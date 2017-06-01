@@ -73,6 +73,8 @@ const char * const screenshot_types[] = {
 
 static char *bg_pictures_source_get_unique_filename (const char *uri);
 
+static void picture_opened_for_read (GObject *source_object, GAsyncResult *res, gpointer user_data);
+
 static void
 bg_pictures_source_dispose (GObject *object)
 {
@@ -136,6 +138,34 @@ remove_placeholder (BgPicturesSource *bg_source, CcBackgroundItem *item)
   gtk_list_store_remove (store, &iter);
 }
 
+static gboolean
+picture_needs_rotation (GdkPixbuf *pixbuf)
+{
+  const gchar *str;
+
+  str = gdk_pixbuf_get_option (pixbuf, "orientation");
+  if (str == NULL)
+    return FALSE;
+
+  if (*str == '5' || *str == '6' || *str == '7' || *str == '8')
+    return TRUE;
+
+  return FALSE;
+}
+
+static GdkPixbuf *
+swap_rotated_pixbuf (GdkPixbuf *pixbuf)
+{
+  GdkPixbuf *tmp_pixbuf;
+
+  tmp_pixbuf = gdk_pixbuf_apply_embedded_orientation (pixbuf);
+  if (tmp_pixbuf == NULL)
+    return pixbuf;
+
+  g_object_unref (pixbuf);
+  return tmp_pixbuf;
+}
+
 static void
 picture_scaled (GObject *source_object,
                 GAsyncResult *res,
@@ -153,6 +183,7 @@ picture_scaled (GObject *source_object,
   GtkListStore *store;
   cairo_surface_t *surface = NULL;
   int scale_factor;
+  gboolean rotation_applied;
 
   item = g_object_get_data (source_object, "item");
   pixbuf = gdk_pixbuf_new_from_stream_finish (res, &error);
@@ -186,6 +217,27 @@ picture_scaled (GObject *source_object,
       remove_placeholder (BG_PICTURES_SOURCE (user_data), item);
       goto out;
     }
+
+  /* Process embedded orientation */
+  rotation_applied = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "rotation-applied"));
+
+  if (!rotation_applied && picture_needs_rotation (pixbuf))
+    {
+      /* the width and height of pixbuf we requested are wrong for EXIF
+       * orientations 5, 6, 7 and 8. the file has to be reloaded. */
+      GFile *file;
+
+      file = g_file_new_for_uri (uri);
+      g_object_set_data (G_OBJECT (item), "needs-rotation", GINT_TO_POINTER (TRUE));
+      g_object_set_data_full (G_OBJECT (file), "item", g_object_ref (item), g_object_unref);
+      g_file_read_async (G_FILE (file), G_PRIORITY_DEFAULT,
+                         bg_source->priv->cancellable,
+                         picture_opened_for_read, bg_source);
+      g_object_unref (file);
+      goto out;
+    }
+
+  pixbuf = swap_rotated_pixbuf (pixbuf);
 
   scale_factor = bg_source_get_scale_factor (BG_SOURCE (bg_source));
   surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
@@ -233,6 +285,7 @@ picture_opened_for_read (GObject *source_object,
   GError *error = NULL;
   gint thumbnail_height;
   gint thumbnail_width;
+  gboolean needs_rotation;
 
   item = g_object_get_data (source_object, "item");
   stream = g_file_read_finish (G_FILE (source_object), res, &error);
@@ -255,8 +308,20 @@ picture_opened_for_read (GObject *source_object,
    */
   bg_source = BG_PICTURES_SOURCE (user_data);
 
-  thumbnail_height = bg_source_get_thumbnail_height (BG_SOURCE (bg_source));
-  thumbnail_width = bg_source_get_thumbnail_width (BG_SOURCE (bg_source));
+  needs_rotation = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "needs-rotation"));
+  if (needs_rotation)
+    {
+      /* swap width and height for EXIF orientations that need it */
+      thumbnail_width = bg_source_get_thumbnail_height (BG_SOURCE (bg_source));
+      thumbnail_height = bg_source_get_thumbnail_width (BG_SOURCE (bg_source));
+      g_object_set_data (G_OBJECT (item), "rotation-applied", GINT_TO_POINTER (TRUE));
+    }
+  else
+    {
+      thumbnail_width = bg_source_get_thumbnail_width (BG_SOURCE (bg_source));
+      thumbnail_height = bg_source_get_thumbnail_height (BG_SOURCE (bg_source));
+    }
+
   g_object_set_data_full (G_OBJECT (stream), "item", g_object_ref (item), g_object_unref);
   gdk_pixbuf_new_from_stream_at_scale_async (G_INPUT_STREAM (stream),
                                              thumbnail_width, thumbnail_height,
