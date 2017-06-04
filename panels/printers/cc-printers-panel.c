@@ -915,6 +915,9 @@ new_printer_dialog_response_cb (PpNewPrinterDialog *dialog,
 
   actualize_printers_list (self);
 
+  if (priv->new_printer_name == NULL)
+    return;
+
   /* Scroll the view to show the newly added printer-entry. */
   scrolled_window = GTK_SCROLLED_WINDOW (gtk_builder_get_object (priv->builder,
                                                                  "scrolled-window"));
