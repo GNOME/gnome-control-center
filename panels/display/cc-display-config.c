@@ -39,6 +39,18 @@ cc_display_mode_get_resolution (CcDisplayMode *self, int *w, int *h)
   return CC_DISPLAY_MODE_GET_CLASS (self)->get_resolution (self, w, h);
 }
 
+const double *
+cc_display_mode_get_supported_scales (CcDisplayMode *self)
+{
+  return CC_DISPLAY_MODE_GET_CLASS (self)->get_supported_scales (self);
+}
+
+double
+cc_display_mode_get_preferred_scale (CcDisplayMode *self)
+{
+  return CC_DISPLAY_MODE_GET_CLASS (self)->get_preferred_scale (self);
+}
+
 gboolean
 cc_display_mode_is_interlaced (CcDisplayMode *self)
 {
@@ -270,12 +282,6 @@ GList *
 cc_display_config_get_cloning_modes (CcDisplayConfig *self)
 {
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->get_cloning_modes (self);
-}
-
-const double *
-cc_display_config_get_supported_scales (CcDisplayConfig *self)
-{
-  return CC_DISPLAY_CONFIG_GET_CLASS (self)->get_supported_scales (self);
 }
 
 gboolean

@@ -21,17 +21,17 @@
 
 #include "cc-display-config-dbus.h"
 
-#define MODE_FORMAT "(iiddu)"
+#define MODE_FORMAT "(iiddadu)"
 #define MODES_FORMAT "a" MODE_FORMAT
-
 #define MONITOR_SPEC_FORMAT "(ssss)"
 #define MONITOR_FORMAT "(" MONITOR_SPEC_FORMAT MODES_FORMAT "a{sv})"
 #define MONITORS_FORMAT "a" MONITOR_FORMAT
 
-#define LOGICAL_MONITOR_FORMAT "(iiduba" MONITOR_SPEC_FORMAT "a{sv})"
+#define LOGICAL_MONITOR_MONITORS_FORMAT "a" MONITOR_SPEC_FORMAT
+#define LOGICAL_MONITOR_FORMAT "(iidub" LOGICAL_MONITOR_MONITORS_FORMAT "a{sv})"
 #define LOGICAL_MONITORS_FORMAT "a" LOGICAL_MONITOR_FORMAT
 
-#define CURRENT_STATE_FORMAT "(u" MONITORS_FORMAT LOGICAL_MONITORS_FORMAT "ad" "a{sv})"
+#define CURRENT_STATE_FORMAT "(u" MONITORS_FORMAT LOGICAL_MONITORS_FORMAT "a{sv})"
 
 typedef enum _CcDisplayModeFlags
 {
@@ -47,6 +47,7 @@ struct _CcDisplayModeDBus
   int height;
   double refresh_rate;
   double preferred_scale;
+  GArray *supported_scales;
   guint32 flags;
 };
 
@@ -80,6 +81,36 @@ cc_display_mode_dbus_get_resolution (CcDisplayMode *pself,
     *h = self->height;
 }
 
+static const double *
+cc_display_mode_dbus_get_supported_scales (CcDisplayMode *pself)
+{
+  CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (pself);
+
+  return (const double *) self->supported_scales->data;
+}
+
+static double
+cc_display_mode_dbus_get_preferred_scale (CcDisplayMode *pself)
+{
+  CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (pself);
+
+  return self->preferred_scale;
+}
+
+static gboolean
+cc_display_mode_dbus_is_supported_scale (CcDisplayMode *pself,
+                                         double scale)
+{
+  CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (pself);
+
+  guint i;
+  for (i = 0; i < self->supported_scales->len; i++)
+    if (g_array_index (self->supported_scales, double, i) == scale)
+      return TRUE;
+  return FALSE;
+}
+
+
 static gboolean
 cc_display_mode_dbus_is_interlaced (CcDisplayMode *pself)
 {
@@ -106,11 +137,16 @@ cc_display_mode_dbus_get_freq_f (CcDisplayMode *pself)
 static void
 cc_display_mode_dbus_init (CcDisplayModeDBus *self)
 {
+  self->supported_scales = g_array_new (TRUE, TRUE, sizeof (double));
 }
 
 static void
 cc_display_mode_dbus_finalize (GObject *object)
 {
+  CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (object);
+
+  g_array_free (self->supported_scales, TRUE);
+
   G_OBJECT_CLASS (cc_display_mode_dbus_parent_class)->finalize (object);
 }
 
@@ -123,6 +159,8 @@ cc_display_mode_dbus_class_init (CcDisplayModeDBusClass *klass)
   gobject_class->finalize = cc_display_mode_dbus_finalize;
 
   parent_class->get_resolution = cc_display_mode_dbus_get_resolution;
+  parent_class->get_supported_scales = cc_display_mode_dbus_get_supported_scales;
+  parent_class->get_preferred_scale = cc_display_mode_dbus_get_preferred_scale;
   parent_class->is_interlaced = cc_display_mode_dbus_is_interlaced;
   parent_class->get_freq = cc_display_mode_dbus_get_freq;
   parent_class->get_freq_f = cc_display_mode_dbus_get_freq_f;
@@ -131,6 +169,8 @@ cc_display_mode_dbus_class_init (CcDisplayModeDBusClass *klass)
 static CcDisplayModeDBus *
 cc_display_mode_dbus_new (GVariant *variant)
 {
+  double d;
+  GVariantIter *scales_iter;
   CcDisplayModeDBus *self = g_object_new (CC_TYPE_DISPLAY_MODE_DBUS, NULL);
 
   g_variant_get (variant, MODE_FORMAT,
@@ -138,7 +178,13 @@ cc_display_mode_dbus_new (GVariant *variant)
                  &self->height,
                  &self->refresh_rate,
                  &self->preferred_scale,
+                 &scales_iter,
                  &self->flags);
+
+  while (g_variant_iter_next (scales_iter, "d", &d))
+    g_array_append_val (self->supported_scales, d);
+
+  g_variant_iter_free (scales_iter);
 
   return self;
 }
@@ -262,9 +308,6 @@ static void
 cc_display_config_dbus_ensure_gapless (CcDisplayConfigDBus *self);
 static void
 cc_display_config_dbus_make_linear (CcDisplayConfigDBus *self);
-static gboolean
-cc_display_config_dbus_is_supported_scale (CcDisplayConfigDBus *self,
-                                           double scale);
 
 
 static const char *
@@ -591,6 +634,9 @@ cc_display_monitor_dbus_set_mode (CcDisplayMonitor *pself,
      existing layout here. */
   if (w1 != w2 || h1 != h2)
     cc_display_config_dbus_make_linear (self->config);
+
+  if (!cc_display_mode_dbus_is_supported_scale (mode, cc_display_monitor_get_scale (pself)))
+    cc_display_monitor_set_scale (pself, cc_display_mode_get_preferred_scale (mode));
 }
 
 static void
@@ -623,7 +669,10 @@ cc_display_monitor_dbus_set_scale (CcDisplayMonitor *pself,
 {
   CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
 
-  if (!cc_display_config_dbus_is_supported_scale (self->config, scale))
+  if (!self->current_mode)
+    return;
+
+  if (!cc_display_mode_dbus_is_supported_scale (self->current_mode, scale))
     return;
 
   if (!self->logical_monitor)
@@ -811,8 +860,6 @@ struct _CcDisplayConfigDBus
   gboolean supports_mirroring;
   gboolean supports_changing_layout_mode;
   CcDisplayLayoutMode layout_mode;
-
-  GArray *supported_scales;
 
   GList *monitors;
   CcDisplayMonitorDBus *primary;
@@ -1115,14 +1162,6 @@ cc_display_config_dbus_apply (CcDisplayConfig *pself,
   return config_apply (self, CC_DISPLAY_CONFIG_METHOD_PERSISTENT, error);
 }
 
-static const double *
-cc_display_config_dbus_get_supported_scales (CcDisplayConfig *pself)
-{
-  CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (pself);
-
-  return (const double *) self->supported_scales->data;
-}
-
 static gboolean
 cc_display_config_dbus_is_layout_logical (CcDisplayConfig *pself)
 {
@@ -1138,7 +1177,6 @@ cc_display_config_dbus_init (CcDisplayConfigDBus *self)
   self->supports_mirroring = TRUE;
   self->supports_changing_layout_mode = FALSE;
   self->layout_mode = CC_DISPLAY_LAYOUT_MODE_LOGICAL;
-  self->supported_scales = g_array_new (TRUE, TRUE, sizeof (double));
   self->logical_monitors = g_hash_table_new (NULL, NULL);
 }
 
@@ -1265,9 +1303,7 @@ cc_display_config_dbus_constructed (GObject *object)
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (object);
   GVariantIter *monitors;
   GVariantIter *logical_monitors;
-  GVariantIter *scales;
   GVariantIter *props;
-  double d;
   const char *s;
   GVariant *v;
 
@@ -1276,11 +1312,7 @@ cc_display_config_dbus_constructed (GObject *object)
                  &self->serial,
                  &monitors,
                  &logical_monitors,
-                 &scales,
                  &props);
-
-  while (g_variant_iter_next (scales, "d", &d))
-    g_array_append_val (self->supported_scales, d);
 
   while (g_variant_iter_next (props, "{&sv}", &s, &v))
     {
@@ -1308,7 +1340,6 @@ cc_display_config_dbus_constructed (GObject *object)
 
   g_variant_iter_free (monitors);
   g_variant_iter_free (logical_monitors);
-  g_variant_iter_free (scales);
   g_variant_iter_free (props);
 
   G_OBJECT_CLASS (cc_display_config_dbus_parent_class)->constructed (object);
@@ -1364,7 +1395,6 @@ cc_display_config_dbus_finalize (GObject *object)
   g_clear_pointer (&self->state, g_variant_unref);
   g_clear_object (&self->connection);
 
-  g_array_free (self->supported_scales, TRUE);
   g_list_foreach (self->monitors, (GFunc) g_object_unref, NULL);
   g_clear_pointer (&self->monitors, g_list_free);
   g_clear_pointer (&self->logical_monitors, g_hash_table_destroy);
@@ -1392,7 +1422,6 @@ cc_display_config_dbus_class_init (CcDisplayConfigDBusClass *klass)
   parent_class->is_cloning = cc_display_config_dbus_is_cloning;
   parent_class->set_cloning = cc_display_config_dbus_set_cloning;
   parent_class->get_cloning_modes = cc_display_config_dbus_get_cloning_modes;
-  parent_class->get_supported_scales = cc_display_config_dbus_get_supported_scales;
   parent_class->is_layout_logical = cc_display_config_dbus_is_layout_logical;
 
   pspec = g_param_spec_variant ("state",
@@ -1631,15 +1660,4 @@ cc_display_config_dbus_make_linear (CcDisplayConfigDBus *self)
     }
 
   g_list_free (logical_monitors);
-}
-
-static gboolean
-cc_display_config_dbus_is_supported_scale (CcDisplayConfigDBus *self,
-                                           double scale)
-{
-  guint i;
-  for (i = 0; i < self->supported_scales->len; i++)
-    if (g_array_index (self->supported_scales, double, i) == scale)
-      return TRUE;
-  return FALSE;
 }
