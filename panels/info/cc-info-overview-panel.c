@@ -69,7 +69,7 @@ typedef struct
 
   /* Virtualisation labels */
   GtkWidget      *label8;
-  GtkWidget      *table1;
+  GtkWidget      *grid1;
   GtkWidget      *label18;
 
   char           *gnome_version;
@@ -667,20 +667,18 @@ get_cpu_info (const glibtop_sysinfo *info)
 }
 
 static void
-move_one_up (GtkWidget *table,
+move_one_up (GtkWidget *grid,
              GtkWidget *child)
 {
-  int top_attach, bottom_attach;
+  int top_attach;
 
-  gtk_container_child_get (GTK_CONTAINER (table),
+  gtk_container_child_get (GTK_CONTAINER (grid),
                            child,
                            "top-attach", &top_attach,
-                           "bottom-attach", &bottom_attach,
                            NULL);
-  gtk_container_child_set (GTK_CONTAINER (table),
+  gtk_container_child_set (GTK_CONTAINER (grid),
                            child,
                            "top-attach", top_attach - 1,
-                           "bottom-attach", bottom_attach - 1,
                            NULL);
 }
 
@@ -714,8 +712,8 @@ set_virtualization_label (CcInfoOverviewPanel *self,
   {
     gtk_widget_hide (priv->virt_type_label);
     gtk_widget_hide (priv->label18);
-    move_one_up (priv->table1, priv->label8);
-    move_one_up (priv->table1, priv->disk_label);
+    move_one_up (priv->grid1, priv->label8);
+    move_one_up (priv->grid1, priv->disk_label);
     return;
   }
 
@@ -918,7 +916,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, virt_type_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, updates_button);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, label8);
-  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, table1);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, grid1);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, label18);
 }
 
