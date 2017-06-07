@@ -58,13 +58,12 @@
                             <property name="spacing">6</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkTable" id="table4">
+                              <object class="GtkGrid" id="grid4">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="n_rows">5</property>
-                                <property name="n_columns">2</property>
-                                <property name="column_spacing">6</property>
-                                <property name="row_spacing">6</property>
+                                <property name="can-focus">False</property>
+                                <property name="hexpand">True</property>
+                                <property name="column-spacing">6</property>
+                                <property name="row-spacing">6</property>
                                 <child>
                                   <object class="GtkLabel" id="label44">
                                     <property name="visible">True</property>
@@ -78,8 +77,8 @@
                                     </style>
                                   </object>
                                   <packing>
-                                    <property name="x_options">GTK_FILL</property>
-                                    <property name="y_options"></property>
+                                    <property name="top-attach">0</property>
+                                    <property name="left-attach">0</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -95,37 +94,32 @@
                                     </style>
                                   </object>
                                   <packing>
-                                    <property name="top_attach">1</property>
-                                    <property name="bottom_attach">2</property>
-                                    <property name="x_options">GTK_FILL</property>
-                                    <property name="y_options"></property>
+                                    <property name="top-attach">1</property>
+                                    <property name="left-attach">0</property>
                                   </packing>
                                 </child>
                                 <child>
                                   <object class="GtkAppChooserButton" id="media_audio_cdda_combobox">
                                     <property name="visible">True</property>
+                                    <property name="hexpand">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="content_type">x-content/audio-cdda</property>
                                   </object>
                                   <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="right_attach">2</property>
-                                    <property name="y_options">GTK_FILL</property>
+                                    <property name="top-attach">0</property>
+                                    <property name="left-attach">1</property>
                                   </packing>
                                 </child>
                                 <child>
                                   <object class="GtkAppChooserButton" id="media_video_dvd_combobox">
                                     <property name="visible">True</property>
+                                    <property name="hexpand">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="content_type">x-content/video-dvd</property>
                                   </object>
                                   <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="right_attach">2</property>
-                                    <property name="top_attach">1</property>
-                                    <property name="bottom_attach">2</property>
-                                    <property name="x_options">GTK_FILL</property>
-                                    <property name="y_options">GTK_FILL</property>
+                                    <property name="top-attach">1</property>
+                                    <property name="left-attach">1</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -141,25 +135,20 @@
                                     </style>
                                   </object>
                                   <packing>
-                                    <property name="top_attach">2</property>
-                                    <property name="bottom_attach">3</property>
-                                    <property name="x_options">GTK_FILL</property>
-                                    <property name="y_options"></property>
+                                    <property name="top-attach">2</property>
+                                    <property name="left-attach">0</property>
                                   </packing>
                                 </child>
                                 <child>
                                   <object class="GtkAppChooserButton" id="media_music_player_combobox">
                                     <property name="visible">True</property>
+                                    <property name="hexpand">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="content_type">x-content/audio-player</property>
                                   </object>
                                   <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="right_attach">2</property>
-                                    <property name="top_attach">2</property>
-                                    <property name="bottom_attach">3</property>
-                                    <property name="x_options">GTK_FILL</property>
-                                    <property name="y_options">GTK_FILL</property>
+                                    <property name="top-attach">2</property>
+                                    <property name="left-attach">1</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -175,25 +164,20 @@
                                     </style>
                                   </object>
                                   <packing>
-                                    <property name="top_attach">3</property>
-                                    <property name="bottom_attach">4</property>
-                                    <property name="x_options">GTK_FILL</property>
-                                    <property name="y_options"></property>
+                                    <property name="top-attach">3</property>
+                                    <property name="left-attach">0</property>
                                   </packing>
                                 </child>
                                 <child>
                                   <object class="GtkAppChooserButton" id="media_dcf_combobox">
                                     <property name="visible">True</property>
+                                    <property name="hexpand">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="content_type">x-content/image-dcf</property>
                                   </object>
                                   <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="right_attach">2</property>
-                                    <property name="top_attach">3</property>
-                                    <property name="bottom_attach">4</property>
-                                    <property name="x_options">GTK_FILL</property>
-                                    <property name="y_options">GTK_FILL</property>
+                                    <property name="top-attach">3</property>
+                                    <property name="left-attach">1</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -209,25 +193,20 @@
                                     </style>
                                   </object>
                                   <packing>
-                                    <property name="top_attach">4</property>
-                                    <property name="bottom_attach">5</property>
-                                    <property name="x_options">GTK_FILL</property>
-                                    <property name="y_options"></property>
+                                    <property name="top-attach">4</property>
+                                    <property name="left-attach">0</property>
                                   </packing>
                                 </child>
                                 <child>
                                   <object class="GtkAppChooserButton" id="media_software_combobox">
                                     <property name="visible">True</property>
+                                    <property name="hexpand">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="content_type">x-content/unix-software</property>
                                   </object>
                                   <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="right_attach">2</property>
-                                    <property name="top_attach">4</property>
-                                    <property name="bottom_attach">5</property>
-                                    <property name="x_options">GTK_FILL</property>
-                                    <property name="y_options">GTK_FILL</property>
+                                    <property name="top-attach">4</property>
+                                    <property name="left-attach">1</property>
                                   </packing>
                                 </child>
                               </object>
