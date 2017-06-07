@@ -273,7 +273,7 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 	} else if (!strcmp ((gchar *)wpa->name, "text")) {
 	  /* Do nothing here, libxml2 is being weird */
 	} else {
-	  g_warning ("Unknown Tag: %s", wpa->name);
+	  g_warning ("Unknown Tag in %s: %s", filename, wpa->name);
 	}
       }
 
