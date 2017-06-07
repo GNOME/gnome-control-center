@@ -79,6 +79,7 @@ struct _CcDisplayModeClass
   GObjectClass parent_class;
 
   void (*get_resolution) (CcDisplayMode *self, int *w, int *h);
+  const double * (*get_supported_scales) (CcDisplayMode *self);
   gboolean (*is_interlaced) (CcDisplayMode *self);
   int (*get_freq) (CcDisplayMode *self);
   double (*get_freq_f) (CcDisplayMode *self);
@@ -134,7 +135,6 @@ struct _CcDisplayConfigClass
   gboolean (*is_cloning) (CcDisplayConfig *self);
   void (*set_cloning) (CcDisplayConfig *self, gboolean clone);
   GList * (*get_cloning_modes) (CcDisplayConfig *self);
-  const double * (*get_supported_scales) (CcDisplayConfig *self);
   gboolean (*is_layout_logical) (CcDisplayConfig *self);
 };
 
@@ -147,7 +147,6 @@ gboolean cc_display_config_apply (CcDisplayConfig *config, GError **error);
 gboolean cc_display_config_is_cloning (CcDisplayConfig *config);
 void cc_display_config_set_cloning (CcDisplayConfig *config, gboolean clone);
 GList *cc_display_config_get_cloning_modes (CcDisplayConfig *config);
-const double *cc_display_config_get_supported_scales (CcDisplayConfig *self);
 gboolean cc_display_config_is_layout_logical (CcDisplayConfig *self);
 
 const char * cc_display_monitor_get_display_name (CcDisplayMonitor *monitor);
@@ -186,11 +185,9 @@ void cc_display_monitor_set_position (CcDisplayMonitor *monitor,
                                       int x, int y);
 
 void cc_display_mode_get_resolution (CcDisplayMode *mode,
-				     int *width,
-				     int *height);
-void cc_display_mode_get_dimensions (CcDisplayMode *mode,
                                      int *width,
-                                     int *hegiht);
+                                     int *height);
+const double *cc_display_mode_get_supported_scales (CcDisplayMode *self);
 gboolean cc_display_mode_is_interlaced (CcDisplayMode *mode);
 int cc_display_mode_get_freq (CcDisplayMode *mode);
 double cc_display_mode_get_freq_f (CcDisplayMode *mode);

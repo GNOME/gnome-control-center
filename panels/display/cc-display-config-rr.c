@@ -46,6 +46,14 @@ cc_display_mode_rr_get_resolution (CcDisplayMode *pself,
     *h = gnome_rr_mode_get_height (self->rr_mode);
 }
 
+static double rr_supported_scales[] = { 1.0, 0.0 };
+
+static const double *
+cc_display_mode_rr_get_supported_scales (CcDisplayMode *pself)
+{
+  return rr_supported_scales;
+}
+
 static gboolean
 cc_display_mode_rr_is_interlaced (CcDisplayMode *pself)
 {
@@ -90,6 +98,7 @@ cc_display_mode_rr_class_init (CcDisplayModeRRClass *klass)
   gobject_class->finalize = cc_display_mode_rr_finalize;
 
   parent_class->get_resolution = cc_display_mode_rr_get_resolution;
+  parent_class->get_supported_scales = cc_display_mode_rr_get_supported_scales;
   parent_class->is_interlaced = cc_display_mode_rr_is_interlaced;
   parent_class->get_freq = cc_display_mode_rr_get_freq;
   parent_class->get_freq_f = cc_display_mode_rr_get_freq_f;
@@ -429,9 +438,6 @@ cc_display_monitor_rr_new (GnomeRROutput     *output,
   return CC_DISPLAY_MONITOR (self);
 }
 
-
-static double rr_supported_scales[] = { 1.0, 0.0 };
-
 struct _CcDisplayConfigRR
 {
   CcDisplayConfig parent_instance;
@@ -554,12 +560,6 @@ cc_display_config_rr_get_cloning_modes (CcDisplayConfig *pself)
   CcDisplayConfigRR *self = CC_DISPLAY_CONFIG_RR (pself);
 
   return self->clone_modes;
-}
-
-static const double *
-cc_display_config_rr_get_supported_scales (CcDisplayConfig *pself)
-{
-  return rr_supported_scales;
 }
 
 static gboolean
@@ -687,7 +687,6 @@ cc_display_config_rr_class_init (CcDisplayConfigRRClass *klass)
   parent_class->is_cloning = cc_display_config_rr_is_cloning;
   parent_class->set_cloning = cc_display_config_rr_set_cloning;
   parent_class->get_cloning_modes = cc_display_config_rr_get_cloning_modes;
-  parent_class->get_supported_scales = cc_display_config_rr_get_supported_scales;
   parent_class->is_layout_logical = cc_display_config_rr_is_layout_logical;
 
   pspec = g_param_spec_object ("gnome-rr-screen",

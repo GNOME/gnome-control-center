@@ -82,6 +82,7 @@ struct _CcDisplayPanelPrivate
   GtkWidget *arrange_button;
   GtkWidget *res_combo;
   GtkWidget *freq_combo;
+  GtkWidget *scale_slider;
   GHashTable *res_freqs;
   GtkWidget *scaling_switch;
   GtkWidget *rotate_left_button;
@@ -1698,6 +1699,72 @@ setup_frequency_combo_box (CcDisplayPanel *panel,
     gtk_combo_box_set_active (GTK_COMBO_BOX (priv->freq_combo), 0);
 }
 
+static guint
+n_supported_scales (CcDisplayMode *mode)
+{
+  const double *scales = cc_display_mode_get_supported_scales (mode);
+  guint n = 0;
+
+  while (scales[n] != 0.0)
+    n++;
+
+  return n;
+}
+
+static void
+setup_scaling_slider (CcDisplayPanel *panel,
+                      CcDisplayMode  *resolution_mode)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  guint i;
+  guint n;
+  const double *scales;
+
+  scales = cc_display_mode_get_supported_scales (resolution_mode);
+  n = n_supported_scales (resolution_mode);
+
+  if (n > 0)
+    {
+      GtkAdjustment *adj;
+      double current_scale;
+      int current_index = -1;
+
+      current_scale = cc_display_monitor_get_scale (priv->current_output);
+      adj = gtk_range_get_adjustment (GTK_RANGE (priv->scale_slider));
+
+      gtk_scale_clear_marks (GTK_SCALE (priv->scale_slider));
+
+      gtk_adjustment_set_step_increment (adj, 1);
+      gtk_adjustment_set_lower (adj, 0);
+      gtk_adjustment_set_upper (adj, n-1);
+      gtk_scale_set_digits (GTK_SCALE (priv->scale_slider), 0);
+
+      for (i = 0; i < n; ++i)
+        {
+          double rounded_scale = round (scales[i] * 10) / 10;
+          double integral;
+          double fractional = modf (rounded_scale, &integral);
+
+          if (scales[i] == current_scale || (current_index < 0 && scales[i] == 1.0))
+            current_index = i;
+
+          if (fractional != 0 && (fractional != 0.5 || integral > 0))
+            continue;
+
+          gchar *s = g_strdup_printf ("%.2lg×", scales[i]);
+          gtk_scale_add_mark (GTK_SCALE (priv->scale_slider), i, GTK_POS_TOP, s);
+          g_free (s);
+        }
+
+      gtk_widget_show (priv->scale_slider);
+      gtk_range_set_value (GTK_RANGE (priv->scale_slider), current_index);
+    }
+  else
+    {
+      gtk_widget_hide (priv->scale_slider);
+    }
+}
+
 static void
 free_mode_list (gpointer key,
                 gpointer value,
@@ -1782,6 +1849,7 @@ setup_resolution_combo_box (CcDisplayPanel  *panel,
     gtk_combo_box_set_active (GTK_COMBO_BOX (priv->res_combo), 0);
 
   setup_frequency_combo_box (panel, current_mode);
+  setup_scaling_slider (panel, current_mode);
 }
 
 
@@ -1988,6 +2056,7 @@ res_combo_changed (GtkComboBox    *combo,
       update_apply_button (panel);
 
       setup_frequency_combo_box (panel, mode);
+      setup_scaling_slider (panel, mode);
     }
 }
 
@@ -2041,16 +2110,17 @@ underscan_switch_toggled (CcDisplayPanel *panel)
   update_apply_button (panel);
 }
 
-static guint
-n_supported_scales (CcDisplayConfig *config)
+static double
+scale_slider_get_selected_scale (CcDisplayPanel *panel)
 {
-  const double *scales = cc_display_config_get_supported_scales (config);
-  guint n = 0;
+  CcDisplayPanelPrivate *priv = panel->priv;
+  CcDisplayMode *mode = cc_display_monitor_get_mode (priv->current_output);
+  const double *scales = cc_display_mode_get_supported_scales (mode);
+  int selected = gtk_range_get_value (GTK_RANGE (priv->scale_slider));
 
-  while (scales[n] != 0.0)
-    n++;
+  g_return_val_if_fail (selected < n_supported_scales (mode), 1.0);
 
-  return n;
+  return scales[selected];
 }
 
 static void
@@ -2058,8 +2128,16 @@ scale_slider_changed (GtkRange *slider,
                       CcDisplayPanel *panel)
 {
   cc_display_monitor_set_scale (panel->priv->current_output,
-                                gtk_range_get_value (slider));
+                                scale_slider_get_selected_scale (panel));
   update_apply_button (panel);
+}
+
+static char *
+scale_slider_format_value (GtkScale *slider,
+                           double value,
+                           CcDisplayPanel *panel)
+{
+  return g_strdup_printf ("%.3g", scale_slider_get_selected_scale (panel));
 }
 
 static void
@@ -2298,31 +2376,22 @@ show_setup_dialog (CcDisplayPanel *panel)
   grid_pos++;
 
   /* scale */
-  if (n_supported_scales (priv->current_config) > 1)
-  {
-    GtkWidget *slider;
-    const double *scales = cc_display_config_get_supported_scales (priv->current_config);
-    guint n = n_supported_scales (priv->current_config);
-    guint i = 0;
+  priv->scale_slider = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, NULL);
+  gtk_widget_set_no_show_all (priv->scale_slider, TRUE);
 
-    slider = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL,
-                                       scales[0], scales[n - 1],
-                                       scales[1] - scales[0]);
-    gtk_scale_set_draw_value (GTK_SCALE (slider), FALSE);
-    gtk_scale_set_has_origin (GTK_SCALE (slider), FALSE);
-    for (i = 0; i < n; i++)
-      {
-        gchar *s = g_strdup_printf ("%.1lg×", scales[i]);
-        gtk_scale_add_mark (GTK_SCALE (slider), scales[i], GTK_POS_TOP, s);
-        g_free (s);
-      }
-    gtk_range_set_value (GTK_RANGE (slider), cc_display_monitor_get_scale (priv->current_output));
-    g_signal_connect (slider, "value-changed", G_CALLBACK (scale_slider_changed), panel);
+  g_signal_connect (priv->scale_slider, "format-value",
+                    G_CALLBACK (scale_slider_format_value), panel);
+  g_signal_connect (priv->scale_slider, "value-changed",
+                    G_CALLBACK (scale_slider_changed), panel);
 
-    gtk_grid_attach (GTK_GRID (priv->config_grid), slider, 1, grid_pos, 1, 1);
-    gtk_widget_set_halign (priv->freq_combo, GTK_ALIGN_CENTER);
-    grid_pos++;
-  }
+  gtk_scale_set_draw_value (GTK_SCALE (priv->scale_slider), TRUE);
+  gtk_range_set_round_digits (GTK_RANGE (priv->scale_slider), 2);
+  gtk_scale_set_value_pos (GTK_SCALE (priv->scale_slider), GTK_POS_BOTTOM);
+  gtk_scale_set_has_origin (GTK_SCALE (priv->scale_slider), FALSE);
+  gtk_grid_attach (GTK_GRID (priv->config_grid),
+                   priv->scale_slider, 1, grid_pos, 1, 1);
+  gtk_widget_set_halign (priv->freq_combo, GTK_ALIGN_CENTER);
+  grid_pos++;
 
   was_clone = clone = cc_display_config_is_cloning (priv->current_config);
   primary = cc_display_monitor_is_primary (priv->current_output);
