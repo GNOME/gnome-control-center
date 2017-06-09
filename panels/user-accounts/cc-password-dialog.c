@@ -567,7 +567,7 @@ cc_password_dialog_new (ActUser *user)
                 self->passwd_handler = passwd_init ();
         }
         else {
-                mode_change (self, ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
+                mode_change (self, act_user_get_password_mode (user));
                 gtk_widget_show (GTK_WIDGET (self->action_radio_box));
 
                 gtk_widget_hide (GTK_WIDGET (self->old_password_label));
