@@ -273,9 +273,27 @@
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
                         <property name="use_underline">True</property>
+			<signal name="toggled" handler="on_no_password_radio_changed_cb" object="CcAddUserDialog" swapped="no"/>
                       </object>
                       <packing>
                         <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkRadioButton" id="local_no_password_radio">
+                        <property name="label" translatable="yes">Do not re_quire a password when logging in</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">True</property>
+                        <property name="group">local_password_login_radio</property>
+                        <property name="use_underline">True</property>
+                        <property name="margin_start">12</property>
+                        <signal name="toggled" handler="on_no_password_radio_changed_cb" object="CcAddUserDialog" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                     <child>
@@ -291,7 +309,7 @@
                         <signal name="toggled" handler="local_password_radio_changed_cb" object="CcAddUserDialog" swapped="yes"/>
                       </object>
                       <packing>
-                        <property name="position">1</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
