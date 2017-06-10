@@ -26,7 +26,7 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_INFO_REMOVABLE_MEDIA_PANEL (cc_info_removable_media_panel_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcInfoRemovableMediaPanel, cc_info_removable_media_panel, CC, INFO_REMOVABLE_MEDIA_PANEL, GtkBox)
+G_DECLARE_FINAL_TYPE (CcInfoRemovableMediaPanel, cc_info_removable_media_panel, CC, INFO_REMOVABLE_MEDIA_PANEL, CcPanel)
 
 
 G_END_DECLS

@@ -62,7 +62,7 @@
 
 struct _CcInfoRemovableMediaPanel
 {
-  GtkBox     parent_instance;
+  CcPanel    parent_instance;
 
   /* Media */
   GSettings *media_settings;
@@ -85,7 +85,7 @@ struct _CcInfoRemovableMediaPanel
 };
 
 
-G_DEFINE_TYPE (CcInfoRemovableMediaPanel, cc_info_removable_media_panel, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcInfoRemovableMediaPanel, cc_info_removable_media_panel, CC_TYPE_PANEL)
 
 static char **
 remove_elem_from_str_array (char       **v,

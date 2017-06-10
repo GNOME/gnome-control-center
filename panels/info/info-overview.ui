@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <template class="CcInfoOverviewPanel" parent="GtkBox">
+  <template class="CcInfoOverviewPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="expand">True</property>
+    <child>
+    <object class="GtkBox" id="">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="spacing">18</property>
@@ -322,6 +327,8 @@
         <property name="pack_type">end</property>
         <property name="position">3</property>
       </packing>
+        </child>
+    </object>
     </child>
   </template>
 </interface>

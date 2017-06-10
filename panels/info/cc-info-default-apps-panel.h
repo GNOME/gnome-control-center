@@ -26,7 +26,7 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_INFO_DEFAULT_APPS_PANEL (cc_info_default_apps_panel_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcInfoDefaultAppsPanel, cc_info_default_apps_panel, CC, INFO_DEFAULT_APPS_PANEL, GtkBox)
+G_DECLARE_FINAL_TYPE (CcInfoDefaultAppsPanel, cc_info_default_apps_panel, CC, INFO_DEFAULT_APPS_PANEL, CcPanel)
 
 GtkWidget *cc_info_default_apps_panel_new (void);
 

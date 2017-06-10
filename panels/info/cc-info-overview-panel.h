@@ -26,7 +26,7 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_INFO_OVERVIEW_PANEL (cc_info_overview_panel_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcInfoOverviewPanel, cc_info_overview_panel, CC, INFO_OVERVIEW_PANEL, GtkBox);
+G_DECLARE_FINAL_TYPE (CcInfoOverviewPanel, cc_info_overview_panel, CC, INFO_OVERVIEW_PANEL, CcPanel)
 
 GtkWidget *cc_info_overview_panel_new (void);
 

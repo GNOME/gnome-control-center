@@ -87,7 +87,7 @@ typedef struct
 
 struct _CcInfoOverviewPanel
 {
- GtkBox                 parent_instance;
+ CcPanel parent_instance;
 
   /*< private >*/
  CcInfoOverviewPanelPrivate *priv;
@@ -106,7 +106,7 @@ typedef struct
 } VersionData;
 
 
-G_DEFINE_TYPE_WITH_PRIVATE (CcInfoOverviewPanel, cc_info_overview_panel, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (CcInfoOverviewPanel, cc_info_overview_panel, CC_TYPE_PANEL)
 
 static void
 version_start_element_handler (GMarkupParseContext      *ctx,

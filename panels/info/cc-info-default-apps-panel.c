@@ -59,7 +59,7 @@ typedef struct
 
 struct _CcInfoDefaultAppsPanel
 {
-  GtkBox     parent_instance;
+  CcPanel    parent_instance;
 
   GtkWidget *default_apps_grid;
 
@@ -72,7 +72,7 @@ struct _CcInfoDefaultAppsPanel
 };
 
 
-G_DEFINE_TYPE (CcInfoDefaultAppsPanel, cc_info_default_apps_panel, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcInfoDefaultAppsPanel, cc_info_default_apps_panel, CC_TYPE_PANEL)
 
 static void
 default_app_changed (GtkAppChooserButton    *button,
