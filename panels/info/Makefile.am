@@ -52,7 +52,12 @@ cc-info-resources.h: info.gresource.xml $(resource_files)
 @INTLTOOL_DESKTOP_RULE@
 
 desktopdir = $(datadir)/applications
-desktop_in_files = gnome-info-panel.desktop.in
+desktop_in_files = \
+		gnome-info-panel.desktop.in		\
+		gnome-info-overview-panel.desktop.in	\
+		gnome-default-apps-panel.desktop.in	\
+		gnome-removable-media-panel.desktop.in
+
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 SPACEDIR=$(top_srcdir)/../gnome-settings-daemon/plugins/housekeeping/
