@@ -129,7 +129,9 @@ parse_categories (GDesktopAppInfo *app)
 #define const_strv(s) ((const gchar* const*) s)
 
 #ifdef CC_ENABLE_ALT_CATEGORIES
-  if (g_strv_contains (const_strv (split), "X-GNOME-ConnectivitySettings"))
+  if (g_strv_contains (const_strv (split), "X-GNOME-AltHidden"))
+    retval = CC_CATEGORY_HIDDEN;
+  else if (g_strv_contains (const_strv (split), "X-GNOME-ConnectivitySettings"))
     retval = CC_CATEGORY_CONNECTIVITY;
   else if (g_strv_contains (const_strv (split), "X-GNOME-PersonalizationSettings"))
     retval = CC_CATEGORY_PERSONALIZATION;
@@ -142,7 +144,9 @@ parse_categories (GDesktopAppInfo *app)
   else if (g_strv_contains (const_strv (split), "HardwareSettings"))
     retval = CC_CATEGORY_HARDWARE;
 #else
-  if (g_strv_contains (const_strv (split), "HardwareSettings"))
+  if (g_strv_contains (const_strv (split), "X-GNOME-Hidden"))
+    retval = CC_CATEGORY_HIDDEN;
+  else if (g_strv_contains (const_strv (split), "HardwareSettings"))
     retval = CC_CATEGORY_HARDWARE;
   else if (g_strv_contains (const_strv (split), "X-GNOME-PersonalSettings"))
     retval = CC_CATEGORY_PERSONAL;
@@ -189,7 +193,12 @@ cc_panel_loader_fill_model (CcShellModel *model)
       if (G_UNLIKELY (category < 0))
         continue;
 
-      cc_shell_model_add_item (model, category, G_APP_INFO (app), all_panels[i].name);
+      /* Only add the panel when it is not hidden, e.g. the Details subpanels
+       * that are only visible in the new Shell.
+       */
+      if (category != CC_CATEGORY_HIDDEN)
+        cc_shell_model_add_item (model, category, G_APP_INFO (app), all_panels[i].name);
+
       g_object_unref (app);
     }
 }

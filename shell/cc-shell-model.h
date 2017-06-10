@@ -66,6 +66,7 @@ typedef enum {
   CC_CATEGORY_HARDWARE,
 #endif
 
+  CC_CATEGORY_HIDDEN,
   CC_CATEGORY_LAST
 } CcPanelCategory;
 
