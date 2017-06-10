@@ -6,329 +6,329 @@
     <property name="can-focus">False</property>
     <property name="expand">True</property>
     <child>
-    <object class="GtkBox" id="">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="spacing">18</property>
-    <property name="orientation">vertical</property>
-    <child>
-      <object class="GtkImage" id="system_image">
+      <object class="GtkBox" id="">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="resource">/org/gnome/control-center/info/GnomeLogoVerticalMedium.svg</property>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">False</property>
-        <property name="position">0</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkLabel" id="version_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label">Version 3.0</property>
-        <property name="selectable">True</property>
-        <attributes>
-          <attribute name="scale" value="1.25"/>
-        </attributes>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">False</property>
-        <property name="position">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkGrid" id="grid1">
-        <property name="visible">True</property>
-        <property name="halign">center</property>
-        <property name="valign">center</property>
-        <property name="can-focus">False</property>
-        <property name="column-spacing">12</property>
-        <property name="row-spacing">5</property>
+        <property name="spacing">18</property>
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel" id="label4">
+          <object class="GtkImage" id="system_image">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">Device name</property>
-            <property name="mnemonic_widget">name_entry</property>
-            <style>
-             <class name="dim-label"/>
-            </style>
-          </object>
-          <packing>
-            <property name="top-attach">0</property>
-            <property name="left-attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label5">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">Memory</property>
-            <property name="mnemonic_widget">memory_label</property>
-            <style>
-             <class name="dim-label"/>
-            </style>
-          </object>
-          <packing>
-            <property name="top-attach">1</property>
-            <property name="left-attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label6">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">Processor</property>
-            <property name="mnemonic_widget">processor_label</property>
-            <style>
-             <class name="dim-label"/>
-            </style>
-          </object>
-          <packing>
-            <property name="top-attach">2</property>
-            <property name="left-attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label14">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">Graphics</property>
-            <style>
-             <class name="dim-label"/>
-            </style>
-          </object>
-          <packing>
-            <property name="top-attach">3</property>
-            <property name="left-attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label7">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes" comments="To translators: this field contains the distro name and version">OS name</property>
-            <property name="mnemonic_widget">os_name_label</property>
-            <style>
-             <class name="dim-label"/>
-            </style>
-          </object>
-          <packing>
-            <property name="top-attach">4</property>
-            <property name="left-attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label17">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes" comments="To translators: this field contains the distro type">OS type</property>
-            <property name="mnemonic_widget">os_type_label</property>
-            <style>
-              <class name="dim-label"/>
-            </style>
-          </object>
-          <packing>
-            <property name="top-attach">5</property>
-            <property name="left-attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label18">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">Virtualization</property>
-            <property name="mnemonic_widget">virt_type_label</property>
-            <style>
-             <class name="dim-label"/>
-            </style>
-          </object>
-          <packing>
-            <property name="top-attach">6</property>
-            <property name="left-attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label8">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">Disk</property>
-            <property name="mnemonic_widget">disk_label</property>
-            <style>
-             <class name="dim-label"/>
-            </style>
-          </object>
-          <packing>
-            <property name="top-attach">7</property>
-            <property name="left-attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="CcHostnameEntry" id="name_entry">
-            <property name="visible">True</property>
-            <property name="xalign">0</property>
-          </object>
-          <packing>
-            <property name="top-attach">0</property>
-            <property name="left-attach">2</property>
-            <property name="width">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="memory_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">0</property>
-            <property name="label">Unknown</property>
-            <property name="selectable">True</property>
-          </object>
-          <packing>
-            <property name="top-attach">1</property>
-            <property name="left-attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="processor_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">0</property>
-            <property name="label">Unknown</property>
-            <property name="selectable">True</property>
-          </object>
-          <packing>
-            <property name="top-attach">2</property>
-            <property name="left-attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="graphics_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">0</property>
-            <property name="label">Unknown</property>
-            <property name="selectable">True</property>
-          </object>
-          <packing>
-            <property name="top-attach">3</property>
-            <property name="left-attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="os_name_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">0</property>
-            <property name="label">Unknown</property>
-            <property name="selectable">True</property>
-          </object>
-          <packing>
-            <property name="top-attach">4</property>
-            <property name="left-attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="os_type_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">0</property>
-            <property name="label">Unknown</property>
-            <property name="selectable">True</property>
-          </object>
-          <packing>
-            <property name="top-attach">5</property>
-            <property name="left-attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="virt_type_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">0</property>
-            <property name="label">Unknown</property>
-            <property name="selectable">True</property>
-          </object>
-          <packing>
-            <property name="top-attach">6</property>
-            <property name="left-attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="disk_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">0</property>
-            <property name="label" translatable="yes">Calculating…</property>
-            <property name="selectable">True</property>
-          </object>
-          <packing>
-            <property name="top-attach">7</property>
-            <property name="left-attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="dummy1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label">    </property>
-          </object>
-          <packing>
-            <property name="top-attach">1</property>
-            <property name="left-attach">3</property>
-          </packing>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">False</property>
-        <property name="position">2</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkButtonBox" id="hbuttonbox1">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="layout_style">end</property>
-        <property name="orientation">horizontal</property>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <object class="GtkButton" id="updates_button">
-            <property name="label" translatable="yes">Check for updates</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="use_action_appearance">False</property>
-            <property name="visible">True</property>
+            <property name="resource">/org/gnome/control-center/info/GnomeLogoVerticalMedium.svg</property>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">True</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="version_label">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label">Version 3.0</property>
+            <property name="selectable">True</property>
+            <attributes>
+              <attribute name="scale" value="1.25"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
             <property name="position">1</property>
           </packing>
         </child>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">False</property>
-        <property name="pack_type">end</property>
-        <property name="position">3</property>
-      </packing>
+        <child>
+          <object class="GtkGrid" id="grid1">
+            <property name="visible">True</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="can-focus">False</property>
+            <property name="column-spacing">12</property>
+            <property name="row-spacing">5</property>
+            <child>
+              <object class="GtkLabel" id="label4">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes">Device name</property>
+                <property name="mnemonic_widget">name_entry</property>
+                <style>
+                 <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="top-attach">0</property>
+                <property name="left-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label5">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes">Memory</property>
+                <property name="mnemonic_widget">memory_label</property>
+                <style>
+                 <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="top-attach">1</property>
+                <property name="left-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label6">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes">Processor</property>
+                <property name="mnemonic_widget">processor_label</property>
+                <style>
+                 <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="top-attach">2</property>
+                <property name="left-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label14">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes">Graphics</property>
+                <style>
+                 <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="top-attach">3</property>
+                <property name="left-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label7">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes" comments="To translators: this field contains the distro name and version">OS name</property>
+                <property name="mnemonic_widget">os_name_label</property>
+                <style>
+                 <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="top-attach">4</property>
+                <property name="left-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label17">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes" comments="To translators: this field contains the distro type">OS type</property>
+                <property name="mnemonic_widget">os_type_label</property>
+                <style>
+                 <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="top-attach">5</property>
+                <property name="left-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label18">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes">Virtualization</property>
+                <property name="mnemonic_widget">virt_type_label</property>
+                <style>
+                 <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="top-attach">6</property>
+                <property name="left-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label8">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes">Disk</property>
+                <property name="mnemonic_widget">disk_label</property>
+                <style>
+                 <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="top-attach">7</property>
+                <property name="left-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="CcHostnameEntry" id="name_entry">
+                <property name="visible">True</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="top-attach">0</property>
+                <property name="left-attach">2</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="memory_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="label">Unknown</property>
+                <property name="selectable">True</property>
+              </object>
+              <packing>
+                <property name="top-attach">1</property>
+                <property name="left-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="processor_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="label">Unknown</property>
+                <property name="selectable">True</property>
+              </object>
+              <packing>
+                <property name="top-attach">2</property>
+                <property name="left-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="graphics_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="label">Unknown</property>
+                <property name="selectable">True</property>
+              </object>
+              <packing>
+                <property name="top-attach">3</property>
+                <property name="left-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="os_name_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="label">Unknown</property>
+                <property name="selectable">True</property>
+              </object>
+              <packing>
+                <property name="top-attach">4</property>
+                <property name="left-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="os_type_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="label">Unknown</property>
+                <property name="selectable">True</property>
+              </object>
+              <packing>
+                <property name="top-attach">5</property>
+                <property name="left-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="virt_type_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="label">Unknown</property>
+                <property name="selectable">True</property>
+              </object>
+              <packing>
+                <property name="top-attach">6</property>
+                <property name="left-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="disk_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">Calculating…</property>
+                <property name="selectable">True</property>
+              </object>
+              <packing>
+                <property name="top-attach">7</property>
+                <property name="left-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="dummy1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">    </property>
+              </object>
+              <packing>
+                <property name="top-attach">1</property>
+                <property name="left-attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">2</property>
+          </packing>
         </child>
-    </object>
+        <child>
+          <object class="GtkButtonBox" id="hbuttonbox1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <property name="orientation">horizontal</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <object class="GtkButton" id="updates_button">
+                <property name="label" translatable="yes">Check for updates</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="pack_type">end</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+      </object>
     </child>
   </template>
 </interface>
