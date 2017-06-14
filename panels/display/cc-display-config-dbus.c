@@ -37,7 +37,8 @@
 typedef enum _CcDisplayModeFlags
 {
   MODE_PREFERRED = 1 << 0,
-  MODE_CURRENT = 1 << 1
+  MODE_CURRENT = 1 << 1,
+  MODE_INTERLACED = 1 << 2,
 } CcDisplayModeFlags;
 
 struct _CcDisplayModeDBus
@@ -116,8 +117,9 @@ cc_display_mode_dbus_is_supported_scale (CcDisplayMode *pself,
 static gboolean
 cc_display_mode_dbus_is_interlaced (CcDisplayMode *pself)
 {
-  /* XXX: add to the dbus api ? */
-  return FALSE;
+  CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (pself);
+
+  return !!(self->flags & MODE_INTERLACED);
 }
 
 static int
@@ -177,6 +179,7 @@ cc_display_mode_dbus_new (GVariant *variant)
   GVariant *properties_variant;
   gboolean is_current;
   gboolean is_preferred;
+  gboolean is_interlaced;
   CcDisplayModeDBus *self = g_object_new (CC_TYPE_DISPLAY_MODE_DBUS, NULL);
 
   g_variant_get (variant, "(" MODE_BASE_FORMAT "@a{sv})",
@@ -195,11 +198,15 @@ cc_display_mode_dbus_new (GVariant *variant)
     is_current = FALSE;
   if (!g_variant_lookup (properties_variant, "is-preferred", "b", &is_preferred))
     is_preferred = FALSE;
+  if (!g_variant_lookup (properties_variant, "is-interlaced", "b", &is_interlaced))
+    is_interlaced = FALSE;
 
   if (is_current)
     self->flags |= MODE_CURRENT;
   if (is_preferred)
     self->flags |= MODE_PREFERRED;
+  if (is_interlaced)
+    self->flags |= MODE_INTERLACED;
 
   g_variant_iter_free (scales_iter);
   g_variant_unref (properties_variant);
