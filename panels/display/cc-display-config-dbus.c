@@ -21,7 +21,8 @@
 
 #include "cc-display-config-dbus.h"
 
-#define MODE_FORMAT "(iiddadu)"
+#define MODE_BASE_FORMAT "siiddad"
+#define MODE_FORMAT "(" MODE_BASE_FORMAT "a{sv})"
 #define MODES_FORMAT "a" MODE_FORMAT
 #define MONITOR_SPEC_FORMAT "(ssss)"
 #define MONITOR_FORMAT "(" MONITOR_SPEC_FORMAT MODES_FORMAT "a{sv})"
@@ -43,6 +44,7 @@ struct _CcDisplayModeDBus
 {
   CcDisplayMode parent_instance;
 
+  char *id;
   int width;
   int height;
   double refresh_rate;
@@ -145,6 +147,7 @@ cc_display_mode_dbus_finalize (GObject *object)
 {
   CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (object);
 
+  g_free (self->id);
   g_array_free (self->supported_scales, TRUE);
 
   G_OBJECT_CLASS (cc_display_mode_dbus_parent_class)->finalize (object);
@@ -171,20 +174,35 @@ cc_display_mode_dbus_new (GVariant *variant)
 {
   double d;
   GVariantIter *scales_iter;
+  GVariant *properties_variant;
+  gboolean is_current;
+  gboolean is_preferred;
   CcDisplayModeDBus *self = g_object_new (CC_TYPE_DISPLAY_MODE_DBUS, NULL);
 
-  g_variant_get (variant, MODE_FORMAT,
+  g_variant_get (variant, "(" MODE_BASE_FORMAT "@a{sv})",
+                 &self->id,
                  &self->width,
                  &self->height,
                  &self->refresh_rate,
                  &self->preferred_scale,
                  &scales_iter,
-                 &self->flags);
+                 &properties_variant);
 
   while (g_variant_iter_next (scales_iter, "d", &d))
     g_array_append_val (self->supported_scales, d);
 
+  if (!g_variant_lookup (properties_variant, "is-current", "b", &is_current))
+    is_current = FALSE;
+  if (!g_variant_lookup (properties_variant, "is-preferred", "b", &is_preferred))
+    is_preferred = FALSE;
+
+  if (is_current)
+    self->flags |= MODE_CURRENT;
+  if (is_preferred)
+    self->flags |= MODE_PREFERRED;
+
   g_variant_iter_free (scales_iter);
+  g_variant_unref (properties_variant);
 
   return self;
 }
@@ -900,8 +918,8 @@ build_monitors_variant (GHashTable *monitors)
 
   while (g_hash_table_iter_next (&iter, (void **) &monitor, NULL))
     {
-      int w, h;
       GVariantBuilder props_builder;
+      CcDisplayModeDBus *mode_dbus;
 
       if (!monitor->current_mode)
         continue;
@@ -911,11 +929,10 @@ build_monitors_variant (GHashTable *monitors)
                              "underscanning",
                              g_variant_new_boolean (monitor->underscanning == UNDERSCANNING_ENABLED));
 
-      cc_display_mode_get_resolution (monitor->current_mode, &w, &h);
-      g_variant_builder_add (&builder, "(s(iid)@*)",
+      mode_dbus = CC_DISPLAY_MODE_DBUS (monitor->current_mode);
+      g_variant_builder_add (&builder, "(ss@*)",
                              monitor->connector_name,
-                             w, h,
-                             cc_display_mode_get_freq_f (monitor->current_mode),
+                             mode_dbus->id,
                              g_variant_builder_end (&props_builder));
     }
 
