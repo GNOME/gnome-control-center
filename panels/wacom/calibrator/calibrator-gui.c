@@ -41,7 +41,7 @@ struct CalibArea
   XYinfo       axis;
   gboolean     swap;
   gboolean     success;
-  int          device_id;
+  GdkDevice   *device;
 
   double X[4], Y[4];
   int display_width, display_height;
@@ -310,35 +310,29 @@ hide_error_message (CalibArea *area)
 }
 
 static gboolean
-on_button_press_event(ClutterActor       *actor,
-                      ClutterButtonEvent *event,
-                      CalibArea          *area)
+on_button_press_event (GtkWidget      *widget,
+                       GdkEventButton *event,
+                       CalibArea      *area)
 {
   gint num_clicks;
   gboolean success;
+  GdkDevice *source;
 
   if (area->success)
     return FALSE;
 
-  if (event->click_count > 1)
+  if (event->type != GDK_BUTTON_PRESS ||
+      event->button != GDK_BUTTON_PRIMARY)
     return FALSE;
 
-  /* Check matching device ID if a device ID was provided */
-  if (area->device_id > -1)
+  source = gdk_event_get_source_device ((GdkEvent *) event);
+
+  /* Check matching device if a device was provided */
+  if (area->device && area->device != source)
     {
-      ClutterInputDevice *device;
-
-      device = clutter_event_get_source_device ((ClutterEvent *) event);
-      if (device != NULL && clutter_input_device_get_device_id (device) != area->device_id) {
-        char *name;
-
-        g_object_get (G_OBJECT (device), "name", &name, NULL);
-        g_debug ("Ignoring input from device %s (%d)",
-                 name,
-                 clutter_input_device_get_device_id (device));
-        g_free (name);
-        return FALSE;
-      }
+      g_debug ("Ignoring input from device %s",
+	       gdk_device_get_name (source));
+      return FALSE;
     }
 
   /* Handle click */
@@ -661,11 +655,6 @@ set_up_stage (CalibArea *calib_area, ClutterActor *stage)
                     "completed",
                     G_CALLBACK (on_timeout),
                     calib_area);
-
-  g_signal_connect (stage,
-                    "button-press-event",
-                    G_CALLBACK (on_button_press_event),
-                    calib_area);
 }
 
 /**
@@ -677,7 +666,7 @@ set_up_stage (CalibArea *calib_area, ClutterActor *stage)
 CalibArea *
 calib_area_new (GdkScreen      *screen,
                 int             monitor,
-                int             device_id,
+                GdkDevice      *device,
                 FinishCallback  callback,
                 gpointer        user_data,
                 XYinfo         *old_axis,
@@ -706,7 +695,7 @@ calib_area_new (GdkScreen      *screen,
   calib_area = g_new0 (CalibArea, 1);
   calib_area->callback = callback;
   calib_area->user_data = user_data;
-  calib_area->device_id = device_id;
+  calib_area->device = device;
   calib_area->calibrator.old_axis.x_min = old_axis->x_min;
   calib_area->calibrator.old_axis.x_max = old_axis->x_max;
   calib_area->calibrator.old_axis.y_min = old_axis->y_min;
@@ -759,6 +748,10 @@ calib_area_new (GdkScreen      *screen,
   g_signal_connect (calib_area->window,
                     "window-state-event",
                     G_CALLBACK (on_fullscreen),
+                    calib_area);
+  g_signal_connect (calib_area->window,
+                    "button-press-event",
+                    G_CALLBACK (on_button_press_event),
                     calib_area);
 
   gtk_window_fullscreen_on_monitor (GTK_WINDOW (calib_area->window), screen, monitor);
