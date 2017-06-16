@@ -28,6 +28,12 @@
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 #include <gdesktop-enums.h>
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+#include <gdk/gdkwayland.h>
+#endif
 
 #include "cc-wacom-device.h"
 #include "cc-wacom-button-row.h"
@@ -37,6 +43,7 @@
 #include "cc-wacom-stylus-page.h"
 #include "gsd-enums.h"
 #include "calibrator-gui.h"
+#include "gsd-input-helper.h"
 
 #include <string.h>
 
@@ -204,6 +211,48 @@ finish_calibration (CalibArea *area,
 	gtk_widget_set_sensitive (WID ("button-calibrate"), TRUE);
 }
 
+static GdkDevice *
+cc_wacom_page_get_gdk_device (CcWacomPage *page)
+{
+	GsdDevice *gsd_device;
+	GdkDevice *gdk_device = NULL;
+	GdkDeviceManager *device_manager;
+	GdkDisplay *display;
+	GList *slaves, *l;
+
+	gsd_device = cc_wacom_device_get_device (page->priv->stylus);
+	g_return_val_if_fail (GSD_IS_DEVICE (gsd_device), NULL);
+
+	display = gtk_widget_get_display (GTK_WIDGET (page));
+	device_manager = gdk_display_get_device_manager (display);
+	slaves = gdk_device_manager_list_devices (device_manager, GDK_DEVICE_TYPE_SLAVE);
+
+	for (l = slaves; l && !gdk_device; l = l->next) {
+		gchar *device_node = NULL;
+
+		if (gdk_device_get_source (l->data) != GDK_SOURCE_PEN)
+			continue;
+
+#ifdef GDK_WINDOWING_X11
+		if (GDK_IS_X11_DISPLAY (display))
+			device_node = xdevice_get_device_node (gdk_x11_device_get_id (l->data));
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+		if (GDK_IS_WAYLAND_DISPLAY (display))
+			device_node = g_strdup (gdk_wayland_device_get_node_path (l->data));
+#endif
+
+		if (g_strcmp0 (device_node, gsd_device_get_device_file (gsd_device)) == 0)
+			gdk_device = l->data;
+
+		g_free (device_node);
+	}
+
+	g_list_free (slaves);
+
+	return gdk_device;
+}
+
 static gboolean
 run_calibration (CcWacomPage *page,
 		 GVariant    *old_calibration,
@@ -224,7 +273,7 @@ run_calibration (CcWacomPage *page,
 
 	priv->area = calib_area_new (NULL,
 				     monitor,
-				     NULL, /* FIXME: Pass GdkDevice/ClutterInputDevice */
+				     cc_wacom_page_get_gdk_device (page),
 				     finish_calibration,
 				     page,
 				     &old_axis,
