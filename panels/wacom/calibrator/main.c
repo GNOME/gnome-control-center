@@ -406,7 +406,7 @@ int main(int argc, char** argv)
 
     calib_area = calib_area_new (NULL,
 				 0,  /* monitor */
-				 -1, /* -1 to ignore device ID */
+				 NULL, /* NULL to accept input from any device */
 				 calibration_finished_cb,
 				 NULL,
 				 &calibrator->old_axis,

@@ -40,7 +40,7 @@ typedef void (*FinishCallback) (CalibArea *area, gpointer user_data);
 
 CalibArea * calib_area_new (GdkScreen      *screen,
 			    int             monitor,
-			    int             device_id,
+			    GdkDevice      *device,
 			    FinishCallback  callback,
 			    gpointer        user_data,
 			    XYinfo         *old_axis,

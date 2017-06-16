@@ -224,7 +224,7 @@ run_calibration (CcWacomPage *page,
 
 	priv->area = calib_area_new (NULL,
 				     monitor,
-				     -1, /* FIXME: Pass GdkDevice/ClutterInputDevice */
+				     NULL, /* FIXME: Pass GdkDevice/ClutterInputDevice */
 				     finish_calibration,
 				     page,
 				     &old_axis,
