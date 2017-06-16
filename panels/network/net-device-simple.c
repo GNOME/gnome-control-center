@@ -85,7 +85,7 @@ static void
 nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
 {
         NetDeviceSimplePrivate *priv = device_simple->priv;
-        char *hwaddr;
+        const char *hwaddr;
         GtkWidget *widget;
         char *speed = NULL;
         NMDevice *nm_device;
@@ -119,11 +119,8 @@ nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
         panel_set_device_status (priv->builder, "label_status", nm_device, speed);
 
         /* device MAC */
-        g_object_get (G_OBJECT (nm_device),
-                      "hw-address", &hwaddr,
-                      NULL);
+        hwaddr = nm_device_get_hw_address (nm_device);
         panel_set_device_widget_details (priv->builder, "mac", hwaddr);
-        g_free (hwaddr);
 
         /* set IP entries */
         panel_set_device_widgets (priv->builder, nm_device);
