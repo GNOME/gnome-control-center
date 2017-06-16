@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-06-04 14:02+0000\n"
-"PO-Revision-Date: 2017-06-05 15:47+0200\n"
+"POT-Creation-Date: 2017-06-14 20:10+0000\n"
+"PO-Revision-Date: 2017-06-16 13:24+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -712,7 +712,7 @@ msgid "_Import File…"
 msgstr "_Importar archivo…"
 
 #: ../panels/color/color.ui.h:31
-#: ../panels/network/connection-editor/net-connection-editor.c:546
+#: ../panels/network/connection-editor/net-connection-editor.c:519
 #: ../panels/printers/new-printer-dialog.ui.h:4
 #: ../panels/region/input-chooser.ui.h:3
 #: ../panels/user-accounts/data/account-dialog.ui.h:3
@@ -896,12 +896,12 @@ msgid "No languages found"
 msgstr "No se han encontrado idiomas"
 
 #: ../panels/common/cc-util.c:127
-#: ../panels/network/connection-editor/ce-page-details.c:100
+#: ../panels/network/connection-editor/ce-page-details.c:106
 msgid "Today"
 msgstr "Hoy"
 
 #: ../panels/common/cc-util.c:131
-#: ../panels/network/connection-editor/ce-page-details.c:102
+#: ../panels/network/connection-editor/ce-page-details.c:108
 msgid "Yesterday"
 msgstr "Ayer"
 
@@ -1192,7 +1192,7 @@ msgid "Aspect Ratio"
 msgstr "Proporción de aspecto"
 
 #: ../panels/display/cc-display-panel.c:2246
-#: ../panels/printers/pp-options-dialog.c:85
+#: ../panels/printers/pp-options-dialog.c:87
 msgid "Resolution"
 msgstr "Resolución"
 
@@ -1299,8 +1299,8 @@ msgid "Sunset to Sunrise"
 msgstr "Desde el amanecer hasta la puesta del sol"
 
 #: ../panels/display/display.ui.h:10
-#: ../panels/network/connection-editor/ce-page-ip4.c:630
-#: ../panels/network/connection-editor/ce-page-ip6.c:592
+#: ../panels/network/connection-editor/ip4-page.ui.h:4
+#: ../panels/network/connection-editor/ip6-page.ui.h:5
 #: ../panels/network/network-wifi.ui.h:26
 #: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Manual"
@@ -1374,7 +1374,7 @@ msgstr "64 bits"
 msgid "32-bit"
 msgstr "32 bits"
 
-#: ../panels/info/cc-info-overview-panel.c:802
+#: ../panels/info/cc-info-overview-panel.c:800
 #, c-format
 msgid "Version %s"
 msgstr "Versión %s"
@@ -1391,7 +1391,7 @@ msgstr "Visión general"
 msgid "Default Applications"
 msgstr "Aplicaciones predeterminadas"
 
-#: ../panels/info/cc-info-panel.c:158 ../panels/info/info.ui.h:11
+#: ../panels/info/cc-info-panel.c:158 ../panels/info/info.ui.h:3
 msgid "Removable Media"
 msgstr "Soportes extraíbles"
 
@@ -1526,7 +1526,7 @@ msgid "_Video"
 msgstr "_Vídeo"
 
 #: ../panels/info/info-default-apps.ui.h:6
-#: ../panels/info/info-removable-media.ui.h:5 ../panels/info/info.ui.h:7
+#: ../panels/info/info-removable-media.ui.h:5
 msgid "_Photos"
 msgstr "_Fotos"
 
@@ -1542,61 +1542,61 @@ msgstr "Memoria"
 msgid "Processor"
 msgstr "Procesador"
 
+#: ../panels/info/info-overview.ui.h:4
+msgid "Graphics"
+msgstr "Gráficos"
+
 #. To translators: this field contains the distro name and version
-#: ../panels/info/info-overview.ui.h:5
+#: ../panels/info/info-overview.ui.h:6
 msgid "OS name"
 msgstr "Nombre del SO"
 
 #. To translators: this field contains the distro type
-#: ../panels/info/info-overview.ui.h:7
+#: ../panels/info/info-overview.ui.h:8
 msgid "OS type"
 msgstr "Tipo de SO"
 
-#: ../panels/info/info-overview.ui.h:8
+#: ../panels/info/info-overview.ui.h:9
+msgid "Virtualization"
+msgstr "Virtualización"
+
+#: ../panels/info/info-overview.ui.h:10
 msgid "Disk"
 msgstr "Disco"
 
-#: ../panels/info/info-overview.ui.h:9
+#: ../panels/info/info-overview.ui.h:11
 msgid "Calculating…"
 msgstr "Calculando…"
-
-#: ../panels/info/info-overview.ui.h:10
-msgid "Graphics"
-msgstr "Gráficos"
-
-#: ../panels/info/info-overview.ui.h:11
-msgid "Virtualization"
-msgstr "Virtualización"
 
 #: ../panels/info/info-overview.ui.h:12
 msgid "Check for updates"
 msgstr "Comprobar si hay actualizaciones"
 
-#: ../panels/info/info-removable-media.ui.h:1 ../panels/info/info.ui.h:3
+#: ../panels/info/info-removable-media.ui.h:1
 msgid "Select how media should be handled"
 msgstr "Seleccionar cómo se deben manejar los soportes"
 
-#: ../panels/info/info-removable-media.ui.h:2 ../panels/info/info.ui.h:4
+#: ../panels/info/info-removable-media.ui.h:2
 msgid "CD _audio"
 msgstr "CD de _sonido"
 
-#: ../panels/info/info-removable-media.ui.h:3 ../panels/info/info.ui.h:5
+#: ../panels/info/info-removable-media.ui.h:3
 msgid "_DVD video"
 msgstr "_DVD de vídeo"
 
-#: ../panels/info/info-removable-media.ui.h:4 ../panels/info/info.ui.h:6
+#: ../panels/info/info-removable-media.ui.h:4
 msgid "_Music player"
 msgstr "Reproductor de _música"
 
-#: ../panels/info/info-removable-media.ui.h:6 ../panels/info/info.ui.h:8
+#: ../panels/info/info-removable-media.ui.h:6
 msgid "_Software"
 msgstr "Soft_ware"
 
-#: ../panels/info/info-removable-media.ui.h:7 ../panels/info/info.ui.h:9
+#: ../panels/info/info-removable-media.ui.h:7
 msgid "_Other Media…"
 msgstr "_Otros soportes…"
 
-#: ../panels/info/info-removable-media.ui.h:8 ../panels/info/info.ui.h:10
+#: ../panels/info/info-removable-media.ui.h:8
 msgid "_Never prompt or start programs on media insertion"
 msgstr "_Nunca preguntar ni iniciar programas al introducir soportes"
 
@@ -1958,8 +1958,8 @@ msgid "Remove"
 msgstr "Quitar"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
-#: ../panels/network/connection-editor/ce-page-ip4.c:305
-#: ../panels/network/connection-editor/ce-page-ip6.c:277
+#: ../panels/network/connection-editor/ce-page-ip4.c:296
+#: ../panels/network/connection-editor/ce-page-ip6.c:267
 msgid "Add"
 msgstr "Añadir"
 
@@ -2162,14 +2162,14 @@ msgid "Profile %d"
 msgstr "Perfil %d"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:50
+#: ../panels/network/connection-editor/ce-page-details.c:56
 #: ../panels/network/net-device-wifi.c:214
 #: ../panels/network/net-device-wifi.c:390
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:54
+#: ../panels/network/connection-editor/ce-page-details.c:60
 #: ../panels/network/net-device-wifi.c:218
 #: ../panels/network/net-device-wifi.c:395
 #: ../panels/network/network-wifi.ui.h:19
@@ -2177,30 +2177,30 @@ msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:58
+#: ../panels/network/connection-editor/ce-page-details.c:64
 #: ../panels/network/net-device-wifi.c:222
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:63
+#: ../panels/network/connection-editor/ce-page-details.c:69
 #: ../panels/network/net-device-wifi.c:227
 msgid "Enterprise"
 msgstr "Empresa"
 
-#: ../panels/network/connection-editor/ce-page-details.c:68
+#: ../panels/network/connection-editor/ce-page-details.c:74
 #: ../panels/network/net-device-wifi.c:232
 #: ../panels/network/net-device-wifi.c:380
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Ninguna"
 
-#: ../panels/network/connection-editor/ce-page-details.c:89
+#: ../panels/network/connection-editor/ce-page-details.c:95
 #: ../panels/power/power.ui.h:17
 msgid "Never"
 msgstr "Nunca"
 
-#: ../panels/network/connection-editor/ce-page-details.c:104
+#: ../panels/network/connection-editor/ce-page-details.c:110
 #: ../panels/network/net-device-ethernet.c:120
 #: ../panels/network/net-device-wifi.c:488
 #, c-format
@@ -2210,145 +2210,133 @@ msgstr[0] "hace %i día"
 msgstr[1] "hace %i días"
 
 #. Translators: network device speed
-#: ../panels/network/connection-editor/ce-page-details.c:153
+#: ../panels/network/connection-editor/ce-page-details.c:176
 #: ../panels/network/net-device-ethernet.c:50
 #: ../panels/network/net-device-wifi.c:544
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: ../panels/network/connection-editor/ce-page-details.c:179
+#: ../panels/network/connection-editor/ce-page-details.c:202
 #: ../panels/network/net-device-wifi.c:573
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Ninguna"
 
-#: ../panels/network/connection-editor/ce-page-details.c:181
+#: ../panels/network/connection-editor/ce-page-details.c:204
 #: ../panels/network/net-device-wifi.c:575
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Débil"
 
-#: ../panels/network/connection-editor/ce-page-details.c:183
+#: ../panels/network/connection-editor/ce-page-details.c:206
 #: ../panels/network/net-device-wifi.c:577
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Aceptar"
 
-#: ../panels/network/connection-editor/ce-page-details.c:185
+#: ../panels/network/connection-editor/ce-page-details.c:208
 #: ../panels/network/net-device-wifi.c:579
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Buena"
 
-#: ../panels/network/connection-editor/ce-page-details.c:187
+#: ../panels/network/connection-editor/ce-page-details.c:210
 #: ../panels/network/net-device-wifi.c:581
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excelente"
 
-#: ../panels/network/connection-editor/ce-page-details.c:225
+#: ../panels/network/connection-editor/ce-page-details.c:248
+#| msgid "Connection"
+msgid "Forget Connection"
+msgstr "Olvidar conexión"
+
+#: ../panels/network/connection-editor/ce-page-details.c:250
+#| msgid "Connection failed"
+msgid "Remove Connection Profile"
+msgstr "Eliminar perfil de conexión"
+
+#: ../panels/network/connection-editor/ce-page-details.c:252
+#| msgid "Remove"
+msgid "Remove VPN"
+msgstr "Quitar VPN"
+
+#: ../panels/network/connection-editor/ce-page-details.c:280
 #: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:269
 #: ../shell/panel-list.ui.h:2
 msgid "Details"
 msgstr "Detalles"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:205
-#: ../panels/network/connection-editor/ce-page-vpn.c:210
-#: ../panels/network/connection-editor/ce-page-wifi.c:225
+#: ../panels/network/connection-editor/ce-page-ethernet.c:173
+#: ../panels/network/connection-editor/ce-page-vpn.c:188
+#: ../panels/network/connection-editor/ce-page-wifi.c:194
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
 msgstr "Identidad"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:202
-#: ../panels/network/connection-editor/ce-page-ip4.c:461
-#: ../panels/network/connection-editor/ce-page-ip6.c:180
-#: ../panels/network/connection-editor/ce-page-ip6.c:427
+#: ../panels/network/connection-editor/ce-page-ip4.c:193
+#: ../panels/network/connection-editor/ce-page-ip4.c:452
+#: ../panels/network/connection-editor/ce-page-ip6.c:170
+#: ../panels/network/connection-editor/ce-page-ip6.c:417
 #: ../panels/printers/details-dialog.ui.h:3
 msgid "Address"
 msgstr "Dirección"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:215
-#: ../panels/network/connection-editor/ce-page-ip4.c:474
+#: ../panels/network/connection-editor/ce-page-ip4.c:206
+#: ../panels/network/connection-editor/ce-page-ip4.c:465
 msgid "Netmask"
 msgstr "Máscara de red"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:229
-#: ../panels/network/connection-editor/ce-page-ip4.c:487
-#: ../panels/network/connection-editor/ce-page-ip6.c:206
-#: ../panels/network/connection-editor/ce-page-ip6.c:453
+#: ../panels/network/connection-editor/ce-page-ip4.c:220
+#: ../panels/network/connection-editor/ce-page-ip4.c:478
+#: ../panels/network/connection-editor/ce-page-ip6.c:196
+#: ../panels/network/connection-editor/ce-page-ip6.c:443
 #: ../panels/network/network-vpn.ui.h:2
 msgid "Gateway"
 msgstr "Puerta de enlace"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:250
-#: ../panels/network/connection-editor/ce-page-ip6.c:223
+#: ../panels/network/connection-editor/ce-page-ip4.c:241
+#: ../panels/network/connection-editor/ce-page-ip6.c:213
 msgid "Delete Address"
 msgstr "Eliminar dirección"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:368
-#: ../panels/network/connection-editor/ce-page-ip6.c:334
+#: ../panels/network/connection-editor/ce-page-ip4.c:359
+#: ../panels/network/connection-editor/ce-page-ip6.c:324
 msgid "Server"
 msgstr "Servidor"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:385
-#: ../panels/network/connection-editor/ce-page-ip6.c:351
+#: ../panels/network/connection-editor/ce-page-ip4.c:376
+#: ../panels/network/connection-editor/ce-page-ip6.c:341
 msgid "Delete DNS Server"
 msgstr "Eliminar servidor DNS"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: ../panels/network/connection-editor/ce-page-ip4.c:501
-#: ../panels/network/connection-editor/ce-page-ip6.c:467
+#: ../panels/network/connection-editor/ce-page-ip4.c:492
+#: ../panels/network/connection-editor/ce-page-ip6.c:457
 msgctxt "network parameters"
 msgid "Metric"
 msgstr "Métrica"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:522
-#: ../panels/network/connection-editor/ce-page-ip6.c:484
+#: ../panels/network/connection-editor/ce-page-ip4.c:513
+#: ../panels/network/connection-editor/ce-page-ip6.c:474
 msgid "Delete Route"
 msgstr "Eliminar ruta"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:626
-#: ../panels/network/network-wifi.ui.h:27
-msgid "Automatic (DHCP)"
-msgstr "Automático (DHCP)"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:634
-#: ../panels/network/connection-editor/ce-page-ip6.c:596
-msgid "Link-Local Only"
-msgstr "Sólo enlace local"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:980
+#: ../panels/network/connection-editor/ce-page-ip4.c:977
 #: ../panels/network/network-wifi.ui.h:48
 msgid "IPv4"
 msgstr "IPv4"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:193
-#: ../panels/network/connection-editor/ce-page-ip6.c:440
+#: ../panels/network/connection-editor/ce-page-ip6.c:183
+#: ../panels/network/connection-editor/ce-page-ip6.c:430
 msgid "Prefix"
 msgstr "Prefijo"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:584
-#: ../panels/network/connection-editor/ethernet-page.ui.h:1
-#: ../panels/network/connection-editor/ip4-page.ui.h:4
-#: ../panels/network/connection-editor/ip6-page.ui.h:4
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
-#: ../panels/privacy/cc-privacy-panel.c:217
-msgid "Automatic"
-msgstr "Automático"
-
-#: ../panels/network/connection-editor/ce-page-ip6.c:588
-msgid "Automatic, DHCP only"
-msgstr "Automático, DHCP únicamente"
-
-#: ../panels/network/connection-editor/ce-page-ip6.c:898
+#: ../panels/network/connection-editor/ce-page-ip6.c:896
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
-
-#: ../panels/network/connection-editor/ce-page-reset.c:78
-msgid "Reset"
-msgstr "Reiniciar"
 
 #: ../panels/network/connection-editor/ce-page-security.c:245
 msgctxt "Wi-Fi/Ethernet security"
@@ -2422,8 +2410,8 @@ msgid "Default Route"
 msgstr "Ruta predeterminada"
 
 #: ../panels/network/connection-editor/details-page.ui.h:8
-#: ../panels/network/connection-editor/ip4-page.ui.h:3
-#: ../panels/network/connection-editor/ip6-page.ui.h:3
+#: ../panels/network/connection-editor/ip4-page.ui.h:6
+#: ../panels/network/connection-editor/ip6-page.ui.h:7
 #: ../panels/network/net-device-ethernet.c:167
 #: ../panels/network/network-mobile.ui.h:6
 #: ../panels/network/network-simple.ui.h:6
@@ -2434,6 +2422,22 @@ msgstr "DNS"
 #: ../panels/network/connection-editor/details-page.ui.h:9
 msgid "Last Used"
 msgstr "Usada por última vez"
+
+#: ../panels/network/connection-editor/details-page.ui.h:10
+msgid "Connect _automatically"
+msgstr "Conectar _automáticamente"
+
+#: ../panels/network/connection-editor/details-page.ui.h:11
+msgid "Make available to _other users"
+msgstr "Hacer disponible para _otros usuarios"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:1
+#: ../panels/network/connection-editor/ip4-page.ui.h:7
+#: ../panels/network/connection-editor/ip6-page.ui.h:2
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
+#: ../panels/privacy/cc-privacy-panel.c:217
+msgid "Automatic"
+msgstr "Automático"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:2
 msgid "Twisted Pair (TP)"
@@ -2491,100 +2495,77 @@ msgstr "Dirección _clonada"
 msgid "bytes"
 msgstr "bytes"
 
-#: ../panels/network/connection-editor/ethernet-page.ui.h:15
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
-msgid "Make available to other _users"
-msgstr "Hacer disponible para _otros usuarios"
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:16
-#: ../panels/network/connection-editor/wifi-page.ui.h:7
-msgid "Connect _automatically"
-msgstr "Conectar _automáticamente"
-
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:24
-msgid "IPv_4"
-msgstr "IPv_4"
+#| msgid "_Method"
+msgid "IPv_4 Method"
+msgstr "Método IPv_4"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
-#: ../panels/network/connection-editor/ip6-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:25
-msgid "_Addresses"
-msgstr "_Direcciones"
+#: ../panels/network/network-wifi.ui.h:27
+msgid "Automatic (DHCP)"
+msgstr "Automático (DHCP)"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:3
+#: ../panels/network/connection-editor/ip6-page.ui.h:4
+msgid "Link-Local Only"
+msgstr "Sólo enlace local"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:5
-#: ../panels/network/connection-editor/ip6-page.ui.h:5
+#: ../panels/network/connection-editor/ip6-page.ui.h:6
+#| msgid "Disabled"
+msgid "Disable"
+msgstr "Desactivar"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:8
+#: ../panels/network/connection-editor/ip6-page.ui.h:8
 msgid "Automatic DNS"
 msgstr "DNS automático"
 
-#: ../panels/network/connection-editor/ip4-page.ui.h:6
-#: ../panels/network/connection-editor/ip6-page.ui.h:6
+#: ../panels/network/connection-editor/ip4-page.ui.h:9
+#: ../panels/network/connection-editor/ip6-page.ui.h:9
 #: ../panels/network/network-wifi.ui.h:32
 msgid "Routes"
 msgstr "Rutas"
 
-#: ../panels/network/connection-editor/ip4-page.ui.h:7
-#: ../panels/network/connection-editor/ip6-page.ui.h:7
+#: ../panels/network/connection-editor/ip4-page.ui.h:10
+#: ../panels/network/connection-editor/ip6-page.ui.h:10
 msgid "Automatic Routes"
 msgstr "Rutas automáticas"
 
-#: ../panels/network/connection-editor/ip4-page.ui.h:8
-#: ../panels/network/connection-editor/ip6-page.ui.h:8
+#: ../panels/network/connection-editor/ip4-page.ui.h:11
+#: ../panels/network/connection-editor/ip6-page.ui.h:11
 #: ../panels/network/network-wifi.ui.h:34
 msgid "Use this connection _only for resources on its network"
 msgstr "Usar esta c_onexión sólo para los recursos en su red"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:36
-msgid "IPv_6"
-msgstr "IPv_6"
+#| msgid "_Method"
+msgid "IPv_6 Method"
+msgstr "Método IPv_6"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:296
+#: ../panels/network/connection-editor/ip6-page.ui.h:3
+msgid "Automatic, DHCP only"
+msgstr "Automático, DHCP únicamente"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:273
 msgid "Unable to open connection editor"
 msgstr "No se pudo abrir el editor de conexiones"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:314
+#: ../panels/network/connection-editor/net-connection-editor.c:291
 msgid "New Profile"
 msgstr "Perfil nuevo"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:635
+#: ../panels/network/connection-editor/net-connection-editor.c:603
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:783
+#: ../panels/network/connection-editor/net-connection-editor.c:751
 msgid "Import from file…"
 msgstr "Importar desde un archivo…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:817
+#: ../panels/network/connection-editor/net-connection-editor.c:785
 msgid "Add VPN"
 msgstr "Añadir VPN"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:41
-msgid "_Reset"
-msgstr "_Reiniciar"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1620
-#: ../panels/network/network-wifi.ui.h:42
-msgid "_Forget"
-msgstr "_Olvidar"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:3
-msgid ""
-"Reset the settings for this network, including passwords, but remember it as "
-"a preferred network"
-msgstr ""
-"Restablecer la configuración para esta red, incluyendo las contraseñas, pero "
-"recordarla como una red preferida."
-
-#: ../panels/network/connection-editor/reset-page.ui.h:4
-msgid ""
-"Remove all details relating to this network and do not try to automatically "
-"connect"
-msgstr ""
-"Quitar todos los detalles relativos a esta red y no volver a intentar "
-"conectarse automáticamente a ella."
 
 #: ../panels/network/connection-editor/security-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:16
@@ -2652,7 +2633,7 @@ msgstr ""
 msgid "Export VPN connection"
 msgstr "Exportar conexión VPN"
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:3
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Error: no se pudo cargar el editor de conexiones VPN)"
 
@@ -2670,10 +2651,6 @@ msgstr "_BSSID"
 #: ../panels/network/network-wifi.ui.h:18
 msgid "My Home Network"
 msgstr "Mi red privada"
-
-#: ../panels/network/connection-editor/wifi-page.ui.h:6
-msgid "Make available to _other users"
-msgstr "Hacer disponible para _otros usuarios"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
@@ -2757,7 +2734,6 @@ msgstr ""
 "«hotspot» está activado."
 
 #: ../panels/network/net-device-wifi.c:1269
-#| msgid "Wi-Fi Hotspot"
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "¿Activar el punto de acceso inalámbrico?"
 
@@ -2796,6 +2772,11 @@ msgid ""
 msgstr ""
 "Se perderán los detalles de las redes seleccionadas, incluyendo la "
 "contraseña y cualquier configuración personalizada."
+
+#: ../panels/network/net-device-wifi.c:1620
+#: ../panels/network/network-wifi.ui.h:42
+msgid "_Forget"
+msgstr "_Olvidar"
 
 #: ../panels/network/net-device-wifi.c:1929
 #: ../panels/network/net-device-wifi.c:1936
@@ -2968,6 +2949,14 @@ msgstr "Hacer disponible para el resto de usuarios"
 msgid "identity"
 msgstr "indentidad"
 
+#: ../panels/network/network-wifi.ui.h:24
+msgid "IPv_4"
+msgstr "IPv_4"
+
+#: ../panels/network/network-wifi.ui.h:25
+msgid "_Addresses"
+msgstr "_Direcciones"
+
 #: ../panels/network/network-wifi.ui.h:28
 msgid "Automatic (DHCP) addresses only"
 msgstr "Sólo direcciones automáticas (DHCP)"
@@ -2988,6 +2977,10 @@ msgstr "_Ignorar rutas obtenidas automáticamente"
 msgid "ipv4"
 msgstr "ipv4"
 
+#: ../panels/network/network-wifi.ui.h:36
+msgid "IPv_6"
+msgstr "IPv_6"
+
 #: ../panels/network/network-wifi.ui.h:37
 msgid "ipv6"
 msgstr "ipv6"
@@ -2999,6 +2992,10 @@ msgstr "Dirección MAC _clonada"
 #: ../panels/network/network-wifi.ui.h:40
 msgid "hardware"
 msgstr "hardware"
+
+#: ../panels/network/network-wifi.ui.h:41
+msgid "_Reset"
+msgstr "_Reiniciar"
 
 #: ../panels/network/network-wifi.ui.h:43
 msgid ""
@@ -4314,6 +4311,14 @@ msgstr ""
 "Introduzca su nombre de usuario y su contraseña para ver las impresoras "
 "disponibles en el servidor de impresión."
 
+#. Translators: This button triggers the printing of a test page.
+#. Translators: Name of job which makes printer to print test page
+#: ../panels/printers/options-dialog.ui.h:2
+#: ../panels/printers/pp-options-dialog.c:893
+#| msgid "Test page"
+msgid "Test Page"
+msgstr "Página de prueba"
+
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: ../panels/printers/pp-details-dialog.c:123
 #: ../panels/printers/pp-details-dialog.c:415
@@ -4506,88 +4511,93 @@ msgstr "Dirección: %s"
 msgid "Server requires authentication"
 msgstr "El servidor requiere autenticación"
 
-#: ../panels/printers/pp-options-dialog.c:81
+#: ../panels/printers/pp-options-dialog.c:83
 msgid "Two Sided"
 msgstr "Dos caras"
 
-#: ../panels/printers/pp-options-dialog.c:82
+#: ../panels/printers/pp-options-dialog.c:84
 msgid "Paper Type"
 msgstr "Tipo de papel"
 
-#: ../panels/printers/pp-options-dialog.c:83
+#: ../panels/printers/pp-options-dialog.c:85
 msgid "Paper Source"
 msgstr "Fuente de papel"
 
-#: ../panels/printers/pp-options-dialog.c:84
+#: ../panels/printers/pp-options-dialog.c:86
 msgid "Output Tray"
 msgstr "Bandeja de salida"
 
-#: ../panels/printers/pp-options-dialog.c:86
+#: ../panels/printers/pp-options-dialog.c:88
 msgid "GhostScript pre-filtering"
 msgstr "Prefiltrado GhostScript"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: ../panels/printers/pp-options-dialog.c:532
+#: ../panels/printers/pp-options-dialog.c:534
 msgid "Pages per side"
 msgstr "Páginas por cara"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: ../panels/printers/pp-options-dialog.c:544
+#: ../panels/printers/pp-options-dialog.c:546
 msgid "Two-sided"
 msgstr "Dos caras"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: ../panels/printers/pp-options-dialog.c:556
+#: ../panels/printers/pp-options-dialog.c:558
 msgid "Orientation"
 msgstr "Orientación"
 
 #. Translators: "General" tab contains general printer options
-#: ../panels/printers/pp-options-dialog.c:653
+#: ../panels/printers/pp-options-dialog.c:655
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "General"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: ../panels/printers/pp-options-dialog.c:656
+#: ../panels/printers/pp-options-dialog.c:658
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Configuración de página"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: ../panels/printers/pp-options-dialog.c:659
+#: ../panels/printers/pp-options-dialog.c:661
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Opciones instalables"
 
 #. Translators: "Job" tab contains settings for jobs
-#: ../panels/printers/pp-options-dialog.c:662
+#: ../panels/printers/pp-options-dialog.c:664
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Trabajo"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: ../panels/printers/pp-options-dialog.c:665
+#: ../panels/printers/pp-options-dialog.c:667
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Calidad de la imagen"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: ../panels/printers/pp-options-dialog.c:668
+#: ../panels/printers/pp-options-dialog.c:670
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Color"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: ../panels/printers/pp-options-dialog.c:671
+#: ../panels/printers/pp-options-dialog.c:673
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Terminando"
 
 #. Translators: "Advanced" tab contains all others settings
-#: ../panels/printers/pp-options-dialog.c:674
+#: ../panels/printers/pp-options-dialog.c:676
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Avanzado"
+
+#. Translators: Name of job which makes printer to print test page
+#: ../panels/printers/pp-options-dialog.c:908
+msgid "Test page"
+msgstr "Página de prueba"
 
 #. Translators: this is an option of "Paper Source"
 #: ../panels/printers/pp-ppd-option-widget.c:76
@@ -4631,12 +4641,12 @@ msgid "Manufacturer"
 msgstr "Fabricante"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:573
+#: ../panels/printers/pp-printer-entry.c:576
 msgid "No Active Jobs"
 msgstr "No hay trabajos activos"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:578
+#: ../panels/printers/pp-printer-entry.c:581
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -4644,111 +4654,111 @@ msgstr[0] "%u trabajo"
 msgstr[1] "%u trabajos"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/pp-printer-entry.c:714
+#: ../panels/printers/pp-printer-entry.c:717
 msgid "Low on toner"
 msgstr "Tóner bajo"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/pp-printer-entry.c:716
+#: ../panels/printers/pp-printer-entry.c:719
 msgid "Out of toner"
 msgstr "Sin tóner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:719
+#: ../panels/printers/pp-printer-entry.c:722
 msgid "Low on developer"
 msgstr "Nivel de revelador bajo"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:722
+#: ../panels/printers/pp-printer-entry.c:725
 msgid "Out of developer"
 msgstr "Sin revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:724
+#: ../panels/printers/pp-printer-entry.c:727
 msgid "Low on a marker supply"
 msgstr "Marcador bajo"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:726
+#: ../panels/printers/pp-printer-entry.c:729
 msgid "Out of a marker supply"
 msgstr "Sin marcador"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/pp-printer-entry.c:728
+#: ../panels/printers/pp-printer-entry.c:731
 msgid "Open cover"
 msgstr "Abrir cubierta"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/pp-printer-entry.c:730
+#: ../panels/printers/pp-printer-entry.c:733
 msgid "Open door"
 msgstr "Abrir puerta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/pp-printer-entry.c:732
+#: ../panels/printers/pp-printer-entry.c:735
 msgid "Low on paper"
 msgstr "Nivel de papel bajo"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/pp-printer-entry.c:734
+#: ../panels/printers/pp-printer-entry.c:737
 msgid "Out of paper"
 msgstr "Sin papel"
 
 #. Translators: The printer is offline
-#: ../panels/printers/pp-printer-entry.c:736
+#: ../panels/printers/pp-printer-entry.c:739
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Desconectada"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/pp-printer-entry.c:738
-#: ../panels/printers/pp-printer-entry.c:868
+#: ../panels/printers/pp-printer-entry.c:741
+#: ../panels/printers/pp-printer-entry.c:871
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Detenida"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/pp-printer-entry.c:740
+#: ../panels/printers/pp-printer-entry.c:743
 msgid "Waste receptacle almost full"
 msgstr "Recipiente de residuos casi lleno"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/pp-printer-entry.c:742
+#: ../panels/printers/pp-printer-entry.c:745
 msgid "Waste receptacle full"
 msgstr "Receptáculo de residuos lleno"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:744
+#: ../panels/printers/pp-printer-entry.c:747
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor óptico está cerca del final de su vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:746
+#: ../panels/printers/pp-printer-entry.c:749
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor óptico ya no funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/pp-printer-entry.c:854
+#: ../panels/printers/pp-printer-entry.c:857
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Preparada"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/pp-printer-entry.c:859
+#: ../panels/printers/pp-printer-entry.c:862
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "No aceptar trabajos"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/pp-printer-entry.c:864
+#: ../panels/printers/pp-printer-entry.c:867
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/pp-printer-entry.c:888
+#: ../panels/printers/pp-printer-entry.c:891
 msgid "Clean print heads"
 msgstr "Limpiar cabezales de la impresora"
 
@@ -5104,7 +5114,6 @@ msgid "Times"
 msgstr "Horas"
 
 #: ../panels/region/format-chooser.ui.h:7
-#| msgid "Date & Time"
 msgid "Dates & Times"
 msgstr "Fecha y hora"
 
@@ -7398,6 +7407,26 @@ msgstr "Hotspot"
 msgid "No results found"
 msgstr "No se han encontrado resultados"
 
+#~ msgid "Reset"
+#~ msgstr "Reiniciar"
+
+#~ msgid "Make available to other _users"
+#~ msgstr "Hacer disponible para _otros usuarios"
+
+#~ msgid ""
+#~ "Reset the settings for this network, including passwords, but remember it "
+#~ "as a preferred network"
+#~ msgstr ""
+#~ "Restablecer la configuración para esta red, incluyendo las contraseñas, "
+#~ "pero recordarla como una red preferida."
+
+#~ msgid ""
+#~ "Remove all details relating to this network and do not try to "
+#~ "automatically connect"
+#~ msgstr ""
+#~ "Quitar todos los detalles relativos a esta red y no volver a intentar "
+#~ "conectarse automáticamente a ella."
+
 #~ msgid "Press Esc to cancel."
 #~ msgstr "Pulse Esc para cancelar."
 
@@ -7513,9 +7542,6 @@ msgstr "No se han encontrado resultados"
 #~ msgid_plural "%u active"
 #~ msgstr[0] "%u activo"
 #~ msgstr[1] "%u activos"
-
-#~ msgid "Test page"
-#~ msgstr "Página de prueba"
 
 #~| msgid "Add"
 #~ msgctxt "button"
@@ -8132,9 +8158,6 @@ msgstr "No se han encontrado resultados"
 
 #~ msgid "Set Up New Device"
 #~ msgstr "Configurar un dispositivo nuevo"
-
-#~ msgid "Connection"
-#~ msgstr "Conexión"
 
 #~ msgid "Paired"
 #~ msgstr "Emparejado"
