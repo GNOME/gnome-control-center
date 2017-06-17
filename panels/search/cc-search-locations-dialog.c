@@ -374,6 +374,8 @@ switch_tracker_get_mapping (GValue *value,
         break;
     }
 
+  g_free (locations);
+
   g_value_set_boolean (value, found);
   return TRUE;
 }
