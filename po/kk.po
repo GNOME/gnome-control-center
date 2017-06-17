@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-05-26 14:13+0000\n"
-"PO-Revision-Date: 2017-05-29 20:36+0500\n"
+"POT-Creation-Date: 2017-06-16 17:49+0000\n"
+"PO-Revision-Date: 2017-06-17 13:46+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.0.2\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
@@ -695,7 +695,7 @@ msgid "_Import File…"
 msgstr "Файлды _импорттау…"
 
 #: ../panels/color/color.ui.h:31
-#: ../panels/network/connection-editor/net-connection-editor.c:546
+#: ../panels/network/connection-editor/net-connection-editor.c:519
 #: ../panels/printers/new-printer-dialog.ui.h:4
 #: ../panels/region/input-chooser.ui.h:3
 #: ../panels/user-accounts/data/account-dialog.ui.h:3
@@ -882,12 +882,12 @@ msgid "No languages found"
 msgstr "Тілдер табылмады"
 
 #: ../panels/common/cc-util.c:127
-#: ../panels/network/connection-editor/ce-page-details.c:100
+#: ../panels/network/connection-editor/ce-page-details.c:106
 msgid "Today"
 msgstr "Бүгін"
 
 #: ../panels/common/cc-util.c:131
-#: ../panels/network/connection-editor/ce-page-details.c:102
+#: ../panels/network/connection-editor/ce-page-details.c:108
 msgid "Yesterday"
 msgstr "Кеше"
 
@@ -1177,7 +1177,7 @@ msgid "Aspect Ratio"
 msgstr "Жақтар арақатынасы"
 
 #: ../panels/display/cc-display-panel.c:2246
-#: ../panels/printers/pp-options-dialog.c:85
+#: ../panels/printers/pp-options-dialog.c:87
 msgid "Resolution"
 msgstr "Ажыратылымдығы"
 
@@ -1284,8 +1284,8 @@ msgid "Sunset to Sunrise"
 msgstr "Күн батуынан күн шығысына дейін"
 
 #: ../panels/display/display.ui.h:10
-#: ../panels/network/connection-editor/ce-page-ip4.c:630
-#: ../panels/network/connection-editor/ce-page-ip6.c:592
+#: ../panels/network/connection-editor/ip4-page.ui.h:4
+#: ../panels/network/connection-editor/ip6-page.ui.h:5
 #: ../panels/network/network-wifi.ui.h:26
 #: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Manual"
@@ -1360,44 +1360,60 @@ msgstr "64-биттік"
 msgid "32-bit"
 msgstr "32-биттік"
 
-#: ../panels/info/cc-info-overview-panel.c:802
+#: ../panels/info/cc-info-overview-panel.c:800
 #, c-format
 msgid "Version %s"
 msgstr "Нұсқасы %s"
 
-#: ../panels/info/cc-info-panel.c:366
+#: ../panels/info/cc-info-panel.c:138
+msgid "Section"
+msgstr "Санат"
+
+#: ../panels/info/cc-info-panel.c:147 ../panels/info/info.ui.h:1
+msgid "Overview"
+msgstr "Шолу"
+
+#: ../panels/info/cc-info-panel.c:153 ../panels/info/info.ui.h:2
+msgid "Default Applications"
+msgstr "Үнсіз келісім қолданбалары"
+
+#: ../panels/info/cc-info-panel.c:158 ../panels/info/info.ui.h:3
+msgid "Removable Media"
+msgstr "Ауыстырмалы тасушылар"
+
+#: ../panels/info/cc-info-removable-media-panel.c:312
 msgid "Ask what to do"
 msgstr "Не істеуді сұрау"
 
-#: ../panels/info/cc-info-panel.c:370
+#: ../panels/info/cc-info-removable-media-panel.c:316
 msgid "Do nothing"
 msgstr "Ешнәрсе жасамау"
 
-#: ../panels/info/cc-info-panel.c:374
+#: ../panels/info/cc-info-removable-media-panel.c:320
 msgid "Open folder"
 msgstr "Буманы ашу"
 
-#: ../panels/info/cc-info-panel.c:465
+#: ../panels/info/cc-info-removable-media-panel.c:411
 msgid "Other Media"
 msgstr "Басқа тасушылар"
 
-#: ../panels/info/cc-info-panel.c:496
+#: ../panels/info/cc-info-removable-media-panel.c:444
 msgid "Select an application for audio CDs"
 msgstr "Аудио CD үшін қолданбаны таңдаңыз"
 
-#: ../panels/info/cc-info-panel.c:497
+#: ../panels/info/cc-info-removable-media-panel.c:445
 msgid "Select an application for video DVDs"
 msgstr "Видео DVD үшін қолданбаны таңдаңыз"
 
-#: ../panels/info/cc-info-panel.c:498
+#: ../panels/info/cc-info-removable-media-panel.c:446
 msgid "Select an application to run when a music player is connected"
 msgstr "Музыкалық плеері салынған кезде жөнелтілетін қолданбаны таңдаңыз"
 
-#: ../panels/info/cc-info-panel.c:499
+#: ../panels/info/cc-info-removable-media-panel.c:447
 msgid "Select an application to run when a camera is connected"
 msgstr "Камера байланысқан кезде жөнелтілетін қолданбаны таңдаңыз"
 
-#: ../panels/info/cc-info-panel.c:500
+#: ../panels/info/cc-info-removable-media-panel.c:448
 msgid "Select an application for software CDs"
 msgstr "БҚ CD дискілері үшін қолданбаны таңдаңыз"
 
@@ -1406,69 +1422,53 @@ msgstr "БҚ CD дискілері үшін қолданбаны таңдаңы�
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:512
+#: ../panels/info/cc-info-removable-media-panel.c:460
 msgid "audio DVD"
 msgstr "аудио DVD"
 
-#: ../panels/info/cc-info-panel.c:513
+#: ../panels/info/cc-info-removable-media-panel.c:461
 msgid "blank Blu-ray disc"
 msgstr "Таза Blu-Ray дискі"
 
-#: ../panels/info/cc-info-panel.c:514
+#: ../panels/info/cc-info-removable-media-panel.c:462
 msgid "blank CD disc"
 msgstr "Таза CD-R дискі"
 
-#: ../panels/info/cc-info-panel.c:515
+#: ../panels/info/cc-info-removable-media-panel.c:463
 msgid "blank DVD disc"
 msgstr "Таза DVD+R дискі"
 
-#: ../panels/info/cc-info-panel.c:516
+#: ../panels/info/cc-info-removable-media-panel.c:464
 msgid "blank HD DVD disc"
 msgstr "Таза HD DVD дискі"
 
-#: ../panels/info/cc-info-panel.c:517
+#: ../panels/info/cc-info-removable-media-panel.c:465
 msgid "Blu-ray video disc"
 msgstr "Blu-ray видео дискі"
 
-#: ../panels/info/cc-info-panel.c:518
+#: ../panels/info/cc-info-removable-media-panel.c:466
 msgid "e-book reader"
 msgstr "электронды кітаптарды оқу құрылғысы"
 
-#: ../panels/info/cc-info-panel.c:519
+#: ../panels/info/cc-info-removable-media-panel.c:467
 msgid "HD DVD video disc"
 msgstr "HD DVD видео дискі"
 
-#: ../panels/info/cc-info-panel.c:520
+#: ../panels/info/cc-info-removable-media-panel.c:468
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: ../panels/info/cc-info-panel.c:521
+#: ../panels/info/cc-info-removable-media-panel.c:469
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:522
+#: ../panels/info/cc-info-removable-media-panel.c:470
 msgid "Video CD"
 msgstr "Video CD"
 
-#: ../panels/info/cc-info-panel.c:523
+#: ../panels/info/cc-info-removable-media-panel.c:471
 msgid "Windows software"
 msgstr "Windows БҚ"
-
-#: ../panels/info/cc-info-panel.c:646
-msgid "Section"
-msgstr "Санат"
-
-#: ../panels/info/cc-info-panel.c:655 ../panels/info/info.ui.h:4
-msgid "Overview"
-msgstr "Шолу"
-
-#: ../panels/info/cc-info-panel.c:661 ../panels/info/info.ui.h:5
-msgid "Default Applications"
-msgstr "Үнсіз келісім қолданбалары"
-
-#: ../panels/info/cc-info-panel.c:666 ../panels/info/info.ui.h:14
-msgid "Removable Media"
-msgstr "Ауыстырмалы тасушылар"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:2
@@ -1510,7 +1510,8 @@ msgstr "Му_зыка"
 msgid "_Video"
 msgstr "В_идео"
 
-#: ../panels/info/info-default-apps.ui.h:6 ../panels/info/info.ui.h:10
+#: ../panels/info/info-default-apps.ui.h:6
+#: ../panels/info/info-removable-media.ui.h:5
 msgid "_Photos"
 msgstr "Фо_толар"
 
@@ -1526,75 +1527,75 @@ msgstr "Жады"
 msgid "Processor"
 msgstr "Процессор"
 
+#: ../panels/info/info-overview.ui.h:4
+msgid "Graphics"
+msgstr "Графика"
+
 #. To translators: this field contains the distro name and version
-#: ../panels/info/info-overview.ui.h:5
+#: ../panels/info/info-overview.ui.h:6
 msgid "OS name"
 msgstr "ОЖ атауы"
 
 #. To translators: this field contains the distro type
-#: ../panels/info/info-overview.ui.h:7
+#: ../panels/info/info-overview.ui.h:8
 msgid "OS type"
 msgstr "Стиль:"
 
-#: ../panels/info/info-overview.ui.h:8
+#: ../panels/info/info-overview.ui.h:9
+msgid "Virtualization"
+msgstr "Виртуализация"
+
+#: ../panels/info/info-overview.ui.h:10
 msgid "Disk"
 msgstr "Диск"
 
-#: ../panels/info/info-overview.ui.h:9
+#: ../panels/info/info-overview.ui.h:11
 msgid "Calculating…"
 msgstr "Есептеу…"
-
-#: ../panels/info/info-overview.ui.h:10
-msgid "Graphics"
-msgstr "Графика"
-
-#: ../panels/info/info-overview.ui.h:11
-msgid "Virtualization"
-msgstr "Виртуализация"
 
 #: ../panels/info/info-overview.ui.h:12
 msgid "Check for updates"
 msgstr "Жаңартуларға тексеру"
 
-#: ../panels/info/info.ui.h:1
-msgid "Select how other media should be handled"
-msgstr "Басқа медиа қалай өнделетінін таңдаңыз"
-
-#: ../panels/info/info.ui.h:2
-msgid "_Action:"
-msgstr "Әр_екет:"
-
-#: ../panels/info/info.ui.h:3
-msgid "_Type:"
-msgstr "Тү_рі:"
-
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info-removable-media.ui.h:1
 msgid "Select how media should be handled"
 msgstr "Медиа қалай өнделетінін таңдаңыз"
 
-#: ../panels/info/info.ui.h:7
+#: ../panels/info/info-removable-media.ui.h:2
 msgid "CD _audio"
 msgstr "CD _аудио"
 
-#: ../panels/info/info.ui.h:8
+#: ../panels/info/info-removable-media.ui.h:3
 msgid "_DVD video"
 msgstr "DVD ви_део"
 
-#: ../panels/info/info.ui.h:9
+#: ../panels/info/info-removable-media.ui.h:4
 msgid "_Music player"
 msgstr "_Музыка плеері"
 
-#: ../panels/info/info.ui.h:11
+#: ../panels/info/info-removable-media.ui.h:6
 msgid "_Software"
 msgstr "Б_ағд. қамтамасы"
 
-#: ../panels/info/info.ui.h:12
+#: ../panels/info/info-removable-media.ui.h:7
 msgid "_Other Media…"
 msgstr "Б_асқа медиа…"
 
-#: ../panels/info/info.ui.h:13
+#: ../panels/info/info-removable-media.ui.h:8
 msgid "_Never prompt or start programs on media insertion"
 msgstr "Тасушы са_лынған кезде ешқашан сұрамау және бағдарламаларды жөнелтпеу"
+
+#: ../panels/info/info-removable-media.ui.h:9
+msgid "Select how other media should be handled"
+msgstr "Басқа медиа қалай өнделетінін таңдаңыз"
+
+#: ../panels/info/info-removable-media.ui.h:10
+msgid "_Action:"
+msgstr "Әр_екет:"
+
+#: ../panels/info/info-removable-media.ui.h:11
+msgid "_Type:"
+msgstr "Тү_рі:"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
 msgid "Sound and Media"
@@ -1943,8 +1944,8 @@ msgid "Remove"
 msgstr "Өшіру"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
-#: ../panels/network/connection-editor/ce-page-ip4.c:305
-#: ../panels/network/connection-editor/ce-page-ip6.c:277
+#: ../panels/network/connection-editor/ce-page-ip4.c:296
+#: ../panels/network/connection-editor/ce-page-ip6.c:267
 msgid "Add"
 msgstr "Қосу"
 
@@ -2147,14 +2148,14 @@ msgid "Profile %d"
 msgstr "Профиль %d"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:50
+#: ../panels/network/connection-editor/ce-page-details.c:56
 #: ../panels/network/net-device-wifi.c:214
 #: ../panels/network/net-device-wifi.c:390
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:54
+#: ../panels/network/connection-editor/ce-page-details.c:60
 #: ../panels/network/net-device-wifi.c:218
 #: ../panels/network/net-device-wifi.c:395
 #: ../panels/network/network-wifi.ui.h:19
@@ -2162,30 +2163,30 @@ msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:58
+#: ../panels/network/connection-editor/ce-page-details.c:64
 #: ../panels/network/net-device-wifi.c:222
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:63
+#: ../panels/network/connection-editor/ce-page-details.c:69
 #: ../panels/network/net-device-wifi.c:227
 msgid "Enterprise"
 msgstr "Кәсіпорын"
 
-#: ../panels/network/connection-editor/ce-page-details.c:68
+#: ../panels/network/connection-editor/ce-page-details.c:74
 #: ../panels/network/net-device-wifi.c:232
 #: ../panels/network/net-device-wifi.c:380
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Жоқ"
 
-#: ../panels/network/connection-editor/ce-page-details.c:89
+#: ../panels/network/connection-editor/ce-page-details.c:95
 #: ../panels/power/power.ui.h:17
 msgid "Never"
 msgstr "Ешқашан"
 
-#: ../panels/network/connection-editor/ce-page-details.c:104
+#: ../panels/network/connection-editor/ce-page-details.c:110
 #: ../panels/network/net-device-ethernet.c:120
 #: ../panels/network/net-device-wifi.c:488
 #, c-format
@@ -2194,145 +2195,131 @@ msgid_plural "%i days ago"
 msgstr[0] "%i күн бұрын"
 
 #. Translators: network device speed
-#: ../panels/network/connection-editor/ce-page-details.c:153
+#: ../panels/network/connection-editor/ce-page-details.c:176
 #: ../panels/network/net-device-ethernet.c:50
 #: ../panels/network/net-device-wifi.c:544
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Мб/с"
 
-#: ../panels/network/connection-editor/ce-page-details.c:179
+#: ../panels/network/connection-editor/ce-page-details.c:202
 #: ../panels/network/net-device-wifi.c:573
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Жоқ"
 
-#: ../panels/network/connection-editor/ce-page-details.c:181
+#: ../panels/network/connection-editor/ce-page-details.c:204
 #: ../panels/network/net-device-wifi.c:575
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Әлсіз"
 
-#: ../panels/network/connection-editor/ce-page-details.c:183
+#: ../panels/network/connection-editor/ce-page-details.c:206
 #: ../panels/network/net-device-wifi.c:577
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "ОК"
 
-#: ../panels/network/connection-editor/ce-page-details.c:185
+#: ../panels/network/connection-editor/ce-page-details.c:208
 #: ../panels/network/net-device-wifi.c:579
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Жақсы"
 
-#: ../panels/network/connection-editor/ce-page-details.c:187
+#: ../panels/network/connection-editor/ce-page-details.c:210
 #: ../panels/network/net-device-wifi.c:581
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Тамаша"
 
-#: ../panels/network/connection-editor/ce-page-details.c:225
+#: ../panels/network/connection-editor/ce-page-details.c:248
+msgid "Forget Connection"
+msgstr "Байланысты ұмыту"
+
+#: ../panels/network/connection-editor/ce-page-details.c:250
+msgid "Remove Connection Profile"
+msgstr "Байланыс профилін өшіру"
+
+#: ../panels/network/connection-editor/ce-page-details.c:252
+#| msgid "Remove"
+msgid "Remove VPN"
+msgstr "VPN өшіру"
+
+#: ../panels/network/connection-editor/ce-page-details.c:280
 #: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:269
 #: ../shell/panel-list.ui.h:2
 msgid "Details"
 msgstr "Көбірек білу"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:205
-#: ../panels/network/connection-editor/ce-page-vpn.c:210
-#: ../panels/network/connection-editor/ce-page-wifi.c:225
+#: ../panels/network/connection-editor/ce-page-ethernet.c:173
+#: ../panels/network/connection-editor/ce-page-vpn.c:188
+#: ../panels/network/connection-editor/ce-page-wifi.c:194
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
 msgstr "Идентификация"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:202
-#: ../panels/network/connection-editor/ce-page-ip4.c:461
-#: ../panels/network/connection-editor/ce-page-ip6.c:180
-#: ../panels/network/connection-editor/ce-page-ip6.c:427
+#: ../panels/network/connection-editor/ce-page-ip4.c:193
+#: ../panels/network/connection-editor/ce-page-ip4.c:452
+#: ../panels/network/connection-editor/ce-page-ip6.c:170
+#: ../panels/network/connection-editor/ce-page-ip6.c:417
 #: ../panels/printers/details-dialog.ui.h:3
 msgid "Address"
 msgstr "Адрес"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:215
-#: ../panels/network/connection-editor/ce-page-ip4.c:474
+#: ../panels/network/connection-editor/ce-page-ip4.c:206
+#: ../panels/network/connection-editor/ce-page-ip4.c:465
 msgid "Netmask"
 msgstr "Желі маскасы"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:229
-#: ../panels/network/connection-editor/ce-page-ip4.c:487
-#: ../panels/network/connection-editor/ce-page-ip6.c:206
-#: ../panels/network/connection-editor/ce-page-ip6.c:453
+#: ../panels/network/connection-editor/ce-page-ip4.c:220
+#: ../panels/network/connection-editor/ce-page-ip4.c:478
+#: ../panels/network/connection-editor/ce-page-ip6.c:196
+#: ../panels/network/connection-editor/ce-page-ip6.c:443
 #: ../panels/network/network-vpn.ui.h:2
 msgid "Gateway"
 msgstr "Шлюз"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:250
-#: ../panels/network/connection-editor/ce-page-ip6.c:223
+#: ../panels/network/connection-editor/ce-page-ip4.c:241
+#: ../panels/network/connection-editor/ce-page-ip6.c:213
 msgid "Delete Address"
 msgstr "Адресті өшіру"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:368
-#: ../panels/network/connection-editor/ce-page-ip6.c:334
+#: ../panels/network/connection-editor/ce-page-ip4.c:359
+#: ../panels/network/connection-editor/ce-page-ip6.c:324
 msgid "Server"
 msgstr "Сервер"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:385
-#: ../panels/network/connection-editor/ce-page-ip6.c:351
+#: ../panels/network/connection-editor/ce-page-ip4.c:376
+#: ../panels/network/connection-editor/ce-page-ip6.c:341
 msgid "Delete DNS Server"
 msgstr "DNS серверін өшіру"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: ../panels/network/connection-editor/ce-page-ip4.c:501
-#: ../panels/network/connection-editor/ce-page-ip6.c:467
+#: ../panels/network/connection-editor/ce-page-ip4.c:492
+#: ../panels/network/connection-editor/ce-page-ip6.c:457
 msgctxt "network parameters"
 msgid "Metric"
 msgstr "Метрика"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:522
-#: ../panels/network/connection-editor/ce-page-ip6.c:484
+#: ../panels/network/connection-editor/ce-page-ip4.c:513
+#: ../panels/network/connection-editor/ce-page-ip6.c:474
 msgid "Delete Route"
 msgstr "Маршрутты өшіру"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:626
-#: ../panels/network/network-wifi.ui.h:27
-msgid "Automatic (DHCP)"
-msgstr "Автоматты түрде (DHCP)"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:634
-#: ../panels/network/connection-editor/ce-page-ip6.c:596
-msgid "Link-Local Only"
-msgstr "Тек жергілікті желі үшін"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:980
+#: ../panels/network/connection-editor/ce-page-ip4.c:977
 #: ../panels/network/network-wifi.ui.h:48
 msgid "IPv4"
 msgstr "IPv4"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:193
-#: ../panels/network/connection-editor/ce-page-ip6.c:440
+#: ../panels/network/connection-editor/ce-page-ip6.c:183
+#: ../panels/network/connection-editor/ce-page-ip6.c:430
 msgid "Prefix"
 msgstr "Префикс"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:584
-#: ../panels/network/connection-editor/ethernet-page.ui.h:1
-#: ../panels/network/connection-editor/ip4-page.ui.h:4
-#: ../panels/network/connection-editor/ip6-page.ui.h:4
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
-#: ../panels/privacy/cc-privacy-panel.c:217
-msgid "Automatic"
-msgstr "Автоматты түрде"
-
-#: ../panels/network/connection-editor/ce-page-ip6.c:588
-msgid "Automatic, DHCP only"
-msgstr "Автоматты түрде, тек DHCP"
-
-#: ../panels/network/connection-editor/ce-page-ip6.c:898
+#: ../panels/network/connection-editor/ce-page-ip6.c:896
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
-
-#: ../panels/network/connection-editor/ce-page-reset.c:78
-msgid "Reset"
-msgstr "Тастау"
 
 #: ../panels/network/connection-editor/ce-page-security.c:245
 msgctxt "Wi-Fi/Ethernet security"
@@ -2406,8 +2393,8 @@ msgid "Default Route"
 msgstr "Үнсіз келісім бойынша маршруты"
 
 #: ../panels/network/connection-editor/details-page.ui.h:8
-#: ../panels/network/connection-editor/ip4-page.ui.h:3
-#: ../panels/network/connection-editor/ip6-page.ui.h:3
+#: ../panels/network/connection-editor/ip4-page.ui.h:6
+#: ../panels/network/connection-editor/ip6-page.ui.h:7
 #: ../panels/network/net-device-ethernet.c:167
 #: ../panels/network/network-mobile.ui.h:6
 #: ../panels/network/network-simple.ui.h:6
@@ -2418,6 +2405,22 @@ msgstr "DNS"
 #: ../panels/network/connection-editor/details-page.ui.h:9
 msgid "Last Used"
 msgstr "Соңғы қолданылған"
+
+#: ../panels/network/connection-editor/details-page.ui.h:10
+msgid "Connect _automatically"
+msgstr "_Автоматты түрде байланысу"
+
+#: ../panels/network/connection-editor/details-page.ui.h:11
+msgid "Make available to _other users"
+msgstr "Басқа па_йдаланушыларға қолжетерлік қылу"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:1
+#: ../panels/network/connection-editor/ip4-page.ui.h:7
+#: ../panels/network/connection-editor/ip6-page.ui.h:2
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
+#: ../panels/privacy/cc-privacy-panel.c:217
+msgid "Automatic"
+msgstr "Автоматты түрде"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:2
 msgid "Twisted Pair (TP)"
@@ -2475,99 +2478,76 @@ msgstr "_Клондалған адрес"
 msgid "bytes"
 msgstr "байт"
 
-#: ../panels/network/connection-editor/ethernet-page.ui.h:15
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
-msgid "Make available to other _users"
-msgstr "Басқа па_йдаланушыларға қолжетерлік қылу"
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:16
-#: ../panels/network/connection-editor/wifi-page.ui.h:7
-msgid "Connect _automatically"
-msgstr "_Автоматты түрде байланысу"
-
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:24
-msgid "IPv_4"
-msgstr "IPv_4"
+#| msgid "_Method"
+msgid "IPv_4 Method"
+msgstr "IPv_4 тәсілі"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
-#: ../panels/network/connection-editor/ip6-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:25
-msgid "_Addresses"
-msgstr "_Адрестер"
+#: ../panels/network/network-wifi.ui.h:27
+msgid "Automatic (DHCP)"
+msgstr "Автоматты түрде (DHCP)"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:3
+#: ../panels/network/connection-editor/ip6-page.ui.h:4
+msgid "Link-Local Only"
+msgstr "Тек жергілікті желі үшін"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:5
-#: ../panels/network/connection-editor/ip6-page.ui.h:5
+#: ../panels/network/connection-editor/ip6-page.ui.h:6
+msgid "Disable"
+msgstr "Сөндіру"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:8
+#: ../panels/network/connection-editor/ip6-page.ui.h:8
 msgid "Automatic DNS"
 msgstr "Автоматты DNS"
 
-#: ../panels/network/connection-editor/ip4-page.ui.h:6
-#: ../panels/network/connection-editor/ip6-page.ui.h:6
+#: ../panels/network/connection-editor/ip4-page.ui.h:9
+#: ../panels/network/connection-editor/ip6-page.ui.h:9
 #: ../panels/network/network-wifi.ui.h:32
 msgid "Routes"
 msgstr "Бағдарлар"
 
-#: ../panels/network/connection-editor/ip4-page.ui.h:7
-#: ../panels/network/connection-editor/ip6-page.ui.h:7
+#: ../panels/network/connection-editor/ip4-page.ui.h:10
+#: ../panels/network/connection-editor/ip6-page.ui.h:10
 msgid "Automatic Routes"
 msgstr "Автоматты бағдарлар"
 
-#: ../panels/network/connection-editor/ip4-page.ui.h:8
-#: ../panels/network/connection-editor/ip6-page.ui.h:8
+#: ../panels/network/connection-editor/ip4-page.ui.h:11
+#: ../panels/network/connection-editor/ip6-page.ui.h:11
 #: ../panels/network/network-wifi.ui.h:34
 msgid "Use this connection _only for resources on its network"
 msgstr "Бұл байланысты тек ол өзі жатқан желі ішіндегі ресурстар үшін қ_олдану"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:36
-msgid "IPv_6"
-msgstr "IPv_6"
+#| msgid "_Method"
+msgid "IPv_6 Method"
+msgstr "IPv_6 тәсілі"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:296
+#: ../panels/network/connection-editor/ip6-page.ui.h:3
+msgid "Automatic, DHCP only"
+msgstr "Автоматты түрде, тек DHCP"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:273
 msgid "Unable to open connection editor"
 msgstr "Байланыстар түзеткішін ашу мүмкін емес"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:314
+#: ../panels/network/connection-editor/net-connection-editor.c:291
 msgid "New Profile"
 msgstr "Жаңа профиль"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:635
+#: ../panels/network/connection-editor/net-connection-editor.c:603
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:783
+#: ../panels/network/connection-editor/net-connection-editor.c:751
 msgid "Import from file…"
 msgstr "Файлдан импорттау..."
 
-#: ../panels/network/connection-editor/net-connection-editor.c:817
+#: ../panels/network/connection-editor/net-connection-editor.c:785
 msgid "Add VPN"
 msgstr "VPN қосу"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:41
-msgid "_Reset"
-msgstr "_Тастау"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1620
-#: ../panels/network/network-wifi.ui.h:42
-msgid "_Forget"
-msgstr "Ұ_мыту"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:3
-msgid ""
-"Reset the settings for this network, including passwords, but remember it as "
-"a preferred network"
-msgstr ""
-"Бұл желі үшін барлық баптауларды тастау (парольді қоса), бірақ, оны "
-"таңдамалы желі ретінде есте сақтау"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:4
-msgid ""
-"Remove all details relating to this network and do not try to automatically "
-"connect"
-msgstr ""
-"Бұл желі үшін барлық баптауларды тастау және автобайланысу талаптарын жасамау"
 
 #: ../panels/network/connection-editor/security-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:16
@@ -2635,7 +2615,7 @@ msgstr ""
 msgid "Export VPN connection"
 msgstr "VPN байланысын экспорттау"
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:3
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Қате: VPN байланыстары түзетушісін жүктеу мүмкін емес)"
 
@@ -2653,10 +2633,6 @@ msgstr "_BSSID"
 #: ../panels/network/network-wifi.ui.h:18
 msgid "My Home Network"
 msgstr "Менің үй желім"
-
-#: ../panels/network/connection-editor/wifi-page.ui.h:6
-msgid "Make available to _other users"
-msgstr "Басқа па_йдаланушыларға қолжетерлік қылу"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
@@ -2779,6 +2755,11 @@ msgid ""
 msgstr ""
 "Таңдалған желілер үшін желі ақпараты, парольдер және таңдауыңызша жасалған "
 "баптаулар жоғалатын болады."
+
+#: ../panels/network/net-device-wifi.c:1620
+#: ../panels/network/network-wifi.ui.h:42
+msgid "_Forget"
+msgstr "Ұ_мыту"
 
 #: ../panels/network/net-device-wifi.c:1929
 #: ../panels/network/net-device-wifi.c:1936
@@ -2950,6 +2931,14 @@ msgstr "Басқа пайдаланушыларға қолжетерлік қы�
 msgid "identity"
 msgstr "идентификация"
 
+#: ../panels/network/network-wifi.ui.h:24
+msgid "IPv_4"
+msgstr "IPv_4"
+
+#: ../panels/network/network-wifi.ui.h:25
+msgid "_Addresses"
+msgstr "_Адрестер"
+
 #: ../panels/network/network-wifi.ui.h:28
 msgid "Automatic (DHCP) addresses only"
 msgstr "Автоматты (DHCP), тек адрестер"
@@ -2970,6 +2959,10 @@ msgstr "Автоматты алынан бағдарларды еле_меу"
 msgid "ipv4"
 msgstr "ipv4"
 
+#: ../panels/network/network-wifi.ui.h:36
+msgid "IPv_6"
+msgstr "IPv_6"
+
 #: ../panels/network/network-wifi.ui.h:37
 msgid "ipv6"
 msgstr "ipv6"
@@ -2981,6 +2974,10 @@ msgstr "Кл_ондалған MAC адресі"
 #: ../panels/network/network-wifi.ui.h:40
 msgid "hardware"
 msgstr "құрылғы"
+
+#: ../panels/network/network-wifi.ui.h:41
+msgid "_Reset"
+msgstr "_Тастау"
 
 #: ../panels/network/network-wifi.ui.h:43
 msgid ""
@@ -4196,18 +4193,18 @@ msgid "Authentication Required"
 msgstr "Аутентификация керек"
 
 #. Translators: %s is the printer name
-#: ../panels/printers/cc-printers-panel.c:716
+#: ../panels/printers/cc-printers-panel.c:717
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "\"%s\" принтері өшірілді"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:898
+#: ../panels/printers/cc-printers-panel.c:908
 msgid "Failed to add new printer."
 msgstr "Жаңа принтерді қосу сәтсіз аяқталды"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:1195
+#: ../panels/printers/cc-printers-panel.c:1217
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "ui жүктеу мүмкін емес: %s"
@@ -4295,15 +4292,12 @@ msgstr ""
 "Баспаға шығару серверіндегі принтерлерді қарау үшін пайдаланушы атын және "
 "пароліңізді енгізіңіз."
 
-#: ../panels/printers/options-dialog.ui.h:1
-msgid "Loading options…"
-msgstr "Жүктеу опциялары…"
-
+#. Translators: This button triggers the printing of a test page.
+#. Translators: Name of job which makes printer to print test page
 #: ../panels/printers/options-dialog.ui.h:2
-#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
-msgid "_Close"
-msgstr "Жа_бу"
+#: ../panels/printers/pp-options-dialog.c:893
+msgid "Test Page"
+msgstr "Сынау парағы"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: ../panels/printers/pp-details-dialog.c:123
@@ -4497,88 +4491,93 @@ msgstr "Адресі: %s"
 msgid "Server requires authentication"
 msgstr "Сервер аутентификацияны талап етеді"
 
-#: ../panels/printers/pp-options-dialog.c:81
+#: ../panels/printers/pp-options-dialog.c:83
 msgid "Two Sided"
 msgstr "Екі жақты"
 
-#: ../panels/printers/pp-options-dialog.c:82
+#: ../panels/printers/pp-options-dialog.c:84
 msgid "Paper Type"
 msgstr "Қағаз түрі"
 
-#: ../panels/printers/pp-options-dialog.c:83
+#: ../panels/printers/pp-options-dialog.c:85
 msgid "Paper Source"
 msgstr "Қағаз көзі"
 
-#: ../panels/printers/pp-options-dialog.c:84
+#: ../panels/printers/pp-options-dialog.c:86
 msgid "Output Tray"
 msgstr "Шығыс сөресі"
 
-#: ../panels/printers/pp-options-dialog.c:86
+#: ../panels/printers/pp-options-dialog.c:88
 msgid "GhostScript pre-filtering"
 msgstr "GhostScript алдын-ала сүзгілеу"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: ../panels/printers/pp-options-dialog.c:533
+#: ../panels/printers/pp-options-dialog.c:534
 msgid "Pages per side"
 msgstr "Бір жақтағы парақтар"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: ../panels/printers/pp-options-dialog.c:545
+#: ../panels/printers/pp-options-dialog.c:546
 msgid "Two-sided"
 msgstr "Екі жақты"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: ../panels/printers/pp-options-dialog.c:557
+#: ../panels/printers/pp-options-dialog.c:558
 msgid "Orientation"
 msgstr "Бағдары"
 
 #. Translators: "General" tab contains general printer options
-#: ../panels/printers/pp-options-dialog.c:654
+#: ../panels/printers/pp-options-dialog.c:655
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "Жалпы"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: ../panels/printers/pp-options-dialog.c:657
+#: ../panels/printers/pp-options-dialog.c:658
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Парақ баптаулары"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: ../panels/printers/pp-options-dialog.c:660
+#: ../panels/printers/pp-options-dialog.c:661
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Орнатуға келетін опциялар"
 
 #. Translators: "Job" tab contains settings for jobs
-#: ../panels/printers/pp-options-dialog.c:663
+#: ../panels/printers/pp-options-dialog.c:664
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Тапсырма"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: ../panels/printers/pp-options-dialog.c:666
+#: ../panels/printers/pp-options-dialog.c:667
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Сурет сапасы"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: ../panels/printers/pp-options-dialog.c:669
+#: ../panels/printers/pp-options-dialog.c:670
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Түс"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: ../panels/printers/pp-options-dialog.c:672
+#: ../panels/printers/pp-options-dialog.c:673
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Аяқтау"
 
 #. Translators: "Advanced" tab contains all others settings
-#: ../panels/printers/pp-options-dialog.c:675
+#: ../panels/printers/pp-options-dialog.c:676
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Кеңейтілген"
+
+#. Translators: Name of job which makes printer to print test page
+#: ../panels/printers/pp-options-dialog.c:908
+msgid "Test page"
+msgstr "Сынау парағы"
 
 #. Translators: this is an option of "Paper Source"
 #: ../panels/printers/pp-ppd-option-widget.c:76
@@ -4622,123 +4621,123 @@ msgid "Manufacturer"
 msgstr "Шығарушы"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:573
+#: ../panels/printers/pp-printer-entry.c:577
 msgid "No Active Jobs"
 msgstr "Белсенді тапсырмалар жоқ"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:578
+#: ../panels/printers/pp-printer-entry.c:582
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
 msgstr[0] "%u тапсырма"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/pp-printer-entry.c:714
+#: ../panels/printers/pp-printer-entry.c:730
 msgid "Low on toner"
 msgstr "Тонер аз"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/pp-printer-entry.c:716
+#: ../panels/printers/pp-printer-entry.c:732
 msgid "Out of toner"
 msgstr "Тонер жоқ"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:719
+#: ../panels/printers/pp-printer-entry.c:735
 msgid "Low on developer"
 msgstr "Айқындауышы аз"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:722
+#: ../panels/printers/pp-printer-entry.c:738
 msgid "Out of developer"
 msgstr "Айқындауышы бітті"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:724
+#: ../panels/printers/pp-printer-entry.c:740
 msgid "Low on a marker supply"
 msgstr "Тонер бітіп жатыр"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:726
+#: ../panels/printers/pp-printer-entry.c:742
 msgid "Out of a marker supply"
 msgstr "Тонер бітті"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/pp-printer-entry.c:728
+#: ../panels/printers/pp-printer-entry.c:744
 msgid "Open cover"
 msgstr "Қақпағы ашық"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/pp-printer-entry.c:730
+#: ../panels/printers/pp-printer-entry.c:746
 msgid "Open door"
 msgstr "Есігі ашық"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/pp-printer-entry.c:732
+#: ../panels/printers/pp-printer-entry.c:748
 msgid "Low on paper"
 msgstr "Қағазы аз"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/pp-printer-entry.c:734
+#: ../panels/printers/pp-printer-entry.c:750
 msgid "Out of paper"
 msgstr "Қағаз бітті"
 
 #. Translators: The printer is offline
-#: ../panels/printers/pp-printer-entry.c:736
+#: ../panels/printers/pp-printer-entry.c:752
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Желіде емес"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/pp-printer-entry.c:738
-#: ../panels/printers/pp-printer-entry.c:868
+#: ../panels/printers/pp-printer-entry.c:754
+#: ../panels/printers/pp-printer-entry.c:884
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Тоқтатылды"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/pp-printer-entry.c:740
+#: ../panels/printers/pp-printer-entry.c:756
 msgid "Waste receptacle almost full"
 msgstr "Қоқысты қабылдағыш толуға жақын"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/pp-printer-entry.c:742
+#: ../panels/printers/pp-printer-entry.c:758
 msgid "Waste receptacle full"
 msgstr "Қоқысты қабылдағыш толып қалды"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:744
+#: ../panels/printers/pp-printer-entry.c:760
 msgid "The optical photo conductor is near end of life"
 msgstr "Фоторезист жақында жарамсыз болып қалады"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:746
+#: ../panels/printers/pp-printer-entry.c:762
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Фоторезист жұмыс істемейді"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/pp-printer-entry.c:854
+#: ../panels/printers/pp-printer-entry.c:870
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Дайын"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/pp-printer-entry.c:859
+#: ../panels/printers/pp-printer-entry.c:875
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Тапрсырмаларды қабылдамайды"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/pp-printer-entry.c:864
+#: ../panels/printers/pp-printer-entry.c:880
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Өңдеуде"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/pp-printer-entry.c:888
+#: ../panels/printers/pp-printer-entry.c:904
 msgid "Clean print heads"
 msgstr "Баспа бастиектерін тазарту"
 
@@ -5067,7 +5066,7 @@ msgstr "Аймақтар табылмады"
 msgid "No input sources found"
 msgstr "Кіріс қайнар көздері табылмады"
 
-#: ../panels/region/cc-input-chooser.c:992
+#: ../panels/region/cc-input-chooser.c:1012
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Басқа"
@@ -7047,6 +7046,11 @@ msgstr ""
 msgid "Map Buttons"
 msgstr "Пернелер бейнеленуі"
 
+#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+msgid "_Close"
+msgstr "Жа_бу"
+
 #: ../panels/wacom/button-mapping.ui.h:3
 msgid "Map buttons to functions"
 msgstr "Пернелер және функциялар сәйкестігі"
@@ -7382,6 +7386,29 @@ msgstr "Қатынау нүктесі"
 msgid "No results found"
 msgstr "Нәтижелер табылмады"
 
+#~ msgid "Reset"
+#~ msgstr "Тастау"
+
+#~ msgid "Make available to other _users"
+#~ msgstr "Басқа па_йдаланушыларға қолжетерлік қылу"
+
+#~ msgid ""
+#~ "Reset the settings for this network, including passwords, but remember it "
+#~ "as a preferred network"
+#~ msgstr ""
+#~ "Бұл желі үшін барлық баптауларды тастау (парольді қоса), бірақ, оны "
+#~ "таңдамалы желі ретінде есте сақтау"
+
+#~ msgid ""
+#~ "Remove all details relating to this network and do not try to "
+#~ "automatically connect"
+#~ msgstr ""
+#~ "Бұл желі үшін барлық баптауларды тастау және автобайланысу талаптарын "
+#~ "жасамау"
+
+#~ msgid "Loading options…"
+#~ msgstr "Жүктеу опциялары…"
+
 #~ msgid ""
 #~ "If you have a connection to the Internet other than wireless, you can set "
 #~ "up a wireless hotspot to share the connection with others."
@@ -7492,9 +7519,6 @@ msgstr "Нәтижелер табылмады"
 #~ msgid "%u active"
 #~ msgid_plural "%u active"
 #~ msgstr[0] "%u белсенді"
-
-#~ msgid "Test page"
-#~ msgstr "Сынау парағы"
 
 #~ msgid "Supply"
 #~ msgstr "Жаратылатын заттар"
@@ -8050,9 +8074,6 @@ msgstr "Нәтижелер табылмады"
 
 #~ msgid "Set Up New Device"
 #~ msgstr "Жаңа құрылғыны орнату"
-
-#~ msgid "Connection"
-#~ msgstr "Байланыс"
 
 #~ msgid "Paired"
 #~ msgstr "Жұпталған"
