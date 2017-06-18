@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-05-05 17:32+0000\n"
-"PO-Revision-Date: 2017-02-23 08:18+0100\n"
+"POT-Creation-Date: 2017-06-16 17:49+0000\n"
+"PO-Revision-Date: 2017-06-18 08:15+0200\n"
 "Last-Translator: Jordi Mas <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "Language: ca\n"
@@ -29,11 +29,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 2.0.1\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
-msgstr "_Fons"
+msgstr "&Fons"
 
 #. This refers to a slideshow background
 #: ../panels/background/background.ui.h:3
@@ -116,13 +116,14 @@ msgstr "Podeu afegir imatges a la carpeta %s i apareixeran aquí"
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:30
 #: ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1580
-#: ../panels/display/cc-display-panel.c:2226
+#: ../panels/display/cc-display-panel.c:1437
+#: ../panels/display/cc-display-panel.c:2094
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1350
-#: ../panels/network/net-device-wifi.c:1589
+#: ../panels/network/net-device-wifi.c:1301
+#: ../panels/network/net-device-wifi.c:1381
+#: ../panels/network/net-device-wifi.c:1619
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/printers/pp-details-dialog.c:319
@@ -135,7 +136,7 @@ msgstr "Podeu afegir imatges a la carpeta %s i apareixeran aquí"
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
-#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-photo-dialog.c:221
 #: ../panels/user-accounts/um-user-panel.c:644
 #: ../panels/user-accounts/um-user-panel.c:662
 msgid "_Cancel"
@@ -710,7 +711,7 @@ msgid "_Import File…"
 msgstr "_Importa un fitxer…"
 
 #: ../panels/color/color.ui.h:31
-#: ../panels/network/connection-editor/net-connection-editor.c:546
+#: ../panels/network/connection-editor/net-connection-editor.c:519
 #: ../panels/printers/new-printer-dialog.ui.h:4
 #: ../panels/region/input-chooser.ui.h:3
 #: ../panels/user-accounts/data/account-dialog.ui.h:3
@@ -886,7 +887,7 @@ msgid "Other…"
 msgstr "Altres…"
 
 #: ../panels/common/cc-language-chooser.c:124
-#: ../panels/region/cc-format-chooser.c:271
+#: ../panels/region/cc-format-chooser.c:269
 #: ../panels/region/cc-input-chooser.c:169
 msgid "More…"
 msgstr "Més…"
@@ -896,12 +897,12 @@ msgid "No languages found"
 msgstr "No s'ha trobat cap idioma"
 
 #: ../panels/common/cc-util.c:127
-#: ../panels/network/connection-editor/ce-page-details.c:100
+#: ../panels/network/connection-editor/ce-page-details.c:106
 msgid "Today"
 msgstr "Avui"
 
 #: ../panels/common/cc-util.c:131
-#: ../panels/network/connection-editor/ce-page-details.c:102
+#: ../panels/network/connection-editor/ce-page-details.c:108
 msgid "Yesterday"
 msgstr "Ahir"
 
@@ -1107,22 +1108,22 @@ msgstr "Canvieu els paràmetres d'hora i data del sistema"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Per canviar els paràmetres d'hora i data, us heu d'autentificar."
 
-#: ../panels/display/cc-display-panel.c:592
+#: ../panels/display/cc-display-panel.c:579
 msgid "Lid Closed"
 msgstr "Tapa tancada"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:595
+#: ../panels/display/cc-display-panel.c:582
 msgid "Mirrored"
 msgstr "Duplicat"
 
-#: ../panels/display/cc-display-panel.c:597
-#: ../panels/display/cc-display-panel.c:2449
+#: ../panels/display/cc-display-panel.c:584
+#: ../panels/display/cc-display-panel.c:2348
 msgid "Primary"
 msgstr "Primària"
 
-#: ../panels/display/cc-display-panel.c:599
-#: ../panels/display/cc-display-panel.c:2786
+#: ../panels/display/cc-display-panel.c:586
+#: ../panels/display/cc-display-panel.c:2690
 #: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
 #: ../panels/privacy/cc-privacy-panel.c:190
@@ -1136,115 +1137,115 @@ msgstr "Primària"
 msgid "Off"
 msgstr "Desactivat"
 
-#: ../panels/display/cc-display-panel.c:602
+#: ../panels/display/cc-display-panel.c:589
 msgid "Secondary"
 msgstr "Secundària"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1577
+#: ../panels/display/cc-display-panel.c:1434
 msgid "Arrange Combined Displays"
 msgstr "Organitzeu les pantalles combinades"
 
-#: ../panels/display/cc-display-panel.c:1581
-#: ../panels/display/cc-display-panel.c:2227
+#: ../panels/display/cc-display-panel.c:1438
+#: ../panels/display/cc-display-panel.c:2095
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Aplica"
 
-#: ../panels/display/cc-display-panel.c:1605
+#: ../panels/display/cc-display-panel.c:1462
 msgid "Drag displays to rearrange them"
 msgstr "Arrossegueu les pantalles per a reordenar-les"
 
 #. translators: example string is "60 Hz (NTSC)"
 #. * NTSC is https://en.wikipedia.org/wiki/NTSC
-#: ../panels/display/cc-display-panel.c:1812
+#: ../panels/display/cc-display-panel.c:1668
 #, c-format
 msgid "%d Hz (NTSC)"
 msgstr "%d Hz (NTSC)"
 
 #. translators: example string is "60 Hz"
-#: ../panels/display/cc-display-panel.c:1818
+#: ../panels/display/cc-display-panel.c:1674
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../panels/display/cc-display-panel.c:2279
+#: ../panels/display/cc-display-panel.c:2147
 msgid "Rotate counterclockwise by 90°"
 msgstr "Gira en sentit antihorari 90°"
 
-#: ../panels/display/cc-display-panel.c:2297
+#: ../panels/display/cc-display-panel.c:2165
 msgid "Rotate by 180°"
 msgstr "Gira 180°"
 
-#: ../panels/display/cc-display-panel.c:2315
+#: ../panels/display/cc-display-panel.c:2183
 msgid "Rotate clockwise by 90°"
 msgstr "Gira en sentit horari 90°"
 
-#: ../panels/display/cc-display-panel.c:2336
+#: ../panels/display/cc-display-panel.c:2204
 msgid "Size"
 msgstr "Mida"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2351
+#: ../panels/display/cc-display-panel.c:2219
 msgid "Aspect Ratio"
 msgstr "Relació d'aspecte"
 
-#: ../panels/display/cc-display-panel.c:2374
-#: ../panels/printers/pp-options-dialog.c:85
+#: ../panels/display/cc-display-panel.c:2246
+#: ../panels/printers/pp-options-dialog.c:87
 msgid "Resolution"
 msgstr "Resolució"
 
-#: ../panels/display/cc-display-panel.c:2394
+#: ../panels/display/cc-display-panel.c:2266
 msgid "Adjust for TV"
 msgstr "Ajusta per a televisió"
 
-#: ../panels/display/cc-display-panel.c:2418
+#: ../panels/display/cc-display-panel.c:2290
 msgid "Refresh Rate"
 msgstr "Freqüència de refresc"
 
-#: ../panels/display/cc-display-panel.c:2450
+#: ../panels/display/cc-display-panel.c:2349
 msgid "Show the top bar and Activities Overview on this display"
 msgstr ""
 "Mostra la barra superior i la vista general d'activitats en aquesta pantalla"
 
-#: ../panels/display/cc-display-panel.c:2456
+#: ../panels/display/cc-display-panel.c:2355
 msgid "Secondary Display"
 msgstr "Pantalla secundària"
 
-#: ../panels/display/cc-display-panel.c:2457
+#: ../panels/display/cc-display-panel.c:2356
 msgid "Join this display with another to create an extra workspace"
 msgstr ""
 "Ajunta aquesta pantalla amb una altra per crear un espai de treball "
 "addicional"
 
-#: ../panels/display/cc-display-panel.c:2464
+#: ../panels/display/cc-display-panel.c:2363
 msgid "Presentation"
 msgstr "Presentació"
 
-#: ../panels/display/cc-display-panel.c:2465
+#: ../panels/display/cc-display-panel.c:2364
 msgid "Show slideshows and media only"
 msgstr "Mostra només seqüències d'imatges i multimèdia"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2470
+#: ../panels/display/cc-display-panel.c:2369
 msgid "Mirror"
 msgstr "Mirall"
 
-#: ../panels/display/cc-display-panel.c:2471
+#: ../panels/display/cc-display-panel.c:2370
 msgid "Show your existing view on both displays"
 msgstr "Mostra el mateix a les dues pantalles"
 
-#: ../panels/display/cc-display-panel.c:2477
+#: ../panels/display/cc-display-panel.c:2376
 msgid "Turn Off"
 msgstr "_Desactiva"
 
-#: ../panels/display/cc-display-panel.c:2478
+#: ../panels/display/cc-display-panel.c:2377
 msgid "Don’t use this display"
 msgstr "No usis aquesta pantalla"
 
 #. TRANSLATORS: the state of the night light setting
-#: ../panels/display/cc-display-panel.c:2786
+#: ../panels/display/cc-display-panel.c:2690
 #: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
 #: ../panels/privacy/cc-privacy-panel.c:190
@@ -1257,15 +1258,15 @@ msgstr "No usis aquesta pantalla"
 msgid "On"
 msgstr "Activat"
 
-#: ../panels/display/cc-display-panel.c:2826
+#: ../panels/display/cc-display-panel.c:2795
 msgid "Could not get screen information"
 msgstr "No s'ha pogut obtenir la informació de la pantalla"
 
-#: ../panels/display/cc-display-panel.c:2857
+#: ../panels/display/cc-display-panel.c:2833
 msgid "_Arrange Combined Displays"
 msgstr "_Organitzeu les pantalles combinades"
 
-#: ../panels/display/cc-display-panel.c:2878
+#: ../panels/display/cc-display-panel.c:2854
 msgid "_Night Light"
 msgstr "_Llum nocturna"
 
@@ -1301,8 +1302,8 @@ msgid "Sunset to Sunrise"
 msgstr "Posta de sol a la sortida del sol"
 
 #: ../panels/display/display.ui.h:10
-#: ../panels/network/connection-editor/ce-page-ip4.c:630
-#: ../panels/network/connection-editor/ce-page-ip6.c:592
+#: ../panels/network/connection-editor/ip4-page.ui.h:4
+#: ../panels/network/connection-editor/ip6-page.ui.h:5
 #: ../panels/network/network-wifi.ui.h:26
 #: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Manual"
@@ -1366,7 +1367,7 @@ msgstr "%s; ID del muntatge: %s"
 
 #. translators: This is the type of architecture for the OS
 #: ../panels/info/cc-info-overview-panel.c:493
-#,  c-format
+#, c-format
 msgid "64-bit"
 msgstr "64-bit"
 
@@ -1376,46 +1377,62 @@ msgstr "64-bit"
 msgid "32-bit"
 msgstr "32-bit"
 
-#: ../panels/info/cc-info-overview-panel.c:802
+#: ../panels/info/cc-info-overview-panel.c:800
 #, c-format
 msgid "Version %s"
 msgstr "Versió %s"
 
-#: ../panels/info/cc-info-panel.c:514
+#: ../panels/info/cc-info-panel.c:138
+msgid "Section"
+msgstr "Secció"
+
+#: ../panels/info/cc-info-panel.c:147 ../panels/info/info.ui.h:1
+msgid "Overview"
+msgstr "Vista general"
+
+#: ../panels/info/cc-info-panel.c:153 ../panels/info/info.ui.h:2
+msgid "Default Applications"
+msgstr "Aplicacions per defecte"
+
+#: ../panels/info/cc-info-panel.c:158 ../panels/info/info.ui.h:3
+msgid "Removable Media"
+msgstr "Suport extraïble"
+
+#: ../panels/info/cc-info-removable-media-panel.c:312
 msgid "Ask what to do"
 msgstr "Pregunta què fer"
 
-#: ../panels/info/cc-info-panel.c:518
+#: ../panels/info/cc-info-removable-media-panel.c:316
 msgid "Do nothing"
 msgstr "No facis res"
 
-#: ../panels/info/cc-info-panel.c:522
+#: ../panels/info/cc-info-removable-media-panel.c:320
 msgid "Open folder"
 msgstr "Obre la carpeta"
 
-#: ../panels/info/cc-info-panel.c:613
+#: ../panels/info/cc-info-removable-media-panel.c:411
 msgid "Other Media"
 msgstr "Altres suports"
 
-#: ../panels/info/cc-info-panel.c:644
+#: ../panels/info/cc-info-removable-media-panel.c:444
 msgid "Select an application for audio CDs"
 msgstr "Seleccioneu l'aplicació per als CD d'àudio"
 
-#: ../panels/info/cc-info-panel.c:645
+#: ../panels/info/cc-info-removable-media-panel.c:445
 msgid "Select an application for video DVDs"
 msgstr "Seleccioneu l'aplicació per als DVD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:646
+#: ../panels/info/cc-info-removable-media-panel.c:446
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Seleccioneu l'aplicació que s'iniciarà quan es connecti un reproductor de "
 "música"
 
-#: ../panels/info/cc-info-panel.c:647
+#: ../panels/info/cc-info-removable-media-panel.c:447
 msgid "Select an application to run when a camera is connected"
 msgstr "Seleccioneu l'aplicació que s'iniciarà quan es connecti una càmera"
 
-#: ../panels/info/cc-info-panel.c:648
+#: ../panels/info/cc-info-removable-media-panel.c:448
 msgid "Select an application for software CDs"
 msgstr "Seleccioneu l'aplicació per als CD de programari"
 
@@ -1424,69 +1441,53 @@ msgstr "Seleccioneu l'aplicació per als CD de programari"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:660
+#: ../panels/info/cc-info-removable-media-panel.c:460
 msgid "audio DVD"
 msgstr "DVD d'àudio"
 
-#: ../panels/info/cc-info-panel.c:661
+#: ../panels/info/cc-info-removable-media-panel.c:461
 msgid "blank Blu-ray disc"
 msgstr "Disc Blu-ray en blanc"
 
-#: ../panels/info/cc-info-panel.c:662
+#: ../panels/info/cc-info-removable-media-panel.c:462
 msgid "blank CD disc"
 msgstr "Disc CD en blanc"
 
-#: ../panels/info/cc-info-panel.c:663
+#: ../panels/info/cc-info-removable-media-panel.c:463
 msgid "blank DVD disc"
 msgstr "Disc DVD en blanc"
 
-#: ../panels/info/cc-info-panel.c:664
+#: ../panels/info/cc-info-removable-media-panel.c:464
 msgid "blank HD DVD disc"
 msgstr "Disc HD DVD en blanc"
 
-#: ../panels/info/cc-info-panel.c:665
+#: ../panels/info/cc-info-removable-media-panel.c:465
 msgid "Blu-ray video disc"
 msgstr "Disc Blu-ray de vídeo"
 
-#: ../panels/info/cc-info-panel.c:666
+#: ../panels/info/cc-info-removable-media-panel.c:466
 msgid "e-book reader"
 msgstr "Lector de llibres digitals"
 
-#: ../panels/info/cc-info-panel.c:667
+#: ../panels/info/cc-info-removable-media-panel.c:467
 msgid "HD DVD video disc"
 msgstr "Disc HD DVD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:668
+#: ../panels/info/cc-info-removable-media-panel.c:468
 msgid "Picture CD"
 msgstr "CD de fotos"
 
-#: ../panels/info/cc-info-panel.c:669
+#: ../panels/info/cc-info-removable-media-panel.c:469
 msgid "Super Video CD"
 msgstr "Supervídeo CD"
 
-#: ../panels/info/cc-info-panel.c:670
+#: ../panels/info/cc-info-removable-media-panel.c:470
 msgid "Video CD"
 msgstr "CD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:671
+#: ../panels/info/cc-info-removable-media-panel.c:471
 msgid "Windows software"
 msgstr "Programari de Windows"
-
-#: ../panels/info/cc-info-panel.c:794
-msgid "Section"
-msgstr "Secció"
-
-#: ../panels/info/cc-info-panel.c:803 ../panels/info/info.ui.h:4
-msgid "Overview"
-msgstr "Vista general"
-
-#: ../panels/info/cc-info-panel.c:809 ../panels/info/info.ui.h:11
-msgid "Default Applications"
-msgstr "Aplicacions per defecte"
-
-#: ../panels/info/cc-info-panel.c:814 ../panels/info/info.ui.h:19
-msgid "Removable Media"
-msgstr "Suport extraïble"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:2
@@ -1507,6 +1508,31 @@ msgstr ""
 "aplicació;preferit;cd;dvd;usb;àudio;vídeo;disc;extraïble;multimèdia;execució "
 "automàtica;"
 
+#: ../panels/info/info-default-apps.ui.h:1
+msgid "_Web"
+msgstr "_Web"
+
+#: ../panels/info/info-default-apps.ui.h:2
+msgid "_Mail"
+msgstr "_Correu"
+
+#: ../panels/info/info-default-apps.ui.h:3
+msgid "_Calendar"
+msgstr "Ca_lendari"
+
+#: ../panels/info/info-default-apps.ui.h:4
+msgid "M_usic"
+msgstr "_Música"
+
+#: ../panels/info/info-default-apps.ui.h:5
+msgid "_Video"
+msgstr "_Vídeo"
+
+#: ../panels/info/info-default-apps.ui.h:6
+#: ../panels/info/info-removable-media.ui.h:5
+msgid "_Photos"
+msgstr "_Fotos"
+
 #: ../panels/info/info-overview.ui.h:1
 msgid "Device name"
 msgstr "Nom del dispositiu"
@@ -1519,99 +1545,75 @@ msgstr "Memòria"
 msgid "Processor"
 msgstr "Processador"
 
+#: ../panels/info/info-overview.ui.h:4
+msgid "Graphics"
+msgstr "Gràfics"
+
 #. To translators: this field contains the distro name and version
-#: ../panels/info/info-overview.ui.h:5
+#: ../panels/info/info-overview.ui.h:6
 msgid "OS name"
 msgstr "Nom del sistema operatiu"
 
 #. To translators: this field contains the distro type
-#: ../panels/info/info-overview.ui.h:7
+#: ../panels/info/info-overview.ui.h:8
 msgid "OS type"
 msgstr "Tipus de sistema operatiu"
 
-#: ../panels/info/info-overview.ui.h:8
+#: ../panels/info/info-overview.ui.h:9
+msgid "Virtualization"
+msgstr "Virtualització"
+
+#: ../panels/info/info-overview.ui.h:10
 msgid "Disk"
 msgstr "Disc"
 
-#: ../panels/info/info-overview.ui.h:9
+#: ../panels/info/info-overview.ui.h:11
 msgid "Calculating…"
 msgstr "S'està calculant…"
-
-#: ../panels/info/info-overview.ui.h:10
-msgid "Graphics"
-msgstr "Gràfics"
-
-#: ../panels/info/info-overview.ui.h:11
-msgid "Virtualization"
-msgstr "Virtualització"
 
 #: ../panels/info/info-overview.ui.h:12
 msgid "Check for updates"
 msgstr "Comprova si hi ha actualitzacions"
 
-#: ../panels/info/info.ui.h:1
-msgid "Select how other media should be handled"
-msgstr "Seleccioneu com s'han de gestionar els altres suports"
-
-#: ../panels/info/info.ui.h:2
-msgid "_Action:"
-msgstr "_Acció:"
-
-#: ../panels/info/info.ui.h:3
-msgid "_Type:"
-msgstr "_Tipus:"
-
-#: ../panels/info/info.ui.h:5
-msgid "_Web"
-msgstr "_Web"
-
-#: ../panels/info/info.ui.h:6
-msgid "_Mail"
-msgstr "_Correu"
-
-#: ../panels/info/info.ui.h:7
-msgid "_Calendar"
-msgstr "Ca_lendari"
-
-#: ../panels/info/info.ui.h:8
-msgid "M_usic"
-msgstr "_Música"
-
-#: ../panels/info/info.ui.h:9
-msgid "_Video"
-msgstr "_Vídeo"
-
-#: ../panels/info/info.ui.h:10
-msgid "_Photos"
-msgstr "_Fotos"
-
-#: ../panels/info/info.ui.h:12
+#: ../panels/info/info-removable-media.ui.h:1
 msgid "Select how media should be handled"
 msgstr "Seleccioneu com s'han de gestionar els suports"
 
-#: ../panels/info/info.ui.h:13
+#: ../panels/info/info-removable-media.ui.h:2
 msgid "CD _audio"
 msgstr "_CD d'àudio"
 
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info-removable-media.ui.h:3
 msgid "_DVD video"
 msgstr "_DVD de vídeo"
 
-#: ../panels/info/info.ui.h:15
+#: ../panels/info/info-removable-media.ui.h:4
 msgid "_Music player"
 msgstr "Reproductor de _música"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info-removable-media.ui.h:6
 msgid "_Software"
 msgstr "_Programari"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info-removable-media.ui.h:7
 msgid "_Other Media…"
 msgstr "_Altres suports…"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info-removable-media.ui.h:8
 msgid "_Never prompt or start programs on media insertion"
 msgstr "_No preguntis mai ni iniciïs programes quan s'insereixin suports"
+
+#: ../panels/info/info-removable-media.ui.h:9
+msgid "Select how other media should be handled"
+msgstr "Seleccioneu com s'han de gestionar els altres suports"
+
+#: ../panels/info/info-removable-media.ui.h:10
+msgid "_Action:"
+msgstr "_Acció:"
+
+#: ../panels/info/info-removable-media.ui.h:11
+msgid "_Type:"
+msgstr "_Tipus:"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
 msgid "Sound and Media"
@@ -1897,7 +1899,8 @@ msgstr ""
 msgid ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
 msgstr ""
-"Drecera;Espai de treball;Finestra;Canvia la mida;Amplia;Contrast;Entrada;Font;Bloqueig;Volum;"
+"Drecera;Espai de treball;Finestra;Canvia la mida;Amplia;Contrast;Entrada;"
+"Font;Bloqueig;Volum;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 #: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
@@ -1910,7 +1913,7 @@ msgstr "Restableix-ho tot..."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Reset all shortcuts to their default keybindings"
-msgstr "Restableix totes les dreceres al seus valors per omissió"
+msgstr "Restableix totes les dreceres als seus valors per omissió"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "No keyboard shortcut found"
@@ -1921,8 +1924,8 @@ msgid "Try a different search"
 msgstr "Proveu amb una cerca diferent"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:1
-msgid "Press Esc to cancel."
-msgstr "Premeu Esc per cancel·lar."
+msgid "Press Esc to cancel or Backspace to reset the keyboard shortcut."
+msgstr "Premeu Esc o Retrocés per a reiniciar la drecera de teclat."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/printers/details-dialog.ui.h:1
@@ -1957,8 +1960,8 @@ msgid "Remove"
 msgstr "Suprimeix"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
-#: ../panels/network/connection-editor/ce-page-ip4.c:305
-#: ../panels/network/connection-editor/ce-page-ip6.c:277
+#: ../panels/network/connection-editor/ce-page-ip4.c:296
+#: ../panels/network/connection-editor/ce-page-ip6.c:267
 msgid "Add"
 msgstr "Afegeix"
 
@@ -2087,11 +2090,11 @@ msgstr "Un sol clic, botó secundari"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:349
+#: ../panels/network/cc-network-panel.c:347
 msgid "Air_plane Mode"
 msgstr "_Mode d'avió"
 
-#: ../panels/network/cc-network-panel.c:953
+#: ../panels/network/cc-network-panel.c:1014
 msgid "Network proxy"
 msgstr "Servidor intermediari de xarxa"
 
@@ -2099,18 +2102,18 @@ msgstr "Servidor intermediari de xarxa"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1129 ../panels/network/net-vpn.c:283
+#: ../panels/network/cc-network-panel.c:1193 ../panels/network/net-vpn.c:283
 #: ../panels/network/net-vpn.c:440
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:1194
+#: ../panels/network/cc-network-panel.c:1260
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "S'ha produït un error inesperat. Contacteu el vostre proveïdor de programari."
 
-#: ../panels/network/cc-network-panel.c:1200
+#: ../panels/network/cc-network-panel.c:1266
 msgid "NetworkManager needs to be running."
 msgstr "Cal que el NetworkManager estigui executant-se."
 
@@ -2160,47 +2163,47 @@ msgid "Profile %d"
 msgstr "Perfil %d"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:50
-#: ../panels/network/net-device-wifi.c:215
-#: ../panels/network/net-device-wifi.c:391
+#: ../panels/network/connection-editor/ce-page-details.c:56
+#: ../panels/network/net-device-wifi.c:214
+#: ../panels/network/net-device-wifi.c:390
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:54
-#: ../panels/network/net-device-wifi.c:219
-#: ../panels/network/net-device-wifi.c:396
+#: ../panels/network/connection-editor/ce-page-details.c:60
+#: ../panels/network/net-device-wifi.c:218
+#: ../panels/network/net-device-wifi.c:395
 #: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:58
-#: ../panels/network/net-device-wifi.c:223
+#: ../panels/network/connection-editor/ce-page-details.c:64
+#: ../panels/network/net-device-wifi.c:222
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:63
-#: ../panels/network/net-device-wifi.c:228
+#: ../panels/network/connection-editor/ce-page-details.c:69
+#: ../panels/network/net-device-wifi.c:227
 msgid "Enterprise"
 msgstr "Corporativa"
 
-#: ../panels/network/connection-editor/ce-page-details.c:68
-#: ../panels/network/net-device-wifi.c:233
-#: ../panels/network/net-device-wifi.c:381
+#: ../panels/network/connection-editor/ce-page-details.c:74
+#: ../panels/network/net-device-wifi.c:232
+#: ../panels/network/net-device-wifi.c:380
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Cap"
 
-#: ../panels/network/connection-editor/ce-page-details.c:89
+#: ../panels/network/connection-editor/ce-page-details.c:95
 #: ../panels/power/power.ui.h:17
 msgid "Never"
 msgstr "Mai"
 
-#: ../panels/network/connection-editor/ce-page-details.c:104
+#: ../panels/network/connection-editor/ce-page-details.c:110
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:489
+#: ../panels/network/net-device-wifi.c:488
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2208,145 +2211,130 @@ msgstr[0] "fa %i dia"
 msgstr[1] "fa %i dies"
 
 #. Translators: network device speed
-#: ../panels/network/connection-editor/ce-page-details.c:153
+#: ../panels/network/connection-editor/ce-page-details.c:176
 #: ../panels/network/net-device-ethernet.c:50
-#: ../panels/network/net-device-wifi.c:545
+#: ../panels/network/net-device-wifi.c:544
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: ../panels/network/connection-editor/ce-page-details.c:179
-#: ../panels/network/net-device-wifi.c:574
+#: ../panels/network/connection-editor/ce-page-details.c:202
+#: ../panels/network/net-device-wifi.c:573
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Cap"
 
-#: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:576
+#: ../panels/network/connection-editor/ce-page-details.c:204
+#: ../panels/network/net-device-wifi.c:575
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Dèbil"
 
-#: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:578
+#: ../panels/network/connection-editor/ce-page-details.c:206
+#: ../panels/network/net-device-wifi.c:577
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Acceptable"
 
-#: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:580
+#: ../panels/network/connection-editor/ce-page-details.c:208
+#: ../panels/network/net-device-wifi.c:579
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Bona"
 
-#: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:582
+#: ../panels/network/connection-editor/ce-page-details.c:210
+#: ../panels/network/net-device-wifi.c:581
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excel·lent"
 
-#: ../panels/network/connection-editor/ce-page-details.c:225
+#: ../panels/network/connection-editor/ce-page-details.c:248
+msgid "Forget Connection"
+msgstr "Oblida la connexió"
+
+#: ../panels/network/connection-editor/ce-page-details.c:250
+msgid "Remove Connection Profile"
+msgstr "Suprimeix el perfil de connexió"
+
+#: ../panels/network/connection-editor/ce-page-details.c:252
+msgid "Remove VPN"
+msgstr "Suprimeix VPN"
+
+#: ../panels/network/connection-editor/ce-page-details.c:280
 #: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:269
 #: ../shell/panel-list.ui.h:2
 msgid "Details"
 msgstr "Detalls"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:205
-#: ../panels/network/connection-editor/ce-page-vpn.c:210
-#: ../panels/network/connection-editor/ce-page-wifi.c:227
+#: ../panels/network/connection-editor/ce-page-ethernet.c:173
+#: ../panels/network/connection-editor/ce-page-vpn.c:188
+#: ../panels/network/connection-editor/ce-page-wifi.c:194
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
 msgstr "Identitat"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:202
-#: ../panels/network/connection-editor/ce-page-ip4.c:461
-#: ../panels/network/connection-editor/ce-page-ip6.c:180
-#: ../panels/network/connection-editor/ce-page-ip6.c:427
+#: ../panels/network/connection-editor/ce-page-ip4.c:193
+#: ../panels/network/connection-editor/ce-page-ip4.c:452
+#: ../panels/network/connection-editor/ce-page-ip6.c:170
+#: ../panels/network/connection-editor/ce-page-ip6.c:417
 #: ../panels/printers/details-dialog.ui.h:3
 msgid "Address"
 msgstr "Adreça"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:215
-#: ../panels/network/connection-editor/ce-page-ip4.c:474
+#: ../panels/network/connection-editor/ce-page-ip4.c:206
+#: ../panels/network/connection-editor/ce-page-ip4.c:465
 msgid "Netmask"
 msgstr "Màscara de xarxa"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:229
-#: ../panels/network/connection-editor/ce-page-ip4.c:487
-#: ../panels/network/connection-editor/ce-page-ip6.c:206
-#: ../panels/network/connection-editor/ce-page-ip6.c:453
+#: ../panels/network/connection-editor/ce-page-ip4.c:220
+#: ../panels/network/connection-editor/ce-page-ip4.c:478
+#: ../panels/network/connection-editor/ce-page-ip6.c:196
+#: ../panels/network/connection-editor/ce-page-ip6.c:443
 #: ../panels/network/network-vpn.ui.h:2
 msgid "Gateway"
 msgstr "Porta d'enllaç"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:250
-#: ../panels/network/connection-editor/ce-page-ip6.c:223
+#: ../panels/network/connection-editor/ce-page-ip4.c:241
+#: ../panels/network/connection-editor/ce-page-ip6.c:213
 msgid "Delete Address"
 msgstr "Suprimeix l'adreça"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:368
-#: ../panels/network/connection-editor/ce-page-ip6.c:334
+#: ../panels/network/connection-editor/ce-page-ip4.c:359
+#: ../panels/network/connection-editor/ce-page-ip6.c:324
 msgid "Server"
 msgstr "Servidor"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:385
-#: ../panels/network/connection-editor/ce-page-ip6.c:351
+#: ../panels/network/connection-editor/ce-page-ip4.c:376
+#: ../panels/network/connection-editor/ce-page-ip6.c:341
 msgid "Delete DNS Server"
 msgstr "Suprimeix el servidor DNS"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: ../panels/network/connection-editor/ce-page-ip4.c:501
-#: ../panels/network/connection-editor/ce-page-ip6.c:467
+#: ../panels/network/connection-editor/ce-page-ip4.c:492
+#: ../panels/network/connection-editor/ce-page-ip6.c:457
 msgctxt "network parameters"
 msgid "Metric"
 msgstr "Mètrica"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:522
-#: ../panels/network/connection-editor/ce-page-ip6.c:484
+#: ../panels/network/connection-editor/ce-page-ip4.c:513
+#: ../panels/network/connection-editor/ce-page-ip6.c:474
 msgid "Delete Route"
 msgstr "Suprimeix la ruta"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:626
-#: ../panels/network/network-wifi.ui.h:27
-msgid "Automatic (DHCP)"
-msgstr "Automàtic (DHCP)"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:634
-#: ../panels/network/connection-editor/ce-page-ip6.c:596
-msgid "Link-Local Only"
-msgstr "Només enllaç local"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:980
+#: ../panels/network/connection-editor/ce-page-ip4.c:977
 #: ../panels/network/network-wifi.ui.h:48
 msgid "IPv4"
 msgstr "IPv4"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:193
-#: ../panels/network/connection-editor/ce-page-ip6.c:440
+#: ../panels/network/connection-editor/ce-page-ip6.c:183
+#: ../panels/network/connection-editor/ce-page-ip6.c:430
 msgid "Prefix"
 msgstr "Prefix"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:584
-#: ../panels/network/connection-editor/ethernet-page.ui.h:1
-#: ../panels/network/connection-editor/ip4-page.ui.h:4
-#: ../panels/network/connection-editor/ip6-page.ui.h:4
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
-#: ../panels/privacy/cc-privacy-panel.c:217
-msgid "Automatic"
-msgstr "Automàtic"
-
-#: ../panels/network/connection-editor/ce-page-ip6.c:588
-msgid "Automatic, DHCP only"
-msgstr "Automàtic, només DHCP"
-
-#: ../panels/network/connection-editor/ce-page-ip6.c:898
+#: ../panels/network/connection-editor/ce-page-ip6.c:896
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
-
-#: ../panels/network/connection-editor/ce-page-reset.c:78
-msgid "Reset"
-msgstr "Reinicia"
 
 #: ../panels/network/connection-editor/ce-page-security.c:245
 msgctxt "Wi-Fi/Ethernet security"
@@ -2420,8 +2408,8 @@ msgid "Default Route"
 msgstr "Ruta per defecte"
 
 #: ../panels/network/connection-editor/details-page.ui.h:8
-#: ../panels/network/connection-editor/ip4-page.ui.h:3
-#: ../panels/network/connection-editor/ip6-page.ui.h:3
+#: ../panels/network/connection-editor/ip4-page.ui.h:6
+#: ../panels/network/connection-editor/ip6-page.ui.h:7
 #: ../panels/network/net-device-ethernet.c:167
 #: ../panels/network/network-mobile.ui.h:6
 #: ../panels/network/network-simple.ui.h:6
@@ -2432,6 +2420,22 @@ msgstr "DNS"
 #: ../panels/network/connection-editor/details-page.ui.h:9
 msgid "Last Used"
 msgstr "Utilitzada per últim cop"
+
+#: ../panels/network/connection-editor/details-page.ui.h:10
+msgid "Connect _automatically"
+msgstr "Connecta _automàticament"
+
+#: ../panels/network/connection-editor/details-page.ui.h:11
+msgid "Make available to _other users"
+msgstr "Fes-la disponible a _altres usuaris"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:1
+#: ../panels/network/connection-editor/ip4-page.ui.h:7
+#: ../panels/network/connection-editor/ip6-page.ui.h:2
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
+#: ../panels/privacy/cc-privacy-panel.c:217
+msgid "Automatic"
+msgstr "Automàtic"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:2
 msgid "Twisted Pair (TP)"
@@ -2489,100 +2493,74 @@ msgstr "Adreça _clonada"
 msgid "bytes"
 msgstr "bytes"
 
-#: ../panels/network/connection-editor/ethernet-page.ui.h:15
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
-msgid "Make available to other _users"
-msgstr "Fes-la disponible a altres _usuaris"
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:16
-#: ../panels/network/connection-editor/wifi-page.ui.h:7
-msgid "Connect _automatically"
-msgstr "Connecta _automàticament"
-
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:24
-msgid "IPv_4"
-msgstr "IPv_4"
+msgid "IPv_4 Method"
+msgstr "_Mètode IPv4"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
-#: ../panels/network/connection-editor/ip6-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:25
-msgid "_Addresses"
-msgstr "_Adreces"
+#: ../panels/network/network-wifi.ui.h:27
+msgid "Automatic (DHCP)"
+msgstr "Automàtic (DHCP)"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:3
+#: ../panels/network/connection-editor/ip6-page.ui.h:4
+msgid "Link-Local Only"
+msgstr "Només enllaç local"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:5
-#: ../panels/network/connection-editor/ip6-page.ui.h:5
+#: ../panels/network/connection-editor/ip6-page.ui.h:6
+msgid "Disable"
+msgstr "Inhabilita"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:8
+#: ../panels/network/connection-editor/ip6-page.ui.h:8
 msgid "Automatic DNS"
 msgstr "DNS automàtic"
 
-#: ../panels/network/connection-editor/ip4-page.ui.h:6
-#: ../panels/network/connection-editor/ip6-page.ui.h:6
+#: ../panels/network/connection-editor/ip4-page.ui.h:9
+#: ../panels/network/connection-editor/ip6-page.ui.h:9
 #: ../panels/network/network-wifi.ui.h:32
 msgid "Routes"
 msgstr "Rutes"
 
-#: ../panels/network/connection-editor/ip4-page.ui.h:7
-#: ../panels/network/connection-editor/ip6-page.ui.h:7
+#: ../panels/network/connection-editor/ip4-page.ui.h:10
+#: ../panels/network/connection-editor/ip6-page.ui.h:10
 msgid "Automatic Routes"
 msgstr "Rutes automàtiques"
 
-#: ../panels/network/connection-editor/ip4-page.ui.h:8
-#: ../panels/network/connection-editor/ip6-page.ui.h:8
+#: ../panels/network/connection-editor/ip4-page.ui.h:11
+#: ../panels/network/connection-editor/ip6-page.ui.h:11
 #: ../panels/network/network-wifi.ui.h:34
 msgid "Use this connection _only for resources on its network"
 msgstr "_Utilitza aquesta connexió només per recursos en aquesta xarxa"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:36
-msgid "IPv_6"
-msgstr "IPv_6"
+msgid "IPv_6 Method"
+msgstr "_Mètode IPv6"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:296
+#: ../panels/network/connection-editor/ip6-page.ui.h:3
+msgid "Automatic, DHCP only"
+msgstr "Automàtic, només DHCP"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:273
 msgid "Unable to open connection editor"
 msgstr "No s'ha pogut obrir l'editor de connexions"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:314
+#: ../panels/network/connection-editor/net-connection-editor.c:291
 msgid "New Profile"
 msgstr "Perfil nou"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:635
+#: ../panels/network/connection-editor/net-connection-editor.c:603
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:783
+#: ../panels/network/connection-editor/net-connection-editor.c:751
 msgid "Import from file…"
 msgstr "Importa des d'un fitxer…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:817
+#: ../panels/network/connection-editor/net-connection-editor.c:785
 msgid "Add VPN"
 msgstr "Afegeix VPN"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:41
-msgid "_Reset"
-msgstr "_Reinicia"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1590
-#: ../panels/network/network-wifi.ui.h:42
-msgid "_Forget"
-msgstr "_Oblida"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:3
-msgid ""
-"Reset the settings for this network, including passwords, but remember it as "
-"a preferred network"
-msgstr ""
-"Reinicia els paràmetres d'aquesta xarxa, incloent les contrasenyes, però "
-"recorda-la com una xarxa preferida"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:4
-msgid ""
-"Remove all details relating to this network and do not try to automatically "
-"connect"
-msgstr ""
-"Suprimeix totes les dades relacionades amb aquesta xarxa i no intentis "
-"connectar-t'hi automàticament"
 
 #: ../panels/network/connection-editor/security-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:16
@@ -2613,7 +2591,7 @@ msgstr "Seleccioneu el fitxer a importar"
 #: ../panels/network/connection-editor/vpn-helpers.c:182
 #: ../panels/printers/pp-details-dialog.c:320
 #: ../panels/sharing/cc-sharing-panel.c:376
-#: ../panels/user-accounts/um-photo-dialog.c:219
+#: ../panels/user-accounts/um-photo-dialog.c:222
 msgid "_Open"
 msgstr "_Obre"
 
@@ -2650,7 +2628,7 @@ msgstr ""
 msgid "Export VPN connection"
 msgstr "Exporta la connexió VPN"
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:3
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Error: no s'ha pogut carregar l'editor de connexió VPN)"
 
@@ -2668,10 +2646,6 @@ msgstr "_BSSID"
 #: ../panels/network/network-wifi.ui.h:18
 msgid "My Home Network"
 msgstr "La meva xarxa"
-
-#: ../panels/network/connection-editor/wifi-page.ui.h:6
-msgid "Make available to _other users"
-msgstr "Fes-la disponible a _altres usuaris"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
@@ -2692,17 +2666,17 @@ msgstr ""
 "Mòdem;Bluetooth;vpn;DNS;"
 
 #: ../panels/network/net-device-ethernet.c:106
-#: ../panels/network/net-device-wifi.c:475
+#: ../panels/network/net-device-wifi.c:474
 msgid "never"
 msgstr "mai"
 
 #: ../panels/network/net-device-ethernet.c:116
-#: ../panels/network/net-device-wifi.c:485
+#: ../panels/network/net-device-wifi.c:484
 msgid "today"
 msgstr "avui"
 
 #: ../panels/network/net-device-ethernet.c:118
-#: ../panels/network/net-device-wifi.c:487
+#: ../panels/network/net-device-wifi.c:486
 msgid "yesterday"
 msgstr "ahir"
 
@@ -2729,7 +2703,7 @@ msgid "Wired"
 msgstr "Amb fil"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1748
+#: ../panels/network/net-device-wifi.c:1778
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
@@ -2741,19 +2715,11 @@ msgid "Add new connection"
 msgstr "Afegeix una connexió nova"
 
 #: ../panels/network/net-device-wifi.c:1258
-msgid ""
-"If you have a connection to the Internet other than wireless, you can set up "
-"a wireless hotspot to share the connection with others."
-msgstr ""
-"Si teniu una connexió a Internet que no sigui la xarxa sense fil, podeu "
-"establir un punt d'accés sense fil per compartir-la amb altres."
-
-#: ../panels/network/net-device-wifi.c:1262
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Si activeu el punt d'accés sense fil us desconnectareu de <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1266
+#: ../panels/network/net-device-wifi.c:1262
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2761,24 +2727,40 @@ msgstr ""
 "No és possible accedir a Internet a través de la xarxa sense fil mentre el "
 "punt d'accés està actiu."
 
-#: ../panels/network/net-device-wifi.c:1348
+#: ../panels/network/net-device-wifi.c:1269
+msgid "Turn On Wi-Fi Hotspot?"
+msgstr "Activa el punt d'accés Wi-Fi"
+
+#: ../panels/network/net-device-wifi.c:1291
+msgid ""
+"Wi-Fi hotspots are usually used to share an additional Internet connection "
+"over Wi-Fi."
+msgstr ""
+"Els punts d'accés Wi-Fi s'utilitzen habitualment per compartir una connexió "
+"Internet addicional per Wi-fi"
+
+#: ../panels/network/net-device-wifi.c:1302
+msgid "_Turn On"
+msgstr "_Activa"
+
+#: ../panels/network/net-device-wifi.c:1379
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Voleu aturar el punt d'accés Wi-Fi i desconnectar els usuaris?"
 
-#: ../panels/network/net-device-wifi.c:1351
+#: ../panels/network/net-device-wifi.c:1382
 msgid "_Stop Hotspot"
 msgstr "_Atura el punt d'accés Wi-Fi"
 
-#: ../panels/network/net-device-wifi.c:1451
+#: ../panels/network/net-device-wifi.c:1482
 msgid "System policy prohibits use as a Hotspot"
 msgstr ""
 "La política del sistema prohibeix utilitzar-lo com a punt d'accés Wi-Fi"
 
-#: ../panels/network/net-device-wifi.c:1454
+#: ../panels/network/net-device-wifi.c:1485
 msgid "Wireless device does not support Hotspot mode"
 msgstr "El dispositiu sense fil no admet el mode punt d'accés Wi-Fi"
 
-#: ../panels/network/net-device-wifi.c:1586
+#: ../panels/network/net-device-wifi.c:1616
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2786,19 +2768,18 @@ msgstr ""
 "Es perdran les dades de xarxa de les xarxes seleccionades, incloent les "
 "contrasenyes i la configuració personalitzada."
 
-#: ../panels/network/net-device-wifi.c:1896
-msgid "History"
-msgstr "Historial"
+#: ../panels/network/net-device-wifi.c:1620
+#: ../panels/network/network-wifi.ui.h:42
+msgid "_Forget"
+msgstr "_Oblida"
 
-#: ../panels/network/net-device-wifi.c:1900
-#: ../panels/printers/options-dialog.ui.h:2
-#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
-msgid "_Close"
-msgstr "_Tanca"
+#: ../panels/network/net-device-wifi.c:1929
+#: ../panels/network/net-device-wifi.c:1936
+msgid "Known Wi-Fi Networks"
+msgstr "Xarxes sense fil conegudes"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1908
+#: ../panels/network/net-device-wifi.c:1969
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Oblida"
@@ -2963,6 +2944,14 @@ msgstr "Fes-la disponible a altres usuaris"
 msgid "identity"
 msgstr "identitat"
 
+#: ../panels/network/network-wifi.ui.h:24
+msgid "IPv_4"
+msgstr "IPv_4"
+
+#: ../panels/network/network-wifi.ui.h:25
+msgid "_Addresses"
+msgstr "_Adreces"
+
 #: ../panels/network/network-wifi.ui.h:28
 msgid "Automatic (DHCP) addresses only"
 msgstr "Només adreces automàtiques (DHCP)"
@@ -2983,6 +2972,10 @@ msgstr "_Ignora les rutes obtingudes automàticament"
 msgid "ipv4"
 msgstr "ipv4"
 
+#: ../panels/network/network-wifi.ui.h:36
+msgid "IPv_6"
+msgstr "IPv_6"
+
 #: ../panels/network/network-wifi.ui.h:37
 msgid "ipv6"
 msgstr "ipv6"
@@ -2994,6 +2987,10 @@ msgstr "Adreça MAC _clonada"
 #: ../panels/network/network-wifi.ui.h:40
 msgid "hardware"
 msgstr "maquinari"
+
+#: ../panels/network/network-wifi.ui.h:41
+msgid "_Reset"
+msgstr "_Reinicia"
 
 #: ../panels/network/network-wifi.ui.h:43
 msgid ""
@@ -3025,50 +3022,46 @@ msgid "Reset"
 msgstr "Restableix"
 
 #: ../panels/network/network-wifi.ui.h:52
-msgid "Wi-Fi Hotspot"
-msgstr "Punt d'accés Wi-Fi"
-
-#: ../panels/network/network-wifi.ui.h:53
-msgid "_Turn On"
-msgstr "_Activa"
-
-#: ../panels/network/network-wifi.ui.h:54
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:55
+#: ../panels/network/network-wifi.ui.h:53
 msgid "Turn Wi-Fi off"
 msgstr "Desactiva el Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:56
+#: ../panels/network/network-wifi.ui.h:54
 msgid "_Use as Hotspot…"
 msgstr "_Utilitza com a punt d'accés Wi-Fi…"
 
-#: ../panels/network/network-wifi.ui.h:57
+#: ../panels/network/network-wifi.ui.h:55
 msgid "_Connect to Hidden Network…"
 msgstr "_Connecta't a una xarxa oculta…"
 
-#: ../panels/network/network-wifi.ui.h:58
+#: ../panels/network/network-wifi.ui.h:56
 msgid "_History"
 msgstr "_Historial"
 
-#: ../panels/network/network-wifi.ui.h:59
+#: ../panels/network/network-wifi.ui.h:57
+msgid "Wi-Fi Hotspot"
+msgstr "Punt d'accés Wi-Fi"
+
+#: ../panels/network/network-wifi.ui.h:58
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr "Desactiva-ho per connectar-se a una xarxa Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:60
+#: ../panels/network/network-wifi.ui.h:59
 msgid "Network Name"
 msgstr "Nom de la xarxa"
 
-#: ../panels/network/network-wifi.ui.h:61
+#: ../panels/network/network-wifi.ui.h:60
 msgid "Connected Devices"
 msgstr "Dispositius connectats"
 
-#: ../panels/network/network-wifi.ui.h:62
+#: ../panels/network/network-wifi.ui.h:61
 msgid "Security type"
 msgstr "Tipus de seguretat"
 
-#: ../panels/network/network-wifi.ui.h:63
+#: ../panels/network/network-wifi.ui.h:62
 #: ../panels/printers/authentication-dialog.ui.h:5
 #: ../panels/printers/new-printer-dialog.ui.h:14
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
@@ -3357,7 +3350,6 @@ msgid "Cable unplugged"
 msgstr "Cable desconnectat"
 
 #: ../panels/network/wireless-security/eap-method.c:57
-
 msgid "undefined error in 802.1X security (wpa-eap)"
 msgstr "s'ha produït un error no definit en la seguretat de 802.1X (wpa-eap)"
 
@@ -3542,9 +3534,9 @@ msgid ""
 "\n"
 "(You can password-protect your private key with openssl)"
 msgstr ""
-"La clau privada que heu seleccionat no sembla protegida amb una "
-"contrasenya. Això podria permetre que les credencials de seguretat fossin "
-"compromeses. Seleccioneu una clau privada protegida per contrasenya.\n"
+"La clau privada que heu seleccionat no sembla protegida amb una contrasenya. "
+"Això podria permetre que les credencials de seguretat fossin compromeses. "
+"Seleccioneu una clau privada protegida per contrasenya.\n"
 "\n"
 "(Podeu protegir la vostra clau privada amb una contrasenya amb l'openssl)"
 
@@ -3824,7 +3816,9 @@ msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;En línia;Xat;Calendari;Correu;Contacte;"
 "ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
 
+#. Translators: This is the button which allows undoing the removal of the printer.
 #: ../panels/online-accounts/online-accounts.ui.h:1
+#: ../panels/printers/printers.ui.h:4
 msgid "Undo"
 msgstr "Desfés"
 
@@ -4212,13 +4206,19 @@ msgstr "Autenticació"
 msgid "Authentication Required"
 msgstr "Cal autenticació"
 
+#. Translators: %s is the printer name
+#: ../panels/printers/cc-printers-panel.c:717
+#, c-format
+msgid "Printer “%s” has been deleted"
+msgstr "S'ha suprimit la impressora «%s»"
+
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:735
+#: ../panels/printers/cc-printers-panel.c:908
 msgid "Failed to add new printer."
 msgstr "No s'ha pogut afegir una impressora nova."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:983
+#: ../panels/printers/cc-printers-panel.c:1217
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No s'ha pogut carregar la interfície d'usuari: %s"
@@ -4304,9 +4304,12 @@ msgstr ""
 "Introduïu el nom d'usuari i la contrasenya per visualitzar les impressores "
 "al servidor d'impressió."
 
-#: ../panels/printers/options-dialog.ui.h:1
-msgid "Loading options…"
-msgstr "S'estan carregant les opcions…"
+#. Translators: This button triggers the printing of a test page.
+#. Translators: Name of job which makes printer to print test page
+#: ../panels/printers/options-dialog.ui.h:2
+#: ../panels/printers/pp-options-dialog.c:893
+msgid "Test Page"
+msgstr "Pàgina de prova"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: ../panels/printers/pp-details-dialog.c:123
@@ -4500,88 +4503,93 @@ msgstr "Adreça: %s"
 msgid "Server requires authentication"
 msgstr "El servidor requereix autenticació"
 
-#: ../panels/printers/pp-options-dialog.c:81
+#: ../panels/printers/pp-options-dialog.c:83
 msgid "Two Sided"
 msgstr "Doble cara"
 
-#: ../panels/printers/pp-options-dialog.c:82
+#: ../panels/printers/pp-options-dialog.c:84
 msgid "Paper Type"
 msgstr "Tipus de paper"
 
-#: ../panels/printers/pp-options-dialog.c:83
+#: ../panels/printers/pp-options-dialog.c:85
 msgid "Paper Source"
 msgstr "Font del paper"
 
-#: ../panels/printers/pp-options-dialog.c:84
+#: ../panels/printers/pp-options-dialog.c:86
 msgid "Output Tray"
 msgstr "Safata de sortida"
 
-#: ../panels/printers/pp-options-dialog.c:86
+#: ../panels/printers/pp-options-dialog.c:88
 msgid "GhostScript pre-filtering"
 msgstr "Filtrat previ del GhostScript"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: ../panels/printers/pp-options-dialog.c:533
+#: ../panels/printers/pp-options-dialog.c:534
 msgid "Pages per side"
 msgstr "Pàgines per cara"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: ../panels/printers/pp-options-dialog.c:545
+#: ../panels/printers/pp-options-dialog.c:546
 msgid "Two-sided"
 msgstr "Doble cara"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: ../panels/printers/pp-options-dialog.c:557
+#: ../panels/printers/pp-options-dialog.c:558
 msgid "Orientation"
 msgstr "Orientació"
 
 #. Translators: "General" tab contains general printer options
-#: ../panels/printers/pp-options-dialog.c:654
+#: ../panels/printers/pp-options-dialog.c:655
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "General"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: ../panels/printers/pp-options-dialog.c:657
+#: ../panels/printers/pp-options-dialog.c:658
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Configuració de la pàgina"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: ../panels/printers/pp-options-dialog.c:660
+#: ../panels/printers/pp-options-dialog.c:661
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Opcions instal·lables"
 
 #. Translators: "Job" tab contains settings for jobs
-#: ../panels/printers/pp-options-dialog.c:663
+#: ../panels/printers/pp-options-dialog.c:664
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Tasca"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: ../panels/printers/pp-options-dialog.c:666
+#: ../panels/printers/pp-options-dialog.c:667
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Qualitat de la imatge"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: ../panels/printers/pp-options-dialog.c:669
+#: ../panels/printers/pp-options-dialog.c:670
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Color"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: ../panels/printers/pp-options-dialog.c:672
+#: ../panels/printers/pp-options-dialog.c:673
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Acabats"
 
 #. Translators: "Advanced" tab contains all others settings
-#: ../panels/printers/pp-options-dialog.c:675
+#: ../panels/printers/pp-options-dialog.c:676
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Avançat"
+
+#. Translators: Name of job which makes printer to print test page
+#: ../panels/printers/pp-options-dialog.c:908
+msgid "Test page"
+msgstr "Pàgina de prova"
 
 #. Translators: this is an option of "Paper Source"
 #: ../panels/printers/pp-ppd-option-widget.c:76
@@ -4625,12 +4633,12 @@ msgid "Manufacturer"
 msgstr "Fabricant"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:522
+#: ../panels/printers/pp-printer-entry.c:577
 msgid "No Active Jobs"
 msgstr "No hi ha tasques actives"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:527
+#: ../panels/printers/pp-printer-entry.c:582
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -4638,111 +4646,111 @@ msgstr[0] "%u tasca"
 msgstr[1] "%u tasques"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/pp-printer-entry.c:663
+#: ../panels/printers/pp-printer-entry.c:730
 msgid "Low on toner"
 msgstr "Tòner baix"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/pp-printer-entry.c:665
+#: ../panels/printers/pp-printer-entry.c:732
 msgid "Out of toner"
 msgstr "Sense tòner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:668
+#: ../panels/printers/pp-printer-entry.c:735
 msgid "Low on developer"
 msgstr "Revelador baix"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:671
+#: ../panels/printers/pp-printer-entry.c:738
 msgid "Out of developer"
 msgstr "Sense revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:673
+#: ../panels/printers/pp-printer-entry.c:740
 msgid "Low on a marker supply"
 msgstr "Marcador baix"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:675
+#: ../panels/printers/pp-printer-entry.c:742
 msgid "Out of a marker supply"
 msgstr "Sense marcador"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/pp-printer-entry.c:677
+#: ../panels/printers/pp-printer-entry.c:744
 msgid "Open cover"
 msgstr "Tapa oberta"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/pp-printer-entry.c:679
+#: ../panels/printers/pp-printer-entry.c:746
 msgid "Open door"
 msgstr "Porta oberta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/pp-printer-entry.c:681
+#: ../panels/printers/pp-printer-entry.c:748
 msgid "Low on paper"
 msgstr "Paper baix"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/pp-printer-entry.c:683
+#: ../panels/printers/pp-printer-entry.c:750
 msgid "Out of paper"
 msgstr "Sense paper"
 
 #. Translators: The printer is offline
-#: ../panels/printers/pp-printer-entry.c:685
+#: ../panels/printers/pp-printer-entry.c:752
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Apagada"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/pp-printer-entry.c:687
-#: ../panels/printers/pp-printer-entry.c:817
+#: ../panels/printers/pp-printer-entry.c:754
+#: ../panels/printers/pp-printer-entry.c:884
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Aturada"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/pp-printer-entry.c:689
+#: ../panels/printers/pp-printer-entry.c:756
 msgid "Waste receptacle almost full"
 msgstr "El receptacle de residus està quasi ple"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/pp-printer-entry.c:691
+#: ../panels/printers/pp-printer-entry.c:758
 msgid "Waste receptacle full"
 msgstr "El receptacle de residus està ple"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:693
+#: ../panels/printers/pp-printer-entry.c:760
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor òptic fotogràfic està al final de la seva vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:695
+#: ../panels/printers/pp-printer-entry.c:762
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor òptic fotogràfic ja no funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/pp-printer-entry.c:803
+#: ../panels/printers/pp-printer-entry.c:870
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Apunt"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/pp-printer-entry.c:808
+#: ../panels/printers/pp-printer-entry.c:875
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "No accepta tasques"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/pp-printer-entry.c:813
+#: ../panels/printers/pp-printer-entry.c:880
 msgctxt "printer state"
 msgid "Processing"
 msgstr "S'està processant"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/pp-printer-entry.c:837
+#: ../panels/printers/pp-printer-entry.c:904
 msgid "Clean print heads"
 msgstr "Neteja els capçals d'impressió"
 
@@ -4778,7 +4786,7 @@ msgstr "Nivell de tinta"
 #. Translators: This is the message which follows the printer error.
 #: ../panels/printers/printer-entry.ui.h:11
 msgid "Please restart when the problem is resolved."
-msgstr "Reinicieu quan el problema "
+msgstr "Reinicieu quan el problema estigui resolt."
 
 #. Translators: This is the button which restarts the printer.
 #: ../panels/printers/printer-entry.ui.h:13
@@ -4790,17 +4798,17 @@ msgstr "Torna a iniciar"
 msgid "Add…"
 msgstr "Afegeix..."
 
-#: ../panels/printers/printers.ui.h:3
+#: ../panels/printers/printers.ui.h:5
 msgid "No printers"
 msgstr "Sense impressores"
 
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:5
+#: ../panels/printers/printers.ui.h:7
 msgid "Add a Printer…"
 msgstr "Afegeix una impressora..."
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:7
+#: ../panels/printers/printers.ui.h:9
 msgid ""
 "Sorry! The system printing service\n"
 "doesn’t seem to be available."
@@ -5051,17 +5059,17 @@ msgstr "Serveis d'_ubicació"
 msgid "_Automatic Problem Reporting"
 msgstr "_Informa de problemes automàticament"
 
-#: ../panels/region/cc-format-chooser.c:120
+#: ../panels/region/cc-format-chooser.c:118
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Imperial"
 
-#: ../panels/region/cc-format-chooser.c:122
+#: ../panels/region/cc-format-chooser.c:120
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Mètric"
 
-#: ../panels/region/cc-format-chooser.c:287
+#: ../panels/region/cc-format-chooser.c:285
 msgid "No regions found"
 msgstr "No s'han trobat regions"
 
@@ -5069,7 +5077,7 @@ msgstr "No s'han trobat regions"
 msgid "No input sources found"
 msgstr "No s'han trobat fonts d'entrada"
 
-#: ../panels/region/cc-input-chooser.c:992
+#: ../panels/region/cc-input-chooser.c:1012
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Altres"
@@ -5099,14 +5107,18 @@ msgid "Times"
 msgstr "Hores"
 
 #: ../panels/region/format-chooser.ui.h:7
+msgid "Dates & Times"
+msgstr "Dates i hores"
+
+#: ../panels/region/format-chooser.ui.h:8
 msgid "Numbers"
 msgstr "Nombres"
 
-#: ../panels/region/format-chooser.ui.h:8
+#: ../panels/region/format-chooser.ui.h:9
 msgid "Measurement"
 msgstr "Mesura"
 
-#: ../panels/region/format-chooser.ui.h:9
+#: ../panels/region/format-chooser.ui.h:10
 msgid "Paper"
 msgstr "Paper"
 
@@ -5832,7 +5844,8 @@ msgstr "Mida del cursor"
 msgid ""
 "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgstr ""
-"La mida del cursor pot combinar-se amb l'ampliació perquè sigui més fàcil veure el cursor."
+"La mida del cursor pot combinar-se amb l'ampliació perquè sigui més fàcil "
+"veure el cursor."
 
 #: ../panels/universal-access/uap.ui.h:24
 msgid "Screen Reader"
@@ -6547,7 +6560,8 @@ msgid ""
 "Password needs to be longer. Try to add more letters, numbers and "
 "punctuation."
 msgstr ""
-"Cal que la contrasenya sigui més gran. Intenteu utilitzar una combinació de lletres, nombres i signes de puntuació."
+"Cal que la contrasenya sigui més gran. Intenteu utilitzar una combinació de "
+"lletres, nombres i signes de puntuació."
 
 #: ../panels/user-accounts/pw-utils.c:117
 msgctxt "Password hint"
@@ -6559,7 +6573,8 @@ msgctxt "Password hint"
 msgid ""
 "Adding more letters, numbers and punctuation will make the password stronger."
 msgstr ""
-"Si hi afegiu més lletres, nombres i signes de puntuació la contrasenya serà més segura."
+"Si hi afegiu més lletres, nombres i signes de puntuació la contrasenya serà "
+"més segura."
 
 #: ../panels/user-accounts/run-passwd.c:422
 msgid "Authentication failed"
@@ -6838,23 +6853,23 @@ msgstr "No s'ha pogut canviar la contrasenya"
 msgid "The passwords do not match."
 msgstr "Les contrasenyes no coincideixen."
 
-#: ../panels/user-accounts/um-photo-dialog.c:215
+#: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "Browse for more pictures"
 msgstr "Cerca més imatges"
 
-#: ../panels/user-accounts/um-photo-dialog.c:449
+#: ../panels/user-accounts/um-photo-dialog.c:452
 msgid "Disable image"
 msgstr "Inhabilita la imatge"
 
-#: ../panels/user-accounts/um-photo-dialog.c:467
+#: ../panels/user-accounts/um-photo-dialog.c:470
 msgid "Take a photo…"
 msgstr "Fes una fotografia…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:485
+#: ../panels/user-accounts/um-photo-dialog.c:488
 msgid "Browse for more pictures…"
 msgstr "Cerca més imatges…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:711
+#: ../panels/user-accounts/um-photo-dialog.c:714
 #, c-format
 msgid "Used by %s"
 msgstr "Utilitzat per %s"
@@ -7038,6 +7053,11 @@ msgstr ""
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
 msgstr "Mapa els botons"
+
+#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+msgid "_Close"
+msgstr "_Tanca"
 
 #: ../panels/wacom/button-mapping.ui.h:3
 msgid "Map buttons to functions"
@@ -7375,6 +7395,42 @@ msgstr "Punt d'accés Wi-Fi"
 msgid "No results found"
 msgstr "No s'ha trobat cap resultat."
 
+#~ msgid "Press Esc to cancel."
+#~ msgstr "Premeu Esc per cancel·lar."
+
+#~ msgid "Reset"
+#~ msgstr "Reinicia"
+
+#~ msgid "Make available to other _users"
+#~ msgstr "Fes-la disponible a altres _usuaris"
+
+#~ msgid ""
+#~ "Reset the settings for this network, including passwords, but remember it "
+#~ "as a preferred network"
+#~ msgstr ""
+#~ "Reinicia els paràmetres d'aquesta xarxa, incloent les contrasenyes, però "
+#~ "recorda-la com una xarxa preferida"
+
+#~ msgid ""
+#~ "Remove all details relating to this network and do not try to "
+#~ "automatically connect"
+#~ msgstr ""
+#~ "Suprimeix totes les dades relacionades amb aquesta xarxa i no intentis "
+#~ "connectar-t'hi automàticament"
+
+#~ msgid ""
+#~ "If you have a connection to the Internet other than wireless, you can set "
+#~ "up a wireless hotspot to share the connection with others."
+#~ msgstr ""
+#~ "Si teniu una connexió a Internet que no sigui la xarxa sense fil, podeu "
+#~ "establir un punt d'accés sense fil per compartir-la amb altres."
+
+#~ msgid "History"
+#~ msgstr "Historial"
+
+#~ msgid "Loading options…"
+#~ msgstr "S'estan carregant les opcions…"
+
 #~ msgid "%s %d-bit (Build ID: %s)"
 #~ msgstr "%s %d-bit (ID del muntatge: %s)"
 
@@ -7476,9 +7532,6 @@ msgstr "No s'ha trobat cap resultat."
 #~ msgid_plural "%u active"
 #~ msgstr[0] "%u actiu"
 #~ msgstr[1] "%u actius"
-
-#~ msgid "Test page"
-#~ msgstr "Pàgina de prova"
 
 #~ msgctxt "button"
 #~ msgid "Add Printer"
