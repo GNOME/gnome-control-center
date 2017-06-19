@@ -370,7 +370,10 @@ switch_tracker_get_mapping (GValue *value,
   for (idx = 0; locations[idx] != NULL; idx++)
     {
       location = g_file_new_for_path (path_from_tracker_dir(locations[idx]));
-      if ((found = g_file_equal (location, place->location)))
+      found = g_file_equal (location, place->location);
+      g_object_unref (location);
+
+      if (found)
         break;
     }
 
