@@ -752,19 +752,12 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         if (find_in_model_by_id (panel, udi, NULL) != NULL)
                 goto out;
 
-        /* Don't add the libvirtd bridge to the UI */
-        if (g_strrstr (udi, "/virbr0") != NULL)
-                goto out;
-        /* Don't add VPN devices either */
-        if (g_strrstr (udi, "/tun0") != NULL)
-                goto out;
-
         type = nm_device_get_device_type (device);
 
         g_debug ("device %s type %i path %s",
                  udi, type, nm_object_get_path (NM_OBJECT (device)));
 
-        /* map the NMDeviceType to the GType */
+        /* map the NMDeviceType to the GType, or ignore */
         switch (type) {
         case NM_DEVICE_TYPE_ETHERNET:
                 device_g_type = NET_TYPE_DEVICE_ETHERNET;
@@ -775,6 +768,16 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         case NM_DEVICE_TYPE_WIFI:
                 device_g_type = NET_TYPE_DEVICE_WIFI;
                 break;
+        /* not going to set up a cluster in GNOME */
+        case NM_DEVICE_TYPE_VETH:
+        /* enterprise features */
+        case NM_DEVICE_TYPE_BOND:
+        case NM_DEVICE_TYPE_TEAM:
+        /* Don't need the libvirtd bridge */
+        case NM_DEVICE_TYPE_BRIDGE:
+        /* Don't add VPN devices */
+        case NM_DEVICE_TYPE_TUN:
+                goto out;
         default:
                 device_g_type = NET_TYPE_DEVICE_SIMPLE;
                 break;
