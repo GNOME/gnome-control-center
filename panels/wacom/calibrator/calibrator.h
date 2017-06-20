@@ -66,9 +66,6 @@ enum
 
 struct Calib
 {
-    /* original axis values */
-    XYinfo old_axis;
-
     /* Geometry of the calibration window */
     GdkRectangle geometry;
 

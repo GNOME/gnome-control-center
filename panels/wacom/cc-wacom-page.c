@@ -181,11 +181,11 @@ finish_calibration (CalibArea *area,
 	CcWacomPage *page = (CcWacomPage *) user_data;
 	CcWacomPagePrivate *priv = page->priv;
 	XYinfo axis;
-	gboolean swap_xy;
 	gdouble cal[4];
 	gint display_width, display_height;
 
-	if (calib_area_finish (area, &axis, &swap_xy)) {
+	if (calib_area_finish (area)) {
+		calib_area_get_padding (area, &axis);
 		cal[0] = axis.x_min;
 		cal[1] = axis.y_min;
 		cal[2] = axis.x_max;
@@ -259,15 +259,9 @@ run_calibration (CcWacomPage *page,
 		 gdouble     *cal,
 		 gint         monitor)
 {
-	XYinfo              old_axis;
 	CcWacomPagePrivate *priv;
 
 	g_assert (page->priv->area == NULL);
-
-	old_axis.x_min = cal[0];
-	old_axis.y_min = cal[1];
-	old_axis.x_max = cal[2];
-	old_axis.y_max = cal[3];
 
 	priv = page->priv;
 
@@ -276,7 +270,6 @@ run_calibration (CcWacomPage *page,
 				     cc_wacom_page_get_gdk_device (page),
 				     finish_calibration,
 				     page,
-				     &old_axis,
 				     THRESHOLD_MISCLICK,
 				     THRESHOLD_DOUBLECLICK);
 
