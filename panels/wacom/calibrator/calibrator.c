@@ -143,38 +143,30 @@ finish (struct Calib *c,
 
     /* Should x and y be swapped? If the device and output are wider
      * towards different axes, swapping must be performed
+     *
+     * FIXME: Would be even better to know the actual output orientation,
+     * not just the direction.
      */
-    swap_xy = (c->geometry.width > c->geometry.height) !=
-        ((c->old_axis.x_max - c->old_axis.x_min) > (c->old_axis.y_max - c->old_axis.y_min));
+    swap_xy = (c->geometry.width < c->geometry.height);
 
-    if (swap_xy)
-        SWAP (int, c->geometry.width, c->geometry.height);
+    /* Compute the scale to transform from pixel positions to [0..1]. */
+    scale_x = 1 / (float)c->geometry.width;
+    scale_y = 1 / (float)c->geometry.height;
 
-    /* Compute min/max coordinates. */
-    /* These are scaled using the values of old_axis */
-    scale_x = (1 - c->old_axis.x_max - c->old_axis.x_min)/(float)c->geometry.width;
-    scale_y = (1 - c->old_axis.y_max - c->old_axis.y_min)/(float)c->geometry.height;
-
-    /* Swap back for usage with the collected click points, which are in screen
-     * coordinates, hence possibly rotated.
-     */
-    if (swap_xy)
-        SWAP(gdouble, scale_x, scale_y);
-
-    axis.x_min = ((((c->clicked_x[UL] + c->clicked_x[LL]) / 2)) * scale_x) + c->old_axis.x_min;
-    axis.x_max = 1 - ((((c->clicked_x[UR] + c->clicked_x[LR]) / 2)) * scale_x) + c->old_axis.x_min;
-    axis.y_min = ((((c->clicked_y[UL] + c->clicked_y[UR]) / 2)) * scale_y) + c->old_axis.y_min;
-    axis.y_max = 1 - ((((c->clicked_y[LL] + c->clicked_y[LR]) / 2)) * scale_y) + c->old_axis.y_min;
+    axis.x_min = ((((c->clicked_x[UL] + c->clicked_x[LL]) / 2)) * scale_x);
+    axis.x_max = ((((c->clicked_x[UR] + c->clicked_x[LR]) / 2)) * scale_x);
+    axis.y_min = ((((c->clicked_y[UL] + c->clicked_y[UR]) / 2)) * scale_y);
+    axis.y_max = ((((c->clicked_y[LL] + c->clicked_y[LR]) / 2)) * scale_y);
 
     /* Add/subtract the offset that comes from not having the points in the
      * corners (using the same coordinate system they are currently in)
      */
-    delta_x = (1 - axis.x_max - axis.x_min) / (float)(NUM_BLOCKS - 2);
+    delta_x = (axis.x_max - axis.x_min) / (float)(NUM_BLOCKS - 2);
     axis.x_min -= delta_x;
-    axis.x_max -= delta_x;
-    delta_y = (1 - axis.y_max - axis.y_min) / (float)(NUM_BLOCKS - 2);
+    axis.x_max += delta_x;
+    delta_y = (axis.y_max - axis.y_min) / (float)(NUM_BLOCKS - 2);
     axis.y_min -= delta_y;
-    axis.y_max -= delta_y;
+    axis.y_max += delta_y;
 
     /* If x and y has to be swapped we also have to swap the parameters */
     if (swap_xy)

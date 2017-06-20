@@ -669,7 +669,6 @@ calib_area_new (GdkScreen      *screen,
                 GdkDevice      *device,
                 FinishCallback  callback,
                 gpointer        user_data,
-                XYinfo         *old_axis,
                 int             threshold_doubleclick,
                 int             threshold_misclick)
 {
@@ -683,23 +682,12 @@ calib_area_new (GdkScreen      *screen,
   GtkWidget *clutter_embed;
   ClutterActor *stage;
 
-  g_return_val_if_fail (old_axis, NULL);
   g_return_val_if_fail (callback, NULL);
-
-  g_debug ("Current calibration: %f, %f, %f, %f\n",
-           old_axis->x_min,
-           old_axis->y_min,
-           old_axis->x_max,
-           old_axis->y_max);
 
   calib_area = g_new0 (CalibArea, 1);
   calib_area->callback = callback;
   calib_area->user_data = user_data;
   calib_area->device = device;
-  calib_area->calibrator.old_axis.x_min = old_axis->x_min;
-  calib_area->calibrator.old_axis.x_max = old_axis->x_max;
-  calib_area->calibrator.old_axis.y_min = old_axis->y_min;
-  calib_area->calibrator.old_axis.y_max = old_axis->y_max;
   calib_area->calibrator.threshold_doubleclick = threshold_doubleclick;
   calib_area->calibrator.threshold_misclick = threshold_misclick;
 
@@ -769,21 +757,16 @@ calib_area_new (GdkScreen      *screen,
 /* Finishes the calibration. Note that CalibArea
  * needs to be destroyed with calib_area_free() afterwards */
 gboolean
-calib_area_finish (CalibArea *area,
-                   XYinfo    *new_axis,
-                   gboolean  *swap_xy)
+calib_area_finish (CalibArea *area)
 {
   g_return_val_if_fail (area != NULL, FALSE);
 
-  *new_axis = area->axis;
-  *swap_xy  = area->swap;
-
   if (area->success)
     g_debug ("Final calibration: %f, %f, %f, %f\n",
-             new_axis->x_min,
-             new_axis->y_min,
-             new_axis->x_max,
-             new_axis->y_max);
+             area->axis.x_min,
+             area->axis.y_min,
+             area->axis.x_max,
+             area->axis.y_max);
   else
     g_debug ("Calibration was aborted or timed out");
 
@@ -810,4 +793,31 @@ calib_area_get_display_size (CalibArea *area, gint *width, gint *height)
 
   *width = area->display_width;
   *height = area->display_height;
+}
+
+void
+calib_area_get_axis (CalibArea *area,
+                     XYinfo    *new_axis,
+                     gboolean  *swap_xy)
+{
+  g_return_if_fail (area != NULL);
+
+  *new_axis = area->axis;
+  *swap_xy  = area->swap;
+}
+
+void
+calib_area_get_padding (CalibArea *area,
+                        XYinfo    *padding)
+{
+  g_return_if_fail (area != NULL);
+
+  /* min/max values are monitor coordinates scaled to be between
+   * 0 and 1, padding starts at 0 on "the edge", and positive
+   * values grow towards the center of the rectangle.
+   */
+  padding->x_min = area->axis.x_min;
+  padding->y_min = area->axis.y_min;
+  padding->x_max = 1 - area->axis.x_max;
+  padding->y_max = 1 - area->axis.y_max;
 }

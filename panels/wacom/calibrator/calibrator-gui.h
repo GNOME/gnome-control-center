@@ -43,13 +43,10 @@ CalibArea * calib_area_new (GdkScreen      *screen,
 			    GdkDevice      *device,
 			    FinishCallback  callback,
 			    gpointer        user_data,
-			    XYinfo         *old_axis,
 			    int             threshold_doubleclick,
 			    int             threshold_misclick);
 
-gboolean calib_area_finish (CalibArea *area,
-			    XYinfo    *new_axis,
-			    gboolean  *swap_xy);
+gboolean calib_area_finish (CalibArea *area);
 
 void calib_area_free (CalibArea *area);
 
@@ -57,4 +54,10 @@ void calib_area_get_display_size (CalibArea *area,
 				  gint      *width,
 				  gint      *height);
 
+void calib_area_get_axis (CalibArea *area,
+                          XYinfo    *new_axis,
+                          gboolean  *swap_xy);
+
+void calib_area_get_padding (CalibArea *area,
+                             XYinfo    *padding);
 #endif /* __CALIBRATOR_GUI_H__ */

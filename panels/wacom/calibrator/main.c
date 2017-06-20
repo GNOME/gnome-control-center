@@ -173,13 +173,12 @@ static void usage(char* cmd, unsigned thr_misclick)
 static struct Calib* CalibratorXorgPrint(const char* const device_name0, const XYinfo *axis0, const gboolean verbose0, const int thr_misclick, const int thr_doubleclick)
 {
     struct Calib* c = (struct Calib*)calloc(1, sizeof(struct Calib));
-    c->old_axis = *axis0;
     c->threshold_misclick = thr_misclick;
     c->threshold_doubleclick = thr_doubleclick;
 
     printf("Calibrating standard Xorg driver \"%s\"\n", device_name0);
     printf("\tcurrent calibration values: min_x=%lf, max_x=%lf and min_y=%lf, max_y=%lf\n",
-                c->old_axis.x_min, c->old_axis.x_max, c->old_axis.y_min, c->old_axis.y_max);
+                axis0->x_min, axis0->x_max, axis0->y_min, axis0->y_max);
     printf("\tIf these values are estimated wrong, either supply it manually with the --precalib option, or run the 'get_precalib.sh' script to automatically get it (through HAL).\n");
 
     return c;
@@ -376,9 +375,12 @@ calibration_finished_cb (CalibArea *area,
 	XYinfo axis;
 	gboolean swap_xy;
 
-	success = calib_area_finish (area, &axis, &swap_xy);
+	success = calib_area_finish (area);
 	if (success)
+	{
+		calib_area_get_axis (area, &axis, &swap_xy);
 		success = finish_data (axis, swap_xy);
+	}
 	else
 		fprintf(stderr, "Error: unable to apply or save configuration values\n");
 
@@ -409,7 +411,6 @@ int main(int argc, char** argv)
 				 NULL, /* NULL to accept input from any device */
 				 calibration_finished_cb,
 				 NULL,
-				 &calibrator->old_axis,
 				 calibrator->threshold_doubleclick,
 				 calibrator->threshold_misclick);
 
