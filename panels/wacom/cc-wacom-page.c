@@ -169,7 +169,7 @@ set_calibration (CcWacomDevice  *device,
 
 	g_free (tmp);
 
-	g_debug ("Setting area top (%f, %f) bottom (%f, %f) (last used resolution: %d x %d)",
+	g_debug ("Setting area to %f, %f, %f, %f (left/right/top/bottom) (last used resolution: %d x %d)",
 		 cal[0], cal[1], cal[2], cal[3],
 		 display_width, display_height);
 }
@@ -187,8 +187,8 @@ finish_calibration (CalibArea *area,
 	if (calib_area_finish (area)) {
 		calib_area_get_padding (area, &axis);
 		cal[0] = axis.x_min;
-		cal[1] = axis.y_min;
-		cal[2] = axis.x_max;
+		cal[1] = axis.x_max;
+		cal[2] = axis.y_min;
 		cal[3] = axis.y_max;
 
 		calib_area_get_display_size (area, &display_width, &display_height);
