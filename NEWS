@@ -1,4 +1,44 @@
 ==============
+Version 3.25.3
+==============
+
+- Fix memory leaks
+
+Background:
+- handle EXIF orientation in chooser
+
+Network:
+- Reduce connection editor dialog width
+- Rely on notebook tabs to switch connection editor pages
+- Align details page labels at start
+- Move checkboxes to Details page
+- Drop Reset page
+- Adapt forget button label according to connection type
+- Move Security page to the end
+- Use radio buttons instead of a combobox in IP pages
+- Avoid crashing if the NMDevice doesn't have a hw-address
+- Simplify the ignored Network interface types
+
+Online Accounts:
+- Move the margins and spacing lower down the hierarchy
+- Increase the spacing above the "Remove Account" button
+
+Printers:
+- Don't block when removing printers
+- Allow undoing deletion of a printer
+- Add 10s timeout for printer removal
+- Scroll view to show newly added Printer
+- Move options dialog spinner out of the action area
+- Add print "Test Page" button to Options Dialog
+- Hide supply level bar when there is no inklevel data
+
+Region & Language:
+- Make the input source chooser back button activate on click
+- Don't return the input chooser dialog if nothing is selected
+- Avoid starting with a gap at the bottom of the input chooser
+
+
+==============
 Version 3.25.2
 ==============
 
