@@ -105,19 +105,27 @@ static gboolean
 find_conflict (CcUniquenessData *data,
                CcKeyboardItem   *item)
 {
-  CcKeyCombo *combo = item->primary_combo;
+  GList *l;
   gboolean is_conflict = FALSE;
 
   if (data->orig_item && cc_keyboard_item_equal (data->orig_item, item))
     return FALSE;
 
-  if (data->new_mask != combo->mask)
-    return FALSE;
+  for (l = item->key_combos; l; l = l->next)
+    {
+      CcKeyCombo *combo = l->data;
 
-  if (data->new_keyval != 0)
-    is_conflict = data->new_keyval == combo->keyval;
-  else
-    is_conflict = combo->keyval == 0 && data->new_keycode == combo->keycode;
+      if (data->new_mask != combo->mask)
+        continue;
+
+      if (data->new_keyval != 0)
+        is_conflict = data->new_keyval == combo->keyval;
+      else
+        is_conflict = combo->keyval == 0 && data->new_keycode == combo->keycode;
+
+      if (is_conflict)
+        break;
+    }
 
   if (is_conflict)
     data->conflict_item = item;
