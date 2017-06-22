@@ -718,9 +718,6 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
   /* Use a sizegroup to make the accelerator labels the same width */
   self->accelerator_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-  /* Shortcut editor dialog */
-  self->shortcut_editor = cc_keyboard_shortcut_editor_new (self->manager);
-
   g_signal_connect_swapped (self->manager,
                             "shortcut-added",
                             G_CALLBACK (add_item),
