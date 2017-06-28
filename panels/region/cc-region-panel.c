@@ -87,6 +87,7 @@ struct _CcRegionPanelPrivate {
         GCancellable *cancellable;
 
         GtkWidget *restart_notification;
+        gchar *needs_restart_file_path;
 
         GtkWidget     *language_section;
         GtkListBoxRow *language_row;
@@ -161,6 +162,8 @@ cc_region_panel_finalize (GObject *object)
         g_free (priv->system_language);
         g_free (priv->system_region);
 
+        g_clear_pointer (&priv->needs_restart_file_path, g_free);
+
         chooser = g_object_get_data (G_OBJECT (self), "input-chooser");
         if (chooser)
                 gtk_widget_destroy (chooser);
@@ -206,6 +209,9 @@ restart_now (CcRegionPanel *self)
 {
         CcRegionPanelPrivate *priv = self->priv;
 
+        g_file_delete (g_file_new_for_path (priv->needs_restart_file_path),
+                                            NULL, NULL);
+
         g_dbus_proxy_call (priv->session,
                            "Logout",
                            g_variant_new ("(u)", 0),
@@ -214,8 +220,9 @@ restart_now (CcRegionPanel *self)
 }
 
 static void
-show_restart_notification (CcRegionPanel *self,
-                           const gchar   *locale)
+set_restart_notification_visible (CcRegionPanel *self,
+                                  const gchar   *locale,
+                                  gboolean       visible)
 {
 	CcRegionPanelPrivate *priv = self->priv;
         gchar *current_locale = NULL;
@@ -225,12 +232,22 @@ show_restart_notification (CcRegionPanel *self,
                 setlocale (LC_MESSAGES, locale);
         }
 
-        gtk_revealer_set_reveal_child (GTK_REVEALER (priv->restart_notification), TRUE);
+        gtk_revealer_set_reveal_child (GTK_REVEALER (priv->restart_notification), visible);
 
         if (locale) {
                 setlocale (LC_MESSAGES, current_locale);
                 g_free (current_locale);
         }
+
+        if (!visible) {
+                g_file_delete (g_file_new_for_path (priv->needs_restart_file_path),
+                                                    NULL, NULL);
+
+                return;
+        }
+
+        if (!g_file_set_contents (priv->needs_restart_file_path, "", -1, NULL))
+                g_warning ("Unable to create %s", priv->needs_restart_file_path);
 }
 
 typedef struct {
@@ -279,8 +296,13 @@ maybe_notify_finish (GObject      *source,
 
         if (g_str_equal (current_lang_code, target_lang_code) == FALSE ||
             g_str_equal (current_country_code, target_country_code) == FALSE)
-                show_restart_notification (self,
-                                           mnd->category == LC_MESSAGES ? mnd->target_locale : NULL);
+                set_restart_notification_visible (self,
+                                                  mnd->category == LC_MESSAGES ? mnd->target_locale : NULL,
+                                                  TRUE);
+        else
+                set_restart_notification_visible (self,
+                                                  mnd->category == LC_MESSAGES ? mnd->target_locale : NULL,
+                                                  FALSE);
 out:
         g_free (target_country_code);
         g_free (target_lang_code);
@@ -1826,4 +1848,10 @@ cc_region_panel_init (CcRegionPanel *self)
 
 	gtk_container_add (GTK_CONTAINER (self),
                            GTK_WIDGET (gtk_builder_get_object (priv->builder, "vbox_region")));
+
+        priv->needs_restart_file_path = g_build_filename (g_get_user_runtime_dir (),
+                                                          "gnome-control-center-region-needs-restart",
+                                                          NULL);
+        if (g_file_query_exists (g_file_new_for_path (priv->needs_restart_file_path), NULL))
+                set_restart_notification_visible (self, NULL, TRUE);
 }
