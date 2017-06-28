@@ -86,8 +86,6 @@ struct _CcRegionPanelPrivate {
         GDBusProxy  *session;
         GCancellable *cancellable;
 
-        GtkWidget *overlay;
-        GtkWidget *notification;
         GtkWidget *restart_notification;
 
         GtkWidget     *language_section;
@@ -208,8 +206,6 @@ restart_now (CcRegionPanel *self)
 {
         CcRegionPanelPrivate *priv = self->priv;
 
-        gtk_revealer_set_reveal_child (GTK_REVEALER (self->priv->notification), FALSE);
-
         g_dbus_proxy_call (priv->session,
                            "Logout",
                            g_variant_new ("(u)", 0),
@@ -229,21 +225,12 @@ show_restart_notification (CcRegionPanel *self,
                 setlocale (LC_MESSAGES, locale);
         }
 
-        gtk_revealer_set_reveal_child (GTK_REVEALER (priv->notification), TRUE);
         gtk_revealer_set_reveal_child (GTK_REVEALER (priv->restart_notification), TRUE);
 
         if (locale) {
                 setlocale (LC_MESSAGES, current_locale);
                 g_free (current_locale);
         }
-}
-
-static void
-dismiss_notification (CcRegionPanel *self)
-{
-        CcRegionPanelPrivate *priv = self->priv;
-
-        gtk_revealer_set_reveal_child (GTK_REVEALER (priv->notification), FALSE);
 }
 
 typedef struct {
@@ -648,7 +635,7 @@ setup_language_section (CcRegionPanel *self)
         priv->formats_label = WID ("formats_label");
 
         priv->restart_notification = WID ("restart-revealer");
-        widget = WID ("restart-button1");
+        widget = WID ("restart-button");
         g_signal_connect_swapped (widget, "clicked", G_CALLBACK (restart_now), self);
 
         widget = WID ("language_list");
@@ -1803,7 +1790,6 @@ static void
 cc_region_panel_init (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv;
-        GtkWidget *button;
 	GError *error = NULL;
 
 	priv = self->priv = REGION_PANEL_PRIVATE (self);
@@ -1834,18 +1820,10 @@ cc_region_panel_init (CcRegionPanel *self)
                                   session_proxy_ready,
                                   self);
 
-        priv->notification = GTK_WIDGET (gtk_builder_get_object (priv->builder, "notification"));
-
-        button = GTK_WIDGET (gtk_builder_get_object (priv->builder, "restart-button"));
-        g_signal_connect_swapped (button, "clicked", G_CALLBACK (restart_now), self);
-
-        button = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dismiss-button"));
-        g_signal_connect_swapped (button, "clicked", G_CALLBACK (dismiss_notification), self);
-
         setup_login_button (self);
         setup_language_section (self);
         setup_input_section (self);
 
-        priv->overlay = GTK_WIDGET (gtk_builder_get_object (priv->builder, "overlay"));
-	gtk_container_add (GTK_CONTAINER (self), priv->overlay);
+	gtk_container_add (GTK_CONTAINER (self),
+                           GTK_WIDGET (gtk_builder_get_object (priv->builder, "vbox_region")));
 }
