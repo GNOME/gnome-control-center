@@ -88,6 +88,7 @@ struct _CcRegionPanelPrivate {
 
         GtkWidget *overlay;
         GtkWidget *notification;
+        GtkWidget *restart_notification;
 
         GtkWidget     *language_section;
         GtkListBoxRow *language_row;
@@ -229,6 +230,7 @@ show_restart_notification (CcRegionPanel *self,
         }
 
         gtk_revealer_set_reveal_child (GTK_REVEALER (priv->notification), TRUE);
+        gtk_revealer_set_reveal_child (GTK_REVEALER (priv->restart_notification), TRUE);
 
         if (locale) {
                 setlocale (LC_MESSAGES, current_locale);
@@ -644,6 +646,10 @@ setup_language_section (CcRegionPanel *self)
         priv->language_label = WID ("language_label");
         priv->formats_row = GTK_LIST_BOX_ROW (WID ("formats_row"));
         priv->formats_label = WID ("formats_label");
+
+        priv->restart_notification = WID ("restart-revealer");
+        widget = WID ("restart-button1");
+        g_signal_connect_swapped (widget, "clicked", G_CALLBACK (restart_now), self);
 
         widget = WID ("language_list");
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget),
