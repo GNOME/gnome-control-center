@@ -547,6 +547,8 @@ filter_function (GtkListBoxRow *row,
   RowData *data;
   gboolean retval;
   gchar *search, *name;
+  gchar **terms;
+  guint i;
 
   if (gtk_entry_get_text_length (GTK_ENTRY (self->search_entry)) == 0)
     return TRUE;
@@ -559,11 +561,18 @@ filter_function (GtkListBoxRow *row,
   item = data->item;
   name = cc_util_normalize_casefold_and_unaccent (item->description);
   search = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (self->search_entry)));
+  terms = g_strsplit (search, " ", -1);
 
-  retval = strstr (name, search) != NULL || search_match_shortcut (item, search);
+  for (i = 0; terms && terms[i]; i++)
+    {
+      retval = strstr (name, terms[i]) || search_match_shortcut (item, terms[i]);
+      if (!retval)
+        break;
+    }
 
   g_free (search);
   g_free (name);
+  g_strfreev (terms);
 
   return retval;
 }
