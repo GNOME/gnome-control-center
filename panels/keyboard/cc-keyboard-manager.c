@@ -87,12 +87,18 @@ free_key_array (GPtrArray *keys)
 static const gchar*
 get_binding_from_variant (GVariant *variant)
 {
+  const char *str, **strv;
+
   if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING))
     return g_variant_get_string (variant, NULL);
-  else if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
-    return g_variant_get_strv (variant, NULL)[0];
+  else if (!g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
+    return NULL;
 
-  return NULL;
+  strv = g_variant_get_strv (variant, NULL);
+  str = strv[0];
+  g_free (strv);
+
+  return str;
 }
 
 static gboolean
