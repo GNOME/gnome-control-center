@@ -84,23 +84,6 @@ free_key_array (GPtrArray *keys)
     }
 }
 
-static const gchar*
-get_binding_from_variant (GVariant *variant)
-{
-  const char *str, **strv;
-
-  if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING))
-    return g_variant_get_string (variant, NULL);
-  else if (!g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
-    return NULL;
-
-  strv = g_variant_get_strv (variant, NULL);
-  str = strv[0];
-  g_free (strv);
-
-  return str;
-}
-
 static gboolean
 find_conflict (CcUniquenessData *data,
                CcKeyboardItem   *item)
@@ -984,34 +967,22 @@ void
 cc_keyboard_manager_reset_shortcut (CcKeyboardManager *self,
                                     CcKeyboardItem    *item)
 {
-  GVariant *default_value;
-  const gchar *default_binding;
+  GList *l;
 
   g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
   g_return_if_fail (CC_IS_KEYBOARD_ITEM (item));
 
-  default_value = g_settings_get_default_value (item->settings, item->key);
-  default_binding = get_binding_from_variant (default_value);
-
   /* Disables any shortcut that conflicts with the new shortcut's value */
-  if (default_binding && *default_binding != '\0')
+  for (l = item->default_combos; l; l = l->next)
     {
+      CcKeyCombo *combo = l->data;
       CcKeyboardItem *collision;
-      CcKeyCombo combo;
-      guint *keycodes;
 
-      gtk_accelerator_parse_with_keycode (default_binding, &combo.keyval, &keycodes, &combo.mask);
-      combo.keycode = keycodes ? keycodes[0] : 0;
-
-      collision = cc_keyboard_manager_get_collision (self, NULL, &combo);
+      collision = cc_keyboard_manager_get_collision (self, NULL, combo);
       if (collision)
         cc_keyboard_manager_disable_shortcut (self, collision);
-
-      g_free (keycodes);
     }
 
   /* Resets the current item */
   cc_keyboard_item_reset (item);
-
-  g_variant_unref (default_value);
 }
