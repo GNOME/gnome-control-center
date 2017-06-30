@@ -63,12 +63,18 @@ G_DEFINE_TYPE (CcKeyboardItem, cc_keyboard_item, G_TYPE_OBJECT)
 static const gchar *
 get_binding_from_variant (GVariant *variant)
 {
+  const char *str, **strv;
+
   if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING))
     return g_variant_get_string (variant, NULL);
-  else if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
-    return g_variant_get_strv (variant, NULL)[0];
-  else
+  else if (!g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
     return "";
+
+  strv = g_variant_get_strv (variant, NULL);
+  str = strv[0];
+  g_free (strv);
+
+  return str;
 }
 
 static gboolean
