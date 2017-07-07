@@ -125,8 +125,6 @@ cc_synaptics_check (void)
                                           GDK_SEAT_CAPABILITY_ALL_POINTING);
         for (l = devicelist; l != NULL; l = l->next) {
                 GdkDevice *device = l->data;
-                if (gdk_device_get_source (device) != GDK_SOURCE_TOUCHPAD)
-			continue;
 
                 if ((XIGetProperty (display, gdk_x11_device_get_id (device), prop,
                                     0, 2, False, XA_INTEGER, &realtype, &realformat, &nitems,
