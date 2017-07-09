@@ -133,6 +133,7 @@ power_callback (GObject          *object,
 static void
 cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 {
+	GtkAlign valign;
 	GObject *toggle;
 	gboolean sensitive, powered, change_powered;
 	const char *page;
@@ -141,6 +142,7 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 		 self->priv->has_airplane_mode, self->priv->hardware_airplane_mode, self->priv->bt_airplane_mode, self->priv->airplane_mode);
 
 	change_powered = TRUE;
+  valign = GTK_ALIGN_CENTER;
 
 	if (self->priv->has_airplane_mode == FALSE) {
 		g_debug ("No Bluetooth available");
@@ -168,8 +170,10 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 		sensitive = TRUE;
 		powered = TRUE;
 		page = BLUETOOTH_WORKING_PAGE;
+		valign = GTK_ALIGN_FILL;
 	}
 
+	gtk_widget_set_valign (self->priv->stack, valign);
 	gtk_widget_set_sensitive (WID ("box_power") , sensitive);
 
 	toggle = G_OBJECT (WID ("switch_bluetooth"));
