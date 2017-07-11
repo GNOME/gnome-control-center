@@ -39,7 +39,9 @@ libnetwork_la_SOURCES =					\
 	network-dialogs.c				\
 	network-dialogs.h				\
 	cc-network-panel.c				\
-	cc-network-panel.h
+	cc-network-panel.h                              \
+	cc-wifi-panel.c					\
+	cc-wifi-panel.h
 
 libnetwork_la_LIBADD = $(PANEL_LIBS) $(NETWORK_PANEL_LIBS) $(NETWORK_MANAGER_LIBS) $(builddir)/connection-editor/libconnection-editor.la
 
@@ -54,7 +56,7 @@ cc-network-resources.h: network.gresource.xml $(resource_files)
 @INTLTOOL_DESKTOP_RULE@
 
 desktopdir = $(datadir)/applications
-desktop_in_files = gnome-network-panel.desktop.in
+desktop_in_files = gnome-network-panel.desktop.in gnome-wifi-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)

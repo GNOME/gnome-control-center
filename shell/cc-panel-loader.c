@@ -41,6 +41,7 @@ extern GType cc_keyboard_panel_get_type (void);
 extern GType cc_mouse_panel_get_type (void);
 #ifdef BUILD_NETWORK
 extern GType cc_network_panel_get_type (void);
+extern GType cc_wifi_panel_get_type (void);
 #endif /* BUILD_NETWORK */
 extern GType cc_notifications_panel_get_type (void);
 extern GType cc_goa_panel_get_type (void);
@@ -83,6 +84,7 @@ static struct {
   PANEL_TYPE("mouse",            cc_mouse_panel_get_type        ),
 #ifdef BUILD_NETWORK
   PANEL_TYPE("network",          cc_network_panel_get_type      ),
+  PANEL_TYPE("wifi",             cc_wifi_panel_get_type         ),
 #endif
   PANEL_TYPE("notifications",    cc_notifications_panel_get_type),
   PANEL_TYPE("online-accounts",  cc_goa_panel_get_type          ),

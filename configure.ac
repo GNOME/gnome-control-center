@@ -542,6 +542,7 @@ panels/network/Makefile
 panels/network/wireless-security/Makefile
 panels/network/connection-editor/Makefile
 panels/network/gnome-network-panel.desktop.in
+panels/network/gnome-wifi-panel.desktop.in
 panels/notifications/Makefile
 panels/notifications/gnome-notifications-panel.desktop.in
 panels/universal-access/Makefile
