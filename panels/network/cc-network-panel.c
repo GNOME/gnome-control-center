@@ -775,9 +775,8 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         case NM_DEVICE_TYPE_MODEM:
                 device_g_type = NET_TYPE_DEVICE_MOBILE;
                 break;
+        /* Let the wi-fi panel take care of wifi devices */
         case NM_DEVICE_TYPE_WIFI:
-                device_g_type = NET_TYPE_DEVICE_WIFI;
-                break;
         /* not going to set up a cluster in GNOME */
         case NM_DEVICE_TYPE_VETH:
         /* enterprise features */
@@ -1316,7 +1315,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
         GtkWidget *widget;
         GtkWidget *toplevel;
         GDBusConnection *system_bus;
-        GtkCssProvider *provider;
         const GPtrArray *connections;
         guint i;
 
@@ -1408,13 +1406,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "vbox1"));
         gtk_container_add (GTK_CONTAINER (panel), widget);
-
-        provider = gtk_css_provider_new ();
-        gtk_css_provider_load_from_data (provider, ".circular-button { border-radius: 20px; -gtk-outline-radius: 20px; }", -1, NULL);
-        gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                                   GTK_STYLE_PROVIDER (provider),
-                                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-        g_object_unref (provider);
 
         /* Cold-plug existing connections */
         connections = nm_client_get_connections (panel->priv->client);

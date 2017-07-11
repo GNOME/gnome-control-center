@@ -1418,16 +1418,13 @@ client_connection_removed_cb (NMClient           *client,
                               NMRemoteConnection *connection,
                               NetDeviceWifi      *device_wifi)
 {
-        GtkWidget *swin;
         GtkWidget *list;
         GList *rows, *l;
         const char *uuid;
 
         uuid = nm_connection_get_uuid (NM_CONNECTION (connection));
 
-        swin = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                   "scrolledwindow_list"));
-        list = gtk_bin_get_child (GTK_BIN (gtk_bin_get_child (GTK_BIN (swin))));
+        list = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "listbox"));
         rows = gtk_container_get_children (GTK_CONTAINER (list));
         for (l = rows; l != NULL; l = l->next) {
                 GtkWidget *row = l->data;
@@ -1770,7 +1767,7 @@ make_row (GtkSizeGroup   *rows,
         gtk_widget_show (image);
         widget = gtk_button_new ();
         gtk_style_context_add_class (gtk_widget_get_style_context (widget), "image-button");
-        gtk_style_context_add_class (gtk_widget_get_style_context (widget), "circular-button");
+        gtk_style_context_add_class (gtk_widget_get_style_context (widget), "circular");
         gtk_widget_show (widget);
         gtk_container_add (GTK_CONTAINER (widget), image);
         gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
@@ -2031,7 +2028,6 @@ open_history (NetDeviceWifi *device_wifi)
 static void
 populate_ap_list (NetDeviceWifi *device_wifi)
 {
-        GtkWidget *swin;
         GtkWidget *list;
         GtkSizeGroup *rows;
         GtkSizeGroup *icons;
@@ -2046,9 +2042,7 @@ populate_ap_list (NetDeviceWifi *device_wifi)
         GtkWidget *button;
         GList *children, *child;
 
-        swin = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                   "scrolledwindow_list"));
-        list = gtk_bin_get_child (GTK_BIN (gtk_bin_get_child (GTK_BIN (swin))));
+        list = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "listbox"));
 
         children = gtk_container_get_children (GTK_CONTAINER (list));
         for (child = children; child; child = child->next) {
@@ -2148,7 +2142,6 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
 {
         GError *error = NULL;
         GtkWidget *widget;
-        GtkWidget *swin;
         GtkWidget *list;
         GtkSizeGroup *rows;
         GtkSizeGroup *icons;
@@ -2175,14 +2168,9 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
         g_signal_connect (widget, "notify::active",
                           G_CALLBACK (device_off_toggled), device_wifi);
 
-        swin = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                   "scrolledwindow_list"));
-        list = GTK_WIDGET (gtk_list_box_new ());
-        gtk_widget_show (list);
-        gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
+        list = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "listbox"));
         gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)ap_sort, NULL, NULL);
-        gtk_container_add (GTK_CONTAINER (swin), list);
         g_signal_connect (list, "row-activated",
                           G_CALLBACK (ap_activated), device_wifi);
 
