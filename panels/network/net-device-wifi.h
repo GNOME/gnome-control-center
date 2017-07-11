@@ -50,7 +50,9 @@ struct _NetDeviceWifiClass
         NetDeviceClass                   parent_class;
 };
 
-GType            net_device_wifi_get_type       (void);
+GType            net_device_wifi_get_type          (void) G_GNUC_CONST;
+GtkWidget       *net_device_wifi_get_header_widget (NetDeviceWifi *device_wifi);
+GtkWidget       *net_device_wifi_get_title_widget  (NetDeviceWifi *device_wifi);
 
 G_END_DECLS
 

@@ -80,6 +80,18 @@ enum {
         COLUMN_LAST
 };
 
+GtkWidget *
+net_device_wifi_get_header_widget (NetDeviceWifi *device_wifi)
+{
+        return GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "header_box"));
+}
+
+GtkWidget *
+net_device_wifi_get_title_widget (NetDeviceWifi *device_wifi)
+{
+        return GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "center_box"));
+}
+
 static GtkWidget *
 device_wifi_proxy_add_to_stack (NetObject    *object,
                                 GtkStack     *stack,
