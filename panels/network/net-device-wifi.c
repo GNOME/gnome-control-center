@@ -81,9 +81,9 @@ enum {
 };
 
 static GtkWidget *
-device_wifi_proxy_add_to_notebook (NetObject *object,
-                                    GtkNotebook *notebook,
-                                    GtkSizeGroup *heading_size_group)
+device_wifi_proxy_add_to_stack (NetObject    *object,
+                                GtkStack     *stack,
+                                GtkSizeGroup *heading_size_group)
 {
         GtkWidget *widget;
         NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (object);
@@ -95,7 +95,7 @@ device_wifi_proxy_add_to_notebook (NetObject *object,
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "notebook_view"));
-        gtk_notebook_append_page (notebook, widget, NULL);
+        gtk_stack_add_named (stack, widget, net_object_get_id (object));
 
         return widget;
 }
@@ -1547,7 +1547,7 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
 
         object_class->finalize = net_device_wifi_finalize;
         object_class->constructed = net_device_wifi_constructed;
-        parent_class->add_to_notebook = device_wifi_proxy_add_to_notebook;
+        parent_class->add_to_stack = device_wifi_proxy_add_to_stack;
         parent_class->refresh = device_wifi_refresh;
         parent_class->edit = device_wifi_edit;
 

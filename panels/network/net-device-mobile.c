@@ -68,9 +68,9 @@ enum {
 G_DEFINE_TYPE (NetDeviceMobile, net_device_mobile, NET_TYPE_DEVICE)
 
 static GtkWidget *
-device_mobile_proxy_add_to_notebook (NetObject *object,
-                                     GtkNotebook *notebook,
-                                     GtkSizeGroup *heading_size_group)
+device_mobile_proxy_add_to_stack (NetObject    *object,
+                                  GtkStack     *stack,
+                                  GtkSizeGroup *heading_size_group)
 {
         GtkWidget *widget;
         NetDeviceMobile *device_mobile = NET_DEVICE_MOBILE (object);
@@ -85,7 +85,7 @@ device_mobile_proxy_add_to_notebook (NetObject *object,
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder,
                                                      "vbox7"));
-        gtk_notebook_append_page (notebook, widget, NULL);
+        gtk_stack_add_named (stack, widget, net_object_get_id (object));
         return widget;
 }
 
@@ -880,7 +880,7 @@ net_device_mobile_class_init (NetDeviceMobileClass *klass)
         object_class->constructed = net_device_mobile_constructed;
         object_class->get_property = net_device_mobile_get_property;
         object_class->set_property = net_device_mobile_set_property;
-        parent_class->add_to_notebook = device_mobile_proxy_add_to_notebook;
+        parent_class->add_to_stack = device_mobile_proxy_add_to_stack;
         parent_class->refresh = device_mobile_refresh;
 
         g_type_class_add_private (klass, sizeof (NetDeviceMobilePrivate));

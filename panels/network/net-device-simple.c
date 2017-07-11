@@ -42,9 +42,9 @@ struct _NetDeviceSimplePrivate
 G_DEFINE_TYPE (NetDeviceSimple, net_device_simple, NET_TYPE_DEVICE)
 
 static GtkWidget *
-device_simple_proxy_add_to_notebook (NetObject *object,
-                                     GtkNotebook *notebook,
-                                     GtkSizeGroup *heading_size_group)
+device_simple_proxy_add_to_stack (NetObject    *object,
+                                  GtkStack     *stack,
+                                  GtkSizeGroup *heading_size_group)
 {
         GtkWidget *widget;
         NetDeviceSimple *device_simple = NET_DEVICE_SIMPLE (object);
@@ -56,7 +56,7 @@ device_simple_proxy_add_to_notebook (NetObject *object,
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_simple->priv->builder,
                                                      "vbox6"));
-        gtk_notebook_append_page (notebook, widget, NULL);
+        gtk_stack_add_named (stack, widget, net_object_get_id (object));
         return widget;
 }
 
@@ -219,7 +219,7 @@ net_device_simple_class_init (NetDeviceSimpleClass *klass)
 
         object_class->finalize = net_device_simple_finalize;
         object_class->constructed = net_device_simple_constructed;
-        parent_class->add_to_notebook = device_simple_proxy_add_to_notebook;
+        parent_class->add_to_stack = device_simple_proxy_add_to_stack;
         parent_class->refresh = device_simple_refresh;
         simple_class->get_speed = device_simple_get_speed;
 

@@ -135,23 +135,21 @@ net_object_get_panel (NetObject *object)
 }
 
 GtkWidget *
-net_object_add_to_notebook (NetObject *object,
-                            GtkNotebook *notebook,
-                            GtkSizeGroup *heading_size_group)
+net_object_add_to_stack (NetObject    *object,
+                         GtkStack     *stack,
+                         GtkSizeGroup *heading_size_group)
 {
         GtkWidget *widget;
         NetObjectClass *klass = NET_OBJECT_GET_CLASS (object);
-        if (klass->add_to_notebook != NULL) {
-                widget = klass->add_to_notebook (object,
-                                                 notebook,
-                                                 heading_size_group);
+        if (klass->add_to_stack != NULL) {
+                widget = klass->add_to_stack (object, stack, heading_size_group);
                 g_object_set_data_full (G_OBJECT (widget),
                                         "NetObject::id",
                                         g_strdup (object->priv->id),
                                         g_free);
                 return widget;
         }
-        g_debug ("no klass->add_to_notebook for %s", object->priv->id);
+        g_debug ("no klass->add_to_stack for %s", object->priv->id);
         return NULL;
 }
 

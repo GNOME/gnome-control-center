@@ -750,7 +750,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         NMDeviceType type;
         NetDevice *net_device;
         CcNetworkPanelPrivate *priv = panel->priv;
-        GtkNotebook *notebook;
         GtkSizeGroup *size_group;
         GType device_g_type;
         const char *udi;
@@ -831,13 +830,12 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 
         /* add as a panel */
         if (device_g_type != NET_TYPE_DEVICE) {
-                notebook = GTK_NOTEBOOK (gtk_builder_get_object (panel->priv->builder,
-                                                                 "notebook_types"));
+                GtkStack *stack;
+
+                stack = GTK_STACK (gtk_builder_get_object (panel->priv->builder, "stack"));
                 size_group = GTK_SIZE_GROUP (gtk_builder_get_object (panel->priv->builder,
                                                                      "sizegroup1"));
-                net_object_add_to_notebook (NET_OBJECT (net_device),
-                                            notebook,
-                                            size_group);
+                net_object_add_to_stack (NET_OBJECT (net_device), stack, size_group);
         }
 
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
@@ -961,46 +959,25 @@ static void
 nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *panel)
 {
         CcNetworkPanelPrivate *priv = panel->priv;
-        const gchar *id_tmp;
         const gchar *needle;
-        GList *l;
-        GList *panels = NULL;
-        GtkNotebook *notebook;
+        GtkStack *stack;
         GtkTreeIter iter;
         GtkTreeModel *model;
-        GtkWidget *widget;
-        guint i = 0;
         NetObject *object = NULL;
 
         if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
                 g_debug ("no row selected");
-                goto out;
+                return;
         }
 
-        /* find the widget in the notebook that matches the object ID */
+        /* find the widget in the stack that matches the object ID */
         object = get_selected_object (panel);
         needle = net_object_get_id (object);
-        notebook = GTK_NOTEBOOK (gtk_builder_get_object (priv->builder,
-                                                         "notebook_types"));
-        panels = gtk_container_get_children (GTK_CONTAINER (notebook));
-        for (l = panels; l != NULL; l = l->next) {
-                widget = GTK_WIDGET (l->data);
-                id_tmp = g_object_get_data (G_OBJECT (widget), "NetObject::id");
-                if (g_strcmp0 (needle, id_tmp) == 0) {
-                        gtk_notebook_set_current_page (notebook, i);
+        stack = GTK_STACK (gtk_builder_get_object (priv->builder, "stack"));
 
-                        /* object is deletable? */
-                        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                                     "remove_toolbutton"));
-                        gtk_widget_set_sensitive (widget,
-                                                  net_object_get_removable (object));
-                        break;
-                }
-                i++;
-        }
+        gtk_stack_set_visible_child_name (stack, needle);
+
         g_object_unref (object);
-out:
-        g_list_free (panels);
 }
 
 static void
@@ -1009,18 +986,15 @@ panel_add_proxy_device (CcNetworkPanel *panel)
         GtkListStore *liststore_devices;
         GtkTreeIter iter;
         NetProxy *proxy;
-        GtkNotebook *notebook;
+        GtkStack *stack;
         GtkSizeGroup *size_group;
 
-        /* add proxy to notebook */
+        /* add proxy to stack */
         proxy = net_proxy_new ();
-        notebook = GTK_NOTEBOOK (gtk_builder_get_object (panel->priv->builder,
-                                                         "notebook_types"));
+        stack = GTK_STACK (gtk_builder_get_object (panel->priv->builder, "stack"));
         size_group = GTK_SIZE_GROUP (gtk_builder_get_object (panel->priv->builder,
                                                              "sizegroup1"));
-        net_object_add_to_notebook (NET_OBJECT (proxy),
-                                    notebook,
-                                    size_group);
+        net_object_add_to_stack (NET_OBJECT (proxy), stack, size_group);
 
         /* add proxy to device list */
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
@@ -1174,7 +1148,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         GtkTreeIter iter;
         NetVpn *net_vpn;
         const gchar *id;
-        GtkNotebook *notebook;
+        GtkStack *stack;
         GtkSizeGroup *size_group;
 
         /* does already exist */
@@ -1194,13 +1168,10 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
                                  G_CALLBACK (object_removed_cb), panel, 0);
 
         /* add as a panel */
-        notebook = GTK_NOTEBOOK (gtk_builder_get_object (panel->priv->builder,
-                                                         "notebook_types"));
+        stack = GTK_STACK (gtk_builder_get_object (panel->priv->builder, "stack"));
         size_group = GTK_SIZE_GROUP (gtk_builder_get_object (panel->priv->builder,
                                                              "sizegroup1"));
-        net_object_add_to_notebook (NET_OBJECT (net_vpn),
-                                    notebook,
-                                    size_group);
+        net_object_add_to_stack (NET_OBJECT (net_vpn), stack, size_group);
 
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                             "liststore_devices"));
@@ -1433,11 +1404,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         g_signal_connect_after (toplevel, "map", G_CALLBACK (on_toplevel_map), panel);
-
-        /* hide implementation details */
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "notebook_types"));
-        gtk_notebook_set_show_tabs (GTK_NOTEBOOK (widget), FALSE);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "vbox1"));

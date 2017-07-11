@@ -53,15 +53,15 @@ device_ethernet_get_speed (NetDeviceSimple *device_simple)
 }
 
 static GtkWidget *
-device_ethernet_add_to_notebook (NetObject    *object,
-                                 GtkNotebook  *notebook,
-                                 GtkSizeGroup *heading_size_group)
+device_ethernet_add_to_stack (NetObject    *object,
+                              GtkStack     *stack,
+                              GtkSizeGroup *heading_size_group)
 {
         NetDeviceEthernet *device = NET_DEVICE_ETHERNET (object);
         GtkWidget *vbox;
 
         vbox = GTK_WIDGET (gtk_builder_get_object (device->builder, "vbox6"));
-        gtk_notebook_append_page (notebook, vbox, NULL);
+        gtk_stack_add_named (stack, vbox, net_object_get_id (object));
         return vbox;
 }
 
@@ -612,7 +612,7 @@ net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
 
         simple_class->get_speed = device_ethernet_get_speed;
         obj_class->refresh = device_ethernet_refresh;
-        obj_class->add_to_notebook = device_ethernet_add_to_notebook;
+        obj_class->add_to_stack = device_ethernet_add_to_stack;
         object_class->constructed = device_ethernet_constructed;
         object_class->finalize = device_ethernet_finalize;
 }

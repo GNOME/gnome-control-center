@@ -210,9 +210,9 @@ panel_proxy_mode_combo_changed_cb (GtkWidget *widget, NetProxy *proxy)
 }
 
 static GtkWidget *
-net_proxy_add_to_notebook (NetObject *object,
-                           GtkNotebook *notebook,
-                           GtkSizeGroup *heading_size_group)
+net_proxy_add_to_stack (NetObject    *object,
+                        GtkStack     *stack,
+                        GtkSizeGroup *heading_size_group)
 {
         GtkWidget *widget;
         NetProxy *proxy = NET_PROXY (object);
@@ -224,7 +224,7 @@ net_proxy_add_to_notebook (NetObject *object,
 
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
                                                      "grid5"));
-        gtk_notebook_append_page (notebook, widget, NULL);
+        gtk_stack_add_named (stack, widget, net_object_get_id (object));
         return widget;
 }
 
@@ -247,7 +247,7 @@ net_proxy_class_init (NetProxyClass *klass)
         NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
 
         object_class->finalize = net_proxy_finalize;
-        parent_class->add_to_notebook = net_proxy_add_to_notebook;
+        parent_class->add_to_stack = net_proxy_add_to_stack;
         g_type_class_add_private (klass, sizeof (NetProxyPrivate));
 }
 

@@ -237,9 +237,9 @@ vpn_proxy_delete (NetObject *object)
 }
 
 static GtkWidget *
-vpn_proxy_add_to_notebook (NetObject *object,
-                           GtkNotebook *notebook,
-                           GtkSizeGroup *heading_size_group)
+vpn_proxy_add_to_stack (NetObject    *object,
+                        GtkStack     *stack,
+                        GtkSizeGroup *heading_size_group)
 {
         GtkWidget *widget;
         NetVpn *vpn = NET_VPN (object);
@@ -251,7 +251,7 @@ vpn_proxy_add_to_notebook (NetObject *object,
 
         widget = GTK_WIDGET (gtk_builder_get_object (vpn->priv->builder,
                                                      "vbox9"));
-        gtk_notebook_append_page (notebook, widget, NULL);
+        gtk_stack_add_named (stack, widget, net_object_get_id (object));
         return widget;
 }
 
@@ -553,7 +553,7 @@ net_vpn_class_init (NetVpnClass *klass)
         object_class->set_property = net_vpn_set_property;
         object_class->constructed = net_vpn_constructed;
         object_class->finalize = net_vpn_finalize;
-        parent_class->add_to_notebook = vpn_proxy_add_to_notebook;
+        parent_class->add_to_stack = vpn_proxy_add_to_stack;
         parent_class->delete = vpn_proxy_delete;
         parent_class->refresh = vpn_proxy_refresh;
         parent_class->edit = vpn_proxy_edit;
