@@ -97,8 +97,11 @@ device_wifi_proxy_add_to_stack (NetObject    *object,
                                 GtkStack     *stack,
                                 GtkSizeGroup *heading_size_group)
 {
+        NMDevice *nmdevice;
         GtkWidget *widget;
         NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (object);
+
+        nmdevice = net_device_get_nm_device (NET_DEVICE (object));
 
         /* add widgets to size group */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
@@ -107,7 +110,9 @@ device_wifi_proxy_add_to_stack (NetObject    *object,
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "notebook_view"));
-        gtk_stack_add_named (stack, widget, net_object_get_id (object));
+        gtk_stack_add_titled (stack, widget,
+                              net_object_get_id (object),
+                              nm_device_get_product (nmdevice));
 
         return widget;
 }
