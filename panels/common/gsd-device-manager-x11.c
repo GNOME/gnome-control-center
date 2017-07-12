@@ -70,7 +70,7 @@ device_get_device_type (GdkDevice *gdk_device)
 	case GDK_SOURCE_TOUCHPAD:
 		return GSD_DEVICE_TYPE_TOUCHPAD;
 	case GDK_SOURCE_TABLET_PAD:
-		return GSD_DEVICE_TYPE_PAD;
+		return GSD_DEVICE_TYPE_TABLET | GSD_DEVICE_TYPE_PAD;
 	}
 
 	g_warning ("Unhandled input source %d\n", source);
