@@ -27,42 +27,7 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_NETWORK_PANEL cc_network_panel_get_type()
 
-#define CC_NETWORK_PANEL(obj) \
-        (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-        CC_TYPE_NETWORK_PANEL, CcNetworkPanel))
-
-#define CC_NETWORK_PANEL_CLASS(klass) \
-        (G_TYPE_CHECK_CLASS_CAST ((klass), \
-        CC_TYPE_NETWORK_PANEL, CcNetworkPanelClass))
-
-#define CC_IS_NETWORK_PANEL(obj) \
-        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-        CC_TYPE_NETWORK_PANEL))
-
-#define CC_IS_NETWORK_PANEL_CLASS(klass) \
-        (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-        CC_TYPE_NETWORK_PANEL))
-
-#define CC_NETWORK_PANEL_GET_CLASS(obj) \
-        (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-        CC_TYPE_NETWORK_PANEL, CcNetworkPanelClass))
-
-typedef struct _CcNetworkPanel CcNetworkPanel;
-typedef struct _CcNetworkPanelClass CcNetworkPanelClass;
-typedef struct _CcNetworkPanelPrivate CcNetworkPanelPrivate;
-
-struct _CcNetworkPanel
-{
-        CcPanel parent;
-        CcNetworkPanelPrivate *priv;
-};
-
-struct _CcNetworkPanelClass
-{
-        CcPanelClass parent_class;
-};
-
-GType cc_network_panel_get_type (void) G_GNUC_CONST;
+G_DECLARE_FINAL_TYPE (CcNetworkPanel, cc_network_panel, CC, NETWORK_PANEL, CcPanel)
 
 GPtrArray *cc_network_panel_get_devices (CcNetworkPanel *panel);
 
