@@ -1206,7 +1206,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         g_signal_connect_after (toplevel, "map", G_CALLBACK (on_toplevel_map), panel);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->builder, "vbox1"));
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->builder, "main_box"));
         gtk_container_add (GTK_CONTAINER (panel), widget);
 
         /* Cold-plug existing connections */
