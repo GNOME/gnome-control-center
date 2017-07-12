@@ -66,11 +66,6 @@ struct _CcNetworkPanelPrivate
         MMManager        *modem_manager;
         gboolean          updating_device;
 
-        /* Killswitch stuff */
-        GDBusProxy       *rfkill_proxy;
-        GtkWidget        *kill_switch_header;
-        GtkSwitch        *rfkill_switch;
-
         /* wireless dialog stuff */
         CmdlineOperation  arg_operation;
         gchar            *arg_device;
@@ -220,12 +215,9 @@ cc_network_panel_dispose (GObject *object)
                 g_cancellable_cancel (priv->cancellable);
 
         g_clear_object (&priv->cancellable);
-        g_clear_object (&priv->rfkill_proxy);
         g_clear_object (&priv->builder);
         g_clear_object (&priv->client);
         g_clear_object (&priv->modem_manager);
-        g_clear_object (&priv->kill_switch_header);
-        priv->rfkill_switch = NULL;
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
 }
@@ -247,131 +239,6 @@ cc_network_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-cc_network_panel_notify_enable_active_cb (GtkSwitch *sw,
-                                          GParamSpec *pspec,
-                                          CcNetworkPanel *panel)
-{
-        CcNetworkPanelPrivate *priv = panel->priv;
-	gboolean enable;
-	enable = gtk_switch_get_active (sw);
-        g_dbus_proxy_call (priv->rfkill_proxy,
-                           "org.freedesktop.DBus.Properties.Set",
-                           g_variant_new_parsed ("('org.gnome.SettingsDaemon.Rfkill',"
-                                                 "'AirplaneMode', %v)",
-                                                 g_variant_new_boolean (enable)),
-                           G_DBUS_CALL_FLAGS_NONE,
-                           -1,
-                           priv->cancellable,
-                           NULL, NULL);
-}
-
-static void
-sync_airplane_mode_switch (CcNetworkPanel *panel)
-{
-        GVariant *result;
-        gboolean enabled, should_show;
-        gboolean hw_enabled;
-
-        result = g_dbus_proxy_get_cached_property (panel->priv->rfkill_proxy, "HasAirplaneMode");
-        enabled = g_variant_get_boolean (result);
-
-        result = g_dbus_proxy_get_cached_property (panel->priv->rfkill_proxy, "ShouldShowAirplaneMode");
-        should_show = g_variant_get_boolean (result);
-
-        gtk_widget_set_visible (GTK_WIDGET (panel->priv->kill_switch_header), enabled && should_show);
-        if (!enabled || !should_show)
-                return;
-
-        result = g_dbus_proxy_get_cached_property (panel->priv->rfkill_proxy, "AirplaneMode");
-        enabled = g_variant_get_boolean (result);
-
-        result = g_dbus_proxy_get_cached_property (panel->priv->rfkill_proxy, "HardwareAirplaneMode");
-        hw_enabled = !!g_variant_get_boolean (result);
-
-	enabled |= hw_enabled;
-
-	if (enabled != gtk_switch_get_active (panel->priv->rfkill_switch)) {
-		g_signal_handlers_block_by_func (panel->priv->rfkill_switch,
-						 cc_network_panel_notify_enable_active_cb,
-						 panel);
-		gtk_switch_set_active (panel->priv->rfkill_switch, enabled);
-		g_signal_handlers_unblock_by_func (panel->priv->rfkill_switch,
-						 cc_network_panel_notify_enable_active_cb,
-						 panel);
-	}
-
-	gtk_widget_set_sensitive (GTK_WIDGET (panel->priv->rfkill_switch), !hw_enabled);
-}
-
-static void
-on_property_change (GDBusProxy *proxy,
-                    GVariant   *changed_properties,
-                    GVariant   *invalidated_properties,
-                    gpointer    user_data)
-{
-        sync_airplane_mode_switch (CC_NETWORK_PANEL (user_data));
-}
-
-static void
-got_rfkill_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
-{
-        GError *error = NULL;
-        CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
-
-        panel->priv->rfkill_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-        if (panel->priv->rfkill_proxy == NULL) {
-                g_printerr ("Error creating rfkill proxy: %s\n", error->message);
-                g_error_free (error);
-                return;
-        }
-
-        g_signal_connect (panel->priv->rfkill_proxy, "g-properties-changed",
-                          G_CALLBACK (on_property_change), panel);
-        sync_airplane_mode_switch (panel);
-}
-
-static void
-cc_network_panel_constructed (GObject *object)
-{
-        CcNetworkPanel *panel = CC_NETWORK_PANEL (object);
-        GtkWidget *box;
-        GtkWidget *label;
-        GtkWidget *widget;
-
-        G_OBJECT_CLASS (cc_network_panel_parent_class)->constructed (object);
-
-        /* add kill switch widgets  */
-        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
-        /* TRANSLATORS: this is to disable the radio hardware in the
-         * network panel */
-        label = gtk_label_new_with_mnemonic (_("Air_plane Mode"));
-        gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
-        gtk_widget_set_visible (label, TRUE);
-        widget = gtk_switch_new ();
-        gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
-        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 4);
-        gtk_widget_show_all (box);
-        panel->priv->rfkill_switch = GTK_SWITCH (widget);
-        cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (panel)), box);
-        panel->priv->kill_switch_header = g_object_ref (box);
-
-        g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                                  G_DBUS_PROXY_FLAGS_NONE,
-                                  NULL,
-                                  "org.gnome.SettingsDaemon.Rfkill",
-                                  "/org/gnome/SettingsDaemon/Rfkill",
-                                  "org.gnome.SettingsDaemon.Rfkill",
-                                  panel->priv->cancellable,
-                                  got_rfkill_proxy_cb,
-                                  panel);
-
-        g_signal_connect (panel->priv->rfkill_switch, "notify::active",
-                          G_CALLBACK (cc_network_panel_notify_enable_active_cb),
-                          panel);
-}
-
-static void
 cc_network_panel_class_init (CcNetworkPanelClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -385,7 +252,6 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
         object_class->set_property = cc_network_panel_set_property;
         object_class->dispose = cc_network_panel_dispose;
         object_class->finalize = cc_network_panel_finalize;
-        object_class->constructed = cc_network_panel_constructed;
 
         g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 }
