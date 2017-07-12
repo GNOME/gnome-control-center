@@ -54,11 +54,15 @@ struct _CcNetworkPanel
         CcPanel           parent;
 
         GCancellable     *cancellable;
-        GtkBuilder       *builder;
-        GtkWidget        *treeview;
+        GtkListStore     *liststore_devices;
         NMClient         *client;
         MMManager        *modem_manager;
+        GtkSizeGroup     *sizegroup;
         gboolean          updating_device;
+
+        /* widgets */
+        GtkStack         *stack;
+        GtkWidget        *treeview;
 
         /* wireless dialog stuff */
         CmdlineOperation  arg_operation;
@@ -203,7 +207,6 @@ cc_network_panel_dispose (GObject *object)
                 g_cancellable_cancel (self->cancellable);
 
         g_clear_object (&self->cancellable);
-        g_clear_object (&self->builder);
         g_clear_object (&self->client);
         g_clear_object (&self->modem_manager);
 
@@ -224,22 +227,6 @@ static const char *
 cc_network_panel_get_help_uri (CcPanel *panel)
 {
 	return "help:gnome-help/net";
-}
-
-static void
-cc_network_panel_class_init (CcNetworkPanelClass *klass)
-{
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
-
-	panel_class->get_help_uri = cc_network_panel_get_help_uri;
-
-        object_class->get_property = cc_network_panel_get_property;
-        object_class->set_property = cc_network_panel_set_property;
-        object_class->dispose = cc_network_panel_dispose;
-        object_class->finalize = cc_network_panel_finalize;
-
-        g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 }
 
 static NetObject *
@@ -298,7 +285,7 @@ object_removed_cb (NetObject *object, CcNetworkPanel *panel)
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->treeview));
 
         /* remove device from model */
-        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->builder, "liststore_devices"));
+        model = GTK_TREE_MODEL (panel->liststore_devices);
         ret = gtk_tree_model_get_iter_first (model, &iter);
         if (!ret)
                 return;
@@ -331,7 +318,7 @@ cc_network_panel_get_devices (CcNetworkPanel *panel)
 
         devices = g_ptr_array_new_with_free_func (g_object_unref);
 
-        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->builder, "liststore_devices"));
+        model = GTK_TREE_MODEL (panel->liststore_devices);
         if (!gtk_tree_model_get_iter_first (model, &iter))
                 return devices;
 
@@ -401,17 +388,14 @@ static void
 panel_net_object_notify_title_cb (NetObject *net_object, GParamSpec *pspec, CcNetworkPanel *panel)
 {
         GtkTreeIter iter;
-        GtkListStore *liststore;
 
         if (!find_in_model_by_id (panel, net_object_get_id (net_object), &iter))
                 return;
 
-        liststore = GTK_LIST_STORE (gtk_builder_get_object (panel->builder, "liststore_devices"));
-
         /* gtk_tree_model_row_changed would not cause the list store to resort.
          * Instead set the object column to the current value.
          * See https://bugzilla.gnome.org/show_bug.cgi?id=782737 */
-        gtk_list_store_set (liststore, &iter,
+        gtk_list_store_set (panel->liststore_devices, &iter,
                             PANEL_DEVICES_COLUMN_OBJECT, net_object,
                            -1);
 }
@@ -511,7 +495,7 @@ handle_argv (CcNetworkPanel *panel)
         if (panel->arg_operation == OPERATION_NULL)
                 return;
 
-        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->builder, "liststore_devices"));
+        model = GTK_TREE_MODEL (panel->liststore_devices);
         ret = gtk_tree_model_get_iter_first (model, &iter);
         while (ret) {
                 GObject *object_tmp;
@@ -550,16 +534,13 @@ state_changed_cb (NMDevice *device,
                   NMDeviceStateReason reason,
                   CcNetworkPanel *panel)
 {
-        GtkListStore *store;
         GtkTreeIter iter;
 
         if (!find_in_model_by_id (panel, nm_device_get_udi (device), &iter)) {
                 return;
         }
 
-        store = GTK_LIST_STORE (gtk_builder_get_object (panel->builder, "liststore_devices"));
-
-        gtk_list_store_set (store, &iter,
+        gtk_list_store_set (GTK_LIST_STORE (panel->liststore_devices), &iter,
                             PANEL_DEVICES_COLUMN_ICON, panel_device_to_icon_name (device, TRUE),
                            -1);
 }
@@ -567,11 +548,9 @@ state_changed_cb (NMDevice *device,
 static gboolean
 panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 {
-        GtkListStore *liststore_devices;
         GtkTreeIter iter;
         NMDeviceType type;
         NetDevice *net_device;
-        GtkSizeGroup *size_group;
         GType device_g_type;
         const char *udi;
 
@@ -649,20 +628,13 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         }
 
         /* add as a panel */
-        if (device_g_type != NET_TYPE_DEVICE) {
-                GtkStack *stack;
+        if (device_g_type != NET_TYPE_DEVICE)
+                net_object_add_to_stack (NET_OBJECT (net_device), panel->stack, panel->sizegroup);
 
-                stack = GTK_STACK (gtk_builder_get_object (panel->builder, "stack"));
-                size_group = GTK_SIZE_GROUP (gtk_builder_get_object (panel->builder, "sizegroup1"));
-                net_object_add_to_stack (NET_OBJECT (net_device), stack, size_group);
-        }
-
-        liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->builder,
-                                            "liststore_devices"));
         g_signal_connect_object (net_device, "removed",
                                  G_CALLBACK (object_removed_cb), panel, 0);
-        gtk_list_store_append (liststore_devices, &iter);
-        gtk_list_store_set (liststore_devices,
+        gtk_list_store_append (panel->liststore_devices, &iter);
+        gtk_list_store_set (panel->liststore_devices,
                             &iter,
                             PANEL_DEVICES_COLUMN_ICON, panel_device_to_icon_name (device, TRUE),
                             PANEL_DEVICES_COLUMN_OBJECT, net_device,
@@ -687,7 +659,7 @@ panel_remove_device (CcNetworkPanel *panel, NMDevice *device)
         GtkTreeModel *model;
 
         /* remove device from model */
-        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->builder, "liststore_devices"));
+        model = GTK_TREE_MODEL (panel->liststore_devices);
         ret = gtk_tree_model_get_iter_first (model, &iter);
         if (!ret)
                 return;
@@ -730,7 +702,6 @@ static void
 panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
 {
         GtkCellRenderer *renderer;
-        GtkListStore *liststore_devices;
         GtkTreeViewColumn *column;
 
         /* image */
@@ -760,11 +731,10 @@ panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
                                                  get_object_title,
                                                  NULL, NULL);
         gtk_tree_view_column_set_sort_column_id (column, PANEL_DEVICES_COLUMN_OBJECT);
-        liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->builder, "liststore_devices"));
-        gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (liststore_devices),
+        gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (panel->liststore_devices),
                                          PANEL_DEVICES_COLUMN_OBJECT,
                                          panel_net_object_sort_func, NULL, NULL);
-        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (liststore_devices),
+        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (panel->liststore_devices),
                                               PANEL_DEVICES_COLUMN_OBJECT,
                                               GTK_SORT_ASCENDING);
         gtk_tree_view_append_column (treeview, column);
@@ -775,7 +745,6 @@ static void
 nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *panel)
 {
         const gchar *needle;
-        GtkStack *stack;
         GtkTreeIter iter;
         GtkTreeModel *model;
         NetObject *object = NULL;
@@ -788,9 +757,8 @@ nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *pan
         /* find the widget in the stack that matches the object ID */
         object = get_selected_object (panel);
         needle = net_object_get_id (object);
-        stack = GTK_STACK (gtk_builder_get_object (panel->builder, "stack"));
 
-        gtk_stack_set_visible_child_name (stack, needle);
+        gtk_stack_set_visible_child_name (panel->stack, needle);
 
         g_object_unref (object);
 }
@@ -798,23 +766,17 @@ nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *pan
 static void
 panel_add_proxy_device (CcNetworkPanel *panel)
 {
-        GtkListStore *liststore_devices;
         GtkTreeIter iter;
         NetProxy *proxy;
-        GtkStack *stack;
-        GtkSizeGroup *size_group;
 
         /* add proxy to stack */
         proxy = net_proxy_new ();
-        stack = GTK_STACK (gtk_builder_get_object (panel->builder, "stack"));
-        size_group = GTK_SIZE_GROUP (gtk_builder_get_object (panel->builder, "sizegroup1"));
-        net_object_add_to_stack (NET_OBJECT (proxy), stack, size_group);
+        net_object_add_to_stack (NET_OBJECT (proxy), panel->stack, panel->sizegroup);
 
         /* add proxy to device list */
-        liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->builder, "liststore_devices"));
         net_object_set_title (NET_OBJECT (proxy), _("Network proxy"));
-        gtk_list_store_append (liststore_devices, &iter);
-        gtk_list_store_set (liststore_devices,
+        gtk_list_store_append (panel->liststore_devices, &iter);
+        gtk_list_store_set (panel->liststore_devices,
                             &iter,
                             PANEL_DEVICES_COLUMN_ICON, "preferences-system-network-symbolic",
                             PANEL_DEVICES_COLUMN_OBJECT, proxy,
@@ -882,15 +844,13 @@ manager_running (NMClient *client, GParamSpec *pspec, gpointer user_data)
         const GPtrArray *devices;
         int i;
         NMDevice *device_tmp;
-        GtkListStore *liststore_devices;
         gboolean selected = FALSE;
         CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
 
         /* clear all devices we added */
         if (!nm_client_get_nm_running (client)) {
                 g_debug ("NM disappeared");
-                liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->builder, "liststore_devices"));
-                gtk_list_store_clear (liststore_devices);
+                gtk_list_store_clear (panel->liststore_devices);
                 panel_add_proxy_device (panel);
                 goto out;
         }
@@ -927,7 +887,7 @@ find_in_model_by_id (CcNetworkPanel *panel, const gchar *id, GtkTreeIter *iter_o
         NetObject *object = NULL;
 
         /* find in model */
-        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->builder, "liststore_devices"));
+        model = GTK_TREE_MODEL (panel->liststore_devices);
         ret = gtk_tree_model_get_iter_first (model, &iter);
         if (!ret)
                 goto out;
@@ -955,12 +915,9 @@ static void
 panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 {
         gchar *title;
-        GtkListStore *liststore_devices;
         GtkTreeIter iter;
         NetVpn *net_vpn;
         const gchar *id;
-        GtkStack *stack;
-        GtkSizeGroup *size_group;
 
         /* does already exist */
         id = nm_connection_get_path (connection);
@@ -979,16 +936,13 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
                                  G_CALLBACK (object_removed_cb), panel, 0);
 
         /* add as a panel */
-        stack = GTK_STACK (gtk_builder_get_object (panel->builder, "stack"));
-        size_group = GTK_SIZE_GROUP (gtk_builder_get_object (panel->builder, "sizegroup1"));
-        net_object_add_to_stack (NET_OBJECT (net_vpn), stack, size_group);
+        net_object_add_to_stack (NET_OBJECT (net_vpn), panel->stack, panel->sizegroup);
 
-        liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->builder, "liststore_devices"));
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (connection));
 
         net_object_set_title (NET_OBJECT (net_vpn), title);
-        gtk_list_store_append (liststore_devices, &iter);
-        gtk_list_store_set (liststore_devices,
+        gtk_list_store_append (panel->liststore_devices, &iter);
+        gtk_list_store_set (panel->liststore_devices,
                             &iter,
                             PANEL_DEVICES_COLUMN_ICON, "network-vpn-symbolic",
                             PANEL_DEVICES_COLUMN_OBJECT, net_vpn,
@@ -1115,13 +1069,39 @@ on_toplevel_map (GtkWidget      *widget,
         panel_check_network_manager_version (panel);
 }
 
+
+static void
+cc_network_panel_class_init (CcNetworkPanelClass *klass)
+{
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+
+	panel_class->get_help_uri = cc_network_panel_get_help_uri;
+
+        object_class->get_property = cc_network_panel_get_property;
+        object_class->set_property = cc_network_panel_set_property;
+        object_class->dispose = cc_network_panel_dispose;
+        object_class->finalize = cc_network_panel_finalize;
+
+        g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, liststore_devices);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, stack);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, sizegroup);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, treeview);
+
+        gtk_widget_class_bind_template_callback (widget_class, add_connection_cb);
+        gtk_widget_class_bind_template_callback (widget_class, remove_connection);
+}
+
 static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
         GError *error = NULL;
-        GtkStyleContext *context;
         GtkTreeSelection *selection;
-        GtkWidget *widget;
         GtkWidget *toplevel;
         GDBusConnection *system_bus;
         const GPtrArray *connections;
@@ -1129,33 +1109,15 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         g_resources_register (cc_network_get_resource ());
 
-        panel->builder = gtk_builder_new ();
-        gtk_builder_add_from_resource (panel->builder,
-                                       "/org/gnome/control-center/network/network.ui",
-                                       &error);
-        if (error != NULL) {
-                g_warning ("Could not load interface file: %s", error->message);
-                g_error_free (error);
-                return;
-        }
+        gtk_widget_init_template (GTK_WIDGET (panel));
 
         panel->cancellable = g_cancellable_new ();
 
-        panel->treeview = GTK_WIDGET (gtk_builder_get_object (panel->builder, "treeview_devices"));
         panel_add_devices_columns (panel, GTK_TREE_VIEW (panel->treeview));
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->treeview));
         gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
         g_signal_connect (selection, "changed",
                           G_CALLBACK (nm_devices_treeview_clicked_cb), panel);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->builder, "devices_scrolledwindow"));
-        gtk_widget_set_size_request (widget, 200, -1);
-        context = gtk_widget_get_style_context (widget);
-        gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->builder, "devices_toolbar"));
-        context = gtk_widget_get_style_context (widget);
-        gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
         /* add the virtual proxy device */
         panel_add_proxy_device (panel);
@@ -1190,24 +1152,12 @@ cc_network_panel_init (CcNetworkPanel *panel)
                 g_object_unref (system_bus);
         }
 
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->builder, "add_toolbutton"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (add_connection_cb), panel);
-
-        /* disable for now, until we actually show removable connections */
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->builder, "remove_toolbutton"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (remove_connection), panel);
-
         /* add remote settings such as VPN settings as virtual devices */
         g_signal_connect (panel->client, NM_CLIENT_CONNECTION_ADDED,
                           G_CALLBACK (notify_connection_added_cb), panel);
 
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         g_signal_connect_after (toplevel, "map", G_CALLBACK (on_toplevel_map), panel);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->builder, "main_box"));
-        gtk_container_add (GTK_CONTAINER (panel), widget);
 
         /* Cold-plug existing connections */
         connections = nm_client_get_connections (panel->client);
