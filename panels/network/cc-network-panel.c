@@ -46,9 +46,6 @@
 typedef enum {
         OPERATION_NULL,
         OPERATION_SHOW_DEVICE,
-        OPERATION_CREATE_WIFI,
-        OPERATION_CONNECT_HIDDEN,
-        OPERATION_CONNECT_8021X,
         OPERATION_CONNECT_MOBILE
 } CmdlineOperation;
 
@@ -101,12 +98,6 @@ cc_network_panel_get_property (GObject    *object,
 static CmdlineOperation
 cmdline_operation_from_string (const gchar *string)
 {
-        if (g_strcmp0 (string, "create-wifi") == 0)
-                return OPERATION_CREATE_WIFI;
-        if (g_strcmp0 (string, "connect-hidden-wifi") == 0)
-                return OPERATION_CONNECT_HIDDEN;
-        if (g_strcmp0 (string, "connect-8021x-wifi") == 0)
-                return OPERATION_CONNECT_8021X;
         if (g_strcmp0 (string, "connect-3g") == 0)
                 return OPERATION_CONNECT_MOBILE;
         if (g_strcmp0 (string, "show-device") == 0)
@@ -130,7 +121,6 @@ verify_argv (CcNetworkPanel *self,
 {
 	switch (self->arg_operation) {
 	case OPERATION_CONNECT_MOBILE:
-	case OPERATION_CONNECT_8021X:
 	case OPERATION_SHOW_DEVICE:
 		if (self->arg_device == NULL) {
 			g_warning ("Operation %s requires an object path", args[0]);
@@ -469,41 +459,19 @@ handle_argv_for_device (CcNetworkPanel *self,
 			NMDevice       *device,
 			GtkTreeIter    *iter)
 {
-        NMDeviceType type;
         GtkWidget *toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
 
         if (self->arg_operation == OPERATION_NULL)
                 return TRUE;
 
-        type = nm_device_get_device_type (device);
-
-        if (type == NM_DEVICE_TYPE_WIFI &&
-            (self->arg_operation == OPERATION_CREATE_WIFI ||
-             self->arg_operation == OPERATION_CONNECT_HIDDEN)) {
-                g_debug ("Selecting wifi device");
-                select_tree_iter (self, iter);
-
-                if (self->arg_operation == OPERATION_CREATE_WIFI)
-                        cc_network_panel_create_wifi_network (toplevel, self->client);
-                else
-                        cc_network_panel_connect_to_hidden_network (toplevel, self->client);
-
-                reset_command_line_args (self); /* done */
-                return TRUE;
-        } else if (g_strcmp0 (nm_object_get_path (NM_OBJECT (device)), self->arg_device) == 0) {
+        if (g_strcmp0 (nm_object_get_path (NM_OBJECT (device)), self->arg_device) == 0) {
                 if (self->arg_operation == OPERATION_CONNECT_MOBILE) {
                         cc_network_panel_connect_to_3g_network (toplevel, self->client, device);
 
                         reset_command_line_args (self); /* done */
                         select_tree_iter (self, iter);
                         return TRUE;
-                } else if (self->arg_operation == OPERATION_CONNECT_8021X) {
-                        cc_network_panel_connect_to_8021x_network (toplevel, self->client, device, self->arg_access_point);
-                        reset_command_line_args (self); /* done */
-                        select_tree_iter (self, iter);
-                        return TRUE;
-                }
-                else if (self->arg_operation == OPERATION_SHOW_DEVICE) {
+                } else if (self->arg_operation == OPERATION_SHOW_DEVICE) {
                         select_tree_iter (self, iter);
                         reset_command_line_args (self); /* done */
                         return TRUE;
