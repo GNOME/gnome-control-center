@@ -25,14 +25,15 @@
       <column type="GObject"/>
     </columns>
   </object>
+  <template class="CcNetworkPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="margin">6</property>
+    <child>
       <object class="GtkBox" id="main_box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">12</property>
-        <property name="margin-start">6</property>
-        <property name="margin-end">6</property>
-        <property name="margin-top">6</property>
-        <property name="margin-bottom">6</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkBox">
@@ -60,8 +61,9 @@
                         <property name="hscrollbar_policy">never</property>
                         <property name="shadow_type">in</property>
                         <property name="expand">True</property>
+                        <property name="width_request">200</property>
                         <child>
-                          <object class="GtkTreeView" id="treeview_devices">
+                          <object class="GtkTreeView" id="treeview">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="model">liststore_devices</property>
@@ -94,6 +96,7 @@
                             <property name="label" translatable="yes">Add Device</property>
                             <property name="use_underline">True</property>
                             <property name="icon_name">list-add-symbolic</property>
+                            <signal name="clicked" handler="add_connection_cb" object="CcNetworkPanel" swapped="no" />
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -109,6 +112,7 @@
                             <property name="label" translatable="yes">Remove Device</property>
                             <property name="use_underline">True</property>
                             <property name="icon_name">list-remove-symbolic</property>
+                            <signal name="clicked" handler="remove_connection" object="CcNetworkPanel" swapped="no" />
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -136,6 +140,8 @@
           </object>
         </child>
       </object>
-  <object class="GtkSizeGroup" id="sizegroup1">
+    </child>
+  </template>
+  <object class="GtkSizeGroup" id="sizegroup">
   </object>
 </interface>
