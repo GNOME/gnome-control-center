@@ -392,8 +392,13 @@ xdevice_get_dimensions (int    deviceid,
         guint *value, w, h;
         int i, n_info;
 
+        gdk_error_trap_push ();
+
         info = XIQueryDevice (GDK_DISPLAY_XDISPLAY (display), deviceid, &n_info);
         *width = *height = w = h = 0;
+
+        if (gdk_error_trap_pop ())
+                return FALSE;
 
         if (!info)
                 return FALSE;

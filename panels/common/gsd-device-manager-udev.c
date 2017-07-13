@@ -92,8 +92,14 @@ create_device (GUdevDevice *udev_device)
 	name = g_udev_device_get_sysfs_attr (parent, "name");
 	vendor = g_udev_device_get_property (udev_device, "ID_VENDOR_ID");
 	product = g_udev_device_get_property (udev_device, "ID_MODEL_ID");
+
+	if (!vendor || !product) {
+		vendor = g_udev_device_get_sysfs_attr (udev_device, "device/id/vendor");
+		product = g_udev_device_get_sysfs_attr (udev_device, "device/id/product");
+	}
+
 	width = g_udev_device_get_property_as_int (udev_device, "ID_INPUT_WIDTH_MM");
-	height = g_udev_device_get_property_as_int (udev_device, "ID_INPUT_WIDTH_MM");
+	height = g_udev_device_get_property_as_int (udev_device, "ID_INPUT_HEIGHT_MM");
 
 	device = g_object_new (GSD_TYPE_DEVICE,
 			       "name", name,

@@ -145,10 +145,8 @@ remove_device (GsdX11DeviceManager *manager,
 
 	device = g_hash_table_lookup (manager->devices, device_file);
 
-	if (device)
-		g_object_ref (device);
-
 	if (device) {
+		g_object_ref (device);
 		g_signal_emit_by_name (manager, "device-removed", device);
 		g_object_unref (device);
 	}
