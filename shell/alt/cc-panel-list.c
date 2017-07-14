@@ -40,6 +40,11 @@ struct _CcPanelList
   GtkWidget          *main_listbox;
   GtkWidget          *search_listbox;
 
+  /* When clicking on Details or Devices row, show it
+   * automatically select the first panel of the list.
+   */
+  gboolean            autoselect_panel : 1;
+
   GtkListBoxRow      *details_row;
   GtkListBoxRow      *devices_row;
 
@@ -410,14 +415,14 @@ row_activated_cb (GtkWidget     *listbox,
   if (row == self->details_row)
     {
       cc_panel_list_set_view (self, CC_PANEL_LIST_DETAILS);
-      return;
+      goto out;
     }
 
   /* Devices */
   if (row == self->devices_row)
     {
       cc_panel_list_set_view (self, CC_PANEL_LIST_DEVICES);
-      return;
+      goto out;
     }
 
   /*
@@ -445,6 +450,13 @@ row_activated_cb (GtkWidget     *listbox,
   data = g_object_get_data (G_OBJECT (row), "data");
 
   g_signal_emit (self, signals[SHOW_PANEL], 0, data->id);
+
+out:
+  /* After selecting the panel and eventually changing the view, reset the
+   * autoselect flag. If necessary, cc_panel_list_set_active_panel() will
+   * set it to FALSE again.
+   */
+  self->autoselect_panel = TRUE;
 }
 
 static void
@@ -768,6 +780,12 @@ cc_panel_list_set_view (CcPanelList     *self,
 
       gtk_stack_set_visible_child (GTK_STACK (self), visible_child);
 
+      /* For non-search views, make sure the displayed panel matches the
+       * newly selected row
+       */
+      if (self->autoselect_panel && view != CC_PANEL_LIST_SEARCH)
+        cc_panel_list_activate (self);
+
       g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_VIEW]);
       g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SEARCH_MODE]);
     }
@@ -837,6 +855,11 @@ cc_panel_list_set_active_panel (CcPanelList *self,
 
   gtk_list_box_select_row (GTK_LIST_BOX (listbox), GTK_LIST_BOX_ROW (data->row));
   gtk_widget_grab_focus (data->row);
+
+  /* When setting the active panel programatically, prevent from
+   * autoselecting the first panel of the new view.
+   */
+  self->autoselect_panel = FALSE;
 
   g_signal_emit_by_name (data->row, "activate");
 }
