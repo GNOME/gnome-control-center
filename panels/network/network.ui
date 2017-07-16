@@ -28,47 +28,67 @@
   <template class="CcNetworkPanel" parent="CcPanel">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="margin">6</property>
+
     <child>
-      <object class="GtkBox" id="main_box">
+      <object class="GtkScrolledWindow">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="spacing">12</property>
-        <property name="orientation">vertical</property>
+        <property name="hscrollbar_policy">never</property>
         <child>
-          <object class="GtkBox">
+          <object class="GtkViewport">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="spacing">3</property>
-            <property name="orientation">vertical</property>
-
-            <!-- Each GtkBox below will contain GtkStacks from the NetDevices -->
+            <property name="shadow_type">none</property>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="spacing">12</property>
+                <property name="margin">18</property>
                 <property name="orientation">vertical</property>
+                <property name="halign">center</property>
+                <property name="valign">start</property>
+
                 <child>
-                  <object class="GtkBox" id="box_wired">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="spacing">12</property>
                     <property name="orientation">vertical</property>
+                    <property name="width_request">350</property>
+
+                    <!-- Each GtkBox below will contain GtkStacks from the NetDevices -->
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkBox" id="box_wired">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox" id="box_vpn">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox" id="box_proxy">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkBox" id="box_vpn">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkBox" id="box_proxy">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                </child>
+
               </object>
             </child>
           </object>
