@@ -54,15 +54,17 @@ struct _CcNetworkPanel
         CcPanel           parent;
 
         GCancellable     *cancellable;
-        GtkListStore     *liststore_devices;
+        GHashTable       *device_to_stack;
+        GPtrArray        *devices;
         NMClient         *client;
         MMManager        *modem_manager;
         GtkSizeGroup     *sizegroup;
         gboolean          updating_device;
 
         /* widgets */
-        GtkStack         *stack;
-        GtkWidget        *treeview;
+        GtkWidget        *box_proxy;
+        GtkWidget        *box_vpn;
+        GtkWidget        *box_wired;
 
         /* wireless dialog stuff */
         CmdlineOperation  arg_operation;
@@ -82,7 +84,7 @@ enum {
         PROP_PARAMETERS
 };
 
-static NetObject *find_in_model_by_id (CcNetworkPanel *panel, const gchar *id, GtkTreeIter *iter_out);
+static NetObject *find_net_object_by_id (CcNetworkPanel *panel, const gchar *id);
 static void handle_argv (CcNetworkPanel *panel);
 
 CC_PANEL_REGISTER (CcNetworkPanel, cc_network_panel)
@@ -210,6 +212,9 @@ cc_network_panel_dispose (GObject *object)
         g_clear_object (&self->client);
         g_clear_object (&self->modem_manager);
 
+        g_clear_pointer (&self->device_to_stack, g_hash_table_destroy);
+        g_clear_pointer (&self->devices, g_ptr_array_unref);
+
         G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
 }
 
@@ -229,175 +234,37 @@ cc_network_panel_get_help_uri (CcPanel *panel)
 	return "help:gnome-help/net";
 }
 
-static NetObject *
-get_selected_object (CcNetworkPanel *panel)
-{
-        GtkTreeSelection *selection;
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-        NetObject *object = NULL;
-
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->treeview));
-        if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
-                return NULL;
-        }
-
-        gtk_tree_model_get (model, &iter,
-                            PANEL_DEVICES_COLUMN_OBJECT, &object,
-                            -1);
-
-        return object;
-}
-
-static void
-select_first_device (CcNetworkPanel *panel)
-{
-        GtkTreePath *path;
-        GtkTreeSelection *selection;
-
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->treeview));
-
-        /* select the first device */
-        path = gtk_tree_path_new_from_string ("0");
-        gtk_tree_selection_select_path (selection, path);
-        gtk_tree_path_free (path);
-}
-
-static void
-select_tree_iter (CcNetworkPanel *panel, GtkTreeIter *iter)
-{
-        GtkTreeSelection *selection;
-
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->treeview));
-
-        gtk_tree_selection_select_iter (selection, iter);
-}
-
 static void
 object_removed_cb (NetObject *object, CcNetworkPanel *panel)
 {
-        gboolean ret;
-        NetObject *object_tmp;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
-        GtkTreeSelection *selection;
+        GtkWidget *stack;
 
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->treeview));
-
-        /* remove device from model */
-        model = GTK_TREE_MODEL (panel->liststore_devices);
-        ret = gtk_tree_model_get_iter_first (model, &iter);
-        if (!ret)
-                return;
-
-        /* get the other elements */
-        do {
-                gtk_tree_model_get (model, &iter,
-                                    PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
-                                    -1);
-                if (g_strcmp0 (net_object_get_id (object),
-                               net_object_get_id (object_tmp)) == 0) {
-                        g_object_unref (object_tmp);
-                        if (gtk_list_store_remove (GTK_LIST_STORE (model), &iter)) {
-                                if (gtk_tree_model_get_iter_first (model, &iter))
-                                        gtk_tree_selection_select_iter (selection, &iter);
-                        }
-                        break;
-                }
-                g_object_unref (object_tmp);
-        } while (gtk_tree_model_iter_next (model, &iter));
+        /* remove device */
+        stack = g_hash_table_lookup (panel->device_to_stack, object);
+        if (stack != NULL)
+                gtk_widget_destroy (stack);
 }
 
 GPtrArray *
 cc_network_panel_get_devices (CcNetworkPanel *panel)
 {
         GPtrArray *devices;
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-        NetObject *object;
+        guint i;
+
+        g_return_val_if_fail (CC_IS_NETWORK_PANEL (panel), NULL);
 
         devices = g_ptr_array_new_with_free_func (g_object_unref);
 
-        model = GTK_TREE_MODEL (panel->liststore_devices);
-        if (!gtk_tree_model_get_iter_first (model, &iter))
-                return devices;
+        for (i = 0; i < panel->devices->len; i++) {
+                NetObject *object = g_ptr_array_index (panel->devices, i);
 
-        do {
-                gtk_tree_model_get (model, &iter,
-                                    PANEL_DEVICES_COLUMN_OBJECT, &object,
-                                    -1);
-                if (NET_IS_DEVICE (object))
-                        g_ptr_array_add (devices, object);
-                else
-                        g_object_unref (object);
-        } while (gtk_tree_model_iter_next (model, &iter));
+                if (!NET_IS_DEVICE (object))
+                        continue;
 
-        return devices;
-}
-
-static gint
-panel_net_object_get_sort_category (NetObject *net_object)
-{
-        if (NET_IS_DEVICE (net_object)) {
-                return panel_device_get_sort_category (net_device_get_nm_device (NET_DEVICE (net_object)));
-        } else if (NET_IS_PROXY (net_object)) {
-                return 9;
-        } else if (NET_IS_VPN (net_object)) {
-                return 5;
+                g_ptr_array_add (devices, g_object_ref (object));
         }
 
-        g_assert_not_reached ();
-}
-
-static gint
-panel_net_object_sort_func (GtkTreeModel *model, GtkTreeIter *a,
-                            GtkTreeIter *b, void *data)
-{
-        g_autoptr(NetObject) obj_a = NULL;
-        g_autoptr(NetObject) obj_b = NULL;
-        gint cat_a, cat_b;
-        const char *title_a, *title_b;
-
-        gtk_tree_model_get (model, a,
-                            PANEL_DEVICES_COLUMN_OBJECT, &obj_a,
-                            -1);
-        gtk_tree_model_get (model, b,
-                            PANEL_DEVICES_COLUMN_OBJECT, &obj_b,
-                            -1);
-
-        cat_a = panel_net_object_get_sort_category (obj_a);
-        cat_b = panel_net_object_get_sort_category (obj_b);
-
-        if (cat_a != cat_b)
-                return cat_a - cat_b;
-
-        title_a = net_object_get_title (obj_a);
-        title_b = net_object_get_title (obj_b);
-
-        if (title_a == title_b)
-                return 0;
-        if (title_a == NULL)
-                return -1;
-        if (title_b == NULL)
-                return 1;
-
-        return g_utf8_collate (title_a, title_b);
-}
-
-static void
-panel_net_object_notify_title_cb (NetObject *net_object, GParamSpec *pspec, CcNetworkPanel *panel)
-{
-        GtkTreeIter iter;
-
-        if (!find_in_model_by_id (panel, net_object_get_id (net_object), &iter))
-                return;
-
-        /* gtk_tree_model_row_changed would not cause the list store to resort.
-         * Instead set the object column to the current value.
-         * See https://bugzilla.gnome.org/show_bug.cgi?id=782737 */
-        gtk_list_store_set (panel->liststore_devices, &iter,
-                            PANEL_DEVICES_COLUMN_OBJECT, net_object,
-                           -1);
+        return devices;
 }
 
 static void
@@ -440,8 +307,7 @@ panel_refresh_device_titles (CcNetworkPanel *panel)
 
 static gboolean
 handle_argv_for_device (CcNetworkPanel *self,
-			NMDevice       *device,
-			GtkTreeIter    *iter)
+			NMDevice       *device)
 {
         GtkWidget *toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
 
@@ -453,10 +319,8 @@ handle_argv_for_device (CcNetworkPanel *self,
                         cc_network_panel_connect_to_3g_network (toplevel, self->client, device);
 
                         reset_command_line_args (self); /* done */
-                        select_tree_iter (self, iter);
                         return TRUE;
                 } else if (self->arg_operation == OPERATION_SHOW_DEVICE) {
-                        select_tree_iter (self, iter);
                         reset_command_line_args (self); /* done */
                         return TRUE;
                 }
@@ -467,8 +331,7 @@ handle_argv_for_device (CcNetworkPanel *self,
 
 static gboolean
 handle_argv_for_connection (CcNetworkPanel *panel,
-                            NMConnection   *connection,
-                            GtkTreeIter    *iter)
+                            NMConnection   *connection)
 {
         if (panel->arg_operation == OPERATION_NULL)
                 return TRUE;
@@ -477,7 +340,6 @@ handle_argv_for_connection (CcNetworkPanel *panel,
 
         if (g_strcmp0 (nm_connection_get_path (connection), panel->arg_device) == 0) {
                 reset_command_line_args (panel);
-                select_tree_iter (panel, iter);
                 return TRUE;
         }
 
@@ -488,31 +350,26 @@ handle_argv_for_connection (CcNetworkPanel *panel,
 static void
 handle_argv (CcNetworkPanel *panel)
 {
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-        gboolean ret;
+        gint i;
 
         if (panel->arg_operation == OPERATION_NULL)
                 return;
 
-        model = GTK_TREE_MODEL (panel->liststore_devices);
-        ret = gtk_tree_model_get_iter_first (model, &iter);
-        while (ret) {
+        for (i = 0; i < panel->devices->len; i++) {
                 GObject *object_tmp;
                 NMDevice *device;
                 NMConnection *connection;
                 gboolean done = FALSE;
 
-                gtk_tree_model_get (model, &iter,
-                                    PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
-                                    -1);
+                object_tmp = g_ptr_array_index (panel->devices, i);
+
                 if (NET_IS_DEVICE (object_tmp)) {
                         g_object_get (object_tmp, "nm-device", &device, NULL);
-                        done = handle_argv_for_device (panel, device, &iter);
+                        done = handle_argv_for_device (panel, device);
                         g_object_unref (device);
                 } else if (NET_IS_VPN (object_tmp)) {
                         g_object_get (object_tmp, "connection", &connection, NULL);
-                        done = handle_argv_for_connection (panel, connection, &iter);
+                        done = handle_argv_for_connection (panel, connection);
                         g_object_unref (connection);
                 }
 
@@ -520,47 +377,40 @@ handle_argv (CcNetworkPanel *panel)
 
                 if (done)
                         return;
-
-                ret = gtk_tree_model_iter_next (model, &iter);
         }
 
         g_debug ("Could not handle argv operation, no matching device yet?");
 }
 
-static void
-state_changed_cb (NMDevice *device,
-                  NMDeviceState new_state,
-                  NMDeviceState old_state,
-                  NMDeviceStateReason reason,
-                  CcNetworkPanel *panel)
+static GtkWidget *
+add_device_stack (CcNetworkPanel *self, NetObject *object)
 {
-        GtkTreeIter iter;
+        GtkWidget *stack;
 
-        if (!find_in_model_by_id (panel, nm_device_get_udi (device), &iter)) {
-                return;
-        }
+        stack = gtk_stack_new ();
+        gtk_widget_show (stack);
+        g_hash_table_insert (self->device_to_stack, object, stack);
 
-        gtk_list_store_set (GTK_LIST_STORE (panel->liststore_devices), &iter,
-                            PANEL_DEVICES_COLUMN_ICON, panel_device_to_icon_name (device, TRUE),
-                           -1);
+        net_object_add_to_stack (object, GTK_STACK (stack), self->sizegroup);
+
+        return stack;
 }
 
-static gboolean
+static void
 panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 {
-        GtkTreeIter iter;
         NMDeviceType type;
         NetDevice *net_device;
         GType device_g_type;
         const char *udi;
 
         if (!nm_device_get_managed (device))
-                goto out;
+                return;
 
         /* do we have an existing object with this id? */
         udi = nm_device_get_udi (device);
-        if (find_in_model_by_id (panel, udi, NULL) != NULL)
-                goto out;
+        if (find_net_object_by_id (panel, udi) != NULL)
+                return;
 
         type = nm_device_get_device_type (device);
 
@@ -586,7 +436,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         case NM_DEVICE_TYPE_BRIDGE:
         /* Don't add VPN devices */
         case NM_DEVICE_TYPE_TUN:
-                goto out;
+                return;
         default:
                 device_g_type = NET_TYPE_DEVICE_SIMPLE;
                 break;
@@ -609,7 +459,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                 if (panel->modem_manager == NULL) {
                         g_warning ("Cannot grab information for modem at %s: No ModemManager support",
                                    nm_device_get_udi (device));
-                        goto out;
+                        return;
                 }
 
                 modem_object = g_dbus_object_manager_get_object (G_DBUS_OBJECT_MANAGER (panel->modem_manager),
@@ -617,7 +467,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                 if (modem_object == NULL) {
                         g_warning ("Cannot grab information for modem at %s: Not found",
                                    nm_device_get_udi (device));
-                        goto out;
+                        return;
                 }
 
                 /* Set the modem object in the NetDeviceMobile */
@@ -628,164 +478,52 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         }
 
         /* add as a panel */
-        if (device_g_type != NET_TYPE_DEVICE)
-                net_object_add_to_stack (NET_OBJECT (net_device), panel->stack, panel->sizegroup);
+        if (device_g_type != NET_TYPE_DEVICE) {
+                GtkWidget *stack;
+
+                stack = add_device_stack (panel, NET_OBJECT (net_device));
+                gtk_container_add (GTK_CONTAINER (panel->box_wired), stack);
+        }
+
+        /* Add to the devices array */
+        g_ptr_array_add (panel->devices, net_device);
 
         g_signal_connect_object (net_device, "removed",
                                  G_CALLBACK (object_removed_cb), panel, 0);
-        gtk_list_store_append (panel->liststore_devices, &iter);
-        gtk_list_store_set (panel->liststore_devices,
-                            &iter,
-                            PANEL_DEVICES_COLUMN_ICON, panel_device_to_icon_name (device, TRUE),
-                            PANEL_DEVICES_COLUMN_OBJECT, net_device,
-                            -1);
-        g_signal_connect (net_device, "notify::title",
-                          G_CALLBACK (panel_net_object_notify_title_cb), panel);
-
-        g_object_unref (net_device);
-        g_signal_connect (device, "state-changed",
-                          G_CALLBACK (state_changed_cb), panel);
-
-out:
-        return FALSE;
 }
 
 static void
 panel_remove_device (CcNetworkPanel *panel, NMDevice *device)
 {
-        gboolean ret;
-        NetObject *object_tmp;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
-
-        /* remove device from model */
-        model = GTK_TREE_MODEL (panel->liststore_devices);
-        ret = gtk_tree_model_get_iter_first (model, &iter);
-        if (!ret)
-                return;
-
-        /* get the other elements */
-        do {
-                gtk_tree_model_get (model, &iter,
-                                    PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
-                                    -1);
-                if (g_strcmp0 (net_object_get_id (object_tmp),
-                               nm_device_get_udi (device)) == 0) {
-                        gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
-                        g_object_unref (object_tmp);
-                        break;
-                }
-                g_object_unref (object_tmp);
-        } while (gtk_tree_model_iter_next (model, &iter));
-}
-
-static void
-get_object_title (GtkTreeViewColumn *column,
-                  GtkCellRenderer   *cell,
-                  GtkTreeModel      *model,
-                  GtkTreeIter       *iter,
-                  gpointer           data)
-{
         NetObject *object;
 
-        gtk_tree_model_get (model, iter,
-                            PANEL_DEVICES_COLUMN_OBJECT, &object,
-                            -1);
-        if (!object)
+        /* remove device from array */
+        object = find_net_object_by_id (panel, nm_device_get_udi (device));
+
+        if (object == NULL)
                 return;
 
-        g_object_set (cell, "text", net_object_get_title (object), NULL);
-        g_object_unref (object);
-}
-
-static void
-panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
-{
-        GtkCellRenderer *renderer;
-        GtkTreeViewColumn *column;
-
-        /* image */
-        renderer = gtk_cell_renderer_pixbuf_new ();
-        g_object_set (renderer,
-                      "width", 32,
-                      "xalign", 1.0,
-                      "stock-size", GTK_ICON_SIZE_MENU,
-                      "follow-state", TRUE,
-                      NULL);
-        gtk_cell_renderer_set_padding (renderer, 4, 10);
-
-        column = gtk_tree_view_column_new_with_attributes ("icon", renderer,
-                                                           "icon-name", PANEL_DEVICES_COLUMN_ICON,
-                                                           NULL);
-        gtk_tree_view_append_column (treeview, column);
-
-        /* column for text */
-        renderer = gtk_cell_renderer_text_new ();
-        g_object_set (renderer,
-                      "wrap-mode", PANGO_WRAP_WORD,
-                      "ellipsize", PANGO_ELLIPSIZE_END,
-                      NULL);
-        column = gtk_tree_view_column_new_with_attributes ("title", renderer, NULL);
-        gtk_tree_view_column_set_cell_data_func (GTK_TREE_VIEW_COLUMN (column),
-                                                 renderer,
-                                                 get_object_title,
-                                                 NULL, NULL);
-        gtk_tree_view_column_set_sort_column_id (column, PANEL_DEVICES_COLUMN_OBJECT);
-        gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (panel->liststore_devices),
-                                         PANEL_DEVICES_COLUMN_OBJECT,
-                                         panel_net_object_sort_func, NULL, NULL);
-        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (panel->liststore_devices),
-                                              PANEL_DEVICES_COLUMN_OBJECT,
-                                              GTK_SORT_ASCENDING);
-        gtk_tree_view_append_column (treeview, column);
-        gtk_tree_view_column_set_expand (column, TRUE);
-}
-
-static void
-nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *panel)
-{
-        const gchar *needle;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
-        NetObject *object = NULL;
-
-        if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
-                g_debug ("no row selected");
-                return;
-        }
-
-        /* find the widget in the stack that matches the object ID */
-        object = get_selected_object (panel);
-        needle = net_object_get_id (object);
-
-        gtk_stack_set_visible_child_name (panel->stack, needle);
-
-        g_object_unref (object);
+        g_ptr_array_remove (panel->devices, object);
 }
 
 static void
 panel_add_proxy_device (CcNetworkPanel *panel)
 {
-        GtkTreeIter iter;
+        GtkWidget *stack;
         NetProxy *proxy;
 
-        /* add proxy to stack */
         proxy = net_proxy_new ();
-        net_object_add_to_stack (NET_OBJECT (proxy), panel->stack, panel->sizegroup);
+
+        /* add proxy to stack */
+        stack = add_device_stack (panel, NET_OBJECT (proxy));
+        gtk_container_add (GTK_CONTAINER (panel->box_proxy), stack);
 
         /* add proxy to device list */
         net_object_set_title (NET_OBJECT (proxy), _("Network proxy"));
-        gtk_list_store_append (panel->liststore_devices, &iter);
-        gtk_list_store_set (panel->liststore_devices,
-                            &iter,
-                            PANEL_DEVICES_COLUMN_ICON, "preferences-system-network-symbolic",
-                            PANEL_DEVICES_COLUMN_OBJECT, proxy,
-                            -1);
 
         /* NOTE: No connect to notify::title here as it is guaranteed to not
          *       be changed by anyone.*/
-
-        g_object_unref (proxy);
+        g_ptr_array_add (panel->devices, proxy);
 }
 
 static void
@@ -844,13 +582,11 @@ manager_running (NMClient *client, GParamSpec *pspec, gpointer user_data)
         const GPtrArray *devices;
         int i;
         NMDevice *device_tmp;
-        gboolean selected = FALSE;
         CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
 
         /* clear all devices we added */
         if (!nm_client_get_nm_running (client)) {
                 g_debug ("NM disappeared");
-                gtk_list_store_clear (panel->liststore_devices);
                 panel_add_proxy_device (panel);
                 goto out;
         }
@@ -863,14 +599,9 @@ manager_running (NMClient *client, GParamSpec *pspec, gpointer user_data)
         }
         for (i = 0; i < devices->len; i++) {
                 device_tmp = g_ptr_array_index (devices, i);
-                selected = panel_add_device (panel, device_tmp) || selected;
+                panel_add_device (panel, device_tmp);
         }
 out:
-        if (!selected) {
-                /* select the first device */
-                select_first_device (panel);
-        }
-
         panel_refresh_device_titles (panel);
 
         g_debug ("Calling handle_argv() after cold-plugging devices");
@@ -878,50 +609,35 @@ out:
 }
 
 static NetObject *
-find_in_model_by_id (CcNetworkPanel *panel, const gchar *id, GtkTreeIter *iter_out)
+find_net_object_by_id (CcNetworkPanel *panel, const gchar *id)
 {
-        gboolean ret;
         NetObject *object_tmp;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
         NetObject *object = NULL;
+        guint i;
 
-        /* find in model */
-        model = GTK_TREE_MODEL (panel->liststore_devices);
-        ret = gtk_tree_model_get_iter_first (model, &iter);
-        if (!ret)
-                goto out;
+        for (i = 0; i < panel->devices->len; i++) {
+                object_tmp = g_ptr_array_index (panel->devices, i);
 
-        /* get the other elements */
-        ret = FALSE;
-        do {
-                gtk_tree_model_get (model, &iter,
-                                    PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
-                                    -1);
-                if (object_tmp != NULL) {
-                        g_debug ("got %s", net_object_get_id (object_tmp));
-                        if (g_strcmp0 (net_object_get_id (object_tmp), id) == 0)
-                                object = object_tmp;
-                        g_object_unref (object_tmp);
+                if (g_strcmp0 (net_object_get_id (object_tmp), id) == 0) {
+                        object = object_tmp;
+                        break;
                 }
-        } while (object == NULL && gtk_tree_model_iter_next (model, &iter));
-out:
-        if (iter_out)
-                *iter_out = iter;
+        }
+
         return object;
 }
 
 static void
 panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 {
+        GtkWidget *stack;
         gchar *title;
-        GtkTreeIter iter;
         NetVpn *net_vpn;
         const gchar *id;
 
         /* does already exist */
         id = nm_connection_get_path (connection);
-        if (find_in_model_by_id (panel, id, NULL) != NULL)
+        if (find_net_object_by_id (panel, id) != NULL)
                 return;
 
         /* add as a VPN object */
@@ -936,22 +652,17 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
                                  G_CALLBACK (object_removed_cb), panel, 0);
 
         /* add as a panel */
-        net_object_add_to_stack (NET_OBJECT (net_vpn), panel->stack, panel->sizegroup);
+        stack = add_device_stack (panel, NET_OBJECT (net_vpn));
+        gtk_container_add (GTK_CONTAINER (panel->box_vpn), stack);
 
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (connection));
 
         net_object_set_title (NET_OBJECT (net_vpn), title);
-        gtk_list_store_append (panel->liststore_devices, &iter);
-        gtk_list_store_set (panel->liststore_devices,
-                            &iter,
-                            PANEL_DEVICES_COLUMN_ICON, "network-vpn-symbolic",
-                            PANEL_DEVICES_COLUMN_OBJECT, net_vpn,
-                            -1);
-        g_signal_connect (net_vpn, "notify::title",
-                          G_CALLBACK (panel_net_object_notify_title_cb), panel);
+
+        /* store in the devices array */
+        g_ptr_array_add (panel->devices, net_vpn);
 
         g_free (title);
-        g_object_unref (net_vpn);
 }
 
 static void
@@ -1026,41 +737,6 @@ panel_check_network_manager_version (CcNetworkPanel *panel)
 }
 
 static void
-editor_done (NetConnectionEditor *editor,
-             gboolean             success,
-             gpointer             user_data)
-{
-        g_object_unref (editor);
-}
-
-static void
-add_connection_cb (GtkToolButton *button, CcNetworkPanel *panel)
-{
-        NetConnectionEditor *editor;
-        GtkWindow *toplevel;
-
-        toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (panel)));
-        editor = net_connection_editor_new (toplevel, NULL, NULL, NULL, panel->client);
-        g_signal_connect (editor, "done", G_CALLBACK (editor_done), panel);
-        net_connection_editor_run (editor);
-}
-
-static void
-remove_connection (GtkToolButton *button, CcNetworkPanel *panel)
-{
-        NetObject *object;
-
-        /* get current device */
-        object = get_selected_object (panel);
-        if (object == NULL)
-                return;
-
-        /* delete the object */
-        net_object_delete (object);
-        g_object_unref (object);
-}
-
-static void
 on_toplevel_map (GtkWidget      *widget,
                  CcNetworkPanel *panel)
 {
@@ -1088,20 +764,16 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, liststore_devices);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, stack);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_proxy);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_vpn);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, sizegroup);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, treeview);
-
-        gtk_widget_class_bind_template_callback (widget_class, add_connection_cb);
-        gtk_widget_class_bind_template_callback (widget_class, remove_connection);
 }
 
 static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
         GError *error = NULL;
-        GtkTreeSelection *selection;
         GtkWidget *toplevel;
         GDBusConnection *system_bus;
         const GPtrArray *connections;
@@ -1112,12 +784,8 @@ cc_network_panel_init (CcNetworkPanel *panel)
         gtk_widget_init_template (GTK_WIDGET (panel));
 
         panel->cancellable = g_cancellable_new ();
-
-        panel_add_devices_columns (panel, GTK_TREE_VIEW (panel->treeview));
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->treeview));
-        gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
-        g_signal_connect (selection, "changed",
-                          G_CALLBACK (nm_devices_treeview_clicked_cb), panel);
+        panel->devices = g_ptr_array_new_with_free_func (g_object_unref);
+        panel->device_to_stack = g_hash_table_new (g_direct_hash, g_direct_equal);
 
         /* add the virtual proxy device */
         panel_add_proxy_device (panel);
