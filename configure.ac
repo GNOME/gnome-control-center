@@ -191,6 +191,7 @@ if test "x$have_wayland" = xyes ; then
 		AC_MSG_ERROR([udev is required for Wayland support])
 	fi
 fi
+AM_CONDITIONAL(HAVE_WAYLAND, [test "x$have_wayland" = "xyes"])
 
 # Panels that must be built on Linux systems
 linux_error_or_warn()
