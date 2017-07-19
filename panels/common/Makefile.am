@@ -62,7 +62,7 @@ libdevice_la_SOURCES =			\
 libdevice_la_LIBADD =			\
 	$(DEVICES_LIBS)
 
-if HAVE_UDEV
+if HAVE_WAYLAND
 AM_CPPFLAGS += $(UDEV_CFLAGS)
 libdevice_la_LIBADD += $(UDEV_LIBS)
 libdevice_la_SOURCES +=			\
