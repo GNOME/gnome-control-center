@@ -857,7 +857,7 @@ forgotten_cb (GObject *source_object,
 
         if (!nm_remote_connection_delete_finish (connection, res, &error)) {
                 if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-                        g_warning ("Failed to delete conneciton %s: %s",
+                        g_warning ("Failed to delete connection %s: %s",
                                    nm_connection_get_id (NM_CONNECTION (connection)),
                                    error->message);
                 g_error_free (error);
