@@ -914,7 +914,7 @@ pp_printer_entry_new (cups_dest_t  printer,
 
   self->printer_make_and_model = sanitize_printer_model (printer_make_and_model);
 
-  if (self->printer_make_and_model == NULL && self->printer_make_and_model[0] != '\0')
+  if (self->printer_make_and_model == NULL || self->printer_make_and_model[0] != '\0')
     {
       gtk_widget_hide (GTK_WIDGET (self->printer_model_label));
       gtk_widget_hide (GTK_WIDGET (self->printer_model));
