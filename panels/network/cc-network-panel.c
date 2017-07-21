@@ -147,7 +147,7 @@ variant_av_to_string_array (GVariant *array)
         count = g_variant_iter_init (&iter, array);
         strv = g_ptr_array_sized_new (count + 1);
         while (g_variant_iter_next (&iter, "v", &v)) {
-                g_ptr_array_add (strv, (gpointer *)g_variant_get_string (v, NULL));
+                g_ptr_array_add (strv, (gpointer)g_variant_get_string (v, NULL));
                 g_variant_unref (v);
         }
         g_ptr_array_add (strv, NULL); /* NULL-terminate the strv data array */
