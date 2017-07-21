@@ -737,6 +737,27 @@ panel_check_network_manager_version (CcNetworkPanel *panel)
 }
 
 static void
+editor_done (NetConnectionEditor *editor,
+             gboolean             success,
+             gpointer             user_data)
+{
+        g_object_unref (editor);
+}
+
+static void
+create_connection_cb (GtkWidget      *button,
+                      CcNetworkPanel *self)
+{
+        NetConnectionEditor *editor;
+        GtkWindow *toplevel;
+
+        toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+        editor = net_connection_editor_new (toplevel, NULL, NULL, NULL, self->client);
+        g_signal_connect (editor, "done", G_CALLBACK (editor_done), self);
+        net_connection_editor_run (editor);
+}
+
+static void
 on_toplevel_map (GtkWidget      *widget,
                  CcNetworkPanel *panel)
 {
@@ -768,6 +789,8 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_vpn);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, sizegroup);
+
+        gtk_widget_class_bind_template_callback (widget_class, create_connection_cb);
 }
 
 static void
