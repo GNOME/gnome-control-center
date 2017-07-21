@@ -72,10 +72,11 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkBox" id="box_vpn">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
+                            <property name="spacing">6</property>
 
                             <!-- VPN header -->
                             <child>
@@ -105,6 +106,46 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="icon_name">list-add-symbolic</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkFrame">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child>
+                                  <object class="GtkBox" id="box_vpn">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="orientation">vertical</property>
+
+                                    <!-- "Not set up" row -->
+                                    <child>
+                                      <object class="GtkListBox" id="empty_listbox">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="selection_mode">none</property>
+                                        <child>
+                                          <object class="GtkListBoxRow">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="activatable">False</property>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                                <property name="hexpand">True</property>
+                                                <property name="margin">16</property>
+                                                <property name="xalign">0</property>
+                                                <property name="ellipsize">end</property>
+                                                <property name="label" translatable="yes">Not set up</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </child>
                                       </object>
                                     </child>
                                   </object>
