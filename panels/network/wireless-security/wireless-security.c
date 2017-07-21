@@ -172,6 +172,8 @@ wireless_security_init (gsize obj_size,
 	g_return_val_if_fail (ui_resource != NULL, NULL);
 	g_return_val_if_fail (ui_widget_name != NULL, NULL);
 
+	g_type_ensure (WIRELESS_TYPE_SECURITY);
+
 	sec = g_slice_alloc0 (obj_size);
 	g_assert (sec);
 
