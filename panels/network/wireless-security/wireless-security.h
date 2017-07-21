@@ -25,6 +25,8 @@
 
 #include <gtk/gtk.h>
 
+#define WIRELESS_TYPE_SECURITY (wireless_security_get_type ())
+
 typedef struct _WirelessSecurity WirelessSecurity;
 
 typedef void (*WSChangedFunc) (WirelessSecurity *sec, gpointer user_data);
