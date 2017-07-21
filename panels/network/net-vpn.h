@@ -52,6 +52,8 @@ struct _NetVpnClass
 };
 
 GType            net_vpn_get_type               (void);
+void             net_vpn_set_show_separator     (NetVpn   *self,
+                                                 gboolean  show_separator);
 
 G_END_DECLS
 

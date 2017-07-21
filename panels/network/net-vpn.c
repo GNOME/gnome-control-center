@@ -51,6 +51,16 @@ enum {
 
 G_DEFINE_TYPE (NetVpn, net_vpn, NET_TYPE_OBJECT)
 
+void
+net_vpn_set_show_separator (NetVpn   *self,
+                            gboolean  show_separator)
+{
+        GtkWidget *separator;
+
+        separator = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "separator"));
+        gtk_widget_set_visible (separator, show_separator);
+}
+
 static void
 connection_vpn_state_changed_cb (NMVpnConnection *connection,
                                  NMVpnConnectionState state,
@@ -136,98 +146,6 @@ net_vpn_get_state (NetVpn *vpn)
         return nm_vpn_connection_get_vpn_state (NM_VPN_CONNECTION (priv->connection));
 }
 
-/* VPN parameters can be found at:
- * http://git.gnome.org/browse/network-manager-openvpn/tree/src/nm-openvpn-service.h
- * http://git.gnome.org/browse/network-manager-vpnc/tree/src/nm-vpnc-service.h
- * http://git.gnome.org/browse/network-manager-pptp/tree/src/nm-pptp-service.h
- * http://git.gnome.org/browse/network-manager-openconnect/tree/src/nm-openconnect-service.h
- * http://git.gnome.org/browse/network-manager-openswan/tree/src/nm-openswan-service.h
- * See also 'properties' directory in these plugins.
- */
-static const gchar *
-get_vpn_key_gateway (const char *vpn_type)
-{
-        if (g_strcmp0 (vpn_type, "openvpn") == 0)     return "remote";
-        if (g_strcmp0 (vpn_type, "vpnc") == 0)        return "IPSec gateway";
-        if (g_strcmp0 (vpn_type, "pptp") == 0)        return "gateway";
-        if (g_strcmp0 (vpn_type, "openconnect") == 0) return "gateway";
-        if (g_strcmp0 (vpn_type, "openswan") == 0)    return "right";
-        return "";
-}
-
-static const gchar *
-get_vpn_key_group (const char *vpn_type)
-{
-        if (g_strcmp0 (vpn_type, "openvpn") == 0)     return "";
-        if (g_strcmp0 (vpn_type, "vpnc") == 0)        return "IPSec ID";
-        if (g_strcmp0 (vpn_type, "pptp") == 0)        return "";
-        if (g_strcmp0 (vpn_type, "openconnect") == 0) return "";
-        if (g_strcmp0 (vpn_type, "openswan") == 0)    return "";
-        return "";
-}
-
-static const gchar *
-get_vpn_key_username (const char *vpn_type)
-{
-        if (g_strcmp0 (vpn_type, "openvpn") == 0)     return "username";
-        if (g_strcmp0 (vpn_type, "vpnc") == 0)        return "Xauth username";
-        if (g_strcmp0 (vpn_type, "pptp") == 0)        return "user";
-        if (g_strcmp0 (vpn_type, "openconnect") == 0) return "username";
-        if (g_strcmp0 (vpn_type, "openswan") == 0)    return "leftxauthusername";
-        return "";
-}
-
-static const gchar *
-get_vpn_key_group_password (const char *vpn_type)
-{
-        if (g_strcmp0 (vpn_type, "openvpn") == 0)     return "";
-        if (g_strcmp0 (vpn_type, "vpnc") == 0)        return "Xauth password";
-        if (g_strcmp0 (vpn_type, "pptp") == 0)        return "";
-        if (g_strcmp0 (vpn_type, "openconnect") == 0) return "";
-        if (g_strcmp0 (vpn_type, "openswan") == 0)    return "";
-        return "";
-}
-
-static const gchar *
-net_vpn_get_gateway (NetVpn *vpn)
-{
-        NetVpnPrivate *priv = vpn->priv;
-        const gchar *key;
-
-        key = get_vpn_key_gateway (priv->service_type);
-        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), key);
-}
-
-static const gchar *
-net_vpn_get_id (NetVpn *vpn)
-{
-        NetVpnPrivate *priv = vpn->priv;
-        const gchar *key;
-
-        key = get_vpn_key_group (priv->service_type);
-        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), key);
-}
-
-static const gchar *
-net_vpn_get_username (NetVpn *vpn)
-{
-        NetVpnPrivate *priv = vpn->priv;
-        const gchar *key;
-
-        key = get_vpn_key_username (priv->service_type);
-        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), key);
-}
-
-static const gchar *
-net_vpn_get_password (NetVpn *vpn)
-{
-        NetVpnPrivate *priv = vpn->priv;
-        const gchar *key;
-
-        key = get_vpn_key_group_password (priv->service_type);
-        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), key);
-}
-
 static void
 vpn_proxy_delete (NetObject *object)
 {
@@ -246,10 +164,6 @@ vpn_proxy_add_to_stack (NetObject    *object,
 
         /* add widgets to size group */
         widget = GTK_WIDGET (gtk_builder_get_object (vpn->priv->builder,
-                                                     "heading_group_password"));
-        gtk_size_group_add_widget (heading_size_group, widget);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (vpn->priv->builder,
                                                      "vbox9"));
         gtk_stack_add_named (stack, widget, net_object_get_id (object));
         return widget;
@@ -260,7 +174,6 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
 {
         GtkWidget *widget;
         GtkWidget *sw;
-        const gchar *status;
         NetVpnPrivate *priv = vpn->priv;
         const GPtrArray *acs;
         NMActiveConnection *a;
@@ -268,10 +181,6 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
         NMVpnConnectionState state;
         gchar *title;
         NMClient *client;
-
-        sw = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                 "device_off_switch"));
-        gtk_widget_set_visible (sw, TRUE);
 
         /* update title */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -318,40 +227,12 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
                 }
         }
 
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "label_status"));
-        status = panel_vpn_state_to_localized_string (state);
-        gtk_label_set_label (GTK_LABEL (widget), status);
         priv->updating_device = TRUE;
+        sw = GTK_WIDGET (gtk_builder_get_object (priv->builder, "device_off_switch"));
         gtk_switch_set_active (GTK_SWITCH (sw),
                                state != NM_VPN_CONNECTION_STATE_FAILED &&
                                state != NM_VPN_CONNECTION_STATE_DISCONNECTED);
         priv->updating_device = FALSE;
-
-        /* service type */
-        panel_set_device_widget_details (vpn->priv->builder,
-                                         "service_type",
-                                         vpn->priv->service_type);
-
-        /* gateway */
-        panel_set_device_widget_details (vpn->priv->builder,
-                                         "gateway",
-                                         net_vpn_get_gateway (vpn));
-
-        /* groupname */
-        panel_set_device_widget_details (vpn->priv->builder,
-                                         "group_name",
-                                         net_vpn_get_id (vpn));
-
-        /* username */
-        panel_set_device_widget_details (vpn->priv->builder,
-                                         "username",
-                                         net_vpn_get_username (vpn));
-
-        /* password */
-        panel_set_device_widget_details (vpn->priv->builder,
-                                         "group_password",
-                                         net_vpn_get_password (vpn));
 }
 
 static void

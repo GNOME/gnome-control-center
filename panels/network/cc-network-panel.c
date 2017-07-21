@@ -65,6 +65,7 @@ struct _CcNetworkPanel
         GtkWidget        *box_proxy;
         GtkWidget        *box_vpn;
         GtkWidget        *box_wired;
+        GtkWidget        *empty_listbox;
 
         /* wireless dialog stuff */
         CmdlineOperation  arg_operation;
@@ -382,6 +383,28 @@ handle_argv (CcNetworkPanel *panel)
         g_debug ("Could not handle argv operation, no matching device yet?");
 }
 
+/* HACK: this function is basically a workaround. We don't have a single
+ * listbox in the VPN section, thus we need to track the separators and the
+ * stub row manually.
+ */
+static void
+update_vpn_section (CcNetworkPanel *self)
+{
+        guint i, n_vpns;
+
+        for (i = 0, n_vpns = 0; i < self->devices->len; i++) {
+                NetObject *net_object = g_ptr_array_index (self->devices, i);
+
+                if (!NET_IS_VPN (net_object))
+                        continue;
+
+                net_vpn_set_show_separator (NET_VPN (net_object), n_vpns > 0);
+                n_vpns++;
+        }
+
+        gtk_widget_set_visible (self->empty_listbox, n_vpns == 0);
+}
+
 static GtkWidget *
 add_device_stack (CcNetworkPanel *self, NetObject *object)
 {
@@ -504,6 +527,9 @@ panel_remove_device (CcNetworkPanel *panel, NMDevice *device)
                 return;
 
         g_ptr_array_remove (panel->devices, object);
+
+        /* update vpn widgets */
+        update_vpn_section (panel);
 }
 
 static void
@@ -663,6 +689,9 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         g_ptr_array_add (panel->devices, net_vpn);
 
         g_free (title);
+
+        /* update vpn widgets */
+        update_vpn_section (panel);
 }
 
 static void
@@ -788,6 +817,7 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_proxy);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_vpn);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, empty_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, sizegroup);
 
         gtk_widget_class_bind_template_callback (widget_class, create_connection_cb);
