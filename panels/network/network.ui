@@ -43,19 +43,26 @@
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="spacing">12</property>
-                <property name="margin">18</property>
-                <property name="orientation">vertical</property>
-                <property name="halign">center</property>
+                <property name="orientation">horizontal</property>
                 <property name="valign">start</property>
+
+                <!-- Stub box -->
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                  </object>
+                </child>
 
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
                     <property name="spacing">12</property>
+                    <property name="margin">18</property>
                     <property name="orientation">vertical</property>
-                    <property name="width_request">350</property>
 
                     <!-- Each GtkBox below will contain GtkStacks from the NetDevices -->
                     <child>
@@ -163,6 +170,15 @@
                         </child>
                       </object>
                     </child>
+                  </object>
+                </child>
+
+                <!-- Stub box -->
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
                   </object>
                 </child>
 
