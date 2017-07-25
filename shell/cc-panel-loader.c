@@ -123,9 +123,9 @@ cc_panel_loader_get_panels (void)
 static int
 parse_categories (GDesktopAppInfo *app)
 {
-  const char *categories;
-  char **split;
-  int retval;
+  GStrv split;
+  const gchar *categories;
+  gint retval;
 
   categories = g_desktop_app_info_get_categories (app);
   split = g_strsplit (categories, ";", -1);
@@ -175,23 +175,21 @@ parse_categories (GDesktopAppInfo *app)
 void
 cc_panel_loader_fill_model (CcShellModel *model)
 {
-  int i;
+  guint i;
 
   for (i = 0; i < G_N_ELEMENTS (all_panels); i++)
     {
-      GDesktopAppInfo *app;
-      char *desktop_name;
-      int category;
+      g_autoptr (GDesktopAppInfo) app;
+      g_autofree gchar *desktop_name = NULL;
+      gint category;
 
       desktop_name = g_strconcat ("gnome-", all_panels[i].name,
                                   "-panel.desktop", NULL);
       app = g_desktop_app_info_new (desktop_name);
-      g_free (desktop_name);
 
-      if (app == NULL)
+      if (!app)
         {
-          g_warning ("Ignoring broken panel %s (missing desktop file)",
-                     all_panels[i].name);
+          g_warning ("Ignoring broken panel %s (missing desktop file)", all_panels[i].name);
           continue;
         }
 
@@ -204,8 +202,6 @@ cc_panel_loader_fill_model (CcShellModel *model)
        */
       if (category != CC_CATEGORY_HIDDEN)
         cc_shell_model_add_item (model, category, G_APP_INFO (app), all_panels[i].name);
-
-      g_object_unref (app);
     }
 }
 
