@@ -1,0 +1,19 @@
+#!/bin/sh
+
+cd @working_dir@
+
+export FILES="@source_files@"
+export DIR="@input_dir@"
+
+@program@ &&
+patch -p4 < @source_patch@ &&
+git add @source_files@ &&
+git commit -m "@source_message@"
+
+export FILES="@resource_data@"
+export DIR="@input_dir@"
+
+@program@ &&
+patch -p4 < @resource_patch@ &&
+git add @resource_data@ &&
+git commit -m "@resource_message@"

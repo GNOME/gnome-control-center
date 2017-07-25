@@ -61,7 +61,7 @@ AM_CPPFLAGS   = $(PANEL_CFLAGS) \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
 CLEANFILES = $(Desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
-EXTRA_DIST = $(resource_files) display.gresource.xml
+EXTRA_DIST = $(resource_files) display.gresource.xml meson.build icons/meson.build
 
 if MAINTAINER_MODE
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor

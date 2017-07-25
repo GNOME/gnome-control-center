@@ -116,6 +116,7 @@ EXTRA_DIST =				\
 	$(polkit_in_files)		\
 	$(resource_files)		\
 	user-accounts.gresource.xml	\
+	meson.build			\
 	$(NULL)
 
 CLEANFILES =				\

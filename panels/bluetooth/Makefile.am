@@ -33,6 +33,6 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 CLEANFILES = $(desktop_DATA) $(BUILT_SOURCES)
-EXTRA_DIST = $(man_MANS) $(desktop_in_in_files) $(resource_files) bluetooth.gresource.xml
+EXTRA_DIST = $(man_MANS) $(desktop_in_in_files) $(resource_files) bluetooth.gresource.xml meson.build
 
 -include $(top_srcdir)/git.mk

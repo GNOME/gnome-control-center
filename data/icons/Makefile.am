@@ -24,6 +24,7 @@ EXTRA_DIST = \
 	$(public_icons)		\
 	$(private_icons)	\
 	$(noinst_DATA)		\
+	meson.build		\
 	$(NULL)
 
 ###############################################################################

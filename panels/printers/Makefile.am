@@ -73,7 +73,7 @@ desktop_in_files = gnome-printers-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
-EXTRA_DIST = $(resource_files) printers.gresource.xml
+EXTRA_DIST = $(resource_files) printers.gresource.xml meson.build
 
 noinst_PROGRAMS = $(TEST_PROGS)
 TEST_PROGS += test-shift test-canonicalization

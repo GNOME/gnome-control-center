@@ -46,7 +46,7 @@ service_in_files = 				\
 org.gnome.ControlCenter.SearchProvider.service: org.gnome.ControlCenter.SearchProvider.service.in Makefile
 	$(AM_V_GEN) sed -e "s|\@libexecdir\@|$(libexecdir)|" $< > $@
 
-EXTRA_DIST = $(service_in_files) org.gnome.ShellSearchProvider2.xml
+EXTRA_DIST = $(service_in_files) org.gnome.ShellSearchProvider2.xml meson.build
 
 searchproviderdir = $(datadir)/gnome-shell/search-providers
 dist_searchprovider_DATA = gnome-control-center-search-provider.ini

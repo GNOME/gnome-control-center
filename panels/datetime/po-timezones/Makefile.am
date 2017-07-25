@@ -28,7 +28,7 @@ install: $(CATALOGS)
 		fi; \
 	done
 
-EXTRA_DIST=$(wildcard *.po)
+EXTRA_DIST=$(wildcard *.po) meson.build
 
 CLEANFILES = $(ALL_CATALOGS)
 

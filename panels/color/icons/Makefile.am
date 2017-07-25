@@ -1,5 +1,7 @@
 SUBDIRS = scalable 16x16 22x22 24x24 32x32 48x48 64x64 256x256
 
+EXTRA_DIST = meson.build
+
 if MAINTAINER_MODE
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(pkgdatadir)/icons/hicolor

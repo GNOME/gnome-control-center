@@ -67,6 +67,6 @@ update-from-nma:
 	      git add $(resource_files) && \
 	      git commit -m "network: Update wireless-security UI from network-manager-applet"
 
-EXTRA_DIST = $(resource_files) wireless-security.gresource.xml nm-connection-editor-to-network-panel.patch nm-connection-editor-ui-to-network-panel.patch
+EXTRA_DIST = $(resource_files) wireless-security.gresource.xml nm-connection-editor-to-network-panel.patch nm-connection-editor-ui-to-network-panel.patch meson.build
 
 -include $(top_srcdir)/git.mk

@@ -6,7 +6,9 @@ appdata_in_files =						\
 
 test:
 
-EXTRA_DIST = $(appdata_in_files)
+EXTRA_DIST =			\
+	$(appdata_in_files)	\
+	meson.build
 
 CLEANFILES =							\
 	gnome-control-center.appdata.xml

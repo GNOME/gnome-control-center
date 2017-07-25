@@ -64,6 +64,6 @@ update-from-gsd:
 	git commit -m "info: Update from gnome-settings-daemon" $(SPACEFILES)
 
 CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
-EXTRA_DIST = $(resource_files) info.gresource.xml info-cleanup-test.txt
+EXTRA_DIST = $(resource_files) info.gresource.xml info-cleanup-test.txt meson.build
 
 -include $(top_srcdir)/git.mk

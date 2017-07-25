@@ -17,7 +17,7 @@ metadata_DATA = $(metadata_in_files:.xml.in=.xml)
 noinst_DATA = gnome-sounds-default.xml.in
 CLEANFILES = gnome-sounds-default.xml gnome-sounds-default.xml.in
 
-EXTRA_DIST = $(sound_DATA) gnome-sounds-default.xml.in.in
+EXTRA_DIST = $(sound_DATA) gnome-sounds-default.xml.in.in meson.build
 
 gnome-sounds-default.xml.in: gnome-sounds-default.xml.in.in Makefile
 	$(AM_V_GEN)sed -e 's^\@datadir\@^$(datadir)^g' < $(srcdir)/gnome-sounds-default.xml.in.in > gnome-sounds-default.xml.in.tmp \

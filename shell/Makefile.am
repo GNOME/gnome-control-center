@@ -144,7 +144,9 @@ EXTRA_DIST =					\
 	panel-list.ui				\
 	window.ui				\
 	$(resource_files)			\
-	list-panel.sh
+	list-panel.sh				\
+	meson.build				\
+	completions/meson.build
 
 CLEANFILES = $(BUILT_SOURCES) $(completion_DATA) $(servicefile_DATA)
 DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in

@@ -70,6 +70,7 @@ EXTRA_DIST = $(xml_in_files) \
 	gnome-keybindings.loc \
 	gnome-keybindings.pc.in \
 	$(resource_files) \
-	keyboard.gresource.xml
+	keyboard.gresource.xml \
+	meson.build
 
 -include $(top_srcdir)/git.mk

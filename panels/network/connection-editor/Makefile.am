@@ -51,6 +51,6 @@ net-connection-editor-resources.h: connection-editor.gresource.xml $(resource_fi
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name net_connection_editor $<
 
 EXTRA_DIST = \
-	$(resource_files) connection-editor.gresource.xml
+	$(resource_files) connection-editor.gresource.xml meson.build
 
 -include $(top_srcdir)/git.mk

@@ -79,7 +79,7 @@ cc-common-resources.h: common.gresource.xml $(resource_files)
 rulesdir = $(datadir)/polkit-1/rules.d/
 rules_DATA = gnome-control-center.rules
 
-EXTRA_DIST = $(rules_DATA) $(resource_files) common.gresource.xml
+EXTRA_DIST = $(rules_DATA) $(resource_files) common.gresource.xml meson.build
 CLEANFILES = $(BUILT_SOURCES) $(GSD_COMMON_ENUM_FILES)
 
 INPUTDIR=$(top_srcdir)/../gnome-settings-daemon/plugins/common/

@@ -44,4 +44,6 @@ test_calibrator_SOURCES =		\
 test_calibrator_CPPFLAGS = $(AM_CPPFLAGS)
 test_calibrator_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS) $(LIBM)
 
+EXTRA_DIST = meson.build
+
 -include $(top_srcdir)/git.mk

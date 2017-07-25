@@ -109,6 +109,8 @@ EXTRA_DIST =				\
 	timedated1-interface.xml	\
 	$(polkit_in_files)		\
 	$(resource_files)		\
-	datetime.gresource.xml
+	datetime.gresource.xml		\
+	meson.build			\
+	icons/meson.build
 
 -include $(top_srcdir)/git.mk

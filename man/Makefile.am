@@ -14,7 +14,9 @@ man_MANS = \
 
 xml_files = $(man_MANS:.1=.xml)
 
-EXTRA_DIST = $(xml_files)
+EXTRA_DIST = \
+	$(xml_files) \
+	meson.build
 
 DISTCLEANFILES = $(man_MANS)
 

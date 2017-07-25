@@ -76,6 +76,6 @@ desktop_in_files = gnome-sharing-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(polkit_policy_DATA) $(polkit_policy_in_files) $(BUILT_SOURCES)
-EXTRA_DIST = $(resource_files) sharing.gresource.xml org.gnome.controlcenter.remote-login-helper.policy.in.in org.gnome.SettingsDaemon.Sharing.xml
+EXTRA_DIST = $(resource_files) sharing.gresource.xml org.gnome.controlcenter.remote-login-helper.policy.in.in org.gnome.SettingsDaemon.Sharing.xml meson.build
 
 -include $(top_srcdir)/git.mk

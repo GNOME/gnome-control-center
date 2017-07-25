@@ -9,4 +9,6 @@ SUBDIRS = \
 	48x48		\
 	$(NULL)
 
+EXTRA_DIST = meson.build
+
 -include $(top_srcdir)/git.mk

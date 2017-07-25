@@ -36,6 +36,6 @@ desktop_in_files = gnome-search-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
-EXTRA_DIST = $(resource_files) search.gresource.xml
+EXTRA_DIST = $(resource_files) search.gresource.xml meson.build
 
 -include $(top_srcdir)/git.mk

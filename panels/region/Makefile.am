@@ -47,6 +47,6 @@ Desktop_in_files = gnome-region-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 CLEANFILES = $(Desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
-EXTRA_DIST = $(resource_files) region.gresource.xml
+EXTRA_DIST = $(resource_files) region.gresource.xml meson.build
 
 -include $(top_srcdir)/git.mk

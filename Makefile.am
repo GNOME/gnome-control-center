@@ -27,7 +27,14 @@ MAINTAINERCLEANFILES = \
 	`find "$(srcdir)" -type f -name Makefile.in -print`
 
 EXTRA_DIST = \
-	MAINTAINERS
+	MAINTAINERS \
+	meson.build \
+	meson_options.txt \
+	meson_post_install.py \
+	update-from-gsd.in \
+	update-from-gsd.sh \
+	update-from-nma.in \
+	po/meson.build
 
 AM_DISTCHECK_CONFIGURE_FLAGS = --disable-update-mimedb --enable-gtk-doc --disable-maintainer-mode
 

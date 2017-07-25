@@ -64,6 +64,9 @@ CLEANFILES =				\
 	$(BUILT_SOURCES)		\
 	$(NULL)
 
+EXTRA_DIST =				\
+	meson.build
+
 MAINTAINERCLEANFILES =                  \
         *~                              \
         Makefile.in
