@@ -90,9 +90,8 @@ struct _CcDisplayPanelPrivate
   GtkWidget *rotate_right_button;
   GtkWidget *dialog;
   GtkWidget *config_grid;
-  GtkWidget *night_light_filter_label;
-  CcNightLightDialog *night_light_dialog;
 
+  CcNightLightDialog *night_light_dialog;
   GSettings *settings_color;
 
   UpClient *up_client;
@@ -2749,22 +2748,61 @@ sensor_proxy_vanished_cb (GDBusConnection *connection,
 }
 
 static void
-night_light_enabled_recheck (CcDisplayPanel *self)
+night_light_sync_label (GtkWidget *label, GSettings *settings)
 {
-  CcDisplayPanelPrivate *priv = DISPLAY_PANEL_PRIVATE (self);
-  gboolean ret = g_settings_get_boolean (priv->settings_color,
-                                         "night-light-enabled");
-  gtk_label_set_label (GTK_LABEL (priv->night_light_filter_label),
+  gboolean ret = g_settings_get_boolean (settings, "night-light-enabled");
+  gtk_label_set_label (GTK_LABEL (label),
                        /* TRANSLATORS: the state of the night light setting */
                        ret ? _("On") : _("Off"));
 }
 
 static void
-settings_color_changed_cb (GSettings *settings, gchar *key, gpointer user_data)
+settings_color_changed_cb (GSettings *settings, gchar *key, GtkWidget *label)
 {
-  CcDisplayPanel *self = CC_DISPLAY_PANEL (user_data);
   if (g_strcmp0 (key, "night-light-enabled") == 0)
-    night_light_enabled_recheck (self);
+    night_light_sync_label (label, settings);
+}
+
+static GtkWidget *
+make_night_light_widget (CcDisplayPanel *self)
+{
+  CcDisplayPanelPrivate *priv = DISPLAY_PANEL_PRIVATE (self);
+  GtkWidget *frame, *row, *box, *label;
+  GtkWidget *night_light_listbox;
+
+  frame = gtk_frame_new (NULL);
+  gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
+  night_light_listbox = gtk_list_box_new ();
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (night_light_listbox),
+                                   GTK_SELECTION_NONE);
+  gtk_container_add (GTK_CONTAINER (frame), night_light_listbox);
+  g_signal_connect (night_light_listbox, "row-activated",
+                    G_CALLBACK (cc_display_panel_night_light_activated),
+                    self);
+  row = gtk_list_box_row_new ();
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
+  gtk_container_add (GTK_CONTAINER (row), box);
+  gtk_container_add (GTK_CONTAINER (night_light_listbox), row);
+
+  label = gtk_label_new (_("_Night Light"));
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
+  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+  gtk_widget_set_margin_start (label, 20);
+  gtk_widget_set_margin_end (label, 20);
+  gtk_widget_set_margin_top (label, 12);
+  gtk_widget_set_margin_bottom (label, 12);
+  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+
+  label = gtk_label_new ("");
+  gtk_widget_set_halign (label, GTK_ALIGN_END);
+  gtk_widget_set_margin_start (label, 24);
+  gtk_widget_set_margin_end (label, 24);
+  gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
+  g_signal_connect_object (priv->settings_color, "changed",
+                           G_CALLBACK (settings_color_changed_cb), label, 0);
+  night_light_sync_label (label, priv->settings_color);
+
+  return frame;
 }
 
 static void
@@ -2849,10 +2887,6 @@ cc_display_panel_init (CcDisplayPanel *self)
 {
   CcDisplayPanelPrivate *priv;
   GtkWidget *frame, *vbox;
-  GtkListBoxRow *row;
-  GtkWidget *box;
-  GtkWidget *label;
-  GtkWidget *night_light_listbox;
   GSettings *settings;
 
   g_resources_register (cc_display_get_resource ());
@@ -2874,6 +2908,7 @@ cc_display_panel_init (CcDisplayPanel *self)
   priv->thumbnail_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
   priv->night_light_dialog = cc_night_light_dialog_new ();
+  priv->settings_color = g_settings_new ("org.gnome.settings-daemon.plugins.color");
 
   output_ids = g_hash_table_new (g_direct_hash, g_direct_equal);
 
@@ -2906,35 +2941,8 @@ cc_display_panel_init (CcDisplayPanel *self)
 
   gtk_container_add (GTK_CONTAINER (vbox), priv->arrange_button);
 
-  /* night light section */
-  frame = gtk_frame_new (NULL);
-  gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-  night_light_listbox = gtk_list_box_new ();
-  gtk_list_box_set_selection_mode (GTK_LIST_BOX (night_light_listbox),
-                                   GTK_SELECTION_NONE);
-  gtk_container_add (GTK_CONTAINER (frame), night_light_listbox);
-  g_signal_connect (night_light_listbox, "row-activated",
-                    G_CALLBACK (cc_display_panel_night_light_activated),
-                    self);
-  row = GTK_LIST_BOX_ROW (gtk_list_box_row_new ());
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
-  gtk_container_add (GTK_CONTAINER (row), box);
-  gtk_container_add (GTK_CONTAINER (night_light_listbox), GTK_WIDGET (row));
-  label = gtk_label_new (_("_Night Light"));
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-  gtk_widget_set_margin_start (label, 20);
-  gtk_widget_set_margin_end (label, 20);
-  gtk_widget_set_margin_top (label, 12);
-  gtk_widget_set_margin_bottom (label, 12);
-  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
-  priv->night_light_filter_label = label = gtk_label_new ("");
-  gtk_widget_set_halign (label, GTK_ALIGN_END);
-  gtk_widget_set_margin_start (label, 24);
-  gtk_widget_set_margin_end (label, 24);
-  gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
-  gtk_container_add (GTK_CONTAINER (vbox), frame);
 
+  gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (self));
   gtk_widget_show_all (vbox);
 
   self->priv->up_client = up_client_new ();
@@ -2952,11 +2960,6 @@ cc_display_panel_init (CcDisplayPanel *self)
     }
   else
     g_clear_object (&self->priv->up_client);
-
-  priv->settings_color = g_settings_new ("org.gnome.settings-daemon.plugins.color");
-  g_signal_connect (priv->settings_color, "changed",
-                    G_CALLBACK (settings_color_changed_cb), self);
-  night_light_enabled_recheck (self);
 
   g_signal_connect (self, "map", G_CALLBACK (mapped_cb), NULL);
 
