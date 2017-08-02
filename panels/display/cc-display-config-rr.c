@@ -215,7 +215,8 @@ cc_display_monitor_rr_set_active (CcDisplayMonitor *pself,
 {
   CcDisplayMonitorRR *self = CC_DISPLAY_MONITOR_RR (pself);
 
-  return gnome_rr_output_info_set_active (self->output_info, active);
+  gnome_rr_output_info_set_active (self->output_info, active);
+  g_signal_emit_by_name (self, "active");
 }
 
 static CcDisplayRotation
@@ -237,8 +238,9 @@ cc_display_monitor_rr_set_rotation (CcDisplayMonitor *pself,
 {
   CcDisplayMonitorRR *self = CC_DISPLAY_MONITOR_RR (pself);
 
-  return gnome_rr_output_info_set_rotation (self->output_info,
-                                            rotation_map[rotation]);
+  gnome_rr_output_info_set_rotation (self->output_info,
+                                     rotation_map[rotation]);
+  g_signal_emit_by_name (self, "rotation");
 }
 
 static gboolean
@@ -339,6 +341,7 @@ cc_display_monitor_rr_set_mode (CcDisplayMonitor *pself,
 
   gnome_rr_output_info_set_refresh_rate (self->output_info,
                                          cc_display_mode_get_freq (mode));
+  g_signal_emit_by_name (self, "mode");
 }
 
 static void
@@ -475,8 +478,13 @@ cc_display_config_rr_set_primary (CcDisplayConfigRR *self,
     return;
 
   gnome_rr_output_info_set_primary (self->primary->output_info, FALSE);
+  g_signal_emit_by_name (self->primary, "primary");
+
   self->primary = new_primary;
   gnome_rr_output_info_set_primary (self->primary->output_info, TRUE);
+  g_signal_emit_by_name (self->primary, "primary");
+
+  g_signal_emit_by_name (self, "primary");
 }
 
 static void

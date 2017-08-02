@@ -82,6 +82,26 @@ cc_display_monitor_init (CcDisplayMonitor *self)
 static void
 cc_display_monitor_class_init (CcDisplayMonitorClass *klass)
 {
+  g_signal_new ("rotation",
+                CC_TYPE_DISPLAY_MONITOR,
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL, NULL,
+                G_TYPE_NONE, 0);
+  g_signal_new ("mode",
+                CC_TYPE_DISPLAY_MONITOR,
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL, NULL,
+                G_TYPE_NONE, 0);
+  g_signal_new ("primary",
+                CC_TYPE_DISPLAY_MONITOR,
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL, NULL,
+                G_TYPE_NONE, 0);
+  g_signal_new ("active",
+                CC_TYPE_DISPLAY_MONITOR,
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL, NULL,
+                G_TYPE_NONE, 0);
 }
 
 const char *
@@ -237,6 +257,11 @@ cc_display_config_init (CcDisplayConfig *self)
 static void
 cc_display_config_class_init (CcDisplayConfigClass *klass)
 {
+  g_signal_new ("primary",
+                CC_TYPE_DISPLAY_CONFIG,
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL, NULL,
+                G_TYPE_NONE, 0);
 }
 
 GList *

@@ -448,6 +448,8 @@ cc_display_monitor_dbus_set_active (CcDisplayMonitor *pself,
       cc_display_monitor_dbus_set_logical_monitor (self, NULL);
       cc_display_config_dbus_ensure_gapless (self->config);
     }
+
+  g_signal_emit_by_name (self, "active");
 }
 
 static CcDisplayRotation
@@ -476,6 +478,8 @@ cc_display_monitor_dbus_set_rotation (CcDisplayMonitor *pself,
       /* See comment in ensure_gapless() for why we disregard the
          existing layout here. */
       cc_display_config_dbus_make_linear (self->config);
+
+      g_signal_emit_by_name (self, "rotation");
     }
 }
 
@@ -662,6 +666,8 @@ cc_display_monitor_dbus_set_mode (CcDisplayMonitor *pself,
 
   if (!cc_display_mode_dbus_is_supported_scale (mode, cc_display_monitor_get_scale (pself)))
     cc_display_monitor_set_scale (pself, cc_display_mode_get_preferred_scale (mode));
+
+  g_signal_emit_by_name (self, "mode");
 }
 
 static void
@@ -1095,10 +1101,16 @@ cc_display_config_dbus_set_primary (CcDisplayConfigDBus *self,
     return;
 
   if (self->primary && self->primary->logical_monitor)
-    self->primary->logical_monitor->primary = FALSE;
+    {
+      self->primary->logical_monitor->primary = FALSE;
+      g_signal_emit_by_name (self->primary, "primary");
+    }
 
   self->primary = new_primary;
   self->primary->logical_monitor->primary = TRUE;
+
+  g_signal_emit_by_name (self->primary, "primary");
+  g_signal_emit_by_name (self, "primary");
 }
 
 static void
