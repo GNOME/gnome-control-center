@@ -619,7 +619,8 @@ cc_display_monitor_dbus_get_closest_mode (CcDisplayMonitorDBus *self,
           similar->height != mode->height)
         continue;
 
-      if (similar->refresh_rate == mode->refresh_rate)
+      if (similar->refresh_rate == mode->refresh_rate &&
+          (similar->flags & MODE_INTERLACED) == (mode->flags & MODE_INTERLACED))
         {
           best = similar;
           break;
