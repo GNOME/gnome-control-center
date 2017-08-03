@@ -135,6 +135,15 @@ parse_categories (GDesktopAppInfo *app)
 #define const_strv(s) ((const gchar* const*) s)
 
 #ifdef CC_ENABLE_ALT_CATEGORIES
+  if (g_strv_contains (const_strv (split), "X-GNOME-Hidden"))
+    retval = CC_CATEGORY_HIDDEN;
+  else if (g_strv_contains (const_strv (split), "HardwareSettings"))
+    retval = CC_CATEGORY_HARDWARE;
+  else if (g_strv_contains (const_strv (split), "X-GNOME-PersonalSettings"))
+    retval = CC_CATEGORY_PERSONAL;
+  else if (g_strv_contains (const_strv (split), "X-GNOME-SystemSettings"))
+    retval = CC_CATEGORY_SYSTEM;
+#else
   if (g_strv_contains (const_strv (split), "X-GNOME-AltHidden"))
     retval = CC_CATEGORY_HIDDEN;
   else if (g_strv_contains (const_strv (split), "X-GNOME-ConnectivitySettings"))
@@ -149,15 +158,6 @@ parse_categories (GDesktopAppInfo *app)
     retval = CC_CATEGORY_DETAILS;
   else if (g_strv_contains (const_strv (split), "HardwareSettings"))
     retval = CC_CATEGORY_HARDWARE;
-#else
-  if (g_strv_contains (const_strv (split), "X-GNOME-Hidden"))
-    retval = CC_CATEGORY_HIDDEN;
-  else if (g_strv_contains (const_strv (split), "HardwareSettings"))
-    retval = CC_CATEGORY_HARDWARE;
-  else if (g_strv_contains (const_strv (split), "X-GNOME-PersonalSettings"))
-    retval = CC_CATEGORY_PERSONAL;
-  else if (g_strv_contains (const_strv (split), "X-GNOME-SystemSettings"))
-    retval = CC_CATEGORY_SYSTEM;
 #endif
 
 #undef const_strv
