@@ -55,6 +55,8 @@ common_sources =				\
 
 gnome_control_center_SOURCES =			\
 	$(common_sources)			\
+	cc-panel-list.c				\
+	cc-panel-list.h				\
 	cc-window.c				\
 	cc-window.h
 
