@@ -43,18 +43,11 @@ CC_PANEL_REGISTER (CcDisplayPanel, cc_display_panel)
 #define DISPLAY_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_DISPLAY_PANEL, CcDisplayPanelPrivate))
 
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (self->priv->builder, s))
-
 #define TOP_BAR_HEIGHT 5
 
-/* The minimum supported size for the panel, see:
- * http://live.gnome.org/Design/SystemSettings */
-#define MINIMUM_WIDTH 740
-#define MINIMUM_HEIGHT 530
-
-
-#define DISPLAY_PREVIEW_SETUP_HEIGHT 140
-#define DISPLAY_PREVIEW_LIST_HEIGHT  55
+#define PANEL_PADDING   32
+#define SECTION_PADDING 32
+#define HEADING_PADDING 12
 
 enum
 {
@@ -77,19 +70,9 @@ struct _CcDisplayPanelPrivate
 
   guint           focus_id;
 
+  GtkSizeGroup *rows_size_group;
   GtkWidget *stack;
-  GtkWidget *displays_listbox;
-  GtkWidget *arrange_button;
-  GtkWidget *res_combo;
-  GtkWidget *freq_combo;
-  GtkWidget *scale_slider;
-  GHashTable *res_freqs;
-  GtkWidget *scaling_switch;
-  GtkWidget *rotate_left_button;
-  GtkWidget *upside_down_button;
-  GtkWidget *rotate_right_button;
   GtkWidget *dialog;
-  GtkWidget *config_grid;
 
   CcNightLightDialog *night_light_dialog;
   GSettings *settings_color;
@@ -103,6 +86,9 @@ struct _CcDisplayPanelPrivate
   guint       sensor_watch_id;
   GDBusProxy *iio_sensor_proxy;
   gboolean    has_accelerometer;
+
+  GtkWidget *main_titlebar;
+  GtkWidget *apply_titlebar;
 };
 
 typedef struct
@@ -113,67 +99,90 @@ typedef struct
   int output_y;
 } GrabInfo;
 
-static GHashTable *output_ids;
-
-static gint
-cc_display_panel_get_output_id (CcDisplayMonitor *output)
+enum
 {
-  if (output_ids)
-    return GPOINTER_TO_INT (g_hash_table_lookup (output_ids, output));
+  CURRENT_OUTPUT,
+  LAST_PANEL_SIGNAL
+};
+static guint panel_signals[LAST_PANEL_SIGNAL] = { 0 };
+
+static const gchar *
+get_resolution_string (CcDisplayMode *mode);
+static const gchar *
+get_frequency_string (CcDisplayMode *mode);
+static GtkWidget *
+make_night_light_widget (CcDisplayPanel *panel);
+static gboolean
+should_show_rotation (CcDisplayPanel *panel,
+                      CcDisplayMonitor  *output);
+static void
+update_apply_button (CcDisplayPanel *panel);
+static void
+apply_current_configuration (CcDisplayPanel *self);
+static void
+on_area_paint (FooScrollArea  *area,
+               cairo_t        *cr,
+               gpointer        data);
+static char *
+make_display_size_string (int width_mm,
+                          int height_mm);
+static void
+realign_outputs_after_resolution_change (CcDisplayPanel    *self,
+                                         CcDisplayMonitor  *output_that_changed,
+                                         int                old_width,
+                                         int                old_height,
+                                         CcDisplayRotation  old_rotation);
+static void
+lay_out_outputs_horizontally (CcDisplayPanel *self);
+
+static char *
+make_output_ui_name (CcDisplayMonitor *output)
+{
+  int width_mm, height_mm;
+  char *size, *name;
+
+  cc_display_monitor_get_physical_size (output, &width_mm, &height_mm);
+  size = make_display_size_string (width_mm, height_mm);
+  if (size)
+    name = g_strdup_printf ("%s (%s)", cc_display_monitor_get_display_name (output), size);
   else
-    return 0;
+    name = g_strdup_printf ("%s", cc_display_monitor_get_display_name (output));
+
+  g_free (size);
+  return name;
 }
 
 static void
-monitor_labeler_show (CcDisplayPanel *self)
+ensure_output_numbers (CcDisplayConfig *config)
 {
-  CcDisplayPanelPrivate *priv = self->priv;
   GList *outputs, *l;
-  GVariantBuilder builder;
-  gint number;
-  gboolean has_outputs;
+  GList *sorted = NULL;
+  gint n = 0;
 
-  if (!priv->shell_proxy || !priv->current_config)
-    return;
+  outputs = cc_display_config_get_monitors (config);
 
-  has_outputs = FALSE;
-
-  outputs = cc_display_config_get_monitors (priv->current_config);
   for (l = outputs; l != NULL; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
-
-      number = cc_display_panel_get_output_id (output);
-      if (number == 0)
-        continue;
-
-      if (!has_outputs)
-        {
-          g_variant_builder_init (&builder, G_VARIANT_TYPE_TUPLE);
-          g_variant_builder_open (&builder, G_VARIANT_TYPE_ARRAY);
-          has_outputs = TRUE;
-        }
-
-      if (priv->have_new_dbus_api)
-        g_variant_builder_add (&builder, "{sv}",
-                               cc_display_monitor_get_connector_name (output),
-                               g_variant_new_int32 (number));
+      if (cc_display_monitor_is_builtin (output))
+        sorted = g_list_prepend (sorted, output);
       else
-        g_variant_builder_add (&builder, "{uv}",
-                               cc_display_monitor_get_id (output),
-                               g_variant_new_int32 (number));
+        sorted = g_list_append (sorted, output);
     }
 
-  if (!has_outputs)
-    return;
+  for (l = sorted; l != NULL; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+      gchar *ui_name = make_output_ui_name (output);
 
-  g_variant_builder_close (&builder);
+      g_object_set_data (G_OBJECT (output), "ui-number", GINT_TO_POINTER (++n));
+      g_object_set_data_full (G_OBJECT (output), "ui-number-name",
+                              g_strdup_printf ("%d\u2003%s", n, ui_name),
+                              g_free);
+      g_object_set_data_full (G_OBJECT (output), "ui-name", ui_name, g_free);
+    }
 
-  g_dbus_proxy_call (priv->shell_proxy,
-                     priv->have_new_dbus_api ? "ShowMonitorLabels2" : "ShowMonitorLabels",
-                     g_variant_builder_end (&builder),
-                     G_DBUS_CALL_FLAGS_NONE,
-                     -1, NULL, NULL, NULL);
+  g_object_set_data_full (G_OBJECT (config), "ui-sorted-outputs", sorted, (GDestroyNotify) g_list_free);
 }
 
 static void
@@ -187,6 +196,54 @@ monitor_labeler_hide (CcDisplayPanel *self)
   g_dbus_proxy_call (priv->shell_proxy,
                      "HideMonitorLabels",
                      NULL, G_DBUS_CALL_FLAGS_NONE,
+                     -1, NULL, NULL, NULL);
+}
+
+static void
+monitor_labeler_show (CcDisplayPanel *self)
+{
+  CcDisplayPanelPrivate *priv = self->priv;
+  GList *outputs, *l;
+  GVariantBuilder builder;
+  gint number = 0;
+
+  if (!priv->shell_proxy || !priv->current_config)
+    return;
+
+  if (cc_display_config_is_cloning (priv->current_config))
+    return monitor_labeler_hide (self);
+
+  g_variant_builder_init (&builder, G_VARIANT_TYPE_TUPLE);
+  g_variant_builder_open (&builder, G_VARIANT_TYPE_ARRAY);
+
+  outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
+  for (l = outputs; l != NULL; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+
+      number = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (output), "ui-number"));
+      if (number == 0)
+        continue;
+
+      if (priv->have_new_dbus_api)
+        g_variant_builder_add (&builder, "{sv}",
+                               cc_display_monitor_get_connector_name (output),
+                               g_variant_new_int32 (number));
+      else
+        g_variant_builder_add (&builder, "{uv}",
+                               cc_display_monitor_get_id (output),
+                               g_variant_new_int32 (number));
+    }
+
+  g_variant_builder_close (&builder);
+
+  if (number < 2)
+    return monitor_labeler_hide (self);
+
+  g_dbus_proxy_call (priv->shell_proxy,
+                     priv->have_new_dbus_api ? "ShowMonitorLabels2" : "ShowMonitorLabels",
+                     g_variant_builder_end (&builder),
+                     G_DBUS_CALL_FLAGS_NONE,
                      -1, NULL, NULL, NULL);
 }
 
@@ -213,11 +270,48 @@ ensure_monitor_labels (CcDisplayPanel *self)
 }
 
 static void
+dialog_toplevel_focus_changed (CcDisplayPanel *self)
+{
+  ensure_monitor_labels (self);
+}
+
+static void
+reset_titlebar (CcDisplayPanel *self)
+{
+  CcDisplayPanelPrivate *priv = self->priv;
+  GtkWidget *toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
+
+  if (priv->main_titlebar)
+    {
+      gtk_window_set_titlebar (GTK_WINDOW (toplevel), priv->main_titlebar);
+      g_clear_object (&priv->main_titlebar);
+    }
+
+  g_clear_object (&priv->apply_titlebar);
+}
+
+static void
+active_panel_changed (CcShell    *shell,
+                      GParamSpec *pspec,
+                      CcPanel    *self)
+{
+  CcPanel *panel = NULL;
+
+  g_object_get (shell, "active-panel", &panel, NULL);
+  if (panel != self)
+    reset_titlebar (CC_DISPLAY_PANEL (self));
+
+  g_object_unref (panel);
+}
+
+static void
 cc_display_panel_dispose (GObject *object)
 {
   CcDisplayPanelPrivate *priv = CC_DISPLAY_PANEL (object)->priv;
   CcShell *shell;
   GtkWidget *toplevel;
+
+  reset_titlebar (CC_DISPLAY_PANEL (object));
 
   if (priv->sensor_watch_id > 0)
     {
@@ -226,12 +320,6 @@ cc_display_panel_dispose (GObject *object)
     }
 
   g_clear_object (&priv->iio_sensor_proxy);
-
-  if (output_ids)
-    {
-      g_hash_table_destroy (output_ids);
-      output_ids = NULL;
-    }
 
   if (priv->focus_id)
     {
@@ -265,6 +353,15 @@ cc_display_panel_dispose (GObject *object)
   G_OBJECT_CLASS (cc_display_panel_parent_class)->dispose (object);
 }
 
+static void
+cc_display_panel_constructed (GObject *object)
+{
+  g_signal_connect_object (cc_panel_get_shell (CC_PANEL (object)), "notify::active-panel",
+                           G_CALLBACK (active_panel_changed), object, 0);
+
+  G_OBJECT_CLASS (cc_display_panel_parent_class)->constructed (object);
+}
+
 static const char *
 cc_display_panel_get_help_uri (CcPanel *panel)
 {
@@ -281,21 +378,23 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
 
   panel_class->get_help_uri = cc_display_panel_get_help_uri;
 
+  object_class->constructed = cc_display_panel_constructed;
   object_class->dispose = cc_display_panel_dispose;
+
+  panel_signals[CURRENT_OUTPUT] =
+    g_signal_new ("current-output",
+                  CC_TYPE_DISPLAY_PANEL,
+                  G_SIGNAL_RUN_LAST,
+                  0, NULL, NULL, NULL,
+                  G_TYPE_NONE, 0);
 }
 
-static gboolean
-should_show_resolution (gint output_width,
-                        gint output_height,
-                        gint width,
-                        gint height)
+static void
+set_current_output (CcDisplayPanel   *panel,
+                    CcDisplayMonitor *output)
 {
-  if (width >= MIN (output_width, MINIMUM_WIDTH) &&
-      height >= MIN (output_height, MINIMUM_HEIGHT))
-    {
-      return TRUE;
-    }
-  return FALSE;
+  panel->priv->current_output = output;
+  g_signal_emit (panel, panel_signals[CURRENT_OUTPUT], 0);
 }
 
 static void
@@ -446,52 +545,1563 @@ paint_output (CcDisplayPanel    *panel,
     }
 }
 
-static gboolean
-display_preview_draw (GtkWidget      *widget,
-                      cairo_t        *cr,
-                      CcDisplayPanel *panel)
+static GtkWidget *
+make_bin (void)
 {
-  CcDisplayMonitor *output;
-  CcDisplayConfig *config;
-  gint num, width, height;
+  return g_object_new (GTK_TYPE_FRAME, "shadow-type", GTK_SHADOW_NONE, NULL);
+}
 
-  output = g_object_get_data (G_OBJECT (widget), "output");
-  config = g_object_get_data (G_OBJECT (widget), "config");
-  num = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "number"));
+static GtkWidget *
+wrap_in_boxes (GtkWidget *widget)
+{
+  GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, PANEL_PADDING);
+  gtk_box_pack_start (GTK_BOX (box), make_bin(), TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box), widget, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box), make_bin(), TRUE, TRUE, 0);
+  return box;
+}
 
-  width = gtk_widget_get_allocated_width (widget);
-  height = gtk_widget_get_allocated_height (widget);
+static GtkWidget *
+make_scrollable (GtkWidget *widget)
+{
+  GtkWidget *sw;
+  sw = g_object_new (GTK_TYPE_SCROLLED_WINDOW,
+                     "hscrollbar-policy", GTK_POLICY_NEVER,
+                     "min-content-height", 450,
+                     "propagate-natural-height", TRUE,
+                     NULL);
+  gtk_container_add (GTK_CONTAINER (sw), wrap_in_boxes (widget));
+  return sw;
+}
 
-  paint_output (panel, cr, config, output, num, width, height);
+static GtkWidget *
+make_bold_label (const gchar *text)
+{
+  GtkCssProvider *provider;
+  GtkWidget *label = gtk_label_new (text);
+
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider),
+                                   "label { font-weight: bold; }", -1, NULL);
+  gtk_style_context_add_provider (gtk_widget_get_style_context (label),
+                                  GTK_STYLE_PROVIDER (provider),
+                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  g_object_unref (provider);
+
+  return label;
+}
+
+static GtkWidget *
+make_main_vbox (void)
+{
+  GtkWidget *vbox;
+
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  gtk_widget_set_margin_top (vbox, PANEL_PADDING);
+  gtk_widget_set_margin_bottom (vbox, PANEL_PADDING);
+
+  return vbox;
+}
+
+static GtkWidget *
+make_row (GtkSizeGroup *size_group,
+          GtkWidget    *start_widget,
+          GtkWidget    *end_widget)
+{
+  GtkWidget *row, *box;
+
+  row = g_object_new (CC_TYPE_LIST_BOX_ROW, NULL);
+
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
+  gtk_widget_set_margin_start (box, 20);
+  gtk_widget_set_margin_end (box, 20);
+  gtk_widget_set_margin_top (box, 20);
+  gtk_widget_set_margin_bottom (box, 20);
+
+  if (start_widget)
+    {
+      gtk_widget_set_halign (start_widget, GTK_ALIGN_START);
+      gtk_box_pack_start (GTK_BOX (box), start_widget, FALSE, FALSE, 0);
+    }
+  if (end_widget)
+    {
+      gtk_widget_set_halign (end_widget, GTK_ALIGN_END);
+      gtk_box_pack_end (GTK_BOX (box), end_widget, FALSE, FALSE, 0);
+    }
+
+  gtk_container_add (GTK_CONTAINER (row), box);
+
+  if (size_group)
+    gtk_size_group_add_widget (size_group, row);
+
+  return row;
+}
+
+static GtkWidget *
+make_frame (const gchar *title, const gchar *subtitle)
+{
+  GtkWidget *frame;
+
+  frame = gtk_frame_new (NULL);
+  gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
+
+  if (title)
+    {
+      GtkWidget *vbox, *label;
+
+      vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, HEADING_PADDING/2);
+      gtk_widget_set_margin_bottom (vbox, HEADING_PADDING);
+
+      label = make_bold_label (title);
+      gtk_widget_set_halign (label, GTK_ALIGN_START);
+      gtk_container_add (GTK_CONTAINER (vbox), label);
+
+      if (subtitle)
+        {
+          label = gtk_label_new (subtitle);
+          gtk_widget_set_halign (label, GTK_ALIGN_START);
+          gtk_container_add (GTK_CONTAINER (vbox), label);
+          gtk_style_context_add_class (gtk_widget_get_style_context (label),
+                                       GTK_STYLE_CLASS_DIM_LABEL);
+        }
+
+      gtk_frame_set_label_widget (GTK_FRAME (frame), vbox);
+      gtk_frame_set_label_align (GTK_FRAME (frame), 0.0, 1.0);
+    }
+
+  return frame;
+}
+
+static GtkWidget *
+make_list_box (void)
+{
+  GtkWidget *listbox;
+
+  listbox = g_object_new (CC_TYPE_LIST_BOX, NULL);
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (listbox), GTK_SELECTION_NONE);
+  gtk_list_box_set_header_func (GTK_LIST_BOX (listbox),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+  return listbox;
+}
+
+static GtkWidget *
+make_dialog (CcDisplayPanel *panel,
+             const gchar    *title)
+{
+  GtkWidget *dialog;
+
+  dialog = g_object_new (GTK_TYPE_DIALOG,
+                         "title", title,
+                         "transient-for", cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel))),
+                         "modal", TRUE,
+                         "use-header-bar", TRUE,
+                         "destroy-with-parent", TRUE,
+                         "resizable", FALSE,
+                         NULL);
+  g_signal_connect_object (dialog, "notify::has-toplevel-focus",
+                           G_CALLBACK (dialog_toplevel_focus_changed),
+                           panel, G_CONNECT_SWAPPED);
+  return dialog;
+}
+
+static gboolean
+dialog_closed (GtkWidget      *dialog,
+               GdkEvent       *event,
+               CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+
+  if (priv->dialog == dialog)
+    {
+      gtk_widget_destroy (dialog);
+      priv->dialog = NULL;
+    }
+  else
+    g_warn_if_reached ();
 
   return TRUE;
 }
 
-static GtkWidget*
-display_preview_new (CcDisplayPanel    *panel,
-                     CcDisplayMonitor  *output,
-                     CcDisplayConfig   *config,
-                     gint               num,
-                     gint               base_height)
+static void
+show_dialog (CcDisplayPanel *panel,
+             GtkWidget      *dialog)
 {
-  GtkWidget *area;
-  gint width, height;
+  CcDisplayPanelPrivate *priv = panel->priv;
 
-  get_geometry (output, NULL, NULL, &width, &height);
+  if (!priv->dialog)
+    {
+      priv->dialog = dialog;
+      gtk_widget_show_all (dialog);
+      g_signal_connect_object (dialog, "delete-event", G_CALLBACK (dialog_closed),
+                               panel, 0);
+    }
+  else
+    {
+      gtk_widget_destroy (dialog);
+    }
+}
 
-  area = gtk_drawing_area_new ();
-  g_signal_connect (area, "draw", G_CALLBACK (display_preview_draw), panel);
+static const gchar *
+string_for_rotation (CcDisplayRotation rotation)
+{
+  switch (rotation)
+    {
+    case CC_DISPLAY_ROTATION_NONE:
+    case CC_DISPLAY_ROTATION_180_FLIPPED:
+      return C_("Display rotation", "Landscape");
+    case CC_DISPLAY_ROTATION_90:
+    case CC_DISPLAY_ROTATION_270_FLIPPED:
+      return C_("Display rotation", "Portrait Right");
+    case CC_DISPLAY_ROTATION_270:
+    case CC_DISPLAY_ROTATION_90_FLIPPED:
+      return C_("Display rotation", "Portrait Left");
+    case CC_DISPLAY_ROTATION_180:
+    case CC_DISPLAY_ROTATION_FLIPPED:
+      return C_("Display rotation", "Landscape (flipped)");
+    }
+  return "";
+}
 
-  gtk_widget_set_size_request (area, base_height * (width / (gdouble) height), base_height);
+static void
+orientation_row_activated (CcDisplayPanel *panel,
+                           GtkListBoxRow  *row)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  CcDisplayRotation rotation = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "rotation"));
+  CcDisplayRotation old_rotation = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (priv->current_output), "old-rotation"));
+  int width, height;
 
-  gtk_widget_set_valign (area, GTK_ALIGN_CENTER);
-  gtk_widget_set_halign (area, GTK_ALIGN_CENTER);
+  cc_display_monitor_get_geometry (priv->current_output, NULL, NULL, &width, &height);
 
-  g_object_set_data (G_OBJECT (area), "output", output);
-  g_object_set_data (G_OBJECT (area), "config", config);
-  g_object_set_data (G_OBJECT (area), "number", GINT_TO_POINTER (num));
+  cc_display_monitor_set_rotation (priv->current_output, rotation);
+  realign_outputs_after_resolution_change (panel, priv->current_output, width, height, old_rotation);
+  update_apply_button (panel);
+}
 
-  return area;
+static void
+orientation_row_rotation_changed (GtkListBoxRow    *row,
+                                  CcDisplayMonitor *output)
+{
+  GtkWidget *check = g_object_get_data (G_OBJECT (row), "check");
+  CcDisplayRotation rotation = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "rotation"));
+
+  if (cc_display_monitor_get_rotation (output) == rotation)
+    gtk_widget_set_opacity (check, 1.0);
+  else
+    gtk_widget_set_opacity (check, 0.0);
+}
+
+static void
+show_orientation_dialog (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *dialog, *listbox;
+  GtkSizeGroup *size_group;
+  CcDisplayRotation rotations[] = { CC_DISPLAY_ROTATION_NONE,
+                                    CC_DISPLAY_ROTATION_90,
+                                    CC_DISPLAY_ROTATION_270,
+                                    CC_DISPLAY_ROTATION_180 };
+  guint i = 0;
+
+  dialog = make_dialog (panel, _("Orientation"));
+  listbox = make_list_box ();
+  gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
+                     listbox);
+
+  size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+  for (i = 0; i < G_N_ELEMENTS (rotations); ++i)
+    {
+      CcDisplayRotation rotation = rotations[i];
+      if (cc_display_monitor_supports_rotation (priv->current_output, rotation))
+        {
+          GtkWidget *row, *check;
+
+          check = gtk_image_new ();
+          gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
+          if (cc_display_monitor_get_rotation (priv->current_output) != rotation)
+            gtk_widget_set_opacity (check, 0.0);
+
+          row = make_row (size_group, gtk_label_new (string_for_rotation (rotation)), check);
+          g_object_set_data (G_OBJECT (row), "check", check);
+          g_object_set_data (G_OBJECT (row), "rotation", GUINT_TO_POINTER (rotation));
+
+          g_signal_connect_object (row, "activated", G_CALLBACK (orientation_row_activated),
+                                   panel, G_CONNECT_SWAPPED);
+          g_signal_connect_object (priv->current_output, "rotation",
+                                   G_CALLBACK (orientation_row_rotation_changed),
+                                   row, G_CONNECT_SWAPPED);
+
+          gtk_container_add (GTK_CONTAINER (listbox), row);
+        }
+    }
+  g_object_unref (size_group);
+
+  show_dialog (panel, dialog);
+}
+
+static void
+orientation_label_rotation_changed (GtkLabel         *label,
+                                    CcDisplayMonitor *output)
+{
+  gtk_label_set_text (label, string_for_rotation (cc_display_monitor_get_rotation (output)));
+}
+
+static GtkWidget *
+make_orientation_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
+{
+  GtkWidget *row, *label;
+
+  label = gtk_label_new (string_for_rotation (cc_display_monitor_get_rotation (output)));
+
+  row = make_row (panel->priv->rows_size_group, gtk_label_new (_("Orientation")), label);
+  g_signal_connect_object (row, "activated", G_CALLBACK (show_orientation_dialog),
+                           panel, G_CONNECT_SWAPPED);
+  g_signal_connect_object (output, "rotation", G_CALLBACK (orientation_label_rotation_changed),
+                           label, G_CONNECT_SWAPPED);
+  return row;
+}
+
+static void
+resolution_row_activated (CcDisplayPanel *panel,
+                          GtkListBoxRow  *row)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  CcDisplayMode *mode = g_object_get_data (G_OBJECT (row), "mode");
+  int old_width = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (priv->current_output), "old-width"));
+  int old_height = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (priv->current_output), "old-height"));
+
+  cc_display_monitor_set_mode (priv->current_output, mode);
+  realign_outputs_after_resolution_change (panel, priv->current_output, old_width, old_height,
+                                           cc_display_monitor_get_rotation (priv->current_output));
+  update_apply_button (panel);
+}
+
+static void
+resolution_row_mode_changed (GtkListBoxRow    *row,
+                             CcDisplayMonitor *output)
+{
+  GtkWidget *check = g_object_get_data (G_OBJECT (row), "check");
+  CcDisplayMode *mode = g_object_get_data (G_OBJECT (row), "mode");
+
+  if (g_str_equal (get_resolution_string (cc_display_monitor_get_mode (output)),
+                   get_resolution_string (mode)))
+    gtk_widget_set_opacity (check, 1.0);
+  else
+    gtk_widget_set_opacity (check, 0.0);
+}
+
+static void
+show_resolution_dialog (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *dialog, *listbox, *sw;
+  GtkSizeGroup *size_group;
+  GList *resolutions, *l;
+
+  resolutions = g_object_get_data (G_OBJECT (priv->current_output), "res-list");
+
+  dialog = make_dialog (panel, _("Resolution"));
+  listbox = make_list_box ();
+  sw = g_object_new (GTK_TYPE_SCROLLED_WINDOW,
+                     "hscrollbar-policy", GTK_POLICY_NEVER,
+                     "max-content-height", 450,
+                     "propagate-natural-height", TRUE,
+                     NULL);
+  gtk_container_add (GTK_CONTAINER (sw), listbox);
+  gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), sw);
+
+  size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+  for (l = resolutions; l; l = l->next)
+    {
+      CcDisplayMode *mode = l->data;
+      GtkWidget *row, *check;
+
+      check = gtk_image_new ();
+      gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
+      if (!g_str_equal (get_resolution_string (cc_display_monitor_get_mode (priv->current_output)),
+                        get_resolution_string (mode)))
+        gtk_widget_set_opacity (check, 0.0);
+
+      row = make_row (size_group, gtk_label_new (get_resolution_string (mode)), check);
+      g_object_set_data (G_OBJECT (row), "check", check);
+      g_object_set_data (G_OBJECT (row), "mode", mode);
+
+      g_signal_connect_object (row, "activated", G_CALLBACK (resolution_row_activated),
+                               panel, G_CONNECT_SWAPPED);
+      g_signal_connect_object (priv->current_output, "mode",
+                               G_CALLBACK (resolution_row_mode_changed),
+                               row, G_CONNECT_SWAPPED);
+      gtk_container_add (GTK_CONTAINER (listbox), row);
+    }
+  g_object_unref (size_group);
+
+  show_dialog (panel, dialog);
+}
+
+static void
+resolution_label_mode_changed (GtkLabel         *label,
+                               CcDisplayMonitor *output)
+{
+  gtk_label_set_text (label, get_resolution_string (cc_display_monitor_get_mode (output)));
+}
+
+static GtkWidget *
+make_resolution_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
+{
+  GtkWidget *row, *label;
+
+  label = gtk_label_new (get_resolution_string (cc_display_monitor_get_mode (output)));
+
+  row = make_row (panel->priv->rows_size_group, gtk_label_new (_("Resolution")), label);
+  g_signal_connect_object (row, "activated", G_CALLBACK (show_resolution_dialog),
+                           panel, G_CONNECT_SWAPPED);
+  g_signal_connect_object (output, "mode", G_CALLBACK (resolution_label_mode_changed),
+                           label, G_CONNECT_SWAPPED);
+  return row;
+}
+
+static void
+refresh_rate_row_activated (CcDisplayPanel *panel,
+                            GtkListBoxRow  *row)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  CcDisplayMode *mode = g_object_get_data (G_OBJECT (row), "mode");
+
+  cc_display_monitor_set_mode (priv->current_output, mode);
+  update_apply_button (panel);
+}
+
+static void
+refresh_rate_row_mode_changed (GtkListBoxRow    *row,
+                               CcDisplayMonitor *output)
+{
+  GtkWidget *check = g_object_get_data (G_OBJECT (row), "check");
+  CcDisplayMode *mode = g_object_get_data (G_OBJECT (row), "mode");
+
+  if (cc_display_monitor_get_mode (output) == mode)
+    gtk_widget_set_opacity (check, 1.0);
+  else
+    gtk_widget_set_opacity (check, 0.0);
+}
+
+static void
+show_refresh_rate_dialog (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *dialog, *listbox, *sw;
+  GtkSizeGroup *size_group;
+  GHashTable *res_freqs;
+  GList *freqs, *l;
+
+  res_freqs = g_object_get_data (G_OBJECT (priv->current_output), "res-freqs");
+  freqs = g_hash_table_lookup (res_freqs,
+                               get_resolution_string (cc_display_monitor_get_mode (priv->current_output)));
+
+  dialog = make_dialog (panel, _("Refresh Rate"));
+  listbox = make_list_box ();
+  sw = g_object_new (GTK_TYPE_SCROLLED_WINDOW,
+                     "hscrollbar-policy", GTK_POLICY_NEVER,
+                     "max-content-height", 450,
+                     "propagate-natural-height", TRUE,
+                     NULL);
+  gtk_container_add (GTK_CONTAINER (sw), listbox);
+  gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), sw);
+
+  size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+  for (l = freqs; l; l = l->next)
+    {
+      CcDisplayMode *mode = l->data;
+      GtkWidget *row, *check;
+
+      check = gtk_image_new ();
+      gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
+      if (cc_display_monitor_get_mode (priv->current_output) != mode)
+        gtk_widget_set_opacity (check, 0.0);
+
+      row = make_row (size_group, gtk_label_new (get_frequency_string (mode)), check);
+      g_object_set_data (G_OBJECT (row), "check", check);
+      g_object_set_data (G_OBJECT (row), "mode", mode);
+
+      g_signal_connect_object (row, "activated", G_CALLBACK (refresh_rate_row_activated),
+                               panel, G_CONNECT_SWAPPED);
+      g_signal_connect_object (priv->current_output, "mode",
+                               G_CALLBACK (refresh_rate_row_mode_changed),
+                               row, G_CONNECT_SWAPPED);
+      gtk_container_add (GTK_CONTAINER (listbox), row);
+    }
+  g_object_unref (size_group);
+
+  show_dialog (panel, dialog);
+}
+
+static void
+refresh_rate_label_mode_changed (GtkLabel         *label,
+                                 CcDisplayMonitor *output)
+{
+  gtk_label_set_text (label, get_frequency_string (cc_display_monitor_get_mode (output)));
+}
+
+static gboolean
+should_show_refresh_rate (CcDisplayMonitor *output)
+{
+  GHashTable *res_freqs = g_object_get_data (G_OBJECT (output), "res-freqs");
+  const gchar *resolution = get_resolution_string (cc_display_monitor_get_mode (output));
+  GList *freqs = g_hash_table_lookup (res_freqs, resolution);
+
+  return g_list_length (freqs) > 1;
+}
+
+static void
+refresh_rate_row_sync_visibility (GtkWidget        *row,
+                                  CcDisplayMonitor *output)
+{
+  if (!should_show_refresh_rate (output))
+    gtk_widget_hide (row);
+  else
+    gtk_widget_show (row);
+}
+
+static GtkWidget *
+make_refresh_rate_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
+{
+  GtkWidget *row, *label;
+
+  label = gtk_label_new (get_frequency_string (cc_display_monitor_get_mode (output)));
+
+  row = make_row (panel->priv->rows_size_group, gtk_label_new (_("Refresh Rate")), label);
+  g_signal_connect_object (row, "activated", G_CALLBACK (show_refresh_rate_dialog),
+                           panel, G_CONNECT_SWAPPED);
+  g_signal_connect_object (output, "mode", G_CALLBACK (refresh_rate_label_mode_changed),
+                           label, G_CONNECT_SWAPPED);
+
+  gtk_widget_show_all (row);
+  gtk_widget_set_no_show_all (row, TRUE);
+
+  g_signal_connect_object (output, "mode", G_CALLBACK (refresh_rate_row_sync_visibility),
+                           row, G_CONNECT_SWAPPED);
+  refresh_rate_row_sync_visibility (row, output);
+
+  return row;
+}
+
+static guint
+n_supported_scales (CcDisplayMode *mode)
+{
+  const double *scales = cc_display_mode_get_supported_scales (mode);
+  guint n = 0;
+
+  while (scales[n] != 0.0)
+    n++;
+
+  return n;
+}
+
+static void
+setup_scale_slider (GtkWidget        *slider,
+                    CcDisplayMonitor *output)
+{
+  CcDisplayMode *mode;
+  const double *scales;
+  double current_scale;
+  int current_index = -1;
+  guint i, n;
+
+  mode = cc_display_monitor_get_mode (output);
+  scales = cc_display_mode_get_supported_scales (mode);
+  n = n_supported_scales (mode);
+
+  gtk_range_set_range (GTK_RANGE (slider), 0, n-1);
+
+  current_scale = cc_display_monitor_get_scale (output);
+  gtk_scale_clear_marks (GTK_SCALE (slider));
+
+  for (i = 0; i < n; ++i)
+    {
+      double integral;
+      double fractional = modf (scales[i], &integral);
+      gchar *s = NULL;
+
+      if (scales[i] == current_scale || (current_index < 0 && scales[i] == 1.0))
+        current_index = i;
+
+      if (fractional != 0)
+        s = NULL;
+      else
+        s = g_strdup_printf ("%d", (int) integral);
+
+      gtk_scale_add_mark (GTK_SCALE (slider), i, GTK_POS_TOP, s);
+      g_free (s);
+    }
+
+  gtk_range_set_value (GTK_RANGE (slider), current_index);
+}
+
+static gboolean
+should_show_scale_row (CcDisplayMonitor *output)
+{
+  CcDisplayMode *mode = cc_display_monitor_get_mode (output);
+  return n_supported_scales (mode) > 1;
+}
+
+static void
+scale_row_sync_visibility (GtkWidget        *row,
+                           CcDisplayMonitor *output)
+{
+  if (!should_show_scale_row (output))
+    gtk_widget_hide (row);
+  else
+    gtk_widget_show (row);
+}
+
+static double
+scale_slider_get_selected_scale (GtkRange       *slider,
+                                 CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  CcDisplayMode *mode = cc_display_monitor_get_mode (priv->current_output);
+  const double *scales = cc_display_mode_get_supported_scales (mode);
+  int selected = gtk_range_get_value (slider);
+
+  g_return_val_if_fail (selected < n_supported_scales (mode), 1.0);
+
+  return scales[selected];
+}
+
+static void
+scale_slider_changed (GtkRange       *slider,
+                      CcDisplayPanel *panel)
+{
+  cc_display_monitor_set_scale (panel->priv->current_output,
+                                scale_slider_get_selected_scale (slider, panel));
+  update_apply_button (panel);
+}
+
+static GtkWidget *
+make_scale_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
+{
+  GtkWidget *row, *slider;
+
+  slider = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, NULL);
+  gtk_widget_set_size_request (slider, 200, -1);
+
+  g_signal_connect_object (slider, "value-changed",
+                           G_CALLBACK (scale_slider_changed), panel, 0);
+
+  gtk_scale_set_draw_value (GTK_SCALE (slider), FALSE);
+  gtk_scale_set_has_origin (GTK_SCALE (slider), FALSE);
+  gtk_scale_set_digits (GTK_SCALE (slider), 0);
+  gtk_range_set_increments (GTK_RANGE (slider), 1, 1);
+
+  setup_scale_slider (slider, output);
+
+  row = make_row (panel->priv->rows_size_group, gtk_label_new (_("Scale")), slider);
+  gtk_widget_set_margin_top (gtk_bin_get_child (GTK_BIN (row)), 0);
+  gtk_widget_set_margin_bottom (gtk_bin_get_child (GTK_BIN (row)), 0);
+  g_signal_connect_object (output, "mode", G_CALLBACK (setup_scale_slider),
+                           slider, G_CONNECT_SWAPPED);
+
+  gtk_widget_show_all (row);
+  gtk_widget_set_no_show_all (row, TRUE);
+
+  g_signal_connect_object (output, "mode", G_CALLBACK (scale_row_sync_visibility),
+                           row, G_CONNECT_SWAPPED);
+  scale_row_sync_visibility (row, output);
+
+  return row;
+}
+
+static void
+underscanning_switch_active (CcDisplayPanel *panel,
+                             GParamSpec     *pspec,
+                             GtkWidget      *button)
+{
+  cc_display_monitor_set_active (panel->priv->current_output,
+                                 gtk_switch_get_active (GTK_SWITCH (button)));
+  update_apply_button (panel);
+}
+
+static GtkWidget *
+make_underscanning_row (CcDisplayPanel   *panel,
+                        CcDisplayMonitor *output)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *row, *button;
+
+  button = gtk_switch_new ();
+  gtk_switch_set_active (GTK_SWITCH (button),
+                         cc_display_monitor_get_underscanning (output));
+  g_signal_connect_object (button, "notify::active", G_CALLBACK (underscanning_switch_active),
+                           panel, G_CONNECT_SWAPPED);
+
+  row = make_row (priv->rows_size_group, gtk_label_new (_("Adjust for TV")), button);
+  return row;
+}
+
+static gint
+sort_modes_by_area_desc (CcDisplayMode *a, CcDisplayMode *b)
+{
+  int wa, ha, wb, hb;
+
+  cc_display_mode_get_resolution (a, &wa, &ha);
+  cc_display_mode_get_resolution (b, &wb, &hb);
+
+  return wb*hb - wa*ha;
+}
+
+static gint
+sort_modes_by_freq_desc (CcDisplayMode *a, CcDisplayMode *b)
+{
+  double delta = (cc_display_mode_get_freq_f (b) - cc_display_mode_get_freq_f (a))*1000.;
+  return delta;
+}
+
+static void
+ensure_res_freqs (CcDisplayMonitor *output)
+{
+  GHashTable *res_freqs;
+  GHashTableIter iter;
+  GList *resolutions, *modes, *m;
+  int old_width, old_height;
+
+  if (g_object_get_data (G_OBJECT (output), "res-freqs"))
+    return;
+
+  res_freqs = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                     NULL, (GDestroyNotify) g_list_free);
+  resolutions = NULL;
+
+  modes = cc_display_monitor_get_modes (output);
+  for (m = modes; m; m = m->next)
+    {
+      CcDisplayMode *mode = m->data;
+      const gchar *resolution = get_resolution_string (mode);
+      GList *l, *exist;
+
+      exist = l = g_hash_table_lookup (res_freqs, resolution);
+      l = g_list_append (l, mode);
+      if (!exist)
+        g_hash_table_insert (res_freqs, (gpointer) resolution, l);
+    }
+
+  g_hash_table_iter_init (&iter, res_freqs);
+  while (g_hash_table_iter_next (&iter, NULL, (gpointer *) &modes))
+    {
+      modes = g_list_copy (modes);
+      modes = g_list_sort (modes, (GCompareFunc) sort_modes_by_freq_desc);
+      g_hash_table_iter_replace (&iter, modes);
+
+      resolutions = g_list_prepend (resolutions, g_list_nth_data (modes, 0));
+    }
+
+  resolutions = g_list_sort (resolutions, (GCompareFunc) sort_modes_by_area_desc);
+
+  g_object_set_data_full (G_OBJECT (output), "res-freqs",
+                          res_freqs, (GDestroyNotify) g_hash_table_destroy);
+  g_object_set_data_full (G_OBJECT (output), "res-list",
+                          resolutions, (GDestroyNotify) g_list_free);
+
+  cc_display_monitor_get_geometry (output, NULL, NULL, &old_width, &old_height);
+  g_object_set_data (G_OBJECT (output), "old-width", GINT_TO_POINTER (old_width));
+  g_object_set_data (G_OBJECT (output), "old-height", GINT_TO_POINTER (old_height));
+  g_object_set_data (G_OBJECT (output), "old-rotation",
+                     GUINT_TO_POINTER (cc_display_monitor_get_rotation (output)));
+}
+
+static GtkWidget *
+make_output_ui (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *listbox;
+
+  ensure_res_freqs (priv->current_output);
+
+  listbox = make_list_box ();
+
+  if (should_show_rotation (panel, priv->current_output))
+      gtk_container_add (GTK_CONTAINER (listbox),
+                         make_orientation_row (panel, priv->current_output));
+
+  gtk_container_add (GTK_CONTAINER (listbox),
+                     make_resolution_row (panel, priv->current_output));
+
+  gtk_container_add (GTK_CONTAINER (listbox),
+                     make_refresh_rate_row (panel, priv->current_output));
+
+  gtk_container_add (GTK_CONTAINER (listbox),
+                     make_scale_row (panel, priv->current_output));
+
+  if (cc_display_monitor_supports_underscanning (priv->current_output))
+    gtk_container_add (GTK_CONTAINER (listbox),
+                       make_underscanning_row (panel, priv->current_output));
+
+  return listbox;
+}
+
+static GtkWidget *
+make_single_output_ui (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *vbox, *frame;
+
+  priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+
+  vbox = make_main_vbox ();
+
+  frame = make_frame (g_object_get_data (G_OBJECT (priv->current_output), "ui-name"), NULL);
+  gtk_container_add (GTK_CONTAINER (vbox), frame);
+
+  gtk_container_add (GTK_CONTAINER (frame), make_output_ui (panel));
+
+  gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (panel));
+
+  g_clear_object (&priv->rows_size_group);
+  return make_scrollable (vbox);
+}
+
+static GtkWidget *
+make_arrangement_row (CcDisplayPanel *panel)
+{
+  GtkWidget *row, *area;
+
+  area = (GtkWidget *) foo_scroll_area_new ();
+  g_object_set_data (G_OBJECT (area), "panel", panel);
+  foo_scroll_area_set_min_size (FOO_SCROLL_AREA (area), 400, 150);
+  g_signal_connect (area, "paint",
+                    G_CALLBACK (on_area_paint), panel);
+  g_signal_connect (area, "viewport_changed",
+                    G_CALLBACK (on_viewport_changed), panel);
+
+  row = g_object_new (CC_TYPE_LIST_BOX_ROW, NULL);
+  gtk_container_add (GTK_CONTAINER (row), area);
+
+  return row;
+}
+
+static void
+primary_label_sync (GtkWidget       *label,
+                    CcDisplayConfig *config)
+{
+  GList *outputs, *l;
+
+  outputs = cc_display_config_get_monitors (config);
+  for (l = outputs; l; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+      if (cc_display_monitor_is_primary (output))
+        {
+          gchar *text = g_object_get_data (G_OBJECT (output), "ui-number-name");
+          gtk_label_set_text (GTK_LABEL (label), text);
+          return;
+        }
+    }
+}
+
+static void
+primary_chooser_row_activated (CcDisplayPanel *panel,
+                               GtkListBoxRow  *row)
+{
+  CcDisplayMonitor *output = g_object_get_data (G_OBJECT (row), "output");
+
+  cc_display_monitor_set_primary (output, TRUE);
+  update_apply_button (panel);
+}
+
+static void
+primary_chooser_row_primary_changed (GtkListBoxRow    *row,
+                                     CcDisplayMonitor *output)
+{
+  GtkWidget *check = g_object_get_data (G_OBJECT (row), "check");
+
+  if (cc_display_monitor_is_primary (output))
+    gtk_widget_set_opacity (check, 1.0);
+  else
+    gtk_widget_set_opacity (check, 0.0);
+}
+
+static void
+show_primary_chooser_dialog (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *dialog, *listbox, *sw;
+  GtkSizeGroup *size_group;
+  GList *outputs, *l;
+
+  outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
+
+  dialog = make_dialog (panel, _("Primary Display"));
+  listbox = make_list_box ();
+  sw = g_object_new (GTK_TYPE_SCROLLED_WINDOW,
+                     "hscrollbar-policy", GTK_POLICY_NEVER,
+                     "max-content-height", 450,
+                     "propagate-natural-height", TRUE,
+                     NULL);
+  gtk_container_add (GTK_CONTAINER (sw), listbox);
+  gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), sw);
+
+  size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+  for (l = outputs; l; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+      GtkWidget *row, *check;
+      gchar *text;
+
+      check = gtk_image_new ();
+      gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
+      if (!cc_display_monitor_is_primary (output))
+        gtk_widget_set_opacity (check, 0.0);
+
+      text = g_object_get_data (G_OBJECT (output), "ui-number-name");
+      row = make_row (size_group, gtk_label_new (text), check);
+      g_object_set_data (G_OBJECT (row), "check", check);
+      g_object_set_data (G_OBJECT (row), "output", output);
+
+      g_signal_connect_object (row, "activated", G_CALLBACK (primary_chooser_row_activated),
+                               panel, G_CONNECT_SWAPPED);
+      g_signal_connect_object (output, "primary",
+                               G_CALLBACK (primary_chooser_row_primary_changed),
+                               row, G_CONNECT_SWAPPED);
+      gtk_container_add (GTK_CONTAINER (listbox), row);
+    }
+  g_object_unref (size_group);
+
+  show_dialog (panel, dialog);
+}
+
+static GtkWidget *
+make_primary_chooser_row (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *row, *label;
+
+  label = gtk_label_new (NULL);
+  row = make_row (priv->rows_size_group, gtk_label_new (_("Primary Display")), label);
+  g_signal_connect_object (row, "activated", G_CALLBACK (show_primary_chooser_dialog),
+                           panel, G_CONNECT_SWAPPED);
+  g_signal_connect_object (priv->current_config, "primary", G_CALLBACK (primary_label_sync),
+                           label, G_CONNECT_SWAPPED);
+  primary_label_sync (label, priv->current_config);
+
+  return row;
+}
+
+static void
+replace_current_output_ui (GtkWidget      *frame,
+                           CcDisplayPanel *panel)
+{
+  gtk_widget_destroy (gtk_bin_get_child (GTK_BIN (frame)));
+  gtk_container_add (GTK_CONTAINER (frame), make_output_ui (panel));
+  gtk_widget_show_all (frame);
+}
+
+static guint
+count_active_outputs (GList *outputs)
+{
+  GList *l;
+  guint active = 0;
+  for (l = outputs; l != NULL; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+      if (cc_display_monitor_is_active (output))
+        active++;
+    }
+  return active;
+}
+
+static GtkWidget *
+make_arrangement_ui (CcDisplayPanel *panel)
+{
+  GtkWidget *frame, *listbox;
+
+  frame = make_frame (_("Display Arrangement"),
+                      _("Drag displays to match your setup. The top bar is placed on the primary display."));
+  listbox = make_list_box ();
+  gtk_container_add (GTK_CONTAINER (frame), listbox);
+
+  gtk_container_add (GTK_CONTAINER (listbox), make_arrangement_row (panel));
+
+  gtk_container_add (GTK_CONTAINER (listbox), make_primary_chooser_row (panel));
+
+  return frame;
+}
+
+static void
+two_output_chooser_active (CcDisplayPanel *panel,
+                           GParamSpec     *pspec,
+                           GtkWidget      *button)
+{
+  CcDisplayMonitor *output = g_object_get_data (G_OBJECT (button), "output");
+
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
+    set_current_output (panel, output);
+}
+
+static void
+two_output_chooser_sync (GtkWidget      *box,
+                         CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GList *children, *l;
+
+  children = gtk_container_get_children (GTK_CONTAINER (box));
+  for (l = children; l; l = l->next)
+    {
+      GtkWidget *button = l->data;
+      CcDisplayMonitor *output = g_object_get_data (G_OBJECT (button), "output");
+      if (priv->current_output == output)
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+    }
+  g_list_free (children);
+}
+
+static GtkWidget *
+make_two_output_chooser (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *box;
+  GtkRadioButton *group;
+  GList *outputs, *l;
+
+  outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
+
+  box = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (box), GTK_BUTTONBOX_EXPAND);
+  gtk_style_context_add_class (gtk_widget_get_style_context (box), GTK_STYLE_CLASS_LINKED);
+
+  group = NULL;
+  for (l = outputs; l; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+      GtkWidget *button = gtk_radio_button_new_from_widget (group);
+
+      gtk_button_set_label (GTK_BUTTON (button), g_object_get_data (G_OBJECT (output), "ui-name"));
+      gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (button), FALSE);
+
+      g_object_set_data (G_OBJECT (button), "output", output);
+      g_signal_connect_object (button, "notify::active", G_CALLBACK (two_output_chooser_active),
+                               panel, G_CONNECT_SWAPPED);
+      gtk_container_add (GTK_CONTAINER (box), button);
+      group = GTK_RADIO_BUTTON (button);
+    }
+
+  g_signal_connect_object (panel, "current-output", G_CALLBACK (two_output_chooser_sync),
+                           box, G_CONNECT_SWAPPED);
+  two_output_chooser_sync (box, panel);
+
+  return box;
+}
+
+static GtkWidget *
+make_two_join_ui (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *vbox, *frame, *box;
+
+  priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+
+  vbox = make_main_vbox ();
+
+  gtk_container_add (GTK_CONTAINER (vbox), make_arrangement_ui (panel));
+
+  box = make_two_output_chooser (panel);
+  gtk_widget_set_margin_top (box, SECTION_PADDING);
+  gtk_container_add (GTK_CONTAINER (vbox), box);
+
+  frame = make_frame (NULL, NULL);
+  gtk_widget_set_margin_top (frame, HEADING_PADDING);
+  gtk_container_add (GTK_CONTAINER (vbox), frame);
+
+  gtk_container_add (GTK_CONTAINER (frame), make_output_ui (panel));
+  g_signal_connect_object (panel, "current-output", G_CALLBACK (replace_current_output_ui),
+                           frame, G_CONNECT_SWAPPED);
+
+  gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (panel));
+
+  g_clear_object (&priv->rows_size_group);
+  return make_scrollable (vbox);
+}
+
+static void
+two_output_chooser_activate_output (CcDisplayPanel *panel,
+                                    GParamSpec     *pspec,
+                                    GtkWidget      *button)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  CcDisplayMonitor *output = g_object_get_data (G_OBJECT (button), "output");
+
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
+    {
+      GList *outputs, *l;
+
+      cc_display_monitor_set_active (output, TRUE);
+
+      outputs = cc_display_config_get_monitors (priv->current_config);
+      for (l = outputs; l; l = l->next)
+        {
+          CcDisplayMonitor *other = l->data;
+          if (other != output)
+            cc_display_monitor_set_active (other, FALSE);
+        }
+
+      update_apply_button (panel);
+    }
+}
+
+static void
+connect_activate_output (GtkWidget *button,
+                         gpointer   panel)
+{
+  g_signal_connect_object (button, "notify::active", G_CALLBACK (two_output_chooser_activate_output),
+                           panel, G_CONNECT_SWAPPED);
+}
+
+static GtkWidget *
+make_two_single_ui (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *vbox, *frame, *box;
+
+  priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+
+  vbox = make_main_vbox ();
+
+  box = make_two_output_chooser (panel);
+  gtk_container_foreach (GTK_CONTAINER (box), connect_activate_output, panel);
+  gtk_container_add (GTK_CONTAINER (vbox), box);
+
+  frame = make_frame (NULL, NULL);
+  gtk_widget_set_margin_top (frame, HEADING_PADDING);
+  gtk_container_add (GTK_CONTAINER (vbox), frame);
+
+  gtk_container_add (GTK_CONTAINER (frame), make_output_ui (panel));
+  g_signal_connect_object (panel, "current-output", G_CALLBACK (replace_current_output_ui),
+                           frame, G_CONNECT_SWAPPED);
+
+  gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (panel));
+
+  g_clear_object (&priv->rows_size_group);
+  return make_scrollable (vbox);
+}
+
+static void
+set_mode_on_all_outputs (CcDisplayConfig *config,
+                         CcDisplayMode   *mode)
+{
+  GList *outputs, *l;
+  outputs = cc_display_config_get_monitors (config);
+  for (l = outputs; l; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+      cc_display_monitor_set_mode (output, mode);
+      cc_display_monitor_set_position (output, 0, 0);
+    }
+}
+
+static void
+mirror_resolution_row_activated (CcDisplayPanel *panel,
+                                 GtkListBoxRow  *row)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  CcDisplayMode *mode = g_object_get_data (G_OBJECT (row), "mode");
+
+  set_mode_on_all_outputs (priv->current_config, mode);
+  update_apply_button (panel);
+}
+
+static void
+show_mirror_resolution_dialog (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *dialog, *listbox, *sw;
+  GtkSizeGroup *size_group;
+  GList *resolutions, *l;
+
+  resolutions = g_object_get_data (G_OBJECT (priv->current_config), "mirror-res-list");
+
+  dialog = make_dialog (panel, _("Resolution"));
+  listbox = make_list_box ();
+  sw = g_object_new (GTK_TYPE_SCROLLED_WINDOW,
+                     "hscrollbar-policy", GTK_POLICY_NEVER,
+                     "max-content-height", 450,
+                     "propagate-natural-height", TRUE,
+                     NULL);
+  gtk_container_add (GTK_CONTAINER (sw), listbox);
+  gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), sw);
+
+  size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+  for (l = resolutions; l; l = l->next)
+    {
+      CcDisplayMode *mode = l->data;
+      GtkWidget *row, *check;
+
+      check = gtk_image_new ();
+      gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
+      if (!g_str_equal (get_resolution_string (cc_display_monitor_get_mode (priv->current_output)),
+                        get_resolution_string (mode)))
+        gtk_widget_set_opacity (check, 0.0);
+
+      row = make_row (size_group, gtk_label_new (get_resolution_string (mode)), check);
+      g_object_set_data (G_OBJECT (row), "check", check);
+      g_object_set_data (G_OBJECT (row), "mode", mode);
+
+      g_signal_connect_object (row, "activated", G_CALLBACK (mirror_resolution_row_activated),
+                               panel, G_CONNECT_SWAPPED);
+      g_signal_connect_object (priv->current_output, "mode",
+                               G_CALLBACK (resolution_row_mode_changed),
+                               row, G_CONNECT_SWAPPED);
+      gtk_container_add (GTK_CONTAINER (listbox), row);
+    }
+  g_object_unref (size_group);
+
+  show_dialog (panel, dialog);
+}
+
+static GtkWidget *
+make_mirror_resolution_row (CcDisplayPanel   *panel,
+                            CcDisplayMonitor *output)
+{
+  GtkWidget *row, *label;
+
+  label = gtk_label_new (get_resolution_string (cc_display_monitor_get_mode (output)));
+
+  row = make_row (panel->priv->rows_size_group, gtk_label_new (_("Resolution")), label);
+  g_signal_connect_object (row, "activated", G_CALLBACK (show_mirror_resolution_dialog),
+                           panel, G_CONNECT_SWAPPED);
+  g_signal_connect_object (output, "mode", G_CALLBACK (resolution_label_mode_changed),
+                           label, G_CONNECT_SWAPPED);
+  return row;
+}
+
+static void
+ensure_mirror_res_list (CcDisplayConfig *config)
+{
+  GHashTable *res_set;
+  GList *resolutions, *l;
+
+  if (g_object_get_data (G_OBJECT (config), "mirror-res-list"))
+    return;
+
+  res_set = g_hash_table_new (g_str_hash, g_str_equal);
+
+  resolutions = cc_display_config_get_cloning_modes (config);
+  for (l = resolutions; l; l = l->next)
+    {
+      CcDisplayMode *mode = l->data;
+      const gchar *resolution = get_resolution_string (mode);
+      if (!g_hash_table_contains (res_set, resolution))
+        g_hash_table_insert (res_set, (gpointer) resolution, mode);
+    }
+
+  resolutions = g_hash_table_get_values (res_set);
+  g_hash_table_destroy (res_set);
+
+  resolutions = g_list_sort (resolutions, (GCompareFunc) sort_modes_by_area_desc);
+
+  g_object_set_data_full (G_OBJECT (config), "mirror-res-list",
+                          resolutions, (GDestroyNotify) g_list_free);
+}
+
+static GtkWidget *
+make_two_mirror_ui (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *vbox, *listbox, *frame;
+
+  ensure_mirror_res_list (priv->current_config);
+  if (!cc_display_config_is_cloning (priv->current_config))
+    {
+      GList *modes;
+      cc_display_config_set_cloning (priv->current_config, TRUE);
+      modes = g_object_get_data (G_OBJECT (priv->current_config), "mirror-res-list");
+      set_mode_on_all_outputs (priv->current_config,
+                               CC_DISPLAY_MODE (g_list_nth_data (modes, 0)));
+    }
+
+  priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+
+  vbox = make_main_vbox ();
+  frame = make_frame (NULL, NULL);
+  gtk_container_add (GTK_CONTAINER (vbox), frame);
+  listbox = make_list_box ();
+  gtk_container_add (GTK_CONTAINER (frame), listbox);
+
+  if (should_show_rotation (panel, priv->current_output))
+    gtk_container_add (GTK_CONTAINER (listbox),
+                       make_orientation_row (panel, priv->current_output));
+
+  gtk_container_add (GTK_CONTAINER (listbox),
+                     make_mirror_resolution_row (panel, priv->current_output));
+
+  gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (panel));
+
+  g_clear_object (&priv->rows_size_group);
+  return make_scrollable (vbox);
+}
+
+static void
+two_output_visible_child_changed (CcDisplayPanel *panel,
+                                  GParamSpec     *pspec,
+                                  GtkWidget      *stack)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *bin;
+  GList *children, *l;
+
+  children = gtk_container_get_children (GTK_CONTAINER (stack));
+  for (l = children; l; l = l->next)
+    {
+      GtkWidget *ui = gtk_bin_get_child (GTK_BIN (l->data));
+      if (ui)
+        gtk_widget_destroy (ui);
+    }
+  g_list_free (children);
+
+  bin = gtk_stack_get_visible_child (GTK_STACK (stack));
+
+  if (g_str_equal (gtk_stack_get_visible_child_name (GTK_STACK (stack)), "mirror"))
+    {
+      gtk_container_add (GTK_CONTAINER (bin), make_two_mirror_ui (panel));
+    }
+  else
+    {
+      gboolean single;
+      GList *outputs, *l;
+
+      if (cc_display_config_is_cloning (priv->current_config))
+        {
+          cc_display_config_set_cloning (priv->current_config, FALSE);
+          lay_out_outputs_horizontally (panel);
+        }
+      single = g_str_equal (gtk_stack_get_visible_child_name (GTK_STACK (stack)), "single");
+      outputs = cc_display_config_get_monitors (priv->current_config);
+      for (l = outputs; l; l = l->next)
+        {
+          CcDisplayMonitor *output = l->data;
+          cc_display_monitor_set_active (output, (!single || output == priv->current_output));
+        }
+
+      if (single)
+        gtk_container_add (GTK_CONTAINER (bin), make_two_single_ui (panel));
+      else
+        gtk_container_add (GTK_CONTAINER (bin), make_two_join_ui (panel));
+    }
+
+  gtk_widget_show_all (stack);
+
+  ensure_monitor_labels (panel);
+  update_apply_button (panel);
+}
+
+static void
+setup_stack_switcher (GtkWidget *switcher)
+{
+  GList *children, *l;
+
+  children = gtk_container_get_children (GTK_CONTAINER (switcher));
+  for (l = children; l; l = l->next)
+    {
+      GtkWidget *button = l->data;
+      gtk_container_child_set (GTK_CONTAINER (switcher), button,
+                               "expand", TRUE,
+                               NULL);
+    }
+  g_list_free (children);
+}
+
+static GtkWidget *
+make_two_output_ui (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *vbox, *hbox, *stack, *switcher;
+  gboolean show_mirror;
+
+  show_mirror = g_list_length (cc_display_config_get_cloning_modes (priv->current_config)) > 0;
+
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, HEADING_PADDING);
+  gtk_widget_set_margin_top (hbox, HEADING_PADDING);
+  gtk_widget_set_margin_bottom (hbox, HEADING_PADDING);
+  gtk_container_add (GTK_CONTAINER (vbox), wrap_in_boxes (hbox));
+
+  gtk_container_add (GTK_CONTAINER (hbox), make_bold_label (_("Display Mode")));
+
+  switcher = gtk_stack_switcher_new ();
+  gtk_box_pack_end (GTK_BOX (hbox), switcher, TRUE, TRUE, 0);
+
+  gtk_container_add (GTK_CONTAINER (vbox), gtk_separator_new (GTK_ORIENTATION_HORIZONTAL));
+
+  stack = gtk_stack_new ();
+  gtk_container_add (GTK_CONTAINER (vbox), stack);
+  gtk_stack_switcher_set_stack (GTK_STACK_SWITCHER (switcher), GTK_STACK (stack));
+
+  gtk_stack_add_titled (GTK_STACK (stack), make_bin (),
+                        "join", _("Join Displays"));
+  if (show_mirror)
+    gtk_stack_add_titled (GTK_STACK (stack), make_bin (),
+                          "mirror", _("Mirror"));
+  gtk_stack_add_titled (GTK_STACK (stack), make_bin (),
+                        "single", _("Single Display"));
+
+  g_signal_connect_object (stack, "notify::visible-child-name",
+                           G_CALLBACK (two_output_visible_child_changed),
+                           panel, G_CONNECT_SWAPPED);
+
+  setup_stack_switcher (switcher);
+
+  if (cc_display_config_is_cloning (priv->current_config) && show_mirror)
+    gtk_stack_set_visible_child_name (GTK_STACK (stack), "mirror");
+  else if (count_active_outputs (cc_display_config_get_monitors (priv->current_config)) > 1)
+    gtk_stack_set_visible_child_name (GTK_STACK (stack), "join");
+  else
+    gtk_stack_set_visible_child_name (GTK_STACK (stack), "single");
+
+  return vbox;
+}
+
+static void
+output_switch_active (CcDisplayPanel *panel,
+                      GParamSpec     *pspec,
+                      GtkWidget      *button)
+{
+  cc_display_monitor_set_active (panel->priv->current_output,
+                                 gtk_switch_get_active (GTK_SWITCH (button)));
+  update_apply_button (panel);
+}
+
+static void
+output_switch_sync (GtkWidget        *button,
+                    CcDisplayMonitor *output)
+{
+  gtk_switch_set_active (GTK_SWITCH (button), cc_display_monitor_is_active (output));
+}
+
+static GtkWidget *
+make_output_switch (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *button = gtk_switch_new ();
+
+  g_signal_connect_object (button, "notify::active", G_CALLBACK (output_switch_active),
+                           panel, G_CONNECT_SWAPPED);
+  g_signal_connect_object (priv->current_output, "active", G_CALLBACK (output_switch_sync),
+                           button, G_CONNECT_SWAPPED);
+  output_switch_sync (button, priv->current_output);
+
+  if (count_active_outputs (cc_display_config_get_monitors (priv->current_config)) < 2 &&
+      cc_display_monitor_is_active (priv->current_output))
+    gtk_widget_set_sensitive (button, FALSE);
+
+  return button;
+}
+
+static void
+replace_output_switch (GtkWidget      *frame,
+                       CcDisplayPanel *panel)
+{
+  gtk_widget_destroy (gtk_bin_get_child (GTK_BIN (frame)));
+  gtk_container_add (GTK_CONTAINER (frame), make_output_switch (panel));
+  gtk_widget_show_all (frame);
+}
+
+static void
+output_chooser_row_activated (CcDisplayPanel *panel,
+                              GtkWidget      *row)
+{
+  CcDisplayMonitor *output = g_object_get_data (G_OBJECT (row), "output");
+  set_current_output (panel, output);
+}
+
+static void
+output_chooser_sync (GtkWidget      *button,
+                     CcDisplayPanel *panel)
+{
+  gchar *text = g_object_get_data (G_OBJECT (panel->priv->current_output), "ui-number-name");
+  GtkWidget *label = gtk_bin_get_child (GTK_BIN (button));
+
+  gtk_label_set_text (GTK_LABEL (label), text);
+  gtk_widget_hide (GTK_WIDGET (gtk_menu_button_get_popover (GTK_MENU_BUTTON (button))));
+}
+
+static GtkWidget *
+make_output_chooser_button (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *listbox, *button, *popover;
+  GList *outputs, *l;
+
+  outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
+
+  popover = gtk_popover_new (NULL);
+  listbox = make_list_box ();
+  gtk_container_add (GTK_CONTAINER (popover), listbox);
+
+  for (l = outputs; l; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+      GtkWidget *row = g_object_new (CC_TYPE_LIST_BOX_ROW, NULL);
+      gchar *text = g_object_get_data (G_OBJECT (output), "ui-number-name");
+      GtkWidget *label = g_object_new (GTK_TYPE_LABEL,
+                                       "label", text,
+                                       "margin", 4,
+                                       "halign", GTK_ALIGN_START,
+                                       NULL);
+      gtk_container_add (GTK_CONTAINER (row), label);
+      g_object_set_data (G_OBJECT (row), "output", output);
+
+      g_signal_connect_object (row, "activated", G_CALLBACK (output_chooser_row_activated),
+                               panel, G_CONNECT_SWAPPED);
+      gtk_container_add (GTK_CONTAINER (listbox), row);
+    }
+
+  gtk_widget_show_all (listbox);
+
+  button = gtk_menu_button_new ();
+  gtk_container_add (GTK_CONTAINER (button), make_bold_label (NULL));
+  gtk_menu_button_set_popover (GTK_MENU_BUTTON (button), popover);
+  g_signal_connect_object (panel, "current-output", G_CALLBACK (output_chooser_sync),
+                           button, G_CONNECT_SWAPPED);
+  output_chooser_sync (button, panel);
+
+  return button;
+}
+
+static GtkWidget *
+make_multi_output_ui (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *vbox, *frame, *hbox;
+
+  priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+
+  vbox = make_main_vbox ();
+
+  gtk_container_add (GTK_CONTAINER (vbox), make_arrangement_ui (panel));
+
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_widget_set_margin_top (hbox, SECTION_PADDING);
+  gtk_container_add (GTK_CONTAINER (vbox), hbox);
+
+  gtk_box_pack_start (GTK_BOX (hbox), make_output_chooser_button (panel), FALSE, FALSE, 0);
+
+  frame = make_bin ();
+  gtk_box_pack_end (GTK_BOX (hbox), frame, FALSE, FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (frame), make_output_switch (panel));
+  g_signal_connect_object (panel, "current-output", G_CALLBACK (replace_output_switch),
+                           frame, G_CONNECT_SWAPPED);
+
+  frame = make_frame (NULL, NULL);
+  gtk_widget_set_margin_top (frame, HEADING_PADDING);
+  gtk_container_add (GTK_CONTAINER (vbox), frame);
+
+  gtk_container_add (GTK_CONTAINER (frame), make_output_ui (panel));
+  g_signal_connect_object (panel, "current-output", G_CALLBACK (replace_current_output_ui),
+                           frame, G_CONNECT_SWAPPED);
+
+  gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (panel));
+
+  g_clear_object (&priv->rows_size_group);
+  return make_scrollable (vbox);
 }
 
 static void
@@ -499,11 +2109,14 @@ on_screen_changed (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
   CcDisplayConfig *current;
-  GList *outputs;
-  gint num_connected_outputs = 0, number = 0;
-  gboolean clone = FALSE, combined = FALSE;
-  GtkSizeGroup *sizegroup;
-  GList *sorted_outputs = NULL, *l;
+  GList *outputs, *l;
+  GtkWidget *main_widget;
+
+  reset_titlebar (panel);
+
+  main_widget = gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "main");
+  if (main_widget)
+    gtk_widget_destroy (main_widget);
 
   if (priv->dialog)
     gtk_dialog_response (GTK_DIALOG (priv->dialog), GTK_RESPONSE_NONE);
@@ -512,104 +2125,47 @@ on_screen_changed (CcDisplayPanel *panel)
 
   current = cc_display_config_manager_get_current (priv->manager);
   if (!current)
-    {
-      gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "error");
-      return;
-    }
+    goto show_error;
+
   priv->current_config = current;
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "main");
 
-  gtk_container_foreach (GTK_CONTAINER (priv->displays_listbox),
-                         (GtkCallback) gtk_widget_destroy, NULL);
-
-  outputs = cc_display_config_get_monitors (current);
-  /* count the number of active and connected outputs */
-  for (l = outputs; l != NULL; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-
-      /* ensure the built in display is first in the list */
-      if (cc_display_monitor_is_builtin (output))
-        sorted_outputs = g_list_prepend (sorted_outputs, output);
-      else
-        sorted_outputs = g_list_append (sorted_outputs, output);
-
-      num_connected_outputs++;
-    }
-
-  sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-
-  g_hash_table_remove_all (output_ids);
-
-  for (l = sorted_outputs; l; l = g_list_next (l))
-    {
-      GtkWidget *row, *item, *preview, *label;
-      gboolean primary, active;
-      const gchar *status;
-      gboolean display_closed = FALSE;
-      CcDisplayMonitor *output = l->data;
-
-      if (priv->lid_is_closed)
-        display_closed = cc_display_monitor_is_builtin (output);
-
-      row = gtk_list_box_row_new ();
-      item = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-      gtk_container_set_border_width (GTK_CONTAINER (item), 12);
-
-      preview = display_preview_new (panel, output, current, ++number,
-                                     DISPLAY_PREVIEW_LIST_HEIGHT);
-      gtk_size_group_add_widget (sizegroup, preview);
-
-      if (display_closed)
-        gtk_widget_set_sensitive (row, FALSE);
-
-      g_hash_table_insert (output_ids, output, GINT_TO_POINTER (number));
-
-      gtk_container_add (GTK_CONTAINER (item), preview);
-
-      label = gtk_label_new (cc_display_monitor_get_display_name (output));
-      gtk_container_add (GTK_CONTAINER (item), label);
-
-      primary = cc_display_monitor_is_primary (output);
-      active = cc_display_monitor_is_active (output);
-
-      if (num_connected_outputs > 1)
-        {
-          if (display_closed)
-            status = _("Lid Closed");
-          else if (clone)
-            /* translators: "Mirrored" describes when both displays show the same view */
-            status = _("Mirrored");
-          else if (primary)
-            status = _("Primary");
-          else if (!active)
-            status = _("Off");
-          else
-            {
-              status = _("Secondary");
-              combined = TRUE;
-            }
-
-          label = gtk_label_new (status);
-          gtk_widget_set_hexpand (label, TRUE);
-          gtk_widget_set_halign (label, GTK_ALIGN_END);
-          gtk_container_add (GTK_CONTAINER (item), label);
-        }
-
-      g_object_set_data (G_OBJECT (row), "cc-display-monitor", output);
-      gtk_container_add (GTK_CONTAINER (row), item);
-      gtk_container_add (GTK_CONTAINER (priv->displays_listbox), row);
-      gtk_widget_show_all (row);
-    }
-
-  g_list_free (sorted_outputs);
-
-  if (combined)
-    gtk_widget_show (priv->arrange_button);
-  else
-    gtk_widget_hide (priv->arrange_button);
-
+  ensure_output_numbers (current);
   ensure_monitor_labels (panel);
+
+  priv->current_output = NULL;
+  l = outputs = g_object_get_data (G_OBJECT (current), "ui-sorted-outputs");
+  while (!priv->current_output && l != NULL)
+    {
+      CcDisplayMonitor *output = l->data;
+      if (cc_display_monitor_is_active (output))
+        priv->current_output = output;
+      else
+        l = l->next;
+    }
+
+  if (!priv->current_output)
+    goto show_error;
+
+  switch (g_list_length (outputs))
+    {
+    case 1:
+      main_widget = make_single_output_ui (panel);
+      break;
+    case 2:
+      main_widget = make_two_output_ui (panel);
+      break;
+    default:
+      main_widget = make_multi_output_ui (panel);
+      break;
+    }
+
+  gtk_widget_show_all (main_widget);
+  gtk_stack_add_named (GTK_STACK (priv->stack), main_widget, "main");
+  gtk_stack_set_visible_child (GTK_STACK (priv->stack), main_widget);
+  return;
+
+ show_error:
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "error");
 }
 
 
@@ -627,6 +2183,9 @@ realign_outputs_after_resolution_change (CcDisplayPanel *self, CcDisplayMonitor 
   int x, y, width, height;
   GList *outputs, *l;
   CcDisplayRotation rotation;
+
+  if (self->priv->have_new_dbus_api)
+    return;
 
   g_assert (self->priv->current_config != NULL);
 
@@ -692,6 +2251,9 @@ lay_out_outputs_horizontally (CcDisplayPanel *self)
   int x;
   GList *outputs, *l;
 
+  if (self->priv->have_new_dbus_api)
+    return;
+
   /* Lay out all the monitors horizontally when "mirror screens" is turned
    * off, to avoid having all of them overlapped initially.  We put the
    * outputs turned off on the right-hand side.
@@ -731,7 +2293,6 @@ lay_out_outputs_horizontally (CcDisplayPanel *self)
     }
 
 }
-
 
 
 #define SPACE 15
@@ -1159,6 +2720,47 @@ grab_weak_ref_notify (gpointer  area,
 }
 
 static void
+show_apply_titlebar (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *header, *button, *toplevel;
+  GtkSizeGroup *size_group;
+
+  if (priv->apply_titlebar)
+    return;
+
+  priv->apply_titlebar = header = gtk_header_bar_new ();
+  gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Apply Changes?"));
+
+  size_group = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
+
+  button = gtk_button_new_with_label (_("Cancel"));
+  gtk_header_bar_pack_start (GTK_HEADER_BAR (header), button);
+  gtk_size_group_add_widget (size_group, button);
+  g_signal_connect_object (button, "clicked", G_CALLBACK (on_screen_changed),
+                           panel, G_CONNECT_SWAPPED);
+
+  button = gtk_button_new_with_label (_("Apply"));
+  gtk_header_bar_pack_end (GTK_HEADER_BAR (header), button);
+  gtk_size_group_add_widget (size_group, button);
+  g_signal_connect_object (button, "clicked", G_CALLBACK (apply_current_configuration),
+                           panel, G_CONNECT_SWAPPED);
+  gtk_style_context_add_class (gtk_widget_get_style_context (button),
+                               GTK_STYLE_CLASS_SUGGESTED_ACTION);
+
+  gtk_widget_show_all (header);
+  g_object_unref (size_group);
+
+  toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
+  header = gtk_window_get_titlebar (GTK_WINDOW (toplevel));
+  if (header)
+    priv->main_titlebar = g_object_ref (header);
+
+  gtk_window_set_titlebar (GTK_WINDOW (toplevel), priv->apply_titlebar);
+  g_object_ref (priv->apply_titlebar);
+}
+
+static void
 update_apply_button (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
@@ -1167,7 +2769,7 @@ update_apply_button (CcDisplayPanel *panel)
 
   if (!cc_display_config_is_applicable (priv->current_config))
     {
-      gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT, FALSE);
+      reset_titlebar (panel);
       return;
     }
 
@@ -1177,7 +2779,10 @@ update_apply_button (CcDisplayPanel *panel)
                                           applied_config);
   g_object_unref (applied_config);
 
-  gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT, !config_equal);
+  if (config_equal)
+    reset_titlebar (panel);
+  else
+    show_apply_titlebar (panel);
 }
 
 static void
@@ -1213,8 +2818,7 @@ on_output_event (FooScrollArea *area,
     {
       GrabInfo *info;
 
-      self->priv->current_output = output;
-
+      set_current_output (self, output);
 
       if (!cc_display_config_is_cloning (self->priv->current_config) &&
           n_monitors > 1)
@@ -1327,7 +2931,7 @@ paint_background (FooScrollArea *area,
 
   foo_scroll_area_get_viewport (area, &viewport);
 
-  cairo_set_source_rgba (cr, 0, 0, 0, 0.4);
+  cairo_set_source_rgba (cr, 0, 0, 0, 0.0);
   cairo_rectangle (cr,
                    viewport.x, viewport.y,
                    viewport.width, viewport.height);
@@ -1387,7 +2991,7 @@ on_area_paint (FooScrollArea  *area,
 
       cairo_translate (cr, x, y);
       paint_output (self, cr, self->priv->current_config, output,
-                    cc_display_panel_get_output_id (output),
+                    GPOINTER_TO_INT (g_object_get_data (G_OBJECT (output), "ui-number")),
                     w * scale, h * scale);
 
       cairo_restore (cr);
@@ -1412,73 +3016,6 @@ apply_current_configuration (CcDisplayPanel *self)
       g_warning ("Error applying configuration: %s", error->message);
       g_clear_error (&error);
     }
-}
-
-static void
-dialog_toplevel_focus_changed (GtkWindow      *window,
-                               GParamSpec     *pspec,
-                               CcDisplayPanel *self)
-{
-  ensure_monitor_labels (self);
-}
-
-static void
-show_arrange_displays_dialog (GtkButton      *button,
-                              CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  GtkWidget *content_area, *area, *vbox, *label;
-  gint response;
-
-  /* Title of displays dialog when multiple monitors are present. */
-  priv->dialog = gtk_dialog_new_with_buttons (_("Arrange Combined Displays"),
-                                              GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))),
-                                              GTK_DIALOG_MODAL | GTK_DIALOG_USE_HEADER_BAR,
-                                              _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                              _("_Apply"), GTK_RESPONSE_ACCEPT,
-                                              NULL);
-  g_signal_connect (priv->dialog, "notify::has-toplevel-focus",
-                    G_CALLBACK (dialog_toplevel_focus_changed), panel);
-  gtk_dialog_set_default_response (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT);
-  gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT, FALSE);
-
-  content_area = gtk_dialog_get_content_area (GTK_DIALOG (priv->dialog));
-
-  area = (GtkWidget *) foo_scroll_area_new ();
-  g_object_set_data (G_OBJECT (area), "panel", panel);
-
-  foo_scroll_area_set_min_size (FOO_SCROLL_AREA (area), 520, 290);
-  gtk_widget_set_margin_end (area, 12);
-  gtk_widget_set_margin_start (area, 12);
-  gtk_widget_set_size_request (area, 520, 290);
-  g_signal_connect (area, "paint",
-                    G_CALLBACK (on_area_paint), panel);
-  g_signal_connect (area, "viewport_changed",
-                    G_CALLBACK (on_viewport_changed), panel);
-
-  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_container_add (GTK_CONTAINER (vbox), area);
-
-  label = gtk_label_new (_("Drag displays to rearrange them"));
-  gtk_widget_set_margin_top (label, 12);
-  gtk_widget_set_margin_bottom (label, 12);
-  gtk_container_add (GTK_CONTAINER (vbox), label);
-  gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
-
-  gtk_widget_show_all (vbox);
-  gtk_container_add (GTK_CONTAINER (content_area), vbox);
-
-  response = gtk_dialog_run (GTK_DIALOG (priv->dialog));
-  if (response == GTK_RESPONSE_ACCEPT)
-    apply_current_configuration (panel);
-  else if (response != GTK_RESPONSE_NONE)
-    {
-      /* re-read the previous configuration */
-      on_screen_changed (panel);
-    }
-
-  gtk_widget_destroy (priv->dialog);
-  priv->dialog = NULL;
 }
 
 static const gchar *
@@ -1547,421 +3084,33 @@ make_resolution_string (CcDisplayMode *mode)
     return g_strdup_printf ("%d × %d%s", width, height, interlaced);
 }
 
-static GtkWidget *
-list_box_item (const gchar *title,
-               const gchar *subtitle)
+static const gchar *
+get_resolution_string (CcDisplayMode *mode)
 {
-  GtkWidget *item, *label, *row;
+  char *resolution;
 
-  row = gtk_list_box_row_new ();
+  resolution = g_object_get_data (G_OBJECT (mode), "resolution");
+  if (resolution)
+    return resolution;
 
-  item = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_container_set_border_width (GTK_CONTAINER (item), 12);
-
-  label = gtk_label_new (title);
-  gtk_container_add (GTK_CONTAINER (item), label);
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-
-  label = gtk_label_new (subtitle);
-  gtk_container_add (GTK_CONTAINER (item), label);
-  gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-
-  gtk_container_add (GTK_CONTAINER (row), item);
-
-  return row;
+  resolution = make_resolution_string (mode);
+  g_object_set_data_full (G_OBJECT (mode), "resolution", resolution, g_free);
+  return resolution;
 }
 
-static gboolean
-is_atsc_duplicate_freq (CcDisplayMode *mode,
-                        CcDisplayMode *next_mode)
+static const gchar *
+get_frequency_string (CcDisplayMode *mode)
 {
-  double freq, next_freq;
-  gboolean ret;
+  char *frequency;
 
-  if (next_mode == NULL)
-    return FALSE;
+  frequency = g_object_get_data (G_OBJECT (mode), "frequency");
+  if (frequency)
+    return frequency;
 
-  freq = cc_display_mode_get_freq_f (mode);
-  next_freq = cc_display_mode_get_freq_f (next_mode);
+  frequency = g_strdup_printf (_("%.1lf Hz"), cc_display_mode_get_freq_f (mode));
 
-  ret = fabs (freq - (next_freq / 1000.0 * 1001.0)) < 0.01;
-
-  if (ret)
-    g_debug ("Next frequency %f is the NTSC variant of %f",
-             next_freq, freq);
-
-  return ret;
-}
-
-static int
-sort_frequencies (gconstpointer a, gconstpointer b)
-{
-  CcDisplayMode *mode_a = (CcDisplayMode *) a;
-  CcDisplayMode *mode_b = (CcDisplayMode *) b;
-
-  /* Highest to lowest */
-  if (cc_display_mode_get_freq_f (mode_a) > cc_display_mode_get_freq_f (mode_b))
-    return -1;
-  if (cc_display_mode_get_freq_f (mode_a) < cc_display_mode_get_freq_f (mode_b))
-    return 1;
-  return 0;
-}
-
-static void
-setup_frequency_combo_box (CcDisplayPanel *panel,
-                           CcDisplayMode  *resolution_mode)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  CcDisplayMode *current_mode;
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-  gchar *res;
-  GSList *l, *frequencies;
-  guint i;
-  gboolean prev_dup;
-
-  current_mode = cc_display_monitor_get_mode (priv->current_output);
-
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (priv->freq_combo));
-  gtk_list_store_clear (GTK_LIST_STORE (model));
-
-  i = 0;
-  res = make_resolution_string (resolution_mode);
-  frequencies = g_slist_copy (g_hash_table_lookup (priv->res_freqs, res));
-  g_free (res);
-  frequencies = g_slist_sort (frequencies, sort_frequencies);
-  prev_dup = FALSE;
-
-  /* Look for 59.94Hz, and if it exists, remove the 60Hz option
-   * in favour of this NTSC/ATSC frequency.
-   * 60Hz is a "PC" frequency, 59.94Hz is a holdover
-   * from NTSC:
-   * https://en.wikipedia.org/wiki/NTSC#Lines_and_refresh_rate
-   *
-   * We also want to handle this for ~30Hz and ~120Hz */
-  for (l = frequencies; l != NULL; l = l->next)
-    {
-      CcDisplayMode *mode = l->data;
-      CcDisplayMode *next_mode;
-      gchar *freq;
-      gboolean dup;
-
-      if (l->next != NULL)
-        next_mode = l->next->data;
-      else
-        next_mode = NULL;
-
-      dup = is_atsc_duplicate_freq (mode, next_mode);
-      if (dup && mode != current_mode)
-        {
-          prev_dup = TRUE;
-          continue;
-        }
-
-      if (prev_dup)
-        {
-          /* translators: example string is "60 Hz (NTSC)"
-           * NTSC is https://en.wikipedia.org/wiki/NTSC */
-          freq = g_strdup_printf (_("%d Hz (NTSC)"),
-                                  (int) (roundf (cc_display_mode_get_freq_f (mode))));
-        }
-      else
-        {
-          /* translators: example string is "60 Hz" */
-          freq = g_strdup_printf (_("%d Hz"), cc_display_mode_get_freq (mode));
-        }
-
-      gtk_list_store_insert_with_values (GTK_LIST_STORE (model), &iter,
-                                         -1, 0, freq, 1, mode, -1);
-      g_free (freq);
-
-      if (mode == current_mode)
-        gtk_combo_box_set_active_iter (GTK_COMBO_BOX (priv->freq_combo), &iter);
-
-      prev_dup = dup;
-      i++;
-    }
-
-  g_slist_free (frequencies);
-
-  if (i < 2)
-    {
-      gtk_widget_hide (priv->freq_combo);
-      return;
-    }
-
-  gtk_widget_show (priv->freq_combo);
-  if (gtk_combo_box_get_active (GTK_COMBO_BOX (priv->freq_combo)) == -1)
-    gtk_combo_box_set_active (GTK_COMBO_BOX (priv->freq_combo), 0);
-}
-
-static guint
-n_supported_scales (CcDisplayMode *mode)
-{
-  const double *scales = cc_display_mode_get_supported_scales (mode);
-  guint n = 0;
-
-  while (scales[n] != 0.0)
-    n++;
-
-  return n;
-}
-
-static void
-setup_scaling_slider (CcDisplayPanel *panel,
-                      CcDisplayMode  *resolution_mode)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  guint i;
-  guint n;
-  const double *scales;
-
-  scales = cc_display_mode_get_supported_scales (resolution_mode);
-  n = n_supported_scales (resolution_mode);
-
-  if (n > 0)
-    {
-      GtkAdjustment *adj;
-      double current_scale;
-      int current_index = -1;
-
-      current_scale = cc_display_monitor_get_scale (priv->current_output);
-      adj = gtk_range_get_adjustment (GTK_RANGE (priv->scale_slider));
-
-      gtk_scale_clear_marks (GTK_SCALE (priv->scale_slider));
-
-      gtk_adjustment_set_step_increment (adj, 1);
-      gtk_adjustment_set_lower (adj, 0);
-      gtk_adjustment_set_upper (adj, n-1);
-      gtk_scale_set_digits (GTK_SCALE (priv->scale_slider), 0);
-
-      for (i = 0; i < n; ++i)
-        {
-          double rounded_scale = round (scales[i] * 10) / 10;
-          double integral;
-          double fractional = modf (rounded_scale, &integral);
-
-          if (scales[i] == current_scale || (current_index < 0 && scales[i] == 1.0))
-            current_index = i;
-
-          if (fractional != 0 && (fractional != 0.5 || integral > 0))
-            continue;
-
-          gchar *s = g_strdup_printf ("%.2lg×", scales[i]);
-          gtk_scale_add_mark (GTK_SCALE (priv->scale_slider), i, GTK_POS_TOP, s);
-          g_free (s);
-        }
-
-      gtk_widget_show (priv->scale_slider);
-      gtk_range_set_value (GTK_RANGE (priv->scale_slider), current_index);
-    }
-  else
-    {
-      gtk_widget_hide (priv->scale_slider);
-    }
-}
-
-static void
-free_mode_list (gpointer key,
-                gpointer value,
-                gpointer data)
-{
-  g_slist_free (value);
-}
-
-static void
-clear_res_freqs (CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  if (priv->res_freqs)
-    {
-      g_hash_table_foreach (priv->res_freqs, free_mode_list, NULL);
-      g_hash_table_destroy (priv->res_freqs);
-      priv->res_freqs = NULL;
-    }
-}
-
-static void
-setup_resolution_combo_box (CcDisplayPanel  *panel,
-                            GList           *modes,
-                            CcDisplayMode   *current_mode)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  GtkTreeModel *res_model;
-  GList *m;
-
-  clear_res_freqs (panel);
-  priv->res_freqs = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-
-  res_model = gtk_combo_box_get_model (GTK_COMBO_BOX (priv->res_combo));
-  gtk_list_store_clear (GTK_LIST_STORE (res_model));
-
-  for (m = modes; m != NULL; m = m->next)
-    {
-      CcDisplayMode *mode = m->data;
-      GSList *l;
-      gchar *res;
-      gint output_width, output_height, mode_width, mode_height;
-
-      if (!current_mode)
-        current_mode = mode;
-
-      cc_display_mode_get_resolution (mode, &mode_width, &mode_height);
-
-      cc_display_mode_get_resolution (cc_display_monitor_get_preferred_mode (priv->current_output),
-                                      &output_width, &output_height);
-
-      if (!should_show_resolution (output_width, output_height, mode_width,
-                                   mode_height))
-        continue;
-
-      res = make_resolution_string (mode);
-
-      if ((l = g_hash_table_lookup (priv->res_freqs, res)) == NULL)
-        {
-          GtkTreeIter iter;
-          gint current_mode_width, current_mode_height;
-
-          gtk_list_store_insert_with_values (GTK_LIST_STORE (res_model), &iter,
-                                             -1, 0, res, 1, mode, -1);
-
-          cc_display_mode_get_resolution (current_mode,
-                                          &current_mode_width, &current_mode_height);
-          /* select the current mode in the combo box */
-          if (mode_width == current_mode_width && mode_height == current_mode_height
-              && cc_display_mode_is_interlaced (mode) == cc_display_mode_is_interlaced (current_mode))
-            {
-              gtk_combo_box_set_active_iter (GTK_COMBO_BOX (priv->res_combo),
-                                             &iter);
-            }
-        }
-
-      l = g_slist_append (l, mode);
-      g_hash_table_replace (priv->res_freqs, res, l);
-    }
-
-  /* ensure a resolution is selected by default */
-  if (gtk_combo_box_get_active (GTK_COMBO_BOX (priv->res_combo)) == -1)
-    gtk_combo_box_set_active (GTK_COMBO_BOX (priv->res_combo), 0);
-
-  setup_frequency_combo_box (panel, current_mode);
-  setup_scaling_slider (panel, current_mode);
-}
-
-
-static void
-setup_listbox_row_activated (GtkListBox     *list_box,
-                             GtkListBoxRow  *row,
-                             CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  GList *modes;
-  gint index;
-
-  if (!row)
-    return;
-
-  index = gtk_list_box_row_get_index (row);
-
-  gtk_widget_set_sensitive (priv->config_grid, index != DISPLAY_MODE_OFF);
-  cc_display_monitor_set_active (priv->current_output,
-                                 (index != DISPLAY_MODE_OFF));
-
-  if (index == DISPLAY_MODE_MIRROR)
-    {
-      modes = cc_display_config_get_cloning_modes (priv->current_config);
-      cc_display_config_set_cloning (priv->current_config, TRUE);
-    }
-  else
-    {
-      cc_display_monitor_set_primary (priv->current_output,
-                                      (index == DISPLAY_MODE_PRIMARY));
-      cc_display_config_set_cloning (priv->current_config, FALSE);
-
-      modes = cc_display_monitor_get_modes (priv->current_output);
-    }
-
-  setup_resolution_combo_box (panel, modes,
-                              cc_display_monitor_get_mode (priv->current_output));
-  update_apply_button (panel);
-}
-
-static void
-rotate_left_clicked (GtkButton      *button,
-                     CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  CcDisplayRotation rotation;
-  gboolean active;
-
-  active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-
-  if (active)
-    {
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_right_button), FALSE);
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->upside_down_button), FALSE);
-      rotation = CC_DISPLAY_ROTATION_90;
-    }
-  else
-    {
-      rotation = CC_DISPLAY_ROTATION_NONE;
-    }
-
-  cc_display_monitor_set_rotation (priv->current_output, rotation);
-  update_apply_button (panel);
-}
-
-static void
-upside_down_clicked (GtkButton      *button,
-                     CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  CcDisplayRotation rotation;
-  gboolean active;
-
-  active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-
-  if (active)
-    {
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_left_button), FALSE);
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_right_button), FALSE);
-      rotation = CC_DISPLAY_ROTATION_180;
-    }
-  else
-    {
-      rotation = CC_DISPLAY_ROTATION_NONE;
-    }
-
-  cc_display_monitor_set_rotation (priv->current_output, rotation);
-  update_apply_button (panel);
-}
-
-static void
-rotate_right_clicked (GtkButton      *button,
-                      CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  CcDisplayRotation rotation;
-  gboolean active;
-
-  active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-
-  if (active)
-    {
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_left_button), FALSE);
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->upside_down_button), FALSE);
-      rotation = CC_DISPLAY_ROTATION_270;
-    }
-  else
-    {
-      rotation = CC_DISPLAY_ROTATION_NONE;
-    }
-
-  cc_display_monitor_set_rotation (priv->current_output, rotation);
-  update_apply_button (panel);
+  g_object_set_data_full (G_OBJECT (mode), "frequency", frequency, g_free);
+  return frequency;
 }
 
 static const double known_diagonals[] = {
@@ -2003,77 +3152,6 @@ make_display_size_string (int width_mm,
   return inches;
 }
 
-static void
-freq_combo_changed (GtkComboBox    *combo,
-                    CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-  CcDisplayMode *mode;
-
-  model = gtk_combo_box_get_model (combo);
-
-  if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter))
-    {
-      gtk_tree_model_get (GTK_TREE_MODEL (model), &iter, 1, &mode, -1);
-      if (mode)
-        {
-          cc_display_monitor_set_mode (priv->current_output, mode);
-          update_apply_button (panel);
-        }
-    }
-}
-
-static void
-res_combo_changed (GtkComboBox    *combo,
-                   CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  GtkTreeModel *res_model;
-  GtkTreeIter iter;
-  CcDisplayMode *mode;
-
-  res_model = gtk_combo_box_get_model (combo);
-
-  if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter))
-    {
-      gtk_tree_model_get (GTK_TREE_MODEL (res_model), &iter, 1, &mode, -1);
-
-      if (cc_display_config_is_cloning (priv->current_config))
-        {
-          GList *outputs, *l;
-          outputs = cc_display_config_get_monitors (priv->current_config);
-          for (l = outputs; l != NULL; l = l->next)
-            cc_display_monitor_set_mode (CC_DISPLAY_MONITOR (l->data), mode);
-        }
-      else
-        {
-          cc_display_monitor_set_mode (priv->current_output, mode);
-        }
-
-      update_apply_button (panel);
-
-      setup_frequency_combo_box (panel, mode);
-      setup_scaling_slider (panel, mode);
-    }
-}
-
-static void
-sanity_check_rotation (CcDisplayMonitor *output)
-{
-  CcDisplayRotation rotation;
-
-  rotation = cc_display_monitor_get_rotation (output);
-
-  /* other options such as reflection are not supported */
-  rotation &= (CC_DISPLAY_ROTATION_NONE | CC_DISPLAY_ROTATION_90
-               | CC_DISPLAY_ROTATION_180 | CC_DISPLAY_ROTATION_270);
-  if (rotation == 0)
-    rotation = CC_DISPLAY_ROTATION_NONE;
-  cc_display_monitor_set_rotation (output, rotation);
-}
-
 static gboolean
 should_show_rotation (CcDisplayPanel *panel,
                       CcDisplayMonitor  *output)
@@ -2099,520 +3177,12 @@ should_show_rotation (CcDisplayPanel *panel,
 }
 
 static void
-underscan_switch_toggled (CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  gboolean value;
-
-  value = gtk_switch_get_active (GTK_SWITCH (priv->scaling_switch));
-  cc_display_monitor_set_underscanning (priv->current_output, value);
-  update_apply_button (panel);
-}
-
-static double
-scale_slider_get_selected_scale (CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  CcDisplayMode *mode = cc_display_monitor_get_mode (priv->current_output);
-  const double *scales = cc_display_mode_get_supported_scales (mode);
-  int selected = gtk_range_get_value (GTK_RANGE (priv->scale_slider));
-
-  g_return_val_if_fail (selected < n_supported_scales (mode), 1.0);
-
-  return scales[selected];
-}
-
-static void
-scale_slider_changed (GtkRange *slider,
-                      CcDisplayPanel *panel)
-{
-  cc_display_monitor_set_scale (panel->priv->current_output,
-                                scale_slider_get_selected_scale (panel));
-  update_apply_button (panel);
-}
-
-static char *
-scale_slider_format_value (GtkScale *slider,
-                           double value,
-                           CcDisplayPanel *panel)
-{
-  return g_strdup_printf ("%.3g", scale_slider_get_selected_scale (panel));
-}
-
-static void
-show_setup_dialog (CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  GtkWidget *listbox = NULL, *content_area, *item, *box, *frame, *preview;
-  GtkWidget *label, *rotate_box;
-  gint width_mm, height_mm, old_width, old_height, grid_pos;
-  gchar *str;
-  gboolean clone, was_clone, primary, active;
-  GtkListStore *res_model, *freq_model;
-  GtkCellRenderer *renderer;
-  CcDisplayRotation rotation;
-  gboolean show_rotation;
-  gint response, num_active_outputs = 0;
-  GList *outputs, *l;
-
-  outputs = cc_display_config_get_monitors (priv->current_config);
-
-  /* count the number of active */
-  for (l = outputs; l != NULL; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      if (cc_display_monitor_is_active (output))
-        num_active_outputs++;
-    }
-
-  priv->dialog = gtk_dialog_new_with_buttons (cc_display_monitor_get_display_name (priv->current_output),
-                                              GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))),
-                                              GTK_DIALOG_MODAL | GTK_DIALOG_USE_HEADER_BAR,
-                                              _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                              _("_Apply"), GTK_RESPONSE_ACCEPT,
-                                              NULL);
-  g_signal_connect (priv->dialog, "notify::has-toplevel-focus",
-                    G_CALLBACK (dialog_toplevel_focus_changed), panel);
-  gtk_dialog_set_default_response (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT);
-  gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT, FALSE);
-  gtk_window_set_resizable (GTK_WINDOW (priv->dialog), FALSE);
-
-  content_area = gtk_dialog_get_content_area (GTK_DIALOG (priv->dialog));
-
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_set_margin_start (box, 12);
-  gtk_widget_set_margin_end (box, 12);
-  gtk_widget_set_margin_top (box, 6);
-  gtk_widget_set_margin_bottom (box, 12);
-  gtk_container_add (GTK_CONTAINER (content_area), box);
-
-  /* configuration grid */
-  grid_pos = 0;
-  priv->config_grid = gtk_grid_new ();
-  gtk_widget_set_margin_start (priv->config_grid, 36);
-  gtk_widget_set_margin_end (priv->config_grid, 36);
-  gtk_widget_set_margin_bottom (priv->config_grid, 6);
-  gtk_grid_set_column_spacing (GTK_GRID (priv->config_grid), 12);
-  gtk_grid_set_row_spacing (GTK_GRID (priv->config_grid), 12);
-
-  /* preview */
-  preview = display_preview_new (panel, priv->current_output,
-                                 priv->current_config,
-                                 cc_display_panel_get_output_id (priv->current_output),
-                                 DISPLAY_PREVIEW_SETUP_HEIGHT);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), preview, 0, grid_pos, 2, 1);
-  grid_pos++;
-
-  /* rotation */
-  show_rotation = should_show_rotation (panel, priv->current_output);
-  rotation = cc_display_monitor_get_rotation (priv->current_output);
-
-  if (show_rotation)
-    {
-      rotate_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-      gtk_widget_set_margin_bottom (rotate_box, 12);
-      gtk_style_context_add_class (gtk_widget_get_style_context (rotate_box),
-                                   GTK_STYLE_CLASS_LINKED);
-      gtk_grid_attach (GTK_GRID (priv->config_grid), rotate_box, 0, grid_pos, 2, 1);
-      gtk_widget_set_halign (rotate_box, GTK_ALIGN_CENTER);
-      grid_pos++;
-
-      if (cc_display_monitor_supports_rotation (priv->current_output,
-                                                CC_DISPLAY_ROTATION_90))
-        {
-          priv->rotate_left_button = gtk_toggle_button_new ();
-          gtk_widget_set_tooltip_text (priv->rotate_left_button, _("Rotate counterclockwise by 90\xc2\xb0"));
-          if (rotation == CC_DISPLAY_ROTATION_90)
-            gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_left_button), TRUE);
-          g_signal_connect (priv->rotate_left_button, "clicked",
-                            G_CALLBACK (rotate_left_clicked), panel);
-          g_signal_connect_swapped (priv->rotate_left_button, "clicked",
-                                    G_CALLBACK (gtk_widget_queue_draw), preview);
-          gtk_container_add (GTK_CONTAINER (priv->rotate_left_button),
-                             gtk_image_new_from_icon_name ("object-rotate-left-symbolic",
-                                                           GTK_ICON_SIZE_BUTTON));
-          gtk_widget_set_halign (priv->rotate_left_button, GTK_ALIGN_END);
-          gtk_container_add (GTK_CONTAINER (rotate_box), priv->rotate_left_button);
-        }
-
-      if (cc_display_monitor_supports_rotation (priv->current_output,
-                                                CC_DISPLAY_ROTATION_180))
-        {
-          priv->upside_down_button = gtk_toggle_button_new ();
-          gtk_widget_set_tooltip_text (priv->upside_down_button, _("Rotate by 180\xc2\xb0"));
-          if (rotation == CC_DISPLAY_ROTATION_180)
-            gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->upside_down_button), TRUE);
-          g_signal_connect (priv->upside_down_button, "clicked",
-                            G_CALLBACK (upside_down_clicked), panel);
-          g_signal_connect_swapped (priv->upside_down_button, "clicked",
-                                    G_CALLBACK (gtk_widget_queue_draw), preview);
-          gtk_container_add (GTK_CONTAINER (priv->upside_down_button),
-                             gtk_image_new_from_icon_name ("object-flip-vertical-symbolic",
-                                                           GTK_ICON_SIZE_BUTTON));
-          gtk_widget_set_halign (priv->upside_down_button, GTK_ALIGN_FILL);
-          gtk_container_add (GTK_CONTAINER (rotate_box), priv->upside_down_button);
-        }
-
-      if (cc_display_monitor_supports_rotation (priv->current_output,
-                                                CC_DISPLAY_ROTATION_270))
-        {
-          priv->rotate_right_button = gtk_toggle_button_new ();
-          gtk_widget_set_tooltip_text (priv->rotate_right_button, _("Rotate clockwise by 90\xc2\xb0"));
-          if (rotation == CC_DISPLAY_ROTATION_270)
-            gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_right_button), TRUE);
-          g_signal_connect (priv->rotate_right_button, "clicked",
-                            G_CALLBACK (rotate_right_clicked), panel);
-          g_signal_connect_swapped (priv->rotate_right_button, "clicked",
-                                    G_CALLBACK (gtk_widget_queue_draw), preview);
-          gtk_container_add (GTK_CONTAINER (priv->rotate_right_button),
-                             gtk_image_new_from_icon_name ("object-rotate-right-symbolic",
-                                                           GTK_ICON_SIZE_BUTTON));
-          gtk_widget_set_halign (priv->rotate_right_button, GTK_ALIGN_START);
-          gtk_container_add (GTK_CONTAINER (rotate_box), priv->rotate_right_button);
-        }
-    }
-
-  /* size */
-  cc_display_monitor_get_physical_size (priv->current_output, &width_mm, &height_mm);
-  str = make_display_size_string (width_mm, height_mm);
-
-  if (str != NULL)
-    {
-      label = gtk_label_new (_("Size"));
-      gtk_style_context_add_class (gtk_widget_get_style_context (label),
-                                   GTK_STYLE_CLASS_DIM_LABEL);
-      gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, grid_pos, 1, 1);
-      gtk_widget_set_halign (label, GTK_ALIGN_END);
-
-      label = gtk_label_new (str);
-      gtk_grid_attach (GTK_GRID (priv->config_grid), label, 1, grid_pos, 1, 1);
-      gtk_widget_set_halign (label, GTK_ALIGN_START);
-      g_free (str);
-
-      grid_pos++;
-    }
-
-  /* aspect ratio */
-  label = gtk_label_new (_("Aspect Ratio"));
-  gtk_style_context_add_class (gtk_widget_get_style_context (label),
-                               GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, grid_pos, 1, 1);
-  gtk_widget_set_halign (label, GTK_ALIGN_END);
-  {
-    int w, h;
-    cc_display_mode_get_resolution (cc_display_monitor_get_preferred_mode (priv->current_output),
-                                    &w, &h);
-    label = gtk_label_new (make_aspect_string (w, h));
-  }
-  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 1, grid_pos, 1, 1);
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  grid_pos++;
-
-  /* resolution combo box */
-  res_model = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_POINTER);
-  priv->res_combo = gtk_combo_box_new_with_model (GTK_TREE_MODEL (res_model));
-  g_object_unref (res_model);
-  renderer = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (priv->res_combo), renderer, TRUE);
-  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (priv->res_combo), renderer, "text", 0);
-  g_signal_connect (priv->res_combo, "changed", G_CALLBACK (res_combo_changed),
-                    panel);
-  g_signal_connect_swapped (priv->res_combo, "changed",
-                            G_CALLBACK (gtk_widget_queue_draw), preview);
-
-  label = gtk_label_new (_("Resolution"));
-  gtk_style_context_add_class (gtk_widget_get_style_context (label),
-                               GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, grid_pos, 1, 1);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), priv->res_combo, 1, grid_pos, 1, 1);
-  grid_pos++;
-
-  gtk_widget_set_halign (label, GTK_ALIGN_END);
-  gtk_widget_set_halign (priv->res_combo, GTK_ALIGN_START);
-
-  /* overscan */
-  if (!cc_display_monitor_is_builtin (priv->current_output) &&
-      cc_display_monitor_supports_underscanning (priv->current_output))
-    {
-      priv->scaling_switch = gtk_switch_new ();
-      gtk_switch_set_active (GTK_SWITCH (priv->scaling_switch),
-                             cc_display_monitor_get_underscanning (priv->current_output));
-      g_signal_connect_swapped (G_OBJECT (priv->scaling_switch), "notify::active",
-                                G_CALLBACK (underscan_switch_toggled), panel);
-
-      label = gtk_label_new (_("Adjust for TV"));
-      gtk_style_context_add_class (gtk_widget_get_style_context (label),
-                                   GTK_STYLE_CLASS_DIM_LABEL);
-      gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, grid_pos, 1, 1);
-      gtk_grid_attach (GTK_GRID (priv->config_grid), priv->scaling_switch, 1, grid_pos, 1, 1);
-      grid_pos++;
-
-      gtk_widget_set_halign (label, GTK_ALIGN_END);
-      gtk_widget_set_halign (priv->scaling_switch, GTK_ALIGN_START);
-    }
-
-  /* frequency combo box */
-  freq_model = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_POINTER);
-  priv->freq_combo = gtk_combo_box_new_with_model (GTK_TREE_MODEL (freq_model));
-  g_object_unref (freq_model);
-  renderer = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (priv->freq_combo), renderer, TRUE);
-  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (priv->freq_combo), renderer, "text", 0);
-  g_signal_connect (priv->freq_combo, "changed", G_CALLBACK (freq_combo_changed),
-                    panel);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), priv->freq_combo, 1, grid_pos, 1, 1);
-  gtk_widget_set_halign (priv->freq_combo, GTK_ALIGN_START);
-  gtk_widget_set_no_show_all (priv->freq_combo, TRUE);
-
-  label = gtk_label_new (_("Refresh Rate"));
-  gtk_style_context_add_class (gtk_widget_get_style_context (label),
-                               GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, grid_pos, 1, 1);
-  gtk_widget_set_halign (label, GTK_ALIGN_END);
-  gtk_widget_set_no_show_all (label, TRUE);
-  g_object_bind_property (priv->freq_combo, "visible",
-                          label, "visible", G_BINDING_BIDIRECTIONAL);
-  grid_pos++;
-
-  /* scale */
-  priv->scale_slider = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, NULL);
-  gtk_widget_set_no_show_all (priv->scale_slider, TRUE);
-
-  g_signal_connect (priv->scale_slider, "format-value",
-                    G_CALLBACK (scale_slider_format_value), panel);
-  g_signal_connect (priv->scale_slider, "value-changed",
-                    G_CALLBACK (scale_slider_changed), panel);
-
-  gtk_scale_set_draw_value (GTK_SCALE (priv->scale_slider), TRUE);
-  gtk_range_set_round_digits (GTK_RANGE (priv->scale_slider), 2);
-  gtk_scale_set_value_pos (GTK_SCALE (priv->scale_slider), GTK_POS_BOTTOM);
-  gtk_scale_set_has_origin (GTK_SCALE (priv->scale_slider), FALSE);
-  gtk_grid_attach (GTK_GRID (priv->config_grid),
-                   priv->scale_slider, 1, grid_pos, 1, 1);
-  gtk_widget_set_halign (priv->freq_combo, GTK_ALIGN_CENTER);
-  grid_pos++;
-
-  was_clone = clone = cc_display_config_is_cloning (priv->current_config);
-  primary = cc_display_monitor_is_primary (priv->current_output);
-  active = cc_display_monitor_is_active (priv->current_output);
-
-  if (num_active_outputs > 1 || !active)
-    {
-      frame = gtk_frame_new (NULL);
-      gtk_container_add (GTK_CONTAINER (box), frame);
-      gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-
-      listbox = gtk_list_box_new ();
-      gtk_container_add (GTK_CONTAINER (frame), listbox);
-      gtk_list_box_set_header_func (GTK_LIST_BOX (listbox),
-                                    cc_list_box_update_header_func,
-                                    NULL, NULL);
-      g_signal_connect (listbox, "row-selected",
-                        G_CALLBACK (setup_listbox_row_activated), panel);
-      g_signal_connect_swapped (listbox, "row-selected",
-                                G_CALLBACK (gtk_widget_queue_draw), preview);
-      gtk_widget_show (listbox);
-
-      item = list_box_item (_("Primary"),
-                            _("Show the top bar and Activities Overview on this display"));
-      gtk_container_add (GTK_CONTAINER (listbox), item);
-      if (primary)
-        gtk_list_box_select_row (GTK_LIST_BOX (listbox),
-                                 GTK_LIST_BOX_ROW (item));
-
-      item = list_box_item (_("Secondary Display"),
-                            _("Join this display with another to create an extra workspace"));
-      gtk_container_add (GTK_CONTAINER (listbox), item);
-      if (!primary && !clone)
-        gtk_list_box_select_row (GTK_LIST_BOX (listbox),
-                                 GTK_LIST_BOX_ROW (item));
-
-#if 0
-      item = list_box_item (_("Presentation"),
-                            _("Show slideshows and media only"));
-      gtk_container_add (GTK_CONTAINER (listbox), item);
-#endif
-
-      /* translators: "Mirror" describes when both displays show the same view */
-      item = list_box_item (_("Mirror"),
-                            _("Show your existing view on both displays"));
-      gtk_container_add (GTK_CONTAINER (listbox), item);
-      if (clone && active)
-        gtk_list_box_select_row (GTK_LIST_BOX (listbox),
-                                 GTK_LIST_BOX_ROW (item));
-
-      item = list_box_item (_("Turn Off"),
-                            _("Don’t use this display"));
-      gtk_container_add (GTK_CONTAINER (listbox), item);
-
-      if (!active)
-        gtk_list_box_select_row (GTK_LIST_BOX (listbox),
-                                 GTK_LIST_BOX_ROW (item));
-    }
-  else
-    {
-      setup_resolution_combo_box (panel,
-                                  cc_display_monitor_get_modes (priv->current_output),
-                                  cc_display_monitor_get_mode (priv->current_output));
-    }
-
-  content_area = gtk_dialog_get_content_area (GTK_DIALOG (priv->dialog));
-  gtk_container_add (GTK_CONTAINER (box), priv->config_grid);
-  gtk_widget_show_all (box);
-
-  cc_display_monitor_get_geometry (priv->current_output, NULL, NULL,
-                                   &old_width, &old_height);
-
-  response = gtk_dialog_run (GTK_DIALOG (priv->dialog));
-  if (response == GTK_RESPONSE_ACCEPT)
-    {
-      GtkListBoxRow *row;
-      gboolean active = TRUE;
-
-      if (g_hash_table_size (output_ids) > 1)
-        {
-          gboolean primary_chosen = FALSE;
-
-          row = gtk_list_box_get_selected_row (GTK_LIST_BOX (listbox));
-
-          switch (gtk_list_box_row_get_index (row))
-            {
-            case DISPLAY_MODE_PRIMARY:
-              primary = TRUE;
-              clone = FALSE;
-              break;
-
-#if 0
-            case DISPLAY_MODE_PRESENTATION:
-              gnome_rr_config_set_clone (priv->current_configuration, FALSE);
-              primary = FALSE;
-              clone = FALSE;
-              break;
-#endif
-
-            case DISPLAY_MODE_MIRROR:
-              clone = TRUE;
-              break;
-
-            case DISPLAY_MODE_SECONDARY:
-              primary = FALSE;
-              clone = FALSE;
-              break;
-
-            case DISPLAY_MODE_OFF:
-              primary = FALSE;
-              clone = FALSE;
-              active = FALSE;
-              break;
-            }
-
-          cc_display_monitor_set_active (priv->current_output, active);
-          cc_display_monitor_set_primary (priv->current_output, primary);
-          cc_display_config_set_cloning (priv->current_config, clone);
-
-          for (l = outputs; l != NULL; l = l->next)
-            {
-              CcDisplayMonitor *output = l->data;
-
-              if (!cc_display_monitor_is_active (output))
-                continue;
-
-              if (clone)
-                {
-                  /* set all active outputs to the same size and position when
-                   * cloning */
-                  cc_display_monitor_set_mode (output,
-                                               cc_display_monitor_get_mode (priv->current_output));
-                  cc_display_monitor_set_position (output, 0, 0);
-                }
-              else if (output != priv->current_output)
-                {
-                  /* ensure no other outputs are primary if this output is now
-                   * primary, or find another output to set as primary if this
-                   * output is no longer primary */
-                  if (primary)
-                    {
-                      cc_display_monitor_set_primary (output, FALSE);
-                    }
-                  else if (!primary_chosen)
-                    {
-                      cc_display_monitor_set_primary (output, TRUE);
-                      primary_chosen = TRUE;
-                    }
-                }
-            }
-
-          sanity_check_rotation (priv->current_output);
-
-          /* The new API checks with mutter every time
-             update_apply_button() is called and mutter is very
-             strict about this so it already does these adjustments
-             internally. */
-          if (!priv->have_new_dbus_api)
-            {
-              /* if the display was previously in clone mode, ensure the outputs
-               * are arranged correctly */
-              if ((was_clone && !clone))
-                lay_out_outputs_horizontally (panel);
-
-              if (!clone)
-                realign_outputs_after_resolution_change (panel,
-                                                         priv->current_output,
-                                                         old_width, old_height, rotation);
-            }
-        }
-      else
-        {
-          /* check rotation */
-          sanity_check_rotation (priv->current_output);
-        }
-
-      apply_current_configuration (panel);
-    }
-  else if (response != GTK_RESPONSE_NONE)
-    {
-      /* changes cancelled, so re-read the current configuration */
-      on_screen_changed (panel);
-    }
-
-  priv->rotate_left_button = NULL;
-  priv->rotate_right_button = NULL;
-  priv->res_combo = NULL;
-  priv->freq_combo = NULL;
-  clear_res_freqs (panel);
-  gtk_widget_destroy (priv->dialog);
-  priv->dialog = NULL;
-}
-
-static void
-cc_display_panel_night_light_activated (GtkListBox     *listbox,
-                                          GtkWidget      *row,
-                                          CcDisplayPanel *panel)
+cc_display_panel_night_light_activated (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
   GtkWindow *toplevel;
   toplevel = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel))));
   cc_night_light_dialog_present (priv->night_light_dialog, toplevel);
-}
-
-static void
-cc_display_panel_box_row_activated (GtkListBox     *listbox,
-                                    GtkWidget      *row,
-                                    CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  CcDisplayMonitor *output;
-
-  gtk_list_box_select_row (listbox, NULL);
-
-  output = g_object_get_data (G_OBJECT (row), "cc-display-monitor");
-
-  if (!output)
-    return;
-
-  priv->current_output = output;
-
-  show_setup_dialog (panel);
 }
 
 static void
@@ -2624,9 +3194,9 @@ mapped_cb (CcDisplayPanel *panel)
 
   shell = cc_panel_get_shell (CC_PANEL (panel));
   toplevel = cc_shell_get_toplevel (shell);
-  if (toplevel)
-    priv->focus_id = g_signal_connect (toplevel, "notify::has-toplevel-focus",
-                                       G_CALLBACK (dialog_toplevel_focus_changed), panel);
+  if (toplevel && !priv->focus_id)
+    priv->focus_id = g_signal_connect_swapped (toplevel, "notify::has-toplevel-focus",
+                                               G_CALLBACK (dialog_toplevel_focus_changed), panel);
 }
 
 static void
@@ -2767,41 +3337,28 @@ static GtkWidget *
 make_night_light_widget (CcDisplayPanel *self)
 {
   CcDisplayPanelPrivate *priv = DISPLAY_PANEL_PRIVATE (self);
-  GtkWidget *frame, *row, *box, *label;
+  GtkWidget *frame, *row, *label, *state_label;
   GtkWidget *night_light_listbox;
 
-  frame = gtk_frame_new (NULL);
-  gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-  night_light_listbox = gtk_list_box_new ();
-  gtk_list_box_set_selection_mode (GTK_LIST_BOX (night_light_listbox),
-                                   GTK_SELECTION_NONE);
+  frame = make_frame (NULL, NULL);
+  night_light_listbox = make_list_box ();
   gtk_container_add (GTK_CONTAINER (frame), night_light_listbox);
-  g_signal_connect (night_light_listbox, "row-activated",
-                    G_CALLBACK (cc_display_panel_night_light_activated),
-                    self);
-  row = gtk_list_box_row_new ();
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
-  gtk_container_add (GTK_CONTAINER (row), box);
-  gtk_container_add (GTK_CONTAINER (night_light_listbox), row);
 
   label = gtk_label_new (_("_Night Light"));
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-  gtk_widget_set_margin_start (label, 20);
-  gtk_widget_set_margin_end (label, 20);
-  gtk_widget_set_margin_top (label, 12);
-  gtk_widget_set_margin_bottom (label, 12);
-  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
-  label = gtk_label_new ("");
-  gtk_widget_set_halign (label, GTK_ALIGN_END);
-  gtk_widget_set_margin_start (label, 24);
-  gtk_widget_set_margin_end (label, 24);
-  gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
+  state_label = gtk_label_new ("");
   g_signal_connect_object (priv->settings_color, "changed",
-                           G_CALLBACK (settings_color_changed_cb), label, 0);
-  night_light_sync_label (label, priv->settings_color);
+                           G_CALLBACK (settings_color_changed_cb), state_label, 0);
+  night_light_sync_label (state_label, priv->settings_color);
 
+  row = make_row (priv->rows_size_group, label, state_label);
+  gtk_container_add (GTK_CONTAINER (night_light_listbox), row);
+  g_signal_connect_object (row, "activated",
+                           G_CALLBACK (cc_display_panel_night_light_activated),
+                           self, G_CONNECT_SWAPPED);
+
+  gtk_widget_set_margin_top (frame, SECTION_PADDING);
   return frame;
 }
 
@@ -2886,7 +3443,6 @@ static void
 cc_display_panel_init (CcDisplayPanel *self)
 {
   CcDisplayPanelPrivate *priv;
-  GtkWidget *frame, *vbox;
   GSettings *settings;
 
   g_resources_register (cc_display_get_resource ());
@@ -2909,41 +3465,6 @@ cc_display_panel_init (CcDisplayPanel *self)
 
   priv->night_light_dialog = cc_night_light_dialog_new ();
   priv->settings_color = g_settings_new ("org.gnome.settings-daemon.plugins.color");
-
-  output_ids = g_hash_table_new (g_direct_hash, g_direct_equal);
-
-  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 22);
-  gtk_stack_add_named (GTK_STACK (priv->stack), vbox, "main");
-  gtk_stack_set_visible_child (GTK_STACK (priv->stack), vbox);
-
-  frame = gtk_frame_new (NULL);
-  gtk_widget_set_margin_start (vbox, 134);
-  gtk_widget_set_margin_end (vbox, 134);
-  gtk_widget_set_margin_top (vbox, 22);
-  gtk_widget_set_margin_bottom (vbox, 22);
-  gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-  gtk_container_add (GTK_CONTAINER (vbox), frame);
-
-  priv->displays_listbox = gtk_list_box_new ();
-  gtk_list_box_set_header_func (GTK_LIST_BOX (priv->displays_listbox),
-                                cc_list_box_update_header_func, NULL,
-                                NULL);
-  g_signal_connect (priv->displays_listbox, "row-activated",
-                    G_CALLBACK (cc_display_panel_box_row_activated),
-                    self);
-  gtk_container_add (GTK_CONTAINER (frame), priv->displays_listbox);
-
-
-  priv->arrange_button = gtk_button_new_with_mnemonic (_("_Arrange Combined Displays"));
-  g_signal_connect (priv->arrange_button, "clicked",
-                    G_CALLBACK (show_arrange_displays_dialog), self);
-  gtk_widget_set_halign (priv->arrange_button, GTK_ALIGN_CENTER);
-
-  gtk_container_add (GTK_CONTAINER (vbox), priv->arrange_button);
-
-
-  gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (self));
-  gtk_widget_show_all (vbox);
 
   self->priv->up_client = up_client_new ();
   if (up_client_get_lid_is_present (self->priv->up_client))
