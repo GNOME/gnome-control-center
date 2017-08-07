@@ -2065,6 +2065,7 @@ populate_power_button_model (GtkTreeModel *model,
     GsdPowerButtonActionType value;
   } actions[] = {
     { N_("Suspend"), GSD_POWER_BUTTON_ACTION_SUSPEND },
+    { N_("Power Off"), GSD_POWER_BUTTON_ACTION_INTERACTIVE },
     { N_("Hibernate"), GSD_POWER_BUTTON_ACTION_HIBERNATE },
     { N_("Nothing"), GSD_POWER_BUTTON_ACTION_NOTHING }
   };
