@@ -1,18 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-      <object class="GtkBox" id="vbox_region">
+  <object class="GtkBox" id="vbox_region">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+
+    <!-- Stub boxes to make the content cover 1/3 of the screen -->
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+      </object>
+      <packing>
+        <property name="pack_type">end</property>
+      </packing>
+    </child>
+
+    <!-- Content -->
+    <child>
+      <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
+        <property name="margin">24</property>
+        <property name="spacing">12</property>
+        <property name="hexpand">True</property>
         <child>
           <object class="GtkFrame" id="language_section">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_start">134</property>
-            <property name="margin_end">134</property>
-            <property name="margin_top">24</property>
-            <property name="margin_bottom">32</property>
+            <property name="margin_bottom">12</property>
             <property name="shadow_type">in</property>
             <child>
               <object class="GtkListBox" id="language_list">
@@ -186,10 +212,8 @@
           <object class="GtkBox" id="input_section">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_start">134</property>
-            <property name="margin_end">134</property>
-            <property name="margin_bottom">24</property>
             <property name="orientation">vertical</property>
+            <property name="hexpand">True</property>
             <child>
               <object class="GtkBox" id="input_heading_row">
                 <property name="visible">True</property>
@@ -502,6 +526,7 @@
           <object class="GtkLabel" id="login-label">
            <property name="valign">end</property>
            <property name="vexpand">True</property>
+           <property name="hexpand">True</property>
            <property name="label" translatable="yes">Login settings are used by all users when logging into the system</property>
            <property name="margin_bottom">12</property>
            <style>
@@ -510,4 +535,6 @@
           </object>
         </child>
       </object>
+    </child>
+  </object>
 </interface>
