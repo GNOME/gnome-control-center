@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-07-21 15:00+0000\n"
-"PO-Revision-Date: 2017-07-24 14:42+0200\n"
+"POT-Creation-Date: 2017-08-07 06:46+0000\n"
+"PO-Revision-Date: 2017-08-07 09:57+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician\n"
 "Language: gl\n"
@@ -1356,21 +1356,18 @@ msgstr "Descoñecido"
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
 #: ../panels/info/cc-info-overview-panel.c:476
 #, c-format
-#| msgid "%d-bit (Build ID: %s)"
 msgid "%s; Build ID: %s"
 msgstr "%s; ID de construción: %s"
 
 #. translators: This is the type of architecture for the OS
 #: ../panels/info/cc-info-overview-panel.c:493
 #, c-format
-#| msgid "%d-bit"
 msgid "64-bit"
 msgstr "64-bit"
 
 #. translators: This is the type of architecture for the OS
 #: ../panels/info/cc-info-overview-panel.c:496
 #, c-format
-#| msgid "%d-bit"
 msgid "32-bit"
 msgstr "32-bit"
 
@@ -1487,15 +1484,33 @@ msgid "Windows software"
 msgstr "Software de Windows"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
-#: ../panels/info/gnome-info-panel.desktop.in.in.h:2
-msgid "De­tails"
-msgstr "Detalles"
+#: ../panels/info/gnome-default-apps-panel.desktop.in.in.h:2
+#| msgid "Default Applications"
+msgid "Defa­ult Applications"
+msgstr "Aplicativos predeterminados"
 
+#: ../panels/info/gnome-default-apps-panel.desktop.in.in.h:3
+#| msgid "Default Applications"
+msgid "Configure Default Applications"
+msgstr "Configurar os aplicativos predeterminados"
+
+#. Translators: those are keywords for the System Information panel
+#: ../panels/info/gnome-default-apps-panel.desktop.in.in.h:5
+msgid "default;application;preferred;media;"
+msgstr "predeterminado;aplicativo;prefirido;media;"
+
+#. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
+#: ../panels/info/gnome-info-overview-panel.desktop.in.in.h:2
+msgid "Ab­out"
+msgstr "Sobre"
+
+#: ../panels/info/gnome-info-overview-panel.desktop.in.in.h:3
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:3
 msgid "View information about your system"
 msgstr "Ver información sobre o seu sistema"
 
 #. sure that you use the same "translation" for those keywords
+#: ../panels/info/gnome-info-overview-panel.desktop.in.in.h:5
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:5
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
@@ -1504,6 +1519,34 @@ msgstr ""
 "dispositivo;sistema;información;memoria;procesador;versión;predeterminado;"
 "aplicativo;fallback;alternativo;preferido;cd;dvd;usb;son;video;disco;"
 "extraíbel;medio;autoexecutar;"
+
+#. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:2
+msgid "De­tails"
+msgstr "Detalles"
+
+#. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
+#: ../panels/info/gnome-removable-media-panel.desktop.in.in.h:2
+#| msgid "Removable Media"
+msgid "Remo­vable Media"
+msgstr "Soportes extraíbeis"
+
+#: ../panels/info/gnome-removable-media-panel.desktop.in.in.h:3
+#| msgid "Configure Bluetooth settings"
+msgid "Configure Removable Media settings"
+msgstr "Configurar as preferencias de soportes extraíbeis"
+
+#. Translators: those are keywords for the System Information panel
+#: ../panels/info/gnome-removable-media-panel.desktop.in.in.h:5
+#| msgid ""
+#| "device;system;information;memory;processor;version;default;application;"
+#| "preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
+msgid ""
+"device;system;default;application;preferred;cd;dvd;usb;audio;video;disc;"
+"removable;media;autorun;"
+msgstr ""
+"dispositivo;sistema;predeterminado;aplicativo;fallback;alternativo;preferido;"
+"cd;dvd;usb;son;video;disco;extraíbel;medio;autoexecutar;"
 
 #: ../panels/info/info-default-apps.ui.h:1
 msgid "_Web"
@@ -1553,7 +1596,6 @@ msgstr "Nome do sistema operativo"
 
 #. To translators: this field contains the distro type
 #: ../panels/info/info-overview.ui.h:8
-#| msgid "Security type"
 msgid "OS type"
 msgstr "Tipo de sistema operativo"
 
@@ -1678,8 +1720,8 @@ msgstr "Iniciadores"
 msgid "Launch help browser"
 msgstr "Iniciar o visor de axuda"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:277
-#: ../shell/alt/cc-window.c:830 ../shell/cc-window.c:1590
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:276
+#: ../shell/alt/cc-window.c:829 ../shell/cc-window.c:1590
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/window.ui.h:1
 msgid "Settings"
 msgstr "Preferencias"
@@ -1897,8 +1939,8 @@ msgstr ""
 msgid ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
 msgstr ""
-"Atallo;Espazos de "
-"traballo;Xanela;Redimensionar;Zoom;Contraste;Entrada;Orixe;Bloqueo;Volume;"
+"Atallo;Espazos de traballo;Xanela;Redimensionar;Zoom;Contraste;Entrada;Orixe;"
+"Bloqueo;Volume;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 #: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
@@ -2254,22 +2296,19 @@ msgid "Excellent"
 msgstr "Excelente"
 
 #: ../panels/network/connection-editor/ce-page-details.c:248
-#| msgid "Connection"
 msgid "Forget Connection"
 msgstr "Esquecer conexión"
 
 #: ../panels/network/connection-editor/ce-page-details.c:250
-#| msgid "Connection failed"
 msgid "Remove Connection Profile"
 msgstr "Eliminar o perfíl de conexión"
 
 #: ../panels/network/connection-editor/ce-page-details.c:252
-#| msgid "Remove"
 msgid "Remove VPN"
 msgstr "Eliminar VPN"
 
 #: ../panels/network/connection-editor/ce-page-details.c:280
-#: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:269
+#: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:268
 #: ../shell/panel-list.ui.h:2
 msgid "Details"
 msgstr "Detalles"
@@ -2502,7 +2541,6 @@ msgid "bytes"
 msgstr "bytes"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
-#| msgid "_Method"
 msgid "IPv_4 Method"
 msgstr "Método IPv_4"
 
@@ -2518,7 +2556,6 @@ msgstr "Só ligazón local"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:5
 #: ../panels/network/connection-editor/ip6-page.ui.h:6
-#| msgid "Disabled"
 msgid "Disable"
 msgstr "Desactivar"
 
@@ -2545,7 +2582,6 @@ msgid "Use this connection _only for resources on its network"
 msgstr "Usar esta conexión _só para os recursos desta rede"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
-#| msgid "_Method"
 msgid "IPv_6 Method"
 msgstr "Método IPv_6"
 
@@ -2677,15 +2713,11 @@ msgstr ""
 "DNS;"
 
 #: ../panels/network/gnome-wifi-panel.desktop.in.in.h:3
-#| msgid "Control how you connect to the Internet"
 msgid "Control how you connect to Wi-Fi networks"
 msgstr "Controle como se conecta a redes Wifi"
 
 #. Translators: those are keywords for the wi-fi control-center panel
 #: ../panels/network/gnome-wifi-panel.desktop.in.in.h:5
-#| msgid ""
-#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
-#| "vpn;DNS;"
 msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;"
 msgstr "Rede;Sen fíos;Wi-Fi;Wifi;IP;LAN;Banda larga;DNS;"
 
@@ -2752,7 +2784,6 @@ msgstr ""
 "«hotspot» está activado."
 
 #: ../panels/network/net-device-wifi.c:1286
-#| msgid "Wi-Fi Hotspot"
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Activar o punto de acceso sen fíos?"
 
@@ -3081,7 +3112,6 @@ msgid "_Connect to Hidden Network…"
 msgstr "_Conectar a unha rede oculta…"
 
 #: ../panels/network/network-wifi.ui.h:61
-#| msgid "Wi-Fi Hotspot"
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "_Activar o punto de acceso sen fíos…"
 
@@ -3094,12 +3124,10 @@ msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Asegúrese que o adaptador Wifi está conectado e acendido"
 
 #: ../panels/network/wifi.ui.h:2
-#| msgid "No Printers Found"
 msgid "No Wi-Fi Adapter Found"
 msgstr "Non se atopou ningún adaptador Wifi"
 
 #: ../panels/network/wifi.ui.h:3
-#| msgid "Air_plane Mode"
 msgid "Airplane Mode"
 msgstr "Modo avión"
 
@@ -3108,12 +3136,10 @@ msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
 msgstr "Desactiva o Wifi, o Bluetooth e a banda larga móvil"
 
 #: ../panels/network/wifi.ui.h:5
-#| msgid "Networks"
 msgid "Visible Networks"
 msgstr "Redes visíbeis"
 
 #: ../panels/network/wifi.ui.h:6
-#| msgid "NetworkManager needs to be running."
 msgid "NetworkManager needs to be running"
 msgstr "NetworkManager debe estar en execución."
 
@@ -3399,7 +3425,6 @@ msgid "Cable unplugged"
 msgstr "Cable desconectado"
 
 #: ../panels/network/wireless-security/eap-method.c:57
-#| msgid "undefined error in 802.1x security (wpa-eap)"
 msgid "undefined error in 802.1X security (wpa-eap)"
 msgstr "erro non definido na seguridde 802.1x (wpa-eap)"
 
@@ -3577,12 +3602,6 @@ msgid "Unencrypted private keys are insecure"
 msgstr "As chaves privadas sen cifrar son inseguras"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:319
-#| msgid ""
-#| "The selected private key does not appear to be protected by a password.  "
-#| "This could allow your security credentials to be compromised.  Please "
-#| "select a password-protected private key.\n"
-#| "\n"
-#| "(You can password-protect your private key with openssl)"
 msgid ""
 "The selected private key does not appear to be protected by a password. This "
 "could allow your security credentials to be compromised. Please select a "
@@ -3638,7 +3657,6 @@ msgid "MSCHAP"
 msgstr "MSCHAP"
 
 #: ../panels/network/wireless-security/eap-method-ttls.c:305
-#| msgid "MSCHAPv2"
 msgid "MSCHAPv2 (no EAP)"
 msgstr "MSCHAPv2 (non EAP)"
 
@@ -3647,7 +3665,6 @@ msgid "CHAP"
 msgstr "CHAP"
 
 #: ../panels/network/wireless-security/wireless-security.c:87
-#| msgid "Unknown error validating 802.1x security"
 msgid "Unknown error validating 802.1X security"
 msgstr "Produciuse un erro descoñecido ao validar a seguridade 802.1X"
 
@@ -4156,7 +4173,7 @@ msgstr "Suspensión automática"
 msgid "_When the Power Button is pressed"
 msgstr "_Ao premer o botón de acendido"
 
-#: ../panels/power/cc-power-panel.c:2420 ../shell/alt/cc-window.c:273
+#: ../panels/power/cc-power-panel.c:2420 ../shell/alt/cc-window.c:272
 #: ../shell/panel-list.ui.h:1
 msgid "Devices"
 msgstr "Dispositivos"
@@ -4366,7 +4383,6 @@ msgstr ""
 #. Translators: Name of job which makes printer to print test page
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/printers/pp-options-dialog.c:893
-#| msgid "Test page"
 msgid "Test Page"
 msgstr "Páxina de proba"
 
@@ -4809,7 +4825,6 @@ msgstr "Procesando"
 
 #. Translators: Name of job which makes printer to clean its heads
 #: ../panels/printers/pp-printer-entry.c:904
-#| msgid "Change printer settings"
 msgid "Clean print heads"
 msgstr "Limpar os cabezais de impresión"
 
@@ -4827,7 +4842,6 @@ msgstr "Usar como impresora por omisión"
 
 #. Translators: This button executes command which cleans print heads of the printer.
 #: ../panels/printers/printer-entry.ui.h:5
-#| msgid "Cancel Print Job"
 msgid "Clean Print Heads"
 msgstr "Limpar os cabezais de impresión"
 
@@ -5166,7 +5180,6 @@ msgid "Times"
 msgstr "Horas"
 
 #: ../panels/region/format-chooser.ui.h:7
-#| msgid "Date & Time"
 msgid "Dates & Times"
 msgstr "Datas e horas"
 
@@ -5257,12 +5270,10 @@ msgid "English (United Kingdom)"
 msgstr "Inglés (Reino Unido)"
 
 #: ../panels/region/region.ui.h:3
-#| msgid "Your session needs to be restarted for changes to take effect"
 msgid "Restart the session for changes to take effect"
 msgstr "Reinicie a sesión para que os cambios se apliquen"
 
 #: ../panels/region/region.ui.h:4
-#| msgid "Restart"
 msgid "Restart…"
 msgstr "Reiniciar…"
 
@@ -5768,35 +5779,26 @@ msgstr "Personalizado"
 #. translators: the labels will read:
 #. * Cursor Size: Default
 #: ../panels/universal-access/cc-ua-panel.c:351
-#| msgid "Default"
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Predeterminado"
 
 #: ../panels/universal-access/cc-ua-panel.c:354
-#| msgctxt "Calibration quality"
-#| msgid "Medium"
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Medio"
 
 #: ../panels/universal-access/cc-ua-panel.c:357
-#| msgctxt "dwell click threshold"
-#| msgid "Large"
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Grande"
 
 #: ../panels/universal-access/cc-ua-panel.c:360
-#| msgctxt "universal access, text size"
-#| msgid "Larger"
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Máis grande"
 
 #: ../panels/universal-access/cc-ua-panel.c:363
-#| msgctxt "dwell click threshold"
-#| msgid "Large"
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "O máis grande"
@@ -5819,16 +5821,13 @@ msgstr "Faga máis doado ver, escoitar, escribir, apuntar e clicar"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:5
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;"
-#| "size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
 "AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;Repeat;Blink;"
 msgstr ""
-"Teclado;Rato;a11y;Accesibilidade;Contraste;Ampliación;Lector de "
-"pantalla;texto;tipo de letra;tamaño;AccessX;Persistente;Lenta;Rexeite;Rato;Do"
-"bre;clic;atraso;asistencia;Repetición;Pestanexo;"
+"Teclado;Rato;a11y;Accesibilidade;Contraste;Ampliación;Lector de pantalla;"
+"texto;tipo de letra;tamaño;AccessX;Persistente;Lenta;Rexeite;Rato;Dobre;clic;"
+"atraso;asistencia;Repetición;Pestanexo;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
@@ -5908,7 +5907,6 @@ msgid "Double-Click Delay"
 msgstr "Atraso da dupla pulsación"
 
 #: ../panels/universal-access/uap.ui.h:22
-#| msgid "Cursor Blinking"
 msgid "Cursor Size"
 msgstr "Tamaño do cursor"
 
@@ -6634,8 +6632,6 @@ msgid "Try to avoid sequences like 1234 or abcd."
 msgstr "Tente evitar secuencias como 1234 ou abcd."
 
 #: ../panels/user-accounts/pw-utils.c:115
-#| msgctxt "Password hint"
-#| msgid "Try to use a mixture of letters, numbers and punctuation."
 msgctxt "Password hint"
 msgid ""
 "Password needs to be longer. Try to add more letters, numbers and "
@@ -6650,10 +6646,6 @@ msgid "Mix uppercase and lowercase and try to use a number or two."
 msgstr "Mesture letras en maiúsculas e minúsculas  e use un número ou dous."
 
 #: ../panels/user-accounts/pw-utils.c:119
-#| msgctxt "Password hint"
-#| msgid ""
-#| "Good password! Adding more letters, numbers and punctuation will make it "
-#| "stronger."
 msgctxt "Password hint"
 msgid ""
 "Adding more letters, numbers and punctuation will make the password stronger."
@@ -6757,7 +6749,6 @@ msgid "Failed to log into domain"
 msgstr "Produciuse un erro ao iniciar sesión no dominio"
 
 #: ../panels/user-accounts/um-account-dialog.c:1114
-#| msgid "Unable find the domain. Maybe you misspelled it?"
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Non foi posíbel atopar o dominio. Pode ser que o escribira mal?"
 
@@ -7357,7 +7348,7 @@ msgstr "Sensibilidade de presión do lapis"
 msgid "page 3"
 msgstr "páxina 3"
 
-#: ../shell/alt/cc-window.c:766 ../shell/cc-window.c:53
+#: ../shell/alt/cc-window.c:765 ../shell/cc-window.c:53
 #: ../shell/cc-window.c:1484
 msgid "All Settings"
 msgstr "Todas as preferencias"
@@ -8753,9 +8744,6 @@ msgstr "Non se atoparon resultados"
 #~ msgctxt "Power"
 #~ msgid "Bluetooth"
 #~ msgstr "Bluetooth"
-
-#~ msgid "Configure Bluetooth settings"
-#~ msgstr "Preferencias de Bluetooth"
 
 #~ msgid "Color management settings"
 #~ msgstr "Preferencias de xestión de cor"
