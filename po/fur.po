@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-07-25 14:05+0000\n"
-"PO-Revision-Date: 2017-07-31 08:37+0200\n"
-"Last-Translator: Tomat <f.t.public@gmail.com>\n"
+"POT-Creation-Date: 2017-08-07 19:24+0000\n"
+"PO-Revision-Date: 2017-08-08 21:02+0200\n"
+"Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 2.0.2\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
@@ -1474,7 +1474,6 @@ msgstr "Software Windows"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/info/gnome-default-apps-panel.desktop.in.in.h:2
-#| msgid "Default Applications"
 msgid "Defa­ult Applications"
 msgstr "A­pli­ca­zions­ ­pre­de­fi­ni­dis"
 
@@ -1515,7 +1514,6 @@ msgstr "De­tais"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/info/gnome-removable-media-panel.desktop.in.in.h:2
-#| msgid "Removable Media"
 msgid "Remo­vable Media"
 msgstr "Dis­po­si­tîfs­ ­es­tra­i­bil"
 
@@ -2116,13 +2114,8 @@ msgstr "Dopli-clic, boton secondari"
 msgid "Single click, secondary button"
 msgstr "Clic singul, boton secondari"
 
-#. TRANSLATORS: this is to disable the radio hardware in the
-#. * network panel
-#: ../panels/network/cc-network-panel.c:347
-msgid "Air_plane Mode"
-msgstr "Modalitât a_vion"
-
-#: ../panels/network/cc-network-panel.c:1001
+#. add proxy to device list
+#: ../panels/network/cc-network-panel.c:777
 msgid "Network proxy"
 msgstr "Proxy di rêt"
 
@@ -2130,18 +2123,18 @@ msgstr "Proxy di rêt"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1177 ../panels/network/net-vpn.c:283
+#: ../panels/network/cc-network-panel.c:941 ../panels/network/net-vpn.c:283
 #: ../panels/network/net-vpn.c:440
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
-#: ../panels/network/cc-network-panel.c:1244 ../panels/network/wifi.ui.h:7
+#: ../panels/network/cc-network-panel.c:1008 ../panels/network/wifi.ui.h:7
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Orpo, al semee che alc al è lât stuart. Contate il furnidôr di software."
 
-#: ../panels/network/cc-network-panel.c:1250
+#: ../panels/network/cc-network-panel.c:1014
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager al à di jessi in esecuzion."
 
@@ -4031,7 +4024,7 @@ msgstr "Computer"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:561 ../panels/power/cc-power-panel.c:801
-#: ../panels/power/cc-power-panel.c:2366
+#: ../panels/power/cc-power-panel.c:2367
 msgid "Battery"
 msgstr "Batarie"
 
@@ -4136,31 +4129,35 @@ msgid "Suspend"
 msgstr "Sospindi"
 
 #: ../panels/power/cc-power-panel.c:2068
+msgid "Power Off"
+msgstr "Distudâ"
+
+#: ../panels/power/cc-power-panel.c:2069
 msgid "Hibernate"
 msgstr "Ibernâ"
 
-#: ../panels/power/cc-power-panel.c:2069
+#: ../panels/power/cc-power-panel.c:2070
 msgid "Nothing"
 msgstr "Nissune azion"
 
 #. Frame header
-#: ../panels/power/cc-power-panel.c:2183
+#: ../panels/power/cc-power-panel.c:2184
 msgid "Suspend & Power Button"
 msgstr "Sospension e boton par distudâ"
 
-#: ../panels/power/cc-power-panel.c:2226
+#: ../panels/power/cc-power-panel.c:2227
 msgid "_Automatic suspend"
 msgstr "Sospension _Automatiche"
 
-#: ../panels/power/cc-power-panel.c:2227
+#: ../panels/power/cc-power-panel.c:2228
 msgid "Automatic suspend"
 msgstr "Sospension automatiche"
 
-#: ../panels/power/cc-power-panel.c:2294
+#: ../panels/power/cc-power-panel.c:2295
 msgid "_When the Power Button is pressed"
 msgstr "_Cuant che si frache il boton Distude"
 
-#: ../panels/power/cc-power-panel.c:2420 ../shell/alt/cc-window.c:272
+#: ../panels/power/cc-power-panel.c:2421 ../shell/alt/cc-window.c:272
 #: ../shell/panel-list.ui.h:1
 msgid "Devices"
 msgstr "Dispositîfs"
@@ -7453,6 +7450,9 @@ msgstr "Hotspot"
 msgid "No results found"
 msgstr "Nissun risultât cjatât"
 
+#~ msgid "Air_plane Mode"
+#~ msgstr "Modalitât a_vion"
+
 #~ msgid "_Use as Hotspot…"
 #~ msgstr "_Dopre come Hotspot..."
 
@@ -7901,9 +7901,6 @@ msgstr "Nissun risultât cjatât"
 
 #~ msgid "Yes"
 #~ msgstr "Sì"
-
-#~ msgid "Power"
-#~ msgstr "Alimentazion"
 
 #~ msgid "Privacy"
 #~ msgstr "Privacy"
