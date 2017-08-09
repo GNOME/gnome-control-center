@@ -34,6 +34,7 @@ struct _CcSearchPanelPrivate
 {
   GtkBuilder *builder;
   GtkWidget  *list_box;
+  GtkWidget  *notification;
 
   GCancellable *load_cancellable;
   GSettings  *search_settings;
@@ -868,6 +869,14 @@ populate_search_providers (CcSearchPanel *self)
 }
 
 static void
+on_row_selected (GtkListBox *list_box,
+                 GtkListBoxRow *row,
+                 CcSearchPanel *self)
+{
+  gtk_revealer_set_reveal_child (GTK_REVEALER (self->priv->notification), TRUE);
+}
+
+static void
 cc_search_panel_dispose (GObject *object)
 {
   CcSearchPanelPrivate *priv = CC_SEARCH_PANEL (object)->priv;
@@ -992,6 +1001,9 @@ cc_search_panel_init (CcSearchPanel *self)
   gtk_container_add (GTK_CONTAINER (frame), widget);
   self->priv->list_box = widget;
   gtk_widget_show (widget);
+  g_signal_connect (widget, "row-selected", G_CALLBACK (on_row_selected), self);
+
+  self->priv->notification = WID ("notification");
 
   /* Drag and Drop */
   gtk_drag_dest_set (self->priv->list_box,

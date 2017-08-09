@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkScrolledWindow" id="search_vbox">
+<object class="GtkOverlay" id="search_vbox">
+  <property name="visible">True</property>
+  <child type="overlay">
+    <object class="GtkRevealer" id="notification">
+      <property name="visible">True</property>
+      <property name="halign">center</property>
+      <property name="valign">start</property>
+      <property name="border-width">6</property>
+      <child>
+        <object class="GtkLabel">
+          <property name="visible">True</property>
+          <property name="label" translatable="yes">Use Alt+↑ and Alt+↓ to move rows</property>
+          <style>
+            <class name="app-notification"/>
+          </style>
+        </object>
+      </child>
+    </object>
+  </child>
+  <child>
+  <object class="GtkScrolledWindow" id="scrolled_window">
     <property name="visible">True</property>
     <property name="hscrollbar_policy">never</property>
     <property name="min_content_height">450</property>
@@ -85,4 +105,6 @@
       </object>
     </child>
  </object>
+  </child>
+</object>
 </interface>
