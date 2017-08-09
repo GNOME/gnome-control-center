@@ -18,6 +18,8 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
+#include <config.h>
+
 #include "shell/list-box-helper.h"
 #include "cc-privacy-panel.h"
 #include "cc-privacy-resources.h"
@@ -25,6 +27,11 @@
 
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
+#ifdef BUILD_NETWORK
+#  include <NetworkManager.h>
+#else
+typedef struct _NMClient NMClient;
+#endif
 
 CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
 
@@ -75,6 +82,10 @@ struct _CcPrivacyPanelPrivate
   GHashTable *location_app_switches;
 
   GtkSizeGroup *location_icon_size_group;
+
+  NMClient *nm_client;
+  GtkWidget *connectivity_check_dialog;
+  GtkWidget *connectivity_check_row;
 };
 
 static char *
@@ -1242,6 +1253,66 @@ add_abrt (CcPrivacyPanel *self)
                                                 NULL);
 }
 
+#if defined(BUILD_NETWORK) && NM_CHECK_VERSION(1,10,0)
+static gboolean
+transform_on_off_label (GBinding     *binding G_GNUC_UNUSED,
+                        const GValue *from_value,
+                        GValue       *to_value,
+                        gpointer      user_data G_GNUC_UNUSED)
+{
+  g_value_set_string (to_value, g_value_get_boolean (from_value) ? _("On") : _("Off"));
+  return TRUE;
+}
+
+static GtkWidget *
+get_connectivity_check_label (NMClient *client)
+{
+  GtkWidget *w;
+
+  w = gtk_label_new ("");
+  g_object_bind_property_full (client, NM_CLIENT_CONNECTIVITY_CHECK_ENABLED,
+                               w, "label",
+                               G_BINDING_SYNC_CREATE,
+                               transform_on_off_label,
+                               NULL, NULL, NULL);
+  return w;
+}
+
+static void
+add_connectivity_check (CcPrivacyPanel *self)
+{
+  GtkWidget *w;
+  GtkWidget *dialog;
+
+  self->priv->nm_client = nm_client_new (NULL, NULL);
+  if (!self->priv->nm_client)
+    return;
+
+  w = get_connectivity_check_label (self->priv->nm_client);
+  self->priv->connectivity_check_row = add_row (self, _("Periodic Network Connectivity Check"), "connectivity_check_dialog", w);
+  g_object_bind_property (self->priv->nm_client, NM_CLIENT_CONNECTIVITY_CHECK_AVAILABLE,
+                          self->priv->connectivity_check_row, "visible",
+                          G_BINDING_SYNC_CREATE);
+
+  dialog = self->priv->connectivity_check_dialog;
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "connectivity_check_switch"));
+  g_object_bind_property (self->priv->nm_client, NM_CLIENT_CONNECTIVITY_CHECK_ENABLED,
+                          w, "active",
+                          G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+}
+
+#else
+
+static void
+add_connectivity_check (CcPrivacyPanel *self)
+{
+}
+
+#endif
+
 static void
 cc_privacy_panel_finalize (GObject *object)
 {
@@ -1273,6 +1344,8 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_pointer (&priv->location_apps_perms, g_variant_unref);
   g_clear_pointer (&priv->location_apps_data, g_variant_unref);
   g_clear_pointer (&priv->location_app_switches, g_hash_table_unref);
+  g_clear_object (&priv->nm_client);
+  g_clear_pointer (&priv->connectivity_check_dialog, gtk_widget_destroy);
 
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
 }
@@ -1338,6 +1411,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   self->priv->trash_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "trash_dialog"));
   self->priv->software_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "software_dialog"));
   self->priv->abrt_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "abrt_dialog"));
+  self->priv->connectivity_check_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "connectivity_check_dialog"));
 
   frame = WID ("frame");
   widget = gtk_list_box_new ();
@@ -1372,6 +1446,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   add_trash_temp (self);
   add_software (self);
   add_abrt (self);
+  add_connectivity_check (self);
 
   g_signal_connect (self->priv->lockdown_settings, "changed",
                     G_CALLBACK (on_lockdown_settings_changed), self);
