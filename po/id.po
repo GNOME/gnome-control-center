@@ -5,22 +5,23 @@
 # Mohammad DAMT <mdamt@bisnisweb.com>, 2003.
 # Ahmad Riza H Nst  <rizahnst@gnome.org>, 2006.
 # Dirgita <dirgitadevina@yahoo.co.id>, 2010, 2012, 2014.
-# Andika Triwidada <andika@gmail.com>, 2009, 2011-2015.
+# Andika Triwidada <andika@gmail.com>, 2009, 2011-2015, 2017.
+# Kukuh Syafaat <syafaatkukuh@gmail.com>, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-07-18 16:45+0000\n"
-"PO-Revision-Date: 2017-07-19 13:47+0700\n"
-"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
+"POT-Creation-Date: 2017-08-07 19:24+0000\n"
+"PO-Revision-Date: 2017-08-09 16:29+0700\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
@@ -1470,15 +1471,31 @@ msgid "Windows software"
 msgstr "Perangkat lunak Windows"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
-#: ../panels/info/gnome-info-panel.desktop.in.in.h:2
-msgid "De­tails"
-msgstr "Rincian"
+#: ../panels/info/gnome-default-apps-panel.desktop.in.in.h:2
+msgid "Defa­ult Applications"
+msgstr "Aplikasi Bawaan"
 
+#: ../panels/info/gnome-default-apps-panel.desktop.in.in.h:3
+msgid "Configure Default Applications"
+msgstr "Mengkonfigurasi Aplikasi Bawaan"
+
+#. Translators: those are keywords for the System Information panel
+#: ../panels/info/gnome-default-apps-panel.desktop.in.in.h:5
+msgid "default;application;preferred;media;"
+msgstr "bawaan;aplikasi;disukai;media;"
+
+#. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
+#: ../panels/info/gnome-info-overview-panel.desktop.in.in.h:2
+msgid "Ab­out"
+msgstr "Tentang"
+
+#: ../panels/info/gnome-info-overview-panel.desktop.in.in.h:3
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:3
 msgid "View information about your system"
 msgstr "Tilik informasi tentang sistem Anda"
 
 #. sure that you use the same "translation" for those keywords
+#: ../panels/info/gnome-info-overview-panel.desktop.in.in.h:5
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:5
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
@@ -1486,6 +1503,29 @@ msgid ""
 msgstr ""
 "perangkat;sistem;informasi;memori;prosesor;versi;baku;aplikasi;disukai;cd;"
 "dvd;usb;audio;video;cakram;dapat dicopot;media;autorun;"
+
+#. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:2
+msgid "De­tails"
+msgstr "Rincian"
+
+#. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
+#: ../panels/info/gnome-removable-media-panel.desktop.in.in.h:2
+msgid "Remo­vable Media"
+msgstr "Media Lepasan"
+
+#: ../panels/info/gnome-removable-media-panel.desktop.in.in.h:3
+msgid "Configure Removable Media settings"
+msgstr "Mengkonfigurasi pengaturan Media Lepasan"
+
+#. Translators: those are keywords for the System Information panel
+#: ../panels/info/gnome-removable-media-panel.desktop.in.in.h:5
+msgid ""
+"device;system;default;application;preferred;cd;dvd;usb;audio;video;disc;"
+"removable;media;autorun;"
+msgstr ""
+"perangkat;sistem;bawaan;aplikasi;disukai;cd;dvd;usb;audio;video;cakram;dapat "
+"dicopot;media;autorun;"
 
 #: ../panels/info/info-default-apps.ui.h:1
 msgid "_Web"
@@ -1659,8 +1699,8 @@ msgstr "Peluncur"
 msgid "Launch help browser"
 msgstr "Tampilkan layar bantuan"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:277
-#: ../shell/alt/cc-window.c:830 ../shell/cc-window.c:1590
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:276
+#: ../shell/alt/cc-window.c:829 ../shell/cc-window.c:1590
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/window.ui.h:1
 msgid "Settings"
 msgstr "Pengaturan"
@@ -2068,13 +2108,8 @@ msgstr "Klik ganda, tombol sekunder"
 msgid "Single click, secondary button"
 msgstr "Klik tunggal, tombol sekunder"
 
-#. TRANSLATORS: this is to disable the radio hardware in the
-#. * network panel
-#: ../panels/network/cc-network-panel.c:347
-msgid "Air_plane Mode"
-msgstr "Mode _Pesawat Terbang"
-
-#: ../panels/network/cc-network-panel.c:1001
+#. add proxy to device list
+#: ../panels/network/cc-network-panel.c:777
 msgid "Network proxy"
 msgstr "Proxy jaringan"
 
@@ -2082,18 +2117,18 @@ msgstr "Proxy jaringan"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1177 ../panels/network/net-vpn.c:283
+#: ../panels/network/cc-network-panel.c:941 ../panels/network/net-vpn.c:283
 #: ../panels/network/net-vpn.c:440
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
-#: ../panels/network/cc-network-panel.c:1244 ../panels/network/wifi.ui.h:7
+#: ../panels/network/cc-network-panel.c:1008 ../panels/network/wifi.ui.h:7
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Ups, ada sesuatu yang salah. Harap hubungi vendor perangkat lunak Anda."
 
-#: ../panels/network/cc-network-panel.c:1250
+#: ../panels/network/cc-network-panel.c:1014
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager perlu berjalan."
 
@@ -2247,7 +2282,7 @@ msgid "Remove VPN"
 msgstr "Hapus VPN"
 
 #: ../panels/network/connection-editor/ce-page-details.c:280
-#: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:269
+#: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:268
 #: ../shell/panel-list.ui.h:2
 msgid "Details"
 msgstr "Rincian"
@@ -3976,7 +4011,7 @@ msgstr "Komputer"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:561 ../panels/power/cc-power-panel.c:801
-#: ../panels/power/cc-power-panel.c:2366
+#: ../panels/power/cc-power-panel.c:2367
 msgid "Battery"
 msgstr "Baterai"
 
@@ -4081,31 +4116,35 @@ msgid "Suspend"
 msgstr "Suspensi"
 
 #: ../panels/power/cc-power-panel.c:2068
+msgid "Power Off"
+msgstr "Matikan"
+
+#: ../panels/power/cc-power-panel.c:2069
 msgid "Hibernate"
 msgstr "Hibernasi"
 
-#: ../panels/power/cc-power-panel.c:2069
+#: ../panels/power/cc-power-panel.c:2070
 msgid "Nothing"
 msgstr "Bukan apapun"
 
 #. Frame header
-#: ../panels/power/cc-power-panel.c:2183
+#: ../panels/power/cc-power-panel.c:2184
 msgid "Suspend & Power Button"
 msgstr "Tombol Suspensi & Daya"
 
-#: ../panels/power/cc-power-panel.c:2226
+#: ../panels/power/cc-power-panel.c:2227
 msgid "_Automatic suspend"
 msgstr "Suspensi otom_atis"
 
-#: ../panels/power/cc-power-panel.c:2227
+#: ../panels/power/cc-power-panel.c:2228
 msgid "Automatic suspend"
 msgstr "Suspensi otomatis"
 
-#: ../panels/power/cc-power-panel.c:2294
+#: ../panels/power/cc-power-panel.c:2295
 msgid "_When the Power Button is pressed"
 msgstr "Ketika Tombol Po_wer ditekan"
 
-#: ../panels/power/cc-power-panel.c:2420 ../shell/alt/cc-window.c:273
+#: ../panels/power/cc-power-panel.c:2421 ../shell/alt/cc-window.c:272
 #: ../shell/panel-list.ui.h:1
 msgid "Devices"
 msgstr "Perangkat"
@@ -7275,7 +7314,7 @@ msgstr "Perasaan Tekanan Ujung"
 msgid "page 3"
 msgstr "halaman 3"
 
-#: ../shell/alt/cc-window.c:766 ../shell/cc-window.c:53
+#: ../shell/alt/cc-window.c:765 ../shell/cc-window.c:53
 #: ../shell/cc-window.c:1484
 msgid "All Settings"
 msgstr "Semua Pengaturan"
@@ -7395,104 +7434,3 @@ msgstr "Hotspot"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "Hasil tak ditemukan"
-
-#~ msgid "_Use as Hotspot…"
-#~ msgstr "Jadikan _Hotspot…"
-
-#~ msgid "_History"
-#~ msgstr "R_iwayat"
-
-#~ msgid "Reset"
-#~ msgstr "Reset"
-
-#~ msgid "Make available to other _users"
-#~ msgstr "Jadikan tersedia bagi pengg_una lain"
-
-#~ msgid ""
-#~ "Reset the settings for this network, including passwords, but remember it "
-#~ "as a preferred network"
-#~ msgstr ""
-#~ "Reset pengaturan bagi jaringan ini, termasuk sandi, tapi ingat ini "
-#~ "sebagai jaringan yang disukai"
-
-#~ msgid ""
-#~ "Remove all details relating to this network and do not try to "
-#~ "automatically connect"
-#~ msgstr ""
-#~ "Hapus semua rincian terkait jaringan ini dan jangan coba menyambung "
-#~ "otomatis"
-
-#~ msgid "Loading options…"
-#~ msgstr "Opsi Mematikan Mesin…"
-
-#~ msgid ""
-#~ "If you have a connection to the Internet other than wireless, you can set "
-#~ "up a wireless hotspot to share the connection with others."
-#~ msgstr ""
-#~ "Apabila Anda memiliki koneksi Internet selain nirkabel, Anda dapat "
-#~ "menggunakannya sebagai hotspot nirkabel untuk berbagi koneksi dengan yang "
-#~ "lain."
-
-#~ msgid "History"
-#~ msgstr "Riwayat"
-
-#~ msgid "Press Esc to cancel."
-#~ msgstr "Tekan Esc untuk membatalkan."
-
-#~ msgctxt "Password hint"
-#~ msgid "Try to add more letters, numbers and symbols."
-#~ msgstr "Cobalah menambah lebih banyak huruf, angka, dan simbol."
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: Weak"
-#~ msgstr "Kekuatan: Lemah"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: Low"
-#~ msgstr "Kekuatan: Rendah"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: Medium"
-#~ msgstr "Kekuatan: Sedang"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: Good"
-#~ msgstr "Kekuatan: Baik"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: High"
-#~ msgstr "Kekuatan: Tinggi"
-
-#~ msgid "%s %d-bit (Build ID: %s)"
-#~ msgstr "%s %d-bit (ID Build: %s)"
-
-#~ msgid "%s %d-bit"
-#~ msgstr "%s %d-bit"
-
-#~ msgid "Base system"
-#~ msgstr "Sistem basis"
-
-#~ msgid "Shortcut;Repeat;Blink;"
-#~ msgstr "Pintasan;Pengulangan;Kedip;"
-
-#~ msgid "Firewall _Zone"
-#~ msgstr "_Zona Firewall"
-
-#~ msgctxt "Firewall zone"
-#~ msgid "Default"
-#~ msgstr "Baku"
-
-#~ msgid "The zone defines the trust level of the connection"
-#~ msgstr "Zona mendefinisikan tingkat kepercayaan dari koneksi"
-
-#~ msgid "2"
-#~ msgstr "2"
-
-#~ msgid "3"
-#~ msgstr "3"
-
-#~ msgid "4"
-#~ msgstr "4"
-
-#~ msgid "<small>Your account</small>"
-#~ msgstr "<small>Akun Anda</small>"
