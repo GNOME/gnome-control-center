@@ -18,6 +18,8 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
+#include <config.h>
+
 #include "list-box-helper.h"
 #include "cc-privacy-panel.h"
 #include "cc-privacy-resources.h"
@@ -25,6 +27,11 @@
 
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
+#ifdef BUILD_NETWORK
+#  include <NetworkManager.h>
+#else
+typedef struct _NMClient NMClient;
+#endif
 
 #define REMEMBER_RECENT_FILES "remember-recent-files"
 #define RECENT_FILES_MAX_AGE "recent-files-max-age"
@@ -87,6 +94,11 @@ struct _CcPrivacyPanel
 
   GtkListBoxRow *abrt_row;
   guint          abrt_watch_id;
+
+  GtkListBoxRow *connectivity_row;
+  GtkDialog     *connectivity_dialog;
+  GtkSwitch     *connectivity_switch;
+  NMClient      *nm_client;
 
   GCancellable *cancellable;
 
@@ -1297,6 +1309,64 @@ add_abrt (CcPrivacyPanel *self)
                                                 NULL);
 }
 
+#if defined(BUILD_NETWORK)
+static gboolean
+transform_on_off_label (GBinding     *binding G_GNUC_UNUSED,
+                        const GValue *from_value,
+                        GValue       *to_value,
+                        gpointer      user_data G_GNUC_UNUSED)
+{
+  g_value_set_string (to_value, g_value_get_boolean (from_value) ? _("On") : _("Off"));
+  return TRUE;
+}
+
+static GtkWidget *
+get_connectivity_label (NMClient *client)
+{
+  GtkWidget *w;
+
+  w = gtk_label_new ("");
+  g_object_bind_property_full (client, NM_CLIENT_CONNECTIVITY_CHECK_ENABLED,
+                               w, "label",
+                               G_BINDING_SYNC_CREATE,
+                               transform_on_off_label,
+                               NULL, NULL, NULL);
+  return w;
+}
+
+static void
+add_connectivity_check (CcPrivacyPanel *self)
+{
+  GtkWidget *w;
+
+  self->nm_client = nm_client_new (NULL, NULL);
+  if (!self->nm_client)
+    return;
+
+  w = get_connectivity_label (self->nm_client);
+  gtk_widget_show (w);
+  self->connectivity_row = add_row (self, _("Connectivity Checking"), self->connectivity_dialog, GTK_WIDGET (w));
+  g_object_bind_property (self->nm_client, NM_CLIENT_CONNECTIVITY_CHECK_AVAILABLE,
+                          self->connectivity_row, "visible",
+                          G_BINDING_SYNC_CREATE);
+
+  g_signal_connect (self->connectivity_dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+  g_object_bind_property (self->nm_client, NM_CLIENT_CONNECTIVITY_CHECK_ENABLED,
+                          self->connectivity_switch, "active",
+                          G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+}
+
+#else
+
+static void
+add_connectivity_check (CcPrivacyPanel *self)
+{
+}
+
+#endif
+
 static void
 cc_privacy_panel_finalize (GObject *object)
 {
@@ -1315,6 +1385,7 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_pointer ((GtkWidget **)&self->trash_dialog, gtk_widget_destroy);
   g_clear_pointer ((GtkWidget **)&self->software_dialog, gtk_widget_destroy);
   g_clear_pointer ((GtkWidget **)&self->abrt_dialog, gtk_widget_destroy);
+  g_clear_pointer ((GtkWidget **)&self->connectivity_dialog, gtk_widget_destroy);
   g_clear_object (&self->lockdown_settings);
   g_clear_object (&self->lock_settings);
   g_clear_object (&self->privacy_settings);
@@ -1327,6 +1398,7 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_pointer (&self->location_apps_perms, g_variant_unref);
   g_clear_pointer (&self->location_apps_data, g_variant_unref);
   g_clear_pointer (&self->location_app_switches, g_hash_table_unref);
+  g_clear_object (&self->nm_client);
 
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
 }
@@ -1387,6 +1459,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   add_trash_temp (self);
   add_software (self);
   add_abrt (self);
+  add_connectivity_check (self);
 
   g_signal_connect (self->lockdown_settings, "changed",
                     G_CALLBACK (on_lockdown_settings_changed), self);
@@ -1412,6 +1485,8 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, abrt_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, automatic_screen_lock_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, clear_recent_button);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, connectivity_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, connectivity_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, empty_trash_button);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, list_box);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, location_apps_frame);
