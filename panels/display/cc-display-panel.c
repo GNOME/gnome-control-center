@@ -32,7 +32,6 @@
 #include "shell/list-box-helper.h"
 #include <libupower-glib/upower.h>
 
-#include "cc-display-config-manager-rr.h"
 #include "cc-display-config-manager-dbus.h"
 #include "cc-display-config.h"
 #include "cc-night-light-dialog.h"
@@ -60,7 +59,6 @@ enum
 
 struct _CcDisplayPanelPrivate
 {
-  gboolean have_new_dbus_api;
   CcDisplayConfigManager *manager;
   CcDisplayConfig *current_config;
   CcDisplayMonitor *current_output;
@@ -126,14 +124,6 @@ on_area_paint (FooScrollArea  *area,
 static char *
 make_display_size_string (int width_mm,
                           int height_mm);
-static void
-realign_outputs_after_resolution_change (CcDisplayPanel    *self,
-                                         CcDisplayMonitor  *output_that_changed,
-                                         int                old_width,
-                                         int                old_height,
-                                         CcDisplayRotation  old_rotation);
-static void
-lay_out_outputs_horizontally (CcDisplayPanel *self);
 
 static char *
 make_output_ui_name (CcDisplayMonitor *output)
@@ -225,14 +215,9 @@ monitor_labeler_show (CcDisplayPanel *self)
       if (number == 0)
         continue;
 
-      if (priv->have_new_dbus_api)
-        g_variant_builder_add (&builder, "{sv}",
-                               cc_display_monitor_get_connector_name (output),
-                               g_variant_new_int32 (number));
-      else
-        g_variant_builder_add (&builder, "{uv}",
-                               cc_display_monitor_get_id (output),
-                               g_variant_new_int32 (number));
+      g_variant_builder_add (&builder, "{sv}",
+                             cc_display_monitor_get_connector_name (output),
+                             g_variant_new_int32 (number));
     }
 
   g_variant_builder_close (&builder);
@@ -241,7 +226,7 @@ monitor_labeler_show (CcDisplayPanel *self)
     return monitor_labeler_hide (self);
 
   g_dbus_proxy_call (priv->shell_proxy,
-                     priv->have_new_dbus_api ? "ShowMonitorLabels2" : "ShowMonitorLabels",
+                     "ShowMonitorLabels2",
                      g_variant_builder_end (&builder),
                      G_DBUS_CALL_FLAGS_NONE,
                      -1, NULL, NULL, NULL);
@@ -769,13 +754,11 @@ orientation_row_activated (CcDisplayPanel *panel,
 {
   CcDisplayPanelPrivate *priv = panel->priv;
   CcDisplayRotation rotation = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "rotation"));
-  CcDisplayRotation old_rotation = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (priv->current_output), "old-rotation"));
   int width, height;
 
   cc_display_monitor_get_geometry (priv->current_output, NULL, NULL, &width, &height);
 
   cc_display_monitor_set_rotation (priv->current_output, rotation);
-  realign_outputs_after_resolution_change (panel, priv->current_output, width, height, old_rotation);
   update_apply_button (panel);
 }
 
@@ -868,12 +851,8 @@ resolution_row_activated (CcDisplayPanel *panel,
 {
   CcDisplayPanelPrivate *priv = panel->priv;
   CcDisplayMode *mode = g_object_get_data (G_OBJECT (row), "mode");
-  int old_width = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (priv->current_output), "old-width"));
-  int old_height = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (priv->current_output), "old-height"));
 
   cc_display_monitor_set_mode (priv->current_output, mode);
-  realign_outputs_after_resolution_change (panel, priv->current_output, old_width, old_height,
-                                           cc_display_monitor_get_rotation (priv->current_output));
   update_apply_button (panel);
 }
 
@@ -1870,7 +1849,6 @@ two_output_visible_child_changed (CcDisplayPanel *panel,
       if (cc_display_config_is_cloning (priv->current_config))
         {
           cc_display_config_set_cloning (priv->current_config, FALSE);
-          lay_out_outputs_horizontally (panel);
         }
       single = g_str_equal (gtk_stack_get_visible_child_name (GTK_STACK (stack)), "single");
       outputs = cc_display_config_get_monitors (priv->current_config);
@@ -2167,133 +2145,6 @@ on_screen_changed (CcDisplayPanel *panel)
  show_error:
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "error");
 }
-
-
-static void
-realign_outputs_after_resolution_change (CcDisplayPanel *self, CcDisplayMonitor *output_that_changed, int old_width, int old_height, CcDisplayRotation old_rotation)
-{
-  /* We find the outputs that were below or to the right of the output that
-   * changed, and realign them; we also do that for outputs that shared the
-   * right/bottom edges with the output that changed.  The outputs that are
-   * above or to the left of that output don't need to change.
-   */
-
-  int old_right_edge, old_bottom_edge;
-  int dx, dy;
-  int x, y, width, height;
-  GList *outputs, *l;
-  CcDisplayRotation rotation;
-
-  if (self->priv->have_new_dbus_api)
-    return;
-
-  g_assert (self->priv->current_config != NULL);
-
-  cc_display_monitor_get_geometry (output_that_changed, &x, &y, &width, &height);
-  rotation = cc_display_monitor_get_rotation (output_that_changed);
-
-  if (width == old_width && height == old_height && rotation == old_rotation)
-    {
-      g_debug ("Not realigning outputs, configuration is the same for %s", cc_display_monitor_get_display_name (output_that_changed));
-      return;
-    }
-
-  g_debug ("Realigning outputs, configuration changed for %s", cc_display_monitor_get_display_name (output_that_changed));
-
-  /* Apply rotation to the geometry of the newly changed output,
-   * as well as to its old configuration */
-  apply_rotation_to_geometry (output_that_changed, &width, &height);
-  if ((old_rotation == CC_DISPLAY_ROTATION_90) || (old_rotation == CC_DISPLAY_ROTATION_270))
-    {
-      int tmp;
-      tmp = old_height;
-      old_height = old_width;
-      old_width = tmp;
-    }
-
-  old_right_edge = x + old_width;
-  old_bottom_edge = y + old_height;
-
-  dx = width - old_width;
-  dy = height - old_height;
-
-  outputs = cc_display_config_get_monitors (self->priv->current_config);
-
-  for (l = outputs; l != NULL; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      int output_x, output_y;
-      int output_width, output_height;
-
-      if (output == output_that_changed)
-        continue;
-
-      cc_display_monitor_get_geometry (output, &output_x, &output_y, &output_width, &output_height);
-
-      if (output_x >= old_right_edge)
-         output_x += dx;
-      else if (output_x + output_width == old_right_edge)
-         output_x = x + width - output_width;
-
-      if (output_y >= old_bottom_edge)
-         output_y += dy;
-      else if (output_y + output_height == old_bottom_edge)
-         output_y = y + height - output_height;
-
-      g_debug ("Setting geometry for %s: %dx%d+%d+%d", cc_display_monitor_get_display_name (output), output_width, output_height, output_x, output_y);
-      cc_display_monitor_set_position (output, output_x, output_y);
-    }
-}
-
-static void
-lay_out_outputs_horizontally (CcDisplayPanel *self)
-{
-  int x;
-  GList *outputs, *l;
-
-  if (self->priv->have_new_dbus_api)
-    return;
-
-  /* Lay out all the monitors horizontally when "mirror screens" is turned
-   * off, to avoid having all of them overlapped initially.  We put the
-   * outputs turned off on the right-hand side.
-   */
-
-  x = 0;
-
-  /* First pass, all "on" outputs */
-  outputs = cc_display_config_get_monitors (self->priv->current_config);
-
-  for (l = outputs; l != NULL; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      int width;
-      if (cc_display_monitor_is_active (output))
-        {
-          cc_display_mode_get_resolution (cc_display_monitor_get_mode (output),
-                                          &width, NULL);
-          cc_display_monitor_set_position (output, x, 0);
-          x += width;
-        }
-    }
-
-  /* Second pass, all the black screens */
-
-  for (l = outputs; l != NULL; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      int width;
-      if (!cc_display_monitor_is_active (output))
-        {
-          cc_display_mode_get_resolution (cc_display_monitor_get_mode (output),
-                                          &width, NULL);
-          cc_display_monitor_set_position (output, x, 0);
-          x += width;
-        }
-    }
-
-}
-
 
 #define SPACE 15
 #define MARGIN  15
@@ -3363,47 +3214,6 @@ make_night_light_widget (CcDisplayPanel *self)
 }
 
 static void
-init_config_manager (GObject        *source,
-                     GAsyncResult   *res,
-                     CcDisplayPanel *self)
-{
-  GVariant *variant;
-  GDBusConnection *bus = G_DBUS_CONNECTION (source);
-  GError *error = NULL;
-
-  variant = g_dbus_connection_call_finish (bus, res, &error);
-  if (!variant)
-    {
-      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        goto out;
-    }
-  else
-    {
-      GVariant *value = NULL;
-
-      g_variant_get_child (variant, 0, "v", &value);
-      g_variant_get (value, "b", &self->priv->have_new_dbus_api);
-
-      g_variant_unref (value);
-      g_variant_unref (variant);
-    }
-
-  if (self->priv->have_new_dbus_api)
-    self->priv->manager = cc_display_config_manager_dbus_new ();
-  else
-    self->priv->manager = cc_display_config_manager_rr_new ();
-
-  g_signal_connect_object (self->priv->manager, "changed",
-                           G_CALLBACK (on_screen_changed),
-                           self,
-                           G_CONNECT_SWAPPED);
-
- out:
-  g_clear_error (&error);
-  g_object_unref (bus);
-}
-
-static void
 session_bus_ready (GObject        *source,
                    GAsyncResult   *res,
                    CcDisplayPanel *self)
@@ -3423,20 +3233,11 @@ session_bus_ready (GObject        *source,
       return;
     }
 
-  g_dbus_connection_call (bus,
-                          "org.gnome.Mutter.DisplayConfig",
-                          "/org/gnome/Mutter/DisplayConfig",
-                          "org.freedesktop.DBus.Properties",
-                          "Get",
-                          g_variant_new ("(ss)",
-                                         "org.gnome.Mutter.DisplayConfig",
-                                         "IsExperimentalApiEnabled"),
-                          NULL,
-                          G_DBUS_CALL_FLAGS_NO_AUTO_START,
-                          -1,
-                          self->priv->shell_cancellable,
-                          (GAsyncReadyCallback) init_config_manager,
-                          self);
+  self->priv->manager = cc_display_config_manager_dbus_new ();
+  g_signal_connect_object (self->priv->manager, "changed",
+                           G_CALLBACK (on_screen_changed),
+                           self,
+                           G_CONNECT_SWAPPED);
 }
 
 static void
