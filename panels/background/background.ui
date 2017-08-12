@@ -1,95 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkHBox" id="background-panel">
+  <object class="GtkBox" id="background-panel">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="margin_start">6</property>
-    <property name="margin_end">6</property>
-    <property name="margin_top">6</property>
-    <property name="margin_bottom">6</property>
-    <property name="border_width">10</property>
+    <property name="margin">32</property>
     <property name="spacing">12</property>
+    <property name="valign">center</property>
     <child>
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="margin_top">100</property>
-        <property name="margin_bottom">100</property>
+        <property name="spacing">24</property>
         <child>
-          <object class="GtkVBox" id="vbox3">
+          <object class="GtkBox" id="vbox3">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="halign">end</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkAspectFrame" id="aspectframe1">
+              <object class="GtkButton" id="background-set-button">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_end">12</property>
-                <property name="label_xalign">0</property>
-                <property name="shadow_type">none</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
                 <child>
-                  <object class="GtkButton" id="background-set-button">
+                  <object class="GtkBox" id="box2">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="valign">center</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin">6</property>
+                    <property name="spacing">6</property>
+                    <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkBox" id="box2">
+                      <object class="GtkDrawingArea" id="background-desktop-drawingarea">
+                        <property name="width_request">310</property>
+                        <property name="height_request">170</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkDrawingArea" id="background-desktop-drawingarea">
-                            <property name="width_request">310</property>
-                            <property name="height_request">170</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="valign">center</property>
-                            <property name="margin_start">6</property>
-                            <property name="margin_end">6</property>
-                            <property name="margin_top">6</property>
-                            <property name="margin_bottom">6</property>
-                            <property name="hexpand">True</property>
-                            <property name="vexpand">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label1">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">_Background</property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">background-set-button</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
+                        <property name="valign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">_Background</property>
+                        <property name="use_underline">True</property>
+                        <property name="mnemonic_widget">background-set-button</property>
                       </object>
                     </child>
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
             </child>
             <child>
-              <object class="GtkHBox" id="bottom-hbox">
+              <object class="GtkBox" id="bottom-hbox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="spacing">12</property>
                 <child>
-                  <object class="GtkHBox" id="hbox2">
+                  <object class="GtkBox" id="hbox2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="halign">center</property>
@@ -154,79 +125,55 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox1">
+          <object class="GtkBox" id="vbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkAspectFrame" id="aspectframe2">
+              <object class="GtkButton" id="background-lock-set-button">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_start">12</property>
-                <property name="label_xalign">0</property>
-                <property name="shadow_type">none</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
                 <child>
-                  <object class="GtkButton" id="background-lock-set-button">
+                  <object class="GtkBox" id="box3">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="valign">center</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin">6</property>
+                    <property name="spacing">6</property>
+                    <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkBox" id="box3">
+                      <object class="GtkDrawingArea" id="background-lock-drawingarea">
+                        <property name="width_request">310</property>
+                        <property name="height_request">170</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkDrawingArea" id="background-lock-drawingarea">
-                            <property name="width_request">310</property>
-                            <property name="height_request">170</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="valign">center</property>
-                            <property name="margin_start">6</property>
-                            <property name="margin_end">6</property>
-                            <property name="margin_top">6</property>
-                            <property name="margin_bottom">6</property>
-                            <property name="hexpand">True</property>
-                            <property name="vexpand">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes" comments="To translators: This is a noun, not a verb">_Lock Screen</property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">background-lock-set-button</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
+                        <property name="valign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label2">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes" comments="To translators: This is a noun, not a verb">_Lock Screen</property>
+                        <property name="use_underline">True</property>
+                        <property name="mnemonic_widget">background-lock-set-button</property>
                       </object>
                     </child>
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
             </child>
             <child>
-              <object class="GtkHBox" id="bottom-hbox1">
+              <object class="GtkBox" id="bottom-hbox1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="spacing">12</property>
                 <child>
-                  <object class="GtkHBox" id="hbox1">
+                  <object class="GtkBox" id="hbox1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="halign">center</property>
