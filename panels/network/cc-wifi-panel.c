@@ -404,10 +404,12 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
                           GAsyncResult *res,
                           gpointer      user_data)
 {
-  CcWifiPanel *self = CC_WIFI_PANEL (user_data);
-  GError *error = NULL;
+  CcWifiPanel *self;
+  GDBusProxy *proxy;
+  GError *error;
 
-  self->rfkill_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  error = NULL;
+  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
 
   if (error)
     {
@@ -417,6 +419,10 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
       g_error_free (error);
       return;
     }
+
+  self = CC_WIFI_PANEL (user_data);
+
+  self->rfkill_proxy = proxy;
 
   sync_airplane_mode_switch (self);
 }
