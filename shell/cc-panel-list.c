@@ -261,6 +261,54 @@ filter_func (GtkListBoxRow *row,
   return retval;
 }
 
+static const gchar * const panel_order[] = {
+  /* Main page */
+  "wifi",
+  "mobile-broadband",
+  "bluetooth",
+  "background",
+  "notifications",
+  "search",
+  "region",
+  "universal-access",
+  "online-accounts",
+  "privacy",
+  "sharing",
+  "sound",
+  "power",
+  "network",
+
+  /* Devices page */
+  "printers",
+  "keyboard",
+  "mouse",
+  "display",
+  "removable-media",
+  "wacom",
+  "color",
+
+  /* Details page */
+  "info-overview",
+  "datetime",
+  "user-accounts",
+  "default-apps",
+  "reset-settings"
+};
+
+static guint
+get_panel_id_index (const gchar *panel_id)
+{
+  guint i;
+
+  for (i = 0; i < G_N_ELEMENTS (panel_order); i++)
+    {
+      if (g_str_equal (panel_order[i], panel_id))
+        return i;
+    }
+
+  return 0;
+}
+
 static gint
 sort_function (GtkListBoxRow *a,
                GtkListBoxRow *b,
@@ -291,7 +339,7 @@ sort_function (GtkListBoxRow *a,
   if (a_data->category != b_data->category)
     return a_data->category - b_data->category;
 
-  return g_strcmp0 (a_data->name, b_data->name);
+  return get_panel_id_index (a_data->id) - get_panel_id_index (b_data->id);
 }
 
 static gint
@@ -397,6 +445,10 @@ header_func (GtkListBoxRow *row,
           gtk_widget_show (separator);
 
           gtk_list_box_row_set_header (row, separator);
+        }
+      else
+        {
+          gtk_list_box_row_set_header (row, NULL);
         }
     }
 }
@@ -659,6 +711,16 @@ cc_panel_list_init (CcPanelList *self)
   self->view = CC_PANEL_LIST_MAIN;
 
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->main_listbox),
+                              sort_function,
+                              self,
+                              NULL);
+
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->details_listbox),
+                              sort_function,
+                              self,
+                              NULL);
+
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->devices_listbox),
                               sort_function,
                               self,
                               NULL);
