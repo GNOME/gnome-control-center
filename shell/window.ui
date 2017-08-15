@@ -4,8 +4,8 @@
   <template class="CcWindow" parent="GtkApplicationWindow">
     <property name="can_focus">False</property>
     <property name="window_position">center</property>
-    <property name="default-width">720</property>
-    <property name="default-height">480</property>
+    <property name="default-width">980</property>
+    <property name="default-height">640</property>
     <signal name="notify::window" handler="gdk_window_set_cb" object="CcWindow" swapped="no" />
     <signal name="map-event" handler="window_map_event_cb" object="CcWindow" swapped="no" />
     <child>
