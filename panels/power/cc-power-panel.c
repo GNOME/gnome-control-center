@@ -2358,8 +2358,6 @@ add_battery_section (CcPowerPanel *self)
   g_free (s);
   gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
   gtk_widget_set_halign (widget, GTK_ALIGN_START);
-  gtk_widget_set_margin_start (widget, 6);
-  gtk_widget_set_margin_end (widget, 6);
   gtk_widget_set_margin_bottom (widget, 6);
   gtk_widget_set_margin_bottom (box, 24);
   gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
@@ -2410,8 +2408,6 @@ add_device_section (CcPowerPanel *self)
   g_free (s);
   gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
   gtk_widget_set_halign (widget, GTK_ALIGN_START);
-  gtk_widget_set_margin_start (widget, 6);
-  gtk_widget_set_margin_end (widget, 6);
   gtk_widget_set_margin_bottom (widget, 6);
   gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
 
