@@ -2019,20 +2019,28 @@ gcm_prefs_connect_cb (GObject *object,
                       GAsyncResult *res,
                       gpointer user_data)
 {
+  CcColorPanelPrivate *priv;
+  CcColorPanel *prefs;
   gboolean ret;
   GError *error = NULL;
-  CcColorPanel *prefs = CC_COLOR_PANEL (user_data);
-  CcColorPanelPrivate *priv = prefs->priv;
 
-  ret = cd_client_connect_finish (priv->client,
+  ret = cd_client_connect_finish (CD_CLIENT (object),
                                   res,
                                   &error);
   if (!ret)
     {
-      g_warning ("failed to connect to colord: %s", error->message);
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("failed to connect to colord: %s", error->message);
+
       g_error_free (error);
       return;
     }
+
+  /* Only cast the parameters after making sure it didn't fail. At this point,
+   * the user can potentially already have changed to another panel, effectively
+   * making user_data invalid. */
+  prefs = CC_COLOR_PANEL (user_data);
+  priv = prefs->priv;
 
   /* set calibrate button sensitivity */
   gcm_prefs_sensor_coldplug (prefs);
