@@ -13,12 +13,11 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkBox">
+          <object class="GtkBox" id="sidebar_box">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="hexpand">False</property>
             <property name="orientation">vertical</property>
-            <signal name="size-allocate" handler="sidelist_size_allocate_cb" object="CcWindow" swapped="no" />
             <child>
               <object class="GtkSearchBar" id="search_bar">
                 <property name="visible">True</property>
@@ -190,6 +189,15 @@
       <widget name="lock_button"/>
       <widget name="search_button"/>
       <widget name="previous_button"/>
+    </widgets>
+  </object>
+
+  <!-- Synchronize left header and sidebar -->
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="header"/>
+      <widget name="sidebar_box"/>
     </widgets>
   </object>
 </interface>

@@ -350,15 +350,6 @@ previous_button_clicked_cb (GtkButton *button,
     cc_panel_list_set_view (CC_PANEL_LIST (shell->panel_list), CC_PANEL_LIST_MAIN);
 }
 
-static void
-sidelist_size_allocate_cb (GtkWidget    *box,
-                           GdkRectangle *allocation,
-                           CcWindow     *self)
-{
-  /* Keep the sidelist and the first headerbar synchronized */
-  gtk_widget_set_size_request (self->header, allocation->width, -1);
-}
-
 /* CcShell implementation */
 static void
 _shell_embed_widget_in_header (CcShell      *shell,
@@ -647,7 +638,6 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, gdk_window_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
-  gtk_widget_class_bind_template_callback (widget_class, sidelist_size_allocate_cb);
   gtk_widget_class_bind_template_callback (widget_class, update_list_title);
   gtk_widget_class_bind_template_callback (widget_class, window_map_event_cb);
 }
