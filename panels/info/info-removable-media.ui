@@ -5,7 +5,10 @@
     <property name="visible">True</property>
     <property name="can-focus">False</property>
     <property name="expand">True</property>
-    <property name="margin">24</property>
+    <property name="margin_top">32</property>
+    <property name="margin_bottom">32</property>
+    <property name="margin_left">24</property>
+    <property name="margin_right">24</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -15,7 +18,7 @@
           <object class="GtkBox" id="media_preferences_vbox3">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="spacing">10</property>
+            <property name="spacing">18</property>
             <property name="orientation">vertical</property>
             <child>
               <object class="GtkBox" id="media_handling_vbox">
@@ -35,11 +38,13 @@
                       <object class="GtkLabel" id="label42">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="halign">center</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Select how media should be handled</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                        </attributes>
+                        <property name="margin_bottom">12</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -51,7 +56,7 @@
                       <object class="GtkBox" id="vbox52">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="spacing">6</property>
+                        <property name="spacing">18</property>
                         <property name="margin-start">12</property>
                         <property name="orientation">vertical</property>
                         <child>
@@ -60,7 +65,7 @@
                             <property name="can-focus">False</property>
                             <property name="hexpand">True</property>
                             <property name="column-spacing">6</property>
-                            <property name="row-spacing">6</property>
+                            <property name="row-spacing">12</property>
                             <child>
                               <object class="GtkLabel" id="label44">
                                 <property name="visible">True</property>
