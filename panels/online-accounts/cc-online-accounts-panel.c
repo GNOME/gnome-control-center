@@ -383,6 +383,17 @@ cc_goa_panel_set_property (GObject *object,
 }
 
 static void
+cc_goa_panel_dispose (GObject *object)
+{
+  CcGoaPanel *panel = CC_GOA_PANEL (object);
+
+  /* Must be destroyed in dispose, not finalize. */
+  g_clear_pointer (&panel->edit_account_dialog, gtk_widget_destroy);
+
+  G_OBJECT_CLASS (cc_goa_panel_parent_class)->dispose (object);
+}
+
+static void
 cc_goa_panel_finalize (GObject *object)
 {
   CcGoaPanel *panel = CC_GOA_PANEL (object);
@@ -495,6 +506,7 @@ cc_goa_panel_class_init (CcGoaPanelClass *klass)
   object_class->set_property = cc_goa_panel_set_property;
   object_class->finalize = cc_goa_panel_finalize;
   object_class->constructed = cc_goa_panel_constructed;
+  object_class->dispose = cc_goa_panel_dispose;
 
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
