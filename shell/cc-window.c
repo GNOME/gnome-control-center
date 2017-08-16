@@ -197,34 +197,9 @@ add_current_panel_to_history (CcShell    *shell,
 static void
 shell_show_overview_page (CcWindow *self)
 {
+  /* TODO: need design input on a possibly new overview page. For now,
+   * just go back to the main section of the panel list. */
   cc_panel_list_set_view (CC_PANEL_LIST (self->panel_list), CC_PANEL_LIST_MAIN);
-
-  if (self->current_panel_box)
-    gtk_container_remove (GTK_CONTAINER (self->stack), self->current_panel_box);
-  self->current_panel = NULL;
-  self->current_panel_box = NULL;
-  g_clear_pointer (&self->current_panel_id, g_free);
-
-  /* Clear the panel history */
-  g_queue_free_full (self->previous_panels, g_free);
-  self->previous_panels = g_queue_new ();
-
-  /* clear the search text */
-  gtk_entry_set_text (GTK_ENTRY (self->search_entry), "");
-  if (gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (self->search_bar)))
-    gtk_widget_grab_focus (self->search_entry);
-
-  gtk_lock_button_set_permission (GTK_LOCK_BUTTON (self->lock_button), NULL);
-
-  /* reset window title and icon */
-  gtk_window_set_role (GTK_WINDOW (self), NULL);
-  gtk_window_set_default_icon_name (DEFAULT_WINDOW_ICON_NAME);
-  gtk_window_set_icon_name (GTK_WINDOW (self), DEFAULT_WINDOW_ICON_NAME);
-
-  cc_shell_set_active_panel (CC_SHELL (self), NULL);
-
-  /* clear any custom widgets */
-  _shell_remove_all_custom_widgets (self);
 }
 
 void
