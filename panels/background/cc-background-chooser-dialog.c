@@ -101,17 +101,13 @@ cc_background_chooser_dialog_realize (GtkWidget *widget)
     {
       gtk_window_set_default_size (GTK_WINDOW (chooser), -1, 550);
     }
-  else if (gtk_window_is_maximized (parent))
-    {
-      gtk_window_maximize (GTK_WINDOW (chooser));
-    }
   else
     {
       gint width;
       gint height;
 
       gtk_window_get_size (parent, &width, &height);
-      gtk_window_set_default_size (GTK_WINDOW (chooser), -1, (gint) (0.9 * height));
+      gtk_window_set_default_size (GTK_WINDOW (chooser), -1, (gint) (0.66 * height));
     }
 
   GTK_WIDGET_CLASS (cc_background_chooser_dialog_parent_class)->realize (widget);
@@ -391,7 +387,6 @@ create_view (CcBackgroundChooserDialog *chooser, GtkTreeModel *model)
   GtkCellRenderer *renderer;
   GtkWidget *icon_view;
   GtkWidget *sw;
-  GtkWindow *parent;
 
   sw = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
@@ -405,9 +400,7 @@ create_view (CcBackgroundChooserDialog *chooser, GtkTreeModel *model)
   g_signal_connect (icon_view, "selection-changed", G_CALLBACK (on_selection_changed), chooser);
   g_signal_connect (icon_view, "item-activated", G_CALLBACK (on_item_activated), chooser);
 
-  parent = gtk_window_get_transient_for (GTK_WINDOW (chooser));
-  if (parent == NULL || !gtk_window_is_maximized (parent))
-    gtk_icon_view_set_columns (GTK_ICON_VIEW (icon_view), 3);
+  gtk_icon_view_set_columns (GTK_ICON_VIEW (icon_view), 3);
 
   renderer = gtk_cell_renderer_pixbuf_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (icon_view),
