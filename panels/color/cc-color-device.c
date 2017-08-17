@@ -292,9 +292,9 @@ cc_color_device_init (CcColorDevice *color_device)
   /* description */
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 9);
   priv->widget_description = gtk_label_new ("");
-  gtk_widget_set_margin_start (priv->widget_description, 12);
-  gtk_widget_set_margin_top (priv->widget_description, 6);
-  gtk_widget_set_margin_bottom (priv->widget_description, 6);
+  gtk_widget_set_margin_start (priv->widget_description, 20);
+  gtk_widget_set_margin_top (priv->widget_description, 12);
+  gtk_widget_set_margin_bottom (priv->widget_description, 12);
   gtk_widget_set_halign (priv->widget_description, GTK_ALIGN_START);
   gtk_box_pack_start (GTK_BOX (box), priv->widget_description, TRUE, TRUE, 0);
 
@@ -314,9 +314,9 @@ cc_color_device_init (CcColorDevice *color_device)
   gtk_button_set_relief (GTK_BUTTON (priv->widget_button), GTK_RELIEF_NONE);
   gtk_container_add (GTK_CONTAINER (priv->widget_button), priv->widget_arrow);
   gtk_widget_set_visible (priv->widget_arrow, TRUE);
-  gtk_widget_set_margin_top (priv->widget_button, 3);
-  gtk_widget_set_margin_bottom (priv->widget_button, 3);
-  gtk_widget_set_margin_end (priv->widget_button, 9);
+  gtk_widget_set_margin_top (priv->widget_button, 9);
+  gtk_widget_set_margin_bottom (priv->widget_button, 9);
+  gtk_widget_set_margin_end (priv->widget_button, 12);
   gtk_box_pack_start (GTK_BOX (box), priv->widget_button, FALSE, FALSE, 0);
 
   /* not calibrated */

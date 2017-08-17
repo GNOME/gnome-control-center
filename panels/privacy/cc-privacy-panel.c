@@ -296,8 +296,8 @@ add_row (CcPrivacyPanel *self,
   gtk_widget_set_halign (w, GTK_ALIGN_START);
   gtk_widget_set_margin_start (w, 20);
   gtk_widget_set_margin_end (w, 20);
-  gtk_widget_set_margin_top (w, 12);
-  gtk_widget_set_margin_bottom (w, 12);
+  gtk_widget_set_margin_top (w, 18);
+  gtk_widget_set_margin_bottom (w, 18);
   gtk_widget_set_halign (w, GTK_ALIGN_START);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_widget_set_hexpand (w, TRUE);

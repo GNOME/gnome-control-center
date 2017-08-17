@@ -846,8 +846,8 @@ add_input_row (CcRegionPanel   *self,
         gtk_widget_set_halign (label, GTK_ALIGN_START);
         gtk_widget_set_margin_start (label, 20);
         gtk_widget_set_margin_end (label, 20);
-        gtk_widget_set_margin_top (label, 12);
-        gtk_widget_set_margin_bottom (label, 12);
+        gtk_widget_set_margin_top (label, 18);
+        gtk_widget_set_margin_bottom (label, 18);
         gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
         if (strcmp (type, INPUT_SOURCE_TYPE_IBUS) == 0) {
