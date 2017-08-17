@@ -388,7 +388,6 @@ cc_goa_panel_finalize (GObject *object)
   CcGoaPanel *panel = CC_GOA_PANEL (object);
 
   g_clear_object (&panel->client);
-  g_clear_pointer (&panel->edit_account_dialog, gtk_widget_destroy);
 
   G_OBJECT_CLASS (cc_goa_panel_parent_class)->finalize (object);
 }
