@@ -449,10 +449,10 @@ search_panel_add_one_app_info (CcSearchPanel *self,
   gtk_widget_set_valign (self->priv->list_box, GTK_ALIGN_FILL);
 
   row = gtk_list_box_row_new ();
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
   gtk_container_add (GTK_CONTAINER (row), box);
   gtk_widget_set_hexpand (box, TRUE);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 6);
+  gtk_container_set_border_width (GTK_CONTAINER (box), 10);
   g_object_set_data_full (G_OBJECT (row), "app-info",
                           g_object_ref (app_info), g_object_unref);
   g_object_set_data (G_OBJECT (row), "self", self);
@@ -464,8 +464,8 @@ search_panel_add_one_app_info (CcSearchPanel *self,
   else
     g_object_ref (icon);
 
-  w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
-  gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &width, &height);
+  w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DND);
+  gtk_icon_size_lookup (GTK_ICON_SIZE_DND, &width, &height);
   gtk_image_set_pixel_size (GTK_IMAGE (w), MAX (width, height));
   gtk_container_add (GTK_CONTAINER (box), w);
   g_object_unref (icon);
