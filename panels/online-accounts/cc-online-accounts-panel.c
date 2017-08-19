@@ -233,22 +233,14 @@ show_non_branded_providers (CcGoaPanel *self)
 }
 
 static void
-on_provider_row_activated (CcGoaPanel    *self,
-                           GtkListBoxRow *activated_row)
+add_account (CcGoaPanel  *self,
+             GoaProvider *provider,
+             GVariant    *preseed)
 {
-  GoaProvider *provider;
   GoaObject *object;
   GError *error;
 
-  /* Show More row */
-  if (activated_row == GTK_LIST_BOX_ROW (self->more_providers_row))
-    {
-      show_non_branded_providers (self);
-      return;
-    }
-
   error = NULL;
-  provider = g_object_get_data (G_OBJECT (activated_row), "goa-provider");
 
   gtk_container_foreach (GTK_CONTAINER (self->new_account_vbox),
                          (GtkCallback) gtk_widget_destroy,
@@ -269,10 +261,31 @@ on_provider_row_activated (CcGoaPanel    *self,
                                      GTK_BOX (self->new_account_vbox),
                                      &error);
 
+  if (preseed)
+    goa_provider_set_preseed_data (provider, preseed);
+
   if (object == NULL)
     gtk_widget_hide (self->edit_account_dialog);
   else
     show_page_account (self, object);
+}
+
+static void
+on_provider_row_activated (CcGoaPanel    *self,
+                           GtkListBoxRow *activated_row)
+{
+  GoaProvider *provider;
+
+  /* Show More row */
+  if (activated_row == GTK_LIST_BOX_ROW (self->more_providers_row))
+    {
+      show_non_branded_providers (self);
+      return;
+    }
+
+  provider = g_object_get_data (G_OBJECT (activated_row), "goa-provider");
+
+  add_account (self, provider, NULL);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
@@ -307,20 +320,16 @@ command_add (CcGoaPanel *panel,
 
   switch (g_variant_n_children (parameters))
     {
-      case 4:
-        g_variant_get_child (parameters, 3, "v", &preseed);
       case 3:
-        g_variant_get_child (parameters, 2, "v", &v);
+        g_variant_get_child (parameters, 2, "v", &preseed);
+      case 2:
+        g_variant_get_child (parameters, 1, "v", &v);
         if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
           provider_name = g_variant_get_string (v, NULL);
         else
           g_warning ("Wrong type for the second argument (provider name) GVariant, expected 's' but got '%s'",
                      (gchar *)g_variant_get_type (v));
         g_variant_unref (v);
-      case 2:
-        /* Nothing to see here, move along */
-      case 1:
-        /* No flag to handle here */
         break;
       default:
         g_warning ("Unexpected parameters found, ignore request");
@@ -335,6 +344,8 @@ command_add (CcGoaPanel *panel,
           g_warning ("Unable to get a provider for type '%s'", provider_name);
           goto out;
         }
+
+      add_account (panel, provider, preseed);
     }
 
 out:
