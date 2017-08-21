@@ -1333,6 +1333,27 @@ make_single_output_ui (CcDisplayPanel *panel)
   return make_scrollable (vbox);
 }
 
+static void
+monitor_output_changes (GtkWidget      *area,
+                        CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  const gchar *signals[] = { "rotation", "mode", "primary", "active", "scale" };
+  GList *outputs, *l;
+  guint i;
+
+  outputs = cc_display_config_get_monitors (priv->current_config);
+  for (l = outputs; l; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+      for (i = 0; i < G_N_ELEMENTS (signals); ++i)
+        {
+          g_signal_connect_object (output, signals[i], G_CALLBACK (gtk_widget_queue_draw),
+                                   area, G_CONNECT_SWAPPED);
+        }
+    }
+}
+
 static GtkWidget *
 make_arrangement_row (CcDisplayPanel *panel)
 {
@@ -1345,6 +1366,8 @@ make_arrangement_row (CcDisplayPanel *panel)
                     G_CALLBACK (on_area_paint), panel);
   g_signal_connect (area, "viewport_changed",
                     G_CALLBACK (on_viewport_changed), panel);
+
+  monitor_output_changes (area, panel);
 
   row = g_object_new (CC_TYPE_LIST_BOX_ROW, NULL);
   gtk_container_add (GTK_CONTAINER (row), area);
