@@ -68,6 +68,7 @@ struct _CcDisplayPanelPrivate
 
   guint           focus_id;
 
+  GtkSizeGroup *main_size_group;
   GtkSizeGroup *rows_size_group;
   GtkWidget *stack;
   GtkWidget *dialog;
@@ -324,6 +325,7 @@ cc_display_panel_dispose (GObject *object)
   g_clear_object (&priv->thumbnail_factory);
   g_clear_object (&priv->settings_color);
   g_clear_object (&priv->night_light_dialog);
+  g_clear_object (&priv->main_size_group);
 
   if (priv->dialog)
     {
@@ -577,13 +579,16 @@ make_bold_label (const gchar *text)
 }
 
 static GtkWidget *
-make_main_vbox (void)
+make_main_vbox (GtkSizeGroup *size_group)
 {
   GtkWidget *vbox;
 
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_set_margin_top (vbox, PANEL_PADDING);
   gtk_widget_set_margin_bottom (vbox, PANEL_PADDING);
+
+  if (size_group)
+    gtk_size_group_add_widget (size_group, vbox);
 
   return vbox;
 }
@@ -1315,7 +1320,7 @@ make_single_output_ui (CcDisplayPanel *panel)
 
   priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
-  vbox = make_main_vbox ();
+  vbox = make_main_vbox (priv->main_size_group);
 
   frame = make_frame (g_object_get_data (G_OBJECT (priv->current_output), "ui-name"), NULL);
   gtk_container_add (GTK_CONTAINER (vbox), frame);
@@ -1568,7 +1573,7 @@ make_two_join_ui (CcDisplayPanel *panel)
 
   priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
-  vbox = make_main_vbox ();
+  vbox = make_main_vbox (priv->main_size_group);
 
   gtk_container_add (GTK_CONTAINER (vbox), make_arrangement_ui (panel));
 
@@ -1632,7 +1637,7 @@ make_two_single_ui (CcDisplayPanel *panel)
 
   priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
-  vbox = make_main_vbox ();
+  vbox = make_main_vbox (priv->main_size_group);
 
   box = make_two_output_chooser (panel);
   gtk_container_foreach (GTK_CONTAINER (box), connect_activate_output, panel);
@@ -1788,7 +1793,7 @@ make_two_mirror_ui (CcDisplayPanel *panel)
 
   priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
-  vbox = make_main_vbox ();
+  vbox = make_main_vbox (priv->main_size_group);
   frame = make_frame (NULL, NULL);
   gtk_container_add (GTK_CONTAINER (vbox), frame);
   listbox = make_list_box ();
@@ -1890,6 +1895,7 @@ make_two_output_ui (CcDisplayPanel *panel)
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, HEADING_PADDING);
   gtk_widget_set_margin_top (hbox, HEADING_PADDING);
   gtk_widget_set_margin_bottom (hbox, HEADING_PADDING);
+  gtk_size_group_add_widget (priv->main_size_group, hbox);
   gtk_container_add (GTK_CONTAINER (vbox), wrap_in_boxes (hbox));
 
   gtk_container_add (GTK_CONTAINER (hbox), make_bold_label (_("Display Mode")));
@@ -2042,7 +2048,7 @@ make_multi_output_ui (CcDisplayPanel *panel)
 
   priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
-  vbox = make_main_vbox ();
+  vbox = make_main_vbox (priv->main_size_group);
 
   gtk_container_add (GTK_CONTAINER (vbox), make_arrangement_ui (panel));
 
@@ -3235,15 +3241,24 @@ cc_display_panel_init (CcDisplayPanel *self)
 {
   CcDisplayPanelPrivate *priv;
   GSettings *settings;
+  GtkWidget *bin;
 
   g_resources_register (cc_display_get_resource ());
 
   priv = self->priv = DISPLAY_PANEL_PRIVATE (self);
 
   priv->stack = gtk_stack_new ();
+
+  bin = make_bin ();
+  gtk_widget_set_size_request (bin, 500, -1);
+  gtk_stack_add_named (GTK_STACK (priv->stack), bin, "main-size-group");
+  priv->main_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+  gtk_size_group_add_widget (priv->main_size_group, bin);
+
   gtk_stack_add_named (GTK_STACK (priv->stack),
                        gtk_label_new (_("Could not get screen information")),
                        "error");
+
   gtk_container_add (GTK_CONTAINER (self), priv->stack);
   gtk_widget_show_all (priv->stack);
 
