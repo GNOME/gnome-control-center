@@ -754,9 +754,6 @@ orientation_row_activated (CcDisplayPanel *panel,
 {
   CcDisplayPanelPrivate *priv = panel->priv;
   CcDisplayRotation rotation = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "rotation"));
-  int width, height;
-
-  cc_display_monitor_get_geometry (priv->current_output, NULL, NULL, &width, &height);
 
   cc_display_monitor_set_rotation (priv->current_output, rotation);
   update_apply_button (panel);
@@ -1241,7 +1238,6 @@ ensure_res_freqs (CcDisplayMonitor *output)
   GHashTable *res_freqs;
   GHashTableIter iter;
   GList *resolutions, *modes, *m;
-  int old_width, old_height;
 
   if (g_object_get_data (G_OBJECT (output), "res-freqs"))
     return;
@@ -1279,12 +1275,6 @@ ensure_res_freqs (CcDisplayMonitor *output)
                           res_freqs, (GDestroyNotify) g_hash_table_destroy);
   g_object_set_data_full (G_OBJECT (output), "res-list",
                           resolutions, (GDestroyNotify) g_list_free);
-
-  cc_display_monitor_get_geometry (output, NULL, NULL, &old_width, &old_height);
-  g_object_set_data (G_OBJECT (output), "old-width", GINT_TO_POINTER (old_width));
-  g_object_set_data (G_OBJECT (output), "old-height", GINT_TO_POINTER (old_height));
-  g_object_set_data (G_OBJECT (output), "old-rotation",
-                     GUINT_TO_POINTER (cc_display_monitor_get_rotation (output)));
 }
 
 static GtkWidget *
