@@ -65,6 +65,8 @@ got_current_state (GObject      *object,
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
+          self = CC_DISPLAY_CONFIG_MANAGER_DBUS (data);
+          g_clear_pointer (&self->current_state, g_variant_unref);
           _cc_display_config_manager_emit_changed (CC_DISPLAY_CONFIG_MANAGER (data));
           g_warning ("Error calling GetCurrentState: %s", error->message);
         }
