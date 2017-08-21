@@ -1596,7 +1596,7 @@ make_two_join_ui (CcDisplayPanel *panel)
 
   priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
-  vbox = make_main_vbox (priv->main_size_group);
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
   gtk_container_add (GTK_CONTAINER (vbox), make_arrangement_ui (panel));
 
@@ -1615,7 +1615,7 @@ make_two_join_ui (CcDisplayPanel *panel)
   gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (panel));
 
   g_clear_object (&priv->rows_size_group);
-  return make_scrollable (vbox);
+  return vbox;
 }
 
 static void
@@ -1660,7 +1660,7 @@ make_two_single_ui (CcDisplayPanel *panel)
 
   priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
-  vbox = make_main_vbox (priv->main_size_group);
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
   box = make_two_output_chooser (panel);
   gtk_container_foreach (GTK_CONTAINER (box), connect_activate_output, panel);
@@ -1677,7 +1677,7 @@ make_two_single_ui (CcDisplayPanel *panel)
   gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (panel));
 
   g_clear_object (&priv->rows_size_group);
-  return make_scrollable (vbox);
+  return vbox;
 }
 
 static void
@@ -1816,7 +1816,7 @@ make_two_mirror_ui (CcDisplayPanel *panel)
 
   priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
-  vbox = make_main_vbox (priv->main_size_group);
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   frame = make_frame (NULL, NULL);
   gtk_container_add (GTK_CONTAINER (vbox), frame);
   listbox = make_list_box ();
@@ -1832,7 +1832,7 @@ make_two_mirror_ui (CcDisplayPanel *panel)
   gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (panel));
 
   g_clear_object (&priv->rows_size_group);
-  return make_scrollable (vbox);
+  return vbox;
 }
 
 static void
@@ -1888,63 +1888,92 @@ two_output_visible_child_changed (CcDisplayPanel *panel,
   update_apply_button (panel);
 }
 
-static void
-setup_stack_switcher (GtkWidget *switcher)
+static gboolean
+transform_stack_to_button (GBinding     *binding,
+                           const GValue *from_value,
+                           GValue       *to_value,
+                           gpointer      user_data)
 {
-  GList *children, *l;
+  GtkWidget *visible_child = g_value_get_object (from_value);
+  GtkWidget *button_child = user_data;
 
-  children = gtk_container_get_children (GTK_CONTAINER (switcher));
-  for (l = children; l; l = l->next)
-    {
-      GtkWidget *button = l->data;
-      gtk_container_child_set (GTK_CONTAINER (switcher), button,
-                               "expand", TRUE,
-                               NULL);
-    }
-  g_list_free (children);
+  g_value_set_boolean (to_value, visible_child == button_child);
+  return TRUE;
+}
+
+static gboolean
+transform_button_to_stack (GBinding     *binding,
+                           const GValue *from_value,
+                           GValue       *to_value,
+                           gpointer      user_data)
+{
+  GtkWidget *button_child = user_data;
+
+  if (g_value_get_boolean (from_value))
+    g_value_set_object (to_value, button_child);
+  return TRUE;
+}
+
+static void
+add_two_output_page (GtkWidget   *switcher,
+                     GtkWidget   *stack,
+                     const gchar *name,
+                     const gchar *title,
+                     const gchar *icon)
+{
+  GtkWidget *button, *bin, *image;
+
+  bin = make_bin ();
+  gtk_stack_add_named (GTK_STACK (stack), bin, name);
+  image = gtk_image_new_from_icon_name (icon, GTK_ICON_SIZE_LARGE_TOOLBAR);
+  g_object_set (G_OBJECT (image), "margin", HEADING_PADDING, NULL);
+  button = g_object_new (GTK_TYPE_TOGGLE_BUTTON,
+                         "image", image,
+                         "image-position", GTK_POS_LEFT,
+                         "always-show-image", TRUE,
+                         "label", title,
+                         NULL);
+  gtk_container_add (GTK_CONTAINER (switcher), button);
+  g_object_bind_property_full (stack, "visible-child", button, "active", G_BINDING_BIDIRECTIONAL,
+                               transform_stack_to_button, transform_button_to_stack, bin, NULL);
 }
 
 static GtkWidget *
 make_two_output_ui (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GtkWidget *vbox, *hbox, *stack, *switcher;
+  GtkWidget *vbox, *switcher, *stack, *label;
   gboolean show_mirror;
 
   show_mirror = g_list_length (cc_display_config_get_cloning_modes (priv->current_config)) > 0;
 
-  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  vbox = make_main_vbox (priv->main_size_group);
 
-  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, HEADING_PADDING);
-  gtk_widget_set_margin_top (hbox, HEADING_PADDING);
-  gtk_widget_set_margin_bottom (hbox, HEADING_PADDING);
-  gtk_size_group_add_widget (priv->main_size_group, hbox);
-  gtk_container_add (GTK_CONTAINER (vbox), wrap_in_boxes (hbox));
+  label = make_bold_label (_("Display Mode"));
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
+  gtk_widget_set_margin_bottom (label, HEADING_PADDING);
+  gtk_container_add (GTK_CONTAINER (vbox), label);
 
-  gtk_container_add (GTK_CONTAINER (hbox), make_bold_label (_("Display Mode")));
-
-  switcher = gtk_stack_switcher_new ();
-  gtk_box_pack_end (GTK_BOX (hbox), switcher, TRUE, TRUE, 0);
-
-  gtk_container_add (GTK_CONTAINER (vbox), gtk_separator_new (GTK_ORIENTATION_HORIZONTAL));
+  switcher = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+  gtk_widget_set_margin_bottom (switcher, SECTION_PADDING);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (switcher), GTK_BUTTONBOX_EXPAND);
+  gtk_container_add (GTK_CONTAINER (vbox), switcher);
 
   stack = gtk_stack_new ();
   gtk_container_add (GTK_CONTAINER (vbox), stack);
-  gtk_stack_switcher_set_stack (GTK_STACK_SWITCHER (switcher), GTK_STACK (stack));
 
-  gtk_stack_add_titled (GTK_STACK (stack), make_bin (),
-                        "join", _("Join Displays"));
+  add_two_output_page (switcher, stack, "join", _("Join Displays"),
+                       "video-joined-displays-symbolic");
   if (show_mirror)
-    gtk_stack_add_titled (GTK_STACK (stack), make_bin (),
-                          "mirror", _("Mirror"));
-  gtk_stack_add_titled (GTK_STACK (stack), make_bin (),
-                        "single", _("Single Display"));
+    add_two_output_page (switcher, stack, "mirror", _("Mirror"),
+                         "view-mirror-symbolic");
+
+  add_two_output_page (switcher, stack, "single", _("Single Display"),
+                       "video-single-display-symbolic");
 
   g_signal_connect_object (stack, "notify::visible-child-name",
                            G_CALLBACK (two_output_visible_child_changed),
                            panel, G_CONNECT_SWAPPED);
-
-  setup_stack_switcher (switcher);
 
   if (cc_display_config_is_cloning (priv->current_config) && show_mirror)
     gtk_stack_set_visible_child_name (GTK_STACK (stack), "mirror");
@@ -1953,7 +1982,7 @@ make_two_output_ui (CcDisplayPanel *panel)
   else
     gtk_stack_set_visible_child_name (GTK_STACK (stack), "single");
 
-  return vbox;
+  return make_scrollable (vbox);
 }
 
 static void
