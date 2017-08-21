@@ -716,6 +716,8 @@ cc_display_monitor_dbus_set_scale (CcDisplayMonitor *pself,
       /* See comment in ensure_gapless() for why we disregard the
          existing layout here. */
       cc_display_config_dbus_make_linear (self->config);
+
+      g_signal_emit_by_name (self, "scale");
     }
 }
 
