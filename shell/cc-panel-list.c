@@ -181,7 +181,7 @@ row_data_new (CcPanelCategory  category,
 
   /* Icon */
   image = gtk_image_new_from_icon_name (icon, GTK_ICON_SIZE_BUTTON);
-  gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
+  gtk_style_context_add_class (gtk_widget_get_style_context (image), "sidebar-icon");
 
   gtk_grid_attach (GTK_GRID (grid), image, 0, 0, 1, 1);
 
@@ -194,6 +194,7 @@ row_data_new (CcPanelCategory  category,
                         "xalign", 0.0,
                         "hexpand", TRUE,
                         NULL);
+  gtk_style_context_add_class (gtk_widget_get_style_context (label), "sidebar-label");
   gtk_grid_attach (GTK_GRID (grid), label, 1, 0, 1, 1);
 
   /* Description label */
