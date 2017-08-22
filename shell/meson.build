@@ -133,3 +133,6 @@ exe = executable(
 )
 
 test(test_unit, exe)
+
+install_data ('org.gnome.ControlCenter.gschema.xml',
+              install_dir: control_center_schemadir)

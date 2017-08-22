@@ -74,6 +74,7 @@ struct _CcWindow
   GtkListStore *store;
 
   CcPanel *active_panel;
+  GSettings *settings;
 };
 
 static void     cc_shell_iface_init         (CcShellInterface      *iface);
@@ -122,6 +123,8 @@ activate_panel (CcWindow    *self,
 
   if (!id)
     return FALSE;
+
+  g_settings_set_string (self->settings, "last-panel", id);
 
   self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, parameters));
   cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (self->current_panel));
@@ -664,6 +667,8 @@ cc_window_finalize (GObject *object)
       self->previous_panels = NULL;
     }
 
+  g_clear_object (&self->settings);
+
   G_OBJECT_CLASS (cc_window_parent_class)->finalize (object);
 }
 
@@ -713,10 +718,13 @@ static void
 cc_window_init (CcWindow *self)
 {
   GtkSettings *settings;
+  g_autofree char *id = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
   gtk_widget_add_events (GTK_WIDGET (self), GDK_BUTTON_RELEASE_MASK);
+
+  self->settings = g_settings_new ("org.gnome.ControlCenter");
 
   /* Handle decorations for the split headers. */
   settings = gtk_settings_get_default ();
@@ -733,8 +741,13 @@ cc_window_init (CcWindow *self)
 
   setup_model (self);
 
-  /* After everything is loaded, select the first visible panel */
-  cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
+  /* After everything is loaded, select the last used panel, if any,
+   * or the first visible panel */
+  id = g_settings_get_string (self->settings, "last-panel");
+  if (id != NULL && *id != '\0')
+    cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), id);
+  else
+    cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
 }
 
 CcWindow *

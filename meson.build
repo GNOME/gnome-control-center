@@ -16,6 +16,7 @@ control_center_sysconfdir = join_paths(control_center_prefix, get_option('syscon
 control_center_pkgdatadir = join_paths(control_center_datadir, meson.project_name())
 control_center_desktopdir = join_paths(control_center_datadir, 'applications')
 control_center_icondir = join_paths(control_center_datadir, 'icons')
+control_center_schemadir = join_paths (control_center_datadir, 'glib-2.0', 'schemas')
 
 control_center_gettext = meson.project_name() + '-2.0'
 
