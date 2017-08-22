@@ -1236,8 +1236,8 @@ underscanning_switch_active (CcDisplayPanel *panel,
                              GParamSpec     *pspec,
                              GtkWidget      *button)
 {
-  cc_display_monitor_set_active (panel->priv->current_output,
-                                 gtk_switch_get_active (GTK_SWITCH (button)));
+  cc_display_monitor_set_underscanning (panel->priv->current_output,
+                                        gtk_switch_get_active (GTK_SWITCH (button)));
   update_apply_button (panel);
 }
 
