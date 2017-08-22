@@ -2179,6 +2179,9 @@ on_screen_changed (CcDisplayPanel *panel)
   GList *outputs, *l;
   GtkWidget *main_widget;
 
+  if (!priv->manager)
+    return;
+
   reset_titlebar (panel);
 
   main_widget = gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "main");
