@@ -1078,46 +1078,6 @@ n_supported_scales (CcDisplayMode *mode)
   return n;
 }
 
-static void
-setup_scale_slider (GtkWidget        *slider,
-                    CcDisplayMonitor *output)
-{
-  CcDisplayMode *mode;
-  const double *scales;
-  double current_scale;
-  int current_index = -1;
-  guint i, n;
-
-  mode = cc_display_monitor_get_mode (output);
-  scales = cc_display_mode_get_supported_scales (mode);
-  n = n_supported_scales (mode);
-
-  gtk_range_set_range (GTK_RANGE (slider), 0, n-1);
-
-  current_scale = cc_display_monitor_get_scale (output);
-  gtk_scale_clear_marks (GTK_SCALE (slider));
-
-  for (i = 0; i < n; ++i)
-    {
-      double integral;
-      double fractional = modf (scales[i], &integral);
-      gchar *s = NULL;
-
-      if (scales[i] == current_scale || (current_index < 0 && scales[i] == 1.0))
-        current_index = i;
-
-      if (fractional != 0)
-        s = NULL;
-      else
-        s = g_strdup_printf ("%d", (int) integral);
-
-      gtk_scale_add_mark (GTK_SCALE (slider), i, GTK_POS_TOP, s);
-      g_free (s);
-    }
-
-  gtk_range_set_value (GTK_RANGE (slider), current_index);
-}
-
 static gboolean
 should_show_scale_row (CcDisplayMonitor *output)
 {
@@ -1135,52 +1095,131 @@ scale_row_sync_visibility (GtkWidget        *row,
     gtk_widget_show (row);
 }
 
-static double
-scale_slider_get_selected_scale (GtkRange       *slider,
-                                 CcDisplayPanel *panel)
+static void
+scale_buttons_active (CcDisplayPanel *panel,
+                      GParamSpec     *pspec,
+                      GtkWidget      *button)
 {
-  CcDisplayPanelPrivate *priv = panel->priv;
-  CcDisplayMode *mode = cc_display_monitor_get_mode (priv->current_output);
-  const double *scales = cc_display_mode_get_supported_scales (mode);
-  int selected = gtk_range_get_value (slider);
+  double scale = *(double*) g_object_get_data (G_OBJECT (button), "scale");
 
-  g_return_val_if_fail (selected < n_supported_scales (mode), 1.0);
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
+    {
+      cc_display_monitor_set_scale (panel->priv->current_output, scale);
+      update_apply_button (panel);
+    }
+}
 
-  return scales[selected];
+static GtkWidget *
+make_label_for_scale (double scale)
+{
+  gchar *text = g_strdup_printf (" %d%% ", (int) round (scale*100));
+  GtkWidget *label = gtk_label_new (text);
+  g_free (text);
+  return label;
+}
+
+#define MAX_N_SCALES 5
+static void
+get_display_scales (CcDisplayMonitor *output,
+                    double           *scales)
+{
+  CcDisplayMode *mode;
+  const double *all_scales;
+  double preferred;
+  double increment;
+  guint n, i, j;
+
+  mode = cc_display_monitor_get_mode (output);
+  all_scales = cc_display_mode_get_supported_scales (mode);
+  n = n_supported_scales (mode);
+  if (n <= MAX_N_SCALES)
+    {
+      memcpy (scales, all_scales, n * sizeof (double));
+      return;
+    }
+
+  preferred = cc_display_mode_get_preferred_scale (mode);
+  increment = (all_scales[n - 1] - all_scales[0]) / (double) (MAX_N_SCALES - 1);
+
+  scales[0] = all_scales[0];
+
+  for (i = j = 1; i < n && j < MAX_N_SCALES; i++)
+    if (all_scales[i] >= scales[0] + increment*j || all_scales[i] == preferred)
+      scales[j++] = all_scales[i];
 }
 
 static void
-scale_slider_changed (GtkRange       *slider,
-                      CcDisplayPanel *panel)
+setup_scale_buttons (GtkWidget        *bbox,
+                     CcDisplayMonitor *output)
 {
-  cc_display_monitor_set_scale (panel->priv->current_output,
-                                scale_slider_get_selected_scale (slider, panel));
-  update_apply_button (panel);
+  CcDisplayPanel *panel;
+  GtkRadioButton *group;
+  double scales[MAX_N_SCALES + 1] = { 0 };
+  double *scale;
+
+  panel = g_object_get_data (G_OBJECT (bbox), "panel");
+
+  gtk_container_foreach (GTK_CONTAINER (bbox), (GtkCallback) gtk_widget_destroy, NULL);
+
+  get_display_scales (output, scales);
+
+  group = NULL;
+  for (scale = scales; *scale != 0.0; scale++)
+    {
+      GtkWidget *button = gtk_radio_button_new_from_widget (group);
+
+      gtk_button_set_image (GTK_BUTTON (button), make_label_for_scale (*scale));
+      gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (button), FALSE);
+
+      g_object_set_data_full (G_OBJECT (button), "scale", g_memdup (scale, sizeof (double)), g_free);
+
+      g_signal_connect_object (button, "notify::active", G_CALLBACK (scale_buttons_active),
+                               panel, G_CONNECT_SWAPPED);
+      gtk_container_add (GTK_CONTAINER (bbox), button);
+      group = GTK_RADIO_BUTTON (button);
+    }
+
+  gtk_widget_show_all (bbox);
+}
+#undef MAX_N_SCALES
+
+static void
+scale_buttons_sync (GtkWidget        *bbox,
+                    CcDisplayMonitor *output)
+{
+  GList *children, *l;
+
+  children = gtk_container_get_children (GTK_CONTAINER (bbox));
+  for (l = children; l; l = l->next)
+    {
+      GtkWidget *button = l->data;
+      double scale = *(double*) g_object_get_data (G_OBJECT (button), "scale");
+      if (scale == cc_display_monitor_get_scale (output))
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+    }
+  g_list_free (children);
 }
 
 static GtkWidget *
 make_scale_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
 {
-  GtkWidget *row, *slider;
+  GtkWidget *row, *bbox, *label;
 
-  slider = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, NULL);
-  gtk_widget_set_size_request (slider, 200, -1);
+  label = gtk_label_new (_("Scale"));
 
-  g_signal_connect_object (slider, "value-changed",
-                           G_CALLBACK (scale_slider_changed), panel, 0);
+  bbox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (bbox), GTK_BUTTONBOX_EXPAND);
 
-  gtk_scale_set_draw_value (GTK_SCALE (slider), FALSE);
-  gtk_scale_set_has_origin (GTK_SCALE (slider), FALSE);
-  gtk_scale_set_digits (GTK_SCALE (slider), 0);
-  gtk_range_set_increments (GTK_RANGE (slider), 1, 1);
+  row = make_row (NULL, label, bbox);
 
-  setup_scale_slider (slider, output);
+  g_object_set_data (G_OBJECT (bbox), "panel", panel);
+  g_signal_connect_object (output, "mode", G_CALLBACK (setup_scale_buttons),
+                           bbox, G_CONNECT_SWAPPED);
+  setup_scale_buttons (bbox, output);
 
-  row = make_row (panel->priv->rows_size_group, gtk_label_new (_("Scale")), slider);
-  gtk_widget_set_margin_top (gtk_bin_get_child (GTK_BIN (row)), 0);
-  gtk_widget_set_margin_bottom (gtk_bin_get_child (GTK_BIN (row)), 0);
-  g_signal_connect_object (output, "mode", G_CALLBACK (setup_scale_slider),
-                           slider, G_CONNECT_SWAPPED);
+  g_signal_connect_object (output, "scale", G_CALLBACK (scale_buttons_sync),
+                           bbox, G_CONNECT_SWAPPED);
+  scale_buttons_sync (bbox, output);
 
   gtk_widget_show_all (row);
   gtk_widget_set_no_show_all (row, TRUE);
