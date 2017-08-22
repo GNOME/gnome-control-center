@@ -174,10 +174,11 @@ cc_printers_panel_constructed (GObject *object)
 
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "search-bar");
-  g_signal_connect_swapped (shell,
-                            "key-press-event",
-                            G_CALLBACK (gtk_search_bar_handle_event),
-                            widget);
+  g_signal_connect_object (shell,
+                           "key-press-event",
+                           G_CALLBACK (gtk_search_bar_handle_event),
+                           widget,
+                           G_CONNECT_SWAPPED);
 }
 
 static void
