@@ -1211,6 +1211,7 @@ make_scale_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
   gtk_button_box_set_layout (GTK_BUTTON_BOX (bbox), GTK_BUTTONBOX_EXPAND);
 
   row = make_row (NULL, label, bbox);
+  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), FALSE);
 
   g_object_set_data (G_OBJECT (bbox), "panel", panel);
   g_signal_connect_object (output, "mode", G_CALLBACK (setup_scale_buttons),
@@ -1409,6 +1410,7 @@ make_arrangement_row (CcDisplayPanel *panel)
   monitor_output_changes (area, panel);
 
   row = g_object_new (CC_TYPE_LIST_BOX_ROW, NULL);
+  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), FALSE);
   gtk_container_add (GTK_CONTAINER (row), area);
 
   return row;
