@@ -437,6 +437,7 @@ paint_output (CcDisplayPanel    *panel,
               gint               allocated_width,
               gint               allocated_height)
 {
+  CcDisplayPanelPrivate *priv = panel->priv;
   GdkPixbuf *pixbuf;
   gint x, y, width, height;
 
@@ -462,14 +463,13 @@ paint_output (CcDisplayPanel    *panel,
   cairo_rectangle (cr, x, y, width, height);
   cairo_fill (cr);
 
-  if (cc_display_monitor_is_active (output))
-    {
-      pixbuf = gnome_bg_create_thumbnail (panel->priv->background,
-                                          panel->priv->thumbnail_factory,
-                                          gdk_screen_get_default (), width, height);
-    }
-  else
+  if (!cc_display_monitor_is_active (output) ||
+      (cc_display_monitor_is_builtin (output) && priv->lid_is_closed))
     pixbuf = NULL;
+  else
+    pixbuf = gnome_bg_create_thumbnail (priv->background,
+                                        priv->thumbnail_factory,
+                                        gdk_screen_get_default (), width, height);
 
   if (cc_display_monitor_is_primary (output)
       || cc_display_config_is_cloning (configuration))
@@ -1536,14 +1536,20 @@ replace_current_output_ui (GtkWidget      *frame,
 }
 
 static guint
-count_active_outputs (GList *outputs)
+count_active_outputs (CcDisplayPanel *panel)
 {
-  GList *l;
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GList *outputs, *l;
   guint active = 0;
+
+  outputs = cc_display_config_get_monitors (priv->current_config);
   for (l = outputs; l != NULL; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
-      if (cc_display_monitor_is_active (output))
+      if (!cc_display_monitor_is_active (output) ||
+          (cc_display_monitor_is_builtin (output) && priv->lid_is_closed))
+        continue;
+      else
         active++;
     }
   return active;
@@ -2021,7 +2027,7 @@ make_two_output_ui (CcDisplayPanel *panel)
 
   if (cc_display_config_is_cloning (priv->current_config) && show_mirror)
     gtk_stack_set_visible_child_name (GTK_STACK (stack), "mirror");
-  else if (count_active_outputs (cc_display_config_get_monitors (priv->current_config)) > 1)
+  else if (count_active_outputs (panel) > 1)
     gtk_stack_set_visible_child_name (GTK_STACK (stack), "join");
   else
     gtk_stack_set_visible_child_name (GTK_STACK (stack), "single");
@@ -2058,8 +2064,8 @@ make_output_switch (CcDisplayPanel *panel)
                            button, G_CONNECT_SWAPPED);
   output_switch_sync (button, priv->current_output);
 
-  if (count_active_outputs (cc_display_config_get_monitors (priv->current_config)) < 2 &&
-      cc_display_monitor_is_active (priv->current_output))
+  if ((count_active_outputs (panel) < 2 && cc_display_monitor_is_active (priv->current_output)) ||
+      (cc_display_monitor_is_builtin (priv->current_output) && priv->lid_is_closed))
     gtk_widget_set_sensitive (button, FALSE);
 
   return button;
@@ -2181,6 +2187,7 @@ on_screen_changed (CcDisplayPanel *panel)
   CcDisplayConfig *current;
   GList *outputs, *l;
   GtkWidget *main_widget;
+  guint n_outputs;
 
   if (!priv->manager)
     return;
@@ -2206,30 +2213,38 @@ on_screen_changed (CcDisplayPanel *panel)
   ensure_monitor_labels (panel);
 
   priv->current_output = NULL;
-  l = outputs = g_object_get_data (G_OBJECT (current), "ui-sorted-outputs");
-  while (!priv->current_output && l != NULL)
+  outputs = g_object_get_data (G_OBJECT (current), "ui-sorted-outputs");
+  for (l = outputs; l; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
-      if (cc_display_monitor_is_active (output))
-        priv->current_output = output;
-      else
-        l = l->next;
+
+      if (!cc_display_monitor_is_active (output) ||
+          (cc_display_monitor_is_builtin (output) && priv->lid_is_closed))
+        continue;
+
+      priv->current_output = output;
+      break;
     }
 
   if (!priv->current_output)
     goto show_error;
 
-  switch (g_list_length (outputs))
+  n_outputs = g_list_length (outputs);
+  if (priv->lid_is_closed)
     {
-    case 1:
-      main_widget = make_single_output_ui (panel);
-      break;
-    case 2:
-      main_widget = make_two_output_ui (panel);
-      break;
-    default:
-      main_widget = make_multi_output_ui (panel);
-      break;
+      if (n_outputs <= 2)
+        main_widget = make_single_output_ui (panel);
+      else
+        main_widget = make_multi_output_ui (panel);
+    }
+  else
+    {
+      if (n_outputs == 1)
+        main_widget = make_single_output_ui (panel);
+      else if (n_outputs == 2)
+        main_widget = make_two_output_ui (panel);
+      else
+        main_widget = make_multi_output_ui (panel);
     }
 
   gtk_widget_show_all (main_widget);
