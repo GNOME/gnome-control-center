@@ -1208,9 +1208,12 @@ make_scale_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
   label = gtk_label_new (_("Scale"));
 
   bbox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+  gtk_widget_set_valign (bbox, GTK_ALIGN_CENTER);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (bbox), GTK_BUTTONBOX_EXPAND);
 
-  row = make_row (NULL, label, bbox);
+  row = make_row (panel->priv->rows_size_group, label, bbox);
+  gtk_widget_set_margin_top (gtk_bin_get_child (GTK_BIN (row)), 0);
+  gtk_widget_set_margin_bottom (gtk_bin_get_child (GTK_BIN (row)), 0);
   gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), FALSE);
 
   g_object_set_data (G_OBJECT (bbox), "panel", panel);
