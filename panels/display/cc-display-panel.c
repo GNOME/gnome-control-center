@@ -2700,13 +2700,13 @@ show_apply_titlebar (CcDisplayPanel *panel)
 
   size_group = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
 
-  button = gtk_button_new_with_label (_("Cancel"));
+  button = gtk_button_new_with_mnemonic (_("_Cancel"));
   gtk_header_bar_pack_start (GTK_HEADER_BAR (header), button);
   gtk_size_group_add_widget (size_group, button);
   g_signal_connect_object (button, "clicked", G_CALLBACK (on_screen_changed),
                            panel, G_CONNECT_SWAPPED);
 
-  button = gtk_button_new_with_label (_("Apply"));
+  button = gtk_button_new_with_mnemonic (_("_Apply"));
   gtk_header_bar_pack_end (GTK_HEADER_BAR (header), button);
   gtk_size_group_add_widget (size_group, button);
   g_signal_connect_object (button, "clicked", G_CALLBACK (apply_current_configuration),
