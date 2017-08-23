@@ -2685,6 +2685,17 @@ grab_weak_ref_notify (gpointer  area,
   foo_scroll_area_end_grab (area, NULL);
 }
 
+static gboolean
+on_toplevel_key_press (GtkWidget   *button,
+                       GdkEventKey *event)
+{
+  if (event->keyval != GDK_KEY_Escape)
+    return GDK_EVENT_PROPAGATE;
+
+  g_signal_emit_by_name (button, "activate");
+  return GDK_EVENT_STOP;
+}
+
 static void
 show_apply_titlebar (CcDisplayPanel *panel)
 {
@@ -2706,6 +2717,10 @@ show_apply_titlebar (CcDisplayPanel *panel)
   g_signal_connect_object (button, "clicked", G_CALLBACK (on_screen_changed),
                            panel, G_CONNECT_SWAPPED);
 
+  toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
+  g_signal_connect_object (toplevel, "key-press-event", G_CALLBACK (on_toplevel_key_press),
+                           button, G_CONNECT_SWAPPED);
+
   button = gtk_button_new_with_mnemonic (_("_Apply"));
   gtk_header_bar_pack_end (GTK_HEADER_BAR (header), button);
   gtk_size_group_add_widget (size_group, button);
@@ -2717,7 +2732,6 @@ show_apply_titlebar (CcDisplayPanel *panel)
   gtk_widget_show_all (header);
   g_object_unref (size_group);
 
-  toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
   header = gtk_window_get_titlebar (GTK_WINDOW (toplevel));
   if (header)
     priv->main_titlebar = g_object_ref (header);
