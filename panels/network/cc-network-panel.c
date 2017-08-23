@@ -63,8 +63,10 @@ struct _CcNetworkPanel
 
         /* widgets */
         GtkWidget        *box_proxy;
+        GtkWidget        *box_simple;
         GtkWidget        *box_vpn;
         GtkWidget        *box_wired;
+        GtkWidget        *container_simple;
         GtkWidget        *empty_listbox;
 
         /* wireless dialog stuff */
@@ -405,6 +407,24 @@ update_vpn_section (CcNetworkPanel *self)
         gtk_widget_set_visible (self->empty_listbox, n_vpns == 0);
 }
 
+static void
+update_simple_section (CcNetworkPanel *self)
+{
+        guint i, n_simple;
+
+        for (i = 0, n_simple = 0; i < self->devices->len; i++) {
+                NetObject *net_object = g_ptr_array_index (self->devices, i);
+
+                if (!NET_IS_DEVICE_SIMPLE (net_object))
+                        continue;
+
+                net_device_simple_set_show_separator (NET_DEVICE_SIMPLE (net_object), n_simple > 0);
+                n_simple++;
+        }
+
+        gtk_widget_set_visible (self->container_simple, n_simple > 0);
+}
+
 static GtkWidget *
 add_device_stack (CcNetworkPanel *self, NetObject *object)
 {
@@ -505,11 +525,21 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                 GtkWidget *stack;
 
                 stack = add_device_stack (panel, NET_OBJECT (net_device));
-                gtk_container_add (GTK_CONTAINER (panel->box_wired), stack);
+
+                if (device_g_type == NET_TYPE_DEVICE_SIMPLE)
+                        gtk_container_add (GTK_CONTAINER (panel->box_simple), stack);
+                else
+                        gtk_container_add (GTK_CONTAINER (panel->box_wired), stack);
         }
 
         /* Add to the devices array */
         g_ptr_array_add (panel->devices, net_device);
+
+        /* Update the device_simple section if we're adding a simple
+         * device. This is a temporary solution though, for these will
+         * be handled by the future Mobile Broadband panel */
+        if (device_g_type == NET_TYPE_DEVICE_SIMPLE)
+                update_simple_section (panel);
 
         g_signal_connect_object (net_device, "removed",
                                  G_CALLBACK (object_removed_cb), panel, 0);
@@ -530,6 +560,9 @@ panel_remove_device (CcNetworkPanel *panel, NMDevice *device)
 
         /* update vpn widgets */
         update_vpn_section (panel);
+
+        /* update device_simple widgets */
+        update_simple_section (panel);
 }
 
 static void
@@ -815,8 +848,10 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_proxy);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_simple);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_vpn);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, container_simple);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, empty_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, sizegroup);
 
