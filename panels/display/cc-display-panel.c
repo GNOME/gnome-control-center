@@ -1530,9 +1530,14 @@ static void
 replace_current_output_ui (GtkWidget      *frame,
                            CcDisplayPanel *panel)
 {
+  CcDisplayPanelPrivate *priv = panel->priv;
+  priv->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+
   gtk_widget_destroy (gtk_bin_get_child (GTK_BIN (frame)));
   gtk_container_add (GTK_CONTAINER (frame), make_output_ui (panel));
   gtk_widget_show_all (frame);
+
+  g_clear_object (&priv->rows_size_group);
 }
 
 static guint
