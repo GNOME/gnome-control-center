@@ -61,6 +61,9 @@ void  net_device_simple_add_row                (NetDeviceSimple *device_simple,
                                                 const char      *label,
                                                 const char      *property_name);
 
+void  net_device_simple_set_show_separator     (NetDeviceSimple *device_simple,
+                                                gboolean         show_separator);
+
 G_END_DECLS
 
 #endif /* __NET_DEVICE_SIMPLE_H */

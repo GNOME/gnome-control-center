@@ -41,6 +41,17 @@ struct _NetDeviceSimplePrivate
 
 G_DEFINE_TYPE (NetDeviceSimple, net_device_simple, NET_TYPE_DEVICE)
 
+void
+net_device_simple_set_show_separator (NetDeviceSimple *device_simple,
+                                      gboolean         show_separator)
+{
+        GtkWidget *widget;
+
+        /* add widgets to size group */
+        widget = GTK_WIDGET (gtk_builder_get_object (device_simple->priv->builder, "separator"));
+        gtk_widget_set_visible (widget, show_separator);
+}
+
 static GtkWidget *
 device_simple_proxy_add_to_stack (NetObject    *object,
                                   GtkStack     *stack,
@@ -50,10 +61,6 @@ device_simple_proxy_add_to_stack (NetObject    *object,
         NetDeviceSimple *device_simple = NET_DEVICE_SIMPLE (object);
 
         /* add widgets to size group */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_simple->priv->builder,
-                                                     "heading_ipv4"));
-        gtk_size_group_add_widget (heading_size_group, widget);
-
         widget = GTK_WIDGET (gtk_builder_get_object (device_simple->priv->builder,
                                                      "vbox6"));
         gtk_stack_add_named (stack, widget, net_object_get_id (object));
@@ -85,9 +92,7 @@ static void
 nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
 {
         NetDeviceSimplePrivate *priv = device_simple->priv;
-        const char *hwaddr;
         GtkWidget *widget;
-        char *speed = NULL;
         NMDevice *nm_device;
         NMDeviceState state;
 
@@ -96,10 +101,6 @@ nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
         /* set device kind */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_device"));
         g_object_bind_property (device_simple, "title", widget, "label", 0);
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "image_device"));
-        gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                      panel_device_to_icon_name (nm_device, FALSE),
-                                      GTK_ICON_SIZE_DIALOG);
 
         /* set up the device on/off switch */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "device_off_switch"));
@@ -112,18 +113,6 @@ nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
         /* set up the Options button */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_options"));
         gtk_widget_set_visible (widget, state != NM_DEVICE_STATE_UNMANAGED);
-
-        /* set device state, with status and optionally speed */
-        if (state != NM_DEVICE_STATE_UNAVAILABLE)
-                speed = net_device_simple_get_speed (device_simple);
-        panel_set_device_status (priv->builder, "label_status", nm_device, speed);
-
-        /* device MAC */
-        hwaddr = nm_device_get_hw_address (nm_device);
-        panel_set_device_widget_details (priv->builder, "mac", hwaddr);
-
-        /* set IP entries */
-        panel_set_device_widgets (priv->builder, nm_device);
 }
 
 static void
