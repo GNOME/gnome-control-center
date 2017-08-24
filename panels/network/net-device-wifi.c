@@ -252,13 +252,59 @@ get_ap_security_string (NMAccessPoint *ap)
 }
 
 static void
-net_device_wifi_access_point_changed (NMDeviceWifi *nm_device_wifi,
+nm_access_point_property_changed (NMAccessPoint *ap,
+                                  GParamSpec    *pspec,
+                                  NetDeviceWifi *device_wifi)
+{
+        nm_device_wifi_refresh_ui (device_wifi);
+}
+
+static void
+nm_device_wifi_connect_access_points (NMDeviceWifi *nm_device_wifi,
+                                      NetDeviceWifi *net_device_wifi)
+{
+        guint i;
+        const GPtrArray *aps;
+        NMAccessPoint *ap;
+
+        aps = nm_device_wifi_get_access_points (nm_device_wifi);
+        if (!aps)
+                return;
+
+        for (i = 0; i < aps->len; i++) {
+                ap = NM_ACCESS_POINT (g_ptr_array_index (aps, i));
+
+                /* avoid redundant signal handlers */
+                if (g_signal_handler_find (ap, G_SIGNAL_MATCH_FUNC,
+                                           0, 0, NULL,
+                                           &nm_access_point_property_changed,
+                                           NULL) != 0)
+                        continue;
+
+                g_signal_connect_object (ap, "notify",
+                                         G_CALLBACK (nm_access_point_property_changed),
+                                         net_device_wifi, 0);
+        }
+
+}
+
+static void
+net_device_wifi_access_point_added (NMDeviceWifi *nm_device_wifi,
+                                    NMAccessPoint *ap,
+                                    gpointer user_data)
+{
+        NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (user_data);
+
+        populate_ap_list (device_wifi);
+        nm_device_wifi_connect_access_points (nm_device_wifi, device_wifi);
+}
+
+static void
+net_device_wifi_access_point_removed (NMDeviceWifi *nm_device_wifi,
                                       NMAccessPoint *ap,
                                       gpointer user_data)
 {
-        NetDeviceWifi *device_wifi;
-
-        device_wifi = NET_DEVICE_WIFI (user_data);
+        NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (user_data);
 
         populate_ap_list (device_wifi);
 }
@@ -1487,11 +1533,14 @@ net_device_wifi_constructed (GObject *object)
         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
 
         g_signal_connect_object (nm_device, "access-point-added",
-                                 G_CALLBACK (net_device_wifi_access_point_changed),
+                                 G_CALLBACK (net_device_wifi_access_point_added),
                                  device_wifi, 0);
         g_signal_connect_object (nm_device, "access-point-removed",
-                                 G_CALLBACK (net_device_wifi_access_point_changed),
+                                 G_CALLBACK (net_device_wifi_access_point_removed),
                                  device_wifi, 0);
+
+        nm_device_wifi_connect_access_points (NM_DEVICE_WIFI (nm_device),
+                                              device_wifi);
 
         /* only enable the button if the user can create a hotspot */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
