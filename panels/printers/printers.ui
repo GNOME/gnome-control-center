@@ -132,13 +132,18 @@
             <property name="min-content-height">490</property>
             <property name="vexpand">True</property>
             <child>
-              <object class="GtkListBox" id="content">
+              <object class="GtkBox">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="selection-mode">GTK_SELECTION_NONE</property>
-                <style>
-                  <class name="background"/>
-                </style>
+                <child>
+                  <object class="GtkListBox" id="content">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="selection-mode">GTK_SELECTION_NONE</property>
+                    <style>
+                      <class name="background"/>
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
