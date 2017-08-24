@@ -1111,14 +1111,12 @@
       <object class="GtkBox" id="dialog-vbox2">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
+        <property name="spacing">12</property>
+        <property name="margin">12</property>
         <child>
           <object class="GtkLabel" id="screen_reader_blurb">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">6</property>
-            <property name="margin_top">6</property>
             <property name="xalign">0</property>
             <property name="max_width_chars">45</property>
             <property name="label" translatable="yes">The screen reader reads displayed text as you move the focus.</property>
@@ -1131,51 +1129,61 @@
           </packing>
         </child>
         <child>
-          <object class="GtkGrid" id="grid3">
+          <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">6</property>
-            <property name="margin_top">12</property>
-            <property name="margin_bottom">12</property>
-            <property name="row_spacing">12</property>
-            <property name="column_spacing">6</property>
+            <style>
+              <class name="frame"/>
+              <class name="view"/>
+            </style>
             <child>
-              <object class="GtkLabel" id="screen_reader_label">
+              <object class="GtkGrid" id="grid3">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">_Screen Reader</property>
-                <property name="use_underline">True</property>
-                <property name="mnemonic_widget">screen_reader_switch</property>
+                <property name="margin_start">12</property>
+                <property name="margin_end">6</property>
+                <property name="margin_top">12</property>
+                <property name="margin_bottom">12</property>
+                <property name="row_spacing">12</property>
+                <property name="column_spacing">6</property>
+                <child>
+                  <object class="GtkLabel" id="screen_reader_label">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">_Screen Reader</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">screen_reader_switch</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSwitch" id="screen_reader_switch">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="halign">end</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
               </object>
               <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="screen_reader_switch">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">end</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
         </child>
       </object>
     </child>
