@@ -3101,7 +3101,7 @@ get_frequency_string (CcDisplayMode *mode)
   if (frequency)
     return frequency;
 
-  frequency = g_strdup_printf (_("%.1lf Hz"), cc_display_mode_get_freq_f (mode));
+  frequency = g_strdup_printf (_("%.2lf Hz"), cc_display_mode_get_freq_f (mode));
 
   g_object_set_data_full (G_OBJECT (mode), "frequency", frequency, g_free);
   return frequency;
