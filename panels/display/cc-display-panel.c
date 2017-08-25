@@ -2016,6 +2016,9 @@ make_two_output_ui (CcDisplayPanel *panel)
 
   stack = gtk_stack_new ();
   gtk_container_add (GTK_CONTAINER (vbox), stack);
+  /* Add a dummy first stack page so that setting the visible child
+   * below triggers a visible-child-name notification. */
+  gtk_stack_add_named (GTK_STACK (stack), make_bin (), "dummy");
 
   add_two_output_page (switcher, stack, "join", _("Join Displays"),
                        "video-joined-displays-symbolic");
