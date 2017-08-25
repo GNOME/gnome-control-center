@@ -2026,6 +2026,8 @@ make_two_output_ui (CcDisplayPanel *panel)
   add_two_output_page (switcher, stack, "single", _("Single Display"),
                        "video-single-display-symbolic");
 
+  gtk_widget_show_all (stack);
+
   g_signal_connect_object (stack, "notify::visible-child-name",
                            G_CALLBACK (two_output_visible_child_changed),
                            panel, G_CONNECT_SWAPPED);
