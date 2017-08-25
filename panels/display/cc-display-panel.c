@@ -463,13 +463,9 @@ paint_output (CcDisplayPanel    *panel,
   cairo_rectangle (cr, x, y, width, height);
   cairo_fill (cr);
 
-  if (!cc_display_monitor_is_active (output) ||
-      (cc_display_monitor_is_builtin (output) && priv->lid_is_closed))
-    pixbuf = NULL;
-  else
-    pixbuf = gnome_bg_create_thumbnail (priv->background,
-                                        priv->thumbnail_factory,
-                                        gdk_screen_get_default (), width, height);
+  pixbuf = gnome_bg_create_thumbnail (priv->background,
+                                      priv->thumbnail_factory,
+                                      gdk_screen_get_default (), width, height);
 
   if (cc_display_monitor_is_primary (output)
       || cc_display_config_is_cloning (configuration))
@@ -2953,6 +2949,10 @@ on_area_paint (FooScrollArea  *area,
       int output_x, output_y;
       CcDisplayMonitor *output = list->data;
       GdkRectangle viewport;
+
+      if (!cc_display_monitor_is_active (output) ||
+          (cc_display_monitor_is_builtin (output) && self->priv->lid_is_closed))
+        continue;
 
       cairo_save (cr);
 
