@@ -1082,7 +1082,7 @@ static gboolean
 should_show_scale_row (CcDisplayMonitor *output)
 {
   CcDisplayMode *mode = cc_display_monitor_get_mode (output);
-  return n_supported_scales (mode) > 1;
+  return mode ? n_supported_scales (mode) > 1 : FALSE;
 }
 
 static void
@@ -1130,6 +1130,9 @@ get_display_scales (CcDisplayMonitor *output,
   guint n, i, j;
 
   mode = cc_display_monitor_get_mode (output);
+  if (!mode)
+    return;
+
   all_scales = cc_display_mode_get_supported_scales (mode);
   n = n_supported_scales (mode);
   if (n <= MAX_N_SCALES)
@@ -3074,6 +3077,9 @@ get_resolution_string (CcDisplayMode *mode)
 {
   char *resolution;
 
+  if (!mode)
+    return "";
+
   resolution = g_object_get_data (G_OBJECT (mode), "resolution");
   if (resolution)
     return resolution;
@@ -3087,6 +3093,9 @@ static const gchar *
 get_frequency_string (CcDisplayMode *mode)
 {
   char *frequency;
+
+  if (!mode)
+    return "";
 
   frequency = g_object_get_data (G_OBJECT (mode), "frequency");
   if (frequency)
