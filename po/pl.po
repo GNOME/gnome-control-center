@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-23 03:40+0200\n"
-"PO-Revision-Date: 2017-08-23 03:55+0200\n"
+"POT-Creation-Date: 2017-08-26 16:04+0200\n"
+"PO-Revision-Date: 2017-08-26 16:05+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -109,6 +109,7 @@ msgstr "Po dodaniu obrazów do katalogu „%s” pojawią się one w tym miejsc
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:30
 #: ../panels/common/language-chooser.ui.h:3
+#: ../panels/display/cc-display-panel.c:2718
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
@@ -1099,64 +1100,64 @@ msgstr "Zmiana ustawień czasu i daty systemu"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Wymagane jest uwierzytelnienie, aby zmienić ustawienia czasu lub daty."
 
-#: ../panels/display/cc-display-panel.c:742
+#: ../panels/display/cc-display-panel.c:738
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Pozioma"
 
-#: ../panels/display/cc-display-panel.c:745
+#: ../panels/display/cc-display-panel.c:741
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Pionowa (w prawo)"
 
-#: ../panels/display/cc-display-panel.c:748
+#: ../panels/display/cc-display-panel.c:744
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Pionowa (w lewo)"
 
-#: ../panels/display/cc-display-panel.c:751
+#: ../panels/display/cc-display-panel.c:747
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Pozioma (odwrócona)"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: ../panels/display/cc-display-panel.c:792
-#: ../panels/display/cc-display-panel.c:842
+#: ../panels/display/cc-display-panel.c:788
+#: ../panels/display/cc-display-panel.c:838
 #: ../panels/printers/pp-options-dialog.c:558
 msgid "Orientation"
 msgstr "Orientacja"
 
-#: ../panels/display/cc-display-panel.c:885
-#: ../panels/display/cc-display-panel.c:937
-#: ../panels/display/cc-display-panel.c:1759
-#: ../panels/display/cc-display-panel.c:1805
+#: ../panels/display/cc-display-panel.c:881
+#: ../panels/display/cc-display-panel.c:933
+#: ../panels/display/cc-display-panel.c:1772
+#: ../panels/display/cc-display-panel.c:1818
 #: ../panels/printers/pp-options-dialog.c:87
 msgid "Resolution"
 msgstr "Rozdzielczość"
 
-#: ../panels/display/cc-display-panel.c:982
-#: ../panels/display/cc-display-panel.c:1053
+#: ../panels/display/cc-display-panel.c:978
+#: ../panels/display/cc-display-panel.c:1049
 msgid "Refresh Rate"
 msgstr "Częstotliwość odświeżania"
 
-#: ../panels/display/cc-display-panel.c:1208
+#: ../panels/display/cc-display-panel.c:1207
 msgid "Scale"
 msgstr "Skalowanie"
 
-#: ../panels/display/cc-display-panel.c:1258
+#: ../panels/display/cc-display-panel.c:1260
 msgid "Adjust for TV"
 msgstr "Dostosowanie do telewizora"
 
-#: ../panels/display/cc-display-panel.c:1470
-#: ../panels/display/cc-display-panel.c:1516
+#: ../panels/display/cc-display-panel.c:1472
+#: ../panels/display/cc-display-panel.c:1518
 msgid "Primary Display"
 msgstr "Główny ekran"
 
-#: ../panels/display/cc-display-panel.c:1554
+#: ../panels/display/cc-display-panel.c:1567
 msgid "Display Arrangement"
 msgstr "Ułożenie ekranów"
 
-#: ../panels/display/cc-display-panel.c:1555
+#: ../panels/display/cc-display-panel.c:1568
 msgid ""
 "Drag displays to match your setup. The top bar is placed on the primary "
 "display."
@@ -1164,45 +1165,39 @@ msgstr ""
 "Można przeciągać ekrany tak, aby pasowały do ich fizycznego ułożenia. Górny "
 "pasek jest widoczny na głównym ekranie."
 
-#: ../panels/display/cc-display-panel.c:1993
+#: ../panels/display/cc-display-panel.c:2006
 msgid "Display Mode"
 msgstr "Tryb"
 
-#: ../panels/display/cc-display-panel.c:2006
+#: ../panels/display/cc-display-panel.c:2022
 msgid "Join Displays"
 msgstr "Połączone ekrany"
 
-#: ../panels/display/cc-display-panel.c:2009
+#: ../panels/display/cc-display-panel.c:2025
 msgid "Mirror"
 msgstr "Ten sam obraz"
 
-#: ../panels/display/cc-display-panel.c:2012
+#: ../panels/display/cc-display-panel.c:2028
 msgid "Single Display"
 msgstr "Jeden ekran"
 
-#: ../panels/display/cc-display-panel.c:2676
+#: ../panels/display/cc-display-panel.c:2714
 msgid "Apply Changes?"
 msgstr "Zastosować zmiany?"
 
-#: ../panels/display/cc-display-panel.c:2680
-#: ../panels/keyboard/cc-keyboard-panel.c:188
-#: ../panels/keyboard/shortcut-editor.ui.h:9
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-msgid "Cancel"
-msgstr "Anuluj"
+#: ../panels/display/cc-display-panel.c:2728
+#: ../panels/network/connection-editor/connection-editor.ui.h:2
+#: ../panels/network/network-wifi.ui.h:2
+msgid "_Apply"
+msgstr "_Zastosuj"
 
-#: ../panels/display/cc-display-panel.c:2686
-msgid "Apply"
-msgstr "Zastosuj"
-
-#: ../panels/display/cc-display-panel.c:3053
+#: ../panels/display/cc-display-panel.c:3104
 #, c-format
-msgid "%.1lf Hz"
-msgstr "%.1lf Hz"
+msgid "%.2lf Hz"
+msgstr "%.2lf Hz"
 
 #. TRANSLATORS: the state of the night light setting
-#: ../panels/display/cc-display-panel.c:3269
+#: ../panels/display/cc-display-panel.c:3320
 #: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1970 ../panels/power/cc-power-panel.c:1977
 #: ../panels/privacy/cc-privacy-panel.c:190
@@ -1215,7 +1210,7 @@ msgstr "%.1lf Hz"
 msgid "On"
 msgstr "Włączone"
 
-#: ../panels/display/cc-display-panel.c:3269 ../panels/network/net-proxy.c:54
+#: ../panels/display/cc-display-panel.c:3320 ../panels/network/net-proxy.c:54
 #: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1964 ../panels/power/cc-power-panel.c:1975
 #: ../panels/privacy/cc-privacy-panel.c:190
@@ -1229,11 +1224,11 @@ msgstr "Włączone"
 msgid "Off"
 msgstr "Wyłączone"
 
-#: ../panels/display/cc-display-panel.c:3290
+#: ../panels/display/cc-display-panel.c:3341
 msgid "_Night Light"
 msgstr "_Nocne światło"
 
-#: ../panels/display/cc-display-panel.c:3355
+#: ../panels/display/cc-display-panel.c:3406
 msgid "Could not get screen information"
 msgstr "Nie można uzyskać informacji o rozdzielczości ekranu"
 
@@ -1851,6 +1846,13 @@ msgstr ""
 "Przywrócenie skrótów może wpłynąć na skróty ustawione przez użytkownika. Nie "
 "można tego cofnąć."
 
+#: ../panels/keyboard/cc-keyboard-panel.c:188
+#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Anuluj"
+
 #: ../panels/keyboard/cc-keyboard-panel.c:189
 msgid "Reset All"
 msgstr "Przywróć wszystko"
@@ -2091,7 +2093,7 @@ msgid "Single click, secondary button"
 msgstr "Pojedyncze kliknięcie, przycisk pomocniczy"
 
 #. add proxy to device list
-#: ../panels/network/cc-network-panel.c:548
+#: ../panels/network/cc-network-panel.c:581
 msgid "Network proxy"
 msgstr "Pośrednik sieciowy"
 
@@ -2099,18 +2101,18 @@ msgstr "Pośrednik sieciowy"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:684 ../panels/network/net-vpn.c:192
+#: ../panels/network/cc-network-panel.c:717 ../panels/network/net-vpn.c:192
 #: ../panels/network/net-vpn.c:321
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:748 ../panels/network/wifi.ui.h:7
+#: ../panels/network/cc-network-panel.c:781 ../panels/network/wifi.ui.h:7
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Coś się nie powiodło. Proszę skontaktować się z producentem oprogramowania."
 
-#: ../panels/network/cc-network-panel.c:754
+#: ../panels/network/cc-network-panel.c:787
 msgid "NetworkManager needs to be running."
 msgstr "Usługa NetworkManager musi być uruchomiona."
 
@@ -2328,11 +2330,6 @@ msgstr "WPA i WPA2 Personal"
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA i WPA2 Enterprise"
 
-#: ../panels/network/connection-editor/connection-editor.ui.h:2
-#: ../panels/network/network-wifi.ui.h:2
-msgid "_Apply"
-msgstr "_Zastosuj"
-
 #: ../panels/network/connection-editor/details-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:4
 msgid "Signal Strength"
@@ -2345,7 +2342,6 @@ msgstr "Prędkość połączenia"
 
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:153
-#: ../panels/network/network-simple.ui.h:3
 #: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:644
 msgid "IPv4 Address"
 msgstr "Adres IPv4"
@@ -2354,14 +2350,12 @@ msgstr "Adres IPv4"
 #: ../panels/network/net-device-ethernet.c:154
 #: ../panels/network/net-device-ethernet.c:158
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-simple.ui.h:4
 #: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:645
 msgid "IPv6 Address"
 msgstr "Adres IPv6"
 
 #: ../panels/network/connection-editor/details-page.ui.h:6
 #: ../panels/network/net-device-ethernet.c:161
-#: ../panels/network/network-simple.ui.h:2
 #: ../panels/network/network-wifi.ui.h:9
 msgid "Hardware Address"
 msgstr "Adres sprzętowy"
@@ -2369,7 +2363,6 @@ msgstr "Adres sprzętowy"
 #: ../panels/network/connection-editor/details-page.ui.h:7
 #: ../panels/network/net-device-ethernet.c:165
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-simple.ui.h:5
 #: ../panels/network/network-wifi.ui.h:10
 msgid "Default Route"
 msgstr "Domyślna trasa"
@@ -2379,7 +2372,6 @@ msgstr "Domyślna trasa"
 #: ../panels/network/connection-editor/ip6-page.ui.h:11
 #: ../panels/network/net-device-ethernet.c:167
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-simple.ui.h:6
 #: ../panels/network/network-wifi.ui.h:11
 msgid "DNS"
 msgstr "DNS"
@@ -2554,7 +2546,7 @@ msgid "New Profile"
 msgstr "Nowy profil"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:603
-#: ../panels/network/network.ui.h:1
+#: ../panels/network/network.ui.h:2
 msgid "VPN"
 msgstr "VPN"
 
@@ -2719,7 +2711,7 @@ msgstr "Przewodowe"
 #: ../panels/network/net-device-wifi.c:1792
 #: ../panels/network/network-ethernet.ui.h:2
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:2
+#: ../panels/network/network-simple.ui.h:3 ../panels/network/network-vpn.ui.h:2
 msgid "Options…"
 msgstr "Opcje…"
 
@@ -2870,11 +2862,17 @@ msgstr "Port pośrednika SOCKS"
 msgid "_Configuration URL"
 msgstr "Adres URL _konfiguracji"
 
-#: ../panels/network/network-simple.ui.h:7
+#: ../panels/network/network-simple.ui.h:2
 msgid "Turn device off"
 msgstr "Wyłącz urządzenie"
 
-#: ../panels/network/network.ui.h:2
+#. Translators: The found device is a printer connected via Bluetooth
+#: ../panels/network/network.ui.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:1816
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../panels/network/network.ui.h:3
 msgid "Not set up"
 msgstr "Nie ustawiono"
 
@@ -4217,18 +4215,18 @@ msgid "Authentication Required"
 msgstr "Wymagane jest uwierzytelnienie"
 
 #. Translators: %s is the printer name
-#: ../panels/printers/cc-printers-panel.c:717
+#: ../panels/printers/cc-printers-panel.c:718
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Usunięto drukarkę „%s”"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:908
+#: ../panels/printers/cc-printers-panel.c:909
 msgid "Failed to add new printer."
 msgstr "Dodanie nowej drukarki się nie powiodło."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:1220
+#: ../panels/printers/cc-printers-panel.c:1221
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nie można wczytać interfejsu użytkownika: %s"
@@ -4489,11 +4487,6 @@ msgstr "Port szeregowy"
 #: ../panels/printers/pp-new-printer-dialog.c:1811
 msgid "Parallel Port"
 msgstr "Port równoległy"
-
-#. Translators: The found device is a printer connected via Bluetooth
-#: ../panels/printers/pp-new-printer-dialog.c:1816
-msgid "Bluetooth"
-msgstr "Bluetooth"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
 #: ../panels/printers/pp-new-printer-dialog.c:1853
