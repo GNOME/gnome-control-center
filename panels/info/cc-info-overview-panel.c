@@ -884,6 +884,9 @@ cc_info_overview_panel_finalize (GObject *object)
       g_clear_object (&priv->cancellable);
     }
 
+  if (priv->primary_mounts)
+    g_list_free_full (priv->primary_mounts, (GDestroyNotify) g_unix_mount_free);
+
   g_free (priv->gnome_version);
   g_free (priv->gnome_date);
   g_free (priv->gnome_distributor);
