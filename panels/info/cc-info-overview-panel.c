@@ -501,23 +501,32 @@ query_done (GFile               *file,
             GAsyncResult        *res,
             CcInfoOverviewPanel *self)
 {
+  CcInfoOverviewPanelPrivate *priv;
   GFileInfo *info;
   GError *error = NULL;
-  CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
 
   info = g_file_query_filesystem_info_finish (file, res, &error);
   if (info != NULL)
     {
+      priv = cc_info_overview_panel_get_instance_private (self);
       priv->total_bytes += g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_FILESYSTEM_SIZE);
       g_object_unref (info);
     }
   else
     {
-      char *path;
-      path = g_file_get_path (file);
-      g_warning ("Failed to get filesystem free space for '%s': %s", path, error->message);
-      g_free (path);
-      g_error_free (error);
+      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_error_free (error);
+          return;
+        }
+      else
+        {
+          char *path;
+          path = g_file_get_path (file);
+          g_warning ("Failed to get filesystem free space for '%s': %s", path, error->message);
+          g_free (path);
+          g_error_free (error);
+        }
     }
 
   /* And onto the next element */
