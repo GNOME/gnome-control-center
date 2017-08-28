@@ -1105,10 +1105,17 @@ scale_buttons_active (CcDisplayPanel *panel,
     }
 }
 
+static double
+round_scale_for_ui (double scale)
+{
+  /* Keep in sync with mutter */
+  return round (scale*4)/4;
+}
+
 static GtkWidget *
 make_label_for_scale (double scale)
 {
-  gchar *text = g_strdup_printf (" %d%% ", (int) round (scale*100));
+  gchar *text = g_strdup_printf (" %d %% ", (int) (round_scale_for_ui (scale)*100));
   GtkWidget *label = gtk_label_new (text);
   g_free (text);
   return label;
