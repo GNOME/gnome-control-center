@@ -1116,54 +1116,26 @@ make_label_for_scale (double scale)
 
 #define MAX_N_SCALES 5
 static void
-get_display_scales (CcDisplayMonitor *output,
-                    double           *scales)
-{
-  CcDisplayMode *mode;
-  const double *all_scales;
-  double preferred;
-  double increment;
-  guint n, i, j;
-
-  mode = cc_display_monitor_get_mode (output);
-  if (!mode)
-    return;
-
-  all_scales = cc_display_mode_get_supported_scales (mode);
-  n = n_supported_scales (mode);
-  if (n <= MAX_N_SCALES)
-    {
-      memcpy (scales, all_scales, n * sizeof (double));
-      return;
-    }
-
-  preferred = cc_display_mode_get_preferred_scale (mode);
-  increment = (all_scales[n - 1] - all_scales[0]) / (double) (MAX_N_SCALES - 1);
-
-  scales[0] = all_scales[0];
-
-  for (i = j = 1; i < n && j < MAX_N_SCALES; i++)
-    if (all_scales[i] >= scales[0] + increment*j || all_scales[i] == preferred)
-      scales[j++] = all_scales[i];
-}
-
-static void
 setup_scale_buttons (GtkWidget        *bbox,
                      CcDisplayMonitor *output)
 {
   CcDisplayPanel *panel;
   GtkRadioButton *group;
-  double scales[MAX_N_SCALES + 1] = { 0 };
-  double *scale;
+  CcDisplayMode *mode;
+  const double *scales, *scale;
+  guint i;
 
   panel = g_object_get_data (G_OBJECT (bbox), "panel");
 
   gtk_container_foreach (GTK_CONTAINER (bbox), (GtkCallback) gtk_widget_destroy, NULL);
 
-  get_display_scales (output, scales);
+  mode = cc_display_monitor_get_mode (output);
+  if (!mode)
+    return;
 
+  scales = cc_display_mode_get_supported_scales (mode);
   group = NULL;
-  for (scale = scales; *scale != 0.0; scale++)
+  for (scale = scales, i = 0; *scale != 0.0 && i < MAX_N_SCALES; scale++, i++)
     {
       GtkWidget *button = gtk_radio_button_new_from_widget (group);
 
