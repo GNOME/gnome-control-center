@@ -17,6 +17,7 @@
  *
  */
 
+#include <math.h>
 #include <gio/gio.h>
 
 #include "cc-display-config-dbus.h"
@@ -1539,7 +1540,7 @@ logical_monitor_width (CcDisplayLogicalMonitor *lm)
     width = mode ? mode->width : 0;
 
   if (monitor->config->layout_mode == CC_DISPLAY_LAYOUT_MODE_LOGICAL)
-    return width / lm->scale;
+    return round (width / lm->scale);
   else
     return width;
 }
@@ -1569,7 +1570,7 @@ logical_monitor_height (CcDisplayLogicalMonitor *lm)
     height = mode ? mode->height : 0;
 
   if (monitor->config->layout_mode == CC_DISPLAY_LAYOUT_MODE_LOGICAL)
-    return height / lm->scale;
+    return round (height / lm->scale);
   else
     return height;
 }
