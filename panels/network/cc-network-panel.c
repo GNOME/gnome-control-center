@@ -376,8 +376,6 @@ handle_argv (CcNetworkPanel *panel)
                         g_object_unref (connection);
                 }
 
-                g_object_unref (object_tmp);
-
                 if (done)
                         return;
         }
