@@ -88,7 +88,6 @@ struct _CcSharingPanelPrivate
   GCancellable *hostname_cancellable;
   GtkWidget *screen_sharing_dialog;
 
-  GDBusProxy *rfkill;
   guint remote_desktop_name_watch;
 };
 
@@ -138,7 +137,6 @@ cc_sharing_panel_dispose (GObject *object)
     g_bus_unwatch_name (priv->remote_desktop_name_watch);
   priv->remote_desktop_name_watch = 0;
 
-  g_clear_object (&priv->rfkill);
   g_clear_object (&priv->builder);
 
   if (priv->media_sharing_dialog)
