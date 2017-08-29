@@ -786,7 +786,7 @@ cc_sharing_panel_bus_ready (GObject         *object,
                           (GVariantType*)"(s)",
                           G_DBUS_CALL_FLAGS_NONE,
                           -1,
-                          NULL,
+                          data->panel->priv->hostname_cancellable,
                           (GAsyncReadyCallback) cc_sharing_panel_get_host_name_fqdn_done,
                           data);
 }
@@ -824,7 +824,8 @@ cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
   get_hostname_data = g_new (GetHostNameData, 1);
   get_hostname_data->panel = self;
   get_hostname_data->label = label;
-  g_bus_get (G_BUS_TYPE_SYSTEM, NULL,
+  g_bus_get (G_BUS_TYPE_SYSTEM,
+             self->priv->hostname_cancellable,
              (GAsyncReadyCallback) cc_sharing_panel_bus_ready,
              get_hostname_data);
 }
