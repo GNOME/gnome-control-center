@@ -1069,8 +1069,10 @@ cc_sharing_panel_setup_screen_sharing_dialog_gnome_remote_desktop (CcSharingPane
   CcSharingPanelPrivate *priv = self->priv;
   GtkWidget *networks, *w;
 
-  /* Don't add it nor show it, as the network selection has no effect yet. */
   networks = cc_sharing_networks_new (self->priv->sharing_proxy, "gnome-remote-desktop");
+  gtk_widget_hide (WID ("remote-control-box"));
+  gtk_grid_attach (GTK_GRID (WID ("grid3")), networks, 0, 1, 2, 1);
+  gtk_widget_show (networks);
 
   w = cc_sharing_switch_new (networks);
   gtk_header_bar_pack_start (GTK_HEADER_BAR (WID ("screen-sharing-headerbar")), w);
