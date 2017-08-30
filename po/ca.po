@@ -8,12 +8,13 @@
 # Joan Duran <jodufi@gmail.com>, 2008-2013.
 # Jordi Serratosa <jordis@softcatala.cat>, 2012.
 # Josep Sànchez <papapep@gmx.com>, 2013.
-# Jordi Mas i Hernàndez <jmas@softcatala.org>, 2015-2016
+# Jordi Mas i Hernàndez <jmas@softcatala.org>, 2015-2017
 # Gil Forcada <gilforcada@guifi.net>, 2013, 2014, 2016.
 #
 # Terminologia
 #
 #   Hotspot -> punt d'accés Wi-Fi
+#   Plugged In -> endollat (si es refereix al corrent)
 #
 msgid ""
 msgstr ""
@@ -1630,7 +1631,7 @@ msgstr "So i multimèdia"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:2
 msgid "Volume mute"
-msgstr "Volum silenciat"
+msgstr "Silencia el volum"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:3
 msgid "Volume down"
@@ -2014,13 +2015,15 @@ msgstr "Botó primari"
 msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "Estableix l'ordre dels botons als ratolins i ratolins tàctils."
 
+# N.T.: Es refereix al botó
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Left"
-msgstr "Esquerra"
+msgstr "Esquerre"
 
+# N.T.: Es refereix al botó
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
 msgid "Right"
-msgstr "Dreta"
+msgstr "Dret"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "Mouse"
@@ -2526,7 +2529,7 @@ msgstr "Mètrica"
 #: ../panels/network/connection-editor/ip6-page.ui.h:18
 #: ../panels/network/network-wifi.ui.h:34
 msgid "Use this connection _only for resources on its network"
-msgstr "_Utilitza aquesta connexió només per recursos en aquesta xarxa"
+msgstr "_Utilitza aquesta connexió només per als recursos d'aquesta xarxa"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
 msgid "IPv_6 Method"
@@ -3342,7 +3345,6 @@ msgstr "Cable desconnectat"
 #: ../panels/network/wireless-security/eap-method.c:57
 msgid "undefined error in 802.1X security (wpa-eap)"
 msgstr "s'ha produït un error no definit en la seguretat de 802.1X (wpa-eap)"
-
 #: ../panels/network/wireless-security/eap-method.c:233
 msgid "no file selected"
 msgstr "no s'ha seleccionat cap fitxer"
@@ -3717,14 +3719,14 @@ msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
 msgstr ""
-"Les notificacions continuaran apareixent en la llista de notificacions quan "
-"les emergents estan inhabilitades."
+"Les notificacions continuaran apareixent en la llista de notificacions encara que "
+"inhabiliteu les notificacions emergents."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:8
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
-msgstr "_Mostra el contingut en emergents"
+msgstr "_Mostra el contingut de les notificacions emergents"
 
 #: ../panels/notifications/edit-dialog.ui.h:9
 msgctxt "notifications"
@@ -3734,7 +3736,7 @@ msgstr "_Notificacions a la pantalla de bloqueig"
 #: ../panels/notifications/edit-dialog.ui.h:10
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
-msgstr "_Mostra el contingut del missatge a la pantalla de bloqueig"
+msgstr "_Mostra el contingut dels missatges a la pantalla de bloqueig"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:2
@@ -3814,7 +3816,7 @@ msgstr "Desfés"
 
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Connect to your data in the cloud"
-msgstr "Connecteu-vos amb les vostres dades al núvol"
+msgstr "Connecteu-vos a les vostres dades al núvol"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
 msgid "No internet connection — connect to set up new online accounts"
@@ -4056,7 +4058,7 @@ msgstr "Quan s'utilitzi la bateria"
 
 #: ../panels/power/cc-power-panel.c:1968
 msgid "When plugged in"
-msgstr "Quan estigui connectat"
+msgstr "Quan estigui endollat"
 
 #: ../panels/power/cc-power-panel.c:2063
 msgid "Suspend"
@@ -4077,15 +4079,15 @@ msgstr "Res"
 #. Frame header
 #: ../panels/power/cc-power-panel.c:2180
 msgid "Suspend & Power Button"
-msgstr "Botó d'atura temporalment i apaga"
+msgstr "Botó d'aturada temporal i d'engegada"
 
 #: ../panels/power/cc-power-panel.c:2219
 msgid "_Automatic suspend"
-msgstr "_Atura temporalment automàticament"
+msgstr "_Aturada temporal automàtica"
 
 #: ../panels/power/cc-power-panel.c:2220
 msgid "Automatic suspend"
-msgstr "Atura automàticament"
+msgstr "Aturada temporal automàtica"
 
 #: ../panels/power/cc-power-panel.c:2287
 msgid "_When the Power Button is pressed"
@@ -4177,11 +4179,11 @@ msgstr "Atura temporalment automàticament"
 
 #: ../panels/power/power.ui.h:19
 msgid "_Plugged In"
-msgstr "_Connectat"
+msgstr "_Endollat"
 
 #: ../panels/power/power.ui.h:20
 msgid "On _Battery Power"
-msgstr "Utilitzant la _bateria"
+msgstr "Quan s'utilitza la _bateria"
 
 #: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:36
 msgid "Delay"
@@ -4829,7 +4831,7 @@ msgstr "Serveis d'ubicació"
 
 #: ../panels/privacy/cc-privacy-panel.c:942 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
-msgstr "Utilització i historial"
+msgstr "Ús i historial"
 
 #: ../panels/privacy/cc-privacy-panel.c:1071
 msgid "Empty all items from Trash?"
@@ -4837,7 +4839,7 @@ msgstr "Voleu buidar la paperera?"
 
 #: ../panels/privacy/cc-privacy-panel.c:1072
 msgid "All items in the Trash will be permanently deleted."
-msgstr "S'esborraran definitivament tots els elements de la paperera."
+msgstr "Se suprimiran permanent tots els elements de la paperera."
 
 #: ../panels/privacy/cc-privacy-panel.c:1073
 msgid "_Empty Trash"
@@ -4845,11 +4847,11 @@ msgstr "_Buida la paperera"
 
 #: ../panels/privacy/cc-privacy-panel.c:1096
 msgid "Delete all the temporary files?"
-msgstr "Buida tots fitxers temporals?"
+msgstr "Voleu suprimir tots fitxers temporals?"
 
 #: ../panels/privacy/cc-privacy-panel.c:1097
 msgid "All the temporary files will be permanently deleted."
-msgstr "S'esborraran definitivament tots els fitxers temporals."
+msgstr "Se suprimiran permanent tots els fitxers temporals."
 
 #: ../panels/privacy/cc-privacy-panel.c:1098
 msgid "_Purge Temporary Files"
@@ -4900,8 +4902,9 @@ msgstr ""
 "xarxa;identitat;"
 
 #: ../panels/privacy/privacy.ui.h:1
+# N.T.: En minúscula ja que s'afegeix visualment a una altre cadena
 msgid "Screen Turns Off"
-msgstr "S'apaga la pantalla"
+msgstr "s'apaga la pantalla"
 
 #: ../panels/privacy/privacy.ui.h:2
 msgid "30 seconds"
@@ -4952,8 +4955,8 @@ msgid ""
 "Remembering your history makes things easier to find again. These items are "
 "never shared over the network."
 msgstr ""
-"Si es recorda l'historial del què feu, fa que sigui més fàcil tornar a "
-"trobar les coses. No es comparteixen mai aquests elements a la xarxa."
+"Si es recorda l'historial, és més fàcil tornar a "
+"trobar les coses. Aquests elements no es comparteixen mai a la xarxa."
 
 #: ../panels/privacy/privacy.ui.h:21
 msgid "_Recently Used"
@@ -4961,7 +4964,7 @@ msgstr "Utilitzat _recentment"
 
 #: ../panels/privacy/privacy.ui.h:22
 msgid "Retain _History"
-msgstr "Mantén l'_historial"
+msgstr "Conserva l'_historial"
 
 #: ../panels/privacy/privacy.ui.h:23
 msgid "Cl_ear Recent History"
@@ -4989,7 +4992,7 @@ msgid ""
 "Automatically purge the Trash and temporary files to help keep your computer "
 "free of unnecessary sensitive information."
 msgstr ""
-"Buida automàticament la paperera i els fitxers temporals per ajudar a "
+"Buideu automàticament la paperera i els fitxers temporals per ajudar a "
 "mantenir l'ordinador lliure d'informació sensible innecessària."
 
 #: ../panels/privacy/privacy.ui.h:31
@@ -5038,7 +5041,7 @@ msgid ""
 "mobile broadband increases accuracy."
 msgstr ""
 "Els serveis d'ubicació permeten que les aplicacions puguin saber on sou. "
-"L'ús de la Wi-Fi i les dades de mòbil permet millorar la precisió."
+"L'ús de Wi-Fi i de dades mòbils permet millorar la precisió."
 
 #: ../panels/privacy/privacy.ui.h:44
 msgid "_Location Services"
@@ -5269,7 +5272,7 @@ msgstr "Cerca;Troba;Índex;Oculta;Privacitat;Resultats;"
 
 #: ../panels/search/search-locations-dialog.ui.h:1
 msgid "Search Locations"
-msgstr "Cerca ubicacions"
+msgstr "Ubicacions de cerca"
 
 #: ../panels/search/search-locations-dialog.ui.h:2
 msgid "Places"
@@ -5303,13 +5306,13 @@ msgstr "No hi ha cap xarxa seleccionada per compartir"
 #: ../panels/sharing/cc-sharing-panel.c:266
 msgctxt "service is enabled"
 msgid "On"
-msgstr "Actiu"
+msgstr "Activat"
 
 #: ../panels/sharing/cc-sharing-panel.c:268
 #: ../panels/sharing/cc-sharing-panel.c:295
 msgctxt "service is disabled"
 msgid "Off"
-msgstr "Inactiu"
+msgstr "Desactivat"
 
 #: ../panels/sharing/cc-sharing-panel.c:298
 msgctxt "service is enabled"
@@ -5462,7 +5465,7 @@ msgstr "Compartició multimèdia"
 
 #: ../panels/sharing/sharing.ui.h:19
 msgid "Share music, photos and videos over the network."
-msgstr "Compateix música, fotografies i vídeos a través de la xarxa."
+msgstr "Compartiu música, fotografies i vídeos a través de la xarxa."
 
 #: ../panels/sharing/sharing.ui.h:20
 msgid "Folders"
@@ -5645,7 +5648,7 @@ msgstr "Volum d'_alerta:"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1785
 msgid "No application is currently playing or recording audio."
-msgstr "Cap aplicació està actualment reproduint o enregistrant àudio."
+msgstr "Actualment cap aplicació no està reproduint ni enregistrant àudio."
 
 #: ../panels/sound/gvc-sound-theme-chooser.c:188
 msgid "Built-in"
@@ -5769,7 +5772,7 @@ msgstr "Mida del _cursor"
 #: ../panels/universal-access/uap.ui.h:6
 #: ../panels/universal-access/zoom-options.ui.h:7
 msgid "_Zoom"
-msgstr "_Amplia"
+msgstr "_Ampliació"
 
 #: ../panels/universal-access/uap.ui.h:8
 msgid "Screen _Reader"
@@ -5813,15 +5816,15 @@ msgstr "Tecles del _ratolí"
 
 #: ../panels/universal-access/uap.ui.h:19
 msgid "_Click Assist"
-msgstr "Feu _clic a l'assistent"
+msgstr "A_ssistència en fer clic"
 
 #: ../panels/universal-access/uap.ui.h:20
 msgid "_Double-Click Delay"
-msgstr "_Retard en el doble clic"
+msgstr "_Retard del doble clic"
 
 #: ../panels/universal-access/uap.ui.h:21
 msgid "Double-Click Delay"
-msgstr "Retard en el doble clic"
+msgstr "Retard del doble clic"
 
 #: ../panels/universal-access/uap.ui.h:22
 msgid "Cursor Size"
@@ -5854,7 +5857,7 @@ msgstr "So de les tecles"
 #: ../panels/universal-access/uap.ui.h:28
 msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr ""
-"Pita quan s'activin o desactivin la fixació numèrica o la de majúscules."
+"Fes un avís sonor quan s'activi o desactivi la fixació numèrica o de les majúscules."
 
 #: ../panels/universal-access/uap.ui.h:29
 msgid "Visual Alerts"
@@ -5868,17 +5871,17 @@ msgstr "_Prova el parpelleig"
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "Utilitza una indicació visual quan es produeixi una alerta sonora."
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:32ee
 msgid "Flash the _window title"
-msgstr "Parpelleja el títol de la _finestra"
+msgstr "Fes parpellejar el títol de la _finestra"
 
 #: ../panels/universal-access/uap.ui.h:33
 msgid "Flash the entire _screen"
-msgstr "Parpelleja la _pantalla sencera"
+msgstr "Fes parpellejar la _pantalla sencera"
 
 #: ../panels/universal-access/uap.ui.h:34
 msgid "Repeat Keys"
-msgstr "Tecles de repetició"
+msgstr "Repetició de tecles"
 
 #: ../panels/universal-access/uap.ui.h:35
 msgid "Key presses repeat when key is held down."
@@ -5936,7 +5939,7 @@ msgstr "Tecles _lentes"
 #: ../panels/universal-access/uap.ui.h:49
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr ""
-"Introdueix un retard entre prémer una tecla i quan aquesta és acceptada"
+"Introdueix un retard entre que es prem una tecla i s'accepta"
 
 #: ../panels/universal-access/uap.ui.h:50
 msgid "A_cceptance delay:"
@@ -5970,7 +5973,7 @@ msgstr "Fes un avís sonor quan es _rebutgi una tecla"
 
 #: ../panels/universal-access/uap.ui.h:57
 msgid "_Bounce Keys"
-msgstr "Tecles de _salt"
+msgstr "_Omet tecles"
 
 #: ../panels/universal-access/uap.ui.h:58
 msgid "Ignores fast duplicate keypresses"
@@ -5983,7 +5986,7 @@ msgstr "Curt"
 
 #: ../panels/universal-access/uap.ui.h:60
 msgid "Bounce keys typing delay"
-msgstr "Retard d'escriptura de les tecles de salt"
+msgstr "Retard d'escriptura en ometre tecles"
 
 #: ../panels/universal-access/uap.ui.h:61
 msgctxt "bounce keys delay"
@@ -6000,7 +6003,7 @@ msgstr "Activa i desactiva les funcions d'accessibilitat utilitzant el teclat"
 
 #: ../panels/universal-access/uap.ui.h:64
 msgid "Click Assist"
-msgstr "Feu clic a l'assistent"
+msgstr "Assistència en fer clic"
 
 #: ../panels/universal-access/uap.ui.h:65
 msgid "_Simulated Secondary Click"
@@ -6026,11 +6029,11 @@ msgstr "Llarg"
 
 #: ../panels/universal-access/uap.ui.h:70
 msgid "_Hover Click"
-msgstr "Clic en _mantenir"
+msgstr "Clic en passar per sobre"
 
 #: ../panels/universal-access/uap.ui.h:71
 msgid "Trigger a click when the pointer hovers"
-msgstr "Fes un clic quan es mantingui el punter"
+msgstr "Fes un clic en passar el punter per sobre"
 
 #: ../panels/universal-access/uap.ui.h:72
 msgid "D_elay:"
@@ -6048,12 +6051,12 @@ msgstr "Llarg"
 
 #: ../panels/universal-access/uap.ui.h:75
 msgid "Motion _threshold:"
-msgstr "Llindar del _moviment:"
+msgstr "Llindar de _moviment:"
 
 #: ../panels/universal-access/uap.ui.h:76
 msgctxt "dwell click threshold"
 msgid "Small"
-msgstr "Petita"
+msgstr "Petit"
 
 #: ../panels/universal-access/uap.ui.h:77
 msgctxt "dwell click threshold"
@@ -6206,7 +6209,7 @@ msgstr "Cap"
 #: ../panels/universal-access/zoom-options.ui.h:32
 msgctxt "universal access, color"
 msgid "Full"
-msgstr "Completa"
+msgstr "Tot"
 
 #: ../panels/universal-access/zoom-options.ui.h:33
 msgctxt "universal access, brightness"
@@ -7238,7 +7241,7 @@ msgstr "No s'ha trobat cap llapis"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:7
 msgid "Please move your stylus to the proximity of the tablet to configure it"
-msgstr "Si us plau, moveu el llapis a prop de la tauleta per configurar-lo."
+msgstr "Moveu el llapis a prop de la tauleta per configurar-lo."
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:10
 msgid "Eraser Pressure Feel"
