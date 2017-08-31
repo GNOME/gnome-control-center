@@ -556,6 +556,9 @@ kind_to_description (UpDeviceKind kind)
       case UP_DEVICE_KIND_COMPUTER:
         /* TRANSLATORS: secondary battery */
         return N_("Computer");
+      case UP_DEVICE_KIND_GAMING_INPUT:
+        /* TRANSLATORS: secondary battery */
+        return N_("Gaming input device");
       default:
         /* TRANSLATORS: secondary battery, misc */
         return N_("Battery");
