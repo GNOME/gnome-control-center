@@ -68,8 +68,6 @@ struct _CcBackgroundPanel
 CC_PANEL_REGISTER (CcBackgroundPanel, cc_background_panel)
 
 #define WID(y) (GtkWidget *) gtk_builder_get_object (panel->builder, y)
-#define CURRENT_BG (settings == panel->settings ? panel->current_background : panel->current_lock_background)
-#define SAVE_PATH (settings == panel->settings ? "last-edited.xml" : "last-edited-lock.xml")
 
 static const char *
 cc_background_panel_get_help_uri (CcPanel *panel)
@@ -132,6 +130,15 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
   object_class->finalize = cc_background_panel_finalize;
 }
 
+static CcBackgroundItem *
+get_current_background (CcBackgroundPanel *panel, GSettings *settings)
+{
+  if (settings == panel->settings)
+    return panel->current_background;
+  else
+    return panel->current_lock_background;
+}
+
 static void
 update_preview (CcBackgroundPanel *panel,
                 GSettings         *settings,
@@ -140,7 +147,7 @@ update_preview (CcBackgroundPanel *panel,
   gboolean changes_with_time;
   CcBackgroundItem *current_background;
 
-  current_background = CURRENT_BG;
+  current_background = get_current_background (panel, settings);
 
   if (item && current_background)
     {
@@ -176,13 +183,13 @@ update_preview (CcBackgroundPanel *panel,
     }
 }
 
-static char *
-get_save_path (const char *filename)
+static gchar *
+get_save_path (CcBackgroundPanel *panel, GSettings *settings)
 {
   return g_build_filename (g_get_user_config_dir (),
                            "gnome-control-center",
                            "backgrounds",
-                           filename,
+                           settings == panel->settings ? "last-edited.xml" : "last-edited-lock.xml",
                            NULL);
 }
 
@@ -210,6 +217,7 @@ get_or_create_cached_pixbuf (CcBackgroundPanel *panel,
                                                        -2, TRUE);
       g_object_set_data_full (G_OBJECT (background), "pixbuf", pixbuf, g_object_unref);
     }
+
   return pixbuf;
 }
 
@@ -254,13 +262,15 @@ static void
 reload_current_bg (CcBackgroundPanel *panel,
                    GSettings         *settings)
 {
-  CcBackgroundItem *saved, *configured;
-  gchar *uri, *pcolor, *scolor;
+  g_autoptr(CcBackgroundItem) saved = NULL;
+  CcBackgroundItem *configured;
+  g_autofree gchar *uri = NULL;
+  g_autofree gchar *pcolor = NULL;
+  g_autofree gchar *scolor = NULL;
 
   /* Load the saved configuration */
-  uri = get_save_path (SAVE_PATH);
+  uri = get_save_path (panel, settings);
   saved = cc_background_xml_get_item (uri);
-  g_free (uri);
 
   /* initalise the current background information from settings */
   uri = g_settings_get_string (settings, WP_URI_KEY);
@@ -270,13 +280,10 @@ reload_current_bg (CcBackgroundPanel *panel,
     }
   else
     {
-      GFile *file;
-
+      g_autoptr(GFile) file = NULL;
       file = g_file_new_for_commandline_arg (uri);
-      g_object_unref (file);
     }
   configured = cc_background_item_new (uri);
-  g_free (uri);
 
   pcolor = g_settings_get_string (settings, WP_PCOLOR_KEY);
   scolor = g_settings_get_string (settings, WP_SCOLOR_KEY);
@@ -287,8 +294,6 @@ reload_current_bg (CcBackgroundPanel *panel,
                 "primary-color", pcolor,
                 "secondary-color", scolor,
                 NULL);
-  g_free (pcolor);
-  g_free (scolor);
 
   if (saved != NULL && cc_background_item_compare (saved, configured))
     {
@@ -304,8 +309,6 @@ reload_current_bg (CcBackgroundPanel *panel,
 		    "source-xml", cc_background_item_get_source_xml (saved),
 		    NULL);
     }
-  if (saved != NULL)
-    g_object_unref (saved);
 
   if (settings == panel->settings)
     {
@@ -323,7 +326,7 @@ reload_current_bg (CcBackgroundPanel *panel,
 static gboolean
 create_save_dir (void)
 {
-  char *path;
+  g_autofree char *path = NULL;
 
   path = g_build_filename (g_get_user_config_dir (),
 			   "gnome-control-center",
@@ -332,10 +335,8 @@ create_save_dir (void)
   if (g_mkdir_with_parents (path, USER_DIR_MODE) < 0)
     {
       g_warning ("Failed to create directory '%s'", path);
-      g_free (path);
       return FALSE;
     }
-  g_free (path);
   return TRUE;
 }
 
@@ -344,8 +345,8 @@ copy_finished_cb (GObject      *source_object,
                   GAsyncResult *result,
                   gpointer      pointer)
 {
-  GError *err = NULL;
-  CcBackgroundPanel *panel = (CcBackgroundPanel *) pointer;
+  g_autoptr(GError) err = NULL;
+  g_autoptr(CcBackgroundPanel) panel = (CcBackgroundPanel *) pointer;
   CcBackgroundItem *item;
   CcBackgroundItem *current_background;
   GSettings *settings;
@@ -353,15 +354,13 @@ copy_finished_cb (GObject      *source_object,
   if (!g_file_copy_finish (G_FILE (source_object), result, &err))
     {
       if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-        g_error_free (err);
         return;
       }
       g_warning ("Failed to copy image to cache location: %s", err->message);
-      g_error_free (err);
     }
   item = g_object_get_data (source_object, "item");
   settings = g_object_get_data (source_object, "settings");
-  current_background = CURRENT_BG;
+  current_background = get_current_background (panel, settings);
 
   g_settings_apply (settings);
 
@@ -379,19 +378,16 @@ copy_finished_cb (GObject      *source_object,
 
   if (panel->builder)
     {
-      char *filename;
+      g_autofree gchar *filename = NULL;
 
       update_preview (panel, settings, item);
-      current_background = CURRENT_BG;
+      current_background = get_current_background (panel, settings);
 
       /* Save the source XML if there is one */
-      filename = get_save_path (SAVE_PATH);
+      filename = get_save_path (panel, settings);
       if (create_save_dir ())
         cc_background_xml_save (current_background, filename);
     }
-
-  /* remove the reference taken when the copy was set up */
-  g_object_unref (panel);
 }
 
 static void
@@ -403,7 +399,6 @@ set_background (CcBackgroundPanel *panel,
   gboolean save_settings = TRUE;
   const char *uri;
   CcBackgroundItemFlags flags;
-  char *filename;
 
   if (item == NULL)
     return;
@@ -419,34 +414,33 @@ set_background (CcBackgroundPanel *panel,
   else if (cc_background_item_get_source_url (item) != NULL &&
            cc_background_item_get_needs_download (item))
     {
-      GFile *source, *dest;
-      char *cache_path, *basename, *dest_path, *display_name, *dest_uri;
-      GdkPixbuf *pixbuf;
+      g_autoptr(GFile) source = NULL;
+      g_autoptr(GFile) dest = NULL;
+      g_autofree gchar *cache_path = NULL;
+      g_autofree gchar *basename = NULL;
+      g_autofree gchar *display_name = NULL;
+      g_autofree gchar *dest_path = NULL;
+      g_autofree gchar *dest_uri = NULL;
+      g_autoptr(GdkPixbuf) pixbuf = NULL;
 
       cache_path = bg_pictures_source_get_cache_path ();
       if (g_mkdir_with_parents (cache_path, USER_DIR_MODE) < 0)
         {
           g_warning ("Failed to create directory '%s'", cache_path);
-          g_free (cache_path);
           return;
         }
-      g_free (cache_path);
 
       dest_path = bg_pictures_source_get_unique_path (cc_background_item_get_source_url (item));
       dest = g_file_new_for_path (dest_path);
-      g_free (dest_path);
       source = g_file_new_for_uri (cc_background_item_get_source_url (item));
       basename = g_file_get_basename (source);
       display_name = g_filename_display_name (basename);
       dest_path = g_file_get_path (dest);
-      g_free (basename);
 
       /* create a blank image to use until the source image is ready */
       pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 1, 1);
       gdk_pixbuf_fill (pixbuf, 0x00000000);
       gdk_pixbuf_save (pixbuf, dest_path, "png", NULL, NULL);
-      g_object_unref (pixbuf);
-      g_free (dest_path);
 
       if (panel->copy_cancellable)
         {
@@ -476,9 +470,7 @@ set_background (CcBackgroundPanel *panel,
                          G_PRIORITY_DEFAULT, panel->copy_cancellable,
                          NULL, NULL,
                          copy_finished_cb, panel);
-      g_object_unref (source);
       dest_uri = g_file_get_uri (dest);
-      g_object_unref (dest);
 
       g_settings_set_string (settings, WP_URI_KEY, dest_uri);
       g_object_set (G_OBJECT (item),
@@ -486,8 +478,6 @@ set_background (CcBackgroundPanel *panel,
                     "needs-download", FALSE,
                     "name", display_name,
                     NULL);
-      g_free (display_name);
-      g_free (dest_uri);
 
       /* delay the updated drawing of the preview until the copy finishes */
       save_settings = FALSE;
@@ -518,31 +508,30 @@ set_background (CcBackgroundPanel *panel,
   /* update the preview information */
   if (save_settings != FALSE)
     {
+      g_autofree gchar *filename = NULL;
+
       /* Apply all changes */
       g_settings_apply (settings);
 
       /* Save the source XML if there is one */
-      filename = get_save_path (SAVE_PATH);
+      filename = get_save_path (panel, settings);
       if (create_save_dir ())
-        cc_background_xml_save (CURRENT_BG, filename);
+        cc_background_xml_save (get_current_background (panel, settings), filename);
     }
 }
 
 static void
 on_chooser_dialog_response (GtkDialog         *dialog,
                             int                response_id,
-                            CcBackgroundPanel *self)
+                            CcBackgroundPanel *panel)
 {
   if (response_id == GTK_RESPONSE_OK)
     {
-      CcBackgroundItem *item;
+      g_autoptr(CcBackgroundItem) item = NULL;
 
       item = cc_background_chooser_dialog_get_item (CC_BACKGROUND_CHOOSER_DIALOG (dialog));
       if (item != NULL)
-        {
-          set_background (self, g_object_get_data (G_OBJECT (dialog), "settings"), item);
-          g_object_unref (item);
-        }
+          set_background (panel, g_object_get_data (G_OBJECT (dialog), "settings"), item);
     }
 
   gtk_widget_destroy (GTK_WIDGET (dialog));
@@ -564,32 +553,32 @@ launch_chooser (CcBackgroundPanel *panel,
 
 static void
 on_background_button_clicked (GtkButton         *button,
-                              CcBackgroundPanel *self)
+                              CcBackgroundPanel *panel)
 {
-  launch_chooser (self, self->settings);
+  launch_chooser (panel, panel->settings);
 }
 
 static void
 on_lock_button_clicked (GtkButton         *button,
-                        CcBackgroundPanel *self)
+                        CcBackgroundPanel *panel)
 {
-  launch_chooser (self, self->lock_settings);
+  launch_chooser (panel, panel->lock_settings);
 }
 
 static void
 on_settings_changed (GSettings         *settings,
                      gchar             *key,
-                     CcBackgroundPanel *self)
+                     CcBackgroundPanel *panel)
 {
-  reload_current_bg (self, settings);
-  update_preview (self, settings, NULL);
+  reload_current_bg (panel, settings);
+  update_preview (panel, settings, NULL);
 }
 
 static void
 cc_background_panel_init (CcBackgroundPanel *panel)
 {
   gchar *objects[] = {"background-panel", NULL };
-  GError *err = NULL;
+  g_autoptr(GError) err = NULL;
   GtkWidget *widget;
 
   panel->connection = g_application_get_dbus_connection (g_application_get_default ());
@@ -603,7 +592,6 @@ cc_background_panel_init (CcBackgroundPanel *panel)
   if (err)
     {
       g_warning ("Could not load ui: %s", err->message);
-      g_error_free (err);
       return;
     }
 

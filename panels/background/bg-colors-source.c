@@ -57,7 +57,7 @@ struct {
   { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#7a634b" },
 };
 
-static char *
+static gchar *
 get_colors_path (void)
 {
   return g_build_filename (g_get_user_config_dir (), "gnome-control-center", "backgrounds", "colors.ini", NULL);
@@ -77,8 +77,8 @@ bg_colors_source_add_color (BgColorsSource               *self,
                             GtkTreeRowReference         **ret_row_ref)
 {
   CcBackgroundItemFlags flags;
-  CcBackgroundItem *item;
-  GdkPixbuf *pixbuf;
+  g_autoptr(CcBackgroundItem) item = NULL;
+  g_autoptr(GdkPixbuf) pixbuf = NULL;
   cairo_surface_t *surface;
   int scale_factor;
   int thumbnail_height, thumbnail_width;
@@ -116,6 +116,7 @@ bg_colors_source_add_color (BgColorsSource               *self,
                                      0, surface,
                                      1, item,
                                      -1);
+  cairo_surface_destroy (surface);
 
   if (ret_row_ref)
     {
@@ -125,21 +126,17 @@ bg_colors_source_add_color (BgColorsSource               *self,
       *ret_row_ref = gtk_tree_row_reference_new (GTK_TREE_MODEL (store), path);
       gtk_tree_path_free (path);
     }
-
-  cairo_surface_destroy (surface);
-  g_object_unref (pixbuf);
-  g_object_unref (item);
 }
 
 static void
 bg_colors_source_constructed (GObject *object)
 {
   BgColorsSource *self = BG_COLORS_SOURCE (object);
-  GnomeDesktopThumbnailFactory *thumb_factory;
+  g_autoptr(GnomeDesktopThumbnailFactory) thumb_factory = NULL;
   guint i;
   GtkListStore *store;
-  GKeyFile *keyfile;
-  char *path;
+  g_autoptr(GKeyFile) keyfile = NULL;
+  g_autofree gchar *path = NULL;
 
   G_OBJECT_CLASS (bg_colors_source_parent_class)->constructed (object);
 
@@ -155,21 +152,14 @@ bg_colors_source_constructed (GObject *object)
   path = get_colors_path ();
   if (g_key_file_load_from_file (keyfile, path, G_KEY_FILE_NONE, NULL))
     {
-      char **colors;
+      g_auto(GStrv) colors = NULL;
 
       colors = g_key_file_get_string_list (keyfile, "Colors", "custom-colors", NULL, NULL);
       for (i = 0; colors != NULL && colors[i] != NULL; i++)
         {
           bg_colors_source_add_color (self, thumb_factory, store, colors[i], NULL);
         }
-
-      if (colors)
-        g_strfreev (colors);
     }
-  g_key_file_unref (keyfile);
-  g_free (path);
-
-  g_object_unref (thumb_factory);
 }
 
 gboolean
@@ -177,14 +167,15 @@ bg_colors_source_add (BgColorsSource       *self,
                       GdkRGBA              *rgba,
                       GtkTreeRowReference **ret_row_ref)
 {
-  GnomeDesktopThumbnailFactory *thumb_factory;
+  g_autoptr(GnomeDesktopThumbnailFactory) thumb_factory = NULL;
   GtkListStore *store;
-  gchar *c;
-  char **colors;
+  g_autofree gchar *c = NULL;
+  g_auto(GStrv) colors = NULL;
   gsize len;
-  GKeyFile *keyfile;
-  GError *error = NULL;
-  char *path;
+  g_autoptr(GKeyFile) keyfile = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autofree gchar *dir = NULL;
+  g_autofree gchar *path = NULL;
 
   c = g_strdup_printf ("#%02x%02x%02x",
                        (int)(255*rgba->red),
@@ -196,12 +187,9 @@ bg_colors_source_add (BgColorsSource       *self,
 
   bg_colors_source_add_color (self, thumb_factory, store, c, ret_row_ref);
 
-  g_object_unref (thumb_factory);
-
   /* Save to the keyfile */
-  path = get_colors_dir ();
-  g_mkdir_with_parents (path, 0700);
-  g_free (path);
+  dir = get_colors_dir ();
+  g_mkdir_with_parents (dir, 0700);
 
   path = get_colors_path ();
   colors = NULL;
@@ -212,15 +200,12 @@ bg_colors_source_add (BgColorsSource       *self,
     colors = g_key_file_get_string_list (keyfile, "Colors", "custom-colors", &len, NULL);
 
   if (len == 0 && colors != NULL)
-    {
-      g_strfreev (colors);
-      colors = NULL;
-    }
+    g_clear_pointer (&colors, g_strfreev);
 
   if (colors == NULL)
     {
       colors = g_new0 (char *, 2);
-      colors[0] = c;
+      colors[0] = g_steal_pointer (&c);
       len = 1;
     }
   else
@@ -235,7 +220,7 @@ bg_colors_source_add (BgColorsSource       *self,
           colors[i] = NULL;
         }
 
-      new_colors[len] = c;
+      new_colors[len] = g_steal_pointer (&c);
       len++;
 
       g_strfreev (colors);
@@ -245,13 +230,7 @@ bg_colors_source_add (BgColorsSource       *self,
   g_key_file_set_string_list (keyfile, "Colors", "custom-colors", (const gchar * const*) colors, len);
 
   if (!g_key_file_save_to_file (keyfile, path, &error))
-    {
       g_warning ("Could not save custom color: %s", error->message);
-      g_error_free (error);
-    }
-
-  g_key_file_unref (keyfile);
-  g_strfreev (colors);
 
   return TRUE;
 }

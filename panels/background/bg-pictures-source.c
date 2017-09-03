@@ -170,8 +170,8 @@ picture_scaled (GObject *source_object,
 {
   BgPicturesSource *bg_source;
   CcBackgroundItem *item;
-  GError *error = NULL;
-  GdkPixbuf *pixbuf = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GdkPixbuf) pixbuf = NULL;
   const char *software;
   const char *uri;
   GtkTreeIter iter;
@@ -192,8 +192,7 @@ picture_scaled (GObject *source_object,
           remove_placeholder (BG_PICTURES_SOURCE (user_data), item);
         }
 
-      g_error_free (error);
-      goto out;
+      return;
     }
 
   /* since we were not cancelled, we can now cast user_data
@@ -212,7 +211,7 @@ picture_scaled (GObject *source_object,
     {
       g_debug ("Ignored URL '%s' as it's a screenshot from gnome-screenshot", uri);
       remove_placeholder (BG_PICTURES_SOURCE (user_data), item);
-      goto out;
+      return;
     }
 
   /* Process embedded orientation */
@@ -222,7 +221,7 @@ picture_scaled (GObject *source_object,
     {
       /* the width and height of pixbuf we requested are wrong for EXIF
        * orientations 5, 6, 7 and 8. the file has to be reloaded. */
-      GFile *file;
+      g_autoptr(GFile) file = NULL;
 
       file = g_file_new_for_uri (uri);
       g_object_set_data (G_OBJECT (item), "needs-rotation", GINT_TO_POINTER (TRUE));
@@ -230,8 +229,7 @@ picture_scaled (GObject *source_object,
       g_file_read_async (G_FILE (file), G_PRIORITY_DEFAULT,
                          bg_source->cancellable,
                          picture_opened_for_read, bg_source);
-      g_object_unref (file);
-      goto out;
+      return;
     }
 
   pixbuf = swap_rotated_pixbuf (pixbuf);
@@ -265,10 +263,7 @@ picture_scaled (GObject *source_object,
                        bg_pictures_source_get_unique_filename (uri),
                        GINT_TO_POINTER (TRUE));
 
-
- out:
   g_clear_pointer (&surface, (GDestroyNotify) cairo_surface_destroy);
-  g_clear_object (&pixbuf);
 }
 
 static void
@@ -278,8 +273,8 @@ picture_opened_for_read (GObject *source_object,
 {
   BgPicturesSource *bg_source;
   CcBackgroundItem *item;
-  GFileInputStream *stream;
-  GError *error = NULL;
+  g_autoptr(GFileInputStream) stream = NULL;
+  g_autoptr(GError) error = NULL;
   gint thumbnail_height;
   gint thumbnail_width;
   gboolean needs_rotation;
@@ -290,13 +285,11 @@ picture_opened_for_read (GObject *source_object,
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
-          char *filename = g_file_get_path (G_FILE (source_object));
+          g_autofree gchar *filename = g_file_get_path (G_FILE (source_object));
           g_warning ("Failed to load picture '%s': %s", filename, error->message);
           remove_placeholder (BG_PICTURES_SOURCE (user_data), item);
-          g_free (filename);
         }
 
-      g_error_free (error);
       return;
     }
 
@@ -325,7 +318,6 @@ picture_opened_for_read (GObject *source_object,
                                              TRUE,
                                              bg_source->cancellable,
                                              picture_scaled, bg_source);
-  g_object_unref (stream);
 }
 
 static void
@@ -335,22 +327,21 @@ picture_copied_for_read (GObject *source_object,
 {
   BgPicturesSource *bg_source;
   CcBackgroundItem *item;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   GFile *thumbnail_file = G_FILE (source_object);
   GFile *native_file;
 
   if (!g_file_copy_finish (thumbnail_file, res, &error))
     {
       if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        goto out;
+        return;
       else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_EXISTS))
         {
-          gchar *uri;
+          g_autofree gchar *uri = NULL;
 
           uri = g_file_get_uri (thumbnail_file);
           g_warning ("Failed to download '%s': %s", uri, error->message);
-          g_free (uri);
-          goto out;
+          return;
         }
     }
 
@@ -364,9 +355,6 @@ picture_copied_for_read (GObject *source_object,
                      bg_source->cancellable,
                      picture_opened_for_read,
                      bg_source);
-
- out:
-  g_clear_error (&error);
 }
 
 static gboolean
@@ -393,9 +381,10 @@ static cairo_surface_t *
 get_content_loading_icon (BgSource *source)
 {
   GtkIconTheme *theme;
-  GtkIconInfo *icon_info;
-  GdkPixbuf *pixbuf, *ret;
-  GError *error = NULL;
+  g_autoptr(GtkIconInfo) icon_info = NULL;
+  g_autoptr(GdkPixbuf) pixbuf = NULL;
+  g_autoptr(GdkPixbuf) ret = NULL;
+  g_autoptr(GError) error = NULL;
   int scale_factor;
   cairo_surface_t *surface;
   int thumbnail_height;
@@ -416,8 +405,6 @@ get_content_loading_icon (BgSource *source)
   if (pixbuf == NULL)
     {
       g_warning ("Failed to load placeholder icon: %s", error->message);
-      g_clear_error (&error);
-      g_clear_object (&icon_info);
       return NULL;
     }
 
@@ -434,12 +421,9 @@ get_content_loading_icon (BgSource *source)
 			ret,
 			(thumbnail_width - gdk_pixbuf_get_width (pixbuf)) / 2,
 			(thumbnail_height - gdk_pixbuf_get_height (pixbuf)) / 2);
-  g_object_unref (pixbuf);
 
   scale_factor = bg_source_get_scale_factor (source);
   surface = gdk_cairo_surface_create_from_pixbuf (ret, scale_factor, NULL);
-  g_object_unref (ret);
-  g_clear_object (&icon_info);
 
   return surface;
 }
@@ -447,12 +431,11 @@ get_content_loading_icon (BgSource *source)
 static GFile *
 bg_pictures_source_get_cache_file (void)
 {
-  char *path;
+  g_autofree gchar *path = NULL;
   GFile *file;
 
   path = bg_pictures_source_get_cache_path ();
   file = g_file_new_for_path (path);
-  g_free (path);
 
   return file;
 }
@@ -464,18 +447,19 @@ add_single_file (BgPicturesSource     *bg_source,
                  guint64               mtime,
                  GtkTreeRowReference **ret_row_ref)
 {
-  CcBackgroundItem *item = NULL;
+  g_autoptr(CcBackgroundItem) item = NULL;
   CcBackgroundItemFlags flags = 0;
   GtkListStore *store;
   GtkTreeIter iter;
   GtkTreePath *path = NULL;
   GtkTreeRowReference *row_ref = NULL;
   cairo_surface_t *surface = NULL;
-  char *source_uri = NULL;
-  char *uri = NULL;
+  g_autofree gchar *source_uri = NULL;
+  g_autofree gchar *uri = NULL;
   gboolean needs_download;
   gboolean retval = FALSE;
-  GFile *pictures_dir, *cache_dir;
+  g_autoptr(GFile) pictures_dir = NULL;
+  g_autoptr(GFile) cache_dir = NULL;
   GrlMedia *media;
 
   /* find png and jpeg files */
@@ -491,8 +475,6 @@ add_single_file (BgPicturesSource     *bg_source,
   cache_dir = bg_pictures_source_get_cache_file ();
   needs_download = !g_file_has_parent (file, pictures_dir) &&
           !g_file_has_parent (file, cache_dir);
-  g_object_unref (pictures_dir);
-  g_object_unref (cache_dir);
 
   if (!needs_download)
     {
@@ -501,8 +483,7 @@ add_single_file (BgPicturesSource     *bg_source,
     }
   else
     {
-      source_uri = uri;
-      uri = NULL;
+      source_uri = g_steal_pointer (&uri);
     }
 
   item = cc_background_item_new (uri);
@@ -545,10 +526,10 @@ add_single_file (BgPicturesSource     *bg_source,
     }
   else
     {
-      GFile *native_file;
-      GFile *thumbnail_file = NULL;
-      gchar *native_dir;
-      gchar *native_path;
+      g_autoptr(GFile) native_file = NULL;
+      g_autoptr(GFile) thumbnail_file = NULL;
+      g_autofree gchar *native_dir = NULL;
+      g_autofree gchar *native_path = NULL;
       const gchar *title;
       const gchar *thumbnail_uri;
 
@@ -578,11 +559,6 @@ add_single_file (BgPicturesSource     *bg_source,
                          NULL,
                          picture_copied_for_read,
                          bg_source);
-
-      g_clear_object (&thumbnail_file);
-      g_object_unref (native_file);
-      g_free (native_dir);
-      g_free (native_path);
     }
 
   retval = TRUE;
@@ -597,10 +573,6 @@ add_single_file (BgPicturesSource     *bg_source,
     }
   gtk_tree_path_free (path);
   g_clear_pointer (&surface, (GDestroyNotify) cairo_surface_destroy);
-  g_clear_object (&item);
-  g_object_unref (file);
-  g_free (source_uri);
-  g_free (uri);
   return retval;
 }
 
@@ -648,7 +620,7 @@ bg_pictures_source_add (BgPicturesSource     *bg_source,
                         const char           *uri,
                         GtkTreeRowReference **ret_row_ref)
 {
-  GFile *file;
+  g_autoptr(GFile) file = NULL;
   GFileInfo *info;
   gboolean retval;
 
@@ -677,7 +649,7 @@ bg_pictures_source_remove (BgPicturesSource *bg_source,
   cont = gtk_tree_model_get_iter_first (model, &iter);
   while (cont)
     {
-      CcBackgroundItem *tmp_item;
+      g_autoptr(CcBackgroundItem) tmp_item = NULL;
       const char *tmp_uri;
 
       gtk_tree_model_get (model, &iter, 1, &tmp_item, -1);
@@ -693,7 +665,6 @@ bg_pictures_source_remove (BgPicturesSource *bg_source,
           retval = TRUE;
           break;
         }
-      g_object_unref (tmp_item);
       cont = gtk_tree_model_iter_next (model, &iter);
     }
   return retval;
@@ -721,7 +692,7 @@ file_info_async_ready (GObject      *source,
 {
   BgPicturesSource *bg_source;
   GList *files, *l;
-  GError *err = NULL;
+  g_autoptr(GError) err = NULL;
   GFile *parent;
 
   files = g_file_enumerator_next_files_finish (G_FILE_ENUMERATOR (source),
@@ -731,7 +702,6 @@ file_info_async_ready (GObject      *source,
     {
       if (!g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("Could not get pictures file information: %s", err->message);
-      g_error_free (err);
 
       g_list_foreach (files, (GFunc) g_object_unref, NULL);
       g_list_free (files);
@@ -748,7 +718,7 @@ file_info_async_ready (GObject      *source,
   for (l = files; l; l = g_list_next (l))
     {
       GFileInfo *info = l->data;
-      GFile *file;
+      g_autoptr(GFile) file = NULL;
 
       file = g_file_get_child (parent, g_file_info_get_name (info));
 
@@ -765,8 +735,8 @@ dir_enum_async_ready (GObject      *s,
                       gpointer      user_data)
 {
   BgPicturesSource *source = (BgPicturesSource *) user_data;
-  GFileEnumerator *enumerator;
-  GError *err = NULL;
+  g_autoptr(GFileEnumerator) enumerator = NULL;
+  g_autoptr(GError) err = NULL;
 
   enumerator = g_file_enumerate_children_finish (G_FILE (s), res, &err);
 
@@ -774,7 +744,6 @@ dir_enum_async_ready (GObject      *s,
     {
       if (!g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("Could not fill pictures source: %s", err->message);
-      g_error_free (err);
       return;
     }
 
@@ -785,7 +754,6 @@ dir_enum_async_ready (GObject      *s,
                                       source->cancellable,
                                       file_info_async_ready,
                                       user_data);
-  g_object_unref (enumerator);
 }
 
 char *
@@ -800,13 +768,12 @@ bg_pictures_source_get_cache_path (void)
 static char *
 bg_pictures_source_get_unique_filename (const char *uri)
 {
-  GChecksum *csum;
+  g_autoptr(GChecksum) csum = NULL;
   char *ret;
 
   csum = g_checksum_new (G_CHECKSUM_SHA256);
   g_checksum_update (csum, (guchar *) uri, -1);
   ret = g_strdup (g_checksum_get_string (csum));
-  g_checksum_free (csum);
 
   return ret;
 }
@@ -814,37 +781,29 @@ bg_pictures_source_get_unique_filename (const char *uri)
 char *
 bg_pictures_source_get_unique_path (const char *uri)
 {
-  GFile *parent, *file;
-  char *cache_path;
-  char *filename;
-  char *ret;
+  g_autoptr(GFile) parent = NULL;
+  g_autoptr(GFile) file = NULL;
+  g_autofree gchar *cache_path = NULL;
+  g_autofree gchar *filename = NULL;
 
   cache_path = bg_pictures_source_get_cache_path ();
   parent = g_file_new_for_path (cache_path);
-  g_free (cache_path);
 
   filename = bg_pictures_source_get_unique_filename (uri);
   file = g_file_get_child (parent, filename);
-  g_free (filename);
-  ret = g_file_get_path (file);
-  g_object_unref (file);
-  g_object_unref (parent);
 
-  return ret;
+  return g_file_get_path (file);
 }
 
 gboolean
 bg_pictures_source_is_known (BgPicturesSource *bg_source,
 			     const char       *uri)
 {
-  gboolean retval;
-  char *uuid;
+  g_autofree gchar *uuid = NULL;
 
   uuid = bg_pictures_source_get_unique_filename (uri);
-  retval = (GPOINTER_TO_INT (g_hash_table_lookup (bg_source->known_items, uuid)));
-  g_free (uuid);
 
-  return retval;
+  return GPOINTER_TO_INT (g_hash_table_lookup (bg_source->known_items, uuid));
 }
 
 static int
@@ -853,8 +812,8 @@ sort_func (GtkTreeModel *model,
            GtkTreeIter *b,
            BgPicturesSource *bg_source)
 {
-  CcBackgroundItem *item_a;
-  CcBackgroundItem *item_b;
+  g_autoptr(CcBackgroundItem) item_a = NULL;
+  g_autoptr(CcBackgroundItem) item_b = NULL;
   guint64 modified_a;
   guint64 modified_b;
   int retval;
@@ -870,9 +829,6 @@ sort_func (GtkTreeModel *model,
   modified_b = cc_background_item_get_modified (item_b);
 
   retval = modified_b - modified_a;
-
-  g_object_unref (item_a);
-  g_object_unref (item_b);
 
   return retval;
 }
@@ -896,10 +852,6 @@ file_info_ready (GObject      *object,
       return;
     }
 
-  /* Up the ref count so we can re-use the add_single_item code path which
-   * reduces the ref count.
-   */
-  g_object_ref (file);
   add_single_file_from_info (BG_PICTURES_SOURCE (user_data), file, info, NULL);
 }
 
@@ -907,7 +859,7 @@ static void
 file_added (GFile            *file,
             BgPicturesSource *self)
 {
-  char *uri;
+  g_autofree gchar *uri = NULL;
   uri = g_file_get_uri (file);
 
   if (!bg_pictures_source_is_known (self, uri))
@@ -920,8 +872,6 @@ file_added (GFile            *file,
                                file_info_ready,
                                self);
     }
-
-  g_free (uri);
 }
 
 static void
@@ -932,7 +882,7 @@ files_changed_cb (GFileMonitor      *monitor,
                   gpointer           user_data)
 {
   BgPicturesSource *self = BG_PICTURES_SOURCE (user_data);
-  char *uri;
+  g_autofree gchar *uri = NULL;
 
   switch (event_type)
     {
@@ -943,7 +893,6 @@ files_changed_cb (GFileMonitor      *monitor,
       case G_FILE_MONITOR_EVENT_DELETED:
         uri = g_file_get_uri (file);
         bg_pictures_source_remove (self, uri);
-        g_free (uri);
         break;
 
       default:
@@ -956,7 +905,7 @@ monitor_path (BgPicturesSource *self,
               const char       *path)
 {
   GFileMonitor *monitor;
-  GFile *dir;
+  g_autoptr(GFile) dir = NULL;
 
   g_mkdir_with_parents (path, USER_DIR_MODE);
 
@@ -978,15 +927,13 @@ monitor_path (BgPicturesSource *self,
                       G_CALLBACK (files_changed_cb),
                       self);
 
-  g_object_unref (dir);
-
   return monitor;
 }
 
 static void
 media_found_cb (BgPicturesSource *self, GrlMedia *media)
 {
-  GFile *file = NULL;
+  g_autoptr(GFile) file = NULL;
   const gchar *uri;
 
   uri = grl_media_get_url (media);
@@ -999,7 +946,7 @@ static void
 bg_pictures_source_init (BgPicturesSource *self)
 {
   const gchar *pictures_path;
-  char *cache_path;
+  g_autofree gchar *cache_path = NULL;
   GtkListStore *store;
 
   self->cancellable = g_cancellable_new ();
@@ -1016,7 +963,6 @@ bg_pictures_source_init (BgPicturesSource *self)
 
   cache_path = bg_pictures_source_get_cache_path ();
   self->cache_dir_monitor = monitor_path (self, cache_path);
-  g_free (cache_path);
 
   self->grl_miner = cc_background_grilo_miner_new ();
   g_signal_connect_swapped (self->grl_miner, "media-found", G_CALLBACK (media_found_cb), self);

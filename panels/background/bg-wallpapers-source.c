@@ -43,9 +43,9 @@ load_wallpapers (gchar              *key,
                  BgWallpapersSource *source)
 {
   GtkTreeIter iter;
-  GdkPixbuf *pixbuf;
+  g_autoptr(GdkPixbuf) pixbuf = NULL;
   GtkListStore *store = bg_source_get_liststore (BG_SOURCE (source));
-  cairo_surface_t *surface = NULL;
+  cairo_surface_t *surface;
   gboolean deleted;
   gint scale_factor;
   gint thumbnail_height;
@@ -65,7 +65,7 @@ load_wallpapers (gchar              *key,
 					     thumbnail_width, thumbnail_height,
 					     scale_factor);
   if (pixbuf == NULL)
-    goto out;
+    return;
 
   surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
   gtk_list_store_set (store, &iter,
@@ -73,11 +73,7 @@ load_wallpapers (gchar              *key,
                       1, item,
                       2, cc_background_item_get_name (item),
                       -1);
-
- out:
   g_clear_pointer (&surface, (GDestroyNotify) cairo_surface_destroy);
-  if (pixbuf)
-    g_object_unref (pixbuf);
 }
 
 static void
@@ -100,22 +96,20 @@ static void
 load_default_bg (BgWallpapersSource *self)
 {
   const char * const *system_data_dirs;
-  char *filename;
   guint i;
 
   /* FIXME We could do this nicer if we had the XML source in GSettings */
 
   system_data_dirs = g_get_system_data_dirs ();
   for (i = 0; system_data_dirs[i]; i++) {
+    g_autofree gchar *filename = NULL;
+
     filename = g_build_filename (system_data_dirs[i],
 				 "gnome-background-properties",
 				 "adwaita.xml",
 				 NULL);
-    if (cc_background_xml_load_xml (self->xml, filename)) {
-      g_free (filename);
+    if (cc_background_xml_load_xml (self->xml, filename))
       break;
-    }
-    g_free (filename);
   }
 }
 

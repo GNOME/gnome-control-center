@@ -76,8 +76,6 @@ enum {
         PROP_MODIFIED
 };
 
-static void     cc_background_item_class_init     (CcBackgroundItemClass *klass);
-static void     cc_background_item_init           (CcBackgroundItem      *background_item);
 static void     cc_background_item_finalize       (GObject               *object);
 
 G_DEFINE_TYPE (CcBackgroundItem, cc_background_item, G_TYPE_OBJECT)
@@ -87,9 +85,6 @@ static GdkPixbuf *slideshow_emblem = NULL;
 static GdkPixbuf *
 get_emblemed_pixbuf (CcBackgroundItem *item, GdkPixbuf *pixbuf, gint scale_factor)
 {
-        GdkPixbuf *retval;
-        GIcon *icon = NULL;
-        GtkIconInfo *icon_info = NULL;
         int eh;
         int ew;
         int h;
@@ -97,12 +92,12 @@ get_emblemed_pixbuf (CcBackgroundItem *item, GdkPixbuf *pixbuf, gint scale_facto
         int x;
         int y;
 
-        retval = g_object_ref (pixbuf);
-
         if (item->slideshow_emblem == NULL) {
                 if (slideshow_emblem == NULL) {
-                        GError *error = NULL;
+                        g_autoptr(GIcon) icon = NULL;
                         GtkIconTheme *theme;
+                        g_autoptr(GtkIconInfo) icon_info = NULL;
+                        g_autoptr(GError) error = NULL;
 
                         icon = g_themed_icon_new ("slideshow-emblem");
                         theme = gtk_icon_theme_get_default ();
@@ -115,14 +110,13 @@ get_emblemed_pixbuf (CcBackgroundItem *item, GdkPixbuf *pixbuf, gint scale_facto
                         if (icon_info == NULL) {
                                 g_warning ("Your icon theme is missing the slideshow-emblem icon, "
                                            "please file a bug against it");
-                                goto out;
+                                return g_object_ref (pixbuf);
                         }
 
                         slideshow_emblem = gtk_icon_info_load_icon (icon_info, &error);
                         if (slideshow_emblem == NULL) {
                                 g_warning ("Failed to load slideshow emblem: %s", error->message);
-                                g_error_free (error);
-                                goto out;
+                                return g_object_ref (pixbuf);
                         }
 
                         g_object_add_weak_pointer (G_OBJECT (slideshow_emblem), (gpointer *) (&slideshow_emblem));
@@ -141,10 +135,7 @@ get_emblemed_pixbuf (CcBackgroundItem *item, GdkPixbuf *pixbuf, gint scale_facto
 
         gdk_pixbuf_composite (slideshow_emblem, pixbuf, x, y, ew, eh, x, y, 1.0, 1.0, GDK_INTERP_BILINEAR, 255);
 
- out:
-        g_clear_object (&icon_info);
-        g_clear_object (&icon);
-        return retval;
+        return g_object_ref (pixbuf);
 }
 
 static void
@@ -154,15 +145,12 @@ set_bg_properties (CcBackgroundItem *item)
         GdkColor scolor = { 0, 0, 0, 0 };
 
         if (item->uri) {
-		GFile *file;
-		char *filename;
+		g_autoptr(GFile) file = NULL;
+		g_autofree gchar *filename = NULL;
 
 		file = g_file_new_for_commandline_arg (item->uri);
 		filename = g_file_get_path (file);
-		g_object_unref (file);
-
 		gnome_bg_set_filename (item->bg, filename);
-		g_free (filename);
 	}
 
         if (item->primary_color != NULL) {
@@ -233,8 +221,8 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                         int                           frame,
                                         gboolean                      force_size)
 {
-        GdkPixbuf *pixbuf = NULL;
-        GdkPixbuf *retval = NULL;
+        g_autoptr(GdkPixbuf) pixbuf = NULL;
+        g_autoptr(GdkPixbuf) retval = NULL;
 
 	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
 	g_return_val_if_fail (width > 0 && height > 0, NULL);
@@ -271,9 +259,8 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
             && frame != -2
             && gnome_bg_changes_with_time (item->bg)) {
                 retval = get_emblemed_pixbuf (item, pixbuf, scale_factor);
-                g_object_unref (pixbuf);
         } else {
-                retval = pixbuf;
+                retval = g_steal_pointer (&pixbuf);
 	}
 
         gnome_bg_get_image_size (item->bg,
@@ -285,7 +272,7 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
 
         update_size (item);
 
-        return retval;
+        return g_steal_pointer (&retval);
 }
 
 
@@ -303,10 +290,11 @@ static void
 update_info (CcBackgroundItem *item,
 	     GFileInfo        *_info)
 {
-        GFile     *file;
-        GFileInfo *info;
+        g_autoptr(GFileInfo) info = NULL;
 
 	if (_info == NULL) {
+		g_autoptr(GFile) file = NULL;
+
 		file = g_file_new_for_uri (item->uri);
 
 		info = g_file_query_info (file,
@@ -318,7 +306,6 @@ update_info (CcBackgroundItem *item,
 					  G_FILE_QUERY_INFO_NONE,
 					  NULL,
 					  NULL);
-		g_object_unref (file);
 	} else {
 		info = g_object_ref (_info);
 	}
@@ -338,11 +325,8 @@ update_info (CcBackgroundItem *item,
 
                 item->mime_type = g_strdup (g_file_info_get_content_type (info));
                 if (item->modified == 0)
-                  item->modified = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
+                        item->modified = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
         }
-
-        if (info != NULL)
-                g_object_unref (info);
 }
 
 gboolean
@@ -367,13 +351,12 @@ cc_background_item_load (CcBackgroundItem *item,
 	/* FIXME we should handle XML files as well */
         if (item->mime_type != NULL &&
             g_str_has_prefix (item->mime_type, "image/")) {
-		char *filename;
+		g_autofree gchar *filename = NULL;
 
 		filename = g_filename_from_uri (item->uri, NULL, NULL);
 		gdk_pixbuf_get_file_info (filename,
 					  &item->width,
 					  &item->height);
-		g_free (filename);
 		update_size (item);
 	}
 
@@ -689,8 +672,8 @@ cc_background_item_constructor (GType                  type,
         CcBackgroundItem      *background_item;
 
         background_item = CC_BACKGROUND_ITEM (G_OBJECT_CLASS (cc_background_item_parent_class)->constructor (type,
-                                                                                                                         n_construct_properties,
-                                                                                                                         construct_properties));
+                                                                                                             n_construct_properties,
+                                                                                                             construct_properties));
 
         return G_OBJECT (background_item);
 }
@@ -919,7 +902,7 @@ enum_to_str (GType type,
 void
 cc_background_item_dump (CcBackgroundItem *item)
 {
-	GString *flags;
+	g_autoptr(GString) flags = NULL;
 	int i;
 
 	g_return_if_fail (CC_IS_BACKGROUND_ITEM (item));
@@ -938,7 +921,6 @@ cc_background_item_dump (CcBackgroundItem *item)
 	if (flags->len == 0)
 		g_string_append (flags, "-none-");
 	g_debug ("flags:\t\t\t%s", flags->str);
-	g_string_free (flags, TRUE);
 	if (item->primary_color)
 		g_debug ("pcolor:\t\t\t%s", item->primary_color);
 	if (item->secondary_color)
@@ -961,7 +943,8 @@ static gboolean
 files_equal (const char *a,
 	     const char *b)
 {
-	GFile *file1, *file2;
+	g_autoptr(GFile) file1 = NULL;
+	g_autoptr(GFile) file2 = NULL;
 	gboolean retval;
 
 	if (a == NULL &&
@@ -978,8 +961,6 @@ files_equal (const char *a,
 		retval = FALSE;
 	else
 		retval = TRUE;
-	g_object_unref (file1);
-	g_object_unref (file2);
 
 	return retval;
 }

@@ -349,7 +349,7 @@ cc_background_panel_drag_items (GtkWidget *widget,
 {
   gint i;
   char *uri;
-  gchar **uris;
+  g_auto(GStrv) uris = NULL;
   gboolean ret = FALSE;
 
   if (info == COLOR)
@@ -371,8 +371,6 @@ cc_background_panel_drag_items (GtkWidget *widget,
           ret = TRUE;
         }
     }
-
-  g_strfreev (uris);
 
 out:
   gtk_drag_finish (context, ret, FALSE, time);
@@ -452,10 +450,12 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   GtkWidget *label;
   GtkWidget *switcher;
   GtkStyleContext *context;
-  gchar *markup, *href;
+  g_autofree gchar *markup = NULL;
+  g_autofree gchar *markup2 = NULL;
+  g_autofree gchar *href = NULL;
   const gchar *pictures_dir;
-  gchar *pictures_dir_basename;
-  gchar *pictures_dir_uri;
+  g_autofree gchar *pictures_dir_basename = NULL;
+  g_autofree gchar *pictures_dir_uri = NULL;
   GtkTargetList *target_list;
 
   chooser->wallpapers_source = bg_wallpapers_source_new (GTK_WINDOW (chooser));
@@ -526,8 +526,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   markup = g_markup_printf_escaped ("<b><span size='large'>%s</span></b>",
                                     /* translators: No pictures were found */
                                     _("No Pictures Found"));
-  gtk_label_set_markup (GTK_LABEL (label), (const gchar *) markup);
-  g_free (markup);
+  gtk_label_set_markup (GTK_LABEL (label), markup);
   gtk_widget_show (label);
   gtk_container_add (GTK_CONTAINER (labels_grid), label);
   label = gtk_label_new ("");
@@ -550,15 +549,11 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
 
   pictures_dir_uri = g_filename_to_uri (pictures_dir, NULL, NULL);
   href = g_markup_printf_escaped ("<a href=\"%s\">%s</a>", pictures_dir_uri, pictures_dir_basename);
-  g_free (pictures_dir_uri);
-  g_free (pictures_dir_basename);
 
   /* translators: %s here is the name of the Pictures directory, the string should be translated in
    * the context "You can add images to your Pictures folder and they will show up here" */
-  markup = g_strdup_printf (_("You can add images to your %s folder and they will show up here"), href);
-  g_free (href);
-  gtk_label_set_markup (GTK_LABEL (label), (const gchar *) markup);
-  g_free (markup);
+  markup2 = g_strdup_printf (_("You can add images to your %s folder and they will show up here"), href);
+  gtk_label_set_markup (GTK_LABEL (label), markup2);
   gtk_widget_show (label);
   gtk_container_add (GTK_CONTAINER (labels_grid), label);
 

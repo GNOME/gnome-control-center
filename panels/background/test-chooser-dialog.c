@@ -8,11 +8,10 @@ on_dialog_response (GtkDialog *dialog,
 {
 	g_debug ("response: %d", response_id);
 	if (response_id == GTK_RESPONSE_OK) {
-		CcBackgroundItem *item;
+		g_autoptr(CcBackgroundItem) item = NULL;
 
 		item = cc_background_chooser_dialog_get_item (CC_BACKGROUND_CHOOSER_DIALOG (dialog));
 		cc_background_item_dump (item);
-		g_object_unref (item);
 	}
 	gtk_widget_destroy (GTK_WIDGET (dialog));
 	gtk_main_quit ();
