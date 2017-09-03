@@ -831,6 +831,7 @@ cc_window_new (GtkApplication *application)
                        "title", _("Settings"),
                        "icon-name", DEFAULT_WINDOW_ICON_NAME,
                        "window-position", GTK_WIN_POS_CENTER,
+                       "show-menubar", FALSE,
                        NULL);
 }
 
