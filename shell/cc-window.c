@@ -721,8 +721,36 @@ window_key_press_event (GtkWidget   *win,
 }
 
 static void
+split_decorations (GtkSettings *settings,
+                   GParamSpec  *pspec,
+                   CcWindow    *self)
+{
+  gchar *layout, *layout_start, *layout_end;
+  gchar **buttons;
+
+  g_object_get (settings, "gtk-decoration-layout", &layout, NULL);
+
+  buttons = g_strsplit (layout, ":", -1);
+  layout_start = g_strconcat ("", buttons[0], ":", NULL);
+
+  if (g_strv_length (buttons) > 1)
+      layout_end = g_strconcat (":", buttons[1], NULL);
+  else
+      layout_end = g_strdup ("");
+
+  gtk_header_bar_set_decoration_layout (GTK_HEADER_BAR (self->header), layout_start);
+  gtk_header_bar_set_decoration_layout (GTK_HEADER_BAR (self->panel_headerbar), layout_end);
+
+  g_free (layout_start);
+  g_free (layout_end);
+  g_strfreev (buttons);
+  g_free (layout);
+}
+
+static void
 create_window (CcWindow *self)
 {
+  GtkSettings *settings;
   AtkObject *accessible;
 
   /* previous button */
@@ -765,6 +793,15 @@ create_window (CcWindow *self)
   gtk_widget_add_events (GTK_WIDGET (self), GDK_BUTTON_RELEASE_MASK);
   g_signal_connect (self, "button-release-event",
                     G_CALLBACK (window_button_release_event), self);
+
+  /* handle decorations for the split headers. */
+  settings = gtk_settings_get_default ();
+  g_signal_connect (settings,
+                    "notify::gtk-decoration-layout",
+                    G_CALLBACK (split_decorations),
+                    self);
+
+  split_decorations (settings, NULL, self);
 }
 
 static void
