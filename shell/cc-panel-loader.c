@@ -197,6 +197,10 @@ cc_panel_loader_fill_model (CcShellModel *model)
       if (G_UNLIKELY (category < 0))
         continue;
 
+      /* Consult OnlyShowIn/NotShowIn for desktop environments */
+      if (!g_desktop_app_info_get_show_in (app, NULL))
+        continue;
+
       /* Only add the panel when it is not hidden, e.g. the Details subpanels
        * that are only visible in the new Shell.
        */
