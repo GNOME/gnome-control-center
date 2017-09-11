@@ -1,10 +1,10 @@
 appdata = 'gnome-control-center.appdata.xml'
 
-custom_target(
+i18n.merge_file(
   appdata,
   input: appdata + '.in',
   output: appdata,
-  command: intltool_xml_cmd,
+  po_dir: po_dir,
   install: true,
   install_dir: join_paths(control_center_datadir, 'metainfo')
 )

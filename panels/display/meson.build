@@ -7,13 +7,12 @@ desktop_in = configure_file(
   configuration: desktop_conf
 )
 
-# FIXME: You will need a recent intltool or the patch from this bug
-# http://bugzilla.gnome.org/show_bug.cgi?id=462312
-custom_target(
+i18n.merge_file(
   desktop,
+  type: 'desktop',
   input: desktop_in,
   output: desktop,
-  command: intltool_desktop_cmd,
+  po_dir: po_dir,
   install: true,
   install_dir: control_center_desktopdir
 )

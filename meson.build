@@ -234,11 +234,12 @@ desktop_conf = configuration_data()
 desktop_conf.set('VERSION', meson.project_version())
 
 po_dir = join_paths(meson.source_root(), 'po')
+its_dir = join_paths(meson.source_root(), 'gettext')
 
-intltool_merge = find_program('intltool-merge')
-intltool_cache = join_paths(po_dir, '.intltool-merge-cache')
-intltool_desktop_cmd = [intltool_merge, '-d', '-u', '-c', intltool_cache, po_dir, '@INPUT@', '@OUTPUT@']
-intltool_xml_cmd = [intltool_merge, '-x', '-u', '-c', intltool_cache, po_dir, '@INPUT@', '@OUTPUT@']
+install_subdir(
+  'gettext',
+  install_dir: control_center_datadir
+)
 
 top_inc = include_directories('.')
 shell_inc = include_directories('shell')
