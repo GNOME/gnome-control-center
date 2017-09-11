@@ -15,11 +15,12 @@ foreach name: panel_names
     configuration: desktop_conf
   )
 
-  custom_target(
+  i18n.merge_file(
     desktop,
+    type: 'desktop',
     input: desktop_in,
     output: desktop,
-    command: intltool_desktop_cmd,
+    po_dir: po_dir,
     install: true,
     install_dir: control_center_desktopdir
   )

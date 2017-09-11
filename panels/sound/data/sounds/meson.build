@@ -21,11 +21,12 @@ metadata_in = configure_file(
   configuration: metadata_conf
 )
 
-custom_target(
+i18n.merge_file(
   metadata,
   input: metadata_in,
   output: metadata,
-  command: intltool_xml_cmd,
+  po_dir: po_dir,
+  data_dirs: its_dir,
   install: true,
   install_dir: join_paths(control_center_pkgdatadir, 'sounds')
 )

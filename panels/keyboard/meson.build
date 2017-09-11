@@ -7,11 +7,12 @@ desktop_in = configure_file(
   configuration: desktop_conf
 )
 
-custom_target(
+i18n.merge_file(
   desktop,
+  type: 'desktop',
   input: desktop_in,
   output: desktop,
-  command: intltool_desktop_cmd,
+  po_dir: po_dir,
   install: true,
   install_dir: control_center_desktopdir
 )
@@ -53,11 +54,11 @@ xml_files = [
 ]
 
 foreach file: xml_files
-  custom_target(
+  i18n.merge_file(
     file,
     input: file + '.in',
     output: file,
-    command: [intltool_merge, '-x', '-u', '--no-translations', '@INPUT@', '@OUTPUT@'],
+    po_dir: po_dir,
     install: true,
     install_dir: join_paths(control_center_pkgdatadir, 'keybindings')
   )
