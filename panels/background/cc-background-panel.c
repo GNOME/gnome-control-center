@@ -204,10 +204,10 @@ get_save_path (const char *filename)
                            NULL);
 }
 
-static void
-update_display_preview (CcBackgroundPanel *panel,
-                        GtkWidget         *widget,
-                        CcBackgroundItem  *current_background)
+static GdkPixbuf*
+get_or_create_cached_pixbuf (CcBackgroundPanel *panel,
+                             GtkWidget         *widget,
+                             CcBackgroundItem  *background)
 {
   CcBackgroundPanelPrivate *priv = panel->priv;
   GtkAllocation allocation;
@@ -215,47 +215,49 @@ update_display_preview (CcBackgroundPanel *panel,
   const gint preview_height = 168;
   gint scale_factor;
   GdkPixbuf *pixbuf;
+
+  pixbuf = g_object_get_data (G_OBJECT (background), "pixbuf");
+  if (pixbuf == NULL)
+    {
+      if (background == priv->current_background &&
+          priv->display_screenshot != NULL)
+        {
+          pixbuf = gdk_pixbuf_scale_simple (priv->display_screenshot,
+                                            preview_width,
+                                            preview_height,
+                                            GDK_INTERP_BILINEAR);
+        }
+      else
+        {
+          gtk_widget_get_allocation (widget, &allocation);
+          scale_factor = gtk_widget_get_scale_factor (widget);
+          pixbuf = cc_background_item_get_frame_thumbnail (background,
+                                                           priv->thumb_factory,
+                                                           preview_width,
+                                                           preview_height,
+                                                           scale_factor,
+                                                           -2, TRUE);
+        }
+      g_object_set_data_full (G_OBJECT (background), "pixbuf", pixbuf, g_object_unref);
+    }
+  return pixbuf;
+}
+
+static void
+update_display_preview (CcBackgroundPanel *panel,
+                        GtkWidget         *widget,
+                        CcBackgroundItem  *background)
+{
+  GdkPixbuf *pixbuf;
   cairo_t *cr;
 
-  gtk_widget_get_allocation (widget, &allocation);
-
-  if (!current_background)
-    return;
-
-  scale_factor = gtk_widget_get_scale_factor (widget);
-  pixbuf = cc_background_item_get_frame_thumbnail (current_background,
-                                                   priv->thumb_factory,
-                                                   preview_width,
-                                                   preview_height,
-                                                   scale_factor,
-                                                   -2, TRUE);
+  pixbuf = get_or_create_cached_pixbuf (panel, widget, background);
 
   cr = gdk_cairo_create (gtk_widget_get_window (widget));
   gdk_cairo_set_source_pixbuf (cr,
                                pixbuf,
                                0, 0);
   cairo_paint (cr);
-  g_object_unref (pixbuf);
-
-  pixbuf = NULL;
-  if (current_background == priv->current_background &&
-      panel->priv->display_screenshot != NULL)
-    {
-      pixbuf = gdk_pixbuf_scale_simple (panel->priv->display_screenshot,
-                                        preview_width,
-                                        preview_height,
-                                        GDK_INTERP_BILINEAR);
-    }
-
-  if (pixbuf)
-    {
-      gdk_cairo_set_source_pixbuf (cr,
-                                   pixbuf,
-                                   0, 0);
-      cairo_paint (cr);
-      g_object_unref (pixbuf);
-    }
-
   cairo_destroy (cr);
 }
 
@@ -338,6 +340,8 @@ on_screenshot_finished (GObject *source,
                                                                  0, 0,
                                                                  data->monitor_rect.width,
                                                                  data->monitor_rect.height);
+  /* invalidate existing cached pixbuf */
+  g_object_set_data (G_OBJECT (priv->current_background), "pixbuf", NULL);
 
   /* remove the temporary file created by the shell */
   g_unlink (panel->priv->screenshot_path);
