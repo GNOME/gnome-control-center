@@ -7,12 +7,10 @@
     <property name="show_tabs">False</property>
     <property name="show_border">False</property>
     <child>
-      <object class="GtkTable" id="table8">
+      <object class="GtkGrid" id="eap_tls_grid">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="valign">start</property>
-        <property name="n_rows">6</property>
-        <property name="n_columns">2</property>
         <property name="column_spacing">6</property>
         <property name="row_spacing">6</property>
         <child>
@@ -28,20 +26,20 @@
             <property name="mnemonic_widget">eap_tls_identity_entry</property>
           </object>
           <packing>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options"/>
+            <property name="left_attach">0</property>
+            <property name="top_attach">0</property>
           </packing>
         </child>
         <child>
           <object class="GtkEntry" id="eap_tls_identity_entry">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="hexpand">True</property>
             <property name="activates_default">True</property>
           </object>
           <packing>
             <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
-            <property name="y_options"/>
+            <property name="top_attach">0</property>
           </packing>
         </child>
         <child>
@@ -54,10 +52,19 @@
             <property name="mnemonic_widget">eap_tls_user_cert_button</property>
           </object>
           <packing>
+            <property name="left_attach">0</property>
             <property name="top_attach">1</property>
-            <property name="bottom_attach">2</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options"/>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFileChooserButton" id="eap_tls_user_cert_button">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="hexpand">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">1</property>
           </packing>
         </child>
         <child>
@@ -70,24 +77,19 @@
             <property name="mnemonic_widget">eap_tls_ca_cert_button</property>
           </object>
           <packing>
+            <property name="left_attach">0</property>
             <property name="top_attach">2</property>
-            <property name="bottom_attach">3</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options"/>
           </packing>
         </child>
         <child>
           <object class="GtkFileChooserButton" id="eap_tls_ca_cert_button">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="hexpand">True</property>
           </object>
           <packing>
             <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
             <property name="top_attach">2</property>
-            <property name="bottom_attach">3</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options">GTK_FILL</property>
           </packing>
         </child>
         <child>
@@ -95,17 +97,14 @@
             <property name="label" translatable="yes">No CA certificate is _required</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="hexpand">True</property>
             <property name="receives_default">False</property>
             <property name="use_underline">True</property>
             <property name="draw_indicator">True</property>
           </object>
           <packing>
             <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
             <property name="top_attach">3</property>
-            <property name="bottom_attach">4</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options"/>
           </packing>
         </child>
         <child>
@@ -118,24 +117,19 @@
             <property name="mnemonic_widget">eap_tls_private_key_button</property>
           </object>
           <packing>
+            <property name="left_attach">0</property>
             <property name="top_attach">4</property>
-            <property name="bottom_attach">5</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options"/>
           </packing>
         </child>
         <child>
           <object class="GtkFileChooserButton" id="eap_tls_private_key_button">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="hexpand">True</property>
           </object>
           <packing>
             <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
             <property name="top_attach">4</property>
-            <property name="bottom_attach">5</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options">GTK_FILL</property>
           </packing>
         </child>
         <child>
@@ -148,25 +142,21 @@
             <property name="mnemonic_widget">eap_tls_private_key_password_entry</property>
           </object>
           <packing>
+            <property name="left_attach">0</property>
             <property name="top_attach">5</property>
-            <property name="bottom_attach">6</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options"/>
           </packing>
         </child>
         <child>
           <object class="GtkEntry" id="eap_tls_private_key_password_entry">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="hexpand">True</property>
             <property name="visibility">False</property>
             <property name="activates_default">True</property>
           </object>
           <packing>
             <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
             <property name="top_attach">5</property>
-            <property name="bottom_attach">6</property>
-            <property name="y_options"/>
           </packing>
         </child>
         <child>
@@ -174,31 +164,14 @@
             <property name="label" translatable="yes">Sho_w password</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="hexpand">True</property>
             <property name="receives_default">False</property>
             <property name="use_underline">True</property>
             <property name="draw_indicator">True</property>
           </object>
           <packing>
             <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
             <property name="top_attach">6</property>
-            <property name="bottom_attach">7</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options"/>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkFileChooserButton" id="eap_tls_user_cert_button">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
-            <property name="top_attach">1</property>
-            <property name="bottom_attach">2</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options">GTK_FILL</property>
           </packing>
         </child>
       </object>
