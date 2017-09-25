@@ -25,45 +25,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_INFO_PANEL cc_info_panel_get_type()
-
-#define CC_INFO_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_INFO_PANEL, CcInfoPanel))
-
-#define CC_INFO_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_INFO_PANEL, CcInfoPanelClass))
-
-#define CC_IS_INFO_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_INFO_PANEL))
-
-#define CC_IS_INFO_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_INFO_PANEL))
-
-#define CC_INFO_PANEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_INFO_PANEL, CcInfoPanelClass))
-
-typedef struct _CcInfoPanel CcInfoPanel;
-typedef struct _CcInfoPanelClass CcInfoPanelClass;
-typedef struct _CcInfoPanelPrivate CcInfoPanelPrivate;
-
-struct _CcInfoPanel
-{
-  CcPanel parent;
-
-  CcInfoPanelPrivate *priv;
-};
-
-struct _CcInfoPanelClass
-{
-  CcPanelClass parent_class;
-};
-
-GType cc_info_panel_get_type (void) G_GNUC_CONST;
+#define CC_TYPE_INFO_PANEL (cc_info_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcInfoPanel, cc_info_panel, CC, INFO_PANEL, CcPanel)
 
 G_END_DECLS
 

@@ -47,24 +47,23 @@
 
 #include "gsd-disk-space-helper.h"
 
-#define WID(w) (GtkWidget *) gtk_builder_get_object (self->priv->builder, w)
+#define WID(w) (GtkWidget *) gtk_builder_get_object (self->builder, w)
+
+struct _CcInfoPanel
+{
+  CcPanel     parent_instance;
+
+  GtkBuilder *builder;
+};
 
 CC_PANEL_REGISTER (CcInfoPanel, cc_info_panel)
-
-#define INFO_PANEL_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_INFO_PANEL, CcInfoPanelPrivate))
-
-struct _CcInfoPanelPrivate
-{
-  GtkBuilder    *builder;
-};
 
 static void
 cc_info_panel_dispose (GObject *object)
 {
-  CcInfoPanelPrivate *priv = CC_INFO_PANEL (object)->priv;
+  CcInfoPanel *self = CC_INFO_PANEL (object);
 
-  g_clear_object (&priv->builder);
+  g_clear_object (&self->builder);
 
   G_OBJECT_CLASS (cc_info_panel_parent_class)->dispose (object);
 }
@@ -73,8 +72,6 @@ static void
 cc_info_panel_class_init (CcInfoPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (CcInfoPanelPrivate));
 
   object_class->dispose = cc_info_panel_dispose;
 
@@ -179,12 +176,11 @@ cc_info_panel_init (CcInfoPanel *self)
 {
   GError *error = NULL;
 
-  self->priv = INFO_PANEL_PRIVATE (self);
   g_resources_register (cc_info_get_resource ());
 
-  self->priv->builder = gtk_builder_new ();
+  self->builder = gtk_builder_new ();
 
-  if (gtk_builder_add_from_resource (self->priv->builder,
+  if (gtk_builder_add_from_resource (self->builder,
                                      "/org/gnome/control-center/info/info.ui",
                                      &error) == 0)
     {
