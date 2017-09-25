@@ -32,7 +32,8 @@ typedef struct
 static char *
 prettify_info (const char *info)
 {
-  char *pretty;
+  g_autofree char *escaped = NULL;
+  g_autofree gchar *pretty = NULL;
   int   i;
   static const ReplaceStrings rs[] = {
     { "Mesa DRI ", ""},
@@ -49,22 +50,19 @@ prettify_info (const char *info)
   if (*info == '\0')
     return NULL;
 
-  pretty = g_markup_escape_text (info, -1);
-  pretty = g_strchug (g_strchomp (pretty));
+  escaped = g_markup_escape_text (info, -1);
+  pretty = g_strdup (g_strstrip (escaped));
 
   for (i = 0; i < G_N_ELEMENTS (rs); i++)
     {
-      GError *error;
-      GRegex *re;
-      char   *new;
-
-      error = NULL;
+      g_autoptr(GError) error = NULL;
+      g_autoptr(GRegex) re = NULL;
+      g_autofree gchar *new = NULL;
 
       re = g_regex_new (rs[i].regex, 0, 0, &error);
       if (re == NULL)
         {
           g_warning ("Error building regex: %s", error->message);
-          g_error_free (error);
           continue;
         }
 
@@ -76,38 +74,33 @@ prettify_info (const char *info)
                              0,
                              &error);
 
-      g_regex_unref (re);
-
       if (error != NULL)
         {
           g_warning ("Error replacing %s: %s", rs[i].regex, error->message);
-          g_error_free (error);
           continue;
         }
 
       g_free (pretty);
-      pretty = new;
+      pretty = g_steal_pointer (&new);
     }
 
-  return pretty;
+  return g_steal_pointer (&pretty);
 }
 
 static char *
 remove_duplicate_whitespace (const char *old)
 {
-  char   *new;
-  GRegex *re;
-  GError *error;
+  g_autofree gchar *new = NULL;
+  g_autoptr(GRegex) re = NULL;
+  g_autoptr(GError) error = NULL;
 
   if (old == NULL)
     return NULL;
 
-  error = NULL;
   re = g_regex_new ("[ \t\n\r]+", G_REGEX_MULTILINE, 0, &error);
   if (re == NULL)
     {
       g_warning ("Error building regex: %s", error->message);
-      g_error_free (error);
       return g_strdup (old);
     }
   new = g_regex_replace (re,
@@ -117,25 +110,20 @@ remove_duplicate_whitespace (const char *old)
                          " ",
                          0,
                          &error);
-  g_regex_unref (re);
   if (new == NULL)
     {
       g_warning ("Error replacing string: %s", error->message);
-      g_error_free (error);
       return g_strdup (old);
     }
 
-  return new;
+  return g_steal_pointer (&new);
 }
 
 char *
 info_cleanup (const char *input)
 {
-  char *pretty, *ret;
+  g_autofree char *pretty;
 
   pretty = prettify_info (input);
-  ret = remove_duplicate_whitespace (pretty);
-  g_free (pretty);
-
-  return ret;
+  return remove_duplicate_whitespace (pretty);
 }

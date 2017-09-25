@@ -27,10 +27,9 @@
 static void
 test_info (void)
 {
-	char *contents;
-	char *result;
+	g_autofree gchar *contents = NULL;
 	guint i;
-	char **lines;
+	g_auto(GStrv) lines = NULL;
 
 	if (g_file_get_contents (TEST_SRCDIR "/info-cleanup-test.txt", &contents, NULL, NULL) == FALSE) {
 		g_warning ("Failed to load '%s'", TEST_SRCDIR "/info-cleanup-test.txt");
@@ -46,8 +45,9 @@ test_info (void)
 	}
 
 	for (i = 0; lines[i] != NULL; i++) {
-		char *utf8;
-		char **items;
+		g_auto(GStrv) items = NULL;
+		g_autofree gchar *utf8 = NULL;
+		g_autofree gchar *result = NULL;
 
 		if (*lines[i] == '#')
 			continue;
@@ -65,14 +65,7 @@ test_info (void)
 			g_debug ("Result for '%s' matches '%s'",
 				 utf8, result);
 		}
-		g_free (result);
-		g_free (utf8);
-
-		g_strfreev (items);
 	}
-
-	g_strfreev (lines);
-	g_free (contents);
 }
 
 int main (int argc, char **argv)

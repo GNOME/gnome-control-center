@@ -108,6 +108,18 @@ typedef struct
   char **current;
 } VersionData;
 
+static void
+version_data_free (VersionData *data)
+{
+  g_free (data->major);
+  g_free (data->minor);
+  g_free (data->micro);
+  g_free (data->distributor);
+  g_free (data->date);
+  g_free (data);
+}
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (VersionData, version_data_free);
 
 G_DEFINE_TYPE_WITH_PRIVATE (CcInfoOverviewPanel, cc_info_overview_panel, CC_TYPE_PANEL)
 
@@ -153,7 +165,13 @@ version_text_handler (GMarkupParseContext *ctx,
 {
   VersionData *data = user_data;
   if (data->current != NULL)
-    *data->current = g_strstrip (g_strdup (text));
+    {
+      g_autofree char *stripped = NULL;
+
+      stripped = g_strstrip (g_strdup (text));
+      g_free (*data->current);
+      *data->current = g_strdup (stripped);
+    }
 }
 
 static gboolean
@@ -168,16 +186,12 @@ load_gnome_version (char **version,
     NULL,
     NULL,
   };
-  GError              *error;
-  GMarkupParseContext *ctx;
-  char                *contents;
-  gsize                length;
-  VersionData         *data;
-  gboolean             ret;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GMarkupParseContext) ctx = NULL;
+  g_autofree char *contents = NULL;
+  gsize length;
+  g_autoptr(VersionData) data = NULL;
 
-  ret = FALSE;
-
-  error = NULL;
   if (!g_file_get_contents (DATADIR "/gnome/gnome-version.xml",
                             &contents,
                             &length,
@@ -200,19 +214,10 @@ load_gnome_version (char **version,
       if (date != NULL)
         *date = g_strdup (data->date);
 
-      ret = TRUE;
+      return TRUE;
     }
 
-  g_markup_parse_context_free (ctx);
-  g_free (data->major);
-  g_free (data->minor);
-  g_free (data->micro);
-  g_free (data->distributor);
-  g_free (data->date);
-  g_free (data);
-  g_free (contents);
-
-  return ret;
+  return FALSE;
 };
 
 static void
@@ -225,10 +230,10 @@ graphics_data_free (GraphicsData *gdata)
 static char *
 get_renderer_from_session (void)
 {
-  GDBusProxy *session_proxy;
-  GVariant *renderer_variant;
+  g_autoptr(GDBusProxy) session_proxy = NULL;
+  g_autoptr(GVariant) renderer_variant = NULL;
   char *renderer;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   session_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
                                                  G_DBUS_PROXY_FLAGS_NONE,
@@ -241,12 +246,10 @@ get_renderer_from_session (void)
     {
       g_warning ("Unable to connect to create a proxy for org.gnome.SessionManager: %s",
                  error->message);
-      g_error_free (error);
       return NULL;
     }
 
   renderer_variant = g_dbus_proxy_get_cached_property (session_proxy, "Renderer");
-  g_object_unref (session_proxy);
 
   if (!renderer_variant)
     {
@@ -255,7 +258,6 @@ get_renderer_from_session (void)
     }
 
   renderer = info_cleanup (g_variant_get_string (renderer_variant, NULL));
-  g_variant_unref (renderer_variant);
 
   return renderer;
 }
@@ -265,10 +267,9 @@ get_renderer_from_helper (gboolean discrete_gpu)
 {
   int status;
   char *argv[] = { GNOME_SESSION_DIR "/gnome-session-check-accelerated", NULL };
-  char **envp = NULL;
-  char *renderer = NULL;
-  char *ret = NULL;
-  GError *error = NULL;
+  g_auto(GStrv) envp = NULL;
+  g_autofree char *renderer = NULL;
+  g_autoptr(GError) error = NULL;
 
   if (discrete_gpu)
     {
@@ -281,31 +282,25 @@ get_renderer_from_helper (gboolean discrete_gpu)
       g_debug ("Failed to get %s GPU: %s",
                discrete_gpu ? "discrete" : "integrated",
                error->message);
-      g_error_free (error);
-      goto out;
+      return NULL;
     }
 
   if (!g_spawn_check_exit_status (status, NULL))
-    goto out;
+    return NULL;
 
   if (renderer == NULL || *renderer == '\0')
-    goto out;
+    return NULL;
 
-  ret = info_cleanup (renderer);
-
-out:
-  g_free (renderer);
-  g_strfreev (envp);
-  return ret;
+  return info_cleanup (renderer);
 }
 
 static gboolean
 has_dual_gpu (void)
 {
-  GDBusProxy *switcheroo_proxy;
-  GVariant *dualgpu_variant;
+  g_autoptr(GDBusProxy) switcheroo_proxy = NULL;
+  g_autoptr(GVariant) dualgpu_variant = NULL;
   gboolean ret;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   switcheroo_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                     G_DBUS_PROXY_FLAGS_NONE,
@@ -318,12 +313,10 @@ has_dual_gpu (void)
     {
       g_debug ("Unable to connect to create a proxy for net.hadess.SwitcherooControl: %s",
                error->message);
-      g_error_free (error);
       return FALSE;
     }
 
   dualgpu_variant = g_dbus_proxy_get_cached_property (switcheroo_proxy, "HasDualGpu");
-  g_object_unref (switcheroo_proxy);
 
   if (!dualgpu_variant)
     {
@@ -332,7 +325,6 @@ has_dual_gpu (void)
     }
 
   ret = g_variant_get_boolean (dualgpu_variant);
-  g_variant_unref (dualgpu_variant);
 
   if (ret)
     g_debug ("Dual-GPU machine detected");
@@ -361,8 +353,8 @@ get_graphics_data (void)
 
   if (x11_or_wayland)
     {
-      char *discrete_renderer = NULL;
-      char *renderer;
+      g_autofree char *discrete_renderer = NULL;
+      g_autofree char *renderer = NULL;
 
       renderer = get_renderer_from_session ();
       if (!renderer)
@@ -375,8 +367,6 @@ get_graphics_data (void)
         result->hardware_string = g_strdup_printf ("%s / %s",
                                                    renderer,
                                                    discrete_renderer);
-      g_free (renderer);
-      g_free (discrete_renderer);
     }
 #endif
 
@@ -390,32 +380,31 @@ static GHashTable*
 get_os_info (void)
 {
   GHashTable *hashtable;
-  gchar *buffer;
+  g_autofree gchar *buffer = NULL;
 
   hashtable = NULL;
 
   if (g_file_get_contents ("/etc/os-release", &buffer, NULL, NULL))
     {
-      gchar **lines;
+      g_auto(GStrv) lines = NULL;
       gint i;
 
       lines = g_strsplit (buffer, "\n", -1);
 
       for (i = 0; lines[i] != NULL; i++)
         {
-          gchar *delimiter, *key, *value;
+          gchar *delimiter;
 
           /* Initialize the hash table if needed */
           if (!hashtable)
             hashtable = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
           delimiter = strstr (lines[i], "=");
-          value = NULL;
-          key = NULL;
 
           if (delimiter != NULL)
             {
               gint size;
+              gchar *key, *value;
 
               key = g_strndup (lines[i], delimiter - lines[i]);
 
@@ -437,9 +426,6 @@ get_os_info (void)
               g_hash_table_insert (hashtable, key, value);
             }
         }
-
-      g_strfreev (lines);
-      g_free (buffer);
     }
 
   return hashtable;
@@ -505,30 +491,24 @@ query_done (GFile               *file,
             CcInfoOverviewPanel *self)
 {
   CcInfoOverviewPanelPrivate *priv;
-  GFileInfo *info;
-  GError *error = NULL;
+  g_autoptr(GFileInfo) info = NULL;
+  g_autoptr(GError) error = NULL;
 
   info = g_file_query_filesystem_info_finish (file, res, &error);
   if (info != NULL)
     {
       priv = cc_info_overview_panel_get_instance_private (self);
       priv->total_bytes += g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_FILESYSTEM_SIZE);
-      g_object_unref (info);
     }
   else
     {
       if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          g_error_free (error);
           return;
-        }
       else
         {
-          char *path;
+          g_autofree char *path = NULL;
           path = g_file_get_path (file);
           g_warning ("Failed to get filesystem free space for '%s': %s", path, error->message);
-          g_free (path);
-          g_error_free (error);
         }
     }
 
@@ -540,16 +520,15 @@ static void
 get_primary_disc_info_start (CcInfoOverviewPanel *self)
 {
   GUnixMountEntry *mount;
-  GFile *file;
+  g_autoptr(GFile) file = NULL;
   CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
 
   if (priv->primary_mounts == NULL)
     {
-      char *size;
+      g_autofree char *size = NULL;
 
       size = g_format_size (priv->total_bytes);
       gtk_label_set_text (GTK_LABEL (priv->disk_label), size);
-      g_free (size);
 
       return;
     }
@@ -565,7 +544,6 @@ get_primary_disc_info_start (CcInfoOverviewPanel *self)
                                       priv->cancellable,
                                       (GAsyncReadyCallback) query_done,
                                       self);
-  g_object_unref (file);
 }
 
 static void
@@ -618,9 +596,8 @@ get_primary_disc_info (CcInfoOverviewPanel *self)
 static char *
 get_cpu_info (const glibtop_sysinfo *info)
 {
-  GHashTable    *counts;
-  GString       *cpu;
-  char          *ret;
+  g_autoptr(GHashTable) counts = NULL;
+  g_autoptr(GString) cpu = NULL;
   GHashTableIter iter;
   gpointer       key, value;
   int            i;
@@ -657,8 +634,8 @@ get_cpu_info (const glibtop_sysinfo *info)
   g_hash_table_iter_init (&iter, counts);
   while (g_hash_table_iter_next (&iter, &key, &value))
     {
-      char *cleanedup;
-      int   count;
+      g_autofree char *cleanedup = NULL;
+      int count;
 
       count = GPOINTER_TO_INT (value);
       cleanedup = info_cleanup ((const char *) key);
@@ -666,14 +643,9 @@ get_cpu_info (const glibtop_sysinfo *info)
         g_string_append_printf (cpu, "%s \303\227 %d ", cleanedup, count);
       else
         g_string_append_printf (cpu, "%s ", cleanedup);
-      g_free (cleanedup);
     }
 
-  g_hash_table_destroy (counts);
-
-  ret = g_string_free (cpu, FALSE);
-
-  return ret;
+  return g_strdup (cpu->str);
 }
 
 static void
@@ -743,13 +715,10 @@ set_virtualization_label (CcInfoOverviewPanel *self,
 static void
 info_overview_panel_setup_virt (CcInfoOverviewPanel *self)
 {
-  GError *error = NULL;
-  GDBusProxy *systemd_proxy;
-  GVariant *variant;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GDBusProxy) systemd_proxy = NULL;
+  g_autoptr(GVariant) variant = NULL;
   GVariant *inner;
-  char *str;
-
-  str = NULL;
 
   systemd_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                  G_DBUS_PROXY_FLAGS_NONE,
@@ -763,8 +732,8 @@ info_overview_panel_setup_virt (CcInfoOverviewPanel *self)
   if (systemd_proxy == NULL)
     {
       g_debug ("systemd not available, bailing: %s", error->message);
-      g_error_free (error);
-      goto bail;
+      set_virtualization_label (self, NULL);
+      return;
     }
 
   variant = g_dbus_proxy_call_sync (systemd_proxy,
@@ -777,20 +746,12 @@ info_overview_panel_setup_virt (CcInfoOverviewPanel *self)
   if (variant == NULL)
     {
       g_debug ("Failed to get property '%s': %s", "Virtualization", error->message);
-      g_error_free (error);
-      g_object_unref (systemd_proxy);
-      goto bail;
+      set_virtualization_label (self, NULL);
+      return;
     }
 
   g_variant_get (variant, "(v)", &inner);
-  str = g_variant_dup_string (inner, NULL);
-  g_variant_unref (variant);
-
-  g_object_unref (systemd_proxy);
-
-bail:
-  set_virtualization_label (self, str);
-  g_free (str);
+  set_virtualization_label (self, g_variant_get_string (inner, NULL));
 }
 
 static void
@@ -799,7 +760,10 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   gboolean    res;
   glibtop_mem mem;
   const glibtop_sysinfo *info;
-  char       *text;
+  g_autofree char *memory_text = NULL;
+  g_autofree char *cpu_text = NULL;
+  g_autofree char *os_type_text = NULL;
+  g_autofree char *os_name_text = NULL;
   CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
 
   res = load_gnome_version (&priv->gnome_version,
@@ -807,29 +771,25 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
                             &priv->gnome_date);
   if (res)
     {
+      g_autofree gchar *text = NULL;
       text = g_strdup_printf (_("Version %s"), priv->gnome_version);
       gtk_label_set_text (GTK_LABEL (priv->version_label), text);
-      g_free (text);
     }
 
   glibtop_get_mem (&mem);
-  text = g_format_size_full (mem.total, G_FORMAT_SIZE_IEC_UNITS);
-  gtk_label_set_text (GTK_LABEL (priv->memory_label), text ? text : "");
-  g_free (text);
+  memory_text = g_format_size_full (mem.total, G_FORMAT_SIZE_IEC_UNITS);
+  gtk_label_set_text (GTK_LABEL (priv->memory_label), memory_text ? memory_text : "");
 
   info = glibtop_get_sysinfo ();
 
-  text = get_cpu_info (info);
-  gtk_label_set_markup (GTK_LABEL (priv->processor_label), text ? text : "");
-  g_free (text);
+  cpu_text = get_cpu_info (info);
+  gtk_label_set_markup (GTK_LABEL (priv->processor_label), cpu_text ? cpu_text : "");
 
-  text = get_os_type ();
-  gtk_label_set_text (GTK_LABEL (priv->os_type_label), text ? text : "");
-  g_free (text);
+  os_type_text = get_os_type ();
+  gtk_label_set_text (GTK_LABEL (priv->os_type_label), os_type_text ? os_type_text : "");
 
-  text = get_os_name ();
-  gtk_label_set_text (GTK_LABEL (priv->os_name_label), text ? text : "");
-  g_free (text);
+  os_name_text = get_os_name ();
+  gtk_label_set_text (GTK_LABEL (priv->os_name_label), os_name_text ? os_name_text : "");
 
   get_primary_disc_info (self);
 
@@ -852,9 +812,9 @@ static void
 on_updates_button_clicked (GtkWidget           *widget,
                            CcInfoOverviewPanel *self)
 {
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   gboolean ret;
-  gchar **argv;
+  g_auto(GStrv) argv = NULL;
 
   argv = g_new0 (gchar *, 3);
   if (does_gnome_software_exist ())
@@ -868,11 +828,7 @@ on_updates_button_clicked (GtkWidget           *widget,
     }
   ret = g_spawn_async (NULL, argv, NULL, 0, NULL, NULL, NULL, &error);
   if (!ret)
-    {
       g_warning ("Failed to spawn %s: %s", argv[0], error->message);
-      g_error_free (error);
-    }
-  g_strfreev (argv);
 }
 
 static void
