@@ -29,27 +29,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_BLUETOOTH_PANEL cc_bluetooth_panel_get_type()
-#define CC_BLUETOOTH_PANEL(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_TYPE_BLUETOOTH_PANEL, CcBluetoothPanel))
-#define CC_BLUETOOTH_PANEL_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), CC_TYPE_BLUETOOTH_PANEL, CcBluetoothPanelClass))
-#define CC_IS_BLUETOOTH_PANEL(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CC_TYPE_BLUETOOTH_PANEL))
-#define CC_IS_BLUETOOTH_PANEL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), CC_TYPE_BLUETOOTH_PANEL))
-#define CC_BLUETOOTH_PANEL_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), CC_TYPE_BLUETOOTH_PANEL, CcBluetoothPanelClass))
-
-typedef struct CcBluetoothPanel CcBluetoothPanel;
-typedef struct CcBluetoothPanelClass CcBluetoothPanelClass;
-typedef struct CcBluetoothPanelPrivate CcBluetoothPanelPrivate;
-
-struct CcBluetoothPanel {
-	CcPanel parent;
-	CcBluetoothPanelPrivate *priv;
-};
-
-struct CcBluetoothPanelClass {
-	CcPanelClass parent_class;
-};
-
-GType cc_bluetooth_panel_get_type (void) G_GNUC_CONST;
+#define CC_TYPE_BLUETOOTH_PANEL (cc_bluetooth_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcBluetoothPanel, cc_bluetooth_panel, CC, BLUETOOTH_PANEL, CcPanel)
 
 G_END_DECLS
 
