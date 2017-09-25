@@ -230,7 +230,7 @@ update_sensitivity (UmPasswordDialog *um)
 
         if (um->password_mode == ACT_USER_PASSWORD_MODE_REGULAR) {
                 strength = update_password_strength (um);
-                can_change = strength > 0 && strcmp (password, verify) == 0 &&
+                can_change = strength > 1 && strcmp (password, verify) == 0 &&
                              (um->old_password_ok || !gtk_widget_get_visible (um->old_password_entry));
         }
         else {

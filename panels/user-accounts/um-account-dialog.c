@@ -327,7 +327,7 @@ local_validate (UmAccountDialog *self)
         verify = gtk_entry_get_text (GTK_ENTRY (self->local_verify));
         if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR) {
                 strength = update_password_strength (self);
-                valid_password = strength > 0 && strcmp (password, verify) == 0;
+                valid_password = strength > 1 && strcmp (password, verify) == 0;
         } else {
                 valid_password = TRUE;
         }
