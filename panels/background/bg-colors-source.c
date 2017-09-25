@@ -28,10 +28,12 @@
 #include <glib/gi18n-lib.h>
 #include <gdesktop-enums.h>
 
-G_DEFINE_TYPE (BgColorsSource, bg_colors_source, BG_TYPE_SOURCE)
+struct _BgColorsSource
+{
+  BgSource parent_instance;
+};
 
-#define COLORS_SOURCE_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), BG_TYPE_COLORS_SOURCE, BgColorsSourcePrivate))
+G_DEFINE_TYPE (BgColorsSource, bg_colors_source, BG_TYPE_SOURCE)
 
 struct {
   GDesktopBackgroundShading type;

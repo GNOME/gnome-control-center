@@ -28,45 +28,8 @@
 
 G_BEGIN_DECLS
 
-#define BG_TYPE_WALLPAPERS_SOURCE bg_wallpapers_source_get_type()
-
-#define BG_WALLPAPERS_SOURCE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  BG_TYPE_WALLPAPERS_SOURCE, BgWallpapersSource))
-
-#define BG_WALLPAPERS_SOURCE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  BG_TYPE_WALLPAPERS_SOURCE, BgWallpapersSourceClass))
-
-#define BG_IS_WALLPAPERS_SOURCE(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  BG_TYPE_WALLPAPERS_SOURCE))
-
-#define BG_IS_WALLPAPERS_SOURCE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  BG_TYPE_WALLPAPERS_SOURCE))
-
-#define BG_WALLPAPERS_SOURCE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  BG_TYPE_WALLPAPERS_SOURCE, BgWallpapersSourceClass))
-
-typedef struct _BgWallpapersSource BgWallpapersSource;
-typedef struct _BgWallpapersSourceClass BgWallpapersSourceClass;
-typedef struct _BgWallpapersSourcePrivate BgWallpapersSourcePrivate;
-
-struct _BgWallpapersSource
-{
-  BgSource parent;
-
-  BgWallpapersSourcePrivate *priv;
-};
-
-struct _BgWallpapersSourceClass
-{
-  BgSourceClass parent_class;
-};
-
-GType bg_wallpapers_source_get_type (void) G_GNUC_CONST;
+#define BG_TYPE_WALLPAPERS_SOURCE (bg_wallpapers_source_get_type ())
+G_DECLARE_FINAL_TYPE (BgWallpapersSource, bg_wallpapers_source, BG, WALLPAPERS_SOURCE, BgSource)
 
 BgWallpapersSource *bg_wallpapers_source_new (GtkWindow *window);
 

@@ -44,8 +44,10 @@ enum
   SOURCE_COLORS,
 };
 
-struct _CcBackgroundChooserDialogPrivate
+struct _CcBackgroundChooserDialog
 {
+  GtkDialog parent_instance;
+
   GtkListStore *sources;
   GtkWidget *stack;
   GtkWidget *pictures_stack;
@@ -67,7 +69,7 @@ struct _CcBackgroundChooserDialogPrivate
   gulong row_modified_id;
 };
 
-#define CC_CHOOSER_DIALOG_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), CC_TYPE_BACKGROUND_CHOOSER_DIALOG, CcBackgroundChooserDialogPrivate))
+G_DEFINE_TYPE (CcBackgroundChooserDialog, cc_background_chooser_dialog, GTK_TYPE_DIALOG)
 
 enum
 {
@@ -84,8 +86,6 @@ static const GtkTargetEntry color_targets[] =
 {
   { "application/x-color", 0, COLOR }
 };
-
-G_DEFINE_TYPE (CcBackgroundChooserDialog, cc_background_chooser_dialog, GTK_TYPE_DIALOG)
 
 static void on_visible_child_notify (CcBackgroundChooserDialog *chooser);
 
@@ -117,14 +117,13 @@ static void
 cc_background_chooser_dialog_dispose (GObject *object)
 {
   CcBackgroundChooserDialog *chooser = CC_BACKGROUND_CHOOSER_DIALOG (object);
-  CcBackgroundChooserDialogPrivate *priv = chooser->priv;
 
-  if (priv->copy_cancellable)
+  if (chooser->copy_cancellable)
     {
       /* cancel any copy operation */
-      g_cancellable_cancel (priv->copy_cancellable);
+      g_cancellable_cancel (chooser->copy_cancellable);
 
-      g_clear_object (&priv->copy_cancellable);
+      g_clear_object (&chooser->copy_cancellable);
     }
 
   /* GtkStack triggers notify::visible-child during dispose and this
@@ -133,17 +132,17 @@ cc_background_chooser_dialog_dispose (GObject *object)
    * on_visible_child_notify() will get called while we're in an
    * inconsistent state.
    */
-  if (priv->stack != NULL)
+  if (chooser->stack != NULL)
     {
-      g_signal_handlers_disconnect_by_func (priv->stack, on_visible_child_notify, chooser);
-      priv->stack = NULL;
+      g_signal_handlers_disconnect_by_func (chooser->stack, on_visible_child_notify, chooser);
+      chooser->stack = NULL;
     }
 
-  g_clear_pointer (&chooser->priv->item_to_focus, gtk_tree_row_reference_free);
-  g_clear_object (&priv->pictures_source);
-  g_clear_object (&priv->colors_source);
-  g_clear_object (&priv->wallpapers_source);
-  g_clear_object (&priv->thumb_factory);
+  g_clear_pointer (&chooser->item_to_focus, gtk_tree_row_reference_free);
+  g_clear_object (&chooser->pictures_source);
+  g_clear_object (&chooser->colors_source);
+  g_clear_object (&chooser->wallpapers_source);
+  g_clear_object (&chooser->thumb_factory);
 
   G_OBJECT_CLASS (cc_background_chooser_dialog_parent_class)->dispose (object);
 }
@@ -151,11 +150,10 @@ cc_background_chooser_dialog_dispose (GObject *object)
 static GtkWidget *
 get_visible_view (CcBackgroundChooserDialog *chooser)
 {
-  CcBackgroundChooserDialogPrivate *priv = chooser->priv;
   GtkWidget *visible;
   GtkWidget *icon_view = NULL;
 
-  visible = gtk_stack_get_visible_child (GTK_STACK (priv->stack));
+  visible = gtk_stack_get_visible_child (GTK_STACK (chooser->stack));
   if (GTK_IS_STACK (visible))
     {
       GtkWidget *sw;
@@ -183,11 +181,11 @@ possibly_show_empty_pictures_box (GtkTreeModel              *model,
 
   if (gtk_tree_model_get_iter_first (model, &iter))
     {
-      gtk_stack_set_visible_child_name (GTK_STACK (chooser->priv->pictures_stack), "view");
+      gtk_stack_set_visible_child_name (GTK_STACK (chooser->pictures_stack), "view");
     }
   else
     {
-      gtk_stack_set_visible_child_name (GTK_STACK (chooser->priv->pictures_stack), "empty");
+      gtk_stack_set_visible_child_name (GTK_STACK (chooser->pictures_stack), "empty");
     }
 }
 
@@ -197,28 +195,27 @@ on_source_modified_cb (GtkTreeModel *tree_model,
                        GtkTreeIter  *iter,
                        gpointer      user_data)
 {
+  CcBackgroundChooserDialog *chooser = user_data;
   GtkTreePath *to_focus_path;
   GtkWidget *icon_view;
-  CcBackgroundChooserDialog *chooser = user_data;
-  CcBackgroundChooserDialogPrivate *priv = chooser->priv;
 
-  if (chooser->priv->item_to_focus == NULL)
+  if (chooser->item_to_focus == NULL)
     return;
 
-  to_focus_path = gtk_tree_row_reference_get_path (chooser->priv->item_to_focus);
+  to_focus_path = gtk_tree_row_reference_get_path (chooser->item_to_focus);
 
   if (gtk_tree_path_compare (to_focus_path, path) != 0)
     goto out;
 
   /* Change source */
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "pictures");
+  gtk_stack_set_visible_child_name (GTK_STACK (chooser->stack), "pictures");
 
   /* And select the newly added item */
   icon_view = get_visible_view (chooser);
   gtk_icon_view_select_path (GTK_ICON_VIEW (icon_view), to_focus_path);
   gtk_icon_view_scroll_to_path (GTK_ICON_VIEW (icon_view),
                                 to_focus_path, TRUE, 1.0, 1.0);
-  g_clear_pointer (&chooser->priv->item_to_focus, gtk_tree_row_reference_free);
+  g_clear_pointer (&chooser->item_to_focus, gtk_tree_row_reference_free);
 
 out:
   gtk_tree_path_free (to_focus_path);
@@ -247,7 +244,7 @@ monitor_pictures_model (CcBackgroundChooserDialog *chooser)
 {
   GtkTreeModel *model;
 
-  model = GTK_TREE_MODEL (bg_source_get_liststore (BG_SOURCE (chooser->priv->pictures_source)));
+  model = GTK_TREE_MODEL (bg_source_get_liststore (BG_SOURCE (chooser->pictures_source)));
 
   g_signal_connect (model, "row-inserted", G_CALLBACK (on_source_added_cb), chooser);
   g_signal_connect (model, "row-deleted", G_CALLBACK (on_source_removed_cb), chooser);
@@ -292,9 +289,9 @@ static void
 add_custom_wallpaper (CcBackgroundChooserDialog *chooser,
                       const char                *uri)
 {
-  g_clear_pointer (&chooser->priv->item_to_focus, gtk_tree_row_reference_free);
+  g_clear_pointer (&chooser->item_to_focus, gtk_tree_row_reference_free);
 
-  bg_pictures_source_add (chooser->priv->pictures_source, uri, &chooser->priv->item_to_focus);
+  bg_pictures_source_add (chooser->pictures_source, uri, &chooser->item_to_focus);
   /* and wait for the item to get added */
 }
 
@@ -326,11 +323,11 @@ cc_background_panel_drag_color (CcBackgroundChooserDialog *chooser,
   rgba.blue  = dropped[2] / 65535.;
   rgba.alpha = dropped[3] / 65535.;
 
-  if (bg_colors_source_add (chooser->priv->colors_source, &rgba, &row_ref) == FALSE)
+  if (bg_colors_source_add (chooser->colors_source, &rgba, &row_ref) == FALSE)
     return FALSE;
 
   /* Change source */
-  gtk_stack_set_visible_child_name (GTK_STACK (chooser->priv->stack), "colors");
+  gtk_stack_set_visible_child_name (GTK_STACK (chooser->stack), "colors");
 
   /* And select the newly added item */
   to_focus_path = gtk_tree_row_reference_get_path (row_ref);
@@ -368,7 +365,7 @@ cc_background_panel_drag_items (GtkWidget *widget,
   for (i = 0; uris[i] != NULL; i++)
     {
       uri = uris[i];
-      if (!bg_pictures_source_is_known (chooser->priv->pictures_source, uri))
+      if (!bg_pictures_source_is_known (chooser->pictures_source, uri))
         {
           add_custom_wallpaper (chooser, uri);
           ret = TRUE;
@@ -418,37 +415,35 @@ static void
 cc_background_chooser_dialog_constructed (GObject *object)
 {
   CcBackgroundChooserDialog *chooser = CC_BACKGROUND_CHOOSER_DIALOG (object);
-  CcBackgroundChooserDialogPrivate *priv = chooser->priv;
   GtkListStore *model;
   GtkWidget *sw;
   GtkWidget *vbox;
 
   G_OBJECT_CLASS (cc_background_chooser_dialog_parent_class)->constructed (object);
 
-  model = bg_source_get_liststore (BG_SOURCE (priv->wallpapers_source));
+  model = bg_source_get_liststore (BG_SOURCE (chooser->wallpapers_source));
   sw = create_view (chooser, GTK_TREE_MODEL (model));
-  gtk_stack_add_titled (GTK_STACK (priv->stack), sw, "wallpapers", _("Wallpapers"));
-  gtk_container_child_set (GTK_CONTAINER (priv->stack), sw, "position", 0, NULL);
+  gtk_stack_add_titled (GTK_STACK (chooser->stack), sw, "wallpapers", _("Wallpapers"));
+  gtk_container_child_set (GTK_CONTAINER (chooser->stack), sw, "position", 0, NULL);
 
-  model = bg_source_get_liststore (BG_SOURCE (priv->pictures_source));
+  model = bg_source_get_liststore (BG_SOURCE (chooser->pictures_source));
   sw = create_view (chooser, GTK_TREE_MODEL (model));
-  gtk_stack_add_named (GTK_STACK (priv->pictures_stack), sw, "view");
+  gtk_stack_add_named (GTK_STACK (chooser->pictures_stack), sw, "view");
 
-  model = bg_source_get_liststore (BG_SOURCE (priv->colors_source));
+  model = bg_source_get_liststore (BG_SOURCE (chooser->colors_source));
   sw = create_view (chooser, GTK_TREE_MODEL (model));
-  gtk_stack_add_titled (GTK_STACK (priv->stack), sw, "colors", _("Colors"));
+  gtk_stack_add_titled (GTK_STACK (chooser->stack), sw, "colors", _("Colors"));
 
   vbox = gtk_dialog_get_content_area (GTK_DIALOG (chooser));
   gtk_widget_show_all (vbox);
 
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "wallpapers");
+  gtk_stack_set_visible_child_name (GTK_STACK (chooser->stack), "wallpapers");
   monitor_pictures_model (chooser);
 }
 
 static void
 cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
 {
-  CcBackgroundChooserDialogPrivate *priv;
   GtkWidget *empty_pictures_box;
   GtkWidget *vbox;
   GtkWidget *headerbar;
@@ -463,12 +458,9 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gchar *pictures_dir_uri;
   GtkTargetList *target_list;
 
-  chooser->priv = CC_CHOOSER_DIALOG_GET_PRIVATE (chooser);
-  priv = chooser->priv;
-
-  priv->wallpapers_source = bg_wallpapers_source_new (GTK_WINDOW (chooser));
-  priv->pictures_source = bg_pictures_source_new (GTK_WINDOW (chooser));
-  priv->colors_source = bg_colors_source_new (GTK_WINDOW (chooser));
+  chooser->wallpapers_source = bg_wallpapers_source_new (GTK_WINDOW (chooser));
+  chooser->pictures_source = bg_pictures_source_new (GTK_WINDOW (chooser));
+  chooser->colors_source = bg_colors_source_new (GTK_WINDOW (chooser));
 
   gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);
   gtk_window_set_resizable (GTK_WINDOW (chooser), FALSE);
@@ -478,30 +470,30 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   vbox = gtk_dialog_get_content_area (GTK_DIALOG (chooser));
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 0);
 
-  priv->stack = gtk_stack_new ();
-  gtk_stack_set_homogeneous (GTK_STACK (priv->stack), TRUE);
-  gtk_container_add (GTK_CONTAINER (vbox), priv->stack);
-  g_signal_connect_swapped (priv->stack, "notify::visible-child", G_CALLBACK (on_visible_child_notify), chooser);
+  chooser->stack = gtk_stack_new ();
+  gtk_stack_set_homogeneous (GTK_STACK (chooser->stack), TRUE);
+  gtk_container_add (GTK_CONTAINER (vbox), chooser->stack);
+  g_signal_connect_swapped (chooser->stack, "notify::visible-child", G_CALLBACK (on_visible_child_notify), chooser);
 
   /* Add drag and drop support for bg images */
-  gtk_drag_dest_set (priv->stack, GTK_DEST_DEFAULT_ALL, NULL, 0, GDK_ACTION_COPY);
+  gtk_drag_dest_set (chooser->stack, GTK_DEST_DEFAULT_ALL, NULL, 0, GDK_ACTION_COPY);
   target_list = gtk_target_list_new (NULL, 0);
   gtk_target_list_add_uri_targets (target_list, URI_LIST);
   gtk_target_list_add_table (target_list, color_targets, 1);
-  gtk_drag_dest_set_target_list (priv->stack, target_list);
+  gtk_drag_dest_set_target_list (chooser->stack, target_list);
   gtk_target_list_unref (target_list);
-  g_signal_connect (priv->stack, "drag-data-received", G_CALLBACK (cc_background_panel_drag_items), chooser);
+  g_signal_connect (chooser->stack, "drag-data-received", G_CALLBACK (cc_background_panel_drag_items), chooser);
 
   headerbar = gtk_dialog_get_header_bar (GTK_DIALOG (chooser));
 
   switcher = gtk_stack_switcher_new ();
-  gtk_stack_switcher_set_stack (GTK_STACK_SWITCHER (switcher), GTK_STACK (priv->stack));
+  gtk_stack_switcher_set_stack (GTK_STACK_SWITCHER (switcher), GTK_STACK (chooser->stack));
   gtk_header_bar_set_custom_title (GTK_HEADER_BAR (headerbar), switcher);
   gtk_widget_show (switcher);
 
-  priv->pictures_stack = gtk_stack_new ();
-  gtk_stack_set_homogeneous (GTK_STACK (priv->pictures_stack), TRUE);
-  gtk_stack_add_titled (GTK_STACK (priv->stack), priv->pictures_stack, "pictures", _("Pictures"));
+  chooser->pictures_stack = gtk_stack_new ();
+  gtk_stack_set_homogeneous (GTK_STACK (chooser->pictures_stack), TRUE);
+  gtk_stack_add_titled (GTK_STACK (chooser->stack), chooser->pictures_stack, "pictures", _("Pictures"));
 
   empty_pictures_box = gtk_grid_new ();
   gtk_grid_set_column_spacing (GTK_GRID (empty_pictures_box), 12);
@@ -509,7 +501,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
                                   GTK_ORIENTATION_HORIZONTAL);
   context = gtk_widget_get_style_context (empty_pictures_box);
   gtk_style_context_add_class (context, "dim-label");
-  gtk_stack_add_named (GTK_STACK (priv->pictures_stack), empty_pictures_box, "empty");
+  gtk_stack_add_named (GTK_STACK (chooser->pictures_stack), empty_pictures_box, "empty");
   img = gtk_image_new_from_icon_name ("emblem-photos-symbolic", GTK_ICON_SIZE_DIALOG);
   gtk_image_set_pixel_size (GTK_IMAGE (img), 64);
   gtk_widget_set_halign (img, GTK_ALIGN_END);
@@ -588,8 +580,6 @@ cc_background_chooser_dialog_class_init (CcBackgroundChooserDialogClass *klass)
 
   widget_class = GTK_WIDGET_CLASS (klass);
   widget_class->realize = cc_background_chooser_dialog_realize;
-
-  g_type_class_add_private (object_class, sizeof (CcBackgroundChooserDialogPrivate));
 }
 
 GtkWidget *

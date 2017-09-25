@@ -33,15 +33,15 @@
  * returning to the main loop */
 #define NUM_ITEMS_PER_BATCH 1
 
-struct CcBackgroundXmlPrivate
+struct _CcBackgroundXml
 {
+  GObject      parent_instance;
+
   GHashTable  *wp_hash;
   GAsyncQueue *item_added_queue;
   guint        item_added_id;
   GSList      *monitors; /* GSList of GFileMonitor */
 };
-
-#define CC_BACKGROUND_XML_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_BACKGROUND_XML, CcBackgroundXmlPrivate))
 
 enum {
 	ADDED,
@@ -118,20 +118,20 @@ idle_emit (CcBackgroundXml *xml)
 	GObject *item;
 	guint i = NUM_ITEMS_PER_BATCH;
 
-	g_async_queue_lock (xml->priv->item_added_queue);
+	g_async_queue_lock (xml->item_added_queue);
 
-	while (i > 0 && (item = g_async_queue_try_pop_unlocked (xml->priv->item_added_queue)) != NULL) {
+	while (i > 0 && (item = g_async_queue_try_pop_unlocked (xml->item_added_queue)) != NULL) {
 		g_signal_emit (G_OBJECT (xml), signals[ADDED], 0, item);
 		g_object_unref (item);
 		i--;
 	}
 
-	g_async_queue_unlock (xml->priv->item_added_queue);
+	g_async_queue_unlock (xml->item_added_queue);
 
-        if (g_async_queue_length (xml->priv->item_added_queue) > 0) {
+        if (g_async_queue_length (xml->item_added_queue) > 0) {
                 return TRUE;
         } else {
-                xml->priv->item_added_id = 0;
+                xml->item_added_id = 0;
                 return FALSE;
         }
 }
@@ -140,11 +140,11 @@ static void
 emit_added_in_idle (CcBackgroundXml *xml,
 		    GObject         *object)
 {
-	g_async_queue_lock (xml->priv->item_added_queue);
-	g_async_queue_push_unlocked (xml->priv->item_added_queue, object);
-	if (xml->priv->item_added_id == 0)
-		xml->priv->item_added_id = g_idle_add ((GSourceFunc) idle_emit, xml);
-	g_async_queue_unlock (xml->priv->item_added_queue);
+	g_async_queue_lock (xml->item_added_queue);
+	g_async_queue_push_unlocked (xml->item_added_queue, object);
+	if (xml->item_added_id == 0)
+		xml->item_added_id = g_idle_add ((GSourceFunc) idle_emit, xml);
+	g_async_queue_unlock (xml->item_added_queue);
 }
 
 #define NONE "(none)"
@@ -305,14 +305,14 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
       g_free (uri);
 
       /* Make sure we don't already have this one and that filename exists */
-      if (g_hash_table_lookup (xml->priv->wp_hash, id) != NULL) {
+      if (g_hash_table_lookup (xml->wp_hash, id) != NULL) {
 	g_object_unref (item);
 	g_free (id);
 	continue;
       }
 
       g_object_set (G_OBJECT (item), "flags", flags, NULL);
-      g_hash_table_insert (xml->priv->wp_hash,
+      g_hash_table_insert (xml->wp_hash,
                            g_strdup (id),
                            g_object_ref (item));
       if (in_thread)
@@ -377,7 +377,7 @@ cc_background_xml_add_monitor (GFile      *directory,
                     G_CALLBACK (gnome_wp_file_changed),
                     data);
 
-  data->priv->monitors = g_slist_prepend (data->priv->monitors, monitor);
+  data->monitors = g_slist_prepend (data->monitors, monitor);
 }
 
 static void
@@ -460,7 +460,7 @@ cc_background_xml_load_list_finish (GAsyncResult  *async_result)
 	g_warn_if_fail (g_simple_async_result_get_source_tag (result) == cc_background_xml_load_list_async);
 
 	data = CC_BACKGROUND_XML (g_simple_async_result_get_op_res_gpointer (result));
-	return data->priv->wp_hash;
+	return data->wp_hash;
 }
 
 static void
@@ -631,16 +631,14 @@ cc_background_xml_finalize (GObject *object)
 
         xml = CC_BACKGROUND_XML (object);
 
-        g_return_if_fail (xml->priv != NULL);
+        g_slist_free_full (xml->monitors, g_object_unref);
 
-        g_slist_free_full (xml->priv->monitors, g_object_unref);
-
-	g_clear_pointer (&xml->priv->wp_hash, g_hash_table_destroy);
-	if (xml->priv->item_added_id != 0) {
-		g_source_remove (xml->priv->item_added_id);
-		xml->priv->item_added_id = 0;
+	g_clear_pointer (&xml->wp_hash, g_hash_table_destroy);
+	if (xml->item_added_id != 0) {
+		g_source_remove (xml->item_added_id);
+		xml->item_added_id = 0;
 	}
-	g_clear_pointer (&xml->priv->item_added_queue, g_async_queue_unref);
+	g_clear_pointer (&xml->item_added_queue, g_async_queue_unref);
 }
 
 static void
@@ -657,19 +655,16 @@ cc_background_xml_class_init (CcBackgroundXmlClass *klass)
 				       NULL, NULL,
 				       g_cclosure_marshal_VOID__OBJECT,
 				       G_TYPE_NONE, 1, CC_TYPE_BACKGROUND_ITEM);
-
-        g_type_class_add_private (klass, sizeof (CcBackgroundXmlPrivate));
 }
 
 static void
 cc_background_xml_init (CcBackgroundXml *xml)
 {
-        xml->priv = CC_BACKGROUND_XML_GET_PRIVATE (xml);
-        xml->priv->wp_hash = g_hash_table_new_full (g_str_hash,
+        xml->wp_hash = g_hash_table_new_full (g_str_hash,
 						    g_str_equal,
 						    (GDestroyNotify) g_free,
 						    (GDestroyNotify) g_object_unref);
-	xml->priv->item_added_queue = g_async_queue_new_full ((GDestroyNotify) g_object_unref);
+	xml->item_added_queue = g_async_queue_new_full ((GDestroyNotify) g_object_unref);
 }
 
 CcBackgroundXml *

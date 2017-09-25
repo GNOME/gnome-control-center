@@ -29,45 +29,8 @@
 
 G_BEGIN_DECLS
 
-#define BG_TYPE_PICTURES_SOURCE bg_pictures_source_get_type()
-
-#define BG_PICTURES_SOURCE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  BG_TYPE_PICTURES_SOURCE, BgPicturesSource))
-
-#define BG_PICTURES_SOURCE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  BG_TYPE_PICTURES_SOURCE, BgPicturesSourceClass))
-
-#define BG_IS_PICTURES_SOURCE(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  BG_TYPE_PICTURES_SOURCE))
-
-#define BG_IS_PICTURES_SOURCE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  BG_TYPE_PICTURES_SOURCE))
-
-#define BG_PICTURES_SOURCE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  BG_TYPE_PICTURES_SOURCE, BgPicturesSourceClass))
-
-typedef struct _BgPicturesSource BgPicturesSource;
-typedef struct _BgPicturesSourceClass BgPicturesSourceClass;
-typedef struct _BgPicturesSourcePrivate BgPicturesSourcePrivate;
-
-struct _BgPicturesSource
-{
-  BgSource parent;
-
-  BgPicturesSourcePrivate *priv;
-};
-
-struct _BgPicturesSourceClass
-{
-  BgSourceClass parent_class;
-};
-
-GType bg_pictures_source_get_type (void) G_GNUC_CONST;
+#define BG_TYPE_PICTURES_SOURCE (bg_pictures_source_get_type ())
+G_DECLARE_FINAL_TYPE (BgPicturesSource, bg_pictures_source, BG, PICTURES_SOURCE, BgSource)
 
 BgPicturesSource *bg_pictures_source_new            (GtkWindow *window);
 char             *bg_pictures_source_get_cache_path (void);

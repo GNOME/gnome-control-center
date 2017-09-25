@@ -25,45 +25,13 @@
 
 G_BEGIN_DECLS
 
-#define BG_TYPE_SOURCE bg_source_get_type()
-
-#define BG_SOURCE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  BG_TYPE_SOURCE, BgSource))
-
-#define BG_SOURCE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  BG_TYPE_SOURCE, BgSourceClass))
-
-#define BG_IS_SOURCE(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  BG_TYPE_SOURCE))
-
-#define BG_IS_SOURCE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  BG_TYPE_SOURCE))
-
-#define BG_SOURCE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  BG_TYPE_SOURCE, BgSourceClass))
-
-typedef struct _BgSource BgSource;
-typedef struct _BgSourceClass BgSourceClass;
-typedef struct _BgSourcePrivate BgSourcePrivate;
-
-struct _BgSource
-{
-  GObject parent;
-
-  BgSourcePrivate *priv;
-};
+#define BG_TYPE_SOURCE (bg_source_get_type ())
+G_DECLARE_DERIVABLE_TYPE (BgSource, bg_source, BG, SOURCE, GObject)
 
 struct _BgSourceClass
 {
   GObjectClass parent_class;
 };
-
-GType bg_source_get_type (void) G_GNUC_CONST;
 
 GtkListStore* bg_source_get_liststore (BgSource *source);
 

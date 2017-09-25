@@ -27,42 +27,8 @@
 
 G_BEGIN_DECLS
 
-#define BG_TYPE_COLORS_SOURCE bg_colors_source_get_type()
-
-#define BG_COLORS_SOURCE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  BG_TYPE_COLORS_SOURCE, BgColorsSource))
-
-#define BG_COLORS_SOURCE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  BG_TYPE_COLORS_SOURCE, BgColorsSourceClass))
-
-#define BG_IS_COLORS_SOURCE(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  BG_TYPE_COLORS_SOURCE))
-
-#define BG_IS_COLORS_SOURCE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  BG_TYPE_COLORS_SOURCE))
-
-#define BG_COLORS_SOURCE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  BG_TYPE_COLORS_SOURCE, BgColorsSourceClass))
-
-typedef struct _BgColorsSource BgColorsSource;
-typedef struct _BgColorsSourceClass BgColorsSourceClass;
-
-struct _BgColorsSource
-{
-  BgSource parent;
-};
-
-struct _BgColorsSourceClass
-{
-  BgSourceClass parent_class;
-};
-
-GType bg_colors_source_get_type (void) G_GNUC_CONST;
+#define BG_TYPE_COLORS_SOURCE (bg_colors_source_get_type ())
+G_DECLARE_FINAL_TYPE (BgColorsSource, bg_colors_source, BG, COLORS_SOURCE, BgSource)
 
 BgColorsSource *bg_colors_source_new (GtkWindow *window);
 

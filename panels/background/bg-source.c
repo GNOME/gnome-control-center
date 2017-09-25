@@ -26,18 +26,15 @@
 #define THUMBNAIL_WIDTH 256
 #define THUMBNAIL_HEIGHT (THUMBNAIL_WIDTH * 3 / 4)
 
-G_DEFINE_ABSTRACT_TYPE (BgSource, bg_source, G_TYPE_OBJECT)
-
-#define SOURCE_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), BG_TYPE_SOURCE, BgSourcePrivate))
-
-struct _BgSourcePrivate
+typedef struct
 {
   GtkListStore *store;
   GtkWidget *window;
   gint thumbnail_height;
   gint thumbnail_width;
-};
+} BgSourcePrivate;
+
+G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (BgSource, bg_source, G_TYPE_OBJECT)
 
 enum
 {
@@ -49,7 +46,7 @@ enum
 static void
 bg_source_calculate_thumbnail_dimensions (BgSource *source)
 {
-  BgSourcePrivate *priv = source->priv;
+  BgSourcePrivate *priv = bg_source_get_instance_private (source);
   gint scale_factor;
 
   priv->thumbnail_height = THUMBNAIL_HEIGHT;
@@ -99,7 +96,8 @@ bg_source_set_property (GObject      *object,
                         const GValue *value,
                         GParamSpec   *pspec)
 {
-  BgSourcePrivate *priv = BG_SOURCE (object)->priv;
+  BgSource *source = BG_SOURCE (object);
+  BgSourcePrivate *priv = bg_source_get_instance_private (source);
 
   switch (property_id)
     {
@@ -115,7 +113,8 @@ bg_source_set_property (GObject      *object,
 static void
 bg_source_dispose (GObject *object)
 {
-  BgSourcePrivate *priv = BG_SOURCE (object)->priv;
+  BgSource *source = BG_SOURCE (object);
+  BgSourcePrivate *priv = bg_source_get_instance_private (source);
 
   g_clear_object (&priv->store);
 
@@ -127,8 +126,6 @@ bg_source_class_init (BgSourceClass *klass)
 {
   GParamSpec *pspec;
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (BgSourcePrivate));
 
   object_class->constructed = bg_source_constructed;
   object_class->get_property = bg_source_get_property;
@@ -153,41 +150,50 @@ bg_source_class_init (BgSourceClass *klass)
 static void
 bg_source_init (BgSource *self)
 {
-  BgSourcePrivate *priv;
-
-  priv = self->priv = SOURCE_PRIVATE (self);
-
+  BgSourcePrivate *priv = bg_source_get_instance_private (self);
   priv->store = gtk_list_store_new (3, CAIRO_GOBJECT_TYPE_SURFACE, G_TYPE_OBJECT, G_TYPE_STRING);
 }
 
 GtkListStore*
 bg_source_get_liststore (BgSource *source)
 {
+  BgSourcePrivate *priv;
+
   g_return_val_if_fail (BG_IS_SOURCE (source), NULL);
 
-  return source->priv->store;
+  priv = bg_source_get_instance_private (source);
+  return priv->store;
 }
 
 gint
 bg_source_get_scale_factor (BgSource *source)
 {
+  BgSourcePrivate *priv;
+
   g_return_val_if_fail (BG_IS_SOURCE (source), 1);
 
-  return gtk_widget_get_scale_factor (source->priv->window);
+  priv = bg_source_get_instance_private (source);
+  return gtk_widget_get_scale_factor (priv->window);
 }
 
 gint
 bg_source_get_thumbnail_height (BgSource *source)
 {
+  BgSourcePrivate *priv;
+
   g_return_val_if_fail (BG_IS_SOURCE (source), THUMBNAIL_HEIGHT);
 
-  return source->priv->thumbnail_height;
+  priv = bg_source_get_instance_private (source);
+  return priv->thumbnail_height;
 }
 
 gint
 bg_source_get_thumbnail_width (BgSource *source)
 {
+  BgSourcePrivate *priv;
+
   g_return_val_if_fail (BG_IS_SOURCE (source), THUMBNAIL_WIDTH);
 
-  return source->priv->thumbnail_width;
+  priv = bg_source_get_instance_private (source);
+  return priv->thumbnail_width;
 }

@@ -28,15 +28,13 @@
 
 struct _CcBackgroundGriloMiner
 {
-  GObject parent;
+  GObject parent_instance;
+
   GCancellable *cancellable;
   GList *accounts;
 };
 
-struct _CcBackgroundGriloMinerClass
-{
-  GObjectClass parent_class;
-};
+G_DEFINE_TYPE (CcBackgroundGriloMiner, cc_background_grilo_miner, G_TYPE_OBJECT)
 
 enum
 {
@@ -45,8 +43,6 @@ enum
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
-
-G_DEFINE_TYPE (CcBackgroundGriloMiner, cc_background_grilo_miner, G_TYPE_OBJECT)
 
 #define REMOTE_ITEM_COUNT 50
 

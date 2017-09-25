@@ -28,12 +28,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_BACKGROUND_ITEM         (cc_background_item_get_type ())
-#define CC_BACKGROUND_ITEM(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), CC_TYPE_BACKGROUND_ITEM, CcBackgroundItem))
-#define CC_BACKGROUND_ITEM_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CC_TYPE_BACKGROUND_ITEM, CcBackgroundItemClass))
-#define CC_IS_BACKGROUND_ITEM(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), CC_TYPE_BACKGROUND_ITEM))
-#define CC_IS_BACKGROUND_ITEM_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CC_TYPE_BACKGROUND_ITEM))
-#define CC_BACKGROUND_ITEM_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CC_TYPE_BACKGROUND_ITEM, CcBackgroundItemClass))
+#define CC_TYPE_BACKGROUND_ITEM (cc_background_item_get_type ())
+G_DECLARE_FINAL_TYPE (CcBackgroundItem, cc_background_item, CC, BACKGROUND_ITEM, GObject)
 
 typedef enum {
 	CC_BACKGROUND_ITEM_HAS_SHADING   = 1 << 0,
@@ -48,21 +44,6 @@ typedef enum {
 				    CC_BACKGROUND_ITEM_HAS_PCOLOR &	\
 				    CC_BACKGROUND_ITEM_HAS_SCOLOR &	\
 				    CC_BACKGROUND_ITEM_HAS_FNAME)
-
-typedef struct CcBackgroundItemPrivate CcBackgroundItemPrivate;
-
-typedef struct
-{
-        GObject                  parent;
-        CcBackgroundItemPrivate *priv;
-} CcBackgroundItem;
-
-typedef struct
-{
-        GObjectClass   parent_class;
-} CcBackgroundItemClass;
-
-GType              cc_background_item_get_type (void);
 
 CcBackgroundItem * cc_background_item_new                 (const char                   *uri);
 CcBackgroundItem * cc_background_item_copy                (CcBackgroundItem             *item);

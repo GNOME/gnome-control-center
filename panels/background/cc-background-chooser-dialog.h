@@ -26,29 +26,9 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_BACKGROUND_CHOOSER_DIALOG            (cc_background_chooser_dialog_get_type ())
-#define CC_BACKGROUND_CHOOSER_DIALOG(object)         (G_TYPE_CHECK_INSTANCE_CAST ((object), CC_TYPE_BACKGROUND_CHOOSER_DIALOG, CcBackgroundChooserDialog))
-#define CC_BACKGROUND_CHOOSER_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CC_TYPE_BACKGROUND_CHOOSER_DIALOG, CcBackgroundChooserDialogClass))
-#define CC_IS_BACKGROUND_CHOOSER_DIALOG(object)      (G_TYPE_CHECK_INSTANCE_TYPE ((object), CC_TYPE_BACKGROUND_CHOOSER_DIALOG))
-#define CC_IS_BACKGROUND_CHOOSER_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), CC_TYPE_BACKGROUND_CHOOSER_DIALOG))
-#define CC_BACKGROUND_CHOOSER_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), CC_TYPE_BACKGROUND_CHOOSER_DIALOG, CcBackgroundChooserDialogClass))
+#define CC_TYPE_BACKGROUND_CHOOSER_DIALOG (cc_background_chooser_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (CcBackgroundChooserDialog, cc_background_chooser_dialog, CC, BACKGROUND_CHOOSER_DIALOG, GtkDialog)
 
-typedef struct _CcBackgroundChooserDialog        CcBackgroundChooserDialog;
-typedef struct _CcBackgroundChooserDialogClass   CcBackgroundChooserDialogClass;
-typedef struct _CcBackgroundChooserDialogPrivate CcBackgroundChooserDialogPrivate;
-
-struct _CcBackgroundChooserDialog
-{
-  GtkDialog parent_instance;
-  CcBackgroundChooserDialogPrivate *priv;
-};
-
-struct _CcBackgroundChooserDialogClass
-{
-  GtkDialogClass parent_class;
-};
-
-GType                  cc_background_chooser_dialog_get_type               (void) G_GNUC_CONST;
 GtkWidget *            cc_background_chooser_dialog_new                    (GtkWindow *transient_for);
 
 CcBackgroundItem *     cc_background_chooser_dialog_get_item               (CcBackgroundChooserDialog *chooser);

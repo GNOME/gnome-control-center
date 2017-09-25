@@ -33,17 +33,14 @@
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 #include <gdesktop-enums.h>
 
-G_DEFINE_TYPE (BgPicturesSource, bg_pictures_source, BG_TYPE_SOURCE)
-
-#define PICTURES_SOURCE_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), BG_TYPE_PICTURES_SOURCE, BgPicturesSourcePrivate))
-
 #define ATTRIBUTES G_FILE_ATTRIBUTE_STANDARD_NAME "," \
 	G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE "," \
         G_FILE_ATTRIBUTE_TIME_MODIFIED
 
-struct _BgPicturesSourcePrivate
+struct _BgPicturesSource
 {
+  BgSource parent_instance;
+
   GCancellable *cancellable;
 
   CcBackgroundGriloMiner *grl_miner;
@@ -55,6 +52,8 @@ struct _BgPicturesSourcePrivate
 
   GHashTable *known_items;
 };
+
+G_DEFINE_TYPE (BgPicturesSource, bg_pictures_source, BG_TYPE_SOURCE)
 
 const char * const content_types[] = {
 	"image/png",
@@ -78,16 +77,16 @@ static void picture_opened_for_read (GObject *source_object, GAsyncResult *res, 
 static void
 bg_pictures_source_dispose (GObject *object)
 {
-  BgPicturesSourcePrivate *priv = BG_PICTURES_SOURCE (object)->priv;
+  BgPicturesSource *source = BG_PICTURES_SOURCE (object);
 
-  if (priv->cancellable)
+  if (source->cancellable)
     {
-      g_cancellable_cancel (priv->cancellable);
-      g_clear_object (&priv->cancellable);
+      g_cancellable_cancel (source->cancellable);
+      g_clear_object (&source->cancellable);
     }
 
-  g_clear_object (&priv->grl_miner);
-  g_clear_object (&priv->thumb_factory);
+  g_clear_object (&source->grl_miner);
+  g_clear_object (&source->thumb_factory);
 
   G_OBJECT_CLASS (bg_pictures_source_parent_class)->dispose (object);
 }
@@ -97,12 +96,12 @@ bg_pictures_source_finalize (GObject *object)
 {
   BgPicturesSource *bg_source = BG_PICTURES_SOURCE (object);
 
-  g_clear_object (&bg_source->priv->thumb_factory);
+  g_clear_object (&bg_source->thumb_factory);
 
-  g_clear_pointer (&bg_source->priv->known_items, g_hash_table_destroy);
+  g_clear_pointer (&bg_source->known_items, g_hash_table_destroy);
 
-  g_clear_object (&bg_source->priv->picture_dir_monitor);
-  g_clear_object (&bg_source->priv->cache_dir_monitor);
+  g_clear_object (&bg_source->picture_dir_monitor);
+  g_clear_object (&bg_source->cache_dir_monitor);
 
   G_OBJECT_CLASS (bg_pictures_source_parent_class)->finalize (object);
 }
@@ -111,8 +110,6 @@ static void
 bg_pictures_source_class_init (BgPicturesSourceClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (BgPicturesSourcePrivate));
 
   object_class->dispose = bg_pictures_source_dispose;
   object_class->finalize = bg_pictures_source_finalize;
@@ -231,7 +228,7 @@ picture_scaled (GObject *source_object,
       g_object_set_data (G_OBJECT (item), "needs-rotation", GINT_TO_POINTER (TRUE));
       g_object_set_data_full (G_OBJECT (file), "item", g_object_ref (item), g_object_unref);
       g_file_read_async (G_FILE (file), G_PRIORITY_DEFAULT,
-                         bg_source->priv->cancellable,
+                         bg_source->cancellable,
                          picture_opened_for_read, bg_source);
       g_object_unref (file);
       goto out;
@@ -264,7 +261,7 @@ picture_scaled (GObject *source_object,
         }
     }
 
-  g_hash_table_insert (bg_source->priv->known_items,
+  g_hash_table_insert (bg_source->known_items,
                        bg_pictures_source_get_unique_filename (uri),
                        GINT_TO_POINTER (TRUE));
 
@@ -326,7 +323,7 @@ picture_opened_for_read (GObject *source_object,
   gdk_pixbuf_new_from_stream_at_scale_async (G_INPUT_STREAM (stream),
                                              thumbnail_width, thumbnail_height,
                                              TRUE,
-                                             bg_source->priv->cancellable,
+                                             bg_source->cancellable,
                                              picture_scaled, bg_source);
   g_object_unref (stream);
 }
@@ -364,7 +361,7 @@ picture_copied_for_read (GObject *source_object,
   g_object_set_data_full (G_OBJECT (native_file), "item", g_object_ref (item), g_object_unref);
   g_file_read_async (native_file,
                      G_PRIORITY_DEFAULT,
-                     bg_source->priv->cancellable,
+                     bg_source->cancellable,
                      picture_opened_for_read,
                      bg_source);
 
@@ -543,7 +540,7 @@ add_single_file (BgPicturesSource     *bg_source,
     {
       g_object_set_data_full (G_OBJECT (file), "item", g_object_ref (item), g_object_unref);
       g_file_read_async (file, G_PRIORITY_DEFAULT,
-                         bg_source->priv->cancellable,
+                         bg_source->cancellable,
                          picture_opened_for_read, bg_source);
     }
   else
@@ -576,7 +573,7 @@ add_single_file (BgPicturesSource     *bg_source,
                          native_file,
                          G_FILE_COPY_ALL_METADATA,
                          G_PRIORITY_DEFAULT,
-                         bg_source->priv->cancellable,
+                         bg_source->cancellable,
                          NULL,
                          NULL,
                          picture_copied_for_read,
@@ -689,7 +686,7 @@ bg_pictures_source_remove (BgPicturesSource *bg_source,
         {
           char *uuid;
           uuid = bg_pictures_source_get_unique_filename (uri);
-          g_hash_table_insert (bg_source->priv->known_items,
+          g_hash_table_insert (bg_source->known_items,
 			       uuid, NULL);
 
           gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
@@ -763,15 +760,15 @@ file_info_async_ready (GObject      *source,
 }
 
 static void
-dir_enum_async_ready (GObject      *source,
+dir_enum_async_ready (GObject      *s,
                       GAsyncResult *res,
                       gpointer      user_data)
 {
-  BgPicturesSourcePrivate *priv;
+  BgPicturesSource *source = (BgPicturesSource *) user_data;
   GFileEnumerator *enumerator;
   GError *err = NULL;
 
-  enumerator = g_file_enumerate_children_finish (G_FILE (source), res, &err);
+  enumerator = g_file_enumerate_children_finish (G_FILE (s), res, &err);
 
   if (err)
     {
@@ -781,13 +778,11 @@ dir_enum_async_ready (GObject      *source,
       return;
     }
 
-  priv = BG_PICTURES_SOURCE (user_data)->priv;
-
   /* get the files */
   g_file_enumerator_next_files_async (enumerator,
                                       G_MAXINT,
                                       G_PRIORITY_LOW,
-                                      priv->cancellable,
+                                      source->cancellable,
                                       file_info_async_ready,
                                       user_data);
   g_object_unref (enumerator);
@@ -846,7 +841,7 @@ bg_pictures_source_is_known (BgPicturesSource *bg_source,
   char *uuid;
 
   uuid = bg_pictures_source_get_unique_filename (uri);
-  retval = (GPOINTER_TO_INT (g_hash_table_lookup (bg_source->priv->known_items, uuid)));
+  retval = (GPOINTER_TO_INT (g_hash_table_lookup (bg_source->known_items, uuid)));
   g_free (uuid);
 
   return retval;
@@ -969,12 +964,12 @@ monitor_path (BgPicturesSource *self,
   g_file_enumerate_children_async (dir,
                                    ATTRIBUTES,
                                    G_FILE_QUERY_INFO_NONE,
-                                   G_PRIORITY_LOW, self->priv->cancellable,
+                                   G_PRIORITY_LOW, self->cancellable,
                                    dir_enum_async_ready, self);
 
   monitor = g_file_monitor_directory (dir,
                                       G_FILE_MONITOR_NONE,
-                                      self->priv->cancellable,
+                                      self->cancellable,
                                       NULL);
 
   if (monitor)
@@ -1004,14 +999,11 @@ static void
 bg_pictures_source_init (BgPicturesSource *self)
 {
   const gchar *pictures_path;
-  BgPicturesSourcePrivate *priv;
   char *cache_path;
   GtkListStore *store;
 
-  priv = self->priv = PICTURES_SOURCE_PRIVATE (self);
-
-  priv->cancellable = g_cancellable_new ();
-  priv->known_items = g_hash_table_new_full (g_str_hash,
+  self->cancellable = g_cancellable_new ();
+  self->known_items = g_hash_table_new_full (g_str_hash,
 					     g_str_equal,
 					     (GDestroyNotify) g_free,
 					     NULL);
@@ -1020,17 +1012,17 @@ bg_pictures_source_init (BgPicturesSource *self)
   if (pictures_path == NULL)
     pictures_path = g_get_home_dir ();
 
-  priv->picture_dir_monitor = monitor_path (self, pictures_path);
+  self->picture_dir_monitor = monitor_path (self, pictures_path);
 
   cache_path = bg_pictures_source_get_cache_path ();
-  priv->cache_dir_monitor = monitor_path (self, cache_path);
+  self->cache_dir_monitor = monitor_path (self, cache_path);
   g_free (cache_path);
 
-  priv->grl_miner = cc_background_grilo_miner_new ();
-  g_signal_connect_swapped (priv->grl_miner, "media-found", G_CALLBACK (media_found_cb), self);
-  cc_background_grilo_miner_start (priv->grl_miner);
+  self->grl_miner = cc_background_grilo_miner_new ();
+  g_signal_connect_swapped (self->grl_miner, "media-found", G_CALLBACK (media_found_cb), self);
+  cc_background_grilo_miner_start (self->grl_miner);
 
-  priv->thumb_factory =
+  self->thumb_factory =
     gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
   store = bg_source_get_liststore (BG_SOURCE (self));
