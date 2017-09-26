@@ -15,6 +15,8 @@ icons_DATA =					\
 	audio-speaker-left-side.svg		\
 	audio-speaker-left-side-testing.svg	\
 	audio-speaker-left-testing.svg		\
+	audio-speaker-mono.svg		\
+	audio-speaker-mono-testing.svg		\
 	audio-speaker-right-back.svg		\
 	audio-speaker-right-back-testing.svg	\
 	audio-speaker-right.svg			\
