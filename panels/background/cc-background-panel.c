@@ -63,13 +63,9 @@ struct _CcBackgroundPanelPrivate
   CcBackgroundItem *current_lock_background;
 
   GCancellable *copy_cancellable;
-  GCancellable *capture_cancellable;
 
   GtkWidget *spinner;
   GtkWidget *chooser;
-
-  GdkPixbuf *display_screenshot;
-  char *screenshot_path;
 };
 
 #define WID(y) (GtkWidget *) gtk_builder_get_object (priv->builder, y)
@@ -103,14 +99,6 @@ cc_background_panel_dispose (GObject *object)
       g_clear_object (&priv->copy_cancellable);
     }
 
-  if (priv->capture_cancellable)
-    {
-      /* cancel screenshot operations */
-      g_cancellable_cancel (priv->capture_cancellable);
-
-      g_clear_object (&priv->capture_cancellable);
-    }
-
   if (priv->chooser)
     {
       gtk_widget_destroy (priv->chooser);
@@ -118,9 +106,6 @@ cc_background_panel_dispose (GObject *object)
     }
 
   g_clear_object (&priv->thumb_factory);
-  g_clear_object (&priv->display_screenshot);
-
-  g_clear_pointer (&priv->screenshot_path, g_free);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
 }
@@ -219,25 +204,14 @@ get_or_create_cached_pixbuf (CcBackgroundPanel *panel,
   pixbuf = g_object_get_data (G_OBJECT (background), "pixbuf");
   if (pixbuf == NULL)
     {
-      if (background == priv->current_background &&
-          priv->display_screenshot != NULL)
-        {
-          pixbuf = gdk_pixbuf_scale_simple (priv->display_screenshot,
-                                            preview_width,
-                                            preview_height,
-                                            GDK_INTERP_BILINEAR);
-        }
-      else
-        {
-          gtk_widget_get_allocation (widget, &allocation);
-          scale_factor = gtk_widget_get_scale_factor (widget);
-          pixbuf = cc_background_item_get_frame_thumbnail (background,
-                                                           priv->thumb_factory,
-                                                           preview_width,
-                                                           preview_height,
-                                                           scale_factor,
-                                                           -2, TRUE);
-        }
+      gtk_widget_get_allocation (widget, &allocation);
+      scale_factor = gtk_widget_get_scale_factor (widget);
+      pixbuf = cc_background_item_get_frame_thumbnail (background,
+                                                       priv->thumb_factory,
+                                                       preview_width,
+                                                       preview_height,
+                                                       scale_factor,
+                                                       -2, TRUE);
       g_object_set_data_full (G_OBJECT (background), "pixbuf", pixbuf, g_object_unref);
     }
   return pixbuf;
@@ -261,192 +235,13 @@ update_display_preview (CcBackgroundPanel *panel,
   cairo_destroy (cr);
 }
 
-typedef struct {
-  CcBackgroundPanel *panel;
-  GdkRectangle capture_rect;
-  GdkRectangle monitor_rect;
-  GdkRectangle workarea_rect;
-  gboolean whole_monitor;
-} ScreenshotData;
-
-static void
-on_screenshot_finished (GObject *source,
-                        GAsyncResult *res,
-                        gpointer user_data)
-{
-  ScreenshotData *data = user_data;
-  CcBackgroundPanel *panel = data->panel;
-  CcBackgroundPanelPrivate *priv;
-  GError *error;
-  GdkPixbuf *pixbuf;
-  cairo_surface_t *surface;
-  cairo_t *cr;
-  GVariant *result;
-
-  error = NULL;
-  result = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source),
-                                          res,
-                                          &error);
-
-  if (result == NULL) {
-    if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-      g_error_free (error);
-      g_free (data);
-      return;
-    }
-    g_debug ("Unable to get screenshot: %s",
-             error->message);
-    g_error_free (error);
-    /* fallback? */
-    priv = panel->priv;
-    goto out;
-  }
-  g_variant_unref (result);
-
-  priv = panel->priv;
-
-  pixbuf = gdk_pixbuf_new_from_file (panel->priv->screenshot_path, &error);
-  if (pixbuf == NULL)
-    {
-      g_debug ("Unable to use GNOME Shell's builtin screenshot interface: %s",
-               error->message);
-      g_error_free (error);
-      goto out;
-    }
-
-  surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
-                                        data->monitor_rect.width, data->monitor_rect.height);
-  cr = cairo_create (surface);
-  gdk_cairo_set_source_pixbuf (cr, pixbuf,
-                               data->capture_rect.x - data->monitor_rect.x,
-                               data->capture_rect.y - data->monitor_rect.y);
-  cairo_paint (cr);
-  g_object_unref (pixbuf);
-
-  if (data->whole_monitor) {
-    /* clear the workarea */
-    cairo_save (cr);
-    cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
-    cairo_rectangle (cr, data->workarea_rect.x - data->monitor_rect.x,
-                     data->workarea_rect.y - data->monitor_rect.y,
-                     data->workarea_rect.width,
-                     data->workarea_rect.height);
-    cairo_fill (cr);
-    cairo_restore (cr);
-  }
-
-  g_clear_object (&panel->priv->display_screenshot);
-  panel->priv->display_screenshot = gdk_pixbuf_get_from_surface (surface,
-                                                                 0, 0,
-                                                                 data->monitor_rect.width,
-                                                                 data->monitor_rect.height);
-  /* invalidate existing cached pixbuf */
-  g_object_set_data (G_OBJECT (priv->current_background), "pixbuf", NULL);
-
-  /* remove the temporary file created by the shell */
-  g_unlink (panel->priv->screenshot_path);
-  g_clear_pointer (&priv->screenshot_path, g_free);
-
-  cairo_destroy (cr);
-  cairo_surface_destroy (surface);
-
- out:
-  update_display_preview (panel, WID ("background-desktop-drawingarea"), priv->current_background);
-  g_free (data);
-}
-
-static gboolean
-calculate_contiguous_workarea (ScreenshotData *data)
-{
-  /* Optimise for the shell panel being the only non-workarea
-   * object at the top of the screen */
-  if (data->workarea_rect.x != data->monitor_rect.x)
-    return FALSE;
-  if ((data->workarea_rect.y + data->workarea_rect.height) != (data->monitor_rect.y + data->monitor_rect.height))
-    return FALSE;
-
-  data->capture_rect.x = data->monitor_rect.x;
-  data->capture_rect.width = data->monitor_rect.width;
-  data->capture_rect.y = data->monitor_rect.y;
-  data->capture_rect.height = data->monitor_rect.height - data->workarea_rect.height;
-
-  return TRUE;
-}
-
-static void
-get_screenshot_async (CcBackgroundPanel *panel)
-{
-  CcBackgroundPanelPrivate *priv = panel->priv;
-  gchar *path, *tmpname;
-  const gchar *method_name;
-  GVariant *method_params;
-  GtkWidget *widget;
-  ScreenshotData *data;
-  int primary;
-
-  data = g_new0 (ScreenshotData, 1);
-  data->panel = panel;
-
-  widget = WID ("background-desktop-drawingarea");
-  primary = gdk_screen_get_primary_monitor (gtk_widget_get_screen (widget));
-  gdk_screen_get_monitor_geometry (gtk_widget_get_screen (widget), primary, &data->monitor_rect);
-  gdk_screen_get_monitor_workarea (gtk_widget_get_screen (widget), primary, &data->workarea_rect);
-  if (calculate_contiguous_workarea (data)) {
-    g_debug ("Capturing only a portion of the screen");
-  } else {
-    g_debug ("Capturing the whole monitor");
-    data->whole_monitor = TRUE;
-    data->capture_rect = data->monitor_rect;
-  }
-
-  g_debug ("Trying to capture rectangle %dx%d (at %d,%d)",
-           data->capture_rect.width, data->capture_rect.height, data->capture_rect.x, data->capture_rect.y);
-
-  path = g_build_filename (g_get_user_cache_dir (), "gnome-control-center", NULL);
-  g_mkdir_with_parents (path, USER_DIR_MODE);
-
-  tmpname = g_strdup_printf ("scr-%d.png", g_random_int ());
-  g_free (panel->priv->screenshot_path);
-  panel->priv->screenshot_path = g_build_filename (path, tmpname, NULL);
-  g_free (path);
-  g_free (tmpname);
-
-  method_name = "ScreenshotArea";
-  method_params = g_variant_new ("(iiiibs)",
-                                 data->capture_rect.x, data->capture_rect.y,
-                                 data->capture_rect.width, data->capture_rect.height,
-                                 FALSE, /* flash */
-                                 panel->priv->screenshot_path);
-
-  g_dbus_connection_call (panel->priv->connection,
-                          "org.gnome.Shell.Screenshot",
-                          "/org/gnome/Shell/Screenshot",
-                          "org.gnome.Shell.Screenshot",
-                          method_name,
-                          method_params,
-                          NULL,
-                          G_DBUS_CALL_FLAGS_NONE,
-                          -1,
-                          priv->capture_cancellable,
-                          on_screenshot_finished,
-                          data);
-}
-
 static gboolean
 on_preview_draw (GtkWidget         *widget,
                  cairo_t           *cr,
                  CcBackgroundPanel *panel)
 {
   CcBackgroundPanelPrivate *priv = panel->priv;
-  /* we have another shot in flight or an existing cache */
-  if (panel->priv->display_screenshot == NULL
-      && panel->priv->screenshot_path == NULL)
-    {
-      get_screenshot_async (panel);
-    }
-  else
-    update_display_preview (panel, widget, priv->current_background);
-
+  update_display_preview (panel, widget, priv->current_background);
   return TRUE;
 }
 
@@ -845,7 +640,6 @@ cc_background_panel_init (CcBackgroundPanel *self)
   g_signal_connect (widget, "draw", G_CALLBACK (on_lock_preview_draw), self);
 
   priv->copy_cancellable = g_cancellable_new ();
-  priv->capture_cancellable = g_cancellable_new ();
 
   priv->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
