@@ -25,25 +25,8 @@
 
 G_BEGIN_DECLS
 
-#define GVC_TYPE_LEVEL_BAR         (gvc_level_bar_get_type ())
-#define GVC_LEVEL_BAR(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GVC_TYPE_LEVEL_BAR, GvcLevelBar))
-#define GVC_LEVEL_BAR_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GVC_TYPE_LEVEL_BAR, GvcLevelBarClass))
-#define GVC_IS_LEVEL_BAR(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GVC_TYPE_LEVEL_BAR))
-#define GVC_IS_LEVEL_BAR_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GVC_TYPE_LEVEL_BAR))
-#define GVC_LEVEL_BAR_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GVC_TYPE_LEVEL_BAR, GvcLevelBarClass))
-
-typedef struct GvcLevelBarPrivate GvcLevelBarPrivate;
-
-typedef struct
-{
-        GtkWidget           parent;
-        GvcLevelBarPrivate *priv;
-} GvcLevelBar;
-
-typedef struct
-{
-        GtkWidgetClass      parent_class;
-} GvcLevelBarClass;
+#define GVC_TYPE_LEVEL_BAR (gvc_level_bar_get_type ())
+G_DECLARE_FINAL_TYPE (GvcLevelBar, gvc_level_bar, GVC, LEVEL_BAR, GtkBox)
 
 typedef enum
 {
@@ -51,8 +34,6 @@ typedef enum
     GVC_LEVEL_SCALE_LOG,
     GVC_LEVEL_SCALE_LAST
 } GvcLevelScale;
-
-GType               gvc_level_bar_get_type            (void);
 
 GtkWidget *         gvc_level_bar_new                 (void);
 void                gvc_level_bar_set_orientation     (GvcLevelBar   *bar,

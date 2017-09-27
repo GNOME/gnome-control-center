@@ -26,27 +26,8 @@
 
 G_BEGIN_DECLS
 
-#define GVC_TYPE_SPEAKER_TEST         (gvc_speaker_test_get_type ())
-#define GVC_SPEAKER_TEST(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GVC_TYPE_SPEAKER_TEST, GvcSpeakerTest))
-#define GVC_SPEAKER_TEST_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GVC_TYPE_SPEAKER_TEST, GvcSpeakerTestClass))
-#define GVC_IS_SPEAKER_TEST(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GVC_TYPE_SPEAKER_TEST))
-#define GVC_IS_SPEAKER_TEST_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GVC_TYPE_SPEAKER_TEST))
-#define GVC_SPEAKER_TEST_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GVC_TYPE_SPEAKER_TEST, GvcSpeakerTestClass))
-
-typedef struct GvcSpeakerTestPrivate GvcSpeakerTestPrivate;
-
-typedef struct
-{
-        GtkNotebook               parent;
-        GvcSpeakerTestPrivate *priv;
-} GvcSpeakerTest;
-
-typedef struct
-{
-        GtkNotebookClass        parent_class;
-} GvcSpeakerTestClass;
-
-GType               gvc_speaker_test_get_type            (void);
+#define GVC_TYPE_SPEAKER_TEST (gvc_speaker_test_get_type ())
+G_DECLARE_FINAL_TYPE (GvcSpeakerTest, gvc_speaker_test, GVC, SPEAKER_TEST, GtkGrid)
 
 GtkWidget *         gvc_speaker_test_new                 (GvcMixerControl *control,
                                                           GvcMixerStream  *stream);

@@ -24,29 +24,8 @@
 
 G_BEGIN_DECLS
 
-#define GVC_TYPE_COMBO_BOX         (gvc_combo_box_get_type ())
-#define GVC_COMBO_BOX(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GVC_TYPE_COMBO_BOX, GvcComboBox))
-#define GVC_COMBO_BOX_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GVC_TYPE_COMBO_BOX, GvcComboBoxClass))
-#define GVC_IS_COMBO_BOX(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GVC_TYPE_COMBO_BOX))
-#define GVC_IS_COMBO_BOX_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GVC_TYPE_COMBO_BOX))
-#define GVC_COMBO_BOX_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GVC_TYPE_COMBO_BOX, GvcComboBoxClass))
-
-typedef struct GvcComboBoxPrivate GvcComboBoxPrivate;
-
-typedef struct
-{
-        GtkBox              parent;
-        GvcComboBoxPrivate *priv;
-} GvcComboBox;
-
-typedef struct
-{
-        GtkBoxClass             parent_class;
-        void (* changed)        (GvcComboBox *combobox, const char *name);
-        void (* button_clicked) (GvcComboBox *combobox);
-} GvcComboBoxClass;
-
-GType               gvc_combo_box_get_type            (void);
+#define GVC_TYPE_COMBO_BOX (gvc_combo_box_get_type ())
+G_DECLARE_FINAL_TYPE (GvcComboBox, gvc_combo_box, GVC, COMBO_BOX, GtkBox)
 
 GtkWidget *         gvc_combo_box_new                 (const char   *label);
 

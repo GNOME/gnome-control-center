@@ -32,6 +32,14 @@
 #include "cc-sound-panel.h"
 #include "gvc-mixer-dialog.h"
 
+struct _CcSoundPanel {
+	CcPanel parent_instance;
+
+	GvcMixerControl *control;
+	GvcMixerDialog  *dialog;
+	GtkWidget       *connecting_label;
+};
+
 CC_PANEL_REGISTER (CcSoundPanel, cc_sound_panel)
 
 enum {

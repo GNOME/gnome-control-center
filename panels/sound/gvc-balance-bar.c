@@ -35,10 +35,10 @@
 #define SCALE_SIZE 128
 #define ADJUSTMENT_MAX_NORMAL 65536.0 /* PA_VOLUME_NORM */
 
-#define GVC_BALANCE_BAR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GVC_TYPE_BALANCE_BAR, GvcBalanceBarPrivate))
-
-struct GvcBalanceBarPrivate
+struct _GvcBalanceBar
 {
+        GtkBox         parent_instance;
+
         GvcChannelMap *channel_map;
         GvcBalanceType btype;
         GtkWidget     *scale_box;
@@ -80,27 +80,26 @@ G_DEFINE_TYPE (GvcBalanceBar, gvc_balance_bar, GTK_TYPE_BOX)
 static GtkWidget *
 _scale_box_new (GvcBalanceBar *bar)
 {
-        GvcBalanceBarPrivate *priv = bar->priv;
         GtkWidget            *box;
         GtkWidget            *sbox;
         GtkWidget            *ebox;
-        GtkAdjustment        *adjustment = bar->priv->adjustment;
+        GtkAdjustment        *adjustment = bar->adjustment;
         char                 *str_lower, *str_upper;
         gdouble              lower, upper;
 
-        bar->priv->scale_box = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-        priv->scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, priv->adjustment);
-        gtk_scale_set_has_origin (GTK_SCALE (priv->scale), FALSE);
-        gtk_widget_set_size_request (priv->scale, SCALE_SIZE, -1);
+        bar->scale_box = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        bar->scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, bar->adjustment);
+        gtk_scale_set_has_origin (GTK_SCALE (bar->scale), FALSE);
+        gtk_widget_set_size_request (bar->scale, SCALE_SIZE, -1);
 
-        bar->priv->start_box = sbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        bar->start_box = sbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_box_pack_start (GTK_BOX (box), sbox, FALSE, FALSE, 0);
 
-        gtk_box_pack_start (GTK_BOX (sbox), priv->label, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (sbox), bar->label, FALSE, FALSE, 0);
 
-        gtk_box_pack_start (GTK_BOX (box), priv->scale, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (box), bar->scale, TRUE, TRUE, 0);
 
-        switch (bar->priv->btype) {
+        switch (bar->btype) {
         case BALANCE_TYPE_RL:
                 str_lower = g_strdup_printf ("<small>%s</small>", C_("balance", "Left"));
                 str_upper = g_strdup_printf ("<small>%s</small>", C_("balance", "Right"));
@@ -118,42 +117,42 @@ _scale_box_new (GvcBalanceBar *bar)
         }
 
         lower = gtk_adjustment_get_lower (adjustment);
-        gtk_scale_add_mark (GTK_SCALE (priv->scale), lower,
+        gtk_scale_add_mark (GTK_SCALE (bar->scale), lower,
                             GTK_POS_BOTTOM, str_lower);
         g_free (str_lower);
         upper = gtk_adjustment_get_upper (adjustment);
-        gtk_scale_add_mark (GTK_SCALE (priv->scale), upper,
+        gtk_scale_add_mark (GTK_SCALE (bar->scale), upper,
                             GTK_POS_BOTTOM, str_upper);
         g_free (str_upper);
 
-        if (bar->priv->btype != BALANCE_TYPE_LFE) {
-                gtk_scale_add_mark (GTK_SCALE (priv->scale),
+        if (bar->btype != BALANCE_TYPE_LFE) {
+                gtk_scale_add_mark (GTK_SCALE (bar->scale),
                                     (upper - lower)/2 + lower,
                                     GTK_POS_BOTTOM, NULL);
         }
 
-        bar->priv->end_box = ebox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        bar->end_box = ebox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_box_pack_start (GTK_BOX (box), ebox, FALSE, FALSE, 0);
 
-        ca_gtk_widget_disable_sounds (bar->priv->scale, FALSE);
-        gtk_widget_add_events (bar->priv->scale, GDK_SCROLL_MASK);
+        ca_gtk_widget_disable_sounds (bar->scale, FALSE);
+        gtk_widget_add_events (bar->scale, GDK_SCROLL_MASK);
 
-        g_signal_connect (G_OBJECT (bar->priv->scale), "button-press-event",
+        g_signal_connect (G_OBJECT (bar->scale), "button-press-event",
                           G_CALLBACK (on_scale_button_press_event), bar);
-        g_signal_connect (G_OBJECT (bar->priv->scale), "button-release-event",
+        g_signal_connect (G_OBJECT (bar->scale), "button-release-event",
                           G_CALLBACK (on_scale_button_release_event), bar);
-        g_signal_connect (G_OBJECT (bar->priv->scale), "scroll-event",
+        g_signal_connect (G_OBJECT (bar->scale), "scroll-event",
                           G_CALLBACK (on_scale_scroll_event), bar);
 
-        if (bar->priv->size_group != NULL) {
-                gtk_size_group_add_widget (bar->priv->size_group, sbox);
+        if (bar->size_group != NULL) {
+                gtk_size_group_add_widget (bar->size_group, sbox);
 
-                if (bar->priv->symmetric) {
-                        gtk_size_group_add_widget (bar->priv->size_group, ebox);
+                if (bar->symmetric) {
+                        gtk_size_group_add_widget (bar->size_group, ebox);
                 }
         }
 
-        gtk_scale_set_draw_value (GTK_SCALE (priv->scale), FALSE);
+        gtk_scale_set_draw_value (GTK_SCALE (bar->scale), FALSE);
 
         return box;
 }
@@ -165,16 +164,16 @@ gvc_balance_bar_set_size_group (GvcBalanceBar *bar,
 {
         g_return_if_fail (GVC_IS_BALANCE_BAR (bar));
 
-        bar->priv->size_group = group;
-        bar->priv->symmetric = symmetric;
+        bar->size_group = group;
+        bar->symmetric = symmetric;
 
-        if (bar->priv->size_group != NULL) {
-                gtk_size_group_add_widget (bar->priv->size_group,
-                                           bar->priv->start_box);
+        if (bar->size_group != NULL) {
+                gtk_size_group_add_widget (bar->size_group,
+                                           bar->start_box);
 
-                if (bar->priv->symmetric) {
-                        gtk_size_group_add_widget (bar->priv->size_group,
-                                                   bar->priv->end_box);
+                if (bar->symmetric) {
+                        gtk_size_group_add_widget (bar->size_group,
+                                                   bar->end_box);
                 }
         }
         gtk_widget_queue_draw (GTK_WIDGET (bar));
@@ -204,10 +203,10 @@ update_level_from_map (GvcBalanceBar *bar,
         const gdouble *volumes;
         gdouble val;
 
-        g_debug ("Volume changed (for %s bar)", btype_to_string (bar->priv->btype));
+        g_debug ("Volume changed (for %s bar)", btype_to_string (bar->btype));
 
         volumes = gvc_channel_map_get_volume (map);
-        switch (bar->priv->btype) {
+        switch (bar->btype) {
         case BALANCE_TYPE_RL:
                 val = volumes[BALANCE];
                 break;
@@ -221,7 +220,7 @@ update_level_from_map (GvcBalanceBar *bar,
                 g_assert_not_reached ();
         }
 
-        gtk_adjustment_set_value (bar->priv->adjustment, val);
+        gtk_adjustment_set_value (bar->adjustment, val);
 }
 
 static void
@@ -238,12 +237,12 @@ gvc_balance_bar_set_channel_map (GvcBalanceBar *bar,
 {
         g_return_if_fail (GVC_BALANCE_BAR (bar));
 
-        if (bar->priv->channel_map != NULL) {
-                g_signal_handlers_disconnect_by_func (G_OBJECT (bar->priv->channel_map),
+        if (bar->channel_map != NULL) {
+                g_signal_handlers_disconnect_by_func (G_OBJECT (bar->channel_map),
                                                       on_channel_map_volume_changed, bar);
-                g_object_unref (bar->priv->channel_map);
+                g_object_unref (bar->channel_map);
         }
-        bar->priv->channel_map = g_object_ref (map);
+        bar->channel_map = g_object_ref (map);
 
         update_level_from_map (bar, map);
 
@@ -261,16 +260,16 @@ gvc_balance_bar_set_balance_type (GvcBalanceBar *bar,
 
         g_return_if_fail (GVC_BALANCE_BAR (bar));
 
-        bar->priv->btype = btype;
-        if (bar->priv->btype != BALANCE_TYPE_LFE) {
-                bar->priv->adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0,
+        bar->btype = btype;
+        if (bar->btype != BALANCE_TYPE_LFE) {
+                bar->adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0,
                                                                             -1.0,
                                                                             1.0,
                                                                             0.5,
                                                                             0.5,
                                                                             0.0));
         } else {
-                bar->priv->adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0,
+                bar->adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0,
                                                                             0.0,
                                                                             ADJUSTMENT_MAX_NORMAL,
                                                                             ADJUSTMENT_MAX_NORMAL/100.0,
@@ -278,27 +277,27 @@ gvc_balance_bar_set_balance_type (GvcBalanceBar *bar,
                                                                             0.0));
         }
 
-        g_object_ref_sink (bar->priv->adjustment);
-        g_signal_connect (bar->priv->adjustment,
+        g_object_ref_sink (bar->adjustment);
+        g_signal_connect (bar->adjustment,
                           "value-changed",
                           G_CALLBACK (on_adjustment_value_changed),
                           bar);
 
         switch (btype) {
         case BALANCE_TYPE_RL:
-                bar->priv->label = gtk_label_new_with_mnemonic (_("_Balance:"));
+                bar->label = gtk_label_new_with_mnemonic (_("_Balance:"));
                 break;
         case BALANCE_TYPE_FR:
-                bar->priv->label = gtk_label_new_with_mnemonic (_("_Fade:"));
+                bar->label = gtk_label_new_with_mnemonic (_("_Fade:"));
                 break;
         case BALANCE_TYPE_LFE:
-                bar->priv->label = gtk_label_new_with_mnemonic (_("_Subwoofer:"));
+                bar->label = gtk_label_new_with_mnemonic (_("_Subwoofer:"));
                 break;
         default:
                 g_assert_not_reached ();
         }
-        gtk_widget_set_halign (bar->priv->label, GTK_ALIGN_START);
-        gtk_widget_set_valign (bar->priv->label, GTK_ALIGN_START);
+        gtk_widget_set_halign (bar->label, GTK_ALIGN_START);
+        gtk_widget_set_valign (bar->label, GTK_ALIGN_START);
 
         /* frame */
         frame = gtk_frame_new (NULL);
@@ -306,13 +305,13 @@ gvc_balance_bar_set_balance_type (GvcBalanceBar *bar,
         gtk_box_pack_start (GTK_BOX (bar), frame, TRUE, TRUE, 0);
 
         /* box with scale */
-        bar->priv->scale_box = _scale_box_new (bar);
-        gtk_container_add (GTK_CONTAINER (frame), bar->priv->scale_box);
+        bar->scale_box = _scale_box_new (bar);
+        gtk_container_add (GTK_CONTAINER (frame), bar->scale_box);
         gtk_widget_show_all (frame);
 
-        gtk_widget_set_direction (bar->priv->scale, GTK_TEXT_DIR_LTR);
-        gtk_label_set_mnemonic_widget (GTK_LABEL (bar->priv->label),
-                                       bar->priv->scale);
+        gtk_widget_set_direction (bar->scale, GTK_TEXT_DIR_LTR);
+        gtk_label_set_mnemonic_widget (GTK_LABEL (bar->label),
+                                       bar->scale);
 
         g_object_notify (G_OBJECT (bar), "balance-type");
 }
@@ -348,7 +347,7 @@ gvc_balance_bar_get_property (GObject     *object,
 
         switch (prop_id) {
         case PROP_CHANNEL_MAP:
-                g_value_set_object (value, self->priv->channel_map);
+                g_value_set_object (value, self->channel_map);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -388,8 +387,6 @@ gvc_balance_bar_class_init (GvcBalanceBarClass *klass)
                                                            "Whether the balance is right-left or front-rear",
                                                            BALANCE_TYPE_RL, NUM_BALANCE_TYPES - 1, BALANCE_TYPE_RL,
                                                            G_PARAM_READWRITE|G_PARAM_CONSTRUCT_ONLY));
-
-        g_type_class_add_private (klass, sizeof (GvcBalanceBarPrivate));
 }
 
 
@@ -398,7 +395,7 @@ on_scale_button_press_event (GtkWidget      *widget,
                              GdkEventButton *event,
                              GvcBalanceBar  *bar)
 {
-        bar->priv->click_lock = TRUE;
+        bar->click_lock = TRUE;
 
         return FALSE;
 }
@@ -408,7 +405,7 @@ on_scale_button_release_event (GtkWidget      *widget,
                                GdkEventButton *event,
                                GvcBalanceBar  *bar)
 {
-        bar->priv->click_lock = FALSE;
+        bar->click_lock = FALSE;
 
         return FALSE;
 }
@@ -421,7 +418,7 @@ on_scale_scroll_event (GtkWidget      *widget,
         gdouble value;
         gdouble dx, dy;
 
-        value = gtk_adjustment_get_value (bar->priv->adjustment);
+        value = gtk_adjustment_get_value (bar->adjustment);
 
         if (!gdk_event_get_scroll_deltas ((GdkEvent*)event, &dx, &dy)) {
                 dx = 0.0;
@@ -441,7 +438,7 @@ on_scale_scroll_event (GtkWidget      *widget,
                 }
         }
 
-        if (bar->priv->btype == BALANCE_TYPE_LFE) {
+        if (bar->btype == BALANCE_TYPE_LFE) {
                 if (dy > 0) {
                         if (value + dy * ADJUSTMENT_MAX_NORMAL/100.0 > ADJUSTMENT_MAX_NORMAL)
                                 value = ADJUSTMENT_MAX_NORMAL;
@@ -466,7 +463,7 @@ on_scale_scroll_event (GtkWidget      *widget,
                                 value = value + dy * 0.01;
                 }
         }
-        gtk_adjustment_set_value (bar->priv->adjustment, value);
+        gtk_adjustment_set_value (bar->adjustment, value);
 
         return TRUE;
 }
@@ -479,15 +476,15 @@ on_adjustment_value_changed (GtkAdjustment *adjustment,
         pa_cvolume             cv;
         const pa_channel_map  *pa_map;
 
-        if (bar->priv->channel_map == NULL)
+        if (bar->channel_map == NULL)
                 return;
 
-        cv = *gvc_channel_map_get_cvolume (bar->priv->channel_map);
+        cv = *gvc_channel_map_get_cvolume (bar->channel_map);
         val = gtk_adjustment_get_value (adjustment);
 
-        pa_map = gvc_channel_map_get_pa_channel_map (bar->priv->channel_map);
+        pa_map = gvc_channel_map_get_pa_channel_map (bar->channel_map);
 
-        switch (bar->priv->btype) {
+        switch (bar->btype) {
         case BALANCE_TYPE_RL:
                 pa_cvolume_set_balance (&cv, pa_map, val);
                 break;
@@ -499,13 +496,12 @@ on_adjustment_value_changed (GtkAdjustment *adjustment,
                 break;
         }
 
-        gvc_channel_map_volume_changed (bar->priv->channel_map, &cv, TRUE);
+        gvc_channel_map_volume_changed (bar->channel_map, &cv, TRUE);
 }
 
 static void
 gvc_balance_bar_init (GvcBalanceBar *bar)
 {
-        bar->priv = GVC_BALANCE_BAR_GET_PRIVATE (bar);
 }
 
 static void
@@ -518,12 +514,12 @@ gvc_balance_bar_finalize (GObject *object)
 
         bar = GVC_BALANCE_BAR (object);
 
-        g_return_if_fail (bar->priv != NULL);
+        g_return_if_fail (bar != NULL);
 
-        if (bar->priv->channel_map != NULL) {
-                g_signal_handlers_disconnect_by_func (G_OBJECT (bar->priv->channel_map),
+        if (bar->channel_map != NULL) {
+                g_signal_handlers_disconnect_by_func (G_OBJECT (bar->channel_map),
                                                       on_channel_map_volume_changed, bar);
-                g_object_unref (bar->priv->channel_map);
+                g_object_unref (bar->channel_map);
         }
 
         G_OBJECT_CLASS (gvc_balance_bar_parent_class)->finalize (object);

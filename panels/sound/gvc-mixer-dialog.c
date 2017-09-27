@@ -46,10 +46,10 @@
 
 #define SCALE_SIZE 128
 
-#define GVC_MIXER_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GVC_TYPE_MIXER_DIALOG, GvcMixerDialogPrivate))
-
-struct GvcMixerDialogPrivate
+struct _GvcMixerDialog
 {
+        GtkBox           parent_instance;
+
         GvcMixerControl *mixer_control;
         GHashTable      *bars; /* Application and event bars only */
         GtkWidget       *notebook;
@@ -142,7 +142,7 @@ profile_selection_changed (GvcComboBox    *combo_box,
                 gvc_mixer_ui_device_get_origin (output),
                 gvc_mixer_ui_device_get_id (output));
 
-        if (gvc_mixer_control_change_profile_on_selected_device (dialog->priv->mixer_control, output, profile) == FALSE) {
+        if (gvc_mixer_control_change_profile_on_selected_device (dialog->mixer_control, output, profile) == FALSE) {
                 g_warning ("Could not change profile on device %s",
                            gvc_mixer_ui_device_get_description (output));
          }
@@ -158,42 +158,42 @@ update_output_settings (GvcMixerDialog      *dialog,
         GtkAdjustment       *adj;
 
         g_debug ("Updating output settings");
-        if (dialog->priv->output_balance_bar != NULL) {
-                gtk_container_remove (GTK_CONTAINER (dialog->priv->output_settings_box),
-                                      dialog->priv->output_balance_bar);
-                dialog->priv->output_balance_bar = NULL;
+        if (dialog->output_balance_bar != NULL) {
+                gtk_container_remove (GTK_CONTAINER (dialog->output_settings_box),
+                                      dialog->output_balance_bar);
+                dialog->output_balance_bar = NULL;
         }
-        if (dialog->priv->output_fade_bar != NULL) {
-                gtk_container_remove (GTK_CONTAINER (dialog->priv->output_settings_box),
-                                      dialog->priv->output_fade_bar);
-                dialog->priv->output_fade_bar = NULL;
+        if (dialog->output_fade_bar != NULL) {
+                gtk_container_remove (GTK_CONTAINER (dialog->output_settings_box),
+                                      dialog->output_fade_bar);
+                dialog->output_fade_bar = NULL;
         }
-        if (dialog->priv->output_lfe_bar != NULL) {
-                gtk_container_remove (GTK_CONTAINER (dialog->priv->output_settings_box),
-                                      dialog->priv->output_lfe_bar);
-                dialog->priv->output_lfe_bar = NULL;
+        if (dialog->output_lfe_bar != NULL) {
+                gtk_container_remove (GTK_CONTAINER (dialog->output_settings_box),
+                                      dialog->output_lfe_bar);
+                dialog->output_lfe_bar = NULL;
         }
-        if (dialog->priv->output_profile_combo != NULL) {
-                gtk_container_remove (GTK_CONTAINER (dialog->priv->output_settings_box),
-                                      dialog->priv->output_profile_combo);
-                dialog->priv->output_profile_combo = NULL;
+        if (dialog->output_profile_combo != NULL) {
+                gtk_container_remove (GTK_CONTAINER (dialog->output_settings_box),
+                                      dialog->output_profile_combo);
+                dialog->output_profile_combo = NULL;
         }
 
-        stream = gvc_mixer_control_get_stream_from_device (dialog->priv->mixer_control,
+        stream = gvc_mixer_control_get_stream_from_device (dialog->mixer_control,
                                                            device);
         if (stream == NULL) {
                 g_warning ("Default sink stream not found");
                 return;
         }
 
-        gvc_channel_bar_set_base_volume (GVC_CHANNEL_BAR (dialog->priv->output_bar),
+        gvc_channel_bar_set_base_volume (GVC_CHANNEL_BAR (dialog->output_bar),
                                          gvc_mixer_stream_get_base_volume (stream));
-        gvc_channel_bar_set_is_amplified (GVC_CHANNEL_BAR (dialog->priv->output_bar),
+        gvc_channel_bar_set_is_amplified (GVC_CHANNEL_BAR (dialog->output_bar),
                                           gvc_mixer_stream_get_can_decibel (stream));
 
 	/* Update the adjustment in case the previous bar wasn't decibel
 	 * capable, and we clipped it */
-        adj = GTK_ADJUSTMENT (gvc_channel_bar_get_adjustment (GVC_CHANNEL_BAR (dialog->priv->output_bar)));
+        adj = GTK_ADJUSTMENT (gvc_channel_bar_get_adjustment (GVC_CHANNEL_BAR (dialog->output_bar)));
 	gtk_adjustment_set_value (adj,
 				  gvc_mixer_stream_get_volume (stream));
 
@@ -203,41 +203,41 @@ update_output_settings (GvcMixerDialog      *dialog,
                 return;
         }
 
-        dialog->priv->output_balance_bar = gvc_balance_bar_new (map, BALANCE_TYPE_RL);
-        if (dialog->priv->size_group != NULL) {
-                gvc_balance_bar_set_size_group (GVC_BALANCE_BAR (dialog->priv->output_balance_bar),
-                                                dialog->priv->size_group,
+        dialog->output_balance_bar = gvc_balance_bar_new (map, BALANCE_TYPE_RL);
+        if (dialog->size_group != NULL) {
+                gvc_balance_bar_set_size_group (GVC_BALANCE_BAR (dialog->output_balance_bar),
+                                                dialog->size_group,
                                                 TRUE);
         }
-        gtk_box_pack_start (GTK_BOX (dialog->priv->output_settings_box),
-                            dialog->priv->output_balance_bar,
+        gtk_box_pack_start (GTK_BOX (dialog->output_settings_box),
+                            dialog->output_balance_bar,
                             FALSE, FALSE, 6);
-        gtk_widget_show (dialog->priv->output_balance_bar);
+        gtk_widget_show (dialog->output_balance_bar);
 
         if (gvc_channel_map_can_fade (map)) {
-                dialog->priv->output_fade_bar = gvc_balance_bar_new (map, BALANCE_TYPE_FR);
-                if (dialog->priv->size_group != NULL) {
-                        gvc_balance_bar_set_size_group (GVC_BALANCE_BAR (dialog->priv->output_fade_bar),
-                                                        dialog->priv->size_group,
+                dialog->output_fade_bar = gvc_balance_bar_new (map, BALANCE_TYPE_FR);
+                if (dialog->size_group != NULL) {
+                        gvc_balance_bar_set_size_group (GVC_BALANCE_BAR (dialog->output_fade_bar),
+                                                        dialog->size_group,
                                                         TRUE);
                 }
-                gtk_box_pack_start (GTK_BOX (dialog->priv->output_settings_box),
-                                    dialog->priv->output_fade_bar,
+                gtk_box_pack_start (GTK_BOX (dialog->output_settings_box),
+                                    dialog->output_fade_bar,
                                     FALSE, FALSE, 6);
-                gtk_widget_show (dialog->priv->output_fade_bar);
+                gtk_widget_show (dialog->output_fade_bar);
         }
 
         if (gvc_channel_map_has_lfe (map)) {
-                dialog->priv->output_lfe_bar = gvc_balance_bar_new (map, BALANCE_TYPE_LFE);
-                if (dialog->priv->size_group != NULL) {
-                        gvc_balance_bar_set_size_group (GVC_BALANCE_BAR (dialog->priv->output_lfe_bar),
-                                                        dialog->priv->size_group,
+                dialog->output_lfe_bar = gvc_balance_bar_new (map, BALANCE_TYPE_LFE);
+                if (dialog->size_group != NULL) {
+                        gvc_balance_bar_set_size_group (GVC_BALANCE_BAR (dialog->output_lfe_bar),
+                                                        dialog->size_group,
                                                         TRUE);
                 }
-                gtk_box_pack_start (GTK_BOX (dialog->priv->output_settings_box),
-                                    dialog->priv->output_lfe_bar,
+                gtk_box_pack_start (GTK_BOX (dialog->output_settings_box),
+                                    dialog->output_lfe_bar,
                                     FALSE, FALSE, 6);
-                gtk_widget_show (dialog->priv->output_lfe_bar);
+                gtk_widget_show (dialog->output_lfe_bar);
         }
 
         profiles = gvc_mixer_ui_device_get_profiles (device);
@@ -246,42 +246,42 @@ update_output_settings (GvcMixerDialog      *dialog,
         if (TRUE /*g_list_length((GList *) profiles) >= 2 */) {
                 const gchar *active_profile;
 
-                dialog->priv->output_profile_combo = gvc_combo_box_new (_("_Profile:"));
+                dialog->output_profile_combo = gvc_combo_box_new (_("_Profile:"));
 
-                g_object_set (G_OBJECT (dialog->priv->output_profile_combo), "button-label", _("_Test Speakers"), NULL);
-                g_object_set (G_OBJECT (dialog->priv->output_profile_combo),
+                g_object_set (G_OBJECT (dialog->output_profile_combo), "button-label", _("_Test Speakers"), NULL);
+                g_object_set (G_OBJECT (dialog->output_profile_combo),
                               "show-button", TRUE, NULL);
-                g_signal_connect (G_OBJECT (dialog->priv->output_profile_combo), "button-clicked",
+                g_signal_connect (G_OBJECT (dialog->output_profile_combo), "button-clicked",
                                   G_CALLBACK (on_test_speakers_clicked), dialog);
 
                 if (profiles)
-                        gvc_combo_box_set_profiles (GVC_COMBO_BOX (dialog->priv->output_profile_combo),
+                        gvc_combo_box_set_profiles (GVC_COMBO_BOX (dialog->output_profile_combo),
                                                     profiles);
-                gtk_box_pack_start (GTK_BOX (dialog->priv->output_settings_box),
-                                    dialog->priv->output_profile_combo,
+                gtk_box_pack_start (GTK_BOX (dialog->output_settings_box),
+                                    dialog->output_profile_combo,
                                     TRUE, FALSE, 6);
 
-                if (dialog->priv->size_group != NULL) {
-                        gvc_combo_box_set_size_group (GVC_COMBO_BOX (dialog->priv->output_profile_combo),
-                                                      dialog->priv->size_group, FALSE);
+                if (dialog->size_group != NULL) {
+                        gvc_combo_box_set_size_group (GVC_COMBO_BOX (dialog->output_profile_combo),
+                                                      dialog->size_group, FALSE);
                 }
 
                 active_profile = gvc_mixer_ui_device_get_active_profile (device);
                 if (active_profile)
-                        gvc_combo_box_set_active (GVC_COMBO_BOX (dialog->priv->output_profile_combo), active_profile);
+                        gvc_combo_box_set_active (GVC_COMBO_BOX (dialog->output_profile_combo), active_profile);
 
-                g_object_set_data (G_OBJECT (dialog->priv->output_profile_combo),
+                g_object_set_data (G_OBJECT (dialog->output_profile_combo),
                                    "uidevice",
                                    device);
                 if (g_list_length((GList *) profiles))
-                        g_signal_connect (G_OBJECT (dialog->priv->output_profile_combo), "changed",
+                        g_signal_connect (G_OBJECT (dialog->output_profile_combo), "changed",
                                           G_CALLBACK (profile_selection_changed), dialog);
 
-                gtk_widget_show (dialog->priv->output_profile_combo);
+                gtk_widget_show (dialog->output_profile_combo);
         }
 
         /* FIXME: We could make this into a "No settings" label instead */
-        gtk_widget_set_sensitive (dialog->priv->output_balance_bar, gvc_channel_map_can_balance (map));
+        gtk_widget_set_sensitive (dialog->output_balance_bar, gvc_channel_map_can_balance (map));
 }
 
 #define DECAY_STEP .15
@@ -292,15 +292,15 @@ update_input_peak (GvcMixerDialog *dialog,
 {
         GtkAdjustment *adj;
 
-        if (dialog->priv->last_input_peak >= DECAY_STEP) {
-                if (v < dialog->priv->last_input_peak - DECAY_STEP) {
-                        v = dialog->priv->last_input_peak - DECAY_STEP;
+        if (dialog->last_input_peak >= DECAY_STEP) {
+                if (v < dialog->last_input_peak - DECAY_STEP) {
+                        v = dialog->last_input_peak - DECAY_STEP;
                 }
         }
 
-        dialog->priv->last_input_peak = v;
+        dialog->last_input_peak = v;
 
-        adj = gvc_level_bar_get_peak_adjustment (GVC_LEVEL_BAR (dialog->priv->input_level_bar));
+        adj = gvc_level_bar_get_peak_adjustment (GVC_LEVEL_BAR (dialog->input_level_bar));
         if (v >= 0) {
                 gtk_adjustment_set_value (adj, v);
         } else {
@@ -399,7 +399,7 @@ create_monitor_stream_for_source (GvcMixerDialog *dialog,
         g_debug ("Create monitor for %u",
                  gvc_mixer_stream_get_index (stream));
 
-        context = gvc_mixer_control_get_pa_context (dialog->priv->mixer_control);
+        context = gvc_mixer_control_get_pa_context (dialog->mixer_control);
 
         if (pa_context_get_server_protocol_version (context) < 13) {
                 return;
@@ -438,8 +438,8 @@ create_monitor_stream_for_source (GvcMixerDialog *dialog,
                 pa_stream_unref (s);
         } else {
                 g_object_set_data (G_OBJECT (stream), "has-monitor", GINT_TO_POINTER (TRUE));
-                g_object_set_data (G_OBJECT (dialog->priv->input_level_bar), "pa_stream", s);
-                g_object_set_data (G_OBJECT (dialog->priv->input_level_bar), "stream", stream);
+                g_object_set_data (G_OBJECT (dialog->input_level_bar), "pa_stream", s);
+                g_object_set_data (G_OBJECT (dialog->input_level_bar), "stream", stream);
         }
 }
 
@@ -451,15 +451,15 @@ stop_monitor_stream_for_source (GvcMixerDialog *dialog)
         int             res;
         GvcMixerStream *stream;
 
-        s = g_object_get_data (G_OBJECT (dialog->priv->input_level_bar), "pa_stream");
+        s = g_object_get_data (G_OBJECT (dialog->input_level_bar), "pa_stream");
         if (s == NULL)
                 return;
-        stream = g_object_get_data (G_OBJECT (dialog->priv->input_level_bar), "stream");
+        stream = g_object_get_data (G_OBJECT (dialog->input_level_bar), "stream");
         g_assert (stream != NULL);
 
         g_debug ("Stopping monitor for %u", pa_stream_get_index (s));
 
-        context = gvc_mixer_control_get_pa_context (dialog->priv->mixer_control);
+        context = gvc_mixer_control_get_pa_context (dialog->mixer_control);
 
         if (pa_context_get_server_protocol_version (context) < 13) {
                 return;
@@ -468,8 +468,8 @@ stop_monitor_stream_for_source (GvcMixerDialog *dialog)
         res = pa_stream_disconnect (s);
         if (res == 0)
                 g_object_set_data (G_OBJECT (stream), "has-monitor", GINT_TO_POINTER (FALSE));
-        g_object_set_data (G_OBJECT (dialog->priv->input_level_bar), "pa_stream", NULL);
-        g_object_set_data (G_OBJECT (dialog->priv->input_level_bar), "stream", NULL);
+        g_object_set_data (G_OBJECT (dialog->input_level_bar), "pa_stream", NULL);
+        g_object_set_data (G_OBJECT (dialog->input_level_bar), "stream", NULL);
 }
 
 static void
@@ -484,27 +484,27 @@ update_input_settings (GvcMixerDialog   *dialog,
 
         stop_monitor_stream_for_source (dialog);
 
-        if (dialog->priv->input_profile_combo != NULL) {
-                gtk_container_remove (GTK_CONTAINER (dialog->priv->input_settings_box),
-                                      dialog->priv->input_profile_combo);
-                dialog->priv->input_profile_combo = NULL;
+        if (dialog->input_profile_combo != NULL) {
+                gtk_container_remove (GTK_CONTAINER (dialog->input_settings_box),
+                                      dialog->input_profile_combo);
+                dialog->input_profile_combo = NULL;
         }
 
-        stream = gvc_mixer_control_get_stream_from_device (dialog->priv->mixer_control,
+        stream = gvc_mixer_control_get_stream_from_device (dialog->mixer_control,
                                                            device);
         if (stream == NULL) {
                 g_debug ("Default source stream not found");
                 return;
         }
 
-        gvc_channel_bar_set_base_volume (GVC_CHANNEL_BAR (dialog->priv->input_bar),
+        gvc_channel_bar_set_base_volume (GVC_CHANNEL_BAR (dialog->input_bar),
                                          gvc_mixer_stream_get_base_volume (stream));
-        gvc_channel_bar_set_is_amplified (GVC_CHANNEL_BAR (dialog->priv->input_bar),
+        gvc_channel_bar_set_is_amplified (GVC_CHANNEL_BAR (dialog->input_bar),
                                           gvc_mixer_stream_get_can_decibel (stream));
 
 	/* Update the adjustment in case the previous bar wasn't decibel
 	 * capable, and we clipped it */
-        adj = GTK_ADJUSTMENT (gvc_channel_bar_get_adjustment (GVC_CHANNEL_BAR (dialog->priv->input_bar)));
+        adj = GTK_ADJUSTMENT (gvc_channel_bar_get_adjustment (GVC_CHANNEL_BAR (dialog->input_bar)));
 	gtk_adjustment_set_value (adj,
 				  gvc_mixer_stream_get_volume (stream));
 
@@ -512,30 +512,30 @@ update_input_settings (GvcMixerDialog   *dialog,
         if (g_list_length ((GList *) profiles) >= 2) {
                 const gchar *active_profile;
 
-                dialog->priv->input_profile_combo = gvc_combo_box_new (_("_Profile:"));
-                gvc_combo_box_set_profiles (GVC_COMBO_BOX (dialog->priv->input_profile_combo),
+                dialog->input_profile_combo = gvc_combo_box_new (_("_Profile:"));
+                gvc_combo_box_set_profiles (GVC_COMBO_BOX (dialog->input_profile_combo),
                                             profiles);
 
-                gtk_box_pack_start (GTK_BOX (dialog->priv->input_settings_box),
-                                    dialog->priv->input_profile_combo,
+                gtk_box_pack_start (GTK_BOX (dialog->input_settings_box),
+                                    dialog->input_profile_combo,
                                     TRUE, TRUE, 0);
 
-                if (dialog->priv->size_group != NULL) {
-                        gvc_combo_box_set_size_group (GVC_COMBO_BOX (dialog->priv->input_profile_combo),
-                                                      dialog->priv->size_group, FALSE);
+                if (dialog->size_group != NULL) {
+                        gvc_combo_box_set_size_group (GVC_COMBO_BOX (dialog->input_profile_combo),
+                                                      dialog->size_group, FALSE);
                 }
 
                 active_profile = gvc_mixer_ui_device_get_active_profile (device);
                 if (active_profile)
-                        gvc_combo_box_set_active (GVC_COMBO_BOX (dialog->priv->input_profile_combo), active_profile);
+                        gvc_combo_box_set_active (GVC_COMBO_BOX (dialog->input_profile_combo), active_profile);
 
-                g_object_set_data (G_OBJECT (dialog->priv->input_profile_combo),
+                g_object_set_data (G_OBJECT (dialog->input_profile_combo),
                                    "uidevice",
                                    device);
-                g_signal_connect (G_OBJECT (dialog->priv->input_profile_combo), "changed",
+                g_signal_connect (G_OBJECT (dialog->input_profile_combo), "changed",
                                   G_CALLBACK (profile_selection_changed), dialog);
 
-                gtk_widget_show (dialog->priv->input_profile_combo);
+                gtk_widget_show (dialog->input_profile_combo);
         }
 
         create_monitor_stream_for_source (dialog, stream);
@@ -550,25 +550,25 @@ gvc_mixer_dialog_set_mixer_control (GvcMixerDialog  *dialog,
 
         g_object_ref (control);
 
-        if (dialog->priv->mixer_control != NULL) {
-                g_signal_handlers_disconnect_by_func (dialog->priv->mixer_control,
+        if (dialog->mixer_control != NULL) {
+                g_signal_handlers_disconnect_by_func (dialog->mixer_control,
                                                       G_CALLBACK (on_control_active_input_update),
                                                       dialog);
-                g_signal_handlers_disconnect_by_func (dialog->priv->mixer_control,
+                g_signal_handlers_disconnect_by_func (dialog->mixer_control,
                                                       G_CALLBACK (on_control_active_output_update),
                                                       dialog);
-                g_object_unref (dialog->priv->mixer_control);
+                g_object_unref (dialog->mixer_control);
         }
 
-        dialog->priv->mixer_control = control;
+        dialog->mixer_control = control;
 
         /* FIXME: Why are some mixer_control signals connected here,
          * and others in the dialog constructor? (And similar for disconnect) */
-        g_signal_connect (dialog->priv->mixer_control,
+        g_signal_connect (dialog->mixer_control,
                           "active-input-update",
                           G_CALLBACK (on_control_active_input_update),
                           dialog);
-        g_signal_connect (dialog->priv->mixer_control,
+        g_signal_connect (dialog->mixer_control,
                           "active-output-update",
                           G_CALLBACK (on_control_active_output_update),
                           dialog);
@@ -581,7 +581,7 @@ gvc_mixer_dialog_get_mixer_control (GvcMixerDialog *dialog)
 {
         g_return_val_if_fail (GVC_IS_MIXER_DIALOG (dialog), NULL);
 
-        return dialog->priv->mixer_control;
+        return dialog->mixer_control;
 }
 
 static void
@@ -677,14 +677,14 @@ lookup_bar_for_stream (GvcMixerDialog *dialog,
 {
         GtkWidget *bar;
 
-        bar = g_hash_table_lookup (dialog->priv->bars, GUINT_TO_POINTER (gvc_mixer_stream_get_id (stream)));
+        bar = g_hash_table_lookup (dialog->bars, GUINT_TO_POINTER (gvc_mixer_stream_get_id (stream)));
         if (bar)
                 return bar;
 
-        if (g_object_get_data (G_OBJECT (dialog->priv->output_bar), "gvc-mixer-dialog-stream") == stream)
-                return dialog->priv->output_bar;
-        if (g_object_get_data (G_OBJECT (dialog->priv->input_bar), "gvc-mixer-dialog-stream") == stream)
-                return dialog->priv->input_bar;
+        if (g_object_get_data (G_OBJECT (dialog->output_bar), "gvc-mixer-dialog-stream") == stream)
+                return dialog->output_bar;
+        if (g_object_get_data (G_OBJECT (dialog->input_bar), "gvc-mixer-dialog-stream") == stream)
+                return dialog->input_bar;
 
         return NULL;
 }
@@ -744,8 +744,8 @@ on_stream_is_muted_notify (GObject        *object,
         gvc_channel_bar_set_is_muted (GVC_CHANNEL_BAR (bar),
                                       is_muted);
 
-        if (stream == gvc_mixer_control_get_default_sink (dialog->priv->mixer_control)) {
-                gtk_widget_set_sensitive (dialog->priv->applications_box,
+        if (stream == gvc_mixer_control_get_default_sink (dialog->mixer_control)) {
+                gtk_widget_set_sensitive (dialog->applications_box,
                                           !is_muted);
         }
 
@@ -756,7 +756,7 @@ save_bar_for_stream (GvcMixerDialog *dialog,
                      GvcMixerStream *stream,
                      GtkWidget      *bar)
 {
-        g_hash_table_insert (dialog->priv->bars,
+        g_hash_table_insert (dialog->bars,
                              GUINT_TO_POINTER (gvc_mixer_stream_get_id (stream)),
                              bar);
 }
@@ -770,9 +770,9 @@ create_bar (GvcMixerDialog *dialog,
 
         bar = gvc_channel_bar_new ();
         gtk_widget_set_sensitive (bar, FALSE);
-        if (add_to_size_group && dialog->priv->size_group != NULL) {
+        if (add_to_size_group && dialog->size_group != NULL) {
                 gvc_channel_bar_set_size_group (GVC_CHANNEL_BAR (bar),
-                                                dialog->priv->size_group,
+                                                dialog->size_group,
                                                 symmetric);
         }
         gvc_channel_bar_set_show_mute (GVC_CHANNEL_BAR (bar),
@@ -824,7 +824,7 @@ active_input_update (GvcMixerDialog *dialog,
         g_debug ("active_input_update device id = %i",
                  gvc_mixer_ui_device_get_id (active_input));
 
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->input_treeview));
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->input_treeview));
 
         if (gtk_tree_model_get_iter_first (model, &iter) == FALSE) {
                 g_warning ("No devices in the tree, so cannot set the active output");
@@ -848,20 +848,20 @@ active_input_update (GvcMixerDialog *dialog,
 
                 if (is_selected) {
                         GtkTreeSelection *selection;
-                        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->priv->input_treeview));
+                        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->input_treeview));
                         gtk_tree_selection_select_iter (selection, &iter);
                 }
         } while (gtk_tree_model_iter_next (model, &iter));
 
-        stream = gvc_mixer_control_get_stream_from_device (dialog->priv->mixer_control,
+        stream = gvc_mixer_control_get_stream_from_device (dialog->mixer_control,
                                                            active_input);
         if (stream == NULL) {
                 g_warning ("Couldn't find a stream from the active input");
-                gtk_widget_set_sensitive (dialog->priv->input_bar, FALSE);
+                gtk_widget_set_sensitive (dialog->input_bar, FALSE);
                 return;
         }
 
-        bar_set_stream (dialog, dialog->priv->input_bar, stream);
+        bar_set_stream (dialog, dialog->input_bar, stream);
         update_input_settings (dialog, active_input);
 
 }
@@ -881,7 +881,7 @@ active_output_update (GvcMixerDialog   *dialog,
         g_debug ("active output update device id = %i",
                  gvc_mixer_ui_device_get_id (active_output));
 
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->output_treeview));
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->output_treeview));
 
         if (gtk_tree_model_get_iter_first (model, &iter) == FALSE){
                 g_warning ("No devices in the tree, so cannot set the active output");
@@ -911,19 +911,19 @@ active_output_update (GvcMixerDialog   *dialog,
 
                 if (is_selected) {
                         GtkTreeSelection *selection;
-                        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->priv->output_treeview));
+                        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->output_treeview));
                         gtk_tree_selection_select_iter (selection, &iter);
                 }
         } while (gtk_tree_model_iter_next (model, &iter));
 
-        stream = gvc_mixer_control_get_stream_from_device (dialog->priv->mixer_control,
+        stream = gvc_mixer_control_get_stream_from_device (dialog->mixer_control,
                                                            active_output);
         if (stream == NULL) {
                 g_warning ("Couldn't find a stream from the active output");
                 return;
         }
 
-        bar_set_stream (dialog, dialog->priv->output_bar, stream);
+        bar_set_stream (dialog, dialog->output_bar, stream);
         update_output_settings (dialog, active_output);
 }
 
@@ -948,7 +948,7 @@ bar_set_stream (GvcMixerDialog *dialog,
 
                 g_signal_handlers_disconnect_by_func (old_stream, on_stream_is_muted_notify, dialog);
                 g_signal_handlers_disconnect_by_func (old_stream, on_stream_volume_notify, dialog);
-                g_hash_table_remove (dialog->priv->bars, GUINT_TO_POINTER (gvc_mixer_stream_get_id (old_stream)));
+                g_hash_table_remove (dialog->bars, GUINT_TO_POINTER (gvc_mixer_stream_get_id (old_stream)));
         }
 
         gtk_widget_set_sensitive (bar, (stream != NULL));
@@ -998,8 +998,8 @@ add_stream (GvcMixerDialog *dialog,
 
         if (GVC_IS_MIXER_SOURCE (stream) || GVC_IS_MIXER_SINK (stream))
                 return;
-        else if (stream == gvc_mixer_control_get_event_sink_input (dialog->priv->mixer_control)) {
-                bar = dialog->priv->effects_bar;
+        else if (stream == gvc_mixer_control_get_event_sink_input (dialog->mixer_control)) {
+                bar = dialog->effects_bar;
                 g_debug ("Adding effects stream");
         } else {
                 /* Must be an application stream */
@@ -1009,9 +1009,9 @@ add_stream (GvcMixerDialog *dialog,
 
                 bar = create_app_bar (dialog, name,
                                       gvc_mixer_stream_get_icon_name (stream));
-                gtk_box_pack_start (GTK_BOX (dialog->priv->applications_box), bar, FALSE, FALSE, 12);
-                dialog->priv->num_apps++;
-                gtk_widget_hide (dialog->priv->no_apps_label);
+                gtk_box_pack_start (GTK_BOX (dialog->applications_box), bar, FALSE, FALSE, 12);
+                dialog->num_apps++;
+                gtk_widget_hide (dialog->no_apps_label);
         }
 
         /* We should have a bar by now. */
@@ -1029,7 +1029,7 @@ add_stream (GvcMixerDialog *dialog,
 
                         g_signal_handlers_disconnect_by_func (old_stream, on_stream_is_muted_notify, dialog);
                         g_signal_handlers_disconnect_by_func (old_stream, on_stream_volume_notify, dialog);
-                        g_hash_table_remove (dialog->priv->bars, GUINT_TO_POINTER (gvc_mixer_stream_get_id (old_stream)));
+                        g_hash_table_remove (dialog->bars, GUINT_TO_POINTER (gvc_mixer_stream_get_id (old_stream)));
                 }
                 save_bar_for_stream (dialog, stream, bar);
                 bar_set_stream (dialog, bar, stream);
@@ -1051,7 +1051,7 @@ on_control_stream_added (GvcMixerControl *control,
 
         app_id = gvc_mixer_stream_get_application_id (stream);
 
-        if (stream == gvc_mixer_control_get_event_sink_input (dialog->priv->mixer_control) ||
+        if (stream == gvc_mixer_control_get_event_sink_input (dialog->mixer_control) ||
             (GVC_IS_MIXER_SOURCE (stream) == FALSE &&
              GVC_IS_MIXER_SINK (stream) == FALSE &&
              gvc_mixer_stream_is_virtual (stream) == FALSE &&
@@ -1060,7 +1060,7 @@ on_control_stream_added (GvcMixerControl *control,
              g_strcmp0 (app_id, "org.PulseAudio.pavucontrol") != 0)) {
                 GtkWidget      *bar;
 
-                bar = g_hash_table_lookup (dialog->priv->bars, GUINT_TO_POINTER (id));
+                bar = g_hash_table_lookup (dialog->bars, GUINT_TO_POINTER (id));
                 if (bar != NULL) {
                         g_debug ("GvcMixerDialog: Stream %u already added", id);
                         return;
@@ -1136,7 +1136,7 @@ add_input_ui_entry (GvcMixerDialog *dialog,
         if (icon == NULL) {
                 GvcMixerStream *stream;
                 g_debug ("just detected a network source");
-                stream = gvc_mixer_control_get_stream_from_device (dialog->priv->mixer_control, input);
+                stream = gvc_mixer_control_get_stream_from_device (dialog->mixer_control, input);
                 if (stream == NULL) {
                         g_warning ("tried to add the network source but the stream was null - fail ?!");
                         g_free (final_name);
@@ -1145,7 +1145,7 @@ add_input_ui_entry (GvcMixerDialog *dialog,
                 icon = gvc_mixer_stream_get_gicon (stream);
         }
 
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->input_treeview));
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->input_treeview));
         gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 
         gtk_list_store_set (GTK_LIST_STORE (model),
@@ -1202,7 +1202,7 @@ add_output_ui_entry (GvcMixerDialog   *dialog,
                 GvcMixerStream *stream;
 
                 g_debug ("just detected a network sink");
-                stream = gvc_mixer_control_get_stream_from_device (dialog->priv->mixer_control, output);
+                stream = gvc_mixer_control_get_stream_from_device (dialog->mixer_control, output);
 
                 if (stream == NULL) {
                         g_warning ("tried to add the network sink but the stream was null - fail ?!");
@@ -1212,7 +1212,7 @@ add_output_ui_entry (GvcMixerDialog   *dialog,
                 icon = gvc_mixer_stream_get_gicon (stream);
         }
 
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->output_treeview));
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->output_treeview));
         gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 
         gtk_list_store_set (GTK_LIST_STORE (model),
@@ -1297,7 +1297,7 @@ on_control_input_removed (GvcMixerControl *control,
                  stream_id);
 
         /* remove from any models */
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->input_treeview));
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->input_treeview));
         found = find_item_by_id (GTK_TREE_MODEL (model), id, ID_COLUMN, &iter);
         if (found) {
                 gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
@@ -1342,7 +1342,7 @@ on_control_output_removed (GvcMixerControl *control,
                   sink_stream_id);
 
          /* remove from any models */
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->output_treeview));
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->output_treeview));
         found = find_item_by_id (GTK_TREE_MODEL (model), id, ID_COLUMN, &iter);
         if (found) {
                 gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
@@ -1356,25 +1356,25 @@ remove_stream (GvcMixerDialog  *dialog,
         GtkWidget *bar;
         guint output_id, input_id;
 
-        bar = g_hash_table_lookup (dialog->priv->bars, GUINT_TO_POINTER (id));
+        bar = g_hash_table_lookup (dialog->bars, GUINT_TO_POINTER (id));
         if (bar != NULL) {
-                g_hash_table_remove (dialog->priv->bars, GUINT_TO_POINTER (id));
+                g_hash_table_remove (dialog->bars, GUINT_TO_POINTER (id));
                 gtk_container_remove (GTK_CONTAINER (gtk_widget_get_parent (bar)),
                                       bar);
-                dialog->priv->num_apps--;
-                if (dialog->priv->num_apps == 0) {
-                        gtk_widget_show (dialog->priv->no_apps_label);
+                dialog->num_apps--;
+                if (dialog->num_apps == 0) {
+                        gtk_widget_show (dialog->no_apps_label);
                 }
                 return;
         }
 
-	output_id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (dialog->priv->output_bar), "gvc-mixer-dialog-stream-id"));
-	input_id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (dialog->priv->input_bar), "gvc-mixer-dialog-stream-id"));
+	output_id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (dialog->output_bar), "gvc-mixer-dialog-stream-id"));
+	input_id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (dialog->input_bar), "gvc-mixer-dialog-stream-id"));
 
 	if (output_id == id)
-		bar = dialog->priv->output_bar;
+		bar = dialog->output_bar;
 	else if (input_id == id)
-		bar = dialog->priv->input_bar;
+		bar = dialog->input_bar;
 	else
 		return;
 
@@ -1420,14 +1420,14 @@ on_input_selection_changed (GtkTreeSelection *selection,
                             ACTIVE_COLUMN, &active,
                             -1);
 
-        input = gvc_mixer_control_lookup_input_id (dialog->priv->mixer_control, id);
+        input = gvc_mixer_control_lookup_input_id (dialog->mixer_control, id);
 
         if (input == NULL) {
                 g_warning ("on_input_selection_changed - Unable to find input with id: %u", id);
                 return;
         }
 
-        gvc_mixer_control_change_input (dialog->priv->mixer_control, input);
+        gvc_mixer_control_change_input (dialog->mixer_control, input);
 }
 
 static void
@@ -1454,14 +1454,14 @@ on_output_selection_changed (GtkTreeSelection *selection,
         if (active)
                 return;
 
-        output = gvc_mixer_control_lookup_output_id (dialog->priv->mixer_control, id);
+        output = gvc_mixer_control_lookup_output_id (dialog->mixer_control, id);
 
         if (output == NULL) {
                 g_warning ("Unable to find output with id: %u", id);
                 return;
         }
 
-        gvc_mixer_control_change_output (dialog->priv->mixer_control, output);
+        gvc_mixer_control_change_output (dialog->mixer_control, output);
 }
 
 static GtkWidget *
@@ -1532,7 +1532,7 @@ on_test_speakers_clicked (GvcComboBox *widget,
         GtkWidget           *d, *speaker_test, *container;
         char                *title;
 
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->output_treeview));
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->output_treeview));
 
         if (gtk_tree_model_get_iter_first (model, &iter) == FALSE) {
                 g_warning ("The tree is empty => we have no device to test speakers with return");
@@ -1559,7 +1559,7 @@ on_test_speakers_clicked (GvcComboBox *widget,
                 return;
         }
 
-        output = gvc_mixer_control_lookup_output_id (dialog->priv->mixer_control, (guint)active_output);
+        output = gvc_mixer_control_lookup_output_id (dialog->mixer_control, (guint)active_output);
         stream_id = gvc_mixer_ui_device_get_stream_id (output);
 
         if (stream_id == GVC_MIXER_UI_DEVICE_INVALID)
@@ -1567,7 +1567,7 @@ on_test_speakers_clicked (GvcComboBox *widget,
 
         g_debug ("Test speakers on '%s'", gvc_mixer_ui_device_get_description (output));
 
-        stream = gvc_mixer_control_lookup_stream_id (dialog->priv->mixer_control, stream_id);
+        stream = gvc_mixer_control_lookup_stream_id (dialog->mixer_control, stream_id);
         if (stream == NULL) {
                 g_debug ("Stream/sink not found");
                 return;
@@ -1582,15 +1582,15 @@ on_test_speakers_clicked (GvcComboBox *widget,
                                            NULL);
 
         g_free (title);
-        speaker_test = gvc_speaker_test_new (dialog->priv->mixer_control,
+        speaker_test = gvc_speaker_test_new (dialog->mixer_control,
                                              stream);
         gtk_widget_show (speaker_test);
         container = gtk_dialog_get_content_area (GTK_DIALOG (d));
         gtk_container_add (GTK_CONTAINER (container), speaker_test);
 
-        dialog->priv->test_dialog = d;
+        dialog->test_dialog = d;
         g_object_add_weak_pointer (G_OBJECT (d),
-                                   (gpointer *) &dialog->priv->test_dialog);
+                                   (gpointer *) &dialog->test_dialog);
         gtk_dialog_run (GTK_DIALOG (d));
         gtk_widget_destroy (d);
 }
@@ -1621,30 +1621,30 @@ gvc_mixer_dialog_constructor (GType                  type,
 
         gtk_container_set_border_width (GTK_CONTAINER (self), 12);
 
-        self->priv->output_stream_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-        gtk_widget_set_margin_top (self->priv->output_stream_box, 12);
+        self->output_stream_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+        gtk_widget_set_margin_top (self->output_stream_box, 12);
         gtk_box_pack_start (GTK_BOX (main_vbox),
-                            self->priv->output_stream_box,
+                            self->output_stream_box,
                             FALSE, FALSE, 0);
-        self->priv->output_bar = create_bar (self, TRUE, TRUE);
-        gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->priv->output_bar),
+        self->output_bar = create_bar (self, TRUE, TRUE);
+        gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->output_bar),
                                   _("_Output volume:"));
-        gtk_widget_set_sensitive (self->priv->output_bar, FALSE);
-        gtk_box_pack_start (GTK_BOX (self->priv->output_stream_box),
-                            self->priv->output_bar, TRUE, TRUE, 12);
+        gtk_widget_set_sensitive (self->output_bar, FALSE);
+        gtk_box_pack_start (GTK_BOX (self->output_stream_box),
+                            self->output_bar, TRUE, TRUE, 12);
 
-        self->priv->notebook = gtk_notebook_new ();
+        self->notebook = gtk_notebook_new ();
         gtk_box_pack_start (GTK_BOX (main_vbox),
-                            self->priv->notebook,
+                            self->notebook,
                             TRUE, TRUE, 0);
-        gtk_container_set_border_width (GTK_CONTAINER (self->priv->notebook), 5);
+        gtk_container_set_border_width (GTK_CONTAINER (self->notebook), 5);
 
         /* Output page */
-        self->priv->output_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-        gtk_container_set_border_width (GTK_CONTAINER (self->priv->output_box), 12);
+        self->output_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
+        gtk_container_set_border_width (GTK_CONTAINER (self->output_box), 12);
         label = gtk_label_new (_("Output"));
-        gtk_notebook_append_page (GTK_NOTEBOOK (self->priv->notebook),
-                                  self->priv->output_box,
+        gtk_notebook_append_page (GTK_NOTEBOOK (self->notebook),
+                                  self->output_box,
                                   label);
 
         box = gtk_frame_new (_("C_hoose a device for sound output:"));
@@ -1652,11 +1652,11 @@ gvc_mixer_dialog_constructor (GType                  type,
         _gtk_label_make_bold (GTK_LABEL (label));
         gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
         gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_NONE);
-        gtk_box_pack_start (GTK_BOX (self->priv->output_box), box, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (self->output_box), box, TRUE, TRUE, 0);
 
-        self->priv->output_treeview = create_ui_device_treeview (self,
+        self->output_treeview = create_ui_device_treeview (self,
                                                                  G_CALLBACK (on_output_selection_changed));
-        gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->priv->output_treeview);
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->output_treeview);
 
         sw = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
@@ -1664,7 +1664,7 @@ gvc_mixer_dialog_constructor (GType                  type,
                                         GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
                                              GTK_SHADOW_IN);
-        gtk_container_add (GTK_CONTAINER (sw), self->priv->output_treeview);
+        gtk_container_add (GTK_CONTAINER (sw), self->output_treeview);
         gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (sw), 150);
         gtk_widget_set_margin_top (sw, 6);
         gtk_container_add (GTK_CONTAINER (box), sw);
@@ -1673,33 +1673,33 @@ gvc_mixer_dialog_constructor (GType                  type,
         label = gtk_frame_get_label_widget (GTK_FRAME (box));
         _gtk_label_make_bold (GTK_LABEL (label));
         gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_NONE);
-        gtk_box_pack_start (GTK_BOX (self->priv->output_box), box, FALSE, FALSE, 12);
-        self->priv->output_settings_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-        gtk_container_add (GTK_CONTAINER (box), self->priv->output_settings_box);
+        gtk_box_pack_start (GTK_BOX (self->output_box), box, FALSE, FALSE, 12);
+        self->output_settings_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        gtk_container_add (GTK_CONTAINER (box), self->output_settings_box);
 
         /* Input page */
-        self->priv->input_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-        gtk_container_set_border_width (GTK_CONTAINER (self->priv->input_box), 12);
+        self->input_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
+        gtk_container_set_border_width (GTK_CONTAINER (self->input_box), 12);
         label = gtk_label_new (_("Input"));
-        gtk_notebook_append_page (GTK_NOTEBOOK (self->priv->notebook),
-                                  self->priv->input_box,
+        gtk_notebook_append_page (GTK_NOTEBOOK (self->notebook),
+                                  self->input_box,
                                   label);
 
-        self->priv->input_bar = create_bar (self, TRUE, TRUE);
-        gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->priv->input_bar),
+        self->input_bar = create_bar (self, TRUE, TRUE);
+        gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->input_bar),
                                   _("_Input volume:"));
-        gvc_channel_bar_set_low_icon_name (GVC_CHANNEL_BAR (self->priv->input_bar),
+        gvc_channel_bar_set_low_icon_name (GVC_CHANNEL_BAR (self->input_bar),
                                            "audio-input-microphone-low-symbolic");
-        gvc_channel_bar_set_high_icon_name (GVC_CHANNEL_BAR (self->priv->input_bar),
+        gvc_channel_bar_set_high_icon_name (GVC_CHANNEL_BAR (self->input_bar),
                                             "audio-input-microphone-high-symbolic");
-        gtk_widget_set_sensitive (self->priv->input_bar, FALSE);
-        gtk_widget_set_margin_top (self->priv->input_bar, 6);
-        gtk_box_pack_start (GTK_BOX (self->priv->input_box),
-                            self->priv->input_bar,
+        gtk_widget_set_sensitive (self->input_bar, FALSE);
+        gtk_widget_set_margin_top (self->input_bar, 6);
+        gtk_box_pack_start (GTK_BOX (self->input_box),
+                            self->input_bar,
                             FALSE, FALSE, 0);
 
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-        gtk_box_pack_start (GTK_BOX (self->priv->input_box),
+        gtk_box_pack_start (GTK_BOX (self->input_box),
                             box,
                             FALSE, FALSE, 6);
 
@@ -1712,26 +1712,26 @@ gvc_mixer_dialog_constructor (GType                  type,
         gtk_box_pack_start (GTK_BOX (sbox),
                             label,
                             FALSE, FALSE, 0);
-        if (self->priv->size_group != NULL)
-                gtk_size_group_add_widget (self->priv->size_group, sbox);
+        if (self->size_group != NULL)
+                gtk_size_group_add_widget (self->size_group, sbox);
 
-        self->priv->input_level_bar = gvc_level_bar_new ();
-        gvc_level_bar_set_scale (GVC_LEVEL_BAR (self->priv->input_level_bar),
+        self->input_level_bar = gvc_level_bar_new ();
+        gvc_level_bar_set_scale (GVC_LEVEL_BAR (self->input_level_bar),
                                  GVC_LEVEL_SCALE_LINEAR);
         gtk_box_pack_start (GTK_BOX (box),
-                            self->priv->input_level_bar,
+                            self->input_level_bar,
                             TRUE, TRUE, 6);
 
         ebox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_box_pack_start (GTK_BOX (box),
                             ebox,
                             FALSE, FALSE, 0);
-        if (self->priv->size_group != NULL)
-                gtk_size_group_add_widget (self->priv->size_group, ebox);
+        if (self->size_group != NULL)
+                gtk_size_group_add_widget (self->size_group, ebox);
 
-        self->priv->input_settings_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-        gtk_box_pack_start (GTK_BOX (self->priv->input_box),
-                            self->priv->input_settings_box,
+        self->input_settings_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        gtk_box_pack_start (GTK_BOX (self->input_box),
+                            self->input_settings_box,
                             FALSE, FALSE, 0);
 
         box = gtk_frame_new (_("C_hoose a device for sound input:"));
@@ -1739,11 +1739,11 @@ gvc_mixer_dialog_constructor (GType                  type,
         _gtk_label_make_bold (GTK_LABEL (label));
         gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
         gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_NONE);
-        gtk_box_pack_start (GTK_BOX (self->priv->input_box), box, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (self->input_box), box, TRUE, TRUE, 0);
 
-        self->priv->input_treeview = create_ui_device_treeview (self,
+        self->input_treeview = create_ui_device_treeview (self,
                                                                 G_CALLBACK (on_input_selection_changed));
-        gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->priv->input_treeview);
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->input_treeview);
 
         sw = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
@@ -1751,71 +1751,71 @@ gvc_mixer_dialog_constructor (GType                  type,
                                         GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
                                              GTK_SHADOW_IN);
-        gtk_container_add (GTK_CONTAINER (sw), self->priv->input_treeview);
+        gtk_container_add (GTK_CONTAINER (sw), self->input_treeview);
         gtk_widget_set_margin_top (sw, 6);
         gtk_container_add (GTK_CONTAINER (box), sw);
 
         /* Effects page */
-        self->priv->sound_effects_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-        gtk_container_set_border_width (GTK_CONTAINER (self->priv->sound_effects_box), 12);
+        self->sound_effects_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+        gtk_container_set_border_width (GTK_CONTAINER (self->sound_effects_box), 12);
         label = gtk_label_new (_("Sound Effects"));
-        gtk_notebook_append_page (GTK_NOTEBOOK (self->priv->notebook),
-                                  self->priv->sound_effects_box,
+        gtk_notebook_append_page (GTK_NOTEBOOK (self->notebook),
+                                  self->sound_effects_box,
                                   label);
 
-        self->priv->effects_bar = create_bar (self, TRUE, TRUE);
-        gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->priv->effects_bar),
+        self->effects_bar = create_bar (self, TRUE, TRUE);
+        gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->effects_bar),
                                   _("_Alert volume:"));
-        gtk_widget_set_sensitive (self->priv->effects_bar, FALSE);
-        gtk_box_pack_start (GTK_BOX (self->priv->sound_effects_box),
-                            self->priv->effects_bar, FALSE, FALSE, 0);
+        gtk_widget_set_sensitive (self->effects_bar, FALSE);
+        gtk_box_pack_start (GTK_BOX (self->sound_effects_box),
+                            self->effects_bar, FALSE, FALSE, 0);
 
-        self->priv->sound_theme_chooser = gvc_sound_theme_chooser_new ();
-        gtk_box_pack_start (GTK_BOX (self->priv->sound_effects_box),
-                            self->priv->sound_theme_chooser,
+        self->sound_theme_chooser = gvc_sound_theme_chooser_new ();
+        gtk_box_pack_start (GTK_BOX (self->sound_effects_box),
+                            self->sound_theme_chooser,
                             TRUE, TRUE, 6);
 
         /* Applications */
-        self->priv->applications_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-        gtk_container_set_border_width (GTK_CONTAINER (self->priv->applications_box), 12);
+        self->applications_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
+        gtk_container_set_border_width (GTK_CONTAINER (self->applications_box), 12);
         label = gtk_label_new (_("Applications"));
-        gtk_notebook_append_page (GTK_NOTEBOOK (self->priv->notebook),
-                                  self->priv->applications_box,
+        gtk_notebook_append_page (GTK_NOTEBOOK (self->notebook),
+                                  self->applications_box,
                                   label);
-        self->priv->no_apps_label = gtk_label_new (_("No application is currently playing or recording audio."));
-        gtk_box_pack_start (GTK_BOX (self->priv->applications_box),
-                            self->priv->no_apps_label,
+        self->no_apps_label = gtk_label_new (_("No application is currently playing or recording audio."));
+        gtk_box_pack_start (GTK_BOX (self->applications_box),
+                            self->no_apps_label,
                             TRUE, TRUE, 0);
 
-        g_signal_connect (self->priv->mixer_control,
+        g_signal_connect (self->mixer_control,
                           "output-added",
                           G_CALLBACK (on_control_output_added),
                           self);
-        g_signal_connect (self->priv->mixer_control,
+        g_signal_connect (self->mixer_control,
                           "output-removed",
                           G_CALLBACK (on_control_output_removed),
                           self);
-        g_signal_connect (self->priv->mixer_control,
+        g_signal_connect (self->mixer_control,
                           "input-added",
                           G_CALLBACK (on_control_input_added),
                           self);
-        g_signal_connect (self->priv->mixer_control,
+        g_signal_connect (self->mixer_control,
                           "input-removed",
                           G_CALLBACK (on_control_input_removed),
                           self);
 
-        g_signal_connect (self->priv->mixer_control,
+        g_signal_connect (self->mixer_control,
                           "stream-added",
                           G_CALLBACK (on_control_stream_added),
                           self);
-        g_signal_connect (self->priv->mixer_control,
+        g_signal_connect (self->mixer_control,
                           "stream-removed",
                           G_CALLBACK (on_control_stream_removed),
                           self);
 
         gtk_widget_show_all (main_vbox);
 
-        streams = gvc_mixer_control_get_streams (self->priv->mixer_control);
+        streams = gvc_mixer_control_get_streams (self->mixer_control);
         for (l = streams; l != NULL; l = l->next) {
                 stream = l->data;
                 add_stream (self, stream);
@@ -1830,44 +1830,44 @@ gvc_mixer_dialog_dispose (GObject *object)
 {
         GvcMixerDialog *dialog = GVC_MIXER_DIALOG (object);
 
-        if (dialog->priv->mixer_control != NULL) {
+        if (dialog->mixer_control != NULL) {
 
-                g_signal_handlers_disconnect_by_func (dialog->priv->mixer_control,
+                g_signal_handlers_disconnect_by_func (dialog->mixer_control,
                                                       on_control_output_added,
                                                       dialog);
-                g_signal_handlers_disconnect_by_func (dialog->priv->mixer_control,
+                g_signal_handlers_disconnect_by_func (dialog->mixer_control,
                                                       on_control_output_removed,
                                                       dialog);
-                g_signal_handlers_disconnect_by_func (dialog->priv->mixer_control,
+                g_signal_handlers_disconnect_by_func (dialog->mixer_control,
                                                       on_control_input_added,
                                                       dialog);
-                g_signal_handlers_disconnect_by_func (dialog->priv->mixer_control,
+                g_signal_handlers_disconnect_by_func (dialog->mixer_control,
                                                       on_control_input_removed,
                                                       dialog);
-                g_signal_handlers_disconnect_by_func (dialog->priv->mixer_control,
+                g_signal_handlers_disconnect_by_func (dialog->mixer_control,
                                                       on_control_active_input_update,
                                                       dialog);
-                g_signal_handlers_disconnect_by_func (dialog->priv->mixer_control,
+                g_signal_handlers_disconnect_by_func (dialog->mixer_control,
                                                       on_control_active_output_update,
                                                       dialog);
-                g_signal_handlers_disconnect_by_func (dialog->priv->mixer_control,
+                g_signal_handlers_disconnect_by_func (dialog->mixer_control,
                                                       on_control_stream_added,
                                                       dialog);
-                g_signal_handlers_disconnect_by_func (dialog->priv->mixer_control,
+                g_signal_handlers_disconnect_by_func (dialog->mixer_control,
                                                       on_control_stream_removed,
                                                       dialog);
 
-                g_object_unref (dialog->priv->mixer_control);
-                dialog->priv->mixer_control = NULL;
+                g_object_unref (dialog->mixer_control);
+                dialog->mixer_control = NULL;
         }
 
-        if (dialog->priv->bars != NULL) {
-                g_hash_table_destroy (dialog->priv->bars);
-                dialog->priv->bars = NULL;
+        if (dialog->bars != NULL) {
+                g_hash_table_destroy (dialog->bars);
+                dialog->bars = NULL;
         }
 
-        if (dialog->priv->test_dialog != NULL) {
-                gtk_dialog_response (GTK_DIALOG (dialog->priv->test_dialog),
+        if (dialog->test_dialog != NULL) {
+                gtk_dialog_response (GTK_DIALOG (dialog->test_dialog),
                                      GTK_RESPONSE_OK);
         }
 
@@ -1892,8 +1892,6 @@ gvc_mixer_dialog_class_init (GvcMixerDialogClass *klass)
                                                               "mixer control",
                                                               GVC_TYPE_MIXER_CONTROL,
                                                               G_PARAM_READWRITE|G_PARAM_CONSTRUCT));
-
-        g_type_class_add_private (klass, sizeof (GvcMixerDialogPrivate));
 }
 
 
@@ -1902,9 +1900,8 @@ gvc_mixer_dialog_init (GvcMixerDialog *dialog)
 {
         gtk_orientable_set_orientation (GTK_ORIENTABLE (dialog),
                                         GTK_ORIENTATION_VERTICAL);
-        dialog->priv = GVC_MIXER_DIALOG_GET_PRIVATE (dialog);
-        dialog->priv->bars = g_hash_table_new (NULL, NULL);
-        dialog->priv->size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+        dialog->bars = g_hash_table_new (NULL, NULL);
+        dialog->size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 }
 
 static void
@@ -1917,7 +1914,7 @@ gvc_mixer_dialog_finalize (GObject *object)
 
         mixer_dialog = GVC_MIXER_DIALOG (object);
 
-        g_return_if_fail (mixer_dialog->priv != NULL);
+        g_return_if_fail (mixer_dialog != NULL);
         G_OBJECT_CLASS (gvc_mixer_dialog_parent_class)->finalize (object);
 }
 
@@ -1957,7 +1954,7 @@ gvc_mixer_dialog_set_page (GvcMixerDialog *self,
         else if (g_str_equal (page, "applications"))
                 num = PAGE_APPLICATIONS;
 
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (self->priv->notebook), num);
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (self->notebook), num);
 
         return TRUE;
 }

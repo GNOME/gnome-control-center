@@ -33,10 +33,9 @@
 #include "gvc-speaker-test.h"
 #include "gvc-mixer-stream.h"
 
-#define GVC_SPEAKER_TEST_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GVC_TYPE_SPEAKER_TEST, GvcSpeakerTestPrivate))
-
-struct GvcSpeakerTestPrivate
+struct _GvcSpeakerTest
 {
+        GtkGrid          parent_instance;
         GtkWidget       *channel_controls[PA_CHANNEL_POSITION_MAX];
         ca_context      *canberra;
         GvcMixerStream  *stream;
@@ -88,13 +87,13 @@ gvc_speaker_test_set_property (GObject       *object,
 
         switch (prop_id) {
         case PROP_STREAM:
-                self->priv->stream = g_value_dup_object (value);
-                if (self->priv->control != NULL)
+                self->stream = g_value_dup_object (value);
+                if (self->control != NULL)
                         update_channel_map (self);
                 break;
         case PROP_CONTROL:
-                self->priv->control = g_value_dup_object (value);
-                if (self->priv->stream != NULL)
+                self->control = g_value_dup_object (value);
+                if (self->stream != NULL)
                         update_channel_map (self);
                 break;
         default:
@@ -113,10 +112,10 @@ gvc_speaker_test_get_property (GObject     *object,
 
         switch (prop_id) {
         case PROP_STREAM:
-                g_value_set_object (value, self->priv->stream);
+                g_value_set_object (value, self->stream);
                 break;
         case PROP_CONTROL:
-                g_value_set_object (value, self->priv->control);
+                g_value_set_object (value, self->control);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -147,7 +146,6 @@ gvc_speaker_test_class_init (GvcSpeakerTestClass *klass)
                                                               "The mixer controller",
                                                               GVC_TYPE_MIXER_CONTROL,
                                                               G_PARAM_READWRITE|G_PARAM_CONSTRUCT_ONLY));
-        g_type_class_add_private (klass, sizeof (GvcSpeakerTestPrivate));
 }
 
 static const char *
@@ -365,9 +363,9 @@ create_channel_controls (GvcSpeakerTest *speaker_test)
         guint i;
 
         for (i = 0; i < G_N_ELEMENTS (position_table); i += 3) {
-                speaker_test->priv->channel_controls[position_table[i]] = channel_control_new (speaker_test->priv->canberra, (pa_channel_position_t) position_table[i]);
+                speaker_test->channel_controls[position_table[i]] = channel_control_new (speaker_test->canberra, (pa_channel_position_t) position_table[i]);
                 gtk_grid_attach (GTK_GRID (speaker_test),
-                                 speaker_test->priv->channel_controls[position_table[i]],
+                                 speaker_test->channel_controls[position_table[i]],
                                  position_table[i+1], position_table[i+2], 1, 1);
         }
 }
@@ -378,19 +376,19 @@ update_channel_map (GvcSpeakerTest *speaker_test)
         guint i;
         const GvcChannelMap *map;
 
-        g_return_if_fail (speaker_test->priv->control != NULL);
-        g_return_if_fail (speaker_test->priv->stream != NULL);
+        g_return_if_fail (speaker_test->control != NULL);
+        g_return_if_fail (speaker_test->stream != NULL);
 
         g_debug ("XXX update_channel_map called XXX");
 
-        map = gvc_mixer_stream_get_channel_map (speaker_test->priv->stream);
+        map = gvc_mixer_stream_get_channel_map (speaker_test->stream);
         g_return_if_fail (map != NULL);
 
-        ca_context_change_device (speaker_test->priv->canberra,
-                                  gvc_mixer_stream_get_name (speaker_test->priv->stream));
+        ca_context_change_device (speaker_test->canberra,
+                                  gvc_mixer_stream_get_name (speaker_test->stream));
 
         for (i = 0; i < G_N_ELEMENTS (position_table); i += 3) {
-                gtk_widget_set_visible (speaker_test->priv->channel_controls[position_table[i]],
+                gtk_widget_set_visible (speaker_test->channel_controls[position_table[i]],
                                         gvc_channel_map_has_position(map, position_table[i]));
         }
 }
@@ -418,14 +416,12 @@ gvc_speaker_test_init (GvcSpeakerTest *speaker_test)
 {
         GtkWidget *face;
 
-        speaker_test->priv = GVC_SPEAKER_TEST_GET_PRIVATE (speaker_test);
-
-        ca_context_create (&speaker_test->priv->canberra);
-        ca_context_set_driver (speaker_test->priv->canberra, "pulse");
-        ca_context_change_props (speaker_test->priv->canberra,
+        ca_context_create (&speaker_test->canberra);
+        ca_context_set_driver (speaker_test->canberra, "pulse");
+        ca_context_change_props (speaker_test->canberra,
                                  CA_PROP_APPLICATION_ID, "org.gnome.VolumeControl",
                                  NULL);
-        gvc_speaker_test_set_theme (speaker_test->priv->canberra);
+        gvc_speaker_test_set_theme (speaker_test->canberra);
 
         gtk_widget_set_direction (GTK_WIDGET (speaker_test), GTK_TEXT_DIR_LTR);
         gtk_container_set_border_width (GTK_CONTAINER (speaker_test), 12);
@@ -451,16 +447,16 @@ gvc_speaker_test_finalize (GObject *object)
 
         speaker_test = GVC_SPEAKER_TEST (object);
 
-        g_return_if_fail (speaker_test->priv != NULL);
+        g_return_if_fail (speaker_test != NULL);
 
-        g_object_unref (speaker_test->priv->stream);
-        speaker_test->priv->stream = NULL;
+        g_object_unref (speaker_test->stream);
+        speaker_test->stream = NULL;
 
-        g_object_unref (speaker_test->priv->control);
-        speaker_test->priv->control = NULL;
+        g_object_unref (speaker_test->control);
+        speaker_test->control = NULL;
 
-        ca_context_destroy (speaker_test->priv->canberra);
-        speaker_test->priv->canberra = NULL;
+        ca_context_destroy (speaker_test->canberra);
+        speaker_test->canberra = NULL;
 
         G_OBJECT_CLASS (gvc_speaker_test_parent_class)->finalize (object);
 }

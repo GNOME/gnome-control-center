@@ -24,27 +24,8 @@
 
 G_BEGIN_DECLS
 
-#define GVC_TYPE_CHANNEL_BAR         (gvc_channel_bar_get_type ())
-#define GVC_CHANNEL_BAR(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GVC_TYPE_CHANNEL_BAR, GvcChannelBar))
-#define GVC_CHANNEL_BAR_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GVC_TYPE_CHANNEL_BAR, GvcChannelBarClass))
-#define GVC_IS_CHANNEL_BAR(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GVC_TYPE_CHANNEL_BAR))
-#define GVC_IS_CHANNEL_BAR_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GVC_TYPE_CHANNEL_BAR))
-#define GVC_CHANNEL_BAR_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GVC_TYPE_CHANNEL_BAR, GvcChannelBarClass))
-
-typedef struct GvcChannelBarPrivate GvcChannelBarPrivate;
-
-typedef struct
-{
-        GtkBox                parent;
-        GvcChannelBarPrivate *priv;
-} GvcChannelBar;
-
-typedef struct
-{
-        GtkBoxClass           parent_class;
-} GvcChannelBarClass;
-
-GType               gvc_channel_bar_get_type            (void);
+#define GVC_TYPE_CHANNEL_BAR (gvc_channel_bar_get_type ())
+G_DECLARE_FINAL_TYPE (GvcChannelBar, gvc_channel_bar, GVC, CHANNEL_BAR, GtkBox)
 
 GtkWidget *         gvc_channel_bar_new                 (void);
 

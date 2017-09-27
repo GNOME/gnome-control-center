@@ -26,12 +26,8 @@
 
 G_BEGIN_DECLS
 
-#define GVC_TYPE_BALANCE_BAR         (gvc_balance_bar_get_type ())
-#define GVC_BALANCE_BAR(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GVC_TYPE_BALANCE_BAR, GvcBalanceBar))
-#define GVC_BALANCE_BAR_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GVC_TYPE_BALANCE_BAR, GvcBalanceBarClass))
-#define GVC_IS_BALANCE_BAR(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GVC_TYPE_BALANCE_BAR))
-#define GVC_IS_BALANCE_BAR_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GVC_TYPE_BALANCE_BAR))
-#define GVC_BALANCE_BAR_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GVC_TYPE_BALANCE_BAR, GvcBalanceBarClass))
+#define GVC_TYPE_BALANCE_BAR (gvc_balance_bar_get_type ())
+G_DECLARE_FINAL_TYPE (GvcBalanceBar, gvc_balance_bar, GVC, BALANCE_BAR, GtkBox)
 
 typedef enum {
         BALANCE_TYPE_RL,
@@ -40,21 +36,6 @@ typedef enum {
 } GvcBalanceType;
 
 #define NUM_BALANCE_TYPES BALANCE_TYPE_LFE + 1
-
-typedef struct GvcBalanceBarPrivate GvcBalanceBarPrivate;
-
-typedef struct
-{
-        GtkBox                parent;
-        GvcBalanceBarPrivate *priv;
-} GvcBalanceBar;
-
-typedef struct
-{
-        GtkBoxClass           parent_class;
-} GvcBalanceBarClass;
-
-GType               gvc_balance_bar_get_type            (void);
 
 GtkWidget *         gvc_balance_bar_new                 (const GvcChannelMap *map,
                                                          GvcBalanceType btype);

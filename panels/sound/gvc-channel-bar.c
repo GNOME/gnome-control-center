@@ -36,13 +36,13 @@
 #define SCALE_SIZE 128
 #define ADJUSTMENT_MAX_NORMAL gvc_mixer_control_get_vol_max_norm(NULL)
 #define ADJUSTMENT_MAX_AMPLIFIED gvc_mixer_control_get_vol_max_amplified(NULL)
-#define ADJUSTMENT_MAX (bar->priv->is_amplified ? ADJUSTMENT_MAX_AMPLIFIED : ADJUSTMENT_MAX_NORMAL)
+#define ADJUSTMENT_MAX (bar->is_amplified ? ADJUSTMENT_MAX_AMPLIFIED : ADJUSTMENT_MAX_NORMAL)
 #define SCROLLSTEP (ADJUSTMENT_MAX / 100.0 * 5.0)
 
-#define GVC_CHANNEL_BAR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GVC_TYPE_CHANNEL_BAR, GvcChannelBarPrivate))
-
-struct GvcChannelBarPrivate
+struct _GvcChannelBar
 {
+        GtkBox         parent_instance;
+
         GtkOrientation orientation;
         GtkWidget     *scale_box;
         GtkWidget     *start_box;
@@ -102,80 +102,79 @@ G_DEFINE_TYPE (GvcChannelBar, gvc_channel_bar, GTK_TYPE_BOX)
 static GtkWidget *
 _scale_box_new (GvcChannelBar *bar)
 {
-        GvcChannelBarPrivate *priv = bar->priv;
         GtkWidget            *box;
         GtkWidget            *sbox;
         GtkWidget            *ebox;
 
-        if (priv->orientation == GTK_ORIENTATION_VERTICAL) {
-                bar->priv->scale_box = box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+        if (bar->orientation == GTK_ORIENTATION_VERTICAL) {
+                bar->scale_box = box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 
-                priv->scale = gtk_scale_new (GTK_ORIENTATION_VERTICAL, priv->adjustment);
+                bar->scale = gtk_scale_new (GTK_ORIENTATION_VERTICAL, bar->adjustment);
 
-                gtk_widget_set_size_request (priv->scale, -1, SCALE_SIZE);
-                gtk_range_set_inverted (GTK_RANGE (priv->scale), TRUE);
+                gtk_widget_set_size_request (bar->scale, -1, SCALE_SIZE);
+                gtk_range_set_inverted (GTK_RANGE (bar->scale), TRUE);
 
-                bar->priv->start_box = sbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+                bar->start_box = sbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
                 gtk_box_pack_start (GTK_BOX (box), sbox, FALSE, FALSE, 0);
 
-                gtk_box_pack_start (GTK_BOX (sbox), priv->image, FALSE, FALSE, 0);
-                gtk_box_pack_start (GTK_BOX (sbox), priv->label, FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (sbox), bar->image, FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (sbox), bar->label, FALSE, FALSE, 0);
 
-                gtk_box_pack_start (GTK_BOX (sbox), priv->high_image, FALSE, FALSE, 0);
-                gtk_widget_hide (priv->high_image);
-                gtk_box_pack_start (GTK_BOX (box), priv->scale, TRUE, TRUE, 0);
+                gtk_box_pack_start (GTK_BOX (sbox), bar->high_image, FALSE, FALSE, 0);
+                gtk_widget_hide (bar->high_image);
+                gtk_box_pack_start (GTK_BOX (box), bar->scale, TRUE, TRUE, 0);
 
-                bar->priv->end_box = ebox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+                bar->end_box = ebox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
                 gtk_box_pack_start (GTK_BOX (box), ebox, FALSE, FALSE, 0);
 
-                gtk_box_pack_start (GTK_BOX (ebox), priv->low_image, FALSE, FALSE, 0);
-                gtk_widget_hide (priv->low_image);
+                gtk_box_pack_start (GTK_BOX (ebox), bar->low_image, FALSE, FALSE, 0);
+                gtk_widget_hide (bar->low_image);
 
-                gtk_box_pack_start (GTK_BOX (ebox), priv->mute_switch, FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (ebox), bar->mute_switch, FALSE, FALSE, 0);
         } else {
-                bar->priv->scale_box = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-                gtk_box_pack_start (GTK_BOX (box), priv->image, FALSE, FALSE, 0);
+                bar->scale_box = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+                gtk_box_pack_start (GTK_BOX (box), bar->image, FALSE, FALSE, 0);
 
-                priv->scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, priv->adjustment);
+                bar->scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, bar->adjustment);
 
-                gtk_widget_set_size_request (priv->scale, SCALE_SIZE, -1);
+                gtk_widget_set_size_request (bar->scale, SCALE_SIZE, -1);
 
-                bar->priv->start_box = sbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+                bar->start_box = sbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
                 gtk_box_pack_start (GTK_BOX (box), sbox, FALSE, FALSE, 0);
 
-                gtk_box_pack_end (GTK_BOX (sbox), priv->low_image, FALSE, FALSE, 0);
-                gtk_widget_show (priv->low_image);
+                gtk_box_pack_end (GTK_BOX (sbox), bar->low_image, FALSE, FALSE, 0);
+                gtk_widget_show (bar->low_image);
 
-                gtk_box_pack_start (GTK_BOX (sbox), priv->label, TRUE, TRUE, 0);
-                gtk_box_pack_start (GTK_BOX (box), priv->scale, TRUE, TRUE, 0);
+                gtk_box_pack_start (GTK_BOX (sbox), bar->label, TRUE, TRUE, 0);
+                gtk_box_pack_start (GTK_BOX (box), bar->scale, TRUE, TRUE, 0);
 
-                bar->priv->end_box = ebox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+                bar->end_box = ebox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
                 gtk_box_pack_start (GTK_BOX (box), ebox, FALSE, FALSE, 0);
 
-                gtk_box_pack_start (GTK_BOX (ebox), priv->high_image, FALSE, FALSE, 0);
-                gtk_widget_show (priv->high_image);
-                gtk_box_pack_start (GTK_BOX (ebox), priv->mute_switch, FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (ebox), bar->high_image, FALSE, FALSE, 0);
+                gtk_widget_show (bar->high_image);
+                gtk_box_pack_start (GTK_BOX (ebox), bar->mute_switch, FALSE, FALSE, 0);
         }
 
-        ca_gtk_widget_disable_sounds (bar->priv->scale, FALSE);
-        gtk_widget_add_events (bar->priv->scale, GDK_SCROLL_MASK);
+        ca_gtk_widget_disable_sounds (bar->scale, FALSE);
+        gtk_widget_add_events (bar->scale, GDK_SCROLL_MASK);
 
-        g_signal_connect (G_OBJECT (bar->priv->scale), "button-press-event",
+        g_signal_connect (G_OBJECT (bar->scale), "button-press-event",
                           G_CALLBACK (on_scale_button_press_event), bar);
-        g_signal_connect (G_OBJECT (bar->priv->scale), "button-release-event",
+        g_signal_connect (G_OBJECT (bar->scale), "button-release-event",
                           G_CALLBACK (on_scale_button_release_event), bar);
-        g_signal_connect (G_OBJECT (bar->priv->scale), "scroll-event",
+        g_signal_connect (G_OBJECT (bar->scale), "scroll-event",
                           G_CALLBACK (on_scale_scroll_event), bar);
 
-        if (bar->priv->size_group != NULL) {
-                gtk_size_group_add_widget (bar->priv->size_group, sbox);
+        if (bar->size_group != NULL) {
+                gtk_size_group_add_widget (bar->size_group, sbox);
 
-                if (bar->priv->symmetric) {
-                        gtk_size_group_add_widget (bar->priv->size_group, ebox);
+                if (bar->symmetric) {
+                        gtk_size_group_add_widget (bar->size_group, ebox);
                 }
         }
 
-        gtk_scale_set_draw_value (GTK_SCALE (priv->scale), FALSE);
+        gtk_scale_set_draw_value (GTK_SCALE (bar->scale), FALSE);
 
         return box;
 }
@@ -183,29 +182,29 @@ _scale_box_new (GvcChannelBar *bar)
 static void
 update_image (GvcChannelBar *bar)
 {
-        gtk_image_set_from_icon_name (GTK_IMAGE (bar->priv->image),
-                                      bar->priv->icon_name,
+        gtk_image_set_from_icon_name (GTK_IMAGE (bar->image),
+                                      bar->icon_name,
                                       GTK_ICON_SIZE_DIALOG);
 
-        if (bar->priv->icon_name != NULL) {
-                gtk_widget_show (bar->priv->image);
+        if (bar->icon_name != NULL) {
+                gtk_widget_show (bar->image);
         } else {
-                gtk_widget_hide (bar->priv->image);
+                gtk_widget_hide (bar->image);
         }
 }
 
 static void
 update_label (GvcChannelBar *bar)
 {
-        if (bar->priv->name != NULL) {
-                gtk_label_set_text_with_mnemonic (GTK_LABEL (bar->priv->label),
-                                                  bar->priv->name);
-                gtk_label_set_mnemonic_widget (GTK_LABEL (bar->priv->label),
-                                               bar->priv->scale);
-                gtk_widget_show (bar->priv->label);
+        if (bar->name != NULL) {
+                gtk_label_set_text_with_mnemonic (GTK_LABEL (bar->label),
+                                                  bar->name);
+                gtk_label_set_mnemonic_widget (GTK_LABEL (bar->label),
+                                               bar->scale);
+                gtk_widget_show (bar->label);
         } else {
-                gtk_label_set_text (GTK_LABEL (bar->priv->label), NULL);
-                gtk_widget_hide (bar->priv->label);
+                gtk_label_set_text (GTK_LABEL (bar->label), NULL);
+                gtk_widget_hide (bar->label);
         }
 }
 
@@ -215,44 +214,44 @@ update_layout (GvcChannelBar *bar)
         GtkWidget *box;
         GtkWidget *frame;
 
-        if (bar->priv->scale == NULL) {
+        if (bar->scale == NULL) {
                 return;
         }
 
-        box = bar->priv->scale_box;
+        box = bar->scale_box;
         frame = gtk_widget_get_parent (box);
 
-        g_object_ref (bar->priv->image);
-        g_object_ref (bar->priv->label);
-        g_object_ref (bar->priv->mute_switch);
-        g_object_ref (bar->priv->low_image);
-        g_object_ref (bar->priv->high_image);
+        g_object_ref (bar->image);
+        g_object_ref (bar->label);
+        g_object_ref (bar->mute_switch);
+        g_object_ref (bar->low_image);
+        g_object_ref (bar->high_image);
 
-        gtk_container_remove (GTK_CONTAINER (bar->priv->start_box), bar->priv->image);
-        gtk_container_remove (GTK_CONTAINER (bar->priv->start_box), bar->priv->label);
-        gtk_container_remove (GTK_CONTAINER (bar->priv->end_box), bar->priv->mute_switch);
+        gtk_container_remove (GTK_CONTAINER (bar->start_box), bar->image);
+        gtk_container_remove (GTK_CONTAINER (bar->start_box), bar->label);
+        gtk_container_remove (GTK_CONTAINER (bar->end_box), bar->mute_switch);
 
-        if (bar->priv->orientation == GTK_ORIENTATION_VERTICAL) {
-                gtk_container_remove (GTK_CONTAINER (bar->priv->start_box), bar->priv->low_image);
-                gtk_container_remove (GTK_CONTAINER (bar->priv->end_box), bar->priv->high_image);
+        if (bar->orientation == GTK_ORIENTATION_VERTICAL) {
+                gtk_container_remove (GTK_CONTAINER (bar->start_box), bar->low_image);
+                gtk_container_remove (GTK_CONTAINER (bar->end_box), bar->high_image);
         } else {
-                gtk_container_remove (GTK_CONTAINER (bar->priv->end_box), bar->priv->low_image);
-                gtk_container_remove (GTK_CONTAINER (bar->priv->start_box), bar->priv->high_image);
+                gtk_container_remove (GTK_CONTAINER (bar->end_box), bar->low_image);
+                gtk_container_remove (GTK_CONTAINER (bar->start_box), bar->high_image);
         }
 
-        gtk_container_remove (GTK_CONTAINER (box), bar->priv->start_box);
-        gtk_container_remove (GTK_CONTAINER (box), bar->priv->scale);
-        gtk_container_remove (GTK_CONTAINER (box), bar->priv->end_box);
+        gtk_container_remove (GTK_CONTAINER (box), bar->start_box);
+        gtk_container_remove (GTK_CONTAINER (box), bar->scale);
+        gtk_container_remove (GTK_CONTAINER (box), bar->end_box);
         gtk_container_remove (GTK_CONTAINER (frame), box);
 
-        bar->priv->scale_box = _scale_box_new (bar);
-        gtk_container_add (GTK_CONTAINER (frame), bar->priv->scale_box);
+        bar->scale_box = _scale_box_new (bar);
+        gtk_container_add (GTK_CONTAINER (frame), bar->scale_box);
 
-        g_object_unref (bar->priv->image);
-        g_object_unref (bar->priv->label);
-        g_object_unref (bar->priv->mute_switch);
-        g_object_unref (bar->priv->low_image);
-        g_object_unref (bar->priv->high_image);
+        g_object_unref (bar->image);
+        g_object_unref (bar->label);
+        g_object_unref (bar->mute_switch);
+        g_object_unref (bar->low_image);
+        g_object_unref (bar->high_image);
 
         gtk_widget_show_all (frame);
 }
@@ -264,16 +263,16 @@ gvc_channel_bar_set_size_group (GvcChannelBar *bar,
 {
         g_return_if_fail (GVC_IS_CHANNEL_BAR (bar));
 
-        bar->priv->size_group = group;
-        bar->priv->symmetric = symmetric;
+        bar->size_group = group;
+        bar->symmetric = symmetric;
 
-        if (bar->priv->size_group != NULL) {
-                gtk_size_group_add_widget (bar->priv->size_group,
-                                           bar->priv->start_box);
+        if (bar->size_group != NULL) {
+                gtk_size_group_add_widget (bar->size_group,
+                                           bar->start_box);
 
-                if (bar->priv->symmetric) {
-                        gtk_size_group_add_widget (bar->priv->size_group,
-                                                   bar->priv->end_box);
+                if (bar->symmetric) {
+                        gtk_size_group_add_widget (bar->size_group,
+                                                   bar->end_box);
                 }
         }
         gtk_widget_queue_draw (GTK_WIDGET (bar));
@@ -285,8 +284,8 @@ gvc_channel_bar_set_name (GvcChannelBar  *bar,
 {
         g_return_if_fail (GVC_IS_CHANNEL_BAR (bar));
 
-        g_free (bar->priv->name);
-        bar->priv->name = g_strdup (name);
+        g_free (bar->name);
+        bar->name = g_strdup (name);
         update_label (bar);
         g_object_notify (G_OBJECT (bar), "name");
 }
@@ -297,8 +296,8 @@ gvc_channel_bar_set_icon_name (GvcChannelBar  *bar,
 {
         g_return_if_fail (GVC_IS_CHANNEL_BAR (bar));
 
-        g_free (bar->priv->icon_name);
-        bar->priv->icon_name = g_strdup (name);
+        g_free (bar->icon_name);
+        bar->icon_name = g_strdup (name);
         update_image (bar);
         g_object_notify (G_OBJECT (bar), "icon-name");
 }
@@ -309,11 +308,11 @@ gvc_channel_bar_set_low_icon_name   (GvcChannelBar *bar,
 {
         g_return_if_fail (GVC_IS_CHANNEL_BAR (bar));
 
-        if (name != NULL && strcmp (bar->priv->low_icon_name, name) != 0) {
-                g_free (bar->priv->low_icon_name);
-                bar->priv->low_icon_name = g_strdup (name);
-                gtk_image_set_from_icon_name (GTK_IMAGE (bar->priv->low_image),
-                                              bar->priv->low_icon_name,
+        if (name != NULL && strcmp (bar->low_icon_name, name) != 0) {
+                g_free (bar->low_icon_name);
+                bar->low_icon_name = g_strdup (name);
+                gtk_image_set_from_icon_name (GTK_IMAGE (bar->low_image),
+                                              bar->low_icon_name,
                                               GTK_ICON_SIZE_MENU);
                 g_object_notify (G_OBJECT (bar), "low-icon-name");
         }
@@ -325,11 +324,11 @@ gvc_channel_bar_set_high_icon_name  (GvcChannelBar *bar,
 {
         g_return_if_fail (GVC_IS_CHANNEL_BAR (bar));
 
-        if (name != NULL && strcmp (bar->priv->high_icon_name, name) != 0) {
-                g_free (bar->priv->high_icon_name);
-                bar->priv->high_icon_name = g_strdup (name);
-                gtk_image_set_from_icon_name (GTK_IMAGE (bar->priv->high_image),
-                                              bar->priv->high_icon_name,
+        if (name != NULL && strcmp (bar->high_icon_name, name) != 0) {
+                g_free (bar->high_icon_name);
+                bar->high_icon_name = g_strdup (name);
+                gtk_image_set_from_icon_name (GTK_IMAGE (bar->high_image),
+                                              bar->high_icon_name,
                                               GTK_ICON_SIZE_MENU);
                 g_object_notify (G_OBJECT (bar), "high-icon-name");
         }
@@ -341,8 +340,8 @@ gvc_channel_bar_set_orientation (GvcChannelBar  *bar,
 {
         g_return_if_fail (GVC_IS_CHANNEL_BAR (bar));
 
-        if (orientation != bar->priv->orientation) {
-                bar->priv->orientation = orientation;
+        if (orientation != bar->orientation) {
+                bar->orientation = orientation;
                 update_layout (bar);
                 g_object_notify (G_OBJECT (bar), "orientation");
         }
@@ -355,13 +354,13 @@ gvc_channel_bar_set_adjustment (GvcChannelBar *bar,
         g_return_if_fail (GVC_CHANNEL_BAR (bar));
         g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
 
-        if (bar->priv->adjustment != NULL) {
-                g_object_unref (bar->priv->adjustment);
+        if (bar->adjustment != NULL) {
+                g_object_unref (bar->adjustment);
         }
-        bar->priv->adjustment = g_object_ref_sink (adjustment);
+        bar->adjustment = g_object_ref_sink (adjustment);
 
-        if (bar->priv->scale != NULL) {
-                gtk_range_set_adjustment (GTK_RANGE (bar->priv->scale), adjustment);
+        if (bar->scale != NULL) {
+                gtk_range_set_adjustment (GTK_RANGE (bar->scale), adjustment);
         }
 
         g_object_notify (G_OBJECT (bar), "adjustment");
@@ -372,7 +371,7 @@ gvc_channel_bar_get_adjustment (GvcChannelBar *bar)
 {
         g_return_val_if_fail (GVC_IS_CHANNEL_BAR (bar), NULL);
 
-        return bar->priv->adjustment;
+        return bar->adjustment;
 }
 
 static gboolean
@@ -380,7 +379,7 @@ on_scale_button_press_event (GtkWidget      *widget,
                              GdkEventButton *event,
                              GvcChannelBar  *bar)
 {
-        bar->priv->click_lock = TRUE;
+        bar->click_lock = TRUE;
 
         return FALSE;
 }
@@ -393,7 +392,7 @@ on_scale_button_release_event (GtkWidget      *widget,
         GtkAdjustment *adj;
         gdouble value;
 
-        bar->priv->click_lock = FALSE;
+        bar->click_lock = FALSE;
 
         adj = gtk_range_get_adjustment (GTK_RANGE (widget));
 
@@ -426,7 +425,7 @@ gvc_channel_bar_scroll (GvcChannelBar *bar, GdkEventScroll *event)
 
         direction = event->direction;
 
-        if (bar->priv->orientation == GTK_ORIENTATION_VERTICAL) {
+        if (bar->orientation == GTK_ORIENTATION_VERTICAL) {
                 if (direction == GDK_SCROLL_LEFT || direction == GDK_SCROLL_RIGHT)
                         return FALSE;
         } else {
@@ -462,8 +461,8 @@ gvc_channel_bar_scroll (GvcChannelBar *bar, GdkEventScroll *event)
 		}
 	}
 
-        adj = gtk_range_get_adjustment (GTK_RANGE (bar->priv->scale));
-        if (adj == bar->priv->zero_adjustment) {
+        adj = gtk_range_get_adjustment (GTK_RANGE (bar->scale));
+        if (adj == bar->zero_adjustment) {
                 if (dy > 0)
                         gvc_channel_bar_set_is_muted (bar, FALSE);
                 return TRUE;
@@ -484,7 +483,7 @@ gvc_channel_bar_scroll (GvcChannelBar *bar, GdkEventScroll *event)
         }
 
         gvc_channel_bar_set_is_muted (bar, (value == 0.0));
-        adj = gtk_range_get_adjustment (GTK_RANGE (bar->priv->scale));
+        adj = gtk_range_get_adjustment (GTK_RANGE (bar->scale));
         gtk_adjustment_set_value (adj, value);
 
         return TRUE;
@@ -504,15 +503,15 @@ on_zero_adjustment_value_changed (GtkAdjustment *adjustment,
 {
         gdouble value;
 
-        if (bar->priv->click_lock != FALSE) {
+        if (bar->click_lock != FALSE) {
                 return;
         }
 
-        value = gtk_adjustment_get_value (bar->priv->zero_adjustment);
-        gtk_adjustment_set_value (bar->priv->adjustment, value);
+        value = gtk_adjustment_get_value (bar->zero_adjustment);
+        gtk_adjustment_set_value (bar->adjustment, value);
 
 
-        if (bar->priv->show_mute == FALSE) {
+        if (bar->show_mute == FALSE) {
                 /* this means the adjustment moved away from zero and
                  * therefore we should unmute and set the volume. */
                 gvc_channel_bar_set_is_muted (bar, value > 0.0);
@@ -522,33 +521,33 @@ on_zero_adjustment_value_changed (GtkAdjustment *adjustment,
 static void
 update_mute_switch (GvcChannelBar *bar)
 {
-        if (bar->priv->show_mute) {
-                gtk_widget_show (bar->priv->mute_switch);
-                gtk_switch_set_active (GTK_SWITCH (bar->priv->mute_switch),
-                                       !bar->priv->is_muted);
+        if (bar->show_mute) {
+                gtk_widget_show (bar->mute_switch);
+                gtk_switch_set_active (GTK_SWITCH (bar->mute_switch),
+                                       !bar->is_muted);
         } else {
-                gtk_widget_hide (bar->priv->mute_switch);
+                gtk_widget_hide (bar->mute_switch);
         }
 
-        if (bar->priv->is_muted) {
+        if (bar->is_muted) {
                 /* If we aren't showing the mute button then
                  * move slider to the zero.  But we don't want to
                  * change the adjustment.  */
-                g_signal_handlers_block_by_func (bar->priv->zero_adjustment,
+                g_signal_handlers_block_by_func (bar->zero_adjustment,
                                                  on_zero_adjustment_value_changed,
                                                  bar);
-                gtk_adjustment_set_value (bar->priv->zero_adjustment, 0);
-                g_signal_handlers_unblock_by_func (bar->priv->zero_adjustment,
+                gtk_adjustment_set_value (bar->zero_adjustment, 0);
+                g_signal_handlers_unblock_by_func (bar->zero_adjustment,
                                                    on_zero_adjustment_value_changed,
                                                    bar);
-                gtk_range_set_adjustment (GTK_RANGE (bar->priv->scale),
-                                          bar->priv->zero_adjustment);
+                gtk_range_set_adjustment (GTK_RANGE (bar->scale),
+                                          bar->zero_adjustment);
         } else {
                 /* no longer muted so restore the original adjustment
                  * and tell the front-end that the value changed */
-                gtk_range_set_adjustment (GTK_RANGE (bar->priv->scale),
-                                          bar->priv->adjustment);
-                gtk_adjustment_value_changed (bar->priv->adjustment);
+                gtk_range_set_adjustment (GTK_RANGE (bar->scale),
+                                          bar->adjustment);
+                gtk_adjustment_value_changed (bar->adjustment);
         }
 }
 
@@ -558,10 +557,10 @@ gvc_channel_bar_set_is_muted (GvcChannelBar *bar,
 {
         g_return_if_fail (GVC_IS_CHANNEL_BAR (bar));
 
-        if (is_muted != bar->priv->is_muted) {
+        if (is_muted != bar->is_muted) {
                 /* Update our internal state before telling the
                  * front-end about our changes */
-                bar->priv->is_muted = is_muted;
+                bar->is_muted = is_muted;
                 update_mute_switch (bar);
                 g_object_notify (G_OBJECT (bar), "is-muted");
         }
@@ -571,7 +570,7 @@ gboolean
 gvc_channel_bar_get_is_muted  (GvcChannelBar *bar)
 {
         g_return_val_if_fail (GVC_IS_CHANNEL_BAR (bar), FALSE);
-        return bar->priv->is_muted;
+        return bar->is_muted;
 }
 
 void
@@ -580,8 +579,8 @@ gvc_channel_bar_set_show_mute (GvcChannelBar *bar,
 {
         g_return_if_fail (GVC_IS_CHANNEL_BAR (bar));
 
-        if (show_mute != bar->priv->show_mute) {
-                bar->priv->show_mute = show_mute;
+        if (show_mute != bar->show_mute) {
+                bar->show_mute = show_mute;
                 g_object_notify (G_OBJECT (bar), "show-mute");
                 update_mute_switch (bar);
         }
@@ -591,7 +590,7 @@ gboolean
 gvc_channel_bar_get_show_mute (GvcChannelBar *bar)
 {
         g_return_val_if_fail (GVC_IS_CHANNEL_BAR (bar), FALSE);
-        return bar->priv->show_mute;
+        return bar->show_mute;
 }
 
 void
@@ -599,26 +598,26 @@ gvc_channel_bar_set_is_amplified (GvcChannelBar *bar, gboolean amplified)
 {
         g_return_if_fail (GVC_IS_CHANNEL_BAR (bar));
 
-        bar->priv->is_amplified = amplified;
-        gtk_adjustment_set_upper (bar->priv->adjustment, ADJUSTMENT_MAX);
-        gtk_adjustment_set_upper (bar->priv->zero_adjustment, ADJUSTMENT_MAX);
-        gtk_scale_clear_marks (GTK_SCALE (bar->priv->scale));
+        bar->is_amplified = amplified;
+        gtk_adjustment_set_upper (bar->adjustment, ADJUSTMENT_MAX);
+        gtk_adjustment_set_upper (bar->zero_adjustment, ADJUSTMENT_MAX);
+        gtk_scale_clear_marks (GTK_SCALE (bar->scale));
 
         if (amplified) {
                 char *str;
 
-                if (bar->priv->base_volume == ADJUSTMENT_MAX_NORMAL) {
+                if (bar->base_volume == ADJUSTMENT_MAX_NORMAL) {
                         str = g_strdup_printf ("<small>%s</small>", C_("volume", "100%"));
-                        gtk_scale_add_mark (GTK_SCALE (bar->priv->scale), ADJUSTMENT_MAX_NORMAL,
+                        gtk_scale_add_mark (GTK_SCALE (bar->scale), ADJUSTMENT_MAX_NORMAL,
                                             GTK_POS_BOTTOM, str);
                 } else {
                         str = g_strdup_printf ("<small>%s</small>", C_("volume", "Unamplified"));
-                        gtk_scale_add_mark (GTK_SCALE (bar->priv->scale), bar->priv->base_volume,
+                        gtk_scale_add_mark (GTK_SCALE (bar->scale), bar->base_volume,
                                             GTK_POS_BOTTOM, str);
                         /* Only show 100% if it's higher than the base volume */
-                        if (bar->priv->base_volume < ADJUSTMENT_MAX_NORMAL) {
+                        if (bar->base_volume < ADJUSTMENT_MAX_NORMAL) {
                                 str = g_strdup_printf ("<small>%s</small>", C_("volume", "100%"));
-                                gtk_scale_add_mark (GTK_SCALE (bar->priv->scale), ADJUSTMENT_MAX_NORMAL,
+                                gtk_scale_add_mark (GTK_SCALE (bar->scale), ADJUSTMENT_MAX_NORMAL,
                                                     GTK_POS_BOTTOM, str);
                         }
                 }
@@ -629,19 +628,19 @@ gvc_channel_bar_set_is_amplified (GvcChannelBar *bar, gboolean amplified)
                  * these widgets plus the scale but neither GtkScale
                  * nor GtkSwitch support baseline alignment yet. */
 
-                gtk_widget_set_valign (bar->priv->mute_switch, GTK_ALIGN_START);
+                gtk_widget_set_valign (bar->mute_switch, GTK_ALIGN_START);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-                gtk_misc_set_alignment (GTK_MISC (bar->priv->low_image), 0.5, 0.15);
-                gtk_misc_set_alignment (GTK_MISC (bar->priv->high_image), 0.5, 0.15);
+                gtk_misc_set_alignment (GTK_MISC (bar->low_image), 0.5, 0.15);
+                gtk_misc_set_alignment (GTK_MISC (bar->high_image), 0.5, 0.15);
 G_GNUC_END_IGNORE_DEPRECATIONS
-                gtk_widget_set_valign (bar->priv->label, GTK_ALIGN_START);
+                gtk_widget_set_valign (bar->label, GTK_ALIGN_START);
         } else {
-                gtk_widget_set_valign (bar->priv->mute_switch, GTK_ALIGN_CENTER);
+                gtk_widget_set_valign (bar->mute_switch, GTK_ALIGN_CENTER);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-                gtk_misc_set_alignment (GTK_MISC (bar->priv->low_image), 0.5, 0.5);
-                gtk_misc_set_alignment (GTK_MISC (bar->priv->high_image), 0.5, 0.5);
+                gtk_misc_set_alignment (GTK_MISC (bar->low_image), 0.5, 0.5);
+                gtk_misc_set_alignment (GTK_MISC (bar->high_image), 0.5, 0.5);
 G_GNUC_END_IGNORE_DEPRECATIONS
-                gtk_widget_set_valign (bar->priv->label, GTK_ALIGN_CENTER);
+                gtk_widget_set_valign (bar->label, GTK_ALIGN_CENTER);
         }
 }
 
@@ -650,7 +649,7 @@ gvc_channel_bar_get_ellipsize (GvcChannelBar *bar)
 {
         g_return_val_if_fail (GVC_IS_CHANNEL_BAR (bar), FALSE);
 
-        return gtk_label_get_ellipsize (GTK_LABEL (bar->priv->label)) != PANGO_ELLIPSIZE_NONE;
+        return gtk_label_get_ellipsize (GTK_LABEL (bar->label)) != PANGO_ELLIPSIZE_NONE;
 }
 
 void
@@ -660,9 +659,9 @@ gvc_channel_bar_set_ellipsize (GvcChannelBar *bar,
         g_return_if_fail (GVC_IS_CHANNEL_BAR (bar));
 
         if (ellipsized)
-                gtk_label_set_ellipsize (GTK_LABEL (bar->priv->label), PANGO_ELLIPSIZE_END);
+                gtk_label_set_ellipsize (GTK_LABEL (bar->label), PANGO_ELLIPSIZE_END);
 	else
-                gtk_label_set_ellipsize (GTK_LABEL (bar->priv->label), PANGO_ELLIPSIZE_NONE);
+                gtk_label_set_ellipsize (GTK_LABEL (bar->label), PANGO_ELLIPSIZE_NONE);
 }
 
 void
@@ -672,12 +671,12 @@ gvc_channel_bar_set_base_volume (GvcChannelBar *bar,
         g_return_if_fail (GVC_IS_CHANNEL_BAR (bar));
 
         if (base_volume == 0) {
-                bar->priv->base_volume = ADJUSTMENT_MAX_NORMAL;
+                bar->base_volume = ADJUSTMENT_MAX_NORMAL;
                 return;
         }
 
         /* Note that you need to call _is_amplified() afterwards to update the marks */
-        bar->priv->base_volume = base_volume;
+        bar->base_volume = base_volume;
 }
 
 static void
@@ -732,35 +731,34 @@ gvc_channel_bar_get_property (GObject     *object,
                               GParamSpec  *pspec)
 {
         GvcChannelBar *self = GVC_CHANNEL_BAR (object);
-        GvcChannelBarPrivate *priv = self->priv;
 
         switch (prop_id) {
         case PROP_ORIENTATION:
-                g_value_set_enum (value, priv->orientation);
+                g_value_set_enum (value, self->orientation);
                 break;
         case PROP_IS_MUTED:
-                g_value_set_boolean (value, priv->is_muted);
+                g_value_set_boolean (value, self->is_muted);
                 break;
         case PROP_SHOW_MUTE:
-                g_value_set_boolean (value, priv->show_mute);
+                g_value_set_boolean (value, self->show_mute);
                 break;
         case PROP_NAME:
-                g_value_set_string (value, priv->name);
+                g_value_set_string (value, self->name);
                 break;
         case PROP_ICON_NAME:
-                g_value_set_string (value, priv->icon_name);
+                g_value_set_string (value, self->icon_name);
                 break;
         case PROP_LOW_ICON_NAME:
-                g_value_set_string (value, priv->low_icon_name);
+                g_value_set_string (value, self->low_icon_name);
                 break;
         case PROP_HIGH_ICON_NAME:
-                g_value_set_string (value, priv->high_icon_name);
+                g_value_set_string (value, self->high_icon_name);
                 break;
         case PROP_ADJUSTMENT:
                 g_value_set_object (value, gvc_channel_bar_get_adjustment (self));
                 break;
         case PROP_IS_AMPLIFIED:
-                g_value_set_boolean (value, priv->is_amplified);
+                g_value_set_boolean (value, self->is_amplified);
                 break;
         case PROP_ELLIPSIZE:
                 g_value_set_boolean (value, gvc_channel_bar_get_ellipsize (self));
@@ -870,7 +868,6 @@ gvc_channel_bar_class_init (GvcChannelBarClass *klass)
                                                                "Whether the label is ellipsized",
                                                                FALSE,
                                                                G_PARAM_READWRITE|G_PARAM_CONSTRUCT));
-        g_type_class_add_private (klass, sizeof (GvcChannelBarPrivate));
 }
 
 static void
@@ -888,56 +885,54 @@ gvc_channel_bar_init (GvcChannelBar *bar)
 {
         GtkWidget *frame;
 
-        bar->priv = GVC_CHANNEL_BAR_GET_PRIVATE (bar);
+        bar->base_volume = ADJUSTMENT_MAX_NORMAL;
+        bar->low_icon_name = g_strdup ("audio-volume-low-symbolic");
+        bar->high_icon_name = g_strdup ("audio-volume-high-symbolic");
 
-        bar->priv->base_volume = ADJUSTMENT_MAX_NORMAL;
-        bar->priv->low_icon_name = g_strdup ("audio-volume-low-symbolic");
-        bar->priv->high_icon_name = g_strdup ("audio-volume-high-symbolic");
-
-        bar->priv->orientation = GTK_ORIENTATION_HORIZONTAL;
-        bar->priv->adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0,
+        bar->orientation = GTK_ORIENTATION_HORIZONTAL;
+        bar->adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0,
                                                                     0.0,
                                                                     ADJUSTMENT_MAX_NORMAL,
                                                                     ADJUSTMENT_MAX_NORMAL/100.0,
                                                                     ADJUSTMENT_MAX_NORMAL/10.0,
                                                                     0.0));
-        g_object_ref_sink (bar->priv->adjustment);
+        g_object_ref_sink (bar->adjustment);
 
-        bar->priv->zero_adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0,
+        bar->zero_adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0,
                                                                          0.0,
                                                                          ADJUSTMENT_MAX_NORMAL,
                                                                          ADJUSTMENT_MAX_NORMAL/100.0,
                                                                          ADJUSTMENT_MAX_NORMAL/10.0,
                                                                          0.0));
-        g_object_ref_sink (bar->priv->zero_adjustment);
+        g_object_ref_sink (bar->zero_adjustment);
 
-        g_signal_connect (bar->priv->zero_adjustment,
+        g_signal_connect (bar->zero_adjustment,
                           "value-changed",
                           G_CALLBACK (on_zero_adjustment_value_changed),
                           bar);
 
-        bar->priv->mute_switch = gtk_switch_new ();
-        gtk_widget_set_no_show_all (bar->priv->mute_switch, TRUE);
-        g_signal_connect (bar->priv->mute_switch,
+        bar->mute_switch = gtk_switch_new ();
+        gtk_widget_set_no_show_all (bar->mute_switch, TRUE);
+        g_signal_connect (bar->mute_switch,
                           "notify::active",
                           G_CALLBACK (on_mute_switch_toggled),
                           bar);
 
-        bar->priv->low_image = gtk_image_new_from_icon_name ("audio-volume-low-symbolic",
+        bar->low_image = gtk_image_new_from_icon_name ("audio-volume-low-symbolic",
                                                              GTK_ICON_SIZE_MENU);
-        gtk_style_context_add_class (gtk_widget_get_style_context (bar->priv->low_image), "dim-label");
-        gtk_widget_set_no_show_all (bar->priv->low_image, TRUE);
-        bar->priv->high_image = gtk_image_new_from_icon_name ("audio-volume-high-symbolic",
+        gtk_style_context_add_class (gtk_widget_get_style_context (bar->low_image), "dim-label");
+        gtk_widget_set_no_show_all (bar->low_image, TRUE);
+        bar->high_image = gtk_image_new_from_icon_name ("audio-volume-high-symbolic",
                                                               GTK_ICON_SIZE_MENU);
-        gtk_style_context_add_class (gtk_widget_get_style_context (bar->priv->high_image), "dim-label");
-        gtk_widget_set_no_show_all (bar->priv->high_image, TRUE);
+        gtk_style_context_add_class (gtk_widget_get_style_context (bar->high_image), "dim-label");
+        gtk_widget_set_no_show_all (bar->high_image, TRUE);
 
-        bar->priv->image = gtk_image_new ();
-        gtk_widget_set_no_show_all (bar->priv->image, TRUE);
+        bar->image = gtk_image_new ();
+        gtk_widget_set_no_show_all (bar->image, TRUE);
 
-        bar->priv->label = gtk_label_new (NULL);
-        gtk_widget_set_halign (bar->priv->label, GTK_ALIGN_START);
-        gtk_widget_set_no_show_all (bar->priv->label, TRUE);
+        bar->label = gtk_label_new (NULL);
+        gtk_widget_set_halign (bar->label, GTK_ALIGN_START);
+        gtk_widget_set_no_show_all (bar->label, TRUE);
 
         /* frame */
         frame = gtk_frame_new (NULL);
@@ -946,9 +941,9 @@ gvc_channel_bar_init (GvcChannelBar *bar)
         gtk_widget_show_all (frame);
 
         /* box with scale */
-        bar->priv->scale_box = _scale_box_new (bar);
+        bar->scale_box = _scale_box_new (bar);
 
-        gtk_container_add (GTK_CONTAINER (frame), bar->priv->scale_box);
+        gtk_container_add (GTK_CONTAINER (frame), bar->scale_box);
         gtk_widget_show_all (frame);
 }
 
@@ -962,12 +957,12 @@ gvc_channel_bar_finalize (GObject *object)
 
         channel_bar = GVC_CHANNEL_BAR (object);
 
-        g_return_if_fail (channel_bar->priv != NULL);
+        g_return_if_fail (channel_bar != NULL);
 
-        g_free (channel_bar->priv->name);
-        g_free (channel_bar->priv->icon_name);
-        g_free (channel_bar->priv->low_icon_name);
-        g_free (channel_bar->priv->high_icon_name);
+        g_free (channel_bar->name);
+        g_free (channel_bar->icon_name);
+        g_free (channel_bar->low_icon_name);
+        g_free (channel_bar->high_icon_name);
 
         G_OBJECT_CLASS (gvc_channel_bar_parent_class)->finalize (object);
 }

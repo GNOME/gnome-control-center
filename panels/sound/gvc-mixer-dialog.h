@@ -25,27 +25,8 @@
 
 G_BEGIN_DECLS
 
-#define GVC_TYPE_MIXER_DIALOG         (gvc_mixer_dialog_get_type ())
-#define GVC_MIXER_DIALOG(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GVC_TYPE_MIXER_DIALOG, GvcMixerDialog))
-#define GVC_MIXER_DIALOG_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GVC_TYPE_MIXER_DIALOG, GvcMixerDialogClass))
-#define GVC_IS_MIXER_DIALOG(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GVC_TYPE_MIXER_DIALOG))
-#define GVC_IS_MIXER_DIALOG_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GVC_TYPE_MIXER_DIALOG))
-#define GVC_MIXER_DIALOG_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GVC_TYPE_MIXER_DIALOG, GvcMixerDialogClass))
-
-typedef struct GvcMixerDialogPrivate GvcMixerDialogPrivate;
-
-typedef struct
-{
-        GtkVBox                parent;
-        GvcMixerDialogPrivate *priv;
-} GvcMixerDialog;
-
-typedef struct
-{
-        GtkVBoxClass           parent_class;
-} GvcMixerDialogClass;
-
-GType               gvc_mixer_dialog_get_type            (void);
+#define GVC_TYPE_MIXER_DIALOG (gvc_mixer_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (GvcMixerDialog, gvc_mixer_dialog, GVC, MIXER_DIALOG, GtkBox)
 
 GvcMixerDialog *    gvc_mixer_dialog_new                 (GvcMixerControl *control);
 gboolean            gvc_mixer_dialog_set_page            (GvcMixerDialog *dialog, const gchar* page);

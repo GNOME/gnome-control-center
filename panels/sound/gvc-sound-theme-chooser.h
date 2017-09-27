@@ -24,27 +24,8 @@
 
 G_BEGIN_DECLS
 
-#define GVC_TYPE_SOUND_THEME_CHOOSER         (gvc_sound_theme_chooser_get_type ())
-#define GVC_SOUND_THEME_CHOOSER(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GVC_TYPE_SOUND_THEME_CHOOSER, GvcSoundThemeChooser))
-#define GVC_SOUND_THEME_CHOOSER_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GVC_TYPE_SOUND_THEME_CHOOSER, GvcSoundThemeChooserClass))
-#define GVC_IS_SOUND_THEME_CHOOSER(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GVC_TYPE_SOUND_THEME_CHOOSER))
-#define GVC_IS_SOUND_THEME_CHOOSER_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GVC_TYPE_SOUND_THEME_CHOOSER))
-#define GVC_SOUND_THEME_CHOOSER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GVC_TYPE_SOUND_THEME_CHOOSER, GvcSoundThemeChooserClass))
-
-typedef struct GvcSoundThemeChooserPrivate GvcSoundThemeChooserPrivate;
-
-typedef struct
-{
-        GtkVBox                      parent;
-        GvcSoundThemeChooserPrivate *priv;
-} GvcSoundThemeChooser;
-
-typedef struct
-{
-        GtkVBoxClass          parent_class;
-} GvcSoundThemeChooserClass;
-
-GType               gvc_sound_theme_chooser_get_type            (void);
+#define GVC_TYPE_SOUND_THEME_CHOOSER (gvc_sound_theme_chooser_get_type ())
+G_DECLARE_FINAL_TYPE (GvcSoundThemeChooser, gvc_sound_theme_chooser, GVC, SOUND_THEME_CHOOSER, GtkBox)
 
 GtkWidget *         gvc_sound_theme_chooser_new                 (void);
 

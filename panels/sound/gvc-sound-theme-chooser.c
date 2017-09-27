@@ -37,10 +37,9 @@
 #include "gvc-sound-theme-chooser.h"
 #include "sound-theme-file-utils.h"
 
-#define GVC_SOUND_THEME_CHOOSER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GVC_TYPE_SOUND_THEME_CHOOSER, GvcSoundThemeChooserPrivate))
-
-struct GvcSoundThemeChooserPrivate
+struct _GvcSoundThemeChooser
 {
+        GtkBox     parent_instance;
         GtkWidget *treeview;
         GtkWidget *selection_box;
         GSettings *settings;
@@ -290,7 +289,7 @@ update_alert_model (GvcSoundThemeChooser  *chooser,
         GtkTreeModel *model;
         GtkTreeIter   iter;
 
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (chooser->priv->treeview));
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (chooser->treeview));
         g_assert (gtk_tree_model_get_iter_first (model, &iter));
         do {
                 char    *this_id;
@@ -302,7 +301,7 @@ update_alert_model (GvcSoundThemeChooser  *chooser,
                 if (strcmp (this_id, id) == 0) {
                         GtkTreeSelection *selection;
 
-                        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (chooser->priv->treeview));
+                        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (chooser->treeview));
                         gtk_tree_selection_select_iter (selection, &iter);
                 }
 
@@ -321,13 +320,13 @@ save_theme_name (GvcSoundThemeChooser *chooser,
 
         /* special case for no sounds */
         if (strcmp (theme_name, NO_SOUNDS_THEME_NAME) == 0) {
-                g_settings_set_boolean (chooser->priv->sound_settings, EVENT_SOUNDS_KEY, FALSE);
+                g_settings_set_boolean (chooser->sound_settings, EVENT_SOUNDS_KEY, FALSE);
                 return;
         } else {
-                g_settings_set_boolean (chooser->priv->sound_settings, EVENT_SOUNDS_KEY, TRUE);
+                g_settings_set_boolean (chooser->sound_settings, EVENT_SOUNDS_KEY, TRUE);
         }
 
-        g_settings_set_string (chooser->priv->sound_settings, SOUND_THEME_KEY, theme_name);
+        g_settings_set_string (chooser->sound_settings, SOUND_THEME_KEY, theme_name);
 }
 
 static gboolean
@@ -397,7 +396,7 @@ update_alert (GvcSoundThemeChooser *chooser,
         gboolean      add_custom;
         gboolean      remove_custom;
 
-        is_custom = strcmp (chooser->priv->current_theme, CUSTOM_THEME_NAME) == 0;
+        is_custom = strcmp (chooser->current_theme, CUSTOM_THEME_NAME) == 0;
         is_default = strcmp (alert_id, DEFAULT_ALERT_ID) == 0;
 
         /* So a few possibilities:
@@ -412,8 +411,8 @@ update_alert (GvcSoundThemeChooser *chooser,
                 /* remove custom just in case */
                 remove_custom = TRUE;
         } else if (! is_custom && ! is_default) {
-                if (chooser->priv->current_parent)
-                        create_custom_theme (chooser->priv->current_parent);
+                if (chooser->current_parent)
+                        create_custom_theme (chooser->current_parent);
                 else
                         create_custom_theme (DEFAULT_THEME);
                 save_alert_sounds (chooser, alert_id);
@@ -433,7 +432,7 @@ update_alert (GvcSoundThemeChooser *chooser,
         } else if (remove_custom) {
                 delete_custom_theme_dir ();
                 if (is_custom) {
-                        save_theme_name (chooser, chooser->priv->current_parent);
+                        save_theme_name (chooser, chooser->current_parent);
                 }
         }
 
@@ -449,11 +448,11 @@ play_preview_for_id (GvcSoundThemeChooser *chooser,
         /* special case: for the default item on custom themes
          * play the alert for the parent theme */
         if (strcmp (id, DEFAULT_ALERT_ID) == 0) {
-                if (chooser->priv->current_parent != NULL) {
+                if (chooser->current_parent != NULL) {
                         ca_gtk_play_for_widget (GTK_WIDGET (chooser), 0,
                                                 CA_PROP_APPLICATION_NAME, _("Sound Preferences"),
                                                 CA_PROP_EVENT_ID, "bell-window-system",
-                                                CA_PROP_CANBERRA_XDG_THEME_NAME, chooser->priv->current_parent,
+                                                CA_PROP_CANBERRA_XDG_THEME_NAME, chooser->current_parent,
                                                 CA_PROP_EVENT_DESCRIPTION, _("Testing event sound"),
                                                 CA_PROP_CANBERRA_CACHE_CONTROL, "never",
                                                 CA_PROP_APPLICATION_ID, "org.gnome.VolumeControl",
@@ -498,7 +497,7 @@ on_treeview_row_activated (GtkTreeView          *treeview,
         GtkTreeIter   iter;
         char         *id;
 
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (chooser->priv->treeview));
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (chooser->treeview));
         if (!gtk_tree_model_get_iter (model, &iter, path)) {
                 return;
         }
@@ -630,30 +629,30 @@ update_theme (GvcSoundThemeChooser *chooser)
         gboolean     events_enabled;
         char        *last_theme;
 
-        events_enabled = g_settings_get_boolean (chooser->priv->sound_settings, EVENT_SOUNDS_KEY);
+        events_enabled = g_settings_get_boolean (chooser->sound_settings, EVENT_SOUNDS_KEY);
 
-        last_theme = chooser->priv->current_theme;
+        last_theme = chooser->current_theme;
         if (events_enabled) {
-                chooser->priv->current_theme = g_settings_get_string (chooser->priv->sound_settings, SOUND_THEME_KEY);
+                chooser->current_theme = g_settings_get_string (chooser->sound_settings, SOUND_THEME_KEY);
         } else {
-                chooser->priv->current_theme = g_strdup (NO_SOUNDS_THEME_NAME);
+                chooser->current_theme = g_strdup (NO_SOUNDS_THEME_NAME);
         }
 
-        if (g_strcmp0 (last_theme, chooser->priv->current_theme) != 0) {
-                g_clear_pointer (&chooser->priv->current_parent, g_free);
-                if (load_theme_name (chooser->priv->current_theme,
-                                     &chooser->priv->current_parent) == FALSE) {
-                        g_free (chooser->priv->current_theme);
-                        chooser->priv->current_theme = g_strdup (DEFAULT_THEME);
+        if (g_strcmp0 (last_theme, chooser->current_theme) != 0) {
+                g_clear_pointer (&chooser->current_parent, g_free);
+                if (load_theme_name (chooser->current_theme,
+                                     &chooser->current_parent) == FALSE) {
+                        g_free (chooser->current_theme);
+                        chooser->current_theme = g_strdup (DEFAULT_THEME);
                         load_theme_name (DEFAULT_THEME,
-                                         &chooser->priv->current_parent);
+                                         &chooser->current_parent);
                 }
         }
         g_free (last_theme);
 
-        gtk_widget_set_sensitive (chooser->priv->selection_box, events_enabled);
+        gtk_widget_set_sensitive (chooser->selection_box, events_enabled);
 
-        update_alerts_from_theme_name (chooser, chooser->priv->current_theme);
+        update_alerts_from_theme_name (chooser, chooser->current_theme);
 }
 
 static GObject *
@@ -680,8 +679,6 @@ gvc_sound_theme_chooser_class_init (GvcSoundThemeChooserClass *klass)
 
         object_class->constructor = gvc_sound_theme_chooser_constructor;
         object_class->finalize = gvc_sound_theme_chooser_finalize;
-
-        g_type_class_add_private (klass, sizeof (GvcSoundThemeChooserPrivate));
 }
 
 static void
@@ -732,13 +729,12 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
 
         gtk_orientable_set_orientation (GTK_ORIENTABLE (chooser),
                                         GTK_ORIENTATION_VERTICAL);
-        chooser->priv = GVC_SOUND_THEME_CHOOSER_GET_PRIVATE (chooser);
 
-        chooser->priv->settings = g_settings_new (WM_SCHEMA);
-        chooser->priv->sound_settings = g_settings_new (KEY_SOUNDS_SCHEMA);
+        chooser->settings = g_settings_new (WM_SCHEMA);
+        chooser->sound_settings = g_settings_new (KEY_SOUNDS_SCHEMA);
 
         str = g_strdup_printf ("<b>%s</b>", _("C_hoose an alert sound:"));
-        chooser->priv->selection_box = box = gtk_frame_new (str);
+        chooser->selection_box = box = gtk_frame_new (str);
         g_free (str);
         label = gtk_frame_get_label_widget (GTK_FRAME (box));
         gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
@@ -748,24 +744,24 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
         gtk_widget_set_margin_top (box, 6);
         gtk_box_pack_start (GTK_BOX (chooser), box, TRUE, TRUE, 6);
 
-        chooser->priv->treeview = create_alert_treeview (chooser);
-        gtk_label_set_mnemonic_widget (GTK_LABEL (label), chooser->priv->treeview);
+        chooser->treeview = create_alert_treeview (chooser);
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), chooser->treeview);
 
         scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-        setup_list_size_constraint (scrolled_window, chooser->priv->treeview);
+        setup_list_size_constraint (scrolled_window, chooser->treeview);
 
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                         GTK_POLICY_NEVER,
                                         GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window),
                                              GTK_SHADOW_IN);
-        gtk_container_add (GTK_CONTAINER (scrolled_window), chooser->priv->treeview);
+        gtk_container_add (GTK_CONTAINER (scrolled_window), chooser->treeview);
         gtk_widget_set_margin_top (scrolled_window, 6);
         gtk_container_add (GTK_CONTAINER (box), scrolled_window);
 
-        g_signal_connect (G_OBJECT (chooser->priv->sound_settings), "changed",
+        g_signal_connect (G_OBJECT (chooser->sound_settings), "changed",
                           G_CALLBACK (on_sound_settings_changed), chooser);
-        g_signal_connect (chooser->priv->settings, "changed::" AUDIO_BELL_KEY,
+        g_signal_connect (chooser->settings, "changed::" AUDIO_BELL_KEY,
                           G_CALLBACK (on_audible_bell_changed), chooser);
 }
 
@@ -779,9 +775,9 @@ gvc_sound_theme_chooser_finalize (GObject *object)
 
         sound_theme_chooser = GVC_SOUND_THEME_CHOOSER (object);
 
-        if (sound_theme_chooser->priv != NULL) {
-                g_object_unref (sound_theme_chooser->priv->settings);
-                g_object_unref (sound_theme_chooser->priv->sound_settings);
+        if (sound_theme_chooser != NULL) {
+                g_object_unref (sound_theme_chooser->settings);
+                g_object_unref (sound_theme_chooser->sound_settings);
         }
 
         G_OBJECT_CLASS (gvc_sound_theme_chooser_parent_class)->finalize (object);
