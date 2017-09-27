@@ -269,7 +269,7 @@ on_combo_box_changed (GtkComboBox *widget,
                       GvcComboBox *combo_box)
 {
         GtkTreeIter          iter;
-        char                *profile;
+        g_autofree gchar    *profile = NULL;
 
         if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter) == FALSE) {
                 g_warning ("Could not find an active profile or port");
@@ -280,7 +280,6 @@ on_combo_box_changed (GtkComboBox *widget,
                             COL_NAME, &profile,
                             -1);
         g_signal_emit (combo_box, signals[CHANGED], 0, profile);
-        g_free (profile);
 }
 
 static void

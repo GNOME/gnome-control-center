@@ -242,7 +242,7 @@ populate_model_from_dir (GvcSoundThemeChooser *chooser,
         }
 
         while ((name = g_dir_read_name (d)) != NULL) {
-                char *path;
+                g_autofree gchar *path = NULL;
 
                 if (! g_str_has_suffix (name, ".xml")) {
                         continue;
@@ -250,7 +250,6 @@ populate_model_from_dir (GvcSoundThemeChooser *chooser,
 
                 path = g_build_filename (dirname, name, NULL);
                 populate_model_from_file (chooser, model, path);
-                g_free (path);
         }
 }
 
@@ -259,7 +258,7 @@ save_alert_sounds (GvcSoundThemeChooser  *chooser,
                    const char            *id)
 {
         const char *sounds[3] = { "bell-terminal", "bell-window-system", NULL };
-        char *path;
+        g_autofree gchar *path = NULL;
 
         if (strcmp (id, DEFAULT_ALERT_ID) == 0) {
                 delete_old_files (sounds);
@@ -276,7 +275,6 @@ save_alert_sounds (GvcSoundThemeChooser  *chooser,
                 g_warning ("Failed to update mtime for directory '%s': %s",
                            path, g_strerror (errno));
         }
-        g_free (path);
 
         return FALSE;
 }
@@ -292,7 +290,7 @@ update_alert_model (GvcSoundThemeChooser  *chooser,
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (chooser->treeview));
         g_assert (gtk_tree_model_get_iter_first (model, &iter));
         do {
-                char    *this_id;
+                g_autofree gchar *this_id = NULL;
 
                 gtk_tree_model_get (model, &iter,
                                     ALERT_IDENTIFIER_COL, &this_id,
@@ -304,8 +302,6 @@ update_alert_model (GvcSoundThemeChooser  *chooser,
                         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (chooser->treeview));
                         gtk_tree_selection_select_iter (selection, &iter);
                 }
-
-                g_free (this_id);
         } while (gtk_tree_model_iter_next (model, &iter));
 }
 
@@ -333,12 +329,11 @@ static gboolean
 load_theme_file (const char *path,
                  char      **parent)
 {
-        GKeyFile *file;
+        g_autoptr(GKeyFile) file = NULL;
         gboolean hidden;
 
         file = g_key_file_new ();
         if (g_key_file_load_from_file (file, path, G_KEY_FILE_KEEP_TRANSLATIONS, NULL) == FALSE) {
-                g_key_file_free (file);
                 return FALSE;
         }
         /* Don't add hidden themes to the list */
@@ -353,8 +348,6 @@ load_theme_file (const char *path,
                 }
         }
 
-        g_key_file_free (file);
-
         return TRUE;
 }
 
@@ -364,22 +357,22 @@ load_theme_name (const char *name,
 {
         const char * const   *data_dirs;
         const char           *data_dir;
-        char                 *path;
+        g_autofree gchar     *path = NULL;
         guint                 i;
         gboolean              res;
 
         data_dir = g_get_user_data_dir ();
         path = g_build_filename (data_dir, "sounds", name, "index.theme", NULL);
         res = load_theme_file (path, parent);
-        g_free (path);
         if (res)
                 return TRUE;
 
         data_dirs = g_get_system_data_dirs ();
         for (i = 0; data_dirs[i] != NULL; i++) {
-                path = g_build_filename (data_dirs[i], "sounds", name, "index.theme", NULL);
-                res = load_theme_file (path, parent);
-                g_free (path);
+                g_autofree gchar *p = NULL;
+
+                p = g_build_filename (data_dirs[i], "sounds", name, "index.theme", NULL);
+                res = load_theme_file (p, parent);
                 if (res)
                         return TRUE;
         }
@@ -495,14 +488,13 @@ on_treeview_row_activated (GtkTreeView          *treeview,
 {
         GtkTreeModel *model;
         GtkTreeIter   iter;
-        char         *id;
+        g_autofree gchar *id = NULL;
 
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (chooser->treeview));
         if (!gtk_tree_model_get_iter (model, &iter, path)) {
                 return;
         }
 
-        id = NULL;
         gtk_tree_model_get (model, &iter,
                             ALERT_IDENTIFIER_COL, &id,
                             -1);
@@ -512,7 +504,6 @@ on_treeview_row_activated (GtkTreeView          *treeview,
 
         play_preview_for_id (chooser, id);
         update_alert (chooser, id);
-        g_free (id);
 }
 
 static GtkWidget *
@@ -573,32 +564,27 @@ static int
 get_file_type (const char *sound_name,
                char      **linked_name)
 {
-        char *name, *filename;
+        g_autofree gchar *name = NULL;
+        g_autofree gchar *filename = NULL;
 
         *linked_name = NULL;
 
         name = g_strdup_printf ("%s.disabled", sound_name);
         filename = custom_theme_dir_path (name);
-        g_free (name);
 
         if (g_file_test (filename, G_FILE_TEST_IS_REGULAR) != FALSE) {
-                g_free (filename);
                 return SOUND_TYPE_OFF;
         }
-        g_free (filename);
 
         /* We only check for .ogg files because those are the
          * only ones we create */
         name = g_strdup_printf ("%s.ogg", sound_name);
         filename = custom_theme_dir_path (name);
-        g_free (name);
 
         if (g_file_test (filename, G_FILE_TEST_IS_SYMLINK) != FALSE) {
                 *linked_name = g_file_read_link (filename, NULL);
-                g_free (filename);
                 return SOUND_TYPE_CUSTOM;
         }
-        g_free (filename);
 
         return SOUND_TYPE_BUILTIN;
 }
@@ -611,10 +597,9 @@ update_alerts_from_theme_name (GvcSoundThemeChooser *chooser,
                 /* reset alert to default */
                 update_alert (chooser, DEFAULT_ALERT_ID);
         } else {
-                int   sound_type;
-                char *linkname;
+                int               sound_type;
+                g_autofree gchar *linkname = NULL;
 
-                linkname = NULL;
                 sound_type = get_file_type ("bell-terminal", &linkname);
                 g_debug ("Found link: %s", linkname);
                 if (sound_type == SOUND_TYPE_CUSTOM) {
@@ -626,8 +611,8 @@ update_alerts_from_theme_name (GvcSoundThemeChooser *chooser,
 static void
 update_theme (GvcSoundThemeChooser *chooser)
 {
-        gboolean     events_enabled;
-        char        *last_theme;
+        gboolean          events_enabled;
+        g_autofree gchar *last_theme = NULL;
 
         events_enabled = g_settings_get_boolean (chooser->sound_settings, EVENT_SOUNDS_KEY);
 
@@ -648,7 +633,6 @@ update_theme (GvcSoundThemeChooser *chooser)
                                          &chooser->current_parent);
                 }
         }
-        g_free (last_theme);
 
         gtk_widget_set_sensitive (chooser->selection_box, events_enabled);
 
@@ -725,7 +709,7 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
         GtkWidget   *box;
         GtkWidget   *label;
         GtkWidget   *scrolled_window;
-        char        *str;
+        g_autofree gchar *str = NULL;
 
         gtk_orientable_set_orientation (GTK_ORIENTABLE (chooser),
                                         GTK_ORIENTATION_VERTICAL);
@@ -735,7 +719,6 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
 
         str = g_strdup_printf ("<b>%s</b>", _("C_hoose an alert sound:"));
         chooser->selection_box = box = gtk_frame_new (str);
-        g_free (str);
         label = gtk_frame_get_label_widget (GTK_FRAME (box));
         gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
         gtk_label_set_use_markup (GTK_LABEL (label), TRUE);

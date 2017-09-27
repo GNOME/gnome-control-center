@@ -31,11 +31,10 @@
 void
 custom_theme_update_time (void)
 {
-        char *path;
+        g_autofree gchar *path = NULL;
 
         path = custom_theme_dir_path (NULL);
         utime (path, NULL);
-        g_free (path);
 }
 
 char *
@@ -102,7 +101,7 @@ directory_delete_recursive (GFile *directory, GError **error)
 static gboolean
 capplet_file_delete_recursive (GFile *file, GError **error)
 {
-        GFileInfo *info;
+        g_autoptr(GFileInfo) info = NULL;
         GFileType type;
 
         g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
@@ -115,7 +114,6 @@ capplet_file_delete_recursive (GFile *file, GError **error)
                 return FALSE;
 
         type = g_file_info_get_file_type (info);
-        g_object_unref (info);
 
         if (type == G_FILE_TYPE_DIRECTORY)
                 return directory_delete_recursive (file, error);
@@ -126,14 +124,12 @@ capplet_file_delete_recursive (GFile *file, GError **error)
 void
 delete_custom_theme_dir (void)
 {
-        char *dir;
-        GFile *file;
+        g_autofree gchar *dir = NULL;
+        g_autoptr(GFile) file = NULL;
 
         dir = custom_theme_dir_path (NULL);
         file = g_file_new_for_path (dir);
-        g_free (dir);
         capplet_file_delete_recursive (file, NULL);
-        g_object_unref (file);
 
         g_debug ("deleted the custom theme dir");
 }
@@ -141,16 +137,14 @@ delete_custom_theme_dir (void)
 gboolean
 custom_theme_dir_is_empty (void)
 {
-        char            *dir;
-        GFile           *file;
-        gboolean         is_empty;
-        GFileEnumerator *enumerator;
-        GFileInfo       *info;
-        GError          *error = NULL;
+        g_autofree gchar *dir = NULL;
+        g_autoptr(GFile)  file = NULL;
+        gboolean          is_empty;
+        GFileEnumerator  *enumerator;
+        g_autoptr(GError) error = NULL;
 
         dir = custom_theme_dir_path (NULL);
         file = g_file_new_for_path (dir);
-        g_free (dir);
 
         is_empty = TRUE;
 
@@ -161,23 +155,21 @@ custom_theme_dir_is_empty (void)
                                                 NULL, &error);
         if (enumerator == NULL) {
                 g_warning ("Unable to enumerate files: %s", error->message);
-                g_error_free (error);
-                goto out;
+                return TRUE;
         }
 
-        while (is_empty &&
-               (info = g_file_enumerator_next_file (enumerator, NULL, NULL))) {
+        while (is_empty) {
+                g_autoptr(GFileInfo) info = NULL;
+
+                info = g_file_enumerator_next_file (enumerator, NULL, NULL);
+                if (info == NULL)
+                        break;
 
                 if (strcmp ("index.theme", g_file_info_get_name (info)) != 0) {
                         is_empty = FALSE;
                 }
-
-                g_object_unref (info);
         }
         g_file_enumerator_close (enumerator, NULL, NULL);
-
- out:
-        g_object_unref (file);
 
         return is_empty;
 }
@@ -190,8 +182,9 @@ typedef enum {
 static void
 delete_one_file (const char *sound_name, SoundType sound_type)
 {
-        GFile *file;
-        char *name, *filename;
+        g_autofree gchar *name = NULL;
+        g_autofree gchar *filename = NULL;
+        g_autoptr(GFile) file = NULL;
 
         switch (sound_type) {
         case SOUND_TYPE_OGG:
@@ -205,11 +198,8 @@ delete_one_file (const char *sound_name, SoundType sound_type)
         }
 
         filename = custom_theme_dir_path (name);
-        g_free (name);
         file = g_file_new_for_path (filename);
-        g_free (filename);
         capplet_file_delete_recursive (file, NULL);
-        g_object_unref (file);
 }
 
 void
@@ -233,13 +223,11 @@ delete_disabled_files (const char **sounds)
 static void
 create_one_file (GFile *file)
 {
-        GFileOutputStream* stream;
+        g_autoptr(GFileOutputStream) stream = NULL;
 
         stream = g_file_create (file, G_FILE_CREATE_NONE, NULL, NULL);
-        if (stream != NULL) {
+        if (stream != NULL)
                 g_output_stream_close (G_OUTPUT_STREAM (stream), NULL, NULL);
-                g_object_unref (stream);
-        }
 }
 
 void
@@ -248,17 +236,15 @@ add_disabled_file (const char **sounds)
         guint i;
 
         for (i = 0; sounds[i] != NULL; i++) {
-                GFile *file;
-                char *name, *filename;
+                g_autofree gchar *name = NULL;
+                g_autofree gchar *filename = NULL;
+                g_autoptr(GFile) file = NULL;
 
                 name = g_strdup_printf ("%s.disabled", sounds[i]);
                 filename = custom_theme_dir_path (name);
-                g_free (name);
                 file = g_file_new_for_path (filename);
-                g_free (filename);
 
                 create_one_file (file);
-                g_object_unref (file);
         }
 }
 
@@ -268,36 +254,34 @@ add_custom_file (const char **sounds, const char *filename)
         guint i;
 
         for (i = 0; sounds[i] != NULL; i++) {
-                GFile *file;
-                char *name, *path;
+                g_autofree gchar *name = NULL;
+                g_autofree gchar *path = NULL;
+                g_autoptr(GFile) file = NULL;
 
                 /* We use *.ogg because it's the first type of file that
                  * libcanberra looks at */
                 name = g_strdup_printf ("%s.ogg", sounds[i]);
                 path = custom_theme_dir_path (name);
-                g_free (name);
                 /* In case there's already a link there, delete it */
                 g_unlink (path);
                 file = g_file_new_for_path (path);
-                g_free (path);
 
                 /* Create the link */
                 g_file_make_symbolic_link (file, filename, NULL, NULL);
-                g_object_unref (file);
         }
 }
 
 void
 create_custom_theme (const char *parent)
 {
-        GKeyFile *keyfile;
-        char     *data;
-        char     *path;
+        g_autofree gchar    *path = NULL;
+        g_autoptr(GKeyFile)  keyfile = NULL;
+        g_autofree gchar    *data = NULL;
+        g_autofree gchar    *index_path = NULL;
 
         /* Create the custom directory */
         path = custom_theme_dir_path (NULL);
         g_mkdir_with_parents (path, USER_DIR_MODE);
-        g_free (path);
 
         /* Set the data for index.theme */
         keyfile = g_key_file_new ();
@@ -305,13 +289,10 @@ create_custom_theme (const char *parent)
         g_key_file_set_string (keyfile, "Sound Theme", "Inherits", parent);
         g_key_file_set_string (keyfile, "Sound Theme", "Directories", ".");
         data = g_key_file_to_data (keyfile, NULL, NULL);
-        g_key_file_free (keyfile);
 
         /* Save the index.theme */
-        path = custom_theme_dir_path ("index.theme");
-        g_file_set_contents (path, data, -1, NULL);
-        g_free (path);
-        g_free (data);
+        index_path = custom_theme_dir_path ("index.theme");
+        g_file_set_contents (index_path, data, -1, NULL);
 
         custom_theme_update_time ();
 }

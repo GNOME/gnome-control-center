@@ -604,7 +604,7 @@ gvc_channel_bar_set_is_amplified (GvcChannelBar *bar, gboolean amplified)
         gtk_scale_clear_marks (GTK_SCALE (bar->scale));
 
         if (amplified) {
-                char *str;
+                g_autofree gchar *str = NULL;
 
                 if (bar->base_volume == ADJUSTMENT_MAX_NORMAL) {
                         str = g_strdup_printf ("<small>%s</small>", C_("volume", "100%"));
@@ -621,8 +621,6 @@ gvc_channel_bar_set_is_amplified (GvcChannelBar *bar, gboolean amplified)
                                                     GTK_POS_BOTTOM, str);
                         }
                 }
-
-                g_free (str);
 
                 /* Ideally we would use baseline alignment for all
                  * these widgets plus the scale but neither GtkScale

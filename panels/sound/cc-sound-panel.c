@@ -63,10 +63,9 @@ cc_sound_panel_set_property (GObject      *object,
 
                 parameters = g_value_get_variant (value);
                 if (parameters && g_variant_n_children (parameters) > 0) {
-                        GVariant *v;
+                        g_autoptr(GVariant) v = NULL;
                         g_variant_get_child (parameters, 0, "v", &v);
                         gvc_mixer_dialog_set_page (self->dialog, g_variant_get_string (v, NULL));
-                        g_variant_unref (v);
                 }
                 break;
         }
@@ -100,14 +99,9 @@ cc_sound_panel_finalize (GObject *object)
 {
         CcSoundPanel *panel = CC_SOUND_PANEL (object);
 
-        if (panel->dialog != NULL)
-                panel->dialog = NULL;
-        if (panel->connecting_label != NULL)
-                panel->connecting_label = NULL;
-        if (panel->control != NULL) {
-                g_object_unref (panel->control);
-                panel->control = NULL;
-        }
+        panel->dialog = NULL;
+        panel->connecting_label = NULL;
+        g_clear_object (&panel->control);
 
         G_OBJECT_CLASS (cc_sound_panel_parent_class)->finalize (object);
 }

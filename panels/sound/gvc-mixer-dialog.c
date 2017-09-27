@@ -635,7 +635,7 @@ on_adjustment_value_changed (GtkAdjustment  *adjustment,
         if (stream != NULL) {
                 GObject *bar;
                 gdouble volume, rounded;
-                char *name;
+                g_autofree gchar *name = NULL;
 
                 volume = gtk_adjustment_get_value (adjustment);
                 rounded = round (volume);
@@ -643,7 +643,6 @@ on_adjustment_value_changed (GtkAdjustment  *adjustment,
                 bar = g_object_get_data (G_OBJECT (adjustment), "gvc-mixer-dialog-bar");
                 g_object_get (bar, "name", &name, NULL);
                 g_debug ("Setting stream volume %lf (rounded: %lf) for bar '%s'", volume, rounded, name);
-                g_free (name);
 
                 /* FIXME would need to do that in the balance bar really... */
                 /* Make sure we do not unmute muted streams, there's a button for that */
@@ -669,10 +668,9 @@ on_bar_is_muted_notify (GObject        *object,
         if (stream != NULL) {
                 gvc_mixer_stream_change_is_muted (stream, is_muted);
         } else {
-                char *name;
+                g_autofree gchar *name = NULL;
                 g_object_get (object, "name", &name, NULL);
                 g_warning ("Unable to find stream for bar '%s'", name);
-                g_free (name);
         }
 }
 
@@ -802,13 +800,12 @@ create_app_bar (GvcMixerDialog *dialog,
         if (name == NULL || strchr (name, '_') == NULL) {
                 gvc_channel_bar_set_name (GVC_CHANNEL_BAR (bar), name);
         } else {
-                char **tokens, *escaped;
+                g_auto(GStrv) tokens = NULL;
+                g_autofree gchar *escaped = NULL;
 
                 tokens = g_strsplit (name, "_", -1);
                 escaped = g_strjoinv ("__", tokens);
-                g_strfreev (tokens);
                 gvc_channel_bar_set_name (GVC_CHANNEL_BAR (bar), escaped);
-                g_free (escaped);
         }
 
         return bar;
@@ -944,12 +941,11 @@ bar_set_stream (GvcMixerDialog *dialog,
 
         old_stream = g_object_get_data (G_OBJECT (bar), "gvc-mixer-dialog-stream");
         if (old_stream != NULL) {
-                char *name;
+                g_autofree gchar *name = NULL;
 
                 g_object_get (bar, "name", &name, NULL);
                 g_debug ("Disconnecting old stream '%s' from bar '%s'",
                          gvc_mixer_stream_get_name (old_stream), name);
-                g_free (name);
 
                 g_signal_handlers_disconnect_by_func (old_stream, on_stream_is_muted_notify, dialog);
                 g_signal_handlers_disconnect_by_func (old_stream, on_stream_volume_notify, dialog);
@@ -1025,12 +1021,11 @@ add_stream (GvcMixerDialog *dialog,
         if (bar != NULL) {
                 old_stream = g_object_get_data (G_OBJECT (bar), "gvc-mixer-dialog-stream");
                 if (old_stream != NULL) {
-                        char *name;
+                        g_autofree gchar *name = NULL;
 
                         g_object_get (bar, "name", &name, NULL);
                         g_debug ("Disconnecting old stream '%s' from bar '%s'",
                                  gvc_mixer_stream_get_name (old_stream), name);
-                        g_free (name);
 
                         g_signal_handlers_disconnect_by_func (old_stream, on_stream_is_muted_notify, dialog);
                         g_signal_handlers_disconnect_by_func (old_stream, on_stream_volume_notify, dialog);
@@ -1106,15 +1101,15 @@ static void
 add_input_ui_entry (GvcMixerDialog *dialog,
                     GvcMixerUIDevice *input)
 {
-        gchar               *final_name;
-        gchar               *port_name;
-        gchar               *origin;
-        gchar               *description;
+        g_autofree gchar    *final_name = NULL;
+        g_autofree gchar    *port_name = NULL;
+        g_autofree gchar    *origin = NULL;
+        g_autofree gchar    *description = NULL;
         gboolean             available;
         gint                 stream_id;
         GtkTreeModel        *model;
         GtkTreeIter          iter;
-        GIcon               *icon;
+        g_autoptr(GIcon)     icon = NULL;
 
         g_debug ("Add input ui entry with id :%u",
                   gvc_mixer_ui_device_get_id (input));
@@ -1132,10 +1127,6 @@ add_input_ui_entry (GvcMixerDialog *dialog,
         else
                 final_name = g_strdup (description);
 
-        g_free (port_name);
-        g_free (origin);
-        g_free (description);
-
         icon = gvc_mixer_ui_device_get_gicon (input);
 
         if (icon == NULL) {
@@ -1144,7 +1135,6 @@ add_input_ui_entry (GvcMixerDialog *dialog,
                 stream = gvc_mixer_control_get_stream_from_device (dialog->mixer_control, input);
                 if (stream == NULL) {
                         g_warning ("tried to add the network source but the stream was null - fail ?!");
-                        g_free (final_name);
                         return;
                 }
                 icon = gvc_mixer_stream_get_gicon (stream);
@@ -1161,25 +1151,21 @@ add_input_ui_entry (GvcMixerDialog *dialog,
                             ICON_COLUMN, icon,
                             ID_COLUMN, gvc_mixer_ui_device_get_id (input),
                             -1);
-
-        if (icon != NULL)
-                g_object_unref (icon);
-        g_free (final_name);
 }
 
 static void
 add_output_ui_entry (GvcMixerDialog   *dialog,
                      GvcMixerUIDevice *output)
 {
-        gchar         *sink_port_name;
-        gchar         *origin;
-        gchar         *description;
-        gchar         *final_name;
-        gboolean       available;
-        gint           sink_stream_id;
-        GtkTreeModel  *model;
-        GtkTreeIter    iter;
-        GIcon         *icon;
+        g_autofree gchar *sink_port_name = NULL;
+        g_autofree gchar *origin = NULL;
+        g_autofree gchar *description = NULL;
+        g_autofree gchar *final_name = NULL;
+        gboolean          available;
+        gint              sink_stream_id;
+        GtkTreeModel     *model;
+        GtkTreeIter       iter;
+        g_autoptr(GIcon)  icon = NULL;
 
         g_debug ("Add output ui entry with id :%u",
                   gvc_mixer_ui_device_get_id (output));
@@ -1197,10 +1183,6 @@ add_output_ui_entry (GvcMixerDialog   *dialog,
         else
                 final_name = g_strdup (description);
 
-        g_free (sink_port_name);
-        g_free (origin);
-        g_free (description);
-
         icon = gvc_mixer_ui_device_get_gicon (output);
 
         if (icon == NULL) {
@@ -1211,7 +1193,6 @@ add_output_ui_entry (GvcMixerDialog   *dialog,
 
                 if (stream == NULL) {
                         g_warning ("tried to add the network sink but the stream was null - fail ?!");
-                        g_free (final_name);
                         return;
                 }
                 icon = gvc_mixer_stream_get_gicon (stream);
@@ -1228,10 +1209,6 @@ add_output_ui_entry (GvcMixerDialog   *dialog,
                             ICON_COLUMN, icon,
                             ID_COLUMN, gvc_mixer_ui_device_get_id (output),
                             -1);
-
-        if (icon != NULL)
-                g_object_unref (icon);
-        g_free (final_name);
 }
 
 
@@ -1398,11 +1375,10 @@ on_control_stream_removed (GvcMixerControl *control,
 static void
 _gtk_label_make_bold (GtkLabel *label)
 {
-        gchar *str;
+        g_autofree gchar *str = NULL;
         str = g_strdup_printf ("<span font-weight='bold'>%s</span>",
                                gtk_label_get_label (label));
         gtk_label_set_markup_with_mnemonic (label, str);
-        g_free (str);
 }
 
 static void
@@ -1541,7 +1517,7 @@ on_test_speakers_clicked (GvcComboBox *widget,
         GvcMixerUIDevice    *output;
         GvcMixerStream      *stream;
         GtkWidget           *d, *speaker_test, *container;
-        char                *title;
+        g_autofree gchar    *title = NULL;
 
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->output_treeview));
 
@@ -1592,7 +1568,6 @@ on_test_speakers_clicked (GvcComboBox *widget,
                                            "resizable", FALSE,
                                            NULL);
 
-        g_free (title);
         speaker_test = gvc_speaker_test_new (dialog->mixer_control,
                                              stream);
         gtk_widget_show (speaker_test);

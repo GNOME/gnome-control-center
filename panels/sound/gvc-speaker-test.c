@@ -397,7 +397,7 @@ static void
 gvc_speaker_test_set_theme (ca_context *ca)
 {
         GtkSettings *settings;
-        char *theme_name;
+        g_autofree gchar *theme_name = NULL;
 
         settings = gtk_settings_get_for_screen (gdk_screen_get_default ());
 
@@ -407,8 +407,6 @@ gvc_speaker_test_set_theme (ca_context *ca)
 
         if (theme_name)
                 ca_context_change_props (ca, CA_PROP_CANBERRA_XDG_THEME_NAME, theme_name, NULL);
-
-        g_free (theme_name);
 }
 
 static void
