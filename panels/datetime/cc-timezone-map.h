@@ -27,45 +27,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_TIMEZONE_MAP cc_timezone_map_get_type()
-
-#define CC_TIMEZONE_MAP(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_TIMEZONE_MAP, CcTimezoneMap))
-
-#define CC_TIMEZONE_MAP_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_TIMEZONE_MAP, CcTimezoneMapClass))
-
-#define CC_IS_TIMEZONE_MAP(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_TIMEZONE_MAP))
-
-#define CC_IS_TIMEZONE_MAP_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_TIMEZONE_MAP))
-
-#define CC_TIMEZONE_MAP_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_TIMEZONE_MAP, CcTimezoneMapClass))
-
-typedef struct _CcTimezoneMap CcTimezoneMap;
-typedef struct _CcTimezoneMapClass CcTimezoneMapClass;
-typedef struct _CcTimezoneMapPrivate CcTimezoneMapPrivate;
-
-struct _CcTimezoneMap
-{
-  GtkWidget parent;
-
-  CcTimezoneMapPrivate *priv;
-};
-
-struct _CcTimezoneMapClass
-{
-  GtkWidgetClass parent_class;
-};
-
-GType cc_timezone_map_get_type (void) G_GNUC_CONST;
+#define CC_TYPE_TIMEZONE_MAP (cc_timezone_map_get_type ())
+G_DECLARE_FINAL_TYPE (CcTimezoneMap, cc_timezone_map, CC, TIMEZONE_MAP, GtkWidget)
 
 CcTimezoneMap *cc_timezone_map_new (void);
 
