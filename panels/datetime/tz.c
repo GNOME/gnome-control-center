@@ -48,7 +48,7 @@ static void load_backward_tz (TzDB *tz_db);
 TzDB *
 tz_load_db (void)
 {
-	gchar *tz_data_file;
+	g_autofree gchar *tz_data_file = NULL;
 	TzDB *tz_db;
 	FILE *tzfile;
 	char buf[4096];
@@ -61,7 +61,6 @@ tz_load_db (void)
 	tzfile = fopen (tz_data_file, "r");
 	if (!tzfile) {
 		g_warning ("Could not open *%s*\n", tz_data_file);
-		g_free (tz_data_file);
 		return NULL;
 	}
 
@@ -70,8 +69,10 @@ tz_load_db (void)
 
 	while (fgets (buf, sizeof(buf), tzfile))
 	{
-		gchar **tmpstrarr;
-		gchar *latstr, *lngstr, *p;
+		g_auto(GStrv) tmpstrarr = NULL;
+		g_autofree gchar *latstr = NULL;
+		g_autofree gchar *lngstr = NULL;
+		gchar *p;
 		TzLocation *loc;
 
 		if (*buf == '#') continue;
@@ -113,10 +114,6 @@ tz_load_db (void)
 #endif
 
 		g_ptr_array_add (tz_db->locations, (gpointer) loc);
-
-		g_free (latstr);
-		g_free (lngstr);
-		g_strfreev (tmpstrarr);
 	}
 	
 	fclose (tzfile);
@@ -124,8 +121,6 @@ tz_load_db (void)
 	/* now sort by country */
 	sort_locations_by_country (tz_db->locations);
 	
-	g_free (tz_data_file);
-
 	/* Load up the hashtable of backward links */
 	load_backward_tz (tz_db);
 
@@ -189,12 +184,11 @@ tz_location_get_position (TzLocation *loc, double *longitude, double *latitude)
 glong
 tz_location_get_utc_offset (TzLocation *loc)
 {
-	TzInfo *tz_info;
+	g_autoptr(TzInfo) tz_info = NULL;
 	glong offset;
 
 	tz_info = tz_info_from_location (loc);
 	offset = tz_info->utc_offset;
-	tz_info_free (tz_info);
 	return offset;
 }
 
@@ -204,7 +198,7 @@ tz_info_from_location (TzLocation *loc)
 	TzInfo *tzinfo;
 	time_t curtime;
 	struct tm *curzone;
-	gchar *tz_env_value;
+	g_autofree gchar *tz_env_value = NULL;
 	
 	g_return_val_if_fail (loc != NULL, NULL);
 	g_return_val_if_fail (loc->zone != NULL, NULL);
@@ -244,8 +238,6 @@ tz_info_from_location (TzLocation *loc)
 	else
 		unsetenv ("TZ");
 
-	g_free (tz_env_value);
-	
 	return tzinfo;
 }
 
@@ -295,14 +287,11 @@ compare_timezones (const char *a,
 	if (g_str_equal (a, b))
 		return TRUE;
 	if (strchr (b, '/') == NULL) {
-		char *prefixed;
+		g_autofree gchar *prefixed = NULL;
 
 		prefixed = g_strdup_printf ("/%s", b);
-		if (g_str_has_suffix (a, prefixed)) {
-			g_free (prefixed);
+		if (g_str_has_suffix (a, prefixed))
 			return TRUE;
-		}
-		g_free (prefixed);
 	}
 
 	return FALSE;
@@ -428,8 +417,8 @@ sort_locations_by_country (GPtrArray *locations)
 static void
 load_backward_tz (TzDB *tz_db)
 {
-  char **lines;
-  GBytes *bytes;
+  g_auto(GStrv) lines = NULL;
+  g_autoptr(GBytes) bytes = NULL;
   const char *contents;
   guint i;
 
@@ -440,11 +429,10 @@ load_backward_tz (TzDB *tz_db)
   contents = (const char *) g_bytes_get_data (bytes, NULL);
 
   lines = g_strsplit (contents, "\n", -1);
-  g_bytes_unref (bytes);
 
   for (i = 0; lines[i] != NULL; i++)
     {
-      char **items;
+      g_auto(GStrv) items = NULL;
       guint j;
       char *real, *alias;
 
@@ -477,8 +465,6 @@ load_backward_tz (TzDB *tz_db)
         real = "Etc/GMT";
 
       g_hash_table_insert (tz_db->backward, g_strdup (alias), g_strdup (real));
-      g_strfreev (items);
     }
-  g_strfreev (lines);
 }
 

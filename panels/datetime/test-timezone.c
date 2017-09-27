@@ -23,7 +23,7 @@ get_timezone_list (GList *tzs,
 		return NULL;
 	}
 	while ((name = g_dir_read_name (dir)) != NULL) {
-		char *path;
+		g_autofree gchar *path = NULL;
 
 		if (g_str_has_suffix (name, ".tab"))
 			continue;
@@ -36,10 +36,9 @@ get_timezone_list (GList *tzs,
 			if (subpath == NULL) {
 				tzs = get_timezone_list (tzs, top_path, name);
 			} else {
-				char *new_subpath;
+				g_autofree gchar *new_subpath = NULL;
 				new_subpath = g_strdup_printf ("%s/%s", subpath, name);
 				tzs = get_timezone_list (tzs, top_path, new_subpath);
-				g_free (new_subpath);
 			}
 		} else if (g_file_test (path, G_FILE_TEST_IS_REGULAR)) {
 			if (subpath == NULL)
@@ -50,7 +49,6 @@ get_timezone_list (GList *tzs,
 				tzs = g_list_prepend (tzs, tz);
 			}
 		}
-		g_free (path);
 	}
 	g_dir_close (dir);
 
@@ -70,8 +68,8 @@ test_timezone (void)
 	tz_db = tz_load_db ();
 	tzs = get_timezone_list (NULL, TZ_DIR, NULL);
 	for (l = tzs; l != NULL; l = l->next) {
-		char *timezone = l->data;
-		char *clean_tz;
+		const gchar *timezone = l->data;
+		g_autofree gchar *clean_tz = NULL;
 
 		clean_tz = tz_info_get_clean_name (tz_db, timezone);
 
@@ -90,10 +88,8 @@ test_timezone (void)
 			    !g_str_equal (clean_tz, "Factory"))
 				g_test_fail ();
 		}
-		g_free (timezone);
-		g_free (clean_tz);
 	}
-	g_list_free (tzs);
+	g_list_free_full (tzs, g_free);
 	tz_db_free (tz_db);
 	g_hash_table_destroy (ht);
 }

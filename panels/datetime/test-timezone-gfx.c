@@ -7,7 +7,7 @@ static void
 test_timezone_gfx (gconstpointer data)
 {
 	const char *pixmap_dir = data;
-	TzDB *db;
+	g_autoptr(TzDB) db = NULL;
 	GPtrArray *locs;
 	guint i;
 
@@ -16,7 +16,8 @@ test_timezone_gfx (gconstpointer data)
 	for (i = 0; i < locs->len ; i++) {
 		TzLocation *loc = locs->pdata[i];
 		TzInfo *info;
-		char *filename, *path;
+		g_autofree gchar *filename = NULL;
+		g_autofree gchar *path = NULL;
 		gdouble selected_offset;
                 char buf[16];
 
@@ -33,11 +34,7 @@ test_timezone_gfx (gconstpointer data)
 			g_message ("File '%s' missing for zone '%s'", filename, loc->zone);
 			g_test_fail ();
 		}
-
-		g_free (filename);
-		g_free (path);
 	}
-	tz_db_free (db);
 }
 
 int main (int argc, char **argv)

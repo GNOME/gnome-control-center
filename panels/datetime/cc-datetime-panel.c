@@ -266,7 +266,7 @@ update_time (CcDateTimePanel *self)
   GtkWidget *h_spinbutton;
   GtkWidget *m_spinbutton;
   GtkWidget *am_pm_button;
-  char *label;
+  g_autofree gchar *label = NULL;
   gint hour;
   gint minute;
   gboolean use_ampm;
@@ -336,7 +336,6 @@ update_time (CcDateTimePanel *self)
     }
 
   gtk_label_set_text (GTK_LABEL (W ("datetime_label")), label);
-  g_free (label);
 }
 
 static void
@@ -345,16 +344,14 @@ set_time_cb (GObject      *source,
              gpointer      user_data)
 {
   CcDateTimePanel *self = user_data;
-  GError *error;
+  g_autoptr(GError) error = NULL;
 
-  error = NULL;
   if (!timedate1_call_set_time_finish (self->dtm,
                                        res,
                                        &error))
     {
       /* TODO: display any error in a user friendly way */
       g_warning ("Could not set system time: %s", error->message);
-      g_error_free (error);
     }
   else
     {
@@ -368,16 +365,14 @@ set_timezone_cb (GObject      *source,
                  gpointer      user_data)
 {
   CcDateTimePanel *self = user_data;
-  GError *error;
+  g_autoptr(GError) error = NULL;
 
-  error = NULL;
   if (!timedate1_call_set_timezone_finish (self->dtm,
                                            res,
                                            &error))
     {
       /* TODO: display any error in a user friendly way */
       g_warning ("Could not set system timezone: %s", error->message);
-      g_error_free (error);
     }
 }
 
@@ -387,16 +382,14 @@ set_using_ntp_cb (GObject      *source,
                   gpointer      user_data)
 {
   CcDateTimePanel *self = user_data;
-  GError *error;
+  g_autoptr(GError) error = NULL;
 
-  error = NULL;
   if (!timedate1_call_set_ntp_finish (self->dtm,
                                       res,
                                       &error))
     {
       /* TODO: display any error in a user friendly way */
       g_warning ("Could not set system to use NTP: %s", error->message);
-      g_error_free (error);
     }
 }
 
@@ -451,19 +444,17 @@ static void
 change_date (CcDateTimePanel *self)
 {
   guint mon, y, d;
-  GDateTime *old_date;
-
-  old_date = self->date;
+  g_autoptr(GDateTime) old_date = NULL;
 
   mon = 1 + gtk_combo_box_get_active (GTK_COMBO_BOX (W ("month-combobox")));
   y = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("year-spinbutton")));
   d = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("day-spinbutton")));
 
+  old_date = self->date;
   self->date = g_date_time_new_local (y, mon, d,
                                       g_date_time_get_hour (old_date),
                                       g_date_time_get_minute (old_date),
                                       g_date_time_get_second (old_date));
-  g_date_time_unref (old_date);
   queue_set_datetime (self);
 }
 
@@ -474,12 +465,11 @@ city_changed_cb (GtkEntryCompletion *entry_completion,
                  CcDateTimePanel *self)
 {
   GtkWidget *entry;
-  gchar *zone;
+  g_autofree gchar *zone = NULL;
 
   gtk_tree_model_get (model, iter,
                       CITY_COL_ZONE, &zone, -1);
   cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->map), zone);
-  g_free (zone);
 
   entry = gtk_entry_completion_get_entry (GTK_ENTRY_COMPLETION (entry_completion));
   gtk_entry_set_text (GTK_ENTRY (entry), "");
@@ -490,10 +480,10 @@ city_changed_cb (GtkEntryCompletion *entry_completion,
 static char *
 translated_city_name (TzLocation *loc)
 {
-  char *country;
-  char *name;
-  char *zone_translated;
-  char **split_translated;
+  g_autofree gchar *zone_translated = NULL;
+  g_auto(GStrv) split_translated = NULL;
+  g_autofree gchar *country = NULL;
+  gchar *name;
   gint length;
 
   /* Load the translation for it */
@@ -502,7 +492,6 @@ translated_city_name (TzLocation *loc)
   split_translated = g_regex_split_simple ("[\\x{2044}\\x{2215}\\x{29f8}\\x{ff0f}/]",
                                            zone_translated,
                                            0, 0);
-  g_free (zone_translated);
 
   length = g_strv_length (split_translated);
 
@@ -511,8 +500,6 @@ translated_city_name (TzLocation *loc)
   name = g_strdup_printf (C_("timezone loc", "%s, %s"),
                           split_translated[length-1],
                           country);
-  g_free (country);
-  g_strfreev (split_translated);
 
   return name;
 }
@@ -520,12 +507,12 @@ translated_city_name (TzLocation *loc)
 static void
 update_timezone (CcDateTimePanel *self)
 {
-  char *bubble_text;
-  char *city_country;
-  char *label;
-  char *time_label;
-  char *utc_label;
-  char *tz_desc;
+  g_autofree gchar *bubble_text = NULL;
+  g_autofree gchar *city_country = NULL;
+  g_autofree gchar *label = NULL;
+  g_autofree gchar *time_label = NULL;
+  g_autofree gchar *utc_label = NULL;
+  g_autofree gchar *tz_desc = NULL;
   gboolean use_ampm;
 
   if (self->clock_format == G_DESKTOP_CLOCK_FORMAT_12H)
@@ -541,7 +528,6 @@ update_timezone (CcDateTimePanel *self)
                            g_date_time_get_timezone_abbreviation (self->date),
                            city_country);
   gtk_label_set_text (GTK_LABEL (W ("timezone_label")), label);
-  g_free (label);
 
   /* Translators: UTC here means the Coordinated Universal Time.
    * %:::z will be replaced by the offset from UTC e.g. UTC+02 */
@@ -570,12 +556,6 @@ update_timezone (CcDateTimePanel *self)
                                  city_country,
                                  time_label);
   cc_timezone_map_set_bubble_text (CC_TIMEZONE_MAP (self->map), bubble_text);
-
-  g_free (tz_desc);
-  g_free (bubble_text);
-  g_free (city_country);
-  g_free (time_label);
-  g_free (utc_label);
 }
 
 static void
@@ -583,20 +563,16 @@ location_changed_cb (CcTimezoneMap   *map,
                      TzLocation      *location,
                      CcDateTimePanel *self)
 {
-  GDateTime *old_date;
-  GTimeZone *timezone;
+  g_autoptr(GDateTime) old_date = NULL;
+  g_autoptr(GTimeZone) timezone = NULL;
 
   g_debug ("location changed to %s/%s", location->country, location->zone);
 
   self->current_location = location;
 
-  old_date = self->date;
-
   timezone = g_time_zone_new (location->zone);
+  old_date = self->date;
   self->date = g_date_time_to_timezone (old_date, timezone);
-  g_time_zone_unref (timezone);
-
-  g_date_time_unref (old_date);
 
   update_timezone (self);
   queue_set_timezone (self);
@@ -623,24 +599,22 @@ static void
 load_cities (TzLocation   *loc,
              GtkListStore *city_store)
 {
-  char *human_readable;
+  g_autofree gchar *human_readable = NULL;
 
   human_readable = translated_city_name (loc);
   gtk_list_store_insert_with_values (city_store, NULL, 0,
                                      CITY_COL_CITY_HUMAN_READABLE, human_readable,
                                      CITY_COL_ZONE, loc->zone,
                                      -1);
-  g_free (human_readable);
 }
 
 static void
 load_regions_model (GtkListStore *cities)
 {
-  TzDB *db;
+  g_autoptr(TzDB) db = NULL;
 
   db = tz_load_db ();
   g_ptr_array_foreach (db->locations, (GFunc) load_cities, cities);
-  tz_db_free (db);
 }
 
 static void
@@ -690,9 +664,7 @@ static void
 change_time (CcDateTimePanel *self)
 {
   guint h, m;
-  GDateTime *old_date;
-
-  old_date = self->date;
+  g_autoptr(GDateTime) old_date = NULL;
 
   h = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("h_spinbutton")));
   m = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("m_spinbutton")));
@@ -714,12 +686,12 @@ change_time (CcDateTimePanel *self)
         h += 12;
     }
 
+  old_date = self->date;
   self->date = g_date_time_new_local (g_date_time_get_year (old_date),
                                       g_date_time_get_month (old_date),
                                       g_date_time_get_day_of_month (old_date),
                                       h, m,
                                       g_date_time_get_second (old_date));
-  g_date_time_unref (old_date);
 
   update_time (self);
   queue_set_datetime (self);
@@ -736,7 +708,7 @@ change_ntp (GObject         *gobject,
 static gboolean
 is_ntp_available (CcDateTimePanel *self)
 {
-  GVariant *value;
+  g_autoptr(GVariant) value = NULL;
   gboolean ntp_available = TRUE;
 
   /* We need to access this directly so that we can default to TRUE if
@@ -747,7 +719,6 @@ is_ntp_available (CcDateTimePanel *self)
     {
       if (g_variant_is_of_type (value, G_VARIANT_TYPE_BOOLEAN))
         ntp_available = g_variant_get_boolean (value);
-      g_variant_unref (value);
     }
 
   return ntp_available;
@@ -799,14 +770,13 @@ on_timedated_properties_changed (GDBusProxy       *proxy,
                                  const gchar     **invalidated_properties,
                                  CcDateTimePanel  *self)
 {
-  GError *error;
-  GVariant *variant;
-  GVariant *v;
   guint i;
 
   if (invalidated_properties != NULL)
     for (i = 0; invalidated_properties[i] != NULL; i++) {
-        error = NULL;
+        g_autoptr(GVariant) variant = NULL;
+        g_autoptr(GError) error = NULL;
+
         /* See https://bugs.freedesktop.org/show_bug.cgi?id=37632 for the reason why we're doing this */
         variant = g_dbus_proxy_call_sync (proxy,
                                           "org.freedesktop.DBus.Properties.Get",
@@ -815,13 +785,13 @@ on_timedated_properties_changed (GDBusProxy       *proxy,
                                           -1,
                                           NULL,
                                           &error);
-        if (variant == NULL) {
+        if (variant == NULL)
                 g_warning ("Failed to get property '%s': %s", invalidated_properties[i], error->message);
-                g_error_free (error);
-        } else {
+        else {
+                GVariant *v;
+
                 g_variant_get (variant, "(v)", &v);
                 g_dbus_proxy_set_cached_property (proxy, invalidated_properties[i], v);
-                g_variant_unref (variant);
         }
     }
 }
@@ -908,7 +878,8 @@ list_box_row_activated (GtkListBox      *listbox,
                         CcDateTimePanel *self)
 
 {
-  gchar *widget_name, *found;
+  g_autofree gchar *widget_name = NULL;
+  gchar *found;
 
   widget_name = g_strdup (gtk_buildable_get_name (GTK_BUILDABLE (row)));
 
@@ -932,8 +903,6 @@ list_box_row_activated (GtkListBox      *listbox,
 
       run_dialog (self, widget_name);
     }
-
-  g_free (widget_name);
 }
 
 static void
@@ -956,14 +925,13 @@ format_minutes_combobox (GtkSpinButton *spin,
                          gpointer       data)
 {
   GtkAdjustment *adjustment;
-  char *text;
+  g_autofree gchar *text = NULL;
   int value;
 
   adjustment = gtk_spin_button_get_adjustment (spin);
   value = (int)gtk_adjustment_get_value (adjustment);
   text = g_strdup_printf ("%02d", value);
   gtk_entry_set_text (GTK_ENTRY (spin), text);
-  g_free (text);
 
   return TRUE;
 }
@@ -973,7 +941,7 @@ format_hours_combobox (GtkSpinButton   *spin,
                        CcDateTimePanel *panel)
 {
   GtkAdjustment *adjustment;
-  char *text;
+  g_autofree gchar *text = NULL;
   int hour;
   gboolean use_ampm;
 
@@ -989,7 +957,6 @@ format_hours_combobox (GtkSpinButton   *spin,
   else
     text = g_strdup_printf ("%02d", hour);
   gtk_entry_set_text (GTK_ENTRY (spin), text);
-  g_free (text);
 
   return TRUE;
 }
@@ -997,7 +964,7 @@ format_hours_combobox (GtkSpinButton   *spin,
 static void
 setup_timezone_dialog (CcDateTimePanel *self)
 {
-  GtkEntryCompletion *completion;
+  g_autoptr(GtkEntryCompletion) completion = NULL;
   GtkTreeModel *completion_model;
   GtkWidget *dialog;
   GtkWidget *entry;
@@ -1017,7 +984,6 @@ setup_timezone_dialog (CcDateTimePanel *self)
   /* Create the completion object */
   completion = gtk_entry_completion_new ();
   gtk_entry_set_completion (GTK_ENTRY (entry), completion);
-  g_object_unref (completion);
 
   completion_model = GTK_TREE_MODEL (gtk_builder_get_object (self->builder,
                                                              "city-modelsort"));
@@ -1029,46 +995,37 @@ setup_timezone_dialog (CcDateTimePanel *self)
 static char *
 format_am_label ()
 {
-  GDateTime *date;
-  char *text;
+  g_autoptr(GDateTime) date = NULL;
 
   /* Construct a time at midnight, and use it to get localized AM identifier */
   date = g_date_time_new_utc (1, 1, 1, 0, 0, 0);
-  text = g_date_time_format (date, "%p");
-  g_date_time_unref (date);
-
-  return text;
+  return g_date_time_format (date, "%p");
 }
 
 static char *
 format_pm_label ()
 {
-  GDateTime *date;
-  char *text;
+  g_autoptr(GDateTime) date = NULL;
 
   /* Construct a time at noon, and use it to get localized PM identifier */
   date = g_date_time_new_utc (1, 1, 1, 12, 0, 0);
-  text = g_date_time_format (date, "%p");
-  g_date_time_unref (date);
-
-  return text;
+  return g_date_time_format (date, "%p");
 }
 
 static void
 setup_am_pm_button (CcDateTimePanel *self)
 {
-  GtkCssProvider *provider;
+  g_autoptr(GtkCssProvider) provider = NULL;
   GtkStyleContext *context;
   GtkWidget *am_pm_button;
-  char *text;
+  g_autofree gchar *am_text = NULL;
+  g_autofree gchar *pm_text = NULL;
 
-  text = format_am_label ();
-  self->am_label = gtk_label_new (text);
-  g_free (text);
+  am_text = format_am_label ();
+  self->am_label = gtk_label_new (am_text);
 
-  text = format_pm_label ();
-  self->pm_label = gtk_label_new (text);
-  g_free (text);
+  pm_text = format_pm_label ();
+  self->pm_label = gtk_label_new (pm_text);
 
   self->am_pm_stack = W ("am_pm_stack");
   gtk_container_add (GTK_CONTAINER (self->am_pm_stack), self->am_label);
@@ -1093,7 +1050,6 @@ setup_am_pm_button (CcDateTimePanel *self)
   gtk_style_context_add_provider (context,
                                   GTK_STYLE_PROVIDER (provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-  g_object_unref (provider);
 }
 
 static void
@@ -1101,7 +1057,7 @@ setup_datetime_dialog (CcDateTimePanel *self)
 {
   GtkAdjustment *adjustment;
   GdkScreen *screen;
-  GtkCssProvider *provider;
+  g_autoptr(GtkCssProvider) provider = NULL;
   GtkWidget *dialog;
   guint num_days;
 
@@ -1121,7 +1077,6 @@ setup_datetime_dialog (CcDateTimePanel *self)
   gtk_style_context_add_provider_for_screen (screen,
                                              GTK_STYLE_PROVIDER (provider),
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-  g_object_unref (provider);
 
   dialog = W ("datetime-dialog");
   g_signal_connect (dialog, "delete-event",
@@ -1178,11 +1133,11 @@ static void
 cc_date_time_panel_init (CcDateTimePanel *self)
 {
   GtkWidget *widget;
-  GError *error;
+  g_autoptr(GError) error = NULL;
   GtkTreeModelSort *city_modelsort;
   int ret;
   const char *date_grid_name;
-  char *tmp;
+  g_autofree gchar *tmp = NULL;
 
   g_resources_register (cc_datetime_get_resource ());
 
@@ -1196,7 +1151,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                                                 &error);
   if (self->dtm == NULL) {
         g_warning ("could not get proxy for DateTimeMechanism: %s", error->message);
-        g_clear_error (&error);
         return;
   }
 
@@ -1208,8 +1162,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   if (ret == 0)
     {
       g_warning ("Could not load ui: %s", error ? error->message : "No reason");
-      if (error)
-        g_error_free (error);
       return;
     }
 
@@ -1232,7 +1184,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   tmp = g_strdup_printf ("/org/gnome/control-center/datetime/%s.ui", date_grid_name);
   ret = gtk_builder_add_from_resource (self->builder, tmp, NULL);
-  g_free (tmp);
 
   gtk_box_pack_end (GTK_BOX (W ("time-box")), W ("date_grid"), FALSE, TRUE, 0);
 

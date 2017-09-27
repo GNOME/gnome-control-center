@@ -146,12 +146,7 @@ cc_timezone_map_finalize (GObject *object)
 {
   CcTimezoneMap *self = CC_TIMEZONE_MAP (object);
 
-  if (self->tzdb)
-    {
-      tz_db_free (self->tzdb);
-      self->tzdb = NULL;
-    }
-
+  g_clear_pointer (&self->tzdb, tz_db_free);
 
   G_OBJECT_CLASS (cc_timezone_map_parent_class)->finalize (object);
 }
@@ -365,10 +360,10 @@ cc_timezone_map_draw (GtkWidget *widget,
                       cairo_t   *cr)
 {
   CcTimezoneMap *map = CC_TIMEZONE_MAP (widget);
-  GdkPixbuf *hilight, *orig_hilight;
+  g_autoptr(GdkPixbuf) orig_hilight = NULL;
   GtkAllocation alloc;
-  gchar *file;
-  GError *err = NULL;
+  g_autofree gchar *file = NULL;
+  g_autoptr(GError) err = NULL;
   gdouble pointx, pointy;
   char buf[16];
 
@@ -394,26 +389,21 @@ cc_timezone_map_draw (GtkWidget *widget,
     }
 
   orig_hilight = gdk_pixbuf_new_from_resource (file, &err);
-  g_free (file);
-  file = NULL;
 
   if (!orig_hilight)
     {
       g_warning ("Could not load hilight: %s",
                  (err) ? err->message : "Unknown Error");
-      if (err)
-        g_clear_error (&err);
     }
   else
     {
+      g_autoptr(GdkPixbuf) hilight = NULL;
 
       hilight = gdk_pixbuf_scale_simple (orig_hilight, alloc.width,
                                          alloc.height, GDK_INTERP_BILINEAR);
       gdk_cairo_set_source_pixbuf (cr, hilight, 0, 0);
 
       cairo_paint (cr);
-      g_object_unref (hilight);
-      g_object_unref (orig_hilight);
     }
 
   if (map->location)
@@ -442,7 +432,7 @@ static void
 update_cursor (GtkWidget *widget)
 {
   GdkWindow *window;
-  GdkCursor *cursor = NULL;
+  g_autoptr(GdkCursor) cursor = NULL;
 
   if (!gtk_widget_get_realized (widget))
     return;
@@ -456,9 +446,6 @@ update_cursor (GtkWidget *widget)
 
   window = gtk_widget_get_window (widget);
   gdk_window_set_cursor (window, cursor);
-
-  if (cursor)
-    g_object_unref (cursor);
 }
 
 static void
@@ -517,7 +504,7 @@ static void
 set_location (CcTimezoneMap *map,
               TzLocation    *location)
 {
-  TzInfo *info;
+  g_autoptr(TzInfo) info = NULL;
 
   map->location = location;
 
@@ -527,8 +514,6 @@ set_location (CcTimezoneMap *map,
     / (60.0*60.0) + ((info->daylight) ? -1.0 : 0.0);
 
   g_signal_emit (map, signals[LOCATION_CHANGED], 0, map->location);
-
-  tz_info_free (info);
 }
 
 static gboolean
@@ -665,7 +650,7 @@ cc_timezone_map_set_timezone (CcTimezoneMap *map,
 {
   GPtrArray *locations;
   guint i;
-  char *real_tz;
+  g_autofree gchar *real_tz = NULL;
   gboolean ret;
 
   real_tz = tz_info_get_clean_name (map->tzdb, timezone);
@@ -687,8 +672,6 @@ cc_timezone_map_set_timezone (CcTimezoneMap *map,
 
   if (ret)
     gtk_widget_queue_draw (GTK_WIDGET (map));
-
-  g_free (real_tz);
 
   return ret;
 }

@@ -85,4 +85,8 @@ gint       tz_location_set_locally    (TzLocation *loc);
 TzInfo    *tz_info_from_location      (TzLocation *loc);
 void       tz_info_free               (TzInfo *tz_info);
 
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (TzDB, tz_db_free)
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (TzInfo, tz_info_free)
+
 #endif
