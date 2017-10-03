@@ -418,9 +418,10 @@ device_get_hotspot_security_details (NetDeviceWifi *device_wifi,
          * We'll refresh the UI when secrets arrive.
          */
         if (tmp_secret == NULL) {
+                GCancellable *cancellable = net_object_get_cancellable (NET_OBJECT (device_wifi));
                 nm_remote_connection_get_secrets_async ((NMRemoteConnection*)c,
                                                         NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                                        NULL,
+                                                        cancellable,
                                                         get_secrets_cb,
                                                         device_wifi);
                 return;
@@ -737,6 +738,7 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
         NMDevice *device;
         NMSettingWireless *setting_wireless;
         NMClient *client;
+        GCancellable *cancellable;
 
         if (device_wifi->priv->updating_device)
                 goto out;
@@ -777,12 +779,13 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
 
         /* activate the connection */
         client = net_object_get_client (NET_OBJECT (device_wifi));
+        cancellable = net_object_get_cancellable (NET_OBJECT (device_wifi));
         if (connection_activate != NULL) {
                 nm_client_activate_connection_async (client,
                                                      connection_activate,
                                                      device,
                                                      NULL,
-                                                     NULL,
+                                                     cancellable,
                                                      connection_activate_cb,
                                                      device_wifi);
                 goto out;
@@ -817,7 +820,7 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
                                                              partial,
                                                              device,
                                                              ap_object_path,
-                                                             NULL,
+                                                             cancellable,
                                                              connection_add_activate_cb,
                                                              device_wifi);
                 if (!allowed_to_share)
@@ -1071,6 +1074,7 @@ overwrite_ssid_cb (GObject      *source_object,
         NMDevice *device;
         NMConnection *c;
         NetDeviceWifi *device_wifi;
+        GCancellable *cancellable;
 
         connection = NM_REMOTE_CONNECTION (source_object);
 
@@ -1085,6 +1089,7 @@ overwrite_ssid_cb (GObject      *source_object,
         device_wifi = user_data;
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         client = net_object_get_client (NET_OBJECT (device_wifi));
+        cancellable = net_object_get_cancellable (NET_OBJECT (device_wifi));
         c = net_device_wifi_get_hotspot_connection (device_wifi);
 
         g_debug ("activate existing hotspot connection\n");
@@ -1092,7 +1097,7 @@ overwrite_ssid_cb (GObject      *source_object,
                                              c,
                                              device,
                                              NULL,
-                                             NULL,
+                                             cancellable,
                                              activate_cb,
                                              device_wifi);
 }
@@ -1112,6 +1117,7 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         NMClient *client;
         const char *mode;
         NMDeviceWifiCapabilities caps;
+        GCancellable *cancellable;
 
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         g_assert (nm_device_get_device_type (device) == NM_DEVICE_TYPE_WIFI);
@@ -1121,6 +1127,7 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         ssid = generate_ssid_for_hotspot (device_wifi);
 
         client = net_object_get_client (NET_OBJECT (device_wifi));
+        cancellable = net_object_get_cancellable (NET_OBJECT (device_wifi));
         if (c != NULL) {
                 NMSettingWireless *sw;
                 const char *c_path;
@@ -1137,7 +1144,7 @@ start_shared_connection (NetDeviceWifi *device_wifi)
 
                 nm_remote_connection_commit_changes_async (connection,
                                                            TRUE,
-                                                           NULL,
+                                                           cancellable,
                                                            overwrite_ssid_cb,
                                                            device_wifi);
                 return;
@@ -1215,7 +1222,7 @@ start_shared_connection (NetDeviceWifi *device_wifi)
                                                      c,
                                                      device,
                                                      NULL,
-                                                     NULL,
+                                                     cancellable,
                                                      activate_new_cb,
                                                      device_wifi);
 
@@ -1596,6 +1603,7 @@ really_forget (GtkDialog *dialog, gint response, gpointer data)
         GList *r;
         NMRemoteConnection *connection;
         NetDeviceWifi *device_wifi;
+        GCancellable *cancellable;
 
         gtk_widget_destroy (GTK_WIDGET (dialog));
 
@@ -1603,12 +1611,12 @@ really_forget (GtkDialog *dialog, gint response, gpointer data)
                 return;
 
         device_wifi = NET_DEVICE_WIFI (g_object_get_data (G_OBJECT (forget), "net"));
+        cancellable = net_object_get_cancellable (NET_OBJECT (device_wifi));
         rows = g_object_steal_data (G_OBJECT (forget), "rows");
         for (r = rows; r; r = r->next) {
                 row = r->data;
                 connection = g_object_get_data (G_OBJECT (row), "connection");
-                //FIXME cancellable
-                nm_remote_connection_delete_async (connection, NULL, really_forgotten, device_wifi);
+                nm_remote_connection_delete_async (connection, cancellable, really_forgotten, device_wifi);
                 gtk_widget_destroy (row);
         }
         g_list_free (rows);
@@ -2125,6 +2133,7 @@ ap_activated (GtkListBox *list, GtkListBoxRow *row, NetDeviceWifi *device_wifi)
         NMDevice *nm_device;
         GtkWidget *edit;
         GtkWidget *stack;
+        GCancellable *cancellable;
 
         connection = NM_CONNECTION (g_object_get_data (G_OBJECT (row), "connection"));
         ap = NM_ACCESS_POINT (g_object_get_data (G_OBJECT (row), "ap"));
@@ -2137,9 +2146,10 @@ ap_activated (GtkListBox *list, GtkListBoxRow *row, NetDeviceWifi *device_wifi)
                         gtk_widget_hide (edit);
                         client = net_object_get_client (NET_OBJECT (device_wifi));
                         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
+                        cancellable = net_object_get_cancellable (NET_OBJECT (device_wifi));
                         nm_client_activate_connection_async (client,
                                                              connection,
-                                                             nm_device, NULL, NULL,
+                                                             nm_device, NULL, cancellable,
                                                              connection_activate_cb, device_wifi);
                 } else {
                         GBytes *ssid;
