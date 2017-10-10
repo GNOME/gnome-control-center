@@ -45,6 +45,8 @@ common_sources = files(
 resource_data = files(
   'button-mapping.ui',
   'gnome-wacom-properties.ui',
+  'wacom-stylus-3btn.svg',
+  'wacom-stylus-3btn-no-eraser.svg',
   'wacom-stylus-airbrush.svg',
   'wacom-stylus-art-pen.svg',
   'wacom-stylus-classic.svg',
