@@ -450,7 +450,7 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 
 	update_stylus_ui (page, layout);
 
-	if (num_buttons == 2)
+	if (num_buttons >= 2)
 		set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-topbutton")),
 						   priv->stylus_settings, "secondary-button-action");
 	if (num_buttons >= 1)
