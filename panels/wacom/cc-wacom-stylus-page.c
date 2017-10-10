@@ -331,20 +331,17 @@ enum {
 };
 
 static void
-remove_buttons (CcWacomStylusPagePrivate *priv)
+remove_buttons (CcWacomStylusPagePrivate *priv, int n)
 {
-	gtk_widget_destroy (WID ("combo-topbutton"));
-	gtk_widget_destroy (WID ("combo-bottombutton"));
-	gtk_widget_destroy (WID ("label-top-button"));
-	gtk_widget_destroy (WID ("label-lower-button"));
-}
-
-static void
-remove_button (CcWacomStylusPagePrivate *priv)
-{
-	gtk_widget_destroy (WID ("combo-topbutton"));
-	gtk_widget_destroy (WID ("label-top-button"));
-	gtk_label_set_text (GTK_LABEL (WID ("label-lower-button")), _("Button"));
+	if (n < 2) {
+		gtk_widget_destroy (WID ("combo-topbutton"));
+		gtk_widget_destroy (WID ("label-top-button"));
+		gtk_label_set_text (GTK_LABEL (WID ("label-lower-button")), _("Button"));
+	}
+	if (n < 1) {
+		gtk_widget_destroy (WID ("combo-bottombutton"));
+		gtk_widget_destroy (WID ("label-lower-button"));
+	}
 }
 
 static void
@@ -362,10 +359,10 @@ update_stylus_ui (CcWacomStylusPage *page,
 
 	switch (layout) {
 	case LAYOUT_NORMAL:
-		/* easy! */
+		remove_buttons (page->priv, 2);
 		break;
 	case LAYOUT_INKING:
-		remove_buttons (page->priv);
+		remove_buttons (page->priv, 0);
 		remove_eraser (page->priv);
 		gtk_container_child_set (CWID ("stylus-controls-grid"),
 					 WID ("label-tip-feel"),
@@ -375,7 +372,7 @@ update_stylus_ui (CcWacomStylusPage *page,
 					 "top_attach", 0, NULL);
 		break;
 	case LAYOUT_AIRBRUSH:
-		remove_button (page->priv);
+		remove_buttons (page->priv, 1);
 		gtk_container_child_set (CWID ("stylus-controls-grid"),
 					 WID ("label-lower-button"),
 					 "top_attach", 1, NULL);
@@ -390,6 +387,7 @@ update_stylus_ui (CcWacomStylusPage *page,
 					 "top_attach", 2, NULL);
 		break;
 	case LAYOUT_GENERIC_2_BUTTONS_NO_ERASER:
+		remove_buttons (page->priv, 2);
 		remove_eraser (page->priv);
 		break;
 	case LAYOUT_OTHER:
@@ -435,10 +433,7 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 		layout = LAYOUT_GENERIC_2_BUTTONS_NO_ERASER;
 	else {
 		layout = LAYOUT_OTHER;
-		if (num_buttons == 0)
-			remove_buttons (priv);
-		else if (num_buttons == 1)
-			remove_button (priv);
+		remove_buttons (priv, num_buttons);
 
 		/* Gray out eraser if not available */
 		gtk_widget_set_sensitive (WID ("eraser-box"), has_eraser);
