@@ -345,6 +345,7 @@ enum {
 	LAYOUT_INKING,                      /* tip */
 	LAYOUT_AIRBRUSH,                    /* eraser, 1 button, tip */
 	LAYOUT_GENERIC_2_BUTTONS_NO_ERASER, /* 2 buttons, tip, no eraser */
+	LAYOUT_3DPEN,                       /* 3 buttons, tip, no eraser */
 	LAYOUT_OTHER
 };
 
@@ -412,6 +413,10 @@ update_stylus_ui (CcWacomStylusPage *page,
 		remove_buttons (page->priv, 2);
 		remove_eraser (page->priv);
 		break;
+	case LAYOUT_3DPEN:
+		remove_buttons (page->priv, 3);
+		remove_eraser (page->priv);
+		break;
 	case LAYOUT_OTHER:
 		/* We already warn about it in cc_wacom_stylus_page_new () */
 		break;
@@ -453,6 +458,8 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 		layout = LAYOUT_AIRBRUSH;
 	else if (num_buttons == 2 && !has_eraser)
 		layout = LAYOUT_GENERIC_2_BUTTONS_NO_ERASER;
+	else if (num_buttons == 3 && !has_eraser)
+		layout = LAYOUT_3DPEN;
 	else {
 		layout = LAYOUT_OTHER;
 		remove_buttons (priv, num_buttons);

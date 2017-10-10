@@ -205,11 +205,15 @@ if host_is_linux_not_s390
   # Wacom
   assert(clutter_gtk_dep.found(), 'clutter-gtk library is required for wacom support, but is not available.')
 
+  libwacom_dep = dependency('libwacom', version: '>= 0.7')
+
   wacom_deps = [
     clutter_gtk_dep,
+    libwacom_dep,
     dependency('clutter-1.0', version: '>= 1.11.3'),
-    dependency('libwacom', version: '>= 0.7')
   ]
+  config_h.set('HAVE_WACOM_3D_STYLUS', libwacom_dep.version().version_compare('>= 0.27'),
+               description: 'Define to 1 if libwacom provides definition for 3D styli')
 else
   message('Bluetooth and Wacom panels will not be built (no USB support on this platform)')
 endif
