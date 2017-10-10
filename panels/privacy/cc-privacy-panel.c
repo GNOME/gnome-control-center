@@ -1077,7 +1077,7 @@ empty_trash (CcPrivacyPanel *self)
 
   bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
   g_dbus_connection_call (bus,
-                          "org.gnome.SettingsDaemon",
+                          "org.gnome.SettingsDaemon.Housekeeping",
                           "/org/gnome/SettingsDaemon/Housekeeping",
                           "org.gnome.SettingsDaemon.Housekeeping",
                           "EmptyTrash",
@@ -1102,7 +1102,7 @@ purge_temp (CcPrivacyPanel *self)
 
   bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
   g_dbus_connection_call (bus,
-                          "org.gnome.SettingsDaemon",
+                          "org.gnome.SettingsDaemon.Housekeeping",
                           "/org/gnome/SettingsDaemon/Housekeeping",
                           "org.gnome.SettingsDaemon.Housekeeping",
                           "RemoveTempFiles",
