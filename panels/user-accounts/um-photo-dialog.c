@@ -52,6 +52,7 @@ struct _UmPhotoDialog {
 
 #ifdef HAVE_CHEESE
         CheeseCameraDeviceMonitor *monitor;
+        GCancellable *cancellable;
         guint num_cameras;
 #endif /* HAVE_CHEESE */
 
@@ -370,6 +371,32 @@ create_face_widget (gpointer item,
         return image;
 }
 
+#ifdef HAVE_CHEESE
+static void
+setup_cheese_camera_device_monitor (UmPhotoDialog *um)
+{
+        g_signal_connect (G_OBJECT (um->monitor), "added", G_CALLBACK (device_added), um);
+        g_signal_connect (G_OBJECT (um->monitor), "removed", G_CALLBACK (device_removed), um);
+        cheese_camera_device_monitor_coldplug (um->monitor);
+}
+
+static void
+cheese_camera_device_monitor_new_cb (GObject *source,
+                                     GAsyncResult *result,
+                                     gpointer user_data)
+{
+        UmPhotoDialog *um = user_data;
+        GObject *ret;
+
+        ret = g_async_initable_new_finish (G_ASYNC_INITABLE (source), result, NULL);
+        if (ret == NULL)
+                return;
+
+        um->monitor = CHEESE_CAMERA_DEVICE_MONITOR (ret);
+        setup_cheese_camera_device_monitor (um);
+}
+#endif /* HAVE_CHEESE */
+
 static void
 setup_photo_popup (UmPhotoDialog *um)
 {
@@ -445,12 +472,13 @@ setup_photo_popup (UmPhotoDialog *um)
 #ifdef HAVE_CHEESE
         gtk_widget_set_visible (um->take_picture_button, TRUE);
 
-        um->monitor = cheese_camera_device_monitor_new ();
-        g_signal_connect (G_OBJECT (um->monitor), "added",
-                          G_CALLBACK (device_added), um);
-        g_signal_connect (G_OBJECT (um->monitor), "removed",
-                          G_CALLBACK (device_removed), um);
-        cheese_camera_device_monitor_coldplug (um->monitor);
+        um->cancellable = g_cancellable_new ();
+        g_async_initable_new_async (CHEESE_TYPE_CAMERA_DEVICE_MONITOR,
+                                    G_PRIORITY_DEFAULT,
+                                    um->cancellable,
+                                    cheese_camera_device_monitor_new_cb,
+                                    um,
+                                    NULL);
 #endif /* HAVE_CHEESE */
 }
 
@@ -509,6 +537,8 @@ um_photo_dialog_dispose (GObject *object)
 
         g_clear_object (&um->thumb_factory);
 #ifdef HAVE_CHEESE
+        g_cancellable_cancel (um->cancellable);
+        g_clear_object (&um->cancellable);
         g_clear_object (&um->monitor);
 #endif
         g_clear_object (&um->user);
