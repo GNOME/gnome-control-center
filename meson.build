@@ -146,7 +146,7 @@ if enable_cheese
 
   cheese_deps = [
     clutter_gtk_dep,
-    dependency('cheese'),
+    dependency('cheese', version: '>= 3.28.0'),
     dependency('cheese-gtk', version: '>= 3.5.91')
   ]
 endif
