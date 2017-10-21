@@ -216,6 +216,10 @@ net_proxy_finalize (GObject *object)
 {
         NetProxy *proxy = NET_PROXY (object);
         NetProxyPrivate *priv = proxy->priv;
+        GtkWidget *widget;
+
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog"));
+        gtk_widget_destroy (widget);
 
         g_clear_object (&priv->settings);
         g_clear_object (&priv->builder);
