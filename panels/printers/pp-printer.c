@@ -22,6 +22,10 @@
 
 #include "pp-job.h"
 
+#if (CUPS_VERSION_MAJOR == 1) && (CUPS_VERSION_MINOR <= 6)
+#define IPP_STATE_IDLE IPP_IDLE
+#endif
+
 typedef struct _PpPrinter        PpPrinter;
 typedef struct _PpPrinterPrivate PpPrinterPrivate;
 
