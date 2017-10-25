@@ -1,6 +1,6 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
 /*
- * Copyright (C) 2011, 2012 Red Hat, Inc.
+ * Copyright (C) 2011 - 2017 Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -234,8 +234,7 @@ show_non_branded_providers (CcGoaPanel *self)
 
 static void
 add_account (CcGoaPanel  *self,
-             GoaProvider *provider,
-             GVariant    *preseed)
+             GoaProvider *provider)
 {
   GoaObject *object;
   GError *error;
@@ -261,9 +260,6 @@ add_account (CcGoaPanel  *self,
                                      GTK_BOX (self->new_account_vbox),
                                      &error);
 
-  if (preseed)
-    goa_provider_set_preseed_data (provider, preseed);
-
   if (object == NULL)
     gtk_widget_hide (self->edit_account_dialog);
   else
@@ -285,7 +281,7 @@ on_provider_row_activated (CcGoaPanel    *self,
 
   provider = g_object_get_data (G_OBJECT (activated_row), "goa-provider");
 
-  add_account (self, provider, NULL);
+  add_account (self, provider);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
@@ -305,52 +301,6 @@ sort_func (GtkListBoxRow *a,
   b_account = goa_object_peek_account (b_obj);
 
   return g_strcmp0 (goa_account_get_id (a_account), goa_account_get_id (b_account));
-}
-
-static void
-command_add (CcGoaPanel *panel,
-             GVariant   *parameters)
-{
-  GVariant *v, *preseed = NULL;
-  GoaProvider *provider = NULL;
-  const gchar *provider_name = NULL;
-
-  g_assert (panel != NULL);
-  g_assert (parameters != NULL);
-
-  switch (g_variant_n_children (parameters))
-    {
-      case 3:
-        g_variant_get_child (parameters, 2, "v", &preseed);
-      case 2:
-        g_variant_get_child (parameters, 1, "v", &v);
-        if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
-          provider_name = g_variant_get_string (v, NULL);
-        else
-          g_warning ("Wrong type for the second argument (provider name) GVariant, expected 's' but got '%s'",
-                     (gchar *)g_variant_get_type (v));
-        g_variant_unref (v);
-        break;
-      default:
-        g_warning ("Unexpected parameters found, ignore request");
-        goto out;
-    }
-
-  if (provider_name != NULL)
-    {
-      provider = goa_provider_get_for_provider_type (provider_name);
-      if (provider == NULL)
-        {
-          g_warning ("Unable to get a provider for type '%s'", provider_name);
-          goto out;
-        }
-
-      add_account (panel, provider, preseed);
-    }
-
-out:
-  g_clear_object (&provider);
-  g_clear_pointer (&preseed, g_variant_unref);
 }
 
 static void
@@ -381,9 +331,7 @@ cc_goa_panel_set_property (GObject *object,
                 g_variant_unref (v);
             }
 
-          if (g_strcmp0 (first_arg, "add") == 0)
-            command_add (CC_GOA_PANEL (object), parameters);
-          else if (first_arg != NULL)
+          if (first_arg != NULL)
             select_account_by_id (CC_GOA_PANEL (object), first_arg);
 
           return;
