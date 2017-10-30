@@ -89,15 +89,6 @@ validate (EAPMethod *parent, GError **error)
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_private_key_password_entry"));
 	g_assert (widget);
 	password = gtk_entry_get_text (GTK_ENTRY (widget));
-	if (!password || !strlen (password)) {
-		widget_set_error (widget);
-		if (ret) {
-			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS password: missing"));
-			ret = FALSE;
-		}
-	} else {
-		widget_unset_error (widget);
-	}
 
 	if (!eap_method_validate_filepicker (parent->builder,
 	                                     "eap_tls_private_key_button",
