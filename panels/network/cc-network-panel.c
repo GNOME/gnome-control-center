@@ -915,8 +915,10 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         /* Cold-plug existing connections */
         connections = nm_client_get_connections (panel->client);
-        for (i = 0; i < connections->len; i++)
-                add_connection (panel, connections->pdata[i]);
+        if (connections) {
+                for (i = 0; i < connections->len; i++)
+                        add_connection (panel, connections->pdata[i]);
+        }
 
         g_debug ("Calling handle_argv() after cold-plugging connections");
         handle_argv (panel);
