@@ -386,7 +386,7 @@ device_removed_cb (NMClient    *client,
   /* Remove from the devices list */
   for (i = 0; i < self->devices->len; i++)
     {
-      NetObject *object = g_ptr_array_index (self->devices, 0);
+      NetObject *object = g_ptr_array_index (self->devices, i);
 
       if (g_strcmp0 (net_object_get_id (object), id) == 0)
         {
