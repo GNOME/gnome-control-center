@@ -24,13 +24,14 @@
 #include <glib.h>
 #include <glib/gi18n-lib.h>
 #include <glib/gstdio.h>
+#include <gio/gdesktopappinfo.h>
 
 #include <gdesktop-enums.h>
 
 #include "cc-background-panel.h"
 
-#include "bg-wallpapers-source.h"
 #include "cc-background-item.h"
+#include "cc-background-store.h"
 #include "cc-background-grid-item.h"
 #include "cc-background-resources.h"
 #include "cc-background-xml.h"
@@ -55,8 +56,7 @@ struct _CcBackgroundPanel
   GnomeDesktopThumbnailFactory *thumb_factory;
 
   CcBackgroundItem *current_background;
-
-  BgWallpapersSource *wallpapers_source;
+  CcBackgroundStore *store;
 
   GCancellable *copy_cancellable;
 
@@ -102,6 +102,8 @@ cc_background_panel_finalize (GObject *object)
   CcBackgroundPanel *panel = CC_BACKGROUND_PANEL (object);
 
   g_clear_object (&panel->current_background);
+  g_clear_object (&panel->store);
+  g_clear_object (&panel->settings);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->finalize (object);
 }
@@ -427,6 +429,7 @@ set_background (CcBackgroundPanel *panel,
       g_settings_set_string (settings, WP_URI_KEY, uri);
     }
 
+
   /* Also set the placement if we have a URI and the previous value was none */
   if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT)
     {
@@ -458,6 +461,7 @@ set_background (CcBackgroundPanel *panel,
       if (create_save_dir ())
         cc_background_xml_save (panel->current_background, filename);
     }
+
 }
 
 static void
@@ -469,43 +473,12 @@ on_settings_changed (GSettings         *settings,
   update_preview (self, settings, NULL);
 }
 
-static GtkWidget *
-create_view (GtkWidget *parent, GtkTreeModel *model)
-{
-  GtkCellRenderer *renderer;
-  GtkWidget *icon_view;
-  GtkWidget *sw;
-
-  sw = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_widget_set_hexpand (sw, TRUE);
-  gtk_widget_set_vexpand (sw, TRUE);
-
-  icon_view = gtk_icon_view_new ();
-  gtk_icon_view_set_model (GTK_ICON_VIEW (icon_view), model);
-  gtk_widget_set_hexpand (icon_view, TRUE);
-  gtk_container_add (GTK_CONTAINER (sw), icon_view);
-
-  gtk_icon_view_set_columns (GTK_ICON_VIEW (icon_view), 3);
-
-  renderer = gtk_cell_renderer_pixbuf_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (icon_view),
-                              renderer,
-                              FALSE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (icon_view),
-                                  renderer,
-                                  "surface", 0,
-                                  NULL);
-
-  return sw;
-}
-
 static void
 on_background_select (GtkFlowBox      *box,
                       GtkFlowBoxChild *child,
                       gpointer         user_data)
 {
-  CcBackgroundGridItem *selected = (CcBackgroundGridItem *) child;
+  GtkWidget *selected = GTK_WIDGET (child);
   CcBackgroundPanel *panel = user_data;
   CcBackgroundItem *item;
   item = cc_background_grid_item_get_ref (selected);
@@ -513,26 +486,106 @@ on_background_select (GtkFlowBox      *box,
   set_background (panel, panel->settings, item);
 }
 
-gboolean
-do_foreach_background_item (GtkTreeModel *model,
-                         GtkTreePath *path,
-                         GtkTreeIter *iter,
-                         gpointer data)
+static void
+on_open_gnome_photos (GtkWidget *widget,
+                      gpointer  user_data)
 {
-  CcBackgroundPanel *panel = data;
-  CcBackgroundGridItem *flow;
+  GAppLaunchContext *context;
+  GDesktopAppInfo *appInfo;
+  GError **error = NULL;
+
+  context = G_APP_LAUNCH_CONTEXT (gdk_display_get_app_launch_context (gdk_display_get_default ()));
+  appInfo = g_desktop_app_info_new("org.gnome.Photos.desktop");
+
+  if (appInfo == NULL) {
+    g_debug ("Gnome Photos is not installed.");
+  }
+  else {
+    g_app_info_launch (G_APP_INFO (appInfo), NULL, context, error);
+    g_prefix_error (error, "Problem opening Gnome Photos: ");
+
+    g_object_unref (appInfo);
+  }
+  g_object_unref (context);
+}
+
+static void
+on_open_picture_folder (GtkWidget *widget,
+                        gpointer  user_data)
+{
+  GDBusProxy      *proxy;
+  GVariant        *retval;
+  GVariantBuilder *builder;
+  const gchar     *uri;
+  GError **error = NULL;
+  const gchar     *path;
+
+  path = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
+
+  uri = g_filename_to_uri (path, NULL, error);
+
+  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                         G_DBUS_PROXY_FLAGS_NONE,
+                                         NULL,
+                                         "org.freedesktop.FileManager1",
+                                         "/org/freedesktop/FileManager1",
+                                         "org.freedesktop.FileManager1",
+                                         NULL, error);
+
+  if (!proxy) {
+    g_prefix_error (error,
+                    ("Connecting to org.freedesktop.FileManager1 failed: "));
+  }
+  else {
+
+    builder = g_variant_builder_new (G_VARIANT_TYPE ("as"));
+    g_variant_builder_add (builder, "s", uri);
+
+    retval = g_dbus_proxy_call_sync (proxy,
+                                     "ShowFolders",
+                                     g_variant_new ("(ass)",
+                                                    builder,
+                                                    ""),
+                                     G_DBUS_CALL_FLAGS_NONE,
+                                     -1, NULL, error);
+
+    g_variant_builder_unref (builder);
+    g_object_unref (proxy);
+
+    if (!retval)
+      {
+        g_prefix_error (error, ("Calling ShowFolders failed: "));
+      }
+    else
+      g_variant_unref (retval);
+  }
+}
+
+static gboolean
+is_gnome_photos_installed ()
+{
+  if (g_desktop_app_info_new("org.gnome.Photos.desktop") == NULL) {
+    return FALSE;
+  }
+  return TRUE;
+}
+
+static GtkWidget *
+create_gallery_item (gpointer item,
+                    gpointer user_data)
+{
+  CcBackgroundPanel *panel = user_data;
+  GtkWidget *flow;
   GtkWidget *widget;
   GdkPixbuf *pixbuf;
-  CcBackgroundItem *item;
+  CcBackgroundItem *self = item;
   gint scale_factor;
   const gint preview_width = 309;
   const gint preview_height = 168;
 
-  gtk_tree_model_get (model, iter, 1, &item, -1);
+  scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (panel));
 
-  scale_factor = gtk_widget_get_scale_factor (panel);
-
-  pixbuf = cc_background_item_get_frame_thumbnail (item,
+  pixbuf = cc_background_item_get_frame_thumbnail (self,
                                                    panel->thumb_factory,
                                                    preview_width,
                                                    preview_height,
@@ -541,45 +594,13 @@ do_foreach_background_item (GtkTreeModel *model,
 
   widget = gtk_image_new_from_pixbuf (pixbuf);
 
-  flow = cc_background_grid_item_new(item);
-  cc_background_grid_item_set_ref (flow, item);
+  flow = cc_background_grid_item_new(self);
+  cc_background_grid_item_set_ref (flow, self);
   gtk_widget_show (flow);
   gtk_widget_show (widget);
-  gtk_container_add (flow, widget);
+  gtk_container_add (GTK_CONTAINER (flow), widget);
 
-  gtk_flow_box_insert (GTK_FLOW_BOX (WID("background-gallery")), flow, -1);
-  return TRUE;
-}
-
-static void
-on_source_added_cb (GtkTreeModel *model,
-                    GtkTreePath  *path,
-                    GtkTreeIter  *iter,
-                    gpointer     user_data)
-{
-  //gtk_tree_model_foreach (model, foreach_background_item, user_data);
-  do_foreach_background_item (model, path, iter, user_data);
-}
-
-static void
-load_wallpapers (CcBackgroundPanel *panel, GtkWidget *parent)
-{
-  GtkListStore *model;
-  GtkTreeIter iter;
-  GtkTreePath  *path;
-  GValue *value = NULL;
-  gint scale_factor;
-
-  scale_factor = gtk_widget_get_scale_factor (panel);
-
-  panel->wallpapers_source = bg_wallpapers_source_new (GTK_WINDOW (NULL));
-  model = bg_source_get_liststore (BG_SOURCE (panel->wallpapers_source));
-
-  gtk_tree_model_foreach (model, do_foreach_background_item, panel);
-
-  g_signal_connect (model, "row-inserted", G_CALLBACK (on_source_added_cb), panel);
-  //g_signal_connect (model, "row-deleted", G_CALLBACK (on_source_removed_cb), chooser);
-  //g_signal_connect (model, "row-changed", G_CALLBACK (on_source_modified_cb), chooser);
+  return flow;
 }
 
 static void
@@ -587,9 +608,11 @@ cc_background_panel_init (CcBackgroundPanel *panel)
 {
   gchar *objects[] = {"background-panel", NULL };
   g_autoptr(GError) err = NULL;
-  GtkCssProvider *provider;
-  GtkStyleContext *context;
+  GtkStyleProvider *provider;
   GtkWidget *widget;
+
+  /* Create wallpapers store */
+  panel->store = cc_background_store_new ();
 
   panel->connection = g_application_get_dbus_connection (g_application_get_default ());
   g_resources_register (cc_background_get_resource ());
@@ -616,12 +639,11 @@ cc_background_panel_init (CcBackgroundPanel *panel)
 
   /* add style */
   widget = WID ("background-preview-top");
-  provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
+  provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider,
                                        "org/gnome/control-center/background/background.css");
-  context = gtk_widget_get_style_context (widget);
   gtk_style_context_add_provider_for_screen (gdk_screen_get_default(),
-                                             provider,
+                                             GTK_STYLE_PROVIDER (provider),
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   g_object_unref (provider);
 
@@ -633,17 +655,35 @@ cc_background_panel_init (CcBackgroundPanel *panel)
 
   panel->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
+  /* add button handler */
+  widget = WID ("open-gnome-photos");
+  g_signal_connect (G_OBJECT (widget), "clicked",
+                    G_CALLBACK (on_open_gnome_photos), panel);
+
+  if (!is_gnome_photos_installed ()) {
+    gtk_widget_hide (widget);
+  }
+
+  widget = WID ("open-picture-folder");
+  g_signal_connect (G_OBJECT (widget), "clicked",
+                    G_CALLBACK (on_open_picture_folder), panel);
+
   /* add the gallery widget */
   widget = WID ("background-gallery");
 
   g_signal_connect (G_OBJECT (widget), "child-activated",
                     G_CALLBACK (on_background_select), panel);
 
-  load_wallpapers (panel, widget);
-
   /* Load the backgrounds */
   reload_current_bg (panel, panel->settings);
   update_preview (panel, panel->settings, NULL);
+
+  /* Bind liststore to flowbox */
+  gtk_flow_box_bind_model (GTK_FLOW_BOX (WID("background-gallery")),
+                           G_LIST_MODEL (cc_background_store_get_liststore (panel->store)),
+                           create_gallery_item,
+                           panel,
+                           NULL);
 
   /* Background settings */
   g_signal_connect (panel->settings, "changed", G_CALLBACK (on_settings_changed), panel);

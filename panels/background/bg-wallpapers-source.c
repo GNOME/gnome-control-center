@@ -56,7 +56,7 @@ load_wallpapers (gchar              *key,
   if (deleted)
     return;
 
-//  gtk_list_store_append (store, &iter);
+  //gtk_list_store_append (store, &iter);
 
   scale_factor = bg_source_get_scale_factor (BG_SOURCE (source));
   thumbnail_height = bg_source_get_thumbnail_height (BG_SOURCE (source));
@@ -166,7 +166,7 @@ bg_wallpapers_source_class_init (BgWallpapersSourceClass *klass)
 }
 
 BgWallpapersSource *
-bg_wallpapers_source_new (GtkWindow *window)
+bg_wallpapers_source_new (GtkWidget *window)
 {
   return g_object_new (BG_TYPE_WALLPAPERS_SOURCE, "window", window, NULL);
 }

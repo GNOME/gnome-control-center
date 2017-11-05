@@ -458,7 +458,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   g_autofree gchar *pictures_dir_uri = NULL;
   GtkTargetList *target_list;
 
-  chooser->wallpapers_source = bg_wallpapers_source_new (GTK_WINDOW (chooser));
+  chooser->wallpapers_source = bg_wallpapers_source_new (GTK_WIDGET (chooser));
   chooser->pictures_source = bg_pictures_source_new (GTK_WINDOW (chooser));
   chooser->colors_source = bg_colors_source_new (GTK_WINDOW (chooser));
 

@@ -28,10 +28,10 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (CcBackgroundGridItem, cc_background_grid_item, CC, BACKGROUND_GRID_LIST, GtkFlowBoxChild)
 
-GtkWidget*              cc_background_grid_item_new          (CcBackgroundItem             *);
-
-void cc_background_grid_item_set_ref (CcBackgroundGridItem *self, CcBackgroundItem *item);
-CcBackgroundItem * cc_background_grid_item_get_ref (CcBackgroundGridItem *self);
+GtkWidget *             cc_background_grid_item_new             (CcBackgroundItem             *);
+void                    cc_background_grid_item_set_ref         (GtkWidget                    *,
+                                                                 CcBackgroundItem             *);
+CcBackgroundItem *      cc_background_grid_item_get_ref         (GtkWidget                    *);
 
 G_END_DECLS
 

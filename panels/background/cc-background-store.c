@@ -21,12 +21,14 @@
 #include <gio/gio.h>
 #include "cc-background-store.h"
 #include "cc-background-item.h"
+#include "cc-background-xml.h"
 
 struct _CcBackgroundStore
 {
   GObject parent_instance;
 
   /* Other members, including private data. */
+  //CcBackgroundStorePrivate *priv;
 };
 
 /* Private structure definition. */
@@ -34,7 +36,8 @@ typedef struct _CcBackgroundStorePrivate CcBackgroundStorePrivate;
 
 struct _CcBackgroundStorePrivate
 {
-  GListStore * model;
+  GListStore *model;
+  CcBackgroundXml *xml;
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (CcBackgroundStore, cc_background_store, G_TYPE_OBJECT)
@@ -56,6 +59,7 @@ cc_background_store_dispose (GObject *gobject)
    * NULL; g_clear_object() does this for us.
    */
   g_clear_object (&priv->model);
+  g_clear_object (&priv->xml);
 
   /* Always chain up to the parent class; there is no need to check if
    * the parent class implements the dispose() virtual function: it is
@@ -77,12 +81,50 @@ cc_background_store_finalize (GObject *gobject)
   G_OBJECT_CLASS (cc_background_store_parent_class)->finalize (gobject);
 }
 
+
+static void
+item_added (CcBackgroundXml    *xml,
+            CcBackgroundItem   *item,
+            CcBackgroundStore *self)
+{
+  CcBackgroundStorePrivate *priv = cc_background_store_get_instance_private (self);
+  g_list_store_append (priv->model, item);
+}
+
+static void
+list_load_cb (GObject *source_object,
+              GAsyncResult *res,
+              gpointer user_data)
+{
+  cc_background_xml_load_list_finish (res);
+}
+
+static void
+cc_background_store_constructed (GObject *object)
+{
+  CcBackgroundStore *self = CC_BACKGROUND_STORE (object);
+  CcBackgroundStorePrivate *priv = cc_background_store_get_instance_private (self);
+
+  G_OBJECT_CLASS (cc_background_store_parent_class)->constructed (object);
+
+  g_signal_connect (G_OBJECT (priv->xml), "added",
+                    G_CALLBACK (item_added), self);
+
+  /* Try adding the default background first */
+  //load_default_bg (self);
+
+  cc_background_xml_load_list_async (priv->xml, NULL, list_load_cb, self);
+}
+
+
+
 static void
 cc_background_store_class_init (CcBackgroundStoreClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->dispose = cc_background_store_dispose;
+  object_class->constructed = cc_background_store_constructed;
   object_class->finalize = cc_background_store_finalize;
 }
 
@@ -91,4 +133,17 @@ cc_background_store_init (CcBackgroundStore *self)
 {
   CcBackgroundStorePrivate *priv = cc_background_store_get_instance_private (self);
   priv->model = g_list_store_new (cc_background_item_get_type());
+  priv->xml = cc_background_xml_new ();
+}
+
+GListStore *
+cc_background_store_get_liststore (CcBackgroundStore *self) {
+  CcBackgroundStorePrivate *priv = cc_background_store_get_instance_private (self);
+  return priv->model;
+}
+
+CcBackgroundStore *
+cc_background_store_new ()
+{
+  return g_object_new (CC_TYPE_BACKGROUND_STORE, NULL);
 }

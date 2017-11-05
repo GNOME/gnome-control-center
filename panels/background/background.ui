@@ -111,6 +111,9 @@
       <object class="GtkBox" id="backgroud-gallery-box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <style>
+          <class name="background-gallery"/>
+        </style>
         <child>
           <object class="GtkScrolledWindow">
             <property name="visible">True</property>
@@ -121,9 +124,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
-                <style>
-                  <class name="background-gallery"/>
-                </style>
                 <child>
                   <object class="GtkFlowBox" id="background-gallery">
                     <property name="visible">True</property>
@@ -137,9 +137,72 @@
                     <property name="valign">center</property>
                     <property name="margin">25</property>
                     <property name="margin_top">50</property>
+                    <property name="margin_bottom">32</property>
                   </object>
                 </child>
-
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">center</property>
+                    <property name="valign">end</property>
+                    <property name="margin">32</property>
+                    <property name="margin_top">0</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">16</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Photos or Files can be used to set any image as the background</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">center</property>
+                        <property name="spacing">16</property>
+                        <child>
+                          <object class="GtkButton" id="open-gnome-photos">
+                            <property name="label" translatable="yes">Open Photos app</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="open-picture-folder">
+                            <property name="label" translatable="yes">Open Pictures folder</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

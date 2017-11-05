@@ -48,13 +48,15 @@ cc_background_grid_item_new (CcBackgroundItem *item)
                        NULL);
 }
 
-CcBackgroundItem * cc_background_grid_item_get_ref (CcBackgroundGridItem *self)
+CcBackgroundItem * cc_background_grid_item_get_ref (GtkWidget *widget)
 {
+  CcBackgroundGridItem *self = (CcBackgroundGridItem *) widget;
   return self->item;
 }
 void
-cc_background_grid_item_set_ref (CcBackgroundGridItem *self, CcBackgroundItem *item)
+cc_background_grid_item_set_ref (GtkWidget *widget, CcBackgroundItem *item)
 {
+  CcBackgroundGridItem *self = (CcBackgroundGridItem *) widget;
   self->item = item;
 }
 
@@ -119,7 +121,7 @@ static void
 cc_background_grid_item_class_init (CcBackgroundGridItemClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  //GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->finalize = cc_background_grid_item_finalize;
   object_class->dispose = cc_background_grid_item_dispose;

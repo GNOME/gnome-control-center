@@ -37,7 +37,8 @@ G_DECLARE_FINAL_TYPE (CcBackgroundStore, cc_background_store, CC, BACKGROUND_STO
 /*
  * Method definitions.
  */
-CcBackgroundStore *cc_backgroud_store_new (void);
+CcBackgroundStore *cc_background_store_new (void);
+GListStore *cc_background_store_get_liststore (CcBackgroundStore *);
 
 G_END_DECLS
 
