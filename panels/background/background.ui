@@ -5,175 +5,71 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="hexpand">True</property>
-    <property name="orientation">vertical</property>
     <child>
-      <object class="GtkBox" id="background-preview">
+      <object class="GtkBox" id="content">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="margin">16</property>
-        <property name="halign">center</property>
         <property name="orientation">vertical</property>
-        <property name="expand">False</property>
         <child>
-          <object class="GtkBox" id="background-preview-top">
+          <object class="GtkBox" id="background-preview">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin">6</property>
-            <property name="spacing">6</property>
+            <property name="margin">16</property>
+            <property name="halign">fill</property>
             <property name="orientation">vertical</property>
-            <style>
-              <class name="black-border"/>
-            </style>
+            <property name="expand">False</property>
+            <property name="height_request">150</property>
             <child>
-              <object class="GtkDrawingArea" id="background-desktop-drawingarea">
-                <property name="width_request">310</property>
-                <property name="height_request">170</property>
+              <object class="GtkAspectFrame">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkBox" id="bottom-hbox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="spacing">12</property>
-            <child>
-              <object class="GtkBox" id="hbox2">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="margin_top">12</property>
-                <property name="spacing">2</property>
+                <property name="shadow_type">GTK_SHADOW_NONE</property>
+                <property name="expand">True</property>
+                <property name="obey-child">False</property>
+                <property name="ratio">1.7777</property>
                 <child>
-                  <object class="GtkImage" id="slide_image">
+                  <object class="GtkBox" id="background-preview-top">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">slideshow-symbolic</property>
+                    <property name="orientation">vertical</property>
+                    <style>
+                      <class name="black-border"/>
+                    </style>
+                    <child>
+                      <object class="GtkDrawingArea" id="background-desktop-drawingarea">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="expand">True</property>
+                      </object>
+                    </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="strut">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label"> </property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="slide-label">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes" comments="This refers to a slideshow background">Changes throughout the day</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
                 </child>
               </object>
               <packing>
-                <property name="expand">True</property>
+                <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>
             </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">0</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkBox" id="backgroud-gallery-box">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <style>
-          <class name="background-gallery"/>
-        </style>
-        <child>
-          <object class="GtkScrolledWindow">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="hscrollbar_policy">never</property>
             <child>
-              <object class="GtkBox" id="box4">
+              <object class="GtkRevealer" id="wallpaper-info">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
+                <property name="reveal-child">True</property>
                 <child>
-                  <object class="GtkFlowBox" id="background-gallery">
+                  <object class="GtkBox" id="slide-box">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="homogeneous">True</property>
-                    <property name="orientation">horizontal</property>
-                    <property name="min-children-per-line">2</property>
-                    <property name="row_spacing">5</property>
-                    <property name="column_spacing">5</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="margin">25</property>
-                    <property name="margin_top">50</property>
-                    <property name="margin_bottom">32</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">center</property>
-                    <property name="valign">end</property>
-                    <property name="margin">32</property>
-                    <property name="margin_top">0</property>
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">16</property>
+                    <property name="margin_top">10</property>
                     <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Photos or Files can be used to set any image as the background</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
+                      <object class="GtkBox" id="hbox2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">center</property>
-                        <property name="spacing">16</property>
                         <child>
-                          <object class="GtkButton" id="open-gnome-photos">
-                            <property name="label" translatable="yes">Open Photos app</property>
+                          <object class="GtkImage" id="slide_image">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="icon_name">slideshow-symbolic</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -182,11 +78,23 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="open-picture-folder">
-                            <property name="label" translatable="yes">Open Pictures folder</property>
+                          <object class="GtkLabel" id="strut">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label"> </property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="slide-label">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes" comments="This refers to a slideshow background">Changes throughout the day</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -196,9 +104,9 @@
                         </child>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
+                        <property name="expand">True</property>
                         <property name="fill">True</property>
-                        <property name="position">1</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                   </object>
@@ -207,17 +115,149 @@
             </child>
           </object>
           <packing>
-            <property name="expand">True</property>
+            <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
         </child>
+        <child>
+          <object class="GtkBox" id="background-gallery-box">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="expand">True</property>
+            <!--<property name="height_request">150</property>-->
+            <style>
+              <class name="background-gallery"/>
+            </style>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hscrollbar_policy">never</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="expand">True</property>
+                    <child>
+                      <object class="GtkBox" id="left_space">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="expand">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="box4">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkFlowBox" id="background-gallery">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">False</property>
+                            <property name="homogeneous">True</property>
+                            <property name="orientation">horizontal</property>
+                            <property name="min-children-per-line">2</property>
+                            <property name="max-children-per-line">5</property>
+                            <property name="row_spacing">5</property>
+                            <property name="column_spacing">5</property>
+                            <property name="halign">fill</property>
+                            <property name="valign">fill</property>
+                            <property name="margin">25</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">end</property>
+                            <property name="margin">32</property>
+                            <property name="margin_top">7</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">16</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Photos or Files can be used to set any image as the background</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="spacing">16</property>
+                                <child>
+                                  <object class="GtkButton" id="open-gnome-photos">
+                                    <property name="label" translatable="yes">Open Photos app</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="open-picture-folder">
+                                    <property name="label" translatable="yes">Open Pictures folder</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="right_space">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="expand">True</property>
+                      </object>
+
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
       </object>
-      <packing>
-        <property name="expand">True</property>
-        <property name="fill">True</property>
-        <property name="position">1</property>
-      </packing>
     </child>
   </object>
   <object class="GtkListStore" id="sources-liststore">
