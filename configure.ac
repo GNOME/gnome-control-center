@@ -451,6 +451,8 @@ fi
 
 AC_CONFIG_FILES([
 Makefile
+data/Makefile
+data/icons/Makefile
 panels/Makefile
 panels/common/Makefile
 panels/background/Makefile

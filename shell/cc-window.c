@@ -43,7 +43,7 @@
 
 #define MOUSE_BACK_BUTTON 8
 
-#define DEFAULT_WINDOW_ICON_NAME "preferences-system"
+#define DEFAULT_WINDOW_ICON_NAME "gnome-control-center"
 
 struct _CcWindow
 {
