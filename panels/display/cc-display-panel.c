@@ -71,7 +71,6 @@ struct _CcDisplayPanelPrivate
   GtkSizeGroup *main_size_group;
   GtkSizeGroup *rows_size_group;
   GtkWidget *stack;
-  GtkWidget *dialog;
 
   CcNightLightDialog *night_light_dialog;
   GSettings *settings_color;
@@ -326,12 +325,6 @@ cc_display_panel_dispose (GObject *object)
   g_clear_object (&priv->settings_color);
   g_clear_object (&priv->night_light_dialog);
   g_clear_object (&priv->main_size_group);
-
-  if (priv->dialog)
-    {
-      gtk_widget_destroy (priv->dialog);
-      priv->dialog = NULL;
-    }
 
   g_cancellable_cancel (priv->shell_cancellable);
   g_clear_object (&priv->shell_cancellable);
@@ -672,60 +665,49 @@ make_list_box (void)
 }
 
 static GtkWidget *
-make_dialog (CcDisplayPanel *panel,
-             const gchar    *title)
+make_list_transparent (GtkWidget *listbox)
 {
-  GtkWidget *dialog;
+  GtkCssProvider *provider;
 
-  dialog = g_object_new (GTK_TYPE_DIALOG,
-                         "title", title,
-                         "transient-for", cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel))),
-                         "modal", TRUE,
-                         "use-header-bar", TRUE,
-                         "destroy-with-parent", TRUE,
-                         "resizable", FALSE,
-                         NULL);
-  g_signal_connect_object (dialog, "notify::has-toplevel-focus",
-                           G_CALLBACK (dialog_toplevel_focus_changed),
-                           panel, G_CONNECT_SWAPPED);
-  return dialog;
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider),
+                                   "list { border-style: none; background-color: transparent; }", -1, NULL);
+  gtk_style_context_add_provider (gtk_widget_get_style_context (listbox),
+                                  GTK_STYLE_PROVIDER (provider),
+                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  g_object_unref (provider);
+
+  return listbox;
 }
 
-static gboolean
-dialog_closed (GtkWidget      *dialog,
-               GdkEvent       *event,
-               CcDisplayPanel *panel)
+static GtkWidget *
+make_list_popover (GtkWidget *listbox)
 {
-  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *popover = g_object_new (GTK_TYPE_POPOVER,
+                                     "position", GTK_POS_BOTTOM,
+                                     NULL);
+  GtkWidget *sw = g_object_new (GTK_TYPE_SCROLLED_WINDOW,
+                                "hscrollbar-policy", GTK_POLICY_NEVER,
+                                "max-content-height", 300,
+                                "propagate-natural-height", TRUE,
+                                NULL);
+  gtk_container_add (GTK_CONTAINER (sw), make_list_transparent (listbox));
+  gtk_widget_show_all (sw);
 
-  if (priv->dialog == dialog)
-    {
-      gtk_widget_destroy (dialog);
-      priv->dialog = NULL;
-    }
-  else
-    g_warn_if_reached ();
-
-  return TRUE;
+  gtk_container_add (GTK_CONTAINER (popover), sw);
+  g_signal_connect_object (listbox, "row-activated", G_CALLBACK (gtk_widget_hide),
+                           popover, G_CONNECT_SWAPPED);
+  return popover;
 }
 
-static void
-show_dialog (CcDisplayPanel *panel,
-             GtkWidget      *dialog)
+static GtkWidget *
+make_popover_label (const gchar *text)
 {
-  CcDisplayPanelPrivate *priv = panel->priv;
-
-  if (!priv->dialog)
-    {
-      priv->dialog = dialog;
-      gtk_widget_show_all (dialog);
-      g_signal_connect_object (dialog, "delete-event", G_CALLBACK (dialog_closed),
-                               panel, 0);
-    }
-  else
-    {
-      gtk_widget_destroy (dialog);
-    }
+  return g_object_new (GTK_TYPE_LABEL,
+                       "label", text,
+                       "margin", 4,
+                       "halign", GTK_ALIGN_START,
+                       NULL);
 }
 
 static const gchar *
@@ -760,86 +742,62 @@ orientation_row_activated (CcDisplayPanel *panel,
   update_apply_button (panel);
 }
 
-static void
-orientation_row_rotation_changed (GtkListBoxRow    *row,
-                                  CcDisplayMonitor *output)
-{
-  GtkWidget *check = g_object_get_data (G_OBJECT (row), "check");
-  CcDisplayRotation rotation = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "rotation"));
-
-  if (cc_display_monitor_get_rotation (output) == rotation)
-    gtk_widget_set_opacity (check, 1.0);
-  else
-    gtk_widget_set_opacity (check, 0.0);
-}
-
-static void
-show_orientation_dialog (CcDisplayPanel *panel)
+static GtkWidget *
+make_orientation_popover (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GtkWidget *dialog, *listbox;
-  GtkSizeGroup *size_group;
+  GtkWidget *listbox;
   CcDisplayRotation rotations[] = { CC_DISPLAY_ROTATION_NONE,
                                     CC_DISPLAY_ROTATION_90,
                                     CC_DISPLAY_ROTATION_270,
                                     CC_DISPLAY_ROTATION_180 };
   guint i = 0;
 
-  dialog = make_dialog (panel, _("Orientation"));
   listbox = make_list_box ();
-  gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
-                     listbox);
 
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
   for (i = 0; i < G_N_ELEMENTS (rotations); ++i)
     {
       CcDisplayRotation rotation = rotations[i];
       if (cc_display_monitor_supports_rotation (priv->current_output, rotation))
         {
-          GtkWidget *row, *check;
+          GtkWidget *row;
 
-          check = gtk_image_new ();
-          gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
-          if (cc_display_monitor_get_rotation (priv->current_output) != rotation)
-            gtk_widget_set_opacity (check, 0.0);
-
-          row = make_row (size_group, gtk_label_new (string_for_rotation (rotation)), check);
-          g_object_set_data (G_OBJECT (row), "check", check);
+          row = g_object_new (CC_TYPE_LIST_BOX_ROW,
+                              "child", make_popover_label (string_for_rotation (rotation)),
+                              NULL);
           g_object_set_data (G_OBJECT (row), "rotation", GUINT_TO_POINTER (rotation));
 
           g_signal_connect_object (row, "activated", G_CALLBACK (orientation_row_activated),
                                    panel, G_CONNECT_SWAPPED);
-          g_signal_connect_object (priv->current_output, "rotation",
-                                   G_CALLBACK (orientation_row_rotation_changed),
-                                   row, G_CONNECT_SWAPPED);
-
           gtk_container_add (GTK_CONTAINER (listbox), row);
         }
     }
-  g_object_unref (size_group);
 
-  show_dialog (panel, dialog);
+  return make_list_popover (listbox);
 }
 
 static void
-orientation_label_rotation_changed (GtkLabel         *label,
-                                    CcDisplayMonitor *output)
+orientation_row_sync (GtkPopover       *popover,
+                      CcDisplayMonitor *output)
 {
-  gtk_label_set_text (label, string_for_rotation (cc_display_monitor_get_rotation (output)));
+  gtk_label_set_text (GTK_LABEL (gtk_popover_get_relative_to (popover)),
+                      string_for_rotation (cc_display_monitor_get_rotation (output)));
 }
 
 static GtkWidget *
 make_orientation_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
 {
-  GtkWidget *row, *label;
+  GtkWidget *row, *label, *popover;
 
   label = gtk_label_new (string_for_rotation (cc_display_monitor_get_rotation (output)));
+  popover = make_orientation_popover (panel);
+  gtk_popover_set_relative_to (GTK_POPOVER (popover), label);
 
   row = make_row (panel->priv->rows_size_group, gtk_label_new (_("Orientation")), label);
-  g_signal_connect_object (row, "activated", G_CALLBACK (show_orientation_dialog),
-                           panel, G_CONNECT_SWAPPED);
-  g_signal_connect_object (output, "rotation", G_CALLBACK (orientation_label_rotation_changed),
-                           label, G_CONNECT_SWAPPED);
+  g_signal_connect_object (row, "activated", G_CALLBACK (gtk_popover_popup),
+                           popover, G_CONNECT_SWAPPED);
+  g_signal_connect_object (output, "rotation", G_CALLBACK (orientation_row_sync),
+                           popover, G_CONNECT_SWAPPED);
   return row;
 }
 
@@ -854,87 +812,57 @@ resolution_row_activated (CcDisplayPanel *panel,
   update_apply_button (panel);
 }
 
-static void
-resolution_row_mode_changed (GtkListBoxRow    *row,
-                             CcDisplayMonitor *output)
-{
-  GtkWidget *check = g_object_get_data (G_OBJECT (row), "check");
-  CcDisplayMode *mode = g_object_get_data (G_OBJECT (row), "mode");
-
-  if (g_str_equal (get_resolution_string (cc_display_monitor_get_mode (output)),
-                   get_resolution_string (mode)))
-    gtk_widget_set_opacity (check, 1.0);
-  else
-    gtk_widget_set_opacity (check, 0.0);
-}
-
-static void
-show_resolution_dialog (CcDisplayPanel *panel)
+static GtkWidget *
+make_resolution_popover (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GtkWidget *dialog, *listbox, *sw;
-  GtkSizeGroup *size_group;
+  GtkWidget *listbox;
   GList *resolutions, *l;
 
   resolutions = g_object_get_data (G_OBJECT (priv->current_output), "res-list");
 
-  dialog = make_dialog (panel, _("Resolution"));
   listbox = make_list_box ();
-  sw = g_object_new (GTK_TYPE_SCROLLED_WINDOW,
-                     "hscrollbar-policy", GTK_POLICY_NEVER,
-                     "max-content-height", 450,
-                     "propagate-natural-height", TRUE,
-                     NULL);
-  gtk_container_add (GTK_CONTAINER (sw), listbox);
-  gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), sw);
 
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
   for (l = resolutions; l; l = l->next)
     {
       CcDisplayMode *mode = l->data;
-      GtkWidget *row, *check;
+      GtkWidget *row;
 
-      check = gtk_image_new ();
-      gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
-      if (!g_str_equal (get_resolution_string (cc_display_monitor_get_mode (priv->current_output)),
-                        get_resolution_string (mode)))
-        gtk_widget_set_opacity (check, 0.0);
-
-      row = make_row (size_group, gtk_label_new (get_resolution_string (mode)), check);
-      g_object_set_data (G_OBJECT (row), "check", check);
+      row = g_object_new (CC_TYPE_LIST_BOX_ROW,
+                          "child", make_popover_label (get_resolution_string (mode)),
+                          NULL);
       g_object_set_data (G_OBJECT (row), "mode", mode);
 
       g_signal_connect_object (row, "activated", G_CALLBACK (resolution_row_activated),
                                panel, G_CONNECT_SWAPPED);
-      g_signal_connect_object (priv->current_output, "mode",
-                               G_CALLBACK (resolution_row_mode_changed),
-                               row, G_CONNECT_SWAPPED);
       gtk_container_add (GTK_CONTAINER (listbox), row);
     }
-  g_object_unref (size_group);
 
-  show_dialog (panel, dialog);
+  return make_list_popover (listbox);
 }
 
 static void
-resolution_label_mode_changed (GtkLabel         *label,
-                               CcDisplayMonitor *output)
+resolution_row_sync (GtkPopover       *popover,
+                     CcDisplayMonitor *output)
 {
-  gtk_label_set_text (label, get_resolution_string (cc_display_monitor_get_mode (output)));
+  gtk_label_set_text (GTK_LABEL (gtk_popover_get_relative_to (popover)),
+                      get_resolution_string (cc_display_monitor_get_mode (output)));
 }
 
 static GtkWidget *
 make_resolution_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
 {
-  GtkWidget *row, *label;
+  GtkWidget *row, *label, *popover;
 
   label = gtk_label_new (get_resolution_string (cc_display_monitor_get_mode (output)));
+  popover = make_resolution_popover (panel);
+  gtk_popover_set_relative_to (GTK_POPOVER (popover), label);
 
   row = make_row (panel->priv->rows_size_group, gtk_label_new (_("Resolution")), label);
-  g_signal_connect_object (row, "activated", G_CALLBACK (show_resolution_dialog),
-                           panel, G_CONNECT_SWAPPED);
-  g_signal_connect_object (output, "mode", G_CALLBACK (resolution_label_mode_changed),
-                           label, G_CONNECT_SWAPPED);
+  g_signal_connect_object (row, "activated", G_CALLBACK (gtk_popover_popup),
+                           popover, G_CONNECT_SWAPPED);
+  g_signal_connect_object (output, "mode", G_CALLBACK (resolution_row_sync),
+                           popover, G_CONNECT_SWAPPED);
   return row;
 }
 
@@ -949,25 +877,11 @@ refresh_rate_row_activated (CcDisplayPanel *panel,
   update_apply_button (panel);
 }
 
-static void
-refresh_rate_row_mode_changed (GtkListBoxRow    *row,
-                               CcDisplayMonitor *output)
-{
-  GtkWidget *check = g_object_get_data (G_OBJECT (row), "check");
-  CcDisplayMode *mode = g_object_get_data (G_OBJECT (row), "mode");
-
-  if (cc_display_monitor_get_mode (output) == mode)
-    gtk_widget_set_opacity (check, 1.0);
-  else
-    gtk_widget_set_opacity (check, 0.0);
-}
-
-static void
-show_refresh_rate_dialog (CcDisplayPanel *panel)
+static GtkWidget *
+make_refresh_rate_popover (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GtkWidget *dialog, *listbox, *sw;
-  GtkSizeGroup *size_group;
+  GtkWidget *listbox;
   GHashTable *res_freqs;
   GList *freqs, *l;
 
@@ -975,48 +889,32 @@ show_refresh_rate_dialog (CcDisplayPanel *panel)
   freqs = g_hash_table_lookup (res_freqs,
                                get_resolution_string (cc_display_monitor_get_mode (priv->current_output)));
 
-  dialog = make_dialog (panel, _("Refresh Rate"));
   listbox = make_list_box ();
-  sw = g_object_new (GTK_TYPE_SCROLLED_WINDOW,
-                     "hscrollbar-policy", GTK_POLICY_NEVER,
-                     "max-content-height", 450,
-                     "propagate-natural-height", TRUE,
-                     NULL);
-  gtk_container_add (GTK_CONTAINER (sw), listbox);
-  gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), sw);
 
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
   for (l = freqs; l; l = l->next)
     {
       CcDisplayMode *mode = l->data;
-      GtkWidget *row, *check;
+      GtkWidget *row;
 
-      check = gtk_image_new ();
-      gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
-      if (cc_display_monitor_get_mode (priv->current_output) != mode)
-        gtk_widget_set_opacity (check, 0.0);
-
-      row = make_row (size_group, gtk_label_new (get_frequency_string (mode)), check);
-      g_object_set_data (G_OBJECT (row), "check", check);
+      row = g_object_new (CC_TYPE_LIST_BOX_ROW,
+                          "child", make_popover_label (get_frequency_string (mode)),
+                          NULL);
       g_object_set_data (G_OBJECT (row), "mode", mode);
 
       g_signal_connect_object (row, "activated", G_CALLBACK (refresh_rate_row_activated),
                                panel, G_CONNECT_SWAPPED);
-      g_signal_connect_object (priv->current_output, "mode",
-                               G_CALLBACK (refresh_rate_row_mode_changed),
-                               row, G_CONNECT_SWAPPED);
       gtk_container_add (GTK_CONTAINER (listbox), row);
     }
-  g_object_unref (size_group);
 
-  show_dialog (panel, dialog);
+  return make_list_popover (listbox);
 }
 
 static void
-refresh_rate_label_mode_changed (GtkLabel         *label,
-                                 CcDisplayMonitor *output)
+refresh_rate_row_sync (GtkPopover       *popover,
+                       CcDisplayMonitor *output)
 {
-  gtk_label_set_text (label, get_frequency_string (cc_display_monitor_get_mode (output)));
+  gtk_label_set_text (GTK_LABEL (gtk_popover_get_relative_to (popover)),
+                      get_frequency_string (cc_display_monitor_get_mode (output)));
 }
 
 static gboolean
@@ -1042,15 +940,17 @@ refresh_rate_row_sync_visibility (GtkWidget        *row,
 static GtkWidget *
 make_refresh_rate_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
 {
-  GtkWidget *row, *label;
+  GtkWidget *row, *label, *popover;
 
   label = gtk_label_new (get_frequency_string (cc_display_monitor_get_mode (output)));
+  popover = make_refresh_rate_popover (panel);
+  gtk_popover_set_relative_to (GTK_POPOVER (popover), label);
 
   row = make_row (panel->priv->rows_size_group, gtk_label_new (_("Refresh Rate")), label);
-  g_signal_connect_object (row, "activated", G_CALLBACK (show_refresh_rate_dialog),
-                           panel, G_CONNECT_SWAPPED);
-  g_signal_connect_object (output, "mode", G_CALLBACK (refresh_rate_label_mode_changed),
-                           label, G_CONNECT_SWAPPED);
+  g_signal_connect_object (row, "activated", G_CALLBACK (gtk_popover_popup),
+                           popover, G_CONNECT_SWAPPED);
+  g_signal_connect_object (output, "mode", G_CALLBACK (refresh_rate_row_sync),
+                           popover, G_CONNECT_SWAPPED);
 
   gtk_widget_show_all (row);
   gtk_widget_set_no_show_all (row, TRUE);
@@ -1398,11 +1298,13 @@ make_arrangement_row (CcDisplayPanel *panel)
 }
 
 static void
-primary_label_sync (GtkWidget       *label,
-                    CcDisplayConfig *config)
+primary_chooser_sync (GtkPopover      *popover,
+                      CcDisplayConfig *config)
 {
+  GtkWidget *label;
   GList *outputs, *l;
 
+  label = gtk_popover_get_relative_to (popover);
   outputs = cc_display_config_get_monitors (config);
   for (l = outputs; l; l = l->next)
     {
@@ -1426,80 +1328,53 @@ primary_chooser_row_activated (CcDisplayPanel *panel,
   update_apply_button (panel);
 }
 
-static void
-primary_chooser_row_primary_changed (GtkListBoxRow    *row,
-                                     CcDisplayMonitor *output)
-{
-  GtkWidget *check = g_object_get_data (G_OBJECT (row), "check");
-
-  if (cc_display_monitor_is_primary (output))
-    gtk_widget_set_opacity (check, 1.0);
-  else
-    gtk_widget_set_opacity (check, 0.0);
-}
-
-static void
-show_primary_chooser_dialog (CcDisplayPanel *panel)
+static GtkWidget *
+make_primary_chooser_popover (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GtkWidget *dialog, *listbox, *sw;
-  GtkSizeGroup *size_group;
+  GtkWidget *listbox;
   GList *outputs, *l;
 
   outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
 
-  dialog = make_dialog (panel, _("Primary Display"));
   listbox = make_list_box ();
-  sw = g_object_new (GTK_TYPE_SCROLLED_WINDOW,
-                     "hscrollbar-policy", GTK_POLICY_NEVER,
-                     "max-content-height", 450,
-                     "propagate-natural-height", TRUE,
-                     NULL);
-  gtk_container_add (GTK_CONTAINER (sw), listbox);
-  gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), sw);
 
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
   for (l = outputs; l; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
-      GtkWidget *row, *check;
+      GtkWidget *row;
       gchar *text;
 
-      check = gtk_image_new ();
-      gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
-      if (!cc_display_monitor_is_primary (output))
-        gtk_widget_set_opacity (check, 0.0);
-
       text = g_object_get_data (G_OBJECT (output), "ui-number-name");
-      row = make_row (size_group, gtk_label_new (text), check);
-      g_object_set_data (G_OBJECT (row), "check", check);
+      row = g_object_new (CC_TYPE_LIST_BOX_ROW,
+                          "child", make_popover_label (text),
+                          NULL);
       g_object_set_data (G_OBJECT (row), "output", output);
 
       g_signal_connect_object (row, "activated", G_CALLBACK (primary_chooser_row_activated),
                                panel, G_CONNECT_SWAPPED);
-      g_signal_connect_object (output, "primary",
-                               G_CALLBACK (primary_chooser_row_primary_changed),
-                               row, G_CONNECT_SWAPPED);
       gtk_container_add (GTK_CONTAINER (listbox), row);
     }
-  g_object_unref (size_group);
 
-  show_dialog (panel, dialog);
+  return make_list_popover (listbox);
 }
 
 static GtkWidget *
 make_primary_chooser_row (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GtkWidget *row, *label;
+  GtkWidget *row, *label, *popover;
 
   label = gtk_label_new (NULL);
+  popover = make_primary_chooser_popover (panel);
+  gtk_popover_set_relative_to (GTK_POPOVER (popover), label);
+
   row = make_row (priv->rows_size_group, gtk_label_new (_("Primary Display")), label);
-  g_signal_connect_object (row, "activated", G_CALLBACK (show_primary_chooser_dialog),
-                           panel, G_CONNECT_SWAPPED);
-  g_signal_connect_object (priv->current_config, "primary", G_CALLBACK (primary_label_sync),
-                           label, G_CONNECT_SWAPPED);
-  primary_label_sync (label, priv->current_config);
+  g_signal_connect_object (row, "activated", G_CALLBACK (gtk_popover_popup),
+                           popover, G_CONNECT_SWAPPED);
+  g_signal_connect_object (priv->current_config, "primary", G_CALLBACK (primary_chooser_sync),
+                           popover, G_CONNECT_SWAPPED);
+  primary_chooser_sync (GTK_POPOVER (popover), priv->current_config);
 
   return row;
 }
@@ -1738,67 +1613,50 @@ mirror_resolution_row_activated (CcDisplayPanel *panel,
   update_apply_button (panel);
 }
 
-static void
-show_mirror_resolution_dialog (CcDisplayPanel *panel)
+static GtkWidget *
+make_mirror_resolution_popover (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GtkWidget *dialog, *listbox, *sw;
-  GtkSizeGroup *size_group;
+  GtkWidget *listbox;
   GList *resolutions, *l;
 
   resolutions = g_object_get_data (G_OBJECT (priv->current_config), "mirror-res-list");
 
-  dialog = make_dialog (panel, _("Resolution"));
   listbox = make_list_box ();
-  sw = g_object_new (GTK_TYPE_SCROLLED_WINDOW,
-                     "hscrollbar-policy", GTK_POLICY_NEVER,
-                     "max-content-height", 450,
-                     "propagate-natural-height", TRUE,
-                     NULL);
-  gtk_container_add (GTK_CONTAINER (sw), listbox);
-  gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), sw);
 
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
   for (l = resolutions; l; l = l->next)
     {
       CcDisplayMode *mode = l->data;
-      GtkWidget *row, *check;
+      GtkWidget *row;
 
-      check = gtk_image_new ();
-      gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
-      if (!g_str_equal (get_resolution_string (cc_display_monitor_get_mode (priv->current_output)),
-                        get_resolution_string (mode)))
-        gtk_widget_set_opacity (check, 0.0);
-
-      row = make_row (size_group, gtk_label_new (get_resolution_string (mode)), check);
-      g_object_set_data (G_OBJECT (row), "check", check);
+      row = g_object_new (CC_TYPE_LIST_BOX_ROW,
+                          "child", make_popover_label (get_resolution_string (mode)),
+                          NULL);
       g_object_set_data (G_OBJECT (row), "mode", mode);
 
       g_signal_connect_object (row, "activated", G_CALLBACK (mirror_resolution_row_activated),
                                panel, G_CONNECT_SWAPPED);
-      g_signal_connect_object (priv->current_output, "mode",
-                               G_CALLBACK (resolution_row_mode_changed),
-                               row, G_CONNECT_SWAPPED);
       gtk_container_add (GTK_CONTAINER (listbox), row);
     }
-  g_object_unref (size_group);
 
-  show_dialog (panel, dialog);
+  return make_list_popover (listbox);
 }
 
 static GtkWidget *
 make_mirror_resolution_row (CcDisplayPanel   *panel,
                             CcDisplayMonitor *output)
 {
-  GtkWidget *row, *label;
+  GtkWidget *row, *label, *popover;
 
   label = gtk_label_new (get_resolution_string (cc_display_monitor_get_mode (output)));
+  popover = make_mirror_resolution_popover (panel);
+  gtk_popover_set_relative_to (GTK_POPOVER (popover), label);
 
   row = make_row (panel->priv->rows_size_group, gtk_label_new (_("Resolution")), label);
-  g_signal_connect_object (row, "activated", G_CALLBACK (show_mirror_resolution_dialog),
-                           panel, G_CONNECT_SWAPPED);
-  g_signal_connect_object (output, "mode", G_CALLBACK (resolution_label_mode_changed),
-                           label, G_CONNECT_SWAPPED);
+  g_signal_connect_object (row, "activated", G_CALLBACK (gtk_popover_popup),
+                           popover, G_CONNECT_SWAPPED);
+  g_signal_connect_object (output, "mode", G_CALLBACK (resolution_row_sync),
+                           popover, G_CONNECT_SWAPPED);
   return row;
 }
 
@@ -2084,7 +1942,6 @@ output_chooser_sync (GtkWidget      *button,
   GtkWidget *label = gtk_bin_get_child (GTK_BIN (button));
 
   gtk_label_set_text (GTK_LABEL (label), text);
-  gtk_widget_hide (GTK_WIDGET (gtk_menu_button_get_popover (GTK_MENU_BUTTON (button))));
 }
 
 static GtkWidget *
@@ -2096,21 +1953,18 @@ make_output_chooser_button (CcDisplayPanel *panel)
 
   outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
 
-  popover = gtk_popover_new (NULL);
   listbox = make_list_box ();
-  gtk_container_add (GTK_CONTAINER (popover), listbox);
 
   for (l = outputs; l; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
-      GtkWidget *row = g_object_new (CC_TYPE_LIST_BOX_ROW, NULL);
-      gchar *text = g_object_get_data (G_OBJECT (output), "ui-number-name");
-      GtkWidget *label = g_object_new (GTK_TYPE_LABEL,
-                                       "label", text,
-                                       "margin", 4,
-                                       "halign", GTK_ALIGN_START,
-                                       NULL);
-      gtk_container_add (GTK_CONTAINER (row), label);
+      GtkWidget *row;
+      gchar *text;
+
+      text = g_object_get_data (G_OBJECT (output), "ui-number-name");
+      row = g_object_new (CC_TYPE_LIST_BOX_ROW,
+                          "child", make_popover_label (text),
+                          NULL);
       g_object_set_data (G_OBJECT (row), "output", output);
 
       g_signal_connect_object (row, "activated", G_CALLBACK (output_chooser_row_activated),
@@ -2118,8 +1972,7 @@ make_output_chooser_button (CcDisplayPanel *panel)
       gtk_container_add (GTK_CONTAINER (listbox), row);
     }
 
-  gtk_widget_show_all (listbox);
-
+  popover = make_list_popover (listbox);
   button = gtk_menu_button_new ();
   gtk_container_add (GTK_CONTAINER (button), make_bold_label (NULL));
   gtk_menu_button_set_popover (GTK_MENU_BUTTON (button), popover);
@@ -2185,9 +2038,6 @@ on_screen_changed (CcDisplayPanel *panel)
   main_widget = gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "main");
   if (main_widget)
     gtk_widget_destroy (main_widget);
-
-  if (priv->dialog)
-    gtk_dialog_response (GTK_DIALOG (priv->dialog), GTK_RESPONSE_NONE);
 
   g_clear_object (&priv->current_config);
 
