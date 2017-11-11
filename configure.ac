@@ -563,7 +563,6 @@ po/Makefile.in
 libgd/Makefile
 search-provider/Makefile
 shell/appdata/Makefile
-shell/alt/Makefile
 shell/Makefile
 shell/gnome-control-center.desktop.in
 man/Makefile

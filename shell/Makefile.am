@@ -1,6 +1,6 @@
 include $(top_srcdir)/Makefile.decl
 
-SUBDIRS = appdata alt
+SUBDIRS = appdata
 
 AM_CPPFLAGS =					\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""\
@@ -11,7 +11,6 @@ AM_CPPFLAGS =					\
 	$(CHEESE_CFLAGS)			\
 	$(WACOM_PANEL_CFLAGS)			\
 	-I$(top_srcdir)/panels/common/		\
-	-I$(top_srcdir)/shell/alt		\
 	-I$(top_srcdir)/libgd
 
 all-local: check-local
@@ -23,8 +22,6 @@ libshell_la_SOURCES = \
 	cc-shell-model.h
 
 bin_PROGRAMS = gnome-control-center
-
-noinst_PROGRAMS = gnome-control-center-alt
 
 common_sources =				\
 	$(BUILT_SOURCES)			\
@@ -60,17 +57,7 @@ gnome_control_center_SOURCES =			\
 	cc-window.c				\
 	cc-window.h
 
-gnome_control_center_alt_SOURCES =		\
-	$(common_sources)
-
 gnome_control_center_LDFLAGS = -export-dynamic
-gnome_control_center_alt_LDFLAGS = -export-dynamic
-
-# Temporarily add the CC_ENABLE_ALT_CATEGORIES compile-time
-# flag to keep the current panels working.
-gnome_control_center_alt_CPPFLAGS = \
-	$(AM_CPPFLAGS)				\
-	-DCC_ENABLE_ALT_CATEGORIES
 
 gnome_control_center_LDADD =						\
 	libshell.la							\
@@ -109,10 +96,6 @@ endif
 if BUILD_BLUETOOTH
 gnome_control_center_LDADD += $(top_builddir)/panels/bluetooth/libbluetooth.la
 endif
-
-gnome_control_center_alt_LDADD = 					\
-	$(gnome_control_center_LDADD)					\
-	alt/libshell_alt.la
 
 # Because it is confusing and somewhat problematic to directly add and compile
 # cc-panel-loader.o by another directory (i.e. the shell search provider), we
@@ -167,7 +150,7 @@ CLEANFILES = $(BUILT_SOURCES) $(completion_DATA) $(servicefile_DATA)
 DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in
 
 TEST_PROGS += test-hostname
-noinst_PROGRAMS += test-hostname
+noinst_PROGRAMS = test-hostname
 test_hostname_SOURCES = hostname-helper.c hostname-helper.h test-hostname.c
 test_hostname_LDADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
 
