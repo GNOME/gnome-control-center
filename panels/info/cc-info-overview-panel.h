@@ -20,7 +20,7 @@
 #ifndef CC_INFO_OVERVIEWPANEL_H
 #define CC_INFO_OVERVIEWPANEL_H
 
-#include <gtk/gtk.h>
+#include <shell/cc-panel.h>
 
 G_BEGIN_DECLS
 

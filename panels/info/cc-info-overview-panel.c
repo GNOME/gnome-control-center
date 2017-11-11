@@ -21,7 +21,6 @@
 
 #include <config.h>
 
-#include "cc-info-panel.h"
 #include "cc-info-resources.h"
 #include "info-cleanup.h"
 
@@ -35,6 +34,8 @@
 #include <glibtop/mountlist.h>
 #include <glibtop/mem.h>
 #include <glibtop/sysinfo.h>
+
+#include <gdk/gdk.h>
 
 #ifdef GDK_WINDOWING_WAYLAND
 #include <gdk/gdkwayland.h>
@@ -936,6 +937,8 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
   CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  g_resources_register (cc_info_get_resource ());
 
   priv->graphics_data = get_graphics_data ();
 

@@ -515,7 +515,6 @@ panels/sound/data/icons/scalable/apps/Makefile
 panels/sound/data/icons/scalable/devices/Makefile
 panels/sound/data/sounds/Makefile
 panels/info/Makefile
-panels/info/gnome-info-panel.desktop.in
 panels/info/gnome-info-overview-panel.desktop.in
 panels/info/gnome-default-apps-panel.desktop.in
 panels/info/gnome-removable-media-panel.desktop.in
