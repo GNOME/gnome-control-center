@@ -132,9 +132,7 @@ parse_categories (GDesktopAppInfo *app)
 
 #define const_strv(s) ((const gchar* const*) s)
 
-  if (g_strv_contains (const_strv (split), "X-GNOME-AltHidden"))
-    retval = CC_CATEGORY_HIDDEN;
-  else if (g_strv_contains (const_strv (split), "X-GNOME-ConnectivitySettings"))
+  if (g_strv_contains (const_strv (split), "X-GNOME-ConnectivitySettings"))
     retval = CC_CATEGORY_CONNECTIVITY;
   else if (g_strv_contains (const_strv (split), "X-GNOME-PersonalizationSettings"))
     retval = CC_CATEGORY_PERSONALIZATION;
@@ -191,8 +189,7 @@ cc_panel_loader_fill_model (CcShellModel *model)
       /* Only add the panel when it is not hidden, e.g. the Details subpanels
        * that are only visible in the new Shell.
        */
-      if (category != CC_CATEGORY_HIDDEN)
-        cc_shell_model_add_item (model, category, G_APP_INFO (app), all_panels[i].name);
+      cc_shell_model_add_item (model, category, G_APP_INFO (app), all_panels[i].name);
     }
 }
 
