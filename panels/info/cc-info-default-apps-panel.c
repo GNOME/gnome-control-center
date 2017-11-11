@@ -21,7 +21,6 @@
 
 #include <config.h>
 
-#include "cc-info-panel.h"
 #include "cc-info-resources.h"
 #include "info-cleanup.h"
 
@@ -201,6 +200,8 @@ cc_info_default_apps_panel_class_init (CcInfoDefaultAppsPanelClass *klass)
 static void
 cc_info_default_apps_panel_init (CcInfoDefaultAppsPanel *self)
 {
+  g_resources_register (cc_info_get_resource ());
+
   gtk_widget_init_template (GTK_WIDGET (self));
 
   info_panel_setup_default_apps (self);

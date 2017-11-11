@@ -21,7 +21,6 @@
 
 #include <config.h>
 
-#include "cc-info-panel.h"
 #include "cc-info-resources.h"
 #include "info-cleanup.h"
 
@@ -618,6 +617,8 @@ cc_info_removable_media_panel_class_init (CcInfoRemovableMediaPanelClass *klass)
 static void
 cc_info_removable_media_panel_init (CcInfoRemovableMediaPanel *self)
 {
+  g_resources_register (cc_info_get_resource ());
+
   gtk_widget_init_template (GTK_WIDGET (self));
   self->media_settings = g_settings_new (MEDIA_HANDLING_SCHEMA);
 

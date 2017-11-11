@@ -17,19 +17,17 @@ BUILT_SOURCES =			\
 	cc-info-resources.c	\
 	cc-info-resources.h
 
-libinfo_la_SOURCES =		\
-	$(BUILT_SOURCES)	\
-	cc-info-panel.c		\
-	cc-info-panel.h		\
-	cc-info-overview-panel.c		\
-	cc-info-overview-panel.h		\
-	cc-info-default-apps-panel.c		\
-	cc-info-default-apps-panel.h		\
-	cc-info-removable-media-panel.c		\
-	cc-info-removable-media-panel.h		\
-	gsd-disk-space-helper.h	\
-	gsd-disk-space-helper.c	\
-	info-cleanup.h		\
+libinfo_la_SOURCES =			\
+	$(BUILT_SOURCES)		\
+	cc-info-overview-panel.c	\
+	cc-info-overview-panel.h	\
+	cc-info-default-apps-panel.c	\
+	cc-info-default-apps-panel.h	\
+	cc-info-removable-media-panel.c	\
+	cc-info-removable-media-panel.h	\
+	gsd-disk-space-helper.h		\
+	gsd-disk-space-helper.c		\
+	info-cleanup.h			\
 	info-cleanup.c
 
 libinfo_la_LIBADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
@@ -53,7 +51,6 @@ cc-info-resources.h: info.gresource.xml $(resource_files)
 
 desktopdir = $(datadir)/applications
 desktop_in_files = \
-		gnome-info-panel.desktop.in		\
 		gnome-info-overview-panel.desktop.in	\
 		gnome-default-apps-panel.desktop.in	\
 		gnome-removable-media-panel.desktop.in
