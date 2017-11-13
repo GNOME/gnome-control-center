@@ -331,8 +331,6 @@ static void
 cc_display_config_dbus_append_right (CcDisplayConfigDBus *self,
                                      CcDisplayLogicalMonitor *monitor);
 static void
-cc_display_config_dbus_ensure_gapless (CcDisplayConfigDBus *self);
-static void
 cc_display_config_dbus_make_linear (CcDisplayConfigDBus *self);
 
 
@@ -447,7 +445,6 @@ cc_display_monitor_dbus_set_active (CcDisplayMonitor *pself,
   else if (self->logical_monitor && !active)
     {
       cc_display_monitor_dbus_set_logical_monitor (self, NULL);
-      cc_display_config_dbus_ensure_gapless (self->config);
     }
 
   g_signal_emit_by_name (self, "active");
@@ -476,9 +473,6 @@ cc_display_monitor_dbus_set_rotation (CcDisplayMonitor *pself,
   if (self->logical_monitor->rotation != rotation)
     {
       self->logical_monitor->rotation = rotation;
-      /* See comment in ensure_gapless() for why we disregard the
-         existing layout here. */
-      cc_display_config_dbus_make_linear (self->config);
 
       g_signal_emit_by_name (self, "rotation");
     }
@@ -644,27 +638,12 @@ cc_display_monitor_dbus_set_mode (CcDisplayMonitor *pself,
 {
   CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
   CcDisplayMode *mode;
-  int w1, w2, h1, h2;
 
   g_return_if_fail (new_mode != NULL);
 
-  if (self->current_mode)
-    cc_display_mode_get_resolution (self->current_mode, &w1, &h1);
-  else
-    w1 = h1 = 0;
-
   mode = cc_display_monitor_dbus_get_closest_mode (self, CC_DISPLAY_MODE_DBUS (new_mode));
-  if (mode)
-    cc_display_mode_get_resolution (mode, &w2, &h2);
-  else
-    w2 = h2 = 0;
 
   self->current_mode = mode;
-
-  /* See comment in ensure_gapless() for why we disregard the
-     existing layout here. */
-  if (w1 != w2 || h1 != h2)
-    cc_display_config_dbus_make_linear (self->config);
 
   if (!cc_display_mode_dbus_is_supported_scale (mode, cc_display_monitor_get_scale (pself)))
     cc_display_monitor_set_scale (pself, cc_display_mode_get_preferred_scale (mode));
@@ -714,9 +693,6 @@ cc_display_monitor_dbus_set_scale (CcDisplayMonitor *pself,
   if (self->logical_monitor->scale != scale)
     {
       self->logical_monitor->scale = scale;
-      /* See comment in ensure_gapless() for why we disregard the
-         existing layout here. */
-      cc_display_config_dbus_make_linear (self->config);
 
       g_signal_emit_by_name (self, "scale");
     }
@@ -1553,28 +1529,6 @@ add_y_delta (gpointer d1, gpointer d2)
   m->y += delta;
 }
 
-static int
-logical_monitor_height (CcDisplayLogicalMonitor *lm)
-{
-  CcDisplayMonitorDBus *monitor;
-  CcDisplayModeDBus *mode;
-  GHashTableIter iter;
-  int height;
-
-  g_hash_table_iter_init (&iter, lm->monitors);
-  g_hash_table_iter_next (&iter, (void **) &monitor, NULL);
-  mode = CC_DISPLAY_MODE_DBUS (monitor->current_mode);
-  if (logical_monitor_is_rotated (lm))
-    height = mode ? mode->width : 0;
-  else
-    height = mode ? mode->height : 0;
-
-  if (monitor->config->layout_mode == CC_DISPLAY_LAYOUT_MODE_LOGICAL)
-    return round (height / lm->scale);
-  else
-    return height;
-}
-
 static void
 cc_display_config_dbus_ensure_non_offset_coords (CcDisplayConfigDBus *self)
 {
@@ -1622,49 +1576,6 @@ cc_display_config_dbus_append_right (CcDisplayConfigDBus *self,
   monitor->y = last->y;
 
   g_list_free (x_axis);
-}
-
-static void
-cc_display_config_dbus_ensure_gapless (CcDisplayConfigDBus *self)
-{
-  GList *x_axis, *y_axis, *l;
-
-  if (g_hash_table_size (self->logical_monitors) == 0)
-    return;
-
-  x_axis = g_hash_table_get_keys (self->logical_monitors);
-  x_axis = g_list_sort (x_axis, sort_x_axis);
-  y_axis = g_hash_table_get_keys (self->logical_monitors);
-  y_axis = g_list_sort (y_axis, sort_y_axis);
-
-  /* This might produce overlaps which will fail validation.
-     Unfortunately, automating this to avoid gaps and overlaps with
-     arbitrary rectangles is a hard problem and we'd probably not find
-     the layout the user wants anyway. We'll need a panel re-design
-     that allows manual layout adjustments after monitor operations
-     and before applying. */
-  for (l = x_axis; l != NULL && l->next != NULL; l = l->next)
-    {
-      CcDisplayLogicalMonitor *m = l->data;
-      CcDisplayLogicalMonitor *n = l->next->data;
-      int mx2 = m->x + logical_monitor_width (m);
-
-      if (n->x > mx2)
-        n->x = mx2;
-    }
-
-  for (l = y_axis; l != NULL && l->next != NULL; l = l->next)
-    {
-      CcDisplayLogicalMonitor *m = l->data;
-      CcDisplayLogicalMonitor *n = l->next->data;
-      int my2 = m->y + logical_monitor_height (m);
-
-      if (n->y > my2)
-        n->y = my2;
-    }
-
-  g_list_free (x_axis);
-  g_list_free (y_axis);
 }
 
 static void
