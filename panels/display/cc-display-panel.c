@@ -144,13 +144,13 @@ make_output_ui_name (CcDisplayMonitor *output)
 }
 
 static void
-ensure_output_numbers (CcDisplayConfig *config)
+ensure_output_numbers (CcDisplayPanel *self)
 {
   GList *outputs, *l;
   GList *sorted = NULL;
   gint n = 0;
 
-  outputs = cc_display_config_get_monitors (config);
+  outputs = cc_display_config_get_monitors (self->priv->current_config);
 
   for (l = outputs; l != NULL; l = l->next)
     {
@@ -165,15 +165,20 @@ ensure_output_numbers (CcDisplayConfig *config)
     {
       CcDisplayMonitor *output = l->data;
       gchar *ui_name = make_output_ui_name (output);
+      gboolean lid_is_closed = (cc_display_monitor_is_builtin (output) &&
+                                self->priv->lid_is_closed);
 
       g_object_set_data (G_OBJECT (output), "ui-number", GINT_TO_POINTER (++n));
       g_object_set_data_full (G_OBJECT (output), "ui-number-name",
                               g_strdup_printf ("%d\u2003%s", n, ui_name),
                               g_free);
       g_object_set_data_full (G_OBJECT (output), "ui-name", ui_name, g_free);
+
+      g_object_set_data (G_OBJECT (output), "lid-is-closed", GINT_TO_POINTER (lid_is_closed));
     }
 
-  g_object_set_data_full (G_OBJECT (config), "ui-sorted-outputs", sorted, (GDestroyNotify) g_list_free);
+  g_object_set_data_full (G_OBJECT (self->priv->current_config), "ui-sorted-outputs",
+                          sorted, (GDestroyNotify) g_list_free);
 }
 
 static void
@@ -1397,6 +1402,32 @@ make_arrangement_row (CcDisplayPanel *panel)
   return row;
 }
 
+static gboolean
+is_output_useful (CcDisplayMonitor *output)
+{
+  return (cc_display_monitor_is_active (output) &&
+          !g_object_get_data (G_OBJECT (output), "lid-is-closed"));
+}
+
+static guint
+count_useful_outputs (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GList *outputs, *l;
+  guint active = 0;
+
+  outputs = cc_display_config_get_monitors (priv->current_config);
+  for (l = outputs; l != NULL; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+      if (!is_output_useful (output))
+        continue;
+      else
+        active++;
+    }
+  return active;
+}
+
 static void
 primary_label_sync (GtkWidget       *label,
                     CcDisplayConfig *config)
@@ -1465,6 +1496,9 @@ show_primary_chooser_dialog (CcDisplayPanel *panel)
       GtkWidget *row, *check;
       gchar *text;
 
+      if (!is_output_useful (output))
+        continue;
+
       check = gtk_image_new ();
       gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
       if (!cc_display_monitor_is_primary (output))
@@ -1516,26 +1550,6 @@ replace_current_output_ui (GtkWidget      *frame,
   gtk_widget_show_all (frame);
 
   g_clear_object (&priv->rows_size_group);
-}
-
-static guint
-count_active_outputs (CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  GList *outputs, *l;
-  guint active = 0;
-
-  outputs = cc_display_config_get_monitors (priv->current_config);
-  for (l = outputs; l != NULL; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      if (!cc_display_monitor_is_active (output) ||
-          (cc_display_monitor_is_builtin (output) && priv->lid_is_closed))
-        continue;
-      else
-        active++;
-    }
-  return active;
 }
 
 static GtkWidget *
@@ -2015,7 +2029,7 @@ make_two_output_ui (CcDisplayPanel *panel)
 
   if (cc_display_config_is_cloning (priv->current_config) && show_mirror)
     gtk_stack_set_visible_child_name (GTK_STACK (stack), "mirror");
-  else if (count_active_outputs (panel) > 1)
+  else if (count_useful_outputs (panel) > 1)
     gtk_stack_set_visible_child_name (GTK_STACK (stack), "join");
   else
     gtk_stack_set_visible_child_name (GTK_STACK (stack), "single");
@@ -2052,7 +2066,7 @@ make_output_switch (CcDisplayPanel *panel)
                            button, G_CONNECT_SWAPPED);
   output_switch_sync (button, priv->current_output);
 
-  if ((count_active_outputs (panel) < 2 && cc_display_monitor_is_active (priv->current_output)) ||
+  if ((count_useful_outputs (panel) < 2 && cc_display_monitor_is_active (priv->current_output)) ||
       (cc_display_monitor_is_builtin (priv->current_output) && priv->lid_is_closed))
     gtk_widget_set_sensitive (button, FALSE);
 
@@ -2197,7 +2211,7 @@ on_screen_changed (CcDisplayPanel *panel)
 
   priv->current_config = current;
 
-  ensure_output_numbers (current);
+  ensure_output_numbers (panel);
   ensure_monitor_labels (panel);
 
   priv->current_output = NULL;
@@ -2206,8 +2220,7 @@ on_screen_changed (CcDisplayPanel *panel)
     {
       CcDisplayMonitor *output = l->data;
 
-      if (!cc_display_monitor_is_active (output) ||
-          (cc_display_monitor_is_builtin (output) && priv->lid_is_closed))
+      if (!is_output_useful (output))
         continue;
 
       priv->current_output = output;
@@ -2261,6 +2274,9 @@ get_total_size (CcDisplayPanel *self, int *total_w, int *total_h)
       CcDisplayMonitor *output = l->data;
       int w, h;
 
+      if (!is_output_useful (output))
+        continue;
+
       get_geometry (output, NULL, NULL, &w, &h);
 
       if (cc_display_config_is_layout_logical (self->priv->current_config))
@@ -2287,7 +2303,7 @@ compute_scale (CcDisplayPanel *self, FooScrollArea *area)
 
   get_total_size (self, &total_w, &total_h);
 
-  n_monitors = g_list_length (cc_display_config_get_monitors (self->priv->current_config));
+  n_monitors = count_useful_outputs (self);
 
   available_w = viewport.width - 2 * MARGIN - (n_monitors - 1) * SPACE;
   available_h = viewport.height - 2 * MARGIN - (n_monitors - 1) * SPACE;
@@ -2356,6 +2372,9 @@ list_edges (CcDisplayPanel *panel, GArray *edges)
   for (l = outputs; l != NULL; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
+
+      if (!is_output_useful (output))
+        continue;
 
       list_edges_for_output (output, edges, should_scale);
     }
@@ -2562,6 +2581,10 @@ output_overlaps (CcDisplayMonitor *output, CcDisplayPanel *panel)
   for (l = outputs; l != NULL; l = l->next)
     {
       CcDisplayMonitor *o = l->data;
+
+      if (!is_output_useful (o))
+        continue;
+
       if (o != output)
 	{
 	  GdkRectangle other_rect;
@@ -2584,6 +2607,10 @@ config_is_aligned (CcDisplayPanel *panel, GArray *edges)
   for (l = outputs; l != NULL; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
+
+      if (!is_output_useful (output))
+        continue;
+
       if (!output_is_aligned (output, edges))
         return FALSE;
 
@@ -2767,7 +2794,7 @@ on_output_event (FooScrollArea *area,
       return;
     }
 
-  n_monitors = g_list_length (cc_display_config_get_monitors (self->priv->current_config));
+  n_monitors = count_useful_outputs (self);
 
   /* If the mouse is inside the outputs, set the cursor to "you can move me".  See
    * on_canvas_event() for where we reset the cursor to the default if it
@@ -2929,8 +2956,7 @@ on_area_paint (FooScrollArea  *area,
       CcDisplayMonitor *output = list->data;
       GdkRectangle viewport;
 
-      if (!cc_display_monitor_is_active (output) ||
-          (cc_display_monitor_is_builtin (output) && self->priv->lid_is_closed))
+      if (!is_output_useful (output))
         continue;
 
       cairo_save (cr);
