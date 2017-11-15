@@ -650,6 +650,8 @@ make_frame (const gchar *title, const gchar *subtitle)
       if (subtitle)
         {
           label = gtk_label_new (subtitle);
+          gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+          gtk_label_set_xalign (GTK_LABEL (label), 0.0);
           gtk_widget_set_halign (label, GTK_ALIGN_START);
           gtk_container_add (GTK_CONTAINER (vbox), label);
           gtk_style_context_add_class (gtk_widget_get_style_context (label),
