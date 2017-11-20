@@ -833,6 +833,10 @@ add_location (CcPrivacyPanel *self)
                    w, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
+  g_signal_connect_object (priv->location_settings, "changed::" LOCATION_ENABLED,
+                           G_CALLBACK (update_location_label), self,
+                           G_CONNECT_SWAPPED);
+
   priv->location_app_switches = g_hash_table_new_full (g_str_hash,
                                                        g_str_equal,
                                                        g_free,
