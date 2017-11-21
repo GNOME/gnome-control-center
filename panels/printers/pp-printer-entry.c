@@ -227,6 +227,15 @@ sanitize_printer_model (gchar *printer_make_and_model)
   return g_strdup (printer_model);
 }
 
+static gboolean
+supply_level_is_empty (PpPrinterEntry *self)
+{
+    return !((self->inklevel->marker_levels != NULL) &&
+             (self->inklevel->marker_colors != NULL) &&
+             (self->inklevel->marker_names != NULL) &&
+             (self->inklevel->marker_types != NULL));
+}
+
 /* To tone down the colors in the supply level bar
  * we shade them by darkening the hue.
  *
@@ -267,8 +276,7 @@ supply_levels_draw_cb (GtkWidget      *widget,
 
   gtk_render_background (context, cr, 0, 0, width, height);
 
-  if (self->inklevel->marker_levels && self->inklevel->marker_colors &&
-      self->inklevel->marker_names && self->inklevel->marker_types)
+  if (!supply_level_is_empty (self))
     {
       GSList   *markers = NULL;
       GSList   *tmp_list = NULL;
@@ -694,6 +702,7 @@ pp_printer_entry_new (cups_dest_t  printer,
   PpPrinterEntry *self;
   cups_ptype_t    printer_type = 0;
   gboolean        is_accepting_jobs;
+  gboolean        ink_supply_is_empty;
   gchar          *instance;
   gchar          *printer_uri = NULL;
   gchar          *location = NULL;
@@ -935,6 +944,9 @@ pp_printer_entry_new (cups_dest_t  printer,
     }
 
   g_signal_connect (self->supply_drawing_area, "draw", G_CALLBACK (supply_levels_draw_cb), self);
+  ink_supply_is_empty = supply_level_is_empty (self);
+  gtk_widget_set_visible (GTK_WIDGET (self->printer_inklevel_label), !ink_supply_is_empty);
+  gtk_widget_set_visible (GTK_WIDGET (self->supply_frame), !ink_supply_is_empty);
 
   pp_printer_entry_update_jobs_count (self);
 
