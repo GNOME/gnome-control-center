@@ -16,19 +16,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
+
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
+
 #include "cc-background-grid-item.h"
 #include "cc-background-item.h"
 
 struct _CcBackgroundGridItem
 {
-  GtkFlowBoxChild            parent;
+  GtkFlowBoxChild       parent;
 
   /* data */
   CcBackgroundItem      *item;
-  GdkPixbuf *cached_pixbuf;
+  GdkPixbuf             *cached_pixbuf;
 };
-
 
 G_DEFINE_TYPE (CcBackgroundGridItem, cc_background_grid_item, GTK_TYPE_FLOW_BOX_CHILD)
 
@@ -40,9 +43,9 @@ G_DEFINE_TYPE (CcBackgroundGridItem, cc_background_grid_item, GTK_TYPE_FLOW_BOX_
 
 static void
 add_slideshow_emblem (GdkPixbuf *pixbuf,
-                      gint w,
-                      gint h,
-                      gint scale_factor)
+                      gint      w,
+                      gint      h,
+                      gint      scale_factor)
 {
   GdkPixbuf *slideshow_emblem;
   GIcon *icon = NULL;
@@ -52,8 +55,6 @@ add_slideshow_emblem (GdkPixbuf *pixbuf,
 
   int eh;
   int ew;
-  //int h;
-  //int w;
   int x;
   int y;
 
@@ -79,8 +80,6 @@ add_slideshow_emblem (GdkPixbuf *pixbuf,
     else {
       eh = gdk_pixbuf_get_height (slideshow_emblem);
       ew = gdk_pixbuf_get_width (slideshow_emblem);
-      //h = gdk_pixbuf_get_height (pixbuf);
-      //w = gdk_pixbuf_get_width (pixbuf);
       x = w - ew - 5;
       y = h - eh - 5;
 
@@ -93,16 +92,14 @@ add_slideshow_emblem (GdkPixbuf *pixbuf,
 }
 
 static gboolean
-on_gallery_item_draw (GtkWidget         *widget,
-                      cairo_t           *cr,
+on_gallery_item_draw (GtkWidget            *widget,
+                      cairo_t              *cr,
                       CcBackgroundGridItem *item)
 {
   GdkPixbuf *pixbuf = item->cached_pixbuf;
   GdkPixbuf *new_pixbuf;
   const gint space_width = gtk_widget_get_allocated_width (widget);
   const gint space_height = gtk_widget_get_allocated_height ( (widget));
-  //const gint pixbuf_width = gdk_pixbuf_get_width (pixbuf);
-  //const gint pixbuf_height = gdk_pixbuf_get_height (pixbuf);
   const gint scale_factor = gtk_widget_get_scale_factor (widget);
   gint new_width;
   gint new_height;
@@ -125,7 +122,6 @@ on_gallery_item_draw (GtkWidget         *widget,
     add_slideshow_emblem (new_pixbuf, (space_width + new_width) / 2, (space_height + new_height)/2, scale_factor);
   }
 
-
   gdk_cairo_set_source_pixbuf (cr,
                                new_pixbuf,
                                (space_width - new_width) / 2,
@@ -138,7 +134,8 @@ on_gallery_item_draw (GtkWidget         *widget,
 }
 
 GtkWidget*
-cc_background_grid_item_new (CcBackgroundItem *item, GdkPixbuf *pixbuf)
+cc_background_grid_item_new (CcBackgroundItem *item,
+                             GdkPixbuf        *pixbuf)
 {
 
   return g_object_new (CC_TYPE_BACKGROUND_GRID_ITEM,
@@ -153,7 +150,8 @@ CcBackgroundItem * cc_background_grid_item_get_ref (GtkWidget *widget)
   return self->item;
 }
 void
-cc_background_grid_item_set_ref (GtkWidget *widget, CcBackgroundItem *item)
+cc_background_grid_item_set_ref (GtkWidget        *widget,
+                                 CcBackgroundItem *item)
 {
   CcBackgroundGridItem *self = (CcBackgroundGridItem *) widget;
   self->item = item;
@@ -162,8 +160,6 @@ cc_background_grid_item_set_ref (GtkWidget *widget, CcBackgroundItem *item)
 static void
 cc_background_grid_item_finalize (GObject *object)
 {
-  //CcBackgroundGridItem *self = CC_BACKGROUND_GRID_ITEM (object);
-
   G_OBJECT_CLASS (cc_background_grid_item_parent_class)->finalize (object);
 
 }
@@ -171,14 +167,12 @@ cc_background_grid_item_finalize (GObject *object)
 static void
 cc_background_grid_item_dispose (GObject *object)
 {
-  //CcBackgroundGridItem *self = CC_BACKGROUND_GRID_ITEM (object);
-
   G_OBJECT_CLASS (cc_background_grid_item_parent_class)->dispose (object);
 }
 
 static void
-cc_background_grid_item_set_property (GObject *object,
-                                      guint         prop_id,
+cc_background_grid_item_set_property (GObject      *object,
+                                      guint        prop_id,
                                       const GValue *value,
                                       GParamSpec   *pspec)
 {
@@ -200,7 +194,7 @@ cc_background_grid_item_set_property (GObject *object,
 
 static void
 cc_background_grid_item_get_property (GObject    *object,
-                                      guint       prop_id,
+                                      guint      prop_id,
                                       GValue     *value,
                                       GParamSpec *pspec)
 {
@@ -226,7 +220,6 @@ static void
 cc_background_grid_item_class_init (CcBackgroundGridItemClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  //GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->finalize = cc_background_grid_item_finalize;
   object_class->dispose = cc_background_grid_item_dispose;
@@ -261,7 +254,7 @@ cc_background_grid_item_init (CcBackgroundGridItem *self)
   g_signal_connect (G_OBJECT (drawing), "draw",
                     G_CALLBACK (on_gallery_item_draw), self);
 
-  gtk_widget_set_size_request (self, 250, 200);
+  gtk_widget_set_size_request (GTK_WIDGET(self), 250, 200);
   gtk_widget_show (drawing);
   gtk_container_add (GTK_CONTAINER (self), drawing);
 }

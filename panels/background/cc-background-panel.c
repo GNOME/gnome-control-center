@@ -472,7 +472,6 @@ is_gnome_photos_installed ()
   return TRUE;
 }
 
-
 static GtkWidget *
 create_gallery_item (gpointer item,
                      gpointer user_data)
@@ -487,6 +486,7 @@ create_gallery_item (gpointer item,
 
   scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (panel));
 
+  /* Create a small cached pixbuf which is bigger then a gallery item */
   pixbuf = cc_background_item_get_frame_thumbnail (self,
                                                    panel->thumb_factory,
                                                    preview_width,

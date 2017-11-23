@@ -19,7 +19,10 @@
 #ifndef CC_BACKGROUND_GRID_ITEM_H
 #define CC_BACKGROUND_GRID_ITEM_H
 
+#include "config.h"
+
 #include <gtk/gtk.h>
+
 #include "cc-background-item.h"
 
 G_BEGIN_DECLS
