@@ -61,6 +61,7 @@ sources += gnome.compile_resources(
 
 deps = common_deps + [
   polkit_gobject_dep,
+  udisks2_dep,
   dependency('libgtop-2.0')
 ]
 
