@@ -36,6 +36,7 @@
 #include <glibtop/mountlist.h>
 #include <glibtop/mem.h>
 #include <glibtop/sysinfo.h>
+#include <udisks/udisks.h>
 
 #include <gdk/gdk.h>
 
@@ -81,9 +82,7 @@ typedef struct
 
   GCancellable   *cancellable;
 
-  /* Free space */
-  GList          *primary_mounts;
-  guint64         total_bytes;
+  UDisksClient   *client;
 
   GraphicsData   *graphics_data;
 } CcInfoOverviewPanelPrivate;
@@ -95,8 +94,6 @@ struct _CcInfoOverviewPanel
   /*< private >*/
  CcInfoOverviewPanelPrivate *priv;
 };
-
-static void get_primary_disc_info_start (CcInfoOverviewPanel *self);
 
 typedef struct
 {
@@ -486,111 +483,55 @@ get_os_type (void)
 }
 
 static void
-query_done (GFile               *file,
-            GAsyncResult        *res,
-            CcInfoOverviewPanel *self)
-{
-  CcInfoOverviewPanelPrivate *priv;
-  g_autoptr(GFileInfo) info = NULL;
-  g_autoptr(GError) error = NULL;
-
-  info = g_file_query_filesystem_info_finish (file, res, &error);
-  if (info != NULL)
-    {
-      priv = cc_info_overview_panel_get_instance_private (self);
-      priv->total_bytes += g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_FILESYSTEM_SIZE);
-    }
-  else
-    {
-      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-          return;
-      else
-        {
-          g_autofree char *path = NULL;
-          path = g_file_get_path (file);
-          g_warning ("Failed to get filesystem free space for '%s': %s", path, error->message);
-        }
-    }
-
-  /* And onto the next element */
-  get_primary_disc_info_start (self);
-}
-
-static void
-get_primary_disc_info_start (CcInfoOverviewPanel *self)
-{
-  GUnixMountEntry *mount;
-  g_autoptr(GFile) file = NULL;
-  CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
-
-  if (priv->primary_mounts == NULL)
-    {
-      g_autofree char *size = NULL;
-
-      size = g_format_size (priv->total_bytes);
-      gtk_label_set_text (GTK_LABEL (priv->disk_label), size);
-
-      return;
-    }
-
-  mount = priv->primary_mounts->data;
-  priv->primary_mounts = g_list_remove (priv->primary_mounts, mount);
-  file = g_file_new_for_path (g_unix_mount_get_mount_path (mount));
-  g_unix_mount_free (mount);
-
-  g_file_query_filesystem_info_async (file,
-                                      G_FILE_ATTRIBUTE_FILESYSTEM_SIZE,
-                                      0,
-                                      priv->cancellable,
-                                      (GAsyncReadyCallback) query_done,
-                                      self);
-}
-
-static void
 get_primary_disc_info (CcInfoOverviewPanel *self)
 {
-  GList *points;
-  GList *p;
-  GHashTable *hash;
-  CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
+  g_autoptr (GHashTable) added_drives = NULL;
+  CcInfoOverviewPanelPrivate *priv;
+  GDBusObjectManager *manager;
+  GList *objects, *l;
+  guint64 total_size;
 
-  hash = g_hash_table_new (g_str_hash, g_str_equal);
-  points = g_unix_mount_points_get (NULL);
+  priv = cc_info_overview_panel_get_instance_private (self);
+  total_size = 0;
 
-  /* If we do not have /etc/fstab around, try /etc/mtab */
-  if (points == NULL)
-    points = g_unix_mounts_get (NULL);
-
-  for (p = points; p != NULL; p = p->next)
+  if (!priv->client)
     {
-      GUnixMountEntry *mount = p->data;
-      const char *mount_path;
-      const char *device_path;
+      gtk_label_set_text (GTK_LABEL (priv->disk_label), "-");
+    }
 
-      mount_path = g_unix_mount_get_mount_path (mount);
-      device_path = g_unix_mount_get_device_path (mount);
+  manager = udisks_client_get_object_manager (priv->client);
+  objects = g_dbus_object_manager_get_objects (manager);
+  added_drives = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, NULL);
 
-      /* Do not count multiple mounts with same device_path, because it is
-       * probably something like btrfs subvolume. Use only the first one in
-       * order to count the real size. */
-      if (gsd_should_ignore_unix_mount (mount) ||
-          gsd_is_removable_mount (mount) ||
-          g_str_has_prefix (mount_path, "/media/") ||
-          g_str_has_prefix (mount_path, g_get_home_dir ()) ||
-          g_hash_table_lookup (hash, device_path) != NULL)
+  for (l = objects; l != NULL; l = l->next)
+    {
+      UDisksDrive *drive;
+      drive = udisks_object_peek_drive (UDISKS_OBJECT (l->data));
+
+      /* Skip removable devices */
+      if (drive == NULL ||
+          udisks_drive_get_removable (drive) ||
+          udisks_drive_get_ejectable (drive) ||
+          g_hash_table_contains (added_drives, udisks_drive_get_id (drive)))
         {
-          g_unix_mount_free (mount);
           continue;
         }
 
-      priv->primary_mounts = g_list_prepend (priv->primary_mounts, mount);
-      g_hash_table_insert (hash, (gpointer) device_path, (gpointer) device_path);
+      total_size += udisks_drive_get_size (drive);
+      g_hash_table_add (added_drives, (gpointer) udisks_drive_get_id (drive));
     }
-  g_list_free (points);
-  g_hash_table_destroy (hash);
 
-  priv->cancellable = g_cancellable_new ();
-  get_primary_disc_info_start (self);
+  if (total_size > 0)
+    {
+      g_autofree gchar *size = g_format_size (total_size);
+      gtk_label_set_text (GTK_LABEL (priv->disk_label), size);
+    }
+  else
+    {
+      gtk_label_set_text (GTK_LABEL (priv->disk_label), "-");
+    }
+
+  g_list_free_full (objects, g_object_unref);
 }
 
 static char *
@@ -852,8 +793,7 @@ cc_info_overview_panel_finalize (GObject *object)
       g_clear_object (&priv->cancellable);
     }
 
-  if (priv->primary_mounts)
-    g_list_free_full (priv->primary_mounts, (GDestroyNotify) g_unix_mount_free);
+  g_clear_object (&priv->client);
 
   g_free (priv->gnome_version);
   g_free (priv->gnome_date);
@@ -895,6 +835,7 @@ static void
 cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 {
   CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
+  GError *error = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -906,6 +847,15 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
     g_signal_connect (priv->updates_button, "clicked", G_CALLBACK (on_updates_button_clicked), self);
   else
     gtk_widget_destroy (priv->updates_button);
+
+  priv->client = udisks_client_new_sync (NULL, &error);
+
+  if (error != NULL)
+    {
+      g_warning ("Unable to get UDisks client: %s. Disk information will not be available.",
+                 error->message);
+      g_error_free (error);
+    }
 
   info_overview_panel_setup_overview (self);
   info_overview_panel_setup_virt (self);
