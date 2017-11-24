@@ -35,6 +35,7 @@
 
 #include "cc-display-config-manager-dbus.h"
 #include "cc-display-config.h"
+#include "cc-display-arrangement.h"
 #include "cc-night-light-dialog.h"
 #include "cc-display-resources.h"
 
@@ -1300,24 +1301,47 @@ monitor_output_changes (GtkWidget      *area,
     }
 }
 
+arrangement_notify_selected_ouptut_cb (CcDisplayPanel       *panel,
+				       GParamSpec           *pspec,
+				       CcDisplayArrangement *arr)
+{
+  CcDisplayMonitor *output = cc_display_arrangement_get_selected_output (arr);
+
+  if (output && output != panel->priv->current_output)
+    set_current_output (panel, output);
+}
+
+static void
+arrangement_update_selected_output (CcDisplayArrangement *arr,
+				    CcDisplayPanel       *panel)
+{
+  cc_display_arrangement_set_selected_output (arr, panel->priv->current_output);
+}
+
 static GtkWidget *
 make_arrangement_row (CcDisplayPanel *panel)
 {
-  GtkWidget *row, *area;
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *row;
+  CcDisplayArrangement *arr;
 
-  area = (GtkWidget *) foo_scroll_area_new ();
-  g_object_set_data (G_OBJECT (area), "panel", panel);
-  foo_scroll_area_set_min_size (FOO_SCROLL_AREA (area), 400, 150);
-  g_signal_connect (area, "paint",
-                    G_CALLBACK (on_area_paint), panel);
-  g_signal_connect (area, "viewport_changed",
-                    G_CALLBACK (on_viewport_changed), panel);
+  arr = cc_display_arrangement_new (priv->current_config);
+  cc_display_arrangement_set_selected_output (arr, panel->priv->current_output);
+  g_signal_connect_object (arr, "updated",
+			   G_CALLBACK (update_apply_button), panel,
+			   G_CONNECT_SWAPPED);
+  g_signal_connect_object (arr, "notify::selected-output",
+			   G_CALLBACK (arrangement_notify_selected_ouptut_cb), panel,
+			   G_CONNECT_SWAPPED);
+  g_signal_connect_object (panel, "current-output",
+			   G_CALLBACK (arrangement_update_selected_output), arr,
+			   G_CONNECT_SWAPPED);
 
-  monitor_output_changes (area, panel);
+  gtk_widget_set_size_request (GTK_WIDGET (arr), 400, 175);
 
   row = g_object_new (CC_TYPE_LIST_BOX_ROW, NULL);
   gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), FALSE);
-  gtk_container_add (GTK_CONTAINER (row), area);
+  gtk_container_add (GTK_CONTAINER (row), GTK_WIDGET (arr));
 
   return row;
 }
@@ -3287,6 +3311,7 @@ cc_display_panel_init (CcDisplayPanel *self)
 {
   CcDisplayPanelPrivate *priv;
   GSettings *settings;
+  g_autoptr (GtkCssProvider) provider = NULL;
   GtkWidget *bin;
 
   g_resources_register (cc_display_get_resource ());
@@ -3360,4 +3385,10 @@ cc_display_panel_init (CcDisplayPanel *self)
                                             sensor_proxy_vanished_cb,
                                             self,
                                             NULL);
+
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/display/display-arrangement.css");
+  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                             GTK_STYLE_PROVIDER (provider),
+                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
