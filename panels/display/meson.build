@@ -26,7 +26,6 @@ sources = files(
   'cc-display-config-manager.c',
   'cc-night-light-dialog.c',
   'cc-night-light-widget.c',
-  'scrollarea.c',
 )
 
 resource_data = files(
