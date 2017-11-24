@@ -124,6 +124,8 @@ on_area_paint (FooScrollArea  *area,
 static char *
 make_display_size_string (int width_mm,
                           int height_mm);
+static void
+reset_current_config (CcDisplayPanel *panel);
 
 static char *
 make_output_ui_name (CcDisplayMonitor *output)
@@ -1751,6 +1753,8 @@ two_output_visible_child_changed (CcDisplayPanel *panel,
   GtkWidget *bin;
   GList *children, *l;
 
+  reset_current_config (panel);
+
   children = gtk_container_get_children (GTK_CONTAINER (stack));
   for (l = children; l; l = l->next)
     {
@@ -2038,35 +2042,23 @@ make_multi_output_ui (CcDisplayPanel *panel)
 }
 
 static void
-on_screen_changed (CcDisplayPanel *panel)
+reset_current_config (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  CcDisplayConfig *current;
   GList *outputs, *l;
-  GtkWidget *main_widget;
-  guint n_outputs;
-
-  if (!priv->manager)
-    return;
-
-  reset_titlebar (panel);
-
-  main_widget = gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "main");
-  if (main_widget)
-    gtk_widget_destroy (main_widget);
+  CcDisplayConfig *current;
 
   g_clear_object (&priv->current_config);
+  priv->current_output = NULL;
 
   current = cc_display_config_manager_get_current (priv->manager);
   if (!current)
-    goto show_error;
+    return;
 
   priv->current_config = current;
 
   ensure_output_numbers (panel);
-  ensure_monitor_labels (panel);
 
-  priv->current_output = NULL;
   outputs = g_object_get_data (G_OBJECT (current), "ui-sorted-outputs");
   for (l = outputs; l; l = l->next)
     {
@@ -2078,10 +2070,36 @@ on_screen_changed (CcDisplayPanel *panel)
       priv->current_output = output;
       break;
     }
+}
+
+static void
+on_screen_changed (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWidget *main_widget;
+  GList *outputs;
+  guint n_outputs;
+
+  if (!priv->manager)
+    return;
+
+  reset_titlebar (panel);
+
+  main_widget = gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "main");
+  if (main_widget)
+    gtk_widget_destroy (main_widget);
+
+  reset_current_config (panel);
+
+  if (!priv->current_config)
+    goto show_error;
+
+  ensure_monitor_labels (panel);
 
   if (!priv->current_output)
     goto show_error;
 
+  outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
   n_outputs = g_list_length (outputs);
   if (priv->lid_is_closed)
     {
