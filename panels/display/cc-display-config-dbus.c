@@ -659,9 +659,18 @@ cc_display_monitor_dbus_set_position (CcDisplayMonitor *pself,
 
   if (self->logical_monitor)
     {
+      gboolean notify = FALSE;
+
+      if (self->logical_monitor->x != x || self->logical_monitor->y != y)
+        notify = TRUE;
+
       self->logical_monitor->x = x;
       self->logical_monitor->y = y;
+
+      if (notify)
+        g_signal_emit_by_name (self, "position-changed");
     }
+
 }
 
 static double
