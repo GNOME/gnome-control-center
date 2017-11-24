@@ -19,6 +19,7 @@ i18n.merge_file(
 
 sources = files(
   'cc-display-panel.c',
+  'cc-display-arrangement.c',
   'cc-display-config.c',
   'cc-display-config-dbus.c',
   'cc-display-config-manager-dbus.c',
