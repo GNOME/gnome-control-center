@@ -308,6 +308,7 @@ setup_model (CcWindow *shell)
       GIcon *icon;
       gchar *name, *description, *id, *symbolic_icon;
       const gchar *icon_name;
+      gchar **keywords;
 
       gtk_tree_model_get (model, &iter,
                           COL_CATEGORY, &category,
@@ -315,6 +316,7 @@ setup_model (CcWindow *shell)
                           COL_GICON, &icon,
                           COL_ID, &id,
                           COL_NAME, &name,
+                          COL_KEYWORDS, &keywords,
                           -1);
 
       icon_name = get_icon_name_from_g_icon (icon);
@@ -325,11 +327,13 @@ setup_model (CcWindow *shell)
                                id,
                                name,
                                description,
+                               keywords,
                                symbolic_icon);
 
       valid = gtk_tree_model_iter_next (model, &iter);
 
       g_clear_pointer (&symbolic_icon, g_free);
+      g_clear_pointer (&keywords, g_strfreev);
       g_clear_pointer (&description, g_free);
       g_clear_pointer (&name, g_free);
       g_clear_pointer (&id, g_free);
