@@ -18,6 +18,8 @@
  * Author: Georges Basile Stavracas Neto <gbsneto@gnome.org>
  */
 
+#include <string.h>
+
 #include "cc-panel-list.h"
 #include "cc-util.h"
 
@@ -29,6 +31,7 @@ typedef struct
   gchar           *id;
   gchar           *name;
   gchar           *description;
+  gchar          **keywords;
 } RowData;
 
 struct _CcPanelList
@@ -148,6 +151,7 @@ update_search (CcPanelList *self)
 static void
 row_data_free (RowData *data)
 {
+  g_strfreev (data->keywords);
   g_free (data->description);
   g_free (data->name);
   g_free (data->id);
@@ -159,6 +163,7 @@ row_data_new (CcPanelCategory  category,
               const gchar     *id,
               const gchar     *name,
               const gchar     *description,
+              gchar          **keywords,
               const gchar     *icon)
 {
   GtkWidget *label, *grid, *image;
@@ -170,6 +175,7 @@ row_data_new (CcPanelCategory  category,
   data->id = g_strdup (id);
   data->name = g_strdup (name);
   data->description = g_strdup (description);
+  data->keywords = g_strdupv (keywords);
 
   /* Setup the row */
   grid = g_object_new (GTK_TYPE_GRID,
@@ -229,7 +235,8 @@ filter_func (GtkListBoxRow *row,
   CcPanelList *self;
   RowData *data;
   gchar *search_text, *panel_text, *panel_description;
-  gboolean retval;
+  gboolean retval = FALSE;
+  gint i;
 
   self = CC_PANEL_LIST (user_data);
   data = g_object_get_data (G_OBJECT (row), "data");
@@ -251,7 +258,10 @@ filter_func (GtkListBoxRow *row,
    */
   gtk_widget_set_visible (data->description_label, self->view == CC_PANEL_LIST_SEARCH);
 
-  retval = g_strstr_len (panel_text, -1, search_text) != NULL ||
+  for (i = 0; !retval && data->keywords[i] != NULL; i++)
+      retval = (strstr (data->keywords[i], search_text) == data->keywords[i]);
+
+  retval = retval || g_strstr_len (panel_text, -1, search_text) != NULL ||
            g_strstr_len (panel_description, -1, search_text) != NULL;
 
   g_free (panel_text);
@@ -859,6 +869,7 @@ cc_panel_list_add_panel (CcPanelList     *self,
                          const gchar     *id,
                          const gchar     *title,
                          const gchar     *description,
+                         gchar          **keywords,
                          const gchar     *icon)
 {
   GtkWidget *listbox;
@@ -867,7 +878,7 @@ cc_panel_list_add_panel (CcPanelList     *self,
   g_return_if_fail (CC_IS_PANEL_LIST (self));
 
   /* Add the panel to the proper listbox */
-  data = row_data_new (category, id, title, description, icon);
+  data = row_data_new (category, id, title, description, keywords, icon);
 
   switch (category)
     {
@@ -887,7 +898,7 @@ cc_panel_list_add_panel (CcPanelList     *self,
   gtk_container_add (GTK_CONTAINER (listbox), data->row);
 
   /* And add to the search listbox too */
-  search_data = row_data_new (category, id, title, description, icon);
+  search_data = row_data_new (category, id, title, description, keywords, icon);
   gtk_container_add (GTK_CONTAINER (self->search_listbox), search_data->row);
 
   g_hash_table_insert (self->id_to_data, data->id, data);
