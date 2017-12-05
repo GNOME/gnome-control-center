@@ -46,6 +46,8 @@ UmCarouselItem  *um_carousel_find_item   (UmCarousel     *self,
 void             um_carousel_select_item (UmCarousel     *self,
                                           UmCarouselItem *item);
 
+guint            um_carousel_get_item_count (UmCarousel  *self);
+
 G_END_DECLS
 
 #endif /* UM_CAROUSEL_H */

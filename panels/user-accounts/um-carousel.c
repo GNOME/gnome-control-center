@@ -202,6 +202,15 @@ um_carousel_select_item (UmCarousel     *self,
         gchar *page_name;
         gboolean page_changed = TRUE;
 
+        /* Select first user if none is specified */
+        if (item == NULL)
+        {
+                if (self->children != NULL)
+                        item = self->children->data;
+                else
+                        return;
+        }
+
         if (self->selected_item != NULL)
         {
                 page_changed = (self->selected_item->page != item->page);
@@ -304,10 +313,6 @@ um_carousel_add (GtkContainer *container,
         gtk_widget_show_all (self->last_box);
 
         update_buttons_visibility (self);
-
-        /* If there's only one child, select it. */
-        if (self->children->next == NULL)
-                um_carousel_select_item_at_index (self, 0);
 }
 
 void
@@ -397,4 +402,10 @@ um_carousel_init (UmCarousel *self)
 
         g_signal_connect_swapped (self->stack, "size-allocate", G_CALLBACK (on_size_allocate), self);
         g_signal_connect_swapped (self->stack, "notify::transition-running", G_CALLBACK (on_transition_running), self);
+}
+
+guint
+um_carousel_get_item_count (UmCarousel *self)
+{
+        return g_list_length (self->children);
 }
