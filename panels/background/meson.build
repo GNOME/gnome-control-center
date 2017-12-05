@@ -74,6 +74,8 @@ sources = common_sources + files(
   'bg-pictures-source.c',
   'bg-source.c',
   'bg-wallpapers-source.c',
+  'cc-background-grid-item.c',
+  'cc-background-store.c',
   'cc-background-chooser-dialog.c',
   'cc-background-grilo-miner.c',
   'cc-background-item.c',

@@ -52,10 +52,12 @@ bg_source_calculate_thumbnail_dimensions (BgSource *source)
   priv->thumbnail_height = THUMBNAIL_HEIGHT;
   priv->thumbnail_width = THUMBNAIL_WIDTH;
 
-  if (priv->window == NULL)
-    return;
+  //if (priv->window == NULL)
+  //  return;
 
-  scale_factor = gtk_widget_get_scale_factor (priv->window);
+
+  //scale_factor = gtk_widget_get_scale_factor (priv->window);
+  scale_factor = 1;
   if (scale_factor > 1)
     {
       priv->thumbnail_height *= scale_factor;
@@ -173,6 +175,9 @@ bg_source_get_scale_factor (BgSource *source)
   g_return_val_if_fail (BG_IS_SOURCE (source), 1);
 
   priv = bg_source_get_instance_private (source);
+
+  return 1;
+  g_print("Error Here 2\n");
   return gtk_widget_get_scale_factor (priv->window);
 }
 
