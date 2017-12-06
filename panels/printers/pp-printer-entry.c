@@ -93,6 +93,7 @@ struct _PpPrinterEntryClass
 
   void (*printer_changed) (PpPrinterEntry *printer_entry);
   void (*printer_delete)  (PpPrinterEntry *printer_entry);
+  void (*printer_renamed) (PpPrinterEntry *printer_entry, const gchar *new_name);
 };
 
 G_DEFINE_TYPE (PpPrinterEntry, pp_printer_entry, GTK_TYPE_LIST_BOX_ROW)
@@ -106,6 +107,7 @@ enum {
 enum {
   IS_DEFAULT_PRINTER,
   PRINTER_DELETE,
+  PRINTER_RENAMED,
   LAST_SIGNAL,
 };
 
@@ -391,6 +393,16 @@ supply_levels_draw_cb (GtkWidget      *widget,
 }
 
 static void
+printer_renamed_cb (PpDetailsDialog *dialog,
+                    gchar           *new_name,
+                    gpointer         user_data)
+{
+ PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
+
+ g_signal_emit_by_name (self, "printer-renamed", new_name);
+}
+
+static void
 details_dialog_cb (GtkDialog *dialog,
                    gint       response_id,
                    gpointer   user_data)
@@ -424,6 +436,7 @@ on_show_printer_details_dialog (GtkButton      *button,
     self->is_authorized);
 
   g_signal_connect (self->pp_details_dialog, "response", G_CALLBACK (details_dialog_cb), self);
+  g_signal_connect (self->pp_details_dialog, "printer-renamed", G_CALLBACK (printer_renamed_cb), self);
   gtk_widget_show_all (GTK_WIDGET (self->pp_details_dialog));
 }
 
@@ -1066,4 +1079,13 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
                   G_STRUCT_OFFSET (PpPrinterEntryClass, printer_delete),
                   NULL, NULL, NULL,
                   G_TYPE_NONE, 0);
+
+  signals[PRINTER_RENAMED] =
+    g_signal_new ("printer-renamed",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (PpPrinterEntryClass, printer_renamed),
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE, 1,
+                  G_TYPE_STRING);
 }

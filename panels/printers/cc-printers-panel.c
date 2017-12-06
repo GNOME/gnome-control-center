@@ -102,6 +102,7 @@ struct _CcPrintersPanelPrivate
   gboolean  new_printer_on_network;
 
   gchar    *renamed_printer_name;
+  gchar    *old_printer_name;
   gchar    *deleted_printer_name;
 
   GHashTable *printer_entries;
@@ -213,6 +214,7 @@ cc_printers_panel_dispose (GObject *object)
   g_clear_pointer (&priv->new_printer_make_and_model, g_free);
 
   g_clear_pointer (&priv->renamed_printer_name, g_free);
+  g_clear_pointer (&priv->old_printer_name, g_free);
 
   if (priv->builder)
     {
@@ -732,6 +734,23 @@ on_printer_deleted (PpPrinterEntry *printer_entry,
 }
 
 static void
+on_printer_renamed (PpPrinterEntry *printer_entry,
+                    gchar          *new_name,
+                    gpointer        user_data)
+{
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanelPrivate *priv;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  g_object_get (printer_entry,
+                "printer-name",
+                &priv->old_printer_name,
+                NULL);
+  priv->renamed_printer_name = g_strdup (new_name);
+}
+
+static void
 on_printer_changed (PpPrinterEntry *printer_entry,
                     gpointer        user_data)
 {
@@ -765,6 +784,10 @@ add_printer_entry (CcPrintersPanel *self,
   g_signal_connect (printer_entry,
                     "printer-delete",
                     G_CALLBACK (on_printer_deleted),
+                    self);
+  g_signal_connect (printer_entry,
+                    "printer-renamed",
+                    G_CALLBACK (on_printer_renamed),
                     self);
 
   gtk_list_box_insert (GTK_LIST_BOX (content), GTK_WIDGET (printer_entry), -1);
@@ -801,6 +824,7 @@ actualize_printers_list_cb (GObject      *source_object,
   GtkWidget              *widget;
   PpCups                 *cups = PP_CUPS (source_object);
   PpCupsDests            *cups_dests;
+  gboolean                new_printer_available = FALSE;
   GError                 *error = NULL;
   int                     i;
 
@@ -832,9 +856,20 @@ actualize_printers_list_cb (GObject      *source_object,
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "content");
   gtk_container_foreach (GTK_CONTAINER (widget), (GtkCallback) gtk_widget_destroy, NULL);
+
+  for (i = 0; i < priv->num_dests; i++)
+    {
+      new_printer_available = g_strcmp0 (priv->dests[i].name, priv->renamed_printer_name) == 0;
+      if (new_printer_available)
+        break;
+    }
+
   for (i = 0; i < priv->num_dests; i++)
     {
       if (g_strcmp0 (priv->dests[i].name, priv->deleted_printer_name) == 0)
+          continue;
+
+      if (new_printer_available && g_strcmp0 (priv->dests[i].name, priv->old_printer_name) == 0)
           continue;
 
       add_printer_entry (self, priv->dests[i]);
@@ -1197,6 +1232,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->new_printer_on_network = FALSE;
 
   priv->renamed_printer_name = NULL;
+  priv->old_printer_name = NULL;
   priv->deleted_printer_name = NULL;
 
   priv->permission = NULL;

@@ -65,9 +65,19 @@ struct _PpDetailsDialog {
 struct _PpDetailsDialogClass
 {
   GtkDialogClass parent_class;
+
+  void (*printer_renamed) (PpDetailsDialog *details_dialog, const gchar *new_name);
 };
 
 G_DEFINE_TYPE (PpDetailsDialog, pp_details_dialog, GTK_TYPE_DIALOG)
+
+enum
+{
+  PRINTER_RENAMED,
+  LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = { 0 };
 
 static void
 on_printer_rename_cb (GObject      *source_object,
@@ -100,6 +110,8 @@ pp_details_dialog_response_cb (GtkDialog *dialog,
   if (g_strcmp0 (self->printer_name, new_name) != 0)
     {
       PpPrinter *printer = pp_printer_new (self->printer_name);
+
+      g_signal_emit_by_name (self, "printer-renamed", new_name);
 
       pp_printer_rename_async (printer,
                                new_name,
@@ -388,6 +400,14 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, select_ppd_in_dialog);
   gtk_widget_class_bind_template_callback (widget_class, select_ppd_manually);
   gtk_widget_class_bind_template_callback (widget_class, pp_details_dialog_response_cb);
+
+  signals[PRINTER_RENAMED] = g_signal_new ("printer-renamed",
+                                           G_TYPE_FROM_CLASS (klass),
+                                           G_SIGNAL_RUN_LAST,
+                                           G_STRUCT_OFFSET (PpDetailsDialogClass, printer_renamed),
+                                           NULL, NULL, NULL,
+                                           G_TYPE_NONE, 1,
+                                           G_TYPE_STRING);
 }
 
 PpDetailsDialog *
