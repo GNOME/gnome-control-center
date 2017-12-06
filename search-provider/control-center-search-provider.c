@@ -85,17 +85,26 @@ cc_search_provider_app_dispose (GObject *object)
 static void
 cc_search_provider_app_init (CcSearchProviderApp *self)
 {
-  self->model = cc_shell_model_new ();
-  cc_panel_loader_fill_model (self->model);
-
   self->search_provider = cc_search_provider_new ();
-
   g_application_set_inactivity_timeout (G_APPLICATION (self),
                                         INACTIVITY_TIMEOUT);
 
   /* HACK: get the inactivity timeout started */
   g_application_hold (G_APPLICATION (self));
   g_application_release (G_APPLICATION (self));
+}
+
+static void
+cc_search_provider_app_startup (GApplication *application)
+{
+  CcSearchProviderApp *self;
+
+  self = CC_SEARCH_PROVIDER_APP (application);
+
+  G_APPLICATION_CLASS (cc_search_provider_app_parent_class)->startup (application);
+
+  self->model = cc_shell_model_new ();
+  cc_panel_loader_fill_model (self->model);
 }
 
 static void
@@ -108,6 +117,7 @@ cc_search_provider_app_class_init (CcSearchProviderAppClass *klass)
 
   app_class->dbus_register = cc_search_provider_app_dbus_register;
   app_class->dbus_unregister = cc_search_provider_app_dbus_unregister;
+  app_class->startup = cc_search_provider_app_startup;
 }
 
 CcShellModel *
