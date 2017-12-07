@@ -25,6 +25,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+#include <gio/gio.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
@@ -60,6 +61,8 @@ struct _CcPasswordDialog
 
         ActUser            *user;
         ActUserPasswordMode password_mode;
+
+        GDBusProxy         *input_source_manager;
 
         gboolean            old_password_ok;
         gint                old_password_entry_timeout_id;
@@ -102,6 +105,26 @@ update_password_strength (CcPasswordDialog *self)
         }
 
         return strength_level;
+}
+
+static void
+shell_enable_password_mode (CcPasswordDialog *self,
+                            gboolean          enable)
+{
+        g_autoptr(GError) error = NULL;
+
+        if (!self->input_source_manager)
+                return;
+
+        g_dbus_proxy_call_sync (self->input_source_manager,
+                                "Set",
+                                g_variant_new_parsed ("('org.gnome.Shell.InputSourceManager', 'PasswordModeEnabled', %v)",
+                                                      g_variant_new_boolean (enable)),
+                                G_DBUS_CALL_FLAGS_NONE, -1,
+                                NULL, &error);
+
+        if (error)
+                g_critical ("Unable to set PasswordMode: %s", error->message);
 }
 
 static void
@@ -156,6 +179,7 @@ password_changed_cb (PasswdHandler    *handler,
         gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                                   "%s", secondary_text);
         gtk_dialog_run (GTK_DIALOG (dialog));
+        shell_enable_password_mode (self, FALSE);
         gtk_widget_destroy (dialog);
 }
 
@@ -480,6 +504,7 @@ cc_password_dialog_dispose (GObject *object)
         CcPasswordDialog *self = CC_PASSWORD_DIALOG (object);
 
         g_clear_object (&self->user);
+        g_clear_object (&self->input_source_manager);
 
         if (self->passwd_handler) {
                 passwd_destroy (self->passwd_handler);
@@ -559,6 +584,14 @@ cc_password_dialog_new (ActUser *user)
         gtk_entry_set_text (GTK_ENTRY (self->password_reminder_entry), "");
         gtk_widget_show_all (GTK_WIDGET (self->action_radio_box));
 
+        self->input_source_manager = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                                    G_DBUS_PROXY_FLAGS_NONE,
+                                                                    NULL,
+                                                                    "org.gnome.Shell.InputSourceManager",
+                                                                    "/org/gnome/Shell/InputSourceManager",
+                                                                    "org.freedesktop.DBus.Properties",
+                                                                    NULL, NULL);
+
         if (act_user_get_uid (self->user) == getuid ()) {
                 gboolean visible;
 
@@ -580,6 +613,8 @@ cc_password_dialog_new (ActUser *user)
                 gtk_widget_hide (GTK_WIDGET (self->old_password_entry));
                 self->old_password_ok = TRUE;
         }
+
+        shell_enable_password_mode (self, TRUE);
 
         if (self->old_password_ok == FALSE)
                 gtk_widget_grab_focus (GTK_WIDGET (self->old_password_entry));
