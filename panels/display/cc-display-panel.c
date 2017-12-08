@@ -2505,12 +2505,6 @@ cc_display_panel_init (CcDisplayPanel *self)
   self->priv->up_client = up_client_new ();
   if (up_client_get_lid_is_present (self->priv->up_client))
     {
-      /* Connect to the "changed" signal to track changes to "lid-is-closed"
-       * property. Connecting to "notify::lid-is-closed" would be preferable,
-       * but currently doesn't work as expected:
-       * https://bugs.freedesktop.org/show_bug.cgi?id=43001
-       */
-
       g_signal_connect (self->priv->up_client, "notify::lid-is-closed",
                         G_CALLBACK (cc_display_panel_up_client_changed), self);
       cc_display_panel_up_client_changed (self->priv->up_client, NULL, self);
