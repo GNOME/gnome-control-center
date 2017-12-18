@@ -870,6 +870,7 @@ struct _CcDisplayConfigDBus
   guint32 serial;
   gboolean supports_mirroring;
   gboolean supports_changing_layout_mode;
+  gboolean global_scale_required;
   CcDisplayLayoutMode layout_mode;
 
   GList *monitors;
@@ -1192,6 +1193,7 @@ cc_display_config_dbus_init (CcDisplayConfigDBus *self)
   self->serial = 0;
   self->supports_mirroring = TRUE;
   self->supports_changing_layout_mode = FALSE;
+  self->global_scale_required = FALSE;
   self->layout_mode = CC_DISPLAY_LAYOUT_MODE_LOGICAL;
   self->logical_monitors = g_hash_table_new (NULL, NULL);
 }
@@ -1245,6 +1247,21 @@ register_logical_monitor (CcDisplayConfigDBus *self,
 }
 
 static void
+apply_global_scale_requirement (CcDisplayConfigDBus *self,
+                                CcDisplayMonitor    *monitor)
+{
+  GList *l;
+  double scale = cc_display_monitor_get_scale (monitor);
+
+  for (l = self->monitors; l != NULL; l = l->next)
+    {
+      CcDisplayMonitor *m = l->data;
+      if (m != monitor)
+        cc_display_monitor_set_scale (m, scale);
+    }
+}
+
+static void
 construct_monitors (CcDisplayConfigDBus *self,
                     GVariantIter *monitors,
                     GVariantIter *logical_monitors)
@@ -1258,6 +1275,10 @@ construct_monitors (CcDisplayConfigDBus *self,
       monitor = cc_display_monitor_dbus_new (variant, self);
       self->monitors = g_list_prepend (self->monitors, monitor);
 
+      if (self->global_scale_required)
+        g_signal_connect_object (monitor, "scale",
+                                 G_CALLBACK (apply_global_scale_requirement),
+                                 self, G_CONNECT_SWAPPED);
       g_variant_unref (variant);
     }
 
@@ -1339,6 +1360,10 @@ cc_display_config_dbus_constructed (GObject *object)
       else if (g_str_equal (s, "supports-changing-layout-mode"))
         {
           g_variant_get (v, "b", &self->supports_changing_layout_mode);
+        }
+      else if (g_str_equal (s, "global-scale-required"))
+        {
+          g_variant_get (v, "b", &self->global_scale_required);
         }
       else if (g_str_equal (s, "layout-mode"))
         {
