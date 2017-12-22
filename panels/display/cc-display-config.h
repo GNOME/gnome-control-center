@@ -141,6 +141,8 @@ struct _CcDisplayConfigClass
 
 
 GList *cc_display_config_get_monitors (CcDisplayConfig *config);
+GList *cc_display_config_get_ui_sorted_monitors (CcDisplayConfig *config);
+int cc_display_config_count_useful_monitors (CcDisplayConfig *config);
 gboolean cc_display_config_is_applicable (CcDisplayConfig *config);
 gboolean cc_display_config_equal (CcDisplayConfig *config,
                                   CcDisplayConfig *other);
@@ -184,6 +186,13 @@ void cc_display_monitor_set_mode (CcDisplayMonitor *monitor,
                                   CcDisplayMode    *mode);
 void cc_display_monitor_set_position (CcDisplayMonitor *monitor,
                                       int x, int y);
+
+gboolean cc_display_monitor_is_useful (CcDisplayMonitor *monitor);
+gboolean cc_display_monitor_is_usable (CcDisplayMonitor *monitor);
+void cc_display_monitor_set_usable (CcDisplayMonitor *monitor, gboolean is_usable);
+int cc_display_monitor_get_ui_number (CcDisplayMonitor *monitor);
+const char * cc_display_monitor_get_ui_name (CcDisplayMonitor *monitor);
+const char * cc_display_monitor_get_ui_number_name (CcDisplayMonitor *monitor);
 
 void cc_display_mode_get_resolution (CcDisplayMode *mode,
                                      int *width,
