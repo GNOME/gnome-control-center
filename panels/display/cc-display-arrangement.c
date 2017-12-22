@@ -71,31 +71,6 @@ G_DEFINE_TYPE (CcDisplayArrangement, cc_display_arrangement, GTK_TYPE_DRAWING_AR
 
 static GParamSpec *props[PROP_LAST];
 
-static gboolean
-is_output_useful (CcDisplayMonitor *output)
-{
-  return (cc_display_monitor_is_active (output) &&
-          !g_object_get_data (G_OBJECT (output), "lid-is-closed"));
-}
-
-static guint
-count_useful_outputs (CcDisplayConfig *config)
-{
-  GList *outputs, *l;
-  guint active = 0;
-
-  outputs = cc_display_config_get_monitors (config);
-  for (l = outputs; l != NULL; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      if (!is_output_useful (output))
-        continue;
-      else
-        active++;
-    }
-  return active;
-}
-
 static void
 apply_rotation_to_geometry (CcDisplayMonitor *output,
 			    int *w,
@@ -167,7 +142,7 @@ get_bounding_box (CcDisplayConfig *config,
       CcDisplayMonitor *output = l->data;
       int x, y, w, h;
 
-      if (!is_output_useful (output))
+      if (!cc_display_monitor_is_useful (output))
         continue;
 
       get_scaled_geometry (config, output, &x, &y, &w, &h);
@@ -323,7 +298,7 @@ find_best_snapping (CcDisplayArrangement *arr,
       if (output == snap_output)
         continue;
 
-      if (!is_output_useful (output))
+      if (!cc_display_monitor_is_useful (output))
         continue;
 
       get_scaled_geometry (config, output, &_x1, &_y1, &_w, &_h);
@@ -430,7 +405,7 @@ cc_display_arrangement_find_monitor_at (CcDisplayArrangement *arr,
       CcDisplayMonitor *output = l->data;
       gint x1, y1, x2, y2;
 
-      if (!is_output_useful (output))
+      if (!cc_display_monitor_is_useful (output))
         continue;
 
       monitor_get_drawing_rect (arr, output, &x1, &y1, &x2, &y2);
@@ -474,7 +449,7 @@ static void
 cc_display_arrangement_set_config (CcDisplayArrangement *arr,
 				   CcDisplayConfig      *config)
 {
-  const gchar *signals[] = { "rotation", "mode", "primary", "active", "scale", "position-changed" };
+  const gchar *signals[] = { "rotation", "mode", "primary", "active", "scale", "position-changed", "is-usable" };
   GList *outputs, *l;
   guint i;
 
@@ -535,7 +510,7 @@ cc_display_arrangement_draw (GtkWidget *widget,
       gint w, h;
       gint num;
 
-      if (!is_output_useful (output))
+      if (!cc_display_monitor_is_useful (output))
         continue;
 
       gtk_style_context_save (context);
@@ -553,7 +528,7 @@ cc_display_arrangement_draw (GtkWidget *widget,
         gtk_style_context_add_class (context, "primary");
 
       /* Set in cc-display-panel.c */
-      num = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (output), "ui-number"));
+      num = cc_display_monitor_get_ui_number (output);
 
       monitor_get_drawing_rect (arr, output, &x1, &y1, &x2, &y2);
       w = x2 - x1;
@@ -662,7 +637,7 @@ cc_display_arrangement_button_press_event (GtkWidget      *widget,
 
   cc_display_arrangement_set_selected_output (arr, output);
 
-  if (count_useful_outputs (arr->config) > 1)
+  if (cc_display_config_count_useful_monitors (arr->config) > 1)
     {
       arr->drag_active = TRUE;
       arr->drag_anchor_x = event_x - mon_x;
@@ -710,7 +685,7 @@ cc_display_arrangement_motion_notify_event (GtkWidget      *widget,
 
   g_return_val_if_fail (arr->config, FALSE);
 
-  if (count_useful_outputs (arr->config) <= 1)
+  if (cc_display_config_count_useful_monitors (arr->config) <= 1)
     return FALSE;
 
   if (!arr->drag_active)
