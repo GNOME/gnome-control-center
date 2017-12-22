@@ -115,66 +115,8 @@ static void
 update_apply_button (CcDisplayPanel *panel);
 static void
 apply_current_configuration (CcDisplayPanel *self);
-static char *
-make_display_size_string (int width_mm,
-                          int height_mm);
 static void
 reset_current_config (CcDisplayPanel *panel);
-
-static char *
-make_output_ui_name (CcDisplayMonitor *output)
-{
-  int width_mm, height_mm;
-  char *size, *name;
-
-  cc_display_monitor_get_physical_size (output, &width_mm, &height_mm);
-  size = make_display_size_string (width_mm, height_mm);
-  if (size)
-    name = g_strdup_printf ("%s (%s)", cc_display_monitor_get_display_name (output), size);
-  else
-    name = g_strdup_printf ("%s", cc_display_monitor_get_display_name (output));
-
-  g_free (size);
-  return name;
-}
-
-static void
-ensure_output_numbers (CcDisplayPanel *self)
-{
-  GList *outputs, *l;
-  GList *sorted = NULL;
-  gint n = 0;
-
-  outputs = cc_display_config_get_monitors (self->priv->current_config);
-
-  for (l = outputs; l != NULL; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      if (cc_display_monitor_is_builtin (output))
-        sorted = g_list_prepend (sorted, output);
-      else
-        sorted = g_list_append (sorted, output);
-    }
-
-  for (l = sorted; l != NULL; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      gchar *ui_name = make_output_ui_name (output);
-      gboolean lid_is_closed = (cc_display_monitor_is_builtin (output) &&
-                                self->priv->lid_is_closed);
-
-      g_object_set_data (G_OBJECT (output), "ui-number", GINT_TO_POINTER (++n));
-      g_object_set_data_full (G_OBJECT (output), "ui-number-name",
-                              g_strdup_printf ("%d\u2003%s", n, ui_name),
-                              g_free);
-      g_object_set_data_full (G_OBJECT (output), "ui-name", ui_name, g_free);
-
-      g_object_set_data (G_OBJECT (output), "lid-is-closed", GINT_TO_POINTER (lid_is_closed));
-    }
-
-  g_object_set_data_full (G_OBJECT (self->priv->current_config), "ui-sorted-outputs",
-                          sorted, (GDestroyNotify) g_list_free);
-}
 
 static void
 monitor_labeler_hide (CcDisplayPanel *self)
@@ -201,7 +143,7 @@ monitor_labeler_show (CcDisplayPanel *self)
   if (!priv->shell_proxy || !priv->current_config)
     return;
 
-  outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
+  outputs = cc_display_config_get_ui_sorted_monitors (priv->current_config);
   if (!outputs)
     return;
 
@@ -215,7 +157,7 @@ monitor_labeler_show (CcDisplayPanel *self)
     {
       CcDisplayMonitor *output = l->data;
 
-      number = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (output), "ui-number"));
+      number = cc_display_monitor_get_ui_number (output);
       if (number == 0)
         continue;
 
@@ -1113,7 +1055,7 @@ make_single_output_ui (CcDisplayPanel *panel)
 
   vbox = make_main_vbox (priv->main_size_group);
 
-  frame = make_frame (g_object_get_data (G_OBJECT (priv->current_output), "ui-name"), NULL);
+  frame = make_frame (cc_display_monitor_get_ui_name (priv->current_output), NULL);
   gtk_container_add (GTK_CONTAINER (vbox), frame);
 
   gtk_container_add (GTK_CONTAINER (frame), make_output_ui (panel));
@@ -1170,32 +1112,6 @@ make_arrangement_row (CcDisplayPanel *panel)
   return row;
 }
 
-static gboolean
-is_output_useful (CcDisplayMonitor *output)
-{
-  return (cc_display_monitor_is_active (output) &&
-          !g_object_get_data (G_OBJECT (output), "lid-is-closed"));
-}
-
-static guint
-count_useful_outputs (CcDisplayPanel *panel)
-{
-  CcDisplayPanelPrivate *priv = panel->priv;
-  GList *outputs, *l;
-  guint active = 0;
-
-  outputs = cc_display_config_get_monitors (priv->current_config);
-  for (l = outputs; l != NULL; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      if (!is_output_useful (output))
-        continue;
-      else
-        active++;
-    }
-  return active;
-}
-
 static void
 primary_chooser_sync (GtkPopover      *popover,
                       CcDisplayConfig *config)
@@ -1210,7 +1126,7 @@ primary_chooser_sync (GtkPopover      *popover,
       CcDisplayMonitor *output = l->data;
       if (cc_display_monitor_is_primary (output))
         {
-          gchar *text = g_object_get_data (G_OBJECT (output), "ui-number-name");
+          const gchar *text = cc_display_monitor_get_ui_number_name (output);
           gtk_label_set_text (GTK_LABEL (label), text);
           return;
         }
@@ -1234,7 +1150,7 @@ make_primary_chooser_popover (CcDisplayPanel *panel)
   GtkWidget *listbox;
   GList *outputs, *l;
 
-  outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
+  outputs = cc_display_config_get_ui_sorted_monitors (priv->current_config);
 
   listbox = make_list_box ();
   g_object_set (listbox, "margin", 12, NULL);
@@ -1243,12 +1159,12 @@ make_primary_chooser_popover (CcDisplayPanel *panel)
     {
       CcDisplayMonitor *output = l->data;
       GtkWidget *row;
-      gchar *text;
+      const gchar *text;
 
-      if (!is_output_useful (output))
+      if (!cc_display_monitor_is_useful (output))
         continue;
 
-      text = g_object_get_data (G_OBJECT (output), "ui-number-name");
+      text = cc_display_monitor_get_ui_number_name (output);
       row = g_object_new (CC_TYPE_LIST_BOX_ROW,
                           "child", make_popover_label (text),
                           NULL);
@@ -1350,7 +1266,7 @@ make_two_output_chooser (CcDisplayPanel *panel)
   GtkRadioButton *group;
   GList *outputs, *l;
 
-  outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
+  outputs = cc_display_config_get_ui_sorted_monitors (priv->current_config);
 
   box = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (box), GTK_BUTTONBOX_EXPAND);
@@ -1362,7 +1278,7 @@ make_two_output_chooser (CcDisplayPanel *panel)
       CcDisplayMonitor *output = l->data;
       GtkWidget *button = gtk_radio_button_new_from_widget (group);
 
-      gtk_button_set_label (GTK_BUTTON (button), g_object_get_data (G_OBJECT (output), "ui-name"));
+      gtk_button_set_label (GTK_BUTTON (button), cc_display_monitor_get_ui_name (output));
       gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (button), FALSE);
 
       g_object_set_data (G_OBJECT (button), "output", output);
@@ -1759,7 +1675,7 @@ make_two_output_ui (CcDisplayPanel *panel)
 
   if (cc_display_config_is_cloning (priv->current_config) && show_mirror)
     gtk_stack_set_visible_child_name (GTK_STACK (stack), "mirror");
-  else if (count_useful_outputs (panel) > 1)
+  else if (cc_display_config_count_useful_monitors (priv->current_config) > 1)
     gtk_stack_set_visible_child_name (GTK_STACK (stack), "join");
   else
     gtk_stack_set_visible_child_name (GTK_STACK (stack), "single");
@@ -1796,8 +1712,8 @@ make_output_switch (CcDisplayPanel *panel)
                            button, G_CONNECT_SWAPPED);
   output_switch_sync (button, priv->current_output);
 
-  if ((count_useful_outputs (panel) < 2 && cc_display_monitor_is_active (priv->current_output)) ||
-      (cc_display_monitor_is_builtin (priv->current_output) && priv->lid_is_closed))
+  if ((cc_display_config_count_useful_monitors (priv->current_config) < 2 && cc_display_monitor_is_active (priv->current_output)) ||
+      !cc_display_monitor_is_usable (priv->current_output))
     gtk_widget_set_sensitive (button, FALSE);
 
   return button;
@@ -1824,7 +1740,7 @@ static void
 output_chooser_sync (GtkWidget      *button,
                      CcDisplayPanel *panel)
 {
-  gchar *text = g_object_get_data (G_OBJECT (panel->priv->current_output), "ui-number-name");
+  const gchar *text = cc_display_monitor_get_ui_number_name (panel->priv->current_output);
   GtkWidget *label = gtk_bin_get_child (GTK_BIN (button));
 
   gtk_label_set_text (GTK_LABEL (label), text);
@@ -1837,7 +1753,7 @@ make_output_chooser_button (CcDisplayPanel *panel)
   GtkWidget *listbox, *button, *popover;
   GList *outputs, *l;
 
-  outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
+  outputs = cc_display_config_get_ui_sorted_monitors (priv->current_config);
 
   listbox = make_list_box ();
 
@@ -1845,9 +1761,9 @@ make_output_chooser_button (CcDisplayPanel *panel)
     {
       CcDisplayMonitor *output = l->data;
       GtkWidget *row;
-      gchar *text;
+      const gchar *text;
 
-      text = g_object_get_data (G_OBJECT (output), "ui-number-name");
+      text = cc_display_monitor_get_ui_number_name (output);
       row = g_object_new (CC_TYPE_LIST_BOX_ROW,
                           "child", make_popover_label (text),
                           NULL);
@@ -1923,14 +1839,16 @@ reset_current_config (CcDisplayPanel *panel)
 
   priv->current_config = current;
 
-  ensure_output_numbers (panel);
-
-  outputs = g_object_get_data (G_OBJECT (current), "ui-sorted-outputs");
+  outputs = cc_display_config_get_ui_sorted_monitors (priv->current_config);
   for (l = outputs; l; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
 
-      if (!is_output_useful (output))
+      /* Mark any builtin monitor as unusable if the lid is closed. */
+      if (cc_display_monitor_is_builtin (output) && priv->lid_is_closed)
+        cc_display_monitor_set_usable (output, FALSE);
+
+      if (!cc_display_monitor_is_useful (output))
         continue;
 
       priv->current_output = output;
@@ -1965,7 +1883,7 @@ on_screen_changed (CcDisplayPanel *panel)
   if (!priv->current_output)
     goto show_error;
 
-  outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
+  outputs = cc_display_config_get_ui_sorted_monitors (priv->current_config);
   n_outputs = g_list_length (outputs);
   if (priv->lid_is_closed)
     {
@@ -2195,45 +2113,6 @@ get_frequency_string (CcDisplayMode *mode)
 
   g_object_set_data_full (G_OBJECT (mode), "frequency", frequency, g_free);
   return frequency;
-}
-
-static const double known_diagonals[] = {
-    12.1,
-    13.3,
-    15.6
-};
-
-static char *
-diagonal_to_str (double d)
-{
-    int i;
-
-    for (i = 0; i < G_N_ELEMENTS (known_diagonals); i++)
-    {
-        double delta;
-
-        delta = fabs(known_diagonals[i] - d);
-        if (delta < 0.1)
-            return g_strdup_printf ("%0.1lf\"", known_diagonals[i]);
-    }
-
-    return g_strdup_printf ("%d\"", (int) (d + 0.5));
-}
-
-static char *
-make_display_size_string (int width_mm,
-                          int height_mm)
-{
-  char *inches = NULL;
-
-  if (width_mm > 0 && height_mm > 0)
-    {
-      double d = sqrt (width_mm * width_mm + height_mm * height_mm);
-
-      inches = diagonal_to_str (d / 25.4);
-    }
-
-  return inches;
 }
 
 static gboolean
