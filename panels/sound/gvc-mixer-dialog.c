@@ -1784,9 +1784,13 @@ gvc_mixer_dialog_constructor (GType                  type,
         /* Applications */
         self->applications_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
         gtk_container_set_border_width (GTK_CONTAINER (self->applications_box), 12);
+        gtk_widget_set_margin_end (self->applications_box, 10);
         label = gtk_label_new (_("Applications"));
+
+        box = gtk_scrolled_window_new (NULL, NULL);
+        gtk_container_add (GTK_CONTAINER (box), self->applications_box);
         gtk_notebook_append_page (GTK_NOTEBOOK (self->notebook),
-                                  self->applications_box,
+                                  box,
                                   label);
         self->no_apps_label = gtk_label_new (_("No application is currently playing or recording audio."));
         gtk_box_pack_start (GTK_BOX (self->applications_box),
