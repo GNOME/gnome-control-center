@@ -18,30 +18,21 @@ i18n.merge_file(
 )
 
 image_data = files(
-  'data/faces/astronaut.jpg',
-  'data/faces/baseball.png',
-  'data/faces/butterfly.png',
-  'data/faces/cat-eye.jpg',
-  'data/faces/chess.jpg',
+  'data/faces/bicycle.jpg',
+  'data/faces/book.jpg',
+  'data/faces/calculator.jpg',
+  'data/faces/cat.jpg',
   'data/faces/coffee.jpg',
-  'data/faces/dice.jpg',
-  'data/faces/energy-arc.jpg',
-  'data/faces/fish.jpg',
-  'data/faces/flake.jpg',
   'data/faces/flower.jpg',
-  'data/faces/grapes.jpg',
+  'data/faces/gamepad.jpg',
   'data/faces/guitar.jpg',
-  'data/faces/launch.jpg',
-  'data/faces/leaf.jpg',
-  'data/faces/lightning.jpg',
-  'data/faces/penguin.jpg',
-  'data/faces/puppy.jpg',
-  'data/faces/sky.jpg',
-  'data/faces/soccerball.png',
-  'data/faces/sunflower.jpg',
-  'data/faces/sunset.jpg',
-  'data/faces/tennis-ball.png',
-  'data/faces/yellow-rose.jpg'
+  'data/faces/headphones.jpg',
+  'data/faces/hummingbird.jpg',
+  'data/faces/mountain.jpg',
+  'data/faces/plane.jpg',
+  'data/faces/surfer.jpg',
+  'data/faces/tomatoes.jpg',
+  'data/faces/tree.jpg',
 )
 
 install_data(
