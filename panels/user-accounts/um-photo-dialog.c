@@ -39,7 +39,8 @@
 #include "cc-crop-area.h"
 #include "um-utils.h"
 
-#define ROW_SPAN 6
+#define ROW_SPAN 5
+#define AVATAR_PIXEL_SIZE 72
 
 struct _UmPhotoDialog {
         GtkWidget *photo_popup;
@@ -361,6 +362,7 @@ menu_item_for_filename (UmPhotoDialog *um,
         icon = g_file_icon_new (file);
         g_object_unref (file);
         image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
+        gtk_image_set_pixel_size (GTK_IMAGE (image), AVATAR_PIXEL_SIZE);
         g_object_unref (icon);
 
         menuitem = gtk_menu_item_new ();
