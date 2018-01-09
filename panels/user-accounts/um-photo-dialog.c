@@ -58,6 +58,8 @@ struct _UmPhotoDialog {
         ActUser *user;
 };
 
+G_DEFINE_TYPE (UmPhotoDialog, um_photo_dialog, GTK_TYPE_POPOVER)
+
 static void
 crop_dialog_response (GtkWidget     *dialog,
                       gint           response_id,
@@ -591,21 +593,31 @@ um_photo_dialog_new (GtkWidget *button)
         return um;
 }
 
-void
-um_photo_dialog_free (UmPhotoDialog *um)
+static void
+um_photo_dialog_dispose (GObject *object)
 {
-        gtk_widget_destroy (um->photo_popup);
+        UmPhotoDialog *um = UM_PHOTO_DIALOG (object);
 
-        if (um->thumb_factory)
-                g_object_unref (um->thumb_factory);
+        g_clear_object (&um->thumb_factory);
 #ifdef HAVE_CHEESE
-        if (um->monitor)
-                g_object_unref (um->monitor);
+        g_clear_object (&um->monitor);
 #endif
-        if (um->user)
-                g_object_unref (um->user);
+        g_clear_object (&um->user);
 
-        g_free (um);
+        G_OBJECT_CLASS (um_photo_dialog_parent_class)->dispose (object);
+}
+
+static void
+um_photo_dialog_init (UmPhotoDialog *um)
+{
+}
+
+static void
+um_photo_dialog_class_init (UmPhotoDialogClass *klass)
+{
+        GObjectClass *oclass = G_OBJECT_CLASS (klass);
+
+        oclass->dispose = um_photo_dialog_dispose;
 }
 
 static void
