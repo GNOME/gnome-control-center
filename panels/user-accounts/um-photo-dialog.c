@@ -571,7 +571,7 @@ um_photo_dialog_new (GtkWidget *button)
 {
         UmPhotoDialog *um;
 
-        um = g_new0 (UmPhotoDialog, 1);
+        um = g_object_new (UM_TYPE_PHOTO_DIALOG, NULL);
 
         um->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
@@ -610,12 +610,16 @@ um_photo_dialog_dispose (GObject *object)
 static void
 um_photo_dialog_init (UmPhotoDialog *um)
 {
+        gtk_widget_init_template (GTK_WIDGET (um));
 }
 
 static void
 um_photo_dialog_class_init (UmPhotoDialogClass *klass)
 {
-        GObjectClass *oclass = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
+        GObjectClass   *oclass = G_OBJECT_CLASS (klass);
+
+        gtk_widget_class_set_template_from_resource (wclass, "/org/gnome/control-center/user-accounts/avatar-chooser.ui");
 
         oclass->dispose = um_photo_dialog_dispose;
 }
