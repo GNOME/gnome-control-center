@@ -1498,10 +1498,6 @@ cc_user_panel_dispose (GObject *object)
                 um_password_dialog_free (priv->password_dialog);
                 priv->password_dialog = NULL;
         }
-        if (priv->photo_dialog) {
-                um_photo_dialog_free (priv->photo_dialog);
-                priv->photo_dialog = NULL;
-        }
         if (priv->history_dialog) {
                 um_history_dialog_free (priv->history_dialog);
                 priv->history_dialog = NULL;

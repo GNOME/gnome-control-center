@@ -26,6 +26,10 @@
 
 G_BEGIN_DECLS
 
+#define UM_TYPE_PHOTO_DIALOG (um_photo_dialog_get_type())
+
+G_DECLARE_FINAL_TYPE (UmPhotoDialog, um_photo_dialog, UM, PHOTO_DIALOG, GtkPopover)
+
 typedef struct _UmPhotoDialog UmPhotoDialog;
 
 UmPhotoDialog *um_photo_dialog_new      (GtkWidget     *button);
