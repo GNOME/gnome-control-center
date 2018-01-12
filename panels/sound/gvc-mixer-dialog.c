@@ -44,6 +44,7 @@
 #include "gvc-speaker-test.h"
 #include "gvc-mixer-control-private.h"
 
+#define KEY_SOUNDS_SCHEMA "org.gnome.desktop.sound"
 #define SCALE_SIZE 128
 
 struct _GvcMixerDialog
@@ -78,6 +79,8 @@ struct _GvcMixerDialog
         GtkWidget       *test_dialog;
         GtkSizeGroup    *size_group;
 
+        GSettings       *settings;
+        gboolean         allow_volume_above_100_percent;
         gdouble          last_input_peak;
         guint            num_apps;
 };
@@ -189,6 +192,7 @@ update_output_settings (GvcMixerDialog      *dialog,
         gvc_channel_bar_set_base_volume (GVC_CHANNEL_BAR (dialog->output_bar),
                                          gvc_mixer_stream_get_base_volume (stream));
         gvc_channel_bar_set_is_amplified (GVC_CHANNEL_BAR (dialog->output_bar),
+                                          dialog->allow_volume_above_100_percent &&
                                           gvc_mixer_stream_get_can_decibel (stream));
 
 	/* Update the adjustment in case the previous bar wasn't decibel
@@ -500,6 +504,7 @@ update_input_settings (GvcMixerDialog   *dialog,
         gvc_channel_bar_set_base_volume (GVC_CHANNEL_BAR (dialog->input_bar),
                                          gvc_mixer_stream_get_base_volume (stream));
         gvc_channel_bar_set_is_amplified (GVC_CHANNEL_BAR (dialog->input_bar),
+                                          dialog->allow_volume_above_100_percent &&
                                           gvc_mixer_stream_get_can_decibel (stream));
 
 	/* Update the adjustment in case the previous bar wasn't decibel
@@ -1904,6 +1909,34 @@ gvc_mixer_dialog_class_init (GvcMixerDialogClass *klass)
                                                               G_PARAM_READWRITE|G_PARAM_CONSTRUCT));
 }
 
+static void
+allow_volume_above_100_percent_cb (GObject    *gobject,
+                                   GParamSpec *pspec,
+                                   gpointer    user_data)
+{
+        GvcMixerDialog *dialog = user_data;
+        gboolean output_amplified, input_amplified;
+
+        dialog->allow_volume_above_100_percent = g_settings_get_boolean (dialog->settings,
+                                                                         "allow-volume-above-100-percent");
+
+        if (dialog->allow_volume_above_100_percent) {
+                GvcMixerStream *stream;
+
+                stream = g_object_get_data (G_OBJECT (dialog->output_bar), "gvc-mixer-dialog-stream");
+                output_amplified = gvc_mixer_stream_get_can_decibel (stream);
+
+                stream = g_object_get_data (G_OBJECT (dialog->input_bar), "gvc-mixer-dialog-stream");
+                input_amplified = gvc_mixer_stream_get_can_decibel (stream);
+        } else {
+                output_amplified = input_amplified = FALSE;
+        }
+
+        gvc_channel_bar_set_is_amplified (GVC_CHANNEL_BAR (dialog->output_bar),
+                                          output_amplified);
+        gvc_channel_bar_set_is_amplified (GVC_CHANNEL_BAR (dialog->input_bar),
+                                          input_amplified);
+}
 
 static void
 gvc_mixer_dialog_init (GvcMixerDialog *dialog)
@@ -1912,6 +1945,12 @@ gvc_mixer_dialog_init (GvcMixerDialog *dialog)
                                         GTK_ORIENTATION_VERTICAL);
         dialog->bars = g_hash_table_new (NULL, NULL);
         dialog->size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+
+        dialog->settings = g_settings_new (KEY_SOUNDS_SCHEMA);
+        g_signal_connect (dialog->settings, "changed::allow-volume-above-100-percent",
+                          G_CALLBACK (allow_volume_above_100_percent_cb), dialog);
+        dialog->allow_volume_above_100_percent = g_settings_get_boolean (dialog->settings,
+                                                                         "allow-volume-above-100-percent");
 }
 
 static void
@@ -1925,6 +1964,7 @@ gvc_mixer_dialog_finalize (GObject *object)
         mixer_dialog = GVC_MIXER_DIALOG (object);
 
         g_return_if_fail (mixer_dialog != NULL);
+        g_clear_object (&mixer_dialog->settings);
         G_OBJECT_CLASS (gvc_mixer_dialog_parent_class)->finalize (object);
 }
 
