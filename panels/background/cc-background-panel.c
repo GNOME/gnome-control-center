@@ -379,10 +379,10 @@ on_background_select (GtkFlowBox      *box,
                       GtkFlowBoxChild *child,
                       gpointer         user_data)
 {
-  GtkWidget *selected = GTK_WIDGET (child);
+  GtkWidget *widget = gtk_bin_get_child (GTK_BIN (child));
   CcBackgroundPanel *panel = user_data;
   CcBackgroundItem *item;
-  item = cc_background_grid_item_get_ref (selected);
+  item = cc_background_grid_item_get_item (widget);
 
   set_background (panel, panel->settings, item);
   set_background (panel, panel->lock_settings, item);
@@ -493,7 +493,7 @@ create_gallery_item (gpointer item,
                                                    preview_height,
                                                    scale_factor,
                                                    -2, TRUE);
-  flow = cc_background_grid_item_new(self, pixbuf);
+  flow = GTK_WIDGET (cc_background_grid_item_new(self, pixbuf));
   return flow;
 }
 

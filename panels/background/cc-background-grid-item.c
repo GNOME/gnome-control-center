@@ -33,7 +33,7 @@ struct _CcBackgroundGridItem
   GdkPixbuf             *cached_pixbuf;
 };
 
-G_DEFINE_TYPE (CcBackgroundGridItem, cc_background_grid_item, GTK_TYPE_FLOW_BOX_CHILD)
+G_DEFINE_TYPE (CcBackgroundGridItem, cc_background_grid_item, GTK_TYPE_DRAWING_AREA)
 
     enum {
       PROP_0,
@@ -96,7 +96,7 @@ on_gallery_item_draw (GtkWidget            *widget,
                       cairo_t              *cr,
                       CcBackgroundGridItem *item)
 {
-  GdkPixbuf *pixbuf = item->cached_pixbuf;
+  GdkPixbuf *pixbuf = ((CcBackgroundGridItem *) widget)->cached_pixbuf;
   GdkPixbuf *new_pixbuf;
   const gint space_width = gtk_widget_get_allocated_width (widget);
   const gint space_height = gtk_widget_get_allocated_height ( (widget));
@@ -118,7 +118,7 @@ on_gallery_item_draw (GtkWidget            *widget,
                                         new_height,
                                         GDK_INTERP_BILINEAR);
 
-  if (cc_background_item_changes_with_time (cc_background_grid_item_get_ref (gtk_widget_get_parent(widget)))) {
+  if (cc_background_item_changes_with_time (cc_background_grid_item_get_item (widget))) {
     add_slideshow_emblem (new_pixbuf, (space_width + new_width) / 2, (space_height + new_height)/2, scale_factor);
   }
 
@@ -133,35 +133,32 @@ on_gallery_item_draw (GtkWidget            *widget,
   return TRUE;
 }
 
-GtkWidget*
+CcBackgroundGridItem *
 cc_background_grid_item_new (CcBackgroundItem *item,
                              GdkPixbuf        *pixbuf)
 {
-
   return g_object_new (CC_TYPE_BACKGROUND_GRID_ITEM,
                        "item", item,
                        "cached_pixbuf", pixbuf,
                        NULL);
 }
 
-CcBackgroundItem * cc_background_grid_item_get_ref (GtkWidget *widget)
+CcBackgroundItem*
+cc_background_grid_item_get_item (GtkWidget *widget)
 {
-  CcBackgroundGridItem *self = (CcBackgroundGridItem *) widget;
-  return self->item;
-}
-void
-cc_background_grid_item_set_ref (GtkWidget        *widget,
-                                 CcBackgroundItem *item)
-{
-  CcBackgroundGridItem *self = (CcBackgroundGridItem *) widget;
-  self->item = item;
+  if (GTK_IS_DRAWING_AREA (widget)) {
+    CcBackgroundGridItem *self = (CcBackgroundGridItem *) widget;
+    return self->item;
+  }
+  else {
+    return NULL;
+  }
 }
 
 static void
 cc_background_grid_item_finalize (GObject *object)
 {
   G_OBJECT_CLASS (cc_background_grid_item_parent_class)->finalize (object);
-
 }
 
 static void
@@ -246,15 +243,10 @@ cc_background_grid_item_class_init (CcBackgroundGridItemClass *klass)
 static void
 cc_background_grid_item_init (CcBackgroundGridItem *self)
 {
-  GtkWidget *drawing;
-
-  drawing = gtk_drawing_area_new ();
-  gtk_widget_set_hexpand(drawing, TRUE);
-  gtk_widget_set_vexpand(drawing, TRUE);
-  g_signal_connect (G_OBJECT (drawing), "draw",
-                    G_CALLBACK (on_gallery_item_draw), self);
+  gtk_widget_set_hexpand(GTK_WIDGET (self), TRUE);
+  gtk_widget_set_vexpand(GTK_WIDGET (self), TRUE);
+  g_signal_connect (G_OBJECT (self), "draw",
+                    G_CALLBACK (on_gallery_item_draw), NULL);
 
   gtk_widget_set_size_request (GTK_WIDGET(self), 250, 200);
-  gtk_widget_show (drawing);
-  gtk_container_add (GTK_CONTAINER (self), drawing);
 }

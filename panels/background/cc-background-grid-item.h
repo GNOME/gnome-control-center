@@ -29,13 +29,11 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_BACKGROUND_GRID_ITEM (cc_background_grid_item_get_type())
 
-G_DECLARE_FINAL_TYPE (CcBackgroundGridItem, cc_background_grid_item, CC, BACKGROUND_GRID_LIST, GtkFlowBoxChild)
+G_DECLARE_FINAL_TYPE (CcBackgroundGridItem, cc_background_grid_item, CC, BACKGROUND_GRID_LIST, GtkDrawingArea)
 
-GtkWidget *             cc_background_grid_item_new             (CcBackgroundItem             *,
+CcBackgroundGridItem   *cc_background_grid_item_new             (CcBackgroundItem             *,
                                                                  GdkPixbuf                    *);
-void                    cc_background_grid_item_set_ref         (GtkWidget                    *,
-                                                                 CcBackgroundItem             *);
-CcBackgroundItem *      cc_background_grid_item_get_ref         (GtkWidget                    *);
+CcBackgroundItem       *cc_background_grid_item_get_item        (GtkWidget                    *);
 
 G_END_DECLS
 
