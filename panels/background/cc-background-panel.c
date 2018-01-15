@@ -579,11 +579,11 @@ cc_background_panel_init (CcBackgroundPanel *panel)
   update_preview (panel, panel->settings, NULL);
 
   /* Bind liststore to flowbox */
-  gtk_flow_box_bind_model (GTK_FLOW_BOX (WID("background-gallery")),
-                           G_LIST_MODEL (cc_background_store_get_liststore (panel->store)),
-                           create_gallery_item,
-                           panel,
-                           NULL);
+  cc_background_store_bind_flow_box (panel->store,
+                                     panel,
+                                     WID("background-gallery"),
+                                     create_gallery_item);
+
 
   /* Background settings */
   g_signal_connect (panel->settings, "changed", G_CALLBACK (on_settings_changed), panel);

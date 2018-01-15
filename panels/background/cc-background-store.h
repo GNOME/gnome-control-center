@@ -22,6 +22,7 @@
 #define __CC_BACKGROUND_STORE_H__
 
 #include <glib-object.h>
+#include <gtk/gtk.h>
 /*
  * Potentially, include other headers on which this header depends.
  */
@@ -35,11 +36,13 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcBackgroundStore, cc_background_store, CC, BACKGROUND_STORE, GObject)
 
 /*
- * Method definitions.
- */
-CcBackgroundStore *cc_background_store_new (void);
-GListStore *cc_background_store_get_liststore (CcBackgroundStore *);
-
+* Method definitions.
+*/
+CcBackgroundStore       *cc_background_store_new           (void);
+void                    cc_background_store_bind_flow_box  (CcBackgroundStore           *self,
+                                                            gpointer                     panel,
+                                                            GtkWidget                   *widget,
+                                                            GtkFlowBoxCreateWidgetFunc   create_widget_fun);
 G_END_DECLS
 
 #endif /* __CC_BACKGROUND_STORE_H__ */
