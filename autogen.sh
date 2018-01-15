@@ -4,7 +4,7 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-ACLOCAL_FLAGS="-I libgd $ACLOCAL_FLAGS"
+ACLOCAL_FLAGS="-I subprojects/gvc -I subprojects/libgd $ACLOCAL_FLAGS"
 
 (test -f $srcdir/configure.ac \
   && test -f $srcdir/autogen.sh \

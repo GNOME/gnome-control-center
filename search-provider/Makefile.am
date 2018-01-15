@@ -17,7 +17,7 @@ AM_CPPFLAGS =					\
 	-I$(top_srcdir)				\
 	$(SHELL_CFLAGS)				\
 	-I$(top_srcdir)/panels/common/		\
-	-I$(top_srcdir)/libgd
+	-I$(top_srcdir)/subprojects/libgd
 
 libexec_PROGRAMS = gnome-control-center-search-provider
 

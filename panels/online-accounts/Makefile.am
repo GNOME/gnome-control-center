@@ -5,7 +5,7 @@ SUBDIRS = icons
 AM_CPPFLAGS = 						\
 	$(PANEL_CFLAGS)					\
 	$(ONLINE_ACCOUNTS_PANEL_CFLAGS)			\
-	-I$(top_srcdir)/libgd				\
+	-I$(top_srcdir)/subprojects/libgd		\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	$(NULL)
 
@@ -23,7 +23,7 @@ libonline_accounts_la_SOURCES =		\
 libonline_accounts_la_LIBADD =				\
 	$(PANEL_LIBS)					\
 	$(ONLINE_ACCOUNTS_PANEL_LIBS)			\
-	$(top_builddir)/libgd/libgd.la			\
+	$(top_builddir)/subprojects/libgd/libgd.la	\
 	$(NULL)
 
 libonline_accounts_la_LDFLAGS = $(PANEL_LDFLAGS)

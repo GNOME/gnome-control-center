@@ -115,7 +115,7 @@ COMMON_MODULES="gtk+-3.0 >= $GTK_REQUIRED_VERSION
  gio-unix-2.0
  gsettings-desktop-schemas >= $SCHEMAS_REQUIRED_VERSION"
 
-LIBGD_INIT([_view-common static])
+LIBGD_INIT([_view-common static],[subprojects/libgd])
 
 PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_MODULES gnome-desktop-3.0 fontconfig)
 PKG_CHECK_MODULES(LIBSHORTCUTS, $COMMON_MODULES x11)
@@ -486,7 +486,6 @@ panels/search/gnome-search-panel.desktop.in
 panels/sharing/Makefile
 panels/sharing/gnome-sharing-panel.desktop.in
 panels/sound/Makefile
-panels/sound/gvc/Makefile
 panels/sound/data/Makefile
 panels/sound/data/gnome-sound-panel.desktop.in
 panels/sound/data/symbolic-icons/Makefile
@@ -560,11 +559,12 @@ panels/wacom/Makefile
 panels/wacom/calibrator/Makefile
 panels/wacom/gnome-wacom-panel.desktop.in
 po/Makefile.in
-libgd/Makefile
 search-provider/Makefile
 shell/appdata/Makefile
 shell/Makefile
 shell/gnome-control-center.desktop.in
+subprojects/gvc/Makefile
+subprojects/libgd/Makefile
 man/Makefile
 ])
 

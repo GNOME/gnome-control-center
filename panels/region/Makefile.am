@@ -5,7 +5,7 @@ AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
 	$(REGION_PANEL_CFLAGS)				\
 	-I$(srcdir)/../common/				\
-	-I$(top_srcdir)/libgd/				\
+	-I$(top_srcdir)/subprojects/libgd/		\
 	$(NULL)
 
 noinst_LTLIBRARIES = libregion.la
@@ -31,7 +31,7 @@ libregion_la_SOURCES =	\
 libregion_la_LIBADD = \
 	$(PANEL_LIBS) \
 	$(REGION_PANEL_LIBS) \
-	$(top_builddir)/libgd/libgd.la \
+	$(top_builddir)/subprojects/libgd/libgd.la \
 	$(builddir)/../common/liblanguage.la
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/region.gresource.xml)

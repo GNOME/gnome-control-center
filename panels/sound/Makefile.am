@@ -1,4 +1,4 @@
-SUBDIRS = data gvc
+SUBDIRS = data
 
 # This is used in PANEL_CFLAGS
 cappletname = sound
@@ -7,7 +7,7 @@ NULL =
 noinst_LTLIBRARIES = libsound.la libgvcgtk.la
 
 AM_CPPFLAGS =					\
-	-I$(srcdir)/gvc/			\
+	-I$(top_srcdir)/subprojects/gvc/	\
 	$(PANEL_CFLAGS) 			\
 	$(SOUND_PANEL_CFLAGS)			\
 	-DLOCALE_DIR=\""$(datadir)/locale"\"	\
@@ -26,12 +26,12 @@ libgvcgtk_la_SOURCES = 				\
 	gvc-channel-bar.c			\
 	$(NULL)
 
-libsound_la_LIBADD =				\
-	gvc/libgvc.la				\
-	libgvcgtk.la				\
-	$(PANEL_LIBS)				\
-	$(SOUND_PANEL_LIBS)			\
-	$(LIBM)					\
+libsound_la_LIBADD =					\
+	$(top_builddir)/subprojects/gvc/libgvc.la	\
+	libgvcgtk.la					\
+	$(PANEL_LIBS)					\
+	$(SOUND_PANEL_LIBS)				\
+	$(LIBM)						\
 	$(NULL)
 
 libsound_la_LDFLAGS =				\

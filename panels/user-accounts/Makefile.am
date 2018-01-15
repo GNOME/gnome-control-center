@@ -12,7 +12,7 @@ AM_CPPFLAGS =						\
 	-DHAVE_LIBPWQUALITY				\
 	-I$(srcdir)/../common/				\
 	-I$(srcdir)/../../shell/			\
-	-I$(top_srcdir)/libgd/				\
+	-I$(top_srcdir)/subprojects/libgd/		\
 	$(PANEL_CFLAGS)					\
 	$(USER_ACCOUNTS_PANEL_CFLAGS)
 
@@ -60,14 +60,14 @@ libuser_accounts_la_SOURCES =		\
 	um-cell-renderer-user-image.c	\
 	$(BUILT_SOURCES)
 
-libuser_accounts_la_LIBADD = 		\
-	$(PANEL_LIBS)			\
-	$(USER_ACCOUNTS_PANEL_LIBS)	\
-	$(builddir)/../common/liblanguage.la	\
-	-lpwquality			\
-	-lcrypt				\
-	$(LIBM)				\
-	$(top_builddir)/libgd/libgd.la
+libuser_accounts_la_LIBADD = 				\
+	$(PANEL_LIBS)					\
+	$(USER_ACCOUNTS_PANEL_LIBS)			\
+	$(builddir)/../common/liblanguage.la		\
+	-lpwquality					\
+	-lcrypt						\
+	$(LIBM)						\
+	$(top_builddir)/subprojects/libgd/libgd.la
 
 if BUILD_CHEESE
 libuser_accounts_la_LIBADD += $(CHEESE_LIBS)

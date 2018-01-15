@@ -1,10 +1,10 @@
-ACLOCAL_AMFLAGS = -I m4 -I libgd ${ACLOCAL_FLAGS}
+ACLOCAL_AMFLAGS = -I m4 -I subprojects/gvc -I subprojects/libgd ${ACLOCAL_FLAGS}
 
-SUBDIRS = data libgd po panels shell search-provider
+SUBDIRS = data subprojects/gvc subprojects/libgd po panels shell search-provider
 if BUILD_DOCUMENTATION
 SUBDIRS += man
 endif
-DIST_SUBDIRS = data libgd po panels shell man search-provider
+DIST_SUBDIRS = data subprojects/gvc subprojects/libgd po panels shell man search-provider
 
 MAINTAINERCLEANFILES = \
 	$(srcdir)/INSTALL \

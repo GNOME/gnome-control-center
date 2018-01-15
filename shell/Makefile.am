@@ -11,7 +11,7 @@ AM_CPPFLAGS =					\
 	$(CHEESE_CFLAGS)			\
 	$(WACOM_PANEL_CFLAGS)			\
 	-I$(top_srcdir)/panels/common/		\
-	-I$(top_srcdir)/libgd
+	-I$(top_srcdir)/subprojects/libgd
 
 all-local: check-local
 
@@ -63,7 +63,7 @@ gnome_control_center_LDADD =						\
 	libshell.la							\
 	$(SHELL_LIBS)							\
 	$(CHEESE_LIBS)							\
-	$(top_builddir)/libgd/libgd.la					\
+	$(top_builddir)/subprojects/libgd/libgd.la			\
 	$(top_builddir)/panels/common/liblanguage.la			\
 	$(top_builddir)/panels/common/libdevice.la			\
 	$(top_builddir)/panels/background/libbackground.la		\
