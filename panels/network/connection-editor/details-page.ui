@@ -355,6 +355,65 @@
         <property name="height">1</property>
       </packing>
     </child>
+
+    <!-- "Restrict Data Usage" section -->
+    <child>
+      <object class="GtkGrid" id="restrict_data_grid">
+        <property name="can_focus">True</property>
+        <property name="column_spacing">18</property>
+        <property name="margin_bottom">12</property>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">Restrict Data Usage</property>
+            <property name="hexpand">True</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkSwitch" id="restrict_data_switch">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">0</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">Prevents background network activity in order to limit costs and prevent caps from exceed on metered connections.</property>
+            <property name="wrap">True</property>
+            <property name="max_width_chars">60</property>
+            <style>
+              <class name="dim-label" />
+            </style>
+            <attributes>
+              <attribute name="scale" value="0.8" />
+            </attributes>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">11</property>
+        <property name="width">2</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+
     <child>
       <object class="GtkButton" id="button_forget">
         <property name="visible">True</property>
@@ -370,7 +429,7 @@
       </object>
       <packing>
         <property name="left_attach">0</property>
-        <property name="top_attach">11</property>
+        <property name="top_attach">12</property>
         <property name="width">2</property>
         <property name="height">1</property>
       </packing>
