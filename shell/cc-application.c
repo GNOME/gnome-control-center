@@ -30,9 +30,9 @@
 #include "cc-shell-log.h"
 #include "cc-window.h"
 
-#if defined(HAVE_WACOM)
+#if defined(HAVE_WACOM) || defined(HAVE_CHEESE)
 #include <clutter-gtk/clutter-gtk.h>
-#endif /* HAVE_WACOM */
+#endif /* HAVE_WACOM || HAVE_CHEESE */
 
 struct _CcApplicationPrivate
 {
@@ -218,13 +218,13 @@ cc_application_startup (GApplication *application)
 
   G_APPLICATION_CLASS (cc_application_parent_class)->startup (application);
 
-#if defined(HAVE_WACOM)
+#if defined(HAVE_WACOM) || defined(HAVE_CHEESE)
   if (gtk_clutter_init (NULL, NULL) != CLUTTER_INIT_SUCCESS)
     {
       g_critical ("Unable to initialize Clutter");
       return;
     }
-#endif /* HAVE_WACOM */
+#endif /* HAVE_WACOM || HAVE_CHEESE */
 
   action = g_simple_action_new ("help", NULL);
   g_action_map_add_action (G_ACTION_MAP (application), G_ACTION (action));
