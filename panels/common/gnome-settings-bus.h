@@ -5,8 +5,6 @@
 
 #ifdef GDK_WINDOWING_WAYLAND
 
-#define HAVE_WAYLAND 1
-
 static inline gboolean
 gnome_settings_is_wayland (void)
 {
