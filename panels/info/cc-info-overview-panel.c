@@ -947,13 +947,9 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
   priv->graphics_data = get_graphics_data ();
 
   if (does_gnome_software_exist () || does_gpk_update_viewer_exist ())
-    {
-      g_signal_connect (priv->updates_button, "clicked", G_CALLBACK (on_updates_button_clicked), self);
-    }
+    g_signal_connect (priv->updates_button, "clicked", G_CALLBACK (on_updates_button_clicked), self);
   else
-    {
-      gtk_widget_destroy (priv->updates_button);
-    }
+    gtk_widget_destroy (priv->updates_button);
 
   info_overview_panel_setup_overview (self);
   info_overview_panel_setup_virt (self);
