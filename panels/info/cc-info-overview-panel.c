@@ -21,6 +21,8 @@
 
 #include <config.h>
 
+#include "shell/cc-hostname-entry.h"
+
 #include "cc-info-resources.h"
 #include "info-cleanup.h"
 
@@ -929,6 +931,8 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, label8);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, grid1);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, label18);
+
+  g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
 }
 
 static void
