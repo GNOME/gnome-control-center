@@ -19,6 +19,7 @@ control_center_icondir = join_paths(control_center_datadir, 'icons')
 
 control_center_gettext = meson.project_name() + '-2.0'
 
+host_is_linux = host_machine.system().contains('linux')
 host_is_s390 = host_machine.cpu().contains('s390')
 
 cc = meson.get_compiler('c')
@@ -144,18 +145,6 @@ foreach header: check_headers
   assert(cc.has_header(header[1], args: cups_cflags), 'CUPS headers not found: ' + header[1])
 endforeach
 
-# Check for gnome-bluetooth
-enable_bluetooth = get_option('bluetooth')
-if enable_bluetooth
-  assert(not host_is_s390, 'Bluetooth panel will not be built (no USB support on this platform). Use -Dbluetooth=false to build without it.')
-
-  gnome_bluetooth_dep = dependency('gnome-bluetooth-1.0', version: '>= 3.18.2')
-endif
-config_h.set('BUILD_BLUETOOTH', enable_bluetooth,
-             description: 'Define to 1 to build the Bluetooth panel')
-config_h.set('HAVE_BLUETOOTH', enable_bluetooth,
-             description: 'Define to 1 if bluetooth support is available')
-
 # Optional dependency for the user accounts panel
 enable_cheese = get_option('cheese')
 if enable_cheese
@@ -178,41 +167,6 @@ endif
 config_h.set('HAVE_IBUS', enable_ibus,
              description: 'Defined if IBus support is enabled')
 
-# network manager
-enable_network_manager = get_option('network_manager')
-if enable_network_manager
-  network_manager_deps = [
-    dependency('libnm', version: '>= 1.2.0'),
-    dependency('libnma', version: '>= 1.2.0'),
-    dependency('mm-glib', version: '>= 0.7')
-  ]
-
-  network_manager_dep = dependency('NetworkManager')
-  nm_vpn_config_dir = join_paths(network_manager_dep.get_pkgconfig_variable('configdir'), 'VPN')
-  nm_vpn_module_dir = network_manager_dep.get_pkgconfig_variable('plugindir')
-endif
-config_h.set('BUILD_NETWORK', enable_network_manager,
-             description: 'Define to 1 to build the Network panel')
-config_h.set('HAVE_NETWORK_MANAGER', enable_network_manager,
-             description: 'Define to 1 if NetworkManager is available')
-
-# Wacom
-enable_wacom = get_option('wacom')
-if enable_wacom
-  assert(not host_is_s390, 'Wacom panel will not be built (no USB support on this platform). Use -Dwacom=false to build without it.')
-  assert(clutter_gtk_dep.found(), 'wacom support requested, but clutter-gtk library is not available. Use -Dwacom=false to build without it.')
-
-  wacom_deps = [
-    clutter_gtk_dep,
-    dependency('clutter-1.0', version: '>= 1.11.3'),
-    dependency('libwacom', version: '>= 0.7')
-  ]
-endif
-config_h.set('BUILD_WACOM', enable_wacom,
-             description: 'Define to 1 to build the Wacom panel')
-config_h.set('HAVE_WACOM', enable_wacom,
-             description: 'Define to 1 if Wacom is supportted')
-
 # wayland
 enable_wayland = get_option('wayland')
 if enable_wayland
@@ -223,6 +177,48 @@ if enable_wayland
 endif
 config_h.set('HAVE_WAYLAND', enable_wayland,
              description: 'Define to 1 if Wayland is enabled')
+
+if host_is_s390
+  message('Bluetooth, Network and Wacom panels will not be built (no USB support on this platform)')
+endif
+
+enable_linux = host_is_linux and not host_is_s390
+if enable_linux
+  # gnome-bluetooth
+  gnome_bluetooth_dep = dependency('gnome-bluetooth-1.0', version: '>= 3.18.2')
+
+  # network manager
+  network_manager_deps = [
+    dependency('libnm', version: '>= 1.2.0'),
+    dependency('libnma', version: '>= 1.2.0'),
+    dependency('mm-glib', version: '>= 0.7')
+  ]
+
+  network_manager_dep = dependency('NetworkManager')
+  nm_vpn_config_dir = join_paths(network_manager_dep.get_pkgconfig_variable('configdir'), 'VPN')
+  nm_vpn_module_dir = network_manager_dep.get_pkgconfig_variable('plugindir')
+
+  # Wacom
+  assert(clutter_gtk_dep.found(), 'clutter-gtk library is required for wacom support, but is not available.')
+
+  wacom_deps = [
+    clutter_gtk_dep,
+    dependency('clutter-1.0', version: '>= 1.11.3'),
+    dependency('libwacom', version: '>= 0.7')
+  ]
+endif
+config_h.set('BUILD_BLUETOOTH', enable_linux,
+             description: 'Define to 1 to build the Bluetooth panel')
+config_h.set('HAVE_BLUETOOTH', enable_linux,
+             description: 'Define to 1 if bluetooth support is available')
+config_h.set('BUILD_NETWORK', enable_linux,
+             description: 'Define to 1 to build the Network panel')
+config_h.set('HAVE_NETWORK_MANAGER', enable_linux,
+             description: 'Define to 1 if NetworkManager is available')
+config_h.set('BUILD_WACOM', enable_linux,
+             description: 'Define to 1 to build the Wacom panel')
+config_h.set('HAVE_WACOM', enable_linux,
+             description: 'Define to 1 if Wacom is supportted')
 
 # Check for info panel
 gnome_session_libexecdir = get_option('gnome_session_libexecdir')
@@ -272,11 +268,11 @@ meson.add_install_script(
 )
 
 output = meson.project_name() + ' was configured with the following options:\n'
-output += '** gnome-bluetooth (Bluetooth panel): ' + enable_bluetooth.to_string() + '\n'
+output += '** gnome-bluetooth (Bluetooth panel): ' + enable_linux.to_string() + '\n'
 output += '** Cheese (Users panel webcam support): ' + enable_cheese.to_string() + '\n'
 output += '** IBus (Region panel IBus support): ' + enable_ibus.to_string() + '\n'
-output += '** NetworkManager (Network panel): ' + enable_network_manager.to_string() + '\n'
-output += '** wacom (Wacom tablet panel): ' + enable_wacom.to_string() + '\n'
+output += '** NetworkManager (Network panel): ' + enable_linux.to_string() + '\n'
+output += '** wacom (Wacom tablet panel): ' + enable_linux.to_string() + '\n'
 output += '** Wayland: ' + enable_wayland.to_string() + '\n'
 output += '** gnome-session libexecdir: ' + gnome_session_libexecdir + '\n'
 output += 'End options'
