@@ -660,7 +660,7 @@ cc_sharing_panel_label_activate_link (GtkLabel *label,
                                       gchar    *uri,
                                       GtkMenu  *menu)
 {
-  gtk_menu_popup (menu, NULL, NULL, NULL, NULL, 0, gtk_get_current_event_time ());
+  gtk_menu_popup_at_pointer (menu, NULL);
 
   g_object_set_data_full (G_OBJECT (menu), "uri-text", g_strdup (uri), g_free);
 
