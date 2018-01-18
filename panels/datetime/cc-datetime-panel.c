@@ -54,6 +54,7 @@ enum {
 #define W(x) (GtkWidget*) gtk_builder_get_object (self->builder, x)
 
 #define DATETIME_PERMISSION "org.gnome.controlcenter.datetime.configure"
+#define DATETIME_TZ_PERMISSION "org.freedesktop.timedate1.set-timezone"
 
 #define CLOCK_SCHEMA "org.gnome.desktop.interface"
 #define CLOCK_FORMAT_KEY "clock-format"
@@ -95,6 +96,7 @@ struct _CcDateTimePanel
   GCancellable *cancellable;
 
   GPermission *permission;
+  GPermission *tz_permission;
 };
 
 CC_PANEL_REGISTER (CcDateTimePanel, cc_date_time_panel)
@@ -131,6 +133,7 @@ cc_date_time_panel_dispose (GObject *object)
   g_clear_object (&panel->clock_tracker);
   g_clear_object (&panel->dtm);
   g_clear_object (&panel->permission);
+  g_clear_object (&panel->tz_permission);
   g_clear_object (&panel->clock_settings);
   g_clear_object (&panel->datetime_settings);
   g_clear_object (&panel->filechooser_settings);
@@ -730,24 +733,24 @@ on_permission_changed (GPermission *permission,
                        gpointer     data)
 {
   CcDateTimePanel *self = CC_DATE_TIME_PANEL (data);
-  gboolean allowed, auto_timezone, using_ntp;
+  gboolean allowed, tz_allowed, auto_timezone, using_ntp;
 
   allowed = (self->permission != NULL && g_permission_get_allowed (self->permission));
+  tz_allowed = (self->tz_permission != NULL && g_permission_get_allowed (self->tz_permission));
   using_ntp = gtk_switch_get_active (GTK_SWITCH (W("network_time_switch")));
   auto_timezone = gtk_switch_get_active (GTK_SWITCH (W("auto_timezone_switch")));
 
   /* All the widgets but the lock button and the 24h setting */
   gtk_widget_set_sensitive (W("auto-datetime-row"), allowed);
-  gtk_widget_set_sensitive (W("auto-timezone-row"), allowed);
+  gtk_widget_set_sensitive (W("auto-timezone-row"), allowed || tz_allowed);
   gtk_widget_set_sensitive (W("datetime-button"), allowed && !using_ntp);
-  gtk_widget_set_sensitive (W("timezone-button"), allowed && !auto_timezone);
+  gtk_widget_set_sensitive (W("timezone-button"), (allowed || tz_allowed) && !auto_timezone);
 
   /* Hide the subdialogs if we no longer have permissions */
   if (!allowed)
-    {
       gtk_widget_hide (GTK_WIDGET (W ("datetime-dialog")));
+  if (!allowed && !tz_allowed)
       gtk_widget_hide (GTK_WIDGET (W ("timezone-dialog")));
-    }
 }
 
 static void
@@ -832,6 +835,24 @@ run_dialog (CcDateTimePanel *self,
 
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
   gtk_dialog_run (GTK_DIALOG (dialog));
+}
+
+static gboolean
+tz_switch_to_row_transform_func (GBinding        *binding,
+                                 const GValue    *source_value,
+                                 GValue          *target_value,
+                                 CcDateTimePanel *self)
+{
+  gboolean active;
+  gboolean allowed;
+
+  active = g_value_get_boolean (source_value);
+  allowed = (self->permission != NULL && g_permission_get_allowed (self->permission)) ||
+            (self->tz_permission != NULL && g_permission_get_allowed (self->tz_permission));
+
+  g_value_set_boolean (target_value, !active && allowed);
+
+  return TRUE;
 }
 
 static gboolean
@@ -1189,6 +1210,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   /* add the lock button */
   self->permission = polkit_permission_new_sync (DATETIME_PERMISSION, NULL, NULL, NULL);
+  self->tz_permission = polkit_permission_new_sync (DATETIME_TZ_PERMISSION, NULL, NULL, NULL);
   if (self->permission != NULL)
     {
       g_signal_connect (self->permission, "notify",
@@ -1226,9 +1248,11 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   gtk_widget_set_visible (W ("auto-datetime-row"), is_ntp_available (self));
 
   /* Timezone settings */
-  bind_switch_to_row (self,
-                      W ("auto_timezone_switch"),
-                      W ("timezone-button"));
+  g_object_bind_property_full (W ("auto_timezone_switch"), "active",
+                               W ("timezone-button"), "sensitive",
+                               G_BINDING_SYNC_CREATE,
+                               (GBindingTransformFunc) tz_switch_to_row_transform_func,
+                               NULL, self, NULL);
 
   self->datetime_settings = g_settings_new (DATETIME_SCHEMA);
   g_settings_bind (self->datetime_settings, AUTO_TIMEZONE_KEY,
