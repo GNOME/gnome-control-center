@@ -236,6 +236,7 @@ update_list_title (CcWindow *self)
   const gchar *title;
 
   view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list));
+  title = NULL;
 
   switch (view)
     {
