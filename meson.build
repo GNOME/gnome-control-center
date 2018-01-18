@@ -121,7 +121,7 @@ common_deps = [
   gsettings_desktop_dep,
   dependency('gio-unix-2.0'),
   dependency('gthread-2.0'),
-  dependency('gtk+-3.0', version: '>= 3.22.0')
+  dependency('gtk+-3.0', version: '>= 3.22.20')
 ]
 
 # Check for CUPS 1.4 or newer
