@@ -200,6 +200,8 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   object_class->dispose = cc_sharing_panel_dispose;
 
   panel_class->get_help_uri = cc_sharing_panel_get_help_uri;
+
+  g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
 }
 
 static void
