@@ -86,7 +86,7 @@ if enable_cheese
   shell_deps += cheese_deps
 endif
 
-if enable_wacom
+if enable_linux
   shell_deps += wacom_deps
 endif
 

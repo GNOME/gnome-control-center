@@ -21,16 +21,12 @@ panels = [
   'user-accounts'
 ]
 
-if enable_bluetooth
-  panels += 'bluetooth'
-endif
-
-if enable_network_manager
-  panels += 'network'
-endif
-
-if enable_wacom
-  panels += 'wacom'
+if enable_linux
+  panels += [
+    'bluetooth',
+    'network',
+    'wacom'
+  ]
 endif
 
 panels_list = []
