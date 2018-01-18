@@ -132,14 +132,14 @@ all_user_changed (GtkToggleButton *b, CEPageDetails *page)
 }
 
 static void
-restrict_data_changed (GtkSwitch *sw, GParamSpec *pspec, CEPageDetails *page)
+restrict_data_changed (GtkToggleButton *toggle, GParamSpec *pspec, CEPageDetails *page)
 {
         NMSettingConnection *s_con;
         NMMetered metered;
 
         s_con = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
 
-        if (gtk_switch_get_active (sw))
+        if (gtk_toggle_button_get_active (toggle))
                 metered = NM_METERED_YES;
         else
                 metered = NM_METERED_NO;
@@ -168,11 +168,10 @@ update_restrict_data (CEPageDetails *page)
 
         metered = nm_setting_connection_get_metered (s_con);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "restrict_data_grid"));
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "restrict_data_check"));
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget),
+                                      metered == NM_METERED_YES || metered == NM_METERED_GUESS_YES);
         gtk_widget_show (widget);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "restrict_data_switch"));
-        gtk_switch_set_active (GTK_SWITCH (widget), metered == NM_METERED_YES || metered == NM_METERED_GUESS_YES);
 
         g_signal_connect (widget, "notify::active", G_CALLBACK (restrict_data_changed), page);
         g_signal_connect_swapped (widget, "notify::active", G_CALLBACK (ce_page_changed), page);
@@ -286,7 +285,7 @@ connect_details_page (CEPageDetails *page)
                           G_CALLBACK (all_user_changed), page);
         g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
 
-        /* Restrict Data switch */
+        /* Restrict Data check */
         update_restrict_data (page);
 
         /* Forget button */
