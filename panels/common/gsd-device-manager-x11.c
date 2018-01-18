@@ -117,16 +117,13 @@ add_device (GsdX11DeviceManager *manager,
 	if (!device_file)
 		return;
 
-	/* Takes ownership of device_file */
-	g_hash_table_insert (manager->gdk_devices, gdk_device, device_file);
-
-	device = g_hash_table_lookup (manager->devices, device_file);
+	device = g_hash_table_lookup (manager->devices, gdk_device);
 
 	if (device) {
 		g_signal_emit_by_name (manager, "device-changed", device);
 	} else {
 		device = create_device (gdk_device, device_file);
-		g_hash_table_insert (manager->devices, g_strdup (device_file), device);
+		g_hash_table_insert (manager->devices, gdk_device, device);
 		g_signal_emit_by_name (manager, "device-added", device);
 	}
 }
@@ -135,24 +132,17 @@ static void
 remove_device (GsdX11DeviceManager *manager,
 	       GdkDevice	   *gdk_device)
 {
-	const gchar *device_file;
 	GsdDevice *device;
 
-	device_file = g_hash_table_lookup (manager->gdk_devices, gdk_device);
-
-	if (!device_file)
-		return;
-
-	device = g_hash_table_lookup (manager->devices, device_file);
+	device = g_hash_table_lookup (manager->devices, gdk_device);
 
 	if (device) {
 		g_object_ref (device);
 		g_signal_emit_by_name (manager, "device-removed", device);
 		g_object_unref (device);
-	}
 
-	g_hash_table_remove (manager->devices, device_file);
-	g_hash_table_remove (manager->gdk_devices, gdk_device);
+                g_hash_table_remove (manager->devices, gdk_device);
+	}
 }
 
 static void
@@ -175,11 +165,8 @@ gsd_x11_device_manager_init (GsdX11DeviceManager *manager)
 {
 	GdkDisplay *display;
 
-	manager->devices = g_hash_table_new_full (g_str_hash, g_str_equal,
-						  (GDestroyNotify) g_free,
+	manager->devices = g_hash_table_new_full (NULL, NULL, NULL,
 						  (GDestroyNotify) g_object_unref);
-	manager->gdk_devices = g_hash_table_new_full (NULL, NULL, NULL,
-						      (GDestroyNotify) g_free);
 
 	display = gdk_display_get_default ();
 	manager->device_manager = gdk_display_get_device_manager (display);
@@ -229,12 +216,6 @@ gsd_x11_device_manager_lookup_gdk_device (GsdDeviceManager *manager,
 					  GdkDevice	   *gdk_device)
 {
 	GsdX11DeviceManager *manager_x11 = GSD_X11_DEVICE_MANAGER (manager);
-	const gchar *device_node;
 
-	device_node = g_hash_table_lookup (manager_x11->gdk_devices, gdk_device);
-
-	if (!device_node)
-		return NULL;
-
-	return g_hash_table_lookup (manager_x11->devices, device_node);
+	return g_hash_table_lookup (manager_x11->devices, gdk_device);
 }
