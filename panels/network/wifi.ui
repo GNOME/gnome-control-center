@@ -20,13 +20,13 @@
             <property name="halign">center</property>
             <property name="valign">center</property>
             <property name="orientation">vertical</property>
-            <property name="margin">18</property>
-            <child type="center">
+            <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="icon_name">network-wireless-no-route-symbolic</property>
-                <property name="pixel_size">128</property>
+                <property name="pixel_size">256</property>
+                <property name="margin-bottom">18</property>
                 <style>
                   <class name="dim-label" />
                 </style>
@@ -37,25 +37,20 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="wrap">True</property>
-                <property name="label" translatable="yes">Make sure you have a Wi-Fi adapter plugged and turned on</property>
+                <property name="label" translatable="yes">No Wi-Fi Adapter Found</property>
+                <attributes>
+                  <attribute name="weight" value="bold" />
+                  <attribute name="scale" value="1.2" />
+                </attributes>
               </object>
-              <packing>
-                <property name="pack-type">end</property>
-              </packing>
             </child>
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="wrap">True</property>
-                <property name="label" translatable="yes">No Wi-Fi Adapter Found</property>
-                <attributes>
-                  <attribute name="scale" value="1.42" />
-                </attributes>
+                <property name="label" translatable="yes">Make sure you have a Wi-Fi adapter plugged and turned on</property>
               </object>
-              <packing>
-                <property name="pack-type">end</property>
-              </packing>
             </child>
           </object>
           <packing>
