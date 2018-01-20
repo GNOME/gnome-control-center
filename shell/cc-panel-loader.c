@@ -60,6 +60,7 @@ extern GType cc_sound_panel_get_type (void);
 extern GType cc_bolt_panel_get_type (void);
 #endif /* BUILD_THUNDERBOLT */
 extern GType cc_ua_panel_get_type (void);
+extern GType cc_updates_panel_get_type (void);
 extern GType cc_user_panel_get_type (void);
 #ifdef BUILD_WACOM
 extern GType cc_wacom_panel_get_type (void);
@@ -124,6 +125,7 @@ static CcPanelLoaderVtable default_panels[] =
   PANEL_TYPE("thunderbolt",      cc_bolt_panel_get_type,                 NULL),
 #endif
   PANEL_TYPE("universal-access", cc_ua_panel_get_type,                   NULL),
+  PANEL_TYPE("updates",          cc_updates_panel_get_type,              NULL),
   PANEL_TYPE("usage",            cc_usage_panel_get_type,                NULL),
   PANEL_TYPE("user-accounts",    cc_user_panel_get_type,                 NULL),
 #ifdef BUILD_WACOM

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <template class="CcTariffEditor" parent="GtkGrid">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="column-spacing">12</property>
+
+    <!-- Start time -->
+    <child>
+      <object class="GtkLabel">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="yalign">0.0</property>
+        <property name="label" translatable="yes">From</property>
+        <style>
+          <class name="dim-label" />
+        </style>
+      </object>
+      <packing>
+        <property name="top-attach">0</property>
+        <property name="left-attach">0</property>
+      </packing>
+    </child>
+
+    <child>
+      <object class="GtkSpinButton">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="orientation">vertical</property>
+        <property name="adjustment">adjustment_from_hours</property>
+        <signal name="output" handler="on_hours_output_cb" object="CcTariffEditor" swapped="no" />
+      </object>
+      <packing>
+        <property name="top-attach">0</property>
+        <property name="left-attach">1</property>
+      </packing>
+    </child>
+
+    <child>
+      <object class="GtkSpinButton">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="orientation">vertical</property>
+        <property name="adjustment">adjustment_from_minutes</property>
+        <signal name="output" handler="on_minutes_output_cb" object="CcTariffEditor" swapped="no" />
+      </object>
+      <packing>
+        <property name="top-attach">0</property>
+        <property name="left-attach">2</property>
+      </packing>
+    </child>
+
+    <child>
+      <object class="GtkStack" id="stack_from">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes" comments="This is the short form for the time period in the morning">AM</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="valign">center</property>
+            <signal name="clicked" handler="on_time_period_from_clicked_cb" object="CcTariffEditor" swapped="no" />
+            <signal name="clicked" handler="on_time_changed_cb" object="CcTariffEditor" swapped="yes" />
+          </object>
+          <packing>
+            <property name="name">am</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes" comments="This is the short form for the time period in the afternoon">PM</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="valign">center</property>
+            <signal name="clicked" handler="on_time_period_from_clicked_cb" object="CcTariffEditor" swapped="no" />
+            <signal name="clicked" handler="on_time_changed_cb" object="CcTariffEditor" swapped="yes" />
+          </object>
+          <packing>
+            <property name="name">pm</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="name">blank</property>
+          </packing>
+        </child>
+
+      </object>
+      <packing>
+        <property name="top-attach">0</property>
+        <property name="left-attach">3</property>
+      </packing>
+    </child>
+
+    <!-- End time -->
+    <child>
+      <object class="GtkLabel">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="yalign">0.0</property>
+        <property name="label" translatable="yes">To</property>
+        <style>
+          <class name="dim-label" />
+        </style>
+      </object>
+      <packing>
+        <property name="top-attach">0</property>
+        <property name="left-attach">4</property>
+      </packing>
+    </child>
+
+    <child>
+      <object class="GtkSpinButton">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="orientation">vertical</property>
+        <property name="adjustment">adjustment_to_hours</property>
+        <signal name="output" handler="on_hours_output_cb" object="CcTariffEditor" swapped="no" />
+      </object>
+      <packing>
+        <property name="top-attach">0</property>
+        <property name="left-attach">5</property>
+      </packing>
+    </child>
+
+    <child>
+      <object class="GtkSpinButton">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="orientation">vertical</property>
+        <property name="adjustment">adjustment_to_minutes</property>
+        <signal name="output" handler="on_minutes_output_cb" object="CcTariffEditor" swapped="no" />
+      </object>
+      <packing>
+        <property name="top-attach">0</property>
+        <property name="left-attach">6</property>
+      </packing>
+    </child>
+
+    <child>
+      <object class="GtkStack" id="stack_to">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes" comments="This is the short form for the time period in the morning">AM</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="valign">center</property>
+            <signal name="clicked" handler="on_time_period_to_clicked_cb" object="CcTariffEditor" swapped="no" />
+            <signal name="clicked" handler="on_time_changed_cb" object="CcTariffEditor" swapped="yes" />
+          </object>
+          <packing>
+            <property name="name">am</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes" comments="This is the short form for the time period in the afternoon">PM</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="valign">center</property>
+            <signal name="clicked" handler="on_time_period_to_clicked_cb" object="CcTariffEditor" swapped="no" />
+            <signal name="clicked" handler="on_time_changed_cb" object="CcTariffEditor" swapped="yes" />
+          </object>
+          <packing>
+            <property name="name">pm</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="name">blank</property>
+          </packing>
+        </child>
+
+      </object>
+      <packing>
+        <property name="top-attach">0</property>
+        <property name="left-attach">7</property>
+      </packing>
+    </child>
+
+  </template>
+
+  <!-- Adjustments for the spinners -->
+  <object class="GtkAdjustment" id="adjustment_from_hours">
+    <property name="value">22</property>
+    <property name="upper">23</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+    <signal name="notify::value" handler="on_time_changed_cb" object="CcTariffEditor" swapped="yes" />
+  </object>
+  <object class="GtkAdjustment" id="adjustment_from_minutes">
+    <property name="upper">59</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+    <signal name="notify::value" handler="on_time_changed_cb" object="CcTariffEditor" swapped="yes" />
+  </object>
+  <object class="GtkAdjustment" id="adjustment_to_hours">
+    <property name="value">6</property>
+    <property name="upper">23</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+    <signal name="notify::value" handler="on_time_changed_cb" object="CcTariffEditor" swapped="yes" />
+  </object>
+  <object class="GtkAdjustment" id="adjustment_to_minutes">
+    <property name="upper">59</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+    <signal name="notify::value" handler="on_time_changed_cb" object="CcTariffEditor" swapped="yes" />
+  </object>
+</interface>
