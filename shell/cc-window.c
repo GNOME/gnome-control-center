@@ -115,11 +115,11 @@ get_icon_name_from_g_icon (GIcon *gicon)
 }
 
 static gboolean
-activate_panel (CcWindow           *self,
-                const gchar        *id,
-                GVariant           *parameters,
-                const gchar        *name,
-                GIcon              *gicon)
+activate_panel (CcWindow    *self,
+                const gchar *id,
+                GVariant    *parameters,
+                const gchar *name,
+                GIcon       *gicon)
 {
   GtkWidget *box, *title_widget;
   const gchar *icon_name;
@@ -170,8 +170,8 @@ _shell_remove_all_custom_widgets (CcWindow *self)
   /* remove from the header */
   for (i = 0; i < self->custom_widgets->len; i++)
     {
-        widget = g_ptr_array_index (self->custom_widgets, i);
-        gtk_container_remove (GTK_CONTAINER (self->top_right_box), widget);
+      widget = g_ptr_array_index (self->custom_widgets, i);
+      gtk_container_remove (GTK_CONTAINER (self->top_right_box), widget);
     }
   g_ptr_array_set_size (self->custom_widgets, 0);
 }
@@ -186,8 +186,7 @@ add_current_panel_to_history (CcShell    *shell,
 
   self = CC_WINDOW (shell);
 
-  if (!self->current_panel_id ||
-      g_strcmp0 (self->current_panel_id, start_id) == 0)
+  if (!self->current_panel_id || g_strcmp0 (self->current_panel_id, start_id) == 0)
     return;
 
   g_queue_push_head (self->previous_panels, g_strdup (self->current_panel_id));
@@ -306,10 +305,13 @@ setup_model (CcWindow *shell)
   while (valid)
     {
       CcPanelCategory category;
-      GIcon *icon;
-      gchar *name, *description, *id, *symbolic_icon;
+      g_autoptr(GIcon) icon = NULL;
+      g_autofree gchar *name = NULL;
+      g_autofree gchar *description = NULL;
+      g_autofree gchar *id = NULL;
+      g_autofree gchar *symbolic_icon = NULL;
+      g_autofree GStrv keywords = NULL;
       const gchar *icon_name;
-      gchar **keywords;
 
       gtk_tree_model_get (model, &iter,
                           COL_CATEGORY, &category,
@@ -332,13 +334,6 @@ setup_model (CcWindow *shell)
                                symbolic_icon);
 
       valid = gtk_tree_model_iter_next (model, &iter);
-
-      g_clear_pointer (&symbolic_icon, g_free);
-      g_clear_pointer (&keywords, g_strfreev);
-      g_clear_pointer (&description, g_free);
-      g_clear_pointer (&name, g_free);
-      g_clear_pointer (&id, g_free);
-      g_clear_object (&icon);
     }
 }
 
@@ -393,13 +388,12 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
   /* clear any custom widgets */
   _shell_remove_all_custom_widgets (self);
 
-  iter_valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->store),
-                                              &iter);
+  iter_valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->store), &iter);
 
   /* find the details for this item */
   while (iter_valid)
     {
-      gchar *id;
+      g_autofree gchar *id = NULL;
 
       gtk_tree_model_get (GTK_TREE_MODEL (self->store), &iter,
                           COL_NAME, &name,
@@ -407,25 +401,13 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
                           COL_ID, &id,
                           -1);
 
-      if (id && !strcmp (id, start_id))
-        {
-          g_free (id);
-          break;
-        }
-      else
-        {
-          g_free (id);
-          g_free (name);
-          if (gicon)
-            g_object_unref (gicon);
+      if (id && strcmp (id, start_id) == 0)
+        break;
 
-          name = NULL;
-          id = NULL;
-          gicon = NULL;
-        }
+      g_clear_pointer (&name, g_free);
+      g_clear_object (&gicon);
 
-      iter_valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (self->store),
-                                             &iter);
+      iter_valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (self->store), &iter);
     }
 
   old_panel = self->current_panel_box;
@@ -434,8 +416,7 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
     {
       g_warning ("Could not find settings panel \"%s\"", start_id);
     }
-  else if (activate_panel (CC_WINDOW (shell), start_id, parameters,
-                           name, gicon) == FALSE)
+  else if (!activate_panel (CC_WINDOW (shell), start_id, parameters, name, gicon))
     {
       /* Failed to activate the panel for some reason,
        * let's keep the old panel around instead */
@@ -452,9 +433,8 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
       cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), start_id);
     }
 
-  g_free (name);
-  if (gicon)
-    g_object_unref (gicon);
+  g_clear_pointer (&name, g_free);
+  g_clear_object (&gicon);
 
   return TRUE;
 }
@@ -575,15 +555,8 @@ cc_window_dispose (GObject *object)
 {
   CcWindow *self = CC_WINDOW (object);
 
-  g_free (self->current_panel_id);
-  self->current_panel_id = NULL;
-
-  if (self->custom_widgets)
-    {
-      g_ptr_array_unref (self->custom_widgets);
-      self->custom_widgets = NULL;
-    }
-
+  g_clear_pointer (&self->current_panel_id, g_free);
+  g_clear_pointer (&self->custom_widgets, g_ptr_array_unref);
   g_clear_object (&self->store);
   g_clear_object (&self->active_panel);
 
@@ -648,9 +621,9 @@ cc_window_class_init (CcWindowClass *klass)
 }
 
 static gboolean
-window_button_release_event (GtkWidget          *win,
-			     GdkEventButton     *event,
-			     CcWindow           *self)
+window_button_release_event (GtkWidget      *win,
+                             GdkEventButton *event,
+                             CcWindow       *self)
 {
   /* back button */
   if (event->button == MOUSE_BACK_BUTTON)
@@ -790,11 +763,10 @@ create_window (CcWindow *self)
   setup_model (self);
 
   /* connect various signals */
-  g_signal_connect_after (self, "key_press_event",
-                          G_CALLBACK (window_key_press_event), self);
   gtk_widget_add_events (GTK_WIDGET (self), GDK_BUTTON_RELEASE_MASK);
-  g_signal_connect (self, "button-release-event",
-                    G_CALLBACK (window_button_release_event), self);
+
+  g_signal_connect_after (self, "key_press_event", G_CALLBACK (window_key_press_event), self);
+  g_signal_connect (self, "button-release-event", G_CALLBACK (window_button_release_event), self);
 
   /* handle decorations for the split headers. */
   settings = gtk_settings_get_default ();
