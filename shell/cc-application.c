@@ -287,19 +287,12 @@ cc_application_constructor (GType                  type,
 }
 
 static void
-cc_application_dispose (GObject *object)
-{
-  G_OBJECT_CLASS (cc_application_parent_class)->dispose (object);
-}
-
-static void
 cc_application_class_init (CcApplicationClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GApplicationClass *application_class = G_APPLICATION_CLASS (klass);
 
   object_class->constructor = cc_application_constructor;
-  object_class->dispose = cc_application_dispose;
   application_class->activate = cc_application_activate;
   application_class->startup = cc_application_startup;
   application_class->command_line = cc_application_command_line;
