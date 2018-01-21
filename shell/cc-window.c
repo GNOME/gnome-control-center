@@ -87,31 +87,6 @@ enum
   PROP_ACTIVE_PANEL
 };
 
-static void     panel_list_view_changed_cb  (CcPanelList  *panel_list,
-                                             GParamSpec   *pspec,
-                                             CcWindow     *self);
-
-static gboolean set_active_panel_from_id    (CcShell      *shell,
-                                             const gchar  *start_id,
-                                             GVariant     *parameters,
-                                             GError      **error);
-
-static void     show_panel_cb               (CcPanelList  *panel_list,
-                                             const gchar  *panel_id,
-                                             CcWindow     *self);
-
-static void     split_decorations_cb        (GtkSettings  *settings,
-                                             GParamSpec   *pspec,
-                                             CcWindow     *self);
-
-static gboolean window_key_press_event_cb   (GtkWidget    *win,
-                                             GdkEventKey  *event,
-                                             CcWindow     *self);
-
-static gboolean window_button_release_event_cb (GtkWidget      *win,
-                                                GdkEventButton *event,
-                                                CcWindow       *self);
-
 /* Auxiliary methods */
 static const gchar *
 get_icon_name_from_g_icon (GIcon *gicon)
@@ -402,62 +377,6 @@ set_active_panel (CcWindow *shell,
         }
       g_object_notify (G_OBJECT (shell), "active-panel");
     }
-}
-
-static void
-create_window (CcWindow *self)
-{
-  GtkSettings *settings;
-  AtkObject *accessible;
-
-  /* previous button */
-  accessible = gtk_widget_get_accessible (self->previous_button);
-  atk_object_set_name (accessible, _("All Settings"));
-
-  gtk_window_set_titlebar (GTK_WINDOW (self), self->header_box);
-  gtk_widget_show_all (self->header_box);
-
-  /*
-   * We have to create the listbox here because declaring it in window.ui
-   * and letting GtkBuilder handle it would hit the bug where the focus is
-   * not tracked.
-   */
-  self->panel_list = cc_panel_list_new ();
-
-  g_signal_connect (self->panel_list, "show-panel", G_CALLBACK (show_panel_cb), self);
-  g_signal_connect (self->panel_list, "notify::view", G_CALLBACK (panel_list_view_changed_cb), self);
-
-  g_object_bind_property (self->search_bar,
-                          "search-mode-enabled",
-                          self->panel_list,
-                          "search-mode",
-                          G_BINDING_BIDIRECTIONAL);
-
-  g_object_bind_property (self->search_entry,
-                          "text",
-                          self->panel_list,
-                          "search-query",
-                          G_BINDING_DEFAULT);
-
-  gtk_container_add (GTK_CONTAINER (self->list_scrolled), self->panel_list);
-  gtk_widget_show (self->panel_list);
-
-  setup_model (self);
-
-  /* connect various signals */
-  gtk_widget_add_events (GTK_WIDGET (self), GDK_BUTTON_RELEASE_MASK);
-
-  g_signal_connect_after (self, "key_press_event", G_CALLBACK (window_key_press_event_cb), self);
-  g_signal_connect (self, "button-release-event", G_CALLBACK (window_button_release_event_cb), self);
-
-  /* handle decorations for the split headers. */
-  settings = gtk_settings_get_default ();
-  g_signal_connect (settings,
-                    "notify::gtk-decoration-layout",
-                    G_CALLBACK (split_decorations_cb),
-                    self);
-
-  split_decorations_cb (settings, NULL, self);
 }
 
 /* Callbacks */
@@ -769,6 +688,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, list_scrolled);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_headerbar);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, previous_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_button);
@@ -776,24 +696,42 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, stack);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, top_right_box);
 
-  gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, gdk_window_set_cb);
+  gtk_widget_class_bind_template_callback (widget_class, panel_list_view_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
+  gtk_widget_class_bind_template_callback (widget_class, show_panel_cb);
   gtk_widget_class_bind_template_callback (widget_class, update_list_title);
+  gtk_widget_class_bind_template_callback (widget_class, window_button_release_event_cb);
+  gtk_widget_class_bind_template_callback (widget_class, window_key_press_event_cb);
   gtk_widget_class_bind_template_callback (widget_class, window_map_event_cb);
+
+  g_type_ensure (CC_TYPE_PANEL_LIST);
 }
 
 static void
 cc_window_init (CcWindow *self)
 {
+  GtkSettings *settings;
+
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  create_window (self);
+  gtk_widget_add_events (GTK_WIDGET (self), GDK_BUTTON_RELEASE_MASK);
 
+  /* Handle decorations for the split headers. */
+  settings = gtk_settings_get_default ();
+  g_signal_connect (settings,
+                    "notify::gtk-decoration-layout",
+                    G_CALLBACK (split_decorations_cb),
+                    self);
+
+  split_decorations_cb (settings, NULL, self);
+
+  /* Add the panels */
+  self->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
   self->previous_panels = g_queue_new ();
 
-  /* keep a list of custom widgets to unload on panel change */
-  self->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
+  setup_model (self);
 
   /* After everything is loaded, select the first visible panel */
   cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
