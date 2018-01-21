@@ -879,9 +879,9 @@ gcm_prefs_calib_upload_cb (GtkWidget *widget, CcColorPanel *prefs)
     }
 
   /* setup the session */
-  session = soup_session_sync_new_with_options (SOUP_SESSION_USER_AGENT, "gnome-control-center",
-                                                SOUP_SESSION_TIMEOUT, 5000,
-                                                NULL);
+  session = soup_session_new_with_options (SOUP_SESSION_USER_AGENT, "gnome-control-center",
+                                           SOUP_SESSION_TIMEOUT, 5000,
+                                           NULL);
   if (session == NULL)
   {
     g_warning ("Failed to setup networking");
@@ -1008,9 +1008,10 @@ gcm_prefs_calib_export_link_cb (GtkLabel *widget,
                                 const gchar *url,
                                 CcColorPanel *prefs)
 {
-  gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (prefs->priv->main_window)),
-                "help:gnome-help/color-howtoimport",
-                GDK_CURRENT_TIME, NULL);
+  gtk_show_uri_on_window (GTK_WINDOW (prefs->priv->main_window),
+                          "help:gnome-help/color-howtoimport",
+                          GDK_CURRENT_TIME,
+                          NULL);
 }
 
 static void
