@@ -753,18 +753,6 @@ cc_window_new (GtkApplication *application)
 }
 
 void
-cc_window_present (CcWindow *center)
-{
-  gtk_window_present (GTK_WINDOW (center));
-}
-
-void
-cc_window_show (CcWindow *center)
-{
-  gtk_window_present (GTK_WINDOW (center));
-}
-
-void
 cc_window_set_overview_page (CcWindow *center)
 {
   shell_show_overview_page (center);

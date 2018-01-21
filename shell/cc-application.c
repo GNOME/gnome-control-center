@@ -138,7 +138,7 @@ cc_application_command_line (GApplication *application,
   debug = g_variant_dict_contains (options, "verbose");
   cc_shell_log_set_debug (debug);
 
-  cc_window_show (self->priv->window);
+  gtk_window_present (GTK_WINDOW (self->priv->window));
 
   if (g_variant_dict_lookup (options, "search", "&s", &search_str))
     {
@@ -204,7 +204,7 @@ cc_application_activate (GApplication *application)
 {
   CcApplication *self = CC_APPLICATION (application);
 
-  cc_window_present (self->priv->window);
+  gtk_window_present (GTK_WINDOW (self->priv->window));
 }
 
 static void
