@@ -17,54 +17,16 @@
  * 02110-1301, USA.
  */
 
-#ifndef CC_APPLICATION_H
-#define CC_APPLICATION_H
+#pragma once
 
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_APPLICATION (cc_application_get_type ())
+#define CC_TYPE_APPLICATION (cc_application_get_type())
 
-#define CC_APPLICATION(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-   CC_TYPE_APPLICATION, CcApplication))
-
-#define CC_APPLICATION_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-   CC_TYPE_APPLICATION, CcApplicationClass))
-
-#define CC_IS_APPLICATION(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-   CC_TYPE_APPLICATION))
-
-#define CC_IS_APPLICATION_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-   CC_TYPE_APPLICATION))
-
-#define CC_APPLICATION_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-   CC_TYPE_APPLICATION, CcApplicationClass))
-
-typedef struct _CcApplication        CcApplication;
-typedef struct _CcApplicationClass   CcApplicationClass;
-typedef struct _CcApplicationPrivate CcApplicationPrivate;
-
-struct _CcApplication
-{
-  GtkApplication parent_instance;
-  CcApplicationPrivate *priv;
-};
-
-struct _CcApplicationClass
-{
-  GtkApplicationClass parent_class;
-};
-
-GType                  cc_application_get_type               (void) G_GNUC_CONST;
+G_DECLARE_FINAL_TYPE (CcApplication, cc_application, CC, APPLICATION, GtkApplication)
 
 GtkApplication        *cc_application_new                    (void);
 
 G_END_DECLS
-
-#endif /* CC_APPLICATION_H */

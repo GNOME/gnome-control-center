@@ -34,9 +34,11 @@
 #include <clutter-gtk/clutter-gtk.h>
 #endif /* HAVE_WACOM || HAVE_CHEESE */
 
-struct _CcApplicationPrivate
+struct _CcApplication
 {
-  CcWindow *window;
+  GtkApplication  parent;
+
+  CcWindow       *window;
 };
 
 G_DEFINE_TYPE (CcApplication, cc_application, GTK_TYPE_APPLICATION)
@@ -61,11 +63,11 @@ help_activated (GSimpleAction *action,
   GtkWidget *window;
   const char *uri = NULL;
 
-  panel = cc_shell_get_active_panel (CC_SHELL (self->priv->window));
+  panel = cc_shell_get_active_panel (CC_SHELL (self->window));
   if (panel)
     uri = cc_panel_get_help_uri (panel);
 
-  window = cc_shell_get_toplevel (CC_SHELL (self->priv->window));
+  window = cc_shell_get_toplevel (CC_SHELL (self->window));
   gtk_show_uri_on_window (GTK_WINDOW (window),
                           uri ? uri : "help:gnome-help/prefs",
                           GDK_CURRENT_TIME,
@@ -85,7 +87,7 @@ launch_panel_activated (GSimpleAction *action,
   g_variant_get (parameter, "(&s@av)", &panel_id, &parameters);
   g_debug ("gnome-control-center: 'launch-panel' activated for panel '%s' with %"G_GSIZE_FORMAT" arguments",
       panel_id, g_variant_n_children (parameters));
-  if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->priv->window), panel_id, parameters, &error))
+  if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), panel_id, parameters, &error))
     {
       g_warning ("Failed to activate the '%s' panel: %s", panel_id, error->message);
       g_error_free (error);
@@ -97,7 +99,8 @@ launch_panel_activated (GSimpleAction *action,
 }
 
 static gint
-cc_application_handle_local_options (GApplication *application, GVariantDict *options)
+cc_application_handle_local_options (GApplication *application,
+                                     GVariantDict *options)
 {
   if (g_variant_dict_contains (options, "version"))
     {
@@ -124,7 +127,7 @@ cc_application_handle_local_options (GApplication *application, GVariantDict *op
 }
 
 static int
-cc_application_command_line (GApplication *application,
+cc_application_command_line (GApplication            *application,
                              GApplicationCommandLine *command_line)
 {
   CcApplication *self = CC_APPLICATION (application);
@@ -139,15 +142,15 @@ cc_application_command_line (GApplication *application,
   debug = g_variant_dict_contains (options, "verbose");
   cc_shell_log_set_debug (debug);
 
-  gtk_window_present (GTK_WINDOW (self->priv->window));
+  gtk_window_present (GTK_WINDOW (self->window));
 
   if (g_variant_dict_lookup (options, "search", "&s", &search_str))
     {
-      cc_window_set_search_item (self->priv->window, search_str);
+      cc_window_set_search_item (self->window, search_str);
     }
   else if (g_variant_dict_contains (options, "overview"))
     {
-      cc_window_set_overview_page (self->priv->window);
+      cc_window_set_overview_page (self->window);
     }
   else if (g_variant_dict_lookup (options, G_OPTION_REMAINING, "^a&ay", &start_panels))
     {
@@ -170,7 +173,7 @@ cc_application_command_line (GApplication *application,
       for (i = 1; start_panels[i] != NULL; i++)
         g_variant_builder_add (&builder, "v", g_variant_new_string (start_panels[i]));
       parameters = g_variant_builder_end (&builder);
-      if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->priv->window), start_id, parameters, &err))
+      if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), start_id, parameters, &err))
         {
           g_warning ("Could not load setting panel \"%s\": %s", start_id,
                      (err) ? err->message : "Unknown error");
@@ -191,12 +194,12 @@ cc_application_command_line (GApplication *application,
 
 static void
 cc_application_quit (GSimpleAction *simple,
-                     GVariant *parameter,
-                     gpointer user_data)
+                     GVariant      *parameter,
+                     gpointer       user_data)
 {
   CcApplication *self = CC_APPLICATION (user_data);
 
-  gtk_widget_destroy (GTK_WIDGET (self->priv->window));
+  gtk_widget_destroy (GTK_WIDGET (self->window));
 }
 
 
@@ -205,7 +208,7 @@ cc_application_activate (GApplication *application)
 {
   CcApplication *self = CC_APPLICATION (application);
 
-  gtk_window_present (GTK_WINDOW (self->priv->window));
+  gtk_window_present (GTK_WINDOW (self->window));
 }
 
 static void
@@ -261,12 +264,12 @@ cc_application_startup (GApplication *application)
   gtk_application_set_accels_for_action (GTK_APPLICATION (application),
                                          "app.help", help_accels);
 
-  self->priv->window = cc_window_new (GTK_APPLICATION (application));
+  self->window = cc_window_new (GTK_APPLICATION (application));
 }
 
 static GObject *
-cc_application_constructor (GType type,
-                            guint n_construct_params,
+cc_application_constructor (GType                  type,
+                            guint                  n_construct_params,
                             GObjectConstructParam *construct_params)
 {
   static GObject *self = NULL;
@@ -283,30 +286,17 @@ cc_application_constructor (GType type,
   return g_object_ref (self);
 }
 
-
 static void
 cc_application_dispose (GObject *object)
 {
   G_OBJECT_CLASS (cc_application_parent_class)->dispose (object);
 }
 
-
 static void
-cc_application_init (CcApplication *self)
+cc_application_class_init (CcApplicationClass *klass)
 {
-  g_application_add_main_option_entries (G_APPLICATION (self), all_options);
-
-  self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self,
-                                            CC_TYPE_APPLICATION,
-                                            CcApplicationPrivate);
-}
-
-
-static void
-cc_application_class_init (CcApplicationClass *class)
-{
-  GObjectClass *object_class = G_OBJECT_CLASS (class);
-  GApplicationClass *application_class = G_APPLICATION_CLASS (class);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GApplicationClass *application_class = G_APPLICATION_CLASS (klass);
 
   object_class->constructor = cc_application_constructor;
   object_class->dispose = cc_application_dispose;
@@ -314,10 +304,13 @@ cc_application_class_init (CcApplicationClass *class)
   application_class->startup = cc_application_startup;
   application_class->command_line = cc_application_command_line;
   application_class->handle_local_options = cc_application_handle_local_options;
-
-  g_type_class_add_private (class, sizeof (CcApplicationPrivate));
 }
 
+static void
+cc_application_init (CcApplication *self)
+{
+  g_application_add_main_option_entries (G_APPLICATION (self), all_options);
+}
 
 GtkApplication *
 cc_application_new (void)
