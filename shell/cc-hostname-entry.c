@@ -24,19 +24,17 @@
 
 #include <polkit/polkit.h>
 
-
-G_DEFINE_TYPE (CcHostnameEntry, cc_hostname_entry, GTK_TYPE_ENTRY)
-
-#define HOSTNAME_ENTRY_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_HOSTNAME_ENTRY, CcHostnameEntryPrivate))
-
-#define SET_HOSTNAME_TIMEOUT 1
-
-struct _CcHostnameEntryPrivate
+struct _CcHostnameEntry
 {
+  GtkEntry             parent;
+
   GDBusProxy          *hostnamed_proxy;
   guint                set_hostname_timeout_source_id;
 };
+
+G_DEFINE_TYPE (CcHostnameEntry, cc_hostname_entry, GTK_TYPE_ENTRY)
+
+#define SET_HOSTNAME_TIMEOUT 1
 
 static void
 cc_hostname_entry_set_hostname (CcHostnameEntry *self)
@@ -49,7 +47,7 @@ cc_hostname_entry_set_hostname (CcHostnameEntry *self)
   text = gtk_entry_get_text (GTK_ENTRY (self));
 
   g_debug ("Setting PrettyHostname to '%s'", text);
-  variant = g_dbus_proxy_call_sync (self->priv->hostnamed_proxy,
+  variant = g_dbus_proxy_call_sync (self->hostnamed_proxy,
                                     "SetPrettyHostname",
                                     g_variant_new ("(sb)", text, FALSE),
                                     G_DBUS_CALL_FLAGS_NONE,
@@ -70,7 +68,7 @@ cc_hostname_entry_set_hostname (CcHostnameEntry *self)
   g_assert (hostname);
 
   g_debug ("Setting StaticHostname to '%s'", hostname);
-  variant = g_dbus_proxy_call_sync (self->priv->hostnamed_proxy,
+  variant = g_dbus_proxy_call_sync (self->hostnamed_proxy,
                                     "SetStaticHostname",
                                     g_variant_new ("(sb)", hostname, FALSE),
                                     G_DBUS_CALL_FLAGS_NONE,
@@ -91,14 +89,13 @@ static char *
 get_hostname_property (CcHostnameEntry *self,
                        const char      *property)
 {
-  CcHostnameEntryPrivate *priv = self->priv;
   GVariant *variant;
   char *str;
 
-  if (!priv->hostnamed_proxy)
+  if (!self->hostnamed_proxy)
     return g_strdup ("");
 
-  variant = g_dbus_proxy_get_cached_property (priv->hostnamed_proxy,
+  variant = g_dbus_proxy_get_cached_property (self->hostnamed_proxy,
                                               property);
   if (!variant)
     {
@@ -107,7 +104,7 @@ get_hostname_property (CcHostnameEntry *self,
 
       /* Work around systemd-hostname not sending us back
        * the property value when changing values */
-      variant = g_dbus_proxy_call_sync (priv->hostnamed_proxy,
+      variant = g_dbus_proxy_call_sync (self->hostnamed_proxy,
                                         "org.freedesktop.DBus.Properties.Get",
                                         g_variant_new ("(ss)", "org.freedesktop.hostname1", property),
                                         G_DBUS_CALL_FLAGS_NONE,
@@ -155,7 +152,7 @@ cc_hostname_entry_get_display_hostname (CcHostnameEntry  *self)
 static gboolean
 set_hostname_timeout (CcHostnameEntry *self)
 {
-  self->priv->set_hostname_timeout_source_id = 0;
+  self->set_hostname_timeout_source_id = 0;
 
   cc_hostname_entry_set_hostname (self);
 
@@ -163,24 +160,22 @@ set_hostname_timeout (CcHostnameEntry *self)
 }
 
 static void
-remove_hostname_timeout (CcHostnameEntry *entry)
+remove_hostname_timeout (CcHostnameEntry *self)
 {
-  CcHostnameEntryPrivate *priv = entry->priv;
+  if (self->set_hostname_timeout_source_id)
+    g_source_remove (self->set_hostname_timeout_source_id);
 
-  if (priv->set_hostname_timeout_source_id)
-    g_source_remove (priv->set_hostname_timeout_source_id);
-
-  priv->set_hostname_timeout_source_id = 0;
+  self->set_hostname_timeout_source_id = 0;
 }
 
 static void
-reset_hostname_timeout (CcHostnameEntry *entry)
+reset_hostname_timeout (CcHostnameEntry *self)
 {
-  remove_hostname_timeout (entry);
+  remove_hostname_timeout (self);
 
-  entry->priv->set_hostname_timeout_source_id = g_timeout_add_seconds (SET_HOSTNAME_TIMEOUT,
-                                                                       (GSourceFunc) set_hostname_timeout,
-                                                                       entry);
+  self->set_hostname_timeout_source_id = g_timeout_add_seconds (SET_HOSTNAME_TIMEOUT,
+                                                                (GSourceFunc) set_hostname_timeout,
+                                                                self);
 }
 
 static void
@@ -192,26 +187,25 @@ text_changed_cb (CcHostnameEntry *entry)
 static void
 cc_hostname_entry_dispose (GObject *object)
 {
-  CcHostnameEntry *entry = CC_HOSTNAME_ENTRY (object);
-  CcHostnameEntryPrivate *priv = entry->priv;
+  CcHostnameEntry *self = CC_HOSTNAME_ENTRY (object);
 
-  if (priv->set_hostname_timeout_source_id)
+  if (self->set_hostname_timeout_source_id)
     {
-      remove_hostname_timeout (entry);
-      set_hostname_timeout (entry);
+      remove_hostname_timeout (self);
+      set_hostname_timeout (self);
     }
 
-  g_clear_object (&priv->hostnamed_proxy);
+  g_clear_object (&self->hostnamed_proxy);
 
   G_OBJECT_CLASS (cc_hostname_entry_parent_class)->dispose (object);
 }
 
 static void
-cc_hostname_entry_constructed (GObject *self)
+cc_hostname_entry_constructed (GObject *object)
 {
-  CcHostnameEntryPrivate *priv = CC_HOSTNAME_ENTRY (self)->priv;
-  GError *error = NULL;
+  CcHostnameEntry *self = CC_HOSTNAME_ENTRY (object);
   GPermission *permission;
+  GError *error = NULL;
   char *str;
 
   permission = polkit_permission_new_sync ("org.freedesktop.hostname1.set-static-hostname",
@@ -238,7 +232,7 @@ cc_hostname_entry_constructed (GObject *self)
   gtk_widget_set_sensitive (GTK_WIDGET (self),
                             g_permission_get_allowed (permission));
 
-  priv->hostnamed_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+  self->hostnamed_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                          G_DBUS_PROXY_FLAGS_NONE,
                                                          NULL,
                                                          "org.freedesktop.hostname1",
@@ -249,7 +243,7 @@ cc_hostname_entry_constructed (GObject *self)
 
   /* This could only happen if the policy file was installed
    * but not hostnamed, which points to a system bug */
-  if (priv->hostnamed_proxy == NULL)
+  if (self->hostnamed_proxy == NULL)
     {
       g_debug ("Couldn't get hostnamed to start, bailing: %s", error->message);
       g_error_free (error);
@@ -264,16 +258,13 @@ cc_hostname_entry_constructed (GObject *self)
     gtk_entry_set_text (GTK_ENTRY (self), "");
   g_free (str);
 
-  g_signal_connect (G_OBJECT (self), "changed", G_CALLBACK (text_changed_cb),
-                    self);
+  g_signal_connect (G_OBJECT (self), "changed", G_CALLBACK (text_changed_cb), self);
 }
 
 static void
 cc_hostname_entry_class_init (CcHostnameEntryClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (CcHostnameEntryPrivate));
 
   object_class->constructed = cc_hostname_entry_constructed;
   object_class->dispose = cc_hostname_entry_dispose;
@@ -282,7 +273,6 @@ cc_hostname_entry_class_init (CcHostnameEntryClass *klass)
 static void
 cc_hostname_entry_init (CcHostnameEntry *self)
 {
-  self->priv = HOSTNAME_ENTRY_PRIVATE (self);
 }
 
 CcHostnameEntry *

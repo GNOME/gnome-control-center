@@ -17,56 +17,17 @@
  *
  */
 
-#ifndef __CC_HOSTNAME_ENTRY_H__
-#define __CC_HOSTNAME_ENTRY_H__
+#pragma once
 
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_HOSTNAME_ENTRY cc_hostname_entry_get_type()
+#define CC_TYPE_HOSTNAME_ENTRY (cc_hostname_entry_get_type())
 
-#define CC_HOSTNAME_ENTRY(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_HOSTNAME_ENTRY, CcHostnameEntry))
-
-#define CC_HOSTNAME_ENTRY_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_HOSTNAME_ENTRY, CcHostnameEntryClass))
-
-#define CC_IS_HOSTNAME_ENTRY(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_HOSTNAME_ENTRY))
-
-#define CC_IS_HOSTNAME_ENTRY_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_HOSTNAME_ENTRY))
-
-#define CC_HOSTNAME_ENTRY_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_HOSTNAME_ENTRY, CcHostnameEntryClass))
-
-typedef struct _CcHostnameEntry CcHostnameEntry;
-typedef struct _CcHostnameEntryClass CcHostnameEntryClass;
-typedef struct _CcHostnameEntryPrivate CcHostnameEntryPrivate;
-
-struct _CcHostnameEntry
-{
-  GtkEntry parent;
-
-  CcHostnameEntryPrivate *priv;
-};
-
-struct _CcHostnameEntryClass
-{
-  GtkEntryClass parent_class;
-};
-
-GType cc_hostname_entry_get_type (void) G_GNUC_CONST;
+G_DECLARE_FINAL_TYPE (CcHostnameEntry, cc_hostname_entry, CC, HOSTNAME_ENTRY, GtkEntry)
 
 CcHostnameEntry *cc_hostname_entry_new (void);
 gchar* cc_hostname_entry_get_hostname (CcHostnameEntry *entry);
 
 G_END_DECLS
-
-#endif /* __CC_HOSTNAME_ENTRY_H__ */
