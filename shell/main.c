@@ -38,8 +38,7 @@
 int
 main (int argc, char **argv)
 {
-  GtkApplication *application;
-  int status;
+  g_autoptr(GtkApplication) application = NULL;
 
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -54,9 +53,6 @@ main (int argc, char **argv)
 #endif /* HAVE_CHEESE */
 
   application = cc_application_new ();
-  status = g_application_run (G_APPLICATION (application), argc, argv);
 
-  g_object_unref (application);
-
-  return status;
+  return g_application_run (G_APPLICATION (application), argc, argv);
 }
