@@ -87,7 +87,7 @@ if enable_cheese
   shell_deps += cheese_deps
 endif
 
-if enable_linux
+if host_is_linux_not_s390
   shell_deps += wacom_deps
 endif
 

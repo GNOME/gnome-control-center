@@ -36,8 +36,12 @@ deps = common_deps + [
 
 cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
 
-if enable_linux
-  deps += network_manager_deps + [gnome_bluetooth_dep]
+if host_is_linux
+  deps += network_manager_deps
+endif
+
+if host_is_linux_not_s390
+  deps += gnome_bluetooth_dep
 endif
 
 panels_libs += static_library(
