@@ -369,7 +369,7 @@ static void
 cc_mouse_properties_init (CcMouseProperties *object)
 {
 	CcMousePropertiesPrivate *d = object->priv = CC_MOUSE_PROPERTIES_GET_PRIVATE (object);
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 
 	d->builder = gtk_builder_new ();
 	gtk_builder_add_from_resource (d->builder,

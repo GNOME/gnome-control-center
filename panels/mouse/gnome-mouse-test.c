@@ -117,8 +117,8 @@ scroll_image_timeout (CcMouseTestPrivate *d)
 static void
 setup_information_label (CcMouseTestPrivate *d)
 {
-	gchar *message = NULL;
-	gchar *label_text = NULL;
+	const gchar *message = NULL;
+	g_autofree gchar *label_text = NULL;
 	gboolean double_click;
 
 	if (d->information_label_timeout_id != 0) {
@@ -150,7 +150,6 @@ setup_information_label (CcMouseTestPrivate *d)
 
 	label_text = g_strconcat ("<b>", message, "</b>", NULL);
 	gtk_label_set_markup (GTK_LABEL (WID ("information_label")), label_text);
-	g_free (label_text);
 
 	d->information_label_timeout_id = g_timeout_add (2500, (GSourceFunc) information_label_timeout, d);
 }
@@ -361,7 +360,7 @@ static void
 cc_mouse_test_init (CcMouseTest *object)
 {
 	CcMouseTestPrivate *d = object->priv = CC_MOUSE_TEST_GET_PRIVATE (object);
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 
 	d->builder = gtk_builder_new ();
 	gtk_builder_add_from_resource (d->builder,

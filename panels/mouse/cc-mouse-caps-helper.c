@@ -30,7 +30,8 @@ touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
                                  gboolean *have_tap_to_click)
 {
         Display *display;
-	GList *devicelist, *l;
+	g_autoptr(GList) devicelist = NULL;
+	GList *l;
 	Atom realtype, prop_scroll_methods, prop_tapping_enabled;
 	int realformat;
 	unsigned long nitems, bytes_after;
@@ -79,7 +80,6 @@ touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 			XFree (data);
 		}
 	}
-        g_list_free (devicelist);
 
         gdk_error_trap_pop_ignored ();
 
@@ -106,7 +106,8 @@ gboolean
 cc_synaptics_check (void)
 {
         Display *display;
-        GList *devicelist, *l;
+        g_autoptr(GList) devicelist = NULL;
+        GList *l;
         Atom prop, realtype;
         int realformat;
         unsigned long nitems, bytes_after;
@@ -136,7 +137,6 @@ cc_synaptics_check (void)
                 if (have_synaptics)
                         break;
         }
-        g_list_free (devicelist);
 
         gdk_error_trap_pop_ignored ();
 
