@@ -442,7 +442,7 @@ void
 cc_keyboard_option_set_selection (CcKeyboardOption *self,
                                   GtkTreeIter      *iter)
 {
-  gchar *new_value = NULL;
+  g_autofree gchar *new_value = NULL;
 
   g_return_if_fail (CC_IS_KEYBOARD_OPTION (self));
 
@@ -465,8 +465,6 @@ cc_keyboard_option_set_selection (CcKeyboardOption *self,
 
   g_settings_set_strv (input_sources_settings, XKB_OPTIONS_KEY,
                        (const gchar * const *) current_xkb_options);
-
-  g_free (new_value);
 }
 
 void
