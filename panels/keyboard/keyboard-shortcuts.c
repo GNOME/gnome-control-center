@@ -32,10 +32,10 @@
 static char *
 replace_pictures_folder (const char *description)
 {
-  GRegex *pictures_regex;
+  g_autoptr(GRegex) pictures_regex = NULL;
   const char *path;
-  char *dirname;
-  char *ret;
+  g_autofree gchar *dirname = NULL;
+  g_autofree gchar *ret = NULL;
 
   if (description == NULL)
     return NULL;
@@ -49,13 +49,10 @@ replace_pictures_folder (const char *description)
   ret = g_regex_replace (pictures_regex, description, -1,
                          0, dirname, 0, NULL);
 
-  g_regex_unref (pictures_regex);
-  g_free (dirname);
-
   if (ret == NULL)
     return g_strdup (description);
 
-  return ret;
+  return g_steal_pointer (&ret);
 }
 
 static void
@@ -312,8 +309,8 @@ is_valid_accel (CcKeyCombo *combo)
 gchar*
 find_free_settings_path (GSettings *settings)
 {
-  char **used_names;
-  char *dir = NULL;
+  g_auto(GStrv) used_names = NULL;
+  g_autofree gchar *dir = NULL;
   int i, num, n_names;
 
   used_names = g_settings_get_strv (settings, "custom-keybindings");
@@ -321,7 +318,7 @@ find_free_settings_path (GSettings *settings)
 
   for (num = 0; dir == NULL; num++)
     {
-      char *tmp;
+      g_autofree gchar *tmp = NULL;
       gboolean found = FALSE;
 
       tmp = g_strdup_printf ("%s/custom%d/", CUSTOM_KEYS_BASENAME, num);
@@ -329,13 +326,10 @@ find_free_settings_path (GSettings *settings)
         found = strcmp (used_names[i], tmp) == 0;
 
       if (!found)
-        dir = tmp;
-      else
-        g_free (tmp);
+        dir = g_steal_pointer (&tmp);
     }
-  g_strfreev (used_names);
 
-  return dir;
+  return g_steal_pointer (&dir);
 }
 
 static gboolean
@@ -380,12 +374,12 @@ KeyList*
 parse_keylist_from_file (const gchar *path)
 {
   KeyList *keylist;
-  GError *err = NULL;
-  char *buf;
+  g_autoptr(GError) err = NULL;
+  g_autofree gchar *buf = NULL;
   gsize buf_len;
   guint i;
 
-  GMarkupParseContext *ctx;
+  g_autoptr(GMarkupParseContext) ctx = NULL;
   GMarkupParser parser = { parse_start_tag, NULL, NULL, NULL, NULL };
 
   /* Parse file */
@@ -399,7 +393,6 @@ parse_keylist_from_file (const gchar *path)
   if (!g_markup_parse_context_parse (ctx, buf, buf_len, &err))
     {
       g_warning ("Failed to parse '%s': '%s'", path, err->message);
-      g_error_free (err);
       g_free (keylist->name);
       g_free (keylist->package);
       g_free (keylist->wm_name);
@@ -409,10 +402,8 @@ parse_keylist_from_file (const gchar *path)
 
       g_array_free (keylist->entries, TRUE);
       g_free (keylist);
-      keylist = NULL;
+      return NULL;
     }
-  g_markup_parse_context_free (ctx);
-  g_free (buf);
 
   return keylist;
 }

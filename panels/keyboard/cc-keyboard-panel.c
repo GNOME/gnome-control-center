@@ -118,13 +118,11 @@ transform_binding_to_accel (GBinding     *binding,
   /* Embolden the label when the shortcut is modified */
   if (!cc_keyboard_item_is_value_default (item))
     {
-      gchar *tmp;
+      g_autofree gchar *tmp = NULL;
 
       tmp = convert_keysym_state_to_string (combo);
 
       accelerator = g_strdup_printf ("<b>%s</b>", tmp);
-
-      g_free (tmp);
     }
   else
     {
@@ -507,7 +505,7 @@ header_function (GtkListBoxRow *row,
   if (add_header)
     {
       GtkWidget *box, *label;
-      gchar *markup;
+      g_autofree gchar *markup = NULL;
 
       box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
       gtk_widget_set_margin_top (box, before ? 18 : 6);
@@ -528,8 +526,6 @@ header_function (GtkListBoxRow *row,
       gtk_list_box_row_set_header (row, box);
 
       gtk_widget_show_all (box);
-
-      g_free (markup);
     }
   else
     {
@@ -545,8 +541,9 @@ filter_function (GtkListBoxRow *row,
   CcKeyboardItem *item;
   RowData *data;
   gboolean retval;
-  gchar *search, *name;
-  gchar **terms;
+  g_autofree gchar *search = NULL;
+  g_autofree gchar *name = NULL;
+  g_auto(GStrv) terms = NULL;
   guint i;
 
   if (gtk_entry_get_text_length (GTK_ENTRY (self->search_entry)) == 0)
@@ -568,10 +565,6 @@ filter_function (GtkListBoxRow *row,
       if (!retval)
         break;
     }
-
-  g_free (search);
-  g_free (name);
-  g_strfreev (terms);
 
   return retval;
 }
