@@ -95,6 +95,7 @@ struct _CcPrintersPanelPrivate
   GCancellable *get_all_ppds_cancellable;
   GCancellable *subscription_renew_cancellable;
   GCancellable *actualize_printers_list_cancellable;
+  GCancellable *cups_status_check_cancellable;
 
   gchar    *new_printer_name;
   gchar    *new_printer_location;
@@ -241,6 +242,9 @@ cc_printers_panel_dispose (GObject *object)
   g_clear_object (&priv->actualize_printers_list_cancellable);
 
   detach_from_cups_notifier (CC_PRINTERS_PANEL (object));
+
+  g_cancellable_cancel (priv->cups_status_check_cancellable);
+  g_clear_object (&priv->cups_status_check_cancellable);
 
   if (priv->cups_status_check_id > 0)
     {
@@ -809,7 +813,7 @@ set_current_page (GObject      *source_object,
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
-  success = pp_cups_connection_test_finish (cups, result);
+  success = pp_cups_connection_test_finish (cups, result, NULL);
   g_object_unref (source_object);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "main-vbox");
@@ -857,7 +861,7 @@ actualize_printers_list_cb (GObject      *source_object,
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "main-vbox");
   if (priv->num_dests == 0 && !priv->new_printer_name)
-    pp_cups_connection_test_async (g_object_ref (cups), set_current_page, self);
+    pp_cups_connection_test_async (g_object_ref (cups), NULL, set_current_page, self);
   else
     gtk_stack_set_visible_child_name (GTK_STACK (widget), "printers-list");
 
@@ -1095,7 +1099,7 @@ cups_status_check_cb (GObject      *source_object,
 
   priv = self->priv;
 
-  success = pp_cups_connection_test_finish (cups, result);
+  success = pp_cups_connection_test_finish (cups, result, NULL);
   if (success)
     {
       actualize_printers_list (self);
@@ -1118,7 +1122,7 @@ cups_status_check (gpointer user_data)
   priv = self->priv;
 
   cups = pp_cups_new ();
-  pp_cups_connection_test_async (cups, cups_status_check_cb, self);
+  pp_cups_connection_test_async (cups, NULL, cups_status_check_cb, self);
 
   return priv->cups_status_check_id != 0;
 }
@@ -1132,10 +1136,20 @@ connection_test_cb (GObject      *source_object,
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   gboolean                success;
   PpCups                 *cups = PP_CUPS (source_object);
+  g_autoptr(GError)       error = NULL;
 
   priv = self->priv;
 
-  success = pp_cups_connection_test_finish (cups, result);
+  success = pp_cups_connection_test_finish (cups, result, &error);
+
+  if (error != NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_warning ("Could not test connection: %s", error->message);
+        }
+    }
+
   if (!success)
     {
       priv->cups_status_check_id =
@@ -1264,6 +1278,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
                                                  NULL);
 
   priv->actualize_printers_list_cancellable = g_cancellable_new ();
+  priv->cups_status_check_cancellable = g_cancellable_new ();
 
   builder_result = gtk_builder_add_objects_from_resource (priv->builder,
                                                           "/org/gnome/control-center/printers/printers.ui",
@@ -1354,7 +1369,7 @@ Please check your installation");
                       self);
 
   cups = pp_cups_new ();
-  pp_cups_connection_test_async (cups, connection_test_cb, self);
+  pp_cups_connection_test_async (cups, priv->cups_status_check_cancellable, connection_test_cb, self);
   gtk_container_add (GTK_CONTAINER (self), top_widget);
   gtk_widget_show_all (GTK_WIDGET (self));
 }

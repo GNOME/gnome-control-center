@@ -66,11 +66,13 @@ PpCupsDests *pp_cups_get_dests_finish (PpCups               *cups,
                                        GError              **error);
 
 void         pp_cups_connection_test_async (PpCups              *cups,
+                                            GCancellable        *cancellable,
                                             GAsyncReadyCallback  callback,
                                             gpointer             user_data);
 
 gboolean     pp_cups_connection_test_finish (PpCups         *cups,
-                                             GAsyncResult   *result);
+                                             GAsyncResult   *result,
+                                             GError        **error);
 
 void         pp_cups_cancel_subscription_async    (PpCups              *cups,
                                                    gint                 subscription_id,

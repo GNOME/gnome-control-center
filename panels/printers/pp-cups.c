@@ -112,19 +112,24 @@ connection_test_thread (GTask        *task,
   http_t *http;
 
   http = httpConnectEncrypt (cupsServer (), ippPort (), cupsEncryption ());
-  g_task_return_boolean (task, http != NULL);
-
   httpClose (http);
+
+  if (g_task_set_return_on_cancel (task, FALSE))
+    {
+      g_task_return_boolean (task, http != NULL);
+    }
 }
 
 void
 pp_cups_connection_test_async (PpCups              *cups,
+                               GCancellable        *cancellable,
                                GAsyncReadyCallback  callback,
                                gpointer             user_data)
 {
   GTask *task;
 
-  task = g_task_new (cups, NULL, callback, user_data);
+  task = g_task_new (cups, cancellable, callback, user_data);
+  g_task_set_return_on_cancel (task, TRUE);
   g_task_run_in_thread (task, connection_test_thread);
 
   g_object_unref (task);
@@ -132,11 +137,12 @@ pp_cups_connection_test_async (PpCups              *cups,
 
 gboolean
 pp_cups_connection_test_finish (PpCups         *cups,
-                                GAsyncResult   *result)
+                                GAsyncResult   *result,
+                                GError        **error)
 {
   g_return_val_if_fail (g_task_is_valid (result, cups), FALSE);
 
-  return g_task_propagate_boolean (G_TASK (result), NULL);
+  return g_task_propagate_boolean (G_TASK (result), error);
 }
 
 /* Cancels subscription of given id */
