@@ -228,7 +228,8 @@ add_shortcuts (CcKeyboardManager *self)
     {
       BindingGroupType group;
       GPtrArray *keys;
-      gchar *id, *title;
+      g_autofree gchar *id = NULL;
+      g_autofree gchar *title = NULL;
       gint i;
 
       gtk_tree_model_get (sections_model,
@@ -272,9 +273,6 @@ add_shortcuts (CcKeyboardManager *self)
         }
 
       can_continue = gtk_tree_model_iter_next (sections_model, &sections_iter);
-
-      g_free (title);
-      g_free (id);
     }
 }
 
@@ -431,11 +429,10 @@ append_sections_from_file (CcKeyboardManager  *self,
   keys = (KeyListEntry *) g_array_free (keylist->entries, FALSE);
   if (keylist->package)
     {
-      char *localedir;
+      g_autofree gchar *localedir = NULL;
 
       localedir = g_build_filename (datadir, "locale", NULL);
       bindtextdomain (keylist->package, localedir);
-      g_free (localedir);
 
       title = dgettext (keylist->package, keylist->name);
     } else {
@@ -471,7 +468,7 @@ append_sections_from_file (CcKeyboardManager  *self,
 static void
 append_sections_from_gsettings (CcKeyboardManager *self)
 {
-  char **custom_paths;
+  g_auto(GStrv) custom_paths = NULL;
   GArray *entries;
   KeyListEntry key = { 0, 0, 0, 0, 0, 0, 0 };
   int i;
@@ -491,7 +488,6 @@ append_sections_from_gsettings (CcKeyboardManager *self)
       else
         g_free (key.name);
     }
-  g_strfreev (custom_paths);
 
   if (entries->len > 0)
     {
@@ -565,21 +561,18 @@ reload_sections (CcKeyboardManager *self)
   data_dirs = g_get_system_data_dirs ();
   for (i = 0; data_dirs[i] != NULL; i++)
     {
-      char *dir_path;
+      g_autofree gchar *dir_path = NULL;
       const gchar *name;
 
       dir_path = g_build_filename (data_dirs[i], "gnome-control-center", "keybindings", NULL);
 
       dir = g_dir_open (dir_path, 0, NULL);
       if (!dir)
-        {
-          g_free (dir_path);
-          continue;
-        }
+        continue;
 
       for (name = g_dir_read_name (dir) ; name ; name = g_dir_read_name (dir))
         {
-          gchar *path;
+          g_autofree gchar *path = NULL;
 
           if (g_str_has_suffix (name, ".xml") == FALSE)
             continue;
@@ -593,10 +586,8 @@ reload_sections (CcKeyboardManager *self)
           g_hash_table_insert (loaded_files, g_strdup (name), GINT_TO_POINTER (1));
           path = g_build_filename (dir_path, name, NULL);
           append_sections_from_file (self, path, data_dirs[i], wm_keybindings);
-          g_free (path);
         }
 
-      g_free (dir_path);
       g_dir_close (dir);
     }
 
@@ -753,7 +744,7 @@ CcKeyboardItem*
 cc_keyboard_manager_create_custom_shortcut (CcKeyboardManager *self)
 {
   CcKeyboardItem *item;
-  gchar *settings_path;
+  g_autofree gchar *settings_path = NULL;
 
   g_return_val_if_fail (CC_IS_KEYBOARD_MANAGER (self), NULL);
 
@@ -761,7 +752,6 @@ cc_keyboard_manager_create_custom_shortcut (CcKeyboardManager *self)
 
   settings_path = find_free_settings_path (self->binding_settings);
   cc_keyboard_item_load_from_gsettings_path (item, settings_path, TRUE);
-  g_free (settings_path);
 
   item->model = GTK_TREE_MODEL (self->shortcuts_model);
   item->group = BINDING_GROUP_USER;
