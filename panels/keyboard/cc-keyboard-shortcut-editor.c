@@ -153,7 +153,7 @@ apply_custom_item_fields (CcKeyboardShortcutEditor *self,
   if (self->edited)
     {
       CcKeyCombo *combo = item->primary_combo;
-      gchar *binding;
+      g_autofree gchar *binding = NULL;
 
       combo->keycode = self->custom_combo->keycode;
       combo->keyval = self->custom_combo->keyval;
@@ -168,8 +168,6 @@ apply_custom_item_fields (CcKeyboardShortcutEditor *self,
                                                      combo->mask);
 
       g_object_set (G_OBJECT (item), "binding", binding, NULL);
-
-      g_free (binding);
     }
 
   /* Set the keyboard shortcut name and command for custom entries */
