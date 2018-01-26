@@ -119,7 +119,7 @@ dialog_adjustments_set_frac_hours (CcNightLightDialog *self,
 
   /* display the right thing for AM/PM */
   is_24h = self->clock_format == G_DESKTOP_CLOCK_FORMAT_24H;
-  hours = floor (value);
+  mins = modf (value, &hours) * 60.f;
   if (!is_24h)
     {
       if (hours > 12)
@@ -136,11 +136,6 @@ dialog_adjustments_set_frac_hours (CcNightLightDialog *self,
         {
           is_pm = TRUE;
         }
-    }
-  if (value > 0.f)
-    {
-      mins = fmod (value, hours) * 60.f;
-      mins = fmod (mins, 60.f);
     }
   g_debug ("setting adjustment %.3f to %.0f:%02.0f", value, hours, mins);
 
