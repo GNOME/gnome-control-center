@@ -45,8 +45,9 @@ static void
 update_shortcut_label (GtkWidget   *widget,
                        const gchar *value)
 {
-        gchar *text;
-        guint accel_key, *keycode;
+        g_autofree gchar *text = NULL;
+        guint accel_key;
+        g_autofree guint *keycode = NULL;
         GdkModifierType mods;
 
         if (value == NULL || *value == '\0') {
@@ -62,18 +63,16 @@ update_shortcut_label (GtkWidget   *widget,
         }
 
         text = gtk_accelerator_get_label_with_keycode (gtk_widget_get_display (widget), accel_key, *keycode, mods);
-        g_free (keycode);
         gtk_label_set_text (GTK_LABEL (widget), text);
-        g_free (text);
 }
 
 static void
 update_shortcuts (CcInputOptions *self)
 {
-        gchar **previous;
-        gchar **next;
-        gchar *previous_shortcut;
-        GSettings *settings;
+        g_auto(GStrv) previous = NULL;
+        g_auto(GStrv) next = NULL;
+        g_autofree gchar *previous_shortcut = NULL;
+        g_autoptr(GSettings) settings = NULL;
 
         settings = g_settings_new ("org.gnome.desktop.wm.keybindings");
 
@@ -84,21 +83,15 @@ update_shortcuts (CcInputOptions *self)
 
         update_shortcut_label (self->previous_source, previous_shortcut);
         update_shortcut_label (self->next_source, next[0]);
-
-        g_free (previous_shortcut);
-
-        g_strfreev (previous);
-        g_strfreev (next);
-
-        g_object_unref (settings);
 }
 
 static void
 update_modifiers_shortcut (CcInputOptions *self)
 {
-        gchar **options, **p;
-        GSettings *settings;
-        GnomeXkbInfo *xkb_info;
+        g_auto(GStrv) options = NULL;
+        gchar **p;
+        g_autoptr(GSettings) settings = NULL;
+        g_autoptr(GnomeXkbInfo) xkb_info = NULL;
         const gchar *text;
 
         xkb_info = gnome_xkb_info_new ();
@@ -115,10 +108,6 @@ update_modifiers_shortcut (CcInputOptions *self)
         } else {
                 gtk_widget_hide (self->alt_next_source);
         }
-
-        g_strfreev (options);
-        g_object_unref (settings);
-        g_object_unref (xkb_info);
 }
 
 static void

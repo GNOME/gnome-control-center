@@ -274,12 +274,12 @@ input_source_row_new (GtkWidget   *chooser,
 static void
 remove_all_children (GtkContainer *container)
 {
-  GList *list, *l;
+  g_autoptr(GList) list = NULL;
+  GList *l;
 
   list = gtk_container_get_children (container);
   for (l = list; l; l = l->next)
     gtk_container_remove (container, (GtkWidget *) l->data);
-  g_list_free (list);
 }
 
 static void
@@ -371,7 +371,7 @@ static void
 show_locale_rows (GtkWidget *chooser)
 {
   CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
-  GHashTable *initial = NULL;
+  g_autoptr(GHashTable) initial = NULL;
   LocaleInfo *info;
   GHashTableIter iter;
 
@@ -415,9 +415,6 @@ show_locale_rows (GtkWidget *chooser)
   if (gtk_widget_is_visible (priv->filter_entry) &&
       !gtk_widget_is_focus (priv->filter_entry))
     gtk_widget_grab_focus (priv->filter_entry);
-
-  if (!priv->showing_extra)
-    g_hash_table_destroy (initial);
 }
 
 static gint
@@ -573,38 +570,33 @@ static gboolean
 do_filter (GtkWidget *chooser)
 {
   CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
-  gchar **previous_words;
-  gchar *filter_contents = NULL;
+  g_autofree gchar *filter_contents = NULL;
+  gboolean words_changed;
 
   priv->filter_timeout_id = 0;
-
-  previous_words = priv->filter_words;
 
   filter_contents =
     cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (priv->filter_entry)));
 
+  words_changed = !priv->filter_words;
   if (filter_contents)
     {
+      g_auto(GStrv) previous_words = priv->filter_words;
       priv->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
-      g_free (filter_contents);
+      if (strvs_differ (priv->filter_words, previous_words))
+	words_changed = TRUE;
     }
 
   if (!priv->filter_words || !priv->filter_words[0])
     {
-      g_clear_pointer (&priv->filter_words, g_strfreev);
       gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->list));
       gtk_list_box_set_placeholder (GTK_LIST_BOX (priv->list), NULL);
     }
-  else
+  else if (words_changed)
     {
-      if (!previous_words || strvs_differ (priv->filter_words, previous_words))
-        {
-          gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->list));
-          gtk_list_box_set_placeholder (GTK_LIST_BOX (priv->list), priv->no_results);
-        }
+      gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->list));
+      gtk_list_box_set_placeholder (GTK_LIST_BOX (priv->list), priv->no_results);
     }
-
-  g_strfreev (previous_words);
 
   return G_SOURCE_REMOVE;
 }
@@ -818,15 +810,15 @@ get_ibus_locale_infos (GtkWidget *chooser)
   g_hash_table_iter_init (&iter, priv->ibus_engines);
   while (g_hash_table_iter_next (&iter, (gpointer *) &engine_id, (gpointer *) &engine))
     {
-      gchar *lang_code = NULL;
-      gchar *country_code = NULL;
+      g_autofree gchar *lang_code = NULL;
+      g_autofree gchar *country_code = NULL;
       const gchar *ibus_locale = ibus_engine_desc_get_language (engine);
 
       if (gnome_parse_locale (ibus_locale, &lang_code, &country_code, NULL, NULL) &&
           lang_code != NULL &&
           country_code != NULL)
         {
-          gchar *locale = g_strdup_printf ("%s_%s.UTF-8", lang_code, country_code);
+          g_autofree gchar *locale = g_strdup_printf ("%s_%s.UTF-8", lang_code, country_code);
 
           info = g_hash_table_lookup (priv->locales, locale);
           if (info)
@@ -848,14 +840,12 @@ get_ibus_locale_infos (GtkWidget *chooser)
             {
               add_row_other (chooser, INPUT_SOURCE_TYPE_IBUS, engine_id);
             }
-
-          g_free (locale);
         }
       else if (lang_code != NULL)
         {
           GHashTableIter iter;
           GHashTable *locales_for_language;
-          gchar *language;
+          g_autofree gchar *language = NULL;
 
           /* Most IBus engines only specify the language so we try to
              add them to all locales for that language. */
@@ -865,7 +855,6 @@ get_ibus_locale_infos (GtkWidget *chooser)
             locales_for_language = g_hash_table_lookup (priv->locales_by_language, language);
           else
             locales_for_language = NULL;
-          g_free (language);
 
           if (locales_for_language)
             {
@@ -883,9 +872,6 @@ get_ibus_locale_infos (GtkWidget *chooser)
         {
           add_row_other (chooser, INPUT_SOURCE_TYPE_IBUS, engine_id);
         }
-
-      g_free (country_code);
-      g_free (lang_code);
     }
 }
 #endif  /* HAVE_IBUS */
@@ -896,7 +882,7 @@ add_locale_to_table (GHashTable  *table,
                      LocaleInfo  *info)
 {
   GHashTable *set;
-  gchar *language;
+  g_autofree gchar *language = NULL;
 
   language = gnome_get_language_from_code (lang_code, NULL);
 
@@ -907,8 +893,6 @@ add_locale_to_table (GHashTable  *table,
       g_hash_table_replace (table, g_strdup (language), set);
     }
   g_hash_table_add (set, info);
-
-  g_free (language);
 }
 
 static void
@@ -926,11 +910,12 @@ static void
 get_locale_infos (GtkWidget *chooser)
 {
   CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
-  GHashTable *layouts_with_locale;
+  g_autoptr(GHashTable) layouts_with_locale = NULL;
   LocaleInfo *info;
-  gchar **locale_ids;
+  g_auto(GStrv) locale_ids = NULL;
   gchar **locale;
-  GList *list, *l;
+  g_autoptr(GList) all_layouts = NULL;
+  GList *l;
 
   priv->locales = g_hash_table_new_full (g_str_hash, g_str_equal,
                                          NULL, locale_info_free);
@@ -942,11 +927,13 @@ get_locale_infos (GtkWidget *chooser)
   locale_ids = gnome_get_all_locales ();
   for (locale = locale_ids; *locale; ++locale)
     {
-      gchar *lang_code, *country_code;
-      gchar *simple_locale;
-      gchar *tmp;
+      g_autofree gchar *lang_code = NULL;
+      g_autofree gchar *country_code = NULL;
+      g_autofree gchar *simple_locale = NULL;
+      g_autofree gchar *tmp = NULL;
       const gchar *type = NULL;
       const gchar *id = NULL;
+      g_autoptr(GList) language_layouts = NULL;
 
       if (!gnome_parse_locale (*locale, &lang_code, &country_code, NULL, NULL))
         continue;
@@ -957,20 +944,14 @@ get_locale_infos (GtkWidget *chooser)
 	simple_locale = g_strdup_printf ("%s.UTF-8", lang_code);
 
       if (g_hash_table_contains (priv->locales, simple_locale))
-        {
-          g_free (simple_locale);
-          g_free (country_code);
-          g_free (lang_code);
           continue;
-        }
 
       info = g_new0 (LocaleInfo, 1);
-      info->id = simple_locale; /* Take ownership */
+      info->id = g_steal_pointer (&simple_locale);
       info->name = gnome_get_language_from_locale (simple_locale, NULL);
       info->unaccented_name = cc_util_normalize_casefold_and_unaccent (info->name);
       tmp = gnome_get_language_from_locale (simple_locale, "C");
       info->untranslated_name = cc_util_normalize_casefold_and_unaccent (tmp);
-      g_free (tmp);
 
       g_hash_table_replace (priv->locales, simple_locale, info);
       add_locale_to_table (priv->locales_by_language, lang_code, info);
@@ -988,23 +969,17 @@ get_locale_infos (GtkWidget *chooser)
       info->engine_rows_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                        NULL, g_object_unref);
 
-      list = gnome_xkb_info_get_layouts_for_language (priv->xkb_info, lang_code);
-      add_rows_to_table (chooser, info, list, INPUT_SOURCE_TYPE_XKB, id);
-      add_ids_to_set (layouts_with_locale, list);
-      g_list_free (list);
+      language_layouts = gnome_xkb_info_get_layouts_for_language (priv->xkb_info, lang_code);
+      add_rows_to_table (chooser, info, language_layouts, INPUT_SOURCE_TYPE_XKB, id);
+      add_ids_to_set (layouts_with_locale, language_layouts);
 
       if (country_code != NULL)
         {
-          list = gnome_xkb_info_get_layouts_for_country (priv->xkb_info, country_code);
-          add_rows_to_table (chooser, info, list, INPUT_SOURCE_TYPE_XKB, id);
-          add_ids_to_set (layouts_with_locale, list);
-          g_list_free (list);
+          g_autoptr(GList) country_layouts = gnome_xkb_info_get_layouts_for_country (priv->xkb_info, country_code);
+          add_rows_to_table (chooser, info, country_layouts, INPUT_SOURCE_TYPE_XKB, id);
+          add_ids_to_set (layouts_with_locale, country_layouts);
         }
-
-      g_free (lang_code);
-      g_free (country_code);
     }
-  g_strfreev (locale_ids);
 
   /* Add a "Other" locale to hold the remaining input sources */
   info = g_new0 (LocaleInfo, 1);
@@ -1019,14 +994,10 @@ get_locale_infos (GtkWidget *chooser)
   info->engine_rows_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                    NULL, g_object_unref);
 
-  list = gnome_xkb_info_get_all_layouts (priv->xkb_info);
-  for (l = list; l; l = l->next)
+  all_layouts = gnome_xkb_info_get_all_layouts (priv->xkb_info);
+  for (l = all_layouts; l; l = l->next)
     if (!g_hash_table_contains (layouts_with_locale, l->data))
       add_row_other (chooser, INPUT_SOURCE_TYPE_XKB, l->data);
-
-  g_list_free (list);
-
-  g_hash_table_destroy (layouts_with_locale);
 }
 
 static void
@@ -1061,18 +1032,16 @@ cc_input_chooser_new (GtkWindow    *main_window,
                       GnomeXkbInfo *xkb_info,
                       GHashTable   *ibus_engines)
 {
-  GtkBuilder *builder;
+  g_autoptr(GtkBuilder) builder = NULL;
   GtkWidget *chooser;
   CcInputChooserPrivate *priv;
   gint width, height;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   builder = gtk_builder_new ();
   if (gtk_builder_add_from_resource (builder, "/org/gnome/control-center/region/input-chooser.ui", &error) == 0)
     {
-      g_object_unref (builder);
       g_warning ("failed to load input chooser: %s", error->message);
-      g_error_free (error);
       return NULL;
     }
   chooser = WID ("input-dialog");
@@ -1118,8 +1087,6 @@ cc_input_chooser_new (GtkWindow    *main_window,
   gtk_window_set_resizable (GTK_WINDOW (chooser), TRUE);
 
   gtk_window_set_transient_for (GTK_WINDOW (chooser), main_window);
-
-  g_object_unref (builder);
 
   return chooser;
 }
