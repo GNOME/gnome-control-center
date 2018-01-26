@@ -226,7 +226,7 @@ set_restart_notification_visible (CcRegionPanel *self,
                                   gboolean       visible)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        gchar *current_locale = NULL;
+        g_autofree gchar *current_locale = NULL;
 
         if (locale) {
                 current_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
@@ -235,10 +235,8 @@ set_restart_notification_visible (CcRegionPanel *self,
 
         gtk_revealer_set_reveal_child (GTK_REVEALER (priv->restart_notification), visible);
 
-        if (locale) {
+        if (locale)
                 setlocale (LC_MESSAGES, current_locale);
-                g_free (current_locale);
-        }
 
         if (!visible) {
                 g_file_delete (g_file_new_for_path (priv->needs_restart_file_path),
@@ -258,25 +256,34 @@ typedef struct {
 } MaybeNotifyData;
 
 static void
+maybe_notify_data_free (MaybeNotifyData *data)
+{
+        g_free (data->target_locale);
+        g_free (data);
+}
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (MaybeNotifyData, maybe_notify_data_free)
+
+static void
 maybe_notify_finish (GObject      *source,
                      GAsyncResult *res,
                      gpointer      data)
 {
-        MaybeNotifyData *mnd = data;
+        g_autoptr(MaybeNotifyData) mnd = data;
         CcRegionPanel *self = mnd->self;
-        GError *error = NULL;
-        GVariant *retval = NULL;
-        gchar *current_lang_code = NULL;
-        gchar *current_country_code = NULL;
-        gchar *target_lang_code = NULL;
-        gchar *target_country_code = NULL;
+        g_autoptr(GError) error = NULL;
+        g_autoptr(GVariant) retval = NULL;
+        g_autofree gchar *current_lang_code = NULL;
+        g_autofree gchar *current_country_code = NULL;
+        g_autofree gchar *target_lang_code = NULL;
+        g_autofree gchar *target_country_code = NULL;
         const gchar *current_locale = NULL;
 
         retval = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
         if (!retval) {
                 if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
                         g_warning ("Failed to get locale: %s\n", error->message);
-                goto out;
+                return;
         }
 
         g_variant_get (retval, "(&s)", &current_locale);
@@ -286,14 +293,14 @@ maybe_notify_finish (GObject      *source,
                                  &current_country_code,
                                  NULL,
                                  NULL))
-                goto out;
+                return;
 
         if (!gnome_parse_locale (mnd->target_locale,
                                  &target_lang_code,
                                  &target_country_code,
                                  NULL,
                                  NULL))
-                goto out;
+                return;
 
         if (g_str_equal (current_lang_code, target_lang_code) == FALSE ||
             g_str_equal (current_country_code, target_country_code) == FALSE)
@@ -304,15 +311,6 @@ maybe_notify_finish (GObject      *source,
                 set_restart_notification_visible (self,
                                                   mnd->category == LC_MESSAGES ? mnd->target_locale : NULL,
                                                   FALSE);
-out:
-        g_free (target_country_code);
-        g_free (target_lang_code);
-        g_free (current_country_code);
-        g_free (current_lang_code);
-        g_clear_pointer (&retval, g_variant_unref);
-        g_clear_error (&error);
-        g_free (mnd->target_locale);
-        g_free (mnd);
 }
 
 static void
@@ -506,14 +504,13 @@ permission_acquired (GObject      *source,
 {
         CcRegionPanel *self = data;
 	CcRegionPanelPrivate *priv = self->priv;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         gboolean allowed;
 
         allowed = g_permission_acquire_finish (priv->permission, res, &error);
         if (error) {
                 if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
                         g_warning ("Failed to acquire permission: %s\n", error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -576,7 +573,7 @@ update_region_label (CcRegionPanel *self)
 {
         CcRegionPanelPrivate *priv = self->priv;
         const gchar *region = get_effective_region (self);
-        gchar *name = NULL;
+        g_autofree gchar *name = NULL;
 
         if (region)
                 name = gnome_get_country_from_locale (region, region);
@@ -585,7 +582,6 @@ update_region_label (CcRegionPanel *self)
                 name = gnome_get_country_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
 
         gtk_label_set_label (GTK_LABEL (priv->formats_label), name);
-        g_free (name);
 }
 
 static void
@@ -603,7 +599,7 @@ update_language_label (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
         const gchar *language = get_effective_language (self);
-        gchar *name = NULL;
+        g_autofree gchar *name = NULL;
 
         if (language)
                 name = gnome_get_language_from_locale (language, language);
@@ -612,7 +608,6 @@ update_language_label (CcRegionPanel *self)
                 name = gnome_get_language_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
 
         gtk_label_set_label (GTK_LABEL (priv->language_label), name);
-        g_free (name);
 
         /* Formats will change too if not explicitly set. */
         update_region_label (self);
@@ -679,12 +674,12 @@ static void
 update_ibus_active_sources (CcRegionPanel *self)
 {
         CcRegionPanelPrivate *priv = self->priv;
-        GList *rows, *l;
+        g_autoptr(GList) rows = NULL;
+        GList *l;
         GtkWidget *row;
         const gchar *type;
         const gchar *id;
         IBusEngineDesc *engine_desc;
-        gchar *display_name;
         GtkWidget *label;
 
         rows = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
@@ -697,13 +692,11 @@ update_ibus_active_sources (CcRegionPanel *self)
 
                 engine_desc = g_hash_table_lookup (priv->ibus_engines, id);
                 if (engine_desc) {
-                        display_name = engine_get_display_name (engine_desc);
+                        g_autofree gchar *display_name = engine_get_display_name (engine_desc);
                         label = GTK_WIDGET (g_object_get_data (G_OBJECT (row), "label"));
                         gtk_label_set_text (GTK_LABEL (label), display_name);
-                        g_free (display_name);
                 }
         }
-        g_list_free (rows);
 }
 
 static void
@@ -725,15 +718,14 @@ fetch_ibus_engines_result (GObject       *object,
                            CcRegionPanel *self)
 {
         CcRegionPanelPrivate *priv;
-        GList *list, *l;
-        GError *error;
+        g_autoptr(GList) list = NULL;
+        GList *l;
+        g_autoptr(GError) error = NULL;
 
-        error = NULL;
         list = ibus_bus_list_engines_async_finish (IBUS_BUS (object), result, &error);
         if (!list && error) {
                 if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
                         g_warning ("Couldn't finish IBus request: %s", error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -752,7 +744,6 @@ fetch_ibus_engines_result (GObject       *object,
                 else
                         g_hash_table_replace (priv->ibus_engines, (gpointer)engine_id, engine);
         }
-        g_list_free (list);
 
         update_ibus_active_sources (self);
         update_input_chooser (self);
@@ -794,35 +785,28 @@ maybe_start_ibus (void)
 static GDesktopAppInfo *
 setup_app_info_for_id (const gchar *id)
 {
-  GDesktopAppInfo *app_info;
-  gchar *desktop_file_name;
-  gchar **strv;
+        g_autofree gchar *desktop_file_name = NULL;
+        g_auto(GStrv) strv = NULL;
 
-  strv = g_strsplit (id, ":", 2);
-  desktop_file_name = g_strdup_printf ("ibus-setup-%s.desktop", strv[0]);
-  g_strfreev (strv);
+        strv = g_strsplit (id, ":", 2);
+        desktop_file_name = g_strdup_printf ("ibus-setup-%s.desktop", strv[0]);
 
-  app_info = g_desktop_app_info_new (desktop_file_name);
-  g_free (desktop_file_name);
-
-  return app_info;
+        return g_desktop_app_info_new (desktop_file_name);
 }
 #endif
 
 static void
 remove_no_input_row (GtkContainer *list)
 {
-        GList *l;
+        g_autoptr(GList) l = NULL;
 
         l = gtk_container_get_children (list);
         if (!l)
                 return;
         if (l->next != NULL)
-                goto out;
+                return;
         if (g_strcmp0 (g_object_get_data (G_OBJECT (l->data), "type"), "none") == 0)
                 gtk_container_remove (list, GTK_WIDGET (l->data));
-out:
-        g_list_free (l);
 }
 
 static GtkWidget *
@@ -891,8 +875,8 @@ add_input_sources (CcRegionPanel *self,
         const gchar *type;
         const gchar *id;
         const gchar *name;
-        gchar *display_name;
-        GDesktopAppInfo *app_info;
+        g_autofree gchar *display_name = NULL;
+        g_autoptr(GDesktopAppInfo) app_info = NULL;
 
         if (g_variant_n_children (sources) < 1) {
                 add_no_input_row (self);
@@ -930,8 +914,6 @@ add_input_sources (CcRegionPanel *self,
                 }
 
                 add_input_row (self, type, id, display_name ? display_name : id, app_info);
-                g_free (display_name);
-                g_clear_object (&app_info);
         }
 }
 
@@ -939,22 +921,22 @@ static void
 add_input_sources_from_settings (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GVariant *sources;
+        g_autoptr(GVariant) sources = NULL;
         sources = g_settings_get_value (priv->input_settings, "sources");
         add_input_sources (self, sources);
-        g_variant_unref (sources);
 }
 
 static void
 clear_input_sources (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GList *list, *l;
+        g_autoptr(GList) list = NULL;
+        GList *l;
+
         list = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
         for (l = list; l; l = l->next) {
                 gtk_container_remove (GTK_CONTAINER (priv->input_list), GTK_WIDGET (l->data));
         }
-        g_list_free (list);
 
         cc_list_box_adjust_scrolling (GTK_LIST_BOX (priv->input_list));
 }
@@ -986,17 +968,15 @@ input_sources_changed (GSettings     *settings,
 {
 	CcRegionPanelPrivate *priv = self->priv;
         GtkListBoxRow *selected;
-        gchar *id = NULL;
+        g_autofree gchar *id = NULL;
 
         selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (priv->input_list));
         if (selected)
                 id = g_strdup (g_object_get_data (G_OBJECT (selected), "id"));
         clear_input_sources (self);
         add_input_sources_from_settings (self);
-        if (id) {
+        if (id)
                 select_input (self, id);
-                g_free (id);
-        }
 }
 
 
@@ -1005,12 +985,11 @@ update_buttons (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
         GtkListBoxRow *selected;
-        GList *children;
+        g_autoptr(GList) children = NULL;
         guint n_rows;
 
         children = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
         n_rows = g_list_length (children);
-        g_list_free (children);
 
         selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (priv->input_list));
         if (selected == NULL) {
@@ -1042,7 +1021,8 @@ set_input_settings (CcRegionPanel *self)
         const gchar *type;
         const gchar *id;
         GVariantBuilder builder;
-        GList *list, *l;
+        g_autoptr(GList) list = NULL;
+        GList *l;
 
         g_variant_builder_init (&builder, G_VARIANT_TYPE ("a(ss)"));
         list = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
@@ -1051,7 +1031,6 @@ set_input_settings (CcRegionPanel *self)
                 id = (const gchar *)g_object_get_data (G_OBJECT (l->data), "id");
                 g_variant_builder_add (&builder, "(ss)", type, id);
         }
-        g_list_free (list);
 
         g_settings_set_value (priv->input_settings, KEY_INPUT_SOURCES, g_variant_builder_end (&builder));
         g_settings_apply (priv->input_settings);
@@ -1078,49 +1057,42 @@ input_source_already_added (CcRegionPanel *self,
                             const gchar   *id)
 {
         CcRegionPanelPrivate *priv = self->priv;
-        GList *list, *l;
-        gboolean retval = FALSE;
+        g_autoptr(GList) list = NULL;
+        GList *l;
 
         list = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
         for (l = list; l; l = l->next)
                 if (g_str_equal (id, (const gchar *) g_object_get_data (G_OBJECT (l->data), "id"))) {
-                        retval = TRUE;
-                        break;
+                        return TRUE;
                 }
-        g_list_free (list);
 
-        return retval;
+        return FALSE;
 }
 
 static void
 run_input_chooser (CcRegionPanel *self, GtkWidget *chooser)
 {
-        gchar *type;
-        gchar *id;
-        gchar *name;
-        GDesktopAppInfo *app_info = NULL;
-
         if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_OK) {
+                g_autofree gchar *type = NULL;
+                g_autofree gchar *id = NULL;
+                g_autofree gchar *name = NULL;
+
                 if (cc_input_chooser_get_selected (chooser, &type, &id, &name) &&
                     !input_source_already_added (self, id)) {
+                        g_autoptr(GDesktopAppInfo) app_info = NULL;
+
                         if (g_str_equal (type, INPUT_SOURCE_TYPE_IBUS)) {
-                                g_free (type);
-                                type = INPUT_SOURCE_TYPE_IBUS;
 #ifdef HAVE_IBUS
                                 app_info = setup_app_info_for_id (id);
 #endif
                         } else {
                                 g_free (type);
-                                type = INPUT_SOURCE_TYPE_XKB;
+                                type = g_strdup (INPUT_SOURCE_TYPE_XKB);
                         }
 
                         add_input_row (self, type, id, name, app_info);
                         update_buttons (self);
                         update_input (self);
-
-                        g_free (id);
-                        g_free (name);
-                        g_clear_object (&app_info);
                 }
         }
         gtk_widget_hide(chooser);
@@ -1177,8 +1149,8 @@ add_input (CcRegionPanel *self)
 static GtkWidget *
 find_sibling (GtkContainer *container, GtkWidget *child)
 {
-        GList *list, *c;
-        GList *l;
+        g_autoptr(GList) list = NULL;
+        GList *c, *l;
         GtkWidget *sibling;
 
         list = gtk_container_get_children (container);
@@ -1187,21 +1159,16 @@ find_sibling (GtkContainer *container, GtkWidget *child)
         for (l = c->next; l; l = l->next) {
                 sibling = l->data;
                 if (gtk_widget_get_visible (sibling) && gtk_widget_get_child_visible (sibling))
-                        goto out;
+                        return sibling;
         }
 
         for (l = c->prev; l; l = l->prev) {
                 sibling = l->data;
                 if (gtk_widget_get_visible (sibling) && gtk_widget_get_child_visible (sibling))
-                        goto out;
+                        return sibling;
         }
 
-        sibling = NULL;
-
-out:
-        g_list_free (list);
-
-        return sibling;
+        return NULL;
 }
 
 static void
@@ -1313,10 +1280,10 @@ show_selected_settings (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
         GtkListBoxRow *selected;
-        GdkAppLaunchContext *ctx;
+        g_autoptr(GdkAppLaunchContext) ctx = NULL;
         GDesktopAppInfo *app_info;
         const gchar *id;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (priv->input_list));
         if (selected == NULL)
@@ -1333,12 +1300,8 @@ show_selected_settings (CcRegionPanel *self)
         g_app_launch_context_setenv (G_APP_LAUNCH_CONTEXT (ctx),
                                      "IBUS_ENGINE_NAME", id);
 
-        if (!g_app_info_launch (G_APP_INFO (app_info), NULL, G_APP_LAUNCH_CONTEXT (ctx), &error)) {
+        if (!g_app_info_launch (G_APP_INFO (app_info), NULL, G_APP_LAUNCH_CONTEXT (ctx), &error))
                 g_warning ("Failed to launch input source setup: %s", error->message);
-                g_error_free (error);
-        }
-
-        g_object_unref (ctx);
 }
 
 static void
@@ -1350,7 +1313,7 @@ show_selected_layout (CcRegionPanel *self)
         const gchar *id;
         const gchar *layout;
         const gchar *variant;
-        gchar *commandline;
+        g_autofree gchar *commandline = NULL;
 
         selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (priv->input_list));
         if (selected == NULL)
@@ -1396,7 +1359,6 @@ show_selected_layout (CcRegionPanel *self)
                                                layout);
 
         g_spawn_command_line_async (commandline, NULL);
-        g_free (commandline);
 }
 
 static void
@@ -1493,11 +1455,11 @@ on_localed_properties_changed (GDBusProxy     *proxy,
                                CcRegionPanel  *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GVariant *v;
+        g_autoptr(GVariant) v = NULL;
 
         v = g_dbus_proxy_get_cached_property (proxy, "Locale");
         if (v) {
-                const gchar **strv;
+                g_autofree const gchar **strv = NULL;
                 gsize len;
                 gint i;
                 const gchar *lang, *messages, *time;
@@ -1524,8 +1486,6 @@ on_localed_properties_changed (GDBusProxy     *proxy,
                 priv->system_language = g_strdup (messages);
                 g_free (priv->system_region);
                 priv->system_region = g_strdup (time);
-                g_variant_unref (v);
-                g_free (strv);
 
                 update_language_label (self);
         }
@@ -1535,28 +1495,27 @@ static void
 add_input_sources_from_localed (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GVariant *v;
+        g_autoptr(GVariant) layout_property = NULL;
+        g_autoptr(GVariant) variant_property = NULL;
         const gchar *s;
-        gchar **layouts = NULL;
-        gchar **variants = NULL;
+        g_auto(GStrv) layouts = NULL;
+        g_auto(GStrv) variants = NULL;
         gint i, n;
 
         if (!priv->localed)
                 return;
 
-        v = g_dbus_proxy_get_cached_property (priv->localed, "X11Layout");
-        if (v) {
-                s = g_variant_get_string (v, NULL);
+        layout_property = g_dbus_proxy_get_cached_property (priv->localed, "X11Layout");
+        if (layout_property) {
+                s = g_variant_get_string (layout_property, NULL);
                 layouts = g_strsplit (s, ",", -1);
-                g_variant_unref (v);
         }
 
-        v = g_dbus_proxy_get_cached_property (priv->localed, "X11Variant");
-        if (v) {
-                s = g_variant_get_string (v, NULL);
+        variant_property = g_dbus_proxy_get_cached_property (priv->localed, "X11Variant");
+        if (variant_property) {
+                s = g_variant_get_string (variant_property, NULL);
                 if (s && *s)
                         variants = g_strsplit (s, ",", -1);
-                g_variant_unref (v);
         }
 
         if (variants && variants[0])
@@ -1568,7 +1527,7 @@ add_input_sources_from_localed (CcRegionPanel *self)
 
         for (i = 0; i < n && layouts[i][0]; i++) {
                 const gchar *name;
-                gchar *id;
+                g_autofree gchar *id = NULL;
 
                 if (variants && variants[i] && variants[i][0])
                         id = g_strdup_printf ("%s+%s", layouts[i], variants[i]);
@@ -1578,63 +1537,57 @@ add_input_sources_from_localed (CcRegionPanel *self)
                 gnome_xkb_info_get_layout_info (priv->xkb_info, id, &name, NULL, NULL, NULL);
 
                 add_input_row (self, INPUT_SOURCE_TYPE_XKB, id, name ? name : id, NULL);
-
-                g_free (id);
         }
         if (n == 0) {
                 add_no_input_row (self);
         }
-
-        g_strfreev (variants);
-        g_strfreev (layouts);
 }
 
 static void
 set_localed_locale (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GVariantBuilder *b;
-        gchar *s;
+        g_autoptr(GVariantBuilder) b = NULL;
+        g_autofree gchar *lang_value = NULL;
 
         b = g_variant_builder_new (G_VARIANT_TYPE ("as"));
-        s = g_strconcat ("LANG=", priv->system_language, NULL);
-        g_variant_builder_add (b, "s", s);
-        g_free (s);
+        lang_value = g_strconcat ("LANG=", priv->system_language, NULL);
+        g_variant_builder_add (b, "s", lang_value);
 
         if (priv->system_region != NULL &&
             g_strcmp0 (priv->system_language, priv->system_region) != 0) {
-                s = g_strconcat ("LC_TIME=", priv->system_region, NULL);
-                g_variant_builder_add (b, "s", s);
-                g_free (s);
-                s = g_strconcat ("LC_NUMERIC=", priv->system_region, NULL);
-                g_variant_builder_add (b, "s", s);
-                g_free (s);
-                s = g_strconcat ("LC_MONETARY=", priv->system_region, NULL);
-                g_variant_builder_add (b, "s", s);
-                g_free (s);
-                s = g_strconcat ("LC_MEASUREMENT=", priv->system_region, NULL);
-                g_variant_builder_add (b, "s", s);
-                g_free (s);
-                s = g_strconcat ("LC_PAPER=", priv->system_region, NULL);
-                g_variant_builder_add (b, "s", s);
-                g_free (s);
+                g_autofree gchar *time_value = NULL;
+                g_autofree gchar *numeric_value = NULL;
+                g_autofree gchar *monetary_value = NULL;
+                g_autofree gchar *measurement_value = NULL;
+                g_autofree gchar *paper_value = NULL;
+                time_value = g_strconcat ("LC_TIME=", priv->system_region, NULL);
+                g_variant_builder_add (b, "s", time_value);
+                numeric_value = g_strconcat ("LC_NUMERIC=", priv->system_region, NULL);
+                g_variant_builder_add (b, "s", numeric_value);
+                monetary_value = g_strconcat ("LC_MONETARY=", priv->system_region, NULL);
+                g_variant_builder_add (b, "s", monetary_value);
+                measurement_value = g_strconcat ("LC_MEASUREMENT=", priv->system_region, NULL);
+                g_variant_builder_add (b, "s", measurement_value);
+                paper_value = g_strconcat ("LC_PAPER=", priv->system_region, NULL);
+                g_variant_builder_add (b, "s", paper_value);
         }
         g_dbus_proxy_call (priv->localed,
                            "SetLocale",
                            g_variant_new ("(asb)", b, TRUE),
                            G_DBUS_CALL_FLAGS_NONE,
                            -1, NULL, NULL, NULL);
-        g_variant_builder_unref (b);
 }
 
 static void
 set_localed_input (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GString *layouts;
-        GString *variants;
+        g_autoptr(GString) layouts = NULL;
+        g_autoptr(GString) variants = NULL;
         const gchar *type, *id;
-        GList *list, *li;
+        g_autoptr(GList) list = NULL;
+        GList *li;
         const gchar *l, *v;
 
         layouts = g_string_new ("");
@@ -1656,16 +1609,12 @@ set_localed_input (CcRegionPanel *self)
                         g_string_append (variants, v);
                 }
         }
-        g_list_free (list);
 
         g_dbus_proxy_call (priv->localed,
                            "SetX11Keyboard",
                            g_variant_new ("(ssssbb)", layouts->str, "", variants->str, "", TRUE, TRUE),
                            G_DBUS_CALL_FLAGS_NONE,
                            -1, NULL, NULL, NULL);
-
-        g_string_free (layouts, TRUE);
-        g_string_free (variants, TRUE);
 }
 
 static void
@@ -1676,14 +1625,13 @@ localed_proxy_ready (GObject      *source,
         CcRegionPanel *self = data;
         CcRegionPanelPrivate *priv;
         GDBusProxy *proxy;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         proxy = g_dbus_proxy_new_finish (res, &error);
 
         if (!proxy) {
                 if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
                         g_warning ("Failed to contact localed: %s\n", error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -1746,15 +1694,14 @@ static void
 setup_login_button (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GDBusConnection *bus;
+        g_autoptr(GDBusConnection) bus = NULL;
         gboolean loaded;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         priv->permission = polkit_permission_new_sync ("org.freedesktop.locale1.set-locale", NULL, NULL, &error);
         if (priv->permission == NULL) {
                 g_warning ("Could not get 'org.freedesktop.locale1.set-locale' permission: %s",
                            error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -1768,7 +1715,6 @@ setup_login_button (CcRegionPanel *self)
                           priv->cancellable,
                           (GAsyncReadyCallback) localed_proxy_ready,
                           self);
-        g_object_unref (bus);
 
         priv->login_label = WID ("login-label");
         priv->login_button = gtk_toggle_button_new_with_mnemonic (_("Login _Screen"));
@@ -1795,14 +1741,13 @@ session_proxy_ready (GObject      *source,
 {
         CcRegionPanel *self = data;
         GDBusProxy *proxy;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
 
         if (!proxy) {
                 if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
                         g_warning ("Failed to contact gnome-session: %s\n", error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -1813,7 +1758,7 @@ static void
 cc_region_panel_init (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 
 	priv = self->priv = REGION_PANEL_PRIVATE (self);
         g_resources_register (cc_region_get_resource ());
@@ -1825,7 +1770,6 @@ cc_region_panel_init (CcRegionPanel *self)
                                        &error);
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
-		g_error_free (error);
 		return;
 	}
 
