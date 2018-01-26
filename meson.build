@@ -79,7 +79,10 @@ add_project_arguments(common_flags, language: 'c')
 # Check that we meet the dependencies
 libgvc = subproject(
   'gvc',
-  default_options: 'static=true'
+  default_options: [
+    'static=true',
+    'alsa=false',
+  ]
 )
 libgvc_dep = libgvc.get_variable('libgvc_dep')
 
