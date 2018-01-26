@@ -27,10 +27,12 @@
 
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
+
 #ifdef BUILD_NETWORK
-#  include <NetworkManager.h>
-#else
-typedef struct _NMClient NMClient;
+#include <NetworkManager.h>
+#if NM_CHECK_VERSION(1,10,0)
+#define HAS_CONNECTIVITY_CHECK 1
+#endif
 #endif
 
 CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
@@ -83,9 +85,11 @@ struct _CcPrivacyPanelPrivate
 
   GtkSizeGroup *location_icon_size_group;
 
+#ifdef HAS_CONNECTIVITY_CHECK
   NMClient *nm_client;
   GtkWidget *connectivity_check_dialog;
   GtkWidget *connectivity_check_row;
+#endif
 };
 
 static char *
@@ -1253,7 +1257,7 @@ add_abrt (CcPrivacyPanel *self)
                                                 NULL);
 }
 
-#if defined(BUILD_NETWORK) && NM_CHECK_VERSION(1,10,0)
+#ifdef HAS_CONNECTIVITY_CHECK
 static gboolean
 transform_on_off_label (GBinding     *binding G_GNUC_UNUSED,
                         const GValue *from_value,
@@ -1303,14 +1307,6 @@ add_connectivity_check (CcPrivacyPanel *self)
                           w, "active",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
 }
-
-#else
-
-static void
-add_connectivity_check (CcPrivacyPanel *self)
-{
-}
-
 #endif
 
 static void
@@ -1344,8 +1340,10 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_pointer (&priv->location_apps_perms, g_variant_unref);
   g_clear_pointer (&priv->location_apps_data, g_variant_unref);
   g_clear_pointer (&priv->location_app_switches, g_hash_table_unref);
+#ifdef HAS_CONNECTIVITY_CHECK
   g_clear_object (&priv->nm_client);
   g_clear_pointer (&priv->connectivity_check_dialog, gtk_widget_destroy);
+#endif
 
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
 }
@@ -1411,7 +1409,12 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   self->priv->trash_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "trash_dialog"));
   self->priv->software_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "software_dialog"));
   self->priv->abrt_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "abrt_dialog"));
+
+#ifdef HAS_CONNECTIVITY_CHECK
   self->priv->connectivity_check_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "connectivity_check_dialog"));
+#else
+  gtk_widget_destroy (GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "connectivity_check_dialog")));
+#endif
 
   frame = WID ("frame");
   widget = gtk_list_box_new ();
@@ -1446,7 +1449,9 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   add_trash_temp (self);
   add_software (self);
   add_abrt (self);
+#ifdef HAS_CONNECTIVITY_CHECK
   add_connectivity_check (self);
+#endif
 
   g_signal_connect (self->priv->lockdown_settings, "changed",
                     G_CALLBACK (on_lockdown_settings_changed), self);
