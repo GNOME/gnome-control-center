@@ -97,11 +97,11 @@ get_model (void)
 static gchar **
 get_results (gchar **terms)
 {
+  g_auto(GStrv) casefolded_terms = NULL;
   GtkTreeModel *model = get_model ();
   GtkTreeIter iter;
   GPtrArray *results;
   gboolean ok;
-  gchar **casefolded_terms;
 
   casefolded_terms = get_casefolded_terms (terms);
   results = g_ptr_array_new ();
@@ -122,7 +122,6 @@ get_results (gchar **terms)
     }
 
   g_ptr_array_add (results, NULL);
-  g_strfreev (casefolded_terms);
 
   return (char**) g_ptr_array_free (results, FALSE);
 }
@@ -133,11 +132,10 @@ handle_get_initial_result_set (CcShellSearchProvider2  *skeleton,
                                char                   **terms,
                                CcSearchProvider        *self)
 {
-  gchar **results = get_results (terms);
+  g_auto(GStrv) results = get_results (terms);
   cc_shell_search_provider2_complete_get_initial_result_set (skeleton,
                                                              invocation,
                                                              (const char* const*) results);
-  g_strfreev (results);
   return TRUE;
 }
 
@@ -155,11 +153,10 @@ handle_get_subsearch_result_set (CcShellSearchProvider2  *skeleton,
    * in the model is always small enough that we don't need to worry
    * about this taking too long.
    */
-  gchar **results = get_results (terms);
+  g_auto(GStrv) results = get_results (terms);
   cc_shell_search_provider2_complete_get_subsearch_result_set (skeleton,
                                                                invocation,
                                                                (const char* const*) results);
-  g_strfreev (results);
   return TRUE;
 }
 
@@ -207,15 +204,18 @@ handle_get_result_metas (CcShellSearchProvider2  *skeleton,
   GtkTreeIter *iter;
   int i;
   GVariantBuilder builder;
-  GAppInfo *app;
   const char *id;
-  char *name, *description, *escaped_description;
-  GIcon *icon;
 
   g_variant_builder_init (&builder, G_VARIANT_TYPE ("aa{sv}"));
 
   for (i = 0; results[i]; i++)
     {
+      g_autofree gchar *escaped_description = NULL;
+      g_autofree gchar *description = NULL;
+      g_autofree gchar *name = NULL;
+      g_autoptr(GAppInfo) app = NULL;
+      g_autoptr(GIcon) icon = NULL;
+
       iter = get_iter_for_result (self, results[i]);
       if (!iter)
         continue;
@@ -239,12 +239,6 @@ handle_get_result_metas (CcShellSearchProvider2  *skeleton,
       g_variant_builder_add (&builder, "{sv}",
                              "description", g_variant_new_string (escaped_description));
       g_variant_builder_close (&builder);
-
-      g_free (name);
-      g_free (description);
-      g_free (escaped_description);
-      g_object_unref (app);
-      g_object_unref (icon);
     }
 
   cc_shell_search_provider2_complete_get_result_metas (skeleton,
@@ -262,24 +256,19 @@ handle_activate_result (CcShellSearchProvider2  *skeleton,
                         CcSearchProvider        *self)
 {
   GdkAppLaunchContext *launch_context;
+  g_autoptr(GError) error = NULL;
   GAppInfo *app;
-  GError *error;
 
   launch_context = gdk_display_get_app_launch_context (gdk_display_get_default ());
   gdk_app_launch_context_set_timestamp (launch_context, timestamp);
 
   app = G_APP_INFO (g_desktop_app_info_new (identifier));
 
-  error = NULL;
   if (!g_app_info_launch (app, NULL, G_APP_LAUNCH_CONTEXT (launch_context), &error))
-    {
-      g_dbus_method_invocation_return_gerror (invocation, error);
-      g_error_free (error);
-    }
+    g_dbus_method_invocation_return_gerror (invocation, error);
   else
-    {
-      cc_shell_search_provider2_complete_activate_result (skeleton, invocation);
-    }
+    cc_shell_search_provider2_complete_activate_result (skeleton, invocation);
+
   return TRUE;
 }
 
@@ -291,36 +280,30 @@ handle_launch_search (CcShellSearchProvider2  *skeleton,
                       CcSearchProvider        *self)
 {
   GdkAppLaunchContext *launch_context;
+  g_autoptr(GError) error = NULL;
   char *joined_terms, *command_line;
   GAppInfo *app;
-  GError *error;
 
   launch_context = gdk_display_get_app_launch_context (gdk_display_get_default ());
   gdk_app_launch_context_set_timestamp (launch_context, timestamp);
 
   joined_terms = g_strjoinv (" ", terms);
   command_line = g_strdup_printf ("gnome-control-center -s '%s'", joined_terms);
-
-  error = NULL;
   app = g_app_info_create_from_commandline (command_line,
                                             "gnome-control-center.desktop",
                                             G_APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION,
                                             &error);
-  if (!app) {
+  if (!app)
+    {
       g_dbus_method_invocation_return_gerror (invocation, error);
-      g_error_free (error);
       return TRUE;
-  }
+    }
 
   if (!g_app_info_launch (app, NULL, G_APP_LAUNCH_CONTEXT (launch_context), &error))
-    {
-      g_dbus_method_invocation_return_gerror (invocation, error);
-      g_error_free (error);
-    }
+    g_dbus_method_invocation_return_gerror (invocation, error);
   else
-    {
-      cc_shell_search_provider2_complete_launch_search (skeleton, invocation);
-    }
+    cc_shell_search_provider2_complete_launch_search (skeleton, invocation);
+
   return TRUE;
 }
 
