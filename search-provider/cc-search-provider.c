@@ -43,11 +43,6 @@ struct _CcSearchProvider
   GHashTable *iter_table; /* COL_ID -> GtkTreeIter */
 };
 
-struct _CcSearchProviderClass
-{
-  GObjectClass parent_class;
-};
-
 typedef enum {
   MATCH_NONE,
   MATCH_PREFIX,

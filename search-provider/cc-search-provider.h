@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef _CC_SEARCH_PROVIDER_H
-#define _CC_SEARCH_PROVIDER_H
+#pragma once
 
 #include <glib-object.h>
 #include <gio/gio.h>
@@ -27,32 +26,9 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SEARCH_PROVIDER cc_search_provider_get_type()
+#define CC_TYPE_SEARCH_PROVIDER (cc_search_provider_get_type())
 
-#define CC_SEARCH_PROVIDER(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_SEARCH_PROVIDER, CcSearchProvider))
-
-#define CC_SEARCH_PROVIDER_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_SEARCH_PROVIDER, CcSearchProviderClass))
-
-#define CC_IS_SEARCH_PROVIDER(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_SEARCH_PROVIDER))
-
-#define CC_IS_SEARCH_PROVIDER_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_SEARCH_PROVIDER))
-
-#define CC_SEARCH_PROVIDER_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_SEARCH_PROVIDER, CcSearchProviderClass))
-
-typedef struct _CcSearchProvider CcSearchProvider;
-typedef struct _CcSearchProviderClass CcSearchProviderClass;
-
-GType cc_search_provider_get_type (void) G_GNUC_CONST;
+G_DECLARE_FINAL_TYPE (CcSearchProvider, cc_search_provider, CC, SEARCH_PROVIDER, GObject)
 
 CcSearchProvider *cc_search_provider_new (void);
 
@@ -65,5 +41,3 @@ void     cc_search_provider_dbus_unregister (CcSearchProvider  *provider,
                                              const char        *object_path);
 
 G_END_DECLS
-
-#endif /* _CC_SEARCH_PROVIDER_H */
