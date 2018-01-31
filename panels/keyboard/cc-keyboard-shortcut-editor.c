@@ -222,33 +222,15 @@ static void
 grab_seat (CcKeyboardShortcutEditor *self)
 {
   GdkGrabStatus status;
-  GdkDevice *pointer;
-  GdkDevice *device;
   GdkWindow *window;
-  GList *seats;
+  GdkSeat *seat;
 
   window = gtk_widget_get_window (GTK_WIDGET (self));
-  if (!window)
-    return;
+  g_assert (window);
 
-  seats = gdk_display_list_seats (gdk_window_get_display (window));
-  if (!seats)
-    return;
+  seat = gdk_display_get_default_seat (gdk_window_get_display (window));
 
-  device = gdk_seat_get_keyboard (seats->data);
-  g_list_free (seats);
-
-  if (!device) {
-    g_debug ("Keyboard grab unsuccessful, no keyboard in seat");
-    return;
-  }
-
-  if (gdk_device_get_source (device) == GDK_SOURCE_KEYBOARD)
-    pointer = gdk_device_get_associated_device (device);
-  else
-    pointer = device;
-
-  status = gdk_seat_grab (gdk_device_get_seat (pointer),
+  status = gdk_seat_grab (seat,
                           window,
                           GDK_SEAT_CAPABILITY_KEYBOARD,
                           FALSE,
@@ -257,10 +239,14 @@ grab_seat (CcKeyboardShortcutEditor *self)
                           NULL,
                           NULL);
 
-  if (status != GDK_GRAB_SUCCESS)
+  if (status != GDK_GRAB_SUCCESS) {
+    g_warning ("Grabbing keyboard failed");
     return;
+  }
 
-  self->grab_pointer = pointer;
+  self->grab_pointer = gdk_seat_get_keyboard (seat);
+  if (!self->grab_pointer)
+    self->grab_pointer = gdk_seat_get_pointer (seat);
 
   gtk_grab_add (GTK_WIDGET (self));
 }
