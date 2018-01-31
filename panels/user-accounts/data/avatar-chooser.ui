@@ -9,9 +9,25 @@
         <property name="visible">True</property>
         <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
         <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="border_width">5</property>
+            <property name="margin-start">20</property>
+            <property name="margin-top">20</property>
+            <property name="halign">start</property>
+            <child>
+              <object class="GtkImage" id="current_avatar">
+                <property name="visible">True</property>
+                <property name="icon-size">72</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
           <object class="GtkFlowBox" id="flowbox">
             <property name="visible">True</property>
-            <property name="border-width">20</property>
+            <property name="margin">20</property>
+            <property name="margin-top">0</property>
           </object>
         </child>
         <child>

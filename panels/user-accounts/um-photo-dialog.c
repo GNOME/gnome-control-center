@@ -47,6 +47,7 @@ struct _UmPhotoDialog {
 
         GtkWidget *popup_button;
         GtkWidget *crop_area;
+        GtkWidget *current_avatar;
         GtkWidget *flowbox;
         GtkWidget *take_picture_button;
 
@@ -375,6 +376,7 @@ setup_photo_popup (UmPhotoDialog *um)
         gboolean added_faces;
 
         um->faces = g_list_store_new (G_TYPE_FILE);
+
         gtk_flow_box_bind_model (GTK_FLOW_BOX (um->flowbox),
                                  G_LIST_MODEL (um->faces),
                                  create_face_widget,
@@ -502,6 +504,7 @@ um_photo_dialog_class_init (UmPhotoDialogClass *klass)
 
         gtk_widget_class_set_template_from_resource (wclass, "/org/gnome/control-center/user-accounts/avatar-chooser.ui");
 
+        gtk_widget_class_bind_template_child (wclass, UmPhotoDialog, current_avatar);
         gtk_widget_class_bind_template_child (wclass, UmPhotoDialog, flowbox);
         gtk_widget_class_bind_template_child (wclass, UmPhotoDialog, take_picture_button);
 
@@ -515,6 +518,10 @@ void
 um_photo_dialog_set_user (UmPhotoDialog *um,
                           ActUser       *user)
 {
+        const gchar *avatar_path = NULL;
+        GFile *file;
+        GIcon *icon;
+
         g_return_if_fail (um != NULL);
 
         if (um->user) {
@@ -522,5 +529,15 @@ um_photo_dialog_set_user (UmPhotoDialog *um,
                 um->user = NULL;
         }
         um->user = user;
+
+        avatar_path = act_user_get_icon_file (user);
+        file = g_file_new_for_path (avatar_path);
+        icon = g_file_icon_new (file);
+
+        gtk_image_set_from_gicon (GTK_IMAGE (um->current_avatar), icon, GTK_ICON_SIZE_DIALOG);
+        gtk_image_set_pixel_size (GTK_IMAGE (um->current_avatar), AVATAR_PIXEL_SIZE);
+
+        g_object_unref (icon);
+        g_object_unref (file);
 }
 
