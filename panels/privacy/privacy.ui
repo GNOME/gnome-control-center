@@ -753,17 +753,38 @@ All the information we collect is made anonymous, and we will never share your d
         <property name="margin">12</property>
         <property name="spacing">2</property>
         <child>
-          <object class="GtkLabel" id="location_description_label">
+          <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_bottom">12</property>
-            <property name="label" translatable="yes">Location services allow applications to know your location. Using Wi-Fi and mobile broadband increases accuracy.</property>
-            <property name="wrap">True</property>
-            <property name="max_width_chars">50</property>
-            <property name="xalign">0</property>
-            <style>
-              <class name="dim-label"/>
-            </style>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="location_description_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_bottom">12</property>
+                <property name="label" translatable="yes">Location services allow applications to know your location. Using Wi-Fi and mobile broadband increases accuracy.</property>
+                <property name="wrap">True</property>
+                <property name="max_width_chars">50</property>
+                <property name="xalign">0</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="location_privacy_policy_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_bottom">12</property>
+                <property name="label" translatable="yes">Uses Mozilla Location Service: &lt;a href='https://location.services.mozilla.com/privacy'&gt;Privacy Policy&lt;/a&gt;</property>
+                <property name="use-markup">True</property>
+                <property name="wrap">True</property>
+                <property name="max_width_chars">50</property>
+                <property name="xalign">0</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
