@@ -86,7 +86,7 @@ static void
 ui_to_setting (CEPageEthernet *page)
 {
         gchar *device_mac = NULL;
-        gchar *cloned_mac;
+        gchar *cloned_mac = NULL;
         const gchar *text;
         GtkWidget *entry;
 
@@ -95,8 +95,12 @@ ui_to_setting (CEPageEthernet *page)
                 text = gtk_entry_get_text (GTK_ENTRY (entry));
                 device_mac = ce_page_trim_address (text);
         }
-        text = gtk_entry_get_text (GTK_ENTRY (entry));
-        cloned_mac = ce_page_trim_address (text);
+
+        entry = gtk_bin_get_child (GTK_BIN (page->cloned_mac));
+        if (entry) {
+                text = gtk_entry_get_text (GTK_ENTRY (entry));
+                cloned_mac = ce_page_trim_address (text);
+        }
 
         g_object_set (page->setting_wired,
                       NM_SETTING_WIRED_MAC_ADDRESS, device_mac,
