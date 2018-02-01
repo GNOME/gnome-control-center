@@ -30,7 +30,10 @@ struct _CcBackgroundGridItem
 
   /* data */
   CcBackgroundItem      *item;
+  GdkPixbuf             *base_pixbuf;
   GdkPixbuf             *cached_pixbuf;
+  gint                  pos_zero_x;
+  gint                  pos_zero_y;
 };
 
 G_DEFINE_TYPE (CcBackgroundGridItem, cc_background_grid_item, GTK_TYPE_DRAWING_AREA)
@@ -91,12 +94,14 @@ add_slideshow_emblem (GdkPixbuf *pixbuf,
   g_clear_object (&icon);
 }
 
-static gboolean
-on_gallery_item_draw (GtkWidget            *widget,
-                      cairo_t              *cr,
-                      CcBackgroundGridItem *item)
+
+static void
+on_gallery_item_size_allocate (GtkWidget *widget,
+                               GdkRectangle *allocation,
+                               gpointer  *pointer)
 {
-  GdkPixbuf *pixbuf = ((CcBackgroundGridItem *) widget)->cached_pixbuf;
+  CcBackgroundGridItem *item = (CcBackgroundGridItem *) widget;
+  GdkPixbuf *pixbuf = item->base_pixbuf;
   GdkPixbuf *new_pixbuf;
   const gint space_width = gtk_widget_get_allocated_width (widget);
   const gint space_height = gtk_widget_get_allocated_height ( (widget));
@@ -122,12 +127,26 @@ on_gallery_item_draw (GtkWidget            *widget,
     add_slideshow_emblem (new_pixbuf, (space_width + new_width) / 2, (space_height + new_height)/2, scale_factor);
   }
 
-  gdk_cairo_set_source_pixbuf (cr,
-                               new_pixbuf,
-                               (space_width - new_width) / 2,
-                               (space_height - new_height) / 2);
+  if (item->cached_pixbuf != NULL)
+    g_object_unref (item->cached_pixbuf);
 
-  g_object_unref (new_pixbuf);
+  item->cached_pixbuf = new_pixbuf;
+  item->pos_zero_x = (space_width - new_width) / 2;
+  item->pos_zero_y = (space_height - new_height) / 2;
+}
+
+static gboolean
+on_gallery_item_draw (GtkWidget *widget,
+                      cairo_t   *cr,
+                      gpointer  *pointer)
+{
+  CcBackgroundGridItem *item = (CcBackgroundGridItem *) widget;
+  GdkPixbuf *pixbuf = item->cached_pixbuf;
+
+  gdk_cairo_set_source_pixbuf (cr,
+                               pixbuf,
+                               item->pos_zero_x,
+                               item->pos_zero_y);
   cairo_paint (cr);
 
   return TRUE;
@@ -139,7 +158,7 @@ cc_background_grid_item_new (CcBackgroundItem *item,
 {
   return g_object_new (CC_TYPE_BACKGROUND_GRID_ITEM,
                        "item", item,
-                       "cached_pixbuf", pixbuf,
+                       "base_pixbuf", pixbuf,
                        NULL);
 }
 
@@ -181,7 +200,7 @@ cc_background_grid_item_set_property (GObject      *object,
       g_set_object (&self->item, g_value_get_object (value));
       break;
     case PROP_PIXBUF_CACHE:
-      g_set_object (&self->cached_pixbuf, g_value_get_object (value));
+      g_set_object (&self->base_pixbuf, g_value_get_object (value));
       break;
 
     default:
@@ -204,7 +223,7 @@ cc_background_grid_item_get_property (GObject    *object,
       break;
 
     case PROP_PIXBUF_CACHE:
-      g_value_set_object (value, self->cached_pixbuf);
+      g_value_set_object (value, self->base_pixbuf);
       break;
 
     default:
@@ -232,9 +251,9 @@ cc_background_grid_item_class_init (CcBackgroundGridItemClass *klass)
                                                         G_PARAM_READWRITE));
   g_object_class_install_property (object_class,
                                    PROP_PIXBUF_CACHE,
-                                   g_param_spec_object ("cached_pixbuf",
-                                                        "Cached Pixbuf for preview",
-                                                        "The pixbuf for caching the preview in gallery",
+                                   g_param_spec_object ("base_pixbuf",
+                                                        "Base Pixbuf for preview",
+                                                        "The pixbuf base size for the preview in gallery",
                                                         GDK_TYPE_PIXBUF,
                                                         G_PARAM_READWRITE));
 
@@ -247,6 +266,8 @@ cc_background_grid_item_init (CcBackgroundGridItem *self)
   gtk_widget_set_vexpand(GTK_WIDGET (self), TRUE);
   g_signal_connect (G_OBJECT (self), "draw",
                     G_CALLBACK (on_gallery_item_draw), NULL);
+  g_signal_connect (G_OBJECT (self), "size-allocate",
+                    G_CALLBACK (on_gallery_item_size_allocate), NULL);
 
   gtk_widget_set_size_request (GTK_WIDGET(self), 250, 200);
 }
