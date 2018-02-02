@@ -143,7 +143,6 @@ set_bg_properties (CcBackgroundItem *item)
 {
         GdkRGBA pcolor = { 0, 0, 0, 0 };
         GdkRGBA scolor = { 0, 0, 0, 0 };
-        GdkColor p, s;
 
         if (item->uri) {
 		g_autoptr(GFile) file = NULL;

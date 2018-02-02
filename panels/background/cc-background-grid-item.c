@@ -88,7 +88,7 @@ add_slideshow_emblem (CcBackgroundGridItem *item,
                       gint                  h,
                       gint                  scale_factor)
 {
-  GdkPixbuf *slideshow_emblem;
+  GdkPixbuf *slideshow_emblem = NULL;
 
   int eh;
   int ew;
