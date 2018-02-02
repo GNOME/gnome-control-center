@@ -32,6 +32,7 @@ struct _CcBackgroundGridItem
   CcBackgroundItem      *item;
   GdkPixbuf             *base_pixbuf;
   GdkPixbuf             *cached_pixbuf;
+  GdkPixbuf             *base_emblem;
   gint                  pos_zero_x;
   gint                  pos_zero_y;
 };
@@ -44,22 +45,14 @@ G_DEFINE_TYPE (CcBackgroundGridItem, cc_background_grid_item, GTK_TYPE_DRAWING_A
       PROP_PIXBUF_CACHE
     };
 
-static void
-add_slideshow_emblem (GdkPixbuf *pixbuf,
-                      gint      w,
-                      gint      h,
-                      gint      scale_factor)
+static GdkPixbuf *
+load_slideshow_emblem (CcBackgroundGridItem *item, gint scale_factor)
 {
   GdkPixbuf *slideshow_emblem;
   GIcon *icon = NULL;
   GtkIconInfo *icon_info = NULL;
   GError *error = NULL;
   GtkIconTheme *theme;
-
-  int eh;
-  int ew;
-  int x;
-  int y;
 
   icon = g_themed_icon_new ("slideshow-emblem");
   theme = gtk_icon_theme_get_default ();
@@ -74,24 +67,49 @@ add_slideshow_emblem (GdkPixbuf *pixbuf,
                "please file a bug against it");
   }
   else {
-
     slideshow_emblem = gtk_icon_info_load_icon (icon_info, &error);
+
     if (slideshow_emblem == NULL) {
       g_warning ("Failed to load slideshow emblem: %s", error->message);
       g_error_free (error);
-    }
-    else {
-      eh = gdk_pixbuf_get_height (slideshow_emblem);
-      ew = gdk_pixbuf_get_width (slideshow_emblem);
-      x = w - ew - 5;
-      y = h - eh - 5;
-
-      gdk_pixbuf_composite (slideshow_emblem, pixbuf, x, y, ew, eh, x, y, 1.0, 1.0, GDK_INTERP_BILINEAR, 255);
     }
   }
 
   g_clear_object (&icon_info);
   g_clear_object (&icon);
+
+  return slideshow_emblem;
+}
+
+static void
+add_slideshow_emblem (CcBackgroundGridItem *item,
+                      GdkPixbuf            *pixbuf,
+                      gint                  w,
+                      gint                  h,
+                      gint                  scale_factor)
+{
+  GdkPixbuf *slideshow_emblem;
+
+  int eh;
+  int ew;
+  int x;
+  int y;
+
+  if (item->base_emblem == NULL) {
+    slideshow_emblem = load_slideshow_emblem (item, scale_factor);
+  }
+  else {
+    slideshow_emblem = item->base_emblem;
+  }
+
+  if (slideshow_emblem != NULL) {
+    eh = gdk_pixbuf_get_height (slideshow_emblem);
+    ew = gdk_pixbuf_get_width (slideshow_emblem);
+    x = w - ew - 5;
+    y = h - eh - 5;
+
+    gdk_pixbuf_composite (slideshow_emblem, pixbuf, x, y, ew, eh, x, y, 1.0, 1.0, GDK_INTERP_BILINEAR, 255);
+  }
 }
 
 static void
@@ -122,7 +140,7 @@ on_gallery_item_size_allocate (GtkWidget *widget,
                                             GDK_INTERP_BILINEAR);
 
   if (cc_background_item_changes_with_time (cc_background_grid_item_get_item (widget))) {
-    add_slideshow_emblem (resized_pixbuf, (space_width + new_width) / 2, (space_height + new_height)/2, scale_factor);
+    add_slideshow_emblem (item, resized_pixbuf, (space_width + new_width) / 2, (space_height + new_height)/2, scale_factor);
   }
 
   /* Save the position to place the pixbuf on the widget */
