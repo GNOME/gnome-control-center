@@ -94,15 +94,13 @@ add_slideshow_emblem (GdkPixbuf *pixbuf,
   g_clear_object (&icon);
 }
 
-
 static void
 on_gallery_item_size_allocate (GtkWidget *widget,
                                GdkRectangle *allocation,
                                gpointer  *pointer)
 {
   CcBackgroundGridItem *item = (CcBackgroundGridItem *) widget;
-  GdkPixbuf *pixbuf = item->base_pixbuf;
-  GdkPixbuf *new_pixbuf;
+  GdkPixbuf *resized_pixbuf;
   const gint space_width = gtk_widget_get_allocated_width (widget);
   const gint space_height = gtk_widget_get_allocated_height ( (widget));
   const gint scale_factor = gtk_widget_get_scale_factor (widget);
@@ -118,21 +116,23 @@ on_gallery_item_size_allocate (GtkWidget *widget,
     new_height = space_height;
   }
 
-  new_pixbuf = gdk_pixbuf_scale_simple (pixbuf,
-                                        new_width,
-                                        new_height,
-                                        GDK_INTERP_BILINEAR);
+  resized_pixbuf = gdk_pixbuf_scale_simple (item->base_pixbuf,
+                                            new_width,
+                                            new_height,
+                                            GDK_INTERP_BILINEAR);
 
   if (cc_background_item_changes_with_time (cc_background_grid_item_get_item (widget))) {
-    add_slideshow_emblem (new_pixbuf, (space_width + new_width) / 2, (space_height + new_height)/2, scale_factor);
+    add_slideshow_emblem (resized_pixbuf, (space_width + new_width) / 2, (space_height + new_height)/2, scale_factor);
   }
+
+  /* Save the position to place the pixbuf on the widget */
+  item->pos_zero_x = (space_width - new_width) / 2;
+  item->pos_zero_y = (space_height - new_height) / 2;
 
   if (item->cached_pixbuf != NULL)
     g_object_unref (item->cached_pixbuf);
 
-  item->cached_pixbuf = new_pixbuf;
-  item->pos_zero_x = (space_width - new_width) / 2;
-  item->pos_zero_y = (space_height - new_height) / 2;
+  item->cached_pixbuf = resized_pixbuf;
 }
 
 static gboolean
