@@ -700,7 +700,7 @@ make_list_popover (GtkWidget *listbox)
                                      NULL);
   GtkWidget *sw = g_object_new (GTK_TYPE_SCROLLED_WINDOW,
                                 "hscrollbar-policy", GTK_POLICY_NEVER,
-                                "max-content-height", 300,
+                                "max-content-height", 400,
                                 "propagate-natural-height", TRUE,
                                 NULL);
   gtk_container_add (GTK_CONTAINER (sw), make_list_transparent (listbox));
@@ -717,8 +717,10 @@ make_popover_label (const gchar *text)
 {
   return g_object_new (GTK_TYPE_LABEL,
                        "label", text,
-                       "margin", 4,
-                       "halign", GTK_ALIGN_START,
+                       "margin", 12,
+                       "xalign", 0.0,
+                       "width-chars", 20,
+                       "max-width-chars", 20,
                        NULL);
 }
 
@@ -766,6 +768,7 @@ make_orientation_popover (CcDisplayPanel *panel)
   guint i = 0;
 
   listbox = make_list_box ();
+  g_object_set (listbox, "margin", 12, NULL);
 
   for (i = 0; i < G_N_ELEMENTS (rotations); ++i)
     {
@@ -834,14 +837,18 @@ make_resolution_popover (CcDisplayPanel *panel)
   resolutions = g_object_get_data (G_OBJECT (priv->current_output), "res-list");
 
   listbox = make_list_box ();
+  g_object_set (listbox, "margin", 12, NULL);
 
   for (l = resolutions; l; l = l->next)
     {
       CcDisplayMode *mode = l->data;
       GtkWidget *row;
+      GtkWidget *child;
+
+      child = make_popover_label (get_resolution_string (mode));
 
       row = g_object_new (CC_TYPE_LIST_BOX_ROW,
-                          "child", make_popover_label (get_resolution_string (mode)),
+                          "child", child,
                           NULL);
       g_object_set_data (G_OBJECT (row), "mode", mode);
 
@@ -902,6 +909,7 @@ make_refresh_rate_popover (CcDisplayPanel *panel)
                                get_resolution_string (cc_display_monitor_get_mode (priv->current_output)));
 
   listbox = make_list_box ();
+  g_object_set (listbox, "margin", 12, NULL);
 
   for (l = freqs; l; l = l->next)
     {
@@ -1376,6 +1384,7 @@ make_primary_chooser_popover (CcDisplayPanel *panel)
   outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
 
   listbox = make_list_box ();
+  g_object_set (listbox, "margin", 12, NULL);
 
   for (l = outputs; l; l = l->next)
     {
@@ -1644,6 +1653,7 @@ make_mirror_resolution_popover (CcDisplayPanel *panel)
   resolutions = g_object_get_data (G_OBJECT (priv->current_config), "mirror-res-list");
 
   listbox = make_list_box ();
+  g_object_set (listbox, "margin", 12, NULL);
 
   for (l = resolutions; l; l = l->next)
     {
