@@ -562,8 +562,11 @@ cc_background_panel_init (CcBackgroundPanel *panel)
 
   if (!is_gnome_photos_installed ()) {
     gtk_widget_hide (widget);
+    gtk_label_set_text (GTK_LABEL (WID ("description-label")), _("The background can also be set from Files"));
   }
-
+  else {
+    gtk_label_set_text (GTK_LABEL (WID ("description-label")), _("The background can also be set from Photos or Files"));
+  }
   widget = WID ("open-picture-folder");
   g_signal_connect (G_OBJECT (widget), "clicked",
                     G_CALLBACK (on_open_picture_folder), panel);
