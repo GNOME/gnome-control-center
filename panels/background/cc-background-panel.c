@@ -306,7 +306,7 @@ set_background (CcBackgroundPanel *panel,
 {
   GDesktopBackgroundStyle style;
   gboolean save_settings = TRUE;
-  const char *uri;
+  const gchar *uri = NULL;
   CcBackgroundItemFlags flags;
 
   if (item == NULL)
@@ -392,9 +392,9 @@ static void
 on_open_gnome_photos (GtkWidget *widget,
                       gpointer  user_data)
 {
-  GAppLaunchContext *context;
-  GDesktopAppInfo *appInfo;
-  GError **error = NULL;
+  g_autoptr(GAppLaunchContext) context = NULL;
+  g_autoptr(GDesktopAppInfo) appInfo = NULL;
+  g_autoptr(GError) error = NULL;
 
   context = G_APP_LAUNCH_CONTEXT (gdk_display_get_app_launch_context (gdk_display_get_default ()));
   appInfo = g_desktop_app_info_new("org.gnome.Photos.desktop");
@@ -403,28 +403,25 @@ on_open_gnome_photos (GtkWidget *widget,
     g_debug ("Gnome Photos is not installed.");
   }
   else {
-    g_app_info_launch (G_APP_INFO (appInfo), NULL, context, error);
-    g_prefix_error (error, "Problem opening Gnome Photos: ");
-
-    g_object_unref (appInfo);
+    g_app_info_launch (G_APP_INFO (appInfo), NULL, context, &error);
+    g_prefix_error (&error, "Problem opening Gnome Photos: ");
   }
-  g_object_unref (context);
 }
 
 static void
 on_open_picture_folder (GtkWidget *widget,
                         gpointer  user_data)
 {
-  GDBusProxy      *proxy;
-  GVariant        *retval;
-  GVariantBuilder *builder;
-  const gchar     *uri;
-  GError **error = NULL;
-  const gchar     *path;
+  g_autoptr(GDBusProxy) proxy = NULL;
+  g_autoptr(GVariant) retval = NULL;
+  g_autoptr(GVariantBuilder) builder = NULL;
+  const gchar *uri;
+  g_autoptr(GError) error = NULL;
+  const gchar *path;
 
   path = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
 
-  uri = g_filename_to_uri (path, NULL, error);
+  uri = g_filename_to_uri (path, NULL, &error);
 
   proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
                                          G_DBUS_PROXY_FLAGS_NONE,
@@ -432,10 +429,10 @@ on_open_picture_folder (GtkWidget *widget,
                                          "org.freedesktop.FileManager1",
                                          "/org/freedesktop/FileManager1",
                                          "org.freedesktop.FileManager1",
-                                         NULL, error);
+                                         NULL, &error);
 
   if (!proxy) {
-    g_prefix_error (error,
+    g_prefix_error (&error,
                     ("Connecting to org.freedesktop.FileManager1 failed: "));
   }
   else {
@@ -449,17 +446,12 @@ on_open_picture_folder (GtkWidget *widget,
                                                     builder,
                                                     ""),
                                      G_DBUS_CALL_FLAGS_NONE,
-                                     -1, NULL, error);
-
-    g_variant_builder_unref (builder);
-    g_object_unref (proxy);
+                                     -1, NULL, &error);
 
     if (!retval)
       {
-        g_prefix_error (error, ("Calling ShowFolders failed: "));
+        g_prefix_error (&error, ("Calling ShowFolders failed: "));
       }
-    else
-      g_variant_unref (retval);
   }
 }
 
@@ -502,7 +494,7 @@ cc_background_panel_init (CcBackgroundPanel *panel)
 {
   gchar *objects[] = {"background-panel", NULL };
   g_autoptr(GError) err = NULL;
-  GtkStyleProvider *provider;
+  g_autoptr(GtkCssProvider) provider = NULL;
   GtkWidget *widget;
 
   /* Create wallpapers store */
@@ -542,7 +534,6 @@ cc_background_panel_init (CcBackgroundPanel *panel)
   gtk_style_context_add_provider_for_screen (gdk_screen_get_default(),
                                              GTK_STYLE_PROVIDER (provider),
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-  g_object_unref (provider);
 
   /* setup preview area */
   widget = WID ("background-desktop-drawingarea");
