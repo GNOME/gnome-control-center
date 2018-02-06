@@ -616,7 +616,7 @@ ui_to_setting (CEPageIP6 *page)
                         continue;
                 }
 
-                if (!text_address || !nm_utils_ipaddr_valid (AF_INET6, text_address)) {
+                if (!*text_address || !nm_utils_ipaddr_valid (AF_INET6, text_address)) {
                         widget_set_error (GTK_WIDGET (entry));
                         ret = FALSE;
                 } else {
@@ -631,12 +631,13 @@ ui_to_setting (CEPageIP6 *page)
                         widget_unset_error (g_object_get_data (G_OBJECT (row), "prefix"));
                 }
 
-                if (text_gateway && !nm_utils_ipaddr_valid (AF_INET6, text_gateway)) {
+                if (*text_gateway && !nm_utils_ipaddr_valid (AF_INET6, text_gateway)) {
                         widget_set_error (g_object_get_data (G_OBJECT (row), "gateway"));
                         ret = FALSE;
                 } else {
                         widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
-                        have_gateway = TRUE;
+                        if (*text_gateway)
+                                have_gateway = TRUE;
                 }
 
                 if (!ret)
