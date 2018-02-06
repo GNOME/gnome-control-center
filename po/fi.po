@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2018-02-02 11:50+0000\n"
-"PO-Revision-Date: 2018-02-04 11:18+0200\n"
+"POT-Creation-Date: 2018-02-06 15:58+0000\n"
+"PO-Revision-Date: 2018-02-06 23:43+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -130,7 +130,7 @@ msgstr "Voit lisätä kuvia %s-kansioon, jolloin ne näkyvät täällä"
 #: panels/network/net-device-wifi.c:1387 panels/network/net-device-wifi.c:1467
 #: panels/network/net-device-wifi.c:1706 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:319
+#: panels/printers/pp-details-dialog.c:331
 #: panels/privacy/cc-privacy-panel.c:1053 panels/region/format-chooser.ui:25
 #: panels/region/input-chooser.ui:13
 #: panels/search/cc-search-locations-dialog.c:642
@@ -138,11 +138,11 @@ msgstr "Voit lisätä kuvia %s-kansioon, jolloin ne näkyvät täällä"
 #: panels/user-accounts/data/account-dialog.ui:28
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/user-accounts/data/password-dialog.ui:21
-#: panels/user-accounts/um-fingerprint-dialog.c:264
-#: panels/user-accounts/um-photo-dialog.c:94
-#: panels/user-accounts/um-photo-dialog.c:221
-#: panels/user-accounts/um-user-panel.c:658
-#: panels/user-accounts/um-user-panel.c:676
+#: panels/user-accounts/um-fingerprint-dialog.c:261
+#: panels/user-accounts/um-photo-dialog.c:102
+#: panels/user-accounts/um-photo-dialog.c:229
+#: panels/user-accounts/um-user-panel.c:635
+#: panels/user-accounts/um-user-panel.c:653
 msgid "_Cancel"
 msgstr "_Peru"
 
@@ -700,7 +700,7 @@ msgstr ""
 "href=\"osx\">Apple OS X:llä</a> ja <a href=\"windows\">Windowsilla</a> "
 "saattaa olla hyötyä."
 
-#: panels/color/color.ui:607 panels/user-accounts/um-fingerprint-dialog.c:723
+#: panels/color/color.ui:607 panels/user-accounts/um-fingerprint-dialog.c:720
 msgid "Summary"
 msgstr "Yhteenveto"
 
@@ -1679,8 +1679,8 @@ msgstr "Käynnistimet"
 msgid "Launch help browser"
 msgstr "Käynnistä ohjeselain"
 
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:220
-#: shell/cc-window.c:748 shell/gnome-control-center.desktop.in.in:3
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:223
+#: shell/cc-window.c:761 shell/gnome-control-center.desktop.in.in:3
 #: shell/window.ui:125
 msgid "Settings"
 msgstr "Asetukset"
@@ -1803,7 +1803,7 @@ msgstr "Omat pikanäppäimet"
 #: panels/keyboard/keyboard-shortcuts.c:435
 #: panels/keyboard/shortcut-editor.ui:96 panels/network/network-proxy.ui:123
 #: panels/network/network-wifi.ui:782 panels/network/network-wifi.ui:1059
-#: panels/user-accounts/um-fingerprint-dialog.c:214
+#: panels/user-accounts/um-fingerprint-dialog.c:211
 #: subprojects/gvc/gvc-mixer-control.c:1866
 msgid "Disabled"
 msgstr "Ei käytössä"
@@ -1857,7 +1857,7 @@ msgstr "Palauta kaikki oletusasetukset"
 msgid "Reset the shortcut to its default value"
 msgstr "Palauta pikanäppäin oletusarvoon"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:427
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:413
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1866,21 +1866,21 @@ msgstr ""
 "Pikanäppäin %s on jo asetettu toimintoon <b>%s</b>. Jos korvaat sen, "
 "poistetaan toiminto %s poistetaan käytöstä"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:597
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:583
 msgid "Set Custom Shortcut"
 msgstr "Aseta oma pikanäppäin"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:597
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:583
 msgid "Set Shortcut"
 msgstr "Aseta pikanäppäin"
 
 #. Setup the top label
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:606
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:592
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "Anna uusi pikanäppäin vaihtaaksesi <b>%s</b>."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:1033
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:1019
 msgid "Add Custom Shortcut"
 msgstr "Lisää oma pikanäppäin"
 
@@ -2266,12 +2266,12 @@ msgid "Remove VPN"
 msgstr "Poista VPN"
 
 #: panels/network/connection-editor/ce-page-details.c:329
-#: panels/network/network-wifi.ui:1456 shell/cc-window.c:212
+#: panels/network/network-wifi.ui:1456 shell/cc-window.c:215
 #: shell/panel-list.ui:103
 msgid "Details"
 msgstr "Tiedot"
 
-#: panels/network/connection-editor/ce-page-ethernet.c:173
+#: panels/network/connection-editor/ce-page-ethernet.c:174
 #: panels/network/connection-editor/ce-page-vpn.c:188
 #: panels/network/connection-editor/ce-page-wifi.c:194
 #: panels/network/network-wifi.ui:1460
@@ -2293,7 +2293,7 @@ msgstr "Poista reitti"
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:827
+#: panels/network/connection-editor/ce-page-ip6.c:828
 #: panels/network/network-wifi.ui:1468
 msgid "IPv6"
 msgstr "IPv6"
@@ -2601,9 +2601,9 @@ msgid "Select file to import"
 msgstr "Valitse tuotava tiedosto"
 
 #: panels/network/connection-editor/vpn-helpers.c:182
-#: panels/printers/pp-details-dialog.c:320
+#: panels/printers/pp-details-dialog.c:332
 #: panels/sharing/cc-sharing-panel.c:385
-#: panels/user-accounts/um-photo-dialog.c:222
+#: panels/user-accounts/um-photo-dialog.c:230
 msgid "_Open"
 msgstr "_Avaa"
 
@@ -4099,7 +4099,7 @@ msgstr "Automaattinen valmiustila"
 msgid "_When the Power Button is pressed"
 msgstr "_Kun virtapainiketta painetaan"
 
-#: panels/power/cc-power-panel.c:2418 shell/cc-window.c:216
+#: panels/power/cc-power-panel.c:2418 shell/cc-window.c:219
 #: shell/panel-list.ui:45
 msgid "Devices"
 msgstr "Laitteet"
@@ -4232,18 +4232,18 @@ msgid "Authentication Required"
 msgstr "Tunnistautuminen vaaditaan"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:718
+#: panels/printers/cc-printers-panel.c:720
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Tulostin “%s” on poistettu"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:909
+#: panels/printers/cc-printers-panel.c:953
 msgid "Failed to add new printer."
 msgstr "Uuden tulostimen lisäys epäonnistui."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1221
+#: panels/printers/cc-printers-panel.c:1275
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Käyttöliittymätiedoston lataus epäonnistui: %s"
@@ -4340,21 +4340,21 @@ msgid "Test Page"
 msgstr "Testisivu"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: panels/printers/pp-details-dialog.c:123
-#: panels/printers/pp-details-dialog.c:415
+#: panels/printers/pp-details-dialog.c:135
+#: panels/printers/pp-details-dialog.c:435
 #, c-format
 msgid "%s Details"
 msgstr "Tulostimen %s tiedot"
 
-#: panels/printers/pp-details-dialog.c:172
+#: panels/printers/pp-details-dialog.c:184
 msgid "No suitable driver found"
 msgstr "Soveltuvaa ajuria ei löytynyt"
 
-#: panels/printers/pp-details-dialog.c:316
+#: panels/printers/pp-details-dialog.c:328
 msgid "Select PPD File"
 msgstr "Valitse PPD-tiedosto"
 
-#: panels/printers/pp-details-dialog.c:325
+#: panels/printers/pp-details-dialog.c:337
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4367,7 +4367,7 @@ msgid "Select Printer Driver"
 msgstr "Valitse tulostinajuri"
 
 #: panels/printers/ppd-selection-dialog.ui:40
-#: panels/user-accounts/um-photo-dialog.c:96
+#: panels/user-accounts/um-photo-dialog.c:104
 msgid "Select"
 msgstr "Valitse"
 
@@ -4651,12 +4651,12 @@ msgid "Manufacturer"
 msgstr "Valmistaja"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:585 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:598 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "Ei aktiivisia töitä"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:590
+#: panels/printers/pp-printer-entry.c:603
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -4664,111 +4664,111 @@ msgstr[0] "%u työ"
 msgstr[1] "%u työtä"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:739
+#: panels/printers/pp-printer-entry.c:752
 msgid "Low on toner"
 msgstr "Muste on vähissä"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:741
+#: panels/printers/pp-printer-entry.c:754
 msgid "Out of toner"
 msgstr "Muste on loppu"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:744
+#: panels/printers/pp-printer-entry.c:757
 msgid "Low on developer"
 msgstr "Kehite on vähissä"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:747
+#: panels/printers/pp-printer-entry.c:760
 msgid "Out of developer"
 msgstr "Kehite on loppu"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:749
+#: panels/printers/pp-printer-entry.c:762
 msgid "Low on a marker supply"
 msgstr "Väriaine vähissä"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:751
+#: panels/printers/pp-printer-entry.c:764
 msgid "Out of a marker supply"
 msgstr "Väriaine loppu"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:753
+#: panels/printers/pp-printer-entry.c:766
 msgid "Open cover"
 msgstr "Avaa kansi"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:755
+#: panels/printers/pp-printer-entry.c:768
 msgid "Open door"
 msgstr "Avaa ovi"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:757
+#: panels/printers/pp-printer-entry.c:770
 msgid "Low on paper"
 msgstr "Paperi vähissä"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:759
+#: panels/printers/pp-printer-entry.c:772
 msgid "Out of paper"
 msgstr "Paperi on loppu"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:761
+#: panels/printers/pp-printer-entry.c:774
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Poissa verkosta"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:763
-#: panels/printers/pp-printer-entry.c:893
+#: panels/printers/pp-printer-entry.c:776
+#: panels/printers/pp-printer-entry.c:906
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Pysäytetty"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:765
+#: panels/printers/pp-printer-entry.c:778
 msgid "Waste receptacle almost full"
 msgstr "Jätesäiliö melkein täynnä"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:767
+#: panels/printers/pp-printer-entry.c:780
 msgid "Waste receptacle full"
 msgstr "Jätesäiliö täynnä"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:769
+#: panels/printers/pp-printer-entry.c:782
 msgid "The optical photo conductor is near end of life"
 msgstr "Valojohdeyksikkö on vaihdettava pian"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:771
+#: panels/printers/pp-printer-entry.c:784
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Valojohdeyksikkö on rikki"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:879
+#: panels/printers/pp-printer-entry.c:892
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Valmiina"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:884
+#: panels/printers/pp-printer-entry.c:897
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Ei hyväksy töitä"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:889
+#: panels/printers/pp-printer-entry.c:902
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Käsitellään"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:913
+#: panels/printers/pp-printer-entry.c:926
 msgid "Clean print heads"
 msgstr "Puhdista tulostuspäät"
 
@@ -6358,7 +6358,7 @@ msgid "Right little finger"
 msgstr "Oikea pikkurilli"
 
 #: panels/user-accounts/data/account-fingerprint.ui:39
-#: panels/user-accounts/um-fingerprint-dialog.c:680
+#: panels/user-accounts/um-fingerprint-dialog.c:677
 msgid "Enable Fingerprint Login"
 msgstr "Ota sormenjäljellä kirjautuminen käyttöön"
 
@@ -6381,6 +6381,16 @@ msgid ""
 msgstr ""
 "Sormenjälkesi tallennettiin onnistuneesti. Sinun pitäisi nyt pystyä "
 "kirjautumaan sisään sormenjäljen avulla."
+
+#: panels/user-accounts/data/avatar-chooser.ui:27
+#| msgid "Take a photo…"
+msgid "Take a Picture…"
+msgstr "Ota kuva…"
+
+#: panels/user-accounts/data/avatar-chooser.ui:34
+#| msgid "Select PPD File"
+msgid "Select a File…"
+msgstr "Valitse tiedosto…"
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
 msgid "Users"
@@ -6497,156 +6507,6 @@ msgstr "Käyttäjiä ei löytynyt"
 #: panels/user-accounts/data/user-accounts-dialog.ui:476
 msgid "Unlock to add a user account."
 msgstr "Avaa lukitus lisätäksesi käyttäjätilin."
-
-#: panels/user-accounts/fingerprint-strings.h:28
-#, c-format
-msgid "Place your left thumb on %s"
-msgstr ""
-
-#: panels/user-accounts/fingerprint-strings.h:28
-#, c-format
-msgid "Swipe your left thumb on %s"
-msgstr ""
-
-#: panels/user-accounts/fingerprint-strings.h:29
-#, fuzzy, c-format
-#| msgid "_Left index finger"
-msgid "Place your left index finger on %s"
-msgstr "_Vasen etusormi"
-
-#: panels/user-accounts/fingerprint-strings.h:29
-#, fuzzy, c-format
-#| msgid "_Left index finger"
-msgid "Swipe your left index finger on %s"
-msgstr "_Vasen etusormi"
-
-#: panels/user-accounts/fingerprint-strings.h:30
-#, fuzzy, c-format
-#| msgid "Left middle finger"
-msgid "Place your left middle finger on %s"
-msgstr "Vasen keskisormi"
-
-#: panels/user-accounts/fingerprint-strings.h:30
-#, fuzzy, c-format
-#| msgid "Left middle finger"
-msgid "Swipe your left middle finger on %s"
-msgstr "Vasen keskisormi"
-
-#: panels/user-accounts/fingerprint-strings.h:31
-#, fuzzy, c-format
-#| msgid "Left ring finger"
-msgid "Place your left ring finger on %s"
-msgstr "Vasen nimetön"
-
-#: panels/user-accounts/fingerprint-strings.h:31
-#, fuzzy, c-format
-#| msgid "Left ring finger"
-msgid "Swipe your left ring finger on %s"
-msgstr "Vasen nimetön"
-
-#: panels/user-accounts/fingerprint-strings.h:32
-#, fuzzy, c-format
-#| msgid "Left little finger"
-msgid "Place your left little finger on %s"
-msgstr "Vasen pikkurilli"
-
-#: panels/user-accounts/fingerprint-strings.h:32
-#, fuzzy, c-format
-#| msgid "Left little finger"
-msgid "Swipe your left little finger on %s"
-msgstr "Vasen pikkurilli"
-
-#: panels/user-accounts/fingerprint-strings.h:33
-#, c-format
-msgid "Place your right thumb on %s"
-msgstr ""
-
-#: panels/user-accounts/fingerprint-strings.h:33
-#, c-format
-msgid "Swipe your right thumb on %s"
-msgstr ""
-
-#: panels/user-accounts/fingerprint-strings.h:34
-#, fuzzy, c-format
-#| msgid "_Right index finger"
-msgid "Place your right index finger on %s"
-msgstr "_Oikea etusormi"
-
-#: panels/user-accounts/fingerprint-strings.h:34
-#, fuzzy, c-format
-#| msgid "_Right index finger"
-msgid "Swipe your right index finger on %s"
-msgstr "_Oikea etusormi"
-
-#: panels/user-accounts/fingerprint-strings.h:35
-#, fuzzy, c-format
-#| msgid "Right middle finger"
-msgid "Place your right middle finger on %s"
-msgstr "Oikea keskisormi"
-
-#: panels/user-accounts/fingerprint-strings.h:35
-#, fuzzy, c-format
-#| msgid "Right middle finger"
-msgid "Swipe your right middle finger on %s"
-msgstr "Oikea keskisormi"
-
-#: panels/user-accounts/fingerprint-strings.h:36
-#, fuzzy, c-format
-#| msgid "Right ring finger"
-msgid "Place your right ring finger on %s"
-msgstr "Oikea nimetön"
-
-#: panels/user-accounts/fingerprint-strings.h:36
-#, fuzzy, c-format
-#| msgid "Right ring finger"
-msgid "Swipe your right ring finger on %s"
-msgstr "Oikea nimetön"
-
-#: panels/user-accounts/fingerprint-strings.h:37
-#, fuzzy, c-format
-#| msgid "Right little finger"
-msgid "Place your right little finger on %s"
-msgstr "Oikea pikkurilli"
-
-#: panels/user-accounts/fingerprint-strings.h:37
-#, fuzzy, c-format
-#| msgid "Right little finger"
-msgid "Swipe your right little finger on %s"
-msgstr "Oikea pikkurilli"
-
-#: panels/user-accounts/fingerprint-strings.h:72
-#: panels/user-accounts/fingerprint-strings.h:98
-msgid "Place your finger on the reader again"
-msgstr "Aseta sormesi lukijalle uudelleen"
-
-#: panels/user-accounts/fingerprint-strings.h:74
-#: panels/user-accounts/fingerprint-strings.h:100
-msgid "Swipe your finger again"
-msgstr ""
-
-#: panels/user-accounts/fingerprint-strings.h:77
-msgid "Swipe was too short; try again"
-msgstr ""
-
-#: panels/user-accounts/fingerprint-strings.h:79
-msgid "Your finger was not centered; try swiping your finger again"
-msgstr ""
-
-#: panels/user-accounts/fingerprint-strings.h:81
-msgid "Remove your finger and try swiping it again"
-msgstr ""
-
-#: panels/user-accounts/fingerprint-strings.h:103
-msgid "Swipe was too short, try again"
-msgstr ""
-
-#: panels/user-accounts/fingerprint-strings.h:105
-msgid "Your finger was not centered, try swiping your finger again"
-msgstr ""
-
-#: panels/user-accounts/fingerprint-strings.h:107
-msgid "Remove your finger, and try swiping your finger again"
-msgstr ""
 
 #: panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
@@ -6871,33 +6731,33 @@ msgctxt "Account type"
 msgid "Administrator"
 msgstr "Ylläpitäjä"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:142
+#: panels/user-accounts/um-fingerprint-dialog.c:139
 msgid ""
 "You are not allowed to access the device. Contact your system administrator."
 msgstr ""
 "Sinulla ei ole oikeutta käyttää laitetta. Ota yhteyttä ylläpitäjäjääsi."
 
-#: panels/user-accounts/um-fingerprint-dialog.c:144
+#: panels/user-accounts/um-fingerprint-dialog.c:141
 msgid "The device is already in use."
 msgstr "Laite on jo käytössä."
 
-#: panels/user-accounts/um-fingerprint-dialog.c:146
+#: panels/user-accounts/um-fingerprint-dialog.c:143
 msgid "An internal error occurred."
 msgstr "Tapahtui sisäinen virhe."
 
-#: panels/user-accounts/um-fingerprint-dialog.c:217
+#: panels/user-accounts/um-fingerprint-dialog.c:214
 msgid "Enabled"
 msgstr "Käytössä"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:263
+#: panels/user-accounts/um-fingerprint-dialog.c:260
 msgid "Delete registered fingerprints?"
 msgstr "Poistetaanko rekisteröidyt sormenjäljet?"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:267
+#: panels/user-accounts/um-fingerprint-dialog.c:264
 msgid "_Delete Fingerprints"
 msgstr "_Poista sormenjäljet"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:273
+#: panels/user-accounts/um-fingerprint-dialog.c:270
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -6905,15 +6765,15 @@ msgstr ""
 "Haluatko poistaa rekisteröidyt sormenjälkesi, jolloin sormenjäljillä "
 "kirjautuminen poistetaan käytöstä?"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:443
+#: panels/user-accounts/um-fingerprint-dialog.c:440
 msgid "Done!"
 msgstr "Valmis!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:504
-#: panels/user-accounts/um-fingerprint-dialog.c:546
+#: panels/user-accounts/um-fingerprint-dialog.c:501
+#: panels/user-accounts/um-fingerprint-dialog.c:543
 #, c-format
 msgid "Could not access “%s” device"
 msgstr "Laitetta ”%s” ei voitu käsitellä"
@@ -6921,16 +6781,16 @@ msgstr "Laitetta ”%s” ei voitu käsitellä"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:587
+#: panels/user-accounts/um-fingerprint-dialog.c:584
 #, c-format
 msgid "Could not start finger capture on “%s” device"
 msgstr "Sormenjäljen tunnistusta ei voitu aloittaa laitteella ”%s”"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:631
+#: panels/user-accounts/um-fingerprint-dialog.c:628
 msgid "Could not access any fingerprint readers"
 msgstr "Sormenjälkilukijoita ei voitu käyttää"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:632
+#: panels/user-accounts/um-fingerprint-dialog.c:629
 msgid "Please contact your system administrator for help."
 msgstr "Kysy apua järjestelmäsi ylläpitäjältä."
 
@@ -6939,7 +6799,7 @@ msgstr "Kysy apua järjestelmäsi ylläpitäjältä."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: panels/user-accounts/um-fingerprint-dialog.c:714
+#: panels/user-accounts/um-fingerprint-dialog.c:711
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6948,11 +6808,11 @@ msgstr ""
 "Jotta voit ottaa sormenjäljellä kirjautumisen käyttöön, täytyy yksi "
 "sormenjäljistä tallentaa käyttäen laitetta ”%s”."
 
-#: panels/user-accounts/um-fingerprint-dialog.c:721
+#: panels/user-accounts/um-fingerprint-dialog.c:718
 msgid "Selecting finger"
 msgstr "Valitaan sormea"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:722
+#: panels/user-accounts/um-fingerprint-dialog.c:719
 msgid "Enrolling fingerprints"
 msgstr "Kirjataan sormenjälkiä"
 
@@ -6992,7 +6852,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/um-history-dialog.c:177
-#: panels/user-accounts/um-user-panel.c:790
+#: panels/user-accounts/um-user-panel.c:767
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7000,7 +6860,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/um-history-dialog.c:180
-#: panels/user-accounts/um-user-panel.c:794
+#: panels/user-accounts/um-user-panel.c:771
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7037,26 +6897,9 @@ msgstr "Salasanaa ei voitu vaihtaa"
 msgid "The passwords do not match."
 msgstr "Salasanat eivät täsmää."
 
-#: panels/user-accounts/um-photo-dialog.c:218
+#: panels/user-accounts/um-photo-dialog.c:226
 msgid "Browse for more pictures"
 msgstr "Selaa lisää kuvia"
-
-#: panels/user-accounts/um-photo-dialog.c:452
-msgid "Disable image"
-msgstr "Poista kuva käytöstä"
-
-#: panels/user-accounts/um-photo-dialog.c:470
-msgid "Take a photo…"
-msgstr "Ota kuva…"
-
-#: panels/user-accounts/um-photo-dialog.c:488
-msgid "Browse for more pictures…"
-msgstr "Selaa lisää kuvia…"
-
-#: panels/user-accounts/um-photo-dialog.c:714
-#, c-format
-msgid "Used by %s"
-msgstr "Käytössä (%s)"
 
 #: panels/user-accounts/um-realm-manager.c:350
 msgid "Cannot automatically join this type of domain"
@@ -7086,26 +6929,26 @@ msgstr "Toimialueeseen %s yhdistäminen epäonnistui: %s"
 msgid "Your account"
 msgstr "Tilisi"
 
-#: panels/user-accounts/um-user-panel.c:404
+#: panels/user-accounts/um-user-panel.c:381
 msgid "Failed to delete user"
 msgstr "Käyttäjän poisto epäonnistui"
 
-#: panels/user-accounts/um-user-panel.c:462
-#: panels/user-accounts/um-user-panel.c:521
-#: panels/user-accounts/um-user-panel.c:573
+#: panels/user-accounts/um-user-panel.c:439
+#: panels/user-accounts/um-user-panel.c:498
+#: panels/user-accounts/um-user-panel.c:550
 msgid "Failed to revoke remotely managed user"
 msgstr "Etähallitun käyttäjän kumoaminen epäonnistui"
 
-#: panels/user-accounts/um-user-panel.c:627
+#: panels/user-accounts/um-user-panel.c:604
 msgid "You cannot delete your own account."
 msgstr "Et voi poistaa omaa tunnustasi."
 
-#: panels/user-accounts/um-user-panel.c:636
+#: panels/user-accounts/um-user-panel.c:613
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s on yhä sisäänkirjautuneena"
 
-#: panels/user-accounts/um-user-panel.c:640
+#: panels/user-accounts/um-user-panel.c:617
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7113,12 +6956,12 @@ msgstr ""
 "Jos käyttäjä poistetaan hänen ollessaan sisäänkirjautuneena, järjestelmässä "
 "voi ilmetä ongelmia."
 
-#: panels/user-accounts/um-user-panel.c:649
+#: panels/user-accounts/um-user-panel.c:626
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Haluatko säilyttää käyttäjän %s tiedostot?"
 
-#: panels/user-accounts/um-user-panel.c:653
+#: panels/user-accounts/um-user-panel.c:630
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7126,47 +6969,47 @@ msgstr ""
 "Voit halutessasi säilyttää kotikansion, sähköpostit ja väliaikaistiedostot "
 "käyttäjätilin poiston yhteydessä."
 
-#: panels/user-accounts/um-user-panel.c:656
+#: panels/user-accounts/um-user-panel.c:633
 msgid "_Delete Files"
 msgstr "P_oista tiedostot"
 
-#: panels/user-accounts/um-user-panel.c:657
+#: panels/user-accounts/um-user-panel.c:634
 msgid "_Keep Files"
 msgstr "_Säilytä tiedostot"
 
-#: panels/user-accounts/um-user-panel.c:671
+#: panels/user-accounts/um-user-panel.c:648
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Haluatko varmasti kumota käyttöoikeudet etähallitulta tililtä %s?"
 
-#: panels/user-accounts/um-user-panel.c:675
+#: panels/user-accounts/um-user-panel.c:652
 msgid "_Delete"
 msgstr "_Poista"
 
-#: panels/user-accounts/um-user-panel.c:725
+#: panels/user-accounts/um-user-panel.c:702
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Käyttäjätili pois käytöstä"
 
-#: panels/user-accounts/um-user-panel.c:733
+#: panels/user-accounts/um-user-panel.c:710
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Asetetaan seuraavalla kirjautumiskerralla"
 
-#: panels/user-accounts/um-user-panel.c:736
+#: panels/user-accounts/um-user-panel.c:713
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ei mitään"
 
-#: panels/user-accounts/um-user-panel.c:783
+#: panels/user-accounts/um-user-panel.c:760
 msgid "Logged in"
 msgstr "Sisäänkirjautuneena"
 
-#: panels/user-accounts/um-user-panel.c:1131
+#: panels/user-accounts/um-user-panel.c:1107
 msgid "Failed to contact the accounts service"
 msgstr "Yhteys tilipalveluun (accounts service) epäonnistui"
 
-#: panels/user-accounts/um-user-panel.c:1133
+#: panels/user-accounts/um-user-panel.c:1109
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Varmista, että AccountService on asennettu ja käytössä."
 
@@ -7174,7 +7017,7 @@ msgstr "Varmista, että AccountService on asennettu ja käytössä."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/um-user-panel.c:1169
+#: panels/user-accounts/um-user-panel.c:1141
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7182,12 +7025,12 @@ msgstr ""
 "Tee muutoksia\n"
 "napsauttamalla ensin *-kuvaketta"
 
-#: panels/user-accounts/um-user-panel.c:1209
+#: panels/user-accounts/um-user-panel.c:1181
 msgid "Create a user account"
 msgstr "Luo käyttäjätili"
 
-#: panels/user-accounts/um-user-panel.c:1220
-#: panels/user-accounts/um-user-panel.c:1399
+#: panels/user-accounts/um-user-panel.c:1192
+#: panels/user-accounts/um-user-panel.c:1371
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7195,12 +7038,12 @@ msgstr ""
 "Luo käyttäjätili\n"
 "napsauttamalla ensin *-kuvaketta"
 
-#: panels/user-accounts/um-user-panel.c:1230
+#: panels/user-accounts/um-user-panel.c:1202
 msgid "Delete the selected user account"
 msgstr "Poista valittu käyttäjätili"
 
-#: panels/user-accounts/um-user-panel.c:1242
-#: panels/user-accounts/um-user-panel.c:1404
+#: panels/user-accounts/um-user-panel.c:1214
+#: panels/user-accounts/um-user-panel.c:1376
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7444,13 +7287,11 @@ msgstr "Yläpainike"
 
 #: panels/wacom/wacom-stylus-page.ui:270
 msgid "Lower Button"
-msgstr "Alanäppäin"
+msgstr "Alempi painike"
 
 #: panels/wacom/wacom-stylus-page.ui:299
-#, fuzzy
-#| msgid "Lower Button"
 msgid "Lowest Button"
-msgstr "Alanäppäin"
+msgstr "Alimmaisin painike"
 
 #: panels/wacom/wacom-stylus-page.ui:328
 msgid "Tip Pressure Feel"
@@ -7560,6 +7401,16 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Yhteyspiste"
 
+#: shell/org.gnome.ControlCenter.gschema.xml:5
+msgid "The identifier for the last Settings panel to be opened"
+msgstr ""
+
+#: shell/org.gnome.ControlCenter.gschema.xml:6
+msgid ""
+"The identifier for the last Settings panel to be opened. Unrecognised values "
+"will be ignored and the first panel in the list selected."
+msgstr ""
+
 #: shell/panel-list.ui:195
 msgid "No results found"
 msgstr "Tuloksia ei löytynyt"
@@ -7589,6 +7440,98 @@ msgstr[1] "%u sisääntuloa"
 #: subprojects/gvc/gvc-mixer-control.c:2738
 msgid "System Sounds"
 msgstr "Järjestelmän äänet"
+
+#, fuzzy
+#~| msgid "_Left index finger"
+#~ msgid "Place your left index finger on %s"
+#~ msgstr "_Vasen etusormi"
+
+#, fuzzy
+#~| msgid "_Left index finger"
+#~ msgid "Swipe your left index finger on %s"
+#~ msgstr "_Vasen etusormi"
+
+#, fuzzy
+#~| msgid "Left middle finger"
+#~ msgid "Place your left middle finger on %s"
+#~ msgstr "Vasen keskisormi"
+
+#, fuzzy
+#~| msgid "Left middle finger"
+#~ msgid "Swipe your left middle finger on %s"
+#~ msgstr "Vasen keskisormi"
+
+#, fuzzy
+#~| msgid "Left ring finger"
+#~ msgid "Place your left ring finger on %s"
+#~ msgstr "Vasen nimetön"
+
+#, fuzzy
+#~| msgid "Left ring finger"
+#~ msgid "Swipe your left ring finger on %s"
+#~ msgstr "Vasen nimetön"
+
+#, fuzzy
+#~| msgid "Left little finger"
+#~ msgid "Place your left little finger on %s"
+#~ msgstr "Vasen pikkurilli"
+
+#, fuzzy
+#~| msgid "Left little finger"
+#~ msgid "Swipe your left little finger on %s"
+#~ msgstr "Vasen pikkurilli"
+
+#, fuzzy
+#~| msgid "_Right index finger"
+#~ msgid "Place your right index finger on %s"
+#~ msgstr "_Oikea etusormi"
+
+#, fuzzy
+#~| msgid "_Right index finger"
+#~ msgid "Swipe your right index finger on %s"
+#~ msgstr "_Oikea etusormi"
+
+#, fuzzy
+#~| msgid "Right middle finger"
+#~ msgid "Place your right middle finger on %s"
+#~ msgstr "Oikea keskisormi"
+
+#, fuzzy
+#~| msgid "Right middle finger"
+#~ msgid "Swipe your right middle finger on %s"
+#~ msgstr "Oikea keskisormi"
+
+#, fuzzy
+#~| msgid "Right ring finger"
+#~ msgid "Place your right ring finger on %s"
+#~ msgstr "Oikea nimetön"
+
+#, fuzzy
+#~| msgid "Right ring finger"
+#~ msgid "Swipe your right ring finger on %s"
+#~ msgstr "Oikea nimetön"
+
+#, fuzzy
+#~| msgid "Right little finger"
+#~ msgid "Place your right little finger on %s"
+#~ msgstr "Oikea pikkurilli"
+
+#, fuzzy
+#~| msgid "Right little finger"
+#~ msgid "Swipe your right little finger on %s"
+#~ msgstr "Oikea pikkurilli"
+
+#~ msgid "Place your finger on the reader again"
+#~ msgstr "Aseta sormesi lukijalle uudelleen"
+
+#~ msgid "Disable image"
+#~ msgstr "Poista kuva käytöstä"
+
+#~ msgid "Browse for more pictures…"
+#~ msgstr "Selaa lisää kuvia…"
+
+#~ msgid "Used by %s"
+#~ msgstr "Käytössä (%s)"
 
 #~ msgid "Back­ground"
 #~ msgstr "Taustakuva"
