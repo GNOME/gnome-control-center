@@ -24,15 +24,12 @@
 
 #include "um-fingerprint-dialog.h"
 
-#include "fingerprint-strings.h"
-
 /* Retrieve a widget from the UI object */
 #define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
 
 /* Translate fprintd strings */
 #define TR(s) dgettext("fprintd", s)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wformat-nonliteral"
+#include "fingerprint-strings.h"
 
 /* This must match the number of images on the 2nd page in the UI file */
 #define MAX_ENROLL_STAGES 5
@@ -396,7 +393,7 @@ finger_radio_button_toggled (GtkToggleButton *button, EnrollData *data)
 
         data->finger = selected_finger (data->dialog);
 
-        msg = g_strdup_printf (TR(finger_str_to_msg (data->finger, data->is_swipe)), data->name);
+        msg = finger_str_to_msg (data->finger, data->name, data->is_swipe);
         gtk_label_set_text (GTK_LABEL (WID("enroll-label")), msg);
         g_free (msg);
 }
@@ -409,7 +406,7 @@ finger_combobox_changed (GtkComboBox *combobox, EnrollData *data)
 
         data->finger = selected_finger (data->dialog);
 
-        msg = g_strdup_printf (TR(finger_str_to_msg (data->finger, data->is_swipe)), data->name);
+        msg = finger_str_to_msg (data->finger, data->name, data->is_swipe);
         gtk_label_set_text (GTK_LABEL (WID("enroll-label")), msg);
         g_free (msg);
 }
@@ -725,7 +722,7 @@ enroll_fingerprints (GtkWindow *parent,
         /* Page 2 */
         g_object_set_data (G_OBJECT (WID("page2")), "name", "enroll");
 
-        msg = g_strdup_printf (TR(finger_str_to_msg (data->finger, data->is_swipe)), data->name);
+        msg = finger_str_to_msg (data->finger, data->name, data->is_swipe);
         gtk_label_set_text (GTK_LABEL (WID("enroll-label")), msg);
         g_free (msg);
 

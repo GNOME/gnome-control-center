@@ -22,23 +22,73 @@
 
 struct {
 	const char *dbus_name;
-	const char *place_str;
-	const char *swipe_str;
-} fingers[11] = {
-	{ "left-thumb", N_("Place your left thumb on %s"), N_("Swipe your left thumb on %s") },
-	{ "left-index-finger", N_("Place your left index finger on %s"), N_("Swipe your left index finger on %s") },
-	{ "left-middle-finger", N_("Place your left middle finger on %s"), N_("Swipe your left middle finger on %s") },
-	{ "left-ring-finger", N_("Place your left ring finger on %s"), N_("Swipe your left ring finger on %s") },
-	{ "left-little-finger", N_("Place your left little finger on %s"), N_("Swipe your left little finger on %s") },
-	{ "right-thumb", N_("Place your right thumb on %s"), N_("Swipe your right thumb on %s") },
-	{ "right-index-finger", N_("Place your right index finger on %s"), N_("Swipe your right index finger on %s") },
-	{ "right-middle-finger", N_("Place your right middle finger on %s"), N_("Swipe your right middle finger on %s") },
-	{ "right-ring-finger", N_("Place your right ring finger on %s"), N_("Swipe your right ring finger on %s") },
-	{ "right-little-finger", N_("Place your right little finger on %s"), N_("Swipe your right little finger on %s") },
-	{ NULL, NULL, NULL }
+	const char *place_str_generic;
+	const char *place_str_specific;
+	const char *swipe_str_generic;
+	const char *swipe_str_specific;
+} fingers[] = {
+	{ "any",
+	  N_("Place your finger on the fingerprint reader"),
+	  N_("Place your finger on %s"),
+	  N_("Swipe your finger across the fingerprint reader"),
+	  N_("Swipe your finger across %s") },
+	{ "left-thumb",
+	  N_("Place your left thumb on the fingerprint reader"),
+	  N_("Place your left thumb on %s"),
+	  N_("Swipe your left thumb across the fingerprint reader"),
+	  N_("Swipe your left thumb across %s") },
+	{ "left-index-finger",
+	  N_("Place your left index finger on the fingerprint reader"),
+	  N_("Place your left index finger on %s"),
+	  N_("Swipe your left index finger across the fingerprint reader"),
+	  N_("Swipe your left index finger across %s") },
+	{ "left-middle-finger",
+	  N_("Place your left middle finger on the fingerprint reader"),
+	  N_("Place your left middle finger on %s"),
+	  N_("Swipe your left middle finger across the fingerprint reader"),
+	  N_("Swipe your left middle finger across %s") },
+	{ "left-ring-finger",
+	  N_("Place your left ring finger on the fingerprint reader"),
+	  N_("Place your left ring finger on %s"),
+	  N_("Swipe your left ring finger across the fingerprint reader"),
+	  N_("Swipe your left ring finger across %s") },
+	{ "left-little-finger",
+	  N_("Place your left little finger on the fingerprint reader"),
+	  N_("Place your left little finger on %s"),
+	  N_("Swipe your left little finger across the fingerprint reader"),
+	  N_("Swipe your left little finger across %s") },
+	{ "right-thumb",
+	  N_("Place your right thumb on the fingerprint reader"),
+	  N_("Place your right thumb on %s"),
+	  N_("Swipe your right thumb across the fingerprint reader"),
+	  N_("Swipe your right thumb across %s") },
+	{ "right-index-finger",
+	  N_("Place your right index finger on the fingerprint reader"),
+	  N_("Place your right index finger on %s"),
+	  N_("Swipe your right index finger across the fingerprint reader"),
+	  N_("Swipe your right index finger across %s") },
+	{ "right-middle-finger",
+	  N_("Place your right middle finger on the fingerprint reader"),
+	  N_("Place your right middle finger on %s"),
+	  N_("Swipe your right middle finger across the fingerprint reader"),
+	  N_("Swipe your right middle finger across %s") },
+	{ "right-ring-finger",
+	  N_("Place your right ring finger on the fingerprint reader"),
+	  N_("Place your right ring finger on %s"),
+	  N_("Swipe your right ring finger across the fingerprint reader"),
+	  N_("Swipe your right ring finger across %s") },
+	{ "right-little-finger",
+	  N_("Place your right little finger on the fingerprint reader"),
+	  N_("Place your right little finger on %s"),
+	  N_("Swipe your right little finger across the fingerprint reader"),
+	  N_("Swipe your right little finger across %s") },
+	{ NULL, NULL, NULL, NULL, NULL }
 };
 
-static const char *finger_str_to_msg(const char *finger_name, gboolean is_swipe)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-nonliteral"
+
+G_GNUC_UNUSED static char *finger_str_to_msg(const char *finger_name, const char *driver_name, gboolean is_swipe)
 {
 	int i;
 
@@ -47,15 +97,24 @@ static const char *finger_str_to_msg(const char *finger_name, gboolean is_swipe)
 
 	for (i = 0; fingers[i].dbus_name != NULL; i++) {
 		if (g_str_equal (fingers[i].dbus_name, finger_name)) {
-			if (is_swipe == FALSE)
-				return fingers[i].place_str;
-			else
-				return fingers[i].swipe_str;
+			if (is_swipe == FALSE) {
+				if (driver_name)
+					return g_strdup_printf (TR (fingers[i].place_str_specific), driver_name);
+				else
+					return g_strdup (TR (fingers[i].place_str_generic));
+			} else {
+				if (driver_name)
+					return g_strdup_printf (TR (fingers[i].swipe_str_specific), driver_name);
+				else
+					return g_strdup (TR (fingers[i].swipe_str_generic));
+			}
 		}
 	}
 
 	return NULL;
 }
+
+#pragma GCC diagnostic pop
 
 /* Cases not handled:
  * verify-no-match
@@ -74,11 +133,11 @@ G_GNUC_UNUSED static const char *verify_result_str_to_msg(const char *result, gb
 			return N_("Swipe your finger again");
 	}
 	if (strcmp (result, "verify-swipe-too-short") == 0)
-		return N_("Swipe was too short; try again");
+		return N_("Swipe was too short, try again");
 	if (strcmp (result, "verify-finger-not-centered") == 0)
-		return N_("Your finger was not centered; try swiping your finger again");
+		return N_("Your finger was not centered, try swiping your finger again");
 	if (strcmp (result, "verify-remove-and-retry") == 0)
-		return N_("Remove your finger and try swiping it again");
+		return N_("Remove your finger, and try swiping your finger again");
 
 	return NULL;
 }
@@ -88,7 +147,7 @@ G_GNUC_UNUSED static const char *verify_result_str_to_msg(const char *result, gb
  * enroll-failed
  * enroll-unknown-error
  */
-static const char *enroll_result_str_to_msg(const char *result, gboolean is_swipe)
+G_GNUC_UNUSED static const char *enroll_result_str_to_msg(const char *result, gboolean is_swipe)
 {
 	if (result == NULL)
 		return NULL;
