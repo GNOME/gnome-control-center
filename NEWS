@@ -1,3 +1,63 @@
+===============
+Version 3.27.90
+===============
+
+- Split the window decorations between the header bars
+- Disable the menubar
+- Only load panel corresponding to OnlyShowIn/NotShowIn
+- Modernize object definition by using G_DEFINE_TYPE macro
+- Use g_auto in various places to improve memory management
+- Ship app icon
+- Drop the old shell
+- Allow search to be filtered by panel "keywords"
+- Port to meson build system (and drop autotools)
+- Make Bluetooth, Network, and Wacom panels mandatory on Linux
+- Swap Display and Printers panels position in Devices section
+- Remember the last used panel
+- Translation updates
+
+Background:
+- Cache pixbufs for performance improvement
+
+Display:
+- Replace modal dialogs with popovers
+
+Info:
+- Ignore more virtual filesystems
+
+Network:
+- Make asynchronous calls cancellable
+- Allow empty 802.1x certificate passwords
+- Avoid crashing if NM reports no devices or no connections
+- Consider empty IPv6 gateway to be valid
+
+Notifications:
+- Add link to help/documentation
+
+Power:
+- Add gaming input devices label
+- Add 20 and 25 minutes suspend timeouts (complying with EU energy regulations)
+
+Printers:
+- Stay backwards compatible with old cups
+- Don't show the supply level bar if there's no ink info
+
+Privacy:
+- Add link to Location Services privacy policy
+
+Sound:
+- Update art work (new icons)
+- Respect setting (gsetting) for allowing output volume over 100%
+- Update gvc to not require ALSA support
+
+User Accounts:
+- Fix password strength check
+- Update user face pictures (new pictures)
+- Introduce a new avatar chooser popover
+
+Wacom
+- Add support for three-button styli
+
 ==============
 Version 3.26.0
 ==============
