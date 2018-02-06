@@ -31,17 +31,17 @@ G_DECLARE_FINAL_TYPE (CcBackgroundXml, cc_background_xml, CC, BACKGROUND_XML, GO
 
 CcBackgroundXml *cc_background_xml_new (void);
 
-void cc_background_xml_save                          (CcBackgroundItem *item,
-						      const char       *filename);
+void cc_background_xml_save                          (CcBackgroundItem    *item,
+						      const char          *filename);
 
-CcBackgroundItem *cc_background_xml_get_item         (const char      *filename);
-gboolean cc_background_xml_load_xml                  (CcBackgroundXml *data,
-						      const char      *filename);
-void cc_background_xml_load_list_async               (CcBackgroundXml *data,
-						      GCancellable *cancellable,
-						      GAsyncReadyCallback callback,
-						      gpointer user_data);
-const GHashTable *cc_background_xml_load_list_finish (GAsyncResult  *async_result);
+CcBackgroundItem *cc_background_xml_get_item         (const char          *filename);
+gboolean cc_background_xml_load_xml                  (CcBackgroundXml     *data,
+						      const char          *filename);
+void cc_background_xml_load_list_async               (CcBackgroundXml     *data,
+						      GCancellable        *cancellable,
+						      GAsyncReadyCallback  callback,
+						      gpointer             user_data);
+const GHashTable *cc_background_xml_load_list_finish (GAsyncResult        *async_result);
 
 G_END_DECLS
 

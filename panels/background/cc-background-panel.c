@@ -14,7 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
- * Author: Thomas Wood <thomas.wood@intel.com>
+ * Authors: Thomas Wood <thomas.wood@intel.com>
+ *          Julian Sparber <julian@sparber.net>
  *
  */
 
@@ -208,7 +209,7 @@ on_preview_draw (GtkWidget         *widget,
 }
 
 static void
-on_panel_resize (GtkWidget *widget,
+on_panel_resize (GtkWidget    *widget,
                  GdkRectangle *allocation,
                  gpointer      user_data)
 {
@@ -226,7 +227,7 @@ on_panel_resize (GtkWidget *widget,
 
 static void
 reload_current_bg (CcBackgroundPanel *panel,
-                   GSettings *settings)
+                   GSettings         *settings)
 {
   g_autoptr(CcBackgroundItem) saved = NULL;
   CcBackgroundItem *configured;
@@ -390,7 +391,7 @@ on_background_select (GtkFlowBox      *box,
 
 static void
 on_open_gnome_photos (GtkWidget *widget,
-                      gpointer  user_data)
+                      gpointer   user_data)
 {
   g_autoptr(GAppLaunchContext) context = NULL;
   g_autoptr(GDesktopAppInfo) appInfo = NULL;
@@ -410,7 +411,7 @@ on_open_gnome_photos (GtkWidget *widget,
 
 static void
 on_open_picture_folder (GtkWidget *widget,
-                        gpointer  user_data)
+                        gpointer   user_data)
 {
   g_autoptr(GDBusProxy) proxy = NULL;
   g_autoptr(GVariant) retval = NULL;

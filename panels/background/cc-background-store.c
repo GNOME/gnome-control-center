@@ -54,19 +54,18 @@ cc_background_store_finalize (GObject *gobject)
   G_OBJECT_CLASS (cc_background_store_parent_class)->finalize (gobject);
 }
 
-
 static void
 item_added (CcBackgroundXml    *xml,
             CcBackgroundItem   *item,
-            CcBackgroundStore *self)
+            CcBackgroundStore  *self)
 {
   g_list_store_append (self->model, item);
 }
 
 static void
-list_load_cb (GObject *source_object,
-              GAsyncResult *res,
-              gpointer user_data)
+list_load_cb (GObject           *source_object,
+              GAsyncResult      *res,
+              gpointer           user_data)
 {
   cc_background_xml_load_list_finish (res);
 }
@@ -96,17 +95,17 @@ cc_background_store_init (CcBackgroundStore *self)
 }
 
 void 
-cc_background_store_bind_flow_box (CcBackgroundStore *self,
-                                   gpointer panel,
-                                   GtkWidget *widget,
-                                   GtkFlowBoxCreateWidgetFunc create_widget_fun) {
+cc_background_store_bind_flow_box (CcBackgroundStore            *self,
+                                   gpointer                      panel,
+                                   GtkWidget                    *widget,
+                                   GtkFlowBoxCreateWidgetFunc    create_widget_fun)
+{
   gtk_flow_box_bind_model (GTK_FLOW_BOX (widget),
-                           G_LIST_MODEL(self->model),
+                           G_LIST_MODEL (self->model),
                            create_widget_fun,
                            panel,
                            NULL);
 }
-
 
 CcBackgroundStore *
 cc_background_store_new ()

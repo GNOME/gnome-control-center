@@ -58,8 +58,6 @@ common_sources += gnome.compile_resources(
 )
 
 sources = common_sources + files(
-  'bg-source.c',
-  'bg-wallpapers-source.c',
   'cc-background-item.c',
   'cc-background-grid-item.c',
   'cc-background-store.c',

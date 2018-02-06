@@ -83,7 +83,9 @@ G_DEFINE_TYPE (CcBackgroundItem, cc_background_item, G_TYPE_OBJECT)
 static GdkPixbuf *slideshow_emblem = NULL;
 
 static GdkPixbuf *
-get_emblemed_pixbuf (CcBackgroundItem *item, GdkPixbuf *pixbuf, gint scale_factor)
+get_emblemed_pixbuf (CcBackgroundItem *item,
+                     GdkPixbuf        *pixbuf,
+                     gint              scale_factor)
 {
         int eh;
         int ew;
@@ -201,8 +203,8 @@ update_size (CcBackgroundItem *item)
 
 static GdkPixbuf *
 render_at_size (GnomeBG *bg,
-                gint width,
-                gint height)
+                gint     width,
+                gint     height)
 {
         GdkPixbuf *pixbuf;
 

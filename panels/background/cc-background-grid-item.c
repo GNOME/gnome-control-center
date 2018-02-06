@@ -46,9 +46,10 @@ G_DEFINE_TYPE (CcBackgroundGridItem, cc_background_grid_item, GTK_TYPE_DRAWING_A
     };
 
 static GdkPixbuf *
-load_slideshow_emblem (CcBackgroundGridItem *item, gint scale_factor)
+load_slideshow_emblem (CcBackgroundGridItem *item,
+                       gint                  scale_factor)
 {
-  GdkPixbuf *slideshow_emblem;
+  GdkPixbuf *slideshow_emblem = NULL;
   GIcon *icon = NULL;
   GtkIconInfo *icon_info = NULL;
   GError *error = NULL;
@@ -113,9 +114,9 @@ add_slideshow_emblem (CcBackgroundGridItem *item,
 }
 
 static void
-on_gallery_item_size_allocate (GtkWidget *widget,
+on_gallery_item_size_allocate (GtkWidget    *widget,
                                GdkRectangle *allocation,
-                               gpointer  *pointer)
+                               gpointer      pointer)
 {
   CcBackgroundGridItem *item = (CcBackgroundGridItem *) widget;
   GdkPixbuf *resized_pixbuf;
@@ -206,7 +207,7 @@ cc_background_grid_item_dispose (GObject *object)
 
 static void
 cc_background_grid_item_set_property (GObject      *object,
-                                      guint        prop_id,
+                                      guint         prop_id,
                                       const GValue *value,
                                       GParamSpec   *pspec)
 {
@@ -228,7 +229,7 @@ cc_background_grid_item_set_property (GObject      *object,
 
 static void
 cc_background_grid_item_get_property (GObject    *object,
-                                      guint      prop_id,
+                                      guint       prop_id,
                                       GValue     *value,
                                       GParamSpec *pspec)
 {
