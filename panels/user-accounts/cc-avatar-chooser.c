@@ -41,7 +41,8 @@
 #include "cc-crop-area.h"
 
 #define ROW_SPAN 5
-#define AVATAR_PIXEL_SIZE 80
+#define AVATAR_CHOOSER_PIXEL_SIZE 80
+#define PIXEL_SIZE 512
 
 struct _CcAvatarChooser {
         GtkPopover parent;
@@ -119,7 +120,7 @@ crop_dialog_response (GtkWidget       *dialog,
         }
 
         pb = cc_crop_area_get_picture (CC_CROP_AREA (self->crop_area));
-        pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);
+        pb2 = gdk_pixbuf_scale_simple (pb, PIXEL_SIZE, PIXEL_SIZE, GDK_INTERP_BILINEAR);
 
         set_user_icon_data (self->user, pb2);
 
@@ -320,7 +321,7 @@ webcam_response_cb (GtkDialog        *dialog,
                 GdkPixbuf *pb, *pb2;
 
                 g_object_get (G_OBJECT (dialog), "pixbuf", &pb, NULL);
-                pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);
+                pb2 = gdk_pixbuf_scale_simple (pb, PIXEL_SIZE, PIXEL_SIZE, GDK_INTERP_BILINEAR);
 
                 set_user_icon_data (self->user, pb2);
 
@@ -402,7 +403,7 @@ create_face_widget (gpointer item,
 
         icon = g_file_icon_new (G_FILE (item));
         image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
-        gtk_image_set_pixel_size (GTK_IMAGE (image), AVATAR_PIXEL_SIZE);
+        gtk_image_set_pixel_size (GTK_IMAGE (image), AVATAR_CHOOSER_PIXEL_SIZE);
         g_object_unref (icon);
 
         gtk_widget_show (image);
