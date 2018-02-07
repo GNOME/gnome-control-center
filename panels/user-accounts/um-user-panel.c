@@ -39,7 +39,6 @@
 #include <libgnome-desktop/gnome-languages.h>
 
 #include "um-user-image.h"
-#include "um-cell-renderer-user-image.h"
 
 #include "um-account-dialog.h"
 #include "cc-language-chooser.h"
@@ -1440,7 +1439,6 @@ cc_user_panel_init (CcUserPanel *self)
 
         /* register types that the builder might need */
         type = um_user_image_get_type ();
-        type = um_cell_renderer_user_image_get_type ();
         type = um_carousel_get_type ();
 
         d->builder = gtk_builder_new ();
