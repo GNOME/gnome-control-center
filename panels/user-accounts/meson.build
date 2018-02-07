@@ -148,7 +148,6 @@ sources = common_sources + files(
   'run-passwd.c',
   'um-account-type.c',
   'um-carousel.c',
-  'um-cell-renderer-user-image.c',
   'um-fingerprint-dialog.c',
   'um-history-dialog.c',
   'um-password-dialog.c',
