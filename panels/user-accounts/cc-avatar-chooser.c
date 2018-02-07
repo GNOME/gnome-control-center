@@ -42,7 +42,8 @@
 #include "user-utils.h"
 
 #define ROW_SPAN 5
-#define AVATAR_PIXEL_SIZE 80
+#define AVATAR_CHOOSER_PIXEL_SIZE 80
+#define PIXEL_SIZE 512
 
 struct _CcAvatarChooser {
         GtkPopover parent;
@@ -80,7 +81,7 @@ crop_dialog_response (GtkWidget       *dialog,
         }
 
         pb = cc_crop_area_get_picture (CC_CROP_AREA (self->crop_area));
-        pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);
+        pb2 = gdk_pixbuf_scale_simple (pb, PIXEL_SIZE, PIXEL_SIZE, GDK_INTERP_BILINEAR);
 
         set_user_icon_data (self->user, pb2);
 
@@ -281,7 +282,7 @@ webcam_response_cb (GtkDialog        *dialog,
                 GdkPixbuf *pb, *pb2;
 
                 g_object_get (G_OBJECT (dialog), "pixbuf", &pb, NULL);
-                pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);
+                pb2 = gdk_pixbuf_scale_simple (pb, PIXEL_SIZE, PIXEL_SIZE, GDK_INTERP_BILINEAR);
 
                 set_user_icon_data (self->user, pb2);
 
@@ -366,16 +367,15 @@ create_face_widget (gpointer item,
         image_path = g_file_get_path (G_FILE (item));
 
         source_pixbuf = gdk_pixbuf_new_from_file_at_size (image_path,
-                                                          AVATAR_PIXEL_SIZE,
-                                                          AVATAR_PIXEL_SIZE,
+                                                          AVATAR_CHOOSER_PIXEL_SIZE,
+                                                          AVATAR_CHOOSER_PIXEL_SIZE,
                                                           NULL);
         if (source_pixbuf == NULL)
                 return NULL;
 
-        pixbuf = round_image (source_pixbuf, AVATAR_PIXEL_SIZE);
+        pixbuf = round_image (source_pixbuf, AVATAR_CHOOSER_PIXEL_SIZE);
         image = gtk_image_new_from_pixbuf (pixbuf);
-        gtk_image_set_pixel_size (GTK_IMAGE (image), AVATAR_PIXEL_SIZE);
-
+        gtk_image_set_pixel_size (GTK_IMAGE (image), AVATAR_CHOOSER_PIXEL_SIZE);
         gtk_widget_show (image);
 
         g_object_set_data (G_OBJECT (image),
