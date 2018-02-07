@@ -30,46 +30,12 @@ struct _CcUserImage {
 
 G_DEFINE_TYPE (CcUserImage, cc_user_image, GTK_TYPE_IMAGE)
 
-#define MAX_FILE_SIZE     65536
-
-static gboolean
-check_user_file (const char *filename,
-                 gssize      max_file_size)
-{
-        struct stat fileinfo;
-
-        if (max_file_size < 0) {
-                max_file_size = G_MAXSIZE;
-        }
-
-        /* Exists/Readable? */
-        if (stat (filename, &fileinfo) < 0) {
-                g_debug ("File does not exist");
-                return FALSE;
-        }
-
-        /* Is a regular file */
-        if (G_UNLIKELY (!S_ISREG (fileinfo.st_mode))) {
-                g_debug ("File is not a regular file");
-                return FALSE;
-        }
-
-        /* Size is sane? */
-        if (G_UNLIKELY (fileinfo.st_size > max_file_size)) {
-                g_debug ("File is too large");
-                return FALSE;
-        }
-
-        return TRUE;
-}
-
 static cairo_surface_t *
 render_user_icon (ActUser *user,
                   gint     icon_size,
                   gint     scale)
 {
         GdkPixbuf    *pixbuf;
-        gboolean      res;
         GError       *error;
         const gchar  *icon_file;
         cairo_surface_t *surface = NULL;
@@ -80,16 +46,10 @@ render_user_icon (ActUser *user,
         icon_file = act_user_get_icon_file (user);
         pixbuf = NULL;
         if (icon_file) {
-                res = check_user_file (icon_file, MAX_FILE_SIZE);
-                if (res) {
-                        pixbuf = gdk_pixbuf_new_from_file_at_size (icon_file,
-                                                                   icon_size * scale,
-                                                                   icon_size * scale,
-                                                                   NULL);
-                }
-                else {
-                        pixbuf = NULL;
-                }
+                pixbuf = gdk_pixbuf_new_from_file_at_size (icon_file,
+                                                           icon_size * scale,
+                                                           icon_size * scale,
+                                                           NULL);
         }
 
         if (pixbuf != NULL) {
