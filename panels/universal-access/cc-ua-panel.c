@@ -138,7 +138,9 @@ cc_ua_panel_dispose (GObject *object)
   g_clear_object (&priv->interface_settings);
   g_clear_object (&priv->kb_settings);
   g_clear_object (&priv->mouse_settings);
+  g_clear_object (&priv->kb_desktop_settings);
   g_clear_object (&priv->application_settings);
+  g_clear_object (&priv->gsd_mouse_settings);
 
   g_clear_object (&priv->zoom_options);
 
