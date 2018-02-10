@@ -190,6 +190,9 @@ connect_details_page (CEPageDetails *page)
         const gchar *type;
         gboolean device_is_active;
 
+        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
+        type = nm_setting_connection_get_connection_type (sc);
+
         if (NM_IS_DEVICE_WIFI (page->device))
                 active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (page->device));
         else
@@ -270,11 +273,14 @@ connect_details_page (CEPageDetails *page)
         /* Auto connect check */
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
                                                      "auto_connect_check"));
-        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-        g_object_bind_property (sc, "autoconnect",
-                                widget, "active",
-                                G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
-        g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
+        if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME)) {
+                gtk_widget_hide (widget);
+        } else {
+                g_object_bind_property (sc, "autoconnect",
+                                        widget, "active",
+                                        G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+                g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
+        }
 
         /* All users check */
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
@@ -292,7 +298,6 @@ connect_details_page (CEPageDetails *page)
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "button_forget"));
         g_signal_connect (widget, "clicked", G_CALLBACK (forget_cb), page);
 
-        type = nm_setting_connection_get_connection_type (sc);
         if (g_str_equal (type, NM_SETTING_WIRELESS_SETTING_NAME))
                 gtk_button_set_label (GTK_BUTTON (widget), _("Forget Connection"));
         else if (g_str_equal (type, NM_SETTING_WIRED_SETTING_NAME))
