@@ -1188,6 +1188,51 @@ combo_time_changed_cb (GtkWidget *widget, CcPowerPanel *self)
   g_settings_set_int (self->priv->gsd_settings, key, value);
 }
 
+/* Copied from src/properties/bacon-video-widget-properties.c
+ * in totem */
+static char *
+time_to_string_text (gint64 msecs)
+{
+	char *secs, *mins, *hours, *string;
+	int sec, min, hour, _time;
+
+	_time = (int) (msecs / 1000);
+	sec = _time % 60;
+	_time = _time - sec;
+	min = (_time % (60*60)) / 60;
+	_time = _time - (min * 60);
+	hour = _time / (60*60);
+
+	hours = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d hour", "%d hours", hour), hour);
+
+	mins = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d minute",
+					  "%d minutes", min), min);
+
+	secs = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d second",
+					  "%d seconds", sec), sec);
+
+	if (hour > 0)
+	{
+		/* 5 hours 2 minutes 12 seconds */
+		string = g_strdup_printf (C_("time", "%s %s %s"), hours, mins, secs);
+	} else if (min > 0) {
+		/* 2 minutes 12 seconds */
+		string = g_strdup_printf (C_("time", "%s %s"), mins, secs);
+	} else if (sec > 0) {
+		/* 10 seconds */
+		string = g_strdup (secs);
+	} else {
+		/* 0 seconds */
+		string = g_strdup (_("0 seconds"));
+	}
+
+	g_free (hours);
+	g_free (mins);
+	g_free (secs);
+
+	return string;
+}
+
 static void
 set_value_for_combo (GtkComboBox *combo_box, gint value)
 {
@@ -1209,9 +1254,25 @@ set_value_for_combo (GtkComboBox *combo_box, gint value)
       gtk_tree_model_get (model, &iter,
                           ACTION_MODEL_VALUE, &value_tmp,
                           -1);
-      if (value == value_tmp)
+      if (value_tmp == value)
         {
           gtk_combo_box_set_active_iter (combo_box, &iter);
+          return;
+        }
+      else if (value_tmp > value)
+        {
+          GtkTreeIter new;
+          char *text;
+
+          /* This is an unlisted value, add it to the drop-down */
+          gtk_list_store_insert_before (GTK_LIST_STORE (model), &new, &iter);
+          text = time_to_string_text (value * 1000);
+          gtk_list_store_set (GTK_LIST_STORE (model), &new,
+                              ACTION_MODEL_TEXT, text,
+                              ACTION_MODEL_VALUE, value,
+                              -1);
+          g_free (text);
+          gtk_combo_box_set_active_iter (combo_box, &new);
           return;
         }
       last = iter;
