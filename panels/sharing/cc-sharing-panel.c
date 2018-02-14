@@ -30,6 +30,7 @@
 #include "cc-media-sharing.h"
 #include "cc-sharing-networks.h"
 #include "cc-sharing-switch.h"
+#include "cc-gnome-remote-desktop.h"
 #include "org.gnome.SettingsDaemon.Sharing.h"
 
 #ifdef GDK_WINDOWING_WAYLAND
@@ -45,6 +46,13 @@ static GtkWidget *cc_sharing_panel_new_media_sharing_row (const char     *uri_or
 #define VINO_SCHEMA_ID "org.gnome.Vino"
 #define FILE_SHARING_SCHEMA_ID "org.gnome.desktop.file-sharing"
 #define GNOME_REMOTE_DESKTOP_SCHEMA_ID "org.gnome.desktop.remote-desktop"
+#define GNOME_REMOTE_DESKTOP_VNC_SCHEMA_ID "org.gnome.desktop.remote-desktop.vnc"
+
+typedef enum
+{
+  GRD_VNC_AUTH_METHOD_PROMPT,
+  GRD_VNC_AUTH_METHOD_PASSWORD
+} GrdVncAuthMethod;
 
 struct _CcSharingPanel
 {
@@ -1078,11 +1086,72 @@ cc_sharing_panel_setup_screen_sharing_dialog_vino (CcSharingPanel *self)
 static void
 cc_sharing_panel_setup_screen_sharing_dialog_gnome_remote_desktop (CcSharingPanel *self)
 {
+  g_autoptr(GSettings) vnc_settings = NULL;
   GtkWidget *networks, *w;
 
+  cc_sharing_panel_bind_switch_to_widgets (self->require_password_radiobutton, self->password_grid, NULL);
+
+  cc_sharing_panel_setup_label_with_hostname (self, self->screen_sharing_label);
+
+  g_object_bind_property (self->show_password_checkbutton,
+                          "active",
+                          self->remote_control_password_entry,
+                          "visibility",
+                          G_BINDING_SYNC_CREATE);
+
+  /* make sure the password entry is hidden by default */
+  g_signal_connect (self->screen_sharing_dialog,
+                    "show",
+                    G_CALLBACK (screen_sharing_show_cb),
+                    self);
+
+  g_signal_connect (self->screen_sharing_dialog,
+                    "hide",
+                    G_CALLBACK (screen_sharing_hide_cb),
+                    self);
+
+  /* accept at most 8 bytes in password entry */
+  g_signal_connect (self->remote_control_password_entry,
+                    "insert-text",
+                    G_CALLBACK (screen_sharing_password_insert_text_cb),
+                    self);
+
+  /* Bind settings to widgets */
+  vnc_settings = g_settings_new (GNOME_REMOTE_DESKTOP_VNC_SCHEMA_ID);
+
+  g_settings_bind (vnc_settings,
+                   "view-only",
+                   self->remote_control_checkbutton,
+                   "active",
+                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
+
+  g_settings_bind_with_mapping (vnc_settings,
+                                "auth-method",
+                                self->approve_connections_radiobutton,
+                                "active",
+                                G_SETTINGS_BIND_DEFAULT,
+                                cc_grd_get_is_auth_method_prompt,
+                                cc_grd_set_is_auth_method_prompt,
+                                NULL,
+                                NULL);
+
+  g_settings_bind_with_mapping (vnc_settings,
+                                "auth-method",
+                                self->require_password_radiobutton,
+                                "active",
+                                G_SETTINGS_BIND_DEFAULT,
+                                cc_grd_get_is_auth_method_password,
+                                cc_grd_set_is_auth_method_password,
+                                NULL,
+                                NULL);
+
+  g_signal_connect (self->remote_control_password_entry,
+                    "notify::text",
+                    G_CALLBACK (cc_grd_on_vnc_password_entry_notify_text),
+                    self);
+
   networks = cc_sharing_networks_new (self->sharing_proxy, "gnome-remote-desktop");
-  gtk_widget_hide (self->remote_control_box);
-  gtk_grid_attach (GTK_GRID (self->screen_sharing_grid), networks, 0, 1, 2, 1);
+  gtk_box_pack_end (GTK_BOX (self->remote_control_box), networks, TRUE, TRUE, 0);
   gtk_widget_show (networks);
 
   w = cc_sharing_switch_new (networks);
@@ -1112,6 +1181,9 @@ static void
 check_remote_desktop_available (CcSharingPanel *self)
 {
   if (!cc_sharing_panel_check_schema_available (self, GNOME_REMOTE_DESKTOP_SCHEMA_ID))
+    return;
+
+  if (!cc_sharing_panel_check_schema_available (self, GNOME_REMOTE_DESKTOP_VNC_SCHEMA_ID))
     return;
 
   self->remote_desktop_name_watch = g_bus_watch_name (G_BUS_TYPE_SESSION,

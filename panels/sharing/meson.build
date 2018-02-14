@@ -43,6 +43,7 @@ sources = files(
   'cc-remote-login.c',
   'cc-sharing-networks.c',
   'cc-sharing-switch.c',
+  'cc-gnome-remote-desktop.c',
   'file-share-properties.c',
   'vino-preferences.c'
 )
@@ -75,11 +76,13 @@ cflags += [
   '-DSYSCONFDIR="@0@"'.format(control_center_sysconfdir)
 ]
 
+libsecret_dep = dependency('libsecret-1')
+
 panels_libs += static_library(
   cappletname,
   sources: sources,
   include_directories: [ top_inc, common_inc ],
-  dependencies: common_deps,
+  dependencies: [common_deps, libsecret_dep],
   c_args: cflags
 )
 
