@@ -2646,6 +2646,59 @@ update_apply_button (CcDisplayPanel *panel)
 }
 
 static void
+snap_output_into_position (CcDisplayPanel *self,
+                           CcDisplayMonitor *output,
+                           int restored_x,
+                           int restored_y,
+                           int new_x,
+                           int new_y)
+{
+  int old_x, old_y;
+  int i;
+  GArray *edges, *snaps, *new_edges;
+
+  cc_display_monitor_get_geometry (output, &old_x, &old_y, NULL, NULL);
+
+  cc_display_monitor_set_position (output, new_x, new_y);
+
+  edges = g_array_new (TRUE, TRUE, sizeof (Edge));
+  snaps = g_array_new (TRUE, TRUE, sizeof (Snap));
+  new_edges = g_array_new (TRUE, TRUE, sizeof (Edge));
+
+  list_edges (self, edges);
+  list_snaps (output, edges, snaps);
+
+  g_array_sort (snaps, compare_snaps);
+
+  cc_display_monitor_set_position (output, old_x, old_y);
+
+  for (i = 0; i < snaps->len; ++i)
+    {
+      Snap *snap = &(g_array_index (snaps, Snap, i));
+      GArray *new_edges = g_array_new (TRUE, TRUE, sizeof (Edge));
+
+      cc_display_monitor_set_position (output, new_x + snap->dx, new_y + snap->dy);
+
+      g_array_set_size (new_edges, 0);
+      list_edges (self, new_edges);
+
+      if (config_is_aligned (self, new_edges))
+        {
+          g_array_free (new_edges, TRUE);
+          break;
+        }
+      else
+        {
+          cc_display_monitor_set_position (output, restored_x, restored_y);
+        }
+    }
+
+  g_array_free (new_edges, TRUE);
+  g_array_free (snaps, TRUE);
+  g_array_free (edges, TRUE);
+}
+
+static void
 on_output_event (FooScrollArea *area,
                  FooScrollAreaEvent *event,
                  gpointer data)
@@ -2702,55 +2755,19 @@ on_output_event (FooScrollArea *area,
   else
     {
       if (foo_scroll_area_is_grabbed (area))
-	{
-	  GrabInfo *info = g_object_get_data (G_OBJECT (output), "grab-info");
-	  double scale = compute_scale (self, area);
-	  int old_x, old_y;
-	  int new_x, new_y;
-	  int i;
-	  GArray *edges, *snaps, *new_edges;
+        {
+          GrabInfo *info = g_object_get_data (G_OBJECT (output), "grab-info");
+          int new_x;
+          int new_y;
+          double scale;
 
-	  cc_display_monitor_get_geometry (output, &old_x, &old_y, NULL, NULL);
-	  new_x = info->output_x + (event->x - info->grab_x) / scale;
-	  new_y = info->output_y + (event->y - info->grab_y) / scale;
+          scale  = compute_scale (self, area);
+          new_x = info->output_x + (event->x - info->grab_x) / scale;
+          new_y = info->output_y + (event->y - info->grab_y) / scale;
 
-	  cc_display_monitor_set_position (output, new_x, new_y);
-
-	  edges = g_array_new (TRUE, TRUE, sizeof (Edge));
-	  snaps = g_array_new (TRUE, TRUE, sizeof (Snap));
-	  new_edges = g_array_new (TRUE, TRUE, sizeof (Edge));
-
-	  list_edges (self, edges);
-	  list_snaps (output, edges, snaps);
-
-	  g_array_sort (snaps, compare_snaps);
-
-	  cc_display_monitor_set_position (output, old_x, old_y);
-
-	  for (i = 0; i < snaps->len; ++i)
-	    {
-	      Snap *snap = &(g_array_index (snaps, Snap, i));
-	      GArray *new_edges = g_array_new (TRUE, TRUE, sizeof (Edge));
-
-	      cc_display_monitor_set_position (output, new_x + snap->dx, new_y + snap->dy);
-
-	      g_array_set_size (new_edges, 0);
-	      list_edges (self, new_edges);
-
-	      if (config_is_aligned (self, new_edges))
-		{
-		  g_array_free (new_edges, TRUE);
-		  break;
-		}
-	      else
-		{
-		  cc_display_monitor_set_position (output, info->output_x, info->output_y);
-		}
-	    }
-
-	  g_array_free (new_edges, TRUE);
-	  g_array_free (snaps, TRUE);
-	  g_array_free (edges, TRUE);
+          snap_output_into_position (self, output,
+                                     info->output_x, info->output_y,
+                                     new_x, new_y);
 
 	  if (event->type == FOO_BUTTON_RELEASE)
 	    {
