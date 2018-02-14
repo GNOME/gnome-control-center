@@ -30,6 +30,7 @@
 #include "cc-media-sharing.h"
 #include "cc-sharing-networks.h"
 #include "cc-sharing-switch.h"
+#include "cc-gnome-remote-desktop.h"
 #include "org.gnome.SettingsDaemon.Sharing.h"
 
 #ifdef GDK_WINDOWING_WAYLAND
@@ -66,6 +67,13 @@ _gtk_builder_get_widget (GtkBuilder  *builder,
 #define VINO_SCHEMA_ID "org.gnome.Vino"
 #define FILE_SHARING_SCHEMA_ID "org.gnome.desktop.file-sharing"
 #define GNOME_REMOTE_DESKTOP_SCHEMA_ID "org.gnome.desktop.remote-desktop"
+#define GNOME_REMOTE_DESKTOP_VNC_SCHEMA_ID "org.gnome.desktop.remote-desktop.vnc"
+
+typedef enum
+{
+  GRD_VNC_AUTH_METHOD_PROMPT,
+  GRD_VNC_AUTH_METHOD_PASSWORD
+} GrdVncAuthMethod;
 
 struct _CcSharingPanelPrivate
 {
@@ -1077,11 +1085,56 @@ static void
 cc_sharing_panel_setup_screen_sharing_dialog_gnome_remote_desktop (CcSharingPanel *self)
 {
   CcSharingPanelPrivate *priv = self->priv;
-  GtkWidget *networks, *w;
+  GSettings *vnc_settings;
+  GtkWidget *networks, *box, *w;
+
+  cc_sharing_panel_bind_switch_to_widgets (WID ("require-password-radiobutton"),
+                                           WID ("password-grid"),
+                                           NULL);
+
+  cc_sharing_panel_setup_label_with_hostname (self,
+                                              WID ("screen-sharing-label"));
+
+  g_object_bind_property (WID ("show-password-checkbutton"), "active",
+                          WID ("remote-control-password-entry"), "visibility",
+                          G_BINDING_SYNC_CREATE);
+
+  /* make sure the password entry is hidden by default */
+  g_signal_connect (priv->screen_sharing_dialog, "show",
+                    G_CALLBACK (screen_sharing_show_cb), self);
+
+  g_signal_connect (priv->screen_sharing_dialog, "hide",
+                    G_CALLBACK (screen_sharing_hide_cb), self);
+
+  /* accept at most 8 bytes in password entry */
+  g_signal_connect (WID ("remote-control-password-entry"), "insert-text",
+                    G_CALLBACK (screen_sharing_password_insert_text_cb), self);
+
+  /* Bind settings to widgets */
+  vnc_settings = g_settings_new (GNOME_REMOTE_DESKTOP_VNC_SCHEMA_ID);
+  g_settings_bind (vnc_settings, "view-only",
+                   WID ("remote-control-checkbutton"), "active",
+                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
+  g_settings_bind_with_mapping (vnc_settings, "auth-method",
+                                WID ("approve-connections-radiobutton"), "active",
+                                G_SETTINGS_BIND_DEFAULT,
+                                cc_grd_get_is_auth_method_prompt,
+                                cc_grd_set_is_auth_method_prompt,
+                                NULL, NULL);
+  g_settings_bind_with_mapping (vnc_settings, "auth-method",
+                                WID ("require-password-radiobutton"), "active",
+                                G_SETTINGS_BIND_DEFAULT,
+                                cc_grd_get_is_auth_method_password,
+                                cc_grd_set_is_auth_method_password,
+                                NULL, NULL);
+  g_signal_connect (WID ("remote-control-password-entry"),
+                    "notify::text",
+                    G_CALLBACK (cc_grd_on_vnc_password_entry_notify_text),
+                    self);
 
   networks = cc_sharing_networks_new (self->priv->sharing_proxy, "gnome-remote-desktop");
-  gtk_widget_hide (WID ("remote-control-box"));
-  gtk_grid_attach (GTK_GRID (WID ("grid3")), networks, 0, 1, 2, 1);
+  box = WID ("remote-control-box");
+  gtk_box_pack_end (GTK_BOX (box), networks, TRUE, TRUE, 0);
   gtk_widget_show (networks);
 
   w = cc_sharing_switch_new (networks);
@@ -1114,6 +1167,9 @@ check_remote_desktop_available (CcSharingPanel *self)
   CcSharingPanelPrivate *priv = self->priv;
 
   if (!cc_sharing_panel_check_schema_available (self, GNOME_REMOTE_DESKTOP_SCHEMA_ID))
+    return;
+
+  if (!cc_sharing_panel_check_schema_available (self, GNOME_REMOTE_DESKTOP_VNC_SCHEMA_ID))
     return;
 
   priv->remote_desktop_name_watch = g_bus_watch_name (G_BUS_TYPE_SESSION,
