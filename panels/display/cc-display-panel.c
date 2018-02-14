@@ -127,6 +127,10 @@ make_display_size_string (int width_mm,
 static void
 reset_current_config (CcDisplayPanel *panel);
 
+static void
+resnap_output_into_position (CcDisplayPanel *self,
+                             CcDisplayMonitor *output);
+
 static char *
 make_output_ui_name (CcDisplayMonitor *output)
 {
@@ -748,6 +752,7 @@ orientation_row_activated (CcDisplayPanel *panel,
   CcDisplayRotation rotation = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "rotation"));
 
   cc_display_monitor_set_rotation (priv->current_output, rotation);
+  resnap_output_into_position (panel, priv->current_output);
   update_apply_button (panel);
 }
 
@@ -818,6 +823,7 @@ resolution_row_activated (CcDisplayPanel *panel,
   CcDisplayMode *mode = g_object_get_data (G_OBJECT (row), "mode");
 
   cc_display_monitor_set_mode (priv->current_output, mode);
+  resnap_output_into_position (panel, priv->current_output);
   update_apply_button (panel);
 }
 
@@ -2696,6 +2702,16 @@ snap_output_into_position (CcDisplayPanel *self,
   g_array_free (new_edges, TRUE);
   g_array_free (snaps, TRUE);
   g_array_free (edges, TRUE);
+}
+
+static void
+resnap_output_into_position (CcDisplayPanel *self,
+                             CcDisplayMonitor *output)
+{
+  int x, y;
+
+  cc_display_monitor_get_geometry (output, &x, &y, NULL, NULL);
+  snap_output_into_position (self, output, x, y, x, y);
 }
 
 static void
