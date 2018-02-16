@@ -305,13 +305,24 @@ get_jobs_thread (GTask        *task,
                  gpointer      task_data,
                  GCancellable *cancellable)
 {
-  GetJobsData *get_jobs_data = task_data;
-  cups_job_t  *jobs = NULL;
-  PpPrinter   *printer = PP_PRINTER (source_object);
-  gchar       *printer_name;
-  GList       *list = NULL;
-  gint         num_jobs;
-  gint         i;
+  ipp_attribute_t *attr = NULL;
+  static gchar    *printer_attributes[] = { "auth-info-required" };
+  GetJobsData     *get_jobs_data = task_data;
+  cups_job_t      *jobs = NULL;
+  PpPrinter       *printer = PP_PRINTER (source_object);
+  gboolean         auth_info_is_required;
+  PpJob           *job;
+  ipp_t           *job_request;
+  ipp_t           *job_response;
+  ipp_t           *printer_request;
+  ipp_t           *printer_response;
+  gchar           *job_uri;
+  gchar           *printer_uri;
+  gchar          **auth_info_required = NULL;
+  gchar           *printer_name;
+  GList           *list = NULL;
+  gint             num_jobs;
+  gint             i, j;
 
   g_object_get (printer, "printer-name", &printer_name, NULL);
 
@@ -319,21 +330,79 @@ get_jobs_thread (GTask        *task,
                           printer_name,
                           get_jobs_data->myjobs ? 1 : 0,
                           get_jobs_data->which_jobs);
-  g_free (printer_name);
 
   for (i = 0; i < num_jobs; i++)
     {
-      PpJob *job;
+      auth_info_is_required = FALSE;
+      if (jobs[i].state == IPP_JOB_HELD)
+        {
+          job_uri = g_strdup_printf ("ipp://localhost/jobs/%d", jobs[i].id);
+
+          job_request = ippNewRequest (IPP_GET_JOB_ATTRIBUTES);
+          ippAddString (job_request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                        "job-uri", NULL, job_uri);
+          ippAddString (job_request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                        "requesting-user-name", NULL, cupsUser ());
+          ippAddString (job_request, IPP_TAG_OPERATION, IPP_TAG_KEYWORD,
+                        "requested-attributes", NULL, "job-hold-until");
+          job_response = cupsDoRequest (CUPS_HTTP_DEFAULT, job_request, "/");
+
+          g_free (job_uri);
+
+          if (job_response != NULL)
+            {
+              attr = ippFindAttribute (job_response, "job-hold-until", IPP_TAG_ZERO);
+              if (attr != NULL && g_strcmp0 (ippGetString (attr, 0, NULL), "auth-info-required") == 0)
+                {
+                  auth_info_is_required = TRUE;
+
+                  if (auth_info_required == NULL)
+                    {
+                      printer_uri = g_strdup_printf ("ipp://localhost/printers/%s", printer_name);
+
+                      printer_request = ippNewRequest (IPP_GET_PRINTER_ATTRIBUTES);
+                      ippAddString (printer_request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                                    "printer-uri", NULL, printer_uri);
+                      ippAddString (printer_request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                                    "requesting-user-name", NULL, cupsUser ());
+                      ippAddStrings (printer_request, IPP_TAG_OPERATION, IPP_TAG_KEYWORD,
+                                     "requested-attributes", 1, NULL, (const char **) printer_attributes);
+                      printer_response = cupsDoRequest (CUPS_HTTP_DEFAULT, printer_request, "/");
+
+                      g_free (printer_uri);
+
+                      if (printer_response != NULL)
+                        {
+                          attr = ippFindAttribute (printer_response, "auth-info-required", IPP_TAG_ZERO);
+                          if (attr != NULL)
+                            {
+                              auth_info_required = g_new0 (gchar *, ippGetCount (attr) + 1);
+                              for (j = 0; j < ippGetCount (attr); j++)
+                                auth_info_required[j] = g_strdup (ippGetString (attr, j, NULL));
+                            }
+
+                          ippDelete (printer_response);
+                        }
+                    }
+                }
+
+              ippDelete (job_response);
+            }
+        }
 
       job = g_object_new (pp_job_get_type (),
                           "id",    jobs[i].id,
                           "title", jobs[i].title,
                           "state", jobs[i].state,
+                          "auth-info-required", auth_info_is_required ? auth_info_required : NULL,
                           NULL);
 
       list = g_list_append (list, job);
     }
+
+  g_strfreev (auth_info_required);
   cupsFreeJobs (num_jobs, jobs);
+  g_free (printer_name);
 
   if (g_task_set_return_on_cancel (task, FALSE))
     {
