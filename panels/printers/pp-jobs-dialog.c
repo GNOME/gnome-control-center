@@ -59,6 +59,8 @@ struct _PpJobsDialog {
   gchar *printer_name;
 
   gchar    **actual_auth_info_required;
+  gboolean   jobs_filled;
+  gboolean   pop_up_authentication_popup;
 
   GCancellable *get_jobs_cancellable;
 };
@@ -306,6 +308,18 @@ create_listbox_row (gpointer item,
 }
 
 static void
+pop_up_authentication_popup (PpJobsDialog *dialog)
+{
+  GtkWidget *widget;
+
+  if (dialog->actual_auth_info_required != NULL)
+    {
+      widget = GTK_WIDGET (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "authenticate-jobs-button"));
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+    }
+}
+
+static void
 update_jobs_list_cb (GObject      *source_object,
                      GAsyncResult *result,
                      gpointer      user_data)
@@ -395,6 +409,17 @@ update_jobs_list_cb (GObject      *source_object,
 
   g_list_free (jobs);
   g_clear_object (&dialog->get_jobs_cancellable);
+
+  if (!dialog->jobs_filled)
+    {
+      if (dialog->pop_up_authentication_popup)
+        {
+          pop_up_authentication_popup (dialog);
+          dialog->pop_up_authentication_popup = FALSE;
+        }
+
+      dialog->jobs_filled = TRUE;
+    }
 }
 
 static void
@@ -561,6 +586,8 @@ pp_jobs_dialog_new (GtkWindow            *parent,
   dialog->user_data = user_data;
   dialog->printer_name = g_strdup (printer_name);
   dialog->actual_auth_info_required = NULL;
+  dialog->jobs_filled = FALSE;
+  dialog->pop_up_authentication_popup = FALSE;
 
   /* connect signals */
   g_signal_connect (dialog->dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
@@ -652,4 +679,13 @@ static void
 pp_jobs_dialog_hide (PpJobsDialog *dialog)
 {
   gtk_widget_hide (GTK_WIDGET (dialog->dialog));
+}
+
+void
+pp_jobs_dialog_authenticate_jobs (PpJobsDialog *dialog)
+{
+  if (dialog->jobs_filled)
+    pop_up_authentication_popup (dialog);
+  else
+    dialog->pop_up_authentication_popup = TRUE;
 }

@@ -663,16 +663,30 @@ printer_jobs_dialog_free_cb (GtkDialog *dialog,
 }
 
 static void
+pp_printer_entry_show_jobs_dialog (PpPrinterEntry *self)
+{
+  if (self->pp_jobs_dialog == NULL)
+    {
+      self->pp_jobs_dialog = pp_jobs_dialog_new (
+        GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+        jobs_dialog_response_cb,
+        self,
+        self->printer_name);
+    }
+}
+
+void
+pp_printer_entry_authenticate_jobs (PpPrinterEntry *self)
+{
+  pp_printer_entry_show_jobs_dialog (self);
+  pp_jobs_dialog_authenticate_jobs (self->pp_jobs_dialog);
+}
+
+static void
 show_jobs_dialog (GtkButton *button,
                   gpointer   user_data)
 {
-  PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
-
-  self->pp_jobs_dialog = pp_jobs_dialog_new (
-    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
-    jobs_dialog_response_cb,
-    self,
-    self->printer_name);
+  pp_printer_entry_show_jobs_dialog (PP_PRINTER_ENTRY (user_data));
 }
 
 enum
