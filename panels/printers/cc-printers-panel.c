@@ -107,6 +107,8 @@ struct _CcPrintersPanelPrivate
   gchar    *deleted_printer_name;
 
   GHashTable *printer_entries;
+  gboolean    entries_filled;
+  GVariant   *action;
 
   GtkSizeGroup *size_group;
 
@@ -122,10 +124,49 @@ typedef struct
   GCancellable *cancellable;
 } SetPPDItem;
 
+enum {
+  PROP_0,
+  PROP_PARAMETERS
+};
+
 static void actualize_printers_list (CcPrintersPanel *self);
 static void update_sensitivity (gpointer user_data);
 static void detach_from_cups_notifier (gpointer data);
 static void free_dests (CcPrintersPanel *self);
+
+static void
+execute_action (CcPrintersPanel *self,
+                GVariant        *action)
+{
+  CcPrintersPanelPrivate *priv = self->priv;
+  PpPrinterEntry         *printer_entry;
+  const gchar            *action_name;
+  const gchar            *printer_name;
+  GVariant               *variant;
+  gint                    count;
+
+  count = g_variant_n_children (action);
+  if (count == 2)
+    {
+      g_variant_get_child (action, 0, "v", &variant);
+      action_name = g_variant_get_string (variant, NULL);
+      g_variant_unref (variant);
+
+      /* authenticate-jobs printer-name */
+      if (g_strcmp0 (action_name, "authenticate-jobs") == 0)
+        {
+          g_variant_get_child (action, 1, "v", &variant);
+          printer_name = g_variant_get_string (variant, NULL);
+          g_variant_unref (variant);
+
+          printer_entry = PP_PRINTER_ENTRY (g_hash_table_lookup (priv->printer_entries, printer_name));
+          if (printer_entry != NULL)
+            pp_printer_entry_authenticate_jobs (printer_entry);
+          else
+            g_warning ("Could not find printer \"%s\"!", printer_name);
+        }
+    }
+}
 
 static void
 cc_printers_panel_get_property (GObject    *object,
@@ -135,21 +176,42 @@ cc_printers_panel_get_property (GObject    *object,
 {
   switch (property_id)
     {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
 }
 
 static void
 cc_printers_panel_set_property (GObject      *object,
-                               guint         property_id,
-                               const GValue *value,
-                               GParamSpec   *pspec)
+                                guint         property_id,
+                                const GValue *value,
+                                GParamSpec   *pspec)
 {
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (object);
+  CcPrintersPanelPrivate *priv = self->priv;
+  GVariant               *parameters;
+
   switch (property_id)
     {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      case PROP_PARAMETERS:
+        parameters = g_value_get_variant (value);
+        if (parameters != NULL && g_variant_n_children (parameters) > 0)
+          {
+            if (priv->entries_filled)
+              {
+                execute_action (CC_PRINTERS_PANEL (object), parameters);
+              }
+            else
+              {
+                if (priv->action != NULL)
+                  g_variant_unref (priv->action);
+                priv->action = g_variant_ref (parameters);
+              }
+          }
+        break;
+
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
 }
 
@@ -284,6 +346,9 @@ cc_printers_panel_dispose (GObject *object)
                                NULL);
     }
 
+  if (priv->action != NULL)
+    g_variant_unref (priv->action);
+
   g_clear_pointer (&priv->printer_entries, g_hash_table_destroy);
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
@@ -316,6 +381,8 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
   object_class->finalize = cc_printers_panel_finalize;
 
   panel_class->get_help_uri = cc_printers_panel_get_help_uri;
+
+  g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 }
 
 static void
@@ -886,6 +953,18 @@ actualize_printers_list_cb (GObject      *source_object,
       add_printer_entry (self, priv->dests[i]);
     }
 
+  if (!priv->entries_filled)
+    {
+      if (priv->action != NULL)
+        {
+          execute_action (self, priv->action);
+          g_variant_unref (priv->action);
+          priv->action = NULL;
+        }
+
+      priv->entries_filled = TRUE;
+    }
+
   update_sensitivity (user_data);
 }
 
@@ -1276,6 +1355,8 @@ cc_printers_panel_init (CcPrintersPanel *self)
                                                  g_str_equal,
                                                  g_free,
                                                  NULL);
+  priv->entries_filled = FALSE;
+  priv->action = NULL;
 
   priv->actualize_printers_list_cancellable = g_cancellable_new ();
   priv->cups_status_check_cancellable = g_cancellable_new ();
