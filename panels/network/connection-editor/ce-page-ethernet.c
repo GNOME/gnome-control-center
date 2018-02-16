@@ -96,7 +96,7 @@ ui_to_setting (CEPageEthernet *page)
                 device_mac = ce_page_trim_address (text);
         }
 
-        text = gtk_entry_get_text (GTK_ENTRY (entry));
+        text = gtk_entry_get_text (GTK_ENTRY (page->cloned_mac));
         cloned_mac = ce_page_trim_address (text);
 
         g_object_set (page->setting_wired,
