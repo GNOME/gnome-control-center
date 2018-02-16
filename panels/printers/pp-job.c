@@ -47,9 +47,10 @@ typedef struct
 {
   GObject parent;
 
-  gint   id;
-  gchar *title;
-  gint   state;
+  gint    id;
+  gchar  *title;
+  gint    state;
+  gchar **auth_info_required;
 } PpJobPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (PpJob, pp_job, G_TYPE_OBJECT)
@@ -60,6 +61,7 @@ enum
   PROP_ID,
   PROP_TITLE,
   PROP_STATE,
+  PROP_AUTH_INFO_REQUIRED,
   LAST_PROPERTY
 };
 
@@ -195,6 +197,9 @@ pp_job_get_property (GObject    *object,
       case PROP_STATE:
         g_value_set_int (value, priv->state);
         break;
+      case PROP_AUTH_INFO_REQUIRED:
+        g_value_set_pointer (value, g_strdupv (priv->auth_info_required));
+        break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
         break;
@@ -223,6 +228,9 @@ pp_job_set_property (GObject      *object,
       case PROP_STATE:
         priv->state = g_value_get_int (value);
         break;
+      case PROP_AUTH_INFO_REQUIRED:
+        priv->auth_info_required = g_strdupv (g_value_get_pointer (value));
+        break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
         break;
@@ -237,6 +245,7 @@ pp_job_finalize (GObject *object)
   priv = pp_job_get_instance_private (PP_JOB (object));
 
   g_free (priv->title);
+  g_strfreev (priv->auth_info_required);
 
   G_OBJECT_CLASS (pp_job_parent_class)->finalize (object);
 }
@@ -269,6 +278,10 @@ pp_job_class_init (PpJobClass *class)
                                              G_MAXINT,
                                              0,
                                              G_PARAM_READWRITE);
+  properties[PROP_AUTH_INFO_REQUIRED] = g_param_spec_pointer ("auth-info-required",
+                                                              "Authentication info required",
+                                                              "Which authentication info is required for this print job",
+                                                              G_PARAM_READWRITE);
 
   g_object_class_install_properties (object_class, LAST_PROPERTY, properties);
 }
@@ -412,4 +425,72 @@ pp_job_get_attributes_finish (PpJob         *job,
   g_return_val_if_fail (g_task_is_valid (result, job), NULL);
 
   return g_task_propagate_pointer (G_TASK (result), error);
+}
+
+static void
+_pp_job_authenticate_thread (GTask        *task,
+                             gpointer      source_object,
+                             gpointer      task_data,
+                             GCancellable *cancellable)
+{
+  PpJobPrivate  *priv;
+  gboolean       result = FALSE;
+  gchar        **auth_info = task_data;
+  ipp_t         *request;
+  ipp_t         *response = NULL;
+  gchar         *job_uri;
+  gint           length;
+
+  priv = pp_job_get_instance_private (source_object);
+
+  if (auth_info != NULL)
+    {
+      job_uri = g_strdup_printf ("ipp://localhost/jobs/%d", priv->id);
+
+      length = g_strv_length (auth_info);
+
+      request = ippNewRequest (IPP_OP_CUPS_AUTHENTICATE_JOB);
+      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                    "job-uri", NULL, job_uri);
+      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                    "requesting-user-name", NULL, cupsUser ());
+      ippAddStrings (request, IPP_TAG_OPERATION, IPP_TAG_TEXT,
+                     "auth-info", length, NULL, (const char **) auth_info);
+      response = cupsDoRequest (CUPS_HTTP_DEFAULT, request, "/");
+
+      result = response != NULL && ippGetStatusCode (response) <= IPP_OK;
+
+      if (response != NULL)
+        ippDelete (response);
+
+      g_free (job_uri);
+    }
+
+  g_task_return_boolean (task, result);
+}
+
+void
+pp_job_authenticate_async (PpJob                *job,
+                           gchar               **auth_info,
+                           GCancellable         *cancellable,
+                           GAsyncReadyCallback   callback,
+                           gpointer              user_data)
+{
+  GTask *task;
+
+  task = g_task_new (job, cancellable, callback, user_data);
+  g_task_set_task_data (task, g_strdupv (auth_info), (GDestroyNotify) g_strfreev);
+  g_task_run_in_thread (task, _pp_job_authenticate_thread);
+
+  g_object_unref (task);
+}
+
+gboolean
+pp_job_authenticate_finish (PpJob         *job,
+                            GAsyncResult  *result,
+                            GError       **error)
+{
+  g_return_val_if_fail (g_task_is_valid (result, job), FALSE);
+
+  return g_task_propagate_boolean (G_TASK (result), error);
 }

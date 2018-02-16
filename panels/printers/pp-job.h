@@ -52,6 +52,16 @@ GVariant      *pp_job_get_attributes_finish      (PpJob                *job,
                                                   GAsyncResult         *result,
                                                   GError              **error);
 
+void           pp_job_authenticate_async         (PpJob                *job,
+                                                  gchar               **auth_info,
+                                                  GCancellable         *cancellable,
+                                                  GAsyncReadyCallback   callback,
+                                                  gpointer              user_data);
+
+gboolean       pp_job_authenticate_finish        (PpJob                *job,
+                                                  GAsyncResult         *result,
+                                                  GError              **error);
+
 G_END_DECLS
 
 #endif
