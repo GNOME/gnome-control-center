@@ -1192,17 +1192,23 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
   gboolean has_batteries = FALSE;
   GPtrArray *devices;
   guint i;
-  UpDevice *device;
-  UpDeviceKind kind;
 
   devices = up_client_get_devices (self->priv->up_client);
   g_debug ("got %d devices from upower\n", devices ? devices->len : 0);
 
   for (i = 0; devices != NULL && i < devices->len; i++)
     {
+      UpDevice *device;
+      gboolean is_power_supply;
+      UpDeviceKind kind;
+
       device = g_ptr_array_index (devices, i);
-      g_object_get (device, "kind", &kind, NULL);
-      if (kind == UP_DEVICE_KIND_BATTERY || kind == UP_DEVICE_KIND_UPS)
+      g_object_get (device,
+                    "kind", &kind,
+                    "power-supply", &is_power_supply,
+                    NULL);
+      if (kind == UP_DEVICE_KIND_UPS ||
+          (kind == UP_DEVICE_KIND_BATTERY && is_power_supply))
         {
           has_batteries = TRUE;
           break;
