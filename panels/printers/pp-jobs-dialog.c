@@ -281,6 +281,8 @@ create_listbox_row (gpointer item,
   gtk_container_set_border_width (GTK_CONTAINER (box), 2);
 
   widget = gtk_label_new (title);
+  gtk_label_set_max_width_chars (GTK_LABEL (widget), 40);
+  gtk_label_set_ellipsize (GTK_LABEL (widget), PANGO_ELLIPSIZE_END);
   gtk_widget_set_halign (widget, GTK_ALIGN_START);
   gtk_box_pack_start (GTK_BOX (box), widget, TRUE, TRUE, 10);
 
