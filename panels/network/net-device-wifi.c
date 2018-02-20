@@ -92,22 +92,6 @@ net_device_wifi_get_title_widget (NetDeviceWifi *device_wifi)
         return GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "center_box"));
 }
 
-void
-net_device_wifi_request_scan (NetDeviceWifi *device_wifi)
-{
-        NMDevice *nm_device;
-        GError *error = NULL;
-
-        nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
-        g_return_if_fail (nm_device_get_device_type (nm_device) == NM_DEVICE_TYPE_WIFI);
-
-        nm_device_wifi_request_scan (NM_DEVICE_WIFI (nm_device), NULL, &error);
-        if (error) {
-                g_debug ("scan request failed: %s", error->message);
-                g_error_free (error);
-        }
-}
-
 static GtkWidget *
 device_wifi_proxy_add_to_stack (NetObject    *object,
                                 GtkStack     *stack,

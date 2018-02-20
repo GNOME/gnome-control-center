@@ -451,27 +451,6 @@ rfkill_switch_notify_activate_cb (GtkSwitch   *rfkill_switch,
                      NULL);
 }
 
-static void
-button_refresh_clicked_cb (GtkButton   *button,
-                           CcWifiPanel *self)
-{
-  const gchar *id;
-  guint i;
-
-  id = gtk_stack_get_visible_child_name (self->stack);
-
-  for (i = 0; i < self->devices->len; i++)
-    {
-      NetObject *object = g_ptr_array_index (self->devices, i);
-
-      if (g_strcmp0 (net_object_get_id (object), id) == 0)
-        {
-          net_device_wifi_request_scan (NET_DEVICE_WIFI (object));
-          break;
-        }
-    }
-}
-
 /* Overrides */
 
 static const gchar *
@@ -616,7 +595,6 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, stack);
 
   gtk_widget_class_bind_template_callback (widget_class, rfkill_switch_notify_activate_cb);
-  gtk_widget_class_bind_template_callback (widget_class, button_refresh_clicked_cb);
 
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 }
