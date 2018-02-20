@@ -1080,11 +1080,11 @@ static void
 got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
   GError *error = NULL;
-  CcPowerPanel *self = CC_POWER_PANEL (user_data);
-  CcPowerPanelPrivate *priv = self->priv;
+  CcPowerPanel *self;
+  GDBusProxy *screen_proxy;
 
-  priv->screen_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-  if (priv->screen_proxy == NULL)
+  screen_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (screen_proxy == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_printerr ("Error creating screen proxy: %s\n", error->message);
@@ -1092,8 +1092,11 @@ got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
       return;
     }
 
+  self = CC_POWER_PANEL (user_data);
+  self->priv->screen_proxy = screen_proxy;
+
   /* we want to change the bar if the user presses brightness buttons */
-  g_signal_connect (priv->screen_proxy, "g-properties-changed",
+  g_signal_connect (screen_proxy, "g-properties-changed",
                     G_CALLBACK (on_screen_property_change), self);
 
   sync_screen_brightness (self);
