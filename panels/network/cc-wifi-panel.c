@@ -125,7 +125,8 @@ check_main_stack_page (CcWifiPanel *self)
 
   if (!nm_version)
     gtk_stack_set_visible_child_name (self->main_stack, "nm-not-running");
-  else if (self->devices->len == 0)
+  else if (self->devices->len == 0 ||
+           !nm_client_wireless_get_enabled (self->client))
     gtk_stack_set_visible_child_name (self->main_stack, "no-wifi-devices");
   else
     gtk_stack_set_visible_child_name (self->main_stack, "wifi-connections");
@@ -403,6 +404,14 @@ device_removed_cb (NMClient    *client,
 }
 
 static void
+wireless_enabled_cb (NMClient    *client,
+                     NMDevice    *device,
+                     CcWifiPanel *self)
+{
+  check_main_stack_page (self);
+}
+
+static void
 rfkill_proxy_acquired_cb (GObject      *source_object,
                           GAsyncResult *res,
                           gpointer      user_data)
@@ -620,6 +629,11 @@ cc_wifi_panel_init (CcWifiPanel *self)
   g_signal_connect (self->client,
                     "device-removed",
                     G_CALLBACK (device_removed_cb),
+                    self);
+
+  g_signal_connect (self->client,
+                    "notify::wireless-enabled",
+                    G_CALLBACK (wireless_enabled_cb),
                     self);
 
   /* Load Wi-Fi devices */
