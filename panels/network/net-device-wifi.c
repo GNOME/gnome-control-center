@@ -37,6 +37,8 @@
 #include "connection-editor/net-connection-editor.h"
 #include "net-device-wifi.h"
 
+#define PERIODIC_WIFI_SCAN_TIMEOUT 15
+
 #define NET_DEVICE_WIFI_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_DEVICE_WIFI, NetDeviceWifiPrivate))
 
 typedef enum {
@@ -61,6 +63,8 @@ struct _NetDeviceWifiPrivate
         gchar                   *selected_ssid_title;
         gchar                   *selected_connection_id;
         gchar                   *selected_ap_id;
+        guint                    scan_id;
+        GCancellable            *cancellable;
 };
 
 G_DEFINE_TYPE (NetDeviceWifi, net_device_wifi, NET_TYPE_DEVICE)
@@ -264,6 +268,16 @@ net_device_wifi_access_point_changed (NMDeviceWifi *nm_device_wifi,
 }
 
 static void
+disable_scan_timeout (NetDeviceWifi *device_wifi)
+{
+        g_debug ("Disabling periodic Wi-Fi scan");
+        if (device_wifi->priv->scan_id > 0) {
+                g_source_remove (device_wifi->priv->scan_id);
+                device_wifi->priv->scan_id = 0;
+        }
+}
+
+static void
 wireless_enabled_toggled (NMClient       *client,
                           GParamSpec     *pspec,
                           NetDeviceWifi *device_wifi)
@@ -282,6 +296,7 @@ wireless_enabled_toggled (NMClient       *client,
 
         device_wifi->priv->updating_device = TRUE;
         gtk_switch_set_active (sw, enabled);
+        disable_scan_timeout (device_wifi);
         device_wifi->priv->updating_device = FALSE;
 }
 
@@ -515,6 +530,21 @@ out:
         g_free (last_used);
 }
 
+static gboolean
+request_scan (gpointer user_data)
+{
+        NetDeviceWifi *device_wifi = user_data;
+        NMDevice *nm_device;
+
+        g_debug ("Periodic Wi-Fi scan requested");
+
+        nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
+        nm_device_wifi_request_scan_async (NM_DEVICE_WIFI (nm_device),
+                                           device_wifi->priv->cancellable, NULL, NULL);
+
+        return G_SOURCE_CONTINUE;
+}
+
 static void
 nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 {
@@ -534,22 +564,30 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         if (device_is_hotspot (device_wifi)) {
                 nm_device_wifi_refresh_hotspot (device_wifi);
                 show_hotspot_ui (device_wifi);
+                disable_scan_timeout (device_wifi);
                 return;
         }
 
-        nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
+        client = net_object_get_client (NET_OBJECT (device_wifi));
+
+        if (device_wifi->priv->scan_id == 0 &&
+            nm_client_wireless_get_enabled (client)) {
+                device_wifi->priv->scan_id = g_timeout_add_seconds (PERIODIC_WIFI_SCAN_TIMEOUT,
+                                                                    request_scan, device_wifi);
+                request_scan (device_wifi);
+        }
 
         dialog = device_wifi->priv->details_dialog;
 
         ap = g_object_get_data (G_OBJECT (dialog), "ap");
         connection = g_object_get_data (G_OBJECT (dialog), "connection");
 
+        nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (nm_device));
 
         state = nm_device_get_state (nm_device);
 
         /* keep this in sync with the signal handler setup in cc_network_panel_init */
-        client = net_object_get_client (NET_OBJECT (device_wifi));
         wireless_enabled_toggled (client, NULL, device_wifi);
 
         if (ap != active_ap)
@@ -647,6 +685,8 @@ device_off_toggled (GtkSwitch *sw,
         client = net_object_get_client (NET_OBJECT (device_wifi));
         active = gtk_switch_get_active (sw);
         nm_client_wireless_set_enabled (client, active);
+        if (!active)
+                disable_scan_timeout (device_wifi);
 }
 
 static void
@@ -1525,6 +1565,12 @@ net_device_wifi_finalize (GObject *object)
         NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (object);
         NetDeviceWifiPrivate *priv = device_wifi->priv;
 
+        if (priv->cancellable) {
+                g_cancellable_cancel (priv->cancellable);
+                g_clear_object (&priv->cancellable);
+        }
+        disable_scan_timeout (device_wifi);
+
         g_clear_pointer (&priv->details_dialog, gtk_widget_destroy);
         g_object_unref (priv->builder);
         g_free (priv->selected_ssid_title);
@@ -2184,6 +2230,8 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                 g_error_free (error);
                 return;
         }
+
+        device_wifi->priv->cancellable = g_cancellable_new ();
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "details_dialog"));
