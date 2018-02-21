@@ -143,28 +143,31 @@ execute_action (CcPrintersPanel *self,
   const gchar            *action_name;
   const gchar            *printer_name;
   GVariant               *variant;
+  GVariant               *action_variant;
   gint                    count;
 
   count = g_variant_n_children (action);
   if (count == 2)
     {
-      g_variant_get_child (action, 0, "v", &variant);
-      action_name = g_variant_get_string (variant, NULL);
-      g_variant_unref (variant);
+      g_variant_get_child (action, 0, "v", &action_variant);
+      action_name = g_variant_get_string (action_variant, NULL);
 
       /* authenticate-jobs printer-name */
       if (g_strcmp0 (action_name, "authenticate-jobs") == 0)
         {
           g_variant_get_child (action, 1, "v", &variant);
           printer_name = g_variant_get_string (variant, NULL);
-          g_variant_unref (variant);
 
           printer_entry = PP_PRINTER_ENTRY (g_hash_table_lookup (priv->printer_entries, printer_name));
           if (printer_entry != NULL)
             pp_printer_entry_authenticate_jobs (printer_entry);
           else
             g_warning ("Could not find printer \"%s\"!", printer_name);
+
+          g_variant_unref (variant);
         }
+
+      g_variant_unref (action_variant);
     }
 }
 
