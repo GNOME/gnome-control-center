@@ -24,10 +24,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2018-02-06 15:58+0000\n"
-"PO-Revision-Date: 2018-02-06 23:43+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
+"issues\n"
+"POT-Creation-Date: 2018-02-20 09:14+0000\n"
+"PO-Revision-Date: 2018-02-21 10:04+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -35,7 +35,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.3\n"
 "X-POT-Import-Date: 2012-03-07 10:37:43+0000\n"
 "X-Project-Style: gnome\n"
 
@@ -127,8 +127,8 @@ msgstr "Voit lisätä kuvia %s-kansioon, jolloin ne näkyvät täällä"
 #: panels/network/connection-editor/connection-editor.ui:15
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
-#: panels/network/net-device-wifi.c:1387 panels/network/net-device-wifi.c:1467
-#: panels/network/net-device-wifi.c:1706 panels/network/network-wifi.ui:24
+#: panels/network/net-device-wifi.c:1371 panels/network/net-device-wifi.c:1451
+#: panels/network/net-device-wifi.c:1690 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:331
 #: panels/privacy/cc-privacy-panel.c:1053 panels/region/format-chooser.ui:25
@@ -388,7 +388,7 @@ msgstr "Väriavaruus: "
 #. * profile is a test profile
 #: panels/color/cc-color-panel.c:156
 msgid "Test profile: "
-msgstr "Testiprofiili:"
+msgstr "Testiprofiili: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
 #: panels/color/cc-color-panel.c:223
@@ -882,7 +882,7 @@ msgstr "preferences-color"
 #. Translators: those are keywords for the color control-center panel
 #: panels/color/gnome-color-panel.desktop.in.in:18
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
-msgstr "väri;ICC;color;profiili;kalibrointi;Calibrate;Tulostin;Printer;Näyttö;"
+msgstr "Väri;ICC;color;profiili;kalibrointi;Calibrate;Tulostin;Printer;Näyttö;"
 
 #: panels/common/cc-common-language.c:323
 msgid "Other…"
@@ -1205,25 +1205,25 @@ msgstr "%.2lf Hz"
 #. TRANSLATORS: the state of the night light setting
 #: panels/display/cc-display-panel.c:3195
 #: panels/notifications/cc-notifications-panel.c:292
-#: panels/power/cc-power-panel.c:1982 panels/power/cc-power-panel.c:1989
+#: panels/power/cc-power-panel.c:1988 panels/power/cc-power-panel.c:1995
 #: panels/privacy/cc-privacy-panel.c:190 panels/privacy/cc-privacy-panel.c:257
-#: panels/universal-access/cc-ua-panel.c:331
-#: panels/universal-access/cc-ua-panel.c:712
-#: panels/universal-access/cc-ua-panel.c:725
-#: panels/universal-access/cc-ua-panel.c:737
-#: panels/universal-access/cc-ua-panel.c:908
+#: panels/universal-access/cc-ua-panel.c:333
+#: panels/universal-access/cc-ua-panel.c:714
+#: panels/universal-access/cc-ua-panel.c:727
+#: panels/universal-access/cc-ua-panel.c:739
+#: panels/universal-access/cc-ua-panel.c:910
 msgid "On"
 msgstr "Päällä"
 
 #: panels/display/cc-display-panel.c:3195 panels/network/net-proxy.c:54
 #: panels/notifications/cc-notifications-panel.c:292
-#: panels/power/cc-power-panel.c:1976 panels/power/cc-power-panel.c:1987
+#: panels/power/cc-power-panel.c:1982 panels/power/cc-power-panel.c:1993
 #: panels/privacy/cc-privacy-panel.c:190 panels/privacy/cc-privacy-panel.c:257
-#: panels/universal-access/cc-ua-panel.c:331
-#: panels/universal-access/cc-ua-panel.c:712
-#: panels/universal-access/cc-ua-panel.c:725
-#: panels/universal-access/cc-ua-panel.c:737
-#: panels/universal-access/cc-ua-panel.c:908 panels/universal-access/uap.ui:334
+#: panels/universal-access/cc-ua-panel.c:333
+#: panels/universal-access/cc-ua-panel.c:714
+#: panels/universal-access/cc-ua-panel.c:727
+#: panels/universal-access/cc-ua-panel.c:739
+#: panels/universal-access/cc-ua-panel.c:910 panels/universal-access/uap.ui:334
 #: panels/universal-access/uap.ui:380 panels/universal-access/uap.ui:426
 #: panels/universal-access/uap.ui:532 panels/universal-access/uap.ui:685
 #: panels/universal-access/uap.ui:731 panels/universal-access/uap.ui:777
@@ -2112,7 +2112,7 @@ msgstr "Verkon välityspalvelin"
 msgid "%s VPN"
 msgstr "%s - VPN"
 
-#: panels/network/cc-network-panel.c:779 panels/network/wifi.ui:307
+#: panels/network/cc-network-panel.c:779 panels/network/wifi.ui:282
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Hups, jokin taisi mennä pieleen. Ota yhteys sovellustoimittajaan."
 
@@ -2173,31 +2173,31 @@ msgstr "Profiili %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:56
-#: panels/network/net-device-wifi.c:247 panels/network/net-device-wifi.c:469
+#: panels/network/net-device-wifi.c:231 panels/network/net-device-wifi.c:453
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:60
-#: panels/network/net-device-wifi.c:251 panels/network/net-device-wifi.c:474
+#: panels/network/net-device-wifi.c:235 panels/network/net-device-wifi.c:458
 #: panels/network/network-wifi.ui:593
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:64
-#: panels/network/net-device-wifi.c:255
+#: panels/network/net-device-wifi.c:239
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: panels/network/connection-editor/ce-page-details.c:69
-#: panels/network/net-device-wifi.c:260
+#: panels/network/net-device-wifi.c:244
 msgid "Enterprise"
 msgstr "Yritys"
 
 #: panels/network/connection-editor/ce-page-details.c:74
-#: panels/network/net-device-wifi.c:265 panels/network/net-device-wifi.c:459
+#: panels/network/net-device-wifi.c:249 panels/network/net-device-wifi.c:443
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Ei mitään"
@@ -2209,7 +2209,7 @@ msgstr "Ei koskaan"
 
 #: panels/network/connection-editor/ce-page-details.c:110
 #: panels/network/net-device-ethernet.c:121
-#: panels/network/net-device-wifi.c:568
+#: panels/network/net-device-wifi.c:552
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2217,55 +2217,55 @@ msgstr[0] "%i päivä sitten"
 msgstr[1] "%i päivää sitten"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:222
-#: panels/network/net-device-ethernet.c:50 panels/network/net-device-wifi.c:624
+#: panels/network/connection-editor/ce-page-details.c:225
+#: panels/network/net-device-ethernet.c:50 panels/network/net-device-wifi.c:608
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: panels/network/connection-editor/ce-page-details.c:248
-#: panels/network/net-device-wifi.c:653
+#: panels/network/connection-editor/ce-page-details.c:251
+#: panels/network/net-device-wifi.c:637
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Ei mitään"
 
-#: panels/network/connection-editor/ce-page-details.c:250
-#: panels/network/net-device-wifi.c:655
+#: panels/network/connection-editor/ce-page-details.c:253
+#: panels/network/net-device-wifi.c:639
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Heikko"
 
-#: panels/network/connection-editor/ce-page-details.c:252
-#: panels/network/net-device-wifi.c:657
+#: panels/network/connection-editor/ce-page-details.c:255
+#: panels/network/net-device-wifi.c:641
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "OK"
 
-#: panels/network/connection-editor/ce-page-details.c:254
-#: panels/network/net-device-wifi.c:659
+#: panels/network/connection-editor/ce-page-details.c:257
+#: panels/network/net-device-wifi.c:643
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Hyvä"
 
-#: panels/network/connection-editor/ce-page-details.c:256
-#: panels/network/net-device-wifi.c:661
+#: panels/network/connection-editor/ce-page-details.c:259
+#: panels/network/net-device-wifi.c:645
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Erinomainen"
 
-#: panels/network/connection-editor/ce-page-details.c:297
+#: panels/network/connection-editor/ce-page-details.c:302
 msgid "Forget Connection"
 msgstr "Unohda yhteys"
 
-#: panels/network/connection-editor/ce-page-details.c:299
+#: panels/network/connection-editor/ce-page-details.c:304
 msgid "Remove Connection Profile"
 msgstr "Poista yhteysprofiili"
 
-#: panels/network/connection-editor/ce-page-details.c:301
+#: panels/network/connection-editor/ce-page-details.c:306
 msgid "Remove VPN"
 msgstr "Poista VPN"
 
-#: panels/network/connection-editor/ce-page-details.c:329
+#: panels/network/connection-editor/ce-page-details.c:334
 #: panels/network/network-wifi.ui:1456 shell/cc-window.c:215
 #: shell/panel-list.ui:103
 msgid "Details"
@@ -2699,17 +2699,17 @@ msgstr ""
 "nimipalvelu;"
 
 #: panels/network/net-device-ethernet.c:107
-#: panels/network/net-device-wifi.c:554
+#: panels/network/net-device-wifi.c:538
 msgid "never"
 msgstr "ei koskaan"
 
 #: panels/network/net-device-ethernet.c:117
-#: panels/network/net-device-wifi.c:564
+#: panels/network/net-device-wifi.c:548
 msgid "today"
 msgstr "tänään"
 
 #: panels/network/net-device-ethernet.c:119
-#: panels/network/net-device-wifi.c:566
+#: panels/network/net-device-wifi.c:550
 msgid "yesterday"
 msgstr "eilen"
 
@@ -2734,7 +2734,7 @@ msgid "Wired"
 msgstr "Kiinteä"
 
 #: panels/network/net-device-ethernet.c:344
-#: panels/network/net-device-wifi.c:1865 panels/network/network-ethernet.ui:120
+#: panels/network/net-device-wifi.c:1849 panels/network/network-ethernet.ui:120
 #: panels/network/network-mobile.ui:394 panels/network/network-simple.ui:75
 #: panels/network/network-vpn.ui:79
 msgid "Options…"
@@ -2744,14 +2744,14 @@ msgstr "Valinnat…"
 msgid "Add new connection"
 msgstr "Lisää uusi yhteys"
 
-#: panels/network/net-device-wifi.c:1344
+#: panels/network/net-device-wifi.c:1328
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Yhteyspisteen käyttöönotto katkaisee yhteyden langattomaan verkkoon <b>%s</"
 "b>."
 
-#: panels/network/net-device-wifi.c:1348
+#: panels/network/net-device-wifi.c:1332
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2759,11 +2759,11 @@ msgstr ""
 "Yhteyspisteen ollessa käytössä langattoman internetyhteyden käyttö ei ole "
 "mahdollista."
 
-#: panels/network/net-device-wifi.c:1355
+#: panels/network/net-device-wifi.c:1339
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Otetaanko wifi-yhteyspiste käyttöön?"
 
-#: panels/network/net-device-wifi.c:1377
+#: panels/network/net-device-wifi.c:1361
 msgid ""
 "Wi-Fi hotspots are usually used to share an additional Internet connection "
 "over Wi-Fi."
@@ -2771,43 +2771,43 @@ msgstr ""
 "Wifi-yhteyspisteitä käytetään yleensä Internet-yhteyden jakamiseen "
 "langattomasti."
 
-#: panels/network/net-device-wifi.c:1388
+#: panels/network/net-device-wifi.c:1372
 msgid "_Turn On"
 msgstr "_Ota käyttöön"
 
-#: panels/network/net-device-wifi.c:1465
+#: panels/network/net-device-wifi.c:1449
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Suljetaanko yhteyspiste ja katkaistaanko kaikkien käyttäjien yhteydet?"
 
-#: panels/network/net-device-wifi.c:1468
+#: panels/network/net-device-wifi.c:1452
 msgid "_Stop Hotspot"
 msgstr "_Sulje yhteyspiste"
 
-#: panels/network/net-device-wifi.c:1568
+#: panels/network/net-device-wifi.c:1552
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Järjestelmäkäytännöt estävät käytön yhteyspisteenä"
 
-#: panels/network/net-device-wifi.c:1571
+#: panels/network/net-device-wifi.c:1555
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Langaton verkkolaite ei tue yhteyspisteeksi asettamista"
 
-#: panels/network/net-device-wifi.c:1703
+#: panels/network/net-device-wifi.c:1687
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
 msgstr ""
 "Valittujen verkkojen tiedot, kuten salasanat ja omat asetukset, häviävät."
 
-#: panels/network/net-device-wifi.c:1707 panels/network/network-wifi.ui:1362
+#: panels/network/net-device-wifi.c:1691 panels/network/network-wifi.ui:1362
 msgid "_Forget"
 msgstr "_Unohda"
 
-#: panels/network/net-device-wifi.c:2016 panels/network/net-device-wifi.c:2023
+#: panels/network/net-device-wifi.c:2000 panels/network/net-device-wifi.c:2007
 msgid "Known Wi-Fi Networks"
 msgstr "Tunnetut wifi-verkot"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:2056
+#: panels/network/net-device-wifi.c:2040
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Unohda"
@@ -3060,7 +3060,7 @@ msgstr "Poistaa käytöstä wifin, Bluetoothin ja mobiililaajakaistan"
 msgid "Visible Networks"
 msgstr "Näkyvissä olevat verkot"
 
-#: panels/network/wifi.ui:296
+#: panels/network/wifi.ui:271
 msgid "NetworkManager needs to be running"
 msgstr "NetworkManagerin tulee olla käynnissä"
 
@@ -3962,7 +3962,7 @@ msgstr "Pelaamiseen tarkoitettu syötelaite"
 
 #. TRANSLATORS: secondary battery, misc
 #: panels/power/cc-power-panel.c:564 panels/power/cc-power-panel.c:804
-#: panels/power/cc-power-panel.c:2368
+#: panels/power/cc-power-panel.c:2374
 msgid "Battery"
 msgstr "Akku"
 
@@ -4006,100 +4006,100 @@ msgstr "Tyhjä"
 msgid "Batteries"
 msgstr "Akut"
 
-#: panels/power/cc-power-panel.c:1230
+#: panels/power/cc-power-panel.c:1236
 msgid "When _idle"
 msgstr "Kun _käyttämättä"
 
-#: panels/power/cc-power-panel.c:1684
+#: panels/power/cc-power-panel.c:1690
 msgid "Power Saving"
 msgstr "Virransäästö"
 
-#: panels/power/cc-power-panel.c:1715
+#: panels/power/cc-power-panel.c:1721
 msgid "_Screen brightness"
 msgstr "_Näytön kirkkaus"
 
-#: panels/power/cc-power-panel.c:1734
+#: panels/power/cc-power-panel.c:1740
 msgid "Automatic brightness"
 msgstr "Automaattinen kirkkaus"
 
-#: panels/power/cc-power-panel.c:1754
+#: panels/power/cc-power-panel.c:1760
 msgid "_Keyboard brightness"
 msgstr "Näppäimistön _kirkkaus"
 
-#: panels/power/cc-power-panel.c:1764
+#: panels/power/cc-power-panel.c:1770
 msgid "_Dim screen when inactive"
 msgstr "_Himmennä näyttö koneen ollessa käyttämättä"
 
-#: panels/power/cc-power-panel.c:1789
+#: panels/power/cc-power-panel.c:1795
 msgid "_Blank screen"
 msgstr "_Tyhjä näyttö"
 
-#: panels/power/cc-power-panel.c:1826
+#: panels/power/cc-power-panel.c:1832
 msgid "_Wi-Fi"
 msgstr "_Wifi"
 
-#: panels/power/cc-power-panel.c:1831
+#: panels/power/cc-power-panel.c:1837
 msgid "Turn off Wi-Fi to save power."
 msgstr "Sammuta wifi säästääksesi virtaa."
 
-#: panels/power/cc-power-panel.c:1856
+#: panels/power/cc-power-panel.c:1862
 msgid "_Mobile broadband"
 msgstr "_Mobiililaajakaista"
 
-#: panels/power/cc-power-panel.c:1861
+#: panels/power/cc-power-panel.c:1867
 msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
 msgstr "Sammuta mobiililaajakaista (3G, 4G, LTE jne.) säästääksesi virtaa."
 
-#: panels/power/cc-power-panel.c:1914
+#: panels/power/cc-power-panel.c:1920
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:1919
+#: panels/power/cc-power-panel.c:1925
 msgid "Turn off Bluetooth to save power."
 msgstr "Sammuta bluetooth säästääksesi virtaa."
 
-#: panels/power/cc-power-panel.c:1978
+#: panels/power/cc-power-panel.c:1984
 msgid "When on battery power"
 msgstr "Käytettäessä akkua"
 
-#: panels/power/cc-power-panel.c:1980
+#: panels/power/cc-power-panel.c:1986
 msgid "When plugged in"
 msgstr "Käytettäessä verkkovirtaa"
 
-#: panels/power/cc-power-panel.c:2075
+#: panels/power/cc-power-panel.c:2081
 msgid "Suspend"
 msgstr "Valmiustila"
 
-#: panels/power/cc-power-panel.c:2076
+#: panels/power/cc-power-panel.c:2082
 msgid "Power Off"
 msgstr "Virta pois päältä"
 
-#: panels/power/cc-power-panel.c:2077
+#: panels/power/cc-power-panel.c:2083
 msgid "Hibernate"
 msgstr "Lepotila"
 
-#: panels/power/cc-power-panel.c:2078
+#: panels/power/cc-power-panel.c:2084
 msgid "Nothing"
 msgstr "Ei mitään"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2192
+#: panels/power/cc-power-panel.c:2198
 msgid "Suspend & Power Button"
 msgstr "Valmiustila ja virran katkaisu"
 
-#: panels/power/cc-power-panel.c:2231
+#: panels/power/cc-power-panel.c:2237
 msgid "_Automatic suspend"
 msgstr "_Automaattinen valmiustila"
 
-#: panels/power/cc-power-panel.c:2232
+#: panels/power/cc-power-panel.c:2238
 msgid "Automatic suspend"
 msgstr "Automaattinen valmiustila"
 
-#: panels/power/cc-power-panel.c:2299
+#: panels/power/cc-power-panel.c:2305
 msgid "_When the Power Button is pressed"
 msgstr "_Kun virtapainiketta painetaan"
 
-#: panels/power/cc-power-panel.c:2418 shell/cc-window.c:219
+#: panels/power/cc-power-panel.c:2424 shell/cc-window.c:219
 #: shell/panel-list.ui:45
 msgid "Devices"
 msgstr "Laitteet"
@@ -4215,13 +4215,15 @@ msgstr " "
 msgid "Authenticate"
 msgstr "Tunnistaudu"
 
+#. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
-#: panels/printers/new-printer-dialog.ui:361
+#: panels/printers/jobs-dialog.ui:57 panels/printers/new-printer-dialog.ui:361
 msgid "Username"
 msgstr "Käyttäjätunnus"
 
+#. Translators: This is a password needed for printing.
 #: panels/printers/authentication-dialog.ui:96
-#: panels/printers/new-printer-dialog.ui:382
+#: panels/printers/jobs-dialog.ui:70 panels/printers/new-printer-dialog.ui:382
 #: panels/user-accounts/data/account-dialog.ui:240
 msgid "Password"
 msgstr "Salasana"
@@ -4232,18 +4234,18 @@ msgid "Authentication Required"
 msgstr "Tunnistautuminen vaaditaan"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:720
+#: panels/printers/cc-printers-panel.c:791
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Tulostin “%s” on poistettu"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:953
+#: panels/printers/cc-printers-panel.c:1036
 msgid "Failed to add new printer."
 msgstr "Uuden tulostimen lisäys epäonnistui."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1275
+#: panels/printers/cc-printers-panel.c:1371
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Käyttöliittymätiedoston lataus epäonnistui: %s"
@@ -4290,16 +4292,31 @@ msgstr "printer"
 #: panels/printers/gnome-printers-panel.desktop.in.in:15
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr ""
-"tulostin;jono;tulosta;paperi;muste;värikasetti;Printer;Queue;Print;Paper;Ink;"
+"Tulostin;jono;tulosta;paperi;muste;värikasetti;Printer;Queue;Print;Paper;Ink;"
 "Toner;"
 
+#. Translators: This is a windows domain used with SMB protocol.
+#: panels/printers/jobs-dialog.ui:44
+msgid "Domain"
+msgstr "Toimialue"
+
+#. Translators: This button authenticates all print jobs and send them for printing.
+#: panels/printers/jobs-dialog.ui:123
+msgid "A_uthenticate"
+msgstr "_Tunnistaudu"
+
 #. Translators: this action removes (purges) all the listed jobs from the list.
-#: panels/printers/jobs-dialog.ui:22
+#: panels/printers/jobs-dialog.ui:163
 msgid "Clear All"
 msgstr "Tyhjennä kaikki"
 
+#. Translators: This button pop up authentication dialog for print jobs which need credentials.
+#: panels/printers/jobs-dialog.ui:225
+msgid "_Authenticate"
+msgstr "_Tunnistaudu"
+
 #. Translators: this label describes the dialog empty state, with no jobs listed.
-#: panels/printers/jobs-dialog.ui:96
+#: panels/printers/jobs-dialog.ui:354
 msgid "No Active Printer Jobs"
 msgstr "Ei aktiivisia tulostustöitä"
 
@@ -4424,53 +4441,74 @@ msgid "Reverse portrait"
 msgstr "Käänteinen pysty"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: panels/printers/pp-jobs-dialog.c:104
+#: panels/printers/pp-jobs-dialog.c:243
 msgctxt "print job"
 msgid "Pending"
 msgstr "Odottaa"
 
 #. Translators: Job's state (job is held for printing)
-#: panels/printers/pp-jobs-dialog.c:108
+#: panels/printers/pp-jobs-dialog.c:249
 msgctxt "print job"
 msgid "Paused"
 msgstr "Keskeytetty"
 
+#. Translators: Job's state (job needs authentication to proceed further)
+#: panels/printers/pp-jobs-dialog.c:254
+msgctxt "print job"
+msgid "Authentication required"
+msgstr "Tunnistautuminen vaaditaan"
+
 #. Translators: Job's state (job is currently printing)
-#: panels/printers/pp-jobs-dialog.c:112
+#: panels/printers/pp-jobs-dialog.c:259
 msgctxt "print job"
 msgid "Processing"
 msgstr "Käsitellään"
 
 #. Translators: Job's state (job has been stopped)
-#: panels/printers/pp-jobs-dialog.c:116
+#: panels/printers/pp-jobs-dialog.c:263
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Pysäytetty"
 
 #. Translators: Job's state (job has been canceled)
-#: panels/printers/pp-jobs-dialog.c:120
+#: panels/printers/pp-jobs-dialog.c:267
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Peruttu"
 
 #. Translators: Job's state (job has aborted due to error)
-#: panels/printers/pp-jobs-dialog.c:124
+#: panels/printers/pp-jobs-dialog.c:271
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Keskeytetynyt"
 
 #. Translators: Job's state (job has completed successfully)
-#: panels/printers/pp-jobs-dialog.c:128
+#: panels/printers/pp-jobs-dialog.c:275
 msgctxt "print job"
 msgid "Completed"
 msgstr "Valmis"
 
+#. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
+#: panels/printers/pp-jobs-dialog.c:399
+#, c-format
+#| msgid "Server requires authentication"
+msgid "%u Job Requires Authentication"
+msgid_plural "%u Jobs Require Authentication"
+msgstr[0] "%u työ vaatii tunnistautumisen"
+msgstr[1] "%u työtä vaatii tunnistautumisen"
+
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:310
+#: panels/printers/pp-jobs-dialog.c:617
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — Aktiiviset työt"
+
+#. Translators: The printer needs authentication info to print.
+#: panels/printers/pp-jobs-dialog.c:622
+#, c-format
+msgid "Enter credentials to print from %s."
+msgstr "Syötä kirjautumistietosi tulostaaksesi tulostimesta %s."
 
 #: panels/printers/pp-new-printer-dialog.c:402
 msgid "Unlock Print Server"
@@ -4664,111 +4702,111 @@ msgstr[0] "%u työ"
 msgstr[1] "%u työtä"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:752
+#: panels/printers/pp-printer-entry.c:766
 msgid "Low on toner"
 msgstr "Muste on vähissä"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:754
+#: panels/printers/pp-printer-entry.c:768
 msgid "Out of toner"
 msgstr "Muste on loppu"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:757
+#: panels/printers/pp-printer-entry.c:771
 msgid "Low on developer"
 msgstr "Kehite on vähissä"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:760
+#: panels/printers/pp-printer-entry.c:774
 msgid "Out of developer"
 msgstr "Kehite on loppu"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:762
+#: panels/printers/pp-printer-entry.c:776
 msgid "Low on a marker supply"
 msgstr "Väriaine vähissä"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:764
+#: panels/printers/pp-printer-entry.c:778
 msgid "Out of a marker supply"
 msgstr "Väriaine loppu"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:766
+#: panels/printers/pp-printer-entry.c:780
 msgid "Open cover"
 msgstr "Avaa kansi"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:768
+#: panels/printers/pp-printer-entry.c:782
 msgid "Open door"
 msgstr "Avaa ovi"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:770
+#: panels/printers/pp-printer-entry.c:784
 msgid "Low on paper"
 msgstr "Paperi vähissä"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:772
+#: panels/printers/pp-printer-entry.c:786
 msgid "Out of paper"
 msgstr "Paperi on loppu"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:774
+#: panels/printers/pp-printer-entry.c:788
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Poissa verkosta"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:776
-#: panels/printers/pp-printer-entry.c:906
+#: panels/printers/pp-printer-entry.c:790
+#: panels/printers/pp-printer-entry.c:920
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Pysäytetty"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:778
+#: panels/printers/pp-printer-entry.c:792
 msgid "Waste receptacle almost full"
 msgstr "Jätesäiliö melkein täynnä"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:780
+#: panels/printers/pp-printer-entry.c:794
 msgid "Waste receptacle full"
 msgstr "Jätesäiliö täynnä"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:782
+#: panels/printers/pp-printer-entry.c:796
 msgid "The optical photo conductor is near end of life"
 msgstr "Valojohdeyksikkö on vaihdettava pian"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:784
+#: panels/printers/pp-printer-entry.c:798
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Valojohdeyksikkö on rikki"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:892
+#: panels/printers/pp-printer-entry.c:906
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Valmiina"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:897
+#: panels/printers/pp-printer-entry.c:911
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Ei hyväksy töitä"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:902
+#: panels/printers/pp-printer-entry.c:916
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Käsitellään"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:926
+#: panels/printers/pp-printer-entry.c:940
 msgid "Clean print heads"
 msgstr "Puhdista tulostuspäät"
 
@@ -5719,32 +5757,32 @@ msgstr "Oma"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:351
+#: panels/universal-access/cc-ua-panel.c:353
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Oletus"
 
-#: panels/universal-access/cc-ua-panel.c:354
+#: panels/universal-access/cc-ua-panel.c:356
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Keskikoko"
 
-#: panels/universal-access/cc-ua-panel.c:357
+#: panels/universal-access/cc-ua-panel.c:359
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Suuri"
 
-#: panels/universal-access/cc-ua-panel.c:360
+#: panels/universal-access/cc-ua-panel.c:362
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Suurempi"
 
-#: panels/universal-access/cc-ua-panel.c:363
+#: panels/universal-access/cc-ua-panel.c:365
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Suurin"
 
-#: panels/universal-access/cc-ua-panel.c:367
+#: panels/universal-access/cc-ua-panel.c:369
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -6383,12 +6421,10 @@ msgstr ""
 "kirjautumaan sisään sormenjäljen avulla."
 
 #: panels/user-accounts/data/avatar-chooser.ui:27
-#| msgid "Take a photo…"
 msgid "Take a Picture…"
 msgstr "Ota kuva…"
 
 #: panels/user-accounts/data/avatar-chooser.ui:34
-#| msgid "Select PPD File"
 msgid "Select a File…"
 msgstr "Valitse tiedosto…"
 
@@ -6472,7 +6508,7 @@ msgstr "_Lisää käyttäjä…"
 
 #: panels/user-accounts/data/user-accounts-dialog.ui:69
 msgid "Your session needs to be restarted for changes to take effect"
-msgstr "Istunto täytyy käynnistää uudelleen, jotta muutokset tulevat voimaan."
+msgstr "Istunto täytyy käynnistää uudelleen, jotta muutokset tulevat voimaan"
 
 #: panels/user-accounts/data/user-accounts-dialog.ui:77
 msgid "Restart Now"
@@ -6658,7 +6694,7 @@ msgstr "Vanha ja uusi salasana ovat samat"
 #: panels/user-accounts/run-passwd.c:528
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
-msgstr "Salasanasi on vaihtunut ensimmäisen todennuksen jälkeen"
+msgstr "Salasanasi on vaihtunut ensimmäisen todennuksen jälkeen!"
 
 #: panels/user-accounts/run-passwd.c:532
 #, c-format
@@ -7223,7 +7259,7 @@ msgstr "Määritä painikkeet…"
 
 #: panels/wacom/gnome-wacom-properties.ui:263
 msgid "Calibrate…"
-msgstr "Kalibroi..."
+msgstr "Kalibroi…"
 
 #: panels/wacom/gnome-wacom-properties.ui:284
 msgid "Adjust display resolution"
@@ -7913,9 +7949,6 @@ msgstr "Järjestelmän äänet"
 
 #~ msgid "Add a New Printer"
 #~ msgstr "Lisää uusi tulostin"
-
-#~ msgid "A_uthenticate"
-#~ msgstr "_Tunnistaudu"
 
 #~ msgid "No printers detected."
 #~ msgstr "Tulostimia ei havaittu."
