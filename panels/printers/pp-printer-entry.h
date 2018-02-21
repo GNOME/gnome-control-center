@@ -38,6 +38,8 @@ void            pp_printer_entry_update_jobs_count (PpPrinterEntry *self);
 
 GSList         *pp_printer_entry_get_size_group_widgets (PpPrinterEntry *self);
 
+void            pp_printer_entry_show_jobs_dialog (PpPrinterEntry *self);
+
 void            pp_printer_entry_authenticate_jobs (PpPrinterEntry *self);
 
 #endif /* PP_PRINTER_ENTRY_H */

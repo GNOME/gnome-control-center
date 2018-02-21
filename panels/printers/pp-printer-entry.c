@@ -662,7 +662,7 @@ printer_jobs_dialog_free_cb (GtkDialog *dialog,
   pp_jobs_dialog_free ((PpJobsDialog *) user_data);
 }
 
-static void
+void
 pp_printer_entry_show_jobs_dialog (PpPrinterEntry *self)
 {
   if (self->pp_jobs_dialog == NULL)
