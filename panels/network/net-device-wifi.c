@@ -116,7 +116,7 @@ device_wifi_proxy_add_to_stack (NetObject    *object,
                                                      "notebook_view"));
         gtk_stack_add_titled (stack, widget,
                               net_object_get_id (object),
-                              nm_device_get_product (nmdevice));
+                              nm_device_get_description (nmdevice));
 
         return widget;
 }

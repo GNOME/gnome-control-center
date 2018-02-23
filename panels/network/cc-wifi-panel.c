@@ -288,7 +288,7 @@ update_devices_names (CcWifiPanel *self)
           object = g_ptr_array_index (self->devices, i);
           device = net_device_get_nm_device (NET_DEVICE (object));
 
-          net_object_set_title (object, nm_device_get_product (device));
+          net_object_set_title (object, nm_device_get_description (device));
         }
 
       /* Remove the widget at the "single" page */
