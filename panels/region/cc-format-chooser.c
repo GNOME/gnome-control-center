@@ -41,7 +41,6 @@ typedef struct {
         GtkListBoxRow *more_item;
         GtkWidget *filter_entry;
         GtkWidget *list;
-        GtkWidget *scrolledwindow;
         GtkWidget *date;
         GtkWidget *time;
         GtkWidget *date_time;
@@ -401,17 +400,11 @@ static void
 show_more (GtkDialog *chooser)
 {
         CcFormatChooserPrivate *priv = GET_PRIVATE (chooser);
-        GtkWidget *widget;
         gint width, height;
 
         gtk_window_get_size (GTK_WINDOW (chooser), &width, &height);
         gtk_widget_set_size_request (GTK_WIDGET (chooser), width, height);
         gtk_window_set_resizable (GTK_WINDOW (chooser), TRUE);
-
-        widget = priv->scrolledwindow;
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (widget),
-                                        GTK_POLICY_NEVER,
-                                        GTK_POLICY_AUTOMATIC);
 
         gtk_widget_show (priv->filter_entry);
         gtk_widget_grab_focus (priv->filter_entry);
@@ -504,7 +497,6 @@ cc_format_chooser_new (GtkWidget *parent)
         priv->done_button = WID ("ok-button");
         priv->filter_entry = WID ("region-filter-entry");
         priv->list = WID ("region-list");
-        priv->scrolledwindow = WID ("region-scrolledwindow");
         priv->more_item = more_widget_new ();
         /* We ref-sink here so we can reuse this widget multiple times */
         priv->no_results = g_object_ref_sink (no_results_widget_new ());
@@ -516,9 +508,6 @@ cc_format_chooser_new (GtkWidget *parent)
         priv->number = WID ("number-format");
         priv->measurement = WID ("measurement-format");
         priv->paper = WID ("paper-format");
-
-        gtk_list_box_set_adjustment (GTK_LIST_BOX (priv->list),
-                                     gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (priv->scrolledwindow)));
 
         gtk_list_box_set_sort_func (GTK_LIST_BOX (priv->list),
                                     (GtkListBoxSortFunc)sort_regions, chooser, NULL);
