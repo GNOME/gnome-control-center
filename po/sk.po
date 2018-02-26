@@ -13,9 +13,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2018-02-23 19:10+0000\n"
-"PO-Revision-Date: 2018-02-24 18:46+0100\n"
-"Last-Translator: Dušan Kazik <prescott66@mail.com>\n"
+"POT-Creation-Date: 2018-02-24 17:48+0000\n"
+"PO-Revision-Date: 2018-02-26 12:52+0100\n"
+"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -238,7 +238,6 @@ msgstr "Zapína a vypína rozhranie Bluetooth a pripája vaše zariadenia"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:6
-#| msgid "Bluetooth"
 msgid "bluetooth"
 msgstr "bluetooth"
 
@@ -961,7 +960,6 @@ msgstr ""
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/color/gnome-color-panel.desktop.in.in:7
-#| msgid "Preferences"
 msgid "preferences-color"
 msgstr "preferences-color"
 
@@ -2155,7 +2153,6 @@ msgstr ""
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:7
-#| msgid "Keyboard"
 msgid "input-keyboard"
 msgstr "input-keyboard"
 
@@ -4264,7 +4261,6 @@ msgstr "Ovláda zobrazovanie oznámení a ich obsah"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/notifications/gnome-notifications-panel.desktop.in.in:7
-#| msgid "Preferences;Settings;"
 msgid "preferences-system-notifications"
 msgstr "preferences-system-notifications"
 
@@ -4923,7 +4919,6 @@ msgstr ""
 # desktop entry name
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/printers/gnome-printers-panel.desktop.in.in:7
-#| msgid "Printers"
 msgid "printer"
 msgstr "printer"
 
@@ -5141,13 +5136,12 @@ msgstr "Dokončená"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
 #: panels/printers/pp-jobs-dialog.c:399
-#, fuzzy, c-format
-#| msgid "Server requires authentication"
+#, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
-msgstr[0] "Server vyžaduje overenie totožnosti"
-msgstr[1] "Server vyžaduje overenie totožnosti"
-msgstr[2] "Server vyžaduje overenie totožnosti"
+msgstr[0] "%u úloh vyžaduje overenie totožnosti"
+msgstr[1] "%u úloha vyžaduje overenie totožnosti"
+msgstr[2] "%u úlohy vyžadujú overenie totožnosti"
 
 #. Translators: This is the printer name for which we are showing the active jobs
 #: panels/printers/pp-jobs-dialog.c:617
@@ -5158,11 +5152,9 @@ msgstr "%s — Aktívne úlohy"
 
 #. Translators: The printer needs authentication info to print.
 #: panels/printers/pp-jobs-dialog.c:622
-#, fuzzy, c-format
-#| msgid "Enter username and password to view printers on %s."
+#, c-format
 msgid "Enter credentials to print from %s."
-msgstr ""
-"Zadajte používateľské meno a heslo pre zobrazenie tlačiarní na serveri %s."
+msgstr "Zadajte poverenia na tlač z tlačiarne %s."
 
 # headerbar
 #: panels/printers/pp-new-printer-dialog.c:402
@@ -5835,6 +5827,8 @@ msgid ""
 "Uses Mozilla Location Service: <a href='https://location.services.mozilla."
 "com/privacy'>Privacy Policy</a>"
 msgstr ""
+"Využíva lokalizačnú službu spoločnosti Mozilla: <a href='https://location."
+"services.mozilla.com/privacy'>Zásady súkromia</a>"
 
 #: panels/privacy/privacy.ui:828
 msgid "_Location Services"
@@ -7369,7 +7363,6 @@ msgstr "Odfotografovať…"
 
 # file chooser dialog title
 #: panels/user-accounts/data/avatar-chooser.ui:34
-#| msgid "Select PPD File"
 msgid "Select a File…"
 msgstr "Vybrať súbor…"
 
@@ -7506,10 +7499,8 @@ msgstr "Nenašli sa žiadni používatelia"
 
 # tooltip
 #: panels/user-accounts/data/user-accounts-dialog.ui:476
-#, fuzzy
-#| msgid "Create a user account"
 msgid "Unlock to add a user account."
-msgstr "Vytvorí používateľský účet"
+msgstr "Odomknutím pridáte používateľský účet"
 
 # policy action desc
 #: panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in:11
@@ -8479,13 +8470,15 @@ msgstr "Prístupový bod"
 
 #: shell/org.gnome.ControlCenter.gschema.xml:5
 msgid "The identifier for the last Settings panel to be opened"
-msgstr ""
+msgstr "Identifikátor naposledy otvoreného panela nastavení"
 
 #: shell/org.gnome.ControlCenter.gschema.xml:6
 msgid ""
 "The identifier for the last Settings panel to be opened. Unrecognised values "
 "will be ignored and the first panel in the list selected."
 msgstr ""
+"Identifikátor naposledy otvoreného panela nastavení. Nerozpoznané hodnoty "
+"budú ignorované a bude vybraný prvý panel v zozname."
 
 #: shell/panel-list.ui:195
 msgid "No results found"
