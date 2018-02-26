@@ -376,6 +376,8 @@ setup_photo_popup (UmPhotoDialog *um)
         GFile *file, *dir;
         GFileInfo *info;
         GFileEnumerator *enumerator;
+        GFileType type;
+        const gchar *target;
         const gchar * const * dirs;
         guint i;
         gboolean added_faces;
@@ -413,6 +415,18 @@ setup_photo_popup (UmPhotoDialog *um)
                 while ((info = g_file_enumerator_next_file (enumerator, NULL, NULL)) != NULL) {
                         added_faces = TRUE;
 
+                        type = g_file_info_get_file_type (info);
+                        if (type != G_FILE_TYPE_REGULAR &&
+                            type != G_FILE_TYPE_SYMBOLIC_LINK) {
+                                g_object_unref (info);
+                                continue;
+                        }
+
+                        target = g_file_info_get_symlink_target (info);
+                        if (target != NULL && g_str_has_prefix (target , "legacy/")) {
+                                g_object_unref (info);
+                                continue;
+                        }
 
                         file = g_file_get_child (dir, g_file_info_get_name (info));
                         g_list_store_append (um->faces, file);
