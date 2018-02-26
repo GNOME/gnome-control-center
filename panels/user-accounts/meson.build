@@ -35,10 +35,50 @@ image_data = files(
   'data/faces/tree.jpg',
 )
 
+legacy_image_data = files(
+  'data/faces/legacy/astronaut.jpg',
+  'data/faces/legacy/baseball.png',
+  'data/faces/legacy/butterfly.png',
+  'data/faces/legacy/cat-eye.jpg',
+  'data/faces/legacy/chess.jpg',
+  'data/faces/legacy/coffee.jpg',
+  'data/faces/legacy/dice.jpg',
+  'data/faces/legacy/energy-arc.jpg',
+  'data/faces/legacy/fish.jpg',
+  'data/faces/legacy/flake.jpg',
+  'data/faces/legacy/flower.jpg',
+  'data/faces/legacy/grapes.jpg',
+  'data/faces/legacy/guitar.jpg',
+  'data/faces/legacy/launch.jpg',
+  'data/faces/legacy/leaf.jpg',
+  'data/faces/legacy/lightning.jpg',
+  'data/faces/legacy/penguin.jpg',
+  'data/faces/legacy/puppy.jpg',
+  'data/faces/legacy/sky.jpg',
+  'data/faces/legacy/soccerball.png',
+  'data/faces/legacy/sunflower.jpg',
+  'data/faces/legacy/sunset.jpg',
+  'data/faces/legacy/tennis-ball.png',
+  'data/faces/legacy/yellow-rose.jpg',
+)
+
+image_dir = join_paths(control_center_datadir, 'pixmaps', 'faces')
+
 install_data(
   image_data,
-  install_dir: join_paths(control_center_datadir, 'pixmaps', 'faces')
+  install_dir: image_dir
 )
+
+install_data(
+  legacy_image_data,
+  install_dir: join_paths(image_dir, 'legacy')
+)
+
+# create symlinks for legacy images to not break current images for people
+foreach file: legacy_image_data
+  meson.add_install_script('sh', '-c',
+                           'ln -s legacy/$(basename @1@) $DESTDIR@0@/$(basename @1@)'.format(image_dir, file))
+endforeach
 
 polkit = 'org.gnome.controlcenter.@0@.policy'.format(cappletname)
 
