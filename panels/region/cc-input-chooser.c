@@ -1062,7 +1062,6 @@ cc_input_chooser_new (GtkWindow    *main_window,
   priv->no_results = g_object_ref_sink (no_results_widget_new ());
   gtk_widget_show_all (priv->no_results);
 
-  gtk_list_box_set_adjustment (GTK_LIST_BOX (priv->list), priv->adjustment);
   gtk_list_box_set_filter_func (GTK_LIST_BOX (priv->list), list_filter, chooser, NULL);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (priv->list), (GtkListBoxSortFunc)list_sort, chooser, NULL);
   g_signal_connect (priv->list, "row-activated", G_CALLBACK (row_activated), chooser);
