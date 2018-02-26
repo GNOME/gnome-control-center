@@ -42,7 +42,6 @@ typedef struct {
         GtkListBoxRow *more_item;
         GtkWidget *filter_entry;
         GtkWidget *language_list;
-        GtkWidget *scrolledwindow;
         gboolean showing_extra;
         gchar *language;
         gchar **filter_words;
@@ -288,17 +287,11 @@ static void
 show_more (GtkDialog *chooser, gboolean visible)
 {
         CcLanguageChooserPrivate *priv = GET_PRIVATE (chooser);
-        GtkWidget *widget;
         gint width, height;
 
         gtk_window_get_size (GTK_WINDOW (chooser), &width, &height);
         gtk_widget_set_size_request (GTK_WIDGET (chooser), width, height);
         gtk_window_set_resizable (GTK_WINDOW (chooser), TRUE);
-
-        widget = priv->scrolledwindow;
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (widget),
-                                        GTK_POLICY_NEVER,
-                                        visible ? GTK_POLICY_AUTOMATIC : GTK_POLICY_NEVER);
 
         gtk_widget_set_visible (priv->filter_entry, visible);
         gtk_widget_grab_focus (visible ? priv->filter_entry : priv->language_list);
@@ -427,7 +420,6 @@ cc_language_chooser_new (GtkWidget *parent)
         priv->done_button = WID ("ok-button");
         priv->filter_entry = WID ("language-filter-entry");
         priv->language_list = WID ("language-list");
-        priv->scrolledwindow = WID ("language-scrolledwindow");
         priv->more_item = more_widget_new ();
         /* We ref-sink here so we can reuse this widget multiple times */
         priv->no_results = g_object_ref_sink (no_results_widget_new ());
