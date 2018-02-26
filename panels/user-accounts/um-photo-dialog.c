@@ -373,11 +373,11 @@ create_face_widget (gpointer item,
 static void
 setup_photo_popup (UmPhotoDialog *um)
 {
-        GFile *face_file;
+        GFile *file, *dir;
+        GFileInfo *info;
+        GFileEnumerator *enumerator;
         const gchar * const * dirs;
         guint i;
-        GDir *dir;
-        const char *face;
         gboolean added_faces;
 
         um->faces = g_list_store_new (G_TYPE_FILE);
@@ -395,25 +395,34 @@ setup_photo_popup (UmPhotoDialog *um)
                 char *path;
 
                 path = g_build_filename (dirs[i], "pixmaps", "faces", NULL);
-                dir = g_dir_open (path, 0, NULL);
-                if (dir == NULL) {
-                        g_free (path);
+                dir = g_file_new_for_path (path);
+                g_free (path);
+
+                enumerator = g_file_enumerate_children (dir,
+                                                        G_FILE_ATTRIBUTE_STANDARD_NAME ","
+                                                        G_FILE_ATTRIBUTE_STANDARD_TYPE ","
+                                                        G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK ","
+                                                        G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET,
+                                                        G_FILE_QUERY_INFO_NONE,
+                                                        NULL, NULL);
+                if (enumerator == NULL) {
+                        g_object_unref (dir);
                         continue;
                 }
 
-                while ((face = g_dir_read_name (dir)) != NULL) {
-                        char *filename;
-
+                while ((info = g_file_enumerator_next_file (enumerator, NULL, NULL)) != NULL) {
                         added_faces = TRUE;
 
-                        filename = g_build_filename (path, face, NULL);
-                        face_file = g_file_new_for_path (filename);
-                        g_free (filename);
 
-                        g_list_store_append (um->faces, face_file);
+                        file = g_file_get_child (dir, g_file_info_get_name (info));
+                        g_list_store_append (um->faces, file);
+
+                        g_object_unref (info);
                 }
-                g_dir_close (dir);
-                g_free (path);
+
+                g_file_enumerator_close (enumerator, NULL, NULL);
+                g_object_unref (enumerator);
+                g_object_unref (dir);
 
                 if (added_faces)
                         break;
