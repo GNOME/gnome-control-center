@@ -90,6 +90,12 @@ cc_display_mode_class_init (CcDisplayModeClass *klass)
 {
 }
 
+const char *
+cc_display_mode_get_name (CcDisplayMode *self)
+{
+  return CC_DISPLAY_MODE_GET_CLASS (self)->get_name (self);
+}
+
 void
 cc_display_mode_get_resolution (CcDisplayMode *self, int *w, int *h)
 {

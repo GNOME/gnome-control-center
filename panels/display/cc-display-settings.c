@@ -171,14 +171,20 @@ make_resolution_string (CcDisplayMode *mode)
   const char *interlaced = cc_display_mode_is_interlaced (mode) ? "i" : "";
   const char *aspect;
   int width, height;
+  const char *name;
 
   cc_display_mode_get_resolution (mode, &width, &height);
   aspect = make_aspect_string (width, height);
 
+  /* Retrieve the name assigned by mutter if possible, so that we
+   * show a non-confusing string to the user when underscanning.
+   */
+  name = cc_display_mode_get_name (mode);
+
   if (aspect != NULL)
-    return g_strdup_printf ("%d × %d%s (%s)", width, height, interlaced, aspect);
+    return g_strdup_printf ("%s%s (%s)", name, interlaced, aspect);
   else
-    return g_strdup_printf ("%d × %d%s", width, height, interlaced);
+    return g_strdup_printf ("%s%s", name, interlaced);
 }
 
 static gchar *

@@ -22,7 +22,7 @@
 
 #include "cc-display-config-dbus.h"
 
-#define MODE_BASE_FORMAT "siiddad"
+#define MODE_BASE_FORMAT "ssiiddad"
 #define MODE_FORMAT "(" MODE_BASE_FORMAT "a{sv})"
 #define MODES_FORMAT "a" MODE_FORMAT
 #define MONITOR_SPEC_FORMAT "(ssss)"
@@ -47,6 +47,7 @@ struct _CcDisplayModeDBus
   CcDisplayMode parent_instance;
 
   char *id;
+  char *name;
   int width;
   int height;
   double refresh_rate;
@@ -72,6 +73,14 @@ cc_display_mode_dbus_equal (const CcDisplayModeDBus *m1,
     m1->height == m2->height &&
     m1->refresh_rate == m2->refresh_rate &&
     (m1->flags & MODE_INTERLACED) == (m2->flags & MODE_INTERLACED);
+}
+
+static const char *
+cc_display_mode_dbus_get_name (CcDisplayMode *pself)
+{
+  CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (pself);
+
+  return self->name;
 }
 
 static void
@@ -152,6 +161,7 @@ cc_display_mode_dbus_finalize (GObject *object)
   CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (object);
 
   g_free (self->id);
+  g_free (self->name);
   g_array_free (self->supported_scales, TRUE);
 
   G_OBJECT_CLASS (cc_display_mode_dbus_parent_class)->finalize (object);
@@ -165,6 +175,7 @@ cc_display_mode_dbus_class_init (CcDisplayModeDBusClass *klass)
 
   gobject_class->finalize = cc_display_mode_dbus_finalize;
 
+  parent_class->get_name = cc_display_mode_dbus_get_name;
   parent_class->get_resolution = cc_display_mode_dbus_get_resolution;
   parent_class->get_supported_scales = cc_display_mode_dbus_get_supported_scales;
   parent_class->get_preferred_scale = cc_display_mode_dbus_get_preferred_scale;
@@ -186,6 +197,7 @@ cc_display_mode_dbus_new (GVariant *variant)
 
   g_variant_get (variant, "(" MODE_BASE_FORMAT "@a{sv})",
                  &self->id,
+                 &self->name,
                  &self->width,
                  &self->height,
                  &self->refresh_rate,
