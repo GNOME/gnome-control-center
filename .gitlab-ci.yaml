@@ -1,0 +1,64 @@
+image: fedora:rawhide
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  DEPENDENCIES: gcc meson ninja-build gettext gtk-doc glib2-devel
+                gtk3-devel gsettings-desktop-schemas-devel git
+                gnome-online-accounts-devel gnome-bluetooth-devel
+                gnome-desktop3-devel gnome-settings-daemon-devel
+                switcheroo-control-devel NetworkManager-devel
+                colord-devel libgtop2-devel libgudev-devel
+                grilo-devel gnome-color-manager-devel upower-devel
+                accountsservice-devel smbclient-devel clutter-devel
+                clutter-gtk-devel libxml2-devel pulseaudio-devel
+                libXi-devel libX11-devel
+
+before_script:
+  - dnf update -y --nogpgcheck && dnf install -y --nogpgcheck $DEPENDENCIES
+
+
+##
+# Stage: Build
+#
+# Checks if GNOME Control Center is properly building and installing. This is the
+# most important stage of the CI, and no MR should ever be merged if it breaks
+# any of them.
+##
+build:
+  stage: build
+  script:
+    - meson . _build
+    - ninja -C _build
+    - ninja -C _build install
+
+
+##
+# Stage: Test
+#
+# Runs the unit tests.
+##
+test:
+  stage: test
+  script:
+    - meson . _build
+    - ninja -C _build
+    - meson test -C _build --verbose --no-stdsplit
+
+
+##
+# Stage: Deploy
+#
+# Checks if the released version is in a good shape.
+##
+deploy:
+  stage: deploy
+  script:
+    - meson . _build
+    - ninja -C _build
+    - meson test -C _build
+    - ninja dist -C _build
+  only:
+    - tags
