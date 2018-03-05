@@ -1117,11 +1117,11 @@ static void
 got_kbd_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
   GError *error = NULL;
-  CcPowerPanel *self = CC_POWER_PANEL (user_data);
-  CcPowerPanelPrivate *priv = self->priv;
+  CcPowerPanel *self;
+  GDBusProxy *kbd_proxy;
 
-  priv->kbd_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-  if (priv->kbd_proxy == NULL)
+  kbd_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (kbd_proxy == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_printerr ("Error creating keyboard proxy: %s\n", error->message);
@@ -1129,8 +1129,11 @@ got_kbd_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
       return;
     }
 
+  self = CC_POWER_PANEL (user_data);
+  self->priv->kbd_proxy = kbd_proxy;
+
   /* we want to change the bar if the user presses brightness buttons */
-  g_signal_connect (priv->kbd_proxy, "g-properties-changed",
+  g_signal_connect (kbd_proxy, "g-properties-changed",
                     G_CALLBACK (on_kbd_property_change), self);
 
   sync_kbd_brightness (self);
