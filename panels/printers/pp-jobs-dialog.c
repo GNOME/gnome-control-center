@@ -166,30 +166,21 @@ authenticate_popover_update (PpJobsDialog *dialog)
   widget = GTK_WIDGET (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "domain-entry"));
   gtk_widget_set_visible (widget, domain_required);
   if (domain_required)
-    {
-      gtk_entry_set_text (GTK_ENTRY (widget), "");
-      gtk_entry_grab_focus_without_selecting (GTK_ENTRY (widget));
-    }
+    gtk_entry_set_text (GTK_ENTRY (widget), "");
 
   widget = GTK_WIDGET (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "username-label"));
   gtk_widget_set_visible (widget, username_required);
   widget = GTK_WIDGET (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "username-entry"));
   gtk_widget_set_visible (widget, username_required);
   if (username_required)
-    {
-      gtk_entry_set_text (GTK_ENTRY (widget), cupsUser ());
-      gtk_entry_grab_focus_without_selecting (GTK_ENTRY (widget));
-    }
+    gtk_entry_set_text (GTK_ENTRY (widget), cupsUser ());
 
   widget = GTK_WIDGET (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "password-label"));
   gtk_widget_set_visible (widget, password_required);
   widget = GTK_WIDGET (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "password-entry"));
   gtk_widget_set_visible (widget, password_required);
   if (password_required)
-    {
-      gtk_entry_set_text (GTK_ENTRY (widget), "");
-      gtk_entry_grab_focus_without_selecting (GTK_ENTRY (widget));
-    }
+    gtk_entry_set_text (GTK_ENTRY (widget), "");
 
   widget = GTK_WIDGET (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "authenticate-button"));
   gtk_widget_set_sensitive (widget, FALSE);
