@@ -544,6 +544,17 @@ authenticate_button_clicked (GtkWidget *button,
   g_strfreev (auth_info);
 }
 
+static gboolean
+key_press_event_cb (GtkWidget   *widget,
+                    GdkEventKey *event,
+                    gpointer     user_data)
+{
+  if (event->keyval == GDK_KEY_Escape)
+    gtk_dialog_response (GTK_DIALOG (widget), GTK_RESPONSE_CLOSE);
+
+  return FALSE;
+}
+
 PpJobsDialog *
 pp_jobs_dialog_new (GtkWindow            *parent,
                     UserResponseCallback  user_callback,
@@ -585,6 +596,7 @@ pp_jobs_dialog_new (GtkWindow            *parent,
   /* connect signals */
   g_signal_connect (dialog->dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
   g_signal_connect (dialog->dialog, "response", G_CALLBACK (jobs_dialog_response_cb), dialog);
+  g_signal_connect (dialog->dialog, "key-press-event", G_CALLBACK (key_press_event_cb), NULL);
 
   widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "jobs-clear-all-button"));
   g_signal_connect (widget, "clicked", G_CALLBACK (on_clear_all_button_clicked), dialog);
