@@ -304,6 +304,49 @@ sort_func (GtkListBoxRow *a,
 }
 
 static void
+command_add (CcGoaPanel *panel,
+             GVariant   *parameters)
+{
+  GVariant *v = NULL;
+  GoaProvider *provider = NULL;
+  const gchar *provider_name = NULL;
+
+  g_assert (panel != NULL);
+  g_assert (parameters != NULL);
+
+  switch (g_variant_n_children (parameters))
+    {
+      case 2:
+        g_variant_get_child (parameters, 1, "v", &v);
+        if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
+          provider_name = g_variant_get_string (v, NULL);
+        else
+          g_warning ("Wrong type for the second argument (provider name) GVariant, expected 's' but got '%s'",
+                     (gchar *)g_variant_get_type (v));
+        g_variant_unref (v);
+        break;
+      default:
+        g_warning ("Unexpected parameters found, ignore request");
+        goto out;
+    }
+
+  if (provider_name != NULL)
+    {
+      provider = goa_provider_get_for_provider_type (provider_name);
+      if (provider == NULL)
+        {
+          g_warning ("Unable to get a provider for type '%s'", provider_name);
+          goto out;
+        }
+
+      add_account (panel, provider);
+    }
+
+out:
+  g_clear_object (&provider);
+}
+
+static void
 cc_goa_panel_set_property (GObject *object,
                         guint property_id,
                         const GValue *value,
@@ -331,7 +374,9 @@ cc_goa_panel_set_property (GObject *object,
                 g_variant_unref (v);
             }
 
-          if (first_arg != NULL)
+          if (g_strcmp0 (first_arg, "add") == 0)
+            command_add (CC_GOA_PANEL (object), parameters);
+          else if (first_arg != NULL)
             select_account_by_id (CC_GOA_PANEL (object), first_arg);
 
           return;
