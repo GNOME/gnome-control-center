@@ -78,9 +78,9 @@ install_data(
 
 # create symlinks for legacy images to not break current images for people
 meson.add_install_script('sh', '-c',
-                         'for f in $DESTDIR@0@/*; do
-                          ln -s legacy/$(basename $f) $DESTDIR@1@/$(basename $f);
-                          done'.format(legacy_image_dir, image_dir))
+                         '''for f in $DESTDIR@0@/*; do
+                          ln -sf legacy/$(basename $f) $DESTDIR@1@/$(basename $f);
+                          done'''.format(legacy_image_dir, image_dir))
 
 polkit = 'org.gnome.controlcenter.@0@.policy'.format(cappletname)
 
