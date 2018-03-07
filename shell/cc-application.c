@@ -80,19 +80,18 @@ launch_panel_activated (GSimpleAction *action,
                         gpointer       user_data)
 {
   CcApplication *self = CC_APPLICATION (user_data);
-  GError *error = NULL;
+  g_autoptr (GVariant) parameters = NULL;
+  g_autoptr (GError) error = NULL;
   gchar *panel_id;
-  GVariant *parameters;
 
   g_variant_get (parameter, "(&s@av)", &panel_id, &parameters);
+
   g_debug ("gnome-control-center: 'launch-panel' activated for panel '%s' with %"G_GSIZE_FORMAT" arguments",
-      panel_id, g_variant_n_children (parameters));
+           panel_id,
+           g_variant_n_children (parameters));
+
   if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), panel_id, parameters, &error))
-    {
-      g_warning ("Failed to activate the '%s' panel: %s", panel_id, error->message);
-      g_error_free (error);
-    }
-  g_variant_unref (parameters);
+    g_warning ("Failed to activate the '%s' panel: %s", panel_id, error->message);
 
   /* Now present the window */
   g_application_activate (G_APPLICATION (self));
@@ -110,15 +109,14 @@ cc_application_handle_local_options (GApplication *application,
 
   if (g_variant_dict_contains (options, "list"))
     {
-      GList *panels, *l;
+      g_autoptr(GList) panels = NULL;
+      g_autoptr(GList) l = NULL;
 
       panels = cc_panel_loader_get_panels ();
 
       g_print ("%s\n", _("Available panels:"));
       for (l = panels; l != NULL; l = l->next)
         g_print ("\t%s\n", (char *) l->data);
-
-      g_list_free (panels);
 
       return 0;
     }
@@ -130,13 +128,14 @@ static int
 cc_application_command_line (GApplication            *application,
                              GApplicationCommandLine *command_line)
 {
-  CcApplication *self = CC_APPLICATION (application);
+  CcApplication *self;
+  g_autofree GStrv start_panels = NULL;
   GVariantDict *options;
   int retval = 0;
   char *search_str;
-  GStrv start_panels = NULL;
   gboolean debug;
 
+  self = CC_APPLICATION (application);
   options = g_application_command_line_get_options_dict (command_line);
 
   debug = g_variant_dict_contains (options, "verbose");
@@ -178,16 +177,11 @@ cc_application_command_line (GApplication            *application,
           g_warning ("Could not load setting panel \"%s\": %s", start_id,
                      (err) ? err->message : "Unknown error");
           retval = 1;
+
           if (err)
-            {
-              g_error_free (err);
-              err = NULL;
-            }
+            g_clear_error (&err);
         }
     }
-
-  g_free (start_panels);
-  start_panels = NULL;
 
   return retval;
 }
