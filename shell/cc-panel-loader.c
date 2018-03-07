@@ -121,7 +121,7 @@ cc_panel_loader_get_panels (void)
 static int
 parse_categories (GDesktopAppInfo *app)
 {
-  GStrv split;
+  g_auto(GStrv) split = NULL;
   const gchar *categories;
   gint retval;
 
@@ -153,7 +153,6 @@ parse_categories (GDesktopAppInfo *app)
                  categories, g_app_info_get_id (G_APP_INFO (app)));
     }
 
-  g_strfreev (split);
   return retval;
 }
 
@@ -168,8 +167,7 @@ cc_panel_loader_fill_model (CcShellModel *model)
       g_autofree gchar *desktop_name = NULL;
       gint category;
 
-      desktop_name = g_strconcat ("gnome-", all_panels[i].name,
-                                  "-panel.desktop", NULL);
+      desktop_name = g_strconcat ("gnome-", all_panels[i].name, "-panel.desktop", NULL);
       app = g_desktop_app_info_new (desktop_name);
 
       if (!app)
