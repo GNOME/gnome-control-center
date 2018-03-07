@@ -482,16 +482,17 @@ window_key_press_event_cb (GtkWidget   *win,
                            GdkEventKey *event,
                            CcWindow    *self)
 {
-  GdkKeymap *keymap;
-  gboolean retval;
   GdkModifierType state;
   CcPanelListView view;
+  GdkKeymap *keymap;
+  gboolean retval;
   gboolean is_rtl;
 
   retval = GDK_EVENT_PROPAGATE;
   state = event->state;
-  keymap = gdk_keymap_get_default ();
+  keymap = gdk_keymap_get_for_display (gtk_widget_get_display (win));
   gdk_keymap_add_virtual_modifiers (keymap, &state);
+
   state = state & gtk_accelerator_get_default_mod_mask ();
   is_rtl = gtk_widget_get_direction (win) == GTK_TEXT_DIR_RTL;
   view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list));
