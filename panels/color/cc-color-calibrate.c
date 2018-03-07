@@ -497,7 +497,6 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
   CcColorCalibratePrivate *priv = calibrate->priv;
   CdColorRGB color;
   CdColorRGB *color_tmp;
-  CdSessionInteraction code;
   const gchar *image = NULL;
   const gchar *message;
   const gchar *profile_path = NULL;
@@ -512,14 +511,16 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
 
   if (g_strcmp0 (signal_name, "Finished") == 0)
     {
+      CdSessionError error_code;
+
       g_variant_get (parameters, "(u@a{sv})",
-                     &code,
+                     &error_code,
                      &dict);
       g_variant_lookup (dict, "ErrorDetails", "&s", &str);
       ret = g_variant_lookup (dict, "ProfilePath", "&s", &profile_path);
       if (ret)
         priv->profile = cd_profile_new_with_object_path (profile_path);
-      cc_color_calibrate_finished (calibrate, code, str);
+      cc_color_calibrate_finished (calibrate, error_code, str);
       goto out;
     }
   if (g_strcmp0 (signal_name, "UpdateSample") == 0)
@@ -555,6 +556,8 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
     }
   if (g_strcmp0 (signal_name, "InteractionRequired") == 0)
     {
+      CdSessionInteraction code;
+
       g_variant_get (parameters, "(u&s&s)",
                      &code,
                      &message,
@@ -634,24 +637,26 @@ cc_color_calibrate_move_and_resize_window (GtkWindow *window,
 {
   const gchar *xrandr_name;
   gboolean ret = TRUE;
-  gchar *plug_name;
   GdkRectangle rect;
-  GdkScreen *screen;
+  GdkDisplay *display;
+  GdkMonitor *monitor;
   gint i;
   gint monitor_num = -1;
   gint num_monitors;
 
   /* find the monitor num of the device output */
-  screen = gdk_screen_get_default ();
-  num_monitors = gdk_screen_get_n_monitors (screen);
-  xrandr_name = cd_device_get_metadata_item (device,
-                                             CD_DEVICE_METADATA_XRANDR_NAME);
+  display = gdk_display_get_default ();
+  num_monitors = gdk_display_get_n_monitors (display);
+  xrandr_name = cd_device_get_metadata_item (device, CD_DEVICE_METADATA_XRANDR_NAME);
   for (i = 0; i < num_monitors; i++)
     {
-      plug_name = gdk_screen_get_monitor_plug_name (screen, i);
+      const gchar *plug_name;
+
+      monitor = gdk_display_get_monitor (display, i);
+      plug_name = gdk_monitor_get_model (monitor);
+
       if (g_strcmp0 (plug_name, xrandr_name) == 0)
         monitor_num = i;
-      g_free (plug_name);
     }
   if (monitor_num == -1)
     {
@@ -665,7 +670,8 @@ cc_color_calibrate_move_and_resize_window (GtkWindow *window,
     }
 
   /* move the window, and set it to the right size */
-  gdk_screen_get_monitor_geometry (screen, monitor_num, &rect);
+  monitor = gdk_display_get_monitor (display, monitor_num);
+  gdk_monitor_get_geometry (monitor, &rect);
   gtk_window_move (window, rect.x, rect.y);
   gtk_window_resize (window, rect.width, rect.height);
   g_debug ("Setting window to %ix%i with size %ix%i",
@@ -761,7 +767,7 @@ static gboolean
 cc_color_calibrate_alpha_window_draw (GtkWidget *widget, cairo_t *cr)
 {
   if (gdk_screen_get_rgba_visual (gtk_widget_get_screen (widget)) &&
-      gtk_widget_is_composited (widget))
+      gdk_screen_is_composited (gtk_widget_get_screen (widget)))
     {
       /* transparent */
       cairo_set_source_rgba (cr, 0.0, 0.0, 0.0, CALIBRATE_WINDOW_OPACITY);
