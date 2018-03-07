@@ -41,6 +41,18 @@ struct _CcApplication
   CcWindow       *window;
 };
 
+static void cc_application_quit    (GSimpleAction *simple,
+                                    GVariant      *parameter,
+                                    gpointer       user_data);
+
+static void launch_panel_activated (GSimpleAction *action,
+                                    GVariant      *parameter,
+                                    gpointer       user_data);
+
+static void help_activated         (GSimpleAction *action,
+                                    GVariant      *parameter,
+                                    gpointer       user_data);
+
 G_DEFINE_TYPE (CcApplication, cc_application, GTK_TYPE_APPLICATION)
 
 const GOptionEntry all_options[] = {
@@ -51,6 +63,12 @@ const GOptionEntry all_options[] = {
   { "list", 'l', 0, G_OPTION_ARG_NONE, NULL, N_("List possible panel names and exit"), NULL },
   { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, NULL, N_("Panel to display"), N_("[PANEL] [ARGUMENT…]") },
   { NULL, 0, 0, 0, NULL, NULL, NULL } /* end the list */
+};
+
+static const GActionEntry cc_app_actions[] = {
+  { "launch-panel", launch_panel_activated, "(sav)", NULL, NULL, { 0 } },
+  { "help", help_activated, NULL, NULL, NULL, { 0 } },
+  { "quit", cc_application_quit, NULL, NULL, NULL, { 0 } }
 };
 
 static void
@@ -211,13 +229,6 @@ cc_application_startup (GApplication *application)
   CcApplication *self = CC_APPLICATION (application);
   GMenu *section;
   GMenu *menu;
-
-  const GActionEntry cc_app_actions[] = {
-      { "launch-panel", launch_panel_activated, "(sav)", NULL, NULL, { 0 } },
-      { "help", help_activated, NULL, NULL, NULL, { 0 } },
-      { "quit", cc_application_quit, NULL, NULL, NULL, { 0 } }
-    };
-
   const gchar *help_accels[] = { "F1", NULL };
 
   g_action_map_add_action_entries (G_ACTION_MAP (self),
