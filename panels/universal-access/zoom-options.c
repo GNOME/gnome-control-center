@@ -314,16 +314,22 @@ xhairs_color_opacity_changed (GtkColorButton *button, ZoomOptionsPrivate *priv)
 
 static void xhairs_length_add_marks (GtkScale *scale)
 {
-    gint length, quarter_length;
     GtkAdjustment *scale_model;
+    GdkRectangle rect;
+    GdkMonitor *monitor;
+    GdkDisplay *display;
+    gint length, quarter_length;
 
-    /* Get maximum dimension of screen */
-    length = MAX(gdk_screen_width(), gdk_screen_height());
+    /* Get maximum dimension of the monitor */
+    display = gtk_widget_get_display (GTK_WIDGET (scale));
+    monitor = gdk_display_get_monitor_at_window (display, gtk_widget_get_window (GTK_WIDGET (scale)));
+    gdk_monitor_get_workarea (monitor, &rect);
+
+    length = MAX (rect.width, rect.height);
     scale_model = gtk_range_get_adjustment (GTK_RANGE (scale));
-    if (length < gtk_adjustment_get_upper(scale_model))
-      {
+
+    if (length < gtk_adjustment_get_upper (scale_model))
         gtk_adjustment_set_upper (scale_model, length);
-      }
 
     /* The crosshair is made up of four lines in pairs (top, bottom) and
        (left, right).  Stipulating: "quarter of the screen" means that the
