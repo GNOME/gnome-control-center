@@ -814,7 +814,7 @@ net_connection_editor_new (GtkWindow        *parent_window,
         editor = g_object_new (NET_TYPE_CONNECTION_EDITOR, NULL);
 
         if (parent_window) {
-                editor->parent_window = g_object_ref (parent_window);
+                editor->parent_window = GTK_WIDGET (g_object_ref (parent_window));
                 gtk_window_set_transient_for (GTK_WINDOW (editor->window),
                                               parent_window);
         }
