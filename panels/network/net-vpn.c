@@ -62,15 +62,6 @@ net_vpn_set_show_separator (NetVpn   *self,
 }
 
 static void
-connection_vpn_state_changed_cb (NMVpnConnection *connection,
-                                 NMVpnConnectionState state,
-                                 NMVpnConnectionStateReason reason,
-                                 NetVpn *vpn)
-{
-        net_object_emit_changed (NET_OBJECT (vpn));
-}
-
-static void
 connection_changed_cb (NMConnection *connection,
                        NetVpn *vpn)
 {
@@ -127,23 +118,7 @@ net_vpn_set_connection (NetVpn *vpn, NMConnection *connection)
                           G_CALLBACK (connection_changed_cb),
                           vpn);
 
-        if (NM_IS_VPN_CONNECTION (priv->connection)) {
-                g_signal_connect (priv->connection,
-                                  NM_VPN_CONNECTION_VPN_STATE,
-                                  G_CALLBACK (connection_vpn_state_changed_cb),
-                                  vpn);
-        }
-
         priv->service_type = net_vpn_connection_to_type (priv->connection);
-}
-
-static NMVpnConnectionState
-net_vpn_get_state (NetVpn *vpn)
-{
-        NetVpnPrivate *priv = vpn->priv;
-        if (!NM_IS_VPN_CONNECTION (priv->connection))
-                return NM_VPN_CONNECTION_STATE_DISCONNECTED;
-        return nm_vpn_connection_get_vpn_state (NM_VPN_CONNECTION (priv->connection));
 }
 
 static void
@@ -202,14 +177,14 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
         }
 
 
-        /* use status */
-        state = net_vpn_get_state (vpn);
+        /* Default to disconnected if there is no active connection */
+        state = NM_VPN_CONNECTION_STATE_DISCONNECTED;
         client = net_object_get_client (NET_OBJECT (vpn));
         acs = nm_client_get_active_connections (client);
         if (acs != NULL) {
                 const gchar *uuid;
-
                 uuid = nm_connection_get_uuid (vpn->priv->connection);
+
                 for (i = 0; i < acs->len; i++) {
                         const gchar *auuid;
 
@@ -406,9 +381,6 @@ net_vpn_finalize (GObject *object)
                 g_object_unref (priv->active_connection);
         }
 
-        g_signal_handlers_disconnect_by_func (priv->connection,
-                                              connection_vpn_state_changed_cb,
-                                              vpn);
         g_signal_handlers_disconnect_by_func (priv->connection,
                                               connection_removed_cb,
                                               vpn);
