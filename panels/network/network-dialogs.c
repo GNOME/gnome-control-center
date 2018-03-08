@@ -98,19 +98,6 @@ activate_new_cb (GObject *source_object,
 }
 
 static void
-nag_dialog_response_cb (GtkDialog *nag_dialog,
-                        gint response,
-                        gpointer user_data)
-{
-	NMAWifiDialog *wireless_dialog = NMA_WIFI_DIALOG (user_data);
-
-	if (response == GTK_RESPONSE_NO) {  /* user opted not to correct the warning */
-		nma_wifi_dialog_set_nag_ignored (wireless_dialog, TRUE);
-		gtk_dialog_response (GTK_DIALOG (wireless_dialog), GTK_RESPONSE_OK);
-	}
-}
-
-static void
 wireless_dialog_response_cb (GtkDialog *foo,
                              gint response,
                              gpointer user_data)
@@ -125,22 +112,6 @@ wireless_dialog_response_cb (GtkDialog *foo,
 
 	if (response != GTK_RESPONSE_OK)
 		goto done;
-
-	if (!nma_wifi_dialog_get_nag_ignored (dialog)) {
-		GtkWidget *nag_dialog;
-
-		/* Nag the user about certificates or whatever.  Only destroy the dialog
-		 * if no nagging was done.
-		 */
-		nag_dialog = nma_wifi_dialog_nag_user (dialog);
-		if (nag_dialog) {
-			gtk_window_set_transient_for (GTK_WINDOW (nag_dialog), GTK_WINDOW (dialog));
-			g_signal_connect (nag_dialog, "response",
-			                  G_CALLBACK (nag_dialog_response_cb),
-			                  dialog);
-			return;
-		}
-	}
 
 	/* nma_wifi_dialog_get_connection() returns a connection with the
 	 * refcount incremented, so the caller must remember to unref it.
