@@ -37,7 +37,7 @@ wireless_security_get_type (void)
 	if (!type_id) {
 		g_resources_register (wireless_security_get_resource ());
 
-		type_id = g_boxed_type_register_static ("WirelessSecurity",
+		type_id = g_boxed_type_register_static ("CcWirelessSecurity",
 							(GBoxedCopyFunc) wireless_security_ref,
 							(GBoxedFreeFunc) wireless_security_unref);
 	}
