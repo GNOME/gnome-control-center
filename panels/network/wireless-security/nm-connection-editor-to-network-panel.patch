@@ -1,3 +1,28 @@
+diff --git a/panels/network/wireless-security/eap-method.c b/panels/network/wireless-security/eap-method.c
+index cb733e861..824f315a3 100644
+--- a/panels/network/wireless-security/eap-method.c
++++ b/panels/network/wireless-security/eap-method.c
+@@ -34,7 +34,19 @@
+ #include "utils.h"
+ #include "helpers.h"
+ 
+-G_DEFINE_BOXED_TYPE (EAPMethod, eap_method, eap_method_ref, eap_method_unref)
++GType
++eap_method_get_type (void)
++{
++       static GType type_id = 0;
++
++       if (!type_id) {
++               type_id = g_boxed_type_register_static ("CcEAPMethod",
++                                                       (GBoxedCopyFunc) eap_method_ref,
++                                                       (GBoxedFreeFunc) eap_method_unref);
++       }
++
++       return type_id;
++}
+ 
+ GtkWidget *
+ eap_method_get_widget (EAPMethod *method)
 diff --git a/panels/network/wireless-security/wireless-security.c b/panels/network/wireless-security/wireless-security.c
 index 23b8a27..bd233b0 100644
 --- a/panels/network/wireless-security/wireless-security.c
@@ -19,7 +44,7 @@ index 23b8a27..bd233b0 100644
 +	if (!type_id) {
 +		g_resources_register (wireless_security_get_resource ());
 +
-+		type_id = g_boxed_type_register_static ("WirelessSecurity",
++		type_id = g_boxed_type_register_static ("CcWirelessSecurity",
 +							(GBoxedCopyFunc) wireless_security_ref,
 +							(GBoxedFreeFunc) wireless_security_unref);
 +	}
