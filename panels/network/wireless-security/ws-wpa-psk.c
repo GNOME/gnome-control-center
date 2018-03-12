@@ -182,7 +182,7 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	                                 fill_connection,
 	                                 update_secrets,
 	                                 NULL,
-	                                 "/org/freedesktop/network-manager-applet/ws-wpa-psk.ui",
+	                                 "/org/gnome/ControlCenter/network/ws-wpa-psk.ui",
 	                                 "wpa_psk_notebook",
 	                                 "wpa_psk_entry");
 	if (!parent)
