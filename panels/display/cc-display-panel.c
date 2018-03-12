@@ -207,13 +207,16 @@ monitor_labeler_show (CcDisplayPanel *self)
   if (!priv->shell_proxy || !priv->current_config)
     return;
 
+  outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
+  if (!outputs)
+    return;
+
   if (cc_display_config_is_cloning (priv->current_config))
     return monitor_labeler_hide (self);
 
   g_variant_builder_init (&builder, G_VARIANT_TYPE_TUPLE);
   g_variant_builder_open (&builder, G_VARIANT_TYPE_ARRAY);
 
-  outputs = g_object_get_data (G_OBJECT (priv->current_config), "ui-sorted-outputs");
   for (l = outputs; l != NULL; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
