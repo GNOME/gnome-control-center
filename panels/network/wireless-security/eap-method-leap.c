@@ -199,7 +199,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	                          fill_connection,
 	                          update_secrets,
 	                          destroy,
-	                          "/org/freedesktop/network-manager-applet/eap-method-leap.ui",
+	                          "/org/gnome/ControlCenter/network/eap-method-leap.ui",
 	                          "eap_leap_notebook",
 	                          "eap_leap_username_entry",
 	                          FALSE);
