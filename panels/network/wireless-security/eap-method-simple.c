@@ -296,7 +296,7 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	                          fill_connection,
 	                          update_secrets,
 	                          destroy,
-	                          "/org/freedesktop/network-manager-applet/eap-method-simple.ui",
+	                          "/org/gnome/ControlCenter/network/eap-method-simple.ui",
 	                          "eap_simple_notebook",
 	                          "eap_simple_username_entry",
 	                          flags & EAP_METHOD_SIMPLE_FLAG_PHASE2);

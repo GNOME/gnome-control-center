@@ -493,3 +493,146 @@ index b34720a..3c689d3 100644
          <property name="row_spacing">6</property>
          <child>
            <object class="GtkLabel" id="wpa_psk_label">
+diff --git a/panels/network/wireless-security/eap-method-fast.c b/panels/network/wireless-security/eap-method-fast.c
+index ec1cd6455..98d5411a7 100644
+--- a/panels/network/wireless-security/eap-method-fast.c
++++ b/panels/network/wireless-security/eap-method-fast.c
+@@ -349,7 +349,7 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
+ 	                          fill_connection,
+ 	                          update_secrets,
+ 	                          destroy,
+-	                          "/org/freedesktop/network-manager-applet/eap-method-fast.ui",
++	                          "/org/gnome/ControlCenter/network/eap-method-fast.ui",
+ 	                          "eap_fast_notebook",
+ 	                          "eap_fast_anon_identity_entry",
+ 	                          FALSE);
+diff --git a/panels/network/wireless-security/eap-method-leap.c b/panels/network/wireless-security/eap-method-leap.c
+index 0087bdf24..57d8759b9 100644
+--- a/panels/network/wireless-security/eap-method-leap.c
++++ b/panels/network/wireless-security/eap-method-leap.c
+@@ -199,7 +199,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
+ 	                          fill_connection,
+ 	                          update_secrets,
+ 	                          destroy,
+-	                          "/org/freedesktop/network-manager-applet/eap-method-leap.ui",
++	                          "/org/gnome/ControlCenter/network/eap-method-leap.ui",
+ 	                          "eap_leap_notebook",
+ 	                          "eap_leap_username_entry",
+ 	                          FALSE);
+diff --git a/panels/network/wireless-security/eap-method-peap.c b/panels/network/wireless-security/eap-method-peap.c
+index 402887c87..f75631e10 100644
+--- a/panels/network/wireless-security/eap-method-peap.c
++++ b/panels/network/wireless-security/eap-method-peap.c
+@@ -349,7 +349,7 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
+ 	                          fill_connection,
+ 	                          update_secrets,
+ 	                          destroy,
+-	                          "/org/freedesktop/network-manager-applet/eap-method-peap.ui",
++	                          "/org/gnome/ControlCenter/network/eap-method-peap.ui",
+ 	                          "eap_peap_notebook",
+ 	                          "eap_peap_anon_identity_entry",
+ 	                          FALSE);
+diff --git a/panels/network/wireless-security/eap-method-simple.c b/panels/network/wireless-security/eap-method-simple.c
+index 80de96482..2287b99cd 100644
+--- a/panels/network/wireless-security/eap-method-simple.c
++++ b/panels/network/wireless-security/eap-method-simple.c
+@@ -296,7 +296,7 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
+ 	                          fill_connection,
+ 	                          update_secrets,
+ 	                          destroy,
+-	                          "/org/freedesktop/network-manager-applet/eap-method-simple.ui",
++	                          "/org/gnome/ControlCenter/network/eap-method-simple.ui",
+ 	                          "eap_simple_notebook",
+ 	                          "eap_simple_username_entry",
+ 	                          flags & EAP_METHOD_SIMPLE_FLAG_PHASE2);
+diff --git a/panels/network/wireless-security/eap-method-tls.c b/panels/network/wireless-security/eap-method-tls.c
+index ce6763b37..aa0491c56 100644
+--- a/panels/network/wireless-security/eap-method-tls.c
++++ b/panels/network/wireless-security/eap-method-tls.c
+@@ -449,7 +449,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
+ 	                          fill_connection,
+ 	                          update_secrets,
+ 	                          NULL,
+-	                          "/org/freedesktop/network-manager-applet/eap-method-tls.ui",
++	                          "/org/gnome/ControlCenter/network/eap-method-tls.ui",
+ 	                          "eap_tls_notebook",
+ 	                          "eap_tls_identity_entry",
+ 	                          phase2);
+diff --git a/panels/network/wireless-security/eap-method-ttls.c b/panels/network/wireless-security/eap-method-ttls.c
+index 2d9de48d6..efdc00676 100644
+--- a/panels/network/wireless-security/eap-method-ttls.c
++++ b/panels/network/wireless-security/eap-method-ttls.c
+@@ -398,7 +398,7 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
+ 	                          fill_connection,
+ 	                          update_secrets,
+ 	                          destroy,
+-	                          "/org/freedesktop/network-manager-applet/eap-method-ttls.ui",
++	                          "/org/gnome/ControlCenter/network/eap-method-ttls.ui",
+ 	                          "eap_ttls_notebook",
+ 	                          "eap_ttls_anon_identity_entry",
+ 	                          FALSE);
+diff --git a/panels/network/wireless-security/ws-dynamic-wep.c b/panels/network/wireless-security/ws-dynamic-wep.c
+index 810a10565..c267cac4d 100644
+--- a/panels/network/wireless-security/ws-dynamic-wep.c
++++ b/panels/network/wireless-security/ws-dynamic-wep.c
+@@ -109,7 +109,7 @@ ws_dynamic_wep_new (NMConnection *connection,
+ 	                                 fill_connection,
+ 	                                 update_secrets,
+ 	                                 destroy,
+-	                                 "/org/freedesktop/network-manager-applet/ws-dynamic-wep.ui",
++	                                 "/org/gnome/ControlCenter/network/ws-dynamic-wep.ui",
+ 	                                 "dynamic_wep_notebook",
+ 	                                 NULL);
+ 	if (!parent)
+diff --git a/panels/network/wireless-security/ws-leap.c b/panels/network/wireless-security/ws-leap.c
+index 0d2ce75bf..35b2e034b 100644
+--- a/panels/network/wireless-security/ws-leap.c
++++ b/panels/network/wireless-security/ws-leap.c
+@@ -154,7 +154,7 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
+ 	                                 fill_connection,
+ 	                                 update_secrets,
+ 	                                 NULL,
+-	                                 "/org/freedesktop/network-manager-applet/ws-leap.ui",
++	                                 "/org/gnome/ControlCenter/network/ws-leap.ui",
+ 	                                 "leap_notebook",
+ 	                                 "leap_username_entry");
+ 	if (!parent)
+diff --git a/panels/network/wireless-security/ws-wep-key.c b/panels/network/wireless-security/ws-wep-key.c
+index c7472ca39..8b78515b1 100644
+--- a/panels/network/wireless-security/ws-wep-key.c
++++ b/panels/network/wireless-security/ws-wep-key.c
+@@ -264,7 +264,7 @@ ws_wep_key_new (NMConnection *connection,
+ 	                                 fill_connection,
+ 	                                 update_secrets,
+ 	                                 destroy,
+-	                                 "/org/freedesktop/network-manager-applet/ws-wep-key.ui",
++	                                 "/org/gnome/ControlCenter/network/ws-wep-key.ui",
+ 	                                 "wep_key_notebook",
+ 	                                 "wep_key_entry");
+ 	if (!parent)
+diff --git a/panels/network/wireless-security/ws-wpa-eap.c b/panels/network/wireless-security/ws-wpa-eap.c
+index 2479a3ee2..f9a9be37e 100644
+--- a/panels/network/wireless-security/ws-wpa-eap.c
++++ b/panels/network/wireless-security/ws-wpa-eap.c
+@@ -110,7 +110,7 @@ ws_wpa_eap_new (NMConnection *connection,
+ 	                                 fill_connection,
+ 	                                 update_secrets,
+ 	                                 destroy,
+-	                                 "/org/freedesktop/network-manager-applet/ws-wpa-eap.ui",
++	                                 "/org/gnome/ControlCenter/network/ws-wpa-eap.ui",
+ 	                                 "wpa_eap_notebook",
+ 	                                 NULL);
+ 	if (!parent)
+diff --git a/panels/network/wireless-security/ws-wpa-psk.c b/panels/network/wireless-security/ws-wpa-psk.c
+index befe68b04..29064f4f3 100644
+--- a/panels/network/wireless-security/ws-wpa-psk.c
++++ b/panels/network/wireless-security/ws-wpa-psk.c
+@@ -182,7 +182,7 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
+ 	                                 fill_connection,
+ 	                                 update_secrets,
+ 	                                 NULL,
+-	                                 "/org/freedesktop/network-manager-applet/ws-wpa-psk.ui",
++	                                 "/org/gnome/ControlCenter/network/ws-wpa-psk.ui",
+ 	                                 "wpa_psk_notebook",
+ 	                                 "wpa_psk_entry");
+ 	if (!parent)
