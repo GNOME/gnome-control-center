@@ -564,7 +564,9 @@ um_photo_dialog_class_init (UmPhotoDialogClass *klass)
         gtk_widget_class_bind_template_child (wclass, UmPhotoDialog, take_picture_button);
 
         gtk_widget_class_bind_template_callback (wclass, um_photo_dialog_select_file);
+#ifdef HAVE_CHEESE
         gtk_widget_class_bind_template_callback (wclass, webcam_icon_selected);
+#endif
 
         oclass->dispose = um_photo_dialog_dispose;
 }
