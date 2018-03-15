@@ -11,7 +11,6 @@ panels = [
   'notifications',
   'online-accounts',
   'power',
-  'printers',
   'privacy',
   'region',
   'search',
@@ -20,6 +19,10 @@ panels = [
   'universal-access',
   'user-accounts'
 ]
+
+if enable_cups
+  panels =+ ['printers']
+endif
 
 if host_is_linux
   panels += ['network']
