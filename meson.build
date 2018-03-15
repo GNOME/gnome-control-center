@@ -120,24 +120,30 @@ common_deps = [
 ]
 
 # Check for CUPS 1.4 or newer
-cups_dep = dependency('cups', version : '>= 1.4', required: false)
-assert(cups_dep.found(), 'CUPS 1.4 or newer not found')
+enable_cups = get_option('cups')
+if enable_cups
+  cups_dep = dependency('cups', version : '>= 1.4', required: false)
+  assert(cups_dep.found(), 'CUPS 1.4 or newer not found')
 
-# https://bugzilla.gnome.org/show_bug.cgi?id=696766
-cups_cflags = []
-if cups_dep.version().version_compare('>= 1.6')
-  cups_cflags += '-D_PPD_DEPRECATED=""'
+  # https://bugzilla.gnome.org/show_bug.cgi?id=696766
+  cups_cflags = []
+  if cups_dep.version().version_compare('>= 1.6')
+    cups_cflags += '-D_PPD_DEPRECATED=""'
+  endif
+
+  # cups headers
+  check_headers = [
+    ['HAVE_CUPS_CUPS_H', 'cups/cups.h'],
+    ['HAVE_CUPS_PPD_H', 'cups/ppd.h']
+  ]
+
+  foreach header: check_headers
+    assert(cc.has_header(header[1], args: cups_cflags), 'CUPS headers not found: ' + header[1])
+  endforeach
+
+  config_h.set('HAVE_CUPS', enable_cups,
+               description: 'Define to 1 to enable CUPS support')
 endif
-
-# cups headers
-check_headers = [
-  ['HAVE_CUPS_CUPS_H', 'cups/cups.h'],
-  ['HAVE_CUPS_PPD_H', 'cups/ppd.h']
-]
-
-foreach header: check_headers
-  assert(cc.has_header(header[1], args: cups_cflags), 'CUPS headers not found: ' + header[1])
-endforeach
 
 # Optional dependency for the user accounts panel
 enable_cheese = get_option('cheese')
