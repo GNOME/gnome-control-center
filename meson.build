@@ -185,8 +185,8 @@ config_h.set('HAVE_WAYLAND', enable_wayland,
 if host_is_linux
   # network manager
   network_manager_deps = [
-    dependency('libnm', version: '>= 1.2.0'),
-    dependency('libnma', version: '>= 1.2.0'),
+    dependency('libnm', version: '>= 1.10.0'),
+    dependency('libnma', version: '>= 1.8.0'),
     dependency('mm-glib', version: '>= 0.7')
   ]
 endif
