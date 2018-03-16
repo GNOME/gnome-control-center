@@ -23,18 +23,17 @@
 #include <glib/gi18n.h>
 #include <string.h>
 
-#define WID(w) (GtkWidget *) gtk_builder_get_object (priv->builder, w)
-
 #define POSITION_MODEL_VALUE_COLUMN     2
 #define FONT_SCALE                      1.25
 
-struct _ZoomOptionsPrivate
+struct _ZoomOptions
 {
-  GtkBuilder *builder;
+  GtkDialog parent;
+
   GSettings *settings;
   GSettings *application_settings;
 
-  GtkWidget *position_combobox;
+  GtkWidget *screen_position_combobox;
   GtkWidget *follow_mouse_radio;
   GtkWidget *screen_part_radio;
   GtkWidget *centered_radio;
@@ -43,11 +42,18 @@ struct _ZoomOptionsPrivate
   GtkWidget *extend_beyond_checkbox;
   GtkWidget *brightness_slider;
   GtkWidget *contrast_slider;
-
-  GtkWidget *dialog;
+  GtkWidget *crosshair_picker_color_button;
+  GtkWidget *magnifier_factor_spin;
+  GtkWidget *seeing_zoom_switch;
+  GtkWidget *crosshair_thickness_scale;
+  GtkWidget *grayscale_slider;
+  GtkWidget *crosshair_clip_checkbox;
+  GtkWidget *crosshair_length_slider;
+  GtkWidget *crosshair_enabled_switcher;
+  GtkWidget *inverse_enabled_switch;
 };
 
-G_DEFINE_TYPE (ZoomOptions, zoom_options, G_TYPE_OBJECT);
+G_DEFINE_TYPE (ZoomOptions, zoom_options, GTK_TYPE_DIALOG);
 
 static gchar *brightness_keys[] = {
   "brightness-red",
@@ -63,33 +69,33 @@ static gchar *contrast_keys[] = {
   NULL
 };
 
-static void set_enable_screen_part_ui (GtkWidget *widget, ZoomOptionsPrivate *priv);
-static void mouse_tracking_notify_cb (GSettings *settings, const gchar *key, ZoomOptionsPrivate *priv);
+static void set_enable_screen_part_ui (GtkWidget *widget, ZoomOptions *self);
+static void mouse_tracking_notify_cb (GSettings *settings, const gchar *key, ZoomOptions *self);
 static void scale_label (GtkBin *toggle, PangoAttrList *attrs);
-static void xhairs_color_opacity_changed (GtkColorButton *button, ZoomOptionsPrivate *priv);
-static void xhairs_length_add_marks (GtkScale *scale);
+static void xhairs_color_opacity_changed (GtkColorButton *button, ZoomOptions *self);
+static void xhairs_length_add_marks (ZoomOptions *self, GtkScale *scale);
 static void effects_slider_set_value (GtkRange *slider, GSettings *settings);
-static void brightness_slider_notify_cb (GSettings *settings, const gchar *key, ZoomOptionsPrivate *priv);
-static void contrast_slider_notify_cb (GSettings *settings, const gchar *key, ZoomOptionsPrivate *priv);
-static void effects_slider_changed (GtkRange *slider, ZoomOptionsPrivate *priv);
+static void brightness_slider_notify_cb (GSettings *settings, const gchar *key, ZoomOptions *self);
+static void contrast_slider_notify_cb (GSettings *settings, const gchar *key, ZoomOptions *self);
+static void effects_slider_changed (GtkRange *slider, ZoomOptions *self);
 
 static void
-mouse_tracking_radio_toggled_cb (GtkWidget *widget, ZoomOptionsPrivate *priv)
+mouse_tracking_radio_toggled_cb (GtkWidget *widget, ZoomOptions *self)
 {
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)) == TRUE)
 	  {
-        g_settings_set_string (priv->settings, "mouse-tracking",
+        g_settings_set_string (self->settings, "mouse-tracking",
 	                           gtk_buildable_get_name (GTK_BUILDABLE (widget)));
       }
 }
 
 static void
-init_mouse_mode_radio_group (GSList *mode_group, ZoomOptionsPrivate *priv)
+init_mouse_mode_radio_group (GSList *mode_group, ZoomOptions *self)
 {
     gchar *mode;
     gchar *name;
 
-    mode = g_settings_get_string (priv->settings, "mouse-tracking");
+    mode = g_settings_get_string (self->settings, "mouse-tracking");
 	for (; mode_group != NULL; mode_group = mode_group->next)
 	  {
 	    name = (gchar *) gtk_buildable_get_name (GTK_BUILDABLE (mode_group->data));
@@ -100,94 +106,87 @@ init_mouse_mode_radio_group (GSList *mode_group, ZoomOptionsPrivate *priv)
 
 	    g_signal_connect (G_OBJECT (mode_group->data), "toggled",
                           G_CALLBACK(mouse_tracking_radio_toggled_cb),
-                          priv);
+                          self);
 	  }
 }
 
 static void
-init_screen_part_section (ZoomOptionsPrivate *priv, PangoAttrList *pango_attrs)
+init_screen_part_section (ZoomOptions *self, PangoAttrList *pango_attrs)
 {
   gboolean lens_mode;
   GSList *mouse_mode_group;
 
-  priv->follow_mouse_radio = WID ("moveableLens");
-  priv->screen_part_radio = WID ("screenPart");
-  priv->centered_radio = WID ("centered");
-  priv->push_radio = WID ("push");
-  priv->proportional_radio = WID ("proportional");
-  priv->extend_beyond_checkbox = WID ("scrollAtEdges");
-
   /* Scale the labels of the toggles */
-  scale_label (GTK_BIN(priv->follow_mouse_radio), pango_attrs);
-  scale_label (GTK_BIN(priv->screen_part_radio), pango_attrs);
-  scale_label (GTK_BIN(priv->centered_radio), pango_attrs);
-  scale_label (GTK_BIN(priv->push_radio), pango_attrs);
-  scale_label (GTK_BIN(priv->proportional_radio), pango_attrs);
-  scale_label (GTK_BIN(priv->extend_beyond_checkbox), pango_attrs);
+  scale_label (GTK_BIN (self->follow_mouse_radio), pango_attrs);
+  scale_label (GTK_BIN (self->screen_part_radio), pango_attrs);
+  scale_label (GTK_BIN (self->centered_radio), pango_attrs);
+  scale_label (GTK_BIN (self->push_radio), pango_attrs);
+  scale_label (GTK_BIN (self->proportional_radio), pango_attrs);
+  scale_label (GTK_BIN (self->extend_beyond_checkbox), pango_attrs);
 
-  lens_mode = g_settings_get_boolean (priv->settings, "lens-mode");
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->follow_mouse_radio), lens_mode);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->screen_part_radio), !lens_mode);
+  lens_mode = g_settings_get_boolean (self->settings, "lens-mode");
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->follow_mouse_radio), lens_mode);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->screen_part_radio), !lens_mode);
 
-  mouse_mode_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (priv->centered_radio));
-  init_mouse_mode_radio_group (mouse_mode_group, priv);
-  set_enable_screen_part_ui (priv->screen_part_radio, priv);
+  mouse_mode_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (self->centered_radio));
+  init_mouse_mode_radio_group (mouse_mode_group, self);
+  set_enable_screen_part_ui (self->screen_part_radio, self);
 
-  g_settings_bind (priv->settings, "lens-mode",
-                   priv->follow_mouse_radio, "active",
+  g_settings_bind (self->settings, "lens-mode",
+                   self->follow_mouse_radio, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  g_settings_bind (priv->settings, "scroll-at-edges",
-                   priv->extend_beyond_checkbox, "active",
+  g_settings_bind (self->settings, "scroll-at-edges",
+                   self->extend_beyond_checkbox, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  g_signal_connect (G_OBJECT (priv->screen_part_radio), "toggled",
-                    G_CALLBACK (set_enable_screen_part_ui), priv);
+  g_signal_connect (G_OBJECT (self->screen_part_radio), "toggled",
+                    G_CALLBACK (set_enable_screen_part_ui), self);
 
-  g_signal_connect (G_OBJECT (priv->settings), "changed::mouse-tracking",
-                    G_CALLBACK (mouse_tracking_notify_cb), priv);
+  g_signal_connect (G_OBJECT (self->settings), "changed::mouse-tracking",
+                    G_CALLBACK (mouse_tracking_notify_cb), self);
 }
 
 static void
-set_enable_screen_part_ui (GtkWidget *widget, ZoomOptionsPrivate *priv)
+set_enable_screen_part_ui (GtkWidget *widget, ZoomOptions *self)
 {
     gboolean screen_part;
 
     /* If the "screen part" radio is not checked, then the "follow mouse" radio
      * is checked (== lens mode). Set mouse tracking back to the default.
      */
-    screen_part = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->screen_part_radio));
+    screen_part = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->screen_part_radio));
     if (!screen_part)
       {
-        g_settings_set_string (priv->settings,
+        g_settings_set_string (self->settings,
                                "mouse-tracking", "proportional");
       }
 
-    gtk_widget_set_sensitive (priv->centered_radio, screen_part);
-    gtk_widget_set_sensitive (priv->push_radio, screen_part);
-    gtk_widget_set_sensitive (priv->proportional_radio, screen_part);
-    gtk_widget_set_sensitive (priv->extend_beyond_checkbox, screen_part);
+    gtk_widget_set_sensitive (self->centered_radio, screen_part);
+    gtk_widget_set_sensitive (self->push_radio, screen_part);
+    gtk_widget_set_sensitive (self->proportional_radio, screen_part);
+    gtk_widget_set_sensitive (self->extend_beyond_checkbox, screen_part);
 }
 
 static void
-mouse_tracking_notify_cb (GSettings             *settings,
-                          const gchar           *key,
-                          ZoomOptionsPrivate    *priv)
+mouse_tracking_notify_cb (GSettings   *settings,
+                          const gchar *key,
+                          ZoomOptions *self)
 {
   gchar *tracking;
 
   tracking = g_settings_get_string (settings, key);
   if (g_strcmp0 (tracking, "proportional") == 0)
     {
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->proportional_radio), TRUE);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->proportional_radio), TRUE);
     }
   else if (g_strcmp0 (tracking, "centered") == 0)
     {
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->centered_radio), TRUE);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->centered_radio), TRUE);
     }
   else
     {
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->push_radio), TRUE);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->push_radio), TRUE);
     }
 }
 
@@ -201,9 +200,8 @@ scale_label (GtkBin *toggle, PangoAttrList *attrs)
 }
 
 static void
-screen_position_combo_changed_cb (GtkWidget *combobox, ZoomOptions *options)
+screen_position_combo_changed_cb (GtkWidget *combobox, ZoomOptions *self)
 {
-  ZoomOptionsPrivate *priv = options->priv;
   gchar *combo_value = NULL;
   GtkTreeIter iter;
 
@@ -215,7 +213,7 @@ screen_position_combo_changed_cb (GtkWidget *combobox, ZoomOptions *options)
 
   if (g_strcmp0 (combo_value, ""))
     {
-      g_settings_set_string (priv->settings, "screen-position", combo_value);
+      g_settings_set_string (self->settings, "screen-position", combo_value);
     }
 
   g_free (combo_value);
@@ -224,9 +222,8 @@ screen_position_combo_changed_cb (GtkWidget *combobox, ZoomOptions *options)
 static void
 screen_position_notify_cb (GSettings *settings,
                            const gchar *key,
-                           ZoomOptions *options)
+                           ZoomOptions *self)
 {
-  ZoomOptionsPrivate *priv = options->priv;
   gchar *position;
   GtkTreeIter iter;
   GtkTreeModel *model;
@@ -235,8 +232,8 @@ screen_position_notify_cb (GSettings *settings,
   gchar *combo_value;
 
   position = g_settings_get_string (settings, key);
-  position = g_settings_get_string (priv->settings, key);
-  combobox = GTK_COMBO_BOX (WID ("screen_position_combo_box"));
+  position = g_settings_get_string (self->settings, key);
+  combobox = GTK_COMBO_BOX (self->screen_position_combobox);
   model = gtk_combo_box_get_model (combobox);
 
   /* Find the matching screen position value in the combobox model.  If nothing
@@ -250,9 +247,9 @@ screen_position_notify_cb (GSettings *settings,
                             -1);
         if (!g_strcmp0 (combo_value, position))
           {
-            g_signal_handlers_block_by_func (combobox, screen_position_combo_changed_cb, priv);
+            g_signal_handlers_block_by_func (combobox, screen_position_combo_changed_cb, self);
             gtk_combo_box_set_active_iter (combobox, &iter);
-            g_signal_handlers_unblock_by_func (combobox, screen_position_combo_changed_cb, priv);
+            g_signal_handlers_unblock_by_func (combobox, screen_position_combo_changed_cb, self);
             g_free (combo_value);
             break;
           }
@@ -295,7 +292,7 @@ xhairs_opacity_notify_cb (GSettings *settings, gchar *key, GtkColorButton *butto
 
 #define TO_HEX(x) (int) ((gdouble) x * 255.0)
 static void
-xhairs_color_opacity_changed (GtkColorButton *button, ZoomOptionsPrivate *priv)
+xhairs_color_opacity_changed (GtkColorButton *button, ZoomOptions *self)
 {
     GdkRGBA rgba;
     gchar *color_string;
@@ -306,13 +303,13 @@ xhairs_color_opacity_changed (GtkColorButton *button, ZoomOptionsPrivate *priv)
                                     TO_HEX(rgba.green),
                                     TO_HEX(rgba.blue));
 
-    g_settings_set_string (priv->settings, "cross-hairs-color", color_string);
+    g_settings_set_string (self->settings, "cross-hairs-color", color_string);
     g_free (color_string);
 
-    g_settings_set_double (priv->settings, "cross-hairs-opacity", rgba.alpha);
+    g_settings_set_double (self->settings, "cross-hairs-opacity", rgba.alpha);
 }
 
-static void xhairs_length_add_marks (GtkScale *scale)
+static void xhairs_length_add_marks (ZoomOptions *self, GtkScale *scale)
 {
     GtkAdjustment *scale_model;
     GdkRectangle rect;
@@ -345,7 +342,7 @@ static void xhairs_length_add_marks (GtkScale *scale)
 
 static void
 init_effects_slider (GtkRange *slider,
-                     ZoomOptionsPrivate *priv,
+                     ZoomOptions *self,
                      gchar **keys,
                      GCallback notify_cb)
 {
@@ -353,17 +350,17 @@ init_effects_slider (GtkRange *slider,
   gchar *signal;
 
   g_object_set_data (G_OBJECT (slider), "settings-keys", keys);
-  effects_slider_set_value (slider, priv->settings);
+  effects_slider_set_value (slider, self->settings);
 
   for (key = keys; *key; key++)
     {
       signal = g_strdup_printf ("changed::%s", *key);
-      g_signal_connect (G_OBJECT (priv->settings), signal, notify_cb, priv);
+      g_signal_connect (G_OBJECT (self->settings), signal, notify_cb, self);
       g_free (signal);
     }
   g_signal_connect (G_OBJECT (slider), "value-changed",
                     G_CALLBACK (effects_slider_changed),
-                    priv);
+                    self);
   gtk_scale_add_mark (GTK_SCALE (slider), 0, GTK_POS_BOTTOM, NULL);
 }
 
@@ -392,29 +389,29 @@ effects_slider_set_value (GtkRange *slider, GSettings *settings)
 static void
 brightness_slider_notify_cb (GSettings *settings,
                              const gchar *key,
-                             ZoomOptionsPrivate *priv)
+                             ZoomOptions *self)
 {
-  GtkRange *slider = GTK_RANGE (priv->brightness_slider);
+  GtkRange *slider = GTK_RANGE (self->brightness_slider);
 
-  g_signal_handlers_block_by_func (slider, effects_slider_changed, priv);
+  g_signal_handlers_block_by_func (slider, effects_slider_changed, self);
   effects_slider_set_value (slider, settings);
-  g_signal_handlers_unblock_by_func (slider, effects_slider_changed, priv);
+  g_signal_handlers_unblock_by_func (slider, effects_slider_changed, self);
 }
 
 static void
 contrast_slider_notify_cb (GSettings *settings,
                            const gchar *key,
-                           ZoomOptionsPrivate *priv)
+                           ZoomOptions *self)
 {
-  GtkRange *slider = GTK_RANGE (priv->contrast_slider);
+  GtkRange *slider = GTK_RANGE (self->contrast_slider);
 
-  g_signal_handlers_block_by_func (slider, effects_slider_changed, priv);
+  g_signal_handlers_block_by_func (slider, effects_slider_changed, self);
   effects_slider_set_value (slider, settings);
-  g_signal_handlers_unblock_by_func (slider, effects_slider_changed, priv);
+  g_signal_handlers_unblock_by_func (slider, effects_slider_changed, self);
 }
 
 static void
-effects_slider_changed (GtkRange *slider, ZoomOptionsPrivate *priv)
+effects_slider_changed (GtkRange *slider, ZoomOptions *self)
 {
   gchar **keys, **key;
   gdouble value;
@@ -424,197 +421,145 @@ effects_slider_changed (GtkRange *slider, ZoomOptionsPrivate *priv)
 
   for (key = keys; *key; key++)
     {
-      g_settings_set_double (priv->settings, *key, value);
+      g_settings_set_double (self->settings, *key, value);
     }
-}
-
-static void
-zoom_options_dispose (GObject *object)
-{
-  g_return_if_fail (object != NULL);
-  g_return_if_fail (ZOOM_IS_OPTIONS (object));
-  ZoomOptionsPrivate *priv = ZOOM_OPTIONS (object)->priv;
-
-  if (priv->builder)
-    {
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
-    }
-
-  if (priv->settings)
-    {
-      g_object_unref (priv->settings);
-      priv->settings = NULL;
-    }
-
-  g_clear_object (&priv->application_settings);
-
-  if (priv->dialog)
-    {
-      gtk_widget_destroy (priv->dialog);
-      priv->dialog = NULL;
-    }
-
-  G_OBJECT_CLASS (zoom_options_parent_class)->dispose (object);
 }
 
 static void
 zoom_options_finalize (GObject *object)
 {
+  ZoomOptions *self = ZOOM_OPTIONS (object);
+
+  g_clear_object (&self->settings);
+  g_clear_object (&self->application_settings);
+
   G_OBJECT_CLASS (zoom_options_parent_class)->finalize (object);
 }
 
 static void
 zoom_options_class_init (ZoomOptionsClass *klass)
 {
-  GObjectClass    *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->dispose = zoom_options_dispose;
   object_class->finalize = zoom_options_finalize;
 
-  g_type_class_add_private (klass, sizeof (ZoomOptionsPrivate));
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/zoom-options.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, brightness_slider);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, centered_radio);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, contrast_slider);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_clip_checkbox);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_enabled_switcher);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_length_slider);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_picker_color_button);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_thickness_scale);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, extend_beyond_checkbox);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, follow_mouse_radio);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, grayscale_slider);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, inverse_enabled_switch);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, magnifier_factor_spin);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, proportional_radio);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, push_radio);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, screen_part_radio);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, screen_position_combobox);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, seeing_zoom_switch);
 }
 
 static void
 zoom_options_init (ZoomOptions *self)
 {
-  ZoomOptionsPrivate *priv;
-  GtkWidget *w;
   PangoAttrList *pango_attrs;
   PangoAttribute *attr;
-  GError *err = NULL;
 
-  priv = self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, ZOOM_TYPE_OPTIONS, ZoomOptionsPrivate);
+  gtk_widget_init_template (GTK_WIDGET (self));
 
-  priv->builder = gtk_builder_new ();
-  gtk_builder_add_from_resource (priv->builder,
-                                 "/org/gnome/control-center/universal-access/zoom-options.ui",
-                                 &err);
-  if (err)
-    {
-      g_warning ("Could not load interface file: %s", err->message);
-      g_error_free (err);
-
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
-
-      return;
-    }
-
-  priv->settings = g_settings_new ("org.gnome.desktop.a11y.magnifier");
-  priv->application_settings = g_settings_new ("org.gnome.desktop.a11y.applications");
+  self->settings = g_settings_new ("org.gnome.desktop.a11y.magnifier");
+  self->application_settings = g_settings_new ("org.gnome.desktop.a11y.applications");
 
   pango_attrs = pango_attr_list_new ();
   attr = pango_attr_scale_new (FONT_SCALE);
   pango_attr_list_insert (pango_attrs, attr);
 
   /* Zoom switch */
-  g_settings_bind (priv->application_settings, "screen-magnifier-enabled",
-                   WID ("seeing_zoom_switch"), "active",
+  g_settings_bind (self->application_settings, "screen-magnifier-enabled",
+                   self->seeing_zoom_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* Magnification factor */
-  w = WID ("magFactorSpinButton");
-  g_settings_bind (priv->settings, "mag-factor",
-                   gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (w)),
+  g_settings_bind (self->settings, "mag-factor",
+                   gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (self->magnifier_factor_spin)),
                    "value", G_SETTINGS_BIND_DEFAULT);
 
   /* Screen position combo */
-  w = WID ("screen_position_combo_box");
-  screen_position_notify_cb (priv->settings, "screen-position", self);
-  g_signal_connect (G_OBJECT (priv->settings), "changed::screen-position",
+  screen_position_notify_cb (self->settings, "screen-position", self);
+  g_signal_connect (self->settings, "changed::screen-position",
                     G_CALLBACK (screen_position_notify_cb), self);
-  g_signal_connect (G_OBJECT (w), "changed",
+  g_signal_connect (self->screen_position_combobox, "changed",
                     G_CALLBACK (screen_position_combo_changed_cb), self);
 
   /* Screen part section */
-  init_screen_part_section (priv, pango_attrs);
+  init_screen_part_section (self, pango_attrs);
 
   /* Cross hairs: show/hide ... */
-  w = WID ("xhairsEnabledSwitch");
-  g_settings_bind (priv->settings, "show-cross-hairs", w, "active",
+  g_settings_bind (self->settings, "show-cross-hairs",
+                   self->crosshair_enabled_switcher, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* ... Cross hairs: color and opacity */
-  w = WID ("xHairsPicker");
-  init_xhairs_color_opacity (GTK_COLOR_BUTTON (w), priv->settings);
-  g_signal_connect (G_OBJECT (priv->settings), "changed::cross-hairs-color",
-                    G_CALLBACK (xhairs_color_notify_cb), w);
-  g_signal_connect (G_OBJECT (priv->settings), "changed::cross-hairs-opacity",
-                    G_CALLBACK (xhairs_opacity_notify_cb), w);
-  g_signal_connect (G_OBJECT (w), "color-set",
+  init_xhairs_color_opacity (GTK_COLOR_BUTTON (self->crosshair_picker_color_button), self->settings);
+  g_signal_connect (self->settings, "changed::cross-hairs-color",
+                    G_CALLBACK (xhairs_color_notify_cb), self->crosshair_picker_color_button);
+  g_signal_connect (self->settings, "changed::cross-hairs-opacity",
+                    G_CALLBACK (xhairs_opacity_notify_cb), self->crosshair_picker_color_button);
+  g_signal_connect (self->crosshair_picker_color_button, "color-set",
                     G_CALLBACK (xhairs_color_opacity_changed),
-                    priv);
+                    self);
 
   /* ... Cross hairs: thickness ... */
-  w = WID ("xHairsThicknessSlider");
-  g_settings_bind (priv->settings, "cross-hairs-thickness",
-                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+  g_settings_bind (self->settings, "cross-hairs-thickness",
+                   gtk_range_get_adjustment (GTK_RANGE (self->crosshair_thickness_scale)), "value",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* ... Cross hairs: clip ... */
-  w = WID ("xHairsClipCheckbox");
-  scale_label (GTK_BIN(w), pango_attrs);
-  g_settings_bind (priv->settings, "cross-hairs-clip", w, "active",
+  scale_label (GTK_BIN (self->crosshair_clip_checkbox), pango_attrs);
+  g_settings_bind (self->settings, "cross-hairs-clip",
+                   self->crosshair_clip_checkbox, "active",
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
 
   /* ... Cross hairs: length ... */
-  w = WID ("xHairsLengthSlider");
-  xhairs_length_add_marks (GTK_SCALE (w));
-  g_settings_bind (priv->settings, "cross-hairs-length",
-                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+  xhairs_length_add_marks (self, GTK_SCALE (self->crosshair_length_slider));
+  g_settings_bind (self->settings, "cross-hairs-length",
+                   gtk_range_get_adjustment (GTK_RANGE (self->crosshair_length_slider)), "value",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* ... Color effects ... */
-  w = WID ("inverseEnabledSwitch");
-  g_settings_bind (priv->settings, "invert-lightness", w, "active",
+  g_settings_bind (self->settings, "invert-lightness", self->inverse_enabled_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  w = WID ("brightnessSlider");
-  priv->brightness_slider = w;
-  init_effects_slider (GTK_RANGE(w), priv, brightness_keys,
+  init_effects_slider (GTK_RANGE (self->brightness_slider),
+                       self,
+                       brightness_keys,
                        G_CALLBACK (brightness_slider_notify_cb));
 
-  w = WID ("contrastSlider");
-  priv->contrast_slider = w;
-  init_effects_slider (GTK_RANGE(w), priv, contrast_keys,
+  init_effects_slider (GTK_RANGE (self->contrast_slider),
+                       self,
+                       contrast_keys,
                        G_CALLBACK (contrast_slider_notify_cb));
 
-  w = WID ("grayscale_slider");
-  g_settings_bind (priv->settings, "color-saturation",
-                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+  g_settings_bind (self->settings, "color-saturation",
+                   gtk_range_get_adjustment (GTK_RANGE (self->grayscale_slider)), "value",
                    G_SETTINGS_BIND_DEFAULT);
-  gtk_scale_add_mark (GTK_SCALE(w), 1.0, GTK_POS_BOTTOM, NULL);
-  /* ... Window itself ... */
-  priv->dialog = WID ("magPrefsDialog");
-
-  g_signal_connect (G_OBJECT (priv->dialog), "delete-event",
-                    G_CALLBACK (gtk_widget_hide_on_delete),
-                    NULL);
+  gtk_scale_add_mark (GTK_SCALE(self->grayscale_slider), 1.0, GTK_POS_BOTTOM, NULL);
 
   pango_attr_list_unref (pango_attrs);
 }
 
-/**
- * zoom_options_set_parent:
- * @self: the #ZoomOptions object
- * @parent: the parent #GtkWindow
- *
- * Activate the dialog associated with this ZoomOptions.
- */
-void
-zoom_options_set_parent (ZoomOptions *self,
-			 GtkWindow   *parent)
-{
-  g_return_if_fail (ZOOM_IS_OPTIONS (self));
-
-  gtk_window_set_transient_for (GTK_WINDOW (self->priv->dialog), parent);
-  gtk_window_set_modal (GTK_WINDOW (self->priv->dialog), TRUE);
-  gtk_widget_show (self->priv->dialog);
-}
-
 ZoomOptions *
-zoom_options_new (void)
+zoom_options_new (GtkWindow *parent)
 {
-  return g_object_new (ZOOM_TYPE_OPTIONS, NULL);
+  return g_object_new (ZOOM_TYPE_OPTIONS,
+                       "transient-for", parent,
+                       "use-header-bar", TRUE,
+                       NULL);
 }

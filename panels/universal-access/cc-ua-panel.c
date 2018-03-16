@@ -174,11 +174,12 @@ static void
 zoom_options_launch (CcUaPanel *self)
 {
   if (self->priv->zoom_options == NULL)
-    self->priv->zoom_options = zoom_options_new ();
+    {
+      GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+      self->priv->zoom_options = zoom_options_new (window);
+    }
 
-  if (self->priv->zoom_options != NULL)
-    zoom_options_set_parent (self->priv->zoom_options,
-			     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+  gtk_window_present_with_time (GTK_WINDOW (self->priv->zoom_options), GDK_CURRENT_TIME);
 }
 
 /* cursor size dialog */

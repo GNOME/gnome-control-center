@@ -71,13 +71,14 @@
       </row>
     </data>
   </object>
-  <object class="GtkDialog" id="magPrefsDialog">
+  <template class="ZoomOptions" parent="GtkDialog">
+    <property name="modal">True</property>
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Zoom Options</property>
     <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
-    <property name="use_header_bar">1</property>
+    <signal name="delete-event" handler="gtk_widget_hide_on_delete" object="ZoomOptions" swapped="no" />
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox1">
         <property name="visible">True</property>
@@ -186,7 +187,7 @@
                             <property name="ypad">2</property>
                             <property name="label" translatable="yes">_Magnification:</property>
                             <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">magFactorSpinButton</property>
+                            <property name="mnemonic_widget">magnifier_factor_spin</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1.25"/>
@@ -199,7 +200,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkSpinButton" id="magFactorSpinButton">
+                          <object class="GtkSpinButton" id="magnifier_factor_spin">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="halign">start</property>
@@ -247,7 +248,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
-                                  <object class="GtkRadioButton" id="moveableLens">
+                                  <object class="GtkRadioButton" id="follow_mouse_radio">
                                     <property name="label" translatable="yes">_Follow mouse cursor</property>
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
@@ -267,7 +268,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkRadioButton" id="screenPart">
+                                  <object class="GtkRadioButton" id="screen_part_radio">
                                     <property name="label" translatable="yes">_Screen part:</property>
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
@@ -277,7 +278,7 @@
                                     <property name="xalign">0</property>
                                     <property name="yalign">0</property>
                                     <property name="draw_indicator">True</property>
-                                    <property name="group">moveableLens</property>
+                                    <property name="group">follow_mouse_radio</property>
                                     <property name="use_underline">True</property>
                                   </object>
                                   <packing>
@@ -288,7 +289,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="screen_position_combo_box">
+                                  <object class="GtkComboBox" id="screen_position_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="model">screen_position_model</property>
@@ -329,7 +330,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="orientation">vertical</property>
                                     <child>
-                                      <object class="GtkCheckButton" id="scrollAtEdges">
+                                      <object class="GtkCheckButton" id="extend_beyond_checkbox">
                                         <property name="label" translatable="yes">Magnifier _extends outside of screen</property>
                                         <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
@@ -348,7 +349,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkRadioButton" id="centered">
+                                      <object class="GtkRadioButton" id="centered_radio">
                                         <property name="label" translatable="yes">_Keep magnifier cursor centered</property>
                                         <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
@@ -367,7 +368,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkRadioButton" id="push">
+                                      <object class="GtkRadioButton" id="push_radio">
                                         <property name="label" translatable="yes">Magnifier cursor _pushes contents around</property>
                                         <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
@@ -376,7 +377,7 @@
                                         <property name="use_action_appearance">False</property>
                                         <property name="xalign">0</property>
                                         <property name="draw_indicator">True</property>
-                                        <property name="group">centered</property>
+                                        <property name="group">centered_radio</property>
                                         <property name="use_underline">True</property>
                                       </object>
                                       <packing>
@@ -386,7 +387,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkRadioButton" id="proportional">
+                                      <object class="GtkRadioButton" id="proportional_radio">
                                         <property name="label" translatable="yes">Magnifier cursor moves with _contents</property>
                                         <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
@@ -395,7 +396,7 @@
                                         <property name="use_action_appearance">False</property>
                                         <property name="xalign">0</property>
                                         <property name="draw_indicator">True</property>
-                                        <property name="group">centered</property>
+                                        <property name="group">centered_radio</property>
                                         <property name="use_underline">True</property>
                                       </object>
                                       <packing>
@@ -492,7 +493,7 @@
                                     <property name="label" translatable="yes">_Thickness:</property>
                                     <property name="justify">center</property>
                                     <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">xHairsThicknessSlider</property>
+                                    <property name="mnemonic_widget">crosshair_thickness_scale</property>
                                     <property name="width_chars">12</property>
                                     <attributes>
                                       <attribute name="scale" value="1.25"/>
@@ -528,7 +529,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkScale" id="xHairsThicknessSlider">
+                                      <object class="GtkScale" id="crosshair_thickness_scale">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="adjustment">xHairsThickness</property>
@@ -576,10 +577,10 @@
                                     <property name="label" translatable="yes">_Length:</property>
                                     <property name="justify">center</property>
                                     <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">xHairsLengthSlider</property>
+                                    <property name="mnemonic_widget">crosshair_length_slider</property>
                                     <property name="width_chars">12</property>
                                     <accessibility>
-                                      <relation type="label-for" target="xHairsLengthSlider"/>
+                                      <relation type="label-for" target="crosshair_length_slider"/>
                                     </accessibility>
                                     <attributes>
                                       <attribute name="scale" value="1.25"/>
@@ -598,7 +599,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="spacing">3</property>
                                     <child>
-                                      <object class="GtkScale" id="xHairsLengthSlider">
+                                      <object class="GtkScale" id="crosshair_length_slider">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="adjustment">xhairsLength</property>
@@ -627,7 +628,7 @@
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes" comments="The color of the accessibility crosshair">Co_lor:</property>
                                     <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">xHairsPicker</property>
+                                    <property name="mnemonic_widget">crosshair_picker_color_button</property>
                                     <attributes>
                                       <attribute name="scale" value="1.25"/>
                                     </attributes>
@@ -645,7 +646,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="spacing">3</property>
                                     <child>
-                                      <object class="GtkColorButton" id="xHairsPicker">
+                                      <object class="GtkColorButton" id="crosshair_picker_color_button">
                                         <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -692,7 +693,7 @@
                             <property name="label" translatable="yes">_Crosshairs:</property>
                             <property name="use_markup">True</property>
                             <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">xhairsEnabledSwitch</property>
+                            <property name="mnemonic_widget">crosshair_enabled_switcher</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1.25"/>
@@ -713,7 +714,7 @@
                               <placeholder/>
                             </child>
                             <child>
-                              <object class="GtkSwitch" id="xhairsEnabledSwitch">
+                              <object class="GtkSwitch" id="crosshair_enabled_switcher">
                                 <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -739,7 +740,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="xHairsClipCheckbox">
+                          <object class="GtkCheckButton" id="crosshair_clip_checkbox">
                             <property name="label" translatable="yes">_Overlaps mouse cursor</property>
                             <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
@@ -830,9 +831,9 @@
                                     <property name="label" translatable="yes">_White on black:</property>
                                     <property name="justify">right</property>
                                     <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">inverseEnabledSwitch</property>
+                                    <property name="mnemonic_widget">inverse_enabled_switch</property>
                                     <accessibility>
-                                      <relation type="label-for" target="inverseEnabledSwitch"/>
+                                      <relation type="label-for" target="inverse_enabled_switch"/>
                                     </accessibility>
                                     <attributes>
                                       <attribute name="scale" value="1.25"/>
@@ -853,10 +854,10 @@
                                     <property name="label" translatable="yes">_Brightness:</property>
                                     <property name="justify">right</property>
                                     <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">brightnessSlider</property>
+                                    <property name="mnemonic_widget">brightness_slider</property>
                                     <property name="width_chars">12</property>
                                     <accessibility>
-                                      <relation type="label-for" target="brightnessSlider"/>
+                                      <relation type="label-for" target="brightness_slider"/>
                                     </accessibility>
                                     <attributes>
                                       <attribute name="scale" value="1.25"/>
@@ -877,9 +878,9 @@
                                     <property name="label" translatable="yes">_Contrast:</property>
                                     <property name="justify">right</property>
                                     <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">contrastSlider</property>
+                                    <property name="mnemonic_widget">contrast_slider</property>
                                     <accessibility>
-                                      <relation type="label-for" target="contrastSlider"/>
+                                      <relation type="label-for" target="contrast_slider"/>
                                     </accessibility>
                                     <attributes>
                                       <attribute name="scale" value="1.25"/>
@@ -987,7 +988,7 @@
                                       <placeholder/>
                                     </child>
                                     <child>
-                                      <object class="GtkSwitch" id="inverseEnabledSwitch">
+                                      <object class="GtkSwitch" id="inverse_enabled_switch">
                                         <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -1036,7 +1037,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkScale" id="brightnessSlider">
+                                      <object class="GtkScale" id="brightness_slider">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="adjustment">brightness</property>
@@ -1100,7 +1101,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkScale" id="contrastSlider">
+                                      <object class="GtkScale" id="contrast_slider">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="adjustment">contrast</property>
@@ -1197,7 +1198,7 @@
         </child>
       </object>
     </child>
-  </object>
+  </template>
   <object class="GtkAdjustment" id="xHairsThickness">
     <property name="lower">1</property>
     <property name="upper">100</property>
