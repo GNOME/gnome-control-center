@@ -37,16 +37,11 @@ sources += gnome.compile_resources(
   export: true
 )
 
-ce_cflags = cflags + [
-  '-DNM_VPN_CONFIG_DIR="@0@"'.format(nm_vpn_config_dir),
-  '-DNM_VPN_MODULE_DIR="@0@"'.format(nm_vpn_module_dir)
-]
-
 libconnection_editor = static_library(
   name,
   sources: sources,
   include_directories: [top_inc, wireless_security_inc],
   dependencies: deps,
-  c_args: ce_cflags,
+  c_args: cflags,
   link_with: libwireless_security
 )
