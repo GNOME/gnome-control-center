@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2018-02-24 17:48+0000\n"
-"PO-Revision-Date: 2018-02-26 12:52+0100\n"
+"POT-Creation-Date: 2018-03-12 16:43+0000\n"
+"PO-Revision-Date: 2018-03-16 22:55+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -134,8 +134,8 @@ msgstr "Môžete pridať obrázky do vášho priečinka %s a potom sa zobrazia t
 #: panels/user-accounts/um-fingerprint-dialog.c:261
 #: panels/user-accounts/um-photo-dialog.c:102
 #: panels/user-accounts/um-photo-dialog.c:229
-#: panels/user-accounts/um-user-panel.c:635
-#: panels/user-accounts/um-user-panel.c:653
+#: panels/user-accounts/um-user-panel.c:634
+#: panels/user-accounts/um-user-panel.c:652
 msgid "_Cancel"
 msgstr "_Zrušiť"
 
@@ -1336,7 +1336,7 @@ msgstr "%.2lf Hz"
 #. TRANSLATORS: the state of the night light setting
 #: panels/display/cc-display-panel.c:3195
 #: panels/notifications/cc-notifications-panel.c:292
-#: panels/power/cc-power-panel.c:1991 panels/power/cc-power-panel.c:1998
+#: panels/power/cc-power-panel.c:1994 panels/power/cc-power-panel.c:2001
 #: panels/privacy/cc-privacy-panel.c:190 panels/privacy/cc-privacy-panel.c:257
 #: panels/universal-access/cc-ua-panel.c:333
 #: panels/universal-access/cc-ua-panel.c:714
@@ -1350,7 +1350,7 @@ msgstr "Zapnuté"
 # * https://bugzilla.gnome.org/show_bug.cgi?id=708580
 #: panels/display/cc-display-panel.c:3195 panels/network/net-proxy.c:54
 #: panels/notifications/cc-notifications-panel.c:292
-#: panels/power/cc-power-panel.c:1985 panels/power/cc-power-panel.c:1996
+#: panels/power/cc-power-panel.c:1988 panels/power/cc-power-panel.c:1999
 #: panels/privacy/cc-privacy-panel.c:190 panels/privacy/cc-privacy-panel.c:257
 #: panels/universal-access/cc-ua-panel.c:333
 #: panels/universal-access/cc-ua-panel.c:714
@@ -2412,7 +2412,7 @@ msgstr "NetworkManager musí byť spustený."
 # GtkLabel label
 #: panels/network/cc-wifi-panel.c:213
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
-#: panels/network/network-wifi.ui:1766
+#: panels/network/network-wifi.ui:1769
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
@@ -3470,21 +3470,21 @@ msgid "Password"
 msgstr "Heslo"
 
 # GtkSwitch AtkObject
-#: panels/network/network-wifi.ui:1796
+#: panels/network/network-wifi.ui:1799
 msgid "Turn Wi-Fi off"
 msgstr "Vypnúť Wi-Fi"
 
 # GtkButton label
-#: panels/network/network-wifi.ui:1828
+#: panels/network/network-wifi.ui:1831
 msgid "_Connect to Hidden Network…"
 msgstr "_Pripojiť sa k skrytej sieti…"
 
 # GtkLabel label
-#: panels/network/network-wifi.ui:1838
+#: panels/network/network-wifi.ui:1841
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "Zapnúť _prístupový bod Wi-Fi…"
 
-#: panels/network/network-wifi.ui:1848
+#: panels/network/network-wifi.ui:1851
 msgid "_Known Wi-Fi Networks"
 msgstr "Známe siete _Wi-Fi"
 
@@ -3796,27 +3796,27 @@ msgstr "Chýba firmvér"
 msgid "Cable unplugged"
 msgstr "Kábel odpojený"
 
-#: panels/network/wireless-security/eap-method.c:57
+#: panels/network/wireless-security/eap-method.c:69
 msgid "undefined error in 802.1X security (wpa-eap)"
 msgstr "nedefinovaná chyba v zabezpečení protokolu 802.1X (wpa-eap)"
 
-#: panels/network/wireless-security/eap-method.c:233
+#: panels/network/wireless-security/eap-method.c:245
 msgid "no file selected"
 msgstr "Nebol vybratý žiadny súbor"
 
-#: panels/network/wireless-security/eap-method.c:264
+#: panels/network/wireless-security/eap-method.c:276
 msgid "unspecified error validating eap-method file"
 msgstr "nešpecifikovaná chyba pri overovaní súboru metódy protokolu eap"
 
 # PK: pkcs#12 je zauzivane
 # file filter
-#: panels/network/wireless-security/eap-method.c:439
+#: panels/network/wireless-security/eap-method.c:451
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr ""
 "Súkromné kľúče typu DER, PEM alebo PKCS#12 (*.der, *.pem, *.p12, *.key)"
 
 # file filter
-#: panels/network/wireless-security/eap-method.c:442
+#: panels/network/wireless-security/eap-method.c:454
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
 msgstr "Certifikáty typu DER alebo PEM (*.der, *.pem, *.crt, *.cer)"
 
@@ -4293,19 +4293,19 @@ msgstr "Iný"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:551
+#: panels/online-accounts/cc-online-accounts-panel.c:596
 #, c-format
 msgid "%s Account"
 msgstr "Účet služby %s"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:843
+#: panels/online-accounts/cc-online-accounts-panel.c:888
 msgid "Error removing account"
 msgstr "Chyba pri odstraňovaní účtu"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:908
+#: panels/online-accounts/cc-online-accounts-panel.c:953
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "Účet <b>%s</b> bol odstránený"
@@ -4500,7 +4500,7 @@ msgstr "Herné vstupné zariadenie"
 
 #. TRANSLATORS: secondary battery, misc
 #: panels/power/cc-power-panel.c:564 panels/power/cc-power-panel.c:804
-#: panels/power/cc-power-panel.c:2377
+#: panels/power/cc-power-panel.c:2380
 msgid "Battery"
 msgstr "Batéria"
 
@@ -4545,125 +4545,125 @@ msgstr "Vybitá"
 msgid "Batteries"
 msgstr "Batérie"
 
-#: panels/power/cc-power-panel.c:1239
+#: panels/power/cc-power-panel.c:1242
 msgid "When _idle"
 msgstr "Pri neč_innosti"
 
 # label
-#: panels/power/cc-power-panel.c:1693
+#: panels/power/cc-power-panel.c:1696
 msgid "Power Saving"
 msgstr "Šetrenie energie"
 
 # label
-#: panels/power/cc-power-panel.c:1724
+#: panels/power/cc-power-panel.c:1727
 msgid "_Screen brightness"
 msgstr "_Jas obrazovky"
 
 # GtkSwitch AtkObject
-#: panels/power/cc-power-panel.c:1743
+#: panels/power/cc-power-panel.c:1746
 msgid "Automatic brightness"
 msgstr "Automatický jas"
 
 # label
-#: panels/power/cc-power-panel.c:1763
+#: panels/power/cc-power-panel.c:1766
 msgid "_Keyboard brightness"
 msgstr "Jas _klávesnice"
 
 # label
-#: panels/power/cc-power-panel.c:1773
+#: panels/power/cc-power-panel.c:1776
 msgid "_Dim screen when inactive"
 msgstr "_Stmaviť obrazovku pri neaktivite"
 
 # PK: toto je divne, skor vypnut obrazovku
 # PM: no blank screen praveze nie je vypnutie obrazovky, balnk screen je vyplnenie obrazovky čiernou ale je stále zapnutá. Používa sa to pri starých monitoroch, ktoré zobrazujú pri ATM hlásku ze nie je signál.
 # label
-#: panels/power/cc-power-panel.c:1798
+#: panels/power/cc-power-panel.c:1801
 msgid "_Blank screen"
 msgstr "Vy_prázdniť obrazovku za"
 
 # PM: pozerám že je tam aj reťazec Turns off wireless devices ako label, nemá byť aj on na preklad?
 # PK: nie, je to label v tom dialogu hruby a potom prepinac
 # label
-#: panels/power/cc-power-panel.c:1835
+#: panels/power/cc-power-panel.c:1838
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.c:1840
+#: panels/power/cc-power-panel.c:1843
 msgid "Turn off Wi-Fi to save power."
 msgstr "Vypnutím Wi-Fi ušetríte energiu."
 
 # label
-#: panels/power/cc-power-panel.c:1865
+#: panels/power/cc-power-panel.c:1868
 msgid "_Mobile broadband"
 msgstr "Širokopásmové _mobilné pripojenie"
 
-#: panels/power/cc-power-panel.c:1870
+#: panels/power/cc-power-panel.c:1873
 msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
 msgstr ""
 "Vypnutím šírokopásmových mobilných zariadení (3G, 4G, LTE, atď) ušetríte "
 "energiu."
 
 # label
-#: panels/power/cc-power-panel.c:1923
+#: panels/power/cc-power-panel.c:1926
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:1928
+#: panels/power/cc-power-panel.c:1931
 msgid "Turn off Bluetooth to save power."
 msgstr "Vypnutím rozhrania Bluetooth ušetríte energiu."
 
 #  label
-#: panels/power/cc-power-panel.c:1987
+#: panels/power/cc-power-panel.c:1990
 msgid "When on battery power"
 msgstr "Pri napájaní z batérie"
 
 # PK: ked je zastrceny v zasuvke
 #  label
-#: panels/power/cc-power-panel.c:1989
+#: panels/power/cc-power-panel.c:1992
 msgid "When plugged in"
-msgstr "Pri zastrčení do zásuvky"
+msgstr "Pri napájaní zo siete"
 
-#: panels/power/cc-power-panel.c:2084
+#: panels/power/cc-power-panel.c:2087
 msgid "Suspend"
 msgstr "Uspať"
 
 # label
-#: panels/power/cc-power-panel.c:2085
+#: panels/power/cc-power-panel.c:2088
 msgid "Power Off"
 msgstr "Vypnúť"
 
 # GtkListStore item
-#: panels/power/cc-power-panel.c:2086
+#: panels/power/cc-power-panel.c:2089
 msgid "Hibernate"
 msgstr "Hibernovať"
 
 # chooser_button
-#: panels/power/cc-power-panel.c:2087
+#: panels/power/cc-power-panel.c:2090
 msgid "Nothing"
 msgstr "Nespraviť nič"
 
 # label
 #. Frame header
-#: panels/power/cc-power-panel.c:2201
+#: panels/power/cc-power-panel.c:2204
 msgid "Suspend & Power Button"
 msgstr "Tlačidlo uspania a napájania"
 
 # label
-#: panels/power/cc-power-panel.c:2240
+#: panels/power/cc-power-panel.c:2243
 msgid "_Automatic suspend"
 msgstr "_Automaticky uspať"
 
 # label
-#: panels/power/cc-power-panel.c:2241
+#: panels/power/cc-power-panel.c:2244
 msgid "Automatic suspend"
 msgstr "Automatické uspanie"
 
-#: panels/power/cc-power-panel.c:2308
+#: panels/power/cc-power-panel.c:2311
 msgid "_When the Power Button is pressed"
 msgstr "K_eď je stlačené tlačidlo napájania"
 
 # label
-#: panels/power/cc-power-panel.c:2427 shell/cc-window.c:219
+#: panels/power/cc-power-panel.c:2430 shell/cc-window.c:219
 #: shell/panel-list.ui:45
 msgid "Devices"
 msgstr "Zariadenia"
@@ -4857,18 +4857,18 @@ msgid "Authentication Required"
 msgstr "Vyžaduje sa overenie totožnosti"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:791
+#: panels/printers/cc-printers-panel.c:808
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Tlačiareň „%s“ bola odstránená"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:1036
+#: panels/printers/cc-printers-panel.c:1053
 msgid "Failed to add new printer."
 msgstr "Pridávanie novej tlačiarne zlyhalo."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1371
+#: panels/printers/cc-printers-panel.c:1388
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nepodarilo sa načítať súbor používateľského rozhrania: %s"
@@ -5087,55 +5087,55 @@ msgid "Reverse portrait"
 msgstr "Opačne na výšku"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: panels/printers/pp-jobs-dialog.c:243
+#: panels/printers/pp-jobs-dialog.c:234
 msgctxt "print job"
 msgid "Pending"
 msgstr "Čaká"
 
 #. Translators: Job's state (job is held for printing)
-#: panels/printers/pp-jobs-dialog.c:249
+#: panels/printers/pp-jobs-dialog.c:240
 msgctxt "print job"
 msgid "Paused"
 msgstr "Pozastavená"
 
 #. Translators: Job's state (job needs authentication to proceed further)
-#: panels/printers/pp-jobs-dialog.c:254
+#: panels/printers/pp-jobs-dialog.c:245
 msgctxt "print job"
 msgid "Authentication required"
 msgstr "Vyžaduje sa overenie totožnosti"
 
 #. Translators: Job's state (job is currently printing)
-#: panels/printers/pp-jobs-dialog.c:259
+#: panels/printers/pp-jobs-dialog.c:250
 msgctxt "print job"
 msgid "Processing"
 msgstr "Spracúva sa"
 
 #. Translators: Job's state (job has been stopped)
-#: panels/printers/pp-jobs-dialog.c:263
+#: panels/printers/pp-jobs-dialog.c:254
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Zastavená"
 
 #. Translators: Job's state (job has been canceled)
-#: panels/printers/pp-jobs-dialog.c:267
+#: panels/printers/pp-jobs-dialog.c:258
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Zrušená"
 
 #. Translators: Job's state (job has aborted due to error)
-#: panels/printers/pp-jobs-dialog.c:271
+#: panels/printers/pp-jobs-dialog.c:262
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Prerušená"
 
 #. Translators: Job's state (job has completed successfully)
-#: panels/printers/pp-jobs-dialog.c:275
+#: panels/printers/pp-jobs-dialog.c:266
 msgctxt "print job"
 msgid "Completed"
 msgstr "Dokončená"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:399
+#: panels/printers/pp-jobs-dialog.c:390
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -5144,14 +5144,14 @@ msgstr[1] "%u úloha vyžaduje overenie totožnosti"
 msgstr[2] "%u úlohy vyžadujú overenie totožnosti"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:617
+#: panels/printers/pp-jobs-dialog.c:620
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — Aktívne úlohy"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:622
+#: panels/printers/pp-jobs-dialog.c:625
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Zadajte poverenia na tlač z tlačiarne %s."
@@ -7855,7 +7855,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/um-history-dialog.c:177
-#: panels/user-accounts/um-user-panel.c:767
+#: panels/user-accounts/um-user-panel.c:766
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7863,7 +7863,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/um-history-dialog.c:180
-#: panels/user-accounts/um-user-panel.c:771
+#: panels/user-accounts/um-user-panel.c:770
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7931,42 +7931,42 @@ msgstr "Neplatné heslo, skúste to znovu"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Nepodarilo sa pripojiť k doméne %s: %s"
 
-#: panels/user-accounts/um-user-panel.c:201
+#: panels/user-accounts/um-user-panel.c:200
 msgid "Your account"
 msgstr "Váš účet"
 
-#: panels/user-accounts/um-user-panel.c:381
+#: panels/user-accounts/um-user-panel.c:380
 msgid "Failed to delete user"
 msgstr "Odstránenie používateľa zlyhalo"
 
-#: panels/user-accounts/um-user-panel.c:439
-#: panels/user-accounts/um-user-panel.c:498
-#: panels/user-accounts/um-user-panel.c:550
+#: panels/user-accounts/um-user-panel.c:438
+#: panels/user-accounts/um-user-panel.c:497
+#: panels/user-accounts/um-user-panel.c:549
 msgid "Failed to revoke remotely managed user"
 msgstr "Zlyhalo zrušenie na diaľku spravovaného používateľa"
 
-#: panels/user-accounts/um-user-panel.c:604
+#: panels/user-accounts/um-user-panel.c:603
 msgid "You cannot delete your own account."
 msgstr "Nemôžete odstrániť vlastný účet."
 
-#: panels/user-accounts/um-user-panel.c:613
+#: panels/user-accounts/um-user-panel.c:612
 #, c-format
 msgid "%s is still logged in"
 msgstr "Používateľ %s je stále prihlásený"
 
-#: panels/user-accounts/um-user-panel.c:617
+#: panels/user-accounts/um-user-panel.c:616
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr ""
 "Odstránenie prihláseného používateľa môže spôsobiť nestabilitu systému."
 
-#: panels/user-accounts/um-user-panel.c:626
+#: panels/user-accounts/um-user-panel.c:625
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Chcete ponechať súbory používateľa %s?"
 
-#: panels/user-accounts/um-user-panel.c:630
+#: panels/user-accounts/um-user-panel.c:629
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7975,49 +7975,49 @@ msgstr ""
 "súbory pošty a dočasné súbory."
 
 # button
-#: panels/user-accounts/um-user-panel.c:633
+#: panels/user-accounts/um-user-panel.c:632
 msgid "_Delete Files"
 msgstr "O_dstrániť súbory"
 
 # button
-#: panels/user-accounts/um-user-panel.c:634
+#: panels/user-accounts/um-user-panel.c:633
 msgid "_Keep Files"
 msgstr "Po_nechať súbory"
 
-#: panels/user-accounts/um-user-panel.c:648
+#: panels/user-accounts/um-user-panel.c:647
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Naozaj chcete zrušiť na diaľku spravovaný účet používateľa %s?"
 
 # button
-#: panels/user-accounts/um-user-panel.c:652
+#: panels/user-accounts/um-user-panel.c:651
 msgid "_Delete"
 msgstr "O_dstrániť"
 
-#: panels/user-accounts/um-user-panel.c:702
+#: panels/user-accounts/um-user-panel.c:701
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Účet je zakázaný"
 
-#: panels/user-accounts/um-user-panel.c:710
+#: panels/user-accounts/um-user-panel.c:709
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Nastaviť pri najbližšom prihlásení"
 
-#: panels/user-accounts/um-user-panel.c:713
+#: panels/user-accounts/um-user-panel.c:712
 msgctxt "Password mode"
 msgid "None"
 msgstr "Žiadne"
 
-#: panels/user-accounts/um-user-panel.c:760
+#: panels/user-accounts/um-user-panel.c:759
 msgid "Logged in"
 msgstr "Prihlásený"
 
-#: panels/user-accounts/um-user-panel.c:1107
+#: panels/user-accounts/um-user-panel.c:1106
 msgid "Failed to contact the accounts service"
 msgstr "Spojenie so službou účtov zlyhalo"
 
-#: panels/user-accounts/um-user-panel.c:1109
+#: panels/user-accounts/um-user-panel.c:1108
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Uistite sa, prosím, že je služba AccountService nainštalovaná a povolená."
@@ -8027,7 +8027,7 @@ msgstr ""
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/um-user-panel.c:1141
+#: panels/user-accounts/um-user-panel.c:1140
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -8036,13 +8036,13 @@ msgstr ""
 "kliknite najprv na ikonu *"
 
 # tooltip
-#: panels/user-accounts/um-user-panel.c:1181
+#: panels/user-accounts/um-user-panel.c:1180
 msgid "Create a user account"
 msgstr "Vytvorí používateľský účet"
 
 # tooltip
-#: panels/user-accounts/um-user-panel.c:1192
-#: panels/user-accounts/um-user-panel.c:1371
+#: panels/user-accounts/um-user-panel.c:1191
+#: panels/user-accounts/um-user-panel.c:1370
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -8051,13 +8051,13 @@ msgstr ""
 "kliknite najprv na ikonu *"
 
 # tooltip
-#: panels/user-accounts/um-user-panel.c:1202
+#: panels/user-accounts/um-user-panel.c:1201
 msgid "Delete the selected user account"
 msgstr "Odstráni vybraný používateľský účet"
 
 # tooltip
-#: panels/user-accounts/um-user-panel.c:1214
-#: panels/user-accounts/um-user-panel.c:1376
+#: panels/user-accounts/um-user-panel.c:1213
+#: panels/user-accounts/um-user-panel.c:1375
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
