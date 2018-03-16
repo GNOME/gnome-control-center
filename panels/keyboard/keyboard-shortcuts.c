@@ -26,7 +26,6 @@
 
 #include "keyboard-shortcuts.h"
 #include "cc-keyboard-option.h"
-#include "wm-common.h"
 
 #define CUSTOM_KEYS_BASENAME  "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
 
