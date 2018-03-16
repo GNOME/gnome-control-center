@@ -185,14 +185,10 @@ config_h.set('HAVE_WAYLAND', enable_wayland,
 if host_is_linux
   # network manager
   network_manager_deps = [
-    dependency('libnm', version: '>= 1.2.0'),
-    dependency('libnma', version: '>= 1.2.0'),
+    dependency('libnm', version: '>= 1.10.0'),
+    dependency('libnma', version: '>= 1.8.0'),
     dependency('mm-glib', version: '>= 0.7')
   ]
-
-  network_manager_dep = dependency('NetworkManager')
-  nm_vpn_config_dir = join_paths(network_manager_dep.get_pkgconfig_variable('configdir'), 'VPN')
-  nm_vpn_module_dir = network_manager_dep.get_pkgconfig_variable('plugindir')
 endif
 config_h.set('BUILD_NETWORK', host_is_linux,
              description: 'Define to 1 to build the Network panel')
