@@ -315,11 +315,13 @@ static void xhairs_length_add_marks (ZoomOptions *self, GtkScale *scale)
     GdkRectangle rect;
     GdkMonitor *monitor;
     GdkDisplay *display;
+    GtkWindow *transient_for;
     gint length, quarter_length;
 
     /* Get maximum dimension of the monitor */
-    display = gtk_widget_get_display (GTK_WIDGET (scale));
-    monitor = gdk_display_get_monitor_at_window (display, gtk_widget_get_window (GTK_WIDGET (scale)));
+    transient_for = gtk_window_get_transient_for (GTK_WINDOW (self));
+    display = gtk_widget_get_display (GTK_WIDGET (transient_for));
+    monitor = gdk_display_get_monitor_at_window (display, gtk_widget_get_window (GTK_WIDGET (transient_for)));
     gdk_monitor_get_workarea (monitor, &rect);
 
     length = MAX (rect.width, rect.height);
