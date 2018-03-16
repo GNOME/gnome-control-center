@@ -58,8 +58,7 @@ wm_common_get_window_manager_property (Atom atom)
 
   return retval;
 }
-
-char*
+static gchar*
 wm_common_get_current_window_manager (void)
 {
   Atom atom = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_NET_WM_NAME", False);
