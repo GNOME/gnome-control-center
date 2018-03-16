@@ -15,9 +15,69 @@ typedef struct _WMCallbackData
 /* Our WM Window */
 static Window wm_window = None;
 
+/*
+ * These push/pop implementations are based on the GDK versions, except that they
+ * use only non-deprecated API.
+ */
+
+static GPtrArray*
+push_error_traps (void)
+{
+  GdkDisplayManager *manager;
+  g_autoptr(GPtrArray) trapped_displays = NULL;
+  g_autoptr(GSList) displays = NULL;
+  GSList *l;
+
+  manager = gdk_display_manager_get ();
+  displays = gdk_display_manager_list_displays (manager);
+  trapped_displays = g_ptr_array_new ();
+
+  for (l = displays; l != NULL; l = l->next)
+    {
+      GdkDisplay *display = l->data;
+
+#ifdef GDK_WINDOWING_X11
+      if (GDK_IS_X11_DISPLAY (display))
+        {
+          gdk_x11_display_error_trap_push (display);
+          g_ptr_array_add (trapped_displays, display);
+        }
+#endif
+    }
+
+  return g_steal_pointer (&trapped_displays);
+}
+
+static gint
+pop_error_traps (GPtrArray *displays)
+{
+  guint i;
+  gint result;
+
+  result = 0;
+
+  for (i = 0; displays && i < displays->len; i++)
+    {
+      GdkDisplay *display;
+      gint code = 0;
+
+      display = g_ptr_array_index (displays, i);
+
+#ifdef GDK_WINDOWING_X11
+      code = gdk_x11_display_error_trap_pop (display);
+#endif
+
+      if (code != 0)
+        result = code;
+    }
+
+  return result;
+}
+
 static char *
 wm_common_get_window_manager_property (Atom atom)
 {
+  g_autoptr(GPtrArray) trapped_displays = NULL;
   Atom utf8_string, type;
   int result;
   char *retval;
@@ -31,7 +91,7 @@ wm_common_get_window_manager_property (Atom atom)
 
   utf8_string = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "UTF8_STRING", False);
 
-  gdk_error_trap_push ();
+  trapped_displays = push_error_traps ();
 
   val = NULL;
   result = XGetWindowProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
@@ -42,8 +102,11 @@ wm_common_get_window_manager_property (Atom atom)
                                &type, &format, &nitems,
                                &bytes_after, (guchar **) &val);
 
-  if (gdk_error_trap_pop () || result != Success ||
-      type != utf8_string || format != 8 || nitems == 0 ||
+  if (pop_error_traps (trapped_displays) ||
+      result != Success ||
+      type != utf8_string ||
+      format != 8 ||
+      nitems == 0 ||
       !g_utf8_validate (val, nitems, NULL))
     {
       retval = NULL;
@@ -109,6 +172,7 @@ wm_common_get_current_keybindings (void)
 static void
 update_wm_window (void)
 {
+  g_autoptr(GPtrArray) trapped_displays = NULL;
   Window *xwindow;
   Atom type;
   gint format;
@@ -126,11 +190,12 @@ update_wm_window (void)
      return;
     }
 
-  gdk_error_trap_push ();
+  trapped_displays = push_error_traps ();
+
   XSelectInput (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), *xwindow, StructureNotifyMask | PropertyChangeMask);
   XSync (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), False);
 
-  if (gdk_error_trap_pop ())
+  if (pop_error_traps (trapped_displays))
     {
        XFree (xwindow);
        wm_window = None;
