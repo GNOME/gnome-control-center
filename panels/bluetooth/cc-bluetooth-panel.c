@@ -260,14 +260,14 @@ add_stack_page (CcBluetoothPanel *self,
 	gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
 
 	if (g_str_equal (name, BLUETOOTH_AIRPLANE_PAGE)) {
-		GtkWidget *button, *alignment;
+		GtkWidget *button;
 
 		button = gtk_button_new_with_label (_("Turn Off Airplane Mode"));
-		alignment = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
-		gtk_container_add (GTK_CONTAINER (alignment), button);
+		gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
+		gtk_widget_set_halign (button, GTK_ALIGN_CENTER);
 		g_signal_connect (G_OBJECT (button), "clicked",
 				  G_CALLBACK (on_airplane_mode_off_clicked), self);
-		gtk_box_pack_start (GTK_BOX (box), alignment, FALSE, FALSE, 24);
+		gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 24);
 	}
 
 	gtk_stack_add_named (GTK_STACK (self->stack), box, name);
