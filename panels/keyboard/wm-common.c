@@ -35,12 +35,12 @@ wm_common_get_window_manager_property (Atom atom)
 
   val = NULL;
   result = XGetWindowProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
-		  	       wm_window,
-			       atom,
-			       0, G_MAXLONG,
-			       False, utf8_string,
-			       &type, &format, &nitems,
-			       &bytes_after, (guchar **) &val);
+                               wm_window,
+                               atom,
+                               0, G_MAXLONG,
+                               False, utf8_string,
+                               &type, &format, &nitems,
+                               &bytes_after, (guchar **) &val);
 
   if (gdk_error_trap_pop () || result != Success ||
       type != utf8_string || format != 8 || nitems == 0 ||
@@ -53,8 +53,7 @@ wm_common_get_window_manager_property (Atom atom)
       retval = g_strndup (val, nitems);
     }
 
-  if (val)
-    XFree (val);
+  g_clear_pointer (&val, XFree);
 
   return retval;
 }
@@ -74,31 +73,37 @@ wm_common_get_current_window_manager (void)
 GStrv
 wm_common_get_current_keybindings (void)
 {
-  Atom keybindings_atom = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_GNOME_WM_KEYBINDINGS", False);
-  char *keybindings = wm_common_get_window_manager_property (keybindings_atom);
-  char **results;
+  g_autofree gchar* keybindings = NULL;
+  g_auto(GStrv) results = NULL;
+  Atom keybindings_atom;
+
+  keybindings_atom = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_GNOME_WM_KEYBINDINGS", False);
+  keybindings = wm_common_get_window_manager_property (keybindings_atom);
 
   if (keybindings)
     {
-      char **p;
-      results = g_strsplit(keybindings, ",", -1);
-      for (p = results; *p; p++)
-	g_strstrip (*p);
-      g_free (keybindings);
+      GStrv p;
+
+      results = g_strsplit (keybindings, ",", -1);
+
+      for (p = results; p && *p; p++)
+        g_strstrip (*p);
     }
   else
     {
-      Atom wm_atom = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_NET_WM_NAME", False);
-      char *wm_name = wm_common_get_window_manager_property (wm_atom);
-      char *to_copy[] = { NULL, NULL };
+      g_autofree gchar *wm_name = NULL;
+      Atom wm_atom;
+      gchar *to_copy[2] = { NULL, NULL };
+
+      wm_atom = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_NET_WM_NAME", False);
+      wm_name = wm_common_get_window_manager_property (wm_atom);
 
       to_copy[0] = wm_name ? wm_name : WM_COMMON_UNKNOWN;
 
       results = g_strdupv (to_copy);
-      g_free (wm_name);
     }
 
-  return results;
+  return g_steal_pointer (&results);
 }
 
 static void
@@ -111,9 +116,9 @@ update_wm_window (void)
   gulong bytes_after;
 
   XGetWindowProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), GDK_ROOT_WINDOW (),
-		      XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_NET_SUPPORTING_WM_CHECK", False),
-		      0, G_MAXLONG, False, XA_WINDOW, &type, &format,
-		      &nitems, &bytes_after, (guchar **) &xwindow);
+                      XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_NET_SUPPORTING_WM_CHECK", False),
+                      0, G_MAXLONG, False, XA_WINDOW, &type, &format,
+                      &nitems, &bytes_after, (guchar **) &xwindow);
 
   if (type != XA_WINDOW)
     {
@@ -132,14 +137,14 @@ update_wm_window (void)
        return;
     }
 
-    wm_window = *xwindow;
-    XFree (xwindow);
+  wm_window = *xwindow;
+  XFree (xwindow);
 }
 
 static GdkFilterReturn
 wm_window_event_filter (GdkXEvent *xev,
-			GdkEvent  *event,
-			gpointer   data)
+                        GdkEvent  *event,
+                        gpointer   data)
 {
   WMCallbackData *ncb_data = (WMCallbackData*) data;
   XEvent *xevent = (XEvent *)xev;
@@ -154,8 +159,7 @@ wm_window_event_filter (GdkXEvent *xev,
        xevent->xproperty.atom == (XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_NET_WM_NAME", False))))
     {
       update_wm_window ();
-      (* ncb_data->func) ((gpointer)wm_common_get_current_window_manager(),
-		   	  ncb_data->data);
+      (* ncb_data->func) ((gpointer) wm_common_get_current_window_manager (), ncb_data->data);
     }
 
   return GDK_FILTER_CONTINUE;
@@ -163,7 +167,7 @@ wm_window_event_filter (GdkXEvent *xev,
 
 gpointer
 wm_common_register_window_manager_change (GFunc    func,
-					  gpointer data)
+                                          gpointer data)
 {
   WMCallbackData *ncb_data;
 
@@ -185,8 +189,8 @@ wm_common_register_window_manager_change (GFunc    func,
 void
 wm_common_unregister_window_manager_change (gpointer id)
 {
-	g_return_if_fail (id != NULL);
+  g_return_if_fail (id != NULL);
 
-	gdk_window_remove_filter (NULL, wm_window_event_filter, id);
-	g_free (id);
+  gdk_window_remove_filter (NULL, wm_window_event_filter, id);
+  g_free (id);
 }
