@@ -67,7 +67,7 @@ parse_start_tag (GMarkupParseContext *ctx,
                  GError             **error)
 {
   KeyList *keylist = (KeyList *) user_data;
-  KeyListEntry key = { 0, };
+  KeyListEntry key;
   const char *name, *schema, *description, *package, *context, *orig_description, *reverse_entry;
   gboolean is_reversed, hidden;
 
