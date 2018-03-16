@@ -71,7 +71,7 @@ wm_common_get_current_window_manager (void)
     return g_strdup (WM_COMMON_UNKNOWN);
 }
 
-char**
+GStrv
 wm_common_get_current_keybindings (void)
 {
   Atom keybindings_atom = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_GNOME_WM_KEYBINDINGS", False);

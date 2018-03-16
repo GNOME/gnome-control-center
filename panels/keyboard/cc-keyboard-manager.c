@@ -524,7 +524,7 @@ reload_sections (CcKeyboardManager *self)
   GHashTable *loaded_files;
   GDir *dir;
   gchar *default_wm_keybindings[] = { "Mutter", "GNOME Shell", NULL };
-  gchar **wm_keybindings;
+  g_auto(GStrv) wm_keybindings = NULL;
   const gchar * const * data_dirs;
   guint i;
 
@@ -601,7 +601,6 @@ reload_sections (CcKeyboardManager *self)
     }
 
   g_hash_table_destroy (loaded_files);
-  g_strfreev (wm_keybindings);
 
   /* Load custom keybindings */
   append_sections_from_gsettings (self);
