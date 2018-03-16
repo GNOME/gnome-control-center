@@ -31,7 +31,6 @@ sources += gnome.compile_resources(
 
 deps = common_deps + [
   goa_dep,
-  libgd_dep,
   dependency('goa-backend-1.0', version: goa_req_version)
 ]
 

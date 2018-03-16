@@ -77,7 +77,6 @@ sources = common_sources + files(
 
 shell_deps = common_deps + [
   libdevice_dep,
-  libgd_dep,
   liblanguage_dep,
   polkit_gobject_dep,
   x11_dep

@@ -87,16 +87,6 @@ libgvc = subproject(
 )
 libgvc_dep = libgvc.get_variable('libgvc_dep')
 
-libgd = subproject(
-  'libgd',
-  default_options: [
-    'static=true',
-    'with-view-common=true',
-    'with-main-view=true'
-  ]
-)
-libgd_dep = libgd.get_variable('libgd_dep')
-
 goa_req_version = '>= 3.25.3'
 pulse_req_version = '>= 2.0'
 
