@@ -426,56 +426,15 @@ effects_slider_changed (GtkRange *slider, ZoomOptions *self)
 }
 
 static void
-zoom_options_finalize (GObject *object)
+zoom_options_constructed (GObject *object)
 {
-  ZoomOptions *self = ZOOM_OPTIONS (object);
-
-  g_clear_object (&self->settings);
-  g_clear_object (&self->application_settings);
-
-  G_OBJECT_CLASS (zoom_options_parent_class)->finalize (object);
-}
-
-static void
-zoom_options_class_init (ZoomOptionsClass *klass)
-{
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-  object_class->finalize = zoom_options_finalize;
-
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/zoom-options.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, brightness_slider);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, centered_radio);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, contrast_slider);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_clip_checkbox);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_enabled_switcher);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_length_slider);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_picker_color_button);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_thickness_scale);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, extend_beyond_checkbox);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, follow_mouse_radio);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, grayscale_slider);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, inverse_enabled_switch);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, magnifier_factor_spin);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, proportional_radio);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, push_radio);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, screen_part_radio);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, screen_position_combobox);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, seeing_zoom_switch);
-}
-
-static void
-zoom_options_init (ZoomOptions *self)
-{
-  PangoAttrList *pango_attrs;
   PangoAttribute *attr;
+  PangoAttrList *pango_attrs;
+  ZoomOptions *self;
 
-  gtk_widget_init_template (GTK_WIDGET (self));
+  self = ZOOM_OPTIONS (object);
 
-  self->settings = g_settings_new ("org.gnome.desktop.a11y.magnifier");
-  self->application_settings = g_settings_new ("org.gnome.desktop.a11y.applications");
+  G_OBJECT_CLASS (zoom_options_parent_class)->constructed (object);
 
   pango_attrs = pango_attr_list_new ();
   attr = pango_attr_scale_new (FONT_SCALE);
@@ -553,6 +512,57 @@ zoom_options_init (ZoomOptions *self)
   gtk_scale_add_mark (GTK_SCALE(self->grayscale_slider), 1.0, GTK_POS_BOTTOM, NULL);
 
   pango_attr_list_unref (pango_attrs);
+}
+
+static void
+zoom_options_finalize (GObject *object)
+{
+  ZoomOptions *self = ZOOM_OPTIONS (object);
+
+  g_clear_object (&self->settings);
+  g_clear_object (&self->application_settings);
+
+  G_OBJECT_CLASS (zoom_options_parent_class)->finalize (object);
+}
+
+static void
+zoom_options_class_init (ZoomOptionsClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->finalize = zoom_options_finalize;
+  object_class->constructed = zoom_options_constructed;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/zoom-options.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, brightness_slider);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, centered_radio);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, contrast_slider);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_clip_checkbox);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_enabled_switcher);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_length_slider);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_picker_color_button);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_thickness_scale);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, extend_beyond_checkbox);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, follow_mouse_radio);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, grayscale_slider);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, inverse_enabled_switch);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, magnifier_factor_spin);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, proportional_radio);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, push_radio);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, screen_part_radio);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, screen_position_combobox);
+  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, seeing_zoom_switch);
+}
+
+static void
+zoom_options_init (ZoomOptions *self)
+{
+  gtk_widget_init_template (GTK_WIDGET (self));
+
+  self->settings = g_settings_new ("org.gnome.desktop.a11y.magnifier");
+  self->application_settings = g_settings_new ("org.gnome.desktop.a11y.applications");
 }
 
 ZoomOptions *
