@@ -164,7 +164,6 @@ deps = common_deps + [
   accounts_dep,
   gdk_pixbuf_dep,
   gnome_desktop_dep,
-  libgd_dep,
   liblanguage_dep,
   krb_dep,
   m_dep,

@@ -43,7 +43,6 @@ sources += gnome.compile_resources(
 deps = common_deps + [
   accounts_dep,
   gnome_desktop_dep,
-  libgd_dep,
   liblanguage_dep,
   polkit_gobject_dep
 ]
