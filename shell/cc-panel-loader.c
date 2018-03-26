@@ -54,6 +54,9 @@ extern GType cc_region_panel_get_type (void);
 extern GType cc_search_panel_get_type (void);
 extern GType cc_sharing_panel_get_type (void);
 extern GType cc_sound_panel_get_type (void);
+#ifdef BUILD_THUNDERBOLT
+extern GType cc_bolt_panel_get_type (void);
+#endif /* BUILD_THUNDERBOLT */
 extern GType cc_ua_panel_get_type (void);
 extern GType cc_user_panel_get_type (void);
 #ifdef BUILD_WACOM
@@ -99,6 +102,9 @@ static struct {
   PANEL_TYPE("search",           cc_search_panel_get_type       ),
   PANEL_TYPE("sharing",          cc_sharing_panel_get_type      ),
   PANEL_TYPE("sound",            cc_sound_panel_get_type        ),
+#ifdef BUILD_THUNDERBOLT
+  PANEL_TYPE("thunderbolt",      cc_bolt_panel_get_type         ),
+#endif
   PANEL_TYPE("universal-access", cc_ua_panel_get_type           ),
   PANEL_TYPE("user-accounts",    cc_user_panel_get_type         ),
 #ifdef BUILD_WACOM
