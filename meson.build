@@ -206,6 +206,7 @@ if host_is_linux_not_s390
                description: 'Define to 1 if libwacom provides definition for 3D styli')
 else
   message('Bluetooth and Wacom panels will not be built (no USB support on this platform)')
+  message('Thunderbolt panel will not be built (not supported on this platform)')
 endif
 config_h.set('BUILD_BLUETOOTH', host_is_linux_not_s390,
              description: 'Define to 1 to build the Bluetooth panel')
@@ -215,6 +216,8 @@ config_h.set('BUILD_WACOM', host_is_linux_not_s390,
              description: 'Define to 1 to build the Wacom panel')
 config_h.set('HAVE_WACOM', host_is_linux_not_s390,
              description: 'Define to 1 if Wacom is supportted')
+config_h.set('BUILD_THUNDERBOLT', host_is_linux_not_s390,
+             description: 'Define to 1 to build the Thunderbolt panel')
 
 # Check for info panel
 gnome_session_libexecdir = get_option('gnome_session_libexecdir')
