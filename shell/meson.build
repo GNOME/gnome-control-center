@@ -1,5 +1,6 @@
 subdir('appdata')
-subdir('completions')
+# Included from main meson.build
+#subdir('shell')
 
 service_conf = configuration_data()
 service_conf.set('bindir', control_center_bindir)
@@ -42,19 +43,16 @@ libshell = static_library(
   c_args: cflags
 )
 
-common_sources = files(
-  'cc-application.c',
+shell_sources = files(
   'cc-editable-entry.c',
   'cc-hostname-entry.c',
-  'cc-panel-loader.c',
   'cc-panel.c',
   'cc-shell-category-view.c',
   'cc-shell-item-view.c',
   'cc-shell-log.c',
   'cc-shell.c',
   'hostname-helper.c',
-  'list-box-helper.c',
-  'main.c'
+  'list-box-helper.c'
 )
 
 resource_data = files(
@@ -63,16 +61,23 @@ resource_data = files(
   'window.ui'
 )
 
-common_sources += gnome.compile_resources(
+shell_sources += gnome.compile_resources(
   'resources',
   meson.project_name() + '.gresource.xml',
   dependencies: resource_data,
   export: true
 )
 
-sources = common_sources + files(
+shell_test_sources = shell_sources + files(
+  'cc-test-window.c'
+)
+
+main_sources = shell_sources + files(
+  'cc-application.c',
+  'cc-panel-loader.c',
   'cc-panel-list.c',
-  'cc-window.c'
+  'cc-window.c',
+  'main.c'
 )
 
 shell_deps = common_deps + [
@@ -89,16 +94,6 @@ endif
 if host_is_linux_not_s390
   shell_deps += wacom_deps
 endif
-
-executable(
-  meson.project_name(),
-  sources,
-  include_directories: top_inc,
-  dependencies: shell_deps,
-  c_args: cflags,
-  link_with: panels_libs + [libshell],
-  install: true
-)
 
 # Because it is confusing and somewhat problematic to directly add and compile
 # cc-panel-loader.o by another directory (i.e. the shell search provider), we

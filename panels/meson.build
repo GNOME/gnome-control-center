@@ -1,4 +1,3 @@
-subdir('common')
 
 panels = [
   'background',
