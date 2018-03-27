@@ -29,6 +29,7 @@
 #include <gdesktop-enums.h>
 #include <math.h>
 
+#include "shell/cc-object-storage.h"
 #include "shell/list-box-helper.h"
 #include <libupower-glib/upower.h>
 
@@ -3117,7 +3118,7 @@ shell_proxy_ready (GObject        *source,
   GDBusProxy *proxy;
   GError *error = NULL;
 
-  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
   if (!proxy)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
@@ -3336,17 +3337,16 @@ cc_display_panel_init (CcDisplayPanel *self)
   g_signal_connect (self, "map", G_CALLBACK (mapped_cb), NULL);
 
   self->priv->shell_cancellable = g_cancellable_new ();
-  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                            G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES |
-                            G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS |
-                            G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-                            NULL,
-                            "org.gnome.Shell",
-                            "/org/gnome/Shell",
-                            "org.gnome.Shell",
-                            self->priv->shell_cancellable,
-                            (GAsyncReadyCallback) shell_proxy_ready,
-                            self);
+  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES |
+                                       G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS |
+                                       G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+                                       "org.gnome.Shell",
+                                       "/org/gnome/Shell",
+                                       "org.gnome.Shell",
+                                       self->priv->shell_cancellable,
+                                       (GAsyncReadyCallback) shell_proxy_ready,
+                                       self);
 
   g_bus_get (G_BUS_TYPE_SESSION,
              self->priv->shell_cancellable,
