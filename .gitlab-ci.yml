@@ -5,6 +5,7 @@ stages:
   - deploy
 
 variables:
+  # dbusmock is missing the dbus dependency
   DEPENDENCIES: accountsservice-devel cheese-libs-devel chrpath clutter-gtk-devel colord-devel
                 colord-gtk-devel cups-devel desktop-file-utils docbook-style-xsl gdk-pixbuf2-devel
                 gettext git glib2-devel gnome-bluetooth-libs-devel gnome-desktop3-devel
@@ -14,6 +15,8 @@ variables:
                 libsoup-devel libwacom-devel libX11-devel libXi-devel libxml2-devel libxslt
                 libXxf86misc-devel meson ModemManager-glib-devel NetworkManager-libnm-devel
                 polkit-devel pulseaudio-libs-devel upower-devel
+                python3-dbusmock python3-gobject xorg-x11-server-Xvfb
+                python3-dbus
 
 
 before_script:
