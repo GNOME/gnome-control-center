@@ -32,6 +32,7 @@
 #include "cc-drawing-area.h"
 #include "cc-tablet-tool-map.h"
 #include "gsd-device-manager.h"
+#include "shell/cc-object-storage.h"
 
 #ifdef GDK_WINDOWING_WAYLAND
 #include <gdk/gdkwayland.h>
@@ -663,7 +664,7 @@ got_osd_proxy_cb (GObject      *source_object,
 
 	self = CC_WACOM_PANEL (data);
 	priv = self->priv;
-	priv->proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+	priv->proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
 
 	g_clear_object (&priv->cancellable);
 
@@ -742,15 +743,14 @@ cc_wacom_panel_init (CcWacomPanel *self)
 
 	priv->cancellable = g_cancellable_new ();
 
-	g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-				  G_DBUS_PROXY_FLAGS_NONE,
-				  NULL,
-				  "org.gnome.Shell",
-				  "/org/gnome/Shell/Wacom",
-				  "org.gnome.Shell.Wacom.PadOsd",
-				  priv->cancellable,
-				  got_osd_proxy_cb,
-				  self);
+  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_NONE,
+                                       "org.gnome.Shell",
+                                       "/org/gnome/Shell/Wacom",
+                                       "org.gnome.Shell.Wacom.PadOsd",
+                                       priv->cancellable,
+                                       got_osd_proxy_cb,
+                                       self);
 
 	/* Stack + Switcher */
 	priv->stack = gtk_stack_new ();
