@@ -25,6 +25,7 @@
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
 
+#include "shell/cc-object-storage.h"
 #include "shell/list-box-helper.h"
 #include "cc-notifications-panel.h"
 #include "cc-notifications-resources.h"
@@ -150,7 +151,7 @@ on_perm_store_ready (GObject *source_object,
   GDBusProxy *proxy;
   GError *error = NULL;
 
-  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
   if (proxy == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
@@ -241,15 +242,14 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
 
   gtk_widget_show (w);
 
-  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                            G_DBUS_PROXY_FLAGS_NONE,
-                            NULL,
-                            "org.freedesktop.impl.portal.PermissionStore",
-                            "/org/freedesktop/impl/portal/PermissionStore",
-                            "org.freedesktop.impl.portal.PermissionStore",
-                            panel->apps_load_cancellable,
-                            on_perm_store_ready,
-                            panel);
+  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_NONE,
+                                       "org.freedesktop.impl.portal.PermissionStore",
+                                       "/org/freedesktop/impl/portal/PermissionStore",
+                                       "org.freedesktop.impl.portal.PermissionStore",
+                                       panel->apps_load_cancellable,
+                                       on_perm_store_ready,
+                                       panel);
 }
 
 static const char *
