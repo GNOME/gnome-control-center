@@ -18,8 +18,8 @@
  *
  */
 
-
 #include "cc-hostname-entry.h"
+#include "cc-object-storage.h"
 #include "hostname-helper.h"
 
 #include <polkit/polkit.h>
@@ -232,14 +232,13 @@ cc_hostname_entry_constructed (GObject *object)
   gtk_widget_set_sensitive (GTK_WIDGET (self),
                             g_permission_get_allowed (permission));
 
-  self->hostnamed_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                                         G_DBUS_PROXY_FLAGS_NONE,
-                                                         NULL,
-                                                         "org.freedesktop.hostname1",
-                                                         "/org/freedesktop/hostname1",
-                                                         "org.freedesktop.hostname1",
-                                                         NULL,
-                                                         &error);
+  self->hostnamed_proxy = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
+                                                                    G_DBUS_PROXY_FLAGS_NONE,
+                                                                    "org.freedesktop.hostname1",
+                                                                    "/org/freedesktop/hostname1",
+                                                                    "org.freedesktop.hostname1",
+                                                                    NULL,
+                                                                    &error);
 
   /* This could only happen if the policy file was installed
    * but not hostnamed, which points to a system bug */
