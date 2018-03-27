@@ -49,7 +49,6 @@ struct _CcColorPanelPrivate
   GPtrArray     *devices;
   GPtrArray     *sensors;
   GCancellable  *cancellable;
-  GDBusProxy    *proxy;
   GSettings     *settings;
   GSettings     *settings_colord;
   GtkBuilder    *builder;
