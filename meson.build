@@ -243,9 +243,23 @@ update_from_nma_in = files('update-from-nma.in')
 
 subdir('data/icons')
 subdir('po')
-subdir('panels')
+subdir('panels/common')
 subdir('shell')
+subdir('panels')
+subdir('shell/completions')
 subdir('search-provider')
+
+# Main executable
+executable(
+  meson.project_name(),
+  main_sources,
+  include_directories: top_inc,
+  dependencies: shell_deps,
+  c_args: cflags,
+  link_with: panels_libs + [libshell],
+  install: true
+)
+
 
 if get_option('documentation')
   subdir('man')
