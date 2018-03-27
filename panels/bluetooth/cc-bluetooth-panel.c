@@ -24,6 +24,7 @@
 
 #include <glib/gi18n-lib.h>
 #include <shell/cc-shell.h>
+#include <shell/cc-object-storage.h>
 #include <bluetooth-settings-widget.h>
 
 #include "cc-bluetooth-panel.h"
@@ -310,20 +311,18 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	self->cancellable = g_cancellable_new ();
 
 	/* RFKill */
-	self->rfkill = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-							    G_DBUS_PROXY_FLAGS_NONE,
-							    NULL,
-							    "org.gnome.SettingsDaemon.Rfkill",
-							    "/org/gnome/SettingsDaemon/Rfkill",
-							    "org.gnome.SettingsDaemon.Rfkill",
-							    NULL, NULL);
-	self->properties = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-								G_DBUS_PROXY_FLAGS_NONE,
-								NULL,
-								"org.gnome.SettingsDaemon.Rfkill",
-								"/org/gnome/SettingsDaemon/Rfkill",
-								"org.freedesktop.DBus.Properties",
-								NULL, NULL);
+	self->rfkill = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
+								 G_DBUS_PROXY_FLAGS_NONE,
+								 "org.gnome.SettingsDaemon.Rfkill",
+								 "/org/gnome/SettingsDaemon/Rfkill",
+								 "org.gnome.SettingsDaemon.Rfkill",
+								 NULL, NULL);
+	self->properties = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
+								     G_DBUS_PROXY_FLAGS_NONE,
+								     "org.gnome.SettingsDaemon.Rfkill",
+								     "/org/gnome/SettingsDaemon/Rfkill",
+								     "org.freedesktop.DBus.Properties",
+								     NULL, NULL);
 
 	self->stack = gtk_stack_new ();
 	gtk_stack_set_homogeneous (GTK_STACK (self->stack), TRUE);
@@ -343,10 +342,10 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	gtk_container_add (GTK_CONTAINER (self), self->stack);
 
 	airplane_mode_changed (NULL, NULL, NULL, self);
-	g_signal_connect (self->rfkill, "g-properties-changed",
-			  G_CALLBACK (airplane_mode_changed), self);
-	g_signal_connect_swapped (G_OBJECT (self->widget), "adapter-status-changed",
-				  G_CALLBACK (cc_bluetooth_panel_update_power), self);
+	g_signal_connect_object (self->rfkill, "g-properties-changed",
+                                 G_CALLBACK (airplane_mode_changed), self, 0);
+	g_signal_connect_object (G_OBJECT (self->widget), "adapter-status-changed",
+                                 G_CALLBACK (cc_bluetooth_panel_update_power), self, G_CONNECT_SWAPPED);
 
 	g_signal_connect (G_OBJECT (WID ("switch_bluetooth")), "notify::active",
 			  G_CALLBACK (power_callback), self);
