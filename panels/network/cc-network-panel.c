@@ -23,6 +23,8 @@
 #include <glib/gi18n.h>
 #include <stdlib.h>
 
+#include "shell/cc-object-storage.h"
+
 #include "cc-network-panel.h"
 #include "cc-network-resources.h"
 
@@ -876,16 +878,24 @@ cc_network_panel_init (CcNetworkPanel *panel)
         /* add the virtual proxy device */
         panel_add_proxy_device (panel);
 
+        /* Create and store a NMClient instance if it doesn't exist yet */
+        if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT)) {
+                NMClient *client = nm_client_new (NULL, NULL);
+                cc_object_storage_add_object (CC_OBJECT_NMCLIENT, client);
+                g_object_unref (client);
+        }
+
         /* use NetworkManager client */
-        panel->client = nm_client_new (NULL, NULL);
-        g_signal_connect (panel->client, "notify::nm-running" ,
-                          G_CALLBACK (manager_running), panel);
-        g_signal_connect (panel->client, "notify::active-connections",
-                          G_CALLBACK (active_connections_changed), panel);
-        g_signal_connect (panel->client, "device-added",
-                          G_CALLBACK (device_added_cb), panel);
-        g_signal_connect (panel->client, "device-removed",
-                          G_CALLBACK (device_removed_cb), panel);
+        panel->client = cc_object_storage_get_object (CC_OBJECT_NMCLIENT);
+
+        g_signal_connect_object (panel->client, "notify::nm-running" ,
+                                 G_CALLBACK (manager_running), panel, 0);
+        g_signal_connect_object (panel->client, "notify::active-connections",
+                                 G_CALLBACK (active_connections_changed), panel, 0);
+        g_signal_connect_object (panel->client, "device-added",
+                                 G_CALLBACK (device_added_cb), panel, 0);
+        g_signal_connect_object (panel->client, "device-removed",
+                                 G_CALLBACK (device_removed_cb), panel, 0);
 
         /* Setup ModemManager client */
         system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
@@ -907,8 +917,8 @@ cc_network_panel_init (CcNetworkPanel *panel)
         }
 
         /* add remote settings such as VPN settings as virtual devices */
-        g_signal_connect (panel->client, NM_CLIENT_CONNECTION_ADDED,
-                          G_CALLBACK (notify_connection_added_cb), panel);
+        g_signal_connect_object (panel->client, NM_CLIENT_CONNECTION_ADDED,
+                                 G_CALLBACK (notify_connection_added_cb), panel, 0);
 
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         g_signal_connect_after (toplevel, "map", G_CALLBACK (on_toplevel_map), panel);
