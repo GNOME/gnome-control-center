@@ -23,6 +23,7 @@
 #include "net-device-wifi.h"
 #include "network-dialogs.h"
 
+#include "shell/cc-object-storage.h"
 #include "shell/list-box-helper.h"
 
 #include <glib/gi18n.h>
@@ -421,7 +422,7 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
   GError *error;
 
   error = NULL;
-  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
 
   if (error)
     {
@@ -618,37 +619,47 @@ cc_wifi_panel_init (CcWifiPanel *self)
   self->cancellable = g_cancellable_new ();
   self->devices = g_ptr_array_new_with_free_func (g_object_unref);
 
+  /* Create and store a NMClient instance if it doesn't exist yet */
+  if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT))
+    {
+      NMClient *client = nm_client_new (NULL, NULL);
+      cc_object_storage_add_object (CC_OBJECT_NMCLIENT, client);
+      g_object_unref (client);
+    }
+
   /* Load NetworkManager */
-  self->client = nm_client_new (NULL, NULL);
+  self->client = cc_object_storage_get_object (CC_OBJECT_NMCLIENT);
 
-  g_signal_connect (self->client,
-                    "device-added",
-                    G_CALLBACK (device_added_cb),
-                    self);
+  g_signal_connect_object (self->client,
+                           "device-added",
+                           G_CALLBACK (device_added_cb),
+                           self,
+                           0);
 
-  g_signal_connect (self->client,
-                    "device-removed",
-                    G_CALLBACK (device_removed_cb),
-                    self);
+  g_signal_connect_object (self->client,
+                           "device-removed",
+                           G_CALLBACK (device_removed_cb),
+                           self,
+                           0);
 
-  g_signal_connect (self->client,
-                    "notify::wireless-enabled",
-                    G_CALLBACK (wireless_enabled_cb),
-                    self);
+  g_signal_connect_object (self->client,
+                           "notify::wireless-enabled",
+                           G_CALLBACK (wireless_enabled_cb),
+                           self,
+                           0);
 
   /* Load Wi-Fi devices */
   load_wifi_devices (self);
 
   /* Acquire Airplane Mode proxy */
-  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                            G_DBUS_PROXY_FLAGS_NONE,
-                            NULL,
-                            "org.gnome.SettingsDaemon.Rfkill",
-                            "/org/gnome/SettingsDaemon/Rfkill",
-                            "org.gnome.SettingsDaemon.Rfkill",
-                            self->cancellable,
-                            rfkill_proxy_acquired_cb,
-                            self);
+  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_NONE,
+                                       "org.gnome.SettingsDaemon.Rfkill",
+                                       "/org/gnome/SettingsDaemon/Rfkill",
+                                       "org.gnome.SettingsDaemon.Rfkill",
+                                       self->cancellable,
+                                       rfkill_proxy_acquired_cb,
+                                       self);
 
   /* Handle comment-line arguments after loading devices */
   handle_argv (self);
