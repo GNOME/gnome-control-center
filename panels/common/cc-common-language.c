@@ -33,6 +33,7 @@
 #include <libgnome-desktop/gnome-languages.h>
 
 #include "cc-common-language.h"
+#include "shell/cc-object-storage.h"
 
 static char *get_lang_for_user_object_path (const char *path);
 
@@ -175,14 +176,13 @@ get_lang_for_user_object_path (const char *path)
 	GVariant *props;
 	char *lang;
 
-	user = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-					      G_DBUS_PROXY_FLAGS_NONE,
-					      NULL,
-					      "org.freedesktop.Accounts",
-					      path,
-					      "org.freedesktop.Accounts.User",
-					      NULL,
-					      &error);
+	user = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
+							 G_DBUS_PROXY_FLAGS_NONE,
+							 "org.freedesktop.Accounts",
+							 path,
+							 "org.freedesktop.Accounts.User",
+							 NULL,
+							 &error);
 	if (user == NULL) {
 		g_warning ("Failed to get proxy for user '%s': %s",
 			   path, error->message);
