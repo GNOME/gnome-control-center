@@ -18,6 +18,8 @@
 
 #include <config.h>
 
+#include "shell/cc-object-storage.h"
+
 #include "cc-printers-panel.h"
 #include "cc-printers-resources.h"
 #include "pp-printer.h"
@@ -608,14 +610,13 @@ attach_to_cups_notifier_cb (GObject      *source_object,
       priv->subscription_renewal_id =
         g_timeout_add_seconds (RENEW_INTERVAL, renew_subscription, self);
 
-      priv->cups_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                                        0,
-                                                        NULL,
-                                                        CUPS_DBUS_NAME,
-                                                        CUPS_DBUS_PATH,
-                                                        CUPS_DBUS_INTERFACE,
-                                                        NULL,
-                                                        &error);
+      priv->cups_proxy = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
+                                                                   G_DBUS_PROXY_FLAGS_NONE,
+                                                                   CUPS_DBUS_NAME,
+                                                                   CUPS_DBUS_PATH,
+                                                                   CUPS_DBUS_INTERFACE,
+                                                                   NULL,
+                                                                   &error);
 
       if (!priv->cups_proxy)
         {
