@@ -29,6 +29,7 @@
 #include <NetworkManager.h>
 #endif
 
+#include "shell/cc-object-storage.h"
 #include "shell/list-box-helper.h"
 #include "cc-power-panel.h"
 #include "cc-power-resources.h"
@@ -1083,7 +1084,7 @@ got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
   CcPowerPanel *self;
   GDBusProxy *screen_proxy;
 
-  screen_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  screen_proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
   if (screen_proxy == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
@@ -1096,8 +1097,8 @@ got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
   self->priv->screen_proxy = screen_proxy;
 
   /* we want to change the bar if the user presses brightness buttons */
-  g_signal_connect (screen_proxy, "g-properties-changed",
-                    G_CALLBACK (on_screen_property_change), self);
+  g_signal_connect_object (screen_proxy, "g-properties-changed",
+                           G_CALLBACK (on_screen_property_change), self, 0);
 
   sync_screen_brightness (self);
   als_enabled_state_changed (self);
@@ -1120,7 +1121,7 @@ got_kbd_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
   CcPowerPanel *self;
   GDBusProxy *kbd_proxy;
 
-  kbd_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  kbd_proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
   if (kbd_proxy == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
@@ -1133,8 +1134,8 @@ got_kbd_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
   self->priv->kbd_proxy = kbd_proxy;
 
   /* we want to change the bar if the user presses brightness buttons */
-  g_signal_connect (kbd_proxy, "g-properties-changed",
-                    G_CALLBACK (on_kbd_property_change), self);
+  g_signal_connect_object (kbd_proxy, "g-properties-changed",
+                           G_CALLBACK (on_kbd_property_change), self, 0);
 
   sync_kbd_brightness (self);
 }
@@ -1441,12 +1442,30 @@ nm_device_changed (NMClient     *client,
 }
 
 static void
+setup_nm_client (CcPowerPanel *self,
+                 NMClient     *client)
+{
+  CcPowerPanelPrivate *priv = self->priv;
+
+  priv->nm_client = client;
+
+  g_signal_connect_object (priv->nm_client, "notify",
+                           G_CALLBACK (nm_client_state_changed), self, 0);
+  g_signal_connect_object (priv->nm_client, "device-added",
+                           G_CALLBACK (nm_device_changed), self, 0);
+  g_signal_connect_object (priv->nm_client, "device-removed",
+                           G_CALLBACK (nm_device_changed), self, 0);
+
+  nm_client_state_changed (priv->nm_client, NULL, self);
+  nm_device_changed (priv->nm_client, NULL, self);
+}
+
+static void
 nm_client_ready_cb (GObject *source_object,
                     GAsyncResult *res,
                     gpointer user_data)
 {
   CcPowerPanel *self;
-  CcPowerPanelPrivate *priv;
   NMClient *client;
   GError *error = NULL;
 
@@ -1467,18 +1486,12 @@ nm_client_ready_cb (GObject *source_object,
     }
 
   self = user_data;
-  priv = self->priv;
-  priv->nm_client = client;
 
-  g_signal_connect (priv->nm_client, "notify",
-                    G_CALLBACK (nm_client_state_changed), self);
-  g_signal_connect (priv->nm_client, "device-added",
-                    G_CALLBACK (nm_device_changed), self);
-  g_signal_connect (priv->nm_client, "device-removed",
-                    G_CALLBACK (nm_device_changed), self);
+  /* Setup the client */
+  setup_nm_client (self, client);
 
-  nm_client_state_changed (priv->nm_client, NULL, self);
-  nm_device_changed (priv->nm_client, NULL, self);
+  /* Store the object in the cache too */
+  cc_object_storage_add_object (CC_OBJECT_NMCLIENT, client);
 }
 
 #endif
@@ -1648,13 +1661,12 @@ iio_proxy_appeared_cb (GDBusConnection *connection,
   GError *error = NULL;
 
   self->priv->iio_proxy =
-    g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                   G_DBUS_PROXY_FLAGS_NONE,
-                                   NULL,
-                                   "net.hadess.SensorProxy",
-                                   "/net/hadess/SensorProxy",
-                                   "net.hadess.SensorProxy",
-                                   NULL, &error);
+    cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
+                                              G_DBUS_PROXY_FLAGS_NONE,
+                                              "net.hadess.SensorProxy",
+                                              "/net/hadess/SensorProxy",
+                                              "net.hadess.SensorProxy",
+                                              NULL, &error);
   if (error != NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
@@ -1887,29 +1899,35 @@ add_power_saving_section (CcPowerPanel *self)
   g_signal_connect (G_OBJECT (priv->mobile_switch), "notify::active",
                     G_CALLBACK (mobile_switch_changed), self);
 
-  nm_client_new_async (priv->cancellable, nm_client_ready_cb, self);
+  /* Create and store a NMClient instance if it doesn't exist yet */
+  if (cc_object_storage_has_object (CC_OBJECT_NMCLIENT))
+    setup_nm_client (self, cc_object_storage_get_object (CC_OBJECT_NMCLIENT));
+  else
+    nm_client_new_async (priv->cancellable, nm_client_ready_cb, self);
 
   g_signal_connect (G_OBJECT (priv->wifi_switch), "notify::active",
                     G_CALLBACK (wifi_switch_changed), self);
 #endif
 
 #ifdef HAVE_BLUETOOTH
-  priv->bt_rfkill = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-						   G_DBUS_PROXY_FLAGS_NONE,
-						   NULL,
-						   "org.gnome.SettingsDaemon.Rfkill",
-						   "/org/gnome/SettingsDaemon/Rfkill",
-						   "org.gnome.SettingsDaemon.Rfkill",
-						   NULL, NULL);
+
+  priv->bt_rfkill = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
+                                                              G_DBUS_PROXY_FLAGS_NONE,
+                                                              "org.gnome.SettingsDaemon.Rfkill",
+                                                              "/org/gnome/SettingsDaemon/Rfkill",
+                                                              "org.gnome.SettingsDaemon.Rfkill",
+                                                              NULL,
+                                                              NULL);
+
   if (priv->bt_rfkill)
     {
-      priv->bt_properties = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-							   G_DBUS_PROXY_FLAGS_NONE,
-							   NULL,
-							   "org.gnome.SettingsDaemon.Rfkill",
-							   "/org/gnome/SettingsDaemon/Rfkill",
-							   "org.freedesktop.DBus.Properties",
-							   NULL, NULL);
+      priv->bt_properties = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
+                                                                      G_DBUS_PROXY_FLAGS_NONE,
+                                                                      "org.gnome.SettingsDaemon.Rfkill",
+                                                                      "/org/gnome/SettingsDaemon/Rfkill",
+                                                                      "org.freedesktop.DBus.Properties",
+                                                                      NULL,
+                                                                      NULL);
     }
 
   row = no_prelight_row_new ();
@@ -1944,8 +1962,8 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_show_all (box);
   gtk_widget_set_no_show_all (row, TRUE);
   priv->bt_row = row;
-  g_signal_connect_swapped (G_OBJECT (priv->bt_rfkill), "g-properties-changed",
-			G_CALLBACK (bt_powered_state_changed), self);
+  g_signal_connect_object (priv->bt_rfkill, "g-properties-changed",
+                           G_CALLBACK (bt_powered_state_changed), self, G_CONNECT_SWAPPED);
   g_signal_connect (G_OBJECT (priv->bt_switch), "notify::active",
 		G_CALLBACK (bt_switch_changed), self);
 
@@ -2509,24 +2527,22 @@ cc_power_panel_init (CcPowerPanel *self)
 
   priv->cancellable = g_cancellable_new ();
 
-  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                            G_DBUS_PROXY_FLAGS_NONE,
-                            NULL,
-                            "org.gnome.SettingsDaemon.Power",
-                            "/org/gnome/SettingsDaemon/Power",
-                            "org.gnome.SettingsDaemon.Power.Screen",
-                            priv->cancellable,
-                            got_screen_proxy_cb,
-                            self);
-  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                            G_DBUS_PROXY_FLAGS_NONE,
-                            NULL,
-                            "org.gnome.SettingsDaemon.Power",
-                            "/org/gnome/SettingsDaemon/Power",
-                            "org.gnome.SettingsDaemon.Power.Keyboard",
-                            priv->cancellable,
-                            got_kbd_proxy_cb,
-                            self);
+  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_NONE,
+                                       "org.gnome.SettingsDaemon.Power",
+                                       "/org/gnome/SettingsDaemon/Power",
+                                       "org.gnome.SettingsDaemon.Power.Screen",
+                                       priv->cancellable,
+                                       got_screen_proxy_cb,
+                                       self);
+  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_NONE,
+                                       "org.gnome.SettingsDaemon.Power",
+                                       "/org/gnome/SettingsDaemon/Power",
+                                       "org.gnome.SettingsDaemon.Power.Keyboard",
+                                       priv->cancellable,
+                                       got_kbd_proxy_cb,
+                                       self);
 
   priv->chassis_type = get_chassis_type (priv->cancellable);
 
