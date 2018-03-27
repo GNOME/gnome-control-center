@@ -554,6 +554,8 @@ panel_remove_device (CcNetworkPanel *panel, NMDevice *device)
         if (object == NULL)
                 return;
 
+        /* NMObject will not fire the "removed" signal, so handle the UI removal explicitly */
+        object_removed_cb (object, panel);
         g_ptr_array_remove (panel->devices, object);
 
         /* update vpn widgets */
