@@ -77,3 +77,36 @@ panels_libs += static_library(
   c_args: cflags,
   link_with: libconnection_editor
 )
+
+
+test_cflags = cflags
+test_cflags += [
+  '-DNETWORKMANAGER_COMPILATION=NM_NETWORKMANAGER_COMPILATION_WITH_GLIB',
+  '-DTEST_NM_SERVICE="@0@"'.format(join_paths(meson.source_root(), 'panels', 'network', 'nm-utils', 'test-networkmanager-service.py')),
+]
+
+test_sources = sources + shell_test_sources
+test_sources += files('nm-utils/nm-test-utils-impl.c')
+test_sources += files('test-network-panel.c')
+
+exe = executable(
+  'test-network-panel',
+  sources: test_sources,
+  include_directories: [top_inc, include_directories('nm-utils')],
+  dependencies: shell_deps + deps,
+  c_args: test_cflags,
+  link_with: libconnection_editor
+)
+
+envs = [
+#  'G_DEBUG=fatal_warnings',
+  'G_MESSAGES_DEBUG=all',
+  'BUILDDIR=' + meson.current_build_dir(),
+  'TOP_BUILDDIR=' + meson.build_root()
+]
+
+test('test-network-panel',
+  find_program('test-network-panel.py'),
+  env: envs,
+  timeout: 10
+)
