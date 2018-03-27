@@ -46,6 +46,7 @@ common_sources = files(
   'cc-application.c',
   'cc-editable-entry.c',
   'cc-hostname-entry.c',
+  'cc-object-storage.c',
   'cc-panel-loader.c',
   'cc-panel.c',
   'cc-shell-category-view.c',
