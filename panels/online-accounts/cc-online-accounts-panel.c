@@ -32,6 +32,7 @@
 #include "cc-online-accounts-panel.h"
 #include "cc-online-accounts-resources.h"
 
+#include "shell/cc-object-storage.h"
 #include "shell/list-box-helper.h"
 
 struct _CcGoaPanel
@@ -426,7 +427,6 @@ cc_goa_panel_finalize (GObject *object)
 static void
 cc_goa_panel_init (CcGoaPanel *panel)
 {
-  GError *error;
   GNetworkMonitor *monitor;
 
   g_resources_register (cc_online_accounts_get_resource ());
@@ -461,32 +461,44 @@ cc_goa_panel_init (CcGoaPanel *panel)
                           panel->providers_listbox, "sensitive",
                           G_BINDING_SYNC_CREATE);
 
-  /* TODO: probably want to avoid _sync() ... */
-  error = NULL;
-  panel->client = goa_client_new_sync (NULL /* GCancellable */, &error);
-  if (panel->client == NULL)
+  if (!cc_object_storage_has_object (CC_OBJECT_GOACLIENT))
     {
-      g_warning ("Error getting a GoaClient: %s (%s, %d)",
-                 error->message, g_quark_to_string (error->domain), error->code);
-      gtk_widget_set_sensitive (GTK_WIDGET (panel), FALSE);
-      g_error_free (error);
-      return;
+      g_autoptr(GoaClient) client = NULL;
+      g_autoptr(GError) error = NULL;
+
+      /* TODO: probably want to avoid _sync() ... */
+      client = goa_client_new_sync (NULL /* GCancellable */, &error);
+
+      if (client == NULL)
+        {
+          g_warning ("Error getting a GoaClient: %s (%s, %d)",
+                     error->message, g_quark_to_string (error->domain), error->code);
+          gtk_widget_set_sensitive (GTK_WIDGET (panel), FALSE);
+          return;
+        }
+
+      cc_object_storage_add_object (CC_OBJECT_GOACLIENT, client);
     }
 
-  g_signal_connect (panel->client,
-                    "account-added",
-                    G_CALLBACK (on_account_added),
-                    panel);
+  panel->client = cc_object_storage_get_object (CC_OBJECT_GOACLIENT);
 
-  g_signal_connect (panel->client,
-                    "account-changed",
-                    G_CALLBACK (on_account_changed),
-                    panel);
+  g_signal_connect_object (panel->client,
+                           "account-added",
+                           G_CALLBACK (on_account_added),
+                           panel,
+                           0);
 
-  g_signal_connect (panel->client,
-                    "account-removed",
-                    G_CALLBACK (on_account_removed),
-                    panel);
+  g_signal_connect_object (panel->client,
+                           "account-changed",
+                           G_CALLBACK (on_account_changed),
+                           panel,
+                           0);
+
+  g_signal_connect_object (panel->client,
+                           "account-removed",
+                           G_CALLBACK (on_account_removed),
+                           panel,
+                           0);
 
   fill_accounts_listbox (panel);
   goa_provider_get_all (get_all_providers_cb, panel);
