@@ -305,12 +305,15 @@ set_active_panel_from_id (CcShell      *shell,
                           GVariant     *parameters,
                           GError      **error)
 {
+  g_autoptr(GIcon) gicon = NULL;
+  g_autofree gchar *name = NULL;
   GtkTreeIter iter;
-  gboolean iter_valid;
-  gchar *name = NULL;
-  GIcon *gicon = NULL;
-  CcWindow *self = CC_WINDOW (shell);
   GtkWidget *old_panel;
+  CcWindow *self;
+  gboolean iter_valid;
+  gboolean activated;
+
+  self = CC_WINDOW (shell);
 
   /* When loading the same panel again, just set its parameters */
   if (g_strcmp0 (self->current_panel_id, start_id) == 0)
@@ -349,26 +352,25 @@ set_active_panel_from_id (CcShell      *shell,
   if (!name)
     {
       g_warning ("Could not find settings panel \"%s\"", start_id);
-    }
-  else if (!activate_panel (CC_WINDOW (shell), start_id, parameters, name, gicon))
-    {
-      /* Failed to activate the panel for some reason,
-       * let's keep the old panel around instead */
-    }
-  else
-    {
-      /* Successful activation */
-      g_free (self->current_panel_id);
-      self->current_panel_id = g_strdup (start_id);
-
-      if (old_panel)
-        gtk_container_remove (GTK_CONTAINER (self->stack), old_panel);
-
-      cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), start_id);
+      return TRUE;
     }
 
-  g_clear_pointer (&name, g_free);
-  g_clear_object (&gicon);
+  /* Activate the panel */
+  activated = activate_panel (CC_WINDOW (shell), start_id, parameters, name, gicon);
+
+  /* Failed to activate the panel for some reason, let's keep the old
+   * panel around instead */
+  if (!activated)
+    return TRUE;
+
+  /* Successful activation */
+  g_free (self->current_panel_id);
+  self->current_panel_id = g_strdup (start_id);
+
+  if (old_panel)
+    gtk_container_remove (GTK_CONTAINER (self->stack), old_panel);
+
+  cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), start_id);
 
   return TRUE;
 }
@@ -387,13 +389,10 @@ set_active_panel (CcWindow *shell,
 
       /* set the new panel */
       if (panel)
-        {
-          shell->active_panel = g_object_ref (panel);
-        }
+        shell->active_panel = g_object_ref (panel);
       else
-        {
-          shell_show_overview_page (shell);
-        }
+        shell_show_overview_page (shell);
+
       g_object_notify (G_OBJECT (shell), "active-panel");
     }
 }
