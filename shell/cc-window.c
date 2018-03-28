@@ -20,6 +20,8 @@
  * Author: Thomas Wood <thos@gnome.org>
  */
 
+#define G_LOG_DOMAIN "cc-window"
+
 #include <config.h>
 
 #include "cc-window.h"
@@ -31,6 +33,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <gdk/gdkx.h>
 #include <string.h>
+#include <time.h>
 
 #include "cc-panel.h"
 #include "cc-shell.h"
@@ -119,11 +122,15 @@ activate_panel (CcWindow    *self,
 {
   GtkWidget *box, *title_widget;
   const gchar *icon_name;
+  clock_t start, end;
 
   if (!id)
     return FALSE;
 
   g_settings_set_string (self->settings, "last-panel", id);
+
+  /* Begin the profile */
+  start = clock ();
 
   self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, parameters));
   cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (self->current_panel));
@@ -155,6 +162,13 @@ activate_panel (CcWindow    *self,
   gtk_header_bar_set_custom_title (GTK_HEADER_BAR (self->panel_headerbar), title_widget);
 
   self->current_panel_box = box;
+
+  /* Finish profiling */
+  end = clock ();
+
+  g_debug ("Time to open panel '%s': %lfms",
+           name,
+           1000.0 * (end - start) / (gdouble) CLOCKS_PER_SEC);
 
   return TRUE;
 }
