@@ -53,7 +53,7 @@ struct _CcKeyboardPanel
   guint               search_bar_handler_id;
 
   /* Shortcuts */
-  GtkWidget          *listbox;
+  GtkWidget          *shortcuts_listbox;
   GtkListBoxRow      *add_shortcut_row;
   GtkSizeGroup       *accelerator_sizegroup;
 
@@ -198,7 +198,7 @@ reset_all_clicked_cb (CcKeyboardPanel *self)
 
   if (response == GTK_RESPONSE_ACCEPT)
     {
-      gtk_container_foreach (GTK_CONTAINER (self->listbox),
+      gtk_container_foreach (GTK_CONTAINER (self->shortcuts_listbox),
                              reset_all_shortcuts_cb,
                              self);
     }
@@ -308,7 +308,7 @@ add_item (CcKeyboardPanel *self,
                           row_data_new (item, section_id, section_title),
                           (GDestroyNotify) row_data_free);
 
-  gtk_container_add (GTK_CONTAINER (self->listbox), row);
+  gtk_container_add (GTK_CONTAINER (self->shortcuts_listbox), row);
 }
 
 static void
@@ -317,7 +317,7 @@ remove_item (CcKeyboardPanel *self,
 {
   GList *children, *l;
 
-  children = gtk_container_get_children (GTK_CONTAINER (self->listbox));
+  children = gtk_container_get_children (GTK_CONTAINER (self->shortcuts_listbox));
 
   for (l = children; l != NULL; l = l->next)
     {
@@ -327,7 +327,7 @@ remove_item (CcKeyboardPanel *self,
 
       if (row_data->item == item)
         {
-          gtk_container_remove (GTK_CONTAINER (self->listbox), l->data);
+          gtk_container_remove (GTK_CONTAINER (self->shortcuts_listbox), l->data);
           break;
         }
     }
@@ -680,7 +680,7 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, add_shortcut_row);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, empty_search_placeholder);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, shortcuts_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_entry);
@@ -729,22 +729,22 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
   /* Shortcut editor dialog */
   self->shortcut_editor = cc_keyboard_shortcut_editor_new (self->manager);
 
-  /* Setup the shortcuts listbox */
-  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->listbox),
+  /* Setup the shortcuts shortcuts_listbox */
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->shortcuts_listbox),
                               sort_function,
                               self,
                               NULL);
 
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->listbox),
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->shortcuts_listbox),
                                 header_function,
                                 self,
                                 NULL);
 
-  gtk_list_box_set_filter_func (GTK_LIST_BOX (self->listbox),
+  gtk_list_box_set_filter_func (GTK_LIST_BOX (self->shortcuts_listbox),
                                 filter_function,
                                 self,
                                 NULL);
 
-  gtk_list_box_set_placeholder (GTK_LIST_BOX (self->listbox), self->empty_search_placeholder);
+  gtk_list_box_set_placeholder (GTK_LIST_BOX (self->shortcuts_listbox), self->empty_search_placeholder);
 }
 
