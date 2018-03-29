@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcAltCharsKeyDialog" parent="GtkDialog">
+    <property name="modal">True</property>
+    <property name="can_focus">False</property>
+    <property name="resizable">False</property>
+    <property name="type_hint">dialog</property>
+    <property name="title" translatable="yes">Alternate Characters Key</property>
+    <signal name="delete-event" handler="gtk_widget_hide_on_delete" />
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin">18</property>
+            <property name="orientation">vertical</property>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">6</property>
+                <property name="margin_bottom">12</property>
+                <property name="label" translatable="yes">The alternate characters key can be used to enter additional characters. These are sometimes printed as a third-option on your keyboard.</property>
+                <property name="wrap">True</property>
+                <property name="width_chars">40</property>
+                <property name="max_width_chars">40</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkGrid">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="row_spacing">6</property>
+                <property name="column_spacing">6</property>
+                <property name="column_homogeneous">True</property>
+
+                <child>
+                  <object class="GtkRadioButton" id="leftalt_radio">
+                    <property name="label" translatable="yes">Left Alt</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="active">True</property>
+                    <property name="draw_indicator">True</property>
+                    <signal name="toggled" handler="on_active_lv3_changed_cb" object="CcAltCharsKeyDialog" swapped="no" />
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <object class="GtkRadioButton" id="rightalt_radio">
+                    <property name="label" translatable="yes">Right Alt</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="draw_indicator">True</property>
+                    <property name="group">leftalt_radio</property>
+                    <signal name="toggled" handler="on_active_lv3_changed_cb" object="CcAltCharsKeyDialog" swapped="no" />
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <object class="GtkRadioButton" id="leftsuper_radio">
+                    <property name="label" translatable="yes">Left Super</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="draw_indicator">True</property>
+                    <property name="group">leftalt_radio</property>
+                    <signal name="toggled" handler="on_active_lv3_changed_cb" object="CcAltCharsKeyDialog" swapped="no" />
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">1</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <object class="GtkRadioButton" id="rightsuper_radio">
+                    <property name="label" translatable="yes">Right Super</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="draw_indicator">True</property>
+                    <property name="group">leftalt_radio</property>
+                    <signal name="toggled" handler="on_active_lv3_changed_cb" object="CcAltCharsKeyDialog" swapped="no" />
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">1</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <object class="GtkRadioButton" id="menukey_radio">
+                    <property name="label" translatable="yes">Menu key</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="draw_indicator">True</property>
+                    <property name="group">leftalt_radio</property>
+                    <signal name="toggled" handler="on_active_lv3_changed_cb" object="CcAltCharsKeyDialog" swapped="no" />
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">2</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <object class="GtkRadioButton" id="rightctrl_radio">
+                    <property name="label" translatable="yes">Right Ctrl</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="draw_indicator">True</property>
+                    <property name="group">leftalt_radio</property>
+                    <signal name="toggled" handler="on_active_lv3_changed_cb" object="CcAltCharsKeyDialog" swapped="no" />
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">2</property>
+                  </packing>
+                </child>
+
+              </object>
+            </child>
+
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child internal-child="headerbar">
+      <object class="GtkHeaderBar">
+        <property name="can_focus">False</property>
+        <property name="show_close_button">True</property>
+      </object>
+    </child>
+  </template>
+</interface>
