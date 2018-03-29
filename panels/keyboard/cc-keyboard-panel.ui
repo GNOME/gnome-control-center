@@ -53,6 +53,102 @@
                 <property name="margin_right">18</property>
                 <property name="spacing">12</property>
                 <property name="halign">center</property>
+		<child>
+                  <object class="GtkFrame">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkListBox" id="alternate_chars_listbox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="selection-mode">none</property>
+                        <property name="width-request">250</property>
+                        <signal name="row-activated" handler="alternate_chars_activated" object="CcKeyboardPanel" swapped="no" />
+                        <child>
+                          <object class="GtkListBoxRow">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="hexpand">True</property>
+                                <property name="expand">True</property>
+                                <property name="border_width">6</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="GtkLabel" id="heading_alternate_chars">
+                                        <property name="hexpand">True</property>
+                                        <property name="expand">True</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_start">12</property>
+                                        <property name="margin_end">12</property>
+                                        <property name="margin_top">6</property>
+                                        <property name="margin_bottom">0</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">_Alternate Characters Key</property>
+                                        <property name="use_underline">True</property>
+                                        <property name="mnemonic_widget">value_alternate_chars</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="subtitle_alternate_chars">
+                                        <property name="hexpand">True</property>
+                                        <property name="expand">True</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_start">12</property>
+                                        <property name="margin_end">12</property>
+                                        <property name="margin_top">0</property>
+                                        <property name="margin_bottom">6</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">Hold down and type to enter different characters</property>
+                                        <property name="use_underline">False</property>
+                                        <style>
+                                          <class name="dim-label"/>
+                                        </style>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="value_alternate_chars">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="margin_start">12</property>
+                                    <property name="margin_end">12</property>
+                                    <property name="margin_top">12</property>
+                                    <property name="margin_bottom">12</property>
+                                    <property name="label" translatable="no">Right Alt</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
