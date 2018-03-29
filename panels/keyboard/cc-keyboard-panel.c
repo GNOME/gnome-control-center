@@ -57,6 +57,10 @@ struct _CcKeyboardPanel
   GtkListBoxRow      *add_shortcut_row;
   GtkSizeGroup       *accelerator_sizegroup;
 
+  /* Alternate characters key */
+  GSettings          *input_source_settings;
+  GtkWidget          *value_alternate_chars;
+
   /* Custom shortcut dialog */
   GtkWidget          *shortcut_editor;
 
@@ -76,6 +80,21 @@ static const gchar* custom_css =
 "button.reset-shortcut-button {"
 "    padding: 0;"
 "}";
+
+
+#define DEFAULT_LV3_OPTION 5
+static struct {
+  const char *xkb_option;
+  const char *label;
+  const char *widget_name;
+} lv3_xkb_options[] = {
+  { "lv3:switch", NC_("keyboard key", "Right Ctrl"), "radiobutton_rightctrl" },
+  { "lv3:menu_switch", NC_("keyboard key", "Menu Key"), "radiobutton_menukey" },
+  { "lv3:lwin_switch", NC_("keyboard key", "Left Super"), "radiobutton_leftsuper" },
+  { "lv3:rwin_switch", NC_("keyboard key", "Right Super"), "radiobutton_rightsuper" },
+  { "lv3:lalt_switch", NC_("keyboard key", "Left Alt"), "radiobutton_leftalt" },
+  { "lv3:ralt_switch", NC_("keyboard key", "Right Alt"), "radiobutton_rightalt" },
+};
 
 /* RowData functions */
 static RowData *
@@ -263,7 +282,7 @@ add_item (CcKeyboardPanel *self,
                                "binding",
                                label,
                               "label",
-                               G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE,
+                               G_SETTINGS_BIND_GET | G_BINDING_SYNC_CREATE,
                                transform_binding_to_accel,
                                NULL, NULL, NULL);
 
@@ -602,6 +621,113 @@ shortcut_row_activated (GtkWidget       *button,
 }
 
 static void
+active_lv3_changed (GtkToggleButton *button,
+                    CcKeyboardPanel *self)
+{
+  char **options;
+  GPtrArray *array;
+  guint i;
+  gboolean found;
+
+  if (!gtk_toggle_button_get_active (button))
+    return;
+
+  /* Either replace the existing "lv3:" option in the string
+   * array, or add the option at the end */
+  array = g_ptr_array_new_with_free_func (g_free);
+  options = g_settings_get_strv (self->input_source_settings, "xkb-options");
+  found = FALSE;
+  for (i = 0; options != NULL && options[i] != NULL; i++) {
+    if (g_str_has_prefix (options[i], "lv3:")) {
+      found = TRUE;
+      g_ptr_array_add (array, g_strdup ((char *) g_object_get_data (G_OBJECT (button), "option")));
+    } else {
+      g_ptr_array_add (array, g_strdup (options[i]));
+    }
+  }
+  g_strfreev (options);
+
+  if (!found)
+    g_ptr_array_add (array, g_strdup ((char *) g_object_get_data (G_OBJECT (button), "option")));
+
+  g_ptr_array_add (array, NULL);
+
+  g_settings_set_strv (self->input_source_settings, "xkb-options",
+                       (const char **) array->pdata);
+  g_ptr_array_free (array, TRUE);
+}
+
+static void
+alternate_chars_activated (GtkWidget       *button,
+                           GtkListBoxRow   *row,
+                           CcKeyboardPanel *self)
+{
+  GtkBuilder *builder;
+  GtkWidget *dialog;
+  guint i;
+  const char *current_lv3_widget;
+
+  current_lv3_widget = g_object_get_data (G_OBJECT (self->value_alternate_chars), "lv3_widget_name");
+  builder = gtk_builder_new_from_resource ("/org/gnome/control-center/keyboard/alt-chars-key.ui");
+  for (i = 0; i < G_N_ELEMENTS(lv3_xkb_options); i++) {
+    GObject *label;
+
+    label = gtk_builder_get_object (builder, lv3_xkb_options[i].widget_name);
+    g_object_set_data (label, "option", (gpointer) lv3_xkb_options[i].xkb_option);
+    if (g_str_equal (current_lv3_widget, lv3_xkb_options[i].widget_name))
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (label), TRUE);
+
+    g_signal_connect (label, "toggled", G_CALLBACK (active_lv3_changed), self);
+  }
+  dialog = GTK_WIDGET (gtk_builder_get_object (builder, "alt_chars_key_dialog"));
+  gtk_window_set_title (GTK_WINDOW (dialog), _("Alternate Characters Key"));
+  gtk_window_set_transient_for (GTK_WINDOW (dialog),
+                                GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)))));
+  gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
+  g_object_unref (builder);
+}
+
+static gboolean
+transform_binding_to_alt_chars (GValue *value,
+                                GVariant *variant,
+                                gpointer user_data)
+{
+  GObject *value_alternate_chars = user_data;
+  const char **items;
+  guint i;
+
+  items = g_variant_get_strv (variant, NULL);
+  if (!items)
+    goto bail;
+
+  for (i = 0; items[i] != NULL; i++) {
+    guint j;
+    if (!g_str_has_prefix (items[i], "lv3:"))
+      continue;
+
+    for (j = 0; j < G_N_ELEMENTS (lv3_xkb_options); j++) {
+      if (g_str_equal (items[i], lv3_xkb_options[j].xkb_option)) {
+        g_value_set_string (value,
+                            g_dpgettext2 (NULL, "keyboard key", lv3_xkb_options[j].label));
+        g_object_set_data (value_alternate_chars,
+                           "lv3_widget_name",
+                           (gpointer) lv3_xkb_options[j].widget_name);
+        return TRUE;
+      }
+    }
+  }
+
+bail:
+  g_value_set_string (value,
+                      g_dpgettext2 (NULL, "keyboard key", lv3_xkb_options[DEFAULT_LV3_OPTION].label));
+  g_object_set_data (value_alternate_chars,
+                     "lv3_widget_name",
+                     (gpointer) lv3_xkb_options[DEFAULT_LV3_OPTION].widget_name);
+  return TRUE;
+}
+
+static void
 cc_keyboard_panel_set_property (GObject      *object,
                                guint         property_id,
                                const GValue *value,
@@ -631,6 +757,7 @@ cc_keyboard_panel_finalize (GObject *object)
 
   g_clear_pointer (&self->pictures_regex, g_regex_unref);
   g_clear_object (&self->accelerator_sizegroup);
+  g_clear_object (&self->input_source_settings);
 
   cc_keyboard_option_clear_all ();
 
@@ -687,9 +814,11 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_entry);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, value_alternate_chars);
 
   gtk_widget_class_bind_template_callback (widget_class, reset_all_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, shortcut_row_activated);
+  gtk_widget_class_bind_template_callback (widget_class, alternate_chars_activated);
 }
 
 static void
@@ -710,6 +839,14 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
 
   g_object_unref (provider);
+
+  /* Alternate characters key */
+  self->input_source_settings = g_settings_new ("org.gnome.desktop.input-sources");
+  g_settings_bind_with_mapping (self->input_source_settings, "xkb-options",
+                                self->value_alternate_chars, "label",
+                                G_SETTINGS_BIND_GET,
+                                transform_binding_to_alt_chars,
+                                NULL, self->value_alternate_chars, NULL);
 
   /* Shortcut manager */
   self->manager = cc_keyboard_manager_new ();
