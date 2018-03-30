@@ -39,6 +39,71 @@ NM_DEVICE_STATE_ACTIVATED    = 100
 NM_DEVICE_STATE_DEACTIVATING = 110
 NM_DEVICE_STATE_FAILED       = 120
 
+# Device state reason
+NM_DEVICE_STATE_REASON_NONE                           = 0
+NM_DEVICE_STATE_REASON_UNKNOWN                        = 1
+NM_DEVICE_STATE_REASON_NOW_MANAGED                    = 2
+NM_DEVICE_STATE_REASON_NOW_UNMANAGED                  = 3
+NM_DEVICE_STATE_REASON_CONFIG_FAILED                  = 4
+NM_DEVICE_STATE_REASON_IP_CONFIG_UNAVAILABLE          = 5
+NM_DEVICE_STATE_REASON_IP_CONFIG_EXPIRED              = 6
+NM_DEVICE_STATE_REASON_NO_SECRETS                     = 7
+NM_DEVICE_STATE_REASON_SUPPLICANT_DISCONNECT          = 8
+NM_DEVICE_STATE_REASON_SUPPLICANT_CONFIG_FAILED       = 9
+NM_DEVICE_STATE_REASON_SUPPLICANT_FAILED              = 10
+NM_DEVICE_STATE_REASON_SUPPLICANT_TIMEOUT             = 11
+NM_DEVICE_STATE_REASON_PPP_START_FAILED               = 12
+NM_DEVICE_STATE_REASON_PPP_DISCONNECT                 = 13
+NM_DEVICE_STATE_REASON_PPP_FAILED                     = 14
+NM_DEVICE_STATE_REASON_DHCP_START_FAILED              = 15
+NM_DEVICE_STATE_REASON_DHCP_ERROR                     = 16
+NM_DEVICE_STATE_REASON_DHCP_FAILED                    = 17
+NM_DEVICE_STATE_REASON_SHARED_START_FAILED            = 18
+NM_DEVICE_STATE_REASON_SHARED_FAILED                  = 19
+NM_DEVICE_STATE_REASON_AUTOIP_START_FAILED            = 20
+NM_DEVICE_STATE_REASON_AUTOIP_ERROR                   = 21
+NM_DEVICE_STATE_REASON_AUTOIP_FAILED                  = 22
+NM_DEVICE_STATE_REASON_MODEM_BUSY                     = 23
+NM_DEVICE_STATE_REASON_MODEM_NO_DIAL_TONE             = 24
+NM_DEVICE_STATE_REASON_MODEM_NO_CARRIER               = 25
+NM_DEVICE_STATE_REASON_MODEM_DIAL_TIMEOUT             = 26
+NM_DEVICE_STATE_REASON_MODEM_DIAL_FAILED              = 27
+NM_DEVICE_STATE_REASON_MODEM_INIT_FAILED              = 28
+NM_DEVICE_STATE_REASON_GSM_APN_FAILED                 = 29
+NM_DEVICE_STATE_REASON_GSM_REGISTRATION_NOT_SEARCHING = 30
+NM_DEVICE_STATE_REASON_GSM_REGISTRATION_DENIED        = 31
+NM_DEVICE_STATE_REASON_GSM_REGISTRATION_TIMEOUT       = 32
+NM_DEVICE_STATE_REASON_GSM_REGISTRATION_FAILED        = 33
+NM_DEVICE_STATE_REASON_GSM_PIN_CHECK_FAILED           = 34
+NM_DEVICE_STATE_REASON_FIRMWARE_MISSING               = 35
+NM_DEVICE_STATE_REASON_REMOVED                        = 36
+NM_DEVICE_STATE_REASON_SLEEPING                       = 37
+NM_DEVICE_STATE_REASON_CONNECTION_REMOVED             = 38
+NM_DEVICE_STATE_REASON_USER_REQUESTED                 = 39
+NM_DEVICE_STATE_REASON_CARRIER                        = 40
+NM_DEVICE_STATE_REASON_CONNECTION_ASSUMED             = 41
+NM_DEVICE_STATE_REASON_SUPPLICANT_AVAILABLE           = 42
+NM_DEVICE_STATE_REASON_MODEM_NOT_FOUND                = 43
+NM_DEVICE_STATE_REASON_BT_FAILED                      = 44
+NM_DEVICE_STATE_REASON_GSM_SIM_NOT_INSERTED           = 45
+NM_DEVICE_STATE_REASON_GSM_SIM_PIN_REQUIRED           = 46
+NM_DEVICE_STATE_REASON_GSM_SIM_PUK_REQUIRED           = 47
+NM_DEVICE_STATE_REASON_GSM_SIM_WRONG                  = 48
+NM_DEVICE_STATE_REASON_INFINIBAND_MODE                = 49
+NM_DEVICE_STATE_REASON_DEPENDENCY_FAILED              = 50
+NM_DEVICE_STATE_REASON_BR2684_FAILED                  = 51
+NM_DEVICE_STATE_REASON_MODEM_MANAGER_UNAVAILABLE      = 52
+NM_DEVICE_STATE_REASON_SSID_NOT_FOUND                 = 53
+NM_DEVICE_STATE_REASON_SECONDARY_CONNECTION_FAILED    = 54
+NM_DEVICE_STATE_REASON_DCB_FCOE_FAILED                = 55
+NM_DEVICE_STATE_REASON_TEAMD_CONTROL_FAILED           = 56
+NM_DEVICE_STATE_REASON_MODEM_FAILED                   = 57
+NM_DEVICE_STATE_REASON_MODEM_AVAILABLE                = 58
+NM_DEVICE_STATE_REASON_SIM_PIN_INCORRECT              = 59
+NM_DEVICE_STATE_REASON_NEW_ACTIVATION                 = 60
+NM_DEVICE_STATE_REASON_PARENT_CHANGED                 = 61
+NM_DEVICE_STATE_REASON_PARENT_MANAGED_CHANGED         = 62
+
 # Device type
 NM_DEVICE_TYPE_UNKNOWN    = 0
 NM_DEVICE_TYPE_ETHERNET   = 1
@@ -153,6 +218,7 @@ PD_UDI = "Udi"
 PD_IFACE = "Interface"
 PD_DRIVER = "Driver"
 PD_STATE = "State"
+PD_STATE_REASON = "StateReason"
 PD_ACTIVE_CONNECTION = "ActiveConnection"
 PD_IP4_CONFIG = "Ip4Config"
 PD_IP6_CONFIG = "Ip6Config"
@@ -175,6 +241,7 @@ class Device(ExportedObj):
         self.devtype = devtype
         self.active_connection = None
         self.state = NM_DEVICE_STATE_UNAVAILABLE
+        self.reason = NM_DEVICE_STATE_REASON_NONE
         self.ip4_config = None
         self.ip6_config = None
         self.dhcp4_config = None
@@ -191,6 +258,7 @@ class Device(ExportedObj):
         props[PD_IFACE] = self.iface
         props[PD_DRIVER] = "virtual"
         props[PD_STATE] = dbus.UInt32(self.state)
+        props[PD_STATE_REASON] = dbus.Struct((dbus.UInt32(self.state), dbus.UInt32(self.reason)), signature='uu')
         props[PD_ACTIVE_CONNECTION] = to_path(self.active_connection)
         props[PD_IP4_CONFIG] = to_path(self.ip4_config)
         props[PD_IP6_CONFIG] = to_path(self.ip6_config)
@@ -224,6 +292,13 @@ class Device(ExportedObj):
         self.active_connection = ac
         self.__notify(PD_ACTIVE_CONNECTION)
 
+    def set_state_reason(self, state, reason):
+        self.state = state
+        self.reason = reason
+        self.__notify(PD_STATE)
+        self.__notify(PD_STATE_REASON)
+
+
 ###################################################################
 
 def random_mac():
@@ -249,6 +324,7 @@ class WiredDevice(Device):
         else:
             self.mac = mac
         self.carrier = False
+        self.speed = 100
         self.s390_subchannels = subchannels
 
         self.add_dbus_interface(IFACE_WIRED, self.__get_props, WiredDevice.PropertiesChanged)
@@ -259,7 +335,7 @@ class WiredDevice(Device):
         props = {}
         props[PE_HW_ADDRESS] = self.mac
         props[PE_PERM_HW_ADDRESS] = self.mac
-        props[PE_SPEED] = dbus.UInt32(100)
+        props[PE_SPEED] = dbus.UInt32(self.speed)
         props[PE_CARRIER] = self.carrier
         props[PE_S390_SUBCHANNELS] = self.s390_subchannels
         return props
@@ -270,6 +346,18 @@ class WiredDevice(Device):
     @dbus.service.signal(IFACE_WIRED, signature='a{sv}')
     def PropertiesChanged(self, changed):
         pass
+
+    def set_wired_speed(self, speed):
+        if speed > 0:
+            self.speed = speed
+            self.carrier = True
+            self.__notify(PE_SPEED)
+            self.__notify(PE_CARRIER)
+        else:
+            self.speed = 100
+            self.carrier = False
+            self.__notify(PE_CARRIER)
+            self.__notify(PE_SPEED)
 
 ###################################################################
 IFACE_VLAN = 'org.freedesktop.NetworkManager.Device.Vlan'
@@ -956,6 +1044,22 @@ class NetworkManager(ExportedObj):
     @dbus.service.method(dbus_interface=IFACE_TEST, in_signature='sa{sa{sv}}b', out_signature='')
     def UpdateConnection(self, path, connection, verify_connection):
         return settings.update_connection(connection, path, verify_connection)
+
+    @dbus.service.method(dbus_interface=IFACE_TEST, in_signature='suu', out_signature='')
+    def SetDeviceState(self, path, state, reason):
+        for d in self.devices:
+            if d.path == path:
+                d.set_state_reason(state, reason)
+                return
+        raise UnknownDeviceException("Device not found")
+
+    @dbus.service.method(dbus_interface=IFACE_TEST, in_signature='su', out_signature='')
+    def SetWiredSpeed(self, path, speed):
+        for d in self.devices:
+            if d.path == path:
+                d.set_wired_speed(speed)
+                return
+        raise UnknownDeviceException("Device not found")
 
     @dbus.service.method(dbus_interface=IFACE_TEST, in_signature='', out_signature='')
     def Restart(self):
