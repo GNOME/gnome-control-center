@@ -80,7 +80,7 @@ sources = common_sources + files(
   'cc-background-xml.c'
 )
 
-deps = common_deps + [
+deps = common_panel_deps + [
   gdk_pixbuf_dep,
   gnome_desktop_dep,
   goa_dep,

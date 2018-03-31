@@ -21,7 +21,7 @@
 #ifndef _UM_USER_PANEL_H
 #define _UM_USER_PANEL_H
 
-#include <shell/cc-panel.h>
+#include <cc-panel.h>
 
 G_BEGIN_DECLS
 

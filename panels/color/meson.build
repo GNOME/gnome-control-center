@@ -39,7 +39,7 @@ sources += gnome.compile_resources(
   export: true
 )
 
-deps = common_deps + [
+deps = common_panel_deps + [
   colord_dep,
   gnome_desktop_dep,
   m_dep,

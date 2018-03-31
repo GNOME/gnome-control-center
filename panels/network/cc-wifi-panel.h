@@ -20,7 +20,7 @@
 #ifndef CC_WIFI_PANEL_H
 #define CC_WIFI_PANEL_H
 
-#include <shell/cc-panel.h>
+#include <cc-panel.h>
 
 G_BEGIN_DECLS
 

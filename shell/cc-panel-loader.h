@@ -23,7 +23,7 @@
 
 #include <glib.h>
 #include <glib-object.h>
-#include <shell/cc-panel.h>
+#include <cc-panel.h>
 #include <shell/cc-shell-model.h>
 
 G_BEGIN_DECLS

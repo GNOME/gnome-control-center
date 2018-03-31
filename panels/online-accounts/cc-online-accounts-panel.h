@@ -21,7 +21,7 @@
 #ifndef __GOA_PANEL_H__
 #define __GOA_PANEL_H__
 
-#include <shell/cc-panel.h>
+#include <cc-panel.h>
 
 G_BEGIN_DECLS
 

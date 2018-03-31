@@ -22,7 +22,7 @@
 #ifndef __CC_SHARING_PANEL_H__
 #define __CC_SHARING_PANEL_H__
 
-#include <shell/cc-shell.h>
+#include <cc-shell.h>
 
 G_BEGIN_DECLS
 

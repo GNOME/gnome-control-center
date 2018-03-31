@@ -21,7 +21,7 @@
 #define _CC_NOTIFICATIONS_PANEL_H_
 
 #include <gio/gio.h>
-#include <shell/cc-panel.h>
+#include <cc-panel.h>
 
 G_BEGIN_DECLS
 

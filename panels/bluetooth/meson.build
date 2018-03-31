@@ -29,7 +29,7 @@ sources += gnome.compile_resources(
   export: true
 )
 
-deps = common_deps + [gnome_bluetooth_dep]
+deps = common_panel_deps + [gnome_bluetooth_dep]
 
 cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
 

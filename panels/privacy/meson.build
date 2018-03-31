@@ -35,6 +35,6 @@ panels_libs += static_library(
   cappletname,
   sources: sources,
   include_directories: [top_inc, common_inc],
-  dependencies: common_deps,
+  dependencies: common_panel_deps,
   c_args: cflags
 )

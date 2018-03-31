@@ -40,7 +40,7 @@ sources += gnome.compile_resources(
   export: true
 )
 
-deps = common_deps + [m_dep]
+deps = common_panel_deps + [m_dep]
 
 cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
 

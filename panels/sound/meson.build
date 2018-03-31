@@ -17,7 +17,7 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
-deps = common_deps + [
+deps = common_panel_deps + [
   libgvc_dep,
   libxml_dep,
   m_dep,

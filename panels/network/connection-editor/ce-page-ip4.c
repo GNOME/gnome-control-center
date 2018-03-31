@@ -28,7 +28,7 @@
 #include <glib/gi18n.h>
 #include <NetworkManager.h>
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "ce-page-ip4.h"
 #include "ui-helpers.h"
 

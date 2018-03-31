@@ -39,7 +39,7 @@ sources = common_sources + files(
   'gnome-mouse-test.c'
 )
 
-deps = common_deps + [
+deps = common_panel_deps + [
   gnome_settings_dep,
   libdevice_dep,
   x11_dep,

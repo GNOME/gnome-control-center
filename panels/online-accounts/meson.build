@@ -29,7 +29,7 @@ sources += gnome.compile_resources(
   export: true
 )
 
-deps = common_deps + [
+deps = common_panel_deps + [
   goa_dep,
   dependency('goa-backend-1.0', version: goa_req_version)
 ]

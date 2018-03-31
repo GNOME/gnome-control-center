@@ -160,7 +160,7 @@ sources = common_sources + files(
 krb_dep = dependency('krb5', required: false)
 assert(krb_dep.found(), 'kerberos libraries not found in your path')
 
-deps = common_deps + [
+deps = common_panel_deps + [
   accounts_dep,
   gdk_pixbuf_dep,
   gnome_desktop_dep,

@@ -23,7 +23,7 @@
 #endif
 
 #include <glib/gi18n-lib.h>
-#include <shell/cc-shell.h>
+#include <cc-shell.h>
 #include <bluetooth-settings-widget.h>
 
 #include "cc-bluetooth-panel.h"

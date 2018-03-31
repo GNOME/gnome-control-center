@@ -25,7 +25,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
-#include <shell/cc-panel.h>
+#include <cc-panel.h>
 #include <shell/cc-shell-model.h>
 #include <shell/cc-panel-loader.h>
 

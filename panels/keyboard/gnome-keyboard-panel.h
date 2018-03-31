@@ -3,7 +3,7 @@
  */
 
 #include <gtk/gtk.h>
-#include <shell/cc-panel.h>
+#include <cc-panel.h>
 
 void gnome_keybinding_properties_init (CcPanel *panel, GtkBuilder *builder);
 void gnome_keybinding_properties_dispose (CcPanel *panel);

@@ -29,8 +29,8 @@
 #include <NetworkManager.h>
 #include <polkit/polkit.h>
 
-#include "shell/list-box-helper.h"
-#include "shell/hostname-helper.h"
+#include "list-box-helper.h"
+#include "hostname-helper.h"
 #include "network-dialogs.h"
 #include "panel-common.h"
 

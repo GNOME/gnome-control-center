@@ -79,7 +79,7 @@ sources += gnome.compile_resources(
   export: true
 )
 
-deps = common_deps + [
+deps = common_panel_deps + [
   gnome_desktop_dep,
   x11_dep
 ]

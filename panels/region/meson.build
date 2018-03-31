@@ -40,7 +40,7 @@ sources += gnome.compile_resources(
   export: true
 )
 
-deps = common_deps + [
+deps = common_panel_deps + [
   accounts_dep,
   gnome_desktop_dep,
   liblanguage_dep,

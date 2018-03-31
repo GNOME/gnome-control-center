@@ -24,6 +24,26 @@ common_sources += gnome.mkenums(
   vtail: '      { 0, NULL, NULL }\n    };\n    etype = g_@type@_register_static ("@EnumName@", values);\n  }\n  return etype;\n}\n'
 )
 
+sources = files(
+  'cc-hostname-entry.c',
+  'cc-panel.c',
+  'hostname-helper.c',
+  'cc-shell.c',
+  'list-box-helper.c',
+)
+
+libwidgets = static_library(
+  'widgets',
+  sources: sources,
+  include_directories: top_inc,
+  dependencies: common_deps + [ polkit_gobject_dep ]
+)
+libwidgets_dep = declare_dependency(
+  include_directories: common_inc,
+  link_with: libwidgets
+)
+common_panel_deps = common_deps + [ polkit_gobject_dep, libwidgets_dep]
+
 sources = common_sources + files(
   'cc-common-language.c',
   'cc-language-chooser.c',

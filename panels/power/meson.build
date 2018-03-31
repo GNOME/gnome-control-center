@@ -29,7 +29,7 @@ sources += gnome.compile_resources(
   export: true
 )
 
-deps = common_deps + [
+deps = common_panel_deps + [
   gnome_settings_dep,
   upower_glib_dep
 ]

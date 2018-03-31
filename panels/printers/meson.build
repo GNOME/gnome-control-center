@@ -57,7 +57,7 @@ sources += gnome.compile_resources(
   export: true
 )
 
-deps = common_deps + [
+deps = common_panel_deps + [
   cups_dep,
   m_dep,
   polkit_gobject_dep,

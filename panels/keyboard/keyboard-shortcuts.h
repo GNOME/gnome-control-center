@@ -19,7 +19,7 @@
  */
 
 #include <gtk/gtk.h>
-#include <shell/cc-panel.h>
+#include <cc-panel.h>
 
 #include "cc-keyboard-item.h"
 

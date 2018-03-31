@@ -59,7 +59,7 @@ sources += gnome.compile_resources(
   export: true
 )
 
-deps = common_deps + [
+deps = common_panel_deps + [
   polkit_gobject_dep,
   dependency('libgtop-2.0')
 ]

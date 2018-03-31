@@ -19,7 +19,7 @@
 #ifndef _CC_SOUND_PANEL_H
 #define _CC_SOUND_PANEL_H
 
-#include <shell/cc-panel.h>
+#include <cc-panel.h>
 #include "gvc-mixer-control.h"
 #include "gvc-mixer-dialog.h"
 

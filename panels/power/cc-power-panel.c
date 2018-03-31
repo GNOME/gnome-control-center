@@ -29,7 +29,7 @@
 #include <NetworkManager.h>
 #endif
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "cc-power-panel.h"
 #include "cc-power-resources.h"
 

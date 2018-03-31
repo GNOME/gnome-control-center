@@ -31,7 +31,7 @@
 
 #include <cups/cups.h>
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "pp-jobs-dialog.h"
 #include "pp-utils.h"
 #include "pp-job.h"

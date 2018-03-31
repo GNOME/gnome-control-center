@@ -22,7 +22,7 @@
 #ifndef _CC_DATE_TIME_PANEL_H
 #define _CC_DATE_TIME_PANEL_H
 
-#include <shell/cc-panel.h>
+#include <cc-panel.h>
 
 G_BEGIN_DECLS
 
