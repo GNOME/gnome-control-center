@@ -66,34 +66,12 @@ deps = common_deps + [
 
 cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
 
-panels_libs += static_library(
+printers_panel_lib = static_library(
   cappletname,
   sources: sources,
   include_directories: [top_inc, common_inc, shell_inc],
   dependencies: deps,
   c_args: cflags
 )
+panels_libs += [ printers_panel_lib ]
 
-test_units = [
-  'test-canonicalization',
-  'test-shift'
-]
-
-sources = files(
-  'pp-print-device.c',
-  'pp-utils.c'
-)
-
-cflags += '-DTEST_SRCDIR="@0@"'.format(meson.current_source_dir())
-
-foreach unit: test_units
-  exe = executable(
-    unit,
-    [unit + '.c'] + sources,
-    include_directories: top_inc,
-    dependencies: deps,
-    c_args: cflags
-  )
-
-  test(unit, exe)
-endforeach
