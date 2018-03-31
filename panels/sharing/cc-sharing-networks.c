@@ -26,7 +26,7 @@
 #include "cc-sharing-networks.h"
 #include "org.gnome.SettingsDaemon.Sharing.h"
 #include "gsd-sharing-enums.h"
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 
 struct _CcSharingNetworksPrivate {
   GtkWidget *listbox;

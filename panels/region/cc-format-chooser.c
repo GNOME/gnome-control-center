@@ -27,7 +27,7 @@
 #include <string.h>
 #include <glib/gi18n.h>
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "cc-common-language.h"
 #include "cc-util.h"
 

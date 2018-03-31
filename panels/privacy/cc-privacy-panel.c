@@ -18,7 +18,7 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "cc-privacy-panel.h"
 #include "cc-privacy-resources.h"
 #include "cc-util.h"

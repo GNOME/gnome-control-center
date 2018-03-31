@@ -42,43 +42,36 @@ libshell = static_library(
   c_args: cflags
 )
 
-common_sources = files(
-  'cc-application.c',
-  'cc-editable-entry.c',
-  'cc-hostname-entry.c',
-  'cc-panel-loader.c',
-  'cc-panel.c',
-  'cc-shell-category-view.c',
-  'cc-shell-item-view.c',
-  'cc-shell-log.c',
-  'cc-shell.c',
-  'hostname-helper.c',
-  'list-box-helper.c',
-  'main.c'
-)
-
 resource_data = files(
   'help-overlay.ui',
   'panel-list.ui',
   'window.ui'
 )
 
-common_sources += gnome.compile_resources(
+sources = files(
+  'cc-application.c',
+  'cc-panel-loader.c',
+  'cc-panel-list.c',
+  'cc-panel.c',
+  'cc-shell-category-view.c',
+  'cc-shell-item-view.c',
+  'cc-shell-log.c',
+  'cc-shell.c',
+  'cc-window.c',
+  'main.c'
+)
+
+sources += gnome.compile_resources(
   'resources',
   meson.project_name() + '.gresource.xml',
   dependencies: resource_data,
   export: true
 )
 
-sources = common_sources + files(
-  'cc-panel-list.c',
-  'cc-window.c'
-)
-
 shell_deps = common_deps + [
   libdevice_dep,
   liblanguage_dep,
-  polkit_gobject_dep,
+  libwidgets_dep,
   x11_dep
 ]
 
@@ -110,28 +103,6 @@ libpanel_loader = static_library(
   dependencies: common_deps,
   c_args: cflags + ['-DCC_PANEL_LOADER_NO_GTYPES']
 )
-
-test_unit = 'test-hostname'
-
-sources = files(
-  'hostname-helper.c',
-  test_unit + '.c'
-)
-
-cflags += [
-  '-DTEST_SRCDIR="@0@"'.format(meson.current_source_dir()),
-  '-DTEST_TOPSRCDIR="@0@"'.format(meson.source_root())
-]
-
-exe = executable(
-  test_unit,
-  sources,
-  include_directories: top_inc,
-  dependencies: common_deps,
-  c_args: cflags
-)
-
-test(test_unit, exe)
 
 install_data ('org.gnome.ControlCenter.gschema.xml',
               install_dir: control_center_schemadir)

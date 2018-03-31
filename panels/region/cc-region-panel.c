@@ -26,7 +26,7 @@
 #include <gtk/gtk.h>
 #include <polkit/polkit.h>
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "cc-region-panel.h"
 #include "cc-region-resources.h"
 #include "cc-language-chooser.h"
