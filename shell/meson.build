@@ -44,7 +44,6 @@ libshell = static_library(
 
 common_sources = files(
   'cc-application.c',
-  'cc-editable-entry.c',
   'cc-hostname-entry.c',
   'cc-log.c',
   'cc-object-storage.c',
