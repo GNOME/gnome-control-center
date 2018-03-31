@@ -33,7 +33,6 @@
 #include <cups/cups.h>
 #include <cups/ppd.h>
 
-#include "cc-editable-entry.h"
 #include "pp-details-dialog.h"
 #include "pp-ppd-selection-dialog.h"
 #include "pp-printer.h"
