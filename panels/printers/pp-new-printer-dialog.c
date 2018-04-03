@@ -550,6 +550,7 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
   g_signal_connect (priv->dialog, "response", G_CALLBACK (new_printer_dialog_response_cb), dialog);
 
   widget = WID ("search-entry");
+  gtk_widget_grab_focus (widget);
   g_signal_connect (widget, "activate", G_CALLBACK (search_entry_activated_cb), dialog);
   g_signal_connect (widget, "search-changed", G_CALLBACK (search_entry_changed_cb), dialog);
 
