@@ -183,33 +183,14 @@ cflags += [
   '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
 ]
 
-panels_libs += static_library(
+datetime_panel_lib = static_library(
   cappletname,
   sources: sources + resources,
   include_directories: [ top_inc, common_inc ],
   dependencies: deps,
   c_args: cflags
 )
-
-test_cflags = '-DSRCDIR="@0@"'.format(meson.current_source_dir())
-
-test_units = [
-  #['test-timezone', ['cc-timezone-map.c', 'tz.c'] + resources, [m_dep], []],
-  ['test-timezone-gfx', ['tz.c'] + resources, [m_dep], [test_cflags]],
-  ['test-endianess', ['date-endian.c'], [], []]
-]
-
-foreach unit: test_units
-  exe = executable(
-    unit[0],
-    [unit[0] + '.c'] + unit[1],
-    include_directories: top_inc,
-    dependencies: deps + unit[2],
-    c_args: cflags + unit[3]
-  )
-
-  test(unit[0], exe)
-endforeach
+panels_libs += datetime_panel_lib
 
 subdir('po-timezones')
 subdir('icons')
