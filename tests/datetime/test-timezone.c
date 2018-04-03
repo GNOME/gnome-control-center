@@ -1,5 +1,6 @@
 #include <locale.h>
 #include <gtk/gtk.h>
+#include "cc-datetime-resources.h"
 #include "cc-timezone-map.h"
 
 #define TZ_DIR "/usr/share/zoneinfo/"
@@ -99,6 +100,8 @@ int main (int argc, char **argv)
 	setlocale (LC_ALL, "");
 	gtk_init (NULL, NULL);
 	g_test_init (&argc, &argv, NULL);
+
+	g_resources_register (cc_datetime_get_resource ());
 
 	g_setenv ("G_DEBUG", "fatal_warnings", FALSE);
 
