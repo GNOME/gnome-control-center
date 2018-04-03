@@ -64,32 +64,14 @@ deps = common_deps + [
   dependency('libgtop-2.0')
 ]
 
-panels_libs += static_library(
+info_panel_lib = static_library(
   cappletname,
   sources: sources,
   include_directories: [ top_inc, common_inc ],
   dependencies: deps,
   c_args: cflags
 )
-
-test_name = 'test-info-cleanup'
-
-sources = files(
-  'info-cleanup.c',
-  test_name + '.c'
-)
-
-cflags += ['-DTEST_SRCDIR="@0@"'.format(meson.current_source_dir())]
-
-exe = executable(
-  test_name,
-  sources,
-  include_directories: top_inc,
-  dependencies: deps,
-  c_args: cflags
-)
-
-test(name, exe)
+panels_libs += info_panel_lib
 
 # FIXME: workaround for updating different sources code
 input_dir = join_paths(meson.source_root(), '..', 'gnome-settings-daemon', 'plugins', 'housekeeping')
