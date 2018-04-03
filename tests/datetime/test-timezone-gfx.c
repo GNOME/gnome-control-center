@@ -1,6 +1,7 @@
 #include <config.h>
 #include <locale.h>
 
+#include "cc-datetime-resources.h"
 #include "tz.h"
 
 static void
@@ -45,6 +46,8 @@ int main (int argc, char **argv)
 	g_test_init (&argc, &argv, NULL);
 
 	g_setenv ("G_DEBUG", "fatal_warnings", FALSE);
+
+	g_resources_register (cc_datetime_get_resource ());
 
 	if (argc == 2) {
 		pixmap_dir = g_strdup (argv[1]);
