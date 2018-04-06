@@ -1,4 +1,5 @@
 subdir('common')
 subdir('datetime')
+subdir('network')
 subdir('printers')
 subdir('info')
