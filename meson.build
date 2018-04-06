@@ -30,6 +30,11 @@ enable_tracing = get_option('tracing')
 
 config_h = configuration_data()
 
+py3 = import('python3')
+python = py3.find_python()
+
+config_h.set_quoted('TEST_NM_PYTHON', python.path())
+
 # defines
 set_defines = [
   # package
