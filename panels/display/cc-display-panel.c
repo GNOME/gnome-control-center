@@ -30,7 +30,7 @@
 #include <math.h>
 
 #include "shell/cc-object-storage.h"
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include <libupower-glib/upower.h>
 
 #include "cc-display-config-manager-dbus.h"

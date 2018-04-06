@@ -21,7 +21,7 @@
 #include "cc-search-panel.h"
 #include "cc-search-locations-dialog.h"
 #include "cc-search-resources.h"
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>

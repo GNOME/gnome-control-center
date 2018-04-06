@@ -32,7 +32,7 @@
 #include "cc-online-accounts-panel.h"
 #include "cc-online-accounts-resources.h"
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 
 struct _CcGoaPanel
 {

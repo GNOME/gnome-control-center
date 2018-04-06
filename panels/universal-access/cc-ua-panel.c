@@ -27,7 +27,7 @@
 #include <glib/gi18n-lib.h>
 #include <gdesktop-enums.h>
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "cc-ua-panel.h"
 #include "cc-ua-resources.h"
 

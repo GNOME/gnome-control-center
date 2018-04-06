@@ -26,7 +26,7 @@
 #include <gdk/gdkx.h>
 #include <libsoup/soup.h>
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "cc-color-calibrate.h"
 #include "cc-color-cell-renderer-text.h"
 #include "cc-color-panel.h"

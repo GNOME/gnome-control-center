@@ -24,7 +24,7 @@
 #include "network-dialogs.h"
 
 #include "shell/cc-object-storage.h"
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 
 #include <glib/gi18n.h>
 #include <NetworkManager.h>
