@@ -129,8 +129,8 @@ int main (int argc, char **argv)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	g_test_init (&argc, &argv, NULL);
 
-	g_test_add_func ("/shell/hostname", test_hostname);
-	g_test_add_func ("/shell/ssid", test_ssid);
+	g_test_add_func ("/common/hostname", test_hostname);
+	g_test_add_func ("/common/ssid", test_ssid);
 
 	return g_test_run ();
 }

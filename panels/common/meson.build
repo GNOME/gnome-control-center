@@ -24,6 +24,23 @@ common_sources += gnome.mkenums(
   vtail: '      { 0, NULL, NULL }\n    };\n    etype = g_@type@_register_static ("@EnumName@", values);\n  }\n  return etype;\n}\n'
 )
 
+sources = files(
+  'cc-hostname-entry.c',
+  'hostname-helper.c',
+  'list-box-helper.c',
+)
+
+libwidgets = static_library(
+  'widgets',
+  sources: sources,
+  include_directories: top_inc,
+  dependencies: common_deps + [ polkit_gobject_dep ]
+)
+libwidgets_dep = declare_dependency(
+  include_directories: common_inc,
+  link_with: libwidgets
+)
+
 sources = common_sources + files(
   'cc-common-language.c',
   'cc-language-chooser.c',
@@ -121,3 +138,26 @@ run_target(
   script_name,
   command: script
 )
+
+
+test_unit = 'test-hostname'
+
+sources = files(
+  'hostname-helper.c',
+  test_unit + '.c'
+)
+
+cflags = [
+  '-DTEST_SRCDIR="@0@"'.format(meson.current_source_dir()),
+  '-DTEST_TOPSRCDIR="@0@"'.format(meson.source_root())
+]
+
+exe = executable(
+  test_unit,
+  sources,
+  include_directories: top_inc,
+  dependencies: [ common_deps, libwidgets_dep ],
+  c_args: cflags
+)
+
+test(test_unit, exe)

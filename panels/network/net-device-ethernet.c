@@ -28,7 +28,7 @@
 
 #include "panel-common.h"
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "connection-editor/net-connection-editor.h"
 #include "connection-editor/ce-page.h"
 

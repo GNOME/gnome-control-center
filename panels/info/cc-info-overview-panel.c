@@ -21,7 +21,7 @@
 
 #include <config.h>
 
-#include "shell/cc-hostname-entry.h"
+#include "cc-hostname-entry.h"
 
 #include "cc-info-resources.h"
 #include "info-cleanup.h"

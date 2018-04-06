@@ -26,7 +26,7 @@
 
 #include <NetworkManager.h>
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "net-connection-editor.h"
 #include "net-connection-editor-resources.h"
 #include "ce-page-details.h"
