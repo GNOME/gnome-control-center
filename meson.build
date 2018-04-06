@@ -255,6 +255,8 @@ subdir('panels')
 subdir('shell')
 subdir('search-provider')
 
+subdir('tests')
+
 if get_option('documentation')
   subdir('man')
 endif
