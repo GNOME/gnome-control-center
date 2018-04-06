@@ -25,7 +25,7 @@
 
 #include <langinfo.h>
 #include <sys/time.h>
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "cc-timezone-map.h"
 #include "timedated.h"
 #include "date-endian.h"

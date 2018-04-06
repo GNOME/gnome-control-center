@@ -26,7 +26,7 @@
 #include <gio/gdesktopappinfo.h>
 
 #include "shell/cc-object-storage.h"
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "cc-notifications-panel.h"
 #include "cc-notifications-resources.h"
 #include "cc-edit-dialog.h"

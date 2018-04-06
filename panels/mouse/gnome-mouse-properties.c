@@ -35,7 +35,7 @@
 #include "gnome-mouse-properties.h"
 #include "gsd-input-helper.h"
 #include "gsd-device-manager.h"
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "cc-mouse-caps-helper.h"
 
 #include <sys/types.h>
