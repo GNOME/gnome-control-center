@@ -27,7 +27,7 @@
  * @stability:stable
  *
  * Macros used for tracing and debugging code. These
- * are only valid when Calendar is compiled with tracing
+ * are only valid when Settings is compiled with tracing
  * suppoer (pass `--enable-tracing` to the configure
  * script to do that).
  */
@@ -204,7 +204,7 @@ G_BEGIN_DECLS
 #define _CC_BUG(Component, Description, File, Line, Func, ...)                        \
   G_STMT_START {                                                                        \
     g_printerr ("-----------------------------------------------------------------\n"); \
-    g_printerr ("You've found a bug in Calendar or one of its dependent libraries.\n"); \
+    g_printerr ("You've found a bug in Settings or one of its dependent libraries.\n"); \
     g_printerr ("Please help us help you by filing a bug report at:\n");                \
     g_printerr ("\n");                                                                  \
     g_printerr ("@BUGREPORT_URL@&component=%s\n", Component);                           \
