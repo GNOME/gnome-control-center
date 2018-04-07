@@ -25,6 +25,9 @@ host_is_linux_not_s390 = host_is_linux and not host_machine.cpu().contains('s390
 
 cc = meson.get_compiler('c')
 
+# Tracing
+enable_tracing = get_option('tracing')
+
 config_h = configuration_data()
 
 # defines
@@ -269,5 +272,10 @@ output += '** NetworkManager (Network panel): ' + host_is_linux.to_string() + '\
 output += '** wacom (Wacom tablet panel): ' + host_is_linux_not_s390.to_string() + '\n'
 output += '** Wayland: ' + enable_wayland.to_string() + '\n'
 output += '** gnome-session libexecdir: ' + gnome_session_libexecdir + '\n'
+
+if enable_tracing
+  output += '** Tracing enabled \n'
+endif
+
 output += 'End options'
 message(output)

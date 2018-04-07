@@ -46,12 +46,12 @@ common_sources = files(
   'cc-application.c',
   'cc-editable-entry.c',
   'cc-hostname-entry.c',
+  'cc-log.c',
   'cc-object-storage.c',
   'cc-panel-loader.c',
   'cc-panel.c',
   'cc-shell-category-view.c',
   'cc-shell-item-view.c',
-  'cc-shell-log.c',
   'cc-shell.c',
   'hostname-helper.c',
   'list-box-helper.c',
@@ -90,6 +90,17 @@ endif
 if host_is_linux_not_s390
   shell_deps += wacom_deps
 endif
+
+# Debug
+debug_conf = configuration_data()
+debug_conf.set('BUGREPORT_URL', 'http://bugzilla.gnome.org/enter_bug.cgi?product=' + meson.project_name())
+debug_conf.set10('ENABLE_TRACING', enable_tracing)
+
+sources += configure_file(
+  input: 'cc-debug.h.in',
+  output: 'cc-debug.h',
+  configuration: debug_conf
+)
 
 executable(
   meson.project_name(),

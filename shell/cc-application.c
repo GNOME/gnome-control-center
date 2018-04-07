@@ -26,9 +26,9 @@
 #include <gio/gio.h>
 
 #include "cc-application.h"
+#include "cc-log.h"
 #include "cc-object-storage.h"
 #include "cc-panel-loader.h"
-#include "cc-shell-log.h"
 #include "cc-window.h"
 
 #if defined(HAVE_WACOM) || defined(HAVE_CHEESE)
@@ -158,7 +158,9 @@ cc_application_command_line (GApplication            *application,
   options = g_application_command_line_get_options_dict (command_line);
 
   debug = g_variant_dict_contains (options, "verbose");
-  cc_shell_log_set_debug (debug);
+
+  if (debug)
+    cc_log_init ();
 
   gtk_window_present (GTK_WINDOW (self->window));
 
