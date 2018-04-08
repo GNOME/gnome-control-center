@@ -24,6 +24,7 @@
 #include <string.h>
 #include <gio/gdesktopappinfo.h>
 
+#include "cc-panel.h"
 #include "cc-panel-loader.h"
 
 #ifndef CC_PANEL_LOADER_NO_GTYPES
@@ -63,11 +64,11 @@ extern GType cc_user_panel_get_type (void);
 extern GType cc_wacom_panel_get_type (void);
 #endif /* BUILD_WACOM */
 
-#define PANEL_TYPE(name, get_type) { name, get_type }
+#define PANEL_TYPE(name, get_type, init_func) { name, get_type, init_func }
 
 #else /* CC_PANEL_LOADER_NO_GTYPES */
 
-#define PANEL_TYPE(name, get_type) { name }
+#define PANEL_TYPE(name, get_type, init_func) { name }
 
 #endif
 
@@ -75,40 +76,41 @@ static struct {
   const char *name;
 #ifndef CC_PANEL_LOADER_NO_GTYPES
   GType (*get_type)(void);
+  CcPanelStaticInitFunc static_init_func;
 #endif
 } all_panels[] = {
-  PANEL_TYPE("background",       cc_background_panel_get_type   ),
+  PANEL_TYPE("background",       cc_background_panel_get_type,           NULL),
 #ifdef BUILD_BLUETOOTH
-  PANEL_TYPE("bluetooth",        cc_bluetooth_panel_get_type    ),
+  PANEL_TYPE("bluetooth",        cc_bluetooth_panel_get_type,            NULL),
 #endif
-  PANEL_TYPE("color",            cc_color_panel_get_type        ),
-  PANEL_TYPE("datetime",         cc_date_time_panel_get_type    ),
-  PANEL_TYPE("display",          cc_display_panel_get_type      ),
-  PANEL_TYPE("info-overview",    cc_info_overview_panel_get_type),
-  PANEL_TYPE("default-apps",     cc_info_default_apps_panel_get_type),
-  PANEL_TYPE("removable-media",  cc_info_removable_media_panel_get_type),
-  PANEL_TYPE("keyboard",         cc_keyboard_panel_get_type     ),
-  PANEL_TYPE("mouse",            cc_mouse_panel_get_type        ),
+  PANEL_TYPE("color",            cc_color_panel_get_type,                NULL),
+  PANEL_TYPE("datetime",         cc_date_time_panel_get_type,            NULL),
+  PANEL_TYPE("display",          cc_display_panel_get_type,              NULL),
+  PANEL_TYPE("info-overview",    cc_info_overview_panel_get_type,        NULL),
+  PANEL_TYPE("default-apps",     cc_info_default_apps_panel_get_type,    NULL),
+  PANEL_TYPE("removable-media",  cc_info_removable_media_panel_get_type, NULL),
+  PANEL_TYPE("keyboard",         cc_keyboard_panel_get_type,             NULL),
+  PANEL_TYPE("mouse",            cc_mouse_panel_get_type,                NULL),
 #ifdef BUILD_NETWORK
-  PANEL_TYPE("network",          cc_network_panel_get_type      ),
-  PANEL_TYPE("wifi",             cc_wifi_panel_get_type         ),
+  PANEL_TYPE("network",          cc_network_panel_get_type,              NULL),
+  PANEL_TYPE("wifi",             cc_wifi_panel_get_type,                 NULL),
 #endif
-  PANEL_TYPE("notifications",    cc_notifications_panel_get_type),
-  PANEL_TYPE("online-accounts",  cc_goa_panel_get_type          ),
-  PANEL_TYPE("power",            cc_power_panel_get_type        ),
-  PANEL_TYPE("printers",         cc_printers_panel_get_type     ),
-  PANEL_TYPE("privacy",          cc_privacy_panel_get_type      ),
-  PANEL_TYPE("region",           cc_region_panel_get_type       ),
-  PANEL_TYPE("search",           cc_search_panel_get_type       ),
-  PANEL_TYPE("sharing",          cc_sharing_panel_get_type      ),
-  PANEL_TYPE("sound",            cc_sound_panel_get_type        ),
+  PANEL_TYPE("notifications",    cc_notifications_panel_get_type,        NULL),
+  PANEL_TYPE("online-accounts",  cc_goa_panel_get_type,                  NULL),
+  PANEL_TYPE("power",            cc_power_panel_get_type,                NULL),
+  PANEL_TYPE("printers",         cc_printers_panel_get_type,             NULL),
+  PANEL_TYPE("privacy",          cc_privacy_panel_get_type,              NULL),
+  PANEL_TYPE("region",           cc_region_panel_get_type,               NULL),
+  PANEL_TYPE("search",           cc_search_panel_get_type,               NULL),
+  PANEL_TYPE("sharing",          cc_sharing_panel_get_type,              NULL),
+  PANEL_TYPE("sound",            cc_sound_panel_get_type,                NULL),
 #ifdef BUILD_THUNDERBOLT
-  PANEL_TYPE("thunderbolt",      cc_bolt_panel_get_type         ),
+  PANEL_TYPE("thunderbolt",      cc_bolt_panel_get_type,                 NULL),
 #endif
-  PANEL_TYPE("universal-access", cc_ua_panel_get_type           ),
-  PANEL_TYPE("user-accounts",    cc_user_panel_get_type         ),
+  PANEL_TYPE("universal-access", cc_ua_panel_get_type,                   NULL),
+  PANEL_TYPE("user-accounts",    cc_user_panel_get_type,                 NULL),
 #ifdef BUILD_WACOM
-  PANEL_TYPE("wacom",            cc_wacom_panel_get_type        ),
+  PANEL_TYPE("wacom",            cc_wacom_panel_get_type,                NULL),
 #endif
 };
 
@@ -192,6 +194,18 @@ cc_panel_loader_fill_model (CcShellModel *model)
 
       cc_shell_model_add_item (model, category, G_APP_INFO (app), all_panels[i].name);
     }
+
+  /* If there's an static init function, execute it after adding all panels to
+   * the model. This will allow the panels to show or hide themselves without
+   * having an instance running.
+   */
+#ifndef CC_PANEL_LOADER_NO_GTYPES
+  for (i = 0; i < G_N_ELEMENTS (all_panels); i++)
+    {
+      if (all_panels[i].static_init_func)
+        all_panels[i].static_init_func ();
+    }
+#endif
 }
 
 #ifndef CC_PANEL_LOADER_NO_GTYPES
