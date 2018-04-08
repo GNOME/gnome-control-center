@@ -19,6 +19,8 @@
 
 #pragma once
 
+#include "cc-shell-model.h"
+
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
@@ -28,5 +30,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcApplication, cc_application, CC, APPLICATION, GtkApplication)
 
 GtkApplication        *cc_application_new                    (void);
+
+CcShellModel          *cc_application_get_model              (CcApplication *self);
 
 G_END_DECLS
