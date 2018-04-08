@@ -18,20 +18,24 @@
  * Author: Georges Basile Stavracas Neto <gbsneto@gnome.org>
  */
 
+#define G_LOG_DOMAIN "cc-panel-list"
+
 #include <string.h>
 
+#include "cc-debug.h"
 #include "cc-panel-list.h"
 #include "cc-util.h"
 
 typedef struct
 {
-  GtkWidget       *row;
-  GtkWidget       *description_label;
-  CcPanelCategory  category;
-  gchar           *id;
-  gchar           *name;
-  gchar           *description;
-  gchar          **keywords;
+  GtkWidget          *row;
+  GtkWidget          *description_label;
+  CcPanelCategory     category;
+  gchar              *id;
+  gchar              *name;
+  gchar              *description;
+  gchar             **keywords;
+  CcPanelVisibility   visibility;
 } RowData;
 
 struct _CcPanelList
@@ -106,6 +110,49 @@ get_listbox_from_view (CcPanelList     *self,
     }
 }
 
+static GtkWidget *
+get_listbox_from_category (CcPanelList     *self,
+                           CcPanelCategory  category)
+{
+
+  switch (category)
+    {
+    case CC_CATEGORY_DEVICES:
+      return self->devices_listbox;
+      break;
+
+    case CC_CATEGORY_DETAILS:
+      return self->details_listbox;
+      break;
+
+    default:
+      return self->main_listbox;
+      break;
+    }
+
+  return NULL;
+}
+
+static void
+activate_row_below (CcPanelList *self,
+                    RowData     *data)
+{
+  GtkListBoxRow *next_row;
+  GtkListBox *listbox;
+  guint row_index;
+
+  row_index = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (data->row));
+  listbox = GTK_LIST_BOX (get_listbox_from_category (self, data->category));
+  next_row = gtk_list_box_get_row_at_index (listbox, row_index + 1);
+
+  /* Try the previous one if the current is invalid */
+  if (!next_row || next_row == self->devices_row || next_row == self->details_row)
+    next_row = gtk_list_box_get_row_at_index (listbox, row_index - 1);
+
+  if (next_row)
+    g_signal_emit_by_name (next_row, "activate");
+}
+
 static CcPanelListView
 get_view_from_listbox (CcPanelList *self,
                        GtkWidget   *listbox)
@@ -159,12 +206,13 @@ row_data_free (RowData *data)
 }
 
 static RowData*
-row_data_new (CcPanelCategory  category,
-              const gchar     *id,
-              const gchar     *name,
-              const gchar     *description,
-              gchar          **keywords,
-              const gchar     *icon)
+row_data_new (CcPanelCategory     category,
+              const gchar        *id,
+              const gchar        *name,
+              const gchar        *description,
+              gchar             **keywords,
+              const gchar        *icon,
+              CcPanelVisibility   visibility)
 {
   GtkWidget *label, *grid, *image;
   RowData *data;
@@ -221,6 +269,9 @@ row_data_new (CcPanelCategory  category,
   gtk_widget_show (data->row);
 
   g_object_set_data_full (G_OBJECT (data->row), "data", data, (GDestroyNotify) row_data_free);
+
+  data->visibility = visibility;
+  gtk_widget_set_visible (data->row, visibility == CC_PANEL_VISIBLE);
 
   return data;
 }
@@ -766,18 +817,21 @@ cc_panel_list_activate (CcPanelList *self)
 {
   GtkListBoxRow *row;
   GtkWidget *listbox;
+  guint i = 0;
+
+  CC_ENTRY;
 
   g_return_val_if_fail (CC_IS_PANEL_LIST (self), FALSE);
 
   listbox = get_listbox_from_view (self, self->view);
 
-  if (self->view == CC_PANEL_LIST_SEARCH)
-    row = gtk_list_box_get_row_at_y (GTK_LIST_BOX (listbox), 0);
-  else
-    row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (listbox), 0);
+  /* Select the first visible row */
+  do
+    row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (listbox), i++);
+  while (row && !gtk_widget_get_visible (GTK_WIDGET (row)));
 
   /* If the row is valid, activate it */
-  if (row)
+  if (row && !gtk_list_box_row_is_selected (row))
     {
       gtk_list_box_select_row (GTK_LIST_BOX (listbox), row);
       gtk_widget_grab_focus (GTK_WIDGET (row));
@@ -785,7 +839,7 @@ cc_panel_list_activate (CcPanelList *self)
       g_signal_emit_by_name (row, "activate");
     }
 
-  return row != NULL;
+  CC_RETURN (row != NULL);
 }
 
 const gchar*
@@ -865,13 +919,14 @@ cc_panel_list_set_view (CcPanelList     *self,
 }
 
 void
-cc_panel_list_add_panel (CcPanelList     *self,
-                         CcPanelCategory  category,
-                         const gchar     *id,
-                         const gchar     *title,
-                         const gchar     *description,
-                         gchar          **keywords,
-                         const gchar     *icon)
+cc_panel_list_add_panel (CcPanelList        *self,
+                         CcPanelCategory     category,
+                         const gchar        *id,
+                         const gchar        *title,
+                         const gchar        *description,
+                         gchar             **keywords,
+                         const gchar        *icon,
+                         CcPanelVisibility   visibility)
 {
   GtkWidget *listbox;
   RowData *data, *search_data;
@@ -879,27 +934,13 @@ cc_panel_list_add_panel (CcPanelList     *self,
   g_return_if_fail (CC_IS_PANEL_LIST (self));
 
   /* Add the panel to the proper listbox */
-  data = row_data_new (category, id, title, description, keywords, icon);
+  data = row_data_new (category, id, title, description, keywords, icon, visibility);
 
-  switch (category)
-    {
-    case CC_CATEGORY_DEVICES:
-      listbox = self->devices_listbox;
-      break;
-
-    case CC_CATEGORY_DETAILS:
-      listbox = self->details_listbox;
-      break;
-
-    default:
-      listbox = self->main_listbox;
-      break;
-    }
-
+  listbox = get_listbox_from_category (self, category);
   gtk_container_add (GTK_CONTAINER (listbox), data->row);
 
   /* And add to the search listbox too */
-  search_data = row_data_new (category, id, title, description, keywords, icon);
+  search_data = row_data_new (category, id, title, description, keywords, icon, visibility);
   gtk_container_add (GTK_CONTAINER (self->search_listbox), search_data->row);
 
   g_hash_table_insert (self->id_to_data, data->id, data);
@@ -925,7 +966,18 @@ cc_panel_list_set_active_panel (CcPanelList *self,
 
   g_assert (data != NULL);
 
+  /* Stop if row is supposed to be always hidden */
+  if (data->visibility == CC_PANEL_HIDDEN)
+    {
+      g_debug ("Panel '%s' is always hidden, stopping.", id);
+      cc_panel_list_activate (self);
+      return;
+    }
+
   listbox = gtk_widget_get_parent (data->row);
+
+  /* The row might be hidden now, so make sure it's visible */
+  gtk_widget_show (data->row);
 
   gtk_list_box_select_row (GTK_LIST_BOX (listbox), GTK_LIST_BOX_ROW (data->row));
   gtk_widget_grab_focus (data->row);
@@ -936,4 +988,39 @@ cc_panel_list_set_active_panel (CcPanelList *self,
   self->autoselect_panel = FALSE;
 
   g_signal_emit_by_name (data->row, "activate");
+}
+
+/**
+ * cc_panel_list_set_panel_visibility:
+ * @self: a #CcPanelList
+ * @id: the id of the panel
+ * @visibility: visibility of panel with @id
+ *
+ * Sets the visibility of panel with @id. @id must be a valid
+ * id with a corresponding panel.
+ */
+void
+cc_panel_list_set_panel_visibility (CcPanelList       *self,
+                                    const gchar       *id,
+                                    CcPanelVisibility  visibility)
+{
+  RowData *data;
+
+  g_return_if_fail (CC_IS_PANEL_LIST (self));
+
+  data = g_hash_table_lookup (self->id_to_data, id);
+
+  g_assert (data != NULL);
+
+  data->visibility = visibility;
+
+  /* If this is the currently selected row, and the panel can't be displayed
+   * (i.e. visibility != VISIBLE), then select the next possible row */
+  if (gtk_list_box_row_is_selected (GTK_LIST_BOX_ROW (data->row)) &&
+      visibility != CC_PANEL_VISIBLE)
+    {
+      activate_row_below (self, data);
+    }
+
+  gtk_widget_set_visible (data->row, visibility == CC_PANEL_VISIBLE);
 }

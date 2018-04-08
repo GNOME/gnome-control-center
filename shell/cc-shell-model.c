@@ -254,8 +254,8 @@ cc_shell_model_class_init (CcShellModelClass *klass)
 static void
 cc_shell_model_init (CcShellModel *self)
 {
-  GType types[] = {G_TYPE_STRING, G_TYPE_STRING, G_TYPE_APP_INFO, G_TYPE_STRING,
-                   G_TYPE_UINT, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV};
+  GType types[] = {G_TYPE_STRING, G_TYPE_STRING, G_TYPE_APP_INFO, G_TYPE_STRING, G_TYPE_UINT,
+                   G_TYPE_STRING, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV, G_TYPE_UINT };
 
   gtk_list_store_set_column_types (GTK_LIST_STORE (self),
                                    N_COLS, types);
@@ -318,6 +318,7 @@ cc_shell_model_add_item (CcShellModel    *model,
                                      COL_CASEFOLDED_DESCRIPTION, casefolded_description,
                                      COL_GICON, icon,
                                      COL_KEYWORDS, keywords,
+                                     COL_VISIBILITY, CC_PANEL_VISIBLE,
                                      -1);
 
   g_free (casefolded_name);
@@ -398,4 +399,44 @@ cc_shell_model_set_sort_terms (CcShellModel  *self,
                                            cc_shell_model_sort_func,
                                            self,
                                            NULL);
+}
+
+void
+cc_shell_model_set_panel_visibility (CcShellModel      *self,
+                                     const gchar       *id,
+                                     CcPanelVisibility  visibility)
+{
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gboolean valid;
+
+  g_return_if_fail (CC_IS_SHELL_MODEL (self));
+
+  model = GTK_TREE_MODEL (self);
+
+  /* Find the iter for the panel with the given id */
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+
+  while (valid)
+    {
+      g_autofree gchar *item_id = NULL;
+
+      gtk_tree_model_get (model, &iter, COL_ID, &item_id, -1);
+
+      /* Found the iter */
+      if (g_str_equal (id, item_id))
+        break;
+
+      /* If not found, continue */
+      valid = gtk_tree_model_iter_next (model, &iter);
+    }
+
+  /* If we don't find any panel with the given id, we'll iterate until
+   * valid == FALSE, so we can use this variable to determine if the
+   * panel was found or not. It is a programming error to try to set
+   * the visibility of a non-existant panel.
+   */
+  g_assert (valid);
+
+  gtk_list_store_set (GTK_LIST_STORE (self), &iter, COL_VISIBILITY, visibility, -1);
 }

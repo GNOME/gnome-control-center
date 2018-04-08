@@ -20,6 +20,8 @@
 
 #pragma once
 
+#include "cc-panel.h"
+
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
@@ -50,6 +52,7 @@ enum
   COL_CASEFOLDED_DESCRIPTION,
   COL_GICON,
   COL_KEYWORDS,
+  COL_VISIBILITY,
 
   N_COLS
 };
@@ -57,19 +60,23 @@ enum
 
 CcShellModel* cc_shell_model_new                 (void);
 
-void          cc_shell_model_add_item            (CcShellModel    *model,
-                                                  CcPanelCategory  category,
-                                                  GAppInfo        *appinfo,
-                                                  const char      *id);
+void          cc_shell_model_add_item            (CcShellModel       *model,
+                                                  CcPanelCategory     category,
+                                                  GAppInfo           *appinfo,
+                                                  const char         *id);
 
-gboolean      cc_shell_model_has_panel           (CcShellModel    *model,
-                                                  const char      *id);
+gboolean      cc_shell_model_has_panel           (CcShellModel       *model,
+                                                  const char         *id);
 
-gboolean      cc_shell_model_iter_matches_search (CcShellModel    *model,
-                                                  GtkTreeIter     *iter,
-                                                  const char      *term);
+gboolean      cc_shell_model_iter_matches_search (CcShellModel       *model,
+                                                  GtkTreeIter        *iter,
+                                                  const char         *term);
 
-void          cc_shell_model_set_sort_terms       (CcShellModel   *model,
-                                                   GStrv          terms);
+void          cc_shell_model_set_sort_terms       (CcShellModel      *model,
+                                                   GStrv              terms);
+
+void          cc_shell_model_set_panel_visibility (CcShellModel      *self,
+                                                   const gchar       *id,
+                                                   CcPanelVisibility  visible);
 
 G_END_DECLS
