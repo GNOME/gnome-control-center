@@ -39,6 +39,8 @@ struct _CcApplication
 {
   GtkApplication  parent;
 
+  CcShellModel   *model;
+
   CcWindow       *window;
 };
 
@@ -259,7 +261,8 @@ cc_application_startup (GApplication *application)
   gtk_application_set_accels_for_action (GTK_APPLICATION (application),
                                          "app.help", help_accels);
 
-  self->window = cc_window_new (GTK_APPLICATION (application));
+  self->model = cc_shell_model_new ();
+  self->window = cc_window_new (GTK_APPLICATION (application), self->model);
 }
 
 static void
@@ -319,4 +322,12 @@ cc_application_new (void)
                        "application-id", "org.gnome.ControlCenter",
                        "flags", G_APPLICATION_HANDLES_COMMAND_LINE,
                        NULL);
+}
+
+CcShellModel *
+cc_application_get_model (CcApplication *self)
+{
+  g_return_val_if_fail (CC_IS_APPLICATION (self), NULL);
+
+  return self->model;
 }

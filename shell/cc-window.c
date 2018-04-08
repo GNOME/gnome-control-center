@@ -36,6 +36,7 @@
 #include <string.h>
 #include <time.h>
 
+#include "cc-application.h"
 #include "cc-panel.h"
 #include "cc-shell.h"
 #include "cc-shell-category-view.h"
@@ -89,7 +90,8 @@ G_DEFINE_TYPE_WITH_CODE (CcWindow, cc_window, GTK_TYPE_APPLICATION_WINDOW,
 enum
 {
   PROP_0,
-  PROP_ACTIVE_PANEL
+  PROP_ACTIVE_PANEL,
+  PROP_MODEL
 };
 
 /* Auxiliary methods */
@@ -288,7 +290,9 @@ setup_model (CcWindow *shell)
   GtkTreeIter iter;
   gboolean valid;
 
-  shell->store = (GtkListStore *) cc_shell_model_new ();
+  /* CcApplication must have a valid model at this point */
+  g_assert (shell->store != NULL);
+
   model = GTK_TREE_MODEL (shell->store);
 
   cc_panel_loader_fill_model (CC_SHELL_MODEL (shell->store));
@@ -700,6 +704,11 @@ cc_window_get_property (GObject    *object,
     case PROP_ACTIVE_PANEL:
       g_value_set_object (value, self->active_panel);
       break;
+
+    case PROP_MODEL:
+      g_value_set_object (value, self->store);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
@@ -718,9 +727,47 @@ cc_window_set_property (GObject      *object,
     case PROP_ACTIVE_PANEL:
       set_active_panel (shell, g_value_get_object (value));
       break;
+
+    case PROP_MODEL:
+      g_assert (shell->store == NULL);
+      shell->store = g_value_dup_object (value);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
+}
+
+static void
+cc_window_constructed (GObject *object)
+{
+  g_autofree char *id = NULL;
+  GtkSettings *settings;
+  CcWindow *self;
+
+  self = CC_WINDOW (object);
+
+  /* Handle decorations for the split headers. */
+  settings = gtk_settings_get_default ();
+  g_signal_connect (settings,
+                    "notify::gtk-decoration-layout",
+                    G_CALLBACK (split_decorations_cb),
+                    self);
+
+  split_decorations_cb (settings, NULL, self);
+
+  /* Add the panels */
+  setup_model (self);
+
+  /* After everything is loaded, select the last used panel, if any,
+   * or the first visible panel */
+  id = g_settings_get_string (self->settings, "last-panel");
+  if (id != NULL && cc_shell_model_has_panel (CC_SHELL_MODEL (self->store), id))
+    cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), id);
+  else
+    cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
+
+  G_OBJECT_CLASS (cc_window_parent_class)->constructed (object);
 }
 
 static void
@@ -760,12 +807,21 @@ cc_window_class_init (CcWindowClass *klass)
 
   object_class->get_property = cc_window_get_property;
   object_class->set_property = cc_window_set_property;
+  object_class->constructed = cc_window_constructed;
   object_class->dispose = cc_window_dispose;
   object_class->finalize = cc_window_finalize;
 
   widget_class->map = cc_window_map;
 
   g_object_class_override_property (object_class, PROP_ACTIVE_PANEL, "active-panel");
+
+  g_object_class_install_property (object_class,
+                                   PROP_MODEL,
+                                   g_param_spec_object ("model",
+                                                        "Model",
+                                                        "The CcShellModel of this application",
+                                                        CC_TYPE_SHELL_MODEL,
+                                                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/gtk/window.ui");
 
@@ -800,37 +856,13 @@ cc_window_class_init (CcWindowClass *klass)
 static void
 cc_window_init (CcWindow *self)
 {
-  GtkSettings *settings;
-  g_autofree char *id = NULL;
-
   gtk_widget_init_template (GTK_WIDGET (self));
 
   gtk_widget_add_events (GTK_WIDGET (self), GDK_BUTTON_RELEASE_MASK);
 
   self->settings = g_settings_new ("org.gnome.ControlCenter");
-
-  /* Handle decorations for the split headers. */
-  settings = gtk_settings_get_default ();
-  g_signal_connect (settings,
-                    "notify::gtk-decoration-layout",
-                    G_CALLBACK (split_decorations_cb),
-                    self);
-
-  split_decorations_cb (settings, NULL, self);
-
-  /* Add the panels */
   self->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
   self->previous_panels = g_queue_new ();
-
-  setup_model (self);
-
-  /* After everything is loaded, select the last used panel, if any,
-   * or the first visible panel */
-  id = g_settings_get_string (self->settings, "last-panel");
-  if (id != NULL && cc_shell_model_has_panel (CC_SHELL_MODEL (self->store), id))
-    cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), id);
-  else
-    cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
 
   /* Add a custom CSS class on development builds */
   if (in_flatpak_sandbox ())
@@ -838,7 +870,8 @@ cc_window_init (CcWindow *self)
 }
 
 CcWindow *
-cc_window_new (GtkApplication *application)
+cc_window_new (GtkApplication *application,
+               CcShellModel   *model)
 {
   g_return_val_if_fail (GTK_IS_APPLICATION (application), NULL);
 
@@ -849,6 +882,7 @@ cc_window_new (GtkApplication *application)
                        "icon-name", DEFAULT_WINDOW_ICON_NAME,
                        "window-position", GTK_WIN_POS_CENTER,
                        "show-menubar", FALSE,
+                       "model", model,
                        NULL);
 }
 
