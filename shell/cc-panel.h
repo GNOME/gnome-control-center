@@ -36,6 +36,20 @@
 
 G_DECLARE_DERIVABLE_TYPE (CcPanel, cc_panel, CC, PANEL, GtkBin)
 
+/**
+ * CcPanelVisibility:
+ *
+ * @CC_PANEL_HIDDEN: Panel is hidden from search and sidebar, and not reachable.
+ * @CC_PANEL_VISIBLE_IN_SEARCH: Panel is hidden from main view, but can be accessed from search.
+ * @CC_PANEL_VISIBLE: Panel is visible everywhere.
+ */
+typedef enum
+{
+  CC_PANEL_HIDDEN,
+  CC_PANEL_VISIBLE_IN_SEARCH,
+  CC_PANEL_VISIBLE,
+} CcPanelVisibility;
+
 /* cc-shell.h requires CcPanel, so make sure it is defined first */
 #include "cc-shell.h"
 

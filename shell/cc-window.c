@@ -162,17 +162,21 @@ get_symbolic_icon_name_from_g_icon (GIcon *gicon)
 }
 
 static gboolean
-activate_panel (CcWindow    *self,
-                const gchar *id,
-                GVariant    *parameters,
-                const gchar *name,
-                GIcon       *gicon)
+activate_panel (CcWindow          *self,
+                const gchar       *id,
+                GVariant          *parameters,
+                const gchar       *name,
+                GIcon             *gicon,
+                CcPanelVisibility  visibility)
 {
   g_autoptr (GTimer) timer = NULL;
   GtkWidget *box, *title_widget;
   gdouble ellapsed_time;
 
   if (!id)
+    return FALSE;
+
+  if (visibility == CC_PANEL_HIDDEN)
     return FALSE;
 
   timer = g_timer_new ();
@@ -284,6 +288,23 @@ update_list_title (CcWindow *self)
 }
 
 static void
+on_row_changed_cb (GtkTreeModel *model,
+                   GtkTreePath  *path,
+                   GtkTreeIter  *iter,
+                   CcWindow     *self)
+{
+  g_autofree gchar *id = NULL;
+  CcPanelVisibility visibility;
+
+  gtk_tree_model_get (model, iter,
+                      COL_ID, &id,
+                      COL_VISIBILITY, &visibility,
+                      -1);
+
+  cc_panel_list_set_panel_visibility (CC_PANEL_LIST (self->panel_list), id, visibility);
+}
+
+static void
 setup_model (CcWindow *shell)
 {
   GtkTreeModel *model;
@@ -309,6 +330,7 @@ setup_model (CcWindow *shell)
       g_autofree gchar *id = NULL;
       g_autofree gchar *icon_name = NULL;
       g_autofree GStrv keywords = NULL;
+      CcPanelVisibility visibility;
 
       gtk_tree_model_get (model, &iter,
                           COL_CATEGORY, &category,
@@ -317,6 +339,7 @@ setup_model (CcWindow *shell)
                           COL_ID, &id,
                           COL_NAME, &name,
                           COL_KEYWORDS, &keywords,
+                          COL_VISIBILITY, &visibility,
                           -1);
 
       icon_name = get_symbolic_icon_name_from_g_icon (icon);
@@ -327,10 +350,14 @@ setup_model (CcWindow *shell)
                                name,
                                description,
                                keywords,
-                               icon_name);
+                               icon_name,
+                               visibility);
 
       valid = gtk_tree_model_iter_next (model, &iter);
     }
+
+  /* React to visibility changes */
+  g_signal_connect_object (model, "row-changed", G_CALLBACK (on_row_changed_cb), shell, 0);
 }
 
 
@@ -343,6 +370,7 @@ set_active_panel_from_id (CcShell      *shell,
 {
   g_autoptr(GIcon) gicon = NULL;
   g_autofree gchar *name = NULL;
+  CcPanelVisibility visibility;
   GtkTreeIter iter;
   GtkWidget *old_panel;
   CcWindow *self;
@@ -372,6 +400,7 @@ set_active_panel_from_id (CcShell      *shell,
                           COL_NAME, &name,
                           COL_GICON, &gicon,
                           COL_ID, &id,
+                          COL_VISIBILITY, &visibility,
                           -1);
 
       if (id && strcmp (id, start_id) == 0)
