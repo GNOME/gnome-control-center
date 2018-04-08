@@ -29,6 +29,19 @@
 
 G_DECLARE_DERIVABLE_TYPE (CcPanel, cc_panel, CC, PANEL, GtkBin)
 
+/**
+ * CcPanelStaticInitFunc:
+ *
+ * Function that statically allocates resources and initializes
+ * any data that the panel will make use of during runtime.
+ *
+ * If panels represent hardware that can potentially not exist,
+ * e.g. the Wi-Fi panel, these panels can use this function to
+ * show or hide themselves without needing to have an instance
+ * created and running.
+ */
+typedef void (*CcPanelStaticInitFunc) (void);
+
 /*•
  * Utility macro used to register panels
  *
