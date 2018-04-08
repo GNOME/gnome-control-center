@@ -60,10 +60,15 @@ void                 cc_panel_list_add_panel                     (CcPanelList   
                                                                   const gchar        *title,
                                                                   const gchar        *description,
                                                                   gchar             **keywords,
-                                                                  const gchar        *icon);
+                                                                  const gchar        *icon,
+                                                                  gboolean            visible);
 
 void                 cc_panel_list_set_active_panel               (CcPanelList       *self,
                                                                    const gchar       *id);
+
+void                 cc_panel_list_set_panel_visible             (CcPanelList        *self,
+                                                                  const gchar        *id,
+                                                                  gboolean            visible);
 
 G_END_DECLS
 

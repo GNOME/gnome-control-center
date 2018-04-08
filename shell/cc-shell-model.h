@@ -73,6 +73,7 @@ enum
   COL_CASEFOLDED_DESCRIPTION,
   COL_GICON,
   COL_KEYWORDS,
+  COL_VISIBLE,
 
   N_COLS
 };
@@ -104,6 +105,10 @@ gboolean cc_shell_model_iter_matches_search (CcShellModel *model,
 
 void cc_shell_model_set_sort_terms (CcShellModel  *model,
                                     gchar        **terms);
+
+void cc_shell_model_set_panel_visible (CcShellModel *self,
+                                       const gchar  *id,
+                                       gboolean      visible);
 
 G_END_DECLS
 
