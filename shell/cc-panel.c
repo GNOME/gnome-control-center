@@ -42,7 +42,7 @@
 
 #define CC_PANEL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_PANEL, CcPanelPrivate))
 
-struct CcPanelPrivate
+typedef struct
 {
   gchar    *id;
   gchar    *display_name;
@@ -51,16 +51,19 @@ struct CcPanelPrivate
 
   gboolean  is_active;
   CcShell  *shell;
-};
+} CcPanelPrivate;
+
+G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (CcPanel, cc_panel, GTK_TYPE_BIN)
 
 enum
 {
-    PROP_0,
-    PROP_SHELL,
-    PROP_PARAMETERS
+  PROP_0,
+  PROP_SHELL,
+  PROP_PARAMETERS,
+  N_PROPS
 };
 
-G_DEFINE_ABSTRACT_TYPE (CcPanel, cc_panel, GTK_TYPE_BIN)
+static GParamSpec *properties [N_PROPS];
 
 static void
 cc_panel_set_property (GObject      *object,
@@ -68,22 +71,22 @@ cc_panel_set_property (GObject      *object,
                        const GValue *value,
                        GParamSpec   *pspec)
 {
-  CcPanel *panel;
-
-  panel = CC_PANEL (object);
+  CcPanelPrivate *priv = cc_panel_get_instance_private (CC_PANEL (object));
 
   switch (prop_id)
     {
     case PROP_SHELL:
       /* construct only property */
-      panel->priv->shell = g_value_get_object (value);
+      priv->shell = g_value_get_object (value);
       break;
 
     case PROP_PARAMETERS:
       {
-        GVariant *parameters = g_value_get_variant (value);
-        GVariant *v;
+        g_autoptr (GVariant) v = NULL;
+        GVariant *parameters;
         gsize n_parameters;
+
+        parameters = g_value_get_variant (value);
 
         if (parameters == NULL)
           return;
@@ -99,8 +102,6 @@ cc_panel_set_property (GObject      *object,
                      (gchar *)g_variant_get_type (v));
         else if (g_variant_n_children (v) > 0)
           g_warning ("Ignoring additional flags");
-
-        g_variant_unref (v);
 
         if (n_parameters > 1)
           g_warning ("Ignoring additional parameters");
@@ -119,14 +120,12 @@ cc_panel_get_property (GObject    *object,
                        GValue     *value,
                        GParamSpec *pspec)
 {
-  CcPanel *panel;
-
-  panel = CC_PANEL (object);
+  CcPanelPrivate *priv = cc_panel_get_instance_private (CC_PANEL (object));
 
   switch (prop_id)
     {
     case PROP_SHELL:
-      g_value_set_object (value, panel->priv->shell);
+      g_value_set_object (value, priv->shell);
       break;
 
     default:
@@ -138,15 +137,10 @@ cc_panel_get_property (GObject    *object,
 static void
 cc_panel_finalize (GObject *object)
 {
-  CcPanel *panel;
+  CcPanelPrivate *priv = cc_panel_get_instance_private (CC_PANEL (object));
 
-  g_return_if_fail (object != NULL);
-  g_return_if_fail (CC_IS_PANEL (object));
-
-  panel = CC_PANEL (object);
-
-  g_free (panel->priv->id);
-  g_free (panel->priv->display_name);
+  g_clear_pointer (&priv->id, g_free);
+  g_clear_pointer (&priv->display_name, g_free);
 
   G_OBJECT_CLASS (cc_panel_parent_class)->finalize (object);
 }
@@ -206,9 +200,8 @@ cc_panel_size_allocate (GtkWidget     *widget,
 static void
 cc_panel_class_init (CcPanelClass *klass)
 {
-  GParamSpec      *pspec;
-  GObjectClass    *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass  *widget_class = GTK_WIDGET_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->get_property = cc_panel_get_property;
   object_class->set_property = cc_panel_set_property;
@@ -218,31 +211,25 @@ cc_panel_class_init (CcPanelClass *klass)
   widget_class->get_preferred_height = cc_panel_get_preferred_height;
   widget_class->size_allocate = cc_panel_size_allocate;
 
-  gtk_container_class_handle_border_width (GTK_CONTAINER_CLASS (klass));
+  properties[PROP_SHELL] = g_param_spec_object ("shell",
+                                                "Shell",
+                                                "Shell the Panel resides in",
+                                                CC_TYPE_SHELL,
+                                                G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  g_type_class_add_private (klass, sizeof (CcPanelPrivate));
+  properties[PROP_PARAMETERS] = g_param_spec_variant ("parameters",
+                                                      "Structured parameters",
+                                                      "Additional parameters passed externally (ie. command line, D-Bus activation)",
+                                                      G_VARIANT_TYPE ("av"),
+                                                      NULL,
+                                                      G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);
 
-  pspec = g_param_spec_object ("shell",
-                               "Shell",
-                               "Shell the Panel resides in",
-                               CC_TYPE_SHELL,
-                               G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS
-                               | G_PARAM_CONSTRUCT_ONLY);
-  g_object_class_install_property (object_class, PROP_SHELL, pspec);
-
-  pspec = g_param_spec_variant ("parameters",
-                                "Structured parameters",
-                                "Additional parameters passed externally (ie. command line, dbus activation)",
-                                G_VARIANT_TYPE ("av"),
-                                NULL,
-                                G_PARAM_WRITABLE);
-  g_object_class_install_property (object_class, PROP_PARAMETERS, pspec);
+  g_object_class_install_properties (object_class, N_PROPS, properties);
 }
 
 static void
 cc_panel_init (CcPanel *panel)
 {
-  panel->priv = CC_PANEL_GET_PRIVATE (panel);
 }
 
 /**
@@ -256,7 +243,13 @@ cc_panel_init (CcPanel *panel)
 CcShell *
 cc_panel_get_shell (CcPanel *panel)
 {
-  return panel->priv->shell;
+  CcPanelPrivate *priv;
+
+  g_return_val_if_fail (CC_IS_PANEL (panel), NULL);
+
+  priv = cc_panel_get_instance_private (panel);
+
+  return priv->shell;
 }
 
 GPermission *
