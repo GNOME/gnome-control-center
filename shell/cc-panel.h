@@ -32,6 +32,20 @@
  */
 #define CC_PANEL_REGISTER(PluginName, plugin_name) G_DEFINE_TYPE (PluginName, plugin_name, CC_TYPE_PANEL)
 
+/**
+ * CcPanelStaticInitFunc:
+ *
+ * Function that statically allocates resources and initializes
+ * any data that the panel will make use of during runtime.
+ *
+ * If panels represent hardware that can potentially not exist,
+ * e.g. the Wi-Fi panel, these panels can use this function to
+ * show or hide themselves without needing to have an instance
+ * created and running.
+ */
+typedef void (*CcPanelStaticInitFunc) (void);
+
+
 #define CC_TYPE_PANEL (cc_panel_get_type())
 
 G_DECLARE_DERIVABLE_TYPE (CcPanel, cc_panel, CC, PANEL, GtkBin)
