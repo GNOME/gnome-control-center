@@ -865,13 +865,14 @@ cc_panel_list_set_view (CcPanelList     *self,
 }
 
 void
-cc_panel_list_add_panel (CcPanelList     *self,
-                         CcPanelCategory  category,
-                         const gchar     *id,
-                         const gchar     *title,
-                         const gchar     *description,
-                         gchar          **keywords,
-                         const gchar     *icon)
+cc_panel_list_add_panel (CcPanelList      *self,
+                         CcPanelCategory   category,
+                         const gchar      *id,
+                         const gchar      *title,
+                         const gchar      *description,
+                         gchar           **keywords,
+                         const gchar      *icon,
+                         gboolean          visible)
 {
   GtkWidget *listbox;
   RowData *data, *search_data;
@@ -897,10 +898,12 @@ cc_panel_list_add_panel (CcPanelList     *self,
     }
 
   gtk_container_add (GTK_CONTAINER (listbox), data->row);
+  gtk_widget_set_visible (data->row, visible);
 
   /* And add to the search listbox too */
   search_data = row_data_new (category, id, title, description, keywords, icon);
   gtk_container_add (GTK_CONTAINER (self->search_listbox), search_data->row);
+  gtk_widget_set_visible (search_data->row, visible);
 
   g_hash_table_insert (self->id_to_data, data->id, data);
 }
@@ -936,4 +939,29 @@ cc_panel_list_set_active_panel (CcPanelList *self,
   self->autoselect_panel = FALSE;
 
   g_signal_emit_by_name (data->row, "activate");
+}
+
+/**
+ * cc_panel_list_set_panel_visible:
+ * @self: a #CcPanelList
+ * @id: the id of the panel
+ * @visible: whether panel with @id is visible
+ *
+ * Sets the visibility of panel with @id. @id must be a valid
+ * id with a corresponding panel.
+ */
+void
+cc_panel_list_set_panel_visible (CcPanelList *self,
+                                 const gchar *id,
+                                 gboolean     visible)
+{
+  RowData *data;
+
+  g_return_if_fail (CC_IS_PANEL_LIST (self));
+
+  data = g_hash_table_lookup (self->id_to_data, id);
+
+  g_assert (data != NULL);
+
+  gtk_widget_set_visible (data->row, visible);
 }

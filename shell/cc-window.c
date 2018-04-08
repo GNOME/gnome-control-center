@@ -249,6 +249,23 @@ update_list_title (CcWindow *self)
 }
 
 static void
+on_row_changed_cb (GtkTreeModel *model,
+                   GtkTreePath  *path,
+                   GtkTreeIter  *iter,
+                   CcWindow     *self)
+{
+  g_autofree gchar *id = NULL;
+  gboolean visible;
+
+  gtk_tree_model_get (model, iter,
+                      COL_ID, &id,
+                      COL_VISIBLE, &visible,
+                      -1);
+
+  cc_panel_list_set_panel_visible (CC_PANEL_LIST (self->panel_list), id, visible);
+}
+
+static void
 setup_model (CcWindow *shell)
 {
   GtkTreeModel *model;
@@ -274,6 +291,7 @@ setup_model (CcWindow *shell)
       g_autofree gchar *id = NULL;
       g_autofree gchar *icon_name = NULL;
       g_autofree GStrv keywords = NULL;
+      gboolean visible;
 
       gtk_tree_model_get (model, &iter,
                           COL_CATEGORY, &category,
@@ -282,6 +300,7 @@ setup_model (CcWindow *shell)
                           COL_ID, &id,
                           COL_NAME, &name,
                           COL_KEYWORDS, &keywords,
+                          COL_VISIBLE, &visible,
                           -1);
 
       icon_name = get_symbolic_icon_name_from_g_icon (icon);
@@ -292,10 +311,14 @@ setup_model (CcWindow *shell)
                                name,
                                description,
                                keywords,
-                               icon_name);
+                               icon_name,
+                               visible);
 
       valid = gtk_tree_model_iter_next (model, &iter);
     }
+
+  /* React to visibility changes */
+  g_signal_connect_object (model, "row-changed", G_CALLBACK (on_row_changed_cb), shell, 0);
 }
 
 
