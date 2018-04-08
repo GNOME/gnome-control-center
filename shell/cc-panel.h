@@ -20,52 +20,27 @@
  *          Thomas Wood <thomas.wood@intel.com>
  */
 
-
-#ifndef __CC_PANEL_H
-#define __CC_PANEL_H
+#pragma once
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-
-G_BEGIN_DECLS
-
-#define CC_TYPE_PANEL         (cc_panel_get_type ())
-#define CC_PANEL(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), CC_TYPE_PANEL, CcPanel))
-#define CC_PANEL_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CC_TYPE_PANEL, CcPanelClass))
-#define CC_IS_PANEL(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), CC_TYPE_PANEL))
-#define CC_IS_PANEL_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CC_TYPE_PANEL))
-#define CC_PANEL_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CC_TYPE_PANEL, CcPanelClass))
-
-/*•
+/**
  * Utility macro used to register panels
  *
  * use: CC_PANEL_REGISTER (PluginName, plugin_name)
  */
-#define CC_PANEL_REGISTER(PluginName, plugin_name)                      \
-  G_DEFINE_TYPE (PluginName, plugin_name, CC_TYPE_PANEL)
+#define CC_PANEL_REGISTER(PluginName, plugin_name) G_DEFINE_TYPE (PluginName, plugin_name, CC_TYPE_PANEL)
 
-typedef struct CcPanelPrivate CcPanelPrivate;
+#define CC_TYPE_PANEL (cc_panel_get_type())
 
-typedef struct _CcPanel       CcPanel;
-typedef struct _CcPanelClass  CcPanelClass;
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (CcPanel, g_object_unref)
+G_DECLARE_DERIVABLE_TYPE (CcPanel, cc_panel, CC, PANEL, GtkBin)
 
 /* cc-shell.h requires CcPanel, so make sure it is defined first */
 #include "cc-shell.h"
 
-/**
- * CcPanel:
- *
- * The contents of this struct are private and should not be accessed directly.
- */
-struct _CcPanel
-{
-  /*< private >*/
-  GtkBin          parent;
-  CcPanelPrivate *priv;
-};
+G_BEGIN_DECLS
+
 /**
  * CcPanelClass:
  *
@@ -94,4 +69,3 @@ GtkWidget   *cc_panel_get_title_widget (CcPanel     *panel);
 
 G_END_DECLS
 
-#endif /* __CC_PANEL_H */
