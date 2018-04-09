@@ -1229,14 +1229,13 @@ connection_test_cb (GObject      *source_object,
                     gpointer      user_data)
 {
   CcPrintersPanelPrivate *priv;
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self;
   gboolean                success;
   PpCups                 *cups = PP_CUPS (source_object);
   g_autoptr(GError)       error = NULL;
 
-  priv = self->priv;
-
   success = pp_cups_connection_test_finish (cups, result, &error);
+  g_object_unref (cups);
 
   if (error != NULL)
     {
@@ -1244,15 +1243,18 @@ connection_test_cb (GObject      *source_object,
         {
           g_warning ("Could not test connection: %s", error->message);
         }
+
+      return;
     }
+
+  self = CC_PRINTERS_PANEL (user_data);
+  priv = self->priv;
 
   if (!success)
     {
       priv->cups_status_check_id =
         g_timeout_add_seconds (CUPS_STATUS_CHECK_INTERVAL, cups_status_check, self);
     }
-
-  g_object_unref (cups);
 }
 
 static void
