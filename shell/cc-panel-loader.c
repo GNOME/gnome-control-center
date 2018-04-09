@@ -64,6 +64,11 @@ extern GType cc_user_panel_get_type (void);
 extern GType cc_wacom_panel_get_type (void);
 #endif /* BUILD_WACOM */
 
+/* Static init functions */
+#ifdef BUILD_NETWORK
+extern void cc_wifi_panel_static_init_func (void);
+#endif /* BUILD_NETWORK */
+
 #define PANEL_TYPE(name, get_type, init_func) { name, get_type, init_func }
 
 #else /* CC_PANEL_LOADER_NO_GTYPES */
@@ -93,7 +98,7 @@ static struct {
   PANEL_TYPE("mouse",            cc_mouse_panel_get_type,                NULL),
 #ifdef BUILD_NETWORK
   PANEL_TYPE("network",          cc_network_panel_get_type,              NULL),
-  PANEL_TYPE("wifi",             cc_wifi_panel_get_type,                 NULL),
+  PANEL_TYPE("wifi",             cc_wifi_panel_get_type,                 cc_wifi_panel_static_init_func),
 #endif
   PANEL_TYPE("notifications",    cc_notifications_panel_get_type,        NULL),
   PANEL_TYPE("online-accounts",  cc_goa_panel_get_type,                  NULL),
