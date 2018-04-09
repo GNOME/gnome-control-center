@@ -28,6 +28,8 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (CcWifiPanel, cc_wifi_panel, CC, WIFI_PANEL, CcPanel)
 
+void                 cc_wifi_panel_static_init_func              (void);
+
 G_END_DECLS
 
 #endif /* CC_WIFI_PANEL_H */

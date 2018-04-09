@@ -23,6 +23,8 @@
 #include "net-device-wifi.h"
 #include "network-dialogs.h"
 
+#include "shell/cc-application.h"
+#include "shell/cc-debug.h"
 #include "shell/cc-object-storage.h"
 #include "list-box-helper.h"
 
@@ -80,6 +82,67 @@ enum
   PROP_PARAMETERS,
   N_PROPS
 };
+
+/* Static init function */
+
+static void
+update_panel_visibility (NMClient *client)
+{
+  const GPtrArray *devices;
+  CcApplication *application;
+  gboolean visible;
+  guint i;
+
+  CC_TRACE_MSG ("Updating Wi-Fi panel visibility");
+
+  devices = nm_client_get_devices (client);
+  visible = FALSE;
+
+  for (i = 0; devices && i < devices->len; i++)
+    {
+      NMDevice *device = g_ptr_array_index (devices, i);
+
+      visible |= NM_IS_DEVICE_WIFI (device);
+
+      if (visible)
+        break;
+    }
+
+  /* Set the new visibility */
+  application = CC_APPLICATION (g_application_get_default ());
+  cc_shell_model_set_panel_visibility (cc_application_get_model (application),
+                                       "wifi",
+                                       visible ? CC_PANEL_VISIBLE : CC_PANEL_VISIBLE_IN_SEARCH);
+
+  CC_TRACE_MSG ("Wi-Fi panel visible: %s", visible ? "yes" : "no");
+}
+
+void
+cc_wifi_panel_static_init_func (void)
+{
+  NMClient *client;
+
+  g_debug ("Monitoring NetworkManager for Wi-Fi devices");
+
+  /* Create and store a NMClient instance if it doesn't exist yet */
+  if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT))
+    {
+      client = nm_client_new (NULL, NULL);
+      cc_object_storage_add_object (CC_OBJECT_NMCLIENT, client);
+      g_object_unref (client);
+    }
+
+  client = cc_object_storage_get_object (CC_OBJECT_NMCLIENT);
+
+  /* Update the panel visibility and monitor for changes */
+
+  g_signal_connect (client, "device-added", G_CALLBACK (update_panel_visibility), NULL);
+  g_signal_connect (client, "device-removed", G_CALLBACK (update_panel_visibility), NULL);
+
+  update_panel_visibility (client);
+
+  g_object_unref (client);
+}
 
 /* Auxiliary methods */
 
