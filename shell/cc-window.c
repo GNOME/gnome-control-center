@@ -122,7 +122,6 @@ activate_panel (CcWindow    *self,
 {
   g_autoptr (GTimer) timer = NULL;
   GtkWidget *box, *title_widget;
-  const gchar *icon_name;
   gdouble ellapsed_time;
 
   if (!id)
@@ -154,12 +153,8 @@ activate_panel (CcWindow    *self,
   gtk_stack_set_visible_child_name (GTK_STACK (self->stack), id);
 
   /* set the title of the window */
-  icon_name = get_icon_name_from_g_icon (gicon);
-
   gtk_window_set_role (GTK_WINDOW (self), id);
   gtk_header_bar_set_title (GTK_HEADER_BAR (self->panel_headerbar), name);
-  gtk_window_set_default_icon_name (icon_name);
-  gtk_window_set_icon_name (GTK_WINDOW (self), icon_name);
 
   title_widget = cc_panel_get_title_widget (CC_PANEL (self->current_panel));
   gtk_header_bar_set_custom_title (GTK_HEADER_BAR (self->panel_headerbar), title_widget);
