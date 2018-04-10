@@ -91,8 +91,8 @@ enum
 };
 
 /* Auxiliary methods */
-static const gchar *
-get_icon_name_from_g_icon (GIcon *gicon)
+static gchar *
+get_symbolic_icon_name_from_g_icon (GIcon *gicon)
 {
   const gchar * const *names;
   GtkIconTheme *icon_theme;
@@ -106,8 +106,11 @@ get_icon_name_from_g_icon (GIcon *gicon)
 
   for (i = 0; names[i] != NULL; i++)
     {
-      if (gtk_icon_theme_has_icon (icon_theme, names[i]))
-        return names[i];
+      g_autofree gchar *name = NULL;
+      name = g_strdup_printf ("%s-symbolic", names[i]);
+
+      if (gtk_icon_theme_has_icon (icon_theme, name))
+        return g_steal_pointer (&name);
     }
 
   return NULL;
@@ -265,9 +268,8 @@ setup_model (CcWindow *shell)
       g_autofree gchar *name = NULL;
       g_autofree gchar *description = NULL;
       g_autofree gchar *id = NULL;
-      g_autofree gchar *symbolic_icon = NULL;
+      g_autofree gchar *icon_name = NULL;
       g_autofree GStrv keywords = NULL;
-      const gchar *icon_name;
 
       gtk_tree_model_get (model, &iter,
                           COL_CATEGORY, &category,
@@ -278,8 +280,7 @@ setup_model (CcWindow *shell)
                           COL_KEYWORDS, &keywords,
                           -1);
 
-      icon_name = get_icon_name_from_g_icon (icon);
-      symbolic_icon = g_strdup_printf ("%s-symbolic", icon_name);
+      icon_name = get_symbolic_icon_name_from_g_icon (icon);
 
       cc_panel_list_add_panel (CC_PANEL_LIST (shell->panel_list),
                                category,
@@ -287,7 +288,7 @@ setup_model (CcWindow *shell)
                                name,
                                description,
                                keywords,
-                               symbolic_icon);
+                               icon_name);
 
       valid = gtk_tree_model_iter_next (model, &iter);
     }
