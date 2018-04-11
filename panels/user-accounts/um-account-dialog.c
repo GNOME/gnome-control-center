@@ -514,6 +514,20 @@ on_password_focus_out (GtkEntry *entry,
         return FALSE;
 }
 
+static gboolean
+on_password_key_press_cb (GtkEntry *entry,
+                          GdkEvent *event,
+                          gpointer  user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        GdkEventKey *key = (GdkEventKey *)event;
+
+        if (key->keyval == GDK_KEY_Tab)
+               local_password_timeout (self);
+
+        return FALSE;
+}
+
 static void
 on_password_changed (GtkEntry *entry,
                    GParamSpec *pspec,
@@ -577,6 +591,7 @@ local_init (UmAccountDialog *self)
         gtk_widget_set_sensitive (self->local_password, FALSE);
         g_signal_connect (self->local_password, "notify::text", G_CALLBACK (on_password_changed), self);
         g_signal_connect_after (self->local_password, "focus-out-event", G_CALLBACK (on_password_focus_out), self);
+        g_signal_connect (self->local_password, "key-press-event", G_CALLBACK (on_password_key_press_cb), self);
         g_signal_connect_swapped (self->local_password, "activate", G_CALLBACK (dialog_validate), self);
         g_signal_connect (self->local_password, "icon-press", G_CALLBACK (on_generate), self);
 
