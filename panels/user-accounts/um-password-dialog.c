@@ -350,6 +350,19 @@ password_entry_focus_out (GtkWidget        *entry,
         return FALSE;
 }
 
+static gboolean
+password_key_press (GtkEntry         *entry,
+                    GdkEvent         *event,
+                    UmPasswordDialog *um)
+{
+        GdkEventKey *key = (GdkEventKey *)event;
+
+        if (key->keyval == GDK_KEY_Tab)
+               password_entry_timeout (um);
+
+        return FALSE;
+}
+
 static void
 auth_cb (PasswdHandler    *handler,
          GError           *error,
@@ -481,6 +494,8 @@ um_password_dialog_new (void)
                           G_CALLBACK (password_entry_changed), um);
         g_signal_connect_after (widget, "focus-out-event",
                                 G_CALLBACK (password_entry_focus_out), um);
+        g_signal_connect (widget, "key-press-event",
+                          G_CALLBACK (password_key_press), um);
         g_signal_connect_swapped (widget, "activate", G_CALLBACK (password_entry_timeout), um);
         gtk_entry_set_visibility (GTK_ENTRY (widget), FALSE);
         um->password_entry = widget;
