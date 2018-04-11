@@ -482,6 +482,7 @@ on_generate (GtkEntry             *entry,
         gtk_entry_set_text (GTK_ENTRY (self->local_password), pwd);
         gtk_entry_set_text (GTK_ENTRY (self->local_verify), pwd);
         gtk_entry_set_visibility (GTK_ENTRY (self->local_password), TRUE);
+        gtk_widget_set_sensitive (self->local_verify, TRUE);
 
         g_free (pwd);
 }
