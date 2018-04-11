@@ -443,6 +443,7 @@ on_generate (GtkEntry             *entry,
         gtk_entry_set_text (GTK_ENTRY (um->password_entry), pwd);
         gtk_entry_set_text (GTK_ENTRY (um->verify_entry), pwd);
         gtk_entry_set_visibility (GTK_ENTRY (um->password_entry), TRUE);
+        gtk_widget_set_sensitive (um->verify_entry, TRUE);
 
         g_free (pwd);
 }
