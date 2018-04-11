@@ -69,6 +69,7 @@ update_password_strength (UmPasswordDialog *um)
         const gchar *username;
         gint strength_level;
         const gchar *hint;
+        const gchar *verify;
 
         if (um->user == NULL) {
                 return 0;
@@ -90,6 +91,11 @@ update_password_strength (UmPasswordDialog *um)
                 set_entry_generation_icon (GTK_ENTRY (um->password_entry));
         } else {
                 clear_entry_validation_error (GTK_ENTRY (um->password_entry));
+        }
+
+        verify = gtk_entry_get_text (GTK_ENTRY (um->verify_entry));
+        if (strlen (verify) == 0) {
+                gtk_widget_set_sensitive (um->verify_entry, strength_level > 1);
         }
 
         return strength_level;
