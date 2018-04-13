@@ -276,7 +276,6 @@ static const gchar * const panel_order[] = {
   "wifi",
   "mobile-broadband",
   "bluetooth",
-  "thunderbolt",
   "background",
   "notifications",
   "search",
@@ -295,6 +294,7 @@ static const gchar * const panel_order[] = {
   "mouse",
   "printers",
   "removable-media",
+  "thunderbolt",
   "wacom",
   "color",
 
