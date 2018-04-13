@@ -185,8 +185,8 @@ bolt_client_ready (GObject      *source,
         return;
 
       g_warning ("Could not create client: %s", err->message);
-      text = _("The thunderbolt subsystem (boltd) is not installed or "
-               "not setup properly.");
+      text = _("The Thunderbolt subsystem (boltd) is not installed or "
+               "not set up properly.");
 
       gtk_label_set_label (panel->notb_details, text);
       gtk_stack_set_visible_child_name (panel->container, "no-thunderbolt");
