@@ -27,6 +27,8 @@
 
 #include <glib/gi18n.h>
 
+#define RESOURCE_UI "/org/gnome/control-center/thunderbolt/cc-bolt-device-entry.ui"
+
 struct _CcBoltDeviceEntry
 {
   GtkListBoxRow parent;
@@ -40,17 +42,15 @@ struct _CcBoltDeviceEntry
 
 static const char *   device_status_to_brief_for_ui (BoltDevice *dev);
 
+G_DEFINE_TYPE (CcBoltDeviceEntry, cc_bolt_device_entry, GTK_TYPE_LIST_BOX_ROW);
+
 enum
 {
   SIGNAL_STATUS_CHANGED,
   SIGNAL_LAST
 };
 
-static guint signals[SIGNAL_LAST] = {0};
-
-G_DEFINE_TYPE (CcBoltDeviceEntry, cc_bolt_device_entry, GTK_TYPE_LIST_BOX_ROW);
-
-#define RESOURCE_UI "/org/gnome/control-center/thunderbolt/cc-bolt-device-entry.ui"
+static guint signals[SIGNAL_LAST] = { 0, };
 
 static void
 entry_set_name (CcBoltDeviceEntry *entry)
