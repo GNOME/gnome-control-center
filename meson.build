@@ -44,7 +44,7 @@ foreach define: set_defines
   config_h.set_quoted(define[0], define[1])
 endforeach
 
-config_h.set('USER_DIR_MODE', 0700,
+config_h.set('USER_DIR_MODE', '0700',
              description: 'Permissions for creating the user\'s config, cache and data directories')
 
 # compiler flags
