@@ -119,5 +119,27 @@ libpanel_loader = static_library(
   c_args: cflags + ['-DCC_PANEL_LOADER_NO_GTYPES']
 )
 
+# libshell_test
+sources = files(
+  'cc-panel.c',
+  'cc-shell.c',
+  'cc-log.c',
+  'cc-object-storage.c',
+)
+libtestshell = static_library(
+  'testshell',
+  sources,
+  include_directories: top_inc,
+  dependencies: common_deps + [ libwidgets_dep ],
+  c_args: cflags,
+  link_with: panels_libs
+)
+libtestshell_dep = declare_dependency(
+  include_directories: top_inc,
+  link_with: libtestshell
+)
+libtestshell_deps = common_deps + [ libwidgets_dep, libtestshell_dep ]
+
+
 install_data ('org.gnome.ControlCenter.gschema.xml',
               install_dir: control_center_schemadir)
