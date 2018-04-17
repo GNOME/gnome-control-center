@@ -1,8 +1,8 @@
 project(
   'gnome-control-center', 'c',
-  version: '3.29.0',
-  license: 'GPL2+',
-  meson_version: '>= 0.43.0'
+        version : '3.29.0',
+        license : 'GPL2+',
+  meson_version : '>= 0.43.0'
 )
 
 control_center_prefix = get_option('prefix')
@@ -254,7 +254,6 @@ subdir('po')
 subdir('panels')
 subdir('shell')
 subdir('search-provider')
-
 subdir('tests')
 
 if get_option('documentation')
@@ -271,18 +270,19 @@ meson.add_install_script(
   control_center_datadir
 )
 
-output = meson.project_name() + ' was configured with the following options:\n'
-output += '** gnome-bluetooth (Bluetooth panel): ' + host_is_linux_not_s390.to_string() + '\n'
-output += '** Cheese (Users panel webcam support): ' + enable_cheese.to_string() + '\n'
-output += '** IBus (Region panel IBus support): ' + enable_ibus.to_string() + '\n'
-output += '** NetworkManager (Network panel): ' + host_is_linux.to_string() + '\n'
-output += '** wacom (Wacom tablet panel): ' + host_is_linux_not_s390.to_string() + '\n'
-output += '** Wayland: ' + enable_wayland.to_string() + '\n'
-output += '** gnome-session libexecdir: ' + gnome_session_libexecdir + '\n'
+output = ''
+output += '\n        ' + meson.project_name() + ' - ' + meson.project_version() + '\n'
+output += '    ===================================\n'
+output += ' Options \n'
+output += '     Documentation .............................. ' + get_option('documentation').to_string() + '\n'
+output += '     Tracing .................................... ' + enable_tracing.to_string() + '\n'
+output += '     gnome-session libexecdir ................... ' + gnome_session_libexecdir + '\n'
+output += ' Panels \n'
+output += '     GNOME Bluetooth (Bluetooth panel) .......... ' + host_is_linux_not_s390.to_string() + '\n'
+output += '     Cheese (Users panel webcam support) ........ ' + enable_cheese.to_string() + '\n'
+output += '     IBus (Region panel IBus support) ........... ' + enable_ibus.to_string() + '\n'
+output += '     NetworkManager (Network panel) ............. ' + host_is_linux.to_string() + '\n'
+output += '     Wacom (Wacom tablet panel) ................. ' + host_is_linux_not_s390.to_string() + '\n'
+output += '     Wayland .................................... ' + enable_wayland.to_string() + '\n'
 
-if enable_tracing
-  output += '** Tracing enabled \n'
-endif
-
-output += 'End options'
 message(output)
