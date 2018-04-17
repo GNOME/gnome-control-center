@@ -53,26 +53,37 @@ static void
 fixture_set_up_empty (NetworkPanelFixture *fixture,
                       gconstpointer user_data)
 {
+  g_print("fixture_set_up: 1\n");
   GError *error = NULL;
+  g_print("fixture_set_up: 2\n");
 
   cc_object_storage_initialize ();
+  g_print("fixture_set_up: 3\n");
 
   /* Bring up the libnm service. */
   fixture->sinfo = nmtstc_service_init ();
+  g_print("fixture_set_up: 4\n");
 
   fixture->client = nm_client_new (NULL, &error);
+  g_print("fixture_set_up: 5\n");
   g_assert_no_error (error);
+  g_print("fixture_set_up: 6\n");
 
   fixture->shell = GTK_WIDGET (cc_test_window_new ());
+  g_print("fixture_set_up: 7\n");
 
   fixture->panel = g_object_new (cc_network_panel_get_type (),
                                  "shell", CC_SHELL (fixture->shell),
                                  NULL);
+  g_print("fixture_set_up: 8\n");
 
   g_object_ref (fixture->panel);
+  g_print("fixture_set_up: 9\n");
   cc_shell_set_active_panel (CC_SHELL (fixture->shell), fixture->panel);
+  g_print("fixture_set_up: 10\n");
 
   gtk_widget_show_all (fixture->shell);
+  g_print("fixture_set_up: 11\n");
 }
 
 static void
@@ -299,46 +310,59 @@ test_connection_multi_add_activate (NetworkPanelFixture *fixture,
 int
 main (int argc, char **argv)
 {
+  g_print("1\n");
   g_setenv ("GSETTINGS_BACKEND", "memory", TRUE);
+  g_print("2\n");
   g_setenv ("LIBNM_USE_SESSION_BUS", "1", TRUE);
+  g_print("3\n");
   g_setenv ("LC_ALL", "C", TRUE);
+  g_print("4\n");
 
   gtk_test_init (&argc, &argv, NULL);
+
+  g_print("5\n");
 
   g_test_add ("/network-panel-wired/device-add", NetworkPanelFixture, NULL,
               fixture_set_up_empty,
               test_device_add,
               fixture_tear_down);
+  g_print("6\n");
 
   g_test_add ("/network-panel-wired/second-device-add", NetworkPanelFixture, NULL,
               fixture_set_up_empty,
               test_second_device_add,
               fixture_tear_down);
+  g_print("7\n");
 
   g_test_add ("/network-panel-wired/second-device-add-remove", NetworkPanelFixture, NULL,
               fixture_set_up_empty,
               test_second_device_add_remove,
               fixture_tear_down);
+  g_print("8\n");
 
   g_test_add ("/network-panel-wired/unconnected-carrier-plug", NetworkPanelFixture, NULL,
               fixture_set_up_wired,
               test_unconnected_carrier_plug,
               fixture_tear_down);
+  g_print("9\n");
 
   g_test_add ("/network-panel-wired/connection-add", NetworkPanelFixture, NULL,
               fixture_set_up_wired,
               test_connection_add,
               fixture_tear_down);
+  g_print("10\n");
 
   g_test_add ("/network-panel-wired/connection-add-activate", NetworkPanelFixture, NULL,
               fixture_set_up_wired,
               test_connection_add_activate,
               fixture_tear_down);
+  g_print("11\n");
 
   g_test_add ("/network-panel-wired/connection-multi-add-activate", NetworkPanelFixture, NULL,
               fixture_set_up_wired,
               test_connection_multi_add_activate,
               fixture_tear_down);
+  g_print("12\n");
 
   return g_test_run ();
 }
