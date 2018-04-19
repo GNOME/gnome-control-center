@@ -568,6 +568,18 @@ kind_to_description (UpDeviceKind kind)
   g_assert_not_reached ();
 }
 
+static UpDeviceLevel
+get_battery_level (UpDevice *device)
+{
+  UpDeviceLevel battery_level;
+
+  if (!g_object_class_find_property (G_OBJECT_CLASS (G_OBJECT_GET_CLASS (device)), "battery-level"))
+    return UP_DEVICE_LEVEL_NONE;
+
+  g_object_get (device, "battery-level", &battery_level, NULL);
+  return battery_level;
+}
+
 static void
 add_device (CcPowerPanel *panel, UpDevice *device)
 {
@@ -582,9 +594,9 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   GString *description;
   gdouble percentage;
   gchar *name;
-  gchar *s;
   gboolean show_caution = FALSE;
   gboolean is_present;
+  UpDeviceLevel battery_level;
 
   name = NULL;
   g_object_get (device,
@@ -594,6 +606,7 @@ add_device (CcPowerPanel *panel, UpDevice *device)
                 "model", &name,
                 "is-present", &is_present,
                 NULL);
+  battery_level = get_battery_level (device);
 
   if (!is_present)
     {
@@ -668,9 +681,20 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_set_margin_start (box2, 20);
   gtk_widget_set_margin_end (box2, 20);
-  s = g_strdup_printf ("%d%%", (int)percentage);
-  widget = gtk_label_new (s);
-  g_free (s);
+
+  if (battery_level == UP_DEVICE_LEVEL_NONE)
+    {
+      gchar *s;
+
+      s = g_strdup_printf ("%d%%", (int)(percentage + 0.5));
+      widget = gtk_label_new (s);
+      g_free (s);
+    }
+  else
+    {
+      widget = gtk_label_new ("");
+    }
+
   gtk_widget_set_halign (widget, GTK_ALIGN_END);
   gtk_style_context_add_class (gtk_widget_get_style_context (widget), GTK_STYLE_CLASS_DIM_LABEL);
   gtk_box_pack_start (GTK_BOX (box2), widget, FALSE, TRUE, 0);
