@@ -37,6 +37,8 @@ struct _CcDisplayArrangement
   /* Starting position of cursor inside the monitor. */
   gdouble           drag_anchor_x;
   gdouble           drag_anchor_y;
+
+  guint             max_snap_distance;
 };
 
 typedef struct _CcDisplayArrangement CcDisplayArrangement;
@@ -66,6 +68,7 @@ struct SnapData {
 #define MARGIN_PX  0
 #define MARGIN_MON  0.66
 #define MAX_SNAP_DISTANCE 10
+#define MIN_OVERLAP 25
 
 G_DEFINE_TYPE (CcDisplayArrangement, cc_display_arrangement, GTK_TYPE_DRAWING_AREA)
 
@@ -222,7 +225,7 @@ maybe_update_snap (CcDisplayArrangement *arr,
   get_snap_distance (arr, mon_x, mon_y, new_x, new_y, &dist_x, &dist_y);
   dist = MAX (dist_x, dist_y);
 
-  if (dist > MAX_SNAP_DISTANCE)
+  if (dist > arr->max_snap_distance)
     return;
 
   if (snapped == SNAP_DIR_BOTH)
@@ -355,6 +358,29 @@ find_best_snapping (CcDisplayArrangement *arr,
       /* Top/bottom edge identical on the right */
       maybe_update_snap (arr, snap_data, x1, y1, right_snap_pos, _y1, SNAP_DIR_BOTH);
       maybe_update_snap (arr, snap_data, x1, y1, right_snap_pos, _y2 - h, SNAP_DIR_BOTH);
+
+      /* If snapping is infinite, then add snapping points with minimal overlap
+       * to prevent detachment.
+       * This is similar to the above but simply re-defines the snapping pos
+       * to have only minimal overlap */
+      if (arr->max_snap_distance == G_MAXUINT)
+        {
+          /* Hanging over the left/right edge on the top */
+          maybe_update_snap (arr, snap_data, x1, y1, _x1 - w + MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH);
+          maybe_update_snap (arr, snap_data, x1, y1, _x2 - MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH);
+
+          /* Left/right edge identical on the bottom */
+          maybe_update_snap (arr, snap_data, x1, y1, _x1 - w + MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH);
+          maybe_update_snap (arr, snap_data, x1, y1, _x2 - MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH);
+
+          /* Top/bottom edge identical on the left */
+          maybe_update_snap (arr, snap_data, x1, y1, left_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH);
+          maybe_update_snap (arr, snap_data, x1, y1, left_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH);
+
+          /* Top/bottom edge identical on the right */
+          maybe_update_snap (arr, snap_data, x1, y1, right_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH);
+          maybe_update_snap (arr, snap_data, x1, y1, right_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH);
+        }
     }
 }
 #undef OVERLAP
@@ -442,6 +468,12 @@ static void
 on_output_changed_cb (CcDisplayArrangement *arr,
                       CcDisplayMonitor     *output)
 {
+  if (cc_display_config_count_useful_monitors (arr->config) > 2) {
+    arr->max_snap_distance = MAX_SNAP_DISTANCE;
+  } else {
+    arr->max_snap_distance = G_MAXUINT;
+  }
+
   gtk_widget_queue_draw (GTK_WIDGET (arr));
 }
 
@@ -824,6 +856,8 @@ cc_display_arrangement_init (CcDisplayArrangement *arr)
   /* XXX: Do we need to listen to touch events here? */
   gtk_widget_add_events (GTK_WIDGET (arr),
 			 GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_POINTER_MOTION_MASK);
+
+  arr->max_snap_distance = MAX_SNAP_DISTANCE;
 }
 
 CcDisplayArrangement*
