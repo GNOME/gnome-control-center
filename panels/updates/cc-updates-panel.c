@@ -27,6 +27,7 @@
 #include <NetworkManager.h>
 
 #define NM_SETTING_ALLOW_DOWNLOADS_WHEN_METERED "connection.allow-downloads-when-metered"
+#define NM_SETTING_ALLOW_DOWNLOADS              "connection.allow-downloads"
 #define NM_SETTING_TARIFF_ENABLED               "connection.tariff-enabled"
 #define NM_SETTING_TARIFF                       "connection.tariff"
 
@@ -75,6 +76,7 @@ static void          on_scheduled_updates_switch_changed_cb      (GtkSwitch     
 static void          on_tariff_changed_cb                        (CcTariffEditor *tariff_editor,
                                                                   CcUpdatesPanel *self);
 
+static gboolean      save_tariff_cb                              (gpointer        user_data);
 
 G_DEFINE_TYPE (CcUpdatesPanel, cc_updates_panel, CC_TYPE_PANEL)
 
@@ -163,16 +165,30 @@ store_automatic_updates_setting (CcUpdatesPanel *self,
   if (self->current_connection && self->connection_changed_id)
     g_signal_handler_block (self->current_connection, self->connection_changed_id);
 
-  g_debug ("Setting "NM_SETTING_ALLOW_DOWNLOADS_WHEN_METERED" to %d", automatic_updates_enabled);
+  g_debug ("Setting "NM_SETTING_ALLOW_DOWNLOADS_WHEN_METERED" to 1");
 
   nm_setting_user_set_data (setting_user,
                             NM_SETTING_ALLOW_DOWNLOADS_WHEN_METERED,
-                            automatic_updates_enabled ? "1" : "0",
+                            "1",
                             &error);
 
   if (error)
     {
       g_warning ("Error storing "NM_SETTING_ALLOW_DOWNLOADS_WHEN_METERED": %s", error->message);
+      g_clear_error (&error);
+      errored = TRUE;
+    }
+
+  g_debug ("Setting "NM_SETTING_ALLOW_DOWNLOADS" to %d", automatic_updates_enabled);
+
+  nm_setting_user_set_data (setting_user,
+                            NM_SETTING_ALLOW_DOWNLOADS,
+                            automatic_updates_enabled ? "1" : "0",
+                            &error);
+
+  if (error)
+    {
+      g_warning ("Error storing "NM_SETTING_ALLOW_DOWNLOADS": %s", error->message);
       g_clear_error (&error);
       errored = TRUE;
     }
@@ -342,6 +358,17 @@ get_network_status_icon_name (CcUpdatesPanel *self,
 }
 
 static void
+schedule_save_tariff (CcUpdatesPanel *self)
+{
+  g_debug ("Scheduling save tariff");
+
+  if (self->save_tariff_timeout_id > 0)
+    g_source_remove (self->save_tariff_timeout_id);
+
+  self->save_tariff_timeout_id = g_timeout_add_seconds (2, save_tariff_cb, self);
+}
+
+static void
 load_tariff_from_connection (CcUpdatesPanel *self,
                              NMConnection   *connection)
 {
@@ -415,14 +442,33 @@ load_automatic_updates_from_connection (CcUpdatesPanel *self,
 
   if (connection)
     {
+      const gchar * const * keys = NULL;
       NMSettingUser *setting_user;
       const gchar *value;
+      gboolean should_save;
       gboolean enabled;
 
       setting_user = ensure_setting_user (connection);
       g_assert (setting_user != NULL);
 
-      value = nm_setting_user_get_data (setting_user, NM_SETTING_ALLOW_DOWNLOADS_WHEN_METERED);
+      /* This is the upgrade path from the old NM_SETTING_ALLOW_DOWNLOADS_WHEN_METERED
+       * to NM_SETTING_ALLOW_DOWNLOADS. For now, downloads are always allowed when we're
+       * on a metered connection. */
+      keys = nm_setting_user_get_keys (setting_user, NULL);
+
+      if (g_strv_contains (keys, NM_SETTING_ALLOW_DOWNLOADS_WHEN_METERED) &&
+          !g_strv_contains (keys, NM_SETTING_ALLOW_DOWNLOADS))
+        {
+          g_debug ("Upgrading setting from "NM_SETTING_ALLOW_DOWNLOADS_WHEN_METERED" to "NM_SETTING_ALLOW_DOWNLOADS);
+
+          value = nm_setting_user_get_data (setting_user, NM_SETTING_ALLOW_DOWNLOADS_WHEN_METERED);
+          should_save = TRUE;
+        }
+      else
+        {
+          value = nm_setting_user_get_data (setting_user, NM_SETTING_ALLOW_DOWNLOADS);
+          should_save = FALSE;
+        }
 
       if (value != NULL)
         {
@@ -442,6 +488,9 @@ load_automatic_updates_from_connection (CcUpdatesPanel *self,
         }
 
       gtk_switch_set_active (GTK_SWITCH (self->automatic_updates_switch), enabled);
+
+      if (should_save)
+        schedule_save_tariff (self);
     }
   else
     {
@@ -547,6 +596,11 @@ save_connection_settings (CcUpdatesPanel *self)
   store_automatic_updates_setting (self, connection, automatic_updates_enabled, tariff_enabled, tariff_variant);
 }
 
+
+/*
+ * Callbacks
+ */
+
 static gboolean
 save_tariff_cb (gpointer user_data)
 {
@@ -557,22 +611,6 @@ save_tariff_cb (gpointer user_data)
 
   return G_SOURCE_REMOVE;
 }
-
-static void
-schedule_save_tariff (CcUpdatesPanel *self)
-{
-  g_debug ("Scheduling save tariff");
-
-  if (self->save_tariff_timeout_id > 0)
-    g_source_remove (self->save_tariff_timeout_id);
-
-  self->save_tariff_timeout_id = g_timeout_add_seconds (2, save_tariff_cb, self);
-}
-
-
-/*
- * Callbacks
- */
 
 static void
 on_automatic_updates_switch_changed_cb (GtkSwitch      *sw,
