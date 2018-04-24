@@ -70,7 +70,7 @@ static void   um_account_dialog_response  (GtkDialog *dialog,
 struct _UmAccountDialog {
         GtkDialog parent;
         GtkWidget *stack;
-        GSimpleAsyncResult *async;
+        GTask *task;
         GCancellable *cancellable;
         GPermission *permission;
         GtkSpinner *spinner;
@@ -181,14 +181,13 @@ static void
 complete_dialog (UmAccountDialog *self,
                  ActUser         *user)
 {
-        if (user != NULL) {
-                g_simple_async_result_set_op_res_gpointer (self->async,
-                                                           g_object_ref (user),
-                                                           g_object_unref);
-        }
-
-        g_simple_async_result_complete_in_idle (self->async);
         gtk_widget_hide (GTK_WIDGET (self));
+
+        if (user != NULL)
+                g_object_ref (user);
+
+        g_task_return_pointer (self->task, user, g_object_unref);
+        g_clear_object (&self->task);
 }
 
 static void
@@ -1599,14 +1598,14 @@ um_account_dialog_show (UmAccountDialog     *self,
         g_return_if_fail (UM_IS_ACCOUNT_DIALOG (self));
 
         /* Make sure not already doing an operation */
-        g_return_if_fail (self->async == NULL);
-
-        self->async = g_simple_async_result_new (G_OBJECT (self), callback, user_data,
-                                                 um_account_dialog_show);
+        g_return_if_fail (self->task == NULL);
 
         if (self->cancellable)
                 g_object_unref (self->cancellable);
         self->cancellable = g_cancellable_new ();
+
+        self->task = g_task_new (G_OBJECT (self), self->cancellable, callback, user_data);
+        g_task_set_source_tag (self->task, um_account_dialog_show);
 
         g_clear_object (&self->permission);
         self->permission = permission ? g_object_ref (permission) : NULL;
@@ -1626,17 +1625,10 @@ ActUser *
 um_account_dialog_finish (UmAccountDialog     *self,
                           GAsyncResult        *result)
 {
-        ActUser *user;
-
         g_return_val_if_fail (UM_IS_ACCOUNT_DIALOG (self), NULL);
-        g_return_val_if_fail (g_simple_async_result_is_valid (result, G_OBJECT (self),
-                              um_account_dialog_show), NULL);
-        g_return_val_if_fail (result == G_ASYNC_RESULT (self->async), NULL);
+        g_return_val_if_fail (g_task_is_valid (result, G_OBJECT (self)), NULL);
+        g_return_val_if_fail (g_async_result_is_tagged (result, um_account_dialog_show), NULL);
+        g_return_val_if_fail (result == G_ASYNC_RESULT (self->task), NULL);
 
-        user = g_simple_async_result_get_op_res_gpointer (self->async);
-        if (user != NULL)
-                g_object_ref (user);
-
-        g_clear_object (&self->async);
-        return user;
+        return g_task_propagate_pointer (self->task, NULL);
 }
