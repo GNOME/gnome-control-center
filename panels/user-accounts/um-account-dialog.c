@@ -894,7 +894,7 @@ on_join_login (GObject *source,
                 return;
         }
 
-        um_realm_login_finish (result, &creds, &error);
+        creds = um_realm_login_finish (result, &error);
 
         /* Logged in as admin successfully, use creds to join domain */
         if (error == NULL) {
@@ -1000,7 +1000,7 @@ on_realm_login (GObject *source,
                 return;
         }
 
-        um_realm_login_finish (result, &creds, &error);
+        creds = um_realm_login_finish (result, &error);
 
         /*
          * User login is valid, but cannot authenticate right now (eg: user needs
