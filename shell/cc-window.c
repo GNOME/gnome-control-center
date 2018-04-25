@@ -756,7 +756,7 @@ cc_window_init (CcWindow *self)
   /* After everything is loaded, select the last used panel, if any,
    * or the first visible panel */
   id = g_settings_get_string (self->settings, "last-panel");
-  if (id != NULL && *id != '\0')
+  if (id != NULL && cc_shell_model_has_panel (self->store, id))
     cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), id);
   else
     cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
