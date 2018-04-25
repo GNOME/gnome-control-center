@@ -1581,6 +1581,7 @@ um_account_dialog_class_init (UmAccountDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, enterprise_login);
         gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, enterprise_password);
         gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, enterprise_domain_hint);
+        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, enterprise_hint);
 }
 
 UmAccountDialog *
