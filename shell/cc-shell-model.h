@@ -98,6 +98,9 @@ void cc_shell_model_add_item (CcShellModel   *model,
                               GAppInfo       *appinfo,
                               const char     *id);
 
+gboolean cc_shell_model_has_panel (CcShellModel *model,
+                                   const char   *id);
+
 gboolean cc_shell_model_iter_matches_search (CcShellModel *model,
                                              GtkTreeIter  *iter,
                                              const char   *term);
