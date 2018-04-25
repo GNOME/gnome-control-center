@@ -328,6 +328,30 @@ cc_shell_model_add_item (CcShellModel    *model,
 }
 
 gboolean
+cc_shell_model_has_panel (CcShellModel *model,
+                          const char   *id)
+{
+  GtkTreeIter iter;
+  gboolean valid;
+
+  g_assert (id);
+
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+  while (valid)
+    {
+      g_autofree gchar *panel_id = NULL;
+
+      gtk_tree_model_get (model, &iter, COL_ID, &panel_id, -1);
+      if (g_str_equal (id, panel_id))
+        return TRUE;
+
+      valid = gtk_tree_model_iter_next (model, &iter);
+    }
+
+  return FALSE;
+}
+
+gboolean
 cc_shell_model_iter_matches_search (CcShellModel *model,
                                     GtkTreeIter  *iter,
                                     const char   *term)
