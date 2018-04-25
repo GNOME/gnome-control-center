@@ -923,7 +923,7 @@ cc_panel_list_set_active_panel (CcPanelList *self,
 
   data = g_hash_table_lookup (self->id_to_data, id);
 
-  g_assert (data != NULL);
+  g_return_if_fail (data != NULL);
 
   listbox = gtk_widget_get_parent (data->row);
 
