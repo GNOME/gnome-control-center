@@ -61,6 +61,8 @@ void                 cc_panel_list_add_panel                     (CcPanelList   
                                                                   const gchar        *description,
                                                                   gchar             **keywords,
                                                                   const gchar        *icon);
+gboolean             cc_panel_list_has_panel                     (CcPanelList        *self,
+                                                                  const gchar        *id);
 
 void                 cc_panel_list_set_active_panel               (CcPanelList       *self,
                                                                    const gchar       *id);

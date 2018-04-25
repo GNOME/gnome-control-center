@@ -906,6 +906,23 @@ cc_panel_list_add_panel (CcPanelList     *self,
 }
 
 /**
+ * cc_panel_list_has_panel:
+ * @self: a #CcPanelList
+ * @id: the id of the panel to be activated
+ *
+ * Checks whether a panel with the given ID exists.
+ */
+gboolean
+cc_panel_list_has_panel (CcPanelList *self,
+                         const gchar *id)
+{
+  g_return_if_fail (CC_IS_PANEL_LIST (self));
+  g_return_if_fail (id != NULL);
+
+  return g_hash_table_contains (self->id_to_data, id);
+}
+
+/**
  * cc_panel_list_set_active_panel:
  * @self: a #CcPanelList
  * @id: the id of the panel to be activated
