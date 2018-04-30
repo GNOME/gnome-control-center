@@ -17,9 +17,10 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2018-04-13 14:19+0000\n"
-"PO-Revision-Date: 2018-04-18 13:30+0300\n"
-"Last-Translator: Florentina Mușat <florentina.musat.28@gmail.com>\n"
+"POT-Creation-Date: 2018-04-26 16:26+0000\n"
+"PO-Revision-Date: 2018-04-27 00:50+0300\n"
+"Last-Translator: Florentina Mușat <florentina.musat.28 [at] gmail [dot] "
+"com>\n"
 "Language-Team: Gnome Romanian Translation Team\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +28,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.0.7\n"
 "X-Launchpad-Export-Date: 2014-07-13 17:08+0000\n"
 "X-Project-Style: gnome\n"
 
@@ -122,7 +123,7 @@ msgstr "Puteți adăuga imagini în directorul %s și acestea vor fi afișate ai
 #: panels/network/net-device-wifi.c:1411 panels/network/net-device-wifi.c:1491
 #: panels/network/net-device-wifi.c:1736 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:331
+#: panels/printers/pp-details-dialog.c:330
 #: panels/privacy/cc-privacy-panel.c:1053 panels/region/format-chooser.ui:25
 #: panels/region/input-chooser.ui:13
 #: panels/search/cc-search-locations-dialog.c:642
@@ -924,6 +925,12 @@ msgstr "%b %e"
 msgid "%b %e, %Y"
 msgstr "%b %e, %Y"
 
+#. translators: This is the default hotspot name, need to be less than 32-bytes
+#: panels/common/hostname-helper.c:189
+msgctxt "hotspot"
+msgid "Hotspot"
+msgstr "Hotspot"
+
 #: panels/common/language-chooser.ui:5
 msgid "Language"
 msgstr "Limba"
@@ -1221,7 +1228,7 @@ msgstr "%.2lf Hz"
 #. TRANSLATORS: the state of the night light setting
 #: panels/display/cc-display-panel.c:3219
 #: panels/notifications/cc-notifications-panel.c:292
-#: panels/power/cc-power-panel.c:2012 panels/power/cc-power-panel.c:2019
+#: panels/power/cc-power-panel.c:2097 panels/power/cc-power-panel.c:2104
 #: panels/privacy/cc-privacy-panel.c:191 panels/privacy/cc-privacy-panel.c:258
 #: panels/universal-access/cc-ua-panel.c:334
 #: panels/universal-access/cc-ua-panel.c:715
@@ -1233,7 +1240,7 @@ msgstr "Pornit"
 
 #: panels/display/cc-display-panel.c:3219 panels/network/net-proxy.c:54
 #: panels/notifications/cc-notifications-panel.c:292
-#: panels/power/cc-power-panel.c:2006 panels/power/cc-power-panel.c:2017
+#: panels/power/cc-power-panel.c:2091 panels/power/cc-power-panel.c:2102
 #: panels/privacy/cc-privacy-panel.c:191 panels/privacy/cc-privacy-panel.c:258
 #: panels/universal-access/cc-ua-panel.c:334
 #: panels/universal-access/cc-ua-panel.c:715
@@ -2625,7 +2632,7 @@ msgid "Select file to import"
 msgstr "Selectează fișierul de importat"
 
 #: panels/network/connection-editor/vpn-helpers.c:182
-#: panels/printers/pp-details-dialog.c:332
+#: panels/printers/pp-details-dialog.c:331
 #: panels/sharing/cc-sharing-panel.c:385
 #: panels/user-accounts/um-photo-dialog.c:231
 msgid "_Open"
@@ -4001,146 +4008,190 @@ msgid "Gaming input device"
 msgstr "Dispozitiv de intrare pentru jocuri"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:565 panels/power/cc-power-panel.c:805
-#: panels/power/cc-power-panel.c:2398
+#: panels/power/cc-power-panel.c:565 panels/power/cc-power-panel.c:829
+#: panels/power/cc-power-panel.c:2483
 msgid "Battery"
 msgstr "Baterie"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:619
+#: panels/power/cc-power-panel.c:632
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Se încarcă"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:626
+#: panels/power/cc-power-panel.c:639
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Atenție"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:631
+#: panels/power/cc-power-panel.c:644
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Scăzută"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:636
+#: panels/power/cc-power-panel.c:649
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Bună"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:641
+#: panels/power/cc-power-panel.c:654
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Complet încărcat"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:645
+#: panels/power/cc-power-panel.c:658
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Descărcată complet"
 
-#: panels/power/cc-power-panel.c:803
+#: panels/power/cc-power-panel.c:827
 msgid "Batteries"
 msgstr "Baterii"
 
-#: panels/power/cc-power-panel.c:1243
+#: panels/power/cc-power-panel.c:1206
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d oră"
+msgstr[1] "%d ore"
+msgstr[2] "%d de ore"
+
+#: panels/power/cc-power-panel.c:1208
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minut"
+msgstr[1] "%d minute"
+msgstr[2] "%d de minute"
+
+#: panels/power/cc-power-panel.c:1211
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d secundă"
+msgstr[1] "%d secunde"
+msgstr[2] "%d de secunde"
+
+#. 5 hours 2 minutes 12 seconds
+#: panels/power/cc-power-panel.c:1217
+#, c-format
+msgctxt "time"
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
+#. 2 minutes 12 seconds
+#: panels/power/cc-power-panel.c:1220
+#, c-format
+msgctxt "time"
+msgid "%s %s"
+msgstr "%s %s"
+
+#. 0 seconds
+#: panels/power/cc-power-panel.c:1226
+msgid "0 seconds"
+msgstr "0 secunde"
+
+#: panels/power/cc-power-panel.c:1328
 msgid "When _idle"
 msgstr "Când e _inactiv"
 
-#: panels/power/cc-power-panel.c:1708
+#: panels/power/cc-power-panel.c:1793
 msgid "Power Saving"
 msgstr "Economisire de energie"
 
-#: panels/power/cc-power-panel.c:1739
+#: panels/power/cc-power-panel.c:1824
 msgid "_Screen brightness"
 msgstr "Luminozitate ec_ran"
 
-#: panels/power/cc-power-panel.c:1758
+#: panels/power/cc-power-panel.c:1843
 msgid "Automatic brightness"
 msgstr "Luminozitate automată"
 
-#: panels/power/cc-power-panel.c:1778
+#: panels/power/cc-power-panel.c:1863
 msgid "_Keyboard brightness"
 msgstr "Luminozitate _tastatură"
 
-#: panels/power/cc-power-panel.c:1788
+#: panels/power/cc-power-panel.c:1873
 msgid "_Dim screen when inactive"
 msgstr "_Diminuează luminozitatea la inactivitate"
 
-#: panels/power/cc-power-panel.c:1813
+#: panels/power/cc-power-panel.c:1898
 msgid "_Blank screen"
 msgstr "Ecran _gol"
 
-#: panels/power/cc-power-panel.c:1850
+#: panels/power/cc-power-panel.c:1935
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.c:1855
+#: panels/power/cc-power-panel.c:1940
 msgid "Turn off Wi-Fi to save power."
 msgstr "Închide Wi-Fi pentru a economisi energia."
 
-#: panels/power/cc-power-panel.c:1880
+#: panels/power/cc-power-panel.c:1965
 msgid "_Mobile broadband"
 msgstr "Internet _mobil de bandă largă"
 
-#: panels/power/cc-power-panel.c:1885
+#: panels/power/cc-power-panel.c:1970
 msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
 msgstr ""
 "Închide internetul mobil (3G, 4G, LTE, etc.) pentru a economisi energie."
 
-#: panels/power/cc-power-panel.c:1944
+#: panels/power/cc-power-panel.c:2029
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:1949
+#: panels/power/cc-power-panel.c:2034
 msgid "Turn off Bluetooth to save power."
 msgstr "Închide Bluetooth pentru a economisi energia."
 
-#: panels/power/cc-power-panel.c:2008
+#: panels/power/cc-power-panel.c:2093
 msgid "When on battery power"
 msgstr "Când funcționează pe baterie"
 
-#: panels/power/cc-power-panel.c:2010
+#: panels/power/cc-power-panel.c:2095
 msgid "When plugged in"
 msgstr "Alimentat de la rețea"
 
-#: panels/power/cc-power-panel.c:2105
+#: panels/power/cc-power-panel.c:2190
 msgid "Suspend"
 msgstr "Suspendă"
 
-#: panels/power/cc-power-panel.c:2106
+#: panels/power/cc-power-panel.c:2191
 msgid "Power Off"
 msgstr "Oprește"
 
-#: panels/power/cc-power-panel.c:2107
+#: panels/power/cc-power-panel.c:2192
 msgid "Hibernate"
 msgstr "Hibernează"
 
-#: panels/power/cc-power-panel.c:2108
+#: panels/power/cc-power-panel.c:2193
 msgid "Nothing"
 msgstr "Nimic"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2222
+#: panels/power/cc-power-panel.c:2307
 msgid "Suspend & Power Button"
 msgstr "Buton de suspendare și oprire"
 
-#: panels/power/cc-power-panel.c:2261
+#: panels/power/cc-power-panel.c:2346
 msgid "_Automatic suspend"
 msgstr "Suspendare _automată"
 
-#: panels/power/cc-power-panel.c:2262
+#: panels/power/cc-power-panel.c:2347
 msgid "Automatic suspend"
 msgstr "Suspendare automată"
 
-#: panels/power/cc-power-panel.c:2329
+#: panels/power/cc-power-panel.c:2414
 msgid "_When the Power Button is pressed"
 msgstr "_Când butonul de oprire este apăsat"
 
-#: panels/power/cc-power-panel.c:2448 shell/cc-window.c:233
+#: panels/power/cc-power-panel.c:2533 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-window.c:233
 #: shell/panel-list.ui:45
 msgid "Devices"
 msgstr "Dispozitive"
@@ -4398,21 +4449,21 @@ msgid "Test Page"
 msgstr "Pagină de test"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: panels/printers/pp-details-dialog.c:135
-#: panels/printers/pp-details-dialog.c:435
+#: panels/printers/pp-details-dialog.c:134
+#: panels/printers/pp-details-dialog.c:434
 #, c-format
 msgid "%s Details"
 msgstr "Detalii %s"
 
-#: panels/printers/pp-details-dialog.c:184
+#: panels/printers/pp-details-dialog.c:183
 msgid "No suitable driver found"
 msgstr "Nu s-a găsit un driver potrivit"
 
-#: panels/printers/pp-details-dialog.c:328
+#: panels/printers/pp-details-dialog.c:327
 msgid "Select PPD File"
 msgstr "Specificați fișierul PPD"
 
-#: panels/printers/pp-details-dialog.c:337
+#: panels/printers/pp-details-dialog.c:336
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -5805,6 +5856,174 @@ msgstr "Subwoofer"
 msgid "Custom"
 msgstr "Personalizat"
 
+#: panels/thunderbolt/cc-bolt-device-dialog.c:86
+#: panels/thunderbolt/cc-bolt-device-entry.c:119
+msgctxt "Thunderbolt Device Status"
+msgid "Disconnected"
+msgstr "Deconectat"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:89
+#: panels/thunderbolt/cc-bolt-device-entry.c:122
+msgctxt "Thunderbolt Device Status"
+msgid "Connecting"
+msgstr "Se conectează"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:92
+#: panels/thunderbolt/cc-bolt-device-entry.c:126
+#: panels/thunderbolt/cc-bolt-device-entry.c:138
+msgctxt "Thunderbolt Device Status"
+msgid "Connected"
+msgstr "Conectat"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:95
+msgctxt "Thunderbolt Device Status"
+msgid "Authorization Error"
+msgstr "Eroare de autorizare"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:98
+#: panels/thunderbolt/cc-bolt-device-entry.c:132
+msgctxt "Thunderbolt Device Status"
+msgid "Authorizing"
+msgstr "Autorizare"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:105
+msgctxt "Thunderbolt Device Status"
+msgid "Reduced Functionality"
+msgstr "Funcționalitate redusă"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:107
+msgctxt "Thunderbolt Device Status"
+msgid "Connected & Authorized"
+msgstr "Conectat și autorizat"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:113
+#: panels/thunderbolt/cc-bolt-device-entry.c:146
+msgctxt "Thunderbolt Device Status"
+msgid "Unknown"
+msgstr "Necunoscut"
+
+#. Translators: The time point the device was authorized.
+#: panels/thunderbolt/cc-bolt-device-dialog.c:169
+msgid "Authorized at:"
+msgstr "Autorizat la:"
+
+#. Translators: The time point the device was connected.
+#: panels/thunderbolt/cc-bolt-device-dialog.c:175
+msgid "Connected at:"
+msgstr "Conectat la:"
+
+#. Translators: The time point the device was enrolled,
+#. * i.e. authorized and stored in the device database.
+#: panels/thunderbolt/cc-bolt-device-dialog.c:182
+msgid "Enrolled at:"
+msgstr "Înscris la:"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:250
+msgid "Failed to authorize device: "
+msgstr "Nu s-a putut autoriza dispozitivul: "
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:327
+msgid "Failed to forget device: "
+msgstr "Nu s-a putut uita dispozitivul: "
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:109
+msgid "Name:"
+msgstr "Nume:"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:141
+msgid "Status:"
+msgstr "Stare:"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:174
+msgid "UUID:"
+msgstr "UUID:"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:280
+msgid "Authorize and Connect"
+msgstr "Autorizează și conectează"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:303
+msgid "Forget Device"
+msgstr "Uită dispozitivul"
+
+#: panels/thunderbolt/cc-bolt-device-entry.c:129
+msgctxt "Thunderbolt Device Status"
+msgid "Error"
+msgstr "Eroare"
+
+#: panels/thunderbolt/cc-bolt-device-entry.c:140
+msgctxt "Thunderbolt Device Status"
+msgid "Authorized"
+msgstr "Autorizat"
+
+#: panels/thunderbolt/cc-bolt-panel.c:175
+msgid ""
+"The Thunderbolt subsystem (boltd) is not installed or not set up properly."
+msgstr ""
+"Subsistemul Thunderbolt (boltd) nu este instalat sau configurat corect."
+
+#: panels/thunderbolt/cc-bolt-panel.c:460
+msgid ""
+"Thunderbolt could not be detected.\n"
+"Either the system lacks Thunderbolt support, it has been disabled in the "
+"BIOS or is set to an unsupported security level in the BIOS."
+msgstr ""
+"Nu s-a putut detecta Thunderbolt.\n"
+"Fie sistemul nu are suport pentru Thunderbolt, a fost dezactivat în BIOS sau "
+"este stabilit la un nivel de securitate nesuportat în BIOS."
+
+#: panels/thunderbolt/cc-bolt-panel.c:504
+msgid "Thunderbolt support has been disabled in the BIOS."
+msgstr "Suportul pentru Thunderbolt a fost dezactivat în BIOS."
+
+#: panels/thunderbolt/cc-bolt-panel.c:613
+#, c-format
+msgid "Error switching direct mode: %s"
+msgstr "Eroare la comutarea modului direct: %s"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:143
+msgid "No Thunderbolt support"
+msgstr "Nu este suport pentru Thunderbolt"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:246
+msgid "Direct Access"
+msgstr "Acces direct"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:269
+msgid "Allow direct access to devices such as docks and external GPUs."
+msgstr ""
+"Permite accesul direct la dispozitive precum docurile și GPU-urile externe."
+
+#: panels/thunderbolt/cc-bolt-panel.ui:289
+msgid "Only USB and Display Port devices can attach."
+msgstr "Doar dispozitivele USB sau port de afișaj pot atașa."
+
+#: panels/thunderbolt/cc-bolt-panel.ui:397
+msgid "Pending Devices"
+msgstr "Dispozitive în așteptare"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:535
+msgid "No devices attached"
+msgstr "Nu sunt dispozitive atașate"
+
+#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:3
+msgid "Thunderbolt"
+msgstr "Thunderbolt"
+
+#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:4
+msgid "Manage Thunderbolt devices"
+msgstr "Administrează dispozitive Thunderbolt"
+
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:7
+msgid "thunderbolt"
+msgstr "thunderbolt"
+
+#. Translators: those are keywords for the thunderbolt control-center panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:19
+msgid "Thunderbolt;"
+msgstr "Thunderbolt;"
+
 #. translators: the labels will read:
 #. * Cursor Size: Default
 #: panels/universal-access/cc-ua-panel.c:354
@@ -6767,29 +6986,29 @@ msgstr "Eroare necunoscută"
 msgid "Should match the web address of your login provider."
 msgstr "Trebuie să potriviți adresele web a furnizorului de logare."
 
-#: panels/user-accounts/um-account-dialog.c:229
+#: panels/user-accounts/um-account-dialog.c:228
 msgid "Failed to add account"
 msgstr "Eșec la adăugarea contului"
 
-#: panels/user-accounts/um-account-dialog.c:462
+#: panels/user-accounts/um-account-dialog.c:461
 msgid "Passwords do not match."
 msgstr "Parolele nu se potrivesc."
 
-#: panels/user-accounts/um-account-dialog.c:717
-#: panels/user-accounts/um-account-dialog.c:763
-#: panels/user-accounts/um-account-dialog.c:784
+#: panels/user-accounts/um-account-dialog.c:716
+#: panels/user-accounts/um-account-dialog.c:762
+#: panels/user-accounts/um-account-dialog.c:783
 msgid "Failed to register account"
 msgstr "Eșec la înregistrarea contului"
 
-#: panels/user-accounts/um-account-dialog.c:907
+#: panels/user-accounts/um-account-dialog.c:906
 msgid "No supported way to authenticate with this domain"
 msgstr "Nici o metodă suportată pentru autentificarea cu acest domeniu"
 
-#: panels/user-accounts/um-account-dialog.c:980
+#: panels/user-accounts/um-account-dialog.c:979
 msgid "Failed to join domain"
 msgstr "Eșec la înregistrarea domeniului"
 
-#: panels/user-accounts/um-account-dialog.c:1041
+#: panels/user-accounts/um-account-dialog.c:1040
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6797,7 +7016,7 @@ msgstr ""
 "Numele de autentificare nu a funcționat.\n"
 "Încercați din nou."
 
-#: panels/user-accounts/um-account-dialog.c:1048
+#: panels/user-accounts/um-account-dialog.c:1047
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6805,11 +7024,11 @@ msgstr ""
 "Parola de autentificare nu a funcționat.\n"
 "Încercați din nou."
 
-#: panels/user-accounts/um-account-dialog.c:1056
+#: panels/user-accounts/um-account-dialog.c:1055
 msgid "Failed to log into domain"
 msgstr "Eșec la conectarea în domeniu"
 
-#: panels/user-accounts/um-account-dialog.c:1114
+#: panels/user-accounts/um-account-dialog.c:1113
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Nu se poate găsi domeniul. Poate l-ați scris greșit?"
 
@@ -6994,26 +7213,25 @@ msgstr "Parolele nu se potrivesc."
 msgid "Browse for more pictures"
 msgstr "Răsfoiește pentru mai multe imagini"
 
-#: panels/user-accounts/um-realm-manager.c:350
+#: panels/user-accounts/um-realm-manager.c:310
 msgid "Cannot automatically join this type of domain"
 msgstr "Nu se poate conecta automat la acest tip de domeniu"
 
-#: panels/user-accounts/um-realm-manager.c:413
-#, c-format
+#: panels/user-accounts/um-realm-manager.c:313
 msgid "No such domain or realm found"
 msgstr "Nu este găsit niciun domeniu și nicio valoare reală"
 
-#: panels/user-accounts/um-realm-manager.c:815
-#: panels/user-accounts/um-realm-manager.c:829
+#: panels/user-accounts/um-realm-manager.c:735
+#: panels/user-accounts/um-realm-manager.c:749
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Nu se poate realiza conectarea ca %s în domeniul %s"
 
-#: panels/user-accounts/um-realm-manager.c:821
+#: panels/user-accounts/um-realm-manager.c:741
 msgid "Invalid password, please try again"
 msgstr "Parola nu este validă, încercați din nou"
 
-#: panels/user-accounts/um-realm-manager.c:834
+#: panels/user-accounts/um-realm-manager.c:754
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Nu se poate realiza conectarea la domeniul %s: %s"
@@ -7494,12 +7712,6 @@ msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "Anulează căutarea"
 
-#. translators: This is the default hotspot name, need to be less than 32-bytes
-#: shell/hostname-helper.c:189
-msgctxt "hotspot"
-msgid "Hotspot"
-msgstr "Hotspot"
-
 #: shell/org.gnome.ControlCenter.gschema.xml:5
 msgid "The identifier for the last Settings panel to be opened"
 msgstr "Identificatorul ultimului panou de configurări de deschis"
@@ -7722,12 +7934,6 @@ msgstr "Sunete de sistem"
 #~ msgid "_Method"
 #~ msgstr "_Metodă"
 
-#~ msgid "Add Device"
-#~ msgstr "Adaugă dispozitiv"
-
-#~ msgid "Remove Device"
-#~ msgstr "Șterge dispozitiv"
-
 #~ msgid "VPN Type"
 #~ msgstr "Tip de VPN"
 
@@ -7748,9 +7954,6 @@ msgstr "Sunete de sistem"
 
 #~ msgid "Shortcut;Repeat;Blink;"
 #~ msgstr "Shortcut;Repeat;Blink;Scurtatură;"
-
-#~ msgid "_Name:"
-#~ msgstr "_Nume:"
 
 #~ msgid "Add Shortcut"
 #~ msgstr "Adaugă scurtătură"
@@ -8749,9 +8952,6 @@ msgstr "Sunete de sistem"
 
 #~ msgid "Mesh"
 #~ msgstr "Mesh"
-
-#~ msgid "Disconnected"
-#~ msgstr "Deconectat"
 
 #~ msgid "Power management settings"
 #~ msgstr "Configurări administrare consum"
