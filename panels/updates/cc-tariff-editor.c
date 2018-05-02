@@ -23,7 +23,6 @@
 
 #define CLOCK_SCHEMA     "org.gnome.desktop.interface"
 #define CLOCK_FORMAT_KEY "clock-format"
-#define SECONDS_PER_DAY  (24 * 60 * 60)
 
 struct _CcTariffEditor
 {
@@ -46,6 +45,7 @@ struct _CcTariffEditor
   guint8              time_period_from;
   guint8              time_period_to;
 
+  /* Always in UTC */
   guint64             seconds_to_start;
   guint64             seconds_to_end;
 };
@@ -115,8 +115,15 @@ update_seconds_from_adjustments (CcTariffEditor *self)
    * need to add +1 day to the end date. Otherwise, e.g, [13:10, 19:15), the period
    * is contained in a single day, and we don't need to do anything.
    */
-  if (self->seconds_to_start >= self->seconds_to_end)
-    self->seconds_to_end += SECONDS_PER_DAY;
+  if (g_date_time_compare (local_start, local_end) >= 0)
+    {
+      g_autoptr(GDateTime) new_local_end = g_date_time_add_days (local_end, 1);
+      g_clear_pointer (&local_end, g_date_time_unref);
+      local_end = g_steal_pointer (&new_local_end);
+    }
+
+  self->seconds_to_start = g_date_time_to_unix (local_start);
+  self->seconds_to_end = g_date_time_to_unix (local_end);
 }
 
 static gboolean
@@ -225,11 +232,8 @@ update_tariff (CcTariffEditor *self,
   g_autoptr(GDateTime) forbidden_start = NULL;
   g_autoptr(GDateTime) forbidden_end = NULL;
   g_autoptr(MwtPeriod) allowed_period = NULL;
-  g_autoptr(GDateTime) allowed_start_utc = NULL;
-  g_autoptr(GDateTime) allowed_end_utc = NULL;
   g_autoptr(GDateTime) allowed_start = NULL;
   g_autoptr(GDateTime) allowed_end = NULL;
-  g_autoptr(GTimeZone) local_tz = g_time_zone_new_local ();
 
   /*
    *  This is the a very simple implementation of a tariff, with 2 defined
@@ -261,10 +265,12 @@ update_tariff (CcTariffEditor *self,
   mwt_tariff_builder_add_period (tariff_builder, forbidden_period);
 
   /* 2. Allowed downloads period */
-  allowed_start_utc = g_date_time_new_from_unix_utc (self->seconds_to_start);
-  allowed_end_utc = g_date_time_new_from_unix_utc (self->seconds_to_end);
-  allowed_start = g_date_time_to_timezone (allowed_start_utc, local_tz);
-  allowed_end = g_date_time_to_timezone (allowed_end_utc, local_tz);
+  allowed_start = g_date_time_new_from_unix_local (self->seconds_to_start);
+  allowed_end = g_date_time_new_from_unix_local (self->seconds_to_end);
+
+  g_assert (allowed_start != NULL);
+  g_assert (allowed_end != NULL);
+
   allowed_period = mwt_period_new (allowed_start,
                                    allowed_end,
                                    MWT_PERIOD_REPEAT_DAY, 1,
