@@ -65,7 +65,6 @@ optimized_src = '''
 '''
 
 control_center_optimized = get_option('buildtype').contains('optimized') and cc.compiles(optimized_src)
-message('whether_optimization is enabled: ' + control_center_optimized.to_string())
 
 if control_center_optimized
   common_flags += '-Wp,-D_FORTIFY_SOURCE=2'
@@ -282,6 +281,7 @@ output += ' Options \n'
 output += '     Documentation .............................. ' + get_option('documentation').to_string() + '\n'
 output += '     Tracing .................................... ' + enable_tracing.to_string() + '\n'
 output += '     gnome-session libexecdir ................... ' + gnome_session_libexecdir + '\n'
+output += '     Optimized .................................. ' + control_center_optimized.to_string() + '\n'
 output += ' Panels \n'
 output += '     GNOME Bluetooth (Bluetooth panel) .......... ' + host_is_linux_not_s390.to_string() + '\n'
 output += '     Cheese (Users panel webcam support) ........ ' + enable_cheese.to_string() + '\n'

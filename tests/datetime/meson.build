@@ -1,6 +1,6 @@
 
 test_units = [
-  #'test-timezone',
+  'test-timezone',
   'test-timezone-gfx',
   'test-endianess',
 ]
@@ -13,12 +13,12 @@ cflags = [
 
 foreach unit: test_units
   exe = executable(
-    unit,
-    [unit + '.c'],
-    include_directories: includes,
-    dependencies: common_deps + [m_dep],
-    link_with: [datetime_panel_lib],
-    c_args: cflags
+                    unit,
+           [unit + '.c'],
+    include_directories : includes,
+           dependencies : common_deps + [m_dep],
+              link_with : [datetime_panel_lib],
+                 c_args : cflags
   )
 
   test(unit, exe)

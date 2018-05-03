@@ -4,11 +4,11 @@ service_conf.set('libexecdir', control_center_libexecdir)
 service = 'org.gnome.ControlCenter.SearchProvider.service'
 
 configure_file(
-  input: service + '.in',
-  output: service,
-  install: true,
-  install_dir: join_paths(control_center_datadir, 'dbus-1', 'services'),
-  configuration: service_conf
+          input : service + '.in',
+         output : service,
+        install : true,
+    install_dir : join_paths(control_center_datadir, 'dbus-1', 'services'),
+  configuration : service_conf
 )
 
 install_data(
@@ -26,8 +26,8 @@ sources = files(
 sources += gnome.gdbus_codegen(
   'cc-shell-search-provider-generated',
   'org.gnome.ShellSearchProvider2.xml',
-  interface_prefix: 'org.gnome.',
-  namespace: 'Cc'
+  interface_prefix : 'org.gnome.',
+         namespace : 'Cc'
 )
 
 cflags = '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
@@ -38,12 +38,12 @@ libs = [
 ]
 
 executable(
-  meson.project_name() + '-search-provider',
-  sources,
-  include_directories: top_inc,
-  dependencies: shell_deps,
-  c_args: cflags,
-  link_with: libs,
-  install: true,
-  install_dir: control_center_libexecdir
+  'gnome-control-center-search-provider',
+               sources,
+  include_directories : top_inc,
+         dependencies : shell_deps,
+               c_args : cflags,
+            link_with : libs,
+              install : true,
+          install_dir : control_center_libexecdir
 )
