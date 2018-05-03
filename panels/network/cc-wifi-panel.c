@@ -26,7 +26,6 @@
 #include "shell/cc-application.h"
 #include "shell/cc-debug.h"
 #include "shell/cc-object-storage.h"
-#include "list-box-helper.h"
 
 #include <glib/gi18n.h>
 #include <NetworkManager.h>
