@@ -386,9 +386,6 @@ set_active_panel_from_id (CcShell      *shell,
       return TRUE;
     }
 
-  /* clear any custom widgets */
-  remove_all_custom_widgets (self);
-
   iter_valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->store), &iter);
 
   /* find the details for this item */
@@ -421,12 +418,18 @@ set_active_panel_from_id (CcShell      *shell,
     }
 
   /* Activate the panel */
-  activated = activate_panel (CC_WINDOW (shell), start_id, parameters, name, gicon);
+  activated = activate_panel (CC_WINDOW (shell), start_id, parameters, name, gicon, visibility);
 
   /* Failed to activate the panel for some reason, let's keep the old
    * panel around instead */
   if (!activated)
-    return TRUE;
+    {
+      g_debug ("Failed to activate panel");
+      return TRUE;
+    }
+
+  /* clear any custom widgets */
+  remove_all_custom_widgets (self);
 
   if (add_to_history)
     add_current_panel_to_history (shell, start_id);
