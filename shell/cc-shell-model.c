@@ -336,16 +336,16 @@ cc_shell_model_has_panel (CcShellModel *model,
 
   g_assert (id);
 
-  valid = gtk_tree_model_get_iter_first (model, &iter);
+  valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (model), &iter);
   while (valid)
     {
       g_autofree gchar *panel_id = NULL;
 
-      gtk_tree_model_get (model, &iter, COL_ID, &panel_id, -1);
+      gtk_tree_model_get (GTK_TREE_MODEL (model), &iter, COL_ID, &panel_id, -1);
       if (g_str_equal (id, panel_id))
         return TRUE;
 
-      valid = gtk_tree_model_iter_next (model, &iter);
+      valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (model), &iter);
     }
 
   return FALSE;
