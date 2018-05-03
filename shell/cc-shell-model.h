@@ -18,9 +18,7 @@
  * Author: Thomas Wood <thos@gnome.org>
  */
 
-
-#ifndef _CC_SHELL_MODEL_H
-#define _CC_SHELL_MODEL_H
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -28,31 +26,10 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_SHELL_MODEL cc_shell_model_get_type()
 
-#define CC_SHELL_MODEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_SHELL_MODEL, CcShellModel))
+G_DECLARE_FINAL_TYPE (CcShellModel, cc_shell_model, CC, SHELL_MODEL, GtkListStore)
 
-#define CC_SHELL_MODEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_SHELL_MODEL, CcShellModelClass))
-
-#define CC_IS_SHELL_MODEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_SHELL_MODEL))
-
-#define CC_IS_SHELL_MODEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_SHELL_MODEL))
-
-#define CC_SHELL_MODEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_SHELL_MODEL, CcShellModelClass))
-
-typedef struct _CcShellModel CcShellModel;
-typedef struct _CcShellModelClass CcShellModelClass;
-typedef struct _CcShellModelPrivate CcShellModelPrivate;
-
-typedef enum {
+typedef enum
+{
   CC_CATEGORY_CONNECTIVITY,
   CC_CATEGORY_PERSONALIZATION,
   CC_CATEGORY_ACCOUNT,
@@ -77,37 +54,22 @@ enum
   N_COLS
 };
 
-struct _CcShellModel
-{
-  GtkListStore parent;
 
-  CcShellModelPrivate *priv;
-};
+CcShellModel* cc_shell_model_new                 (void);
 
-struct _CcShellModelClass
-{
-  GtkListStoreClass parent_class;
-};
+void          cc_shell_model_add_item            (CcShellModel    *model,
+                                                  CcPanelCategory  category,
+                                                  GAppInfo        *appinfo,
+                                                  const char      *id);
 
-GType cc_shell_model_get_type (void) G_GNUC_CONST;
+gboolean      cc_shell_model_has_panel           (CcShellModel    *model,
+                                                  const char      *id);
 
-CcShellModel *cc_shell_model_new (void);
+gboolean      cc_shell_model_iter_matches_search (CcShellModel    *model,
+                                                  GtkTreeIter     *iter,
+                                                  const char      *term);
 
-void cc_shell_model_add_item (CcShellModel   *model,
-                              CcPanelCategory category,
-                              GAppInfo       *appinfo,
-                              const char     *id);
-
-gboolean cc_shell_model_has_panel (CcShellModel *model,
-                                   const char   *id);
-
-gboolean cc_shell_model_iter_matches_search (CcShellModel *model,
-                                             GtkTreeIter  *iter,
-                                             const char   *term);
-
-void cc_shell_model_set_sort_terms (CcShellModel  *model,
-                                    gchar        **terms);
+void          cc_shell_model_set_sort_terms       (CcShellModel   *model,
+                                                   GStrv          terms);
 
 G_END_DECLS
-
-#endif /* _CC_SHELL_MODEL_H */
