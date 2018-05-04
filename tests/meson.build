@@ -1,5 +1,7 @@
 subdir('common')
 subdir('datetime')
-subdir('network')
+if host_is_linux
+  subdir('network')
+endif
 subdir('printers')
 subdir('info')
