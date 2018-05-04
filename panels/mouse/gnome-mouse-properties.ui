@@ -608,6 +608,58 @@
                           </object>
                         </child>
                         <child>
+                          <object class="GtkListBoxRow" id="tap-and-drag-row">
+                            <property name="visible">False</property>
+                            <property name="can_focus">True</property>
+                            <property name="activatable">false</property>
+                            <child>
+                              <object class="GtkGrid" id="tap-and-drag-grid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="row_spacing">0</property>
+                                <property name="column_spacing">32</property>
+                                <property name="margin_start">20</property>
+                                <property name="margin_end">20</property>
+                                <property name="margin_top">12</property>
+                                <property name="margin_bottom">12</property>
+                                <property name="valign">center</property>
+                                <child>
+                                  <object class="GtkLabel" id="tap-and-drag-label">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="valign">end</property>
+                                    <property name="label" translatable="yes">Tap and drag</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="mnemonic_widget">tap-and-drag-switch</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSwitch" id="tap-and-drag-switch">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="halign">end</property>
+                                    <property name="valign">center</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">1</property>
+                                    <property name="top_attach">0</property>
+                                    <property name="width">1</property>
+                                    <property name="height">2</property>
+                                  </packing>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
                           <object class="GtkListBoxRow" id="two-finger-scrolling-row">
                             <property name="visible">False</property>
                             <property name="can_focus">True</property>

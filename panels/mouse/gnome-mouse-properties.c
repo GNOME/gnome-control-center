@@ -96,6 +96,7 @@ setup_touchpad_options (CcMousePropertiesPrivate *d)
 	gtk_widget_set_visible (WID ("two-finger-scrolling-row"), have_two_finger_scrolling);
 	gtk_widget_set_visible (WID ("edge-scrolling-row"), have_edge_scrolling);
 	gtk_widget_set_visible (WID ("tap-to-click-row"), have_tap_to_click);
+	gtk_widget_set_visible (WID ("tap-and-drag-row"), have_tap_to_click);
 
 	edge_scroll_enabled = g_settings_get_boolean (d->touchpad_settings, "edge-scrolling-enabled");
 	two_finger_scroll_enabled = g_settings_get_boolean (d->touchpad_settings, "two-finger-scrolling-enabled");
@@ -288,6 +289,10 @@ setup_dialog (CcMousePropertiesPrivate *d)
 
 	g_settings_bind (d->touchpad_settings, "tap-to-click",
 			 WID ("tap-to-click-switch"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
+
+	g_settings_bind (d->touchpad_settings, "tap-and-drag",
+			 WID ("tap-and-drag-switch"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
 
 	setup_touchpad_options (d);
