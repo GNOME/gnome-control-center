@@ -56,6 +56,8 @@ struct _CcBackgroundChooserDialog
   BgPicturesSource *pictures_source;
   BgColorsSource *colors_source;
 
+  GtkWidget *action_button;
+
   GtkTreeRowReference *item_to_focus;
 
   GnomeDesktopThumbnailFactory *thumb_factory;
@@ -257,10 +259,23 @@ static void
 on_visible_child_notify (CcBackgroundChooserDialog *chooser)
 {
   GtkWidget *icon_view;
+  const gchar *child_name;
 
   icon_view = get_visible_view (chooser);
   gtk_icon_view_unselect_all (GTK_ICON_VIEW (icon_view));
   gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser), GTK_RESPONSE_OK, FALSE);
+
+  child_name = gtk_stack_get_visible_child_name (GTK_STACK (chooser->stack));
+  if (g_strcmp0(child_name, "wallpapers") == 0 ||
+      g_strcmp0(child_name, "pictures")   == 0) {
+    gtk_image_set_from_icon_name (
+        GTK_IMAGE (gtk_button_get_image (GTK_BUTTON (chooser->action_button))),
+        "emblem-photos-symbolic", GTK_ICON_SIZE_MENU);
+  } else {
+    gtk_image_set_from_icon_name (
+        GTK_IMAGE (gtk_button_get_image (GTK_BUTTON (chooser->action_button))),
+        "color-select-symbolic", GTK_ICON_SIZE_MENU);
+  }
 }
 
 static void
@@ -338,6 +353,41 @@ cc_background_panel_drag_color (CcBackgroundChooserDialog *chooser,
   gtk_tree_row_reference_free (row_ref);
   gtk_tree_path_free (to_focus_path);
 
+  return TRUE;
+}
+
+static gboolean
+on_action_button_press_cb (GtkButton                 *action_button,
+                           GdkEventButton            *event,
+                           CcBackgroundChooserDialog *chooser)
+{
+  const gchar *child_name;
+  GtkWidget *dialog;
+  GdkRGBA rgba;
+  int result;
+
+  child_name = gtk_stack_get_visible_child_name (GTK_STACK (chooser->stack));
+  if (g_strcmp0(child_name, "wallpapers") == 0 ||
+      g_strcmp0(child_name, "pictures")   == 0) {
+    dialog = gtk_file_chooser_dialog_new("Choose wallpaper", GTK_WINDOW(chooser),
+                                         GTK_FILE_CHOOSER_ACTION_OPEN,
+                                         _("_Cancel"),
+                                         GTK_RESPONSE_CANCEL,
+                                         _("_Open"),
+                                         GTK_RESPONSE_ACCEPT,
+                                         NULL);
+    result = gtk_dialog_run (GTK_DIALOG (dialog));
+    if(result == GTK_RESPONSE_ACCEPT)
+        add_custom_wallpaper (chooser, gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog)));
+  } else {
+    dialog = gtk_color_chooser_dialog_new(NULL, GTK_WINDOW(chooser));
+    result = gtk_dialog_run (GTK_DIALOG (dialog));
+    if(result == GTK_RESPONSE_OK) {
+      gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (dialog), &rgba);
+      bg_colors_source_add (chooser->colors_source, &rgba, NULL);
+    }
+  }
+  gtk_widget_destroy(dialog);
   return TRUE;
 }
 
@@ -559,6 +609,19 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
 
   gtk_dialog_add_button (GTK_DIALOG (chooser), _("_Cancel"), GTK_RESPONSE_CANCEL);
   gtk_dialog_add_button (GTK_DIALOG (chooser), _("_Select"), GTK_RESPONSE_OK);
+
+  img = gtk_image_new();
+  chooser->action_button = g_object_new (GTK_TYPE_BUTTON,
+                                        "image", img,
+                                        "always-show-image", TRUE,
+                                        NULL);
+  gtk_dialog_add_action_widget (GTK_DIALOG (chooser),
+                                chooser->action_button,
+                                GTK_RESPONSE_NONE);
+  gtk_widget_show (chooser->action_button);
+  g_signal_connect (chooser->action_button, "button-press-event",
+                    G_CALLBACK (on_action_button_press_cb), chooser);
+
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
   gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser), GTK_RESPONSE_OK, FALSE);
 }
