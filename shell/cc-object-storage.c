@@ -256,7 +256,7 @@ cc_object_storage_create_dbus_proxy_sync (GBusType          bus_type,
 
   if (local_error)
     {
-      g_propagate_error (error, local_error);
+      g_propagate_error (error, g_steal_pointer (&local_error));
       return NULL;
     }
 
@@ -385,7 +385,7 @@ cc_object_storage_create_dbus_proxy_finish (GAsyncResult  *result,
   /* If the proxy is not cached, do the normal caching routine */
   if (local_error)
     {
-      g_propagate_error (error, local_error);
+      g_propagate_error (error, g_steal_pointer (&local_error));
       return NULL;
     }
 
