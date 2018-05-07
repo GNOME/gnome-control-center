@@ -79,11 +79,11 @@ cc_night_light_dialog_finalize (GObject *object)
       self->main_window = NULL;
     }
 
-  g_object_unref (self->builder);
-  g_object_unref (self->proxy_color);
-  g_object_unref (self->proxy_color_props);
-  g_object_unref (self->settings_display);
-  g_object_unref (self->settings_clock);
+  g_clear_object (&self->builder);
+  g_clear_object (&self->proxy_color);
+  g_clear_object (&self->proxy_color_props);
+  g_clear_object (&self->settings_display);
+  g_clear_object (&self->settings_clock);
   if (self->timer_id > 0)
     g_source_remove (self->timer_id);
 
@@ -392,7 +392,8 @@ dialog_got_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
   proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
   if (proxy == NULL)
     {
-      g_warning ("failed to connect to g-s-d: %s", error->message);
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("failed to connect to g-s-d: %s", error->message);
       return;
     }
 
@@ -414,7 +415,8 @@ dialog_got_proxy_props_cb (GObject *source_object, GAsyncResult *res, gpointer u
   proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
   if (proxy == NULL)
     {
-      g_warning ("failed to connect to g-s-d: %s", error->message);
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("failed to connect to g-s-d: %s", error->message);
       return;
     }
 
