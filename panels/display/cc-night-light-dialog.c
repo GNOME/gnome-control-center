@@ -384,13 +384,18 @@ static void
 dialog_got_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
   CcNightLightDialog *self = (CcNightLightDialog *) user_data;
+  GDBusProxy *proxy;
   g_autoptr(GError) error = NULL;
-  self->proxy_color = g_dbus_proxy_new_for_bus_finish (res, &error);
-  if (self->proxy_color == NULL)
+
+  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (proxy == NULL)
     {
       g_warning ("failed to connect to g-s-d: %s", error->message);
       return;
     }
+
+  self->proxy_color = proxy;
+
   g_signal_connect (self->proxy_color, "g-properties-changed",
                     G_CALLBACK (dialog_color_properties_changed_cb), self);
   dialog_update_state (self);
@@ -401,13 +406,17 @@ static void
 dialog_got_proxy_props_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
   CcNightLightDialog *self = (CcNightLightDialog *) user_data;
+  GDBusProxy *proxy;
   g_autoptr(GError) error = NULL;
-  self->proxy_color_props = g_dbus_proxy_new_for_bus_finish (res, &error);
-  if (self->proxy_color_props == NULL)
+
+  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (proxy == NULL)
     {
       g_warning ("failed to connect to g-s-d: %s", error->message);
       return;
     }
+
+  self->proxy_color_props = proxy;
 }
 
 static gboolean
