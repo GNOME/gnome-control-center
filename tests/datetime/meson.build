@@ -1,6 +1,6 @@
 
 test_units = [
-  'test-timezone',
+  #'test-timezone',
   'test-timezone-gfx',
   'test-endianess',
 ]
