@@ -1,4 +1,4 @@
-#include <locale.h>
+	#include <locale.h>
 #include <gtk/gtk.h>
 #include "cc-datetime-resources.h"
 #include "cc-timezone-map.h"
@@ -98,7 +98,6 @@ test_timezone (void)
 int main (int argc, char **argv)
 {
 	setlocale (LC_ALL, "");
-	gtk_init (NULL, NULL);
 	g_test_init (&argc, &argv, NULL);
 
 	g_resources_register (cc_datetime_get_resource ());
