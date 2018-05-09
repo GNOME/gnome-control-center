@@ -1,5 +1,6 @@
 #include <config.h>
 #include <locale.h>
+#include <gtk/gtk.h>
 
 #include "cc-datetime-resources.h"
 #include "tz.h"
@@ -42,7 +43,7 @@ int main (int argc, char **argv)
 {
 	char *pixmap_dir;
 
-        setlocale (LC_ALL, "");
+  setlocale (LC_ALL, "");
 	g_test_init (&argc, &argv, NULL);
 
 	g_setenv ("G_DEBUG", "fatal_warnings", FALSE);
