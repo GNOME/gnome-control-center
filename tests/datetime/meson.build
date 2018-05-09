@@ -6,6 +6,9 @@ test_units = [
 ]
 
 includes = [top_inc, include_directories('../../panels/datetime')]
+env = [
+  'G_MESSAGES_DEBUG=all',
+]
 cflags = [
   '-DTEST_SRCDIR="@0@"'.format(meson.current_source_dir()),
   '-DSRCDIR="@0@"'.format(meson.source_root() + '/panels/datetime')
@@ -21,6 +24,6 @@ foreach unit: test_units
                  c_args : cflags
   )
 
-  test(unit, exe)
+  test(unit, exe, env: env)
 endforeach
 
