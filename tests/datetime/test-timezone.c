@@ -52,7 +52,8 @@ main (gint    argc,
       gchar **argv)
 {
   setlocale (LC_ALL, "");
-  gtk_init (NULL, NULL);
+
+  gtk_init_check (&argc, &argv);
   g_test_init (&argc, &argv, NULL);
 
   g_resources_register (cc_datetime_get_resource ());
