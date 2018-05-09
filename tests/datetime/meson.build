@@ -8,6 +8,8 @@ test_units = [
 includes = [top_inc, include_directories('../../panels/datetime')]
 env = [
   'G_MESSAGES_DEBUG=all',
+          'BUILDDIR=' + meson.current_build_dir(),
+      'TOP_BUILDDIR=' + meson.build_root()
 ]
 cflags = [
   '-DTEST_SRCDIR="@0@"'.format(meson.current_source_dir()),
@@ -24,6 +26,9 @@ foreach unit: test_units
                  c_args : cflags
   )
 
-  test(unit, exe, env: env)
+  test(
+            unit,
+    find_program(unit + '.py'),
+        env : env,
+    timeout : 10)
 endforeach
-
