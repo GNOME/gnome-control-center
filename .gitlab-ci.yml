@@ -13,8 +13,8 @@ variables:
                 libgtop2-devel libgudev-devel libnma-devel libpwquality-devel libsmbclient-devel
                 libsoup-devel libwacom-devel libX11-devel libXi-devel libxml2-devel libxslt
                 libXxf86misc-devel meson ModemManager-glib-devel NetworkManager-libnm-devel
-                polkit-devel pulseaudio-libs-devel upower-devel
-                python3-dbusmock xorg-x11-server-Xvfb mesa-dri-drivers
+                polkit-devel pulseaudio-libs-devel upower-devel python3-dbusmock xorg-x11-server-Xvfb
+                mesa-dri-drivers zoneinfo
 
 
 before_script:
@@ -47,6 +47,11 @@ test:
     - meson . _build
     - ninja -C _build
     - meson test -C _build --verbose --no-stdsplit
+    - cat _build/meson-logs/testsuite.txt
+  artifacts:
+        paths:
+        - _build/meson-logs/testsuite.txt
+        expire_in: 3 days
 
 
 ##
