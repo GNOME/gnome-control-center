@@ -249,10 +249,7 @@ install_subdir(
 top_inc = include_directories('.')
 shell_inc = include_directories('shell')
 
-update_from_gsd = find_program('update-from-gsd.sh')
-update_from_gsd_in = files('update-from-gsd.in')
-update_from_nma_in = files('update-from-nma.in')
-
+subdir('build-aux')
 subdir('data/icons')
 subdir('po')
 subdir('panels')
@@ -267,11 +264,6 @@ endif
 configure_file(
   output: 'config.h',
   configuration: config_h
-)
-
-meson.add_install_script(
-  'meson_post_install.py',
-  control_center_datadir
 )
 
 output = ''
