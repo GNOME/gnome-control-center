@@ -1,25 +1,7 @@
-image: fedora:rawhide
+image: claudioandre/control-center:job-445.6
 stages:
   - build
   - test
-  - deploy
-
-variables:
-  DEPENDENCIES: accountsservice-devel cheese-libs-devel chrpath clutter-gtk-devel colord-devel
-                colord-gtk-devel cups-devel desktop-file-utils docbook-style-xsl gdk-pixbuf2-devel
-                gettext git glib2-devel gnome-bluetooth-libs-devel gnome-desktop3-devel
-                gnome-online-accounts-devel gnome-settings-daemon-devel grilo-devel
-                gsettings-desktop-schemas-devel gtk3-devel ibus-devel intltool libcanberra-devel
-                libgtop2-devel libgudev-devel libnma-devel libpwquality-devel libsmbclient-devel
-                libsoup-devel libwacom-devel libX11-devel libXi-devel libxml2-devel libxslt
-                libXxf86misc-devel meson ModemManager-glib-devel NetworkManager-libnm-devel
-                polkit-devel pulseaudio-libs-devel upower-devel
-                python3-dbusmock xorg-x11-server-Xvfb mesa-dri-drivers
-
-
-before_script:
-  - dnf update -y --nogpgcheck && dnf install -y --nogpgcheck $DEPENDENCIES
-
 
 ##
 # Stage: Build
@@ -46,20 +28,12 @@ test:
   script:
     - meson . _build
     - ninja -C _build
-    - meson test -C _build --verbose --no-stdsplit
-
-
-##
-# Stage: Deploy
-#
-# Checks if the released version is in a good shape.
-##
-deploy:
-  stage: deploy
-  script:
-    - meson . _build
-    - ninja -C _build
-    - meson test -C _build
-    - ninja dist -C _build
-  only:
-    - tags
+    - |
+      if [[ -n "${CI_COMMIT_TAG}" ]]; then
+        echo "== Distro Test =="
+        meson test -C _build
+        ninja dist -C _build
+      else
+        echo "== Testing =="
+        meson test -C _build --verbose --no-stdsplit
+      fi
