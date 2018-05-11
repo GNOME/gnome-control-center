@@ -1,0 +1,24 @@
+From 3a6db21994ad66fa3c5a3636d5d4f1f07d3d0f02 Mon Sep 17 00:00:00 2001
+From: Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
+Date: Thu, 10 May 2018 22:07:58 -0300
+Subject: [PATCH] NetworkManager
+
+---
+ libnm/meson.build | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/libnm/meson.build b/libnm/meson.build
+index 4e985b0aa..29fe414e3 100644
+--- a/libnm/meson.build
++++ b/libnm/meson.build
+@@ -28,6 +28,7 @@ libnm_utils = static_library(
+ 
+ libnm_headers = files(
+   'NetworkManager.h',
++  'nm-autoptr.h',
+   'nm-access-point.h',
+   'nm-active-connection.h',
+   'nm-checkpoint.h',
+-- 
+2.17.0
+
