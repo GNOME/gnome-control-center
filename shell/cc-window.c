@@ -65,6 +65,7 @@ struct _CcWindow
   GtkWidget  *search_entry;
   GtkWidget  *lock_button;
   GtkWidget  *current_panel_box;
+  GtkWidget  *flatpak_warning_dialog;
   GtkWidget  *current_panel;
   char       *current_panel_id;
   GQueue     *previous_panels;
@@ -652,6 +653,20 @@ cc_shell_iface_init (CcShellInterface *iface)
   iface->get_toplevel = cc_window_get_toplevel;
 }
 
+/* GtkWidget overrides */
+static void
+cc_window_map (GtkWidget *widget)
+{
+  CcWindow *self = (CcWindow *) widget;
+
+  GTK_WIDGET_CLASS (cc_window_parent_class)->map (widget);
+
+  /* Show a warning for Flatpak builds */
+#ifdef FLATPAK_BUILD
+  gtk_window_present (GTK_WINDOW (self->flatpak_warning_dialog));
+#endif
+}
+
 /* GObject Implementation */
 static void
 cc_window_get_property (GObject    *object,
@@ -729,10 +744,13 @@ cc_window_class_init (CcWindowClass *klass)
   object_class->dispose = cc_window_dispose;
   object_class->finalize = cc_window_finalize;
 
+  widget_class->map = cc_window_map;
+
   g_object_class_override_property (object_class, PROP_ACTIVE_PANEL, "active-panel");
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/gtk/window.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, flatpak_warning_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_sizegroup);
