@@ -28,6 +28,15 @@ cc = meson.get_compiler('c')
 # Tracing
 enable_tracing = get_option('tracing')
 
+# Build profile (the 'development' profile is guessed of nothing is set)
+gnome_control_center_minor_version = meson.project_version().split('.')[1].to_int()
+
+build_profile = get_option('profile')
+
+if build_profile == 'default' and gnome_control_center_minor_version.is_odd()
+  build_profile = 'development'
+endif
+
 config_h = configuration_data()
 
 py3 = import('python3')
@@ -48,6 +57,12 @@ set_defines = [
 foreach define: set_defines
   config_h.set_quoted(define[0], define[1])
 endforeach
+
+config_h.set('DEVELOPMENT_BUILD', build_profile != 'default',
+             description: 'Defined if this build is a development build (from the master branch)')
+
+config_h.set('FLATPAK_BUILD', build_profile == 'flatpak',
+             description: 'Defined if this build is a flatpak build')
 
 # meson does not support octal values, so it must be handled as a
 # string. See: https://github.com/mesonbuild/meson/issues/2047
@@ -274,6 +289,7 @@ output += '     Documentation .............................. ' + get_option('doc
 output += '     Tracing .................................... ' + enable_tracing.to_string() + '\n'
 output += '     gnome-session libexecdir ................... ' + gnome_session_libexecdir + '\n'
 output += '     Optimized .................................. ' + control_center_optimized.to_string() + '\n'
+output += '     Profile .................................... ' + build_profile + '\n'
 output += ' Panels \n'
 output += '     GNOME Bluetooth (Bluetooth panel) .......... ' + host_is_linux_not_s390.to_string() + '\n'
 output += '     Cheese (Users panel webcam support) ........ ' + enable_cheese.to_string() + '\n'
