@@ -224,4 +224,17 @@
       <widget name="sidebar_box"/>
     </widgets>
   </object>
+
+  <!-- Warning dialog for Flatpak builds -->
+  <object class="GtkMessageDialog" id="flatpak_warning_dialog">
+    <property name="message-type">warning</property>
+    <property name="transient-for">CcWindow</property>
+    <property name="resizable">false</property>
+    <property name="modal">true</property>
+    <property name="buttons">ok</property>
+    <property name="text" translatable="yes">GNOME Settings is running with Flatpak</property>
+    <property name="secondary-text" translatable="yes">Flatpak builds are experimental, and only meant to be used for development purposes. You may experience misbehaviors, data loss and other unexpected issues. Use with caution.</property>
+    <signal name="response" handler="gtk_widget_hide" object="CcWindow" swapped="no" />
+  </object>
+
 </interface>
