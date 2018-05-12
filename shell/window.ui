@@ -224,4 +224,33 @@
       <widget name="sidebar_box"/>
     </widgets>
   </object>
+
+  <!-- Warning dialog for Flatpak builds -->
+  <object class="GtkMessageDialog" id="flatpak_warning_dialog">
+    <property name="message-type">warning</property>
+    <property name="transient-for">CcWindow</property>
+    <property name="resizable">false</property>
+    <property name="modal">true</property>
+    <property name="text" translatable="yes">GNOME Settings Is Running With Flatpak</property>
+    <property name="secondary-text" translatable="yes">Flatpak builds are experimental, and are intended to be used for development purposes only. You may experience misbehaviors, data loss and other unexpected issues. Use with caution.</property>
+    <child type="action">
+      <object class="GtkButton" id="stop_showing_button">
+        <property name="visible">True</property>
+        <property name="label" translatable="yes">Don't Show This Again</property>
+      </object>
+    </child>
+    <child type="action">
+      <object class="GtkButton" id="dismiss_button">
+        <property name="visible">True</property>
+        <property name="label" translatable="yes">OK, Understood</property>
+        <property name="can-default">True</property>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="cancel" default="true">dismiss_button</action-widget>
+      <action-widget response="ok">stop_showing_button</action-widget>
+    </action-widgets>
+    <signal name="response" handler="on_flatpak_warning_dialog_responded_cb" object="CcWindow" swapped="no" />
+  </object>
+
 </interface>
