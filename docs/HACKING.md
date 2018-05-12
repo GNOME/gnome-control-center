@@ -10,6 +10,18 @@ The most important rule is: **see the surrounding code, and copy its style**.
 Another rule that applies to function declarations is that all parameters are
 aligned by the last '*'. There are plenty of examples below.
 
+## Comments
+
+Comment blocks should be formatted as following:
+
+```c
+/* Single line comment */
+
+/* Multiline comments start at the first line of the comment block,
+ * but have the closing slash a line after. Every line starts with
+ * an asterisk that is aligned with every the rest of the block.
+ */
+
 ## Header (.h) files
 
 It is organized by the following structure:
