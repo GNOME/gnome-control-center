@@ -2,6 +2,7 @@ image: claudioandre/control-center:job-445.6
 stages:
   - build
   - test
+  - delivery
 
 ##
 # Stage: Build
@@ -18,10 +19,13 @@ build:
     expire_in: 3h30min
 
   script:
+    - echo "== Building =="
     - meson . _build
     - ninja -C _build
-    - ninja -C _build install
 
+    - echo "== Installing =="
+    - ninja -C _build install
+  when: manual
 
 ##
 # Stage: Test
@@ -43,3 +47,38 @@ test:
         echo "== Testing =="
         meson test -C _build --verbose --no-stdsplit
       fi
+  when: manual
+
+##
+# Stage: Delivery
+#
+# Create a flatpak
+##
+packaging:
+  stage: delivery
+  image: registry.gitlab.gnome.org/gnome/gnome-nightly-oci/nightly:master
+  variables:
+    CODECHECK: "FLATPAK"
+    APPID: "org.gnome.SettingsDevel"
+    BUNDLE: "org.gnome.SettingsDevel.flatpak"
+    MANIFEST_PATH: "org.gnome.SettingsDevel.json"
+    RUNTIME_REPO: "https://sdk.gnome.org/gnome-nightly.flatpakrepo"
+
+  script:
+    - echo "== Flatpak packaging =="
+
+    # Move the manifest file to the root folder
+    - cp tests/*.json .
+
+    # Ajust manifest
+    - sed -i "s,<<ID>>,$APPID,g" ${MANIFEST_PATH}
+    - sed -i "s,<<master>>,master,g" ${MANIFEST_PATH}
+    - sed -i "s,<<current>>,origin/$CI_COMMIT_REF_NAME,g" ${MANIFEST_PATH}
+
+    - flatpak-builder --bundle-sources --repo=devel build ${MANIFEST_PATH}
+    - flatpak build-bundle devel ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APPID}
+
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    url: https://gitlab.gnome.org/$CI_PROJECT_PATH/-/jobs/$CI_JOB_ID/artifacts/raw/${BUNDLE}
+  when: always
