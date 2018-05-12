@@ -12,6 +12,11 @@ stages:
 ##
 build:
   stage: build
+  artifacts:
+    name: builded
+    untracked: true
+    expire_in: 3h30min
+
   script:
     - meson . _build
     - ninja -C _build
@@ -25,9 +30,10 @@ build:
 ##
 test:
   stage: test
+  dependencies:
+    - build
+
   script:
-    - meson . _build
-    - ninja -C _build
     - |
       if [[ -n "${CI_COMMIT_TAG}" ]]; then
         echo "== Distro Test =="
