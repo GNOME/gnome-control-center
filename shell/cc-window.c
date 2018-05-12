@@ -91,6 +91,42 @@ enum
 };
 
 /* Auxiliary methods */
+static void
+maybe_add_development_build_css (CcWindow *self)
+{
+#ifdef DEVELOPMENT_BUILD
+  g_autoptr(GtkCssProvider) provider = NULL;
+  g_autoptr(GError) error = NULL;
+
+  /* This CSS snipped is added on development builds of GNOME Settings. It is
+   * not meant to be beautiful (althout it is) and is only supposed to integrate
+   * with Adwaita light (although it integrates well with dark too). */
+
+  const gchar *development_build_css =
+  "window.development headerbar {\n"
+   "  background: @theme_bg_color linear-gradient(to top,\n"
+   "                                              alpha(@theme_selected_bg_color, 0.34),\n"
+   "                                              alpha(@theme_selected_bg_color, 0.27) 2px,\n"
+   "                                              alpha(@theme_selected_bg_color, 0.20) 3px);\n"
+   "}";
+
+  gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)), "development");
+
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_data (provider, development_build_css, -1, &error);
+
+  if (error)
+    {
+      g_error ("Failed to load CSS: %s", error->message);
+      return;
+    }
+
+  gtk_style_context_add_provider_for_screen (gtk_widget_get_screen (GTK_WIDGET (self)),
+                                             GTK_STYLE_PROVIDER (provider),
+                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+#endif
+}
+
 static gchar *
 get_symbolic_icon_name_from_g_icon (GIcon *gicon)
 {
@@ -760,6 +796,9 @@ cc_window_init (CcWindow *self)
     cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), id);
   else
     cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
+
+  /* Add a custom CSS class on development builds */
+  maybe_add_development_build_css (self);
 }
 
 CcWindow *
