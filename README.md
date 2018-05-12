@@ -1,3 +1,6 @@
+[![Build Status](https://gitlab.gnome.org/GNOME/gnome-control-center/badges/master/build.svg)](https://gitlab.gnome.org/GNOME/gnome-control-center/pipelines)
+[![License](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://gitlab.gnome.org/GNOME/gnome-control-center/blob/master/COPYING)
+
 GNOME Settings
 ====================
 
