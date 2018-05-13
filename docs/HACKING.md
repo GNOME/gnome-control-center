@@ -21,6 +21,7 @@ Comment blocks should be formatted as following:
  * but have the closing slash a line after. Every line starts with
  * an asterisk that is aligned with every the rest of the block.
  */
+```
 
 ## Header (.h) files
 
