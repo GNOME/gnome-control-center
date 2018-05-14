@@ -18,10 +18,12 @@ build:
     expire_in: 3h30min
 
   script:
+    - echo "== Building =="
     - meson . _build
     - ninja -C _build
-    - ninja -C _build install
 
+    - echo "== Installing =="
+    - ninja -C _build install
 
 ##
 # Stage: Test
