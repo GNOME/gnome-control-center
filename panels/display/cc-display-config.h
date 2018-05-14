@@ -78,12 +78,12 @@ struct _CcDisplayModeClass
 {
   GObjectClass parent_class;
 
-  void (*get_resolution) (CcDisplayMode *self, int *w, int *h);
-  const double * (*get_supported_scales) (CcDisplayMode *self);
-  double (*get_preferred_scale) (CcDisplayMode *self);
-  gboolean (*is_interlaced) (CcDisplayMode *self);
-  int (*get_freq) (CcDisplayMode *self);
-  double (*get_freq_f) (CcDisplayMode *self);
+  void          (*get_resolution)       (CcDisplayMode *self, int *w, int *h);
+  const double* (*get_supported_scales) (CcDisplayMode *self);
+  double        (*get_preferred_scale)  (CcDisplayMode *self);
+  gboolean      (*is_interlaced)        (CcDisplayMode *self);
+  int           (*get_freq)             (CcDisplayMode *self);
+  double        (*get_freq_f)           (CcDisplayMode *self);
 };
 
 
@@ -95,29 +95,44 @@ struct _CcDisplayMonitorClass
 {
   GObjectClass parent_class;
 
-  guint32 (*get_id) (CcDisplayMonitor *self);
-  const char * (*get_display_name) (CcDisplayMonitor *self);
-  const char * (*get_connector_name) (CcDisplayMonitor *self);
-  gboolean (*is_builtin) (CcDisplayMonitor *self);
-  gboolean (*is_primary) (CcDisplayMonitor *self);
-  void (*set_primary) (CcDisplayMonitor *self, gboolean primary);
-  gboolean (*is_active) (CcDisplayMonitor *self);
-  void (*set_active) (CcDisplayMonitor *self, gboolean a);
-  CcDisplayRotation (*get_rotation) (CcDisplayMonitor *self);
-  void (*set_rotation) (CcDisplayMonitor *self, CcDisplayRotation r);
-  gboolean (*supports_rotation) (CcDisplayMonitor *self, CcDisplayRotation r);
-  void (*get_physical_size) (CcDisplayMonitor *self, int *w, int *h);
-  void (*get_geometry) (CcDisplayMonitor *self, int *x, int *y, int *w, int *h);
-  gboolean (*supports_underscanning) (CcDisplayMonitor *self);
-  gboolean (*get_underscanning) (CcDisplayMonitor *self);
-  void (*set_underscanning) (CcDisplayMonitor *self, gboolean u);
-  CcDisplayMode * (*get_mode) (CcDisplayMonitor *self);
-  CcDisplayMode * (*get_preferred_mode) (CcDisplayMonitor *self);
-  GList * (*get_modes) (CcDisplayMonitor *self);
-  void (*set_mode) (CcDisplayMonitor *self, CcDisplayMode *m);
-  void (*set_position) (CcDisplayMonitor *self, int x, int y);
-  double (*get_scale) (CcDisplayMonitor *self);
-  void (*set_scale) (CcDisplayMonitor *self, double s);
+  guint32           (*get_id)                 (CcDisplayMonitor  *self);
+  const char*       (*get_display_name)       (CcDisplayMonitor  *self);
+  const char*       (*get_connector_name)     (CcDisplayMonitor  *self);
+  gboolean          (*is_builtin)             (CcDisplayMonitor  *self);
+  gboolean          (*is_primary)             (CcDisplayMonitor  *self);
+  void              (*set_primary)            (CcDisplayMonitor  *self,
+                                               gboolean          primary);
+  gboolean          (*is_active)              (CcDisplayMonitor *self);
+  void              (*set_active)             (CcDisplayMonitor *self,
+                                               gboolean          a);
+  CcDisplayRotation (*get_rotation)           (CcDisplayMonitor *self);
+  void              (*set_rotation)           (CcDisplayMonitor  *self,
+                                               CcDisplayRotation  r);
+  gboolean          (*supports_rotation)      (CcDisplayMonitor  *self,
+                                               CcDisplayRotation  r);
+  void              (*get_physical_size)      (CcDisplayMonitor  *self,
+                                               int               *w,
+                                               int               *h);
+  void              (*get_geometry)           (CcDisplayMonitor  *self,
+                                               int               *x,
+                                               int               *y,
+                                               int               *w,
+                                               int               *h);
+  gboolean          (*supports_underscanning) (CcDisplayMonitor  *self);
+  gboolean          (*get_underscanning)      (CcDisplayMonitor  *self);
+  void              (*set_underscanning)      (CcDisplayMonitor  *self,
+                                               gboolean           u);
+  CcDisplayMode*    (*get_mode)               (CcDisplayMonitor  *self);
+  CcDisplayMode*    (*get_preferred_mode)     (CcDisplayMonitor  *self);
+  GList*            (*get_modes)              (CcDisplayMonitor  *self);
+  void              (*set_mode)               (CcDisplayMonitor  *self,
+                                               CcDisplayMode     *m);
+  void              (*set_position)           (CcDisplayMonitor  *self,
+                                               int                x,
+                                               int                y);
+  double            (*get_scale)              (CcDisplayMonitor  *self);
+  void              (*set_scale)              (CcDisplayMonitor  *self,
+                                               double             s);
 };
 
 
@@ -129,70 +144,82 @@ struct _CcDisplayConfigClass
 {
   GObjectClass parent_class;
 
-  GList * (*get_monitors) (CcDisplayConfig *self);
-  gboolean (*is_applicable) (CcDisplayConfig *self);
-  gboolean (*equal) (CcDisplayConfig *self, CcDisplayConfig *other);
-  gboolean (*apply) (CcDisplayConfig *self, GError **error);
-  gboolean (*is_cloning) (CcDisplayConfig *self);
-  void (*set_cloning) (CcDisplayConfig *self, gboolean clone);
-  GList * (*get_cloning_modes) (CcDisplayConfig *self);
-  gboolean (*is_layout_logical) (CcDisplayConfig *self);
+  GList*   (*get_monitors)      (CcDisplayConfig  *self);
+  gboolean (*is_applicable)     (CcDisplayConfig  *self);
+  gboolean (*equal)             (CcDisplayConfig  *self,
+                                 CcDisplayConfig  *other);
+  gboolean (*apply)             (CcDisplayConfig  *self,
+                                GError           **error);
+  gboolean (*is_cloning)        (CcDisplayConfig  *self);
+  void     (*set_cloning)       (CcDisplayConfig  *self,
+                                 gboolean          clone);
+  GList*   (*get_cloning_modes) (CcDisplayConfig  *self);
+  gboolean (*is_layout_logical) (CcDisplayConfig  *self);
 };
 
 
-GList *cc_display_config_get_monitors (CcDisplayConfig *config);
-gboolean cc_display_config_is_applicable (CcDisplayConfig *config);
-gboolean cc_display_config_equal (CcDisplayConfig *config,
-                                  CcDisplayConfig *other);
-gboolean cc_display_config_apply (CcDisplayConfig *config, GError **error);
-gboolean cc_display_config_is_cloning (CcDisplayConfig *config);
-void cc_display_config_set_cloning (CcDisplayConfig *config, gboolean clone);
-GList *cc_display_config_get_cloning_modes (CcDisplayConfig *config);
-gboolean cc_display_config_is_layout_logical (CcDisplayConfig *self);
+GList*            cc_display_config_get_monitors            (CcDisplayConfig    *config);
+gboolean          cc_display_config_is_applicable           (CcDisplayConfig    *config);
+gboolean          cc_display_config_equal                   (CcDisplayConfig    *config,
+                                                             CcDisplayConfig    *other);
+gboolean          cc_display_config_apply                   (CcDisplayConfig    *config,
+                                                             GError            **error);
+gboolean          cc_display_config_is_cloning              (CcDisplayConfig    *config);
+void              cc_display_config_set_cloning             (CcDisplayConfig    *config,
+                                                             gboolean            clone);
+GList*            cc_display_config_get_cloning_modes       (CcDisplayConfig    *config);
+gboolean          cc_display_config_is_layout_logical       (CcDisplayConfig    *self);
 
-const char * cc_display_monitor_get_display_name (CcDisplayMonitor *monitor);
-gboolean cc_display_monitor_is_active (CcDisplayMonitor *monitor);
-void cc_display_monitor_set_active (CcDisplayMonitor *monitor, gboolean active);
-const char * cc_display_monitor_get_connector_name (CcDisplayMonitor *monitor);
-CcDisplayRotation cc_display_monitor_get_rotation (CcDisplayMonitor *monitor);
-void cc_display_monitor_set_rotation (CcDisplayMonitor *monitor, CcDisplayRotation r);
-gboolean cc_display_monitor_supports_rotation (CcDisplayMonitor *monitor,
-                                           CcDisplayRotation rotation);
-void cc_display_monitor_get_physical_size (CcDisplayMonitor *monitor, int *w, int *h);
-gboolean cc_display_monitor_is_builtin (CcDisplayMonitor *monitor);
-gboolean cc_display_monitor_is_primary (CcDisplayMonitor *monitor);
-void cc_display_monitor_set_primary (CcDisplayMonitor *monitor, gboolean primary);
-guint32 cc_display_monitor_get_id (CcDisplayMonitor *monitor);
+const char*       cc_display_monitor_get_display_name       (CcDisplayMonitor   *monitor);
+gboolean          cc_display_monitor_is_active              (CcDisplayMonitor   *monitor);
+void              cc_display_monitor_set_active             (CcDisplayMonitor   *monitor,
+                                                             gboolean            active);
+const char*       cc_display_monitor_get_connector_name     (CcDisplayMonitor   *monitor);
+CcDisplayRotation cc_display_monitor_get_rotation           (CcDisplayMonitor   *monitor);
+void              cc_display_monitor_set_rotation           (CcDisplayMonitor   *monitor,
+                                                             CcDisplayRotation  r);
+gboolean          cc_display_monitor_supports_rotation      (CcDisplayMonitor  *monitor,
+                                                             CcDisplayRotation  rotation);
+void              cc_display_monitor_get_physical_size      (CcDisplayMonitor  *monitor,
+                                                             int               *w,
+                                                             int               *h);
+gboolean          cc_display_monitor_is_builtin             (CcDisplayMonitor  *monitor);
+gboolean          cc_display_monitor_is_primary             (CcDisplayMonitor  *monitor);
+void              cc_display_monitor_set_primary            (CcDisplayMonitor  *monitor,
+                                                             gboolean           primary);
+guint32           cc_display_monitor_get_id                 (CcDisplayMonitor  *monitor);
 
-gboolean cc_display_monitor_supports_underscanning (CcDisplayMonitor *monitor);
-gboolean cc_display_monitor_get_underscanning (CcDisplayMonitor *monitor);
-void cc_display_monitor_set_underscanning (CcDisplayMonitor *monitor,
-                                           gboolean underscanning);
+gboolean          cc_display_monitor_supports_underscanning (CcDisplayMonitor  *monitor);
+gboolean          cc_display_monitor_get_underscanning      (CcDisplayMonitor  *monitor);
+void              cc_display_monitor_set_underscanning      (CcDisplayMonitor  *monitor,
+                                                             gboolean           underscanning);
 
-CcDisplayMode * cc_display_monitor_get_mode (CcDisplayMonitor *monitor);
-void cc_display_monitor_get_geometry (CcDisplayMonitor *monitor,
-                                      int              *x,
-                                      int              *y,
-                                      int              *width,
-                                      int              *height);
-GList * cc_display_monitor_get_modes (CcDisplayMonitor *monitor);
-CcDisplayMode * cc_display_monitor_get_preferred_mode (CcDisplayMonitor *monitor);
-double cc_display_monitor_get_scale (CcDisplayMonitor *monitor);
-void cc_display_monitor_set_scale (CcDisplayMonitor *monitor, double s);
+CcDisplayMode*    cc_display_monitor_get_mode               (CcDisplayMonitor  *monitor);
+void              cc_display_monitor_get_geometry           (CcDisplayMonitor  *monitor,
+                                                             int               *x,
+                                                             int               *y,
+                                                             int               *width,
+                                                             int               *height);
+GList*            cc_display_monitor_get_modes              (CcDisplayMonitor  *monitor);
+CcDisplayMode*    cc_display_monitor_get_preferred_mode     (CcDisplayMonitor  *monitor);
+double            cc_display_monitor_get_scale              (CcDisplayMonitor  *monitor);
+void              cc_display_monitor_set_scale              (CcDisplayMonitor  *monitor,
+                                                             double s);
 
-void cc_display_monitor_set_mode (CcDisplayMonitor *monitor,
-                                  CcDisplayMode    *mode);
-void cc_display_monitor_set_position (CcDisplayMonitor *monitor,
-                                      int x, int y);
+void              cc_display_monitor_set_mode               (CcDisplayMonitor  *monitor,
+                                                             CcDisplayMode     *mode);
+void              cc_display_monitor_set_position           (CcDisplayMonitor  *monitor,
+                                                             int                x,
+                                                             int                y);
 
-void cc_display_mode_get_resolution (CcDisplayMode *mode,
-                                     int *width,
-                                     int *height);
-const double *cc_display_mode_get_supported_scales (CcDisplayMode *self);
-double cc_display_mode_get_preferred_scale (CcDisplayMode *self);
-gboolean cc_display_mode_is_interlaced (CcDisplayMode *mode);
-int cc_display_mode_get_freq (CcDisplayMode *mode);
-double cc_display_mode_get_freq_f (CcDisplayMode *mode);
+void              cc_display_mode_get_resolution            (CcDisplayMode     *mode,
+                                                             int               *width,
+                                                             int               *height);
+const double*     cc_display_mode_get_supported_scales      (CcDisplayMode     *self);
+double            cc_display_mode_get_preferred_scale       (CcDisplayMode     *self);
+gboolean          cc_display_mode_is_interlaced             (CcDisplayMode     *mode);
+int               cc_display_mode_get_freq                  (CcDisplayMode     *mode);
+double            cc_display_mode_get_freq_f                (CcDisplayMode     *mode);
 
 G_END_DECLS
 
