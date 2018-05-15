@@ -1,4 +1,4 @@
 install_subdir(
-  'hicolor',
-  install_dir: control_center_icondir
+     'hicolor',
+  install_dir : control_center_icondir
 )

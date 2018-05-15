@@ -1,8 +1,8 @@
 project(
   'gnome-control-center', 'c',
-  version: '3.29.0',
-  license: 'GPL2+',
-  meson_version: '>= 0.43.0'
+        version : '3.29.0',
+        license : 'GPL2+',
+  meson_version : '>= 0.43.0'
 )
 
 control_center_prefix = get_option('prefix')
@@ -25,7 +25,15 @@ host_is_linux_not_s390 = host_is_linux and not host_machine.cpu().contains('s390
 
 cc = meson.get_compiler('c')
 
+# Tracing
+enable_tracing = get_option('tracing')
+
 config_h = configuration_data()
+
+py3 = import('python3')
+python = py3.find_python()
+
+config_h.set_quoted('TEST_NM_PYTHON', python.path())
 
 # defines
 set_defines = [
@@ -41,7 +49,9 @@ foreach define: set_defines
   config_h.set_quoted(define[0], define[1])
 endforeach
 
-config_h.set('USER_DIR_MODE', 0700,
+# meson does not support octal values, so it must be handled as a
+# string. See: https://github.com/mesonbuild/meson/issues/2047
+config_h.set('USER_DIR_MODE', '0700',
              description: 'Permissions for creating the user\'s config, cache and data directories')
 
 # compiler flags
@@ -55,7 +65,6 @@ optimized_src = '''
 '''
 
 control_center_optimized = get_option('buildtype').contains('optimized') and cc.compiles(optimized_src)
-message('whether_optimization is enabled: ' + control_center_optimized.to_string())
 
 if control_center_optimized
   common_flags += '-Wp,-D_FORTIFY_SOURCE=2'
@@ -203,6 +212,7 @@ if host_is_linux_not_s390
                description: 'Define to 1 if libwacom provides definition for 3D styli')
 else
   message('Bluetooth and Wacom panels will not be built (no USB support on this platform)')
+  message('Thunderbolt panel will not be built (not supported on this platform)')
 endif
 config_h.set('BUILD_BLUETOOTH', host_is_linux_not_s390,
              description: 'Define to 1 to build the Bluetooth panel')
@@ -212,6 +222,8 @@ config_h.set('BUILD_WACOM', host_is_linux_not_s390,
              description: 'Define to 1 to build the Wacom panel')
 config_h.set('HAVE_WACOM', host_is_linux_not_s390,
              description: 'Define to 1 if Wacom is supportted')
+config_h.set('BUILD_THUNDERBOLT', host_is_linux_not_s390,
+             description: 'Define to 1 to build the Thunderbolt panel')
 
 # Check for info panel
 gnome_session_libexecdir = get_option('gnome_session_libexecdir')
@@ -237,15 +249,13 @@ install_subdir(
 top_inc = include_directories('.')
 shell_inc = include_directories('shell')
 
-update_from_gsd = find_program('update-from-gsd.sh')
-update_from_gsd_in = files('update-from-gsd.in')
-update_from_nma_in = files('update-from-nma.in')
-
+subdir('build-aux')
 subdir('data/icons')
 subdir('po')
 subdir('panels')
 subdir('shell')
 subdir('search-provider')
+subdir('tests')
 
 if get_option('documentation')
   subdir('man')
@@ -256,18 +266,20 @@ configure_file(
   configuration: config_h
 )
 
-meson.add_install_script(
-  'meson_post_install.py',
-  control_center_datadir
-)
+output = ''
+output += '\n        ' + meson.project_name() + ' - ' + meson.project_version() + '\n'
+output += '    ===================================\n'
+output += ' Options \n'
+output += '     Documentation .............................. ' + get_option('documentation').to_string() + '\n'
+output += '     Tracing .................................... ' + enable_tracing.to_string() + '\n'
+output += '     gnome-session libexecdir ................... ' + gnome_session_libexecdir + '\n'
+output += '     Optimized .................................. ' + control_center_optimized.to_string() + '\n'
+output += ' Panels \n'
+output += '     GNOME Bluetooth (Bluetooth panel) .......... ' + host_is_linux_not_s390.to_string() + '\n'
+output += '     Cheese (Users panel webcam support) ........ ' + enable_cheese.to_string() + '\n'
+output += '     IBus (Region panel IBus support) ........... ' + enable_ibus.to_string() + '\n'
+output += '     NetworkManager (Network panel) ............. ' + host_is_linux.to_string() + '\n'
+output += '     Wacom (Wacom tablet panel) ................. ' + host_is_linux_not_s390.to_string() + '\n'
+output += '     Wayland .................................... ' + enable_wayland.to_string() + '\n'
 
-output = meson.project_name() + ' was configured with the following options:\n'
-output += '** gnome-bluetooth (Bluetooth panel): ' + host_is_linux_not_s390.to_string() + '\n'
-output += '** Cheese (Users panel webcam support): ' + enable_cheese.to_string() + '\n'
-output += '** IBus (Region panel IBus support): ' + enable_ibus.to_string() + '\n'
-output += '** NetworkManager (Network panel): ' + host_is_linux.to_string() + '\n'
-output += '** wacom (Wacom tablet panel): ' + host_is_linux_not_s390.to_string() + '\n'
-output += '** Wayland: ' + enable_wayland.to_string() + '\n'
-output += '** gnome-session libexecdir: ' + gnome_session_libexecdir + '\n'
-output += 'End options'
 message(output)

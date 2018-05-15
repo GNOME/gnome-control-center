@@ -15,19 +15,19 @@ panels_list += cappletname
 desktop = 'gnome-@0@-panel.desktop'.format(cappletname)
 
 desktop_in = configure_file(
-  input: desktop + '.in.in',
-  output: desktop + '.in',
-  configuration: desktop_conf
+          input : desktop + '.in.in',
+         output : desktop + '.in',
+  configuration : desktop_conf
 )
 
 i18n.merge_file(
-  desktop,
-  type: 'desktop',
-  input: desktop_in,
-  output: desktop,
-  po_dir: po_dir,
-  install: true,
-  install_dir: control_center_desktopdir
+       desktop,
+         type : 'desktop',
+        input : desktop_in,
+       output : desktop,
+       po_dir : po_dir,
+      install : true,
+  install_dir : control_center_desktopdir
 )
 
 common_sources = files(
@@ -62,10 +62,10 @@ resource_data = files(
 common_sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
-  source_dir: '.',
-  c_name: 'cc_' + cappletname,
-  dependencies: resource_data,
-  export: true
+    source_dir : '.',
+        c_name : 'cc_' + cappletname,
+  dependencies : resource_data,
+        export : true
 )
 
 sources = common_sources + files(
@@ -82,13 +82,11 @@ incs = [
 
 panels_libs += static_library(
   cappletname + '-properties',
-  sources: sources,
-  include_directories: incs,
-  dependencies: deps,
-  c_args: cflags,
-  link_with: [
-    libwacom_calibrator
-  ]
+              sources : sources,
+  include_directories : incs,
+         dependencies : deps,
+               c_args : cflags,
+            link_with : [ libwacom_calibrator ]
 )
 
 name = 'test-wacom'
@@ -96,12 +94,10 @@ name = 'test-wacom'
 sources = common_sources + files(name + '.c')
 
 executable(
-  name,
-  sources,
-  include_directories: incs,
-  dependencies: deps,
-  c_args: test_cflags,
-  link_with: [
-    libwacom_calibrator_test
-  ]
+                  name,
+               sources,
+  include_directories : incs,
+         dependencies : deps,
+               c_args : test_cflags,
+            link_with : [ libwacom_calibrator_test ]
 )

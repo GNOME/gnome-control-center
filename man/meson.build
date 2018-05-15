@@ -17,10 +17,10 @@ xsltproc_cmd = [
 output = meson.project_name() + '.1'
 
 custom_target(
-  output,
-  input: meson.project_name() + '.xml',
-  output: output,
-  command: xsltproc_cmd,
-  install: true,
-  install_dir: join_paths(control_center_mandir, 'man1')
+        output,
+        input : meson.project_name() + '.xml',
+       output : output,
+      command : xsltproc_cmd,
+      install : true,
+  install_dir : join_paths(control_center_mandir, 'man1')
 )

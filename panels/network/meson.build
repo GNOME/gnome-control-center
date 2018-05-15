@@ -69,11 +69,12 @@ sources += gnome.compile_resources(
 
 cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
 
-panels_libs += static_library(
+network_panel_lib = static_library(
   cappletname,
   sources: sources,
-  include_directories: top_inc,
+  include_directories: [top_inc, common_inc],
   dependencies: deps,
   c_args: cflags,
   link_with: libconnection_editor
 )
+panels_libs += network_panel_lib

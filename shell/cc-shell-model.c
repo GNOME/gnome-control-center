@@ -19,23 +19,25 @@
  * Author: Thomas Wood <thos@gnome.org>
  */
 
+#include "cc-shell-model.h"
+#include "cc-util.h"
+
 #include <string.h>
 
 #include <gio/gdesktopappinfo.h>
-
-#include "cc-shell-model.h"
-#include "cc-util.h"
 
 #define GNOME_SETTINGS_PANEL_ID_KEY "X-GNOME-Settings-Panel"
 #define GNOME_SETTINGS_PANEL_CATEGORY GNOME_SETTINGS_PANEL_ID_KEY
 #define GNOME_SETTINGS_PANEL_ID_KEYWORDS "Keywords"
 
-struct _CcShellModelPrivate
+struct _CcShellModel
 {
-  gchar **sort_terms;
+  GtkListStore parent;
+
+  GStrv        sort_terms;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CcShellModel, cc_shell_model, GTK_TYPE_LIST_STORE)
+G_DEFINE_TYPE (CcShellModel, cc_shell_model, GTK_TYPE_LIST_STORE)
 
 static gint
 sort_by_name (GtkTreeModel *model,
@@ -224,20 +226,19 @@ cc_shell_model_sort_func (GtkTreeModel *model,
                           gpointer      data)
 {
   CcShellModel *self = data;
-  CcShellModelPrivate *priv = self->priv;
 
-  if (!priv->sort_terms || !priv->sort_terms[0])
+  if (!self->sort_terms || !self->sort_terms[0])
     return sort_by_name (model, a, b);
   else
-    return sort_with_terms (model, a, b, priv->sort_terms);
+    return sort_with_terms (model, a, b, self->sort_terms);
 }
 
 static void
 cc_shell_model_finalize (GObject *object)
 {
-  CcShellModelPrivate *priv = CC_SHELL_MODEL (object)->priv;;
+  CcShellModel *self = CC_SHELL_MODEL (object);
 
-  g_strfreev (priv->sort_terms);
+  g_clear_pointer (&self->sort_terms, g_strfreev);
 
   G_OBJECT_CLASS (cc_shell_model_parent_class)->finalize (object);
 }
@@ -245,9 +246,8 @@ cc_shell_model_finalize (GObject *object)
 static void
 cc_shell_model_class_init (CcShellModelClass *klass)
 {
-  GObjectClass *gobject_class;
+  GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
-  gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = cc_shell_model_finalize;
 }
 
@@ -256,8 +256,6 @@ cc_shell_model_init (CcShellModel *self)
 {
   GType types[] = {G_TYPE_STRING, G_TYPE_STRING, G_TYPE_APP_INFO, G_TYPE_STRING,
                    G_TYPE_UINT, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV};
-
-  self->priv = cc_shell_model_get_instance_private (self);
 
   gtk_list_store_set_column_types (GTK_LIST_STORE (self),
                                    N_COLS, types);
@@ -328,6 +326,30 @@ cc_shell_model_add_item (CcShellModel    *model,
 }
 
 gboolean
+cc_shell_model_has_panel (CcShellModel *model,
+                          const char   *id)
+{
+  GtkTreeIter iter;
+  gboolean valid;
+
+  g_assert (id);
+
+  valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (model), &iter);
+  while (valid)
+    {
+      g_autofree gchar *panel_id = NULL;
+
+      gtk_tree_model_get (GTK_TREE_MODEL (model), &iter, COL_ID, &panel_id, -1);
+      if (g_str_equal (id, panel_id))
+        return TRUE;
+
+      valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (model), &iter);
+    }
+
+  return FALSE;
+}
+
+gboolean
 cc_shell_model_iter_matches_search (CcShellModel *model,
                                     GtkTreeIter  *iter,
                                     const char   *term)
@@ -366,13 +388,14 @@ void
 cc_shell_model_set_sort_terms (CcShellModel  *self,
                                gchar        **terms)
 {
-  CcShellModelPrivate *priv = self->priv;
+  g_return_if_fail (CC_IS_SHELL_MODEL (self));
 
-  g_strfreev (priv->sort_terms);
-  priv->sort_terms = g_strdupv (terms);
+  g_clear_pointer (&self->sort_terms, g_strfreev);
+  self->sort_terms = g_strdupv (terms);
 
   /* trigger a re-sort */
   gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (self),
                                            cc_shell_model_sort_func,
-                                           self, NULL);
+                                           self,
+                                           NULL);
 }

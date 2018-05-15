@@ -26,8 +26,9 @@
 #include <gio/gio.h>
 
 #include "cc-application.h"
+#include "cc-log.h"
+#include "cc-object-storage.h"
 #include "cc-panel-loader.h"
-#include "cc-shell-log.h"
 #include "cc-window.h"
 
 #if defined(HAVE_WACOM) || defined(HAVE_CHEESE)
@@ -157,7 +158,9 @@ cc_application_command_line (GApplication            *application,
   options = g_application_command_line_get_options_dict (command_line);
 
   debug = g_variant_dict_contains (options, "verbose");
-  cc_shell_log_set_debug (debug);
+
+  if (debug)
+    cc_log_init ();
 
   gtk_window_present (GTK_WINDOW (self->window));
 
@@ -264,6 +267,15 @@ cc_application_startup (GApplication *application)
   self->window = cc_window_new (GTK_APPLICATION (application));
 }
 
+static void
+cc_application_finalize (GObject *object)
+{
+  /* Destroy the object storage cache when finalizing */
+  cc_object_storage_destroy ();
+
+  G_OBJECT_CLASS (cc_application_parent_class)->finalize (object);
+}
+
 static GObject *
 cc_application_constructor (GType                  type,
                             guint                  n_construct_params,
@@ -289,6 +301,7 @@ cc_application_class_init (CcApplicationClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GApplicationClass *application_class = G_APPLICATION_CLASS (klass);
 
+  object_class->finalize = cc_application_finalize;
   object_class->constructor = cc_application_constructor;
   application_class->activate = cc_application_activate;
   application_class->startup = cc_application_startup;
@@ -299,6 +312,8 @@ cc_application_class_init (CcApplicationClass *klass)
 static void
 cc_application_init (CcApplication *self)
 {
+  cc_object_storage_initialize ();
+
   g_application_add_main_option_entries (G_APPLICATION (self), all_options);
 }
 

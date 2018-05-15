@@ -20,9 +20,9 @@
  */
 
 #include "cc-sharing-panel.h"
-#include "shell/cc-hostname-entry.h"
+#include "cc-hostname-entry.h"
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "cc-sharing-resources.h"
 #include "vino-preferences.h"
 #include "cc-remote-login.h"

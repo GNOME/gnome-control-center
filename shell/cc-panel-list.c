@@ -294,6 +294,7 @@ static const gchar * const panel_order[] = {
   "mouse",
   "printers",
   "removable-media",
+  "thunderbolt",
   "wacom",
   "color",
 

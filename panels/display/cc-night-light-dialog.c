@@ -27,6 +27,8 @@
 #include "cc-night-light-dialog.h"
 #include "cc-night-light-widget.h"
 
+#include "shell/cc-object-storage.h"
+
 struct _CcNightLightDialog {
   GObject              parent;
   GtkBuilder          *builder;
@@ -77,11 +79,11 @@ cc_night_light_dialog_finalize (GObject *object)
       self->main_window = NULL;
     }
 
-  g_object_unref (self->builder);
-  g_object_unref (self->proxy_color);
-  g_object_unref (self->proxy_color_props);
-  g_object_unref (self->settings_display);
-  g_object_unref (self->settings_clock);
+  g_clear_object (&self->builder);
+  g_clear_object (&self->proxy_color);
+  g_clear_object (&self->proxy_color_props);
+  g_clear_object (&self->settings_display);
+  g_clear_object (&self->settings_clock);
   if (self->timer_id > 0)
     g_source_remove (self->timer_id);
 
@@ -384,15 +386,21 @@ static void
 dialog_got_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
   CcNightLightDialog *self = (CcNightLightDialog *) user_data;
+  GDBusProxy *proxy;
   g_autoptr(GError) error = NULL;
-  self->proxy_color = g_dbus_proxy_new_for_bus_finish (res, &error);
-  if (self->proxy_color == NULL)
+
+  proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
+  if (proxy == NULL)
     {
-      g_warning ("failed to connect to g-s-d: %s", error->message);
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("failed to connect to g-s-d: %s", error->message);
       return;
     }
-  g_signal_connect (self->proxy_color, "g-properties-changed",
-                    G_CALLBACK (dialog_color_properties_changed_cb), self);
+
+  self->proxy_color = proxy;
+
+  g_signal_connect_object (self->proxy_color, "g-properties-changed",
+                           G_CALLBACK (dialog_color_properties_changed_cb), self, 0);
   dialog_update_state (self);
   self->timer_id = g_timeout_add_seconds (10, dialog_tick_cb, self);
 }
@@ -401,13 +409,18 @@ static void
 dialog_got_proxy_props_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
   CcNightLightDialog *self = (CcNightLightDialog *) user_data;
+  GDBusProxy *proxy;
   g_autoptr(GError) error = NULL;
-  self->proxy_color_props = g_dbus_proxy_new_for_bus_finish (res, &error);
-  if (self->proxy_color_props == NULL)
+
+  proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
+  if (proxy == NULL)
     {
-      g_warning ("failed to connect to g-s-d: %s", error->message);
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("failed to connect to g-s-d: %s", error->message);
       return;
     }
+
+  self->proxy_color_props = proxy;
 }
 
 static gboolean
@@ -669,25 +682,23 @@ cc_night_light_dialog_init (CcNightLightDialog *self)
   gtk_box_pack_start (box, self->night_light_widget, FALSE, FALSE, 0);
   gtk_widget_show (self->night_light_widget);
 
-  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                            G_DBUS_PROXY_FLAGS_NONE,
-                            NULL,
-                            "org.gnome.SettingsDaemon.Color",
-                            "/org/gnome/SettingsDaemon/Color",
-                            "org.gnome.SettingsDaemon.Color",
-                            self->cancellable,
-                            dialog_got_proxy_cb,
-                            self);
+  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_NONE,
+                                       "org.gnome.SettingsDaemon.Color",
+                                       "/org/gnome/SettingsDaemon/Color",
+                                       "org.gnome.SettingsDaemon.Color",
+                                       self->cancellable,
+                                       dialog_got_proxy_cb,
+                                       self);
 
-  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                            G_DBUS_PROXY_FLAGS_NONE,
-                            NULL,
-                            "org.gnome.SettingsDaemon.Color",
-                            "/org/gnome/SettingsDaemon/Color",
-                            "org.freedesktop.DBus.Properties",
-                            self->cancellable,
-                            dialog_got_proxy_props_cb,
-                            self);
+  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_NONE,
+                                       "org.gnome.SettingsDaemon.Color",
+                                       "/org/gnome/SettingsDaemon/Color",
+                                       "org.freedesktop.DBus.Properties",
+                                       self->cancellable,
+                                       dialog_got_proxy_props_cb,
+                                       self);
 
   /* clock settings_display */
   self->settings_clock = g_settings_new (CLOCK_SCHEMA);

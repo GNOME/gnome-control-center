@@ -1,24 +1,7 @@
-image: fedora:rawhide
+image: claudioandre/settings:fedora.dev
 stages:
   - build
   - test
-  - deploy
-
-variables:
-  DEPENDENCIES: accountsservice-devel cheese-libs-devel chrpath clutter-gtk-devel colord-devel
-                colord-gtk-devel cups-devel desktop-file-utils docbook-style-xsl gdk-pixbuf2-devel
-                gettext git glib2-devel gnome-bluetooth-libs-devel gnome-desktop3-devel
-                gnome-online-accounts-devel gnome-settings-daemon-devel grilo-devel
-                gsettings-desktop-schemas-devel gtk3-devel ibus-devel intltool libcanberra-devel
-                libgtop2-devel libgudev-devel libnma-devel libpwquality-devel libsmbclient-devel
-                libsoup-devel libwacom-devel libX11-devel libXi-devel libxml2-devel libxslt
-                libXxf86misc-devel meson ModemManager-glib-devel NetworkManager-libnm-devel
-                polkit-devel pulseaudio-libs-devel upower-devel
-
-
-before_script:
-  - dnf update -y --nogpgcheck && dnf install -y --nogpgcheck $DEPENDENCIES
-
 
 ##
 # Stage: Build
@@ -29,11 +12,25 @@ before_script:
 ##
 build:
   stage: build
+  artifacts:
+    name: builded
+    untracked: true
+    expire_in: 3h30min
+
   script:
+    - echo "== Info =="
+    - tests/ci-helper.sh "INFO"
+    - tests/ci-helper.sh "GIT_INFO"
+
+    - echo "== Building =="
     - meson . _build
-    - ninja -C _build
+    - ninja -C _build 2>&1 | tee compilation.log
+
+    - echo "== Installing =="
     - ninja -C _build install
 
+    - echo "== Report =="
+    - tests/ci-helper.sh "WARNINGS"
 
 ##
 # Stage: Test
@@ -42,24 +39,26 @@ build:
 ##
 test:
   stage: test
-  script:
-    - meson . _build
-    - ninja -C _build
-    - ninja -C _build install
-    - meson test -C _build --verbose --no-stdsplit
+  artifacts:
+    name: log
+    when: always
+    paths:
+    - $(pwd)/*.log
 
+  dependencies:
+    - build
 
-##
-# Stage: Deploy
-#
-# Checks if the released version is in a good shape.
-##
-deploy:
-  stage: deploy
   script:
-    - meson . _build
-    - ninja -C _build
-    - meson test -C _build
-    - ninja dist -C _build
-  only:
-    - tags
+    - echo "== Info =="
+    - tests/ci-helper.sh "INFO"
+    - tests/ci-helper.sh "GIT_INFO"
+
+    - |
+      if [[ -n "${CI_COMMIT_TAG}" ]]; then
+        echo "== Distro Test =="
+        meson test -C _build
+        ninja dist -C _build
+      else
+        echo "== Testing =="
+        meson test -C _build --verbose --no-stdsplit
+      fi

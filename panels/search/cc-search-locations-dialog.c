@@ -19,7 +19,7 @@
  */
 
 #include "cc-search-locations-dialog.h"
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 
 #include <glib/gi18n.h>
 

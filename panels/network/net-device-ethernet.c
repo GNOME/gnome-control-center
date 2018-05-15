@@ -28,7 +28,7 @@
 
 #include "panel-common.h"
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "connection-editor/net-connection-editor.h"
 #include "connection-editor/ce-page.h"
 
@@ -551,8 +551,8 @@ device_ethernet_constructed (GObject *object)
                           G_CALLBACK (add_profile), device);
 
         client = net_object_get_client (NET_OBJECT (object));
-        g_signal_connect (client, NM_CLIENT_CONNECTION_ADDED,
-                          G_CALLBACK (client_connection_added_cb), object);
+        g_signal_connect_object (client, NM_CLIENT_CONNECTION_ADDED,
+                                 G_CALLBACK (client_connection_added_cb), object, 0);
         g_signal_connect_object (client, NM_CLIENT_CONNECTION_REMOVED,
                                  G_CALLBACK (connection_removed), device, 0);
 

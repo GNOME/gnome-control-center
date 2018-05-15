@@ -32,7 +32,7 @@
 #include "cc-online-accounts-panel.h"
 #include "cc-online-accounts-resources.h"
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 
 struct _CcGoaPanel
 {
@@ -401,6 +401,22 @@ static void
 cc_goa_panel_finalize (GObject *object)
 {
   CcGoaPanel *panel = CC_GOA_PANEL (object);
+
+  if (panel->removed_object != NULL)
+    {
+      g_autoptr(GError) error = NULL;
+      goa_account_call_remove_sync (goa_object_peek_account (panel->removed_object),
+                                    NULL, /* GCancellable */
+                                    &error);
+
+      if (error != NULL)
+        {
+          g_warning ("Error removing account: %s (%s, %d)",
+                     error->message,
+                     g_quark_to_string (error->domain),
+                     error->code);
+        }
+    }
 
   g_clear_object (&panel->client);
 

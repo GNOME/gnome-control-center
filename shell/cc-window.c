@@ -20,6 +20,8 @@
  * Author: Thomas Wood <thos@gnome.org>
  */
 
+#define G_LOG_DOMAIN "cc-window"
+
 #include <config.h>
 
 #include "cc-window.h"
@@ -31,6 +33,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <gdk/gdkx.h>
 #include <string.h>
+#include <time.h>
 
 #include "cc-panel.h"
 #include "cc-shell.h"
@@ -62,6 +65,7 @@ struct _CcWindow
   GtkWidget  *search_entry;
   GtkWidget  *lock_button;
   GtkWidget  *current_panel_box;
+  GtkWidget  *development_warning_dialog;
   GtkWidget  *current_panel;
   char       *current_panel_id;
   GQueue     *previous_panels;
@@ -88,8 +92,49 @@ enum
 };
 
 /* Auxiliary methods */
-static const gchar *
-get_icon_name_from_g_icon (GIcon *gicon)
+static gboolean
+in_flatpak_sandbox (void)
+{
+  return g_file_test ("/.flatpak-info", G_FILE_TEST_EXISTS);
+}
+
+static void
+add_development_build_css (CcWindow *self)
+{
+  g_autoptr(GtkCssProvider) provider = NULL;
+  g_autoptr(GError) error = NULL;
+
+  /* This CSS snipped is added on development builds of GNOME Settings. It is
+   * not meant to be beautiful (althout it is) and is only supposed to integrate
+   * with Adwaita light (although it integrates well with dark too).
+   */
+
+  const gchar *development_build_css =
+  "window.development-version headerbar {\n"
+   "  background: @theme_bg_color linear-gradient(to top,\n"
+   "                                              alpha(@theme_selected_bg_color, 0.34),\n"
+   "                                              alpha(@theme_selected_bg_color, 0.27) 2px,\n"
+   "                                              alpha(@theme_selected_bg_color, 0.20) 3px);\n"
+   "}";
+
+  gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)), "development-version");
+
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_data (provider, development_build_css, -1, &error);
+
+  if (error)
+    {
+      g_error ("Failed to load CSS: %s", error->message);
+      return;
+    }
+
+  gtk_style_context_add_provider_for_screen (gtk_widget_get_screen (GTK_WIDGET (self)),
+                                             GTK_STYLE_PROVIDER (provider),
+                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+}
+
+static gchar *
+get_symbolic_icon_name_from_g_icon (GIcon *gicon)
 {
   const gchar * const *names;
   GtkIconTheme *icon_theme;
@@ -103,8 +148,11 @@ get_icon_name_from_g_icon (GIcon *gicon)
 
   for (i = 0; names[i] != NULL; i++)
     {
-      if (gtk_icon_theme_has_icon (icon_theme, names[i]))
-        return names[i];
+      g_autofree gchar *name = NULL;
+      name = g_strdup_printf ("%s-symbolic", names[i]);
+
+      if (gtk_icon_theme_has_icon (icon_theme, name))
+        return g_steal_pointer (&name);
     }
 
   return NULL;
@@ -117,13 +165,19 @@ activate_panel (CcWindow    *self,
                 const gchar *name,
                 GIcon       *gicon)
 {
+  g_autoptr (GTimer) timer = NULL;
   GtkWidget *box, *title_widget;
-  const gchar *icon_name;
+  gdouble ellapsed_time;
 
   if (!id)
     return FALSE;
 
+  timer = g_timer_new ();
+
   g_settings_set_string (self->settings, "last-panel", id);
+
+  /* Begin the profile */
+  g_timer_start (timer);
 
   self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, parameters));
   cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (self->current_panel));
@@ -144,17 +198,20 @@ activate_panel (CcWindow    *self,
   gtk_stack_set_visible_child_name (GTK_STACK (self->stack), id);
 
   /* set the title of the window */
-  icon_name = get_icon_name_from_g_icon (gicon);
-
   gtk_window_set_role (GTK_WINDOW (self), id);
   gtk_header_bar_set_title (GTK_HEADER_BAR (self->panel_headerbar), name);
-  gtk_window_set_default_icon_name (icon_name);
-  gtk_window_set_icon_name (GTK_WINDOW (self), icon_name);
 
   title_widget = cc_panel_get_title_widget (CC_PANEL (self->current_panel));
   gtk_header_bar_set_custom_title (GTK_HEADER_BAR (self->panel_headerbar), title_widget);
 
   self->current_panel_box = box;
+
+  /* Finish profiling */
+  g_timer_stop (timer);
+
+  ellapsed_time = g_timer_elapsed (timer, NULL);
+
+  g_debug ("Time to open panel '%s': %lfs", name, ellapsed_time);
 
   return TRUE;
 }
@@ -253,9 +310,8 @@ setup_model (CcWindow *shell)
       g_autofree gchar *name = NULL;
       g_autofree gchar *description = NULL;
       g_autofree gchar *id = NULL;
-      g_autofree gchar *symbolic_icon = NULL;
+      g_autofree gchar *icon_name = NULL;
       g_autofree GStrv keywords = NULL;
-      const gchar *icon_name;
 
       gtk_tree_model_get (model, &iter,
                           COL_CATEGORY, &category,
@@ -266,8 +322,7 @@ setup_model (CcWindow *shell)
                           COL_KEYWORDS, &keywords,
                           -1);
 
-      icon_name = get_icon_name_from_g_icon (icon);
-      symbolic_icon = g_strdup_printf ("%s-symbolic", icon_name);
+      icon_name = get_symbolic_icon_name_from_g_icon (icon);
 
       cc_panel_list_add_panel (CC_PANEL_LIST (shell->panel_list),
                                category,
@@ -275,7 +330,7 @@ setup_model (CcWindow *shell)
                                name,
                                description,
                                keywords,
-                               symbolic_icon);
+                               icon_name);
 
       valid = gtk_tree_model_iter_next (model, &iter);
     }
@@ -288,12 +343,15 @@ set_active_panel_from_id (CcShell      *shell,
                           GVariant     *parameters,
                           GError      **error)
 {
+  g_autoptr(GIcon) gicon = NULL;
+  g_autofree gchar *name = NULL;
   GtkTreeIter iter;
-  gboolean iter_valid;
-  gchar *name = NULL;
-  GIcon *gicon = NULL;
-  CcWindow *self = CC_WINDOW (shell);
   GtkWidget *old_panel;
+  CcWindow *self;
+  gboolean iter_valid;
+  gboolean activated;
+
+  self = CC_WINDOW (shell);
 
   /* When loading the same panel again, just set its parameters */
   if (g_strcmp0 (self->current_panel_id, start_id) == 0)
@@ -332,26 +390,25 @@ set_active_panel_from_id (CcShell      *shell,
   if (!name)
     {
       g_warning ("Could not find settings panel \"%s\"", start_id);
-    }
-  else if (!activate_panel (CC_WINDOW (shell), start_id, parameters, name, gicon))
-    {
-      /* Failed to activate the panel for some reason,
-       * let's keep the old panel around instead */
-    }
-  else
-    {
-      /* Successful activation */
-      g_free (self->current_panel_id);
-      self->current_panel_id = g_strdup (start_id);
-
-      if (old_panel)
-        gtk_container_remove (GTK_CONTAINER (self->stack), old_panel);
-
-      cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), start_id);
+      return TRUE;
     }
 
-  g_clear_pointer (&name, g_free);
-  g_clear_object (&gicon);
+  /* Activate the panel */
+  activated = activate_panel (CC_WINDOW (shell), start_id, parameters, name, gicon);
+
+  /* Failed to activate the panel for some reason, let's keep the old
+   * panel around instead */
+  if (!activated)
+    return TRUE;
+
+  /* Successful activation */
+  g_free (self->current_panel_id);
+  self->current_panel_id = g_strdup (start_id);
+
+  if (old_panel)
+    gtk_container_remove (GTK_CONTAINER (self->stack), old_panel);
+
+  cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), start_id);
 
   return TRUE;
 }
@@ -370,13 +427,10 @@ set_active_panel (CcWindow *shell,
 
       /* set the new panel */
       if (panel)
-        {
-          shell->active_panel = g_object_ref (panel);
-        }
+        shell->active_panel = g_object_ref (panel);
       else
-        {
-          shell_show_overview_page (shell);
-        }
+        shell_show_overview_page (shell);
+
       g_object_notify (G_OBJECT (shell), "active-panel");
     }
 }
@@ -568,6 +622,17 @@ split_decorations_cb (GtkSettings *settings,
   gtk_header_bar_set_decoration_layout (GTK_HEADER_BAR (self->panel_headerbar), layout_end);
 }
 
+static void
+on_development_warning_dialog_responded_cb (GtkWidget *dialog,
+                                            gint       response,
+                                            CcWindow  *self)
+{
+  g_debug ("Disabling development build warning dialog");
+  g_settings_set_boolean (self->settings, "show-development-warning", FALSE);
+
+  gtk_widget_hide (dialog);
+}
+
 /* CcShell implementation */
 static gboolean
 cc_window_set_active_panel_from_id (CcShell      *shell,
@@ -604,6 +669,19 @@ cc_shell_iface_init (CcShellInterface *iface)
   iface->set_active_panel_from_id = cc_window_set_active_panel_from_id;
   iface->embed_widget_in_header = cc_window_embed_widget_in_header;
   iface->get_toplevel = cc_window_get_toplevel;
+}
+
+/* GtkWidget overrides */
+static void
+cc_window_map (GtkWidget *widget)
+{
+  CcWindow *self = (CcWindow *) widget;
+
+  GTK_WIDGET_CLASS (cc_window_parent_class)->map (widget);
+
+  /* Show a warning for Flatpak builds */
+  if (in_flatpak_sandbox () && g_settings_get_boolean (self->settings, "show-development-warning"))
+    gtk_window_present (GTK_WINDOW (self->development_warning_dialog));
 }
 
 /* GObject Implementation */
@@ -683,10 +761,13 @@ cc_window_class_init (CcWindowClass *klass)
   object_class->dispose = cc_window_dispose;
   object_class->finalize = cc_window_finalize;
 
+  widget_class->map = cc_window_map;
+
   g_object_class_override_property (object_class, PROP_ACTIVE_PANEL, "active-panel");
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/gtk/window.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, development_warning_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_sizegroup);
@@ -702,6 +783,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, top_right_box);
 
   gtk_widget_class_bind_template_callback (widget_class, gdk_window_set_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_development_warning_dialog_responded_cb);
   gtk_widget_class_bind_template_callback (widget_class, panel_list_view_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
@@ -744,10 +826,14 @@ cc_window_init (CcWindow *self)
   /* After everything is loaded, select the last used panel, if any,
    * or the first visible panel */
   id = g_settings_get_string (self->settings, "last-panel");
-  if (id != NULL && *id != '\0')
+  if (id != NULL && cc_shell_model_has_panel (CC_SHELL_MODEL (self->store), id))
     cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), id);
   else
     cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
+
+  /* Add a custom CSS class on development builds */
+  if (in_flatpak_sandbox ())
+    add_development_build_css (self);
 }
 
 CcWindow *

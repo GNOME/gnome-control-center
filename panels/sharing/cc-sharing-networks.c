@@ -26,7 +26,7 @@
 #include "cc-sharing-networks.h"
 #include "org.gnome.SettingsDaemon.Sharing.h"
 #include "gsd-sharing-enums.h"
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 
 struct _CcSharingNetworksPrivate {
   GtkWidget *listbox;
@@ -232,6 +232,7 @@ cc_sharing_networks_new_row (const char        *uuid,
 
   /* Label */
   w = gtk_label_new (network_name);
+  gtk_widget_set_margin_end (w, 12);
   gtk_container_add (GTK_CONTAINER (box), w);
 
   /* Remove button */
@@ -273,6 +274,7 @@ cc_sharing_networks_new_current_row (CcSharingNetworks *self)
   /* Label */
   w = gtk_label_new ("");
   gtk_container_add (GTK_CONTAINER (box), w);
+  gtk_widget_set_margin_end (w, 12);
   self->priv->current_label = w;
 
   w = gtk_switch_new ();

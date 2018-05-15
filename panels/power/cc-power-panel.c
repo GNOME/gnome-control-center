@@ -29,7 +29,8 @@
 #include <NetworkManager.h>
 #endif
 
-#include "shell/list-box-helper.h"
+#include "shell/cc-object-storage.h"
+#include "list-box-helper.h"
 #include "cc-power-panel.h"
 #include "cc-power-resources.h"
 
@@ -567,6 +568,18 @@ kind_to_description (UpDeviceKind kind)
   g_assert_not_reached ();
 }
 
+static UpDeviceLevel
+get_battery_level (UpDevice *device)
+{
+  UpDeviceLevel battery_level;
+
+  if (!g_object_class_find_property (G_OBJECT_CLASS (G_OBJECT_GET_CLASS (device)), "battery-level"))
+    return UP_DEVICE_LEVEL_NONE;
+
+  g_object_get (device, "battery-level", &battery_level, NULL);
+  return battery_level;
+}
+
 static void
 add_device (CcPowerPanel *panel, UpDevice *device)
 {
@@ -581,9 +594,9 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   GString *description;
   gdouble percentage;
   gchar *name;
-  gchar *s;
   gboolean show_caution = FALSE;
   gboolean is_present;
+  UpDeviceLevel battery_level;
 
   name = NULL;
   g_object_get (device,
@@ -593,6 +606,7 @@ add_device (CcPowerPanel *panel, UpDevice *device)
                 "model", &name,
                 "is-present", &is_present,
                 NULL);
+  battery_level = get_battery_level (device);
 
   if (!is_present)
     {
@@ -667,9 +681,20 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_set_margin_start (box2, 20);
   gtk_widget_set_margin_end (box2, 20);
-  s = g_strdup_printf ("%d%%", (int)percentage);
-  widget = gtk_label_new (s);
-  g_free (s);
+
+  if (battery_level == UP_DEVICE_LEVEL_NONE)
+    {
+      gchar *s;
+
+      s = g_strdup_printf ("%d%%", (int)(percentage + 0.5));
+      widget = gtk_label_new (s);
+      g_free (s);
+    }
+  else
+    {
+      widget = gtk_label_new ("");
+    }
+
   gtk_widget_set_halign (widget, GTK_ALIGN_END);
   gtk_style_context_add_class (gtk_widget_get_style_context (widget), GTK_STYLE_CLASS_DIM_LABEL);
   gtk_box_pack_start (GTK_BOX (box2), widget, FALSE, TRUE, 0);
@@ -1083,7 +1108,7 @@ got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
   CcPowerPanel *self;
   GDBusProxy *screen_proxy;
 
-  screen_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  screen_proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
   if (screen_proxy == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
@@ -1096,8 +1121,8 @@ got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
   self->priv->screen_proxy = screen_proxy;
 
   /* we want to change the bar if the user presses brightness buttons */
-  g_signal_connect (screen_proxy, "g-properties-changed",
-                    G_CALLBACK (on_screen_property_change), self);
+  g_signal_connect_object (screen_proxy, "g-properties-changed",
+                           G_CALLBACK (on_screen_property_change), self, 0);
 
   sync_screen_brightness (self);
   als_enabled_state_changed (self);
@@ -1120,7 +1145,7 @@ got_kbd_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
   CcPowerPanel *self;
   GDBusProxy *kbd_proxy;
 
-  kbd_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  kbd_proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
   if (kbd_proxy == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
@@ -1133,8 +1158,8 @@ got_kbd_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
   self->priv->kbd_proxy = kbd_proxy;
 
   /* we want to change the bar if the user presses brightness buttons */
-  g_signal_connect (kbd_proxy, "g-properties-changed",
-                    G_CALLBACK (on_kbd_property_change), self);
+  g_signal_connect_object (kbd_proxy, "g-properties-changed",
+                           G_CALLBACK (on_kbd_property_change), self, 0);
 
   sync_kbd_brightness (self);
 }
@@ -1163,6 +1188,51 @@ combo_time_changed_cb (GtkWidget *widget, CcPowerPanel *self)
   g_settings_set_int (self->priv->gsd_settings, key, value);
 }
 
+/* Copied from src/properties/bacon-video-widget-properties.c
+ * in totem */
+static char *
+time_to_string_text (gint64 msecs)
+{
+	char *secs, *mins, *hours, *string;
+	int sec, min, hour, _time;
+
+	_time = (int) (msecs / 1000);
+	sec = _time % 60;
+	_time = _time - sec;
+	min = (_time % (60*60)) / 60;
+	_time = _time - (min * 60);
+	hour = _time / (60*60);
+
+	hours = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d hour", "%d hours", hour), hour);
+
+	mins = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d minute",
+					  "%d minutes", min), min);
+
+	secs = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d second",
+					  "%d seconds", sec), sec);
+
+	if (hour > 0)
+	{
+		/* 5 hours 2 minutes 12 seconds */
+		string = g_strdup_printf (C_("time", "%s %s %s"), hours, mins, secs);
+	} else if (min > 0) {
+		/* 2 minutes 12 seconds */
+		string = g_strdup_printf (C_("time", "%s %s"), mins, secs);
+	} else if (sec > 0) {
+		/* 10 seconds */
+		string = g_strdup (secs);
+	} else {
+		/* 0 seconds */
+		string = g_strdup (_("0 seconds"));
+	}
+
+	g_free (hours);
+	g_free (mins);
+	g_free (secs);
+
+	return string;
+}
+
 static void
 set_value_for_combo (GtkComboBox *combo_box, gint value)
 {
@@ -1184,9 +1254,25 @@ set_value_for_combo (GtkComboBox *combo_box, gint value)
       gtk_tree_model_get (model, &iter,
                           ACTION_MODEL_VALUE, &value_tmp,
                           -1);
-      if (value == value_tmp)
+      if (value_tmp == value)
         {
           gtk_combo_box_set_active_iter (combo_box, &iter);
+          return;
+        }
+      else if (value_tmp > value)
+        {
+          GtkTreeIter new;
+          char *text;
+
+          /* This is an unlisted value, add it to the drop-down */
+          gtk_list_store_insert_before (GTK_LIST_STORE (model), &new, &iter);
+          text = time_to_string_text (value * 1000);
+          gtk_list_store_set (GTK_LIST_STORE (model), &new,
+                              ACTION_MODEL_TEXT, text,
+                              ACTION_MODEL_VALUE, value,
+                              -1);
+          g_free (text);
+          gtk_combo_box_set_active_iter (combo_box, &new);
           return;
         }
       last = iter;
@@ -1441,12 +1527,30 @@ nm_device_changed (NMClient     *client,
 }
 
 static void
+setup_nm_client (CcPowerPanel *self,
+                 NMClient     *client)
+{
+  CcPowerPanelPrivate *priv = self->priv;
+
+  priv->nm_client = client;
+
+  g_signal_connect_object (priv->nm_client, "notify",
+                           G_CALLBACK (nm_client_state_changed), self, 0);
+  g_signal_connect_object (priv->nm_client, "device-added",
+                           G_CALLBACK (nm_device_changed), self, 0);
+  g_signal_connect_object (priv->nm_client, "device-removed",
+                           G_CALLBACK (nm_device_changed), self, 0);
+
+  nm_client_state_changed (priv->nm_client, NULL, self);
+  nm_device_changed (priv->nm_client, NULL, self);
+}
+
+static void
 nm_client_ready_cb (GObject *source_object,
                     GAsyncResult *res,
                     gpointer user_data)
 {
   CcPowerPanel *self;
-  CcPowerPanelPrivate *priv;
   NMClient *client;
   GError *error = NULL;
 
@@ -1467,18 +1571,12 @@ nm_client_ready_cb (GObject *source_object,
     }
 
   self = user_data;
-  priv = self->priv;
-  priv->nm_client = client;
 
-  g_signal_connect (priv->nm_client, "notify",
-                    G_CALLBACK (nm_client_state_changed), self);
-  g_signal_connect (priv->nm_client, "device-added",
-                    G_CALLBACK (nm_device_changed), self);
-  g_signal_connect (priv->nm_client, "device-removed",
-                    G_CALLBACK (nm_device_changed), self);
+  /* Setup the client */
+  setup_nm_client (self, client);
 
-  nm_client_state_changed (priv->nm_client, NULL, self);
-  nm_device_changed (priv->nm_client, NULL, self);
+  /* Store the object in the cache too */
+  cc_object_storage_add_object (CC_OBJECT_NMCLIENT, client);
 }
 
 #endif
@@ -1648,13 +1746,12 @@ iio_proxy_appeared_cb (GDBusConnection *connection,
   GError *error = NULL;
 
   self->priv->iio_proxy =
-    g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                   G_DBUS_PROXY_FLAGS_NONE,
-                                   NULL,
-                                   "net.hadess.SensorProxy",
-                                   "/net/hadess/SensorProxy",
-                                   "net.hadess.SensorProxy",
-                                   NULL, &error);
+    cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
+                                              G_DBUS_PROXY_FLAGS_NONE,
+                                              "net.hadess.SensorProxy",
+                                              "/net/hadess/SensorProxy",
+                                              "net.hadess.SensorProxy",
+                                              NULL, &error);
   if (error != NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
@@ -1887,29 +1984,35 @@ add_power_saving_section (CcPowerPanel *self)
   g_signal_connect (G_OBJECT (priv->mobile_switch), "notify::active",
                     G_CALLBACK (mobile_switch_changed), self);
 
-  nm_client_new_async (priv->cancellable, nm_client_ready_cb, self);
+  /* Create and store a NMClient instance if it doesn't exist yet */
+  if (cc_object_storage_has_object (CC_OBJECT_NMCLIENT))
+    setup_nm_client (self, cc_object_storage_get_object (CC_OBJECT_NMCLIENT));
+  else
+    nm_client_new_async (priv->cancellable, nm_client_ready_cb, self);
 
   g_signal_connect (G_OBJECT (priv->wifi_switch), "notify::active",
                     G_CALLBACK (wifi_switch_changed), self);
 #endif
 
 #ifdef HAVE_BLUETOOTH
-  priv->bt_rfkill = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-						   G_DBUS_PROXY_FLAGS_NONE,
-						   NULL,
-						   "org.gnome.SettingsDaemon.Rfkill",
-						   "/org/gnome/SettingsDaemon/Rfkill",
-						   "org.gnome.SettingsDaemon.Rfkill",
-						   NULL, NULL);
+
+  priv->bt_rfkill = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
+                                                              G_DBUS_PROXY_FLAGS_NONE,
+                                                              "org.gnome.SettingsDaemon.Rfkill",
+                                                              "/org/gnome/SettingsDaemon/Rfkill",
+                                                              "org.gnome.SettingsDaemon.Rfkill",
+                                                              NULL,
+                                                              NULL);
+
   if (priv->bt_rfkill)
     {
-      priv->bt_properties = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-							   G_DBUS_PROXY_FLAGS_NONE,
-							   NULL,
-							   "org.gnome.SettingsDaemon.Rfkill",
-							   "/org/gnome/SettingsDaemon/Rfkill",
-							   "org.freedesktop.DBus.Properties",
-							   NULL, NULL);
+      priv->bt_properties = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
+                                                                      G_DBUS_PROXY_FLAGS_NONE,
+                                                                      "org.gnome.SettingsDaemon.Rfkill",
+                                                                      "/org/gnome/SettingsDaemon/Rfkill",
+                                                                      "org.freedesktop.DBus.Properties",
+                                                                      NULL,
+                                                                      NULL);
     }
 
   row = no_prelight_row_new ();
@@ -1944,8 +2047,8 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_show_all (box);
   gtk_widget_set_no_show_all (row, TRUE);
   priv->bt_row = row;
-  g_signal_connect_swapped (G_OBJECT (priv->bt_rfkill), "g-properties-changed",
-			G_CALLBACK (bt_powered_state_changed), self);
+  g_signal_connect_object (priv->bt_rfkill, "g-properties-changed",
+                           G_CALLBACK (bt_powered_state_changed), self, G_CONNECT_SWAPPED);
   g_signal_connect (G_OBJECT (priv->bt_switch), "notify::active",
 		G_CALLBACK (bt_switch_changed), self);
 
@@ -2509,24 +2612,22 @@ cc_power_panel_init (CcPowerPanel *self)
 
   priv->cancellable = g_cancellable_new ();
 
-  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                            G_DBUS_PROXY_FLAGS_NONE,
-                            NULL,
-                            "org.gnome.SettingsDaemon.Power",
-                            "/org/gnome/SettingsDaemon/Power",
-                            "org.gnome.SettingsDaemon.Power.Screen",
-                            priv->cancellable,
-                            got_screen_proxy_cb,
-                            self);
-  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                            G_DBUS_PROXY_FLAGS_NONE,
-                            NULL,
-                            "org.gnome.SettingsDaemon.Power",
-                            "/org/gnome/SettingsDaemon/Power",
-                            "org.gnome.SettingsDaemon.Power.Keyboard",
-                            priv->cancellable,
-                            got_kbd_proxy_cb,
-                            self);
+  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_NONE,
+                                       "org.gnome.SettingsDaemon.Power",
+                                       "/org/gnome/SettingsDaemon/Power",
+                                       "org.gnome.SettingsDaemon.Power.Screen",
+                                       priv->cancellable,
+                                       got_screen_proxy_cb,
+                                       self);
+  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_NONE,
+                                       "org.gnome.SettingsDaemon.Power",
+                                       "/org/gnome/SettingsDaemon/Power",
+                                       "org.gnome.SettingsDaemon.Power.Keyboard",
+                                       priv->cancellable,
+                                       got_kbd_proxy_cb,
+                                       self);
 
   priv->chassis_type = get_chassis_type (priv->cancellable);
 

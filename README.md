@@ -1,19 +1,21 @@
-GNOME Control Center  
+[![Build Status](https://gitlab.gnome.org/GNOME/gnome-control-center/badges/master/build.svg)](https://gitlab.gnome.org/GNOME/gnome-control-center/pipelines)
+[![License](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://gitlab.gnome.org/GNOME/gnome-control-center/blob/master/COPYING)
+
+GNOME Settings
 ====================
 
-About -
+GNOME Settings is GNOME's main interface for configuration of various aspects of
+your desktop.
 
-The control center is GNOME's main interface for configuration of various
-aspects of your desktop.
+## Contributing
 
-Installation -
+See `docs/CONTRIBUTING.md` for details on the contribution process, and `docs/HACKING.md`
+for the coding style guidelines.
 
-See the file 'INSTALL'
-
-How to report bugs -
+## Reporting Bugs
 
 Bugs should be reported to the GNOME bug tracking system under the product
-gnome-control-center. It is available at http://bugzilla.gnome.org.
+gnome-control-center. It is available at https://gitlab.gnome.org.
 
 In the report please include the following information -
 
@@ -23,7 +25,7 @@ In the report please include the following information -
 	If the bug was a crash, include the exact text that was printed out
 	A stacktrace where possible [see below]
 
-How to get a stack trace -
+### How to get a stack trace
 
 If the crash is reproducible, it is possible to get a stack trace and 
 attach it to the bug report. The following steps are used to obtain a 
@@ -39,15 +41,3 @@ stack trace -
 
 Once you have the backtrace, copy and paste this either into the 
 'Comments' field or attach a file with it included.
-
-
-Patches -
-
-Patches should be submitted to bugzilla.gnome.org or emailed to the 
-gnomecc-list@gnome.org list. If using bugzilla, attach
-the patch to a new bug report [or preferably, check to see if there is
-already a bug report that corresponds to your patch]. Bug reports 
-containing patches should include the 'PATCH' keyword.
-
-See https://wiki.gnome.org/Newcomers/CodeContributionWorkflow for how to
-create patches.

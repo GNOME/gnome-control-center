@@ -26,7 +26,7 @@
 #include <gdk/gdkx.h>
 #include <libsoup/soup.h>
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "cc-color-calibrate.h"
 #include "cc-color-cell-renderer-text.h"
 #include "cc-color-panel.h"
@@ -49,7 +49,6 @@ struct _CcColorPanelPrivate
   GPtrArray     *devices;
   GPtrArray     *sensors;
   GCancellable  *cancellable;
-  GDBusProxy    *proxy;
   GSettings     *settings;
   GSettings     *settings_colord;
   GtkBuilder    *builder;

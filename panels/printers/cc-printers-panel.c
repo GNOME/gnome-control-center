@@ -18,6 +18,8 @@
 
 #include <config.h>
 
+#include "shell/cc-object-storage.h"
+
 #include "cc-printers-panel.h"
 #include "cc-printers-resources.h"
 #include "pp-printer.h"
@@ -608,14 +610,13 @@ attach_to_cups_notifier_cb (GObject      *source_object,
       priv->subscription_renewal_id =
         g_timeout_add_seconds (RENEW_INTERVAL, renew_subscription, self);
 
-      priv->cups_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                                        0,
-                                                        NULL,
-                                                        CUPS_DBUS_NAME,
-                                                        CUPS_DBUS_PATH,
-                                                        CUPS_DBUS_INTERFACE,
-                                                        NULL,
-                                                        &error);
+      priv->cups_proxy = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
+                                                                   G_DBUS_PROXY_FLAGS_NONE,
+                                                                   CUPS_DBUS_NAME,
+                                                                   CUPS_DBUS_PATH,
+                                                                   CUPS_DBUS_INTERFACE,
+                                                                   NULL,
+                                                                   &error);
 
       if (!priv->cups_proxy)
         {
@@ -1229,14 +1230,13 @@ connection_test_cb (GObject      *source_object,
                     gpointer      user_data)
 {
   CcPrintersPanelPrivate *priv;
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self;
   gboolean                success;
   PpCups                 *cups = PP_CUPS (source_object);
   g_autoptr(GError)       error = NULL;
 
-  priv = self->priv;
-
   success = pp_cups_connection_test_finish (cups, result, &error);
+  g_object_unref (cups);
 
   if (error != NULL)
     {
@@ -1244,15 +1244,18 @@ connection_test_cb (GObject      *source_object,
         {
           g_warning ("Could not test connection: %s", error->message);
         }
+
+      return;
     }
+
+  self = CC_PRINTERS_PANEL (user_data);
+  priv = self->priv;
 
   if (!success)
     {
       priv->cups_status_check_id =
         g_timeout_add_seconds (CUPS_STATUS_CHECK_INTERVAL, cups_status_check, self);
     }
-
-  g_object_unref (cups);
 }
 
 static void

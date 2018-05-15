@@ -166,42 +166,25 @@ on_realm_diagnostics (GDBusConnection *connection,
         }
 }
 
-typedef struct {
-        GCancellable *cancellable;
-        UmRealmManager *manager;
-} NewClosure;
-
-static void
-new_closure_free (gpointer data)
-{
-        NewClosure *closure = data;
-        g_clear_object (&closure->cancellable);
-        g_clear_object (&closure->manager);
-        g_slice_free (NewClosure, closure);
-}
-
 static void
 on_provider_new (GObject *source,
                  GAsyncResult *result,
                  gpointer user_data)
 {
-        GSimpleAsyncResult *async = G_SIMPLE_ASYNC_RESULT (user_data);
-        NewClosure *closure = g_simple_async_result_get_op_res_gpointer (async);
+        GTask *task = G_TASK (user_data);
+        UmRealmManager *manager = g_task_get_task_data (task);
         GError *error = NULL;
-        UmRealmProvider *provider;
 
-        provider = um_realm_provider_proxy_new_finish (result, &error);
-        closure->manager->provider = provider;
-
+        manager->provider = um_realm_provider_proxy_new_finish (result, &error);
         if (error == NULL) {
-                g_dbus_proxy_set_default_timeout (G_DBUS_PROXY (closure->manager->provider), -1);
+                g_dbus_proxy_set_default_timeout (G_DBUS_PROXY (manager->provider), -1);
                 g_debug ("Created realm manager");
+                g_task_return_pointer (task, g_object_ref (manager), g_object_unref);
         } else {
-                g_simple_async_result_take_error (async, error);
+                g_task_return_error (task, error);
         }
-        g_simple_async_result_complete (async);
 
-        g_object_unref (async);
+        g_object_unref (task);
 }
 
 static void
@@ -209,8 +192,8 @@ on_manager_new (GObject *source,
                 GAsyncResult *result,
                 gpointer user_data)
 {
-        GSimpleAsyncResult *async = G_SIMPLE_ASYNC_RESULT (user_data);
-        NewClosure *closure = g_simple_async_result_get_op_res_gpointer (async);
+        GTask *task = G_TASK (user_data);
+        UmRealmManager *manager;
         GDBusConnection *connection;
         GError *error = NULL;
         GObject *object;
@@ -218,7 +201,7 @@ on_manager_new (GObject *source,
 
         object = g_async_initable_new_finish (G_ASYNC_INITABLE (source), result, &error);
         if (error == NULL) {
-                closure->manager = UM_REALM_MANAGER (object);
+                manager = UM_REALM_MANAGER (object);
                 connection = g_dbus_object_manager_client_get_connection (G_DBUS_OBJECT_MANAGER_CLIENT (object));
 
                 g_debug ("Connected to realmd");
@@ -233,20 +216,20 @@ on_manager_new (GObject *source,
                                                           on_realm_diagnostics,
                                                           NULL,
                                                           NULL);
-                closure->manager->diagnostics_sig = sig;
+                manager->diagnostics_sig = sig;
+
+                g_task_set_task_data (task, manager, g_object_unref);
 
                 um_realm_provider_proxy_new (connection,
                                              G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES,
                                              "org.freedesktop.realmd",
                                              "/org/freedesktop/realmd",
-                                             closure->cancellable,
-                                             on_provider_new, g_object_ref (async));
+                                             g_task_get_cancellable (task),
+                                             on_provider_new, task);
         } else {
-                g_simple_async_result_take_error (async, error);
-                g_simple_async_result_complete (async);
+                g_task_return_error (task, error);
+                g_object_unref (task);
         }
-
-        g_object_unref (async);
 }
 
 void
@@ -254,61 +237,37 @@ um_realm_manager_new (GCancellable *cancellable,
                       GAsyncReadyCallback callback,
                       gpointer user_data)
 {
-        GSimpleAsyncResult *async;
-        NewClosure *closure;
+        GTask *task;
 
         g_debug ("Connecting to realmd...");
 
-        async = g_simple_async_result_new (NULL, callback, user_data,
-                                           um_realm_manager_new);
-        closure = g_slice_new (NewClosure);
-        closure->cancellable = cancellable ? g_object_ref (cancellable) : NULL;
-        g_simple_async_result_set_op_res_gpointer (async, closure, new_closure_free);
+        task = g_task_new (NULL, cancellable, callback, user_data);
+        g_task_set_source_tag (task, um_realm_manager_new);
 
         g_async_initable_new_async (UM_TYPE_REALM_MANAGER, G_PRIORITY_DEFAULT,
-                                    cancellable, on_manager_new, g_object_ref (async),
+                                    cancellable, on_manager_new, task,
                                     "flags", G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE,
                                     "name", "org.freedesktop.realmd",
                                     "bus-type", G_BUS_TYPE_SYSTEM,
                                     "object-path", "/org/freedesktop/realmd",
                                     "get-proxy-type-func", um_realm_object_manager_client_get_proxy_type,
                                     NULL);
-
-        g_object_unref (async);
 }
 
 UmRealmManager *
 um_realm_manager_new_finish (GAsyncResult *result,
                              GError **error)
 {
-        GSimpleAsyncResult *async;
-        NewClosure *closure;
+        g_return_val_if_fail (g_task_is_valid (result, NULL), NULL);
+        g_return_val_if_fail (g_async_result_is_tagged (result, um_realm_manager_new), NULL);
 
-        g_return_val_if_fail (g_simple_async_result_is_valid (result, NULL,
-                                                              um_realm_manager_new), NULL);
-
-        async = G_SIMPLE_ASYNC_RESULT (result);
-        if (g_simple_async_result_propagate_error (async, error))
-                return NULL;
-
-        closure = g_simple_async_result_get_op_res_gpointer (async);
-        return g_object_ref (closure->manager);
+        return g_task_propagate_pointer (G_TASK (result), error);
 }
 
-typedef struct {
-        GDBusObjectManager *manager;
-        GCancellable *cancellable;
-        GList *realms;
-} DiscoverClosure;
-
 static void
-discover_closure_free (gpointer data)
+realms_free (gpointer data)
 {
-        DiscoverClosure *discover = data;
-        g_object_unref (discover->manager);
-        g_clear_object (&discover->cancellable);
-        g_list_free_full (discover->realms, g_object_unref);
-        g_slice_free (DiscoverClosure, discover);
+        g_list_free_full (data, g_object_unref);
 }
 
 static void
@@ -316,26 +275,27 @@ on_provider_discover (GObject *source,
                       GAsyncResult *result,
                       gpointer user_data)
 {
-        GSimpleAsyncResult *async = G_SIMPLE_ASYNC_RESULT (user_data);
-        DiscoverClosure *discover = g_simple_async_result_get_op_res_gpointer (async);
+        GTask *task = G_TASK (user_data);
+        UmRealmManager *manager = g_task_get_source_object (task);
         GDBusObject *object;
         GError *error = NULL;
         gboolean no_membership = FALSE;
         gchar **realms;
         gint relevance;
         gint i;
+        GList *kerberos_realms = NULL;
 
         um_realm_provider_call_discover_finish (UM_REALM_PROVIDER (source), &relevance,
                                                 &realms, result, &error);
         if (error == NULL) {
                 for (i = 0; realms[i]; i++) {
-                        object = g_dbus_object_manager_get_object (discover->manager, realms[i]);
+                        object = g_dbus_object_manager_get_object (G_DBUS_OBJECT_MANAGER (manager), realms[i]);
                         if (object == NULL) {
                                 g_warning ("Realm is not in object manager: %s", realms[i]);
                         } else {
                                 if (is_realm_with_kerberos_and_membership (object)) {
                                         g_debug ("Discovered realm: %s", realms[i]);
-                                        discover->realms = g_list_prepend (discover->realms, object);
+                                        kerberos_realms = g_list_prepend (kerberos_realms, object);
                                 } else {
                                         g_debug ("Realm does not support kerberos membership: %s", realms[i]);
                                         no_membership = TRUE;
@@ -345,16 +305,21 @@ on_provider_discover (GObject *source,
                 }
                 g_strfreev (realms);
 
-                if (!discover->realms && no_membership) {
-                        g_simple_async_result_set_error (async, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC,
-                                                         _("Cannot automatically join this type of domain"));
+                if (!kerberos_realms && no_membership) {
+                        g_task_return_new_error (task, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC,
+                                                 _("Cannot automatically join this type of domain"));
+                } else if (!kerberos_realms) {
+                        g_task_return_new_error (task, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC,
+                                                 _("No such domain or realm found"));
+                } else {
+                        kerberos_realms = g_list_reverse (kerberos_realms);
+                        g_task_return_pointer (task, kerberos_realms, realms_free);
                 }
         } else {
-                g_simple_async_result_take_error (async, error);
+                g_task_return_error (task, error);
         }
 
-        g_simple_async_result_complete (async);
-        g_object_unref (async);
+        g_object_unref (task);
 }
 
 void
@@ -364,8 +329,7 @@ um_realm_manager_discover (UmRealmManager *self,
                            GAsyncReadyCallback callback,
                            gpointer user_data)
 {
-        GSimpleAsyncResult *res;
-        DiscoverClosure *discover;
+        GTask *task;
         GVariant *options;
 
         g_return_if_fail (UM_IS_REALM_MANAGER (self));
@@ -374,19 +338,13 @@ um_realm_manager_discover (UmRealmManager *self,
 
         g_debug ("Discovering realms for: %s", input);
 
-        res = g_simple_async_result_new (G_OBJECT (self), callback, user_data,
-                                         um_realm_manager_discover);
-        discover = g_slice_new0 (DiscoverClosure);
-        discover->manager = g_object_ref (self);
-        discover->cancellable = cancellable ? g_object_ref (cancellable) : NULL;
-        g_simple_async_result_set_op_res_gpointer (res, discover, discover_closure_free);
+        task = g_task_new (G_OBJECT (self), cancellable, callback, user_data);
+        g_task_set_source_tag (task, um_realm_manager_discover);
 
 	options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
 
         um_realm_provider_call_discover (self->provider, input, options, cancellable,
-                                         on_provider_discover, g_object_ref (res));
-
-        g_object_unref (res);
+                                         on_provider_discover, task);
 }
 
 GList *
@@ -394,29 +352,12 @@ um_realm_manager_discover_finish (UmRealmManager *self,
                                   GAsyncResult *result,
                                   GError **error)
 {
-        GSimpleAsyncResult *async;
-        DiscoverClosure *discover;
-        GList *realms;
-
         g_return_val_if_fail (UM_IS_REALM_MANAGER (self), NULL);
-        g_return_val_if_fail (g_simple_async_result_is_valid (result, G_OBJECT (self),
-                              um_realm_manager_discover), NULL);
+        g_return_val_if_fail (g_task_is_valid (result, G_OBJECT (self)), NULL);
+        g_return_val_if_fail (g_async_result_is_tagged (result, um_realm_manager_discover), NULL);
         g_return_val_if_fail (error == NULL || *error == NULL, NULL);
 
-        async = G_SIMPLE_ASYNC_RESULT (result);
-        if (g_simple_async_result_propagate_error (async, error))
-                return NULL;
-
-        discover = g_simple_async_result_get_op_res_gpointer (async);
-        if (!discover->realms) {
-                g_set_error (error, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC,
-                             _("No such domain or realm found"));
-                return NULL;
-        }
-
-        realms = g_list_reverse (discover->realms);
-        discover->realms = NULL;
-        return realms;
+        return g_task_propagate_pointer (G_TASK (result), error);
 }
 
 GList *
@@ -516,20 +457,6 @@ find_supported_credentials (UmRealmKerberosMembership *membership,
         return NULL;
 }
 
-static void
-on_realm_join_complete (GObject *source,
-                        GAsyncResult *result,
-                        gpointer user_data)
-{
-	GSimpleAsyncResult *async = G_SIMPLE_ASYNC_RESULT (user_data);
-
-	g_debug ("Completed Join() method call");
-
-	g_simple_async_result_set_op_res_gpointer (async, g_object_ref (result), g_object_unref);
-	g_simple_async_result_complete_in_idle (async);
-	g_object_unref (async);
-}
-
 static gboolean
 realm_join_as_owner (UmRealmObject *realm,
                      const gchar *owner,
@@ -541,7 +468,6 @@ realm_join_as_owner (UmRealmObject *realm,
                      gpointer user_data)
 {
         UmRealmKerberosMembership *membership;
-        GSimpleAsyncResult *async;
         GVariant *contents;
         GVariant *options;
         GVariant *option;
@@ -557,9 +483,6 @@ realm_join_as_owner (UmRealmObject *realm,
                 g_object_unref (membership);
                 return FALSE;
         }
-
-        async = g_simple_async_result_new (G_OBJECT (realm), callback, user_data,
-                                           realm_join_as_owner);
 
         if (g_str_equal (type, "ccache")) {
                 g_debug ("Using a kerberos credential cache to join the realm");
@@ -583,10 +506,7 @@ realm_join_as_owner (UmRealmObject *realm,
         g_debug ("Calling the Join() method with %s credentials", owner);
 
         um_realm_kerberos_membership_call_join (membership, creds, options,
-                                                cancellable, on_realm_join_complete,
-                                                g_object_ref (async));
-
-        g_object_unref (async);
+                                                cancellable, callback, user_data);
         g_object_unref (membership);
 
         return TRUE;
@@ -640,7 +560,6 @@ um_realm_join_finish (UmRealmObject *realm,
         UmRealmKerberosMembership *membership;
         GError *call_error = NULL;
         gchar *dbus_error;
-        GAsyncResult *async;
 
         g_return_val_if_fail (UM_REALM_IS_OBJECT (realm), FALSE);
         g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
@@ -648,12 +567,13 @@ um_realm_join_finish (UmRealmObject *realm,
         membership = um_realm_object_get_kerberos_membership (realm);
         g_return_val_if_fail (membership != NULL, FALSE);
 
-        async = g_simple_async_result_get_op_res_gpointer (G_SIMPLE_ASYNC_RESULT (result));
-        um_realm_kerberos_membership_call_join_finish (membership, async, &call_error);
+        um_realm_kerberos_membership_call_join_finish (membership, result, &call_error);
         g_object_unref (membership);
 
-        if (call_error == NULL)
+        if (call_error == NULL) {
+                g_debug ("Completed Join() method call");
                 return TRUE;
+        }
 
         dbus_error = g_dbus_error_get_remote_error (call_error);
         if (dbus_error == NULL) {
@@ -683,7 +603,6 @@ typedef struct {
         gchar *realm;
         gchar *user;
         gchar *password;
-        GBytes *credentials;
 } LoginClosure;
 
 static void
@@ -694,7 +613,6 @@ login_closure_free (gpointer data)
         g_free (login->realm);
         g_free (login->user);
         g_free (login->password);
-        g_bytes_unref (login->credentials);
         g_slice_free (LoginClosure, login);
 }
 
@@ -763,11 +681,12 @@ login_perform_kinit (krb5_context k5,
 }
 
 static void
-kinit_thread_func (GSimpleAsyncResult *async,
-                   GObject *object,
+kinit_thread_func (GTask *task,
+                   gpointer object,
+                   gpointer task_data,
                    GCancellable *cancellable)
 {
-        LoginClosure *login = g_simple_async_result_get_op_res_gpointer (async);
+        LoginClosure *login = task_data;
         krb5_context k5 = NULL;
         krb5_error_code code;
         GError *error = NULL;
@@ -799,40 +718,41 @@ kinit_thread_func (GSimpleAsyncResult *async,
                 if (filename != NULL) {
                         g_file_get_contents (filename, &contents, &length, &error);
                         if (error == NULL) {
-                                login->credentials = g_bytes_new_take (contents, length);
                                 g_debug ("Read in credential cache: %s", filename);
                         } else {
                                 g_warning ("Couldn't read credential cache: %s: %s",
                                            filename, error->message);
                                 g_error_free (error);
                         }
+
+                        g_task_return_pointer (task, g_bytes_new_take (contents, length), (GDestroyNotify) g_bytes_unref);
                 }
                 break;
 
         case KRB5KDC_ERR_C_PRINCIPAL_UNKNOWN:
         case KRB5KDC_ERR_POLICY:
-                g_simple_async_result_set_error (async, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN,
-                                                 _("Cannot log in as %s at the %s domain"),
-                                                 login->user, login->domain);
+                g_task_return_new_error (task, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN,
+                                         _("Cannot log in as %s at the %s domain"),
+                                         login->user, login->domain);
                 break;
         case KRB5KDC_ERR_PREAUTH_FAILED:
         case KRB5KRB_AP_ERR_BAD_INTEGRITY:
-                g_simple_async_result_set_error (async, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD,
-                                                 _("Invalid password, please try again"));
+                g_task_return_new_error (task, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD,
+                                         _("Invalid password, please try again"));
                 break;
         case KRB5_PREAUTH_FAILED:
         case KRB5KDC_ERR_KEY_EXP:
         case KRB5KDC_ERR_CLIENT_REVOKED:
         case KRB5KDC_ERR_ETYPE_NOSUPP:
         case KRB5_PROG_ETYPE_NOSUPP:
-                g_simple_async_result_set_error (async, UM_REALM_ERROR, UM_REALM_ERROR_CANNOT_AUTH,
-                                                 _("Cannot log in as %s at the %s domain"),
-                                                 login->user, login->domain);
+                g_task_return_new_error (task, UM_REALM_ERROR, UM_REALM_ERROR_CANNOT_AUTH,
+                                         _("Cannot log in as %s at the %s domain"),
+                                         login->user, login->domain);
                 break;
         default:
-                g_simple_async_result_set_error (async, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC,
-                                                 _("Couldn’t connect to the %s domain: %s"),
-                                                 login->domain, krb5_get_error_message (k5, code));
+                g_task_return_new_error (task, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC,
+                                         _("Couldn’t connect to the %s domain: %s"),
+                                         login->domain, krb5_get_error_message (k5, code));
                 break;
         }
 
@@ -844,6 +764,8 @@ kinit_thread_func (GSimpleAsyncResult *async,
 
         if (k5)
                 krb5_free_context (k5);
+
+        g_object_unref (task);
 }
 
 void
@@ -854,7 +776,7 @@ um_realm_login (UmRealmObject *realm,
                 GAsyncReadyCallback callback,
                 gpointer user_data)
 {
-        GSimpleAsyncResult *async;
+        GTask *task;
         LoginClosure *login;
         UmRealmKerberos *kerberos;
 
@@ -866,46 +788,29 @@ um_realm_login (UmRealmObject *realm,
         kerberos = um_realm_object_get_kerberos (realm);
         g_return_if_fail (kerberos != NULL);
 
-        async = g_simple_async_result_new (NULL, callback, user_data,
-                                           um_realm_login);
+        task = g_task_new (NULL, cancellable, callback, user_data);
+        g_task_set_source_tag (task, um_realm_login);
+
         login = g_slice_new0 (LoginClosure);
         login->domain = g_strdup (um_realm_kerberos_get_domain_name (kerberos));
         login->realm = g_strdup (um_realm_kerberos_get_realm_name (kerberos));
         login->user = g_strdup (user);
         login->password = g_strdup (password);
-        g_simple_async_result_set_op_res_gpointer (async, login, login_closure_free);
+        g_task_set_task_data (task, login, login_closure_free);
 
-        g_simple_async_result_set_handle_cancellation (async, TRUE);
-        g_simple_async_result_run_in_thread (async, kinit_thread_func,
-                                             G_PRIORITY_DEFAULT, cancellable);
+        g_task_set_return_on_cancel (task, TRUE);
+        g_task_run_in_thread (task, kinit_thread_func);
 
-        g_object_unref (async);
         g_object_unref (kerberos);
 }
 
-gboolean
+GBytes *
 um_realm_login_finish (GAsyncResult *result,
-                       GBytes **credentials,
                        GError **error)
 {
-        GSimpleAsyncResult *async;
-        LoginClosure *login;
-
-        g_return_val_if_fail (g_simple_async_result_is_valid (result, NULL,
-                              um_realm_login), FALSE);
+        g_return_val_if_fail (g_task_is_valid (result, NULL), FALSE);
+        g_return_val_if_fail (g_async_result_is_tagged (result, um_realm_login), FALSE);
         g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-        async = G_SIMPLE_ASYNC_RESULT (result);
-        if (g_simple_async_result_propagate_error (async, error))
-                return FALSE;
-
-        login = g_simple_async_result_get_op_res_gpointer (async);
-        if (credentials) {
-                if (login->credentials)
-                        *credentials = g_bytes_ref (login->credentials);
-                else
-                        *credentials = NULL;
-        }
-
-        return TRUE;
+        return g_task_propagate_pointer (G_TASK (result), error);
 }

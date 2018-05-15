@@ -29,7 +29,8 @@
 #include <gdesktop-enums.h>
 #include <math.h>
 
-#include "shell/list-box-helper.h"
+#include "shell/cc-object-storage.h"
+#include "list-box-helper.h"
 #include <libupower-glib/upower.h>
 
 #include "cc-display-config-manager-dbus.h"
@@ -87,6 +88,8 @@ struct _CcDisplayPanelPrivate
 
   GtkWidget *main_titlebar;
   GtkWidget *apply_titlebar;
+  GtkWidget *apply_titlebar_apply;
+  GtkWidget *apply_titlebar_warning;
 };
 
 typedef struct
@@ -283,6 +286,8 @@ reset_titlebar (CcDisplayPanel *self)
     }
 
   g_clear_object (&priv->apply_titlebar);
+  g_clear_object (&priv->apply_titlebar_apply);
+  g_clear_object (&priv->apply_titlebar_warning);
 }
 
 static void
@@ -2590,47 +2595,59 @@ on_toplevel_key_press (GtkWidget   *button,
 }
 
 static void
-show_apply_titlebar (CcDisplayPanel *panel)
+show_apply_titlebar (CcDisplayPanel *panel, gboolean is_applicable)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GtkWidget *header, *button, *toplevel;
   GtkSizeGroup *size_group;
 
-  if (priv->apply_titlebar)
-    return;
+  if (!priv->apply_titlebar)
+    {
+      GtkWidget *header, *button, *toplevel;
+      priv->apply_titlebar = header = gtk_header_bar_new ();
 
-  priv->apply_titlebar = header = gtk_header_bar_new ();
-  gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Apply Changes?"));
+      size_group = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
 
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
+      button = gtk_button_new_with_mnemonic (_("_Cancel"));
+      gtk_header_bar_pack_start (GTK_HEADER_BAR (header), button);
+      gtk_size_group_add_widget (size_group, button);
+      g_signal_connect_object (button, "clicked", G_CALLBACK (on_screen_changed),
+                               panel, G_CONNECT_SWAPPED);
 
-  button = gtk_button_new_with_mnemonic (_("_Cancel"));
-  gtk_header_bar_pack_start (GTK_HEADER_BAR (header), button);
-  gtk_size_group_add_widget (size_group, button);
-  g_signal_connect_object (button, "clicked", G_CALLBACK (on_screen_changed),
-                           panel, G_CONNECT_SWAPPED);
+      toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
+      g_signal_connect_object (toplevel, "key-press-event", G_CALLBACK (on_toplevel_key_press),
+                               button, G_CONNECT_SWAPPED);
 
-  toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
-  g_signal_connect_object (toplevel, "key-press-event", G_CALLBACK (on_toplevel_key_press),
-                           button, G_CONNECT_SWAPPED);
+      priv->apply_titlebar_apply = button = gtk_button_new_with_mnemonic (_("_Apply"));
+      gtk_header_bar_pack_end (GTK_HEADER_BAR (header), button);
+      gtk_size_group_add_widget (size_group, button);
+      g_signal_connect_object (button, "clicked", G_CALLBACK (apply_current_configuration),
+                               panel, G_CONNECT_SWAPPED);
+      gtk_style_context_add_class (gtk_widget_get_style_context (button),
+                                   GTK_STYLE_CLASS_SUGGESTED_ACTION);
 
-  button = gtk_button_new_with_mnemonic (_("_Apply"));
-  gtk_header_bar_pack_end (GTK_HEADER_BAR (header), button);
-  gtk_size_group_add_widget (size_group, button);
-  g_signal_connect_object (button, "clicked", G_CALLBACK (apply_current_configuration),
-                           panel, G_CONNECT_SWAPPED);
-  gtk_style_context_add_class (gtk_widget_get_style_context (button),
-                               GTK_STYLE_CLASS_SUGGESTED_ACTION);
+      gtk_widget_show_all (header);
+      g_object_unref (size_group);
 
-  gtk_widget_show_all (header);
-  g_object_unref (size_group);
+      header = gtk_window_get_titlebar (GTK_WINDOW (toplevel));
+      if (header)
+        priv->main_titlebar = g_object_ref (header);
 
-  header = gtk_window_get_titlebar (GTK_WINDOW (toplevel));
-  if (header)
-    priv->main_titlebar = g_object_ref (header);
+      gtk_window_set_titlebar (GTK_WINDOW (toplevel), priv->apply_titlebar);
+      g_object_ref (priv->apply_titlebar);
+      g_object_ref (priv->apply_titlebar_apply);
+    }
 
-  gtk_window_set_titlebar (GTK_WINDOW (toplevel), priv->apply_titlebar);
-  g_object_ref (priv->apply_titlebar);
+  if (is_applicable)
+    {
+      gtk_header_bar_set_title (GTK_HEADER_BAR (priv->apply_titlebar), _("Apply Changes?"));
+      gtk_header_bar_set_subtitle (GTK_HEADER_BAR (priv->apply_titlebar), NULL);
+    }
+  else
+    {
+      gtk_header_bar_set_title (GTK_HEADER_BAR (priv->apply_titlebar), _("Changes Cannot be Applied"));
+      gtk_header_bar_set_subtitle (GTK_HEADER_BAR (priv->apply_titlebar), _("This could be due to hardware limitations."));
+    }
+  gtk_widget_set_sensitive (priv->apply_titlebar_apply, is_applicable);
 }
 
 static void
@@ -2639,12 +2656,6 @@ update_apply_button (CcDisplayPanel *panel)
   CcDisplayPanelPrivate *priv = panel->priv;
   gboolean config_equal;
   CcDisplayConfig *applied_config;
-
-  if (!cc_display_config_is_applicable (priv->current_config))
-    {
-      reset_titlebar (panel);
-      return;
-    }
 
   applied_config = cc_display_config_manager_get_current (priv->manager);
 
@@ -2655,7 +2666,7 @@ update_apply_button (CcDisplayPanel *panel)
   if (config_equal)
     reset_titlebar (panel);
   else
-    show_apply_titlebar (panel);
+    show_apply_titlebar (panel, cc_display_config_is_applicable (priv->current_config));
 }
 
 static void
@@ -3107,7 +3118,7 @@ shell_proxy_ready (GObject        *source,
   GDBusProxy *proxy;
   GError *error = NULL;
 
-  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
   if (!proxy)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
@@ -3326,17 +3337,16 @@ cc_display_panel_init (CcDisplayPanel *self)
   g_signal_connect (self, "map", G_CALLBACK (mapped_cb), NULL);
 
   self->priv->shell_cancellable = g_cancellable_new ();
-  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                            G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES |
-                            G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS |
-                            G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-                            NULL,
-                            "org.gnome.Shell",
-                            "/org/gnome/Shell",
-                            "org.gnome.Shell",
-                            self->priv->shell_cancellable,
-                            (GAsyncReadyCallback) shell_proxy_ready,
-                            self);
+  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES |
+                                       G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS |
+                                       G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+                                       "org.gnome.Shell",
+                                       "/org/gnome/Shell",
+                                       "org.gnome.Shell",
+                                       self->priv->shell_cancellable,
+                                       (GAsyncReadyCallback) shell_proxy_ready,
+                                       self);
 
   g_bus_get (G_BUS_TYPE_SESSION,
              self->priv->shell_cancellable,

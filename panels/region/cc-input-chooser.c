@@ -22,7 +22,7 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
 
-#include "shell/list-box-helper.h"
+#include "list-box-helper.h"
 #include "cc-common-language.h"
 #include "cc-util.h"
 #include "cc-input-chooser.h"

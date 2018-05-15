@@ -1,6 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
- *
- * Copyright (C) 2009 Red Hat, Inc.
+/* Copyright © 2018 Red Hat, Inc
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,18 +13,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
+ * Authors: Christian J. Kellner <ckellner@redhat.com>
+ *
  */
 
-#ifndef __CC_SHELL_LOG_H
-#define __CC_SHELL_LOG_H
+#pragma once
 
-#include <glib.h>
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 
-void cc_shell_log_init      (void);
-void cc_shell_log_set_debug (gboolean debug);
+#define CC_TYPE_BOLT_PANEL cc_bolt_panel_get_type ()
+
+G_DECLARE_FINAL_TYPE (CcBoltPanel, cc_bolt_panel, CC, BOLT_PANEL, CcPanel);
 
 G_END_DECLS
-
-#endif /* __CC_SHELL_LOG_H */

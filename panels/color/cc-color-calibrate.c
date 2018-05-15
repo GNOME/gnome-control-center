@@ -28,6 +28,8 @@
 #include <math.h>
 #include <colord-session/cd-session.h>
 
+#include "shell/cc-object-storage.h"
+
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-rr.h>
 
@@ -884,14 +886,13 @@ cc_color_calibrate_setup (CcColorCalibrate *calibrate,
   g_return_val_if_fail (calibrate->priv->device_kind != CD_SENSOR_CAP_UNKNOWN, FALSE);
 
   /* use logind to disable system state idle */
-  priv->proxy_inhibit = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                                       G_DBUS_PROXY_FLAGS_NONE,
-                                                       NULL,
-                                                       "org.freedesktop.login1",
-                                                       "/org/freedesktop/login1",
-                                                       "org.freedesktop.login1.Manager",
-                                                       NULL,
-                                                       error);
+  priv->proxy_inhibit = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
+                                                                  G_DBUS_PROXY_FLAGS_NONE,
+                                                                  "org.freedesktop.login1",
+                                                                  "/org/freedesktop/login1",
+                                                                  "org.freedesktop.login1.Manager",
+                                                                  NULL,
+                                                                  error);
   if (priv->proxy_inhibit == NULL)
     {
       ret = FALSE;
@@ -899,27 +900,26 @@ cc_color_calibrate_setup (CcColorCalibrate *calibrate,
     }
 
   /* start the calibration session daemon */
-  priv->proxy_helper = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                                      G_DBUS_PROXY_FLAGS_NONE,
-                                                      NULL,
-                                                      CD_SESSION_DBUS_SERVICE,
-                                                      CD_SESSION_DBUS_PATH,
-                                                      CD_SESSION_DBUS_INTERFACE_DISPLAY,
-                                                      NULL,
-                                                      error);
+  priv->proxy_helper = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
+                                                                 G_DBUS_PROXY_FLAGS_NONE,
+                                                                 CD_SESSION_DBUS_SERVICE,
+                                                                 CD_SESSION_DBUS_PATH,
+                                                                 CD_SESSION_DBUS_INTERFACE_DISPLAY,
+                                                                 NULL,
+                                                                 error);
   if (priv->proxy_helper == NULL)
     {
       ret = FALSE;
       goto out;
     }
-  g_signal_connect (priv->proxy_helper,
-                    "g-properties-changed",
-                    G_CALLBACK (cc_color_calibrate_property_changed_cb),
-                    calibrate);
-  g_signal_connect (priv->proxy_helper,
-                    "g-signal",
-                    G_CALLBACK (cc_color_calibrate_signal_cb),
-                    calibrate);
+  g_signal_connect_object (priv->proxy_helper,
+                           "g-properties-changed",
+                           G_CALLBACK (cc_color_calibrate_property_changed_cb),
+                           calibrate, 0);
+  g_signal_connect_object (priv->proxy_helper,
+                           "g-signal",
+                           G_CALLBACK (cc_color_calibrate_signal_cb),
+                           calibrate, 0);
 out:
   return ret;
 }

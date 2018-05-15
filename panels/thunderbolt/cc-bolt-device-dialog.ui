@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <template class="CcBoltDeviceDialog" parent="GtkDialog">
+    <property name="can_focus">False</property>
+    <property name="type_hint">dialog</property>
+    <property name="use_header_bar">1</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+
+    <child internal-child="headerbar">
+      <object class="GtkHeaderBar" id="header_bar">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="show_close_button">True</property>
+        <property name="title">Device Identifier</property>
+        <property name="subtitle"></property>
+        <property name="has-subtitle">False</property>
+      </object>
+    </child>
+
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="margin-bottom">24</property>
+        <property name="border-width">0</property>
+        <child>
+          <object class="GtkOverlay">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child type="overlay">
+              <object class="GtkRevealer" id="notify_revealer">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">start</property>
+                <property name="transition_type">slide-down</property>
+                <child>
+                  <object class="GtkFrame">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="spacing">12</property>
+                        <child>
+                          <object class="GtkLabel" id="notify_label">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="use_markup">True</property>
+                            <property name="wrap">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="relief">none</property>
+                            <signal name="clicked"
+                                    handler="on_notify_button_clicked_cb"
+                                    object="CcBoltDeviceDialog"
+                                    swapped="no" />
+                            <child>
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="icon-name">window-close-symbolic</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="app-notification" />
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="expand">True</property>
+                <property name="orientation">vertical</property>
+
+                <child>
+                  <object class="GtkGrid">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin-left">72</property>
+                    <property name="margin-right">72</property>
+                    <property name="margin-top">24</property>
+                    <property name="margin-bottom">0</property>
+                    <property name="row_spacing">12</property>
+                    <property name="column_spacing">24</property>
+                    <child>
+                      <object class="GtkLabel" id="name_title_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">end</property>
+                        <property name="hexpand">False</property>
+                        <property name="vexpand">False</property>
+                        <property name="label" translatable="yes">Name:</property>
+                        <property name="justify">right</property>
+                        <property name="xalign">1</property>
+                        <property name="mnemonic_widget">name_label</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="name_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="hexpand">True</property>
+                        <property name="label">Device identifier</property>
+                        <property name="use_markup">True</property>
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="status_title_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">end</property>
+                        <property name="hexpand">False</property>
+                        <property name="vexpand">False</property>
+                        <property name="label" translatable="yes">Status:</property>
+                        <property name="justify">right</property>
+                        <property name="xalign">1</property>
+                        <property name="mnemonic_widget">status_label</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="status_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="valign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="label">Status</property>
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+
+                    <child>
+                      <object class="GtkLabel" id="uuid_title_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">end</property>
+                        <property name="hexpand">False</property>
+                        <property name="vexpand">False</property>
+                        <property name="label" translatable="yes">UUID:</property>
+                        <property name="justify">right</property>
+                        <property name="xalign">1</property>
+                        <property name="mnemonic_widget">uuid_label</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="uuid_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="valign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="label">Status</property>
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">2</property>
+                      </packing>
+                    </child>
+
+                    <child>
+                      <object class="GtkLabel" id="time_title">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">end</property>
+                        <property name="hexpand">False</property>
+                        <property name="vexpand">False</property>
+                        <property name="label">Timestamp:</property>
+                        <property name="justify">right</property>
+                        <property name="xalign">1</property>
+                        <property name="mnemonic_widget">time_label</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="time_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="valign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="label">Status</property>
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">3</property>
+                      </packing>
+                    </child>
+
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="padding">1</property>
+                    <property name="position">1</property>
+                  </packing>
+                  <object class="GtkSizeGroup" id="device_titles_sizegroup">
+                    <widgets>
+                      <widget name="name_title_label"/>
+                      <widget name="status_title_label"/>
+                      <widget name="uuid_title_label"/>
+                      <widget name="time_title"/>
+                    </widgets>
+                  </object>
+                  <object class="GtkSizeGroup" id="device_labels_sizegroup">
+                    <widgets>
+                      <widget name="name_label"/>
+                      <widget name="status_label"/>
+                      <widget name="uuid_label"/>
+                      <widget name="time_label"/>
+                    </widgets>
+                  </object>
+                </child>
+                <!-- end of grid -->
+                <child>
+                  <object class="GtkBox" id="button_box">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">12</property>
+                    <property name="margin-left">72</property>
+                    <property name="margin-right">72</property>
+                    <property name="margin-top">36</property>
+                    <property name="margin-bottom">0</property>
+                    <property name="halign">fill</property>
+                    <child>
+                      <object class="GtkSpinner" id="spinner">
+                        <property name="visible">True</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="active">False</property>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkButton" id="connect_button">
+                        <property name="label" translatable="yes">Authorize and Connect</property>
+                        <property name="visible">True</property>
+                        <property name="no_show_all">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="halign">fill</property>
+
+                        <signal name="clicked"
+                                handler="on_connect_button_clicked_cb"
+                                object="CcBoltDeviceDialog"
+                                swapped="yes" />
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
+
+                    <child>
+                      <object class="GtkButton" id="forget_button">
+                        <property name="label" translatable="yes">Forget Device</property>
+                        <property name="visible">True</property>
+                        <property name="no_show_all">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="halign">fill</property>
+                        <signal name="clicked"
+                                handler="on_forget_button_clicked_cb"
+                                object="CcBoltDeviceDialog"
+                                swapped="yes" />
+                        <style>
+                          <class name="destructive-action"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="spinner_box">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                    </child>
+                  </object>
+
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+
+                  <object class="GtkSizeGroup" id="actions_sizegroup">
+                    <widgets>
+                      <widget name="forget_button"/>
+                      <widget name="connect_button"/>
+                    </widgets>
+                  </object>
+
+                  <object class="GtkSizeGroup" id="spinner_sizegroup">
+                    <widgets>
+                      <widget name="spinner"/>
+                      <widget name="spinner_box"/>
+                    </widgets>
+                  </object>
+
+                </child>
+              </object>
+            </child>
+
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

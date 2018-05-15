@@ -7,53 +7,50 @@ service_conf.set('bindir', control_center_bindir)
 service = 'org.gnome.ControlCenter.service'
 
 configure_file(
-  input: service + '.in',
-  output: service,
-  install: true,
-  install_dir: join_paths(control_center_datadir, 'dbus-1', 'services'),
-  configuration: service_conf
+          input : service + '.in',
+         output : service,
+        install : true,
+    install_dir : join_paths(control_center_datadir, 'dbus-1', 'services'),
+  configuration : service_conf
 )
 
 desktop = 'gnome-control-center.desktop'
 
 desktop_in = configure_file(
-  input: desktop + '.in.in',
-  output: desktop + '.in',
-  configuration: desktop_conf
+          input : desktop + '.in.in',
+         output : desktop + '.in',
+  configuration : desktop_conf
 )
 
 i18n.merge_file(
-  desktop,
-  type: 'desktop',
-  input: desktop_in,
-  output: desktop,
-  po_dir: po_dir,
-  install: true,
-  install_dir: control_center_desktopdir
+       desktop,
+         type : 'desktop',
+        input : desktop_in,
+       output : desktop,
+       po_dir : po_dir,
+      install : true,
+  install_dir : control_center_desktopdir
 )
 
 cflags = ['-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)]
 
 libshell = static_library(
-  'shell',
-  sources: 'cc-shell-model.c',
-  include_directories: [top_inc, common_inc],
-  dependencies: common_deps,
-  c_args: cflags
+               'shell',
+              sources : 'cc-shell-model.c',
+  include_directories : [top_inc, common_inc],
+         dependencies : common_deps,
+               c_args : cflags
 )
 
-common_sources = files(
+sources = files(
   'cc-application.c',
-  'cc-editable-entry.c',
-  'cc-hostname-entry.c',
+  'cc-log.c',
+  'cc-object-storage.c',
   'cc-panel-loader.c',
   'cc-panel.c',
   'cc-shell-category-view.c',
   'cc-shell-item-view.c',
-  'cc-shell-log.c',
   'cc-shell.c',
-  'hostname-helper.c',
-  'list-box-helper.c',
   'main.c'
 )
 
@@ -63,14 +60,14 @@ resource_data = files(
   'window.ui'
 )
 
-common_sources += gnome.compile_resources(
+sources += gnome.compile_resources(
   'resources',
   meson.project_name() + '.gresource.xml',
   dependencies: resource_data,
   export: true
 )
 
-sources = common_sources + files(
+sources += files(
   'cc-panel-list.c',
   'cc-window.c'
 )
@@ -78,7 +75,7 @@ sources = common_sources + files(
 shell_deps = common_deps + [
   libdevice_dep,
   liblanguage_dep,
-  polkit_gobject_dep,
+  libwidgets_dep,
   x11_dep
 ]
 
@@ -90,48 +87,61 @@ if host_is_linux_not_s390
   shell_deps += wacom_deps
 endif
 
+# Debug
+debug_conf = configuration_data()
+debug_conf.set('BUGREPORT_URL', 'http://bugzilla.gnome.org/enter_bug.cgi?product=' + meson.project_name())
+debug_conf.set10('ENABLE_TRACING', enable_tracing)
+
+sources += configure_file(
+          input : 'cc-debug.h.in',
+         output : 'cc-debug.h',
+  configuration : debug_conf
+)
+
 executable(
   meson.project_name(),
-  sources,
-  include_directories: top_inc,
-  dependencies: shell_deps,
-  c_args: cflags,
-  link_with: panels_libs + [libshell],
-  install: true
+               sources,
+  include_directories : top_inc,
+         dependencies : shell_deps,
+               c_args : cflags,
+            link_with : panels_libs + [libshell],
+              install : true
 )
 
 # Because it is confusing and somewhat problematic to directly add and compile
 # cc-panel-loader.o by another directory (i.e. the shell search provider), we
 # have to create a library and link it there, just like libshell.la.
 libpanel_loader = static_library(
-  'panel_loader',
-  sources: 'cc-panel-loader.c',
-  include_directories: top_inc,
-  dependencies: common_deps,
-  c_args: cflags + ['-DCC_PANEL_LOADER_NO_GTYPES']
+        'panel_loader',
+              sources : 'cc-panel-loader.c',
+  include_directories : top_inc,
+         dependencies : common_deps,
+               c_args : cflags + ['-DCC_PANEL_LOADER_NO_GTYPES']
 )
 
-test_unit = 'test-hostname'
-
+# libshell_test
 sources = files(
-  'hostname-helper.c',
-  test_unit + '.c'
+  'cc-panel.c',
+  'cc-shell.c',
+  'cc-log.c',
+  'cc-object-storage.c',
 )
-
-cflags += [
-  '-DTEST_SRCDIR="@0@"'.format(meson.current_source_dir()),
-  '-DTEST_TOPSRCDIR="@0@"'.format(meson.source_root())
-]
-
-exe = executable(
-  test_unit,
-  sources,
-  include_directories: top_inc,
-  dependencies: common_deps,
-  c_args: cflags
+libtestshell = static_library(
+           'testshell',
+               sources,
+  include_directories : top_inc,
+         dependencies : common_deps + [ libwidgets_dep ],
+               c_args : cflags,
+            link_with : panels_libs
 )
+libtestshell_dep = declare_dependency(
+  include_directories : top_inc,
+            link_with : libtestshell
+)
+libtestshell_deps = common_deps + [ libwidgets_dep, libtestshell_dep ]
 
-test(test_unit, exe)
 
-install_data ('org.gnome.ControlCenter.gschema.xml',
-              install_dir: control_center_schemadir)
+install_data (
+  'org.gnome.ControlCenter.gschema.xml',
+  install_dir : control_center_schemadir
+)
