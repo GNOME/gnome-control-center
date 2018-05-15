@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2018-04-23 14:18+0000\n"
-"PO-Revision-Date: 2018-04-24 21:31+0200\n"
+"POT-Creation-Date: 2018-05-15 19:04+0000\n"
+"PO-Revision-Date: 2018-05-15 21:07+0200\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -211,7 +211,7 @@ msgstr "Izklopi letalski način za omogočanje vmesnika Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/network/network.ui:101 panels/printers/pp-new-printer-dialog.c:1816
+#: panels/network/network.ui:101 panels/printers/pp-new-printer-dialog.c:1832
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -1696,8 +1696,8 @@ msgstr "Zaganjalniki"
 msgid "Launch help browser"
 msgstr "Zagon brskalnika pomoči"
 
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:237
-#: shell/cc-window.c:773 shell/gnome-control-center.desktop.in.in:3
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
+#: shell/cc-window.c:847 shell/gnome-control-center.desktop.in.in:3
 #: shell/window.ui:125
 msgid "Settings"
 msgstr "Nastavitve"
@@ -2113,7 +2113,7 @@ msgid "Single click, secondary button"
 msgstr "Enojni klik, drugi gumb"
 
 #. add proxy to device list
-#: panels/network/cc-network-panel.c:581
+#: panels/network/cc-network-panel.c:583
 msgid "Network proxy"
 msgstr "Omrežni posredniški strežnik"
 
@@ -2121,18 +2121,18 @@ msgstr "Omrežni posredniški strežnik"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: panels/network/cc-network-panel.c:717 panels/network/net-vpn.c:167
+#: panels/network/cc-network-panel.c:719 panels/network/net-vpn.c:167
 #: panels/network/net-vpn.c:296
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
-#: panels/network/cc-network-panel.c:781 panels/network/wifi.ui:282
+#: panels/network/cc-network-panel.c:783 panels/network/wifi.ui:282
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Ojoj, prišlo je do napake. Stopite v stik s ponudnikom programske opreme."
 
-#: panels/network/cc-network-panel.c:787
+#: panels/network/cc-network-panel.c:789
 msgid "NetworkManager needs to be running."
 msgstr "Program NetworkManager mora biti zagnan."
 
@@ -2284,7 +2284,7 @@ msgid "Remove VPN"
 msgstr "Odstrani VPN"
 
 #: panels/network/connection-editor/ce-page-details.c:334
-#: panels/network/network-wifi.ui:1456 shell/cc-window.c:229
+#: panels/network/network-wifi.ui:1456 shell/cc-window.c:271
 #: shell/panel-list.ui:103
 msgid "Details"
 msgstr "Podrobnosti"
@@ -4081,7 +4081,6 @@ msgstr[3] "%d sekunde"
 #. 5 hours 2 minutes 12 seconds
 #: panels/power/cc-power-panel.c:1217
 #, c-format
-#| msgid "%i %s %i %s"
 msgctxt "time"
 msgid "%s %s %s"
 msgstr "%s %s %s"
@@ -4089,7 +4088,6 @@ msgstr "%s %s %s"
 #. 2 minutes 12 seconds
 #: panels/power/cc-power-panel.c:1220
 #, c-format
-#| msgid "%i %s %i %s"
 msgctxt "time"
 msgid "%s %s"
 msgstr "%s %s"
@@ -4195,7 +4193,7 @@ msgid "_When the Power Button is pressed"
 msgstr "Ko je pritisnjen gumb za _vklop računalnika"
 
 #: panels/power/cc-power-panel.c:2533 panels/thunderbolt/cc-bolt-panel.ui:466
-#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-window.c:233
+#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-window.c:275
 #: shell/panel-list.ui:45
 msgid "Devices"
 msgstr "Naprave"
@@ -4314,19 +4312,19 @@ msgstr "Overi"
 
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
-#: panels/printers/jobs-dialog.ui:57 panels/printers/new-printer-dialog.ui:361
+#: panels/printers/jobs-dialog.ui:57 panels/printers/new-printer-dialog.ui:362
 msgid "Username"
 msgstr "Uporabniško ime"
 
 #. Translators: This is a password needed for printing.
 #: panels/printers/authentication-dialog.ui:96
-#: panels/printers/jobs-dialog.ui:70 panels/printers/new-printer-dialog.ui:382
+#: panels/printers/jobs-dialog.ui:70 panels/printers/new-printer-dialog.ui:383
 #: panels/user-accounts/data/account-dialog.ui:240
 msgid "Password"
 msgstr "Geslo"
 
 #: panels/printers/authentication-dialog.ui:139
-#: panels/printers/new-printer-dialog.ui:336
+#: panels/printers/new-printer-dialog.ui:337
 msgid "Authentication Required"
 msgstr "Zahtevana je overitev"
 
@@ -4433,16 +4431,16 @@ msgid "_Unlock"
 msgstr "_Odkleni"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:210
+#: panels/printers/new-printer-dialog.ui:211
 msgid "No Printers Found"
 msgstr "Ni najdenih tiskalnikov"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:283
+#: panels/printers/new-printer-dialog.ui:284
 msgid "Enter a network address or search for a printer"
 msgstr "Vpis omrežnega naslova oziroma niz za iskanje tiskalnika"
 
-#: panels/printers/new-printer-dialog.ui:352
+#: panels/printers/new-printer-dialog.ui:353
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
 "Vnesite uporabniško ime in geslo za ogled tiskalnikov na strežniku tiskanja."
@@ -4624,39 +4622,39 @@ msgstr "Odkleni %s."
 msgid "Enter username and password to view printers on %s."
 msgstr "Vnesite uporabniško ime in geslo za ogled tiskalnikov na %s."
 
-#: panels/printers/pp-new-printer-dialog.c:876
+#: panels/printers/pp-new-printer-dialog.c:892
 msgid "Searching for Printers"
 msgstr "Poteka iskanje tiskalnikov"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1799
+#: panels/printers/pp-new-printer-dialog.c:1815
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1804
+#: panels/printers/pp-new-printer-dialog.c:1820
 msgid "Serial Port"
 msgstr "Zaporedna vrata"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1811
+#: panels/printers/pp-new-printer-dialog.c:1827
 msgid "Parallel Port"
 msgstr "Vzporedna vrata"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1853
+#: panels/printers/pp-new-printer-dialog.c:1869
 #, c-format
 msgid "Location: %s"
 msgstr "Mesto: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1858
+#: panels/printers/pp-new-printer-dialog.c:1874
 #, c-format
 msgid "Address: %s"
 msgstr "Naslov: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1887
+#: panels/printers/pp-new-printer-dialog.c:1903
 msgid "Server requires authentication"
 msgstr "Strežnik zahteva overitev"
 
@@ -5476,7 +5474,7 @@ msgid "Preferences"
 msgstr "Možnosti"
 
 #. Label
-#: panels/sharing/cc-sharing-networks.c:305
+#: panels/sharing/cc-sharing-networks.c:307
 msgid "No networks selected for sharing"
 msgstr "Ni izbranega omrežja za souporabo"
 
@@ -5906,22 +5904,18 @@ msgstr "Neznano"
 #. Translators: The time point the device was authorized.
 #: panels/thunderbolt/cc-bolt-device-dialog.c:169
 msgid "Authorized at:"
-msgstr ""
+msgstr "Naprava je bila overjena ob:"
 
 #. Translators: The time point the device was connected.
 #: panels/thunderbolt/cc-bolt-device-dialog.c:175
-#, fuzzy
-#| msgid "Connected"
 msgid "Connected at:"
-msgstr "Povezano"
+msgstr "Povezava je bila vzpostavljena ob:"
 
 #. Translators: The time point the device was enrolled,
 #. * i.e. authorized and stored in the device database.
 #: panels/thunderbolt/cc-bolt-device-dialog.c:182
-#, fuzzy
-#| msgid "_Enroll"
 msgid "Enrolled at:"
-msgstr "_Prijava v domeno"
+msgstr "Naprava je bila vpisana ob:"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.c:250
 msgid "Failed to authorize device: "
@@ -6976,29 +6970,29 @@ msgstr "Neznana napaka"
 msgid "Should match the web address of your login provider."
 msgstr "Vpis mora biti skladen s spletnim naslovom ponudnika prijave."
 
-#: panels/user-accounts/um-account-dialog.c:229
+#: panels/user-accounts/um-account-dialog.c:228
 msgid "Failed to add account"
 msgstr "Dodajanje računa je spodletelo"
 
-#: panels/user-accounts/um-account-dialog.c:462
+#: panels/user-accounts/um-account-dialog.c:461
 msgid "Passwords do not match."
 msgstr "Gesli se ne skladata."
 
-#: panels/user-accounts/um-account-dialog.c:717
-#: panels/user-accounts/um-account-dialog.c:763
-#: panels/user-accounts/um-account-dialog.c:784
+#: panels/user-accounts/um-account-dialog.c:716
+#: panels/user-accounts/um-account-dialog.c:762
+#: panels/user-accounts/um-account-dialog.c:783
 msgid "Failed to register account"
 msgstr "Vpis računa je spodletel"
 
-#: panels/user-accounts/um-account-dialog.c:907
+#: panels/user-accounts/um-account-dialog.c:906
 msgid "No supported way to authenticate with this domain"
 msgstr "Ni podprtega načina za overitev s to domeno"
 
-#: panels/user-accounts/um-account-dialog.c:980
+#: panels/user-accounts/um-account-dialog.c:979
 msgid "Failed to join domain"
 msgstr "Pridružitev v domeno je spodletela"
 
-#: panels/user-accounts/um-account-dialog.c:1041
+#: panels/user-accounts/um-account-dialog.c:1040
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7006,7 +7000,7 @@ msgstr ""
 "Prijavno ime ne deluje.\n"
 "Poskusite vpisati drugo ime."
 
-#: panels/user-accounts/um-account-dialog.c:1048
+#: panels/user-accounts/um-account-dialog.c:1047
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7014,11 +7008,11 @@ msgstr ""
 "Prijavno geslo je napačno.\n"
 "Poskusite vpisati drugo geslo."
 
-#: panels/user-accounts/um-account-dialog.c:1056
+#: panels/user-accounts/um-account-dialog.c:1055
 msgid "Failed to log into domain"
 msgstr "Prijava v domeno je spodletela"
 
-#: panels/user-accounts/um-account-dialog.c:1114
+#: panels/user-accounts/um-account-dialog.c:1113
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Domene ni mogoče najti. Morda je vpisana napačno."
 
@@ -7201,26 +7195,25 @@ msgstr "Gesli se ne skladata."
 msgid "Browse for more pictures"
 msgstr "Brskanje med več slikami"
 
-#: panels/user-accounts/um-realm-manager.c:350
+#: panels/user-accounts/um-realm-manager.c:310
 msgid "Cannot automatically join this type of domain"
 msgstr "Ni mogoče samodejno pridružiti tej vrsti domene"
 
-#: panels/user-accounts/um-realm-manager.c:413
-#, c-format
+#: panels/user-accounts/um-realm-manager.c:313
 msgid "No such domain or realm found"
 msgstr "Ni mogoče najti take domene ali takega področja"
 
-#: panels/user-accounts/um-realm-manager.c:815
-#: panels/user-accounts/um-realm-manager.c:829
+#: panels/user-accounts/um-realm-manager.c:735
+#: panels/user-accounts/um-realm-manager.c:749
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Ni se mogoče prijaviti kot %s v domeno %s."
 
-#: panels/user-accounts/um-realm-manager.c:821
+#: panels/user-accounts/um-realm-manager.c:741
 msgid "Invalid password, please try again"
 msgstr "Napačno geslo, poskusite znova."
 
-#: panels/user-accounts/um-realm-manager.c:834
+#: panels/user-accounts/um-realm-manager.c:754
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Z domeno %s povezava ni mogoča: %s"
@@ -7712,6 +7705,15 @@ msgstr ""
 "Določilnik za odpiranje zadnjega pladnja Nastavitev. Neprepoznane vrednosti "
 "so prezrte, za prikaz pa je izbran prvi pladenj na seznamu."
 
+#: shell/org.gnome.ControlCenter.gschema.xml:13
+msgid "Show warning when running a development build of Settings"
+msgstr ""
+
+#: shell/org.gnome.ControlCenter.gschema.xml:14
+msgid ""
+"Whether Settings should show a warning when running a development build."
+msgstr ""
+
 #: shell/panel-list.ui:195
 msgid "No results found"
 msgstr "Ni najdenih zadetkov"
@@ -7719,6 +7721,17 @@ msgstr "Ni najdenih zadetkov"
 #: shell/window.ui:141
 msgid "All Settings"
 msgstr "Vse nastavitve"
+
+#: shell/window.ui:235
+msgid "Warning: Development Version"
+msgstr "Opozorilo: razvojna različica"
+
+#: shell/window.ui:236
+msgid ""
+"This version of Settings should only be used for development purposes. You "
+"may experience incorrect system behavior, data loss, and other unexpected "
+"issues. "
+msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
