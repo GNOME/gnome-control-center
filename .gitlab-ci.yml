@@ -20,8 +20,8 @@ build:
 
   script:
     - echo "== Info =="
-    - tests/ci-helper.sh "INFO"
-    - tests/ci-helper.sh "GIT_INFO"
+    - build-aux/ci/ci-helper.sh "INFO"
+    - build-aux/ci/ci-helper.sh "GIT_INFO"
 
     - echo "== Building =="
     - meson . _build
@@ -31,7 +31,7 @@ build:
     - ninja -C _build install
 
     - echo "== Report =="
-    - tests/ci-helper.sh "WARNINGS"
+    - build-aux/ci/ci-helper.sh "WARNINGS"
 
 ##
 # Stage: Test
@@ -51,8 +51,8 @@ test:
 
   script:
     - echo "== Info =="
-    - tests/ci-helper.sh "INFO"
-    - tests/ci-helper.sh "GIT_INFO"
+    - build-aux/ci/ci-helper.sh "INFO"
+    - build-aux/ci/ci-helper.sh "GIT_INFO"
 
     - |
       if [[ -n "${CI_COMMIT_TAG}" ]]; then

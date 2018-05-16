@@ -50,12 +50,12 @@ if [[ $1 == "INFO" ]]; then
     do_print_labels
 
 elif [[ $1 == "GIT_INFO" ]]; then
-    do_print_labels 'The Commit'
+    do_print_labels 'Commit'
     git log --pretty=format:"%h %cd %s" -1; echo
     do_print_labels
 
 elif [[ $1 == "WARNINGS" ]]; then
-    do_print_labels 'Warnings Report '
+    do_print_labels 'Warning Report '
     do_check_warnings
     do_print_labels
 fi
