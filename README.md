@@ -12,6 +12,15 @@ your desktop.
 See `docs/CONTRIBUTING.md` for details on the contribution process, and `docs/HACKING.md`
 for the coding style guidelines.
 
+## Testing Unstable Settings
+
+It is quite easy to test and give feedback about the development version of GNOME
+Settings. Just access https://gitlab.gnome.org/GNOME/gnome-control-center/environments,
+get the latest version, download it, double-click the file, install and run.
+
+Note that GNOME Settings Flatpak will only work if you are running
+the latest GNOME version in your host system.
+
 ## Reporting Bugs
 
 Bugs should be reported to the GNOME bug tracking system under the product
