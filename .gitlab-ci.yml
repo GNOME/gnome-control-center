@@ -91,6 +91,7 @@ packaging:
     - echo "== Flatpak packaging =="
 
     # Move needed files to the root folder
+    - cp ${PATCHES} . || true
     - cp ${PROJECT_FILE} ${MANIFEST_PATH}
 
     # Make it a develoment manifest
