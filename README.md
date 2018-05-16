@@ -15,7 +15,7 @@ for the coding style guidelines.
 ## Reporting Bugs
 
 Bugs should be reported to the GNOME bug tracking system under the product
-gnome-control-center. It is available at https://gitlab.gnome.org.
+gnome-control-center. It is available at [GitLab Issues](https://gitlab.gnome.org/GNOME/gnome-control-center/issues).
 
 In the report please include the following information -
 
