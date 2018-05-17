@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2018-04-19 13:00+0000\n"
-"PO-Revision-Date: 2018-05-04 14:13+0200\n"
+"POT-Creation-Date: 2018-05-16 18:05+0000\n"
+"PO-Revision-Date: 2018-05-17 13:11+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -222,7 +222,7 @@ msgstr "Vypněte přepínač režimu „letadlo“, aby se povolilo Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/network/network.ui:101 panels/printers/pp-new-printer-dialog.c:1816
+#: panels/network/network.ui:101 panels/printers/pp-new-printer-dialog.c:1832
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -1704,8 +1704,8 @@ msgstr "Spouštěče"
 msgid "Launch help browser"
 msgstr "Spustit prohlížeč nápovědy"
 
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:237
-#: shell/cc-window.c:773 shell/gnome-control-center.desktop.in.in:3
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
+#: shell/cc-window.c:847 shell/gnome-control-center.desktop.in.in:3
 #: shell/window.ui:125
 msgid "Settings"
 msgstr "Nastavení"
@@ -2124,7 +2124,7 @@ msgid "Single click, secondary button"
 msgstr "Kliknutí, vedlejší tlačítko"
 
 #. add proxy to device list
-#: panels/network/cc-network-panel.c:581
+#: panels/network/cc-network-panel.c:583
 msgid "Network proxy"
 msgstr "Proxy sítě"
 
@@ -2132,17 +2132,17 @@ msgstr "Proxy sítě"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: panels/network/cc-network-panel.c:717 panels/network/net-vpn.c:167
+#: panels/network/cc-network-panel.c:719 panels/network/net-vpn.c:167
 #: panels/network/net-vpn.c:296
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
-#: panels/network/cc-network-panel.c:781 panels/network/wifi.ui:282
+#: panels/network/cc-network-panel.c:783 panels/network/wifi.ui:282
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Problém, něco se stalo špatně. Kontaktujte prosím vyrobce softwaru."
 
-#: panels/network/cc-network-panel.c:787
+#: panels/network/cc-network-panel.c:789
 msgid "NetworkManager needs to be running."
 msgstr "Je zapotřebí, aby běžel program NetworkManager."
 
@@ -2297,7 +2297,7 @@ msgid "Remove VPN"
 msgstr "Odebrat VPN"
 
 #: panels/network/connection-editor/ce-page-details.c:334
-#: panels/network/network-wifi.ui:1456 shell/cc-window.c:229
+#: panels/network/network-wifi.ui:1456 shell/cc-window.c:271
 #: shell/panel-list.ui:103
 msgid "Details"
 msgstr "Podrobnosti"
@@ -4196,7 +4196,7 @@ msgid "_When the Power Button is pressed"
 msgstr "_Když je zmáčknuto vypínací tlačítko"
 
 #: panels/power/cc-power-panel.c:2533 panels/thunderbolt/cc-bolt-panel.ui:466
-#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-window.c:233
+#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-window.c:275
 #: shell/panel-list.ui:45
 msgid "Devices"
 msgstr "Zařízení"
@@ -4314,19 +4314,19 @@ msgstr "Ověření totožnosti"
 
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
-#: panels/printers/jobs-dialog.ui:57 panels/printers/new-printer-dialog.ui:361
+#: panels/printers/jobs-dialog.ui:57 panels/printers/new-printer-dialog.ui:362
 msgid "Username"
 msgstr "Uživatelské jméno"
 
 #. Translators: This is a password needed for printing.
 #: panels/printers/authentication-dialog.ui:96
-#: panels/printers/jobs-dialog.ui:70 panels/printers/new-printer-dialog.ui:382
+#: panels/printers/jobs-dialog.ui:70 panels/printers/new-printer-dialog.ui:383
 #: panels/user-accounts/data/account-dialog.ui:240
 msgid "Password"
 msgstr "Heslo"
 
 #: panels/printers/authentication-dialog.ui:139
-#: panels/printers/new-printer-dialog.ui:336
+#: panels/printers/new-printer-dialog.ui:337
 msgid "Authentication Required"
 msgstr "Požadováno ověření totožnosti"
 
@@ -4433,16 +4433,16 @@ msgid "_Unlock"
 msgstr "Odemkno_ut"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:210
+#: panels/printers/new-printer-dialog.ui:211
 msgid "No Printers Found"
 msgstr "Žádná tiskárna nebyla nalezena"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:283
+#: panels/printers/new-printer-dialog.ui:284
 msgid "Enter a network address or search for a printer"
 msgstr "Zadejte síťovou adresu tiskárny nebo ji vyhledejte"
 
-#: panels/printers/new-printer-dialog.ui:352
+#: panels/printers/new-printer-dialog.ui:353
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
 "Chcete-li vidět tiskárny z tiskového serveru, zadejte uživatelské jméno a "
@@ -4625,39 +4625,39 @@ msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Chcete-li vidět tiskárny ze serveru %s, zadejte uživatelské jméno a heslo."
 
-#: panels/printers/pp-new-printer-dialog.c:876
+#: panels/printers/pp-new-printer-dialog.c:892
 msgid "Searching for Printers"
 msgstr "Vyhledávají se tiskárny"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1799
+#: panels/printers/pp-new-printer-dialog.c:1815
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1804
+#: panels/printers/pp-new-printer-dialog.c:1820
 msgid "Serial Port"
 msgstr "Sériový port"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1811
+#: panels/printers/pp-new-printer-dialog.c:1827
 msgid "Parallel Port"
 msgstr "Paralelní port"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1853
+#: panels/printers/pp-new-printer-dialog.c:1869
 #, c-format
 msgid "Location: %s"
 msgstr "Umístění: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1858
+#: panels/printers/pp-new-printer-dialog.c:1874
 #, c-format
 msgid "Address: %s"
 msgstr "Adresa: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1887
+#: panels/printers/pp-new-printer-dialog.c:1903
 msgid "Server requires authentication"
 msgstr "Server požaduje ověření totožnosti"
 
@@ -5477,7 +5477,7 @@ msgid "Preferences"
 msgstr "Předvolby"
 
 #. Label
-#: panels/sharing/cc-sharing-networks.c:305
+#: panels/sharing/cc-sharing-networks.c:307
 msgid "No networks selected for sharing"
 msgstr "Nebyly zvoleny žádné sítě pro sdílení"
 
@@ -6985,29 +6985,29 @@ msgid "Should match the web address of your login provider."
 msgstr ""
 "Mělo by se shodovat s webovou adresou poskytovatele vašeho přihlašování."
 
-#: panels/user-accounts/um-account-dialog.c:229
+#: panels/user-accounts/um-account-dialog.c:228
 msgid "Failed to add account"
 msgstr "Přidání účtu selhalo"
 
-#: panels/user-accounts/um-account-dialog.c:462
+#: panels/user-accounts/um-account-dialog.c:461
 msgid "Passwords do not match."
 msgstr "Hesla si neodpovídají."
 
-#: panels/user-accounts/um-account-dialog.c:717
-#: panels/user-accounts/um-account-dialog.c:763
-#: panels/user-accounts/um-account-dialog.c:784
+#: panels/user-accounts/um-account-dialog.c:716
+#: panels/user-accounts/um-account-dialog.c:762
+#: panels/user-accounts/um-account-dialog.c:783
 msgid "Failed to register account"
 msgstr "Registrace účtu selhala"
 
-#: panels/user-accounts/um-account-dialog.c:907
+#: panels/user-accounts/um-account-dialog.c:906
 msgid "No supported way to authenticate with this domain"
 msgstr "Ověření s touto doménou není podporováno"
 
-#: panels/user-accounts/um-account-dialog.c:980
+#: panels/user-accounts/um-account-dialog.c:979
 msgid "Failed to join domain"
 msgstr "Připojení k doméně selhalo"
 
-#: panels/user-accounts/um-account-dialog.c:1041
+#: panels/user-accounts/um-account-dialog.c:1040
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7015,7 +7015,7 @@ msgstr ""
 "Toto přihlašovací jméno nefunguje.\n"
 "Zkuste to, prosím, znovu."
 
-#: panels/user-accounts/um-account-dialog.c:1048
+#: panels/user-accounts/um-account-dialog.c:1047
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7023,11 +7023,11 @@ msgstr ""
 "Toto přihlašovací heslo nefunguje.\n"
 "Zkuste to, prosím, znovu."
 
-#: panels/user-accounts/um-account-dialog.c:1056
+#: panels/user-accounts/um-account-dialog.c:1055
 msgid "Failed to log into domain"
 msgstr "Přihlášení do domény selhalo"
 
-#: panels/user-accounts/um-account-dialog.c:1114
+#: panels/user-accounts/um-account-dialog.c:1113
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Nelze najít doménu. Nemáte v názvu překlep?"
 
@@ -7211,26 +7211,25 @@ msgstr "Hesla si neodpovídají."
 msgid "Browse for more pictures"
 msgstr "Procházet další obrázky"
 
-#: panels/user-accounts/um-realm-manager.c:350
+#: panels/user-accounts/um-realm-manager.c:310
 msgid "Cannot automatically join this type of domain"
 msgstr "Nelze se automaticky připojit k tomuto typu domény"
 
-#: panels/user-accounts/um-realm-manager.c:413
-#, c-format
+#: panels/user-accounts/um-realm-manager.c:313
 msgid "No such domain or realm found"
 msgstr "Doména nebyla nalezena"
 
-#: panels/user-accounts/um-realm-manager.c:815
-#: panels/user-accounts/um-realm-manager.c:829
+#: panels/user-accounts/um-realm-manager.c:735
+#: panels/user-accounts/um-realm-manager.c:749
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Nelze se přihlásit jako „%s“ v doméně „%s“"
 
-#: panels/user-accounts/um-realm-manager.c:821
+#: panels/user-accounts/um-realm-manager.c:741
 msgid "Invalid password, please try again"
 msgstr "Neplatné heslo, zkuste to, prosím, znovu"
 
-#: panels/user-accounts/um-realm-manager.c:834
+#: panels/user-accounts/um-realm-manager.c:754
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Nelze se připojit k doméně „%s“: %s"
@@ -7725,6 +7724,16 @@ msgstr ""
 "Nerozpoznané hodnoty budou ignorovány a v takovém případě bude vybrán první "
 "panel v seznamu."
 
+#: shell/org.gnome.ControlCenter.gschema.xml:13
+msgid "Show warning when running a development build of Settings"
+msgstr "Zobrazit varování při spuštění vývojové sestavení"
+
+#: shell/org.gnome.ControlCenter.gschema.xml:14
+msgid ""
+"Whether Settings should show a warning when running a development build."
+msgstr ""
+"Zda mají Nastavení zobrazit varování, když je spuštěno vývojové sestavení."
+
 #: shell/panel-list.ui:195
 msgid "No results found"
 msgstr "Nebyly nalezeny žádné výsledky"
@@ -7732,6 +7741,19 @@ msgstr "Nebyly nalezeny žádné výsledky"
 #: shell/window.ui:141
 msgid "All Settings"
 msgstr "Všechna nastavení"
+
+#: shell/window.ui:235
+msgid "Warning: Development Version"
+msgstr "Varování: Vývojová verze"
+
+#: shell/window.ui:236
+msgid ""
+"This version of Settings should only be used for development purposes. You "
+"may experience incorrect system behavior, data loss, and other unexpected "
+"issues. "
+msgstr ""
+"Tato verze Nastavení by se měla používat jen pro účely vývoje. Můžete s ní "
+"narazit na nesprávné chování systému, ztrátu dat a další neočekávané chování."
 
 #. translators:
 #. * The number of sound outputs on a particular device
