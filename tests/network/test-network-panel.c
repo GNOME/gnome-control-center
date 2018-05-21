@@ -116,6 +116,23 @@ fixture_set_up_wired (NetworkPanelFixture  *fixture,
 /*****************************************************************************/
 
 static void
+test_empty_ui (NetworkPanelFixture  *fixture,
+               gconstpointer         user_data)
+{
+  GtkWidget *bt_header;
+  GtkWidget *wired_header;
+
+  /* There should be no Wired or Bluetooth sections */
+  wired_header = gtk_test_find_label(fixture->shell, "Wired");
+  g_assert_false (wired_header && gtk_widget_is_visible(wired_header));
+
+  bt_header = gtk_test_find_label(fixture->shell, "Bluetooth");
+  g_assert_false (bt_header && gtk_widget_is_visible(bt_header));
+}
+
+/*****************************************************************************/
+
+static void
 test_device_add (NetworkPanelFixture  *fixture,
                  gconstpointer         user_data)
 {
@@ -327,6 +344,13 @@ main (int argc, char **argv)
   g_setenv ("LC_ALL", "C", TRUE);
 
   gtk_test_init (&argc, &argv, NULL);
+
+  g_test_add ("/network-panel-wired/empty-ui",
+              NetworkPanelFixture,
+              NULL,
+              fixture_set_up_empty,
+              test_empty_ui,
+              fixture_tear_down);
 
   g_test_add ("/network-panel-wired/device-add",
               NetworkPanelFixture,
