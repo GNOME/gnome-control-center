@@ -78,6 +78,7 @@ set_active_panel (CcTestWindow *shell,
                                          "expand", TRUE,
                                          "fill", TRUE,
                                          NULL);
+      gtk_widget_show (GTK_WIDGET (shell->active_panel));
     }
 }
 
@@ -190,6 +191,7 @@ cc_test_window_init (CcTestWindow *self)
   self->main_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
 
   gtk_container_add (GTK_CONTAINER (self), self->main_box);
+  gtk_widget_show (self->main_box);
 }
 
 CcTestWindow *
