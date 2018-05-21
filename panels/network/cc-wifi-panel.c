@@ -153,7 +153,7 @@ add_wifi_device (CcWifiPanel *self,
   NetObject *net_device;
 
   /* Only manage Wi-Fi devices */
-  if (!NM_IS_DEVICE_WIFI (device))
+  if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
     return;
 
   /* Create the NetDevice */
