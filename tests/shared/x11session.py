@@ -79,7 +79,7 @@ class X11SessionTestCase(DBusTestCase):
         klass.X_display = display
         # Export information into our environment for tests to use
         os.environ['DISPLAY'] = ":%d" % klass.X_display
-        os.environ['WAYLAND'] = ''
+        os.environ['WAYLAND_DISPLAY'] = ''
 
         # Server should still be up and running at this point
         assert klass.xorg.poll() is None
