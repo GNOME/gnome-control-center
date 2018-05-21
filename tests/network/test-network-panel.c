@@ -75,7 +75,7 @@ fixture_set_up_empty (NetworkPanelFixture  *fixture,
   g_object_ref (fixture->panel);
   cc_shell_set_active_panel (CC_SHELL (fixture->shell), fixture->panel);
 
-  gtk_widget_show_all (fixture->shell);
+  gtk_widget_show (GTK_WIDGET (fixture->shell));
 }
 
 static void
