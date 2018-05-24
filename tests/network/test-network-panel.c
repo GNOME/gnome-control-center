@@ -184,6 +184,7 @@ test_second_device_add_remove (NetworkPanelFixture  *fixture,
 {
   NMDevice *device;
   const gchar *device_path;
+  GtkWidget *bt_header;
 
   test_device_add (fixture, user_data);
 
@@ -198,9 +199,14 @@ test_second_device_add_remove (NetworkPanelFixture  *fixture,
   nmtst_remove_device (fixture->sinfo, fixture->client, device);
   g_debug("Second device removed again\n");
 
+  /* eth1000 should be labeled "Wired" again */
   g_assert_nonnull (gtk_test_find_label (fixture->shell, "Wired"));
   g_assert_null (gtk_test_find_label (fixture->shell, "Ethernet (eth1000)"));
   g_assert_null (gtk_test_find_label (fixture->shell, "Ethernet (eth1001)"));
+
+  /* Some more checks for unrelated UI not showing up randomly */
+  bt_header = gtk_test_find_label(fixture->shell, "Bluetooth");
+  g_assert_false (bt_header && gtk_widget_is_visible(bt_header));
 }
 
 /*****************************************************************************/
@@ -322,7 +328,7 @@ test_connection_multi_add_activate (NetworkPanelFixture  *fixture,
                                     gconstpointer         user_data)
 {
   NMConnection *conn;
-  GtkWidget *sw;
+  GtkWidget *sw, *bt_header;
   g_autoptr(GError) error = NULL;
 
   /* Add a single connection (just chainging up to other test). */
@@ -353,6 +359,10 @@ test_connection_multi_add_activate (NetworkPanelFixture  *fixture,
 
   /* Hardware address is shown at this point */
   g_assert_nonnull (gtk_test_find_label (fixture->shell, "52:54:00:ab:db:23"));
+
+  /* Some more checks for unrelated UI not showing up randomly */
+  bt_header = gtk_test_find_label(fixture->shell, "Bluetooth");
+  g_assert_false (bt_header && gtk_widget_is_visible(bt_header));
 }
 
 int
