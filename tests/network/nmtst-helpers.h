@@ -76,6 +76,7 @@ typedef struct {
 	NMConnection *connection;
 
 	NMActiveConnection *ac;
+	NMRemoteConnection *rc;
 
 	const gchar * const *client_props;
 	const gchar * const *device_props;
