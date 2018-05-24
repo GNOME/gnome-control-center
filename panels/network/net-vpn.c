@@ -51,6 +51,8 @@ enum {
 
 G_DEFINE_TYPE (NetVpn, net_vpn, NET_TYPE_OBJECT)
 
+static void nm_device_refresh_vpn_ui (NetVpn *vpn);
+
 void
 net_vpn_set_show_separator (NetVpn   *self,
                             gboolean  show_separator)
@@ -66,6 +68,7 @@ connection_changed_cb (NMConnection *connection,
                        NetVpn *vpn)
 {
         net_object_emit_changed (NET_OBJECT (vpn));
+        nm_device_refresh_vpn_ui (vpn);
 }
 
 static void
