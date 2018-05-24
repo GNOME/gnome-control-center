@@ -73,6 +73,7 @@ typedef struct {
 	GMainLoop *loop;
 	NMDevice *device;
 	NMClient *client;
+	NMConnection *connection;
 
 	NMActiveConnection *ac;
 
@@ -81,17 +82,18 @@ typedef struct {
 
 	int client_remaining;
 	int device_remaining;
+	int connection_remaining;
 	int other_remaining;
 } EventWaitInfo;
 
 
 #define WAIT_CHECK_REMAINING() \
-	if (info->client_remaining == 0 && info->device_remaining == 0 && info->other_remaining == 0) { \
+	if (info->client_remaining == 0 && info->device_remaining == 0 && info->connection_remaining == 0 && info->other_remaining == 0) { \
 		g_debug ("Got expected events, quitting mainloop"); \
 		g_main_loop_quit (info->loop); \
 	} \
-	if (info->client_remaining < 0 || info->device_remaining < 0 || info->other_remaining < 0) { \
-		g_error ("Pending events are negative: client: %d, device: %d, other: %d", info->client_remaining, info->device_remaining, info->other_remaining); \
+	if (info->client_remaining < 0 || info->device_remaining < 0 || info->connection_remaining < 0 || info->other_remaining < 0) { \
+		g_error ("Pending events are negative: client: %d, device: %d, connection: %d, other: %d", info->client_remaining, info->device_remaining, info->connection_remaining, info->other_remaining); \
 		g_assert_not_reached (); \
 	}
 
@@ -101,21 +103,34 @@ typedef struct {
 #define WAIT_DEVICE(_device, count, ...) \
 	info.device = (_device); \
 	info.device_remaining = (count); \
-	{ const gchar * const *props = (const char const *[]){ __VA_ARGS__, NULL }; \
-	info.device_props = props; } \
-	g_signal_connect ((_device), "notify", G_CALLBACK (device_notify_cb), &info);
+	info.device_props = (const char *[]) {__VA_ARGS__, NULL}; \
+	g_signal_connect ((_device), "notify", G_CALLBACK (device_notify_cb), &info); \
+	connect_signals (&info, G_OBJECT (_device), info.device_props, G_CALLBACK (device_signal_cb));
 #define WAIT_CLIENT(_client, count, ...) \
 	info.client = (_client); \
 	info.client_remaining = (count); \
 	info.client_props = (const char *[]) {__VA_ARGS__, NULL}; \
-	g_signal_connect ((_client), "notify", G_CALLBACK (client_notify_cb), &info);
+	g_signal_connect ((_client), "notify", G_CALLBACK (client_notify_cb), &info); \
+	connect_signals (&info, G_OBJECT (_client), info.client_props, G_CALLBACK (client_signal_cb));
+#define WAIT_CONNECTION(_connection, count, ...) \
+	info.connection = NM_CONNECTION (_connection); \
+	info.connection_remaining = (count); \
+	{ const gchar* const *_signals = (const char *[]) {__VA_ARGS__, NULL}; \
+	connect_signals (&info, G_OBJECT (_connection), _signals, G_CALLBACK (connection_signal_cb)); }
 
 #define WAIT_DESTROY() \
 	g_source_remove (_timeout_id); \
-	if (info.device) \
+	if (info.device) { \
 		g_signal_handlers_disconnect_by_func (info.device, G_CALLBACK (device_notify_cb), &info); \
-	if (info.client) \
+		g_signal_handlers_disconnect_by_func (info.device, G_CALLBACK (device_signal_cb), &info); \
+	} \
+	if (info.client) { \
 		g_signal_handlers_disconnect_by_func (info.client, G_CALLBACK (client_notify_cb), &info); \
+		g_signal_handlers_disconnect_by_func (info.client, G_CALLBACK (client_signal_cb), &info); \
+	} \
+	if (info.connection) { \
+		g_signal_handlers_disconnect_by_func (info.connection, G_CALLBACK (connection_signal_cb), &info); \
+	} \
 	g_main_loop_unref (info.loop);
 
 #define WAIT_FINISHED(timeout) \
@@ -130,9 +145,57 @@ timeout_cb (gpointer user_data)
 	EventWaitInfo *info = user_data;
 
 	if (info)
-		g_error ("Pending events are: client: %d, device: %d, other: %d", info->client_remaining, info->device_remaining, info->other_remaining); \
+		g_error ("Pending events are: client: %d, device: %d, connection: %d, other: %d", info->client_remaining, info->device_remaining, info->connection_remaining, info->other_remaining); \
 	g_assert_not_reached ();
 	return G_SOURCE_REMOVE;
+}
+
+static void
+connect_signals (EventWaitInfo *info, GObject *object, const gchar* const* signals, GCallback handler)
+{
+	const gchar * const* signal;
+	GObjectClass *class = G_OBJECT_GET_CLASS(object);
+
+	for (signal = signals; *signal != NULL; signal++) {
+		if (g_object_class_find_property (class, *signal))
+			continue;
+
+		g_debug ("Connecting signal handler for %s", *signal);
+		g_signal_connect_data (object, *signal, handler, info, NULL, G_CONNECT_AFTER | G_CONNECT_SWAPPED);
+	}
+}
+
+static void
+device_signal_cb (gpointer user_data)
+{
+	EventWaitInfo *info = user_data;
+
+	g_debug ("Counting signal for device");
+
+	info->device_remaining--;
+	WAIT_CHECK_REMAINING()
+}
+
+static void
+client_signal_cb (gpointer user_data)
+{
+	EventWaitInfo *info = user_data;
+
+	g_debug ("Counting signal for client");
+
+	info->client_remaining--;
+	WAIT_CHECK_REMAINING()
+}
+
+static void
+connection_signal_cb (gpointer user_data)
+{
+	EventWaitInfo *info = user_data;
+
+	g_debug ("Counting signal for connection");
+
+	info->connection_remaining--;
+	WAIT_CHECK_REMAINING()
 }
 
 static void
