@@ -273,7 +273,7 @@ test_connection_add (NetworkPanelFixture  *fixture,
   nm_client_add_connection_async (fixture->client, conn, TRUE, NULL, add_cb, &info);
 
   info.other_remaining = 1;
-  WAIT_CLIENT(fixture->client, 1, NM_CLIENT_CONNECTIONS);
+  WAIT_CLIENT(fixture->client, 2, NM_CLIENT_CONNECTIONS, NM_CLIENT_CONNECTION_ADDED);
 
   WAIT_FINISHED(5)
 
