@@ -415,7 +415,8 @@ update_simple_section (CcNetworkPanel *self)
         for (i = 0, n_simple = 0; i < self->devices->len; i++) {
                 NetObject *net_object = g_ptr_array_index (self->devices, i);
 
-                if (!NET_IS_DEVICE_SIMPLE (net_object))
+                /* NetDeviceSimple but none of the subclasses */
+                if (G_OBJECT_TYPE (net_object) != NET_TYPE_DEVICE_SIMPLE)
                         continue;
 
                 net_device_simple_set_show_separator (NET_DEVICE_SIMPLE (net_object), n_simple > 0);
