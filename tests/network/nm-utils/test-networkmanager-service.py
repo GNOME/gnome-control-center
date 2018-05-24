@@ -1126,7 +1126,7 @@ class Connection(ExportedObj):
         if not verify_strict:
             return;
         t = s_con['type']
-        if t not in ['802-3-ethernet', '802-11-wireless', 'vlan', 'wimax']:
+        if t not in ['802-3-ethernet', '802-11-wireless', 'vlan', 'wimax', 'vpn']:
             raise InvalidPropertyException('connection.type: unsupported connection type "%s"' % (t))
 
     def update_connection(self, settings, verify_connection):
