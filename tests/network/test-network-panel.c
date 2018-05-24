@@ -119,6 +119,20 @@ fixture_set_up_wired (NetworkPanelFixture  *fixture,
 
 /*****************************************************************************/
 
+static GtkWidget*
+find_parent_of_type(GtkWidget *widget, GType parent)
+{
+  while (widget) {
+    widget = gtk_widget_get_parent (widget);
+    if (G_TYPE_CHECK_INSTANCE_TYPE (G_OBJECT (widget), parent))
+      return widget;
+  }
+
+  return NULL;
+}
+
+/*****************************************************************************/
+
 static void
 test_empty_ui (NetworkPanelFixture  *fixture,
                gconstpointer         user_data)
