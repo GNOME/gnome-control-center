@@ -223,6 +223,22 @@ add_cb (GObject       *object,
 }
 
 static void
+delete_cb (GObject       *object,
+           GAsyncResult  *result,
+           gpointer       user_data)
+{
+  NMRemoteConnection *connection = NM_REMOTE_CONNECTION (object);
+  EventWaitInfo *info = user_data;
+  g_autoptr(GError) error = NULL;
+
+  nm_remote_connection_delete_finish (connection, result, &error);
+  g_assert_no_error (error);
+
+  info->other_remaining--;
+  WAIT_CHECK_REMAINING()
+}
+
+static void
 test_connection_add (NetworkPanelFixture  *fixture,
                      gconstpointer         user_data)
 {
