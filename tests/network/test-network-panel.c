@@ -66,6 +66,9 @@ fixture_set_up_empty (NetworkPanelFixture  *fixture,
   fixture->client = nm_client_new (NULL, &error);
   g_assert_no_error (error);
 
+  /* Insert into object storage so that we see the same events as the panel. */
+  cc_object_storage_add_object (CC_OBJECT_NMCLIENT, fixture->client);
+
   fixture->shell = GTK_WIDGET (cc_test_window_new ());
 
   fixture->panel = g_object_new (cc_network_panel_get_type (),
@@ -83,6 +86,7 @@ fixture_tear_down (NetworkPanelFixture  *fixture,
                    gconstpointer         user_data)
 {
   g_clear_object (&fixture->panel);
+  g_clear_object (&fixture->client);
   g_clear_pointer (&fixture->shell, gtk_widget_destroy);
 
   cc_object_storage_destroy ();
