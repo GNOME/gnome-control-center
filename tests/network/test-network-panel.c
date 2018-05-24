@@ -212,13 +212,11 @@ add_cb (GObject       *object,
 {
   NMClient *client = NM_CLIENT (object);
   EventWaitInfo *info = user_data;
-  NMRemoteConnection *remote_conn;
   g_autoptr(GError) error = NULL;
 
-  remote_conn = nm_client_add_connection_finish (client, result, &error);
+  info->rc = nm_client_add_connection_finish (client, result, &error);
   g_assert_no_error (error);
-  g_assert_nonnull (remote_conn);
-  g_object_unref (remote_conn);
+  g_assert_nonnull (info->rc);
 
   info->other_remaining--;
   WAIT_CHECK_REMAINING()
@@ -241,9 +239,10 @@ test_connection_add (NetworkPanelFixture  *fixture,
   info.other_remaining = 1;
   WAIT_CLIENT(fixture->client, 1, NM_CLIENT_CONNECTIONS);
 
-  g_object_unref (conn);
-
   WAIT_FINISHED(5)
+
+  g_clear_object (&info.rc);
+  g_object_unref (conn);
 
   /* We have one (non-active) connection only, so we get a special case */
   g_assert_nonnull (gtk_test_find_label (fixture->shell, "Cable unplugged"));
