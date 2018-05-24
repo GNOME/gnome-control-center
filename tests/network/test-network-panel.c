@@ -153,7 +153,7 @@ test_device_add (NetworkPanelFixture  *fixture,
   device_path = nm_object_get_path (NM_OBJECT (fixture->main_ether));
   g_debug("Device added: %s\n", device_path);
 
-  g_assert (gtk_test_find_label(fixture->shell, "Wired") != NULL);
+  g_assert_nonnull (gtk_test_find_label(fixture->shell, "Wired"));
 }
 
 static void
