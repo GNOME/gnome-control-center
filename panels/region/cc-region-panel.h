@@ -26,45 +26,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_REGION_PANEL cc_region_panel_get_type()
-
-#define CC_REGION_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_REGION_PANEL, CcRegionPanel))
-
-#define CC_REGION_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_REGION_PANEL, CcRegionPanelClass))
-
-#define CC_IS_REGION_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_REGION_PANEL))
-
-#define CC_IS_REGION_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_REGION_PANEL))
-
-#define CC_REGION_PANEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_REGION_PANEL, CcRegionPanelClass))
-
-typedef struct _CcRegionPanel CcRegionPanel;
-typedef struct _CcRegionPanelClass CcRegionPanelClass;
-typedef struct _CcRegionPanelPrivate CcRegionPanelPrivate;
-
-struct _CcRegionPanel
-{
-  CcPanel parent;
-
-  CcRegionPanelPrivate *priv;
-};
-
-struct _CcRegionPanelClass
-{
-  CcPanelClass parent_class;
-};
-
-GType cc_region_panel_get_type (void) G_GNUC_CONST;
+#define CC_TYPE_REGION_PANEL (cc_region_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcRegionPanel, cc_region_panel, CC, REGION_PANEL, CcPanel)
 
 G_END_DECLS
 
