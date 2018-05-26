@@ -62,8 +62,7 @@ struct _GsdWacomKeyShortcutButtonPrivate
 {
   gboolean editing_mode;
 
-  GdkDevice *grab_keyboard;
-  GdkDevice *grab_pointer;
+  GdkSeat *grab_seat;
 
   guint keyval;
   guint keycode;
@@ -170,12 +169,8 @@ gsd_wacom_key_shortcut_set_editing_mode (GsdWacomKeyShortcutButton *self,
                                          GdkEvent                  *event)
 {
   GsdWacomKeyShortcutButtonPrivate *priv;
-  GdkDevice *kbd = NULL, *pointer = NULL;
-  GdkDeviceManager *device_manager;
-  GdkDisplay *display;
-  GList *devices, *l;
   GdkWindow *window;
-  guint32 time;
+  GdkSeat *seat;
 
   priv = GSD_WACOM_KEY_SHORTCUT_BUTTON (self)->priv;
 
@@ -186,46 +181,15 @@ gsd_wacom_key_shortcut_set_editing_mode (GsdWacomKeyShortcutButton *self,
 
   g_return_if_fail (window != NULL);
 
-  display = gtk_widget_get_display (GTK_WIDGET (self));
-  device_manager = gdk_display_get_device_manager (display);
-  devices = gdk_device_manager_list_devices (device_manager, GDK_DEVICE_TYPE_MASTER);
+  seat = gdk_event_get_seat (event);
 
-  for (l = devices; l != NULL; l = l->next)
-    {
-      GdkDevice *current_device;
-
-      current_device = l->data;
-      if (!kbd && gdk_device_get_source (current_device) == GDK_SOURCE_KEYBOARD)
-        kbd = current_device;
-      else if (!pointer && gdk_device_get_source (current_device) == GDK_SOURCE_MOUSE)
-        pointer = current_device;
-
-      if (kbd && pointer)
-        break;
-    }
-  g_list_free (devices);
-
-  time = gdk_event_get_time (event);
-
-  if (gdk_device_grab (kbd, window,
-                       GDK_OWNERSHIP_WINDOW, FALSE,
-                       GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK,
-                       NULL, time) != GDK_GRAB_SUCCESS)
+  if (gdk_seat_grab (seat, window, GDK_SEAT_CAPABILITY_ALL,
+		     FALSE, NULL, event, NULL, NULL) != GDK_GRAB_SUCCESS)
     return;
-
-  if (gdk_device_grab (pointer, window,
-                       GDK_OWNERSHIP_WINDOW, FALSE,
-                       GDK_BUTTON_PRESS_MASK,
-                       NULL, time) != GDK_GRAB_SUCCESS)
-    {
-      gdk_device_ungrab (kbd, time);
-      return;
-    }
 
   gtk_widget_grab_focus (GTK_WIDGET (self));
 
-  priv->grab_keyboard = kbd;
-  priv->grab_pointer = pointer;
+  priv->grab_seat = seat;
 }
 
 static void
@@ -237,15 +201,10 @@ gsd_wacom_key_shortcut_remove_editing_mode (GsdWacomKeyShortcutButton *self)
 
   priv->editing_mode = FALSE;
 
-  if (priv->grab_keyboard != NULL)
+  if (priv->grab_seat)
     {
-      gdk_device_ungrab (priv->grab_keyboard, GDK_CURRENT_TIME);
-      priv->grab_keyboard = NULL;
-    }
-  if (priv->grab_pointer != NULL)
-    {
-      gdk_device_ungrab (priv->grab_pointer, GDK_CURRENT_TIME);
-      priv->grab_pointer = NULL;
+      gdk_seat_ungrab (priv->grab_seat);
+      priv->grab_seat = NULL;
     }
 
   priv->tmp_shortcut_keyval = 0;
@@ -305,11 +264,8 @@ key_shortcut_finished_editing (GsdWacomKeyShortcutButton *self,
 {
   GsdWacomKeyShortcutButtonPrivate *priv = self->priv;
 
-  gdk_device_ungrab (priv->grab_keyboard, time);
-  gdk_device_ungrab (priv->grab_pointer, time);
-
-  priv->grab_keyboard = NULL;
-  priv->grab_pointer = NULL;
+  gdk_seat_ungrab (priv->grab_seat);
+  priv->grab_seat = NULL;
 
   priv->editing_mode = FALSE;
 
