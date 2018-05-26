@@ -257,16 +257,25 @@ static gboolean
 run_calibration (CcWacomPage *page,
 		 GVariant    *old_calibration,
 		 gdouble     *cal,
-		 gint         monitor)
+		 GdkMonitor  *monitor)
 {
+	GdkDisplay *display = gdk_monitor_get_display (monitor);
 	CcWacomPagePrivate *priv;
+	gint i, n_monitor = 0;
 
 	g_assert (page->priv->area == NULL);
 
 	priv = page->priv;
 
+	for (i = 0; i < gdk_display_get_n_monitors (display); i++) {
+		if (monitor == gdk_display_get_monitor (display, i)) {
+			n_monitor = i;
+			break;
+		}
+	}
+
 	priv->area = calib_area_new (NULL,
-				     monitor,
+				     n_monitor,
 				     cc_wacom_page_get_gdk_device (page),
 				     finish_calibration,
 				     page,
@@ -289,7 +298,7 @@ calibrate (CcWacomPage *page)
 	GVariant *old_calibration, **tmp, *array;
 	gdouble *calibration;
 	gsize ncal;
-	gint monitor;
+	GdkMonitor *monitor;
 	GdkScreen *screen;
 	GnomeRRScreen *rr_screen;
 	GnomeRROutput *output;
@@ -308,9 +317,9 @@ calibrate (CcWacomPage *page)
 
 	output = cc_wacom_device_get_output (page->priv->stylus, rr_screen);
 	gnome_rr_output_get_position (output, &x, &y);
-	monitor = gdk_screen_get_monitor_at_point (screen, x, y);
+	monitor = gdk_display_get_monitor_at_point (gdk_screen_get_display (screen), x, y);
 
-	if (monitor < 0) {
+	if (!monitor) {
 		/* The display the tablet should be mapped to could not be located.
 		 * This shouldn't happen if the EDID data is good...
 		 */

@@ -665,7 +665,7 @@ set_up_stage (CalibArea *calib_area, ClutterActor *stage)
  */
 CalibArea *
 calib_area_new (GdkScreen      *screen,
-                int             monitor,
+                int             n_monitor,
                 GdkDevice      *device,
                 FinishCallback  callback,
                 gpointer        user_data,
@@ -675,6 +675,7 @@ calib_area_new (GdkScreen      *screen,
   CalibArea *calib_area;
   GdkRectangle rect;
   GdkVisual *visual;
+  GdkMonitor *monitor;
 #ifndef FAKE_AREA
   GdkWindow *window;
   GdkCursor *cursor;
@@ -715,7 +716,8 @@ calib_area_new (GdkScreen      *screen,
   /* Move to correct screen */
   if (screen == NULL)
     screen = gdk_screen_get_default ();
-  gdk_screen_get_monitor_geometry (screen, monitor, &rect);
+  monitor = gdk_display_get_monitor (gdk_screen_get_display (screen), n_monitor);
+  gdk_monitor_get_geometry (monitor, &rect);
 
   calib_area->calibrator.geometry = rect;
 
@@ -742,7 +744,7 @@ calib_area_new (GdkScreen      *screen,
                     G_CALLBACK (on_button_press_event),
                     calib_area);
 
-  gtk_window_fullscreen_on_monitor (GTK_WINDOW (calib_area->window), screen, monitor);
+  gtk_window_fullscreen_on_monitor (GTK_WINDOW (calib_area->window), screen, n_monitor);
 
   visual = gdk_screen_get_rgba_visual (screen);
   if (visual != NULL)
