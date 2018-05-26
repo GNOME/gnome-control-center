@@ -216,16 +216,16 @@ cc_wacom_page_get_gdk_device (CcWacomPage *page)
 {
 	GsdDevice *gsd_device;
 	GdkDevice *gdk_device = NULL;
-	GdkDeviceManager *device_manager;
 	GdkDisplay *display;
+	GdkSeat *seat;
 	GList *slaves, *l;
 
 	gsd_device = cc_wacom_device_get_device (page->priv->stylus);
 	g_return_val_if_fail (GSD_IS_DEVICE (gsd_device), NULL);
 
 	display = gtk_widget_get_display (GTK_WIDGET (page));
-	device_manager = gdk_display_get_device_manager (display);
-	slaves = gdk_device_manager_list_devices (device_manager, GDK_DEVICE_TYPE_SLAVE);
+	seat = gdk_display_get_default_seat (display);
+	slaves = gdk_seat_get_slaves (seat, GDK_SEAT_CAPABILITY_TABLET_STYLUS);
 
 	for (l = slaves; l && !gdk_device; l = l->next) {
 		gchar *device_node = NULL;
