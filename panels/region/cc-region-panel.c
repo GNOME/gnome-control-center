@@ -59,8 +59,6 @@
 
 #define DEFAULT_LOCALE "en_US.utf-8"
 
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (self->builder, s))
-
 typedef enum {
         CHOOSE_LANGUAGE,
         CHOOSE_REGION,
@@ -73,8 +71,6 @@ typedef enum {
 struct _CcRegionPanel {
 	CcPanel      parent_instance;
 
-	GtkBuilder *builder;
-
         GtkWidget   *login_button;
         GtkWidget   *login_label;
         gboolean     login;
@@ -85,7 +81,7 @@ struct _CcRegionPanel {
         GDBusProxy  *session;
         GCancellable *cancellable;
 
-        GtkWidget *restart_notification;
+        GtkWidget *restart_revealer;
         gchar *needs_restart_file_path;
 
         GtkWidget     *language_section;
@@ -112,6 +108,8 @@ struct _CcRegionPanel {
         GtkWidget *move_down_input;
         GtkWidget *show_config;
         GtkWidget *show_layout;
+        GtkWidget *restart_button;
+        GtkWidget *language_list;
 
         GSettings *input_settings;
         GnomeXkbInfo *xkb_info;
@@ -146,7 +144,6 @@ cc_region_panel_finalize (GObject *object)
         g_clear_object (&self->permission);
         g_clear_object (&self->localed);
         g_clear_object (&self->session);
-        g_clear_object (&self->builder);
         g_clear_object (&self->locale_settings);
         g_clear_object (&self->input_settings);
         g_clear_object (&self->xkb_info);
@@ -192,13 +189,34 @@ cc_region_panel_get_help_uri (CcPanel *panel)
 static void
 cc_region_panel_class_init (CcRegionPanelClass * klass)
 {
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	CcPanelClass * panel_class = CC_PANEL_CLASS (klass);
+	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
 	panel_class->get_help_uri = cc_region_panel_get_help_uri;
 
         object_class->constructed = cc_region_panel_constructed;
 	object_class->finalize = cc_region_panel_finalize;
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/region.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_row);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_label);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_label);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_revealer);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_section);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, options_button);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_list);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, add_input);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, remove_input);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, move_up_input);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, move_down_input);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, show_config);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, show_layout);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_label);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_list);
 }
 
 static void
@@ -226,7 +244,7 @@ set_restart_notification_visible (CcRegionPanel *self,
                 setlocale (LC_MESSAGES, locale);
         }
 
-        gtk_revealer_set_reveal_child (GTK_REVEALER (self->restart_notification), visible);
+        gtk_revealer_set_reveal_child (GTK_REVEALER (self->restart_revealer), visible);
 
         if (locale)
                 setlocale (LC_MESSAGES, current_locale);
@@ -607,8 +625,6 @@ update_language_from_user (CcRegionPanel *self)
 static void
 setup_language_section (CcRegionPanel *self)
 {
-        GtkWidget *widget;
-
         self->user = act_user_manager_get_user_by_id (self->user_manager, getuid ());
         g_signal_connect_swapped (self->user, "notify::language",
                                   G_CALLBACK (update_language_from_user), self);
@@ -619,23 +635,14 @@ setup_language_section (CcRegionPanel *self)
         g_signal_connect_swapped (self->locale_settings, "changed::" KEY_REGION,
                                   G_CALLBACK (update_region_from_setting), self);
 
-        self->language_section = WID ("language_section");
-        self->language_row = GTK_LIST_BOX_ROW (WID ("language_row"));
-        self->language_label = WID ("language_label");
-        self->formats_row = GTK_LIST_BOX_ROW (WID ("formats_row"));
-        self->formats_label = WID ("formats_label");
+        g_signal_connect_swapped (self->restart_button, "clicked", G_CALLBACK (restart_now), self);
 
-        self->restart_notification = WID ("restart-revealer");
-        widget = WID ("restart-button");
-        g_signal_connect_swapped (widget, "clicked", G_CALLBACK (restart_now), self);
-
-        widget = WID ("language_list");
-        gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget),
+        gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->language_list),
                                          GTK_SELECTION_NONE);
-        gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
+        gtk_list_box_set_header_func (GTK_LIST_BOX (self->language_list),
                                       cc_list_box_update_header_func,
                                       NULL, NULL);
-        g_signal_connect_swapped (widget, "row-activated",
+        g_signal_connect_swapped (self->language_list, "row-activated",
                                   G_CALLBACK (activate_language_row), self);
 
         update_language_from_user (self);
@@ -1350,16 +1357,6 @@ setup_input_section (CcRegionPanel *self)
         maybe_start_ibus ();
 #endif
 
-        self->input_section = WID ("input_section");
-        self->options_button = WID ("input_options");
-        self->input_list = WID ("input_list");
-        self->add_input = WID ("input_source_add");
-        self->remove_input = WID ("input_source_remove");
-        self->move_up_input = WID ("input_source_up");
-        self->move_down_input = WID ("input_source_down");
-        self->show_config = WID ("input_source_config");
-        self->show_layout = WID ("input_source_layout");
-
         g_signal_connect_swapped (self->options_button, "clicked",
                                   G_CALLBACK (show_input_options), self);
         g_signal_connect_swapped (self->add_input, "clicked",
@@ -1651,7 +1648,6 @@ setup_login_button (CcRegionPanel *self)
                           (GAsyncReadyCallback) localed_proxy_ready,
                           self);
 
-        self->login_label = WID ("login-label");
         self->login_button = gtk_toggle_button_new_with_mnemonic (_("Login _Screen"));
         gtk_style_context_add_class (gtk_widget_get_style_context (self->login_button),
                                      "text-button");
@@ -1696,15 +1692,7 @@ cc_region_panel_init (CcRegionPanel *self)
 
         g_resources_register (cc_region_get_resource ());
 
-	self->builder = gtk_builder_new ();
-
-	gtk_builder_add_from_resource (self->builder,
-                                       "/org/gnome/control-center/region/region.ui",
-                                       &error);
-	if (error != NULL) {
-		g_warning ("Error loading UI file: %s", error->message);
-		return;
-	}
+        gtk_widget_init_template (GTK_WIDGET (self));
 
         self->user_manager = act_user_manager_get_default ();
 
@@ -1722,9 +1710,6 @@ cc_region_panel_init (CcRegionPanel *self)
         setup_login_button (self);
         setup_language_section (self);
         setup_input_section (self);
-
-	gtk_container_add (GTK_CONTAINER (self),
-                           GTK_WIDGET (gtk_builder_get_object (self->builder, "vbox_region")));
 
         self->needs_restart_file_path = g_build_filename (g_get_user_runtime_dir (),
                                                           "gnome-control-center-region-needs-restart",
