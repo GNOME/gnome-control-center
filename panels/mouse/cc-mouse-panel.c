@@ -30,15 +30,14 @@
 
 #include <glib/gi18n.h>
 
-CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
-
-#define MOUSE_PANEL_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_MOUSE_PANEL, CcMousePanelPrivate))
-
-struct _CcMousePanelPrivate
+struct _CcMousePanel
 {
-  GtkWidget  *stack;
+  CcPanel    parent_instance;
+
+  GtkWidget *stack;
 };
+
+CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
 
 enum {
   CC_MOUSE_PAGE_PREFS,
@@ -60,11 +59,10 @@ cc_mouse_panel_get_help_uri (CcPanel *panel)
 static void
 shell_test_button_toggled (GtkToggleButton *button, CcMousePanel *panel)
 {
-  CcMousePanelPrivate *priv = panel->priv;
   gboolean active;
 
   active = gtk_toggle_button_get_active (button);
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), active ? "test_widget" : "prefs_widget");
+  gtk_stack_set_visible_child_name (GTK_STACK (panel->stack), active ? "test_widget" : "prefs_widget");
 }
 
 static void
@@ -95,10 +93,8 @@ cc_mouse_panel_constructed (GObject *object)
 static void
 cc_mouse_panel_init (CcMousePanel *self)
 {
-  CcMousePanelPrivate *priv;
   GtkWidget *prefs_widget, *test_widget;
 
-  priv = self->priv = MOUSE_PANEL_PRIVATE (self);
   g_resources_register (cc_mouse_get_resource ());
 
   prefs_widget = cc_mouse_properties_new ();
@@ -106,12 +102,12 @@ cc_mouse_panel_init (CcMousePanel *self)
   test_widget = cc_mouse_test_new ();
   gtk_widget_show (test_widget);
 
-  priv->stack = gtk_stack_new ();
-  gtk_widget_show (priv->stack);
-  gtk_stack_add_named (GTK_STACK (priv->stack), prefs_widget, "prefs_widget");
-  gtk_stack_add_named (GTK_STACK (priv->stack), test_widget, "test_widget");
+  self->stack = gtk_stack_new ();
+  gtk_widget_show (self->stack);
+  gtk_stack_add_named (GTK_STACK (self->stack), prefs_widget, "prefs_widget");
+  gtk_stack_add_named (GTK_STACK (self->stack), test_widget, "test_widget");
 
-  gtk_container_add (GTK_CONTAINER (self), priv->stack);
+  gtk_container_add (GTK_CONTAINER (self), self->stack);
 }
 
 static void
@@ -119,8 +115,6 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (CcMousePanelPrivate));
 
   panel_class->get_help_uri = cc_mouse_panel_get_help_uri;
 

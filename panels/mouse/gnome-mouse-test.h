@@ -25,31 +25,9 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_MOUSE_TEST cc_mouse_test_get_type ()
+#define CC_TYPE_MOUSE_TEST (cc_mouse_test_get_type ())
+G_DECLARE_FINAL_TYPE (CcMouseTest, cc_mouse_test, CC, MOUSE_TEST, GtkBin)
 
-#define CC_MOUSE_TEST(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_TYPE_MOUSE_TEST, CcMouseTest))
-#define CC_MOUSE_TEST_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), CC_TYPE_MOUSE_TEST, CcMouseTestClass))
-#define CC_IS_MOUSE_TEST(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CC_TYPE_MOUSE_TEST))
-#define CC_IS_MOUSE_TEST_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), CC_TYPE_MOUSE_TEST))
-#define CC_MOUSE_TEST_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), CC_TYPE_MOUSE_TEST, CcMouseTestClass))
-
-typedef struct _CcMouseTest CcMouseTest;
-typedef struct _CcMouseTestClass CcMouseTestClass;
-typedef struct _CcMouseTestPrivate CcMouseTestPrivate;
-
-struct _CcMouseTest
-{
-  GtkAlignment parent;
-
-  CcMouseTestPrivate *priv;
-};
-
-struct _CcMouseTestClass
-{
-  GtkAlignmentClass parent_class;
-};
-
-GType cc_mouse_test_get_type (void) G_GNUC_CONST;
 GtkWidget *cc_mouse_test_new (void);
 
 G_END_DECLS
