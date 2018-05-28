@@ -28,31 +28,9 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_MOUSE_PROPERTIES cc_mouse_properties_get_type ()
+#define CC_TYPE_MOUSE_PROPERTIES (cc_mouse_properties_get_type ())
+G_DECLARE_FINAL_TYPE (CcMouseProperties, cc_mouse_properties, CC, MOUSE_PROPERTIES, GtkBin)
 
-#define CC_MOUSE_PROPERTIES(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_TYPE_MOUSE_PROPERTIES, CcMouseProperties))
-#define CC_MOUSE_PROPERTIES_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), CC_TYPE_MOUSE_PROPERTIES, CcMousePropertiesClass))
-#define CC_IS_MOUSE_PROPERTIES(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CC_TYPE_MOUSE_PROPERTIES))
-#define CC_IS_MOUSE_PROPERTIES_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), CC_TYPE_MOUSE_PROPERTIES))
-#define CC_MOUSE_PROPERTIES_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), CC_TYPE_MOUSE_PROPERTIES, CcMousePropertiesClass))
-
-typedef struct _CcMouseProperties CcMouseProperties;
-typedef struct _CcMousePropertiesClass CcMousePropertiesClass;
-typedef struct _CcMousePropertiesPrivate CcMousePropertiesPrivate;
-
-struct _CcMouseProperties
-{
-  GtkAlignment parent;
-
-  CcMousePropertiesPrivate *priv;
-};
-
-struct _CcMousePropertiesClass
-{
-  GtkAlignmentClass parent_class;
-};
-
-GType cc_mouse_properties_get_type (void) G_GNUC_CONST;
 GtkWidget *cc_mouse_properties_new (void);
 
 G_END_DECLS
