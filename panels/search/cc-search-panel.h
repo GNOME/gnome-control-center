@@ -18,8 +18,7 @@
  * Author: Cosimo Cecchi <cosimoc@gnome.org>
  */
 
-#ifndef _CC_SEARCH_PANEL_H
-#define _CC_SEARCH_PANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -29,5 +28,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcSearchPanel, cc_search_panel, CC, SEARCH_PANEL, CcPanel)
 
 G_END_DECLS
-
-#endif /* _CC_SEARCH_PANEL_H */
