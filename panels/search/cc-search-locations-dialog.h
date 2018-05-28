@@ -18,8 +18,7 @@
  * Author: Cosimo Cecchi <cosimoc@gnome.org>
  */
 
-#ifndef _CC_SEARCH_LOCATIONS_DIALOG_H
-#define _CC_SEARCH_LOCATIONS_DIALOG_H
+#pragma once
 
 #include "cc-search-panel.h"
 
@@ -29,5 +28,3 @@ G_DECLARE_FINAL_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, CC, S
 CcSearchLocationsDialog *cc_search_locations_dialog_new (CcSearchPanel *panel);
 
 gboolean cc_search_locations_dialog_is_available        (void);
-
-#endif /* _CC_SEARCH_LOCATIONS_DIALOG_H */
