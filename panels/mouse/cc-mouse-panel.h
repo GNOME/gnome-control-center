@@ -18,8 +18,7 @@
  *
  */
 
-#ifndef _CC_MOUSE_PANEL_H
-#define _CC_MOUSE_PANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -29,5 +28,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcMousePanel, cc_mouse_panel, CC, MOUSE_PANEL, CcPanel)
 
 G_END_DECLS
-
-#endif /* _CC_MOUSE_PANEL_H */
