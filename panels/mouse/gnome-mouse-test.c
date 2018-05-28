@@ -32,8 +32,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#define WID(x) (GtkWidget *) gtk_builder_get_object (self->builder, x)
-
 /* Click test button sizes. */
 #define SHADOW_SIZE (10.0 / 180 * size)
 #define SHADOW_SHIFT_Y (-1.0 / 180 * size)
@@ -59,7 +57,11 @@ struct _CcMouseTest
 {
 	GtkBin parent_instance;
 
-	GtkBuilder *builder;
+	GtkWidget *button_drawing_area;
+	GtkWidget *information_label;
+	GtkWidget *image;
+	GtkWidget *scrolled_window_adjustment;
+	GtkWidget *viewport;
 
 	guint32 double_click_timestamp;
 	gint double_click_state;
@@ -81,7 +83,7 @@ test_maybe_timeout (CcMouseTest *self)
 {
 	self->double_click_state = DOUBLE_CLICK_TEST_OFF;
 
-	gtk_widget_queue_draw (WID ("button_drawing_area"));
+	gtk_widget_queue_draw (self->button_drawing_area);
 
 	self->button_drawing_area_timeout_id = 0;
 
@@ -127,7 +129,7 @@ setup_information_label (CcMouseTest *self)
 	}
 
 	if (self->double_click_state == DOUBLE_CLICK_TEST_OFF) {
-		gtk_label_set_label (GTK_LABEL (WID ("information_label")), _("Try clicking, double clicking, scrolling"));
+		gtk_label_set_label (GTK_LABEL (self->information_label), _("Try clicking, double clicking, scrolling"));
 		return;
 	}
 
@@ -149,7 +151,7 @@ setup_information_label (CcMouseTest *self)
 	}
 
 	label_text = g_strconcat ("<b>", message, "</b>", NULL);
-	gtk_label_set_markup (GTK_LABEL (WID ("information_label")), label_text);
+	gtk_label_set_markup (GTK_LABEL (self->information_label), label_text);
 
 	self->information_label_timeout_id = g_timeout_add (2500, (GSourceFunc) information_label_timeout, self);
 }
@@ -170,7 +172,7 @@ setup_scroll_image (CcMouseTest *self)
 		resource = "/org/gnome/control-center/mouse/scroll-test-gegl.svg";
 	else
 		resource = "/org/gnome/control-center/mouse/scroll-test.svg";
-	gtk_image_set_from_resource (GTK_IMAGE (WID ("image")), resource);
+	gtk_image_set_from_resource (GTK_IMAGE (self->image), resource);
 
 	if (self->double_click_state != DOUBLE_CLICK_TEST_GEGL)
 		return;
@@ -224,7 +226,7 @@ button_drawing_area_button_press_event (GtkWidget *widget,
 
 	self->double_click_timestamp = event->time;
 
-	gtk_widget_queue_draw (WID ("button_drawing_area"));
+	gtk_widget_queue_draw (self->button_drawing_area);
 
 	self->button_state = event->button;
 	setup_information_label (self);
@@ -297,23 +299,23 @@ setup_dialog (CcMouseTest *self)
 	GtkAdjustment *adjustment;
 	GtkStyleProvider *provider;
 
-	g_signal_connect (WID ("button_drawing_area"), "button_press_event",
+	g_signal_connect (self->button_drawing_area, "button_press_event",
 			  G_CALLBACK (button_drawing_area_button_press_event),
 			  self);
-	g_signal_connect (WID ("button_drawing_area"), "draw",
+	g_signal_connect (self->button_drawing_area, "draw",
 			  G_CALLBACK (button_drawing_area_draw_event),
 			  self);
 
-	adjustment = GTK_ADJUSTMENT (WID ("scrolled_window_adjustment"));
+	adjustment = GTK_ADJUSTMENT (self->scrolled_window_adjustment);
 	gtk_adjustment_set_value (adjustment,
 				  gtk_adjustment_get_upper (adjustment));
 
 	provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
 	gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider), "* {background: #565854}", -1, NULL);
-	gtk_style_context_add_provider (gtk_widget_get_style_context (WID ("viewport")),
+	gtk_style_context_add_provider (gtk_widget_get_style_context (self->viewport),
 					provider,
 					GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-	gtk_style_context_add_provider (gtk_widget_get_style_context (WID ("button_drawing_area")),
+	gtk_style_context_add_provider (gtk_widget_get_style_context (self->button_drawing_area),
 					provider,
 					GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 	g_object_unref (provider);
@@ -325,7 +327,6 @@ cc_mouse_test_finalize (GObject *object)
 	CcMouseTest *self = CC_MOUSE_TEST (object);
 
 	g_clear_object (&self->mouse_settings);
-	g_clear_object (&self->builder);
 
 	if (self->information_label_timeout_id != 0) {
 		g_source_remove (self->information_label_timeout_id);
@@ -346,12 +347,20 @@ cc_mouse_test_finalize (GObject *object)
 }
 
 static void
-cc_mouse_test_class_init (CcMouseTestClass *class)
+cc_mouse_test_class_init (CcMouseTestClass *klass)
 {
-	GObjectClass *object_class;
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	object_class = G_OBJECT_CLASS (class);
 	object_class->finalize = cc_mouse_test_finalize;
+
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/mouse/gnome-mouse-test.ui");
+
+	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, button_drawing_area);
+	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, information_label);
+	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, image);
+	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, scrolled_window_adjustment);
+	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, viewport);
 }
 
 static void
@@ -359,10 +368,7 @@ cc_mouse_test_init (CcMouseTest *self)
 {
 	g_autoptr(GError) error = NULL;
 
-	self->builder = gtk_builder_new ();
-	gtk_builder_add_from_resource (self->builder,
-				       "/org/gnome/control-center/mouse/gnome-mouse-test.ui",
-				       &error);
+	gtk_widget_init_template (GTK_WIDGET (self));
 
 	self->double_click_timestamp = 0;
 	self->double_click_state = DOUBLE_CLICK_TEST_OFF;
@@ -373,8 +379,6 @@ cc_mouse_test_init (CcMouseTest *self)
 	self->information_label_timeout_id = 0;
 	self->button_drawing_area_timeout_id = 0;
 	self->scroll_image_timeout_id = 0;
-
-	gtk_container_add (GTK_CONTAINER (self), WID ("test_widget"));
 
 	setup_dialog (self);
 }
