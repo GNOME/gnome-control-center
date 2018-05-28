@@ -25,45 +25,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SEARCH_PANEL cc_search_panel_get_type()
-
-#define CC_SEARCH_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_SEARCH_PANEL, CcSearchPanel))
-
-#define CC_SEARCH_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_SEARCH_PANEL, CcSearchPanelClass))
-
-#define CC_IS_SEARCH_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_SEARCH_PANEL))
-
-#define CC_IS_SEARCH_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_SEARCH_PANEL))
-
-#define CC_SEARCH_PANEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_SEARCH_PANEL, CcSearchPanelClass))
-
-typedef struct _CcSearchPanel CcSearchPanel;
-typedef struct _CcSearchPanelClass CcSearchPanelClass;
-typedef struct _CcSearchPanelPrivate CcSearchPanelPrivate;
-
-struct _CcSearchPanel
-{
-  CcPanel parent;
-
-  CcSearchPanelPrivate *priv;
-};
-
-struct _CcSearchPanelClass
-{
-  CcPanelClass parent_class;
-};
-
-GType cc_search_panel_get_type (void) G_GNUC_CONST;
+#define CC_TYPE_SEARCH_PANEL (cc_search_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcSearchPanel, cc_search_panel, CC, SEARCH_PANEL, CcPanel)
 
 G_END_DECLS
 

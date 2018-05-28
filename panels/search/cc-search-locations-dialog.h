@@ -24,15 +24,10 @@
 #include "cc-search-panel.h"
 
 #define CC_SEARCH_LOCATIONS_DIALOG_TYPE (cc_search_locations_dialog_get_type ())
-#define CC_SEARCH_LOCATIONS_DIALOG(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_SEARCH_LOCATIONS_DIALOG_TYPE, CcSearchLocationsDialog))
+G_DECLARE_FINAL_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, CC, SEARCH_LOCATIONS_DIALOG, GtkDialog)
 
-typedef struct _CcSearchLocationsDialog      CcSearchLocationsDialog;
-typedef struct _CcSearchLocationsDialogClass CcSearchLocationsDialogClass;
+CcSearchLocationsDialog *cc_search_locations_dialog_new (CcSearchPanel *panel);
 
-GType                    cc_search_locations_dialog_get_type   (void);
-
-CcSearchLocationsDialog *cc_search_locations_dialog_new        (CcSearchPanel *panel);
-
-gboolean cc_search_locations_dialog_is_available (void);
+gboolean cc_search_locations_dialog_is_available        (void);
 
 #endif /* _CC_SEARCH_LOCATIONS_DIALOG_H */
