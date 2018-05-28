@@ -18,8 +18,7 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#ifndef _CC_PRIVACY_PANEL_H
-#define _CC_PRIVACY_PANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -29,5 +28,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcPrivacyPanel, cc_privacy_panel, CC, PRIVACY_PANEL, CcPanel)
 
 G_END_DECLS
-
-#endif /* _CC_PRIVACY_PANEL_H */
