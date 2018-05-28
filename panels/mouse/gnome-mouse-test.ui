@@ -7,6 +7,8 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
+  <template class="CcMouseTest" parent="GtkBin">
+    <child>
       <object class="GtkGrid" id="test_widget">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
@@ -95,4 +97,6 @@
           </packing>
         </child>
       </object>
+    </child>
+  </template>
 </interface>
