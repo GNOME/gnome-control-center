@@ -14,7 +14,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">Day</property>
-        <property name="mnemonic_widget">day-spinbutton</property>
+        <property name="mnemonic_widget">day_spinbutton</property>
         <property name="xalign">1</property>
         <style>
           <class name="dim-label"/>
@@ -30,7 +30,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">Month</property>
-        <property name="mnemonic_widget">month-combobox</property>
+        <property name="mnemonic_widget">month_combobox</property>
         <property name="xalign">1</property>
         <style>
           <class name="dim-label"/>
@@ -46,7 +46,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">Year</property>
-        <property name="mnemonic_widget">year-spinbutton</property>
+        <property name="mnemonic_widget">year_spinbutton</property>
         <property name="xalign">1</property>
         <style>
           <class name="dim-label"/>
@@ -58,7 +58,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkSpinButton" id="day-spinbutton">
+      <object class="GtkSpinButton" id="day_spinbutton">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="invisible_char">•</property>
@@ -72,10 +72,9 @@
       </packing>
     </child>
     <child>
-      <object class="GtkComboBox" id="month-combobox">
+      <object class="GtkComboBox" id="month_combobox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="model">month-liststore</property>
         <child>
           <object class="GtkCellRendererText" id="cellrenderertext3"/>
           <attributes>
@@ -89,7 +88,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkSpinButton" id="year-spinbutton">
+      <object class="GtkSpinButton" id="year_spinbutton">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="invisible_char">•</property>
