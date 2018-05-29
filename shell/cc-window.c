@@ -161,6 +161,25 @@ get_symbolic_icon_name_from_g_icon (GIcon *gicon)
   return NULL;
 }
 
+static void
+remove_all_custom_widgets (CcWindow *self)
+{
+  GtkWidget *widget;
+  guint i;
+
+  CC_ENTRY;
+
+  /* remove from the header */
+  for (i = 0; i < self->custom_widgets->len; i++)
+    {
+      widget = g_ptr_array_index (self->custom_widgets, i);
+      gtk_container_remove (GTK_CONTAINER (self->top_right_box), widget);
+    }
+  g_ptr_array_set_size (self->custom_widgets, 0);
+
+  CC_EXIT;
+}
+
 static gboolean
 activate_panel (CcWindow          *self,
                 const gchar       *id,
@@ -178,6 +197,9 @@ activate_panel (CcWindow          *self,
 
   if (visibility == CC_PANEL_HIDDEN)
     return FALSE;
+
+  /* clear any custom widgets */
+  remove_all_custom_widgets (self);
 
   timer = g_timer_new ();
 
@@ -221,25 +243,6 @@ activate_panel (CcWindow          *self,
   g_debug ("Time to open panel '%s': %lfs", name, ellapsed_time);
 
   return TRUE;
-}
-
-static void
-remove_all_custom_widgets (CcWindow *self)
-{
-  GtkWidget *widget;
-  guint i;
-
-  CC_ENTRY;
-
-  /* remove from the header */
-  for (i = 0; i < self->custom_widgets->len; i++)
-    {
-      widget = g_ptr_array_index (self->custom_widgets, i);
-      gtk_container_remove (GTK_CONTAINER (self->top_right_box), widget);
-    }
-  g_ptr_array_set_size (self->custom_widgets, 0);
-
-  CC_EXIT;
 }
 
 static void
@@ -431,9 +434,6 @@ set_active_panel_from_id (CcShell      *shell,
       g_debug ("Failed to activate panel");
       return TRUE;
     }
-
-  /* clear any custom widgets */
-  remove_all_custom_widgets (self);
 
   if (add_to_history)
     add_current_panel_to_history (shell, start_id);
