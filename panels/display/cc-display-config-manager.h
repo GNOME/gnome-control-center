@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef _CC_DISPLAY_CONFIG_MANAGER_H
-#define _CC_DISPLAY_CONFIG_MANAGER_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -42,5 +41,3 @@ CcDisplayConfig * cc_display_config_manager_get_current (CcDisplayConfigManager 
 void _cc_display_config_manager_emit_changed (CcDisplayConfigManager *self);
 
 G_END_DECLS
-
-#endif /* _CC_DISPLAY_CONFIG_MANAGER_H */
