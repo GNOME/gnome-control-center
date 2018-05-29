@@ -177,7 +177,8 @@ monitor_labeler_show (CcDisplayPanel *self)
 static void
 ensure_monitor_labels (CcDisplayPanel *self)
 {
-  GList *windows, *w;
+  g_autoptr(GList) windows;
+  GList *w;
 
   windows = gtk_window_list_toplevels ();
 
@@ -192,8 +193,6 @@ ensure_monitor_labels (CcDisplayPanel *self)
 
   if (!w)
     monitor_labeler_hide (self);
-
-  g_list_free (windows);
 }
 
 static void
@@ -223,13 +222,11 @@ active_panel_changed (CcShell    *shell,
                       GParamSpec *pspec,
                       CcPanel    *self)
 {
-  CcPanel *panel = NULL;
+  g_autoptr(CcPanel) panel = NULL;
 
   g_object_get (shell, "active-panel", &panel, NULL);
   if (panel != self)
     reset_titlebar (CC_DISPLAY_PANEL (self));
-
-  g_object_unref (panel);
 }
 
 static void
@@ -348,7 +345,7 @@ make_scrollable (GtkWidget *widget)
 static GtkWidget *
 make_bold_label (const gchar *text)
 {
-  GtkCssProvider *provider;
+  g_autoptr(GtkCssProvider) provider = NULL;
   GtkWidget *label = gtk_label_new (text);
 
   provider = gtk_css_provider_new ();
@@ -357,7 +354,6 @@ make_bold_label (const gchar *text)
   gtk_style_context_add_provider (gtk_widget_get_style_context (label),
                                   GTK_STYLE_PROVIDER (provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-  g_object_unref (provider);
 
   return label;
 }
@@ -464,7 +460,7 @@ make_list_box (void)
 static GtkWidget *
 make_list_transparent (GtkWidget *listbox)
 {
-  GtkCssProvider *provider;
+  g_autoptr(GtkCssProvider) provider = NULL;
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider),
@@ -472,7 +468,6 @@ make_list_transparent (GtkWidget *listbox)
   gtk_style_context_add_provider (gtk_widget_get_style_context (listbox),
                                   GTK_STYLE_PROVIDER (provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-  g_object_unref (provider);
 
   return listbox;
 }
@@ -815,10 +810,8 @@ round_scale_for_ui (double scale)
 static GtkWidget *
 make_label_for_scale (double scale)
 {
-  gchar *text = g_strdup_printf (" %d %% ", (int) (round_scale_for_ui (scale)*100));
-  GtkWidget *label = gtk_label_new (text);
-  g_free (text);
-  return label;
+  g_autofree gchar *text = g_strdup_printf (" %d %% ", (int) (round_scale_for_ui (scale)*100));
+  return gtk_label_new (text);
 }
 
 #define MAX_N_SCALES 5
@@ -865,7 +858,8 @@ static void
 scale_buttons_sync (GtkWidget        *bbox,
                     CcDisplayMonitor *output)
 {
-  GList *children, *l;
+  g_autoptr(GList) children;
+  GList *l;
 
   children = gtk_container_get_children (GTK_CONTAINER (bbox));
   for (l = children; l; l = l->next)
@@ -875,7 +869,6 @@ scale_buttons_sync (GtkWidget        *bbox,
       if (scale == cc_display_monitor_get_scale (output))
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
     }
-  g_list_free (children);
 }
 
 static GtkWidget *
@@ -1225,7 +1218,8 @@ static void
 two_output_chooser_sync (GtkWidget      *box,
                          CcDisplayPanel *panel)
 {
-  GList *children, *l;
+  g_autoptr(GList) children = NULL;
+  GList *l;
 
   children = gtk_container_get_children (GTK_CONTAINER (box));
   for (l = children; l; l = l->next)
@@ -1235,7 +1229,6 @@ two_output_chooser_sync (GtkWidget      *box,
       if (panel->current_output == output)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
     }
-  g_list_free (children);
 }
 
 static GtkWidget *
@@ -1505,7 +1498,8 @@ two_output_visible_child_changed (CcDisplayPanel *panel,
                                   GtkWidget      *stack)
 {
   GtkWidget *bin;
-  GList *children, *l;
+  g_autoptr(GList) children = NULL;
+  GList *l;
 
   reset_current_config (panel);
 
@@ -1516,7 +1510,6 @@ two_output_visible_child_changed (CcDisplayPanel *panel,
       if (ui)
         gtk_widget_destroy (ui);
     }
-  g_list_free (children);
 
   bin = gtk_stack_get_visible_child (GTK_STACK (stack));
 
@@ -1891,10 +1884,9 @@ on_toplevel_key_press (GtkWidget   *button,
 static void
 show_apply_titlebar (CcDisplayPanel *panel, gboolean is_applicable)
 {
-  GtkSizeGroup *size_group;
-
   if (!panel->apply_titlebar)
     {
+      g_autoptr(GtkSizeGroup) size_group = NULL;
       GtkWidget *header, *button, *toplevel;
       panel->apply_titlebar = header = gtk_header_bar_new ();
 
@@ -1919,7 +1911,6 @@ show_apply_titlebar (CcDisplayPanel *panel, gboolean is_applicable)
                                    GTK_STYLE_CLASS_SUGGESTED_ACTION);
 
       gtk_widget_show_all (header);
-      g_object_unref (size_group);
 
       header = gtk_window_get_titlebar (GTK_WINDOW (toplevel));
       if (header)
@@ -1947,13 +1938,12 @@ static void
 update_apply_button (CcDisplayPanel *panel)
 {
   gboolean config_equal;
-  CcDisplayConfig *applied_config;
+  g_autoptr(CcDisplayConfig) applied_config = NULL;
 
   applied_config = cc_display_config_manager_get_current (panel->manager);
 
   config_equal = cc_display_config_equal (panel->current_config,
                                           applied_config);
-  g_object_unref (applied_config);
 
   if (config_equal)
     reset_titlebar (panel);
@@ -1964,7 +1954,7 @@ update_apply_button (CcDisplayPanel *panel)
 static void
 apply_current_configuration (CcDisplayPanel *self)
 {
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   cc_display_config_apply (self->current_config, &error);
 
@@ -1972,10 +1962,7 @@ apply_current_configuration (CcDisplayPanel *self)
   on_screen_changed (self);
 
   if (error)
-    {
-      g_warning ("Error applying configuration: %s", error->message);
-      g_clear_error (&error);
-    }
+    g_warning ("Error applying configuration: %s", error->message);
 }
 
 static const gchar *
@@ -2146,14 +2133,13 @@ shell_proxy_ready (GObject        *source,
                    CcDisplayPanel *self)
 {
   GDBusProxy *proxy;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
   if (!proxy)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("Failed to contact gnome-shell: %s", error->message);
-      g_error_free (error);
       return;
     }
 
@@ -2165,7 +2151,7 @@ shell_proxy_ready (GObject        *source,
 static void
 update_has_accel (CcDisplayPanel *self)
 {
-  GVariant *v;
+  g_autoptr(GVariant) v = NULL;
 
   if (self->iio_sensor_proxy == NULL)
     {
@@ -2178,7 +2164,6 @@ update_has_accel (CcDisplayPanel *self)
   if (v)
     {
       self->has_accelerometer = g_variant_get_boolean (v);
-      g_variant_unref (v);
     }
   else
     {
@@ -2290,7 +2275,7 @@ session_bus_ready (GObject        *source,
                    CcDisplayPanel *self)
 {
   GDBusConnection *bus;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   bus = g_bus_get_finish (res, &error);
   if (!bus)
@@ -2300,7 +2285,6 @@ session_bus_ready (GObject        *source,
           g_warning ("Failed to get session bus: %s", error->message);
           gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "error");
         }
-      g_error_free (error);
       return;
     }
 

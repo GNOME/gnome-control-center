@@ -628,7 +628,7 @@ cc_display_arrangement_draw (GtkWidget *widget,
         {
           PangoLayout *layout;
           PangoFontDescription *font = NULL;
-          gchar *number_str;
+          g_autofree gchar *number_str = NULL;
           PangoRectangle extents;
           GdkRGBA color;
           gdouble text_width, text_padding;
@@ -647,7 +647,6 @@ cc_display_arrangement_draw (GtkWidget *widget,
           layout = gtk_widget_create_pango_layout (GTK_WIDGET (self), number_str);
           pango_layout_set_font_description (layout, font);
           pango_layout_get_extents (layout, NULL, &extents);
-          g_free (number_str);
 
           h = (extents.height - extents.y) / PANGO_SCALE;
           text_width = (extents.width - extents.x) / PANGO_SCALE;

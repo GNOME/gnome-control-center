@@ -57,7 +57,7 @@ got_current_state (GObject      *object,
 {
   CcDisplayConfigManagerDBus *self;
   GVariant *variant;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   variant = g_dbus_connection_call_finish (G_DBUS_CONNECTION (object),
                                            result, &error);
@@ -70,7 +70,6 @@ got_current_state (GObject      *object,
           _cc_display_config_manager_emit_changed (CC_DISPLAY_CONFIG_MANAGER (data));
           g_warning ("Error calling GetCurrentState: %s", error->message);
         }
-      g_clear_error (&error);
       return;
     }
 
@@ -118,7 +117,7 @@ bus_gotten (GObject      *object,
 {
   CcDisplayConfigManagerDBus *self;
   GDBusConnection *connection;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   connection = g_bus_get_finish (result, &error);
   if (!connection)
@@ -128,7 +127,6 @@ bus_gotten (GObject      *object,
           _cc_display_config_manager_emit_changed (CC_DISPLAY_CONFIG_MANAGER (data));
           g_warning ("Error obtaining DBus connection: %s", error->message);
         }
-      g_clear_error (&error);
       return;
     }
 
