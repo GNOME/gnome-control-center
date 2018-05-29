@@ -24,6 +24,7 @@
 
 #include <config.h>
 
+#include "cc-debug.h"
 #include "cc-window.h"
 
 #include <glib/gi18n.h>
@@ -333,6 +334,7 @@ static gboolean
 set_active_panel_from_id (CcShell      *shell,
                           const gchar  *start_id,
                           GVariant     *parameters,
+                          gboolean      add_to_history,
                           GError      **error)
 {
   g_autoptr(GIcon) gicon = NULL;
@@ -393,7 +395,9 @@ set_active_panel_from_id (CcShell      *shell,
   if (!activated)
     return TRUE;
 
-  /* Successful activation */
+  if (add_to_history)
+    add_current_panel_to_history (shell, start_id);
+
   g_free (self->current_panel_id);
   self->current_panel_id = g_strdup (start_id);
 
@@ -425,6 +429,25 @@ set_active_panel (CcWindow *shell,
     }
 }
 
+static void
+switch_to_previous_panel (CcWindow *self)
+{
+  g_autofree gchar *previous_panel_id = NULL;
+
+  CC_ENTRY;
+
+  if (g_queue_get_length (self->previous_panels) == 0)
+    CC_RETURN ();
+
+  previous_panel_id = g_queue_pop_head (self->previous_panels);
+
+  g_debug ("Going to previous panel (%s)", previous_panel_id);
+
+  set_active_panel_from_id (CC_SHELL (self), previous_panel_id, NULL, FALSE, NULL);
+
+  CC_EXIT;
+}
+
 /* Callbacks */
 static void
 show_panel_cb (CcPanelList *panel_list,
@@ -434,7 +457,7 @@ show_panel_cb (CcPanelList *panel_list,
   if (!panel_id)
     return;
 
-  set_active_panel_from_id (CC_SHELL (self), panel_id, NULL, NULL);
+  set_active_panel_from_id (CC_SHELL (self), panel_id, NULL, TRUE, NULL);
 }
 
 static void
@@ -570,7 +593,8 @@ window_key_press_event_cb (GtkWidget   *win,
            (is_rtl && state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Right) ||
            event->keyval == GDK_KEY_Back)
     {
-      previous_button_clicked_cb (NULL, self);
+      g_debug ("Going to previous panel");
+      switch_to_previous_panel (self);
       retval = GDK_EVENT_STOP;
     }
 
@@ -619,8 +643,7 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
                                     GVariant     *parameters,
                                     GError      **error)
 {
-  add_current_panel_to_history (shell, start_id);
-  return set_active_panel_from_id (shell, start_id, parameters, error);
+  return set_active_panel_from_id (shell, start_id, parameters, TRUE, error);
 }
 
 static void
