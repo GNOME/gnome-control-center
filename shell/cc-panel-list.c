@@ -57,11 +57,13 @@ struct _CcPanelList
 
   GtkWidget          *empty_search_placeholder;
 
+  gchar              *current_panel_id;
   gchar              *search_query;
 
   CcPanelListView     previous_view;
   CcPanelListView     view;
   GHashTable         *id_to_data;
+  GHashTable         *id_to_search_data;
 };
 
 G_DEFINE_TYPE (CcPanelList, cc_panel_list, GTK_TYPE_STACK)
@@ -271,7 +273,6 @@ row_data_new (CcPanelCategory     category,
   g_object_set_data_full (G_OBJECT (data->row), "data", data, (GDestroyNotify) row_data_free);
 
   data->visibility = visibility;
-  gtk_widget_set_visible (data->row, visibility == CC_PANEL_VISIBLE);
 
   return data;
 }
@@ -631,7 +632,9 @@ cc_panel_list_finalize (GObject *object)
   CcPanelList *self = (CcPanelList *)object;
 
   g_clear_pointer (&self->search_query, g_free);
+  g_clear_pointer (&self->current_panel_id, g_free);
   g_clear_pointer (&self->id_to_data, g_hash_table_destroy);
+  g_clear_pointer (&self->id_to_search_data, g_hash_table_destroy);
 
   G_OBJECT_CLASS (cc_panel_list_parent_class)->finalize (object);
 }
@@ -770,6 +773,7 @@ cc_panel_list_init (CcPanelList *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->id_to_data = g_hash_table_new (g_str_hash, g_str_equal);
+  self->id_to_search_data = g_hash_table_new (g_str_hash, g_str_equal);
   self->view = CC_PANEL_LIST_MAIN;
 
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->main_listbox),
@@ -935,15 +939,19 @@ cc_panel_list_add_panel (CcPanelList        *self,
 
   /* Add the panel to the proper listbox */
   data = row_data_new (category, id, title, description, keywords, icon, visibility);
+  gtk_widget_set_visible (data->row, visibility == CC_PANEL_VISIBLE);
 
   listbox = get_listbox_from_category (self, category);
   gtk_container_add (GTK_CONTAINER (listbox), data->row);
 
   /* And add to the search listbox too */
   search_data = row_data_new (category, id, title, description, keywords, icon, visibility);
+  gtk_widget_set_visible (search_data->row, visibility != CC_PANEL_HIDDEN);
+
   gtk_container_add (GTK_CONTAINER (self->search_listbox), search_data->row);
 
   g_hash_table_insert (self->id_to_data, data->id, data);
+  g_hash_table_insert (self->id_to_search_data, search_data->id, search_data);
 }
 
 /**
@@ -974,6 +982,22 @@ cc_panel_list_set_active_panel (CcPanelList *self,
       return;
     }
 
+  /* If the currently selected panel is not always visible, for example when
+   * the panel is only visible on search and we're temporarily seeing it, make
+   * sure to hide it after the user moves out.
+   */
+  if (self->current_panel_id != NULL && g_strcmp0 (self->current_panel_id, id) != 0)
+    {
+      RowData *current_row_data;
+
+      current_row_data = g_hash_table_lookup (self->id_to_data, self->current_panel_id);
+
+      /* We cannot be showing a non-existant panel */
+      g_assert (current_row_data != NULL);
+
+      gtk_widget_set_visible (current_row_data->row, current_row_data->visibility == CC_PANEL_VISIBLE);
+    }
+
   listbox = gtk_widget_get_parent (data->row);
 
   /* The row might be hidden now, so make sure it's visible */
@@ -988,6 +1012,10 @@ cc_panel_list_set_active_panel (CcPanelList *self,
   self->autoselect_panel = FALSE;
 
   g_signal_emit_by_name (data->row, "activate");
+
+  /* Store the current panel id */
+  g_clear_pointer (&self->current_panel_id, g_free);
+  self->current_panel_id = g_strdup (id);
 }
 
 /**
@@ -1004,13 +1032,15 @@ cc_panel_list_set_panel_visibility (CcPanelList       *self,
                                     const gchar       *id,
                                     CcPanelVisibility  visibility)
 {
-  RowData *data;
+  RowData *data, *search_data;
 
   g_return_if_fail (CC_IS_PANEL_LIST (self));
 
   data = g_hash_table_lookup (self->id_to_data, id);
+  search_data = g_hash_table_lookup (self->id_to_search_data, id);
 
   g_assert (data != NULL);
+  g_assert (search_data != NULL);
 
   data->visibility = visibility;
 
@@ -1023,4 +1053,5 @@ cc_panel_list_set_panel_visibility (CcPanelList       *self,
     }
 
   gtk_widget_set_visible (data->row, visibility == CC_PANEL_VISIBLE);
+  gtk_widget_set_visible (search_data->row, visibility =! CC_PANEL_HIDDEN);
 }
