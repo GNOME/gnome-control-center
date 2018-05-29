@@ -299,13 +299,6 @@ setup_dialog (CcMouseTest *self)
 	GtkAdjustment *adjustment;
 	GtkStyleProvider *provider;
 
-	g_signal_connect (self->button_drawing_area, "button_press_event",
-			  G_CALLBACK (button_drawing_area_button_press_event),
-			  self);
-	g_signal_connect (self->button_drawing_area, "draw",
-			  G_CALLBACK (button_drawing_area_draw_event),
-			  self);
-
 	adjustment = GTK_ADJUSTMENT (self->scrolled_window_adjustment);
 	gtk_adjustment_set_value (adjustment,
 				  gtk_adjustment_get_upper (adjustment));
@@ -361,6 +354,9 @@ cc_mouse_test_class_init (CcMouseTestClass *klass)
 	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, image);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, scrolled_window_adjustment);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, viewport);
+
+	gtk_widget_class_bind_template_callback (widget_class, button_drawing_area_button_press_event);
+	gtk_widget_class_bind_template_callback (widget_class, button_drawing_area_draw_event);
 }
 
 static void
