@@ -43,7 +43,7 @@ typedef struct {
 
 struct _CcKeyboardPanel
 {
-  CcPanel             parent;
+  CcPanel             parent_instance;
 
   /* Search */
   GtkWidget          *empty_search_placeholder;
@@ -113,7 +113,7 @@ transform_binding_to_accel (GBinding     *binding,
   gchar *accelerator;
 
   item = CC_KEYBOARD_ITEM (g_binding_get_source (binding));
-  combo = item->primary_combo;
+  combo = cc_keyboard_item_get_primary_combo (item);
 
   /* Embolden the label when the shortcut is modified */
   if (!cc_keyboard_item_is_value_default (item))
@@ -157,7 +157,7 @@ reset_all_shortcuts_cb (GtkWidget *widget,
   data = g_object_get_data (G_OBJECT (widget), "data");
 
   /* Don't reset custom shortcuts */
-  if (data->item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
+  if (cc_keyboard_item_get_item_type (data->item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
     return;
 
   /* cc_keyboard_manager_reset_shortcut() already resets conflicting shortcuts,
@@ -236,7 +236,7 @@ add_item (CcKeyboardPanel *self,
                       NULL);
 
   /* Shortcut title */
-  label = gtk_label_new (item->description);
+  label = gtk_label_new (cc_keyboard_item_get_description (item));
   gtk_label_set_xalign (GTK_LABEL (label), 0.0);
   gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
   gtk_label_set_line_wrap_mode (GTK_LABEL (label), PANGO_WRAP_WORD_CHAR);
@@ -392,7 +392,7 @@ static gboolean
 search_match_shortcut (CcKeyboardItem *item,
                        const gchar    *search)
 {
-  CcKeyCombo *combo = item->primary_combo;
+  CcKeyCombo *combo = cc_keyboard_item_get_primary_combo (item);
   GStrv shortcut_tokens, search_tokens;
   g_autofree gchar *normalized_accel = NULL;
   g_autofree gchar *accel = NULL;
@@ -452,9 +452,9 @@ sort_function (GtkListBoxRow *a,
   b_data = g_object_get_data (G_OBJECT (b), "data");
 
   /* Put custom shortcuts below everything else */
-  if (a_data->item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
+  if (cc_keyboard_item_get_item_type (a_data->item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
     return 1;
-  else if (b_data->item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
+  else if (cc_keyboard_item_get_item_type (b_data->item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
     return -1;
 
   retval = g_strcmp0 (a_data->section_title, b_data->section_title);
@@ -462,7 +462,7 @@ sort_function (GtkListBoxRow *a,
   if (retval != 0)
     return retval;
 
-  return g_strcmp0 (a_data->item->description, b_data->item->description);
+  return g_strcmp0 (cc_keyboard_item_get_description (a_data->item), cc_keyboard_item_get_description (b_data->item));
 }
 
 static void
@@ -555,7 +555,7 @@ filter_function (GtkListBoxRow *row,
 
   data = g_object_get_data (G_OBJECT (row), "data");
   item = data->item;
-  name = cc_util_normalize_casefold_and_unaccent (item->description);
+  name = cc_util_normalize_casefold_and_unaccent (cc_keyboard_item_get_description (item));
   search = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (self->search_entry)));
   terms = g_strsplit (search, " ", -1);
 
