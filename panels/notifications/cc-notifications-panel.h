@@ -26,13 +26,8 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_NOTIFICATIONS_PANEL  (cc_notifications_panel_get_type ())
-#define CC_NOTIFICATIONS_PANEL(o)    (G_TYPE_CHECK_INSTANCE_CAST ((o), CC_TYPE_NOTIFICATIONS_PANEL, CcNotificationsPanel))
-#define GC_IS_NOTIFICATIONS_PANEL(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), CC_TYPE_NOTIFICATIONS_PANEL))
 
-typedef struct _CcNotificationsPanel CcNotificationsPanel;
-typedef struct _CcNotificationsPanelClass CcNotificationsPanelClass;
-
-GType cc_notifications_panel_get_type (void) G_GNUC_CONST;
+G_DECLARE_FINAL_TYPE (CcNotificationsPanel, cc_notifications_panel, CC, NOTIFICATIONS_PANEL, CcPanel)
 
 G_END_DECLS
 
