@@ -80,14 +80,10 @@ static GtkWidget *
 get_switch (GtkBuilder  *builder,
             const gchar *prefix)
 {
-  GtkWidget *result;
-  gchar     *name;
+  g_autofree gchar *name = NULL;
 
   name = g_strdup_printf ("%s-switch", prefix);
-  result = GTK_WIDGET (gtk_builder_get_object (builder, name));
-  g_free (name);
-
-  return result;
+  return GTK_WIDGET (gtk_builder_get_object (builder, name));
 }
 
 static void
@@ -430,14 +426,14 @@ cc_build_edit_dialog (CcNotificationsPanel *panel,
                       GSettings            *master_settings,
                       GDBusProxy           *perm_store)
 {
-  GtkBuilder *builder;
+  g_autoptr(GtkBuilder) builder = NULL;
   GtkWindow  *shell;
   GtkWidget  *dialog;
   GtkWidget  *listbox;
-  GError     *error = NULL;
+  g_autoptr(GError) error = NULL;
   gchar      *objects[] = { "edit-dialog", NULL };
   guint       builder_result;
-  char *app_id;
+  g_autofree gchar *app_id = NULL;
 
   builder = gtk_builder_new ();
   builder_result = gtk_builder_add_objects_from_resource (builder,
@@ -448,8 +444,6 @@ cc_build_edit_dialog (CcNotificationsPanel *panel,
   if (builder_result == 0)
     {
       g_warning ("Could not load ui: %s", error->message);
-      g_error_free (error);
-      g_object_unref (builder);
       return;
     }
 
@@ -461,7 +455,6 @@ cc_build_edit_dialog (CcNotificationsPanel *panel,
   if (g_str_has_suffix (app_id, ".desktop"))
     app_id[strlen (app_id) - strlen (".desktop")] = '\0';
   dialog_set_app_id (dialog, app_id);
-  g_free (app_id);
 
   dialog_set_perm_store (dialog, perm_store);
 
@@ -483,7 +476,7 @@ cc_build_edit_dialog (CcNotificationsPanel *panel,
    */
   g_object_set_data_full (G_OBJECT (dialog),
                           "builder",
-                          builder,
+                          g_object_ref (builder),
                           g_object_unref);
 
   g_object_set_data_full (G_OBJECT (dialog),
