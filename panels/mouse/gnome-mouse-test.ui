@@ -76,6 +76,8 @@
                         <property name="margin_top">20</property>
                         <property name="margin_bottom">20</property>
                         <property name="hexpand">True</property>
+                        <signal name="button_press_event" handler="button_drawing_area_button_press_event"/>
+                        <signal name="draw" handler="button_drawing_area_draw_event"/>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
