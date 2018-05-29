@@ -26,16 +26,16 @@
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (self->builder, s))
-
 struct _CcSearchPanel
 {
   CcPanel     parent_instance;
 
-  GtkBuilder *builder;
   GtkWidget  *list_box;
   GtkWidget  *up_button;
   GtkWidget  *down_button;
+  GtkWidget  *search_vbox;
+  GtkWidget  *search_frame;
+  GtkWidget  *settings_button;
 
   GCancellable *load_cancellable;
   GSettings  *search_settings;
@@ -675,7 +675,6 @@ cc_search_panel_finalize (GObject *object)
 {
   CcSearchPanel *self = CC_SEARCH_PANEL (object);
 
-  g_clear_object (&self->builder);
   g_clear_object (&self->search_settings);
   g_hash_table_destroy (self->sort_order);
 
@@ -689,12 +688,11 @@ static void
 cc_search_panel_constructed (GObject *object)
 {
   CcSearchPanel *self = CC_SEARCH_PANEL (object);
-  GtkWidget *box, *widget, *search_box;
+  GtkWidget *box, *widget;
 
   G_OBJECT_CLASS (cc_search_panel_parent_class)->constructed (object);
 
   /* add the disable all switch */
-  search_box = WID ("search_vbox");
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
   widget = gtk_switch_new ();
@@ -707,7 +705,7 @@ cc_search_panel_constructed (GObject *object)
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
 
   g_object_bind_property (widget, "active",
-                          search_box, "sensitive",
+                          self->search_vbox, "sensitive",
                           G_BINDING_DEFAULT |
                           G_BINDING_SYNC_CREATE);
 
@@ -718,54 +716,31 @@ cc_search_panel_constructed (GObject *object)
 static void
 cc_search_panel_init (CcSearchPanel *self)
 {
-  GError    *error;
-  GtkWidget *widget;
-  GtkWidget *frame;
-  guint res;
-
   g_resources_register (cc_search_get_resource ());
 
-  self->builder = gtk_builder_new ();
+  gtk_widget_init_template (GTK_WIDGET (self));
 
-  error = NULL;
-  res = gtk_builder_add_from_resource (self->builder,
-                                       "/org/gnome/control-center/search/search.ui",
-                                       &error);
-
-  if (res == 0)
-    {
-      g_warning ("Could not load interface file: %s",
-                 (error != NULL) ? error->message : "unknown error");
-      g_clear_error (&error);
-      return;
-    }
-
-  frame = WID ("search_frame");
-  widget = GTK_WIDGET (gtk_list_box_new ());
-  gtk_list_box_set_sort_func (GTK_LIST_BOX (widget),
+  self->list_box = GTK_WIDGET (gtk_list_box_new ());
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->list_box),
                               (GtkListBoxSortFunc)list_sort_func, self, NULL);
-  gtk_list_box_set_header_func (GTK_LIST_BOX (widget), cc_list_box_update_header_func, NULL, NULL);
-  gtk_container_add (GTK_CONTAINER (frame), widget);
-  self->list_box = widget;
-  gtk_widget_show (widget);
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->list_box), cc_list_box_update_header_func, NULL, NULL);
+  gtk_container_add (GTK_CONTAINER (self->search_frame), self->list_box);
+  gtk_widget_show (self->list_box);
 
-  g_signal_connect_swapped (widget, "row-selected",
+  g_signal_connect_swapped (self->list_box, "row-selected",
                             G_CALLBACK (search_panel_invalidate_button_state), self);
 
-  self->up_button = WID ("up_button");
   g_signal_connect (self->up_button, "clicked",
                     G_CALLBACK (up_button_clicked), self);
   gtk_widget_set_sensitive (self->up_button, FALSE);
 
-  self->down_button = WID ("down_button");
   g_signal_connect (self->down_button, "clicked",
                     G_CALLBACK (down_button_clicked), self);
   gtk_widget_set_sensitive (self->down_button, FALSE);
 
-  widget = WID ("settings_button");
-  g_signal_connect (widget, "clicked",
+  g_signal_connect (self->settings_button, "clicked",
                     G_CALLBACK (settings_button_clicked), self);
-  gtk_widget_set_sensitive (widget, cc_search_locations_dialog_is_available ());
+  gtk_widget_set_sensitive (self->settings_button, cc_search_locations_dialog_is_available ());
 
   self->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
   self->sort_order = g_hash_table_new_full (g_str_hash, g_str_equal,
@@ -775,17 +750,24 @@ cc_search_panel_init (CcSearchPanel *self)
   search_panel_invalidate_sort_order (self);
 
   populate_search_providers (self);
-
-  widget = WID ("search_vbox");
-  gtk_container_add (GTK_CONTAINER (self), widget);
 }
 
 static void
 cc_search_panel_class_init (CcSearchPanelClass *klass)
 {
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *oclass = G_OBJECT_CLASS (klass);
 
   oclass->constructed = cc_search_panel_constructed;
   oclass->dispose = cc_search_panel_dispose;
   oclass->finalize = cc_search_panel_finalize;
+
+  gtk_widget_class_set_template_from_resource (widget_class,
+                                               "/org/gnome/control-center/search/search.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, up_button);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, down_button);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_vbox);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_frame);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, settings_button);
 }

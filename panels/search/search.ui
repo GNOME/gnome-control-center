@@ -1,147 +1,154 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkScrolledWindow" id="search_vbox">
+  <template class="CcSearchPanel" parent="CcPanel">
     <property name="visible">True</property>
-    <property name="hscrollbar_policy">never</property>
-    <property name="min_content_height">450</property>
+    <property name="can_focus">True</property>
+
     <child>
-      <object class="GtkBox">
+      <object class="GtkScrolledWindow" id="search_vbox">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-
-        <!-- Stub boxes to make the content cover 1/3 of the screen -->
+        <property name="hscrollbar_policy">never</property>
+        <property name="min_content_height">450</property>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="hexpand">True</property>
-          </object>
-        </child>
 
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="hexpand">True</property>
-          </object>
-          <packing>
-            <property name="pack_type">end</property>
-          </packing>
-        </child>
-
-        <!-- Content -->
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="orientation">vertical</property>
-            <property name="margin">32</property>
-            <property name="hexpand">True</property>
+            <!-- Stub boxes to make the content cover 1/3 of the screen -->
             <child>
-              <object class="GtkFrame" id="search_frame">
-                <property name="visible">True</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkToolbar" id="search_toolbar">
+              <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="toolbar_style">icons</property>
-                <property name="show_arrow">False</property>
-                <property name="icon_size">1</property>
-                <style>
-                  <class name="inline-toolbar"/>
-                </style>
-                <child>
-                  <object class="GtkToolItem" id="up_down_item">
-                    <property name="visible">True</property>
-                    <child>
-                      <object class="GtkBox" id="up_down_box">
-                        <property name="visible">True</property>
-                        <child>
-                           <object class="GtkButton" id="up_button">
-                             <property name="visible">True</property>
-                             <child internal-child="accessible">
-                               <object class="AtkObject" id="up_button_a11y">
-                                 <property name="accessible-name" translatable="yes">Move Up</property>
-                               </object>
-                             </child>
-                             <child>
-                                <object class="GtkImage" id="up_image">
-                                  <property name="visible">True</property>
-                                  <property name="icon-name">go-up-symbolic</property>
-                                  <property name="icon-size">1</property>
-                                </object>
-                             </child>
-                           </object>
-                        </child>
-                        <child>
-                           <object class="GtkButton" id="down_button">
-                             <property name="visible">True</property>
-                             <child internal-child="accessible">
-                               <object class="AtkObject" id="down_button_a11y">
-                                 <property name="accessible-name" translatable="yes">Move Down</property>
-                               </object>
-                             </child>
-                             <child>
-                                <object class="GtkImage" id="down_image">
-                                  <property name="visible">True</property>
-                                  <property name="icon-name">go-down-symbolic</property>
-                                  <property name="icon-size">1</property>
-                                </object>
-                             </child>
-                           </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkSeparatorToolItem" id="sep1">
-                    <property name="visible">True</property>
-                    <property name="draw">False</property>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkToolItem" id="settings_item">
-                    <property name="visible">True</property>
-                    <child>
-                      <object class="GtkBox" id="i_s_ud_box">
-                        <property name="visible">True</property>
-                        <child>
-                           <object class="GtkButton" id="settings_button">
-                             <property name="visible">True</property>
-                             <child internal-child="accessible">
-                               <object class="AtkObject" id="settings_button_a11y">
-                                 <property name="accessible-name" translatable="yes">Preferences</property>
-                               </object>
-                             </child>
-                             <child>
-                                <object class="GtkImage" id="settings_image">
-                                  <property name="visible">True</property>
-                                  <property name="icon-name">emblem-system-symbolic</property>
-                                  <property name="icon-size">1</property>
-                                </object>
-                             </child>
-                           </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+                <property name="hexpand">True</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="pack_type">end</property>
               </packing>
             </child>
+
+            <!-- Content -->
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="orientation">vertical</property>
+                <property name="margin">32</property>
+                <property name="hexpand">True</property>
+                <child>
+                  <object class="GtkFrame" id="search_frame">
+                    <property name="visible">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkToolbar" id="search_toolbar">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="toolbar_style">icons</property>
+                    <property name="show_arrow">False</property>
+                    <property name="icon_size">1</property>
+                    <style>
+                      <class name="inline-toolbar"/>
+                    </style>
+                    <child>
+                      <object class="GtkToolItem" id="up_down_item">
+                        <property name="visible">True</property>
+                        <child>
+                          <object class="GtkBox" id="up_down_box">
+                            <property name="visible">True</property>
+                            <child>
+                               <object class="GtkButton" id="up_button">
+                                 <property name="visible">True</property>
+                                 <child internal-child="accessible">
+                                   <object class="AtkObject" id="up_button_a11y">
+                                     <property name="accessible-name" translatable="yes">Move Up</property>
+                                   </object>
+                                 </child>
+                                 <child>
+                                    <object class="GtkImage" id="up_image">
+                                      <property name="visible">True</property>
+                                      <property name="icon-name">go-up-symbolic</property>
+                                      <property name="icon-size">1</property>
+                                    </object>
+                                 </child>
+                               </object>
+                            </child>
+                            <child>
+                               <object class="GtkButton" id="down_button">
+                                 <property name="visible">True</property>
+                                 <child internal-child="accessible">
+                                   <object class="AtkObject" id="down_button_a11y">
+                                     <property name="accessible-name" translatable="yes">Move Down</property>
+                                   </object>
+                                 </child>
+                                 <child>
+                                    <object class="GtkImage" id="down_image">
+                                      <property name="visible">True</property>
+                                      <property name="icon-name">go-down-symbolic</property>
+                                      <property name="icon-size">1</property>
+                                    </object>
+                                 </child>
+                               </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparatorToolItem" id="sep1">
+                        <property name="visible">True</property>
+                        <property name="draw">False</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkToolItem" id="settings_item">
+                        <property name="visible">True</property>
+                        <child>
+                          <object class="GtkBox" id="i_s_ud_box">
+                            <property name="visible">True</property>
+                            <child>
+                               <object class="GtkButton" id="settings_button">
+                                 <property name="visible">True</property>
+                                 <child internal-child="accessible">
+                                   <object class="AtkObject" id="settings_button_a11y">
+                                     <property name="accessible-name" translatable="yes">Preferences</property>
+                                   </object>
+                                 </child>
+                                 <child>
+                                    <object class="GtkImage" id="settings_image">
+                                      <property name="visible">True</property>
+                                      <property name="icon-name">emblem-system-symbolic</property>
+                                      <property name="icon-size">1</property>
+                                    </object>
+                                 </child>
+                               </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+           </child>
           </object>
-       </child>
+        </child>
       </object>
     </child>
- </object>
+  </template>
 </interface>
