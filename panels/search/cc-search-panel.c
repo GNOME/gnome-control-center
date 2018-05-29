@@ -96,7 +96,7 @@ list_sort_func (gconstpointer a,
 static void
 search_panel_invalidate_button_state (CcSearchPanel *self)
 {
-  GList *children;
+  g_autoptr(GList) children = NULL;
   gboolean is_first, is_last;
   GtkListBoxRow *row;
 
@@ -111,14 +111,12 @@ search_panel_invalidate_button_state (CcSearchPanel *self)
 
   gtk_widget_set_sensitive (self->up_button, !is_first);
   gtk_widget_set_sensitive (self->down_button, !is_last);
-
-  g_list_free (children);
 }
 
 static void
 search_panel_invalidate_sort_order (CcSearchPanel *self)
 {
-  gchar **sort_order;
+  g_auto(GStrv) sort_order = NULL;
   gint idx;
 
   g_hash_table_remove_all (self->sort_order);
@@ -128,7 +126,6 @@ search_panel_invalidate_sort_order (CcSearchPanel *self)
     g_hash_table_insert (self->sort_order, g_strdup (sort_order[idx]), GINT_TO_POINTER (idx + 1));
 
   gtk_list_box_invalidate_sort (GTK_LIST_BOX (self->list_box));
-  g_strfreev (sort_order);
 
   search_panel_invalidate_button_state (self);
 }
@@ -151,8 +148,9 @@ propagate_compare_func (gconstpointer a,
 static void
 search_panel_propagate_sort_order (CcSearchPanel *self)
 {
-  GList *keys, *l;
-  GPtrArray *sort_order;
+  g_autoptr(GList) keys = NULL;
+  GList *l;
+  g_autoptr(GPtrArray) sort_order = NULL;
 
   sort_order = g_ptr_array_new ();
   keys = g_hash_table_get_keys (self->sort_order);
@@ -164,9 +162,6 @@ search_panel_propagate_sort_order (CcSearchPanel *self)
   g_ptr_array_add (sort_order, NULL);
   g_settings_set_strv (self->search_settings, "sort-order",
                        (const gchar **) sort_order->pdata);
-
-  g_ptr_array_unref (sort_order);
-  g_list_free (keys);
 }
 
 static void
@@ -194,7 +189,8 @@ search_panel_move_selected (CcSearchPanel *self,
   gint idx, other_idx;
   gpointer idx_ptr;
   gboolean found;
-  GList *children, *l, *other;
+  g_autoptr(GList) children = NULL;
+  GList *l, *other;
 
   row = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->list_box));
   app_info = g_object_get_data (G_OBJECT (row), "app-info");
@@ -288,8 +284,6 @@ search_panel_move_selected (CcSearchPanel *self,
   g_hash_table_replace (self->sort_order, g_strdup (app_id), GINT_TO_POINTER (idx));
 
   search_panel_propagate_sort_order (self);
-
-  g_list_free (children);
 }
 
 static void
@@ -330,11 +324,10 @@ switch_settings_mapping_set_generic (const GValue *value,
 {
   CcSearchPanel *self = g_object_get_data (G_OBJECT (row), "self");
   GAppInfo *app_info = g_object_get_data (G_OBJECT (row), "app-info");
-  gchar **apps;
-  GPtrArray *new_apps;
+  g_auto(GStrv) apps = NULL;
+  g_autoptr(GPtrArray) new_apps = NULL;
   gint idx;
   gboolean remove, found;
-  GVariant *variant;
 
   remove = !!g_value_get_boolean (value) == !!default_enabled;
   found = FALSE;
@@ -360,11 +353,7 @@ switch_settings_mapping_set_generic (const GValue *value,
 
   g_ptr_array_add (new_apps, NULL);
 
-  variant = g_variant_new_strv ((const gchar **) new_apps->pdata, -1);
-  g_ptr_array_unref (new_apps);
-  g_strfreev (apps);
-
-  return variant;
+  return g_variant_new_strv ((const gchar **) new_apps->pdata, -1);
 }
 
 static GVariant *
@@ -392,7 +381,7 @@ switch_settings_mapping_get_generic (GValue *value,
                                      gboolean default_enabled)
 {
   GAppInfo *app_info = g_object_get_data (G_OBJECT (row), "app-info");
-  const gchar **apps;
+  g_autofree const gchar **apps = NULL;
   gint idx;
   gboolean found;
 
@@ -408,7 +397,6 @@ switch_settings_mapping_get_generic (GValue *value,
         }
     }
 
-  g_free (apps);
   g_value_set_boolean (value, !!default_enabled != !!found);
 
   return TRUE;
@@ -438,7 +426,7 @@ search_panel_add_one_app_info (CcSearchPanel *self,
                                gboolean default_enabled)
 {
   GtkWidget *row, *box, *w;
-  GIcon *icon;
+  g_autoptr(GIcon) icon = NULL;
   gint width, height;
 
   /* gnome-control-center is special cased in the shell,
@@ -470,7 +458,6 @@ search_panel_add_one_app_info (CcSearchPanel *self,
   gtk_icon_size_lookup (GTK_ICON_SIZE_DND, &width, &height);
   gtk_image_set_pixel_size (GTK_IMAGE (w), MAX (width, height));
   gtk_container_add (GTK_CONTAINER (box), w);
-  g_object_unref (icon);
 
   w = gtk_label_new (g_app_info_get_name (app_info));
   gtk_container_add (GTK_CONTAINER (box), w);
@@ -505,10 +492,11 @@ static void
 search_panel_add_one_provider (CcSearchPanel *self,
                                GFile *provider)
 {
-  gchar *path, *desktop_id;
-  GKeyFile *keyfile;
-  GAppInfo *app_info;
-  GError *error = NULL;
+  g_autofree gchar *path = NULL;
+  g_autofree gchar *desktop_id = NULL;
+  g_autoptr(GKeyFile) keyfile = NULL;
+  g_autoptr(GAppInfo) app_info = NULL;
+  g_autoptr(GError) error = NULL;
   gboolean default_disabled;
 
   path = g_file_get_path (provider);
@@ -519,13 +507,13 @@ search_panel_add_one_provider (CcSearchPanel *self,
     {
       g_warning ("Error loading %s: %s - search provider will be ignored",
                  path, error->message);
-      goto out;
+      return;
     }
 
   if (!g_key_file_has_group (keyfile, SHELL_PROVIDER_GROUP))
     {
       g_debug ("Shell search provider group missing from '%s', ignoring", path);
-      goto out;
+      return;
     }
 
   desktop_id = g_key_file_get_string (keyfile, SHELL_PROVIDER_GROUP,
@@ -535,7 +523,7 @@ search_panel_add_one_provider (CcSearchPanel *self,
     {
       g_warning ("Unable to read desktop ID from %s: %s - search provider will be ignored",
                  path, error->message);
-      goto out;
+      return;
     }
 
   app_info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
@@ -544,20 +532,12 @@ search_panel_add_one_provider (CcSearchPanel *self,
     {
       g_debug ("Could not find application with desktop ID '%s' referenced in '%s', ignoring",
                desktop_id, path);
-      g_free (desktop_id);
-      goto out;
+      return;
     }
 
-  g_free (desktop_id);
   default_disabled = g_key_file_get_boolean (keyfile, SHELL_PROVIDER_GROUP,
                                              "DefaultDisabled", NULL);
   search_panel_add_one_app_info (self, app_info, !default_disabled);
-  g_object_unref (app_info);
-
- out:
-  g_free (path);
-  g_clear_error (&error);
-  g_key_file_unref (keyfile);
 }
 
 static void
@@ -565,18 +545,15 @@ search_providers_discover_ready (GObject *source,
                                  GAsyncResult *result,
                                  gpointer user_data)
 {
-  GList *providers, *l;
-  GFile *provider;
+  g_autoptr(GList) providers = NULL;
+  GList *l;
   CcSearchPanel *self = CC_SEARCH_PANEL (source);
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   providers = g_task_propagate_pointer (G_TASK (result), &error);
 
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-    {
-      g_error_free (error);
-      return;
-    }
+    return;
 
   g_clear_object (&self->load_cancellable);
 
@@ -588,16 +565,14 @@ search_providers_discover_ready (GObject *source,
 
   for (l = providers; l != NULL; l = l->next)
     {
-      provider = l->data;
+      g_autoptr(GFile) provider = l->data;
       search_panel_add_one_provider (self, provider);
-      g_object_unref (provider);
     }
 
   /* propagate a write to GSettings, to make sure we always have
    * all the providers in the list.
    */
   search_panel_propagate_sort_order (self);
-  g_list_free (providers);
 }
 
 static GList *
@@ -605,11 +580,10 @@ search_providers_discover_one_directory (const gchar *system_dir,
                                          GCancellable *cancellable)
 {
   GList *providers = NULL;
-  gchar *providers_path;
-  GFile *providers_location, *provider;
-  GFileInfo *info;
-  GFileEnumerator *enumerator;
-  GError *error = NULL;
+  g_autofree gchar *providers_path = NULL;
+  g_autoptr(GFile) providers_location = NULL;
+  g_autoptr(GFileEnumerator) enumerator = NULL;
+  g_autoptr(GError) error = NULL;
 
   providers_path = g_build_filename (system_dir, "gnome-shell", "search-providers", NULL);
   providers_location = g_file_new_for_path (providers_path);
@@ -625,32 +599,26 @@ search_providers_discover_one_directory (const gchar *system_dir,
           !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("Error opening %s: %s - search provider configuration won't be possible",
                    providers_path, error->message);
-      g_clear_error (&error);
 
-      goto out;
+      return NULL;
     }
 
-  while ((info = g_file_enumerator_next_file (enumerator, cancellable, &error)) != NULL)
+  while (TRUE)
     {
+      g_autoptr(GFileInfo) info = NULL;
+      GFile *provider;
+
+      info = g_file_enumerator_next_file (enumerator, cancellable, &error);
+      if (info == NULL)
+        {
+          if (error != NULL && !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+            g_warning ("Error reading from %s: %s - search providers might be missing from the panel",
+                       providers_path, error->message);
+          return providers;
+        }
       provider = g_file_get_child (providers_location, g_file_info_get_name (info));
       providers = g_list_prepend (providers, provider);
-      g_object_unref (info);
     }
-
-  if (error != NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Error reading from %s: %s - search providers might be missing from the panel",
-                   providers_path, error->message);
-      g_clear_error (&error);
-    }
-
- out:
-  g_clear_object (&enumerator);
-  g_clear_object (&providers_location);
-  g_free (providers_path);
-
-  return providers;
 }
 
 static void
@@ -682,13 +650,12 @@ search_providers_discover_thread (GTask *task,
 static void
 populate_search_providers (CcSearchPanel *self)
 {
-  GTask *task;
+  g_autoptr(GTask) task = NULL;
 
   self->load_cancellable = g_cancellable_new ();
   task = g_task_new (self, self->load_cancellable,
                      search_providers_discover_ready, self);
   g_task_run_in_thread (task, search_providers_discover_thread);
-  g_object_unref (task);
 }
 
 static void
