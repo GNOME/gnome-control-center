@@ -63,17 +63,14 @@ static char *
 make_output_ui_name (CcDisplayMonitor *output)
 {
   int width_mm, height_mm;
-  char *size, *name;
+  g_autofree char *size = NULL;
 
   cc_display_monitor_get_physical_size (output, &width_mm, &height_mm);
   size = make_display_size_string (width_mm, height_mm);
   if (size)
-    name = g_strdup_printf ("%s (%s)", cc_display_monitor_get_display_name (output), size);
+    return g_strdup_printf ("%s (%s)", cc_display_monitor_get_display_name (output), size);
   else
-    name = g_strdup_printf ("%s", cc_display_monitor_get_display_name (output));
-
-  g_free (size);
-  return name;
+    return g_strdup_printf ("%s", cc_display_monitor_get_display_name (output));
 }
 
 
