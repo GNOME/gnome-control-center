@@ -62,6 +62,7 @@
     <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
+    <signal name="delete-event" handler="gtk_widget_hide_on_delete"/>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog_vbox2">
         <property name="can_focus">False</property>
@@ -101,6 +102,8 @@
                     <property name="orientation">vertical</property>
                     <property name="numeric">True</property>
                     <property name="wrap">True</property>
+                    <signal name="output" handler="format_hours_combobox" object="CcDateTimePanel" swapped="no"/>
+                    <signal name="value-changed" handler="change_time" object="CcDateTimePanel" swapped="yes"/>
                     <child internal-child="accessible">
                       <object class="AtkObject" id="h_spinbutton-atkobject">
                         <property name="AtkObject::accessible-name" translatable="yes">Hour</property>
@@ -138,6 +141,8 @@
                     <property name="orientation">vertical</property>
                     <property name="numeric">True</property>
                     <property name="wrap">True</property>
+                    <signal name="output" handler="format_minutes_combobox" object="CcDateTimePanel" swapped="no"/>
+                    <signal name="value-changed" handler="change_time" object="CcDateTimePanel" swapped="yes"/>
                     <child internal-child="accessible">
                       <object class="AtkObject" id="m_spinbutton-atkobject">
                         <property name="AtkObject::accessible-name" translatable="yes">Minute</property>
@@ -164,6 +169,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
+                        <signal name="clicked" handler="am_pm_button_clicked" object="CcDateTimePanel" swapped="no"/>
                         <style>
                           <class name="gnome-control-center-ampm-toggle-button"/>
                         </style>
@@ -171,6 +177,7 @@
                           <object class="GtkStack" id="am_pm_stack">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <signal name="notify::visible-child" handler="am_pm_stack_visible_child_changed_cb" object="CcDateTimePanel" swapped="yes"/>
                             <child>
                               <placeholder/>
                             </child>
@@ -209,6 +216,7 @@
     <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
+    <signal name="delete-event" handler="gtk_widget_hide_on_delete"/>
     <child internal-child="headerbar">
       <object class="GtkHeaderBar" id="dialog_header_bar">
         <property name="visible">True</property>
@@ -281,6 +289,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="selection_mode">none</property>
+                <signal name="row-activated" handler="list_box_row_activated" object="CcDateTimePanel" swapped="no"/>
+                <signal name="keynav-failed" handler="keynav_failed" object="CcDateTimePanel" swapped="no"/>
                 <child>
                   <object class="GtkListBoxRow" id="auto_datetime_row">
                     <property name="visible">True</property>
@@ -553,6 +563,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="selection_mode">none</property>
+                <signal name="row-activated" handler="list_box_row_activated" object="CcDateTimePanel" swapped="no"/>
+                <signal name="keynav-failed" handler="keynav_failed" object="CcDateTimePanel" swapped="no"/>
                 <child>
                   <object class="GtkListBoxRow" id="timeformat_row">
                     <property name="visible">True</property>
@@ -588,6 +600,7 @@
                             <property name="valign">center</property>
                             <property name="margin_start">20</property>
                             <property name="margin_end">20</property>
+                            <signal name="notify::active-id" handler="change_clock_settings" object="CcDateTimePanel" swapped="no"/>
                             <items>
                               <item id="24h" translatable="yes">24-hour</item>
                               <item id="12h" translatable="yes">AM / PM</item>
