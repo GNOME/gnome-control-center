@@ -139,6 +139,7 @@
                                         <style>
                                           <class name="suggested-action"/>
                                         </style>
+                                        <signal name="clicked" handler="restart_now" object="CcRegionPanel" swapped="yes"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -251,6 +252,7 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="use_underline">True</property>
+                        <signal name="clicked" handler="show_input_options" object="CcRegionPanel" swapped="yes"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -310,6 +312,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <signal name="clicked" handler="add_input" object="CcRegionPanel" swapped="yes"/>
                                 <child internal-child="accessible">
                                   <object class="AtkObject">
                                     <property name="accessible-name" translatable="yes">Add input source</property>
@@ -335,6 +338,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <signal name="clicked" handler="remove_selected_input" object="CcRegionPanel" swapped="yes"/>
                                 <child internal-child="accessible">
                                   <object class="AtkObject">
                                     <property name="accessible-name" translatable="yes">Remove input source</property>
@@ -385,6 +389,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <signal name="clicked" handler="move_selected_input_up" object="CcRegionPanel" swapped="yes"/>
                                 <child internal-child="accessible">
                                   <object class="AtkObject">
                                     <property name="accessible-name" translatable="yes">Move input source up</property>
@@ -410,6 +415,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <signal name="clicked" handler="move_selected_input_down" object="CcRegionPanel" swapped="yes"/>
                                 <child internal-child="accessible">
                                   <object class="AtkObject">
                                     <property name="accessible-name" translatable="yes">Move input source down</property>
@@ -460,6 +466,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <signal name="clicked" handler="show_selected_settings" object="CcRegionPanel" swapped="yes"/>
                                 <child internal-child="accessible">
                                   <object class="AtkObject">
                                     <property name="accessible-name" translatable="yes">Configure input source</property>
@@ -485,6 +492,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <signal name="clicked" handler="show_selected_layout" object="CcRegionPanel" swapped="yes"/>
                                 <child internal-child="accessible">
                                   <object class="AtkObject">
                                     <property name="accessible-name" translatable="yes">Show input source keyboard layout</property>
