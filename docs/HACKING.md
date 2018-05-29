@@ -23,6 +23,48 @@ Comment blocks should be formatted as following:
  */
 ```
 
+## Structs and Enums
+
+Structures and enums are formatted as following:
+
+```c
+struct _FooBar
+{
+  guint32    field_one;
+  gchar     *text;
+};
+
+typedef struct
+{
+  FooParent     parent;
+
+  guint32       field_one;
+  gchar        *text;
+
+  struct
+  {
+    CustomType *something;
+    guint       something_else;
+  } inner_struct;
+
+  gboolean      flag : 1;
+} FooBar;
+
+enum
+{
+  FIRST,
+  SECOND,
+  LAST,
+};
+
+typedef enum
+{
+  FOO_BAR_FIRST,
+  FOO_BAR_SECOND,
+  FOO_BAR_LAST,
+} FooEnumBar;
+```
+
 ## Header (.h) files
 
 It is organized by the following structure:
