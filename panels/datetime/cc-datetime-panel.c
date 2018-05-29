@@ -113,7 +113,6 @@ struct _CcDateTimePanel
   GtkWidget *timezone_label;
   GtkWidget *timezone_searchentry;
   GtkWidget *year_spinbutton;
-  gulong am_pm_visiblity_changed_id;
 
   GnomeWallClock *clock_tracker;
 
@@ -139,13 +138,6 @@ cc_date_time_panel_dispose (GObject *object)
     {
       g_cancellable_cancel (panel->cancellable);
       g_clear_object (&panel->cancellable);
-    }
-
-  if (panel->am_pm_visiblity_changed_id != 0)
-    {
-      g_signal_handler_disconnect (panel->am_pm_stack,
-                                   panel->am_pm_visiblity_changed_id);
-      panel->am_pm_visiblity_changed_id = 0;
     }
 
   if (panel->toplevels)
@@ -182,48 +174,6 @@ static const char *
 cc_date_time_panel_get_help_uri (CcPanel *panel)
 {
   return "help:gnome-help/clock";
-}
-
-static void
-cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
-{
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
-
-  object_class->dispose = cc_date_time_panel_dispose;
-
-  panel_class->get_permission = cc_date_time_panel_get_permission;
-  panel_class->get_help_uri   = cc_date_time_panel_get_help_uri;
-
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/datetime/datetime.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, am_pm_button);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, am_pm_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, aspectmap);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, auto_datetime_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, auto_timezone_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, auto_timezone_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, city_liststore);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, city_modelsort);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_button);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, format_combobox);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, h_spinbutton);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox1);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox2);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, m_spinbutton);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_liststore);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, network_time_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, time_box);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, time_grid);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_button);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_searchentry);
-
-  bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8");
 }
 
 static void clock_settings_changed_cb (GSettings       *settings,
@@ -965,12 +915,6 @@ setup_listbox (CcDateTimePanel *self,
                GtkWidget       *listbox)
 {
   gtk_list_box_set_header_func (GTK_LIST_BOX (listbox), cc_list_box_update_header_func, NULL, NULL);
-  g_signal_connect (listbox, "row-activated",
-                    G_CALLBACK (list_box_row_activated), self);
-
-  g_signal_connect (listbox, "keynav-failed",
-                    G_CALLBACK (keynav_failed), self);
-
   self->listboxes = g_list_append (self->listboxes, listbox);
   self->listboxes_reverse = g_list_prepend (self->listboxes_reverse, listbox);
 }
@@ -1027,9 +971,6 @@ setup_timezone_dialog (CcDateTimePanel *self)
   gtk_container_add (GTK_CONTAINER (self->aspectmap),
                      self->map);
 
-  g_signal_connect (self->timezone_dialog, "delete-event",
-                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
   /* Create the completion object */
   completion = gtk_entry_completion_new ();
   gtk_entry_set_completion (GTK_ENTRY (self->timezone_searchentry), completion);
@@ -1076,14 +1017,7 @@ setup_am_pm_button (CcDateTimePanel *self)
   gtk_container_add (GTK_CONTAINER (self->am_pm_stack), self->am_label);
   gtk_container_add (GTK_CONTAINER (self->am_pm_stack), self->pm_label);
   gtk_widget_show_all (self->am_pm_stack);
-  self->am_pm_visiblity_changed_id = g_signal_connect_swapped (self->am_pm_stack,
-                                                               "notify::visible-child",
-                                                               G_CALLBACK (am_pm_stack_visible_child_changed_cb),
-                                                               self);
   am_pm_stack_visible_child_changed_cb (self);
-
-  g_signal_connect (self->am_pm_button, "clicked",
-                    G_CALLBACK (am_pm_button_clicked), self);
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider),
@@ -1121,9 +1055,6 @@ setup_datetime_dialog (CcDateTimePanel *self)
                                              GTK_STYLE_PROVIDER (provider),
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-  g_signal_connect (self->datetime_dialog, "delete-event",
-                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
   /* Force the direction for the time, so that the time
    * is presented correctly for RTL languages */
   gtk_widget_set_direction (self->time_grid, GTK_TEXT_DIR_LTR);
@@ -1154,21 +1085,62 @@ setup_datetime_dialog (CcDateTimePanel *self)
                     G_CALLBACK (month_year_changed), self);
 
   /* Hours and minutes */
-  g_signal_connect (self->h_spinbutton, "output",
-                    G_CALLBACK (format_hours_combobox), self);
-  g_signal_connect (self->m_spinbutton, "output",
-                    G_CALLBACK (format_minutes_combobox), self);
-
   gtk_spin_button_set_increments (GTK_SPIN_BUTTON (self->h_spinbutton), 1, 0);
   gtk_spin_button_set_increments (GTK_SPIN_BUTTON (self->m_spinbutton), 1, 0);
 
   gtk_spin_button_set_range (GTK_SPIN_BUTTON (self->h_spinbutton), 0, 23);
   gtk_spin_button_set_range (GTK_SPIN_BUTTON (self->m_spinbutton), 0, 59);
+}
 
-  g_signal_connect_swapped (self->h_spinbutton, "value-changed",
-                            G_CALLBACK (change_time), self);
-  g_signal_connect_swapped (self->m_spinbutton, "value-changed",
-                            G_CALLBACK (change_time), self);
+static void
+cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
+{
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+
+  object_class->dispose = cc_date_time_panel_dispose;
+
+  panel_class->get_permission = cc_date_time_panel_get_permission;
+  panel_class->get_help_uri   = cc_date_time_panel_get_help_uri;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/datetime/datetime.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, am_pm_button);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, am_pm_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, aspectmap);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, auto_datetime_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, auto_timezone_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, auto_timezone_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, city_liststore);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, city_modelsort);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_button);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, format_combobox);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, h_spinbutton);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox1);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox2);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, m_spinbutton);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_liststore);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, network_time_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, time_box);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, time_grid);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_button);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_searchentry);
+
+  gtk_widget_class_bind_template_callback (widget_class, list_box_row_activated);
+  gtk_widget_class_bind_template_callback (widget_class, keynav_failed);
+  gtk_widget_class_bind_template_callback (widget_class, am_pm_button_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, format_hours_combobox);
+  gtk_widget_class_bind_template_callback (widget_class, format_minutes_combobox);
+  gtk_widget_class_bind_template_callback (widget_class, change_time);
+  gtk_widget_class_bind_template_callback (widget_class, change_clock_settings);
+  gtk_widget_class_bind_template_callback (widget_class, am_pm_stack_visible_child_changed_cb);
+
+  bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8");
 }
 
 static void
@@ -1284,9 +1256,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   clock_settings_changed_cb (self->clock_settings, CLOCK_FORMAT_KEY, self);
   g_signal_connect (self->clock_settings, "changed::" CLOCK_FORMAT_KEY,
                     G_CALLBACK (clock_settings_changed_cb), self);
-
-  g_signal_connect (self->format_combobox, "notify::active-id",
-                    G_CALLBACK (change_clock_settings), self);
 
   update_time (self);
 
