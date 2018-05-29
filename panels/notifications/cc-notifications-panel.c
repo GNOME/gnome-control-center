@@ -499,9 +499,11 @@ load_apps_thread (GTask        *task,
 
   for (iter = apps; iter && !g_cancellable_is_cancelled (cancellable); iter = iter->next)
     {
-      GDesktopAppInfo *app;
+      GDesktopAppInfo *app = iter->data;
 
-      app = iter->data;
+      if (g_desktop_app_info_get_nodisplay (app) || !g_desktop_app_info_get_show_in (app, NULL))
+        continue;
+
       if (g_desktop_app_info_get_boolean (app, "X-GNOME-UsesNotifications")) {
         process_app_info (panel, task, G_APP_INFO (app));
         g_debug ("Processing app '%s'", g_app_info_get_id (G_APP_INFO (app)));
