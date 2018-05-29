@@ -26,45 +26,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_DISPLAY_PANEL cc_display_panel_get_type()
-
-#define CC_DISPLAY_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_DISPLAY_PANEL, CcDisplayPanel))
-
-#define CC_DISPLAY_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_DISPLAY_PANEL, CcDisplayPanelClass))
-
-#define CC_IS_DISPLAY_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_DISPLAY_PANEL))
-
-#define CC_IS_DISPLAY_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_DISPLAY_PANEL))
-
-#define CC_DISPLAY_PANEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_DISPLAY_PANEL, CcDisplayPanelClass))
-
-typedef struct _CcDisplayPanel CcDisplayPanel;
-typedef struct _CcDisplayPanelClass CcDisplayPanelClass;
-typedef struct _CcDisplayPanelPrivate CcDisplayPanelPrivate;
-
-struct _CcDisplayPanel
-{
-  CcPanel parent;
-
-  CcDisplayPanelPrivate *priv;
-};
-
-struct _CcDisplayPanelClass
-{
-  CcPanelClass parent_class;
-};
-
-GType cc_display_panel_get_type (void) G_GNUC_CONST;
+#define CC_TYPE_DISPLAY_PANEL (cc_display_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcDisplayPanel, cc_display_panel, CC, DISPLAY_PANEL, CcPanel)
 
 G_END_DECLS
 
