@@ -59,7 +59,6 @@ G_DEFINE_TYPE (CcApplication, cc_application, GTK_TYPE_APPLICATION)
 const GOptionEntry all_options[] = {
   { "version", 0, 0, G_OPTION_ARG_NONE, NULL, N_("Display version number"), NULL },
   { "verbose", 'v', 0, G_OPTION_ARG_NONE, NULL, N_("Enable verbose mode"), NULL },
-  { "overview", 'o', 0, G_OPTION_ARG_NONE, NULL, N_("Show the overview"), NULL },
   { "search", 's', 0, G_OPTION_ARG_STRING, NULL, N_("Search for the string"), "SEARCH" },
   { "list", 'l', 0, G_OPTION_ARG_NONE, NULL, N_("List possible panel names and exit"), NULL },
   { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, NULL, N_("Panel to display"), N_("[PANEL] [ARGUMENT…]") },
@@ -167,10 +166,6 @@ cc_application_command_line (GApplication            *application,
   if (g_variant_dict_lookup (options, "search", "&s", &search_str))
     {
       cc_window_set_search_item (self->window, search_str);
-    }
-  else if (g_variant_dict_contains (options, "overview"))
-    {
-      cc_window_set_overview_page (self->window);
     }
   else if (g_variant_dict_lookup (options, G_OPTION_REMAINING, "^a&ay", &start_panels))
     {

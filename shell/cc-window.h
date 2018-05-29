@@ -32,8 +32,6 @@ G_DECLARE_FINAL_TYPE (CcWindow, cc_window, CC, WINDOW, GtkApplicationWindow)
 
 CcWindow *cc_window_new (GtkApplication *application);
 
-void cc_window_set_overview_page (CcWindow *center);
-
 void cc_window_set_search_item (CcWindow *center,
                                 const char *search);
 

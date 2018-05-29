@@ -8,18 +8,15 @@ _gnome_control_center()
 	prev=${COMP_WORDS[COMP_CWORD-1]}
 
 	case "$prev" in
-	-o|--overview)
-		command_list=""
-		;;
 	*)
 		if [ $prev = "gnome-control-center" ] ; then
-			command_list="--overview --verbose --version"
+			command_list="--verbose --version"
 			command_list="$command_list @PANELS@"
 		elif [ $prev = "--verbose" ]; then
 			command_list="@PANELS@"
 		fi
 
-		for i in --overview --version @PANELS@; do
+		for i in --version @PANELS@; do
 			if [ $i = $prev ]; then
 				case $i in
 				keyboard)

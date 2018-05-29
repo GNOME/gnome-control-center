@@ -249,14 +249,6 @@ add_current_panel_to_history (CcShell    *shell,
 }
 
 static void
-shell_show_overview_page (CcWindow *self)
-{
-  /* TODO: need design input on a possibly new overview page. For now,
-   * just go back to the main section of the panel list. */
-  cc_panel_list_set_view (CC_PANEL_LIST (self->panel_list), CC_PANEL_LIST_MAIN);
-}
-
-static void
 update_list_title (CcWindow *self)
 {
   CcPanelListView view;
@@ -428,8 +420,6 @@ set_active_panel (CcWindow *shell,
       /* set the new panel */
       if (panel)
         shell->active_panel = g_object_ref (panel);
-      else
-        shell_show_overview_page (shell);
 
       g_object_notify (G_OBJECT (shell), "active-panel");
     }
@@ -441,10 +431,10 @@ show_panel_cb (CcPanelList *panel_list,
                const gchar *panel_id,
                CcWindow    *self)
 {
-  if (panel_id)
-    set_active_panel_from_id (CC_SHELL (self), panel_id, NULL, NULL);
-  else
-    shell_show_overview_page (self);
+  if (!panel_id)
+    return;
+
+  set_active_panel_from_id (CC_SHELL (self), panel_id, NULL, NULL);
 }
 
 static void
@@ -517,17 +507,6 @@ window_map_event_cb (GtkWidget *widget,
    * we explicitly unset the focus here. */
   gtk_window_set_focus (GTK_WINDOW (self), NULL);
   return GDK_EVENT_PROPAGATE;
-}
-
-static gboolean
-window_button_release_event_cb (GtkWidget      *win,
-                                GdkEventButton *event,
-                                CcWindow       *self)
-{
-  /* back button */
-  if (event->button == MOUSE_BACK_BUTTON)
-    shell_show_overview_page (self);
-  return FALSE;
 }
 
 static gboolean
@@ -789,7 +768,6 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, show_panel_cb);
   gtk_widget_class_bind_template_callback (widget_class, update_list_title);
-  gtk_widget_class_bind_template_callback (widget_class, window_button_release_event_cb);
   gtk_widget_class_bind_template_callback (widget_class, window_key_press_event_cb);
   gtk_widget_class_bind_template_callback (widget_class, window_map_event_cb);
 
@@ -852,16 +830,9 @@ cc_window_new (GtkApplication *application)
 }
 
 void
-cc_window_set_overview_page (CcWindow *center)
-{
-  shell_show_overview_page (center);
-}
-
-void
 cc_window_set_search_item (CcWindow   *center,
                            const char *search)
 {
-  shell_show_overview_page (center);
   gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (center->search_bar), TRUE);
   gtk_entry_set_text (GTK_ENTRY (center->search_entry), search);
   gtk_editable_set_position (GTK_EDITABLE (center->search_entry), -1);
