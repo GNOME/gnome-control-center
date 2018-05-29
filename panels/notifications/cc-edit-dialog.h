@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef _CC_EDIT_DIALOG_H_
-#define _CC_EDIT_DIALOG_H_
+#pragma once
 
 #include "cc-notifications-panel.h"
 
@@ -31,5 +30,3 @@ void cc_build_edit_dialog (CcNotificationsPanel *panel,
                            GDBusProxy           *perm_store);
 
 G_END_DECLS
-
-#endif /* _CC_EDIT_DIALOG_H_ */
