@@ -18,9 +18,7 @@
  *
  */
 
-
-#ifndef _CC_DISPLAY_PANEL_H
-#define _CC_DISPLAY_PANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -30,5 +28,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcDisplayPanel, cc_display_panel, CC, DISPLAY_PANEL, CcPanel)
 
 G_END_DECLS
-
-#endif /* _CC_DISPLAY_PANEL_H */
