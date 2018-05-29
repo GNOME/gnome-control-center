@@ -35,62 +35,73 @@ typedef enum
   BINDING_GROUP_USER,
 } BindingGroupType;
 
-typedef enum {
-	CC_KEYBOARD_ITEM_TYPE_NONE = 0,
-	CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH,
-	CC_KEYBOARD_ITEM_TYPE_GSETTINGS
+typedef enum
+{
+  CC_KEYBOARD_ITEM_TYPE_NONE = 0,
+  CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH,
+  CC_KEYBOARD_ITEM_TYPE_GSETTINGS
 } CcKeyboardItemType;
 
-typedef struct {
-  guint keyval;
-  guint keycode;
+typedef struct
+{
+  guint           keyval;
+  guint           keycode;
   GdkModifierType mask;
 } CcKeyCombo;
 
-CcKeyboardItem * cc_keyboard_item_new         (CcKeyboardItemType type);
-gboolean cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem *item,
-					            const char     *path,
-					            gboolean        reset);
-gboolean cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
-					       const char *description,
-					       const char *schema,
-					       const char *key);
+CcKeyboardItem*    cc_keyboard_item_new                      (CcKeyboardItemType  type);
 
-const char * cc_keyboard_item_get_description (CcKeyboardItem *item);
-gboolean     cc_keyboard_item_get_desc_editable (CcKeyboardItem *item);
-const char * cc_keyboard_item_get_command     (CcKeyboardItem *item);
-gboolean     cc_keyboard_item_get_cmd_editable (CcKeyboardItem *item);
+gboolean           cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem     *item,
+                                                              const char         *path,
+                                                              gboolean            reset);
 
-gboolean     cc_keyboard_item_equal           (CcKeyboardItem *a,
-					       CcKeyboardItem *b);
+gboolean           cc_keyboard_item_load_from_gsettings      (CcKeyboardItem     *item,
+                                                              const char         *description,
+                                                              const char         *schema,
+                                                              const char         *key);
 
-void         cc_keyboard_item_add_reverse_item (CcKeyboardItem *item,
-						CcKeyboardItem *reverse_item,
-						gboolean is_reversed);
+const char*        cc_keyboard_item_get_description          (CcKeyboardItem     *item);
 
-CcKeyboardItem * cc_keyboard_item_get_reverse_item (CcKeyboardItem *item);
-void             cc_keyboard_item_set_hidden       (CcKeyboardItem *item,
-						    gboolean hidden);
-gboolean         cc_keyboard_item_is_hidden        (CcKeyboardItem *item);
+gboolean           cc_keyboard_item_get_desc_editable        (CcKeyboardItem     *item);
 
-gboolean         cc_keyboard_item_is_value_default (CcKeyboardItem *self);
+const char*        cc_keyboard_item_get_command              (CcKeyboardItem     *item);
 
-void             cc_keyboard_item_reset            (CcKeyboardItem *self);
+gboolean           cc_keyboard_item_get_cmd_editable         (CcKeyboardItem     *item);
 
-GList          * cc_keyboard_item_get_key_combos   (CcKeyboardItem *self);
+gboolean           cc_keyboard_item_equal                    (CcKeyboardItem     *a,
+                                                              CcKeyboardItem     *b);
 
-GList          * cc_keyboard_item_get_default_combos (CcKeyboardItem *self);
+void               cc_keyboard_item_add_reverse_item         (CcKeyboardItem     *item,
+                                                              CcKeyboardItem     *reverse_item,
+                                                              gboolean            is_reversed);
 
-CcKeyCombo     * cc_keyboard_item_get_primary_combo (CcKeyboardItem *self);
+CcKeyboardItem*    cc_keyboard_item_get_reverse_item         (CcKeyboardItem     *item);
 
-const gchar    * cc_keyboard_item_get_key          (CcKeyboardItem *self);
+void               cc_keyboard_item_set_hidden               (CcKeyboardItem     *item,
+                                                              gboolean            hidden);
 
-CcKeyboardItemType cc_keyboard_item_get_item_type  (CcKeyboardItem *self);
+gboolean           cc_keyboard_item_is_hidden                (CcKeyboardItem     *item);
 
-void             cc_keyboard_item_set_model        (CcKeyboardItem *self, GtkTreeModel *model, BindingGroupType group);
+gboolean           cc_keyboard_item_is_value_default         (CcKeyboardItem     *self);
 
-const gchar    * cc_keyboard_item_get_gsettings_path (CcKeyboardItem *self);
+void               cc_keyboard_item_reset                    (CcKeyboardItem     *self);
 
-GSettings      * cc_keyboard_item_get_settings     (CcKeyboardItem *self);
+GList*             cc_keyboard_item_get_key_combos           (CcKeyboardItem     *self);
+
+GList*             cc_keyboard_item_get_default_combos       (CcKeyboardItem     *self);
+
+CcKeyCombo*        cc_keyboard_item_get_primary_combo        (CcKeyboardItem     *self);
+
+const gchar*       cc_keyboard_item_get_key                  (CcKeyboardItem     *self);
+
+CcKeyboardItemType cc_keyboard_item_get_item_type            (CcKeyboardItem     *self);
+
+void               cc_keyboard_item_set_model                (CcKeyboardItem     *self,
+                                                              GtkTreeModel       *model,
+                                                              BindingGroupType    group);
+
+const gchar*       cc_keyboard_item_get_gsettings_path       (CcKeyboardItem     *self);
+
+GSettings*         cc_keyboard_item_get_settings             (CcKeyboardItem     *self);
 
 G_END_DECLS

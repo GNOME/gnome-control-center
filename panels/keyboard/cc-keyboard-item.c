@@ -62,7 +62,8 @@ struct _CcKeyboardItem
   GSettings *settings;
 };
 
-enum {
+enum
+{
   PROP_0,
   PROP_DESCRIPTION,
   PROP_BINDING,
@@ -767,6 +768,3 @@ cc_keyboard_item_get_settings (CcKeyboardItem *item)
   return item->settings;
 }
 
-/*
- * vim: sw=2 ts=8 cindent noai bs=2
- */
