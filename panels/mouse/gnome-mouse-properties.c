@@ -309,11 +309,6 @@ setup_dialog (CcMouseProperties *self)
 
 	setup_touchpad_options (self);
 
-	g_signal_connect (self->edge_scrolling_switch, "state-set",
-			  G_CALLBACK (edge_scrolling_changed_event), self);
-	g_signal_connect (self->two_finger_scrolling_switch, "state-set",
-			  G_CALLBACK (two_finger_scrolling_changed_event), self);
-
 	gtk_list_box_set_header_func (GTK_LIST_BOX (self->touchpad_options_listbox), cc_list_box_update_header_func, NULL, NULL);
 }
 
@@ -400,6 +395,10 @@ cc_mouse_properties_class_init (CcMousePropertiesClass *klass)
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, touchpad_toggle_switch);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, two_finger_scrolling_row);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, two_finger_scrolling_switch);
+
+	gtk_widget_class_bind_template_callback (widget_class, edge_scrolling_changed_event);
+	gtk_widget_class_bind_template_callback (widget_class, two_finger_scrolling_changed_event);
+	gtk_widget_class_bind_template_callback (widget_class, on_content_size_changed);
 }
 
 static void
@@ -429,8 +428,6 @@ cc_mouse_properties_init (CcMouseProperties *self)
 	self->changing_scroll = FALSE;
 
 	setup_dialog (self);
-
-	g_signal_connect (self->scrolled_window, "size-allocate", G_CALLBACK (on_content_size_changed), NULL);
 }
 
 GtkWidget *
