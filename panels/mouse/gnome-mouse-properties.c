@@ -131,17 +131,14 @@ setup_touchpad_options (CcMouseProperties *self)
 }
 
 static void
-two_finger_scrolling_changed_event (GtkSwitch *button,
-				    gboolean   state,
-				    gpointer user_data)
+two_finger_scrolling_changed_event (CcMouseProperties *self,
+				    gboolean           state)
 {
-	CcMouseProperties *self = user_data;
-
 	if (self->changing_scroll)
 		return;
 
 	g_settings_set_boolean (self->touchpad_settings, "two-finger-scrolling-enabled", state);
-	gtk_switch_set_state (button, state);
+	gtk_switch_set_state (GTK_SWITCH (self->two_finger_scrolling_switch), state);
 
 	if (state && gtk_widget_get_visible (self->edge_scrolling_row)) {
 		/* Disable edge scrolling if two-finger scrolling is enabled */
@@ -150,17 +147,14 @@ two_finger_scrolling_changed_event (GtkSwitch *button,
 }
 
 static void
-edge_scrolling_changed_event (GtkSwitch *button,
-			      gboolean   state,
-			      gpointer user_data)
+edge_scrolling_changed_event (CcMouseProperties *self,
+			      gboolean           state)
 {
-	CcMouseProperties *self = user_data;
-
 	if (self->changing_scroll)
 		return;
 
 	g_settings_set_boolean (self->touchpad_settings, "edge-scrolling-enabled", state);
-	gtk_switch_set_state (button, state);
+	gtk_switch_set_state (GTK_SWITCH (self->edge_scrolling_switch), state);
 
 	if (state && gtk_widget_get_visible (self->two_finger_scrolling_row)) {
 		/* Disable two-finger scrolling if edge scrolling is enabled */
@@ -329,17 +323,16 @@ device_changed (GsdDeviceManager *device_manager,
 }
 
 static void
-on_content_size_changed (GtkWidget     *widget,
-			  GtkAllocation *allocation,
-			  gpointer       data)
+on_content_size_changed (CcMouseProperties *self,
+			 GtkAllocation     *allocation)
 {
 	if (allocation->height < 490) {
-		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (widget),
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (self->scrolled_window),
 						GTK_POLICY_NEVER, GTK_POLICY_NEVER);
 	} else {
-		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (widget),
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (self->scrolled_window),
 						GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-		gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (widget), 490);
+		gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->scrolled_window), 490);
 	}
 }
 
