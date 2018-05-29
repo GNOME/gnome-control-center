@@ -187,39 +187,6 @@ cc_region_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-cc_region_panel_class_init (CcRegionPanelClass * klass)
-{
-	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
-
-	panel_class->get_help_uri = cc_region_panel_get_help_uri;
-
-        object_class->constructed = cc_region_panel_constructed;
-	object_class->finalize = cc_region_panel_finalize;
-
-        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/region.ui");
-
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_row);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_label);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_label);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_revealer);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_section);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, options_button);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_list);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, add_input);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, remove_input);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, move_up_input);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, move_down_input);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, show_config);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, show_layout);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_label);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_list);
-}
-
-static void
 restart_now (CcRegionPanel *self)
 {
         g_file_delete (g_file_new_for_path (self->needs_restart_file_path),
@@ -634,8 +601,6 @@ setup_language_section (CcRegionPanel *self)
         self->locale_settings = g_settings_new (GNOME_SYSTEM_LOCALE_DIR);
         g_signal_connect_swapped (self->locale_settings, "changed::" KEY_REGION,
                                   G_CALLBACK (update_region_from_setting), self);
-
-        g_signal_connect_swapped (self->restart_button, "clicked", G_CALLBACK (restart_now), self);
 
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->language_list),
                                          GTK_SELECTION_NONE);
@@ -1357,21 +1322,6 @@ setup_input_section (CcRegionPanel *self)
         maybe_start_ibus ();
 #endif
 
-        g_signal_connect_swapped (self->options_button, "clicked",
-                                  G_CALLBACK (show_input_options), self);
-        g_signal_connect_swapped (self->add_input, "clicked",
-                                  G_CALLBACK (add_input), self);
-        g_signal_connect_swapped (self->remove_input, "clicked",
-                                  G_CALLBACK (remove_selected_input), self);
-        g_signal_connect_swapped (self->move_up_input, "clicked",
-                                  G_CALLBACK (move_selected_input_up), self);
-        g_signal_connect_swapped (self->move_down_input, "clicked",
-                                  G_CALLBACK (move_selected_input_down), self);
-        g_signal_connect_swapped (self->show_config, "clicked",
-                                  G_CALLBACK (show_selected_settings), self);
-        g_signal_connect_swapped (self->show_layout, "clicked",
-                                  G_CALLBACK (show_selected_layout), self);
-
         cc_list_box_setup_scrolling (GTK_LIST_BOX (self->input_list), 5);
 
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->input_list),
@@ -1683,6 +1633,48 @@ session_proxy_ready (GObject      *source,
         }
 
         self->session = proxy;
+}
+
+static void
+cc_region_panel_class_init (CcRegionPanelClass * klass)
+{
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+
+	panel_class->get_help_uri = cc_region_panel_get_help_uri;
+
+        object_class->constructed = cc_region_panel_constructed;
+	object_class->finalize = cc_region_panel_finalize;
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/region.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_row);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_label);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_label);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_revealer);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_section);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, options_button);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_list);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, add_input);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, remove_input);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, move_up_input);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, move_down_input);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, show_config);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, show_layout);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_label);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_list);
+
+        gtk_widget_class_bind_template_callback (widget_class, restart_now);
+        gtk_widget_class_bind_template_callback (widget_class, show_input_options);
+        gtk_widget_class_bind_template_callback (widget_class, add_input);
+        gtk_widget_class_bind_template_callback (widget_class, remove_selected_input);
+        gtk_widget_class_bind_template_callback (widget_class, move_selected_input_up);
+        gtk_widget_class_bind_template_callback (widget_class, move_selected_input_down);
+        gtk_widget_class_bind_template_callback (widget_class, show_selected_settings);
+        gtk_widget_class_bind_template_callback (widget_class, show_selected_layout);
 }
 
 static void
