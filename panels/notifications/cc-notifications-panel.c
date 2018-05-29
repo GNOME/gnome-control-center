@@ -67,7 +67,6 @@ typedef struct {
   CcNotificationsPanel *panel;
 } Application;
 
-static void application_free (Application *app);
 static void build_app_store (CcNotificationsPanel *panel);
 static void select_app      (GtkListBox *box, GtkListBoxRow *row, CcNotificationsPanel *panel);
 static int  sort_apps       (gconstpointer one, gconstpointer two, gpointer user_data);
@@ -149,7 +148,7 @@ on_perm_store_ready (GObject *source_object,
 {
   CcNotificationsPanel *self;
   GDBusProxy *proxy;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
   if (proxy == NULL)
@@ -157,8 +156,6 @@ on_perm_store_ready (GObject *source_object,
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
           g_warning ("Failed to connect to xdg-app permission store: %s",
                      error->message);
-      g_error_free (error);
-
       return;
     }
   self = user_data;
@@ -170,7 +167,7 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
 {
   GtkWidget *w;
   GtkWidget *label;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   g_resources_register (cc_notifications_get_resource ());
   panel->known_applications = g_hash_table_new_full (g_str_hash, g_str_equal,
@@ -182,7 +179,6 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
                                      &error) == 0)
     {
       g_error ("Error loading UI file: %s", error->message);
-      g_error_free (error);
       return;
     }
 
@@ -295,11 +291,23 @@ on_off_label_mapping_get (GValue   *value,
 }
 
 static void
+application_free (Application *app)
+{
+  g_free (app->canonical_app_id);
+  g_object_unref (app->app_info);
+  g_object_unref (app->settings);
+
+  g_slice_free (Application, app);
+}
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (Application, application_free)
+
+static void
 add_application (CcNotificationsPanel *panel,
                  Application          *app)
 {
   GtkWidget *box, *w, *row, *list_box;
-  GIcon *icon;
+  g_autoptr(GIcon) icon = NULL;
   const gchar *app_name;
   int size;
 
@@ -331,7 +339,6 @@ add_application (CcNotificationsPanel *panel,
   gtk_image_set_pixel_size (GTK_IMAGE (w), size);
   gtk_size_group_add_widget (GTK_SIZE_GROUP (gtk_builder_get_object (panel->builder, "sizegroup1")), w);
   gtk_container_add (GTK_CONTAINER (box), w);
-  g_object_unref (icon);
 
   w = gtk_label_new (app_name);
   gtk_container_add (GTK_CONTAINER (box), w);
@@ -359,10 +366,10 @@ maybe_add_app_id (CcNotificationsPanel *panel,
                   const char *canonical_app_id)
 {
   Application *app;
-  gchar *path;
-  gchar *full_app_id;
-  GSettings *settings;
-  GAppInfo *app_info;
+  g_autofree gchar *path = NULL;
+  g_autofree gchar *full_app_id = NULL;
+  g_autoptr(GSettings) settings = NULL;
+  g_autoptr(GAppInfo) app_info = NULL;
 
   if (*canonical_app_id == '\0')
     return;
@@ -381,46 +388,38 @@ maybe_add_app_id (CcNotificationsPanel *panel,
     g_debug ("Not adding application '%s' (canonical app ID: %s)",
              full_app_id, canonical_app_id);
     /* The application cannot be found, probably it was uninstalled */
-    g_object_unref (settings);
-  } else {
-    app = g_slice_new (Application);
-    app->canonical_app_id = g_strdup (canonical_app_id);
-    app->settings = settings;
-    app->app_info = app_info;
-
-    g_debug ("Adding application '%s' (canonical app ID: %s)",
-             full_app_id, canonical_app_id);
-
-    add_application (panel, app);
+    return;
   }
 
-  g_free (path);
-  g_free (full_app_id);
+  app = g_slice_new (Application);
+  app->canonical_app_id = g_strdup (canonical_app_id);
+  app->settings = g_object_ref (settings);
+  app->app_info = g_object_ref (app_info);
+
+  g_debug ("Adding application '%s' (canonical app ID: %s)",
+           full_app_id, canonical_app_id);
+
+  add_application (panel, app);
 }
 
 static gboolean
 queued_app_info (gpointer data)
 {
-  Application *app;
-  CcNotificationsPanel *panel;
+  g_autoptr(Application) app = NULL;
+  g_autoptr(CcNotificationsPanel) panel = NULL;
 
   app = data;
-  panel = app->panel;
-  app->panel = NULL;
+  panel = g_steal_pointer (&app->panel);
 
   if (g_cancellable_is_cancelled (panel->apps_load_cancellable) ||
       g_hash_table_contains (panel->known_applications,
                              app->canonical_app_id))
-    {
-      application_free (app);
-      g_object_unref (panel);
-      return FALSE;
-    }
+    return FALSE;
 
   g_debug ("Processing queued application %s", app->canonical_app_id);
 
   add_application (panel, app);
-  g_object_unref (panel);
+  g_steal_pointer (&app);
 
   return FALSE;
 }
@@ -429,7 +428,7 @@ static char *
 app_info_get_id (GAppInfo *app_info)
 {
   const char *desktop_id;
-  char *ret;
+  g_autofree gchar *ret = NULL;
   const char *filename;
   int l;
 
@@ -445,14 +444,11 @@ app_info_get_id (GAppInfo *app_info)
     }
 
   if (G_UNLIKELY (g_str_has_suffix (ret, ".desktop") == FALSE))
-    {
-      g_free (ret);
-      return NULL;
-    }
+    return NULL;
 
   l = strlen (desktop_id);
   *(ret + l - strlen(".desktop")) = '\0';
-  return ret;
+  return g_steal_pointer (&ret);
 }
 
 static void
@@ -461,37 +457,34 @@ process_app_info (CcNotificationsPanel *panel,
                   GAppInfo             *app_info)
 {
   Application *app;
-  char *app_id;
-  char *canonical_app_id;
-  char *path;
-  GSettings *settings;
+  g_autofree gchar *app_id = NULL;
+  g_autofree gchar *path = NULL;
+  g_autoptr(GSettings) settings = NULL;
   GSource *source;
   guint i;
 
   app_id = app_info_get_id (app_info);
-  canonical_app_id = g_strcanon (app_id,
-                                 "0123456789"
-                                 "abcdefghijklmnopqrstuvwxyz"
-                                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                 "-",
-                                 '-');
-  for (i = 0; canonical_app_id[i] != '\0'; i++)
-    canonical_app_id[i] = g_ascii_tolower (canonical_app_id[i]);
+  g_strcanon (app_id,
+              "0123456789"
+              "abcdefghijklmnopqrstuvwxyz"
+              "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+              "-",
+              '-');
+  for (i = 0; app_id[i] != '\0'; i++)
+    app_id[i] = g_ascii_tolower (app_id[i]);
 
-  path = g_strconcat (APP_PREFIX, canonical_app_id, "/", NULL);
+  path = g_strconcat (APP_PREFIX, app_id, "/", NULL);
   settings = g_settings_new_with_path (APP_SCHEMA, path);
 
   app = g_slice_new (Application);
-  app->canonical_app_id = canonical_app_id;
-  app->settings = settings;
+  app->canonical_app_id = g_steal_pointer (&app_id);
+  app->settings = g_object_ref (settings);
   app->app_info = g_object_ref (app_info);
   app->panel = g_object_ref (panel);
 
   source = g_idle_source_new ();
   g_source_set_callback (source, queued_app_info, app, NULL);
   g_source_attach (source, g_task_get_context (task));
-
-  g_free (path);
 }
 
 static void
@@ -523,13 +516,11 @@ load_apps_thread (GTask        *task,
 static void
 load_apps_async (CcNotificationsPanel *panel)
 {
-  GTask *task;
+  g_autoptr(GTask) task = NULL;
 
   panel->apps_load_cancellable = g_cancellable_new ();
   task = g_task_new (panel, panel->apps_load_cancellable, NULL, NULL);
   g_task_run_in_thread (task, load_apps_thread);
-
-  g_object_unref (task);
 }
 
 static void
@@ -538,14 +529,13 @@ children_changed (GSettings            *settings,
                   CcNotificationsPanel *panel)
 {
   int i;
-  gchar **new_app_ids;
+  g_auto (GStrv) new_app_ids = NULL;
 
   g_settings_get (panel->master_settings,
                   "application-children",
                   "^as", &new_app_ids);
   for (i = 0; new_app_ids[i]; i++)
     maybe_add_app_id (panel, new_app_ids[i]);
-  g_strfreev (new_app_ids);
 }
 
 static void
@@ -569,16 +559,6 @@ select_app (GtkListBox           *list_box,
 
   app = g_object_get_qdata (G_OBJECT (row), application_quark ());
   cc_build_edit_dialog (panel, app->app_info, app->settings, panel->master_settings, panel->perm_store);
-}
-
-static void
-application_free (Application *app)
-{
-  g_free (app->canonical_app_id);
-  g_object_unref (app->app_info);
-  g_object_unref (app->settings);
-
-  g_slice_free (Application, app);
 }
 
 static int
