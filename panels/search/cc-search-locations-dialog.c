@@ -87,35 +87,24 @@ place_free (Place * p)
   g_slice_free (Place, p);
 }
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (Place, place_free)
+
 static GList *
 get_bookmarks (void)
 {
-  GFile *file;
-  gchar *contents;
-  gchar *path;
-  gchar **lines;
-  GList *bookmarks;
+  g_autoptr(GFile) file = NULL;
+  g_autofree gchar *contents = NULL;
+  g_autofree gchar *path = NULL;
+  GList *bookmarks = NULL;
   GError *error = NULL;
 
   path = g_build_filename (g_get_user_config_dir (), "gtk-3.0",
                            "bookmarks", NULL);
   file = g_file_new_for_path (path);
-  g_free (path);
-
-  contents = NULL;
-  g_file_load_contents (file, NULL, &contents, NULL, NULL, &error);
-  g_object_unref (file);
-
-  bookmarks = NULL;
-  lines = NULL;
-
-  if (error != NULL)
-    {
-      g_error_free (error);
-    }
-  else
+  if (g_file_load_contents (file, NULL, &contents, NULL, NULL, &error))
     {
       gint idx;
+      g_auto(GStrv) lines = NULL;
 
       lines = g_strsplit (contents, "\n", -1);
       for (idx = 0; lines[idx]; idx++)
@@ -150,9 +139,6 @@ get_bookmarks (void)
             }
 	}
     }
-
-  g_strfreev (lines);
-  g_free (contents);
 
   return g_list_reverse (bookmarks);
 }
@@ -259,7 +245,7 @@ path_from_tracker_dir (const gchar *value)
 static GList *
 get_tracker_locations (void)
 {
-  gchar **locations;
+  g_auto(GStrv) locations = NULL;
   GList *list;
   gint idx;
   Place *location;
@@ -280,16 +266,17 @@ get_tracker_locations (void)
       list = g_list_prepend (list, location);
     }
 
-  g_strfreev (locations);
-
   return g_list_reverse (list);
 }
 
 static GList *
 get_places_list (void)
 {
-  GList *list, *l;
-  GHashTable *places;
+  g_autoptr(GList) xdg_list = NULL;
+  g_autoptr(GList) tracker_list = NULL;
+  g_autoptr(GList) bookmark_list = NULL;
+  GList *l;
+  g_autoptr(GHashTable) places = NULL;
   Place *place, *old_place;
   GList *places_list;
 
@@ -303,53 +290,45 @@ get_places_list (void)
   g_hash_table_insert (places, place->location, place);
 
   /* first, load the XDG dirs */
-  list = get_xdg_dirs ();
-  for (l = list; l != NULL; l = l->next)
+  xdg_list = get_xdg_dirs ();
+  for (l = xdg_list; l != NULL; l = l->next)
     {
       place = l->data;
       g_hash_table_insert (places, place->location, place);
     }
-  g_list_free (list);
 
   /* then, insert all the tracker locations that are not XDG dirs */
-  list = get_tracker_locations ();
-  for (l = list; l != NULL; l = l->next)
+  tracker_list = get_tracker_locations ();
+  for (l = tracker_list; l != NULL; l = l->next)
     {
-      place = l->data;
-      old_place = g_hash_table_lookup (places, place->location);
+      g_autoptr(Place) p = l->data;
+      old_place = g_hash_table_lookup (places, p->location);
       if (old_place == NULL)
-        g_hash_table_insert (places, place->location, place);
-      else
-        place_free (place);
+        g_hash_table_insert (places, p->location, g_steal_pointer (&p));
     }
-  g_list_free (list);
 
   /* finally, load bookmarks, and possibly update attributes */
-  list = get_bookmarks ();
-  for (l = list; l != NULL; l = l->next)
+  bookmark_list = get_bookmarks ();
+  for (l = bookmark_list; l != NULL; l = l->next)
     {
-      place = l->data;
-      old_place = g_hash_table_lookup (places, place->location);
+      g_autoptr(Place) p = l->data;
+      old_place = g_hash_table_lookup (places, p->location);
       if (old_place == NULL)
         {
-          g_hash_table_insert (places, place->location, place);
+          g_hash_table_insert (places, p->location, g_steal_pointer (&p));
         }
       else
         {
           g_free (old_place->display_name);
-          old_place->display_name = g_strdup (place->display_name);
+          old_place->display_name = g_strdup (p->display_name);
 
           if (old_place->place_type == PLACE_OTHER)
             old_place->place_type = PLACE_BOOKMARKS;
-
-          place_free (place);
         }
     }
-  g_list_free (list);
 
   places_list = g_hash_table_get_values (places);
   g_hash_table_steal_all (places);
-  g_hash_table_unref (places);
 
   return places_list;
 }
@@ -360,7 +339,7 @@ switch_tracker_get_mapping (GValue *value,
                             gpointer user_data)
 {
   Place *place = user_data;
-  const gchar **locations;
+  g_autofree const gchar **locations = NULL;
   GFile *location;
   gint idx;
   gboolean found;
@@ -377,8 +356,6 @@ switch_tracker_get_mapping (GValue *value,
         break;
     }
 
-  g_free (locations);
-
   g_value_set_boolean (value, found);
   return TRUE;
 }
@@ -387,8 +364,8 @@ static GPtrArray *
 place_get_new_settings_values (Place *place,
                                gboolean remove)
 {
-  gchar **values;
-  gchar *path;
+  g_auto(GStrv) values = NULL;
+  g_autofree gchar *path = NULL;
   GPtrArray *new_values;
   const gchar *tracker_dir;
   gboolean found;
@@ -419,9 +396,6 @@ place_get_new_settings_values (Place *place,
 
   g_ptr_array_add (new_values, NULL);
 
-  g_strfreev (values);
-  g_free (path);
-
   return new_values;
 }
 
@@ -431,17 +405,12 @@ switch_tracker_set_mapping (const GValue *value,
                             gpointer user_data)
 {
   Place *place = user_data;
-  GPtrArray *new_values;
+  g_autoptr(GPtrArray) new_values = NULL;
   gboolean remove;
-  GVariant *variant;
 
   remove = !g_value_get_boolean (value);
   new_values = place_get_new_settings_values (place, remove);
-  variant = g_variant_new_strv ((const gchar **) new_values->pdata, -1);
-
-  g_ptr_array_unref (new_values);
-
-  return variant;
+  return g_variant_new_strv ((const gchar **) new_values->pdata, -1);
 }
 
 static void
@@ -451,8 +420,8 @@ place_query_info_ready (GObject *source,
 {
   GtkWidget *row, *box, *w;
   Place *place;
-  GFileInfo *info;
-  gchar *path;
+  g_autoptr(GFileInfo) info = NULL;
+  g_autofree gchar *path = NULL;
 
   info = g_file_query_info_finish (G_FILE (source), res, NULL);
   if (!info)
@@ -470,8 +439,6 @@ place_query_info_ready (GObject *source,
   else
     place->settings_key = TRACKER_KEY_RECURSIVE_DIRECTORIES;
 
-  g_free (path);
-
   w = gtk_label_new (place->display_name);
   gtk_container_add (GTK_CONTAINER (box), w);
 
@@ -486,7 +453,6 @@ place_query_info_ready (GObject *source,
                                 place, NULL);
 
   gtk_widget_show_all (row);
-  g_object_unref (info);
 }
 
 static void
@@ -494,14 +460,12 @@ remove_button_clicked (GtkWidget *widget,
                        gpointer   user_data)
 {
   GtkWidget *row = user_data;
-  GPtrArray *new_values;
-  Place     *place;
+  g_autoptr(GPtrArray) new_values = NULL;
+  Place *place;
 
   place = g_object_get_data (G_OBJECT (row), "place");
   new_values = place_get_new_settings_values (place, TRUE);
   g_settings_set_strv (tracker_preferences, place->settings_key, (const gchar **) new_values->pdata);
-
-  g_ptr_array_unref (new_values);
 }
 
 static gint
@@ -511,7 +475,7 @@ place_compare_func (gconstpointer a,
 {
   GtkWidget *child_a, *child_b;
   Place *place_a, *place_b;
-  gchar *path;
+  g_autofree gchar *path = NULL;
   gboolean is_home;
 
   child_a = GTK_WIDGET (a);
@@ -522,7 +486,6 @@ place_compare_func (gconstpointer a,
 
   path = g_file_get_path (place_a->location);
   is_home = (g_strcmp0 (path, g_get_home_dir ()) == 0);
-  g_free (path);
 
   if (is_home)
     return -1;
@@ -573,7 +536,8 @@ create_row_for_place (Place *place)
 static void
 populate_list_boxes (CcSearchLocationsDialog *self)
 {
-  GList *places, *l;
+  g_autoptr(GList) places = NULL;
+  GList *l;
   Place *place;
   GtkWidget *row;
 
@@ -598,8 +562,6 @@ populate_list_boxes (CcSearchLocationsDialog *self)
             g_assert_not_reached ();
         }
     }
-
-  g_list_free (places);
 }
 
 static void
@@ -607,8 +569,8 @@ add_file_chooser_response (GtkDialog *widget,
                            GtkResponseType response,
                            gpointer user_data)
 {
-  Place *place;
-  GPtrArray *new_values;
+  g_autoptr(Place) place = NULL;
+  g_autoptr(GPtrArray) new_values = NULL;
 
   if (response != GTK_RESPONSE_OK)
     {
@@ -624,9 +586,7 @@ add_file_chooser_response (GtkDialog *widget,
   new_values = place_get_new_settings_values (place, FALSE);
   g_settings_set_strv (tracker_preferences, place->settings_key, (const gchar **) new_values->pdata);
 
-  g_ptr_array_unref (new_values);
   gtk_widget_destroy (GTK_WIDGET (widget));
-  place_free (place);
 }
 
 static void
@@ -651,7 +611,8 @@ add_button_clicked (GtkWidget *widget,
 static void
 other_places_refresh (CcSearchLocationsDialog *self)
 {
-  GList *places, *l;
+  g_autoptr(GList) places = NULL;
+  GList *l;
   Place *place;
   GtkWidget *row;
 
@@ -667,8 +628,6 @@ other_places_refresh (CcSearchLocationsDialog *self)
       row = create_row_for_place (place);
       gtk_container_add (GTK_CONTAINER (self->others_list), row);
     }
-
-  g_list_free (places);
 }
 
 CcSearchLocationsDialog *
@@ -701,18 +660,14 @@ gboolean
 cc_search_locations_dialog_is_available (void)
 {
   GSettingsSchemaSource *source;
-  GSettingsSchema *schema;
+  g_autoptr(GSettingsSchema) schema = NULL;
 
   source = g_settings_schema_source_get_default ();
   if (!source)
     return FALSE;
 
   schema = g_settings_schema_source_lookup (source, TRACKER_SCHEMA, TRUE);
-  if (!schema)
-    return FALSE;
-
-  g_settings_schema_unref (schema);
-  return TRUE;
+  return schema != NULL;
 }
 
 static void
