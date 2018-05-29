@@ -183,9 +183,7 @@ setup_scroll_image (CcMouseTest *self)
 /* Callback issued when the user clicks the double click testing area. */
 
 static gboolean
-button_drawing_area_button_press_event (GtkWidget *widget,
-					GdkEventButton *event,
-					CcMouseTest *self)
+button_drawing_area_button_press_event (CcMouseTest *self, GdkEventButton *event)
 {
 	gint double_click_time;
 
@@ -236,17 +234,16 @@ button_drawing_area_button_press_event (GtkWidget *widget,
 }
 
 static gboolean
-button_drawing_area_draw_event (GtkWidget *widget,
-				cairo_t *cr,
-				CcMouseTest *self)
+button_drawing_area_draw_event (CcMouseTest *self,
+                                cairo_t     *cr)
 {
 	gdouble center_x, center_y, size;
 	GdkRGBA inner_color, outer_color;
 	cairo_pattern_t *pattern;
 
-	size = MAX (MIN (gtk_widget_get_allocated_width (widget), gtk_widget_get_allocated_height (widget)), 1);
-	center_x = gtk_widget_get_allocated_width (widget) / 2.0;
-	center_y = gtk_widget_get_allocated_height (widget) / 2.0;
+	size = MAX (MIN (gtk_widget_get_allocated_width (self->button_drawing_area), gtk_widget_get_allocated_height (self->button_drawing_area)), 1);
+	center_x = gtk_widget_get_allocated_width (self->button_drawing_area) / 2.0;
+	center_y = gtk_widget_get_allocated_height (self->button_drawing_area) / 2.0;
 
 	switch (self->double_click_state) {
 	case DOUBLE_CLICK_TEST_ON:
