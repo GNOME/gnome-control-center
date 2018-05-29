@@ -29,7 +29,7 @@ sources = files(
 )
 
 resource_data = files(
-  'display.ui',
+  'cc-night-light-dialog.ui',
   'icons/16x16/sunset.png',
   'icons/16x16/sunrise.png'
 )

@@ -1,36 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.0 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
-  <object class="GtkSizeGroup">
-    <property name="mode">both</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment_from_hours">
-    <property name="upper">23</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment_from_minutes">
-    <property name="upper">59</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment_to_hours">
-    <property name="upper">23</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment_to_minutes">
-    <property name="upper">59</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkDialog" id="window_night_light">
+  <template class="CcNightLightDialog" parent="GtkDialog">
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
+    <!-- <signal name="delete-event" handler="gtk_widget_hide_on_delete" object="CcNightLightDialog" swapped="no" /> -->
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
@@ -73,6 +49,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
+                        <signal name="clicked" handler="dialog_undisable_clicked_cb" object="CcNightLightDialog" swapped="no" />
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -105,33 +82,19 @@
                           <attribute name="weight" value="bold"/>
                         </attributes>
                       </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">0</property>
-                  </packing>
                 </child>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
             </child>
+
             <child>
-              <object class="GtkBox" id="box_content">
+              <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="margin_top">30</property>
-                <property name="margin_left">36</property>
-                <property name="margin_right">36</property>
+                <property name="margin_end">36</property>
+                <property name="margin_start">36</property>
                 <property name="margin_bottom">36</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">26</property>
@@ -149,11 +112,6 @@
                       <class name="dim-label"/>
                     </style>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">0</property>
-                  </packing>
                 </child>
                 <child>
                   <object class="GtkGrid">
@@ -199,6 +157,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="halign">start</property>
+                        <signal name="notify::active" handler="dialog_enabled_notify_cb" object="CcNightLightDialog" swapped="no" />
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -217,6 +176,7 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="active">True</property>
+                            <signal name="toggled" handler="dialog_mode_changed_cb" object="CcNightLightDialog" swapped="no" />
                           </object>
                           <packing>
                             <property name="expand">True</property>
@@ -230,6 +190,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <signal name="toggled" handler="dialog_mode_changed_cb" object="CcNightLightDialog" swapped="no" />
                           </object>
                           <packing>
                             <property name="expand">True</property>
@@ -247,11 +208,6 @@
                       </packing>
                     </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
                 </child>
                 <child>
                   <object class="GtkBox" id="box_manual">
@@ -270,11 +226,6 @@
                           <class name="dim-label"/>
                         </style>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkBox">
@@ -292,15 +243,11 @@
                             <property name="numeric">True</property>
                             <property name="wrap">True</property>
                             <property name="value">4</property>
+                            <signal name="output" handler="dialog_format_hours_combobox" object="CcNightLightDialog" swapped="no" />
                             <style>
                               <class name="padded-spinbutton"/>
                             </style>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkLabel">
@@ -308,11 +255,6 @@
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">:</property>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkSpinButton" id="spinbutton_from_minutes">
@@ -324,15 +266,11 @@
                             <property name="adjustment">adjustment_from_minutes</property>
                             <property name="numeric">True</property>
                             <property name="wrap">True</property>
+                            <signal name="output" handler="dialog_format_minutes_combobox" object="CcNightLightDialog" swapped="no" />
                             <style>
                               <class name="padded-spinbutton"/>
                             </style>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkStack" id="stack_from">
@@ -345,13 +283,13 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="valign">center</property>
+                                <signal name="clicked" handler="dialog_am_pm_from_button_clicked_cb" object="CcNightLightDialog" swapped="no" />
                                 <style>
                                   <class name="unpadded-button"/>
                                 </style>
                               </object>
                               <packing>
                                 <property name="name">am</property>
-                                <property name="title">page0</property>
                               </packing>
                             </child>
                             <child>
@@ -361,13 +299,13 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="valign">center</property>
+                                <signal name="clicked" handler="dialog_am_pm_from_button_clicked_cb" object="CcNightLightDialog" swapped="no" />
                                 <style>
                                   <class name="unpadded-button"/>
                                 </style>
                               </object>
                               <packing>
                                 <property name="name">pm</property>
-                                <property name="title">page1</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
@@ -378,23 +316,12 @@
                               </object>
                               <packing>
                                 <property name="name">blank</property>
-                                <property name="title">page0</property>
                                 <property name="position">2</property>
                               </packing>
                             </child>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">3</property>
-                          </packing>
                         </child>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkBox">
@@ -413,15 +340,11 @@
                             <property name="numeric">True</property>
                             <property name="wrap">True</property>
                             <property name="value">4</property>
+                            <signal name="output" handler="dialog_format_hours_combobox" object="CcNightLightDialog" swapped="no" />
                             <style>
                               <class name="padded-spinbutton"/>
                             </style>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkLabel">
@@ -429,11 +352,6 @@
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">:</property>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkSpinButton" id="spinbutton_to_minutes">
@@ -445,15 +363,11 @@
                             <property name="adjustment">adjustment_to_minutes</property>
                             <property name="numeric">True</property>
                             <property name="wrap">True</property>
+                            <signal name="output" handler="dialog_format_minutes_combobox" object="CcNightLightDialog" swapped="no" />
                             <style>
                               <class name="padded-spinbutton"/>
                             </style>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkStack" id="stack_to">
@@ -466,13 +380,13 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="valign">center</property>
+                                <signal name="clicked" handler="dialog_am_pm_to_button_clicked_cb" object="CcNightLightDialog" swapped="no" />
                                 <style>
                                   <class name="unpadded-button"/>
                                 </style>
                               </object>
                               <packing>
                                 <property name="name">am</property>
-                                <property name="title">page0</property>
                               </packing>
                             </child>
                             <child>
@@ -482,13 +396,13 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="valign">center</property>
+                                <signal name="clicked" handler="dialog_am_pm_to_button_clicked_cb" object="CcNightLightDialog" swapped="no" />
                                 <style>
                                   <class name="unpadded-button"/>
                                 </style>
                               </object>
                               <packing>
                                 <property name="name">pm</property>
-                                <property name="title">page1</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
@@ -499,16 +413,10 @@
                               </object>
                               <packing>
                                 <property name="name">blank</property>
-                                <property name="title">page0</property>
                                 <property name="position">2</property>
                               </packing>
                             </child>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">3</property>
-                          </packing>
                         </child>
                       </object>
                       <packing>
@@ -538,25 +446,16 @@
                       </packing>
                     </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
+                </child>
+                <child>
+                  <object class="CcNightLightWidget" id="night_light_widget">
+                    <property name="visible">True</property>
+                    <property name="height_request">40</property>
+                  </object>
                 </child>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
     </child>
@@ -568,5 +467,30 @@
         <property name="show_close_button">True</property>
       </object>
     </child>
+  </template>
+
+  <object class="GtkAdjustment" id="adjustment_from_hours">
+    <property name="upper">23</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+    <signal name="value-changed" handler="dialog_time_from_value_changed_cb" object="CcNightLightDialog" swapped="no" />
+  </object>
+  <object class="GtkAdjustment" id="adjustment_from_minutes">
+    <property name="upper">59</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+    <signal name="value-changed" handler="dialog_time_from_value_changed_cb" object="CcNightLightDialog" swapped="no" />
+  </object>
+  <object class="GtkAdjustment" id="adjustment_to_hours">
+    <property name="upper">23</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+    <signal name="value-changed" handler="dialog_time_to_value_changed_cb" object="CcNightLightDialog" swapped="no" />
+  </object>
+  <object class="GtkAdjustment" id="adjustment_to_minutes">
+    <property name="upper">59</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+    <signal name="value-changed" handler="dialog_time_to_value_changed_cb" object="CcNightLightDialog" swapped="no" />
   </object>
 </interface>

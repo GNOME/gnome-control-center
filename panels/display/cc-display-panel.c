@@ -269,12 +269,13 @@ cc_display_panel_dispose (GObject *object)
   g_clear_object (&priv->current_config);
   g_clear_object (&priv->up_client);
   g_clear_object (&priv->settings_color);
-  g_clear_object (&priv->night_light_dialog);
   g_clear_object (&priv->main_size_group);
 
   g_cancellable_cancel (priv->shell_cancellable);
   g_clear_object (&priv->shell_cancellable);
   g_clear_object (&priv->shell_proxy);
+
+  g_clear_pointer (&priv->night_light_dialog, gtk_widget_destroy);
 
   G_OBJECT_CLASS (cc_display_panel_parent_class)->dispose (object);
 }
@@ -2145,7 +2146,8 @@ cc_display_panel_night_light_activated (CcDisplayPanel *panel)
   CcDisplayPanelPrivate *priv = panel->priv;
   GtkWindow *toplevel;
   toplevel = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel))));
-  cc_night_light_dialog_present (priv->night_light_dialog, toplevel);
+  gtk_window_set_transient_for (GTK_WINDOW (priv->night_light_dialog), toplevel);
+  gtk_window_present (GTK_WINDOW (priv->night_light_dialog));
 }
 
 static void

@@ -30,72 +30,41 @@
 #include "shell/cc-object-storage.h"
 
 struct _CcNightLightDialog {
-  GObject              parent;
-  GtkBuilder          *builder;
+  GtkDialog            parent;
+
+  GtkWidget           *box_manual;
+  GtkWidget           *infobar_disabled;
+  GtkWidget           *night_light_widget;
+  GtkWidget           *spinbutton_from_hours;
+  GtkWidget           *spinbutton_from_minutes;
+  GtkWidget           *spinbutton_to_hours;
+  GtkWidget           *spinbutton_to_minutes;
+  GtkStack            *stack_from;
+  GtkStack            *stack_to;
+  GtkWidget           *switch_enable;
+  GtkWidget           *togglebutton_automatic;
+  GtkWidget           *togglebutton_manual;
+
+  GtkAdjustment       *adjustment_from_hours;
+  GtkAdjustment       *adjustment_from_minutes;
+  GtkAdjustment       *adjustment_to_hours;
+  GtkAdjustment       *adjustment_to_minutes;
+
   GSettings           *settings_display;
   GSettings           *settings_clock;
   GDBusProxy          *proxy_color;
   GDBusProxy          *proxy_color_props;
   GCancellable        *cancellable;
-  GtkWidget           *night_light_widget;
-  GtkWidget           *main_window;
   gboolean             ignore_value_changed;
   guint                timer_id;
   GDesktopClockFormat  clock_format;
 };
 
-G_DEFINE_TYPE (CcNightLightDialog, cc_night_light_dialog, G_TYPE_OBJECT);
+G_DEFINE_TYPE (CcNightLightDialog, cc_night_light_dialog, GTK_TYPE_DIALOG);
 
 #define CLOCK_SCHEMA     "org.gnome.desktop.interface"
 #define DISPLAY_SCHEMA   "org.gnome.settings-daemon.plugins.color"
 #define CLOCK_FORMAT_KEY "clock-format"
-
-void
-cc_night_light_dialog_present (CcNightLightDialog *self, GtkWindow *parent)
-{
-  GtkWindow *window = GTK_WINDOW (self->main_window);
-  if (parent != NULL)
-    {
-      gtk_window_set_transient_for (window, parent);
-      gtk_window_set_modal (window, TRUE);
-    }
-  gtk_window_present (window);
-}
-
-static void
-cc_night_light_dialog_finalize (GObject *object)
-{
-  CcNightLightDialog *self = CC_NIGHT_LIGHT_DIALOG (object);
-
-  if (self->cancellable != NULL)
-    {
-      g_cancellable_cancel (self->cancellable);
-      g_clear_object (&self->cancellable);
-    }
-
-  if (self->main_window)
-    {
-      gtk_widget_destroy (self->main_window);
-      self->main_window = NULL;
-    }
-
-  g_clear_object (&self->builder);
-  g_clear_object (&self->proxy_color);
-  g_clear_object (&self->proxy_color_props);
-  g_clear_object (&self->settings_display);
-  g_clear_object (&self->settings_clock);
-  if (self->timer_id > 0)
-    g_source_remove (self->timer_id);
-
-  G_OBJECT_CLASS (cc_night_light_dialog_parent_class)->finalize (object);
-}
-
-static void
-cc_night_light_dialog_class_init (CcNightLightDialogClass *klass)
-{
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  object_class->finalize = cc_night_light_dialog_finalize;
-}
 
 static gdouble
 frac_day_from_dt (GDateTime *dt)
@@ -107,17 +76,15 @@ frac_day_from_dt (GDateTime *dt)
 
 static void
 dialog_adjustments_set_frac_hours (CcNightLightDialog *self,
-                                   gdouble value,
-                                   const gchar *id_hours,
-                                   const gchar *id_mins,
-                                   const gchar *id_stack)
+                                   gdouble             value,
+                                   GtkAdjustment      *adj_hours,
+                                   GtkAdjustment      *adj_mins,
+                                   GtkStack           *stack)
 {
-  GtkAdjustment *adj;
   gdouble hours;
   gdouble mins = 0.f;
   gboolean is_pm = FALSE;
   gboolean is_24h;
-  GtkWidget *widget;
 
   /* display the right thing for AM/PM */
   is_24h = self->clock_format == G_DESKTOP_CLOCK_FORMAT_24H;
@@ -139,26 +106,23 @@ dialog_adjustments_set_frac_hours (CcNightLightDialog *self,
           is_pm = TRUE;
         }
     }
+
   g_debug ("setting adjustment %.3f to %.0f:%02.0f", value, hours, mins);
 
   self->ignore_value_changed = TRUE;
-  adj = GTK_ADJUSTMENT (gtk_builder_get_object (self->builder, id_hours));
-  gtk_adjustment_set_value (GTK_ADJUSTMENT (adj), hours);
-  adj = GTK_ADJUSTMENT (gtk_builder_get_object (self->builder, id_mins));
-  gtk_adjustment_set_value (GTK_ADJUSTMENT (adj), mins);
+  gtk_adjustment_set_value (GTK_ADJUSTMENT (adj_hours), hours);
+  gtk_adjustment_set_value (GTK_ADJUSTMENT (adj_mins), mins);
   self->ignore_value_changed = FALSE;
 
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, id_stack));
   if (is_24h)
-    gtk_stack_set_visible_child_name (GTK_STACK (widget), "blank");
+    gtk_stack_set_visible_child_name (stack, "blank");
   else
-    gtk_stack_set_visible_child_name (GTK_STACK (widget), is_pm ? "pm" : "am");
+    gtk_stack_set_visible_child_name (stack, is_pm ? "pm" : "am");
 }
 
 static void
 dialog_update_state (CcNightLightDialog *self)
 {
-  GtkWidget *widget;
   gboolean automatic;
   gboolean disabled_until_tomorrow = FALSE;
   gboolean enabled;
@@ -174,27 +138,22 @@ dialog_update_state (CcNightLightDialog *self)
       if (disabled != NULL)
         disabled_until_tomorrow = g_variant_get_boolean (disabled);
     }
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "infobar_disabled"));
-  gtk_widget_set_visible (widget, disabled_until_tomorrow);
+  gtk_widget_set_visible (self->infobar_disabled, disabled_until_tomorrow);
 
   /* make things insensitive if the switch is disabled */
-  enabled = g_settings_get_boolean (self->settings_display,
-                                    "night-light-enabled");
-  automatic = g_settings_get_boolean (self->settings_display,
-                                      "night-light-schedule-automatic");
+  enabled = g_settings_get_boolean (self->settings_display, "night-light-enabled");
+  automatic = g_settings_get_boolean (self->settings_display, "night-light-schedule-automatic");
+
   gtk_widget_set_sensitive (self->night_light_widget, enabled);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "togglebutton_automatic"));
-  gtk_widget_set_sensitive (widget, enabled);
+  gtk_widget_set_sensitive (self->togglebutton_automatic, enabled);
+  gtk_widget_set_sensitive (self->togglebutton_manual, enabled);
+
   self->ignore_value_changed = TRUE;
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), automatic);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->togglebutton_automatic), automatic);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->togglebutton_manual), !automatic);
   self->ignore_value_changed = FALSE;
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "togglebutton_manual"));
-  gtk_widget_set_sensitive (widget, enabled);
-  self->ignore_value_changed = TRUE;
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), !automatic);
-  self->ignore_value_changed = FALSE;
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "box_manual"));
-  gtk_widget_set_sensitive (widget, enabled && !automatic);
+
+  gtk_widget_set_sensitive (self->box_manual, enabled && !automatic);
 
   /* show the sunset & sunrise icons when required */
   cc_night_light_widget_set_mode (CC_NIGHT_LIGHT_WIDGET (self->night_light_widget),
@@ -222,9 +181,9 @@ dialog_update_state (CcNightLightDialog *self)
       value = fmod (value, 24.f);
     }
   dialog_adjustments_set_frac_hours (self, value,
-                                    "adjustment_from_hours",
-                                    "adjustment_from_minutes",
-                                    "stack_from");
+                                     self->adjustment_from_hours,
+                                     self->adjustment_from_minutes,
+                                     self->stack_from);
   cc_night_light_widget_set_from (CC_NIGHT_LIGHT_WIDGET (self->night_light_widget), value);
 
   /* set to */
@@ -248,14 +207,14 @@ dialog_update_state (CcNightLightDialog *self)
       value = fmod (value, 24.f);
     }
   dialog_adjustments_set_frac_hours (self, value,
-                                     "adjustment_to_hours",
-                                     "adjustment_to_minutes",
-                                     "stack_to");
+                                     self->adjustment_to_hours,
+                                     self->adjustment_to_minutes,
+                                     self->stack_to);
+
   cc_night_light_widget_set_to (CC_NIGHT_LIGHT_WIDGET (self->night_light_widget), value);
 
   /* set new time */
-  cc_night_light_widget_set_now (CC_NIGHT_LIGHT_WIDGET (self->night_light_widget),
-                                   frac_day_from_dt (dt));
+  cc_night_light_widget_set_now (CC_NIGHT_LIGHT_WIDGET (self->night_light_widget), frac_day_from_dt (dt));
 }
 
 static gboolean
@@ -267,14 +226,17 @@ dialog_tick_cb (gpointer user_data)
 }
 
 static void
-dialog_enabled_notify_cb (GtkSwitch *sw, GParamSpec *pspec, CcNightLightDialog *self)
+dialog_enabled_notify_cb (GtkSwitch          *sw,
+                          GParamSpec         *pspec,
+                          CcNightLightDialog *self)
 {
   g_settings_set_boolean (self->settings_display, "night-light-enabled",
                           gtk_switch_get_active (sw));
 }
 
 static void
-dialog_mode_changed_cb (GtkToggleButton *togglebutton, CcNightLightDialog *self)
+dialog_mode_changed_cb (GtkToggleButton    *togglebutton,
+                        CcNightLightDialog *self)
 {
   gboolean ret;
 
@@ -288,7 +250,9 @@ dialog_mode_changed_cb (GtkToggleButton *togglebutton, CcNightLightDialog *self)
 }
 
 static void
-dialog_undisable_call_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+dialog_undisable_call_cb (GObject      *source_object,
+                          GAsyncResult *res,
+                          gpointer      user_data)
 {
   g_autoptr(GVariant) val = NULL;
   g_autoptr(GError) error = NULL;
@@ -303,7 +267,8 @@ dialog_undisable_call_cb (GObject *source_object, GAsyncResult *res, gpointer us
 }
 
 static void
-dialog_undisable_clicked_cb (GtkButton *button, CcNightLightDialog *self)
+dialog_undisable_clicked_cb (GtkButton          *button,
+                             CcNightLightDialog *self)
 {
   g_dbus_proxy_call (self->proxy_color_props,
                      "Set",
@@ -320,25 +285,24 @@ dialog_undisable_clicked_cb (GtkButton *button, CcNightLightDialog *self)
 
 static gdouble
 dialog_adjustments_get_frac_hours (CcNightLightDialog *self,
-                                   const gchar *id_hours,
-                                   const gchar *id_mins,
-                                   const gchar *id_stack)
+                                   GtkAdjustment      *adj_hours,
+                                   GtkAdjustment      *adj_mins,
+                                   GtkStack           *stack)
 {
-  GtkAdjustment *adj;
-  GtkWidget *widget;
   gdouble value;
-  adj = GTK_ADJUSTMENT (gtk_builder_get_object (self->builder, id_hours));
-  value = gtk_adjustment_get_value (adj);
-  adj = GTK_ADJUSTMENT (gtk_builder_get_object (self->builder, id_mins));
-  value += gtk_adjustment_get_value (adj) / 60.0f;
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, id_stack));
-  if (g_strcmp0 (gtk_stack_get_visible_child_name (GTK_STACK (widget)), "pm") == 0)
+
+  value = gtk_adjustment_get_value (adj_hours);
+  value += gtk_adjustment_get_value (adj_mins) / 60.0f;
+
+  if (g_strcmp0 (gtk_stack_get_visible_child_name (stack), "pm") == 0)
     value += 12.f;
+
   return value;
 }
 
 static void
-dialog_time_from_value_changed_cb (GtkAdjustment *adjustment, CcNightLightDialog *self)
+dialog_time_from_value_changed_cb (GtkAdjustment      *adjustment,
+                                   CcNightLightDialog *self)
 {
   gdouble value;
 
@@ -346,17 +310,21 @@ dialog_time_from_value_changed_cb (GtkAdjustment *adjustment, CcNightLightDialog
     return;
 
   value = dialog_adjustments_get_frac_hours (self,
-                                             "adjustment_from_hours",
-                                             "adjustment_from_minutes",
-                                             "stack_from");
+                                             self->adjustment_from_hours,
+                                             self->adjustment_from_minutes,
+                                             self->stack_from);
+
   if (value >= 24.f)
     value = fmod (value, 24);
+
   g_debug ("new value = %.3f", value);
+
   g_settings_set_double (self->settings_display, "night-light-schedule-from", value);
 }
 
 static void
-dialog_time_to_value_changed_cb (GtkAdjustment *adjustment, CcNightLightDialog *self)
+dialog_time_to_value_changed_cb (GtkAdjustment      *adjustment,
+                                 CcNightLightDialog *self)
 {
   gdouble value;
 
@@ -364,26 +332,30 @@ dialog_time_to_value_changed_cb (GtkAdjustment *adjustment, CcNightLightDialog *
     return;
 
   value = dialog_adjustments_get_frac_hours (self,
-                                      "adjustment_to_hours",
-                                      "adjustment_to_minutes",
-                                      "stack_to");
+                                             self->adjustment_to_hours,
+                                             self->adjustment_to_minutes,
+                                             self->stack_to);
   if (value >= 24.f)
     value = fmod (value, 24);
+
   g_debug ("new value = %.3f", value);
+
   g_settings_set_double (self->settings_display, "night-light-schedule-to", value);
 }
 
 static void
-dialog_color_properties_changed_cb (GDBusProxy *proxy,
-                                    GVariant *changed_properties,
-                                    GStrv invalidated_properties,
+dialog_color_properties_changed_cb (GDBusProxy         *proxy,
+                                    GVariant           *changed_properties,
+                                    GStrv               invalidated_properties,
                                     CcNightLightDialog *self)
 {
   dialog_update_state (self);
 }
 
 static void
-dialog_got_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+dialog_got_proxy_cb (GObject      *source_object,
+                     GAsyncResult *res,
+                     gpointer      user_data)
 {
   CcNightLightDialog *self = (CcNightLightDialog *) user_data;
   GDBusProxy *proxy;
@@ -406,7 +378,9 @@ dialog_got_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
 }
 
 static void
-dialog_got_proxy_props_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+dialog_got_proxy_props_cb (GObject      *source_object,
+                           GAsyncResult *res,
+                           gpointer      user_data)
 {
   CcNightLightDialog *self = (CcNightLightDialog *) user_data;
   GDBusProxy *proxy;
@@ -424,7 +398,8 @@ dialog_got_proxy_props_cb (GObject *source_object, GAsyncResult *res, gpointer u
 }
 
 static gboolean
-dialog_format_minutes_combobox (GtkSpinButton *spin, CcNightLightDialog *self)
+dialog_format_minutes_combobox (GtkSpinButton      *spin,
+                                CcNightLightDialog *self)
 {
   GtkAdjustment *adjustment;
   g_autofree gchar *text = NULL;
@@ -435,7 +410,8 @@ dialog_format_minutes_combobox (GtkSpinButton *spin, CcNightLightDialog *self)
 }
 
 static gboolean
-dialog_format_hours_combobox (GtkSpinButton *spin, CcNightLightDialog *self)
+dialog_format_hours_combobox (GtkSpinButton      *spin,
+                              CcNightLightDialog *self)
 {
   GtkAdjustment *adjustment;
   g_autofree gchar *text = NULL;
@@ -451,73 +427,61 @@ dialog_format_hours_combobox (GtkSpinButton *spin, CcNightLightDialog *self)
 static void
 dialog_update_adjustments (CcNightLightDialog *self)
 {
-  GtkAdjustment *adj;
-  GtkWidget *widget;
-
   /* from */
-  adj = GTK_ADJUSTMENT (gtk_builder_get_object (self->builder, "adjustment_from_hours"));
   if (self->clock_format == G_DESKTOP_CLOCK_FORMAT_24H)
     {
-      gtk_adjustment_set_lower (adj, 0);
-      gtk_adjustment_set_upper (adj, 23);
+      gtk_adjustment_set_lower (self->adjustment_from_hours, 0);
+      gtk_adjustment_set_upper (self->adjustment_from_hours, 23);
     }
   else
     {
-      if (gtk_adjustment_get_value (adj) > 12)
-        {
-          widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "stack_from"));
-          gtk_stack_set_visible_child_name (GTK_STACK (widget), "pm");
-        }
-      gtk_adjustment_set_lower (adj, 1);
-      gtk_adjustment_set_upper (adj, 12);
+      if (gtk_adjustment_get_value (self->adjustment_from_hours) > 12)
+          gtk_stack_set_visible_child_name (self->stack_from, "pm");
+
+      gtk_adjustment_set_lower (self->adjustment_from_hours, 1);
+      gtk_adjustment_set_upper (self->adjustment_from_hours, 12);
     }
 
   /* to */
-  adj = GTK_ADJUSTMENT (gtk_builder_get_object (self->builder, "adjustment_to_hours"));
   if (self->clock_format == G_DESKTOP_CLOCK_FORMAT_24H)
     {
-      gtk_adjustment_set_lower (adj, 0);
-      gtk_adjustment_set_upper (adj, 23);
+      gtk_adjustment_set_lower (self->adjustment_to_hours, 0);
+      gtk_adjustment_set_upper (self->adjustment_to_hours, 23);
     }
   else
     {
-      if (gtk_adjustment_get_value (adj) > 12)
-        {
-          widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "stack_to"));
-          gtk_stack_set_visible_child_name (GTK_STACK (widget), "pm");
-        }
-      gtk_adjustment_set_lower (adj, 1);
-      gtk_adjustment_set_upper (adj, 12);
+      if (gtk_adjustment_get_value (self->adjustment_to_hours) > 12)
+          gtk_stack_set_visible_child_name (self->stack_to, "pm");
+
+      gtk_adjustment_set_lower (self->adjustment_to_hours, 1);
+      gtk_adjustment_set_upper (self->adjustment_to_hours, 12);
     }
 }
 
 static void
-dialog_settings_changed_cb (GSettings *settings_display, gchar *key, CcNightLightDialog *self)
+dialog_settings_changed_cb (GSettings          *settings_display,
+                            gchar              *key,
+                            CcNightLightDialog *self)
 {
   dialog_update_state (self);
 }
 
 static void
-dialog_clock_settings_changed_cb (GSettings *settings_display, gchar *key, CcNightLightDialog *self)
+dialog_clock_settings_changed_cb (GSettings          *settings_display,
+                                  gchar              *key,
+                                  CcNightLightDialog *self)
 {
-  GtkAdjustment *adj;
-  GtkWidget *widget;
-
   self->clock_format = g_settings_get_enum (settings_display, CLOCK_FORMAT_KEY);
 
   /* uncontionally widen this to avoid truncation */
-  adj = GTK_ADJUSTMENT (gtk_builder_get_object (self->builder, "adjustment_from_hours"));
-  gtk_adjustment_set_lower (adj, 0);
-  gtk_adjustment_set_upper (adj, 23);
-  adj = GTK_ADJUSTMENT (gtk_builder_get_object (self->builder, "adjustment_to_hours"));
-  gtk_adjustment_set_lower (adj, 0);
-  gtk_adjustment_set_upper (adj, 23);
+  gtk_adjustment_set_lower (self->adjustment_from_hours, 0);
+  gtk_adjustment_set_upper (self->adjustment_from_hours, 23);
+  gtk_adjustment_set_lower (self->adjustment_to_hours, 0);
+  gtk_adjustment_set_upper (self->adjustment_to_hours, 23);
 
   /* update spinbuttons */
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "spinbutton_from_hours"));
-  gtk_spin_button_update (GTK_SPIN_BUTTON (widget));
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "spinbutton_to_hours"));
-  gtk_spin_button_update (GTK_SPIN_BUTTON (widget));
+  gtk_spin_button_update (GTK_SPIN_BUTTON (self->spinbutton_from_hours));
+  gtk_spin_button_update (GTK_SPIN_BUTTON (self->spinbutton_to_hours));
 
   /* update UI */
   dialog_update_state (self);
@@ -525,7 +489,8 @@ dialog_clock_settings_changed_cb (GSettings *settings_display, gchar *key, CcNig
 }
 
 static void
-dialog_am_pm_from_button_clicked_cb (GtkButton *button, CcNightLightDialog *self)
+dialog_am_pm_from_button_clicked_cb (GtkButton          *button,
+                                     CcNightLightDialog *self)
 {
   gdouble value;
   value = g_settings_get_double (self->settings_display, "night-light-schedule-from");
@@ -540,7 +505,8 @@ dialog_am_pm_from_button_clicked_cb (GtkButton *button, CcNightLightDialog *self
 }
 
 static void
-dialog_am_pm_to_button_clicked_cb (GtkButton *button, CcNightLightDialog *self)
+dialog_am_pm_to_button_clicked_cb (GtkButton          *button,
+                                   CcNightLightDialog *self)
 {
   gdouble value;
   value = g_settings_get_double (self->settings_display, "night-light-schedule-to");
@@ -554,92 +520,89 @@ dialog_am_pm_to_button_clicked_cb (GtkButton *button, CcNightLightDialog *self)
   g_debug ("new value = %.3f", value);
 }
 
-static gboolean
-dialog_delete_event_cb (GtkWidget *widget,
-                        GdkEvent *event,
-                        CcNightLightDialog *self)
+/* GObject overrides */
+static void
+cc_night_light_dialog_finalize (GObject *object)
 {
-  gtk_widget_hide (widget);
-  return TRUE;
+  CcNightLightDialog *self = CC_NIGHT_LIGHT_DIALOG (object);
+
+  g_cancellable_cancel (self->cancellable);
+
+  g_clear_object (&self->cancellable);
+  g_clear_object (&self->proxy_color);
+  g_clear_object (&self->proxy_color_props);
+  g_clear_object (&self->settings_display);
+  g_clear_object (&self->settings_clock);
+  if (self->timer_id > 0)
+    g_source_remove (self->timer_id);
+
+  G_OBJECT_CLASS (cc_night_light_dialog_parent_class)->finalize (object);
+}
+
+static void
+cc_night_light_dialog_class_init (CcNightLightDialogClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->finalize = cc_night_light_dialog_finalize;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/display/cc-night-light-dialog.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, adjustment_from_hours);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, adjustment_from_minutes);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, adjustment_to_hours);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, adjustment_to_minutes);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, box_manual);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, infobar_disabled);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, night_light_widget);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, spinbutton_from_hours);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, spinbutton_from_minutes);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, spinbutton_to_hours);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, spinbutton_to_minutes);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, stack_from);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, stack_to);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, switch_enable);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, togglebutton_automatic);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, togglebutton_manual);
+
+  gtk_widget_class_bind_template_callback (widget_class, dialog_am_pm_from_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, dialog_am_pm_to_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, dialog_enabled_notify_cb);
+  gtk_widget_class_bind_template_callback (widget_class, dialog_format_hours_combobox);
+  gtk_widget_class_bind_template_callback (widget_class, dialog_format_minutes_combobox);
+  gtk_widget_class_bind_template_callback (widget_class, dialog_mode_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, dialog_time_from_value_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, dialog_time_to_value_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, dialog_undisable_clicked_cb);
+
+  g_type_ensure (CC_TYPE_NIGHT_LIGHT_WIDGET);
 }
 
 static void
 cc_night_light_dialog_init (CcNightLightDialog *self)
 {
-  GdkScreen *screen;
-  GtkAdjustment *adj;
-  GtkBox *box;
-  GtkWidget *sw;
-  GtkWidget *widget;
-  g_autoptr(GError) error = NULL;
   g_autoptr(GtkCssProvider) provider = NULL;
+  g_autoptr(GError) error = NULL;
+
+  gtk_widget_init_template (GTK_WIDGET (self));
 
   self->cancellable = g_cancellable_new ();
   self->settings_display = g_settings_new (DISPLAY_SCHEMA);
-  g_signal_connect (self->settings_display, "changed",
-                    G_CALLBACK (dialog_settings_changed_cb), self);
 
-  self->builder = gtk_builder_new ();
-  gtk_builder_add_from_resource (self->builder,
-                                 "/org/gnome/control-center/display/display.ui",
-                                 &error);
-
-  if (error != NULL)
-    {
-      g_critical ("Could not load interface file: %s", error->message);
-      return;
-    }
+  g_signal_connect (self->settings_display, "changed", G_CALLBACK (dialog_settings_changed_cb), self);
 
   /* connect widgets */
-  sw = GTK_WIDGET (gtk_builder_get_object (self->builder, "switch_enable"));
   g_settings_bind (self->settings_display,
                    "night-light-enabled",
-                   GTK_SWITCH (sw),
+                   self->switch_enable,
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
-  g_signal_connect (sw, "notify::active",
-                    G_CALLBACK (dialog_enabled_notify_cb), self);
+
   g_settings_bind_writable (self->settings_display, "night-light-enabled",
-                            sw, "sensitive",
+                            self->switch_enable, "sensitive",
                             FALSE);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "togglebutton_automatic"));
-  g_signal_connect (widget, "toggled",
-                    G_CALLBACK (dialog_mode_changed_cb), self);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "togglebutton_manual"));
-  g_signal_connect (widget, "toggled",
-                    G_CALLBACK (dialog_mode_changed_cb), self);
-  adj = GTK_ADJUSTMENT (gtk_builder_get_object (self->builder, "adjustment_from_hours"));
-  g_signal_connect (adj, "value-changed",
-                    G_CALLBACK (dialog_time_from_value_changed_cb), self);
-  adj = GTK_ADJUSTMENT (gtk_builder_get_object (self->builder, "adjustment_from_minutes"));
-  g_signal_connect (adj, "value-changed",
-                    G_CALLBACK (dialog_time_from_value_changed_cb), self);
-  adj = GTK_ADJUSTMENT (gtk_builder_get_object (self->builder, "adjustment_to_hours"));
-  g_signal_connect (adj, "value-changed",
-                    G_CALLBACK (dialog_time_to_value_changed_cb), self);
-  adj = GTK_ADJUSTMENT (gtk_builder_get_object (self->builder, "adjustment_to_minutes"));
-  g_signal_connect (adj, "value-changed",
-                    G_CALLBACK (dialog_time_to_value_changed_cb), self);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "button_undisable"));
-  g_signal_connect (widget, "clicked",
-                    G_CALLBACK (dialog_undisable_clicked_cb), self);
 
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "button_from_pm"));
-  g_signal_connect (widget, "clicked",
-                    G_CALLBACK (dialog_am_pm_from_button_clicked_cb), self);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "button_from_am"));
-  g_signal_connect (widget, "clicked",
-                    G_CALLBACK (dialog_am_pm_from_button_clicked_cb), self);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "button_to_pm"));
-  g_signal_connect (widget, "clicked",
-                    G_CALLBACK (dialog_am_pm_to_button_clicked_cb), self);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "button_to_am"));
-  g_signal_connect (widget, "clicked",
-                    G_CALLBACK (dialog_am_pm_to_button_clicked_cb), self);
-
-  self->main_window = GTK_WIDGET (gtk_builder_get_object (self->builder, "window_night_light"));
-  g_signal_connect (self->main_window, "delete-event",
-                    G_CALLBACK (dialog_delete_event_cb), self);
 
   /* use custom CSS */
   provider = gtk_css_provider_new ();
@@ -656,30 +619,10 @@ cc_night_light_dialog_init (CcNightLightDialog *self)
     {
       g_error ("Failed to load CSS: %s", error->message);
     }
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "spinbutton_from_hours"));
-  screen = gtk_widget_get_screen (widget);
-  gtk_style_context_add_provider_for_screen (screen, GTK_STYLE_PROVIDER (provider),
+
+  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                             GTK_STYLE_PROVIDER (provider),
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "spinbutton_from_hours"));
-  g_signal_connect (widget, "output",
-                    G_CALLBACK (dialog_format_hours_combobox), self);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "spinbutton_from_minutes"));
-  g_signal_connect (widget, "output",
-                    G_CALLBACK (dialog_format_minutes_combobox), self);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "spinbutton_to_hours"));
-  g_signal_connect (widget, "output",
-                    G_CALLBACK (dialog_format_hours_combobox), self);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "spinbutton_to_minutes"));
-  g_signal_connect (widget, "output",
-                    G_CALLBACK (dialog_format_minutes_combobox), self);
-
-  /* add custom widget */
-  self->night_light_widget = cc_night_light_widget_new ();
-  gtk_widget_set_size_request (self->night_light_widget, -1, 40);
-  box = GTK_BOX (gtk_builder_get_object (self->builder, "box_content"));
-  gtk_box_pack_start (box, self->night_light_widget, FALSE, FALSE, 0);
-  gtk_widget_show (self->night_light_widget);
 
   cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
                                        G_DBUS_PROXY_FLAGS_NONE,
@@ -703,8 +646,10 @@ cc_night_light_dialog_init (CcNightLightDialog *self)
   self->settings_clock = g_settings_new (CLOCK_SCHEMA);
   self->clock_format = g_settings_get_enum (self->settings_clock, CLOCK_FORMAT_KEY);
   dialog_update_adjustments (self);
-  g_signal_connect (self->settings_clock, "changed::" CLOCK_FORMAT_KEY,
-                    G_CALLBACK (dialog_clock_settings_changed_cb), self);
+  g_signal_connect (self->settings_clock,
+                    "changed::" CLOCK_FORMAT_KEY,
+                    G_CALLBACK (dialog_clock_settings_changed_cb),
+                    self);
 
   dialog_update_state (self);
 }
@@ -712,6 +657,8 @@ cc_night_light_dialog_init (CcNightLightDialog *self)
 CcNightLightDialog *
 cc_night_light_dialog_new (void)
 {
-  return g_object_new (CC_TYPE_NIGHT_LIGHT_DIALOG, NULL);
+  return g_object_new (CC_TYPE_NIGHT_LIGHT_DIALOG,
+                       "use-header-bar", TRUE,
+                       NULL);
 }
 

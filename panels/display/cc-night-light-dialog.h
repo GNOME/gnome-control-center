@@ -25,10 +25,8 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_NIGHT_LIGHT_DIALOG (cc_night_light_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcNightLightDialog, cc_night_light_dialog, CC, NIGHT_LIGHT_DIALOG, GObject)
+G_DECLARE_FINAL_TYPE (CcNightLightDialog, cc_night_light_dialog, CC, NIGHT_LIGHT_DIALOG, GtkDialog)
 
-CcNightLightDialog  *cc_night_light_dialog_new      (void);
-void                 cc_night_light_dialog_present  (CcNightLightDialog *self,
-                                                     GtkWindow          *parent);
+CcNightLightDialog* cc_night_light_dialog_new (void);
 
 G_END_DECLS
