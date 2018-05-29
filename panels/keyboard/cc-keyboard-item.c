@@ -28,20 +28,38 @@
 
 #include "cc-keyboard-item.h"
 
-#define CC_KEYBOARD_ITEM_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_KEYBOARD_ITEM, CcKeyboardItemPrivate))
-
 #define CUSTOM_KEYS_SCHEMA "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
 
-struct CcKeyboardItemPrivate
+struct _CcKeyboardItem
 {
-  /* properties */
-  /* common */
+  GObject parent_instance;
+
   char *binding;
 
-  /* internal */
   CcKeyboardItem *reverse_item;
   gboolean is_reversed;
   gboolean hidden;
+
+  CcKeyboardItemType type;
+
+  CcKeyCombo *primary_combo;
+  BindingGroupType group;
+  GtkTreeModel *model;
+  char *description;
+  gboolean editable;
+  GList *key_combos;
+  GList *default_combos;
+
+  /* GSettings path */
+  char *gsettings_path;
+  gboolean desc_editable;
+  char *command;
+  gboolean cmd_editable;
+
+  /* GSettings */
+  char *schema;
+  char *key;
+  GSettings *settings;
 };
 
 enum {
@@ -117,6 +135,14 @@ cc_keyboard_item_get_description (CcKeyboardItem *item)
   return item->description;
 }
 
+gboolean
+cc_keyboard_item_get_desc_editable (CcKeyboardItem *item)
+{
+  g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), FALSE);
+
+  return item->desc_editable;
+}
+
 /* wrapper around g_settings_set_str[ing|v] */
 static void
 settings_set_binding (GSettings  *settings,
@@ -157,13 +183,13 @@ _set_binding (CcKeyboardItem *item,
   CcKeyboardItem *reverse;
   gboolean enabled;
 
-  reverse = item->priv->reverse_item;
+  reverse = item->reverse_item;
   enabled = value && strlen (value) > 0;
 
-  g_clear_pointer (&item->priv->binding, g_free);
-  item->priv->binding = enabled ? g_strdup (value) : g_strdup ("");
+  g_clear_pointer (&item->binding, g_free);
+  item->binding = enabled ? g_strdup (value) : g_strdup ("");
 
-  binding_from_string (item->priv->binding, item->primary_combo);
+  binding_from_string (item->binding, item->primary_combo);
 
   /*
    * Always treat the pair (item, reverse) as a unit: setting one also
@@ -176,26 +202,26 @@ _set_binding (CcKeyboardItem *item,
       reverse_mask = enabled ? item->primary_combo->mask ^ GDK_SHIFT_MASK
                              : item->primary_combo->mask;
 
-      g_clear_pointer (&reverse->priv->binding, g_free);
+      g_clear_pointer (&reverse->binding, g_free);
       if (enabled)
-        reverse->priv->binding = gtk_accelerator_name_with_keycode (NULL,
+        reverse->binding = gtk_accelerator_name_with_keycode (NULL,
                                                                     item->primary_combo->keyval,
                                                                     item->primary_combo->keycode,
                                                                     reverse_mask);
 
-      binding_from_string (reverse->priv->binding, reverse->primary_combo);
+      binding_from_string (reverse->binding, reverse->primary_combo);
     }
 
   if (set_backend == FALSE)
     return;
 
-  settings_set_binding (item->settings, item->key, item->priv->binding);
+  settings_set_binding (item->settings, item->key, item->binding);
 
   g_object_notify (G_OBJECT (item), "is-value-default");
 
   if (reverse)
     {
-      settings_set_binding (reverse->settings, reverse->key, reverse->priv->binding);
+      settings_set_binding (reverse->settings, reverse->key, reverse->binding);
       g_object_notify (G_OBJECT (reverse), "is-value-default");
     }
 }
@@ -221,6 +247,14 @@ cc_keyboard_item_get_command (CcKeyboardItem *item)
   g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), NULL);
 
   return item->command;
+}
+
+gboolean
+cc_keyboard_item_get_cmd_editable (CcKeyboardItem *item)
+{
+  g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), FALSE);
+
+  return item->cmd_editable;
 }
 
 static void
@@ -267,7 +301,7 @@ cc_keyboard_item_get_property (GObject    *object,
     g_value_set_string (value, self->description);
     break;
   case PROP_BINDING:
-    g_value_set_string (value, self->priv->binding);
+    g_value_set_string (value, self->binding);
     break;
   case PROP_EDITABLE:
     g_value_set_boolean (value, self->editable);
@@ -342,14 +376,11 @@ cc_keyboard_item_class_init (CcKeyboardItemClass *klass)
                                                          "is value default",
                                                          TRUE,
                                                          G_PARAM_READABLE));
-
-  g_type_class_add_private (klass, sizeof (CcKeyboardItemPrivate));
 }
 
 static void
 cc_keyboard_item_init (CcKeyboardItem *item)
 {
-  item->priv = CC_KEYBOARD_ITEM_GET_PRIVATE (item);
   item->primary_combo = g_new0 (CcKeyCombo, 1);
 }
 
@@ -363,13 +394,11 @@ cc_keyboard_item_finalize (GObject *object)
 
   item = CC_KEYBOARD_ITEM (object);
 
-  g_return_if_fail (item->priv != NULL);
-
   if (item->settings != NULL)
     g_object_unref (item->settings);
 
   /* Free memory */
-  g_free (item->priv->binding);
+  g_free (item->binding);
   g_free (item->primary_combo);
   g_free (item->gsettings_path);
   g_free (item->description);
@@ -509,9 +538,9 @@ cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem *item,
   g_list_free_full (item->key_combos, g_free);
   item->key_combos = settings_get_key_combos (item->settings, item->key, FALSE);
 
-  g_free (item->priv->binding);
-  item->priv->binding = settings_get_binding (item->settings, item->key);
-  binding_from_string (item->priv->binding, item->primary_combo);
+  g_free (item->binding);
+  item->binding = settings_get_binding (item->settings, item->key);
+  binding_from_string (item->binding, item->primary_combo);
   g_signal_connect (G_OBJECT (item->settings), "changed::binding",
 		    G_CALLBACK (binding_changed), item);
 
@@ -531,10 +560,10 @@ cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
   item->description = g_strdup (description);
 
   item->settings = g_settings_new (item->schema);
-  g_free (item->priv->binding);
-  item->priv->binding = settings_get_binding (item->settings, item->key);
+  g_free (item->binding);
+  item->binding = settings_get_binding (item->settings, item->key);
   item->editable = g_settings_is_writable (item->settings, item->key);
-  binding_from_string (item->priv->binding, item->primary_combo);
+  binding_from_string (item->binding, item->primary_combo);
 
   g_list_free_full (item->key_combos, g_free);
   item->key_combos = settings_get_key_combos (item->settings, item->key, FALSE);
@@ -576,36 +605,36 @@ cc_keyboard_item_add_reverse_item (CcKeyboardItem *item,
 {
   g_return_if_fail (item->key != NULL);
 
-  item->priv->reverse_item = reverse_item;
-  if (reverse_item->priv->reverse_item == NULL)
+  item->reverse_item = reverse_item;
+  if (reverse_item->reverse_item == NULL)
     {
-      reverse_item->priv->reverse_item = item;
-      reverse_item->priv->is_reversed = !is_reversed;
+      reverse_item->reverse_item = item;
+      reverse_item->is_reversed = !is_reversed;
     }
   else
-    g_warn_if_fail (reverse_item->priv->is_reversed == !!is_reversed);
+    g_warn_if_fail (reverse_item->is_reversed == !!is_reversed);
 
-  item->priv->is_reversed = !!is_reversed;
+  item->is_reversed = !!is_reversed;
 }
 
 CcKeyboardItem *
 cc_keyboard_item_get_reverse_item (CcKeyboardItem *item)
 {
-  return item->priv->reverse_item;
+  return item->reverse_item;
 }
 
 
 void
 cc_keyboard_item_set_hidden (CcKeyboardItem *item, gboolean hidden)
 {
-  item->priv->hidden = !!hidden;
+  item->hidden = !!hidden;
 }
 
 
 gboolean
 cc_keyboard_item_is_hidden (CcKeyboardItem *item)
 {
-  return item->priv->hidden;
+  return item->hidden;
 }
 
 /**
@@ -668,7 +697,7 @@ cc_keyboard_item_reset (CcKeyboardItem *self)
 
   g_return_if_fail (CC_IS_KEYBOARD_ITEM (self));
 
-  reverse = self->priv->reverse_item;
+  reverse = self->reverse_item;
 
   g_settings_reset (self->settings, self->key);
   g_object_notify (G_OBJECT (self), "is-value-default");
@@ -679,6 +708,63 @@ cc_keyboard_item_reset (CcKeyboardItem *self)
       g_settings_reset (reverse->settings, reverse->key);
       g_object_notify (G_OBJECT (reverse), "is-value-default");
     }
+}
+
+GList *
+cc_keyboard_item_get_key_combos (CcKeyboardItem *item)
+{
+  g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), NULL);
+  return item->key_combos;
+}
+
+GList *
+cc_keyboard_item_get_default_combos (CcKeyboardItem *item)
+{
+  g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), NULL);
+  return item->default_combos;
+}
+
+CcKeyCombo *
+cc_keyboard_item_get_primary_combo (CcKeyboardItem *item)
+{
+  g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), NULL);
+  return item->primary_combo;
+}
+
+const gchar *
+cc_keyboard_item_get_key (CcKeyboardItem *item)
+{
+  g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), NULL);
+  return item->key;
+}
+
+CcKeyboardItemType
+cc_keyboard_item_get_item_type (CcKeyboardItem *item)
+{
+  g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), CC_KEYBOARD_ITEM_TYPE_NONE);
+  return item->type;
+}
+
+void
+cc_keyboard_item_set_model (CcKeyboardItem *item, GtkTreeModel *model, BindingGroupType group)
+{
+  g_return_if_fail (CC_IS_KEYBOARD_ITEM (item));
+  item->model = model;
+  item->group = group;
+}
+
+const gchar *
+cc_keyboard_item_get_gsettings_path (CcKeyboardItem *item)
+{
+  g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), NULL);
+  return item->gsettings_path;
+}
+
+GSettings *
+cc_keyboard_item_get_settings (CcKeyboardItem *item)
+{
+  g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), NULL);
+  return item->settings;
 }
 
 /*

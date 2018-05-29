@@ -152,7 +152,7 @@ apply_custom_item_fields (CcKeyboardShortcutEditor *self,
   /* Only setup the binding when it was actually edited */
   if (self->edited)
     {
-      CcKeyCombo *combo = item->primary_combo;
+      CcKeyCombo *combo = cc_keyboard_item_get_primary_combo (item);
       g_autofree gchar *binding = NULL;
 
       combo->keycode = self->custom_combo->keycode;
@@ -171,10 +171,10 @@ apply_custom_item_fields (CcKeyboardShortcutEditor *self,
     }
 
   /* Set the keyboard shortcut name and command for custom entries */
-  if (item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
+  if (cc_keyboard_item_get_item_type (item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
     {
-      g_settings_set_string (item->settings, "name", gtk_entry_get_text (GTK_ENTRY (self->name_entry)));
-      g_settings_set_string (item->settings, "command", gtk_entry_get_text (GTK_ENTRY (self->command_entry)));
+      g_settings_set_string (cc_keyboard_item_get_settings (item), "name", gtk_entry_get_text (GTK_ENTRY (self->name_entry)));
+      g_settings_set_string (cc_keyboard_item_get_settings (item), "command", gtk_entry_get_text (GTK_ENTRY (self->command_entry)));
     }
 }
 
@@ -411,8 +411,8 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
       collision_text = g_strdup_printf (_("%s is already being used for <b>%s</b>. If you "
                                           "replace it, %s will be disabled"),
                                         friendly_accelerator,
-                                        collision_item->description,
-                                        collision_item->description);
+                                        cc_keyboard_item_get_description (collision_item),
+                                        cc_keyboard_item_get_description (collision_item));
 
       label = is_custom_shortcut (self) ? self->new_shortcut_conflict_label : self->shortcut_conflict_label;
 
@@ -539,7 +539,7 @@ reset_item_clicked_cb (CcKeyboardShortcutEditor *self)
   /* Reset first, then update the shortcut */
   cc_keyboard_manager_reset_shortcut (self->manager, self->item);
 
-  combo = self->item->primary_combo;
+  combo = cc_keyboard_item_get_primary_combo (self->item);
   accel = gtk_accelerator_name (combo->keyval, combo->mask);
   gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->shortcut_accel_label), accel);
 
@@ -565,8 +565,8 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
   if (!item)
     return;
 
-  combo = item->primary_combo;
-  is_custom = item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH;
+  combo = cc_keyboard_item_get_primary_combo (item);
+  is_custom = cc_keyboard_item_get_item_type (item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH;
   accel = gtk_accelerator_name (combo->keyval, combo->mask);
 
   /* To avoid accidentally thinking we unset the current keybinding, set the values
@@ -587,7 +587,7 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
   gtk_widget_hide (self->replace_button);
 
   /* Setup the top label */
-  text = g_strdup_printf (_("Enter new shortcut to change <b>%s</b>."), item->description);
+  text = g_strdup_printf (_("Enter new shortcut to change <b>%s</b>."), cc_keyboard_item_get_description (item));
 
   gtk_label_set_markup (GTK_LABEL (self->top_info_label), text);
 
@@ -611,12 +611,12 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
       g_signal_handlers_block_by_func (self->name_entry, name_entry_changed_cb, self);
 
       /* Name entry */
-      gtk_entry_set_text (GTK_ENTRY (self->name_entry), item->description);
-      gtk_widget_set_sensitive (self->name_entry, item->desc_editable);
+      gtk_entry_set_text (GTK_ENTRY (self->name_entry), cc_keyboard_item_get_description (item));
+      gtk_widget_set_sensitive (self->name_entry, cc_keyboard_item_get_desc_editable (item));
 
       /* Command entry */
-      gtk_entry_set_text (GTK_ENTRY (self->command_entry), item->command);
-      gtk_widget_set_sensitive (self->command_entry, item->cmd_editable);
+      gtk_entry_set_text (GTK_ENTRY (self->command_entry), cc_keyboard_item_get_command (item));
+      gtk_widget_set_sensitive (self->command_entry, cc_keyboard_item_get_cmd_editable (item));
 
       /* If there is no accelerator set for this custom shortcut, show the "Set Shortcut" button. */
       is_accel_empty = !accel || accel[0] == '\0';
@@ -808,7 +808,7 @@ grab_idle (gpointer data)
 {
   CcKeyboardShortcutEditor *self = data;
 
-  if (self->item && self->item->type != CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
+  if (self->item && cc_keyboard_item_get_item_type (self->item) != CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
     grab_seat (self);
 
   self->grab_idle_id = 0;
