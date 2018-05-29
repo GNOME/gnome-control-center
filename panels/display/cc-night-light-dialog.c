@@ -587,7 +587,6 @@ cc_night_light_dialog_init (CcNightLightDialog *self)
   if (error != NULL)
     {
       g_critical ("Could not load interface file: %s", error->message);
-      g_error_free (error);
       return;
     }
 
