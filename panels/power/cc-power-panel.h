@@ -25,45 +25,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_POWER_PANEL cc_power_panel_get_type()
-
-#define CC_POWER_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_POWER_PANEL, CcPowerPanel))
-
-#define CC_POWER_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_POWER_PANEL, CcPowerPanelClass))
-
-#define CC_IS_POWER_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_POWER_PANEL))
-
-#define CC_IS_POWER_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_POWER_PANEL))
-
-#define CC_POWER_PANEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_POWER_PANEL, CcPowerPanelClass))
-
-typedef struct _CcPowerPanel CcPowerPanel;
-typedef struct _CcPowerPanelClass CcPowerPanelClass;
-typedef struct _CcPowerPanelPrivate CcPowerPanelPrivate;
-
-struct _CcPowerPanel
-{
-  CcPanel parent;
-
-  CcPowerPanelPrivate *priv;
-};
-
-struct _CcPowerPanelClass
-{
-  CcPanelClass parent_class;
-};
-
-GType cc_power_panel_get_type (void) G_GNUC_CONST;
+#define CC_TYPE_POWER_PANEL (cc_power_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcPowerPanel, cc_power_panel, CC, POWER_PANEL, CcPanel)
 
 G_END_DECLS
 
