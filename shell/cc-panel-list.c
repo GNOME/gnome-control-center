@@ -835,7 +835,7 @@ cc_panel_list_activate (CcPanelList *self)
   while (row && !gtk_widget_get_visible (GTK_WIDGET (row)));
 
   /* If the row is valid, activate it */
-  if (row && !gtk_list_box_row_is_selected (row))
+  if (row)
     {
       gtk_list_box_select_row (GTK_LIST_BOX (listbox), row);
       gtk_widget_grab_focus (GTK_WIDGET (row));
