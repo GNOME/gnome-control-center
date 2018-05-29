@@ -229,6 +229,8 @@ remove_all_custom_widgets (CcWindow *self)
   GtkWidget *widget;
   guint i;
 
+  CC_ENTRY;
+
   /* remove from the header */
   for (i = 0; i < self->custom_widgets->len; i++)
     {
@@ -236,6 +238,8 @@ remove_all_custom_widgets (CcWindow *self)
       gtk_container_remove (GTK_CONTAINER (self->top_right_box), widget);
     }
   g_ptr_array_set_size (self->custom_widgets, 0);
+
+  CC_EXIT;
 }
 
 static void
@@ -688,11 +692,15 @@ cc_window_embed_widget_in_header (CcShell   *shell,
 {
   CcWindow *self = CC_WINDOW (shell);
 
+  CC_ENTRY;
+
   /* add to header */
   gtk_box_pack_end (GTK_BOX (self->top_right_box), widget, FALSE, FALSE, 0);
   g_ptr_array_add (self->custom_widgets, g_object_ref (widget));
 
   gtk_size_group_add_widget (self->header_sizegroup, widget);
+
+  CC_EXIT;
 }
 
 static GtkWidget *
