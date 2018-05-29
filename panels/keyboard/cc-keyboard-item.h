@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef __CC_KEYBOARD_ITEM_H
-#define __CC_KEYBOARD_ITEM_H
+#pragma once
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -95,5 +94,3 @@ const gchar    * cc_keyboard_item_get_gsettings_path (CcKeyboardItem *self);
 GSettings      * cc_keyboard_item_get_settings     (CcKeyboardItem *self);
 
 G_END_DECLS
-
-#endif /* __CC_KEYBOARD_ITEM_H */
