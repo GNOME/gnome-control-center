@@ -18,8 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __CC_NIGHT_LIGHT_WIDGET_H__
-#define __CC_NIGHT_LIGHT_WIDGET_H__
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -45,5 +44,3 @@ void         cc_night_light_widget_set_mode   (CcNightLightWidget *self,
                                                CcNightLightWidgetMode mode);
 
 G_END_DECLS
-
-#endif
