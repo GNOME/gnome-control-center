@@ -176,8 +176,8 @@ static CcDisplayModeDBus *
 cc_display_mode_dbus_new (GVariant *variant)
 {
   double d;
-  GVariantIter *scales_iter;
-  GVariant *properties_variant;
+  g_autoptr(GVariantIter) scales_iter = NULL;
+  g_autoptr(GVariant) properties_variant = NULL;
   gboolean is_current;
   gboolean is_preferred;
   gboolean is_interlaced;
@@ -208,9 +208,6 @@ cc_display_mode_dbus_new (GVariant *variant)
     self->flags |= MODE_PREFERRED;
   if (is_interlaced)
     self->flags |= MODE_INTERLACED;
-
-  g_variant_iter_free (scales_iter);
-  g_variant_unref (properties_variant);
 
   return self;
 }
@@ -776,10 +773,14 @@ construct_modes (CcDisplayMonitorDBus *self,
                  GVariantIter *modes)
 {
   CcDisplayModeDBus *mode;
-  GVariant *variant;
 
-  while (g_variant_iter_next (modes, "@"MODE_FORMAT, &variant))
+  while (TRUE)
     {
+      g_autoptr(GVariant) variant = NULL;
+
+      if (!g_variant_iter_next (modes, "@"MODE_FORMAT, &variant))
+        break;
+
       mode = cc_display_mode_dbus_new (variant);
       self->modes = g_list_prepend (self->modes, mode);
 
@@ -787,8 +788,6 @@ construct_modes (CcDisplayMonitorDBus *self,
         self->preferred_mode = CC_DISPLAY_MODE (mode);
       if (mode->flags & MODE_CURRENT)
         self->current_mode = CC_DISPLAY_MODE (mode);
-
-      g_variant_unref (variant);
     }
 }
 
@@ -798,10 +797,8 @@ cc_display_monitor_dbus_new (GVariant *variant,
 {
   CcDisplayMonitorDBus *self = g_object_new (CC_TYPE_DISPLAY_MONITOR_DBUS, NULL);
   gchar *s1, *s2, *s3, *s4;
-  GVariantIter *modes;
-  GVariantIter *props;
-  const char *s;
-  GVariant *v;
+  g_autoptr(GVariantIter) modes = NULL;
+  g_autoptr(GVariantIter) props = NULL;
 
   self->config = config;
 
@@ -814,8 +811,14 @@ cc_display_monitor_dbus_new (GVariant *variant,
 
   construct_modes (self, modes);
 
-  while (g_variant_iter_next (props, "{&sv}", &s, &v))
+  while (TRUE)
     {
+      const char *s;
+      g_autoptr(GVariant) v = NULL;
+
+      if (!g_variant_iter_next (props, "{&sv}", &s, &v))
+        break;
+
       if (g_str_equal (s, "width-mm"))
         {
           g_variant_get (v, "i", &self->width_mm);
@@ -845,12 +848,7 @@ cc_display_monitor_dbus_new (GVariant *variant,
         {
           g_variant_get (v, "s", &self->display_name);
         }
-
-      g_variant_unref (v);
     }
-
-  g_variant_iter_free (modes);
-  g_variant_iter_free (props);
 
   return self;
 }
@@ -987,7 +985,7 @@ config_apply (CcDisplayConfigDBus *self,
               CcDisplayConfigMethod method,
               GError **error)
 {
-  GVariant *retval;
+  g_autoptr(GVariant) retval = NULL;
 
   cc_display_config_dbus_ensure_non_offset_coords (self);
 
@@ -1002,23 +1000,18 @@ config_apply (CcDisplayConfigDBus *self,
                                         -1,
                                         NULL,
                                         error);
-  if (!retval)
-    return FALSE;
-
-  g_variant_unref (retval);
-  return TRUE;
+  return retval != NULL;
 }
 
 static gboolean
 cc_display_config_dbus_is_applicable (CcDisplayConfig *pself)
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (pself);
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   if (!config_apply (self, CC_DISPLAY_CONFIG_METHOD_VERIFY, &error))
     {
       g_warning ("Config not applicable: %s", error->message);
-      g_error_free (error);
       return FALSE;
     }
   else
@@ -1275,11 +1268,13 @@ construct_monitors (CcDisplayConfigDBus *self,
                     GVariantIter *monitors,
                     GVariantIter *logical_monitors)
 {
-  GVariant *variant;
-
-  while (g_variant_iter_next (monitors, "@"MONITOR_FORMAT, &variant))
+  while (TRUE)
     {
       CcDisplayMonitorDBus *monitor;
+      g_autoptr(GVariant) variant = NULL;
+
+      if (!g_variant_iter_next (monitors, "@"MONITOR_FORMAT, &variant))
+        break;
 
       monitor = cc_display_monitor_dbus_new (variant, self);
       self->monitors = g_list_prepend (self->monitors, monitor);
@@ -1288,14 +1283,17 @@ construct_monitors (CcDisplayConfigDBus *self,
         g_signal_connect_object (monitor, "scale",
                                  G_CALLBACK (apply_global_scale_requirement),
                                  self, G_CONNECT_SWAPPED);
-      g_variant_unref (variant);
     }
 
-  while (g_variant_iter_next (logical_monitors, "@"LOGICAL_MONITOR_FORMAT, &variant))
+  while (TRUE)
     {
+      g_autoptr(GVariant) variant = NULL;
       CcDisplayLogicalMonitor *logical_monitor;
-      GVariantIter *monitor_specs;
+      g_autoptr(GVariantIter) monitor_specs = NULL;
       const gchar *s1, *s2, *s3, *s4;
+
+      if (!g_variant_iter_next (logical_monitors, "@"LOGICAL_MONITOR_FORMAT, &variant))
+        break;
 
       logical_monitor = g_object_new (CC_TYPE_DISPLAY_LOGICAL_MONITOR, NULL);
       g_variant_get (variant, LOGICAL_MONITOR_FORMAT,
@@ -1335,9 +1333,6 @@ construct_monitors (CcDisplayConfigDBus *self,
         }
 
       register_logical_monitor (self, logical_monitor);
-
-      g_variant_iter_free (monitor_specs);
-      g_variant_unref (variant);
     }
 
   gather_clone_modes (self);
@@ -1347,11 +1342,9 @@ static void
 cc_display_config_dbus_constructed (GObject *object)
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (object);
-  GVariantIter *monitors;
-  GVariantIter *logical_monitors;
-  GVariantIter *props;
-  const char *s;
-  GVariant *v;
+  g_autoptr(GVariantIter) monitors = NULL;
+  g_autoptr(GVariantIter) logical_monitors = NULL;
+  g_autoptr(GVariantIter) props = NULL;
 
   g_variant_get (self->state,
                  CURRENT_STATE_FORMAT,
@@ -1360,8 +1353,14 @@ cc_display_config_dbus_constructed (GObject *object)
                  &logical_monitors,
                  &props);
 
-  while (g_variant_iter_next (props, "{&sv}", &s, &v))
+  while (TRUE)
     {
+      const char *s;
+      g_autoptr(GVariant) v = NULL;
+
+      if (!g_variant_iter_next (props, "{&sv}", &s, &v))
+	break;
+
       if (g_str_equal (s, "supports-mirroring"))
         {
           g_variant_get (v, "b", &self->supports_mirroring);
@@ -1382,15 +1381,9 @@ cc_display_config_dbus_constructed (GObject *object)
               u <= CC_DISPLAY_LAYOUT_MODE_PHYSICAL)
             self->layout_mode = u;
         }
-
-      g_variant_unref (v);
     }
 
   construct_monitors (self, monitors, logical_monitors);
-
-  g_variant_iter_free (monitors);
-  g_variant_iter_free (logical_monitors);
-  g_variant_iter_free (props);
 
   G_OBJECT_CLASS (cc_display_config_dbus_parent_class)->constructed (object);
 }
