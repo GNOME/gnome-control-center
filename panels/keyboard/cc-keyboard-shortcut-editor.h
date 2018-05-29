@@ -18,8 +18,7 @@
  * Authors: Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  */
 
-#ifndef CC_KEYBOARD_SHORTCUT_EDITOR_H
-#define CC_KEYBOARD_SHORTCUT_EDITOR_H
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -50,6 +49,4 @@ void                 cc_keyboard_shortcut_editor_set_mode        (CcKeyboardShor
                                                                   CcShortcutEditorMode      mode);
 
 G_END_DECLS
-
-#endif /* CC_KEYBOARD_SHORTCUT_EDITOR_H */
 

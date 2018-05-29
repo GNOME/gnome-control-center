@@ -19,8 +19,7 @@
  * 02110-1301, USA.
  */
 
-#ifndef __CC_KEYBOARD_OPTION_H__
-#define __CC_KEYBOARD_OPTION_H__
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -45,5 +44,3 @@ void            cc_keyboard_option_set_selection        (CcKeyboardOption *self,
 void            cc_keyboard_option_clear_all            (void);
 
 G_END_DECLS
-
-#endif  /* __CC_KEYBOARD_OPTION_H__ */

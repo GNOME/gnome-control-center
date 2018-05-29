@@ -20,8 +20,7 @@
  *
  */
 
-#ifndef CC_KEYBOARD_MANAGER_H
-#define CC_KEYBOARD_MANAGER_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -55,6 +54,4 @@ void                 cc_keyboard_manager_reset_shortcut          (CcKeyboardMana
                                                                   CcKeyboardItem     *item);
 
 G_END_DECLS
-
-#endif /* CC_KEYBOARD_MANAGER_H */
 
