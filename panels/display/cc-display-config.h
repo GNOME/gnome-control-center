@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef _CC_DISPLAY_CONFIG_H
-#define _CC_DISPLAY_CONFIG_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -232,5 +231,3 @@ int               cc_display_mode_get_freq                  (CcDisplayMode     *
 double            cc_display_mode_get_freq_f                (CcDisplayMode     *mode);
 
 G_END_DECLS
-
-#endif /* _CC_DISPLAY_CONFIG_H */

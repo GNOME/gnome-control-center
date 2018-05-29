@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef _CC_DISPLAY_CONFIG_MANAGER_DBUS_H
-#define _CC_DISPLAY_CONFIG_MANAGER_DBUS_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -33,5 +32,3 @@ G_DECLARE_FINAL_TYPE (CcDisplayConfigManagerDBus, cc_display_config_manager_dbus
 CcDisplayConfigManager * cc_display_config_manager_dbus_new (void);
 
 G_END_DECLS
-
-#endif /* _CC_DISPLAY_CONFIG_MANAGER_DBUS_H */

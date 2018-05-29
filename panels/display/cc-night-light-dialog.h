@@ -18,8 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __CC_NIGHT_LIGHT_DIALOG_H__
-#define __CC_NIGHT_LIGHT_DIALOG_H__
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -33,5 +32,3 @@ void                 cc_night_light_dialog_present  (CcNightLightDialog *self,
                                                      GtkWindow          *parent);
 
 G_END_DECLS
-
-#endif
