@@ -1,4 +1,4 @@
-/* -*- mode: c; style: linux -*-
+/* cc-display-arrangement.c
  *
  * Copyright (C) 2007, 2008, 2017  Red Hat, Inc.
  * Copyright (C) 2013 Intel, Inc.
@@ -25,11 +25,12 @@
 
 struct _CcDisplayArrangement
 {
-  GtkDrawingArea object;
-  CcDisplayConfig *config;
+  GtkDrawingArea    object;
 
-  cairo_matrix_t to_widget;
-  cairo_matrix_t to_actual;
+  CcDisplayConfig  *config;
+
+  cairo_matrix_t    to_widget;
+  cairo_matrix_t    to_actual;
 
   gboolean          drag_active;
   CcDisplayMonitor *selected_output;
@@ -77,8 +78,8 @@ static GParamSpec *props[PROP_LAST];
 
 static void
 apply_rotation_to_geometry (CcDisplayMonitor *output,
-			    int *w,
-			    int *h)
+                            int              *w,
+                            int              *h)
 {
   CcDisplayRotation rotation;
 
@@ -108,8 +109,7 @@ get_scaled_geometry (CcDisplayConfig  *config,
   else
     {
       cc_display_monitor_get_geometry (output, x, y, NULL, NULL);
-      cc_display_mode_get_resolution (cc_display_monitor_get_preferred_mode (output),
-                                      w, h);
+      cc_display_mode_get_resolution (cc_display_monitor_get_preferred_mode (output), w, h);
     }
 
   if (cc_display_config_is_layout_logical (config))
@@ -124,12 +124,12 @@ get_scaled_geometry (CcDisplayConfig  *config,
 
 static void
 get_bounding_box (CcDisplayConfig *config,
-		  gint            *x1,
-		  gint            *y1,
-		  gint            *x2,
-		  gint            *y2,
-		  gint            *max_w,
-		  gint            *max_h)
+                  gint            *x1,
+                  gint            *y1,
+                  gint            *x2,
+                  gint            *y2,
+                  gint            *max_w,
+                  gint            *max_h)
 {
   GList *outputs, *l;
 
@@ -141,7 +141,7 @@ get_bounding_box (CcDisplayConfig *config,
   *max_h = 0;
 
   outputs = cc_display_config_get_monitors (config);
-  for (l = outputs; l != NULL; l = l->next)
+  for (l = outputs; l; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
       int x, y, w, h;
@@ -151,81 +151,81 @@ get_bounding_box (CcDisplayConfig *config,
 
       get_scaled_geometry (config, output, &x, &y, &w, &h);
 
-      *x1 = MIN(*x1, x);
-      *y1 = MIN(*y1, y);
-      *x2 = MAX(*x2, x + w);
-      *y2 = MAX(*y2, y + h);
-      *max_w = MAX(*max_w, w);
-      *max_h = MAX(*max_h, h);
+      *x1 = MIN (*x1, x);
+      *y1 = MIN (*y1, y);
+      *x2 = MAX (*x2, x + w);
+      *y2 = MAX (*y2, y + h);
+      *max_w = MAX (*max_w, w);
+      *max_h = MAX (*max_h, h);
     }
 }
 
 static void
-monitor_get_drawing_rect (CcDisplayArrangement *arr,
-			  CcDisplayMonitor     *output,
-			  gint                 *x1,
-			  gint                 *y1,
-			  gint                 *x2,
-			  gint                 *y2)
+monitor_get_drawing_rect (CcDisplayArrangement *self,
+                          CcDisplayMonitor     *output,
+                          gint                 *x1,
+                          gint                 *y1,
+                          gint                 *x2,
+                          gint                 *y2)
 {
   gdouble x, y;
 
-  get_scaled_geometry (arr->config, output, x1, y1, x2, y2);
+  get_scaled_geometry (self->config, output, x1, y1, x2, y2);
 
   /* get_scaled_geometry returns the width and height */
   *x2 = *x1 + *x2;
   *y2 = *y1 + *y2;
 
   x = *x1; y = *y1;
-  cairo_matrix_transform_point (&arr->to_widget, &x, &y);
+  cairo_matrix_transform_point (&self->to_widget, &x, &y);
   *x1 = round (x);
   *y1 = round (y);
 
   x = *x2; y = *y2;
-  cairo_matrix_transform_point (&arr->to_widget, &x, &y);
+  cairo_matrix_transform_point (&self->to_widget, &x, &y);
   *x2 = round (x);
   *y2 = round (y);
 }
 
 
 static void
-get_snap_distance (CcDisplayArrangement *arr,
-		   gint                  mon_x,
-		   gint                  mon_y,
-		   gint                  new_x,
-		   gint                  new_y,
-		   gdouble              *dist_x,
-		   gdouble              *dist_y)
+get_snap_distance (CcDisplayArrangement *self,
+                   gint                  mon_x,
+                   gint                  mon_y,
+                   gint                  new_x,
+                   gint                  new_y,
+                   gdouble              *dist_x,
+                   gdouble              *dist_y)
 {
-  gdouble _dist_x, _dist_y;
+  gdouble local_dist_x, local_dist_y;
 
-  _dist_x = ABS (mon_x - new_x);
-  _dist_y = ABS (mon_y - new_y);
+  local_dist_x = ABS (mon_x - new_x);
+  local_dist_y = ABS (mon_y - new_y);
 
-  cairo_matrix_transform_distance (&arr->to_widget, &_dist_x, &_dist_y);
+  cairo_matrix_transform_distance (&self->to_widget, &local_dist_x, &local_dist_y);
 
   if (dist_x)
-    *dist_x = _dist_x;
+    *dist_x = local_dist_x;
   if (dist_y)
-    *dist_y = _dist_y;
+    *dist_y = local_dist_y;
 }
 
 static void
-maybe_update_snap (CcDisplayArrangement *arr,
-		   struct SnapData      *snap_data,
-		   gint                  mon_x,
-		   gint                  mon_y,
-		   gint                  new_x,
-		   gint                  new_y,
-		   enum SnapDirection    snapped,
-		   enum SnapDirection    major_axis,
-		   gint                  minor_unlimited)
+maybe_update_snap (CcDisplayArrangement *self,
+                   struct SnapData      *snap_data,
+                   gint                  mon_x,
+                   gint                  mon_y,
+                   gint                  new_x,
+                   gint                  new_y,
+                   enum SnapDirection    snapped,
+                   enum SnapDirection    major_axis,
+                   gint                  minor_unlimited)
 {
   enum SnapDirection update_snap = SNAP_DIR_NONE;
   gdouble dist_x, dist_y;
   gdouble dist;
 
-  get_snap_distance (arr, mon_x, mon_y, new_x, new_y, &dist_x, &dist_y);
+  get_snap_distance (self, mon_x, mon_y, new_x, new_y, &dist_x, &dist_y);
   dist = MAX (dist_x, dist_y);
 
   /* Snap by the variable max snap distance on the major axis, ensure the
@@ -233,7 +233,7 @@ maybe_update_snap (CcDisplayArrangement *arr,
   switch (major_axis)
     {
       case SNAP_DIR_X:
-        if (dist_x > arr->major_snap_distance)
+        if (dist_x > self->major_snap_distance)
           return;
         if (dist_y > MINOR_SNAP_DISTANCE)
           {
@@ -245,7 +245,7 @@ maybe_update_snap (CcDisplayArrangement *arr,
         break;
 
       case SNAP_DIR_Y:
-        if (dist_y > arr->major_snap_distance)
+        if (dist_y > self->major_snap_distance)
           return;
         if (dist_x > MINOR_SNAP_DISTANCE)
           {
@@ -268,13 +268,17 @@ maybe_update_snap (CcDisplayArrangement *arr,
       /* Update, if this is closer on the main axis. */
       if (((major_axis == SNAP_DIR_X) && (dist_x < snap_data->dist_x)) ||
           ((major_axis == SNAP_DIR_Y) && (dist_y < snap_data->dist_y)))
-        update_snap = SNAP_DIR_BOTH;
+        {
+          update_snap = SNAP_DIR_BOTH;
+        }
 
       /* Also update if we were only snapping in one direction earlier and it
        * is better or equally good. */
       if ((snap_data->snapped == SNAP_DIR_X && (dist <= snap_data->dist_x)) ||
           (snap_data->snapped == SNAP_DIR_Y && (dist <= snap_data->dist_y)))
-        update_snap = SNAP_DIR_BOTH;
+        {
+          update_snap = SNAP_DIR_BOTH;
+        }
     }
   else if (snapped == SNAP_DIR_X)
     {
@@ -305,13 +309,11 @@ maybe_update_snap (CcDisplayArrangement *arr,
     }
 }
 
-#define OVERLAP(_s1, _s2, _t1, _t2) ((_s1) <= (_t2) && (_t1) <= (_s2))
-
 static void
-find_best_snapping (CcDisplayArrangement *arr,
-		    CcDisplayConfig      *config,
-		    CcDisplayMonitor     *snap_output,
-		    struct SnapData      *snap_data)
+find_best_snapping (CcDisplayArrangement *self,
+                    CcDisplayConfig      *config,
+                    CcDisplayMonitor     *snap_output,
+                    struct SnapData      *snap_data)
 {
   GList *outputs, *l;
   gint x1, y1, x2, y2;
@@ -322,6 +324,8 @@ find_best_snapping (CcDisplayArrangement *arr,
   get_scaled_geometry (config, snap_output, &x1, &y1, &w, &h);
   x2 = x1 + w;
   y2 = y1 + h;
+
+#define OVERLAP(_s1, _s2, _t1, _t2) ((_s1) <= (_t2) && (_t1) <= (_s2))
 
   outputs = cc_display_config_get_monitors (config);
   for (l = outputs; l; l = l->next)
@@ -352,116 +356,119 @@ find_best_snapping (CcDisplayArrangement *arr,
 
       dist_y = 9999;
       /* overlap on the X axis */
-      if (OVERLAP(x1, x2, _x1, _x2))
+      if (OVERLAP (x1, x2, _x1, _x2))
         {
-          get_snap_distance (arr, x1, y1, x1, top_snap_pos, NULL, &dist_y);
-          get_snap_distance (arr, x1, y1, x1, bottom_snap_pos, NULL, &tmp);
+          get_snap_distance (self, x1, y1, x1, top_snap_pos, NULL, &dist_y);
+          get_snap_distance (self, x1, y1, x1, bottom_snap_pos, NULL, &tmp);
           dist_y = MIN(dist_y, tmp);
         }
 
       dist_x = 9999;
       /* overlap on the Y axis */
-      if (OVERLAP(y1, y2, _y1, _y2))
+      if (OVERLAP (y1, y2, _y1, _y2))
         {
-          get_snap_distance (arr, x1, y1, left_snap_pos, y1, &dist_x, NULL);
-          get_snap_distance (arr, x1, y1, right_snap_pos, y1, &tmp, NULL);
+          get_snap_distance (self, x1, y1, left_snap_pos, y1, &dist_x, NULL);
+          get_snap_distance (self, x1, y1, right_snap_pos, y1, &tmp, NULL);
           dist_x = MIN(dist_x, tmp);
         }
 
       /* We only snap horizontally or vertically to an edge of the same monitor */
       if (dist_y < dist_x)
         {
-          maybe_update_snap (arr, snap_data, x1, y1, x1, top_snap_pos, SNAP_DIR_Y, SNAP_DIR_Y, 0);
-          maybe_update_snap (arr, snap_data, x1, y1, x1, bottom_snap_pos, SNAP_DIR_Y, SNAP_DIR_Y, 0);
+          maybe_update_snap (self, snap_data, x1, y1, x1, top_snap_pos, SNAP_DIR_Y, SNAP_DIR_Y, 0);
+          maybe_update_snap (self, snap_data, x1, y1, x1, bottom_snap_pos, SNAP_DIR_Y, SNAP_DIR_Y, 0);
         }
       else if (dist_x < 9999)
         {
-          maybe_update_snap (arr, snap_data, x1, y1, left_snap_pos, y1, SNAP_DIR_X, SNAP_DIR_X, 0);
-          maybe_update_snap (arr, snap_data, x1, y1, right_snap_pos, y1, SNAP_DIR_X, SNAP_DIR_X, 0);
+          maybe_update_snap (self, snap_data, x1, y1, left_snap_pos, y1, SNAP_DIR_X, SNAP_DIR_X, 0);
+          maybe_update_snap (self, snap_data, x1, y1, right_snap_pos, y1, SNAP_DIR_X, SNAP_DIR_X, 0);
         }
 
       /* Left/right edge identical on the top */
-      maybe_update_snap (arr, snap_data, x1, y1, _x1, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
-      maybe_update_snap (arr, snap_data, x1, y1, _x2 - w, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+      maybe_update_snap (self, snap_data, x1, y1, _x1, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+      maybe_update_snap (self, snap_data, x1, y1, _x2 - w, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
 
       /* Left/right edge identical on the bottom */
-      maybe_update_snap (arr, snap_data, x1, y1, _x1, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
-      maybe_update_snap (arr, snap_data, x1, y1, _x2 - w, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+      maybe_update_snap (self, snap_data, x1, y1, _x1, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+      maybe_update_snap (self, snap_data, x1, y1, _x2 - w, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
 
       /* Top/bottom edge identical on the left */
-      maybe_update_snap (arr, snap_data, x1, y1, left_snap_pos, _y1, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
-      maybe_update_snap (arr, snap_data, x1, y1, left_snap_pos, _y2 - h, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
+      maybe_update_snap (self, snap_data, x1, y1, left_snap_pos, _y1, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
+      maybe_update_snap (self, snap_data, x1, y1, left_snap_pos, _y2 - h, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
 
       /* Top/bottom edge identical on the right */
-      maybe_update_snap (arr, snap_data, x1, y1, right_snap_pos, _y1, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
-      maybe_update_snap (arr, snap_data, x1, y1, right_snap_pos, _y2 - h, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
+      maybe_update_snap (self, snap_data, x1, y1, right_snap_pos, _y1, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
+      maybe_update_snap (self, snap_data, x1, y1, right_snap_pos, _y2 - h, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
 
       /* If snapping is infinite, then add snapping points with minimal overlap
        * to prevent detachment.
        * This is similar to the above but simply re-defines the snapping pos
        * to have only minimal overlap */
-      if (arr->major_snap_distance == G_MAXUINT)
+      if (self->major_snap_distance == G_MAXUINT)
         {
           /* Hanging over the left/right edge on the top */
-          maybe_update_snap (arr, snap_data, x1, y1, _x1 - w + MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 1);
-          maybe_update_snap (arr, snap_data, x1, y1, _x2 - MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, -1);
+          maybe_update_snap (self, snap_data, x1, y1, _x1 - w + MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 1);
+          maybe_update_snap (self, snap_data, x1, y1, _x2 - MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, -1);
 
           /* Left/right edge identical on the bottom */
-          maybe_update_snap (arr, snap_data, x1, y1, _x1 - w + MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 1);
-          maybe_update_snap (arr, snap_data, x1, y1, _x2 - MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, -1);
+          maybe_update_snap (self, snap_data, x1, y1, _x1 - w + MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 1);
+          maybe_update_snap (self, snap_data, x1, y1, _x2 - MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, -1);
 
           /* Top/bottom edge identical on the left */
-          maybe_update_snap (arr, snap_data, x1, y1, left_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, 1);
-          maybe_update_snap (arr, snap_data, x1, y1, left_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, -1);
+          maybe_update_snap (self, snap_data, x1, y1, left_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, 1);
+          maybe_update_snap (self, snap_data, x1, y1, left_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, -1);
 
           /* Top/bottom edge identical on the right */
-          maybe_update_snap (arr, snap_data, x1, y1, right_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, 1);
-          maybe_update_snap (arr, snap_data, x1, y1, right_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, -1);
+          maybe_update_snap (self, snap_data, x1, y1, right_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, 1);
+          maybe_update_snap (self, snap_data, x1, y1, right_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, -1);
         }
     }
-}
+
 #undef OVERLAP
+}
 
 static void
-cc_display_arrangement_update_matrices (CcDisplayArrangement *arr)
+cc_display_arrangement_update_matrices (CcDisplayArrangement *self)
 {
-  gint x1, y1, x2, y2, max_w, max_h;
   GtkAllocation allocation;
   gdouble scale, scale_h, scale_w;
+  gint x1, y1, x2, y2, max_w, max_h;
 
-  g_assert (arr->config);
+  g_assert (self->config);
 
   /* Do not update the matrices while the user is dragging things around. */
-  if (arr->drag_active)
+  if (self->drag_active)
     return;
 
-  get_bounding_box (arr->config, &x1, &y1, &x2, &y2, &max_w, &max_h);
-  gtk_widget_get_allocation (GTK_WIDGET (arr), &allocation);
+  get_bounding_box (self->config, &x1, &y1, &x2, &y2, &max_w, &max_h);
+  gtk_widget_get_allocation (GTK_WIDGET (self), &allocation);
 
   scale_h = (gdouble) (allocation.width - 2 * MARGIN_PX) / (x2 - x1 + max_w * 2 * MARGIN_MON);
   scale_w = (gdouble) (allocation.height - 2 * MARGIN_PX) / (y2 - y1 + max_h * 2 * MARGIN_MON);
 
   scale = MIN (scale_h, scale_w);
 
-  cairo_matrix_init_identity (&arr->to_widget);
-  cairo_matrix_translate (&arr->to_widget, allocation.width / 2.0, allocation.height / 2.0);
-  cairo_matrix_scale (&arr->to_widget, scale, scale);
-  cairo_matrix_translate (&arr->to_widget, - (x1 + x2) / 2.0, - (y1 + y2) / 2.0);
+  cairo_matrix_init_identity (&self->to_widget);
+  cairo_matrix_translate (&self->to_widget, allocation.width / 2.0, allocation.height / 2.0);
+  cairo_matrix_scale (&self->to_widget, scale, scale);
+  cairo_matrix_translate (&self->to_widget, - (x1 + x2) / 2.0, - (y1 + y2) / 2.0);
 
-  arr->to_actual = arr->to_widget;
-  cairo_matrix_invert (&arr->to_actual);
+  self->to_actual = self->to_widget;
+  cairo_matrix_invert (&self->to_actual);
 }
 
 static CcDisplayMonitor*
-cc_display_arrangement_find_monitor_at (CcDisplayArrangement *arr,
-					gint                  x,
-					gint                  y)
+cc_display_arrangement_find_monitor_at (CcDisplayArrangement *self,
+                                        gint                  x,
+                                        gint                  y)
 {
-  GList *outputs, *l;
+  g_autoptr(GList) outputs = NULL;
+  GList *l;
 
-  outputs = g_list_copy (cc_display_config_get_monitors (arr->config));
-  if (arr->selected_output)
-    outputs = g_list_prepend (outputs, arr->selected_output);
+  outputs = g_list_copy (cc_display_config_get_monitors (self->config));
+
+  if (self->selected_output)
+    outputs = g_list_prepend (outputs, self->selected_output);
 
   for (l = outputs; l; l = l->next)
     {
@@ -471,103 +478,97 @@ cc_display_arrangement_find_monitor_at (CcDisplayArrangement *arr,
       if (!cc_display_monitor_is_useful (output))
         continue;
 
-      monitor_get_drawing_rect (arr, output, &x1, &y1, &x2, &y2);
+      monitor_get_drawing_rect (self, output, &x1, &y1, &x2, &y2);
+
       if (x >= x1 && x <= x2 && y >= y1 && y <= y2)
         return output;
     }
-
-  g_list_free (outputs);
 
   return NULL;
 }
 
 static void
-cc_display_arrangement_update_cursor (CcDisplayArrangement *arr,
-				      gboolean              dragable)
+cc_display_arrangement_update_cursor (CcDisplayArrangement *self,
+                                      gboolean              dragable)
 {
-  GdkCursor *cursor;
+  g_autoptr(GdkCursor) cursor = NULL;
   GdkWindow *window;
 
   if (dragable)
-    cursor = gdk_cursor_new_for_display (gtk_widget_get_display (GTK_WIDGET (arr)), GDK_FLEUR);
+    cursor = gdk_cursor_new_for_display (gtk_widget_get_display (GTK_WIDGET (self)), GDK_FLEUR);
   else
     cursor = NULL;
 
-  window = gtk_widget_get_window (GTK_WIDGET (arr));
+  window = gtk_widget_get_window (GTK_WIDGET (self));
 
   if (window)
     gdk_window_set_cursor (window, cursor);
-
-  g_clear_object (&cursor);
 }
 
 static void
-on_output_changed_cb (CcDisplayArrangement *arr,
+on_output_changed_cb (CcDisplayArrangement *self,
                       CcDisplayMonitor     *output)
 {
-  if (cc_display_config_count_useful_monitors (arr->config) > 2) {
-    arr->major_snap_distance = MAJOR_SNAP_DISTANCE;
-  } else {
-    arr->major_snap_distance = G_MAXUINT;
-  }
+  if (cc_display_config_count_useful_monitors (self->config) > 2)
+    self->major_snap_distance = MAJOR_SNAP_DISTANCE;
+  else
+    self->major_snap_distance = G_MAXUINT;
 
-  gtk_widget_queue_draw (GTK_WIDGET (arr));
+  gtk_widget_queue_draw (GTK_WIDGET (self));
 }
 
 static void
-cc_display_arrangement_set_config (CcDisplayArrangement *arr,
-				   CcDisplayConfig      *config)
+cc_display_arrangement_set_config (CcDisplayArrangement *self,
+                                   CcDisplayConfig      *config)
 {
   const gchar *signals[] = { "rotation", "mode", "primary", "active", "scale", "position-changed", "is-usable" };
   GList *outputs, *l;
   guint i;
 
-  g_assert (arr->config == NULL);
+  g_assert (self->config == NULL);
 
-  arr->config = g_object_ref (config);
+  self->config = g_object_ref (config);
 
   /* Listen to all the signals */
-  if (arr->config)
+  if (self->config)
     {
-      outputs = cc_display_config_get_monitors (arr->config);
+      outputs = cc_display_config_get_monitors (self->config);
       for (l = outputs; l; l = l->next)
         {
           CcDisplayMonitor *output = l->data;
+
           for (i = 0; i < G_N_ELEMENTS (signals); ++i)
-            {
-              g_signal_connect_object (output, signals[i],
-                                       G_CALLBACK (on_output_changed_cb),
-                                       arr, G_CONNECT_SWAPPED);
-            }
+            g_signal_connect_object (output, signals[i], G_CALLBACK (on_output_changed_cb), self, G_CONNECT_SWAPPED);
         }
     }
 
-  cc_display_arrangement_set_selected_output (arr, NULL);
+  cc_display_arrangement_set_selected_output (self, NULL);
 
-  g_object_notify_by_pspec (G_OBJECT (arr), props[PROP_CONFIG]);
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_CONFIG]);
 }
 
 static gboolean
 cc_display_arrangement_draw (GtkWidget *widget,
-			     cairo_t   *cr)
+                             cairo_t   *cr)
 {
-  CcDisplayArrangement *arr = CC_DISPLAY_ARRANGEMENT (widget);
+  CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (widget);
   GtkStyleContext *context = gtk_widget_get_style_context (widget);
-  GList *outputs, *l;
+  g_autoptr(GList) outputs = NULL;
+  GList *l;
 
-  g_return_val_if_fail (arr->config, FALSE);
+  g_return_val_if_fail (self->config, FALSE);
 
-  cc_display_arrangement_update_matrices (arr);
+  cc_display_arrangement_update_matrices (self);
 
   gtk_style_context_save (context);
   gtk_style_context_add_class (context, "display-arrangement");
 
   /* Draw in reverse order so that hit detection matches visual. Also pull
    * the selected output to the back. */
-  outputs = g_list_copy (cc_display_config_get_monitors (arr->config));
-  outputs = g_list_remove (outputs, arr->selected_output);
-  if (arr->selected_output != NULL)
-    outputs = g_list_prepend (outputs, arr->selected_output);
+  outputs = g_list_copy (cc_display_config_get_monitors (self->config));
+  outputs = g_list_remove (outputs, self->selected_output);
+  if (self->selected_output != NULL)
+    outputs = g_list_prepend (outputs, self->selected_output);
   outputs = g_list_reverse (outputs);
 
   for (l = outputs; l; l = l->next)
@@ -587,19 +588,19 @@ cc_display_arrangement_draw (GtkWidget *widget,
 
       gtk_style_context_add_class (context, "monitor");
 
-      if (output == arr->selected_output)
+      if (output == self->selected_output)
         state |= GTK_STATE_FLAG_SELECTED;
-      if (output == arr->prelit_output)
+      if (output == self->prelit_output)
         state |= GTK_STATE_FLAG_PRELIGHT;
 
       gtk_style_context_set_state (context, state);
-      if (cc_display_monitor_is_primary (output) || cc_display_config_is_cloning (arr->config))
+      if (cc_display_monitor_is_primary (output) || cc_display_config_is_cloning (self->config))
         gtk_style_context_add_class (context, "primary");
 
       /* Set in cc-display-panel.c */
       num = cc_display_monitor_get_ui_number (output);
 
-      monitor_get_drawing_rect (arr, output, &x1, &y1, &x2, &y2);
+      monitor_get_drawing_rect (self, output, &x1, &y1, &x2, &y2);
       w = x2 - x1;
       h = y2 - y1;
 
@@ -643,7 +644,7 @@ cc_display_arrangement_draw (GtkWidget *widget,
 
           number_str = g_strdup_printf ("%d", num);
           gtk_style_context_get (context, state, "font", &font, NULL);
-          layout = gtk_widget_create_pango_layout (GTK_WIDGET (arr), number_str);
+          layout = gtk_widget_create_pango_layout (GTK_WIDGET (self), number_str);
           pango_layout_set_font_description (layout, font);
           pango_layout_get_extents (layout, NULL, &extents);
           g_free (number_str);
@@ -672,7 +673,6 @@ cc_display_arrangement_draw (GtkWidget *widget,
       gtk_style_context_restore (context);
       cairo_restore (cr);
     }
-  g_list_free (outputs);
 
   gtk_style_context_restore (context);
 
@@ -681,9 +681,9 @@ cc_display_arrangement_draw (GtkWidget *widget,
 
 static gboolean
 cc_display_arrangement_button_press_event (GtkWidget      *widget,
-					   GdkEventButton *event)
+                                           GdkEventButton *event)
 {
-  CcDisplayArrangement *arr = CC_DISPLAY_ARRANGEMENT (widget);
+  CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (widget);
   CcDisplayMonitor *output;
   gdouble event_x, event_y;
   gint mon_x, mon_y;
@@ -692,25 +692,25 @@ cc_display_arrangement_button_press_event (GtkWidget      *widget,
   if (event->button != 1 || event->type != GDK_BUTTON_PRESS)
     return FALSE;
 
-  g_return_val_if_fail (arr->drag_active == FALSE, FALSE);
+  g_return_val_if_fail (self->drag_active == FALSE, FALSE);
 
-  output = cc_display_arrangement_find_monitor_at (arr, event->x, event->y);
+  output = cc_display_arrangement_find_monitor_at (self, event->x, event->y);
   if (!output)
     return FALSE;
 
   event_x = event->x;
   event_y = event->y;
 
-  cairo_matrix_transform_point (&arr->to_actual, &event_x, &event_y);
+  cairo_matrix_transform_point (&self->to_actual, &event_x, &event_y);
   cc_display_monitor_get_geometry (output, &mon_x, &mon_y, NULL, NULL);
 
-  cc_display_arrangement_set_selected_output (arr, output);
+  cc_display_arrangement_set_selected_output (self, output);
 
-  if (cc_display_config_count_useful_monitors (arr->config) > 1)
+  if (cc_display_config_count_useful_monitors (self->config) > 1)
     {
-      arr->drag_active = TRUE;
-      arr->drag_anchor_x = event_x - mon_x;
-      arr->drag_anchor_y = event_y - mon_y;
+      self->drag_active = TRUE;
+      self->drag_anchor_x = event_x - mon_x;
+      self->drag_anchor_y = event_y - mon_y;
     }
 
   return TRUE;
@@ -718,22 +718,22 @@ cc_display_arrangement_button_press_event (GtkWidget      *widget,
 
 static gboolean
 cc_display_arrangement_button_release_event (GtkWidget      *widget,
-					     GdkEventButton *event)
+                                             GdkEventButton *event)
 {
-  CcDisplayArrangement *arr = CC_DISPLAY_ARRANGEMENT (widget);
+  CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (widget);
   CcDisplayMonitor *output;
 
   /* Only handle left mouse button */
   if (event->button != 1)
     return FALSE;
 
-  if (!arr->drag_active)
+  if (!self->drag_active)
     return FALSE;
 
-  arr->drag_active = FALSE;
+  self->drag_active = FALSE;
 
-  output = cc_display_arrangement_find_monitor_at (arr, event->x, event->y);
-  cc_display_arrangement_update_cursor (arr, output != NULL);
+  output = cc_display_arrangement_find_monitor_at (self, event->x, event->y);
+  cc_display_arrangement_update_cursor (self, output != NULL);
 
   /* And queue a redraw to recenter everything */
   gtk_widget_queue_draw (widget);
@@ -745,41 +745,41 @@ cc_display_arrangement_button_release_event (GtkWidget      *widget,
 
 static gboolean
 cc_display_arrangement_motion_notify_event (GtkWidget      *widget,
-					    GdkEventMotion *event)
+                                            GdkEventMotion *event)
 {
-  CcDisplayArrangement *arr = CC_DISPLAY_ARRANGEMENT (widget);
+  CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (widget);
   gdouble event_x, event_y;
   gint mon_x, mon_y;
   struct SnapData snap_data;
 
-  g_return_val_if_fail (arr->config, FALSE);
+  g_return_val_if_fail (self->config, FALSE);
 
-  if (cc_display_config_count_useful_monitors (arr->config) <= 1)
+  if (cc_display_config_count_useful_monitors (self->config) <= 1)
     return FALSE;
 
-  if (!arr->drag_active)
+  if (!self->drag_active)
     {
       CcDisplayMonitor *output;
-      output = cc_display_arrangement_find_monitor_at (arr, event->x, event->y);
+      output = cc_display_arrangement_find_monitor_at (self, event->x, event->y);
 
-      cc_display_arrangement_update_cursor (arr, output != NULL);
-      if (arr->prelit_output != output)
+      cc_display_arrangement_update_cursor (self, output != NULL);
+      if (self->prelit_output != output)
         gtk_widget_queue_draw (widget);
 
-      arr->prelit_output = output;
+      self->prelit_output = output;
 
       return FALSE;
     }
 
-  g_assert (arr->selected_output);
+  g_assert (self->selected_output);
 
   event_x = event->x;
   event_y = event->y;
 
-  cairo_matrix_transform_point (&arr->to_actual, &event_x, &event_y);
+  cairo_matrix_transform_point (&self->to_actual, &event_x, &event_y);
 
-  mon_x = round(event_x - arr->drag_anchor_x);
-  mon_y = round(event_y - arr->drag_anchor_y);
+  mon_x = round (event_x - self->drag_anchor_x);
+  mon_y = round (event_y - self->drag_anchor_y);
 
   /* The monitor is now at the location as if there was no snapping whatsoever. */
   snap_data.snapped = SNAP_DIR_NONE;
@@ -788,31 +788,31 @@ cc_display_arrangement_motion_notify_event (GtkWidget      *widget,
   snap_data.dist_x = 0;
   snap_data.dist_y = 0;
 
-  cc_display_monitor_set_position (arr->selected_output, mon_x, mon_y);
+  cc_display_monitor_set_position (self->selected_output, mon_x, mon_y);
 
-  find_best_snapping (arr, arr->config, arr->selected_output, &snap_data);
+  find_best_snapping (self, self->config, self->selected_output, &snap_data);
 
-  cc_display_monitor_set_position (arr->selected_output, snap_data.mon_x, snap_data.mon_y);
+  cc_display_monitor_set_position (self->selected_output, snap_data.mon_x, snap_data.mon_y);
 
   return TRUE;
 }
 
 static void
 cc_display_arrangement_get_property (GObject    *object,
-				     guint       prop_id,
-				     GValue     *value,
-				     GParamSpec *pspec)
+                                     guint       prop_id,
+                                     GValue     *value,
+                                     GParamSpec *pspec)
 {
-  CcDisplayArrangement *arr = CC_DISPLAY_ARRANGEMENT (object);
+  CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (object);
 
   switch (prop_id)
     {
     case PROP_CONFIG:
-      g_value_set_object (value, arr->config);
+      g_value_set_object (value, self->config);
       break;
 
     case PROP_SELECTED_OUTPUT:
-      g_value_set_object (value, arr->selected_output);
+      g_value_set_object (value, self->selected_output);
       break;
 
     default:
@@ -822,9 +822,9 @@ cc_display_arrangement_get_property (GObject    *object,
 
 static void
 cc_display_arrangement_set_property (GObject      *object,
-				     guint         prop_id,
-				     const GValue *value,
-				     GParamSpec   *pspec)
+                                     guint         prop_id,
+                                     const GValue *value,
+                                     GParamSpec   *pspec)
 {
   CcDisplayArrangement *obj = CC_DISPLAY_ARRANGEMENT (object);
 
@@ -846,9 +846,9 @@ cc_display_arrangement_set_property (GObject      *object,
 static void
 cc_display_arrangement_finalize (GObject *object)
 {
-  CcDisplayArrangement *arr = CC_DISPLAY_ARRANGEMENT (object);
+  CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (object);
 
-  g_clear_object (&arr->config);
+  g_clear_object (&self->config);
 }
 
 static void
@@ -867,18 +867,18 @@ cc_display_arrangement_class_init (CcDisplayArrangementClass *klass)
   widget_class->motion_notify_event = cc_display_arrangement_motion_notify_event;
 
   props[PROP_CONFIG] = g_param_spec_object ("config", "Display Config",
-					    "The display configuration to work with",
-					    CC_TYPE_DISPLAY_CONFIG,
-					    G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+                                            "The display configuration to work with",
+                                            CC_TYPE_DISPLAY_CONFIG,
+                                            G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_SELECTED_OUTPUT] = g_param_spec_object ("selected-output", "Selected Output",
-						     "The output that is currently selected on the configuration",
-						     CC_TYPE_DISPLAY_MONITOR,
-						     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                                                     "The output that is currently selected on the configuration",
+                                                     CC_TYPE_DISPLAY_MONITOR,
+                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (gobject_class,
-				     PROP_LAST,
-				     props);
+                                     PROP_LAST,
+                                     props);
 
   g_signal_new ("updated",
                 CC_TYPE_DISPLAY_ARRANGEMENT,
@@ -888,13 +888,13 @@ cc_display_arrangement_class_init (CcDisplayArrangementClass *klass)
 }
 
 static void
-cc_display_arrangement_init (CcDisplayArrangement *arr)
+cc_display_arrangement_init (CcDisplayArrangement *self)
 {
   /* XXX: Do we need to listen to touch events here? */
-  gtk_widget_add_events (GTK_WIDGET (arr),
-			 GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_POINTER_MOTION_MASK);
+  gtk_widget_add_events (GTK_WIDGET (self),
+                         GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_POINTER_MOTION_MASK);
 
-  arr->major_snap_distance = MAJOR_SNAP_DISTANCE;
+  self->major_snap_distance = MAJOR_SNAP_DISTANCE;
 }
 
 CcDisplayArrangement*
@@ -904,19 +904,21 @@ cc_display_arrangement_new (CcDisplayConfig *config)
 }
 
 CcDisplayMonitor*
-cc_display_arrangement_get_selected_output (CcDisplayArrangement *arr)
+cc_display_arrangement_get_selected_output (CcDisplayArrangement *self)
 {
-  return arr->selected_output;
+
+
+  return self->selected_output;
 }
 
 void
-cc_display_arrangement_set_selected_output (CcDisplayArrangement *arr,
-					    CcDisplayMonitor     *output)
+cc_display_arrangement_set_selected_output (CcDisplayArrangement *self,
+                                            CcDisplayMonitor     *output)
 {
-  g_return_if_fail (arr->drag_active == FALSE);
+  g_return_if_fail (self->drag_active == FALSE);
 
   /* XXX: Could check that it actually belongs to the right config object. */
-  arr->selected_output = output;
+  self->selected_output = output;
 
-  g_object_notify_by_pspec (G_OBJECT (arr), props[PROP_SELECTED_OUTPUT]);
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_SELECTED_OUTPUT]);
 }

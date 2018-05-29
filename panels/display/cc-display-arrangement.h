@@ -18,8 +18,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _CC_DISPLAY_ARRANGEMENT_H
-#define _CC_DISPLAY_ARRANGEMENT_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include "cc-display-config.h"
@@ -37,4 +36,3 @@ void                  cc_display_arrangement_set_selected_output (CcDisplayArran
 
 G_END_DECLS
 
-#endif /* _CC_DISPLAY_ARRANGEMENT_H */
