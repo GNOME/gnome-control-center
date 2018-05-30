@@ -134,11 +134,7 @@ cc_power_panel_dispose (GObject *object)
   g_clear_object (&self->builder);
   g_clear_object (&self->screen_proxy);
   g_clear_object (&self->kbd_proxy);
-  if (self->devices)
-    {
-      g_ptr_array_foreach (self->devices, (GFunc) g_object_unref, NULL);
-      g_clear_pointer (&self->devices, g_ptr_array_unref);
-    }
+  g_clear_pointer (&self->devices, g_ptr_array_unref);
   g_clear_object (&self->up_client);
   g_clear_object (&self->bt_rfkill);
   g_clear_object (&self->bt_properties);
@@ -867,7 +863,6 @@ up_client_device_removed (UpClient     *client,
 
       if (g_strcmp0 (object_path, up_device_get_object_path (device)) == 0)
         {
-          g_object_unref (device);
           g_ptr_array_remove_index (self->devices, i);
           break;
         }
@@ -2621,6 +2616,10 @@ cc_power_panel_init (CcPowerPanel *self)
   g_signal_connect (self->up_client, "device-removed", G_CALLBACK (up_client_device_removed), self);
 
   self->devices = up_client_get_devices (self->up_client);
+  /* up_client_get_devices doesn't set a free function, we'll set it so we don't need to do it.
+   * https://bugs.freedesktop.org/show_bug.cgi?id=106740
+   */
+  g_ptr_array_set_free_func (self->devices, g_object_unref);
   for (i = 0; self->devices != NULL && i < self->devices->len; i++) {
     UpDevice *device = g_ptr_array_index (self->devices, i);
     g_signal_connect (G_OBJECT (device), "notify",
