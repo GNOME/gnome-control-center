@@ -17,8 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _CC_CROP_AREA_H_
-#define _CC_CROP_AREA_H_
+#pragma once
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -39,5 +38,3 @@ void       cc_crop_area_set_constrain_aspect (CcCropArea *area,
                                               gboolean    constrain);
 
 G_END_DECLS
-
-#endif /* _CC_CROP_AREA_H_ */

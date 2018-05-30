@@ -18,8 +18,7 @@
  * Written by: Matthias Clasen <mclasen@redhat.com>
  */
 
-#ifndef __UM_PHOTO_DIALOG_H__
-#define __UM_PHOTO_DIALOG_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include <act/act.h>
@@ -38,5 +37,3 @@ void           um_photo_dialog_set_user (UmPhotoDialog *dialog,
                                          ActUser       *user);
 
 G_END_DECLS
-
-#endif

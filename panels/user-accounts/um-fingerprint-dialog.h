@@ -15,6 +15,8 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#pragma once
+
 #include <gtk/gtk.h>
 #include <act/act.h>
 
