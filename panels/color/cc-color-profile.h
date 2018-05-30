@@ -25,33 +25,11 @@
 #include <gtk/gtk.h>
 #include <colord.h>
 
-#define CC_TYPE_COLOR_PROFILE            (cc_color_profile_get_type())
-#define CC_COLOR_PROFILE(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj), CC_TYPE_COLOR_PROFILE, CcColorProfile))
-#define CC_COLOR_PROFILE_CLASS(cls)      (G_TYPE_CHECK_CLASS_CAST((cls), CC_TYPE_COLOR_PROFILE, CcColorProfileClass))
-#define CC_IS_COLOR_PROFILE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj), CC_TYPE_COLOR_PROFILE))
-#define CC_IS_COLOR_PROFILE_CLASS(cls)   (G_TYPE_CHECK_CLASS_TYPE((cls), CC_TYPE_COLOR_PROFILE))
-#define CC_COLOR_PROFILE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), CC_TYPE_COLOR_PROFILE, CcColorProfileClass))
-
 G_BEGIN_DECLS
 
-typedef struct _CcColorProfile                   CcColorProfile;
-typedef struct _CcColorProfileClass              CcColorProfileClass;
-typedef struct _CcColorProfilePrivate            CcColorProfilePrivate;
+#define CC_TYPE_COLOR_PROFILE (cc_color_profile_get_type ())
+G_DECLARE_FINAL_TYPE (CcColorProfile, cc_color_profile, CC, COLOR_PROFILE, GtkListBoxRow)
 
-struct _CcColorProfile
-{
-        GtkListBoxRow             parent;
-
-        /*< private >*/
-        CcColorProfilePrivate    *priv;
-};
-
-struct _CcColorProfileClass
-{
-        GtkListBoxRowClass        parent_class;
-};
-
-GType        cc_color_profile_get_type         (void);
 GtkWidget   *cc_color_profile_new              (CdDevice        *device,
                                                 CdProfile       *profile,
                                                 gboolean         is_default);

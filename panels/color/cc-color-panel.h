@@ -26,45 +26,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_COLOR_PANEL cc_color_panel_get_type()
-
-#define CC_COLOR_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_COLOR_PANEL, CcColorPanel))
-
-#define CC_COLOR_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_COLOR_PANEL, CcColorPanelClass))
-
-#define CC_IS_COLOR_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_COLOR_PANEL))
-
-#define CC_IS_COLOR_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_COLOR_PANEL))
-
-#define CC_COLOR_PANEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_COLOR_PANEL, CcColorPanelClass))
-
-typedef struct _CcColorPanel CcColorPanel;
-typedef struct _CcColorPanelClass CcColorPanelClass;
-typedef struct _CcColorPanelPrivate CcColorPanelPrivate;
-
-struct _CcColorPanel
-{
-  CcPanel parent;
-
-  CcColorPanelPrivate *priv;
-};
-
-struct _CcColorPanelClass
-{
-  CcPanelClass parent_class;
-};
-
-GType cc_color_panel_get_type (void) G_GNUC_CONST;
+#define CC_TYPE_COLOR_PANEL (cc_color_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcColorPanel, cc_color_panel, CC, COLOR_PANEL, CcPanel)
 
 G_END_DECLS
 

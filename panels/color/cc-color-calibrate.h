@@ -28,30 +28,10 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_COLOR_CALIBRATE         (cc_color_calibrate_get_type ())
-#define CC_COLOR_CALIBRATE(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), CC_TYPE_COLOR_CALIBRATE, CcColorCalibrate))
-#define CC_COLOR_CALIBRATE_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CC_TYPE_COLOR_CALIBRATE, CcColorCalibrateClass))
-#define CC_IS_COLOR_CALIB(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), CC_TYPE_COLOR_CALIBRATE))
-#define CC_IS_COLOR_CALIB_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), CC_TYPE_COLOR_CALIBRATE))
-#define CC_COLOR_CALIBRATE_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CC_TYPE_COLOR_CALIBRATE, CcColorCalibrateClass))
-
-typedef struct _CcColorCalibratePrivate         CcColorCalibratePrivate;
-typedef struct _CcColorCalibrate                CcColorCalibrate;
-typedef struct _CcColorCalibrateClass           CcColorCalibrateClass;
-
-struct _CcColorCalibrate
-{
-  GObject                  parent;
-  CcColorCalibratePrivate *priv;
-};
-
-struct _CcColorCalibrateClass
-{
-  GObjectClass             parent_class;
-};
+#define CC_TYPE_COLOR_CALIBRATE (cc_color_calibrate_get_type ())
+G_DECLARE_FINAL_TYPE (CcColorCalibrate, cc_color_calibrate, CC, COLOR_CALIBRATE, GObject)
 
 CcColorCalibrate *cc_color_calibrate_new    (void);
-GType     cc_color_calibrate_get_type       (void);
 void      cc_color_calibrate_set_kind       (CcColorCalibrate *calibrate,
                                              CdSensorCap       kind);
 void      cc_color_calibrate_set_temperature (CcColorCalibrate *calibrate,

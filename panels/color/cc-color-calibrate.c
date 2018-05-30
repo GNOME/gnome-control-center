@@ -35,12 +35,12 @@
 
 #include "cc-color-calibrate.h"
 
-#define CC_COLOR_CALIBRATE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_COLOR_CALIBRATE, CcColorCalibratePrivate))
-
 #define CALIBRATE_WINDOW_OPACITY 0.9
 
-struct _CcColorCalibratePrivate
+struct _CcColorCalibrate
 {
+  GObject          parent_instance;
+
   CdDevice        *device;
   CdSensorCap      device_kind;
   CdSensor        *sensor;
@@ -82,71 +82,71 @@ void
 cc_color_calibrate_set_kind (CcColorCalibrate *calibrate,
                              CdSensorCap kind)
 {
-  g_return_if_fail (CC_IS_COLOR_CALIB (calibrate));
-  calibrate->priv->device_kind = kind;
+  g_return_if_fail (CC_IS_COLOR_CALIBRATE (calibrate));
+  calibrate->device_kind = kind;
 }
 
 void
 cc_color_calibrate_set_temperature (CcColorCalibrate *calibrate,
                                     guint temperature)
 {
-  g_return_if_fail (CC_IS_COLOR_CALIB (calibrate));
+  g_return_if_fail (CC_IS_COLOR_CALIBRATE (calibrate));
   g_return_if_fail (temperature < 10000);
-  calibrate->priv->target_whitepoint = temperature;
+  calibrate->target_whitepoint = temperature;
 }
 
 void
 cc_color_calibrate_set_quality (CcColorCalibrate *calibrate,
                                 CdProfileQuality quality)
 {
-  g_return_if_fail (CC_IS_COLOR_CALIB (calibrate));
-  calibrate->priv->quality = quality;
+  g_return_if_fail (CC_IS_COLOR_CALIBRATE (calibrate));
+  calibrate->quality = quality;
 }
 
 CdProfileQuality
 cc_color_calibrate_get_quality (CcColorCalibrate *calibrate)
 {
-  g_return_val_if_fail (CC_IS_COLOR_CALIB (calibrate), 0);
-  return calibrate->priv->quality;
+  g_return_val_if_fail (CC_IS_COLOR_CALIBRATE (calibrate), 0);
+  return calibrate->quality;
 }
 
 void
 cc_color_calibrate_set_device (CcColorCalibrate *calibrate,
                                CdDevice *device)
 {
-  g_return_if_fail (CC_IS_COLOR_CALIB (calibrate));
+  g_return_if_fail (CC_IS_COLOR_CALIBRATE (calibrate));
   g_return_if_fail (CD_IS_DEVICE (device));
-  if (calibrate->priv->device != NULL)
-        g_object_unref (calibrate->priv->device);
-  calibrate->priv->device = g_object_ref (device);
+  if (calibrate->device != NULL)
+        g_object_unref (calibrate->device);
+  calibrate->device = g_object_ref (device);
 }
 
 void
 cc_color_calibrate_set_sensor (CcColorCalibrate *calibrate,
                                CdSensor *sensor)
 {
-  g_return_if_fail (CC_IS_COLOR_CALIB (calibrate));
+  g_return_if_fail (CC_IS_COLOR_CALIBRATE (calibrate));
   g_return_if_fail (CD_IS_SENSOR (sensor));
-  if (calibrate->priv->sensor != NULL)
-        g_object_unref (calibrate->priv->sensor);
-  calibrate->priv->sensor = g_object_ref (sensor);
+  if (calibrate->sensor != NULL)
+        g_object_unref (calibrate->sensor);
+  calibrate->sensor = g_object_ref (sensor);
 }
 
 void
 cc_color_calibrate_set_title (CcColorCalibrate *calibrate,
                               const gchar *title)
 {
-  g_return_if_fail (CC_IS_COLOR_CALIB (calibrate));
+  g_return_if_fail (CC_IS_COLOR_CALIBRATE (calibrate));
   g_return_if_fail (title != NULL);
-  g_free (calibrate->priv->title);
-  calibrate->priv->title = g_strdup (title);
+  g_free (calibrate->title);
+  calibrate->title = g_strdup (title);
 }
 
 CdProfile *
 cc_color_calibrate_get_profile (CcColorCalibrate *calibrate)
 {
-  g_return_val_if_fail (CC_IS_COLOR_CALIB (calibrate), NULL);
-  return calibrate->priv->profile;
+  g_return_val_if_fail (CC_IS_COLOR_CALIBRATE (calibrate), NULL);
+  return calibrate->profile;
 }
 
 static guint
@@ -169,21 +169,20 @@ cc_color_calibrate_calib_setup_screen (CcColorCalibrate *calibrate,
                                        const gchar *name,
                                        GError **error)
 {
-  CcColorCalibratePrivate *priv = calibrate->priv;
   gboolean ret = TRUE;
 
   /* get screen */
-  priv->x11_screen = gnome_rr_screen_new (gdk_screen_get_default (), error);
-  if (priv->x11_screen == NULL)
+  calibrate->x11_screen = gnome_rr_screen_new (gdk_screen_get_default (), error);
+  if (calibrate->x11_screen == NULL)
     {
       ret = FALSE;
       goto out;
     }
 
   /* get the output */
-  priv->output = gnome_rr_screen_get_output_by_name (priv->x11_screen,
+  calibrate->output = gnome_rr_screen_get_output_by_name (calibrate->x11_screen,
                                                      name);
-  if (priv->output == NULL)
+  if (calibrate->output == NULL)
     {
       ret = FALSE;
       g_set_error_literal (error,
@@ -194,8 +193,8 @@ cc_color_calibrate_calib_setup_screen (CcColorCalibrate *calibrate,
     }
 
   /* create a lookup table */
-  priv->gamma_size = _gnome_rr_output_get_gamma_size (priv->output);
-  if (priv->gamma_size == 0)
+  calibrate->gamma_size = _gnome_rr_output_get_gamma_size (calibrate->output);
+  if (calibrate->gamma_size == 0)
     {
       ret = FALSE;
       g_set_error_literal (error,
@@ -224,7 +223,6 @@ cc_color_calibrate_calib_set_output_gamma (CcColorCalibrate *calibrate,
                                            GPtrArray *array,
                                            GError **error)
 {
-  CcColorCalibratePrivate *priv = calibrate->priv;
   CdColorRGB *p1;
   CdColorRGB *p2;
   CdColorRGB result;
@@ -248,14 +246,14 @@ cc_color_calibrate_calib_set_output_gamma (CcColorCalibrate *calibrate,
     }
 
   /* convert to a type X understands of the right size */
-  red = g_new (guint16, priv->gamma_size);
-  green = g_new (guint16, priv->gamma_size);
-  blue = g_new (guint16, priv->gamma_size);
+  red = g_new (guint16, calibrate->gamma_size);
+  green = g_new (guint16, calibrate->gamma_size);
+  blue = g_new (guint16, calibrate->gamma_size);
   cd_color_rgb_set (&result, 1.0, 1.0, 1.0);
-  for (i = 0; i < priv->gamma_size; i++)
+  for (i = 0; i < calibrate->gamma_size; i++)
     {
       mix = (gdouble) (array->len - 1) /
-            (gdouble) (priv->gamma_size - 1) *
+            (gdouble) (calibrate->gamma_size - 1) *
             (gdouble) i;
       p1 = g_ptr_array_index (array, (guint) floor (mix));
       p2 = g_ptr_array_index (array, (guint) ceil (mix));
@@ -269,7 +267,7 @@ cc_color_calibrate_calib_set_output_gamma (CcColorCalibrate *calibrate,
     }
 
   /* send to LUT */
-  crtc = gnome_rr_output_get_crtc (priv->output);
+  crtc = gnome_rr_output_get_crtc (calibrate->output);
   if (crtc == NULL)
     {
       ret = FALSE;
@@ -277,10 +275,10 @@ cc_color_calibrate_calib_set_output_gamma (CcColorCalibrate *calibrate,
                    CD_SESSION_ERROR,
                    CD_SESSION_ERROR_INTERNAL,
                    "failed to get ctrc for %s",
-                   gnome_rr_output_get_name (priv->output));
+                   gnome_rr_output_get_name (calibrate->output));
       goto out;
     }
-  gnome_rr_crtc_set_gamma (crtc, priv->gamma_size,
+  gnome_rr_crtc_set_gamma (crtc, calibrate->gamma_size,
                            red, green, blue);
 out:
   g_free (red);
@@ -295,7 +293,6 @@ cc_color_calibrate_property_changed_cb (GDBusProxy *proxy,
                                         GStrv invalidated_properties,
                                         CcColorCalibrate *calibrate)
 {
-  CcColorCalibratePrivate *priv = calibrate->priv;
   gboolean ret;
   GtkWidget *widget;
   guint value;
@@ -305,7 +302,7 @@ cc_color_calibrate_property_changed_cb (GDBusProxy *proxy,
                           "u", &value);
   if (ret)
     {
-      widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+      widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                    "progressbar_status"));
       gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget),
                                      value / 100.0f);
@@ -318,7 +315,6 @@ cc_color_calibrate_interaction_required (CcColorCalibrate *calibrate,
                                          const gchar *message,
                                          const gchar *image_path)
 {
-  CcColorCalibratePrivate *priv = calibrate->priv;
   const gchar *message_transl;
   gboolean show_button_start = FALSE;
   GdkPixbuf *pixbuf;
@@ -331,7 +327,7 @@ cc_color_calibrate_interaction_required (CcColorCalibrate *calibrate,
     image_path = "preferences-color-symbolic";
 
   /* set image */
-  img = GTK_IMAGE (gtk_builder_get_object (priv->builder,
+  img = GTK_IMAGE (gtk_builder_get_object (calibrate->builder,
                                            "image_status"));
   if (image_path != NULL && image_path[0] != '\0')
     {
@@ -345,13 +341,13 @@ cc_color_calibrate_interaction_required (CcColorCalibrate *calibrate,
           g_object_unref (pixbuf);
         }
       gtk_widget_set_visible (GTK_WIDGET (img), TRUE);
-      gtk_widget_set_visible (GTK_WIDGET (priv->sample_widget), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (calibrate->sample_widget), FALSE);
     }
   else
     {
       g_debug ("hiding image");
       gtk_widget_set_visible (GTK_WIDGET (img), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (priv->sample_widget), TRUE);
+      gtk_widget_set_visible (GTK_WIDGET (calibrate->sample_widget), TRUE);
     }
 
   /* set new status */
@@ -384,15 +380,15 @@ cc_color_calibrate_interaction_required (CcColorCalibrate *calibrate,
       message_transl = message;
       break;
     }
-  label = GTK_LABEL (gtk_builder_get_object (priv->builder,
+  label = GTK_LABEL (gtk_builder_get_object (calibrate->builder,
                                              "label_status"));
   gtk_label_set_label (label, message_transl);
 
   /* show the correct button */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_start"));
   gtk_widget_set_visible (widget, show_button_start);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_resume"));
   gtk_widget_set_visible (widget, !show_button_start);
 }
@@ -442,22 +438,21 @@ cc_color_calibrate_finished (CcColorCalibrate *calibrate,
   GtkWidget *widget;
   GString *str;
   const gchar *tmp;
-  CcColorCalibratePrivate *priv = calibrate->priv;
 
   /* save failure so we can get this after we've quit the loop */
-  calibrate->priv->session_error_code = code;
+  calibrate->session_error_code = code;
 
   /* show correct buttons */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_cancel"));
   gtk_widget_set_visible (widget, FALSE);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_start"));
   gtk_widget_set_visible (widget, FALSE);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_resume"));
   gtk_widget_set_visible (widget, FALSE);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_done"));
   gtk_widget_set_visible (widget, TRUE);
 
@@ -483,7 +478,7 @@ cc_color_calibrate_finished (CcColorCalibrate *calibrate,
   /* TRANSLATORS: The user can now remove the sensor from the screen */
   g_string_append (str, _("You can remove the calibration device."));
 
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "label_status"));
   gtk_label_set_label (GTK_LABEL (widget), str->str);
   g_string_free (str, TRUE);
@@ -496,7 +491,6 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
                               GVariant *parameters,
                               CcColorCalibrate *calibrate)
 {
-  CcColorCalibratePrivate *priv = calibrate->priv;
   CdColorRGB color;
   CdColorRGB *color_tmp;
   const gchar *image = NULL;
@@ -521,7 +515,7 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
       g_variant_lookup (dict, "ErrorDetails", "&s", &str);
       ret = g_variant_lookup (dict, "ProfilePath", "&s", &profile_path);
       if (ret)
-        priv->profile = cd_profile_new_with_object_path (profile_path);
+        calibrate->profile = cd_profile_new_with_object_path (profile_path);
       cc_color_calibrate_finished (calibrate, error_code, str);
       goto out;
     }
@@ -531,24 +525,24 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
                      &color.R,
                      &color.G,
                      &color.B);
-      img = GTK_IMAGE (gtk_builder_get_object (priv->builder,
+      img = GTK_IMAGE (gtk_builder_get_object (calibrate->builder,
                                                "image_status"));
       gtk_widget_set_visible (GTK_WIDGET (img), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (priv->sample_widget), TRUE);
-      cd_sample_widget_set_color (CD_SAMPLE_WIDGET (priv->sample_widget),
+      gtk_widget_set_visible (GTK_WIDGET (calibrate->sample_widget), TRUE);
+      cd_sample_widget_set_color (CD_SAMPLE_WIDGET (calibrate->sample_widget),
                                   &color);
 
       /* for Lenovo W700 and W520 laptops we almost fullscreen the
        * sample widget as the device is actually embedded in the
        * palmrest! */
-      if (cd_sensor_get_embedded (priv->sensor))
+      if (cd_sensor_get_embedded (calibrate->sensor))
         {
           g_debug ("Making sample window larger for embedded sensor");
-          gtk_widget_set_size_request (priv->sample_widget, 1000, 600);
+          gtk_widget_set_size_request (calibrate->sample_widget, 1000, 600);
         }
 
       /* set the generic label too */
-      label = GTK_LABEL (gtk_builder_get_object (priv->builder,
+      label = GTK_LABEL (gtk_builder_get_object (calibrate->builder,
                                                  "label_status"));
       /* TRANSLATORS: The user has to be careful not to knock the
        * display off the screen (although we do cope if this is
@@ -613,7 +607,7 @@ cc_color_calibrate_cancel (CcColorCalibrate *calibrate)
   GError *error = NULL;
 
   /* cancel the calibration to ensure the helper quits */
-  retval = g_dbus_proxy_call_sync (calibrate->priv->proxy_helper,
+  retval = g_dbus_proxy_call_sync (calibrate->proxy_helper,
                                    "Cancel",
                                    NULL,
                                    G_DBUS_CALL_FLAGS_NONE,
@@ -627,7 +621,7 @@ cc_color_calibrate_cancel (CcColorCalibrate *calibrate)
     }
 
   /* return */
-  g_main_loop_quit (calibrate->priv->loop);
+  g_main_loop_quit (calibrate->loop);
   if (retval != NULL)
     g_variant_unref (retval);
 }
@@ -708,7 +702,7 @@ cc_color_calibrate_window_state_cb (GtkWidget *widget,
 
   /* resize to the correct screen */
   ret = cc_color_calibrate_move_and_resize_window (window,
-                                                   calibrate->priv->device,
+                                                   calibrate->device,
                                                    &error);
   if (!ret)
     {
@@ -722,27 +716,26 @@ static void
 cc_color_calibrate_button_done_cb (GtkWidget *widget,
                                    CcColorCalibrate *calibrate)
 {
-  g_main_loop_quit (calibrate->priv->loop);
+  g_main_loop_quit (calibrate->loop);
 }
 
 static void
 cc_color_calibrate_button_start_cb (GtkWidget *widget,
                                     CcColorCalibrate *calibrate)
 {
-  CcColorCalibratePrivate *priv = calibrate->priv;
   GError *error = NULL;
   GVariant *retval;
 
   /* set correct buttons */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_start"));
   gtk_widget_set_visible (widget, FALSE);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_resume"));
   gtk_widget_set_visible (widget, FALSE);
 
   /* continue */
-  retval = g_dbus_proxy_call_sync (calibrate->priv->proxy_helper,
+  retval = g_dbus_proxy_call_sync (calibrate->proxy_helper,
                                    "Resume",
                                    NULL,
                                    G_DBUS_CALL_FLAGS_NONE,
@@ -799,20 +792,19 @@ cc_color_calibrate_alpha_screen_changed_cb (GtkWindow *window,
 static void
 cc_color_calibrate_uninhibit (CcColorCalibrate *calibrate)
 {
-  CcColorCalibratePrivate *priv = calibrate->priv;
   GtkApplication *application;
 
-  if (priv->inhibit_fd != -1)
+  if (calibrate->inhibit_fd != -1)
     {
-      close (priv->inhibit_fd);
-      priv->inhibit_fd = -1;
+      close (calibrate->inhibit_fd);
+      calibrate->inhibit_fd = -1;
     }
 
-  if (priv->inhibit_cookie != 0)
+  if (calibrate->inhibit_cookie != 0)
     {
       application = GTK_APPLICATION (g_application_get_default ());
-      gtk_application_uninhibit (application, priv->inhibit_cookie);
-      priv->inhibit_cookie = 0;
+      gtk_application_uninhibit (application, calibrate->inhibit_cookie);
+      calibrate->inhibit_cookie = 0;
     }
 }
 
@@ -824,11 +816,10 @@ cc_color_calibrate_inhibit (CcColorCalibrate *calibrate, GtkWindow *window)
   GUnixFDList *fd_list = NULL;
   GVariant *retval;
   GtkApplication *application;
-  CcColorCalibratePrivate *priv = calibrate->priv;
 
   /* inhibit basically everything we can */
   application = GTK_APPLICATION (g_application_get_default ());
-  priv->inhibit_cookie = gtk_application_inhibit (application,
+  calibrate->inhibit_cookie = gtk_application_inhibit (application,
                                                   window,
                                                   GTK_APPLICATION_INHIBIT_LOGOUT |
                                                   GTK_APPLICATION_INHIBIT_SWITCH |
@@ -837,7 +828,7 @@ cc_color_calibrate_inhibit (CcColorCalibrate *calibrate, GtkWindow *window)
                                                   "Display calibration in progress");
 
   /* tell logind to disallow the lid switch */
-  retval = g_dbus_proxy_call_with_unix_fd_list_sync (priv->proxy_inhibit,
+  retval = g_dbus_proxy_call_with_unix_fd_list_sync (calibrate->proxy_inhibit,
                                                      "Inhibit",
                                                      g_variant_new ("(ssss)",
                                                                     "shutdown:"
@@ -860,14 +851,14 @@ cc_color_calibrate_inhibit (CcColorCalibrate *calibrate, GtkWindow *window)
       goto out;
     }
   g_variant_get (retval, "(h)", &idx);
-  priv->inhibit_fd = g_unix_fd_list_get (fd_list, idx, &error);
-  if (priv->inhibit_fd == -1)
+  calibrate->inhibit_fd = g_unix_fd_list_get (fd_list, idx, &error);
+  if (calibrate->inhibit_fd == -1)
     {
       g_warning ("Failed to receive system inhibitor fd: %s", error->message);
       g_error_free (error);
       goto out;
     }
-  g_debug ("System inhibitor fd is %d", priv->inhibit_fd);
+  g_debug ("System inhibitor fd is %d", calibrate->inhibit_fd);
 out:
   if (fd_list != NULL)
     g_object_unref (fd_list);
@@ -879,44 +870,43 @@ gboolean
 cc_color_calibrate_setup (CcColorCalibrate *calibrate,
                           GError **error)
 {
-  CcColorCalibratePrivate *priv = calibrate->priv;
   gboolean ret = TRUE;
 
-  g_return_val_if_fail (CC_IS_COLOR_CALIB (calibrate), FALSE);
-  g_return_val_if_fail (calibrate->priv->device_kind != CD_SENSOR_CAP_UNKNOWN, FALSE);
+  g_return_val_if_fail (CC_IS_COLOR_CALIBRATE (calibrate), FALSE);
+  g_return_val_if_fail (calibrate->device_kind != CD_SENSOR_CAP_UNKNOWN, FALSE);
 
   /* use logind to disable system state idle */
-  priv->proxy_inhibit = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
-                                                                  G_DBUS_PROXY_FLAGS_NONE,
-                                                                  "org.freedesktop.login1",
-                                                                  "/org/freedesktop/login1",
-                                                                  "org.freedesktop.login1.Manager",
-                                                                  NULL,
-                                                                  error);
-  if (priv->proxy_inhibit == NULL)
+  calibrate->proxy_inhibit = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
+								       G_DBUS_PROXY_FLAGS_NONE,
+								       "org.freedesktop.login1",
+								       "/org/freedesktop/login1",
+								       "org.freedesktop.login1.Manager",
+								       NULL,
+								       error);
+  if (calibrate->proxy_inhibit == NULL)
     {
       ret = FALSE;
       goto out;
     }
 
   /* start the calibration session daemon */
-  priv->proxy_helper = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
-                                                                 G_DBUS_PROXY_FLAGS_NONE,
-                                                                 CD_SESSION_DBUS_SERVICE,
-                                                                 CD_SESSION_DBUS_PATH,
-                                                                 CD_SESSION_DBUS_INTERFACE_DISPLAY,
-                                                                 NULL,
-                                                                 error);
-  if (priv->proxy_helper == NULL)
+  calibrate->proxy_helper = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
+								      G_DBUS_PROXY_FLAGS_NONE,
+								      CD_SESSION_DBUS_SERVICE,
+								      CD_SESSION_DBUS_PATH,
+								      CD_SESSION_DBUS_INTERFACE_DISPLAY,
+								      NULL,
+								      error);
+  if (calibrate->proxy_helper == NULL)
     {
       ret = FALSE;
       goto out;
     }
-  g_signal_connect_object (priv->proxy_helper,
+  g_signal_connect_object (calibrate->proxy_helper,
                            "g-properties-changed",
                            G_CALLBACK (cc_color_calibrate_property_changed_cb),
                            calibrate, 0);
-  g_signal_connect_object (priv->proxy_helper,
+  g_signal_connect_object (calibrate->proxy_helper,
                            "g-signal",
                            G_CALLBACK (cc_color_calibrate_signal_cb),
                            calibrate, 0);
@@ -929,7 +919,6 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
                           GtkWindow *parent,
                           GError **error)
 {
-  CcColorCalibratePrivate *priv = calibrate->priv;
   const gchar *name;
   gboolean ret;
   GtkWidget *widget;
@@ -937,10 +926,10 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
   GVariantBuilder builder;
   GVariant *retval = NULL;
 
-  g_return_val_if_fail (CC_IS_COLOR_CALIB (calibrate), FALSE);
+  g_return_val_if_fail (CC_IS_COLOR_CALIBRATE (calibrate), FALSE);
 
   /* get screen */
-  name = cd_device_get_metadata_item (priv->device,
+  name = cd_device_get_metadata_item (calibrate->device,
                                       CD_DEVICE_METADATA_XRANDR_NAME);
   ret = cc_color_calibrate_calib_setup_screen (calibrate, name, error);
   if (!ret)
@@ -950,28 +939,28 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
   g_variant_builder_add (&builder,
                          "{sv}",
                          "Quality",
-                         g_variant_new_uint32 (priv->quality));
+                         g_variant_new_uint32 (calibrate->quality));
   g_variant_builder_add (&builder,
                          "{sv}",
                          "Whitepoint",
-                         g_variant_new_uint32 (priv->target_whitepoint));
+                         g_variant_new_uint32 (calibrate->target_whitepoint));
   g_variant_builder_add (&builder,
                          "{sv}",
                          "Gamma",
-                         g_variant_new_double (priv->target_gamma));
+                         g_variant_new_double (calibrate->target_gamma));
   g_variant_builder_add (&builder,
                          "{sv}",
                          "Title",
-                         g_variant_new_string (priv->title));
+                         g_variant_new_string (calibrate->title));
   g_variant_builder_add (&builder,
                          "{sv}",
                          "DeviceKind",
-                         g_variant_new_uint32 (priv->device_kind));
-  retval = g_dbus_proxy_call_sync (priv->proxy_helper,
+                         g_variant_new_uint32 (calibrate->device_kind));
+  retval = g_dbus_proxy_call_sync (calibrate->proxy_helper,
                                    "Start",
                                    g_variant_new ("(ssa{sv})",
-                                                  cd_device_get_id (priv->device),
-                                                  cd_sensor_get_id (priv->sensor),
+                                                  cd_device_get_id (calibrate->device),
+                                                  cd_sensor_get_id (calibrate->sensor),
                                                   &builder),
                                    G_DBUS_CALL_FLAGS_NONE,
                                    -1,
@@ -984,36 +973,36 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
     }
 
   /* set this above our parent */
-  window = GTK_WINDOW (gtk_builder_get_object (priv->builder,
+  window = GTK_WINDOW (gtk_builder_get_object (calibrate->builder,
                                                "dialog_calibrate"));
   gtk_window_set_modal (window, TRUE);
   gtk_widget_show (GTK_WIDGET (window));
 
   /* show correct buttons */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_cancel"));
   gtk_widget_set_visible (widget, TRUE);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_start"));
   gtk_widget_set_visible (widget, TRUE);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_resume"));
   gtk_widget_set_visible (widget, FALSE);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_done"));
   gtk_widget_set_visible (widget, FALSE);
 
   /* stop the computer from auto-suspending or turning off the screen */
   cc_color_calibrate_inhibit (calibrate, parent);
 
-  g_main_loop_run (priv->loop);
+  g_main_loop_run (calibrate->loop);
   gtk_widget_hide (GTK_WIDGET (window));
 
   /* we can go idle now */
   cc_color_calibrate_uninhibit (calibrate);
 
   /* see if we failed */
-  if (calibrate->priv->session_error_code != CD_SESSION_ERROR_NONE)
+  if (calibrate->session_error_code != CD_SESSION_ERROR_NONE)
     {
       ret = FALSE;
       g_set_error_literal (error,
@@ -1041,17 +1030,16 @@ static void
 cc_color_calibrate_finalize (GObject *object)
 {
   CcColorCalibrate *calibrate = CC_COLOR_CALIBRATE (object);
-  CcColorCalibratePrivate *priv = calibrate->priv;
 
-  g_clear_pointer (&priv->window, gtk_widget_destroy);
-  g_clear_object (&priv->builder);
-  g_clear_object (&priv->device);
-  g_clear_object (&priv->proxy_helper);
-  g_clear_object (&priv->proxy_inhibit);
-  g_clear_object (&priv->sensor);
-  g_clear_object (&priv->x11_screen);
-  g_free (priv->title);
-  g_main_loop_unref (priv->loop);
+  g_clear_pointer (&calibrate->window, gtk_widget_destroy);
+  g_clear_object (&calibrate->builder);
+  g_clear_object (&calibrate->device);
+  g_clear_object (&calibrate->proxy_helper);
+  g_clear_object (&calibrate->proxy_inhibit);
+  g_clear_object (&calibrate->sensor);
+  g_clear_object (&calibrate->x11_screen);
+  g_free (calibrate->title);
+  g_main_loop_unref (calibrate->loop);
 
   G_OBJECT_CLASS (cc_color_calibrate_parent_class)->finalize (object);
 }
@@ -1061,14 +1049,11 @@ cc_color_calibrate_class_init (CcColorCalibrateClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   object_class->finalize = cc_color_calibrate_finalize;
-
-  g_type_class_add_private (klass, sizeof (CcColorCalibratePrivate));
 }
 
 static void
 cc_color_calibrate_init (CcColorCalibrate *calibrate)
 {
-  CcColorCalibratePrivate *priv = calibrate->priv;
   GError *error = NULL;
   gint retval;
   GSettings *settings;
@@ -1076,13 +1061,12 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
   GtkWidget *widget;
   GtkWindow *window;
 
-  calibrate->priv = priv = CC_COLOR_CALIBRATE_GET_PRIVATE (calibrate);
-  calibrate->priv->loop = g_main_loop_new (NULL, FALSE);
-  calibrate->priv->inhibit_fd = -1;
+  calibrate->loop = g_main_loop_new (NULL, FALSE);
+  calibrate->inhibit_fd = -1;
 
   /* load UI */
-  priv->builder = gtk_builder_new ();
-  retval = gtk_builder_add_from_resource (priv->builder,
+  calibrate->builder = gtk_builder_new ();
+  retval = gtk_builder_add_from_resource (calibrate->builder,
                                           "/org/gnome/control-center/color/color-calibrate.ui",
                                           &error);
   if (retval == 0)
@@ -1092,42 +1076,42 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
     }
 
   /* add sample widget */
-  box = GTK_BOX (gtk_builder_get_object (priv->builder,
+  box = GTK_BOX (gtk_builder_get_object (calibrate->builder,
                  "vbox_status"));
-  priv->sample_widget = cd_sample_widget_new ();
-  gtk_widget_set_size_request (priv->sample_widget, 400, 400);
-  gtk_box_pack_start (box, priv->sample_widget, FALSE, FALSE, 0);
-  gtk_box_reorder_child (box, priv->sample_widget, 0);
-  gtk_widget_set_vexpand (priv->sample_widget, FALSE);
-  gtk_widget_set_hexpand (priv->sample_widget, FALSE);
+  calibrate->sample_widget = cd_sample_widget_new ();
+  gtk_widget_set_size_request (calibrate->sample_widget, 400, 400);
+  gtk_box_pack_start (box, calibrate->sample_widget, FALSE, FALSE, 0);
+  gtk_box_reorder_child (box, calibrate->sample_widget, 0);
+  gtk_widget_set_vexpand (calibrate->sample_widget, FALSE);
+  gtk_widget_set_hexpand (calibrate->sample_widget, FALSE);
 
   /* get defaults */
   settings = g_settings_new (COLORD_SETTINGS_SCHEMA);
-  calibrate->priv->target_whitepoint = g_settings_get_int (settings, "display-whitepoint");
-  calibrate->priv->target_gamma = g_settings_get_double (settings, "display-gamma");
+  calibrate->target_whitepoint = g_settings_get_int (settings, "display-whitepoint");
+  calibrate->target_gamma = g_settings_get_double (settings, "display-gamma");
   g_object_unref (settings);
 
   /* connect to buttons */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_start"));
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (cc_color_calibrate_button_start_cb), calibrate);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_resume"));
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (cc_color_calibrate_button_start_cb), calibrate);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_done"));
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (cc_color_calibrate_button_done_cb), calibrate);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_cancel"));
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (cc_color_calibrate_button_cancel_cb), calibrate);
   gtk_widget_show (widget);
 
   /* setup the specialist calibration window */
-  window = GTK_WINDOW (gtk_builder_get_object (priv->builder,
+  window = GTK_WINDOW (gtk_builder_get_object (calibrate->builder,
                                                "dialog_calibrate"));
   g_signal_connect (window, "draw",
                     G_CALLBACK (cc_color_calibrate_alpha_window_draw), calibrate);
@@ -1142,7 +1126,7 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
   cc_color_calibrate_alpha_screen_changed_cb (GTK_WINDOW (window), NULL, calibrate);
   g_signal_connect (window, "screen-changed",
                     G_CALLBACK (cc_color_calibrate_alpha_screen_changed_cb), calibrate);
-  priv->window = window;
+  calibrate->window = window;
 }
 
 CcColorCalibrate *

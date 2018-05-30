@@ -25,35 +25,11 @@
 #include <gtk/gtk.h>
 #include <colord.h>
 
-#define CC_TYPE_COLOR_DEVICE            (cc_color_device_get_type())
-#define CC_COLOR_DEVICE(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj), CC_TYPE_COLOR_DEVICE, CcColorDevice))
-#define CC_COLOR_DEVICE_CLASS(cls)      (G_TYPE_CHECK_CLASS_CAST((cls), CC_TYPE_COLOR_DEVICE, CcColorDeviceClass))
-#define CC_IS_COLOR_DEVICE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj), CC_TYPE_COLOR_DEVICE))
-#define CC_IS_COLOR_DEVICE_CLASS(cls)   (G_TYPE_CHECK_CLASS_TYPE((cls), CC_TYPE_COLOR_DEVICE))
-#define CC_COLOR_DEVICE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), CC_TYPE_COLOR_DEVICE, CcColorDeviceClass))
-
 G_BEGIN_DECLS
 
-typedef struct _CcColorDevice             CcColorDevice;
-typedef struct _CcColorDeviceClass        CcColorDeviceClass;
-typedef struct _CcColorDevicePrivate      CcColorDevicePrivate;
+#define CC_TYPE_COLOR_DEVICE (cc_color_device_get_type ())
+G_DECLARE_FINAL_TYPE (CcColorDevice, cc_color_device, CC, COLOR_DEVICE, GtkListBoxRow)
 
-struct _CcColorDevice
-{
-        GtkListBoxRow            parent;
-
-        /*< private >*/
-        CcColorDevicePrivate    *priv;
-};
-
-struct _CcColorDeviceClass
-{
-        GtkListBoxRowClass       parent_class;
-        void            (*expanded_changed) (CcColorDevice  *color_device,
-                                             gboolean        expanded);
-};
-
-GType        cc_color_device_get_type      (void);
 GtkWidget   *cc_color_device_new           (CdDevice       *device);
 CdDevice    *cc_color_device_get_device    (CcColorDevice  *color_device);
 const gchar *cc_color_device_get_sortable  (CcColorDevice  *color_device);

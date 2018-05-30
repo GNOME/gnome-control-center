@@ -31,6 +31,13 @@ enum {
   PROP_LAST
 };
 
+struct _CcColorCellRendererText
+{
+  GtkCellRendererText  parent_instance;
+
+  gboolean             is_dim_label;
+};
+
 G_DEFINE_TYPE (CcColorCellRendererText, cc_color_cell_renderer_text, GTK_TYPE_CELL_RENDERER_TEXT)
 
 static gpointer parent_class = NULL;
