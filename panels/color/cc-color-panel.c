@@ -35,8 +35,6 @@
 #include "cc-color-device.h"
 #include "cc-color-profile.h"
 
-#define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
-
 struct _CcColorPanel
 {
   CcPanel        parent_instance;
@@ -48,10 +46,43 @@ struct _CcColorPanel
   GCancellable  *cancellable;
   GSettings     *settings;
   GSettings     *settings_colord;
-  GtkBuilder    *builder;
   GtkWidget     *assistant_calib;
+  GtkWidget     *box_calib_brightness;
+  GtkWidget     *box_calib_kind;
+  GtkWidget     *box_calib_quality;
+  GtkWidget     *box_calib_sensor;
+  GtkWidget     *box_calib_summary;
+  GtkWidget     *box_calib_temp;
+  GtkWidget     *box_calib_title;
+  GtkWidget     *box_devices;
+  GtkWidget     *button_assign_cancel;
+  GtkWidget     *button_assign_import;
+  GtkWidget     *button_assign_ok;
+  GtkWidget     *button_calib_export;
+  GtkWidget     *button_calib_upload;
   GtkWidget     *dialog_assign;
+  GtkWidget     *entry_calib_title;
+  GtkWidget     *frame_devices;
+  GtkWidget     *label_assign_warning;
+  GtkWidget     *label_calib_summary_message;
+  GtkWidget     *label_calib_upload_location;
+  GtkWidget     *label_no_devices;
+  GtkTreeModel  *liststore_assign;
+  GtkTreeModel  *liststore_calib_kind;
+  GtkTreeModel  *liststore_calib_sensor;
   GtkWidget     *main_window;
+  GtkWidget     *toolbar_devices;
+  GtkWidget     *toolbutton_device_calibrate;
+  GtkWidget     *toolbutton_device_default;
+  GtkWidget     *toolbutton_device_enable;
+  GtkWidget     *toolbutton_profile_add;
+  GtkWidget     *toolbutton_profile_remove;
+  GtkWidget     *toolbutton_profile_view;
+  GtkWidget     *treeview_assign;
+  GtkWidget     *treeview_calib_kind;
+  GtkWidget     *treeview_calib_quality;
+  GtkWidget     *treeview_calib_sensor;
+  GtkWidget     *treeview_calib_temp;
   CcColorCalibrate *calibrate;
   GtkListBox    *list_box;
   gchar         *list_box_filter;
@@ -114,7 +145,6 @@ gcm_prefs_combobox_add_profile (CcColorPanel *prefs,
   const gchar *id;
   GtkTreeIter iter_tmp;
   g_autoptr(GString) string = NULL;
-  GtkListStore *list_store;
   gchar *escaped = NULL;
   guint kind = 0;
   const gchar *warning = NULL;
@@ -164,10 +194,8 @@ gcm_prefs_combobox_add_profile (CcColorPanel *prefs,
 #endif
 
   escaped = g_markup_escape_text (string->str, -1);
-  list_store = GTK_LIST_STORE(gtk_builder_get_object (prefs->builder,
-                                                      "liststore_assign"));
-  gtk_list_store_append (list_store, iter);
-  gtk_list_store_set (list_store, iter,
+  gtk_list_store_append (GTK_LIST_STORE (prefs->liststore_assign), iter);
+  gtk_list_store_set (GTK_LIST_STORE (prefs->liststore_assign), iter,
                       GCM_PREFS_COMBO_COLUMN_TEXT, escaped,
                       GCM_PREFS_COMBO_COLUMN_PROFILE, profile,
                       GCM_PREFS_COMBO_COLUMN_TYPE, kind,
@@ -253,12 +281,9 @@ gcm_prefs_calib_delayed_complete_cb (gpointer user_data)
 {
   CcColorPanel *panel = CC_COLOR_PANEL (user_data);
   GtkAssistant *assistant;
-  GtkWidget *widget;
 
   assistant = GTK_ASSISTANT (panel->assistant_calib);
-  widget = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                               "box_calib_brightness"));
-  gtk_assistant_set_page_complete (assistant, widget, TRUE);
+  gtk_assistant_set_page_complete (assistant, panel->box_calib_brightness, TRUE);
   return FALSE;
 }
 
@@ -267,14 +292,10 @@ gcm_prefs_calib_prepare_cb (GtkAssistant *assistant,
                             GtkWidget    *page,
                             CcColorPanel *panel)
 {
-  GtkWidget *widget;
-
   /* give the user the indication they should actually manually set the
    * desired brightness rather than clicking blindly by delaying the
    * "Next" button deliberately for a second or so */
-  widget = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                               "box_calib_brightness"));
-  if (widget == page)
+  if (page == panel->box_calib_brightness)
   {
     g_timeout_add_seconds (1, gcm_prefs_calib_delayed_complete_cb, panel);
     return;
@@ -282,7 +303,7 @@ gcm_prefs_calib_prepare_cb (GtkAssistant *assistant,
 
   /* disable the brightness page as we don't want to show a 'Finished'
    * button if the user goes back at any point */
-  gtk_assistant_set_page_complete (assistant, widget, FALSE);
+  gtk_assistant_set_page_complete (assistant, panel->box_calib_brightness, FALSE);
 }
 
 static void
@@ -293,9 +314,7 @@ gcm_prefs_calib_apply_cb (GtkWidget *widget, CcColorPanel *prefs)
   GtkWindow *window = NULL;
 
   /* setup the calibration object with items that can fail */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "button_calib_upload"));
-  gtk_widget_show (widget);
+  gtk_widget_show (prefs->button_calib_upload);
   ret = cc_color_calibrate_setup (prefs->calibrate,
                                   &error);
   if (!ret)
@@ -339,16 +358,13 @@ gcm_prefs_calib_temp_treeview_clicked_cb (GtkTreeSelection *selection,
   gboolean ret;
   GtkTreeIter iter;
   GtkTreeModel *model;
-  GtkWidget *widget;
   guint target_whitepoint;
   GtkAssistant *assistant;
 
   /* check to see if anything is selected */
   ret = gtk_tree_selection_get_selected (selection, &model, &iter);
   assistant = GTK_ASSISTANT (prefs->assistant_calib);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "box_calib_temp"));
-  gtk_assistant_set_page_complete (assistant, widget, ret);
+  gtk_assistant_set_page_complete (assistant, prefs->box_calib_temp, ret);
   if (!ret)
     return;
 
@@ -366,15 +382,12 @@ gcm_prefs_calib_kind_treeview_clicked_cb (GtkTreeSelection *selection,
   gboolean ret;
   GtkTreeIter iter;
   GtkTreeModel *model;
-  GtkWidget *widget;
   GtkAssistant *assistant;
 
   /* check to see if anything is selected */
   ret = gtk_tree_selection_get_selected (selection, &model, &iter);
   assistant = GTK_ASSISTANT (prefs->assistant_calib);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "box_calib_kind"));
-  gtk_assistant_set_page_complete (assistant, widget, ret);
+  gtk_assistant_set_page_complete (assistant, prefs->box_calib_kind, ret);
   if (!ret)
     return;
 
@@ -394,14 +407,11 @@ gcm_prefs_calib_quality_treeview_clicked_cb (GtkTreeSelection *selection,
   GtkAssistant *assistant;
   GtkTreeIter iter;
   GtkTreeModel *model;
-  GtkWidget *widget;
 
   /* check to see if anything is selected */
   ret = gtk_tree_selection_get_selected (selection, &model, &iter);
   assistant = GTK_ASSISTANT (prefs->assistant_calib);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "box_calib_quality"));
-  gtk_assistant_set_page_complete (assistant, widget, ret);
+  gtk_assistant_set_page_complete (assistant, prefs->box_calib_quality, ret);
   if (!ret)
     return;
 
@@ -450,8 +460,6 @@ static void
 gcm_prefs_calib_set_sensor (CcColorPanel *prefs,
                             CdSensor *sensor)
 {
-  GtkTreeModel *model;
-  GtkWidget *page;
   guint64 caps;
   guint8 i;
 
@@ -459,19 +467,15 @@ gcm_prefs_calib_set_sensor (CcColorPanel *prefs,
   cc_color_calibrate_set_sensor (prefs->calibrate, sensor);
 
   /* hide display types the sensor does not support */
-  model = GTK_TREE_MODEL (gtk_builder_get_object (prefs->builder,
-                                                  "liststore_calib_kind"));
-  gtk_tree_model_foreach (model,
+  gtk_tree_model_foreach (prefs->liststore_calib_kind,
                           gcm_prefs_calib_set_sensor_cap_supported_cb,
                           sensor);
 
   /* if the sensor only supports one kind then do not show the panel at all */
-  page = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                             "box_calib_kind"));
   caps = cd_sensor_get_caps (sensor);
   if (_cd_bitfield_popcount (caps) == 1)
     {
-      gtk_widget_set_visible (page, FALSE);
+      gtk_widget_set_visible (prefs->box_calib_kind, FALSE);
       for (i = 0; i < CD_SENSOR_CAP_LAST; i++)
         {
           if (cd_bitfield_contain (caps, i))
@@ -481,7 +485,7 @@ gcm_prefs_calib_set_sensor (CcColorPanel *prefs,
   else
     {
       cc_color_calibrate_set_kind (prefs->calibrate, CD_SENSOR_CAP_UNKNOWN);
-      gtk_widget_set_visible (page, TRUE);
+      gtk_widget_set_visible (prefs->box_calib_kind, TRUE);
     }
 }
 
@@ -492,16 +496,13 @@ gcm_prefs_calib_sensor_treeview_clicked_cb (GtkTreeSelection *selection,
   gboolean ret;
   GtkTreeIter iter;
   GtkTreeModel *model;
-  GtkWidget *widget;
   g_autoptr(CdSensor) sensor = NULL;
   GtkAssistant *assistant;
 
   /* check to see if anything is selected */
   ret = gtk_tree_selection_get_selected (selection, &model, &iter);
   assistant = GTK_ASSISTANT (prefs->assistant_calib);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "box_calib_sensor"));
-  gtk_assistant_set_page_complete (assistant, widget, ret);
+  gtk_assistant_set_page_complete (assistant, prefs->box_calib_sensor, ret);
   if (!ret)
     return;
 
@@ -517,39 +518,32 @@ gcm_prefs_calibrate_display (CcColorPanel *prefs)
 {
   CdSensor *sensor_tmp;
   const gchar *tmp;
-  GtkListStore *liststore;
   GtkTreeIter iter;
-  GtkWidget *page;
-  GtkWidget *widget;
   guint i;
 
   /* set target device */
   cc_color_calibrate_set_device (prefs->calibrate, prefs->current_device);
 
   /* add sensors to list */
-  liststore = GTK_LIST_STORE (gtk_builder_get_object (prefs->builder,
-                                                      "liststore_calib_sensor"));
-  gtk_list_store_clear (liststore);
-  page = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                             "box_calib_sensor"));
+  gtk_list_store_clear (GTK_LIST_STORE (prefs->liststore_calib_sensor));
   if (prefs->sensors->len > 1)
     {
       for (i = 0; i < prefs->sensors->len; i++)
         {
           sensor_tmp = g_ptr_array_index (prefs->sensors, i);
-          gtk_list_store_append (liststore, &iter);
-          gtk_list_store_set (liststore, &iter,
+          gtk_list_store_append (GTK_LIST_STORE (prefs->liststore_calib_sensor), &iter);
+          gtk_list_store_set (GTK_LIST_STORE (prefs->liststore_calib_sensor), &iter,
                               COLUMN_CALIB_SENSOR_OBJECT, sensor_tmp,
                               COLUMN_CALIB_SENSOR_DESCRIPTION, cd_sensor_get_model (sensor_tmp),
                               -1);
         }
-      gtk_widget_set_visible (page, TRUE);
+      gtk_widget_set_visible (prefs->box_calib_sensor, TRUE);
     }
   else
     {
       sensor_tmp = g_ptr_array_index (prefs->sensors, 0);
       gcm_prefs_calib_set_sensor (prefs, sensor_tmp);
-      gtk_widget_set_visible (page, FALSE);
+      gtk_widget_set_visible (prefs->box_calib_sensor, FALSE);
     }
 
   /* set default profile title */
@@ -558,19 +552,16 @@ gcm_prefs_calibrate_display (CcColorPanel *prefs)
     tmp = cd_device_get_vendor (prefs->current_device);
   if (tmp == NULL)
     tmp = _("Screen");
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "entry_calib_title"));
-  gtk_entry_set_text (GTK_ENTRY (widget), tmp);
+  gtk_entry_set_text (GTK_ENTRY (prefs->entry_calib_title), tmp);
   cc_color_calibrate_set_title (prefs->calibrate, tmp);
 
   /* set the display whitepoint to D65 by default */
   //FIXME?
 
   /* show ui */
-  widget = GTK_WIDGET (prefs->assistant_calib);
-  gtk_window_set_transient_for (GTK_WINDOW (widget),
+  gtk_window_set_transient_for (GTK_WINDOW (prefs->assistant_calib),
                                 GTK_WINDOW (prefs->main_window));
-  gtk_widget_show (widget);
+  gtk_widget_show (prefs->assistant_calib);
 }
 
 static void
@@ -579,15 +570,12 @@ gcm_prefs_title_entry_changed_cb (GtkWidget *widget,
                                   CcColorPanel *prefs)
 {
   GtkAssistant *assistant;
-  GtkWidget *page;
   const gchar *value;
 
   assistant = GTK_ASSISTANT (prefs->assistant_calib);
-  page = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                             "box_calib_title"));
-  value = gtk_entry_get_text (GTK_ENTRY (widget));
+  value = gtk_entry_get_text (GTK_ENTRY (prefs->box_calib_title));
   cc_color_calibrate_set_title (prefs->calibrate, value);
-  gtk_assistant_set_page_complete (assistant, page, value[0] != '\0');
+  gtk_assistant_set_page_complete (assistant, prefs->box_calib_title, value[0] != '\0');
 }
 
 static void
@@ -729,24 +717,18 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
   g_autoptr(GError) error = NULL;
   g_autoptr(GPtrArray) profile_array = NULL;
   GtkTreeIter iter;
-  GtkListStore *list_store;
-  GtkWidget *widget;
   guint i;
 
-  list_store = GTK_LIST_STORE(gtk_builder_get_object (prefs->builder,
-                                                      "liststore_assign"));
-  gtk_list_store_clear (list_store);
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (list_store),
+  gtk_list_store_clear (GTK_LIST_STORE (prefs->liststore_assign));
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (prefs->liststore_assign),
                                         GCM_PREFS_COMBO_COLUMN_TEXT,
                                         GTK_SORT_ASCENDING);
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (list_store),
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (prefs->liststore_assign),
                                    GCM_PREFS_COMBO_COLUMN_TEXT,
                                    gcm_prefs_combo_sort_func_cb,
-                                   list_store, NULL);
+                                   prefs->liststore_assign, NULL);
 
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "label_assign_warning"));
-  gtk_widget_hide (widget);
+  gtk_widget_hide (prefs->label_assign_warning);
 
   /* get profiles */
   profile_array = cd_client_get_profiles_sync (prefs->client,
@@ -860,18 +842,14 @@ gcm_prefs_calib_upload_cb (GtkWidget *widget, CcColorPanel *prefs)
   status_code = soup_session_send_message (session, msg);
   if (status_code != 201)
     {
-      widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                                   "label_calib_upload_location"));
       /* TRANSLATORS: this is when the upload of the profile failed */
       msg_result = g_strdup_printf (_("Failed to upload file: %s"), msg->reason_phrase),
-      gtk_label_set_label (GTK_LABEL (widget), msg_result);
-      gtk_widget_show (widget);
+      gtk_label_set_label (GTK_LABEL (prefs->label_calib_upload_location), msg_result);
+      gtk_widget_show (prefs->label_calib_upload_location);
       return;
     }
 
   /* show instructions to the user */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "label_calib_upload_location"));
   uri = soup_message_headers_get_one (msg->response_headers, "Location");
   msg_result = g_strdup_printf ("%s %s\n\n• %s\n• %s\n• %s",
                                 /* TRANSLATORS: these are instructions on how to recover
@@ -882,13 +860,11 @@ gcm_prefs_calib_upload_cb (GtkWidget *widget, CcColorPanel *prefs)
                                 _("Write down this URL."),
                                 _("Restart this computer and boot your normal operating system."),
                                 _("Type the URL into your browser to download and install the profile.")),
-  gtk_label_set_label (GTK_LABEL (widget), msg_result);
-  gtk_widget_show (widget);
+  gtk_label_set_label (GTK_LABEL (prefs->label_calib_upload_location), msg_result);
+  gtk_widget_show (prefs->label_calib_upload_location);
 
   /* hide the upload button as duplicate uploads will fail */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "button_calib_upload"));
-  gtk_widget_hide (widget);
+  gtk_widget_hide (prefs->button_calib_upload);
 }
 
 static void
@@ -961,14 +937,11 @@ gcm_prefs_profile_add_cb (GtkWidget *widget, CcColorPanel *prefs)
   gcm_prefs_add_profiles_suitable_for_devices (prefs, profiles);
 
   /* make insensitve until we have a selection */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "button_assign_ok"));
-  gtk_widget_set_sensitive (widget, FALSE);
+  gtk_widget_set_sensitive (prefs->button_assign_ok, FALSE);
 
   /* show the dialog */
-  widget = GTK_WIDGET (prefs->dialog_assign);
-  gtk_widget_show (widget);
-  gtk_window_set_transient_for (GTK_WINDOW (widget), GTK_WINDOW (prefs->main_window));
+  gtk_widget_show (prefs->dialog_assign);
+  gtk_window_set_transient_for (GTK_WINDOW (prefs->dialog_assign), GTK_WINDOW (prefs->main_window));
 }
 
 static void
@@ -1141,9 +1114,7 @@ gcm_prefs_button_assign_ok_cb (GtkWidget *widget, CcColorPanel *prefs)
   gtk_widget_hide (widget);
 
   /* get the selected profile */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "treeview_assign"));
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_assign));
   if (!gtk_tree_selection_get_selected (selection, &model, &iter))
     return;
   gtk_tree_model_get (model, &iter,
@@ -1229,7 +1200,6 @@ static void
 gcm_prefs_set_calibrate_button_sensitivity (CcColorPanel *prefs)
 {
   gboolean ret = FALSE;
-  GtkWidget *widget;
   const gchar *tooltip;
   CdDeviceKind kind;
   CdSensor *sensor_tmp;
@@ -1299,10 +1269,8 @@ gcm_prefs_set_calibrate_button_sensitivity (CcColorPanel *prefs)
     }
 out:
   /* control the tooltip and sensitivity of the button */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "toolbutton_device_calibrate"));
-  gtk_widget_set_tooltip_text (widget, tooltip);
-  gtk_widget_set_sensitive (widget, ret);
+  gtk_widget_set_tooltip_text (prefs->toolbutton_device_calibrate, tooltip);
+  gtk_widget_set_sensitive (prefs->toolbutton_device_calibrate, ret);
 }
 
 static void
@@ -1319,7 +1287,6 @@ gcm_prefs_device_clicked (CcColorPanel *prefs, CdDevice *device)
 static void
 gcm_prefs_profile_clicked (CcColorPanel *prefs, CdProfile *profile, CdDevice *device)
 {
-  GtkWidget *widget;
   g_autofree gchar *s = NULL;
 
   /* get profile */
@@ -1327,20 +1294,17 @@ gcm_prefs_profile_clicked (CcColorPanel *prefs, CdProfile *profile, CdDevice *de
      cd_profile_get_filename (profile));
 
   /* allow getting profile info */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-               "toolbutton_profile_view"));
   if (cd_profile_get_filename (profile) != NULL &&
       (s = g_find_program_in_path ("gcm-viewer")) != NULL)
-    gtk_widget_set_sensitive (widget, TRUE);
+    gtk_widget_set_sensitive (prefs->toolbutton_profile_view, TRUE);
   else
-    gtk_widget_set_sensitive (widget, FALSE);
+    gtk_widget_set_sensitive (prefs->toolbutton_profile_view, FALSE);
 }
 
 static void
 gcm_prefs_profiles_treeview_clicked_cb (GtkTreeSelection *selection,
                                         CcColorPanel *prefs)
 {
-  GtkWidget *widget;
   GtkTreeModel *model;
   GtkTreeIter iter;
   g_autoptr(CdProfile) profile = NULL;
@@ -1355,20 +1319,15 @@ gcm_prefs_profiles_treeview_clicked_cb (GtkTreeSelection *selection,
                       GCM_PREFS_COMBO_COLUMN_PROFILE, &profile,
                       -1);
 
-
   /* as soon as anything is selected, make the Add button sensitive */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "button_assign_ok"));
-  gtk_widget_set_sensitive (widget, TRUE);
+  gtk_widget_set_sensitive (prefs->button_assign_ok, TRUE);
 
   /* is the profile faulty */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "label_assign_warning"));
 #if CD_CHECK_VERSION(0,1,25)
   warnings = cd_profile_get_warnings (profile);
-  gtk_widget_set_visible (widget, warnings != NULL && warnings[0] != NULL);
+  gtk_widget_set_visible (prefs->label_assign_warning, warnings != NULL && warnings[0] != NULL);
 #else
-  gtk_widget_set_visible (widget, FALSE);
+  gtk_widget_set_visible (prefs->label_assign_warning, FALSE);
 #endif
 }
 
@@ -1731,18 +1690,13 @@ static void
 gcm_prefs_update_device_list_extra_entry (CcColorPanel *prefs)
 {
   g_autoptr(GList) device_widgets = NULL;
-  GtkWidget *widget;
   guint number_of_devices;
 
   /* any devices to show? */
   device_widgets = gtk_container_get_children (GTK_CONTAINER (prefs->list_box));
   number_of_devices = g_list_length (device_widgets);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "label_no_devices"));
-  gtk_widget_set_visible (widget, number_of_devices == 0);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "vbox3"));
-  gtk_widget_set_visible (widget, number_of_devices > 0);
+  gtk_widget_set_visible (prefs->label_no_devices, number_of_devices == 0);
+  gtk_widget_set_visible (prefs->box_devices, number_of_devices > 0);
 
   /* if we have only one device expand it by default */
   if (number_of_devices == 1)
@@ -1815,7 +1769,6 @@ static void
 gcm_prefs_refresh_toolbar_buttons (CcColorPanel *panel)
 {
   CdProfile *profile = NULL;
-  GtkWidget *widget;
   GtkListBoxRow *row;
   gboolean is_device;
 
@@ -1825,9 +1778,7 @@ gcm_prefs_refresh_toolbar_buttons (CcColorPanel *panel)
   is_device = CC_IS_COLOR_DEVICE (row);
 
   /* nothing selected */
-  widget = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                               "toolbar_devices"));
-  gtk_widget_set_visible (widget, row != NULL);
+  gtk_widget_set_visible (panel->toolbar_devices, row != NULL);
   if (row == NULL)
     return;
 
@@ -1850,28 +1801,14 @@ gcm_prefs_refresh_toolbar_buttons (CcColorPanel *panel)
   else
     g_assert_not_reached ();
 
-  widget = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                               "toolbutton_device_default"));
-  gtk_widget_set_visible (widget, !is_device && cc_color_profile_get_is_default (CC_COLOR_PROFILE (row)));
+  gtk_widget_set_visible (panel->toolbutton_device_default, !is_device && cc_color_profile_get_is_default (CC_COLOR_PROFILE (row)));
   if (profile)
-    gtk_widget_set_sensitive (widget, !cd_profile_get_is_system_wide (profile));
-
-  widget = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                               "toolbutton_device_enable"));
-  gtk_widget_set_visible (widget, !is_device && !cc_color_profile_get_is_default (CC_COLOR_PROFILE (row)));
-
-  widget = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                               "toolbutton_device_calibrate"));
-  gtk_widget_set_visible (widget, is_device);
-  widget = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                               "toolbutton_profile_add"));
-  gtk_widget_set_visible (widget, is_device);
-  widget = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                               "toolbutton_profile_view"));
-  gtk_widget_set_visible (widget, !is_device);
-  widget = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                               "toolbutton_profile_remove"));
-  gtk_widget_set_visible (widget, !is_device);
+    gtk_widget_set_sensitive (panel->toolbutton_device_default, !cd_profile_get_is_system_wide (profile));
+  gtk_widget_set_visible (panel->toolbutton_device_enable, !is_device && !cc_color_profile_get_is_default (CC_COLOR_PROFILE (row)));
+  gtk_widget_set_visible (panel->toolbutton_device_calibrate, is_device);
+  gtk_widget_set_visible (panel->toolbutton_profile_add, is_device);
+  gtk_widget_set_visible (panel->toolbutton_profile_view, !is_device);
+  gtk_widget_set_visible (panel->toolbutton_profile_remove, !is_device);
 }
 
 static void
@@ -2022,7 +1959,6 @@ cc_color_panel_dispose (GObject *object)
   g_clear_object (&prefs->settings);
   g_clear_object (&prefs->settings_colord);
   g_clear_object (&prefs->cancellable);
-  g_clear_object (&prefs->builder);
   g_clear_object (&prefs->client);
   g_clear_object (&prefs->current_device);
   g_clear_object (&prefs->calibrate);
@@ -2044,6 +1980,7 @@ static void
 cc_color_panel_class_init (CcColorPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   panel_class->get_help_uri = cc_color_panel_get_help_uri;
@@ -2052,6 +1989,45 @@ cc_color_panel_class_init (CcColorPanelClass *klass)
   object_class->set_property = cc_color_panel_set_property;
   object_class->dispose = cc_color_panel_dispose;
   object_class->finalize = cc_color_panel_finalize;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/color/color.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, assistant_calib);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, box_calib_brightness);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, box_calib_kind);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, box_calib_quality);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, box_calib_sensor);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, box_calib_summary);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, box_calib_temp);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, box_calib_title);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, box_devices);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, button_assign_cancel);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, button_assign_import);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, button_assign_ok);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, button_calib_export);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, button_calib_upload);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, dialog_assign);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, entry_calib_title);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, frame_devices);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, label_assign_warning);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, label_calib_summary_message);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, label_calib_upload_location);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, label_no_devices);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, liststore_assign);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, liststore_calib_kind);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, liststore_calib_sensor);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, toolbar_devices);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, toolbutton_device_calibrate);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, toolbutton_device_default);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, toolbutton_device_enable);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, toolbutton_profile_add);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, toolbutton_profile_remove);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, toolbutton_profile_view);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, treeview_assign);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, treeview_calib_kind);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, treeview_calib_quality);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, treeview_calib_sensor);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, treeview_calib_temp);
 }
 
 static gint
@@ -2110,27 +2086,16 @@ cc_color_panel_treeview_quality_default_cb (GtkTreeModel *model,
 static void
 cc_color_panel_init (CcColorPanel *prefs)
 {
-  g_autoptr(GError) error = NULL;
   GtkCellRenderer *renderer;
   GtkStyleContext *context;
   GtkTreeModel *model;
   GtkTreeModel *model_filter;
   GtkTreeSelection *selection;
   GtkTreeViewColumn *column;
-  GtkWidget *widget;
 
   g_resources_register (cc_color_get_resource ());
 
-  prefs->builder = gtk_builder_new ();
-  gtk_builder_add_from_resource (prefs->builder,
-                                 "/org/gnome/control-center/color/color.ui",
-                                 &error);
-
-  if (error != NULL)
-    {
-      g_warning ("Could not load interface file: %s", error->message);
-      return;
-    }
+  gtk_widget_init_template (GTK_WIDGET (prefs));
 
   prefs->cancellable = g_cancellable_new ();
   prefs->devices = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
@@ -2144,103 +2109,71 @@ cc_color_panel_init (CcColorPanel *prefs)
   prefs->settings_colord = g_settings_new (COLORD_SETTINGS_SCHEMA);
 
   /* assign buttons */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "toolbutton_profile_add"));
-  g_signal_connect (widget, "clicked",
+  g_signal_connect (prefs->toolbutton_profile_add, "clicked",
                     G_CALLBACK (gcm_prefs_profile_add_cb), prefs);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "toolbutton_profile_remove"));
-  g_signal_connect (widget, "clicked",
+  g_signal_connect (prefs->toolbutton_profile_remove, "clicked",
                     G_CALLBACK (gcm_prefs_profile_remove_cb), prefs);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "toolbutton_profile_view"));
-  g_signal_connect (widget, "clicked",
+  g_signal_connect (prefs->toolbutton_profile_view, "clicked",
                     G_CALLBACK (gcm_prefs_profile_view_cb), prefs);
 
   /* href */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "label_assign_warning"));
-  g_signal_connect (widget, "activate-link",
+  g_signal_connect (prefs->label_assign_warning, "activate-link",
                     G_CALLBACK (gcm_prefs_profile_assign_link_activate_cb), prefs);
 
   /* add columns to profile tree view */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "treeview_assign"));
-  gcm_prefs_add_profiles_columns (prefs, GTK_TREE_VIEW (widget));
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  gcm_prefs_add_profiles_columns (prefs, GTK_TREE_VIEW (prefs->treeview_assign));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_assign));
   g_signal_connect (selection, "changed",
                     G_CALLBACK (gcm_prefs_profiles_treeview_clicked_cb),
                     prefs);
-  g_signal_connect (GTK_TREE_VIEW (widget), "row-activated",
+  g_signal_connect (GTK_TREE_VIEW (prefs->treeview_assign), "row-activated",
                     G_CALLBACK (gcm_prefs_profiles_row_activated_cb),
                     prefs);
 
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "toolbutton_device_default"));
-  g_signal_connect (widget, "clicked",
+  g_signal_connect (prefs->toolbutton_device_default, "clicked",
                     G_CALLBACK (gcm_prefs_default_cb), prefs);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "toolbutton_device_enable"));
-  g_signal_connect (widget, "clicked",
+  g_signal_connect (prefs->toolbutton_device_enable, "clicked",
                     G_CALLBACK (gcm_prefs_device_profile_enable_cb), prefs);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "toolbutton_device_calibrate"));
-  g_signal_connect (widget, "clicked",
+  g_signal_connect (prefs->toolbutton_device_calibrate, "clicked",
                     G_CALLBACK (gcm_prefs_calibrate_cb), prefs);
 
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "toolbar_devices"));
-  context = gtk_widget_get_style_context (widget);
+  context = gtk_widget_get_style_context (prefs->toolbar_devices);
   gtk_style_context_add_class (context, GTK_STYLE_CLASS_INLINE_TOOLBAR);
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
   /* set up assign dialog */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "dialog_assign"));
-  g_signal_connect (widget, "delete-event",
+  g_signal_connect (prefs->dialog_assign, "delete-event",
                     G_CALLBACK (gcm_prefs_profile_delete_event_cb), prefs);
-  prefs->dialog_assign = widget;
 
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "button_assign_cancel"));
-  g_signal_connect (widget, "clicked",
+  g_signal_connect (prefs->button_assign_cancel, "clicked",
                     G_CALLBACK (gcm_prefs_button_assign_cancel_cb), prefs);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "button_assign_ok"));
-  g_signal_connect (widget, "clicked",
+  g_signal_connect (prefs->button_assign_ok, "clicked",
                     G_CALLBACK (gcm_prefs_button_assign_ok_cb), prefs);
 
   /* setup icc profiles list */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "button_assign_import"));
-  g_signal_connect (widget, "clicked",
+  g_signal_connect (prefs->button_assign_import, "clicked",
                     G_CALLBACK (gcm_prefs_button_assign_import_cb), prefs);
 
   /* setup the calibration helper */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "assistant_calib"));
-  g_signal_connect (widget, "delete-event",
+  g_signal_connect (prefs->assistant_calib, "delete-event",
                     G_CALLBACK (gcm_prefs_calib_delete_event_cb),
                     prefs);
-  g_signal_connect (widget, "apply",
+  g_signal_connect (prefs->assistant_calib, "apply",
                     G_CALLBACK (gcm_prefs_calib_apply_cb),
                     prefs);
-  g_signal_connect (widget, "cancel",
+  g_signal_connect (prefs->assistant_calib, "cancel",
                     G_CALLBACK (gcm_prefs_calib_cancel_cb),
                     prefs);
-  g_signal_connect (widget, "close",
+  g_signal_connect (prefs->assistant_calib, "close",
                     G_CALLBACK (gcm_prefs_calib_cancel_cb),
                     prefs);
-  g_signal_connect (widget, "prepare",
+  g_signal_connect (prefs->assistant_calib, "prepare",
                     G_CALLBACK (gcm_prefs_calib_prepare_cb),
                     prefs);
-  prefs->assistant_calib = widget;
 
   /* setup the calibration helper ::TreeView */
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "treeview_calib_quality"));
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-  model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_calib_quality));
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (prefs->treeview_calib_quality));
   gtk_tree_model_foreach (model,
                           cc_color_panel_treeview_quality_default_cb,
                           selection);
@@ -2257,7 +2190,7 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_tree_view_column_add_attribute (column, renderer,
                                       "markup", COLUMN_CALIB_QUALITY_DESCRIPTION);
   gtk_tree_view_column_set_expand (column, TRUE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
+  gtk_tree_view_append_column (GTK_TREE_VIEW (prefs->treeview_calib_quality),
                                GTK_TREE_VIEW_COLUMN (column));
   column = gtk_tree_view_column_new ();
   renderer = cc_color_cell_renderer_text_new ();
@@ -2270,12 +2203,10 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_tree_view_column_add_attribute (column, renderer,
                                       "markup", COLUMN_CALIB_QUALITY_APPROX_TIME);
   gtk_tree_view_column_set_expand (column, FALSE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
+  gtk_tree_view_append_column (GTK_TREE_VIEW (prefs->treeview_calib_quality),
                                GTK_TREE_VIEW_COLUMN (column));
 
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "treeview_calib_sensor"));
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_calib_sensor));
   g_signal_connect (selection, "changed",
                     G_CALLBACK (gcm_prefs_calib_sensor_treeview_clicked_cb),
                     prefs);
@@ -2289,12 +2220,10 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_tree_view_column_add_attribute (column, renderer,
                                       "markup", COLUMN_CALIB_SENSOR_DESCRIPTION);
   gtk_tree_view_column_set_expand (column, TRUE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
+  gtk_tree_view_append_column (GTK_TREE_VIEW (prefs->treeview_calib_sensor),
                                GTK_TREE_VIEW_COLUMN (column));
 
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "treeview_calib_kind"));
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_calib_kind));
   g_signal_connect (selection, "changed",
                     G_CALLBACK (gcm_prefs_calib_kind_treeview_clicked_cb),
                     prefs);
@@ -2307,19 +2236,17 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_tree_view_column_pack_start (column, renderer, TRUE);
   gtk_tree_view_column_add_attribute (column, renderer,
                                       "markup", COLUMN_CALIB_KIND_DESCRIPTION);
-  model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (prefs->treeview_calib_kind));
   model_filter = gtk_tree_model_filter_new (model, NULL);
-  gtk_tree_view_set_model (GTK_TREE_VIEW (widget), model_filter);
+  gtk_tree_view_set_model (GTK_TREE_VIEW (prefs->treeview_calib_kind), model_filter);
   gtk_tree_model_filter_set_visible_column (GTK_TREE_MODEL_FILTER (model_filter),
                                             COLUMN_CALIB_KIND_VISIBLE);
 
   gtk_tree_view_column_set_expand (column, TRUE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
+  gtk_tree_view_append_column (GTK_TREE_VIEW (prefs->treeview_calib_kind),
                                GTK_TREE_VIEW_COLUMN (column));
 
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "treeview_calib_temp"));
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_calib_temp));
   g_signal_connect (selection, "changed",
                     G_CALLBACK (gcm_prefs_calib_temp_treeview_clicked_cb),
                     prefs);
@@ -2333,11 +2260,9 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_tree_view_column_add_attribute (column, renderer,
                                       "markup", COLUMN_CALIB_TEMP_DESCRIPTION);
   gtk_tree_view_column_set_expand (column, TRUE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
+  gtk_tree_view_append_column (GTK_TREE_VIEW (prefs->treeview_calib_temp),
                                GTK_TREE_VIEW_COLUMN (column));
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "entry_calib_title"));
-  g_signal_connect (widget, "notify::text",
+  g_signal_connect (prefs->entry_calib_title, "notify::text",
         G_CALLBACK (gcm_prefs_title_entry_changed_cb), prefs);
 
   /* use a device client array */
@@ -2373,8 +2298,7 @@ cc_color_panel_init (CcColorPanel *prefs)
                     prefs);
   prefs->list_box_size = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
 
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder, "frame_devices"));
-  gtk_container_add (GTK_CONTAINER (widget), GTK_WIDGET (prefs->list_box));
+  gtk_container_add (GTK_CONTAINER (prefs->frame_devices), GTK_WIDGET (prefs->list_box));
   gtk_widget_show (GTK_WIDGET (prefs->list_box));
 
   /* connect to colord */
@@ -2396,26 +2320,15 @@ cc_color_panel_init (CcColorPanel *prefs)
 
   /* show the confirmation export page if we are running from a LiveCD */
   prefs->is_live_cd = gcm_prefs_is_livecd ();
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "box_calib_summary"));
-  gtk_widget_set_visible (widget, prefs->is_live_cd);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "button_calib_export"));
-  g_signal_connect (widget, "clicked",
+  gtk_widget_set_visible (prefs->box_calib_summary, prefs->is_live_cd);
+  g_signal_connect (prefs->button_calib_export, "clicked",
                     G_CALLBACK (gcm_prefs_calib_export_cb), prefs);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "button_calib_upload"));
-  g_signal_connect (widget, "clicked",
+  g_signal_connect (prefs->button_calib_upload, "clicked",
                     G_CALLBACK (gcm_prefs_calib_upload_cb), prefs);
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->builder,
-                                               "label_calib_summary_message"));
-  g_signal_connect (widget, "activate-link",
+  g_signal_connect (prefs->label_calib_summary_message, "activate-link",
                     G_CALLBACK (gcm_prefs_calib_export_link_cb), prefs);
 
-
-  widget = WID (prefs->builder, "dialog-vbox1");
-  gtk_container_add (GTK_CONTAINER (prefs), widget);
-  g_signal_connect (widget, "realize",
+  g_signal_connect (prefs, "realize",
                     G_CALLBACK (gcm_prefs_window_realize_cb),
                     prefs);
 }
