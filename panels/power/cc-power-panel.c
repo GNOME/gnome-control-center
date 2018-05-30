@@ -180,11 +180,10 @@ no_prelight_row_new (void)
 static char *
 get_chassis_type (GCancellable *cancellable)
 {
-  char *ret = NULL;
-  GError *error = NULL;
-  GVariant *inner;
-  GVariant *variant = NULL;
-  GDBusConnection *connection;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) inner = NULL;
+  g_autoptr(GVariant) variant = NULL;
+  g_autoptr(GDBusConnection) connection = NULL;
 
   connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM,
                                cancellable,
@@ -193,8 +192,7 @@ get_chassis_type (GCancellable *cancellable)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("system bus not available: %s", error->message);
-      g_error_free (error);
-      goto out;
+      return NULL;
     }
 
   variant = g_dbus_connection_call_sync (connection,
@@ -214,18 +212,11 @@ get_chassis_type (GCancellable *cancellable)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_debug ("Failed to get property '%s': %s", "Chassis", error->message);
-      g_error_free (error);
-      goto out;
+      return NULL;
     }
 
   g_variant_get (variant, "(v)", &inner);
-  ret = g_variant_dup_string (inner, NULL);
-  g_variant_unref (inner);
-
-out:
-  g_clear_object (&connection);
-  g_clear_pointer (&variant, g_variant_unref);
-  return ret;
+  return g_variant_dup_string (inner, NULL);
 }
 
 static gchar *
@@ -279,7 +270,7 @@ get_details_string (gdouble percentage, UpDeviceState state, guint64 time)
 
   if (time > 0)
     {
-      gchar *time_string;
+      g_autofree gchar *time_string = NULL;
 
       time_string = get_timestring (time);
       switch (state)
@@ -314,7 +305,6 @@ get_details_string (gdouble percentage, UpDeviceState state, guint64 time)
             details = g_strdup_printf ("error: %s", up_device_state_to_string (state));
             break;
         }
-      g_free (time_string);
     }
   else
     {
@@ -351,13 +341,13 @@ get_details_string (gdouble percentage, UpDeviceState state, guint64 time)
 static void
 set_primary (CcPowerPanel *panel, UpDevice *device)
 {
-  gchar *details = NULL;
+  g_autofree gchar *details = NULL;
   gdouble percentage;
   guint64 time_empty, time_full, time;
   UpDeviceState state;
   GtkWidget *box, *box2, *label;
   GtkWidget *levelbar, *row;
-  gchar *s;
+  g_autofree gchar *s = NULL;
   gdouble energy_full, energy_rate;
 
   g_object_get (device,
@@ -405,7 +395,6 @@ set_primary (CcPowerPanel *panel, UpDevice *device)
 
   s = g_strdup_printf ("%d%%", (int)(percentage + 0.5));
   label = gtk_label_new (s);
-  g_free (s);
   gtk_widget_set_halign (label, GTK_ALIGN_END);
   gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
   gtk_box_pack_start (GTK_BOX (box2), label, FALSE, TRUE, 0);
@@ -419,8 +408,6 @@ set_primary (CcPowerPanel *panel, UpDevice *device)
   gtk_widget_show_all (row);
 
   g_object_set_data (G_OBJECT (row), "primary", GINT_TO_POINTER (TRUE));
-
-  g_free (details);
 
   gtk_widget_set_visible (panel->battery_section, TRUE);
 }
@@ -437,8 +424,8 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
   GtkWidget *label;
   GtkWidget *levelbar;
   GtkWidget *widget;
-  gchar *s;
-  gchar *icon_name;
+  g_autofree gchar *s = NULL;
+  g_autofree gchar *icon_name = NULL;
   const gchar *name;
 
   g_object_get (device,
@@ -485,7 +472,6 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
 
   s = g_strdup_printf ("%d%%", (int)percentage);
   label = gtk_label_new (s);
-  g_free (s);
   gtk_widget_set_halign (label, GTK_ALIGN_END);
   gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
   gtk_box_pack_start (GTK_BOX (box2), label, FALSE, TRUE, 0);
@@ -509,8 +495,6 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
   gtk_container_add (GTK_CONTAINER (panel->battery_list), row);
   gtk_size_group_add_widget (panel->row_sizegroup, row);
   gtk_widget_show_all (row);
-
-  g_free (icon_name);
 
   gtk_widget_set_visible (panel->battery_section, TRUE);
 }
@@ -576,15 +560,14 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   GtkWidget *hbox;
   GtkWidget *box2;
   GtkWidget *widget;
-  GString *status;
-  GString *description;
+  g_autoptr(GString) status = NULL;
+  g_autoptr(GString) description = NULL;
   gdouble percentage;
-  gchar *name;
+  g_autofree gchar *name = NULL;
   gboolean show_caution = FALSE;
   gboolean is_present;
   UpDeviceLevel battery_level;
 
-  name = NULL;
   g_object_get (device,
                 "kind", &kind,
                 "percentage", &percentage,
@@ -595,10 +578,7 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   battery_level = get_battery_level (device);
 
   if (!is_present)
-    {
-      g_free (name);
-      return;
-    }
+    return;
 
   if (kind == UP_DEVICE_KIND_UPS)
     show_caution = TRUE;
@@ -607,8 +587,6 @@ add_device (CcPowerPanel *panel, UpDevice *device)
     description = g_string_new (_(kind_to_description (kind)));
   else
     description = g_string_new (name);
-
-  g_free (name);
 
   switch (state)
     {
@@ -670,11 +648,10 @@ add_device (CcPowerPanel *panel, UpDevice *device)
 
   if (battery_level == UP_DEVICE_LEVEL_NONE)
     {
-      gchar *s;
+      g_autofree gchar *s = NULL;
 
       s = g_strdup_printf ("%d%%", (int)(percentage + 0.5));
       widget = gtk_label_new (s);
-      g_free (s);
     }
   else
     {
@@ -700,9 +677,6 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   gtk_size_group_add_widget (panel->row_sizegroup, row);
   g_object_set_data (G_OBJECT (row), "kind", GINT_TO_POINTER (kind));
 
-  g_string_free (description, TRUE);
-  g_string_free (status, TRUE);
-
   gtk_widget_set_visible (panel->device_section, TRUE);
 }
 
@@ -711,24 +685,24 @@ up_client_changed (UpClient     *client,
                    UpDevice     *device,
                    CcPowerPanel *self)
 {
-  GList *children, *l;
+  g_autoptr(GList) battery_children = NULL;
+  g_autoptr(GList) device_children = NULL;
+  GList *l;
   gint i;
   UpDeviceKind kind;
   guint n_batteries;
   gboolean on_ups;
-  UpDevice *composite;
-  gchar *s;
+  g_autoptr(UpDevice) composite = NULL;
+  g_autofree gchar *s = NULL;
 
-  children = gtk_container_get_children (GTK_CONTAINER (self->battery_list));
-  for (l = children; l != NULL; l = l->next)
+  battery_children = gtk_container_get_children (GTK_CONTAINER (self->battery_list));
+  for (l = battery_children; l != NULL; l = l->next)
     gtk_container_remove (GTK_CONTAINER (self->battery_list), l->data);
-  g_list_free (children);
   gtk_widget_hide (self->battery_section);
 
-  children = gtk_container_get_children (GTK_CONTAINER (self->device_list));
-  for (l = children; l != NULL; l = l->next)
+  device_children = gtk_container_get_children (GTK_CONTAINER (self->device_list));
+  for (l = device_children; l != NULL; l = l->next)
     gtk_container_remove (GTK_CONTAINER (self->device_list), l->data);
-  g_list_free (children);
   gtk_widget_hide (self->device_section);
 
 #ifdef TEST_FAKE_DEVICES
@@ -813,7 +787,6 @@ up_client_changed (UpClient     *client,
   else
     s = g_strdup_printf ("<b>%s</b>", _("Battery"));
   gtk_label_set_label (GTK_LABEL (self->battery_heading), s);
-  g_free (s);
 
   if (!on_ups && n_batteries > 1)
     set_primary (self, composite);
@@ -843,8 +816,6 @@ up_client_changed (UpClient     *client,
           add_device (self, device);
         }
     }
-
-  g_object_unref (composite);
 }
 
 static void
@@ -886,8 +857,8 @@ static void
 set_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
   CcPowerPanel *self = CC_POWER_PANEL (user_data);
-  GError *error = NULL;
-  GVariant *result;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) result = NULL;
   GDBusProxy *proxy = G_DBUS_PROXY (source_object);
 
   /* not setting, so pay attention to changed signals */
@@ -901,7 +872,6 @@ set_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_printerr ("Error setting brightness: %s\n", error->message);
-      g_error_free (error);
       return;
     }
 }
@@ -911,7 +881,7 @@ brightness_slider_value_changed_cb (GtkRange *range, gpointer user_data)
 {
   CcPowerPanel *self = CC_POWER_PANEL (user_data);
   guint percentage;
-  GVariant *variant;
+  g_autoptr(GVariant) variant = NULL;
   GDBusProxy *proxy;
 
   percentage = (guint) gtk_range_get_value (range);
@@ -946,7 +916,7 @@ brightness_slider_value_changed_cb (GtkRange *range, gpointer user_data)
   /* push this to g-s-d */
   g_dbus_proxy_call (proxy,
                      "org.freedesktop.DBus.Properties.Set",
-                     variant,
+                     g_variant_ref_sink (variant),
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
                      self->cancellable,
@@ -957,7 +927,7 @@ brightness_slider_value_changed_cb (GtkRange *range, gpointer user_data)
 static void
 sync_kbd_brightness (CcPowerPanel *self)
 {
-  GVariant *result;
+  g_autoptr(GVariant) result = NULL;
   gint brightness;
   gboolean visible;
   GtkRange *range;
@@ -984,14 +954,13 @@ sync_kbd_brightness (CcPowerPanel *self)
       self->kbd_setting_brightness = TRUE;
       gtk_range_set_value (range, brightness);
       self->kbd_setting_brightness = FALSE;
-      g_variant_unref (result);
     }
 }
 
 static void
 sync_screen_brightness (CcPowerPanel *self)
 {
-  GVariant *result;
+  g_autoptr(GVariant) result = NULL;
   gint brightness;
   gboolean visible;
   GtkRange *range;
@@ -1020,7 +989,6 @@ sync_screen_brightness (CcPowerPanel *self)
       self->setting_brightness = TRUE;
       gtk_range_set_value (range, brightness);
       self->setting_brightness = FALSE;
-      g_variant_unref (result);
     }
 }
 
@@ -1041,26 +1009,19 @@ als_enabled_state_changed (CcPowerPanel *self)
   gboolean enabled;
   gboolean has_brightness = FALSE;
   gboolean visible = FALSE;
-  GVariant *v;
 
   if (self->screen_proxy != NULL)
     {
-      v = g_dbus_proxy_get_cached_property (self->screen_proxy, "Brightness");
+      g_autoptr(GVariant) v = g_dbus_proxy_get_cached_property (self->screen_proxy, "Brightness");
       if (v != NULL)
-        {
-          has_brightness = g_variant_get_int32 (v) >= 0.0;
-          g_variant_unref (v);
-        }
+        has_brightness = g_variant_get_int32 (v) >= 0.0;
     }
 
   if (self->iio_proxy != NULL)
     {
-      v = g_dbus_proxy_get_cached_property (self->iio_proxy, "HasAmbientLight");
+      g_autoptr(GVariant) v = g_dbus_proxy_get_cached_property (self->iio_proxy, "HasAmbientLight");
       if (v != NULL)
-        {
-          visible = g_variant_get_boolean (v);
-          g_variant_unref (v);
-        }
+        visible = g_variant_get_boolean (v);
     }
 
   enabled = g_settings_get_boolean (self->gsd_settings, "ambient-enabled");
@@ -1084,7 +1045,7 @@ on_screen_property_change (GDBusProxy *proxy,
 static void
 got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   CcPowerPanel *self;
   GDBusProxy *screen_proxy;
 
@@ -1093,7 +1054,6 @@ got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_printerr ("Error creating screen proxy: %s\n", error->message);
-      g_error_free (error);
       return;
     }
 
@@ -1122,7 +1082,7 @@ static void
 got_kbd_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
   CcPowerPanel *self = CC_POWER_PANEL (user_data);
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   GDBusProxy *kbd_proxy;
 
   kbd_proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
@@ -1130,7 +1090,6 @@ got_kbd_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_printerr ("Error creating keyboard proxy: %s\n", error->message);
-      g_error_free (error);
       return;
     }
 
@@ -1172,8 +1131,10 @@ combo_time_changed_cb (GtkWidget *widget, CcPowerPanel *self)
 static char *
 time_to_string_text (gint64 msecs)
 {
-	char *secs, *mins, *hours, *string;
 	int sec, min, hour, _time;
+	g_autofree gchar *hours;
+	g_autofree gchar *mins;
+	g_autofree gchar *secs;
 
 	_time = (int) (msecs / 1000);
 	sec = _time % 60;
@@ -1190,26 +1151,19 @@ time_to_string_text (gint64 msecs)
 	secs = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d second",
 					  "%d seconds", sec), sec);
 
-	if (hour > 0)
-	{
+	if (hour > 0) {
 		/* 5 hours 2 minutes 12 seconds */
-		string = g_strdup_printf (C_("time", "%s %s %s"), hours, mins, secs);
+		return g_strdup_printf (C_("time", "%s %s %s"), hours, mins, secs);
 	} else if (min > 0) {
 		/* 2 minutes 12 seconds */
-		string = g_strdup_printf (C_("time", "%s %s"), mins, secs);
+		return g_strdup_printf (C_("time", "%s %s"), mins, secs);
 	} else if (sec > 0) {
 		/* 10 seconds */
-		string = g_strdup (secs);
+		return g_strdup (secs);
 	} else {
 		/* 0 seconds */
-		string = g_strdup (_("0 seconds"));
+		return g_strdup (_("0 seconds"));
 	}
-
-	g_free (hours);
-	g_free (mins);
-	g_free (secs);
-
-	return string;
 }
 
 static void
@@ -1241,7 +1195,7 @@ set_value_for_combo (GtkComboBox *combo_box, gint value)
       else if (value_tmp > value)
         {
           GtkTreeIter new;
-          char *text;
+          g_autofree gchar *text = NULL;
 
           /* This is an unlisted value, add it to the drop-down */
           gtk_list_store_insert_before (GTK_LIST_STORE (model), &new, &iter);
@@ -1250,7 +1204,6 @@ set_value_for_combo (GtkComboBox *combo_box, gint value)
                               ACTION_MODEL_TEXT, text,
                               ACTION_MODEL_VALUE, value,
                               -1);
-          g_free (text);
           gtk_combo_box_set_active_iter (combo_box, &new);
           return;
         }
@@ -1340,11 +1293,11 @@ static void
 bt_powered_state_changed (CcPowerPanel *panel)
 {
   gboolean powered, has_airplane_mode;
-  GVariant *v;
+  g_autoptr(GVariant) v1 = NULL;
+  g_autoptr(GVariant) v2 = NULL;
 
-  v = g_dbus_proxy_get_cached_property (panel->bt_rfkill, "BluetoothHasAirplaneMode");
-  has_airplane_mode = g_variant_get_boolean (v);
-  g_variant_unref (v);
+  v1 = g_dbus_proxy_get_cached_property (panel->bt_rfkill, "BluetoothHasAirplaneMode");
+  has_airplane_mode = g_variant_get_boolean (v1);
 
   if (!has_airplane_mode)
     {
@@ -1353,9 +1306,8 @@ bt_powered_state_changed (CcPowerPanel *panel)
       return;
     }
 
-  v = g_dbus_proxy_get_cached_property (panel->bt_rfkill, "BluetoothAirplaneMode");
-  powered = !g_variant_get_boolean (v);
-  g_variant_unref (v);
+  v2 = g_dbus_proxy_get_cached_property (panel->bt_rfkill, "BluetoothAirplaneMode");
+  powered = !g_variant_get_boolean (v2);
 
   g_debug ("bt powered state changed to %s", powered ? "on" : "off");
 
@@ -1525,7 +1477,7 @@ nm_client_ready_cb (GObject *source_object,
 {
   CcPowerPanel *self;
   NMClient *client;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   client = nm_client_new_finish (res, &error);
   if (!client)
@@ -1539,7 +1491,6 @@ nm_client_ready_cb (GObject *source_object,
           gtk_widget_set_sensitive (self->wifi_row, FALSE);
           gtk_widget_set_sensitive (self->mobile_row, FALSE);
         }
-      g_error_free (error);
       return;
     }
 
@@ -1714,7 +1665,7 @@ iio_proxy_appeared_cb (GDBusConnection *connection,
                        gpointer user_data)
 {
   CcPowerPanel *self = CC_POWER_PANEL (user_data);
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   self->iio_proxy =
     cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
@@ -1727,7 +1678,6 @@ iio_proxy_appeared_cb (GDBusConnection *connection,
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("Could not create IIO sensor proxy: %s", error->message);
-      g_error_free (error);
       return;
     }
 
@@ -1756,13 +1706,12 @@ add_power_saving_section (CcPowerPanel *self)
   GtkWidget *sw;
   GtkWidget *w;
   int value;
-  gchar *s;
+  g_autofree gchar *s = NULL;
 
   vbox = WID (self->builder, "vbox_power");
 
   s = g_strdup_printf ("<b>%s</b>", _("Power Saving"));
   label = gtk_label_new (s);
-  g_free (s);
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
   gtk_widget_set_halign (label, GTK_ALIGN_START);
   gtk_widget_set_margin_bottom (label, 12);
@@ -2182,10 +2131,9 @@ static gboolean
 can_suspend_or_hibernate (CcPowerPanel *self,
                           const char   *method_name)
 {
-  GDBusConnection *connection;
-  GVariant *variant;
-  gboolean result = FALSE;
-  GError *error = NULL;
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GVariant) variant = NULL;
+  g_autoptr(GError) error = NULL;
   const char *s;
 
   connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM,
@@ -2195,8 +2143,7 @@ can_suspend_or_hibernate (CcPowerPanel *self,
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("system bus not available: %s", error->message);
-      g_error_free (error);
-      goto out;
+      return FALSE;
     }
 
   variant = g_dbus_connection_call_sync (connection,
@@ -2210,23 +2157,16 @@ can_suspend_or_hibernate (CcPowerPanel *self,
                                          -1,
                                          self->cancellable,
                                          &error);
-  g_object_unref (connection);
 
   if (!variant)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_debug ("Failed to call %s(): %s", method_name, error->message);
-      g_error_free (error);
-      goto out;
+      return FALSE;
     }
 
   g_variant_get (variant, "(&s)", &s);
-  if (g_strcmp0 (s, "yes") == 0)
-    result = TRUE;
-  g_variant_unref (variant);
-
- out:
-  return result;
+  return g_strcmp0 (s, "yes") == 0;
 }
 
 static void
@@ -2235,7 +2175,7 @@ add_suspend_and_power_off_section (CcPowerPanel *self)
   GtkWidget *vbox;
   GtkWidget *widget, *box, *label;
   GtkWidget *sw, *row;
-  gchar *s;
+  g_autofree gchar *s = NULL;
   gint value;
   GtkWidget *dialog;
   GtkWidget *combo;
@@ -2272,7 +2212,6 @@ add_suspend_and_power_off_section (CcPowerPanel *self)
   /* Frame header */
   s = g_markup_printf_escaped ("<b>%s</b>", _("Suspend & Power Button"));
   label = gtk_label_new (s);
-  g_free (s);
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
   gtk_widget_set_halign (label, GTK_ALIGN_START);
   gtk_widget_set_margin_bottom (label, 12);
@@ -2437,7 +2376,7 @@ add_battery_section (CcPowerPanel *self)
   GtkWidget *vbox;
   GtkWidget *widget, *box;
   GtkWidget *frame;
-  gchar *s;
+  g_autofree gchar *s = NULL;
 
   vbox = WID (self->builder, "vbox_power");
 
@@ -2447,7 +2386,6 @@ add_battery_section (CcPowerPanel *self)
 
   s = g_markup_printf_escaped ("<b>%s</b>", _("Battery"));
   self->battery_heading = widget = gtk_label_new (s);
-  g_free (s);
   gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
   gtk_widget_set_halign (widget, GTK_ALIGN_START);
   gtk_widget_set_margin_bottom (widget, 12);
@@ -2485,7 +2423,7 @@ add_device_section (CcPowerPanel *self)
   GtkWidget *vbox;
   GtkWidget *widget, *box;
   GtkWidget *frame;
-  gchar *s;
+  g_autofree gchar *s = NULL;
 
   vbox = WID (self->builder, "vbox_power");
 
@@ -2496,7 +2434,6 @@ add_device_section (CcPowerPanel *self)
 
   s = g_markup_printf_escaped ("<b>%s</b>", _("Devices"));
   self->device_heading = widget = gtk_label_new (s);
-  g_free (s);
   gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
   gtk_widget_set_halign (widget, GTK_ALIGN_START);
   gtk_widget_set_margin_bottom (widget, 12);
@@ -2549,7 +2486,7 @@ on_content_size_changed (GtkWidget *widget, GtkAllocation *allocation, gpointer 
 static void
 cc_power_panel_init (CcPowerPanel *self)
 {
-  GError     *error;
+  g_autoptr(GError) error = NULL;
   GtkWidget  *widget;
   GtkWidget  *box;
   guint       i;
@@ -2558,7 +2495,6 @@ cc_power_panel_init (CcPowerPanel *self)
 
   self->builder = gtk_builder_new ();
 
-  error = NULL;
   gtk_builder_add_from_resource (self->builder,
                                  "/org/gnome/control-center/power/power.ui",
                                  &error);
@@ -2566,7 +2502,6 @@ cc_power_panel_init (CcPowerPanel *self)
   if (error != NULL)
     {
       g_warning ("Could not load interface file: %s", error->message);
-      g_error_free (error);
       return;
     }
 
