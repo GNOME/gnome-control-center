@@ -25,6 +25,8 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n-lib.h>
 
+#include "shell/cc-application.h"
+#include "shell/cc-debug.h"
 #include "cc-wacom-panel.h"
 #include "cc-wacom-page.h"
 #include "cc-wacom-stylus-page.h"
@@ -82,6 +84,41 @@ enum {
 	PROP_0,
 	PROP_PARAMETERS
 };
+
+/* Static init function */
+static void
+update_visibility (GsdDeviceManager *manager,
+		   GsdDevice        *device,
+		   gpointer          user_data)
+{
+	CcApplication *application;
+	g_autoptr(GList) devices = NULL;
+	guint i;
+
+	devices = gsd_device_manager_list_devices (manager, GSD_DEVICE_TYPE_TABLET);
+	i = g_list_length (devices);
+
+	/* Set the new visibility */
+	application = CC_APPLICATION (g_application_get_default ());
+	cc_shell_model_set_panel_visibility (cc_application_get_model (application),
+					     "wacom",
+					     i > 0 ? CC_PANEL_VISIBLE : CC_PANEL_VISIBLE_IN_SEARCH);
+
+	g_debug ("Wacom panel visible: %s", i > 0 ? "yes" : "no");
+}
+
+void
+cc_wacom_panel_static_init_func (void)
+{
+	GsdDeviceManager *manager;
+
+	manager = gsd_device_manager_get ();
+	g_signal_connect (G_OBJECT (manager), "device-added",
+			  G_CALLBACK (update_visibility), NULL);
+	g_signal_connect (G_OBJECT (manager), "device-removed",
+			  G_CALLBACK (update_visibility), NULL);
+	update_visibility (manager, NULL, NULL);
+}
 
 static CcWacomPage *
 set_device_page (CcWacomPanel *self, const gchar *device_name)
