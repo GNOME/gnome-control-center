@@ -68,6 +68,9 @@ extern GType cc_wacom_panel_get_type (void);
 #ifdef BUILD_NETWORK
 extern void cc_wifi_panel_static_init_func (void);
 #endif /* BUILD_NETWORK */
+#ifdef BUILD_WACOM
+extern void cc_wacom_panel_static_init_func (void);
+#endif /* BUILD_WACOM */
 
 #define PANEL_TYPE(name, get_type, init_func) { name, get_type, init_func }
 
@@ -115,7 +118,7 @@ static struct {
   PANEL_TYPE("universal-access", cc_ua_panel_get_type,                   NULL),
   PANEL_TYPE("user-accounts",    cc_user_panel_get_type,                 NULL),
 #ifdef BUILD_WACOM
-  PANEL_TYPE("wacom",            cc_wacom_panel_get_type,                NULL),
+  PANEL_TYPE("wacom",            cc_wacom_panel_get_type,                cc_wacom_panel_static_init_func),
 #endif
 };
 
