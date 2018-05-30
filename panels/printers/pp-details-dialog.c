@@ -462,18 +462,11 @@ pp_details_dialog_free (PpDetailsDialog *self)
           self->all_ppds_list = NULL;
         }
 
-      if (self->get_all_ppds_cancellable != NULL)
-        {
-          g_cancellable_cancel (self->get_all_ppds_cancellable);
-          g_clear_object (&self->get_all_ppds_cancellable);
-        }
+      g_cancellable_cancel (self->get_all_ppds_cancellable);
+      g_clear_object (&self->get_all_ppds_cancellable);
 
-      if (self->get_ppd_names_cancellable != NULL)
-        {
-          g_cancellable_cancel (self->get_ppd_names_cancellable);
-          g_object_unref (self->get_ppd_names_cancellable);
-          self->get_ppd_names_cancellable = NULL;
-        }
+      g_cancellable_cancel (self->get_ppd_names_cancellable);
+      g_clear_object (&self->get_ppd_names_cancellable);
 
       gtk_widget_destroy (GTK_WIDGET (self));
     }

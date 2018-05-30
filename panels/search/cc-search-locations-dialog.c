@@ -75,11 +75,8 @@ cc_search_locations_dialog_init (CcSearchLocationsDialog *self)
 static void
 place_free (Place * p)
 {
-  if (p->cancellable != NULL)
-    {
-      g_cancellable_cancel (p->cancellable);
-      g_object_unref (p->cancellable);
-    }
+  g_cancellable_cancel (p->cancellable);
+  g_clear_object (&p->cancellable);
 
   g_object_unref (p->location);
   g_free (p->display_name);

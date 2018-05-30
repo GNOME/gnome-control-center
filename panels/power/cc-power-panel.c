@@ -129,12 +129,8 @@ cc_power_panel_dispose (GObject *object)
   g_clear_pointer (&priv->chassis_type, g_free);
   g_clear_object (&priv->gsd_settings);
   g_clear_object (&priv->session_settings);
-  if (priv->cancellable != NULL)
-    {
-      g_cancellable_cancel (priv->cancellable);
-      g_object_unref (priv->cancellable);
-      priv->cancellable = NULL;
-    }
+  g_cancellable_cancel (priv->cancellable);
+  g_clear_object (&priv->cancellable);
   g_clear_pointer (&priv->automatic_suspend_dialog, gtk_widget_destroy);
   g_clear_object (&priv->builder);
   g_clear_object (&priv->screen_proxy);

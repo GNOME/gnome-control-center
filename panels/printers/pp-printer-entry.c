@@ -623,11 +623,8 @@ pp_printer_entry_update_jobs_count (PpPrinterEntry *self)
 {
   PpPrinter *printer;
 
-  if (self->get_jobs_cancellable != NULL)
-    {
-      g_cancellable_cancel (self->get_jobs_cancellable);
-      g_clear_object (&self->get_jobs_cancellable);
-    }
+  g_cancellable_cancel (self->get_jobs_cancellable);
+  g_clear_object (&self->get_jobs_cancellable);
 
   self->get_jobs_cancellable = g_cancellable_new ();
 
@@ -1009,17 +1006,12 @@ pp_printer_entry_dispose (GObject *object)
   g_clear_pointer (&self->printer_make_and_model, g_free);
   g_clear_pointer (&self->printer_hostname, g_free);
 
-  if (self->get_jobs_cancellable != NULL)
-    {
-      g_cancellable_cancel (self->get_jobs_cancellable);
-      g_clear_object (&self->get_jobs_cancellable);
-    }
+  g_cancellable_cancel (self->get_jobs_cancellable);
+  g_clear_object (&self->get_jobs_cancellable);
 
-  if (self->check_clean_heads_cancellable)
-    {
-      g_cancellable_cancel (self->check_clean_heads_cancellable);
-      g_clear_object (&self->check_clean_heads_cancellable);
-    }
+  g_cancellable_cancel (self->check_clean_heads_cancellable);
+  g_clear_object (&self->check_clean_heads_cancellable);
+
   g_clear_object (&self->clean_command);
 
   G_OBJECT_CLASS (pp_printer_entry_parent_class)->dispose (object);

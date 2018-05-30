@@ -1954,8 +1954,7 @@ cc_color_panel_dispose (GObject *object)
       g_clear_pointer (&prefs->devices, g_ptr_array_unref);
     }
 
-  if (prefs->cancellable != NULL)
-    g_cancellable_cancel (prefs->cancellable);
+  g_cancellable_cancel (prefs->cancellable);
   g_clear_object (&prefs->settings);
   g_clear_object (&prefs->settings_colord);
   g_clear_object (&prefs->cancellable);
