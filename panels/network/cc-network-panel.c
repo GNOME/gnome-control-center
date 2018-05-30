@@ -210,8 +210,7 @@ cc_network_panel_dispose (GObject *object)
 {
         CcNetworkPanel *self = CC_NETWORK_PANEL (object);
 
-        if (self->cancellable != NULL)
-                g_cancellable_cancel (self->cancellable);
+        g_cancellable_cancel (self->cancellable);
 
         g_clear_object (&self->cancellable);
         g_clear_object (&self->client);
