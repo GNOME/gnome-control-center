@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef CC_COLOR_COMMON_H
-#define CC_COLOR_COMMON_H
+#pragma once
 
 #include <colord.h>
 
@@ -30,6 +29,4 @@ gchar   *cc_color_device_get_sortable_base (CdDevice *device);
 gchar   *cc_color_device_get_title         (CdDevice *device);
 
 G_END_DECLS
-
-#endif /* CC_COLOR_COMMON_H */
 

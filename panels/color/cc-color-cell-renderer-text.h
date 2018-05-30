@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef CC_COLOR_CELL_RENDERER_TEXT_H
-#define CC_COLOR_CELL_RENDERER_TEXT_H
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -30,6 +29,4 @@ G_DECLARE_FINAL_TYPE (CcColorCellRendererText, cc_color_cell_renderer_text, CC_C
 GtkCellRenderer *cc_color_cell_renderer_text_new (void);
 
 G_END_DECLS
-
-#endif /* CC_COLOR_CELL_RENDERER_TEXT_H */
 

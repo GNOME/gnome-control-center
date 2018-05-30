@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef CC_COLOR_DEVICE_H
-#define CC_COLOR_DEVICE_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include <colord.h>
@@ -37,6 +36,3 @@ void         cc_color_device_set_expanded  (CcColorDevice  *color_device,
                                             gboolean        expanded);
 
 G_END_DECLS
-
-#endif /* CC_COLOR_DEVICE_H */
-

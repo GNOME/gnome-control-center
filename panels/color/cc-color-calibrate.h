@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __CC_COLOR_CALIBRATE_H
-#define __CC_COLOR_CALIBRATE_H
+#pragma once
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -53,6 +52,3 @@ gboolean  cc_color_calibrate_setup          (CcColorCalibrate *calibrate,
 CdProfile *cc_color_calibrate_get_profile   (CcColorCalibrate *calibrate);
 
 G_END_DECLS
-
-#endif /* __CC_COLOR_CALIBRATE_H */
-

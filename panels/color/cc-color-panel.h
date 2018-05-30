@@ -18,9 +18,7 @@
  *
  */
 
-
-#ifndef _CC_COLOR_PANEL_H
-#define _CC_COLOR_PANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -30,5 +28,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcColorPanel, cc_color_panel, CC, COLOR_PANEL, CcPanel)
 
 G_END_DECLS
-
-#endif /* _CC_COLOR_PANEL_H */

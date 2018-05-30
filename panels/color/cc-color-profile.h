@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef CC_COLOR_PROFILE_H
-#define CC_COLOR_PROFILE_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include <colord.h>
@@ -41,6 +40,4 @@ CdProfile   *cc_color_profile_get_profile      (CcColorProfile  *color_profile);
 const gchar *cc_color_profile_get_sortable     (CcColorProfile  *color_profile);
 
 G_END_DECLS
-
-#endif /* CC_COLOR_PROFILE_H */
 
