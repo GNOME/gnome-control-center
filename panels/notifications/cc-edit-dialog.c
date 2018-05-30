@@ -132,7 +132,6 @@ set_portal_permissions_for_app (GtkWidget *dialog, GtkSwitch *the_switch)
   const char *yes_strv[] = { "yes", NULL };
   const char *no_strv[] = { "no", NULL };
   g_autoptr(GVariant) reply = NULL;
-  g_autoptr(GError) error = NULL;
 
   if (perm_store == NULL)
     {
