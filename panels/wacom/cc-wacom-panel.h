@@ -64,6 +64,8 @@ struct _CcWacomPanelClass
   CcPanelClass parent_class;
 };
 
+void cc_wacom_panel_static_init_func (void);
+
 GType cc_wacom_panel_get_type (void) G_GNUC_CONST;
 
 void  cc_wacom_panel_switch_to_panel (CcWacomPanel *self,
