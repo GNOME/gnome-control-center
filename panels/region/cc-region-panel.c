@@ -1688,8 +1688,6 @@ session_proxy_ready (GObject      *source,
 static void
 cc_region_panel_init (CcRegionPanel *self)
 {
-	g_autoptr(GError) error = NULL;
-
         g_resources_register (cc_region_get_resource ());
 
         gtk_widget_init_template (GTK_WIDGET (self));
