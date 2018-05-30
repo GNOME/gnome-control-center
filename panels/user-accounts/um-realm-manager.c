@@ -35,14 +35,11 @@
 
 
 struct _UmRealmManager {
-        UmRealmObjectManagerClient parent;
+        UmRealmObjectManagerClient parent_instance;
+
         UmRealmProvider *provider;
         guint diagnostics_sig;
 };
-
-typedef struct {
-        UmRealmProviderProxyClass parent_class;
-} UmRealmManagerClass;
 
 enum {
         REALM_ADDED,

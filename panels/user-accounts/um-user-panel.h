@@ -25,31 +25,8 @@
 
 G_BEGIN_DECLS
 
-#define UM_TYPE_USER_PANEL cc_user_panel_get_type()
-
-#define UM_USER_PANEL(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), UM_TYPE_USER_PANEL, CcUserPanel))
-#define UM_USER_PANEL_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), UM_TYPE_USER_PANEL, CcUserPanelClass))
-#define UM_IS_USER_PANEL(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), UM_TYPE_USER_PANEL))
-#define UM_IS_USER_PANEL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), UM_TYPE_USER_PANEL))
-#define UM_USER_PANEL_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), UM_TYPE_USER_PANEL, CcUserPanelClass))
-
-typedef struct _CcUserPanel CcUserPanel;
-typedef struct _CcUserPanelClass CcUserPanelClass;
-typedef struct _CcUserPanelPrivate CcUserPanelPrivate;
-
-struct _CcUserPanel
-{
-  CcPanel parent;
-
-  CcUserPanelPrivate *priv;
-};
-
-struct _CcUserPanelClass
-{
-  CcPanelClass parent_class;
-};
-
-GType cc_user_panel_get_type (void) G_GNUC_CONST;
+#define UM_TYPE_USER_PANEL (cc_user_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcUserPanel, cc_user_panel, UM, USER_PANEL, CcPanel)
 
 G_END_DECLS
 
