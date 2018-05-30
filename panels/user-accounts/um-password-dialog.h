@@ -18,8 +18,7 @@
  * Written by: Matthias Clasen <mclasen@redhat.com>
  */
 
-#ifndef __UM_PASSWORD_DIALOG_H__
-#define __UM_PASSWORD_DIALOG_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include <act/act.h>
@@ -36,5 +35,3 @@ void              um_password_dialog_show     (UmPasswordDialog *dialog,
                                                GtkWindow        *parent);
 
 G_END_DECLS
-
-#endif

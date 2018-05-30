@@ -18,8 +18,7 @@
  * Written by: Matthias Clasen <mclasen@redhat.com>
  */
 
-#ifndef __UM_ACCOUNT_TYPE__
-#define __UM_ACCOUNT_TYPE__
+#pragma once
 
 G_BEGIN_DECLS
 
@@ -31,5 +30,3 @@ typedef enum {
 const gchar *um_account_type_get_name (UmAccountType account_type);
 
 G_END_DECLS
-
-#endif

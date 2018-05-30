@@ -18,6 +18,8 @@
  * Written by: Matthias Clasen <mclasen@redhat.com>
  */
 
+#pragma once
+
 #include <glib.h>
 
 gint     pw_min_length (void);

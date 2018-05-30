@@ -20,8 +20,7 @@
  * Authors: Milan Bouchet-Valat <nalimilan@club.fr>
  */
 
-#ifndef _RUN_PASSWD_H
-#define _RUN_PASSWD_H
+#pragma once
 
 struct PasswdHandler;
 
@@ -52,6 +51,4 @@ gboolean       passwd_change_password     (PasswdHandler *passwd_handler,
                                            const char    *new_password,
                                            PasswdCallback cb,
                                            const gpointer user_data);
-
-#endif /* _RUN_PASSWD_H */
 
