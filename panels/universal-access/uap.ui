@@ -31,6 +31,10 @@
     <property name="page_increment">200</property>
   </object>
   <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcUaPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <property name="can_focus">True</property>
+    <child>
       <object class="GtkScrolledWindow" id="universal_access_panel">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
@@ -1014,6 +1018,8 @@
           </object>
         </child>
       </object>
+    </child>
+  </template>
   <object class="GtkAdjustment" id="text_scaling_factor_adjustment">
     <property name="lower">0.5</property>
     <property name="upper">3</property>
@@ -1447,11 +1453,11 @@
       </object>
     </child>
     <child internal-child="vbox">
-      <object class="GtkBox" id="repeat-keys-vbox5">
+      <object class="GtkBox" id="repeat_keys_vbox5">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel" id="repeat-keys-description">
+          <object class="GtkLabel" id="repeat_keys_description">
             <property name="visible">True</property>
             <property name="use_underline">True</property>
             <property name="can_focus">False</property>
@@ -1469,7 +1475,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkGrid" id="repeat-keys-delay-grid">
+          <object class="GtkGrid" id="repeat_keys_delay_grid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="valign">start</property>
@@ -1481,19 +1487,19 @@
             <property name="row_spacing">18</property>
             <property name="column_spacing">24</property>
             <child>
-              <object class="GtkBox" id="repeat-keys-box6">
+              <object class="GtkBox" id="repeat_keys_box6">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="valign">start</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
-                  <object class="GtkBox" id="repeat-keys-box7">
+                  <object class="GtkBox" id="repeat_keys_box7">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkLabel" id="repeat-keys-delay-label">
+                      <object class="GtkLabel" id="repeat_keys_delay_label">
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="can_focus">False</property>
@@ -1554,7 +1560,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkGrid" id="repeat-keys-speed-grid">
+          <object class="GtkGrid" id="repeat_keys_speed_grid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="valign">start</property>
@@ -1566,19 +1572,19 @@
             <property name="row_spacing">18</property>
             <property name="column_spacing">24</property>
             <child>
-              <object class="GtkBox" id="repeat-keys-speed-box7">
+              <object class="GtkBox" id="repeat_keys_speed-box7">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="valign">start</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
-                  <object class="GtkBox" id="repeat-keys-speed-box8">
+                  <object class="GtkBox" id="repeat_keys_speed-box8">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkLabel" id="repeat-keys-speed-label">
+                      <object class="GtkLabel" id="repeat_keys_speed_label">
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="can_focus">False</property>
@@ -1711,7 +1717,7 @@
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkLabel" id="cursor_blinking-label">
+                      <object class="GtkLabel" id="cursor_blinking_label">
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="can_focus">False</property>
@@ -1774,13 +1780,13 @@
       </object>
     </child>
   </object>
-  <object class="GtkSizeGroup" id="repeat-keys-dialog-labels-sizegroup">
+  <object class="GtkSizeGroup" id="repeat_keys_dialog_labels_sizegroup">
     <widgets>
-      <widget name="repeat-keys-delay-label"/>
-      <widget name="repeat-keys-speed-label"/>
+      <widget name="repeat_keys_delay_label"/>
+      <widget name="repeat_keys_speed_label"/>
     </widgets>
   </object>
-  <object class="GtkSizeGroup" id="repeat-keys-dialog-scales-sizegroup">
+  <object class="GtkSizeGroup" id="repeat_keys_dialog_scales_sizegroup">
     <widgets>
       <widget name="repeat_keys_delay_scale"/>
       <widget name="repeat_keys_speed_scale"/>
