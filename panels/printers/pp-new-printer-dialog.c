@@ -1573,11 +1573,8 @@ search_for_remote_printers (THostSearchData *data)
 {
   PpNewPrinterDialogPrivate *priv = data->dialog->priv;
 
-  if (priv->remote_host_cancellable != NULL)
-    {
-      g_cancellable_cancel (priv->remote_host_cancellable);
-      g_clear_object (&priv->remote_host_cancellable);
-    }
+  g_cancellable_cancel (priv->remote_host_cancellable);
+  g_clear_object (&priv->remote_host_cancellable);
 
   priv->remote_host_cancellable = g_cancellable_new ();
 

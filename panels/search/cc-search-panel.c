@@ -663,8 +663,7 @@ cc_search_panel_dispose (GObject *object)
 {
   CcSearchPanel *self = CC_SEARCH_PANEL (object);
 
-  if (self->load_cancellable != NULL)
-    g_cancellable_cancel (self->load_cancellable);
+  g_cancellable_cancel (self->load_cancellable);
   g_clear_object (&self->load_cancellable);
 
   G_OBJECT_CLASS (cc_search_panel_parent_class)->dispose (object);

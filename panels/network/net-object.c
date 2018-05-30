@@ -267,8 +267,7 @@ net_object_finalize (GObject *object)
 
         g_free (priv->id);
         g_free (priv->title);
-        if (priv->cancellable != NULL)
-                g_object_unref (priv->cancellable);
+        g_clear_object (&priv->cancellable);
 
         if (priv->client)
                 g_object_remove_weak_pointer (G_OBJECT (priv->client), (gpointer *) (&priv->client));
