@@ -18,8 +18,7 @@
  * Author: Felipe Borges <felipeborges@gnome.org>
  */
 
-#ifndef UM_CAROUSEL_H
-#define UM_CAROUSEL_H
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -49,5 +48,3 @@ void             um_carousel_select_item (UmCarousel     *self,
 guint            um_carousel_get_item_count (UmCarousel  *self);
 
 G_END_DECLS
-
-#endif /* UM_CAROUSEL_H */

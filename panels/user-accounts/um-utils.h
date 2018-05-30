@@ -18,8 +18,7 @@
  * Written by: Matthias Clasen <mclasen@redhat.com>
  */
 
-#ifndef __UM_UTILS_H__
-#define __UM_UTILS_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include <act/act.h>
@@ -77,5 +76,3 @@ void     set_user_icon_data               (ActUser         *user,
 gboolean would_demote_only_admin          (ActUser *user);
 
 G_END_DECLS
-
-#endif

@@ -18,8 +18,7 @@
  * Written by: Matthias Clasen <mclasen@redhat.com>
  */
 
-#ifndef _UM_USER_PANEL_H
-#define _UM_USER_PANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -29,5 +28,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcUserPanel, cc_user_panel, UM, USER_PANEL, CcPanel)
 
 G_END_DECLS
-
-#endif /* _UM_USER_PANEL_H */

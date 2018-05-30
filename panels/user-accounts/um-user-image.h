@@ -16,8 +16,7 @@
  * (C) Copyright 2015 Red Hat, Inc.
  */
 
-#ifndef _UM_USER_IMAGE_H
-#define _UM_USER_IMAGE_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include <act/act.h>
@@ -31,5 +30,3 @@ GtkWidget *um_user_image_new      (void);
 void       um_user_image_set_user (UmUserImage *image, ActUser *user);
 
 G_END_DECLS
-
-#endif /* _UM_USER_IMAGE_H */
