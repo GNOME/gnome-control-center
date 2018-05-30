@@ -23,13 +23,13 @@
 
 #include "um-utils.h"
 
-struct _UmUserImagePrivate {
+struct _UmUserImage {
+        GtkImage parent_instance;
+
         ActUser *user;
 };
 
-#define UM_USER_IMAGE_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), UM_TYPE_USER_IMAGE, UmUserImagePrivate))
-
-G_DEFINE_TYPE_WITH_CODE (UmUserImage, um_user_image, GTK_TYPE_IMAGE, G_ADD_PRIVATE (UmUserImage));
+G_DEFINE_TYPE (UmUserImage, um_user_image, GTK_TYPE_IMAGE)
 
 static void
 render_image (UmUserImage *image)
@@ -37,12 +37,12 @@ render_image (UmUserImage *image)
         cairo_surface_t *surface;
         gint scale, pixel_size;
 
-        if (image->priv->user == NULL)
+        if (image->user == NULL)
                 return;
 
         pixel_size = gtk_image_get_pixel_size (GTK_IMAGE (image));
         scale = gtk_widget_get_scale_factor (GTK_WIDGET (image));
-        surface = render_user_icon (image->priv->user,
+        surface = render_user_icon (image->user,
                                     UM_ICON_STYLE_NONE,
                                     pixel_size > 0 ? pixel_size : 48,
                                     scale);
@@ -54,8 +54,8 @@ void
 um_user_image_set_user (UmUserImage *image,
                         ActUser     *user)
 {
-        g_clear_object (&image->priv->user);
-        image->priv->user = g_object_ref (user);
+        g_clear_object (&image->user);
+        image->user = g_object_ref (user);
 
         render_image (image);
 }
@@ -65,7 +65,7 @@ um_user_image_finalize (GObject *object)
 {
         UmUserImage *image = UM_USER_IMAGE (object);
 
-        g_clear_object (&image->priv->user);
+        g_clear_object (&image->user);
 
         G_OBJECT_CLASS (um_user_image_parent_class)->finalize (object);
 }
@@ -81,8 +81,6 @@ um_user_image_class_init (UmUserImageClass *class)
 static void
 um_user_image_init (UmUserImage *image)
 {
-        image->priv = UM_USER_IMAGE_GET_PRIVATE (image);
-
         g_signal_connect_swapped (image, "notify::scale-factor", G_CALLBACK (render_image), image);
         g_signal_connect_swapped (image, "notify::pixel-size", G_CALLBACK (render_image), image);
 }

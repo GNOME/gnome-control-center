@@ -24,29 +24,9 @@
 
 G_BEGIN_DECLS
 
-#define UM_TYPE_USER_IMAGE um_user_image_get_type()
+#define UM_TYPE_USER_IMAGE (um_user_image_get_type ())
+G_DECLARE_FINAL_TYPE (UmUserImage, um_user_image, UM, USER_IMAGE, GtkImage)
 
-#define UM_USER_IMAGE(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), UM_TYPE_USER_IMAGE, UmUserImage))
-#define UM_USER_IMAGE_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), UM_TYPE_USER_IMAGE, UmUserImageClass))
-#define UM_IS_USER_IMAGE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), UM_TYPE_USER_IMAGE))
-#define UM_IS_USER_IMAGE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), UM_TYPE_USER_IMAGE))
-#define UM_USER_IMAGE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), UM_TYPE_USER_IMAGE, UmUserImageClass))
-
-typedef struct _UmUserImage UmUserImage;
-typedef struct _UmUserImageClass UmUserImageClass;
-typedef struct _UmUserImagePrivate UmUserImagePrivate;
-
-struct _UmUserImage {
-        GtkImage parent;
-
-        UmUserImagePrivate *priv;
-};
-
-struct _UmUserImageClass {
-        GtkImageClass parent_class;
-};
-
-GType      um_user_image_get_type (void) G_GNUC_CONST;
 GtkWidget *um_user_image_new      (void);
 void       um_user_image_set_user (UmUserImage *image, ActUser *user);
 
