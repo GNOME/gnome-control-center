@@ -65,19 +65,14 @@ static gchar *
 cc_color_profile_get_profile_date (CdProfile *profile)
 {
   gint64 created;
-  gchar *string = NULL;
-  GDateTime *dt = NULL;
+  g_autoptr(GDateTime) dt = NULL;
 
   /* get profile age */
   created = cd_profile_get_created (profile);
   if (created == 0)
-    goto out;
+    return NULL;
   dt = g_date_time_new_from_unix_utc (created);
-  string = g_date_time_format (dt, "%x");
-out:
-  if (dt != NULL)
-    g_date_time_unref (dt);
-  return string;
+  return g_date_time_format (dt, "%x");
 }
 
 static gchar *
@@ -234,7 +229,7 @@ static void
 cc_color_profile_refresh (CcColorProfile *color_profile)
 {
   const gchar *warnings;
-  gchar *title = NULL;
+  g_autofree gchar *title = NULL;
 
   /* show the image if the profile is default */
   gtk_widget_set_visible (color_profile->widget_image, color_profile->is_default);
@@ -244,7 +239,6 @@ cc_color_profile_refresh (CcColorProfile *color_profile)
   /* set the title */
   title = gcm_prefs_get_profile_title (color_profile->profile);
   gtk_label_set_markup (GTK_LABEL (color_profile->widget_description), title);
-  g_free (title);
 
   /* show any information */
   warnings = cc_color_profile_get_warnings (color_profile);
@@ -355,16 +349,13 @@ static void
 cc_color_profile_changed_cb (CdDevice *device,
                              CcColorProfile *color_profile)
 {
-  CdProfile *profile;
+  g_autoptr(CdProfile) profile = NULL;
 
   /* check to see if the default has changed */
   profile = cd_device_get_default_profile (device);
   if (profile != NULL)
-    {
-      color_profile->is_default = g_strcmp0 (cd_profile_get_object_path (profile),
-                                    cd_profile_get_object_path (color_profile->profile)) == 0;
-      g_object_unref (profile);
-    }
+    color_profile->is_default = g_strcmp0 (cd_profile_get_object_path (profile),
+                                           cd_profile_get_object_path (color_profile->profile)) == 0;
   cc_color_profile_refresh (color_profile);
 }
 
@@ -389,8 +380,8 @@ cc_color_profile_constructed (GObject *object)
 {
   CcColorProfile *color_profile = CC_COLOR_PROFILE (object);
   const gchar *sortable_data_source;
-  gchar *sortable_device;
-  gchar *title;
+  g_autofree gchar *sortable_device = NULL;
+  g_autofree gchar *title = NULL;
 
   /* watch to see if the default changes */
   color_profile->device_changed_id =
@@ -414,8 +405,6 @@ cc_color_profile_constructed (GObject *object)
                                     sortable_data_source,
                                     cd_profile_get_created (color_profile->profile),
                                     title);
-  g_free (title);
-  g_free (sortable_device);
 
   cc_color_profile_refresh (color_profile);
 }

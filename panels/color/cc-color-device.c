@@ -62,15 +62,16 @@ static guint signals [SIGNAL_LAST] = { 0 };
 static void
 cc_color_device_refresh (CcColorDevice *color_device)
 {
-  gchar *title = NULL;
-  GPtrArray *profiles = NULL;
+  g_autofree gchar *title = NULL;
+  g_autoptr(GPtrArray) profiles = NULL;
   AtkObject *accessible;
-  gchar *name = NULL;
+  g_autofree gchar *name1 = NULL;
+  g_autofree gchar *name2 = NULL;
 
   /* add switch and expander if there are profiles, otherwise use a label */
   profiles = cd_device_get_profiles (color_device->device);
   if (profiles == NULL)
-    goto out;
+    return;
 
   title = cc_color_device_get_title (color_device->device);
   gtk_label_set_label (GTK_LABEL (color_device->widget_description), title);
@@ -87,19 +88,12 @@ cc_color_device_refresh (CcColorDevice *color_device)
                          cd_device_get_enabled (color_device->device));
 
   accessible = gtk_widget_get_accessible (color_device->widget_switch);
-  name = g_strdup_printf (_("Enable color management for %s"), title);
-  atk_object_set_name (accessible, name);
-  g_free (name);
+  name1 = g_strdup_printf (_("Enable color management for %s"), title);
+  atk_object_set_name (accessible, name1);
 
-  name = g_strdup_printf (_("Show color profiles for %s"), title);
+  name2 = g_strdup_printf (_("Show color profiles for %s"), title);
   accessible = gtk_widget_get_accessible (color_device->widget_button);
-  atk_object_set_name (accessible, name);
-  g_free (name);
-
-out:
-  if (profiles != NULL)
-    g_ptr_array_unref (profiles);
-  g_free (title);
+  atk_object_set_name (accessible, name2);
 }
 
 CdDevice *
@@ -187,18 +181,15 @@ cc_color_device_notify_enable_device_cb (GtkSwitch *sw,
   CcColorDevice *color_device = CC_COLOR_DEVICE (user_data);
   gboolean enable;
   gboolean ret;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   enable = gtk_switch_get_active (sw);
   g_debug ("Set %s to %i", cd_device_get_id (color_device->device), enable);
   ret = cd_device_set_enabled_sync (color_device->device,
                                     enable, NULL, &error);
   if (!ret)
-    {
-      g_warning ("failed to %s to the device: %s",
-                 enable ? "enable" : "disable", error->message);
-      g_error_free (error);
-    }
+    g_warning ("failed to %s to the device: %s",
+               enable ? "enable" : "disable", error->message);
 
   /* if expanded, close */
   cc_color_device_set_expanded (color_device, FALSE);
@@ -215,7 +206,7 @@ static void
 cc_color_device_constructed (GObject *object)
 {
   CcColorDevice *color_device = CC_COLOR_DEVICE (object);
-  gchar *sortable_tmp;
+  g_autofree gchar *sortable_tmp = NULL;
 
   /* watch the device for changes */
   color_device->device_changed_id =
@@ -227,7 +218,6 @@ cc_color_device_constructed (GObject *object)
    * https://bugzilla.gnome.org/show_bug.cgi?id=691341 */
   sortable_tmp = cc_color_device_get_sortable_base (color_device->device);
   color_device->sortable = g_strdup_printf ("%sXX", sortable_tmp);
-  g_free (sortable_tmp);
 
   cc_color_device_refresh (color_device);
 
