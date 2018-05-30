@@ -18,8 +18,7 @@
  * Written by: Stef Walter <stefw@gnome.org>
  */
 
-#ifndef __UM_REALM_MANAGER_H__
-#define __UM_REALM_MANAGER_H__
+#pragma once
 
 #include "um-realm-generated.h"
 
@@ -96,5 +95,3 @@ gchar *          um_realm_calculate_login         (UmRealmCommon *realm,
                                                    const gchar *username);
 
 G_END_DECLS
-
-#endif /* __UM_REALM_H__ */

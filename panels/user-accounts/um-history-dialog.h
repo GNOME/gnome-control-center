@@ -18,8 +18,7 @@
  * Written by: Ondrej Holy <oholy@redhat.com>
  */
 
-#ifndef __UM_HISTORY_DIALOG_H__
-#define __UM_HISTORY_DIALOG_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include <act/act-user.h>
@@ -36,5 +35,3 @@ void             um_history_dialog_show     (UmHistoryDialog *dialog,
                                              GtkWindow       *parent);
 
 G_END_DECLS
-
-#endif

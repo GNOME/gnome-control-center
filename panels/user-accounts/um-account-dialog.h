@@ -18,8 +18,7 @@
  * Written by: Matthias Clasen <mclasen@redhat.com>
  */
 
-#ifndef __UM_ACCOUNT_DIALOG_H__
-#define __UM_ACCOUNT_DIALOG_H__
+#pragma once
 
 #include <act/act.h>
 #include <gtk/gtk.h>
@@ -39,5 +38,3 @@ ActUser *        um_account_dialog_finish   (UmAccountDialog     *self,
                                              GAsyncResult        *result);
 
 G_END_DECLS
-
-#endif
