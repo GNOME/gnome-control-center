@@ -27,45 +27,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_UA_PANEL cc_ua_panel_get_type()
-
-#define CC_UA_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_UA_PANEL, CcUaPanel))
-
-#define CC_UA_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_UA_PANEL, CcUaPanelClass))
-
-#define CC_IS_UA_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_UA_PANEL))
-
-#define CC_IS_UA_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_UA_PANEL))
-
-#define CC_UA_PANEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_UA_PANEL, CcUaPanelClass))
-
-typedef struct _CcUaPanel CcUaPanel;
-typedef struct _CcUaPanelClass CcUaPanelClass;
-typedef struct _CcUaPanelPrivate CcUaPanelPrivate;
-
-struct _CcUaPanel
-{
-  CcPanel parent;
-
-  CcUaPanelPrivate *priv;
-};
-
-struct _CcUaPanelClass
-{
-  CcPanelClass parent_class;
-};
-
-GType cc_ua_panel_get_type (void) G_GNUC_CONST;
+#define CC_TYPE_UA_PANEL (cc_ua_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcUaPanel, cc_ua_panel, CC, UA_PANEL, CcPanel)
 
 G_END_DECLS
 
