@@ -36,13 +36,8 @@ typedef enum {
 
 GQuark           um_realm_error_get_quark         (void) G_GNUC_CONST;
 
-#define UM_TYPE_REALM_MANAGER      (um_realm_manager_get_type ())
-#define UM_REALM_MANAGER(obj)      (G_TYPE_CHECK_INSTANCE_CAST ((obj), UM_TYPE_REALM_MANAGER, UmRealmManager))
-#define UM_IS_REALM_MANAGER(obj)   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), UM_TYPE_REALM_MANAGER))
-
-typedef struct _UmRealmManager UmRealmManager;
-
-GType            um_realm_manager_get_type        (void) G_GNUC_CONST;
+#define UM_TYPE_REALM_MANAGER (um_realm_manager_get_type ())
+G_DECLARE_FINAL_TYPE (UmRealmManager, um_realm_manager, UM, REALM_MANAGER, UmRealmObjectManagerClient)
 
 void             um_realm_manager_new             (GCancellable *cancellable,
                                                    GAsyncReadyCallback callback,

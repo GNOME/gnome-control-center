@@ -68,7 +68,8 @@ static void   um_account_dialog_response  (GtkDialog *dialog,
                                                                       UmAccountDialogClass))
 
 struct _UmAccountDialog {
-        GtkDialog parent;
+        GtkDialog parent_instance;
+
         GtkWidget *stack;
         GTask *task;
         GCancellable *cancellable;
@@ -116,10 +117,6 @@ struct _UmAccountDialog {
         GtkEntry *join_name;
         GtkEntry *join_password;
         gboolean join_prompted;
-};
-
-struct _UmAccountDialogClass {
-        GtkDialogClass parent_class;
 };
 
 G_DEFINE_TYPE (UmAccountDialog, um_account_dialog, GTK_TYPE_DIALOG);

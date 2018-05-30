@@ -26,29 +26,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_CROP_AREA (cc_crop_area_get_type ())
-#define CC_CROP_AREA(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_TYPE_CROP_AREA, \
-                                                                           CcCropArea))
-#define CC_CROP_AREA_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CC_TYPE_CROP_AREA, \
-                                                                        CcCropAreaClass))
-#define CC_IS_CROP_AREA(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CC_TYPE_CROP_AREA))
-#define CC_IS_CROP_AREA_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), CC_TYPE_CROP_AREA))
-#define CC_CROP_AREA_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), CC_TYPE_CROP_AREA, \
-                                                                          CcCropAreaClass))
-
-typedef struct _CcCropAreaClass CcCropAreaClass;
-typedef struct _CcCropArea CcCropArea;
-typedef struct _CcCropAreaPrivate CcCropAreaPrivate;
-
-struct _CcCropAreaClass {
-        GtkDrawingAreaClass parent_class;
-};
-
-struct _CcCropArea {
-        GtkDrawingArea parent_instance;
-        CcCropAreaPrivate *priv;
-};
-
-GType      cc_crop_area_get_type             (void) G_GNUC_CONST;
+G_DECLARE_FINAL_TYPE (CcCropArea, cc_crop_area, CC, CROP_AREA, GtkDrawingArea)
 
 GtkWidget *cc_crop_area_new                  (void);
 GdkPixbuf *cc_crop_area_get_picture          (CcCropArea *area);

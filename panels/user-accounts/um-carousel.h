@@ -26,11 +26,9 @@
 G_BEGIN_DECLS
 
 #define UM_TYPE_CAROUSEL_ITEM (um_carousel_item_get_type ())
-
 G_DECLARE_FINAL_TYPE (UmCarouselItem, um_carousel_item, UM, CAROUSEL_ITEM, GtkRadioButton)
 
-#define UM_TYPE_CAROUSEL (um_carousel_get_type())
-
+#define UM_TYPE_CAROUSEL (um_carousel_get_type ())
 G_DECLARE_FINAL_TYPE (UmCarousel, um_carousel, UM, CAROUSEL, GtkRevealer)
 
 GtkWidget       *um_carousel_item_new    (void);
