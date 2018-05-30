@@ -117,7 +117,7 @@ cc_color_calibrate_set_device (CcColorCalibrate *calibrate,
   g_return_if_fail (CC_IS_COLOR_CALIBRATE (calibrate));
   g_return_if_fail (CD_IS_DEVICE (device));
   if (calibrate->device != NULL)
-        g_object_unref (calibrate->device);
+    g_object_unref (calibrate->device);
   calibrate->device = g_object_ref (device);
 }
 
@@ -128,7 +128,7 @@ cc_color_calibrate_set_sensor (CcColorCalibrate *calibrate,
   g_return_if_fail (CC_IS_COLOR_CALIBRATE (calibrate));
   g_return_if_fail (CD_IS_SENSOR (sensor));
   if (calibrate->sensor != NULL)
-        g_object_unref (calibrate->sensor);
+    g_object_unref (calibrate->sensor);
   calibrate->sensor = g_object_ref (sensor);
 }
 
@@ -226,23 +226,21 @@ cc_color_calibrate_calib_set_output_gamma (CcColorCalibrate *calibrate,
   CdColorRGB *p1;
   CdColorRGB *p2;
   CdColorRGB result;
-  gboolean ret = TRUE;
   gdouble mix;
   GnomeRRCrtc *crtc;
-  guint16 *blue = NULL;
-  guint16 *green = NULL;
-  guint16 *red = NULL;
+  g_autofree guint16 *blue = NULL;
+  g_autofree guint16 *green = NULL;
+  g_autofree guint16 *red = NULL;
   guint i;
 
   /* no length? */
   if (array->len == 0)
     {
-      ret = FALSE;
       g_set_error_literal (error,
                            CD_SESSION_ERROR,
                            CD_SESSION_ERROR_INTERNAL,
                            "no data in the CLUT array");
-      goto out;
+      return FALSE;
     }
 
   /* convert to a type X understands of the right size */
@@ -270,21 +268,16 @@ cc_color_calibrate_calib_set_output_gamma (CcColorCalibrate *calibrate,
   crtc = gnome_rr_output_get_crtc (calibrate->output);
   if (crtc == NULL)
     {
-      ret = FALSE;
       g_set_error (error,
                    CD_SESSION_ERROR,
                    CD_SESSION_ERROR_INTERNAL,
                    "failed to get ctrc for %s",
                    gnome_rr_output_get_name (calibrate->output));
-      goto out;
+      return FALSE;
     }
   gnome_rr_crtc_set_gamma (crtc, calibrate->gamma_size,
                            red, green, blue);
-out:
-  g_free (red);
-  g_free (green);
-  g_free (blue);
-  return ret;
+  return TRUE;
 }
 
 static void
@@ -317,7 +310,6 @@ cc_color_calibrate_interaction_required (CcColorCalibrate *calibrate,
 {
   const gchar *message_transl;
   gboolean show_button_start = FALSE;
-  GdkPixbuf *pixbuf;
   GtkImage *img;
   GtkLabel *label;
   GtkWidget *widget;
@@ -331,15 +323,14 @@ cc_color_calibrate_interaction_required (CcColorCalibrate *calibrate,
                                            "image_status"));
   if (image_path != NULL && image_path[0] != '\0')
     {
+      g_autoptr(GdkPixbuf) pixbuf = NULL;
+
       g_debug ("showing image %s", image_path);
       pixbuf = gdk_pixbuf_new_from_file_at_size (image_path,
                                                  400, 400,
                                                  NULL);
       if (pixbuf != NULL)
-        {
-          gtk_image_set_from_pixbuf (img, pixbuf);
-          g_object_unref (pixbuf);
-        }
+        gtk_image_set_from_pixbuf (img, pixbuf);
       gtk_widget_set_visible (GTK_WIDGET (img), TRUE);
       gtk_widget_set_visible (GTK_WIDGET (calibrate->sample_widget), FALSE);
     }
@@ -436,7 +427,7 @@ cc_color_calibrate_finished (CcColorCalibrate *calibrate,
                              const gchar *error_fallback)
 {
   GtkWidget *widget;
-  GString *str;
+  g_autoptr(GString) str = NULL;
   const gchar *tmp;
 
   /* save failure so we can get this after we've quit the loop */
@@ -481,7 +472,6 @@ cc_color_calibrate_finished (CcColorCalibrate *calibrate,
   widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "label_status"));
   gtk_label_set_label (GTK_LABEL (widget), str->str);
-  g_string_free (str, TRUE);
 }
 
 static void
@@ -498,12 +488,11 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
   const gchar *profile_path = NULL;
   const gchar *str = NULL;
   gboolean ret;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   GPtrArray *array = NULL;
   GtkImage *img;
   GtkLabel *label;
-  GVariantIter *iter;
-  GVariant *dict = NULL;
+  g_autoptr(GVariant) dict = NULL;
 
   if (g_strcmp0 (signal_name, "Finished") == 0)
     {
@@ -517,7 +506,7 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
       if (ret)
         calibrate->profile = cd_profile_new_with_object_path (profile_path);
       cc_color_calibrate_finished (calibrate, error_code, str);
-      goto out;
+      return;
     }
   if (g_strcmp0 (signal_name, "UpdateSample") == 0)
     {
@@ -548,7 +537,7 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
        * display off the screen (although we do cope if this is
        * detected early enough) */
       gtk_label_set_label (label, _("Do not disturb the calibration device while in progress"));
-      goto out;
+      return;
     }
   if (g_strcmp0 (signal_name, "InteractionRequired") == 0)
     {
@@ -564,10 +553,12 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
                                                code,
                                                message,
                                                image);
-      goto out;
+      return;
     }
   if (g_strcmp0 (signal_name, "UpdateGamma") == 0)
     {
+      g_autoptr(GVariantIter) iter = NULL;
+
       g_variant_get (parameters,
                      "(a(ddd))",
                      &iter);
@@ -581,7 +572,6 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
           cd_color_rgb_copy (&color, color_tmp);
           g_ptr_array_add (array, color_tmp);
         }
-      g_variant_iter_free (iter);
       ret = cc_color_calibrate_calib_set_output_gamma (calibrate,
                                                        array,
                                                        &error);
@@ -589,22 +579,18 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
         {
           g_warning ("failed to update gamma: %s",
                      error->message);
-          g_error_free (error);
-          goto out;
+          return;
         }
-      goto out;
+      return;
     }
   g_warning ("got unknown signal %s", signal_name);
-out:
-  if (dict != NULL)
-    g_variant_unref (dict);
 }
 
 static void
 cc_color_calibrate_cancel (CcColorCalibrate *calibrate)
 {
-  GVariant *retval;
-  GError *error = NULL;
+  g_autoptr(GVariant) retval = NULL;
+  g_autoptr(GError) error = NULL;
 
   /* cancel the calibration to ensure the helper quits */
   retval = g_dbus_proxy_call_sync (calibrate->proxy_helper,
@@ -615,15 +601,10 @@ cc_color_calibrate_cancel (CcColorCalibrate *calibrate)
                                    NULL,
                                    &error);
   if (retval == NULL)
-    {
-      g_warning ("Failed to send Cancel: %s", error->message);
-      g_error_free (error);
-    }
+    g_warning ("Failed to send Cancel: %s", error->message);
 
   /* return */
   g_main_loop_quit (calibrate->loop);
-  if (retval != NULL)
-    g_variant_unref (retval);
 }
 
 static gboolean
@@ -690,7 +671,7 @@ cc_color_calibrate_window_state_cb (GtkWidget *widget,
                                     CcColorCalibrate *calibrate)
 {
   gboolean ret;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   GdkEventWindowState *event_state = (GdkEventWindowState *) event;
   GtkWindow *window = GTK_WINDOW (widget);
 
@@ -705,10 +686,7 @@ cc_color_calibrate_window_state_cb (GtkWidget *widget,
                                                    calibrate->device,
                                                    &error);
   if (!ret)
-    {
-      g_warning ("Failed to resize window: %s", error->message);
-      g_error_free (error);
-    }
+    g_warning ("Failed to resize window: %s", error->message);
   return TRUE;
 }
 
@@ -723,8 +701,8 @@ static void
 cc_color_calibrate_button_start_cb (GtkWidget *widget,
                                     CcColorCalibrate *calibrate)
 {
-  GError *error = NULL;
-  GVariant *retval;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) retval = NULL;
 
   /* set correct buttons */
   widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
@@ -743,12 +721,7 @@ cc_color_calibrate_button_start_cb (GtkWidget *widget,
                                    NULL,
                                    &error);
   if (retval == NULL)
-    {
-      g_warning ("Failed to send Resume: %s", error->message);
-      g_error_free (error);
-    }
-  if (retval != NULL)
-    g_variant_unref (retval);
+    g_warning ("Failed to send Resume: %s", error->message);
 }
 
 static void
@@ -811,10 +784,10 @@ cc_color_calibrate_uninhibit (CcColorCalibrate *calibrate)
 static void
 cc_color_calibrate_inhibit (CcColorCalibrate *calibrate, GtkWindow *window)
 {
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   gint idx;
-  GUnixFDList *fd_list = NULL;
-  GVariant *retval;
+  g_autoptr(GUnixFDList) fd_list = NULL;
+  g_autoptr(GVariant) retval = NULL;
   GtkApplication *application;
 
   /* inhibit basically everything we can */
@@ -847,23 +820,16 @@ cc_color_calibrate_inhibit (CcColorCalibrate *calibrate, GtkWindow *window)
   if (retval == NULL)
     {
       g_warning ("Failed to send Inhibit: %s", error->message);
-      g_error_free (error);
-      goto out;
+      return;
     }
   g_variant_get (retval, "(h)", &idx);
   calibrate->inhibit_fd = g_unix_fd_list_get (fd_list, idx, &error);
   if (calibrate->inhibit_fd == -1)
     {
       g_warning ("Failed to receive system inhibitor fd: %s", error->message);
-      g_error_free (error);
-      goto out;
+      return;
     }
   g_debug ("System inhibitor fd is %d", calibrate->inhibit_fd);
-out:
-  if (fd_list != NULL)
-    g_object_unref (fd_list);
-  if (retval != NULL)
-    g_variant_unref (retval);
 }
 
 gboolean
@@ -920,20 +886,18 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
                           GError **error)
 {
   const gchar *name;
-  gboolean ret;
   GtkWidget *widget;
   GtkWindow *window;
   GVariantBuilder builder;
-  GVariant *retval = NULL;
+  g_autoptr(GVariant) retval = NULL;
 
   g_return_val_if_fail (CC_IS_COLOR_CALIBRATE (calibrate), FALSE);
 
   /* get screen */
   name = cd_device_get_metadata_item (calibrate->device,
                                       CD_DEVICE_METADATA_XRANDR_NAME);
-  ret = cc_color_calibrate_calib_setup_screen (calibrate, name, error);
-  if (!ret)
-    goto out;
+  if (!cc_color_calibrate_calib_setup_screen (calibrate, name, error))
+    return FALSE;
 
   g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
   g_variant_builder_add (&builder,
@@ -967,10 +931,7 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
                                    NULL,
                                    error);
   if (retval == NULL)
-    {
-      ret = FALSE;
-      goto out;
-    }
+    return FALSE;
 
   /* set this above our parent */
   window = GTK_WINDOW (gtk_builder_get_object (calibrate->builder,
@@ -1004,16 +965,14 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
   /* see if we failed */
   if (calibrate->session_error_code != CD_SESSION_ERROR_NONE)
     {
-      ret = FALSE;
       g_set_error_literal (error,
                            CD_SESSION_ERROR,
                            CD_SESSION_ERROR_INTERNAL,
                            "failed to calibrate");
+      return FALSE;
     }
-out:
-  if (retval != NULL)
-    g_variant_unref (retval);
-  return ret;
+
+  return TRUE;
 }
 
 static gboolean
@@ -1054,9 +1013,9 @@ cc_color_calibrate_class_init (CcColorCalibrateClass *klass)
 static void
 cc_color_calibrate_init (CcColorCalibrate *calibrate)
 {
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   gint retval;
-  GSettings *settings;
+  g_autoptr(GSettings) settings = NULL;
   GtkBox *box;
   GtkWidget *widget;
   GtkWindow *window;
@@ -1070,10 +1029,7 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
                                           "/org/gnome/control-center/color/color-calibrate.ui",
                                           &error);
   if (retval == 0)
-    {
-      g_warning ("Could not load interface: %s", error->message);
-      g_error_free (error);
-    }
+    g_warning ("Could not load interface: %s", error->message);
 
   /* add sample widget */
   box = GTK_BOX (gtk_builder_get_object (calibrate->builder,
@@ -1089,7 +1045,6 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
   settings = g_settings_new (COLORD_SETTINGS_SCHEMA);
   calibrate->target_whitepoint = g_settings_get_int (settings, "display-whitepoint");
   calibrate->target_gamma = g_settings_get_double (settings, "display-gamma");
-  g_object_unref (settings);
 
   /* connect to buttons */
   widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,

@@ -108,13 +108,9 @@ cc_color_device_kind_to_sort (CdDevice *device)
 gchar *
 cc_color_device_get_sortable_base (CdDevice *device)
 {
-  gchar *sortable;
-  gchar *title;
-  title = cc_color_device_get_title (device);
-  sortable = g_strdup_printf ("%s-%s-%s",
-                              cc_color_device_kind_to_sort (device),
-                              cd_device_get_id (device),
-                              title);
-  g_free (title);
-  return sortable;
+  g_autofree gchar *title = cc_color_device_get_title (device);
+  return g_strdup_printf ("%s-%s-%s",
+                          cc_color_device_kind_to_sort (device),
+                          cd_device_get_id (device),
+                          title);
 }
