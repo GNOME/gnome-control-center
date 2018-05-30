@@ -202,7 +202,7 @@ scale_label (GtkBin *toggle, PangoAttrList *attrs)
 static void
 screen_position_combo_changed_cb (GtkWidget *combobox, ZoomOptions *self)
 {
-  gchar *combo_value = NULL;
+  g_autofree gchar *combo_value = NULL;
   GtkTreeIter iter;
 
   gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combobox), &iter);
@@ -215,8 +215,6 @@ screen_position_combo_changed_cb (GtkWidget *combobox, ZoomOptions *self)
     {
       g_settings_set_string (self->settings, "screen-position", combo_value);
     }
-
-  g_free (combo_value);
 }
 
 static void
@@ -229,7 +227,6 @@ screen_position_notify_cb (GSettings *settings,
   GtkTreeModel *model;
   GtkComboBox *combobox;
   gboolean valid;
-  gchar *combo_value;
 
   position = g_settings_get_string (settings, key);
   position = g_settings_get_string (self->settings, key);
@@ -242,6 +239,8 @@ screen_position_notify_cb (GSettings *settings,
   valid = gtk_tree_model_get_iter_first (model, &iter);
   while (valid)
     {
+        g_autofree gchar *combo_value = NULL;
+
         gtk_tree_model_get (model, &iter,
                             POSITION_MODEL_VALUE_COLUMN, &combo_value,
                             -1);
@@ -250,11 +249,9 @@ screen_position_notify_cb (GSettings *settings,
             g_signal_handlers_block_by_func (combobox, screen_position_combo_changed_cb, self);
             gtk_combo_box_set_active_iter (combobox, &iter);
             g_signal_handlers_unblock_by_func (combobox, screen_position_combo_changed_cb, self);
-            g_free (combo_value);
             break;
           }
 
-        g_free (combo_value);
         valid = gtk_tree_model_iter_next (model, &iter);
     }
 }
@@ -295,7 +292,7 @@ static void
 xhairs_color_opacity_changed (GtkColorButton *button, ZoomOptions *self)
 {
     GdkRGBA rgba;
-    gchar *color_string;
+    g_autofree gchar *color_string = NULL;
 
     gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (button), &rgba);
     color_string = g_strdup_printf ("#%02x%02x%02x",
@@ -304,7 +301,6 @@ xhairs_color_opacity_changed (GtkColorButton *button, ZoomOptions *self)
                                     TO_HEX(rgba.blue));
 
     g_settings_set_string (self->settings, "cross-hairs-color", color_string);
-    g_free (color_string);
 
     g_settings_set_double (self->settings, "cross-hairs-opacity", rgba.alpha);
 }
@@ -349,16 +345,14 @@ init_effects_slider (GtkRange *slider,
                      GCallback notify_cb)
 {
   gchar **key;
-  gchar *signal;
 
   g_object_set_data (G_OBJECT (slider), "settings-keys", keys);
   effects_slider_set_value (slider, self->settings);
 
   for (key = keys; *key; key++)
     {
-      signal = g_strdup_printf ("changed::%s", *key);
+      g_autofree gchar *signal = g_strdup_printf ("changed::%s", *key);
       g_signal_connect (G_OBJECT (self->settings), signal, notify_cb, self);
-      g_free (signal);
     }
   g_signal_connect (G_OBJECT (slider), "value-changed",
                     G_CALLBACK (effects_slider_changed),

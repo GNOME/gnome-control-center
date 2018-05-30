@@ -216,11 +216,10 @@ cursor_size_setup (CcUaPanel *self)
   for (i = 0; i < G_N_ELEMENTS(cursor_sizes); i++)
     {
       GtkWidget *image, *button;
-      char *cursor_image_name;
+      g_autofree gchar *cursor_image_name = NULL;
 
       cursor_image_name = g_strdup_printf ("/org/gnome/control-center/universal-access/left_ptr_%dpx.png", cursor_sizes[i]);
       image = gtk_image_new_from_resource (cursor_image_name);
-      g_free (cursor_image_name);
 
       button = gtk_radio_button_new_from_widget (GTK_RADIO_BUTTON (last_radio_button));
       last_radio_button = button;
