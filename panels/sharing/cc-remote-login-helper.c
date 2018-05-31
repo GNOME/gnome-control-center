@@ -30,19 +30,19 @@ static const gchar *service_list[] = { SSHD_SERVICE, NULL };
 static gint
 enable_ssh_service ()
 {
-  GDBusConnection *connection;
-  GError *error = NULL;
-  GVariant *temp_variant;
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) start_result = NULL;
+  g_autoptr(GVariant) enable_result = NULL;
 
   connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!connection)
     {
       g_critical ("Error connecting to D-Bus system bus: %s", error->message);
-      g_clear_error (&error);
       return 1;
     }
 
-  temp_variant = g_dbus_connection_call_sync (connection,
+  start_result = g_dbus_connection_call_sync (connection,
                                               "org.freedesktop.systemd1",
                                               "/org/freedesktop/systemd1",
                                               "org.freedesktop.systemd1.Manager",
@@ -56,37 +56,31 @@ enable_ssh_service ()
                                               NULL,
                                               &error);
 
-  if (!temp_variant)
+  if (!start_result)
     {
       g_critical ("Error starting " SSHD_SERVICE ": %s", error->message);
-      g_clear_error (&error);
       return 1;
     }
 
-  g_variant_unref (temp_variant);
+  enable_result = g_dbus_connection_call_sync (connection,
+                                               "org.freedesktop.systemd1",
+                                               "/org/freedesktop/systemd1",
+                                               "org.freedesktop.systemd1.Manager",
+                                               "EnableUnitFiles",
+                                               g_variant_new ("(^asbb)",
+                                                              service_list,
+                                                              FALSE, FALSE),
+                                               (GVariantType *) "(ba(sss))",
+                                               G_DBUS_CALL_FLAGS_NONE,
+                                               -1,
+                                               NULL,
+                                               &error);
 
-  temp_variant = g_dbus_connection_call_sync (connection,
-                                              "org.freedesktop.systemd1",
-                                              "/org/freedesktop/systemd1",
-                                              "org.freedesktop.systemd1.Manager",
-                                              "EnableUnitFiles",
-                                              g_variant_new ("(^asbb)",
-                                                             service_list,
-                                                             FALSE, FALSE),
-                                              (GVariantType *) "(ba(sss))",
-                                              G_DBUS_CALL_FLAGS_NONE,
-                                              -1,
-                                              NULL,
-                                              &error);
-
-  if (!temp_variant)
+  if (!enable_result)
     {
       g_critical ("Error enabling " SSHD_SERVICE ": %s", error->message);
-      g_clear_error (&error);
       return 1;
     }
-
-  g_variant_unref (temp_variant);
 
   return 0;
 }
@@ -94,59 +88,53 @@ enable_ssh_service ()
 static gint
 disable_ssh_service ()
 {
-  GDBusConnection *connection;
-  GError *error = NULL;
-  GVariant *temp_variant;
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) stop_result = NULL;
+  g_autoptr(GVariant) disable_result = NULL;
 
   connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!connection)
     {
       g_critical ("Error connecting to D-Bus system bus: %s", error->message);
-      g_clear_error (&error);
       return 1;
     }
 
-  temp_variant = g_dbus_connection_call_sync (connection,
-                                              "org.freedesktop.systemd1",
-                                              "/org/freedesktop/systemd1",
-                                              "org.freedesktop.systemd1.Manager",
-                                              "StopUnit",
-                                              g_variant_new ("(ss)", SSHD_SERVICE, "replace"),
-                                              (GVariantType *) "(o)",
-                                              G_DBUS_CALL_FLAGS_NONE,
-                                              -1,
-                                              NULL,
-                                              &error);
-  if (!temp_variant)
+  stop_result = g_dbus_connection_call_sync (connection,
+                                             "org.freedesktop.systemd1",
+                                             "/org/freedesktop/systemd1",
+                                             "org.freedesktop.systemd1.Manager",
+                                             "StopUnit",
+                                             g_variant_new ("(ss)", SSHD_SERVICE, "replace"),
+                                             (GVariantType *) "(o)",
+                                             G_DBUS_CALL_FLAGS_NONE,
+                                             -1,
+                                             NULL,
+                                             &error);
+  if (!stop_result)
     {
       g_critical ("Error stopping " SSHD_SERVICE ": %s", error->message);
-      g_clear_error (&error);
       return 1;
     }
 
-  g_variant_unref (temp_variant);
+  disable_result = g_dbus_connection_call_sync (connection,
+                                                "org.freedesktop.systemd1",
+                                                "/org/freedesktop/systemd1",
+                                                "org.freedesktop.systemd1.Manager",
+                                                "DisableUnitFiles",
+                                                g_variant_new ("(^asb)", service_list, FALSE,
+                                                               FALSE),
+                                                (GVariantType *) "(a(sss))",
+                                                G_DBUS_CALL_FLAGS_NONE,
+                                                -1,
+                                                NULL,
+                                                &error);
 
-  temp_variant = g_dbus_connection_call_sync (connection,
-                                              "org.freedesktop.systemd1",
-                                              "/org/freedesktop/systemd1",
-                                              "org.freedesktop.systemd1.Manager",
-                                              "DisableUnitFiles",
-                                              g_variant_new ("(^asb)", service_list, FALSE,
-                                                             FALSE),
-                                              (GVariantType *) "(a(sss))",
-                                              G_DBUS_CALL_FLAGS_NONE,
-                                              -1,
-                                              NULL,
-                                              &error);
-
-  if (!temp_variant)
+  if (!stop_result)
     {
       g_critical ("Error disabling " SSHD_SERVICE ": %s", error->message);
-      g_clear_error (&error);
       return 1;
     }
-
-  g_variant_unref (temp_variant);
 
   return 0;
 }
