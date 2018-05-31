@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef __GSD_SHARING_ENUMS_H
-#define __GSD_SHARING_ENUMS_H
+#pragma once
 
 G_BEGIN_DECLS
 
@@ -30,5 +29,3 @@ typedef enum {
 } GsdSharingStatus;
 
 G_END_DECLS
-
-#endif /* __GSD_SHARING_ENUMS_H */

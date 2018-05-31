@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef __CC_SHARING_PANEL_H__
-#define __CC_SHARING_PANEL_H__
+#pragma once
 
 #include <shell/cc-shell.h>
 
@@ -32,5 +31,3 @@ G_DECLARE_FINAL_TYPE (CcSharingPanel, cc_sharing_panel, CC, SHARING_PANEL, CcPan
 CcSharingPanel *cc_sharing_panel_new (void);
 
 G_END_DECLS
-
-#endif /* __CC_SHARING_PANEL_H__ */

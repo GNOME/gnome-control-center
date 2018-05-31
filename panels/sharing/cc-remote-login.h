@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef __CC_REMOTE_LOGIN_H__
-#define __CC_REMOTE_LOGIN_H__
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -29,5 +28,3 @@ void cc_remote_login_get_enabled (GCancellable *cancellable,
                                   GtkWidget    *button);
 void cc_remote_login_set_enabled (GCancellable *cancellable,
                                   GtkSwitch    *gtkswitch);
-
-#endif /* __CC_REMOTE_LOGIN_H__ **/
