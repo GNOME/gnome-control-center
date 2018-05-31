@@ -32,6 +32,8 @@ typedef struct
   GCancellable *cancellable;
 } CallbackData;
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (CallbackData, g_free)
+
 static void
 set_switch_state (GtkSwitch *gtkswitch,
                   gboolean   active)
@@ -48,12 +50,15 @@ set_switch_state (GtkSwitch *gtkswitch,
 static void
 active_state_ready_callback (GObject      *source_object,
                              GAsyncResult *result,
-                             CallbackData *callback_data)
+                             gpointer      user_data)
 {
-  GVariant *active_variant, *child_variant, *tmp_variant;
+  g_autoptr(CallbackData) callback_data = user_data;
+  g_autoptr(GVariant) active_variant = NULL;
+  g_autoptr(GVariant) child_variant = NULL;
+  g_autoptr(GVariant) tmp_variant = NULL;
   const gchar *active_state;
   gboolean active;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   active_variant = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                                   result, &error);
@@ -64,9 +69,6 @@ active_state_ready_callback (GObject      *source_object,
        * cancelled */
       if (!g_error_matches(error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("Error getting remote login state: %s", error->message);
-
-      g_clear_error (&error);
-      g_free (callback_data);
 
       /* the switch will be remain insensitive, since the current state could
        * not be determined */
@@ -79,25 +81,21 @@ active_state_ready_callback (GObject      *source_object,
 
   active = g_str_equal (active_state, "active");
 
-  g_variant_unref (tmp_variant);
-  g_variant_unref (child_variant);
-  g_variant_unref (active_variant);
-
   /* set the switch to the correct state */
   if (callback_data->gtkswitch)
     set_switch_state (callback_data->gtkswitch, active);
-
-  g_free (callback_data);
 }
 
 static void
 path_ready_callback (GObject      *source_object,
                      GAsyncResult *result,
-                     CallbackData *callback_data)
+                     gpointer      user_data)
 {
-  GVariant *path_variant, *child_variant;
+  g_autoptr(CallbackData) callback_data = user_data;
+  g_autoptr(GVariant) path_variant = NULL;
+  g_autoptr(GVariant) child_variant = NULL;
   const gchar *object_path;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   path_variant = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                                 result, &error);
@@ -105,23 +103,14 @@ path_ready_callback (GObject      *source_object,
   if (!path_variant)
     {
       if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          g_free (callback_data);
-          g_clear_error (&error);
-
-          return;
-        }
+        return;
 
       /* this may fail if systemd or remote login service is not available */
       g_debug ("Error getting remote login state: %s", error->message);
 
-      g_clear_error (&error);
-
       /* hide the remote login button, since the service is not available */
       if (callback_data->button)
         gtk_widget_hide (callback_data->button);
-
-      g_free (callback_data);
 
       return;
     }
@@ -141,44 +130,35 @@ path_ready_callback (GObject      *source_object,
                           G_DBUS_CALL_FLAGS_NONE,
                           -1,
                           callback_data->cancellable,
-                          (GAsyncReadyCallback) active_state_ready_callback,
+                          active_state_ready_callback,
                           callback_data);
-
-  g_variant_unref (child_variant);
-  g_variant_unref (path_variant);
+  g_steal_pointer (&callback_data);
 }
 
 static void
 state_ready_callback (GObject      *source_object,
                       GAsyncResult *result,
-                      CallbackData *callback_data)
+                      gpointer      user_data)
 {
-  GVariant *state_variant, *child_variant;
+  g_autoptr(CallbackData) callback_data = user_data;
+  g_autoptr(GVariant) state_variant = NULL;
+  g_autoptr(GVariant) child_variant = NULL;
   const gchar *state_string;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   state_variant = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                                  result, &error);
   if (!state_variant)
     {
       if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          g_free (callback_data);
-          g_clear_error (&error);
-
-          return;
-        }
+        return;
 
       /* this may fail if systemd or remote login service is not available */
       g_debug ("Error getting remote login state: %s", error->message);
 
-      g_clear_error (&error);
-
       /* hide the remote login button, since the service is not available */
       if (callback_data->button)
         gtk_widget_hide (callback_data->button);
-
-      g_free (callback_data);
 
       return;
     }
@@ -199,35 +179,30 @@ state_ready_callback (GObject      *source_object,
                               G_DBUS_CALL_FLAGS_NONE,
                               -1,
                               callback_data->cancellable,
-                              (GAsyncReadyCallback) path_ready_callback,
+                              path_ready_callback,
                               callback_data);
+      g_steal_pointer (&callback_data);
     }
   else if (g_str_equal (state_string, "disabled"))
     {
       /* service is available, but is currently disabled */
       set_switch_state (callback_data->gtkswitch, FALSE);
-
-      g_free (callback_data);
     }
   else
     {
       /* unknown state */
       g_warning ("Unknown state %s for %s", state_string, SSHD_SERVICE);
-
-      g_free (callback_data);
     }
-
-  g_variant_unref (child_variant);
-  g_variant_unref (state_variant);
 }
 
 static void
 bus_ready_callback (GObject      *source_object,
                     GAsyncResult *result,
-                    CallbackData *callback_data)
+                    gpointer      user_data)
 {
-  GDBusConnection *connection;
-  GError *error = NULL;
+  g_autoptr(CallbackData) callback_data = user_data;
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GError) error = NULL;
 
   connection = g_bus_get_finish (result, &error);
 
@@ -235,8 +210,6 @@ bus_ready_callback (GObject      *source_object,
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("Error getting remote login state: %s", error->message);
-      g_clear_error (&error);
-      g_free (callback_data);
 
       return;
     }
@@ -251,8 +224,9 @@ bus_ready_callback (GObject      *source_object,
                           G_DBUS_CALL_FLAGS_NONE,
                           -1,
                           callback_data->cancellable,
-                          (GAsyncReadyCallback) state_ready_callback,
+                          state_ready_callback,
                           callback_data);
+  g_steal_pointer (&callback_data);
 }
 
 void
@@ -271,7 +245,7 @@ cc_remote_login_get_enabled (GCancellable *cancellable,
   callback_data->cancellable = cancellable;
 
   g_bus_get (G_BUS_TYPE_SYSTEM, callback_data->cancellable,
-             (GAsyncReadyCallback) bus_ready_callback, callback_data);
+             bus_ready_callback, callback_data);
 }
 
 static gint std_err;
@@ -281,7 +255,7 @@ child_watch_func (GPid     pid,
                   gint     status,
                   gpointer user_data)
 {
-  CallbackData *callback_data = user_data;
+  g_autoptr(CallbackData) callback_data = user_data;
   if (status != 0)
     {
       g_warning ("Error enabling or disabling remote login service");
@@ -292,8 +266,6 @@ child_watch_func (GPid     pid,
   g_spawn_close_pid (pid);
 
   gtk_widget_set_sensitive (GTK_WIDGET (callback_data->gtkswitch), TRUE);
-
-  g_free (user_data);
 }
 
 void
@@ -302,10 +274,9 @@ cc_remote_login_set_enabled (GCancellable *cancellable,
 {
   gchar *command[] = { "pkexec", LIBEXECDIR "/cc-remote-login-helper", NULL,
       NULL };
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   GPid pid;
   CallbackData *callback_data;
-
 
   if (GPOINTER_TO_INT (g_object_get_data (G_OBJECT (gtkswitch), "set-from-dbus")) == 1)
     {
@@ -331,8 +302,5 @@ cc_remote_login_set_enabled (GCancellable *cancellable,
   g_child_watch_add (pid, child_watch_func, callback_data);
 
   if (error)
-    {
-      g_error ("Error running cc-remote-login-helper: %s", error->message);
-      g_clear_error (&error);
-    }
+    g_error ("Error running cc-remote-login-helper: %s", error->message);
 }
