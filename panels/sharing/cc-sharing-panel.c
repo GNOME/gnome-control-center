@@ -226,7 +226,8 @@ cc_sharing_panel_main_list_box_row_activated (GtkListBox     *listbox,
                                               GtkListBoxRow  *row,
                                               CcSharingPanel *self)
 {
-  gchar *widget_name, *found;
+  g_autofree gchar *widget_name = NULL;
+  gchar *found;
 
   widget_name = g_strdup (gtk_buildable_get_name (GTK_BUILDABLE (row)));
 
@@ -239,14 +240,11 @@ cc_sharing_panel_main_list_box_row_activated (GtkListBox     *listbox,
   found = g_strrstr (widget_name, "button");
 
   if (!found)
-    goto out;
+    return;
 
   memcpy (found, "dialog", 6);
 
   cc_sharing_panel_run_dialog (self, widget_name);
-
-out:
-  g_free (widget_name);
 }
 
 static gboolean
@@ -364,7 +362,7 @@ cc_sharing_panel_add_folder (GtkListBox     *box,
                              CcSharingPanel *self)
 {
   GtkWidget *dialog;
-  gchar *folder = NULL;
+  g_autofree gchar *folder = NULL;
   gboolean matching = FALSE;
   GList *rows, *l;
 
@@ -418,7 +416,6 @@ cc_sharing_panel_add_folder (GtkListBox     *box,
   cc_list_box_adjust_scrolling (GTK_LIST_BOX (box));
 
 bail:
-  g_free (folder);
   gtk_widget_destroy (dialog);
 }
 
@@ -438,7 +435,7 @@ cc_sharing_panel_media_sharing_dialog_response (GtkDialog      *dialog,
                                                 gint            reponse_id,
                                                 CcSharingPanel *self)
 {
-  GPtrArray *folders;
+  g_autoptr(GPtrArray) folders = NULL;
   GtkWidget *box;
   GList *rows, *l;
 
@@ -459,8 +456,6 @@ cc_sharing_panel_media_sharing_dialog_response (GtkDialog      *dialog,
   g_ptr_array_add (folders, NULL);
 
   cc_media_sharing_set_preferences ((gchar **) folders->pdata);
-
-  g_ptr_array_free (folders, TRUE);
 }
 
 #define ICON_NAME_FOLDER                "folder-symbolic"
@@ -505,14 +500,14 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
 {
   GtkWidget *row, *box, *w;
   GUserDirectory dir = G_USER_N_DIRECTORIES;
-  GIcon *icon;
+  g_autoptr(GIcon) icon = NULL;
   guint i;
-  char *basename, *path;
-  GFile *file;
+  g_autofree gchar *basename = NULL;
+  g_autofree gchar *path = NULL;
+  g_autoptr(GFile) file = NULL;
 
   file = g_file_new_for_commandline_arg (uri_or_path);
   path = g_file_get_path (file);
-  g_object_unref (file);
 
   row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -534,12 +529,10 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
   w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_MENU);
   gtk_widget_set_margin_end (w, 12);
   gtk_container_add (GTK_CONTAINER (box), w);
-  g_object_unref (icon);
 
   /* Label */
   basename = g_filename_display_basename (path);
   w = gtk_label_new (basename);
-  g_free (basename);
   gtk_container_add (GTK_CONTAINER (box), w);
 
   /* Remove button */
@@ -554,7 +547,7 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
                     G_CALLBACK (cc_sharing_panel_remove_folder), self);
   g_object_set_data (G_OBJECT (w), "row", row);
 
-  g_object_set_data_full (G_OBJECT (row), "path", path, g_free);
+  g_object_set_data_full (G_OBJECT (row), "path", g_steal_pointer (&path), g_free);
 
   gtk_widget_show_all (row);
 
@@ -588,9 +581,10 @@ cc_sharing_panel_new_add_media_sharing_row (CcSharingPanel *self)
 static void
 cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
 {
-  gchar **folders, **list;
+  g_auto(GStrv) folders = NULL;
+  GStrv list;
   GtkWidget *box, *networks, *grid, *w;
-  char *path;
+  g_autofree gchar *path = NULL;
 
   path = g_find_program_in_path ("rygel");
   if (path == NULL)
@@ -598,7 +592,6 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
       gtk_widget_hide (WID ("media-sharing-button"));
       return;
     }
-  g_free (path);
 
   g_signal_connect (WID ("media-sharing-dialog"), "response",
                     G_CALLBACK (cc_sharing_panel_media_sharing_dialog_response),
@@ -629,9 +622,6 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
 
   g_signal_connect (G_OBJECT (box), "row-activated",
                     G_CALLBACK (cc_sharing_panel_add_folder), self);
-
-
-  g_strfreev (folders);
 
   networks = cc_sharing_networks_new (self->sharing_proxy, "rygel");
   grid = WID ("grid4");
@@ -676,7 +666,7 @@ cc_sharing_panel_setup_label (CcSharingPanel *self,
                               GtkWidget      *label,
                               const gchar    *hostname)
 {
-  gchar *text;
+  g_autofree gchar *text = NULL;
 
   if (label == WID ("personal-file-sharing-label"))
     text = g_strdup_printf (_("File Sharing allows you to share your Public folder with others on your current network using: <a href=\"dav://%s\">dav://%s</a>"), hostname, hostname);
@@ -688,8 +678,6 @@ cc_sharing_panel_setup_label (CcSharingPanel *self,
     g_assert_not_reached ();
 
   gtk_label_set_label (GTK_LABEL (label), text);
-
-  g_free (text);
 }
 
 typedef struct
@@ -698,13 +686,17 @@ typedef struct
   GtkWidget *label;
 } GetHostNameData;
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (GetHostNameData, g_free);
+
 static void
-cc_sharing_panel_get_host_name_fqdn_done (GDBusConnection *connection,
+cc_sharing_panel_get_host_name_fqdn_done (GObject         *object,
                                           GAsyncResult    *res,
-                                          GetHostNameData *data)
+                                          gpointer         user_data)
 {
-  GError *error = NULL;
-  GVariant *variant;
+  GDBusConnection *connection = G_DBUS_CONNECTION (object);
+  g_autoptr(GetHostNameData) data = user_data;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) variant = NULL;
   const gchar *fqdn;
 
   variant = g_dbus_connection_call_finish (connection, res, &error);
@@ -716,36 +708,29 @@ cc_sharing_panel_get_host_name_fqdn_done (GDBusConnection *connection,
 
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
-          gchar *hostname;
+          g_autofree gchar *hostname = NULL;
 
           hostname = cc_hostname_entry_get_hostname (CC_HOSTNAME_ENTRY (data->panel->hostname_entry));
 
           cc_sharing_panel_setup_label (data->panel, data->label, hostname);
-
-          g_free (hostname);
         }
 
-      g_free (data);
-      g_error_free (error);
       return;
     }
 
   g_variant_get (variant, "(&s)", &fqdn);
 
   cc_sharing_panel_setup_label (data->panel, data->label, fqdn);
-
-  g_variant_unref (variant);
-  g_object_unref (connection);
-  g_free (data);
 }
 
 static void
 cc_sharing_panel_bus_ready (GObject         *object,
                             GAsyncResult    *res,
-                            GetHostNameData *data)
+                            gpointer         user_data)
 {
-  GDBusConnection *connection;
-  GError *error = NULL;
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GetHostNameData) data = user_data;
+  g_autoptr(GError) error = NULL;
 
   connection = g_bus_get_finish (res, &error);
 
@@ -755,17 +740,13 @@ cc_sharing_panel_bus_ready (GObject         *object,
 
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
-          gchar *hostname;
+          g_autofree gchar *hostname = NULL;
 
           hostname = cc_hostname_entry_get_hostname (CC_HOSTNAME_ENTRY (data->panel->hostname_entry));
 
           cc_sharing_panel_setup_label (data->panel, data->label, hostname);
-
-          g_free (hostname);
         }
 
-      g_error_free (error);
-      g_free (data);
       return;
     }
 
@@ -779,8 +760,9 @@ cc_sharing_panel_bus_ready (GObject         *object,
                           G_DBUS_CALL_FLAGS_NONE,
                           -1,
                           data->panel->hostname_cancellable,
-                          (GAsyncReadyCallback) cc_sharing_panel_get_host_name_fqdn_done,
+                          cc_sharing_panel_get_host_name_fqdn_done,
                           data);
+  g_steal_pointer (&data);
 }
 
 
@@ -818,7 +800,7 @@ cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
   get_hostname_data->label = label;
   g_bus_get (G_BUS_TYPE_SYSTEM,
              self->hostname_cancellable,
-             (GAsyncReadyCallback) cc_sharing_panel_bus_ready,
+             cc_sharing_panel_bus_ready,
              get_hostname_data);
 }
 
@@ -926,7 +908,7 @@ cc_sharing_panel_check_schema_available (CcSharingPanel *self,
                                          const gchar *schema_id)
 {
   GSettingsSchemaSource *source;
-  GSettingsSchema *schema;
+  g_autoptr(GSettingsSchema) schema = NULL;
 
   source = g_settings_schema_source_get_default ();
   if (!source)
@@ -936,7 +918,6 @@ cc_sharing_panel_check_schema_available (CcSharingPanel *self,
   if (!schema)
     return FALSE;
 
-  g_settings_schema_unref (schema);
   return TRUE;
 }
 
@@ -1110,13 +1091,12 @@ sharing_proxy_ready (GObject      *source,
 {
   CcSharingPanel *self;
   GDBusProxy *proxy;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   proxy = G_DBUS_PROXY (gsd_sharing_proxy_new_for_bus_finish (res, &error));
   if (!proxy) {
     if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
       g_warning ("Failed to get sharing proxy: %s", error->message);
-    g_error_free (error);
     return;
   }
 
