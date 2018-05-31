@@ -24,28 +24,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SHARING_NETWORKS             (cc_sharing_networks_get_type ())
-#define CC_SHARING_NETWORKS(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_TYPE_SHARING_NETWORKS, CcSharingNetworks))
-#define CC_SHARING_NETWORKS_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), CC_TYPE_SHARING_NETWORKS, CcSharingNetworksClass))
-#define CC_IS_SHARING_NETWORKS(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CC_TYPE_SHARING_NETWORKS))
-#define CC_IS_SHARING_NETWORKS_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), CC_TYPE_SHARING_NETWORKS))
-#define CC_SHARING_NETWORKS_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), CC_TYPE_SHARING_NETWORKS, CcSharingNetworksClass))
-
-typedef struct _CcSharingNetworks        CcSharingNetworks;
-typedef struct _CcSharingNetworksPrivate CcSharingNetworksPrivate;
-typedef struct _CcSharingNetworksClass   CcSharingNetworksClass;
-
-struct _CcSharingNetworks
-{
-  GtkGrid parent_instance;
-
-  CcSharingNetworksPrivate *priv;
-};
-
-struct _CcSharingNetworksClass
-{
-  GtkGridClass parent_class;
-};
+#define CC_TYPE_SHARING_NETWORKS (cc_sharing_networks_get_type ())
+G_DECLARE_FINAL_TYPE (CcSharingNetworks, cc_sharing_networks, CC, SHARING_NETWORKS, GtkGrid)
 
 typedef enum {
   CC_SHARING_STATUS_UNSET,
@@ -54,7 +34,6 @@ typedef enum {
   CC_SHARING_STATUS_ACTIVE
 } CcSharingStatus;
 
-GType          cc_sharing_networks_get_type  (void) G_GNUC_CONST;
 GtkWidget    * cc_sharing_networks_new       (GDBusProxy *proxy,
 					      const char *service_name);
 
