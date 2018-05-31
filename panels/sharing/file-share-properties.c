@@ -35,17 +35,15 @@
 void
 file_share_write_out_password (const char *password)
 {
-    char *to_hash;
-    char *ascii_digest;
-    char *line;
-    char *filename;
+    g_autofree gchar *to_hash = NULL;
+    g_autofree gchar *ascii_digest = NULL;
+    g_autofree gchar *line = NULL;
+    g_autofree gchar *filename = NULL;
     FILE *file;
 
     to_hash = g_strdup_printf ("%s:%s:%s", USER, REALM, password);
     ascii_digest = g_compute_checksum_for_string (G_CHECKSUM_MD5, to_hash, strlen (to_hash));
-    g_free (to_hash);
     line = g_strdup_printf ("%s:%s:%s\n", USER, REALM, ascii_digest);
-    g_free (ascii_digest);
 
     filename = g_build_filename (g_get_user_config_dir (), "user-share", "passwd", NULL);
 
@@ -54,7 +52,4 @@ file_share_write_out_password (const char *password)
 	fwrite (line, strlen (line), 1, file);
 	fclose (file);
     }
-
-    g_free (filename);
-    g_free (line);
 }

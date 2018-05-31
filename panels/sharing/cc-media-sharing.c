@@ -28,7 +28,7 @@
 static GKeyFile*
 cc_media_sharing_open_key_file (void)
 {
-  gchar *path;
+  g_autofree gchar *path = NULL;
   GKeyFile *file;
 
   file = g_key_file_new ();
@@ -39,14 +39,12 @@ cc_media_sharing_open_key_file (void)
                                   G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS,
                                   NULL))
     {
-      g_free (path);
-      path = g_build_filename (SYSCONFDIR, "rygel.conf", NULL);
-      g_key_file_load_from_file (file, path,
+      g_autofree gchar *sysconf_path = NULL;
+      sysconf_path = g_build_filename (SYSCONFDIR, "rygel.conf", NULL);
+      g_key_file_load_from_file (file, sysconf_path,
                                  G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS,
                                  NULL);
     }
-
-  g_free (path);
 
   return file;
 }
@@ -54,7 +52,7 @@ cc_media_sharing_open_key_file (void)
 void
 cc_media_sharing_get_preferences (gchar  ***folders)
 {
-  GKeyFile *file;
+  g_autoptr(GKeyFile) file = NULL;
 
   file = cc_media_sharing_open_key_file ();
 
@@ -62,7 +60,8 @@ cc_media_sharing_get_preferences (gchar  ***folders)
     {
       gsize length;
       GPtrArray *array;
-      char **str_list, **orig_list;
+      GStrv str_list;
+      g_auto(GStrv) orig_list = NULL;
 
       str_list = g_key_file_get_string_list (file, "MediaExport", "uris",
                                              &length, NULL);
@@ -91,20 +90,17 @@ cc_media_sharing_get_preferences (gchar  ***folders)
       g_ptr_array_add (array, NULL);
 
       *folders = (char **) g_ptr_array_free (array, FALSE);
-      g_strfreev (orig_list);
     }
-
-  g_key_file_free (file);
 }
 
 void
 cc_media_sharing_set_preferences (gchar    **folders)
 {
-  GKeyFile *file;
+  g_autoptr(GKeyFile) file = NULL;
   gchar **str_list;
-  gchar *path;
+  g_autofree gchar *path = NULL;
   gsize length;
-  gchar *data;
+  g_autofree gchar *data = NULL;
 
   file = cc_media_sharing_open_key_file ();
 
@@ -146,8 +142,4 @@ cc_media_sharing_set_preferences (gchar    **folders)
   path = g_build_filename (g_get_user_config_dir (), "rygel.conf", NULL);
 
   g_file_set_contents (path, data, -1, NULL);
-
-  g_free (path);
-
-  g_key_file_free (file);
 }
