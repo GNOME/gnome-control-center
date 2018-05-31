@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef __CC_SHARING_NETWORKS_H__
-#define __CC_SHARING_NETWORKS_H__
+#pragma once
 
 #include <gtk/gtkgrid.h>
 
@@ -38,5 +37,3 @@ GtkWidget    * cc_sharing_networks_new       (GDBusProxy *proxy,
 					      const char *service_name);
 
 G_END_DECLS
-
-#endif /* __CC_SHARING_NETWORKS_H__ */

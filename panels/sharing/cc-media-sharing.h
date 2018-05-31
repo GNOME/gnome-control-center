@@ -19,12 +19,9 @@
  *
  */
 
-#ifndef __CC_MEDIA_SHARING_H__
-#define __CC_MEDIA_SHARING_H__
+#pragma once
 
 #include <glib.h>
 
 void cc_media_sharing_get_preferences (gchar ***folders);
 void cc_media_sharing_set_preferences (gchar **folders);
-
-#endif /* __CC_MEDIA_SHARING_H__ */

@@ -23,8 +23,7 @@
  *      Ryan Lortie <desrt@desrt.ca>
  */
 
-#ifndef __VINO_PREFERENCES_H__
-#define __VINO_PREFERENCES_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -44,5 +43,3 @@ gboolean
 vino_get_password (GValue   *value,
                    GVariant *variant,
                    gpointer  user_data);
-
-#endif /* __VINO_PREFERENCES_H__ */

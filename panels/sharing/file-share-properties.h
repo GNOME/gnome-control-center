@@ -17,9 +17,6 @@
  *
  */
 
-#ifndef __FILE_SHARE_PROPERTIES_H__
-#define __FILE_SHARE_PROPERTIES_H__
+#pragma once
 
 void file_share_write_out_password (const char *password);
-
-#endif /* __FILE_SHARE_PROPERTIES_H__ */

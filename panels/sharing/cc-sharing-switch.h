@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef __CC_SHARING_SWITCH_H__
-#define __CC_SHARING_SWITCH_H__
+#pragma once
 
 #include <gtk/gtkswitch.h>
 
@@ -30,5 +29,3 @@ G_DECLARE_FINAL_TYPE (CcSharingSwitch, cc_sharing_switch, CC, SHARING_SWITCH, Gt
 GtkWidget    * cc_sharing_switch_new       (GtkWidget *widget);
 
 G_END_DECLS
-
-#endif /* __CC_SHARING_SWITCH_H__ */
