@@ -304,7 +304,10 @@ get_places_list (void)
       g_autoptr(Place) p = l->data;
       old_place = g_hash_table_lookup (places, p->location);
       if (old_place == NULL)
-        g_hash_table_insert (places, p->location, g_steal_pointer (&p));
+        {
+          g_hash_table_insert (places, p->location, p);
+          g_steal_pointer (&p);
+        }
     }
 
   /* finally, load bookmarks, and possibly update attributes */
@@ -315,7 +318,8 @@ get_places_list (void)
       old_place = g_hash_table_lookup (places, p->location);
       if (old_place == NULL)
         {
-          g_hash_table_insert (places, p->location, g_steal_pointer (&p));
+          g_hash_table_insert (places, p->location, p);
+          g_steal_pointer (&p);
         }
       else
         {
