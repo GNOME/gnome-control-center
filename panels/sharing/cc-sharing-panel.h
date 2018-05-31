@@ -26,45 +26,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SHARING_PANEL cc_sharing_panel_get_type()
-
-#define CC_SHARING_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_SHARING_PANEL, CcSharingPanel))
-
-#define CC_SHARING_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_SHARING_PANEL, CcSharingPanelClass))
-
-#define CC_SHARING_IS_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_SHARING_PANEL))
-
-#define CC_SHARING_IS_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_SHARING_PANEL))
-
-#define CC_SHARING_PANEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_SHARING_PANEL, CcSharingPanelClass))
-
-typedef struct _CcSharingPanel CcSharingPanel;
-typedef struct _CcSharingPanelClass CcSharingPanelClass;
-typedef struct _CcSharingPanelPrivate CcSharingPanelPrivate;
-
-struct _CcSharingPanel
-{
-  CcPanel parent;
-
-  CcSharingPanelPrivate *priv;
-};
-
-struct _CcSharingPanelClass
-{
-  CcPanelClass parent_class;
-};
-
-GType cc_sharing_panel_get_type (void) G_GNUC_CONST;
+#define CC_TYPE_SHARING_PANEL (cc_sharing_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcSharingPanel, cc_sharing_panel, CC, SHARING_PANEL, CcPanel)
 
 CcSharingPanel *cc_sharing_panel_new (void);
 

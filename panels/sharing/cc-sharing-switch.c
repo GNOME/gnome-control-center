@@ -23,12 +23,13 @@
 #include <gio/gio.h>
 #include "cc-sharing-switch.h"
 
-struct _CcSharingSwitchPrivate {
+struct _CcSharingSwitch {
+  GtkSwitch  parent_instance;
+
   GtkWidget *widget;
 };
 
-G_DEFINE_TYPE_WITH_CODE (CcSharingSwitch, cc_sharing_switch, GTK_TYPE_SWITCH,
-			 G_ADD_PRIVATE (CcSharingSwitch))
+G_DEFINE_TYPE (CcSharingSwitch, cc_sharing_switch, GTK_TYPE_SWITCH)
 
 enum {
   PROP_0,
@@ -49,7 +50,7 @@ cc_sharing_switch_constructed (GObject *object)
 
   self = CC_SHARING_SWITCH (object);
 
-  other_sw = g_object_get_data (G_OBJECT (self->priv->widget), "switch");
+  other_sw = g_object_get_data (G_OBJECT (self->widget), "switch");
 
   g_object_bind_property (other_sw, "visible", self, "visible", G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
   g_object_bind_property (other_sw, "state", self, "state", G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
@@ -62,7 +63,6 @@ cc_sharing_switch_constructed (GObject *object)
 static void
 cc_sharing_switch_init (CcSharingSwitch *self)
 {
-  self->priv = cc_sharing_switch_get_instance_private (self);
 }
 
 GtkWidget *
@@ -87,7 +87,7 @@ cc_sharing_switch_set_property (GObject      *object,
 
   switch (prop_id) {
   case PROP_WIDGET:
-    self->priv->widget = g_value_dup_object (value);
+    self->widget = g_value_dup_object (value);
     break;
   default:
     G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -105,9 +105,9 @@ cc_sharing_switch_finalize (GObject *object)
 
   self = CC_SHARING_SWITCH (object);
 
-  g_return_if_fail (self->priv != NULL);
+  g_return_if_fail (self != NULL);
 
-  g_clear_object (&self->priv->widget);
+  g_clear_object (&self->widget);
 
   G_OBJECT_CLASS (cc_sharing_switch_parent_class)->finalize (object);
 }
