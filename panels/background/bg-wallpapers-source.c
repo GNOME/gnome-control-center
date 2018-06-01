@@ -81,7 +81,9 @@ list_load_cb (GObject *source_object,
 	      GAsyncResult *res,
 	      gpointer user_data)
 {
-  cc_background_xml_load_list_finish (res);
+  g_autoptr(GError) error = NULL;
+  if (!cc_background_xml_load_list_finish (CC_BACKGROUND_XML (source_object), res, &error))
+    g_warning ("Failed to load background list: %s", error->message);
 }
 
 static void

@@ -431,42 +431,39 @@ cc_background_xml_load_list (CcBackgroundXml *data,
   }
 }
 
-const GHashTable *
-cc_background_xml_load_list_finish (GAsyncResult  *async_result)
+gboolean
+cc_background_xml_load_list_finish (CcBackgroundXml *xml,
+				    GAsyncResult    *result,
+				    GError         **error)
 {
-	GSimpleAsyncResult *result = G_SIMPLE_ASYNC_RESULT (async_result);
-	CcBackgroundXml *data;
-
-	g_return_val_if_fail (G_IS_ASYNC_RESULT (async_result), NULL);
-	g_warn_if_fail (g_simple_async_result_get_source_tag (result) == cc_background_xml_load_list_async);
-
-	data = CC_BACKGROUND_XML (g_simple_async_result_get_op_res_gpointer (result));
-	return data->wp_hash;
+	g_return_val_if_fail (g_task_is_valid (result, xml), FALSE);
+	g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+	return g_task_propagate_boolean (G_TASK (result), error);
 }
 
 static void
-load_list_thread (GSimpleAsyncResult *res,
-		  GObject *object,
+load_list_thread (GTask *task,
+		  gpointer source_object,
+		  gpointer task_data,
 		  GCancellable *cancellable)
 {
-	CcBackgroundXml *data;
-
-	data = g_simple_async_result_get_op_res_gpointer (res);
-	cc_background_xml_load_list (data, TRUE);
+	CcBackgroundXml *xml = CC_BACKGROUND_XML (source_object);
+	cc_background_xml_load_list (xml, TRUE);
+	g_task_return_boolean (task, TRUE);
 }
 
-void cc_background_xml_load_list_async (CcBackgroundXml *xml,
-					GCancellable *cancellable,
-					GAsyncReadyCallback callback,
-					gpointer user_data)
+void
+cc_background_xml_load_list_async (CcBackgroundXml *xml,
+				   GCancellable *cancellable,
+				   GAsyncReadyCallback callback,
+				   gpointer user_data)
 {
-	g_autoptr(GSimpleAsyncResult) result = NULL;
+	g_autoptr(GTask) task = NULL;
 
 	g_return_if_fail (CC_IS_BACKGROUND_XML (xml));
 
-	result = g_simple_async_result_new (G_OBJECT (xml), callback, user_data, cc_background_xml_load_list_async);
-	g_simple_async_result_set_op_res_gpointer (result, xml, NULL);
-	g_simple_async_result_run_in_thread (result, (GSimpleAsyncThreadFunc) load_list_thread, G_PRIORITY_LOW, cancellable);
+	task = g_task_new (xml, cancellable, callback, user_data);
+	g_task_run_in_thread (task, load_list_thread);
 }
 
 gboolean
