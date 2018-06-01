@@ -333,9 +333,8 @@ GSettings *
 gsd_device_get_settings (GsdDevice *device)
 {
 	const gchar *schema = NULL, *vendor, *product;
-	GSettings *settings;
 	GsdDeviceType type;
-	gchar *path = NULL;
+	g_autofree gchar *path = NULL;
 
 	g_return_val_if_fail (GSD_IS_DEVICE (device), NULL);
 
@@ -362,13 +361,10 @@ gsd_device_get_settings (GsdDevice *device)
 	}
 
 	if (path) {
-		settings = g_settings_new_with_path (schema, path);
-		g_free (path);
+		return g_settings_new_with_path (schema, path);
 	} else {
-		settings = g_settings_new (schema);
+		return g_settings_new (schema);
 	}
-
-	return settings;
 }
 
 const gchar *

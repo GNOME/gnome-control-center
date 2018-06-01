@@ -97,15 +97,15 @@ remove_duplicate_dashes (char *input)
 	return input;
 }
 
-#define CHECK	if (is_empty (result)) goto bail
+#define CHECK	if (is_empty (result)) return g_strdup ("localhost")
 
 char *
 pretty_hostname_to_static (const char *pretty,
 			   gboolean    for_display)
 {
-	char *result;
-	char *valid_chars;
-	char *composed;
+	g_autofree gchar *result = NULL;
+	g_autofree gchar *valid_chars = NULL;
+	g_autofree gchar *composed = NULL;
 
 	g_return_val_if_fail (pretty != NULL, NULL);
 	g_return_val_if_fail (g_utf8_validate (pretty, -1, NULL), NULL);
@@ -117,56 +117,45 @@ pretty_hostname_to_static (const char *pretty,
 	/* Transform the pretty hostname to ASCII */
 	result = g_str_to_ascii (composed, NULL);
 	g_debug ("\ttranslit: '%s'", result);
-	g_free (composed);
 
 	CHECK;
 
 	/* Remove apostrophes */
-	result = remove_apostrophes (result);
+	remove_apostrophes (result);
 	g_debug ("\tapostrophes: '%s'", result);
 
 	CHECK;
 
 	/* Remove all the not-allowed chars */
 	valid_chars = allowed_chars ();
-	result = g_strcanon (result, valid_chars, '-');
-	g_free (valid_chars);
+	g_strcanon (result, valid_chars, '-');
 	g_debug ("\tcanon: '%s'", result);
 
 	CHECK;
 
 	/* Remove the leading dashes */
-	result = remove_leading_dashes (result);
+	remove_leading_dashes (result);
 	g_debug ("\tleading: '%s'", result);
 
 	CHECK;
 
 	/* Remove trailing dashes */
-	result = remove_trailing_dashes (result);
+	remove_trailing_dashes (result);
 	g_debug ("\ttrailing: '%s'", result);
 
 	CHECK;
 
 	/* Remove duplicate dashes */
-	result = remove_duplicate_dashes (result);
+	remove_duplicate_dashes (result);
 	g_debug ("\tduplicate: '%s'", result);
 
 	CHECK;
 
 	/* Lower case */
-	if (!for_display) {
-		char *tmp;
-
-		tmp = g_ascii_strdown (result, -1);
-		g_free (result);
-		result = tmp;
-	}
+	if (!for_display)
+		return g_ascii_strdown (result, -1);
 
 	return result;
-
-bail:
-	g_free (result);
-	return g_strdup ("localhost");
 }
 #undef CHECK
 
