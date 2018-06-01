@@ -9,10 +9,9 @@
 static void
 test_hostname (void)
 {
-	char *contents;
-	char *result;
+	g_autofree gchar *contents = NULL;
 	guint i;
-	char **lines;
+	g_auto(GStrv) lines = NULL;
 
 	if (g_file_get_contents (TEST_SRCDIR "/hostnames-test.txt", &contents, NULL, NULL) == FALSE) {
 		g_warning ("Failed to load '%s'", TEST_SRCDIR "/hostnames-test.txt");
@@ -28,8 +27,10 @@ test_hostname (void)
 	}
 
 	for (i = 0; lines[i] != NULL; i++) {
-		char *utf8;
-		char **items;
+		g_auto(GStrv) items = NULL;
+		g_autofree gchar *utf8 = NULL;
+		g_autofree gchar *result1 = NULL;
+		g_autofree gchar *result2 = NULL;
 
 		if (*lines[i] == '#')
 			continue;
@@ -38,44 +39,35 @@ test_hostname (void)
 
 		items = g_strsplit (lines[i], "\t", -1);
 		utf8 = g_locale_from_utf8 (items[0], -1, NULL, NULL, NULL);
-		result = pretty_hostname_to_static (items[0], FALSE);
-		if (g_strcmp0 (result, items[2]) != 0) {
+
+		result1 = pretty_hostname_to_static (items[0], FALSE);
+		if (g_strcmp0 (result1, items[2]) != 0) {
 			g_error ("Result for '%s' doesn't match '%s' (got: '%s')",
-				 utf8, items[2], result);
+				 utf8, items[2], result1);
 			g_test_fail ();
 		} else {
 			g_debug ("Result for '%s' matches '%s'",
-				 utf8, result);
+				 utf8, result1);
 		}
-		g_free (result);
-		g_free (utf8);
 
-		result = pretty_hostname_to_static (items[0], TRUE);
-		utf8 = g_locale_from_utf8 (items[0], -1, NULL, NULL, NULL);
-		if (g_strcmp0 (result, items[1]) != 0) {
+		result2 = pretty_hostname_to_static (items[0], TRUE);
+		if (g_strcmp0 (result2, items[1]) != 0) {
 			g_error ("Result for '%s' doesn't match '%s' (got: '%s')",
-				 utf8, items[1], result);
+				 utf8, items[1], result2);
 			g_test_fail ();
 		} else {
 			g_debug ("Result for '%s' matches '%s'",
-				 utf8, result);
+				 utf8, result2);
 		}
-		g_free (result);
-		g_free (utf8);
-
-		g_strfreev (items);
 	}
-
-	g_strfreev (lines);
-	g_free (contents);
 }
 
 static void
 test_ssid (void)
 {
-	char *contents;
+	g_autofree gchar *contents = NULL;
 	guint i;
-	char **lines;
+	g_auto(GStrv) lines = NULL;
 
 	if (g_file_get_contents (TEST_SRCDIR "/ssids-test.txt", &contents, NULL, NULL) == FALSE) {
 		g_warning ("Failed to load '%s'", TEST_SRCDIR "/ssids-test.txt");
@@ -91,8 +83,8 @@ test_ssid (void)
 	}
 
 	for (i = 0; lines[i] != NULL; i++) {
-		char *ssid;
-		char **items;
+		g_autofree gchar *ssid = NULL;
+		g_auto(GStrv) items = NULL;
 
 		if (*lines[i] == '#')
 			continue;
@@ -102,12 +94,7 @@ test_ssid (void)
 		items = g_strsplit (lines[i], "\t", -1);
 		ssid = pretty_hostname_to_ssid (items[0]);
 		g_assert_cmpstr (ssid, ==, items[1]);
-		g_free (ssid);
-		g_strfreev (items);
 	}
-
-	g_strfreev (lines);
-	g_free (contents);
 }
 
 int main (int argc, char **argv)

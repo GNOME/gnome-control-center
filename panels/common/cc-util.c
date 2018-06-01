@@ -46,7 +46,8 @@
 char *
 cc_util_normalize_casefold_and_unaccent (const char *str)
 {
-  char *normalized, *tmp;
+  g_autofree gchar *normalized = NULL;
+  gchar *tmp;
   int i = 0, j = 0, ilen;
 
   if (str == NULL)
@@ -54,7 +55,6 @@ cc_util_normalize_casefold_and_unaccent (const char *str)
 
   normalized = g_utf8_normalize (str, -1, G_NORMALIZE_NFKD);
   tmp = g_utf8_casefold (normalized, -1);
-  g_free (normalized);
 
   ilen = strlen (tmp);
 
@@ -110,8 +110,8 @@ cc_util_normalize_casefold_and_unaccent (const char *str)
 char *
 cc_util_get_smart_date (GDateTime *date)
 {
-        gchar *label;
-        GDateTime *today, *local;
+        g_autoptr(GDateTime) today = NULL;
+        g_autoptr(GDateTime) local = NULL;
         GTimeSpan span;
 
         /* Set today date */
@@ -124,28 +124,23 @@ cc_util_get_smart_date (GDateTime *date)
         span = g_date_time_difference (today, date);
         if (span <= 0)
           {
-            label = g_strdup (_("Today"));
+            return g_strdup (_("Today"));
           }
         else if (span <= G_TIME_SPAN_DAY)
           {
-            label = g_strdup (_("Yesterday"));
+            return g_strdup (_("Yesterday"));
           }
         else
           {
             if (g_date_time_get_year (date) == g_date_time_get_year (today))
               {
                 /* Translators: This is a date format string in the style of "Feb 24". */
-                label = g_date_time_format (date, _("%b %e"));
+                return g_date_time_format (date, _("%b %e"));
               }
             else
               {
                 /* Translators: This is a date format string in the style of "Feb 24, 2013". */
-                label = g_date_time_format (date, _("%b %e, %Y"));
+                return g_date_time_format (date, _("%b %e, %Y"));
               }
           }
-
-        g_date_time_unref (local);
-        g_date_time_unref (today);
-
-        return label;
 }

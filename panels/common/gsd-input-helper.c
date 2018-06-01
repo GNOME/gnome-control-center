@@ -157,9 +157,8 @@ supports_xinput2_devices (int *opcode)
 static gboolean
 device_type_is_present (GsdDeviceType type)
 {
-        GList *l = gsd_device_manager_list_devices (gsd_device_manager_get (),
-                                                    type);
-        g_list_free (l);
+        g_autoptr(GList) l = gsd_device_manager_list_devices (gsd_device_manager_get (),
+                                                              type);
         return l != NULL;
 }
 
