@@ -81,7 +81,7 @@ list_load_cb (GObject *source_object,
 	      GAsyncResult *res,
 	      gpointer user_data)
 {
-  cc_background_xml_load_list_finish (res);
+  cc_background_xml_load_list_finish (res, NULL);
 }
 
 static void
