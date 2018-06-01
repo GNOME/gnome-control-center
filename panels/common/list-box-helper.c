@@ -89,7 +89,7 @@ void
 cc_list_box_adjust_scrolling (GtkListBox *listbox)
 {
   GtkWidget *scrolled_window;
-  GList *children;
+  g_autoptr(GList) children = NULL;
   guint n_rows, num_max_rows;
 
   scrolled_window = g_object_get_data (G_OBJECT (listbox), "cc-scrolling-scrolled-window");
@@ -123,8 +123,6 @@ cc_list_box_adjust_scrolling (GtkListBox *listbox)
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                       GTK_POLICY_NEVER, GTK_POLICY_NEVER);
     }
-
-  g_list_free (children);
 }
 
 void
