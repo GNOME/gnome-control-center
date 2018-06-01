@@ -247,11 +247,12 @@ line_split (gchar *line)
 }
 
 static void
-_pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
-                                  GObject            *object,
-                                  GCancellable       *cancellable)
+_pp_host_get_snmp_devices_thread (GTask        *task,
+                                  gpointer      source_object,
+                                  gpointer      task_data,
+                                  GCancellable *cancellable)
 {
-  PpHost           *host = (PpHost *) object;
+  PpHost           *host = (PpHost *) source_object;
   PpHostPrivate    *priv = host->priv;
   PpPrintDevice    *device;
   gboolean          is_network_device;
@@ -262,7 +263,8 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
   gchar            *stderr_string = NULL;
   gint              exit_status;
 
-  data = g_simple_async_result_get_op_res_gpointer (res);
+  data = g_task_get_task_data (task);
+
   data->devices = g_new0 (PpDevicesList, 1);
   data->devices->devices = NULL;
 
@@ -324,6 +326,8 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
       g_strfreev (printer_informations);
       g_free (stdout_string);
     }
+
+  g_task_return_pointer (task, g_steal_pointer (&data->devices), (GDestroyNotify) pp_devices_list_free);
 }
 
 static void
@@ -342,18 +346,10 @@ pp_host_get_snmp_devices_async (PpHost              *host,
                                 GAsyncReadyCallback  callback,
                                 gpointer             user_data)
 {
-  GSimpleAsyncResult *res;
-  GSDData            *data;
+  g_autoptr(GTask) task = NULL;
 
-  res = g_simple_async_result_new (G_OBJECT (host), callback, user_data, pp_host_get_snmp_devices_async);
-  data = g_new0 (GSDData, 1);
-  data->devices = NULL;
-
-  g_simple_async_result_set_check_cancellable (res, cancellable);
-  g_simple_async_result_set_op_res_gpointer (res, data, (GDestroyNotify) gsd_data_free);
-  g_simple_async_result_run_in_thread (res, _pp_host_get_snmp_devices_thread, 0, cancellable);
-
-  g_object_unref (res);
+  task = g_task_new (host, cancellable, callback, user_data);
+  g_task_run_in_thread (task, _pp_host_get_snmp_devices_thread);
 }
 
 PpDevicesList *
@@ -361,32 +357,22 @@ pp_host_get_snmp_devices_finish (PpHost        *host,
                                  GAsyncResult  *res,
                                  GError       **error)
 {
-  GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (res);
-  GSDData            *data;
-  PpDevicesList      *result;
-
-  g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == pp_host_get_snmp_devices_async);
-
-  if (g_simple_async_result_propagate_error (simple, error))
-    return NULL;
-
-  data = g_simple_async_result_get_op_res_gpointer (simple);
-  result = data->devices;
-  data->devices = NULL;
-
-  return result;
+  g_return_val_if_fail (g_task_is_valid (res, host), NULL);
+  g_return_val_if_fail (error == NULL || *error == NULL, NULL);
+  return g_task_propagate_pointer (G_TASK (res), error);
 }
 
 static void
-_pp_host_get_remote_cups_devices_thread (GSimpleAsyncResult *res,
-                                         GObject            *object,
-                                         GCancellable       *cancellable)
+_pp_host_get_remote_cups_devices_thread (GTask        *task,
+                                         gpointer      source_object,
+                                         gpointer      task_data,
+                                         GCancellable *cancellable)
 {
   cups_dest_t   *dests = NULL;
-  GSDData       *data;
-  PpHost        *host = (PpHost *) object;
+  PpHost        *host = (PpHost *) source_object;
   PpHostPrivate *priv = host->priv;
   PpPrintDevice *device;
+  GSDData       *data;
   const char    *device_location;
   http_t        *http;
   gchar         *device_uri;
@@ -394,7 +380,8 @@ _pp_host_get_remote_cups_devices_thread (GSimpleAsyncResult *res,
   gint           port;
   gint           i;
 
-  data = g_simple_async_result_get_op_res_gpointer (res);
+  data = g_task_get_task_data (task);
+
   data->devices = g_new0 (PpDevicesList, 1);
   data->devices->devices = NULL;
 
@@ -439,6 +426,8 @@ _pp_host_get_remote_cups_devices_thread (GSimpleAsyncResult *res,
 
       httpClose (http);
     }
+
+  g_task_return_pointer (task, g_steal_pointer (&data->devices), (GDestroyNotify) pp_devices_list_free);
 }
 
 void
@@ -447,18 +436,10 @@ pp_host_get_remote_cups_devices_async (PpHost              *host,
                                        GAsyncReadyCallback  callback,
                                        gpointer             user_data)
 {
-  GSimpleAsyncResult *res;
-  GSDData            *data;
+  g_autoptr(GTask) task = NULL;
 
-  res = g_simple_async_result_new (G_OBJECT (host), callback, user_data, pp_host_get_remote_cups_devices_async);
-  data = g_new0 (GSDData, 1);
-  data->devices = NULL;
-
-  g_simple_async_result_set_check_cancellable (res, cancellable);
-  g_simple_async_result_set_op_res_gpointer (res, data, (GDestroyNotify) gsd_data_free);
-  g_simple_async_result_run_in_thread (res, _pp_host_get_remote_cups_devices_thread, 0, cancellable);
-
-  g_object_unref (res);
+  task = g_task_new (host, cancellable, callback, user_data);
+  g_task_run_in_thread (task, _pp_host_get_remote_cups_devices_thread);
 }
 
 PpDevicesList *
@@ -466,20 +447,9 @@ pp_host_get_remote_cups_devices_finish (PpHost        *host,
                                         GAsyncResult  *res,
                                         GError       **error)
 {
-  GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (res);
-  GSDData            *data;
-  PpDevicesList      *result;
-
-  g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == pp_host_get_remote_cups_devices_async);
-
-  if (g_simple_async_result_propagate_error (simple, error))
-    return NULL;
-
-  data = g_simple_async_result_get_op_res_gpointer (simple);
-  result = data->devices;
-  data->devices = NULL;
-
-  return result;
+  g_return_val_if_fail (g_task_is_valid (res, host), NULL);
+  g_return_val_if_fail (error == NULL || *error == NULL, NULL);
+  return g_task_propagate_pointer (G_TASK (res), error);
 }
 
 typedef struct
