@@ -307,7 +307,7 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
                            g_strdup (id),
                            g_object_ref (item));
       if (in_thread)
-        emit_added_in_idle (xml, g_object_ref (item));
+        emit_added_in_idle (xml, g_object_ref (G_OBJECT (item)));
       else
         g_signal_emit (G_OBJECT (xml), signals[ADDED], 0, item);
       retval = TRUE;
