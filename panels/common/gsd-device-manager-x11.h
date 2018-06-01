@@ -27,17 +27,8 @@
 
 G_BEGIN_DECLS
 
-#define GSD_TYPE_X11_DEVICE_MANAGER         (gsd_x11_device_manager_get_type ())
-#define GSD_X11_DEVICE_MANAGER(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GSD_TYPE_X11_DEVICE_MANAGER, GsdX11DeviceManager))
-#define GSD_X11_DEVICE_MANAGER_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GSD_TYPE_X11_DEVICE_MANAGER, GsdX11DeviceManagerClass))
-#define GSD_IS_X11_DEVICE_MANAGER(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GSD_TYPE_X11_DEVICE_MANAGER))
-#define GSD_IS_X11_DEVICE_MANAGER_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GSD_TYPE_X11_DEVICE_MANAGER))
-#define GSD_X11_DEVICE_MANAGER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GSD_TYPE_X11_DEVICE_MANAGER, GsdX11DeviceManagerClass))
-
-typedef struct _GsdX11DeviceManager GsdX11DeviceManager;
-typedef struct _GsdX11DeviceManagerClass GsdX11DeviceManagerClass;
-
-GType          gsd_x11_device_manager_get_type	        (void) G_GNUC_CONST;
+#define GSD_TYPE_X11_DEVICE_MANAGER (gsd_x11_device_manager_get_type ())
+G_DECLARE_FINAL_TYPE (GsdX11DeviceManager, gsd_x11_device_manager, GSD, X11_DEVICE_MANAGER, GsdDeviceManager)
 
 G_END_DECLS
 

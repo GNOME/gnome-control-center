@@ -26,24 +26,11 @@
 
 G_BEGIN_DECLS
 
-#define GSD_TYPE_DEVICE		(gsd_device_get_type ())
-#define GSD_DEVICE(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GSD_TYPE_DEVICE, GsdDevice))
-#define GSD_DEVICE_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GSD_TYPE_DEVICE, GsdDeviceClass))
-#define GSD_IS_DEVICE(o)	(G_TYPE_CHECK_INSTANCE_TYPE ((o), GSD_TYPE_DEVICE))
-#define GSD_IS_DEVICE_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GSD_TYPE_DEVICE))
-#define GSD_DEVICE_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GSD_TYPE_DEVICE, GsdDeviceClass))
+#define GSD_TYPE_DEVICE (gsd_device_get_type ())
+G_DECLARE_DERIVABLE_TYPE (GsdDevice, gsd_device, GSD, DEVICE, GObject)
 
-#define GSD_TYPE_DEVICE_MANAGER		(gsd_device_manager_get_type ())
-#define GSD_DEVICE_MANAGER(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GSD_TYPE_DEVICE_MANAGER, GsdDeviceManager))
-#define GSD_DEVICE_MANAGER_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GSD_TYPE_DEVICE_MANAGER, GsdDeviceManagerClass))
-#define GSD_IS_DEVICE_MANAGER(o)	(G_TYPE_CHECK_INSTANCE_TYPE ((o), GSD_TYPE_DEVICE_MANAGER))
-#define GSD_IS_DEVICE_MANAGER_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GSD_TYPE_DEVICE_MANAGER))
-#define GSD_DEVICE_MANAGER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GSD_TYPE_DEVICE_MANAGER, GsdDeviceManagerClass))
-
-typedef struct _GsdDevice GsdDevice;
-typedef struct _GsdDeviceClass GsdDeviceClass;
-typedef struct _GsdDeviceManager GsdDeviceManager;
-typedef struct _GsdDeviceManagerClass GsdDeviceManagerClass;
+#define GSD_TYPE_DEVICE_MANAGER (gsd_device_manager_get_type ())
+G_DECLARE_DERIVABLE_TYPE (GsdDeviceManager, gsd_device_manager, GSD, DEVICE_MANAGER, GObject)
 
 typedef enum {
 	GSD_DEVICE_TYPE_MOUSE	     = 1 << 0,
@@ -54,17 +41,8 @@ typedef enum {
 	GSD_DEVICE_TYPE_PAD          = 1 << 5
 } GsdDeviceType;
 
-struct _GsdDevice {
-	GObject parent_instance;
-};
-
 struct _GsdDeviceClass {
 	GObjectClass parent_class;
-};
-
-struct _GsdDeviceManager
-{
-	GObject parent_instance;
 };
 
 struct _GsdDeviceManagerClass
@@ -85,8 +63,6 @@ struct _GsdDeviceManagerClass
 				       GdkDevice	*gdk_device);
 };
 
-GType		   gsd_device_get_type		      (void) G_GNUC_CONST;
-GType		   gsd_device_manager_get_type	      (void) G_GNUC_CONST;
 GsdDeviceManager * gsd_device_manager_get	      (void);
 GList *		   gsd_device_manager_list_devices    (GsdDeviceManager *manager,
 						       GsdDeviceType	 type);
