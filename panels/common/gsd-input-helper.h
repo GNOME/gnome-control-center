@@ -16,8 +16,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __GSD_INPUT_HELPER_H
-#define __GSD_INPUT_HELPER_H
+#pragma once
 
 G_BEGIN_DECLS
 
@@ -68,5 +67,3 @@ void      xdevice_close      (XDevice                *xdevice);
 const char * xdevice_get_wacom_tool_type (int               deviceid);
 
 G_END_DECLS
-
-#endif /* __GSD_INPUT_HELPER_H */

@@ -18,8 +18,7 @@
  * Written by: Matthias Clasen <mclasen@redhat.com>
  */
 
-#ifndef __CC_LANGUAGE_CHOOSER_H__
-#define __CC_LANGUAGE_CHOOSER_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include <glib-object.h>
@@ -33,5 +32,3 @@ void         cc_language_chooser_set_language (GtkWidget   *chooser,
                                                const gchar *language);
 
 G_END_DECLS
-
-#endif /* __CC_LANGUAGE_CHOOSER_H__ */

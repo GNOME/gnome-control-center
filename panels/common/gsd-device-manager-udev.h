@@ -19,8 +19,7 @@
  * Author: Carlos Garnacho <carlosg@gnome.org>
  */
 
-#ifndef __GSD_UDEV_DEVICE_MANAGER_H__
-#define __GSD_UDEV_DEVICE_MANAGER_H__
+#pragma once
 
 #include "gsd-device-manager.h"
 
@@ -30,5 +29,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (GsdUdevDeviceManager, gsd_udev_device_manager, GSD, UDEV_DEVICE_MANAGER, GsdDeviceManager)
 
 G_END_DECLS
-
-#endif /* __GSD_UDEV_DEVICE_MANAGER_H__ */
