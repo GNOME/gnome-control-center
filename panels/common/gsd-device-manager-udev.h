@@ -26,17 +26,8 @@
 
 G_BEGIN_DECLS
 
-#define GSD_TYPE_UDEV_DEVICE_MANAGER         (gsd_udev_device_manager_get_type ())
-#define GSD_UDEV_DEVICE_MANAGER(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GSD_TYPE_UDEV_DEVICE_MANAGER, GsdUdevDeviceManager))
-#define GSD_UDEV_DEVICE_MANAGER_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GSD_TYPE_UDEV_DEVICE_MANAGER, GsdUdevDeviceManagerClass))
-#define GSD_IS_UDEV_DEVICE_MANAGER(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GSD_TYPE_UDEV_DEVICE_MANAGER))
-#define GSD_IS_UDEV_DEVICE_MANAGER_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GSD_TYPE_UDEV_DEVICE_MANAGER))
-#define GSD_UDEV_DEVICE_MANAGER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GSD_TYPE_UDEV_DEVICE_MANAGER, GsdUdevDeviceManagerClass))
-
-typedef struct _GsdUdevDeviceManager GsdUdevDeviceManager;
-typedef struct _GsdUdevDeviceManagerClass GsdUdevDeviceManagerClass;
-
-GType gsd_udev_device_manager_get_type (void) G_GNUC_CONST;
+#define GSD_TYPE_UDEV_DEVICE_MANAGER (gsd_udev_device_manager_get_type ())
+G_DECLARE_FINAL_TYPE (GsdUdevDeviceManager, gsd_udev_device_manager, GSD, UDEV_DEVICE_MANAGER, GsdDeviceManager)
 
 G_END_DECLS
 

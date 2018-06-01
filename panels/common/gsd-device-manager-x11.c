@@ -36,11 +36,6 @@ struct _GsdX11DeviceManager
 	GHashTable *gdk_devices;
 };
 
-struct _GsdX11DeviceManagerClass
-{
-	GsdDeviceManagerClass parent_class;
-};
-
 GsdDevice  * gsd_x11_device_manager_lookup_gdk_device (GsdDeviceManager *manager,
 						       GdkDevice	*gdk_device);
 

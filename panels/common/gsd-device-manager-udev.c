@@ -34,11 +34,6 @@ struct _GsdUdevDeviceManager
 	GUdevClient *udev_client;
 };
 
-struct _GsdUdevDeviceManagerClass
-{
-	GsdDeviceManagerClass parent_class;
-};
-
 G_DEFINE_TYPE (GsdUdevDeviceManager, gsd_udev_device_manager, GSD_TYPE_DEVICE_MANAGER)
 
 /* Index matches GsdDeviceType */
