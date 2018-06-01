@@ -19,8 +19,7 @@
  * Author: Carlos Garnacho <carlosg@gnome.org>
  */
 
-#ifndef __GSD_X11_DEVICE_MANAGER_H__
-#define __GSD_X11_DEVICE_MANAGER_H__
+#pragma once
 
 #include <gdk/gdk.h>
 #include "gsd-device-manager.h"
@@ -31,5 +30,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (GsdX11DeviceManager, gsd_x11_device_manager, GSD, X11_DEVICE_MANAGER, GsdDeviceManager)
 
 G_END_DECLS
-
-#endif /* __GSD_X11_DEVICE_MANAGER_H__ */

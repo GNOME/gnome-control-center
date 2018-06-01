@@ -17,8 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __GSD_DEVICE_MANAGER_H__
-#define __GSD_DEVICE_MANAGER_H__
+#pragma once
 
 #include <gdk/gdk.h>
 #include <glib-object.h>
@@ -83,5 +82,3 @@ GsdDevice *	   gsd_device_manager_lookup_gdk_device (GsdDeviceManager *manager,
 							 GdkDevice	  *gdk_device);
 
 G_END_DECLS
-
-#endif /* __GSD_DEVICE_MANAGER_H__ */

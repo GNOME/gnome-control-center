@@ -16,6 +16,8 @@
  *
  */
 
+#pragma once
+
 char *pretty_hostname_to_static (const char *pretty,
 				 gboolean    for_display);
 char *pretty_hostname_to_ssid   (const char *pretty);

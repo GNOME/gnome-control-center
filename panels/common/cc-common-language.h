@@ -18,8 +18,7 @@
  * Written by: Matthias Clasen <mclasen@redhat.com>
  */
 
-#ifndef __CC_COMMON_LANGUAGE_H__
-#define __CC_COMMON_LANGUAGE_H__
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -57,5 +56,3 @@ void     cc_common_language_select_current_language (GtkTreeView  *treeview);
 void     cc_common_language_add_user_languages (GtkTreeModel *model);
 
 G_END_DECLS
-
-#endif

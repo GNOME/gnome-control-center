@@ -16,6 +16,8 @@
  *
  */
 
+#pragma once
+
 #include <gtk/gtk.h>
 
 #define CC_TYPE_LIST_BOX_ROW (cc_list_box_row_get_type ())
