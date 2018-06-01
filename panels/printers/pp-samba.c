@@ -354,21 +354,21 @@ list_dir (SMBCCTX      *smb_context,
 }
 
 static void
-_pp_samba_get_devices_thread (GSimpleAsyncResult *res,
-                              GObject            *object,
-                              GCancellable       *cancellable)
+_pp_samba_get_devices_thread (GTask        *task,
+                              gpointer      source_object,
+                              gpointer      task_data,
+                              GCancellable *cancellable)
 {
   static GMutex   mutex;
-  SMBData        *data;
+  SMBData        *data = (SMBData *) task_data;
   SMBCCTX        *smb_context;
   gchar          *dirname;
   gchar          *path;
   gchar          *hostname = NULL;
 
-  data = g_simple_async_result_get_op_res_gpointer (res);
   data->devices = g_new0 (PpDevicesList, 1);
   data->devices->devices = NULL;
-  data->samba = PP_SAMBA (object);
+  data->samba = PP_SAMBA (source_object);
 
   g_mutex_lock (&mutex);
 
@@ -379,7 +379,7 @@ _pp_samba_get_devices_thread (GSimpleAsyncResult *res,
         {
           smbc_setOptionUserData (smb_context, data);
 
-          g_object_get (object, "hostname", &hostname, NULL);
+          g_object_get (source_object, "hostname", &hostname, NULL);
           if (hostname != NULL)
             {
               dirname = g_strdup_printf ("smb://%s", hostname);
@@ -404,6 +404,8 @@ _pp_samba_get_devices_thread (GSimpleAsyncResult *res,
     }
 
   g_mutex_unlock (&mutex);
+
+  g_task_return_pointer (task, g_steal_pointer (&data->devices), (GDestroyNotify) pp_devices_list_free);
 }
 
 void
@@ -413,25 +415,23 @@ pp_samba_get_devices_async (PpSamba             *samba,
                             GAsyncReadyCallback  callback,
                             gpointer             user_data)
 {
-  GSimpleAsyncResult *res;
-  SMBData            *data;
-  gchar              *hostname = NULL;
+  g_autoptr(GTask)  task = NULL;
+  SMBData          *data;
+  gchar            *hostname = NULL;
 
   g_object_get (G_OBJECT (samba), "hostname", &hostname, NULL);
 
-  res = g_simple_async_result_new (G_OBJECT (samba), callback, user_data, pp_samba_get_devices_async);
+  task = g_task_new (samba, cancellable, callback, user_data);
   data = g_new0 (SMBData, 1);
   data->devices = NULL;
   data->context = g_main_context_default ();
   data->hostname_set = hostname != NULL;
   data->auth_if_needed = auth_if_needed;
 
-  g_simple_async_result_set_check_cancellable (res, cancellable);
-  g_simple_async_result_set_op_res_gpointer (res, data, (GDestroyNotify) smb_data_free);
-  g_simple_async_result_run_in_thread (res, _pp_samba_get_devices_thread, 0, cancellable);
+  g_task_set_task_data (task, data, (GDestroyNotify) smb_data_free);
+  g_task_run_in_thread (task, _pp_samba_get_devices_thread);
 
   g_free (hostname);
-  g_object_unref (res);
 }
 
 PpDevicesList *
@@ -439,18 +439,7 @@ pp_samba_get_devices_finish (PpSamba       *samba,
                              GAsyncResult  *res,
                              GError       **error)
 {
-  GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (res);
-  SMBData            *data;
-  PpDevicesList      *result;
-
-  g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == pp_samba_get_devices_async);
-
-  if (g_simple_async_result_propagate_error (simple, error))
-    return NULL;
-
-  data = g_simple_async_result_get_op_res_gpointer (simple);
-  result = data->devices;
-  data->devices = NULL;
-
-  return result;
+  g_return_val_if_fail (g_task_is_valid (res, samba), NULL);
+  g_return_val_if_fail (error == NULL || *error == NULL, NULL);
+  return g_task_propagate_pointer (G_TASK (res), error);
 }

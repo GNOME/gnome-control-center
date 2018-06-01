@@ -59,7 +59,7 @@ struct _PpNewPrinterPrivate
   guint     window_id;
   gboolean  unlink_ppd_file;
 
-  GSimpleAsyncResult *res;
+  GTask        *task;
   GCancellable *cancellable;
 };
 
@@ -102,10 +102,7 @@ pp_new_printer_finalize (GObject *object)
   g_clear_pointer (&priv->location, g_free);
   g_clear_pointer (&priv->make_and_model, g_free);
   g_clear_pointer (&priv->host_name, g_free);
-
-  if (priv->res)
-    g_object_unref (priv->res);
-
+  g_clear_object (&priv->task);
   if (priv->cancellable)
     g_object_unref (priv->cancellable);
 
@@ -351,7 +348,6 @@ pp_new_printer_init (PpNewPrinter *printer)
 
   printer->priv->unlink_ppd_file = FALSE;
   printer->priv->cancellable = NULL;
-  printer->priv->res = NULL;
 }
 
 PpNewPrinter *
@@ -370,14 +366,14 @@ _pp_new_printer_add_async_cb (gboolean      success,
 
   if (!success)
     {
-      g_simple_async_result_set_error (priv->res,
-                                       G_IO_ERROR,
-                                       G_IO_ERROR_FAILED,
-                                       "Installation of the new printer failed.");
+      g_task_return_new_error (priv->task,
+                               G_IO_ERROR,
+                               G_IO_ERROR_FAILED,
+                               "Installation of the new printer failed.");
+      return;
     }
 
-  g_simple_async_result_set_op_res_gboolean (priv->res, success);
-  g_simple_async_result_complete_in_idle (priv->res);
+  g_task_return_boolean (priv->task, success);
 }
 
 static void
@@ -1323,15 +1319,16 @@ printer_configure_async (PpNewPrinter *new_printer)
                          ime_data);
 }
 
-static void
-_pp_new_printer_add_async (GSimpleAsyncResult *res,
-                           GObject            *object,
-                           GCancellable       *cancellable)
+void
+pp_new_printer_add_async (PpNewPrinter        *printer,
+                          GCancellable        *cancellable,
+                          GAsyncReadyCallback  callback,
+                          gpointer             user_data)
 {
-  PpNewPrinter        *printer = PP_NEW_PRINTER (object);
   PpNewPrinterPrivate *priv = printer->priv;
+  g_autoptr(GTask) task = NULL;
 
-  priv->res = g_object_ref (res);
+  priv->task = g_task_new (printer, cancellable, callback, user_data);
   priv->cancellable = g_object_ref (cancellable);
 
   if (priv->ppd_name || priv->ppd_file_name)
@@ -1385,33 +1382,12 @@ _pp_new_printer_add_async (GSimpleAsyncResult *res,
     }
 }
 
-void
-pp_new_printer_add_async (PpNewPrinter        *printer,
-                          GCancellable        *cancellable,
-                          GAsyncReadyCallback  callback,
-                          gpointer             user_data)
-{
-  GSimpleAsyncResult *res;
-
-  res = g_simple_async_result_new (G_OBJECT (printer), callback, user_data, pp_new_printer_add_async);
-
-  g_simple_async_result_set_check_cancellable (res, cancellable);
-  _pp_new_printer_add_async (res, G_OBJECT (printer), cancellable);
-
-  g_object_unref (res);
-}
-
 gboolean
 pp_new_printer_add_finish (PpNewPrinter  *printer,
                            GAsyncResult  *res,
                            GError       **error)
 {
-  GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (res);
-
-  g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == pp_new_printer_add_async);
-
-  if (g_simple_async_result_propagate_error (simple, error))
-    return FALSE;
-
-  return g_simple_async_result_get_op_res_gboolean (simple);
+  g_return_val_if_fail (g_task_is_valid (res, printer), FALSE);
+  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+  return g_task_propagate_boolean (G_TASK (res), error);
 }
