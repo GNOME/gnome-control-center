@@ -201,9 +201,9 @@ language_visible (GtkListBoxRow *row,
 {
         GtkDialog *chooser = user_data;
         CcLanguageChooserPrivate *priv = GET_PRIVATE (chooser);
-        gchar *locale_name = NULL;
-        gchar *locale_current_name = NULL;
-        gchar *locale_untranslated_name = NULL;
+        g_autofree gchar *locale_name = NULL;
+        g_autofree gchar *locale_current_name = NULL;
+        g_autofree gchar *locale_untranslated_name = NULL;
         gboolean is_extra;
         gboolean visible;
 
@@ -218,29 +218,21 @@ language_visible (GtkListBoxRow *row,
         if (!priv->filter_words)
                 return TRUE;
 
-        visible = FALSE;
-
         locale_name =
                 cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-name"));
         visible = match_all (priv->filter_words, locale_name);
         if (visible)
-                goto out;
+                return TRUE;
 
         locale_current_name =
                 cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-current-name"));
         visible = match_all (priv->filter_words, locale_current_name);
         if (visible)
-                goto out;
+                return TRUE;
 
         locale_untranslated_name =
                 cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-untranslated-name"));
-        visible = match_all (priv->filter_words, locale_untranslated_name);
-
-out:
-        g_free (locale_untranslated_name);
-        g_free (locale_current_name);
-        g_free (locale_name);
-        return visible;
+        return match_all (priv->filter_words, locale_untranslated_name);
 }
 
 static gint
@@ -266,7 +258,7 @@ static void
 filter_changed (GtkDialog *chooser)
 {
         CcLanguageChooserPrivate *priv = GET_PRIVATE (chooser);
-        gchar *filter_contents = NULL;
+        g_autofree gchar *filter_contents = NULL;
 
         g_clear_pointer (&priv->filter_words, g_strfreev);
 
@@ -278,7 +270,6 @@ filter_changed (GtkDialog *chooser)
                 return;
         }
         priv->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
-        g_free (filter_contents);
         gtk_list_box_set_placeholder (GTK_LIST_BOX (priv->language_list), priv->no_results);
         gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->language_list));
 }
@@ -305,7 +296,8 @@ set_locale_id (GtkDialog *chooser,
                const gchar       *locale_id)
 {
         CcLanguageChooserPrivate *priv = GET_PRIVATE (chooser);
-        GList *children, *l;
+        g_autoptr(GList) children = NULL;
+        GList *l;
 
         children = gtk_container_get_children (GTK_CONTAINER (priv->language_list));
         for (l = children; l; l = l->next) {
@@ -330,7 +322,6 @@ set_locale_id (GtkDialog *chooser,
                         gtk_widget_set_opacity (check, 0.0);
                 }
         }
-        g_list_free (children);
 
         g_free (priv->language);
         priv->language = g_strdup (locale_id);
@@ -397,18 +388,16 @@ cc_language_chooser_private_free (gpointer data)
 GtkWidget *
 cc_language_chooser_new (GtkWidget *parent)
 {
-        GtkBuilder *builder;
+        g_autoptr(GtkBuilder) builder = NULL;
         GtkWidget *chooser;
         CcLanguageChooserPrivate *priv;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         g_resources_register (cc_common_get_resource ());
 
         builder = gtk_builder_new ();
         if (gtk_builder_add_from_resource (builder, "/org/gnome/control-center/common/language-chooser.ui", &error) == 0) {
-                g_object_unref (builder);
                 g_warning ("failed to load language chooser: %s", error->message);
-                g_error_free (error);
                 return NULL;
         }
 

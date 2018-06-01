@@ -43,22 +43,20 @@ iter_for_language (GtkTreeModel *model,
                    GtkTreeIter  *iter,
                    gboolean      region)
 {
-        char *l;
-        char *name;
-        char *language;
+        g_autofree gchar *name = NULL;
 
         g_assert (gtk_tree_model_get_iter_first (model, iter));
         do {
+                g_autofree gchar *l = NULL;
                 gtk_tree_model_get (model, iter, LOCALE_COL, &l, -1);
-                if (g_strcmp0 (l, lang) == 0) {
-                        g_free (l);
+                if (g_strcmp0 (l, lang) == 0)
                         return TRUE;
-                }
-                g_free (l);
         } while (gtk_tree_model_iter_next (model, iter));
 
         name = gnome_normalize_locale (lang);
         if (name != NULL) {
+                g_autofree gchar *language = NULL;
+
                 if (region) {
                         language = gnome_get_country_from_locale (name, NULL);
                 }
@@ -72,8 +70,6 @@ iter_for_language (GtkTreeModel *model,
                                                    LOCALE_COL, name,
                                                    DISPLAY_LOCALE_COL, language,
                                                    -1);
-                g_free (name);
-                g_free (language);
                 return TRUE;
         }
 
@@ -91,12 +87,12 @@ cc_common_language_get_iter_for_language (GtkTreeModel *model,
 gboolean
 cc_common_language_has_font (const gchar *locale)
 {
-        const FcCharSet *charset;
-        FcPattern       *pattern;
-        FcObjectSet     *object_set;
-        FcFontSet       *font_set;
-        gchar           *language_code;
-        gboolean         is_displayable;
+        const FcCharSet  *charset;
+        FcPattern        *pattern;
+        FcObjectSet      *object_set;
+        FcFontSet        *font_set;
+        g_autofree gchar *language_code = NULL;
+        gboolean          is_displayable;
 
         is_displayable = FALSE;
         pattern = NULL;
@@ -141,8 +137,6 @@ cc_common_language_has_font (const gchar *locale)
         if (pattern != NULL)
                 FcPatternDestroy (pattern);
 
-        g_free (language_code);
-
         return is_displayable;
 }
 
@@ -150,12 +144,11 @@ gchar *
 cc_common_language_get_current_language (void)
 {
         gchar *language;
-        char *path;
+        g_autofree gchar *path = NULL;
         const gchar *locale;
 
 	path = g_strdup_printf ("/org/freedesktop/Accounts/User%d", getuid ());
         language = get_lang_for_user_object_path (path);
-        g_free (path);
         if (language != NULL && *language != '\0')
                 return language;
 
@@ -171,9 +164,9 @@ cc_common_language_get_current_language (void)
 static char *
 get_lang_for_user_object_path (const char *path)
 {
-	GError *error = NULL;
-	GDBusProxy *user;
-	GVariant *props;
+	g_autoptr(GError) error = NULL;
+	g_autoptr(GDBusProxy) user = NULL;
+	g_autoptr(GVariant) props = NULL;
 	char *lang;
 
 	user = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
@@ -186,19 +179,14 @@ get_lang_for_user_object_path (const char *path)
 	if (user == NULL) {
 		g_warning ("Failed to get proxy for user '%s': %s",
 			   path, error->message);
-		g_error_free (error);
 		return NULL;
 	}
 
 	props = g_dbus_proxy_get_cached_property (user, "Language");
-	if (props == NULL) {
-		g_object_unref (user);
+	if (props == NULL)
 		return NULL;
-	}
 	lang = g_variant_dup_string (props, NULL);
 
-	g_variant_unref (props);
-	g_object_unref (user);
 	return lang;
 }
 
@@ -210,31 +198,24 @@ static void
 insert_language (GHashTable *ht,
                  const char *lang)
 {
-        char *label_own_lang;
-        char *label_current_lang;
-        char *label_untranslated;
-        char *key;
+        g_autofree gchar *label_own_lang = NULL;
+        g_autofree gchar *label_current_lang = NULL;
+        g_autofree gchar *label_untranslated = NULL;
 
-        key = g_strdup (lang);
-
-        label_own_lang = gnome_get_language_from_locale (key, key);
-        label_current_lang = gnome_get_language_from_locale (key, NULL);
-        label_untranslated = gnome_get_language_from_locale (key, "C");
+        label_own_lang = gnome_get_language_from_locale (lang, lang);
+        label_current_lang = gnome_get_language_from_locale (lang, NULL);
+        label_untranslated = gnome_get_language_from_locale (lang, "C");
 
         /* We don't have a translation for the label in
          * its own language? */
         if (g_strcmp0 (label_own_lang, label_untranslated) == 0) {
                 if (g_strcmp0 (label_current_lang, label_untranslated) == 0)
-                        g_hash_table_insert (ht, key, g_strdup (label_untranslated));
+                        g_hash_table_insert (ht, g_strdup (lang), g_strdup (label_untranslated));
                 else
-                        g_hash_table_insert (ht, key, g_strdup (label_current_lang));
+                        g_hash_table_insert (ht, g_strdup (lang), g_strdup (label_current_lang));
         } else {
-                g_hash_table_insert (ht, key, g_strdup (label_own_lang));
+                g_hash_table_insert (ht, g_strdup (lang), g_strdup (label_own_lang));
         }
-
-        g_free (label_own_lang);
-        g_free (label_current_lang);
-        g_free (label_untranslated);
 }
 
 GHashTable *
@@ -277,7 +258,7 @@ foreach_user_lang_cb (gpointer key,
 void
 cc_common_language_add_user_languages (GtkTreeModel *model)
 {
-        char *name;
+        g_autofree gchar *name = NULL;
         GtkTreeIter iter;
         GtkListStore *store = GTK_LIST_STORE (model);
         GHashTable *user_langs;
@@ -291,20 +272,17 @@ cc_common_language_add_user_languages (GtkTreeModel *model)
         name = cc_common_language_get_current_language ();
         display = g_hash_table_lookup (user_langs, name);
         if (!display) {
-                char *language = NULL;
-                char *country = NULL;
-                char *codeset = NULL;
+                g_autofree gchar *language = NULL;
+                g_autofree gchar *country = NULL;
+                g_autofree gchar *codeset = NULL;
 
                 gnome_parse_locale (name, &language, &country, &codeset, NULL);
-                g_free (name);
 
                 if (!codeset || !g_str_equal (codeset, "UTF-8"))
                         g_warning ("Current user locale codeset isn't UTF-8");
 
+                g_free (name);
                 name = g_strdup_printf ("%s_%s.UTF-8", language, country);
-                g_free (language);
-                g_free (country);
-                g_free (codeset);
 
                 insert_language (user_langs, name);
                 display = g_hash_table_lookup (user_langs, name);
@@ -313,7 +291,6 @@ cc_common_language_add_user_languages (GtkTreeModel *model)
         gtk_list_store_append (store, &iter);
         gtk_list_store_set (store, &iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, display, -1);
         g_hash_table_remove (user_langs, name);
-        g_free (name);
 
         /* The rest of the languages */
         g_hash_table_foreach (user_langs, (GHFunc) foreach_user_lang_cb, store);
