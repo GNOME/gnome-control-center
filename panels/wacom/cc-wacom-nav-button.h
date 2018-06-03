@@ -17,9 +17,7 @@
  * Authors: Bastien Nocera <hadess@hadess.net>
  */
 
-
-#ifndef _CC_WACOM_NAV_BUTTON_H
-#define _CC_WACOM_NAV_BUTTON_H
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -31,5 +29,3 @@ G_DECLARE_FINAL_TYPE (CcWacomNavButton, cc_wacom_nav_button, CC, WACOM_NAV_BUTTO
 GtkWidget * cc_wacom_nav_button_new (void);
 
 G_END_DECLS
-
-#endif /* _CC_WACOM_NAV_BUTTON_H */
