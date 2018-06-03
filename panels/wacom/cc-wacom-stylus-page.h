@@ -18,9 +18,7 @@
  *          Bastien Nocera <hadess@hadess.net>
  */
 
-
-#ifndef _CC_WACOM_STYLUS_PAGE_H
-#define _CC_WACOM_STYLUS_PAGE_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include "cc-wacom-tool.h"
@@ -38,5 +36,3 @@ void cc_wacom_stylus_page_set_navigation (CcWacomStylusPage *page,
 					  GtkNotebook *notebook);
 
 G_END_DECLS
-
-#endif /* _CC_WACOM_STYLUS_PAGE_H */

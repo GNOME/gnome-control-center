@@ -18,9 +18,7 @@
  *          Bastien Nocera <hadess@hadess.net>
  */
 
-
-#ifndef _CC_WACOM_PANEL_H
-#define _CC_WACOM_PANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -40,5 +38,3 @@ void  cc_wacom_panel_set_osd_visibility (CcWacomPanel *self,
 GDBusProxy * cc_wacom_panel_get_gsd_wacom_bus_proxy (CcWacomPanel *self);
 
 G_END_DECLS
-
-#endif /* _CC_WACOM_PANEL_H */

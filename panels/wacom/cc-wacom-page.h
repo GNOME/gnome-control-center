@@ -18,9 +18,7 @@
  *          Bastien Nocera <hadess@hadess.net>
  */
 
-
-#ifndef _CC_WACOM_PAGE_H
-#define _CC_WACOM_PAGE_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include "cc-wacom-panel.h"
@@ -48,5 +46,3 @@ void        cc_wacom_page_calibrate        (CcWacomPage *page);
 gboolean    cc_wacom_page_can_calibrate    (CcWacomPage *page);
 
 G_END_DECLS
-
-#endif /* _CC_WACOM_PAGE_H */
