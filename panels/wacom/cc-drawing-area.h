@@ -17,8 +17,7 @@
  * Author: Carlos Garnacho <carlosg@gnome.org>
  */
 
-#ifndef _CC_DRAWING_AREA_H
-#define _CC_DRAWING_AREA_H
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -30,5 +29,3 @@ G_DECLARE_FINAL_TYPE (CcDrawingArea, cc_drawing_area, CC, DRAWING_AREA, GtkEvent
 GtkWidget *cc_drawing_area_new (void);
 
 G_END_DECLS
-
-#endif /* _CC_DRAWING_AREA_H */
