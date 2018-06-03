@@ -31,13 +31,10 @@
 #include "cc-wacom-device.h"
 #include "cc-wacom-mapping-panel.h"
 
-G_DEFINE_TYPE (CcWacomMappingPanel, cc_wacom_mapping_panel, GTK_TYPE_BOX)
-
-#define WACOM_MAPPING_PANEL_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_WACOM_MAPPING_PANEL, CcWacomMappingPanelPrivate))
-
-struct _CcWacomMappingPanelPrivate
+struct _CcWacomMappingPanel
 {
+	GtkBox          parent_instance;
+
 	CcWacomDevice  *device;
 	GtkWidget      *label;
 	GtkWidget      *combobox;
@@ -47,6 +44,8 @@ struct _CcWacomMappingPanelPrivate
 
 	GnomeRRScreen  *rr_screen;
 };
+
+G_DEFINE_TYPE (CcWacomMappingPanel, cc_wacom_mapping_panel, GTK_TYPE_BOX)
 
 enum {
 	MONITOR_NAME_COLUMN,
@@ -62,10 +61,10 @@ static void
 set_combobox_sensitive (CcWacomMappingPanel *self,
 			gboolean             sensitive)
 {
-	gtk_widget_set_sensitive (GTK_WIDGET(self->priv->combobox), sensitive);
-	gtk_widget_set_sensitive (GTK_WIDGET(self->priv->label), sensitive);
-	gtk_widget_set_sensitive (GTK_WIDGET(self->priv->aspectswitch), sensitive);
-	gtk_widget_set_sensitive (GTK_WIDGET(self->priv->aspectlabel), sensitive);
+	gtk_widget_set_sensitive (GTK_WIDGET(self->combobox), sensitive);
+	gtk_widget_set_sensitive (GTK_WIDGET(self->label), sensitive);
+	gtk_widget_set_sensitive (GTK_WIDGET(self->aspectswitch), sensitive);
+	gtk_widget_set_sensitive (GTK_WIDGET(self->aspectlabel), sensitive);
 }
 
 /* Update the display of available monitors based on the latest
@@ -85,32 +84,32 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 	guint i;
 
 	store = gtk_list_store_new (MONITOR_NUM_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
-	gtk_combo_box_set_model (GTK_COMBO_BOX(self->priv->combobox), GTK_TREE_MODEL(store));
+	gtk_combo_box_set_model (GTK_COMBO_BOX(self->combobox), GTK_TREE_MODEL(store));
 
-	if (self->priv->device == NULL) {
+	if (self->device == NULL) {
 		set_combobox_sensitive (self, FALSE);
 		g_object_unref (store);
 		return;
 	}
 
-	settings = cc_wacom_device_get_settings (self->priv->device);
-	cur_output = cc_wacom_device_get_output (self->priv->device,
-						 self->priv->rr_screen);
+	settings = cc_wacom_device_get_settings (self->device);
+	cur_output = cc_wacom_device_get_output (self->device,
+						 self->rr_screen);
 
-	g_signal_handlers_block_by_func (G_OBJECT (self->priv->checkbutton), checkbutton_toggled_cb, self);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(self->priv->checkbutton), cur_output != NULL);
-	g_signal_handlers_unblock_by_func (G_OBJECT (self->priv->checkbutton), checkbutton_toggled_cb, self);
+	g_signal_handlers_block_by_func (G_OBJECT (self->checkbutton), checkbutton_toggled_cb, self);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(self->checkbutton), cur_output != NULL);
+	g_signal_handlers_unblock_by_func (G_OBJECT (self->checkbutton), checkbutton_toggled_cb, self);
 
-	g_signal_handlers_block_by_func (G_OBJECT (self->priv->aspectswitch), aspectswitch_toggled_cb, self);
-	gtk_switch_set_active (GTK_SWITCH(self->priv->aspectswitch), g_settings_get_boolean (settings, "keep-aspect"));
-	g_signal_handlers_unblock_by_func (G_OBJECT (self->priv->aspectswitch), aspectswitch_toggled_cb, self);
+	g_signal_handlers_block_by_func (G_OBJECT (self->aspectswitch), aspectswitch_toggled_cb, self);
+	gtk_switch_set_active (GTK_SWITCH(self->aspectswitch), g_settings_get_boolean (settings, "keep-aspect"));
+	g_signal_handlers_unblock_by_func (G_OBJECT (self->aspectswitch), aspectswitch_toggled_cb, self);
 
-	if (!self->priv->rr_screen) {
+	if (!self->rr_screen) {
 		cur_output = NULL;
 		goto bail;
 	}
 
-	outputs = gnome_rr_screen_list_outputs (self->priv->rr_screen);
+	outputs = gnome_rr_screen_list_outputs (self->rr_screen);
 
 	for (i = 0; outputs[i] != NULL; i++) {
 		GnomeRROutput *output = outputs[i];
@@ -130,9 +129,9 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 			gtk_list_store_set (store, &iter, MONITOR_NAME_COLUMN, text, MONITOR_PTR_COLUMN, output, -1);
 
 			if (i == 0 || output == cur_output) {
-				g_signal_handlers_block_by_func (G_OBJECT (self->priv->combobox), combobox_changed_cb, self);
-				gtk_combo_box_set_active_iter (GTK_COMBO_BOX(self->priv->combobox), &iter);
-				g_signal_handlers_unblock_by_func (G_OBJECT (self->priv->combobox), combobox_changed_cb, self);
+				g_signal_handlers_block_by_func (G_OBJECT (self->combobox), combobox_changed_cb, self);
+				gtk_combo_box_set_active_iter (GTK_COMBO_BOX(self->combobox), &iter);
+				g_signal_handlers_unblock_by_func (G_OBJECT (self->combobox), combobox_changed_cb, self);
 			}
 
 			g_free (text);
@@ -147,18 +146,18 @@ bail:
 static void
 update_ui (CcWacomMappingPanel *self)
 {
-	if (self->priv->device == NULL) {
-		gtk_widget_set_sensitive (GTK_WIDGET(self->priv->checkbutton), FALSE);
-		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON(self->priv->checkbutton), TRUE);
+	if (self->device == NULL) {
+		gtk_widget_set_sensitive (GTK_WIDGET(self->checkbutton), FALSE);
+		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON(self->checkbutton), TRUE);
 	} else {
 		gboolean is_screen_tablet;
 
 		is_screen_tablet =
-			cc_wacom_device_get_integration_flags (self->priv->device) &
+			cc_wacom_device_get_integration_flags (self->device) &
 			WACOM_DEVICE_INTEGRATED_DISPLAY;
 
-		gtk_widget_set_sensitive (GTK_WIDGET(self->priv->checkbutton), !is_screen_tablet);
-		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON(self->priv->checkbutton), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET(self->checkbutton), !is_screen_tablet);
+		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON(self->checkbutton), FALSE);
 	}
 
 	update_monitor_chooser (self);
@@ -169,13 +168,13 @@ update_mapping (CcWacomMappingPanel *self)
 {
 	GnomeRROutput *output = NULL;
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->priv->checkbutton))) {
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->checkbutton))) {
 		GtkTreeIter iter;
 		GtkTreeModel *model;
 		char *name;
 
-		model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->priv->combobox));
-		if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self->priv->combobox), &iter)) {
+		model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->combobox));
+		if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self->combobox), &iter)) {
 			g_warning ("Map to single monitor checked, but no screen selected.");
 			return;
 		}
@@ -183,14 +182,14 @@ update_mapping (CcWacomMappingPanel *self)
 		gtk_tree_model_get (model, &iter, MONITOR_NAME_COLUMN, &name, MONITOR_PTR_COLUMN, &output, -1);
 	}
 
-	cc_wacom_device_set_output (self->priv->device, output);
+	cc_wacom_device_set_output (self->device, output);
 }
 
 void
 cc_wacom_mapping_panel_set_device (CcWacomMappingPanel *self,
                                    CcWacomDevice       *device)
 {
-	self->priv->device = device;
+	self->device = device;
 	update_ui (self);
 }
 
@@ -203,7 +202,7 @@ checkbutton_toggled_cb (GtkWidget           *widget,
 	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 	set_combobox_sensitive (self, active);
 	if (!active)
-		gtk_switch_set_active (GTK_SWITCH(self->priv->aspectswitch), FALSE);
+		gtk_switch_set_active (GTK_SWITCH(self->aspectswitch), FALSE);
 	update_mapping (self);
 }
 
@@ -214,7 +213,7 @@ aspectswitch_toggled_cb (GtkWidget           *widget,
 {
 	GSettings *settings;
 
-	settings = cc_wacom_device_get_settings (self->priv->device);
+	settings = cc_wacom_device_get_settings (self->device);
 	g_settings_set_boolean (settings,
 				"keep-aspect",
 				gtk_switch_get_active (GTK_SWITCH (widget)));
@@ -230,21 +229,18 @@ combobox_changed_cb (GtkWidget           *widget,
 static void
 cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 {
-	CcWacomMappingPanelPrivate *priv;
 	GtkWidget *vbox, *grid;
 	GtkCellRenderer *renderer;
 	GError *error = NULL;
 
-	priv = self->priv = WACOM_MAPPING_PANEL_PRIVATE (self);
-
-	priv->rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
+	self->rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
 
 	if (error) {
 		g_warning ("Could not get RR screen: %s", error->message);
 		g_error_free (error);
 	}
 
-	g_signal_connect_swapped (priv->rr_screen, "changed",
+	g_signal_connect_swapped (self->rr_screen, "changed",
 				  G_CALLBACK (update_monitor_chooser), self);
 
 	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 8);
@@ -257,35 +253,35 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 	grid = gtk_grid_new();
 	gtk_grid_set_row_spacing (GTK_GRID (grid), 10);
 	gtk_grid_set_column_spacing (GTK_GRID (grid), 10);
-	priv->label = gtk_label_new (_("Output:"));
-	gtk_widget_set_halign (priv->label, GTK_ALIGN_END);
-	priv->combobox = gtk_combo_box_new ();
-	g_signal_connect (G_OBJECT (priv->combobox), "changed",
+	self->label = gtk_label_new (_("Output:"));
+	gtk_widget_set_halign (self->label, GTK_ALIGN_END);
+	self->combobox = gtk_combo_box_new ();
+	g_signal_connect (G_OBJECT (self->combobox), "changed",
 	                      G_CALLBACK (combobox_changed_cb), self);
 	renderer = gtk_cell_renderer_text_new ();
-	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT(priv->combobox), renderer, TRUE);
-	gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT(priv->combobox), renderer, "text", 0);
-	gtk_grid_attach (GTK_GRID(grid), GTK_WIDGET(priv->label), 0, 0, 1, 1);
-	gtk_grid_attach (GTK_GRID(grid), GTK_WIDGET(priv->combobox), 1, 0, 1, 1);
+	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT(self->combobox), renderer, TRUE);
+	gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT(self->combobox), renderer, "text", 0);
+	gtk_grid_attach (GTK_GRID(grid), GTK_WIDGET(self->label), 0, 0, 1, 1);
+	gtk_grid_attach (GTK_GRID(grid), GTK_WIDGET(self->combobox), 1, 0, 1, 1);
 
 	/* Keep ratio switch */
-	priv->aspectlabel = gtk_label_new (_("Keep aspect ratio (letterbox):"));
-	gtk_widget_set_halign (priv->aspectlabel, GTK_ALIGN_END);
-	priv->aspectswitch = gtk_switch_new ();
-	gtk_widget_set_halign (priv->aspectswitch, GTK_ALIGN_START);
-	gtk_switch_set_active (GTK_SWITCH (priv->aspectswitch), FALSE);
-	g_signal_connect (GTK_SWITCH (priv->aspectswitch), "notify::active",
+	self->aspectlabel = gtk_label_new (_("Keep aspect ratio (letterbox):"));
+	gtk_widget_set_halign (self->aspectlabel, GTK_ALIGN_END);
+	self->aspectswitch = gtk_switch_new ();
+	gtk_widget_set_halign (self->aspectswitch, GTK_ALIGN_START);
+	gtk_switch_set_active (GTK_SWITCH (self->aspectswitch), FALSE);
+	g_signal_connect (GTK_SWITCH (self->aspectswitch), "notify::active",
                       G_CALLBACK (aspectswitch_toggled_cb), self);
-	gtk_grid_attach (GTK_GRID(grid), GTK_WIDGET(priv->aspectlabel), 0, 1, 1, 1);
-	gtk_grid_attach (GTK_GRID(grid), GTK_WIDGET(priv->aspectswitch), 1, 1, 1, 1);
+	gtk_grid_attach (GTK_GRID(grid), GTK_WIDGET(self->aspectlabel), 0, 1, 1, 1);
+	gtk_grid_attach (GTK_GRID(grid), GTK_WIDGET(self->aspectswitch), 1, 1, 1, 1);
 
 	/* Whole-desktop checkbox */
-	priv->checkbutton = gtk_check_button_new_with_label (_("Map to single monitor"));
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->checkbutton), FALSE);
-	g_signal_connect (G_OBJECT (priv->checkbutton), "toggled",
+	self->checkbutton = gtk_check_button_new_with_label (_("Map to single monitor"));
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->checkbutton), FALSE);
+	g_signal_connect (G_OBJECT (self->checkbutton), "toggled",
                       G_CALLBACK (checkbutton_toggled_cb), self);
 
-	gtk_box_pack_start (GTK_BOX(vbox), GTK_WIDGET(priv->checkbutton),
+	gtk_box_pack_start (GTK_BOX(vbox), GTK_WIDGET(self->checkbutton),
 				FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(vbox), GTK_WIDGET(grid),
 				FALSE, FALSE, 8);
@@ -301,7 +297,7 @@ cc_wacom_mapping_panel_new (void)
 	CcWacomMappingPanel *panel;
 
 	panel = CC_WACOM_MAPPING_PANEL(g_object_new (CC_TYPE_WACOM_MAPPING_PANEL, NULL));
-	panel->priv->device = NULL;
+	panel->device = NULL;
 
 	return GTK_WIDGET(panel);
 }
@@ -337,7 +333,7 @@ cc_wacom_mapping_panel_dispose (GObject *object)
 {
 	CcWacomMappingPanel *self = CC_WACOM_MAPPING_PANEL (object);
 
-	g_clear_object (&self->priv->rr_screen);
+	g_clear_object (&self->rr_screen);
 
 	G_OBJECT_CLASS (cc_wacom_mapping_panel_parent_class)->dispose (object);
 }
@@ -346,8 +342,6 @@ static void
 cc_wacom_mapping_panel_class_init (CcWacomMappingPanelClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-	g_type_class_add_private (klass, sizeof (CcWacomMappingPanelPrivate));
 
 	object_class->get_property = cc_wacom_mapping_panel_get_property;
 	object_class->set_property = cc_wacom_mapping_panel_set_property;
