@@ -25,13 +25,10 @@
 
 #include "cc-wacom-nav-button.h"
 
-G_DEFINE_TYPE (CcWacomNavButton, cc_wacom_nav_button, GTK_TYPE_BOX)
-
-#define WACOM_NAV_BUTTON_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_WACOM_NAV_BUTTON, CcWacomNavButtonPrivate))
-
-struct _CcWacomNavButtonPrivate
+struct _CcWacomNavButton
 {
+	GtkBox       parent_instance;
+
 	GtkNotebook *notebook;
 	GtkWidget   *label;
 	GtkWidget   *prev;
@@ -42,6 +39,8 @@ struct _CcWacomNavButtonPrivate
 	gboolean     ignore_first_page;
 };
 
+G_DEFINE_TYPE (CcWacomNavButton, cc_wacom_nav_button, GTK_TYPE_BOX)
+
 enum {
 	PROP_0,
 	PROP_NOTEBOOK,
@@ -51,23 +50,22 @@ enum {
 static void
 cc_wacom_nav_button_update (CcWacomNavButton *nav)
 {
-	CcWacomNavButtonPrivate *priv = nav->priv;
 	int num_pages;
 	int current_page;
 	char *text;
 
-	if (priv->notebook == NULL) {
+	if (nav->notebook == NULL) {
 		gtk_widget_hide (GTK_WIDGET (nav));
 		return;
 	}
 
-	num_pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook));
+	num_pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (nav->notebook));
 	if (num_pages == 0)
 		return;
-	if (priv->ignore_first_page && num_pages == 1)
+	if (nav->ignore_first_page && num_pages == 1)
 		return;
 
-	if (priv->ignore_first_page)
+	if (nav->ignore_first_page)
 		num_pages--;
 
 	g_assert (num_pages >= 1);
@@ -75,18 +73,18 @@ cc_wacom_nav_button_update (CcWacomNavButton *nav)
 	gtk_revealer_set_reveal_child (GTK_REVEALER (gtk_widget_get_parent (GTK_WIDGET (nav))),
 				       num_pages > 1);
 
-	current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->notebook));
+	current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (nav->notebook));
 	if (current_page < 0)
 		return;
-	if (priv->ignore_first_page)
+	if (nav->ignore_first_page)
 		current_page--;
-	gtk_widget_set_sensitive (priv->prev, current_page == 0 ? FALSE : TRUE);
-	gtk_widget_set_sensitive (priv->next, current_page + 1 == num_pages ? FALSE : TRUE);
+	gtk_widget_set_sensitive (nav->prev, current_page == 0 ? FALSE : TRUE);
+	gtk_widget_set_sensitive (nav->next, current_page + 1 == num_pages ? FALSE : TRUE);
 
 	text = g_strdup_printf (_("%d of %d"),
 				current_page + 1,
 				num_pages);
-	gtk_label_set_text (GTK_LABEL (priv->label), text);
+	gtk_label_set_text (GTK_LABEL (nav->label), text);
 }
 
 static void
@@ -112,9 +110,9 @@ next_clicked (GtkButton        *button,
 {
 	int current_page;
 
-	current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (nav->priv->notebook));
+	current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (nav->notebook));
 	current_page++;
-	gtk_notebook_set_current_page (GTK_NOTEBOOK (nav->priv->notebook), current_page);
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (nav->notebook), current_page);
 }
 
 static void
@@ -123,9 +121,9 @@ prev_clicked (GtkButton        *button,
 {
 	int current_page;
 
-	current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (nav->priv->notebook));
+	current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (nav->notebook));
 	current_page--;
-	gtk_notebook_set_current_page (GTK_NOTEBOOK (nav->priv->notebook), current_page--);
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (nav->notebook), current_page--);
 }
 
 static void
@@ -135,27 +133,26 @@ cc_wacom_nav_button_set_property (GObject      *object,
 				  GParamSpec   *pspec)
 {
 	CcWacomNavButton *nav = CC_WACOM_NAV_BUTTON (object);
-	CcWacomNavButtonPrivate *priv = nav->priv;
 
 	switch (property_id) {
 	case PROP_NOTEBOOK:
-		if (priv->notebook) {
-			g_signal_handler_disconnect (priv->notebook, priv->page_added_id);
-			g_signal_handler_disconnect (priv->notebook, priv->page_removed_id);
-			g_signal_handler_disconnect (priv->notebook, priv->page_switched_id);
-			g_object_unref (priv->notebook);
+		if (nav->notebook) {
+			g_signal_handler_disconnect (nav->notebook, nav->page_added_id);
+			g_signal_handler_disconnect (nav->notebook, nav->page_removed_id);
+			g_signal_handler_disconnect (nav->notebook, nav->page_switched_id);
+			g_object_unref (nav->notebook);
 		}
-		priv->notebook = g_value_dup_object (value);
-		priv->page_added_id = g_signal_connect (G_OBJECT (priv->notebook), "page-added",
-							G_CALLBACK (pages_changed), nav);
-		priv->page_removed_id = g_signal_connect (G_OBJECT (priv->notebook), "page-removed",
-							  G_CALLBACK (pages_changed), nav);
-		priv->page_switched_id = g_signal_connect (G_OBJECT (priv->notebook), "notify::page",
-							   G_CALLBACK (page_switched), nav);
+		nav->notebook = g_value_dup_object (value);
+		nav->page_added_id = g_signal_connect (G_OBJECT (nav->notebook), "page-added",
+						       G_CALLBACK (pages_changed), nav);
+		nav->page_removed_id = g_signal_connect (G_OBJECT (nav->notebook), "page-removed",
+							 G_CALLBACK (pages_changed), nav);
+		nav->page_switched_id = g_signal_connect (G_OBJECT (nav->notebook), "notify::page",
+							  G_CALLBACK (page_switched), nav);
 		cc_wacom_nav_button_update (nav);
 		break;
 	case PROP_IGNORE_FIRST:
-		priv->ignore_first_page = g_value_get_boolean (value);
+		nav->ignore_first_page = g_value_get_boolean (value);
 		cc_wacom_nav_button_update (nav);
 		break;
 	default:
@@ -166,17 +163,17 @@ cc_wacom_nav_button_set_property (GObject      *object,
 static void
 cc_wacom_nav_button_dispose (GObject *object)
 {
-	CcWacomNavButtonPrivate *priv = CC_WACOM_NAV_BUTTON (object)->priv;
+	CcWacomNavButton *self = CC_WACOM_NAV_BUTTON (object);
 
-	if (priv->notebook) {
-		g_signal_handler_disconnect (priv->notebook, priv->page_added_id);
-		priv->page_added_id = 0;
-		g_signal_handler_disconnect (priv->notebook, priv->page_removed_id);
-		priv->page_removed_id = 0;
-		g_signal_handler_disconnect (priv->notebook, priv->page_switched_id);
-		priv->page_switched_id = 0;
-		g_object_unref (priv->notebook);
-		priv->notebook = NULL;
+	if (self->notebook) {
+		g_signal_handler_disconnect (self->notebook, self->page_added_id);
+		self->page_added_id = 0;
+		g_signal_handler_disconnect (self->notebook, self->page_removed_id);
+		self->page_removed_id = 0;
+		g_signal_handler_disconnect (self->notebook, self->page_switched_id);
+		self->page_switched_id = 0;
+		g_object_unref (self->notebook);
+		self->notebook = NULL;
 	}
 
 	G_OBJECT_CLASS (cc_wacom_nav_button_parent_class)->dispose (object);
@@ -186,8 +183,6 @@ static void
 cc_wacom_nav_button_class_init (CcWacomNavButtonClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-	g_type_class_add_private (klass, sizeof (CcWacomNavButtonPrivate));
 
 	object_class->set_property = cc_wacom_nav_button_set_property;
 	object_class->dispose = cc_wacom_nav_button_dispose;
@@ -205,16 +200,13 @@ cc_wacom_nav_button_class_init (CcWacomNavButtonClass *klass)
 static void
 cc_wacom_nav_button_init (CcWacomNavButton *self)
 {
-	CcWacomNavButtonPrivate *priv;
 	GtkStyleContext *context;
 	GtkWidget *image, *box;
 
-	priv = self->priv = WACOM_NAV_BUTTON_PRIVATE (self);
-
 	/* Label */
-	priv->label = gtk_label_new (NULL);
-	gtk_style_context_add_class (gtk_widget_get_style_context (priv->label), "dim-label");
-	gtk_box_pack_start (GTK_BOX (self), priv->label,
+	self->label = gtk_label_new (NULL);
+	gtk_style_context_add_class (gtk_widget_get_style_context (self->label), "dim-label");
+	gtk_box_pack_start (GTK_BOX (self), self->label,
 			    FALSE, FALSE, 8);
 
 	box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -224,27 +216,27 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 			    FALSE, FALSE, 0);
 
 	/* Prev button */
-	priv->prev = gtk_button_new ();
+	self->prev = gtk_button_new ();
 	image = gtk_image_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
-	gtk_container_add (GTK_CONTAINER (priv->prev), image);
-	g_signal_connect (G_OBJECT (priv->prev), "clicked",
+	gtk_container_add (GTK_CONTAINER (self->prev), image);
+	g_signal_connect (G_OBJECT (self->prev), "clicked",
 			  G_CALLBACK (prev_clicked), self);
-	gtk_widget_set_valign (priv->prev, GTK_ALIGN_CENTER);
+	gtk_widget_set_valign (self->prev, GTK_ALIGN_CENTER);
 
 	/* Next button */
-	priv->next = gtk_button_new ();
+	self->next = gtk_button_new ();
 	image = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_MENU);
-	gtk_container_add (GTK_CONTAINER (priv->next), image);
-	g_signal_connect (G_OBJECT (priv->next), "clicked",
+	gtk_container_add (GTK_CONTAINER (self->next), image);
+	g_signal_connect (G_OBJECT (self->next), "clicked",
 			  G_CALLBACK (next_clicked), self);
-	gtk_widget_set_valign (priv->next, GTK_ALIGN_CENTER);
+	gtk_widget_set_valign (self->next, GTK_ALIGN_CENTER);
 
-	gtk_box_pack_start (GTK_BOX (box), priv->prev,
+	gtk_box_pack_start (GTK_BOX (box), self->prev,
 			    FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (box), priv->next,
+	gtk_box_pack_start (GTK_BOX (box), self->next,
 			    FALSE, FALSE, 0);
 
-	gtk_widget_show (priv->label);
+	gtk_widget_show (self->label);
 	gtk_widget_show_all (box);
 }
 
