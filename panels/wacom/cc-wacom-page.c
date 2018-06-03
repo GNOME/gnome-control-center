@@ -148,7 +148,7 @@ set_calibration (CcWacomDevice  *device,
 {
 	GVariant    *current; /* current calibration */
 	GVariant    *array;   /* new calibration */
-	GVariant   **tmp;
+	g_autofree GVariant   **tmp = NULL;
 	gsize        nvalues;
 	gint         i;
 
@@ -165,8 +165,6 @@ set_calibration (CcWacomDevice  *device,
 
 	array = g_variant_new_array (G_VARIANT_TYPE_DOUBLE, tmp, nvalues);
 	g_settings_set_value (settings, "area", array);
-
-	g_free (tmp);
 
 	g_debug ("Setting area to %f, %f, %f, %f (left/right/top/bottom) (last used resolution: %d x %d)",
 		 cal[0], cal[1], cal[2], cal[3],
@@ -216,7 +214,8 @@ cc_wacom_page_get_gdk_device (CcWacomPage *page)
 	GdkDevice *gdk_device = NULL;
 	GdkDisplay *display;
 	GdkSeat *seat;
-	GList *slaves, *l;
+	g_autoptr(GList) slaves = NULL;
+	GList *l;
 
 	gsd_device = cc_wacom_device_get_device (page->stylus);
 	g_return_val_if_fail (GSD_IS_DEVICE (gsd_device), NULL);
@@ -226,7 +225,7 @@ cc_wacom_page_get_gdk_device (CcWacomPage *page)
 	slaves = gdk_seat_get_slaves (seat, GDK_SEAT_CAPABILITY_TABLET_STYLUS);
 
 	for (l = slaves; l && !gdk_device; l = l->next) {
-		gchar *device_node = NULL;
+		g_autofree gchar *device_node = NULL;
 
 		if (gdk_device_get_source (l->data) != GDK_SOURCE_PEN)
 			continue;
@@ -242,11 +241,7 @@ cc_wacom_page_get_gdk_device (CcWacomPage *page)
 
 		if (g_strcmp0 (device_node, gsd_device_get_device_file (gsd_device)) == 0)
 			gdk_device = l->data;
-
-		g_free (device_node);
 	}
-
-	g_list_free (slaves);
 
 	return gdk_device;
 }
@@ -289,21 +284,21 @@ static void
 calibrate (CcWacomPage *page)
 {
 	int i;
-	GVariant *old_calibration, **tmp, *array;
-	gdouble *calibration;
+	GVariant *old_calibration, *array;
+	g_autofree GVariant **tmp = NULL;
+	g_autofree gdouble *calibration = NULL;
 	gsize ncal;
 	GdkMonitor *monitor;
 	GdkScreen *screen;
-	GnomeRRScreen *rr_screen;
+	g_autoptr(GnomeRRScreen) rr_screen = NULL;
 	GnomeRROutput *output;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 	gint x, y;
 
 	screen = gdk_screen_get_default ();
 	rr_screen = gnome_rr_screen_new (screen, &error);
 	if (error) {
 		g_warning ("Could not connect to display manager: %s", error->message);
-		g_error_free (error);
 		return;
 	}
 
@@ -339,13 +334,9 @@ calibrate (CcWacomPage *page)
 
 	array = g_variant_new_array (G_VARIANT_TYPE_DOUBLE, tmp, ncal);
 	g_settings_set_value (page->wacom_settings, "area", array);
-	g_free (tmp);
 
 	run_calibration (page, old_calibration, calibration, monitor);
-	g_free (calibration);
 	gtk_widget_set_sensitive (WID ("button-calibrate"), FALSE);
-
-	g_object_unref (rr_screen);
 }
 
 static void
@@ -408,15 +399,14 @@ button_mapping_dialog_closed (GtkDialog   *dialog,
 			      CcWacomPage *page)
 {
 	gtk_widget_destroy (MWID ("button-mapping-dialog"));
-	g_object_unref (page->mapping_builder);
-	page->mapping_builder = NULL;
+	g_clear_object (&page->mapping_builder);
 }
 
 static void
 show_button_mapping_dialog (CcWacomPage *page)
 {
 	GtkWidget          *toplevel;
-	GError             *error = NULL;
+	g_autoptr(GError)   error = NULL;
 	GtkWidget          *dialog;
 
 	g_assert (page->mapping_builder == NULL);
@@ -427,9 +417,7 @@ show_button_mapping_dialog (CcWacomPage *page)
 
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
-		g_object_unref (page->mapping_builder);
-		page->mapping_builder = NULL;
-		g_error_free (error);
+		g_clear_object (&page->mapping_builder);
 		return;
 	}
 
@@ -453,7 +441,7 @@ set_osd_visibility_cb (GObject      *source_object,
 		       GAsyncResult *res,
 		       gpointer      data)
 {
-	GError      *error = NULL;
+	g_autoptr(GError) error = NULL;
 	GVariant    *result;
 	CcWacomPage *page;
 
@@ -464,10 +452,8 @@ set_osd_visibility_cb (GObject      *source_object,
 	if (result == NULL) {
 		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
 			g_printerr ("Error setting OSD's visibility: %s\n", error->message);
-			g_error_free (error);
 			show_button_mapping_dialog (page);
 		} else {
-			g_error_free (error);
 			return;
 		}
 	}
@@ -655,36 +641,13 @@ cc_wacom_page_dispose (GObject *object)
 {
 	CcWacomPage *self = CC_WACOM_PAGE (object);
 
-	if (self->cancellable) {
-		g_cancellable_cancel (self->cancellable);
-		g_clear_object (&self->cancellable);
-	}
-
-	if (self->area) {
-		calib_area_free (self->area);
-		self->area = NULL;
-	}
-
-	if (self->button_map) {
-		gtk_widget_destroy (self->button_map);
-		self->button_map = NULL;
-	}
-
-	if (self->dialog) {
-		gtk_widget_destroy (self->dialog);
-		self->dialog = NULL;
-	}
-
-	if (self->builder) {
-		g_object_unref (self->builder);
-		self->builder = NULL;
-	}
-
-	if (self->header_group) {
-		g_object_unref (self->header_group);
-		self->header_group = NULL;
-	}
-
+	g_cancellable_cancel (self->cancellable);
+	g_clear_object (&self->cancellable);
+	g_clear_pointer (&self->area, calib_area_free);
+	g_clear_pointer (&self->button_map, gtk_widget_destroy);
+	g_clear_pointer (&self->dialog, gtk_widget_destroy);
+	g_clear_object (&self->builder);
+	g_clear_object (&self->header_group);
 
 	self->panel = NULL;
 
@@ -717,7 +680,7 @@ remove_link_padding (GtkWidget *widget)
 static void
 cc_wacom_page_init (CcWacomPage *page)
 {
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 	GtkComboBox *combo;
 	GtkWidget *box;
 	GtkSwitch *sw;
@@ -738,8 +701,6 @@ cc_wacom_page_init (CcWacomPage *page)
                                                &error);
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
-		g_object_unref (page->builder);
-		g_error_free (error);
 		return;
 	}
 
@@ -786,11 +747,10 @@ set_icon_name (CcWacomPage *page,
 	       const char  *widget_name,
 	       const char  *icon_name)
 {
-	char *resource;
+	g_autofree gchar *resource = NULL;
 
 	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
 	gtk_image_set_from_resource (GTK_IMAGE (WID (widget_name)), resource);
-	g_free (resource);
 }
 
 static void

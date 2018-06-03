@@ -140,8 +140,8 @@ cc_wacom_nav_button_set_property (GObject      *object,
 			g_signal_handler_disconnect (nav->notebook, nav->page_added_id);
 			g_signal_handler_disconnect (nav->notebook, nav->page_removed_id);
 			g_signal_handler_disconnect (nav->notebook, nav->page_switched_id);
-			g_object_unref (nav->notebook);
 		}
+		g_clear_object (&nav->notebook);
 		nav->notebook = g_value_dup_object (value);
 		nav->page_added_id = g_signal_connect (G_OBJECT (nav->notebook), "page-added",
 						       G_CALLBACK (pages_changed), nav);
@@ -172,8 +172,7 @@ cc_wacom_nav_button_dispose (GObject *object)
 		self->page_removed_id = 0;
 		g_signal_handler_disconnect (self->notebook, self->page_switched_id);
 		self->page_switched_id = 0;
-		g_object_unref (self->notebook);
-		self->notebook = NULL;
+		g_clear_object (&self->notebook);
 	}
 
 	G_OBJECT_CLASS (cc_wacom_nav_button_parent_class)->dispose (object);
