@@ -19,8 +19,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __GSD_WACOM_KEY_SHORTCUT_BUTTON_H__
-#define __GSD_WACOM_KEY_SHORTCUT_BUTTON_H__
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -39,5 +38,3 @@ typedef enum
 } GsdWacomKeyShortcutButtonMode;
 
 GtkWidget    * gsd_wacom_key_shortcut_button_new             (void);
-
-#endif /* __GSD_WACOM_KEY_SHORTCUT_BUTTON_H__ */
