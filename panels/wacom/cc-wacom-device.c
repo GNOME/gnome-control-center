@@ -266,7 +266,9 @@ find_output_by_edid (GnomeRRScreen *rr_screen,
 	rr_outputs = gnome_rr_screen_list_outputs (rr_screen);
 
 	for (i = 0; rr_outputs[i] != NULL; i++) {
-		gchar *o_vendor, *o_product, *o_serial;
+		g_autofree gchar *o_vendor = NULL;
+		g_autofree gchar *o_product = NULL;
+		g_autofree gchar *o_serial = NULL;
 		gboolean match;
 
 		gnome_rr_output_get_ids_from_edid (rr_outputs[i],
@@ -280,10 +282,6 @@ find_output_by_edid (GnomeRRScreen *rr_screen,
 		match = (g_strcmp0 (vendor,  o_vendor)  == 0) && \
 		        (g_strcmp0 (product, o_product) == 0) && \
 		        (g_strcmp0 (serial,  o_serial)  == 0);
-
-		g_free (o_vendor);
-		g_free (o_product);
-		g_free (o_serial);
 
 		if (match) {
 			retval = rr_outputs[i];
@@ -302,10 +300,9 @@ static GnomeRROutput *
 find_output (GnomeRRScreen *rr_screen,
 	     CcWacomDevice *device)
 {
-	GSettings *settings;
-	GVariant *variant;
-	const gchar **edid;
-	GnomeRROutput *ret = NULL;
+	g_autoptr(GSettings) settings = NULL;
+	g_autoptr(GVariant) variant = NULL;
+	g_autofree const gchar **edid = NULL;
 	gsize n;
 
 	settings = cc_wacom_device_get_settings (device);
@@ -314,20 +311,13 @@ find_output (GnomeRRScreen *rr_screen,
 
 	if (n != 3) {
 		g_critical ("Expected 'output' key to store %d values; got %"G_GSIZE_FORMAT".", 3, n);
-		goto out;
+		return NULL;
 	}
 
 	if (strlen (edid[0]) == 0 || strlen (edid[1]) == 0 || strlen (edid[2]) == 0)
-		goto out;
+		return NULL;
 
-	ret = find_output_by_edid (rr_screen, edid[0], edid[1], edid[2]);
-
-out:
-	g_free (edid);
-	g_variant_unref (variant);
-	g_object_unref (settings);
-
-	return ret;
+	return find_output_by_edid (rr_screen, edid[0], edid[1], edid[2]);
 }
 
 GnomeRROutput *
@@ -359,8 +349,10 @@ void
 cc_wacom_device_set_output (CcWacomDevice *device,
 			    GnomeRROutput *output)
 {
-	GSettings *settings;
-	gchar *vendor, *product, *serial;
+	g_autoptr(GSettings) settings = NULL;
+	g_autofree gchar *vendor = NULL;
+	g_autofree gchar *product = NULL;
+	g_autofree gchar *serial = NULL;
 	const gchar *values[] = { "", "", "", NULL };
 
         g_return_if_fail (CC_IS_WACOM_DEVICE (device));
@@ -379,11 +371,6 @@ cc_wacom_device_set_output (CcWacomDevice *device,
 	}
 
 	g_settings_set_strv (settings, "output", values);
-
-	g_free (vendor);
-	g_free (product);
-	g_free (serial);
-	g_object_unref (settings);
 }
 
 guint
@@ -398,8 +385,10 @@ GSettings *
 cc_wacom_device_get_button_settings (CcWacomDevice *device,
 				     guint          button)
 {
-	GSettings *tablet_settings, *settings;
-	gchar *path, *button_path;
+	g_autoptr(GSettings) tablet_settings = NULL;
+	GSettings *settings;
+	g_autofree gchar *path = NULL;
+	g_autofree gchar *button_path = NULL;
 
 	g_return_val_if_fail (CC_IS_WACOM_DEVICE (device), NULL);
 
@@ -412,9 +401,6 @@ cc_wacom_device_get_button_settings (CcWacomDevice *device,
 	button_path = g_strdup_printf ("%sbutton%c/", path, 'A' + button);
 	settings = g_settings_new_with_path ("org.gnome.desktop.peripherals.tablet.pad-button",
 					     button_path);
-	g_free (path);
-	g_free (button_path);
-	g_object_unref (tablet_settings);
 
 	return settings;
 }
