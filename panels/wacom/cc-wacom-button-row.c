@@ -23,8 +23,6 @@
 #include "gsd-wacom-key-shortcut-button.h"
 #include "cc-wacom-button-row.h"
 
-G_DEFINE_TYPE (CcWacomButtonRow, cc_wacom_button_row, GTK_TYPE_LIST_BOX_ROW)
-
 #define ACTION_KEY            "action"
 #define KEYBINDING_KEY        "keybinding"
 
@@ -36,13 +34,16 @@ enum {
   ACTION_N_COLUMNS
 };
 
-struct _CcWacomButtonRowPrivate {
+struct _CcWacomButtonRow {
+  GtkListBoxRow parent_instance;
   guint button;
   GSettings *settings;
   GtkDirectionType direction;
   GtkComboBox *action_combo;
   GsdWacomKeyShortcutButton *key_shortcut_button;
 };
+
+G_DEFINE_TYPE (CcWacomButtonRow, cc_wacom_button_row, GTK_TYPE_LIST_BOX_ROW)
 
 static GtkWidget *
 create_actions_combo (void)
@@ -78,7 +79,6 @@ static void
 cc_wacom_button_row_update_shortcut (CcWacomButtonRow        *row,
                                      GDesktopPadButtonAction  action_type)
 {
-  CcWacomButtonRowPrivate *priv;
   guint                    keyval;
   GdkModifierType          mask;
   char                    *shortcut;
@@ -86,14 +86,13 @@ cc_wacom_button_row_update_shortcut (CcWacomButtonRow        *row,
   if (action_type != G_DESKTOP_PAD_BUTTON_ACTION_KEYBINDING)
     return;
 
-  priv = row->priv;
-  shortcut = g_settings_get_string (row->priv->settings, KEYBINDING_KEY);
+  shortcut = g_settings_get_string (row->settings, KEYBINDING_KEY);
 
   if (shortcut != NULL)
     {
       gtk_accelerator_parse (shortcut, &keyval, &mask);
 
-      g_object_set (priv->key_shortcut_button,
+      g_object_set (row->key_shortcut_button,
                     "key-value", keyval,
                     "key-mods", mask,
                     NULL);
@@ -106,15 +105,12 @@ static void
 cc_wacom_button_row_update_action (CcWacomButtonRow        *row,
                                    GDesktopPadButtonAction  action_type)
 {
-  CcWacomButtonRowPrivate *priv;
   GtkTreeIter              iter;
   gboolean                 iter_valid;
   GDesktopPadButtonAction  current_action_type, real_action_type;
   GtkTreeModel            *model;
 
-  priv = row->priv;
-
-  model = gtk_combo_box_get_model (priv->action_combo);
+  model = gtk_combo_box_get_model (row->action_combo);
   real_action_type = action_type;
 
   for (iter_valid = gtk_tree_model_get_iter_first (model, &iter); iter_valid;
@@ -126,7 +122,7 @@ cc_wacom_button_row_update_action (CcWacomButtonRow        *row,
 
       if (current_action_type == real_action_type)
         {
-          gtk_combo_box_set_active_iter (priv->action_combo, &iter);
+          gtk_combo_box_set_active_iter (row->action_combo, &iter);
           break;
         }
     }
@@ -135,18 +131,15 @@ cc_wacom_button_row_update_action (CcWacomButtonRow        *row,
 static void
 cc_wacom_button_row_update (CcWacomButtonRow *row)
 {
-  CcWacomButtonRowPrivate *priv;
   GDesktopPadButtonAction current_action_type;
 
-  priv = row->priv;
-
-  current_action_type = g_settings_get_enum (priv->settings, ACTION_KEY);
+  current_action_type = g_settings_get_enum (row->settings, ACTION_KEY);
 
   cc_wacom_button_row_update_shortcut (row, current_action_type);
 
   cc_wacom_button_row_update_action (row, current_action_type);
 
-  gtk_widget_set_sensitive (GTK_WIDGET (row->priv->key_shortcut_button),
+  gtk_widget_set_sensitive (GTK_WIDGET (row->key_shortcut_button),
                             current_action_type == G_DESKTOP_PAD_BUTTON_ACTION_KEYBINDING);
 }
 
@@ -154,8 +147,8 @@ static void
 change_button_action_type (CcWacomButtonRow        *row,
                            GDesktopPadButtonAction  type)
 {
-  g_settings_set_enum (row->priv->settings, ACTION_KEY, type);
-  gtk_widget_set_sensitive (GTK_WIDGET (row->priv->key_shortcut_button),
+  g_settings_set_enum (row->settings, ACTION_KEY, type);
+  gtk_widget_set_sensitive (GTK_WIDGET (row->key_shortcut_button),
                             type == G_DESKTOP_PAD_BUTTON_ACTION_KEYBINDING);
 }
 
@@ -169,7 +162,7 @@ on_key_shortcut_edited (GsdWacomKeyShortcutButton *shortcut_button,
 
   change_button_action_type (row, G_DESKTOP_PAD_BUTTON_ACTION_KEYBINDING);
 
-  g_object_get (row->priv->key_shortcut_button,
+  g_object_get (row->key_shortcut_button,
                 "key-value", &keyval,
                 "key-mods", &mask,
                 NULL);
@@ -178,7 +171,7 @@ on_key_shortcut_edited (GsdWacomKeyShortcutButton *shortcut_button,
 
   custom_key = gtk_accelerator_name (keyval, mask);
 
-  g_settings_set_string (row->priv->settings, KEYBINDING_KEY, custom_key);
+  g_settings_set_string (row->settings, KEYBINDING_KEY, custom_key);
 
   g_free (custom_key);
 }
@@ -232,31 +225,25 @@ on_key_shortcut_button_press_event (GsdWacomKeyShortcutButton  *button,
 static void
 cc_wacom_button_row_class_init (CcWacomButtonRowClass *button_row_class)
 {
-  g_type_class_add_private (button_row_class, sizeof (CcWacomButtonRowPrivate));
 }
 
 static void
 cc_wacom_button_row_init (CcWacomButtonRow *button_row)
 {
-  button_row->priv = G_TYPE_INSTANCE_GET_PRIVATE (button_row,
-                                                  CC_WACOM_TYPE_BUTTON_ROW,
-                                                  CcWacomButtonRowPrivate);
 }
 
 GtkWidget *
 cc_wacom_button_row_new (guint      button,
 			 GSettings *settings)
 {
-  GtkWidget               *row;
+  CcWacomButtonRow        *row;
   GtkWidget               *grid, *combo, *label, *shortcut_button;
-  CcWacomButtonRowPrivate *priv;
   char *name = NULL;
 
-  row = g_object_new (CC_WACOM_TYPE_BUTTON_ROW, NULL);
-  priv = CC_WACOM_BUTTON_ROW (row)->priv;
+  row = CC_WACOM_BUTTON_ROW (g_object_new (CC_WACOM_TYPE_BUTTON_ROW, NULL));
 
-  priv->button = button;
-  priv->settings = g_object_ref (settings);
+  row->button = button;
+  row->settings = g_object_ref (settings);
 
   grid = gtk_grid_new ();
   gtk_widget_show (grid);
@@ -272,7 +259,7 @@ cc_wacom_button_row_new (guint      button,
   combo = create_actions_combo ();
   gtk_grid_attach (GTK_GRID (grid), combo, 1, 0, 1, 1);
   gtk_widget_show (combo);
-  priv->action_combo = GTK_COMBO_BOX (combo);
+  row->action_combo = GTK_COMBO_BOX (combo);
   g_signal_connect (combo, "changed",
                     G_CALLBACK (on_row_action_combo_box_changed), row);
 
@@ -280,7 +267,7 @@ cc_wacom_button_row_new (guint      button,
   g_object_set (shortcut_button, "mode", GSD_WACOM_KEY_SHORTCUT_BUTTON_MODE_ALL, NULL);
   gtk_grid_attach (GTK_GRID (grid), shortcut_button, 2, 0, 1, 1);
   gtk_widget_show (shortcut_button);
-  priv->key_shortcut_button = GSD_WACOM_KEY_SHORTCUT_BUTTON (shortcut_button);
+  row->key_shortcut_button = GSD_WACOM_KEY_SHORTCUT_BUTTON (shortcut_button);
   g_signal_connect (shortcut_button, "key-shortcut-cleared",
                     G_CALLBACK (on_key_shortcut_cleared),
                     row);
@@ -297,5 +284,5 @@ cc_wacom_button_row_new (guint      button,
 
   g_free (name);
 
-  return row;
+  return GTK_WIDGET (row);
 }

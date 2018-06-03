@@ -25,35 +25,15 @@
 
 G_BEGIN_DECLS
 
-#define CC_TARGET_ACTOR_TYPE            (cc_target_actor_get_type ())
-#define CC_TARGET_ACTOR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_TARGET_ACTOR_TYPE, CcTargetActor))
-#define CC_IS_TARGET_ACTOR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CC_TARGET_ACTOR_TYPE))
-#define CC_TARGET_ACTOR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CC_TARGET_ACTOR_TYPE, CcTargetActorClass))
-#define CC_IS_TARGET_ACTOR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), CC_TARGET_ACTOR_TYPE))
-#define CC_TARGET_ACTOR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), CC_TARGET_ACTOR_TYPE, CcTargetActorClass))
-
-typedef struct _CcTargetActor        CcTargetActor;
-typedef struct _CcTargetActorClass   CcTargetActorClass;
-typedef struct _CcTargetActorPrivate CcTargetActorPrivate;
-
-struct _CcTargetActor
-{
-  ClutterActor parent_instance;
-
-  /*< private >*/
-  CcTargetActorPrivate *priv;
-};
-
-struct _CcTargetActorClass
-{
-  ClutterActorClass parent_class;
-};
+#define CC_TARGET_ACTOR_TYPE (cc_target_actor_get_type ())
+G_DECLARE_FINAL_TYPE (CcTargetActor, cc_target_actor, CC, TARGET_ACTOR, ClutterActor)
 
 ClutterActor * cc_target_actor_new         (void);
+
 void           cc_target_actor_move_center (CcTargetActor *target,
                                             gdouble        x,
                                             gdouble        y);
 
-GType          cc_target_actor_get_type    (void);
+G_END_DECLS
 
 #endif /* __CC_TARGET_ACTOR_H__ */
