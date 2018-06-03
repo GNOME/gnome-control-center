@@ -17,8 +17,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __CC_WACOM_BUTTON_ROW_H__
-#define __CC_WACOM_BUTTON_ROW_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include <gdesktop-enums.h>
@@ -42,5 +41,3 @@ GtkWidget * cc_wacom_button_row_new      (guint      button,
                                           GSettings *settings);
 
 G_END_DECLS
-
-#endif /* __CC_WACOM_PAGE_H__ */
