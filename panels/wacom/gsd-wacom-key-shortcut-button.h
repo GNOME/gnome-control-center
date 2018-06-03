@@ -26,19 +26,11 @@
 
 G_BEGIN_DECLS
 
-#define GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON            (gsd_wacom_key_shortcut_button_get_type ())
-#define GSD_WACOM_KEY_SHORTCUT_BUTTON(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON, GsdWacomKeyShortcutButton))
-#define GSD_WACOM_IS_KEY_SHORTCUT_BUTTON(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON))
-#define GSD_WACOM_KEY_SHORTCUT_BUTTON_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON, GsdWacomKeyShortcutButtonClass))
-#define GSD_WACOM_IS_KEY_SHORTCUT_BUTTON_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON))
-#define GSD_WACOM_KEY_SHORTCUT_BUTTON_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON, GsdWacomKeyShortcutButtonClass))
-
-typedef struct _GsdWacomKeyShortcutButton        GsdWacomKeyShortcutButton;
-typedef struct _GsdWacomKeyShortcutButtonClass   GsdWacomKeyShortcutButtonClass;
-typedef struct _GsdWacomKeyShortcutButtonPrivate GsdWacomKeyShortcutButtonPrivate;
+#define GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON (gsd_wacom_key_shortcut_button_get_type ())
+G_DECLARE_FINAL_TYPE (GsdWacomKeyShortcutButton, gsd_wacom_key_shortcut_button, GSD, WACOM_KEY_SHORTCUT_BUTTON, GtkButton)
 
 GType gsd_wacom_key_shortcut_button_mode_type (void) G_GNUC_CONST;
-#define GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON_MODE (gsd_wacom_key_shortcut_button_mode_type())
+#define GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON_MODE (gsd_wacom_key_shortcut_button_mode_type ())
 
 typedef enum
 {
@@ -46,24 +38,6 @@ typedef enum
   GSD_WACOM_KEY_SHORTCUT_BUTTON_MODE_ALL
 } GsdWacomKeyShortcutButtonMode;
 
-struct _GsdWacomKeyShortcutButton
-{
-  GtkButton parent_instance;
-
-  /*< private >*/
-  GsdWacomKeyShortcutButtonPrivate *priv;
-};
-
-struct _GsdWacomKeyShortcutButtonClass
-{
-  GtkButtonClass parent_class;
-
-  void (* key_shortcut_edited)  (GsdWacomKeyShortcutButton *key_shortcut_button);
-
-  void (* key_shortcut_cleared) (GsdWacomKeyShortcutButton *key_shortcut_button);
-};
-
-GType          gsd_wacom_key_shortcut_button_get_type        (void) G_GNUC_CONST;
 GtkWidget    * gsd_wacom_key_shortcut_button_new             (void);
 
 #endif /* __GSD_WACOM_KEY_SHORTCUT_BUTTON_H__ */

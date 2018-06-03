@@ -29,7 +29,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_TABLET_TOOL_MAP (cc_tablet_tool_map_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcTabletToolMap, cc_tablet_tool_map, CC, TABLET_TOOL_MAP, GObject)
 
 CcTabletToolMap * cc_tablet_tool_map_new        (void);
