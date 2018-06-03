@@ -18,8 +18,7 @@
  *
  */
 
-#ifndef __CC_TABLET_TOOL_MAP_H__
-#define __CC_TABLET_TOOL_MAP_H__
+#pragma once
 
 #include "config.h"
 #include <gtk/gtk.h>
@@ -43,5 +42,3 @@ void              cc_tablet_tool_map_add_relation (CcTabletToolMap *map,
 						   CcWacomTool     *tool);
 
 G_END_DECLS
-
-#endif /* __CC_TABLET_TOOL_MAP_H__ */

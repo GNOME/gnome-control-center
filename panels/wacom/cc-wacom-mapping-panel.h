@@ -18,8 +18,7 @@
  *
  */
 
-#ifndef CC_WACOM_MAPPING_PANEL_H_
-#define CC_WACOM_MAPPING_PANEL_H_
+#pragma once
 
 #include <gtk/gtk.h>
 #include "cc-wacom-device.h"
@@ -35,5 +34,3 @@ void cc_wacom_mapping_panel_set_device (CcWacomMappingPanel *self,
                                         CcWacomDevice       *device);
 
 G_END_DECLS
-
-#endif /* CC_WACOM_MAPPING_PANEL_H_ */
