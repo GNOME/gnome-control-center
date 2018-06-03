@@ -29,21 +29,20 @@
 
 #include <string.h>
 
-#define WID(x) (GtkWidget *) gtk_builder_get_object (priv->builder, x)
-#define CWID(x) (GtkContainer *) gtk_builder_get_object (priv->builder, x)
+#define WID(x) (GtkWidget *) gtk_builder_get_object (page->builder, x)
+#define CWID(x) (GtkContainer *) gtk_builder_get_object (page->builder, x)
 
-G_DEFINE_TYPE (CcWacomStylusPage, cc_wacom_stylus_page, GTK_TYPE_BOX)
-
-#define WACOM_STYLUS_PAGE_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_WACOM_STYLUS_PAGE, CcWacomStylusPagePrivate))
-
-struct _CcWacomStylusPagePrivate
+struct _CcWacomStylusPage
 {
+	GtkBox          parent_instance;
+
 	CcWacomTool    *stylus;
 	GtkBuilder     *builder;
 	GtkWidget      *nav;
 	GSettings      *stylus_settings;
 };
+
+G_DEFINE_TYPE (CcWacomStylusPage, cc_wacom_stylus_page, GTK_TYPE_BOX)
 
 /* Button combo box storage columns */
 enum {
@@ -86,13 +85,15 @@ set_pressurecurve (GtkRange *range, GSettings *settings, const gchar *key)
 static void
 tip_feel_value_changed_cb (GtkRange *range, gpointer user_data)
 {
-	set_pressurecurve (range, CC_WACOM_STYLUS_PAGE(user_data)->priv->stylus_settings, "pressure-curve");
+	CcWacomStylusPage *page = CC_WACOM_STYLUS_PAGE(user_data);
+	set_pressurecurve (range, page->stylus_settings, "pressure-curve");
 }
 
 static void
 eraser_feel_value_changed_cb (GtkRange *range, gpointer user_data)
 {
-	set_pressurecurve (range, CC_WACOM_STYLUS_PAGE(user_data)->priv->stylus_settings, "eraser-pressure-curve");
+	CcWacomStylusPage *page = CC_WACOM_STYLUS_PAGE(user_data);
+	set_pressurecurve (range, page->stylus_settings, "eraser-pressure-curve");
 }
 
 static void
@@ -156,7 +157,7 @@ set_button_mapping_from_gsettings (GtkComboBox *combo, GSettings* settings, cons
 static void
 button_changed_cb (GtkComboBox *combo, gpointer user_data)
 {
-	CcWacomStylusPagePrivate	*priv = CC_WACOM_STYLUS_PAGE(user_data)->priv;
+	CcWacomStylusPage	*page = CC_WACOM_STYLUS_PAGE(user_data);
 	GtkTreeIter		iter;
 	GtkListStore		*liststore;
 	gint			mapping_b2,
@@ -171,7 +172,7 @@ button_changed_cb (GtkComboBox *combo, gpointer user_data)
 			    BUTTONNUMBER_COLUMN, &mapping_b2,
 			    -1);
 
-	if (cc_wacom_tool_get_num_buttons (priv->stylus) > 1) {
+	if (cc_wacom_tool_get_num_buttons (page->stylus) > 1) {
 		if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (WID ("combo-topbutton")), &iter))
 			return;
 
@@ -182,7 +183,7 @@ button_changed_cb (GtkComboBox *combo, gpointer user_data)
 		mapping_b3 = 0;
 	}
 
-	if (cc_wacom_tool_get_num_buttons (priv->stylus) > 2) {
+	if (cc_wacom_tool_get_num_buttons (page->stylus) > 2) {
 		if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (WID ("combo-thirdbutton")), &iter))
 			return;
 
@@ -193,9 +194,9 @@ button_changed_cb (GtkComboBox *combo, gpointer user_data)
 		mapping_b4 = 0;
 	}
 
-	g_settings_set_enum (priv->stylus_settings, "button-action", mapping_b2);
-	g_settings_set_enum (priv->stylus_settings, "secondary-button-action", mapping_b3);
-	g_settings_set_enum (priv->stylus_settings, "tertiary-button-action", mapping_b4);
+	g_settings_set_enum (page->stylus_settings, "button-action", mapping_b2);
+	g_settings_set_enum (page->stylus_settings, "secondary-button-action", mapping_b3);
+	g_settings_set_enum (page->stylus_settings, "tertiary-button-action", mapping_b4);
 }
 
 static void
@@ -240,11 +241,11 @@ cc_wacom_stylus_page_set_property (GObject      *object,
 static void
 cc_wacom_stylus_page_dispose (GObject *object)
 {
-	CcWacomStylusPagePrivate *priv = CC_WACOM_STYLUS_PAGE (object)->priv;
+	CcWacomStylusPage *page = CC_WACOM_STYLUS_PAGE (object);
 
-	if (priv->builder) {
-		g_object_unref (priv->builder);
-		priv->builder = NULL;
+	if (page->builder) {
+		g_object_unref (page->builder);
+		page->builder = NULL;
 	}
 
 
@@ -256,17 +257,14 @@ cc_wacom_stylus_page_class_init (CcWacomStylusPageClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	g_type_class_add_private (klass, sizeof (CcWacomStylusPagePrivate));
-
 	object_class->get_property = cc_wacom_stylus_page_get_property;
 	object_class->set_property = cc_wacom_stylus_page_set_property;
 	object_class->dispose = cc_wacom_stylus_page_dispose;
 }
 
 static void
-cc_wacom_stylus_page_init (CcWacomStylusPage *self)
+cc_wacom_stylus_page_init (CcWacomStylusPage *page)
 {
-	CcWacomStylusPagePrivate *priv;
 	GError *error = NULL;
 	GtkComboBox *combo;
 	GtkWidget *box;
@@ -278,50 +276,48 @@ cc_wacom_stylus_page_init (CcWacomStylusPage *self)
 		NULL
 	};
 
-	priv = self->priv = WACOM_STYLUS_PAGE_PRIVATE (self);
+	page->builder = gtk_builder_new ();
 
-	priv->builder = gtk_builder_new ();
-
-	gtk_builder_add_objects_from_resource (priv->builder,
+	gtk_builder_add_objects_from_resource (page->builder,
                                                "/org/gnome/control-center/wacom/wacom-stylus-page.ui",
                                                objects,
                                                &error);
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
-		g_object_unref (priv->builder);
+		g_object_unref (page->builder);
 		g_error_free (error);
 		return;
 	}
 
 	box = WID ("stylus-grid");
-	gtk_container_add (GTK_CONTAINER (self), box);
+	gtk_container_add (GTK_CONTAINER (page), box);
 	gtk_widget_set_vexpand (GTK_WIDGET (box), TRUE);
 
 	g_signal_connect (WID ("scale-tip-feel"), "value-changed",
-			  G_CALLBACK (tip_feel_value_changed_cb), self);
+			  G_CALLBACK (tip_feel_value_changed_cb), page);
 	g_signal_connect (WID ("scale-eraser-feel"), "value-changed",
-			  G_CALLBACK (eraser_feel_value_changed_cb), self);
+			  G_CALLBACK (eraser_feel_value_changed_cb), page);
 
 	combo = GTK_COMBO_BOX (WID ("combo-topbutton"));
 	combobox_text_cellrenderer (combo, BUTTONNAME_COLUMN);
 	g_signal_connect (G_OBJECT (combo), "changed",
-			  G_CALLBACK (button_changed_cb), self);
+			  G_CALLBACK (button_changed_cb), page);
 
 	combo = GTK_COMBO_BOX (WID ("combo-bottombutton"));
 	combobox_text_cellrenderer (combo, BUTTONNAME_COLUMN);
 	g_signal_connect (G_OBJECT (combo), "changed",
-			  G_CALLBACK (button_changed_cb), self);
+			  G_CALLBACK (button_changed_cb), page);
 
 	combo = GTK_COMBO_BOX (WID ("combo-thirdbutton"));
 	combobox_text_cellrenderer (combo, BUTTONNAME_COLUMN);
 	g_signal_connect (G_OBJECT (combo), "changed",
-			  G_CALLBACK (button_changed_cb), self);
+			  G_CALLBACK (button_changed_cb), page);
 
-	priv->nav = cc_wacom_nav_button_new ();
-        gtk_widget_set_halign (priv->nav, GTK_ALIGN_END);
-        gtk_widget_set_margin_start (priv->nav, 10);
-	gtk_widget_show (priv->nav);
-	gtk_container_add (CWID ("navigation-placeholder"), priv->nav);
+	page->nav = cc_wacom_nav_button_new ();
+        gtk_widget_set_halign (page->nav, GTK_ALIGN_END);
+        gtk_widget_set_margin_start (page->nav, 10);
+	gtk_widget_show (page->nav);
+	gtk_container_add (CWID ("navigation-placeholder"), page->nav);
 }
 
 static void
@@ -329,10 +325,7 @@ set_icon_name (CcWacomStylusPage *page,
 	       const char  *widget_name,
 	       const char  *icon_name)
 {
-	CcWacomStylusPagePrivate *priv;
 	char *resource;
-
-	priv = page->priv;
 
 	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
 	gtk_image_set_from_resource (GTK_IMAGE (WID (widget_name)), resource);
@@ -350,7 +343,7 @@ enum {
 };
 
 static void
-remove_buttons (CcWacomStylusPagePrivate *priv, int n)
+remove_buttons (CcWacomStylusPage *page, int n)
 {
 	if (n < 3) {
 		gtk_widget_destroy (WID ("combo-thirdbutton"));
@@ -368,7 +361,7 @@ remove_buttons (CcWacomStylusPagePrivate *priv, int n)
 }
 
 static void
-remove_eraser (CcWacomStylusPagePrivate *priv)
+remove_eraser (CcWacomStylusPage *page)
 {
 	gtk_widget_destroy (WID ("eraser-box"));
 	gtk_widget_destroy (WID ("label-eraser-feel"));
@@ -378,15 +371,13 @@ static void
 update_stylus_ui (CcWacomStylusPage *page,
 		  int                layout)
 {
-	CcWacomStylusPagePrivate *priv = page->priv;
-
 	switch (layout) {
 	case LAYOUT_NORMAL:
-		remove_buttons (page->priv, 2);
+		remove_buttons (page, 2);
 		break;
 	case LAYOUT_INKING:
-		remove_buttons (page->priv, 0);
-		remove_eraser (page->priv);
+		remove_buttons (page, 0);
+		remove_eraser (page);
 		gtk_container_child_set (CWID ("stylus-controls-grid"),
 					 WID ("label-tip-feel"),
 					 "top_attach", 0, NULL);
@@ -395,7 +386,7 @@ update_stylus_ui (CcWacomStylusPage *page,
 					 "top_attach", 0, NULL);
 		break;
 	case LAYOUT_AIRBRUSH:
-		remove_buttons (page->priv, 1);
+		remove_buttons (page, 1);
 		gtk_container_child_set (CWID ("stylus-controls-grid"),
 					 WID ("label-lower-button"),
 					 "top_attach", 1, NULL);
@@ -410,12 +401,12 @@ update_stylus_ui (CcWacomStylusPage *page,
 					 "top_attach", 2, NULL);
 		break;
 	case LAYOUT_GENERIC_2_BUTTONS_NO_ERASER:
-		remove_buttons (page->priv, 2);
-		remove_eraser (page->priv);
+		remove_buttons (page, 2);
+		remove_eraser (page);
 		break;
 	case LAYOUT_3DPEN:
-		remove_buttons (page->priv, 3);
-		remove_eraser (page->priv);
+		remove_buttons (page, 3);
+		remove_eraser (page);
 		break;
 	case LAYOUT_OTHER:
 		/* We already warn about it in cc_wacom_stylus_page_new () */
@@ -427,7 +418,6 @@ GtkWidget *
 cc_wacom_stylus_page_new (CcWacomTool *stylus)
 {
 	CcWacomStylusPage *page;
-	CcWacomStylusPagePrivate *priv;
 	guint num_buttons;
 	int layout;
 	gboolean has_eraser;
@@ -436,14 +426,13 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 
 	page = g_object_new (CC_TYPE_WACOM_STYLUS_PAGE, NULL);
 
-	priv = page->priv;
-	priv->stylus = stylus;
+	page->stylus = stylus;
 
 	/* Icon */
 	set_icon_name (page, "image-stylus", cc_wacom_tool_get_icon_name (stylus));
 
 	/* Settings */
-	priv->stylus_settings = cc_wacom_tool_get_settings (stylus);
+	page->stylus_settings = cc_wacom_tool_get_settings (stylus);
 	has_eraser = cc_wacom_tool_get_has_eraser (stylus);
 
 	/* Stylus name */
@@ -462,7 +451,7 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 		layout = LAYOUT_3DPEN;
 	else {
 		layout = LAYOUT_OTHER;
-		remove_buttons (priv, num_buttons);
+		remove_buttons (page, num_buttons);
 
 		/* Gray out eraser if not available */
 		gtk_widget_set_sensitive (WID ("eraser-box"), has_eraser);
@@ -476,19 +465,19 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 
 	if (num_buttons >= 3)
 		set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-thirdbutton")),
-						   priv->stylus_settings, "tertiary-button-action");
+						   page->stylus_settings, "tertiary-button-action");
 	if (num_buttons >= 2)
 		set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-topbutton")),
-						   priv->stylus_settings, "secondary-button-action");
+						   page->stylus_settings, "secondary-button-action");
 	if (num_buttons >= 1)
 		set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-bottombutton")),
-						   priv->stylus_settings, "button-action");
+						   page->stylus_settings, "button-action");
 	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-tip-feel")),
-				 priv->stylus_settings, "pressure-curve");
+				 page->stylus_settings, "pressure-curve");
 
 	if (has_eraser)
 		set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")),
-					 priv->stylus_settings, "eraser-pressure-curve");
+					 page->stylus_settings, "eraser-pressure-curve");
 
 	return GTK_WIDGET (page);
 }
@@ -496,20 +485,16 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 CcWacomTool *
 cc_wacom_stylus_page_get_tool (CcWacomStylusPage *page)
 {
-	return page->priv->stylus;
+	return page->stylus;
 }
 
 void
 cc_wacom_stylus_page_set_navigation (CcWacomStylusPage *page,
 				     GtkNotebook *notebook)
 {
-	CcWacomStylusPagePrivate *priv;
-
 	g_return_if_fail (CC_IS_WACOM_STYLUS_PAGE (page));
 
-	priv = page->priv;
-
-	g_object_set (G_OBJECT (priv->nav),
+	g_object_set (G_OBJECT (page->nav),
 		      "notebook", notebook,
 		      "ignore-first", TRUE,
 		      NULL);

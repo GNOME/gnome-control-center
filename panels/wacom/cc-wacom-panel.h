@@ -26,47 +26,10 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_WACOM_PANEL cc_wacom_panel_get_type()
-
-#define CC_WACOM_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_WACOM_PANEL, CcWacomPanel))
-
-#define CC_WACOM_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_WACOM_PANEL, CcWacomPanelClass))
-
-#define CC_IS_WACOM_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_WACOM_PANEL))
-
-#define CC_IS_WACOM_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_WACOM_PANEL))
-
-#define CC_WACOM_PANEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_WACOM_PANEL, CcWacomPanelClass))
-
-typedef struct _CcWacomPanel CcWacomPanel;
-typedef struct _CcWacomPanelClass CcWacomPanelClass;
-typedef struct _CcWacomPanelPrivate CcWacomPanelPrivate;
-
-struct _CcWacomPanel
-{
-  CcPanel parent;
-
-  CcWacomPanelPrivate *priv;
-};
-
-struct _CcWacomPanelClass
-{
-  CcPanelClass parent_class;
-};
+#define CC_TYPE_WACOM_PANEL (cc_wacom_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcWacomPanel, cc_wacom_panel, CC, WACOM_PANEL, CcPanel)
 
 void cc_wacom_panel_static_init_func (void);
-
-GType cc_wacom_panel_get_type (void) G_GNUC_CONST;
 
 void  cc_wacom_panel_switch_to_panel (CcWacomPanel *self,
 				      const char   *panel);
