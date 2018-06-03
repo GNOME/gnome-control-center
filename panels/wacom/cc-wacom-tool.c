@@ -109,8 +109,7 @@ cc_wacom_tool_finalize (GObject *object)
 {
 	CcWacomTool *tool = CC_WACOM_TOOL (object);
 
-	if (tool->settings)
-		g_object_unref (tool->settings);
+	g_clear_object (&tool->settings);
 
 	G_OBJECT_CLASS (cc_wacom_tool_parent_class)->finalize (object);
 }

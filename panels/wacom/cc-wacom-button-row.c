@@ -81,7 +81,7 @@ cc_wacom_button_row_update_shortcut (CcWacomButtonRow        *row,
 {
   guint                    keyval;
   GdkModifierType          mask;
-  char                    *shortcut;
+  g_autofree gchar        *shortcut = NULL;
 
   if (action_type != G_DESKTOP_PAD_BUTTON_ACTION_KEYBINDING)
     return;
@@ -96,8 +96,6 @@ cc_wacom_button_row_update_shortcut (CcWacomButtonRow        *row,
                     "key-value", keyval,
                     "key-mods", mask,
                     NULL);
-
-      g_free (shortcut);
     }
 }
 
@@ -156,7 +154,7 @@ static void
 on_key_shortcut_edited (GsdWacomKeyShortcutButton *shortcut_button,
                         CcWacomButtonRow    *row)
 {
-  char *custom_key;
+  g_autofree gchar *custom_key = NULL;
   guint keyval;
   GdkModifierType mask;
 
@@ -172,8 +170,6 @@ on_key_shortcut_edited (GsdWacomKeyShortcutButton *shortcut_button,
   custom_key = gtk_accelerator_name (keyval, mask);
 
   g_settings_set_string (row->settings, KEYBINDING_KEY, custom_key);
-
-  g_free (custom_key);
 }
 
 static void
@@ -238,7 +234,7 @@ cc_wacom_button_row_new (guint      button,
 {
   CcWacomButtonRow        *row;
   GtkWidget               *grid, *combo, *label, *shortcut_button;
-  char *name = NULL;
+  g_autofree gchar        *name = NULL;
 
   row = CC_WACOM_BUTTON_ROW (g_object_new (CC_WACOM_TYPE_BUTTON_ROW, NULL));
 
@@ -281,8 +277,6 @@ cc_wacom_button_row_new (guint      button,
   gtk_container_add (GTK_CONTAINER (row), grid);
 
   cc_wacom_button_row_update (CC_WACOM_BUTTON_ROW (row));
-
-  g_free (name);
 
   return GTK_WIDGET (row);
 }
