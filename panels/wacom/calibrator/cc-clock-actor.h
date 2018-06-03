@@ -25,31 +25,11 @@
 
 G_BEGIN_DECLS
 
-#define CC_CLOCK_ACTOR_TYPE            (cc_clock_actor_get_type ())
-#define CC_CLOCK_ACTOR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_CLOCK_ACTOR_TYPE, CcClockActor))
-#define CC_IS_CLOCK_ACTOR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CC_CLOCK_ACTOR_TYPE))
-#define CC_CLOCK_ACTOR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CC_CLOCK_ACTOR_TYPE, CcClockActorClass))
-#define CC_IS_CLOCK_ACTOR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), CC_CLOCK_ACTOR_TYPE))
-#define CC_CLOCK_ACTOR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), CC_CLOCK_ACTOR_TYPE, CcClockActorClass))
-
-typedef struct _CcClockActor      CcClockActor;
-typedef struct _CcClockActorClass CcClockActorClass;
-
-struct _CcClockActor
-{
-  ClutterActor parent_instance;
-
-  /*< private >*/
-  gfloat angle;
-};
-
-struct _CcClockActorClass
-{
-  ClutterActorClass parent_class;
-};
+#define CC_CLOCK_ACTOR_TYPE (cc_clock_actor_get_type ())
+G_DECLARE_FINAL_TYPE (CcClockActor, cc_clock_actor, CC, CLOCK_ACTOR, ClutterActor)
 
 ClutterActor * cc_clock_actor_new      (void);
 
-GType          cc_clock_actor_get_type (void);
+G_END_DECLS
 
 #endif /* __CC_CLOCK_ACTOR_H__ */
