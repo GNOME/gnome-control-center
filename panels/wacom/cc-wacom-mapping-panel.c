@@ -77,7 +77,7 @@ set_combobox_sensitive (CcWacomMappingPanel *self,
 static void
 update_monitor_chooser (CcWacomMappingPanel *self)
 {
-	GtkListStore *store;
+	g_autoptr(GtkListStore) store = NULL;
 	GnomeRROutput **outputs;
 	GSettings *settings;
 	GnomeRROutput *cur_output;
@@ -88,7 +88,6 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 
 	if (self->device == NULL) {
 		set_combobox_sensitive (self, FALSE);
-		g_object_unref (store);
 		return;
 	}
 
@@ -105,8 +104,8 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 	g_signal_handlers_unblock_by_func (G_OBJECT (self->aspectswitch), aspectswitch_toggled_cb, self);
 
 	if (!self->rr_screen) {
-		cur_output = NULL;
-		goto bail;
+		set_combobox_sensitive (self, FALSE);
+		return;
 	}
 
 	outputs = gnome_rr_screen_list_outputs (self->rr_screen);
@@ -119,7 +118,7 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 		if (crtc && gnome_rr_crtc_get_current_mode (crtc) != NULL) {
 			GtkTreeIter iter;
 			const gchar *name, *disp_name;
-			gchar *text;
+			g_autofree gchar *text = NULL;
 
 			name = gnome_rr_output_get_name (output);
 			disp_name = gnome_rr_output_get_display_name (output);
@@ -133,14 +132,10 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 				gtk_combo_box_set_active_iter (GTK_COMBO_BOX(self->combobox), &iter);
 				g_signal_handlers_unblock_by_func (G_OBJECT (self->combobox), combobox_changed_cb, self);
 			}
-
-			g_free (text);
 		}
 	}
 
-bail:
 	set_combobox_sensitive (self, cur_output != NULL);
-	g_object_unref (store);
 }
 
 static void
@@ -231,14 +226,12 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 {
 	GtkWidget *vbox, *grid;
 	GtkCellRenderer *renderer;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 
 	self->rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
 
-	if (error) {
+	if (error)
 		g_warning ("Could not get RR screen: %s", error->message);
-		g_error_free (error);
-	}
 
 	g_signal_connect_swapped (self->rr_screen, "changed",
 				  G_CALLBACK (update_monitor_chooser), self);
