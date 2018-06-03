@@ -18,8 +18,7 @@
  *
  */
 
-#ifndef __CC_WACOM_TOOL_H__
-#define __CC_WACOM_TOOL_H__
+#pragma once
 
 #include "config.h"
 #include "gsd-device-manager.h"
@@ -43,5 +42,3 @@ GSettings     * cc_wacom_tool_get_settings    (CcWacomTool   *tool);
 
 guint           cc_wacom_tool_get_num_buttons (CcWacomTool   *tool);
 gboolean        cc_wacom_tool_get_has_eraser  (CcWacomTool   *tool);
-
-#endif /* __CC_WACOM_TOOL_H__ */
