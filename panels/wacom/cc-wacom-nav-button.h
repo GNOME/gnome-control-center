@@ -25,45 +25,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_WACOM_NAV_BUTTON cc_wacom_nav_button_get_type()
-
-#define CC_WACOM_NAV_BUTTON(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_WACOM_NAV_BUTTON, CcWacomNavButton))
-
-#define CC_WACOM_NAV_BUTTON_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_WACOM_NAV_BUTTON, CcWacomNavButtonClass))
-
-#define CC_IS_WACOM_NAV_BUTTON(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_WACOM_NAV_BUTTON))
-
-#define CC_IS_WACOM_NAV_BUTTON_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_WACOM_NAV_BUTTON))
-
-#define CC_WACOM_NAV_BUTTON_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_WACOM_NAV_BUTTON, CcWacomNavButtonClass))
-
-typedef struct _CcWacomNavButton CcWacomNavButton;
-typedef struct _CcWacomNavButtonClass CcWacomNavButtonClass;
-typedef struct _CcWacomNavButtonPrivate CcWacomNavButtonPrivate;
-
-struct _CcWacomNavButton
-{
-  GtkBox parent;
-
-  CcWacomNavButtonPrivate *priv;
-};
-
-struct _CcWacomNavButtonClass
-{
-  GtkBoxClass parent_class;
-};
-
-GType cc_wacom_nav_button_get_type (void) G_GNUC_CONST;
+#define CC_TYPE_WACOM_NAV_BUTTON (cc_wacom_nav_button_get_type ())
+G_DECLARE_FINAL_TYPE (CcWacomNavButton, cc_wacom_nav_button, CC, WACOM_NAV_BUTTON, GtkBox)
 
 GtkWidget * cc_wacom_nav_button_new (void);
 

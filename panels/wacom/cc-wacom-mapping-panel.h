@@ -26,48 +26,10 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_WACOM_MAPPING_PANEL cc_wacom_mapping_panel_get_type()
-
-#define CC_WACOM_MAPPING_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_WACOM_MAPPING_PANEL, CcWacomMappingPanel))
-
-#define CC_WACOM_MAPPING_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_WACOM_MAPPING_PANEL, CcWacomMappignPanelClass))
-
-#define CC_IS_WACOM_MAPPING_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_WACOM_MAPPING_PANEL))
-
-#define CC_IS_WACOM_MAPPING_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_WACOM_MAPPING_PANEL))
-
-#define CC_WACOM_MAPPING_PANEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_WACOM_MAPPING_PANEL, CcWacomMappingPanelClass))
-
-typedef struct _CcWacomMappingPanel CcWacomMappingPanel;
-typedef struct _CcWacomMappingPanelClass CcWacomMappingPanelClass;
-typedef struct _CcWacomMappingPanelPrivate CcWacomMappingPanelPrivate;
-
-struct _CcWacomMappingPanel
-{
-  GtkBox parent;
-
-  CcWacomMappingPanelPrivate *priv;
-};
-
-struct _CcWacomMappingPanelClass
-{
-  GtkBoxClass parent_class;
-};
-
-GType cc_wacom_mapping_panel_get_type (void) G_GNUC_CONST;
+#define CC_TYPE_WACOM_MAPPING_PANEL (cc_wacom_mapping_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcWacomMappingPanel, cc_wacom_mapping_panel, CC, WACOM_MAPPING_PANEL, GtkBox)
 
 GtkWidget * cc_wacom_mapping_panel_new (void);
-
 
 void cc_wacom_mapping_panel_set_device (CcWacomMappingPanel *self,
                                         CcWacomDevice       *device);

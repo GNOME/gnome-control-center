@@ -38,10 +38,6 @@
 #define DEFAULT_CANCEL_KEY GDK_KEY_Escape
 #define DEFAULT_CLEAR_KEY  GDK_KEY_BackSpace
 
-#define GSD_WACOM_KEY_SHORTCUT_BUTTON_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON, GsdWacomKeyShortcutButtonPrivate))
-
-G_DEFINE_TYPE (GsdWacomKeyShortcutButton, gsd_wacom_key_shortcut_button, GTK_TYPE_BUTTON);
-
 enum {
   KEY_SHORTCUT_EDITED,
   KEY_SHORTCUT_CLEARED,
@@ -58,8 +54,10 @@ enum {
   N_PROPERTIES
 };
 
-struct _GsdWacomKeyShortcutButtonPrivate
+struct _GsdWacomKeyShortcutButton
 {
+  GtkButton parent_instance;
+
   gboolean editing_mode;
 
   GdkSeat *grab_seat;
@@ -80,6 +78,8 @@ struct _GsdWacomKeyShortcutButtonPrivate
   guint clear_keyval;
 };
 
+G_DEFINE_TYPE (GsdWacomKeyShortcutButton, gsd_wacom_key_shortcut_button, GTK_TYPE_BUTTON);
+
 static guint signals[LAST_SIGNAL] = { 0 };
 
 static GParamSpec *obj_properties[N_PROPERTIES] = { NULL, };
@@ -98,25 +98,25 @@ gsd_wacom_key_shortcut_button_set_property (GObject      *object,
   switch (property_id)
     {
     case PROP_SHORTCUT_KEY_VAL:
-      self->priv->keyval = g_value_get_uint (value);
+      self->keyval = g_value_get_uint (value);
       changed = TRUE;
       break;
 
     case PROP_SHORTCUT_KEY_MODS:
-      self->priv->mods = g_value_get_uint (value);
+      self->mods = g_value_get_uint (value);
       changed = TRUE;
       break;
 
     case PROP_SHORTCUT_MODE:
-      self->priv->mode = g_value_get_enum (value);
+      self->mode = g_value_get_enum (value);
       break;
 
     case PROP_SHORTCUT_CANCEL_KEY:
-      self->priv->cancel_keyval = g_value_get_uint (value);
+      self->cancel_keyval = g_value_get_uint (value);
       break;
 
     case PROP_SHORTCUT_CLEAR_KEY:
-      self->priv->clear_keyval = g_value_get_uint (value);
+      self->clear_keyval = g_value_get_uint (value);
       break;
 
     default:
@@ -139,23 +139,23 @@ gsd_wacom_key_shortcut_button_get_property (GObject      *object,
   switch (property_id)
     {
     case PROP_SHORTCUT_KEY_VAL:
-      g_value_set_uint (value, self->priv->keyval);
+      g_value_set_uint (value, self->keyval);
       break;
 
     case PROP_SHORTCUT_KEY_MODS:
-      g_value_set_uint (value, self->priv->mods);
+      g_value_set_uint (value, self->mods);
       break;
 
     case PROP_SHORTCUT_MODE:
-      g_value_set_enum (value, self->priv->mode);
+      g_value_set_enum (value, self->mode);
       break;
 
     case PROP_SHORTCUT_CANCEL_KEY:
-      g_value_set_uint (value, self->priv->cancel_keyval);
+      g_value_set_uint (value, self->cancel_keyval);
       break;
 
     case PROP_SHORTCUT_CLEAR_KEY:
-      g_value_set_uint (value, self->priv->clear_keyval);
+      g_value_set_uint (value, self->clear_keyval);
       break;
 
     default:
@@ -168,13 +168,10 @@ static void
 gsd_wacom_key_shortcut_set_editing_mode (GsdWacomKeyShortcutButton *self,
                                          GdkEvent                  *event)
 {
-  GsdWacomKeyShortcutButtonPrivate *priv;
   GdkWindow *window;
   GdkSeat *seat;
 
-  priv = GSD_WACOM_KEY_SHORTCUT_BUTTON (self)->priv;
-
-  priv->editing_mode = TRUE;
+  self->editing_mode = TRUE;
   gsd_wacom_key_shortcut_button_changed (self);
 
   window = gtk_widget_get_window (GTK_WIDGET (self));
@@ -189,27 +186,25 @@ gsd_wacom_key_shortcut_set_editing_mode (GsdWacomKeyShortcutButton *self,
 
   gtk_widget_grab_focus (GTK_WIDGET (self));
 
-  priv->grab_seat = seat;
+  self->grab_seat = seat;
 }
 
 static void
 gsd_wacom_key_shortcut_remove_editing_mode (GsdWacomKeyShortcutButton *self)
 {
-  GsdWacomKeyShortcutButtonPrivate *priv;
+  self->editing_mode = FALSE;
 
-  priv = GSD_WACOM_KEY_SHORTCUT_BUTTON (self)->priv;
+  self->editing_mode = FALSE;
 
-  priv->editing_mode = FALSE;
-
-  if (priv->grab_seat)
+  if (self->grab_seat)
     {
-      gdk_seat_ungrab (priv->grab_seat);
-      priv->grab_seat = NULL;
+      gdk_seat_ungrab (self->grab_seat);
+      self->grab_seat = NULL;
     }
 
-  priv->tmp_shortcut_keyval = 0;
-  priv->tmp_shortcut_mods = 0;
-  priv->tmp_shortcut_time = 0;
+  self->tmp_shortcut_keyval = 0;
+  self->tmp_shortcut_mods = 0;
+  self->tmp_shortcut_time = 0;
 }
 
 static void
@@ -217,7 +212,7 @@ gsd_wacom_key_shortcut_button_changed (GsdWacomKeyShortcutButton *self)
 {
   gchar *text;
 
-  if (self->priv->editing_mode)
+  if (self->editing_mode)
     {
       gtk_button_set_label (GTK_BUTTON (self), _("New shortcut…"));
 
@@ -228,13 +223,13 @@ gsd_wacom_key_shortcut_button_changed (GsdWacomKeyShortcutButton *self)
       return;
     }
 
-  if (self->priv->keyval == 0 && self->priv->mods == 0)
+  if (self->keyval == 0 && self->mods == 0)
     {
       gtk_button_set_label (GTK_BUTTON (self), "");
       return;
     }
 
-  text = gtk_accelerator_get_label (self->priv->keyval, self->priv->mods);
+  text = gtk_accelerator_get_label (self->keyval, self->mods);
   gtk_button_set_label (GTK_BUTTON (self), text);
   g_free (text);
 }
@@ -250,24 +245,20 @@ gsd_wacom_key_shortcut_button_activate (GtkButton *self)
 static void
 gsd_wacom_key_shortcut_button_init (GsdWacomKeyShortcutButton *self)
 {
-  self->priv = GSD_WACOM_KEY_SHORTCUT_BUTTON_GET_PRIVATE (self);
-
   gtk_button_set_relief (GTK_BUTTON (self), GTK_RELIEF_NONE);
 
-  self->priv->cancel_keyval = DEFAULT_CANCEL_KEY;
-  self->priv->clear_keyval = DEFAULT_CLEAR_KEY;
+  self->cancel_keyval = DEFAULT_CANCEL_KEY;
+  self->clear_keyval = DEFAULT_CLEAR_KEY;
 }
 
 static void
 key_shortcut_finished_editing (GsdWacomKeyShortcutButton *self,
                                guint32                    time)
 {
-  GsdWacomKeyShortcutButtonPrivate *priv = self->priv;
+  gdk_seat_ungrab (self->grab_seat);
+  self->grab_seat = NULL;
 
-  gdk_seat_ungrab (priv->grab_seat);
-  priv->grab_seat = NULL;
-
-  priv->editing_mode = FALSE;
+  self->editing_mode = FALSE;
 
   gsd_wacom_key_shortcut_remove_editing_mode (self);
 
@@ -279,19 +270,18 @@ gsd_wacom_key_shortcut_button_key_release (GtkWidget            *widget,
                                            GdkEventKey          *event)
 {
   GsdWacomKeyShortcutButton *self = GSD_WACOM_KEY_SHORTCUT_BUTTON (widget);
-  GsdWacomKeyShortcutButtonPrivate *priv = self->priv;
 
-  if (priv->tmp_shortcut_keyval == 0)
+  if (self->tmp_shortcut_keyval == 0)
     {
       GTK_WIDGET_CLASS (gsd_wacom_key_shortcut_button_parent_class)->key_release_event (widget, event);
 
       return FALSE;
     }
 
-  priv->keyval = priv->tmp_shortcut_keyval;
-  priv->mods = priv->tmp_shortcut_mods;
+  self->keyval = self->tmp_shortcut_keyval;
+  self->mods = self->tmp_shortcut_mods;
 
-  key_shortcut_finished_editing (self, priv->tmp_shortcut_time);
+  key_shortcut_finished_editing (self, self->tmp_shortcut_time);
 
   g_signal_emit (self, signals[KEY_SHORTCUT_EDITED], 0);
 
@@ -303,22 +293,18 @@ gsd_wacom_key_shortcut_button_key_press (GtkWidget   *widget,
                                          GdkEventKey *event)
 {
   /* This code is based on the gtk_cell_renderer_accel_start_editing */
-  GsdWacomKeyShortcutButton *self;
-  GsdWacomKeyShortcutButtonPrivate *priv;
+  GsdWacomKeyShortcutButton *self = GSD_WACOM_KEY_SHORTCUT_BUTTON (widget);
   GdkModifierType mods = 0;
   guint shortcut_keyval;
   guint keyval;
   gboolean edited;
   gboolean cleared;
 
-  self = GSD_WACOM_KEY_SHORTCUT_BUTTON (widget);
-  priv = self->priv;
-
   /* GTK and OTHER modes don't allow modifier keyvals */
-  if (event->is_modifier && priv->mode != GSD_WACOM_KEY_SHORTCUT_BUTTON_MODE_ALL)
+  if (event->is_modifier && self->mode != GSD_WACOM_KEY_SHORTCUT_BUTTON_MODE_ALL)
     return TRUE;
 
-  if (!priv->editing_mode)
+  if (!self->editing_mode)
     {
       GTK_WIDGET_CLASS (gsd_wacom_key_shortcut_button_parent_class)->key_press_event (widget, event);
 
@@ -354,12 +340,12 @@ gsd_wacom_key_shortcut_button_key_press (GtkWidget   *widget,
 
   if (mods == 0)
     {
-      if (keyval == priv->cancel_keyval)
+      if (keyval == self->cancel_keyval)
         {
           /* cancel the edition */
           goto out;
         }
-      else if (keyval == priv->clear_keyval)
+      else if (keyval == self->clear_keyval)
         {
 	  /* clear the current shortcut */
 	  cleared = TRUE;
@@ -367,9 +353,9 @@ gsd_wacom_key_shortcut_button_key_press (GtkWidget   *widget,
 	}
     }
 
-  priv->tmp_shortcut_keyval = 0;
-  priv->tmp_shortcut_mods = 0;
-  priv->tmp_shortcut_time = 0;
+  self->tmp_shortcut_keyval = 0;
+  self->tmp_shortcut_mods = 0;
+  self->tmp_shortcut_time = 0;
 
   if (event->is_modifier)
     {
@@ -379,9 +365,9 @@ gsd_wacom_key_shortcut_button_key_press (GtkWidget   *widget,
        * key because the user might assign e.g. Alt, Alt+Ctrl, Alt+Ctrl+Shift, etc.
        * So, we keep track of the pressed shortcut's (keyval, mods and time) if
        * it is a modifier shortcut and assign them when a key-release happens */
-      priv->tmp_shortcut_keyval = shortcut_keyval;
-      priv->tmp_shortcut_mods = mods;
-      priv->tmp_shortcut_time = event->time;
+      self->tmp_shortcut_keyval = shortcut_keyval;
+      self->tmp_shortcut_mods = mods;
+      self->tmp_shortcut_time = event->time;
 
       return TRUE;
     }
@@ -392,14 +378,14 @@ gsd_wacom_key_shortcut_button_key_press (GtkWidget   *widget,
 
   if (edited)
     {
-      priv->keyval = shortcut_keyval;
-      priv->mods = mods;
+      self->keyval = shortcut_keyval;
+      self->mods = mods;
     }
 
   if (cleared)
     {
-      priv->keyval = 0;
-      priv->mods = 0;
+      self->keyval = 0;
+      self->mods = 0;
     }
 
   key_shortcut_finished_editing (GSD_WACOM_KEY_SHORTCUT_BUTTON (widget), event->time);
@@ -420,7 +406,7 @@ gsd_wacom_key_shortcut_button_button_press (GtkWidget      *widget,
 
   self = GSD_WACOM_KEY_SHORTCUT_BUTTON (widget);
 
-  if (self->priv->editing_mode)
+  if (self->editing_mode)
     return TRUE;
 
   gsd_wacom_key_shortcut_set_editing_mode (self, NULL);
@@ -533,8 +519,7 @@ gsd_wacom_key_shortcut_button_class_init (GsdWacomKeyShortcutButtonClass *klass)
   signals[KEY_SHORTCUT_EDITED] = g_signal_new ("key-shortcut-edited",
                                                GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON,
                                                G_SIGNAL_RUN_LAST,
-                                               G_STRUCT_OFFSET (GsdWacomKeyShortcutButtonClass,
-                                                                key_shortcut_edited),
+                                               0,
                                                NULL, NULL,
                                                g_cclosure_marshal_VOID__VOID,
                                                G_TYPE_NONE, 0);
@@ -548,13 +533,10 @@ gsd_wacom_key_shortcut_button_class_init (GsdWacomKeyShortcutButtonClass *klass)
   signals[KEY_SHORTCUT_CLEARED] = g_signal_new ("key-shortcut-cleared",
                                                 GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON,
                                                 G_SIGNAL_RUN_LAST,
-                                                G_STRUCT_OFFSET (GsdWacomKeyShortcutButtonClass,
-                                                                 key_shortcut_cleared),
+                                                0,
                                                 NULL, NULL,
                                                 g_cclosure_marshal_VOID__VOID,
                                                 G_TYPE_NONE, 0);
-
-  g_type_class_add_private (klass, sizeof (GsdWacomKeyShortcutButtonPrivate));
 }
 
 /**

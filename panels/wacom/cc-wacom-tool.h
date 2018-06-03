@@ -27,7 +27,6 @@
 #include <glib.h>
 
 #define CC_TYPE_WACOM_TOOL (cc_wacom_tool_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcWacomTool, cc_wacom_tool, CC, WACOM_TOOL, GObject)
 
 CcWacomTool   * cc_wacom_tool_new             (guint64        serial,
