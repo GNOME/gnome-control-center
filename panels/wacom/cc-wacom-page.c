@@ -47,14 +47,9 @@
 
 #include <string.h>
 
-#define WID(x) (GtkWidget *) gtk_builder_get_object (priv->builder, x)
-#define CWID(x) (GtkContainer *) gtk_builder_get_object (priv->builder, x)
-#define MWID(x) (GtkWidget *) gtk_builder_get_object (priv->mapping_builder, x)
-
-G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
-
-#define WACOM_PAGE_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_WACOM_PAGE, CcWacomPagePrivate))
+#define WID(x) (GtkWidget *) gtk_builder_get_object (page->builder, x)
+#define CWID(x) (GtkContainer *) gtk_builder_get_object (page->builder, x)
+#define MWID(x) (GtkWidget *) gtk_builder_get_object (page->mapping_builder, x)
 
 #define THRESHOLD_MISCLICK	15
 #define THRESHOLD_DOUBLECLICK	7
@@ -67,8 +62,10 @@ enum {
 	MAPPING_N_COLUMNS
 };
 
-struct _CcWacomPagePrivate
+struct _CcWacomPage
 {
+	GtkBox          parent_instance;
+
 	CcWacomPanel   *panel;
 	CcWacomDevice  *stylus;
 	CcWacomDevice  *pad;
@@ -91,6 +88,8 @@ struct _CcWacomPagePrivate
 
 	GCancellable   *cancellable;
 };
+
+G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 
 /* Button combo box storage columns */
 enum {
@@ -179,7 +178,6 @@ finish_calibration (CalibArea *area,
 		    gpointer   user_data)
 {
 	CcWacomPage *page = (CcWacomPage *) user_data;
-	CcWacomPagePrivate *priv = page->priv;
 	XYinfo axis;
 	gdouble cal[4];
 	gint display_width, display_height;
@@ -193,21 +191,21 @@ finish_calibration (CalibArea *area,
 
 		calib_area_get_display_size (area, &display_width, &display_height);
 
-		set_calibration (page->priv->stylus,
+		set_calibration (page->stylus,
 				 display_width,
 				 display_height,
-				 cal, 4, priv->wacom_settings);
+				 cal, 4, page->wacom_settings);
 	} else {
 		/* Reset the old values */
 		GVariant *old_calibration;
 
 		old_calibration = g_object_get_data (G_OBJECT (page), "old-calibration");
-		g_settings_set_value (page->priv->wacom_settings, "area", old_calibration);
+		g_settings_set_value (page->wacom_settings, "area", old_calibration);
 		g_object_set_data (G_OBJECT (page), "old-calibration", NULL);
 	}
 
 	calib_area_free (area);
-	priv->area = NULL;
+	page->area = NULL;
 	gtk_widget_set_sensitive (WID ("button-calibrate"), TRUE);
 }
 
@@ -220,7 +218,7 @@ cc_wacom_page_get_gdk_device (CcWacomPage *page)
 	GdkSeat *seat;
 	GList *slaves, *l;
 
-	gsd_device = cc_wacom_device_get_device (page->priv->stylus);
+	gsd_device = cc_wacom_device_get_device (page->stylus);
 	g_return_val_if_fail (GSD_IS_DEVICE (gsd_device), NULL);
 
 	display = gtk_widget_get_display (GTK_WIDGET (page));
@@ -260,12 +258,9 @@ run_calibration (CcWacomPage *page,
 		 GdkMonitor  *monitor)
 {
 	GdkDisplay *display = gdk_monitor_get_display (monitor);
-	CcWacomPagePrivate *priv;
 	gint i, n_monitor = 0;
 
-	g_assert (page->priv->area == NULL);
-
-	priv = page->priv;
+	g_assert (page->area == NULL);
 
 	for (i = 0; i < gdk_display_get_n_monitors (display); i++) {
 		if (monitor == gdk_display_get_monitor (display, i)) {
@@ -274,7 +269,7 @@ run_calibration (CcWacomPage *page,
 		}
 	}
 
-	priv->area = calib_area_new (NULL,
+	page->area = calib_area_new (NULL,
 				     n_monitor,
 				     cc_wacom_page_get_gdk_device (page),
 				     finish_calibration,
@@ -293,7 +288,6 @@ run_calibration (CcWacomPage *page,
 static void
 calibrate (CcWacomPage *page)
 {
-	CcWacomPagePrivate *priv;
 	int i;
 	GVariant *old_calibration, **tmp, *array;
 	gdouble *calibration;
@@ -305,8 +299,6 @@ calibrate (CcWacomPage *page)
 	GError *error = NULL;
 	gint x, y;
 
-	priv = page->priv;
-
 	screen = gdk_screen_get_default ();
 	rr_screen = gnome_rr_screen_new (screen, &error);
 	if (error) {
@@ -315,7 +307,7 @@ calibrate (CcWacomPage *page)
 		return;
 	}
 
-	output = cc_wacom_device_get_output (page->priv->stylus, rr_screen);
+	output = cc_wacom_device_get_output (page->stylus, rr_screen);
 	gnome_rr_output_get_position (output, &x, &y);
 	monitor = gdk_display_get_monitor_at_point (gdk_screen_get_display (screen), x, y);
 
@@ -327,7 +319,7 @@ calibrate (CcWacomPage *page)
 		return;
 	}
 
-	old_calibration = g_settings_get_value (page->priv->wacom_settings, "area");
+	old_calibration = g_settings_get_value (page->wacom_settings, "area");
 	g_variant_get_fixed_array (old_calibration, &ncal, sizeof (gdouble));
 
 	if (ncal != 4) {
@@ -346,7 +338,7 @@ calibrate (CcWacomPage *page)
 	}
 
 	array = g_variant_new_array (G_VARIANT_TYPE_DOUBLE, tmp, ncal);
-	g_settings_set_value (page->priv->wacom_settings, "area", array);
+	g_settings_set_value (page->wacom_settings, "area", array);
 	g_free (tmp);
 
 	run_calibration (page, old_calibration, calibration, monitor);
@@ -389,17 +381,16 @@ create_row_from_button (GtkWidget *list_box,
 static void
 setup_button_mapping (CcWacomPage *page)
 {
-	CcWacomPagePrivate *priv = page->priv;
 	GDesktopPadButtonAction action;
 	GtkWidget *list_box;
 	guint i, n_buttons;
 	GSettings *settings;
 
 	list_box = MWID ("shortcuts_list");
-	n_buttons = cc_wacom_device_get_num_buttons (priv->pad);
+	n_buttons = cc_wacom_device_get_num_buttons (page->pad);
 
 	for (i = 0; i < n_buttons; i++) {
-		settings = cc_wacom_device_get_button_settings (priv->pad, i);
+		settings = cc_wacom_device_get_button_settings (page->pad, i);
 		if (!settings)
 			continue;
 
@@ -416,12 +407,9 @@ button_mapping_dialog_closed (GtkDialog   *dialog,
 			      int          response_id,
 			      CcWacomPage *page)
 {
-	CcWacomPagePrivate *priv;
-
-	priv = page->priv;
 	gtk_widget_destroy (MWID ("button-mapping-dialog"));
-	g_object_unref (priv->mapping_builder);
-	priv->mapping_builder = NULL;
+	g_object_unref (page->mapping_builder);
+	page->mapping_builder = NULL;
 }
 
 static void
@@ -430,20 +418,17 @@ show_button_mapping_dialog (CcWacomPage *page)
 	GtkWidget          *toplevel;
 	GError             *error = NULL;
 	GtkWidget          *dialog;
-	CcWacomPagePrivate *priv;
 
-	priv = page->priv;
-
-	g_assert (priv->mapping_builder == NULL);
-	priv->mapping_builder = gtk_builder_new ();
-	gtk_builder_add_from_resource (priv->mapping_builder,
+	g_assert (page->mapping_builder == NULL);
+	page->mapping_builder = gtk_builder_new ();
+	gtk_builder_add_from_resource (page->mapping_builder,
                                        "/org/gnome/control-center/wacom/button-mapping.ui",
                                        &error);
 
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
-		g_object_unref (priv->mapping_builder);
-		priv->mapping_builder = NULL;
+		g_object_unref (page->mapping_builder);
+		page->mapping_builder = NULL;
 		g_error_free (error);
 		return;
 	}
@@ -459,8 +444,8 @@ show_button_mapping_dialog (CcWacomPage *page)
 
 	gtk_widget_show (dialog);
 
-	priv->button_map = dialog;
-	g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer *) &priv->button_map);
+	page->button_map = dialog;
+	g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer *) &page->button_map);
 }
 
 static void
@@ -491,14 +476,12 @@ set_osd_visibility_cb (GObject      *source_object,
 static void
 set_osd_visibility (CcWacomPage *page)
 {
-	CcWacomPagePrivate *priv;
 	GDBusProxy         *proxy;
 	GsdDevice          *gsd_device;
 	const gchar        *device_path;
 
-	priv = page->priv;
-	proxy = cc_wacom_panel_get_gsd_wacom_bus_proxy (priv->panel);
-	gsd_device = cc_wacom_device_get_device (priv->pad);
+	proxy = cc_wacom_panel_get_gsd_wacom_bus_proxy (page->panel);
+	gsd_device = cc_wacom_device_get_device (page->pad);
 
 	device_path = gsd_device_get_device_file (gsd_device);
 
@@ -512,7 +495,7 @@ set_osd_visibility (CcWacomPage *page)
 			   g_variant_new ("(ob)", device_path, TRUE),
 			   G_DBUS_CALL_FLAGS_NONE,
 			   -1,
-			   priv->cancellable,
+			   page->cancellable,
 			   set_osd_visibility_cb,
 			   page);
 }
@@ -529,14 +512,12 @@ display_mapping_dialog_closed (GtkDialog   *dialog,
 			       int          response_id,
 			       CcWacomPage *page)
 {
-	CcWacomPagePrivate *priv;
 	int layout;
 
-	priv = page->priv;
-	gtk_widget_destroy (priv->dialog);
-	priv->dialog = NULL;
-	priv->mapping = NULL;
-	layout = get_layout_type (priv->stylus);
+	gtk_widget_destroy (page->dialog);
+	page->dialog = NULL;
+	page->mapping = NULL;
+	layout = get_layout_type (page->stylus);
 	update_tablet_ui (page, layout);
 }
 
@@ -544,34 +525,30 @@ static void
 display_mapping_button_clicked_cb (GtkButton   *button,
 				   CcWacomPage *page)
 {
-	CcWacomPagePrivate *priv;
+	g_assert (page->mapping == NULL);
 
-	priv = page->priv;
-
-	g_assert (priv->mapping == NULL);
-
-	priv->dialog = gtk_dialog_new_with_buttons (_("Display Mapping"),
+	page->dialog = gtk_dialog_new_with_buttons (_("Display Mapping"),
 						    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))),
 						    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 						    _("_Close"),
 						    GTK_RESPONSE_ACCEPT,
 						    NULL);
-	priv->mapping = cc_wacom_mapping_panel_new ();
-	cc_wacom_mapping_panel_set_device (CC_WACOM_MAPPING_PANEL (priv->mapping),
-					   priv->stylus);
-	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (priv->dialog))),
-			   priv->mapping);
-	g_signal_connect (G_OBJECT (priv->dialog), "response",
+	page->mapping = cc_wacom_mapping_panel_new ();
+	cc_wacom_mapping_panel_set_device (CC_WACOM_MAPPING_PANEL (page->mapping),
+					   page->stylus);
+	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (page->dialog))),
+			   page->mapping);
+	g_signal_connect (G_OBJECT (page->dialog), "response",
 			  G_CALLBACK (display_mapping_dialog_closed), page);
-	gtk_widget_show_all (priv->dialog);
+	gtk_widget_show_all (page->dialog);
 
-	g_object_add_weak_pointer (G_OBJECT (priv->mapping), (gpointer *) &priv->dialog);
+	g_object_add_weak_pointer (G_OBJECT (page->mapping), (gpointer *) &page->dialog);
 }
 
 static void
 tabletmode_changed_cb (GtkComboBox *combo, gpointer user_data)
 {
-	CcWacomPagePrivate *priv = CC_WACOM_PAGE (user_data)->priv;
+	CcWacomPage *page = CC_WACOM_PAGE (user_data);
 	GtkListStore *liststore;
 	GtkTreeIter iter;
 	gint mode;
@@ -584,26 +561,25 @@ tabletmode_changed_cb (GtkComboBox *combo, gpointer user_data)
 			    MODENUMBER_COLUMN, &mode,
 			    -1);
 
-	g_settings_set_enum (priv->wacom_settings, "mapping", mode);
+	g_settings_set_enum (page->wacom_settings, "mapping", mode);
 }
 
 static void
 left_handed_toggled_cb (GtkSwitch *sw, GParamSpec *pspec, gpointer *user_data)
 {
-	CcWacomPagePrivate *priv = CC_WACOM_PAGE (user_data)->priv;
+	CcWacomPage *page = CC_WACOM_PAGE (user_data);
 	gboolean left_handed;
 
 	left_handed = gtk_switch_get_active (sw);
-	g_settings_set_boolean (priv->wacom_settings, "left-handed", left_handed);
+	g_settings_set_boolean (page->wacom_settings, "left-handed", left_handed);
 }
 
 static void
 set_left_handed_from_gsettings (CcWacomPage *page)
 {
-	CcWacomPagePrivate *priv = CC_WACOM_PAGE (page)->priv;
 	gboolean left_handed;
 
-	left_handed = g_settings_get_boolean (priv->wacom_settings, "left-handed");
+	left_handed = g_settings_get_boolean (page->wacom_settings, "left-handed");
 	gtk_switch_set_active (GTK_SWITCH (WID ("switch-left-handed")), left_handed);
 }
 
@@ -611,10 +587,9 @@ static void
 set_mode_from_gsettings (GtkComboBox *combo,
 			 CcWacomPage *page)
 {
-	CcWacomPagePrivate *priv = page->priv;
 	GDesktopTabletMapping mapping;
 
-	mapping = g_settings_get_enum (priv->wacom_settings, "mapping");
+	mapping = g_settings_get_enum (page->wacom_settings, "mapping");
 
 	/* this must be kept in sync with the .ui file */
 	gtk_combo_box_set_active (combo, mapping);
@@ -635,7 +610,7 @@ static gboolean
 display_clicked_cb (GtkButton   *button,
 		    CcWacomPage *page)
 {
-	cc_wacom_panel_switch_to_panel (page->priv->panel, "display");
+	cc_wacom_panel_switch_to_panel (page->panel, "display");
 	return TRUE;
 }
 
@@ -643,7 +618,7 @@ static gboolean
 mouse_clicked_cb (GtkButton   *button,
 		  CcWacomPage *page)
 {
-	cc_wacom_panel_switch_to_panel (page->priv->panel, "mouse");
+	cc_wacom_panel_switch_to_panel (page->panel, "mouse");
 	return TRUE;
 }
 
@@ -678,40 +653,40 @@ cc_wacom_page_set_property (GObject      *object,
 static void
 cc_wacom_page_dispose (GObject *object)
 {
-	CcWacomPagePrivate *priv = CC_WACOM_PAGE (object)->priv;
+	CcWacomPage *self = CC_WACOM_PAGE (object);
 
-	if (priv->cancellable) {
-		g_cancellable_cancel (priv->cancellable);
-		g_clear_object (&priv->cancellable);
+	if (self->cancellable) {
+		g_cancellable_cancel (self->cancellable);
+		g_clear_object (&self->cancellable);
 	}
 
-	if (priv->area) {
-		calib_area_free (priv->area);
-		priv->area = NULL;
+	if (self->area) {
+		calib_area_free (self->area);
+		self->area = NULL;
 	}
 
-	if (priv->button_map) {
-		gtk_widget_destroy (priv->button_map);
-		priv->button_map = NULL;
+	if (self->button_map) {
+		gtk_widget_destroy (self->button_map);
+		self->button_map = NULL;
 	}
 
-	if (priv->dialog) {
-		gtk_widget_destroy (priv->dialog);
-		priv->dialog = NULL;
+	if (self->dialog) {
+		gtk_widget_destroy (self->dialog);
+		self->dialog = NULL;
 	}
 
-	if (priv->builder) {
-		g_object_unref (priv->builder);
-		priv->builder = NULL;
+	if (self->builder) {
+		g_object_unref (self->builder);
+		self->builder = NULL;
 	}
 
-	if (priv->header_group) {
-		g_object_unref (priv->header_group);
-		priv->header_group = NULL;
+	if (self->header_group) {
+		g_object_unref (self->header_group);
+		self->header_group = NULL;
 	}
 
 
-	priv->panel = NULL;
+	self->panel = NULL;
 
 	G_OBJECT_CLASS (cc_wacom_page_parent_class)->dispose (object);
 }
@@ -721,17 +696,14 @@ cc_wacom_page_class_init (CcWacomPageClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	g_type_class_add_private (klass, sizeof (CcWacomPagePrivate));
-
 	object_class->get_property = cc_wacom_page_get_property;
 	object_class->set_property = cc_wacom_page_set_property;
 	object_class->dispose = cc_wacom_page_dispose;
 }
 
 static void
-cc_wacom_page_init (CcWacomPage *self)
+cc_wacom_page_init (CcWacomPage *page)
 {
-	CcWacomPagePrivate *priv;
 	GError *error = NULL;
 	GtkComboBox *combo;
 	GtkWidget *box;
@@ -745,55 +717,53 @@ cc_wacom_page_init (CcWacomPage *self)
 		NULL
 	};
 
-	priv = self->priv = WACOM_PAGE_PRIVATE (self);
+	page->builder = gtk_builder_new ();
 
-	priv->builder = gtk_builder_new ();
-
-	gtk_builder_add_objects_from_resource (priv->builder,
+	gtk_builder_add_objects_from_resource (page->builder,
                                                "/org/gnome/control-center/wacom/gnome-wacom-properties.ui",
                                                objects,
                                                &error);
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
-		g_object_unref (priv->builder);
+		g_object_unref (page->builder);
 		g_error_free (error);
 		return;
 	}
 
 	box = WID ("main-grid");
-	gtk_container_add (GTK_CONTAINER (self), box);
+	gtk_container_add (GTK_CONTAINER (page), box);
 	gtk_widget_set_vexpand (GTK_WIDGET (box), TRUE);
 
 	g_signal_connect (WID ("button-calibrate"), "clicked",
-			  G_CALLBACK (calibrate_button_clicked_cb), self);
+			  G_CALLBACK (calibrate_button_clicked_cb), page);
 	g_signal_connect (WID ("map-buttons-button"), "clicked",
-			  G_CALLBACK (map_buttons_button_clicked_cb), self);
+			  G_CALLBACK (map_buttons_button_clicked_cb), page);
 
 	combo = GTK_COMBO_BOX (WID ("combo-tabletmode"));
 	combobox_text_cellrenderer (combo, MODELABEL_COLUMN);
 	g_signal_connect (G_OBJECT (combo), "changed",
-			  G_CALLBACK (tabletmode_changed_cb), self);
+			  G_CALLBACK (tabletmode_changed_cb), page);
 
 	sw = GTK_SWITCH (WID ("switch-left-handed"));
 	g_signal_connect (G_OBJECT (sw), "notify::active",
-			  G_CALLBACK (left_handed_toggled_cb), self);
+			  G_CALLBACK (left_handed_toggled_cb), page);
 
 	g_signal_connect (G_OBJECT (WID ("display-link")), "activate-link",
-			  G_CALLBACK (display_clicked_cb), self);
+			  G_CALLBACK (display_clicked_cb), page);
 
 	g_signal_connect (G_OBJECT (WID ("mouse-link")), "activate-link",
-			  G_CALLBACK (mouse_clicked_cb), self);
+			  G_CALLBACK (mouse_clicked_cb), page);
 
 	g_signal_connect (G_OBJECT (WID ("display-mapping-button")), "clicked",
-			  G_CALLBACK (display_mapping_button_clicked_cb), self);
+			  G_CALLBACK (display_mapping_button_clicked_cb), page);
 
-	priv->nav = cc_wacom_nav_button_new ();
-        gtk_widget_set_halign (priv->nav, GTK_ALIGN_END);
-        gtk_widget_set_margin_start (priv->nav, 10);
-	gtk_widget_show (priv->nav);
-	gtk_container_add (CWID ("navigation-placeholder"), priv->nav);
+	page->nav = cc_wacom_nav_button_new ();
+        gtk_widget_set_halign (page->nav, GTK_ALIGN_END);
+        gtk_widget_set_margin_start (page->nav, 10);
+	gtk_widget_show (page->nav);
+	gtk_container_add (CWID ("navigation-placeholder"), page->nav);
 
-	priv->cancellable = g_cancellable_new ();
+	page->cancellable = g_cancellable_new ();
 }
 
 static void
@@ -801,10 +771,7 @@ set_icon_name (CcWacomPage *page,
 	       const char  *widget_name,
 	       const char  *icon_name)
 {
-	CcWacomPagePrivate *priv;
 	char *resource;
-
-	priv = page->priv;
 
 	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
 	gtk_image_set_from_resource (GTK_IMAGE (WID (widget_name)), resource);
@@ -812,14 +779,14 @@ set_icon_name (CcWacomPage *page,
 }
 
 static void
-remove_left_handed (CcWacomPagePrivate *priv)
+remove_left_handed (CcWacomPage *page)
 {
 	gtk_widget_destroy (WID ("label-left-handed"));
 	gtk_widget_destroy (WID ("switch-left-handed"));
 }
 
 static void
-remove_display_link (CcWacomPagePrivate *priv)
+remove_display_link (CcWacomPage *page)
 {
 	gtk_widget_destroy (WID ("display-link"));
 
@@ -829,7 +796,7 @@ remove_display_link (CcWacomPagePrivate *priv)
 }
 
 static void
-remove_mouse_link (CcWacomPagePrivate *priv)
+remove_mouse_link (CcWacomPage *page)
 {
         gtk_widget_destroy (WID ("mouse-link"));
 
@@ -842,10 +809,8 @@ static gboolean
 has_monitor (CcWacomPage *page)
 {
 	WacomIntegrationFlags integration_flags;
-	CcWacomPagePrivate *priv;
 
-	priv = page->priv;
-	integration_flags = cc_wacom_device_get_integration_flags (priv->stylus);
+	integration_flags = cc_wacom_device_get_integration_flags (page->stylus);
 
 	return ((integration_flags &
 		 (WACOM_DEVICE_INTEGRATED_DISPLAY | WACOM_DEVICE_INTEGRATED_SYSTEM)) != 0);
@@ -856,31 +821,28 @@ update_tablet_ui (CcWacomPage *page,
 		  int          layout)
 {
 	WacomIntegrationFlags integration_flags;
-	CcWacomPagePrivate *priv;
 
-	priv = page->priv;
-
-	integration_flags = cc_wacom_device_get_integration_flags (priv->stylus);
+	integration_flags = cc_wacom_device_get_integration_flags (page->stylus);
 
 	if ((integration_flags &
 	     (WACOM_DEVICE_INTEGRATED_DISPLAY | WACOM_DEVICE_INTEGRATED_SYSTEM)) != 0) {
 		/* FIXME: Check we've got a puck, or a corresponding touchpad device */
-		remove_mouse_link (priv);
+		remove_mouse_link (page);
 	}
 
 	/* Hide the pad buttons if no pad is present */
-	gtk_widget_set_visible (WID ("map-buttons-button"), priv->pad != NULL);
+	gtk_widget_set_visible (WID ("map-buttons-button"), page->pad != NULL);
 
 	switch (layout) {
 	case LAYOUT_NORMAL:
-		remove_left_handed (priv);
-		remove_display_link (priv);
+		remove_left_handed (page);
+		remove_display_link (page);
 		break;
 	case LAYOUT_REVERSIBLE:
-		remove_display_link (priv);
+		remove_display_link (page);
 		break;
 	case LAYOUT_SCREEN:
-		remove_left_handed (priv);
+		remove_left_handed (page);
 
 		gtk_widget_destroy (WID ("combo-tabletmode"));
 		gtk_widget_destroy (WID ("label-trackingmode"));
@@ -907,20 +869,18 @@ cc_wacom_page_update_tools (CcWacomPage   *page,
 			    CcWacomDevice *stylus,
 			    CcWacomDevice *pad)
 {
-	CcWacomPagePrivate *priv;
 	int layout;
 	gboolean changed;
 
 	/* Type of layout */
 	layout = get_layout_type (stylus);
 
-	priv = page->priv;
-	changed = (priv->stylus != stylus || priv->pad != pad);
+	changed = (page->stylus != stylus || page->pad != pad);
 	if (!changed)
 		return FALSE;
 
-	priv->stylus = stylus;
-	priv->pad = pad;
+	page->stylus = stylus;
+	page->pad = pad;
 
 	update_tablet_ui (CC_WACOM_PAGE (page), layout);
 
@@ -933,20 +893,18 @@ cc_wacom_page_new (CcWacomPanel  *panel,
 		   CcWacomDevice *pad)
 {
 	CcWacomPage *page;
-	CcWacomPagePrivate *priv;
 
 	g_return_val_if_fail (CC_IS_WACOM_DEVICE (stylus), NULL);
 	g_return_val_if_fail (!pad || CC_IS_WACOM_DEVICE (pad), NULL);
 
 	page = g_object_new (CC_TYPE_WACOM_PAGE, NULL);
 
-	priv = page->priv;
-	priv->panel = panel;
+	page->panel = panel;
 
 	cc_wacom_page_update_tools (page, stylus, pad);
 
 	/* FIXME move this to construct */
-	priv->wacom_settings  = cc_wacom_device_get_settings (stylus);
+	page->wacom_settings  = cc_wacom_device_get_settings (stylus);
 	set_mode_from_gsettings (GTK_COMBO_BOX (WID ("combo-tabletmode")), page);
 
 	/* Tablet name */
@@ -967,13 +925,9 @@ cc_wacom_page_set_navigation (CcWacomPage *page,
 			      GtkNotebook *notebook,
 			      gboolean     ignore_first_page)
 {
-	CcWacomPagePrivate *priv;
-
 	g_return_if_fail (CC_IS_WACOM_PAGE (page));
 
-	priv = page->priv;
-
-	g_object_set (G_OBJECT (priv->nav),
+	g_object_set (G_OBJECT (page->nav),
 		      "notebook", notebook,
 		      "ignore-first", ignore_first_page,
 		      NULL);

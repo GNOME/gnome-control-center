@@ -27,6 +27,13 @@
 #define ANGLE                          "angle"
 #define EXTRA_SPACE                    2
 
+struct _CcClockActor
+{
+  ClutterActor parent_instance;
+
+  gfloat angle;
+};
+
 G_DEFINE_TYPE (CcClockActor, cc_clock_actor, CLUTTER_TYPE_ACTOR);
 
 enum {

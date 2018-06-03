@@ -20,8 +20,6 @@
 #include <math.h>
 #include "cc-target-actor.h"
 
-#define CC_TARGET_ACTOR_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), CC_TARGET_ACTOR_TYPE, CcTargetActorPrivate))
-
 #define CROSS_LINES                    47
 #define TARGET_DIMENSION               (CROSS_LINES * 2)
 #define CROSS_CIRCLE                   7
@@ -29,8 +27,10 @@
 #define TARGET_SHOW_ANIMATION_DURATION 500
 #define TARGET_HIDE_ANIMATION_DURATION 200
 
-struct _CcTargetActorPrivate
+struct _CcTargetActor
 {
+  ClutterActor parent_instance;
+
   gdouble pos_x;
   gdouble pos_y;
 };
@@ -87,13 +87,10 @@ static void
 on_target_animation_complete (ClutterTimeline *timeline,
                               CcTargetActor   *self)
 {
-  CcTargetActorPrivate *priv;
-  priv = CC_TARGET_ACTOR_GET_PRIVATE (self);
-
   clutter_actor_show (CLUTTER_ACTOR (self));
   clutter_actor_set_position (CLUTTER_ACTOR (self),
-                              priv->pos_x,
-                              priv->pos_y);
+                              self->pos_x,
+                              self->pos_y);
 
   show_target (self);
 }
@@ -132,11 +129,9 @@ cc_target_actor_init (CcTargetActor *self)
 {
   ClutterContent *content;
   ClutterPoint anchor;
-  CcTargetActorPrivate *priv;
 
-  priv = CC_TARGET_ACTOR_GET_PRIVATE (self);
-  priv->pos_x = .0;
-  priv->pos_y = .0;
+  self->pos_x = .0;
+  self->pos_y = .0;
 
   content = clutter_canvas_new ();
   clutter_actor_set_content (CLUTTER_ACTOR (self), content);
@@ -185,8 +180,6 @@ cc_target_actor_class_init (CcTargetActorClass *klass)
 
   clutter_actor_class->get_preferred_width = cc_target_actor_get_preferred_width;
   clutter_actor_class->get_preferred_height = cc_target_actor_get_preferred_height;
-
-  g_type_class_add_private (klass, sizeof (CcTargetActorPrivate));
 }
 
 
@@ -196,14 +189,11 @@ cc_target_actor_move_center (CcTargetActor *self, gdouble x, gdouble y)
 {
   g_return_if_fail (CC_IS_TARGET_ACTOR (self));
 
-  CcTargetActorPrivate *priv;
   ClutterTransition *transition;
   gboolean target_visible;
 
-  priv = CC_TARGET_ACTOR_GET_PRIVATE (self);
-
-  priv->pos_x = x - (TARGET_DIMENSION / 2);
-  priv->pos_y = y - (TARGET_DIMENSION / 2);
+  self->pos_x = x - (TARGET_DIMENSION / 2);
+  self->pos_y = y - (TARGET_DIMENSION / 2);
 
   g_object_get (self, "visible", &target_visible, NULL);
 
@@ -223,7 +213,7 @@ cc_target_actor_move_center (CcTargetActor *self, gdouble x, gdouble y)
     {
       clutter_actor_show (CLUTTER_ACTOR (self));
 
-      clutter_actor_set_position (CLUTTER_ACTOR (self), priv->pos_x, priv->pos_y);
+      clutter_actor_set_position (CLUTTER_ACTOR (self), self->pos_x, self->pos_y);
 
       show_target (self);
     }
