@@ -145,7 +145,8 @@ set_device_page (CcWacomPanel *self, const gchar *device_name)
 static void
 run_operation_from_params (CcWacomPanel *self, GVariant *parameters)
 {
-	GVariant *v;
+	g_autoptr(GVariant) v = NULL;
+	g_autoptr(GVariant) v2 = NULL;
 	CcWacomPage *page;
 	const gchar *operation = NULL;
 	const gchar *device_name = NULL;
@@ -159,12 +160,8 @@ run_operation_from_params (CcWacomPanel *self, GVariant *parameters)
 	if (!g_variant_is_of_type (v, G_VARIANT_TYPE_STRING)) {
 		g_warning ("Wrong type for the second argument GVariant, expected 's' but got '%s'",
 			   g_variant_get_type_string (v));
-		g_variant_unref (v);
-
 		return;
 	}
-
-	g_variant_unref (v);
 
 	switch (n_params) {
 		case 3:
@@ -172,15 +169,14 @@ run_operation_from_params (CcWacomPanel *self, GVariant *parameters)
 			if (page == NULL)
 				return;
 
-			g_variant_get_child (parameters, 1, "v", &v);
+			g_variant_get_child (parameters, 1, "v", &v2);
 
-			if (!g_variant_is_of_type (v, G_VARIANT_TYPE_STRING)) {
+			if (!g_variant_is_of_type (v2, G_VARIANT_TYPE_STRING)) {
 				g_warning ("Wrong type for the operation name argument. A string is expected.");
-				g_variant_unref (v);
 				break;
 			}
 
-			operation = g_variant_get_string (v, NULL);
+			operation = g_variant_get_string (v2, NULL);
 			if (g_strcmp0 (operation, "run-calibration") == 0) {
 				if (cc_wacom_page_can_calibrate (page))
 					cc_wacom_page_calibrate (page);
@@ -189,7 +185,6 @@ run_operation_from_params (CcWacomPanel *self, GVariant *parameters)
 			} else {
 				g_warning ("Ignoring unrecognized operation '%s'", operation);
 			}
-			g_variant_unref (v);
 		case 2:
 			set_device_page (self, device_name);
 			break;
@@ -247,11 +242,7 @@ cc_wacom_panel_dispose (GObject *object)
 {
 	CcWacomPanel *self = CC_WACOM_PANEL (object);
 
-	if (self->builder)
-	{
-		g_object_unref (self->builder);
-		self->builder = NULL;
-	}
+	g_clear_object (&self->builder);
 
 	if (self->manager)
 	{
@@ -260,26 +251,11 @@ cc_wacom_panel_dispose (GObject *object)
 		self->manager = NULL;
 	}
 
-	if (self->devices)
-	{
-		g_hash_table_destroy (self->devices);
-		self->devices = NULL;
-	}
-
+	g_clear_pointer (&self->devices, g_hash_table_unref);
 	g_clear_object (&self->cancellable);
 	g_clear_object (&self->proxy);
-
-	if (self->pages)
-	{
-		g_hash_table_destroy (self->pages);
-		self->pages = NULL;
-	}
-
-	if (self->stylus_pages)
-	{
-		g_hash_table_destroy (self->stylus_pages);
-		self->stylus_pages = NULL;
-	}
+	g_clear_pointer (&self->pages, g_hash_table_unref);
+	g_clear_pointer (&self->stylus_pages, g_hash_table_unref);
 
 	G_OBJECT_CLASS (cc_wacom_panel_parent_class)->dispose (object);
 }
@@ -291,7 +267,8 @@ check_remove_stylus_pages (CcWacomPanel *self)
 	CcWacomDevice *device;
 	CcWacomTool *tool;
 	GtkWidget *page;
-	GList *tools, *total = NULL;
+	GList *tools;
+	g_autoptr(GList) total = NULL;
 
 	/* First. Iterate known devices and get the tools */
 	g_hash_table_iter_init (&iter, self->devices);
@@ -310,8 +287,6 @@ check_remove_stylus_pages (CcWacomPanel *self)
 		gtk_widget_destroy (page);
 		g_hash_table_iter_remove (&iter);
 	}
-
-	g_list_free (total);
 }
 
 static gboolean
@@ -501,7 +476,8 @@ update_current_page (CcWacomPanel  *self,
 		     CcWacomDevice *removed_device)
 {
 	GHashTable *ht;
-	GList *tablets, *l;
+	g_autoptr(GList) tablets = NULL;
+	GList *l;
 	gboolean changed;
 	GHashTableIter iter;
 	GsdDevice *gsd_device;
@@ -571,7 +547,6 @@ update_current_page (CcWacomPanel  *self,
 			cc_wacom_page_update_tools (CC_WACOM_PAGE (page), tablet->stylus, tablet->pad);
 		}
 	}
-	g_list_free (tablets);
 
 	g_hash_table_destroy (ht);
 
@@ -590,7 +565,6 @@ add_known_device (CcWacomPanel *self,
 {
 	CcWacomDevice *device;
 	GsdDeviceType device_type;
-	GList *tools, *l;
 
 	device_type = gsd_device_get_device_type (gsd_device);
 
@@ -610,13 +584,14 @@ add_known_device (CcWacomPanel *self,
 
 	/* Only trigger tool lookup on pen devices */
 	if ((device_type & GSD_DEVICE_TYPE_TABLET) != 0) {
+		g_autoptr(GList) tools = NULL;
+		GList *l;
+
 		tools = cc_tablet_tool_map_list_tools (self->tablet_tool_map, device);
 
 		for (l = tools; l != NULL; l = l->next) {
 			add_stylus (self, l->data);
 		}
-
-		g_list_free (tools);
 	}
 }
 
@@ -625,7 +600,7 @@ device_removed_cb (GsdDeviceManager *manager,
 		   GsdDevice        *gsd_device,
 		   CcWacomPanel     *self)
 {
-	CcWacomDevice *device;
+	g_autoptr(CcWacomDevice) device = NULL;
 
 	device = g_hash_table_lookup (self->devices, gsd_device);
 	if (!device)
@@ -634,7 +609,6 @@ device_removed_cb (GsdDeviceManager *manager,
 	g_hash_table_steal (self->devices, gsd_device);
 	update_current_page (self, device);
 	check_remove_stylus_pages (self);
-	g_object_unref (device);
 }
 
 static void
@@ -659,16 +633,13 @@ cc_wacom_panel_switch_to_panel (CcWacomPanel *self,
 				const char   *panel)
 {
 	CcShell *shell;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 
 	g_return_if_fail (self);
 
 	shell = cc_panel_get_shell (CC_PANEL (self));
-	if (cc_shell_set_active_panel_from_id (shell, panel, NULL, &error) == FALSE)
-	{
+	if (!cc_shell_set_active_panel_from_id (shell, panel, NULL, &error))
 		g_warning ("Failed to activate '%s' panel: %s", panel, error->message);
-		g_error_free (error);
-	}
 }
 
 static void
@@ -676,7 +647,7 @@ got_osd_proxy_cb (GObject      *source_object,
 		  GAsyncResult *res,
 		  gpointer      data)
 {
-	GError              *error = NULL;
+	g_autoptr(GError)    error = NULL;
 	CcWacomPanel        *self;
 
 	self = CC_WACOM_PANEL (data);
@@ -686,7 +657,6 @@ got_osd_proxy_cb (GObject      *source_object,
 
 	if (self->proxy == NULL) {
 		g_printerr ("Error creating proxy: %s\n", error->message);
-		g_error_free (error);
 		return;
 	}
 }
@@ -695,12 +665,11 @@ static void
 enbiggen_label (GtkLabel *label)
 {
 	const char *str;
-	char *new_str;
+	g_autofree char *new_str = NULL;
 
 	str = gtk_label_get_text (label);
 	new_str = g_strdup_printf ("<big>%s</big>", str);
 	gtk_label_set_markup (label, new_str);
-	g_free (new_str);
 }
 
 static void
@@ -724,8 +693,9 @@ static void
 cc_wacom_panel_init (CcWacomPanel *self)
 {
 	GtkWidget *widget;
-	GList *devices, *l;
-	GError *error = NULL;
+	g_autoptr(GList) devices = NULL;
+	GList *l;
+	g_autoptr(GError) error = NULL;
 	char *objects[] = {
 		"main-box",
 		"no-stylus-page",
@@ -744,11 +714,8 @@ cc_wacom_panel_init (CcWacomPanel *self)
                                                "/org/gnome/control-center/wacom/wacom-stylus-page.ui",
                                                objects,
                                                &error);
-	if (error != NULL)
-	{
+	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
-		g_object_unref (self->builder);
-		g_error_free (error);
 		return;
 	}
 
@@ -833,7 +800,6 @@ cc_wacom_panel_init (CcWacomPanel *self)
 						   GSD_DEVICE_TYPE_TABLET);
 	for (l = devices; l ; l = l->next)
 		add_known_device (self, l->data);
-	g_list_free (devices);
 
 	update_current_page (self, NULL);
 }

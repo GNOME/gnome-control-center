@@ -44,54 +44,49 @@ G_DEFINE_TYPE (CcTabletToolMap, cc_tablet_tool_map, G_TYPE_OBJECT)
 static void
 load_keyfiles (CcTabletToolMap *map)
 {
-	GError *error = NULL;
-	gchar *dir;
+	g_autoptr(GError) devices_error = NULL;
+	g_autoptr(GError) tools_error = NULL;
+	g_autofree gchar *dir = NULL;
 
 	dir = g_build_filename (g_get_user_cache_dir (), "gnome-control-center", "wacom", NULL);
 
 	if (g_mkdir_with_parents (dir, 0700) < 0) {
 		g_warning ("Could not create directory '%s', expect stylus mapping oddities: %m", dir);
-		g_free (dir);
 		return;
 	}
 
 	map->tablet_path = g_build_filename (dir, "devices", NULL);
 	g_key_file_load_from_file (map->tablets, map->tablet_path,
-				   G_KEY_FILE_NONE, &error);
+				   G_KEY_FILE_NONE, &devices_error);
 
-	if (error && !g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_NOENT)) {
+	if (devices_error && !g_error_matches (devices_error, G_FILE_ERROR, G_FILE_ERROR_NOENT)) {
 		g_warning ("Could not load tablets keyfile '%s': %s",
-			   map->tablet_path, error->message);
+			   map->tablet_path, devices_error->message);
 	}
-
-	g_clear_error (&error);
 
 	map->tool_path = g_build_filename (dir, "tools", NULL);
 	g_key_file_load_from_file (map->tools, map->tool_path,
-				   G_KEY_FILE_NONE, &error);
+				   G_KEY_FILE_NONE, &tools_error);
 
-	if (error && !g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_NOENT)) {
+	if (tools_error && !g_error_matches (tools_error, G_FILE_ERROR, G_FILE_ERROR_NOENT)) {
 		g_warning ("Could not load tools keyfile '%s': %s",
-			   map->tool_path, error->message);
+			   map->tool_path, tools_error->message);
 	}
-
-	g_clear_error (&error);
-
-	g_free (dir);
 }
 
 static void
 cache_tools (CcTabletToolMap *map)
 {
-	gchar **serials;
+	g_auto(GStrv) serials = NULL;
 	gsize n_serials, i;
 
 	serials = g_key_file_get_groups (map->tools, &n_serials);
 
 	for (i = 0; i < n_serials; i++) {
-		gchar *str, *end;
+		g_autofree gchar *str = NULL;
+		gchar *end;
 		guint64 serial, id;
-		GError *error = NULL;
+		g_autoptr(GError) error = NULL;
 		CcWacomTool *tool;
 
 		serial = g_ascii_strtoull (serials[i], &end, 16);
@@ -102,26 +97,21 @@ cache_tools (CcTabletToolMap *map)
 		}
 
 		str = g_key_file_get_string (map->tools, serials[i], KEY_TOOL_ID, &error);
-		if (error) {
+		if (str == NULL) {
 			g_warning ("Could not get cached ID for tool with serial %s: %s",
 				   serials[i], error->message);
-			g_clear_error (&error);
 			continue;
 		}
 
 		id = g_ascii_strtoull (str, &end, 16);
 		if (*end != '\0') {
 			g_warning ("Invalid tool ID %s", str);
-			g_free (str);
 			continue;
 		}
 
 		tool = cc_wacom_tool_new (serial, id, NULL);
 		g_hash_table_insert (map->tool_map, g_strdup (serials[i]), tool);
-		g_free (str);
 	}
-
-	g_strfreev (serials);
 }
 
 static void
@@ -135,14 +125,13 @@ cache_devices (CcTabletToolMap *map)
 	for (i = 0; i < n_ids; i++) {
 		gchar **styli;
 		gsize n_styli, j;
-		GError *error = NULL;
+		g_autoptr(GError) error = NULL;
 		GList *tools = NULL;
 
 		styli = g_key_file_get_string_list (map->tablets, ids[i], KEY_DEVICE_STYLI, &n_styli, &error);
-		if (error) {
+		if (styli == NULL) {
 			g_warning ("Could not get cached styli for with ID %s: %s",
 				   ids[i], error->message);
-			g_clear_error (&error);
 			continue;
 		}
 
@@ -254,7 +243,7 @@ cc_tablet_tool_map_list_tools (CcTabletToolMap *map,
 {
 	CcWacomTool *no_serial_tool;
 	GList *styli;
-	gchar *key;
+	g_autofree gchar *key = NULL;
 
 	g_return_val_if_fail (CC_IS_TABLET_TOOL_MAP (map), NULL);
 	g_return_val_if_fail (CC_IS_WACOM_DEVICE (device), NULL);
@@ -274,8 +263,6 @@ cc_tablet_tool_map_list_tools (CcTabletToolMap *map,
 		styli = g_list_prepend (styli, no_serial_tool);
 	}
 
-	g_free (key);
-
 	return styli;
 }
 
@@ -285,7 +272,7 @@ cc_tablet_tool_map_lookup_tool (CcTabletToolMap *map,
 				guint64          serial)
 {
 	CcWacomTool *tool = NULL;
-	gchar *key = NULL;
+	g_autofree gchar *key = NULL;
 
 	g_return_val_if_fail (CC_IS_TABLET_TOOL_MAP (map), FALSE);
 	g_return_val_if_fail (CC_IS_WACOM_DEVICE (device), FALSE);
@@ -298,8 +285,6 @@ cc_tablet_tool_map_lookup_tool (CcTabletToolMap *map,
 		tool = g_hash_table_lookup (map->tool_map, key);
 	}
 
-	g_free (key);
-
 	return tool;
 }
 
@@ -308,8 +293,8 @@ keyfile_add_device_stylus (CcTabletToolMap *map,
 			   const gchar     *device_key,
 			   const gchar     *tool_key)
 {
-	GArray *array;
-	gchar **styli;
+	g_autoptr(GArray) array = NULL;
+	g_auto(GStrv) styli = NULL;
 	gsize n_styli;
 
 	array = g_array_new (FALSE, FALSE, sizeof (gchar *));
@@ -324,8 +309,6 @@ keyfile_add_device_stylus (CcTabletToolMap *map,
 	g_array_append_val (array, tool_key);
 	g_key_file_set_string_list (map->tablets, device_key, KEY_DEVICE_STYLI,
 				    (const gchar **) array->data, array->len);
-	g_array_free (array, TRUE);
-	g_strfreev (styli);
 }
 
 static void
@@ -333,12 +316,11 @@ keyfile_add_stylus (CcTabletToolMap *map,
 		    const gchar     *tool_key,
 		    guint64          id)
 {
-	gchar *str;
+	g_autofree gchar *str = NULL;
 
 	/* Also works for IDs */
 	str = get_tool_key (id);
 	g_key_file_set_string (map->tools, tool_key, KEY_TOOL_ID, str);
-	g_free (str);
 }
 
 void
@@ -347,8 +329,8 @@ cc_tablet_tool_map_add_relation (CcTabletToolMap *map,
 				 CcWacomTool     *tool)
 {
 	gboolean tablets_changed = FALSE, tools_changed = FALSE;
-	gchar *tool_key, *device_key;
-	GError *error = NULL;
+	g_autofree gchar *tool_key = NULL;
+	g_autofree gchar *device_key = NULL;
 	guint64 serial, id;
 	GList *styli;
 
@@ -391,26 +373,21 @@ cc_tablet_tool_map_add_relation (CcTabletToolMap *map,
 				      g_list_copy (styli));
 	}
 
-	g_free (device_key);
-	g_free (tool_key);
-
 	if (tools_changed) {
-		g_key_file_save_to_file (map->tools, map->tool_path, &error);
+		g_autoptr(GError) error = NULL;
 
-		if (error) {
+		if (!g_key_file_save_to_file (map->tools, map->tool_path, &error)) {
 			g_warning ("Error saving tools keyfile: %s",
 				   error->message);
-			g_clear_error (&error);
 		}
 	}
 
 	if (tablets_changed) {
-		g_key_file_save_to_file (map->tablets, map->tablet_path, &error);
+		g_autoptr(GError) error = NULL;
 
-		if (error) {
+		if (!g_key_file_save_to_file (map->tablets, map->tablet_path, &error)) {
 			g_warning ("Error saving tablets keyfile: %s",
 				   error->message);
-			g_clear_error (&error);
 		}
 	}
 }
