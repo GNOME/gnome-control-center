@@ -18,8 +18,7 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
-#ifndef __PP_OPTIONS_DIALOG_H__
-#define __PP_OPTIONS_DIALOG_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include "pp-utils.h"
@@ -39,5 +38,3 @@ void             pp_options_dialog_set_callback (PpOptionsDialog      *dialog,
 void             pp_options_dialog_free         (PpOptionsDialog      *dialog);
 
 G_END_DECLS
-
-#endif

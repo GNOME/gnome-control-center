@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef __PP_UTILS_H__
-#define __PP_UTILS_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include <cups/cups.h>
@@ -266,5 +265,3 @@ gchar      *canonicalize_device_name (GList         *device_names,
 void        shift_string_left (gchar *str);
 
 G_END_DECLS
-
-#endif /* __PP_UTILS_H */
