@@ -77,6 +77,10 @@ _pp_cups_get_dests_thread (GTask        *task,
     {
       g_task_return_pointer (task, dests, (GDestroyNotify) pp_cups_dests_free);
     }
+  else
+    {
+      pp_cups_dests_free (dests);
+    }
 }
 
 void

@@ -934,6 +934,7 @@ actualize_printers_list_cb (GObject      *source_object,
         }
 
       g_error_free (error);
+      g_object_unref (cups);
       return;
     }
 
@@ -984,6 +985,8 @@ actualize_printers_list_cb (GObject      *source_object,
     }
 
   update_sensitivity (user_data);
+
+  g_object_unref (cups);
 }
 
 static void

@@ -619,6 +619,8 @@ pp_new_printer_dialog_finalize (GObject *object)
 
   g_clear_pointer (&priv->dialog, gtk_widget_destroy);
 
+  g_clear_pointer (&priv->list, ppd_list_free);
+
   if (priv->builder)
     g_clear_object (&priv->builder);
 
