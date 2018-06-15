@@ -18,8 +18,7 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
-#ifndef __PP_HOST_H__
-#define __PP_HOST_H__
+#pragma once
 
 #include <glib-object.h>
 #include <gio/gio.h>
@@ -79,5 +78,3 @@ PpDevicesList *pp_host_get_lpd_devices_finish         (PpHost               *hos
                                                        GError              **error);
 
 G_END_DECLS
-
-#endif /* __PP_HOST_H__ */
