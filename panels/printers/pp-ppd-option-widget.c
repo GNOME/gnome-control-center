@@ -190,8 +190,8 @@ pp_ppd_option_widget_finalize (GObject *object)
 
       if (priv->option_name)
         {
-          g_free (priv->printer_name);
-          priv->printer_name = NULL;
+          g_free (priv->option_name);
+          priv->option_name = NULL;
         }
 
       if (priv->destination)
