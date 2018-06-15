@@ -18,8 +18,7 @@
  * Author: Felipe Borges <feborges@redhat.com>
  */
 
-#ifndef __PP_JOB_H__
-#define __PP_JOB_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include <glib-object.h>
@@ -58,5 +57,3 @@ gboolean       pp_job_authenticate_finish        (PpJob                *job,
                                                   GError              **error);
 
 G_END_DECLS
-
-#endif

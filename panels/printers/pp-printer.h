@@ -18,8 +18,7 @@
  *          Marek Kasik <mkasik@redhat.com>
  */
 
-#ifndef __PP_PRINTER_H__
-#define __PP_PRINTER_H__
+#pragma once
 
 #include <glib-object.h>
 #include <gio/gio.h>
@@ -77,5 +76,3 @@ gboolean     pp_printer_print_file_finish (PpPrinter         *printer,
                                            GError           **error);
 
 G_END_DECLS
-
-#endif /* __PP_PRINTER_H__ */
