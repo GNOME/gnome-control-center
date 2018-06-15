@@ -18,8 +18,7 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
-#ifndef __PP_SAMBA_H__
-#define __PP_SAMBA_H__
+#pragma once
 
 #include "pp-host.h"
 #include "pp-utils.h"
@@ -46,5 +45,3 @@ void           pp_samba_set_auth_info      (PpSamba             *samba,
                                             const gchar         *password);
 
 G_END_DECLS
-
-#endif /* __PP_SAMBA_H__ */
