@@ -403,7 +403,7 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
   signals[PRINTER_RENAMED] = g_signal_new ("printer-renamed",
                                            G_TYPE_FROM_CLASS (klass),
                                            G_SIGNAL_RUN_LAST,
-                                           G_STRUCT_OFFSET (PpDetailsDialogClass, printer_renamed),
+                                           0,
                                            NULL, NULL, NULL,
                                            G_TYPE_NONE, 1,
                                            G_TYPE_STRING);

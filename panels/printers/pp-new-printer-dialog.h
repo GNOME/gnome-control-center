@@ -26,38 +26,9 @@
 
 G_BEGIN_DECLS
 
-#define PP_TYPE_NEW_PRINTER_DIALOG            (pp_new_printer_dialog_get_type ())
-#define PP_NEW_PRINTER_DIALOG(object)         (G_TYPE_CHECK_INSTANCE_CAST ((object), PP_TYPE_NEW_PRINTER_DIALOG, PpNewPrinterDialog))
-#define PP_NEW_PRINTER_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PP_TYPE_NEW_PRINTER_DIALOG, PpNewPrinterDialogClass))
-#define PP_IS_NEW_PRINTER_DIALOG(object)      (G_TYPE_CHECK_INSTANCE_TYPE ((object), PP_TYPE_NEW_PRINTER_DIALOG))
-#define PP_IS_NEW_PRINTER_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PP_TYPE_NEW_PRINTER_DIALOG))
-#define PP_NEW_PRINTER_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PP_TYPE_NEW_PRINTER_DIALOG, PpNewPrinterDialogClass))
+#define PP_TYPE_NEW_PRINTER_DIALOG (pp_new_printer_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (PpNewPrinterDialog, pp_new_printer_dialog, PP, NEW_PRINTER_DIALOG, GObject)
 
-typedef struct _PpNewPrinterDialog        PpNewPrinterDialog;
-typedef struct _PpNewPrinterDialogClass   PpNewPrinterDialogClass;
-typedef struct _PpNewPrinterDialogPrivate PpNewPrinterDialogPrivate;
-
-struct _PpNewPrinterDialog
-{
-  GObject                    parent_instance;
-  PpNewPrinterDialogPrivate *priv;
-};
-
-struct _PpNewPrinterDialogClass
-{
-  GObjectClass parent_class;
-
-  void (*pre_response)  (PpNewPrinterDialog *dialog,
-                         const gchar        *device_name,
-                         const gchar        *device_location,
-                         const gchar        *device_make_and_model,
-                         gboolean            is_network_device);
-
-  void (*response)      (PpNewPrinterDialog *dialog,
-                         gint                response_id);
-};
-
-GType               pp_new_printer_dialog_get_type     (void) G_GNUC_CONST;
 PpNewPrinterDialog *pp_new_printer_dialog_new          (GtkWindow          *parent,
                                                         PPDList            *ppd_list);
 void                pp_new_printer_dialog_set_ppd_list (PpNewPrinterDialog *dialog,
