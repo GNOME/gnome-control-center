@@ -433,6 +433,7 @@ pp_details_dialog_new (GtkWindow            *parent,
   /* Translators: This is the title of the dialog. %s is the printer name. */
   title = g_strdup_printf (_("%s Details"), printer_name);
   gtk_label_set_label (self->dialog_title, title);
+  g_free (title);
 
   printer_url = g_strdup_printf ("<a href=\"http://%s:%d\">%s</a>", printer_address, ippPort (), printer_address);
   gtk_label_set_markup (GTK_LABEL (self->printer_address_label), printer_url);
