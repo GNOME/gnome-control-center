@@ -269,7 +269,7 @@ string_in_table (gchar       *str,
 
 #define STRING_IN_TABLE(_str, _table) (string_in_table (_str, _table, G_N_ELEMENTS (_table)))
 
-static gchar *
+static const gchar *
 ppd_option_name_translate (ppd_option_t *option)
 {
   gint i;
@@ -277,10 +277,10 @@ ppd_option_name_translate (ppd_option_t *option)
   for (i = 0; i < G_N_ELEMENTS (ppd_option_translations); i++)
     {
       if (g_strcmp0 (ppd_option_translations[i].keyword, option->keyword) == 0)
-	return g_strdup (_(ppd_option_translations[i].translation));
+	return _(ppd_option_translations[i].translation);
     }
 
-  return g_strdup (option->text);
+  return option->text;
 }
 
 static gint
