@@ -27,32 +27,13 @@
 
 G_BEGIN_DECLS
 
-#define PP_TYPE_CUPS         (pp_cups_get_type ())
-#define PP_CUPS(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), PP_TYPE_CUPS, PpCups))
-#define PP_CUPS_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), PP_TYPE_CUPS, PpCupsClass))
-#define PP_IS_CUPS(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), PP_TYPE_CUPS))
-#define PP_IS_CUPS_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), PP_TYPE_CUPS))
-#define PP_CUPS_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), PP_TYPE_CUPS, PpCupsClass))
+#define PP_TYPE_CUPS (pp_cups_get_type ())
+G_DECLARE_FINAL_TYPE (PpCups, pp_cups, PP, CUPS, GObject)
 
 typedef struct{
   cups_dest_t *dests;
   gint         num_of_dests;
 } PpCupsDests;
-
-typedef struct _PpCups        PpCups;
-typedef struct _PpCupsClass   PpCupsClass;
-
-struct _PpCups
-{
-  GObject parent_instance;
-};
-
-struct _PpCupsClass
-{
-  GObjectClass parent_class;
-};
-
-GType        pp_cups_get_type         (void) G_GNUC_CONST;
 
 PpCups      *pp_cups_new              (void);
 
