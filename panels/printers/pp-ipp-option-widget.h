@@ -18,8 +18,7 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
-#ifndef __PP_IPP_OPTION_WIDGET_H__
-#define __PP_IPP_OPTION_WIDGET_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include <cups/cups.h>
@@ -38,5 +37,3 @@ GtkWidget   *pp_ipp_option_widget_new (IPPAttribute *attr_supported,
                                        const gchar  *printer);
 
 G_END_DECLS
-
-#endif /* __PP_IPP_OPTION_WIDGET_H__ */

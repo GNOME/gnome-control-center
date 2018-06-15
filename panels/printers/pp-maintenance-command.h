@@ -18,8 +18,7 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
-#ifndef __PP_MAINTENANCE_COMMAND_H__
-#define __PP_MAINTENANCE_COMMAND_H__
+#pragma once
 
 #include <glib-object.h>
 #include <gio/gio.h>
@@ -51,5 +50,3 @@ gboolean              pp_maintenance_command_is_supported_finish (PpMaintenanceC
                                                                   GAsyncResult          *result,
                                                                   GError               **error);
 G_END_DECLS
-
-#endif /* __PP_MAINTENANCE_COMMAND_H__ */
