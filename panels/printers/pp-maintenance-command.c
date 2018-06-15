@@ -35,8 +35,10 @@
 #define ippGetString(attr, element, language) attr->values[element].string.text
 #endif
 
-struct _PpMaintenanceCommandPrivate
+struct _PpMaintenanceCommand
 {
+  GObject parent_instance;
+
   gchar *printer_name;
   gchar *command;
   gchar *parameters;
@@ -56,14 +58,12 @@ enum {
 static void
 pp_maintenance_command_finalize (GObject *object)
 {
-  PpMaintenanceCommandPrivate *priv;
+  PpMaintenanceCommand *self = PP_MAINTENANCE_COMMAND (object);
 
-  priv = PP_MAINTENANCE_COMMAND (object)->priv;
-
-  g_clear_pointer (&priv->printer_name, g_free);
-  g_clear_pointer (&priv->command, g_free);
-  g_clear_pointer (&priv->parameters, g_free);
-  g_clear_pointer (&priv->title, g_free);
+  g_clear_pointer (&self->printer_name, g_free);
+  g_clear_pointer (&self->command, g_free);
+  g_clear_pointer (&self->parameters, g_free);
+  g_clear_pointer (&self->title, g_free);
 
   G_OBJECT_CLASS (pp_maintenance_command_parent_class)->finalize (object);
 }
@@ -74,23 +74,21 @@ pp_maintenance_command_get_property (GObject    *object,
                                      GValue     *value,
                                      GParamSpec *param_spec)
 {
-  PpMaintenanceCommand *self;
-
-  self = PP_MAINTENANCE_COMMAND (object);
+  PpMaintenanceCommand *self = PP_MAINTENANCE_COMMAND (object);
 
   switch (prop_id)
     {
       case PROP_PRINTER_NAME:
-        g_value_set_string (value, self->priv->printer_name);
+        g_value_set_string (value, self->printer_name);
         break;
       case PROP_COMMAND:
-        g_value_set_string (value, self->priv->command);
+        g_value_set_string (value, self->command);
         break;
       case PROP_PARAMETERS:
-        g_value_set_string (value, self->priv->parameters);
+        g_value_set_string (value, self->parameters);
         break;
       case PROP_TITLE:
-        g_value_set_string (value, self->priv->title);
+        g_value_set_string (value, self->title);
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
@@ -111,20 +109,20 @@ pp_maintenance_command_set_property (GObject      *object,
   switch (prop_id)
     {
       case PROP_PRINTER_NAME:
-        g_free (self->priv->printer_name);
-        self->priv->printer_name = g_value_dup_string (value);
+        g_free (self->printer_name);
+        self->printer_name = g_value_dup_string (value);
         break;
       case PROP_COMMAND:
-        g_free (self->priv->command);
-        self->priv->command = g_value_dup_string (value);
+        g_free (self->command);
+        self->command = g_value_dup_string (value);
         break;
       case PROP_PARAMETERS:
-        g_free (self->priv->parameters);
-        self->priv->parameters = g_value_dup_string (value);
+        g_free (self->parameters);
+        self->parameters = g_value_dup_string (value);
         break;
       case PROP_TITLE:
-        g_free (self->priv->title);
-        self->priv->title = g_value_dup_string (value);
+        g_free (self->title);
+        self->title = g_value_dup_string (value);
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
@@ -138,8 +136,6 @@ static void
 pp_maintenance_command_class_init (PpMaintenanceCommandClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (PpMaintenanceCommandPrivate));
 
   gobject_class->set_property = pp_maintenance_command_set_property;
   gobject_class->get_property = pp_maintenance_command_get_property;
@@ -177,9 +173,6 @@ pp_maintenance_command_class_init (PpMaintenanceCommandClass *klass)
 static void
 pp_maintenance_command_init (PpMaintenanceCommand *command)
 {
-  command->priv = G_TYPE_INSTANCE_GET_PRIVATE (command,
-                                               PP_TYPE_MAINTENANCE_COMMAND,
-                                               PpMaintenanceCommandPrivate);
 }
 
 PpMaintenanceCommand *
@@ -206,11 +199,10 @@ _pp_maintenance_command_execute_thread (GTask        *task,
                                         GCancellable *cancellable)
 {
   PpMaintenanceCommand        *command = PP_MAINTENANCE_COMMAND (source_object);
-  PpMaintenanceCommandPrivate *priv = command->priv;
   gboolean                     success = FALSE;
   GError                      *error = NULL;
 
-  if (_pp_maintenance_command_is_supported (priv->printer_name, priv->command))
+  if (_pp_maintenance_command_is_supported (command->printer_name, command->command))
     {
       ipp_t *request;
       ipp_t *response = NULL;
@@ -219,14 +211,14 @@ _pp_maintenance_command_execute_thread (GTask        *task,
       int    fd = -1;
 
       printer_uri = g_strdup_printf ("ipp://localhost/printers/%s",
-                                     priv->printer_name);
+                                     command->printer_name);
 
       request = ippNewRequest (IPP_PRINT_JOB);
 
       ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
                     "printer-uri", NULL, printer_uri);
       ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
-                    "job-name", NULL, priv->title);
+                    "job-name", NULL, command->title);
       ippAddString (request, IPP_TAG_JOB, IPP_TAG_MIMETYPE,
                     "document-format", NULL, "application/vnd.cups-command");
 
@@ -238,9 +230,9 @@ _pp_maintenance_command_execute_thread (GTask        *task,
 
           file = fdopen (fd, "w");
           fprintf (file, "#CUPS-COMMAND\n");
-          fprintf (file, "%s", priv->command);
-          if (priv->parameters)
-            fprintf (file, " %s", priv->parameters);
+          fprintf (file, "%s", command->command);
+          if (command->parameters)
+            fprintf (file, " %s", command->parameters);
           fprintf (file, "\n");
           fclose (file);
 
@@ -377,10 +369,9 @@ _pp_maintenance_command_is_supported_thread (GTask        *task,
                                              GCancellable *cancellable)
 {
   PpMaintenanceCommand        *command = PP_MAINTENANCE_COMMAND (source_object);
-  PpMaintenanceCommandPrivate *priv = command->priv;
   gboolean                     success = FALSE;
 
-  success = _pp_maintenance_command_is_supported (priv->printer_name, priv->command);
+  success = _pp_maintenance_command_is_supported (command->printer_name, command->command);
   g_task_return_boolean (task, success);
 }
 
