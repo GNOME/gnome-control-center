@@ -742,7 +742,7 @@ pp_printer_entry_new (cups_dest_t  printer,
 {
   PpPrinterEntry *self;
   cups_ptype_t    printer_type = 0;
-  gboolean        is_accepting_jobs;
+  gboolean        is_accepting_jobs = TRUE;
   gboolean        ink_supply_is_empty;
   gchar          *instance;
   gchar          *printer_uri = NULL;
