@@ -18,8 +18,7 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
-#ifndef __PP_PPD_SELECTION_DIALOG_H__
-#define __PP_PPD_SELECTION_DIALOG_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include "pp-utils.h"
@@ -40,5 +39,3 @@ void                  pp_ppd_selection_dialog_set_ppd_list         (PpPPDSelecti
 void                  pp_ppd_selection_dialog_free                 (PpPPDSelectionDialog      *dialog);
 
 G_END_DECLS
-
-#endif
