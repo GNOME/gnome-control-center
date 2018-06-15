@@ -26,29 +26,9 @@
 
 G_BEGIN_DECLS
 
-#define PP_TYPE_NEW_PRINTER         (pp_new_printer_get_type ())
-#define PP_NEW_PRINTER(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), PP_TYPE_NEW_PRINTER, PpNewPrinter))
-#define PP_NEW_PRINTER_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), PP_TYPE_NEW_PRINTER, PpNewPrinterClass))
-#define PP_IS_NEW_PRINTER(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), PP_TYPE_NEW_PRINTER))
-#define PP_IS_NEW_PRINTER_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), PP_TYPE_NEW_PRINTER))
-#define PP_NEW_PRINTER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), PP_TYPE_NEW_PRINTER, PpNewPrinterClass))
+#define PP_TYPE_NEW_PRINTER (pp_new_printer_get_type ())
+G_DECLARE_FINAL_TYPE (PpNewPrinter, pp_new_printer, PP, NEW_PRINTER, GObject)
 
-typedef struct _PpNewPrinter        PpNewPrinter;
-typedef struct _PpNewPrinterClass   PpNewPrinterClass;
-typedef struct _PpNewPrinterPrivate PpNewPrinterPrivate;
-
-struct _PpNewPrinter
-{
-  GObject              parent_instance;
-  PpNewPrinterPrivate *priv;
-};
-
-struct _PpNewPrinterClass
-{
-  GObjectClass parent_class;
-};
-
-GType         pp_new_printer_get_type   (void) G_GNUC_CONST;
 PpNewPrinter *pp_new_printer_new        (void);
 
 void          pp_new_printer_add_async  (PpNewPrinter         *host,

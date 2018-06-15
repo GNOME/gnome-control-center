@@ -31,11 +31,6 @@ G_BEGIN_DECLS
 #define PP_TYPE_JOB (pp_job_get_type ())
 G_DECLARE_FINAL_TYPE (PpJob, pp_job, PP, JOB, GObject)
 
-struct _PpJob
-{
-  GObject parent_instance;
-};
-
 void           pp_job_set_hold_until_async       (PpJob                *job,
                                                   const gchar          *job_hold_until);
 
