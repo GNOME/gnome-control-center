@@ -18,8 +18,7 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
-#ifndef __PP_JOBS_DIALOG_H__
-#define __PP_JOBS_DIALOG_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include "pp-utils.h"
@@ -41,5 +40,3 @@ void          pp_jobs_dialog_free              (PpJobsDialog         *dialog);
 void          pp_jobs_dialog_authenticate_jobs (PpJobsDialog         *dialog);
 
 G_END_DECLS
-
-#endif

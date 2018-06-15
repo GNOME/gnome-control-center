@@ -18,8 +18,7 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
-#ifndef __PP_CUPS_H__
-#define __PP_CUPS_H__
+#pragma once
 
 #include <glib-object.h>
 #include <gio/gio.h>
@@ -75,5 +74,3 @@ gint         pp_cups_renew_subscription_finish (PpCups                *cups,
                                                 GAsyncResult          *result);
 
 G_END_DECLS
-
-#endif /* __PP_CUPS_H__ */
