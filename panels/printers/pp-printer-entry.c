@@ -113,6 +113,22 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
+static InkLevelData *
+ink_level_data_new (void)
+{
+  return g_slice_new0 (InkLevelData);
+}
+
+static void
+ink_level_data_free (InkLevelData *data)
+{
+  g_clear_pointer (&data->marker_names, g_free);
+  g_clear_pointer (&data->marker_levels, g_free);
+  g_clear_pointer (&data->marker_colors, g_free);
+  g_clear_pointer (&data->marker_types, g_free);
+  g_slice_free (InkLevelData, data);
+}
+
 static void
 pp_printer_entry_get_property (GObject    *object,
                                guint       prop_id,
@@ -160,6 +176,7 @@ static void
 pp_printer_entry_init (PpPrinterEntry *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
+  self->inklevel = ink_level_data_new ();
 }
 
 typedef struct {
@@ -226,7 +243,7 @@ sanitize_printer_model (gchar *printer_make_and_model)
 
   g_free (tmp);
 
-  return g_strdup (printer_model);
+  return printer_model;
 }
 
 static gboolean
@@ -797,8 +814,6 @@ pp_printer_entry_new (cups_dest_t  printer,
 
   self = g_object_new (PP_PRINTER_ENTRY_TYPE, "printer-name", printer.name, NULL);
 
-  self->inklevel = g_slice_new0 (InkLevelData);
-
   if (printer.instance)
     {
       instance = g_strdup_printf ("%s / %s", printer.name, printer.instance);
@@ -1005,6 +1020,7 @@ pp_printer_entry_dispose (GObject *object)
   g_clear_pointer (&self->printer_location, g_free);
   g_clear_pointer (&self->printer_make_and_model, g_free);
   g_clear_pointer (&self->printer_hostname, g_free);
+  g_clear_pointer (&self->inklevel, ink_level_data_free);
 
   g_cancellable_cancel (self->get_jobs_cancellable);
   g_clear_object (&self->get_jobs_cancellable);
