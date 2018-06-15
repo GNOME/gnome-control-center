@@ -43,17 +43,17 @@ ippGetRange (ipp_attribute_t *attr,
 }
 #endif
 
-typedef struct
+struct _PpJob
 {
-  GObject parent;
+  GObject parent_instance;
 
   gint    id;
   gchar  *title;
   gint    state;
   gchar **auth_info_required;
-} PpJobPrivate;
+};
 
-G_DEFINE_TYPE_WITH_PRIVATE (PpJob, pp_job, G_TYPE_OBJECT)
+G_DEFINE_TYPE (PpJob, pp_job, G_TYPE_OBJECT)
 
 enum
 {
@@ -180,23 +180,21 @@ pp_job_get_property (GObject    *object,
                      GValue     *value,
                      GParamSpec *pspec)
 {
-  PpJobPrivate *priv;
-
-  priv = pp_job_get_instance_private (PP_JOB (object));
+  PpJob *self = PP_JOB (object);
 
   switch (property_id)
     {
       case PROP_ID:
-        g_value_set_int (value, priv->id);
+        g_value_set_int (value, self->id);
         break;
       case PROP_TITLE:
-        g_value_set_string (value, priv->title);
+        g_value_set_string (value, self->title);
         break;
       case PROP_STATE:
-        g_value_set_int (value, priv->state);
+        g_value_set_int (value, self->state);
         break;
       case PROP_AUTH_INFO_REQUIRED:
-        g_value_set_pointer (value, g_strdupv (priv->auth_info_required));
+        g_value_set_pointer (value, g_strdupv (self->auth_info_required));
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -210,24 +208,22 @@ pp_job_set_property (GObject      *object,
                      const GValue *value,
                      GParamSpec   *pspec)
 {
-  PpJobPrivate *priv;
-
-  priv = pp_job_get_instance_private (PP_JOB (object));
+  PpJob *self = PP_JOB (object);
 
   switch (property_id)
     {
       case PROP_ID:
-        priv->id = g_value_get_int (value);
+        self->id = g_value_get_int (value);
         break;
       case PROP_TITLE:
-        g_free (priv->title);
-        priv->title = g_value_dup_string (value);
+        g_free (self->title);
+        self->title = g_value_dup_string (value);
         break;
       case PROP_STATE:
-        priv->state = g_value_get_int (value);
+        self->state = g_value_get_int (value);
         break;
       case PROP_AUTH_INFO_REQUIRED:
-        priv->auth_info_required = g_strdupv (g_value_get_pointer (value));
+        self->auth_info_required = g_strdupv (g_value_get_pointer (value));
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -238,12 +234,10 @@ pp_job_set_property (GObject      *object,
 static void
 pp_job_finalize (GObject *object)
 {
-  PpJobPrivate *priv;
+  PpJob *self = PP_JOB (object);
 
-  priv = pp_job_get_instance_private (PP_JOB (object));
-
-  g_free (priv->title);
-  g_strfreev (priv->auth_info_required);
+  g_free (self->title);
+  g_strfreev (self->auth_info_required);
 
   G_OBJECT_CLASS (pp_job_parent_class)->finalize (object);
 }
@@ -290,19 +284,17 @@ _pp_job_get_attributes_thread (GTask        *task,
                                gpointer      task_data,
                                GCancellable *cancellable)
 {
+  PpJob *self = PP_JOB (source_object);
   ipp_attribute_t *attr = NULL;
   GVariantBuilder  builder;
   GVariant        *attributes = NULL;
   gchar          **attributes_names = task_data;
-  PpJobPrivate    *priv;
   ipp_t           *request;
   ipp_t           *response = NULL;
   gchar           *job_uri;
   gint             i, j, length = 0, n_attrs = 0;
 
-  priv = pp_job_get_instance_private (source_object);
-
-  job_uri = g_strdup_printf ("ipp://localhost/jobs/%d", priv->id);
+  job_uri = g_strdup_printf ("ipp://localhost/jobs/%d", self->id);
 
   if (attributes_names != NULL)
     {
@@ -431,7 +423,7 @@ _pp_job_authenticate_thread (GTask        *task,
                              gpointer      task_data,
                              GCancellable *cancellable)
 {
-  PpJobPrivate  *priv;
+  PpJob         *job = PP_JOB (source_object);
   gboolean       result = FALSE;
   gchar        **auth_info = task_data;
   ipp_t         *request;
@@ -439,11 +431,9 @@ _pp_job_authenticate_thread (GTask        *task,
   gchar         *job_uri;
   gint           length;
 
-  priv = pp_job_get_instance_private (source_object);
-
   if (auth_info != NULL)
     {
-      job_uri = g_strdup_printf ("ipp://localhost/jobs/%d", priv->id);
+      job_uri = g_strdup_printf ("ipp://localhost/jobs/%d", job->id);
 
       length = g_strv_length (auth_info);
 

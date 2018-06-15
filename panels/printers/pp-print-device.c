@@ -20,10 +20,10 @@
 
 #include "pp-print-device.h"
 
-G_DEFINE_TYPE (PpPrintDevice, pp_print_device, G_TYPE_OBJECT);
-
-struct _PpPrintDevicePrivate
+struct _PpPrintDevice
 {
+  GObject   parent_instance;
+
   gchar    *device_name;
   gchar    *display_name;
   gchar    *device_original_name;
@@ -39,6 +39,8 @@ struct _PpPrintDevicePrivate
   gint      acquisition_method;
   gboolean  is_network_device;
 };
+
+G_DEFINE_TYPE (PpPrintDevice, pp_print_device, G_TYPE_OBJECT);
 
 enum
 {
@@ -62,20 +64,18 @@ enum
 static void
 pp_print_device_finalize (GObject *object)
 {
-  PpPrintDevicePrivate *priv;
+  PpPrintDevice *self = PP_PRINT_DEVICE (object);
 
-  priv = PP_PRINT_DEVICE (object)->priv;
-
-  g_clear_pointer (&priv->device_name, g_free);
-  g_clear_pointer (&priv->display_name, g_free);
-  g_clear_pointer (&priv->device_original_name, g_free);
-  g_clear_pointer (&priv->device_make_and_model, g_free);
-  g_clear_pointer (&priv->device_location, g_free);
-  g_clear_pointer (&priv->device_info, g_free);
-  g_clear_pointer (&priv->device_uri, g_free);
-  g_clear_pointer (&priv->device_id, g_free);
-  g_clear_pointer (&priv->device_ppd, g_free);
-  g_clear_pointer (&priv->host_name, g_free);
+  g_clear_pointer (&self->device_name, g_free);
+  g_clear_pointer (&self->display_name, g_free);
+  g_clear_pointer (&self->device_original_name, g_free);
+  g_clear_pointer (&self->device_make_and_model, g_free);
+  g_clear_pointer (&self->device_location, g_free);
+  g_clear_pointer (&self->device_info, g_free);
+  g_clear_pointer (&self->device_uri, g_free);
+  g_clear_pointer (&self->device_id, g_free);
+  g_clear_pointer (&self->device_ppd, g_free);
+  g_clear_pointer (&self->host_name, g_free);
 
   G_OBJECT_CLASS (pp_print_device_parent_class)->finalize (object);
 }
@@ -86,53 +86,51 @@ pp_print_device_get_property (GObject    *object,
                               GValue     *value,
                               GParamSpec *param_spec)
 {
-  PpPrintDevice *self;
-
-  self = PP_PRINT_DEVICE (object);
+  PpPrintDevice *self = PP_PRINT_DEVICE (object);
 
   switch (prop_id)
     {
       case PROP_DEVICE_NAME:
-        g_value_set_string (value, self->priv->device_name);
+        g_value_set_string (value, self->device_name);
         break;
       case PROP_DISPLAY_NAME:
-        g_value_set_string (value, self->priv->display_name);
+        g_value_set_string (value, self->display_name);
         break;
       case PROP_DEVICE_ORIGINAL_NAME:
-        g_value_set_string (value, self->priv->device_original_name);
+        g_value_set_string (value, self->device_original_name);
         break;
       case PROP_DEVICE_MAKE_AND_MODEL:
-        g_value_set_string (value, self->priv->device_make_and_model);
+        g_value_set_string (value, self->device_make_and_model);
         break;
       case PROP_DEVICE_LOCATION:
-        g_value_set_string (value, self->priv->device_location);
+        g_value_set_string (value, self->device_location);
         break;
       case PROP_DEVICE_INFO:
-        g_value_set_string (value, self->priv->device_info);
+        g_value_set_string (value, self->device_info);
         break;
       case PROP_DEVICE_URI:
-        g_value_set_string (value, self->priv->device_uri);
+        g_value_set_string (value, self->device_uri);
         break;
       case PROP_DEVICE_ID:
-        g_value_set_string (value, self->priv->device_id);
+        g_value_set_string (value, self->device_id);
         break;
       case PROP_DEVICE_PPD:
-        g_value_set_string (value, self->priv->device_ppd);
+        g_value_set_string (value, self->device_ppd);
         break;
       case PROP_HOST_NAME:
-        g_value_set_string (value, self->priv->host_name);
+        g_value_set_string (value, self->host_name);
         break;
       case PROP_HOST_PORT:
-        g_value_set_int (value, self->priv->host_port);
+        g_value_set_int (value, self->host_port);
         break;
       case PROP_IS_AUTHENTICATED_SERVER:
-        g_value_set_boolean (value, self->priv->is_authenticated_server);
+        g_value_set_boolean (value, self->is_authenticated_server);
         break;
       case PROP_ACQUISITION_METHOD:
-        g_value_set_int (value, self->priv->acquisition_method);
+        g_value_set_int (value, self->acquisition_method);
         break;
       case PROP_IS_NETWORK_DEVICE:
-        g_value_set_boolean (value, self->priv->is_network_device);
+        g_value_set_boolean (value, self->is_network_device);
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
@@ -153,56 +151,56 @@ pp_print_device_set_property (GObject      *object,
   switch (prop_id)
     {
       case PROP_DEVICE_NAME:
-        g_free (self->priv->device_name);
-        self->priv->device_name = g_value_dup_string (value);
+        g_free (self->device_name);
+        self->device_name = g_value_dup_string (value);
         break;
       case PROP_DISPLAY_NAME:
-        g_free (self->priv->display_name);
-        self->priv->display_name = g_value_dup_string (value);
+        g_free (self->display_name);
+        self->display_name = g_value_dup_string (value);
         break;
       case PROP_DEVICE_ORIGINAL_NAME:
-        g_free (self->priv->device_original_name);
-        self->priv->device_original_name = g_value_dup_string (value);
+        g_free (self->device_original_name);
+        self->device_original_name = g_value_dup_string (value);
         break;
       case PROP_DEVICE_MAKE_AND_MODEL:
-        g_free (self->priv->device_make_and_model);
-        self->priv->device_make_and_model = g_value_dup_string (value);
+        g_free (self->device_make_and_model);
+        self->device_make_and_model = g_value_dup_string (value);
         break;
       case PROP_DEVICE_LOCATION:
-        g_free (self->priv->device_location);
-        self->priv->device_location = g_value_dup_string (value);
+        g_free (self->device_location);
+        self->device_location = g_value_dup_string (value);
         break;
       case PROP_DEVICE_INFO:
-        g_free (self->priv->device_info);
-        self->priv->device_info = g_value_dup_string (value);
+        g_free (self->device_info);
+        self->device_info = g_value_dup_string (value);
         break;
       case PROP_DEVICE_URI:
-        g_free (self->priv->device_uri);
-        self->priv->device_uri = g_value_dup_string (value);
+        g_free (self->device_uri);
+        self->device_uri = g_value_dup_string (value);
         break;
       case PROP_DEVICE_ID:
-        g_free (self->priv->device_id);
-        self->priv->device_id = g_value_dup_string (value);
+        g_free (self->device_id);
+        self->device_id = g_value_dup_string (value);
         break;
       case PROP_DEVICE_PPD:
-        g_free (self->priv->device_ppd);
-        self->priv->device_ppd = g_value_dup_string (value);
+        g_free (self->device_ppd);
+        self->device_ppd = g_value_dup_string (value);
         break;
       case PROP_HOST_NAME:
-        g_free (self->priv->host_name);
-        self->priv->host_name = g_value_dup_string (value);
+        g_free (self->host_name);
+        self->host_name = g_value_dup_string (value);
         break;
       case PROP_HOST_PORT:
-        self->priv->host_port = g_value_get_int (value);
+        self->host_port = g_value_get_int (value);
         break;
       case PROP_IS_AUTHENTICATED_SERVER:
-        self->priv->is_authenticated_server = g_value_get_boolean (value);
+        self->is_authenticated_server = g_value_get_boolean (value);
         break;
       case PROP_ACQUISITION_METHOD:
-        self->priv->acquisition_method = g_value_get_int (value);
+        self->acquisition_method = g_value_get_int (value);
         break;
       case PROP_IS_NETWORK_DEVICE:
-        self->priv->is_network_device = g_value_get_boolean (value);
+        self->is_network_device = g_value_get_boolean (value);
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
@@ -216,8 +214,6 @@ static void
 pp_print_device_class_init (PpPrintDeviceClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (PpPrintDevicePrivate));
 
   gobject_class->set_property = pp_print_device_set_property;
   gobject_class->get_property = pp_print_device_get_property;
@@ -340,9 +336,6 @@ pp_print_device_class_init (PpPrintDeviceClass *klass)
 static void
 pp_print_device_init (PpPrintDevice *printer)
 {
-  printer->priv = G_TYPE_INSTANCE_GET_PRIVATE (printer,
-                                               PP_TYPE_PRINT_DEVICE,
-                                               PpPrintDevicePrivate);
 }
 
 PpPrintDevice *
@@ -354,85 +347,85 @@ pp_print_device_new ()
 gchar *
 pp_print_device_get_device_name (PpPrintDevice *device)
 {
-  return device->priv->device_name;
+  return device->device_name;
 }
 
 gchar *
 pp_print_device_get_display_name (PpPrintDevice *device)
 {
-  return device->priv->display_name;
+  return device->display_name;
 }
 
 gchar *
 pp_print_device_get_device_original_name (PpPrintDevice *device)
 {
-  return device->priv->device_original_name;
+  return device->device_original_name;
 }
 
 gchar *
 pp_print_device_get_device_make_and_model (PpPrintDevice *device)
 {
-  return device->priv->device_make_and_model;
+  return device->device_make_and_model;
 }
 
 gchar *
 pp_print_device_get_device_location (PpPrintDevice *device)
 {
-  return device->priv->device_location;
+  return device->device_location;
 }
 
 gchar *
 pp_print_device_get_device_info (PpPrintDevice *device)
 {
-  return device->priv->device_info;
+  return device->device_info;
 }
 
 gchar *
 pp_print_device_get_device_uri (PpPrintDevice *device)
 {
-  return device->priv->device_uri;
+  return device->device_uri;
 }
 
 gchar *
 pp_print_device_get_device_id (PpPrintDevice *device)
 {
-  return device->priv->device_id;
+  return device->device_id;
 }
 
 gchar *
 pp_print_device_get_device_ppd (PpPrintDevice *device)
 {
-  return device->priv->device_ppd;
+  return device->device_ppd;
 }
 
 gchar *
 pp_print_device_get_host_name (PpPrintDevice *device)
 {
-  return device->priv->host_name;
+  return device->host_name;
 }
 
 gint
 pp_print_device_get_host_port (PpPrintDevice *device)
 {
-  return device->priv->host_port;
+  return device->host_port;
 }
 
 gboolean
 pp_print_device_is_authenticated_server (PpPrintDevice *device)
 {
-  return device->priv->is_authenticated_server;
+  return device->is_authenticated_server;
 }
 
 gint
 pp_print_device_get_acquisition_method (PpPrintDevice *device)
 {
-  return device->priv->acquisition_method;
+  return device->acquisition_method;
 }
 
 gboolean
 pp_print_device_is_network_device (PpPrintDevice *device)
 {
-  return device->priv->is_network_device;
+  return device->is_network_device;
 }
 
 PpPrintDevice *
