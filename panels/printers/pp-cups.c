@@ -29,6 +29,11 @@
 #define ippGetStatusCode(ipp) ipp->request.status.status_code
 #endif
 
+struct _PpCups
+{
+  GObject parent_instance;
+};
+
 G_DEFINE_TYPE (PpCups, pp_cups, G_TYPE_OBJECT);
 
 static void

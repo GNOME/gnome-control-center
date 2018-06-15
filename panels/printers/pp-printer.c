@@ -26,21 +26,13 @@
 #define IPP_STATE_IDLE IPP_IDLE
 #endif
 
-typedef struct _PpPrinter        PpPrinter;
-typedef struct _PpPrinterPrivate PpPrinterPrivate;
-
 struct _PpPrinter
 {
-  GObject           parent_instance;
-  PpPrinterPrivate *priv;
+  GObject  parent_instance;
+  gchar   *printer_name;
 };
 
-struct _PpPrinterPrivate
-{
-  gchar *printer_name;
-};
-
-G_DEFINE_TYPE_WITH_PRIVATE (PpPrinter, pp_printer, G_TYPE_OBJECT)
+G_DEFINE_TYPE (PpPrinter, pp_printer, G_TYPE_OBJECT)
 
 enum
 {
@@ -51,9 +43,9 @@ enum
 static void
 pp_printer_dispose (GObject *object)
 {
-  PpPrinterPrivate *priv = PP_PRINTER (object)->priv;
+  PpPrinter *self = PP_PRINTER (object);
 
-  g_free (priv->printer_name);
+  g_free (self->printer_name);
 
   G_OBJECT_CLASS (pp_printer_parent_class)->dispose (object);
 }
@@ -75,7 +67,7 @@ pp_printer_get_property (GObject    *object,
   switch (property_id)
     {
       case PROP_NAME:
-        g_value_set_string (value, self->priv->printer_name);
+        g_value_set_string (value, self->printer_name);
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -94,8 +86,8 @@ pp_printer_set_property (GObject      *object,
   switch (property_id)
     {
       case PROP_NAME:
-        g_free (self->priv->printer_name);
-        self->priv->printer_name = g_value_dup_string (value);
+        g_free (self->printer_name);
+        self->printer_name = g_value_dup_string (value);
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -125,9 +117,6 @@ pp_printer_class_init (PpPrinterClass *klass)
 static void
 pp_printer_init (PpPrinter *printer)
 {
-  printer->priv = G_TYPE_INSTANCE_GET_PRIVATE (printer,
-                                               PP_TYPE_PRINTER,
-                                               PpPrinterPrivate);
 }
 
 PpPrinter *

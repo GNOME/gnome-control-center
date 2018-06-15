@@ -24,11 +24,11 @@
 
 #define BUFFER_LENGTH 1024
 
-struct _PpHostPrivate
+typedef struct
 {
-  gchar *hostname;
-  gint   port;
-};
+  gchar   *hostname;
+  gint     port;
+} PpHostPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (PpHost, pp_host, G_TYPE_OBJECT);
 
@@ -48,9 +48,8 @@ static guint signals[LAST_SIGNAL] = { 0 };
 static void
 pp_host_finalize (GObject *object)
 {
-  PpHostPrivate *priv;
-
-  priv = PP_HOST (object)->priv;
+  PpHost *self = PP_HOST (object);
+  PpHostPrivate *priv = pp_host_get_instance_private (self);
 
   g_clear_pointer (&priv->hostname, g_free);
 
@@ -63,17 +62,16 @@ pp_host_get_property (GObject    *object,
                       GValue     *value,
                       GParamSpec *param_spec)
 {
-  PpHost *self;
-
-  self = PP_HOST (object);
+  PpHost *self = PP_HOST (object);
+  PpHostPrivate *priv = pp_host_get_instance_private (self);
 
   switch (prop_id)
     {
       case PROP_HOSTNAME:
-        g_value_set_string (value, self->priv->hostname);
+        g_value_set_string (value, priv->hostname);
         break;
       case PROP_PORT:
-        g_value_set_int (value, self->priv->port);
+        g_value_set_int (value, priv->port);
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
@@ -90,15 +88,16 @@ pp_host_set_property (GObject      *object,
                       GParamSpec   *param_spec)
 {
   PpHost *self = PP_HOST (object);
+  PpHostPrivate *priv = pp_host_get_instance_private (self);
 
   switch (prop_id)
     {
       case PROP_HOSTNAME:
-        g_free (self->priv->hostname);
-        self->priv->hostname = g_value_dup_string (value);
+        g_free (priv->hostname);
+        priv->hostname = g_value_dup_string (value);
         break;
       case PROP_PORT:
-        self->priv->port = g_value_get_int (value);
+        priv->port = g_value_get_int (value);
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
@@ -135,7 +134,7 @@ pp_host_class_init (PpHostClass *klass)
     g_signal_new ("authentication-required",
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (PpHostClass, authentication_required),
+                  0,
                   NULL, NULL, NULL,
                   G_TYPE_NONE, 0);
 }
@@ -143,10 +142,8 @@ pp_host_class_init (PpHostClass *klass)
 static void
 pp_host_init (PpHost *host)
 {
-  host->priv = G_TYPE_INSTANCE_GET_PRIVATE (host,
-                                            PP_TYPE_HOST,
-                                            PpHostPrivate);
-  host->priv->port = PP_HOST_UNSET_PORT;
+  PpHostPrivate *priv = pp_host_get_instance_private (host);
+  priv->port = PP_HOST_UNSET_PORT;
 }
 
 PpHost *
@@ -252,7 +249,7 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
                                   GCancellable       *cancellable)
 {
   PpHost         *host = (PpHost *) object;
-  PpHostPrivate  *priv = host->priv;
+  PpHostPrivate *priv = pp_host_get_instance_private (host);
   PpPrintDevice  *device;
   gboolean        is_network_device;
   GSDData        *data;
@@ -385,7 +382,7 @@ _pp_host_get_remote_cups_devices_thread (GSimpleAsyncResult *res,
   cups_dest_t   *dests = NULL;
   GSDData       *data;
   PpHost        *host = (PpHost *) object;
-  PpHostPrivate *priv = host->priv;
+  PpHostPrivate *priv = pp_host_get_instance_private (host);
   PpPrintDevice *device;
   const char    *device_location;
   http_t        *http;
@@ -506,14 +503,15 @@ jetdirect_connection_test_cb (GObject      *source_object,
                               gpointer      user_data)
 {
   GSocketConnection *connection;
-  PpHostPrivate     *priv;
   PpPrintDevice     *device;
   JetDirectData     *data;
   gpointer           result;
   GError            *error = NULL;
   GTask             *task = G_TASK (user_data);
+  PpHostPrivate     *priv;
 
   data = g_task_get_task_data (task);
+  priv = pp_host_get_instance_private (data->host);
 
   connection = g_socket_client_connect_to_host_finish (G_SOCKET_CLIENT (source_object),
                                                        res,
@@ -525,8 +523,6 @@ jetdirect_connection_test_cb (GObject      *source_object,
 
       g_io_stream_close (G_IO_STREAM (connection), NULL, NULL);
       g_object_unref (connection);
-
-      priv = data->host->priv;
 
       device_uri = g_strdup_printf ("socket://%s:%d",
                                     priv->hostname,
@@ -562,12 +558,12 @@ pp_host_get_jetdirect_devices_async (PpHost              *host,
                                      GAsyncReadyCallback  callback,
                                      gpointer             user_data)
 {
-  PpHostPrivate *priv = host->priv;
   GSocketClient *client;
   JetDirectData *data;
   GTask         *task;
   gchar         *address;
   gpointer       result;
+  PpHostPrivate *priv = pp_host_get_instance_private (host);
 
   data = g_new0 (JetDirectData, 1);
   data->host = g_object_ref (host);
@@ -706,7 +702,7 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
   GSocketConnection *connection;
   PpPrintDevice     *device;
   PpHost            *host = (PpHost *) source_object;
-  PpHostPrivate     *priv = host->priv;
+  PpHostPrivate     *priv = pp_host_get_instance_private (host);
   GSocketClient     *client;
   PpDevicesList     *result;
   GSDData           *data = (GSDData *) task_data;
