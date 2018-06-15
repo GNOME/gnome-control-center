@@ -18,8 +18,7 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
-#ifndef __PP_PRINT_DEVICE_H__
-#define __PP_PRINT_DEVICE_H__
+#pragma once
 
 #include <glib-object.h>
 #include <gio/gio.h>
@@ -47,5 +46,3 @@ gint           pp_print_device_get_acquisition_method    (PpPrintDevice *device)
 gboolean       pp_print_device_is_network_device         (PpPrintDevice *device);
 
 G_END_DECLS
-
-#endif /* __PP_PRINT_DEVICE_H__ */
