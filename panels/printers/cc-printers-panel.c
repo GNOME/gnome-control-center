@@ -564,6 +564,8 @@ renew_subscription_cb (GObject      *source_object,
 
       priv->subscription_id = subscription_id;
     }
+
+  g_object_unref (cups);
 }
 
 static gboolean
@@ -639,7 +641,7 @@ attach_to_cups_notifier_cb (GObject      *source_object,
                                             self,
                                             NULL);
     }
-}
+
 
 static void
 attach_to_cups_notifier (gpointer data)
@@ -934,6 +936,7 @@ actualize_printers_list_cb (GObject      *source_object,
         }
 
       g_error_free (error);
+      g_object_unref (cups);
       return;
     }
 
@@ -984,6 +987,8 @@ actualize_printers_list_cb (GObject      *source_object,
     }
 
   update_sensitivity (user_data);
+
+  g_object_unref (cups);
 }
 
 static void
