@@ -24,45 +24,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_PRINTERS_PANEL cc_printers_panel_get_type()
-
-#define CC_PRINTERS_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_PRINTERS_PANEL, CcPrintersPanel))
-
-#define CC_PRINTERS_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_PRINTERS_PANEL, CcPrintersPanelClass))
-
-#define CC_IS_PRINTERS_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_PRINTERS_PANEL))
-
-#define CC_IS_PRINTERS_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_PRINTERS_PANEL))
-
-#define CC_PRINTERS_PANEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_PRINTERS_PANEL, CcPrintersPanelClass))
-
-typedef struct _CcPrintersPanel CcPrintersPanel;
-typedef struct _CcPrintersPanelClass CcPrintersPanelClass;
-typedef struct _CcPrintersPanelPrivate CcPrintersPanelPrivate;
-
-struct _CcPrintersPanel
-{
-  CcPanel parent;
-
-  CcPrintersPanelPrivate *priv;
-};
-
-struct _CcPrintersPanelClass
-{
-  CcPanelClass parent_class;
-};
-
-GType cc_printers_panel_get_type (void) G_GNUC_CONST;
+#define CC_TYPE_PRINTERS_PANEL (cc_printers_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcPrintersPanel, cc_printers_panel, CC, PRINTERS_PANEL, CcPanel)
 
 G_END_DECLS
 
