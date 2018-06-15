@@ -16,9 +16,7 @@
  *
  */
 
-
-#ifndef _CC_PRINTERS_PANEL_H
-#define _CC_PRINTERS_PANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -28,5 +26,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcPrintersPanel, cc_printers_panel, CC, PRINTERS_PANEL, CcPanel)
 
 G_END_DECLS
-
-#endif /* _CC_PRINTERS_PANEL_H */
