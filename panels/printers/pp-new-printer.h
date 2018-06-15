@@ -18,8 +18,7 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
-#ifndef __PP_NEW_PRINTER_H__
-#define __PP_NEW_PRINTER_H__
+#pragma once
 
 #include <glib-object.h>
 #include <gio/gio.h>
@@ -41,5 +40,3 @@ gboolean      pp_new_printer_add_finish (PpNewPrinter         *host,
                                          GError              **error);
 
 G_END_DECLS
-
-#endif /* __PP_NEW_PRINTER_H__ */
