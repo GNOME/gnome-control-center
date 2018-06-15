@@ -26,29 +26,8 @@
 
 G_BEGIN_DECLS
 
-#define PP_TYPE_MAINTENANCE_COMMAND         (pp_maintenance_command_get_type ())
-#define PP_MAINTENANCE_COMMAND(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), PP_TYPE_MAINTENANCE_COMMAND, PpMaintenanceCommand))
-#define PP_MAINTENANCE_COMMAND_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), PP_TYPE_MAINTENANCE_COMMAND, PpMaintenanceCommandClass))
-#define PP_IS_MAINTENANCE_COMMAND(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), PP_TYPE_MAINTENANCE_COMMAND))
-#define PP_IS_MAINTENANCE_COMMAND_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), PP_TYPE_MAINTENANCE_COMMAND))
-#define PP_MAINTENANCE_COMMAND_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), PP_TYPE_MAINTENANCE_COMMAND, PpMaintenanceCommandClass))
-
-typedef struct _PpMaintenanceCommand        PpMaintenanceCommand;
-typedef struct _PpMaintenanceCommandClass   PpMaintenanceCommandClass;
-typedef struct _PpMaintenanceCommandPrivate PpMaintenanceCommandPrivate;
-
-struct _PpMaintenanceCommand
-{
-  GObject                      parent_instance;
-  PpMaintenanceCommandPrivate *priv;
-};
-
-struct _PpMaintenanceCommandClass
-{
-  GObjectClass parent_class;
-};
-
-GType   pp_maintenance_command_get_type                          (void) G_GNUC_CONST;
+#define PP_TYPE_MAINTENANCE_COMMAND (pp_maintenance_command_get_type ())
+G_DECLARE_FINAL_TYPE (PpMaintenanceCommand, pp_maintenance_command, PP, MAINTENANCE_COMMAND, GObject)
 
 PpMaintenanceCommand *pp_maintenance_command_new                 (const gchar *printer_name,
                                                                   const gchar *command,
