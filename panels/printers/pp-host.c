@@ -26,8 +26,8 @@
 
 typedef struct
 {
-  gchar   *hostname;
-  gint     port;
+  gchar *hostname;
+  gint   port;
 } PpHostPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (PpHost, pp_host, G_TYPE_OBJECT);

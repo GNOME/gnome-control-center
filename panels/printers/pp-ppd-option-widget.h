@@ -18,8 +18,7 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
-#ifndef __PP_PPD_OPTION_WIDGET_H__
-#define __PP_PPD_OPTION_WIDGET_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include <cups/cups.h>
@@ -34,5 +33,3 @@ GtkWidget   *pp_ppd_option_widget_new      (ppd_option_t *source,
                                             const gchar  *printer_name);
 
 G_END_DECLS
-
-#endif /* __PP_PPD_OPTION_WIDGET_H__ */

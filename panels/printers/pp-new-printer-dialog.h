@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef __PP_NEW_PRINTER_DIALOG_H__
-#define __PP_NEW_PRINTER_DIALOG_H__
+#pragma once
 
 #include "pp-utils.h"
 
@@ -35,5 +34,3 @@ void                pp_new_printer_dialog_set_ppd_list (PpNewPrinterDialog *dial
                                                         PPDList            *list);
 
 G_END_DECLS
-
-#endif /* __PP_NEW_PRINTER_DIALOG_H__ */
