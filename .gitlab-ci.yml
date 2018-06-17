@@ -4,6 +4,20 @@ stages:
   - test
   - delivery
 
+.Log files: &log_files  [./*.log, _build/meson-logs/]
+
+.Build logs: &save_build_logs
+  artifacts:
+    name: log
+    when: always
+    paths: *log_files
+
+.Git Untracked files: &save_untracked_files
+  artifacts:
+    name: untracked
+    untracked: true
+    expire_in: 3h30min
+
 ##
 # Stage: Build
 #
@@ -12,11 +26,8 @@ stages:
 # any of them.
 ##
 build:
+  <<: *save_untracked_files
   stage: build
-  artifacts:
-    name: builded
-    untracked: true
-    expire_in: 3h30min
 
   script:
     - echo "== Info =="
@@ -39,13 +50,8 @@ build:
 # Runs the unit tests.
 ##
 test:
+  <<: *save_build_logs
   stage: test
-  artifacts:
-    name: log
-    when: always
-    paths:
-    - $(pwd)/*.log
-    - _build/meson-logs/*
 
   dependencies:
     - build
@@ -71,14 +77,8 @@ test:
 # Runs the coverage test.
 ##
 coverage:
+  <<: *save_build_logs
   stage: test
-  artifacts:
-    name: log
-    when: always
-    paths:
-    - $(pwd)/*.log
-    - _build/meson-logs/*
-    - _build/meson-logs/coveragereport
 
   script:
     - echo "== Info =="
