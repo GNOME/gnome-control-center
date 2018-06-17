@@ -66,6 +66,52 @@ test:
       fi
 
 ##
+# Stage: Test
+#
+# Runs the coverage test.
+##
+coverage:
+  stage: test
+  artifacts:
+    name: log
+    when: always
+    paths:
+    - $(pwd)/*.log
+    - _build/meson-logs/*
+    - _build/meson-logs/coveragereport
+
+  script:
+    - echo "== Info =="
+    - build-aux/ci/ci-helper.sh "INFO"
+    - build-aux/ci/ci-helper.sh "GIT_INFO"
+
+    - echo "== Building =="
+    - rm -rf _build/
+    - meson . _build -Db_coverage=true
+    - ninja -C _build 2>&1 | tee compilation.log
+
+    - echo "== Testing =="
+    - ninja -C _build test
+    - ninja -C _build coverage-html
+
+##
+# Stage: Delivery
+#
+# Publish the Coverage Report generated above
+##
+pages:
+  stage: delivery
+  dependencies:
+    - coverage
+  script:
+    - mv _build/meson-logs/coveragereport/ public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master@GNOME/gnome-control-center
+
+##
 # Stage: Delivery
 #
 # Create a flatpak
