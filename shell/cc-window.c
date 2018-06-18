@@ -66,7 +66,6 @@ struct _CcWindow
   GtkWidget  *search_bar;
   GtkWidget  *search_entry;
   GtkWidget  *lock_button;
-  GtkWidget  *current_panel_box;
   GtkWidget  *development_warning_dialog;
   GtkWidget  *current_panel;
   char       *current_panel_id;
@@ -189,7 +188,7 @@ activate_panel (CcWindow          *self,
                 CcPanelVisibility  visibility)
 {
   g_autoptr (GTimer) timer = NULL;
-  GtkWidget *box, *title_widget;
+  GtkWidget *title_widget;
   gdouble ellapsed_time;
 
   if (!id)
@@ -215,15 +214,10 @@ activate_panel (CcWindow          *self,
   gtk_lock_button_set_permission (GTK_LOCK_BUTTON (self->lock_button),
                                   cc_panel_get_permission (CC_PANEL (self->current_panel)));
 
-  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-
-  gtk_box_pack_start (GTK_BOX (box), self->current_panel,
-                      TRUE, TRUE, 0);
-
-  gtk_stack_add_named (GTK_STACK (self->stack), box, id);
+  gtk_stack_add_named (GTK_STACK (self->stack), self->current_panel, id);
 
   /* switch to the new panel */
-  gtk_widget_show (box);
+  gtk_widget_show (self->current_panel);
   gtk_stack_set_visible_child_name (GTK_STACK (self->stack), id);
 
   /* set the title of the window */
@@ -232,8 +226,6 @@ activate_panel (CcWindow          *self,
 
   title_widget = cc_panel_get_title_widget (CC_PANEL (self->current_panel));
   gtk_header_bar_set_custom_title (GTK_HEADER_BAR (self->panel_headerbar), title_widget);
-
-  self->current_panel_box = box;
 
   /* Finish profiling */
   g_timer_stop (timer);
@@ -416,7 +408,7 @@ set_active_panel_from_id (CcShell      *shell,
       iter_valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (self->store), &iter);
     }
 
-  old_panel = self->current_panel_box;
+  old_panel = self->current_panel;
 
   if (!name)
     {
