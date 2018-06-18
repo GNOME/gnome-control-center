@@ -83,6 +83,8 @@ test:
 coverage:
   <<: *save_build_logs
   stage: test
+  variables:
+    coverage: '/^Lines:.\d+.\d+.(\d+\.\d+\%)/'
 
   script:
     - *environment_information
@@ -95,6 +97,11 @@ coverage:
     - echo "== Testing =="
     - ninja -C _build test
     - ninja -C _build coverage-html
+
+    # Parse the report to get the coverage result
+    - |
+      echo == Coverage ==
+      sed -e 's/<[^>]*>//g' _build/meson-logs/coveragereport/index.html | tr -d ' \t' | grep -A3 -P '^Lines:$'  | tr '\n' ' '; echo
 
 ##
 # Stage: Delivery
