@@ -7,6 +7,12 @@ rules. Please read them carefully and, if in doubt, ask a maintainer for directi
 
 The most important rule is: **see the surrounding code, and copy its style**.
 
+That said, GNOME Settings assumes:
+
+ * 2 spaces of indentation
+ * 120 columns of line width
+ * Newline before `{`
+
 Another rule that applies to function declarations is that all parameters are
 aligned by the last '*'. There are plenty of examples below.
 
@@ -21,6 +27,36 @@ Comment blocks should be formatted as following:
  * but have the closing slash a line after. Every line starts with
  * an asterisk that is aligned with every the rest of the block.
  */
+```
+
+## Conditionals
+
+Conditionals should either be all in one line, or one per line. Newlines inside
+conditionals are aligned by the last parenthesis.
+
+
+Some examples below:
+
+```c
+// Single line if
+if (a || b || (c && d))
+  return;
+
+// Multiline if with nested parenthesis
+if (long_boolean_variable_used_in_this_condition_a || 
+    long_boolean_variable_used_in_this_condition_b ||
+    (long_boolean_variable_used_in_this_condition_c &&
+     long_boolean_variable_used_in_this_condition_d))
+  {
+    return;
+  }
+
+// Another single line example with do {} while (...)
+do
+  {
+    /* something */
+  }
+while (a || b || (c && d));
 ```
 
 ## Structs and Enums
