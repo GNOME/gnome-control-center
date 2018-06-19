@@ -122,14 +122,14 @@ cups_option_free (ppd_option_t *option)
 {
   gint i;
 
-  if (option)
-    {
-      for (i = 0; i < option->num_choices; i++)
-        g_free (option->choices[i].code);
+  if (option == NULL)
+    return;
 
-      g_free (option->choices);
-      g_free (option);
-    }
+  for (i = 0; i < option->num_choices; i++)
+    g_free (option->choices[i].code);
+
+  g_free (option->choices);
+  g_free (option);
 }
 
 static void
@@ -174,44 +174,41 @@ pp_ppd_option_widget_finalize (GObject *object)
   PpPPDOptionWidget        *widget = PP_PPD_OPTION_WIDGET (object);
   PpPPDOptionWidgetPrivate *priv = widget->priv;
 
-  if (priv)
+  if (priv->option)
     {
-      if (priv->option)
-        {
-          cups_option_free (priv->option);
-          priv->option = NULL;
-        }
+      cups_option_free (priv->option);
+      priv->option = NULL;
+    }
 
-      if (priv->printer_name)
-        {
-          g_free (priv->printer_name);
-          priv->printer_name = NULL;
-        }
+  if (priv->printer_name)
+    {
+      g_free (priv->printer_name);
+      priv->printer_name = NULL;
+    }
 
-      if (priv->option_name)
-        {
-          g_free (priv->option_name);
-          priv->option_name = NULL;
-        }
+  if (priv->option_name)
+    {
+      g_free (priv->option_name);
+      priv->option_name = NULL;
+    }
 
-      if (priv->destination)
-        {
-          cupsFreeDests (1, priv->destination);
-          priv->destination = NULL;
-        }
+  if (priv->destination)
+    {
+      cupsFreeDests (1, priv->destination);
+      priv->destination = NULL;
+    }
 
-      if (priv->ppd_filename)
-        {
-          g_unlink (priv->ppd_filename);
-          g_free (priv->ppd_filename);
-          priv->ppd_filename = NULL;
-        }
+  if (priv->ppd_filename)
+    {
+      g_unlink (priv->ppd_filename);
+      g_free (priv->ppd_filename);
+      priv->ppd_filename = NULL;
+    }
 
-      if (priv->cancellable)
-        {
-          g_cancellable_cancel (priv->cancellable);
-          g_object_unref (priv->cancellable);
-        }
+  if (priv->cancellable)
+    {
+      g_cancellable_cancel (priv->cancellable);
+      g_object_unref (priv->cancellable);
     }
 
   G_OBJECT_CLASS (pp_ppd_option_widget_parent_class)->finalize (object);
@@ -240,29 +237,28 @@ pp_ppd_option_widget_new (ppd_option_t *option,
   PpPPDOptionWidgetPrivate *priv;
   PpPPDOptionWidget        *widget = NULL;
 
-  if (option && printer_name)
+  if (option == NULL || printer_name == NULL)
+    return;
+
+  widget = g_object_new (PP_TYPE_PPD_OPTION_WIDGET, NULL);
+
+  priv = PP_PPD_OPTION_WIDGET_GET_PRIVATE (widget);
+
+  priv->printer_name = g_strdup (printer_name);
+  priv->option = cups_option_copy (option);
+  priv->option_name = g_strdup (option->keyword);
+
+  if (construct_widget (widget))
     {
-      widget = g_object_new (PP_TYPE_PPD_OPTION_WIDGET, NULL);
-
-      priv = PP_PPD_OPTION_WIDGET_GET_PRIVATE (widget);
-
-      priv->printer_name = g_strdup (printer_name);
-      priv->option = cups_option_copy (option);
-      priv->option_name = g_strdup (option->keyword);
-
-      if (construct_widget (widget))
-        {
-          update_widget_real (widget);
-        }
-      else
-        {
-          g_object_ref_sink (widget);
-          g_object_unref (widget);
-          widget = NULL;
-        }
+      update_widget_real (widget);
+      return (GtkWidget *) widget;
     }
-
-  return (GtkWidget *) widget;
+  else
+    {
+      g_object_ref_sink (widget);
+      g_object_unref (widget);
+      return NULL;
+    }
 }
 
 enum {
@@ -445,60 +441,56 @@ construct_widget (PpPPDOptionWidget *widget)
   gint                      i;
 
   /* Don't show options which has only one choice */
-  if (priv->option && priv->option->num_choices > 1)
+  if (priv->option == NULL || priv->option->num_choices <= 1)
+    return FALSE;
+
+  switch (priv->option->ui)
     {
-      switch (priv->option->ui)
-        {
-          case PPD_UI_BOOLEAN:
-              priv->switch_button = gtk_switch_new ();
-              g_signal_connect (priv->switch_button, "notify::active", G_CALLBACK (switch_changed_cb), widget);
-              gtk_box_pack_start (GTK_BOX (widget), priv->switch_button, FALSE, FALSE, 0);
-              break;
+      case PPD_UI_BOOLEAN:
+          priv->switch_button = gtk_switch_new ();
+          g_signal_connect (priv->switch_button, "notify::active", G_CALLBACK (switch_changed_cb), widget);
+          gtk_box_pack_start (GTK_BOX (widget), priv->switch_button, FALSE, FALSE, 0);
+          break;
 
-          case PPD_UI_PICKONE:
-              priv->combo = combo_box_new ();
+      case PPD_UI_PICKONE:
+          priv->combo = combo_box_new ();
 
-              for (i = 0; i < priv->option->num_choices; i++)
-                {
-                  combo_box_append (priv->combo,
-                                    ppd_choice_translate (&priv->option->choices[i]),
-                                    priv->option->choices[i].choice);
-                }
+          for (i = 0; i < priv->option->num_choices; i++)
+            {
+              combo_box_append (priv->combo,
+                                ppd_choice_translate (&priv->option->choices[i]),
+                                priv->option->choices[i].choice);
+            }
 
-              gtk_box_pack_start (GTK_BOX (widget), priv->combo, FALSE, FALSE, 0);
-              g_signal_connect (priv->combo, "changed", G_CALLBACK (combo_changed_cb), widget);
-              break;
+          gtk_box_pack_start (GTK_BOX (widget), priv->combo, FALSE, FALSE, 0);
+          g_signal_connect (priv->combo, "changed", G_CALLBACK (combo_changed_cb), widget);
+          break;
 
-          case PPD_UI_PICKMANY:
-              priv->combo = combo_box_new ();
+      case PPD_UI_PICKMANY:
+          priv->combo = combo_box_new ();
 
-              for (i = 0; i < priv->option->num_choices; i++)
-                {
-                  combo_box_append (priv->combo,
-                                    ppd_choice_translate (&priv->option->choices[i]),
-                                    priv->option->choices[i].choice);
-                }
+          for (i = 0; i < priv->option->num_choices; i++)
+            {
+              combo_box_append (priv->combo,
+                                ppd_choice_translate (&priv->option->choices[i]),
+                                priv->option->choices[i].choice);
+            }
 
-              gtk_box_pack_start (GTK_BOX (widget), priv->combo, TRUE, TRUE, 0);
-              g_signal_connect (priv->combo, "changed", G_CALLBACK (combo_changed_cb), widget);
-              break;
+          gtk_box_pack_start (GTK_BOX (widget), priv->combo, TRUE, TRUE, 0);
+          g_signal_connect (priv->combo, "changed", G_CALLBACK (combo_changed_cb), widget);
+          break;
 
-          default:
-              break;
-        }
-
-      priv->image = gtk_image_new_from_icon_name ("dialog-warning-symbolic", GTK_ICON_SIZE_MENU);
-      if (!priv->image)
-        priv->image = gtk_image_new_from_icon_name ("dialog-warning", GTK_ICON_SIZE_MENU);
-      gtk_box_pack_start (GTK_BOX (widget), priv->image, FALSE, FALSE, 0);
-      gtk_widget_set_no_show_all (GTK_WIDGET (priv->image), TRUE);
-
-      return TRUE;
+      default:
+          break;
     }
-  else
-    {
-      return FALSE;
-    }
+
+  priv->image = gtk_image_new_from_icon_name ("dialog-warning-symbolic", GTK_ICON_SIZE_MENU);
+  if (!priv->image)
+    priv->image = gtk_image_new_from_icon_name ("dialog-warning", GTK_ICON_SIZE_MENU);
+  gtk_box_pack_start (GTK_BOX (widget), priv->image, FALSE, FALSE, 0);
+  gtk_widget_set_no_show_all (GTK_WIDGET (priv->image), TRUE);
+
+  return TRUE;
 }
 
 static void
@@ -542,52 +534,52 @@ update_widget_real (PpPPDOptionWidget *widget)
       priv->ppd_filename = NULL;
     }
 
-  if (option)
+  if (option == NULL)
+    return;
+
+  for (i = 0; i < option->num_choices; i++)
+    if (option->choices[i].marked)
+      value = g_strdup (option->choices[i].choice);
+
+  if (value == NULL)
+    value = g_strdup (option->defchoice);
+
+  if (value)
     {
-      for (i = 0; i < option->num_choices; i++)
-        if (option->choices[i].marked)
-          value = g_strdup (option->choices[i].choice);
-
-      if (value == NULL)
-        value = g_strdup (option->defchoice);
-
-      if (value)
+      switch (option->ui)
         {
-          switch (option->ui)
-            {
-              case PPD_UI_BOOLEAN:
-                g_signal_handlers_block_by_func (priv->switch_button, switch_changed_cb, widget);
-                if (g_ascii_strcasecmp (value, "True") == 0)
-                  gtk_switch_set_active (GTK_SWITCH (priv->switch_button), TRUE);
-                else
-                  gtk_switch_set_active (GTK_SWITCH (priv->switch_button), FALSE);
-                g_signal_handlers_unblock_by_func (priv->switch_button, switch_changed_cb, widget);
-                break;
+          case PPD_UI_BOOLEAN:
+            g_signal_handlers_block_by_func (priv->switch_button, switch_changed_cb, widget);
+            if (g_ascii_strcasecmp (value, "True") == 0)
+              gtk_switch_set_active (GTK_SWITCH (priv->switch_button), TRUE);
+            else
+              gtk_switch_set_active (GTK_SWITCH (priv->switch_button), FALSE);
+            g_signal_handlers_unblock_by_func (priv->switch_button, switch_changed_cb, widget);
+            break;
 
-              case PPD_UI_PICKONE:
-                g_signal_handlers_block_by_func (priv->combo, combo_changed_cb, widget);
-                combo_box_set (priv->combo, value);
-                g_signal_handlers_unblock_by_func (priv->combo, combo_changed_cb, widget);
-                break;
+          case PPD_UI_PICKONE:
+            g_signal_handlers_block_by_func (priv->combo, combo_changed_cb, widget);
+            combo_box_set (priv->combo, value);
+            g_signal_handlers_unblock_by_func (priv->combo, combo_changed_cb, widget);
+            break;
 
-              case PPD_UI_PICKMANY:
-                g_signal_handlers_block_by_func (priv->combo, combo_changed_cb, widget);
-                combo_box_set (priv->combo, value);
-                g_signal_handlers_unblock_by_func (priv->combo, combo_changed_cb, widget);
-                break;
+          case PPD_UI_PICKMANY:
+            g_signal_handlers_block_by_func (priv->combo, combo_changed_cb, widget);
+            combo_box_set (priv->combo, value);
+            g_signal_handlers_unblock_by_func (priv->combo, combo_changed_cb, widget);
+            break;
 
-              default:
-                break;
-            }
-
-          g_free (value);
+          default:
+            break;
         }
 
-      if (option->conflicted)
-        gtk_widget_show (priv->image);
-      else
-        gtk_widget_hide (priv->image);
+      g_free (value);
     }
+
+  if (option->conflicted)
+    gtk_widget_show (priv->image);
+  else
+    gtk_widget_hide (priv->image);
 
   cups_option_free (option);
 }

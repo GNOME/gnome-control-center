@@ -69,22 +69,16 @@ static gboolean
 is_info_required (PpJobsDialog *dialog,
                   const gchar  *info)
 {
-  gboolean   required = FALSE;
-  gint       i;
+  gint i;
 
-  if (dialog != NULL && dialog->actual_auth_info_required != NULL)
-    {
-      for (i = 0; dialog->actual_auth_info_required[i] != NULL; i++)
-        {
-          if (g_strcmp0 (dialog->actual_auth_info_required[i], info) == 0)
-            {
-              required = TRUE;
-              break;
-            }
-        }
-    }
+  if (dialog == NULL || dialog->actual_auth_info_required == NULL)
+    return FALSE;
 
-  return required;
+  for (i = 0; dialog->actual_auth_info_required[i] != NULL; i++)
+      if (g_strcmp0 (dialog->actual_auth_info_required[i], info) == 0)
+          return TRUE;
+
+  return FALSE;
 }
 
 static gboolean
@@ -420,21 +414,21 @@ update_jobs_list (PpJobsDialog *dialog)
 {
   PpPrinter *printer;
 
-  if (dialog->printer_name != NULL)
-    {
-      g_cancellable_cancel (dialog->get_jobs_cancellable);
-      g_clear_object (&dialog->get_jobs_cancellable);
+  if (dialog->printer_name == NULL)
+    return;
 
-      dialog->get_jobs_cancellable = g_cancellable_new ();
+  g_cancellable_cancel (dialog->get_jobs_cancellable);
+  g_clear_object (&dialog->get_jobs_cancellable);
 
-      printer = pp_printer_new (dialog->printer_name);
-      pp_printer_get_jobs_async (printer,
-                                 TRUE,
-                                 CUPS_WHICHJOBS_ACTIVE,
-                                 dialog->get_jobs_cancellable,
-                                 update_jobs_list_cb,
-                                 dialog);
-    }
+  dialog->get_jobs_cancellable = g_cancellable_new ();
+
+  printer = pp_printer_new (dialog->printer_name);
+  pp_printer_get_jobs_async (printer,
+                             TRUE,
+                             CUPS_WHICHJOBS_ACTIVE,
+                             dialog->get_jobs_cancellable,
+                             update_jobs_list_cb,
+                             dialog);
 }
 
 static void
@@ -480,19 +474,17 @@ pp_job_authenticate_cb (GObject      *source_object,
   PpJob        *job = PP_JOB (source_object);
 
   result = pp_job_authenticate_finish (job, res, &error);
-  if (result)
-    {
-      pp_jobs_dialog_update (dialog);
-    }
-  else if (error != NULL)
+  if (!result)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           g_warning ("Could not authenticate job: %s", error->message);
         }
 
-      g_error_free (error);
+      g_clear_error (&error);
     }
+
+  pp_jobs_dialog_update (dialog);
 }
 
 static void
@@ -651,11 +643,11 @@ pp_jobs_dialog_set_callback (PpJobsDialog         *dialog,
                              UserResponseCallback  user_callback,
                              gpointer              user_data)
 {
-  if (dialog != NULL)
-    {
-      dialog->user_callback = user_callback;
-      dialog->user_data = user_data;
-    }
+  if (dialog == NULL)
+    return;
+
+  dialog->user_callback = user_callback;
+  dialog->user_data = user_data;
 }
 
 void

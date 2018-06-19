@@ -83,19 +83,19 @@ get_tag_value (const gchar *tag_string, const gchar *tag_name)
   gint    tag_name_length;
   gint    i;
 
-  if (tag_string && tag_name)
-    {
-      tag_name_length = strlen (tag_name);
-      tag_string_splitted = g_strsplit (tag_string, ";", 0);
-      if (tag_string_splitted)
-        {
-          for (i = 0; i < g_strv_length (tag_string_splitted); i++)
-            if (g_ascii_strncasecmp (tag_string_splitted[i], tag_name, tag_name_length) == 0)
-              if (strlen (tag_string_splitted[i]) > tag_name_length + 1)
-                tag_value = g_strdup (tag_string_splitted[i] + tag_name_length + 1);
+  if (tag_string == NULL || tag_name == NULL)
+    return NULL;
 
-          g_strfreev (tag_string_splitted);
-        }
+  tag_name_length = strlen (tag_name);
+  tag_string_splitted = g_strsplit (tag_string, ";", 0);
+  if (tag_string_splitted)
+    {
+      for (i = 0; i < g_strv_length (tag_string_splitted); i++)
+        if (g_ascii_strncasecmp (tag_string_splitted[i], tag_name, tag_name_length) == 0)
+          if (strlen (tag_string_splitted[i]) > tag_name_length + 1)
+            tag_value = g_strdup (tag_string_splitted[i] + tag_name_length + 1);
+
+      g_strfreev (tag_string_splitted);
     }
 
   return tag_value;
@@ -116,48 +116,43 @@ normalize (const gchar *input_string)
   gchar *result = NULL;
   gint   i, j = 0, k = -1;
 
-  if (input_string)
+  if (input_string == NULL)
+    return NULL;
+
+  tmp = g_strstrip (g_ascii_strdown (input_string, -1));
+
+  res = g_new (gchar, 2 * strlen (tmp));
+
+  for (i = 0; i < strlen (tmp); i++)
     {
-      tmp = g_strstrip (g_ascii_strdown (input_string, -1));
-      if (tmp)
+      if ((g_ascii_isalpha (tmp[i]) && k >= 0 && g_ascii_isdigit (res[k])) ||
+          (g_ascii_isdigit (tmp[i]) && k >= 0 && g_ascii_isalpha (res[k])))
         {
-          res = g_new (gchar, 2 * strlen (tmp));
-
-          for (i = 0; i < strlen (tmp); i++)
+          res[j] = ' ';
+          k = j++;
+          res[j] = tmp[i];
+          k = j++;
+        }
+      else if (g_ascii_isspace (tmp[i]) || !g_ascii_isalnum (tmp[i]))
+        {
+          if (!(k >= 0 && res[k] == ' '))
             {
-              if ((g_ascii_isalpha (tmp[i]) && k >= 0 && g_ascii_isdigit (res[k])) ||
-                  (g_ascii_isdigit (tmp[i]) && k >= 0 && g_ascii_isalpha (res[k])))
-                {
-                  res[j] = ' ';
-                  k = j++;
-                  res[j] = tmp[i];
-                  k = j++;
-                }
-              else
-                {
-                  if (g_ascii_isspace (tmp[i]) || !g_ascii_isalnum (tmp[i]))
-                    {
-                      if (!(k >= 0 && res[k] == ' '))
-                        {
-                          res[j] = ' ';
-                          k = j++;
-                        }
-                    }
-                  else
-                    {
-                      res[j] = tmp[i];
-                      k = j++;
-                    }
-                }
+              res[j] = ' ';
+              k = j++;
             }
-
-          res[j] = '\0';
-
-          result = g_strdup (res);
-          g_free (tmp);
-          g_free (res);
+        }
+      else
+        {
+          res[j] = tmp[i];
+          k = j++;
         }
     }
+
+  res[j] = '\0';
+
+  result = g_strdup (res);
+  g_free (tmp);
+  g_free (res);
 
   return result;
 }
@@ -210,18 +205,18 @@ get_ppd_attribute (const gchar *ppd_file_name,
   ppd_attr_t *ppd_attr = NULL;
   gchar *result = NULL;
 
-  if (ppd_file_name)
-    {
-      ppd_file = ppdOpenFile (ppd_file_name);
+  if (ppd_file_name == NULL)
+    return NULL;
 
-      if (ppd_file)
-        {
-          ppd_attr = ppdFindAttr (ppd_file, attribute_name, NULL);
-          if (ppd_attr != NULL)
-            result = g_strdup (ppd_attr->value);
-          ppdClose (ppd_file);
-        }
-    }
+  ppd_file = ppdOpenFile (ppd_file_name);
+
+  if (ppd_file == NULL)
+    return NULL;
+
+  ppd_attr = ppdFindAttr (ppd_file, attribute_name, NULL);
+  if (ppd_attr != NULL)
+    result = g_strdup (ppd_attr->value);
+  ppdClose (ppd_file);
 
   return result;
 }
@@ -543,9 +538,9 @@ printer_set_location (const gchar *printer_name,
                       const gchar *location)
 {
   GDBusConnection *bus;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GVariant    *output;
+  const gchar *ret_error;
+  GError      *error = NULL;
 
   if (!printer_name || !location)
     return TRUE;
@@ -571,25 +566,24 @@ printer_set_location (const gchar *printer_name,
                                         &error);
   g_object_unref (bus);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of location for printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of location for printer %s failed: %s", printer_name, ret_error);
+      g_variant_unref (output);
+      return FALSE;
+    }
+
+  g_variant_unref (output);
+
+  return TRUE;
 }
 
 gboolean
@@ -598,9 +592,9 @@ printer_set_accepting_jobs (const gchar *printer_name,
                             const gchar *reason)
 {
   GDBusConnection *bus;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GVariant    *output;
+  const gchar *ret_error;
+  GError      *error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -629,24 +623,24 @@ printer_set_accepting_jobs (const gchar *printer_name,
                                         &error);
   g_object_unref (bus);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of acceptance of jobs for printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of acceptance of jobs for printer %s failed: %s", printer_name, ret_error);
+      g_variant_unref (output);
+      return FALSE;
+    }
+
+  g_variant_unref (output);
+
+  return TRUE;
 }
 
 gboolean
@@ -654,9 +648,9 @@ printer_set_enabled (const gchar *printer_name,
                      gboolean     enabled)
 {
   GDBusConnection *bus;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GVariant    *output;
+  const gchar *ret_error;
+  GError      *error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -682,34 +676,33 @@ printer_set_enabled (const gchar *printer_name,
                                         &error);
   g_object_unref (bus);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of enablement of printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of enablement of printer %s failed: %s", printer_name, ret_error);
+      g_variant_unref (output);
+      return FALSE;
+    }
+
+  g_variant_unref (output);
+
+  return TRUE;
 }
 
 gboolean
 printer_delete (const gchar *printer_name)
 {
   GDBusConnection *bus;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GVariant    *output;
+  const gchar *ret_error;
+  GError      *error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -735,99 +728,96 @@ printer_delete (const gchar *printer_name)
                                         &error);
   g_object_unref (bus);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: removing of printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: removing of printer %s failed: %s", printer_name, ret_error);
+      g_variant_unref (output);
+      return FALSE;
+    }
+
+  g_variant_unref (output);
+
+  return TRUE;
 }
 
 gboolean
 printer_set_default (const gchar *printer_name)
 {
   GDBusConnection *bus;
-  const char *cups_server;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  const char  *cups_server;
+  GVariant    *output;
+  const gchar *ret_error;
+  GError      *error = NULL;
 
   if (!printer_name)
     return TRUE;
 
   cups_server = cupsServer ();
-  if (g_ascii_strncasecmp (cups_server, "localhost", 9) == 0 ||
-      g_ascii_strncasecmp (cups_server, "127.0.0.1", 9) == 0 ||
-      g_ascii_strncasecmp (cups_server, "::1", 3) == 0 ||
-      cups_server[0] == '/')
-    {
-      /* Clean .cups/lpoptions before setting
-       * default printer on local CUPS server.
-       */
-      set_local_default_printer (NULL);
 
-      bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
-      if (!bus)
-        {
-          g_warning ("Failed to get system bus: %s", error->message);
-          g_error_free (error);
-        }
-      else
-        {
-          output = g_dbus_connection_call_sync (bus,
-                                                MECHANISM_BUS,
-                                                "/",
-                                                MECHANISM_BUS,
-                                                "PrinterSetDefault",
-                                                g_variant_new ("(s)", printer_name),
-                                                G_VARIANT_TYPE ("(s)"),
-                                                G_DBUS_CALL_FLAGS_NONE,
-                                                -1,
-                                                NULL,
-                                                &error);
-          g_object_unref (bus);
-
-          if (output)
-            {
-              const gchar *ret_error;
-
-              g_variant_get (output, "(&s)", &ret_error);
-              if (ret_error[0] != '\0')
-                g_warning ("cups-pk-helper: setting default printer to %s failed: %s", printer_name, ret_error);
-              else
-                result = TRUE;
-
-              g_variant_unref (output);
-            }
-          else
-            {
-              g_warning ("%s", error->message);
-              g_error_free (error);
-            }
-        }
-    }
-  else
-    /* Store default printer to .cups/lpoptions
-     * if we are connected to a remote CUPS server.
-     */
+  /* Store default printer to .cups/lpoptions
+   * if we are connected to a remote CUPS server.
+   */
+  if (!g_ascii_strncasecmp (cups_server, "localhost", 9) == 0 &&
+      !g_ascii_strncasecmp (cups_server, "127.0.0.1", 9) == 0 &&
+      !g_ascii_strncasecmp (cups_server, "::1", 3) == 0 &&
+      cups_server[0] != '/')
     {
       set_local_default_printer (printer_name);
+      return FALSE;
     }
 
-  return result;
+  /* Clean .cups/lpoptions before setting
+   * default printer on local CUPS server.
+   */
+  set_local_default_printer (NULL);
+
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+    {
+      g_warning ("Failed to get system bus: %s", error->message);
+      g_error_free (error);
+      return FALSE;
+    }
+
+  output = g_dbus_connection_call_sync (bus,
+                                        MECHANISM_BUS,
+                                        "/",
+                                        MECHANISM_BUS,
+                                        "PrinterSetDefault",
+                                        g_variant_new ("(s)", printer_name),
+                                        G_VARIANT_TYPE ("(s)"),
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        -1,
+                                        NULL,
+                                        &error);
+  g_object_unref (bus);
+
+  if (output == NULL)
+    {
+      g_warning ("%s", error->message);
+      g_error_free (error);
+      return FALSE;
+    }
+
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting default printer to %s failed: %s", printer_name, ret_error);
+      g_variant_unref (output);
+      return FALSE;
+    }
+
+  g_variant_unref (output);
+
+  return TRUE;
 }
 
 gboolean
@@ -835,9 +825,9 @@ printer_set_shared (const gchar *printer_name,
                     gboolean     shared)
 {
   GDBusConnection *bus;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GVariant    *output;
+  const gchar *ret_error;
+  GError      *error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -863,25 +853,24 @@ printer_set_shared (const gchar *printer_name,
                                         &error);
   g_object_unref (bus);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of sharing of printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of sharing of printer %s failed: %s", printer_name, ret_error);
+      g_variant_unref (output);
+      return FALSE;
+    }
+
+  g_variant_unref (output);
+
+  return TRUE;
 }
 
 gboolean
@@ -890,9 +879,9 @@ printer_set_job_sheets (const gchar *printer_name,
                         const gchar *end_sheet)
 {
   GDBusConnection *bus;
-  GVariant   *output;
-  GError     *error = NULL;
-  gboolean    result = FALSE;
+  GVariant    *output;
+  const gchar *ret_error;
+  GError      *error = NULL;
 
   if (!printer_name || !start_sheet || !end_sheet)
     return TRUE;
@@ -918,25 +907,24 @@ printer_set_job_sheets (const gchar *printer_name,
                                         &error);
   g_object_unref (bus);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of job sheets for printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of job sheets for printer %s failed: %s", printer_name, ret_error);
+      g_variant_unref (output);
+      return FALSE;
+    }
+
+  g_variant_unref (output);
+
+  return TRUE;
 }
 
 gboolean
@@ -945,9 +933,9 @@ printer_set_policy (const gchar *printer_name,
                     gboolean     error_policy)
 {
   GDBusConnection *bus;
-  GVariant   *output;
-  gboolean   result = FALSE;
-  GError     *error = NULL;
+  GVariant    *output;
+  const gchar *ret_error;
+  GError      *error = NULL;
 
   if (!printer_name || !policy)
     return TRUE;
@@ -986,25 +974,24 @@ printer_set_policy (const gchar *printer_name,
                                           &error);
   g_object_unref (bus);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of a policy for printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of a policy for printer %s failed: %s", printer_name, ret_error);
+      g_variant_unref (output);
+      return FALSE;
+    }
+
+  g_variant_unref (output);
+
+  return TRUE;
 }
 
 gboolean
@@ -1014,10 +1001,10 @@ printer_set_users (const gchar  *printer_name,
 {
   GDBusConnection *bus;
   GVariantBuilder array_builder;
-  gint        i;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  gint         i;
+  GVariant    *output;
+  const gchar *ret_error;
+  GError      *error = NULL;
 
   if (!printer_name || !users)
     return TRUE;
@@ -1060,25 +1047,24 @@ printer_set_users (const gchar  *printer_name,
                                           &error);
   g_object_unref (bus);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of access list for printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of access list for printer %s failed: %s", printer_name, ret_error);
+      g_variant_unref (output);
+      return FALSE;
+    }
+
+  g_variant_unref (output);
+
+  return TRUE;
 }
 
 gboolean
@@ -1086,9 +1072,9 @@ class_add_printer (const gchar *class_name,
                    const gchar *printer_name)
 {
   GDBusConnection *bus;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GVariant    *output;
+  const gchar *ret_error;
+  GError      *error = NULL;
 
   if (!class_name || !printer_name)
     return TRUE;
@@ -1114,25 +1100,24 @@ class_add_printer (const gchar *class_name,
                                         &error);
   g_object_unref (bus);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: adding of printer %s to class %s failed: %s", printer_name, class_name, ret_error);
-      else
-        result = TRUE;
-
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: adding of printer %s to class %s failed: %s", printer_name, class_name, ret_error);
+      g_variant_unref (output);
+      return FALSE;
+    }
+
+  g_variant_unref (output);
+
+  return TRUE;
 }
 
 gboolean
@@ -1312,87 +1297,88 @@ get_ipp_attributes_func (gpointer user_data)
 
   printer_uri = g_strdup_printf ("ipp://localhost/printers/%s", data->printer_name);
 
-  if (data->attributes_names)
+  if (data->attributes_names == NULL)
+    goto out;
+
+  length = g_strv_length (data->attributes_names);
+
+  requested_attrs = g_new0 (char *, length);
+  for (i = 0; data->attributes_names[i]; i++)
+    requested_attrs[i] = g_strdup (data->attributes_names[i]);
+
+  request = ippNewRequest (IPP_GET_PRINTER_ATTRIBUTES);
+  ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                "printer-uri", NULL, printer_uri);
+  ippAddStrings (request, IPP_TAG_OPERATION, IPP_TAG_KEYWORD,
+                 "requested-attributes", length, NULL, (const char **) requested_attrs);
+  response = cupsDoRequest (CUPS_HTTP_DEFAULT, request, "/");
+
+  if (response == NULL)
+    goto out;
+
+  if (ippGetStatusCode (response) > IPP_OK_CONFLICT)
+    goto out;
+
+  for (j = 0; j < length; j++)
     {
-      length = g_strv_length (data->attributes_names);
-
-      requested_attrs = g_new0 (char *, length);
-      for (i = 0; data->attributes_names[i]; i++)
-        requested_attrs[i] = g_strdup (data->attributes_names[i]);
-
-      request = ippNewRequest (IPP_GET_PRINTER_ATTRIBUTES);
-      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
-                    "printer-uri", NULL, printer_uri);
-      ippAddStrings (request, IPP_TAG_OPERATION, IPP_TAG_KEYWORD,
-                     "requested-attributes", length, NULL, (const char **) requested_attrs);
-      response = cupsDoRequest (CUPS_HTTP_DEFAULT, request, "/");
-    }
-
-  if (response)
-    {
-      if (ippGetStatusCode (response) <= IPP_OK_CONFLICT)
+      attr = ippFindAttribute (response, requested_attrs[j], IPP_TAG_ZERO);
+      if (attr && ippGetCount (attr) > 0 && ippGetValueTag (attr) != IPP_TAG_NOVALUE)
         {
-          for (j = 0; j < length; j++)
+          IPPAttribute *attribute;
+
+          attribute = g_new0 (IPPAttribute, 1);
+          attribute->attribute_name = g_strdup (requested_attrs[j]);
+          attribute->attribute_values = g_new0 (IPPAttributeValue, ippGetCount (attr));
+          attribute->num_of_values = ippGetCount (attr);
+
+          if (ippGetValueTag (attr) == IPP_TAG_INTEGER ||
+              ippGetValueTag (attr) == IPP_TAG_ENUM)
             {
-              attr = ippFindAttribute (response, requested_attrs[j], IPP_TAG_ZERO);
-              if (attr && ippGetCount (attr) > 0 && ippGetValueTag (attr) != IPP_TAG_NOVALUE)
+              attribute->attribute_type = IPP_ATTRIBUTE_TYPE_INTEGER;
+
+              for (i = 0; i < ippGetCount (attr); i++)
+                attribute->attribute_values[i].integer_value = ippGetInteger (attr, i);
+            }
+          else if (ippGetValueTag (attr) == IPP_TAG_NAME ||
+                   ippGetValueTag (attr) == IPP_TAG_STRING ||
+                   ippGetValueTag (attr) == IPP_TAG_TEXT ||
+                   ippGetValueTag (attr) == IPP_TAG_URI ||
+                   ippGetValueTag (attr) == IPP_TAG_KEYWORD ||
+                   ippGetValueTag (attr) == IPP_TAG_URISCHEME)
+            {
+              attribute->attribute_type = IPP_ATTRIBUTE_TYPE_STRING;
+
+              for (i = 0; i < ippGetCount (attr); i++)
+                attribute->attribute_values[i].string_value = g_strdup (ippGetString (attr, i, NULL));
+            }
+          else if (ippGetValueTag (attr) == IPP_TAG_RANGE)
+            {
+              attribute->attribute_type = IPP_ATTRIBUTE_TYPE_RANGE;
+
+              for (i = 0; i < ippGetCount (attr); i++)
                 {
-                  IPPAttribute *attribute;
-
-                  attribute = g_new0 (IPPAttribute, 1);
-                  attribute->attribute_name = g_strdup (requested_attrs[j]);
-                  attribute->attribute_values = g_new0 (IPPAttributeValue, ippGetCount (attr));
-                  attribute->num_of_values = ippGetCount (attr);
-
-                  if (ippGetValueTag (attr) == IPP_TAG_INTEGER ||
-                      ippGetValueTag (attr) == IPP_TAG_ENUM)
-                    {
-                      attribute->attribute_type = IPP_ATTRIBUTE_TYPE_INTEGER;
-
-                      for (i = 0; i < ippGetCount (attr); i++)
-                        attribute->attribute_values[i].integer_value = ippGetInteger (attr, i);
-                    }
-                  else if (ippGetValueTag (attr) == IPP_TAG_NAME ||
-                           ippGetValueTag (attr) == IPP_TAG_STRING ||
-                           ippGetValueTag (attr) == IPP_TAG_TEXT ||
-                           ippGetValueTag (attr) == IPP_TAG_URI ||
-                           ippGetValueTag (attr) == IPP_TAG_KEYWORD ||
-                           ippGetValueTag (attr) == IPP_TAG_URISCHEME)
-                    {
-                      attribute->attribute_type = IPP_ATTRIBUTE_TYPE_STRING;
-
-                      for (i = 0; i < ippGetCount (attr); i++)
-                        attribute->attribute_values[i].string_value = g_strdup (ippGetString (attr, i, NULL));
-                    }
-                  else if (ippGetValueTag (attr) == IPP_TAG_RANGE)
-                    {
-                      attribute->attribute_type = IPP_ATTRIBUTE_TYPE_RANGE;
-
-                      for (i = 0; i < ippGetCount (attr); i++)
-                        {
-                          attribute->attribute_values[i].lower_range =
-                            ippGetRange (attr, i, &(attribute->attribute_values[i].upper_range));
-                        }
-                    }
-                  else if (ippGetValueTag (attr) == IPP_TAG_BOOLEAN)
-                    {
-                      attribute->attribute_type = IPP_ATTRIBUTE_TYPE_BOOLEAN;
-
-                      for (i = 0; i < ippGetCount (attr); i++)
-                        attribute->attribute_values[i].boolean_value = ippGetBoolean (attr, i);
-                    }
-
-                  if (!data->result)
-                    data->result = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, ipp_attribute_free2);
-
-                  g_hash_table_insert (data->result, g_strdup (requested_attrs[j]), attribute);
+                  attribute->attribute_values[i].lower_range =
+                    ippGetRange (attr, i, &(attribute->attribute_values[i].upper_range));
                 }
             }
-        }
+          else if (ippGetValueTag (attr) == IPP_TAG_BOOLEAN)
+            {
+              attribute->attribute_type = IPP_ATTRIBUTE_TYPE_BOOLEAN;
 
-      ippDelete (response);
+              for (i = 0; i < ippGetCount (attr); i++)
+                attribute->attribute_values[i].boolean_value = ippGetBoolean (attr, i);
+            }
+
+          if (!data->result)
+            data->result = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, ipp_attribute_free2);
+
+          g_hash_table_insert (data->result, g_strdup (requested_attrs[j]), attribute);
+        }
     }
 
+out:
+  if (response != NULL)
+    ippDelete (response);
 
   for (i = 0; i < length; i++)
     g_free (requested_attrs[i]);
@@ -1444,22 +1430,22 @@ get_ipp_attributes_async (const gchar  *printer_name,
 IPPAttribute *
 ipp_attribute_copy (IPPAttribute *attr)
 {
-  IPPAttribute *result = NULL;
+  IPPAttribute *result;
   gint          i;
 
-  if (attr)
-    {
-      result = g_new0 (IPPAttribute, 1);
+  if (attr == NULL)
+    return NULL;
 
-      *result = *attr;
-      result->attribute_name = g_strdup (attr->attribute_name);
-      result->attribute_values = g_new0 (IPPAttributeValue, attr->num_of_values);
-      for (i = 0; i < attr->num_of_values; i++)
-        {
-          result->attribute_values[i] = attr->attribute_values[i];
-          if (attr->attribute_values[i].string_value)
-            result->attribute_values[i].string_value = g_strdup (attr->attribute_values[i].string_value);
-        }
+  result = g_new0 (IPPAttribute, 1);
+
+  *result = *attr;
+  result->attribute_name = g_strdup (attr->attribute_name);
+  result->attribute_values = g_new0 (IPPAttributeValue, attr->num_of_values);
+  for (i = 0; i < attr->num_of_values; i++)
+    {
+      result->attribute_values[i] = attr->attribute_values[i];
+      if (attr->attribute_values[i].string_value)
+        result->attribute_values[i].string_value = g_strdup (attr->attribute_values[i].string_value);
     }
 
   return result;
@@ -1470,15 +1456,15 @@ ipp_attribute_free (IPPAttribute *attr)
 {
   gint i;
 
-  if (attr)
-    {
-      for (i = 0; i < attr->num_of_values; i++)
-        g_free (attr->attribute_values[i].string_value);
+  if (attr == NULL)
+    return;
 
-      g_free (attr->attribute_values);
-      g_free (attr->attribute_name);
-      g_free (attr);
-    }
+  for (i = 0; i < attr->num_of_values; i++)
+    g_free (attr->attribute_values[i].string_value);
+
+  g_free (attr->attribute_values);
+  g_free (attr->attribute_name);
+  g_free (attr);
 }
 
 
@@ -1497,34 +1483,37 @@ printer_set_ppd_async_dbus_cb (GObject      *source_object,
                                GAsyncResult *res,
                                gpointer      user_data)
 {
-  GVariant *output;
-  gboolean  result = FALSE;
-  PSPData  *data = (PSPData *) user_data;
-  GError   *error = NULL;
+  GVariant    *output;
+  gboolean     result = FALSE;
+  PSPData     *data = (PSPData *) user_data;
+  const gchar *ret_error;
+  GError      *error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
   g_object_unref (source_object);
 
-  if (output)
+  if (output == NULL)
     {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of driver for printer %s failed: %s", data->printer_name, ret_error);
-      else
-        result = TRUE;
-
-      g_variant_unref (output);
-    }
-  else
-    {
-      if (error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
       g_error_free (error);
+      goto out;
     }
+
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of driver for printer %s failed: %s", data->printer_name, ret_error);
+      goto out;
+    }
+
+  result = TRUE;
+
+out:
+  if (output != NULL)
+    g_variant_unref (output);
 
   /* Don't call callback if cancelled */
   if (!data->cancellable ||
@@ -1939,14 +1928,18 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
                               GAsyncResult *res,
                               gpointer      user_data)
 {
-  GVariant  *output;
-  PPDName   *ppd_item;
-  PPDName  **result = NULL;
-  GPNData   *data = (GPNData *) user_data;
-  GError    *error = NULL;
-  GList     *driver_list = NULL;
-  GList     *iter;
-  gint       i, j, n = 0;
+  GVariant     *output;
+  PPDName      *ppd_item;
+  PPDName     **result = NULL;
+  GPNData      *data = (GPNData *) user_data;
+  GError       *error = NULL;
+  GList        *driver_list = NULL;
+  gint          i, j, n = 0;
+  GVariant     *array;
+  GVariantIter *iter;
+  GVariant     *item;
+  gchar        *driver;
+  gchar        *match;
   static const char * const match_levels[] = {
              "exact-cmd",
              "exact",
@@ -1959,74 +1952,68 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
                                           &error);
   g_object_unref (source_object);
 
-  if (output)
+  if (output == NULL)
     {
-      GVariant *array;
-
-      g_variant_get (output, "(@a(ss))",
-                     &array);
-
-      if (array)
-        {
-          GVariantIter *iter;
-          GVariant     *item;
-          gchar        *driver;
-          gchar        *match;
-
-          for (j = 0; j < G_N_ELEMENTS (match_levels) && n < data->count; j++)
-            {
-              g_variant_get (array,
-                             "a(ss)",
-                             &iter);
-
-              while ((item = g_variant_iter_next_value (iter)))
-                {
-                  g_variant_get (item,
-                                 "(ss)",
-                                 &driver,
-                                 &match);
-
-                  if (g_str_equal (match, match_levels[j]) && n < data->count)
-                    {
-                      ppd_item = g_new0 (PPDName, 1);
-                      ppd_item->ppd_name = g_strdup (driver);
-
-                      if (g_strcmp0 (match, "exact-cmd") == 0)
-                        ppd_item->ppd_match_level = PPD_EXACT_CMD_MATCH;
-                      else if (g_strcmp0 (match, "exact") == 0)
-                        ppd_item->ppd_match_level = PPD_EXACT_MATCH;
-                      else if (g_strcmp0 (match, "close") == 0)
-                        ppd_item->ppd_match_level = PPD_CLOSE_MATCH;
-                      else if (g_strcmp0 (match, "generic") == 0)
-                        ppd_item->ppd_match_level = PPD_GENERIC_MATCH;
-                      else if (g_strcmp0 (match, "none") == 0)
-                        ppd_item->ppd_match_level = PPD_NO_MATCH;
-
-                      driver_list = g_list_append (driver_list, ppd_item);
-
-                      n++;
-                    }
-
-                  g_free (driver);
-                  g_free (match);
-                  g_variant_unref (item);
-                }
-            }
-
-          g_variant_unref (array);
-        }
-
-      g_variant_unref (output);
-    }
-  else
-    {
-      if (error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
       g_error_free (error);
+      goto out;
     }
+
+  g_variant_get (output, "(@a(ss))",
+                 &array);
+  g_variant_unref (output);
+
+  if (array == NULL)
+    goto out;
+
+  for (j = 0; j < G_N_ELEMENTS (match_levels) && n < data->count; j++)
+    {
+      g_variant_get (array,
+                     "a(ss)",
+                     &iter);
+
+      while ((item = g_variant_iter_next_value (iter)))
+        {
+          g_variant_get (item,
+                         "(ss)",
+                         &driver,
+                         &match);
+
+          if (g_str_equal (match, match_levels[j]) && n < data->count)
+            {
+              ppd_item = g_new0 (PPDName, 1);
+              ppd_item->ppd_name = g_strdup (driver);
+
+              if (g_strcmp0 (match, "exact-cmd") == 0)
+                ppd_item->ppd_match_level = PPD_EXACT_CMD_MATCH;
+              else if (g_strcmp0 (match, "exact") == 0)
+                ppd_item->ppd_match_level = PPD_EXACT_MATCH;
+              else if (g_strcmp0 (match, "close") == 0)
+                ppd_item->ppd_match_level = PPD_CLOSE_MATCH;
+              else if (g_strcmp0 (match, "generic") == 0)
+                ppd_item->ppd_match_level = PPD_GENERIC_MATCH;
+              else if (g_strcmp0 (match, "none") == 0)
+                ppd_item->ppd_match_level = PPD_NO_MATCH;
+
+              driver_list = g_list_append (driver_list, ppd_item);
+
+              n++;
+            }
+
+          g_free (driver);
+          g_free (match);
+          g_variant_unref (item);
+        }
+    }
+
+  g_variant_unref (array);
 
   if (n > 0)
     {
+      gchar **ppds_names;
+      GList *iter;
+
       result = g_new0 (PPDName *, n + 1);
       i = 0;
       for (iter = driver_list; iter; iter = iter->next)
@@ -2034,11 +2021,6 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
           result[i] = iter->data;
           i++;
         }
-    }
-
-  if (result)
-    {
-      gchar **ppds_names;
 
       data->result = result;
 
@@ -2052,19 +2034,20 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
                                 data);
 
       g_strfreev (ppds_names);
-    }
-  else
-    {
-      data->callback (NULL,
-                      data->printer_name,
-                      g_cancellable_is_cancelled (data->cancellable),
-                      data->user_data);
 
-      if (data->cancellable)
-        g_object_unref (data->cancellable);
-      g_free (data->printer_name);
-      g_free (data);
+      return;
     }
+
+out:
+  data->callback (NULL,
+                  data->printer_name,
+                  g_cancellable_is_cancelled (data->cancellable),
+                  data->user_data);
+
+  if (data->cancellable)
+    g_object_unref (data->cancellable);
+  g_free (data->printer_name);
+  g_free (data);
 }
 
 static void
@@ -2293,7 +2276,7 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
     }
   else
     {
-      if (error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
       g_error_free (error);
     }
@@ -2672,210 +2655,206 @@ get_all_ppds_func (gpointer user_data)
   gchar           *mdl;
   gchar           *manufacturer_display_name;
   gint             i, j;
+  GHashTableIter   iter;
+  gpointer         key;
+  gpointer         value;
+  GList           *ppd_item;
+  GList           *sort_list = NULL;
+  GList           *list_iter;
+  gchar           *name;
 
   request = ippNewRequest (CUPS_GET_PPDS);
   response = cupsDoRequest (CUPS_HTTP_DEFAULT, request, "/");
 
-  if (response &&
-      ippGetStatusCode (response) <= IPP_OK_CONFLICT)
+  if (response == NULL ||
+      ippGetStatusCode (response) > IPP_OK_CONFLICT)
+    goto out;
+
+  /*
+   * This hash contains names of manufacturers as keys and
+   * values are GLists of PPD names.
+   */
+  ppds_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+
+  /*
+   * This hash contains all possible names of manufacturers as keys
+   * and values are just first occurences of their equivalents.
+   * This is for mapping of e.g. "Hewlett Packard" and "HP" to the same name
+   * (the one which comes first).
+   */
+  manufacturers_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+
+  for (i = 0; i < G_N_ELEMENTS (manufacturers_names); i++)
     {
-      /*
-       * This hash contains names of manufacturers as keys and
-       * values are GLists of PPD names.
-       */
-      ppds_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-
-      /*
-       * This hash contains all possible names of manufacturers as keys
-       * and values are just first occurences of their equivalents.
-       * This is for mapping of e.g. "Hewlett Packard" and "HP" to the same name
-       * (the one which comes first).
-       */
-      manufacturers_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-
-      for (i = 0; i < G_N_ELEMENTS (manufacturers_names); i++)
-        {
-          g_hash_table_insert (manufacturers_hash,
-                               g_strdup (manufacturers_names[i].normalized_name),
-                               g_strdup (manufacturers_names[i].display_name));
-        }
-
-      for (attr = ippFirstAttribute (response); attr != NULL; attr = ippNextAttribute (response))
-        {
-          while (attr != NULL && ippGetGroupTag (attr) != IPP_TAG_PRINTER)
-            attr = ippNextAttribute (response);
-
-          if (attr == NULL)
-            break;
-
-          ppd_device_id = NULL;
-          ppd_make_and_model = NULL;
-          ppd_name = NULL;
-          ppd_product = NULL;
-          ppd_make = NULL;
-          mfg = NULL;
-          mfg_normalized = NULL;
-          mdl = NULL;
-
-          while (attr != NULL && ippGetGroupTag (attr) == IPP_TAG_PRINTER)
-            {
-              if (g_strcmp0 (ippGetName (attr), "ppd-device-id") == 0 &&
-                  ippGetValueTag (attr) == IPP_TAG_TEXT)
-                ppd_device_id = ippGetString (attr, 0, NULL);
-              else if (g_strcmp0 (ippGetName (attr), "ppd-make-and-model") == 0 &&
-                       ippGetValueTag (attr) == IPP_TAG_TEXT)
-                ppd_make_and_model = ippGetString (attr, 0, NULL);
-              else if (g_strcmp0 (ippGetName (attr), "ppd-name") == 0 &&
-                       ippGetValueTag (attr) == IPP_TAG_NAME)
-                ppd_name = ippGetString (attr, 0, NULL);
-              else if (g_strcmp0 (ippGetName (attr), "ppd-product") == 0 &&
-                       ippGetValueTag (attr) == IPP_TAG_TEXT)
-                ppd_product = ippGetString (attr, 0, NULL);
-              else if (g_strcmp0 (ippGetName (attr), "ppd-make") == 0 &&
-                       ippGetValueTag (attr) == IPP_TAG_TEXT)
-                ppd_make = ippGetString (attr, 0, NULL);
-
-              attr = ippNextAttribute (response);
-            }
-
-          /* Get manufacturer's name */
-          if (ppd_device_id && ppd_device_id[0] != '\0')
-            {
-              mfg = get_tag_value (ppd_device_id, "mfg");
-              if (!mfg)
-                mfg = get_tag_value (ppd_device_id, "manufacturer");
-              mfg_normalized = normalize (mfg);
-            }
-
-          if (!mfg &&
-              ppd_make &&
-              ppd_make[0] != '\0')
-            {
-              mfg = g_strdup (ppd_make);
-              mfg_normalized = normalize (ppd_make);
-            }
-
-          /* Get model */
-          if (ppd_make_and_model &&
-              ppd_make_and_model[0] != '\0')
-            {
-              mdl = g_strdup (ppd_make_and_model);
-            }
-
-          if (!mdl &&
-              ppd_product &&
-              ppd_product[0] != '\0')
-            {
-              mdl = g_strdup (ppd_product);
-            }
-
-          if (!mdl &&
-              ppd_device_id &&
-              ppd_device_id[0] != '\0')
-            {
-              mdl = get_tag_value (ppd_device_id, "mdl");
-              if (!mdl)
-                mdl = get_tag_value (ppd_device_id, "model");
-            }
-
-          if (ppd_name && ppd_name[0] != '\0' &&
-              mdl && mdl[0] != '\0' &&
-              mfg && mfg[0] != '\0')
-            {
-              manufacturer_display_name = g_hash_table_lookup (manufacturers_hash, mfg_normalized);
-              if (!manufacturer_display_name)
-                {
-                  g_hash_table_insert (manufacturers_hash, g_strdup (mfg_normalized), g_strdup (mfg));
-                }
-              else
-                {
-                  g_free (mfg_normalized);
-                  mfg_normalized = normalize (manufacturer_display_name);
-                }
-
-              item = g_new0 (PPDName, 1);
-              item->ppd_name = g_strdup (ppd_name);
-              item->ppd_display_name = g_strdup (mdl);
-              item->ppd_match_level = -1;
-
-              list = g_hash_table_lookup (ppds_hash, mfg_normalized);
-              if (list)
-                {
-                  list = g_list_append (list, item);
-                }
-              else
-                {
-                  list = g_list_append (list, item);
-                  g_hash_table_insert (ppds_hash, g_strdup (mfg_normalized), list);
-                }
-            }
-
-          g_free (mdl);
-          g_free (mfg);
-          g_free (mfg_normalized);
-
-          if (attr == NULL)
-            break;
-        }
+      g_hash_table_insert (manufacturers_hash,
+                           g_strdup (manufacturers_names[i].normalized_name),
+                           g_strdup (manufacturers_names[i].display_name));
     }
 
+  for (attr = ippFirstAttribute (response); attr != NULL; attr = ippNextAttribute (response))
+    {
+      while (attr != NULL && ippGetGroupTag (attr) != IPP_TAG_PRINTER)
+        attr = ippNextAttribute (response);
+
+      if (attr == NULL)
+        break;
+
+      ppd_device_id = NULL;
+      ppd_make_and_model = NULL;
+      ppd_name = NULL;
+      ppd_product = NULL;
+      ppd_make = NULL;
+      mfg = NULL;
+      mfg_normalized = NULL;
+      mdl = NULL;
+
+      while (attr != NULL && ippGetGroupTag (attr) == IPP_TAG_PRINTER)
+        {
+          if (g_strcmp0 (ippGetName (attr), "ppd-device-id") == 0 &&
+              ippGetValueTag (attr) == IPP_TAG_TEXT)
+            ppd_device_id = ippGetString (attr, 0, NULL);
+          else if (g_strcmp0 (ippGetName (attr), "ppd-make-and-model") == 0 &&
+                   ippGetValueTag (attr) == IPP_TAG_TEXT)
+            ppd_make_and_model = ippGetString (attr, 0, NULL);
+          else if (g_strcmp0 (ippGetName (attr), "ppd-name") == 0 &&
+                   ippGetValueTag (attr) == IPP_TAG_NAME)
+            ppd_name = ippGetString (attr, 0, NULL);
+          else if (g_strcmp0 (ippGetName (attr), "ppd-product") == 0 &&
+                   ippGetValueTag (attr) == IPP_TAG_TEXT)
+            ppd_product = ippGetString (attr, 0, NULL);
+          else if (g_strcmp0 (ippGetName (attr), "ppd-make") == 0 &&
+                   ippGetValueTag (attr) == IPP_TAG_TEXT)
+            ppd_make = ippGetString (attr, 0, NULL);
+
+          attr = ippNextAttribute (response);
+        }
+
+      /* Get manufacturer's name */
+      if (ppd_device_id && ppd_device_id[0] != '\0')
+        {
+          mfg = get_tag_value (ppd_device_id, "mfg");
+          if (!mfg)
+            mfg = get_tag_value (ppd_device_id, "manufacturer");
+          mfg_normalized = normalize (mfg);
+        }
+
+      if (!mfg &&
+          ppd_make &&
+          ppd_make[0] != '\0')
+        {
+          mfg = g_strdup (ppd_make);
+          mfg_normalized = normalize (ppd_make);
+        }
+
+      /* Get model */
+      if (ppd_make_and_model &&
+          ppd_make_and_model[0] != '\0')
+        {
+          mdl = g_strdup (ppd_make_and_model);
+        }
+
+      if (!mdl &&
+          ppd_product &&
+          ppd_product[0] != '\0')
+        {
+          mdl = g_strdup (ppd_product);
+        }
+
+      if (!mdl &&
+          ppd_device_id &&
+          ppd_device_id[0] != '\0')
+        {
+          mdl = get_tag_value (ppd_device_id, "mdl");
+          if (!mdl)
+            mdl = get_tag_value (ppd_device_id, "model");
+        }
+
+      if (ppd_name && ppd_name[0] != '\0' &&
+          mdl && mdl[0] != '\0' &&
+          mfg && mfg[0] != '\0')
+        {
+          manufacturer_display_name = g_hash_table_lookup (manufacturers_hash, mfg_normalized);
+          if (!manufacturer_display_name)
+            {
+              g_hash_table_insert (manufacturers_hash, g_strdup (mfg_normalized), g_strdup (mfg));
+            }
+          else
+            {
+              g_free (mfg_normalized);
+              mfg_normalized = normalize (manufacturer_display_name);
+            }
+
+          item = g_new0 (PPDName, 1);
+          item->ppd_name = g_strdup (ppd_name);
+          item->ppd_display_name = g_strdup (mdl);
+          item->ppd_match_level = -1;
+
+          list = g_hash_table_lookup (ppds_hash, mfg_normalized);
+          if (list)
+            {
+              list = g_list_append (list, item);
+            }
+          else
+            {
+              list = g_list_append (list, item);
+              g_hash_table_insert (ppds_hash, g_strdup (mfg_normalized), list);
+            }
+        }
+
+      g_free (mdl);
+      g_free (mfg);
+      g_free (mfg_normalized);
+
+      if (attr == NULL)
+        break;
+    }
+
+  data->result = g_new0 (PPDList, 1);
+  data->result->num_of_manufacturers = g_hash_table_size (ppds_hash);
+  data->result->manufacturers = g_new0 (PPDManufacturerItem *, data->result->num_of_manufacturers);
+
+  g_hash_table_iter_init (&iter, ppds_hash);
+  while (g_hash_table_iter_next (&iter, &key, &value))
+    {
+      sort_list = g_list_append (sort_list, g_strdup (key));
+    }
+
+  /* Sort list of manufacturers */
+  sort_list = g_list_sort (sort_list, (GCompareFunc) g_strcmp0);
+
+  /*
+   * Fill resulting list of lists (list of manufacturers where
+   * each item contains list of PPD names)
+   */
+  i = 0;
+  for (list_iter = sort_list; list_iter; list_iter = list_iter->next)
+    {
+      name = (gchar *) list_iter->data;
+      value = g_hash_table_lookup (ppds_hash, name);
+
+      data->result->manufacturers[i] = g_new0 (PPDManufacturerItem, 1);
+      data->result->manufacturers[i]->manufacturer_name = g_strdup (name);
+      data->result->manufacturers[i]->manufacturer_display_name = g_strdup (g_hash_table_lookup (manufacturers_hash, name));
+      data->result->manufacturers[i]->num_of_ppds = g_list_length ((GList *) value);
+      data->result->manufacturers[i]->ppds = g_new0 (PPDName *, data->result->manufacturers[i]->num_of_ppds);
+
+      for (ppd_item = (GList *) value, j = 0; ppd_item; ppd_item = ppd_item->next, j++)
+        {
+          data->result->manufacturers[i]->ppds[j] = ppd_item->data;
+        }
+
+      g_list_free ((GList *) value);
+
+      i++;
+    }
+
+  g_list_free_full (sort_list, g_free);
+  g_hash_table_destroy (ppds_hash);
+  g_hash_table_destroy (manufacturers_hash);
+
+out:
   if (response)
     ippDelete(response);
-
-  if (ppds_hash &&
-      manufacturers_hash)
-    {
-      GHashTableIter  iter;
-      gpointer        key;
-      gpointer        value;
-      GList          *ppd_item;
-      GList          *sort_list = NULL;
-      GList          *list_iter;
-      gchar          *name;
-
-      data->result = g_new0 (PPDList, 1);
-      data->result->num_of_manufacturers = g_hash_table_size (ppds_hash);
-      data->result->manufacturers = g_new0 (PPDManufacturerItem *, data->result->num_of_manufacturers);
-
-      g_hash_table_iter_init (&iter, ppds_hash);
-      while (g_hash_table_iter_next (&iter, &key, &value))
-        {
-          sort_list = g_list_append (sort_list, g_strdup (key));
-        }
-
-      /* Sort list of manufacturers */
-      sort_list = g_list_sort (sort_list, (GCompareFunc) g_strcmp0);
-
-      /*
-       * Fill resulting list of lists (list of manufacturers where
-       * each item contains list of PPD names)
-       */
-      i = 0;
-      for (list_iter = sort_list; list_iter; list_iter = list_iter->next)
-        {
-          name = (gchar *) list_iter->data;
-          value = g_hash_table_lookup (ppds_hash, name);
-
-          data->result->manufacturers[i] = g_new0 (PPDManufacturerItem, 1);
-          data->result->manufacturers[i]->manufacturer_name = g_strdup (name);
-          data->result->manufacturers[i]->manufacturer_display_name = g_strdup (g_hash_table_lookup (manufacturers_hash, name));
-          data->result->manufacturers[i]->num_of_ppds = g_list_length ((GList *) value);
-          data->result->manufacturers[i]->ppds = g_new0 (PPDName *, data->result->manufacturers[i]->num_of_ppds);
-
-          for (ppd_item = (GList *) value, j = 0; ppd_item; ppd_item = ppd_item->next, j++)
-            {
-              data->result->manufacturers[i]->ppds[j] = ppd_item->data;
-            }
-
-          g_list_free ((GList *) value);
-
-          i++;
-        }
-
-      g_list_free_full (sort_list, g_free);
-      g_hash_table_destroy (ppds_hash);
-      g_hash_table_destroy (manufacturers_hash);
-    }
 
   get_all_ppds_cb (data);
 
@@ -2923,40 +2902,40 @@ get_all_ppds_async (GCancellable *cancellable,
 PPDList *
 ppd_list_copy (PPDList *list)
 {
-  PPDList *result = NULL;
+  PPDList *result;
   gint     i, j;
 
-  if (list)
+  if (list == NULL)
+    return NULL;
+
+  result = g_new0 (PPDList, 1);
+  result->num_of_manufacturers = list->num_of_manufacturers;
+  result->manufacturers = g_new0 (PPDManufacturerItem *, list->num_of_manufacturers);
+
+  for (i = 0; i < result->num_of_manufacturers; i++)
     {
-      result = g_new0 (PPDList, 1);
-      result->num_of_manufacturers = list->num_of_manufacturers;
-      result->manufacturers = g_new0 (PPDManufacturerItem *, list->num_of_manufacturers);
+      result->manufacturers[i] = g_new0 (PPDManufacturerItem, 1);
+      result->manufacturers[i]->num_of_ppds = list->manufacturers[i]->num_of_ppds;
+      result->manufacturers[i]->ppds = g_new0 (PPDName *, result->manufacturers[i]->num_of_ppds);
 
-      for (i = 0; i < result->num_of_manufacturers; i++)
+      result->manufacturers[i]->manufacturer_display_name =
+        g_strdup (list->manufacturers[i]->manufacturer_display_name);
+
+      result->manufacturers[i]->manufacturer_name =
+        g_strdup (list->manufacturers[i]->manufacturer_name);
+
+      for (j = 0; j < result->manufacturers[i]->num_of_ppds; j++)
         {
-          result->manufacturers[i] = g_new0 (PPDManufacturerItem, 1);
-          result->manufacturers[i]->num_of_ppds = list->manufacturers[i]->num_of_ppds;
-          result->manufacturers[i]->ppds = g_new0 (PPDName *, result->manufacturers[i]->num_of_ppds);
+          result->manufacturers[i]->ppds[j] = g_new0 (PPDName, 1);
 
-          result->manufacturers[i]->manufacturer_display_name =
-            g_strdup (list->manufacturers[i]->manufacturer_display_name);
+          result->manufacturers[i]->ppds[j]->ppd_display_name =
+            g_strdup (list->manufacturers[i]->ppds[j]->ppd_display_name);
 
-          result->manufacturers[i]->manufacturer_name =
-            g_strdup (list->manufacturers[i]->manufacturer_name);
+          result->manufacturers[i]->ppds[j]->ppd_name =
+            g_strdup (list->manufacturers[i]->ppds[j]->ppd_name);
 
-          for (j = 0; j < result->manufacturers[i]->num_of_ppds; j++)
-            {
-              result->manufacturers[i]->ppds[j] = g_new0 (PPDName, 1);
-
-              result->manufacturers[i]->ppds[j]->ppd_display_name =
-                g_strdup (list->manufacturers[i]->ppds[j]->ppd_display_name);
-
-              result->manufacturers[i]->ppds[j]->ppd_name =
-                g_strdup (list->manufacturers[i]->ppds[j]->ppd_name);
-
-              result->manufacturers[i]->ppds[j]->ppd_match_level =
-                list->manufacturers[i]->ppds[j]->ppd_match_level;
-            }
+          result->manufacturers[i]->ppds[j]->ppd_match_level =
+            list->manufacturers[i]->ppds[j]->ppd_match_level;
         }
     }
 
@@ -2968,26 +2947,26 @@ ppd_list_free (PPDList *list)
 {
   gint i, j;
 
-  if (list)
-    {
-      for (i = 0; i < list->num_of_manufacturers; i++)
-        {
-          for (j = 0; j < list->manufacturers[i]->num_of_ppds; j++)
-            {
-              g_free (list->manufacturers[i]->ppds[j]->ppd_name);
-              g_free (list->manufacturers[i]->ppds[j]->ppd_display_name);
-              g_free (list->manufacturers[i]->ppds[j]);
-            }
+  if (list == NULL)
+    return;
 
-          g_free (list->manufacturers[i]->manufacturer_name);
-          g_free (list->manufacturers[i]->manufacturer_display_name);
-          g_free (list->manufacturers[i]->ppds);
-          g_free (list->manufacturers[i]);
+  for (i = 0; i < list->num_of_manufacturers; i++)
+    {
+      for (j = 0; j < list->manufacturers[i]->num_of_ppds; j++)
+        {
+          g_free (list->manufacturers[i]->ppds[j]->ppd_name);
+          g_free (list->manufacturers[i]->ppds[j]->ppd_display_name);
+          g_free (list->manufacturers[i]->ppds[j]);
         }
 
-      g_free (list->manufacturers);
-      g_free (list);
+      g_free (list->manufacturers[i]->manufacturer_name);
+      g_free (list->manufacturers[i]->manufacturer_display_name);
+      g_free (list->manufacturers[i]->ppds);
+      g_free (list->manufacturers[i]);
     }
+
+  g_free (list->manufacturers);
+  g_free (list);
 }
 
 gchar *
@@ -2997,21 +2976,21 @@ get_standard_manufacturers_name (const gchar *name)
   gchar *result = NULL;
   gint   i;
 
-  if (name)
+  if (name == NULL)
+    return NULL;
+
+  normalized_name = normalize (name);
+
+  for (i = 0; i < G_N_ELEMENTS (manufacturers_names); i++)
     {
-      normalized_name = normalize (name);
-
-      for (i = 0; i < G_N_ELEMENTS (manufacturers_names); i++)
+      if (g_strcmp0 (manufacturers_names[i].normalized_name, normalized_name) == 0)
         {
-          if (g_strcmp0 (manufacturers_names[i].normalized_name, normalized_name) == 0)
-            {
-              result = g_strdup (manufacturers_names[i].display_name);
-              break;
-            }
+          result = g_strdup (manufacturers_names[i].display_name);
+          break;
         }
-
-      g_free (normalized_name);
     }
+
+  g_free (normalized_name);
 
   return result;
 }
@@ -3242,34 +3221,37 @@ printer_add_option_async_dbus_cb (GObject      *source_object,
                                   GAsyncResult *res,
                                   gpointer      user_data)
 {
-  GVariant *output;
-  gboolean  success = FALSE;
-  PAOData  *data = (PAOData *) user_data;
-  GError   *error = NULL;
+  GVariant    *output;
+  gboolean     success = FALSE;
+  PAOData     *data = (PAOData *) user_data;
+  const gchar *ret_error;
+  GError      *error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
   g_object_unref (source_object);
 
-  if (output)
+  if (output == NULL)
     {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of an option failed: %s", ret_error);
-      else
-        success = TRUE;
-
-      g_variant_unref (output);
-    }
-  else
-    {
-      if (error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
       g_error_free (error);
+      goto out;
     }
+
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of an option failed: %s", ret_error);
+      goto out;
+    }
+
+  success = TRUE;
+
+out:
+  if (output != NULL)
+    g_variant_unref (output);
 
   if (!g_cancellable_is_cancelled (data->cancellable))
     data->callback (success, data->user_data);
@@ -3373,108 +3355,20 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
   GError         *error = NULL;
   GList          *result = NULL;
   gint            num_of_devices = 0;
+  const gchar    *ret_error;
+  GVariant       *devices_variant = NULL;
+  gboolean        is_network_device;
+  GVariantBuilder *include_scheme_builder = NULL;
+  GVariantBuilder *exclude_scheme_builder = NULL;
+  gchar           *backend_name;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
 
-  if (output)
+  if (output == NULL)
     {
-      const gchar *ret_error;
-      GVariant    *devices_variant = NULL;
-      gboolean     is_network_device;
-
-      g_variant_get (output, "(&s@a{ss})",
-                     &ret_error,
-                     &devices_variant);
-
-      if (ret_error[0] != '\0')
-        {
-          g_warning ("cups-pk-helper: getting of CUPS devices failed: %s", ret_error);
-        }
-
-      if (devices_variant)
-        {
-          GVariantIter *iter;
-          GVariant     *item;
-          gchar        *key;
-          gchar        *value;
-          gint          index = -1, max_index = -1, i;
-
-          g_variant_get (devices_variant, "a{ss}", &iter);
-          while ((item = g_variant_iter_next_value (iter)))
-            {
-              g_variant_get (item, "{ss}", &key, &value);
-
-              index = get_suffix_index (key);
-              if (index > max_index)
-                max_index = index;
-
-              g_free (key);
-              g_free (value);
-              g_variant_unref (item);
-            }
-
-          if (max_index >= 0)
-            {
-              num_of_devices = max_index + 1;
-              devices = g_new0 (PpPrintDevice *, num_of_devices);
-
-              g_variant_get (devices_variant, "a{ss}", &iter);
-              while ((item = g_variant_iter_next_value (iter)))
-                {
-                  g_variant_get (item, "{ss}", &key, &value);
-
-                  index = get_suffix_index (key);
-                  if (index >= 0)
-                    {
-                      if (!devices[index])
-                        devices[index] = pp_print_device_new ();
-
-                      if (g_str_has_prefix (key, "device-class"))
-                        {
-                          is_network_device = g_strcmp0 (value, "network") == 0;
-                          g_object_set (devices[index], "is-network-device", is_network_device, NULL);
-                        }
-                      else if (g_str_has_prefix (key, "device-id"))
-                        g_object_set (devices[index], "device-id", value, NULL);
-                      else if (g_str_has_prefix (key, "device-info"))
-                        g_object_set (devices[index], "device-info", value, NULL);
-                      else if (g_str_has_prefix (key, "device-make-and-model"))
-                        {
-                          g_object_set (devices[index],
-                                        "device-make-and-model", value,
-                                        "device-name", value,
-                                        NULL);
-                        }
-                      else if (g_str_has_prefix (key, "device-uri"))
-                        g_object_set (devices[index], "device-uri", value, NULL);
-                      else if (g_str_has_prefix (key, "device-location"))
-                        g_object_set (devices[index], "device-location", value, NULL);
-
-                      g_object_set (devices[index], "acquisition-method", ACQUISITION_METHOD_DEFAULT_CUPS_SERVER, NULL);
-                    }
-
-                  g_free (key);
-                  g_free (value);
-                  g_variant_unref (item);
-                }
-
-              for (i = 0; i < num_of_devices; i++)
-                result = g_list_append (result, devices[i]);
-
-              g_free (devices);
-            }
-
-          g_variant_unref (devices_variant);
-        }
-
-      g_variant_unref (output);
-    }
-  else
-    {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
       g_error_free (error);
 
@@ -3493,78 +3387,160 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
       return;
     }
 
-  if (data->backend_list)
+  g_variant_get (output, "(&s@a{ss})",
+                 &ret_error,
+                 &devices_variant);
+
+  if (ret_error[0] != '\0')
     {
-      if (!g_cancellable_is_cancelled (data->cancellable))
-        {
-          GVariantBuilder *include_scheme_builder = NULL;
-          GVariantBuilder *exclude_scheme_builder = NULL;
-          gchar           *backend_name;
-
-          backend_name = data->backend_list->data;
-
-          data->callback (result,
-                          FALSE,
-                          FALSE,
-                          data->user_data);
-
-          if (g_strcmp0 (backend_name, OTHER_BACKENDS) != 0)
-            {
-              include_scheme_builder = g_variant_builder_new (G_VARIANT_TYPE ("as"));
-              g_variant_builder_add (include_scheme_builder, "s", backend_name);
-            }
-          else
-            {
-              exclude_scheme_builder = create_other_backends_array ();
-            }
-
-          g_free (backend_name);
-          data->backend_list = g_list_remove_link (data->backend_list, data->backend_list);
-
-          g_dbus_connection_call (G_DBUS_CONNECTION (g_object_ref (source_object)),
-                                  MECHANISM_BUS,
-                                  "/",
-                                  MECHANISM_BUS,
-                                  "DevicesGet",
-                                  g_variant_new ("(iiasas)",
-                                                 0,
-                                                 0,
-                                                 include_scheme_builder,
-                                                 exclude_scheme_builder),
-                                  G_VARIANT_TYPE ("(sa{ss})"),
-                                  G_DBUS_CALL_FLAGS_NONE,
-                                  DBUS_TIMEOUT,
-                                  data->cancellable,
-                                  get_cups_devices_async_dbus_cb,
-                                  user_data);
-
-          if (include_scheme_builder)
-            g_variant_builder_unref (include_scheme_builder);
-
-          if (exclude_scheme_builder)
-            g_variant_builder_unref (exclude_scheme_builder);
-
-          return;
-        }
-      else
-        {
-          data->callback (result,
-                          TRUE,
-                          TRUE,
-                          data->user_data);
-
-          g_list_free_full (data->backend_list, g_free);
-          data->backend_list = NULL;
-        }
+      g_warning ("cups-pk-helper: getting of CUPS devices failed: %s", ret_error);
     }
-  else
+
+  if (devices_variant)
+    {
+      GVariantIter *iter;
+      GVariant     *item;
+      gchar        *key;
+      gchar        *value;
+      gint          index = -1, max_index = -1, i;
+
+      g_variant_get (devices_variant, "a{ss}", &iter);
+      while ((item = g_variant_iter_next_value (iter)))
+        {
+          g_variant_get (item, "{ss}", &key, &value);
+
+          index = get_suffix_index (key);
+          if (index > max_index)
+            max_index = index;
+
+          g_free (key);
+          g_free (value);
+          g_variant_unref (item);
+        }
+
+      if (max_index >= 0)
+        {
+          num_of_devices = max_index + 1;
+          devices = g_new0 (PpPrintDevice *, num_of_devices);
+
+          g_variant_get (devices_variant, "a{ss}", &iter);
+          while ((item = g_variant_iter_next_value (iter)))
+            {
+              g_variant_get (item, "{ss}", &key, &value);
+
+              index = get_suffix_index (key);
+              if (index >= 0)
+                {
+                  if (!devices[index])
+                    devices[index] = pp_print_device_new ();
+
+                  if (g_str_has_prefix (key, "device-class"))
+                    {
+                      is_network_device = g_strcmp0 (value, "network") == 0;
+                      g_object_set (devices[index], "is-network-device", is_network_device, NULL);
+                    }
+                  else if (g_str_has_prefix (key, "device-id"))
+                    g_object_set (devices[index], "device-id", value, NULL);
+                  else if (g_str_has_prefix (key, "device-info"))
+                    g_object_set (devices[index], "device-info", value, NULL);
+                  else if (g_str_has_prefix (key, "device-make-and-model"))
+                    {
+                      g_object_set (devices[index],
+                                    "device-make-and-model", value,
+                                    "device-name", value,
+                                    NULL);
+                    }
+                  else if (g_str_has_prefix (key, "device-uri"))
+                    g_object_set (devices[index], "device-uri", value, NULL);
+                  else if (g_str_has_prefix (key, "device-location"))
+                    g_object_set (devices[index], "device-location", value, NULL);
+
+                  g_object_set (devices[index], "acquisition-method", ACQUISITION_METHOD_DEFAULT_CUPS_SERVER, NULL);
+                }
+
+              g_free (key);
+              g_free (value);
+              g_variant_unref (item);
+            }
+
+          for (i = 0; i < num_of_devices; i++)
+            result = g_list_append (result, devices[i]);
+
+          g_free (devices);
+        }
+
+      g_variant_unref (devices_variant);
+    }
+
+  g_variant_unref (output);
+
+  if (data->backend_list == NULL)
     {
       data->callback (result,
                       TRUE,
                       g_cancellable_is_cancelled (data->cancellable),
                       data->user_data);
+      goto out;
     }
 
+  if (g_cancellable_is_cancelled (data->cancellable))
+    {
+      data->callback (result,
+                      TRUE,
+                      TRUE,
+                      data->user_data);
+
+      g_list_free_full (data->backend_list, g_free);
+      data->backend_list = NULL;
+      goto out;
+    }
+
+  backend_name = data->backend_list->data;
+
+  data->callback (result,
+                  FALSE,
+                  FALSE,
+                  data->user_data);
+
+  if (g_strcmp0 (backend_name, OTHER_BACKENDS) != 0)
+    {
+      include_scheme_builder = g_variant_builder_new (G_VARIANT_TYPE ("as"));
+      g_variant_builder_add (include_scheme_builder, "s", backend_name);
+    }
+  else
+    {
+      exclude_scheme_builder = create_other_backends_array ();
+    }
+
+  g_free (backend_name);
+  data->backend_list = g_list_remove_link (data->backend_list, data->backend_list);
+
+  g_dbus_connection_call (G_DBUS_CONNECTION (g_object_ref (source_object)),
+                          MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          "DevicesGet",
+                          g_variant_new ("(iiasas)",
+                                         0,
+                                         0,
+                                         include_scheme_builder,
+                                         exclude_scheme_builder),
+                          G_VARIANT_TYPE ("(sa{ss})"),
+                          G_DBUS_CALL_FLAGS_NONE,
+                          DBUS_TIMEOUT,
+                          data->cancellable,
+                          get_cups_devices_async_dbus_cb,
+                          user_data);
+
+  if (include_scheme_builder)
+    g_variant_builder_unref (include_scheme_builder);
+
+  if (exclude_scheme_builder)
+    g_variant_builder_unref (exclude_scheme_builder);
+
+  return;
+
+out:
   g_object_unref (source_object);
   if (data->cancellable)
     g_object_unref (data->cancellable);
@@ -3637,57 +3613,57 @@ guess_device_hostname (PpPrintDevice *device)
   gchar             *hostname_begin;
   gchar             *hostname_end = NULL;
 
-  if (device != NULL && pp_print_device_get_device_uri (device) != NULL)
+  if (device == NULL || pp_print_device_get_device_uri (device) == NULL)
+    return NULL;
+
+  if (g_str_has_prefix (pp_print_device_get_device_uri (device), "socket") ||
+      g_str_has_prefix (pp_print_device_get_device_uri (device), "lpd") ||
+      g_str_has_prefix (pp_print_device_get_device_uri (device), "ipp") ||
+      g_str_has_prefix (pp_print_device_get_device_uri (device), "smb"))
     {
-      if (g_str_has_prefix (pp_print_device_get_device_uri (device), "socket") ||
-          g_str_has_prefix (pp_print_device_get_device_uri (device), "lpd") ||
-          g_str_has_prefix (pp_print_device_get_device_uri (device), "ipp") ||
-          g_str_has_prefix (pp_print_device_get_device_uri (device), "smb"))
-        {
-          status = httpSeparateURI (HTTP_URI_CODING_ALL,
-                                    pp_print_device_get_device_uri (device),
-                                    scheme, HTTP_MAX_URI,
-                                    username, HTTP_MAX_URI,
-                                    hostname, HTTP_MAX_URI,
-                                    &port,
-                                    resource, HTTP_MAX_URI);
+      status = httpSeparateURI (HTTP_URI_CODING_ALL,
+                                pp_print_device_get_device_uri (device),
+                                scheme, HTTP_MAX_URI,
+                                username, HTTP_MAX_URI,
+                                hostname, HTTP_MAX_URI,
+                                &port,
+                                resource, HTTP_MAX_URI);
 
-          if (status >= HTTP_URI_STATUS_OK &&
-              hostname[0] != '\0')
-            result = g_strdup (hostname);
-        }
-      else if ((g_str_has_prefix (pp_print_device_get_device_uri (device), "dnssd") ||
-                g_str_has_prefix (pp_print_device_get_device_uri (device), "mdns")) &&
-               pp_print_device_get_device_info (device) != NULL)
+      if (status >= HTTP_URI_STATUS_OK &&
+          hostname[0] != '\0')
+        result = g_strdup (hostname);
+    }
+  else if ((g_str_has_prefix (pp_print_device_get_device_uri (device), "dnssd") ||
+            g_str_has_prefix (pp_print_device_get_device_uri (device), "mdns")) &&
+           pp_print_device_get_device_info (device) != NULL)
+    {
+      /*
+       * CUPS browses its printers as
+       * "PrinterName @ ComputerName" or "PrinterInfo @ ComputerName"
+       * through DNS-SD.
+       */
+      hostname_begin = g_strrstr (pp_print_device_get_device_info (device), " @ ");
+      if (hostname_begin != NULL)
+        result = g_strdup (hostname_begin + 3);
+    }
+  else if (g_str_has_prefix (pp_print_device_get_device_uri (device), "hp:/net/") ||
+           g_str_has_prefix (pp_print_device_get_device_uri (device), "hpfax:/net/"))
+    {
+      /*
+       * HPLIP printers have URI of form hp:/net/%s?ip=%s&port=%d
+       * or hp:/net/%s?ip=%s.
+       */
+      hostname_begin = g_strrstr (pp_print_device_get_device_uri (device), "ip=");
+      if (hostname_begin != NULL)
         {
-          /*
-           * CUPS browses its printers as
-           * "PrinterName @ ComputerName" or "PrinterInfo @ ComputerName"
-           * through DNS-SD.
-           */
-          hostname_begin = g_strrstr (pp_print_device_get_device_info (device), " @ ");
-          if (hostname_begin != NULL)
-            result = g_strdup (hostname_begin + 3);
+          hostname_begin += 3;
+          hostname_end = strstr (hostname_begin, "&");
         }
-      else if (g_str_has_prefix (pp_print_device_get_device_uri (device), "hp:/net/") ||
-               g_str_has_prefix (pp_print_device_get_device_uri (device), "hpfax:/net/"))
-        {
-          /*
-           * HPLIP printers have URI of form hp:/net/%s?ip=%s&port=%d
-           * or hp:/net/%s?ip=%s.
-           */
-          hostname_begin = g_strrstr (pp_print_device_get_device_uri (device), "ip=");
-          if (hostname_begin != NULL)
-            {
-              hostname_begin += 3;
-              hostname_end = strstr (hostname_begin, "&");
-            }
 
-          if (hostname_end != NULL)
-            result = g_strndup (hostname_begin, hostname_end - hostname_begin);
-          else
-            result = g_strdup (hostname_begin);
-        }
+      if (hostname_end != NULL)
+        result = g_strndup (hostname_begin, hostname_end - hostname_begin);
+      else
+        result = g_strdup (hostname_begin);
     }
 
   return result;

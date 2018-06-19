@@ -96,12 +96,12 @@ typedef struct
 static void
 smb_data_free (SMBData *data)
 {
-  if (data)
-    {
-      pp_devices_list_free (data->devices);
+  if (data == NULL)
+    return;
 
-      g_free (data);
-    }
+  pp_devices_list_free (data->devices);
+
+  g_free (data);
 }
 
 static gboolean
@@ -155,60 +155,59 @@ auth_fn (SMBCCTX    *smb_context,
   data = (SMBData *) smbc_getOptionUserData (smb_context);
   samba = data->samba;
 
-  if (!data->cancelled)
+  if (data->cancelled)
+    return;
+
+  samba->priv->server = g_strdup (server);
+  samba->priv->share = g_strdup (share);
+  samba->priv->workgroup = g_strdup (workgroup);
+  samba->priv->username = g_strdup (username);
+  samba->priv->password = g_strdup (password);
+
+  source = g_idle_source_new ();
+  g_source_set_callback (source,
+                         get_auth_info,
+                         data,
+                         NULL);
+  g_source_attach (source, data->context);
+  g_source_unref (source);
+
+  samba->priv->waiting = TRUE;
+
+  /*
+   * smbclient needs to get authentication data
+   * from this synchronous callback so we are blocking
+   * until we get them
+   */
+  while (samba->priv->waiting)
     {
-      samba->priv->server = g_strdup (server);
-      samba->priv->share = g_strdup (share);
-      samba->priv->workgroup = g_strdup (workgroup);
-      samba->priv->username = g_strdup (username);
-      samba->priv->password = g_strdup (password);
+      g_usleep (POLL_DELAY);
+    }
 
-      source = g_idle_source_new ();
-      g_source_set_callback (source,
-                             get_auth_info,
-                             data,
-                             NULL);
-      g_source_attach (source, data->context);
-      g_source_unref (source);
+  /* Samba tries to call the auth_fn again if we just set the values
+   * to NULL when we want to cancel the authentication
+   */
+  if (samba->priv->username == NULL && samba->priv->password == NULL)
+    data->cancelled = TRUE;
 
-      samba->priv->waiting = TRUE;
+  if (samba->priv->username != NULL)
+    {
+      if (g_strcmp0 (username, samba->priv->username) != 0)
+        g_strlcpy (username, samba->priv->username, unmaxlen);
+    }
+  else
+    {
+      username[0] = '\0';
+    }
 
-      /*
-       * smbclient needs to get authentication data
-       * from this synchronous callback so we are blocking
-       * until we get them
-       */
-      while (samba->priv->waiting)
-        {
-          g_usleep (POLL_DELAY);
-        }
-
-      /* Samba tries to call the auth_fn again if we just set the values
-       * to NULL when we want to cancel the authentication 
-       */
-      if (samba->priv->username == NULL && samba->priv->password == NULL)
-        data->cancelled = TRUE;
-
-      if (samba->priv->username != NULL)
-        {
-          if (g_strcmp0 (username, samba->priv->username) != 0)
-            g_strlcpy (username, samba->priv->username, unmaxlen);
-        }
-      else
-        {
-          username[0] = '\0';
-        }
-
-      if (samba->priv->password != NULL)
-        {
-          if (g_strcmp0 (password, samba->priv->password) != 0)
-            g_strlcpy (password, samba->priv->password, pwmaxlen);
-        }
-      else
-        {
-          password[0] = '\0';
-        }
-
+  if (samba->priv->password != NULL)
+    {
+      if (g_strcmp0 (password, samba->priv->password) != 0)
+        g_strlcpy (password, samba->priv->password, pwmaxlen);
+    }
+  else
+    {
+      password[0] = '\0';
     }
 }
 
@@ -242,42 +241,29 @@ list_dir (SMBCCTX      *smb_context,
   const gchar        *host_name;
   SMBCFILE           *dir;
 
-  if (!g_cancellable_is_cancelled (cancellable))
+  if (g_cancellable_is_cancelled (cancellable))
+    return;
+
+  smbclient_closedir = smbc_getFunctionClosedir (smb_context);
+  smbclient_readdir = smbc_getFunctionReaddir (smb_context);
+  smbclient_opendir = smbc_getFunctionOpendir (smb_context);
+
+  dir = smbclient_opendir (smb_context, dirname);
+  if (!dir && errno == EACCES)
     {
-      smbclient_closedir = smbc_getFunctionClosedir (smb_context);
-      smbclient_readdir = smbc_getFunctionReaddir (smb_context);
-      smbclient_opendir = smbc_getFunctionOpendir (smb_context);
+      if (g_str_has_prefix (dirname, "smb://"))
+        host_name = dirname + 6;
+      else
+        host_name = dirname;
 
-      dir = smbclient_opendir (smb_context, dirname);
-      if (!dir && errno == EACCES)
+      if (data->auth_if_needed)
         {
-          if (g_str_has_prefix (dirname, "smb://"))
-            host_name = dirname + 6;
-          else
-            host_name = dirname;
+          data->cancelled = FALSE;
+          smbc_setFunctionAuthDataWithContext (smb_context, auth_fn);
+          dir = smbclient_opendir (smb_context, dirname);
+          smbc_setFunctionAuthDataWithContext (smb_context, anonymous_auth_fn);
 
-          if (data->auth_if_needed)
-            {
-              data->cancelled = FALSE;
-              smbc_setFunctionAuthDataWithContext (smb_context, auth_fn);
-              dir = smbclient_opendir (smb_context, dirname);
-              smbc_setFunctionAuthDataWithContext (smb_context, anonymous_auth_fn);
-
-              if (data->cancelled)
-                {
-                  device = g_object_new (PP_TYPE_PRINT_DEVICE,
-                                         "host-name", host_name,
-                                         "is-authenticated-server", TRUE,
-                                         NULL);
-
-                  data->devices->devices = g_list_append (data->devices->devices, device);
-
-                  if (dir)
-                    smbclient_closedir (smb_context, dir);
-                  return;
-                }
-            }
-          else
+          if (data->cancelled)
             {
               device = g_object_new (PP_TYPE_PRINT_DEVICE,
                                      "host-name", host_name,
@@ -285,72 +271,85 @@ list_dir (SMBCCTX      *smb_context,
                                      NULL);
 
               data->devices->devices = g_list_append (data->devices->devices, device);
+
+              if (dir)
+                smbclient_closedir (smb_context, dir);
+              return;
             }
         }
-
-      while (dir && (dirent = smbclient_readdir (smb_context, dir)))
+      else
         {
-          gchar *device_name;
-          gchar *device_uri;
-          gchar *subdirname = NULL;
-          gchar *subpath = NULL;
-          gchar *uri;
+          device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                                 "host-name", host_name,
+                                 "is-authenticated-server", TRUE,
+                                 NULL);
 
-          if (dirent->smbc_type == SMBC_WORKGROUP)
-            {
-              subdirname = g_strdup_printf ("%s%s", dirname, dirent->name);
-              subpath = g_strdup_printf ("%s%s", path, dirent->name);
-            }
+          data->devices->devices = g_list_append (data->devices->devices, device);
+        }
+    }
 
-          if (dirent->smbc_type == SMBC_SERVER)
-            {
-              subdirname = g_strdup_printf ("smb://%s", dirent->name);
-              subpath = g_strdup_printf ("%s//%s", path, dirent->name);
-            }
+  while (dir && (dirent = smbclient_readdir (smb_context, dir)))
+    {
+      gchar *device_name;
+      gchar *device_uri;
+      gchar *subdirname = NULL;
+      gchar *subpath = NULL;
+      gchar *uri;
 
-          if (dirent->smbc_type == SMBC_PRINTER_SHARE)
-            {
-              uri = g_strdup_printf ("%s/%s", dirname, dirent->name);
-              device_uri = g_uri_escape_string (uri,
-                                                G_URI_RESERVED_CHARS_GENERIC_DELIMITERS
-                                                G_URI_RESERVED_CHARS_SUBCOMPONENT_DELIMITERS,
-                                                FALSE);
-
-              device_name = g_strdup (dirent->name);
-              device_name = g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
-
-              device = g_object_new (PP_TYPE_PRINT_DEVICE,
-                                     "device-uri", device_uri,
-                                     "is-network-device", TRUE,
-                                     "device-info", dirent->comment,
-                                     "device-name", device_name,
-                                     "acquisition-method", data->hostname_set ? ACQUISITION_METHOD_SAMBA_HOST : ACQUISITION_METHOD_SAMBA,
-                                     "device-location", path,
-                                     "host-name", dirname,
-                                     NULL);
-
-              g_free (device_name);
-              g_free (device_uri);
-              g_free (uri);
-
-              data->devices->devices = g_list_append (data->devices->devices, device);
-            }
-
-          if (subdirname)
-            {
-              list_dir (smb_context,
-                        subdirname,
-                        subpath,
-                        cancellable,
-                        data);
-              g_free (subdirname);
-              g_free (subpath);
-            }
+      if (dirent->smbc_type == SMBC_WORKGROUP)
+        {
+          subdirname = g_strdup_printf ("%s%s", dirname, dirent->name);
+          subpath = g_strdup_printf ("%s%s", path, dirent->name);
         }
 
-      if (dir)
-        smbclient_closedir (smb_context, dir);
+      if (dirent->smbc_type == SMBC_SERVER)
+        {
+          subdirname = g_strdup_printf ("smb://%s", dirent->name);
+          subpath = g_strdup_printf ("%s//%s", path, dirent->name);
+        }
+
+      if (dirent->smbc_type == SMBC_PRINTER_SHARE)
+        {
+          uri = g_strdup_printf ("%s/%s", dirname, dirent->name);
+          device_uri = g_uri_escape_string (uri,
+                                            G_URI_RESERVED_CHARS_GENERIC_DELIMITERS
+                                            G_URI_RESERVED_CHARS_SUBCOMPONENT_DELIMITERS,
+                                            FALSE);
+
+          device_name = g_strdup (dirent->name);
+          device_name = g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
+
+          device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                                 "device-uri", device_uri,
+                                 "is-network-device", TRUE,
+                                 "device-info", dirent->comment,
+                                 "device-name", device_name,
+                                 "acquisition-method", data->hostname_set ? ACQUISITION_METHOD_SAMBA_HOST : ACQUISITION_METHOD_SAMBA,
+                                 "device-location", path,
+                                 "host-name", dirname,
+                                 NULL);
+
+          g_free (device_name);
+          g_free (device_uri);
+          g_free (uri);
+
+          data->devices->devices = g_list_append (data->devices->devices, device);
+        }
+
+      if (subdirname)
+        {
+          list_dir (smb_context,
+                    subdirname,
+                    subpath,
+                    cancellable,
+                    data);
+          g_free (subdirname);
+          g_free (subpath);
+        }
     }
+
+  if (dir)
+    smbclient_closedir (smb_context, dir);
 }
 
 static void
@@ -373,36 +372,37 @@ _pp_samba_get_devices_thread (GSimpleAsyncResult *res,
   g_mutex_lock (&mutex);
 
   smb_context = smbc_new_context ();
-  if (smb_context)
+  if (smb_context == NULL)
+    goto out;
+
+  if (!smbc_init_context (smb_context))
+    goto out;
+
+  smbc_setOptionUserData (smb_context, data);
+
+  g_object_get (object, "hostname", &hostname, NULL);
+  if (hostname != NULL)
     {
-      if (smbc_init_context (smb_context))
-        {
-          smbc_setOptionUserData (smb_context, data);
+      dirname = g_strdup_printf ("smb://%s", hostname);
+      path = g_strdup_printf ("//%s", hostname);
 
-          g_object_get (object, "hostname", &hostname, NULL);
-          if (hostname != NULL)
-            {
-              dirname = g_strdup_printf ("smb://%s", hostname);
-              path = g_strdup_printf ("//%s", hostname);
-
-              g_free (hostname);
-            }
-          else
-            {
-              dirname = g_strdup_printf ("smb://");
-              path = g_strdup_printf ("//");
-            }
-
-          smbc_setFunctionAuthDataWithContext (smb_context, anonymous_auth_fn);
-          list_dir (smb_context, dirname, path, cancellable, data);
-
-          g_free (dirname);
-          g_free (path);
-        }
-
-      smbc_free_context (smb_context, 1);
+      g_free (hostname);
+    }
+  else
+    {
+      dirname = g_strdup_printf ("smb://");
+      path = g_strdup_printf ("//");
     }
 
+  smbc_setFunctionAuthDataWithContext (smb_context, anonymous_auth_fn);
+  list_dir (smb_context, dirname, path, cancellable, data);
+
+  g_free (dirname);
+  g_free (path);
+
+out:
+  if (smb_context != NULL)
+    smbc_free_context (smb_context, 1);
   g_mutex_unlock (&mutex);
 }
 
