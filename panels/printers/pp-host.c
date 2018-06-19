@@ -175,63 +175,63 @@ line_split (gchar *line)
   gint       n = 0;
   gint       i, j = 0, k = 0;
 
-  if (line)
+  if (line == NULL)
+    return NULL;
+
+  n = strlen (line);
+  words = g_new0 (gchar *, n + 1);
+  buffer = g_new0 (gchar, n + 1);
+
+  for (i = 0; i < n; i++)
     {
-      n = strlen (line);
-      words = g_new0 (gchar *, n + 1);
-      buffer = g_new0 (gchar, n + 1);
+      ch = line[i];
 
-      for (i = 0; i < n; i++)
+      if (escaped)
         {
-          ch = line[i];
+          buffer[k++] = ch;
+          escaped = FALSE;
+          continue;
+        }
 
-          if (escaped)
-            {
-              buffer[k++] = ch;
-              escaped = FALSE;
-              continue;
-            }
+      if (ch == '\\')
+        {
+          in_word = TRUE;
+          escaped = TRUE;
+          continue;
+        }
 
-          if (ch == '\\')
+      if (in_word)
+        {
+          if (quoted)
             {
-              in_word = TRUE;
-              escaped = TRUE;
-              continue;
-            }
-
-          if (in_word)
-            {
-              if (quoted)
-                {
-                  if (ch == '"')
-                    quoted = FALSE;
-                  else
-                    buffer[k++] = ch;
-                }
-              else if (g_ascii_isspace (ch))
-                {
-                  words[j++] = g_strdup (buffer);
-                  memset (buffer, 0, n + 1);
-                  k = 0;
-                  in_word = FALSE;
-                }
-              else if (ch == '"')
-                quoted = TRUE;
+              if (ch == '"')
+                quoted = FALSE;
               else
                 buffer[k++] = ch;
             }
-          else
+          else if (g_ascii_isspace (ch))
             {
-              if (ch == '"')
-                {
-                  in_word = TRUE;
-                  quoted = TRUE;
-                }
-              else if (!g_ascii_isspace (ch))
-                {
-                  in_word = TRUE;
-                  buffer[k++] = ch;
-                }
+              words[j++] = g_strdup (buffer);
+              memset (buffer, 0, n + 1);
+              k = 0;
+              in_word = FALSE;
+            }
+          else if (ch == '"')
+            quoted = TRUE;
+          else
+            buffer[k++] = ch;
+        }
+      else
+        {
+          if (ch == '"')
+            {
+              in_word = TRUE;
+              quoted = TRUE;
+            }
+          else if (!g_ascii_isspace (ch))
+            {
+              in_word = TRUE;
+              buffer[k++] = ch;
             }
         }
     }
@@ -256,11 +256,15 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
   PpPrintDevice  *device;
   gboolean        is_network_device;
   GSDData        *data;
+  gboolean        result;
   GError         *error;
   gchar         **argv;
   gchar          *stdout_string = NULL;
   gchar          *stderr_string = NULL;
   gint            exit_status;
+  gchar         **printer_informations = NULL;
+  gchar          *device_name;
+  gint            length;
 
   data = g_simple_async_result_get_op_res_gpointer (res);
   data->devices = g_new0 (PpDevicesList, 1);
@@ -271,59 +275,55 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
   argv[1] = g_strdup (priv->hostname);
 
   /* Use SNMP to get printer's informations */
-  g_spawn_sync (NULL,
-                argv,
-                NULL,
-                0,
-                NULL,
-                NULL,
-                &stdout_string,
-                &stderr_string,
-                &exit_status,
-                &error);
+  result = g_spawn_sync (NULL,
+                         argv,
+                         NULL,
+                         0,
+                         NULL,
+                         NULL,
+                         &stdout_string,
+                         &stderr_string,
+                         &exit_status,
+                         &error);
 
   g_free (argv[1]);
   g_free (argv[0]);
   g_free (argv);
 
-  if (exit_status == 0 && stdout_string)
+  if (!result || exit_status != 0)
+    return;
+
+  printer_informations = line_split (stdout_string);
+  length = g_strv_length (printer_informations);
+
+  if (length >= 4)
     {
-      gchar **printer_informations = NULL;
-      gchar  *device_name;
-      gint    length;
+      device_name = g_strdup (printer_informations[3]);
+      device_name = g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
+      is_network_device = g_strcmp0 (printer_informations[0], "network") == 0;
 
-      printer_informations = line_split (stdout_string);
-      length = g_strv_length (printer_informations);
+      device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                             "is-network-device", is_network_device,
+                             "device-uri", printer_informations[1],
+                             "device-make-and-model", printer_informations[2],
+                             "device-info", printer_informations[3],
+                             "acquisition-method", ACQUISITION_METHOD_SNMP,
+                             "device-name", device_name,
+                             NULL);
 
-      if (length >= 4)
-        {
-          device_name = g_strdup (printer_informations[3]);
-          device_name = g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
-          is_network_device = g_strcmp0 (printer_informations[0], "network") == 0;
+      g_free (device_name);
 
-          device = g_object_new (PP_TYPE_PRINT_DEVICE,
-                                 "is-network-device", is_network_device,
-                                 "device-uri", printer_informations[1],
-                                 "device-make-and-model", printer_informations[2],
-                                 "device-info", printer_informations[3],
-                                 "acquisition-method", ACQUISITION_METHOD_SNMP,
-                                 "device-name", device_name,
-                                 NULL);
+      if (length >= 5 && printer_informations[4][0] != '\0')
+        g_object_set (device, "device-id", printer_informations[4], NULL);
 
-          g_free (device_name);
+      if (length >= 6 && printer_informations[5][0] != '\0')
+        g_object_set (device, "device-location", printer_informations[5], NULL);
 
-          if (length >= 5 && printer_informations[4][0] != '\0')
-            g_object_set (device, "device-id", printer_informations[4], NULL);
-
-          if (length >= 6 && printer_informations[5][0] != '\0')
-            g_object_set (device, "device-location", printer_informations[5], NULL);
-
-          data->devices->devices = g_list_append (data->devices->devices, device);
-        }
-
-      g_strfreev (printer_informations);
-      g_free (stdout_string);
+      data->devices->devices = g_list_append (data->devices->devices, device);
     }
+
+  g_strfreev (printer_informations);
+  g_free (stdout_string);
 }
 
 static void
@@ -405,40 +405,41 @@ _pp_host_get_remote_cups_devices_thread (GSimpleAsyncResult *res,
 
   /* Connect to remote CUPS server and get its devices */
   http = httpConnect (priv->hostname, port);
-  if (http)
+  if (http == NULL)
+    return;
+
+  num_of_devices = cupsGetDests2 (http, &dests);
+  if (num_of_devices <= 0)
+    goto out;
+
+  for (i = 0; i < num_of_devices; i++)
     {
-      num_of_devices = cupsGetDests2 (http, &dests);
-      if (num_of_devices > 0)
-        {
-          for (i = 0; i < num_of_devices; i++)
-            {
-              device_uri = g_strdup_printf ("ipp://%s:%d/printers/%s",
-                                            priv->hostname,
-                                            port,
-                                            dests[i].name);
+      device_uri = g_strdup_printf ("ipp://%s:%d/printers/%s",
+                                    priv->hostname,
+                                    port,
+                                    dests[i].name);
 
-              device_location = cupsGetOption ("printer-location",
-                                               dests[i].num_options,
-                                               dests[i].options);
+      device_location = cupsGetOption ("printer-location",
+                                       dests[i].num_options,
+                                       dests[i].options);
 
-              device = g_object_new (PP_TYPE_PRINT_DEVICE,
-                                     "is-network-device", TRUE,
-                                     "device-uri", device_uri,
-                                     "device-name", dests[i].name,
-                                     "device-location", device_location,
-                                     "host-name", priv->hostname,
-                                     "host-port", port,
-                                     "acquisition-method", ACQUISITION_METHOD_REMOTE_CUPS_SERVER,
-                                     NULL);
+      device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                             "is-network-device", TRUE,
+                             "device-uri", device_uri,
+                             "device-name", dests[i].name,
+                             "device-location", device_location,
+                             "host-name", priv->hostname,
+                             "host-port", port,
+                             "acquisition-method", ACQUISITION_METHOD_REMOTE_CUPS_SERVER,
+                             NULL);
 
-              g_free (device_uri);
+      g_free (device_uri);
 
-              data->devices->devices = g_list_append (data->devices->devices, device);
-            }
-        }
-
-      httpClose (http);
+      data->devices->devices = g_list_append (data->devices->devices, device);
     }
+
+out:
+  httpClose (http);
 }
 
 void
@@ -492,12 +493,12 @@ typedef struct
 static void
 jetdirect_data_free (JetDirectData *data)
 {
-  if (data != NULL)
-    {
-      pp_devices_list_free (data->devices);
-      g_clear_object (&data->host);
-      g_free (data);
-    }
+  if (data == NULL)
+    return;
+
+  pp_devices_list_free (data->devices);
+  g_clear_object (&data->host);
+  g_free (data);
 }
 
 static void
@@ -512,6 +513,7 @@ jetdirect_connection_test_cb (GObject      *source_object,
   gpointer           result;
   GError            *error = NULL;
   GTask             *task = G_TASK (user_data);
+  gchar             *device_uri;
 
   data = g_task_get_task_data (task);
 
@@ -519,34 +521,33 @@ jetdirect_connection_test_cb (GObject      *source_object,
                                                        res,
                                                        &error);
 
-  if (connection != NULL)
-    {
-      gchar *device_uri;
+  if (connection == NULL)
+    goto out;
 
-      g_io_stream_close (G_IO_STREAM (connection), NULL, NULL);
-      g_object_unref (connection);
+  g_io_stream_close (G_IO_STREAM (connection), NULL, NULL);
+  g_object_unref (connection);
 
-      priv = data->host->priv;
+  priv = data->host->priv;
 
-      device_uri = g_strdup_printf ("socket://%s:%d",
-                                    priv->hostname,
-                                    data->port);
+  device_uri = g_strdup_printf ("socket://%s:%d",
+                                priv->hostname,
+                                data->port);
 
-      device = g_object_new (PP_TYPE_PRINT_DEVICE,
-                             "is-network-device", TRUE,
-                             "device-uri", device_uri,
-                             /* Translators: The found device is a JetDirect printer */
-                             "device-name", _("JetDirect Printer"),
-                             "host-name", priv->hostname,
-                             "host-port", data->port,
-                             "acquisition-method", ACQUISITION_METHOD_JETDIRECT,
-                             NULL);
+  device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                         "is-network-device", TRUE,
+                         "device-uri", device_uri,
+                         /* Translators: The found device is a JetDirect printer */
+                         "device-name", _("JetDirect Printer"),
+                         "host-name", priv->hostname,
+                         "host-port", data->port,
+                         "acquisition-method", ACQUISITION_METHOD_JETDIRECT,
+                         NULL);
 
-      g_free (device_uri);
+  g_free (device_uri);
 
-      data->devices->devices = g_list_append (data->devices->devices, device);
-    }
+  data->devices->devices = g_list_append (data->devices->devices, device);
 
+out:
   result = data->devices;
   data->devices = NULL;
   g_task_return_pointer (task, result, (GDestroyNotify) pp_devices_list_free);
@@ -582,7 +583,7 @@ pp_host_get_jetdirect_devices_async (PpHost              *host,
   g_task_set_task_data (task, data, (GDestroyNotify) jetdirect_data_free);
 
   address = g_strdup_printf ("%s:%d", priv->hostname, data->port);
-  if (address != NULL && address[0] != '/')
+  if (address[0] != '/')
     {
       client = g_socket_client_new ();
 
@@ -625,6 +626,11 @@ test_lpd_queue (GSocketClient *client,
 {
   GSocketConnection *connection;
   gboolean           result = FALSE;
+  GOutputStream     *output;
+  GInputStream      *input;
+  gssize             bytes_read, bytes_written;
+  gchar              buffer[BUFFER_LENGTH];
+  gint               length;
   GError            *error = NULL;
 
   connection = g_socket_client_connect_to_host (client,
@@ -633,66 +639,57 @@ test_lpd_queue (GSocketClient *client,
                                                 cancellable,
                                                 &error);
 
-  if (connection != NULL)
+  if (connection == NULL)
+    return FALSE;
+
+  if (!G_IS_TCP_CONNECTION (connection))
+    goto out;
+
+  output = g_io_stream_get_output_stream (G_IO_STREAM (connection));
+  input = g_io_stream_get_input_stream (G_IO_STREAM (connection));
+
+  /* This LPD command is explained in RFC 1179, section 5.2 */
+  length = g_snprintf (buffer, BUFFER_LENGTH, "\2%s\n", queue_name);
+
+  bytes_written = g_output_stream_write (output,
+                                         buffer,
+                                         length,
+                                         NULL,
+                                         &error);
+  if (bytes_written == -1)
     {
-      if (G_IS_TCP_CONNECTION (connection))
-        {
-          GOutputStream *output;
-          GInputStream  *input;
-          gssize         bytes_read, bytes_written;
-          gchar          buffer[BUFFER_LENGTH];
-          gint           length;
-
-          output = g_io_stream_get_output_stream (G_IO_STREAM (connection));
-          input = g_io_stream_get_input_stream (G_IO_STREAM (connection));
-
-          /* This LPD command is explained in RFC 1179, section 5.2 */
-          length = g_snprintf (buffer, BUFFER_LENGTH, "\2%s\n", queue_name);
-
-          bytes_written = g_output_stream_write (output,
-                                                 buffer,
-                                                 length,
-                                                 NULL,
-                                                 &error);
-
-          if (bytes_written != -1)
-            {
-              bytes_read = g_input_stream_read (input,
-                                                buffer,
-                                                BUFFER_LENGTH,
-                                                NULL,
-                                                &error);
-
-              if (bytes_read != -1)
-                {
-                  if (bytes_read > 0 && buffer[0] == 0)
-                    {
-                      /* This LPD command is explained in RFC 1179, section 6.1 */
-                      length = g_snprintf (buffer, BUFFER_LENGTH, "\1\n");
-
-                      bytes_written = g_output_stream_write (output,
-                                                             buffer,
-                                                             length,
-                                                             NULL,
-                                                             &error);
-
-                      result = TRUE;
-                    }
-                }
-              else
-                {
-                  g_clear_error (&error);
-                }
-            }
-          else
-            {
-              g_clear_error (&error);
-            }
-        }
-
-      g_io_stream_close (G_IO_STREAM (connection), NULL, NULL);
-      g_object_unref (connection);
+      g_clear_error (&error);
+      goto out;
     }
+
+  bytes_read = g_input_stream_read (input,
+                                    buffer,
+                                    BUFFER_LENGTH,
+                                    NULL,
+                                    &error);
+  if (bytes_read == -1)
+    {
+      g_clear_error (&error);
+      goto out;
+    }
+
+  if (bytes_read > 0 && buffer[0] == 0)
+    {
+      /* This LPD command is explained in RFC 1179, section 6.1 */
+      length = g_snprintf (buffer, BUFFER_LENGTH, "\1\n");
+
+      bytes_written = g_output_stream_write (output,
+                                             buffer,
+                                             length,
+                                             NULL,
+                                             &error);
+
+      result = TRUE;
+    }
+
+out:
+  g_io_stream_close (G_IO_STREAM (connection), NULL, NULL);
+  g_object_unref (connection);
 
   return result;
 }
@@ -707,7 +704,7 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
   PpPrintDevice     *device;
   PpHost            *host = (PpHost *) source_object;
   PpHostPrivate     *priv = host->priv;
-  GSocketClient     *client;
+  GSocketClient     *client = NULL;
   PpDevicesList     *result;
   GSDData           *data = (GSDData *) task_data;
   GError            *error = NULL;
@@ -739,76 +736,74 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
                                                 port,
                                                 cancellable,
                                                 &error);
+  if (connection == NULL)
+    goto out;
 
-  if (connection != NULL)
+  g_io_stream_close (G_IO_STREAM (connection), NULL, NULL);
+  g_object_unref (connection);
+
+  /* Most of this list is taken from system-config-printer */
+  candidates = g_list_append (candidates, g_strdup ("PASSTHRU"));
+  candidates = g_list_append (candidates, g_strdup ("AUTO"));
+  candidates = g_list_append (candidates, g_strdup ("BINPS"));
+  candidates = g_list_append (candidates, g_strdup ("RAW"));
+  candidates = g_list_append (candidates, g_strdup ("TEXT"));
+  candidates = g_list_append (candidates, g_strdup ("ps"));
+  candidates = g_list_append (candidates, g_strdup ("lp"));
+  candidates = g_list_append (candidates, g_strdup ("PORT1"));
+
+  for (i = 0; i < 8; i++)
     {
-      g_io_stream_close (G_IO_STREAM (connection), NULL, NULL);
-      g_object_unref (connection);
-
-      /* Most of this list is taken from system-config-printer */
-      candidates = g_list_append (candidates, g_strdup ("PASSTHRU"));
-      candidates = g_list_append (candidates, g_strdup ("AUTO"));
-      candidates = g_list_append (candidates, g_strdup ("BINPS"));
-      candidates = g_list_append (candidates, g_strdup ("RAW"));
-      candidates = g_list_append (candidates, g_strdup ("TEXT"));
-      candidates = g_list_append (candidates, g_strdup ("ps"));
-      candidates = g_list_append (candidates, g_strdup ("lp"));
-      candidates = g_list_append (candidates, g_strdup ("PORT1"));
-
-      for (i = 0; i < 8; i++)
-        {
-          candidates = g_list_append (candidates, g_strdup_printf ("LPT%d", i));
-          candidates = g_list_append (candidates, g_strdup_printf ("LPT%d_PASSTHRU", i));
-          candidates = g_list_append (candidates, g_strdup_printf ("COM%d", i));
-          candidates = g_list_append (candidates, g_strdup_printf ("COM%d_PASSTHRU", i));
-        }
-
-      for (i = 0; i < 50; i++)
-        candidates = g_list_append (candidates, g_strdup_printf ("pr%d", i));
-
-      for (iter = candidates; iter != NULL; iter = iter->next)
-        {
-          candidate = (gchar *) iter->data;
-
-          if (test_lpd_queue (client,
-                              address,
-                              port,
-                              cancellable,
-                              candidate))
-            {
-              found_queue = g_strdup (candidate);
-              break;
-            }
-        }
-
-      if (found_queue != NULL)
-        {
-          device_uri = g_strdup_printf ("lpd://%s:%d/%s",
-                                        priv->hostname,
-                                        port,
-                                        found_queue);
-
-          device = g_object_new (PP_TYPE_PRINT_DEVICE,
-                                 "is-network-device", TRUE,
-                                 "device-uri", device_uri,
-                                 /* Translators: The found device is a Line Printer Daemon printer */
-                                 "device-name", _("LPD Printer"),
-                                 "host-name", priv->hostname,
-                                 "host-port", port,
-                                 "acquisition-method", ACQUISITION_METHOD_LPD,
-                                 NULL);
-
-          g_free (device_uri);
-
-          result->devices = g_list_append (result->devices, device);
-        }
-
-      g_list_free_full (candidates, g_free);
+      candidates = g_list_append (candidates, g_strdup_printf ("LPT%d", i));
+      candidates = g_list_append (candidates, g_strdup_printf ("LPT%d_PASSTHRU", i));
+      candidates = g_list_append (candidates, g_strdup_printf ("COM%d", i));
+      candidates = g_list_append (candidates, g_strdup_printf ("COM%d_PASSTHRU", i));
     }
 
-  g_object_unref (client);
+  for (i = 0; i < 50; i++)
+    candidates = g_list_append (candidates, g_strdup_printf ("pr%d", i));
+
+  for (iter = candidates; iter != NULL; iter = iter->next)
+    {
+      candidate = (gchar *) iter->data;
+
+      if (test_lpd_queue (client,
+                          address,
+                          port,
+                          cancellable,
+                          candidate))
+        {
+          found_queue = g_strdup (candidate);
+          break;
+        }
+    }
+
+  if (found_queue == NULL)
+    goto out;
+
+  device_uri = g_strdup_printf ("lpd://%s:%d/%s",
+                                priv->hostname,
+                                port,
+                                found_queue);
+
+  device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                         "is-network-device", TRUE,
+                         "device-uri", device_uri,
+                         /* Translators: The found device is a Line Printer Daemon printer */
+                         "device-name", _("LPD Printer"),
+                         "host-name", priv->hostname,
+                         "host-port", port,
+                         "acquisition-method", ACQUISITION_METHOD_LPD,
+                         NULL);
+
+  g_free (device_uri);
+
+  result->devices = g_list_append (result->devices, device);
 
 out:
+  g_list_free_full (candidates, g_free);
+  if (client != NULL)
+    g_object_unref (client);
   g_task_return_pointer (task, result, (GDestroyNotify) pp_devices_list_free);
   g_object_unref (task);
 

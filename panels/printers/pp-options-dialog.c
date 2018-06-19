@@ -344,22 +344,22 @@ ipp_option_add (IPPAttribute *attr_supported,
                                                    attr_default,
                                                    option_name,
                                                    printer_name);
-  if (widget)
-    {
-      gtk_widget_set_sensitive (widget, sensitive);
-      position = grid_get_height (grid);
+  if (widget == NULL)
+    return NULL;
 
-      label = gtk_label_new (option_display_name);
-      context = gtk_widget_get_style_context (label);
-      gtk_style_context_add_class (context, "dim-label");
-      gtk_widget_set_halign (label, GTK_ALIGN_END);
-      gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
-      gtk_widget_set_margin_start (label, 10);
-      gtk_grid_attach (GTK_GRID (grid), label, 0, position, 1, 1);
+  gtk_widget_set_sensitive (widget, sensitive);
+  position = grid_get_height (grid);
 
-      gtk_widget_set_margin_start (widget, 20);
-      gtk_grid_attach (GTK_GRID (grid), widget, 1, position, 1, 1);
-    }
+  label = gtk_label_new (option_display_name);
+  context = gtk_widget_get_style_context (label);
+  gtk_style_context_add_class (context, "dim-label");
+  gtk_widget_set_halign (label, GTK_ALIGN_END);
+  gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+  gtk_widget_set_margin_start (label, 10);
+  gtk_grid_attach (GTK_GRID (grid), label, 0, position, 1, 1);
+
+  gtk_widget_set_margin_start (widget, 20);
+  gtk_grid_attach (GTK_GRID (grid), widget, 1, position, 1, 1);
 
   return widget;
 }
@@ -376,22 +376,22 @@ ppd_option_add (ppd_option_t  option,
   gint             position;
 
   widget = (GtkWidget *) pp_ppd_option_widget_new (&option, printer_name);
-  if (widget)
-    {
-      gtk_widget_set_sensitive (widget, sensitive);
-      position = grid_get_height (grid);
+  if (widget == NULL)
+    return NULL;
 
-      label = gtk_label_new (ppd_option_name_translate (&option));
-      context = gtk_widget_get_style_context (label);
-      gtk_style_context_add_class (context, "dim-label");
-      gtk_widget_set_halign (label, GTK_ALIGN_END);
-      gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
-      gtk_widget_set_margin_start (label, 10);
-      gtk_grid_attach (GTK_GRID (grid), label, 0, position, 1, 1);
+  gtk_widget_set_sensitive (widget, sensitive);
+  position = grid_get_height (grid);
 
-      gtk_widget_set_margin_start (widget, 20);
-      gtk_grid_attach (GTK_GRID (grid), widget, 1, position, 1, 1);
-    }
+  label = gtk_label_new (ppd_option_name_translate (&option));
+  context = gtk_widget_get_style_context (label);
+  gtk_style_context_add_class (context, "dim-label");
+  gtk_widget_set_halign (label, GTK_ALIGN_END);
+  gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+  gtk_widget_set_margin_start (label, 10);
+  gtk_grid_attach (GTK_GRID (grid), label, 0, position, 1, 1);
+
+  gtk_widget_set_margin_start (widget, 20);
+  gtk_grid_attach (GTK_GRID (grid), widget, 1, position, 1, 1);
 
   return widget;
 }
@@ -420,44 +420,43 @@ tab_add (const gchar *tab_name,
   gboolean      unref_store = FALSE;
   gint          id;
 
-  if (!grid_is_empty (grid))
-    {
-      scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-                                      GTK_POLICY_NEVER,
-                                      GTK_POLICY_AUTOMATIC);
-      gtk_container_add (GTK_CONTAINER (scrolled_window), grid);
-
-      id = gtk_notebook_append_page (GTK_NOTEBOOK (options_notebook),
-                                     scrolled_window,
-                                     NULL);
-
-      if (id >= 0)
-        {
-          store = GTK_LIST_STORE (gtk_tree_view_get_model (treeview));
-          if (!store)
-            {
-              store = gtk_list_store_new (2, G_TYPE_INT, G_TYPE_STRING);
-              unref_store = TRUE;
-            }
-
-          gtk_list_store_append (store, &iter);
-          gtk_list_store_set (store, &iter,
-                              CATEGORY_IDS_COLUMN, id,
-                              CATEGORY_NAMES_COLUMN, tab_name,
-                              -1);
-
-          if (unref_store)
-            {
-              gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (store));
-              g_object_unref (store);
-            }
-        }
-    }
-  else
+  if (grid_is_empty (grid))
     {
       g_object_ref_sink (grid);
       g_object_unref (grid);
+      return;
+    }
+
+  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                  GTK_POLICY_NEVER,
+                                  GTK_POLICY_AUTOMATIC);
+  gtk_container_add (GTK_CONTAINER (scrolled_window), grid);
+
+  id = gtk_notebook_append_page (GTK_NOTEBOOK (options_notebook),
+                                 scrolled_window,
+                                 NULL);
+
+  if (id < 0)
+    return;
+
+  store = GTK_LIST_STORE (gtk_tree_view_get_model (treeview));
+  if (!store)
+    {
+      store = gtk_list_store_new (2, G_TYPE_INT, G_TYPE_STRING);
+      unref_store = TRUE;
+    }
+
+  gtk_list_store_append (store, &iter);
+  gtk_list_store_set (store, &iter,
+                      CATEGORY_IDS_COLUMN, id,
+                      CATEGORY_NAMES_COLUMN, tab_name,
+                      -1);
+
+  if (unref_store)
+    {
+      gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (store));
+      g_object_unref (store);
     }
 }
 
@@ -478,13 +477,13 @@ category_selection_changed_cb (GtkTreeSelection *selection,
 			  -1);
     }
 
-  if (id >= 0)
-    {
-      options_notebook = (GtkWidget*)
-        gtk_builder_get_object (dialog->builder, "options-notebook");
+  if (id < 0)
+    return;
 
-      gtk_notebook_set_current_page (GTK_NOTEBOOK (options_notebook), id);
-    }
+  options_notebook = (GtkWidget*)
+    gtk_builder_get_object (dialog->builder, "options-notebook");
+
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (options_notebook), id);
 }
 
 static void
@@ -862,53 +861,52 @@ test_page_cb (GtkButton *button,
 {
   PpOptionsDialog *dialog = (PpOptionsDialog*) user_data;
   gint             i;
+  const gchar     *const dirs[] = { "/usr/share/cups",
+                                    "/usr/local/share/cups",
+                                    NULL };
+  const gchar     *datadir = NULL;
+  gchar           *filename = NULL;
 
-  if (dialog->printer_name)
+  if (dialog->printer_name == NULL)
+    return;
+
+  datadir = getenv ("CUPS_DATADIR");
+  if (datadir != NULL)
     {
-      const gchar  *const dirs[] = { "/usr/share/cups",
-                                     "/usr/local/share/cups",
-                                     NULL };
-      const gchar  *datadir = NULL;
-      gchar        *filename = NULL;
+      filename = get_testprint_filename (datadir);
+    }
+  else
+    {
+      for (i = 0; dirs[i] != NULL && filename == NULL; i++)
+        filename = get_testprint_filename (dirs[i]);
+    }
 
-      datadir = getenv ("CUPS_DATADIR");
-      if (datadir != NULL)
-        {
-          filename = get_testprint_filename (datadir);
-        }
-      else
-        {
-          for (i = 0; dirs[i] != NULL && filename == NULL; i++)
-            filename = get_testprint_filename (dirs[i]);
-        }
+  if (filename != NULL)
+    {
+      PpPrinter *printer;
 
-      if (filename != NULL)
-        {
-          PpPrinter *printer;
+      printer = pp_printer_new (dialog->printer_name);
+      pp_printer_print_file_async (printer,
+                                   filename,
+      /* Translators: Name of job which makes printer to print test page */
+                                   _("Test Page"),
+                                   NULL,
+                                   print_test_page_cb,
+                                   NULL);
 
-          printer = pp_printer_new (dialog->printer_name);
-          pp_printer_print_file_async (printer,
-                                       filename,
-          /* Translators: Name of job which makes printer to print test page */
-                                       _("Test Page"),
-                                       NULL,
-                                       print_test_page_cb,
-                                       NULL);
+      g_free (filename);
+    }
+  else
+    {
+      PpMaintenanceCommand *command;
 
-          g_free (filename);
-        }
-      else
-        {
-          PpMaintenanceCommand *command;
+      command = pp_maintenance_command_new (dialog->printer_name,
+                                            "PrintSelfTestPage",
+                                            NULL,
+      /* Translators: Name of job which makes printer to print test page */
+                                            _("Test page"));
 
-          command = pp_maintenance_command_new (dialog->printer_name,
-                                                "PrintSelfTestPage",
-                                                NULL,
-          /* Translators: Name of job which makes printer to print test page */
-                                                _("Test page"));
-
-          pp_maintenance_command_execute_async (command, NULL, pp_maintenance_command_execute_cb, NULL);
-        }
+      pp_maintenance_command_execute_async (command, NULL, pp_maintenance_command_execute_cb, NULL);
     }
 }
 
@@ -996,11 +994,11 @@ pp_options_dialog_set_callback (PpOptionsDialog      *dialog,
                                 UserResponseCallback  user_callback,
                                 gpointer              user_data)
 {
-  if (dialog != NULL)
-    {
-      dialog->user_callback = user_callback;
-      dialog->user_data = user_data;
-    }
+  if (dialog == NULL)
+    return;
+
+  dialog->user_callback = user_callback;
+  dialog->user_data = user_data;
 }
 
 void
