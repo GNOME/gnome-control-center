@@ -121,6 +121,27 @@ pages:
     - master@GNOME/gnome-control-center
 
 ##
+# Stage: Test
+#
+# Runs the address sanitizer.
+##
+asan:
+  <<: *save_build_logs
+  stage: test
+  allow_failure: true
+  variables:
+    BUILD_OPTS: "-Db_sanitize=address"
+
+  script:
+    - *environment_information
+    - *build_procedure
+
+    - export LSAN_OPTIONS="suppressions=$(pwd)/build-aux/ci/lsan.supp"
+
+    - echo "== Testing =="
+    - ninja -C _build test
+
+##
 # Stage: Delivery
 #
 # Create a flatpak
