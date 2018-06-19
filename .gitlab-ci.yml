@@ -18,6 +18,11 @@ stages:
     untracked: true
     expire_in: 3h30min
 
+.Show Info: &environment_information
+  echo "== Info ==" &&
+  build-aux/ci/ci-helper.sh "INFO" &&
+  build-aux/ci/ci-helper.sh "GIT_INFO"
+
 ##
 # Stage: Build
 #
@@ -30,9 +35,7 @@ build:
   stage: build
 
   script:
-    - echo "== Info =="
-    - build-aux/ci/ci-helper.sh "INFO"
-    - build-aux/ci/ci-helper.sh "GIT_INFO"
+    - *environment_information
 
     - echo "== Building =="
     - meson . _build
@@ -57,9 +60,7 @@ test:
     - build
 
   script:
-    - echo "== Info =="
-    - build-aux/ci/ci-helper.sh "INFO"
-    - build-aux/ci/ci-helper.sh "GIT_INFO"
+    - *environment_information
 
     - |
       if [[ -n "${CI_COMMIT_TAG}" ]]; then
@@ -81,9 +82,7 @@ coverage:
   stage: test
 
   script:
-    - echo "== Info =="
-    - build-aux/ci/ci-helper.sh "INFO"
-    - build-aux/ci/ci-helper.sh "GIT_INFO"
+    - *environment_information
 
     - echo "== Building =="
     - rm -rf _build/
