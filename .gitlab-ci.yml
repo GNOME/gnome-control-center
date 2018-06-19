@@ -23,6 +23,12 @@ stages:
   build-aux/ci/ci-helper.sh "INFO" &&
   build-aux/ci/ci-helper.sh "GIT_INFO"
 
+.Build procedure: &build_procedure
+  echo "== Building ==" &&
+  rm -rf _build/ &&
+  meson . _build ${BUILD_OPTS} &&
+  ninja -C _build 2>&1 | tee compilation.log
+
 ##
 # Stage: Build
 #
@@ -36,10 +42,7 @@ build:
 
   script:
     - *environment_information
-
-    - echo "== Building =="
-    - meson . _build
-    - ninja -C _build 2>&1 | tee compilation.log
+    - *build_procedure
 
     - echo "== Installing =="
     - ninja -C _build install
@@ -84,15 +87,12 @@ coverage:
   <<: *save_build_logs
   stage: test
   variables:
+    BUILD_OPTS: "-Db_coverage=true"
     coverage: '/^Lines:.\d+.\d+.(\d+\.\d+\%)/'
 
   script:
     - *environment_information
-
-    - echo "== Building =="
-    - rm -rf _build/
-    - meson . _build -Db_coverage=true
-    - ninja -C _build 2>&1 | tee compilation.log
+    - *build_procedure
 
     - echo "== Testing =="
     - ninja -C _build test
