@@ -662,14 +662,14 @@ printer_jobs_dialog_free_cb (GtkDialog *dialog,
 void
 pp_printer_entry_show_jobs_dialog (PpPrinterEntry *self)
 {
-  if (self->pp_jobs_dialog == NULL)
-    {
-      self->pp_jobs_dialog = pp_jobs_dialog_new (
-        GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
-        jobs_dialog_response_cb,
-        self,
-        self->printer_name);
-    }
+  if (self->pp_jobs_dialog != NULL)
+    return;
+
+  self->pp_jobs_dialog = pp_jobs_dialog_new (
+    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+    jobs_dialog_response_cb,
+    self,
+    self->printer_name);
 }
 
 void

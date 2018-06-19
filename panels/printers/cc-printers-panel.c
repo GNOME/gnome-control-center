@@ -423,37 +423,41 @@ on_get_job_attributes_cb (GObject      *source_object,
   attributes = pp_job_get_attributes_finish (PP_JOB (source_object), res, &error);
   g_object_unref (source_object);
 
-  if (attributes != NULL)
+  if (attributes == NULL)
+    return;
+
+  username = g_variant_lookup_value (attributes, "job-originating-user-name", G_VARIANT_TYPE ("as"));
+  if (username == NULL)
+    goto out;
+
+  printer_uri = g_variant_lookup_value (attributes, "job-printer-uri", G_VARIANT_TYPE ("as"));
+  if (printer_uri == NULL)
+    goto out;
+
+  job_originating_user_name = g_variant_get_string (g_variant_get_child_value (username, 0), NULL);
+  job_printer_uri = g_variant_get_string (g_variant_get_child_value (printer_uri, 0), NULL);
+
+  if (job_originating_user_name != NULL && job_printer_uri != NULL &&
+      g_strcmp0 (job_originating_user_name, cupsUser ()) == 0 &&
+      g_strrstr (job_printer_uri, "/") != 0 &&
+      priv->dests != NULL)
     {
-      if ((username = g_variant_lookup_value (attributes, "job-originating-user-name", G_VARIANT_TYPE ("as"))) != NULL)
-        {
-          if ((printer_uri = g_variant_lookup_value (attributes, "job-printer-uri", G_VARIANT_TYPE ("as"))) != NULL)
-            {
-              job_originating_user_name = g_variant_get_string (g_variant_get_child_value (username, 0), NULL);
-              job_printer_uri = g_variant_get_string (g_variant_get_child_value (printer_uri, 0), NULL);
+      PpPrinterEntry *printer_entry;
+      gchar *printer_name;
 
-              if (job_originating_user_name != NULL && job_printer_uri != NULL &&
-                  g_strcmp0 (job_originating_user_name, cupsUser ()) == 0 &&
-                  g_strrstr (job_printer_uri, "/") != 0 &&
-                  priv->dests != NULL)
-                {
-                  PpPrinterEntry *printer_entry;
-                  gchar *printer_name;
+      printer_name = g_strrstr (job_printer_uri, "/") + 1;
+      printer_entry = PP_PRINTER_ENTRY (g_hash_table_lookup (priv->printer_entries, printer_name));
 
-                  printer_name = g_strrstr (job_printer_uri, "/") + 1;
-                  printer_entry = PP_PRINTER_ENTRY (g_hash_table_lookup (priv->printer_entries, printer_name));
-
-                  pp_printer_entry_update_jobs_count (printer_entry);
-                }
-
-              g_variant_unref (printer_uri);
-            }
-
-          g_variant_unref (username);
-        }
-
-      g_variant_unref (attributes);
+      pp_printer_entry_update_jobs_count (printer_entry);
     }
+
+out:
+  if (printer_uri != NULL)
+    g_variant_unref (printer_uri);
+  if (username != NULL)
+    g_variant_unref (username);
+  if (attributes != NULL)
+    g_variant_unref (attributes);
 }
 
 static void

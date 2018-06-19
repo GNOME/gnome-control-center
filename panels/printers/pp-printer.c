@@ -168,46 +168,22 @@ printer_rename_dbus_cb (GObject      *source_object,
                         GAsyncResult *res,
                         gpointer      user_data)
 {
-  PpPrinter *printer;
-  GVariant  *output;
-  gboolean   result = FALSE;
-  GError    *error = NULL;
-  GTask     *task = user_data;
-  gchar     *old_printer_name;
+  PpPrinter   *printer;
+  GVariant    *output;
+  GError      *error = NULL;
+  GTask       *task = user_data;
+  gchar       *old_printer_name;
+  const gchar *ret_error;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
   g_object_unref (source_object);
 
-  if (output != NULL)
+  if (output == NULL)
     {
-      const gchar *ret_error;
-
-      printer = g_task_get_source_object (task);
-      g_object_get (printer, "printer-name", &old_printer_name, NULL);
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        {
-          g_warning ("cups-pk-helper: renaming of printer %s failed: %s", old_printer_name, ret_error);
-        }
-      else
-        {
-          result = TRUE;
-          g_object_set (printer, "printer-name", g_task_get_task_data (task), NULL);
-        }
-
-      g_task_return_boolean (task, result);
-
-      g_free (old_printer_name);
-      g_variant_unref (output);
-    }
-  else
-    {
-      if (error->domain == G_DBUS_ERROR &&
-          (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
-           error->code == G_DBUS_ERROR_UNKNOWN_METHOD))
+      if (g_error_matches (error, G_DBUS_ERROR, G_DBUS_ERROR_SERVICE_UNKNOWN) ||
+          g_error_matches (error, G_DBUS_ERROR, G_DBUS_ERROR_UNKNOWN_METHOD))
         {
           g_warning ("Update cups-pk-helper to at least 0.2.6 please to be able to use PrinterRename method.");
           g_error_free (error);
@@ -218,7 +194,26 @@ printer_rename_dbus_cb (GObject      *source_object,
         {
           g_task_return_boolean (task, FALSE);
         }
+      return;
     }
+
+  printer = g_task_get_source_object (task);
+  g_object_get (printer, "printer-name", &old_printer_name, NULL);
+
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: renaming of printer %s failed: %s", old_printer_name, ret_error);
+      g_task_return_boolean (task, FALSE);
+      goto out;
+    }
+
+  g_object_set (printer, "printer-name", g_task_get_task_data (task), NULL);
+  g_task_return_boolean (task, TRUE);
+
+out:
+  g_free (old_printer_name);
+  g_variant_unref (output);
 }
 
 static void
@@ -232,34 +227,33 @@ get_bus_cb (GObject      *source_object,
   gchar           *printer_name;
 
   bus = g_bus_get_finish (res, &error);
-  if (bus != NULL)
-    {
-      g_object_get (g_task_get_source_object (task),
-                    "printer-name", &printer_name,
-                    NULL);
-      g_dbus_connection_call (bus,
-                              MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              "PrinterRename",
-                              g_variant_new ("(ss)",
-                                             printer_name,
-                                             g_task_get_task_data (task)),
-                              G_VARIANT_TYPE ("(s)"),
-                              G_DBUS_CALL_FLAGS_NONE,
-                              -1,
-                              g_task_get_cancellable (task),
-                              printer_rename_dbus_cb,
-                              task);
-
-      g_free (printer_name);
-    }
-  else
+  if (bus == NULL)
     {
       g_warning ("Failed to get system bus: %s", error->message);
       g_error_free (error);
       g_task_return_boolean (task, FALSE);
+      return;
     }
+
+  g_object_get (g_task_get_source_object (task),
+                "printer-name", &printer_name,
+                NULL);
+  g_dbus_connection_call (bus,
+                          MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          "PrinterRename",
+                          g_variant_new ("(ss)",
+                                         printer_name,
+                                         g_task_get_task_data (task)),
+                          G_VARIANT_TYPE ("(s)"),
+                          G_DBUS_CALL_FLAGS_NONE,
+                          -1,
+                          g_task_get_cancellable (task),
+                          printer_rename_dbus_cb,
+                          task);
+
+  g_free (printer_name);
 }
 
 void
@@ -447,41 +441,41 @@ pp_printer_delete_dbus_cb (GObject      *source_object,
                            GAsyncResult *res,
                            gpointer      user_data)
 {
-  GVariant  *output;
-  gboolean   result = FALSE;
-  GError    *error = NULL;
-  GTask     *task = user_data;
-  gchar     *printer_name;
+  GVariant    *output;
+  GError      *error = NULL;
+  GTask       *task = user_data;
+  gchar       *printer_name;
+  const gchar *ret_error;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
   g_object_unref (source_object);
 
-  if (output != NULL)
-    {
-      const gchar *ret_error;
-
-      g_object_get (g_task_get_source_object (task), "printer-name", &printer_name, NULL);
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: removing of printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-
-      g_task_return_boolean (task, result);
-
-      g_free (printer_name);
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
 
       g_task_return_boolean (task, FALSE);
+      return;
     }
+
+  g_object_get (g_task_get_source_object (task), "printer-name", &printer_name, NULL);
+
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: removing of printer %s failed: %s", printer_name, ret_error);
+      g_task_return_boolean (task, FALSE);
+      goto out;
+    }
+
+  g_task_return_boolean (task, TRUE);
+
+out:
+  g_free (printer_name);
+  g_variant_unref (output);
 }
 
 static void
@@ -495,33 +489,32 @@ pp_printer_delete_cb (GObject      *source_object,
   gchar           *printer_name;
 
   bus = g_bus_get_finish (res, &error);
-  if (bus != NULL)
-    {
-      g_object_get (g_task_get_source_object (task),
-                    "printer-name", &printer_name,
-                    NULL);
-
-      g_dbus_connection_call (bus,
-                              MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              "PrinterDelete",
-                              g_variant_new ("(s)", printer_name),
-                              G_VARIANT_TYPE ("(s)"),
-                              G_DBUS_CALL_FLAGS_NONE,
-                              -1,
-                              g_task_get_cancellable (task),
-                              pp_printer_delete_dbus_cb,
-                              task);
-
-      g_free (printer_name);
-    }
-  else
+  if (bus == NULL)
     {
       g_warning ("Failed to get system bus: %s", error->message);
       g_error_free (error);
       g_task_return_boolean (task, FALSE);
+      return;
     }
+
+  g_object_get (g_task_get_source_object (task),
+                "printer-name", &printer_name,
+                NULL);
+
+  g_dbus_connection_call (bus,
+                          MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          "PrinterDelete",
+                          g_variant_new ("(s)", printer_name),
+                          G_VARIANT_TYPE ("(s)"),
+                          G_DBUS_CALL_FLAGS_NONE,
+                          -1,
+                          g_task_get_cancellable (task),
+                          pp_printer_delete_dbus_cb,
+                          task);
+
+  g_free (printer_name);
 }
 
 void

@@ -143,17 +143,17 @@ ppd_names_free (gpointer user_data)
   PPDName **names = (PPDName **) user_data;
   gint      i;
 
-  if (names)
-    {
-      for (i = 0; names[i]; i++)
-        {
-          g_free (names[i]->ppd_name);
-          g_free (names[i]->ppd_display_name);
-          g_free (names[i]);
-        }
+  if (names == NULL)
+    return;
 
-      g_free (names);
+  for (i = 0; names[i]; i++)
+    {
+      g_free (names[i]->ppd_name);
+      g_free (names[i]->ppd_display_name);
+      g_free (names[i]);
     }
+
+  g_free (names);
 }
 
 static void set_ppd_cb (gchar *printer_name, gboolean success, gpointer user_data);
@@ -166,25 +166,25 @@ get_ppd_names_cb (PPDName     **names,
 {
   PpDetailsDialog *self = (PpDetailsDialog*) user_data;
 
-  if (!cancelled)
-    {
-      if (names != NULL)
-        {
-          gtk_label_set_text (self->printer_model_label, names[0]->ppd_display_name);
-          printer_set_ppd_async (printer_name,
-                                 names[0]->ppd_name,
-                                 self->get_ppd_names_cancellable,
-                                 set_ppd_cb,
-                                 self);
-          ppd_names_free (names);
-        }
-      else
-        {
-          gtk_label_set_text (self->printer_model_label, _("No suitable driver found"));
-        }
+  if (cancelled)
+    return;
 
-      gtk_stack_set_visible_child_name (self->printer_model_stack, "printer_model_label");
+  if (names != NULL)
+    {
+      gtk_label_set_text (self->printer_model_label, names[0]->ppd_display_name);
+      printer_set_ppd_async (printer_name,
+                             names[0]->ppd_name,
+                             self->get_ppd_names_cancellable,
+                             set_ppd_cb,
+                             self);
+      ppd_names_free (names);
     }
+  else
+    {
+      gtk_label_set_text (self->printer_model_label, _("No suitable driver found"));
+    }
+
+  gtk_stack_set_visible_child_name (self->printer_model_stack, "printer_model_label");
 }
 
 static void
@@ -219,7 +219,7 @@ ppd_selection_dialog_response_cb (GtkDialog *dialog,
 {
   PpDetailsDialog *self = (PpDetailsDialog*) user_data;
 
-  if (response_id == GTK_RESPONSE_OK)
+  if (response_id != GTK_RESPONSE_OK)
     {
       gchar *ppd_name;
 
@@ -274,47 +274,47 @@ select_ppd_in_dialog (GtkButton       *button,
   g_clear_pointer (&self->ppd_file_name, g_free);
   self->ppd_file_name = g_strdup (cupsGetPPD (self->printer_name));
 
-  if (!self->pp_ppd_selection_dialog)
+  if (self->pp_ppd_selection_dialog)
+    return;
+
+  device_id =
+    get_ppd_attribute (self->ppd_file_name,
+                       "1284DeviceID");
+
+  if (device_id)
     {
-      device_id =
+      manufacturer = get_tag_value (device_id, "mfg");
+      if (!manufacturer)
+        manufacturer = get_tag_value (device_id, "manufacturer");
+      }
+
+  if (manufacturer == NULL)
+    {
+      manufacturer =
         get_ppd_attribute (self->ppd_file_name,
-                           "1284DeviceID");
+                           "Manufacturer");
+      }
 
-      if (device_id)
-        {
-          manufacturer = get_tag_value (device_id, "mfg");
-          if (!manufacturer)
-            manufacturer = get_tag_value (device_id, "manufacturer");
-          }
-
-      if (manufacturer == NULL)
-        {
-          manufacturer =
-            get_ppd_attribute (self->ppd_file_name,
-                               "Manufacturer");
-          }
-
-      if (manufacturer == NULL)
-        {
-          manufacturer = g_strdup ("Raw");
-        }
-
-       if (self->all_ppds_list == NULL)
-         {
-           self->get_all_ppds_cancellable = g_cancellable_new ();
-           get_all_ppds_async (self->get_all_ppds_cancellable, get_all_ppds_async_cb, self);
-         }
-
-        self->pp_ppd_selection_dialog = pp_ppd_selection_dialog_new (
-          GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
-          self->all_ppds_list,
-          manufacturer,
-          ppd_selection_dialog_response_cb,
-          self);
-
-        g_free (manufacturer);
-        g_free (device_id);
+  if (manufacturer == NULL)
+    {
+      manufacturer = g_strdup ("Raw");
     }
+
+   if (self->all_ppds_list == NULL)
+     {
+       self->get_all_ppds_cancellable = g_cancellable_new ();
+       get_all_ppds_async (self->get_all_ppds_cancellable, get_all_ppds_async_cb, self);
+     }
+
+    self->pp_ppd_selection_dialog = pp_ppd_selection_dialog_new (
+      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+      self->all_ppds_list,
+      manufacturer,
+      ppd_selection_dialog_response_cb,
+      self);
+
+    g_free (manufacturer);
+    g_free (device_id);
 }
 
 static void
@@ -450,24 +450,24 @@ pp_details_dialog_new (GtkWindow            *parent,
 void
 pp_details_dialog_free (PpDetailsDialog *self)
 {
-  if (self != NULL)
+  if (self == NULL)
+    return;
+
+  g_clear_pointer (&self->printer_name, g_free);
+  g_clear_pointer (&self->printer_location, g_free);
+  g_clear_pointer (&self->ppd_file_name, g_free);
+
+  if (self->all_ppds_list != NULL)
     {
-      g_clear_pointer (&self->printer_name, g_free);
-      g_clear_pointer (&self->printer_location, g_free);
-      g_clear_pointer (&self->ppd_file_name, g_free);
-
-      if (self->all_ppds_list != NULL)
-        {
-          ppd_list_free (self->all_ppds_list);
-          self->all_ppds_list = NULL;
-        }
-
-      g_cancellable_cancel (self->get_all_ppds_cancellable);
-      g_clear_object (&self->get_all_ppds_cancellable);
-
-      g_cancellable_cancel (self->get_ppd_names_cancellable);
-      g_clear_object (&self->get_ppd_names_cancellable);
-
-      gtk_widget_destroy (GTK_WIDGET (self));
+      ppd_list_free (self->all_ppds_list);
+      self->all_ppds_list = NULL;
     }
+
+  g_cancellable_cancel (self->get_all_ppds_cancellable);
+  g_clear_object (&self->get_all_ppds_cancellable);
+
+  g_cancellable_cancel (self->get_ppd_names_cancellable);
+  g_clear_object (&self->get_ppd_names_cancellable);
+
+  gtk_widget_destroy (GTK_WIDGET (self));
 }

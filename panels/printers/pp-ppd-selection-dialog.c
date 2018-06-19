@@ -78,49 +78,50 @@ manufacturer_selection_changed_cb (GtkTreeSelection *selection,
   gchar                *manufacturer_name = NULL;
   gint                  i, index;
 
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+    return;
+
+  gtk_tree_model_get (model, &iter,
+                      PPD_MANUFACTURERS_NAMES_COLUMN, &manufacturer_name,
+                      -1);
+
+  if (manufacturer_name == NULL)
+    return;
+
+  index = -1;
+  for (i = 0; i < dialog->list->num_of_manufacturers; i++)
     {
-      gtk_tree_model_get (model, &iter,
-			  PPD_MANUFACTURERS_NAMES_COLUMN, &manufacturer_name,
-			  -1);
+      if (g_strcmp0 (manufacturer_name,
+                     dialog->list->manufacturers[i]->manufacturer_name) == 0)
+        {
+          index = i;
+          break;
+        }
     }
 
-  if (manufacturer_name)
+  if (index < 0)
+    goto out;
+
+  models_treeview = (GtkTreeView*)
+    gtk_builder_get_object (dialog->builder, "ppd-selection-models-treeview");
+
+  store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+
+  for (i = 0; i < dialog->list->manufacturers[index]->num_of_ppds; i++)
     {
-      index = -1;
-      for (i = 0; i < dialog->list->num_of_manufacturers; i++)
-        {
-          if (g_strcmp0 (manufacturer_name,
-                         dialog->list->manufacturers[i]->manufacturer_name) == 0)
-            {
-              index = i;
-              break;
-            }
-        }
-
-      if (index >= 0)
-        {
-          models_treeview = (GtkTreeView*)
-            gtk_builder_get_object (dialog->builder, "ppd-selection-models-treeview");
-
-          store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
-
-          for (i = 0; i < dialog->list->manufacturers[index]->num_of_ppds; i++)
-            {
-              gtk_list_store_append (store, &iter);
-              gtk_list_store_set (store, &iter,
-                                  PPD_NAMES_COLUMN, dialog->list->manufacturers[index]->ppds[i]->ppd_name,
-                                  PPD_DISPLAY_NAMES_COLUMN, dialog->list->manufacturers[index]->ppds[i]->ppd_display_name,
-                                  -1);
-            }
-
-          gtk_tree_view_set_model (models_treeview, GTK_TREE_MODEL (store));
-          g_object_unref (store);
-          gtk_tree_view_columns_autosize (models_treeview);
-        }
-
-      g_free (manufacturer_name);
+      gtk_list_store_append (store, &iter);
+      gtk_list_store_set (store, &iter,
+                          PPD_NAMES_COLUMN, dialog->list->manufacturers[index]->ppds[i]->ppd_name,
+                          PPD_DISPLAY_NAMES_COLUMN, dialog->list->manufacturers[index]->ppds[i]->ppd_display_name,
+                          -1);
     }
+
+  gtk_tree_view_set_model (models_treeview, GTK_TREE_MODEL (store));
+  g_object_unref (store);
+  gtk_tree_view_columns_autosize (models_treeview);
+
+out:
+  g_free (manufacturer_name);
 }
 
 static void
@@ -133,12 +134,12 @@ model_selection_changed_cb (GtkTreeSelection *selection,
   GtkWidget            *widget;
   gchar                *model_name = NULL;
 
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      gtk_tree_model_get (model, &iter,
-                          PPD_NAMES_COLUMN, &model_name,
-			  -1);
-    }
+  if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+    return;
+
+  gtk_tree_model_get (model, &iter,
+                      PPD_NAMES_COLUMN, &model_name,
+                      -1);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (dialog->builder, "ppd-selection-select-button");
@@ -178,39 +179,39 @@ fill_ppds_list (PpPPDSelectionDialog *dialog)
   treeview = (GtkTreeView*)
     gtk_builder_get_object (dialog->builder, "ppd-selection-manufacturers-treeview");
 
-  if (dialog->list)
+  if (dialog->list == NULL)
+    return;
+
+  store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+
+  for (i = 0; i < dialog->list->num_of_manufacturers; i++)
     {
-      store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+      gtk_list_store_append (store, &iter);
+      gtk_list_store_set (store, &iter,
+                          PPD_MANUFACTURERS_NAMES_COLUMN, dialog->list->manufacturers[i]->manufacturer_name,
+                          PPD_MANUFACTURERS_DISPLAY_NAMES_COLUMN, dialog->list->manufacturers[i]->manufacturer_display_name,
+                          -1);
 
-      for (i = 0; i < dialog->list->num_of_manufacturers; i++)
+      if (g_strcmp0 (dialog->manufacturer,
+                     dialog->list->manufacturers[i]->manufacturer_display_name) == 0)
         {
-          gtk_list_store_append (store, &iter);
-          gtk_list_store_set (store, &iter,
-                              PPD_MANUFACTURERS_NAMES_COLUMN, dialog->list->manufacturers[i]->manufacturer_name,
-                              PPD_MANUFACTURERS_DISPLAY_NAMES_COLUMN, dialog->list->manufacturers[i]->manufacturer_display_name,
-                              -1);
-
-          if (g_strcmp0 (dialog->manufacturer,
-                         dialog->list->manufacturers[i]->manufacturer_display_name) == 0)
-            {
-              preselect_iter = gtk_tree_iter_copy (&iter);
-            }
+          preselect_iter = gtk_tree_iter_copy (&iter);
         }
-
-      gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (store));
-
-      if (preselect_iter &&
-          (selection = gtk_tree_view_get_selection (treeview)) != NULL)
-        {
-          gtk_tree_selection_select_iter (selection, preselect_iter);
-          path = gtk_tree_model_get_path (GTK_TREE_MODEL (store), preselect_iter);
-          gtk_tree_view_scroll_to_cell (treeview, path, NULL, TRUE, 0.5, 0.0);
-          gtk_tree_path_free (path);
-          gtk_tree_iter_free (preselect_iter);
-        }
-
-      g_object_unref (store);
     }
+
+  gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (store));
+
+  if (preselect_iter &&
+      (selection = gtk_tree_view_get_selection (treeview)) != NULL)
+    {
+      gtk_tree_selection_select_iter (selection, preselect_iter);
+      path = gtk_tree_model_get_path (GTK_TREE_MODEL (store), preselect_iter);
+      gtk_tree_view_scroll_to_cell (treeview, path, NULL, TRUE, 0.5, 0.0);
+      gtk_tree_path_free (path);
+      gtk_tree_iter_free (preselect_iter);
+    }
+
+  g_object_unref (store);
 }
 
 static void

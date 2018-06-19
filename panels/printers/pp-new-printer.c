@@ -432,14 +432,11 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
-  if (!error ||
-      error->domain != G_IO_ERROR ||
-      error->code != G_IO_ERROR_CANCELLED)
+  if (!error || !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     {
       get_named_dest_async (priv->name,
                             printer_add_real_async_cb,
@@ -494,9 +491,13 @@ printer_add_real_async (PpNewPrinter *printer)
 static PPDName *
 get_ppd_item_from_output (GVariant *output)
 {
-  GVariant *array;
-  PPDName  *ppd_item = NULL;
-  gint      j;
+  GVariant     *array;
+  PPDName      *ppd_item = NULL;
+  gint          j;
+  GVariantIter *iter;
+  GVariant     *item;
+  gchar        *driver;
+  gchar        *match;
   static const char * const match_levels[] = {
              "exact-cmd",
              "exact",
@@ -504,48 +505,43 @@ get_ppd_item_from_output (GVariant *output)
              "generic",
              "none"};
 
-  if (output)
+  if (output == NULL)
+    return NULL;
+
+  g_variant_get (output, "(@a(ss))", &array);
+  if (array == NULL)
+    return NULL;
+
+  for (j = 0; j < G_N_ELEMENTS (match_levels) && !ppd_item; j++)
     {
-      g_variant_get (output, "(@a(ss))", &array);
-      if (array)
+      g_variant_get (array, "a(ss)", &iter);
+      while ((item = g_variant_iter_next_value (iter)) && !ppd_item)
         {
-          GVariantIter *iter;
-          GVariant     *item;
-          gchar        *driver;
-          gchar        *match;
-
-          for (j = 0; j < G_N_ELEMENTS (match_levels) && !ppd_item; j++)
+          g_variant_get (item, "(ss)", &driver, &match);
+          if (g_str_equal (match, match_levels[j]))
             {
-              g_variant_get (array, "a(ss)", &iter);
-              while ((item = g_variant_iter_next_value (iter)) && !ppd_item)
-                {
-                  g_variant_get (item, "(ss)", &driver, &match);
-                  if (g_str_equal (match, match_levels[j]))
-                    {
-                      ppd_item = g_new0 (PPDName, 1);
-                      ppd_item->ppd_name = g_strdup (driver);
+              ppd_item = g_new0 (PPDName, 1);
+              ppd_item->ppd_name = g_strdup (driver);
 
-                      if (g_strcmp0 (match, "exact-cmd") == 0)
-                        ppd_item->ppd_match_level = PPD_EXACT_CMD_MATCH;
-                      else if (g_strcmp0 (match, "exact") == 0)
-                        ppd_item->ppd_match_level = PPD_EXACT_MATCH;
-                      else if (g_strcmp0 (match, "close") == 0)
-                        ppd_item->ppd_match_level = PPD_CLOSE_MATCH;
-                      else if (g_strcmp0 (match, "generic") == 0)
-                        ppd_item->ppd_match_level = PPD_GENERIC_MATCH;
-                      else if (g_strcmp0 (match, "none") == 0)
-                        ppd_item->ppd_match_level = PPD_NO_MATCH;
-                    }
-
-                  g_free (driver);
-                  g_free (match);
-                  g_variant_unref (item);
-                }
+              if (g_strcmp0 (match, "exact-cmd") == 0)
+                ppd_item->ppd_match_level = PPD_EXACT_CMD_MATCH;
+              else if (g_strcmp0 (match, "exact") == 0)
+                ppd_item->ppd_match_level = PPD_EXACT_MATCH;
+              else if (g_strcmp0 (match, "close") == 0)
+                ppd_item->ppd_match_level = PPD_CLOSE_MATCH;
+              else if (g_strcmp0 (match, "generic") == 0)
+                ppd_item->ppd_match_level = PPD_GENERIC_MATCH;
+              else if (g_strcmp0 (match, "none") == 0)
+                ppd_item->ppd_match_level = PPD_NO_MATCH;
             }
 
-          g_variant_unref (array);
+          g_free (driver);
+          g_free (match);
+          g_variant_unref (item);
         }
     }
+
+  g_variant_unref (array);
 
   return ppd_item;
 }
@@ -574,14 +570,11 @@ printer_add_async_scb3 (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
-  if ((!error ||
-      error->domain != G_IO_ERROR ||
-      error->code != G_IO_ERROR_CANCELLED) &&
+  if ((!error || !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) &&
       ppd_item && ppd_item->ppd_name)
     {
       priv->ppd_name = g_strdup (ppd_item->ppd_name);
@@ -612,6 +605,7 @@ install_printer_drivers_cb (GObject      *source_object,
   PpNewPrinterPrivate *priv;
   PpNewPrinter        *printer;
   GVariant            *output;
+  GDBusConnection     *bus;
   GError              *error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
@@ -619,57 +613,50 @@ install_printer_drivers_cb (GObject      *source_object,
                                           &error);
   g_object_unref (source_object);
 
-  if (output)
+  if (output == NULL)
     {
-      g_variant_unref (output);
+      gboolean cancelled = g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED);
+
+      if (!cancelled)
+        g_warning ("%s", error->message);
+
+      g_clear_error (&error);
+
+      if (cancelled)
+        return;
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
-        g_warning ("%s", error->message);
+      g_variant_unref (output);
     }
 
-  if (!error ||
-      error->domain != G_IO_ERROR ||
-      error->code != G_IO_ERROR_CANCELLED)
+  printer = (PpNewPrinter *) user_data;
+  priv = printer->priv;
+
+  /* Try whether CUPS has a driver for the new printer */
+  bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+  if (bus == NULL)
     {
-      GDBusConnection *bus;
-      GError          *error = NULL;
-
-      printer = (PpNewPrinter *) user_data;
-      priv = printer->priv;
-
-      /* Try whether CUPS has a driver for the new printer */
-      bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
-      if (bus)
-        {
-          g_dbus_connection_call (bus,
-                                  SCP_BUS,
-                                  SCP_PATH,
-                                  SCP_IFACE,
-                                  "GetBestDrivers",
-                                  g_variant_new ("(sss)",
-                                                 priv->device_id,
-                                                 priv->make_and_model ? priv->make_and_model : "",
-                                                 priv->device_uri ? priv->device_uri : ""),
-                                  G_VARIANT_TYPE ("(a(ss))"),
-                                  G_DBUS_CALL_FLAGS_NONE,
-                                  DBUS_TIMEOUT_LONG,
-                                  priv->cancellable,
-                                  printer_add_async_scb3,
-                                  printer);
-        }
-      else
-        {
-          g_warning ("Failed to get system bus: %s", error->message);
-          g_error_free (error);
-          _pp_new_printer_add_async_cb (FALSE, printer);
-        }
+      g_warning ("Failed to get system bus: %s", error->message);
+      g_error_free (error);
+      _pp_new_printer_add_async_cb (FALSE, printer);
     }
 
-  if (error)
-    g_error_free (error);
+  g_dbus_connection_call (bus,
+                          SCP_BUS,
+                          SCP_PATH,
+                          SCP_IFACE,
+                          "GetBestDrivers",
+                          g_variant_new ("(sss)",
+                                         priv->device_id,
+                                         priv->make_and_model ? priv->make_and_model : "",
+                                         priv->device_uri ? priv->device_uri : ""),
+                          G_VARIANT_TYPE ("(a(ss))"),
+                          G_DBUS_CALL_FLAGS_NONE,
+                          DBUS_TIMEOUT_LONG,
+                          priv->cancellable,
+                          printer_add_async_scb3,
+                          printer);
 }
 
 static void
@@ -682,7 +669,6 @@ printer_add_async_scb (GObject      *source_object,
   GDBusConnection     *bus;
   GVariantBuilder      array_builder;
   GVariant            *output;
-  gboolean             cancelled = FALSE;
   PPDName             *ppd_item = NULL;
   GError              *error = NULL;
 
@@ -691,63 +677,63 @@ printer_add_async_scb (GObject      *source_object,
                                           &error);
   g_object_unref (source_object);
 
-  if (output)
+  if (output == NULL)
     {
-      ppd_item = get_ppd_item_from_output (output);
-      g_variant_unref (output);
-    }
-  else
-    {
-      cancelled = g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED);
+      gboolean cancelled = g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED);
 
       if (!cancelled)
         g_warning ("%s", error->message);
 
       g_clear_error (&error);
+
+      if (cancelled)
+	return;
+    }
+  else
+    {
+      ppd_item = get_ppd_item_from_output (output);
+      g_variant_unref (output);
     }
 
-  if (!cancelled)
+  if (ppd_item == NULL || ppd_item->ppd_match_level < PPD_EXACT_MATCH)
     {
-      if (ppd_item == NULL || ppd_item->ppd_match_level < PPD_EXACT_MATCH)
+      bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+      if (bus)
         {
-          bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
-          if (bus)
-            {
-              g_variant_builder_init (&array_builder, G_VARIANT_TYPE ("as"));
-              g_variant_builder_add (&array_builder, "s", priv->device_id);
+          g_variant_builder_init (&array_builder, G_VARIANT_TYPE ("as"));
+          g_variant_builder_add (&array_builder, "s", priv->device_id);
 
-              g_dbus_connection_call (bus,
-                                      PACKAGE_KIT_BUS,
-                                      PACKAGE_KIT_PATH,
-                                      PACKAGE_KIT_MODIFY_IFACE,
-                                      "InstallPrinterDrivers",
-                                      g_variant_new ("(uass)",
-                                                     priv->window_id,
-                                                     &array_builder,
-                                                     "hide-finished"),
-                                      G_VARIANT_TYPE ("()"),
-                                      G_DBUS_CALL_FLAGS_NONE,
-                                      DBUS_TIMEOUT_LONG,
-                                      NULL,
-                                      install_printer_drivers_cb,
-                                      printer);
-            }
-          else
-            {
-              g_warning ("Failed to get session bus: %s", error->message);
-              g_error_free (error);
-              _pp_new_printer_add_async_cb (FALSE, printer);
-            }
-        }
-      else if (ppd_item && ppd_item->ppd_name)
-        {
-          priv->ppd_name = g_strdup (ppd_item->ppd_name);
-          printer_add_real_async (printer);
+          g_dbus_connection_call (bus,
+                                  PACKAGE_KIT_BUS,
+                                  PACKAGE_KIT_PATH,
+                                  PACKAGE_KIT_MODIFY_IFACE,
+                                  "InstallPrinterDrivers",
+                                  g_variant_new ("(uass)",
+                                                 priv->window_id,
+                                                 &array_builder,
+                                                 "hide-finished"),
+                                  G_VARIANT_TYPE ("()"),
+                                  G_DBUS_CALL_FLAGS_NONE,
+                                  DBUS_TIMEOUT_LONG,
+                                  NULL,
+                                  install_printer_drivers_cb,
+                                  printer);
         }
       else
         {
+          g_warning ("Failed to get session bus: %s", error->message);
+          g_error_free (error);
           _pp_new_printer_add_async_cb (FALSE, printer);
         }
+    }
+  else if (ppd_item && ppd_item->ppd_name)
+    {
+      priv->ppd_name = g_strdup (ppd_item->ppd_name);
+      printer_add_real_async (printer);
+    }
+  else
+    {
+      _pp_new_printer_add_async_cb (FALSE, printer);
     }
 
   if (ppd_item)
@@ -858,8 +844,7 @@ printer_set_accepting_jobs_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
       g_error_free (error);
     }
@@ -888,8 +873,7 @@ printer_set_enabled_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
       g_error_free (error);
     }
@@ -960,8 +944,7 @@ install_package_names_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
       g_error_free (error);
     }
@@ -999,8 +982,7 @@ search_files_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
       g_error_free (error);
     }
@@ -1116,9 +1098,8 @@ get_missing_executables_cb (GObject      *source_object,
 
       g_variant_unref (output);
     }
-  else if (error->domain == G_DBUS_ERROR &&
-           (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
-            error->code == G_DBUS_ERROR_UNKNOWN_METHOD))
+  else if (g_error_matches (error, G_DBUS_ERROR, G_DBUS_ERROR_SERVICE_UNKNOWN) ||
+           g_error_matches (error, G_DBUS_ERROR, G_DBUS_ERROR_UNKNOWN_METHOD))
     {
       g_warning ("Install system-config-printer which provides \
 DBus method \"MissingExecutables\" to find missing executables and filters.");
@@ -1126,8 +1107,7 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
       g_error_free (error);
     }
@@ -1173,34 +1153,34 @@ printer_get_ppd_cb (const gchar *ppd_filename,
   IMEData         *data = (IMEData *) user_data;
   GError          *error = NULL;
 
-  data->ppd_file_name = g_strdup (ppd_filename);
-  if (data->ppd_file_name)
+  if (ppd_filename == NULL)
     {
-      bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
-      if (!bus)
-        {
-          g_warning ("%s", error->message);
-          g_error_free (error);
-        }
-      else
-        {
-          g_dbus_connection_call (bus,
-                                  SCP_BUS,
-                                  SCP_PATH,
-                                  SCP_IFACE,
-                                  "MissingExecutables",
-                                  g_variant_new ("(s)", data->ppd_file_name),
-                                  G_VARIANT_TYPE ("(as)"),
-                                  G_DBUS_CALL_FLAGS_NONE,
-                                  DBUS_TIMEOUT,
-                                  data->cancellable,
-                                  get_missing_executables_cb,
-                                  data);
-          return;
-        }
+      install_missing_executables_cb (data);
+      return;
     }
 
-  install_missing_executables_cb (data);
+  data->ppd_file_name = g_strdup (ppd_filename);
+  bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+  if (!bus)
+    {
+      g_warning ("%s", error->message);
+      g_error_free (error);
+      install_missing_executables_cb (data);
+      return;
+    }
+
+  g_dbus_connection_call (bus,
+                          SCP_BUS,
+                          SCP_PATH,
+                          SCP_IFACE,
+                          "MissingExecutables",
+                          g_variant_new ("(s)", data->ppd_file_name),
+                          G_VARIANT_TYPE ("(as)"),
+                          G_DBUS_CALL_FLAGS_NONE,
+                          DBUS_TIMEOUT,
+                          data->cancellable,
+                          get_missing_executables_cb,
+                          data);
 }
 
 static void
@@ -1225,8 +1205,7 @@ pp_maintenance_command_execute_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           data = (PCData *) user_data;
 
