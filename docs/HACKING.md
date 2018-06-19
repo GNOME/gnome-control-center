@@ -43,7 +43,7 @@ if (a || b || (c && d))
   return;
 
 // Multiline if with nested parenthesis
-if (long_boolean_variable_used_in_this_condition_a || 
+if (long_boolean_variable_used_in_this_condition_a ||
     long_boolean_variable_used_in_this_condition_b ||
     (long_boolean_variable_used_in_this_condition_c &&
      long_boolean_variable_used_in_this_condition_d))
