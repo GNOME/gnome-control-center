@@ -113,7 +113,7 @@ update_panel_visibility (NMClient *client)
                                        "wifi",
                                        visible ? CC_PANEL_VISIBLE : CC_PANEL_VISIBLE_IN_SEARCH);
 
-  CC_TRACE_MSG ("Wi-Fi panel visible: %s", visible ? "yes" : "no");
+  g_debug ("Wi-Fi panel visible: %s", visible ? "yes" : "no");
 }
 
 void
