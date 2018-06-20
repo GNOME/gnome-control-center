@@ -570,29 +570,23 @@ static gboolean
 do_filter (GtkWidget *chooser)
 {
   CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
+  g_auto(GStrv) previous_words = NULL;
   g_autofree gchar *filter_contents = NULL;
-  gboolean words_changed;
 
   priv->filter_timeout_id = 0;
 
   filter_contents =
     cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (priv->filter_entry)));
 
-  words_changed = !priv->filter_words;
-  if (filter_contents)
-    {
-      g_auto(GStrv) previous_words = priv->filter_words;
-      priv->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
-      if (strvs_differ (priv->filter_words, previous_words))
-	words_changed = TRUE;
-    }
+  previous_words = priv->filter_words;
+  priv->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
 
-  if (!priv->filter_words || !priv->filter_words[0])
+  if (!priv->filter_words[0])
     {
       gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->list));
       gtk_list_box_set_placeholder (GTK_LIST_BOX (priv->list), NULL);
     }
-  else if (words_changed)
+  else if (previous_words == NULL || strvs_differ (priv->filter_words, previous_words))
     {
       gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->list));
       gtk_list_box_set_placeholder (GTK_LIST_BOX (priv->list), priv->no_results);
