@@ -947,7 +947,7 @@ get_locale_infos (GtkWidget *chooser)
           continue;
 
       info = g_new0 (LocaleInfo, 1);
-      info->id = g_steal_pointer (&simple_locale);
+      info->id = g_strdup (simple_locale);
       info->name = gnome_get_language_from_locale (simple_locale, NULL);
       info->unaccented_name = cc_util_normalize_casefold_and_unaccent (info->name);
       tmp = gnome_get_language_from_locale (simple_locale, "C");
