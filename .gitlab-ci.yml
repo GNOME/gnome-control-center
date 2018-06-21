@@ -2,6 +2,7 @@ image: claudioandre/settings:fedora.dev
 stages:
   - build
   - test
+  - extra
   - delivery
 
 .Log files: &log_files  [./*.log, _build/meson-logs/]
@@ -195,3 +196,43 @@ packaging:
     name: review/$CI_COMMIT_REF_NAME
     url: https://gitlab.gnome.org/$CI_PROJECT_PATH/-/jobs/$CI_JOB_ID/artifacts/raw/${BUNDLE}
   when: manual
+
+##
+# Stage: Extra
+#
+# Runs the sanitizers [thread, undefined, memory].
+##
+.sanitizer: &sanitizer
+  <<: *save_build_logs
+  stage: extra
+  allow_failure: true
+
+  script:
+    # Temporary workaround for Fedora
+    - mkdir -p /usr/lib64/clang/6.0.1/lib/linux/
+    - cp /usr/lib64/clang/6.0.0/lib/linux/libclang_rt.msan-x86_64.a /usr/lib64/clang/6.0.1/lib/linux/libclang_rt.msan-x86_64.a
+
+    - *environment_information
+    - *build_procedure
+
+    - echo "== Testing =="
+    - ninja -C _build test
+
+tsan:
+  <<: *sanitizer
+  variables:
+    BUILD_OPTS: "-Db_sanitize=thread"
+  when: manual
+
+ubsan:
+  <<: *sanitizer
+  variables:
+    BUILD_OPTS: "-Db_sanitize=undefined"
+  when: manual
+
+msan:
+  <<: *sanitizer
+  variables:
+    BUILD_OPTS: "-Db_sanitize=memory"
+    CC: "clang"
+  when : manual
