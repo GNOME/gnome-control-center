@@ -36,7 +36,7 @@ stages:
 # most important stage of the CI, and no MR should ever be merged if it breaks
 # any of them.
 ##
-build:
+.build:
   <<: *save_untracked_files
   stage: build
 
@@ -58,7 +58,7 @@ build:
 #
 # Runs the unit tests.
 ##
-test:
+.test:
   <<: *save_build_logs
   stage: test
 
@@ -83,7 +83,7 @@ test:
 #
 # Runs the coverage test.
 ##
-coverage:
+.coverage:
   <<: *save_build_logs
   stage: test
   variables:
@@ -108,7 +108,7 @@ coverage:
 #
 # Publish the Coverage Report generated above
 ##
-pages:
+.pages:
   stage: delivery
   dependencies:
     - coverage
@@ -125,7 +125,7 @@ pages:
 #
 # Runs the address sanitizer.
 ##
-asan:
+.asan:
   <<: *save_build_logs
   stage: test
   allow_failure: true
@@ -195,3 +195,37 @@ packaging:
     name: review/$CI_COMMIT_REF_NAME
     url: https://gitlab.gnome.org/$CI_PROJECT_PATH/-/jobs/$CI_JOB_ID/artifacts/raw/${BUNDLE}
   when: manual
+
+##
+# Stage: Extra
+#
+# Run multiarch Tests
+##
+.qemu: &multiarch
+  <<: *save_build_logs
+  image: docker:latest
+  services:
+    - docker:dind
+
+  script:
+    # Register QEMU archs
+    - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
+    # Run the multiarch test job using QEMU
+    - 'docker run -v $(pwd):/cwd -e TEST=check $IMAGE bash -e -c "cd /cwd &&
+         echo == Building == &&
+         rm -rf _build/ &&
+         meson . _build ${BUILD_OPTS} &&
+         ninja -C _build 2>&1 | tee compilation.log &&
+
+         echo == Testing == &&
+         ninja -C _build test"
+    '
+
+armv8:
+  <<: *multiarch
+  stage: test
+  variables:
+    DOCKER_DRIVER: overlay
+    IMAGE: "claudioandre/settings:fedora.aarch64"
+  when: always
