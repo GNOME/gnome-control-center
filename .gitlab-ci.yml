@@ -232,3 +232,42 @@ msan:
     BUILD_OPTS: "-Db_sanitize=memory"
     CC: "clang"
   when : manual
+
+# Run multiarch Tests
+##
+.qemu: &multiarch
+  <<: *save_build_logs
+  image: docker:latest
+  services:
+    - docker:dind
+
+  script:
+    # Register QEMU archs
+    - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
+    # Run the multiarch test job using QEMU
+    - 'docker run -v $(pwd):/cwd $IMAGE bash -e -c "cd /cwd &&
+         echo == Building == &&
+         rm -rf _build/ &&
+         meson . _build ${BUILD_OPTS} &&
+         ninja -C _build 2>&1 | tee compilation.log &&
+
+         echo == Testing == &&
+         ninja -C _build test"
+    '
+
+armv8:
+  <<: *multiarch
+  stage: test
+  variables:
+    DOCKER_DRIVER: overlay
+    IMAGE: "claudioandre/settings:fedora.aarch64"
+  when: manual
+
+ppc64le:
+  <<: *multiarch
+  stage: test
+  variables:
+    DOCKER_DRIVER: overlay
+    IMAGE: "claudioandre/settings:fedora.ppc64le"
+  when: manual
