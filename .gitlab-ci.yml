@@ -15,7 +15,7 @@ stages:
 .Git Untracked files: &save_untracked_files
   artifacts:
     name: untracked
-    untracked: true
+    paths: [$(pwd)]
     expire_in: 3h30min
 
 .Show Info: &environment_information
@@ -46,6 +46,9 @@ build:
 
     - echo "== Report =="
     - build-aux/ci/ci-helper.sh "WARNINGS"
+
+    # Save all but git-related files
+    - rm -rf .git .gitignore .gitmodules
 
 ##
 # Stage: Test
