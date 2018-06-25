@@ -165,15 +165,15 @@ typedef struct
 static gchar **
 line_split (gchar *line)
 {
-  gboolean   escaped = FALSE;
-  gboolean   quoted = FALSE;
-  gboolean   in_word = FALSE;
-  gchar    **words = NULL;
-  gchar    **result = NULL;
-  gchar     *buffer = NULL;
-  gchar      ch;
-  gint       n = 0;
-  gint       i, j = 0, k = 0;
+  gboolean          escaped = FALSE;
+  gboolean          quoted = FALSE;
+  gboolean          in_word = FALSE;
+  gchar           **words = NULL;
+  gchar           **result = NULL;
+  g_autofree gchar *buffer = NULL;
+  gchar             ch;
+  gint              n = 0;
+  gint              i, j = 0, k = 0;
 
   if (line)
     {
@@ -241,7 +241,6 @@ line_split (gchar *line)
 
   result = g_strdupv (words);
   g_strfreev (words);
-  g_free (buffer);
 
   return result;
 }
@@ -251,16 +250,16 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
                                   GObject            *object,
                                   GCancellable       *cancellable)
 {
-  PpHost         *host = (PpHost *) object;
-  PpHostPrivate  *priv = host->priv;
-  PpPrintDevice  *device;
-  gboolean        is_network_device;
-  GSDData        *data;
-  GError         *error;
-  gchar         **argv;
-  gchar          *stdout_string = NULL;
-  gchar          *stderr_string = NULL;
-  gint            exit_status;
+  PpHost           *host = (PpHost *) object;
+  PpHostPrivate    *priv = host->priv;
+  PpPrintDevice    *device;
+  gboolean          is_network_device;
+  GSDData          *data;
+  GError           *error;
+  gchar           **argv;
+  g_autofree gchar *stdout_string = NULL;
+  g_autofree gchar *stderr_string = NULL;
+  gint              exit_status;
 
   data = g_simple_async_result_get_op_res_gpointer (res);
   data->devices = g_new0 (PpDevicesList, 1);
@@ -289,7 +288,6 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
   if (exit_status == 0 && stdout_string)
     {
       gchar **printer_informations = NULL;
-      gchar  *device_name;
       gint    length;
 
       printer_informations = line_split (stdout_string);
@@ -297,8 +295,10 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
 
       if (length >= 4)
         {
+          g_autofree gchar *device_name = NULL;
+
           device_name = g_strdup (printer_informations[3]);
-          device_name = g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
+          g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
           is_network_device = g_strcmp0 (printer_informations[0], "network") == 0;
 
           device = g_object_new (PP_TYPE_PRINT_DEVICE,
@@ -310,8 +310,6 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
                                  "device-name", device_name,
                                  NULL);
 
-          g_free (device_name);
-
           if (length >= 5 && printer_informations[4][0] != '\0')
             g_object_set (device, "device-id", printer_informations[4], NULL);
 
@@ -322,7 +320,6 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
         }
 
       g_strfreev (printer_informations);
-      g_free (stdout_string);
     }
 }
 
@@ -389,7 +386,6 @@ _pp_host_get_remote_cups_devices_thread (GSimpleAsyncResult *res,
   PpPrintDevice *device;
   const char    *device_location;
   http_t        *http;
-  gchar         *device_uri;
   gint           num_of_devices = 0;
   gint           port;
   gint           i;
@@ -412,6 +408,8 @@ _pp_host_get_remote_cups_devices_thread (GSimpleAsyncResult *res,
         {
           for (i = 0; i < num_of_devices; i++)
             {
+              g_autofree gchar *device_uri = NULL;
+
               device_uri = g_strdup_printf ("ipp://%s:%d/printers/%s",
                                             priv->hostname,
                                             port,
@@ -430,8 +428,6 @@ _pp_host_get_remote_cups_devices_thread (GSimpleAsyncResult *res,
                                      "host-port", port,
                                      "acquisition-method", ACQUISITION_METHOD_REMOTE_CUPS_SERVER,
                                      NULL);
-
-              g_free (device_uri);
 
               data->devices->devices = g_list_append (data->devices->devices, device);
             }
@@ -521,7 +517,7 @@ jetdirect_connection_test_cb (GObject      *source_object,
 
   if (connection != NULL)
     {
-      gchar *device_uri;
+      g_autofree gchar *device_uri = NULL;
 
       g_io_stream_close (G_IO_STREAM (connection), NULL, NULL);
       g_object_unref (connection);
@@ -541,8 +537,6 @@ jetdirect_connection_test_cb (GObject      *source_object,
                              "host-port", data->port,
                              "acquisition-method", ACQUISITION_METHOD_JETDIRECT,
                              NULL);
-
-      g_free (device_uri);
 
       data->devices->devices = g_list_append (data->devices->devices, device);
     }
@@ -715,8 +709,7 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
   GList             *iter;
   gchar             *found_queue = NULL;
   gchar             *candidate;
-  gchar             *address;
-  gchar             *device_uri;
+  g_autofree gchar  *address = NULL;
   gint               port;
   gint               i;
 
@@ -783,6 +776,8 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
 
       if (found_queue != NULL)
         {
+          g_autofree gchar *device_uri = NULL;
+
           device_uri = g_strdup_printf ("lpd://%s:%d/%s",
                                         priv->hostname,
                                         port,
@@ -798,8 +793,6 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
                                  "acquisition-method", ACQUISITION_METHOD_LPD,
                                  NULL);
 
-          g_free (device_uri);
-
           result->devices = g_list_append (result->devices, device);
         }
 
@@ -811,8 +804,6 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
 out:
   g_task_return_pointer (task, result, (GDestroyNotify) pp_devices_list_free);
   g_object_unref (task);
-
-  g_free (address);
 }
 
 void
