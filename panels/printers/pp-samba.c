@@ -290,11 +290,8 @@ list_dir (SMBCCTX      *smb_context,
 
       while (dir && (dirent = smbclient_readdir (smb_context, dir)))
         {
-          gchar *device_name;
-          gchar *device_uri;
-          gchar *subdirname = NULL;
-          gchar *subpath = NULL;
-          gchar *uri;
+          g_autofree gchar *subdirname = NULL;
+          g_autofree gchar *subpath = NULL;
 
           if (dirent->smbc_type == SMBC_WORKGROUP)
             {
@@ -310,6 +307,10 @@ list_dir (SMBCCTX      *smb_context,
 
           if (dirent->smbc_type == SMBC_PRINTER_SHARE)
             {
+              g_autofree gchar *uri = NULL;
+              g_autofree gchar *device_name = NULL;
+              g_autofree gchar *device_uri = NULL;
+
               uri = g_strdup_printf ("%s/%s", dirname, dirent->name);
               device_uri = g_uri_escape_string (uri,
                                                 G_URI_RESERVED_CHARS_GENERIC_DELIMITERS
@@ -317,7 +318,7 @@ list_dir (SMBCCTX      *smb_context,
                                                 FALSE);
 
               device_name = g_strdup (dirent->name);
-              device_name = g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
+              g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
 
               device = g_object_new (PP_TYPE_PRINT_DEVICE,
                                      "device-uri", device_uri,
@@ -329,10 +330,6 @@ list_dir (SMBCCTX      *smb_context,
                                      "host-name", dirname,
                                      NULL);
 
-              g_free (device_name);
-              g_free (device_uri);
-              g_free (uri);
-
               data->devices->devices = g_list_append (data->devices->devices, device);
             }
 
@@ -343,8 +340,6 @@ list_dir (SMBCCTX      *smb_context,
                         subpath,
                         cancellable,
                         data);
-              g_free (subdirname);
-              g_free (subpath);
             }
         }
 
@@ -361,9 +356,6 @@ _pp_samba_get_devices_thread (GSimpleAsyncResult *res,
   static GMutex   mutex;
   SMBData        *data;
   SMBCCTX        *smb_context;
-  gchar          *dirname;
-  gchar          *path;
-  gchar          *hostname = NULL;
 
   data = g_simple_async_result_get_op_res_gpointer (res);
   data->devices = g_new0 (PpDevicesList, 1);
@@ -377,6 +369,10 @@ _pp_samba_get_devices_thread (GSimpleAsyncResult *res,
     {
       if (smbc_init_context (smb_context))
         {
+          g_autofree gchar *hostname = NULL;
+          g_autofree gchar *dirname = NULL;
+          g_autofree gchar *path = NULL;
+
           smbc_setOptionUserData (smb_context, data);
 
           g_object_get (object, "hostname", &hostname, NULL);
@@ -384,8 +380,6 @@ _pp_samba_get_devices_thread (GSimpleAsyncResult *res,
             {
               dirname = g_strdup_printf ("smb://%s", hostname);
               path = g_strdup_printf ("//%s", hostname);
-
-              g_free (hostname);
             }
           else
             {
@@ -395,9 +389,6 @@ _pp_samba_get_devices_thread (GSimpleAsyncResult *res,
 
           smbc_setFunctionAuthDataWithContext (smb_context, anonymous_auth_fn);
           list_dir (smb_context, dirname, path, cancellable, data);
-
-          g_free (dirname);
-          g_free (path);
         }
 
       smbc_free_context (smb_context, 1);
@@ -415,7 +406,7 @@ pp_samba_get_devices_async (PpSamba             *samba,
 {
   GSimpleAsyncResult *res;
   SMBData            *data;
-  gchar              *hostname = NULL;
+  g_autofree gchar   *hostname = NULL;
 
   g_object_get (G_OBJECT (samba), "hostname", &hostname, NULL);
 
@@ -430,7 +421,6 @@ pp_samba_get_devices_async (PpSamba             *samba,
   g_simple_async_result_set_op_res_gpointer (res, data, (GDestroyNotify) smb_data_free);
   g_simple_async_result_run_in_thread (res, _pp_samba_get_devices_thread, 0, cancellable);
 
-  g_free (hostname);
   g_object_unref (res);
 }
 
