@@ -867,11 +867,11 @@ test_page_cb (GtkButton *button,
 
   if (self->printer_name)
     {
-      const gchar  *const dirs[] = { "/usr/share/cups",
-                                     "/usr/local/share/cups",
-                                     NULL };
-      const gchar  *datadir = NULL;
-      gchar        *filename = NULL;
+      const gchar      *const dirs[] = { "/usr/share/cups",
+                                         "/usr/local/share/cups",
+                                         NULL };
+      const gchar      *datadir = NULL;
+      g_autofree gchar *filename = NULL;
 
       datadir = getenv ("CUPS_DATADIR");
       if (datadir != NULL)
@@ -896,8 +896,6 @@ test_page_cb (GtkButton *button,
                                        NULL,
                                        print_test_page_cb,
                                        NULL);
-
-          g_free (filename);
         }
       else
         {
