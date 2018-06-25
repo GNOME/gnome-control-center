@@ -133,10 +133,10 @@ printer_rename_thread (GTask        *task,
                        gpointer      task_data,
                        GCancellable *cancellable)
 {
-  PpPrinter *self = PP_PRINTER (source_object);
-  gboolean   result;
-  gchar     *new_printer_name = task_data;
-  gchar     *old_printer_name;
+  PpPrinter        *self = PP_PRINTER (source_object);
+  gboolean          result;
+  gchar            *new_printer_name = task_data;
+  g_autofree gchar *old_printer_name = NULL;
 
   g_object_get (self, "printer-name", &old_printer_name, NULL);
 
@@ -146,8 +146,6 @@ printer_rename_thread (GTask        *task,
     {
       g_object_set (self, "printer-name", new_printer_name, NULL);
     }
-
-  g_free (old_printer_name);
 
   g_task_return_boolean (task, result);
 }
@@ -162,7 +160,6 @@ printer_rename_dbus_cb (GObject      *source_object,
   gboolean          result = FALSE;
   g_autoptr(GError) error = NULL;
   GTask            *task = user_data;
-  gchar            *old_printer_name;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -171,6 +168,7 @@ printer_rename_dbus_cb (GObject      *source_object,
 
   if (output != NULL)
     {
+      g_autofree gchar *old_printer_name = NULL;
       const gchar *ret_error;
 
       self = g_task_get_source_object (task);
@@ -189,7 +187,6 @@ printer_rename_dbus_cb (GObject      *source_object,
 
       g_task_return_boolean (task, result);
 
-      g_free (old_printer_name);
       g_variant_unref (output);
     }
   else
@@ -217,11 +214,12 @@ get_bus_cb (GObject      *source_object,
   GDBusConnection  *bus;
   g_autoptr(GError) error = NULL;
   GTask            *task = user_data;
-  gchar            *printer_name;
 
   bus = g_bus_get_finish (res, &error);
   if (bus != NULL)
     {
+      g_autofree gchar *printer_name = NULL;
+
       g_object_get (g_task_get_source_object (task),
                     "printer-name", &printer_name,
                     NULL);
@@ -239,8 +237,6 @@ get_bus_cb (GObject      *source_object,
                               g_task_get_cancellable (task),
                               printer_rename_dbus_cb,
                               task);
-
-      g_free (printer_name);
     }
   else
     {
@@ -292,24 +288,24 @@ get_jobs_thread (GTask        *task,
                  gpointer      task_data,
                  GCancellable *cancellable)
 {
-  ipp_attribute_t *attr = NULL;
-  static gchar    *printer_attributes[] = { "auth-info-required" };
-  GetJobsData     *get_jobs_data = task_data;
-  cups_job_t      *jobs = NULL;
-  PpPrinter       *self = PP_PRINTER (source_object);
-  gboolean         auth_info_is_required;
-  PpJob           *job;
-  ipp_t           *job_request;
-  ipp_t           *job_response;
-  ipp_t           *printer_request;
-  ipp_t           *printer_response;
-  gchar           *job_uri;
-  gchar           *printer_uri;
-  gchar          **auth_info_required = NULL;
-  gchar           *printer_name;
-  GList           *list = NULL;
-  gint             num_jobs;
-  gint             i, j;
+  ipp_attribute_t  *attr = NULL;
+  static gchar     *printer_attributes[] = { "auth-info-required" };
+  GetJobsData      *get_jobs_data = task_data;
+  cups_job_t       *jobs = NULL;
+  PpPrinter        *self = PP_PRINTER (source_object);
+  gboolean          auth_info_is_required;
+  PpJob            *job;
+  ipp_t            *job_request;
+  ipp_t            *job_response;
+  ipp_t            *printer_request;
+  ipp_t            *printer_response;
+  gchar            *job_uri;
+  gchar            *printer_uri;
+  gchar           **auth_info_required = NULL;
+  g_autofree gchar *printer_name = NULL;
+  GList            *list = NULL;
+  gint              num_jobs;
+  gint              i, j;
 
   g_object_get (self, "printer-name", &printer_name, NULL);
 
@@ -323,7 +319,7 @@ get_jobs_thread (GTask        *task,
       auth_info_is_required = FALSE;
       if (jobs[i].state == IPP_JOB_HELD)
         {
-          job_uri = g_strdup_printf ("ipp://localhost/jobs/%d", jobs[i].id);
+          g_autofree gchar *job_uri = g_strdup_printf ("ipp://localhost/jobs/%d", jobs[i].id);
 
           job_request = ippNewRequest (IPP_GET_JOB_ATTRIBUTES);
           ippAddString (job_request, IPP_TAG_OPERATION, IPP_TAG_URI,
@@ -334,8 +330,6 @@ get_jobs_thread (GTask        *task,
                         "requested-attributes", NULL, "job-hold-until");
           job_response = cupsDoRequest (CUPS_HTTP_DEFAULT, job_request, "/");
 
-          g_free (job_uri);
-
           if (job_response != NULL)
             {
               attr = ippFindAttribute (job_response, "job-hold-until", IPP_TAG_ZERO);
@@ -345,7 +339,7 @@ get_jobs_thread (GTask        *task,
 
                   if (auth_info_required == NULL)
                     {
-                      printer_uri = g_strdup_printf ("ipp://localhost/printers/%s", printer_name);
+                      g_autofree gchar *printer_uri = g_strdup_printf ("ipp://localhost/printers/%s", printer_name);
 
                       printer_request = ippNewRequest (IPP_GET_PRINTER_ATTRIBUTES);
                       ippAddString (printer_request, IPP_TAG_OPERATION, IPP_TAG_URI,
@@ -355,8 +349,6 @@ get_jobs_thread (GTask        *task,
                       ippAddStrings (printer_request, IPP_TAG_OPERATION, IPP_TAG_KEYWORD,
                                      "requested-attributes", 1, NULL, (const char **) printer_attributes);
                       printer_response = cupsDoRequest (CUPS_HTTP_DEFAULT, printer_request, "/");
-
-                      g_free (printer_uri);
 
                       if (printer_response != NULL)
                         {
@@ -389,7 +381,6 @@ get_jobs_thread (GTask        *task,
 
   g_strfreev (auth_info_required);
   cupsFreeJobs (num_jobs, jobs);
-  g_free (printer_name);
 
   if (g_task_set_return_on_cancel (task, FALSE))
     {
@@ -438,7 +429,6 @@ pp_printer_delete_dbus_cb (GObject      *source_object,
   gboolean          result = FALSE;
   g_autoptr(GError) error = NULL;
   GTask            *task = user_data;
-  gchar            *printer_name;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -447,7 +437,8 @@ pp_printer_delete_dbus_cb (GObject      *source_object,
 
   if (output != NULL)
     {
-      const gchar *ret_error;
+      g_autofree gchar *printer_name = NULL;
+      const gchar      *ret_error;
 
       g_object_get (g_task_get_source_object (task), "printer-name", &printer_name, NULL);
 
@@ -459,7 +450,6 @@ pp_printer_delete_dbus_cb (GObject      *source_object,
 
       g_task_return_boolean (task, result);
 
-      g_free (printer_name);
       g_variant_unref (output);
     }
   else
@@ -478,11 +468,12 @@ pp_printer_delete_cb (GObject      *source_object,
   GDBusConnection  *bus;
   g_autoptr(GError) error = NULL;
   GTask            *task = user_data;
-  gchar            *printer_name;
 
   bus = g_bus_get_finish (res, &error);
   if (bus != NULL)
     {
+      g_autofree gchar *printer_name = NULL;
+
       g_object_get (g_task_get_source_object (task),
                     "printer-name", &printer_name,
                     NULL);
@@ -499,8 +490,6 @@ pp_printer_delete_cb (GObject      *source_object,
                               g_task_get_cancellable (task),
                               pp_printer_delete_dbus_cb,
                               task);
-
-      g_free (printer_name);
     }
   else
     {
@@ -556,17 +545,17 @@ print_file_thread (GTask        *task,
                    gpointer      task_data,
                    GCancellable *cancellable)
 {
-  PpPrinter    *self = PP_PRINTER (source_object);
-  PrintFileData *print_file_data;
-  cups_ptype_t  type = 0;
-  cups_dest_t  *dest = NULL;
-  const gchar  *printer_type = NULL;
-  gboolean      ret = FALSE;
-  gchar        *printer_name = NULL;
-  gchar        *printer_uri = NULL;
-  gchar        *resource = NULL;
-  ipp_t        *response = NULL;
-  ipp_t        *request;
+  PpPrinter        *self = PP_PRINTER (source_object);
+  PrintFileData    *print_file_data;
+  cups_ptype_t      type = 0;
+  cups_dest_t      *dest = NULL;
+  const gchar      *printer_type = NULL;
+  gboolean          ret = FALSE;
+  g_autofree gchar *printer_name = NULL;
+  g_autofree gchar *printer_uri = NULL;
+  g_autofree gchar *resource = NULL;
+  ipp_t            *response = NULL;
+  ipp_t            *request;
 
   g_object_get (self, "printer-name", &printer_name, NULL);
   dest = cupsGetNamedDest (CUPS_HTTP_DEFAULT, printer_name, NULL);
@@ -612,10 +601,6 @@ print_file_thread (GTask        *task,
 
       ippDelete (response);
     }
-
-  g_free (printer_name);
-  g_free (printer_uri);
-  g_free (resource);
 
   if (g_task_set_return_on_cancel (task, FALSE))
     {

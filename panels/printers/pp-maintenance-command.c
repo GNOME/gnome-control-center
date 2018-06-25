@@ -204,11 +204,11 @@ _pp_maintenance_command_execute_thread (GTask        *task,
 
   if (_pp_maintenance_command_is_supported (self->printer_name, self->command))
     {
-      ipp_t *request;
-      ipp_t *response = NULL;
-      gchar *printer_uri;
-      gchar *file_name = NULL;
-      int    fd = -1;
+      ipp_t            *request;
+      ipp_t            *response = NULL;
+      g_autofree gchar *printer_uri = NULL;
+      g_autofree gchar *file_name = NULL;
+      int               fd = -1;
 
       printer_uri = g_strdup_printf ("ipp://localhost/printers/%s",
                                      self->printer_name);
@@ -249,9 +249,6 @@ _pp_maintenance_command_execute_thread (GTask        *task,
               ippDelete (response);
             }
         }
-
-      g_free (file_name);
-      g_free (printer_uri);
     }
   else
     {
@@ -302,8 +299,7 @@ _pp_maintenance_command_is_supported (const gchar *printer_name,
   gboolean           is_supported = FALSE;
   ipp_t             *request;
   ipp_t             *response = NULL;
-  gchar             *printer_uri;
-  gchar             *command_lowercase;
+  g_autofree gchar  *printer_uri = NULL;
   GPtrArray         *available_commands = NULL;
   int                i;
 
@@ -342,7 +338,7 @@ _pp_maintenance_command_is_supported (const gchar *printer_name,
 
   if (available_commands != NULL)
     {
-      command_lowercase = g_ascii_strdown (command, -1);
+      g_autofree gchar *command_lowercase = g_ascii_strdown (command, -1);
       for (i = 0; i < available_commands->len; ++i)
         {
           const gchar *available_command = g_ptr_array_index (available_commands, i);
@@ -353,11 +349,8 @@ _pp_maintenance_command_is_supported (const gchar *printer_name,
             }
         }
 
-      g_free (command_lowercase);
       g_ptr_array_free (available_commands, TRUE);
     }
-
-  g_free (printer_uri);
 
   return is_supported;
 }

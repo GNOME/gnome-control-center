@@ -282,11 +282,8 @@ list_dir (SMBCCTX      *smb_context,
 
       while (dir && (dirent = smbclient_readdir (smb_context, dir)))
         {
-          gchar *device_name;
-          gchar *device_uri;
-          gchar *subdirname = NULL;
-          gchar *subpath = NULL;
-          gchar *uri;
+          g_autofree gchar *subdirname = NULL;
+          g_autofree gchar *subpath = NULL;
 
           if (dirent->smbc_type == SMBC_WORKGROUP)
             {
@@ -302,6 +299,10 @@ list_dir (SMBCCTX      *smb_context,
 
           if (dirent->smbc_type == SMBC_PRINTER_SHARE)
             {
+              g_autofree gchar *uri = NULL;
+              g_autofree gchar *device_name = NULL;
+              g_autofree gchar *device_uri = NULL;
+
               uri = g_strdup_printf ("%s/%s", dirname, dirent->name);
               device_uri = g_uri_escape_string (uri,
                                                 G_URI_RESERVED_CHARS_GENERIC_DELIMITERS
@@ -309,7 +310,7 @@ list_dir (SMBCCTX      *smb_context,
                                                 FALSE);
 
               device_name = g_strdup (dirent->name);
-              device_name = g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
+              g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
 
               device = g_object_new (PP_TYPE_PRINT_DEVICE,
                                      "device-uri", device_uri,
@@ -321,10 +322,6 @@ list_dir (SMBCCTX      *smb_context,
                                      "host-name", dirname,
                                      NULL);
 
-              g_free (device_name);
-              g_free (device_uri);
-              g_free (uri);
-
               data->devices->devices = g_list_append (data->devices->devices, device);
             }
 
@@ -335,8 +332,6 @@ list_dir (SMBCCTX      *smb_context,
                         subpath,
                         cancellable,
                         data);
-              g_free (subdirname);
-              g_free (subpath);
             }
         }
 
