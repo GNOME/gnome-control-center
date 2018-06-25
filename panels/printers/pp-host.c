@@ -251,16 +251,16 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
                                   GObject            *object,
                                   GCancellable       *cancellable)
 {
-  PpHost         *host = (PpHost *) object;
-  PpHostPrivate  *priv = host->priv;
-  PpPrintDevice  *device;
-  gboolean        is_network_device;
-  GSDData        *data;
-  GError         *error;
-  gchar         **argv;
-  gchar          *stdout_string = NULL;
-  gchar          *stderr_string = NULL;
-  gint            exit_status;
+  PpHost           *host = (PpHost *) object;
+  PpHostPrivate    *priv = host->priv;
+  PpPrintDevice    *device;
+  gboolean          is_network_device;
+  GSDData          *data;
+  g_autoptr(GError) error = NULL;
+  gchar           **argv;
+  gchar            *stdout_string = NULL;
+  gchar            *stderr_string = NULL;
+  gint              exit_status;
 
   data = g_simple_async_result_get_op_res_gpointer (res);
   data->devices = g_new0 (PpDevicesList, 1);
@@ -510,7 +510,7 @@ jetdirect_connection_test_cb (GObject      *source_object,
   PpPrintDevice     *device;
   JetDirectData     *data;
   gpointer           result;
-  GError            *error = NULL;
+  g_autoptr(GError)  error = NULL;
   GTask             *task = G_TASK (user_data);
 
   data = g_task_get_task_data (task);
@@ -625,7 +625,7 @@ test_lpd_queue (GSocketClient *client,
 {
   GSocketConnection *connection;
   gboolean           result = FALSE;
-  GError            *error = NULL;
+  g_autoptr(GError)  error = NULL;
 
   connection = g_socket_client_connect_to_host (client,
                                                 address,
@@ -679,14 +679,6 @@ test_lpd_queue (GSocketClient *client,
                       result = TRUE;
                     }
                 }
-              else
-                {
-                  g_clear_error (&error);
-                }
-            }
-          else
-            {
-              g_clear_error (&error);
             }
         }
 
@@ -710,7 +702,7 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
   GSocketClient     *client;
   PpDevicesList     *result;
   GSDData           *data = (GSDData *) task_data;
-  GError            *error = NULL;
+  g_autoptr(GError)  error = NULL;
   GList             *candidates = NULL;
   GList             *iter;
   gchar             *found_queue = NULL;

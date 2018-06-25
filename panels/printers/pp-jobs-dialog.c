@@ -317,18 +317,18 @@ update_jobs_list_cb (GObject      *source_object,
                      GAsyncResult *result,
                      gpointer      user_data)
 {
-  PpJobsDialog  *dialog = user_data;
-  PpPrinter     *printer = PP_PRINTER (source_object);
-  GtkWidget     *clear_all_button;
-  GtkWidget     *infobar;
-  GtkWidget     *label;
-  GtkStack      *stack;
-  GError        *error = NULL;
-  GList         *jobs, *l;
-  PpJob         *job;
-  gchar        **auth_info_required = NULL;
-  gchar         *text;
-  gint           num_of_jobs, num_of_auth_jobs = 0;
+  PpJobsDialog     *dialog = user_data;
+  PpPrinter        *printer = PP_PRINTER (source_object);
+  GtkWidget        *clear_all_button;
+  GtkWidget        *infobar;
+  GtkWidget        *label;
+  GtkStack         *stack;
+  g_autoptr(GError) error = NULL;
+  GList            *jobs, *l;
+  PpJob            *job;
+  gchar           **auth_info_required = NULL;
+  gchar            *text;
+  gint              num_of_jobs, num_of_auth_jobs = 0;
 
   g_list_store_remove_all (dialog->store);
 
@@ -343,7 +343,6 @@ update_jobs_list_cb (GObject      *source_object,
           g_warning ("Could not get jobs: %s", error->message);
         }
 
-      g_error_free (error);
       return;
     }
 
@@ -474,10 +473,10 @@ pp_job_authenticate_cb (GObject      *source_object,
                         GAsyncResult *res,
                         gpointer      user_data)
 {
-  PpJobsDialog *dialog = user_data;
-  gboolean      result;
-  GError       *error = NULL;
-  PpJob        *job = PP_JOB (source_object);
+  PpJobsDialog     *dialog = user_data;
+  gboolean          result;
+  g_autoptr(GError) error = NULL;
+  PpJob            *job = PP_JOB (source_object);
 
   result = pp_job_authenticate_finish (job, res, &error);
   if (result)
@@ -490,8 +489,6 @@ pp_job_authenticate_cb (GObject      *source_object,
         {
           g_warning ("Could not authenticate job: %s", error->message);
         }
-
-      g_error_free (error);
     }
 }
 
@@ -558,13 +555,13 @@ pp_jobs_dialog_new (GtkWindow            *parent,
                     gpointer              user_data,
                     gchar                *printer_name)
 {
-  PpJobsDialog    *dialog;
-  GtkWidget       *widget;
-  GError          *error = NULL;
-  gchar           *objects[] = { "jobs-dialog", "authentication_popover", NULL };
-  gchar           *text;
-  guint            builder_result;
-  gchar           *title;
+  PpJobsDialog     *dialog;
+  GtkWidget        *widget;
+  g_autoptr(GError) error = NULL;
+  gchar            *objects[] = { "jobs-dialog", "authentication_popover", NULL };
+  gchar            *text;
+  guint             builder_result;
+  gchar            *title;
 
   dialog = g_new0 (PpJobsDialog, 1);
 
@@ -578,7 +575,6 @@ pp_jobs_dialog_new (GtkWindow            *parent,
   if (builder_result == 0)
     {
       g_warning ("Could not load ui: %s", error->message);
-      g_error_free (error);
       return NULL;
     }
 

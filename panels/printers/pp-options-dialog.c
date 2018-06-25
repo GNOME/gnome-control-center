@@ -933,11 +933,11 @@ pp_options_dialog_new (GtkWindow            *parent,
                        gchar                *printer_name,
                        gboolean              sensitive)
 {
-  PpOptionsDialog *dialog;
-  GtkWidget       *test_page_button;
-  GError          *error = NULL;
-  gchar           *objects[] = { "options-dialog", NULL };
-  guint            builder_result;
+  PpOptionsDialog  *dialog;
+  GtkWidget        *test_page_button;
+  g_autoptr(GError) error = NULL;
+  gchar            *objects[] = { "options-dialog", NULL };
+  guint             builder_result;
 
   dialog = g_new0 (PpOptionsDialog, 1);
 
@@ -951,7 +951,6 @@ pp_options_dialog_new (GtkWindow            *parent,
   if (builder_result == 0)
     {
       g_warning ("Could not load ui: %s", error->message);
-      g_error_free (error);
       return NULL;
     }
 
