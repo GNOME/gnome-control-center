@@ -1033,14 +1033,11 @@ DBus method \"GroupPhysicalDevices\" to group duplicates in device list.");
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
-  if (!error ||
-      error->domain != G_IO_ERROR ||
-      error->code != G_IO_ERROR_CANCELLED)
+  if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     group_physical_devices_cb (result, user_data);
 }
 
@@ -1228,8 +1225,7 @@ get_snmp_devices_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           dialog = PP_NEW_PRINTER_DIALOG (user_data);
           priv = dialog->priv;
@@ -1274,8 +1270,7 @@ get_remote_cups_devices_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           dialog = PP_NEW_PRINTER_DIALOG (user_data);
           priv = dialog->priv;
@@ -1320,8 +1315,7 @@ get_samba_host_devices_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           dialog = PP_NEW_PRINTER_DIALOG (user_data);
           priv = dialog->priv;
@@ -1365,8 +1359,7 @@ get_samba_devices_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           dialog = PP_NEW_PRINTER_DIALOG (user_data);
           priv = dialog->priv;
@@ -1948,8 +1941,7 @@ cups_get_dests_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           dialog = PP_NEW_PRINTER_DIALOG (user_data);
 
@@ -2126,8 +2118,7 @@ printer_add_async_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           dialog = PP_NEW_PRINTER_DIALOG (user_data);
 

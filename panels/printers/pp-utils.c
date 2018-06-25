@@ -1499,7 +1499,7 @@ printer_set_ppd_async_dbus_cb (GObject      *source_object,
     }
   else
     {
-      if (error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
@@ -1993,7 +1993,7 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
     }
   else
     {
-      if (error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
@@ -2264,7 +2264,7 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
     }
   else
     {
-      if (error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
@@ -3232,7 +3232,7 @@ printer_add_option_async_dbus_cb (GObject      *source_object,
     }
   else
     {
-      if (error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
@@ -3437,8 +3437,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
 
       data->callback (result,
