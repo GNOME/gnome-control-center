@@ -788,8 +788,8 @@ on_printer_deleted (PpPrinterEntry *printer_entry,
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   GtkLabel               *label;
-  gchar                  *notification_message;
-  gchar                  *printer_name;
+  g_autofree gchar       *notification_message = NULL;
+  g_autofree gchar       *printer_name = NULL;
 
   gtk_widget_hide (GTK_WIDGET (printer_entry));
 
@@ -808,10 +808,7 @@ on_printer_deleted (PpPrinterEntry *printer_entry,
     gtk_builder_get_object (priv->builder, "notification-label");
   gtk_label_set_label (label, notification_message);
 
-  g_free (notification_message);
-
   priv->deleted_printer_name = g_strdup (printer_name);
-  g_free (printer_name);
 
   gtk_revealer_set_reveal_child (priv->notification, TRUE);
 
@@ -1284,11 +1281,11 @@ filter_function (GtkListBoxRow *row,
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   GtkWidget              *search_entry;
   gboolean                retval;
-  gchar                  *search;
-  gchar                  *name;
-  gchar                  *location;
-  gchar                  *printer_name;
-  gchar                  *printer_location;
+  g_autofree gchar       *search = NULL;
+  g_autofree gchar       *name = NULL;
+  g_autofree gchar       *location = NULL;
+  g_autofree gchar       *printer_name = NULL;
+  g_autofree gchar       *printer_location = NULL;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -1306,19 +1303,11 @@ filter_function (GtkListBoxRow *row,
   name = cc_util_normalize_casefold_and_unaccent (printer_name);
   location = cc_util_normalize_casefold_and_unaccent (printer_location);
 
-  g_free (printer_name);
-  g_free (printer_location);
-
   search = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (search_entry)));
-
 
   retval = strstr (name, search) != NULL;
   if (location != NULL)
       retval = retval || (strstr (location, search) != NULL);
-
-  g_free (search);
-  g_free (name);
-  g_free (location);
 
   return retval;
 }
