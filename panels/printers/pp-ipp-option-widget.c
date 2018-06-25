@@ -230,18 +230,17 @@ set_cb (GtkTreeModel *model,
         GtkTreeIter  *iter,
         gpointer      data)
 {
-  struct ComboSet *set_data = data;
-  gboolean         found;
-  char            *value;
+  struct ComboSet  *set_data = data;
+  g_autofree gchar *value = NULL;
 
   gtk_tree_model_get (model, iter, VALUE_COLUMN, &value, -1);
-  found = (strcmp (value, set_data->value) == 0);
-  g_free (value);
+  if (strcmp (value, set_data->value) == 0)
+    {
+      gtk_combo_box_set_active_iter (set_data->combo, iter);
+      return TRUE;
+    }
 
-  if (found)
-    gtk_combo_box_set_active_iter (set_data->combo, iter);
-
-  return found;
+  return FALSE;
 }
 
 static void
@@ -374,7 +373,6 @@ construct_widget (PpIPPOptionWidget *self)
 {
   gboolean                  trivial_option = FALSE;
   gboolean                  result = FALSE;
-  gchar                    *value;
   gint                      i;
 
   if (self->option_supported)
@@ -414,12 +412,13 @@ construct_widget (PpIPPOptionWidget *self)
 
                   for (i = 0; i < self->option_supported->num_of_values; i++)
                     {
+                      g_autofree gchar *value = NULL;
+
                       value = g_strdup_printf ("%d", self->option_supported->attribute_values[i].integer_value);
                       combo_box_append (self->combo,
                                         ipp_choice_translate (self->option_name,
                                                               value),
                                         value);
-                      g_free (value);
                     }
 
                   gtk_box_pack_start (GTK_BOX (self), self->combo, FALSE, FALSE, 0);
@@ -464,8 +463,6 @@ static void
 update_widget_real (PpIPPOptionWidget *self)
 {
   IPPAttribute             *attr = NULL;
-  gchar                    *value;
-  gchar                    *attr_name;
 
   if (self->option_default)
     {
@@ -476,10 +473,9 @@ update_widget_real (PpIPPOptionWidget *self)
     }
   else if (self->ipp_attribute)
     {
-      attr_name = g_strdup_printf ("%s-default", self->option_name);
+      g_autofree gchar *attr_name = g_strdup_printf ("%s-default", self->option_name);
       attr = ipp_attribute_copy (g_hash_table_lookup (self->ipp_attribute, attr_name));
 
-      g_free (attr_name);
       g_hash_table_unref (self->ipp_attribute);
       self->ipp_attribute = NULL;
     }
@@ -505,15 +501,13 @@ update_widget_real (PpIPPOptionWidget *self)
         if (attr && attr->num_of_values > 0 &&
             attr->attribute_type == IPP_ATTRIBUTE_TYPE_INTEGER)
           {
-            value = g_strdup_printf ("%d", attr->attribute_values[0].integer_value);
+            g_autofree gchar *value = g_strdup_printf ("%d", attr->attribute_values[0].integer_value);
             combo_box_set (self->combo, value);
-            g_free (value);
           }
         else
           {
-            value = g_strdup_printf ("%d", self->option_supported->attribute_values[0].integer_value);
+            g_autofree gchar *value = g_strdup_printf ("%d", self->option_supported->attribute_values[0].integer_value);
             combo_box_set (self->combo, value);
-            g_free (value);
           }
 
         g_signal_handlers_unblock_by_func (self->combo, combo_changed_cb, self);

@@ -202,13 +202,13 @@ markers_cmp (gconstpointer a,
 }
 
 static gchar *
-sanitize_printer_model (gchar *printer_make_and_model)
+sanitize_printer_model (const gchar *printer_make_and_model)
 {
-  gchar  *breakpoint = NULL, *tmp = NULL, *tmp2 = NULL;
-  gchar  *printer_model = NULL;
-  gchar   backup;
-  size_t  length = 0;
-  gchar  *forbiden[] = {
+  gchar            *breakpoint = NULL, *tmp2 = NULL;
+  g_autofree gchar *tmp = NULL;
+  gchar             backup;
+  size_t            length = 0;
+  gchar            *forbiden[] = {
     "foomatic",
     ",",
     "hpijs",
@@ -236,14 +236,12 @@ sanitize_printer_model (gchar *printer_make_and_model)
       *breakpoint = backup;
 
       if (length > 0)
-        printer_model = g_strndup (printer_make_and_model, length);
+        return g_strndup (printer_make_and_model, length);
     }
   else
-    printer_model = g_strdup (printer_make_and_model);
+    return g_strdup (printer_make_and_model);
 
-  g_free (tmp);
-
-  return printer_model;
+  return NULL;
 }
 
 static gboolean
@@ -283,7 +281,7 @@ supply_levels_draw_cb (GtkWidget      *widget,
 {
   GtkStyleContext        *context;
   gboolean                is_empty = TRUE;
-  gchar                  *tooltip_text = NULL;
+  g_autofree gchar       *tooltip_text = NULL;
   gint                    width;
   gint                    height;
   int                     i;
@@ -303,7 +301,6 @@ supply_levels_draw_cb (GtkWidget      *widget,
       gchar   **marker_colorsv = NULL;
       gchar   **marker_namesv = NULL;
       gchar   **marker_typesv = NULL;
-      gchar    *tmp = NULL;
 
       gtk_style_context_save (context);
 
@@ -366,12 +363,10 @@ supply_levels_draw_cb (GtkWidget      *widget,
 
                 if (tooltip_text)
                   {
-                    tmp = g_strdup_printf ("%s\n%s",
-                                           tooltip_text,
-                                           ((MarkerItem*) tmp_list->data)->name);
-                    g_free (tooltip_text);
-                    tooltip_text = tmp;
-                    tmp = NULL;
+                    g_autofree gchar *old_tooltip_text = g_steal_pointer (&tooltip_text);
+                    tooltip_text = g_strdup_printf ("%s\n%s",
+                                                    old_tooltip_text,
+                                                    ((MarkerItem*) tmp_list->data)->name);
                   }
                 else
                   tooltip_text = g_strdup_printf ("%s",
@@ -394,7 +389,6 @@ supply_levels_draw_cb (GtkWidget      *widget,
     if (tooltip_text)
       {
         gtk_widget_set_tooltip_text (widget, tooltip_text);
-        g_free (tooltip_text);
       }
     else
       {
@@ -587,7 +581,7 @@ get_jobs_cb (GObject      *source_object,
   PpPrinter        *printer = PP_PRINTER (source_object);
   g_autoptr(GError) error = NULL;
   GList            *jobs;
-  gchar            *button_label;
+  g_autofree gchar *button_label = NULL;
   gint              num_jobs;
 
   jobs = pp_printer_get_jobs_finish (printer, result, &error);
@@ -624,8 +618,6 @@ get_jobs_cb (GObject      *source_object,
     {
       pp_jobs_dialog_update (self->pp_jobs_dialog);
     }
-
-  g_free (button_label);
 
   g_clear_object (&self->get_jobs_cancellable);
 }
@@ -735,21 +727,20 @@ PpPrinterEntry *
 pp_printer_entry_new (cups_dest_t  printer,
                       gboolean     is_authorized)
 {
-  PpPrinterEntry *self;
-  cups_ptype_t    printer_type = 0;
-  gboolean        is_accepting_jobs = TRUE;
-  gboolean        ink_supply_is_empty;
-  gchar          *instance;
-  gchar          *printer_uri = NULL;
-  gchar          *location = NULL;
-  gchar          *printer_icon_name = NULL;
-  gchar          *default_icon_name = NULL;
-  gchar          *printer_make_and_model = NULL;
-  gchar          *reason = NULL;
-  gchar         **printer_reasons = NULL;
-  gchar          *status = NULL;
-  gchar          *printer_status = NULL;
-  int             i, j;
+  PpPrinterEntry   *self;
+  cups_ptype_t      printer_type = 0;
+  gboolean          is_accepting_jobs = TRUE;
+  gboolean          ink_supply_is_empty;
+  g_autofree gchar *instance = NULL;
+  const gchar      *printer_uri = NULL;
+  const gchar      *location = NULL;
+  g_autofree gchar *printer_icon_name = NULL;
+  const gchar      *printer_make_and_model = NULL;
+  const gchar      *reason = NULL;
+  gchar           **printer_reasons = NULL;
+  g_autofree gchar *status = NULL;
+  g_autofree gchar *printer_status = NULL;
+  int               i, j;
   static const char * const reasons[] =
     {
       "toner-low",
@@ -949,7 +940,6 @@ pp_printer_entry_new (cups_dest_t  printer,
 
   gtk_image_set_from_icon_name (self->printer_icon, printer_icon_name, GTK_ICON_SIZE_DIALOG);
   gtk_label_set_text (self->printer_status, printer_status);
-  g_free (printer_status);
   gtk_label_set_text (self->printer_name_label, instance);
   g_signal_handlers_block_by_func (self->printer_default_checkbutton, set_as_default_printer, self);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->printer_default_checkbutton), printer.is_default);
@@ -986,10 +976,6 @@ pp_printer_entry_new (cups_dest_t  printer,
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->printer_default_checkbutton), self->is_authorized);
   gtk_widget_set_sensitive (GTK_WIDGET (self->remove_printer_menuitem), self->is_authorized);
-
-  g_free (instance);
-  g_free (printer_icon_name);
-  g_free (default_icon_name);
 
   return self;
 }
