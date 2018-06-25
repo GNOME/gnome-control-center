@@ -264,7 +264,7 @@ get_authenticated_samba_devices_cb (GObject      *source_object,
   GtkWidget                 *widget;
   gboolean                   cancelled = FALSE;
   PpSamba                   *samba = (PpSamba *) source_object;
-  GError                    *error = NULL;
+  g_autoptr(GError)          error = NULL;
   GList                     *iter;
 
   g_object_ref (samba);
@@ -324,8 +324,6 @@ get_authenticated_samba_devices_cb (GObject      *source_object,
           priv->samba_authenticated_searching = FALSE;
           update_dialog_state (dialog);
         }
-
-      g_error_free (error);
     }
 
   g_free (data->server_name);
@@ -526,7 +524,7 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
   PpNewPrinterDialogPrivate *priv;
   GtkStyleContext           *context;
   GtkWidget                 *widget;
-  GError                    *error = NULL;
+  g_autoptr(GError)          error = NULL;
   gchar                     *objects[] = { "dialog",
                                            "devices-liststore",
                                            "devices-model-filter",
@@ -545,7 +543,6 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
   if (builder_result == 0)
     {
       g_warning ("Could not load ui: %s", error->message);
-      g_error_free (error);
     }
 
   /* GCancellable for cancelling of async operations */
@@ -973,10 +970,10 @@ group_physical_devices_dbus_cb (GObject      *source_object,
                                 GAsyncResult *res,
                                 gpointer      user_data)
 {
-  GVariant   *output;
-  GError     *error = NULL;
-  gchar    ***result = NULL;
-  gint        i, j;
+  GVariant         *output;
+  g_autoptr(GError) error = NULL;
+  gchar          ***result = NULL;
+  gint              i, j;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -1043,9 +1040,6 @@ DBus method \"GroupPhysicalDevices\" to group duplicates in device list.");
       error->domain != G_IO_ERROR ||
       error->code != G_IO_ERROR_CANCELLED)
     group_physical_devices_cb (result, user_data);
-
-  if (error)
-    g_error_free (error);
 }
 
 static void
@@ -1065,7 +1059,7 @@ get_cups_devices_cb (GList    *devices,
   const gchar                *device_class;
   GtkTreeIter                 iter;
   gboolean                    cont;
-  GError                     *error = NULL;
+  g_autoptr(GError)           error = NULL;
   GList                      *liter;
   gint                        length, i;
 
@@ -1181,7 +1175,6 @@ get_cups_devices_cb (GList    *devices,
               else
                 {
                   g_warning ("Failed to get system bus: %s", error->message);
-                  g_error_free (error);
                   group_physical_devices_cb (NULL, user_data);
                 }
 
@@ -1211,7 +1204,7 @@ get_snmp_devices_cb (GObject      *source_object,
   PpNewPrinterDialog        *dialog;
   PpNewPrinterDialogPrivate *priv;
   PpHost                    *host = (PpHost *) source_object;
-  GError                    *error = NULL;
+  g_autoptr(GError)          error = NULL;
   PpDevicesList             *result;
 
   result = pp_host_get_snmp_devices_finish (host, res, &error);
@@ -1246,8 +1239,6 @@ get_snmp_devices_cb (GObject      *source_object,
 
           update_dialog_state (dialog);
         }
-
-      g_error_free (error);
     }
 }
 
@@ -1259,7 +1250,7 @@ get_remote_cups_devices_cb (GObject      *source_object,
   PpNewPrinterDialog        *dialog;
   PpNewPrinterDialogPrivate *priv;
   PpHost                    *host = (PpHost *) source_object;
-  GError                    *error = NULL;
+  g_autoptr(GError)          error = NULL;
   PpDevicesList             *result;
 
   result = pp_host_get_remote_cups_devices_finish (host, res, &error);
@@ -1294,8 +1285,6 @@ get_remote_cups_devices_cb (GObject      *source_object,
 
           update_dialog_state (dialog);
         }
-
-      g_error_free (error);
     }
 }
 
@@ -1308,7 +1297,7 @@ get_samba_host_devices_cb (GObject      *source_object,
   PpNewPrinterDialog        *dialog;
   PpDevicesList             *result;
   PpSamba                   *samba = (PpSamba *) source_object;
-  GError                    *error = NULL;
+  g_autoptr(GError)          error = NULL;
 
   result = pp_samba_get_devices_finish (samba, res, &error);
   g_object_unref (source_object);
@@ -1342,8 +1331,6 @@ get_samba_host_devices_cb (GObject      *source_object,
 
           update_dialog_state (dialog);
         }
-
-      g_error_free (error);
     }
 }
 
@@ -1356,7 +1343,7 @@ get_samba_devices_cb (GObject      *source_object,
   PpNewPrinterDialog        *dialog;
   PpDevicesList             *result;
   PpSamba                   *samba = (PpSamba *) source_object;
-  GError                    *error = NULL;
+  g_autoptr(GError)          error = NULL;
 
   result = pp_samba_get_devices_finish (samba, res, &error);
   g_object_unref (source_object);
@@ -1388,8 +1375,6 @@ get_samba_devices_cb (GObject      *source_object,
 
           update_dialog_state (dialog);
         }
-
-      g_error_free (error);
     }
 }
 
@@ -1401,7 +1386,7 @@ get_jetdirect_devices_cb (GObject      *source_object,
   PpNewPrinterDialog        *dialog;
   PpNewPrinterDialogPrivate *priv;
   PpHost                    *host = (PpHost *) source_object;
-  GError                    *error = NULL;
+  g_autoptr(GError)          error = NULL;
   PpDevicesList             *result;
 
   result = pp_host_get_jetdirect_devices_finish (host, res, &error);
@@ -1435,8 +1420,6 @@ get_jetdirect_devices_cb (GObject      *source_object,
 
           update_dialog_state (dialog);
         }
-
-      g_error_free (error);
     }
 }
 
@@ -1448,7 +1431,7 @@ get_lpd_devices_cb (GObject      *source_object,
   PpNewPrinterDialog        *dialog;
   PpNewPrinterDialogPrivate *priv;
   PpHost                    *host = (PpHost *) source_object;
-  GError                    *error = NULL;
+  g_autoptr(GError)          error = NULL;
   PpDevicesList             *result;
 
   result = pp_host_get_lpd_devices_finish (host, res, &error);
@@ -1482,8 +1465,6 @@ get_lpd_devices_cb (GObject      *source_object,
 
           update_dialog_state (dialog);
         }
-
-      g_error_free (error);
     }
 }
 
@@ -1948,7 +1929,7 @@ cups_get_dests_cb (GObject      *source_object,
   PpNewPrinterDialogPrivate *priv;
   PpCupsDests               *dests;
   PpCups                    *cups = (PpCups *) source_object;
-  GError                    *error = NULL;
+  g_autoptr(GError)          error = NULL;
 
   dests = pp_cups_get_dests_finish (cups, res, &error);
   g_object_unref (source_object);
@@ -1974,8 +1955,6 @@ cups_get_dests_cb (GObject      *source_object,
 
           get_cups_devices (dialog);
         }
-
-      g_error_free (error);
     }
 }
 
@@ -2132,7 +2111,7 @@ printer_add_async_cb (GObject      *source_object,
   GtkResponseType            response_id = GTK_RESPONSE_OK;
   PpNewPrinter              *new_printer = (PpNewPrinter *) source_object;
   gboolean                   success;
-  GError                    *error = NULL;
+  g_autoptr(GError)          error = NULL;
 
   success = pp_new_printer_add_finish (new_printer, res, &error);
   g_object_unref (source_object);
@@ -2156,8 +2135,6 @@ printer_add_async_cb (GObject      *source_object,
 
           emit_response (dialog, response_id);
         }
-
-      g_error_free (error);
     }
 }
 

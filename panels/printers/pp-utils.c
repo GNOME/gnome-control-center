@@ -273,7 +273,7 @@ printer_rename (const gchar *old_name,
   gboolean          printer_paused = FALSE;
   gboolean          default_printer = FALSE;
   gboolean          printer_shared = FALSE;
-  GError           *error = NULL;
+  g_autoptr(GError) error = NULL;
   http_t           *http;
   gchar            *ppd_link;
   gchar            *ppd_filename = NULL;
@@ -446,7 +446,6 @@ printer_rename (const gchar *old_name,
   if (!bus)
    {
      g_warning ("Failed to get system bus: %s", error->message);
-     g_error_free (error);
    }
   else
     {
@@ -458,7 +457,8 @@ printer_rename (const gchar *old_name,
         }
       else
         {
-          GVariant *output;
+          GVariant         *output;
+          g_autoptr(GError) add_error = NULL;
 
           output = g_dbus_connection_call_sync (bus,
                                                 MECHANISM_BUS,
@@ -475,7 +475,7 @@ printer_rename (const gchar *old_name,
                                                 G_DBUS_CALL_FLAGS_NONE,
                                                 -1,
                                                 NULL,
-                                                &error);
+                                                &add_error);
           g_object_unref (bus);
 
           if (output)
@@ -490,8 +490,7 @@ printer_rename (const gchar *old_name,
             }
           else
             {
-              g_warning ("%s", error->message);
-              g_error_free (error);
+              g_warning ("%s", add_error->message);
             }
         }
     }
@@ -542,10 +541,10 @@ gboolean
 printer_set_location (const gchar *printer_name,
                       const gchar *location)
 {
-  GDBusConnection *bus;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GDBusConnection  *bus;
+  GVariant         *output;
+  gboolean          result = FALSE;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name || !location)
     return TRUE;
@@ -554,7 +553,6 @@ printer_set_location (const gchar *printer_name,
   if (!bus)
    {
      g_warning ("Failed to get system bus: %s", error->message);
-     g_error_free (error);
      return TRUE;
    }
 
@@ -586,7 +584,6 @@ printer_set_location (const gchar *printer_name,
   else
     {
       g_warning ("%s", error->message);
-      g_error_free (error);
     }
 
   return result;
@@ -597,10 +594,10 @@ printer_set_accepting_jobs (const gchar *printer_name,
                             gboolean     accepting_jobs,
                             const gchar *reason)
 {
-  GDBusConnection *bus;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GDBusConnection  *bus;
+  GVariant         *output;
+  gboolean          result = FALSE;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -609,7 +606,6 @@ printer_set_accepting_jobs (const gchar *printer_name,
   if (!bus)
    {
      g_warning ("Failed to get system bus: %s", error->message);
-     g_error_free (error);
      return TRUE;
    }
 
@@ -643,7 +639,6 @@ printer_set_accepting_jobs (const gchar *printer_name,
   else
     {
       g_warning ("%s", error->message);
-      g_error_free (error);
     }
 
   return result;
@@ -653,10 +648,10 @@ gboolean
 printer_set_enabled (const gchar *printer_name,
                      gboolean     enabled)
 {
-  GDBusConnection *bus;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GDBusConnection  *bus;
+  GVariant         *output;
+  gboolean          result = FALSE;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -665,7 +660,6 @@ printer_set_enabled (const gchar *printer_name,
   if (!bus)
    {
      g_warning ("Failed to get system bus: %s", error->message);
-     g_error_free (error);
      return TRUE;
    }
 
@@ -697,7 +691,6 @@ printer_set_enabled (const gchar *printer_name,
   else
     {
       g_warning ("%s", error->message);
-      g_error_free (error);
     }
 
   return result;
@@ -706,10 +699,10 @@ printer_set_enabled (const gchar *printer_name,
 gboolean
 printer_delete (const gchar *printer_name)
 {
-  GDBusConnection *bus;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GDBusConnection  *bus;
+  GVariant         *output;
+  gboolean          result = FALSE;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -718,7 +711,6 @@ printer_delete (const gchar *printer_name)
   if (!bus)
    {
      g_warning ("Failed to get system bus: %s", error->message);
-     g_error_free (error);
      return TRUE;
    }
 
@@ -750,7 +742,6 @@ printer_delete (const gchar *printer_name)
   else
     {
       g_warning ("%s", error->message);
-      g_error_free (error);
     }
 
   return result;
@@ -759,11 +750,11 @@ printer_delete (const gchar *printer_name)
 gboolean
 printer_set_default (const gchar *printer_name)
 {
-  GDBusConnection *bus;
-  const char *cups_server;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GDBusConnection  *bus;
+  const char       *cups_server;
+  GVariant         *output;
+  gboolean          result = FALSE;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -783,7 +774,6 @@ printer_set_default (const gchar *printer_name)
       if (!bus)
         {
           g_warning ("Failed to get system bus: %s", error->message);
-          g_error_free (error);
         }
       else
         {
@@ -815,7 +805,6 @@ printer_set_default (const gchar *printer_name)
           else
             {
               g_warning ("%s", error->message);
-              g_error_free (error);
             }
         }
     }
@@ -834,10 +823,10 @@ gboolean
 printer_set_shared (const gchar *printer_name,
                     gboolean     shared)
 {
-  GDBusConnection *bus;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GDBusConnection  *bus;
+  GVariant         *output;
+  gboolean          result = FALSE;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -846,7 +835,6 @@ printer_set_shared (const gchar *printer_name,
   if (!bus)
    {
      g_warning ("Failed to get system bus: %s", error->message);
-     g_error_free (error);
      return TRUE;
    }
 
@@ -878,7 +866,6 @@ printer_set_shared (const gchar *printer_name,
   else
     {
       g_warning ("%s", error->message);
-      g_error_free (error);
     }
 
   return result;
@@ -889,10 +876,10 @@ printer_set_job_sheets (const gchar *printer_name,
                         const gchar *start_sheet,
                         const gchar *end_sheet)
 {
-  GDBusConnection *bus;
-  GVariant   *output;
-  GError     *error = NULL;
-  gboolean    result = FALSE;
+  GDBusConnection  *bus;
+  GVariant         *output;
+  g_autoptr(GError) error = NULL;
+  gboolean          result = FALSE;
 
   if (!printer_name || !start_sheet || !end_sheet)
     return TRUE;
@@ -901,7 +888,6 @@ printer_set_job_sheets (const gchar *printer_name,
   if (!bus)
    {
      g_warning ("Failed to get system bus: %s", error->message);
-     g_error_free (error);
      return TRUE;
    }
 
@@ -933,7 +919,6 @@ printer_set_job_sheets (const gchar *printer_name,
   else
     {
       g_warning ("%s", error->message);
-      g_error_free (error);
     }
 
   return result;
@@ -944,10 +929,10 @@ printer_set_policy (const gchar *printer_name,
                     const gchar *policy,
                     gboolean     error_policy)
 {
-  GDBusConnection *bus;
-  GVariant   *output;
-  gboolean   result = FALSE;
-  GError     *error = NULL;
+  GDBusConnection  *bus;
+  GVariant         *output;
+  gboolean          result = FALSE;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name || !policy)
     return TRUE;
@@ -956,7 +941,6 @@ printer_set_policy (const gchar *printer_name,
   if (!bus)
    {
      g_warning ("Failed to get system bus: %s", error->message);
-     g_error_free (error);
      return TRUE;
    }
 
@@ -1001,7 +985,6 @@ printer_set_policy (const gchar *printer_name,
   else
     {
       g_warning ("%s", error->message);
-      g_error_free (error);
     }
 
   return result;
@@ -1012,12 +995,12 @@ printer_set_users (const gchar  *printer_name,
                    gchar       **users,
                    gboolean      allowed)
 {
-  GDBusConnection *bus;
-  GVariantBuilder array_builder;
-  gint        i;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GDBusConnection  *bus;
+  GVariantBuilder   array_builder;
+  gint              i;
+  GVariant         *output;
+  gboolean          result = FALSE;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name || !users)
     return TRUE;
@@ -1026,7 +1009,6 @@ printer_set_users (const gchar  *printer_name,
   if (!bus)
    {
      g_warning ("Failed to get system bus: %s", error->message);
-     g_error_free (error);
      return TRUE;
    }
 
@@ -1075,7 +1057,6 @@ printer_set_users (const gchar  *printer_name,
   else
     {
       g_warning ("%s", error->message);
-      g_error_free (error);
     }
 
   return result;
@@ -1085,10 +1066,10 @@ gboolean
 class_add_printer (const gchar *class_name,
                    const gchar *printer_name)
 {
-  GDBusConnection *bus;
-  GVariant   *output;
-  gboolean    result = FALSE;
-  GError     *error = NULL;
+  GDBusConnection  *bus;
+  GVariant         *output;
+  gboolean          result = FALSE;
+  g_autoptr(GError) error = NULL;
 
   if (!class_name || !printer_name)
     return TRUE;
@@ -1097,7 +1078,6 @@ class_add_printer (const gchar *class_name,
   if (!bus)
    {
      g_warning ("Failed to get system bus: %s", error->message);
-     g_error_free (error);
      return TRUE;
    }
 
@@ -1129,7 +1109,6 @@ class_add_printer (const gchar *class_name,
   else
     {
       g_warning ("%s", error->message);
-      g_error_free (error);
     }
 
   return result;
@@ -1411,9 +1390,9 @@ get_ipp_attributes_async (const gchar  *printer_name,
                           GIACallback   callback,
                           gpointer      user_data)
 {
-  GIAData *data;
-  GThread *thread;
-  GError  *error = NULL;
+  GIAData          *data;
+  GThread          *thread;
+  g_autoptr(GError) error = NULL;
 
   data = g_new0 (GIAData, 1);
   data->printer_name = g_strdup (printer_name);
@@ -1432,7 +1411,6 @@ get_ipp_attributes_async (const gchar  *printer_name,
       g_warning ("%s", error->message);
       callback (NULL, user_data);
 
-      g_error_free (error);
       get_ipp_attributes_data_free (data);
     }
   else
@@ -1497,10 +1475,10 @@ printer_set_ppd_async_dbus_cb (GObject      *source_object,
                                GAsyncResult *res,
                                gpointer      user_data)
 {
-  GVariant *output;
-  gboolean  result = FALSE;
-  PSPData  *data = (PSPData *) user_data;
-  GError   *error = NULL;
+  GVariant         *output;
+  gboolean          result = FALSE;
+  PSPData          *data = (PSPData *) user_data;
+  g_autoptr(GError) error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -1523,7 +1501,6 @@ printer_set_ppd_async_dbus_cb (GObject      *source_object,
     {
       if (error->code != G_IO_ERROR_CANCELLED)
         g_warning ("%s", error->message);
-      g_error_free (error);
     }
 
   /* Don't call callback if cancelled */
@@ -1557,9 +1534,9 @@ printer_set_ppd_async (const gchar  *printer_name,
                        PSPCallback   callback,
                        gpointer      user_data)
 {
-  GDBusConnection *bus;
-  PSPData         *data;
-  GError          *error = NULL;
+  GDBusConnection  *bus;
+  PSPData          *data;
+  g_autoptr(GError) error = NULL;
 
   data = g_new0 (PSPData, 1);
   if (cancellable)
@@ -1578,7 +1555,6 @@ printer_set_ppd_async (const gchar  *printer_name,
   if (!bus)
     {
       g_warning ("Failed to get system bus: %s", error->message);
-      g_error_free (error);
       goto out;
     }
 
@@ -1616,10 +1592,10 @@ printer_set_ppd_file_async_scb (GObject      *source_object,
                                 GAsyncResult *res,
                                 gpointer      user_data)
 {
-  GDBusConnection *bus;
-  gboolean         success;
-  PSPData         *data = (PSPData *) user_data;
-  GError          *error = NULL;
+  GDBusConnection  *bus;
+  gboolean          success;
+  PSPData          *data = (PSPData *) user_data;
+  g_autoptr(GError) error = NULL;
 
   success = g_file_copy_finish (G_FILE (source_object),
                                 res,
@@ -1629,7 +1605,6 @@ printer_set_ppd_file_async_scb (GObject      *source_object,
   if (!success)
     {
       g_warning ("%s", error->message);
-      g_error_free (error);
       goto out;
     }
 
@@ -1637,7 +1612,6 @@ printer_set_ppd_file_async_scb (GObject      *source_object,
   if (!bus)
     {
       g_warning ("Failed to get system bus: %s", error->message);
-      g_error_free (error);
       goto out;
     }
 
@@ -1828,9 +1802,9 @@ get_ppds_attribute_async (gchar       **ppds_names,
                           GPACallback   callback,
                           gpointer      user_data)
 {
-  GPAData *data;
-  GThread *thread;
-  GError  *error = NULL;
+  GPAData          *data;
+  GThread          *thread;
+  g_autoptr(GError) error = NULL;
 
   if (!ppds_names || !attribute_name)
     {
@@ -1855,7 +1829,6 @@ get_ppds_attribute_async (gchar       **ppds_names,
       g_warning ("%s", error->message);
       callback (NULL, user_data);
 
-      g_error_free (error);
       get_ppds_attribute_data_free (data);
     }
   else
@@ -1939,14 +1912,14 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
                               GAsyncResult *res,
                               gpointer      user_data)
 {
-  GVariant  *output;
-  PPDName   *ppd_item;
-  PPDName  **result = NULL;
-  GPNData   *data = (GPNData *) user_data;
-  GError    *error = NULL;
-  GList     *driver_list = NULL;
-  GList     *iter;
-  gint       i, j, n = 0;
+  GVariant         *output;
+  PPDName          *ppd_item;
+  PPDName         **result = NULL;
+  GPNData          *data = (GPNData *) user_data;
+  g_autoptr(GError) error = NULL;
+  GList            *driver_list = NULL;
+  GList            *iter;
+  gint              i, j, n = 0;
   static const char * const match_levels[] = {
              "exact-cmd",
              "exact",
@@ -2022,7 +1995,6 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
     {
       if (error->code != G_IO_ERROR_CANCELLED)
         g_warning ("%s", error->message);
-      g_error_free (error);
     }
 
   if (n > 0)
@@ -2073,9 +2045,9 @@ get_device_attributes_cb (gchar    *device_id,
                           gchar    *device_uri,
                           gpointer  user_data)
 {
-  GDBusConnection *bus;
-  GError          *error = NULL;
-  GPNData         *data = (GPNData *) user_data;
+  GDBusConnection  *bus;
+  g_autoptr(GError) error = NULL;
+  GPNData          *data = (GPNData *) user_data;
 
   if (g_cancellable_is_cancelled (data->cancellable))
     goto out;
@@ -2087,7 +2059,6 @@ get_device_attributes_cb (gchar    *device_id,
   if (!bus)
     {
       g_warning ("Failed to get system bus: %s", error->message);
-      g_error_free (error);
       goto out;
     }
 
@@ -2181,12 +2152,12 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
                                      gpointer      user_data)
 
 {
-  GVariant *output;
-  GDAData  *data = (GDAData *) user_data;
-  GError   *error = NULL;
-  GList    *tmp;
-  gchar    *device_id = NULL;
-  gchar    *device_make_and_model = NULL;
+  GVariant         *output;
+  GDAData          *data = (GDAData *) user_data;
+  g_autoptr(GError) error = NULL;
+  GList            *tmp;
+  gchar            *device_id = NULL;
+  gchar            *device_make_and_model = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -2295,7 +2266,6 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
     {
       if (error->code != G_IO_ERROR_CANCELLED)
         g_warning ("%s", error->message);
-      g_error_free (error);
     }
 
   if (!device_id || !device_make_and_model)
@@ -2380,12 +2350,12 @@ static void
 get_device_attributes_async_scb (GHashTable *result,
                                  gpointer    user_data)
 {
-  GDBusConnection *bus;
-  GVariantBuilder  include_scheme_builder;
-  IPPAttribute    *attr;
-  GDAData         *data = (GDAData *) user_data;
-  GError          *error = NULL;
-  GList           *tmp;
+  GDBusConnection  *bus;
+  GVariantBuilder   include_scheme_builder;
+  IPPAttribute     *attr;
+  GDAData          *data = (GDAData *) user_data;
+  g_autoptr(GError) error = NULL;
+  GList            *tmp;
 
   if (result)
     {
@@ -2406,7 +2376,6 @@ get_device_attributes_async_scb (GHashTable *result,
   if (!bus)
     {
       g_warning ("Failed to get system bus: %s", error->message);
-      g_error_free (error);
       goto out;
     }
 
@@ -2890,9 +2859,9 @@ get_all_ppds_async (GCancellable *cancellable,
                     GAPCallback   callback,
                     gpointer      user_data)
 {
-  GAPData *data;
-  GThread *thread;
-  GError  *error = NULL;
+  GAPData          *data;
+  GThread          *thread;
+  g_autoptr(GError) error = NULL;
 
   data = g_new0 (GAPData, 1);
   if (cancellable)
@@ -2911,7 +2880,6 @@ get_all_ppds_async (GCancellable *cancellable,
       g_warning ("%s", error->message);
       callback (NULL, user_data);
 
-      g_error_free (error);
       get_all_ppds_data_free (data);
     }
   else
@@ -3098,9 +3066,9 @@ printer_get_ppd_async (const gchar *printer_name,
                        PGPCallback  callback,
                        gpointer     user_data)
 {
-  PGPData *data;
-  GThread *thread;
-  GError  *error = NULL;
+  PGPData          *data;
+  GThread          *thread;
+  g_autoptr(GError) error = NULL;
 
   data = g_new0 (PGPData, 1);
   data->printer_name = g_strdup (printer_name);
@@ -3120,7 +3088,6 @@ printer_get_ppd_async (const gchar *printer_name,
       g_warning ("%s", error->message);
       callback (NULL, user_data);
 
-      g_error_free (error);
       printer_get_ppd_data_free (data);
     }
   else
@@ -3201,9 +3168,9 @@ get_named_dest_async (const gchar *printer_name,
                       GNDCallback  callback,
                       gpointer     user_data)
 {
-  GNDData *data;
-  GThread *thread;
-  GError  *error = NULL;
+  GNDData          *data;
+  GThread          *thread;
+  g_autoptr(GError) error = NULL;
 
   data = g_new0 (GNDData, 1);
   data->printer_name = g_strdup (printer_name);
@@ -3221,7 +3188,6 @@ get_named_dest_async (const gchar *printer_name,
       g_warning ("%s", error->message);
       callback (NULL, user_data);
 
-      g_error_free (error);
       get_named_dest_data_free (data);
     }
   else
@@ -3242,10 +3208,10 @@ printer_add_option_async_dbus_cb (GObject      *source_object,
                                   GAsyncResult *res,
                                   gpointer      user_data)
 {
-  GVariant *output;
-  gboolean  success = FALSE;
-  PAOData  *data = (PAOData *) user_data;
-  GError   *error = NULL;
+  GVariant         *output;
+  gboolean          success = FALSE;
+  PAOData          *data = (PAOData *) user_data;
+  g_autoptr(GError) error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -3268,7 +3234,6 @@ printer_add_option_async_dbus_cb (GObject      *source_object,
     {
       if (error->code != G_IO_ERROR_CANCELLED)
         g_warning ("%s", error->message);
-      g_error_free (error);
     }
 
   if (!g_cancellable_is_cancelled (data->cancellable))
@@ -3288,17 +3253,16 @@ printer_add_option_async (const gchar   *printer_name,
                           PAOCallback    callback,
                           gpointer       user_data)
 {
-  GVariantBuilder  array_builder;
-  GDBusConnection *bus;
-  PAOData         *data;
-  GError          *error = NULL;
-  gint             i;
+  GVariantBuilder   array_builder;
+  GDBusConnection  *bus;
+  PAOData          *data;
+  g_autoptr(GError) error = NULL;
+  gint              i;
 
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!bus)
    {
      g_warning ("Failed to get system bus: %s", error->message);
-     g_error_free (error);
      callback (FALSE, user_data);
      return;
    }
@@ -3367,12 +3331,12 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
                                 gpointer      user_data)
 
 {
-  PpPrintDevice **devices = NULL;
-  GVariant       *output;
-  GCDData        *data = (GCDData *) user_data;
-  GError         *error = NULL;
-  GList          *result = NULL;
-  gint            num_of_devices = 0;
+  PpPrintDevice   **devices = NULL;
+  GVariant         *output;
+  GCDData          *data = (GCDData *) user_data;
+  g_autoptr(GError) error = NULL;
+  GList            *result = NULL;
+  gint              num_of_devices = 0;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -3476,7 +3440,6 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
       if (error->domain != G_IO_ERROR ||
           error->code != G_IO_ERROR_CANCELLED)
         g_warning ("%s", error->message);
-      g_error_free (error);
 
       data->callback (result,
                       TRUE,
@@ -3576,17 +3539,16 @@ get_cups_devices_async (GCancellable *cancellable,
                         GCDCallback   callback,
                         gpointer      user_data)
 {
-  GDBusConnection *bus;
-  GVariantBuilder  include_scheme_builder;
-  GCDData         *data;
-  GError          *error = NULL;
-  gchar           *backend_name;
+  GDBusConnection  *bus;
+  GVariantBuilder   include_scheme_builder;
+  GCDData          *data;
+  g_autoptr(GError) error = NULL;
+  gchar            *backend_name;
 
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!bus)
    {
      g_warning ("Failed to get system bus: %s", error->message);
-     g_error_free (error);
      callback (NULL, TRUE, FALSE, user_data);
      return;
    }

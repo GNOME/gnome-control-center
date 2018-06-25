@@ -490,13 +490,12 @@ check_clean_heads_maintenance_command_cb (GObject      *source_object,
 {
   PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
   gboolean              is_supported = FALSE;
-  GError               *error = NULL;
+  g_autoptr(GError)     error = NULL;
 
   is_supported = pp_maintenance_command_is_supported_finish (command, res, &error);
   if (error != NULL)
     {
       g_debug ("Could not check 'Clean' maintenance command: %s", error->message);
-      g_error_free (error);
       goto out;
     }
 
@@ -532,12 +531,11 @@ clean_heads_maintenance_command_cb (GObject      *source_object,
 {
   PpPrinterEntry       *self = PP_PRINTER_ENTRY (user_data);
   PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
-  GError               *error = NULL;
+  g_autoptr(GError)     error = NULL;
 
   if (!pp_maintenance_command_execute_finish (command, res, &error))
     {
       g_warning ("Error cleaning print heads for %s: %s", self->printer_name, error->message);
-      g_error_free (error);
     }
   g_object_unref (source_object);
 }
@@ -568,12 +566,12 @@ get_jobs_cb (GObject      *source_object,
              GAsyncResult *result,
              gpointer      user_data)
 {
-  PpPrinterEntry *self;
-  PpPrinter      *printer = PP_PRINTER (source_object);
-  GError         *error = NULL;
-  GList          *jobs;
-  gchar          *button_label;
-  gint            num_jobs;
+  PpPrinterEntry   *self;
+  PpPrinter        *printer = PP_PRINTER (source_object);
+  g_autoptr(GError) error = NULL;
+  GList            *jobs;
+  gchar            *button_label;
+  gint              num_jobs;
 
   jobs = pp_printer_get_jobs_finish (printer, result, &error);
   num_jobs = g_list_length (jobs);
@@ -588,7 +586,6 @@ get_jobs_cb (GObject      *source_object,
           g_warning ("Could not get jobs: %s", error->message);
         }
 
-      g_error_free (error);
       return;
     }
 
