@@ -426,14 +426,11 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
-  if (!error ||
-      error->domain != G_IO_ERROR ||
-      error->code != G_IO_ERROR_CANCELLED)
+  if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     {
       get_named_dest_async (priv->name,
                             printer_add_real_async_cb,
@@ -564,14 +561,11 @@ printer_add_async_scb3 (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
-  if ((!error ||
-      error->domain != G_IO_ERROR ||
-      error->code != G_IO_ERROR_CANCELLED) &&
+  if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED) &&
       ppd_item && ppd_item->ppd_name)
     {
       priv->ppd_name = g_strdup (ppd_item->ppd_name);
@@ -610,14 +604,11 @@ install_printer_drivers_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
-  if (!error ||
-      error->domain != G_IO_ERROR ||
-      error->code != G_IO_ERROR_CANCELLED)
+  if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     {
       GDBusConnection  *bus;
       g_autoptr(GError) bus_error = NULL;
@@ -837,8 +828,7 @@ printer_set_accepting_jobs_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
@@ -866,8 +856,7 @@ printer_set_enabled_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
@@ -937,8 +926,7 @@ install_package_names_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
@@ -975,8 +963,7 @@ search_files_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
@@ -1100,8 +1087,7 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
@@ -1197,8 +1183,7 @@ pp_maintenance_command_execute_cb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           data = (PCData *) user_data;
 
