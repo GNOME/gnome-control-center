@@ -292,15 +292,15 @@ _pp_job_get_attributes_thread (GTask        *task,
                                gpointer      task_data,
                                GCancellable *cancellable)
 {
-  ipp_attribute_t *attr = NULL;
-  GVariantBuilder  builder;
-  GVariant        *attributes = NULL;
-  gchar          **attributes_names = task_data;
-  PpJobPrivate    *priv;
-  ipp_t           *request;
-  ipp_t           *response = NULL;
-  gchar           *job_uri;
-  gint             i, j, length = 0, n_attrs = 0;
+  ipp_attribute_t  *attr = NULL;
+  GVariantBuilder   builder;
+  GVariant         *attributes = NULL;
+  gchar           **attributes_names = task_data;
+  PpJobPrivate     *priv;
+  ipp_t            *request;
+  ipp_t            *response = NULL;
+  g_autofree gchar *job_uri = NULL;
+  gint              i, j, length = 0, n_attrs = 0;
 
   priv = pp_job_get_instance_private (source_object);
 
@@ -396,7 +396,6 @@ _pp_job_get_attributes_thread (GTask        *task,
 
       attributes = g_variant_builder_end (&builder);
     }
-  g_free (job_uri);
 
   g_task_return_pointer (task, attributes, (GDestroyNotify) g_variant_unref);
 }
@@ -438,14 +437,13 @@ _pp_job_authenticate_thread (GTask        *task,
   gchar        **auth_info = task_data;
   ipp_t         *request;
   ipp_t         *response = NULL;
-  gchar         *job_uri;
   gint           length;
 
   priv = pp_job_get_instance_private (source_object);
 
   if (auth_info != NULL)
     {
-      job_uri = g_strdup_printf ("ipp://localhost/jobs/%d", priv->id);
+      g_autofree gchar *job_uri = g_strdup_printf ("ipp://localhost/jobs/%d", priv->id);
 
       length = g_strv_length (auth_info);
 
@@ -462,8 +460,6 @@ _pp_job_authenticate_thread (GTask        *task,
 
       if (response != NULL)
         ippDelete (response);
-
-      g_free (job_uri);
     }
 
   g_task_return_boolean (task, result);

@@ -327,7 +327,6 @@ update_jobs_list_cb (GObject      *source_object,
   GList         *jobs, *l;
   PpJob         *job;
   gchar        **auth_info_required = NULL;
-  gchar         *text;
   gint           num_of_jobs, num_of_auth_jobs = 0;
 
   g_list_store_remove_all (dialog->store);
@@ -384,12 +383,13 @@ update_jobs_list_cb (GObject      *source_object,
   infobar = GTK_WIDGET (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "authentication-infobar"));
   if (num_of_auth_jobs > 0)
     {
+      g_autofree gchar *text = NULL;
+
       label = GTK_WIDGET (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "authenticate-jobs-label"));
 
       /* Translators: This label shows how many jobs of this printer needs to be authenticated to be printed. */
       text = g_strdup_printf (ngettext ("%u Job Requires Authentication", "%u Jobs Require Authentication", num_of_auth_jobs), num_of_auth_jobs);
       gtk_label_set_text (GTK_LABEL (label), text);
-      g_free (text);
 
       gtk_widget_show (infobar);
     }
@@ -558,13 +558,13 @@ pp_jobs_dialog_new (GtkWindow            *parent,
                     gpointer              user_data,
                     gchar                *printer_name)
 {
-  PpJobsDialog    *dialog;
-  GtkWidget       *widget;
-  GError          *error = NULL;
-  gchar           *objects[] = { "jobs-dialog", "authentication_popover", NULL };
-  gchar           *text;
-  guint            builder_result;
-  gchar           *title;
+  PpJobsDialog     *dialog;
+  GtkWidget        *widget;
+  GError           *error = NULL;
+  gchar            *objects[] = { "jobs-dialog", "authentication_popover", NULL };
+  g_autofree gchar *text = NULL;
+  guint             builder_result;
+  g_autofree gchar *title = NULL;
 
   dialog = g_new0 (PpJobsDialog, 1);
 
@@ -616,13 +616,11 @@ pp_jobs_dialog_new (GtkWindow            *parent,
   /* Translators: This is the printer name for which we are showing the active jobs */
   title = g_strdup_printf (C_("Printer jobs dialog title", "%s — Active Jobs"), printer_name);
   gtk_window_set_title (GTK_WINDOW (dialog->dialog), title);
-  g_free (title);
 
   /* Translators: The printer needs authentication info to print. */
   text = g_strdup_printf (_("Enter credentials to print from %s."), printer_name);
   widget = GTK_WIDGET (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "authentication-label"));
   gtk_label_set_text (GTK_LABEL (widget), text);
-  g_free (text);
 
   dialog->listbox = GTK_LIST_BOX (gtk_builder_get_object (dialog->builder, "jobs-listbox"));
   gtk_list_box_set_header_func (dialog->listbox,
