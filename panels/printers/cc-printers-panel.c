@@ -269,16 +269,13 @@ printer_removed_cb (GObject      *source_object,
                     GAsyncResult *result,
                     gpointer      user_data)
 {
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   pp_printer_delete_finish (PP_PRINTER (source_object), result, &error);
   g_object_unref (source_object);
 
   if (error != NULL)
-    {
-      g_warning ("Printer could not be deleted: %s", error->message);
-      g_error_free (error);
-    }
+    g_warning ("Printer could not be deleted: %s", error->message);
 }
 
 static void
@@ -416,7 +413,7 @@ on_get_job_attributes_cb (GObject      *source_object,
   GVariant               *attributes;
   GVariant               *username;
   GVariant               *printer_uri;
-  GError                 *error = NULL;
+  g_autoptr(GError)       error = NULL;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -595,7 +592,7 @@ attach_to_cups_notifier_cb (GObject      *source_object,
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   PpCups                 *cups = PP_CUPS (source_object);
-  GError                 *error = NULL;
+  g_autoptr(GError)       error = NULL;
   gint                    subscription_id;
 
   subscription_id = pp_cups_renew_subscription_finish (cups, result);
@@ -621,7 +618,6 @@ attach_to_cups_notifier_cb (GObject      *source_object,
       if (!priv->cups_proxy)
         {
           g_warning ("%s", error->message);
-          g_error_free (error);
           return;
         }
 
@@ -921,7 +917,7 @@ actualize_printers_list_cb (GObject      *source_object,
   PpCups                 *cups = PP_CUPS (source_object);
   PpCupsDests            *cups_dests;
   gboolean                new_printer_available = FALSE;
-  GError                 *error = NULL;
+  g_autoptr(GError)       error = NULL;
   int                     i;
 
   cups_dests = pp_cups_get_dests_finish (cups, result, &error);
@@ -933,7 +929,6 @@ actualize_printers_list_cb (GObject      *source_object,
           g_warning ("Could not get dests: %s", error->message);
         }
 
-      g_error_free (error);
       g_object_unref (cups);
       return;
     }
@@ -1338,7 +1333,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   GtkWidget              *top_widget;
   GtkWidget              *widget;
   PpCups                 *cups;
-  GError                 *error = NULL;
+  g_autoptr(GError)       error = NULL;
   gchar                  *objects[] = { "overlay", "headerbar-buttons", "search-button", NULL };
   guint                   builder_result;
 
@@ -1392,7 +1387,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
     {
       /* Translators: The XML file containing user interface can not be loaded */
       g_warning (_("Could not load ui: %s"), error->message);
-      g_error_free (error);
       return;
     }
 
