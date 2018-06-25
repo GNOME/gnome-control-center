@@ -288,18 +288,18 @@ set_cb (GtkTreeModel *model,
         GtkTreeIter  *iter,
         gpointer      data)
 {
-  struct ComboSet *set_data = data;
-  gboolean         found;
-  char            *value;
+  struct ComboSet  *set_data = data;
+  g_autofree gchar *value = NULL;
 
   gtk_tree_model_get (model, iter, VALUE_COLUMN, &value, -1);
-  found = (strcmp (value, set_data->value) == 0);
-  g_free (value);
 
-  if (found)
-    gtk_combo_box_set_active_iter (set_data->combo, iter);
+  if (strcmp (value, set_data->value) == 0)
+    {
+      gtk_combo_box_set_active_iter (set_data->combo, iter);
+      return TRUE;
+    }
 
-  return found;
+  return FALSE;
 }
 
 static void
@@ -467,7 +467,6 @@ update_widget_real (PpPPDOptionWidget *self)
 {
   ppd_option_t             *option = NULL, *iter;
   ppd_file_t               *ppd_file;
-  gchar                    *value = NULL;
   gint                      i;
 
   if (self->option)
@@ -504,6 +503,8 @@ update_widget_real (PpPPDOptionWidget *self)
 
   if (option)
     {
+      g_autofree gchar *value = NULL;
+
       for (i = 0; i < option->num_choices; i++)
         if (option->choices[i].marked)
           value = g_strdup (option->choices[i].choice);
@@ -539,8 +540,6 @@ update_widget_real (PpPPDOptionWidget *self)
               default:
                 break;
             }
-
-          g_free (value);
         }
 
       if (option->conflicted)
