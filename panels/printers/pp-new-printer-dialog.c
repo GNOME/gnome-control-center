@@ -392,7 +392,9 @@ on_authentication_required (PpHost   *host,
 {
   PpNewPrinterDialogPrivate *priv;
   PpNewPrinterDialog        *dialog = PP_NEW_PRINTER_DIALOG (user_data);
-  gchar                     *text, *hostname;
+  g_autofree gchar          *hostname = NULL;
+  g_autofree gchar          *title = NULL;
+  g_autofree gchar          *text = NULL;
 
   priv = dialog->priv;
 
@@ -401,15 +403,12 @@ on_authentication_required (PpHost   *host,
 
   g_object_get (G_OBJECT (host), "hostname", &hostname, NULL);
   /* Translators: Samba server needs authentication of the user to show list of its printers. */
-  text = g_strdup_printf (_("Unlock %s."), hostname);
-  gtk_label_set_text (GTK_LABEL (WID ("authentication-title")), text);
-  g_free (text);
+  title = g_strdup_printf (_("Unlock %s."), hostname);
+  gtk_label_set_text (GTK_LABEL (WID ("authentication-title")), title);
 
   /* Translators: Samba server needs authentication of the user to show list of its printers. */
   text = g_strdup_printf (_("Enter username and password to view printers on %s."), hostname);
   gtk_label_set_text (GTK_LABEL (WID ("authentication-text")), text);
-  g_free (hostname);
-  g_free (text);
 
   go_to_page (dialog, AUTHENTICATION_PAGE);
 
@@ -734,17 +733,14 @@ add_device_to_list (PpNewPrinterDialog *dialog,
   PpNewPrinterDialogPrivate *priv = dialog->priv;
   PpPrintDevice             *store_device;
   GList                     *original_names_list = NULL;
-  gchar                     *canonicalized_name = NULL;
-  gchar                     *host_name;
   gint                       acquisistion_method;
 
   if (device)
     {
       if (pp_print_device_get_host_name (device) == NULL)
         {
-          host_name = guess_device_hostname (device);
+          g_autofree gchar *host_name = guess_device_hostname (device);
           g_object_set (device, "host-name", host_name, NULL);
-          g_free (host_name);
         }
 
       acquisistion_method = pp_print_device_get_acquisition_method (device);
@@ -758,6 +754,8 @@ add_device_to_list (PpNewPrinterDialog *dialog,
            (acquisistion_method == ACQUISITION_METHOD_JETDIRECT ||
             acquisistion_method == ACQUISITION_METHOD_LPD)))
         {
+          g_autofree gchar *canonicalized_name = NULL;
+
           g_object_set (device,
                         "device-original-name", pp_print_device_get_device_name (device),
                         NULL);
@@ -780,8 +778,6 @@ add_device_to_list (PpNewPrinterDialog *dialog,
                         "display-name", canonicalized_name,
                         "device-name", canonicalized_name,
                         NULL);
-
-          g_free (canonicalized_name);
 
           if (pp_print_device_get_acquisition_method (device) == ACQUISITION_METHOD_DEFAULT_CUPS_SERVER)
             priv->local_cups_devices = g_list_append (priv->local_cups_devices, g_object_ref (device));
@@ -1489,9 +1485,9 @@ parse_uri (const gchar  *uri,
            gchar       **host,
            gint         *port)
 {
-  const gchar *tmp = NULL;
-  gchar       *resulting_host = NULL;
-  gchar       *position;
+  const gchar      *tmp = NULL;
+  g_autofree gchar *resulting_host = NULL;
+  gchar            *position;
 
   *port = PP_HOST_UNSET_PORT;
 
@@ -1529,8 +1525,6 @@ parse_uri (const gchar  *uri,
   *host = g_uri_unescape_string (resulting_host,
                                  G_URI_RESERVED_CHARS_GENERIC_DELIMITERS
                                  G_URI_RESERVED_CHARS_SUBCOMPONENT_DELIMITERS);
-
-  g_free (resulting_host);
 
   return TRUE;
 }
@@ -1630,9 +1624,7 @@ search_address (const gchar        *text,
   gboolean                    subfound;
   gboolean                    next_set;
   gboolean                    cont;
-  gchar                      *lowercase_name;
-  gchar                      *lowercase_location;
-  gchar                      *lowercase_text;
+  g_autofree gchar           *lowercase_text = NULL;
   gchar                     **words;
   gint                        words_length = 0;
   gint                        i;
@@ -1640,7 +1632,6 @@ search_address (const gchar        *text,
 
   lowercase_text = g_ascii_strdown (text, -1);
   words = g_strsplit_set (lowercase_text, " ", -1);
-  g_free (lowercase_text);
 
   if (words)
     {
@@ -1649,6 +1640,9 @@ search_address (const gchar        *text,
       cont = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->store), &iter);
       while (cont)
         {
+          g_autofree gchar *lowercase_name = NULL;
+          g_autofree gchar *lowercase_location = NULL;
+
           gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
                               DEVICE_COLUMN, &device,
                               -1);
@@ -1674,8 +1668,6 @@ search_address (const gchar        *text,
                               DEVICE_VISIBLE_COLUMN, subfound,
                               -1);
 
-          g_free (lowercase_location);
-          g_free (lowercase_name);
           g_object_unref (device);
 
           cont = gtk_tree_model_iter_next (GTK_TREE_MODEL (priv->store), &iter);
@@ -1823,7 +1815,6 @@ set_device (PpNewPrinterDialog *dialog,
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
   GtkTreeIter                titer;
-  gchar                     *description;
   gint                       acquisition_method;
 
   if (device != NULL)
@@ -1840,6 +1831,8 @@ set_device (PpNewPrinterDialog *dialog,
            acquisition_method == ACQUISITION_METHOD_SAMBA_HOST ||
            acquisition_method == ACQUISITION_METHOD_SAMBA))
         {
+          g_autofree gchar *description = NULL;
+
           description = get_local_scheme_description_from_uri (pp_print_device_get_device_uri (device));
           if (description == NULL)
             {
@@ -1866,8 +1859,6 @@ set_device (PpNewPrinterDialog *dialog,
                               DEVICE_VISIBLE_COLUMN, TRUE,
                               DEVICE_COLUMN, device,
                               -1);
-
-          g_free (description);
         }
       else if (pp_print_device_is_authenticated_server (device) &&
                pp_print_device_get_host_name (device) != NULL)
@@ -2004,9 +1995,8 @@ cell_data_func (GtkTreeViewColumn  *tree_column,
   PpNewPrinterDialog        *dialog = (PpNewPrinterDialog *) user_data;
   PpNewPrinterDialogPrivate *priv = dialog->priv;
   gboolean                   selected = FALSE;
-  gchar                     *name = NULL;
-  gchar                     *description = NULL;
-  gchar                     *text;
+  g_autofree gchar          *name = NULL;
+  g_autofree gchar          *description = NULL;
 
   selected = gtk_tree_selection_iter_is_selected (gtk_tree_view_get_selection (priv->treeview), iter);
 
@@ -2017,6 +2007,8 @@ cell_data_func (GtkTreeViewColumn  *tree_column,
 
   if (name != NULL)
     {
+      g_autofree gchar *text = NULL;
+
       if (description != NULL)
         {
           if (selected)
@@ -2037,12 +2029,7 @@ cell_data_func (GtkTreeViewColumn  *tree_column,
       g_object_set (G_OBJECT (cell),
                     "markup", text,
                     NULL);
-
-      g_free (text);
     }
-
-  g_free (name);
-  g_free (description);
 }
 
 static void
@@ -2151,7 +2138,6 @@ ppd_selection_cb (GtkDialog *_dialog,
   GList                     *original_names_list = NULL;
   gchar                     *ppd_name;
   gchar                     *ppd_display_name;
-  gchar                     *printer_name;
   guint                      window_id = 0;
   gint                       acquisition_method;
 
@@ -2169,6 +2155,8 @@ ppd_selection_cb (GtkDialog *_dialog,
            acquisition_method == ACQUISITION_METHOD_LPD) &&
           ppd_display_name != NULL)
         {
+          g_autofree gchar *printer_name = NULL;
+
           g_object_set (priv->new_device,
                         "device-name", ppd_display_name,
                         "device-original-name", ppd_display_name,
@@ -2192,8 +2180,6 @@ ppd_selection_cb (GtkDialog *_dialog,
                         "device-name", printer_name,
                         "device-original-name", printer_name,
                         NULL);
-
-          g_free (printer_name);
         }
 
       emit_pre_response (dialog,
