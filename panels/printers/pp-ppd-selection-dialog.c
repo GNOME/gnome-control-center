@@ -333,7 +333,7 @@ pp_ppd_selection_dialog_new (GtkWindow            *parent,
 {
   PpPPDSelectionDialog *dialog;
   GtkWidget            *widget;
-  GError               *error = NULL;
+  g_autoptr(GError)     error = NULL;
   gchar                *objects[] = { "ppd-selection-dialog", NULL };
   guint                 builder_result;
 
@@ -349,7 +349,6 @@ pp_ppd_selection_dialog_new (GtkWindow            *parent,
   if (builder_result == 0)
     {
       g_warning ("Could not load ui: %s", error->message);
-      g_error_free (error);
       return NULL;
     }
 
