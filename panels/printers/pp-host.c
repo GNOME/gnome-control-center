@@ -160,15 +160,15 @@ pp_host_new (const gchar *hostname)
 static gchar **
 line_split (gchar *line)
 {
-  gboolean   escaped = FALSE;
-  gboolean   quoted = FALSE;
-  gboolean   in_word = FALSE;
-  gchar    **words = NULL;
-  gchar    **result = NULL;
-  gchar     *buffer = NULL;
-  gchar      ch;
-  gint       n = 0;
-  gint       i, j = 0, k = 0;
+  gboolean          escaped = FALSE;
+  gboolean          quoted = FALSE;
+  gboolean          in_word = FALSE;
+  gchar           **words = NULL;
+  gchar           **result = NULL;
+  g_autofree gchar *buffer = NULL;
+  gchar             ch;
+  gint              n = 0;
+  gint              i, j = 0, k = 0;
 
   if (line)
     {
@@ -236,7 +236,6 @@ line_split (gchar *line)
 
   result = g_strdupv (words);
   g_strfreev (words);
-  g_free (buffer);
 
   return result;
 }
@@ -278,7 +277,6 @@ _pp_host_get_snmp_devices_thread (GTask        *task,
   if (exit_status == 0 && stdout_string)
     {
       g_auto(GStrv)     printer_informations = NULL;
-      g_autofree gchar *device_name = NULL;
       gint              length;
 
       printer_informations = line_split (stdout_string);
@@ -286,8 +284,10 @@ _pp_host_get_snmp_devices_thread (GTask        *task,
 
       if (length >= 4)
         {
+          g_autofree gchar *device_name = NULL;
+
           device_name = g_strdup (printer_informations[3]);
-          device_name = g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
+          g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
           is_network_device = g_strcmp0 (printer_informations[0], "network") == 0;
 
           device = g_object_new (PP_TYPE_PRINT_DEVICE,
