@@ -90,7 +90,7 @@ pp_job_cancel_purge_async (PpJob        *job,
                            gboolean      job_purge)
 {
   GDBusConnection *bus;
-  GError          *error = NULL;
+  g_autoptr(GError) error = NULL;
   gint            *job_id;
 
   g_object_get (job, "id", &job_id, NULL);
@@ -99,7 +99,6 @@ pp_job_cancel_purge_async (PpJob        *job,
   if (!bus)
     {
       g_warning ("Failed to get session bus: %s", error->message);
-      g_error_free (error);
       return;
     }
 
@@ -141,9 +140,9 @@ void
 pp_job_set_hold_until_async (PpJob        *job,
                              const gchar  *job_hold_until)
 {
-  GDBusConnection *bus;
-  GError          *error = NULL;
-  gint            *job_id;
+  GDBusConnection  *bus;
+  g_autoptr(GError) error = NULL;
+  gint             *job_id;
 
   g_object_get (job, "id", &job_id, NULL);
 
@@ -151,7 +150,6 @@ pp_job_set_hold_until_async (PpJob        *job,
   if (!bus)
     {
       g_warning ("Failed to get session bus: %s", error->message);
-      g_error_free (error);
       return;
     }
 

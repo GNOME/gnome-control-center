@@ -168,12 +168,12 @@ printer_rename_dbus_cb (GObject      *source_object,
                         GAsyncResult *res,
                         gpointer      user_data)
 {
-  PpPrinter *printer;
-  GVariant  *output;
-  gboolean   result = FALSE;
-  GError    *error = NULL;
-  GTask     *task = user_data;
-  gchar     *old_printer_name;
+  PpPrinter        *printer;
+  GVariant         *output;
+  gboolean          result = FALSE;
+  g_autoptr(GError) error = NULL;
+  GTask            *task = user_data;
+  gchar            *old_printer_name;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -210,7 +210,6 @@ printer_rename_dbus_cb (GObject      *source_object,
            error->code == G_DBUS_ERROR_UNKNOWN_METHOD))
         {
           g_warning ("Update cups-pk-helper to at least 0.2.6 please to be able to use PrinterRename method.");
-          g_error_free (error);
 
           g_task_run_in_thread (task, printer_rename_thread);
         }
@@ -226,10 +225,10 @@ get_bus_cb (GObject      *source_object,
             GAsyncResult *res,
             gpointer      user_data)
 {
-  GDBusConnection *bus;
-  GError          *error = NULL;
-  GTask           *task = user_data;
-  gchar           *printer_name;
+  GDBusConnection  *bus;
+  g_autoptr(GError) error = NULL;
+  GTask            *task = user_data;
+  gchar            *printer_name;
 
   bus = g_bus_get_finish (res, &error);
   if (bus != NULL)
@@ -257,7 +256,6 @@ get_bus_cb (GObject      *source_object,
   else
     {
       g_warning ("Failed to get system bus: %s", error->message);
-      g_error_free (error);
       g_task_return_boolean (task, FALSE);
     }
 }
@@ -447,11 +445,11 @@ pp_printer_delete_dbus_cb (GObject      *source_object,
                            GAsyncResult *res,
                            gpointer      user_data)
 {
-  GVariant  *output;
-  gboolean   result = FALSE;
-  GError    *error = NULL;
-  GTask     *task = user_data;
-  gchar     *printer_name;
+  GVariant         *output;
+  gboolean          result = FALSE;
+  g_autoptr(GError) error = NULL;
+  GTask            *task = user_data;
+  gchar            *printer_name;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -478,7 +476,6 @@ pp_printer_delete_dbus_cb (GObject      *source_object,
   else
     {
       g_warning ("%s", error->message);
-      g_error_free (error);
 
       g_task_return_boolean (task, FALSE);
     }
@@ -489,10 +486,10 @@ pp_printer_delete_cb (GObject      *source_object,
                       GAsyncResult *res,
                       gpointer      user_data)
 {
-  GDBusConnection *bus;
-  GError          *error = NULL;
-  GTask           *task = user_data;
-  gchar           *printer_name;
+  GDBusConnection  *bus;
+  g_autoptr(GError) error = NULL;
+  GTask            *task = user_data;
+  gchar            *printer_name;
 
   bus = g_bus_get_finish (res, &error);
   if (bus != NULL)
@@ -519,7 +516,6 @@ pp_printer_delete_cb (GObject      *source_object,
   else
     {
       g_warning ("Failed to get system bus: %s", error->message);
-      g_error_free (error);
       g_task_return_boolean (task, FALSE);
     }
 }
