@@ -1140,7 +1140,7 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
       data->executables = executables;
 
       item = data->executables;
-      g_dbus_connection_call (g_object_ref (source_object),
+      g_dbus_connection_call (g_object_ref (G_DBUS_CONNECTION (source_object)),
                               PACKAGE_KIT_BUS,
                               PACKAGE_KIT_PATH,
                               PACKAGE_KIT_QUERY_IFACE,
