@@ -19,11 +19,11 @@ i18n.merge_file(
 
 sources = files(
   'cc-notifications-panel.c',
-  'cc-edit-dialog.c'
+  'cc-app-notifications-dialog.c'
 )
 
 resource_data = files(
-  'edit-dialog.ui',
+  'cc-app-notifications-dialog.ui',
   'notifications.ui'
 )
 
