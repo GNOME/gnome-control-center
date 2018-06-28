@@ -203,7 +203,7 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
                                           "ccnotify-switch-listbox"));
   panel->sections = g_list_append (panel->sections, w);
   panel->sections_reverse = g_list_prepend (panel->sections_reverse, w);
-  g_signal_connect (w, "keynav-failed", G_CALLBACK (keynav_failed), panel);
+  g_signal_connect_object (w, "keynav-failed", G_CALLBACK (keynav_failed), panel, 0);
   gtk_list_box_set_header_func (GTK_LIST_BOX (w),
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
@@ -221,14 +221,14 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
 
   panel->sections = g_list_append (panel->sections, w);
   panel->sections_reverse = g_list_prepend (panel->sections_reverse, w);
-  g_signal_connect (w, "keynav-failed", G_CALLBACK (keynav_failed), panel);
+  g_signal_connect_object (w, "keynav-failed", G_CALLBACK (keynav_failed), panel, 0);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (w), (GtkListBoxSortFunc)sort_apps, NULL, NULL);
   gtk_list_box_set_header_func (GTK_LIST_BOX (w),
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
 
-  g_signal_connect (GTK_LIST_BOX (w), "row-activated",
-                    G_CALLBACK (select_app), panel);
+  g_signal_connect_object (GTK_LIST_BOX (w), "row-activated",
+                           G_CALLBACK (select_app), panel, 0);
 
   build_app_store (panel);
 
@@ -543,8 +543,9 @@ build_app_store (CcNotificationsPanel *panel)
 {
   /* Build application entries for known applications */
   children_changed (panel->master_settings, NULL, panel);
-  g_signal_connect (panel->master_settings, "changed::application-children",
-                    G_CALLBACK (children_changed), panel);
+  g_signal_connect_object (panel->master_settings,
+                           "changed::application-children",
+                           G_CALLBACK (children_changed), panel, 0);
 
   /* Scan applications that statically declare to show notifications */
   load_apps_async (panel);
