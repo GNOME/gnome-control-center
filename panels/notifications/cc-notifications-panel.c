@@ -29,7 +29,7 @@
 #include "list-box-helper.h"
 #include "cc-notifications-panel.h"
 #include "cc-notifications-resources.h"
-#include "cc-edit-dialog.h"
+#include "cc-app-notifications-dialog.h"
 
 #define MASTER_SCHEMA "org.gnome.desktop.notifications"
 #define APP_SCHEMA MASTER_SCHEMA ".application"
@@ -557,9 +557,18 @@ select_app (GtkListBox           *list_box,
             CcNotificationsPanel *panel)
 {
   Application *app;
+  g_autofree gchar *app_id = NULL;
+  CcAppNotificationsDialog *dialog;
 
   app = g_object_get_qdata (G_OBJECT (row), application_quark ());
-  cc_build_edit_dialog (panel, app->app_info, app->settings, panel->master_settings, panel->perm_store);
+
+  app_id = g_strdup (g_app_info_get_id (app->app_info));
+  if (g_str_has_suffix (app_id, ".desktop"))
+    app_id[strlen (app_id) - strlen (".desktop")] = '\0';
+
+  dialog = cc_app_notifications_dialog_new (app_id, g_app_info_get_name (app->app_info), app->settings, panel->master_settings, panel->perm_store);
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (panel))));
+  gtk_widget_show (GTK_WIDGET (dialog));
 }
 
 static int
