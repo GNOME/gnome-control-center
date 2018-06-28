@@ -575,7 +575,7 @@ static void
 remove_printer (GtkButton      *button,
                 PpPrinterEntry *self)
 {
-  g_signal_emit_by_name (self, "printer-delete", self->printer_name);
+  g_signal_emit_by_name (self, "printer-delete");
 }
 
 static void
