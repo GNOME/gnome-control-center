@@ -39,6 +39,7 @@ struct _CcNotificationsPanel {
   CcPanel parent_instance;
 
   GSettings *master_settings;
+  gulong application_children_changed_id;
   GtkBuilder *builder;
 
   GCancellable *apps_load_cancellable;
@@ -77,6 +78,12 @@ static void
 cc_notifications_panel_dispose (GObject *object)
 {
   CcNotificationsPanel *panel = CC_NOTIFICATIONS_PANEL (object);
+
+  if (panel->master_settings && panel->application_children_changed_id != 0)
+    {
+      g_signal_handler_disconnect (panel->master_settings, panel->application_children_changed_id);
+      panel->application_children_changed_id = 0;
+    }
 
   g_clear_object (&panel->builder);
   g_clear_object (&panel->master_settings);
@@ -543,8 +550,9 @@ build_app_store (CcNotificationsPanel *panel)
 {
   /* Build application entries for known applications */
   children_changed (panel->master_settings, NULL, panel);
-  g_signal_connect (panel->master_settings, "changed::application-children",
-                    G_CALLBACK (children_changed), panel);
+  panel->application_children_changed_id = g_signal_connect (panel->master_settings,
+                                                             "changed::application-children",
+                                                             G_CALLBACK (children_changed), panel);
 
   /* Scan applications that statically declare to show notifications */
   load_apps_async (panel);
