@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkDialog" id="input-dialog">
+  <template class="CcInputChooser" parent="GtkDialog">
     <property name="title" translatable="yes">Add an Input Source</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
     <property name="resizable">True</property>
-    <property name="use_header_bar">1</property>
     <child type="action">
-      <object class="GtkButton" id="cancel-button">
+      <object class="GtkButton" id="cancel_button">
         <property name="label" translatable="yes">_Cancel</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
@@ -18,7 +17,7 @@
       </object>
     </child>
     <child type="action">
-      <object class="GtkButton" id="add-button">
+      <object class="GtkButton" id="add_button">
         <property name="label" translatable="yes">_Add</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
@@ -29,7 +28,7 @@
       </object>
     </child>
     <child internal-child="vbox">
-      <object class="GtkBox" id="vbox">
+      <object class="GtkBox">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <property name="spacing">0</property>
@@ -46,10 +45,10 @@
             <property name="margin-bottom">6</property>
             <property name="min-content-height">300</property>
             <child>
-              <object class="GtkViewport" id="viewport">
+              <object class="GtkViewport">
                 <property name="visible">True</property>
                 <child>
-                  <object class="GtkListBox" id="list">
+                  <object class="GtkListBox" id="input_listbox">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="vexpand">True</property>
@@ -62,7 +61,7 @@
           </object>
         </child>
         <child>
-          <object class="GtkSearchEntry" id="filter-entry">
+          <object class="GtkSearchEntry" id="filter_entry">
             <property name="visible">False</property>
             <property name="hexpand">True</property>
             <property name="margin-start">6</property>
@@ -72,7 +71,7 @@
           </object>
         </child>
         <child>
-          <object class="GtkLabel" id="login-label">
+          <object class="GtkLabel" id="login_label">
             <property name="visible">False</property>
             <property name="wrap">True</property>
             <property name="label" translatable="yes">Input methods can’t be used on the login screen</property>
@@ -87,8 +86,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-5" default="true">add-button</action-widget>
-      <action-widget response="-6">cancel-button</action-widget>
+      <action-widget response="-5" default="true">add_button</action-widget>
+      <action-widget response="-6">cancel_button</action-widget>
     </action-widgets>
-  </object>
+  </template>
 </interface>
