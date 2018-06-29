@@ -33,6 +33,7 @@
 #include "cc-format-chooser.h"
 #include "cc-input-chooser.h"
 #include "cc-input-options.h"
+#include "cc-input-row.h"
 
 #include "cc-common-language.h"
 
@@ -629,25 +630,19 @@ update_ibus_active_sources (CcRegionPanel *self)
 {
         g_autoptr(GList) rows = NULL;
         GList *l;
-        GtkWidget *row;
-        const gchar *type;
-        const gchar *id;
-        IBusEngineDesc *engine_desc;
-        GtkWidget *label;
 
         rows = gtk_container_get_children (GTK_CONTAINER (self->input_list));
         for (l = rows; l; l = l->next) {
-                row = l->data;
-                type = g_object_get_data (G_OBJECT (row), "type");
-                id = g_object_get_data (G_OBJECT (row), "id");
-                if (g_strcmp0 (type, INPUT_SOURCE_TYPE_IBUS) != 0)
+                CcInputRow *row = CC_INPUT_ROW (l->data);
+                IBusEngineDesc *engine_desc;
+
+                if (g_strcmp0 (cc_input_row_get_input_type (row), INPUT_SOURCE_TYPE_IBUS) != 0)
                         continue;
 
-                engine_desc = g_hash_table_lookup (self->ibus_engines, id);
+                engine_desc = g_hash_table_lookup (self->ibus_engines, cc_input_row_get_id (row));
                 if (engine_desc) {
                         g_autofree gchar *display_name = engine_get_display_name (engine_desc);
-                        label = GTK_WIDGET (g_object_get_data (G_OBJECT (row), "label"));
-                        gtk_label_set_text (GTK_LABEL (label), display_name);
+                        cc_input_row_set_label (row, display_name);
                 }
         }
 }
@@ -749,58 +744,28 @@ remove_no_input_row (GtkContainer *list)
                 return;
         if (l->next != NULL)
                 return;
-        if (g_strcmp0 (g_object_get_data (G_OBJECT (l->data), "type"), "none") == 0)
+        if (g_strcmp0 (cc_input_row_get_input_type (CC_INPUT_ROW (l->data)), "none") == 0)
                 gtk_container_remove (list, GTK_WIDGET (l->data));
 }
 
-static GtkWidget *
+static void
 add_input_row (CcRegionPanel   *self,
                const gchar     *type,
                const gchar     *id,
                const gchar     *name,
                GDesktopAppInfo *app_info)
 {
-        GtkWidget *row;
-        GtkWidget *box;
-        GtkWidget *label;
-        GtkWidget *image;
+        CcInputRow *row;
 
         remove_no_input_row (GTK_CONTAINER (self->input_list));
 
-        row = gtk_list_box_row_new ();
-        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        gtk_container_add (GTK_CONTAINER (row), box);
-        label = gtk_label_new (name);
-        gtk_widget_set_halign (label, GTK_ALIGN_START);
-        gtk_widget_set_margin_start (label, 20);
-        gtk_widget_set_margin_end (label, 20);
-        gtk_widget_set_margin_top (label, 18);
-        gtk_widget_set_margin_bottom (label, 18);
-        gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
-
-        if (strcmp (type, INPUT_SOURCE_TYPE_IBUS) == 0) {
-                image = gtk_image_new_from_icon_name ("system-run-symbolic", GTK_ICON_SIZE_BUTTON);
-                gtk_widget_set_margin_start (image, 20);
-                gtk_widget_set_margin_end (image, 20);
-                gtk_widget_set_margin_top (image, 6);
-                gtk_widget_set_margin_bottom (image, 6);
-                gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
-                gtk_box_pack_start (GTK_BOX (box), image, FALSE, TRUE, 0);
-        }
-
-        gtk_widget_show_all (row);
-        gtk_container_add (GTK_CONTAINER (self->input_list), row);
-
-        g_object_set_data (G_OBJECT (row), "label", label);
-        g_object_set_data (G_OBJECT (row), "type", (gpointer)type);
-        g_object_set_data_full (G_OBJECT (row), "id", g_strdup (id), g_free);
-        if (app_info) {
-                g_object_set_data_full (G_OBJECT (row), "app-info", g_object_ref (app_info), g_object_unref);
-        }
+        row = cc_input_row_new (type, id, app_info);
+        gtk_widget_show (GTK_WIDGET (row));
+        cc_input_row_set_label (row, name);
+        cc_input_row_set_is_input_method (row, strcmp (type, INPUT_SOURCE_TYPE_IBUS) == 0);
+        gtk_container_add (GTK_CONTAINER (self->input_list), GTK_WIDGET (row));
 
         cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->input_list));
-
-        return row;
 }
 
 static void
@@ -884,10 +849,8 @@ select_by_id (GtkWidget   *row,
               gpointer     data)
 {
         const gchar *id = data;
-        const gchar *row_id;
 
-        row_id = (const gchar *)g_object_get_data (G_OBJECT (row), "id");
-        if (g_strcmp0 (row_id, id) == 0)
+        if (g_strcmp0 (cc_input_row_get_id (CC_INPUT_ROW (row)), id) == 0)
                 gtk_list_box_select_row (GTK_LIST_BOX (gtk_widget_get_parent (row)), GTK_LIST_BOX_ROW (row));
 }
 
@@ -904,12 +867,12 @@ input_sources_changed (GSettings     *settings,
                        const gchar   *key,
                        CcRegionPanel *self)
 {
-        GtkListBoxRow *selected;
+        CcInputRow *selected;
         g_autofree gchar *id = NULL;
 
-        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list));
+        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list)));
         if (selected)
-                id = g_strdup (g_object_get_data (G_OBJECT (selected), "id"));
+                id = g_strdup (cc_input_row_get_id (selected));
         clear_input_sources (self);
         add_input_sources_from_settings (self);
         if (id)
@@ -920,14 +883,14 @@ input_sources_changed (GSettings     *settings,
 static void
 update_buttons (CcRegionPanel *self)
 {
-        GtkListBoxRow *selected;
+        CcInputRow *selected;
         g_autoptr(GList) children = NULL;
         guint n_rows;
 
         children = gtk_container_get_children (GTK_CONTAINER (self->input_list));
         n_rows = g_list_length (children);
 
-        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list));
+        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list)));
         if (selected == NULL) {
                 gtk_widget_set_visible (self->show_config, FALSE);
                 gtk_widget_set_sensitive (self->remove_input, FALSE);
@@ -936,14 +899,16 @@ update_buttons (CcRegionPanel *self)
                 gtk_widget_set_sensitive (self->move_down_input, FALSE);
         } else {
                 GDesktopAppInfo *app_info;
+                gint index;
 
-                app_info = (GDesktopAppInfo *)g_object_get_data (G_OBJECT (selected), "app-info");
+                app_info = cc_input_row_get_app_info (selected);
+                index = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (selected));
 
                 gtk_widget_set_visible (self->show_config, app_info != NULL);
                 gtk_widget_set_sensitive (self->show_layout, TRUE);
                 gtk_widget_set_sensitive (self->remove_input, n_rows > 1);
-                gtk_widget_set_sensitive (self->move_up_input, gtk_list_box_row_get_index (selected) > 0);
-                gtk_widget_set_sensitive (self->move_down_input, gtk_list_box_row_get_index (selected) < n_rows - 1);
+                gtk_widget_set_sensitive (self->move_up_input, index > 0);
+                gtk_widget_set_sensitive (self->move_down_input, index < n_rows - 1);
         }
 
         gtk_widget_set_visible (self->options_button,
@@ -953,8 +918,6 @@ update_buttons (CcRegionPanel *self)
 static void
 set_input_settings (CcRegionPanel *self)
 {
-        const gchar *type;
-        const gchar *id;
         GVariantBuilder builder;
         g_autoptr(GList) list = NULL;
         GList *l;
@@ -962,9 +925,8 @@ set_input_settings (CcRegionPanel *self)
         g_variant_builder_init (&builder, G_VARIANT_TYPE ("a(ss)"));
         list = gtk_container_get_children (GTK_CONTAINER (self->input_list));
         for (l = list; l; l = l->next) {
-                type = (const gchar *)g_object_get_data (G_OBJECT (l->data), "type");
-                id = (const gchar *)g_object_get_data (G_OBJECT (l->data), "id");
-                g_variant_builder_add (&builder, "(ss)", type, id);
+                CcInputRow *row = CC_INPUT_ROW (l->data);
+                g_variant_builder_add (&builder, "(ss)", cc_input_row_get_input_type (row), cc_input_row_get_id (row));
         }
 
         g_settings_set_value (self->input_settings, KEY_INPUT_SOURCES, g_variant_builder_end (&builder));
@@ -994,7 +956,7 @@ input_source_already_added (CcRegionPanel *self,
 
         list = gtk_container_get_children (GTK_CONTAINER (self->input_list));
         for (l = list; l; l = l->next)
-                if (g_str_equal (id, (const gchar *) g_object_get_data (G_OBJECT (l->data), "id"))) {
+                if (g_str_equal (id, cc_input_row_get_id (CC_INPUT_ROW (l->data)))) {
                         return TRUE;
                 }
 
@@ -1201,26 +1163,24 @@ move_selected_input_down (CcRegionPanel *self)
 static void
 show_selected_settings (CcRegionPanel *self)
 {
-        GtkListBoxRow *selected;
+        CcInputRow *selected;
         g_autoptr(GdkAppLaunchContext) ctx = NULL;
         GDesktopAppInfo *app_info;
-        const gchar *id;
         g_autoptr(GError) error = NULL;
 
-        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list));
+        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list)));
         if (selected == NULL)
                 return;
 
-        app_info = (GDesktopAppInfo *)g_object_get_data (G_OBJECT (selected), "app-info");
+        app_info = cc_input_row_get_app_info (selected);
         if  (app_info == NULL)
                 return;
 
         ctx = gdk_display_get_app_launch_context (gdk_display_get_default ());
         gdk_app_launch_context_set_timestamp (ctx, gtk_get_current_event_time ());
 
-        id = (const gchar *)g_object_get_data (G_OBJECT (selected), "id");
         g_app_launch_context_setenv (G_APP_LAUNCH_CONTEXT (ctx),
-                                     "IBUS_ENGINE_NAME", id);
+                                     "IBUS_ENGINE_NAME", cc_input_row_get_id (selected));
 
         if (!g_app_info_launch (G_APP_INFO (app_info), NULL, G_APP_LAUNCH_CONTEXT (ctx), &error))
                 g_warning ("Failed to launch input source setup: %s", error->message);
@@ -1229,20 +1189,18 @@ show_selected_settings (CcRegionPanel *self)
 static void
 show_selected_layout (CcRegionPanel *self)
 {
-        GtkListBoxRow *selected;
-        const gchar *type;
-        const gchar *id;
+        CcInputRow *selected;
+        const gchar *type, *id;
         const gchar *layout;
         const gchar *variant;
         g_autofree gchar *commandline = NULL;
 
-        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list));
+        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list)));
         if (selected == NULL)
                 return;
 
-        type = (const gchar *)g_object_get_data (G_OBJECT (selected), "type");
-        id = (const gchar *)g_object_get_data (G_OBJECT (selected), "id");
-
+        type = cc_input_row_get_input_type (selected);
+        id = cc_input_row_get_id (selected);
         if (g_str_equal (type, INPUT_SOURCE_TYPE_XKB)) {
                 gnome_xkb_info_get_layout_info (self->xkb_info,
                                                 id, NULL, NULL,
@@ -1475,22 +1433,21 @@ set_localed_input (CcRegionPanel *self)
 {
         g_autoptr(GString) layouts = NULL;
         g_autoptr(GString) variants = NULL;
-        const gchar *type, *id;
         g_autoptr(GList) list = NULL;
         GList *li;
-        const gchar *l, *v;
 
         layouts = g_string_new ("");
         variants = g_string_new ("");
 
         list = gtk_container_get_children (GTK_CONTAINER (self->input_list));
         for (li = list; li; li = li->next) {
-                type = (const gchar *)g_object_get_data (G_OBJECT (li->data), "type");
-                id = (const gchar *)g_object_get_data (G_OBJECT (li->data), "id");
-                if (g_str_equal (type, INPUT_SOURCE_TYPE_IBUS))
+                CcInputRow *row = CC_INPUT_ROW (li->data);
+                const gchar *l, *v;
+
+                if (g_str_equal (cc_input_row_get_input_type (row), INPUT_SOURCE_TYPE_IBUS))
                         continue;
 
-                if (gnome_xkb_info_get_layout_info (self->xkb_info, id, NULL, NULL, &l, &v)) {
+                if (gnome_xkb_info_get_layout_info (self->xkb_info, cc_input_row_get_id (row), NULL, NULL, &l, &v)) {
                         if (layouts->str[0]) {
                                 g_string_append_c (layouts, ',');
                                 g_string_append_c (variants, ',');
