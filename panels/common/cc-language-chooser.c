@@ -404,7 +404,7 @@ cc_language_chooser_new (GtkWidget *parent)
         chooser = WID ("language-dialog");
         priv = g_new0 (CcLanguageChooserPrivate, 1);
         g_object_set_data_full (G_OBJECT (chooser), "private", priv, cc_language_chooser_private_free);
-        g_object_set_data_full (G_OBJECT (chooser), "builder", builder, g_object_unref);
+        g_object_set_data_full (G_OBJECT (chooser), "builder", g_object_ref (builder), g_object_unref);
 
         priv->done_button = WID ("ok-button");
         priv->filter_entry = WID ("language-filter-entry");
