@@ -389,14 +389,14 @@ update_region (CcRegionPanel *self,
 }
 
 static void
-format_response (GtkDialog *chooser,
-                 gint       response_id,
-                 CcRegionPanel *self)
+format_response (CcFormatChooser *chooser,
+                 gint             response_id,
+                 CcRegionPanel   *self)
 {
         const gchar *region;
 
         if (response_id == GTK_RESPONSE_OK) {
-                region = cc_format_chooser_get_region (GTK_WIDGET (chooser));
+                region = cc_format_chooser_get_region (chooser);
                 update_region (self, region);
         }
 
@@ -448,11 +448,10 @@ get_effective_region (CcRegionPanel *self)
 static void
 show_region_chooser (CcRegionPanel *self)
 {
-        GtkWidget *toplevel;
-        GtkWidget *chooser;
+        CcFormatChooser *chooser;
 
-        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-        chooser = cc_format_chooser_new (toplevel);
+        chooser = cc_format_chooser_new ();
+        gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
         cc_format_chooser_set_region (chooser, get_effective_region (self));
         g_signal_connect (chooser, "response",
                           G_CALLBACK (format_response), self);
