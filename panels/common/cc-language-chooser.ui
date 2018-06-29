@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkDialog" id="language-dialog">
+  <template class="CcLanguageChooser" parent="GtkDialog">
     <property name="title" translatable="yes">Language</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
     <property name="resizable">False</property>
-    <property name="use_header_bar">1</property>
     <child type="action">
-      <object class="GtkButton" id="ok-button">
+      <object class="GtkButton" id="done_button">
         <property name="label" translatable="yes">_Done</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
@@ -19,7 +18,7 @@
       </object>
     </child>
     <child type="action">
-      <object class="GtkButton" id="cancel-button">
+      <object class="GtkButton" id="cancel_button">
         <property name="label" translatable="yes">_Cancel</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
@@ -28,12 +27,12 @@
       </object>
     </child>
     <child internal-child="vbox">
-      <object class="GtkBox" id="language-vbox">
+      <object class="GtkBox">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <property name="spacing">0</property>
         <child>
-          <object class="GtkScrolledWindow" id="language-scrolledwindow">
+          <object class="GtkScrolledWindow">
             <property name="visible">True</property>
             <property name="hscrollbar-policy">never</property>
             <property name="vscrollbar-policy">automatic</property>
@@ -44,10 +43,10 @@
             <property name="margin-top">6</property>
             <property name="margin-bottom">6</property>
             <child>
-              <object class="GtkViewport" id="language-viewport">
+              <object class="GtkViewport">
                 <property name="visible">True</property>
                 <child>
-                  <object class="GtkListBox" id="language-list">
+                  <object class="GtkListBox" id="language_listbox">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="vexpand">True</property>
@@ -60,7 +59,7 @@
           </object>
         </child>
         <child>
-          <object class="GtkSearchEntry" id="language-filter-entry">
+          <object class="GtkSearchEntry" id="language_filter_entry">
             <property name="visible">False</property>
             <property name="hexpand">True</property>
             <property name="margin-start">6</property>
@@ -72,8 +71,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-5" default="true">ok-button</action-widget>
-      <action-widget response="-6">cancel-button</action-widget>
+      <action-widget response="-5" default="true">done_button</action-widget>
+      <action-widget response="-6">cancel_button</action-widget>
     </action-widgets>
-  </object>
+  </template>
 </interface>

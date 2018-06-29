@@ -72,7 +72,7 @@ struct _CcUserPanel {
         UmCarousel *carousel;
         ActUser *selected_user;
         GPermission *permission;
-        GtkWidget *language_chooser;
+        CcLanguageChooser *language_chooser;
 
         UmPasswordDialog *password_dialog;
         UmPhotoDialog *photo_dialog;
@@ -1006,7 +1006,7 @@ language_response (GtkDialog   *dialog,
         user = get_selected_user (self);
         account_language = act_user_get_language (user);
 
-        lang = cc_language_chooser_get_language (GTK_WIDGET (dialog));
+        lang = cc_language_chooser_get_language (CC_LANGUAGE_CHOOSER (dialog));
         if (lang) {
                 if (g_strcmp0 (lang, account_language) != 0) {
                         act_user_set_language (user, lang);
@@ -1036,7 +1036,9 @@ change_language (GtkButton   *button,
                 cc_language_chooser_set_language (self->language_chooser, NULL);
         }
         else {
-                self->language_chooser = cc_language_chooser_new (gtk_widget_get_toplevel (self->main_box));
+                self->language_chooser = cc_language_chooser_new ();
+                gtk_window_set_transient_for (GTK_WINDOW (self->language_chooser),
+                                              GTK_WINDOW (gtk_widget_get_toplevel (self->main_box)));
 
                 g_signal_connect (self->language_chooser, "response",
                                   G_CALLBACK (language_response), self);
