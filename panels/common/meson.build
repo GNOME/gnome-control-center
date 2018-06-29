@@ -47,7 +47,7 @@ sources = common_sources + files(
   'cc-util.c'
 )
 
-resource_data = files('language-chooser.ui')
+resource_data = files('cc-language-chooser.ui')
 
 sources += gnome.compile_resources(
   'cc-common-resources',

@@ -345,14 +345,14 @@ update_language (CcRegionPanel *self,
 }
 
 static void
-language_response (GtkDialog     *chooser,
-                   gint           response_id,
-                   CcRegionPanel *self)
+language_response (CcLanguageChooser *chooser,
+                   gint               response_id,
+                   CcRegionPanel     *self)
 {
         const gchar *language;
 
         if (response_id == GTK_RESPONSE_OK) {
-                language = cc_language_chooser_get_language (GTK_WIDGET (chooser));
+                language = cc_language_chooser_get_language (chooser);
                 update_language (self, language);
         }
 
@@ -415,11 +415,10 @@ get_effective_language (CcRegionPanel *self)
 static void
 show_language_chooser (CcRegionPanel *self)
 {
-        GtkWidget *toplevel;
-        GtkWidget *chooser;
+        CcLanguageChooser *chooser;
 
-        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-        chooser = cc_language_chooser_new (toplevel);
+        chooser = cc_language_chooser_new ();
+        gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
         cc_language_chooser_set_language (chooser, get_effective_language (self));
         g_signal_connect (chooser, "response",
                           G_CALLBACK (language_response), self);
