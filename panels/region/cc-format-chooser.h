@@ -18,20 +18,19 @@
  *     Matthias Clasen
  */
 
-#ifndef __CC_FORMAT_CHOOSER_H__
-#define __CC_FORMAT_CHOOSER_H__
+#pragma once
 
 #include <gtk/gtk.h>
-#include <glib-object.h>
 
 G_BEGIN_DECLS
 
-GtkWidget   *cc_format_chooser_new          (GtkWidget   *parent);
-void         cc_format_chooser_clear_filter (GtkWidget   *chooser);
-const gchar *cc_format_chooser_get_region   (GtkWidget   *chooser);
-void         cc_format_chooser_set_region   (GtkWidget   *chooser,
-                                             const gchar *region);
+#define CC_TYPE_FORMAT_CHOOSER (cc_format_chooser_get_type ())
+G_DECLARE_FINAL_TYPE (CcFormatChooser, cc_format_chooser, CC, FORMAT_CHOOSER, GtkDialog)
+
+CcFormatChooser *cc_format_chooser_new          (void);
+void             cc_format_chooser_clear_filter (CcFormatChooser *chooser);
+const gchar     *cc_format_chooser_get_region   (CcFormatChooser *chooser);
+void             cc_format_chooser_set_region   (CcFormatChooser *chooser,
+                                                 const gchar     *region);
 
 G_END_DECLS
-
-#endif /* __CC_FORMAT_CHOOSER_H__ */
