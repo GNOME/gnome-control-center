@@ -35,7 +35,6 @@
 #define INPUT_SOURCE_TYPE_XKB "xkb"
 #define INPUT_SOURCE_TYPE_IBUS "ibus"
 
-#define MAIN_WINDOW_WIDTH_RATIO 0.60
 #define FILTER_TIMEOUT 150 /* ms */
 
 typedef enum {
@@ -283,29 +282,6 @@ remove_all_children (GtkContainer *container)
 }
 
 static void
-set_fixed_size (GtkWidget *chooser)
-{
-  CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
-  GtkPolicyType policy;
-  gint width, height;
-
-  gtk_scrolled_window_get_policy (GTK_SCROLLED_WINDOW (priv->scrolledwindow), &policy, NULL);
-  if (policy == GTK_POLICY_AUTOMATIC)
-    return;
-
-  /* Don't let it automatically get wider than the main CC window nor
-     get taller than the initial height */
-  gtk_window_get_size (gtk_window_get_transient_for (GTK_WINDOW (chooser)),
-                       &width, NULL);
-  gtk_window_get_size (GTK_WINDOW (chooser), NULL, &height);
-  gtk_widget_set_size_request (chooser, width * MAIN_WINDOW_WIDTH_RATIO, height);
-
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->scrolledwindow),
-                                  GTK_POLICY_AUTOMATIC,
-                                  GTK_POLICY_AUTOMATIC);
-}
-
-static void
 add_input_source_rows_for_locale (GtkWidget  *chooser,
                                   LocaleInfo *info)
 {
@@ -331,8 +307,6 @@ show_input_sources_for_locale (GtkWidget   *chooser,
                                LocaleInfo  *info)
 {
   CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
-
-  set_fixed_size (chooser);
 
   remove_all_children (GTK_CONTAINER (priv->list));
 
@@ -608,8 +582,6 @@ static void
 show_more (GtkWidget *chooser)
 {
   CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
-
-  set_fixed_size (chooser);
 
   gtk_widget_show (priv->filter_entry);
   gtk_widget_grab_focus (priv->filter_entry);
@@ -1029,7 +1001,6 @@ cc_input_chooser_new (GtkWindow    *main_window,
   g_autoptr(GtkBuilder) builder = NULL;
   GtkWidget *chooser;
   CcInputChooserPrivate *priv;
-  gint width, height;
   g_autoptr(GError) error = NULL;
 
   builder = gtk_builder_new ();
@@ -1073,11 +1044,6 @@ cc_input_chooser_new (GtkWindow    *main_window,
   get_ibus_locale_infos (chooser);
 #endif  /* HAVE_IBUS */
   show_locale_rows (chooser);
-
-  /* Try to come up with a sensible size */
-  gtk_window_get_size (main_window, &width, &height);
-  gtk_widget_set_size_request (chooser, width * MAIN_WINDOW_WIDTH_RATIO, -1);
-  gtk_window_set_resizable (GTK_WINDOW (chooser), TRUE);
 
   gtk_window_set_transient_for (GTK_WINDOW (chooser), main_window);
 
