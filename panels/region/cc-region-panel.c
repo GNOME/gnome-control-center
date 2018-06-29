@@ -809,11 +809,7 @@ add_input_sources (CcRegionPanel *self,
                    GVariant      *sources)
 {
         GVariantIter iter;
-        const gchar *type;
-        const gchar *id;
-        const gchar *name;
-        g_autofree gchar *display_name = NULL;
-        g_autoptr(GDesktopAppInfo) app_info = NULL;
+        const gchar *type, *id;
 
         if (g_variant_n_children (sources) < 1) {
                 add_no_input_row (self);
@@ -822,10 +818,12 @@ add_input_sources (CcRegionPanel *self,
 
         g_variant_iter_init (&iter, sources);
         while (g_variant_iter_next (&iter, "(&s&s)", &type, &id)) {
-                display_name = NULL;
-                app_info = NULL;
+                g_autoptr(GDesktopAppInfo) app_info = NULL;
+                g_autofree gchar *display_name = NULL;
 
                 if (g_str_equal (type, INPUT_SOURCE_TYPE_XKB)) {
+                        const gchar *name;
+
                         gnome_xkb_info_get_layout_info (self->xkb_info, id, &name, NULL, NULL, NULL);
                         if (!name) {
                                 g_warning ("Couldn't find XKB input source '%s'", id);
