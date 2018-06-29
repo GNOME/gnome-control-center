@@ -27,7 +27,7 @@ sources = files(
 
 resource_data = files(
   'format-chooser.ui',
-  'input-chooser.ui',
+  'cc-input-chooser.ui',
   'input-options.ui',
   'region.ui'
 )
