@@ -662,7 +662,7 @@ update_ibus_active_sources (CcRegionPanel *self)
 static void
 update_input_chooser (CcRegionPanel *self)
 {
-        GtkWidget *chooser;
+        CcInputChooser *chooser;
 
         chooser = g_object_get_data (G_OBJECT (self), "input-chooser");
         if (!chooser)
@@ -969,7 +969,7 @@ input_source_already_added (CcRegionPanel *self,
 }
 
 static void
-run_input_chooser (CcRegionPanel *self, GtkWidget *chooser)
+run_input_chooser (CcRegionPanel *self, CcInputChooser *chooser)
 {
         if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_OK) {
                 g_autofree gchar *type = NULL;
@@ -994,21 +994,21 @@ run_input_chooser (CcRegionPanel *self, GtkWidget *chooser)
                         update_input (self);
                 }
         }
-        gtk_widget_hide(chooser);
+        gtk_widget_hide (GTK_WIDGET (chooser));
 }
 
 static void
 show_input_chooser (CcRegionPanel *self)
 {
-        GtkWidget *chooser;
-        GtkWidget *toplevel;
+        CcInputChooser *chooser;
 
         chooser = g_object_get_data (G_OBJECT (self), "input-chooser");
 
         if (!chooser) {
+                GtkWidget *toplevel;
+
                 toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-                chooser = cc_input_chooser_new (GTK_WINDOW (toplevel),
-                                                self->login,
+                chooser = cc_input_chooser_new (self->login,
                                                 self->xkb_info,
 #ifdef HAVE_IBUS
                                                 self->ibus_engines
@@ -1016,6 +1016,7 @@ show_input_chooser (CcRegionPanel *self)
                                                 NULL
 #endif
                                                 );
+                gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (toplevel));
                 g_object_ref (chooser);
                 g_object_set_data_full (G_OBJECT (self), "input-chooser",
                                         chooser, g_object_unref);
