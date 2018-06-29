@@ -15,30 +15,27 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __CC_INPUT_CHOOSER_H__
-#define __CC_INPUT_CHOOSER_H__
+#pragma once
 
 #include <gtk/gtk.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-xkb-info.h>
 
-
 G_BEGIN_DECLS
 
-GtkWidget   *cc_input_chooser_new          (GtkWindow    *parent,
-                                            gboolean      is_login,
-                                            GnomeXkbInfo *xkb_info,
-                                            GHashTable   *ibus_engines);
-void         cc_input_chooser_set_ibus_engines (GtkWidget *chooser,
-                                                GHashTable *ibus_engines);
-gboolean     cc_input_chooser_get_selected (GtkWidget    *chooser,
-                                            gchar       **type,
-                                            gchar       **id,
-                                            gchar       **name);
+#define CC_TYPE_INPUT_CHOOSER (cc_input_chooser_get_type ())
+G_DECLARE_FINAL_TYPE (CcInputChooser, cc_input_chooser, CC, INPUT_CHOOSER, GtkDialog)
 
-void         cc_input_chooser_reset (GtkWidget *chooser);
+CcInputChooser *cc_input_chooser_new              (gboolean        is_login,
+                                                   GnomeXkbInfo   *xkb_info,
+                                                   GHashTable     *ibus_engines);
+void            cc_input_chooser_set_ibus_engines (CcInputChooser *chooser,
+                                                   GHashTable     *ibus_engines);
+gboolean        cc_input_chooser_get_selected     (CcInputChooser *chooser,
+                                                   gchar         **type,
+                                                   gchar         **id,
+                                                   gchar         **name);
+void            cc_input_chooser_reset            (CcInputChooser *chooser);
 
 G_END_DECLS
-
-#endif /* __CC_INPUT_CHOOSER_H__ */
