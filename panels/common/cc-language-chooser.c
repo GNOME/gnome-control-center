@@ -42,6 +42,7 @@ struct _CcLanguageChooser {
         GtkWidget *done_button;
         GtkWidget *no_results;
         GtkListBoxRow *more_item;
+        GtkWidget *search_bar;
         GtkWidget *language_filter_entry;
         GtkWidget *language_listbox;
         gboolean showing_extra;
@@ -279,9 +280,8 @@ show_more (CcLanguageChooser *chooser, gboolean visible)
 
         gtk_window_get_size (GTK_WINDOW (chooser), &width, &height);
         gtk_widget_set_size_request (GTK_WIDGET (chooser), width, height);
-        gtk_window_set_resizable (GTK_WINDOW (chooser), TRUE);
 
-        gtk_widget_set_visible (chooser->language_filter_entry, visible);
+        gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (chooser->search_bar), visible);
         gtk_widget_grab_focus (visible ? chooser->language_filter_entry : chooser->language_listbox);
 
         chooser->showing_extra = visible;
@@ -423,6 +423,7 @@ cc_language_chooser_class_init (CcLanguageChooserClass *klass)
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-language-chooser.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, done_button);
+        gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, search_bar);
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, language_filter_entry);
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, language_listbox);
 }

@@ -5,7 +5,7 @@
     <property name="title" translatable="yes">Language</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
-    <property name="resizable">False</property>
+    <property name="default_height">350</property>
     <child type="action">
       <object class="GtkButton" id="done_button">
         <property name="label" translatable="yes">_Done</property>
@@ -32,16 +32,24 @@
         <property name="orientation">vertical</property>
         <property name="spacing">0</property>
         <child>
+          <object class="GtkSearchBar" id="search_bar">
+            <property name="visible">True</property>
+            <property name="hexpand">True</property>
+            <child>
+              <object class="GtkSearchEntry" id="language_filter_entry">
+                <property name="visible">True</property>
+                <property name="width_chars">30</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
           <object class="GtkScrolledWindow">
             <property name="visible">True</property>
             <property name="hscrollbar-policy">never</property>
             <property name="vscrollbar-policy">automatic</property>
             <property name="propagate-natural-height">True</property>
-            <property name="shadow-type">in</property>
-            <property name="margin-start">6</property>
-            <property name="margin-end">6</property>
-            <property name="margin-top">6</property>
-            <property name="margin-bottom">6</property>
+            <property name="min-content-height">200</property>
             <child>
               <object class="GtkViewport">
                 <property name="visible">True</property>
@@ -56,16 +64,6 @@
                 </child>
               </object>
             </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkSearchEntry" id="language_filter_entry">
-            <property name="visible">False</property>
-            <property name="hexpand">True</property>
-            <property name="margin-start">6</property>
-            <property name="margin-end">6</property>
-            <property name="margin-top">6</property>
-            <property name="margin-bottom">6</property>
           </object>
         </child>
       </object>
