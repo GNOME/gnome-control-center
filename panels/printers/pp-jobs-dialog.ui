@@ -17,7 +17,7 @@
         <property name="orientation">vertical</property>
         <property name="spacing">20</property>
         <child>
-          <object class="GtkLabel" id="authentication-label">
+          <object class="GtkLabel" id="authentication_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_top">5</property>
@@ -37,7 +37,7 @@
             <property name="row_spacing">10</property>
             <property name="column_spacing">15</property>
             <child>
-              <object class="GtkLabel" id="domain-label">
+              <object class="GtkLabel" id="domain_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
@@ -50,7 +50,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="username-label">
+              <object class="GtkLabel" id="username_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
@@ -63,7 +63,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="password-label">
+              <object class="GtkLabel" id="password_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
@@ -76,10 +76,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="domain-entry">
+              <object class="GtkEntry" id="domain_entry">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
+                <signal name="changed" handler="auth_entries_changed" swapped="true"/>
+                <signal name="activate" handler="auth_entries_activated" swapped="true"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -87,10 +89,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="username-entry">
+              <object class="GtkEntry" id="username_entry">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
+                <signal name="changed" handler="auth_entries_changed" swapped="true"/>
+                <signal name="activate" handler="auth_entries_activated" swapped="true"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -98,13 +102,15 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="password-entry">
+              <object class="GtkEntry" id="password_entry">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
                 <property name="visibility">False</property>
                 <property name="invisible_char">*</property>
                 <property name="input_purpose">password</property>
+                <signal name="changed" handler="auth_entries_changed" swapped="true"/>
+                <signal name="activate" handler="auth_entries_activated" swapped="true"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -119,13 +125,14 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="authenticate-button">
+          <object class="GtkButton" id="authenticate_button">
             <property name="label" translatable="yes" comments="Translators: This button authenticates all print jobs and send them for printing.">A_uthenticate</property>
             <property name="use_underline">True</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="halign">end</property>
+            <signal name="clicked" handler="authenticate_button_clicked" swapped="yes"/>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -138,12 +145,12 @@
   </object>
   <object class="GtkSizeGroup">
     <widgets>
-      <widget name="domain-label"/>
-      <widget name="username-label"/>
-      <widget name="password-label"/>
+      <widget name="domain_label"/>
+      <widget name="username_label"/>
+      <widget name="password_label"/>
     </widgets>
   </object>
-  <object class="GtkDialog" id="jobs-dialog">
+  <template class="PpJobsDialog" parent="GtkDialog">
     <property name="width_request">720</property>
     <property name="height_request">500</property>
     <property name="can_focus">False</property>
@@ -152,20 +159,20 @@
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
-    <property name="use-header-bar">1</property>
     <child internal-child="headerbar">
-      <object class="GtkHeaderBar" id="dialog-header-bar">
+      <object class="GtkHeaderBar">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="show_close_button">True</property>
         <child>
-          <object class="GtkButton" id="jobs-clear-all-button">
+          <object class="GtkButton" id="jobs_clear_all_button">
             <property name="label" translatable="yes" comments="Translators: this action removes (purges) all the listed jobs from the list.">Clear All</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="use_underline">True</property>
             <property name="valign">center</property>
+            <signal name="clicked" handler="on_clear_all_button_clicked" swapped="yes"/>
             <style>
               <class name="destructive-action"/>
             </style>
@@ -174,7 +181,7 @@
       </object>
     </child>
     <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox1">
+      <object class="GtkBox">
         <property name="can_focus">False</property>
         <property name="border_width">0</property>
         <style>
@@ -192,7 +199,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkInfoBar" id="authentication-infobar">
+          <object class="GtkInfoBar" id="authentication_infobar">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="border_width">0</property>
@@ -206,7 +213,7 @@
                 <property name="layout_style">end</property>
                 <property name="margin-end">2</property>
                 <child>
-                  <object class="GtkMenuButton" id="authenticate-jobs-button">
+                  <object class="GtkMenuButton" id="authenticate_jobs_button">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -265,7 +272,7 @@
                 <property name="spacing">16</property>
                 <property name="margin-start">12</property>
                 <child>
-                  <object class="GtkLabel" id="authenticate-jobs-label">
+                  <object class="GtkLabel" id="authenticate_jobs_label">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="halign">start</property>
@@ -300,14 +307,14 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkScrolledWindow" id="scrolledwindow">
+              <object class="GtkScrolledWindow" id="list_jobs_page">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="vexpand">True</property>
                 <property name="hscrollbar-policy">never</property>
                 <property name="shadow_type">none</property>
                 <child>
-                  <object class="GtkListBox" id="jobs-listbox">
+                  <object class="GtkListBox" id="jobs_listbox">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="halign">fill</property>
@@ -319,19 +326,16 @@
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="name">list-jobs-page</property>
-              </packing>
             </child>
             <child>
-              <object class="GtkBox" id="no-jobs-dialog">
+              <object class="GtkBox" id="no_jobs_page">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="spacing">10</property>
                 <property name="orientation">vertical</property>
                 <property name="valign">center</property>
                 <child>
-                  <object class="GtkImage" id="no-printer-image">
+                  <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="valign">start</property>
@@ -348,7 +352,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="no-printer-label">
+                  <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes" comments="Translators: this label describes the dialog empty state, with no jobs listed.">No Active Printer Jobs</property>
@@ -364,7 +368,6 @@
                 </child>
               </object>
               <packing>
-                <property name="name">no-jobs-page</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -380,5 +383,5 @@
     <child>
       <placeholder/>
     </child>
-  </object>
+  </template>
 </interface>
