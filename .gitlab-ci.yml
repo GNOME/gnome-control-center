@@ -271,3 +271,67 @@ ppc64le:
     DOCKER_DRIVER: overlay
     IMAGE: "claudioandre/settings:fedora.ppc64le"
   when: manual
+
+#############################################
+#          Create CI Docker Images          #
+#############################################
+.Docker image template: &create_docker_image
+  image: docker:latest
+  stage: delivery
+  services:
+    - docker:dind
+  only:
+    variables:
+      - $CRON_TASK == "BUILD_CI_IMAGES"
+
+  script:
+    # Skip the build (if requested)
+    - |
+      if [[ -z "${CI_COMMIT_MESSAGE##*[skip images]*}" && -z "${CI_COMMIT_MESSAGE##*$NAME*}" ]]; then
+        echo "== Nothing to do =="
+        exit 0
+      fi
+
+    # Get multiarch stuff
+    - |
+      if [[ -n "${TARGET_ARCH}" ]]; then
+        docker run --rm --privileged multiarch/qemu-user-static:register --reset
+        wget https://github.com/multiarch/qemu-user-static/releases/download/v2.12.0/x86_64_qemu-${TARGET_ARCH}-static.tar.gz
+      fi
+
+    # Build using the Dockerfile
+    - docker build -f "$DOCKERFILE" -t "$CI_REGISTRY_IMAGE:$NAME" .
+
+    # Prepare to publish
+    - docker tag "$CI_REGISTRY_IMAGE:$NAME" "$CI_REGISTRY_IMAGE:job-"$CI_JOB_ID"_$NAME"
+    - docker images
+    - docker login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}
+
+    # Publish (if running on a schedule)
+    - |
+      if [[ "${CI_PIPELINE_SOURCE}" == "schedule" ]]; then
+        docker push "$CI_REGISTRY_IMAGE"
+      fi
+
+fedora.dev:
+  <<: *create_docker_image
+  variables:
+    DOCKER_DRIVER: overlay
+    DOCKERFILE: "build-aux/ci/Dockerfile.fedora.rawhide"
+    NAME: "fedora.dev"
+
+fedora.aarch64:
+  <<: *create_docker_image
+  variables:
+    DOCKER_DRIVER: overlay
+    DOCKERFILE: "build-aux/ci/Dockerfile.arm64v8.fedora.rawhide"
+    NAME: "fedora.aarch64"
+    TARGET_ARCH: "aarch64"
+
+fedora.ppc64le:
+  <<: *create_docker_image
+  variables:
+    DOCKER_DRIVER: overlay
+    DOCKERFILE: "build-aux/ci/Dockerfile.ppc64le.fedora.rawhide"
+    NAME: "fedora.ppc64le"
+    TARGET_ARCH: "ppc64le"
