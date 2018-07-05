@@ -36,7 +36,7 @@ stages:
 # most important stage of the CI, and no MR should ever be merged if it breaks
 # any of them.
 ##
-build:
+.build:
   <<: *save_untracked_files
   stage: build
 
@@ -58,7 +58,7 @@ build:
 #
 # Runs the unit tests.
 ##
-test:
+.test:
   <<: *save_build_logs
   stage: test
 
@@ -83,7 +83,7 @@ test:
 #
 # Runs the coverage test.
 ##
-coverage:
+.coverage:
   <<: *save_build_logs
   stage: test
   variables:
@@ -108,7 +108,7 @@ coverage:
 #
 # Publish the Coverage Report generated above
 ##
-pages:
+.pages:
   stage: delivery
   dependencies:
     - coverage
@@ -125,7 +125,7 @@ pages:
 #
 # Runs the address sanitizer.
 ##
-asan:
+.asan:
   <<: *save_build_logs
   stage: test
   allow_failure: true
@@ -195,3 +195,89 @@ packaging:
     name: review/$CI_COMMIT_REF_NAME
     url: https://gitlab.gnome.org/$CI_PROJECT_PATH/-/jobs/$CI_JOB_ID/artifacts/raw/${BUNDLE}
   when: manual
+
+#############################################
+#          Create CI Docker Images          #
+#############################################
+.images_template: &create_images
+  image: docker:latest
+  stage: delivery
+  services:
+    - docker:dind
+  only:
+    variables:
+      - $CRON_TASK == "BUILD_CI_IMAGES"
+
+  script:
+    # Skip the build (if requested)
+    - |
+      if [[ -z "${CI_COMMIT_MESSAGE##*[skip images]*}" && -z "${CI_COMMIT_MESSAGE##*$NAME*}" ]]; then
+        echo "== Nothing to do =="
+        exit 0
+      fi
+
+    # Register QEMU archs
+    - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
+    # Get multiarch stuff
+    - |
+      if [[ -n "${TARGET_ARCH}" ]]; then
+        wget https://github.com/multiarch/qemu-user-static/releases/download/v2.12.0/x86_64_qemu-${TARGET_ARCH}-static.tar.gz
+      fi
+
+    # Build using the Dockerfile
+    - |
+      if [[ -n "${DOCKERFILE}" ]]; then
+        docker build -f "$DOCKERFILE" -t "$IMAGE" .
+      fi
+
+    # Prepare to publish
+    - docker tag "$IMAGE" "$REPO:job-"$CI_JOB_ID"_$NAME"
+    - docker images
+    - docker login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}
+
+    # Do not push (if requested)
+    - |
+      if [[ "${CI_PIPELINE_SOURCE}" == "schedule" || -n "${CI_COMMIT_MESSAGE##*[dont push]*}" ]]; then
+        docker push $REPO
+      fi
+
+fedora.dev:
+  <<: *create_images
+  variables:
+    BASE: "fedora"
+    DOCKER_DRIVER: overlay
+    DOCKERFILE: "build-aux/ci/Dockerfile.fedora.rawhide"
+    IMAGE: "${CI_REGISTRY}/${CI_PROJECT_PATH}:fedora.dev"
+    NAME: "fedora.dev"
+    REPO: "${CI_REGISTRY}/${CI_PROJECT_PATH}"
+    CRON_TASK: "BUILD_CI_IMAGES"
+
+fedora.aarch64:
+  <<: *create_images
+  variables:
+    BASE: "fedora"
+    DEV: "devel"
+    DOCKER_DRIVER: overlay
+    DOCKERFILE: "build-aux/ci/Dockerfile.arm64v8.fedora.rawhide"
+    IMAGE: "${CI_REGISTRY}/${CI_PROJECT_PATH}:fedora.aarch64"
+    NAME: "fedora.aarch64"
+    REPO: "${CI_REGISTRY}/${CI_PROJECT_PATH}"
+    STATIC: "qemu"
+    TARGET_ARCH: "aarch64"
+    CRON_TASK: "BUILD_CI_IMAGES"
+
+fedora.ppc64le:
+  <<: *create_images
+  variables:
+    BASE: "fedora"
+    DEV: "devel"
+    DOCKER_DRIVER: overlay
+    DOCKERFILE: "build-aux/ci/Dockerfile.ppc64le.fedora.rawhide"
+    IMAGE: "${CI_REGISTRY}/${CI_PROJECT_PATH}:fedora.ppc64le"
+    NAME: "fedora.ppc64le"
+    REPO: "${CI_REGISTRY}/${CI_PROJECT_PATH}"
+    STATIC: "qemu"
+    TARGET_ARCH: "ppc64le"
+    CRON_TASK: "BUILD_CI_IMAGES"
+
