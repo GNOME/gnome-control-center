@@ -173,31 +173,47 @@ cc_application_command_line (GApplication            *application,
     {
       const char *start_id;
       GError *err = NULL;
-      GVariant *parameters;
-      GVariantBuilder builder;
-      int i;
 
       g_return_val_if_fail (start_panels[0] != NULL, 1);
       start_id = start_panels[0];
-
-      if (start_panels[1])
-        g_debug ("Extra argument: %s", start_panels[1]);
-      else
-        g_debug ("No extra argument");
-
-      g_variant_builder_init (&builder, G_VARIANT_TYPE ("av"));
-
-      for (i = 1; start_panels[i] != NULL; i++)
-        g_variant_builder_add (&builder, "v", g_variant_new_string (start_panels[i]));
-      parameters = g_variant_builder_end (&builder);
-      if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), start_id, parameters, &err))
+      if (g_str_has_prefix (start_id, "settings://"))
         {
-          g_warning ("Could not load setting panel \"%s\": %s", start_id,
-                     (err) ? err->message : "Unknown error");
-          retval = 1;
+          g_autofree gchar *scheme = g_strdup(start_id + strlen("settings://"));
+          if (!cc_shell_set_active_panel_from_scheme (CC_SHELL (self->window), scheme, &err))
+            {
+              g_warning ("Could not load setting panel \"%s\": %s", start_id,
+                         (err) ? err->message : "Unknown error");
+              retval = 1;
 
-          if (err)
-            g_clear_error (&err);
+              if (err)
+                g_clear_error (&err);
+            }
+        }
+      else
+        {
+          GVariant *parameters;
+          GVariantBuilder builder;
+          int i;
+
+          if (start_panels[1])
+            g_debug ("Extra argument: %s", start_panels[1]);
+          else
+            g_debug ("No extra argument");
+
+          g_variant_builder_init (&builder, G_VARIANT_TYPE ("av"));
+
+          for (i = 1; start_panels[i] != NULL; i++)
+            g_variant_builder_add (&builder, "v", g_variant_new_string (start_panels[i]));
+          parameters = g_variant_builder_end (&builder);
+          if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), start_id, parameters, &err))
+            {
+              g_warning ("Could not load setting panel \"%s\": %s", start_id,
+                         (err) ? err->message : "Unknown error");
+              retval = 1;
+
+              if (err)
+                g_clear_error (&err);
+            }
         }
     }
 
