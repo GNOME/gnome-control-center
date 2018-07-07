@@ -27,6 +27,7 @@
 #include <gio/gdesktopappinfo.h>
 
 #define GNOME_SETTINGS_PANEL_ID_KEY "X-GNOME-Settings-Panel"
+#define GNOME_SETTINGS_SCHEMAS_KEY "X-GNOME-Settings-Schemas"
 #define GNOME_SETTINGS_PANEL_CATEGORY GNOME_SETTINGS_PANEL_ID_KEY
 #define GNOME_SETTINGS_PANEL_ID_KEYWORDS "Keywords"
 
@@ -255,7 +256,7 @@ static void
 cc_shell_model_init (CcShellModel *self)
 {
   GType types[] = {G_TYPE_STRING, G_TYPE_STRING, G_TYPE_APP_INFO, G_TYPE_STRING, G_TYPE_UINT,
-                   G_TYPE_STRING, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV, G_TYPE_UINT };
+                   G_TYPE_STRING, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV, G_TYPE_UINT, G_TYPE_STRV };
 
   gtk_list_store_set_column_types (GTK_LIST_STORE (self),
                                    N_COLS, types);
@@ -292,6 +293,22 @@ get_casefolded_keywords (GAppInfo *appinfo)
   return casefolded_keywords;
 }
 
+static gchar **
+get_schemes (GAppInfo *appinfo)
+{
+  char *schemes_str;
+  gchar **schemes;
+
+  schemes_str = g_desktop_app_info_get_string (G_DESKTOP_APP_INFO (appinfo), GNOME_SETTINGS_SCHEMAS_KEY);
+  if (!schemes_str)
+    return NULL;
+
+  schemes = g_strsplit (schemes_str, ";", -1);
+  g_free (schemes_str);
+
+  return schemes;
+}
+
 void
 cc_shell_model_add_item (CcShellModel    *model,
                          CcPanelCategory  category,
@@ -302,11 +319,13 @@ cc_shell_model_add_item (CcShellModel    *model,
   const gchar *name = g_app_info_get_name (appinfo);
   const gchar *comment = g_app_info_get_description (appinfo);
   char **keywords;
+  gchar **schemes;
   char *casefolded_name, *casefolded_description;
 
   casefolded_name = cc_util_normalize_casefold_and_unaccent (name);
   casefolded_description = cc_util_normalize_casefold_and_unaccent (comment);
   keywords = get_casefolded_keywords (appinfo);
+  schemes = get_schemes (appinfo);
 
   gtk_list_store_insert_with_values (GTK_LIST_STORE (model), NULL, 0,
                                      COL_NAME, name,
@@ -319,11 +338,13 @@ cc_shell_model_add_item (CcShellModel    *model,
                                      COL_GICON, icon,
                                      COL_KEYWORDS, keywords,
                                      COL_VISIBILITY, CC_PANEL_VISIBLE,
+                                     COL_SCHEMES, schemes,
                                      -1);
 
   g_free (casefolded_name);
   g_free (casefolded_description);
   g_strfreev (keywords);
+  g_strfreev (schemes);
 }
 
 gboolean

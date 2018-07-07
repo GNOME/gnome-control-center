@@ -328,7 +328,7 @@ setup_model (CcWindow *shell)
       g_autofree gchar *description = NULL;
       g_autofree gchar *id = NULL;
       g_autofree gchar *icon_name = NULL;
-      g_autofree GStrv keywords = NULL;
+      g_auto(GStrv) keywords = NULL;
       CcPanelVisibility visibility;
 
       gtk_tree_model_get (model, &iter,
@@ -537,7 +537,7 @@ gdk_window_set_cb (GObject    *object,
                    CcWindow   *self)
 {
   GdkWindow *window;
-  gchar *str;
+  g_autofree gchar *str = NULL;
 
   if (!GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     return;
@@ -549,7 +549,6 @@ gdk_window_set_cb (GObject    *object,
 
   str = g_strdup_printf ("%u", (guint) GDK_WINDOW_XID (window));
   g_setenv ("GNOME_CONTROL_CENTER_XID", str, TRUE);
-  g_free (str);
 }
 
 static gboolean
@@ -641,7 +640,7 @@ split_decorations_cb (GtkSettings *settings,
   g_autofree gchar *layout = NULL;
   g_autofree gchar *layout_start = NULL;
   g_autofree gchar *layout_end = NULL;
-  g_autofree gchar **buttons;
+  g_auto(GStrv) buttons = NULL;
 
   g_object_get (settings, "gtk-decoration-layout", &layout, NULL);
 
@@ -678,6 +677,50 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
   return set_active_panel_from_id (shell, start_id, parameters, TRUE, error);
 }
 
+static gboolean
+cc_window_set_active_panel_from_scheme (CcShell      *shell,
+                                        const gchar  *scheme,
+                                        GError      **error)
+{
+  GtkTreeIter iter;
+  CcWindow *self;
+  gboolean iter_valid;
+
+  g_assert (CC_IS_WINDOW (shell));
+
+  self = CC_WINDOW (shell);
+  iter_valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->store), &iter);
+
+  /* find the details for this item */
+  while (iter_valid)
+    {
+      g_autofree gchar *id = NULL;
+      g_auto(GStrv) schemes = NULL;
+
+      gtk_tree_model_get (GTK_TREE_MODEL (self->store), &iter,
+                          COL_SCHEMES, &schemes,
+                          COL_ID, &id,
+                          -1);
+
+      for (int i = 0; schemes != NULL && schemes[i] != NULL; i++) {
+        if (g_strcmp0 (schemes[i], scheme) == 0)
+          {
+            GVariant *parameters;
+            GVariantBuilder builder;
+
+            g_variant_builder_init (&builder, G_VARIANT_TYPE ("av"));
+            parameters = g_variant_builder_end (&builder);
+            return cc_window_set_active_panel_from_id (shell, id, parameters, error);
+          }
+      }
+
+      iter_valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (self->store), &iter);
+    }
+
+    g_warning ("Could not find settings panel matching scheme \"%s\"", scheme);
+    return TRUE;
+}
+
 static void
 cc_window_embed_widget_in_header (CcShell   *shell,
                                   GtkWidget *widget)
@@ -705,6 +748,7 @@ static void
 cc_shell_iface_init (CcShellInterface *iface)
 {
   iface->set_active_panel_from_id = cc_window_set_active_panel_from_id;
+  iface->set_active_panel_from_scheme = cc_window_set_active_panel_from_scheme;
   iface->embed_widget_in_header = cc_window_embed_widget_in_header;
   iface->get_toplevel = cc_window_get_toplevel;
 }
