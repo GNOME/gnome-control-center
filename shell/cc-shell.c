@@ -123,6 +123,40 @@ cc_shell_set_active_panel_from_id (CcShell      *shell,
 }
 
 /**
+ * cc_shell_set_active_panel_from_scheme:
+ * @shell: A #CcShell
+ * @scheme: One scheme of the panel to set as active
+ * @error: A #GError
+ *
+ * Find a panel corresponding to the specified scheme and set it as active.
+ *
+ * Returns: #TRUE if the panel was found and set as the active panel
+ */
+gboolean
+cc_shell_set_active_panel_from_scheme (CcShell      *shell,
+                                       const gchar  *scheme,
+                                       GError      **error)
+{
+  CcShellInterface *iface;
+
+  g_return_val_if_fail (CC_IS_SHELL (shell), FALSE);
+
+  iface = CC_SHELL_GET_IFACE (shell);
+
+  if (!iface->set_active_panel_from_scheme)
+    {
+      g_warning ("Object of type \"%s\" does not implement required interface"
+                 " method \"set_active_panel_from_scheme\",",
+                 G_OBJECT_TYPE_NAME (shell));
+      return FALSE;
+    }
+  else
+    {
+      return iface->set_active_panel_from_scheme (shell, scheme, error);
+    }
+}
+
+/**
  * cc_shell_get_toplevel:
  * @shell: A #CcShell
  *
