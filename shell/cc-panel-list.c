@@ -212,7 +212,7 @@ row_data_new (CcPanelCategory     category,
               const gchar        *id,
               const gchar        *name,
               const gchar        *description,
-              gchar             **keywords,
+              const GStrv         keywords,
               const gchar        *icon,
               CcPanelVisibility   visibility)
 {
@@ -928,7 +928,7 @@ cc_panel_list_add_panel (CcPanelList        *self,
                          const gchar        *id,
                          const gchar        *title,
                          const gchar        *description,
-                         gchar             **keywords,
+                         const GStrv         keywords,
                          const gchar        *icon,
                          CcPanelVisibility   visibility)
 {

@@ -59,7 +59,7 @@ void                 cc_panel_list_add_panel                     (CcPanelList   
                                                                   const gchar        *id,
                                                                   const gchar        *title,
                                                                   const gchar        *description,
-                                                                  gchar             **keywords,
+                                                                  const GStrv         keywords,
                                                                   const gchar        *icon,
                                                                   CcPanelVisibility   visibility);
 
