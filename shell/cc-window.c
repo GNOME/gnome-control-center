@@ -328,7 +328,7 @@ setup_model (CcWindow *shell)
       g_autofree gchar *description = NULL;
       g_autofree gchar *id = NULL;
       g_autofree gchar *icon_name = NULL;
-      g_autofree GStrv keywords = NULL;
+      g_auto(GStrv) keywords = NULL;
       CcPanelVisibility visibility;
 
       gtk_tree_model_get (model, &iter,
@@ -537,7 +537,7 @@ gdk_window_set_cb (GObject    *object,
                    CcWindow   *self)
 {
   GdkWindow *window;
-  gchar *str;
+  g_autofree gchar *str = NULL;
 
   if (!GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     return;
@@ -549,7 +549,6 @@ gdk_window_set_cb (GObject    *object,
 
   str = g_strdup_printf ("%u", (guint) GDK_WINDOW_XID (window));
   g_setenv ("GNOME_CONTROL_CENTER_XID", str, TRUE);
-  g_free (str);
 }
 
 static gboolean
@@ -641,7 +640,7 @@ split_decorations_cb (GtkSettings *settings,
   g_autofree gchar *layout = NULL;
   g_autofree gchar *layout_start = NULL;
   g_autofree gchar *layout_end = NULL;
-  g_autofree gchar **buttons;
+  g_auto(GStrv) buttons = NULL;
 
   g_object_get (settings, "gtk-decoration-layout", &layout, NULL);
 
