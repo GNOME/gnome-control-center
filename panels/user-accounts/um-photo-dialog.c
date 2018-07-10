@@ -40,7 +40,7 @@
 #include "um-utils.h"
 
 #define ROW_SPAN 5
-#define AVATAR_PIXEL_SIZE 72
+#define AVATAR_PIXEL_SIZE 80
 
 struct _UmPhotoDialog {
         GtkPopover parent;
