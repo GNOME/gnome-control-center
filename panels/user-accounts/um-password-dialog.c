@@ -281,20 +281,20 @@ update_password_match (UmPasswordDialog *um)
 {
         const char *password;
         const char *verify;
+        gboolean have_password, passwords_match;
+        const char *message = "";
 
         password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
         verify = gtk_entry_get_text (GTK_ENTRY (um->verify_entry));
+        have_password = strlen (password) > 0 || strlen (verify) > 0;
+        passwords_match = g_strcmp0 (password, verify) == 0;
 
-        if (strlen (password) > 0 && strlen (verify) > 0) {
-                if (strcmp (password, verify) != 0) {
-                        gtk_label_set_label (GTK_LABEL (um->verify_hint),
-                                             _("The passwords do not match."));
-                }
-                else {
-                        gtk_label_set_label (GTK_LABEL (um->verify_hint), "");
-                        set_entry_validation_checkmark (GTK_ENTRY (um->verify_entry));
-                }
-        }
+        if (have_password && !passwords_match)
+                message = _("The passwords do not match.");
+        gtk_label_set_label (GTK_LABEL (um->verify_hint), message);
+
+        if (have_password && passwords_match)
+                set_entry_validation_checkmark (GTK_ENTRY (um->verify_entry));
 }
 
 static gboolean
