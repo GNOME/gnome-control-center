@@ -450,17 +450,20 @@ update_password_match (UmAccountDialog *self)
 {
         const gchar *password;
         const gchar *verify;
+        gboolean have_password, passwords_match;
+        const gchar *message = "";
 
         password = gtk_entry_get_text (GTK_ENTRY (self->local_password));
         verify = gtk_entry_get_text (GTK_ENTRY (self->local_verify));
-        if (strlen (verify) != 0) {
-                if (strcmp (password, verify) != 0) {
-                        gtk_label_set_label (GTK_LABEL (self->local_verify_hint), _("Passwords do not match."));
-                } else {
-                        gtk_label_set_label (GTK_LABEL (self->local_verify_hint), "");
-                        set_entry_validation_checkmark (GTK_ENTRY (self->local_verify));
-                }
-        }
+        have_password = strlen (password) > 0 || strlen (verify) > 0;
+        passwords_match = g_strcmp0 (password, verify) == 0;
+
+        if (have_password && !passwords_match)
+                message = _("Passwords do not match.");
+        gtk_label_set_label (GTK_LABEL (self->local_verify_hint), message);
+
+        if (have_password && passwords_match)
+                set_entry_validation_checkmark (GTK_ENTRY (self->local_verify));
 }
 
 static void
