@@ -60,7 +60,7 @@ method_changed (GtkToggleButton *radio, CEPageIP4 *page)
         gboolean routes_enabled;
         GtkWidget *widget;
 
-        if (RADIO_IS_ACTIVE ("radio_disabled")) {
+        if (RADIO_IS_ACTIVE ("radio_disabled") || RADIO_IS_ACTIVE ("radio_shared")) {
                 addr_enabled = FALSE;
                 dns_enabled = FALSE;
                 routes_enabled = FALSE;
@@ -502,6 +502,7 @@ enum
         RADIO_AUTOMATIC,
         RADIO_LOCAL,
         RADIO_MANUAL,
+        RADIO_SHARED,
         RADIO_DISABLED,
         N_RADIO
 };
@@ -550,6 +551,7 @@ connect_ip4_page (CEPageIP4 *page)
         radios[RADIO_AUTOMATIC] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_automatic"));
         radios[RADIO_LOCAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_local"));
         radios[RADIO_MANUAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_manual"));
+        radios[RADIO_SHARED] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_shared"));
         radios[RADIO_DISABLED] = page->disabled;
 
         for (i = RADIO_AUTOMATIC; i < RADIO_DISABLED; i++)
@@ -564,6 +566,9 @@ connect_ip4_page (CEPageIP4 *page)
                 break;
         case IP4_METHOD_MANUAL:
                 gtk_toggle_button_set_active (radios[RADIO_MANUAL], TRUE);
+                break;
+        case IP4_METHOD_SHARED:
+                gtk_toggle_button_set_active (radios[RADIO_SHARED], TRUE);
                 break;
         case IP4_METHOD_DISABLED:
                 gtk_toggle_button_set_active (radios[RADIO_DISABLED], TRUE);
@@ -627,6 +632,8 @@ ui_to_setting (CEPageIP4 *page)
                         method = NM_SETTING_IP4_CONFIG_METHOD_LINK_LOCAL;
                 else if (RADIO_IS_ACTIVE ("radio_manual"))
                         method = NM_SETTING_IP4_CONFIG_METHOD_MANUAL;
+                else if (RADIO_IS_ACTIVE ("radio_shared"))
+                        method = NM_SETTING_IP4_CONFIG_METHOD_SHARED;
         }
 
         addresses = g_ptr_array_new_with_free_func ((GDestroyNotify) nm_ip_address_unref);
