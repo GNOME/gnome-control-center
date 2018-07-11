@@ -55,6 +55,7 @@ struct _CEPageIP6
         GtkBox            *routes_box;
         GtkSizeGroup      *routes_metric_sizegroup;
         GtkSizeGroup      *routes_sizegroup;
+        GtkRadioButton    *shared_radio;
 
         NMSettingIPConfig *setting;
 
@@ -88,7 +89,8 @@ method_changed (CEPageIP6 *self)
         gboolean dns_enabled;
         gboolean routes_enabled;
 
-        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->disabled_radio))) {
+        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->disabled_radio)) ||
+            gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->shared_radio))) {
                 addr_enabled = FALSE;
                 dns_enabled = FALSE;
                 routes_enabled = FALSE;
@@ -482,6 +484,11 @@ connect_ip6_page (CEPageIP6 *self)
                                 self->content_box, "sensitive",
                                 G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
 
+        g_signal_connect_swapped (self->shared_radio, "notify::active", G_CALLBACK (ce_page_changed), self);
+        g_object_bind_property (self->shared_radio, "active",
+                                self->content_box, "sensitive",
+                                G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
+
         method = IP6_METHOD_AUTO;
         if (g_strcmp0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_DHCP) == 0) {
                 method = IP6_METHOD_DHCP;
@@ -519,6 +526,9 @@ connect_ip6_page (CEPageIP6 *self)
         case IP6_METHOD_MANUAL:
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->manual_radio), TRUE);
                 break;
+        case IP6_METHOD_SHARED:
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->shared_radio), TRUE);
+                break;
         case IP6_METHOD_IGNORE:
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->disabled_radio), TRUE);
                 break;
@@ -552,6 +562,8 @@ ui_to_setting (CEPageIP6 *self)
                 method = NM_SETTING_IP6_CONFIG_METHOD_DHCP;
         else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->automatic_radio)))
                 method = NM_SETTING_IP6_CONFIG_METHOD_AUTO;
+        else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->shared_radio)))
+                method = NM_SETTING_IP6_CONFIG_METHOD_SHARED;
 
         nm_setting_ip_config_clear_addresses (self->setting);
         if (g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_MANUAL)) {
@@ -810,6 +822,7 @@ ce_page_ip6_class_init (CEPageIP6Class *klass)
         gtk_widget_class_bind_template_child (widget_class, CEPageIP6, routes_box);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP6, routes_metric_sizegroup);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP6, routes_sizegroup);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP6, shared_radio);
 }
 
 static void
