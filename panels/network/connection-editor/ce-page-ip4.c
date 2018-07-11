@@ -60,7 +60,7 @@ method_changed (GtkToggleButton *radio, CEPageIP4 *page)
         gboolean routes_enabled;
         GtkWidget *widget;
 
-        if (RADIO_IS_ACTIVE ("radio_disabled")) {
+        if (RADIO_IS_ACTIVE ("radio_disabled") || RADIO_IS_ACTIVE ("radio_shared")) {
                 addr_enabled = FALSE;
                 dns_enabled = FALSE;
                 routes_enabled = FALSE;
@@ -502,6 +502,7 @@ enum
         RADIO_AUTOMATIC,
         RADIO_LOCAL,
         RADIO_MANUAL,
+        RADIO_SHARED,
         RADIO_DISABLED,
         N_RADIO
 };
@@ -519,13 +520,21 @@ connect_ip4_page (CEPageIP4 *page)
         add_routes_section (page);
 
         radios[RADIO_DISABLED] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_disabled"));
+        radios[RADIO_SHARED] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_shared"));
 
-        str_method = nm_setting_ip_config_get_method (page->setting);
-        g_signal_connect_swapped (radios[RADIO_DISABLED], "notify::active", G_CALLBACK (ce_page_changed), page);
         content = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "page_content"));
+
+        g_signal_connect_swapped (radios[RADIO_DISABLED], "notify::active", G_CALLBACK (ce_page_changed), page);
         g_object_bind_property (radios[RADIO_DISABLED], "active",
                                 content, "sensitive",
                                 G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
+
+        g_signal_connect_swapped (radios[RADIO_SHARED], "notify::active", G_CALLBACK (ce_page_changed), page);
+        g_object_bind_property (radios[RADIO_SHARED], "active",
+                                content, "sensitive",
+                                G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
+
+        str_method = nm_setting_ip_config_get_method (page->setting);
 
         method = IP4_METHOD_AUTO;
         if (g_strcmp0 (str_method, NM_SETTING_IP4_CONFIG_METHOD_LINK_LOCAL) == 0) {
@@ -560,6 +569,9 @@ connect_ip4_page (CEPageIP4 *page)
                 break;
         case IP4_METHOD_MANUAL:
                 gtk_toggle_button_set_active (radios[RADIO_MANUAL], TRUE);
+                break;
+        case IP4_METHOD_SHARED:
+                gtk_toggle_button_set_active (radios[RADIO_SHARED], TRUE);
                 break;
         case IP4_METHOD_DISABLED:
                 gtk_toggle_button_set_active (radios[RADIO_DISABLED], TRUE);
@@ -622,6 +634,8 @@ ui_to_setting (CEPageIP4 *page)
                 method = NM_SETTING_IP4_CONFIG_METHOD_MANUAL;
         else if (RADIO_IS_ACTIVE ("radio_disabled"))
                 method = NM_SETTING_IP4_CONFIG_METHOD_DISABLED;
+        else if (RADIO_IS_ACTIVE ("radio_shared"))
+                method = NM_SETTING_IP4_CONFIG_METHOD_SHARED;
 
         addresses = g_ptr_array_new_with_free_func ((GDestroyNotify) nm_ip_address_unref);
         if (g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL))
