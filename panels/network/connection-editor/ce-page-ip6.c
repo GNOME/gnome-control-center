@@ -61,7 +61,7 @@ method_changed (GtkToggleButton *button, CEPageIP6 *page)
         gboolean routes_enabled;
         GtkWidget *widget;
 
-        if (RADIO_IS_ACTIVE ("radio_disabled")) {
+        if (RADIO_IS_ACTIVE ("radio_disabled") || RADIO_IS_ACTIVE("radio_shared")) {
                 addr_enabled = FALSE;
                 dns_enabled = FALSE;
                 routes_enabled = FALSE;
@@ -472,6 +472,7 @@ enum
         RADIO_DHCP,
         RADIO_LOCAL,
         RADIO_MANUAL,
+        RADIO_SHARED,
         RADIO_DISABLED,
         N_RADIO
 };
@@ -524,6 +525,7 @@ connect_ip6_page (CEPageIP6 *page)
         radios[RADIO_DHCP] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_dhcp"));
         radios[RADIO_LOCAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_local"));
         radios[RADIO_MANUAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_manual"));
+        radios[RADIO_SHARED] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_shared"));
         radios[RADIO_DISABLED] = page->disabled;
 
         for (i = RADIO_AUTOMATIC; i < RADIO_DISABLED; i++)
@@ -541,6 +543,9 @@ connect_ip6_page (CEPageIP6 *page)
                 break;
         case IP6_METHOD_MANUAL:
                 gtk_toggle_button_set_active (radios[RADIO_MANUAL], TRUE);
+                break;
+        case IP6_METHOD_SHARED:
+                gtk_toggle_button_set_active (radios[RADIO_SHARED], TRUE);
                 break;
         case IP6_METHOD_IGNORE:
                 gtk_toggle_button_set_active (radios[RADIO_DISABLED], TRUE);
@@ -576,6 +581,8 @@ ui_to_setting (CEPageIP6 *page)
                         method = NM_SETTING_IP6_CONFIG_METHOD_DHCP;
                 } else if (RADIO_IS_ACTIVE ("radio_automatic")) {
                         method = NM_SETTING_IP6_CONFIG_METHOD_AUTO;
+                } else if (RADIO_IS_ACTIVE ("radio_shared")) {
+                        method = NM_SETTING_IP6_CONFIG_METHOD_SHARED;
                 }
         }
 
