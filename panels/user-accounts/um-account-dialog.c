@@ -462,7 +462,7 @@ update_password_match (UmAccountDialog *self)
         verify = gtk_entry_get_text (GTK_ENTRY (self->local_verify));
         if (strlen (verify) != 0) {
                 if (strcmp (password, verify) != 0) {
-                        message = _("Passwords do not match.");
+                        message = _("The passwords do not match.");
                 } else {
                         set_entry_validation_checkmark (GTK_ENTRY (self->local_verify));
                 }
