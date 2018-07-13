@@ -2991,7 +2991,7 @@ ppd_list_free (PPDList *list)
 }
 
 gchar *
-get_standard_manufacturers_name (gchar *name)
+get_standard_manufacturers_name (const gchar *name)
 {
   gchar *normalized_name;
   gchar *result = NULL;

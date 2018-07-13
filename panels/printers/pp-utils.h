@@ -213,7 +213,7 @@ IPPAttribute *ipp_attribute_copy (IPPAttribute *attr);
 
 void        ipp_attribute_free (IPPAttribute *attr);
 
-gchar      *get_standard_manufacturers_name (gchar *name);
+gchar      *get_standard_manufacturers_name (const gchar *name);
 
 typedef void (*PGPCallback) (const gchar *ppd_filename,
                              gpointer     user_data);
