@@ -27,5 +27,5 @@ test(
   'test-network-panel',
   find_program('test-network-panel.py'),
       env : envs,
-  timeout : 10
+  timeout : 60
 )
