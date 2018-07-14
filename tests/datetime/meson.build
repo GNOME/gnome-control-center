@@ -31,5 +31,5 @@ test(
   'test-datetime',
   find_program('test-datetime.py'),
       env : env,
-  timeout : 10
+  timeout : 60
 )
