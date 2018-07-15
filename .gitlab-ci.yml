@@ -2,8 +2,8 @@ image: claudioandre/settings:job-502.6_fedora.dev  # temporarily pinned to old t
 stages:
   - build
   - test
-  - extra
-  - delivery
+  - manual
+  - deploy
 
 .Log files: &log_files  [./*.log, _build/meson-logs/]
 
@@ -20,7 +20,6 @@ stages:
     expire_in: 3h30min
 
 .Show Info: &environment_information
-  echo "== Info ==" &&
   build-aux/ci/ci-helper.sh "INFO" &&
   build-aux/ci/ci-helper.sh "GIT_INFO"
 
@@ -29,6 +28,10 @@ stages:
   rm -rf _build/ &&
   meson . _build ${BUILD_OPTS} &&
   ninja -C _build 2>&1 | tee compilation.log
+
+.Run Tests: &run_tests
+  echo "== Testing ==" &&
+  ninja -C _build test
 
 ##
 # Stage: Build
@@ -71,19 +74,16 @@ test:
 
     - |
       if [[ -n "${CI_COMMIT_TAG}" ]]; then
+        *run_tests
+
         echo "== Distro Test =="
-        meson test -C _build
         ninja dist -C _build
       else
         echo "== Testing =="
         meson test -C _build --verbose --no-stdsplit
       fi
 
-##
-# Stage: Test
-#
 # Runs the coverage test.
-##
 coverage:
   <<: *save_build_logs
   stage: test
@@ -96,9 +96,8 @@ coverage:
   script:
     - *environment_information
     - *build_procedure
+    - *run_tests
 
-    - echo "== Testing =="
-    - ninja -C _build test
     - ninja -C _build coverage-html
 
     # Parse the report to get the coverage result
@@ -106,13 +105,16 @@ coverage:
       echo == Coverage ==
       sed -e 's/<[^>]*>//g' _build/meson-logs/coveragereport/index.html | tr -d ' \t' | grep -A3 -P '^Lines:$'  | tr '\n' ' '; echo
 
+# Runs the address sanitizer.
+# - below, at the "sanitizers section"
+
 ##
-# Stage: Delivery
+# Stage: Deploy
 #
-# Publish the Coverage Report generated above
+# Publishes the Coverage Report generated above
 ##
 pages:
-  stage: delivery
+  stage: deploy
   dependencies:
     - coverage
   script:
@@ -124,33 +126,12 @@ pages:
     - master@GNOME/gnome-control-center
 
 ##
-# Stage: Test
+# Stage: Manual
 #
-# Runs the address sanitizer.
+# Creates a flatpak
 ##
-asan:
-  <<: *save_build_logs
-  stage: test
-  allow_failure: true
-  variables:
-    BUILD_OPTS: "-Db_sanitize=address"
-
-  script:
-    - *environment_information
-    - *build_procedure
-
-    - export LSAN_OPTIONS="suppressions=$(pwd)/build-aux/ci/lsan.supp"
-
-    - echo "== Testing =="
-    - ninja -C _build test
-
-##
-# Stage: Delivery
-#
-# Create a flatpak
-##
-packaging:
-  stage: delivery
+flatpak:
+  stage: deploy
   image: claudioandre/settings:fedora.flatpak
   artifacts:
     name: package
@@ -199,44 +180,41 @@ packaging:
     url: https://gitlab.gnome.org/$CI_PROJECT_PATH/-/jobs/$CI_JOB_ID/artifacts/raw/${BUNDLE}
   when: manual
 
-##
-# Stage: Extra
-#
-# Runs the sanitizers [thread, undefined, memory].
-##
+# Runs the sanitizers [address, thread, undefined, and memory].
 .sanitizer: &sanitizer
   <<: *save_build_logs
-  stage: extra
-  allow_failure: true
-
+  stage: manual
+  when: manual
   script:
     - *environment_information
     - *build_procedure
+    - *run_tests
 
-    - echo "== Testing =="
-    - ninja -C _build test
+asan:
+  <<: *sanitizer
+  stage: test
+  when: on_success
+  variables:
+    BUILD_OPTS: "-Db_sanitize=address"
+    LSAN_OPTIONS: "suppressions=${CI_PROJECT_DIR}/build-aux/ci/lsan.supp"
 
 tsan:
   <<: *sanitizer
   variables:
     BUILD_OPTS: "-Db_sanitize=thread"
-  when: manual
 
 ubsan:
   <<: *sanitizer
   variables:
     BUILD_OPTS: "-Db_sanitize=undefined"
-  when: manual
 
 msan:
   <<: *sanitizer
   variables:
     BUILD_OPTS: "-Db_sanitize=memory"
     CC: "clang"
-  when : manual
 
-# Run multiarch Tests
-##
+# Runs multiarch build test.
 .qemu: &multiarch
   <<: *save_build_logs
   image: docker:latest
@@ -278,7 +256,7 @@ ppc64le:
 #############################################
 .Docker image template: &create_docker_image
   image: docker:latest
-  stage: delivery
+  stage: deploy
   services:
     - docker:dind
   only:
@@ -288,7 +266,7 @@ ppc64le:
   script:
     # Skip the build (if requested)
     - |
-      if [[ -z "${CI_COMMIT_MESSAGE##*[skip images]*}" && -z "${CI_COMMIT_MESSAGE##*$NAME*}" ]]; then
+      if [[ -z "${CI_COMMIT_MESSAGE##*[skip images]*}" && -z "${CI_COMMIT_MESSAGE##*[$NAME]*}" ]]; then
         echo "== Nothing to do =="
         exit 0
       fi
