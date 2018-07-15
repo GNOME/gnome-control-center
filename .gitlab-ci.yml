@@ -262,7 +262,6 @@ armv8:
   variables:
     DOCKER_DRIVER: overlay
     IMAGE: "claudioandre/settings:fedora.aarch64"
-  when: manual
 
 ppc64le:
   <<: *multiarch
@@ -270,7 +269,6 @@ ppc64le:
   variables:
     DOCKER_DRIVER: overlay
     IMAGE: "claudioandre/settings:fedora.ppc64le"
-  when: manual
 
 #############################################
 #          Create CI Docker Images          #
