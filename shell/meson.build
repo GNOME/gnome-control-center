@@ -48,8 +48,6 @@ sources = files(
   'cc-object-storage.c',
   'cc-panel-loader.c',
   'cc-panel.c',
-  'cc-shell-category-view.c',
-  'cc-shell-item-view.c',
   'cc-shell.c',
   'main.c'
 )

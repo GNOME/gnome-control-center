@@ -39,7 +39,6 @@
 #include "cc-application.h"
 #include "cc-panel.h"
 #include "cc-shell.h"
-#include "cc-shell-category-view.h"
 #include "cc-shell-model.h"
 #include "cc-panel-list.h"
 #include "cc-panel-loader.h"
