@@ -266,6 +266,7 @@ armv8:
 ppc64le:
   <<: *multiarch
   stage: test
+  allow_failure: true
   variables:
     DOCKER_DRIVER: overlay
     IMAGE: "claudioandre/settings:fedora.ppc64le"
