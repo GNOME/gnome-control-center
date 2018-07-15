@@ -90,6 +90,8 @@ coverage:
   variables:
     BUILD_OPTS: "-Db_coverage=true"
     coverage: '/^Lines:.\d+.\d+.(\d+\.\d+\%)/'
+  only:
+    - master@GNOME/gnome-control-center
 
   script:
     - *environment_information
