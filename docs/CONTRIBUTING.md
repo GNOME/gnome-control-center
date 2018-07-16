@@ -7,10 +7,13 @@ Please note we have a Code of Conduct, please follow it in all your interactions
 
 ## Pull Request Process
 
-1. Ensure your code compiles and doesn't break anything. Run `meson test -C <builddir>` before creating
-   the pull request.
-2. If you're adding new API, it must be properly documented.
-3. The commit message is formatted as follows:
+1. Create a fork in GitLab and push your work to there
+2. Open a Merge Request
+  1. Always allow maintainer edits
+  2. Mark the Merge Request as WIP if your work is not ready to be reviewed
+3. Assign the correct maintainer to the Merge Request (see [`MAINTAINERS.md`][maintainers] to select
+   the correct maintainer)
+4. Format commit messages as follows:
    ```
    component: <summary>
    ‌
@@ -69,3 +72,4 @@ available at [http://contributor-covenant.org/version/1/4][version]
 
 [homepage]: http://contributor-covenant.org
 [version]: http://contributor-covenant.org/version/1/4/
+[maintainers]: https://gitlab.gnome.org/GNOME/gnome-control-center/blob/master/docs/MAINTAINERS.md
