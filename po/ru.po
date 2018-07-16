@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2018-06-01 10:27+0000\n"
-"PO-Revision-Date: 2018-06-06 13:13+0300\n"
+"POT-Creation-Date: 2018-07-14 15:07+0000\n"
+"PO-Revision-Date: 2018-07-17 00:07+0300\n"
 "Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -34,7 +34,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.0.7\n"
+"X-Generator: Poedit 2.0.9\n"
 
 #: panels/background/background.ui:49
 msgid "_Background"
@@ -106,7 +106,7 @@ msgstr "Изображения не найдены"
 #. * directory in the string below when XDG_PICTURES_DIR is
 #. * undefined
 #: panels/background/cc-background-chooser-dialog.c:545
-#: panels/search/cc-search-locations-dialog.c:289
+#: panels/search/cc-search-locations-dialog.c:286
 msgid "Home"
 msgstr "Домашняя папка"
 
@@ -130,16 +130,16 @@ msgstr "Можно добавить изображения в папку %s и �
 #: panels/printers/pp-details-dialog.c:330
 #: panels/privacy/cc-privacy-panel.c:1049 panels/region/format-chooser.ui:25
 #: panels/region/input-chooser.ui:13
-#: panels/search/cc-search-locations-dialog.c:606
-#: panels/sharing/cc-sharing-panel.c:384
+#: panels/search/cc-search-locations-dialog.c:603
+#: panels/sharing/cc-sharing-panel.c:426
 #: panels/user-accounts/data/account-dialog.ui:28
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/user-accounts/data/password-dialog.ui:21
 #: panels/user-accounts/um-fingerprint-dialog.c:261
 #: panels/user-accounts/um-photo-dialog.c:103
 #: panels/user-accounts/um-photo-dialog.c:230
-#: panels/user-accounts/um-user-panel.c:634
-#: panels/user-accounts/um-user-panel.c:652
+#: panels/user-accounts/um-user-panel.c:631
+#: panels/user-accounts/um-user-panel.c:649
 msgid "_Cancel"
 msgstr "_Отменить"
 
@@ -222,7 +222,7 @@ msgstr "Для включения Bluetooth выключите режим для
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/network/network.ui:101 panels/printers/pp-new-printer-dialog.c:1832
+#: panels/network/network.ui:101 panels/printers/pp-new-printer-dialog.c:1831
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -892,7 +892,7 @@ msgstr "preferences-color"
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Цвет;ICC;Профиль;Калибровка;Принтер;Экран;"
 
-#: panels/common/cc-common-language.c:323
+#: panels/common/cc-common-language.c:300
 msgid "Other…"
 msgstr "Другой…"
 
@@ -926,7 +926,7 @@ msgid "%b %e, %Y"
 msgstr "%-d %b %Y"
 
 #. translators: This is the default hotspot name, need to be less than 32-bytes
-#: panels/common/hostname-helper.c:189
+#: panels/common/hostname-helper.c:177
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Точка доступа"
@@ -951,17 +951,17 @@ msgid "Year"
 msgstr "Год"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:376
+#: panels/datetime/cc-datetime-panel.c:326
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%-d %B %Y, %-l∶%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:381
+#: panels/datetime/cc-datetime-panel.c:331
 msgid "%e %B %Y, %R"
 msgstr "%-d %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:546
+#: panels/datetime/cc-datetime-panel.c:496
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -969,7 +969,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:573
+#: panels/datetime/cc-datetime-panel.c:523
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -977,23 +977,23 @@ msgstr "%s (%s)"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: panels/datetime/cc-datetime-panel.c:580
+#: panels/datetime/cc-datetime-panel.c:530
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:585
+#: panels/datetime/cc-datetime-panel.c:535
 msgid "%l:%M %p"
 msgstr "%-l∶%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:590
+#: panels/datetime/cc-datetime-panel.c:540
 msgid "%R"
 msgstr "%R"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: panels/datetime/cc-datetime-panel.c:595
+#: panels/datetime/cc-datetime-panel.c:545
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
@@ -1052,56 +1052,56 @@ msgstr "Декабрь"
 msgid "Date & Time"
 msgstr "Дата и время"
 
-#: panels/datetime/datetime.ui:106
+#: panels/datetime/datetime.ui:109
 msgid "Hour"
 msgstr "Часы"
 
 #. Translator: this is the separator between hours and minutes, like in HH∶MM
-#: panels/datetime/datetime.ui:121
+#: panels/datetime/datetime.ui:124
 msgid "∶"
 msgstr "∶"
 
-#: panels/datetime/datetime.ui:143
+#: panels/datetime/datetime.ui:148
 msgid "Minute"
 msgstr "Минуты"
 
-#: panels/datetime/datetime.ui:208
+#: panels/datetime/datetime.ui:215
 msgid "Time Zone"
 msgstr "Часовой пояс"
 
-#: panels/datetime/datetime.ui:228
+#: panels/datetime/datetime.ui:236
 msgid "Search for a city"
 msgstr "Поиск местоположения"
 
-#: panels/datetime/datetime.ui:308
+#: panels/datetime/datetime.ui:318
 msgid "Automatic _Date & Time"
 msgstr "Автоматическое определение _даты и времени"
 
-#: panels/datetime/datetime.ui:323 panels/datetime/datetime.ui:401
+#: panels/datetime/datetime.ui:333 panels/datetime/datetime.ui:411
 msgid "Requires internet access"
 msgstr "Требуется подключение к Интернету"
 
-#: panels/datetime/datetime.ui:386
+#: panels/datetime/datetime.ui:396
 msgid "Automatic Time _Zone"
 msgstr "Автоматическое определение _часового пояса"
 
-#: panels/datetime/datetime.ui:458
+#: panels/datetime/datetime.ui:468
 msgid "Date & _Time"
 msgstr "Дата и _время"
 
-#: panels/datetime/datetime.ui:506
+#: panels/datetime/datetime.ui:516
 msgid "Time Z_one"
 msgstr "_Часовой пояс"
 
-#: panels/datetime/datetime.ui:574
+#: panels/datetime/datetime.ui:586
 msgid "Time _Format"
 msgstr "_Формат времени"
 
-#: panels/datetime/datetime.ui:592
+#: panels/datetime/datetime.ui:605
 msgid "24-hour"
 msgstr "24-часовой"
 
-#: panels/datetime/datetime.ui:593
+#: panels/datetime/datetime.ui:606
 msgid "AM / PM"
 msgstr "12-часовой"
 
@@ -1228,29 +1228,29 @@ msgstr "%.2lf Гц"
 #. TRANSLATORS: the state of the night light setting
 #: panels/display/cc-display-panel.c:2236
 #: panels/notifications/cc-notifications-panel.c:288
-#: panels/power/cc-power-panel.c:2066 panels/power/cc-power-panel.c:2073
+#: panels/power/cc-power-panel.c:2038 panels/power/cc-power-panel.c:2045
 #: panels/privacy/cc-privacy-panel.c:193 panels/privacy/cc-privacy-panel.c:260
-#: panels/universal-access/cc-ua-panel.c:331
-#: panels/universal-access/cc-ua-panel.c:706
-#: panels/universal-access/cc-ua-panel.c:719
-#: panels/universal-access/cc-ua-panel.c:731
-#: panels/universal-access/cc-ua-panel.c:901
+#: panels/universal-access/cc-ua-panel.c:478
+#: panels/universal-access/cc-ua-panel.c:841
+#: panels/universal-access/cc-ua-panel.c:854
+#: panels/universal-access/cc-ua-panel.c:866
+#: panels/universal-access/cc-ua-panel.c:1031
 msgid "On"
 msgstr "Включено"
 
 #: panels/display/cc-display-panel.c:2236 panels/network/net-proxy.c:54
 #: panels/notifications/cc-notifications-panel.c:288
-#: panels/power/cc-power-panel.c:2060 panels/power/cc-power-panel.c:2071
+#: panels/power/cc-power-panel.c:2032 panels/power/cc-power-panel.c:2043
 #: panels/privacy/cc-privacy-panel.c:193 panels/privacy/cc-privacy-panel.c:260
-#: panels/universal-access/cc-ua-panel.c:331
-#: panels/universal-access/cc-ua-panel.c:706
-#: panels/universal-access/cc-ua-panel.c:719
-#: panels/universal-access/cc-ua-panel.c:731
-#: panels/universal-access/cc-ua-panel.c:901 panels/universal-access/uap.ui:334
-#: panels/universal-access/uap.ui:380 panels/universal-access/uap.ui:426
-#: panels/universal-access/uap.ui:532 panels/universal-access/uap.ui:685
-#: panels/universal-access/uap.ui:731 panels/universal-access/uap.ui:777
-#: panels/universal-access/uap.ui:929
+#: panels/universal-access/cc-ua-panel.c:478
+#: panels/universal-access/cc-ua-panel.c:841
+#: panels/universal-access/cc-ua-panel.c:854
+#: panels/universal-access/cc-ua-panel.c:866
+#: panels/universal-access/cc-ua-panel.c:1031
+#: panels/universal-access/uap.ui:338 panels/universal-access/uap.ui:384
+#: panels/universal-access/uap.ui:430 panels/universal-access/uap.ui:536
+#: panels/universal-access/uap.ui:689 panels/universal-access/uap.ui:735
+#: panels/universal-access/uap.ui:781 panels/universal-access/uap.ui:933
 msgid "Off"
 msgstr "Выключено"
 
@@ -1689,7 +1689,7 @@ msgstr "Следующая дорожка"
 msgid "Eject"
 msgstr "Извлечь"
 
-#: panels/keyboard/01-input-sources.xml.in:4 panels/universal-access/uap.ui:576
+#: panels/keyboard/01-input-sources.xml.in:4 panels/universal-access/uap.ui:580
 msgid "Typing"
 msgstr "Ввод"
 
@@ -1709,8 +1709,8 @@ msgstr "Запуск приложений"
 msgid "Launch help browser"
 msgstr "Запустить справочный браузер"
 
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:285
-#: shell/cc-window.c:921 shell/gnome-control-center.desktop.in.in:3
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:277
+#: shell/cc-window.c:913 shell/gnome-control-center.desktop.in.in:3
 #: shell/window.ui:124
 msgid "Settings"
 msgstr "Параметры"
@@ -2001,7 +2001,7 @@ msgstr "Заменить"
 msgid "Set"
 msgstr "Установить"
 
-#: panels/mouse/cc-mouse-panel.c:80 panels/wacom/cc-wacom-panel.c:402
+#: panels/mouse/cc-mouse-panel.c:80 panels/wacom/cc-wacom-panel.c:439
 msgid "Test Your _Settings"
 msgstr "_Проверить параметры"
 
@@ -2126,7 +2126,7 @@ msgid "Single click, secondary button"
 msgstr "Один щелчок, вторичная кнопка"
 
 #. add proxy to device list
-#: panels/network/cc-network-panel.c:584
+#: panels/network/cc-network-panel.c:583
 msgid "Network proxy"
 msgstr "Прокси"
 
@@ -2134,19 +2134,19 @@ msgstr "Прокси"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: panels/network/cc-network-panel.c:720 panels/network/net-vpn.c:170
+#: panels/network/cc-network-panel.c:719 panels/network/net-vpn.c:170
 #: panels/network/net-vpn.c:299
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
-#: panels/network/cc-network-panel.c:784 panels/network/wifi.ui:282
+#: panels/network/cc-network-panel.c:783 panels/network/wifi.ui:282
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "К сожалению, что-то пошло не так. Обратитесь к поставщику программного "
 "обеспечения."
 
-#: panels/network/cc-network-panel.c:790
+#: panels/network/cc-network-panel.c:789
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager должен быть запущен."
 
@@ -2162,7 +2162,7 @@ msgstr "_Безопасность 802.1x"
 
 #: panels/network/connection-editor/8021x-security-page.ui:73
 #: panels/network/connection-editor/security-page.ui:72
-#: panels/wacom/wacom-stylus-page.ui:108
+#: panels/wacom/wacom-stylus-page.ui:110
 msgid "page 1"
 msgstr "страница 1"
 
@@ -2181,7 +2181,7 @@ msgstr "Внутренняя _аутентификация"
 
 #: panels/network/connection-editor/8021x-security-page.ui:281
 #: panels/network/connection-editor/security-page.ui:280
-#: panels/wacom/wacom-stylus-page.ui:426
+#: panels/wacom/wacom-stylus-page.ui:428
 msgid "page 2"
 msgstr "страница 2"
 
@@ -2297,7 +2297,7 @@ msgid "Remove VPN"
 msgstr "Удалить VPN"
 
 #: panels/network/connection-editor/ce-page-details.c:334
-#: panels/network/network-wifi.ui:1456 shell/cc-window.c:277
+#: panels/network/network-wifi.ui:1456 shell/cc-window.c:269
 #: shell/panel-list.ui:103
 msgid "Details"
 msgstr "Подробности"
@@ -2633,7 +2633,7 @@ msgstr "Выберите файл для импортирования"
 
 #: panels/network/connection-editor/vpn-helpers.c:182
 #: panels/printers/pp-details-dialog.c:331
-#: panels/sharing/cc-sharing-panel.c:385
+#: panels/sharing/cc-sharing-panel.c:427
 #: panels/user-accounts/um-photo-dialog.c:231
 msgid "_Open"
 msgstr "_Открыть"
@@ -2935,7 +2935,7 @@ msgstr "подробности"
 #: panels/network/wireless-security/eap-method-simple.ui:40
 #: panels/network/wireless-security/ws-leap.ui:40
 #: panels/network/wireless-security/ws-wpa-psk.ui:22
-#: panels/sharing/sharing.ui:351
+#: panels/sharing/sharing.ui:357
 #: panels/user-accounts/data/account-dialog.ui:300
 #: panels/user-accounts/data/account-dialog.ui:525
 #: panels/user-accounts/data/user-accounts-dialog.ui:205
@@ -3878,11 +3878,11 @@ msgstr "Добавить учётную запись"
 msgid "Remove Account"
 msgstr "Удалить учётную запись"
 
-#: panels/power/cc-power-panel.c:243
+#: panels/power/cc-power-panel.c:260
 msgid "Unknown time"
 msgstr "Время неизвестно"
 
-#: panels/power/cc-power-panel.c:249
+#: panels/power/cc-power-panel.c:266
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -3890,7 +3890,7 @@ msgstr[0] "%i минута"
 msgstr[1] "%i минуты"
 msgstr[2] "%i минут"
 
-#: panels/power/cc-power-panel.c:261
+#: panels/power/cc-power-panel.c:278
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3900,19 +3900,19 @@ msgstr[2] "%i часов"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: panels/power/cc-power-panel.c:269
+#: panels/power/cc-power-panel.c:286
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: panels/power/cc-power-panel.c:270
+#: panels/power/cc-power-panel.c:287
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "час"
 msgstr[1] "часа"
 msgstr[2] "часов"
 
-#: panels/power/cc-power-panel.c:271
+#: panels/power/cc-power-panel.c:288
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "минута"
@@ -3920,136 +3920,136 @@ msgstr[1] "минуты"
 msgstr[2] "минут"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:290
+#: panels/power/cc-power-panel.c:307
 #, c-format
 msgid "%s until fully charged"
 msgstr "Полностью зарядится через %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:297
+#: panels/power/cc-power-panel.c:314
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Внимание: разрядится через %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:302
+#: panels/power/cc-power-panel.c:319
 #, c-format
 msgid "%s remaining"
 msgstr "Разрядится через %s"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:307 panels/power/cc-power-panel.c:335
+#: panels/power/cc-power-panel.c:324 panels/power/cc-power-panel.c:351
 msgid "Fully charged"
 msgstr "Полностью заряжена"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:311 panels/power/cc-power-panel.c:339
+#: panels/power/cc-power-panel.c:328 panels/power/cc-power-panel.c:355
 msgid "Empty"
 msgstr "Разряжена"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:326
+#: panels/power/cc-power-panel.c:342
 msgid "Charging"
 msgstr "Зарядка"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:331
+#: panels/power/cc-power-panel.c:347
 msgid "Discharging"
 msgstr "Разрядка"
 
-#: panels/power/cc-power-panel.c:452
+#: panels/power/cc-power-panel.c:465
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Основная"
 
-#: panels/power/cc-power-panel.c:454
+#: panels/power/cc-power-panel.c:467
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Дополнительная"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:525
+#: panels/power/cc-power-panel.c:535
 msgid "Wireless mouse"
 msgstr "Беспроводная мышь"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:528
+#: panels/power/cc-power-panel.c:538
 msgid "Wireless keyboard"
 msgstr "Беспроводная клавиатура"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:531
+#: panels/power/cc-power-panel.c:541
 msgid "Uninterruptible power supply"
 msgstr "Источник бесперебойного питания"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:534
+#: panels/power/cc-power-panel.c:544
 msgid "Personal digital assistant"
 msgstr "КПК"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:537
+#: panels/power/cc-power-panel.c:547
 msgid "Cellphone"
 msgstr "Мобильный телефон"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:540
+#: panels/power/cc-power-panel.c:550
 msgid "Media player"
 msgstr "Медиапроигрыватель"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:543 panels/wacom/cc-wacom-panel.c:793
+#: panels/power/cc-power-panel.c:553 panels/wacom/cc-wacom-panel.c:830
 msgid "Tablet"
 msgstr "Планшет"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:546
+#: panels/power/cc-power-panel.c:556
 msgid "Computer"
 msgstr "Компьютер"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:549
+#: panels/power/cc-power-panel.c:559
 msgid "Gaming input device"
 msgstr "Игровое устройство ввода"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:552 panels/power/cc-power-panel.c:814
-#: panels/power/cc-power-panel.c:2448
+#: panels/power/cc-power-panel.c:562 panels/power/cc-power-panel.c:814
+#: panels/power/cc-power-panel.c:2400
 msgid "Battery"
 msgstr "Батарея"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:618
+#: panels/power/cc-power-panel.c:622
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Зарядка"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:625
+#: panels/power/cc-power-panel.c:629
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Внимание"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:630
+#: panels/power/cc-power-panel.c:634
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Низкий"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:635
+#: panels/power/cc-power-panel.c:639
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Хороший"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:640
+#: panels/power/cc-power-panel.c:644
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Полностью заряжена"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:644
+#: panels/power/cc-power-panel.c:648
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Полностью разряжена"
@@ -4058,7 +4058,7 @@ msgstr "Полностью разряжена"
 msgid "Batteries"
 msgstr "Батареи"
 
-#: panels/power/cc-power-panel.c:1185
+#: panels/power/cc-power-panel.c:1172
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -4066,7 +4066,7 @@ msgstr[0] "%d час"
 msgstr[1] "%d часа"
 msgstr[2] "%d часов"
 
-#: panels/power/cc-power-panel.c:1187
+#: panels/power/cc-power-panel.c:1174
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -4075,7 +4075,7 @@ msgstr[1] "%d минуты"
 msgstr[2] "%d минут"
 
 # Блокировать экран после:
-#: panels/power/cc-power-panel.c:1190
+#: panels/power/cc-power-panel.c:1177
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -4084,14 +4084,14 @@ msgstr[1] "%d секунды"
 msgstr[2] "%d секунд"
 
 #. 5 hours 2 minutes 12 seconds
-#: panels/power/cc-power-panel.c:1196
+#: panels/power/cc-power-panel.c:1182
 #, c-format
 msgctxt "time"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. 2 minutes 12 seconds
-#: panels/power/cc-power-panel.c:1199
+#: panels/power/cc-power-panel.c:1185
 #, c-format
 msgctxt "time"
 msgid "%s %s"
@@ -4099,107 +4099,107 @@ msgstr "%s %s"
 
 # Блокировать экран после:
 #. 0 seconds
-#: panels/power/cc-power-panel.c:1205
+#: panels/power/cc-power-panel.c:1191
 msgid "0 seconds"
 msgstr "0 секунд"
 
-#: panels/power/cc-power-panel.c:1307
+#: panels/power/cc-power-panel.c:1286
 msgid "When _idle"
 msgstr "При п_ростое"
 
-#: panels/power/cc-power-panel.c:1763
+#: panels/power/cc-power-panel.c:1736
 msgid "Power Saving"
 msgstr "Энергосбережение"
 
-#: panels/power/cc-power-panel.c:1794
+#: panels/power/cc-power-panel.c:1766
 msgid "_Screen brightness"
 msgstr "Яркость _экрана"
 
-#: panels/power/cc-power-panel.c:1813
+#: panels/power/cc-power-panel.c:1785
 msgid "Automatic brightness"
 msgstr "Автоматическая регулировка яркости"
 
-#: panels/power/cc-power-panel.c:1833
+#: panels/power/cc-power-panel.c:1805
 msgid "_Keyboard brightness"
 msgstr "Яркость подсветки _клавиатуры"
 
-#: panels/power/cc-power-panel.c:1843
+#: panels/power/cc-power-panel.c:1815
 msgid "_Dim screen when inactive"
 msgstr "У_меньшать яркость экрана при простое"
 
-#: panels/power/cc-power-panel.c:1868
+#: panels/power/cc-power-panel.c:1840
 msgid "_Blank screen"
 msgstr "_Выключение экрана"
 
-#: panels/power/cc-power-panel.c:1905
+#: panels/power/cc-power-panel.c:1877
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.c:1910
+#: panels/power/cc-power-panel.c:1882
 msgid "Turn off Wi-Fi to save power."
 msgstr "Выключите Wi-Fi для уменьшения энергопотребления."
 
-#: panels/power/cc-power-panel.c:1935
+#: panels/power/cc-power-panel.c:1907
 msgid "_Mobile broadband"
 msgstr "_Мобильный Интернет"
 
-#: panels/power/cc-power-panel.c:1940
+#: panels/power/cc-power-panel.c:1912
 msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
 msgstr ""
 "Выключите адаптер мобильного широкополосного доступа (3G, 4G, WiMax и т.д.) "
 "для уменьшения энергопотребления."
 
-#: panels/power/cc-power-panel.c:1999
+#: panels/power/cc-power-panel.c:1971
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:2004
+#: panels/power/cc-power-panel.c:1976
 msgid "Turn off Bluetooth to save power."
 msgstr "Выключите Bluetooth для уменьшения энергопотребления."
 
-#: panels/power/cc-power-panel.c:2062
+#: panels/power/cc-power-panel.c:2034
 msgid "When on battery power"
 msgstr "При работе от батареи"
 
-#: panels/power/cc-power-panel.c:2064
+#: panels/power/cc-power-panel.c:2036
 msgid "When plugged in"
 msgstr "При подключении"
 
-#: panels/power/cc-power-panel.c:2158
+#: panels/power/cc-power-panel.c:2130
 msgid "Suspend"
 msgstr "Перевести в режим ожидания"
 
-#: panels/power/cc-power-panel.c:2159
+#: panels/power/cc-power-panel.c:2131
 msgid "Power Off"
 msgstr "Выключить"
 
-#: panels/power/cc-power-panel.c:2160
+#: panels/power/cc-power-panel.c:2132
 msgid "Hibernate"
 msgstr "Перевести в режим гибернации"
 
-#: panels/power/cc-power-panel.c:2161
+#: panels/power/cc-power-panel.c:2133
 msgid "Nothing"
 msgstr "Ничего не делать"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2273
+#: panels/power/cc-power-panel.c:2233
 msgid "Suspend & Power Button"
 msgstr "Режим ожидания и кнопка выключения"
 
-#: panels/power/cc-power-panel.c:2312
+#: panels/power/cc-power-panel.c:2271
 msgid "_Automatic suspend"
 msgstr "_Автоматический режим ожидания"
 
-#: panels/power/cc-power-panel.c:2313
+#: panels/power/cc-power-panel.c:2272
 msgid "Automatic suspend"
 msgstr "Автоматический режим ожидания"
 
-#: panels/power/cc-power-panel.c:2380
+#: panels/power/cc-power-panel.c:2335
 msgid "_When the Power Button is pressed"
 msgstr "_При нажатии кнопки выключения"
 
-#: panels/power/cc-power-panel.c:2497 panels/thunderbolt/cc-bolt-panel.ui:466
-#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-window.c:281
+#: panels/power/cc-power-panel.c:2445 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-window.c:273
 #: shell/panel-list.ui:45
 msgid "Devices"
 msgstr "Устройства"
@@ -4306,20 +4306,20 @@ msgstr "10 минут"
 msgid "12 minutes"
 msgstr "12 минут"
 
-#: panels/power/power.ui:155
+#: panels/power/power.ui:167
 msgid "Automatic Suspend"
 msgstr "Автоматический ждущий режим"
 
-#: panels/power/power.ui:180
+#: panels/power/power.ui:192
 msgid "_Plugged In"
 msgstr "При _подключении"
 
-#: panels/power/power.ui:196
+#: panels/power/power.ui:208
 msgid "On _Battery Power"
 msgstr "При работе от _батареи"
 
-#: panels/power/power.ui:241 panels/power/power.ui:301
-#: panels/universal-access/uap.ui:1501
+#: panels/power/power.ui:253 panels/power/power.ui:313
+#: panels/universal-access/uap.ui:1507
 msgid "Delay"
 msgstr "Задержка"
 
@@ -4356,12 +4356,12 @@ msgid "Printer “%s” has been deleted"
 msgstr "Принтер «%s» удалён"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:1054
+#: panels/printers/cc-printers-panel.c:1057
 msgid "Failed to add new printer."
 msgstr "Не удалось добавить новый принтер."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1391
+#: panels/printers/cc-printers-panel.c:1394
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Не удалось загрузить интерфейс пользователя: %s"
@@ -4612,14 +4612,14 @@ msgstr[1] "%u задания требуют аутентификацию"
 msgstr[2] "%u заданий требуют аутентификацию"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:620
+#: panels/printers/pp-jobs-dialog.c:617
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "Текущие задания — %s"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:625
+#: panels/printers/pp-jobs-dialog.c:622
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Введите учётные данные для печати из %s."
@@ -4640,39 +4640,39 @@ msgstr "Разблокировать %s."
 msgid "Enter username and password to view printers on %s."
 msgstr "Введите имя пользователя и пароль для просмотра принтеров на %s."
 
-#: panels/printers/pp-new-printer-dialog.c:892
+#: panels/printers/pp-new-printer-dialog.c:894
 msgid "Searching for Printers"
 msgstr "Поиск принтеров"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1815
+#: panels/printers/pp-new-printer-dialog.c:1814
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1820
+#: panels/printers/pp-new-printer-dialog.c:1819
 msgid "Serial Port"
 msgstr "Последовательный порт"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1827
+#: panels/printers/pp-new-printer-dialog.c:1826
 msgid "Parallel Port"
 msgstr "Параллельный порт"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1869
+#: panels/printers/pp-new-printer-dialog.c:1868
 #, c-format
 msgid "Location: %s"
 msgstr "Расположение: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1874
+#: panels/printers/pp-new-printer-dialog.c:1873
 #, c-format
 msgid "Address: %s"
 msgstr "Адрес: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1903
+#: panels/printers/pp-new-printer-dialog.c:1902
 msgid "Server requires authentication"
 msgstr "Сервер требует аутентификацию"
 
@@ -4801,12 +4801,12 @@ msgid "Manufacturer"
 msgstr "Производитель"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:598 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:615 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "Нет активных заданий"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:603
+#: panels/printers/pp-printer-entry.c:620
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -4815,111 +4815,111 @@ msgstr[1] "%u задания"
 msgstr[2] "%u заданий"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:766
+#: panels/printers/pp-printer-entry.c:780
 msgid "Low on toner"
 msgstr "Мало тонера"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:768
+#: panels/printers/pp-printer-entry.c:782
 msgid "Out of toner"
 msgstr "Тонер закончился"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:771
+#: panels/printers/pp-printer-entry.c:785
 msgid "Low on developer"
 msgstr "Мало проявителя"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:774
+#: panels/printers/pp-printer-entry.c:788
 msgid "Out of developer"
 msgstr "Проявитель закончился"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:776
+#: panels/printers/pp-printer-entry.c:790
 msgid "Low on a marker supply"
 msgstr "Маркер скоро закончится"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:778
+#: panels/printers/pp-printer-entry.c:792
 msgid "Out of a marker supply"
 msgstr "Маркер закончился"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:780
+#: panels/printers/pp-printer-entry.c:794
 msgid "Open cover"
 msgstr "Открыта крышка"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:782
+#: panels/printers/pp-printer-entry.c:796
 msgid "Open door"
 msgstr "Открыта дверца"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:784
+#: panels/printers/pp-printer-entry.c:798
 msgid "Low on paper"
 msgstr "Мало бумаги"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:786
+#: panels/printers/pp-printer-entry.c:800
 msgid "Out of paper"
 msgstr "Бумага закончилась"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:788
+#: panels/printers/pp-printer-entry.c:802
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Выключен"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:790
-#: panels/printers/pp-printer-entry.c:920
+#: panels/printers/pp-printer-entry.c:804
+#: panels/printers/pp-printer-entry.c:932
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Остановлен"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:792
+#: panels/printers/pp-printer-entry.c:806
 msgid "Waste receptacle almost full"
 msgstr "Резервуар почти полон"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:794
+#: panels/printers/pp-printer-entry.c:808
 msgid "Waste receptacle full"
 msgstr "Резервуар заполнен"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:796
+#: panels/printers/pp-printer-entry.c:810
 msgid "The optical photo conductor is near end of life"
 msgstr "Фотобарабан скоро выйдет из строя"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:798
+#: panels/printers/pp-printer-entry.c:812
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Фотобарабан перестал работать"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:906
+#: panels/printers/pp-printer-entry.c:918
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Готов"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:911
+#: panels/printers/pp-printer-entry.c:923
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Не принимает задания"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:916
+#: panels/printers/pp-printer-entry.c:928
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Обработка"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:940
+#: panels/printers/pp-printer-entry.c:952
 msgid "Clean print heads"
 msgstr "Очистка печатающих головок принтера"
 
@@ -5263,16 +5263,16 @@ msgstr "Регионы не найдены"
 msgid "No input sources found"
 msgstr "Источники ввода не найдены"
 
-#: panels/region/cc-input-chooser.c:987
+#: panels/region/cc-input-chooser.c:981
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Другое"
 
-#: panels/region/cc-region-panel.c:839
+#: panels/region/cc-region-panel.c:804
 msgid "No input source selected"
 msgstr "Не выбран источник ввода"
 
-#: panels/region/cc-region-panel.c:1651
+#: panels/region/cc-region-panel.c:1599
 msgid "Login _Screen"
 msgstr "_Экран входа"
 
@@ -5393,55 +5393,55 @@ msgstr "Перезапустите сеанс, чтобы изменения в�
 msgid "Restart…"
 msgstr "Перезапустить…"
 
-#: panels/region/region.ui:173
+#: panels/region/region.ui:174
 msgid "_Formats"
 msgstr "_Форматы"
 
-#: panels/region/region.ui:191
+#: panels/region/region.ui:192
 msgid "United Kingdom"
 msgstr "Великобритания"
 
-#: panels/region/region.ui:233
+#: panels/region/region.ui:234
 msgid "Input Sources"
 msgstr "Источники ввода"
 
-#: panels/region/region.ui:249
+#: panels/region/region.ui:250
 msgid "_Options"
 msgstr "_Параметры"
 
-#: panels/region/region.ui:315
+#: panels/region/region.ui:318
 msgid "Add input source"
 msgstr "Добавить источник ввода"
 
-#: panels/region/region.ui:340
+#: panels/region/region.ui:344
 msgid "Remove input source"
 msgstr "Удалить источник ввода"
 
-#: panels/region/region.ui:390
+#: panels/region/region.ui:395
 msgid "Move input source up"
 msgstr "Переместить источник ввода вверх"
 
-#: panels/region/region.ui:415
+#: panels/region/region.ui:421
 msgid "Move input source down"
 msgstr "Переместить источник ввода вниз"
 
-#: panels/region/region.ui:465
+#: panels/region/region.ui:472
 msgid "Configure input source"
 msgstr "Настроить источник ввода"
 
-#: panels/region/region.ui:490
+#: panels/region/region.ui:498
 msgid "Show input source keyboard layout"
 msgstr "Показать раскладку источника ввода"
 
-#: panels/region/region.ui:534
+#: panels/region/region.ui:542
 msgid "Login settings are used by all users when logging into the system"
 msgstr "Параметры входа в систему используются всеми пользователями"
 
-#: panels/search/cc-search-locations-dialog.c:603
+#: panels/search/cc-search-locations-dialog.c:600
 msgid "Select Location"
 msgstr "Выберите расположение"
 
-#: panels/search/cc-search-locations-dialog.c:607
+#: panels/search/cc-search-locations-dialog.c:604
 msgid "_OK"
 msgstr "_OK"
 
@@ -5493,35 +5493,35 @@ msgid "Preferences"
 msgstr "Настройки"
 
 #. Label
-#: panels/sharing/cc-sharing-networks.c:307
+#: panels/sharing/cc-sharing-networks.c:302
 msgid "No networks selected for sharing"
 msgstr "Не выбрано ни одной сети для обеспечения общего доступа"
 
-#: panels/sharing/cc-sharing-panel.c:275
+#: panels/sharing/cc-sharing-panel.c:318
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Включено"
 
-#: panels/sharing/cc-sharing-panel.c:277 panels/sharing/cc-sharing-panel.c:304
+#: panels/sharing/cc-sharing-panel.c:320 panels/sharing/cc-sharing-panel.c:347
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Выключено"
 
-#: panels/sharing/cc-sharing-panel.c:307
+#: panels/sharing/cc-sharing-panel.c:350
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Включено"
 
-#: panels/sharing/cc-sharing-panel.c:310
+#: panels/sharing/cc-sharing-panel.c:353
 msgctxt "service is active"
 msgid "Active"
 msgstr "Запущено"
 
-#: panels/sharing/cc-sharing-panel.c:381
+#: panels/sharing/cc-sharing-panel.c:423
 msgid "Choose a Folder"
 msgstr "Выберите папку"
 
-#: panels/sharing/cc-sharing-panel.c:693
+#: panels/sharing/cc-sharing-panel.c:720
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5530,7 +5530,7 @@ msgstr ""
 "Общий доступ к файлам позволяет открыть доступ к вашим папкам другим "
 "пользователям сети с помощью: <a href=\"dav://%s\">dav://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:695
+#: panels/sharing/cc-sharing-panel.c:722
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5541,7 +5541,7 @@ msgstr ""
 "используя команду Secure Shell:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:697
+#: panels/sharing/cc-sharing-panel.c:724
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
@@ -5550,11 +5550,11 @@ msgstr ""
 "Общий доступ к экрану позволяет удалённым пользователям просматривать и "
 "управлять вашим экраном, подключившись к <a href=\"vnc://%s\">vnc://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:809
+#: panels/sharing/cc-sharing-panel.c:828
 msgid "Copy"
 msgstr "Копировать"
 
-#: panels/sharing/cc-sharing-panel.c:1236
+#: panels/sharing/cc-sharing-panel.c:1279
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "Общий доступ"
@@ -5591,79 +5591,79 @@ msgstr ""
 "Для включения или выключения удалённого доступа необходимо выполнить "
 "проверку подлинности"
 
-#: panels/sharing/sharing.ui:46
+#: panels/sharing/sharing.ui:50
 msgid "_Computer Name"
 msgstr "Имя _компьютера"
 
-#: panels/sharing/sharing.ui:104
+#: panels/sharing/sharing.ui:108
 msgid "_File Sharing"
 msgstr "Общий доступ к _файлам"
 
-#: panels/sharing/sharing.ui:147
+#: panels/sharing/sharing.ui:151
 msgid "_Screen Sharing"
 msgstr "Общий доступ к _экрану"
 
-#: panels/sharing/sharing.ui:190
+#: panels/sharing/sharing.ui:194
 msgid "_Media Sharing"
 msgstr "Общий доступ к _мультимедиа"
 
-#: panels/sharing/sharing.ui:233
+#: panels/sharing/sharing.ui:237
 msgid "_Remote Login"
 msgstr "_Удалённая авторизация"
 
-#: panels/sharing/sharing.ui:272
+#: panels/sharing/sharing.ui:276
 msgid "Some services are disabled because of no network access."
 msgstr "Некоторые службы отключены из-за отсутствия доступа к сети."
 
-#: panels/sharing/sharing.ui:286 panels/sharing/sharing.ui:413
+#: panels/sharing/sharing.ui:292 panels/sharing/sharing.ui:419
 msgid "File Sharing"
 msgstr "Общий доступ к файлам"
 
-#: panels/sharing/sharing.ui:333
+#: panels/sharing/sharing.ui:339
 msgid "_Require Password"
 msgstr "_Требовать пароль"
 
-#: panels/sharing/sharing.ui:424 panels/sharing/sharing.ui:496
+#: panels/sharing/sharing.ui:430 panels/sharing/sharing.ui:502
 msgid "Remote Login"
 msgstr "Удалённая авторизация"
 
-#: panels/sharing/sharing.ui:519 panels/sharing/sharing.ui:765
+#: panels/sharing/sharing.ui:525 panels/sharing/sharing.ui:771
 msgid "Screen Sharing"
 msgstr "Общий доступ к экрану"
 
-#: panels/sharing/sharing.ui:577
+#: panels/sharing/sharing.ui:583
 msgid "_Allow connections to control the screen"
 msgstr "_Разрешить соединения для управления экраном"
 
-#: panels/sharing/sharing.ui:622
+#: panels/sharing/sharing.ui:628
 msgid "_Password:"
 msgstr "_Пароль:"
 
-#: panels/sharing/sharing.ui:652
+#: panels/sharing/sharing.ui:658
 msgid "_Show Password"
 msgstr "П_оказать пароль"
 
-#: panels/sharing/sharing.ui:683
+#: panels/sharing/sharing.ui:689
 msgid "Access Options"
 msgstr "Параметры доступа"
 
-#: panels/sharing/sharing.ui:697
+#: panels/sharing/sharing.ui:703
 msgid "_New connections must ask for access"
 msgstr "_Новые подключения должны запрашивать доступ"
 
-#: panels/sharing/sharing.ui:715
+#: panels/sharing/sharing.ui:721
 msgid "_Require a password"
 msgstr "_Требовать пароль"
 
-#: panels/sharing/sharing.ui:776 panels/sharing/sharing.ui:870
+#: panels/sharing/sharing.ui:782 panels/sharing/sharing.ui:876
 msgid "Media Sharing"
 msgstr "Общий доступ к мультимедиа"
 
-#: panels/sharing/sharing.ui:809
+#: panels/sharing/sharing.ui:815
 msgid "Share music, photos and videos over the network."
 msgstr "Общий доступ к музыке, фото и видео по сети."
 
-#: panels/sharing/sharing.ui:824
+#: panels/sharing/sharing.ui:830
 msgid "Folders"
 msgstr "Папки"
 
@@ -6045,32 +6045,32 @@ msgstr "Thunderbolt;"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:351
+#: panels/universal-access/cc-ua-panel.c:498
 msgctxt "cursor size"
 msgid "Default"
 msgstr "По умолчанию"
 
-#: panels/universal-access/cc-ua-panel.c:354
+#: panels/universal-access/cc-ua-panel.c:501
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Средний"
 
-#: panels/universal-access/cc-ua-panel.c:357
+#: panels/universal-access/cc-ua-panel.c:504
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Увеличенный"
 
-#: panels/universal-access/cc-ua-panel.c:360
+#: panels/universal-access/cc-ua-panel.c:507
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Большой"
 
-#: panels/universal-access/cc-ua-panel.c:363
+#: panels/universal-access/cc-ua-panel.c:510
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Огромный"
 
-#: panels/universal-access/cc-ua-panel.c:367
+#: panels/universal-access/cc-ua-panel.c:514
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -6099,340 +6099,340 @@ msgstr ""
 "Чтение;текст;шрифт;размер;AccessX;Залипающие;клавиши;Медленные;Отскакивающие;"
 "Мышь;Двойное;нажатие;Задержка;Помощь;Повтор;Мигающий;"
 
-#: panels/universal-access/uap.ui:89
+#: panels/universal-access/uap.ui:93
 msgid "_Always Show Universal Access Menu"
 msgstr "_Всегда показывать меню универсального доступа"
 
-#: panels/universal-access/uap.ui:131
+#: panels/universal-access/uap.ui:135
 msgid "Seeing"
 msgstr "Зрение"
 
-#: panels/universal-access/uap.ui:177
+#: panels/universal-access/uap.ui:181
 msgid "_High Contrast"
 msgstr "В_ысокая контрастность"
 
-#: panels/universal-access/uap.ui:224
+#: panels/universal-access/uap.ui:228
 msgid "_Large Text"
 msgstr "_Крупный текст"
 
-#: panels/universal-access/uap.ui:269
+#: panels/universal-access/uap.ui:273
 msgid "C_ursor Size"
 msgstr "Размер _курсора"
 
-#: panels/universal-access/uap.ui:316
+#: panels/universal-access/uap.ui:320
 #: panels/universal-access/zoom-options.ui:99
 msgid "_Zoom"
 msgstr "_Масштабирование"
 
-#: panels/universal-access/uap.ui:362
+#: panels/universal-access/uap.ui:366
 msgid "Screen _Reader"
 msgstr "_Чтение с экрана"
 
-#: panels/universal-access/uap.ui:408 panels/universal-access/uap.ui:1237
+#: panels/universal-access/uap.ui:412 panels/universal-access/uap.ui:1243
 msgid "_Sound Keys"
 msgstr "_Звук при нажатии клавиш"
 
-#: panels/universal-access/uap.ui:470
+#: panels/universal-access/uap.ui:474
 msgid "Hearing"
 msgstr "Слух"
 
-#: panels/universal-access/uap.ui:514 panels/universal-access/uap.ui:1340
+#: panels/universal-access/uap.ui:518 panels/universal-access/uap.ui:1346
 msgid "_Visual Alerts"
 msgstr "_Визуальные уведомления"
 
-#: panels/universal-access/uap.ui:622
+#: panels/universal-access/uap.ui:626
 msgid "Screen _Keyboard"
 msgstr "_Экранная клавиатура"
 
-#: panels/universal-access/uap.ui:667
+#: panels/universal-access/uap.ui:671
 msgid "R_epeat Keys"
 msgstr "_Автоповтор клавиш"
 
-#: panels/universal-access/uap.ui:713
+#: panels/universal-access/uap.ui:717
 msgid "Cursor _Blinking"
 msgstr "_Мигание курсора"
 
-#: panels/universal-access/uap.ui:759
+#: panels/universal-access/uap.ui:763
 msgid "_Typing Assist (AccessX)"
 msgstr "Помощник ввода (AccessX)"
 
-#: panels/universal-access/uap.ui:820
+#: panels/universal-access/uap.ui:824
 msgid "Pointing & Clicking"
 msgstr "Наведение и нажатие"
 
-#: panels/universal-access/uap.ui:866
+#: panels/universal-access/uap.ui:870
 msgid "_Mouse Keys"
 msgstr "_Клавиши мыши"
 
-#: panels/universal-access/uap.ui:911
+#: panels/universal-access/uap.ui:915
 msgid "_Click Assist"
 msgstr "Помощник _нажатия"
 
-#: panels/universal-access/uap.ui:957
+#: panels/universal-access/uap.ui:961
 msgid "_Double-Click Delay"
 msgstr "Задержка _двойного нажатия"
 
-#: panels/universal-access/uap.ui:977
+#: panels/universal-access/uap.ui:981
 msgid "Double-Click Delay"
 msgstr "Задержка двойного нажатия"
 
-#: panels/universal-access/uap.ui:1042
+#: panels/universal-access/uap.ui:1048
 msgid "Cursor Size"
 msgstr "Размер курсора"
 
-#: panels/universal-access/uap.ui:1069
+#: panels/universal-access/uap.ui:1075
 msgid ""
 "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgstr ""
 "Размер курсора можно выбрать в соответствии с масштабом для улучшения его "
 "видимости."
 
-#: panels/universal-access/uap.ui:1105
+#: panels/universal-access/uap.ui:1111
 msgid "Screen Reader"
 msgstr "Чтение с экрана"
 
-#: panels/universal-access/uap.ui:1122
+#: panels/universal-access/uap.ui:1128
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr ""
 "Приложение для чтения с экрана читает отображённый текст при перемещении "
 "фокуса."
 
-#: panels/universal-access/uap.ui:1155
+#: panels/universal-access/uap.ui:1161
 msgid "_Screen Reader"
 msgstr "_Чтение с экрана"
 
-#: panels/universal-access/uap.ui:1194
+#: panels/universal-access/uap.ui:1200
 msgid "Sound Keys"
 msgstr "Озвучивание клавиши"
 
-#: panels/universal-access/uap.ui:1212
+#: panels/universal-access/uap.ui:1218
 msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr "Подавать сигнал при нажатии Num Lock или Caps Lock."
 
-#: panels/universal-access/uap.ui:1282
+#: panels/universal-access/uap.ui:1288
 msgid "Visual Alerts"
 msgstr "Визуальные уведомления"
 
-#: panels/universal-access/uap.ui:1286
+#: panels/universal-access/uap.ui:1292
 msgid "_Test flash"
 msgstr "_Проверить мигание"
 
-#: panels/universal-access/uap.ui:1315
+#: panels/universal-access/uap.ui:1321
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "Использовать визуальную индикацию для звуковых уведомлений."
 
-#: panels/universal-access/uap.ui:1366
+#: panels/universal-access/uap.ui:1372
 msgid "Flash the _window title"
 msgstr "Мигать _заголовком окна"
 
-#: panels/universal-access/uap.ui:1384
+#: panels/universal-access/uap.ui:1390
 msgid "Flash the entire _screen"
 msgstr "Мигать всем _экраном"
 
-#: panels/universal-access/uap.ui:1429
+#: panels/universal-access/uap.ui:1435
 msgid "Repeat Keys"
 msgstr "Автоповтор клавиш"
 
-#: panels/universal-access/uap.ui:1459
+#: panels/universal-access/uap.ui:1465
 msgid "Key presses repeat when key is held down."
 msgstr "Повторять нажатую удерживаемую клавишу."
 
-#: panels/universal-access/uap.ui:1538
+#: panels/universal-access/uap.ui:1544
 msgid "Repeat keys delay"
 msgstr "Задержка повтора клавиш"
 
-#: panels/universal-access/uap.ui:1586 panels/universal-access/uap.ui:1719
+#: panels/universal-access/uap.ui:1592 panels/universal-access/uap.ui:1725
 msgid "Speed"
 msgstr "Скорость"
 
-#: panels/universal-access/uap.ui:1623
+#: panels/universal-access/uap.ui:1629
 msgid "Repeat keys speed"
 msgstr "Скорость повтора клавиш"
 
-#: panels/universal-access/uap.ui:1647
+#: panels/universal-access/uap.ui:1653
 msgid "Cursor Blinking"
 msgstr "Мигание курсора"
 
-#: panels/universal-access/uap.ui:1677
+#: panels/universal-access/uap.ui:1683
 msgid "Cursor blinks in text fields."
 msgstr "Курсор мигает в текстовых полях ввода."
 
-#: panels/universal-access/uap.ui:1756
+#: panels/universal-access/uap.ui:1762
 msgid "Cursor blinking speed"
 msgstr "Частота мигания курсора"
 
-#: panels/universal-access/uap.ui:1792
+#: panels/universal-access/uap.ui:1798
 msgid "Typing Assist"
 msgstr "Помощник ввода"
 
-#: panels/universal-access/uap.ui:1831
+#: panels/universal-access/uap.ui:1837
 msgid "_Sticky Keys"
 msgstr "_Залипающие клавиши"
 
-#: panels/universal-access/uap.ui:1848
+#: panels/universal-access/uap.ui:1854
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Обрабатывает последовательность модификаторов как комбинацию клавиш"
 
-#: panels/universal-access/uap.ui:1872
+#: panels/universal-access/uap.ui:1878
 msgid "_Disable if two keys are pressed together"
 msgstr "_Отключать, если две клавиши нажаты вместе"
 
-#: panels/universal-access/uap.ui:1890
+#: panels/universal-access/uap.ui:1896
 msgid "Beep when a _modifier key is pressed"
 msgstr "Подавать сигнал при нажатии _модификатора"
 
-#: panels/universal-access/uap.ui:1938
+#: panels/universal-access/uap.ui:1944
 msgid "S_low Keys"
 msgstr "_Медленные клавиши"
 
-#: panels/universal-access/uap.ui:1955
+#: panels/universal-access/uap.ui:1961
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Вставляет задержку между нажатием клавиши и его обработкой"
 
-#: panels/universal-access/uap.ui:1988 panels/universal-access/uap.ui:2201
-#: panels/universal-access/uap.ui:2538
+#: panels/universal-access/uap.ui:1994 panels/universal-access/uap.ui:2207
+#: panels/universal-access/uap.ui:2544
 msgid "A_cceptance delay:"
 msgstr "За_держка принятия:"
 
-#: panels/universal-access/uap.ui:2010
+#: panels/universal-access/uap.ui:2016
 msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Короткая"
 
-#: panels/universal-access/uap.ui:2029
+#: panels/universal-access/uap.ui:2035
 msgid "Slow keys typing delay"
 msgstr "Задержка ввода «медленных» клавиш"
 
-#: panels/universal-access/uap.ui:2044
+#: panels/universal-access/uap.ui:2050
 msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Длинная"
 
-#: panels/universal-access/uap.ui:2071
+#: panels/universal-access/uap.ui:2077
 msgid "Beep when a key is pr_essed"
 msgstr "Подавать сигнал при _нажатии клавиши"
 
-#: panels/universal-access/uap.ui:2088
+#: panels/universal-access/uap.ui:2094
 msgid "Beep when a key is _accepted"
 msgstr "Подавать сигнал при _отпускании клавиши"
 
-#: panels/universal-access/uap.ui:2105 panels/universal-access/uap.ui:2284
+#: panels/universal-access/uap.ui:2111 panels/universal-access/uap.ui:2290
 msgid "Beep when a key is _rejected"
 msgstr "Подавать сигнал при _игнорировании клавиш"
 
-#: panels/universal-access/uap.ui:2151
+#: panels/universal-access/uap.ui:2157
 msgid "_Bounce Keys"
 msgstr "_Отскакивающие клавиши"
 
-#: panels/universal-access/uap.ui:2168
+#: panels/universal-access/uap.ui:2174
 msgid "Ignores fast duplicate keypresses"
 msgstr "Игнорирует быстрые нажатия клавиш"
 
-#: panels/universal-access/uap.ui:2223
+#: panels/universal-access/uap.ui:2229
 msgctxt "bounce keys delay"
 msgid "Short"
 msgstr "Короткая"
 
-#: panels/universal-access/uap.ui:2242
+#: panels/universal-access/uap.ui:2248
 msgid "Bounce keys typing delay"
 msgstr "Задержка ввода «отскакивающих» клавиш"
 
-#: panels/universal-access/uap.ui:2257
+#: panels/universal-access/uap.ui:2263
 msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "Длинная"
 
-#: panels/universal-access/uap.ui:2370
+#: panels/universal-access/uap.ui:2376
 msgid "_Enable by Keyboard"
 msgstr "_Управляется клавиатурой"
 
-#: panels/universal-access/uap.ui:2387
+#: panels/universal-access/uap.ui:2393
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Включать и выключать специальные возможности с помощью клавиатуры"
 
-#: panels/universal-access/uap.ui:2451
+#: panels/universal-access/uap.ui:2457
 msgid "Click Assist"
 msgstr "Помощник нажатия"
 
-#: panels/universal-access/uap.ui:2487
+#: panels/universal-access/uap.ui:2493
 msgid "_Simulated Secondary Click"
 msgstr "_Симуляция вторичного нажатия"
 
-#: panels/universal-access/uap.ui:2505
+#: panels/universal-access/uap.ui:2511
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Двойное нажатие удержанием главной кнопки"
 
-#: panels/universal-access/uap.ui:2559
+#: panels/universal-access/uap.ui:2565
 msgctxt "secondary click"
 msgid "Short"
 msgstr "Короткая"
 
-#: panels/universal-access/uap.ui:2578
+#: panels/universal-access/uap.ui:2584
 msgid "Secondary click delay"
 msgstr "Задержка вторичного нажатия"
 
-#: panels/universal-access/uap.ui:2593
+#: panels/universal-access/uap.ui:2599
 msgctxt "secondary click delay"
 msgid "Long"
 msgstr "Длинная"
 
-#: panels/universal-access/uap.ui:2650
+#: panels/universal-access/uap.ui:2656
 msgid "_Hover Click"
 msgstr "Нажатие при на_ведении"
 
-#: panels/universal-access/uap.ui:2668
+#: panels/universal-access/uap.ui:2674
 msgid "Trigger a click when the pointer hovers"
 msgstr "Нажатие при наведении указателя"
 
-#: panels/universal-access/uap.ui:2701
+#: panels/universal-access/uap.ui:2707
 msgid "D_elay:"
 msgstr "За_держка:"
 
-#: panels/universal-access/uap.ui:2723
+#: panels/universal-access/uap.ui:2729
 msgctxt "dwell click delay"
 msgid "Short"
 msgstr "Короткая"
 
-#: panels/universal-access/uap.ui:2754
+#: panels/universal-access/uap.ui:2760
 msgctxt "dwell click delay"
 msgid "Long"
 msgstr "Длинная"
 
-#: panels/universal-access/uap.ui:2790
+#: panels/universal-access/uap.ui:2796
 msgid "Motion _threshold:"
 msgstr "Двигательный _порог:"
 
-#: panels/universal-access/uap.ui:2812
+#: panels/universal-access/uap.ui:2818
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Уменьшенный"
 
-#: panels/universal-access/uap.ui:2843
+#: panels/universal-access/uap.ui:2849
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Увеличенный"
 
-#: panels/universal-access/zoom-options.c:338
+#: panels/universal-access/zoom-options.c:334
 msgctxt "Distance"
 msgid "Short"
 msgstr "Короткая"
 
-#: panels/universal-access/zoom-options.c:339
+#: panels/universal-access/zoom-options.c:335
 msgctxt "Distance"
 msgid "¼ Screen"
 msgstr "¼ экрана"
 
-#: panels/universal-access/zoom-options.c:340
+#: panels/universal-access/zoom-options.c:336
 msgctxt "Distance"
 msgid "½ Screen"
 msgstr "½ экрана"
 
-#: panels/universal-access/zoom-options.c:341
+#: panels/universal-access/zoom-options.c:337
 msgctxt "Distance"
 msgid "¾ Screen"
 msgstr "¾ экрана"
 
-#: panels/universal-access/zoom-options.c:342
+#: panels/universal-access/zoom-options.c:338
 msgctxt "Distance"
 msgid "Long"
 msgstr "Длинная"
@@ -6774,8 +6774,8 @@ msgid "Ch_ange"
 msgstr "Из_менить"
 
 #: panels/user-accounts/data/password-dialog.ui:142
-msgid "_Verify New Password"
-msgstr "_Подтвердить новый пароль"
+msgid "_Confirm New Password"
+msgstr "_Подтвердите новый пароль"
 
 #: panels/user-accounts/data/password-dialog.ui:159
 msgid "_New Password"
@@ -7004,29 +7004,30 @@ msgstr "Неизвестная ошибка"
 msgid "Should match the web address of your login provider."
 msgstr "Должно совпадать с веб-адресом провайдера вашей учётной записи."
 
-#: panels/user-accounts/um-account-dialog.c:228
+#: panels/user-accounts/um-account-dialog.c:225
 msgid "Failed to add account"
 msgstr "Не удалось добавить учётную запись"
 
-#: panels/user-accounts/um-account-dialog.c:461
-msgid "Passwords do not match."
+#: panels/user-accounts/um-account-dialog.c:465
+#: panels/user-accounts/um-password-dialog.c:291
+msgid "The passwords do not match."
 msgstr "Пароли не совпадают."
 
-#: panels/user-accounts/um-account-dialog.c:716
-#: panels/user-accounts/um-account-dialog.c:762
-#: panels/user-accounts/um-account-dialog.c:783
+#: panels/user-accounts/um-account-dialog.c:736
+#: panels/user-accounts/um-account-dialog.c:782
+#: panels/user-accounts/um-account-dialog.c:803
 msgid "Failed to register account"
 msgstr "Не удалось зарегистрировать учётную запись"
 
-#: panels/user-accounts/um-account-dialog.c:906
+#: panels/user-accounts/um-account-dialog.c:926
 msgid "No supported way to authenticate with this domain"
 msgstr "Нет поддерживаемого метода аутентификации в этом домене"
 
-#: panels/user-accounts/um-account-dialog.c:979
+#: panels/user-accounts/um-account-dialog.c:999
 msgid "Failed to join domain"
 msgstr "Не удалось подключить к домену"
 
-#: panels/user-accounts/um-account-dialog.c:1040
+#: panels/user-accounts/um-account-dialog.c:1060
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7034,7 +7035,7 @@ msgstr ""
 "Неправильное имя пользователя.\n"
 "Попробуйте ещё раз."
 
-#: panels/user-accounts/um-account-dialog.c:1047
+#: panels/user-accounts/um-account-dialog.c:1067
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7042,11 +7043,11 @@ msgstr ""
 "Неправильный пароль.\n"
 "Попробуйте ещё раз."
 
-#: panels/user-accounts/um-account-dialog.c:1055
+#: panels/user-accounts/um-account-dialog.c:1075
 msgid "Failed to log into domain"
 msgstr "Не удалось войти в домен"
 
-#: panels/user-accounts/um-account-dialog.c:1113
+#: panels/user-accounts/um-account-dialog.c:1133
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Не удалось найти домен. Может быть, он написан с ошибкой?"
 
@@ -7152,7 +7153,6 @@ msgstr "На этой неделе"
 msgid "Last Week"
 msgstr "На прошлой неделе"
 
-# fix для часов
 #. Translators: This is a date format string in the style of "Feb 18",
 #. shown as the first day of a week on login history dialog.
 #. Translators: This is a date format string in the style of "Feb 24",
@@ -7181,7 +7181,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/um-history-dialog.c:177
-#: panels/user-accounts/um-user-panel.c:766
+#: panels/user-accounts/um-user-panel.c:763
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7189,7 +7189,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/um-history-dialog.c:180
-#: panels/user-accounts/um-user-panel.c:770
+#: panels/user-accounts/um-user-panel.c:767
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7210,73 +7210,69 @@ msgstr "Сеанс начат"
 msgid "%s — Account Activity"
 msgstr "%s — активность учётной записи"
 
-#: panels/user-accounts/um-password-dialog.c:144
+#: panels/user-accounts/um-password-dialog.c:150
 msgid "Please choose another password."
 msgstr "Выберите другой пароль."
 
-#: panels/user-accounts/um-password-dialog.c:153
+#: panels/user-accounts/um-password-dialog.c:159
 msgid "Please type your current password again."
 msgstr "Введите пароль ещё раз."
 
-#: panels/user-accounts/um-password-dialog.c:159
+#: panels/user-accounts/um-password-dialog.c:165
 msgid "Password could not be changed"
 msgstr "Не удалось изменить пароль"
-
-#: panels/user-accounts/um-password-dialog.c:285
-msgid "The passwords do not match."
-msgstr "Пароли не совпадают."
 
 #: panels/user-accounts/um-photo-dialog.c:227
 msgid "Browse for more pictures"
 msgstr "Найти дополнительные изображения"
 
-#: panels/user-accounts/um-realm-manager.c:310
+#: panels/user-accounts/um-realm-manager.c:307
 msgid "Cannot automatically join this type of domain"
 msgstr "Не удалось автоматически присоединиться к этому типу домена"
 
-#: panels/user-accounts/um-realm-manager.c:313
+#: panels/user-accounts/um-realm-manager.c:310
 msgid "No such domain or realm found"
 msgstr "Домен или realm не найден"
 
-#: panels/user-accounts/um-realm-manager.c:735
-#: panels/user-accounts/um-realm-manager.c:749
+#: panels/user-accounts/um-realm-manager.c:732
+#: panels/user-accounts/um-realm-manager.c:746
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Не удалось войти как %s в домене %s"
 
-#: panels/user-accounts/um-realm-manager.c:741
+#: panels/user-accounts/um-realm-manager.c:738
 msgid "Invalid password, please try again"
 msgstr "Неправильный пароль, попробуйте ещё раз"
 
-#: panels/user-accounts/um-realm-manager.c:754
+#: panels/user-accounts/um-realm-manager.c:751
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Не удалось подключиться к домену %s: %s"
 
-#: panels/user-accounts/um-user-panel.c:200
+#: panels/user-accounts/um-user-panel.c:199
 msgid "Your account"
 msgstr "Ваша учётная запись"
 
-#: panels/user-accounts/um-user-panel.c:380
+#: panels/user-accounts/um-user-panel.c:379
 msgid "Failed to delete user"
 msgstr "Не удалось удалить пользователя"
 
-#: panels/user-accounts/um-user-panel.c:438
-#: panels/user-accounts/um-user-panel.c:497
-#: panels/user-accounts/um-user-panel.c:549
+#: panels/user-accounts/um-user-panel.c:437
+#: panels/user-accounts/um-user-panel.c:496
+#: panels/user-accounts/um-user-panel.c:548
 msgid "Failed to revoke remotely managed user"
 msgstr "Не удалось аннулировать удалённого пользователя"
 
-#: panels/user-accounts/um-user-panel.c:603
+#: panels/user-accounts/um-user-panel.c:600
 msgid "You cannot delete your own account."
 msgstr "Нельзя удалить собственную учётную запись."
 
-#: panels/user-accounts/um-user-panel.c:612
+#: panels/user-accounts/um-user-panel.c:609
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s всё ещё находится в системе"
 
-#: panels/user-accounts/um-user-panel.c:616
+#: panels/user-accounts/um-user-panel.c:613
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7284,12 +7280,12 @@ msgstr ""
 "Удаление пользователя, с незавершённым сеансом, может привести систему в "
 "противоречивое состояние."
 
-#: panels/user-accounts/um-user-panel.c:625
+#: panels/user-accounts/um-user-panel.c:622
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Хотите сохранить файлы пользователя %s?"
 
-#: panels/user-accounts/um-user-panel.c:629
+#: panels/user-accounts/um-user-panel.c:626
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7297,47 +7293,47 @@ msgstr ""
 "Можно сохранить домашнюю папку, почтовый ящик и временные файлы при удалении "
 "учётной записи пользователя."
 
-#: panels/user-accounts/um-user-panel.c:632
+#: panels/user-accounts/um-user-panel.c:629
 msgid "_Delete Files"
 msgstr "_Удалить файлы"
 
-#: panels/user-accounts/um-user-panel.c:633
+#: panels/user-accounts/um-user-panel.c:630
 msgid "_Keep Files"
 msgstr "_Сохранить файлы"
 
-#: panels/user-accounts/um-user-panel.c:647
+#: panels/user-accounts/um-user-panel.c:644
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Действительно аннулировать удалённую учётную запись %s?"
 
-#: panels/user-accounts/um-user-panel.c:651
+#: panels/user-accounts/um-user-panel.c:648
 msgid "_Delete"
 msgstr "_Удалить"
 
-#: panels/user-accounts/um-user-panel.c:701
+#: panels/user-accounts/um-user-panel.c:698
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Учётная запись отключена"
 
-#: panels/user-accounts/um-user-panel.c:709
+#: panels/user-accounts/um-user-panel.c:706
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Установить при следующем входе в систему"
 
-#: panels/user-accounts/um-user-panel.c:712
+#: panels/user-accounts/um-user-panel.c:709
 msgctxt "Password mode"
 msgid "None"
 msgstr "Нет"
 
-#: panels/user-accounts/um-user-panel.c:759
+#: panels/user-accounts/um-user-panel.c:756
 msgid "Logged in"
 msgstr "Авторизованный"
 
-#: panels/user-accounts/um-user-panel.c:1106
+#: panels/user-accounts/um-user-panel.c:1103
 msgid "Failed to contact the accounts service"
 msgstr "Не удалось связаться со службой учётных записей"
 
-#: panels/user-accounts/um-user-panel.c:1108
+#: panels/user-accounts/um-user-panel.c:1105
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Убедитесь, что AccountService установлен и включён."
 
@@ -7345,7 +7341,7 @@ msgstr "Убедитесь, что AccountService установлен и вкл
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/um-user-panel.c:1140
+#: panels/user-accounts/um-user-panel.c:1137
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7353,12 +7349,12 @@ msgstr ""
 "Чтобы изменить,\n"
 "сначала нажмите на значок *"
 
-#: panels/user-accounts/um-user-panel.c:1180
+#: panels/user-accounts/um-user-panel.c:1177
 msgid "Create a user account"
 msgstr "Создать учётную запись пользователя"
 
-#: panels/user-accounts/um-user-panel.c:1191
-#: panels/user-accounts/um-user-panel.c:1370
+#: panels/user-accounts/um-user-panel.c:1188
+#: panels/user-accounts/um-user-panel.c:1366
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7366,12 +7362,12 @@ msgstr ""
 "Чтобы создать учётную запись пользователя,\n"
 "сначала нажмите на значок *"
 
-#: panels/user-accounts/um-user-panel.c:1201
+#: panels/user-accounts/um-user-panel.c:1198
 msgid "Delete the selected user account"
 msgstr "Удалить выбранную учётную запись пользователя"
 
-#: panels/user-accounts/um-user-panel.c:1213
-#: panels/user-accounts/um-user-panel.c:1375
+#: panels/user-accounts/um-user-panel.c:1210
+#: panels/user-accounts/um-user-panel.c:1371
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7487,7 +7483,7 @@ msgstr "%d из %d"
 msgid "Display Mapping"
 msgstr "Отображение на экран"
 
-#: panels/wacom/cc-wacom-panel.c:790 panels/wacom/wacom-stylus-page.ui:127
+#: panels/wacom/cc-wacom-panel.c:827 panels/wacom/wacom-stylus-page.ui:129
 msgid "Stylus"
 msgstr "Перо"
 
@@ -7496,7 +7492,7 @@ msgid "Button"
 msgstr "Кнопка"
 
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:3
-#: panels/wacom/gnome-wacom-properties.ui:198
+#: panels/wacom/gnome-wacom-properties.ui:200
 msgid "Wacom Tablet"
 msgstr "Планшет Wacom"
 
@@ -7532,43 +7528,43 @@ msgstr "Настройки планшета"
 msgid "_Help"
 msgstr "_Справка"
 
-#: panels/wacom/gnome-wacom-properties.ui:123
+#: panels/wacom/gnome-wacom-properties.ui:125
 msgid "No tablet detected"
 msgstr "Планшет не обнаружен"
 
-#: panels/wacom/gnome-wacom-properties.ui:139
+#: panels/wacom/gnome-wacom-properties.ui:141
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Подключите или включите планшет Wacom"
 
-#: panels/wacom/gnome-wacom-properties.ui:159
+#: panels/wacom/gnome-wacom-properties.ui:161
 msgid "Bluetooth Settings"
 msgstr "Параметры Bluetooth"
 
-#: panels/wacom/gnome-wacom-properties.ui:231
+#: panels/wacom/gnome-wacom-properties.ui:233
 msgid "Map to Monitor…"
 msgstr "Отображение на экран…"
 
-#: panels/wacom/gnome-wacom-properties.ui:247
+#: panels/wacom/gnome-wacom-properties.ui:249
 msgid "Map Buttons…"
 msgstr "Отображение кнопок…"
 
-#: panels/wacom/gnome-wacom-properties.ui:263
+#: panels/wacom/gnome-wacom-properties.ui:265
 msgid "Calibrate…"
 msgstr "Калибровать…"
 
-#: panels/wacom/gnome-wacom-properties.ui:284
+#: panels/wacom/gnome-wacom-properties.ui:286
 msgid "Adjust display resolution"
 msgstr "Настроить разрешение экрана"
 
-#: panels/wacom/gnome-wacom-properties.ui:300
+#: panels/wacom/gnome-wacom-properties.ui:302
 msgid "Adjust mouse settings"
 msgstr "Изменить параметры мыши"
 
-#: panels/wacom/gnome-wacom-properties.ui:328
+#: panels/wacom/gnome-wacom-properties.ui:330
 msgid "Tracking Mode"
 msgstr "Режим слежения"
 
-#: panels/wacom/gnome-wacom-properties.ui:356
+#: panels/wacom/gnome-wacom-properties.ui:358
 msgid "Left-Handed Orientation"
 msgstr "Настроить под левую руку"
 
@@ -7592,47 +7588,47 @@ msgstr "Назад"
 msgid "Forward"
 msgstr "Вперёд"
 
-#: panels/wacom/wacom-stylus-page.ui:77
+#: panels/wacom/wacom-stylus-page.ui:79
 msgid "No stylus found"
 msgstr "Стилус не найден"
 
-#: panels/wacom/wacom-stylus-page.ui:91
+#: panels/wacom/wacom-stylus-page.ui:93
 msgid "Please move your stylus to the proximity of the tablet to configure it"
 msgstr ""
 "Переместите стилус в непосредственную близость к планшету, чтобы настроить "
 "его"
 
-#: panels/wacom/wacom-stylus-page.ui:167
+#: panels/wacom/wacom-stylus-page.ui:169
 msgid "Eraser Pressure Feel"
 msgstr "Чувствительность нажатия ластика"
 
 # Чувствительность нажатия пера/ластика
-#: panels/wacom/wacom-stylus-page.ui:188 panels/wacom/wacom-stylus-page.ui:348
+#: panels/wacom/wacom-stylus-page.ui:190 panels/wacom/wacom-stylus-page.ui:350
 msgid "Soft"
 msgstr "Высокая"
 
 # Чувствительность нажатия пера/ластика
-#: panels/wacom/wacom-stylus-page.ui:218 panels/wacom/wacom-stylus-page.ui:378
+#: panels/wacom/wacom-stylus-page.ui:220 panels/wacom/wacom-stylus-page.ui:380
 msgid "Firm"
 msgstr "Низкая"
 
-#: panels/wacom/wacom-stylus-page.ui:241
+#: panels/wacom/wacom-stylus-page.ui:243
 msgid "Top Button"
 msgstr "Верхняя кнопка"
 
-#: panels/wacom/wacom-stylus-page.ui:270
+#: panels/wacom/wacom-stylus-page.ui:272
 msgid "Lower Button"
 msgstr "Нижняя кнопка"
 
-#: panels/wacom/wacom-stylus-page.ui:299
+#: panels/wacom/wacom-stylus-page.ui:301
 msgid "Lowest Button"
 msgstr "Самая нижняя кнопка"
 
-#: panels/wacom/wacom-stylus-page.ui:328
+#: panels/wacom/wacom-stylus-page.ui:330
 msgid "Tip Pressure Feel"
 msgstr "Чувствительность нажатия пера"
 
-#: panels/wacom/wacom-stylus-page.ui:440
+#: panels/wacom/wacom-stylus-page.ui:442
 msgid "page 3"
 msgstr "страница 3"
 
@@ -7797,6 +7793,12 @@ msgstr[2] "%u входов"
 #: subprojects/gvc/gvc-mixer-control.c:2738
 msgid "System Sounds"
 msgstr "Системные звуки"
+
+#~ msgid "_Verify New Password"
+#~ msgstr "_Подтвердить новый пароль"
+
+#~ msgid "Passwords do not match."
+#~ msgstr "Пароли не совпадают."
 
 #~ msgid "Show the overview"
 #~ msgstr "Предварительный просмотр"
