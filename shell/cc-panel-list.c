@@ -753,7 +753,7 @@ cc_panel_list_class_init (CcPanelListClass *klass)
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/gtk/panel-list.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/gtk/cc-panel-list.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcPanelList, details_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPanelList, details_row);
