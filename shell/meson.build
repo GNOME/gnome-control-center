@@ -53,9 +53,9 @@ sources = files(
 )
 
 resource_data = files(
+  'cc-panel-list.ui',
+  'cc-window.ui',
   'help-overlay.ui',
-  'panel-list.ui',
-  'window.ui'
 )
 
 sources += gnome.compile_resources(
