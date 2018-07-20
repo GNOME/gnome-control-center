@@ -604,16 +604,14 @@ ui_to_setting (CEPageIP4 *self)
         gchar *dns_text = NULL;
         guint i;
 
-        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->disabled_radio))) {
+        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->disabled_radio)))
                 method = NM_SETTING_IP4_CONFIG_METHOD_DISABLED;
-        } else {
-                if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->automatic_radio)))
-                        method = NM_SETTING_IP4_CONFIG_METHOD_AUTO;
-                else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->local_radio)))
-                        method = NM_SETTING_IP4_CONFIG_METHOD_LINK_LOCAL;
-                else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->manual_radio)))
-                        method = NM_SETTING_IP4_CONFIG_METHOD_MANUAL;
-        }
+        else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->automatic_radio)))
+                method = NM_SETTING_IP4_CONFIG_METHOD_AUTO;
+        else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->local_radio)))
+                method = NM_SETTING_IP4_CONFIG_METHOD_LINK_LOCAL;
+        else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->manual_radio)))
+                method = NM_SETTING_IP4_CONFIG_METHOD_MANUAL;
 
         addresses = g_ptr_array_new_with_free_func ((GDestroyNotify) nm_ip_address_unref);
         if (g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL))

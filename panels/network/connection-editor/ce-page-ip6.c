@@ -542,19 +542,16 @@ ui_to_setting (CEPageIP6 *self)
         gchar *dns_text = NULL;
         guint i;
 
-        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->disabled_radio))) {
+        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->disabled_radio)))
                 method = NM_SETTING_IP6_CONFIG_METHOD_IGNORE;
-        } else {
-                if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->manual_radio))) {
-                        method = NM_SETTING_IP6_CONFIG_METHOD_MANUAL;
-                } else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->local_radio))) {
-                        method = NM_SETTING_IP6_CONFIG_METHOD_LINK_LOCAL;
-                } else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->dhcp_radio))) {
-                        method = NM_SETTING_IP6_CONFIG_METHOD_DHCP;
-                } else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->automatic_radio))) {
-                        method = NM_SETTING_IP6_CONFIG_METHOD_AUTO;
-                }
-        }
+        else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->manual_radio)))
+                method = NM_SETTING_IP6_CONFIG_METHOD_MANUAL;
+        else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->local_radio)))
+                method = NM_SETTING_IP6_CONFIG_METHOD_LINK_LOCAL;
+        else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->dhcp_radio)))
+                method = NM_SETTING_IP6_CONFIG_METHOD_DHCP;
+        else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->automatic_radio)))
+                method = NM_SETTING_IP6_CONFIG_METHOD_AUTO;
 
         nm_setting_ip_config_clear_addresses (self->setting);
         if (g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_MANUAL)) {
