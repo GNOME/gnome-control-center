@@ -482,7 +482,6 @@ connect_ip6_page (CEPageIP6 *page)
         GtkToggleButton *radios[N_RADIO];
         GtkWidget *content;
         const gchar *str_method;
-        gboolean disabled;
         guint method, i;
 
         add_address_section (page);
@@ -492,8 +491,6 @@ connect_ip6_page (CEPageIP6 *page)
         page->disabled = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_disabled"));
 
         str_method = nm_setting_ip_config_get_method (page->setting);
-        disabled = g_strcmp0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_IGNORE) == 0;
-        gtk_toggle_button_set_active (page->disabled, disabled);
         g_signal_connect_swapped (page->disabled, "notify::active", G_CALLBACK (ce_page_changed), page);
         content = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "page_content"));
         g_object_bind_property (page->disabled, "active",
