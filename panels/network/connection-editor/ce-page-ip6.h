@@ -45,7 +45,6 @@ struct _CEPageIP6
 
         NMSettingIPConfig *setting;
 
-        GtkToggleButton *disabled;
         GtkWidget       *address_list;
         GtkSwitch       *auto_dns;
         GtkWidget       *dns_entry;

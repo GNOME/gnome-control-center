@@ -488,12 +488,12 @@ connect_ip6_page (CEPageIP6 *page)
         add_dns_section (page);
         add_routes_section (page);
 
-        page->disabled = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_disabled"));
+        radios[RADIO_DISABLED] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_disabled"));
 
         str_method = nm_setting_ip_config_get_method (page->setting);
-        g_signal_connect_swapped (page->disabled, "notify::active", G_CALLBACK (ce_page_changed), page);
+        g_signal_connect_swapped (radios[RADIO_DISABLED], "notify::active", G_CALLBACK (ce_page_changed), page);
         content = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "page_content"));
-        g_object_bind_property (page->disabled, "active",
+        g_object_bind_property (radios[RADIO_DISABLED], "active",
                                 content, "sensitive",
                                 G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
 
@@ -521,7 +521,6 @@ connect_ip6_page (CEPageIP6 *page)
         radios[RADIO_DHCP] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_dhcp"));
         radios[RADIO_LOCAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_local"));
         radios[RADIO_MANUAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_manual"));
-        radios[RADIO_DISABLED] = page->disabled;
 
         for (i = RADIO_AUTOMATIC; i < RADIO_DISABLED; i++)
                 g_signal_connect (radios[i], "toggled", G_CALLBACK (method_changed), page);
@@ -562,18 +561,16 @@ ui_to_setting (CEPageIP6 *page)
         gchar *dns_text = NULL;
         guint i;
 
-        if (gtk_toggle_button_get_active (page->disabled)) {
+        if (RADIO_IS_ACTIVE ("radio_manual")) {
+                method = NM_SETTING_IP6_CONFIG_METHOD_MANUAL;
+        } else if (RADIO_IS_ACTIVE ("radio_local")) {
+                method = NM_SETTING_IP6_CONFIG_METHOD_LINK_LOCAL;
+        } else if (RADIO_IS_ACTIVE ("radio_dhcp")) {
+                method = NM_SETTING_IP6_CONFIG_METHOD_DHCP;
+        } else if (RADIO_IS_ACTIVE ("radio_automatic")) {
+                method = NM_SETTING_IP6_CONFIG_METHOD_AUTO;
+        } else if (RADIO_IS_ACTIVE ("radio_disabled")) {
                 method = NM_SETTING_IP6_CONFIG_METHOD_IGNORE;
-        } else {
-                if (RADIO_IS_ACTIVE ("radio_manual")) {
-                        method = NM_SETTING_IP6_CONFIG_METHOD_MANUAL;
-                } else if (RADIO_IS_ACTIVE ("radio_local")) {
-                        method = NM_SETTING_IP6_CONFIG_METHOD_LINK_LOCAL;
-                } else if (RADIO_IS_ACTIVE ("radio_dhcp")) {
-                        method = NM_SETTING_IP6_CONFIG_METHOD_DHCP;
-                } else if (RADIO_IS_ACTIVE ("radio_automatic")) {
-                        method = NM_SETTING_IP6_CONFIG_METHOD_AUTO;
-                }
         }
 
         nm_setting_ip_config_clear_addresses (page->setting);
