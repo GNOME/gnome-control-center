@@ -470,7 +470,6 @@ static void
 connect_ip6_page (CEPageIP6 *self)
 {
         const gchar *str_method;
-        gboolean disabled;
         guint method;
 
         add_address_box (self);
@@ -478,8 +477,6 @@ connect_ip6_page (CEPageIP6 *self)
         add_routes_box (self);
 
         str_method = nm_setting_ip_config_get_method (self->setting);
-        disabled = g_strcmp0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_IGNORE) == 0;
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->disabled_radio), disabled);
         g_signal_connect_swapped (self->disabled_radio, "notify::active", G_CALLBACK (ce_page_changed), self);
         g_object_bind_property (self->disabled_radio, "active",
                                 self->content_box, "sensitive",
