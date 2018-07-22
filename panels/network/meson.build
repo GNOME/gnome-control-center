@@ -49,14 +49,14 @@ sources = files(
 )
 
 resource_data = files(
+  'cc-network-panel.ui',
+  'cc-wifi-panel.ui',
   'network-ethernet.ui',
   'network-mobile.ui',
   'network-proxy.ui',
   'network-simple.ui',
-  'network.ui',
   'network-vpn.ui',
   'network-wifi.ui',
-  'wifi.ui'
 )
 
 sources += gnome.compile_resources(

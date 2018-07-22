@@ -847,7 +847,7 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 
         g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
-        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network.ui");
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-network-panel.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_proxy);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_simple);

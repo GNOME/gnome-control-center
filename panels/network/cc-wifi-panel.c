@@ -656,7 +656,7 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
   object_class->get_property = cc_wifi_panel_get_property;
   object_class->set_property = cc_wifi_panel_set_property;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/wifi.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-wifi-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, center_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, header_stack);
