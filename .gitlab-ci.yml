@@ -33,6 +33,15 @@ stages:
   echo "== Testing ==" &&
   ninja -C _build test
 
+.Skip tests on translation: &skip_on_translation
+  # Skip the build (if this is a translation commit)
+  '
+  if [[ -z "${CI_COMMIT_TITLE##Update*}" && -z "${CI_COMMIT_TITLE##*translation}" ]]; then
+    echo "== Nothing to do ==";
+    exit 0;
+  fi
+  '
+
 ##
 # Stage: Build
 #
@@ -70,6 +79,7 @@ test:
     - build
 
   script:
+    - *skip_on_translation
     - *environment_information
 
     - |
@@ -94,6 +104,7 @@ coverage:
     - master@GNOME/gnome-control-center
 
   script:
+    - *skip_on_translation
     - *environment_information
     - *build_procedure
     - *run_tests
@@ -186,6 +197,7 @@ flatpak:
   stage: manual
   when: manual
   script:
+    - *skip_on_translation
     - *environment_information
     - *build_procedure
     - *run_tests
@@ -223,6 +235,7 @@ msan:
 
   script:
     # Register QEMU archs
+    - *skip_on_translation
     - docker run --rm --privileged multiarch/qemu-user-static:register --reset
 
     # Run the multiarch test job using QEMU
