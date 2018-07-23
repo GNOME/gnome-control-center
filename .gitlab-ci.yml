@@ -83,6 +83,10 @@ test:
         meson test -C _build --verbose --no-stdsplit
       fi
 
+  except:
+    variables:
+      - $CI_COMMIT_TITLE =~ /^Update.*translation$/
+
 # Runs the coverage test.
 coverage:
   <<: *save_build_logs
@@ -104,6 +108,10 @@ coverage:
     - |
       echo == Coverage ==
       sed -e 's/<[^>]*>//g' _build/meson-logs/coveragereport/index.html | tr -d ' \t' | grep -A3 -P '^Lines:$'  | tr '\n' ' '; echo
+
+  except:
+    variables:
+      - $CI_COMMIT_TITLE =~ /^Update.*translation$/
 
 # Runs the address sanitizer.
 # - below, at the "sanitizers section"
@@ -190,6 +198,10 @@ flatpak:
     - *build_procedure
     - *run_tests
 
+  except:
+    variables:
+      - $CI_COMMIT_TITLE =~ /^Update.*translation$/
+
 asan:
   <<: *sanitizer
   stage: test
@@ -235,6 +247,10 @@ msan:
          echo == Testing == &&
          ninja -C _build test"
     '
+
+  except:
+    variables:
+      - $CI_COMMIT_TITLE =~ /^Update.*translation$/
 
 armv8:
   <<: *multiarch
