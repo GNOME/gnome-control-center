@@ -480,6 +480,17 @@ wireless_enabled_cb (NMClient    *client,
 }
 
 static void
+on_rfkill_proxy_properties_changed_cb (GDBusProxy  *proxy,
+                                       GVariant    *changed_properties,
+                                       GStrv        invalidated_properties,
+                                       CcWifiPanel *self)
+{
+  g_debug ("Rfkill properties changed");
+
+  sync_airplane_mode_switch (self);
+}
+
+static void
 rfkill_proxy_acquired_cb (GObject      *source_object,
                           GAsyncResult *res,
                           gpointer      user_data)
@@ -503,6 +514,12 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
   self = CC_WIFI_PANEL (user_data);
 
   self->rfkill_proxy = proxy;
+
+  g_signal_connect_object (proxy,
+                           "g-properties-changed",
+                           G_CALLBACK (on_rfkill_proxy_properties_changed_cb),
+                           self,
+                           0);
 
   sync_airplane_mode_switch (self);
 }
