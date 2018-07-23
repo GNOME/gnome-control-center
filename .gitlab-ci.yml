@@ -135,6 +135,9 @@ pages:
       - public
   only:
     - master@GNOME/gnome-control-center
+  except:
+    variables:
+      - $CRON_TASK == "BUILD_CI_IMAGES"
 
 ##
 # Stage: Manual
