@@ -18,7 +18,8 @@ RUN dnf -y --nogpgcheck upgrade && \
                    libXxf86misc-devel meson ModemManager-glib-devel NetworkManager-libnm-devel \
                    polkit-devel pulseaudio-libs-devel upower-devel \
                    python3-dbusmock xorg-x11-server-Xvfb mesa-dri-drivers libsecret-devel llvm && \
-     dnf -y clean all
+     dnf -y clean all && \
+     rm -rf /var/cache/dnf
 
 CMD ["/bin/bash"]
 
