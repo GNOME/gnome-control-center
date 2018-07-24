@@ -292,13 +292,31 @@ get_casefolded_keywords (GAppInfo *appinfo)
   return casefolded_keywords;
 }
 
+static GIcon *
+symbolicize_g_icon (GIcon *gicon)
+{
+  const gchar * const *names;
+  g_autofree gchar *new_name = NULL;
+
+  if (!G_IS_THEMED_ICON (gicon))
+    return g_object_ref (gicon);
+
+  names = g_themed_icon_get_names (G_THEMED_ICON (gicon));
+
+  if (g_str_has_suffix (names[0], "-symbolic"))
+    return g_object_ref (gicon);
+
+  new_name = g_strdup_printf ("%s-symbolic", names[0]);
+  return g_themed_icon_new_with_default_fallbacks (new_name);
+}
+
 void
 cc_shell_model_add_item (CcShellModel    *model,
                          CcPanelCategory  category,
                          GAppInfo        *appinfo,
                          const char      *id)
 {
-  GIcon       *icon = g_app_info_get_icon (appinfo);
+  g_autoptr(GIcon) icon = NULL;
   const gchar *name = g_app_info_get_name (appinfo);
   const gchar *comment = g_app_info_get_description (appinfo);
   char **keywords;
@@ -307,6 +325,7 @@ cc_shell_model_add_item (CcShellModel    *model,
   casefolded_name = cc_util_normalize_casefold_and_unaccent (name);
   casefolded_description = cc_util_normalize_casefold_and_unaccent (comment);
   keywords = get_casefolded_keywords (appinfo);
+  icon = symbolicize_g_icon (g_app_info_get_icon (appinfo));
 
   gtk_list_store_insert_with_values (GTK_LIST_STORE (model), NULL, 0,
                                      COL_NAME, name,

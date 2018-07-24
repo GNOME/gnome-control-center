@@ -134,31 +134,6 @@ add_development_build_css (CcWindow *self)
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
-static gchar *
-get_symbolic_icon_name_from_g_icon (GIcon *gicon)
-{
-  const gchar * const *names;
-  GtkIconTheme *icon_theme;
-  int i;
-
-  if (!G_IS_THEMED_ICON (gicon))
-    return NULL;
-
-  names = g_themed_icon_get_names (G_THEMED_ICON (gicon));
-  icon_theme = gtk_icon_theme_get_default ();
-
-  for (i = 0; names[i] != NULL; i++)
-    {
-      g_autofree gchar *name = NULL;
-      name = g_strdup_printf ("%s-symbolic", names[i]);
-
-      if (gtk_icon_theme_has_icon (icon_theme, name))
-        return g_steal_pointer (&name);
-    }
-
-  return NULL;
-}
-
 static void
 remove_all_custom_widgets (CcWindow *self)
 {
@@ -326,9 +301,9 @@ setup_model (CcWindow *shell)
       g_autofree gchar *name = NULL;
       g_autofree gchar *description = NULL;
       g_autofree gchar *id = NULL;
-      g_autofree gchar *icon_name = NULL;
       g_autofree GStrv keywords = NULL;
       CcPanelVisibility visibility;
+      const gchar *icon_name = NULL;
 
       gtk_tree_model_get (model, &iter,
                           COL_CATEGORY, &category,
@@ -340,7 +315,8 @@ setup_model (CcWindow *shell)
                           COL_VISIBILITY, &visibility,
                           -1);
 
-      icon_name = get_symbolic_icon_name_from_g_icon (icon);
+      if (G_IS_THEMED_ICON (icon))
+        icon_name = g_themed_icon_get_names (G_THEMED_ICON (icon))[0];
 
       cc_panel_list_add_panel (CC_PANEL_LIST (shell->panel_list),
                                category,
