@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2018-07-14 15:07+0000\n"
-"PO-Revision-Date: 2018-07-23 12:15+0200\n"
+"POT-Creation-Date: 2018-07-23 14:26+0000\n"
+"PO-Revision-Date: 2018-07-27 13:15+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #: panels/background/background.ui:49
 msgid "_Background"
@@ -115,7 +115,8 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 #: panels/background/cc-background-chooser-dialog.c:560
 #: panels/color/cc-color-panel.c:240 panels/color/cc-color-panel.c:893
 #: panels/color/color-calibrate.ui:25 panels/color/color.ui:657
-#: panels/common/language-chooser.ui:23 panels/display/cc-display-panel.c:1896
+#: panels/common/cc-language-chooser.ui:22
+#: panels/display/cc-display-panel.c:1896
 #: panels/network/connection-editor/connection-editor.ui:15
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
@@ -123,7 +124,7 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 #: panels/network/net-device-wifi.c:1736 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:330
-#: panels/privacy/cc-privacy-panel.c:1049 panels/region/format-chooser.ui:25
+#: panels/privacy/cc-privacy-panel.c:1049 panels/region/cc-format-chooser.ui:24
 #: panels/region/input-chooser.ui:13
 #: panels/search/cc-search-locations-dialog.c:603
 #: panels/sharing/cc-sharing-panel.c:426
@@ -218,7 +219,8 @@ msgstr "Apague el modo avión para activar el Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/network/network.ui:101 panels/printers/pp-new-printer-dialog.c:1831
+#: panels/network/cc-network-panel.ui:101
+#: panels/printers/pp-new-printer-dialog.c:1831
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -566,8 +568,8 @@ msgid "_Resume"
 msgstr "_Reanudar"
 
 #. This button returns the user back to the color control panel
-#: panels/color/color-calibrate.ui:67 panels/common/language-chooser.ui:12
-#: panels/region/format-chooser.ui:14
+#: panels/color/color-calibrate.ui:67 panels/common/cc-language-chooser.ui:11
+#: panels/region/cc-format-chooser.ui:13
 msgid "_Done"
 msgstr "_Hecho"
 
@@ -844,8 +846,7 @@ msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Baja"
 
-#: panels/color/color.ui:1126 panels/power/power.ui:13
-#: panels/power/power.ui:95
+#: panels/color/color.ui:1126 panels/power/power.ui:13 panels/power/power.ui:95
 msgid "15 minutes"
 msgstr "15 minutos"
 
@@ -893,14 +894,18 @@ msgstr "Color;ICC;Perfil;Calibrado;Impresora;Pantalla;"
 msgid "Other…"
 msgstr "Otro…"
 
-#: panels/common/cc-language-chooser.c:123
-#: panels/region/cc-format-chooser.c:262 panels/region/cc-input-chooser.c:169
+#: panels/common/cc-language-chooser.c:126
+#: panels/region/cc-format-chooser.c:261 panels/region/cc-input-chooser.c:169
 msgid "More…"
 msgstr "Más…"
 
-#: panels/common/cc-language-chooser.c:139
+#: panels/common/cc-language-chooser.c:142
 msgid "No languages found"
 msgstr "No se han encontrado idiomas"
+
+#: panels/common/cc-language-chooser.ui:5
+msgid "Language"
+msgstr "Idioma"
 
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:106
@@ -927,10 +932,6 @@ msgstr "%e de %b, %Y"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Hotspot"
-
-#: panels/common/language-chooser.ui:5
-msgid "Language"
-msgstr "Idioma"
 
 #: panels/datetime/big.ui:16 panels/datetime/little.ui:16
 #: panels/datetime/middle.ui:16 panels/datetime/ydm.ui:16
@@ -1151,8 +1152,7 @@ msgstr "Horizontal (dada la vuelta)"
 msgid "Orientation"
 msgstr "Orientación"
 
-#: panels/display/cc-display-panel.c:658
-#: panels/display/cc-display-panel.c:1423
+#: panels/display/cc-display-panel.c:658 panels/display/cc-display-panel.c:1423
 #: panels/printers/pp-options-dialog.c:87
 msgid "Resolution"
 msgstr "Resolución"
@@ -1559,8 +1559,7 @@ msgstr "_Música"
 msgid "_Video"
 msgstr "_Vídeo"
 
-#: panels/info/info-default-apps.ui:162
-#: panels/info/info-removable-media.ui:161
+#: panels/info/info-default-apps.ui:162 panels/info/info-removable-media.ui:161
 msgid "_Photos"
 msgstr "_Fotos"
 
@@ -1690,8 +1689,7 @@ msgstr "Siguiente pista"
 msgid "Eject"
 msgstr "Expulsar"
 
-#: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/uap.ui:580
+#: panels/keyboard/01-input-sources.xml.in:4 panels/universal-access/uap.ui:580
 msgid "Typing"
 msgstr "Escritura"
 
@@ -1711,9 +1709,9 @@ msgstr "Lanzadores"
 msgid "Launch help browser"
 msgstr "Lanzar el visor de ayuda"
 
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:277
-#: shell/cc-window.c:913 shell/gnome-control-center.desktop.in.in:3
-#: shell/window.ui:124
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:276
+#: shell/cc-window.c:912 shell/cc-window.ui:124
+#: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Configuración"
 
@@ -1734,7 +1732,7 @@ msgid "Home folder"
 msgstr "Carpeta personal"
 
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/search/gnome-search-panel.desktop.in.in:3 shell/window.ui:156
+#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:156
 msgid "Search"
 msgstr "Buscar"
 
@@ -1935,8 +1933,8 @@ msgstr ""
 "atajo;área;trabajo;ventana:redimensionar;ampliación;contraste;fuente;entrada;"
 "bloqueo;volumen;"
 
-#: panels/keyboard/gnome-keyboard-panel.ui:67
-#: panels/region/input-options.ui:68 shell/cc-application.c:252
+#: panels/keyboard/gnome-keyboard-panel.ui:67 panels/region/input-options.ui:68
+#: shell/cc-application.c:252
 msgid "Keyboard Shortcuts"
 msgstr "Combinaciones de teclas"
 
@@ -1952,12 +1950,11 @@ msgstr "Restablecer todos los atajos a sus valores predeterminados"
 msgid "No keyboard shortcut found"
 msgstr "No se ha encontrado un atajo del teclado"
 
-#: panels/keyboard/gnome-keyboard-panel.ui:175 shell/panel-list.ui:206
+#: panels/keyboard/gnome-keyboard-panel.ui:175 shell/cc-panel-list.ui:206
 msgid "Try a different search"
 msgstr "Pruebe una búsqueda diferente"
 
-#: panels/keyboard/shortcut-editor.ui:68
-#: panels/keyboard/shortcut-editor.ui:318
+#: panels/keyboard/shortcut-editor.ui:68 panels/keyboard/shortcut-editor.ui:318
 msgid "Press Esc to cancel or Backspace to reset the keyboard shortcut."
 msgstr ""
 "Pulse Esc para cancelar o Retroceso para restablecer el atajo del teclado."
@@ -2144,7 +2141,7 @@ msgstr "Proxy de la red"
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
-#: panels/network/cc-network-panel.c:783 panels/network/wifi.ui:282
+#: panels/network/cc-network-panel.c:783 panels/network/cc-wifi-panel.ui:320
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Algo ha fallado. Contacte con el fabricante del software."
 
@@ -2152,11 +2149,54 @@ msgstr "Algo ha fallado. Contacte con el fabricante del software."
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager debe estar en ejecución."
 
-#: panels/network/cc-wifi-panel.c:276
+#: panels/network/cc-network-panel.ui:142
+#: panels/network/connection-editor/net-connection-editor.c:603
+msgid "VPN"
+msgstr "VPN"
+
+#: panels/network/cc-network-panel.ui:194
+msgid "Not set up"
+msgstr "No configurada"
+
+#: panels/network/cc-wifi-panel.c:281
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
 #: panels/network/network-wifi.ui:1769
 msgid "Wi-Fi"
 msgstr "Inalámbrica"
+
+#: panels/network/cc-wifi-panel.ui:73
+msgid "Airplane Mode"
+msgstr "Modo avión"
+
+#: panels/network/cc-wifi-panel.ui:88
+msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
+msgstr "Desactiva la red inalámbrica, el Bluetooth y la red de banda ancha"
+
+#: panels/network/cc-wifi-panel.ui:157
+msgid "No Wi-Fi Adapter Found"
+msgstr "No se han encontrado ningún adaptador inalámbrico"
+
+#: panels/network/cc-wifi-panel.ui:169
+msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
+msgstr "Asegúrese de que tiene un adaptador inalámbrico conectado y activado"
+
+#: panels/network/cc-wifi-panel.ui:204
+#| msgid "Airplane Mode"
+msgid "Airplane Mode On"
+msgstr "Modo avión activado"
+
+#: panels/network/cc-wifi-panel.ui:216
+#| msgid "Turn off Wi-Fi to save power."
+msgid "Turn off to use Wi-Fi"
+msgstr "Apagar para usar la Wi-Fi"
+
+#: panels/network/cc-wifi-panel.ui:242
+msgid "Visible Networks"
+msgstr "Redes visibles"
+
+#: panels/network/cc-wifi-panel.ui:309
+msgid "NetworkManager needs to be running"
+msgstr "NetworkManager debe estar en ejecución"
 
 #: panels/network/connection-editor/8021x-security-page.ui:26
 msgid "802.1x _Security"
@@ -2250,8 +2290,7 @@ msgstr[1] "hace %i días"
 
 #. Translators: network device speed
 #: panels/network/connection-editor/ce-page-details.c:225
-#: panels/network/net-device-ethernet.c:50
-#: panels/network/net-device-wifi.c:646
+#: panels/network/net-device-ethernet.c:50 panels/network/net-device-wifi.c:646
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
@@ -2299,8 +2338,8 @@ msgid "Remove VPN"
 msgstr "Quitar VPN"
 
 #: panels/network/connection-editor/ce-page-details.c:334
-#: panels/network/network-wifi.ui:1456 shell/cc-window.c:269
-#: shell/panel-list.ui:103
+#: panels/network/network-wifi.ui:1456 shell/cc-panel-list.ui:103
+#: shell/cc-window.c:268
 msgid "Details"
 msgstr "Detalles"
 
@@ -2592,11 +2631,6 @@ msgstr "No se pudo abrir el editor de conexiones"
 msgid "New Profile"
 msgstr "Perfil nuevo"
 
-#: panels/network/connection-editor/net-connection-editor.c:603
-#: panels/network/network.ui:142
-msgid "VPN"
-msgstr "VPN"
-
 #: panels/network/connection-editor/net-connection-editor.c:751
 msgid "Import from file…"
 msgstr "Importar desde un archivo…"
@@ -2763,9 +2797,9 @@ msgid "Wired"
 msgstr "Cableada"
 
 #: panels/network/net-device-ethernet.c:344
-#: panels/network/net-device-wifi.c:1895
-#: panels/network/network-ethernet.ui:120 panels/network/network-mobile.ui:394
-#: panels/network/network-simple.ui:75 panels/network/network-vpn.ui:79
+#: panels/network/net-device-wifi.c:1895 panels/network/network-ethernet.ui:120
+#: panels/network/network-mobile.ui:394 panels/network/network-simple.ui:75
+#: panels/network/network-vpn.ui:79
 msgid "Options…"
 msgstr "Opciones…"
 
@@ -2911,10 +2945,6 @@ msgstr "URL de _configuración"
 #: panels/network/network-simple.ui:50
 msgid "Turn device off"
 msgstr "Apagar dispositivo"
-
-#: panels/network/network.ui:194
-msgid "Not set up"
-msgstr "No configurada"
 
 #: panels/network/network-vpn.ui:56
 msgid "Turn VPN connection off"
@@ -3069,30 +3099,6 @@ msgstr "_Activar el punto de acceso inalámbrico…"
 #: panels/network/network-wifi.ui:1851
 msgid "_Known Wi-Fi Networks"
 msgstr "Redes inalámbricas _conocidas"
-
-#: panels/network/wifi.ui:40
-msgid "No Wi-Fi Adapter Found"
-msgstr "No se han encontrado ningún adaptador inalámbrico"
-
-#: panels/network/wifi.ui:52
-msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
-msgstr "Asegúrese de que tiene un adaptador inalámbrico conectado y activado"
-
-#: panels/network/wifi.ui:127
-msgid "Airplane Mode"
-msgstr "Modo avión"
-
-#: panels/network/wifi.ui:142
-msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
-msgstr "Desactiva la red inalámbrica, el Bluetooth y la red de banda ancha"
-
-#: panels/network/wifi.ui:192
-msgid "Visible Networks"
-msgstr "Redes visibles"
-
-#: panels/network/wifi.ui:271
-msgid "NetworkManager needs to be running"
-msgstr "NetworkManager debe estar en ejecución"
 
 #. TRANSLATORS: AP type
 #: panels/network/panel-common.c:127
@@ -3734,23 +3740,23 @@ msgid "_Type"
 msgstr "_Tipo"
 
 #. This is the per application switch for message tray usage.
-#: panels/notifications/edit-dialog.ui:64
+#: panels/notifications/cc-app-notifications-dialog.ui:61
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "_Notificaciones"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/edit-dialog.ui:116
+#: panels/notifications/cc-app-notifications-dialog.ui:113
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "_Alertas sonoras"
 
-#: panels/notifications/edit-dialog.ui:172
+#: panels/notifications/cc-app-notifications-dialog.ui:169
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "_Notificaciones emergentes"
 
-#: panels/notifications/edit-dialog.ui:188
+#: panels/notifications/cc-app-notifications-dialog.ui:185
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
@@ -3759,17 +3765,17 @@ msgstr ""
 "las ventanas emergentes estén desactivadas."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/edit-dialog.ui:253
+#: panels/notifications/cc-app-notifications-dialog.ui:250
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "Mostrar el _contenido del mensaje en las ventanas emergentes"
 
-#: panels/notifications/edit-dialog.ui:304
+#: panels/notifications/cc-app-notifications-dialog.ui:301
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Notificaciones de la pantalla de _bloqueo"
 
-#: panels/notifications/edit-dialog.ui:355
+#: panels/notifications/cc-app-notifications-dialog.ui:352
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Mostrar el c_ontenido del mensaje en la pantalla de bloqueo"
@@ -4126,24 +4132,29 @@ msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
 #: panels/power/cc-power-panel.c:1882
-msgid "Turn off Wi-Fi to save power."
-msgstr "Apagar la Wi-Fi para ahorrar energía."
+#| msgid "Turn off Wi-Fi to save power."
+msgid "Wi-Fi can be turned off to save power."
+msgstr "Se puede apagar la Wi-Fi para ahorrar energía."
 
 #: panels/power/cc-power-panel.c:1907
 msgid "_Mobile broadband"
 msgstr "Banda ancha _móvil"
 
 #: panels/power/cc-power-panel.c:1912
-msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
-msgstr "Apagar la banda ancha móvil (3G, 4G, LTE, etc.) para ahorrar energía."
+#| msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
+msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
+msgstr ""
+"Se puede apagar la banda ancha móvil (3G, 4G, LTE, etc.) para ahorrar "
+"energía."
 
 #: panels/power/cc-power-panel.c:1971
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
 #: panels/power/cc-power-panel.c:1976
-msgid "Turn off Bluetooth to save power."
-msgstr "Apagar el Bluetooth para ahorrar energía."
+#| msgid "Turn off Bluetooth to save power."
+msgid "Bluetooth can be turned off to save power."
+msgstr "Se puede apagar el Bluetooth para ahorrar energía."
 
 #: panels/power/cc-power-panel.c:2034
 msgid "When on battery power"
@@ -4187,8 +4198,8 @@ msgid "_When the Power Button is pressed"
 msgstr "Al pulsar el b_otón de encendido"
 
 #: panels/power/cc-power-panel.c:2445 panels/thunderbolt/cc-bolt-panel.ui:466
-#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-window.c:273
-#: shell/panel-list.ui:45
+#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
+#: shell/cc-window.c:272
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -4442,8 +4453,7 @@ msgstr ""
 
 #. Translators: This button triggers the printing of a test page.
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/options-dialog.ui:22
-#: panels/printers/pp-options-dialog.c:893
+#: panels/printers/options-dialog.ui:22 panels/printers/pp-options-dialog.c:893
 msgid "Test Page"
 msgstr "Página de prueba"
 
@@ -5228,9 +5238,41 @@ msgctxt "measurement format"
 msgid "Metric"
 msgstr "Métrico"
 
-#: panels/region/cc-format-chooser.c:278
+#: panels/region/cc-format-chooser.c:277
 msgid "No regions found"
 msgstr "No se han encontrado regiones"
+
+#: panels/region/cc-format-chooser.ui:7
+msgid "Formats"
+msgstr "Formatos"
+
+#: panels/region/cc-format-chooser.ui:120
+msgid "Preview"
+msgstr "Vista previa"
+
+#: panels/region/cc-format-chooser.ui:137
+msgid "Dates"
+msgstr "Fechas"
+
+#: panels/region/cc-format-chooser.ui:168
+msgid "Times"
+msgstr "Horas"
+
+#: panels/region/cc-format-chooser.ui:199
+msgid "Dates & Times"
+msgstr "Fecha y hora"
+
+#: panels/region/cc-format-chooser.ui:230
+msgid "Numbers"
+msgstr "Números"
+
+#: panels/region/cc-format-chooser.ui:247
+msgid "Measurement"
+msgstr "Medida"
+
+#: panels/region/cc-format-chooser.ui:264
+msgid "Paper"
+msgstr "Papel"
 
 #: panels/region/cc-input-chooser.c:182
 msgid "No input sources found"
@@ -5241,45 +5283,13 @@ msgctxt "Input Source"
 msgid "Other"
 msgstr "Otra"
 
-#: panels/region/cc-region-panel.c:804
+#: panels/region/cc-region-panel.c:802
 msgid "No input source selected"
 msgstr "No se ha seleccionado ninguna fuente de entrada"
 
-#: panels/region/cc-region-panel.c:1599
+#: panels/region/cc-region-panel.c:1597
 msgid "Login _Screen"
 msgstr "Pantalla de inicio de _sesión"
-
-#: panels/region/format-chooser.ui:7
-msgid "Formats"
-msgstr "Formatos"
-
-#: panels/region/format-chooser.ui:121
-msgid "Preview"
-msgstr "Vista previa"
-
-#: panels/region/format-chooser.ui:138
-msgid "Dates"
-msgstr "Fechas"
-
-#: panels/region/format-chooser.ui:169
-msgid "Times"
-msgstr "Horas"
-
-#: panels/region/format-chooser.ui:200
-msgid "Dates & Times"
-msgstr "Fecha y hora"
-
-#: panels/region/format-chooser.ui:231
-msgid "Numbers"
-msgstr "Números"
-
-#: panels/region/format-chooser.ui:248
-msgid "Measurement"
-msgstr "Medida"
-
-#: panels/region/format-chooser.ui:265
-msgid "Paper"
-msgstr "Papel"
 
 #: panels/region/gnome-region-panel.desktop.in.in:3
 msgid "Region & Language"
@@ -6751,7 +6761,6 @@ msgid "Ch_ange"
 msgstr "Cam_biar"
 
 #: panels/user-accounts/data/password-dialog.ui:142
-#| msgid "C_onfirm New Password"
 msgid "_Confirm New Password"
 msgstr "_Confirmar la contraseña nueva"
 
@@ -7309,11 +7318,11 @@ msgstr "Ninguno"
 msgid "Logged in"
 msgstr "Sesión iniciada"
 
-#: panels/user-accounts/um-user-panel.c:1103
+#: panels/user-accounts/um-user-panel.c:1105
 msgid "Failed to contact the accounts service"
 msgstr "Falló al contactar con el servicio de cuentas"
 
-#: panels/user-accounts/um-user-panel.c:1105
+#: panels/user-accounts/um-user-panel.c:1107
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 
@@ -7321,7 +7330,7 @@ msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/um-user-panel.c:1137
+#: panels/user-accounts/um-user-panel.c:1139
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7329,12 +7338,12 @@ msgstr ""
 "Para realizar los cambios\n"
 "pulse primero el icono *"
 
-#: panels/user-accounts/um-user-panel.c:1177
+#: panels/user-accounts/um-user-panel.c:1179
 msgid "Create a user account"
 msgstr "Crear una cuenta de usuario"
 
-#: panels/user-accounts/um-user-panel.c:1188
-#: panels/user-accounts/um-user-panel.c:1366
+#: panels/user-accounts/um-user-panel.c:1190
+#: panels/user-accounts/um-user-panel.c:1368
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7342,12 +7351,12 @@ msgstr ""
 "Para crear un usuario\n"
 "pulse primero el icono *"
 
-#: panels/user-accounts/um-user-panel.c:1198
+#: panels/user-accounts/um-user-panel.c:1200
 msgid "Delete the selected user account"
 msgstr "Quitar la cuenta de usuario seleccionada"
 
-#: panels/user-accounts/um-user-panel.c:1210
-#: panels/user-accounts/um-user-panel.c:1371
+#: panels/user-accounts/um-user-panel.c:1212
+#: panels/user-accounts/um-user-panel.c:1373
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7659,6 +7668,28 @@ msgstr "Ayuda"
 msgid "Quit"
 msgstr "Salir"
 
+#: shell/cc-panel-list.ui:195
+msgid "No results found"
+msgstr "No se han encontrado resultados"
+
+#: shell/cc-window.ui:140
+msgid "All Settings"
+msgstr "Todas las configuraciones"
+
+#: shell/cc-window.ui:234
+msgid "Warning: Development Version"
+msgstr "Advertencia: versión de desarrollo"
+
+#: shell/cc-window.ui:235
+msgid ""
+"This version of Settings should only be used for development purposes. You "
+"may experience incorrect system behavior, data loss, and other unexpected "
+"issues. "
+msgstr ""
+"Esta versión de Configuración sólo debe usarse con propósitos de desarrollo. "
+"Puede experimentar un comportamiento incorrecto del sistema, pérdida de "
+"datos y otros problemas inesperados."
+
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: shell/gnome-control-center.desktop.in.in:5
 msgid "gnome-control-center"
@@ -7722,28 +7753,6 @@ msgid ""
 msgstr ""
 "Indica si Configuración debe mostrar advertencia al ejecutar una versión de "
 "desarrollo de Configuración."
-
-#: shell/panel-list.ui:195
-msgid "No results found"
-msgstr "No se han encontrado resultados"
-
-#: shell/window.ui:140
-msgid "All Settings"
-msgstr "Todas las configuraciones"
-
-#: shell/window.ui:234
-msgid "Warning: Development Version"
-msgstr "Advertencia: versión de desarrollo"
-
-#: shell/window.ui:235
-msgid ""
-"This version of Settings should only be used for development purposes. You "
-"may experience incorrect system behavior, data loss, and other unexpected "
-"issues. "
-msgstr ""
-"Esta versión de Configuración sólo debe usarse con propósitos de desarrollo. "
-"Puede experimentar un comportamiento incorrecto del sistema, pérdida de "
-"datos y otros problemas inesperados."
 
 #. translators:
 #. * The number of sound outputs on a particular device
