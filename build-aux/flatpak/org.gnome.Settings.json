@@ -201,6 +201,9 @@
         {
             "name" : "gnome-online-accounts",
             "buildsystem" : "autotools",
+            "build-options" : {
+                "cflags" : "-Wno-error"
+            },
             "config-opts" : [
                 "--disable-telepathy",
                 "--disable-documentation"
