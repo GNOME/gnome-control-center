@@ -309,11 +309,11 @@ find_output (GnomeRRScreen *rr_screen,
 	gsize n;
 
 	settings = cc_wacom_device_get_settings (device);
-	variant = g_settings_get_value (settings, "display");
+	variant = g_settings_get_value (settings, "output");
 	edid = g_variant_get_strv (variant, &n);
 
 	if (n != 3) {
-		g_critical ("Expected 'display' key to store %d values; got %"G_GSIZE_FORMAT".", 3, n);
+		g_critical ("Expected 'output' key to store %d values; got %"G_GSIZE_FORMAT".", 3, n);
 		goto out;
 	}
 
@@ -378,7 +378,7 @@ cc_wacom_device_set_output (CcWacomDevice *device,
 		values[2] = serial;
 	}
 
-	g_settings_set_strv (settings, "display", values);
+	g_settings_set_strv (settings, "output", values);
 
 	g_free (vendor);
 	g_free (product);
