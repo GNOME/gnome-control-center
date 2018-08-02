@@ -78,6 +78,7 @@ struct _CcDisplayPanel
   GDBusProxy *iio_sensor_proxy;
   gboolean    has_accelerometer;
 
+  gchar     *main_title;
   GtkWidget *main_titlebar;
   GtkWidget *apply_titlebar;
   GtkWidget *apply_titlebar_apply;
@@ -210,6 +211,10 @@ reset_titlebar (CcDisplayPanel *self)
     {
       gtk_window_set_titlebar (GTK_WINDOW (toplevel), self->main_titlebar);
       g_clear_object (&self->main_titlebar);
+
+      /* The split header bar will not reset the window title, so do that here. */
+      gtk_window_set_title (GTK_WINDOW (toplevel), self->main_title);
+      g_clear_pointer (&self->main_title, g_free);
     }
 
   g_clear_object (&self->apply_titlebar);
@@ -1916,6 +1921,7 @@ show_apply_titlebar (CcDisplayPanel *panel, gboolean is_applicable)
       header = gtk_window_get_titlebar (GTK_WINDOW (toplevel));
       if (header)
         panel->main_titlebar = g_object_ref (header);
+      panel->main_title = g_strdup (gtk_window_get_title (GTK_WINDOW (toplevel)));
 
       gtk_window_set_titlebar (GTK_WINDOW (toplevel), panel->apply_titlebar);
       g_object_ref (panel->apply_titlebar);
