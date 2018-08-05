@@ -1597,10 +1597,10 @@ net_device_wifi_constructed (GObject *object)
         } else
                 gtk_widget_set_sensitive (widget, TRUE);
 
-        g_signal_connect (client, NM_CLIENT_CONNECTION_ADDED,
-                          G_CALLBACK (client_connection_added_cb), device_wifi);
-        g_signal_connect (client, NM_CLIENT_CONNECTION_REMOVED,
-                          G_CALLBACK (client_connection_removed_cb), device_wifi);
+        g_signal_connect_object (client, NM_CLIENT_CONNECTION_ADDED,
+                                 G_CALLBACK (client_connection_added_cb), device_wifi, 0);
+        g_signal_connect_object (client, NM_CLIENT_CONNECTION_REMOVED,
+                                 G_CALLBACK (client_connection_removed_cb), device_wifi, 0);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "heading_list"));
         g_object_bind_property (device_wifi, "title", widget, "label", 0);
