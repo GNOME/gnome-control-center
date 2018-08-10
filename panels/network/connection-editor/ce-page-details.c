@@ -37,6 +37,8 @@ struct _CEPageDetails
         GtkLabel *dns_heading_label;
         GtkLabel *dns_label;
         GtkButton *forget_button;
+        GtkLabel *freq_heading_label;
+        GtkLabel *freq_label;
         GtkLabel *ipv4_heading_label;
         GtkLabel *ipv4_label;
         GtkLabel *ipv6_heading_label;
@@ -212,6 +214,7 @@ connect_details_page (CEPageDetails *self)
 {
         NMSettingConnection *sc;
         guint speed;
+        NMDeviceWifiCapabilities wifi_caps;
         guint strength;
         NMDeviceState state;
         NMAccessPoint *active_ap;
@@ -219,6 +222,7 @@ connect_details_page (CEPageDetails *self)
         const gchar *type;
         const gchar *hw_address = NULL;
         g_autofree gchar *security_string = NULL;
+        g_autofree gchar *freq_string = NULL;
         const gchar *strength_label;
         gboolean device_is_active;
         NMIPConfig *ipv4_config = NULL, *ipv6_config = NULL;
@@ -236,10 +240,13 @@ connect_details_page (CEPageDetails *self)
 
         device_is_active = FALSE;
         speed = 0;
+        wifi_caps = 0;
         if (active_ap && self->ap == active_ap && state != NM_DEVICE_STATE_UNAVAILABLE) {
                 device_is_active = TRUE;
-                if (NM_IS_DEVICE_WIFI (self->device))
+                if (NM_IS_DEVICE_WIFI (self->device)) {
                         speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (self->device)) / 1000;
+                        wifi_caps = nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (self->device));
+                }
         } else if (self->device) {
                 NMActiveConnection *ac;
                 const gchar *p1, *p2;
@@ -249,9 +256,10 @@ connect_details_page (CEPageDetails *self)
                 p2 = nm_connection_get_uuid (self->connection);
                 if (g_strcmp0 (p1, p2) == 0) {
                         device_is_active = TRUE;
-                        if (NM_IS_DEVICE_WIFI (self->device))
+                        if (NM_IS_DEVICE_WIFI (self->device)) {
                                 speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (self->device)) / 1000;
-                        else if (NM_IS_DEVICE_ETHERNET (self->device))
+                                wifi_caps = nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (self->device));
+                        } else if (NM_IS_DEVICE_ETHERNET (self->device))
                                 speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (self->device));
                 }
         }
@@ -269,6 +277,20 @@ connect_details_page (CEPageDetails *self)
         gtk_label_set_label (self->mac_label, hw_address);
         gtk_widget_set_visible (GTK_WIDGET (self->mac_heading_label), hw_address != NULL);
         gtk_widget_set_visible (GTK_WIDGET (self->mac_label), hw_address != NULL);
+
+        if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_VALID) {
+                if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_2GHZ &&
+                    wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_5GHZ)
+                        freq_string = g_strdup (_("2.4 GHz / 5 GHz"));
+                else if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_2GHZ)
+                        freq_string = g_strdup (_("2.4 GHz"));
+                else if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_5GHZ)
+                        freq_string = g_strdup (_("5 GHz"));
+        }
+
+        gtk_label_set_label (self->freq_label, freq_string);
+        gtk_widget_set_visible (GTK_WIDGET (self->freq_heading_label), freq_string != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->freq_label), freq_string != NULL);
 
         if (device_is_active && active_ap)
                 security_string = get_ap_security_string (active_ap);
@@ -434,6 +456,8 @@ ce_page_details_class_init (CEPageDetailsClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, dns_heading_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, dns_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, forget_button);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, freq_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, freq_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, ipv4_heading_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, ipv4_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, ipv6_heading_label);
