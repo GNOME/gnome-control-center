@@ -184,6 +184,7 @@ connect_details_page (CEPageDetails *page)
         GtkWidget *widget;
         guint speed;
         NMDeviceWifiCapabilities wifi_caps;
+        guint frequency;
         guint strength;
         NMDeviceState state;
         NMAccessPoint *active_ap;
@@ -194,10 +195,13 @@ connect_details_page (CEPageDetails *page)
         sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
         type = nm_setting_connection_get_connection_type (sc);
 
-        if (NM_IS_DEVICE_WIFI (page->device))
+        if (NM_IS_DEVICE_WIFI (page->device)) {
                 active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (page->device));
-        else
+                frequency = nm_access_point_get_frequency (active_ap);
+        } else {
                 active_ap = NULL;
+                frequency = 0;
+        }
 
         state = page->device ? nm_device_get_state (page->device) : NM_DEVICE_STATE_DISCONNECTED;
 
@@ -226,7 +230,9 @@ connect_details_page (CEPageDetails *page)
                                 speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (page->device));
                 }
         }
-        if (speed > 0)
+        if (speed > 0 && frequency > 0)
+                str = g_strdup_printf (_("%d Mb/s (%1.1f GHz)"), speed, (float) (frequency) / 1000.0);
+        else if (speed > 0)
                 str = g_strdup_printf (_("%d Mb/s"), speed);
         else
                 str = NULL;
