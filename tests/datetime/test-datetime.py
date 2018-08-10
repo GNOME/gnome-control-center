@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # Copyright © 2018 Red Hat, Inc
 #             2018 Endless Mobile, Inc
 #
