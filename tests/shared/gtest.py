@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # Copyright © 2018 Red Hat, Inc
 #
 # This program is free software; you can redistribute it and/or modify
