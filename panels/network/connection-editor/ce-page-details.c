@@ -183,6 +183,7 @@ connect_details_page (CEPageDetails *page)
         NMSettingConnection *sc;
         GtkWidget *widget;
         guint speed;
+        NMDeviceWifiCapabilities wifi_caps;
         guint strength;
         NMDeviceState state;
         NMAccessPoint *active_ap;
@@ -202,10 +203,13 @@ connect_details_page (CEPageDetails *page)
 
         device_is_active = FALSE;
         speed = 0;
+        wifi_caps = 0;
         if (active_ap && page->ap == active_ap && state != NM_DEVICE_STATE_UNAVAILABLE) {
                 device_is_active = TRUE;
-                if (NM_IS_DEVICE_WIFI (page->device))
+                if (NM_IS_DEVICE_WIFI (page->device)) {
                         speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (page->device)) / 1000;
+                        wifi_caps = nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (page->device));
+                }
         } else if (page->device) {
                 NMActiveConnection *ac;
                 const gchar *p1, *p2;
@@ -215,9 +219,10 @@ connect_details_page (CEPageDetails *page)
                 p2 = nm_connection_get_uuid (CE_PAGE (page)->connection);
                 if (g_strcmp0 (p1, p2) == 0) {
                         device_is_active = TRUE;
-                        if (NM_IS_DEVICE_WIFI (page->device))
+                        if (NM_IS_DEVICE_WIFI (page->device)) {
                                 speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (page->device)) / 1000;
-                        else if (NM_IS_DEVICE_ETHERNET (page->device))
+                                wifi_caps = nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (page->device));
+                        } else if (NM_IS_DEVICE_ETHERNET (page->device))
                                 speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (page->device));
                 }
         }
@@ -234,6 +239,19 @@ connect_details_page (CEPageDetails *page)
                 str = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (page->device));
 
         panel_set_device_widget_details (CE_PAGE (page)->builder, "mac", str);
+
+        if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_VALID) {
+                if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_2GHZ &&
+                    wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_5GHZ)
+                        str = g_strdup (_("2.4 GHz / 5 GHz"));
+                else if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_2GHZ)
+                        str = g_strdup (_("2.4 GHz"));
+                else if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_5GHZ)
+                        str = g_strdup (_("5 GHz"));
+        }
+
+        panel_set_device_widget_details (CE_PAGE (page)->builder, "freq", str);
+        g_clear_pointer (&str, g_free);
 
         str = NULL;
         if (device_is_active && active_ap)
