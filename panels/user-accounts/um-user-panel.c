@@ -839,7 +839,6 @@ show_user (ActUser *user, CcUserPanel *self)
         lang = g_strdup (act_user_get_language (user));
         if ((!lang || *lang == '\0') && act_user_get_uid (user) == getuid ()) {
                 lang = cc_common_language_get_current_language ();
-                act_user_set_language (user, lang);
         }
 
         if (lang && *lang != '\0') {
