@@ -1549,7 +1549,7 @@ um_account_dialog_dispose (GObject *obj)
                 self->enterprise_domain_timeout_id = 0;
         }
 
-        g_clear_pointer (&self->join_dialog, gtk_widget_destroy);
+        g_clear_pointer ((GtkWidget **)&self->join_dialog, gtk_widget_destroy);
 
         G_OBJECT_CLASS (um_account_dialog_parent_class)->dispose (obj);
 }
