@@ -1485,7 +1485,7 @@ cc_user_panel_dispose (GObject *object)
                 gtk_dialog_response (GTK_DIALOG (self->account_dialog), GTK_RESPONSE_DELETE_EVENT);
                 self->account_dialog = NULL;
         }
-        g_clear_pointer (&self->language_chooser, gtk_widget_destroy);
+        g_clear_pointer ((GtkWidget **)&self->language_chooser, gtk_widget_destroy);
         g_clear_object (&self->permission);
         G_OBJECT_CLASS (cc_user_panel_parent_class)->dispose (object);
 }
