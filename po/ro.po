@@ -17,10 +17,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2018-07-14 15:07+0000\n"
-"PO-Revision-Date: 2018-07-17 19:16+0300\n"
-"Last-Translator: Florentina Mușat <florentina.musat.28 [at] gmail [dot] "
-"com>\n"
+"POT-Creation-Date: 2018-08-09 17:00+0000\n"
+"PO-Revision-Date: 2018-08-19 18:35+0200\n"
+"Last-Translator: Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>\n"
 "Language-Team: Gnome Romanian Translation Team\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +27,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);\n"
-"X-Generator: Poedit 2.0.9\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Launchpad-Export-Date: 2014-07-13 17:08+0000\n"
 "X-Project-Style: gnome\n"
 
@@ -116,7 +115,8 @@ msgstr "Puteți adăuga imagini în directorul %s și acestea vor fi afișate ai
 #: panels/background/cc-background-chooser-dialog.c:560
 #: panels/color/cc-color-panel.c:240 panels/color/cc-color-panel.c:893
 #: panels/color/color-calibrate.ui:25 panels/color/color.ui:657
-#: panels/common/language-chooser.ui:23 panels/display/cc-display-panel.c:1896
+#: panels/common/cc-language-chooser.ui:22
+#: panels/display/cc-display-panel.c:1901
 #: panels/network/connection-editor/connection-editor.ui:15
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
@@ -124,7 +124,7 @@ msgstr "Puteți adăuga imagini în directorul %s și acestea vor fi afișate ai
 #: panels/network/net-device-wifi.c:1736 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:330
-#: panels/privacy/cc-privacy-panel.c:1049 panels/region/format-chooser.ui:25
+#: panels/privacy/cc-privacy-panel.c:1049 panels/region/cc-format-chooser.ui:24
 #: panels/region/input-chooser.ui:13
 #: panels/search/cc-search-locations-dialog.c:603
 #: panels/sharing/cc-sharing-panel.c:426
@@ -218,7 +218,8 @@ msgstr "Opriți modul avion pentru a putea activa Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/network/network.ui:101 panels/printers/pp-new-printer-dialog.c:1831
+#: panels/network/cc-network-panel.ui:101
+#: panels/printers/pp-new-printer-dialog.c:1831
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -564,8 +565,8 @@ msgid "_Resume"
 msgstr "_Continuă"
 
 #. This button returns the user back to the color control panel
-#: panels/color/color-calibrate.ui:67 panels/common/language-chooser.ui:12
-#: panels/region/format-chooser.ui:14
+#: panels/color/color-calibrate.ui:67 panels/common/cc-language-chooser.ui:11
+#: panels/region/cc-format-chooser.ui:13
 msgid "_Done"
 msgstr "_Gata"
 
@@ -896,14 +897,18 @@ msgstr ""
 msgid "Other…"
 msgstr "Altele…"
 
-#: panels/common/cc-language-chooser.c:123
-#: panels/region/cc-format-chooser.c:262 panels/region/cc-input-chooser.c:169
+#: panels/common/cc-language-chooser.c:126
+#: panels/region/cc-format-chooser.c:261 panels/region/cc-input-chooser.c:169
 msgid "More…"
 msgstr "Mai mult…"
 
-#: panels/common/cc-language-chooser.c:139
+#: panels/common/cc-language-chooser.c:142
 msgid "No languages found"
 msgstr "Nu s-au găsit limbi"
+
+#: panels/common/cc-language-chooser.ui:5
+msgid "Language"
+msgstr "Limba"
 
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:106
@@ -930,10 +935,6 @@ msgstr "%b %e, %Y"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Hotspot"
-
-#: panels/common/language-chooser.ui:5
-msgid "Language"
-msgstr "Limba"
 
 #: panels/datetime/big.ui:16 panels/datetime/little.ui:16
 #: panels/datetime/middle.ui:16 panels/datetime/ydm.ui:16
@@ -1127,58 +1128,58 @@ msgstr "Modifică data și ora sistemului"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Pentru a schimba data sau ora, trebuie să vă autentificați."
 
-#: panels/display/cc-display-panel.c:515
+#: panels/display/cc-display-panel.c:520
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Peisaj"
 
-#: panels/display/cc-display-panel.c:518
+#: panels/display/cc-display-panel.c:523
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Portret dreapta"
 
-#: panels/display/cc-display-panel.c:521
+#: panels/display/cc-display-panel.c:526
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Portret stânga"
 
-#: panels/display/cc-display-panel.c:524
+#: panels/display/cc-display-panel.c:529
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Peisaj (inversat)"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/display/cc-display-panel.c:591
+#: panels/display/cc-display-panel.c:596
 #: panels/printers/pp-options-dialog.c:558
 msgid "Orientation"
 msgstr "Orientare"
 
-#: panels/display/cc-display-panel.c:658 panels/display/cc-display-panel.c:1423
+#: panels/display/cc-display-panel.c:663 panels/display/cc-display-panel.c:1428
 #: panels/printers/pp-options-dialog.c:87
 msgid "Resolution"
 msgstr "Rezoluție"
 
-#: panels/display/cc-display-panel.c:745
+#: panels/display/cc-display-panel.c:750
 msgid "Refresh Rate"
 msgstr "Rata de reîmprospătare"
 
-#: panels/display/cc-display-panel.c:880
+#: panels/display/cc-display-panel.c:885
 msgid "Scale"
 msgstr "Scalează"
 
-#: panels/display/cc-display-panel.c:932
+#: panels/display/cc-display-panel.c:937
 msgid "Adjust for TV"
 msgstr "Reglează pentru TV"
 
-#: panels/display/cc-display-panel.c:1167
+#: panels/display/cc-display-panel.c:1172
 msgid "Primary Display"
 msgstr "Afișaj primar"
 
-#: panels/display/cc-display-panel.c:1195
+#: panels/display/cc-display-panel.c:1200
 msgid "Display Arrangement"
 msgstr "Aranjamentul afișajelor"
 
-#: panels/display/cc-display-panel.c:1196
+#: panels/display/cc-display-panel.c:1201
 msgid ""
 "Drag displays to match your setup. The top bar is placed on the primary "
 "display."
@@ -1186,47 +1187,47 @@ msgstr ""
 "Trageți afișaje potrivit situației dumneavoastră. Bara de sus este plasată "
 "pe afișajul primar."
 
-#: panels/display/cc-display-panel.c:1610
+#: panels/display/cc-display-panel.c:1615
 msgid "Display Mode"
 msgstr "Modul de afișaj"
 
-#: panels/display/cc-display-panel.c:1626
+#: panels/display/cc-display-panel.c:1631
 msgid "Join Displays"
 msgstr "Unește afișaje"
 
-#: panels/display/cc-display-panel.c:1629
+#: panels/display/cc-display-panel.c:1634
 msgid "Mirror"
 msgstr "Oglindire"
 
-#: panels/display/cc-display-panel.c:1632
+#: panels/display/cc-display-panel.c:1637
 msgid "Single Display"
 msgstr "Afișaj singular"
 
-#: panels/display/cc-display-panel.c:1906
+#: panels/display/cc-display-panel.c:1911
 #: panels/network/connection-editor/connection-editor.ui:24
 #: panels/network/network-wifi.ui:38
 msgid "_Apply"
 msgstr "_Aplică"
 
-#: panels/display/cc-display-panel.c:1927
+#: panels/display/cc-display-panel.c:1933
 msgid "Apply Changes?"
 msgstr "Aplicați modificările?"
 
-#: panels/display/cc-display-panel.c:1932
+#: panels/display/cc-display-panel.c:1938
 msgid "Changes Cannot be Applied"
 msgstr "Nu se pot aplica modificările"
 
-#: panels/display/cc-display-panel.c:1933
+#: panels/display/cc-display-panel.c:1939
 msgid "This could be due to hardware limitations."
 msgstr "Aceasta poate fi din cauza limitărilor de hardware."
 
-#: panels/display/cc-display-panel.c:2064
+#: panels/display/cc-display-panel.c:2070
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
 
 #. TRANSLATORS: the state of the night light setting
-#: panels/display/cc-display-panel.c:2236
+#: panels/display/cc-display-panel.c:2242
 #: panels/notifications/cc-notifications-panel.c:288
 #: panels/power/cc-power-panel.c:2038 panels/power/cc-power-panel.c:2045
 #: panels/privacy/cc-privacy-panel.c:193 panels/privacy/cc-privacy-panel.c:260
@@ -1238,7 +1239,7 @@ msgstr "%.2lf Hz"
 msgid "On"
 msgstr "Pornit"
 
-#: panels/display/cc-display-panel.c:2236 panels/network/net-proxy.c:54
+#: panels/display/cc-display-panel.c:2242 panels/network/net-proxy.c:54
 #: panels/notifications/cc-notifications-panel.c:288
 #: panels/power/cc-power-panel.c:2032 panels/power/cc-power-panel.c:2043
 #: panels/privacy/cc-privacy-panel.c:193 panels/privacy/cc-privacy-panel.c:260
@@ -1254,11 +1255,11 @@ msgstr "Pornit"
 msgid "Off"
 msgstr "Oprit"
 
-#: panels/display/cc-display-panel.c:2256
+#: panels/display/cc-display-panel.c:2262
 msgid "_Night Light"
 msgstr "Lumină _nocturnă"
 
-#: panels/display/cc-display-panel.c:2317
+#: panels/display/cc-display-panel.c:2323
 msgid "Could not get screen information"
 msgstr "Nu s-au putut obține informații despre ecran"
 
@@ -1713,9 +1714,9 @@ msgstr "Lansatori"
 msgid "Launch help browser"
 msgstr "Lansează navigatorul de ajutor"
 
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:277
-#: shell/cc-window.c:913 shell/gnome-control-center.desktop.in.in:3
-#: shell/window.ui:124
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:251
+#: shell/cc-window.c:888 shell/cc-window.ui:124
+#: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Configurări"
 
@@ -1736,7 +1737,7 @@ msgid "Home folder"
 msgstr "Dosar personal"
 
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/search/gnome-search-panel.desktop.in.in:3 shell/window.ui:156
+#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:156
 msgid "Search"
 msgstr "Caută"
 
@@ -1955,7 +1956,7 @@ msgstr "Restabilește toate scurtăturile la valorile implicite"
 msgid "No keyboard shortcut found"
 msgstr "Nicio scurtătură de tastatură găsită"
 
-#: panels/keyboard/gnome-keyboard-panel.ui:175 shell/panel-list.ui:206
+#: panels/keyboard/gnome-keyboard-panel.ui:175 shell/cc-panel-list.ui:206
 msgid "Try a different search"
 msgstr "Încercați o căutare diferită"
 
@@ -2007,7 +2008,7 @@ msgstr "Înlocuiește"
 msgid "Set"
 msgstr "Stabilește"
 
-#: panels/mouse/cc-mouse-panel.c:80 panels/wacom/cc-wacom-panel.c:439
+#: panels/mouse/cc-mouse-panel.c:80 panels/wacom/cc-wacom-panel.c:427
 msgid "Test Your _Settings"
 msgstr "Te_stează configurările"
 
@@ -2146,7 +2147,7 @@ msgstr "Proxy rețea"
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: panels/network/cc-network-panel.c:783 panels/network/wifi.ui:282
+#: panels/network/cc-network-panel.c:783 panels/network/cc-wifi-panel.ui:320
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Ups, ceva nu a funcționat corect. Vă rugăm să contactați distribuitorul de "
@@ -2156,11 +2157,52 @@ msgstr ""
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager trebuie să funcționeze."
 
-#: panels/network/cc-wifi-panel.c:276
+#: panels/network/cc-network-panel.ui:142
+#: panels/network/connection-editor/net-connection-editor.c:603
+msgid "VPN"
+msgstr "VPN"
+
+#: panels/network/cc-network-panel.ui:194
+msgid "Not set up"
+msgstr "Neconfigurat"
+
+#: panels/network/cc-wifi-panel.c:281
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
 #: panels/network/network-wifi.ui:1769
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
+
+#: panels/network/cc-wifi-panel.ui:73
+msgid "Airplane Mode"
+msgstr "Modul avion"
+
+#: panels/network/cc-wifi-panel.ui:88
+msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
+msgstr "Dezactivează Wi-Fi, Bluetooth și conexiunea de date mobile"
+
+#: panels/network/cc-wifi-panel.ui:157
+msgid "No Wi-Fi Adapter Found"
+msgstr "Nu au fost găsit niciun adaptor Wi-Fi"
+
+#: panels/network/cc-wifi-panel.ui:169
+msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
+msgstr "Asigurați-vă că aveți un adaptor Wi-Fi conectat și pornit"
+
+#: panels/network/cc-wifi-panel.ui:204
+msgid "Airplane Mode On"
+msgstr "Modul avion este pornit"
+
+#: panels/network/cc-wifi-panel.ui:216
+msgid "Turn off to use Wi-Fi"
+msgstr "Opriți pentru a utiliza Wi-Fi"
+
+#: panels/network/cc-wifi-panel.ui:242
+msgid "Visible Networks"
+msgstr "Rețele vizibile"
+
+#: panels/network/cc-wifi-panel.ui:309
+msgid "NetworkManager needs to be running"
+msgstr "NetworkManager trebuie să funcționeze"
 
 #: panels/network/connection-editor/8021x-security-page.ui:26
 msgid "802.1x _Security"
@@ -2303,8 +2345,8 @@ msgid "Remove VPN"
 msgstr "Elimină VPN"
 
 #: panels/network/connection-editor/ce-page-details.c:334
-#: panels/network/network-wifi.ui:1456 shell/cc-window.c:269
-#: shell/panel-list.ui:103
+#: panels/network/network-wifi.ui:1456 shell/cc-panel-list.ui:103
+#: shell/cc-window.c:243
 msgid "Details"
 msgstr "Detalii"
 
@@ -2595,11 +2637,6 @@ msgstr "Nu se poate deschide editorul de conexiuni"
 #: panels/network/connection-editor/net-connection-editor.c:291
 msgid "New Profile"
 msgstr "Profil nou"
-
-#: panels/network/connection-editor/net-connection-editor.c:603
-#: panels/network/network.ui:142
-msgid "VPN"
-msgstr "VPN"
 
 #: panels/network/connection-editor/net-connection-editor.c:751
 msgid "Import from file…"
@@ -2915,10 +2952,6 @@ msgstr "_URL de configurare"
 msgid "Turn device off"
 msgstr "Închide dispozitivul"
 
-#: panels/network/network.ui:194
-msgid "Not set up"
-msgstr "Neconfigurat"
-
 #: panels/network/network-vpn.ui:56
 msgid "Turn VPN connection off"
 msgstr "Închide conexiunea VPN"
@@ -3071,30 +3104,6 @@ msgstr "Porneș_te hotspot Wi-Fi…"
 #: panels/network/network-wifi.ui:1851
 msgid "_Known Wi-Fi Networks"
 msgstr "Rețele _Wi-Fi cunoscute"
-
-#: panels/network/wifi.ui:40
-msgid "No Wi-Fi Adapter Found"
-msgstr "Nu au fost găsit niciun adaptor Wi-Fi"
-
-#: panels/network/wifi.ui:52
-msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
-msgstr "Asigurați-vă că aveți un adaptor Wi-Fi conectat și pornit"
-
-#: panels/network/wifi.ui:127
-msgid "Airplane Mode"
-msgstr "Modul avion"
-
-#: panels/network/wifi.ui:142
-msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
-msgstr "Dezactivează Wi-Fi, Bluetooth și conexiunea de date mobile"
-
-#: panels/network/wifi.ui:192
-msgid "Visible Networks"
-msgstr "Rețele vizibile"
-
-#: panels/network/wifi.ui:271
-msgid "NetworkManager needs to be running"
-msgstr "NetworkManager trebuie să funcționeze"
 
 #. TRANSLATORS: AP type
 #: panels/network/panel-common.c:127
@@ -3732,23 +3741,23 @@ msgid "_Type"
 msgstr "_Tipul"
 
 #. This is the per application switch for message tray usage.
-#: panels/notifications/edit-dialog.ui:64
+#: panels/notifications/cc-app-notifications-dialog.ui:61
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "_Notificări"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/edit-dialog.ui:116
+#: panels/notifications/cc-app-notifications-dialog.ui:113
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "_Alerte sonore"
 
-#: panels/notifications/edit-dialog.ui:172
+#: panels/notifications/cc-app-notifications-dialog.ui:169
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "Notificări _popup"
 
-#: panels/notifications/edit-dialog.ui:188
+#: panels/notifications/cc-app-notifications-dialog.ui:185
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
@@ -3757,17 +3766,17 @@ msgstr ""
 "sunt dezactivate."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/edit-dialog.ui:253
+#: panels/notifications/cc-app-notifications-dialog.ui:250
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "Arată _conținutul mesajelor în popup-uri"
 
-#: panels/notifications/edit-dialog.ui:304
+#: panels/notifications/cc-app-notifications-dialog.ui:301
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Notificări b_locare ecran"
 
-#: panels/notifications/edit-dialog.ui:355
+#: panels/notifications/cc-app-notifications-dialog.ui:352
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Arată c_onținutul mesajelor pe ecranul blocat"
@@ -3997,7 +4006,7 @@ msgid "Media player"
 msgstr "Player media"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:553 panels/wacom/cc-wacom-panel.c:830
+#: panels/power/cc-power-panel.c:553 panels/wacom/cc-wacom-panel.c:807
 msgid "Tablet"
 msgstr "Tabletă"
 
@@ -4133,25 +4142,26 @@ msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
 #: panels/power/cc-power-panel.c:1882
-msgid "Turn off Wi-Fi to save power."
-msgstr "Închide Wi-Fi pentru a economisi energia."
+msgid "Wi-Fi can be turned off to save power."
+msgstr "Wi-Fi poate fi oprit pentru a economisi energia."
 
 #: panels/power/cc-power-panel.c:1907
 msgid "_Mobile broadband"
 msgstr "Internet _mobil de bandă largă"
 
 #: panels/power/cc-power-panel.c:1912
-msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
+msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
-"Închide internetul mobil (3G, 4G, LTE, etc.) pentru a economisi energie."
+"Conexiunea mobilă de bandă largă (3G, 4G, LTE, etc.) poate fi oprită pentru "
+"a economisi energie."
 
 #: panels/power/cc-power-panel.c:1971
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
 #: panels/power/cc-power-panel.c:1976
-msgid "Turn off Bluetooth to save power."
-msgstr "Închide Bluetooth pentru a economisi energia."
+msgid "Bluetooth can be turned off to save power."
+msgstr "Bluetooth poate fi oprit pentru a economisi energie."
 
 #: panels/power/cc-power-panel.c:2034
 msgid "When on battery power"
@@ -4195,8 +4205,8 @@ msgid "_When the Power Button is pressed"
 msgstr "_Când butonul de oprire este apăsat"
 
 #: panels/power/cc-power-panel.c:2445 panels/thunderbolt/cc-bolt-panel.ui:466
-#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-window.c:273
-#: shell/panel-list.ui:45
+#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
+#: shell/cc-window.c:247
 msgid "Devices"
 msgstr "Dispozitive"
 
@@ -5236,9 +5246,41 @@ msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metric"
 
-#: panels/region/cc-format-chooser.c:278
+#: panels/region/cc-format-chooser.c:277
 msgid "No regions found"
 msgstr "Nu s-au găsit regiuni"
+
+#: panels/region/cc-format-chooser.ui:7
+msgid "Formats"
+msgstr "Formate"
+
+#: panels/region/cc-format-chooser.ui:120
+msgid "Preview"
+msgstr "Previzualizare"
+
+#: panels/region/cc-format-chooser.ui:137
+msgid "Dates"
+msgstr "Date"
+
+#: panels/region/cc-format-chooser.ui:168
+msgid "Times"
+msgstr "Repere orare"
+
+#: panels/region/cc-format-chooser.ui:199
+msgid "Dates & Times"
+msgstr "Date și ore"
+
+#: panels/region/cc-format-chooser.ui:230
+msgid "Numbers"
+msgstr "Numere"
+
+#: panels/region/cc-format-chooser.ui:247
+msgid "Measurement"
+msgstr "Unități de măsură"
+
+#: panels/region/cc-format-chooser.ui:264
+msgid "Paper"
+msgstr "Hârtie"
 
 #: panels/region/cc-input-chooser.c:182
 msgid "No input sources found"
@@ -5249,45 +5291,13 @@ msgctxt "Input Source"
 msgid "Other"
 msgstr "Altele"
 
-#: panels/region/cc-region-panel.c:804
+#: panels/region/cc-region-panel.c:802
 msgid "No input source selected"
 msgstr "Nicio sursă de intrare selectată"
 
-#: panels/region/cc-region-panel.c:1599
+#: panels/region/cc-region-panel.c:1597
 msgid "Login _Screen"
 msgstr "_Ecran de autentificare"
-
-#: panels/region/format-chooser.ui:7
-msgid "Formats"
-msgstr "Formate"
-
-#: panels/region/format-chooser.ui:121
-msgid "Preview"
-msgstr "Previzualizare"
-
-#: panels/region/format-chooser.ui:138
-msgid "Dates"
-msgstr "Date"
-
-#: panels/region/format-chooser.ui:169
-msgid "Times"
-msgstr "Repere orare"
-
-#: panels/region/format-chooser.ui:200
-msgid "Dates & Times"
-msgstr "Date și ore"
-
-#: panels/region/format-chooser.ui:231
-msgid "Numbers"
-msgstr "Numere"
-
-#: panels/region/format-chooser.ui:248
-msgid "Measurement"
-msgstr "Unități de măsură"
-
-#: panels/region/format-chooser.ui:265
-msgid "Paper"
-msgstr "Hârtie"
 
 #: panels/region/gnome-region-panel.desktop.in.in:3
 msgid "Region & Language"
@@ -7317,11 +7327,11 @@ msgstr "Niciuna"
 msgid "Logged in"
 msgstr "Autentificat"
 
-#: panels/user-accounts/um-user-panel.c:1103
+#: panels/user-accounts/um-user-panel.c:1105
 msgid "Failed to contact the accounts service"
 msgstr "Contactarea serviciului pentru conturi a eșuat"
 
-#: panels/user-accounts/um-user-panel.c:1105
+#: panels/user-accounts/um-user-panel.c:1107
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asigurați-vă că aplicația AccountService este corect instalată."
 
@@ -7329,7 +7339,7 @@ msgstr "Asigurați-vă că aplicația AccountService este corect instalată."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/um-user-panel.c:1137
+#: panels/user-accounts/um-user-panel.c:1139
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7337,12 +7347,12 @@ msgstr ""
 "Pentru a face schimbări,\n"
 "dați clic întâi pe iconița *"
 
-#: panels/user-accounts/um-user-panel.c:1177
+#: panels/user-accounts/um-user-panel.c:1179
 msgid "Create a user account"
 msgstr "Creează un cont de utilizator"
 
-#: panels/user-accounts/um-user-panel.c:1188
-#: panels/user-accounts/um-user-panel.c:1366
+#: panels/user-accounts/um-user-panel.c:1190
+#: panels/user-accounts/um-user-panel.c:1368
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7350,12 +7360,12 @@ msgstr ""
 "Pentru a crea un cont de utilizator,\n"
 "efectuați clic pe iconița *"
 
-#: panels/user-accounts/um-user-panel.c:1198
+#: panels/user-accounts/um-user-panel.c:1200
 msgid "Delete the selected user account"
 msgstr "Șterge contul de utilizator selectat"
 
-#: panels/user-accounts/um-user-panel.c:1210
-#: panels/user-accounts/um-user-panel.c:1371
+#: panels/user-accounts/um-user-panel.c:1212
+#: panels/user-accounts/um-user-panel.c:1373
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7395,7 +7405,7 @@ msgstr ""
 msgid "Map Buttons"
 msgstr "Alocare butoane"
 
-#: panels/wacom/button-mapping.ui:37 panels/wacom/cc-wacom-page.c:556
+#: panels/wacom/button-mapping.ui:37 panels/wacom/cc-wacom-page.c:533
 #: panels/wacom/gnome-wacom-properties.ui:60
 msgid "_Close"
 msgstr "În_chide"
@@ -7424,59 +7434,59 @@ msgstr ""
 msgid "Mis-click detected, restarting…"
 msgstr "S-a detectat un clic pierdut, se repornește…"
 
-#: panels/wacom/cc-wacom-button-row.c:266
+#: panels/wacom/cc-wacom-button-row.c:253
 #, c-format
 msgid "Button %d"
 msgstr "Buton %d"
 
-#: panels/wacom/cc-wacom-button-row.h:53
+#: panels/wacom/cc-wacom-button-row.h:34
 msgctxt "Wacom action-type"
 msgid "Application defined"
 msgstr "Definit de aplicație"
 
-#: panels/wacom/cc-wacom-button-row.h:54
+#: panels/wacom/cc-wacom-button-row.h:35
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
 msgstr "Trimitere apăsare de tastă"
 
-#: panels/wacom/cc-wacom-button-row.h:55
+#: panels/wacom/cc-wacom-button-row.h:36
 msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "Comută monitorul"
 
-#: panels/wacom/cc-wacom-button-row.h:56
+#: panels/wacom/cc-wacom-button-row.h:37
 msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Arată ajutorul pe ecran"
 
-#: panels/wacom/cc-wacom-mapping-panel.c:260
+#: panels/wacom/cc-wacom-mapping-panel.c:256
 msgid "Output:"
 msgstr "Ieșire:"
 
 #. Keep ratio switch
-#: panels/wacom/cc-wacom-mapping-panel.c:272
+#: panels/wacom/cc-wacom-mapping-panel.c:268
 msgid "Keep aspect ratio (letterbox):"
 msgstr "Păstrează raportul de aspect (letterbox):"
 
 #. Whole-desktop checkbox
-#: panels/wacom/cc-wacom-mapping-panel.c:283
+#: panels/wacom/cc-wacom-mapping-panel.c:279
 msgid "Map to single monitor"
 msgstr "Asociază unui singur monitor"
 
-#: panels/wacom/cc-wacom-nav-button.c:86
+#: panels/wacom/cc-wacom-nav-button.c:84
 #, c-format
 msgid "%d of %d"
 msgstr "%d din %d"
 
-#: panels/wacom/cc-wacom-page.c:553
+#: panels/wacom/cc-wacom-page.c:530
 msgid "Display Mapping"
 msgstr "Afișează alocarea"
 
-#: panels/wacom/cc-wacom-panel.c:827 panels/wacom/wacom-stylus-page.ui:129
+#: panels/wacom/cc-wacom-panel.c:804 panels/wacom/wacom-stylus-page.ui:129
 msgid "Stylus"
 msgstr "Creion"
 
-#: panels/wacom/cc-wacom-stylus-page.c:362
+#: panels/wacom/cc-wacom-stylus-page.c:355
 msgid "Button"
 msgstr "Buton"
 
@@ -7557,7 +7567,7 @@ msgstr "Mod de urmărire"
 msgid "Left-Handed Orientation"
 msgstr "Orientare pentru mâna stângă"
 
-#: panels/wacom/gsd-wacom-key-shortcut-button.c:222
+#: panels/wacom/gsd-wacom-key-shortcut-button.c:217
 msgid "New shortcut…"
 msgstr "Scurtătură nouă…"
 
@@ -7669,6 +7679,28 @@ msgstr "Ajutor"
 msgid "Quit"
 msgstr "Ieșire"
 
+#: shell/cc-panel-list.ui:195
+msgid "No results found"
+msgstr "Nu s-au găsit rezultate"
+
+#: shell/cc-window.ui:140
+msgid "All Settings"
+msgstr "Toate configurările"
+
+#: shell/cc-window.ui:234
+msgid "Warning: Development Version"
+msgstr "Avertisment: versiune de dezvoltare"
+
+#: shell/cc-window.ui:235
+msgid ""
+"This version of Settings should only be used for development purposes. You "
+"may experience incorrect system behavior, data loss, and other unexpected "
+"issues. "
+msgstr ""
+"Această versiune a Configurări ar trebui să fie utilizată doar în scopuri de "
+"dezvoltare. Este posibil să experimentați un comportament incorect al "
+"sistemului, pierderi de date, și alte probleme neașteptate. "
+
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: shell/gnome-control-center.desktop.in.in:5
 msgid "gnome-control-center"
@@ -7732,28 +7764,6 @@ msgid ""
 msgstr ""
 "Dacă programul Configurări ar trebui să arate un avertisment când se rulează "
 "o versiune de dezvoltare."
-
-#: shell/panel-list.ui:195
-msgid "No results found"
-msgstr "Nu s-au găsit rezultate"
-
-#: shell/window.ui:140
-msgid "All Settings"
-msgstr "Toate configurările"
-
-#: shell/window.ui:234
-msgid "Warning: Development Version"
-msgstr "Avertisment: versiune de dezvoltare"
-
-#: shell/window.ui:235
-msgid ""
-"This version of Settings should only be used for development purposes. You "
-"may experience incorrect system behavior, data loss, and other unexpected "
-"issues. "
-msgstr ""
-"Această versiune a Configurări ar trebui să fie utilizată doar în scopuri de "
-"dezvoltare. Este posibil să experimentați un comportament incorect al "
-"sistemului, pierderi de date, și alte probleme neașteptate. "
 
 #. translators:
 #. * The number of sound outputs on a particular device
