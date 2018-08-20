@@ -53,6 +53,8 @@ enum {
 
 #define DATETIME_PERMISSION "org.gnome.controlcenter.datetime.configure"
 #define DATETIME_TZ_PERMISSION "org.freedesktop.timedate1.set-timezone"
+#define LOCATION_SETTINGS "org.gnome.system.location"
+#define LOCATION_ENABLED "enabled"
 
 #define CLOCK_SCHEMA "org.gnome.desktop.interface"
 #define CLOCK_FORMAT_KEY "clock-format"
@@ -121,6 +123,7 @@ struct _CcDateTimePanel
 
   GPermission *permission;
   GPermission *tz_permission;
+  GSettings *location_settings;
 };
 
 CC_PANEL_REGISTER (CcDateTimePanel, cc_date_time_panel)
@@ -151,6 +154,7 @@ cc_date_time_panel_dispose (GObject *object)
   g_clear_object (&panel->dtm);
   g_clear_object (&panel->permission);
   g_clear_object (&panel->tz_permission);
+  g_clear_object (&panel->location_settings);
   g_clear_object (&panel->clock_settings);
   g_clear_object (&panel->datetime_settings);
   g_clear_object (&panel->filechooser_settings);
@@ -726,16 +730,17 @@ on_permission_changed (GPermission *permission,
                        gpointer     data)
 {
   CcDateTimePanel *self = CC_DATE_TIME_PANEL (data);
-  gboolean allowed, tz_allowed, auto_timezone, using_ntp;
+  gboolean allowed, location_allowed, tz_allowed, auto_timezone, using_ntp;
 
   allowed = (self->permission != NULL && g_permission_get_allowed (self->permission));
+  location_allowed = g_settings_get_boolean (self->location_settings, LOCATION_ENABLED);
   tz_allowed = (self->tz_permission != NULL && g_permission_get_allowed (self->tz_permission));
   using_ntp = gtk_switch_get_active (GTK_SWITCH (self->network_time_switch));
   auto_timezone = gtk_switch_get_active (GTK_SWITCH (self->auto_timezone_switch));
 
   /* All the widgets but the lock button and the 24h setting */
   gtk_widget_set_sensitive (self->auto_datetime_row, allowed);
-  gtk_widget_set_sensitive (self->auto_timezone_row, allowed || tz_allowed);
+  gtk_widget_set_sensitive (self->auto_timezone_row, location_allowed && (allowed || tz_allowed));
   gtk_widget_set_sensitive (self->datetime_button, allowed && !using_ntp);
   gtk_widget_set_sensitive (self->timezone_button, (allowed || tz_allowed) && !auto_timezone);
 
@@ -744,6 +749,14 @@ on_permission_changed (GPermission *permission,
       gtk_widget_hide (GTK_WIDGET (self->datetime_dialog));
   if (!allowed && !tz_allowed)
       gtk_widget_hide (GTK_WIDGET (self->timezone_dialog));
+}
+
+static void
+on_location_settings_changed (GSettings       *settings,
+                              const char      *key,
+                              CcDateTimePanel *panel)
+{
+  on_permission_changed (panel->permission, NULL, panel);
 }
 
 static void
@@ -1209,6 +1222,11 @@ cc_date_time_panel_init (CcDateTimePanel *self)
       g_warning ("Your system does not have the '%s' PolicyKit files installed. Please check your installation",
                  DATETIME_PERMISSION);
     }
+
+  self->location_settings = g_settings_new (LOCATION_SETTINGS);
+  g_signal_connect (self->location_settings, "changed",
+                    G_CALLBACK (on_location_settings_changed), self);
+  on_location_settings_changed (self->location_settings, NULL, self);
 
   self->date = g_date_time_new_now_local ();
 
