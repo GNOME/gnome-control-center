@@ -2,13 +2,13 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcLanguageChooser" parent="GtkDialog">
-    <property name="title" translatable="yes">Language</property>
+    <property name="title" translatable="yes">Select Language</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
     <property name="default_height">350</property>
     <child type="action">
-      <object class="GtkButton" id="done_button">
-        <property name="label" translatable="yes">_Done</property>
+      <object class="GtkButton" id="select_button">
+        <property name="label" translatable="yes">_Select</property>
         <property name="visible">True</property>
         <property name="sensitive">False</property>
         <property name="can_focus">True</property>
@@ -66,7 +66,7 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-5" default="true">done_button</action-widget>
+      <action-widget response="-5" default="true">select_button</action-widget>
       <action-widget response="-6">cancel_button</action-widget>
     </action-widgets>
   </template>
