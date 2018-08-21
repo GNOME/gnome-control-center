@@ -295,6 +295,8 @@ set_locale_id (CcLanguageChooser *chooser,
         g_autoptr(GList) children = NULL;
         GList *l;
 
+        gtk_widget_set_sensitive (chooser->done_button, FALSE);
+
         children = gtk_container_get_children (GTK_CONTAINER (chooser->language_listbox));
         for (l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
@@ -307,6 +309,7 @@ set_locale_id (CcLanguageChooser *chooser,
                         gboolean is_extra;
 
                         gtk_widget_set_opacity (check, 1.0);
+                        gtk_widget_set_sensitive (chooser->done_button, TRUE);
 
                         /* make sure the selected language is shown */
                         is_extra = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "is-extra"));
