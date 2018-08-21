@@ -39,7 +39,7 @@
 struct _CcLanguageChooser {
         GtkDialog parent_instance;
 
-        GtkWidget *done_button;
+        GtkWidget *select_button;
         GtkWidget *no_results;
         GtkListBoxRow *more_item;
         GtkWidget *search_bar;
@@ -341,7 +341,7 @@ row_activated (GtkListBox        *box,
         if (g_strcmp0 (new_locale_id, chooser->language) == 0) {
                 gtk_dialog_response (GTK_DIALOG (chooser),
                                      gtk_dialog_get_response_for_widget (GTK_DIALOG (chooser),
-                                                                         chooser->done_button));
+                                                                         chooser->select_button));
         } else {
                 set_locale_id (chooser, new_locale_id);
         }
@@ -422,7 +422,7 @@ cc_language_chooser_class_init (CcLanguageChooserClass *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-language-chooser.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, done_button);
+        gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, select_button);
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, search_bar);
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, language_filter_entry);
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, language_listbox);
