@@ -39,7 +39,7 @@
 struct _CcLanguageChooser {
         GtkDialog parent_instance;
 
-        GtkWidget *done_button;
+        GtkWidget *select_button;
         GtkWidget *no_results;
         GtkListBoxRow *more_item;
         GtkWidget *search_bar;
@@ -295,7 +295,7 @@ set_locale_id (CcLanguageChooser *chooser,
         g_autoptr(GList) children = NULL;
         GList *l;
 
-        gtk_widget_set_sensitive (chooser->done_button, FALSE);
+        gtk_widget_set_sensitive (chooser->select_button, FALSE);
 
         children = gtk_container_get_children (GTK_CONTAINER (chooser->language_listbox));
         for (l = children; l; l = l->next) {
@@ -309,7 +309,7 @@ set_locale_id (CcLanguageChooser *chooser,
                         gboolean is_extra;
 
                         gtk_widget_set_opacity (check, 1.0);
-                        gtk_widget_set_sensitive (chooser->done_button, TRUE);
+                        gtk_widget_set_sensitive (chooser->select_button, TRUE);
 
                         /* make sure the selected language is shown */
                         is_extra = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "is-extra"));
@@ -344,7 +344,7 @@ row_activated (GtkListBox        *box,
         if (g_strcmp0 (new_locale_id, chooser->language) == 0) {
                 gtk_dialog_response (GTK_DIALOG (chooser),
                                      gtk_dialog_get_response_for_widget (GTK_DIALOG (chooser),
-                                                                         chooser->done_button));
+                                                                         chooser->select_button));
         } else {
                 set_locale_id (chooser, new_locale_id);
         }
@@ -425,7 +425,7 @@ cc_language_chooser_class_init (CcLanguageChooserClass *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-language-chooser.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, done_button);
+        gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, select_button);
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, search_bar);
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, language_filter_entry);
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, language_listbox);
