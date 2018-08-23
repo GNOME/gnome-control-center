@@ -29,6 +29,7 @@ test_timezone_gfx (gconstpointer data)
       location = locs->pdata[i];
       info = tz_info_from_location (location);
       selected_offset = tz_location_get_utc_offset (location) / (60.0 * 60.0) + (info->daylight ? -1.0 : 0.0);
+      tz_info_free (info);
 
       filename = g_strdup_printf ("timezone_%s.png", g_ascii_formatd (buf, sizeof (buf), "%g", selected_offset));
       path = g_build_filename (pixmap_dir, filename, NULL);
