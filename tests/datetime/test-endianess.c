@@ -23,7 +23,7 @@ print_endianess (const char *lang)
 static void
 test_endianess (void)
 {
-	GDir *dir;
+	g_autoptr(GDir) dir = NULL;
 	const char *name;
 
 	dir = g_dir_open ("/usr/share/i18n/locales/", 0, NULL);
