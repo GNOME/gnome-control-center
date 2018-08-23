@@ -38,6 +38,8 @@ test_endianess (void)
 
 	while ((name = g_dir_read_name (dir)) != NULL)
 		print_endianess (name);
+
+	g_dir_close (dir);
 }
 
 int main (int argc, char **argv)
