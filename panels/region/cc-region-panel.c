@@ -26,7 +26,6 @@
 #include <gtk/gtk.h>
 #include <polkit/polkit.h>
 
-#include "shell/cc-object-storage.h"
 #include "list-box-helper.h"
 #include "cc-region-panel.h"
 #include "cc-region-resources.h"
@@ -1620,7 +1619,7 @@ session_proxy_ready (GObject      *source,
         GDBusProxy *proxy;
         g_autoptr(GError) error = NULL;
 
-        proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
+        proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
 
         if (!proxy) {
                 if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
@@ -1684,14 +1683,15 @@ cc_region_panel_init (CcRegionPanel *self)
 
         self->cancellable = g_cancellable_new ();
 
-        cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
-                                             G_DBUS_PROXY_FLAGS_NONE,
-                                             "org.gnome.SessionManager",
-                                             "/org/gnome/SessionManager",
-                                             "org.gnome.SessionManager",
-                                             self->cancellable,
-                                             session_proxy_ready,
-                                             self);
+        g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                                  G_DBUS_PROXY_FLAGS_NONE,
+                                  NULL,
+                                  "org.gnome.SessionManager",
+                                  "/org/gnome/SessionManager",
+                                  "org.gnome.SessionManager",
+                                  self->cancellable,
+                                  session_proxy_ready,
+                                  self);
 
         setup_login_button (self);
         setup_language_section (self);
