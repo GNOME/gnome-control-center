@@ -18,7 +18,6 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "shell/cc-object-storage.h"
 #include "list-box-helper.h"
 #include "cc-privacy-panel.h"
 #include "cc-privacy-resources.h"
@@ -465,7 +464,7 @@ on_gclue_manager_ready (GObject *source_object,
   GDBusProxy *proxy;
   GError *error = NULL;
 
-  proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
+  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
   if (proxy == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
@@ -782,7 +781,7 @@ on_perm_store_ready (GObject *source_object,
   GVariant *params;
   GError *error = NULL;
 
-  proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
+  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
   if (proxy == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
@@ -840,23 +839,25 @@ add_location (CcPrivacyPanel *self)
                                                        g_free,
                                                        g_object_unref);
 
-  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SYSTEM,
-                                       G_DBUS_PROXY_FLAGS_NONE,
-                                       "org.freedesktop.GeoClue2",
-                                       "/org/freedesktop/GeoClue2/Manager",
-                                       "org.freedesktop.GeoClue2.Manager",
-                                       self->cancellable,
-                                       on_gclue_manager_ready,
-                                       self);
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.freedesktop.GeoClue2",
+                            "/org/freedesktop/GeoClue2/Manager",
+                            "org.freedesktop.GeoClue2.Manager",
+                            self->cancellable,
+                            on_gclue_manager_ready,
+                            self);
 
-  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
-                                       G_DBUS_PROXY_FLAGS_NONE,
-                                       "org.freedesktop.impl.portal.PermissionStore",
-                                       "/org/freedesktop/impl/portal/PermissionStore",
-                                       "org.freedesktop.impl.portal.PermissionStore",
-                                       self->cancellable,
-                                       on_perm_store_ready,
-                                       self);
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.freedesktop.impl.portal.PermissionStore",
+                            "/org/freedesktop/impl/portal/PermissionStore",
+                            "org.freedesktop.impl.portal.PermissionStore",
+                            self->cancellable,
+                            on_perm_store_ready,
+                            self);
 }
 
 static void
