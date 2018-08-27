@@ -28,8 +28,6 @@
 #include <math.h>
 #include <colord-session/cd-session.h>
 
-#include "shell/cc-object-storage.h"
-
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-rr.h>
 
@@ -842,13 +840,14 @@ cc_color_calibrate_setup (CcColorCalibrate *calibrate,
   g_return_val_if_fail (calibrate->device_kind != CD_SENSOR_CAP_UNKNOWN, FALSE);
 
   /* use logind to disable system state idle */
-  calibrate->proxy_inhibit = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
-								       G_DBUS_PROXY_FLAGS_NONE,
-								       "org.freedesktop.login1",
-								       "/org/freedesktop/login1",
-								       "org.freedesktop.login1.Manager",
-								       NULL,
-								       error);
+  calibrate->proxy_inhibit = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                            G_DBUS_PROXY_FLAGS_NONE,
+                                                            NULL,
+                                                            "org.freedesktop.login1",
+                                                            "/org/freedesktop/login1",
+                                                            "org.freedesktop.login1.Manager",
+                                                            NULL,
+                                                            error);
   if (calibrate->proxy_inhibit == NULL)
     {
       ret = FALSE;
@@ -856,13 +855,14 @@ cc_color_calibrate_setup (CcColorCalibrate *calibrate,
     }
 
   /* start the calibration session daemon */
-  calibrate->proxy_helper = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
-								      G_DBUS_PROXY_FLAGS_NONE,
-								      CD_SESSION_DBUS_SERVICE,
-								      CD_SESSION_DBUS_PATH,
-								      CD_SESSION_DBUS_INTERFACE_DISPLAY,
-								      NULL,
-								      error);
+  calibrate->proxy_helper = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                           G_DBUS_PROXY_FLAGS_NONE,
+                                                           NULL,
+                                                           CD_SESSION_DBUS_SERVICE,
+                                                           CD_SESSION_DBUS_PATH,
+                                                           CD_SESSION_DBUS_INTERFACE_DISPLAY,
+                                                           NULL,
+                                                           error);
   if (calibrate->proxy_helper == NULL)
     {
       ret = FALSE;
