@@ -21,7 +21,6 @@
 
 #include <config.h>
 
-#include "shell/cc-object-storage.h"
 #include "cc-hostname-entry.h"
 
 #include "cc-info-resources.h"
@@ -236,12 +235,13 @@ get_renderer_from_session (void)
   char *renderer;
   g_autoptr(GError) error = NULL;
 
-  session_proxy = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
-                                                            G_DBUS_PROXY_FLAGS_NONE,
-                                                            "org.gnome.SessionManager",
-                                                            "/org/gnome/SessionManager",
-                                                            "org.gnome.SessionManager",
-                                                            NULL, &error);
+  session_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                 G_DBUS_PROXY_FLAGS_NONE,
+                                                 NULL,
+                                                 "org.gnome.SessionManager",
+                                                 "/org/gnome/SessionManager",
+                                                 "org.gnome.SessionManager",
+                                                 NULL, &error);
   if (error != NULL)
     {
       g_warning ("Unable to connect to create a proxy for org.gnome.SessionManager: %s",
@@ -302,12 +302,13 @@ has_dual_gpu (void)
   gboolean ret;
   g_autoptr(GError) error = NULL;
 
-  switcheroo_proxy = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
-                                                               G_DBUS_PROXY_FLAGS_NONE,
-                                                               "net.hadess.SwitcherooControl",
-                                                               "/net/hadess/SwitcherooControl",
-                                                               "net.hadess.SwitcherooControl",
-                                                               NULL, &error);
+  switcheroo_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                    G_DBUS_PROXY_FLAGS_NONE,
+                                                    NULL,
+                                                    "net.hadess.SwitcherooControl",
+                                                    "/net/hadess/SwitcherooControl",
+                                                    "net.hadess.SwitcherooControl",
+                                                    NULL, &error);
   if (switcheroo_proxy == NULL)
     {
       g_debug ("Unable to connect to create a proxy for net.hadess.SwitcherooControl: %s",
@@ -719,13 +720,14 @@ info_overview_panel_setup_virt (CcInfoOverviewPanel *self)
   g_autoptr(GVariant) variant = NULL;
   GVariant *inner;
 
-  systemd_proxy = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
-                                                            G_DBUS_PROXY_FLAGS_NONE,
-                                                            "org.freedesktop.systemd1",
-                                                            "/org/freedesktop/systemd1",
-                                                            "org.freedesktop.systemd1",
-                                                            NULL,
-                                                            &error);
+  systemd_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                 G_DBUS_PROXY_FLAGS_NONE,
+                                                 NULL,
+                                                 "org.freedesktop.systemd1",
+                                                 "/org/freedesktop/systemd1",
+                                                 "org.freedesktop.systemd1",
+                                                 NULL,
+                                                 &error);
 
   if (systemd_proxy == NULL)
     {
