@@ -29,8 +29,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2018-03-26 22:21+0000\n"
-"PO-Revision-Date: 2018-04-06 17:53+0900\n"
+"POT-Creation-Date: 2018-07-23 14:26+0000\n"
+"PO-Revision-Date: 2018-08-27 11:30+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -110,7 +110,7 @@ msgstr "사진이 없습니다"
 #. * directory in the string below when XDG_PICTURES_DIR is
 #. * undefined
 #: panels/background/cc-background-chooser-dialog.c:545
-#: panels/search/cc-search-locations-dialog.c:302
+#: panels/search/cc-search-locations-dialog.c:286
 msgid "Home"
 msgstr "내 폴더"
 
@@ -122,28 +122,29 @@ msgid "You can add images to your %s folder and they will show up here"
 msgstr "이미지 파일을 %s 폴더에 놓으면 여기 나타납니다"
 
 #: panels/background/cc-background-chooser-dialog.c:560
-#: panels/color/cc-color-panel.c:225 panels/color/cc-color-panel.c:963
+#: panels/color/cc-color-panel.c:240 panels/color/cc-color-panel.c:893
 #: panels/color/color-calibrate.ui:25 panels/color/color.ui:657
-#: panels/common/language-chooser.ui:23 panels/display/cc-display-panel.c:2597
+#: panels/common/cc-language-chooser.ui:22
+#: panels/display/cc-display-panel.c:1896
 #: panels/network/connection-editor/connection-editor.ui:15
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
 #: panels/network/net-device-wifi.c:1411 panels/network/net-device-wifi.c:1491
 #: panels/network/net-device-wifi.c:1736 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:331
-#: panels/privacy/cc-privacy-panel.c:1053 panels/region/format-chooser.ui:25
+#: panels/printers/pp-details-dialog.c:330
+#: panels/privacy/cc-privacy-panel.c:1049 panels/region/cc-format-chooser.ui:24
 #: panels/region/input-chooser.ui:13
-#: panels/search/cc-search-locations-dialog.c:642
-#: panels/sharing/cc-sharing-panel.c:384
+#: panels/search/cc-search-locations-dialog.c:603
+#: panels/sharing/cc-sharing-panel.c:426
 #: panels/user-accounts/data/account-dialog.ui:28
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/user-accounts/data/password-dialog.ui:21
 #: panels/user-accounts/um-fingerprint-dialog.c:261
 #: panels/user-accounts/um-photo-dialog.c:103
 #: panels/user-accounts/um-photo-dialog.c:230
-#: panels/user-accounts/um-user-panel.c:634
-#: panels/user-accounts/um-user-panel.c:652
+#: panels/user-accounts/um-user-panel.c:631
+#: panels/user-accounts/um-user-panel.c:649
 msgid "_Cancel"
 msgstr "취소(_C)"
 
@@ -151,18 +152,18 @@ msgstr "취소(_C)"
 msgid "_Select"
 msgstr "선택(_S)"
 
-#: panels/background/cc-background-item.c:192
+#: panels/background/cc-background-item.c:191
 msgid "multiple sizes"
 msgstr "여러 개 크기"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:196
+#: panels/background/cc-background-item.c:195
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:321
+#: panels/background/cc-background-item.c:320
 msgid "No Desktop Background"
 msgstr "바탕 화면 배경 없음"
 
@@ -188,45 +189,46 @@ msgstr "preferences-desktop-wallpaper"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Wallpaper;배경;Screen;화면;Desktop;바탕 화면;"
 
-#: panels/bluetooth/cc-bluetooth-panel.c:265
+#: panels/bluetooth/cc-bluetooth-panel.c:266
 msgid "Turn Off Airplane Mode"
 msgstr "비행 모드 끄기"
 
-#: panels/bluetooth/cc-bluetooth-panel.c:330
+#: panels/bluetooth/cc-bluetooth-panel.c:329
 msgid "No Bluetooth Found"
 msgstr "블루투스 없음"
 
-#: panels/bluetooth/cc-bluetooth-panel.c:330
+#: panels/bluetooth/cc-bluetooth-panel.c:329
 msgid "Plug in a dongle to use Bluetooth."
 msgstr "블루투스를 사용하려면 동글을 연결하십시오."
 
-#: panels/bluetooth/cc-bluetooth-panel.c:331
+#: panels/bluetooth/cc-bluetooth-panel.c:330
 msgid "Bluetooth Turned Off"
 msgstr "블루투스 꺼짐"
 
-#: panels/bluetooth/cc-bluetooth-panel.c:331
+#: panels/bluetooth/cc-bluetooth-panel.c:330
 msgid "Turn on to connect devices and receive file transfers."
 msgstr "장치에 연결하고 파일 전송을 받으려면 켜십시오."
 
-#: panels/bluetooth/cc-bluetooth-panel.c:332
+#: panels/bluetooth/cc-bluetooth-panel.c:331
 msgid "Airplane Mode is on"
 msgstr "비행 모드가 켜져 있습니다"
 
-#: panels/bluetooth/cc-bluetooth-panel.c:332
+#: panels/bluetooth/cc-bluetooth-panel.c:331
 msgid "Bluetooth is disabled when airplane mode is on."
 msgstr "비행 모드가 켜져 있을 때 블루투스가 꺼집니다."
 
-#: panels/bluetooth/cc-bluetooth-panel.c:333
+#: panels/bluetooth/cc-bluetooth-panel.c:332
 msgid "Hardware Airplane Mode is on"
 msgstr "하드웨어 비행 모드가 켜져 있습니다"
 
-#: panels/bluetooth/cc-bluetooth-panel.c:333
+#: panels/bluetooth/cc-bluetooth-panel.c:332
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
 msgstr "블루투스를 사용하려면 비행 모드 스위치를 끄십시오."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/network/network.ui:101 panels/printers/pp-new-printer-dialog.c:1816
+#: panels/network/cc-network-panel.ui:101
+#: panels/printers/pp-new-printer-dialog.c:1831
 msgid "Bluetooth"
 msgstr "블루투스"
 
@@ -245,14 +247,14 @@ msgid "share;sharing;bluetooth;obex;"
 msgstr "share;sharing;공유;bluetooth;블루투스;obex;"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
-#: panels/color/cc-color-calibrate.c:361
+#: panels/color/cc-color-calibrate.c:350
 msgid "Place your calibration device over the square and press “Start”"
 msgstr "보정 장치를 사각형 구역에 놓고 “시작”을 누르십시오"
 
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
-#: panels/color/cc-color-calibrate.c:367
+#: panels/color/cc-color-calibrate.c:356
 msgid ""
 "Move your calibration device to the calibrate position and press “Continue”"
 msgstr "보정 장치를 보정 위치에 놓고 “계속”을 누르십시오"
@@ -260,7 +262,7 @@ msgstr "보정 장치를 보정 위치에 놓고 “계속”을 누르십시오
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
-#: panels/color/cc-color-calibrate.c:373
+#: panels/color/cc-color-calibrate.c:362
 msgid ""
 "Move your calibration device to the surface position and press “Continue”"
 msgstr "보정 장치를 평면 위치에 놓고 “계속”을 누르십시오"
@@ -268,54 +270,54 @@ msgstr "보정 장치를 평면 위치에 놓고 “계속”을 누르십시오
 #. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
 #. * is built into the palmrest and we need to fullscreen the
 #. * sample widget and shut the lid.
-#: panels/color/cc-color-calibrate.c:379
+#: panels/color/cc-color-calibrate.c:368
 msgid "Shut the laptop lid"
 msgstr "노트북 덮개를 닫으십시오"
 
 #. TRANSLATORS: We suck, the calibation failed and we have no
 #. * good idea why or any suggestions
-#: panels/color/cc-color-calibrate.c:410
+#: panels/color/cc-color-calibrate.c:399
 msgid "An internal error occurred that could not be recovered."
 msgstr "내부 오류가 발생했지만 복구할 수 없습니다."
 
 #. TRANSLATORS: Some required-at-runtime tools were not
 #. * installed, which should only affect insane distros
-#: panels/color/cc-color-calibrate.c:415
+#: panels/color/cc-color-calibrate.c:404
 msgid "Tools required for calibration are not installed."
 msgstr "보정에 필요한 프로그램을 설치하지 않았습니다."
 
 #. TRANSLATORS: The profile failed for some reason
-#: panels/color/cc-color-calibrate.c:421
+#: panels/color/cc-color-calibrate.c:410
 msgid "The profile could not be generated."
 msgstr "프로파일을 만들 수 없습니다."
 
 #. TRANSLATORS: The user specified a whitepoint that was
 #. * unobtainable with the hardware they've got -- see
 #. * https://en.wikipedia.org/wiki/White_point for details
-#: panels/color/cc-color-calibrate.c:427
+#: panels/color/cc-color-calibrate.c:416
 msgid "The target whitepoint was not obtainable."
 msgstr "대상 화이트포인트을 얻을 수 없습니다."
 
 #. TRANSLATORS: the display calibration process is finished
-#: panels/color/cc-color-calibrate.c:467
+#: panels/color/cc-color-calibrate.c:455
 msgid "Complete!"
 msgstr "완료!"
 
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
-#: panels/color/cc-color-calibrate.c:475
+#: panels/color/cc-color-calibrate.c:463
 msgid "Calibration failed!"
 msgstr "보정에 실패했습니다"
 
 #. TRANSLATORS: The user can now remove the sensor from the screen
-#: panels/color/cc-color-calibrate.c:482
+#: panels/color/cc-color-calibrate.c:470
 msgid "You can remove the calibration device."
 msgstr "보정 장치를 제거할 수 있습니다."
 
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: panels/color/cc-color-calibrate.c:553
+#: panels/color/cc-color-calibrate.c:539
 msgid "Do not disturb the calibration device while in progress"
 msgstr "진행 중에는 보정 장치를 방해하지 마십시오."
 
@@ -360,65 +362,65 @@ msgstr "%s 프린터"
 msgid "%s Webcam"
 msgstr "%s 웹캠"
 
-#: panels/color/cc-color-device.c:89
+#: panels/color/cc-color-device.c:91
 #, c-format
 msgid "Enable color management for %s"
 msgstr "%s에 색상 관리 사용"
 
-#: panels/color/cc-color-device.c:93
+#: panels/color/cc-color-device.c:94
 #, c-format
 msgid "Show color profiles for %s"
 msgstr "%s의 색 프로파일 표시"
 
 #. not calibrated
-#: panels/color/cc-color-device.c:323
+#: panels/color/cc-color-device.c:301
 msgid "Not calibrated"
 msgstr "보정되지 않음"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: panels/color/cc-color-panel.c:141
+#: panels/color/cc-color-panel.c:169
 msgid "Default: "
 msgstr "기본값:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: panels/color/cc-color-panel.c:149
+#: panels/color/cc-color-panel.c:177
 msgid "Colorspace: "
 msgstr "색 영역: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: panels/color/cc-color-panel.c:156
+#: panels/color/cc-color-panel.c:184
 msgid "Test profile: "
 msgstr "시험용 프로파일: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: panels/color/cc-color-panel.c:223
+#: panels/color/cc-color-panel.c:238
 msgid "Select ICC Profile File"
 msgstr "ICC 프로파일 파일 선택"
 
-#: panels/color/cc-color-panel.c:226
+#: panels/color/cc-color-panel.c:241
 msgid "_Import"
 msgstr "가져오기(_I)"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:237
+#: panels/color/cc-color-panel.c:252
 msgid "Supported ICC profiles"
 msgstr "지원하는 ICC 프로파일"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:244
+#: panels/color/cc-color-panel.c:259
 #: panels/network/wireless-security/eap-method-fast.c:417
 msgid "All files"
 msgstr "모든 파일"
 
-#: panels/color/cc-color-panel.c:583
+#: panels/color/cc-color-panel.c:554
 msgid "Screen"
 msgstr "화면"
 
 #. TRANSLATORS: this is when the upload of the profile failed
-#: panels/color/cc-color-panel.c:908
+#: panels/color/cc-color-panel.c:846
 #, c-format
 msgid "Failed to upload file: %s"
 msgstr "파일 업로드에 실패했습니다: %s"
@@ -426,39 +428,39 @@ msgstr "파일 업로드에 실패했습니다: %s"
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
-#: panels/color/cc-color-panel.c:922
+#: panels/color/cc-color-panel.c:858
 msgid "The profile has been uploaded to:"
 msgstr "프로파일이 다음에 업로드되어 있습니다:"
 
-#: panels/color/cc-color-panel.c:924
+#: panels/color/cc-color-panel.c:860
 msgid "Write down this URL."
 msgstr "이 URL을 적어 놓으십시오."
 
-#: panels/color/cc-color-panel.c:925
+#: panels/color/cc-color-panel.c:861
 msgid "Restart this computer and boot your normal operating system."
 msgstr "이 컴퓨터를 다시 시작해 일반 운영체제로 부팅합니다."
 
-#: panels/color/cc-color-panel.c:926
+#: panels/color/cc-color-panel.c:862
 msgid "Type the URL into your browser to download and install the profile."
 msgstr "URL을 브라우저에 입력해 프로파일을 다운로드하고 설치합니다."
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: panels/color/cc-color-panel.c:960
+#: panels/color/cc-color-panel.c:890
 msgid "Save Profile"
 msgstr "프로파일 저장"
 
-#: panels/color/cc-color-panel.c:964
+#: panels/color/cc-color-panel.c:894
 #: panels/network/connection-editor/vpn-helpers.c:311
 msgid "_Save"
 msgstr "저장(_S)"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1325
+#: panels/color/cc-color-panel.c:1208
 msgid "Create a color profile for the selected device"
 msgstr "선택한 장치에 대한 색 프로파일 만들기"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1340 panels/color/cc-color-panel.c:1364
+#: panels/color/cc-color-panel.c:1223 panels/color/cc-color-panel.c:1247
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -467,24 +469,24 @@ msgstr ""
 "십시오."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1374
+#: panels/color/cc-color-panel.c:1257
 msgid "The measuring instrument does not support printer profiling."
 msgstr "이 측정 장치는 프린터 프로파일링을 지원하지 않습니다."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1385
+#: panels/color/cc-color-panel.c:1268
 msgid "The device type is not currently supported."
 msgstr "이 종류의 장치는 현재 지원하지 않습니다."
 
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
-#: panels/color/cc-color-profile.c:103
+#: panels/color/cc-color-profile.c:100
 msgid "Standard Space"
 msgstr "표준 색 공간"
 
 #. TRANSLATORS: test profiles do things like changing the screen
 #. * a different color, or swap the red and green channels
-#: panels/color/cc-color-profile.c:109
+#: panels/color/cc-color-profile.c:106
 msgid "Test Profile"
 msgstr "시험용 프로파일"
 
@@ -492,7 +494,7 @@ msgstr "시험용 프로파일"
 #. * by the color management system based on manufacturing data,
 #. * for instance the default monitor profile is created from the
 #. * primaries specified in the monitor EDID
-#: panels/color/cc-color-profile.c:117
+#: panels/color/cc-color-profile.c:114
 msgctxt "Automatically generated profile"
 msgid "Automatic"
 msgstr "자동"
@@ -500,13 +502,13 @@ msgstr "자동"
 #. TRANSLATORS: the profile quality - low quality profiles take
 #. * much less time to generate but may be a poor reflection of the
 #. * device capability
-#: panels/color/cc-color-profile.c:127
+#: panels/color/cc-color-profile.c:124
 msgctxt "Profile quality"
 msgid "Low Quality"
 msgstr "낮은 품질"
 
 #. TRANSLATORS: the profile quality
-#: panels/color/cc-color-profile.c:132
+#: panels/color/cc-color-profile.c:129
 msgctxt "Profile quality"
 msgid "Medium Quality"
 msgstr "중간 품질"
@@ -514,41 +516,41 @@ msgstr "중간 품질"
 #. TRANSLATORS: the profile quality - high quality profiles take
 #. * a *long* time, and have the best calibration and
 #. * characterisation data.
-#: panels/color/cc-color-profile.c:139
+#: panels/color/cc-color-profile.c:136
 msgctxt "Profile quality"
 msgid "High Quality"
 msgstr "높은 품질"
 
 #. TRANSLATORS: this default RGB space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: panels/color/cc-color-profile.c:156
+#: panels/color/cc-color-profile.c:153
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "기본 RGB"
 
 #. TRANSLATORS: this default CMYK space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: panels/color/cc-color-profile.c:163
+#: panels/color/cc-color-profile.c:160
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "기본 CMYK"
 
 #. TRANSLATORS: this default gray space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: panels/color/cc-color-profile.c:170
+#: panels/color/cc-color-profile.c:167
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "기본 Gray"
 
-#: panels/color/cc-color-profile.c:194
+#: panels/color/cc-color-profile.c:190
 msgid "Vendor supplied factory calibration data"
 msgstr "제조사가 제공한 공장 출고 보정 데이터"
 
-#: panels/color/cc-color-profile.c:203
+#: panels/color/cc-color-profile.c:199
 msgid "Full-screen display correction not possible with this profile"
 msgstr "이 프로파일에서는 전체 화면 교정이 불가합니다."
 
-#: panels/color/cc-color-profile.c:225
+#: panels/color/cc-color-profile.c:221
 msgid "This profile may no longer be accurate"
 msgstr "이 프로필은 이제 정확하지 않을 수도 있습니다"
 
@@ -567,8 +569,8 @@ msgid "_Resume"
 msgstr "다시 시작(_R)"
 
 #. This button returns the user back to the color control panel
-#: panels/color/color-calibrate.ui:67 panels/common/language-chooser.ui:12
-#: panels/region/format-chooser.ui:14
+#: panels/color/color-calibrate.ui:67 panels/common/cc-language-chooser.ui:11
+#: panels/region/cc-format-chooser.ui:13
 msgid "_Done"
 msgstr "완료(_D)"
 
@@ -729,140 +731,140 @@ msgstr ""
 "문제가 발생했습니다. 프로파일이 동작하지 않을 수도 있습니다. <a href=\"\">자"
 "세히 보기.</a>"
 
-#: panels/color/color.ui:807
+#: panels/color/color.ui:811
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr "장치는 색상 관리 기능을 사용하려면 색 프로파일을 업데이트해야 합니다."
 
-#: panels/color/color.ui:829
+#: panels/color/color.ui:833
 msgid "Learn more"
 msgstr "더 알아보기"
 
-#: panels/color/color.ui:834
+#: panels/color/color.ui:838
 msgid "Learn more about color management"
 msgstr "색상 관리에 대해 더 알아봅니다"
 
-#: panels/color/color.ui:882
+#: panels/color/color.ui:886
 msgid "_Set for all users"
 msgstr "모든 사용자에 대해 설정(_S)"
 
-#: panels/color/color.ui:886 panels/color/color.ui:901
-#: panels/color/color.ui:902
+#: panels/color/color.ui:890 panels/color/color.ui:905
+#: panels/color/color.ui:906
 msgid "Set this profile for all users on this computer"
 msgstr "이 컴퓨터의 모든 사용자가 사용할 프로파일을 설정합니다"
 
-#: panels/color/color.ui:897
+#: panels/color/color.ui:901
 msgid "_Enable"
 msgstr "사용(_E)"
 
-#: panels/color/color.ui:928
+#: panels/color/color.ui:932
 msgid "_Add profile"
 msgstr "프로파일 추가(_A)"
 
-#: panels/color/color.ui:941
+#: panels/color/color.ui:945
 msgid "_Calibrate…"
 msgstr "보정(_C)…"
 
-#: panels/color/color.ui:945
+#: panels/color/color.ui:949
 msgid "Calibrate the device"
 msgstr "장치 보정"
 
-#: panels/color/color.ui:956
+#: panels/color/color.ui:960
 msgid "_Remove profile"
 msgstr "프로파일 제거(_R)"
 
-#: panels/color/color.ui:969
+#: panels/color/color.ui:973
 msgid "_View details"
 msgstr "자세히 보기(_V)"
 
-#: panels/color/color.ui:1005
+#: panels/color/color.ui:1009
 msgid "Unable to detect any devices that can be color managed"
 msgstr "색 관리가 되는 장치를 검색할 수 없습니다"
 
-#: panels/color/color.ui:1047
+#: panels/color/color.ui:1053
 msgid "LCD"
 msgstr "LCD"
 
-#: panels/color/color.ui:1052
+#: panels/color/color.ui:1058
 msgid "LED"
 msgstr "LED"
 
-#: panels/color/color.ui:1057
+#: panels/color/color.ui:1063
 msgid "CRT"
 msgstr "CRT"
 
-#: panels/color/color.ui:1062
+#: panels/color/color.ui:1068
 msgid "Projector"
 msgstr "프로젝터"
 
-#: panels/color/color.ui:1067
+#: panels/color/color.ui:1073
 msgid "Plasma"
 msgstr "플라스마"
 
-#: panels/color/color.ui:1072
+#: panels/color/color.ui:1078
 msgid "LCD (CCFL backlight)"
 msgstr "LCD(CCFL 백라이트)"
 
-#: panels/color/color.ui:1077
+#: panels/color/color.ui:1083
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD(RGB LED 백라이트)"
 
-#: panels/color/color.ui:1082
+#: panels/color/color.ui:1088
 msgid "LCD (white LED backlight)"
 msgstr "LCD(백색 LED 백라이트)"
 
-#: panels/color/color.ui:1087
+#: panels/color/color.ui:1093
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "광색역 LCD(CCFL 백라이트)"
 
-#: panels/color/color.ui:1092
+#: panels/color/color.ui:1098
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "광색역 LCD(RGB LED 백라이트)"
 
-#: panels/color/color.ui:1109
+#: panels/color/color.ui:1115
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "높게"
 
-#: panels/color/color.ui:1110
+#: panels/color/color.ui:1116
 msgid "40 minutes"
 msgstr "40분"
 
-#: panels/color/color.ui:1114
+#: panels/color/color.ui:1120
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "중간"
 
-#: panels/color/color.ui:1115 panels/power/power.ui:25
+#: panels/color/color.ui:1121 panels/power/power.ui:25
 #: panels/privacy/privacy.ui:38
 msgid "30 minutes"
 msgstr "30분"
 
-#: panels/color/color.ui:1119
+#: panels/color/color.ui:1125
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "낮게"
 
-#: panels/color/color.ui:1120 panels/power/power.ui:13 panels/power/power.ui:95
+#: panels/color/color.ui:1126 panels/power/power.ui:13 panels/power/power.ui:95
 msgid "15 minutes"
 msgstr "15분"
 
-#: panels/color/color.ui:1142
+#: panels/color/color.ui:1148
 msgid "Native to display"
 msgstr "디스플레이에 따라"
 
-#: panels/color/color.ui:1146
+#: panels/color/color.ui:1152
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (인쇄 및 출판)"
 
-#: panels/color/color.ui:1150
+#: panels/color/color.ui:1156
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/color.ui:1154
+#: panels/color/color.ui:1160
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (사진 및 그래픽)"
 
-#: panels/color/color.ui:1158
+#: panels/color/color.ui:1164
 msgid "D75"
 msgstr "D75"
 
@@ -887,18 +889,22 @@ msgstr ""
 "Color;색;ICC;Profile;프로파일;Calibrate;보정;Printer;프린터;Display;디스플레"
 "이;"
 
-#: panels/common/cc-common-language.c:323
+#: panels/common/cc-common-language.c:300
 msgid "Other…"
 msgstr "기타…"
 
-#: panels/common/cc-language-chooser.c:124
-#: panels/region/cc-format-chooser.c:269 panels/region/cc-input-chooser.c:169
+#: panels/common/cc-language-chooser.c:126
+#: panels/region/cc-format-chooser.c:261 panels/region/cc-input-chooser.c:169
 msgid "More…"
 msgstr "기타…"
 
-#: panels/common/cc-language-chooser.c:140
+#: panels/common/cc-language-chooser.c:142
 msgid "No languages found"
 msgstr "언어 없음"
+
+#: panels/common/cc-language-chooser.ui:5
+msgid "Language"
+msgstr "언어"
 
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:106
@@ -920,9 +926,11 @@ msgstr "%b %e일"
 msgid "%b %e, %Y"
 msgstr "%Y년 %b %e일"
 
-#: panels/common/language-chooser.ui:5
-msgid "Language"
-msgstr "언어"
+#. translators: This is the default hotspot name, need to be less than 32-bytes
+#: panels/common/hostname-helper.c:177
+msgctxt "hotspot"
+msgid "Hotspot"
+msgstr "핫스팟"
 
 #: panels/datetime/big.ui:16 panels/datetime/little.ui:16
 #: panels/datetime/middle.ui:16 panels/datetime/ydm.ui:16
@@ -940,17 +948,17 @@ msgid "Year"
 msgstr "연"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:333
+#: panels/datetime/cc-datetime-panel.c:326
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%Y년 %B %e일, %p %l:%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:338
+#: panels/datetime/cc-datetime-panel.c:331
 msgid "%e %B %Y, %R"
 msgstr "%Y년 %B %e일, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:503
+#: panels/datetime/cc-datetime-panel.c:496
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -958,7 +966,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:530
+#: panels/datetime/cc-datetime-panel.c:523
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -966,23 +974,23 @@ msgstr "%s (%s)"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: panels/datetime/cc-datetime-panel.c:537
+#: panels/datetime/cc-datetime-panel.c:530
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:542
+#: panels/datetime/cc-datetime-panel.c:535
 msgid "%l:%M %p"
 msgstr "%p %l:%M"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:547
+#: panels/datetime/cc-datetime-panel.c:540
 msgid "%R"
 msgstr "%R"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: panels/datetime/cc-datetime-panel.c:552
+#: panels/datetime/cc-datetime-panel.c:545
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
@@ -1041,57 +1049,57 @@ msgstr "12월"
 msgid "Date & Time"
 msgstr "날짜 및 시각"
 
-#: panels/datetime/datetime.ui:106
+#: panels/datetime/datetime.ui:109
 msgid "Hour"
 msgstr "시간"
 
 #. Translator: this is the separator between hours and minutes, like in HH∶MM
-#: panels/datetime/datetime.ui:121
+#: panels/datetime/datetime.ui:124
 msgid "∶"
 msgstr "∶"
 
-#: panels/datetime/datetime.ui:143
+#: panels/datetime/datetime.ui:148
 msgid "Minute"
 msgstr "분"
 
-#: panels/datetime/datetime.ui:208
+#: panels/datetime/datetime.ui:215
 msgid "Time Zone"
 msgstr "표준 시간대"
 
 # 커맨드라인 설명. 문장으로 번역
-#: panels/datetime/datetime.ui:228
+#: panels/datetime/datetime.ui:236
 msgid "Search for a city"
 msgstr "도시를 검색합니다"
 
-#: panels/datetime/datetime.ui:304
+#: panels/datetime/datetime.ui:318
 msgid "Automatic _Date & Time"
 msgstr "날짜 및 시각 자동(_D)"
 
-#: panels/datetime/datetime.ui:319 panels/datetime/datetime.ui:397
+#: panels/datetime/datetime.ui:333 panels/datetime/datetime.ui:411
 msgid "Requires internet access"
 msgstr "인터넷 연결 필요"
 
-#: panels/datetime/datetime.ui:382
+#: panels/datetime/datetime.ui:396
 msgid "Automatic Time _Zone"
 msgstr "표준 시간대 자동(_Z)"
 
-#: panels/datetime/datetime.ui:454
+#: panels/datetime/datetime.ui:468
 msgid "Date & _Time"
 msgstr "날짜 및 시각(_T)"
 
-#: panels/datetime/datetime.ui:502
+#: panels/datetime/datetime.ui:516
 msgid "Time Z_one"
 msgstr "표준 시간대(_O)"
 
-#: panels/datetime/datetime.ui:570
+#: panels/datetime/datetime.ui:586
 msgid "Time _Format"
 msgstr "시각 형식(_F)"
 
-#: panels/datetime/datetime.ui:588
+#: panels/datetime/datetime.ui:605
 msgid "24-hour"
 msgstr "24시간"
 
-#: panels/datetime/datetime.ui:589
+#: panels/datetime/datetime.ui:606
 msgid "AM / PM"
 msgstr "오전 / 오후"
 
@@ -1117,58 +1125,58 @@ msgstr "시스템의 날짜와 시간 설정을 바꿉니다"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "시간 또는 날짜 설정을 바꾸려면 인증이 필요합니다."
 
-#: panels/display/cc-display-panel.c:732
+#: panels/display/cc-display-panel.c:515
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "가로"
 
-#: panels/display/cc-display-panel.c:735
+#: panels/display/cc-display-panel.c:518
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "세로 오른쪽"
 
-#: panels/display/cc-display-panel.c:738
+#: panels/display/cc-display-panel.c:521
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "세로 왼쪽"
 
-#: panels/display/cc-display-panel.c:741
+#: panels/display/cc-display-panel.c:524
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "가로 (뒤집힘)"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/display/cc-display-panel.c:808
+#: panels/display/cc-display-panel.c:591
 #: panels/printers/pp-options-dialog.c:558
 msgid "Orientation"
 msgstr "방향"
 
-#: panels/display/cc-display-panel.c:873 panels/display/cc-display-panel.c:1676
+#: panels/display/cc-display-panel.c:658 panels/display/cc-display-panel.c:1423
 #: panels/printers/pp-options-dialog.c:87
 msgid "Resolution"
 msgstr "해상도"
 
-#: panels/display/cc-display-panel.c:961
+#: panels/display/cc-display-panel.c:745
 msgid "Refresh Rate"
 msgstr "주사율"
 
-#: panels/display/cc-display-panel.c:1098
+#: panels/display/cc-display-panel.c:880
 msgid "Scale"
 msgstr "크기 조정"
 
-#: panels/display/cc-display-panel.c:1151
+#: panels/display/cc-display-panel.c:932
 msgid "Adjust for TV"
 msgstr "TV에 맞게 조정"
 
-#: panels/display/cc-display-panel.c:1413
+#: panels/display/cc-display-panel.c:1167
 msgid "Primary Display"
 msgstr "주요 디스플레이"
 
-#: panels/display/cc-display-panel.c:1442
+#: panels/display/cc-display-panel.c:1195
 msgid "Display Arrangement"
 msgstr "디스플레이 배치"
 
-#: panels/display/cc-display-panel.c:1443
+#: panels/display/cc-display-panel.c:1196
 msgid ""
 "Drag displays to match your setup. The top bar is placed on the primary "
 "display."
@@ -1176,85 +1184,93 @@ msgstr ""
 "설정에 맞는 디스플레이를 끌어 놓으십시오. 화면 위 표시 막대는 주요 디스플레이"
 "에서 표시됩니다."
 
-#: panels/display/cc-display-panel.c:1866
+#: panels/display/cc-display-panel.c:1610
 msgid "Display Mode"
 msgstr "디스플레이 모드"
 
-#: panels/display/cc-display-panel.c:1882
+#: panels/display/cc-display-panel.c:1626
 msgid "Join Displays"
 msgstr "디스플레이 연결"
 
-#: panels/display/cc-display-panel.c:1885
+#: panels/display/cc-display-panel.c:1629
 msgid "Mirror"
 msgstr "동일 화면"
 
-#: panels/display/cc-display-panel.c:1888
+#: panels/display/cc-display-panel.c:1632
 msgid "Single Display"
 msgstr "단일 디스플레이"
 
-#: panels/display/cc-display-panel.c:2593
-msgid "Apply Changes?"
-msgstr "변경 사항을 적용하시겠습니까?"
-
-#: panels/display/cc-display-panel.c:2607
+#: panels/display/cc-display-panel.c:1906
 #: panels/network/connection-editor/connection-editor.ui:24
 #: panels/network/network-wifi.ui:38
 msgid "_Apply"
 msgstr "적용(_A)"
 
-#: panels/display/cc-display-panel.c:2982
+#: panels/display/cc-display-panel.c:1927
+msgid "Apply Changes?"
+msgstr "바뀐 사항을 적용하시겠습니까?"
+
+#: panels/display/cc-display-panel.c:1932
+msgid "Changes Cannot be Applied"
+msgstr "바뀐 사항을 적용할 수 없습니다"
+
+#: panels/display/cc-display-panel.c:1933
+msgid "This could be due to hardware limitations."
+msgstr "하드웨어 제한 때문에 문제가 발생할 수도 있습니다."
+
+#: panels/display/cc-display-panel.c:2064
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
 
 #. TRANSLATORS: the state of the night light setting
-#: panels/display/cc-display-panel.c:3198
-#: panels/notifications/cc-notifications-panel.c:292
-#: panels/power/cc-power-panel.c:1994 panels/power/cc-power-panel.c:2001
-#: panels/privacy/cc-privacy-panel.c:190 panels/privacy/cc-privacy-panel.c:257
-#: panels/universal-access/cc-ua-panel.c:333
-#: panels/universal-access/cc-ua-panel.c:714
-#: panels/universal-access/cc-ua-panel.c:727
-#: panels/universal-access/cc-ua-panel.c:739
-#: panels/universal-access/cc-ua-panel.c:910
+#: panels/display/cc-display-panel.c:2236
+#: panels/notifications/cc-notifications-panel.c:288
+#: panels/power/cc-power-panel.c:2038 panels/power/cc-power-panel.c:2045
+#: panels/privacy/cc-privacy-panel.c:193 panels/privacy/cc-privacy-panel.c:260
+#: panels/universal-access/cc-ua-panel.c:478
+#: panels/universal-access/cc-ua-panel.c:841
+#: panels/universal-access/cc-ua-panel.c:854
+#: panels/universal-access/cc-ua-panel.c:866
+#: panels/universal-access/cc-ua-panel.c:1031
 msgid "On"
 msgstr "켬"
 
-#: panels/display/cc-display-panel.c:3198 panels/network/net-proxy.c:54
-#: panels/notifications/cc-notifications-panel.c:292
-#: panels/power/cc-power-panel.c:1988 panels/power/cc-power-panel.c:1999
-#: panels/privacy/cc-privacy-panel.c:190 panels/privacy/cc-privacy-panel.c:257
-#: panels/universal-access/cc-ua-panel.c:333
-#: panels/universal-access/cc-ua-panel.c:714
-#: panels/universal-access/cc-ua-panel.c:727
-#: panels/universal-access/cc-ua-panel.c:739
-#: panels/universal-access/cc-ua-panel.c:910 panels/universal-access/uap.ui:334
-#: panels/universal-access/uap.ui:380 panels/universal-access/uap.ui:426
-#: panels/universal-access/uap.ui:532 panels/universal-access/uap.ui:685
-#: panels/universal-access/uap.ui:731 panels/universal-access/uap.ui:777
-#: panels/universal-access/uap.ui:929
+#: panels/display/cc-display-panel.c:2236 panels/network/net-proxy.c:54
+#: panels/notifications/cc-notifications-panel.c:288
+#: panels/power/cc-power-panel.c:2032 panels/power/cc-power-panel.c:2043
+#: panels/privacy/cc-privacy-panel.c:193 panels/privacy/cc-privacy-panel.c:260
+#: panels/universal-access/cc-ua-panel.c:478
+#: panels/universal-access/cc-ua-panel.c:841
+#: panels/universal-access/cc-ua-panel.c:854
+#: panels/universal-access/cc-ua-panel.c:866
+#: panels/universal-access/cc-ua-panel.c:1031
+#: panels/universal-access/uap.ui:338 panels/universal-access/uap.ui:384
+#: panels/universal-access/uap.ui:430 panels/universal-access/uap.ui:536
+#: panels/universal-access/uap.ui:689 panels/universal-access/uap.ui:735
+#: panels/universal-access/uap.ui:781 panels/universal-access/uap.ui:933
 msgid "Off"
 msgstr "끔"
 
-#: panels/display/cc-display-panel.c:3219
+#: panels/display/cc-display-panel.c:2256
 msgid "_Night Light"
 msgstr "야간 모드(_N)"
 
-#: panels/display/cc-display-panel.c:3284
+#: panels/display/cc-display-panel.c:2317
 msgid "Could not get screen information"
 msgstr "화면 정보를 읽어 올 수 없습니다"
 
 #. This cancels the redshift inhibit.
-#: panels/display/display.ui:71
+#: panels/display/cc-night-light-dialog.ui:47
 msgid "Restart Filter"
 msgstr "필터 다시 시작"
 
 #. Inhibit the redshift functionality until the next day starts
-#: panels/display/display.ui:103
+#: panels/display/cc-night-light-dialog.ui:80
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "내일까지 임시로 사용 않기"
 
-#: panels/display/display.ui:144
+#: panels/display/cc-night-light-dialog.ui:107
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
@@ -1263,46 +1279,50 @@ msgstr ""
 "피로를 덜어줍니다."
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/display.ui:171 panels/display/display.ui:567
+#: panels/display/cc-night-light-dialog.ui:129
+#: panels/display/cc-night-light-dialog.ui:466
 msgid "Night Light"
 msgstr "야간 모드"
 
-#: panels/display/display.ui:187
+#: panels/display/cc-night-light-dialog.ui:145
 msgid "Schedule"
 msgstr "일정"
 
-#: panels/display/display.ui:215
+#: panels/display/cc-night-light-dialog.ui:174
 msgid "Sunset to Sunrise"
 msgstr "일몰에서 일출"
 
-#: panels/display/display.ui:229
+#: panels/display/cc-night-light-dialog.ui:189
 #: panels/network/connection-editor/ip4-page.ui:69
 #: panels/network/connection-editor/ip6-page.ui:83
 #: panels/network/net-proxy.c:56 panels/network/network-proxy.ui:113
 #: panels/network/network-wifi.ui:777 panels/network/network-wifi.ui:1054
-#: panels/privacy/cc-privacy-panel.c:217
+#: panels/privacy/cc-privacy-panel.c:220
 msgid "Manual"
 msgstr "수동"
 
-#: panels/display/display.ui:268
+#: panels/display/cc-night-light-dialog.ui:224
 msgid "From"
 msgstr "시작"
 
-#: panels/display/display.ui:309 panels/display/display.ui:430
+#: panels/display/cc-night-light-dialog.ui:256
+#: panels/display/cc-night-light-dialog.ui:353
 msgid ":"
 msgstr ":"
 
 #. This is the short form for the time period in the morning
-#: panels/display/display.ui:343 panels/display/display.ui:464
+#: panels/display/cc-night-light-dialog.ui:281
+#: panels/display/cc-night-light-dialog.ui:378
 msgid "AM"
 msgstr "오전"
 
 #. This is the short form for the time period in the afternoon
-#: panels/display/display.ui:359 panels/display/display.ui:480
+#: panels/display/cc-night-light-dialog.ui:297
+#: panels/display/cc-night-light-dialog.ui:394
 msgid "PM"
 msgstr "오후"
 
-#: panels/display/display.ui:528
+#: panels/display/cc-night-light-dialog.ui:436
 msgid "To"
 msgstr "끝"
 
@@ -1330,8 +1350,8 @@ msgstr ""
 "color;색;sunset;일몰;sunrise;일출;"
 
 #. TRANSLATORS: AP type
-#: panels/info/cc-info-overview-panel.c:374
-#: panels/info/cc-info-overview-panel.c:457 panels/network/panel-common.c:123
+#: panels/info/cc-info-overview-panel.c:373
+#: panels/info/cc-info-overview-panel.c:456 panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "알 수 없음"
 
@@ -1339,24 +1359,24 @@ msgstr "알 수 없음"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info/cc-info-overview-panel.c:465
+#: panels/info/cc-info-overview-panel.c:464
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s, 빌드 ID: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info/cc-info-overview-panel.c:482
+#: panels/info/cc-info-overview-panel.c:481
 #, c-format
 msgid "64-bit"
 msgstr "64비트"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info/cc-info-overview-panel.c:485
+#: panels/info/cc-info-overview-panel.c:484
 #, c-format
 msgid "32-bit"
 msgstr "32비트"
 
-#: panels/info/cc-info-overview-panel.c:775
+#: panels/info/cc-info-overview-panel.c:773
 #, c-format
 msgid "Version %s"
 msgstr "버전 %s"
@@ -1671,7 +1691,7 @@ msgstr "다음 트랙"
 msgid "Eject"
 msgstr "빼기"
 
-#: panels/keyboard/01-input-sources.xml.in:4 panels/universal-access/uap.ui:576
+#: panels/keyboard/01-input-sources.xml.in:4 panels/universal-access/uap.ui:580
 msgid "Typing"
 msgstr "자판 입력"
 
@@ -1691,9 +1711,9 @@ msgstr "실행 아이콘"
 msgid "Launch help browser"
 msgstr "도움말 보기 실행"
 
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:222
-#: shell/cc-window.c:760 shell/gnome-control-center.desktop.in.in:3
-#: shell/window.ui:125
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:276
+#: shell/cc-window.c:912 shell/cc-window.ui:124
+#: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "설정"
 
@@ -1714,7 +1734,7 @@ msgid "Home folder"
 msgstr "내 폴더"
 
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/search/gnome-search-panel.desktop.in.in:3 shell/window.ui:157
+#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:156
 msgid "Search"
 msgstr "검색"
 
@@ -1799,9 +1819,9 @@ msgstr "글자 크기 줄이기"
 msgid "High contrast on or off"
 msgstr "고대비 켜거나 끄기"
 
-#: panels/keyboard/cc-keyboard-manager.c:506
-#: panels/keyboard/cc-keyboard-manager.c:514
-#: panels/keyboard/cc-keyboard-manager.c:822
+#: panels/keyboard/cc-keyboard-manager.c:501
+#: panels/keyboard/cc-keyboard-manager.c:509
+#: panels/keyboard/cc-keyboard-manager.c:809
 msgid "Custom Shortcuts"
 msgstr "사용자 설정 바로 가기"
 
@@ -1810,9 +1830,9 @@ msgstr "사용자 설정 바로 가기"
 #.
 #. translators:
 #. * The device has been disabled
-#: panels/keyboard/cc-keyboard-option.c:263
-#: panels/keyboard/cc-keyboard-option.c:382
-#: panels/keyboard/keyboard-shortcuts.c:435
+#: panels/keyboard/cc-keyboard-option.c:259
+#: panels/keyboard/cc-keyboard-option.c:378
+#: panels/keyboard/keyboard-shortcuts.c:425
 #: panels/keyboard/shortcut-editor.ui:96 panels/network/network-proxy.ui:123
 #: panels/network/network-wifi.ui:782 panels/network/network-wifi.ui:1059
 #: panels/user-accounts/um-fingerprint-dialog.c:211
@@ -1824,7 +1844,7 @@ msgstr "사용 않음"
 #. * chooser'. AltGr is often used for this purpose. See
 #. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
 #.
-#: panels/keyboard/cc-keyboard-option.c:341
+#: panels/keyboard/cc-keyboard-option.c:337
 msgid "Alternative Characters Key"
 msgstr "대체 문자 키"
 
@@ -1832,19 +1852,19 @@ msgstr "대체 문자 키"
 #. * sequences that are combined to form a single character.
 #. * See http://en.wikipedia.org/wiki/Compose_key
 #.
-#: panels/keyboard/cc-keyboard-option.c:350
+#: panels/keyboard/cc-keyboard-option.c:346
 msgid "Compose Key"
 msgstr "구성 키"
 
-#: panels/keyboard/cc-keyboard-option.c:355
+#: panels/keyboard/cc-keyboard-option.c:351
 msgid "Modifiers-only switch to next source"
 msgstr "조합 키로만 다음 입력 소스로 전환"
 
-#: panels/keyboard/cc-keyboard-panel.c:181
+#: panels/keyboard/cc-keyboard-panel.c:179
 msgid "Reset All Shortcuts?"
 msgstr "모든 바로 가기를 초기화하시겠습니까?"
 
-#: panels/keyboard/cc-keyboard-panel.c:184
+#: panels/keyboard/cc-keyboard-panel.c:182
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -1852,22 +1872,22 @@ msgstr ""
 "바로 가기를 초기화하면 사용자 추가한 바로 가기에도 영향을 미칩니다. 이 동작"
 "은 되돌릴 수 없습니다."
 
-#: panels/keyboard/cc-keyboard-panel.c:188
+#: panels/keyboard/cc-keyboard-panel.c:186
 #: panels/keyboard/shortcut-editor.ui:346
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
 msgid "Cancel"
 msgstr "취소"
 
-#: panels/keyboard/cc-keyboard-panel.c:189
+#: panels/keyboard/cc-keyboard-panel.c:187
 msgid "Reset All"
 msgstr "모두 초기화"
 
-#: panels/keyboard/cc-keyboard-panel.c:281
+#: panels/keyboard/cc-keyboard-panel.c:279
 msgid "Reset the shortcut to its default value"
 msgstr "바로 가기 키 기본값으로 초기화"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:413
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:411
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1875,21 +1895,21 @@ msgid ""
 msgstr ""
 "%s은(는) <b>%s</b>용으로 사용 중입니다. 바꾸면 %s이(가) 사용 중지됩니다"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:583
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:581
 msgid "Set Custom Shortcut"
 msgstr "사용자 설정 바로 가기 설정"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:583
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:581
 msgid "Set Shortcut"
 msgstr "바로 가기 설정"
 
 #. Setup the top label
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:592
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:590
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "<b>%s</b> 항목을 바꾸려면 새 바로 가기를 입력하십시오."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:1019
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:1017
 msgid "Add Custom Shortcut"
 msgstr "사용자 설정 바로 가기 키 추가"
 
@@ -1916,7 +1936,7 @@ msgstr ""
 "륨;소리;"
 
 #: panels/keyboard/gnome-keyboard-panel.ui:67 panels/region/input-options.ui:68
-#: shell/cc-application.c:255
+#: shell/cc-application.c:252
 msgid "Keyboard Shortcuts"
 msgstr "키보드 바로 가기"
 
@@ -1932,13 +1952,15 @@ msgstr "모든 바로 가기 키 기본값 키바인딩으로 초기화"
 msgid "No keyboard shortcut found"
 msgstr "키보드 바로 가기가 없습니다"
 
-#: panels/keyboard/gnome-keyboard-panel.ui:175 shell/panel-list.ui:206
+#: panels/keyboard/gnome-keyboard-panel.ui:175 shell/cc-panel-list.ui:206
 msgid "Try a different search"
 msgstr "다르게 검색해 보십시오"
 
 #: panels/keyboard/shortcut-editor.ui:68 panels/keyboard/shortcut-editor.ui:318
 msgid "Press Esc to cancel or Backspace to reset the keyboard shortcut."
-msgstr "키보드 바로 가기 입력에서 Esc를 누르면 취소하고, 백스페이스를 누르면 초기화합니다."
+msgstr ""
+"키보드 바로 가기 입력에서 Esc를 누르면 취소하고, 백스페이스를 누르면 초기화합"
+"니다."
 
 #: panels/keyboard/shortcut-editor.ui:156 panels/printers/details-dialog.ui:38
 #: panels/sound/gvc-mixer-dialog.c:1480
@@ -1982,7 +2004,7 @@ msgstr "바꾸기"
 msgid "Set"
 msgstr "설정"
 
-#: panels/mouse/cc-mouse-panel.c:82 panels/wacom/cc-wacom-panel.c:402
+#: panels/mouse/cc-mouse-panel.c:80 panels/wacom/cc-wacom-panel.c:439
 msgid "Test Your _Settings"
 msgstr "설정 검사(_S)"
 
@@ -2008,106 +2030,106 @@ msgstr ""
 "Trackpad;트랙패드;Pointer;포인터;Click;클릭;누르기;Tap;두드리기;Double;더블;"
 "Button;버튼;단추;Trackball;트랙볼;Scroll;스크롤;"
 
-#: panels/mouse/gnome-mouse-properties.ui:45
+#: panels/mouse/gnome-mouse-properties.ui:50
 msgid "General"
 msgstr "일반"
 
-#: panels/mouse/gnome-mouse-properties.ui:83
+#: panels/mouse/gnome-mouse-properties.ui:88
 msgid "Primary Button"
 msgstr "기본 단추"
 
-#: panels/mouse/gnome-mouse-properties.ui:102
+#: panels/mouse/gnome-mouse-properties.ui:107
 msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "마우스 및 터치패드의 물리적 단추의 순서를 설정합니다."
 
-#: panels/mouse/gnome-mouse-properties.ui:131
+#: panels/mouse/gnome-mouse-properties.ui:136
 msgid "Left"
 msgstr "왼쪽"
 
-#: panels/mouse/gnome-mouse-properties.ui:141
+#: panels/mouse/gnome-mouse-properties.ui:146
 msgid "Right"
 msgstr "오른쪽"
 
-#: panels/mouse/gnome-mouse-properties.ui:177
+#: panels/mouse/gnome-mouse-properties.ui:182
 msgid "Mouse"
 msgstr "마우스"
 
-#: panels/mouse/gnome-mouse-properties.ui:216
+#: panels/mouse/gnome-mouse-properties.ui:221
 msgid "Mouse Speed"
 msgstr "마우스 속도"
 
-#: panels/mouse/gnome-mouse-properties.ui:238
-#: panels/mouse/gnome-mouse-properties.ui:543
+#: panels/mouse/gnome-mouse-properties.ui:243
+#: panels/mouse/gnome-mouse-properties.ui:548
 msgid "Double-click timeout"
 msgstr "두번 누르기 제한시간"
 
 #. Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: panels/mouse/gnome-mouse-properties.ui:275
-#: panels/mouse/gnome-mouse-properties.ui:451
+#: panels/mouse/gnome-mouse-properties.ui:280
+#: panels/mouse/gnome-mouse-properties.ui:456
 msgid "Natural Scrolling"
 msgstr "스크롤 방향 뒤바꾸기"
 
-#: panels/mouse/gnome-mouse-properties.ui:291
-#: panels/mouse/gnome-mouse-properties.ui:467
+#: panels/mouse/gnome-mouse-properties.ui:296
+#: panels/mouse/gnome-mouse-properties.ui:472
 msgid "Scrolling moves the content, not the view."
 msgstr "스크롤하면 내용을 옮기고, 뷰를 옮기지 않습니다."
 
-#: panels/mouse/gnome-mouse-properties.ui:341
-#: panels/mouse/gnome-mouse-properties.ui:386
+#: panels/mouse/gnome-mouse-properties.ui:346
+#: panels/mouse/gnome-mouse-properties.ui:391
 msgid "Touchpad"
 msgstr "터치패드"
 
-#: panels/mouse/gnome-mouse-properties.ui:522
+#: panels/mouse/gnome-mouse-properties.ui:527
 msgid "Touchpad Speed"
 msgstr "터치패드 속도"
 
-#: panels/mouse/gnome-mouse-properties.ui:581
+#: panels/mouse/gnome-mouse-properties.ui:586
 msgid "Tap to Click"
 msgstr "터치패드 두드리면 단추 누름으로 취급"
 
-#: panels/mouse/gnome-mouse-properties.ui:634
+#: panels/mouse/gnome-mouse-properties.ui:639
 msgid "Two-finger Scrolling"
 msgstr "두손가락 스크롤"
 
-#: panels/mouse/gnome-mouse-properties.ui:687
+#: panels/mouse/gnome-mouse-properties.ui:693
 msgid "Edge Scrolling"
 msgstr "가장자리 스크롤"
 
-#: panels/mouse/gnome-mouse-test.c:130 panels/mouse/gnome-mouse-test.ui:23
+#: panels/mouse/gnome-mouse-test.c:132 panels/mouse/gnome-mouse-test.ui:25
 msgid "Try clicking, double clicking, scrolling"
 msgstr "한번 누르기, 두번 누르기, 스크롤을 해 보십시오"
 
-#: panels/mouse/gnome-mouse-test.c:135
+#: panels/mouse/gnome-mouse-test.c:137
 msgid "Five clicks, GEGL time!"
 msgstr "다섯번 누름, 게글 타임!"
 
-#: panels/mouse/gnome-mouse-test.c:140
+#: panels/mouse/gnome-mouse-test.c:142
 msgid "Double click, primary button"
 msgstr "두번 누르기, 첫번째 단추"
 
-#: panels/mouse/gnome-mouse-test.c:140
+#: panels/mouse/gnome-mouse-test.c:142
 msgid "Single click, primary button"
 msgstr "한번 누르기, 첫번째 단추"
 
-#: panels/mouse/gnome-mouse-test.c:143
+#: panels/mouse/gnome-mouse-test.c:145
 msgid "Double click, middle button"
 msgstr "두번 누르기, 가운데 단추"
 
-#: panels/mouse/gnome-mouse-test.c:143
+#: panels/mouse/gnome-mouse-test.c:145
 msgid "Single click, middle button"
 msgstr "한번 누르기, 가운데 단추"
 
-#: panels/mouse/gnome-mouse-test.c:146
+#: panels/mouse/gnome-mouse-test.c:148
 msgid "Double click, secondary button"
 msgstr "두번 누르기, 두번째 단추"
 
-#: panels/mouse/gnome-mouse-test.c:146
+#: panels/mouse/gnome-mouse-test.c:148
 msgid "Single click, secondary button"
 msgstr "한번 누르기, 두번째 단추"
 
 #. add proxy to device list
-#: panels/network/cc-network-panel.c:579
+#: panels/network/cc-network-panel.c:583
 msgid "Network proxy"
 msgstr "네트워크 프록시"
 
@@ -2115,25 +2137,66 @@ msgstr "네트워크 프록시"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: panels/network/cc-network-panel.c:715 panels/network/net-vpn.c:167
-#: panels/network/net-vpn.c:296
+#: panels/network/cc-network-panel.c:719 panels/network/net-vpn.c:170
+#: panels/network/net-vpn.c:299
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN(가상사설망)"
 
-#: panels/network/cc-network-panel.c:779 panels/network/wifi.ui:282
+#: panels/network/cc-network-panel.c:783 panels/network/cc-wifi-panel.ui:320
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "앗, 뭔가 잘못됐습니다. 소프트웨어 공급자에게 연락하십시오."
 
-#: panels/network/cc-network-panel.c:785
+#: panels/network/cc-network-panel.c:789
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager가 동작해야 합니다."
 
-#: panels/network/cc-wifi-panel.c:213
+#: panels/network/cc-network-panel.ui:142
+#: panels/network/connection-editor/net-connection-editor.c:603
+msgid "VPN"
+msgstr "VPN(가상사설망)"
+
+#: panels/network/cc-network-panel.ui:194
+msgid "Not set up"
+msgstr "설정되지 않음"
+
+#: panels/network/cc-wifi-panel.c:281
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
 #: panels/network/network-wifi.ui:1769
 msgid "Wi-Fi"
 msgstr "와이파이"
+
+#: panels/network/cc-wifi-panel.ui:73
+msgid "Airplane Mode"
+msgstr "비행 모드"
+
+#: panels/network/cc-wifi-panel.ui:88
+msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
+msgstr "와이파이, 블루투스, 휴대전화 인터넷을 끕니다"
+
+#: panels/network/cc-wifi-panel.ui:157
+msgid "No Wi-Fi Adapter Found"
+msgstr "와이파이 어댑터가 없습니다"
+
+#: panels/network/cc-wifi-panel.ui:169
+msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
+msgstr "와이파이 어댑터를 연결하고 켰는지 확인하십시오"
+
+#: panels/network/cc-wifi-panel.ui:204
+msgid "Airplane Mode On"
+msgstr "비행 모드 켬"
+
+#: panels/network/cc-wifi-panel.ui:216
+msgid "Turn off to use Wi-Fi"
+msgstr "와이파이를 사용하려면 끄십시오"
+
+#: panels/network/cc-wifi-panel.ui:242
+msgid "Visible Networks"
+msgstr "보이는 네트워크"
+
+#: panels/network/cc-wifi-panel.ui:309
+msgid "NetworkManager needs to be running"
+msgstr "NetworkManager가 동작해야 합니다"
 
 #: panels/network/connection-editor/8021x-security-page.ui:26
 msgid "802.1x _Security"
@@ -2141,7 +2204,7 @@ msgstr "802.1x 보안(_S)"
 
 #: panels/network/connection-editor/8021x-security-page.ui:73
 #: panels/network/connection-editor/security-page.ui:72
-#: panels/wacom/wacom-stylus-page.ui:108
+#: panels/wacom/wacom-stylus-page.ui:110
 msgid "page 1"
 msgstr "페이지 1"
 
@@ -2160,7 +2223,7 @@ msgstr "내부 인증(_A)"
 
 #: panels/network/connection-editor/8021x-security-page.ui:281
 #: panels/network/connection-editor/security-page.ui:280
-#: panels/wacom/wacom-stylus-page.ui:426
+#: panels/wacom/wacom-stylus-page.ui:428
 msgid "page 2"
 msgstr "페이지 2"
 
@@ -2274,8 +2337,8 @@ msgid "Remove VPN"
 msgstr "VPN(가상사설망) 제거"
 
 #: panels/network/connection-editor/ce-page-details.c:334
-#: panels/network/network-wifi.ui:1456 shell/cc-window.c:214
-#: shell/panel-list.ui:103
+#: panels/network/network-wifi.ui:1456 shell/cc-panel-list.ui:103
+#: shell/cc-window.c:268
 msgid "Details"
 msgstr "자세히 보기"
 
@@ -2409,7 +2472,7 @@ msgstr "종량제 데이터 요금 또는 데이터가 제한된 연결에서 �
 #: panels/network/connection-editor/ip6-page.ui:291
 #: panels/network/net-proxy.c:58 panels/network/network-proxy.ui:103
 #: panels/network/wireless-security/eap-method-peap.ui:22
-#: panels/privacy/cc-privacy-panel.c:217
+#: panels/privacy/cc-privacy-panel.c:220
 msgid "Automatic"
 msgstr "자동"
 
@@ -2569,11 +2632,6 @@ msgstr "연결 편집을 열 수 없습니다"
 msgid "New Profile"
 msgstr "새 프로파일"
 
-#: panels/network/connection-editor/net-connection-editor.c:603
-#: panels/network/network.ui:142
-msgid "VPN"
-msgstr "VPN(가상사설망)"
-
 #: panels/network/connection-editor/net-connection-editor.c:751
 msgid "Import from file…"
 msgstr "파일에서 가져오기…"
@@ -2609,8 +2667,8 @@ msgid "Select file to import"
 msgstr "가져올 파일을 선택하십시오"
 
 #: panels/network/connection-editor/vpn-helpers.c:182
-#: panels/printers/pp-details-dialog.c:332
-#: panels/sharing/cc-sharing-panel.c:385
+#: panels/printers/pp-details-dialog.c:331
+#: panels/sharing/cc-sharing-panel.c:427
 #: panels/user-accounts/um-photo-dialog.c:231
 msgid "_Open"
 msgstr "열기(_O)"
@@ -2887,10 +2945,6 @@ msgstr "설정 URL(_C)"
 msgid "Turn device off"
 msgstr "장치 끄기"
 
-#: panels/network/network.ui:194
-msgid "Not set up"
-msgstr "설정되지 않음"
-
 #: panels/network/network-vpn.ui:56
 msgid "Turn VPN connection off"
 msgstr "VPN(가상사설망) 끄기"
@@ -2908,7 +2962,7 @@ msgstr "자세히"
 #: panels/network/wireless-security/eap-method-simple.ui:40
 #: panels/network/wireless-security/ws-leap.ui:40
 #: panels/network/wireless-security/ws-wpa-psk.ui:22
-#: panels/sharing/sharing.ui:351
+#: panels/sharing/sharing.ui:357
 #: panels/user-accounts/data/account-dialog.ui:300
 #: panels/user-accounts/data/account-dialog.ui:525
 #: panels/user-accounts/data/user-accounts-dialog.ui:205
@@ -3042,30 +3096,6 @@ msgstr "와이파이 핫스팟 켜기(_T)…"
 #: panels/network/network-wifi.ui:1851
 msgid "_Known Wi-Fi Networks"
 msgstr "알려진 와이파이 네트워크(_K)"
-
-#: panels/network/wifi.ui:40
-msgid "No Wi-Fi Adapter Found"
-msgstr "와이파이 어댑터가 없습니다"
-
-#: panels/network/wifi.ui:52
-msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
-msgstr "와이파이 어댑터를 연결하고 켰는지 확인하십시오"
-
-#: panels/network/wifi.ui:127
-msgid "Airplane Mode"
-msgstr "비행 모드"
-
-#: panels/network/wifi.ui:142
-msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
-msgstr "와이파이, 블루투스, 휴대전화 인터넷을 끕니다"
-
-#: panels/network/wifi.ui:192
-msgid "Visible Networks"
-msgstr "보이는 네트워크"
-
-#: panels/network/wifi.ui:271
-msgid "NetworkManager needs to be running"
-msgstr "NetworkManager가 동작해야 합니다"
 
 #. TRANSLATORS: AP type
 #: panels/network/panel-common.c:127
@@ -3697,40 +3727,40 @@ msgid "_Type"
 msgstr "종류(_T)"
 
 #. This is the per application switch for message tray usage.
-#: panels/notifications/edit-dialog.ui:64
+#: panels/notifications/cc-app-notifications-dialog.ui:61
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "알림(_N)"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/edit-dialog.ui:116
+#: panels/notifications/cc-app-notifications-dialog.ui:113
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "경고음(_A)"
 
-#: panels/notifications/edit-dialog.ui:172
+#: panels/notifications/cc-app-notifications-dialog.ui:169
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "알림 팝업(_P)"
 
-#: panels/notifications/edit-dialog.ui:188
+#: panels/notifications/cc-app-notifications-dialog.ui:185
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
 msgstr "팝업을 꺼도 알림은 알림 목록에 계속 나타납니다."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/edit-dialog.ui:253
+#: panels/notifications/cc-app-notifications-dialog.ui:250
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "팝업에 메시지 내용 표시(_C)"
 
-#: panels/notifications/edit-dialog.ui:304
+#: panels/notifications/cc-app-notifications-dialog.ui:301
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "잠금 화면 알림(_L)"
 
-#: panels/notifications/edit-dialog.ui:355
+#: panels/notifications/cc-app-notifications-dialog.ui:352
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "잠금 화면에서 메시지 내용 표시(_O)"
@@ -3775,19 +3805,19 @@ msgstr "기타"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:596
+#: panels/online-accounts/cc-online-accounts-panel.c:612
 #, c-format
 msgid "%s Account"
 msgstr "%s 계정"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:888
+#: panels/online-accounts/cc-online-accounts-panel.c:904
 msgid "Error removing account"
 msgstr "계정 제거 오류"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:953
+#: panels/online-accounts/cc-online-accounts-panel.c:969
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "<b>%s</b> 제거함"
@@ -3839,17 +3869,17 @@ msgstr "계정 추가"
 msgid "Remove Account"
 msgstr "계정 제거"
 
-#: panels/power/cc-power-panel.c:253
+#: panels/power/cc-power-panel.c:260
 msgid "Unknown time"
 msgstr "시간 알 수 없음"
 
-#: panels/power/cc-power-panel.c:259
+#: panels/power/cc-power-panel.c:266
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i분"
 
-#: panels/power/cc-power-panel.c:271
+#: panels/power/cc-power-panel.c:278
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3857,256 +3887,294 @@ msgstr[0] "%i시간"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: panels/power/cc-power-panel.c:279
+#: panels/power/cc-power-panel.c:286
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i%s %i%s"
 
-#: panels/power/cc-power-panel.c:280
+#: panels/power/cc-power-panel.c:287
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "시간"
 
-#: panels/power/cc-power-panel.c:281
+#: panels/power/cc-power-panel.c:288
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "분"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:300
+#: panels/power/cc-power-panel.c:307
 #, c-format
 msgid "%s until fully charged"
 msgstr "완전 충전까지 %s 남음"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:307
+#: panels/power/cc-power-panel.c:314
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "주의: %s 남음"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:312
+#: panels/power/cc-power-panel.c:319
 #, c-format
 msgid "%s remaining"
 msgstr "%s 남음"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:317 panels/power/cc-power-panel.c:345
+#: panels/power/cc-power-panel.c:324 panels/power/cc-power-panel.c:351
 msgid "Fully charged"
 msgstr "완전 충전"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:321 panels/power/cc-power-panel.c:349
+#: panels/power/cc-power-panel.c:328 panels/power/cc-power-panel.c:355
 msgid "Empty"
 msgstr "비었음"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:336
+#: panels/power/cc-power-panel.c:342
 msgid "Charging"
 msgstr "충전 중"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:341
+#: panels/power/cc-power-panel.c:347
 msgid "Discharging"
 msgstr "방전 중"
 
-#: panels/power/cc-power-panel.c:464
+#: panels/power/cc-power-panel.c:465
 msgctxt "Battery name"
 msgid "Main"
 msgstr "1차"
 
-#: panels/power/cc-power-panel.c:466
+#: panels/power/cc-power-panel.c:467
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "추가"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:537
+#: panels/power/cc-power-panel.c:535
 msgid "Wireless mouse"
 msgstr "무선 마우스"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:540
+#: panels/power/cc-power-panel.c:538
 msgid "Wireless keyboard"
 msgstr "무선 키보드"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:543
+#: panels/power/cc-power-panel.c:541
 msgid "Uninterruptible power supply"
 msgstr "무정전 전원 장치"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:546
+#: panels/power/cc-power-panel.c:544
 msgid "Personal digital assistant"
 msgstr "개인 휴대 정보 단말기"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:549
+#: panels/power/cc-power-panel.c:547
 msgid "Cellphone"
 msgstr "휴대전화"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:552
+#: panels/power/cc-power-panel.c:550
 msgid "Media player"
 msgstr "미디어 플레이어"
 
 # 태블릿 PC
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:555 panels/wacom/cc-wacom-panel.c:793
+#: panels/power/cc-power-panel.c:553 panels/wacom/cc-wacom-panel.c:830
 msgid "Tablet"
 msgstr "태블릿"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:558
+#: panels/power/cc-power-panel.c:556
 msgid "Computer"
 msgstr "컴퓨터"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:561
+#: panels/power/cc-power-panel.c:559
 msgid "Gaming input device"
 msgstr "게임 입력 장치"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:564 panels/power/cc-power-panel.c:804
-#: panels/power/cc-power-panel.c:2380
+#: panels/power/cc-power-panel.c:562 panels/power/cc-power-panel.c:814
+#: panels/power/cc-power-panel.c:2400
 msgid "Battery"
 msgstr "배터리"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:618
+#: panels/power/cc-power-panel.c:622
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "충전 중"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:625
+#: panels/power/cc-power-panel.c:629
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "위험"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:630
+#: panels/power/cc-power-panel.c:634
 msgctxt "Battery power"
 msgid "Low"
 msgstr "적음"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:635
+#: panels/power/cc-power-panel.c:639
 msgctxt "Battery power"
 msgid "Good"
 msgstr "적당함"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:640
+#: panels/power/cc-power-panel.c:644
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "완전 충전"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:644
+#: panels/power/cc-power-panel.c:648
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "방전됨"
 
-#: panels/power/cc-power-panel.c:802
+#: panels/power/cc-power-panel.c:812
 msgid "Batteries"
 msgstr "배터리"
 
-#: panels/power/cc-power-panel.c:1242
+#: panels/power/cc-power-panel.c:1172
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d시간"
+
+#: panels/power/cc-power-panel.c:1174
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d분"
+
+#: panels/power/cc-power-panel.c:1177
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d초"
+
+#. 5 hours 2 minutes 12 seconds
+#: panels/power/cc-power-panel.c:1182
+#, c-format
+msgctxt "time"
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
+#. 2 minutes 12 seconds
+#: panels/power/cc-power-panel.c:1185
+#, c-format
+msgctxt "time"
+msgid "%s %s"
+msgstr "%s %s"
+
+#. 0 seconds
+#: panels/power/cc-power-panel.c:1191
+msgid "0 seconds"
+msgstr "0초"
+
+#: panels/power/cc-power-panel.c:1286
 msgid "When _idle"
 msgstr "입력이 없을 때(_I)"
 
-#: panels/power/cc-power-panel.c:1696
+#: panels/power/cc-power-panel.c:1736
 msgid "Power Saving"
 msgstr "절전"
 
-#: panels/power/cc-power-panel.c:1727
+#: panels/power/cc-power-panel.c:1766
 msgid "_Screen brightness"
 msgstr "화면 밝기(_S)"
 
-#: panels/power/cc-power-panel.c:1746
+#: panels/power/cc-power-panel.c:1785
 msgid "Automatic brightness"
 msgstr "자동 밝기 조절"
 
-#: panels/power/cc-power-panel.c:1766
+#: panels/power/cc-power-panel.c:1805
 msgid "_Keyboard brightness"
 msgstr "키보드 밝기 조절(_K)"
 
-#: panels/power/cc-power-panel.c:1776
+#: panels/power/cc-power-panel.c:1815
 msgid "_Dim screen when inactive"
 msgstr "입력이 없으면 화면 어둡게(_D)"
 
-#: panels/power/cc-power-panel.c:1801
+#: panels/power/cc-power-panel.c:1840
 msgid "_Blank screen"
 msgstr "빈 화면(_B)"
 
-#: panels/power/cc-power-panel.c:1838
+#: panels/power/cc-power-panel.c:1877
 msgid "_Wi-Fi"
 msgstr "와이파이(_W)"
 
-#: panels/power/cc-power-panel.c:1843
-msgid "Turn off Wi-Fi to save power."
-msgstr "전기 사용을 줄이려면 와이파이를 끄십시오."
+#: panels/power/cc-power-panel.c:1882
+msgid "Wi-Fi can be turned off to save power."
+msgstr "와이파이를 끄면 전기 사용을 아낄 수 있습니다."
 
-#: panels/power/cc-power-panel.c:1868
+#: panels/power/cc-power-panel.c:1907
 msgid "_Mobile broadband"
 msgstr "휴대전화 네트워크(_M)"
 
-#: panels/power/cc-power-panel.c:1873
-msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
-msgstr "전기 사용을 줄이려면 휴대전화 네트워크를(3G, 4G, LTE 등) 끄십시오."
+#: panels/power/cc-power-panel.c:1912
+msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
+msgstr "휴대전화 네트워크를 (LTE, 4G, 3G 등) 끄면 전기 사용을 아낄 수 있습니다."
 
-#: panels/power/cc-power-panel.c:1926
+#: panels/power/cc-power-panel.c:1971
 msgid "_Bluetooth"
 msgstr "블루투스(_B)"
 
-#: panels/power/cc-power-panel.c:1931
-msgid "Turn off Bluetooth to save power."
-msgstr "전기 사용을 줄이려면 블루투스를 끄십시오."
+#: panels/power/cc-power-panel.c:1976
+msgid "Bluetooth can be turned off to save power."
+msgstr "블루투스를 끄면 전기 사용을 아낄 수 있습니다."
 
-#: panels/power/cc-power-panel.c:1990
+#: panels/power/cc-power-panel.c:2034
 msgid "When on battery power"
 msgstr "배터리 전원 사용할 때"
 
-#: panels/power/cc-power-panel.c:1992
+#: panels/power/cc-power-panel.c:2036
 msgid "When plugged in"
 msgstr "전원이 연결되었을 때"
 
-#: panels/power/cc-power-panel.c:2087
+#: panels/power/cc-power-panel.c:2130
 msgid "Suspend"
 msgstr "대기 모드"
 
-#: panels/power/cc-power-panel.c:2088
+#: panels/power/cc-power-panel.c:2131
 msgid "Power Off"
 msgstr "전원 끄기"
 
-#: panels/power/cc-power-panel.c:2089
+#: panels/power/cc-power-panel.c:2132
 msgid "Hibernate"
 msgstr "최대 절전"
 
-#: panels/power/cc-power-panel.c:2090
+#: panels/power/cc-power-panel.c:2133
 msgid "Nothing"
 msgstr "아무것도 하지 않기"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2204
+#: panels/power/cc-power-panel.c:2233
 msgid "Suspend & Power Button"
 msgstr "대기 모드 및 전원 단추"
 
-#: panels/power/cc-power-panel.c:2243
+#: panels/power/cc-power-panel.c:2271
 msgid "_Automatic suspend"
 msgstr "자동 대기 모드(_A)"
 
-#: panels/power/cc-power-panel.c:2244
+#: panels/power/cc-power-panel.c:2272
 msgid "Automatic suspend"
 msgstr "자동 대기 모드"
 
-#: panels/power/cc-power-panel.c:2311
+#: panels/power/cc-power-panel.c:2335
 msgid "_When the Power Button is pressed"
 msgstr "전원 단추를 눌렀을 때(_W)"
 
-#: panels/power/cc-power-panel.c:2430 shell/cc-window.c:218
-#: shell/panel-list.ui:45
+#: panels/power/cc-power-panel.c:2445 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
+#: shell/cc-window.c:272
 msgid "Devices"
 msgstr "장치"
 
@@ -4196,20 +4264,20 @@ msgstr "10분"
 msgid "12 minutes"
 msgstr "12분"
 
-#: panels/power/power.ui:155
+#: panels/power/power.ui:167
 msgid "Automatic Suspend"
 msgstr "자동 대기 모드"
 
-#: panels/power/power.ui:180
+#: panels/power/power.ui:192
 msgid "_Plugged In"
 msgstr "전원 연결(_P)"
 
-#: panels/power/power.ui:196
+#: panels/power/power.ui:208
 msgid "On _Battery Power"
 msgstr "배터리 전원 사용(_B)"
 
-#: panels/power/power.ui:241 panels/power/power.ui:301
-#: panels/universal-access/uap.ui:1501
+#: panels/power/power.ui:253 panels/power/power.ui:313
+#: panels/universal-access/uap.ui:1507
 msgid "Delay"
 msgstr "지연 시간"
 
@@ -4223,35 +4291,35 @@ msgstr "인증"
 
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
-#: panels/printers/jobs-dialog.ui:57 panels/printers/new-printer-dialog.ui:361
+#: panels/printers/jobs-dialog.ui:57 panels/printers/new-printer-dialog.ui:362
 msgid "Username"
 msgstr "사용자 이름"
 
 #. Translators: This is a password needed for printing.
 #: panels/printers/authentication-dialog.ui:96
-#: panels/printers/jobs-dialog.ui:70 panels/printers/new-printer-dialog.ui:382
+#: panels/printers/jobs-dialog.ui:70 panels/printers/new-printer-dialog.ui:383
 #: panels/user-accounts/data/account-dialog.ui:240
 msgid "Password"
 msgstr "암호"
 
 #: panels/printers/authentication-dialog.ui:139
-#: panels/printers/new-printer-dialog.ui:336
+#: panels/printers/new-printer-dialog.ui:337
 msgid "Authentication Required"
 msgstr "인증 필요"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:808
+#: panels/printers/cc-printers-panel.c:809
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "“%s” 프린터를 삭제했습니다"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:1053
+#: panels/printers/cc-printers-panel.c:1057
 msgid "Failed to add new printer."
 msgstr "새 프린터 추가에 실패했습니다."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1388
+#: panels/printers/cc-printers-panel.c:1394
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "UI를 읽어들일 수 없습니다: %s"
@@ -4341,16 +4409,16 @@ msgid "_Unlock"
 msgstr "잠금 해제(_U)"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:210
+#: panels/printers/new-printer-dialog.ui:211
 msgid "No Printers Found"
 msgstr "프린터가 없습니다"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:283
+#: panels/printers/new-printer-dialog.ui:284
 msgid "Enter a network address or search for a printer"
 msgstr "프린터의 네트워크 주소를 입력하거나 프린터를 찾아보십시오"
 
-#: panels/printers/new-printer-dialog.ui:352
+#: panels/printers/new-printer-dialog.ui:353
 msgid "Enter username and password to view printers on Print Server."
 msgstr "인쇄 서버의 프린터를 보려면 사용자 이름과 암호를 입력하십시오."
 
@@ -4361,21 +4429,21 @@ msgid "Test Page"
 msgstr "테스트 페이지"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: panels/printers/pp-details-dialog.c:135
-#: panels/printers/pp-details-dialog.c:435
+#: panels/printers/pp-details-dialog.c:134
+#: panels/printers/pp-details-dialog.c:434
 #, c-format
 msgid "%s Details"
 msgstr "%s 자세히 보기"
 
-#: panels/printers/pp-details-dialog.c:184
+#: panels/printers/pp-details-dialog.c:183
 msgid "No suitable driver found"
 msgstr "적당한 드라이버가 없습니다"
 
-#: panels/printers/pp-details-dialog.c:328
+#: panels/printers/pp-details-dialog.c:327
 msgid "Select PPD File"
 msgstr "PPD 파일 선택"
 
-#: panels/printers/pp-details-dialog.c:337
+#: panels/printers/pp-details-dialog.c:336
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4499,14 +4567,14 @@ msgid_plural "%u Jobs Require Authentication"
 msgstr[0] "작업 %u개에 인증이 필요합니다"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:620
+#: panels/printers/pp-jobs-dialog.c:617
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — 활성 작업"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:625
+#: panels/printers/pp-jobs-dialog.c:622
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "%s에서 인쇄하려면 인증 정보가 필요합니다."
@@ -4527,39 +4595,39 @@ msgstr "%s 잠금 해제."
 msgid "Enter username and password to view printers on %s."
 msgstr "%s의 프린터를 보려면 사용자 이름과 암호를 입력하십시오."
 
-#: panels/printers/pp-new-printer-dialog.c:876
+#: panels/printers/pp-new-printer-dialog.c:894
 msgid "Searching for Printers"
 msgstr "프린터 검색 중"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1799
+#: panels/printers/pp-new-printer-dialog.c:1814
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1804
+#: panels/printers/pp-new-printer-dialog.c:1819
 msgid "Serial Port"
 msgstr "직렬 포트"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1811
+#: panels/printers/pp-new-printer-dialog.c:1826
 msgid "Parallel Port"
 msgstr "병렬 포트"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1853
+#: panels/printers/pp-new-printer-dialog.c:1868
 #, c-format
 msgid "Location: %s"
 msgstr "위치: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1858
+#: panels/printers/pp-new-printer-dialog.c:1873
 #, c-format
 msgid "Address: %s"
 msgstr "주소: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1887
+#: panels/printers/pp-new-printer-dialog.c:1902
 msgid "Server requires authentication"
 msgstr "서버에 인증이 필요합니다"
 
@@ -4688,123 +4756,123 @@ msgid "Manufacturer"
 msgstr "제조사"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:598 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:615 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "활성 작업 없음"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:603
+#: panels/printers/pp-printer-entry.c:620
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
 msgstr[0] "작업 %u개"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:766
+#: panels/printers/pp-printer-entry.c:780
 msgid "Low on toner"
 msgstr "토너 부족"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:768
+#: panels/printers/pp-printer-entry.c:782
 msgid "Out of toner"
 msgstr "토너 없음"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:771
+#: panels/printers/pp-printer-entry.c:785
 msgid "Low on developer"
 msgstr "현상액 부족"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:774
+#: panels/printers/pp-printer-entry.c:788
 msgid "Out of developer"
 msgstr "현상액 없음"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:776
+#: panels/printers/pp-printer-entry.c:790
 msgid "Low on a marker supply"
 msgstr "마커 내용물 부족"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:778
+#: panels/printers/pp-printer-entry.c:792
 msgid "Out of a marker supply"
 msgstr "마커 내용물 없음"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:780
+#: panels/printers/pp-printer-entry.c:794
 msgid "Open cover"
 msgstr "덮개 열림"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:782
+#: panels/printers/pp-printer-entry.c:796
 msgid "Open door"
 msgstr "문 열림"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:784
+#: panels/printers/pp-printer-entry.c:798
 msgid "Low on paper"
 msgstr "용지 부족"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:786
+#: panels/printers/pp-printer-entry.c:800
 msgid "Out of paper"
 msgstr "용지 없음"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:788
+#: panels/printers/pp-printer-entry.c:802
 msgctxt "printer state"
 msgid "Offline"
 msgstr "연결 끊김"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:790
-#: panels/printers/pp-printer-entry.c:920
+#: panels/printers/pp-printer-entry.c:804
+#: panels/printers/pp-printer-entry.c:932
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "중지"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:792
+#: panels/printers/pp-printer-entry.c:806
 msgid "Waste receptacle almost full"
 msgstr "찌꺼기 보관함이 거의 가득 찼습니다"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:794
+#: panels/printers/pp-printer-entry.c:808
 msgid "Waste receptacle full"
 msgstr "찌꺼기 보관함이 가득 찼습니다"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:796
+#: panels/printers/pp-printer-entry.c:810
 msgid "The optical photo conductor is near end of life"
 msgstr "감광 반도체의 수명이 거의 다 되었습니다"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:798
+#: panels/printers/pp-printer-entry.c:812
 msgid "The optical photo conductor is no longer functioning"
 msgstr "감광 반도체가 이제 동작하지 않습니다"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:906
+#: panels/printers/pp-printer-entry.c:918
 msgctxt "printer state"
 msgid "Ready"
 msgstr "준비"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:911
+#: panels/printers/pp-printer-entry.c:923
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "인쇄 작업 받지 않음"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:916
+#: panels/printers/pp-printer-entry.c:928
 msgctxt "printer state"
 msgid "Processing"
 msgstr "처리중"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:940
+#: panels/printers/pp-printer-entry.c:952
 msgid "Clean print heads"
 msgstr "인쇄 헤드 청소"
 
@@ -4871,70 +4939,70 @@ msgstr ""
 "죄송합니다. 시스템 인쇄 서비스가\n"
 "없는 것 같습니다."
 
-#: panels/privacy/cc-privacy-panel.c:387 panels/privacy/privacy.ui:280
+#: panels/privacy/cc-privacy-panel.c:390 panels/privacy/privacy.ui:280
 msgid "Screen Lock"
 msgstr "화면 잠금"
 
-#: panels/privacy/cc-privacy-panel.c:438
+#: panels/privacy/cc-privacy-panel.c:440
 msgid "In use"
 msgstr "사용 중"
 
-#: panels/privacy/cc-privacy-panel.c:443
+#: panels/privacy/cc-privacy-panel.c:445
 msgctxt "Location services status"
 msgid "On"
 msgstr "켬"
 
-#: panels/privacy/cc-privacy-panel.c:444
+#: panels/privacy/cc-privacy-panel.c:446
 msgctxt "Location services status"
 msgid "Off"
 msgstr "끔"
 
-#: panels/privacy/cc-privacy-panel.c:823 panels/privacy/privacy.ui:745
+#: panels/privacy/cc-privacy-panel.c:821 panels/privacy/privacy.ui:745
 msgid "Location Services"
 msgstr "위치 서비스"
 
-#: panels/privacy/cc-privacy-panel.c:946 panels/privacy/privacy.ui:127
+#: panels/privacy/cc-privacy-panel.c:942 panels/privacy/privacy.ui:127
 msgid "Usage & History"
 msgstr "사용 내역"
 
-#: panels/privacy/cc-privacy-panel.c:1075
+#: panels/privacy/cc-privacy-panel.c:1071
 msgid "Empty all items from Trash?"
 msgstr "휴지통의 모든 항목을 비우시겠습니까?"
 
-#: panels/privacy/cc-privacy-panel.c:1076
+#: panels/privacy/cc-privacy-panel.c:1072
 msgid "All items in the Trash will be permanently deleted."
 msgstr "휴지통의 모든 항목을 완전히 삭제합니다."
 
-#: panels/privacy/cc-privacy-panel.c:1077
+#: panels/privacy/cc-privacy-panel.c:1073
 msgid "_Empty Trash"
 msgstr "휴지통 비우기(_E)"
 
-#: panels/privacy/cc-privacy-panel.c:1100
+#: panels/privacy/cc-privacy-panel.c:1096
 msgid "Delete all the temporary files?"
 msgstr "모든 임시 파일을 지우시겠습니까?"
 
-#: panels/privacy/cc-privacy-panel.c:1101
+#: panels/privacy/cc-privacy-panel.c:1097
 msgid "All the temporary files will be permanently deleted."
 msgstr "모든 임시 파일을 완전히 삭제합니다."
 
-#: panels/privacy/cc-privacy-panel.c:1102
+#: panels/privacy/cc-privacy-panel.c:1098
 msgid "_Purge Temporary Files"
 msgstr "임시 파일 지우기(_P)"
 
-#: panels/privacy/cc-privacy-panel.c:1124 panels/privacy/privacy.ui:432
+#: panels/privacy/cc-privacy-panel.c:1120 panels/privacy/privacy.ui:432
 msgid "Purge Trash & Temporary Files"
 msgstr "휴지통 및 임시 파일 지우기"
 
-#: panels/privacy/cc-privacy-panel.c:1164 panels/privacy/privacy.ui:637
+#: panels/privacy/cc-privacy-panel.c:1160 panels/privacy/privacy.ui:637
 msgid "Software Usage"
 msgstr "소프트웨어 사용"
 
-#: panels/privacy/cc-privacy-panel.c:1205 panels/privacy/privacy.ui:959
+#: panels/privacy/cc-privacy-panel.c:1201 panels/privacy/privacy.ui:959
 msgid "Problem Reporting"
 msgstr "문제점 보고"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: panels/privacy/cc-privacy-panel.c:1219
+#: panels/privacy/cc-privacy-panel.c:1215
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4943,7 +5011,7 @@ msgstr ""
 "기술적인 문제점에 대한 보고서를 보내면 %s 개선에 도움이 됩니다. 보고서는 익명"
 "으로 전송되고 개인 정보는 가려집니다."
 
-#: panels/privacy/cc-privacy-panel.c:1231 panels/privacy/privacy.ui:719
+#: panels/privacy/cc-privacy-panel.c:1227 panels/privacy/privacy.ui:719
 msgid "Privacy Policy"
 msgstr "개인 정보 보호 정책"
 
@@ -5125,68 +5193,68 @@ msgstr "위치 서비스(_L)"
 msgid "_Automatic Problem Reporting"
 msgstr "문제점 보고서 자동(_A)"
 
-#: panels/region/cc-format-chooser.c:118
+#: panels/region/cc-format-chooser.c:114
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "야드파운드법"
 
-#: panels/region/cc-format-chooser.c:120
+#: panels/region/cc-format-chooser.c:116
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "미터법"
 
-#: panels/region/cc-format-chooser.c:285
+#: panels/region/cc-format-chooser.c:277
 msgid "No regions found"
 msgstr "지역이 없습니다"
+
+#: panels/region/cc-format-chooser.ui:7
+msgid "Formats"
+msgstr "형식"
+
+#: panels/region/cc-format-chooser.ui:120
+msgid "Preview"
+msgstr "미리 보기"
+
+#: panels/region/cc-format-chooser.ui:137
+msgid "Dates"
+msgstr "날짜"
+
+#: panels/region/cc-format-chooser.ui:168
+msgid "Times"
+msgstr "시각"
+
+#: panels/region/cc-format-chooser.ui:199
+msgid "Dates & Times"
+msgstr "날짜 및 시각"
+
+#: panels/region/cc-format-chooser.ui:230
+msgid "Numbers"
+msgstr "숫자"
+
+#: panels/region/cc-format-chooser.ui:247
+msgid "Measurement"
+msgstr "단위"
+
+#: panels/region/cc-format-chooser.ui:264
+msgid "Paper"
+msgstr "용지"
 
 #: panels/region/cc-input-chooser.c:182
 msgid "No input sources found"
 msgstr "입력 소스가 없습니다"
 
-#: panels/region/cc-input-chooser.c:1012
+#: panels/region/cc-input-chooser.c:981
 msgctxt "Input Source"
 msgid "Other"
 msgstr "기타"
 
-#: panels/region/cc-region-panel.c:881
+#: panels/region/cc-region-panel.c:802
 msgid "No input source selected"
 msgstr "입력 소스를 선택하지 않았습니다"
 
-#: panels/region/cc-region-panel.c:1773
+#: panels/region/cc-region-panel.c:1597
 msgid "Login _Screen"
 msgstr "로그인 화면(_S)"
-
-#: panels/region/format-chooser.ui:7
-msgid "Formats"
-msgstr "형식"
-
-#: panels/region/format-chooser.ui:120
-msgid "Preview"
-msgstr "미리 보기"
-
-#: panels/region/format-chooser.ui:137
-msgid "Dates"
-msgstr "날짜"
-
-#: panels/region/format-chooser.ui:168
-msgid "Times"
-msgstr "시각"
-
-#: panels/region/format-chooser.ui:199
-msgid "Dates & Times"
-msgstr "날짜 및 시각"
-
-#: panels/region/format-chooser.ui:230
-msgid "Numbers"
-msgstr "숫자"
-
-#: panels/region/format-chooser.ui:247
-msgid "Measurement"
-msgstr "단위"
-
-#: panels/region/format-chooser.ui:264
-msgid "Paper"
-msgstr "용지"
 
 #: panels/region/gnome-region-panel.desktop.in.in:3
 msgid "Region & Language"
@@ -5211,7 +5279,7 @@ msgstr "Language;언어;Layout;배치;Keyboard;키보드;Input;입력;"
 msgid "Add an Input Source"
 msgstr "입력 소스 추가"
 
-#: panels/region/input-chooser.ui:76
+#: panels/region/input-chooser.ui:77
 msgid "Input methods can’t be used on the login screen"
 msgstr "로그인 화면에서는 입력기를 사용할 수 없습니다"
 
@@ -5256,76 +5324,76 @@ msgstr "다음 입력 소스로 전환(추가)"
 msgid "Left+Right Alt"
 msgstr "왼쪽+오른쪽 Alt"
 
-#: panels/region/region.ui:67
+#: panels/region/region.ui:71
 #: panels/user-accounts/data/user-accounts-dialog.ui:348
 msgid "_Language"
 msgstr "언어(_L)"
 
-#: panels/region/region.ui:85
+#: panels/region/region.ui:89
 msgid "English (United Kingdom)"
 msgstr "영어(영국)"
 
-#: panels/region/region.ui:112
+#: panels/region/region.ui:116
 msgid "Restart the session for changes to take effect"
 msgstr "바뀐 사항을 적용하려면 세션을 다시 시작하십시오"
 
-#: panels/region/region.ui:134
+#: panels/region/region.ui:138
 msgid "Restart…"
 msgstr "다시 시작…"
 
-#: panels/region/region.ui:169
+#: panels/region/region.ui:174
 msgid "_Formats"
 msgstr "형식(_F)"
 
-#: panels/region/region.ui:187
+#: panels/region/region.ui:192
 msgid "United Kingdom"
 msgstr "영국"
 
-#: panels/region/region.ui:229
+#: panels/region/region.ui:234
 msgid "Input Sources"
 msgstr "입력 소스"
 
-#: panels/region/region.ui:245
+#: panels/region/region.ui:250
 msgid "_Options"
 msgstr "옵션(_O)"
 
-#: panels/region/region.ui:311
+#: panels/region/region.ui:318
 msgid "Add input source"
 msgstr "입력 소스 추가"
 
-#: panels/region/region.ui:336
+#: panels/region/region.ui:344
 msgid "Remove input source"
 msgstr "입력 소스 제거"
 
-#: panels/region/region.ui:386
+#: panels/region/region.ui:395
 msgid "Move input source up"
 msgstr "입력 소스 위로 이동"
 
-#: panels/region/region.ui:411
+#: panels/region/region.ui:421
 msgid "Move input source down"
 msgstr "입력 소스 아래로 이동"
 
-#: panels/region/region.ui:461
+#: panels/region/region.ui:472
 msgid "Configure input source"
 msgstr "입력 소스 설정"
 
-#: panels/region/region.ui:486
+#: panels/region/region.ui:498
 msgid "Show input source keyboard layout"
 msgstr "입력 소스 키보드 배치"
 
-#: panels/region/region.ui:530
+#: panels/region/region.ui:542
 msgid "Login settings are used by all users when logging into the system"
 msgstr "로그인 설정은 로그인할 때 모든 사용자가 사용합니다"
 
-#: panels/search/cc-search-locations-dialog.c:639
+#: panels/search/cc-search-locations-dialog.c:600
 msgid "Select Location"
 msgstr "위치 선택"
 
-#: panels/search/cc-search-locations-dialog.c:643
+#: panels/search/cc-search-locations-dialog.c:604
 msgid "_OK"
 msgstr "확인(_O)"
 
-#: panels/search/cc-search-panel.c:178
+#: panels/search/cc-search-panel.c:175
 msgid "No applications found"
 msgstr "프로그램 없음"
 
@@ -5362,48 +5430,48 @@ msgstr "책갈피"
 msgid "Other"
 msgstr "기타"
 
-#: panels/search/search.ui:66
+#: panels/search/search.ui:71
 msgid "Move Up"
 msgstr "위로 이동"
 
-#: panels/search/search.ui:83
+#: panels/search/search.ui:88
 msgid "Move Down"
 msgstr "아래로 이동"
 
-#: panels/search/search.ui:119
+#: panels/search/search.ui:124
 msgid "Preferences"
 msgstr "기본 설정"
 
 #. Label
-#: panels/sharing/cc-sharing-networks.c:305
+#: panels/sharing/cc-sharing-networks.c:302
 msgid "No networks selected for sharing"
 msgstr "공유에 사용할 네트워크를 선택하지 않았습니다"
 
-#: panels/sharing/cc-sharing-panel.c:275
+#: panels/sharing/cc-sharing-panel.c:318
 msgctxt "service is enabled"
 msgid "On"
 msgstr "켬"
 
-#: panels/sharing/cc-sharing-panel.c:277 panels/sharing/cc-sharing-panel.c:304
+#: panels/sharing/cc-sharing-panel.c:320 panels/sharing/cc-sharing-panel.c:347
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "끔"
 
-#: panels/sharing/cc-sharing-panel.c:307
+#: panels/sharing/cc-sharing-panel.c:350
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "사용"
 
-#: panels/sharing/cc-sharing-panel.c:310
+#: panels/sharing/cc-sharing-panel.c:353
 msgctxt "service is active"
 msgid "Active"
 msgstr "동작"
 
-#: panels/sharing/cc-sharing-panel.c:381
+#: panels/sharing/cc-sharing-panel.c:423
 msgid "Choose a Folder"
 msgstr "폴더 선택"
 
-#: panels/sharing/cc-sharing-panel.c:693
+#: panels/sharing/cc-sharing-panel.c:720
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5412,7 +5480,7 @@ msgstr ""
 "파일 공유를 사용하면, 현재 네트워크에 있는 다른 사람이 다음 URL을 사용해 공"
 "유 폴더를 공유할 수 있습니다: <a href=\"dav://%s\">dav://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:695
+#: panels/sharing/cc-sharing-panel.c:722
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5423,7 +5491,7 @@ msgstr ""
 "다:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:697
+#: panels/sharing/cc-sharing-panel.c:724
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
@@ -5432,11 +5500,11 @@ msgstr ""
 "화면 공유를 사용하면, 원격 사용자가 <a href=\"vnc://%s\">vnc://%s</a>에 연결"
 "해 화면을 보거나 조작할 수 있습니다"
 
-#: panels/sharing/cc-sharing-panel.c:809
+#: panels/sharing/cc-sharing-panel.c:828
 msgid "Copy"
 msgstr "복사"
 
-#: panels/sharing/cc-sharing-panel.c:1236
+#: panels/sharing/cc-sharing-panel.c:1279
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "공유"
@@ -5472,79 +5540,79 @@ msgstr "원격 로그인 사용 여부"
 msgid "Authentication is required to enable or disable remote login"
 msgstr "원격 로그인 사용 여부를 바꾸려면 인증이 필요합니다"
 
-#: panels/sharing/sharing.ui:46
+#: panels/sharing/sharing.ui:50
 msgid "_Computer Name"
 msgstr "컴퓨터 이름(_C)"
 
-#: panels/sharing/sharing.ui:104
+#: panels/sharing/sharing.ui:108
 msgid "_File Sharing"
 msgstr "파일 공유(_F)"
 
-#: panels/sharing/sharing.ui:147
+#: panels/sharing/sharing.ui:151
 msgid "_Screen Sharing"
 msgstr "화면 공유(_S)"
 
-#: panels/sharing/sharing.ui:190
+#: panels/sharing/sharing.ui:194
 msgid "_Media Sharing"
 msgstr "미디어 공유(_M)"
 
-#: panels/sharing/sharing.ui:233
+#: panels/sharing/sharing.ui:237
 msgid "_Remote Login"
 msgstr "원격 로그인(_R)"
 
-#: panels/sharing/sharing.ui:272
+#: panels/sharing/sharing.ui:276
 msgid "Some services are disabled because of no network access."
 msgstr "네트워크 연결이 없어 일부 서비스를 사용하지 못합니다."
 
-#: panels/sharing/sharing.ui:286 panels/sharing/sharing.ui:413
+#: panels/sharing/sharing.ui:292 panels/sharing/sharing.ui:419
 msgid "File Sharing"
 msgstr "파일 공유"
 
-#: panels/sharing/sharing.ui:333
+#: panels/sharing/sharing.ui:339
 msgid "_Require Password"
 msgstr "암호 필요(_R)"
 
-#: panels/sharing/sharing.ui:424 panels/sharing/sharing.ui:496
+#: panels/sharing/sharing.ui:430 panels/sharing/sharing.ui:502
 msgid "Remote Login"
 msgstr "원격 로그인"
 
-#: panels/sharing/sharing.ui:519 panels/sharing/sharing.ui:765
+#: panels/sharing/sharing.ui:525 panels/sharing/sharing.ui:771
 msgid "Screen Sharing"
 msgstr "화면 공유"
 
-#: panels/sharing/sharing.ui:577
+#: panels/sharing/sharing.ui:583
 msgid "_Allow connections to control the screen"
 msgstr "연결해서 화면 조작 허용(_A)"
 
-#: panels/sharing/sharing.ui:622
+#: panels/sharing/sharing.ui:628
 msgid "_Password:"
 msgstr "암호(_P):"
 
-#: panels/sharing/sharing.ui:652
+#: panels/sharing/sharing.ui:658
 msgid "_Show Password"
 msgstr "암호 보이기(_S)"
 
-#: panels/sharing/sharing.ui:683
+#: panels/sharing/sharing.ui:689
 msgid "Access Options"
 msgstr "접근 옵션"
 
-#: panels/sharing/sharing.ui:697
+#: panels/sharing/sharing.ui:703
 msgid "_New connections must ask for access"
 msgstr "새로 연결하면 접근을 허용할지 확인(_N)"
 
-#: panels/sharing/sharing.ui:715
+#: panels/sharing/sharing.ui:721
 msgid "_Require a password"
 msgstr "암호 필요(_R)"
 
-#: panels/sharing/sharing.ui:776 panels/sharing/sharing.ui:870
+#: panels/sharing/sharing.ui:782 panels/sharing/sharing.ui:876
 msgid "Media Sharing"
 msgstr "미디어 공유"
 
-#: panels/sharing/sharing.ui:809
+#: panels/sharing/sharing.ui:815
 msgid "Share music, photos and videos over the network."
 msgstr "네트워크를 통해 음악, 사진, 영상을 공유합니다."
 
-#: panels/sharing/sharing.ui:824
+#: panels/sharing/sharing.ui:830
 msgid "Folders"
 msgstr "폴더"
 
@@ -5755,34 +5823,199 @@ msgstr "서브우퍼"
 msgid "Custom"
 msgstr "사용자 설정"
 
+#: panels/thunderbolt/cc-bolt-device-dialog.c:86
+#: panels/thunderbolt/cc-bolt-device-entry.c:119
+msgctxt "Thunderbolt Device Status"
+msgid "Disconnected"
+msgstr "연결 끊김"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:89
+#: panels/thunderbolt/cc-bolt-device-entry.c:122
+msgctxt "Thunderbolt Device Status"
+msgid "Connecting"
+msgstr "연결 중"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:92
+#: panels/thunderbolt/cc-bolt-device-entry.c:126
+#: panels/thunderbolt/cc-bolt-device-entry.c:138
+msgctxt "Thunderbolt Device Status"
+msgid "Connected"
+msgstr "연결됨"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:95
+msgctxt "Thunderbolt Device Status"
+msgid "Authorization Error"
+msgstr "인증 오류"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:98
+#: panels/thunderbolt/cc-bolt-device-entry.c:132
+msgctxt "Thunderbolt Device Status"
+msgid "Authorizing"
+msgstr "인증 중"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:105
+msgctxt "Thunderbolt Device Status"
+msgid "Reduced Functionality"
+msgstr "기능 줄어듬"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:107
+msgctxt "Thunderbolt Device Status"
+msgid "Connected & Authorized"
+msgstr "연결 및 인증된 장치"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:113
+#: panels/thunderbolt/cc-bolt-device-entry.c:146
+msgctxt "Thunderbolt Device Status"
+msgid "Unknown"
+msgstr "알 수 없음"
+
+#. Translators: The time point the device was authorized.
+#: panels/thunderbolt/cc-bolt-device-dialog.c:169
+msgid "Authorized at:"
+msgstr "인증 시각:"
+
+#. Translators: The time point the device was connected.
+#: panels/thunderbolt/cc-bolt-device-dialog.c:175
+msgid "Connected at:"
+msgstr "연결 시각:"
+
+#. Translators: The time point the device was enrolled,
+#. * i.e. authorized and stored in the device database.
+#: panels/thunderbolt/cc-bolt-device-dialog.c:182
+msgid "Enrolled at:"
+msgstr "등록 시각:"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:250
+msgid "Failed to authorize device: "
+msgstr "장치 인증에 실패했습니다: "
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:327
+msgid "Failed to forget device: "
+msgstr "장치 정보 삭제에 실패했습니다: "
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:109
+msgid "Name:"
+msgstr "이름:"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:141
+msgid "Status:"
+msgstr "상태:"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:174
+msgid "UUID:"
+msgstr "UUID:"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:280
+msgid "Authorize and Connect"
+msgstr "인증 및 연결"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:303
+msgid "Forget Device"
+msgstr "장치 정보 삭제"
+
+#: panels/thunderbolt/cc-bolt-device-entry.c:129
+msgctxt "Thunderbolt Device Status"
+msgid "Error"
+msgstr "오류"
+
+#: panels/thunderbolt/cc-bolt-device-entry.c:140
+msgctxt "Thunderbolt Device Status"
+msgid "Authorized"
+msgstr "인증됨"
+
+#: panels/thunderbolt/cc-bolt-panel.c:175
+msgid ""
+"The Thunderbolt subsystem (boltd) is not installed or not set up properly."
+msgstr "썬더볼트 서브시스템을 (boltd) 설치하지 않았거나 제대로 준비하지 않았습니다."
+
+#: panels/thunderbolt/cc-bolt-panel.c:460
+msgid ""
+"Thunderbolt could not be detected.\n"
+"Either the system lacks Thunderbolt support, it has been disabled in the "
+"BIOS or is set to an unsupported security level in the BIOS."
+msgstr ""
+"썬더볼트를 찾을 수 없습니다.\n"
+"시스템에서 썬더볼트를 지원하지 않거나, BIOS에서 썬더볼트를 껐거나, BIOS에서 지원하지 않는 보안 레벨을 설정했습니다."
+
+#: panels/thunderbolt/cc-bolt-panel.c:504
+msgid "Thunderbolt support has been disabled in the BIOS."
+msgstr "썬더볼트 지원 기능이 BIOS에서 꺼져 있습니다."
+
+#: panels/thunderbolt/cc-bolt-panel.c:613
+#, c-format
+msgid "Error switching direct mode: %s"
+msgstr "직접 접근 모드로 전환하는데 오류: %s"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:143
+msgid "No Thunderbolt support"
+msgstr "썬더볼트 지원 기능이 없습니다"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:246
+msgid "Direct Access"
+msgstr "직접 접근"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:269
+msgid "Allow direct access to devices such as docks and external GPUs."
+msgstr "도크나 외부 GPU같은 장치에 직접 접근을 허용합니다."
+
+#: panels/thunderbolt/cc-bolt-panel.ui:289
+msgid "Only USB and Display Port devices can attach."
+msgstr "USB와 디스플레이 포트 장치만 붙일 수 있습니다."
+
+#: panels/thunderbolt/cc-bolt-panel.ui:397
+msgid "Pending Devices"
+msgstr "지연된 장치"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:535
+msgid "No devices attached"
+msgstr "연결한 장치가 없습니다"
+
+#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:3
+msgid "Thunderbolt"
+msgstr "썬더볼트"
+
+#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:4
+msgid "Manage Thunderbolt devices"
+msgstr "썬더볼트 장치를 관리합니다"
+
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:7
+msgid "thunderbolt"
+msgstr "thunderbolt"
+
+#. Translators: those are keywords for the thunderbolt control-center panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:19
+msgid "Thunderbolt;"
+msgstr "Thunderbolt;썬더볼트;선더볼트;"
+
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:353
+#: panels/universal-access/cc-ua-panel.c:498
 msgctxt "cursor size"
 msgid "Default"
 msgstr "기본값"
 
-#: panels/universal-access/cc-ua-panel.c:356
+#: panels/universal-access/cc-ua-panel.c:501
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "중간"
 
-#: panels/universal-access/cc-ua-panel.c:359
+#: panels/universal-access/cc-ua-panel.c:504
 msgctxt "cursor size"
 msgid "Large"
 msgstr "크게"
 
-#: panels/universal-access/cc-ua-panel.c:362
+#: panels/universal-access/cc-ua-panel.c:507
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "더 크게"
 
-#: panels/universal-access/cc-ua-panel.c:365
+#: panels/universal-access/cc-ua-panel.c:510
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "매우 크게"
 
-#: panels/universal-access/cc-ua-panel.c:369
+#: panels/universal-access/cc-ua-panel.c:514
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -5809,336 +6042,336 @@ msgstr ""
 "크기;AccessX;Sticky;Keys;고정;키;Slow;느린;Bounce;탄력;Mouse;마우스;Double;"
 "click;두번;누르기;Delay;Assist;지연;도우미;Repeat;반복;Blink;깜박;"
 
-#: panels/universal-access/uap.ui:89
+#: panels/universal-access/uap.ui:93
 msgid "_Always Show Universal Access Menu"
 msgstr "항상 접근성 메뉴 표시(_A)"
 
-#: panels/universal-access/uap.ui:131
+#: panels/universal-access/uap.ui:135
 msgid "Seeing"
 msgstr "보기"
 
-#: panels/universal-access/uap.ui:177
+#: panels/universal-access/uap.ui:181
 msgid "_High Contrast"
 msgstr "고대비(_H)"
 
-#: panels/universal-access/uap.ui:224
+#: panels/universal-access/uap.ui:228
 msgid "_Large Text"
 msgstr "큰 글씨(_L)"
 
-#: panels/universal-access/uap.ui:269
+#: panels/universal-access/uap.ui:273
 msgid "C_ursor Size"
 msgstr "커서 크기(_U)"
 
-#: panels/universal-access/uap.ui:316
-#: panels/universal-access/zoom-options.ui:98
+#: panels/universal-access/uap.ui:320
+#: panels/universal-access/zoom-options.ui:99
 msgid "_Zoom"
 msgstr "확대(_Z)"
 
-#: panels/universal-access/uap.ui:362
+#: panels/universal-access/uap.ui:366
 msgid "Screen _Reader"
 msgstr "화면 읽기 프로그램(_R)"
 
-#: panels/universal-access/uap.ui:408 panels/universal-access/uap.ui:1237
+#: panels/universal-access/uap.ui:412 panels/universal-access/uap.ui:1243
 msgid "_Sound Keys"
 msgstr "소리 키(_S)"
 
-#: panels/universal-access/uap.ui:470
+#: panels/universal-access/uap.ui:474
 msgid "Hearing"
 msgstr "듣기"
 
-#: panels/universal-access/uap.ui:514 panels/universal-access/uap.ui:1340
+#: panels/universal-access/uap.ui:518 panels/universal-access/uap.ui:1346
 msgid "_Visual Alerts"
 msgstr "시각 알림(_V)"
 
-#: panels/universal-access/uap.ui:622
+#: panels/universal-access/uap.ui:626
 msgid "Screen _Keyboard"
 msgstr "화면 키보드(_K)"
 
-#: panels/universal-access/uap.ui:667
+#: panels/universal-access/uap.ui:671
 msgid "R_epeat Keys"
 msgstr "반복 키(_E)"
 
-#: panels/universal-access/uap.ui:713
+#: panels/universal-access/uap.ui:717
 msgid "Cursor _Blinking"
 msgstr "커서 깜빡이기(_B)"
 
-#: panels/universal-access/uap.ui:759
+#: panels/universal-access/uap.ui:763
 msgid "_Typing Assist (AccessX)"
 msgstr "타이핑 도움(AccessX)(_T)"
 
-#: panels/universal-access/uap.ui:820
+#: panels/universal-access/uap.ui:824
 msgid "Pointing & Clicking"
 msgstr "마우스 이동 및 누르기"
 
-#: panels/universal-access/uap.ui:866
+#: panels/universal-access/uap.ui:870
 msgid "_Mouse Keys"
 msgstr "마우스 키(_M)"
 
-#: panels/universal-access/uap.ui:911
+#: panels/universal-access/uap.ui:915
 msgid "_Click Assist"
 msgstr "누르기 도움(_C)"
 
-#: panels/universal-access/uap.ui:957
+#: panels/universal-access/uap.ui:961
 msgid "_Double-Click Delay"
 msgstr "두번 누르기 지연시간(_D)"
 
-#: panels/universal-access/uap.ui:977
+#: panels/universal-access/uap.ui:981
 msgid "Double-Click Delay"
 msgstr "두번 누르기 지연시간"
 
-#: panels/universal-access/uap.ui:1042
+#: panels/universal-access/uap.ui:1048
 msgid "Cursor Size"
 msgstr "커서 크기"
 
-#: panels/universal-access/uap.ui:1069
+#: panels/universal-access/uap.ui:1075
 msgid ""
 "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgstr "커서 크기와 크기 조정을 결합하면 커서를 보기 쉽게 조정할 수 있습니다."
 
-#: panels/universal-access/uap.ui:1105
+#: panels/universal-access/uap.ui:1111
 msgid "Screen Reader"
 msgstr "화면 읽기 프로그램"
 
-#: panels/universal-access/uap.ui:1122
+#: panels/universal-access/uap.ui:1128
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr "화면 읽기 프로그램은 포커스를 옮길 때마다 표시되 텍스트를 읽습니다."
 
-#: panels/universal-access/uap.ui:1155
+#: panels/universal-access/uap.ui:1161
 msgid "_Screen Reader"
 msgstr "화면 읽기 프로그램(_S)"
 
-#: panels/universal-access/uap.ui:1194
+#: panels/universal-access/uap.ui:1200
 msgid "Sound Keys"
 msgstr "소리 키"
 
-#: panels/universal-access/uap.ui:1212
+#: panels/universal-access/uap.ui:1218
 msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr "Num Lock 또는 Caps Lock 키를 켤 때나 끌 때 소리를 냅니다."
 
-#: panels/universal-access/uap.ui:1282
+#: panels/universal-access/uap.ui:1288
 msgid "Visual Alerts"
 msgstr "시각 알림"
 
-#: panels/universal-access/uap.ui:1286
+#: panels/universal-access/uap.ui:1292
 msgid "_Test flash"
 msgstr "번쩍이기 시험(_T)"
 
-#: panels/universal-access/uap.ui:1315
+#: panels/universal-access/uap.ui:1321
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "경보가 울리면 화면으로 보이게 알립니다."
 
-#: panels/universal-access/uap.ui:1366
+#: panels/universal-access/uap.ui:1372
 msgid "Flash the _window title"
 msgstr "창 제목 표시줄 번쩍이기(_W)"
 
-#: panels/universal-access/uap.ui:1384
+#: panels/universal-access/uap.ui:1390
 msgid "Flash the entire _screen"
 msgstr "전체 화면 번쩍이기(_S)"
 
-#: panels/universal-access/uap.ui:1429
+#: panels/universal-access/uap.ui:1435
 msgid "Repeat Keys"
 msgstr "반복 키"
 
-#: panels/universal-access/uap.ui:1459
+#: panels/universal-access/uap.ui:1465
 msgid "Key presses repeat when key is held down."
 msgstr "키를 누르고 있을 때 키를 반복합니다."
 
-#: panels/universal-access/uap.ui:1538
+#: panels/universal-access/uap.ui:1544
 msgid "Repeat keys delay"
 msgstr "반복 키 지연시간"
 
-#: panels/universal-access/uap.ui:1586 panels/universal-access/uap.ui:1719
+#: panels/universal-access/uap.ui:1592 panels/universal-access/uap.ui:1725
 msgid "Speed"
 msgstr "속도"
 
-#: panels/universal-access/uap.ui:1623
+#: panels/universal-access/uap.ui:1629
 msgid "Repeat keys speed"
 msgstr "반복 키 빠르기"
 
-#: panels/universal-access/uap.ui:1647
+#: panels/universal-access/uap.ui:1653
 msgid "Cursor Blinking"
 msgstr "커서 깜빡이기"
 
-#: panels/universal-access/uap.ui:1677
+#: panels/universal-access/uap.ui:1683
 msgid "Cursor blinks in text fields."
 msgstr "텍스트 입력란에서 커서를 깜박입니다."
 
-#: panels/universal-access/uap.ui:1756
+#: panels/universal-access/uap.ui:1762
 msgid "Cursor blinking speed"
 msgstr "커서 깜빡임 빠르기"
 
-#: panels/universal-access/uap.ui:1792
+#: panels/universal-access/uap.ui:1798
 msgid "Typing Assist"
 msgstr "자판 도움"
 
-#: panels/universal-access/uap.ui:1831
+#: panels/universal-access/uap.ui:1837
 msgid "_Sticky Keys"
 msgstr "고정 키(_S)"
 
-#: panels/universal-access/uap.ui:1848
+#: panels/universal-access/uap.ui:1854
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "변경 키와 다른 키를 연속해서 누를 때 키 조합으로 취급"
 
-#: panels/universal-access/uap.ui:1872
+#: panels/universal-access/uap.ui:1878
 msgid "_Disable if two keys are pressed together"
 msgstr "키 두개를 같이 누르면 사용 중지(_D)"
 
-#: panels/universal-access/uap.ui:1890
+#: panels/universal-access/uap.ui:1896
 msgid "Beep when a _modifier key is pressed"
 msgstr "변경 키를 눌렀을 때 삑 소리(_M)"
 
-#: panels/universal-access/uap.ui:1938
+#: panels/universal-access/uap.ui:1944
 msgid "S_low Keys"
 msgstr "느린 키(_L)"
 
-#: panels/universal-access/uap.ui:1955
+#: panels/universal-access/uap.ui:1961
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "키를 누르고 허용하는 사이에 지연 시간을 넣습니다"
 
-#: panels/universal-access/uap.ui:1988 panels/universal-access/uap.ui:2201
-#: panels/universal-access/uap.ui:2538
+#: panels/universal-access/uap.ui:1994 panels/universal-access/uap.ui:2207
+#: panels/universal-access/uap.ui:2544
 msgid "A_cceptance delay:"
 msgstr "허용 지연 시간(_C):"
 
-#: panels/universal-access/uap.ui:2010
+#: panels/universal-access/uap.ui:2016
 msgctxt "slow keys delay"
 msgid "Short"
 msgstr "짧게"
 
-#: panels/universal-access/uap.ui:2029
+#: panels/universal-access/uap.ui:2035
 msgid "Slow keys typing delay"
 msgstr "느린 키 입력 지연시간"
 
-#: panels/universal-access/uap.ui:2044
+#: panels/universal-access/uap.ui:2050
 msgctxt "slow keys delay"
 msgid "Long"
 msgstr "길게"
 
-#: panels/universal-access/uap.ui:2071
+#: panels/universal-access/uap.ui:2077
 msgid "Beep when a key is pr_essed"
 msgstr "키를 눌렀을 때 삑 소리(_E)"
 
-#: panels/universal-access/uap.ui:2088
+#: panels/universal-access/uap.ui:2094
 msgid "Beep when a key is _accepted"
 msgstr "키가 허용되었을 때 삑 소리(_A)"
 
-#: panels/universal-access/uap.ui:2105 panels/universal-access/uap.ui:2284
+#: panels/universal-access/uap.ui:2111 panels/universal-access/uap.ui:2290
 msgid "Beep when a key is _rejected"
 msgstr "키가 거부되었을 때 삑 소리(_R)"
 
-#: panels/universal-access/uap.ui:2151
+#: panels/universal-access/uap.ui:2157
 msgid "_Bounce Keys"
 msgstr "탄력 키(_B)"
 
-#: panels/universal-access/uap.ui:2168
+#: panels/universal-access/uap.ui:2174
 msgid "Ignores fast duplicate keypresses"
 msgstr "빠르게 중복된 키 누름 무시"
 
-#: panels/universal-access/uap.ui:2223
+#: panels/universal-access/uap.ui:2229
 msgctxt "bounce keys delay"
 msgid "Short"
 msgstr "짧게"
 
-#: panels/universal-access/uap.ui:2242
+#: panels/universal-access/uap.ui:2248
 msgid "Bounce keys typing delay"
 msgstr "탄력 키 입력 지연 시간"
 
-#: panels/universal-access/uap.ui:2257
+#: panels/universal-access/uap.ui:2263
 msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "길게"
 
-#: panels/universal-access/uap.ui:2370
+#: panels/universal-access/uap.ui:2376
 msgid "_Enable by Keyboard"
 msgstr "키보드로 활성화(_E)"
 
-#: panels/universal-access/uap.ui:2387
+#: panels/universal-access/uap.ui:2393
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "키보드로 접근성 기능을 켜고 끕니다"
 
-#: panels/universal-access/uap.ui:2451
+#: panels/universal-access/uap.ui:2457
 msgid "Click Assist"
 msgstr "누르기 도움"
 
-#: panels/universal-access/uap.ui:2487
+#: panels/universal-access/uap.ui:2493
 msgid "_Simulated Secondary Click"
 msgstr "두 번째 누르기 흉내 내기(_S)"
 
-#: panels/universal-access/uap.ui:2505
+#: panels/universal-access/uap.ui:2511
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "단추를 누르고 있으면 두 번째 누르기로 취급"
 
-#: panels/universal-access/uap.ui:2559
+#: panels/universal-access/uap.ui:2565
 msgctxt "secondary click"
 msgid "Short"
 msgstr "짧게"
 
-#: panels/universal-access/uap.ui:2578
+#: panels/universal-access/uap.ui:2584
 msgid "Secondary click delay"
 msgstr "두 번째 누르기 지연 시간"
 
-#: panels/universal-access/uap.ui:2593
+#: panels/universal-access/uap.ui:2599
 msgctxt "secondary click delay"
 msgid "Long"
 msgstr "길게"
 
-#: panels/universal-access/uap.ui:2650
+#: panels/universal-access/uap.ui:2656
 msgid "_Hover Click"
 msgstr "자동 누르기(_H)"
 
-#: panels/universal-access/uap.ui:2668
+#: panels/universal-access/uap.ui:2674
 msgid "Trigger a click when the pointer hovers"
 msgstr "포인터가 멈추면 누른 것으로 취급"
 
-#: panels/universal-access/uap.ui:2701
+#: panels/universal-access/uap.ui:2707
 msgid "D_elay:"
 msgstr "지연 시간(_E):"
 
-#: panels/universal-access/uap.ui:2723
+#: panels/universal-access/uap.ui:2729
 msgctxt "dwell click delay"
 msgid "Short"
 msgstr "짧게"
 
-#: panels/universal-access/uap.ui:2754
+#: panels/universal-access/uap.ui:2760
 msgctxt "dwell click delay"
 msgid "Long"
 msgstr "길게"
 
-#: panels/universal-access/uap.ui:2790
+#: panels/universal-access/uap.ui:2796
 msgid "Motion _threshold:"
 msgstr "움직임 임계값(_T):"
 
-#: panels/universal-access/uap.ui:2812
+#: panels/universal-access/uap.ui:2818
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "작게"
 
-#: panels/universal-access/uap.ui:2843
+#: panels/universal-access/uap.ui:2849
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "크게"
 
-#: panels/universal-access/zoom-options.c:333
+#: panels/universal-access/zoom-options.c:334
 msgctxt "Distance"
 msgid "Short"
 msgstr "짧게"
 
-#: panels/universal-access/zoom-options.c:334
+#: panels/universal-access/zoom-options.c:335
 msgctxt "Distance"
 msgid "¼ Screen"
 msgstr "화면의 1/4"
 
-#: panels/universal-access/zoom-options.c:335
+#: panels/universal-access/zoom-options.c:336
 msgctxt "Distance"
 msgid "½ Screen"
 msgstr "화면의 1/2"
 
-#: panels/universal-access/zoom-options.c:336
+#: panels/universal-access/zoom-options.c:337
 msgctxt "Distance"
 msgid "¾ Screen"
 msgstr "화면의 3/4"
 
-#: panels/universal-access/zoom-options.c:337
+#: panels/universal-access/zoom-options.c:338
 msgctxt "Distance"
 msgid "Long"
 msgstr "길게"
@@ -6163,134 +6396,134 @@ msgstr "왼쪽 절반"
 msgid "Right Half"
 msgstr "오른쪽 절반"
 
-#: panels/universal-access/zoom-options.ui:77
+#: panels/universal-access/zoom-options.ui:78
 msgid "Zoom Options"
 msgstr "확대 옵션"
 
-#: panels/universal-access/zoom-options.ui:186
+#: panels/universal-access/zoom-options.ui:188
 msgid "_Magnification:"
 msgstr "확대(_M):"
 
-#: panels/universal-access/zoom-options.ui:250
+#: panels/universal-access/zoom-options.ui:252
 msgid "_Follow mouse cursor"
 msgstr "마우스 커서 따라가기(_F)"
 
-#: panels/universal-access/zoom-options.ui:270
+#: panels/universal-access/zoom-options.ui:272
 msgid "_Screen part:"
 msgstr "화면 나누기(_S):"
 
-#: panels/universal-access/zoom-options.ui:332
+#: panels/universal-access/zoom-options.ui:334
 msgid "Magnifier _extends outside of screen"
 msgstr "돋보기를 화면 밖 영역으로 확장(_E)"
 
-#: panels/universal-access/zoom-options.ui:351
+#: panels/universal-access/zoom-options.ui:353
 msgid "_Keep magnifier cursor centered"
 msgstr "커서를 중심으로 돋보기를 유지(_K)"
 
-#: panels/universal-access/zoom-options.ui:370
+#: panels/universal-access/zoom-options.ui:372
 msgid "Magnifier cursor _pushes contents around"
 msgstr "확대 커서를 내용 밖으로 밀어내기(_P)"
 
-#: panels/universal-access/zoom-options.ui:389
+#: panels/universal-access/zoom-options.ui:391
 msgid "Magnifier cursor moves with _contents"
 msgstr "확대 커서를 내용에 따라 이동(_C)"
 
-#: panels/universal-access/zoom-options.ui:423
+#: panels/universal-access/zoom-options.ui:425
 msgid "Magnifier Position:"
 msgstr "돋보기 위치:"
 
-#: panels/universal-access/zoom-options.ui:444
+#: panels/universal-access/zoom-options.ui:446
 msgid "Magnifier"
 msgstr "돋보기"
 
-#: panels/universal-access/zoom-options.ui:490
+#: panels/universal-access/zoom-options.ui:493
 msgid "_Thickness:"
 msgstr "두께(_T):"
 
-#: panels/universal-access/zoom-options.ui:516
+#: panels/universal-access/zoom-options.ui:519
 msgctxt "universal access, thickness"
 msgid "Thin"
 msgstr "얇게"
 
-#: panels/universal-access/zoom-options.ui:548
+#: panels/universal-access/zoom-options.ui:551
 msgctxt "universal access, thickness"
 msgid "Thick"
 msgstr "두껍게"
 
-#: panels/universal-access/zoom-options.ui:574
+#: panels/universal-access/zoom-options.ui:577
 msgid "_Length:"
 msgstr "길이(_L):"
 
 #. The color of the accessibility crosshair
-#: panels/universal-access/zoom-options.ui:626
+#: panels/universal-access/zoom-options.ui:629
 msgid "Co_lor:"
 msgstr "색(_L):"
 
-#: panels/universal-access/zoom-options.ui:690
+#: panels/universal-access/zoom-options.ui:693
 msgid "_Crosshairs:"
 msgstr "십자선(_C):"
 
-#: panels/universal-access/zoom-options.ui:741
+#: panels/universal-access/zoom-options.ui:744
 msgid "_Overlaps mouse cursor"
 msgstr "마우스 커서 겹치기(_O)"
 
-#: panels/universal-access/zoom-options.ui:779
+#: panels/universal-access/zoom-options.ui:782
 msgid "Crosshairs"
 msgstr "십자선"
 
-#: panels/universal-access/zoom-options.ui:827
+#: panels/universal-access/zoom-options.ui:831
 msgid "_White on black:"
 msgstr "검은 바탕 흰색(_W):"
 
-#: panels/universal-access/zoom-options.ui:850
+#: panels/universal-access/zoom-options.ui:854
 msgid "_Brightness:"
 msgstr "밝기(_B):"
 
-#: panels/universal-access/zoom-options.ui:874
+#: panels/universal-access/zoom-options.ui:878
 msgid "_Contrast:"
 msgstr "대비(_C):"
 
 #. The contrast scale goes from Color to None (grayscale)
-#: panels/universal-access/zoom-options.ui:897
+#: panels/universal-access/zoom-options.ui:901
 msgctxt "universal access, contrast"
 msgid "Co_lor"
 msgstr "색(_L)"
 
-#: panels/universal-access/zoom-options.ui:925
+#: panels/universal-access/zoom-options.ui:929
 msgctxt "universal access, color"
 msgid "None"
 msgstr "없음"
 
-#: panels/universal-access/zoom-options.ui:957
+#: panels/universal-access/zoom-options.ui:961
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "전체"
 
-#: panels/universal-access/zoom-options.ui:1023
+#: panels/universal-access/zoom-options.ui:1027
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "낮게"
 
-#: panels/universal-access/zoom-options.ui:1056
+#: panels/universal-access/zoom-options.ui:1060
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "높게"
 
-#: panels/universal-access/zoom-options.ui:1087
+#: panels/universal-access/zoom-options.ui:1091
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "낮게"
 
-#: panels/universal-access/zoom-options.ui:1120
+#: panels/universal-access/zoom-options.ui:1124
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "높게"
 
-#: panels/universal-access/zoom-options.ui:1156
+#: panels/universal-access/zoom-options.ui:1160
 msgid "Color Effects:"
 msgstr "색상 효과:"
 
-#: panels/universal-access/zoom-options.ui:1181
+#: panels/universal-access/zoom-options.ui:1185
 msgid "Color Effects"
 msgstr "색상 효과"
 
@@ -6478,8 +6711,8 @@ msgid "Ch_ange"
 msgstr "바꾸기(_A)"
 
 #: panels/user-accounts/data/password-dialog.ui:142
-msgid "_Verify New Password"
-msgstr "새 암호 확인(_V)"
+msgid "_Confirm New Password"
+msgstr "새 암호 확인(_C)"
 
 #: panels/user-accounts/data/password-dialog.ui:159
 msgid "_New Password"
@@ -6703,29 +6936,30 @@ msgstr "알 수 없는 오류"
 msgid "Should match the web address of your login provider."
 msgstr "로그인을 제공하는 곳의 웹 주소."
 
-#: panels/user-accounts/um-account-dialog.c:229
+#: panels/user-accounts/um-account-dialog.c:225
 msgid "Failed to add account"
 msgstr "계정 추가에 실패했습니다"
 
-#: panels/user-accounts/um-account-dialog.c:462
-msgid "Passwords do not match."
+#: panels/user-accounts/um-account-dialog.c:465
+#: panels/user-accounts/um-password-dialog.c:291
+msgid "The passwords do not match."
 msgstr "암호가 다릅니다."
 
-#: panels/user-accounts/um-account-dialog.c:717
-#: panels/user-accounts/um-account-dialog.c:763
-#: panels/user-accounts/um-account-dialog.c:784
+#: panels/user-accounts/um-account-dialog.c:736
+#: panels/user-accounts/um-account-dialog.c:782
+#: panels/user-accounts/um-account-dialog.c:803
 msgid "Failed to register account"
 msgstr "계정 등록에 실패했습니다"
 
-#: panels/user-accounts/um-account-dialog.c:907
+#: panels/user-accounts/um-account-dialog.c:926
 msgid "No supported way to authenticate with this domain"
 msgstr "이 도메인에 대해 인증하기 위한 방법을 지원하지 않습니다"
 
-#: panels/user-accounts/um-account-dialog.c:980
+#: panels/user-accounts/um-account-dialog.c:999
 msgid "Failed to join domain"
 msgstr "도메인 참여에 실패했습니다"
 
-#: panels/user-accounts/um-account-dialog.c:1041
+#: panels/user-accounts/um-account-dialog.c:1060
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6733,7 +6967,7 @@ msgstr ""
 "이 로그인 이름은 쓸 수 없습니다.\n"
 "다시 시도해 보십시오."
 
-#: panels/user-accounts/um-account-dialog.c:1048
+#: panels/user-accounts/um-account-dialog.c:1067
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6741,11 +6975,11 @@ msgstr ""
 "이 로그인 암호는 쓸 수 없습니다.\n"
 "다시 시도해 보십시오."
 
-#: panels/user-accounts/um-account-dialog.c:1056
+#: panels/user-accounts/um-account-dialog.c:1075
 msgid "Failed to log into domain"
 msgstr "도메인에 로그를 남기는데 실패했습니다"
 
-#: panels/user-accounts/um-account-dialog.c:1114
+#: panels/user-accounts/um-account-dialog.c:1133
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "도메인을 찾을 수 없습니다. 잘못 쓰신 것이 아닙니까?"
 
@@ -6875,7 +7109,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/um-history-dialog.c:177
-#: panels/user-accounts/um-user-panel.c:766
+#: panels/user-accounts/um-user-panel.c:763
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6883,7 +7117,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/um-history-dialog.c:180
-#: panels/user-accounts/um-user-panel.c:770
+#: panels/user-accounts/um-user-panel.c:767
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6904,85 +7138,80 @@ msgstr "세션이 시작했습니다"
 msgid "%s — Account Activity"
 msgstr "%s — 계정 활동"
 
-#: panels/user-accounts/um-password-dialog.c:144
+#: panels/user-accounts/um-password-dialog.c:150
 msgid "Please choose another password."
 msgstr "다른 암호를 입력하십시오."
 
-#: panels/user-accounts/um-password-dialog.c:153
+#: panels/user-accounts/um-password-dialog.c:159
 msgid "Please type your current password again."
 msgstr "현재 암호를 다시 입력하십시오."
 
-#: panels/user-accounts/um-password-dialog.c:159
+#: panels/user-accounts/um-password-dialog.c:165
 msgid "Password could not be changed"
 msgstr "암호를 바꿀 수 없습니다"
-
-#: panels/user-accounts/um-password-dialog.c:285
-msgid "The passwords do not match."
-msgstr "암호가 다릅니다."
 
 #: panels/user-accounts/um-photo-dialog.c:227
 msgid "Browse for more pictures"
 msgstr "다른 사진 찾아보기"
 
-#: panels/user-accounts/um-realm-manager.c:350
+#: panels/user-accounts/um-realm-manager.c:307
 msgid "Cannot automatically join this type of domain"
 msgstr "이 종류의 도메인에 자동으로 들어갈 수 없습니다"
 
-#: panels/user-accounts/um-realm-manager.c:413
-#, c-format
+#: panels/user-accounts/um-realm-manager.c:310
 msgid "No such domain or realm found"
 msgstr "도메인 또는 영역을 찾지 못했습니다"
 
-#: panels/user-accounts/um-realm-manager.c:815
-#: panels/user-accounts/um-realm-manager.c:829
+#: panels/user-accounts/um-realm-manager.c:732
+#: panels/user-accounts/um-realm-manager.c:746
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "%2$s 도메인에서 %1$s(으)로 로그인할 수 없습니다"
 
-#: panels/user-accounts/um-realm-manager.c:821
+#: panels/user-accounts/um-realm-manager.c:738
 msgid "Invalid password, please try again"
 msgstr "암호가 잘못되었으니 다시 시도해주십시오"
 
-#: panels/user-accounts/um-realm-manager.c:834
+#: panels/user-accounts/um-realm-manager.c:751
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "%s 도메인에 연결할 수 없습니다: %s"
 
-#: panels/user-accounts/um-user-panel.c:200
+#: panels/user-accounts/um-user-panel.c:199
 msgid "Your account"
 msgstr "내 계정"
 
-#: panels/user-accounts/um-user-panel.c:380
+#: panels/user-accounts/um-user-panel.c:379
 msgid "Failed to delete user"
 msgstr "사용자 삭제에 실패했습니다"
 
-#: panels/user-accounts/um-user-panel.c:438
-#: panels/user-accounts/um-user-panel.c:497
-#: panels/user-accounts/um-user-panel.c:549
+#: panels/user-accounts/um-user-panel.c:437
+#: panels/user-accounts/um-user-panel.c:496
+#: panels/user-accounts/um-user-panel.c:548
 msgid "Failed to revoke remotely managed user"
 msgstr "원격에서 관리하는 사용자를 철회하는데 실패했습니다"
 
-#: panels/user-accounts/um-user-panel.c:603
+#: panels/user-accounts/um-user-panel.c:600
 msgid "You cannot delete your own account."
 msgstr "자기 계정은 삭제할 수 없습니다."
 
-#: panels/user-accounts/um-user-panel.c:612
+#: panels/user-accounts/um-user-panel.c:609
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s 사용자가 아직 로그인 중입니다"
 
-#: panels/user-accounts/um-user-panel.c:616
+#: panels/user-accounts/um-user-panel.c:613
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "로그인 중인 사용자를 삭제하면 시스템이 불안정한 상태가 될 수 있습니다."
 
-#: panels/user-accounts/um-user-panel.c:625
+#: panels/user-accounts/um-user-panel.c:622
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "%s 사용자의 파일을 유지하시겠습니까?"
 
-#: panels/user-accounts/um-user-panel.c:629
+#: panels/user-accounts/um-user-panel.c:626
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6990,47 +7219,47 @@ msgstr ""
 "사용자 계정을 삭제할 때 홈 디렉터리, 메일 스풀, 임시 파일을 유지할 수 있습니"
 "다."
 
-#: panels/user-accounts/um-user-panel.c:632
+#: panels/user-accounts/um-user-panel.c:629
 msgid "_Delete Files"
 msgstr "파일 삭제(_D)"
 
-#: panels/user-accounts/um-user-panel.c:633
+#: panels/user-accounts/um-user-panel.c:630
 msgid "_Keep Files"
 msgstr "파일 유지(_K)"
 
-#: panels/user-accounts/um-user-panel.c:647
+#: panels/user-accounts/um-user-panel.c:644
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "정말로 원격에서 관리하는 %s의 계정을 철회하시겠습니까?"
 
-#: panels/user-accounts/um-user-panel.c:651
+#: panels/user-accounts/um-user-panel.c:648
 msgid "_Delete"
 msgstr "삭제(_D)"
 
-#: panels/user-accounts/um-user-panel.c:701
+#: panels/user-accounts/um-user-panel.c:698
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "계정 사용 중지됨"
 
-#: panels/user-accounts/um-user-panel.c:709
+#: panels/user-accounts/um-user-panel.c:706
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "다음 로그인에 설정 예정"
 
-#: panels/user-accounts/um-user-panel.c:712
+#: panels/user-accounts/um-user-panel.c:709
 msgctxt "Password mode"
 msgid "None"
 msgstr "없음"
 
-#: panels/user-accounts/um-user-panel.c:759
+#: panels/user-accounts/um-user-panel.c:756
 msgid "Logged in"
 msgstr "로그인함"
 
-#: panels/user-accounts/um-user-panel.c:1106
+#: panels/user-accounts/um-user-panel.c:1105
 msgid "Failed to contact the accounts service"
 msgstr "계정 서비스 연결에 실패했습니다"
 
-#: panels/user-accounts/um-user-panel.c:1108
+#: panels/user-accounts/um-user-panel.c:1107
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "AccountService를 설치하고 사용 표시했는지 확인하십시오."
 
@@ -7038,7 +7267,7 @@ msgstr "AccountService를 설치하고 사용 표시했는지 확인하십시오
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/um-user-panel.c:1140
+#: panels/user-accounts/um-user-panel.c:1139
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7046,12 +7275,12 @@ msgstr ""
 "바꾸려면,\n"
 "먼저 * 아이콘을 누르십시오"
 
-#: panels/user-accounts/um-user-panel.c:1180
+#: panels/user-accounts/um-user-panel.c:1179
 msgid "Create a user account"
 msgstr "새 사용자 계정 만들기"
 
-#: panels/user-accounts/um-user-panel.c:1191
-#: panels/user-accounts/um-user-panel.c:1370
+#: panels/user-accounts/um-user-panel.c:1190
+#: panels/user-accounts/um-user-panel.c:1368
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7059,12 +7288,12 @@ msgstr ""
 "사용자 계정을 만드려면,\n"
 "먼저 * 아이콘을 누르십시오"
 
-#: panels/user-accounts/um-user-panel.c:1201
+#: panels/user-accounts/um-user-panel.c:1200
 msgid "Delete the selected user account"
 msgstr "선택한 사용자 계정 삭제"
 
-#: panels/user-accounts/um-user-panel.c:1213
-#: panels/user-accounts/um-user-panel.c:1375
+#: panels/user-accounts/um-user-panel.c:1212
+#: panels/user-accounts/um-user-panel.c:1373
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7101,7 +7330,7 @@ msgstr "홈 폴더의 이름입니다. 바꿀 수 없습니다."
 msgid "Map Buttons"
 msgstr "단추 연결"
 
-#: panels/wacom/button-mapping.ui:37 panels/wacom/cc-wacom-page.c:547
+#: panels/wacom/button-mapping.ui:37 panels/wacom/cc-wacom-page.c:556
 #: panels/wacom/gnome-wacom-properties.ui:60
 msgid "_Close"
 msgstr "닫기(_C)"
@@ -7173,11 +7402,11 @@ msgstr "단일 모니터에 일대 일로 맞추기"
 msgid "%d of %d"
 msgstr "%2$d개 중 %1$d"
 
-#: panels/wacom/cc-wacom-page.c:544
+#: panels/wacom/cc-wacom-page.c:553
 msgid "Display Mapping"
 msgstr "디스플레이 매핑"
 
-#: panels/wacom/cc-wacom-panel.c:790 panels/wacom/wacom-stylus-page.ui:127
+#: panels/wacom/cc-wacom-panel.c:827 panels/wacom/wacom-stylus-page.ui:129
 msgid "Stylus"
 msgstr "스타일러스"
 
@@ -7186,7 +7415,7 @@ msgid "Button"
 msgstr "단추"
 
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:3
-#: panels/wacom/gnome-wacom-properties.ui:198
+#: panels/wacom/gnome-wacom-properties.ui:200
 msgid "Wacom Tablet"
 msgstr "와콤 디지타이저"
 
@@ -7223,47 +7452,47 @@ msgstr "디지타이저 기본 설정"
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#: panels/wacom/gnome-wacom-properties.ui:123
+#: panels/wacom/gnome-wacom-properties.ui:125
 msgid "No tablet detected"
 msgstr "검색된 디지타이저 없음"
 
-#: panels/wacom/gnome-wacom-properties.ui:139
+#: panels/wacom/gnome-wacom-properties.ui:141
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "와콤 디지타이저를 연결하거나 켜십시오"
 
-#: panels/wacom/gnome-wacom-properties.ui:159
+#: panels/wacom/gnome-wacom-properties.ui:161
 msgid "Bluetooth Settings"
 msgstr "블루투스 설정"
 
-#: panels/wacom/gnome-wacom-properties.ui:231
+#: panels/wacom/gnome-wacom-properties.ui:233
 msgid "Map to Monitor…"
 msgstr "모니터에 연결하기…"
 
-#: panels/wacom/gnome-wacom-properties.ui:247
+#: panels/wacom/gnome-wacom-properties.ui:249
 msgid "Map Buttons…"
 msgstr "단추 연결…"
 
-#: panels/wacom/gnome-wacom-properties.ui:263
+#: panels/wacom/gnome-wacom-properties.ui:265
 msgid "Calibrate…"
 msgstr "보정…"
 
-#: panels/wacom/gnome-wacom-properties.ui:284
+#: panels/wacom/gnome-wacom-properties.ui:286
 msgid "Adjust display resolution"
 msgstr "디스플레이 해상도 조절하기"
 
-#: panels/wacom/gnome-wacom-properties.ui:300
+#: panels/wacom/gnome-wacom-properties.ui:302
 msgid "Adjust mouse settings"
 msgstr "마우스 설정 조정"
 
-#: panels/wacom/gnome-wacom-properties.ui:328
+#: panels/wacom/gnome-wacom-properties.ui:330
 msgid "Tracking Mode"
 msgstr "트래킹 모드"
 
-#: panels/wacom/gnome-wacom-properties.ui:356
+#: panels/wacom/gnome-wacom-properties.ui:358
 msgid "Left-Handed Orientation"
 msgstr "왼손잡이 방향"
 
-#: panels/wacom/gsd-wacom-key-shortcut-button.c:263
+#: panels/wacom/gsd-wacom-key-shortcut-button.c:222
 msgid "New shortcut…"
 msgstr "새 바로 가기…"
 
@@ -7283,43 +7512,43 @@ msgstr "뒤로(_B)"
 msgid "Forward"
 msgstr "앞으로"
 
-#: panels/wacom/wacom-stylus-page.ui:77
+#: panels/wacom/wacom-stylus-page.ui:79
 msgid "No stylus found"
 msgstr "스타일러스 없음"
 
-#: panels/wacom/wacom-stylus-page.ui:91
+#: panels/wacom/wacom-stylus-page.ui:93
 msgid "Please move your stylus to the proximity of the tablet to configure it"
 msgstr "스타일러스를 디지타이저에 가깝게 움직여서 설정하십시오"
 
-#: panels/wacom/wacom-stylus-page.ui:167
+#: panels/wacom/wacom-stylus-page.ui:169
 msgid "Eraser Pressure Feel"
 msgstr "지우개 압력 감도"
 
-#: panels/wacom/wacom-stylus-page.ui:188 panels/wacom/wacom-stylus-page.ui:348
+#: panels/wacom/wacom-stylus-page.ui:190 panels/wacom/wacom-stylus-page.ui:350
 msgid "Soft"
 msgstr "부드럽게"
 
-#: panels/wacom/wacom-stylus-page.ui:218 panels/wacom/wacom-stylus-page.ui:378
+#: panels/wacom/wacom-stylus-page.ui:220 panels/wacom/wacom-stylus-page.ui:380
 msgid "Firm"
 msgstr "단단하게"
 
-#: panels/wacom/wacom-stylus-page.ui:241
+#: panels/wacom/wacom-stylus-page.ui:243
 msgid "Top Button"
 msgstr "위 단추"
 
-#: panels/wacom/wacom-stylus-page.ui:270
+#: panels/wacom/wacom-stylus-page.ui:272
 msgid "Lower Button"
 msgstr "아래 단추"
 
-#: panels/wacom/wacom-stylus-page.ui:299
+#: panels/wacom/wacom-stylus-page.ui:301
 msgid "Lowest Button"
 msgstr "맨 아래 단추"
 
-#: panels/wacom/wacom-stylus-page.ui:328
+#: panels/wacom/wacom-stylus-page.ui:330
 msgid "Tip Pressure Feel"
 msgstr "팁 압력 감도"
 
-#: panels/wacom/wacom-stylus-page.ui:440
+#: panels/wacom/wacom-stylus-page.ui:442
 msgid "page 3"
 msgstr "페이지 3"
 
@@ -7339,49 +7568,63 @@ msgstr ""
 "제어 센터는 그놈 데스크톱의 여러가지 사항을 설정하는 주요 인터페이스입니다."
 
 # 커맨드라인 설명. 문장으로 번역
-#: shell/cc-application.c:47
+#: shell/cc-application.c:62
 msgid "Display version number"
 msgstr "버전 번호를 표시합니다"
 
 # 커맨드라인 설명. 문장으로 번역
-#: shell/cc-application.c:48
+#: shell/cc-application.c:63
 msgid "Enable verbose mode"
 msgstr "자세히 표시 모드를 사용합니다"
 
 # 커맨드라인 설명. 문장으로 번역
-#: shell/cc-application.c:49
-msgid "Show the overview"
-msgstr "개요를 봅니다"
-
-# 커맨드라인 설명. 문장으로 번역
-#: shell/cc-application.c:50
+#: shell/cc-application.c:64
 msgid "Search for the string"
 msgstr "문자열을 검색합니다"
 
 # 커맨드라인 설명. 문장으로 번역
-#: shell/cc-application.c:51
+#: shell/cc-application.c:65
 msgid "List possible panel names and exit"
 msgstr "패널 이름 목록을 표시하고 끝냅니다"
 
-#: shell/cc-application.c:52
+#: shell/cc-application.c:66
 msgid "Panel to display"
 msgstr "표시할 패널"
 
-#: shell/cc-application.c:52
+#: shell/cc-application.c:66
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[패널] [인수…]"
 
-#: shell/cc-application.c:117
+#: shell/cc-application.c:137
 msgid "Available panels:"
 msgstr "사용 가능 패널:"
 
-#: shell/cc-application.c:256
+#: shell/cc-application.c:253
 msgid "Help"
 msgstr "도움말"
 
-#: shell/cc-application.c:257
+#: shell/cc-application.c:254
 msgid "Quit"
 msgstr "끝내기"
+
+#: shell/cc-panel-list.ui:195
+msgid "No results found"
+msgstr "결과가 없습니다"
+
+#: shell/cc-window.ui:140
+msgid "All Settings"
+msgstr "전체 설정"
+
+#: shell/cc-window.ui:234
+msgid "Warning: Development Version"
+msgstr "경고: 개발 버전"
+
+#: shell/cc-window.ui:235
+msgid ""
+"This version of Settings should only be used for development purposes. You "
+"may experience incorrect system behavior, data loss, and other unexpected "
+"issues. "
+msgstr "이 버전의 설정은 개발 목적으로만 사용해야 합니다. 잘못된 시스템 동작, 데이터 손실, 기타 예상치 못한 문제를 겪을 수 있습니다."
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: shell/gnome-control-center.desktop.in.in:5
@@ -7415,19 +7658,13 @@ msgstr "패널"
 
 #: shell/help-overlay.ui:40
 msgctxt "shortcut window"
-msgid "Go back to the overview"
-msgstr "개요로 돌아가기"
+msgid "Go back to previous panel"
+msgstr "이전 창으로 돌아가기"
 
 #: shell/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "검색 취소"
-
-#. translators: This is the default hotspot name, need to be less than 32-bytes
-#: shell/hostname-helper.c:189
-msgctxt "hotspot"
-msgid "Hotspot"
-msgstr "핫스팟"
 
 #: shell/org.gnome.ControlCenter.gschema.xml:5
 msgid "The identifier for the last Settings panel to be opened"
@@ -7441,13 +7678,14 @@ msgstr ""
 "마지막에 연 설정 패널 아이디. 알 수 없는 값이면 무시하고 목록에서 첫 번째 패"
 "널을 선택합니다."
 
-#: shell/panel-list.ui:195
-msgid "No results found"
-msgstr "결과가 없습니다"
+#: shell/org.gnome.ControlCenter.gschema.xml:13
+msgid "Show warning when running a development build of Settings"
+msgstr "설정의 개발 빌드를 실행할 때 경고 표시"
 
-#: shell/window.ui:141
-msgid "All Settings"
-msgstr "전체 설정"
+#: shell/org.gnome.ControlCenter.gschema.xml:14
+msgid ""
+"Whether Settings should show a warning when running a development build."
+msgstr "설정에서 개발 버전을 실행할 때 경고를 표시할지 여부."
 
 #. translators:
 #. * The number of sound outputs on a particular device
