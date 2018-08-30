@@ -1286,8 +1286,6 @@ on_permission_changed (GPermission *permission,
                 gtk_widget_set_sensitive (get_widget (self, "last-login-button"), FALSE);
                 add_unlock_tooltip (get_widget (self, "last-login-button"));
         }
-
-        um_password_dialog_set_user (self->password_dialog, user);
 }
 
 static void
