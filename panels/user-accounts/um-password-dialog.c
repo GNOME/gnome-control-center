@@ -439,6 +439,8 @@ on_generate (GtkEntry             *entry,
         gchar *pwd;
 
         pwd = pw_generate ();
+        if (pwd == NULL)
+                return;
 
         gtk_entry_set_text (GTK_ENTRY (um->password_entry), pwd);
         gtk_entry_set_text (GTK_ENTRY (um->verify_entry), pwd);
