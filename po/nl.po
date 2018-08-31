@@ -18,23 +18,23 @@
 # Rachid BM <rachidbm@ubuntu.com>, 2011.
 # Reinout van Schouwen <reinouts@gnome.org>, 2002–2008, 2011, 2012, 2014, 2016.
 # Nathan Follens <nthn@unseen.is>, 2015-2018.
-# Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2011, 2012, 2013, 2014, 2015, 2017.
+# Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2011, 2012, 2013, 2014, 2015, 2017, 2018.
 # Justin van Steijn <jvs@fsfe.org>, 2016, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
-"issues\n"
-"POT-Creation-Date: 2018-03-17 17:33+0000\n"
-"PO-Revision-Date: 2018-03-21 21:33+0100\n"
-"Last-Translator: Justin van Steijn <jvs@fsfe.org>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
+"es\n"
+"POT-Creation-Date: 2018-08-29 21:54+0000\n"
+"PO-Revision-Date: 2018-08-31 12:09+0100\n"
+"Last-Translator: Hannie Dumoleyn <hannie@ubuntu-nl.org>\n"
 "Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Lokalize 2.0\n"
 "X-Project-Style: gnome\n"
 
 #: panels/background/background.ui:49
@@ -110,7 +110,7 @@ msgstr "Er zijn geen afbeeldingen aangetroffen"
 #. * directory in the string below when XDG_PICTURES_DIR is
 #. * undefined
 #: panels/background/cc-background-chooser-dialog.c:545
-#: panels/search/cc-search-locations-dialog.c:302
+#: panels/search/cc-search-locations-dialog.c:286
 msgid "Home"
 msgstr "Persoonlijke map"
 
@@ -124,28 +124,29 @@ msgstr ""
 "zullen worden"
 
 #: panels/background/cc-background-chooser-dialog.c:560
-#: panels/color/cc-color-panel.c:225 panels/color/cc-color-panel.c:963
+#: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/color-calibrate.ui:25 panels/color/color.ui:657
-#: panels/common/language-chooser.ui:23 panels/display/cc-display-panel.c:2597
+#: panels/common/cc-language-chooser.ui:23
+#: panels/display/cc-display-panel.c:1901
 #: panels/network/connection-editor/connection-editor.ui:15
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
 #: panels/network/net-device-wifi.c:1411 panels/network/net-device-wifi.c:1491
 #: panels/network/net-device-wifi.c:1736 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:331
-#: panels/privacy/cc-privacy-panel.c:1053 panels/region/format-chooser.ui:25
+#: panels/printers/pp-details-dialog.c:330
+#: panels/privacy/cc-privacy-panel.c:1050 panels/region/cc-format-chooser.ui:24
 #: panels/region/input-chooser.ui:13
-#: panels/search/cc-search-locations-dialog.c:642
-#: panels/sharing/cc-sharing-panel.c:384
+#: panels/search/cc-search-locations-dialog.c:603
+#: panels/sharing/cc-sharing-panel.c:426
 #: panels/user-accounts/data/account-dialog.ui:28
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/user-accounts/data/password-dialog.ui:21
 #: panels/user-accounts/um-fingerprint-dialog.c:261
-#: panels/user-accounts/um-photo-dialog.c:102
-#: panels/user-accounts/um-photo-dialog.c:229
-#: panels/user-accounts/um-user-panel.c:634
-#: panels/user-accounts/um-user-panel.c:652
+#: panels/user-accounts/um-photo-dialog.c:103
+#: panels/user-accounts/um-photo-dialog.c:230
+#: panels/user-accounts/um-user-panel.c:631
+#: panels/user-accounts/um-user-panel.c:649
 msgid "_Cancel"
 msgstr "_Annuleren"
 
@@ -153,18 +154,18 @@ msgstr "_Annuleren"
 msgid "_Select"
 msgstr "_Selecteren"
 
-#: panels/background/cc-background-item.c:192
+#: panels/background/cc-background-item.c:191
 msgid "multiple sizes"
 msgstr "meerdere groottes"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:196
+#: panels/background/cc-background-item.c:195
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:321
+#: panels/background/cc-background-item.c:320
 msgid "No Desktop Background"
 msgstr "Geen werkbladachtergrond"
 
@@ -190,46 +191,47 @@ msgstr "preferences-desktop-wallpaper"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Wallpaper;Screen;Desktop;Achtergrond;Scherm;Bureaublad;"
 
-#: panels/bluetooth/cc-bluetooth-panel.c:265
+#: panels/bluetooth/cc-bluetooth-panel.c:266
 msgid "Turn Off Airplane Mode"
 msgstr "Vliegtuigstand uitzetten"
 
-#: panels/bluetooth/cc-bluetooth-panel.c:330
+#: panels/bluetooth/cc-bluetooth-panel.c:329
 msgid "No Bluetooth Found"
 msgstr "Bluetooth niet aangetroffen"
 
-#: panels/bluetooth/cc-bluetooth-panel.c:330
+#: panels/bluetooth/cc-bluetooth-panel.c:329
 msgid "Plug in a dongle to use Bluetooth."
 msgstr "Sluit een dongle aan om Bluetooth te gebruiken."
 
-#: panels/bluetooth/cc-bluetooth-panel.c:331
+#: panels/bluetooth/cc-bluetooth-panel.c:330
 msgid "Bluetooth Turned Off"
 msgstr "Bluetooth uitgeschakeld"
 
-#: panels/bluetooth/cc-bluetooth-panel.c:331
+#: panels/bluetooth/cc-bluetooth-panel.c:330
 msgid "Turn on to connect devices and receive file transfers."
 msgstr ""
 "Aanzetten om apparaten aan te sluiten en bestandsoverdrachten te ontvangen."
 
-#: panels/bluetooth/cc-bluetooth-panel.c:332
+#: panels/bluetooth/cc-bluetooth-panel.c:331
 msgid "Airplane Mode is on"
 msgstr "Vliegtuigstand aan"
 
-#: panels/bluetooth/cc-bluetooth-panel.c:332
+#: panels/bluetooth/cc-bluetooth-panel.c:331
 msgid "Bluetooth is disabled when airplane mode is on."
 msgstr "Bluetooth wordt uitgeschakeld als vliegtuigstand aan staat."
 
-#: panels/bluetooth/cc-bluetooth-panel.c:333
+#: panels/bluetooth/cc-bluetooth-panel.c:332
 msgid "Hardware Airplane Mode is on"
 msgstr "Hardware-vliegtuigstand aan"
 
-#: panels/bluetooth/cc-bluetooth-panel.c:333
+#: panels/bluetooth/cc-bluetooth-panel.c:332
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
 msgstr "Vliegtuigstand uitschakelen om Bluetooth mogelijk te maken."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/network/network.ui:101 panels/printers/pp-new-printer-dialog.c:1816
+#: panels/network/cc-network-panel.ui:101
+#: panels/printers/pp-new-printer-dialog.c:1831
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -248,14 +250,14 @@ msgid "share;sharing;bluetooth;obex;"
 msgstr "share;sharing;bluetooth;obex;delen;"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
-#: panels/color/cc-color-calibrate.c:361
+#: panels/color/cc-color-calibrate.c:348
 msgid "Place your calibration device over the square and press “Start”"
 msgstr "Plaats uw kalibratieapparaat boven het vierkant en druk op ‘Starten’"
 
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
-#: panels/color/cc-color-calibrate.c:367
+#: panels/color/cc-color-calibrate.c:354
 msgid ""
 "Move your calibration device to the calibrate position and press “Continue”"
 msgstr ""
@@ -264,7 +266,7 @@ msgstr ""
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
-#: panels/color/cc-color-calibrate.c:373
+#: panels/color/cc-color-calibrate.c:360
 msgid ""
 "Move your calibration device to the surface position and press “Continue”"
 msgstr ""
@@ -273,54 +275,54 @@ msgstr ""
 #. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
 #. * is built into the palmrest and we need to fullscreen the
 #. * sample widget and shut the lid.
-#: panels/color/cc-color-calibrate.c:379
+#: panels/color/cc-color-calibrate.c:366
 msgid "Shut the laptop lid"
 msgstr "Sluit het deksel van de laptop"
 
 #. TRANSLATORS: We suck, the calibation failed and we have no
 #. * good idea why or any suggestions
-#: panels/color/cc-color-calibrate.c:410
+#: panels/color/cc-color-calibrate.c:397
 msgid "An internal error occurred that could not be recovered."
 msgstr "Er is een interne fout opgetreden die niet hersteld kon worden."
 
 #. TRANSLATORS: Some required-at-runtime tools were not
 #. * installed, which should only affect insane distros
-#: panels/color/cc-color-calibrate.c:415
+#: panels/color/cc-color-calibrate.c:402
 msgid "Tools required for calibration are not installed."
 msgstr "De hulpmiddelen nodig voor de kalibratie zijn niet geïnstalleerd."
 
 #. TRANSLATORS: The profile failed for some reason
-#: panels/color/cc-color-calibrate.c:421
+#: panels/color/cc-color-calibrate.c:408
 msgid "The profile could not be generated."
 msgstr "Het profiel kon niet gegenereerd worden."
 
 #. TRANSLATORS: The user specified a whitepoint that was
 #. * unobtainable with the hardware they've got -- see
 #. * https://en.wikipedia.org/wiki/White_point for details
-#: panels/color/cc-color-calibrate.c:427
+#: panels/color/cc-color-calibrate.c:414
 msgid "The target whitepoint was not obtainable."
 msgstr "Het ‘target whitepoint’ was niet te krijgen."
 
 #. TRANSLATORS: the display calibration process is finished
-#: panels/color/cc-color-calibrate.c:467
+#: panels/color/cc-color-calibrate.c:453
 msgid "Complete!"
 msgstr "Klaar!"
 
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
-#: panels/color/cc-color-calibrate.c:475
+#: panels/color/cc-color-calibrate.c:461
 msgid "Calibration failed!"
 msgstr "Kalibratie mislukt!"
 
 #. TRANSLATORS: The user can now remove the sensor from the screen
-#: panels/color/cc-color-calibrate.c:482
+#: panels/color/cc-color-calibrate.c:468
 msgid "You can remove the calibration device."
 msgstr "U kunt het kalibratieapparaat verwijderen."
 
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: panels/color/cc-color-calibrate.c:553
+#: panels/color/cc-color-calibrate.c:537
 msgid "Do not disturb the calibration device while in progress"
 msgstr "Niet aan het kalibratieapparaat komen terwijl dit proces loopt"
 
@@ -365,65 +367,65 @@ msgstr "%s-printer"
 msgid "%s Webcam"
 msgstr "%s-webcam"
 
-#: panels/color/cc-color-device.c:89
+#: panels/color/cc-color-device.c:91
 #, c-format
 msgid "Enable color management for %s"
 msgstr "Kleurbeheer voor %s inschakelen"
 
-#: panels/color/cc-color-device.c:93
+#: panels/color/cc-color-device.c:94
 #, c-format
 msgid "Show color profiles for %s"
 msgstr "Kleurprofielen voor %s tonen"
 
 #. not calibrated
-#: panels/color/cc-color-device.c:323
+#: panels/color/cc-color-device.c:301
 msgid "Not calibrated"
 msgstr "Niet gekalibreerd"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: panels/color/cc-color-panel.c:141
+#: panels/color/cc-color-panel.c:170
 msgid "Default: "
 msgstr "Standaard: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: panels/color/cc-color-panel.c:149
+#: panels/color/cc-color-panel.c:178
 msgid "Colorspace: "
 msgstr "Kleurruimte: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: panels/color/cc-color-panel.c:156
+#: panels/color/cc-color-panel.c:185
 msgid "Test profile: "
 msgstr "Testprofiel: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: panels/color/cc-color-panel.c:223
+#: panels/color/cc-color-panel.c:239
 msgid "Select ICC Profile File"
 msgstr "ICC-profiel selecteren"
 
-#: panels/color/cc-color-panel.c:226
+#: panels/color/cc-color-panel.c:242
 msgid "_Import"
 msgstr "_Importeren"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:237
+#: panels/color/cc-color-panel.c:253
 msgid "Supported ICC profiles"
 msgstr "Ondersteunde ICC-profielen"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:244
+#: panels/color/cc-color-panel.c:260
 #: panels/network/wireless-security/eap-method-fast.c:417
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: panels/color/cc-color-panel.c:583
+#: panels/color/cc-color-panel.c:555
 msgid "Screen"
 msgstr "Scherm"
 
 #. TRANSLATORS: this is when the upload of the profile failed
-#: panels/color/cc-color-panel.c:908
+#: panels/color/cc-color-panel.c:847
 #, c-format
 msgid "Failed to upload file: %s"
 msgstr "Bestand uploaden mislukt: %s"
@@ -431,20 +433,20 @@ msgstr "Bestand uploaden mislukt: %s"
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
-#: panels/color/cc-color-panel.c:922
+#: panels/color/cc-color-panel.c:859
 msgid "The profile has been uploaded to:"
 msgstr "Het profiel is geüpload naar:"
 
-#: panels/color/cc-color-panel.c:924
+#: panels/color/cc-color-panel.c:861
 msgid "Write down this URL."
 msgstr "Noteer deze URL."
 
-#: panels/color/cc-color-panel.c:925
+#: panels/color/cc-color-panel.c:862
 msgid "Restart this computer and boot your normal operating system."
 msgstr ""
 "Deze computer herstarten en opstarten met uw normale besturingssysteem."
 
-#: panels/color/cc-color-panel.c:926
+#: panels/color/cc-color-panel.c:863
 msgid "Type the URL into your browser to download and install the profile."
 msgstr ""
 "Voer de URL in in uw browser om het profiel te downloaden en te installeren."
@@ -452,22 +454,22 @@ msgstr ""
 # bij een browser is dit bladwijzers, maar hier is
 # favorieten/favoriet beter (favoriete programma's) (tino)
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: panels/color/cc-color-panel.c:960
+#: panels/color/cc-color-panel.c:891
 msgid "Save Profile"
 msgstr "Profiel opslaan"
 
-#: panels/color/cc-color-panel.c:964
+#: panels/color/cc-color-panel.c:895
 #: panels/network/connection-editor/vpn-helpers.c:311
 msgid "_Save"
 msgstr "Op_slaan"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1325
+#: panels/color/cc-color-panel.c:1209
 msgid "Create a color profile for the selected device"
 msgstr "Kleurprofiel maken voor het geselecteerde apparaat"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1340 panels/color/cc-color-panel.c:1364
+#: panels/color/cc-color-panel.c:1224 panels/color/cc-color-panel.c:1248
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -476,24 +478,24 @@ msgstr ""
 "verbonden is."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1374
+#: panels/color/cc-color-panel.c:1258
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Het meetinstrument ondersteunt het profileren van printers niet."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1385
+#: panels/color/cc-color-panel.c:1269
 msgid "The device type is not currently supported."
 msgstr "Dit type apparaat wordt niet ondersteund."
 
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
-#: panels/color/cc-color-profile.c:103
+#: panels/color/cc-color-profile.c:100
 msgid "Standard Space"
 msgstr "Standaard kleurruimte"
 
 #. TRANSLATORS: test profiles do things like changing the screen
 #. * a different color, or swap the red and green channels
-#: panels/color/cc-color-profile.c:109
+#: panels/color/cc-color-profile.c:106
 msgid "Test Profile"
 msgstr "Testprofiel"
 
@@ -501,7 +503,7 @@ msgstr "Testprofiel"
 #. * by the color management system based on manufacturing data,
 #. * for instance the default monitor profile is created from the
 #. * primaries specified in the monitor EDID
-#: panels/color/cc-color-profile.c:117
+#: panels/color/cc-color-profile.c:114
 msgctxt "Automatically generated profile"
 msgid "Automatic"
 msgstr "Automatisch"
@@ -509,13 +511,13 @@ msgstr "Automatisch"
 #. TRANSLATORS: the profile quality - low quality profiles take
 #. * much less time to generate but may be a poor reflection of the
 #. * device capability
-#: panels/color/cc-color-profile.c:127
+#: panels/color/cc-color-profile.c:124
 msgctxt "Profile quality"
 msgid "Low Quality"
 msgstr "Lage kwaliteit"
 
 #. TRANSLATORS: the profile quality
-#: panels/color/cc-color-profile.c:132
+#: panels/color/cc-color-profile.c:129
 msgctxt "Profile quality"
 msgid "Medium Quality"
 msgstr "Gemiddelde kwaliteit"
@@ -523,41 +525,41 @@ msgstr "Gemiddelde kwaliteit"
 #. TRANSLATORS: the profile quality - high quality profiles take
 #. * a *long* time, and have the best calibration and
 #. * characterisation data.
-#: panels/color/cc-color-profile.c:139
+#: panels/color/cc-color-profile.c:136
 msgctxt "Profile quality"
 msgid "High Quality"
 msgstr "Hoge kwaliteit"
 
 #. TRANSLATORS: this default RGB space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: panels/color/cc-color-profile.c:156
+#: panels/color/cc-color-profile.c:153
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "Standaard RGB"
 
 #. TRANSLATORS: this default CMYK space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: panels/color/cc-color-profile.c:163
+#: panels/color/cc-color-profile.c:160
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "Standaard CMYK"
 
 #. TRANSLATORS: this default gray space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: panels/color/cc-color-profile.c:170
+#: panels/color/cc-color-profile.c:167
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "Standaard grijs"
 
-#: panels/color/cc-color-profile.c:194
+#: panels/color/cc-color-profile.c:190
 msgid "Vendor supplied factory calibration data"
 msgstr "Fabrieksinstellingen voor kalibratie zijn door fabrikant geleverd"
 
-#: panels/color/cc-color-profile.c:203
+#: panels/color/cc-color-profile.c:199
 msgid "Full-screen display correction not possible with this profile"
 msgstr "Volledig scherm-correctie is niet mogelijk met dit profiel"
 
-#: panels/color/cc-color-profile.c:225
+#: panels/color/cc-color-profile.c:221
 msgid "This profile may no longer be accurate"
 msgstr "Dit profiel is mogelijk niet meer accuraat"
 
@@ -576,8 +578,8 @@ msgid "_Resume"
 msgstr "He_rvatten"
 
 #. This button returns the user back to the color control panel
-#: panels/color/color-calibrate.ui:67 panels/common/language-chooser.ui:12
-#: panels/region/format-chooser.ui:14
+#: panels/color/color-calibrate.ui:67 panels/common/cc-language-chooser.ui:11
+#: panels/region/cc-format-chooser.ui:13
 msgid "_Done"
 msgstr "_Klaar"
 
@@ -739,144 +741,144 @@ msgstr ""
 "Er zijn problemen ontdekt. Het profiel werkt mogelijk niet correct. <a href="
 "\"\">Details tonen.</a>"
 
-#: panels/color/color.ui:807
+#: panels/color/color.ui:811
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr ""
 "Elk apparaat heeft een actueel bijgewerkt kleurprofiel nodig om gebruik te "
 "maken van kleurbeheer."
 
-#: panels/color/color.ui:829
+#: panels/color/color.ui:833
 msgid "Learn more"
 msgstr "Meer informatie"
 
-#: panels/color/color.ui:834
+#: panels/color/color.ui:838
 msgid "Learn more about color management"
 msgstr "Meer te weten komen over kleurbeheer"
 
-#: panels/color/color.ui:882
+#: panels/color/color.ui:886
 msgid "_Set for all users"
 msgstr "Voor _alle gebruikers instellen"
 
-#: panels/color/color.ui:886 panels/color/color.ui:901
-#: panels/color/color.ui:902
+#: panels/color/color.ui:890 panels/color/color.ui:905
+#: panels/color/color.ui:906
 msgid "Set this profile for all users on this computer"
 msgstr "Dit profiel instellen voor alle gebruikers op deze computer"
 
-#: panels/color/color.ui:897
+#: panels/color/color.ui:901
 msgid "_Enable"
 msgstr "_Inschakelen"
 
-#: panels/color/color.ui:928
+#: panels/color/color.ui:932
 msgid "_Add profile"
 msgstr "Profiel _toevoegen"
 
-#: panels/color/color.ui:941
+#: panels/color/color.ui:945
 msgid "_Calibrate…"
 msgstr "_Kalibreren…"
 
-#: panels/color/color.ui:945
+#: panels/color/color.ui:949
 msgid "Calibrate the device"
 msgstr "Apparaat kalibreren"
 
 # bij een browser is dit bladwijzers, maar hier is
 # favorieten/favoriet beter (favoriete programma's) (tino)
-#: panels/color/color.ui:956
+#: panels/color/color.ui:960
 msgid "_Remove profile"
 msgstr "Profiel _verwijderen"
 
-#: panels/color/color.ui:969
+#: panels/color/color.ui:973
 msgid "_View details"
 msgstr "Details _bekijken"
 
-#: panels/color/color.ui:1005
+#: panels/color/color.ui:1009
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Er zijn geen apparaten met kleurbeheer aangetroffen"
 
-#: panels/color/color.ui:1047
+#: panels/color/color.ui:1053
 msgid "LCD"
 msgstr "LCD"
 
-#: panels/color/color.ui:1052
+#: panels/color/color.ui:1058
 msgid "LED"
 msgstr "LED"
 
-#: panels/color/color.ui:1057
+#: panels/color/color.ui:1063
 msgid "CRT"
 msgstr "CRT"
 
-#: panels/color/color.ui:1062
+#: panels/color/color.ui:1068
 msgid "Projector"
 msgstr "Projector"
 
-#: panels/color/color.ui:1067
+#: panels/color/color.ui:1073
 msgid "Plasma"
 msgstr "Plasma"
 
-#: panels/color/color.ui:1072
+#: panels/color/color.ui:1078
 msgid "LCD (CCFL backlight)"
 msgstr "LCD (CCFL achtergrondverlichting)"
 
-#: panels/color/color.ui:1077
+#: panels/color/color.ui:1083
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD (RGB LED achtergrondverlichting)"
 
-#: panels/color/color.ui:1082
+#: panels/color/color.ui:1088
 msgid "LCD (white LED backlight)"
 msgstr "LCD (wit LED achtergrondverlichting)"
 
-#: panels/color/color.ui:1087
+#: panels/color/color.ui:1093
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "Wide gamut LCD (CCFL achtergrondverlichting)"
 
-#: panels/color/color.ui:1092
+#: panels/color/color.ui:1098
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "Wide gamut LCD (RGB LED achtergrondverlichting)"
 
-#: panels/color/color.ui:1109
+#: panels/color/color.ui:1115
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Hoog"
 
-#: panels/color/color.ui:1110
+#: panels/color/color.ui:1116
 msgid "40 minutes"
 msgstr "40 minuten"
 
-#: panels/color/color.ui:1114
+#: panels/color/color.ui:1120
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Gemiddeld"
 
-#: panels/color/color.ui:1115 panels/power/power.ui:25
+#: panels/color/color.ui:1121 panels/power/power.ui:25
 #: panels/privacy/privacy.ui:38
 msgid "30 minutes"
 msgstr "30 minuten"
 
-#: panels/color/color.ui:1119
+#: panels/color/color.ui:1125
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Laag"
 
-#: panels/color/color.ui:1120 panels/power/power.ui:13 panels/power/power.ui:95
+#: panels/color/color.ui:1126 panels/power/power.ui:13 panels/power/power.ui:95
 msgid "15 minutes"
 msgstr "15 minuten"
 
-#: panels/color/color.ui:1142
+#: panels/color/color.ui:1148
 msgid "Native to display"
 msgstr "Scherm-eigen"
 
-#: panels/color/color.ui:1146
+#: panels/color/color.ui:1152
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (Afdrukken en publiceren)"
 
-#: panels/color/color.ui:1150
+#: panels/color/color.ui:1156
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/color.ui:1154
+#: panels/color/color.ui:1160
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (Fotografie en afbeeldingen)"
 
-#: panels/color/color.ui:1158
+#: panels/color/color.ui:1164
 msgid "D75"
 msgstr "D75"
 
@@ -901,18 +903,22 @@ msgstr "preferences-color"
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Color;ICC;Profile;Calibrate;Printer;Display;Kleur;Kalibreren;Weergave;"
 
-#: panels/common/cc-common-language.c:323
+#: panels/common/cc-common-language.c:300
 msgid "Other…"
 msgstr "Ander profiel…"
 
-#: panels/common/cc-language-chooser.c:124
-#: panels/region/cc-format-chooser.c:269 panels/region/cc-input-chooser.c:169
+#: panels/common/cc-language-chooser.c:126
+#: panels/region/cc-format-chooser.c:261 panels/region/cc-input-chooser.c:168
 msgid "More…"
 msgstr "Meer…"
 
-#: panels/common/cc-language-chooser.c:140
+#: panels/common/cc-language-chooser.c:142
 msgid "No languages found"
 msgstr "Er zijn geen talen aangetroffen"
+
+#: panels/common/cc-language-chooser.ui:5
+msgid "Language"
+msgstr "Taal"
 
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:106
@@ -934,9 +940,11 @@ msgstr "%d %b"
 msgid "%b %e, %Y"
 msgstr "%d %b %Y"
 
-#: panels/common/language-chooser.ui:5
-msgid "Language"
-msgstr "Taal"
+#. translators: This is the default hotspot name, need to be less than 32-bytes
+#: panels/common/hostname-helper.c:177
+msgctxt "hotspot"
+msgid "Hotspot"
+msgstr "Hotspot"
 
 #: panels/datetime/big.ui:16 panels/datetime/little.ui:16
 #: panels/datetime/middle.ui:16 panels/datetime/ydm.ui:16
@@ -954,17 +962,17 @@ msgid "Year"
 msgstr "Jaar"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:333
+#: panels/datetime/cc-datetime-panel.c:326
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:338
+#: panels/datetime/cc-datetime-panel.c:331
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:503
+#: panels/datetime/cc-datetime-panel.c:496
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -972,7 +980,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:530
+#: panels/datetime/cc-datetime-panel.c:523
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -980,23 +988,23 @@ msgstr "%s (%s)"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: panels/datetime/cc-datetime-panel.c:537
+#: panels/datetime/cc-datetime-panel.c:530
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:542
+#: panels/datetime/cc-datetime-panel.c:535
 msgid "%l:%M %p"
 msgstr "%k:%M"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:547
+#: panels/datetime/cc-datetime-panel.c:540
 msgid "%R"
 msgstr "%R"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: panels/datetime/cc-datetime-panel.c:552
+#: panels/datetime/cc-datetime-panel.c:545
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
@@ -1055,58 +1063,58 @@ msgstr "December"
 msgid "Date & Time"
 msgstr "Datum en tijd"
 
-#: panels/datetime/datetime.ui:106
+#: panels/datetime/datetime.ui:109
 msgid "Hour"
 msgstr "uur"
 
 #. Translator: this is the separator between hours and minutes, like in HH∶MM
-#: panels/datetime/datetime.ui:121
+#: panels/datetime/datetime.ui:124
 msgid "∶"
 msgstr ":"
 
-#: panels/datetime/datetime.ui:143
+#: panels/datetime/datetime.ui:148
 msgid "Minute"
 msgstr "minuut"
 
 # Is dit intervaltijd uit de dubbelklik-pref of iets anders?
-#: panels/datetime/datetime.ui:208
+#: panels/datetime/datetime.ui:215
 msgid "Time Zone"
 msgstr "Tijdzone"
 
-#: panels/datetime/datetime.ui:228
+#: panels/datetime/datetime.ui:236
 msgid "Search for a city"
 msgstr "Een locatie zoeken"
 
-#: panels/datetime/datetime.ui:304
+#: panels/datetime/datetime.ui:318
 msgid "Automatic _Date & Time"
 msgstr "Automatische _datum en tijd"
 
-#: panels/datetime/datetime.ui:319 panels/datetime/datetime.ui:397
+#: panels/datetime/datetime.ui:333 panels/datetime/datetime.ui:411
 msgid "Requires internet access"
 msgstr "Internetverbinding vereist"
 
-#: panels/datetime/datetime.ui:382
+#: panels/datetime/datetime.ui:396
 msgid "Automatic Time _Zone"
 msgstr "Automatische tijd_zone"
 
-#: panels/datetime/datetime.ui:454
+#: panels/datetime/datetime.ui:468
 msgid "Date & _Time"
 msgstr "Datum en _tijd"
 
 # Is dit intervaltijd uit de dubbelklik-pref of iets anders?
-#: panels/datetime/datetime.ui:502
+#: panels/datetime/datetime.ui:516
 msgid "Time Z_one"
 msgstr "_Tijdzone"
 
-#: panels/datetime/datetime.ui:570
+#: panels/datetime/datetime.ui:586
 msgid "Time _Format"
 msgstr "Tijd_notatie"
 
-#: panels/datetime/datetime.ui:588
+#: panels/datetime/datetime.ui:605
 msgid "24-hour"
 msgstr "24-uurs"
 
-#: panels/datetime/datetime.ui:589
+#: panels/datetime/datetime.ui:606
 msgid "AM / PM"
 msgstr "AM / PM"
 
@@ -1134,59 +1142,59 @@ msgstr ""
 "Om de datum en tijd van het systeem te wijzigen dient u zich te "
 "authenticeren."
 
-#: panels/display/cc-display-panel.c:732
+#: panels/display/cc-display-panel.c:520
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Liggend"
 
-#: panels/display/cc-display-panel.c:735
+#: panels/display/cc-display-panel.c:523
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Staand rechts"
 
-#: panels/display/cc-display-panel.c:738
+#: panels/display/cc-display-panel.c:526
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Staand links"
 
-#: panels/display/cc-display-panel.c:741
+#: panels/display/cc-display-panel.c:529
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Liggend (omgedraaid)"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/display/cc-display-panel.c:808
+#: panels/display/cc-display-panel.c:596
 #: panels/printers/pp-options-dialog.c:558
 msgid "Orientation"
 msgstr "Oriëntatie"
 
-#: panels/display/cc-display-panel.c:873 panels/display/cc-display-panel.c:1676
+#: panels/display/cc-display-panel.c:663 panels/display/cc-display-panel.c:1428
 #: panels/printers/pp-options-dialog.c:87
 msgid "Resolution"
 msgstr "Resolutie"
 
-#: panels/display/cc-display-panel.c:961
+#: panels/display/cc-display-panel.c:750
 msgid "Refresh Rate"
 msgstr "Verversingsfrequentie"
 
-#: panels/display/cc-display-panel.c:1098
+#: panels/display/cc-display-panel.c:885
 msgid "Scale"
 msgstr "Schalen"
 
-#: panels/display/cc-display-panel.c:1151
+#: panels/display/cc-display-panel.c:937
 msgid "Adjust for TV"
 msgstr "Aanpassen aan tv"
 
-#: panels/display/cc-display-panel.c:1413
+#: panels/display/cc-display-panel.c:1172
 msgid "Primary Display"
 msgstr "Primair scherm"
 
 # Select a display language (change will be applied next time you log in)
-#: panels/display/cc-display-panel.c:1442
+#: panels/display/cc-display-panel.c:1200
 msgid "Display Arrangement"
 msgstr "Schermvolgorde"
 
-#: panels/display/cc-display-panel.c:1443
+#: panels/display/cc-display-panel.c:1201
 msgid ""
 "Drag displays to match your setup. The top bar is placed on the primary "
 "display."
@@ -1194,86 +1202,94 @@ msgstr ""
 "Schermen verslepen om overeen te komen met uw instelling. De menubalk wordt "
 "geplaatst op het primaire scherm."
 
-#: panels/display/cc-display-panel.c:1866
+#: panels/display/cc-display-panel.c:1615
 msgid "Display Mode"
 msgstr "Beeldschermmodus"
 
-#: panels/display/cc-display-panel.c:1882
+#: panels/display/cc-display-panel.c:1631
 msgid "Join Displays"
 msgstr "Schermen bij elkaar brengen"
 
-#: panels/display/cc-display-panel.c:1885
+#: panels/display/cc-display-panel.c:1634
 msgid "Mirror"
 msgstr "Spiegelen"
 
-#: panels/display/cc-display-panel.c:1888
+#: panels/display/cc-display-panel.c:1637
 msgid "Single Display"
 msgstr "Enkel scherm"
 
-#: panels/display/cc-display-panel.c:2593
-msgid "Apply Changes?"
-msgstr "Wijzigingen toepassen?"
-
-#: panels/display/cc-display-panel.c:2607
+#: panels/display/cc-display-panel.c:1911
 #: panels/network/connection-editor/connection-editor.ui:24
 #: panels/network/network-wifi.ui:38
 msgid "_Apply"
 msgstr "_Toepassen"
 
-#: panels/display/cc-display-panel.c:2982
+#: panels/display/cc-display-panel.c:1933
+msgid "Apply Changes?"
+msgstr "Wijzigingen toepassen?"
+
+#: panels/display/cc-display-panel.c:1938
+msgid "Changes Cannot be Applied"
+msgstr "Wijzigingen kunnen niet worden toegepast"
+
+#: panels/display/cc-display-panel.c:1939
+msgid "This could be due to hardware limitations."
+msgstr "Dit kan het gevolg zijn van hardwarebeperkingen."
+
+#: panels/display/cc-display-panel.c:2070
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
 
 #. TRANSLATORS: the state of the night light setting
-#: panels/display/cc-display-panel.c:3198
-#: panels/notifications/cc-notifications-panel.c:292
-#: panels/power/cc-power-panel.c:1994 panels/power/cc-power-panel.c:2001
-#: panels/privacy/cc-privacy-panel.c:190 panels/privacy/cc-privacy-panel.c:257
-#: panels/universal-access/cc-ua-panel.c:333
-#: panels/universal-access/cc-ua-panel.c:714
-#: panels/universal-access/cc-ua-panel.c:727
-#: panels/universal-access/cc-ua-panel.c:739
-#: panels/universal-access/cc-ua-panel.c:910
+#: panels/display/cc-display-panel.c:2242
+#: panels/notifications/cc-notifications-panel.c:288
+#: panels/power/cc-power-panel.c:2038 panels/power/cc-power-panel.c:2045
+#: panels/privacy/cc-privacy-panel.c:192 panels/privacy/cc-privacy-panel.c:259
+#: panels/universal-access/cc-ua-panel.c:478
+#: panels/universal-access/cc-ua-panel.c:841
+#: panels/universal-access/cc-ua-panel.c:854
+#: panels/universal-access/cc-ua-panel.c:866
+#: panels/universal-access/cc-ua-panel.c:1031
 msgid "On"
 msgstr "Aan"
 
-#: panels/display/cc-display-panel.c:3198 panels/network/net-proxy.c:54
-#: panels/notifications/cc-notifications-panel.c:292
-#: panels/power/cc-power-panel.c:1988 panels/power/cc-power-panel.c:1999
-#: panels/privacy/cc-privacy-panel.c:190 panels/privacy/cc-privacy-panel.c:257
-#: panels/universal-access/cc-ua-panel.c:333
-#: panels/universal-access/cc-ua-panel.c:714
-#: panels/universal-access/cc-ua-panel.c:727
-#: panels/universal-access/cc-ua-panel.c:739
-#: panels/universal-access/cc-ua-panel.c:910 panels/universal-access/uap.ui:334
-#: panels/universal-access/uap.ui:380 panels/universal-access/uap.ui:426
-#: panels/universal-access/uap.ui:532 panels/universal-access/uap.ui:685
-#: panels/universal-access/uap.ui:731 panels/universal-access/uap.ui:777
-#: panels/universal-access/uap.ui:929
+#: panels/display/cc-display-panel.c:2242 panels/network/net-proxy.c:54
+#: panels/notifications/cc-notifications-panel.c:288
+#: panels/power/cc-power-panel.c:2032 panels/power/cc-power-panel.c:2043
+#: panels/privacy/cc-privacy-panel.c:192 panels/privacy/cc-privacy-panel.c:259
+#: panels/universal-access/cc-ua-panel.c:478
+#: panels/universal-access/cc-ua-panel.c:841
+#: panels/universal-access/cc-ua-panel.c:854
+#: panels/universal-access/cc-ua-panel.c:866
+#: panels/universal-access/cc-ua-panel.c:1031
+#: panels/universal-access/uap.ui:338 panels/universal-access/uap.ui:384
+#: panels/universal-access/uap.ui:430 panels/universal-access/uap.ui:536
+#: panels/universal-access/uap.ui:689 panels/universal-access/uap.ui:735
+#: panels/universal-access/uap.ui:781 panels/universal-access/uap.ui:933
 msgid "Off"
 msgstr "Uit"
 
-#: panels/display/cc-display-panel.c:3219
+#: panels/display/cc-display-panel.c:2262
 msgid "_Night Light"
 msgstr "_Nachtlicht"
 
 # beeldscherm
-#: panels/display/cc-display-panel.c:3284
+#: panels/display/cc-display-panel.c:2323
 msgid "Could not get screen information"
 msgstr "Kon informatie over het scherm niet verkrijgen"
 
 #. This cancels the redshift inhibit.
-#: panels/display/display.ui:71
+#: panels/display/cc-night-light-dialog.ui:47
 msgid "Restart Filter"
 msgstr "Filter herstarten"
 
 #. Inhibit the redshift functionality until the next day starts
-#: panels/display/display.ui:103
+#: panels/display/cc-night-light-dialog.ui:80
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Tijdelijk uitgeschakeld tot morgen"
 
-#: panels/display/display.ui:144
+#: panels/display/cc-night-light-dialog.ui:107
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
@@ -1282,46 +1298,50 @@ msgstr ""
 "slapeloosheid te voorkomen."
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/display.ui:171 panels/display/display.ui:567
+#: panels/display/cc-night-light-dialog.ui:129
+#: panels/display/cc-night-light-dialog.ui:466
 msgid "Night Light"
 msgstr "Nachtlicht"
 
-#: panels/display/display.ui:187
+#: panels/display/cc-night-light-dialog.ui:145
 msgid "Schedule"
 msgstr "Planning"
 
-#: panels/display/display.ui:215
+#: panels/display/cc-night-light-dialog.ui:174
 msgid "Sunset to Sunrise"
 msgstr "Zonsondergang tot zonsopgang"
 
-#: panels/display/display.ui:229
+#: panels/display/cc-night-light-dialog.ui:189
 #: panels/network/connection-editor/ip4-page.ui:69
 #: panels/network/connection-editor/ip6-page.ui:83
 #: panels/network/net-proxy.c:56 panels/network/network-proxy.ui:113
-#: panels/network/network-wifi.ui:777 panels/network/network-wifi.ui:1054
-#: panels/privacy/cc-privacy-panel.c:217
+#: panels/network/network-wifi.ui:776 panels/network/network-wifi.ui:1053
+#: panels/privacy/cc-privacy-panel.c:219
 msgid "Manual"
 msgstr "Handmatig"
 
-#: panels/display/display.ui:268
+#: panels/display/cc-night-light-dialog.ui:224
 msgid "From"
 msgstr "Van"
 
-#: panels/display/display.ui:309 panels/display/display.ui:430
+#: panels/display/cc-night-light-dialog.ui:256
+#: panels/display/cc-night-light-dialog.ui:353
 msgid ":"
 msgstr ":"
 
 #. This is the short form for the time period in the morning
-#: panels/display/display.ui:343 panels/display/display.ui:464
+#: panels/display/cc-night-light-dialog.ui:281
+#: panels/display/cc-night-light-dialog.ui:378
 msgid "AM"
 msgstr "am"
 
 #. This is the short form for the time period in the afternoon
-#: panels/display/display.ui:359 panels/display/display.ui:480
+#: panels/display/cc-night-light-dialog.ui:297
+#: panels/display/cc-night-light-dialog.ui:394
 msgid "PM"
 msgstr "pm"
 
-#: panels/display/display.ui:528
+#: panels/display/cc-night-light-dialog.ui:436
 msgid "To"
 msgstr "tot"
 
@@ -1691,7 +1711,7 @@ msgstr "Volgende track"
 msgid "Eject"
 msgstr "Uitwerpen"
 
-#: panels/keyboard/01-input-sources.xml.in:4 panels/universal-access/uap.ui:576
+#: panels/keyboard/01-input-sources.xml.in:4 panels/universal-access/uap.ui:580
 msgid "Typing"
 msgstr "Typen"
 
@@ -1711,9 +1731,9 @@ msgstr "Starters"
 msgid "Launch help browser"
 msgstr "Hulptoepassing starten"
 
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:222
-#: shell/cc-window.c:760 shell/gnome-control-center.desktop.in.in:3
-#: shell/window.ui:125
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:251
+#: shell/cc-window.c:888 shell/cc-window.ui:124
+#: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -1734,7 +1754,7 @@ msgid "Home folder"
 msgstr "Persoonlijke map"
 
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/search/gnome-search-panel.desktop.in.in:3 shell/window.ui:157
+#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:156
 msgid "Search"
 msgstr "Zoeken"
 
@@ -1819,9 +1839,9 @@ msgstr "Kleinere tekst"
 msgid "High contrast on or off"
 msgstr "Hoog contrast aan of uit"
 
-#: panels/keyboard/cc-keyboard-manager.c:506
-#: panels/keyboard/cc-keyboard-manager.c:514
-#: panels/keyboard/cc-keyboard-manager.c:822
+#: panels/keyboard/cc-keyboard-manager.c:501
+#: panels/keyboard/cc-keyboard-manager.c:509
+#: panels/keyboard/cc-keyboard-manager.c:809
 msgid "Custom Shortcuts"
 msgstr "Aangepaste sneltoets"
 
@@ -1830,11 +1850,11 @@ msgstr "Aangepaste sneltoets"
 #.
 #. translators:
 #. * The device has been disabled
-#: panels/keyboard/cc-keyboard-option.c:263
-#: panels/keyboard/cc-keyboard-option.c:382
-#: panels/keyboard/keyboard-shortcuts.c:435
+#: panels/keyboard/cc-keyboard-option.c:259
+#: panels/keyboard/cc-keyboard-option.c:378
+#: panels/keyboard/keyboard-shortcuts.c:425
 #: panels/keyboard/shortcut-editor.ui:96 panels/network/network-proxy.ui:123
-#: panels/network/network-wifi.ui:782 panels/network/network-wifi.ui:1059
+#: panels/network/network-wifi.ui:781 panels/network/network-wifi.ui:1058
 #: panels/user-accounts/um-fingerprint-dialog.c:211
 #: subprojects/gvc/gvc-mixer-control.c:1866
 msgid "Disabled"
@@ -1844,7 +1864,7 @@ msgstr "Uitgeschakeld"
 #. * chooser'. AltGr is often used for this purpose. See
 #. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
 #.
-#: panels/keyboard/cc-keyboard-option.c:341
+#: panels/keyboard/cc-keyboard-option.c:337
 msgid "Alternative Characters Key"
 msgstr "Toets voor alternatieve tekens"
 
@@ -1852,19 +1872,19 @@ msgstr "Toets voor alternatieve tekens"
 #. * sequences that are combined to form a single character.
 #. * See http://en.wikipedia.org/wiki/Compose_key
 #.
-#: panels/keyboard/cc-keyboard-option.c:350
+#: panels/keyboard/cc-keyboard-option.c:346
 msgid "Compose Key"
 msgstr "Samensteltoets"
 
-#: panels/keyboard/cc-keyboard-option.c:355
+#: panels/keyboard/cc-keyboard-option.c:351
 msgid "Modifiers-only switch to next source"
 msgstr "‘Modifiers-only’-schakeling naar volgende bron"
 
-#: panels/keyboard/cc-keyboard-panel.c:181
+#: panels/keyboard/cc-keyboard-panel.c:179
 msgid "Reset All Shortcuts?"
 msgstr "Alle sneltoetsen opnieuw instellen?"
 
-#: panels/keyboard/cc-keyboard-panel.c:184
+#: panels/keyboard/cc-keyboard-panel.c:182
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -1872,22 +1892,22 @@ msgstr ""
 "Het opnieuw instellen van de sneltoetsen kan invloed hebben op uw aangepaste "
 "sneltoetsen. Dit kan niet ongedaan worden gemaakt."
 
-#: panels/keyboard/cc-keyboard-panel.c:188
+#: panels/keyboard/cc-keyboard-panel.c:186
 #: panels/keyboard/shortcut-editor.ui:346
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: panels/keyboard/cc-keyboard-panel.c:189
+#: panels/keyboard/cc-keyboard-panel.c:187
 msgid "Reset All"
 msgstr "Alles opnieuw instellen"
 
-#: panels/keyboard/cc-keyboard-panel.c:281
+#: panels/keyboard/cc-keyboard-panel.c:279
 msgid "Reset the shortcut to its default value"
 msgstr "Sneltoets naar standaardwaarde terugzetten"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:413
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:411
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1896,21 +1916,21 @@ msgstr ""
 "%s wordt al gebruikt voor <b>%s</b>. Als u deze vervangt, zal %s worden "
 "uitgeschakeld"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:583
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:581
 msgid "Set Custom Shortcut"
 msgstr "Aangepaste sneltoets instellen"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:583
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:581
 msgid "Set Shortcut"
 msgstr "Sneltoets instellen"
 
 #. Setup the top label
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:592
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:590
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "Voer een nieuwe sneltoets in om <b>%s</b> te wijzigen."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:1019
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:1017
 msgid "Add Custom Shortcut"
 msgstr "Aangepaste sneltoets toevoegen"
 
@@ -1936,7 +1956,7 @@ msgstr ""
 "Sneltoets;Werkruimte;Venster;Vergrendelen;"
 
 #: panels/keyboard/gnome-keyboard-panel.ui:67 panels/region/input-options.ui:68
-#: shell/cc-application.c:255
+#: shell/cc-application.c:252
 msgid "Keyboard Shortcuts"
 msgstr "Sneltoetsen"
 
@@ -1952,7 +1972,7 @@ msgstr "Alle sneltoetsen naar hun standaardwaarde terugzetten"
 msgid "No keyboard shortcut found"
 msgstr "Geen sneltoets gevonden"
 
-#: panels/keyboard/gnome-keyboard-panel.ui:175 shell/panel-list.ui:206
+#: panels/keyboard/gnome-keyboard-panel.ui:175 shell/cc-panel-list.ui:206
 msgid "Try a different search"
 msgstr "Probeer een andere zoekopdracht"
 
@@ -1980,7 +2000,7 @@ msgstr "Sneltoets"
 msgid "Set Shortcut…"
 msgstr "Sneltoets instellen…"
 
-#: panels/keyboard/shortcut-editor.ui:272 panels/network/network-wifi.ui:594
+#: panels/keyboard/shortcut-editor.ui:272 panels/network/network-wifi.ui:593
 msgid "None"
 msgstr "Geen"
 
@@ -2004,7 +2024,7 @@ msgstr "Vervangen"
 msgid "Set"
 msgstr "Instellen"
 
-#: panels/mouse/cc-mouse-panel.c:82 panels/wacom/cc-wacom-panel.c:402
+#: panels/mouse/cc-mouse-panel.c:80 panels/wacom/cc-wacom-panel.c:427
 msgid "Test Your _Settings"
 msgstr "Uw instellingen _testen"
 
@@ -2031,107 +2051,107 @@ msgstr ""
 "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;Aanwijzer;Klik;Tik;"
 "Dubbel;Knop;"
 
-#: panels/mouse/gnome-mouse-properties.ui:45
+#: panels/mouse/gnome-mouse-properties.ui:50
 msgid "General"
 msgstr "Algemeen"
 
-#: panels/mouse/gnome-mouse-properties.ui:83
+#: panels/mouse/gnome-mouse-properties.ui:88
 msgid "Primary Button"
 msgstr "Primaire knop"
 
-#: panels/mouse/gnome-mouse-properties.ui:102
+#: panels/mouse/gnome-mouse-properties.ui:107
 msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "Stelt de volgorde van fysieke knoppen in op muizen en touchpads."
 
-#: panels/mouse/gnome-mouse-properties.ui:131
+#: panels/mouse/gnome-mouse-properties.ui:136
 msgid "Left"
 msgstr "Links"
 
-#: panels/mouse/gnome-mouse-properties.ui:141
+#: panels/mouse/gnome-mouse-properties.ui:146
 msgid "Right"
 msgstr "Rechts"
 
-#: panels/mouse/gnome-mouse-properties.ui:177
+#: panels/mouse/gnome-mouse-properties.ui:182
 msgid "Mouse"
 msgstr "Muis"
 
-#: panels/mouse/gnome-mouse-properties.ui:216
+#: panels/mouse/gnome-mouse-properties.ui:221
 msgid "Mouse Speed"
 msgstr "Aanwijzersnelheid"
 
-#: panels/mouse/gnome-mouse-properties.ui:238
-#: panels/mouse/gnome-mouse-properties.ui:543
+#: panels/mouse/gnome-mouse-properties.ui:243
+#: panels/mouse/gnome-mouse-properties.ui:548
 msgid "Double-click timeout"
 msgstr "Intervaltijd voor dubbelklik"
 
 #. Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: panels/mouse/gnome-mouse-properties.ui:275
-#: panels/mouse/gnome-mouse-properties.ui:451
+#: panels/mouse/gnome-mouse-properties.ui:280
+#: panels/mouse/gnome-mouse-properties.ui:456
 msgid "Natural Scrolling"
 msgstr "Natuurlijk schuiven"
 
-#: panels/mouse/gnome-mouse-properties.ui:291
-#: panels/mouse/gnome-mouse-properties.ui:467
+#: panels/mouse/gnome-mouse-properties.ui:296
+#: panels/mouse/gnome-mouse-properties.ui:472
 msgid "Scrolling moves the content, not the view."
 msgstr "Schuiven beweegt de inhoud, niet de weergave."
 
-#: panels/mouse/gnome-mouse-properties.ui:341
-#: panels/mouse/gnome-mouse-properties.ui:386
+#: panels/mouse/gnome-mouse-properties.ui:346
+#: panels/mouse/gnome-mouse-properties.ui:391
 msgid "Touchpad"
 msgstr "Touchpad"
 
-#: panels/mouse/gnome-mouse-properties.ui:522
+#: panels/mouse/gnome-mouse-properties.ui:527
 msgid "Touchpad Speed"
 msgstr "Touchpadsnelheid"
 
 # op het touchpad tikken om te klikken
-#: panels/mouse/gnome-mouse-properties.ui:581
+#: panels/mouse/gnome-mouse-properties.ui:586
 msgid "Tap to Click"
 msgstr "Tikken om te klikken"
 
-#: panels/mouse/gnome-mouse-properties.ui:634
+#: panels/mouse/gnome-mouse-properties.ui:639
 msgid "Two-finger Scrolling"
 msgstr "Scrollen met twee vingers"
 
-#: panels/mouse/gnome-mouse-properties.ui:687
+#: panels/mouse/gnome-mouse-properties.ui:693
 msgid "Edge Scrolling"
 msgstr "Aan de rand schuiven"
 
-#: panels/mouse/gnome-mouse-test.c:130 panels/mouse/gnome-mouse-test.ui:23
+#: panels/mouse/gnome-mouse-test.c:132 panels/mouse/gnome-mouse-test.ui:25
 msgid "Try clicking, double clicking, scrolling"
 msgstr "Probeer te klikken, dubbelklikken, of scrollen"
 
-#: panels/mouse/gnome-mouse-test.c:135
+#: panels/mouse/gnome-mouse-test.c:137
 msgid "Five clicks, GEGL time!"
 msgstr "Vijf klikken, GEGL-tijd!"
 
-#: panels/mouse/gnome-mouse-test.c:140
+#: panels/mouse/gnome-mouse-test.c:142
 msgid "Double click, primary button"
 msgstr "Dubbelklik, primaire knop"
 
-#: panels/mouse/gnome-mouse-test.c:140
+#: panels/mouse/gnome-mouse-test.c:142
 msgid "Single click, primary button"
 msgstr "Enkele klik, primaire knop"
 
-#: panels/mouse/gnome-mouse-test.c:143
+#: panels/mouse/gnome-mouse-test.c:145
 msgid "Double click, middle button"
 msgstr "Dubbelklik, middelste knop"
 
-#: panels/mouse/gnome-mouse-test.c:143
+#: panels/mouse/gnome-mouse-test.c:145
 msgid "Single click, middle button"
 msgstr "Enkele klik, middelste knop"
 
-#: panels/mouse/gnome-mouse-test.c:146
+#: panels/mouse/gnome-mouse-test.c:148
 msgid "Double click, secondary button"
 msgstr "Dubbelklik, secundaire knop"
 
-#: panels/mouse/gnome-mouse-test.c:146
+#: panels/mouse/gnome-mouse-test.c:148
 msgid "Single click, secondary button"
 msgstr "Enkele klik, secundaire knop"
 
 #. add proxy to device list
-#: panels/network/cc-network-panel.c:579
+#: panels/network/cc-network-panel.c:583
 msgid "Network proxy"
 msgstr "Netwerkproxy"
 
@@ -2139,25 +2159,66 @@ msgstr "Netwerkproxy"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: panels/network/cc-network-panel.c:715 panels/network/net-vpn.c:167
-#: panels/network/net-vpn.c:296
+#: panels/network/cc-network-panel.c:719 panels/network/net-vpn.c:170
+#: panels/network/net-vpn.c:299
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: panels/network/cc-network-panel.c:779 panels/network/wifi.ui:282
+#: panels/network/cc-network-panel.c:783 panels/network/cc-wifi-panel.ui:320
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Oeps! Er ging iets mis. Neem contact op met uw softwareleverancier."
 
-#: panels/network/cc-network-panel.c:785
+#: panels/network/cc-network-panel.c:789
 msgid "NetworkManager needs to be running."
 msgstr "Netwerkbeheer moet draaien."
 
-#: panels/network/cc-wifi-panel.c:213
+#: panels/network/cc-network-panel.ui:142
+#: panels/network/connection-editor/net-connection-editor.c:603
+msgid "VPN"
+msgstr "VPN"
+
+#: panels/network/cc-network-panel.ui:194
+msgid "Not set up"
+msgstr "Niet ingesteld"
+
+#: panels/network/cc-wifi-panel.c:281
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
-#: panels/network/network-wifi.ui:1769
+#: panels/network/network-wifi.ui:1746
 msgid "Wi-Fi"
 msgstr "Wifi"
+
+#: panels/network/cc-wifi-panel.ui:73
+msgid "Airplane Mode"
+msgstr "Vliegtuigstand"
+
+#: panels/network/cc-wifi-panel.ui:88
+msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
+msgstr "Schakelt wifi, bluetooth en mobiel breedband uit"
+
+#: panels/network/cc-wifi-panel.ui:157
+msgid "No Wi-Fi Adapter Found"
+msgstr "Geen wifi-adapter gevonden"
+
+#: panels/network/cc-wifi-panel.ui:169
+msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
+msgstr "Zorg ervoor dat u een wifi-adapter heeft aangesloten en ingeschakeld"
+
+#: panels/network/cc-wifi-panel.ui:204
+msgid "Airplane Mode On"
+msgstr "Vliegtuigstand aan"
+
+#: panels/network/cc-wifi-panel.ui:216
+msgid "Turn off to use Wi-Fi"
+msgstr "Schakel uit om wifi te gebruiken"
+
+#: panels/network/cc-wifi-panel.ui:242
+msgid "Visible Networks"
+msgstr "Zichtbare netwerken"
+
+#: panels/network/cc-wifi-panel.ui:309
+msgid "NetworkManager needs to be running"
+msgstr "Netwerkbeheer moet draaien"
 
 #: panels/network/connection-editor/8021x-security-page.ui:26
 msgid "802.1x _Security"
@@ -2165,7 +2226,6 @@ msgstr "802.1x _Beveiliging"
 
 #: panels/network/connection-editor/8021x-security-page.ui:73
 #: panels/network/connection-editor/security-page.ui:72
-#: panels/wacom/wacom-stylus-page.ui:108
 msgid "page 1"
 msgstr "pagina 1"
 
@@ -2184,7 +2244,6 @@ msgstr "Interne _aanmeldingscontrole"
 
 #: panels/network/connection-editor/8021x-security-page.ui:281
 #: panels/network/connection-editor/security-page.ui:280
-#: panels/wacom/wacom-stylus-page.ui:426
 msgid "page 2"
 msgstr "pagina 2"
 
@@ -2213,7 +2272,7 @@ msgstr "WEP"
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:60
 #: panels/network/net-device-wifi.c:239 panels/network/net-device-wifi.c:473
-#: panels/network/network-wifi.ui:593
+#: panels/network/network-wifi.ui:592
 msgid "WPA"
 msgstr "WPA"
 
@@ -2299,15 +2358,15 @@ msgid "Remove VPN"
 msgstr "VPN verwijderen"
 
 #: panels/network/connection-editor/ce-page-details.c:334
-#: panels/network/network-wifi.ui:1456 shell/cc-window.c:214
-#: shell/panel-list.ui:103
+#: panels/network/network-wifi.ui:1433 shell/cc-panel-list.ui:103
+#: shell/cc-window.c:243
 msgid "Details"
 msgstr "Details"
 
 #: panels/network/connection-editor/ce-page-ethernet.c:174
 #: panels/network/connection-editor/ce-page-vpn.c:188
 #: panels/network/connection-editor/ce-page-wifi.c:194
-#: panels/network/network-wifi.ui:1460
+#: panels/network/network-wifi.ui:1437
 msgid "Identity"
 msgstr "Identiteit"
 
@@ -2322,12 +2381,12 @@ msgid "Delete Route"
 msgstr "Route verwijderen"
 
 #: panels/network/connection-editor/ce-page-ip4.c:896
-#: panels/network/network-wifi.ui:1464
+#: panels/network/network-wifi.ui:1441
 msgid "IPv4"
 msgstr "IPv4"
 
 #: panels/network/connection-editor/ce-page-ip6.c:828
-#: panels/network/network-wifi.ui:1468
+#: panels/network/network-wifi.ui:1445
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -2401,7 +2460,7 @@ msgstr "Standaardroute"
 #: panels/network/connection-editor/ip6-page.ui:211
 #: panels/network/net-device-ethernet.c:168
 #: panels/network/network-mobile.ui:224 panels/network/network-wifi.ui:325
-#: panels/network/network-wifi.ui:832 panels/network/network-wifi.ui:1109
+#: panels/network/network-wifi.ui:831 panels/network/network-wifi.ui:1108
 msgid "DNS"
 msgstr "DNS"
 
@@ -2434,7 +2493,7 @@ msgstr "Geschikt voor betaalde of gelimiteerde verbindingen."
 #: panels/network/connection-editor/ip6-page.ui:291
 #: panels/network/net-proxy.c:58 panels/network/network-proxy.ui:103
 #: panels/network/wireless-security/eap-method-peap.ui:22
-#: panels/privacy/cc-privacy-panel.c:217
+#: panels/privacy/cc-privacy-panel.c:219
 msgid "Automatic"
 msgstr "Automatisch"
 
@@ -2476,8 +2535,8 @@ msgid "_Name"
 msgstr "_Naam"
 
 #: panels/network/connection-editor/ethernet-page.ui:100
-#: panels/network/connection-editor/wifi-page.ui:68
-#: panels/network/network-wifi.ui:1261
+#: panels/network/connection-editor/wifi-page.ui:67
+#: panels/network/network-wifi.ui:1260
 msgid "_MAC Address"
 msgstr "_MAC-adres"
 
@@ -2486,7 +2545,7 @@ msgid "M_TU"
 msgstr "M_TU"
 
 #: panels/network/connection-editor/ethernet-page.ui:163
-#: panels/network/connection-editor/wifi-page.ui:98
+#: panels/network/connection-editor/wifi-page.ui:97
 msgid "_Cloned Address"
 msgstr "Ge_kloond adres"
 
@@ -2499,7 +2558,7 @@ msgid "IPv_4 Method"
 msgstr "IPv_4-methode"
 
 #: panels/network/connection-editor/ip4-page.ui:42
-#: panels/network/network-wifi.ui:778 panels/network/network-wifi.ui:1055
+#: panels/network/network-wifi.ui:777 panels/network/network-wifi.ui:1054
 msgid "Automatic (DHCP)"
 msgstr "Automatisch (DHCP)"
 
@@ -2550,7 +2609,7 @@ msgstr "IP-adressen met komma’s scheiden"
 
 #: panels/network/connection-editor/ip4-page.ui:265
 #: panels/network/connection-editor/ip6-page.ui:279
-#: panels/network/network-wifi.ui:877 panels/network/network-wifi.ui:1154
+#: panels/network/network-wifi.ui:876 panels/network/network-wifi.ui:1153
 msgid "Routes"
 msgstr "Routes"
 
@@ -2567,7 +2626,7 @@ msgstr "Metrisch"
 
 #: panels/network/connection-editor/ip4-page.ui:384
 #: panels/network/connection-editor/ip6-page.ui:398
-#: panels/network/network-wifi.ui:933 panels/network/network-wifi.ui:1210
+#: panels/network/network-wifi.ui:932 panels/network/network-wifi.ui:1209
 msgid "Use this connection _only for resources on its network"
 msgstr "Gebruik deze verbinding _alleen voor bronnen op hun netwerk"
 
@@ -2591,11 +2650,6 @@ msgstr "Openen van verbindingseditor mislukt"
 #: panels/network/connection-editor/net-connection-editor.c:291
 msgid "New Profile"
 msgstr "Nieuw profiel"
-
-#: panels/network/connection-editor/net-connection-editor.c:603
-#: panels/network/network.ui:142
-msgid "VPN"
-msgstr "VPN"
 
 #: panels/network/connection-editor/net-connection-editor.c:751
 msgid "Import from file…"
@@ -2632,9 +2686,9 @@ msgid "Select file to import"
 msgstr "Het te importeren bestand selecteren"
 
 #: panels/network/connection-editor/vpn-helpers.c:182
-#: panels/printers/pp-details-dialog.c:332
-#: panels/sharing/cc-sharing-panel.c:385
-#: panels/user-accounts/um-photo-dialog.c:230
+#: panels/printers/pp-details-dialog.c:331
+#: panels/sharing/cc-sharing-panel.c:427
+#: panels/user-accounts/um-photo-dialog.c:231
 msgid "_Open"
 msgstr "_Openen"
 
@@ -2684,11 +2738,6 @@ msgstr "_SSID"
 #: panels/network/network-wifi.ui:513
 msgid "_BSSID"
 msgstr "_BSSID"
-
-#: panels/network/connection-editor/wifi-page.ui:53
-#: panels/network/network-wifi.ui:562
-msgid "My Home Network"
-msgstr "Mijn thuisnetwerk"
 
 #: panels/network/gnome-network-panel.desktop.in.in:3
 #: panels/network/network-mobile.ui:241
@@ -2829,7 +2878,7 @@ msgstr ""
 "Netwerkdetails voor de geselecteerde netwerken, inclusief wachtwoord en "
 "aangepaste configuratie, zullen verloren gaan."
 
-#: panels/network/net-device-wifi.c:1737 panels/network/network-wifi.ui:1362
+#: panels/network/net-device-wifi.c:1737 panels/network/network-wifi.ui:1350
 msgid "_Forget"
 msgstr "_Vergeten"
 
@@ -2915,10 +2964,6 @@ msgstr "_Configuratie-URL"
 msgid "Turn device off"
 msgstr "Apparaat uitzetten"
 
-#: panels/network/network.ui:194
-msgid "Not set up"
-msgstr "Niet ingesteld"
-
 #: panels/network/network-vpn.ui:56
 msgid "Turn VPN connection off"
 msgstr "VPN-verbinding uitschakelen"
@@ -2936,74 +2981,70 @@ msgstr "details"
 #: panels/network/wireless-security/eap-method-simple.ui:40
 #: panels/network/wireless-security/ws-leap.ui:40
 #: panels/network/wireless-security/ws-wpa-psk.ui:22
-#: panels/sharing/sharing.ui:351
+#: panels/sharing/sharing.ui:357
 #: panels/user-accounts/data/account-dialog.ui:300
 #: panels/user-accounts/data/account-dialog.ui:525
 #: panels/user-accounts/data/user-accounts-dialog.ui:205
 msgid "_Password"
 msgstr "_Wachtwoord"
 
-#: panels/network/network-wifi.ui:622
+#: panels/network/network-wifi.ui:621
 msgid "Show P_assword"
 msgstr "Wachtwoord _tonen"
 
-#: panels/network/network-wifi.ui:652
+#: panels/network/network-wifi.ui:651
 msgid "Make available to other users"
 msgstr "Beschikbaar maken voor andere gebruikers"
 
-#: panels/network/network-wifi.ui:680
+#: panels/network/network-wifi.ui:679
 msgid "identity"
 msgstr "identiteit"
 
-#: panels/network/network-wifi.ui:714
+#: panels/network/network-wifi.ui:713
 msgid "IPv_4"
 msgstr "IPv_4"
 
-#: panels/network/network-wifi.ui:755 panels/network/network-wifi.ui:1032
+#: panels/network/network-wifi.ui:754 panels/network/network-wifi.ui:1031
 msgid "_Addresses"
 msgstr "_Adressen"
 
-#: panels/network/network-wifi.ui:779 panels/network/network-wifi.ui:1056
+#: panels/network/network-wifi.ui:778 panels/network/network-wifi.ui:1055
 msgid "Automatic (DHCP) addresses only"
 msgstr "Alleen automatische (DHCP) adressen"
 
-#: panels/network/network-wifi.ui:780 panels/network/network-wifi.ui:1057
+#: panels/network/network-wifi.ui:779 panels/network/network-wifi.ui:1056
 msgid "Link-local only"
 msgstr "Alleen Link-Local"
 
-#: panels/network/network-wifi.ui:781 panels/network/network-wifi.ui:1058
+#: panels/network/network-wifi.ui:780 panels/network/network-wifi.ui:1057
 msgid "Shared with other computers"
 msgstr "Gedeeld met andere computers"
 
-#: panels/network/network-wifi.ui:917 panels/network/network-wifi.ui:1194
+#: panels/network/network-wifi.ui:916 panels/network/network-wifi.ui:1193
 msgid "_Ignore automatically obtained routes"
 msgstr "Automatisch verkregen routes _negeren"
 
-#: panels/network/network-wifi.ui:960
+#: panels/network/network-wifi.ui:959
 msgid "ipv4"
 msgstr "ipv4"
 
-#: panels/network/network-wifi.ui:991
+#: panels/network/network-wifi.ui:990
 msgid "IPv_6"
 msgstr "IPv_6"
 
-#: panels/network/network-wifi.ui:1237
+#: panels/network/network-wifi.ui:1236
 msgid "ipv6"
 msgstr "ipv6"
 
-#: panels/network/network-wifi.ui:1277
+#: panels/network/network-wifi.ui:1276
 msgid "_Cloned MAC Address"
 msgstr "Ge_kloond MAC-adres"
 
-#: panels/network/network-wifi.ui:1327
-msgid "hardware"
-msgstr "hardware"
-
-#: panels/network/network-wifi.ui:1346
+#: panels/network/network-wifi.ui:1334
 msgid "_Reset"
 msgstr "_Opnieuw instellen"
 
-#: panels/network/network-wifi.ui:1382
+#: panels/network/network-wifi.ui:1370
 msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
@@ -3011,7 +3052,7 @@ msgstr ""
 "Instellingen voor deze verbinding terugzetten naar standaardinstellingen, "
 "maar onthouden als een voorkeursnetwerk."
 
-#: panels/network/network-wifi.ui:1399
+#: panels/network/network-wifi.ui:1387
 msgid ""
 "Remove all details relating to this network and do not try to automatically "
 "connect to it."
@@ -3019,83 +3060,55 @@ msgstr ""
 "Alle details met betrekking tot dit netwerk verwijderen, en niet proberen "
 "automatisch verbinding te maken."
 
-#: panels/network/network-wifi.ui:1419
-msgid "reset"
-msgstr "opnieuw instellen"
-
-#: panels/network/network-wifi.ui:1472
+#: panels/network/network-wifi.ui:1449
 msgid "Hardware"
 msgstr "Hardware"
 
-#: panels/network/network-wifi.ui:1476
+#: panels/network/network-wifi.ui:1453
 msgctxt "tab"
 msgid "Reset"
 msgstr "Opnieuw instellen"
 
-#: panels/network/network-wifi.ui:1537
+#: panels/network/network-wifi.ui:1514
 msgid "Wi-Fi Hotspot"
 msgstr "Wifi-hotspot"
 
-#: panels/network/network-wifi.ui:1554
+#: panels/network/network-wifi.ui:1531
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr "Uitschakelen om te verbinden met een wifi-netwerk"
 
-#: panels/network/network-wifi.ui:1603
+#: panels/network/network-wifi.ui:1580
 msgid "Network Name"
 msgstr "Netwerknaam"
 
-#: panels/network/network-wifi.ui:1621
+#: panels/network/network-wifi.ui:1598
 msgid "Connected Devices"
 msgstr "Verbonden apparaten"
 
-#: panels/network/network-wifi.ui:1639
+#: panels/network/network-wifi.ui:1616
 msgid "Security type"
 msgstr "Beveiligingstype"
 
-#: panels/network/network-wifi.ui:1702
+#: panels/network/network-wifi.ui:1679
 msgctxt "Wi-Fi passkey"
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: panels/network/network-wifi.ui:1799
+#: panels/network/network-wifi.ui:1776
 msgid "Turn Wi-Fi off"
 msgstr "Wifi uitschakelen"
 
-#: panels/network/network-wifi.ui:1831
+#: panels/network/network-wifi.ui:1808
 msgid "_Connect to Hidden Network…"
 msgstr "_Verbinden met een verborgen netwerk…"
 
-#: panels/network/network-wifi.ui:1841
+#: panels/network/network-wifi.ui:1818
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "Wifi-hotspot i_nschakelen…"
 
-#: panels/network/network-wifi.ui:1851
+#: panels/network/network-wifi.ui:1828
 msgid "_Known Wi-Fi Networks"
 msgstr "Be_kende wifi-netwerken"
-
-#: panels/network/wifi.ui:40
-msgid "No Wi-Fi Adapter Found"
-msgstr "Geen wifi-adapter gevonden"
-
-#: panels/network/wifi.ui:52
-msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
-msgstr "Zorg ervoor dat u een wifi-adapter heeft aangesloten en ingeschakeld"
-
-#: panels/network/wifi.ui:127
-msgid "Airplane Mode"
-msgstr "Vliegtuigstand"
-
-#: panels/network/wifi.ui:142
-msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
-msgstr "Schakelt wifi, bluetooth en mobiel breedband uit"
-
-#: panels/network/wifi.ui:192
-msgid "Visible Networks"
-msgstr "Zichtbare netwerken"
-
-#: panels/network/wifi.ui:271
-msgid "NetworkManager needs to be running"
-msgstr "Netwerkbeheer moet draaien"
 
 #. TRANSLATORS: AP type
 #: panels/network/panel-common.c:127
@@ -3749,23 +3762,23 @@ msgid "_Type"
 msgstr "_Type"
 
 #. This is the per application switch for message tray usage.
-#: panels/notifications/edit-dialog.ui:64
+#: panels/notifications/cc-app-notifications-dialog.ui:61
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "_Notificaties"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/edit-dialog.ui:116
+#: panels/notifications/cc-app-notifications-dialog.ui:113
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "Geluids_waarschuwingen"
 
-#: panels/notifications/edit-dialog.ui:172
+#: panels/notifications/cc-app-notifications-dialog.ui:169
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "_Notificaties"
 
-#: panels/notifications/edit-dialog.ui:188
+#: panels/notifications/cc-app-notifications-dialog.ui:185
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
@@ -3774,17 +3787,17 @@ msgstr ""
 "wanneer pop-ups uitgeschakeld zijn."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/edit-dialog.ui:253
+#: panels/notifications/cc-app-notifications-dialog.ui:250
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "Bericht_inhoud tonen in pop-ups"
 
-#: panels/notifications/edit-dialog.ui:304
+#: panels/notifications/cc-app-notifications-dialog.ui:301
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Notificaties op _vergrendelingsscherm"
 
-#: panels/notifications/edit-dialog.ui:355
+#: panels/notifications/cc-app-notifications-dialog.ui:352
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "_Berichtinhoud tonen op vergrendelingsscherm"
@@ -3830,19 +3843,19 @@ msgstr "Overige"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:596
+#: panels/online-accounts/cc-online-accounts-panel.c:612
 #, c-format
 msgid "%s Account"
 msgstr "%s-account"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:888
+#: panels/online-accounts/cc-online-accounts-panel.c:904
 msgid "Error removing account"
 msgstr "Fout tijdens verwijderen van het account"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:953
+#: panels/online-accounts/cc-online-accounts-panel.c:969
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "<b>%s</b> verwijderd"
@@ -3895,18 +3908,18 @@ msgstr "Een account toevoegen"
 msgid "Remove Account"
 msgstr "Account verwijderen"
 
-#: panels/power/cc-power-panel.c:253
+#: panels/power/cc-power-panel.c:260
 msgid "Unknown time"
 msgstr "Onbekende tijd"
 
-#: panels/power/cc-power-panel.c:259
+#: panels/power/cc-power-panel.c:266
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minuut"
 msgstr[1] "%i minuten"
 
-#: panels/power/cc-power-panel.c:271
+#: panels/power/cc-power-panel.c:278
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3915,258 +3928,300 @@ msgstr[1] "%i uur"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: panels/power/cc-power-panel.c:279
+#: panels/power/cc-power-panel.c:286
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: panels/power/cc-power-panel.c:280
+#: panels/power/cc-power-panel.c:287
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "uur"
 msgstr[1] "uur"
 
-#: panels/power/cc-power-panel.c:281
+#: panels/power/cc-power-panel.c:288
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuut"
 msgstr[1] "minuten"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:300
+#: panels/power/cc-power-panel.c:307
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s totdat deze volledig opgeladen is"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:307
+#: panels/power/cc-power-panel.c:314
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Waarschuwing: %s resterend"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:312
+#: panels/power/cc-power-panel.c:319
 #, c-format
 msgid "%s remaining"
 msgstr "%s resterend"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:317 panels/power/cc-power-panel.c:345
+#: panels/power/cc-power-panel.c:324 panels/power/cc-power-panel.c:351
 msgid "Fully charged"
 msgstr "Volledig opgeladen"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:321 panels/power/cc-power-panel.c:349
+#: panels/power/cc-power-panel.c:328 panels/power/cc-power-panel.c:355
 msgid "Empty"
 msgstr "Leeg"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:336
+#: panels/power/cc-power-panel.c:342
 msgid "Charging"
 msgstr "Aan het opladen"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:341
+#: panels/power/cc-power-panel.c:347
 msgid "Discharging"
 msgstr "Aan het ontladen"
 
-#: panels/power/cc-power-panel.c:464
+#: panels/power/cc-power-panel.c:465
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Hoofd"
 
-#: panels/power/cc-power-panel.c:466
+#: panels/power/cc-power-panel.c:467
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Extra"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:537
+#: panels/power/cc-power-panel.c:535
 msgid "Wireless mouse"
 msgstr "Draadloze muis"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:540
+#: panels/power/cc-power-panel.c:538
 msgid "Wireless keyboard"
 msgstr "Draadloos toetsenbord"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:543
+#: panels/power/cc-power-panel.c:541
 msgid "Uninterruptible power supply"
 msgstr "Onderbrekingsvrije voeding"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:546
+#: panels/power/cc-power-panel.c:544
 msgid "Personal digital assistant"
 msgstr "Personal digital assistant"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:549
+#: panels/power/cc-power-panel.c:547
 msgid "Cellphone"
 msgstr "Mobiele telefoon"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:552
+#: panels/power/cc-power-panel.c:550
 msgid "Media player"
 msgstr "Mediaspeler"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:555 panels/wacom/cc-wacom-panel.c:793
+#: panels/power/cc-power-panel.c:553 panels/wacom/cc-wacom-panel.c:807
 msgid "Tablet"
 msgstr "Tablet"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:558
+#: panels/power/cc-power-panel.c:556
 msgid "Computer"
 msgstr "Computer"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:561
+#: panels/power/cc-power-panel.c:559
 msgid "Gaming input device"
 msgstr "Gamings-invoerapparaat"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:564 panels/power/cc-power-panel.c:804
-#: panels/power/cc-power-panel.c:2380
+#: panels/power/cc-power-panel.c:562 panels/power/cc-power-panel.c:814
+#: panels/power/cc-power-panel.c:2400
 msgid "Battery"
 msgstr "Accu"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:618
+#: panels/power/cc-power-panel.c:622
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Aan het opladen"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:625
+#: panels/power/cc-power-panel.c:629
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Waarschuwing"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:630
+#: panels/power/cc-power-panel.c:634
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Laag"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:635
+#: panels/power/cc-power-panel.c:639
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Goed"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:640
+#: panels/power/cc-power-panel.c:644
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Volledig opgeladen"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:644
+#: panels/power/cc-power-panel.c:648
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Leeg"
 
-#: panels/power/cc-power-panel.c:802
+#: panels/power/cc-power-panel.c:812
 msgid "Batteries"
 msgstr "Accu’s"
 
-#: panels/power/cc-power-panel.c:1242
+#: panels/power/cc-power-panel.c:1172
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d uur"
+msgstr[1] "%d uur"
+
+#: panels/power/cc-power-panel.c:1174
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minuut"
+msgstr[1] "%d minuten"
+
+#: panels/power/cc-power-panel.c:1177
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d seconde"
+msgstr[1] "%d seconden"
+
+#. 5 hours 2 minutes 12 seconds
+#: panels/power/cc-power-panel.c:1182
+#, c-format
+msgctxt "time"
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
+#. 2 minutes 12 seconds
+#: panels/power/cc-power-panel.c:1185
+#, c-format
+msgctxt "time"
+msgid "%s %s"
+msgstr "%s %s"
+
+#. 0 seconds
+#: panels/power/cc-power-panel.c:1191
+msgid "0 seconds"
+msgstr "0 seconden"
+
+#: panels/power/cc-power-panel.c:1286
 msgid "When _idle"
 msgstr "Wanneer i_nactief"
 
-#: panels/power/cc-power-panel.c:1696
+#: panels/power/cc-power-panel.c:1736
 msgid "Power Saving"
 msgstr "Energiebesparing"
 
-#: panels/power/cc-power-panel.c:1727
+#: panels/power/cc-power-panel.c:1766
 msgid "_Screen brightness"
 msgstr "Helderheid beeld_scherm"
 
-#: panels/power/cc-power-panel.c:1746
+#: panels/power/cc-power-panel.c:1785
 msgid "Automatic brightness"
 msgstr "Automatische helderheid"
 
-#: panels/power/cc-power-panel.c:1766
+#: panels/power/cc-power-panel.c:1805
 msgid "_Keyboard brightness"
 msgstr "_Helderheid toetsenbord"
 
-#: panels/power/cc-power-panel.c:1776
+#: panels/power/cc-power-panel.c:1815
 msgid "_Dim screen when inactive"
 msgstr "Scherm _dimmen wanneer inactief"
 
-#: panels/power/cc-power-panel.c:1801
+#: panels/power/cc-power-panel.c:1840
 msgid "_Blank screen"
 msgstr "_Zwart scherm"
 
-#: panels/power/cc-power-panel.c:1838
+#: panels/power/cc-power-panel.c:1877
 msgid "_Wi-Fi"
 msgstr "_Wifi"
 
-#: panels/power/cc-power-panel.c:1843
-msgid "Turn off Wi-Fi to save power."
-msgstr "Schakel wifi uit om energie te besparen."
+#: panels/power/cc-power-panel.c:1882
+msgid "Wi-Fi can be turned off to save power."
+msgstr "Wifi kan worden uitgeschakeld om energie te besparen."
 
-#: panels/power/cc-power-panel.c:1868
+#: panels/power/cc-power-panel.c:1907
 msgid "_Mobile broadband"
 msgstr "_Mobiel breedband"
 
-#: panels/power/cc-power-panel.c:1873
-msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
+#: panels/power/cc-power-panel.c:1912
+msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
-"Mobiele breedband (3G, 4G, LTE, etc.) uitschakelen om energie te sparen."
+"Mobiele breedband (LTE, 4G, 3G, etc.) kan worden uitgeschakeld om energie te "
+"besparen."
 
-#: panels/power/cc-power-panel.c:1926
+#: panels/power/cc-power-panel.c:1971
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:1931
-msgid "Turn off Bluetooth to save power."
-msgstr "Schakel Bluetooth uit om energie te besparen."
+#: panels/power/cc-power-panel.c:1976
+msgid "Bluetooth can be turned off to save power."
+msgstr "Bluetooth kan worden uitgeschakeld om energie te besparen."
 
-#: panels/power/cc-power-panel.c:1990
+#: panels/power/cc-power-panel.c:2034
 msgid "When on battery power"
 msgstr "Wanneer op accustroom"
 
-#: panels/power/cc-power-panel.c:1992
+#: panels/power/cc-power-panel.c:2036
 msgid "When plugged in"
 msgstr "Als de kabel aangesloten is"
 
-#: panels/power/cc-power-panel.c:2087
+#: panels/power/cc-power-panel.c:2130
 msgid "Suspend"
 msgstr "Pauzestand"
 
-#: panels/power/cc-power-panel.c:2088
+#: panels/power/cc-power-panel.c:2131
 msgid "Power Off"
 msgstr "Uitschakelen"
 
-#: panels/power/cc-power-panel.c:2089
+#: panels/power/cc-power-panel.c:2132
 msgid "Hibernate"
 msgstr "Slaapstand"
 
-#: panels/power/cc-power-panel.c:2090
+#: panels/power/cc-power-panel.c:2133
 msgid "Nothing"
 msgstr "Niets doen"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2204
+#: panels/power/cc-power-panel.c:2233
 msgid "Suspend & Power Button"
 msgstr "Pauzestand en uitschakelen"
 
-#: panels/power/cc-power-panel.c:2243
+#: panels/power/cc-power-panel.c:2271
 msgid "_Automatic suspend"
 msgstr "_Automatisch in pauzestand zetten"
 
-#: panels/power/cc-power-panel.c:2244
+#: panels/power/cc-power-panel.c:2272
 msgid "Automatic suspend"
 msgstr "Automatisch in pauzestand zetten"
 
-#: panels/power/cc-power-panel.c:2311
+#: panels/power/cc-power-panel.c:2335
 msgid "_When the Power Button is pressed"
 msgstr "Als de _aan-/uitknop wordt ingedrukt"
 
-#: panels/power/cc-power-panel.c:2430 shell/cc-window.c:218
-#: shell/panel-list.ui:45
+#: panels/power/cc-power-panel.c:2445 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
+#: shell/cc-window.c:247
 msgid "Devices"
 msgstr "Apparaten"
 
@@ -4256,20 +4311,20 @@ msgstr "10 minuten"
 msgid "12 minutes"
 msgstr "12 minuten"
 
-#: panels/power/power.ui:155
+#: panels/power/power.ui:167
 msgid "Automatic Suspend"
 msgstr "Automatisch in pauzestand zetten"
 
-#: panels/power/power.ui:180
+#: panels/power/power.ui:192
 msgid "_Plugged In"
 msgstr "_Aangesloten"
 
-#: panels/power/power.ui:196
+#: panels/power/power.ui:208
 msgid "On _Battery Power"
 msgstr "Op _accustroom"
 
-#: panels/power/power.ui:241 panels/power/power.ui:301
-#: panels/universal-access/uap.ui:1501
+#: panels/power/power.ui:253 panels/power/power.ui:313
+#: panels/universal-access/uap.ui:1507
 msgid "Delay"
 msgstr "Vertraging"
 
@@ -4289,35 +4344,35 @@ msgstr "Controleren"
 
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
-#: panels/printers/jobs-dialog.ui:57 panels/printers/new-printer-dialog.ui:361
+#: panels/printers/jobs-dialog.ui:57 panels/printers/new-printer-dialog.ui:362
 msgid "Username"
 msgstr "Gebruikersnaam"
 
 #. Translators: This is a password needed for printing.
 #: panels/printers/authentication-dialog.ui:96
-#: panels/printers/jobs-dialog.ui:70 panels/printers/new-printer-dialog.ui:382
+#: panels/printers/jobs-dialog.ui:70 panels/printers/new-printer-dialog.ui:383
 #: panels/user-accounts/data/account-dialog.ui:240
 msgid "Password"
 msgstr "Wachtwoord"
 
 #: panels/printers/authentication-dialog.ui:139
-#: panels/printers/new-printer-dialog.ui:336
+#: panels/printers/new-printer-dialog.ui:337
 msgid "Authentication Required"
 msgstr "Authenticatie vereist"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:808
+#: panels/printers/cc-printers-panel.c:809
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Printer ‘%s’ is verwijderd"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:1053
+#: panels/printers/cc-printers-panel.c:1057
 msgid "Failed to add new printer."
 msgstr "Nieuwe printer toevoegen mislukt."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1388
+#: panels/printers/cc-printers-panel.c:1394
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Kon ui niet laden: %s"
@@ -4407,16 +4462,16 @@ msgid "_Unlock"
 msgstr "_Ontgrendelen"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:210
+#: panels/printers/new-printer-dialog.ui:211
 msgid "No Printers Found"
 msgstr "Geen printers gevonden"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:283
+#: panels/printers/new-printer-dialog.ui:284
 msgid "Enter a network address or search for a printer"
 msgstr "Voer een netwerkadres in of zoek naar een printer"
 
-#: panels/printers/new-printer-dialog.ui:352
+#: panels/printers/new-printer-dialog.ui:353
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
 "Voer uw gebruikersnaam en wachtwoord in om printers op printserver te "
@@ -4429,22 +4484,22 @@ msgid "Test Page"
 msgstr "Testpagina"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: panels/printers/pp-details-dialog.c:135
-#: panels/printers/pp-details-dialog.c:435
+#: panels/printers/pp-details-dialog.c:134
+#: panels/printers/pp-details-dialog.c:434
 #, c-format
 msgid "%s Details"
 msgstr "Details van %s"
 
 # geen/zonder
-#: panels/printers/pp-details-dialog.c:184
+#: panels/printers/pp-details-dialog.c:183
 msgid "No suitable driver found"
 msgstr "Geen geschikt stuurprogramma aangetroffen"
 
-#: panels/printers/pp-details-dialog.c:328
+#: panels/printers/pp-details-dialog.c:327
 msgid "Select PPD File"
 msgstr "PPD-bestand selecteren"
 
-#: panels/printers/pp-details-dialog.c:337
+#: panels/printers/pp-details-dialog.c:336
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4457,7 +4512,7 @@ msgid "Select Printer Driver"
 msgstr "Printerstuurprogramma kiezen"
 
 #: panels/printers/ppd-selection-dialog.ui:40
-#: panels/user-accounts/um-photo-dialog.c:104
+#: panels/user-accounts/um-photo-dialog.c:105
 msgid "Select"
 msgstr "Selecteren"
 
@@ -4572,14 +4627,14 @@ msgstr[0] "%u taak vereist authenticatie"
 msgstr[1] "%u taken vereisen authenticatie"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:620
+#: panels/printers/pp-jobs-dialog.c:617
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — Actieve afdruktaken"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:625
+#: panels/printers/pp-jobs-dialog.c:622
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Voer uw aanmeldgegevens in om af te drukken op %s."
@@ -4600,39 +4655,39 @@ msgstr "%s ontgrendelen."
 msgid "Enter username and password to view printers on %s."
 msgstr "Voer uw gebruikersnaam en wachtwoord in om printers op %s te bekijken."
 
-#: panels/printers/pp-new-printer-dialog.c:876
+#: panels/printers/pp-new-printer-dialog.c:894
 msgid "Searching for Printers"
 msgstr "Naar printers zoeken"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1799
+#: panels/printers/pp-new-printer-dialog.c:1814
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1804
+#: panels/printers/pp-new-printer-dialog.c:1819
 msgid "Serial Port"
 msgstr "Seriële poort"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1811
+#: panels/printers/pp-new-printer-dialog.c:1826
 msgid "Parallel Port"
 msgstr "Parallelle poort"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1853
+#: panels/printers/pp-new-printer-dialog.c:1868
 #, c-format
 msgid "Location: %s"
 msgstr "Locatie: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1858
+#: panels/printers/pp-new-printer-dialog.c:1873
 #, c-format
 msgid "Address: %s"
 msgstr "Adres: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1887
+#: panels/printers/pp-new-printer-dialog.c:1902
 msgid "Server requires authentication"
 msgstr "Server vereist authenticatie"
 
@@ -4761,12 +4816,12 @@ msgid "Manufacturer"
 msgstr "Fabrikant"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:598 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:615 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "Geen actieve afdruktaken"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:603
+#: panels/printers/pp-printer-entry.c:620
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -4774,115 +4829,115 @@ msgstr[0] "%u taak"
 msgstr[1] "%u taken"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:766
+#: panels/printers/pp-printer-entry.c:780
 msgid "Low on toner"
 msgstr "Weinig toner"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:768
+#: panels/printers/pp-printer-entry.c:782
 msgid "Out of toner"
 msgstr "Geen toner meer"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:771
+#: panels/printers/pp-printer-entry.c:785
 msgid "Low on developer"
 msgstr "Weinig developer (voor ontwikkelen)"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:774
+#: panels/printers/pp-printer-entry.c:788
 msgid "Out of developer"
 msgstr "Geen developer meer (voor ontwikkelen)"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:776
+#: panels/printers/pp-printer-entry.c:790
 msgid "Low on a marker supply"
 msgstr "Weinig marker-voorraad"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:778
+#: panels/printers/pp-printer-entry.c:792
 msgid "Out of a marker supply"
 msgstr "Geen marker meer"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:780
+#: panels/printers/pp-printer-entry.c:794
 msgid "Open cover"
 msgstr "Klep open"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:782
+#: panels/printers/pp-printer-entry.c:796
 msgid "Open door"
 msgstr "Deur open"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:784
+#: panels/printers/pp-printer-entry.c:798
 msgid "Low on paper"
 msgstr "Weinig papier"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:786
+#: panels/printers/pp-printer-entry.c:800
 msgid "Out of paper"
 msgstr "Geen papier meer"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:788
+#: panels/printers/pp-printer-entry.c:802
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Offline"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:790
-#: panels/printers/pp-printer-entry.c:920
+#: panels/printers/pp-printer-entry.c:804
+#: panels/printers/pp-printer-entry.c:932
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Gestopt"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:792
+#: panels/printers/pp-printer-entry.c:806
 msgid "Waste receptacle almost full"
 msgstr "Afvalbakje bijna vol"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:794
+#: panels/printers/pp-printer-entry.c:808
 msgid "Waste receptacle full"
 msgstr "Afvalbakje vol"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:796
+#: panels/printers/pp-printer-entry.c:810
 msgid "The optical photo conductor is near end of life"
 msgstr ""
 "De optische lichtgevoelige geleider (optical photo conductor) is bijna niet "
 "meer te gebruiken"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:798
+#: panels/printers/pp-printer-entry.c:812
 msgid "The optical photo conductor is no longer functioning"
 msgstr ""
 "De optische lichtgevoelige geleider (optical photo conductor) functioneert "
 "niet meer"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:906
+#: panels/printers/pp-printer-entry.c:918
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Gereed"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:911
+#: panels/printers/pp-printer-entry.c:923
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Taken worden niet geaccepteerd"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:916
+#: panels/printers/pp-printer-entry.c:928
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Verwerken"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:940
+#: panels/printers/pp-printer-entry.c:952
 msgid "Clean print heads"
 msgstr "Printkoppen schoonmaken"
 
@@ -4951,70 +5006,70 @@ msgstr ""
 "Helaas, de systeemservice voor\n"
 "afdrukken is niet beschikbaar."
 
-#: panels/privacy/cc-privacy-panel.c:387 panels/privacy/privacy.ui:280
+#: panels/privacy/cc-privacy-panel.c:389 panels/privacy/privacy.ui:280
 msgid "Screen Lock"
 msgstr "Schermvergrendeling"
 
-#: panels/privacy/cc-privacy-panel.c:438
+#: panels/privacy/cc-privacy-panel.c:439
 msgid "In use"
 msgstr "In gebruik"
 
-#: panels/privacy/cc-privacy-panel.c:443
+#: panels/privacy/cc-privacy-panel.c:444
 msgctxt "Location services status"
 msgid "On"
 msgstr "Aan"
 
-#: panels/privacy/cc-privacy-panel.c:444
+#: panels/privacy/cc-privacy-panel.c:445
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Uit"
 
-#: panels/privacy/cc-privacy-panel.c:823 panels/privacy/privacy.ui:745
+#: panels/privacy/cc-privacy-panel.c:820 panels/privacy/privacy.ui:745
 msgid "Location Services"
 msgstr "Locatiediensten"
 
-#: panels/privacy/cc-privacy-panel.c:946 panels/privacy/privacy.ui:127
+#: panels/privacy/cc-privacy-panel.c:943 panels/privacy/privacy.ui:127
 msgid "Usage & History"
 msgstr "Gebruik en geschiedenis"
 
-#: panels/privacy/cc-privacy-panel.c:1075
+#: panels/privacy/cc-privacy-panel.c:1072
 msgid "Empty all items from Trash?"
 msgstr "Alle items uit prullenbak verwijderen?"
 
-#: panels/privacy/cc-privacy-panel.c:1076
+#: panels/privacy/cc-privacy-panel.c:1073
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Alle items in de prullenbak zullen definitief verwijderd worden."
 
-#: panels/privacy/cc-privacy-panel.c:1077
+#: panels/privacy/cc-privacy-panel.c:1074
 msgid "_Empty Trash"
 msgstr "Prullenbak l_egen"
 
-#: panels/privacy/cc-privacy-panel.c:1100
+#: panels/privacy/cc-privacy-panel.c:1097
 msgid "Delete all the temporary files?"
 msgstr "Alle tijdelijke bestanden verwijderen?"
 
-#: panels/privacy/cc-privacy-panel.c:1101
+#: panels/privacy/cc-privacy-panel.c:1098
 msgid "All the temporary files will be permanently deleted."
 msgstr "Alle tijdelijke bestanden zullen definitief verwijderd worden."
 
-#: panels/privacy/cc-privacy-panel.c:1102
+#: panels/privacy/cc-privacy-panel.c:1099
 msgid "_Purge Temporary Files"
 msgstr "Tijdelijke bestanden _definitief verwijderen"
 
-#: panels/privacy/cc-privacy-panel.c:1124 panels/privacy/privacy.ui:432
+#: panels/privacy/cc-privacy-panel.c:1121 panels/privacy/privacy.ui:432
 msgid "Purge Trash & Temporary Files"
 msgstr "Prullenbak legen en tijdelijke bestanden definitief verwijderen"
 
-#: panels/privacy/cc-privacy-panel.c:1164 panels/privacy/privacy.ui:637
+#: panels/privacy/cc-privacy-panel.c:1161 panels/privacy/privacy.ui:637
 msgid "Software Usage"
 msgstr "Softwaregebruik"
 
-#: panels/privacy/cc-privacy-panel.c:1205 panels/privacy/privacy.ui:959
+#: panels/privacy/cc-privacy-panel.c:1202 panels/privacy/privacy.ui:959
 msgid "Problem Reporting"
 msgstr "Problemen melden"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: panels/privacy/cc-privacy-panel.c:1219
+#: panels/privacy/cc-privacy-panel.c:1216
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -5024,7 +5079,7 @@ msgstr ""
 "verbeteren. Rapporten worden anoniem verstuurd en bevatten geen persoonlijke "
 "gegevens."
 
-#: panels/privacy/cc-privacy-panel.c:1231 panels/privacy/privacy.ui:719
+#: panels/privacy/cc-privacy-panel.c:1228 panels/privacy/privacy.ui:719
 msgid "Privacy Policy"
 msgstr "Privacybeleid"
 
@@ -5208,70 +5263,70 @@ msgid "_Automatic Problem Reporting"
 msgstr "Problemen _automatisch melden"
 
 # Maatsysteem dat in de VS wordt gebruikt met inch, foot en pound.
-#: panels/region/cc-format-chooser.c:118
+#: panels/region/cc-format-chooser.c:114
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Imperiaal (Brits-Amerikaans)"
 
-#: panels/region/cc-format-chooser.c:120
+#: panels/region/cc-format-chooser.c:116
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrisch"
 
-#: panels/region/cc-format-chooser.c:285
+#: panels/region/cc-format-chooser.c:277
 msgid "No regions found"
 msgstr "Geen regio’s gevonden"
 
-#: panels/region/cc-input-chooser.c:182
-msgid "No input sources found"
-msgstr "Er zijn geen invoerbronnen aangetroffen"
-
-#: panels/region/cc-input-chooser.c:1012
-msgctxt "Input Source"
-msgid "Other"
-msgstr "Overige"
-
-#: panels/region/cc-region-panel.c:881
-msgid "No input source selected"
-msgstr "Er zijn geen invoerbronnen geselecteerd"
-
-#: panels/region/cc-region-panel.c:1773
-msgid "Login _Screen"
-msgstr "Aanmeld_scherm"
-
-#: panels/region/format-chooser.ui:7
+#: panels/region/cc-format-chooser.ui:7
 msgid "Formats"
 msgstr "Formaten"
 
-#: panels/region/format-chooser.ui:120
+#: panels/region/cc-format-chooser.ui:120
 msgid "Preview"
 msgstr "Voorbeeld"
 
-#: panels/region/format-chooser.ui:137
+#: panels/region/cc-format-chooser.ui:137
 msgid "Dates"
 msgstr "Data"
 
 # Is dit intervaltijd uit de dubbelklik-pref of iets anders?
 # Rachid: het wordt in de code gebruikt bij datum en de opmaak voor tijd dingen dus het lijkt mij iets met TIJD te maken te hebben ;)
-#: panels/region/format-chooser.ui:168
+#: panels/region/cc-format-chooser.ui:168
 msgid "Times"
 msgstr "Tijden"
 
-#: panels/region/format-chooser.ui:199
+#: panels/region/cc-format-chooser.ui:199
 msgid "Dates & Times"
 msgstr "Datum en tijd"
 
-#: panels/region/format-chooser.ui:230
+#: panels/region/cc-format-chooser.ui:230
 msgid "Numbers"
 msgstr "Getallen"
 
-#: panels/region/format-chooser.ui:247
+#: panels/region/cc-format-chooser.ui:247
 msgid "Measurement"
 msgstr "Maatsysteem"
 
-#: panels/region/format-chooser.ui:264
+#: panels/region/cc-format-chooser.ui:264
 msgid "Paper"
 msgstr "Papiersoort"
+
+#: panels/region/cc-input-chooser.c:181
+msgid "No input sources found"
+msgstr "Er zijn geen invoerbronnen aangetroffen"
+
+#: panels/region/cc-input-chooser.c:953
+msgctxt "Input Source"
+msgid "Other"
+msgstr "Overige"
+
+#: panels/region/cc-region-panel.c:801
+msgid "No input source selected"
+msgstr "Er zijn geen invoerbronnen geselecteerd"
+
+#: panels/region/cc-region-panel.c:1596
+msgid "Login _Screen"
+msgstr "Aanmeld_scherm"
 
 #: panels/region/gnome-region-panel.desktop.in.in:3
 msgid "Region & Language"
@@ -5297,7 +5352,7 @@ msgstr "Language;Layout;Keyboard;Taal;Indeling;Toetsenbord;"
 msgid "Add an Input Source"
 msgstr "Invoerbron toevoegen"
 
-#: panels/region/input-chooser.ui:76
+#: panels/region/input-chooser.ui:78
 msgid "Input methods can’t be used on the login screen"
 msgstr "Invoermethodes kunnen niet gebruikt worden in het aanmeldscherm"
 
@@ -5341,78 +5396,70 @@ msgstr "Alternatieve overschakeling naar volgende bron"
 msgid "Left+Right Alt"
 msgstr "Linker+rechter Alt"
 
-#: panels/region/region.ui:67
+#: panels/region/region.ui:71
 #: panels/user-accounts/data/user-accounts-dialog.ui:348
 msgid "_Language"
 msgstr "_Taal"
 
-#: panels/region/region.ui:85
-msgid "English (United Kingdom)"
-msgstr "Engels (Verenigd Koninkrijk)"
-
-#: panels/region/region.ui:112
+#: panels/region/region.ui:115
 msgid "Restart the session for changes to take effect"
 msgstr "Om de wijzigingen door te voeren moet de sessie opnieuw gestart worden"
 
-#: panels/region/region.ui:134
+#: panels/region/region.ui:137
 msgid "Restart…"
 msgstr "Herstarten…"
 
-#: panels/region/region.ui:169
+#: panels/region/region.ui:173
 msgid "_Formats"
 msgstr "_Formaten"
 
-#: panels/region/region.ui:187
-msgid "United Kingdom"
-msgstr "Verenigd Koninkrijk"
-
-#: panels/region/region.ui:229
+#: panels/region/region.ui:232
 msgid "Input Sources"
 msgstr "Invoerbron"
 
-#: panels/region/region.ui:245
+#: panels/region/region.ui:248
 msgid "_Options"
 msgstr "_Opties"
 
-#: panels/region/region.ui:311
+#: panels/region/region.ui:316
 msgid "Add input source"
 msgstr "Invoerbron toevoegen"
 
-#: panels/region/region.ui:336
+#: panels/region/region.ui:342
 msgid "Remove input source"
 msgstr "Invoerbron verwijderen"
 
-#: panels/region/region.ui:386
+#: panels/region/region.ui:393
 msgid "Move input source up"
 msgstr "Invoerbron naar boven verplaatsen"
 
-#: panels/region/region.ui:411
+#: panels/region/region.ui:419
 msgid "Move input source down"
 msgstr "Invoerbron naar beneden verplaatsen"
 
-#: panels/region/region.ui:461
+#: panels/region/region.ui:470
 msgid "Configure input source"
 msgstr "Invoerbron configureren"
 
-#: panels/region/region.ui:486
+#: panels/region/region.ui:496
 msgid "Show input source keyboard layout"
 msgstr "Invoerbron toetsenbordindeling tonen"
 
-#: panels/region/region.ui:530
+#: panels/region/region.ui:540
 msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "Aanmeldinstellingen worden gebruikt door alle gebruikers die zich aanmelden "
 "bij het systeem"
 
-#: panels/search/cc-search-locations-dialog.c:639
+#: panels/search/cc-search-locations-dialog.c:600
 msgid "Select Location"
 msgstr "Locatie selecteren"
 
-#: panels/search/cc-search-locations-dialog.c:643
+#: panels/search/cc-search-locations-dialog.c:604
 msgid "_OK"
 msgstr "_OK"
 
-#: panels/search/cc-search-panel.c:178
+#: panels/search/cc-search-panel.c:175
 msgid "No applications found"
 msgstr "Geen toepassingen aangetroffen"
 
@@ -5448,48 +5495,48 @@ msgstr "Bladwijzers"
 msgid "Other"
 msgstr "Overige"
 
-#: panels/search/search.ui:66
+#: panels/search/search.ui:71
 msgid "Move Up"
 msgstr "Naar boven"
 
-#: panels/search/search.ui:83
+#: panels/search/search.ui:88
 msgid "Move Down"
 msgstr "Naar beneden"
 
-#: panels/search/search.ui:119
+#: panels/search/search.ui:124
 msgid "Preferences"
 msgstr "Voorkeuren"
 
 #. Label
-#: panels/sharing/cc-sharing-networks.c:305
+#: panels/sharing/cc-sharing-networks.c:302
 msgid "No networks selected for sharing"
 msgstr "Geen netwerken geselecteerd om te delen"
 
-#: panels/sharing/cc-sharing-panel.c:275
+#: panels/sharing/cc-sharing-panel.c:318
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Aan"
 
-#: panels/sharing/cc-sharing-panel.c:277 panels/sharing/cc-sharing-panel.c:304
+#: panels/sharing/cc-sharing-panel.c:320 panels/sharing/cc-sharing-panel.c:347
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Uit"
 
-#: panels/sharing/cc-sharing-panel.c:307
+#: panels/sharing/cc-sharing-panel.c:350
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
-#: panels/sharing/cc-sharing-panel.c:310
+#: panels/sharing/cc-sharing-panel.c:353
 msgctxt "service is active"
 msgid "Active"
 msgstr "Actief"
 
-#: panels/sharing/cc-sharing-panel.c:381
+#: panels/sharing/cc-sharing-panel.c:423
 msgid "Choose a Folder"
 msgstr "Een map kiezen"
 
-#: panels/sharing/cc-sharing-panel.c:693
+#: panels/sharing/cc-sharing-panel.c:720
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5498,7 +5545,7 @@ msgstr ""
 "Met ‘Delen van persoonlijke bestanden’ kunt u de map ‘Openbaar’ delen met "
 "anderen op uw huidige netwerk via: <a href=\"dav://%s\">dav://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:695
+#: panels/sharing/cc-sharing-panel.c:722
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5509,7 +5556,7 @@ msgstr ""
 "verbinding maken via de Secure Shell-opdracht:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:697
+#: panels/sharing/cc-sharing-panel.c:724
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
@@ -5518,11 +5565,11 @@ msgstr ""
 "Met scherm delen kunnen gebruikers op afstand uw scherm te bekijken of "
 "besturen door te verbinden met <a href=\"vnc://%s\">vnc://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:809
+#: panels/sharing/cc-sharing-panel.c:828
 msgid "Copy"
 msgstr "Kopiëren"
 
-#: panels/sharing/cc-sharing-panel.c:1236
+#: panels/sharing/cc-sharing-panel.c:1279
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "Delen"
@@ -5558,79 +5605,79 @@ msgid "Authentication is required to enable or disable remote login"
 msgstr ""
 "Er is authenticatie vereist om aanmelden op afstand in of uit te schakelen"
 
-#: panels/sharing/sharing.ui:46
+#: panels/sharing/sharing.ui:50
 msgid "_Computer Name"
 msgstr "_Computernaam"
 
-#: panels/sharing/sharing.ui:104
+#: panels/sharing/sharing.ui:108
 msgid "_File Sharing"
 msgstr "Delen van _bestanden"
 
-#: panels/sharing/sharing.ui:147
+#: panels/sharing/sharing.ui:151
 msgid "_Screen Sharing"
 msgstr "_Scherm delen"
 
-#: panels/sharing/sharing.ui:190
+#: panels/sharing/sharing.ui:194
 msgid "_Media Sharing"
 msgstr "_Media delen"
 
-#: panels/sharing/sharing.ui:233
+#: panels/sharing/sharing.ui:237
 msgid "_Remote Login"
 msgstr "_Aanmelden op afstand"
 
-#: panels/sharing/sharing.ui:272
+#: panels/sharing/sharing.ui:276
 msgid "Some services are disabled because of no network access."
 msgstr "Sommige diensten zijn uitgeschakeld omdat er geen netwerktoegang is."
 
-#: panels/sharing/sharing.ui:286 panels/sharing/sharing.ui:413
+#: panels/sharing/sharing.ui:292 panels/sharing/sharing.ui:419
 msgid "File Sharing"
 msgstr "Delen van bestanden"
 
-#: panels/sharing/sharing.ui:333
+#: panels/sharing/sharing.ui:339
 msgid "_Require Password"
 msgstr "_Wachtwoord vereisen"
 
-#: panels/sharing/sharing.ui:424 panels/sharing/sharing.ui:496
+#: panels/sharing/sharing.ui:430 panels/sharing/sharing.ui:502
 msgid "Remote Login"
 msgstr "Aanmelden op afstand"
 
-#: panels/sharing/sharing.ui:519 panels/sharing/sharing.ui:765
+#: panels/sharing/sharing.ui:525 panels/sharing/sharing.ui:771
 msgid "Screen Sharing"
 msgstr "Scherm delen"
 
-#: panels/sharing/sharing.ui:577
+#: panels/sharing/sharing.ui:583
 msgid "_Allow connections to control the screen"
 msgstr "Verbindingen om het scherm te besturen toest_aan"
 
-#: panels/sharing/sharing.ui:622
+#: panels/sharing/sharing.ui:628
 msgid "_Password:"
 msgstr "_Wachtwoord:"
 
-#: panels/sharing/sharing.ui:652
+#: panels/sharing/sharing.ui:658
 msgid "_Show Password"
 msgstr "Wachtwoord _tonen"
 
-#: panels/sharing/sharing.ui:683
+#: panels/sharing/sharing.ui:689
 msgid "Access Options"
 msgstr "Toegangsopties"
 
-#: panels/sharing/sharing.ui:697
+#: panels/sharing/sharing.ui:703
 msgid "_New connections must ask for access"
 msgstr "_Nieuwe verbindingen moeten toegang vragen"
 
-#: panels/sharing/sharing.ui:715
+#: panels/sharing/sharing.ui:721
 msgid "_Require a password"
 msgstr "Een wachtwoord _vereisen"
 
-#: panels/sharing/sharing.ui:776 panels/sharing/sharing.ui:870
+#: panels/sharing/sharing.ui:782 panels/sharing/sharing.ui:876
 msgid "Media Sharing"
 msgstr "Media delen"
 
-#: panels/sharing/sharing.ui:809
+#: panels/sharing/sharing.ui:815
 msgid "Share music, photos and videos over the network."
 msgstr "Muziek, foto’s en video’s delen op het netwerk."
 
-#: panels/sharing/sharing.ui:824
+#: panels/sharing/sharing.ui:830
 msgid "Folders"
 msgstr "Mappen"
 
@@ -5840,34 +5887,221 @@ msgstr "Subwoofer"
 msgid "Custom"
 msgstr "Aangepast"
 
+#: panels/thunderbolt/cc-bolt-device-dialog.c:86
+#: panels/thunderbolt/cc-bolt-device-entry.c:119
+msgctxt "Thunderbolt Device Status"
+msgid "Disconnected"
+msgstr "Verbinding verbroken"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:89
+#: panels/thunderbolt/cc-bolt-device-entry.c:122
+msgctxt "Thunderbolt Device Status"
+msgid "Connecting"
+msgstr "Verbinden"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:92
+#: panels/thunderbolt/cc-bolt-device-entry.c:126
+#: panels/thunderbolt/cc-bolt-device-entry.c:138
+msgctxt "Thunderbolt Device Status"
+msgid "Connected"
+msgstr "Verbonden"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:95
+msgctxt "Thunderbolt Device Status"
+msgid "Authorization Error"
+msgstr "Authenticatie-fout"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:98
+#: panels/thunderbolt/cc-bolt-device-entry.c:132
+msgctxt "Thunderbolt Device Status"
+msgid "Authorizing"
+msgstr "Autoriseren"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:105
+msgctxt "Thunderbolt Device Status"
+msgid "Reduced Functionality"
+msgstr "Verminderde functionaliteit"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:107
+msgctxt "Thunderbolt Device Status"
+msgid "Connected & Authorized"
+msgstr "Verbonden en geautoriseerd"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:113
+#: panels/thunderbolt/cc-bolt-device-entry.c:146
+msgctxt "Thunderbolt Device Status"
+msgid "Unknown"
+msgstr "Onbekend"
+
+#. Translators: The time point the device was authorized.
+#: panels/thunderbolt/cc-bolt-device-dialog.c:169
+msgid "Authorized at:"
+msgstr "Geautoriseerd om:"
+
+#. Translators: The time point the device was connected.
+#: panels/thunderbolt/cc-bolt-device-dialog.c:175
+#| msgid "Connected"
+msgid "Connected at:"
+msgstr "Verbonden om:"
+
+#. Translators: The time point the device was enrolled,
+#. * i.e. authorized and stored in the device database.
+#: panels/thunderbolt/cc-bolt-device-dialog.c:182
+#| msgid "_Enroll"
+msgid "Enrolled at:"
+msgstr "Geregistreerd om:"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:250
+#| msgid "Failed to upload file: %s"
+msgid "Failed to authorize device: "
+msgstr "Autoriseren van apparaat mislukt: "
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:327
+#| msgid "Failed to upload file: %s"
+msgid "Failed to forget device: "
+msgstr "Vergeten van apparaat mislukt: "
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:109
+#| msgid "_Name:"
+msgid "Name:"
+msgstr "Naam:"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:141
+msgid "Status:"
+msgstr "Status:"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:174
+msgid "UUID:"
+msgstr "UUID:"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:280
+#| msgid "Automatic _Connect"
+msgid "Authorize and Connect"
+msgstr "Autoriseren en verbinden"
+
+# bij een browser is dit bladwijzers, maar hier is
+# favorieten/favoriet beter (favoriete programma's) (tino)
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:303
+#| msgid "Remove Device"
+msgid "Forget Device"
+msgstr "Apparaat vergeten"
+
+#: panels/thunderbolt/cc-bolt-device-entry.c:129
+msgctxt "Thunderbolt Device Status"
+msgid "Error"
+msgstr "Fout"
+
+# dit is de knop die naast het veld 'huidige wachtwoord' staat
+# als je je huidige wachtwoord hebt ingevuld en op 'Authenticate'
+# klikt (en het wachtwoord is juist) kun je je huidige wachtwoord
+# gaan wijzigen.
+# Dus letterlijke vertaling is 'Aanmeldingscontrole' maar in dit
+# geval houden we het kort en gebruiken we alleen 'Controle' (tino)
+#: panels/thunderbolt/cc-bolt-device-entry.c:140
+#| msgid "Authenticated"
+msgctxt "Thunderbolt Device Status"
+msgid "Authorized"
+msgstr "Geautoriseerd"
+
+#: panels/thunderbolt/cc-bolt-panel.c:175
+msgid ""
+"The Thunderbolt subsystem (boltd) is not installed or not set up properly."
+msgstr ""
+"Het Thunderbolt-subsysteem (boltd) is niet geïnstalleerd of niet correct"
+" ingesteld."
+
+#: panels/thunderbolt/cc-bolt-panel.c:460
+msgid ""
+"Thunderbolt could not be detected.\n"
+"Either the system lacks Thunderbolt support, it has been disabled in the "
+"BIOS or is set to an unsupported security level in the BIOS."
+msgstr ""
+"Thunderbolt kon niet worden gedetecteerd.\n"
+"Of het systeem ondersteunt Thunderbolt niet, of het is uitgeschakeld in de"
+" BIOS, of het is ingesteld op een niet-ondersteund beveiligingsniveau in de"
+" BIOS."
+
+#: panels/thunderbolt/cc-bolt-panel.c:504
+msgid "Thunderbolt support has been disabled in the BIOS."
+msgstr "De ondersteuning van Thunderbolt is uitgeschakeld in de BIOS."
+
+#: panels/thunderbolt/cc-bolt-panel.c:613
+#, c-format
+msgid "Error switching direct mode: %s"
+msgstr "Fout bij omschakelen naar directe modus: %s"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:143
+msgid "No Thunderbolt support"
+msgstr "Geen Thunderbolt-ondersteuning"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:246
+#| msgid "Universal Access"
+msgid "Direct Access"
+msgstr "Directe toegang"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:269
+msgid "Allow direct access to devices such as docks and external GPUs."
+msgstr "Directe toegang tot apparaten zoals docks en externe GPU's toestaan."
+
+#: panels/thunderbolt/cc-bolt-panel.ui:289
+msgid "Only USB and Display Port devices can attach."
+msgstr "Alleen USB- en Display Port-apparaten kunnen worden aangesloten."
+
+#: panels/thunderbolt/cc-bolt-panel.ui:397
+#| msgid "Add Device"
+msgid "Pending Devices"
+msgstr "apparaten in afwachting"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:535
+msgid "No devices attached"
+msgstr "Geen apparaten aangesloten"
+
+#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:3
+msgid "Thunderbolt"
+msgstr "Thunderbolt"
+
+#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:4
+msgid "Manage Thunderbolt devices"
+msgstr "Thunderbolt-apparaten beheren"
+
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:7
+msgid "thunderbolt"
+msgstr "thunderbolt"
+
+#. Translators: those are keywords for the thunderbolt control-center panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:19
+msgid "Thunderbolt;"
+msgstr "Thunderbolt;"
+
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:353
+#: panels/universal-access/cc-ua-panel.c:498
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Standaard"
 
-#: panels/universal-access/cc-ua-panel.c:356
+#: panels/universal-access/cc-ua-panel.c:501
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Gemiddeld"
 
-#: panels/universal-access/cc-ua-panel.c:359
+#: panels/universal-access/cc-ua-panel.c:504
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Groot"
 
-#: panels/universal-access/cc-ua-panel.c:362
+#: panels/universal-access/cc-ua-panel.c:507
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Groter"
 
-#: panels/universal-access/cc-ua-panel.c:365
+#: panels/universal-access/cc-ua-panel.c:510
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Grootst"
 
-#: panels/universal-access/cc-ua-panel.c:369
+#: panels/universal-access/cc-ua-panel.c:514
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -5894,340 +6128,340 @@ msgstr ""
 "Mouse;Double;click;Delay;Assist;Repeat;Blink;Muistoetsen;Toetsenbord;"
 "Toegankelijkheid;Tekst;Lettertype;vergroten;Dubbel;klik;"
 
-#: panels/universal-access/uap.ui:89
+#: panels/universal-access/uap.ui:93
 msgid "_Always Show Universal Access Menu"
 msgstr "Menu Universele toegang _altijd tonen"
 
-#: panels/universal-access/uap.ui:131
+#: panels/universal-access/uap.ui:135
 msgid "Seeing"
 msgstr "Zicht"
 
-#: panels/universal-access/uap.ui:177
+#: panels/universal-access/uap.ui:181
 msgid "_High Contrast"
 msgstr "_Hoog contrast"
 
-#: panels/universal-access/uap.ui:224
+#: panels/universal-access/uap.ui:228
 msgid "_Large Text"
 msgstr "_Grote letters"
 
-#: panels/universal-access/uap.ui:269
+#: panels/universal-access/uap.ui:273
 msgid "C_ursor Size"
 msgstr "C_ursorgrootte"
 
-#: panels/universal-access/uap.ui:316
-#: panels/universal-access/zoom-options.ui:98
+#: panels/universal-access/uap.ui:320
+#: panels/universal-access/zoom-options.ui:99
 msgid "_Zoom"
 msgstr "_Zoom"
 
-#: panels/universal-access/uap.ui:362
+#: panels/universal-access/uap.ui:366
 msgid "Screen _Reader"
 msgstr "_Schermlezer"
 
-#: panels/universal-access/uap.ui:408 panels/universal-access/uap.ui:1237
+#: panels/universal-access/uap.ui:412 panels/universal-access/uap.ui:1243
 msgid "_Sound Keys"
 msgstr "_Geluidtoetsen"
 
-#: panels/universal-access/uap.ui:470
+#: panels/universal-access/uap.ui:474
 msgid "Hearing"
 msgstr "Gehoor"
 
-#: panels/universal-access/uap.ui:514 panels/universal-access/uap.ui:1340
+#: panels/universal-access/uap.ui:518 panels/universal-access/uap.ui:1346
 msgid "_Visual Alerts"
 msgstr "_Visuele alertering"
 
-#: panels/universal-access/uap.ui:622
+#: panels/universal-access/uap.ui:626
 msgid "Screen _Keyboard"
 msgstr "_Toetsenbord op scherm"
 
-#: panels/universal-access/uap.ui:667
+#: panels/universal-access/uap.ui:671
 msgid "R_epeat Keys"
 msgstr "_Herhaaltoetsen"
 
-#: panels/universal-access/uap.ui:713
+#: panels/universal-access/uap.ui:717
 msgid "Cursor _Blinking"
 msgstr "_Knipperen van de cursor"
 
-#: panels/universal-access/uap.ui:759
+#: panels/universal-access/uap.ui:763
 msgid "_Typing Assist (AccessX)"
 msgstr "_Typ-assistent (AccessX)"
 
-#: panels/universal-access/uap.ui:820
+#: panels/universal-access/uap.ui:824
 msgid "Pointing & Clicking"
 msgstr "Aanwijzen en klikken"
 
-#: panels/universal-access/uap.ui:866
+#: panels/universal-access/uap.ui:870
 msgid "_Mouse Keys"
 msgstr "_Muistoetsen"
 
-#: panels/universal-access/uap.ui:911
+#: panels/universal-access/uap.ui:915
 msgid "_Click Assist"
 msgstr "Op Typ-assistent _klikken"
 
-#: panels/universal-access/uap.ui:957
+#: panels/universal-access/uap.ui:961
 msgid "_Double-Click Delay"
 msgstr "_Dubbelklik-vertraging"
 
-#: panels/universal-access/uap.ui:977
+#: panels/universal-access/uap.ui:981
 msgid "Double-Click Delay"
 msgstr "Intervaltijd voor dubbelklik"
 
-#: panels/universal-access/uap.ui:1042
+#: panels/universal-access/uap.ui:1048
 msgid "Cursor Size"
 msgstr "Cursorgrootte"
 
-#: panels/universal-access/uap.ui:1069
+#: panels/universal-access/uap.ui:1075
 msgid ""
 "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgstr ""
 "De cursorgrootte kan gecombineerd worden met zoomen zodat de cursor beter "
 "zichtbaar wordt."
 
-#: panels/universal-access/uap.ui:1105
+#: panels/universal-access/uap.ui:1111
 msgid "Screen Reader"
 msgstr "Schermlezer"
 
-#: panels/universal-access/uap.ui:1122
+#: panels/universal-access/uap.ui:1128
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr "De schermlezer leest getoonde tekst terwijl u de focus verplaatst."
 
-#: panels/universal-access/uap.ui:1155
+#: panels/universal-access/uap.ui:1161
 msgid "_Screen Reader"
 msgstr "_Schermlezer"
 
-#: panels/universal-access/uap.ui:1194
+#: panels/universal-access/uap.ui:1200
 msgid "Sound Keys"
 msgstr "Geluidtoetsen"
 
-#: panels/universal-access/uap.ui:1212
+#: panels/universal-access/uap.ui:1218
 msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr "Piepen wanneer Num Lock of Caps Lock aan of uit wordt gezet."
 
-#: panels/universal-access/uap.ui:1282
+#: panels/universal-access/uap.ui:1288
 msgid "Visual Alerts"
 msgstr "Visuele alertering"
 
-#: panels/universal-access/uap.ui:1286
+#: panels/universal-access/uap.ui:1292
 msgid "_Test flash"
 msgstr "_Knipperen testen"
 
-#: panels/universal-access/uap.ui:1315
+#: panels/universal-access/uap.ui:1321
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "Visuele indicatie tonen als er een alerteringsgeluid klinkt."
 
 # laten knipperen/oplichten
-#: panels/universal-access/uap.ui:1366
+#: panels/universal-access/uap.ui:1372
 msgid "Flash the _window title"
 msgstr "_Titelbalk laten knipperen"
 
-#: panels/universal-access/uap.ui:1384
+#: panels/universal-access/uap.ui:1390
 msgid "Flash the entire _screen"
 msgstr "_Hele scherm laten knipperen"
 
-#: panels/universal-access/uap.ui:1429
+#: panels/universal-access/uap.ui:1435
 msgid "Repeat Keys"
 msgstr "Herhaaltoetsen"
 
-#: panels/universal-access/uap.ui:1459
+#: panels/universal-access/uap.ui:1465
 msgid "Key presses repeat when key is held down."
 msgstr "Toetsaanslagen herhalen zich wanneer de toets ingedrukt blijft."
 
-#: panels/universal-access/uap.ui:1538
+#: panels/universal-access/uap.ui:1544
 msgid "Repeat keys delay"
 msgstr "Toetsherhaalvertraging"
 
-#: panels/universal-access/uap.ui:1586 panels/universal-access/uap.ui:1719
+#: panels/universal-access/uap.ui:1592 panels/universal-access/uap.ui:1725
 msgid "Speed"
 msgstr "Snelheid"
 
-#: panels/universal-access/uap.ui:1623
+#: panels/universal-access/uap.ui:1629
 msgid "Repeat keys speed"
 msgstr "Toetsherhaalsnelheid"
 
-#: panels/universal-access/uap.ui:1647
+#: panels/universal-access/uap.ui:1653
 msgid "Cursor Blinking"
 msgstr "Knipperen van de cursor"
 
-#: panels/universal-access/uap.ui:1677
+#: panels/universal-access/uap.ui:1683
 msgid "Cursor blinks in text fields."
 msgstr "Cursor knippert in tekstvelden."
 
-#: panels/universal-access/uap.ui:1756
+#: panels/universal-access/uap.ui:1762
 msgid "Cursor blinking speed"
 msgstr "Cursorknippersnelheid"
 
-#: panels/universal-access/uap.ui:1792
+#: panels/universal-access/uap.ui:1798
 msgid "Typing Assist"
 msgstr "Typ-assistent"
 
-#: panels/universal-access/uap.ui:1831
+#: panels/universal-access/uap.ui:1837
 msgid "_Sticky Keys"
 msgstr "_Plaktoetsen"
 
-#: panels/universal-access/uap.ui:1848
+#: panels/universal-access/uap.ui:1854
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Een opeenvolging van optietoetsen als een toetsencombinatie behandelen"
 
-#: panels/universal-access/uap.ui:1872
+#: panels/universal-access/uap.ui:1878
 msgid "_Disable if two keys are pressed together"
 msgstr "_Uitschakelen wanneer twee toetsen tegelijkertijd worden ingedrukt"
 
-#: panels/universal-access/uap.ui:1890
+#: panels/universal-access/uap.ui:1896
 msgid "Beep when a _modifier key is pressed"
 msgstr "Piepen wanneer _bewerktoets wordt ingedrukt"
 
-#: panels/universal-access/uap.ui:1938
+#: panels/universal-access/uap.ui:1944
 msgid "S_low Keys"
 msgstr "T_rage toetsen"
 
-#: panels/universal-access/uap.ui:1955
+#: panels/universal-access/uap.ui:1961
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr ""
 "Een vertraging inbouwen tussen het aanslaan en accepteren van een toets"
 
-#: panels/universal-access/uap.ui:1988 panels/universal-access/uap.ui:2201
-#: panels/universal-access/uap.ui:2538
+#: panels/universal-access/uap.ui:1994 panels/universal-access/uap.ui:2207
+#: panels/universal-access/uap.ui:2544
 msgid "A_cceptance delay:"
 msgstr "Vertraging voor a_ccepteren:"
 
-#: panels/universal-access/uap.ui:2010
+#: panels/universal-access/uap.ui:2016
 msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Kort"
 
-#: panels/universal-access/uap.ui:2029
+#: panels/universal-access/uap.ui:2035
 msgid "Slow keys typing delay"
 msgstr "Typ-vertraging trage toetsen"
 
-#: panels/universal-access/uap.ui:2044
+#: panels/universal-access/uap.ui:2050
 msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Lang"
 
-#: panels/universal-access/uap.ui:2071
+#: panels/universal-access/uap.ui:2077
 msgid "Beep when a key is pr_essed"
 msgstr "Piepen wanneer  er een toets wordt i_ngedrukt"
 
-#: panels/universal-access/uap.ui:2088
+#: panels/universal-access/uap.ui:2094
 msgid "Beep when a key is _accepted"
 msgstr "Piepen wanneer toets is _geaccepteerd"
 
-#: panels/universal-access/uap.ui:2105 panels/universal-access/uap.ui:2284
+#: panels/universal-access/uap.ui:2111 panels/universal-access/uap.ui:2290
 msgid "Beep when a key is _rejected"
 msgstr "Piepen wanneer toets is _geweigerd"
 
-#: panels/universal-access/uap.ui:2151
+#: panels/universal-access/uap.ui:2157
 msgid "_Bounce Keys"
 msgstr "S_pringende toetsen"
 
-#: panels/universal-access/uap.ui:2168
+#: panels/universal-access/uap.ui:2174
 msgid "Ignores fast duplicate keypresses"
 msgstr "Snel opeenvolgende dubbele toetsaanslagen negeren"
 
-#: panels/universal-access/uap.ui:2223
+#: panels/universal-access/uap.ui:2229
 msgctxt "bounce keys delay"
 msgid "Short"
 msgstr "Kort"
 
-#: panels/universal-access/uap.ui:2242
+#: panels/universal-access/uap.ui:2248
 msgid "Bounce keys typing delay"
 msgstr "Typ-vertraging kaatstoetsen"
 
-#: panels/universal-access/uap.ui:2257
+#: panels/universal-access/uap.ui:2263
 msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "Lang"
 
-#: panels/universal-access/uap.ui:2370
+#: panels/universal-access/uap.ui:2376
 msgid "_Enable by Keyboard"
 msgstr "_Via toetsenbord inschakelen"
 
-#: panels/universal-access/uap.ui:2387
+#: panels/universal-access/uap.ui:2393
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Toegankelijkheidsfuncties via het toetsenbord inschakelen"
 
-#: panels/universal-access/uap.ui:2451
+#: panels/universal-access/uap.ui:2457
 msgid "Click Assist"
 msgstr "Op Typ-assistent klikken"
 
-#: panels/universal-access/uap.ui:2487
+#: panels/universal-access/uap.ui:2493
 msgid "_Simulated Secondary Click"
 msgstr "Ge_simuleerde secundaire klik"
 
-#: panels/universal-access/uap.ui:2505
+#: panels/universal-access/uap.ui:2511
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Tweede keer klikken als de primaire knop ingedrukt gehouden wordt"
 
-#: panels/universal-access/uap.ui:2559
+#: panels/universal-access/uap.ui:2565
 msgctxt "secondary click"
 msgid "Short"
 msgstr "Kort"
 
-#: panels/universal-access/uap.ui:2578
+#: panels/universal-access/uap.ui:2584
 msgid "Secondary click delay"
 msgstr "Vertraging secundaire klik"
 
-#: panels/universal-access/uap.ui:2593
+#: panels/universal-access/uap.ui:2599
 msgctxt "secondary click delay"
 msgid "Long"
 msgstr "Lang"
 
-#: panels/universal-access/uap.ui:2650
+#: panels/universal-access/uap.ui:2656
 msgid "_Hover Click"
 msgstr "_ZweefKlik"
 
-#: panels/universal-access/uap.ui:2668
+#: panels/universal-access/uap.ui:2674
 msgid "Trigger a click when the pointer hovers"
 msgstr "Klikken als muisbeweging stopt"
 
-#: panels/universal-access/uap.ui:2701
+#: panels/universal-access/uap.ui:2707
 msgid "D_elay:"
 msgstr "Vertra_ging:"
 
-#: panels/universal-access/uap.ui:2723
+#: panels/universal-access/uap.ui:2729
 msgctxt "dwell click delay"
 msgid "Short"
 msgstr "Kort"
 
-#: panels/universal-access/uap.ui:2754
+#: panels/universal-access/uap.ui:2760
 msgctxt "dwell click delay"
 msgid "Long"
 msgstr "Lang"
 
-#: panels/universal-access/uap.ui:2790
+#: panels/universal-access/uap.ui:2796
 msgid "Motion _threshold:"
 msgstr "Be_wegingsdrempel:"
 
-#: panels/universal-access/uap.ui:2812
+#: panels/universal-access/uap.ui:2818
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Klein"
 
-#: panels/universal-access/uap.ui:2843
+#: panels/universal-access/uap.ui:2849
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Groot"
 
-#: panels/universal-access/zoom-options.c:333
+#: panels/universal-access/zoom-options.c:334
 msgctxt "Distance"
 msgid "Short"
 msgstr "Kort"
 
-#: panels/universal-access/zoom-options.c:334
+#: panels/universal-access/zoom-options.c:335
 msgctxt "Distance"
 msgid "¼ Screen"
 msgstr "¼ Scherm"
 
-#: panels/universal-access/zoom-options.c:335
+#: panels/universal-access/zoom-options.c:336
 msgctxt "Distance"
 msgid "½ Screen"
 msgstr "½ Scherm"
 
-#: panels/universal-access/zoom-options.c:336
+#: panels/universal-access/zoom-options.c:337
 msgctxt "Distance"
 msgid "¾ Screen"
 msgstr "¾ Scherm"
 
-#: panels/universal-access/zoom-options.c:337
+#: panels/universal-access/zoom-options.c:338
 msgctxt "Distance"
 msgid "Long"
 msgstr "Lang"
@@ -6252,134 +6486,134 @@ msgstr "Linkerhelft"
 msgid "Right Half"
 msgstr "Rechterhelft"
 
-#: panels/universal-access/zoom-options.ui:77
+#: panels/universal-access/zoom-options.ui:78
 msgid "Zoom Options"
 msgstr "Zoomopties"
 
-#: panels/universal-access/zoom-options.ui:186
+#: panels/universal-access/zoom-options.ui:188
 msgid "_Magnification:"
 msgstr "_Vergroting:"
 
-#: panels/universal-access/zoom-options.ui:250
+#: panels/universal-access/zoom-options.ui:252
 msgid "_Follow mouse cursor"
 msgstr "_Muisaanwijzer volgen"
 
-#: panels/universal-access/zoom-options.ui:270
+#: panels/universal-access/zoom-options.ui:272
 msgid "_Screen part:"
 msgstr "_Schermdeel:"
 
-#: panels/universal-access/zoom-options.ui:332
+#: panels/universal-access/zoom-options.ui:334
 msgid "Magnifier _extends outside of screen"
 msgstr "Vergrootglas komt _buiten het scherm"
 
-#: panels/universal-access/zoom-options.ui:351
+#: panels/universal-access/zoom-options.ui:353
 msgid "_Keep magnifier cursor centered"
 msgstr "Vergrootglascursor _gecentreerd houden"
 
-#: panels/universal-access/zoom-options.ui:370
+#: panels/universal-access/zoom-options.ui:372
 msgid "Magnifier cursor _pushes contents around"
 msgstr "Vergrootglascursor _schuift inhoud rond"
 
-#: panels/universal-access/zoom-options.ui:389
+#: panels/universal-access/zoom-options.ui:391
 msgid "Magnifier cursor moves with _contents"
 msgstr "Vergrootglascursor beweegt mee met de _inhoud"
 
-#: panels/universal-access/zoom-options.ui:423
+#: panels/universal-access/zoom-options.ui:425
 msgid "Magnifier Position:"
 msgstr "Positie vergrootglas:"
 
-#: panels/universal-access/zoom-options.ui:444
+#: panels/universal-access/zoom-options.ui:446
 msgid "Magnifier"
 msgstr "Vergrootglas"
 
-#: panels/universal-access/zoom-options.ui:490
+#: panels/universal-access/zoom-options.ui:493
 msgid "_Thickness:"
 msgstr "_Dikte:"
 
-#: panels/universal-access/zoom-options.ui:516
+#: panels/universal-access/zoom-options.ui:519
 msgctxt "universal access, thickness"
 msgid "Thin"
 msgstr "Dun"
 
-#: panels/universal-access/zoom-options.ui:548
+#: panels/universal-access/zoom-options.ui:551
 msgctxt "universal access, thickness"
 msgid "Thick"
 msgstr "Dik"
 
-#: panels/universal-access/zoom-options.ui:574
+#: panels/universal-access/zoom-options.ui:577
 msgid "_Length:"
 msgstr "_Lengte:"
 
 #. The color of the accessibility crosshair
-#: panels/universal-access/zoom-options.ui:626
+#: panels/universal-access/zoom-options.ui:629
 msgid "Co_lor:"
 msgstr "_Kleur:"
 
-#: panels/universal-access/zoom-options.ui:690
+#: panels/universal-access/zoom-options.ui:693
 msgid "_Crosshairs:"
 msgstr "_Draadkruis:"
 
-#: panels/universal-access/zoom-options.ui:741
+#: panels/universal-access/zoom-options.ui:744
 msgid "_Overlaps mouse cursor"
 msgstr "_Overlapt muisaanwijzer"
 
-#: panels/universal-access/zoom-options.ui:779
+#: panels/universal-access/zoom-options.ui:782
 msgid "Crosshairs"
 msgstr "Draadkruis"
 
-#: panels/universal-access/zoom-options.ui:827
+#: panels/universal-access/zoom-options.ui:831
 msgid "_White on black:"
 msgstr "_Wit op zwart:"
 
-#: panels/universal-access/zoom-options.ui:850
+#: panels/universal-access/zoom-options.ui:854
 msgid "_Brightness:"
 msgstr "_Helderheid:"
 
-#: panels/universal-access/zoom-options.ui:874
+#: panels/universal-access/zoom-options.ui:878
 msgid "_Contrast:"
 msgstr "_Contrast:"
 
 #. The contrast scale goes from Color to None (grayscale)
-#: panels/universal-access/zoom-options.ui:897
+#: panels/universal-access/zoom-options.ui:901
 msgctxt "universal access, contrast"
 msgid "Co_lor"
 msgstr "Kl_eur"
 
-#: panels/universal-access/zoom-options.ui:925
+#: panels/universal-access/zoom-options.ui:929
 msgctxt "universal access, color"
 msgid "None"
 msgstr "Geen"
 
-#: panels/universal-access/zoom-options.ui:957
+#: panels/universal-access/zoom-options.ui:961
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "Volledig"
 
-#: panels/universal-access/zoom-options.ui:1023
+#: panels/universal-access/zoom-options.ui:1027
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Laag"
 
-#: panels/universal-access/zoom-options.ui:1056
+#: panels/universal-access/zoom-options.ui:1060
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Hoog"
 
-#: panels/universal-access/zoom-options.ui:1087
+#: panels/universal-access/zoom-options.ui:1091
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Laag"
 
-#: panels/universal-access/zoom-options.ui:1120
+#: panels/universal-access/zoom-options.ui:1124
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Hoog"
 
-#: panels/universal-access/zoom-options.ui:1156
+#: panels/universal-access/zoom-options.ui:1160
 msgid "Color Effects:"
 msgstr "Kleureffecten:"
 
-#: panels/universal-access/zoom-options.ui:1181
+#: panels/universal-access/zoom-options.ui:1185
 msgid "Color Effects"
 msgstr "Kleureffecten"
 
@@ -6569,8 +6803,8 @@ msgid "Ch_ange"
 msgstr "_Wijzigen"
 
 #: panels/user-accounts/data/password-dialog.ui:142
-msgid "_Verify New Password"
-msgstr "_Nieuw wachtwoord verifiëren"
+msgid "_Confirm New Password"
+msgstr "Nieuw wachtwoord _bevestigen"
 
 #: panels/user-accounts/data/password-dialog.ui:159
 msgid "_New Password"
@@ -6802,29 +7036,30 @@ msgstr "Onbekende fout"
 msgid "Should match the web address of your login provider."
 msgstr "Dient overeen te komen met het internetadres van uw inlog-provider."
 
-#: panels/user-accounts/um-account-dialog.c:229
+#: panels/user-accounts/um-account-dialog.c:225
 msgid "Failed to add account"
 msgstr "Toevoegen van account mislukt"
 
-#: panels/user-accounts/um-account-dialog.c:462
-msgid "Passwords do not match."
-msgstr "Wachtwoorden komen niet overeen."
+#: panels/user-accounts/um-account-dialog.c:465
+#: panels/user-accounts/um-password-dialog.c:291
+msgid "The passwords do not match."
+msgstr "De wachtwoorden komen niet overeen."
 
-#: panels/user-accounts/um-account-dialog.c:717
-#: panels/user-accounts/um-account-dialog.c:763
-#: panels/user-accounts/um-account-dialog.c:784
+#: panels/user-accounts/um-account-dialog.c:736
+#: panels/user-accounts/um-account-dialog.c:782
+#: panels/user-accounts/um-account-dialog.c:803
 msgid "Failed to register account"
 msgstr "Registreren van account mislukt"
 
-#: panels/user-accounts/um-account-dialog.c:907
+#: panels/user-accounts/um-account-dialog.c:926
 msgid "No supported way to authenticate with this domain"
 msgstr "Geen ondersteunde manier om met dit domein te authenticeren"
 
-#: panels/user-accounts/um-account-dialog.c:980
+#: panels/user-accounts/um-account-dialog.c:999
 msgid "Failed to join domain"
 msgstr "Toetreden tot domein mislukt"
 
-#: panels/user-accounts/um-account-dialog.c:1041
+#: panels/user-accounts/um-account-dialog.c:1060
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6832,7 +7067,7 @@ msgstr ""
 "Ongeldige gebruikersnaam.\n"
 "Probeer het opnieuw."
 
-#: panels/user-accounts/um-account-dialog.c:1048
+#: panels/user-accounts/um-account-dialog.c:1067
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6840,11 +7075,11 @@ msgstr ""
 "Ongeldig wachtwoord.\n"
 "Probeer het opnieuw."
 
-#: panels/user-accounts/um-account-dialog.c:1056
+#: panels/user-accounts/um-account-dialog.c:1075
 msgid "Failed to log into domain"
 msgstr "Aanmelden bij domein mislukt"
 
-#: panels/user-accounts/um-account-dialog.c:1114
+#: panels/user-accounts/um-account-dialog.c:1133
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Domein niet gevonden. Heeft u het verkeerd gespeld?"
 
@@ -6981,7 +7216,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/um-history-dialog.c:177
-#: panels/user-accounts/um-user-panel.c:766
+#: panels/user-accounts/um-user-panel.c:763
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6989,7 +7224,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/um-history-dialog.c:180
-#: panels/user-accounts/um-user-panel.c:770
+#: panels/user-accounts/um-user-panel.c:767
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7010,74 +7245,69 @@ msgstr "Sessie gestart"
 msgid "%s — Account Activity"
 msgstr "%s — Accountactiviteit"
 
-#: panels/user-accounts/um-password-dialog.c:144
+#: panels/user-accounts/um-password-dialog.c:150
 msgid "Please choose another password."
 msgstr "Kies een ander wachtwoord."
 
-#: panels/user-accounts/um-password-dialog.c:153
+#: panels/user-accounts/um-password-dialog.c:159
 msgid "Please type your current password again."
 msgstr "Vul uw wachtwoord opnieuw in."
 
-#: panels/user-accounts/um-password-dialog.c:159
+#: panels/user-accounts/um-password-dialog.c:165
 msgid "Password could not be changed"
 msgstr "Wachtwoord kon niet gewijzigd worden"
 
-#: panels/user-accounts/um-password-dialog.c:285
-msgid "The passwords do not match."
-msgstr "De wachtwoorden komen niet overeen."
-
-#: panels/user-accounts/um-photo-dialog.c:226
+#: panels/user-accounts/um-photo-dialog.c:227
 msgid "Browse for more pictures"
 msgstr "Bladeren naar meer afbeeldingen"
 
-#: panels/user-accounts/um-realm-manager.c:350
+#: panels/user-accounts/um-realm-manager.c:307
 msgid "Cannot automatically join this type of domain"
 msgstr "Automatisch voegen bij dit type domein is niet mogelijk"
 
-#: panels/user-accounts/um-realm-manager.c:413
-#, c-format
+#: panels/user-accounts/um-realm-manager.c:310
 msgid "No such domain or realm found"
 msgstr "Een dergelijk domein of realm is niet aangetroffen"
 
-#: panels/user-accounts/um-realm-manager.c:815
-#: panels/user-accounts/um-realm-manager.c:829
+#: panels/user-accounts/um-realm-manager.c:732
+#: panels/user-accounts/um-realm-manager.c:746
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Aanmelden als %s bij het domein %s kan niet"
 
-#: panels/user-accounts/um-realm-manager.c:821
+#: panels/user-accounts/um-realm-manager.c:738
 msgid "Invalid password, please try again"
 msgstr "Ongeldig wachtwoord, probeer het opnieuw"
 
-#: panels/user-accounts/um-realm-manager.c:834
+#: panels/user-accounts/um-realm-manager.c:751
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Kon geen verbinding maken met het %s domein: %s"
 
-#: panels/user-accounts/um-user-panel.c:200
+#: panels/user-accounts/um-user-panel.c:199
 msgid "Your account"
 msgstr "Uw account"
 
-#: panels/user-accounts/um-user-panel.c:380
+#: panels/user-accounts/um-user-panel.c:379
 msgid "Failed to delete user"
 msgstr "Kon gebruiker niet verwijderen"
 
-#: panels/user-accounts/um-user-panel.c:438
-#: panels/user-accounts/um-user-panel.c:497
-#: panels/user-accounts/um-user-panel.c:549
+#: panels/user-accounts/um-user-panel.c:437
+#: panels/user-accounts/um-user-panel.c:496
+#: panels/user-accounts/um-user-panel.c:548
 msgid "Failed to revoke remotely managed user"
 msgstr "Op afstand beheerde gebruiker kon niet worden verwijderen"
 
-#: panels/user-accounts/um-user-panel.c:603
+#: panels/user-accounts/um-user-panel.c:600
 msgid "You cannot delete your own account."
 msgstr "U kunt uw eigen account niet verwijderen."
 
-#: panels/user-accounts/um-user-panel.c:612
+#: panels/user-accounts/um-user-panel.c:609
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s is nog aangemeld"
 
-#: panels/user-accounts/um-user-panel.c:616
+#: panels/user-accounts/um-user-panel.c:613
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7085,12 +7315,12 @@ msgstr ""
 "Het verwijderen van een gebruiker die nog aangemeld is, kan leiden tot een "
 "inconsistent systeem."
 
-#: panels/user-accounts/um-user-panel.c:625
+#: panels/user-accounts/um-user-panel.c:622
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Moeten de bestanden van %s bewaard blijven?"
 
-#: panels/user-accounts/um-user-panel.c:629
+#: panels/user-accounts/um-user-panel.c:626
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7098,48 +7328,48 @@ msgstr ""
 "Het is mogelijk om de persoonlijke map, de e-mailmap en de tijdelijke "
 "bestanden te bewaren als een account verwijderd wordt."
 
-#: panels/user-accounts/um-user-panel.c:632
+#: panels/user-accounts/um-user-panel.c:629
 msgid "_Delete Files"
 msgstr "Bestanden _verwijderen"
 
-#: panels/user-accounts/um-user-panel.c:633
+#: panels/user-accounts/um-user-panel.c:630
 msgid "_Keep Files"
 msgstr "Bestanden be_waren"
 
-#: panels/user-accounts/um-user-panel.c:647
+#: panels/user-accounts/um-user-panel.c:644
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr ""
 "Weet u zeker dat u de op afstand beheerde account van %s wilt verwijderen?"
 
-#: panels/user-accounts/um-user-panel.c:651
+#: panels/user-accounts/um-user-panel.c:648
 msgid "_Delete"
 msgstr "Verwij_deren"
 
-#: panels/user-accounts/um-user-panel.c:701
+#: panels/user-accounts/um-user-panel.c:698
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Account uitgeschakeld"
 
-#: panels/user-accounts/um-user-panel.c:709
+#: panels/user-accounts/um-user-panel.c:706
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "In te stellen bij volgende keer aanmelden"
 
-#: panels/user-accounts/um-user-panel.c:712
+#: panels/user-accounts/um-user-panel.c:709
 msgctxt "Password mode"
 msgid "None"
 msgstr "Geen"
 
-#: panels/user-accounts/um-user-panel.c:759
+#: panels/user-accounts/um-user-panel.c:756
 msgid "Logged in"
 msgstr "Aangemeld"
 
-#: panels/user-accounts/um-user-panel.c:1106
+#: panels/user-accounts/um-user-panel.c:1101
 msgid "Failed to contact the accounts service"
 msgstr "Kon de accounts-service niet benaderen"
 
-#: panels/user-accounts/um-user-panel.c:1108
+#: panels/user-accounts/um-user-panel.c:1103
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Zorg ervoor dat het de AccountService geïnstalleerd in ingeschakeld is."
@@ -7148,7 +7378,7 @@ msgstr ""
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/um-user-panel.c:1140
+#: panels/user-accounts/um-user-panel.c:1135
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7156,12 +7386,12 @@ msgstr ""
 "Klik op het het *-pictogram\n"
 "om wijzigingen te maken"
 
-#: panels/user-accounts/um-user-panel.c:1180
+#: panels/user-accounts/um-user-panel.c:1175
 msgid "Create a user account"
 msgstr "Gebruikersaccount aanmaken"
 
-#: panels/user-accounts/um-user-panel.c:1191
-#: panels/user-accounts/um-user-panel.c:1370
+#: panels/user-accounts/um-user-panel.c:1186
+#: panels/user-accounts/um-user-panel.c:1364
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7169,12 +7399,12 @@ msgstr ""
 "Klik op het *-pictogram\n"
 "om een gebruikersaccount aan te maken"
 
-#: panels/user-accounts/um-user-panel.c:1201
+#: panels/user-accounts/um-user-panel.c:1196
 msgid "Delete the selected user account"
 msgstr "De geselecteerde gebruiker verwijderen"
 
-#: panels/user-accounts/um-user-panel.c:1213
-#: panels/user-accounts/um-user-panel.c:1375
+#: panels/user-accounts/um-user-panel.c:1208
+#: panels/user-accounts/um-user-panel.c:1369
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7213,7 +7443,7 @@ msgstr ""
 msgid "Map Buttons"
 msgstr "Knoppen toewijzen"
 
-#: panels/wacom/button-mapping.ui:37 panels/wacom/cc-wacom-page.c:547
+#: panels/wacom/button-mapping.ui:37 panels/wacom/cc-wacom-page.c:533
 #: panels/wacom/gnome-wacom-properties.ui:60
 msgid "_Close"
 msgstr "_Sluiten"
@@ -7243,65 +7473,65 @@ msgstr ""
 msgid "Mis-click detected, restarting…"
 msgstr "Misklik gedetecteerd, herstarten…"
 
-#: panels/wacom/cc-wacom-button-row.c:266
+#: panels/wacom/cc-wacom-button-row.c:253
 #, c-format
 msgid "Button %d"
 msgstr "Knop %d"
 
-#: panels/wacom/cc-wacom-button-row.h:53
+#: panels/wacom/cc-wacom-button-row.h:34
 msgctxt "Wacom action-type"
 msgid "Application defined"
 msgstr "Toepassingen gedefinieerd"
 
-#: panels/wacom/cc-wacom-button-row.h:54
+#: panels/wacom/cc-wacom-button-row.h:35
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
 msgstr "Toetsaanslag sturen"
 
-#: panels/wacom/cc-wacom-button-row.h:55
+#: panels/wacom/cc-wacom-button-row.h:36
 msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "Van beeldscherm wisselen"
 
-#: panels/wacom/cc-wacom-button-row.h:56
+#: panels/wacom/cc-wacom-button-row.h:37
 msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Schermhulp tonen"
 
-#: panels/wacom/cc-wacom-mapping-panel.c:260
+#: panels/wacom/cc-wacom-mapping-panel.c:256
 msgid "Output:"
 msgstr "Uitvoer:"
 
 #. Keep ratio switch
-#: panels/wacom/cc-wacom-mapping-panel.c:272
+#: panels/wacom/cc-wacom-mapping-panel.c:268
 msgid "Keep aspect ratio (letterbox):"
 msgstr "Beeldverhouding behouden (breedbeeld):"
 
 #. Whole-desktop checkbox
-#: panels/wacom/cc-wacom-mapping-panel.c:283
+#: panels/wacom/cc-wacom-mapping-panel.c:279
 msgid "Map to single monitor"
 msgstr "Toewijzen aan één monitor"
 
-#: panels/wacom/cc-wacom-nav-button.c:86
+#: panels/wacom/cc-wacom-nav-button.c:84
 #, c-format
 msgid "%d of %d"
 msgstr "%d van %d"
 
 # Select a display language (change will be applied next time you log in)
-#: panels/wacom/cc-wacom-page.c:544
+#: panels/wacom/cc-wacom-page.c:530
 msgid "Display Mapping"
 msgstr "Taal voor weergave"
 
-#: panels/wacom/cc-wacom-panel.c:790 panels/wacom/wacom-stylus-page.ui:127
+#: panels/wacom/cc-wacom-panel.c:804 panels/wacom/wacom-stylus-page.ui:119
 msgid "Stylus"
 msgstr "Stylus"
 
-#: panels/wacom/cc-wacom-stylus-page.c:362
+#: panels/wacom/cc-wacom-stylus-page.c:355
 msgid "Button"
 msgstr "Knop"
 
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:3
-#: panels/wacom/gnome-wacom-properties.ui:198
+#: panels/wacom/gnome-wacom-properties.ui:200
 msgid "Wacom Tablet"
 msgstr "Wacom-tablet"
 
@@ -7337,47 +7567,47 @@ msgstr "Tabletvoorkeuren"
 msgid "_Help"
 msgstr "_Hulp"
 
-#: panels/wacom/gnome-wacom-properties.ui:123
+#: panels/wacom/gnome-wacom-properties.ui:125
 msgid "No tablet detected"
 msgstr "Geen tablet gedetecteerd"
 
-#: panels/wacom/gnome-wacom-properties.ui:139
+#: panels/wacom/gnome-wacom-properties.ui:141
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Sluit het Wacom-tablet aan en zet het aan"
 
-#: panels/wacom/gnome-wacom-properties.ui:159
+#: panels/wacom/gnome-wacom-properties.ui:161
 msgid "Bluetooth Settings"
 msgstr "Bluetooth-instellingen"
 
-#: panels/wacom/gnome-wacom-properties.ui:231
+#: panels/wacom/gnome-wacom-properties.ui:233
 msgid "Map to Monitor…"
 msgstr "Naar monitor mappen…"
 
-#: panels/wacom/gnome-wacom-properties.ui:247
+#: panels/wacom/gnome-wacom-properties.ui:249
 msgid "Map Buttons…"
 msgstr "Knoppen toewijzen…"
 
-#: panels/wacom/gnome-wacom-properties.ui:263
+#: panels/wacom/gnome-wacom-properties.ui:265
 msgid "Calibrate…"
 msgstr "Kalibreren…"
 
-#: panels/wacom/gnome-wacom-properties.ui:284
+#: panels/wacom/gnome-wacom-properties.ui:286
 msgid "Adjust display resolution"
 msgstr "Beeldschermresolutie aanpassen"
 
-#: panels/wacom/gnome-wacom-properties.ui:300
+#: panels/wacom/gnome-wacom-properties.ui:302
 msgid "Adjust mouse settings"
 msgstr "Muisinstellingen aanpassen"
 
-#: panels/wacom/gnome-wacom-properties.ui:328
+#: panels/wacom/gnome-wacom-properties.ui:330
 msgid "Tracking Mode"
 msgstr "Tracking-modus"
 
-#: panels/wacom/gnome-wacom-properties.ui:356
+#: panels/wacom/gnome-wacom-properties.ui:358
 msgid "Left-Handed Orientation"
 msgstr "Linkshandige oriëntatie"
 
-#: panels/wacom/gsd-wacom-key-shortcut-button.c:263
+#: panels/wacom/gsd-wacom-key-shortcut-button.c:217
 msgid "New shortcut…"
 msgstr "Nieuwe sneltoets…"
 
@@ -7397,46 +7627,42 @@ msgstr "Terug"
 msgid "Forward"
 msgstr "Vooruit"
 
-#: panels/wacom/wacom-stylus-page.ui:77
+#: panels/wacom/wacom-stylus-page.ui:79
 msgid "No stylus found"
 msgstr "Geen pen aangetroffen"
 
-#: panels/wacom/wacom-stylus-page.ui:91
+#: panels/wacom/wacom-stylus-page.ui:93
 msgid "Please move your stylus to the proximity of the tablet to configure it"
 msgstr "Breng de pen in de buurt van het tablet om hem te configureren"
 
-#: panels/wacom/wacom-stylus-page.ui:167
+#: panels/wacom/wacom-stylus-page.ui:159
 msgid "Eraser Pressure Feel"
 msgstr "Gedrag gumdruk"
 
-#: panels/wacom/wacom-stylus-page.ui:188 panels/wacom/wacom-stylus-page.ui:348
+#: panels/wacom/wacom-stylus-page.ui:180 panels/wacom/wacom-stylus-page.ui:340
 msgid "Soft"
 msgstr "Zacht"
 
 # ??? (Wouter Bolsterlee)
-#: panels/wacom/wacom-stylus-page.ui:218 panels/wacom/wacom-stylus-page.ui:378
+#: panels/wacom/wacom-stylus-page.ui:210 panels/wacom/wacom-stylus-page.ui:370
 msgid "Firm"
 msgstr "Stevig"
 
-#: panels/wacom/wacom-stylus-page.ui:241
+#: panels/wacom/wacom-stylus-page.ui:233
 msgid "Top Button"
 msgstr "Bovenste knop"
 
-#: panels/wacom/wacom-stylus-page.ui:270
+#: panels/wacom/wacom-stylus-page.ui:262
 msgid "Lower Button"
 msgstr "Onderste knop"
 
-#: panels/wacom/wacom-stylus-page.ui:299
+#: panels/wacom/wacom-stylus-page.ui:291
 msgid "Lowest Button"
 msgstr "Onderste knop"
 
-#: panels/wacom/wacom-stylus-page.ui:328
+#: panels/wacom/wacom-stylus-page.ui:320
 msgid "Tip Pressure Feel"
 msgstr "Gedrag puntdruk"
-
-#: panels/wacom/wacom-stylus-page.ui:440
-msgid "page 3"
-msgstr "pagina 3"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Control Center"
@@ -7454,45 +7680,63 @@ msgstr ""
 "Het configuratiecentrum is de hoofdinterface van Gnome om verschillende "
 "aspecten van uw desktop te configureren."
 
-#: shell/cc-application.c:47
+#: shell/cc-application.c:62
 msgid "Display version number"
 msgstr "Versienummer weergeven"
 
-#: shell/cc-application.c:48
+#: shell/cc-application.c:63
 msgid "Enable verbose mode"
 msgstr "Verbose-modus inschakelen"
 
-#: shell/cc-application.c:49
-msgid "Show the overview"
-msgstr "Overzicht tonen"
-
-#: shell/cc-application.c:50
+#: shell/cc-application.c:64
 msgid "Search for the string"
 msgstr "Zoeken naar de tekenreeks"
 
-#: shell/cc-application.c:51
+#: shell/cc-application.c:65
 msgid "List possible panel names and exit"
 msgstr "Een lijst met mogelijke paneelnamen tonen en sluiten"
 
-#: shell/cc-application.c:52
+#: shell/cc-application.c:66
 msgid "Panel to display"
 msgstr "Te tonen paneel"
 
-#: shell/cc-application.c:52
+#: shell/cc-application.c:66
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENT…]"
 
-#: shell/cc-application.c:117
+#: shell/cc-application.c:137
 msgid "Available panels:"
 msgstr "Beschikbare panelen:"
 
-#: shell/cc-application.c:256
+#: shell/cc-application.c:253
 msgid "Help"
 msgstr "Hulp"
 
-#: shell/cc-application.c:257
+#: shell/cc-application.c:254
 msgid "Quit"
 msgstr "Afsluiten"
+
+#: shell/cc-panel-list.ui:195
+msgid "No results found"
+msgstr "Geen resultaat gevonden"
+
+#: shell/cc-window.ui:140
+msgid "All Settings"
+msgstr "Alle instellingen"
+
+#: shell/cc-window.ui:234
+msgid "Warning: Development Version"
+msgstr "Waarschuwing: ontwikkelversie"
+
+#: shell/cc-window.ui:235
+msgid ""
+"This version of Settings should only be used for development purposes. You "
+"may experience incorrect system behavior, data loss, and other unexpected "
+"issues. "
+msgstr ""
+"Deze versie van Instellingen moet alleen voor ontwikkelingsdoeleinden"
+" gebruikt worden. U kunt onjuist systeemgedrag, gegevensverlies en andere"
+" onverwachte problemen tegenkomen."
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: shell/gnome-control-center.desktop.in.in:5
@@ -7525,20 +7769,16 @@ msgid "Panels"
 msgstr "Panelen"
 
 #: shell/help-overlay.ui:40
+#| msgctxt "shortcut window"
+#| msgid "Go back to the overview"
 msgctxt "shortcut window"
-msgid "Go back to the overview"
-msgstr "Terug naar het overzicht gaan"
+msgid "Go back to previous panel"
+msgstr "Terug naar het vorige paneel"
 
 #: shell/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "Zoeken annuleren"
-
-#. translators: This is the default hotspot name, need to be less than 32-bytes
-#: shell/hostname-helper.c:189
-msgctxt "hotspot"
-msgid "Hotspot"
-msgstr "Hotspot"
 
 #: shell/org.gnome.ControlCenter.gschema.xml:5
 msgid "The identifier for the last Settings panel to be opened"
@@ -7553,13 +7793,17 @@ msgstr ""
 "herkende waarden worden genegeerd, en het eerste paneel in de lijst wordt "
 "geselecteerd."
 
-#: shell/panel-list.ui:195
-msgid "No results found"
-msgstr "Geen resultaat gevonden"
+#: shell/org.gnome.ControlCenter.gschema.xml:13
+msgid "Show warning when running a development build of Settings"
+msgstr ""
+"Waarschuwing tonen wanneer er een ontwikkelversie van Instellingen draait"
 
-#: shell/window.ui:141
-msgid "All Settings"
-msgstr "Alle instellingen"
+#: shell/org.gnome.ControlCenter.gschema.xml:14
+msgid ""
+"Whether Settings should show a warning when running a development build."
+msgstr ""
+"Of Instellingen een waarschuwing moet tonen wanneer er een ontwikkelversie"
+" draait."
 
 #. translators:
 #. * The number of sound outputs on a particular device
@@ -7582,6 +7826,33 @@ msgstr[1] "%u inputs"
 #: subprojects/gvc/gvc-mixer-control.c:2738
 msgid "System Sounds"
 msgstr "Systeemgeluiden"
+
+#~ msgid "My Home Network"
+#~ msgstr "Mijn thuisnetwerk"
+
+#~ msgid "hardware"
+#~ msgstr "hardware"
+
+#~ msgid "reset"
+#~ msgstr "opnieuw instellen"
+
+#~ msgid "English (United Kingdom)"
+#~ msgstr "Engels (Verenigd Koninkrijk)"
+
+#~ msgid "United Kingdom"
+#~ msgstr "Verenigd Koninkrijk"
+
+#~ msgid "page 3"
+#~ msgstr "pagina 3"
+
+#~ msgid "_Verify New Password"
+#~ msgstr "_Nieuw wachtwoord verifiëren"
+
+#~ msgid "Passwords do not match."
+#~ msgstr "Wachtwoorden komen niet overeen."
+
+#~ msgid "Show the overview"
+#~ msgstr "Overzicht tonen"
 
 #~ msgid "Back­ground"
 #~ msgstr "Achtergrond"
@@ -7813,14 +8084,6 @@ msgstr "Systeemgeluiden"
 #~ msgid "Automatic"
 #~ msgstr "Automatisch"
 
-#~ msgid "Add Device"
-#~ msgstr "Apparaat toevoegen"
-
-# bij een browser is dit bladwijzers, maar hier is
-# favorieten/favoriet beter (favoriete programma's) (tino)
-#~ msgid "Remove Device"
-#~ msgstr "Apparaat verwijderen"
-
 #~ msgid "VPN Type"
 #~ msgstr "VPN-type"
 
@@ -8049,9 +8312,6 @@ msgstr "Systeemgeluiden"
 #~ msgctxt "login history week label"
 #~ msgid "%s - %s"
 #~ msgstr "%s - %s"
-
-#~ msgid "_Name:"
-#~ msgstr "_Naam:"
 
 #~ msgid "Remove Shortcut"
 #~ msgstr "Sneltoets verwijderen"
