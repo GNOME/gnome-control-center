@@ -26,11 +26,65 @@ struct _CcInputRow
   gchar           *id;
   GDesktopAppInfo *app_info;
 
+  GtkWidget       *drag_handle;
   GtkWidget       *name_label;
   GtkWidget       *icon_image;
 };
 
 G_DEFINE_TYPE (CcInputRow, cc_input_row, GTK_TYPE_LIST_BOX_ROW)
+
+enum
+{
+  SIGNAL_MOVE_ROW,
+  SIGNAL_REMOVE_ROW,
+  SIGNAL_LAST
+};
+
+static guint signals[SIGNAL_LAST] = { 0, };
+
+static void
+drag_data_get_cb (CcInputRow       *row,
+                  GdkDragContext   *context,
+                  GtkSelectionData *selection_data,
+                  guint             info,
+                  guint             time_)
+{
+  gtk_selection_data_set (selection_data,
+                          gdk_atom_intern_static_string ("GTK_LIST_BOX_ROW"),
+                          32,
+                          (const guchar *)&row,
+                          sizeof (gpointer));
+}
+
+static void
+drag_data_received_cb (CcInputRow       *row,
+                       GdkDragContext   *context,
+                       gint              x,
+                       gint              y,
+                       GtkSelectionData *selection_data,
+                       guint             info,
+                       guint             time_)
+{
+  CcInputRow *source;
+
+  source = *((CcInputRow **) gtk_selection_data_get_data (selection_data));
+
+  if (source == row)
+    return;
+
+  g_signal_emit (source,
+                 signals[SIGNAL_MOVE_ROW],
+                 0,
+                 row);
+}
+
+static void
+remove_button_clicked_cb (CcInputRow *row)
+{
+  g_signal_emit (row,
+                 signals[SIGNAL_REMOVE_ROW],
+                 0);
+}
 
 static void
 cc_input_row_dispose (GObject *object)
@@ -53,14 +107,46 @@ cc_input_row_class_init (CcInputRowClass *klass)
   object_class->dispose = cc_input_row_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-input-row.ui");
+  gtk_widget_class_bind_template_child (widget_class, CcInputRow, drag_handle);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, name_label);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, icon_image);
+  gtk_widget_class_bind_template_callback (widget_class, drag_data_get_cb);
+  gtk_widget_class_bind_template_callback (widget_class, drag_data_received_cb);
+  gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
+
+  signals[SIGNAL_MOVE_ROW] =
+    g_signal_new ("move-row",
+                  G_TYPE_FROM_CLASS (object_class),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL,
+                  NULL,
+                  G_TYPE_NONE,
+                  1, CC_TYPE_INPUT_ROW);
+
+  signals[SIGNAL_REMOVE_ROW] =
+    g_signal_new ("remove-row",
+                  G_TYPE_FROM_CLASS (object_class),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL,
+                  NULL,
+                  G_TYPE_NONE,
+                  0);
 }
+
+static GtkTargetEntry entries[] =
+{
+  { "GTK_LIST_BOX_ROW", GTK_TARGET_SAME_APP, 0 }
+};
 
 void
 cc_input_row_init (CcInputRow *row)
 {
   gtk_widget_init_template (GTK_WIDGET (row));
+
+  gtk_drag_source_set (row->drag_handle, GDK_BUTTON1_MASK, entries, 1, GDK_ACTION_MOVE);
+  gtk_drag_dest_set (GTK_WIDGET (row), GTK_DEST_DEFAULT_ALL, entries, 1, GDK_ACTION_MOVE);
 }
 
 CcInputRow *
