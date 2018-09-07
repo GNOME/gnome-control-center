@@ -244,13 +244,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="options_button">
+                      <object class="GtkMenuButton" id="options_button">
                         <property name="label" translatable="yes">_Options</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="use_underline">True</property>
-                        <signal name="clicked" handler="show_input_options" object="CcRegionPanel" swapped="yes"/>
+                        <property name="popover">options_popover</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -549,4 +549,207 @@
       </object>
     </child>
   </template>
+  <object class="GtkPopover" id="options_popover">
+    <property name="can_focus">False</property>
+    <property name="border_width">12</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child>
+          <object class="GtkGrid">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_start">6</property>
+            <property name="margin_end">6</property>
+            <property name="margin_top">6</property>
+            <property name="margin_bottom">6</property>
+            <property name="row_spacing">6</property>
+            <property name="column_spacing">6</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">6</property>
+                <property name="label" translatable="yes">Input Source Options</property>
+                <property name="margin_bottom">6</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+                <property name="width">2</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="same_source">
+                <property name="label" translatable="yes">Use the _same source for all windows</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="use_underline">True</property>
+                <property name="xalign">0</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+                <property name="width">2</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="per_window_source">
+                <property name="label" translatable="yes">Allow _different sources for each window</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="use_underline">True</property>
+                <property name="xalign">0</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+                <property name="group">same_source</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+                <property name="width">2</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">12</property>
+                <property name="margin_bottom">6</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">Keyboard Shortcuts</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">3</property>
+                <property name="width">2</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="previous_source_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="halign">start</property>
+                <property name="label" translatable="yes">Previous source</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="previous_source">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Super+Shift+Space</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="next_source_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="halign">start</property>
+                <property name="label" translatable="yes">Next source</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="next_source">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Super+Space</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="alt_next_source">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Left+Right Alt</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">6</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">12</property>
+                <property name="wrap">True</property>
+                <property name="max_width_chars">40</property>
+                <property name="label" translatable="yes">These keyboard shortcuts can be changed in the keyboard settings</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">7</property>
+                <property name="width">2</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
 </interface>
