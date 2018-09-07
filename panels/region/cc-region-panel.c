@@ -32,7 +32,6 @@
 #include "cc-language-chooser.h"
 #include "cc-format-chooser.h"
 #include "cc-input-chooser.h"
-#include "cc-input-options.h"
 #include "cc-input-row.h"
 
 #include "cc-common-language.h"
@@ -109,6 +108,14 @@ struct _CcRegionPanel {
         GtkWidget *show_layout;
         GtkWidget *restart_button;
         GtkWidget *language_list;
+        GtkWidget *same_source;
+        GtkWidget *per_window_source;
+        GtkWidget *previous_source;
+        GtkWidget *previous_source_label;
+        GtkWidget *next_source;
+        GtkWidget *next_source_label;
+        GtkWidget *alt_next_source;
+        GtkWidget *alt_next_source_label;
 
         GSettings *input_settings;
         GnomeXkbInfo *xkb_info;
@@ -1241,25 +1248,72 @@ show_selected_layout (CcRegionPanel *self)
 }
 
 static void
-options_response (GtkDialog     *options,
-                  gint           response_id,
-                  CcRegionPanel *self)
+update_shortcut_label (GtkWidget   *widget,
+                       const gchar *value)
 {
-        gtk_widget_destroy (GTK_WIDGET (options));
+        g_autofree gchar *text = NULL;
+        guint accel_key;
+        g_autofree guint *keycode = NULL;
+        GdkModifierType mods;
+
+        if (value == NULL || *value == '\0') {
+                gtk_widget_hide (widget);
+                return;
+        }
+
+        gtk_accelerator_parse_with_keycode (value, &accel_key, &keycode, &mods);
+        if (accel_key == 0 && keycode == NULL && mods == 0) {
+                g_warning ("Failed to parse keyboard shortcut: '%s'", value);
+                gtk_widget_hide (widget);
+                return;
+        }
+
+        text = gtk_accelerator_get_label_with_keycode (gtk_widget_get_display (widget), accel_key, *keycode, mods);
+        gtk_label_set_text (GTK_LABEL (widget), text);
 }
 
+static void
+update_shortcuts (CcRegionPanel *self)
+{
+        g_auto(GStrv) previous = NULL;
+        g_auto(GStrv) next = NULL;
+        g_autofree gchar *previous_shortcut = NULL;
+        g_autoptr(GSettings) settings = NULL;
+
+        settings = g_settings_new ("org.gnome.desktop.wm.keybindings");
+
+        previous = g_settings_get_strv (settings, "switch-input-source-backward");
+        next = g_settings_get_strv (settings, "switch-input-source");
+
+        previous_shortcut = g_strdup (previous[0]);
+
+        update_shortcut_label (self->previous_source, previous_shortcut);
+        update_shortcut_label (self->next_source, next[0]);
+}
 
 static void
-show_input_options (CcRegionPanel *self)
+update_modifiers_shortcut (CcRegionPanel *self)
 {
-        GtkWidget *toplevel;
-        GtkWidget *options;
+        g_auto(GStrv) options = NULL;
+        gchar **p;
+        g_autoptr(GSettings) settings = NULL;
+        g_autoptr(GnomeXkbInfo) xkb_info = NULL;
+        const gchar *text;
 
-        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-        options = cc_input_options_new (toplevel);
-        g_signal_connect (options, "response",
-                          G_CALLBACK (options_response), self);
-        gtk_window_present (GTK_WINDOW (options));
+        xkb_info = gnome_xkb_info_new ();
+        settings = g_settings_new ("org.gnome.desktop.input-sources");
+        options = g_settings_get_strv (settings, "xkb-options");
+
+        for (p = options; p && *p; ++p)
+                if (g_str_has_prefix (*p, "grp:"))
+                        break;
+
+        if (p && *p) {
+                text = gnome_xkb_info_description_for_option (xkb_info, "grp", *p);
+                gtk_label_set_text (GTK_LABEL (self->alt_next_source), text);
+        } else {
+                gtk_widget_hide (self->alt_next_source);
+        }
 }
 
 static void
@@ -1298,6 +1352,23 @@ setup_input_section (CcRegionPanel *self)
 
         add_input_sources_from_settings (self);
         update_buttons (self);
+
+        g_object_bind_property (self->previous_source, "visible",
+                                self->previous_source_label, "visible",
+                                G_BINDING_DEFAULT);
+        g_object_bind_property (self->next_source, "visible",
+                                self->next_source_label, "visible",
+                                G_BINDING_DEFAULT);
+
+        g_settings_bind (self->input_settings, "per-window",
+                         self->per_window_source, "active",
+                         G_SETTINGS_BIND_DEFAULT);
+        g_settings_bind (self->input_settings, "per-window",
+                         self->same_source, "active",
+                         G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
+
+        update_shortcuts (self);
+        update_modifiers_shortcut (self);
 }
 
 static void
@@ -1627,9 +1698,15 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_list);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, same_source);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, per_window_source);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, previous_source);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, previous_source_label);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, next_source);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, next_source_label);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, alt_next_source);
 
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
-        gtk_widget_class_bind_template_callback (widget_class, show_input_options);
         gtk_widget_class_bind_template_callback (widget_class, add_input);
         gtk_widget_class_bind_template_callback (widget_class, remove_selected_input);
         gtk_widget_class_bind_template_callback (widget_class, move_selected_input_up);

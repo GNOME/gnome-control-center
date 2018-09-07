@@ -22,14 +22,12 @@ sources = files(
   'cc-format-chooser.c',
   'cc-ibus-utils.c',
   'cc-input-chooser.c',
-  'cc-input-options.c',
   'cc-input-row.c',
 )
 
 resource_data = files(
   'cc-format-chooser.ui',
   'input-chooser.ui',
-  'input-options.ui',
   'region.ui'
 )
 
