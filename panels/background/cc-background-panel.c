@@ -69,6 +69,12 @@ CC_PANEL_REGISTER (CcBackgroundPanel, cc_background_panel)
 
 #define WID(y) (GtkWidget *) gtk_builder_get_object (panel->builder, y)
 
+enum
+{
+  ACTION_MODEL_TEXT, //TODO this was taken from cc-power-panel  What to do about repeated code??
+  ACTION_MODEL_VALUE
+};
+
 static const char *
 cc_background_panel_get_help_uri (CcPanel *panel)
 {
@@ -237,6 +243,73 @@ update_display_preview (CcBackgroundPanel *panel,
                                0, 0);
   cairo_paint (cr);
   cairo_destroy (cr);
+}
+
+/* set_value_for_combo: Sets the value of a combobox */
+static void
+set_value_for_combo (GtkComboBox *combo_box, gint value)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  gint value_tmp;
+  gboolean ret;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (combo_box);
+  ret = gtk_tree_model_get_iter_first (model, &iter);
+  if (!ret)
+    return;
+  
+  /* try to make the UI match the setting */
+  do
+    {
+      gtk_tree_model_get (model, &iter,
+                          ACTION_MODEL_VALUE, &value_tmp,
+                          -1);
+
+      if (value_tmp == value)
+        {
+          gtk_combo_box_set_active_iter (combo_box, &iter);
+          return;
+        }
+      
+    } while (gtk_tree_model_iter_next (model, &iter));
+
+  /* If no option matched the setting throw an error */
+  g_log(NULL, G_LOG_LEVEL_ERROR, "Unlisted value '%d' in combobox for alignment!", value);
+}
+
+static void
+update_alignment_comboboxes (CcBackgroundPanel *panel) 
+{
+  GtkWidget *combobox;
+  int value;
+
+  combobox = WID ("background-alignment-combo");
+  value = g_settings_get_enum (panel->settings, WP_OPTIONS_KEY);
+  set_value_for_combo (GTK_COMBO_BOX (combobox), value);
+
+  combobox = WID ("background-lock-alignment-combo");
+  value = g_settings_get_enum (panel->lock_settings, WP_OPTIONS_KEY);
+  set_value_for_combo (GTK_COMBO_BOX (combobox), value);
+}
+
+static void
+on_background_alignment_changed (GtkComboBox *combobox,
+                                 GSettings *settings)
+{
+  int value;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+
+  gboolean ok = gtk_combo_box_get_active_iter(combobox, &iter);
+  g_assert(ok);
+
+  model = gtk_combo_box_get_model (combobox);
+  gtk_tree_model_get (model, &iter, ACTION_MODEL_VALUE, &value, -1);
+
+  g_settings_set_enum (settings, "picture-options", value);
+  g_settings_apply (settings);
 }
 
 static gboolean
@@ -490,7 +563,7 @@ set_background (CcBackgroundPanel *panel,
   /* Also set the placement if we have a URI and the previous value was none */
   if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT)
     {
-      g_settings_set_enum (settings, WP_OPTIONS_KEY, cc_background_item_get_placement (item));
+      //g_settings_set_enum (settings, WP_OPTIONS_KEY, cc_background_item_get_placement (item));
     }
   else if (uri != NULL)
     {
@@ -565,6 +638,7 @@ on_lock_button_clicked (GtkButton         *button,
   launch_chooser (panel, panel->lock_settings);
 }
 
+
 static void
 on_settings_changed (GSettings         *settings,
                      gchar             *key,
@@ -572,12 +646,13 @@ on_settings_changed (GSettings         *settings,
 {
   reload_current_bg (panel, settings);
   update_preview (panel, settings, NULL);
+  update_alignment_comboboxes(panel);
 }
 
 static void
 cc_background_panel_init (CcBackgroundPanel *panel)
 {
-  gchar *objects[] = {"background-panel", NULL };
+  gchar *objects[] = {"background-panel", "style-liststore", NULL };
   g_autoptr(GError) err = NULL;
   GtkWidget *widget;
 
@@ -632,4 +707,13 @@ cc_background_panel_init (CcBackgroundPanel *panel)
   g_signal_connect (widget, "clicked", G_CALLBACK (on_background_button_clicked), panel);
   widget = WID ("background-lock-set-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (on_lock_button_clicked), panel);
+
+  /* Alignment comboboxes */
+  widget = WID ("background-alignment-combo");
+  g_signal_connect(widget, "changed", G_CALLBACK (on_background_alignment_changed), panel->settings);
+
+  widget = WID ("background-lock-alignment-combo");
+  g_signal_connect(widget, "changed", G_CALLBACK (on_background_alignment_changed), panel->lock_settings);
+  
+  update_alignment_comboboxes(panel);
 }
