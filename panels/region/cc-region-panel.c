@@ -115,7 +115,6 @@ struct _CcRegionPanel {
 #ifdef HAVE_IBUS
         IBusBus *ibus;
         GHashTable *ibus_engines;
-        GCancellable *ibus_cancellable;
 #endif
 };
 
@@ -148,9 +147,6 @@ cc_region_panel_finalize (GObject *object)
         g_clear_object (&self->xkb_info);
 #ifdef HAVE_IBUS
         g_clear_object (&self->ibus);
-        if (self->ibus_cancellable)
-                g_cancellable_cancel (self->ibus_cancellable);
-        g_clear_object (&self->ibus_cancellable);
         g_clear_pointer (&self->ibus_engines, g_hash_table_destroy);
 #endif
         g_free (self->language);
@@ -668,8 +664,6 @@ fetch_ibus_engines_result (GObject       *object,
                 return;
         }
 
-        g_clear_object (&self->ibus_cancellable);
-
         /* Maps engine ids to engine description objects */
         self->ibus_engines = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_object_unref);
 
@@ -690,11 +684,9 @@ fetch_ibus_engines_result (GObject       *object,
 static void
 fetch_ibus_engines (CcRegionPanel *self)
 {
-        self->ibus_cancellable = g_cancellable_new ();
-
         ibus_bus_list_engines_async (self->ibus,
                                      -1,
-                                     self->ibus_cancellable,
+                                     self->cancellable,
                                      (GAsyncReadyCallback)fetch_ibus_engines_result,
                                      self);
 
