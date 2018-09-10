@@ -776,7 +776,8 @@ add_input_row (CcRegionPanel   *self,
         gtk_widget_set_margin_end (label, 20);
         gtk_widget_set_margin_top (label, 18);
         gtk_widget_set_margin_bottom (label, 18);
-        gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+        gtk_widget_set_hexpand (label, TRUE);
+        gtk_container_add (GTK_CONTAINER (box), label);
 
         if (strcmp (type, INPUT_SOURCE_TYPE_IBUS) == 0) {
                 image = gtk_image_new_from_icon_name ("system-run-symbolic", GTK_ICON_SIZE_BUTTON);
@@ -785,7 +786,7 @@ add_input_row (CcRegionPanel   *self,
                 gtk_widget_set_margin_top (image, 6);
                 gtk_widget_set_margin_bottom (image, 6);
                 gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
-                gtk_box_pack_start (GTK_BOX (box), image, FALSE, TRUE, 0);
+                gtk_container_add (GTK_CONTAINER (box), image);
         }
 
         gtk_widget_show_all (row);
