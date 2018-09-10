@@ -1654,6 +1654,7 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
 
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_label);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_section);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_revealer);
