@@ -199,7 +199,7 @@ padded_label_new (char *text, gboolean narrow)
         gtk_widget_set_margin_bottom (widget, 10);
         gtk_widget_set_margin_start (widget, narrow ? 10 : 80);
         gtk_widget_set_margin_end (widget, narrow ? 10 : 80);
-        gtk_box_pack_start (GTK_BOX (widget), gtk_label_new (text), FALSE, FALSE, 0);
+        gtk_container_add (GTK_CONTAINER (widget), gtk_label_new (text));
 
         return widget;
 }
@@ -230,14 +230,14 @@ region_widget_new (const gchar *locale_id,
         gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
         gtk_widget_set_opacity (check, 0.0);
         g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
-        gtk_box_pack_start (GTK_BOX (box), check, FALSE, FALSE, 0);
+        gtk_container_add (GTK_CONTAINER (box), check);
         gtk_box_reorder_child (GTK_BOX (box), check, 0);
 
         check = gtk_image_new ();
         gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
         gtk_widget_set_opacity (check, 0.0);
         g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
-        gtk_box_pack_start (GTK_BOX (box), check, FALSE, FALSE, 0);
+        gtk_container_add (GTK_CONTAINER (box), check);
 
         g_object_set_data (G_OBJECT (row), "check", check);
         g_object_set_data_full (G_OBJECT (row), "locale-id", g_strdup (locale_id), g_free);
@@ -262,9 +262,10 @@ more_widget_new (void)
 
         arrow = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_MENU);
         gtk_style_context_add_class (gtk_widget_get_style_context (arrow), "dim-label");
+        gtk_widget_set_hexpand (arrow, TRUE);
         gtk_widget_set_margin_top (box, 10);
         gtk_widget_set_margin_bottom (box, 10);
-        gtk_box_pack_start (GTK_BOX (box), arrow, TRUE, TRUE, 0);
+        gtk_container_add (GTK_CONTAINER (box), arrow);
 
         return GTK_LIST_BOX_ROW (row);
 }
