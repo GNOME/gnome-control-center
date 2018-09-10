@@ -293,14 +293,16 @@ msan:
 
 armv8:
   <<: *multiarch
-  stage: test
+  stage: manual
+  when: manual
   variables:
     DOCKER_DRIVER: overlay
     IMAGE: "claudioandre/settings:fedora.aarch64"
 
 ppc64le:
   <<: *multiarch
-  stage: test
+  stage: manual
+  when: manual
   allow_failure: true
   variables:
     DOCKER_DRIVER: overlay
