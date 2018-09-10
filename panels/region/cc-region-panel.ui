@@ -28,7 +28,7 @@
             <property name="spacing">12</property>
             <property name="hexpand">True</property>
             <child>
-              <object class="GtkFrame" id="language_section">
+              <object class="GtkFrame" id="language_section_frame">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="margin_bottom">18</property>
@@ -49,7 +49,7 @@
                               <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <child>
-                                  <object class="GtkLabel" id="language_heading">
+                                  <object class="GtkLabel">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="margin_start">20</property>
@@ -128,11 +128,11 @@
                       <object class="GtkListBoxRow" id="formats_row">
                         <property name="visible">True</property>
                         <child>
-                          <object class="GtkBox" id="formats_box">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkLabel" id="formats_heading">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="margin_start">20</property>
@@ -168,7 +168,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkBox" id="input_section">
+              <object class="GtkBox" id="input_section_box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
@@ -186,7 +186,7 @@
                         <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkLabel" id="input_heading">
+                          <object class="GtkLabel" id="input_heading_label">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
@@ -244,7 +244,7 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkFrame" id="input_frame">
+                  <object class="GtkFrame">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label_xalign">0</property>
@@ -254,7 +254,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <accessibility>
-                          <relation target="input_heading" type="labelled-by"/>
+                          <relation target="input_heading_label" type="labelled-by"/>
                         </accessibility>
                         <child>
                           <object class="GtkListBoxRow" id="no_inputs_row">
@@ -277,7 +277,7 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkToolbar" id="input_toolbar">
+                  <object class="GtkToolbar">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="toolbar_style">icons</property>
@@ -287,15 +287,15 @@
                       <class name="inline-toolbar"/>
                     </style>
                     <child>
-                      <object class="GtkToolItem" id="i_s_ar_item">
+                      <object class="GtkToolItem">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkBox" id="i_s_ar_box">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkButton" id="add_input">
+                              <object class="GtkButton" id="add_input_button">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -306,7 +306,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkImage" id="i_s_a_image">
+                                  <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="icon_name">list-add-symbolic</property>
@@ -316,7 +316,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="remove_input">
+                              <object class="GtkButton" id="remove_input_button">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -327,7 +327,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkImage" id="i_s_r_image">
+                                  <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="icon_name">list-remove-symbolic</property>
@@ -341,7 +341,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkSeparatorToolItem" id="sep1">
+                      <object class="GtkSeparatorToolItem">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="draw">False</property>
@@ -351,15 +351,15 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkToolItem" id="i_s_ud_item">
+                      <object class="GtkToolItem">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkBox" id="i_s_ud_box">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkButton" id="move_up_input">
+                              <object class="GtkButton" id="move_up_input_button">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -370,7 +370,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkImage" id="i_s_up_image">
+                                  <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="icon_name">go-up-symbolic</property>
@@ -380,7 +380,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="move_down_input">
+                              <object class="GtkButton" id="move_down_input_button">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -391,7 +391,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkImage" id="i_s_down_image">
+                                  <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="icon_name">go-down-symbolic</property>
@@ -405,7 +405,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkSeparatorToolItem" id="sep2">
+                      <object class="GtkSeparatorToolItem">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="draw">False</property>
@@ -415,15 +415,15 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkToolItem" id="i_s_sc_item">
+                      <object class="GtkToolItem">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkBox" id="i_s_sc_box">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkButton" id="show_config">
+                              <object class="GtkButton" id="show_config_button">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -434,7 +434,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkImage" id="i_s_sc_image">
+                                  <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="icon_name">emblem-system-symbolic</property>
@@ -444,7 +444,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="show_layout">
+                              <object class="GtkButton" id="show_layout_button">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -455,7 +455,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkImage" id="i_s_sl_image">
+                                  <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="icon_name">input-keyboard-symbolic</property>
