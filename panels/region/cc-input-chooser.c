@@ -135,21 +135,22 @@ padded_label_new (const gchar        *text,
   if (direction == ROW_TRAVEL_DIRECTION_BACKWARD)
     {
       arrow = gtk_image_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
-      gtk_box_pack_start (GTK_BOX (widget), arrow, FALSE, TRUE, 0);
+      gtk_container_add (GTK_CONTAINER (widget), arrow);
     }
 
   label = gtk_label_new (text);
   gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_MIDDLE);
+  gtk_widget_set_hexpand (label, TRUE);
   gtk_widget_set_halign (label, alignment);
   set_row_widget_margins (label);
-  gtk_box_pack_start (GTK_BOX (widget), label, TRUE, TRUE, 0);
+  gtk_container_add (GTK_CONTAINER (widget), label);
   if (dim_label)
     gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
 
   if (direction == ROW_TRAVEL_DIRECTION_FORWARD)
     {
       arrow = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_MENU);
-      gtk_box_pack_start (GTK_BOX (widget), arrow, FALSE, TRUE, 0);
+      gtk_container_add (GTK_CONTAINER (widget), arrow);
     }
 
   return widget;
@@ -169,8 +170,9 @@ more_row_new (void)
 
   arrow = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_MENU);
   gtk_style_context_add_class (gtk_widget_get_style_context (arrow), "dim-label");
+  gtk_widget_set_hexpand (arrow, TRUE);
   set_row_widget_margins (arrow);
-  gtk_box_pack_start (GTK_BOX (box), arrow, TRUE, TRUE, 0);
+  gtk_container_add (GTK_CONTAINER (box), arrow);
 
   return GTK_LIST_BOX_ROW (row);
 }
@@ -249,7 +251,7 @@ input_source_row_new (GtkWidget   *chooser,
       image = gtk_image_new_from_icon_name ("system-run-symbolic", GTK_ICON_SIZE_MENU);
       set_row_widget_margins (image);
       gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
-      gtk_box_pack_start (GTK_BOX (widget), image, FALSE, TRUE, 0);
+      gtk_container_add (GTK_CONTAINER (widget), image);
 
       g_object_set_data_full (G_OBJECT (row), "name", display_name, g_free);
       g_object_set_data_full (G_OBJECT (row), "unaccented-name",
