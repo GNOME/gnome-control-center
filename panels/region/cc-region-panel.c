@@ -68,7 +68,7 @@ typedef enum {
 } SystemOp;
 
 struct _CcRegionPanel {
-	CcPanel      parent_instance;
+        CcPanel      parent_instance;
 
         GtkWidget   *login_button;
         GtkWidget   *login_label;
@@ -122,8 +122,8 @@ CC_PANEL_REGISTER (CcRegionPanel, cc_region_panel)
 static void
 cc_region_panel_finalize (GObject *object)
 {
-	CcRegionPanel *self = CC_REGION_PANEL (object);
-	GtkWidget *chooser;
+        CcRegionPanel *self = CC_REGION_PANEL (object);
+        GtkWidget *chooser;
 
         g_cancellable_cancel (self->cancellable);
         g_clear_object (&self->cancellable);
@@ -157,7 +157,7 @@ cc_region_panel_finalize (GObject *object)
         if (chooser)
                 gtk_widget_destroy (chooser);
 
-	G_OBJECT_CLASS (cc_region_panel_parent_class)->finalize (object);
+        G_OBJECT_CLASS (cc_region_panel_parent_class)->finalize (object);
 }
 
 static void
@@ -1641,14 +1641,14 @@ session_proxy_ready (GObject      *source,
 static void
 cc_region_panel_class_init (CcRegionPanelClass * klass)
 {
-	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
-	panel_class->get_help_uri = cc_region_panel_get_help_uri;
+        panel_class->get_help_uri = cc_region_panel_get_help_uri;
 
         object_class->constructed = cc_region_panel_constructed;
-	object_class->finalize = cc_region_panel_finalize;
+        object_class->finalize = cc_region_panel_finalize;
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/region.ui");
 
