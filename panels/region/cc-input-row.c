@@ -29,12 +29,14 @@ struct _CcInputRow
   GtkWidget       *drag_handle;
   GtkWidget       *name_label;
   GtkWidget       *icon_image;
+  GtkWidget       *settings_button;
 };
 
 G_DEFINE_TYPE (CcInputRow, cc_input_row, GTK_TYPE_LIST_BOX_ROW)
 
 enum
 {
+  SIGNAL_SHOW_SETTINGS,
   SIGNAL_MOVE_ROW,
   SIGNAL_REMOVE_ROW,
   SIGNAL_LAST
@@ -79,6 +81,14 @@ drag_data_received_cb (CcInputRow       *row,
 }
 
 static void
+settings_button_clicked_cb (CcInputRow *row)
+{
+  g_signal_emit (row,
+                 signals[SIGNAL_SHOW_SETTINGS],
+                 0);
+}
+
+static void
 remove_button_clicked_cb (CcInputRow *row)
 {
   g_signal_emit (row,
@@ -109,10 +119,22 @@ cc_input_row_class_init (CcInputRowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-input-row.ui");
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, drag_handle);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, name_label);
+  gtk_widget_class_bind_template_child (widget_class, CcInputRow, settings_button);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, icon_image);
   gtk_widget_class_bind_template_callback (widget_class, drag_data_get_cb);
   gtk_widget_class_bind_template_callback (widget_class, drag_data_received_cb);
+  gtk_widget_class_bind_template_callback (widget_class, settings_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
+
+  signals[SIGNAL_SHOW_SETTINGS] =
+    g_signal_new ("show-settings",
+                  G_TYPE_FROM_CLASS (object_class),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL,
+                  NULL,
+                  G_TYPE_NONE,
+                  0);
 
   signals[SIGNAL_MOVE_ROW] =
     g_signal_new ("move-row",
