@@ -58,15 +58,6 @@
 
 #define DEFAULT_LOCALE "en_US.utf-8"
 
-typedef enum {
-        CHOOSE_LANGUAGE,
-        CHOOSE_REGION,
-        ADD_INPUT,
-        REMOVE_INPUT,
-        MOVE_UP_INPUT,
-        MOVE_DOWN_INPUT,
-} SystemOp;
-
 struct _CcRegionPanel {
         CcPanel          parent_instance;
 
@@ -101,7 +92,6 @@ struct _CcRegionPanel {
         gboolean     login;
         gboolean     login_auto_apply;
         GPermission *permission;
-        SystemOp     op;
         GDBusProxy  *localed;
         GDBusProxy  *session;
         GCancellable *cancellable;
@@ -124,6 +114,32 @@ struct _CcRegionPanel {
 };
 
 CC_PANEL_REGISTER (CcRegionPanel, cc_region_panel)
+
+typedef struct
+{
+        CcRegionPanel *panel;
+        GtkListBoxRow *row;
+        gint           offset;
+} RowData;
+
+static RowData *
+row_data_new (CcRegionPanel *panel, GtkListBoxRow *row, gint offset)
+{
+        RowData *data = g_malloc0 (sizeof (RowData));
+        data->panel = panel;
+        data->row = g_object_ref (row);
+        data->offset = offset;
+        return data;
+}
+
+static void
+row_data_free (RowData *data)
+{
+        g_object_unref (data->row);
+        g_free (data);
+}
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (RowData, row_data_free)
 
 static void
 cc_region_panel_finalize (GObject *object)
@@ -475,49 +491,35 @@ show_region_chooser (CcRegionPanel *self)
 }
 
 static void show_input_chooser (CcRegionPanel *self);
-static void remove_selected_input (CcRegionPanel *self);
-static void move_selected_input (CcRegionPanel *self,
-                                 SystemOp       op);
+
+static gboolean
+permission_acquired (GPermission *permission, GAsyncResult *res, const gchar *action)
+{
+        g_autoptr(GError) error = NULL;
+
+        if (!g_permission_acquire_finish (permission, res, &error)) {
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_warning ("Failed to acquire permission to %s: %s\n", error->message, action);
+                return FALSE;
+        }
+
+        return FALSE;
+}
 
 static void
-permission_acquired (GObject      *source,
-                     GAsyncResult *res,
-                     gpointer      data)
+choose_language_permission_cb (GObject *source, GAsyncResult *res, gpointer user_data)
 {
-        CcRegionPanel *self = data;
-        g_autoptr(GError) error = NULL;
-        gboolean allowed;
+        CcRegionPanel *self = user_data;
+        if (permission_acquired (G_PERMISSION (source), res, "choose language"))
+                show_language_chooser (self);
+}
 
-        allowed = g_permission_acquire_finish (self->permission, res, &error);
-        if (error) {
-                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-                        g_warning ("Failed to acquire permission: %s\n", error->message);
-                return;
-        }
-
-        if (allowed) {
-                switch (self->op) {
-                case CHOOSE_LANGUAGE:
-                        show_language_chooser (self);
-                        break;
-                case CHOOSE_REGION:
-                        show_region_chooser (self);
-                        break;
-                case ADD_INPUT:
-                        show_input_chooser (self);
-                        break;
-                case REMOVE_INPUT:
-                        remove_selected_input (self);
-                        break;
-                case MOVE_UP_INPUT:
-                case MOVE_DOWN_INPUT:
-                        move_selected_input (self, self->op);
-                        break;
-                default:
-                        g_warning ("Unknown privileged operation: %d\n", self->op);
-                        break;
-                }
-        }
+static void
+choose_region_permission_cb (GObject *source, GAsyncResult *res, gpointer user_data)
+{
+        CcRegionPanel *self = user_data;
+        if (permission_acquired (G_PERMISSION (source), res, "choose region"))
+                show_region_chooser (self);
 }
 
 static void
@@ -528,20 +530,18 @@ activate_language_row (CcRegionPanel *self,
                 if (!self->login || g_permission_get_allowed (self->permission)) {
                         show_language_chooser (self);
                 } else if (g_permission_get_can_acquire (self->permission)) {
-                        self->op = CHOOSE_LANGUAGE;
                         g_permission_acquire_async (self->permission,
                                                     self->cancellable,
-                                                    permission_acquired,
+                                                    choose_language_permission_cb,
                                                     self);
                 }
         } else if (row == self->formats_row) {
                 if (!self->login || g_permission_get_allowed (self->permission)) {
                         show_region_chooser (self);
                 } else if (g_permission_get_can_acquire (self->permission)) {
-                        self->op = CHOOSE_REGION;
                         g_permission_acquire_async (self->permission,
                                                     self->cancellable,
-                                                    permission_acquired,
+                                                    choose_region_permission_cb,
                                                     self);
                 }
         }
@@ -900,7 +900,7 @@ update_buttons (CcRegionPanel *self)
                 gtk_widget_set_visible (GTK_WIDGET (self->show_config_button), app_info != NULL);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->show_layout_button), TRUE);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->remove_input_button), n_rows > 1);
-                gtk_widget_set_sensitive (GTK_WIDGET (self->move_up_input_button), index > 0);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->move_up_input_button), index > 1);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->move_down_input_button), index < n_rows - 1);
         }
 
@@ -1025,6 +1025,14 @@ show_input_chooser (CcRegionPanel *self)
 }
 
 static void
+add_input_permission_cb (GObject *source, GAsyncResult *res, gpointer user_data)
+{
+        CcRegionPanel *self = user_data;
+        if (permission_acquired (G_PERMISSION (source), res, "add input"))
+                show_input_chooser (self);
+}
+
+static void
 add_input (CcRegionPanel *self)
 {
         if (!self->login) {
@@ -1032,10 +1040,9 @@ add_input (CcRegionPanel *self)
         } else if (g_permission_get_allowed (self->permission)) {
                 show_input_chooser (self);
         } else if (g_permission_get_can_acquire (self->permission)) {
-                self->op = ADD_INPUT;
                 g_permission_acquire_async (self->permission,
                                             self->cancellable,
-                                            permission_acquired,
+                                            add_input_permission_cb,
                                             self);
         }
 }
@@ -1066,17 +1073,12 @@ find_sibling (GtkContainer *container, GtkWidget *child)
 }
 
 static void
-do_remove_selected_input (CcRegionPanel *self)
+do_remove_input (CcRegionPanel *self, GtkListBoxRow *row)
 {
-        GtkListBoxRow *selected;
         GtkWidget *sibling;
 
-        selected = gtk_list_box_get_selected_row (self->input_list);
-        if (selected == NULL)
-                return;
-
-        sibling = find_sibling (GTK_CONTAINER (self->input_list), GTK_WIDGET (selected));
-        gtk_container_remove (GTK_CONTAINER (self->input_list), GTK_WIDGET (selected));
+        sibling = find_sibling (GTK_CONTAINER (self->input_list), GTK_WIDGET (row));
+        gtk_container_remove (GTK_CONTAINER (self->input_list), GTK_WIDGET (row));
         gtk_list_box_select_row (self->input_list, GTK_LIST_BOX_ROW (sibling));
 
         cc_list_box_adjust_scrolling (self->input_list);
@@ -1086,47 +1088,50 @@ do_remove_selected_input (CcRegionPanel *self)
 }
 
 static void
+remove_input_permission_cb (GObject *source, GAsyncResult *res, gpointer user_data)
+{
+        RowData *data = user_data;
+        if (permission_acquired (G_PERMISSION (source), res, "remove input"))
+                do_remove_input (data->panel, data->row);
+}
+
+static void
 remove_selected_input (CcRegionPanel *self)
 {
+        GtkListBoxRow *selected;
+
+        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list));
+        g_return_if_fail (selected != NULL);
+
         if (!self->login) {
-                do_remove_selected_input (self);
+                do_remove_input (self, selected);
         } else if (g_permission_get_allowed (self->permission)) {
-                do_remove_selected_input (self);
+                do_remove_input (self, selected);
         } else if (g_permission_get_can_acquire (self->permission)) {
-                self->op = REMOVE_INPUT;
                 g_permission_acquire_async (self->permission,
                                             self->cancellable,
-                                            permission_acquired,
-                                            self);
+                                            remove_input_permission_cb,
+                                            row_data_new (self, selected, -1));
         }
 }
 
 static void
-do_move_selected_input (CcRegionPanel *self,
-                        SystemOp       op)
+do_move_input (CcRegionPanel *self,
+               GtkListBoxRow *row,
+               gint           offset)
 {
-        GtkListBoxRow *selected;
         gint idx;
 
-        g_assert (op == MOVE_UP_INPUT || op == MOVE_DOWN_INPUT);
+        idx = gtk_list_box_row_get_index (row) + offset;
 
-        selected = gtk_list_box_get_selected_row (self->input_list);
-        g_assert (selected);
+        gtk_list_box_unselect_row (self->input_list, row);
 
-        idx = gtk_list_box_row_get_index (selected);
-        if (op == MOVE_UP_INPUT)
-                idx -= 1;
-        else
-                idx += 1;
+        g_object_ref (row);
+        gtk_container_remove (GTK_CONTAINER (self->input_list), GTK_WIDGET (row));
+        gtk_list_box_insert (self->input_list, GTK_WIDGET (row), idx);
+        g_object_unref (row);
 
-        gtk_list_box_unselect_row (self->input_list, selected);
-
-        g_object_ref (selected);
-        gtk_container_remove (GTK_CONTAINER (self->input_list), GTK_WIDGET (selected));
-        gtk_list_box_insert (self->input_list, GTK_WIDGET (selected), idx);
-        g_object_unref (selected);
-
-        gtk_list_box_select_row (self->input_list, selected);
+        gtk_list_box_select_row (self->input_list, row);
 
         cc_list_box_adjust_scrolling (self->input_list);
 
@@ -1135,32 +1140,52 @@ do_move_selected_input (CcRegionPanel *self,
 }
 
 static void
-move_selected_input (CcRegionPanel *self,
-                     SystemOp       op)
+move_input_permission_cb (GObject *source, GAsyncResult *res, gpointer user_data)
+{
+        RowData *data = user_data;
+        if (permission_acquired (G_PERMISSION (source), res, "move input"))
+                do_move_input (data->panel, data->row, data->offset);
+}
+
+static void
+move_input (CcRegionPanel *self,
+            GtkListBoxRow *row,
+            gint           offset)
 {
         if (!self->login) {
-                do_move_selected_input (self, op);
+                do_move_input (self, row, offset);
         } else if (g_permission_get_allowed (self->permission)) {
-                do_move_selected_input (self, op);
+                do_move_input (self, row, offset);
         } else if (g_permission_get_can_acquire (self->permission)) {
-                self->op = op;
                 g_permission_acquire_async (self->permission,
                                             self->cancellable,
-                                            permission_acquired,
-                                            self);
+                                            move_input_permission_cb,
+                                            row_data_new (self, row, offset));
         }
 }
 
 static void
 move_selected_input_up (CcRegionPanel *self)
 {
-        move_selected_input (self, MOVE_UP_INPUT);
+        GtkListBoxRow *selected;
+
+        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list));
+        if (selected == NULL)
+                return;
+
+        move_input (self, selected, -1);
 }
 
 static void
 move_selected_input_down (CcRegionPanel *self)
 {
-        move_selected_input (self, MOVE_DOWN_INPUT);
+        GtkListBoxRow *selected;
+
+        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list));
+        if (selected == NULL)
+                return;
+
+        move_input (self, selected, 1);
 }
 
 static void
