@@ -27,8 +27,8 @@ sources = files(
 
 resource_data = files(
   'cc-format-chooser.ui',
+  'cc-region-panel.ui',
   'input-chooser.ui',
-  'region.ui'
 )
 
 sources += gnome.compile_resources(
