@@ -524,7 +524,7 @@ activate_language_row (CcRegionPanel *self,
                 } else if (g_permission_get_can_acquire (self->permission)) {
                         self->op = CHOOSE_LANGUAGE;
                         g_permission_acquire_async (self->permission,
-                                                    NULL,
+                                                    self->cancellable,
                                                     permission_acquired,
                                                     self);
                 }
@@ -534,7 +534,7 @@ activate_language_row (CcRegionPanel *self,
                 } else if (g_permission_get_can_acquire (self->permission)) {
                         self->op = CHOOSE_REGION;
                         g_permission_acquire_async (self->permission,
-                                                    NULL,
+                                                    self->cancellable,
                                                     permission_acquired,
                                                     self);
                 }
@@ -1069,7 +1069,7 @@ add_input (CcRegionPanel *self)
         } else if (g_permission_get_can_acquire (self->permission)) {
                 self->op = ADD_INPUT;
                 g_permission_acquire_async (self->permission,
-                                            NULL,
+                                            self->cancellable,
                                             permission_acquired,
                                             self);
         }
@@ -1130,7 +1130,7 @@ remove_selected_input (CcRegionPanel *self)
         } else if (g_permission_get_can_acquire (self->permission)) {
                 self->op = REMOVE_INPUT;
                 g_permission_acquire_async (self->permission,
-                                            NULL,
+                                            self->cancellable,
                                             permission_acquired,
                                             self);
         }
@@ -1180,7 +1180,7 @@ move_selected_input (CcRegionPanel *self,
         } else if (g_permission_get_can_acquire (self->permission)) {
                 self->op = op;
                 g_permission_acquire_async (self->permission,
-                                            NULL,
+                                            self->cancellable,
                                             permission_acquired,
                                             self);
         }
