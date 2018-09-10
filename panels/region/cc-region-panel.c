@@ -68,10 +68,36 @@ typedef enum {
 } SystemOp;
 
 struct _CcRegionPanel {
-        CcPanel      parent_instance;
+        CcPanel          parent_instance;
 
-        GtkWidget   *login_button;
-        GtkWidget   *login_label;
+        GtkButton       *add_input_button;
+        GtkLabel        *alt_next_source;
+        GtkLabel        *formats_label;
+        GtkListBoxRow   *formats_row;
+        GtkListBox      *input_list;
+        GtkBox          *input_section_box;
+        GtkToggleButton *login_button;
+        GtkLabel        *login_label;
+        GtkLabel        *language_label;
+        GtkListBox      *language_list;
+        GtkListBoxRow   *language_row;
+        GtkFrame        *language_section_frame;
+        GtkButton       *move_down_input_button;
+        GtkButton       *move_up_input_button;
+        GtkLabel        *next_source;
+        GtkLabel        *next_source_label;
+        GtkListBoxRow   *no_inputs_row;
+        GtkButton       *options_button;
+        GtkRadioButton  *per_window_source;
+        GtkLabel        *previous_source;
+        GtkLabel        *previous_source_label;
+        GtkButton       *remove_input_button;
+        GtkButton       *restart_button;
+        GtkRevealer     *restart_revealer;
+        GtkRadioButton  *same_source;
+        GtkButton       *show_config_button;
+        GtkButton       *show_layout_button;
+
         gboolean     login;
         gboolean     login_auto_apply;
         GPermission *permission;
@@ -79,14 +105,6 @@ struct _CcRegionPanel {
         GDBusProxy  *localed;
         GDBusProxy  *session;
         GCancellable *cancellable;
-
-        GtkWidget *restart_revealer;
-
-        GtkWidget     *language_section;
-        GtkListBoxRow *language_row;
-        GtkWidget     *language_label;
-        GtkListBoxRow *formats_row;
-        GtkWidget     *formats_label;
 
         ActUserManager *user_manager;
         ActUser        *user;
@@ -96,27 +114,6 @@ struct _CcRegionPanel {
         gchar *region;
         gchar *system_language;
         gchar *system_region;
-
-        GtkWidget *input_section;
-        GtkWidget *options_button;
-        GtkWidget *input_list;
-        GtkWidget *no_inputs_row;
-        GtkWidget *add_input;
-        GtkWidget *remove_input;
-        GtkWidget *move_up_input;
-        GtkWidget *move_down_input;
-        GtkWidget *show_config;
-        GtkWidget *show_layout;
-        GtkWidget *restart_button;
-        GtkWidget *language_list;
-        GtkWidget *same_source;
-        GtkWidget *per_window_source;
-        GtkWidget *previous_source;
-        GtkWidget *previous_source_label;
-        GtkWidget *next_source;
-        GtkWidget *next_source_label;
-        GtkWidget *alt_next_source;
-        GtkWidget *alt_next_source_label;
 
         GSettings *input_settings;
         GnomeXkbInfo *xkb_info;
@@ -178,7 +175,7 @@ cc_region_panel_constructed (GObject *object)
 
         if (self->permission)
                 cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (object)),
-                                                 self->login_button);
+                                                 GTK_WIDGET (self->login_button));
 }
 
 static const char *
@@ -228,7 +225,7 @@ set_restart_notification_visible (CcRegionPanel *self,
                 setlocale (LC_MESSAGES, locale);
         }
 
-        gtk_revealer_set_reveal_child (GTK_REVEALER (self->restart_revealer), visible);
+        gtk_revealer_set_reveal_child (self->restart_revealer, visible);
 
         if (locale)
                 setlocale (LC_MESSAGES, current_locale);
@@ -562,7 +559,7 @@ update_region_label (CcRegionPanel *self)
         if (!name)
                 name = gnome_get_country_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
 
-        gtk_label_set_label (GTK_LABEL (self->formats_label), name);
+        gtk_label_set_label (self->formats_label, name);
 }
 
 static void
@@ -585,7 +582,7 @@ update_language_label (CcRegionPanel *self)
         if (!name)
                 name = gnome_get_language_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
 
-        gtk_label_set_label (GTK_LABEL (self->language_label), name);
+        gtk_label_set_label (self->language_label, name);
 
         /* Formats will change too if not explicitly set. */
         update_region_label (self);
@@ -620,9 +617,9 @@ setup_language_section (CcRegionPanel *self)
         g_signal_connect_swapped (self->locale_settings, "changed::" KEY_REGION,
                                   G_CALLBACK (update_region_from_setting), self);
 
-        gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->language_list),
+        gtk_list_box_set_selection_mode (self->language_list,
                                          GTK_SELECTION_NONE);
-        gtk_list_box_set_header_func (GTK_LIST_BOX (self->language_list),
+        gtk_list_box_set_header_func (self->language_list,
                                       cc_list_box_update_header_func,
                                       NULL, NULL);
         g_signal_connect_swapped (self->language_list, "row-activated",
@@ -763,7 +760,7 @@ add_input_row (CcRegionPanel   *self,
         cc_input_row_set_is_input_method (row, strcmp (type, INPUT_SOURCE_TYPE_IBUS) == 0);
         gtk_container_add (GTK_CONTAINER (self->input_list), GTK_WIDGET (row));
 
-        cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->input_list));
+        cc_list_box_adjust_scrolling (self->input_list);
 }
 
 static void
@@ -834,7 +831,7 @@ clear_input_sources (CcRegionPanel *self)
                         gtk_container_remove (GTK_CONTAINER (self->input_list), GTK_WIDGET (l->data));
         }
 
-        cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->input_list));
+        cc_list_box_adjust_scrolling (self->input_list);
 }
 
 static void
@@ -866,7 +863,7 @@ input_sources_changed (GSettings     *settings,
         CcInputRow *selected;
         g_autofree gchar *id = NULL;
 
-        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list)));
+        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (self->input_list));
         if (selected)
                 id = g_strdup (cc_input_row_get_id (selected));
         clear_input_sources (self);
@@ -886,13 +883,13 @@ update_buttons (CcRegionPanel *self)
         children = gtk_container_get_children (GTK_CONTAINER (self->input_list));
         n_rows = g_list_length (children);
 
-        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list)));
+        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (self->input_list));
         if (selected == NULL) {
-                gtk_widget_set_visible (self->show_config, FALSE);
-                gtk_widget_set_sensitive (self->remove_input, FALSE);
-                gtk_widget_set_sensitive (self->show_layout, FALSE);
-                gtk_widget_set_sensitive (self->move_up_input, FALSE);
-                gtk_widget_set_sensitive (self->move_down_input, FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->show_config_button), FALSE);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->remove_input_button), FALSE);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->show_layout_button), FALSE);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->move_up_input_button), FALSE);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->move_down_input_button), FALSE);
         } else {
                 GDesktopAppInfo *app_info;
                 gint index;
@@ -900,14 +897,14 @@ update_buttons (CcRegionPanel *self)
                 app_info = cc_input_row_get_app_info (selected);
                 index = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (selected));
 
-                gtk_widget_set_visible (self->show_config, app_info != NULL);
-                gtk_widget_set_sensitive (self->show_layout, TRUE);
-                gtk_widget_set_sensitive (self->remove_input, n_rows > 1);
-                gtk_widget_set_sensitive (self->move_up_input, index > 0);
-                gtk_widget_set_sensitive (self->move_down_input, index < n_rows - 1);
+                gtk_widget_set_visible (GTK_WIDGET (self->show_config_button), app_info != NULL);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->show_layout_button), TRUE);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->remove_input_button), n_rows > 1);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->move_up_input_button), index > 0);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->move_down_input_button), index < n_rows - 1);
         }
 
-        gtk_widget_set_visible (self->options_button,
+        gtk_widget_set_visible (GTK_WIDGET (self->options_button),
                                 n_rows > 1 && !self->login);
 }
 
@@ -1074,15 +1071,15 @@ do_remove_selected_input (CcRegionPanel *self)
         GtkListBoxRow *selected;
         GtkWidget *sibling;
 
-        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list));
+        selected = gtk_list_box_get_selected_row (self->input_list);
         if (selected == NULL)
                 return;
 
         sibling = find_sibling (GTK_CONTAINER (self->input_list), GTK_WIDGET (selected));
         gtk_container_remove (GTK_CONTAINER (self->input_list), GTK_WIDGET (selected));
-        gtk_list_box_select_row (GTK_LIST_BOX (self->input_list), GTK_LIST_BOX_ROW (sibling));
+        gtk_list_box_select_row (self->input_list, GTK_LIST_BOX_ROW (sibling));
 
-        cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->input_list));
+        cc_list_box_adjust_scrolling (self->input_list);
 
         update_buttons (self);
         update_input (self);
@@ -1113,7 +1110,7 @@ do_move_selected_input (CcRegionPanel *self,
 
         g_assert (op == MOVE_UP_INPUT || op == MOVE_DOWN_INPUT);
 
-        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list));
+        selected = gtk_list_box_get_selected_row (self->input_list);
         g_assert (selected);
 
         idx = gtk_list_box_row_get_index (selected);
@@ -1122,16 +1119,16 @@ do_move_selected_input (CcRegionPanel *self,
         else
                 idx += 1;
 
-        gtk_list_box_unselect_row (GTK_LIST_BOX (self->input_list), selected);
+        gtk_list_box_unselect_row (self->input_list, selected);
 
         g_object_ref (selected);
         gtk_container_remove (GTK_CONTAINER (self->input_list), GTK_WIDGET (selected));
-        gtk_list_box_insert (GTK_LIST_BOX (self->input_list), GTK_WIDGET (selected), idx);
+        gtk_list_box_insert (self->input_list, GTK_WIDGET (selected), idx);
         g_object_unref (selected);
 
-        gtk_list_box_select_row (GTK_LIST_BOX (self->input_list), selected);
+        gtk_list_box_select_row (self->input_list, selected);
 
-        cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->input_list));
+        cc_list_box_adjust_scrolling (self->input_list);
 
         update_buttons (self);
         update_input (self);
@@ -1174,7 +1171,7 @@ show_selected_settings (CcRegionPanel *self)
         GDesktopAppInfo *app_info;
         g_autoptr(GError) error = NULL;
 
-        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list)));
+        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (self->input_list));
         if (selected == NULL)
                 return;
 
@@ -1201,7 +1198,7 @@ show_selected_layout (CcRegionPanel *self)
         const gchar *variant;
         g_autofree gchar *commandline = NULL;
 
-        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list)));
+        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (self->input_list));
         if (selected == NULL)
                 return;
 
@@ -1247,7 +1244,7 @@ show_selected_layout (CcRegionPanel *self)
 }
 
 static void
-update_shortcut_label (GtkWidget   *widget,
+update_shortcut_label (GtkLabel    *label,
                        const gchar *value)
 {
         g_autofree gchar *text = NULL;
@@ -1256,19 +1253,19 @@ update_shortcut_label (GtkWidget   *widget,
         GdkModifierType mods;
 
         if (value == NULL || *value == '\0') {
-                gtk_widget_hide (widget);
+                gtk_widget_hide (GTK_WIDGET (label));
                 return;
         }
 
         gtk_accelerator_parse_with_keycode (value, &accel_key, &keycode, &mods);
         if (accel_key == 0 && keycode == NULL && mods == 0) {
                 g_warning ("Failed to parse keyboard shortcut: '%s'", value);
-                gtk_widget_hide (widget);
+                gtk_widget_hide (GTK_WIDGET (label));
                 return;
         }
 
-        text = gtk_accelerator_get_label_with_keycode (gtk_widget_get_display (widget), accel_key, *keycode, mods);
-        gtk_label_set_text (GTK_LABEL (widget), text);
+        text = gtk_accelerator_get_label_with_keycode (gtk_widget_get_display (GTK_WIDGET (label)), accel_key, *keycode, mods);
+        gtk_label_set_text (label, text);
 }
 
 static void
@@ -1309,9 +1306,9 @@ update_modifiers_shortcut (CcRegionPanel *self)
 
         if (p && *p) {
                 text = gnome_xkb_info_description_for_option (xkb_info, "grp", *p);
-                gtk_label_set_text (GTK_LABEL (self->alt_next_source), text);
+                gtk_label_set_text (self->alt_next_source, text);
         } else {
-                gtk_widget_hide (self->alt_next_source);
+                gtk_widget_hide (GTK_WIDGET (self->alt_next_source));
         }
 }
 
@@ -1337,11 +1334,11 @@ setup_input_section (CcRegionPanel *self)
         maybe_start_ibus ();
 #endif
 
-        cc_list_box_setup_scrolling (GTK_LIST_BOX (self->input_list), 5);
+        cc_list_box_setup_scrolling (self->input_list, 5);
 
-        gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->input_list),
+        gtk_list_box_set_selection_mode (self->input_list,
                                          GTK_SELECTION_SINGLE);
-        gtk_list_box_set_header_func (GTK_LIST_BOX (self->input_list),
+        gtk_list_box_set_header_func (self->input_list,
                                       cc_list_box_update_header_func,
                                       NULL, NULL);
         g_signal_connect_object (self->input_list, "row-selected",
@@ -1556,7 +1553,7 @@ localed_proxy_ready (GObject      *source,
 
         self->localed = proxy;
 
-        gtk_widget_set_sensitive (self->login_button, TRUE);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->login_button), TRUE);
 
         g_signal_connect (self->localed, "g-properties-changed",
                           G_CALLBACK (on_localed_properties_changed), self);
@@ -1568,15 +1565,15 @@ login_changed (CcRegionPanel *self)
 {
         gboolean can_acquire;
 
-        self->login = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->login_button));
-        gtk_widget_set_visible (self->login_label, self->login);
+        self->login = gtk_toggle_button_get_active (self->login_button);
+        gtk_widget_set_visible (GTK_WIDGET (self->login_label), self->login);
 
         can_acquire = self->permission &&
                 (g_permission_get_allowed (self->permission) ||
                  g_permission_get_can_acquire (self->permission));
         /* FIXME: insensitive doesn't look quite right for this */
-        gtk_widget_set_sensitive (self->language_section, !self->login || can_acquire);
-        gtk_widget_set_sensitive (self->input_section, !self->login || can_acquire);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->language_section_frame), !self->login || can_acquire);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->input_section_box), !self->login || can_acquire);
 
         clear_input_sources (self);
         if (self->login)
@@ -1601,7 +1598,7 @@ set_login_button_visibility (CcRegionPanel *self)
         g_object_get (self->user_manager, "has-multiple-users", &has_multiple_users, NULL);
 
         self->login_auto_apply = !has_multiple_users && g_permission_get_allowed (self->permission);
-        gtk_widget_set_visible (self->login_button, !self->login_auto_apply);
+        gtk_widget_set_visible (GTK_WIDGET (self->login_button), !self->login_auto_apply);
 
         g_signal_handlers_disconnect_by_func (self->user_manager, set_login_button_visibility, self);
 }
@@ -1631,12 +1628,12 @@ setup_login_button (CcRegionPanel *self)
                           (GAsyncReadyCallback) localed_proxy_ready,
                           self);
 
-        self->login_button = gtk_toggle_button_new_with_mnemonic (_("Login _Screen"));
-        gtk_style_context_add_class (gtk_widget_get_style_context (self->login_button),
+        self->login_button = GTK_TOGGLE_BUTTON (gtk_toggle_button_new_with_mnemonic (_("Login _Screen")));
+        gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self->login_button)),
                                      "text-button");
-        gtk_widget_set_valign (self->login_button, GTK_ALIGN_CENTER);
-        gtk_widget_set_visible (self->login_button, FALSE);
-        gtk_widget_set_sensitive (self->login_button, FALSE);
+        gtk_widget_set_valign (GTK_WIDGET (self->login_button), GTK_ALIGN_CENTER);
+        gtk_widget_set_visible (GTK_WIDGET (self->login_button), FALSE);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->login_button), FALSE);
         g_signal_connect_swapped (self->login_button, "notify::active",
                                   G_CALLBACK (login_changed), self);
 
@@ -1680,34 +1677,34 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         object_class->constructed = cc_region_panel_constructed;
         object_class->finalize = cc_region_panel_finalize;
 
-        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/region.ui");
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-region-panel.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_row);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_label);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_section);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, add_input_button);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, alt_next_source);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_label);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_revealer);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_section);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, options_button);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_list);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, no_inputs_row);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, add_input);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, remove_input);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, move_up_input);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, move_down_input);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, show_config);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, show_layout);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_section_box);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_label);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_list);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, same_source);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_row);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_section_frame);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, move_down_input_button);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, move_up_input_button);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, next_source);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, next_source_label);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, no_inputs_row);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, options_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, per_window_source);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, previous_source);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, previous_source_label);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, next_source);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, next_source_label);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, alt_next_source);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, remove_input_button);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_revealer);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, same_source);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, show_config_button);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, show_layout_button);
 
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
         gtk_widget_class_bind_template_callback (widget_class, add_input);
