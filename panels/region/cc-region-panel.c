@@ -81,7 +81,6 @@ struct _CcRegionPanel {
         GCancellable *cancellable;
 
         GtkWidget *restart_revealer;
-        gchar *needs_restart_file_path;
 
         GtkWidget     *language_section;
         GtkListBoxRow *language_row;
@@ -154,8 +153,6 @@ cc_region_panel_finalize (GObject *object)
         g_free (self->system_language);
         g_free (self->system_region);
 
-        g_clear_pointer (&self->needs_restart_file_path, g_free);
-
         chooser = g_object_get_data (G_OBJECT (self), "input-chooser");
         if (chooser)
                 gtk_widget_destroy (chooser);
@@ -181,11 +178,24 @@ cc_region_panel_get_help_uri (CcPanel *panel)
         return "help:gnome-help/prefs-language";
 }
 
+static GFile *
+get_needs_restart_file (void)
+{
+        g_autofree gchar *path = NULL;
+
+        path = g_build_filename (g_get_user_runtime_dir (),
+                                 "gnome-control-center-region-needs-restart",
+                                 NULL);
+        return g_file_new_for_path (path);
+}
+
 static void
 restart_now (CcRegionPanel *self)
 {
-        g_file_delete (g_file_new_for_path (self->needs_restart_file_path),
-                                            NULL, NULL);
+        g_autoptr(GFile) file = NULL;
+
+        file = get_needs_restart_file ();
+        g_file_delete (file, NULL, NULL);
 
         g_dbus_proxy_call (self->session,
                            "Logout",
@@ -200,6 +210,9 @@ set_restart_notification_visible (CcRegionPanel *self,
                                   gboolean       visible)
 {
         g_autofree gchar *current_locale = NULL;
+        g_autoptr(GFile) file = NULL;
+        g_autoptr(GFileOutputStream) output_stream = NULL;
+        g_autoptr(GError) error = NULL;
 
         if (locale) {
                 current_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
@@ -211,15 +224,18 @@ set_restart_notification_visible (CcRegionPanel *self,
         if (locale)
                 setlocale (LC_MESSAGES, current_locale);
 
-        if (!visible) {
-                g_file_delete (g_file_new_for_path (self->needs_restart_file_path),
-                                                    NULL, NULL);
+        file = get_needs_restart_file ();
 
+        if (!visible) {
+                g_file_delete (file, NULL, NULL);
                 return;
         }
 
-        if (!g_file_set_contents (self->needs_restart_file_path, "", -1, NULL))
-                g_warning ("Unable to create %s", self->needs_restart_file_path);
+        output_stream = g_file_create (file, G_FILE_CREATE_NONE, NULL, &error);
+        if (output_stream == NULL) {
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_EXISTS))
+                        g_warning ("Unable to create %s: %s", g_file_get_path (file), error->message);
+        }
 }
 
 typedef struct {
@@ -1667,6 +1683,8 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
 static void
 cc_region_panel_init (CcRegionPanel *self)
 {
+        g_autoptr(GFile) needs_restart_file = NULL;
+
         g_resources_register (cc_region_get_resource ());
 
         gtk_widget_init_template (GTK_WIDGET (self));
@@ -1689,9 +1707,7 @@ cc_region_panel_init (CcRegionPanel *self)
         setup_language_section (self);
         setup_input_section (self);
 
-        self->needs_restart_file_path = g_build_filename (g_get_user_runtime_dir (),
-                                                          "gnome-control-center-region-needs-restart",
-                                                          NULL);
-        if (g_file_query_exists (g_file_new_for_path (self->needs_restart_file_path), NULL))
+        needs_restart_file = get_needs_restart_file ();
+        if (g_file_query_exists (needs_restart_file, NULL))
                 set_restart_notification_visible (self, NULL, TRUE);
 }
