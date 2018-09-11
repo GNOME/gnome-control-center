@@ -100,6 +100,7 @@ struct _CcRegionPanel {
         GtkWidget *input_section;
         GtkWidget *options_button;
         GtkWidget *input_list;
+        GtkWidget *no_inputs_row;
         GtkWidget *add_input;
         GtkWidget *remove_input;
         GtkWidget *move_up_input;
@@ -640,8 +641,12 @@ update_ibus_active_sources (CcRegionPanel *self)
 
         rows = gtk_container_get_children (GTK_CONTAINER (self->input_list));
         for (l = rows; l; l = l->next) {
-                CcInputRow *row = CC_INPUT_ROW (l->data);
+                CcInputRow *row;
                 IBusEngineDesc *engine_desc;
+
+                if (!CC_IS_INPUT_ROW (l->data))
+                        continue;
+                row = CC_INPUT_ROW (l->data);
 
                 if (g_strcmp0 (cc_input_row_get_input_type (row), INPUT_SOURCE_TYPE_IBUS) != 0)
                         continue;
@@ -742,20 +747,6 @@ setup_app_info_for_id (const gchar *id)
 #endif
 
 static void
-remove_no_input_row (GtkContainer *list)
-{
-        g_autoptr(GList) l = NULL;
-
-        l = gtk_container_get_children (list);
-        if (!l)
-                return;
-        if (l->next != NULL)
-                return;
-        if (g_strcmp0 (cc_input_row_get_input_type (CC_INPUT_ROW (l->data)), "none") == 0)
-                gtk_container_remove (list, GTK_WIDGET (l->data));
-}
-
-static void
 add_input_row (CcRegionPanel   *self,
                const gchar     *type,
                const gchar     *id,
@@ -764,7 +755,7 @@ add_input_row (CcRegionPanel   *self,
 {
         CcInputRow *row;
 
-        remove_no_input_row (GTK_CONTAINER (self->input_list));
+        gtk_widget_set_visible (GTK_WIDGET (self->no_inputs_row), FALSE);
 
         row = cc_input_row_new (type, id, app_info);
         gtk_widget_show (GTK_WIDGET (row));
@@ -776,12 +767,6 @@ add_input_row (CcRegionPanel   *self,
 }
 
 static void
-add_no_input_row (CcRegionPanel *self)
-{
-        add_input_row (self, "none", "none", _("No input source selected"), NULL);
-}
-
-static void
 add_input_sources (CcRegionPanel *self,
                    GVariant      *sources)
 {
@@ -789,7 +774,7 @@ add_input_sources (CcRegionPanel *self,
         const gchar *type, *id;
 
         if (g_variant_n_children (sources) < 1) {
-                add_no_input_row (self);
+                gtk_widget_set_visible (GTK_WIDGET (self->no_inputs_row), TRUE);
                 return;
         }
 
@@ -845,7 +830,8 @@ clear_input_sources (CcRegionPanel *self)
 
         list = gtk_container_get_children (GTK_CONTAINER (self->input_list));
         for (l = list; l; l = l->next) {
-                gtk_container_remove (GTK_CONTAINER (self->input_list), GTK_WIDGET (l->data));
+                if (CC_IS_INPUT_ROW (l->data))
+                        gtk_container_remove (GTK_CONTAINER (self->input_list), GTK_WIDGET (l->data));
         }
 
         cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->input_list));
@@ -856,6 +842,9 @@ select_by_id (GtkWidget   *row,
               gpointer     data)
 {
         const gchar *id = data;
+
+        if (!CC_IS_INPUT_ROW (row))
+                return;
 
         if (g_strcmp0 (cc_input_row_get_id (CC_INPUT_ROW (row)), id) == 0)
                 gtk_list_box_select_row (GTK_LIST_BOX (gtk_widget_get_parent (row)), GTK_LIST_BOX_ROW (row));
@@ -932,7 +921,12 @@ set_input_settings (CcRegionPanel *self)
         g_variant_builder_init (&builder, G_VARIANT_TYPE ("a(ss)"));
         list = gtk_container_get_children (GTK_CONTAINER (self->input_list));
         for (l = list; l; l = l->next) {
-                CcInputRow *row = CC_INPUT_ROW (l->data);
+                CcInputRow *row;
+
+                if (!CC_IS_INPUT_ROW (l->data))
+                        continue;
+
+                row = CC_INPUT_ROW (l->data);
                 g_variant_builder_add (&builder, "(ss)", cc_input_row_get_input_type (row), cc_input_row_get_id (row));
         }
 
@@ -962,10 +956,14 @@ input_source_already_added (CcRegionPanel *self,
         GList *l;
 
         list = gtk_container_get_children (GTK_CONTAINER (self->input_list));
-        for (l = list; l; l = l->next)
+        for (l = list; l; l = l->next) {
+                if (!CC_IS_INPUT_ROW (l->data))
+                        continue;
+
                 if (g_str_equal (id, cc_input_row_get_id (CC_INPUT_ROW (l->data)))) {
                         return TRUE;
                 }
+        }
 
         return FALSE;
 }
@@ -1459,9 +1457,7 @@ add_input_sources_from_localed (CcRegionPanel *self)
 
                 add_input_row (self, INPUT_SOURCE_TYPE_XKB, id, name ? name : id, NULL);
         }
-        if (n == 0) {
-                add_no_input_row (self);
-        }
+        gtk_widget_set_visible (GTK_WIDGET (self->no_inputs_row), n == 0);
 }
 
 static void
@@ -1512,8 +1508,12 @@ set_localed_input (CcRegionPanel *self)
 
         list = gtk_container_get_children (GTK_CONTAINER (self->input_list));
         for (li = list; li; li = li->next) {
-                CcInputRow *row = CC_INPUT_ROW (li->data);
+                CcInputRow *row;
                 const gchar *l, *v;
+
+                if (!CC_IS_INPUT_ROW (li->data))
+                        continue;
+                row = CC_INPUT_ROW (li->data);
 
                 if (g_str_equal (cc_input_row_get_input_type (row), INPUT_SOURCE_TYPE_IBUS))
                         continue;
@@ -1689,6 +1689,7 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_section);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, options_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_list);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, no_inputs_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, add_input);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, remove_input);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, move_up_input);
