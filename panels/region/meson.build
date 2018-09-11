@@ -24,6 +24,9 @@ sources = files(
   'cc-input-chooser.c',
   'cc-input-options.c',
   'cc-input-row.c',
+  'cc-input-source.c',
+  'cc-input-source-ibus.c',
+  'cc-input-source-xkb.c',
 )
 
 resource_data = files(

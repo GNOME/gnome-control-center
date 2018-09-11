@@ -26,6 +26,8 @@
 #include "cc-common-language.h"
 #include "cc-util.h"
 #include "cc-input-chooser.h"
+#include "cc-input-source-ibus.h"
+#include "cc-input-source-xkb.h"
 
 #ifdef HAVE_IBUS
 #include <ibus.h>
@@ -1067,32 +1069,29 @@ cc_input_chooser_set_ibus_engines (GtkWidget  *chooser,
 #endif  /* HAVE_IBUS */
 }
 
-gboolean
-cc_input_chooser_get_selected (GtkWidget  *chooser,
-                               gchar     **type,
-                               gchar     **id,
-                               gchar     **name)
+CcInputSource *
+cc_input_chooser_get_source (GtkWidget *chooser)
 {
   CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
   GtkListBoxRow *selected;
-  const gchar *t, *i, *n;
+  const gchar *t, *i;
 
   selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (priv->list));
   if (!selected)
-    return FALSE;
+    return NULL;
 
   t = g_object_get_data (G_OBJECT (selected), "type");
   i = g_object_get_data (G_OBJECT (selected), "id");
-  n = g_object_get_data (G_OBJECT (selected), "name");
 
-  if (!t || !i || !n)
+  if (!t || !i)
     return FALSE;
 
-  *type = g_strdup (t);
-  *id = g_strdup (i);
-  *name = g_strdup (n);
-
-  return TRUE;
+  if (g_strcmp0 (t, "xkb") == 0)
+    return CC_INPUT_SOURCE (cc_input_source_xkb_new_from_id (priv->xkb_info, i));
+  else if (g_strcmp0 (t, "ibus") == 0)
+    return CC_INPUT_SOURCE (cc_input_source_ibus_new (i));
+  else
+    return NULL;
 }
 
 void
