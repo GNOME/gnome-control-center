@@ -17,14 +17,13 @@
 
 #include <config.h>
 #include "cc-input-row.h"
+#include "cc-input-source-ibus.h"
 
 struct _CcInputRow
 {
   GtkListBoxRow    parent_instance;
 
-  gchar           *type;
-  gchar           *id;
-  GDesktopAppInfo *app_info;
+  CcInputSource   *source;
 
   GtkWidget       *name_label;
   GtkWidget       *icon_image;
@@ -37,9 +36,7 @@ cc_input_row_dispose (GObject *object)
 {
   CcInputRow *self = CC_INPUT_ROW (object);
 
-  g_clear_pointer (&self->type, g_free);
-  g_clear_pointer (&self->id, g_free);
-  g_clear_object (&self->app_info);
+  g_clear_object (&self->source);
 
   G_OBJECT_CLASS (cc_input_row_parent_class)->dispose (object);
 }
@@ -63,55 +60,32 @@ cc_input_row_init (CcInputRow *row)
   gtk_widget_init_template (GTK_WIDGET (row));
 }
 
+static void
+label_changed_cb (CcInputRow *row)
+{
+  g_autofree gchar *label = cc_input_source_get_label (row->source);
+  gtk_label_set_text (GTK_LABEL (row->name_label), label);
+}
+
 CcInputRow *
-cc_input_row_new (const gchar     *type,
-                  const gchar     *id,
-                  GDesktopAppInfo *app_info)
+cc_input_row_new (CcInputSource *source)
 {
   CcInputRow *row;
 
   row = g_object_new (CC_TYPE_INPUT_ROW, NULL);
-  row->type = g_strdup (type);
-  row->id = g_strdup (id);
-  if (app_info != NULL)
-    row->app_info = g_object_ref (app_info);
+  row->source = g_object_ref (source);
+
+  g_signal_connect_object (source, "label-changed", G_CALLBACK (label_changed_cb), row, G_CONNECT_SWAPPED);
+  label_changed_cb (row);
+
+  gtk_widget_set_visible (row->icon_image, CC_IS_INPUT_SOURCE_IBUS (source));
 
   return row;
 }
 
-const gchar *
-cc_input_row_get_input_type (CcInputRow *row)
+CcInputSource *
+cc_input_row_get_source (CcInputRow *row)
 {
   g_return_val_if_fail (CC_IS_INPUT_ROW (row), NULL);
-  return row->type;
-}
-
-const gchar *
-cc_input_row_get_id (CcInputRow *row)
-{
-  g_return_val_if_fail (CC_IS_INPUT_ROW (row), NULL);
-  return row->id;
-}
-
-GDesktopAppInfo *
-cc_input_row_get_app_info (CcInputRow *row)
-{
-  g_return_val_if_fail (CC_IS_INPUT_ROW (row), NULL);
-  return row->app_info;
-}
-
-void
-cc_input_row_set_label (CcInputRow  *row,
-                        const gchar *text)
-{
-  g_return_if_fail (CC_IS_INPUT_ROW (row));
-  gtk_label_set_text (GTK_LABEL (row->name_label), text);
-}
-
-void
-cc_input_row_set_is_input_method (CcInputRow  *row,
-                                  gboolean is_input_method)
-{
-  g_return_if_fail (CC_IS_INPUT_ROW (row));
-  gtk_widget_set_visible (row->icon_image, is_input_method);
+  return row->source;
 }

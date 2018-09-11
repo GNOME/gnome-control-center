@@ -1,5 +1,5 @@
 /*
- * Copyright © 2013 Red Hat, Inc
+ * Copyright © 2018 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -17,25 +17,23 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
-
-#include "cc-input-source.h"
-
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-xkb-info.h>
 
+#include "cc-input-source.h"
+
 G_BEGIN_DECLS
 
-#define CC_TYPE_INPUT_CHOOSER (cc_input_chooser_get_type ())
-G_DECLARE_FINAL_TYPE (CcInputChooser, cc_input_chooser, CC, INPUT_CHOOSER, GtkDialog)
+#define CC_TYPE_INPUT_SOURCE_XKB (cc_input_source_xkb_get_type ())
+G_DECLARE_FINAL_TYPE (CcInputSourceXkb, cc_input_source_xkb, CC, INPUT_SOURCE_XKB, CcInputSource)
 
-CcInputChooser *cc_input_chooser_new              (gboolean       is_login,
-                                                   GnomeXkbInfo  *xkb_info,
-                                                   GHashTable     *ibus_engines);
+CcInputSourceXkb *cc_input_source_xkb_new         (GnomeXkbInfo     *xkb_info,
+                                                   const gchar      *layout,
+                                                   const gchar      *variant);
 
-void            cc_input_chooser_set_ibus_engines (CcInputChooser *chooser,
-                                                   GHashTable     *ibus_engines);
+CcInputSourceXkb *cc_input_source_xkb_new_from_id (GnomeXkbInfo     *xkb_info,
+                                                   const gchar      *id);
 
-CcInputSource  *cc_input_chooser_get_source       (CcInputChooser *chooser);
+gchar            *cc_input_source_xkb_get_id      (CcInputSourceXkb *source);
 
 G_END_DECLS
