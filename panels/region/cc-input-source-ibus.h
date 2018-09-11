@@ -17,18 +17,30 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <config.h>
+
+#ifdef HAVE_IBUS
+#include <ibus.h>
+#endif
+
 #include <gio/gdesktopappinfo.h>
 
 #include "cc-input-source.h"
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_INPUT_ROW (cc_input_row_get_type ())
-G_DECLARE_FINAL_TYPE (CcInputRow, cc_input_row, CC, INPUT_ROW, GtkListBoxRow)
+#define CC_TYPE_INPUT_SOURCE_IBUS (cc_input_source_ibus_get_type ())
+G_DECLARE_FINAL_TYPE (CcInputSourceIBus, cc_input_source_ibus, CC, INPUT_SOURCE_IBUS, CcInputSource)
 
-CcInputRow      *cc_input_row_new        (CcInputSource   *source);
+CcInputSourceIBus *cc_input_source_ibus_new             (const gchar       *engine_name);
 
-CcInputSource   *cc_input_row_get_source (CcInputRow      *row);
+#ifdef HAVE_IBUS
+void               cc_input_source_ibus_set_engine_desc (CcInputSourceIBus *source,
+                                                         IBusEngineDesc    *engine_desc);
+#endif
+
+const gchar       *cc_input_source_ibus_get_engine_name (CcInputSourceIBus *source);
+
+GDesktopAppInfo   *cc_input_source_ibus_get_app_info    (CcInputSourceIBus *source);
 
 G_END_DECLS
