@@ -17,18 +17,23 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
-#include <gio/gdesktopappinfo.h>
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnome-desktop/gnome-xkb-info.h>
 
 #include "cc-input-source.h"
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_INPUT_ROW (cc_input_row_get_type ())
-G_DECLARE_FINAL_TYPE (CcInputRow, cc_input_row, CC, INPUT_ROW, GtkListBoxRow)
+#define CC_TYPE_INPUT_SOURCE_XKB (cc_input_source_xkb_get_type ())
+G_DECLARE_FINAL_TYPE (CcInputSourceXkb, cc_input_source_xkb, CC, INPUT_SOURCE_XKB, CcInputSource)
 
-CcInputRow      *cc_input_row_new        (CcInputSource   *source);
+CcInputSourceXkb *cc_input_source_xkb_new          (GnomeXkbInfo     *xkb_info,
+                                                    const gchar      *layout,
+                                                    const gchar      *variant);
 
-CcInputSource   *cc_input_row_get_source (CcInputRow      *row);
+CcInputSourceXkb *cc_input_source_xkb_new_from_id  (GnomeXkbInfo     *xkb_info,
+                                                    const gchar      *id);
+
+gchar             *cc_input_source_xkb_get_id      (CcInputSourceXkb *source);
 
 G_END_DECLS

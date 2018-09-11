@@ -19,6 +19,8 @@
 
 #include <gtk/gtk.h>
 
+#include "cc-input-source.h"
+
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-xkb-info.h>
 
@@ -30,12 +32,12 @@ G_DECLARE_FINAL_TYPE (CcInputChooser, cc_input_chooser, CC, INPUT_CHOOSER, GtkDi
 CcInputChooser *cc_input_chooser_new              (gboolean        is_login,
                                                    GnomeXkbInfo   *xkb_info,
                                                    GHashTable     *ibus_engines);
+
 void            cc_input_chooser_set_ibus_engines (CcInputChooser *chooser,
                                                    GHashTable     *ibus_engines);
-gboolean        cc_input_chooser_get_selected     (CcInputChooser *chooser,
-                                                   gchar         **type,
-                                                   gchar         **id,
-                                                   gchar         **name);
+
+CcInputSource  *cc_input_chooser_get_source       (CcInputChooser *chooser);
+
 void            cc_input_chooser_reset            (CcInputChooser *chooser);
 
 G_END_DECLS
