@@ -278,6 +278,22 @@
                         <accessibility>
                           <relation target="input_heading" type="labelled-by"/>
                         </accessibility>
+                        <child>
+                          <object class="GtkListBoxRow" id="no_inputs_row">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="selectable">False</property>
+                            <property name="activatable">False</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin">18</property>
+                                <property name="label" translatable="yes">No input source selected</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
