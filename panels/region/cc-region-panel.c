@@ -657,18 +657,6 @@ update_ibus_active_sources (CcRegionPanel *self)
 }
 
 static void
-update_input_chooser (CcRegionPanel *self)
-{
-        CcInputChooser *chooser;
-
-        chooser = g_object_get_data (G_OBJECT (self), "input-chooser");
-        if (!chooser)
-                return;
-
-        cc_input_chooser_set_ibus_engines (chooser, self->ibus_engines);
-}
-
-static void
 fetch_ibus_engines_result (GObject       *object,
                            GAsyncResult  *result,
                            CcRegionPanel *self)
@@ -698,7 +686,6 @@ fetch_ibus_engines_result (GObject       *object,
         }
 
         update_ibus_active_sources (self);
-        update_input_chooser (self);
 }
 
 static void
@@ -966,62 +953,46 @@ input_source_already_added (CcRegionPanel *self,
 }
 
 static void
-run_input_chooser (CcRegionPanel *self, CcInputChooser *chooser)
-{
-        if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_OK) {
-                g_autofree gchar *type = NULL;
-                g_autofree gchar *id = NULL;
-                g_autofree gchar *name = NULL;
-
-                if (cc_input_chooser_get_selected (chooser, &type, &id, &name) &&
-                    !input_source_already_added (self, id)) {
-                        g_autoptr(GDesktopAppInfo) app_info = NULL;
-
-                        if (g_str_equal (type, INPUT_SOURCE_TYPE_IBUS)) {
-#ifdef HAVE_IBUS
-                                app_info = setup_app_info_for_id (id);
-#endif
-                        } else {
-                                g_free (type);
-                                type = g_strdup (INPUT_SOURCE_TYPE_XKB);
-                        }
-
-                        add_input_row (self, type, id, name, app_info);
-                        update_buttons (self);
-                        update_input (self);
-                }
-        }
-        gtk_widget_hide (GTK_WIDGET (chooser));
-}
-
-static void
 show_input_chooser (CcRegionPanel *self)
 {
         CcInputChooser *chooser;
+        g_autofree gchar *type = NULL;
+        g_autofree gchar *id = NULL;
+        g_autofree gchar *name = NULL;
 
-        chooser = g_object_get_data (G_OBJECT (self), "input-chooser");
-
-        if (!chooser) {
-                GtkWidget *toplevel;
-
-                toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-                chooser = cc_input_chooser_new (self->login,
-                                                self->xkb_info,
+        chooser = cc_input_chooser_new (self->login,
+                                        self->xkb_info,
 #ifdef HAVE_IBUS
-                                                self->ibus_engines
+                                        self->ibus_engines
 #else
-                                                NULL
+                                        NULL
 #endif
-                                                );
-                gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (toplevel));
-                g_object_ref (chooser);
-                g_object_set_data_full (G_OBJECT (self), "input-chooser",
-                                        chooser, g_object_unref);
-        } else {
-                cc_input_chooser_reset (chooser);
+                                        );
+        gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+
+        if (gtk_dialog_run (GTK_DIALOG (chooser)) != GTK_RESPONSE_OK) {
+                gtk_widget_destroy (GTK_WIDGET (chooser));
+                return;
         }
 
-        run_input_chooser (self, chooser);
+        if (cc_input_chooser_get_selected (chooser, &type, &id, &name) &&
+            !input_source_already_added (self, id)) {
+                g_autoptr(GDesktopAppInfo) app_info = NULL;
+
+                if (g_str_equal (type, INPUT_SOURCE_TYPE_IBUS)) {
+#ifdef HAVE_IBUS
+                        app_info = setup_app_info_for_id (id);
+#endif
+                } else {
+                        g_free (type);
+                        type = g_strdup (INPUT_SOURCE_TYPE_XKB);
+                }
+
+                add_input_row (self, type, id, name, app_info);
+                update_buttons (self);
+                update_input (self);
+        }
+        gtk_widget_destroy (GTK_WIDGET (chooser));
 }
 
 static void

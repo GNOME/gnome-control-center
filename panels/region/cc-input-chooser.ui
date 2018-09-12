@@ -3,7 +3,6 @@
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcInputChooser" parent="GtkDialog">
     <property name="title" translatable="yes">Add an Input Source</property>
-    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
     <property name="resizable">True</property>
@@ -33,7 +32,7 @@
         <property name="orientation">vertical</property>
         <property name="spacing">0</property>
         <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow">
+          <object class="GtkScrolledWindow">
             <property name="visible">True</property>
             <property name="hscrollbar-policy">never</property>
             <property name="vscrollbar-policy">automatic</property>
@@ -44,18 +43,17 @@
             <property name="margin-top">6</property>
             <property name="margin-bottom">6</property>
             <property name="min-content-height">300</property>
+            <property name="vadjustment">scroll_adjustment</property>
             <child>
-              <object class="GtkViewport">
+              <object class="GtkListBox" id="input_sources_listbox">
                 <property name="visible">True</property>
-                <child>
-                  <object class="GtkListBox" id="input_listbox">
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="vexpand">True</property>
-                    <property name="halign">fill</property>
-                    <property name="valign">fill</property>
-                  </object>
-                </child>
+                <property name="can-focus">True</property>
+                <property name="vexpand">True</property>
+                <property name="halign">fill</property>
+                <property name="valign">fill</property>
+                <signal name="row-activated" handler="on_input_sources_listbox_row_activated_cb" object="CcInputChooser" swapped="yes" />
+                <signal name="selected-rows-changed" handler="on_input_sources_listbox_selected_rows_changed_cb" object="CcInputChooser" swapped="yes" />
+                <signal name="button-release-event" handler="on_input_sources_listbox_button_release_event_cb" object="CcInputChooser" swapped="yes" />
               </object>
             </child>
           </object>
@@ -68,6 +66,8 @@
             <property name="margin-end">6</property>
             <property name="margin-top">6</property>
             <property name="margin-bottom">6</property>
+            <signal name="search-changed" handler="on_filter_entry_search_changed_cb" object="CcInputChooser" swapped="yes" />
+            <signal name="key-release-event" handler="on_filter_entry_key_release_event_cb" object="CcInputChooser" swapped="yes" />
           </object>
         </child>
         <child>
@@ -90,4 +90,6 @@
       <action-widget response="-6">cancel_button</action-widget>
     </action-widgets>
   </template>
+  <object class="GtkAdjustment" id="scroll_adjustment">
+  </object>
 </interface>
