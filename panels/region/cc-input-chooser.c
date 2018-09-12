@@ -919,7 +919,7 @@ get_locale_infos (GtkWidget *chooser)
       tmp = gnome_get_language_from_locale (simple_locale, "C");
       info->untranslated_name = cc_util_normalize_casefold_and_unaccent (tmp);
 
-      g_hash_table_replace (priv->locales, simple_locale, info);
+      g_hash_table_replace (priv->locales, g_strdup (simple_locale), info);
       add_locale_to_table (priv->locales_by_language, lang_code, info);
 
       if (gnome_get_input_source_from_locale (simple_locale, &type, &id) &&
