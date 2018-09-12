@@ -884,7 +884,7 @@ get_locale_infos (GtkWidget *chooser)
   GList *l;
 
   priv->locales = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                         NULL, locale_info_free);
+                                         g_free, locale_info_free);
   priv->locales_by_language = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                      g_free, (GDestroyNotify) g_hash_table_destroy);
 
@@ -919,7 +919,7 @@ get_locale_infos (GtkWidget *chooser)
       tmp = gnome_get_language_from_locale (simple_locale, "C");
       info->untranslated_name = cc_util_normalize_casefold_and_unaccent (tmp);
 
-      g_hash_table_replace (priv->locales, simple_locale, info);
+      g_hash_table_replace (priv->locales, g_strdup (simple_locale), info);
       add_locale_to_table (priv->locales_by_language, lang_code, info);
 
       if (gnome_get_input_source_from_locale (simple_locale, &type, &id) &&
