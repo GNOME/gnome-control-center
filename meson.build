@@ -96,6 +96,21 @@ libgvc = subproject(
 )
 libgvc_dep = libgvc.get_variable('libgvc_dep')
 
+libhandy_dep = dependency('libhandy-0.0', version: '>= 0.0.4', required: false)
+if not libhandy_dep.found()
+  libhandy = subproject(
+    'libhandy',
+    default_options: [
+      'examples=false',
+      'glade_catalog=false',
+      'introspection=false',
+      'tests=false',
+      'vapi=false',
+    ]
+  )
+  libhandy_dep = libhandy.get_variable('libhandy_dep')
+endif
+
 goa_req_version = '>= 3.25.3'
 pulse_req_version = '>= 2.0'
 
@@ -122,6 +137,7 @@ common_deps = [
   gio_dep,
   glib_dep,
   gsettings_desktop_dep,
+  libhandy_dep,
   dependency('gio-unix-2.0'),
   dependency('gthread-2.0'),
   dependency('gtk+-3.0', version: '>= 3.22.20')
