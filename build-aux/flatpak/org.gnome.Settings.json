@@ -316,6 +316,10 @@
         {
             "name" : "NetworkManager",
             "buildsystem" : "meson",
+            "build-options" : {
+                "cflags" : "-ltinfo",
+                "cxxflags" : "-ltinfo"
+            },
             "config-opts" : [
                 "-Dlibaudit=no",
                 "-Ddbus_conf_dir=/app/etc/dbus-1/system.d",
@@ -343,8 +347,8 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "tag" : "1.12.0",
-                    "commit" : "8964dbe8bc9cbe7300a48bffe86faee6b149fbf2",
+                    "tag": "1.14.0",
+                    "commit" : "2979c891c4af7584780924e92b6d448b7d6cd328",
                     "url" : "https://gitlab.freedesktop.org/NetworkManager/NetworkManager.git"
                 }
             ]
