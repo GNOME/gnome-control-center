@@ -109,6 +109,7 @@ gnome_desktop_dep = dependency('gnome-desktop-3.0', version: '>= 3.27.90')
 gnome_settings_dep = dependency('gnome-settings-daemon', version: '>= 3.25.90')
 goa_dep = dependency('goa-1.0', version: goa_req_version)
 gsettings_desktop_dep = dependency('gsettings-desktop-schemas', version: '>= 3.27.2')
+libhandy_dep = dependency('libhandy-0.0', version: '>= 0.0.3')
 libxml_dep = dependency('libxml-2.0')
 polkit_gobject_dep = dependency('polkit-gobject-1', version: '>= 0.103')
 pulse_dep = dependency('libpulse', version: pulse_req_version)
@@ -123,6 +124,7 @@ common_deps = [
   gio_dep,
   glib_dep,
   gsettings_desktop_dep,
+  libhandy_dep,
   dependency('gio-unix-2.0'),
   dependency('gthread-2.0'),
   dependency('gtk+-3.0', version: '>= 3.22.20')
