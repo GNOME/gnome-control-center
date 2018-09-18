@@ -48,6 +48,7 @@ struct _CcFormatChooser {
         GtkWidget *number_format_label;
         GtkWidget *measurement_format_label;
         GtkWidget *paper_format_label;
+        GtkSearchBar *search_bar;
         gboolean adding;
         gboolean showing_extra;
         gchar *region;
@@ -408,7 +409,7 @@ show_more (CcFormatChooser *chooser)
         gtk_widget_set_size_request (GTK_WIDGET (chooser), width, height);
         gtk_window_set_resizable (GTK_WINDOW (chooser), TRUE);
 
-        gtk_widget_show (chooser->region_filter_entry);
+        gtk_search_bar_set_search_mode (chooser->search_bar, TRUE);
         gtk_widget_grab_focus (chooser->region_filter_entry);
 
         chooser->showing_extra = TRUE;
@@ -491,6 +492,7 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, number_format_label);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, measurement_format_label);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, paper_format_label);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, search_bar);
 }
 
 void
