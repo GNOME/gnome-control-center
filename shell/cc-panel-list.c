@@ -80,6 +80,7 @@ enum
 enum
 {
   SHOW_PANEL,
+  SHOW_NESTED_LIST,
   LAST_SIGNAL
 };
 
@@ -580,6 +581,7 @@ row_activated_cb (GtkWidget     *listbox,
   /* Details */
   if (row == self->details_row)
     {
+      g_signal_emit (self, signals[SHOW_NESTED_LIST], 0);
       switch_to_view (self, CC_PANEL_LIST_DETAILS);
       goto out;
     }
@@ -587,6 +589,7 @@ row_activated_cb (GtkWidget     *listbox,
   /* Devices */
   if (row == self->devices_row)
     {
+      g_signal_emit (self, signals[SHOW_NESTED_LIST], 0);
       switch_to_view (self, CC_PANEL_LIST_DEVICES);
       goto out;
     }
@@ -782,6 +785,18 @@ cc_panel_list_class_init (CcPanelListClass *klass)
                                       G_TYPE_NONE,
                                       1,
                                       G_TYPE_STRING);
+
+  /**
+   * CcPanelList:show-nested-list:
+   *
+   * Emited when a nested list is selected.
+   */
+  signals[SHOW_NESTED_LIST] = g_signal_new ("show-nested-list",
+                                            CC_TYPE_PANEL_LIST,
+                                            G_SIGNAL_RUN_LAST,
+                                            0, NULL, NULL, NULL,
+                                            G_TYPE_NONE,
+                                            0);
 
   /**
    * CcPanelList:search-mode:
