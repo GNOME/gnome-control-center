@@ -3,7 +3,6 @@
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcFormatChooser" parent="GtkDialog">
     <property name="can_focus">False</property>
-    <property name="border_width">5</property>
     <property name="title" translatable="yes">Formats</property>
     <property name="type_hint">dialog</property>
     <property name="resizable">False</property>
@@ -29,27 +28,36 @@
       </object>
     </child>
     <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox1">
+      <object class="GtkBox">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
+        <property name="spacing">0</property>
+        <property name="border_width">0</property>
         <child>
-          <object class="GtkBox" id="box1">
+          <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_start">6</property>
-            <property name="margin_end">6</property>
-            <property name="margin_top">6</property>
-            <property name="margin_bottom">6</property>
             <property name="hexpand">True</property>
-            <property name="spacing">20</property>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="vexpand">True</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">6</property>
+                <child>
+                  <object class="GtkSearchBar" id="search_bar">
+                    <property name="visible">True</property>
+                    <property name="hexpand">True</property>
+                    <child>
+                      <object class="GtkSearchEntry" id="region_filter_entry">
+                        <property name="visible">True</property>
+                        <property name="hexpand">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="width_chars">30</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
                 <child>
                   <object class="GtkScrolledWindow">
                     <property name="visible">True</property>
@@ -75,23 +83,6 @@
                       </object>
                     </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkSearchEntry" id="region_filter_entry">
-                    <property name="visible">False</property>
-                    <property name="hexpand">True</property>
-                    <property name="can_focus">True</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
                 </child>
               </object>
               <packing>
@@ -106,15 +97,15 @@
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="valign">start</property>
-                <property name="margin_end">20</property>
                 <property name="hexpand">True</property>
                 <property name="row_spacing">6</property>
                 <property name="column_spacing">6</property>
+                <property name="border_width">24</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_bottom">6</property>
+                    <property name="margin_bottom">12</property>
                     <property name="hexpand">True</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Preview</property>
