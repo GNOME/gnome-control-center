@@ -28,6 +28,8 @@
 #include "shell/cc-object-storage.h"
 
 #include <glib/gi18n.h>
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
 #include <NetworkManager.h>
 
 typedef enum
@@ -677,6 +679,8 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
   object_class->finalize = cc_wifi_panel_finalize;
   object_class->get_property = cc_wifi_panel_get_property;
   object_class->set_property = cc_wifi_panel_set_property;
+
+  g_type_ensure (HDY_TYPE_COLUMN);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-wifi-panel.ui");
 
