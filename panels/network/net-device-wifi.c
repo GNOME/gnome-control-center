@@ -1868,6 +1868,8 @@ make_row (GtkSizeGroup   *rows,
         g_free (title);
         gtk_widget_set_margin_top (widget, 12);
         gtk_widget_set_margin_bottom (widget, 12);
+        gtk_label_set_ellipsize (GTK_LABEL (widget), PANGO_ELLIPSIZE_END);
+        gtk_label_set_xalign (GTK_LABEL (widget), 0.f);
         gtk_box_pack_start (GTK_BOX (row_box), widget, FALSE, FALSE, 0);
 
         if (active) {
