@@ -238,6 +238,7 @@ add_stack_page (CcBluetoothPanel *self,
 
 	box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	g_object_set (G_OBJECT (box), "margin-top", 64, "margin-bottom", 64, NULL);
+	g_object_set (G_OBJECT (box), "margin-start", 12, "margin-end", 12, NULL);
 
 	if (g_str_equal (name, BLUETOOTH_AIRPLANE_PAGE) ||
 	    g_str_equal (name, BLUETOOTH_HW_AIRPLANE_PAGE)) {
@@ -258,6 +259,7 @@ add_stack_page (CcBluetoothPanel *self,
 	gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
 
 	label = gtk_label_new (explanation);
+	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
 	gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
 
 	if (g_str_equal (name, BLUETOOTH_AIRPLANE_PAGE)) {
