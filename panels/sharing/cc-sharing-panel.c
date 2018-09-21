@@ -218,6 +218,7 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sharing/sharing.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, approve_connections_radiobutton);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, hostname_entry);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, screen_sharing_grid);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, shared_folders_grid);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, main_list_box);
