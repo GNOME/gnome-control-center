@@ -507,6 +507,23 @@
             ]
         },
         {
+            "name" : "libhandy",
+            "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dexamples=false",
+                "-Dglade_catalog=false",
+                "-Dintrospection=false",
+                "-Dtests=false",
+                "-Dvapi=false"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://source.puri.sm/Librem5/libhandy.git"
+                }
+            ]
+        },
+        {
             "name" : "gnome-control-center",
             "buildsystem" : "meson",
             "sources" : [
