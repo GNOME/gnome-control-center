@@ -295,6 +295,7 @@ panel_changed (GtkWidget        *settings_widget,
 static void
 cc_bluetooth_panel_init (CcBluetoothPanel *self)
 {
+	GtkWidget *scrolled_window;
 	GError *error = NULL;
 
 	g_resources_register (cc_bluetooth_get_resource ());
@@ -336,9 +337,15 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	self->widget = bluetooth_settings_widget_new ();
 	g_signal_connect (G_OBJECT (self->widget), "panel-changed",
 			  G_CALLBACK (panel_changed), self);
+	g_object_set (G_OBJECT (self->widget), "margin-top", 32, "margin-bottom", 12, NULL);
+	g_object_set (G_OBJECT (self->widget), "margin-start", 128, "margin-end", 128, NULL);
+
+	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+	gtk_container_add (GTK_CONTAINER (scrolled_window), self->widget);
 	gtk_stack_add_named (GTK_STACK (self->stack),
-			     self->widget, BLUETOOTH_WORKING_PAGE);
+			     scrolled_window, BLUETOOTH_WORKING_PAGE);
 	gtk_widget_show (self->widget);
+	gtk_widget_show (scrolled_window);
 	gtk_widget_show (self->stack);
 
 	gtk_container_add (GTK_CONTAINER (self), self->stack);
