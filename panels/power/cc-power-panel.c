@@ -1116,7 +1116,7 @@ on_kbd_property_change (GDBusProxy *proxy,
 static void
 got_kbd_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
-  CcPowerPanel *self = CC_POWER_PANEL (user_data);
+  CcPowerPanel *self;
   g_autoptr(GError) error = NULL;
   GDBusProxy *kbd_proxy;
 
@@ -1128,6 +1128,7 @@ got_kbd_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
       return;
     }
 
+  self = CC_POWER_PANEL (user_data);
   self->kbd_proxy = kbd_proxy;
 
   /* we want to change the bar if the user presses brightness buttons */
