@@ -362,6 +362,7 @@ cc_object_storage_create_dbus_proxy_finish (GAsyncResult  *result,
   g_assert (!error || !*error);
 
   task_data = g_task_get_task_data (task);
+  g_assert (task_data != NULL);
 
   /* Retrieve the newly created proxy */
   proxy = g_task_propagate_pointer (task, &local_error);
@@ -386,7 +387,6 @@ cc_object_storage_create_dbus_proxy_finish (GAsyncResult  *result,
    * proxy asynchronously multiple times. Trying to do so is considered a programming
    * error.
    */
-  g_assert (task_data != NULL);
   g_assert (task_data->cached == cc_object_storage_has_object (key));
 
   /* If the proxy is already cached, destroy the newly created and used the cached proxy
