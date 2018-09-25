@@ -30,7 +30,7 @@ struct _CcObjectStorage
 G_DEFINE_TYPE (CcObjectStorage, cc_object_storage, G_TYPE_OBJECT)
 
 /* Singleton instance */
-CcObjectStorage *_instance = NULL;
+static CcObjectStorage *_instance = NULL;
 
 /* GTask API to create a new D-Bus proxy */
 typedef struct
