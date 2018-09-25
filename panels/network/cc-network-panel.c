@@ -479,6 +479,8 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         case NM_DEVICE_TYPE_BRIDGE:
         /* Don't add VPN devices */
         case NM_DEVICE_TYPE_TUN:
+        /* Don't add VLAN devices */
+        case NM_DEVICE_TYPE_VLAN:
                 return;
         default:
                 device_g_type = NET_TYPE_DEVICE_SIMPLE;
