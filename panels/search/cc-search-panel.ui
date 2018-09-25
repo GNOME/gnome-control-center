@@ -9,38 +9,19 @@
       <object class="GtkScrolledWindow" id="search_vbox">
         <property name="visible">True</property>
         <property name="hscrollbar_policy">never</property>
-        <property name="min_content_height">450</property>
         <child>
-          <object class="GtkBox">
+          <object class="HdyColumn">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-
-            <!-- Stub boxes to make the content cover 1/3 of the screen -->
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-              </object>
-              <packing>
-                <property name="pack_type">end</property>
-              </packing>
-            </child>
-
-            <!-- Content -->
+            <property name="maximum_width">600</property>
+            <property name="linear_growth_width">400</property>
+            <property name="margin_top">32</property>
+            <property name="margin_bottom">32</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
-                <property name="margin">32</property>
                 <property name="hexpand">True</property>
                 <child>
                   <object class="GtkFrame" id="search_frame">
