@@ -363,6 +363,16 @@ cc_object_storage_create_dbus_proxy_finish (GAsyncResult  *result,
 
   task_data = g_task_get_task_data (task);
 
+  /* Retrieve the newly created proxy */
+  proxy = g_task_propagate_pointer (task, &local_error);
+
+  /* If the proxy is not cached, do the normal caching routine */
+  if (local_error)
+    {
+      g_propagate_error (error, g_steal_pointer (&local_error));
+      return NULL;
+    }
+
   key = g_strdup_printf ("CcObjectStorage::dbus-proxy(%s,%s,%s)",
                          task_data->name,
                          task_data->path,
@@ -378,16 +388,6 @@ cc_object_storage_create_dbus_proxy_finish (GAsyncResult  *result,
    */
   g_assert (task_data != NULL);
   g_assert (task_data->cached == cc_object_storage_has_object (key));
-
-  /* Retrieve the newly created proxy */
-  proxy = g_task_propagate_pointer (task, &local_error);
-
-  /* If the proxy is not cached, do the normal caching routine */
-  if (local_error)
-    {
-      g_propagate_error (error, g_steal_pointer (&local_error));
-      return NULL;
-    }
 
   /* If the proxy is already cached, destroy the newly created and used the cached proxy
    * instead.
