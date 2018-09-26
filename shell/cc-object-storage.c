@@ -408,7 +408,7 @@ cc_object_storage_create_dbus_proxy_finish (GAsyncResult  *result,
 }
 
 /**
- * cc_object_storage_init:
+ * cc_object_storage_initialize:
  *
  * Initializes the single CcObjectStorage. This must be called only once,
  * and before every other method of this object.
