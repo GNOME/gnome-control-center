@@ -1023,13 +1023,14 @@ setup_am_pm_button (CcDateTimePanel *self)
 
   am_text = format_am_label ();
   self->am_label = gtk_label_new (am_text);
+  gtk_widget_show (self->am_label);
 
   pm_text = format_pm_label ();
   self->pm_label = gtk_label_new (pm_text);
+  gtk_widget_show (self->pm_label);
 
   gtk_container_add (GTK_CONTAINER (self->am_pm_stack), self->am_label);
   gtk_container_add (GTK_CONTAINER (self->am_pm_stack), self->pm_label);
-  gtk_widget_show_all (self->am_pm_stack);
   am_pm_stack_visible_child_changed_cb (self);
 
   provider = gtk_css_provider_new ();
