@@ -605,7 +605,7 @@ cc_background_panel_init (CcBackgroundPanel *panel)
   widget = WID ("background-panel");
 
   gtk_container_add (GTK_CONTAINER (panel), widget);
-  gtk_widget_show_all (GTK_WIDGET (panel));
+  gtk_widget_show (GTK_WIDGET (panel));
 
   /* setup preview area */
   widget = WID ("background-desktop-drawingarea");
