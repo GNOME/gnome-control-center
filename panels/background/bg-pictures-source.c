@@ -47,11 +47,25 @@ struct _BgPicturesSource
 
   GnomeDesktopThumbnailFactory *thumb_factory;
 
+  GQueue add_queue;
+  gint adds_running;
+
   GFileMonitor *picture_dir_monitor;
   GFileMonitor *cache_dir_monitor;
 
   GHashTable *known_items;
 };
+
+#define MAX_PARALLEL_ADD 4
+
+typedef struct {
+  BgPicturesSource     *bg_source;
+  GFile                *file;
+  gchar                *content_type;
+  guint64               mtime;
+  GtkTreeRowReference **ret_row_ref;
+  GCancellable         *cancellable;
+} AddQueueData;
 
 G_DEFINE_TYPE (BgPicturesSource, bg_pictures_source, BG_TYPE_SOURCE)
 
@@ -74,6 +88,86 @@ static char *bg_pictures_source_get_unique_filename (const char *uri);
 
 static void picture_opened_for_read (GObject *source_object, GAsyncResult *res, gpointer user_data);
 
+static gboolean add_single_file_real (BgPicturesSource     *bg_source,
+                                      GFile                *file,
+                                      const gchar          *content_type,
+                                      guint64               mtime,
+                                      GtkTreeRowReference **ret_row_ref);
+
+static void
+add_queue_data_free (AddQueueData *data)
+{
+  g_clear_object (&data->file);
+  g_clear_object (&data->cancellable);
+  g_free (data->content_type);
+  g_free (data);
+}
+
+static gboolean
+add_single_file_idle (gpointer user_data)
+{
+  AddQueueData *data = (AddQueueData*) user_data;
+
+  if (!g_cancellable_is_cancelled (data->cancellable))
+    add_single_file_real (data->bg_source, data->file, data->content_type,
+                          data->mtime, data->ret_row_ref);
+  add_queue_data_free (data);
+
+  return FALSE;
+}
+
+static void
+ensure_add_processing (BgPicturesSource *bg_source)
+{
+  while (bg_source->adds_running < MAX_PARALLEL_ADD)
+    {
+      AddQueueData *data = g_queue_pop_head (&bg_source->add_queue);
+
+      /* Nothing left to process */
+      if (!data)
+        return;
+
+      g_idle_add (add_single_file_idle, data);
+
+      bg_source->adds_running += 1;
+    }
+}
+
+static void
+add_processing_finished (BgPicturesSource     *bg_source)
+{
+  g_assert (bg_source->adds_running > 0);
+
+  bg_source->adds_running -= 1;
+
+  ensure_add_processing (bg_source);
+}
+
+static gboolean
+add_single_file (BgPicturesSource     *bg_source,
+                 GFile                *file,
+                 const gchar          *content_type,
+                 guint64               mtime,
+                 GtkTreeRowReference **ret_row_ref)
+{
+  AddQueueData *data = g_new0 (AddQueueData, 1);
+
+  data->bg_source = bg_source;
+  data->file = g_object_ref (file);
+  data->content_type = g_strdup (content_type);
+  data->mtime = mtime;
+  data->ret_row_ref = ret_row_ref;
+  data->cancellable = g_object_ref (bg_source->cancellable);
+
+  g_queue_push_tail (&bg_source->add_queue, data);
+
+  ensure_add_processing (bg_source);
+
+  /* Just return TRUE. */
+  return TRUE;
+}
+
+
 static void
 bg_pictures_source_dispose (GObject *object)
 {
@@ -84,6 +178,9 @@ bg_pictures_source_dispose (GObject *object)
       g_cancellable_cancel (source->cancellable);
       g_clear_object (&source->cancellable);
     }
+
+  g_queue_foreach (&source->add_queue, (GFunc) add_queue_data_free, NULL);
+  g_queue_clear (&source->add_queue);
 
   g_clear_object (&source->grl_miner);
   g_clear_object (&source->thumb_factory);
@@ -190,6 +287,9 @@ picture_scaled (GObject *source_object,
         {
           g_warning ("Failed to load image: %s", error->message);
           remove_placeholder (BG_PICTURES_SOURCE (user_data), item);
+
+          bg_source = BG_PICTURES_SOURCE (user_data);
+          add_processing_finished (bg_source);
         }
 
       return;
@@ -211,6 +311,8 @@ picture_scaled (GObject *source_object,
     {
       g_debug ("Ignored URL '%s' as it's a screenshot from gnome-screenshot", uri);
       remove_placeholder (BG_PICTURES_SOURCE (user_data), item);
+
+      add_processing_finished (bg_source);
       return;
     }
 
@@ -264,6 +366,8 @@ picture_scaled (GObject *source_object,
                        GINT_TO_POINTER (TRUE));
 
   g_clear_pointer (&surface, (GDestroyNotify) cairo_surface_destroy);
+
+  add_processing_finished (bg_source);
 }
 
 static void
@@ -288,6 +392,9 @@ picture_opened_for_read (GObject *source_object,
           g_autofree gchar *filename = g_file_get_path (G_FILE (source_object));
           g_warning ("Failed to load picture '%s': %s", filename, error->message);
           remove_placeholder (BG_PICTURES_SOURCE (user_data), item);
+
+          bg_source = BG_PICTURES_SOURCE (user_data);
+          add_processing_finished (bg_source);
         }
 
       return;
@@ -341,6 +448,10 @@ picture_copied_for_read (GObject *source_object,
 
           uri = g_file_get_uri (thumbnail_file);
           g_warning ("Failed to download '%s': %s", uri, error->message);
+
+          bg_source = BG_PICTURES_SOURCE (user_data);
+          add_processing_finished (bg_source);
+
           return;
         }
     }
@@ -441,11 +552,11 @@ bg_pictures_source_get_cache_file (void)
 }
 
 static gboolean
-add_single_file (BgPicturesSource     *bg_source,
-                 GFile                *file,
-                 const gchar          *content_type,
-                 guint64               mtime,
-                 GtkTreeRowReference **ret_row_ref)
+add_single_file_real (BgPicturesSource     *bg_source,
+                      GFile                *file,
+                      const gchar          *content_type,
+                      guint64               mtime,
+                      GtkTreeRowReference **ret_row_ref)
 {
   g_autoptr(CcBackgroundItem) item = NULL;
   CcBackgroundItemFlags flags = 0;
@@ -573,6 +684,11 @@ add_single_file (BgPicturesSource     *bg_source,
     }
   gtk_tree_path_free (path);
   g_clear_pointer (&surface, (GDestroyNotify) cairo_surface_destroy);
+
+  /* Async processing is happening. */
+  if (!retval)
+    add_processing_finished (bg_source);
+
   return retval;
 }
 
@@ -954,6 +1070,8 @@ bg_pictures_source_init (BgPicturesSource *self)
 					     g_str_equal,
 					     (GDestroyNotify) g_free,
 					     NULL);
+
+  g_queue_init (&self->add_queue);
 
   pictures_path = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
   if (pictures_path == NULL)
