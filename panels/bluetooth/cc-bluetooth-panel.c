@@ -106,7 +106,7 @@ cc_bluetooth_panel_constructed (GObject *object)
 	self->kill_switch_header = g_object_ref (WID ("box_power"));
 	cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
 					 self->kill_switch_header);
-	gtk_widget_show_all (self->kill_switch_header);
+	gtk_widget_show (self->kill_switch_header);
 }
 
 static void
@@ -237,6 +237,7 @@ add_stack_page (CcBluetoothPanel *self,
 	char *str;
 
 	box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+	gtk_widget_show (box);
 	g_object_set (G_OBJECT (box), "margin-top", 64, "margin-bottom", 64, NULL);
 	g_object_set (G_OBJECT (box), "margin-start", 12, "margin-end", 12, NULL);
 
@@ -248,17 +249,20 @@ add_stack_page (CcBluetoothPanel *self,
 		image = gtk_image_new_from_icon_name ("bluetooth-active-symbolic",
 						      GTK_ICON_SIZE_DIALOG);
 	}
+	gtk_widget_show (image);
 	gtk_image_set_pixel_size (GTK_IMAGE (image), 192);
 	gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
 	gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 24);
 
 	str = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>", message);
 	label = gtk_label_new ("");
+	gtk_widget_show (label);
 	gtk_label_set_markup (GTK_LABEL (label), str);
 	g_free (str);
 	gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
 
 	label = gtk_label_new (explanation);
+	gtk_widget_show (label);
 	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
 	gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
 
@@ -266,6 +270,7 @@ add_stack_page (CcBluetoothPanel *self,
 		GtkWidget *button;
 
 		button = gtk_button_new_with_label (_("Turn Off Airplane Mode"));
+		gtk_widget_show (button);
 		gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
 		gtk_widget_set_halign (button, GTK_ALIGN_CENTER);
 		g_signal_connect (G_OBJECT (button), "clicked",
@@ -274,7 +279,6 @@ add_stack_page (CcBluetoothPanel *self,
 	}
 
 	gtk_stack_add_named (GTK_STACK (self->stack), box, name);
-	gtk_widget_show_all (box);
 }
 
 static void
