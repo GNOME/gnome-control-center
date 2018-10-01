@@ -9,7 +9,6 @@ panels = [
   'keyboard',
   'mouse',
   'notifications',
-  'online-accounts',
   'power',
   'printers',
   'privacy',
@@ -20,6 +19,10 @@ panels = [
   'universal-access',
   'user-accounts'
 ]
+
+if enable_online_accounts
+  panels += ['online-accounts']
+endif
 
 if host_is_linux
   panels += ['network']
