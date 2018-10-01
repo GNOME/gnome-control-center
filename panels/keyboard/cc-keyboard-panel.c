@@ -234,9 +234,11 @@ add_item (CcKeyboardPanel *self,
                       "margin-bottom", 4,
                       "margin-top", 4,
                       NULL);
+  gtk_widget_show (box);
 
   /* Shortcut title */
   label = gtk_label_new (cc_keyboard_item_get_description (item));
+  gtk_widget_show (label);
   gtk_label_set_xalign (GTK_LABEL (label), 0.0);
   gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
   gtk_label_set_line_wrap_mode (GTK_LABEL (label), PANGO_WRAP_WORD_CHAR);
@@ -252,6 +254,7 @@ add_item (CcKeyboardPanel *self,
 
   /* Shortcut accelerator */
   label = gtk_label_new ("");
+  gtk_widget_show (label);
   gtk_label_set_xalign (GTK_LABEL (label), 0.0);
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 
@@ -271,6 +274,7 @@ add_item (CcKeyboardPanel *self,
 
   /* Reset shortcut button */
   reset_button = gtk_button_new_from_icon_name ("edit-clear-symbolic", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (reset_button);
   gtk_widget_set_valign (reset_button, GTK_ALIGN_CENTER);
 
   gtk_button_set_relief (GTK_BUTTON (reset_button), GTK_RELIEF_NONE);
@@ -296,9 +300,8 @@ add_item (CcKeyboardPanel *self,
 
   /* The row */
   row = gtk_list_box_row_new ();
+  gtk_widget_show (row);
   gtk_container_add (GTK_CONTAINER (row), box);
-
-  gtk_widget_show_all (row);
 
   g_object_set_data_full (G_OBJECT (row),
                           "data",
@@ -504,10 +507,11 @@ header_function (GtkListBoxRow *row,
 
   if (add_header)
     {
-      GtkWidget *box, *label;
+      GtkWidget *box, *label, *separator;
       g_autofree gchar *markup = NULL;
 
       box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+      gtk_widget_show (box);
       gtk_widget_set_margin_top (box, before ? 18 : 6);
 
       markup = g_strdup_printf ("<b>%s</b>", _(data->section_title));
@@ -517,15 +521,15 @@ header_function (GtkListBoxRow *row,
                             "xalign", 0.0,
                             "margin-start", 6,
                             NULL);
-
+      gtk_widget_show (label);
       gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
-
       gtk_container_add (GTK_CONTAINER (box), label);
-      gtk_container_add (GTK_CONTAINER (box), gtk_separator_new (GTK_ORIENTATION_HORIZONTAL));
+
+      separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (separator);
+      gtk_container_add (GTK_CONTAINER (box), separator);
 
       gtk_list_box_row_set_header (row, box);
-
-      gtk_widget_show_all (box);
     }
   else
     {
