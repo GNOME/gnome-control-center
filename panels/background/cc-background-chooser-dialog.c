@@ -384,11 +384,13 @@ create_view (CcBackgroundChooserDialog *chooser, GtkTreeModel *model)
   GtkWidget *sw;
 
   sw = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_show (sw);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
   gtk_widget_set_hexpand (sw, TRUE);
   gtk_widget_set_vexpand (sw, TRUE);
 
   icon_view = gtk_icon_view_new ();
+  gtk_widget_show (icon_view);
   gtk_icon_view_set_model (GTK_ICON_VIEW (icon_view), model);
   gtk_widget_set_hexpand (icon_view, TRUE);
   gtk_container_add (GTK_CONTAINER (sw), icon_view);
@@ -415,25 +417,24 @@ cc_background_chooser_dialog_constructed (GObject *object)
   CcBackgroundChooserDialog *chooser = CC_BACKGROUND_CHOOSER_DIALOG (object);
   GtkListStore *model;
   GtkWidget *sw;
-  GtkWidget *vbox;
 
   G_OBJECT_CLASS (cc_background_chooser_dialog_parent_class)->constructed (object);
 
   model = bg_source_get_liststore (BG_SOURCE (chooser->wallpapers_source));
   sw = create_view (chooser, GTK_TREE_MODEL (model));
+  gtk_widget_show (sw);
   gtk_stack_add_titled (GTK_STACK (chooser->stack), sw, "wallpapers", _("Wallpapers"));
   gtk_container_child_set (GTK_CONTAINER (chooser->stack), sw, "position", 0, NULL);
 
   model = bg_source_get_liststore (BG_SOURCE (chooser->pictures_source));
   sw = create_view (chooser, GTK_TREE_MODEL (model));
+  gtk_widget_show (sw);
   gtk_stack_add_named (GTK_STACK (chooser->pictures_stack), sw, "view");
 
   model = bg_source_get_liststore (BG_SOURCE (chooser->colors_source));
   sw = create_view (chooser, GTK_TREE_MODEL (model));
+  gtk_widget_show (sw);
   gtk_stack_add_titled (GTK_STACK (chooser->stack), sw, "colors", _("Colors"));
-
-  vbox = gtk_dialog_get_content_area (GTK_DIALOG (chooser));
-  gtk_widget_show_all (vbox);
 
   gtk_stack_set_visible_child_name (GTK_STACK (chooser->stack), "wallpapers");
   monitor_pictures_model (chooser);
@@ -471,6 +472,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 0);
 
   chooser->stack = gtk_stack_new ();
+  gtk_widget_show (chooser->stack);
   gtk_stack_set_homogeneous (GTK_STACK (chooser->stack), TRUE);
   gtk_container_add (GTK_CONTAINER (vbox), chooser->stack);
   g_signal_connect_swapped (chooser->stack, "notify::visible-child", G_CALLBACK (on_visible_child_notify), chooser);
@@ -487,15 +489,17 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   headerbar = gtk_dialog_get_header_bar (GTK_DIALOG (chooser));
 
   switcher = gtk_stack_switcher_new ();
+  gtk_widget_show (switcher);
   gtk_stack_switcher_set_stack (GTK_STACK_SWITCHER (switcher), GTK_STACK (chooser->stack));
   gtk_header_bar_set_custom_title (GTK_HEADER_BAR (headerbar), switcher);
-  gtk_widget_show (switcher);
 
   chooser->pictures_stack = gtk_stack_new ();
+  gtk_widget_show (chooser->pictures_stack);
   gtk_stack_set_homogeneous (GTK_STACK (chooser->pictures_stack), TRUE);
   gtk_stack_add_titled (GTK_STACK (chooser->stack), chooser->pictures_stack, "pictures", _("Pictures"));
 
   empty_pictures_box = gtk_grid_new ();
+  gtk_widget_show (empty_pictures_box);
   gtk_grid_set_column_spacing (GTK_GRID (empty_pictures_box), 12);
   gtk_orientable_set_orientation (GTK_ORIENTABLE (empty_pictures_box),
                                   GTK_ORIENTATION_HORIZONTAL);
@@ -503,14 +507,15 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_style_context_add_class (context, "dim-label");
   gtk_stack_add_named (GTK_STACK (chooser->pictures_stack), empty_pictures_box, "empty");
   img = gtk_image_new_from_icon_name ("emblem-photos-symbolic", GTK_ICON_SIZE_DIALOG);
+  gtk_widget_show (img);
   gtk_image_set_pixel_size (GTK_IMAGE (img), 64);
   gtk_widget_set_halign (img, GTK_ALIGN_END);
   gtk_widget_set_valign (img, GTK_ALIGN_CENTER);
   gtk_widget_set_hexpand (img, TRUE);
   gtk_widget_set_vexpand (img, TRUE);
-  gtk_widget_show (img);
   gtk_container_add (GTK_CONTAINER (empty_pictures_box), img);
   labels_grid = gtk_grid_new ();
+  gtk_widget_show (labels_grid);
   gtk_widget_set_halign (labels_grid, GTK_ALIGN_START);
   gtk_widget_set_valign (labels_grid, GTK_ALIGN_CENTER);
   gtk_widget_set_hexpand (labels_grid, TRUE);
@@ -521,15 +526,16 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_widget_show (labels_grid);
   gtk_container_add (GTK_CONTAINER (empty_pictures_box), labels_grid);
   label = gtk_label_new ("");
+  gtk_widget_show (label);
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
   gtk_widget_set_halign (label, GTK_ALIGN_START);
   markup = g_markup_printf_escaped ("<b><span size='large'>%s</span></b>",
                                     /* translators: No pictures were found */
                                     _("No Pictures Found"));
   gtk_label_set_markup (GTK_LABEL (label), markup);
-  gtk_widget_show (label);
   gtk_container_add (GTK_CONTAINER (labels_grid), label);
   label = gtk_label_new ("");
+  gtk_widget_show (label);
   gtk_label_set_max_width_chars (GTK_LABEL (label), 24);
   gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
@@ -554,7 +560,6 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
    * the context "You can add images to your Pictures folder and they will show up here" */
   markup2 = g_strdup_printf (_("You can add images to your %s folder and they will show up here"), href);
   gtk_label_set_markup (GTK_LABEL (label), markup2);
-  gtk_widget_show (label);
   gtk_container_add (GTK_CONTAINER (labels_grid), label);
 
   gtk_dialog_add_button (GTK_DIALOG (chooser), _("_Cancel"), GTK_RESPONSE_CANCEL);
