@@ -279,6 +279,13 @@ maybe_update_snap (CcDisplayArrangement *self,
         {
           update_snap = SNAP_DIR_BOTH;
         }
+
+      /* Also allow a minor axis to be added if the first axis remains identical. */
+      if (((snap_data->snapped == SNAP_DIR_X) && (major_axis == SNAP_DIR_X) && (new_x == snap_data->mon_x)) ||
+          ((snap_data->snapped == SNAP_DIR_Y) && (major_axis == SNAP_DIR_Y) && (new_y == snap_data->mon_y)))
+        {
+          update_snap = SNAP_DIR_BOTH;
+        }
     }
   else if (snapped == SNAP_DIR_X)
     {
