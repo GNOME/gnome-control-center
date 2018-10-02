@@ -29,7 +29,11 @@
 #include <string.h>
 #include <cairo-gobject.h>
 #include <gio/gio.h>
+
+#ifdef HAVE_ONLINE_ACCOUNTS
 #include <grilo.h>
+#endif
+
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 #include <gdesktop-enums.h>
 
@@ -42,9 +46,9 @@ struct _BgPicturesSource
   BgSource parent_instance;
 
   GCancellable *cancellable;
-
+#ifdef HAVE_ONLINE_ACCOUNTS
   CcBackgroundGriloMiner *grl_miner;
-
+#endif
   GnomeDesktopThumbnailFactory *thumb_factory;
 
   GFileMonitor *picture_dir_monitor;
@@ -84,8 +88,9 @@ bg_pictures_source_dispose (GObject *object)
       g_cancellable_cancel (source->cancellable);
       g_clear_object (&source->cancellable);
     }
-
+#ifdef HAVE_ONLINE_ACCOUNTS
   g_clear_object (&source->grl_miner);
+#endif
   g_clear_object (&source->thumb_factory);
 
   G_OBJECT_CLASS (bg_pictures_source_parent_class)->dispose (object);
@@ -963,10 +968,11 @@ bg_pictures_source_init (BgPicturesSource *self)
 
   cache_path = bg_pictures_source_get_cache_path ();
   self->cache_dir_monitor = monitor_path (self, cache_path);
-
+#ifdef HAVE_ONLINE_ACCOUNTS
   self->grl_miner = cc_background_grilo_miner_new ();
   g_signal_connect_swapped (self->grl_miner, "media-found", G_CALLBACK (media_found_cb), self);
   cc_background_grilo_miner_start (self->grl_miner);
+#endif
 
   self->thumb_factory =
     gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);

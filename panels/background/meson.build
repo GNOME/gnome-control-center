@@ -75,7 +75,6 @@ sources = common_sources + files(
   'bg-source.c',
   'bg-wallpapers-source.c',
   'cc-background-chooser-dialog.c',
-  'cc-background-grilo-miner.c',
   'cc-background-item.c',
   'cc-background-xml.c'
 )
@@ -83,11 +82,19 @@ sources = common_sources + files(
 deps = common_deps + [
   gdk_pixbuf_dep,
   gnome_desktop_dep,
-  goa_dep,
   libxml_dep,
-  dependency('cairo-gobject'),
-  dependency('grilo-0.3', version: '>= 0.3.0')
+  dependency('cairo-gobject')
 ]
+
+if enable_online_accounts
+  deps += [
+    goa_dep,
+    dependency('grilo-0.3', version: '>= 0.3.0')
+  ]
+  sources = sources + files(
+    'cc-background-grilo-miner.c'
+  )
+endif
 
 cflags += [
   '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir),
