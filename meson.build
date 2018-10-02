@@ -107,7 +107,6 @@ gio_dep = dependency('gio-2.0')
 glib_dep = dependency('glib-2.0', version: '>= 2.53.0')
 gnome_desktop_dep = dependency('gnome-desktop-3.0', version: '>= 3.27.90')
 gnome_settings_dep = dependency('gnome-settings-daemon', version: '>= 3.25.90')
-goa_dep = dependency('goa-1.0', version: goa_req_version)
 gsettings_desktop_dep = dependency('gsettings-desktop-schemas', version: '>= 3.27.2')
 libxml_dep = dependency('libxml-2.0')
 polkit_gobject_dep = dependency('polkit-gobject-1', version: '>= 0.103')
@@ -147,6 +146,13 @@ check_headers = [
 foreach header: check_headers
   assert(cc.has_header(header[1], args: cups_cflags), 'CUPS headers not found: ' + header[1])
 endforeach
+
+# Optional online accounts support
+enable_online_accounts = get_option('online_accounts')
+
+if enable_online_accounts
+  goa_dep = dependency('goa-1.0', version: goa_req_version)
+endif
 
 # Optional dependency for the user accounts panel
 enable_cheese = get_option('cheese')
@@ -279,6 +285,7 @@ output += '     GNOME Bluetooth (Bluetooth panel) .......... ' + host_is_linux_n
 output += '     Cheese (Users panel webcam support) ........ ' + enable_cheese.to_string() + '\n'
 output += '     IBus (Region panel IBus support) ........... ' + enable_ibus.to_string() + '\n'
 output += '     NetworkManager (Network panel) ............. ' + host_is_linux.to_string() + '\n'
+output += '     Online Accounts (Online accounts support)... ' + enable_online_accounts.to_string() + '\n'
 output += '     Wacom (Wacom tablet panel) ................. ' + host_is_linux_not_s390.to_string() + '\n'
 output += '     Wayland .................................... ' + enable_wayland.to_string() + '\n'
 

@@ -47,7 +47,9 @@ extern GType cc_network_panel_get_type (void);
 extern GType cc_wifi_panel_get_type (void);
 #endif /* BUILD_NETWORK */
 extern GType cc_notifications_panel_get_type (void);
+#ifdef HAVE_ONLINE_ACCOUNTS
 extern GType cc_goa_panel_get_type (void);
+#endif
 extern GType cc_power_panel_get_type (void);
 extern GType cc_printers_panel_get_type (void);
 extern GType cc_privacy_panel_get_type (void);
@@ -104,7 +106,9 @@ static struct {
   PANEL_TYPE("wifi",             cc_wifi_panel_get_type,                 cc_wifi_panel_static_init_func),
 #endif
   PANEL_TYPE("notifications",    cc_notifications_panel_get_type,        NULL),
+#ifdef HAVE_ONLINE_ACCOUNTS
   PANEL_TYPE("online-accounts",  cc_goa_panel_get_type,                  NULL),
+#endif
   PANEL_TYPE("power",            cc_power_panel_get_type,                NULL),
   PANEL_TYPE("printers",         cc_printers_panel_get_type,             NULL),
   PANEL_TYPE("privacy",          cc_privacy_panel_get_type,              NULL),
