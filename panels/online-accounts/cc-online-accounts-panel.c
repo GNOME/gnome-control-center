@@ -56,6 +56,7 @@ struct _CcGoaPanel
   GtkWidget *stack;
   GtkWidget *accounts_vbox;
 
+  gboolean   destroyed;
   guint      remove_account_timeout_id;
 };
 
@@ -394,6 +395,8 @@ cc_goa_panel_dispose (GObject *object)
   /* Must be destroyed in dispose, not finalize. */
   g_clear_pointer (&panel->edit_account_dialog, gtk_widget_destroy);
 
+  panel->destroyed = TRUE;
+
   G_OBJECT_CLASS (cc_goa_panel_parent_class)->dispose (object);
 }
 
@@ -489,7 +492,7 @@ cc_goa_panel_init (CcGoaPanel *panel)
                     panel);
 
   fill_accounts_listbox (panel);
-  goa_provider_get_all (get_all_providers_cb, panel);
+  goa_provider_get_all (get_all_providers_cb, g_object_ref_sink (panel));
 
   gtk_widget_show (GTK_WIDGET (panel));
 }
@@ -852,12 +855,15 @@ get_all_providers_cb (GObject      *source,
                       GAsyncResult *res,
                       gpointer      user_data)
 {
-  CcGoaPanel *self = user_data;
+  g_autoptr (CcGoaPanel) self = user_data;
   GList *providers;
   GList *l;
 
   providers = NULL;
   if (!goa_provider_get_all_finish (&providers, res, NULL))
+    return;
+
+  if (self->destroyed)
     return;
 
   for (l = providers; l != NULL; l = l->next)
