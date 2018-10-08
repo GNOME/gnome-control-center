@@ -1215,7 +1215,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
     {
       g_signal_connect (self->permission, "notify",
                         G_CALLBACK (on_permission_changed), self);
-      on_permission_changed (self->permission, NULL, self);
     }
   else
     {
