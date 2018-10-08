@@ -376,9 +376,9 @@ update_language (CcRegionPanel *self,
 }
 
 static void
-language_response (CcLanguageChooser *chooser,
+language_response (CcRegionPanel     *self,
                    gint               response_id,
-                   CcRegionPanel     *self)
+                   CcLanguageChooser *chooser)
 {
         const gchar *language;
 
@@ -420,9 +420,9 @@ update_region (CcRegionPanel *self,
 }
 
 static void
-format_response (CcFormatChooser *chooser,
+format_response (CcRegionPanel   *self,
                  gint             response_id,
-                 CcRegionPanel   *self)
+                 CcFormatChooser *chooser)
 {
         const gchar *region;
 
@@ -451,8 +451,8 @@ show_language_chooser (CcRegionPanel *self)
         chooser = cc_language_chooser_new ();
         gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
         cc_language_chooser_set_language (chooser, get_effective_language (self));
-        g_signal_connect (chooser, "response",
-                          G_CALLBACK (language_response), self);
+        g_signal_connect_object (chooser, "response",
+                                 G_CALLBACK (language_response), self, G_CONNECT_SWAPPED);
         gtk_window_present (GTK_WINDOW (chooser));
 }
 
@@ -483,8 +483,8 @@ show_region_chooser (CcRegionPanel *self)
         chooser = cc_format_chooser_new ();
         gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
         cc_format_chooser_set_region (chooser, get_effective_region (self));
-        g_signal_connect (chooser, "response",
-                          G_CALLBACK (format_response), self);
+        g_signal_connect_object (chooser, "response",
+                                 G_CALLBACK (format_response), self, G_CONNECT_SWAPPED);
         gtk_window_present (GTK_WINDOW (chooser));
 }
 
@@ -606,22 +606,22 @@ static void
 setup_language_section (CcRegionPanel *self)
 {
         self->user = act_user_manager_get_user_by_id (self->user_manager, getuid ());
-        g_signal_connect_swapped (self->user, "notify::language",
-                                  G_CALLBACK (update_language_from_user), self);
-        g_signal_connect_swapped (self->user, "notify::is-loaded",
-                                  G_CALLBACK (update_language_from_user), self);
+        g_signal_connect_object (self->user, "notify::language",
+                                 G_CALLBACK (update_language_from_user), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->user, "notify::is-loaded",
+                                 G_CALLBACK (update_language_from_user), self, G_CONNECT_SWAPPED);
 
         self->locale_settings = g_settings_new (GNOME_SYSTEM_LOCALE_DIR);
-        g_signal_connect_swapped (self->locale_settings, "changed::" KEY_REGION,
-                                  G_CALLBACK (update_region_from_setting), self);
+        g_signal_connect_object (self->locale_settings, "changed::" KEY_REGION,
+                                 G_CALLBACK (update_region_from_setting), self, G_CONNECT_SWAPPED);
 
         gtk_list_box_set_selection_mode (self->language_list,
                                          GTK_SELECTION_NONE);
         gtk_list_box_set_header_func (self->language_list,
                                       cc_list_box_update_header_func,
                                       NULL, NULL);
-        g_signal_connect_swapped (self->language_list, "row-activated",
-                                  G_CALLBACK (activate_language_row), self);
+        g_signal_connect_object (self->language_list, "row-activated",
+                                 G_CALLBACK (activate_language_row), self, G_CONNECT_SWAPPED);
 
         update_language_from_user (self);
         update_region_from_setting (self);
@@ -812,9 +812,8 @@ get_row_by_source (CcRegionPanel *self, CcInputSource *source)
 }
 
 static void
-input_sources_changed (GSettings     *settings,
-                       const gchar   *key,
-                       CcRegionPanel *self)
+input_sources_changed (CcRegionPanel *self,
+                       const gchar   *key)
 {
         CcInputRow *selected;
         g_autoptr(CcInputSource) source = NULL;
@@ -1257,8 +1256,8 @@ setup_input_section (CcRegionPanel *self)
         g_signal_connect_object (self->input_list, "row-selected",
                                  G_CALLBACK (update_buttons), self, G_CONNECT_SWAPPED);
 
-        g_signal_connect (self->input_settings, "changed::" KEY_INPUT_SOURCES,
-                          G_CALLBACK (input_sources_changed), self);
+        g_signal_connect_object (self->input_settings, "changed::" KEY_INPUT_SOURCES,
+                                 G_CALLBACK (input_sources_changed), self, G_CONNECT_SWAPPED);
 
         add_input_sources_from_settings (self);
         update_buttons (self);
@@ -1282,14 +1281,13 @@ setup_input_section (CcRegionPanel *self)
 }
 
 static void
-on_localed_properties_changed (GDBusProxy     *proxy,
+on_localed_properties_changed (CcRegionPanel  *self,
                                GVariant       *changed_properties,
-                               const gchar   **invalidated_properties,
-                               CcRegionPanel  *self)
+                               const gchar   **invalidated_properties)
 {
         g_autoptr(GVariant) v = NULL;
 
-        v = g_dbus_proxy_get_cached_property (proxy, "Locale");
+        v = g_dbus_proxy_get_cached_property (G_DBUS_PROXY (self->localed), "Locale");
         if (v) {
                 g_autofree const gchar **strv = NULL;
                 gsize len;
@@ -1463,9 +1461,9 @@ localed_proxy_ready (GObject      *source,
 
         gtk_widget_set_sensitive (GTK_WIDGET (self->login_button), TRUE);
 
-        g_signal_connect (self->localed, "g-properties-changed",
-                          G_CALLBACK (on_localed_properties_changed), self);
-        on_localed_properties_changed (self->localed, NULL, NULL, self);
+        g_signal_connect_object (self->localed, "g-properties-changed",
+                                 G_CALLBACK (on_localed_properties_changed), self, G_CONNECT_SWAPPED);
+        on_localed_properties_changed (self, NULL, NULL);
 }
 
 static void
@@ -1542,15 +1540,15 @@ setup_login_button (CcRegionPanel *self)
         gtk_widget_set_valign (GTK_WIDGET (self->login_button), GTK_ALIGN_CENTER);
         gtk_widget_set_visible (GTK_WIDGET (self->login_button), FALSE);
         gtk_widget_set_sensitive (GTK_WIDGET (self->login_button), FALSE);
-        g_signal_connect_swapped (self->login_button, "notify::active",
-                                  G_CALLBACK (login_changed), self);
+        g_signal_connect_object (self->login_button, "notify::active",
+                                 G_CALLBACK (login_changed), self, G_CONNECT_SWAPPED);
 
         g_object_get (self->user_manager, "is-loaded", &loaded, NULL);
         if (loaded)
                 set_login_button_visibility (self);
         else
-                g_signal_connect_swapped (self->user_manager, "notify::is-loaded",
-                                          G_CALLBACK (set_login_button_visibility), self);
+                g_signal_connect_object (self->user_manager, "notify::is-loaded",
+                                         G_CALLBACK (set_login_button_visibility), self, G_CONNECT_SWAPPED);
 }
 
 static void

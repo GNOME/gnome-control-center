@@ -417,9 +417,8 @@ show_more (CcFormatChooser *chooser)
 }
 
 static void
-row_activated (GtkListBox      *box,
-               GtkListBoxRow   *row,
-               CcFormatChooser *chooser)
+row_activated (CcFormatChooser *chooser,
+               GtkListBoxRow   *row)
 {
         const gchar *new_locale_id;
 
@@ -444,13 +443,12 @@ row_activated (GtkListBox      *box,
 }
 
 static void
-activate_default (GtkWindow       *window,
-                  CcFormatChooser *chooser)
+activate_default (CcFormatChooser *chooser)
 {
         GtkWidget *focus;
         const gchar *locale_id;
 
-        focus = gtk_window_get_focus (window);
+        focus = gtk_window_get_focus (GTK_WINDOW (chooser));
         if (!focus)
                 return;
 
@@ -458,7 +456,7 @@ activate_default (GtkWindow       *window,
         if (g_strcmp0 (locale_id, chooser->region) == 0)
                 return;
 
-        g_signal_stop_emission_by_name (window, "activate-default");
+        g_signal_stop_emission_by_name (chooser, "activate-default");
         gtk_widget_activate (focus);
 }
 
@@ -517,16 +515,16 @@ cc_format_chooser_init (CcFormatChooser *chooser)
 
         add_all_regions (chooser);
 
-        g_signal_connect_swapped (chooser->region_filter_entry, "search-changed",
-                                  G_CALLBACK (filter_changed), chooser);
+        g_signal_connect_object (chooser->region_filter_entry, "search-changed",
+                                 G_CALLBACK (filter_changed), chooser, G_CONNECT_SWAPPED);
 
-        g_signal_connect (chooser->region_listbox, "row-activated",
-                          G_CALLBACK (row_activated), chooser);
+        g_signal_connect_object (chooser->region_listbox, "row-activated",
+                                 G_CALLBACK (row_activated), chooser, G_CONNECT_SWAPPED);
 
         gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->region_listbox));
 
-        g_signal_connect (chooser, "activate-default",
-                          G_CALLBACK (activate_default), chooser);
+        g_signal_connect_object (chooser, "activate-default",
+                                 G_CALLBACK (activate_default), chooser, G_CONNECT_SWAPPED);
 }
 
 CcFormatChooser *
