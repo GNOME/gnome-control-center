@@ -517,10 +517,9 @@ set_location (CcTimezoneMap *map,
 }
 
 static gboolean
-button_press_event (GtkWidget      *widget,
+button_press_event (CcTimezoneMap  *map,
                     GdkEventButton *event)
 {
-  CcTimezoneMap *map = CC_TIMEZONE_MAP (widget);
   gint x, y;
   guchar r, g, b, a;
   guchar *pixels;
@@ -554,13 +553,13 @@ button_press_event (GtkWidget      *widget,
          }
     }
 
-  gtk_widget_queue_draw (widget);
+  gtk_widget_queue_draw (GTK_WIDGET (map));
 
   /* work out the co-ordinates */
 
   array = tz_get_locations (map->tzdb);
 
-  gtk_widget_get_allocation (widget, &alloc);
+  gtk_widget_get_allocation (GTK_WIDGET (map), &alloc);
   width = alloc.width;
   height = alloc.height;
 
@@ -582,7 +581,7 @@ button_press_event (GtkWidget      *widget,
   distances = g_list_sort (distances, (GCompareFunc) sort_locations);
 
 
-  set_location (CC_TIMEZONE_MAP (widget), (TzLocation*) distances->data);
+  set_location (map, (TzLocation*) distances->data);
 
   g_list_free (distances);
 
@@ -634,8 +633,7 @@ cc_timezone_map_init (CcTimezoneMap *map)
 
   map->tzdb = tz_load_db ();
 
-  g_signal_connect (map, "button-press-event", G_CALLBACK (button_press_event),
-                    NULL);
+  g_signal_connect_object (map, "button-press-event", G_CALLBACK (button_press_event), map, G_CONNECT_SWAPPED);
 }
 
 CcTimezoneMap *
