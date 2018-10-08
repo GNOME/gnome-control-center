@@ -36,6 +36,10 @@
 #include "cc-night-light-dialog.h"
 #include "cc-display-resources.h"
 
+/* The minimum supported size for the panel */
+#define MINIMUM_WIDTH 740
+#define MINIMUM_HEIGHT 530
+
 #define PANEL_PADDING   32
 #define SECTION_PADDING 32
 #define HEADING_PADDING 12
@@ -611,6 +615,16 @@ resolution_row_activated (CcDisplayPanel *panel,
   update_apply_button (panel);
 }
 
+static gboolean
+should_show_resolution (CcDisplayMode *mode)
+{
+  int width, height;
+
+  cc_display_mode_get_resolution (mode, &width, &height);
+
+  return width >= MINIMUM_WIDTH && height >= MINIMUM_HEIGHT;
+}
+
 static GtkWidget *
 make_resolution_popover (CcDisplayPanel *panel)
 {
@@ -627,6 +641,9 @@ make_resolution_popover (CcDisplayPanel *panel)
       CcDisplayMode *mode = l->data;
       GtkWidget *row;
       GtkWidget *child;
+
+      if (!should_show_resolution (mode))
+        continue;
 
       child = make_popover_label (get_resolution_string (mode));
 
@@ -763,13 +780,23 @@ make_refresh_rate_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
   return row;
 }
 
+static gboolean
+scale_supported_for_mode (double scale, CcDisplayMode *mode)
+{
+  int width, height;
+
+  cc_display_mode_get_resolution (mode, &width, &height);
+
+  return width / scale >= MINIMUM_WIDTH && height / scale >= MINIMUM_HEIGHT;
+}
+
 static guint
 n_supported_scales (CcDisplayMode *mode)
 {
   const double *scales = cc_display_mode_get_supported_scales (mode);
   guint n = 0;
 
-  while (scales[n] != 0.0)
+  while (scales[n] != 0.0 && scale_supported_for_mode (scales[n], mode))
     n++;
 
   return n;
@@ -843,7 +870,12 @@ setup_scale_buttons (GtkWidget        *bbox,
   group = NULL;
   for (scale = scales, i = 0; *scale != 0.0 && i < MAX_N_SCALES; scale++, i++)
     {
-      GtkWidget *button = gtk_radio_button_new_from_widget (group);
+      GtkWidget *button;
+
+      if (!scale_supported_for_mode (*scale, mode))
+        continue;
+
+      button = gtk_radio_button_new_from_widget (group);
 
       gtk_button_set_image (GTK_BUTTON (button), make_label_for_scale (*scale));
       gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (button), FALSE);
