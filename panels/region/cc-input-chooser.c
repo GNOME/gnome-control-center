@@ -584,9 +584,8 @@ show_more (CcInputChooser *chooser)
 }
 
 static void
-row_activated (GtkListBox     *box,
-               GtkListBoxRow  *row,
-               CcInputChooser *chooser)
+row_activated (CcInputChooser *chooser,
+               GtkListBoxRow  *row)
 {
   gpointer data;
 
@@ -625,13 +624,12 @@ row_activated (GtkListBox     *box,
 }
 
 static void
-selected_rows_changed (GtkListBox     *box,
-                       CcInputChooser *chooser)
+selected_rows_changed (CcInputChooser *chooser)
 {
   gboolean sensitive = TRUE;
   GtkListBoxRow *row;
 
-  row = gtk_list_box_get_selected_row (box);
+  row = gtk_list_box_get_selected_row (GTK_LIST_BOX (chooser->input_listbox));
   if (!row || g_object_get_data (G_OBJECT (row), "back"))
     sensitive = FALSE;
 
@@ -639,15 +637,14 @@ selected_rows_changed (GtkListBox     *box,
 }
 
 static gboolean
-list_button_release_event (GtkListBox     *box,
-                           GdkEvent       *event,
-                           CcInputChooser *chooser)
+list_button_release_event (CcInputChooser *chooser,
+                           GdkEvent       *event)
 {
   gdouble x, y;
   GtkListBoxRow *row;
 
   gdk_event_get_coords (event, &x, &y);
-  row = gtk_list_box_get_row_at_y (box, y);
+  row = gtk_list_box_get_row_at_y (GTK_LIST_BOX (chooser->input_listbox), y);
   if (row && g_object_get_data (G_OBJECT (row), "back"))
     {
       g_signal_emit_by_name (row, "activate", NULL);
@@ -955,9 +952,8 @@ get_locale_infos (CcInputChooser *chooser)
 
 
 static gboolean
-reset_on_escape (GtkWidget      *widget,
-                 GdkEventKey    *event,
-                 CcInputChooser *chooser)
+reset_on_escape (CcInputChooser *chooser,
+                 GdkEventKey    *event)
 {
   if (event->keyval == GDK_KEY_Escape)
     cc_input_chooser_reset (chooser);
@@ -1014,12 +1010,12 @@ cc_input_chooser_init (CcInputChooser *chooser)
 
   gtk_list_box_set_filter_func (GTK_LIST_BOX (chooser->input_listbox), list_filter, chooser, NULL);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (chooser->input_listbox), (GtkListBoxSortFunc)list_sort, chooser, NULL);
-  g_signal_connect (chooser->input_listbox, "row-activated", G_CALLBACK (row_activated), chooser);
-  g_signal_connect (chooser->input_listbox, "selected-rows-changed", G_CALLBACK (selected_rows_changed), chooser);
-  g_signal_connect (chooser->input_listbox, "button-release-event", G_CALLBACK (list_button_release_event), chooser);
+  g_signal_connect_object (chooser->input_listbox, "row-activated", G_CALLBACK (row_activated), chooser, G_CONNECT_SWAPPED);
+  g_signal_connect_object (chooser->input_listbox, "selected-rows-changed", G_CALLBACK (selected_rows_changed), chooser, G_CONNECT_SWAPPED);
+  g_signal_connect_object (chooser->input_listbox, "button-release-event", G_CALLBACK (list_button_release_event), chooser, G_CONNECT_SWAPPED);
 
-  g_signal_connect_swapped (chooser->filter_entry, "search-changed", G_CALLBACK (filter_changed), chooser);
-  g_signal_connect (chooser->filter_entry, "key-release-event", G_CALLBACK (reset_on_escape), chooser);
+  g_signal_connect_object (chooser->filter_entry, "search-changed", G_CALLBACK (filter_changed), chooser, G_CONNECT_SWAPPED);
+  g_signal_connect_object (chooser->filter_entry, "key-release-event", G_CALLBACK (reset_on_escape), chooser, G_CONNECT_SWAPPED);
 
   if (chooser->is_login)
     gtk_widget_show (chooser->login_label);
