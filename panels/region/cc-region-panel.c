@@ -1319,8 +1319,9 @@ setup_input_section (CcRegionPanel *self)
                 if (ibus_bus_is_connected (self->ibus))
                         fetch_ibus_engines (self);
                 else
-                        g_signal_connect_swapped (self->ibus, "connected",
-                                                  G_CALLBACK (fetch_ibus_engines), self);
+                        g_signal_connect_object (self->ibus, "connected",
+                                                 G_CALLBACK (fetch_ibus_engines), self,
+                                                 G_CONNECT_SWAPPED);
         }
         maybe_start_ibus ();
 #endif
