@@ -36,6 +36,10 @@
 #include "cc-night-light-dialog.h"
 #include "cc-display-resources.h"
 
+/* The minimum supported size for the panel */
+#define MINIMUM_WIDTH 740
+#define MINIMUM_HEIGHT 530
+
 #define PANEL_PADDING   32
 #define SECTION_PADDING 32
 #define HEADING_PADDING 12
@@ -611,6 +615,16 @@ resolution_row_activated (CcDisplayPanel *panel,
   update_apply_button (panel);
 }
 
+static gboolean
+should_show_resolution (CcDisplayMode *mode)
+{
+  int width, height;
+
+  cc_display_mode_get_resolution (mode, &width, &height);
+
+  return width >= MINIMUM_WIDTH && height >= MINIMUM_HEIGHT;
+}
+
 static GtkWidget *
 make_resolution_popover (CcDisplayPanel *panel)
 {
@@ -627,6 +641,9 @@ make_resolution_popover (CcDisplayPanel *panel)
       CcDisplayMode *mode = l->data;
       GtkWidget *row;
       GtkWidget *child;
+
+      if (!should_show_resolution (mode))
+        continue;
 
       child = make_popover_label (get_resolution_string (mode));
 
