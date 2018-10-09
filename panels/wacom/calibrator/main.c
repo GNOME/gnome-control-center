@@ -28,7 +28,6 @@
 #include <string.h>
 #include <dirent.h>
 #include <glib/gi18n.h>
-#include <clutter-gtk/clutter-gtk.h>
 
 #include <X11/extensions/XInput.h>
 
@@ -397,14 +396,9 @@ int main(int argc, char** argv)
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
     textdomain (GETTEXT_PACKAGE);
 
-    g_setenv ("G_MESSAGES_DEBUG", "all", TRUE);
+    gtk_init (&argc, &argv);
 
-    /* GTK setup */
-    if (gtk_clutter_init (&argc, &argv) != CLUTTER_INIT_SUCCESS)
-    {
-      g_critical ("Unable to initialize Clutter");
-      return 1;
-    }
+    g_setenv ("G_MESSAGES_DEBUG", "all", TRUE);
 
     calib_area = calib_area_new (NULL,
 				 0,  /* monitor */

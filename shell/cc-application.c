@@ -31,10 +31,6 @@
 #include "cc-panel-loader.h"
 #include "cc-window.h"
 
-#if defined(HAVE_WACOM) || defined(HAVE_CHEESE)
-#include <clutter-gtk/clutter-gtk.h>
-#endif /* HAVE_WACOM || HAVE_CHEESE */
-
 struct _CcApplication
 {
   GtkApplication  parent;
@@ -237,14 +233,6 @@ cc_application_startup (GApplication *application)
                                    self);
 
   G_APPLICATION_CLASS (cc_application_parent_class)->startup (application);
-
-#if defined(HAVE_WACOM) || defined(HAVE_CHEESE)
-  if (gtk_clutter_init (NULL, NULL) != CLUTTER_INIT_SUCCESS)
-    {
-      g_critical ("Unable to initialize Clutter");
-      return;
-    }
-#endif /* HAVE_WACOM || HAVE_CHEESE */
 
   menu = g_menu_new ();
 
