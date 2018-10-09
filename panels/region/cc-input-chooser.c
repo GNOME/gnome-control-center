@@ -940,7 +940,7 @@ get_locale_infos (CcInputChooser *chooser)
   info->name = g_strdup (C_("Input Source", "Other"));
   info->unaccented_name = g_strdup ("");
   info->untranslated_name = g_strdup ("");
-  g_hash_table_replace (chooser->locales, info->id, info);
+  g_hash_table_replace (chooser->locales, g_strdup(info->id), info);
 
   info->layout_rows_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                    NULL, g_object_unref);
