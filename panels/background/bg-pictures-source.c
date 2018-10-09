@@ -458,6 +458,7 @@ add_single_file (BgPicturesSource     *bg_source,
   g_autofree gchar *uri = NULL;
   gboolean needs_download;
   gboolean retval = FALSE;
+  const gchar *pictures_path;
   g_autoptr(GFile) pictures_dir = NULL;
   g_autoptr(GFile) cache_dir = NULL;
   GrlMedia *media;
@@ -471,7 +472,10 @@ add_single_file (BgPicturesSource     *bg_source,
   /* create a new CcBackgroundItem */
   uri = g_file_get_uri (file);
 
-  pictures_dir = g_file_new_for_path (g_get_user_special_dir (G_USER_DIRECTORY_PICTURES));
+  pictures_path = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
+  if (pictures_path == NULL)
+    pictures_path = g_get_home_dir ();
+  pictures_dir = g_file_new_for_path (pictures_path);
   cache_dir = bg_pictures_source_get_cache_file ();
   needs_download = !g_file_has_parent (file, pictures_dir) &&
           !g_file_has_parent (file, cache_dir);
