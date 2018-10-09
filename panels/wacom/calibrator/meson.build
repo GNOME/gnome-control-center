@@ -3,8 +3,7 @@ calibrator_inc = include_directories('.')
 common_sources = files(
   'calibrator.c',
   'calibrator-gui.c',
-  'cc-clock-actor.c',
-  'cc-target-actor.c'
+  'cc-clock.c',
 )
 
 calibrator_deps = deps + [m_dep]
@@ -25,7 +24,7 @@ libwacom_calibrator_test = static_library(
   c_args: test_cflags
 )
 
-sources = common_sources + files('main.c')
+sources = common_sources + wacom_gresource + files('main.c')
 
 executable(
   'test-calibrator',

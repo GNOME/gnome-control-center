@@ -1,0 +1,47 @@
+window {
+    background-color: #000;
+}
+
+* {
+    color: #fff;
+}
+
+label {
+    font-size: larger;
+}
+
+#title {
+    font-weight: bold;
+    color: #888;
+}
+
+#error {
+    font-weight: bold;
+}
+
+#target {
+    background-image: url('target.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+@keyframes target-enabled-animation {
+    0%   { background-size: 0px }
+    90%  { background-size: 120px }
+    100% { background-size: 100px }
+}
+
+@keyframes target-disabled-animation {
+    0%   { background-size: 100px }
+    100% { background-size: 0px }
+}
+
+#target:not(disabled) {
+    animation: target-enabled-animation 1 ease 0.5s;
+    background-size: 100px;
+}
+
+#target:disabled {
+    animation: target-disabled-animation 1 ease 0.2s;
+    background-size: 0px;
+}
