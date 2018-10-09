@@ -9,6 +9,15 @@ cflags += ['-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)]
 
 test_cflags = cflags + ['-DFAKE_AREA']
 
+wacom_gresource = gnome.compile_resources(
+  'cc-' + cappletname + '-resources',
+  cappletname + '.gresource.xml',
+    source_dir : '.',
+        c_name : 'cc_' + cappletname,
+  dependencies : resource_data,
+        export : true
+)
+
 subdir('calibrator')
 
 panels_list += cappletname
@@ -43,6 +52,9 @@ common_sources = files(
 )
 
 resource_data = files(
+  'calibrator/calibrator.ui',
+  'calibrator/calibrator.css',
+  'calibrator/target.svg',
   'button-mapping.ui',
   'gnome-wacom-properties.ui',
   'wacom-stylus-3btn.svg',
@@ -59,14 +71,7 @@ resource_data = files(
   'wacom-tablet.svg'
 )
 
-common_sources += gnome.compile_resources(
-  'cc-' + cappletname + '-resources',
-  cappletname + '.gresource.xml',
-    source_dir : '.',
-        c_name : 'cc_' + cappletname,
-  dependencies : resource_data,
-        export : true
-)
+common_sources += wacom_gresource
 
 sources = common_sources + files(
   'cc-' + cappletname + '-panel.c',
