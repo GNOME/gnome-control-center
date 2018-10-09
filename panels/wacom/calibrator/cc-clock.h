@@ -1,5 +1,5 @@
 /*
- * Copyright © 2013 Red Hat, Inc.
+ * Copyright © 2018 Red Hat, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,26 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
- * Author: Joaquim Rocha <jrocha@redhat.com>
+ * Author: Carlos Garnacho <carlosg@gnome.org>
  */
 
-#ifndef __CC_TARGET_ACTOR_H__
-#define __CC_TARGET_ACTOR_H__
+#ifndef __CC_CLOCK_H__
+#define __CC_CLOCK_H__
 
 #include <glib.h>
-#include <clutter/clutter.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-#define CC_TARGET_ACTOR_TYPE (cc_target_actor_get_type ())
-G_DECLARE_FINAL_TYPE (CcTargetActor, cc_target_actor, CC, TARGET_ACTOR, ClutterActor)
+#define CC_TYPE_CLOCK (cc_clock_get_type ())
 
-ClutterActor * cc_target_actor_new         (void);
+G_DECLARE_FINAL_TYPE (CcClock, cc_clock, CC, CLOCK, GtkWidget)
 
-void           cc_target_actor_move_center (CcTargetActor *target,
-                                            gdouble        x,
-                                            gdouble        y);
+GtkWidget * cc_clock_new          (guint duration);
 
-G_END_DECLS
+void        cc_clock_reset        (CcClock *clock);
 
-#endif /* __CC_TARGET_ACTOR_H__ */
+void        cc_clock_set_duration (CcClock *clock,
+                                   guint    duration);
+guint       cc_clock_get_duration (CcClock *clock);
+
+GType       cc_clock_get_type     (void);
+
+#endif /* __CC_CLOCK_H__ */
