@@ -18,11 +18,19 @@
 
 #pragma once
 
-#include <shell/cc-panel.h>
+#include <gsound.h>
+#include <gtk/gtk.h>
+#include <pulse/pulseaudio.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SOUND_PANEL (cc_sound_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcSoundPanel, cc_sound_panel, CC, SOUND_PANEL, CcPanel)
+#define CC_TYPE_SPEAKER_TEST_BUTTON (cc_speaker_test_button_get_type ())
+G_DECLARE_FINAL_TYPE (CcSpeakerTestButton, cc_speaker_test_button, CC, SPEAKER_TEST_BUTTON, GtkButton)
+
+CcSpeakerTestButton *cc_speaker_test_button_new                  (void);
+
+void                 cc_speaker_test_button_set_channel_position (CcSpeakerTestButton  *button,
+                                                                  GSoundContext        *context,
+                                                                  pa_channel_position_t position);
 
 G_END_DECLS
