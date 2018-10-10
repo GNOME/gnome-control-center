@@ -18,11 +18,13 @@
 
 #pragma once
 
-#include <shell/cc-panel.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SOUND_PANEL (cc_sound_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcSoundPanel, cc_sound_panel, CC, SOUND_PANEL, CcPanel)
+#define CC_TYPE_INPUT_TEST_DIALOG (cc_input_test_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (CcInputTestDialog, cc_input_test_dialog, CC, INPUT_TEST_DIALOG, GtkDialog)
+
+CcInputTestDialog *cc_input_test_dialog_new (void);
 
 G_END_DECLS
