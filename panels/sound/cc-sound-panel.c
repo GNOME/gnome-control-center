@@ -30,6 +30,7 @@
 #include <pulse/pulseaudio.h>
 
 #include "cc-sound-panel.h"
+#include "cc-sound-resources.h"
 #include "gvc-mixer-dialog.h"
 
 struct _CcSoundPanel {
@@ -83,8 +84,9 @@ cc_sound_panel_get_help_uri (CcPanel *panel)
 static void
 cc_sound_panel_class_init (CcSoundPanelClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  CcPanelClass   *panel_class = CC_PANEL_CLASS (klass);
 
   panel_class->get_help_uri = cc_sound_panel_get_help_uri;
 
@@ -92,6 +94,8 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   object_class->set_property = cc_sound_panel_set_property;
 
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-sound-panel.ui");
 }
 
 static void
@@ -109,6 +113,10 @@ cc_sound_panel_finalize (GObject *object)
 static void
 cc_sound_panel_init (CcSoundPanel *self)
 {
+  g_resources_register (cc_sound_get_resource ());
+
+  gtk_widget_init_template (GTK_WIDGET (self));
+
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
                                      ICON_DATA_DIR);
   gtk_window_set_default_icon_name ("multimedia-volume-control");
