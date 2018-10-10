@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcAlertChooser" parent="GtkBox">
+    <property name="homogeneous">True</property>
+    <style>
+      <class name="linked"/>
+    </style>
+    <child>
+      <object class="CcSoundButton" id="bark_button">
+        <property name="visible">True</property>
+        <property name="label" translatable="yes">Bark</property>
+        <signal name="clicked" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
+      </object>
+    </child>
+    <child>
+      <object class="CcSoundButton" id="drip_button">
+        <property name="visible">True</property>
+        <property name="label" translatable="yes">Drip</property>
+        <signal name="clicked" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
+      </object>
+    </child>
+    <child>
+      <object class="CcSoundButton" id="glass_button">
+        <property name="visible">True</property>
+        <property name="label" translatable="yes">Glass</property>
+        <signal name="clicked" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
+      </object>
+    </child>
+    <child>
+      <object class="CcSoundButton" id="sonar_button">
+        <property name="visible">True</property>
+        <property name="label" translatable="yes">Sonar</property>
+        <signal name="clicked" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
+      </object>
+    </child>
+  </template>
+</interface>
