@@ -87,8 +87,6 @@ static const GtkTargetEntry color_targets[] =
   { "application/x-color", 0, COLOR }
 };
 
-static void on_visible_child_notify (CcBackgroundChooserDialog *chooser);
-
 static void
 cc_background_chooser_dialog_realize (GtkWidget *widget)
 {
@@ -124,18 +122,6 @@ cc_background_chooser_dialog_dispose (GObject *object)
       g_cancellable_cancel (chooser->copy_cancellable);
 
       g_clear_object (&chooser->copy_cancellable);
-    }
-
-  /* GtkStack triggers notify::visible-child during dispose and this
-   * means that we have to explicitly disconnect the signal handler
-   * before calling up to the parent implementation, or
-   * on_visible_child_notify() will get called while we're in an
-   * inconsistent state.
-   */
-  if (chooser->stack != NULL)
-    {
-      g_signal_handlers_disconnect_by_func (chooser->stack, on_visible_child_notify, chooser);
-      chooser->stack = NULL;
     }
 
   g_clear_pointer (&chooser->item_to_focus, gtk_tree_row_reference_free);
@@ -475,7 +461,6 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_widget_show (chooser->stack);
   gtk_stack_set_homogeneous (GTK_STACK (chooser->stack), TRUE);
   gtk_container_add (GTK_CONTAINER (vbox), chooser->stack);
-  g_signal_connect_swapped (chooser->stack, "notify::visible-child", G_CALLBACK (on_visible_child_notify), chooser);
 
   /* Add drag and drop support for bg images */
   gtk_drag_dest_set (chooser->stack, GTK_DEST_DEFAULT_ALL, NULL, 0, GDK_ACTION_COPY);
@@ -566,6 +551,8 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_dialog_add_button (GTK_DIALOG (chooser), _("_Select"), GTK_RESPONSE_OK);
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
   gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser), GTK_RESPONSE_OK, FALSE);
+
+  g_signal_connect_object (chooser->stack, "notify::visible-child", G_CALLBACK (on_visible_child_notify), chooser, G_CONNECT_SWAPPED);
 }
 
 static void
