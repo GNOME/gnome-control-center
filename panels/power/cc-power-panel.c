@@ -1717,8 +1717,9 @@ iio_proxy_appeared_cb (GDBusConnection *connection,
       return;
     }
 
-  g_signal_connect_swapped (G_OBJECT (self->iio_proxy), "g-properties-changed",
-                            G_CALLBACK (als_enabled_state_changed), self);
+  g_signal_connect_object (G_OBJECT (self->iio_proxy), "g-properties-changed",
+                           G_CALLBACK (als_enabled_state_changed), self,
+                           G_CONNECT_SWAPPED);
   als_enabled_state_changed (self);
 }
 
