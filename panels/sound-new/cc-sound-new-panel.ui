@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcSoundNewPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="visible">True</property>
+        <property name="hscrollbar_policy">never</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="hexpand">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox" id="main_box">
+                <property name="visible">True</property>
+                <property name="orientation">vertical</property>
+                <property name="margin">32</property>
+                <property name="spacing">12</property>
+                <property name="hexpand">True</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">System Volume</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcVolumeSlider" id="output_volume_slider">
+                    <property name="visible">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="margin-top">18</property>
+                    <property name="label" translatable="yes">Volume Levels</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkFrame">
+                    <property name="visible">True</property>
+                    <child>
+                      <object class="CcStreamListBox" id="stream_list_box">
+                        <property name="visible">True</property>
+                        <property name="label-size-group">label_size_group</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="margin-top">18</property>
+                    <property name="label" translatable="yes">Output</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkFrame">
+                    <property name="visible">True</property>
+                    <child>
+                      <object class="GtkListBox" id="output_list_box">
+                        <property name="visible">True</property>
+                        <property name="selection_mode">none</property>
+                        <child>
+                          <object class="GtkListBoxRow">
+                            <property name="visible">True</property>
+                            <property name="activatable">False</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="margin">12</property>
+                                <property name="spacing">12</property>
+                                <child>
+                                  <object class="GtkLabel" id="output_device_label">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Output Device</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="spacing">6</property>
+                                        <child>
+                                          <object class="CcDeviceComboBox" id="output_device_combo_box">
+                                            <property name="visible">True</property>
+                                            <property name="hexpand">True</property>
+                                            <signal name="changed" handler="output_device_changed_cb" object="CcSoundNewPanel" swapped="yes"/>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Test</property>
+                                            <signal name="clicked" handler="test_output_configuration_button_clicked_cb" object="CcSoundNewPanel" swapped="yes"/>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="CcLevelBar" id="output_level_bar">
+                                        <property name="visible">True</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkListBoxRow" id="output_profile_row">
+                            <property name="visible">True</property>
+                            <property name="activatable">False</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="margin">12</property>
+                                <property name="spacing">12</property>
+                                <child>
+                                  <object class="GtkLabel" id="output_configuration_label">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Configuration</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">6</property>
+                                    <child>
+                                      <object class="CcProfileComboBox" id="output_profile_combo_box">
+                                        <property name="visible">True</property>
+                                        <property name="hexpand">True</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkListBoxRow">
+                            <property name="visible">True</property>
+                            <property name="activatable">False</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="margin">12</property>
+                                <property name="spacing">12</property>
+                                <child>
+                                  <object class="GtkLabel" id="output_balance_label">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Balance</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="CcBalanceSlider" id="balance_slider">
+                                    <property name="visible">True</property>
+                                    <property name="hexpand">True</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkListBoxRow" id="fade_row">
+                            <property name="visible">True</property>
+                            <property name="activatable">False</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="margin">12</property>
+                                <property name="spacing">12</property>
+                                <child>
+                                  <object class="GtkLabel" id="output_fade_label">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Fade</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="CcFadeSlider" id="fade_slider">
+                                    <property name="visible">True</property>
+                                    <property name="hexpand">True</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkListBoxRow" id="subwoofer_row">
+                            <property name="visible">True</property>
+                            <property name="activatable">False</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="margin">12</property>
+                                <property name="spacing">12</property>
+                                <child>
+                                  <object class="GtkLabel" id="output_subwoofer_label">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Subwoofer</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="CcSubwooferSlider" id="subwoofer_slider">
+                                    <property name="visible">True</property>
+                                    <property name="hexpand">True</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="margin-top">18</property>
+                    <property name="label" translatable="yes">Input</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkFrame">
+                    <property name="visible">True</property>
+                    <child>
+                      <object class="GtkListBox" id="input_list_box">
+                        <property name="visible">True</property>
+                        <property name="selection_mode">none</property>
+                        <child>
+                          <object class="GtkListBoxRow">
+                            <property name="visible">True</property>
+                            <property name="activatable">False</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="margin">12</property>
+                                <property name="spacing">12</property>
+                                <child>
+                                  <object class="GtkLabel" id="input_device_label">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Input Device</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="CcDeviceComboBox" id="input_device_combo_box">
+                                        <property name="visible">True</property>
+                                        <property name="hexpand">True</property>
+                                        <signal name="changed" handler="input_device_changed_cb" object="CcSoundNewPanel" swapped="yes"/>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="CcLevelBar" id="input_level_bar">
+                                        <property name="visible">True</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkListBoxRow" id="input_profile_row">
+                            <property name="visible">True</property>
+                            <property name="activatable">False</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="margin">12</property>
+                                <property name="spacing">12</property>
+                                <child>
+                                  <object class="GtkLabel" id="input_configuration_label">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Configuration</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">6</property>
+                                    <child>
+                                      <object class="CcProfileComboBox" id="input_profile_combo_box">
+                                        <property name="visible">True</property>
+                                        <property name="hexpand">True</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkListBoxRow">
+                            <property name="visible">True</property>
+                            <property name="activatable">False</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="margin">12</property>
+                                <property name="spacing">12</property>
+                                <child>
+                                  <object class="GtkLabel" id="input_volume_label">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Volume</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="CcVolumeSlider" id="input_volume_slider">
+                                    <property name="visible">True</property>
+                                    <property name="hexpand">True</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="margin-top">18</property>
+                    <property name="label" translatable="yes">Alert Sound</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcAlertChooser">
+                    <property name="visible">True</property>
+                    <property name="hexpand">True</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="hexpand">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+  <object class="GtkSizeGroup" id="label_size_group">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="output_device_label"/>
+      <widget name="output_configuration_label"/>
+      <widget name="output_balance_label"/>
+      <widget name="output_fade_label"/>
+      <widget name="output_subwoofer_label"/>
+      <widget name="input_configuration_label"/>
+      <widget name="input_device_label"/>
+      <widget name="input_volume_label"/>
+    </widgets>
+  </object>
+</interface>
