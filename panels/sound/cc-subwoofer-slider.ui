@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcSubwooferSlider" parent="GtkBox">
+    <child>
+      <object class="GtkScale">
+        <property name="visible">True</property>
+        <property name="hexpand">True</property>
+        <property name="draw_value">False</property>
+        <property name="has_origin">False</property>
+        <property name="adjustment">adjustment</property>
+      </object>
+    </child>
+  </template>
+  <object class="GtkAdjustment" id="adjustment">
+    <signal name="value_changed" handler="changed_cb" object="CcSubwooferSlider" swapped="yes"/>
+  </object>
+</interface>
