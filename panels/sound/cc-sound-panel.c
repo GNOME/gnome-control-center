@@ -29,12 +29,18 @@
 #include <gtk/gtk.h>
 #include <pulse/pulseaudio.h>
 
+#include "list-box-helper.h"
 #include "cc-sound-panel.h"
 #include "cc-sound-resources.h"
 #include "gvc-mixer-dialog.h"
+#include "gvc-mixer-control.h"
 
 struct _CcSoundPanel {
-  CcPanel parent_instance;
+  CcPanel          parent_instance;
+
+  GtkListBox      *input_listbox;
+  GtkBox          *main_box;
+  GtkListBox      *output_listbox;
 
   GvcMixerControl *control;
   GvcMixerDialog  *dialog;
@@ -48,7 +54,31 @@ enum {
   PROP_PARAMETERS
 };
 
-static void cc_sound_panel_finalize (GObject *object);
+static void
+active_input_update_cb (CcSoundPanel *self,
+                        guint         id)
+{
+  GvcMixerUIDevice *in = NULL;
+  in = gvc_mixer_control_lookup_input_id (self->control, id);
+
+  if (in == NULL) {
+    g_warning ("gvc_mixer_control_lookup_input_id - tried to fetch an input of id %u but got nothing", id);
+    return;
+  }
+}
+
+static void
+active_output_update_cb (CcSoundPanel *self,
+                         guint         id)
+{
+  GvcMixerUIDevice *out = NULL;
+
+  out = gvc_mixer_control_lookup_output_id (self->control, id);
+  if (out == NULL) {
+    g_warning ("active_output_update_cb - tried to fetch an output of id %u but got nothing", id);
+    return;
+  }
+}
 
 static void
 cc_sound_panel_set_property (GObject      *object,
@@ -82,6 +112,18 @@ cc_sound_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
+cc_sound_panel_finalize (GObject *object)
+{
+  CcSoundPanel *panel = CC_SOUND_PANEL (object);
+
+  panel->dialog = NULL;
+  panel->connecting_label = NULL;
+  g_clear_object (&panel->control);
+
+  G_OBJECT_CLASS (cc_sound_panel_parent_class)->finalize (object);
+}
+
+static void
 cc_sound_panel_class_init (CcSoundPanelClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
@@ -96,18 +138,10 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-sound-panel.ui");
-}
 
-static void
-cc_sound_panel_finalize (GObject *object)
-{
-  CcSoundPanel *panel = CC_SOUND_PANEL (object);
-
-  panel->dialog = NULL;
-  panel->connecting_label = NULL;
-  g_clear_object (&panel->control);
-
-  G_OBJECT_CLASS (cc_sound_panel_parent_class)->finalize (object);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, main_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_listbox);
 }
 
 static void
@@ -117,13 +151,29 @@ cc_sound_panel_init (CcSoundPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  gtk_list_box_set_header_func (self->input_listbox,
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+  gtk_list_box_set_header_func (self->output_listbox,
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
                                      ICON_DATA_DIR);
   gtk_window_set_default_icon_name ("multimedia-volume-control");
 
-  self->control = gvc_mixer_control_new ("GNOME Volume Control Dialog");
+  self->control = gvc_mixer_control_new ("GNOME Volume Control Dialog"); // FIXME: Rename?
   gvc_mixer_control_open (self->control);
+  g_signal_connect_object (self->control,
+                           "active-input-update",
+                           G_CALLBACK (active_input_update_cb),
+                           self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->control,
+                           "active-output-update",
+                           G_CALLBACK (active_output_update_cb),
+                           self, G_CONNECT_SWAPPED);
+
   self->dialog = gvc_mixer_dialog_new (self->control);
-  gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (self->dialog));
+  gtk_container_add (GTK_CONTAINER (self->main_box), GTK_WIDGET (self->dialog));
   gtk_widget_show (GTK_WIDGET (self->dialog));
 }
