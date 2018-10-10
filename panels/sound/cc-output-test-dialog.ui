@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcOutputTestDialog" parent="GtkDialog">
+    <property name="resizable">False</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <child>
+          <object class="GtkGrid">
+            <property name="visible">True</property>
+            <property name="row_spacing">30</property>
+            <property name="column_spacing">30</property>
+            <property name="margin">30</property>
+            <child>
+              <object class="CcSpeakerTestButton" id="front_left_speaker_button">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="CcSpeakerTestButton" id="front_left_of_center_speaker_button">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="CcSpeakerTestButton" id="front_center_speaker_button">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="CcSpeakerTestButton" id="front_right_of_center_speaker_button">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="CcSpeakerTestButton" id="front_right_speaker_button">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">4</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="CcSpeakerTestButton" id="side_left_speaker_button">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon_name">avatar-default</property>
+                <property name="pixel_size">64</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="CcSpeakerTestButton" id="side_right_speaker_button">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">4</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="CcSpeakerTestButton" id="rear_left_speaker_button">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="CcSpeakerTestButton" id="rear_center_speaker_button">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="CcSpeakerTestButton" id="lfe_speaker_button">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="CcSpeakerTestButton" id="rear_right_speaker_button">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">4</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Click a speaker to test</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">3</property>
+                <property name="width">5</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+  <object class="GtkSizeGroup">
+    <property name="mode">both</property>
+    <widgets>
+      <widget name="front_left_speaker_button"/>
+      <widget name="front_left_of_center_speaker_button"/>
+      <widget name="front_center_speaker_button"/>
+      <widget name="front_right_of_center_speaker_button"/>
+      <widget name="front_right_speaker_button"/>
+      <widget name="side_left_speaker_button"/>
+      <widget name="side_right_speaker_button"/>
+      <widget name="rear_left_speaker_button"/>
+      <widget name="rear_center_speaker_button"/>
+      <widget name="lfe_speaker_button"/>
+      <widget name="rear_right_speaker_button"/>
+    </widgets>
+  </object>
+</interface>
