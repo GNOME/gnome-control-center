@@ -146,7 +146,7 @@ _scale_box_new (GvcChannelBar *bar)
                 gtk_box_pack_start (GTK_BOX (box), sbox, FALSE, FALSE, 0);
 
                 gtk_box_pack_end (GTK_BOX (sbox), bar->low_image, FALSE, FALSE, 0);
-                gtk_widget_show (bar->low_image);
+                //gtk_widget_show (bar->low_image);
 
                 gtk_box_pack_start (GTK_BOX (sbox), bar->label, TRUE, TRUE, 0);
                 gtk_box_pack_start (GTK_BOX (box), bar->scale, TRUE, TRUE, 0);
@@ -156,7 +156,7 @@ _scale_box_new (GvcChannelBar *bar)
                 gtk_box_pack_start (GTK_BOX (box), ebox, FALSE, FALSE, 0);
 
                 gtk_box_pack_start (GTK_BOX (ebox), bar->high_image, FALSE, FALSE, 0);
-                gtk_widget_show (bar->high_image);
+                //gtk_widget_show (bar->high_image);
                 gtk_box_pack_start (GTK_BOX (ebox), bar->mute_switch, FALSE, FALSE, 0);
                 gtk_widget_show (bar->mute_switch);
         }

@@ -299,7 +299,7 @@ gvc_balance_bar_set_balance_type (GvcBalanceBar *bar,
         default:
                 g_assert_not_reached ();
         }
-        gtk_widget_show (bar->label);
+        //gtk_widget_show (bar->label);
         gtk_widget_set_halign (bar->label, GTK_ALIGN_START);
         gtk_widget_set_valign (bar->label, GTK_ALIGN_START);
 

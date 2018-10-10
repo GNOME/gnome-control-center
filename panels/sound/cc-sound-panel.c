@@ -29,12 +29,24 @@
 #include <gtk/gtk.h>
 #include <pulse/pulseaudio.h>
 
+#include "list-box-helper.h"
 #include "cc-sound-panel.h"
 #include "cc-sound-resources.h"
 #include "gvc-mixer-dialog.h"
+#include "gvc-mixer-control.h"
+#include "gvc-speaker-test.h"
 
 struct _CcSoundPanel {
-  CcPanel parent_instance;
+  CcPanel          parent_instance;
+
+  GtkComboBox     *input_device_combobox;
+  GtkListStore    *input_device_model;
+  GtkListBox      *input_listbox;
+  GtkBox          *main_box;
+  GtkListStore    *output_configuration_model;
+  GtkComboBox     *output_device_combobox;
+  GtkListStore    *output_device_model;
+  GtkListBox      *output_listbox;
 
   GvcMixerControl *control;
   GvcMixerDialog  *dialog;
@@ -48,7 +60,129 @@ enum {
   PROP_PARAMETERS
 };
 
-static void cc_sound_panel_finalize (GObject *object);
+static void
+output_added_cb (CcSoundPanel *self,
+                 guint         id)
+{
+  GvcMixerUIDevice* device = NULL;
+  GtkTreeIter iter;
+
+  device = gvc_mixer_control_lookup_output_id (self->control, id);
+  if (device == NULL)
+    return;
+
+  gtk_list_store_append (self->output_device_model, &iter);
+  gtk_list_store_set (self->output_device_model, &iter,
+                      0, gvc_mixer_ui_device_get_description (device),
+                      1, id,
+                      -1);
+}
+
+static gboolean
+get_output_iter (CcSoundPanel *self,
+                 guint         id,
+                 GtkTreeIter  *iter)
+{
+  if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->output_device_model), iter))
+    return FALSE;
+
+  do {
+    guint i;
+
+    gtk_tree_model_get (GTK_TREE_MODEL (self->output_device_model), iter, 1, &i, -1);
+    if (i == id)
+      return TRUE;
+  } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (self->output_device_model), iter));
+
+  return FALSE;
+}
+
+static void
+output_removed_cb (CcSoundPanel *self,
+                   guint         id)
+{
+  GtkTreeIter iter;
+
+  if (get_output_iter (self, id, &iter))
+    gtk_list_store_remove (self->output_device_model, &iter);
+}
+
+static void
+active_output_update_cb (CcSoundPanel *self,
+                         guint         id)
+{
+  GtkTreeIter iter;
+
+  if (get_output_iter (self, id, &iter))
+    gtk_combo_box_set_active_iter (self->output_device_combobox, &iter);
+}
+
+static void
+input_added_cb (CcSoundPanel *self,
+                guint         id)
+{
+  GvcMixerUIDevice* device = NULL;
+  GtkTreeIter iter;
+
+  device = gvc_mixer_control_lookup_input_id (self->control, id);
+  if (device == NULL)
+    return;
+
+  gtk_list_store_append (self->input_device_model, &iter);
+  gtk_list_store_set (self->input_device_model, &iter,
+                      0, gvc_mixer_ui_device_get_description (device),
+                      1, id,
+                      -1);
+}
+
+static gboolean
+get_input_iter (CcSoundPanel *self,
+                guint         id,
+                GtkTreeIter  *iter)
+{
+  if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->input_device_model), iter))
+    return FALSE;
+
+  do {
+    guint i;
+
+    gtk_tree_model_get (GTK_TREE_MODEL (self->input_device_model), iter, 1, &i, -1);
+    if (i == id)
+      return TRUE;
+  } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (self->input_device_model), iter));
+
+  return FALSE;
+}
+
+static void
+input_removed_cb (CcSoundPanel *self,
+                  guint         id)
+{
+  GtkTreeIter iter;
+
+  if (get_input_iter (self, id, &iter))
+    gtk_list_store_remove (self->input_device_model, &iter);
+}
+
+static void
+active_input_update_cb (CcSoundPanel *self,
+                        guint         id)
+{
+  GtkTreeIter iter;
+
+  if (get_input_iter (self, id, &iter))
+    gtk_combo_box_set_active_iter (self->input_device_combobox, &iter);
+}
+
+static void
+test_output_configuration_button_clicked_cb (CcSoundPanel *self)
+{
+}
+
+static void
+test_input_device_button_clicked_cb (CcSoundPanel *self)
+{
+}
 
 static void
 cc_sound_panel_set_property (GObject      *object,
@@ -82,6 +216,18 @@ cc_sound_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
+cc_sound_panel_finalize (GObject *object)
+{
+  CcSoundPanel *panel = CC_SOUND_PANEL (object);
+
+  panel->dialog = NULL;
+  panel->connecting_label = NULL;
+  g_clear_object (&panel->control);
+
+  G_OBJECT_CLASS (cc_sound_panel_parent_class)->finalize (object);
+}
+
+static void
 cc_sound_panel_class_init (CcSoundPanelClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
@@ -96,18 +242,18 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-sound-panel.ui");
-}
 
-static void
-cc_sound_panel_finalize (GObject *object)
-{
-  CcSoundPanel *panel = CC_SOUND_PANEL (object);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_device_combobox);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_device_model);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, main_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_configuration_model);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_device_combobox);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_device_model);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_listbox);
 
-  panel->dialog = NULL;
-  panel->connecting_label = NULL;
-  g_clear_object (&panel->control);
-
-  G_OBJECT_CLASS (cc_sound_panel_parent_class)->finalize (object);
+  gtk_widget_class_bind_template_callback (widget_class, test_output_configuration_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, test_input_device_button_clicked_cb);
 }
 
 static void
@@ -117,13 +263,45 @@ cc_sound_panel_init (CcSoundPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  gtk_list_box_set_header_func (self->input_listbox,
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+  gtk_list_box_set_header_func (self->output_listbox,
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
                                      ICON_DATA_DIR);
   gtk_window_set_default_icon_name ("multimedia-volume-control");
 
-  self->control = gvc_mixer_control_new ("GNOME Volume Control Dialog");
+  self->control = gvc_mixer_control_new ("GNOME Volume Control Dialog"); // FIXME: Rename?
   gvc_mixer_control_open (self->control);
+  g_signal_connect_object (self->control,
+                           "output-added",
+                           G_CALLBACK (output_added_cb),
+                           self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->control,
+                           "output-removed",
+                           G_CALLBACK (output_removed_cb),
+                           self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->control,
+                           "active-output-update",
+                           G_CALLBACK (active_output_update_cb),
+                           self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->control,
+                           "input-added",
+                           G_CALLBACK (input_added_cb),
+                           self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->control,
+                           "input-removed",
+                           G_CALLBACK (input_removed_cb),
+                           self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->control,
+                           "active-input-update",
+                           G_CALLBACK (active_input_update_cb),
+                           self, G_CONNECT_SWAPPED);
+
   self->dialog = gvc_mixer_dialog_new (self->control);
-  gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (self->dialog));
+  gtk_container_add (GTK_CONTAINER (self->main_box), GTK_WIDGET (self->dialog));
   gtk_widget_show (GTK_WIDGET (self->dialog));
 }
