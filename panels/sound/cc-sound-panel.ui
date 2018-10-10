@@ -3,5 +3,31 @@
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcSoundPanel" parent="CcPanel">
     <property name="visible">True</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="hexpand">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="main_box">
+            <property name="visible">True</property>
+            <property name="orientation">vertical</property>
+            <property name="margin">32</property>
+            <property name="spacing">12</property>
+            <property name="hexpand">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="hexpand">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
   </template>
 </interface>
