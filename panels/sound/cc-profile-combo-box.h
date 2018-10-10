@@ -18,11 +18,20 @@
 
 #pragma once
 
-#include <shell/cc-panel.h>
+#include <gtk/gtk.h>
+#include <pulse/pulseaudio.h>
+#include <gvc-mixer-control.h>
+#include <gvc-mixer-ui-device.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SOUND_PANEL (cc_sound_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcSoundPanel, cc_sound_panel, CC, SOUND_PANEL, CcPanel)
+#define CC_TYPE_PROFILE_COMBO_BOX (cc_profile_combo_box_get_type ())
+G_DECLARE_FINAL_TYPE (CcProfileComboBox, cc_profile_combo_box, CC, PROFILE_COMBO_BOX, GtkComboBox)
+
+void                cc_profile_combo_box_set_device        (CcProfileComboBox *combo_box,
+                                                            GvcMixerControl   *mixer_control,
+                                                            GvcMixerUIDevice  *device);
+
+gint                cc_profile_combo_box_get_profile_count (CcProfileComboBox *combo_box);
 
 G_END_DECLS
