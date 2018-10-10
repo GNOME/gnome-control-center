@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcInputDeviceComboBox" parent="GtkComboBoxText">
+    <property name="model">device_model</property>
+  </template>
+  <object class="GtkListStore" id="device_model">
+    <columns>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+      <!-- column-name id -->
+      <column type="guint"/>
+    </columns>
+  </object>
+</interface>

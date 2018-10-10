@@ -44,7 +44,13 @@ libgvcgtk = static_library(
 )
 
 sources = files(
+  'cc-input-device-combo-box.c',
+  'cc-input-test-dialog.c',
+  'cc-output-device-combo-box.c',
+  'cc-output-test-dialog.c',
   'cc-sound-panel.c',
+  'cc-stream-row.c',
+  'cc-volume-slider.c',
   'gvc-balance-bar.c',
   'gvc-combo-box.c',
   'gvc-level-bar.c',
@@ -54,10 +60,28 @@ sources = files(
   'sound-theme-file-utils.c'
 )
 
+resource_data = files(
+  'cc-input-device-combo-box.ui',
+  'cc-input-test-dialog.ui',
+  'cc-output-device-combo-box.ui',
+  'cc-output-test-dialog.ui',
+  'cc-sound-panel.ui',
+  'cc-stream-row.ui',
+  'cc-volume-slider.ui',
+)
+
+sources += gnome.compile_resources(
+  'cc-' + cappletname + '-resources',
+  cappletname + '.gresource.xml',
+  c_name: 'cc_' + cappletname,
+  dependencies: resource_data,
+  export: true
+)
+
 panels_libs += static_library(
   cappletname,
   sources: sources,
-  include_directories: top_inc,
+  include_directories: [top_inc, common_inc],
   dependencies: deps,
   c_args: cflags,
   link_with: libgvcgtk
