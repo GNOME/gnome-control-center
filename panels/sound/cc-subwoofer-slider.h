@@ -18,11 +18,16 @@
 
 #pragma once
 
-#include <shell/cc-panel.h>
+#include <gtk/gtk.h>
+#include <pulse/pulseaudio.h>
+#include <gvc-channel-map.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SOUND_PANEL (cc_sound_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcSoundPanel, cc_sound_panel, CC, SOUND_PANEL, CcPanel)
+#define CC_TYPE_SUBWOOFER_SLIDER (cc_subwoofer_slider_get_type ())
+G_DECLARE_FINAL_TYPE (CcSubwooferSlider, cc_subwoofer_slider, CC, SUBWOOFER_SLIDER, GtkBox)
+
+void cc_subwoofer_slider_set_channel_map (CcSubwooferSlider *slider,
+                                          GvcChannelMap     *map);
 
 G_END_DECLS
