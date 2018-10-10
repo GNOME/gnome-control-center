@@ -18,11 +18,16 @@
 
 #pragma once
 
-#include <shell/cc-panel.h>
+#include <gtk/gtk.h>
+#include <pulse/pulseaudio.h>
+#include <gvc-mixer-control.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SOUND_PANEL (cc_sound_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcSoundPanel, cc_sound_panel, CC, SOUND_PANEL, CcPanel)
+#define CC_TYPE_STREAM_LIST_BOX (cc_stream_list_box_get_type ())
+G_DECLARE_FINAL_TYPE (CcStreamListBox, cc_stream_list_box, CC, STREAM_LIST_BOX, GtkListBox)
+
+void cc_stream_list_box_set_mixer_control (CcStreamListBox *combo_box,
+                                           GvcMixerControl *mixer_control);
 
 G_END_DECLS

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcInputTestDialog" parent="GtkDialog">
+    <property name="resizable">False</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="margin">6</property>
+        <child>
+          <object class="GtkGrid">
+            <property name="visible">True</property>
+            <property name="vexpand">True</property>
+            <property name="valign">center</property>
+            <property name="halign">center</property>
+            <property name="column_spacing">6</property>
+            <property name="row_spacing">12</property>
+            <property name="margin">24</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="valign">center</property>
+                <property name="halign">center</property>
+                <property name="icon_name">audio-input-microphone</property>
+                <property name="pixel_size">128</property>
+              </object>
+              <packing>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="record_button">
+                <property name="visible">True</property>
+                <signal name="clicked" handler="record_button_clicked_cb" object="CcInputTestDialog" swapped="yes"/>
+                <style>
+                  <class name="destructive-action"/>
+                </style>
+              </object>
+              <packing>
+                <property name="top_attach">1</property>
+                <property name="left_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="play_button">
+                <property name="visible">True</property>
+                <signal name="clicked" handler="play_button_clicked_cb" object="CcInputTestDialog" swapped="yes"/>
+                <style>
+                  <class name="suggested-action"/>
+                </style>
+              </object>
+              <packing>
+                <property name="top_attach">1</property>
+                <property name="left_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkStack" id="progress_stack">
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkBox" id="progress_placeholder">
+                    <property name="visible">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkProgressBar" id="progress_bar">
+                    <property name="visible">True</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="top-attach">2</property>
+                <property name="left_attach">0</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="CcLevelBar">
+            <property name="visible">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+  <object class="GtkSizeGroup">
+    <widgets>
+      <widget name="play_button"/>
+      <widget name="record_button"/>
+    </widgets>
+  </object>
+</interface>

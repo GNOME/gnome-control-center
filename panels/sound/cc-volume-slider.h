@@ -18,11 +18,19 @@
 
 #pragma once
 
-#include <shell/cc-panel.h>
+#include <gtk/gtk.h>
+#include <pulse/pulseaudio.h>
+#include <gvc-mixer-stream.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SOUND_PANEL (cc_sound_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcSoundPanel, cc_sound_panel, CC, SOUND_PANEL, CcPanel)
+#define CC_TYPE_VOLUME_SLIDER (cc_volume_slider_get_type ())
+G_DECLARE_FINAL_TYPE (CcVolumeSlider, cc_volume_slider, CC, VOLUME_SLIDER, GtkBox)
+
+void cc_volume_slider_set_stream       (CcVolumeSlider *slider,
+                                        GvcMixerStream *stream);
+
+void cc_volume_slider_set_is_amplified (CcVolumeSlider *slider,
+                                        gboolean        is_amplified);
 
 G_END_DECLS
