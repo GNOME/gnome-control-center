@@ -301,10 +301,10 @@ gvc_level_bar_set_peak_adjustment (GvcLevelBar   *bar,
 
         bar->peak_adjustment = g_object_ref_sink (adjustment);
 
-        g_signal_connect (bar->peak_adjustment,
-                          "value-changed",
-                          G_CALLBACK (on_peak_adjustment_value_changed),
-                          bar);
+        g_signal_connect_object (bar->peak_adjustment,
+                                 "value-changed",
+                                 G_CALLBACK (on_peak_adjustment_value_changed),
+                                 bar, 0);
 
         update_peak_value (bar);
 
@@ -328,10 +328,10 @@ gvc_level_bar_set_rms_adjustment (GvcLevelBar   *bar,
         bar->rms_adjustment = g_object_ref_sink (adjustment);
 
 
-        g_signal_connect (bar->peak_adjustment,
-                          "value-changed",
-                          G_CALLBACK (on_peak_adjustment_value_changed),
-                          bar);
+        g_signal_connect_object (bar->peak_adjustment,
+                                 "value-changed",
+                                 G_CALLBACK (on_peak_adjustment_value_changed),
+                                 bar, 0);
 
         update_rms_value (bar);
 
@@ -725,10 +725,10 @@ gvc_level_bar_init (GvcLevelBar *bar)
                                                                          0.1,
                                                                          0.1));
         g_object_ref_sink (bar->peak_adjustment);
-        g_signal_connect (bar->peak_adjustment,
-                          "value-changed",
-                          G_CALLBACK (on_peak_adjustment_value_changed),
-                          bar);
+        g_signal_connect_object (bar->peak_adjustment,
+                                 "value-changed",
+                                 G_CALLBACK (on_peak_adjustment_value_changed),
+                                 bar, 0);
 
         bar->rms_adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0,
                                                                         0.0,
