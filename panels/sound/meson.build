@@ -45,6 +45,7 @@ libgvcgtk = static_library(
 
 sources = files(
   'cc-sound-panel.c',
+  'cc-volume-slider.c',
   'gvc-balance-bar.c',
   'gvc-combo-box.c',
   'gvc-level-bar.c',
@@ -69,7 +70,7 @@ sources += gnome.compile_resources(
 panels_libs += static_library(
   cappletname,
   sources: sources,
-  include_directories: top_inc,
+  include_directories: [top_inc, common_inc],
   dependencies: deps,
   c_args: cflags,
   link_with: libgvcgtk
