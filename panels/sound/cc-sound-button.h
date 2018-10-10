@@ -18,11 +18,11 @@
 
 #pragma once
 
-#include <shell/cc-panel.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SOUND_PANEL (cc_sound_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcSoundPanel, cc_sound_panel, CC, SOUND_PANEL, CcPanel)
+#define CC_TYPE_SOUND_BUTTON (cc_sound_button_get_type ())
+G_DECLARE_FINAL_TYPE (CcSoundButton, cc_sound_button, CC, SOUND_BUTTON, GtkToggleButton)
 
 G_END_DECLS
