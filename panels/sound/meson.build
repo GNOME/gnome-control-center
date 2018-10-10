@@ -69,7 +69,7 @@ sources += gnome.compile_resources(
 panels_libs += static_library(
   cappletname,
   sources: sources,
-  include_directories: top_inc,
+  include_directories: [top_inc, common_inc],
   dependencies: deps,
   c_args: cflags,
   link_with: libgvcgtk
