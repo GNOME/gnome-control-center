@@ -18,11 +18,23 @@
 
 #pragma once
 
-#include <shell/cc-panel.h>
+#include <gtk/gtk.h>
+#include <pulse/pulseaudio.h>
+#include <gvc-mixer-stream.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SOUND_PANEL (cc_sound_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcSoundPanel, cc_sound_panel, CC, SOUND_PANEL, CcPanel)
+#define CC_TYPE_LEVEL_BAR (cc_level_bar_get_type ())
+G_DECLARE_FINAL_TYPE (CcLevelBar, cc_level_bar, CC, LEVEL_BAR, GtkWidget)
+
+typedef enum
+{
+  CC_LEVEL_BAR_STREAM_TYPE_OUTPUT,
+  CC_LEVEL_BAR_STREAM_TYPE_INPUT
+} CcLevelBarStreamType;
+
+void cc_level_bar_set_stream (CcLevelBar          *bar,
+                              GvcMixerStream      *stream,
+                              CcLevelBarStreamType type);
 
 G_END_DECLS
