@@ -23,7 +23,8 @@ deps = common_deps + [
   m_dep,
   pulse_dep,
   pulse_mainloop_dep,
-  dependency('libcanberra-gtk3', version: '>= 0.13')
+  dependency('gsound'),
+  dependency('libcanberra-gtk3', version: '>= 0.13') # FIXME remove
 ]
 
 cflags += [
@@ -44,7 +45,20 @@ libgvcgtk = static_library(
 )
 
 sources = files(
+  'cc-balance-slider.c',
+  'cc-device-combo-box.c',
+  'cc-fade-slider.c',
+  'cc-input-test-dialog.c',
+  'cc-level-bar.c',
+  'cc-output-test-dialog.c',
+  'cc-profile-combo-box.c',
+  'cc-sound-button.c',
   'cc-sound-panel.c',
+  'cc-speaker-test-button.c',
+  'cc-stream-list-box.c',
+  'cc-stream-row.c',
+  'cc-subwoofer-slider.c',
+  'cc-volume-slider.c',
   'gvc-balance-bar.c',
   'gvc-combo-box.c',
   'gvc-level-bar.c',
@@ -54,10 +68,33 @@ sources = files(
   'sound-theme-file-utils.c'
 )
 
+resource_data = files(
+  'cc-balance-slider.ui',
+  'cc-device-combo-box.ui',
+  'cc-fade-slider.ui',
+  'cc-input-test-dialog.ui',
+  'cc-output-test-dialog.ui',
+  'cc-profile-combo-box.ui',
+  'cc-sound-button.ui',
+  'cc-sound-panel.ui',
+  'cc-speaker-test-button.ui',
+  'cc-stream-row.ui',
+  'cc-subwoofer-slider.ui',
+  'cc-volume-slider.ui',
+)
+
+sources += gnome.compile_resources(
+  'cc-' + cappletname + '-resources',
+  cappletname + '.gresource.xml',
+  c_name: 'cc_' + cappletname,
+  dependencies: resource_data,
+  export: true
+)
+
 panels_libs += static_library(
   cappletname,
   sources: sources,
-  include_directories: top_inc,
+  include_directories: [top_inc, common_inc],
   dependencies: deps,
   c_args: cflags,
   link_with: libgvcgtk
