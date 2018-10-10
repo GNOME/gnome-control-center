@@ -161,7 +161,7 @@ _scale_box_new (GvcChannelBar *bar)
                 gtk_widget_show (bar->mute_switch);
         }
 
-        ca_gtk_widget_disable_sounds (bar->scale, FALSE);
+        ca_gtk_widget_disable_sounds (bar->scale, FALSE); // FIXME: keep
         gtk_widget_add_events (bar->scale, GDK_SCROLL_MASK);
 
         g_signal_connect (G_OBJECT (bar->scale), "button-press-event",
