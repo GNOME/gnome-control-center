@@ -100,7 +100,6 @@ goa_req_version = '>= 3.25.3'
 pulse_req_version = '>= 2.0'
 
 accounts_dep = dependency('accountsservice', version: '>= 0.6.39')
-clutter_gtk_dep = dependency('clutter-gtk-1.0', required: false)
 colord_dep = dependency('colord', version: '>= 0.1.34')
 gdk_pixbuf_dep = dependency('gdk-pixbuf-2.0', version: '>= 2.23.0')
 gio_dep = dependency('gio-2.0')
@@ -151,10 +150,7 @@ endforeach
 # Optional dependency for the user accounts panel
 enable_cheese = get_option('cheese')
 if enable_cheese
-  assert(clutter_gtk_dep.found(), 'cheese support requested, but clutter-gtk library is not available. Use -Dcheese=false to build without it.')
-
   cheese_deps = [
-    clutter_gtk_dep,
     dependency('cheese', version: '>= 3.28.0'),
     dependency('cheese-gtk', version: '>= 3.5.91')
   ]
