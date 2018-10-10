@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcVolumeSlider" parent="GtkBox">
+    <property name="spacing">6</property>
+    <child>
+      <object class="GtkScale" id="volume_scale">
+        <property name="visible">True</property>
+        <property name="adjustment">volume_adjustment</property>
+        <property name="draw_value">False</property>
+        <property name="hexpand">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkToggleButton" id="mute_button">
+        <property name="visible">True</property>
+        <property name="relief">none</property>
+        <signal name="toggled" handler="mute_button_toggled_cb" object="CcVolumeSlider" swapped="yes"/>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="icon_name">audio-volume-muted-symbolic</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+  <object class="GtkAdjustment" id="volume_adjustment">
+    <signal name="value_changed" handler="volume_changed_cb" object="CcVolumeSlider" swapped="yes"/>
+  </object>
+</interface>
