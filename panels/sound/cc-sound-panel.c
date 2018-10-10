@@ -34,7 +34,9 @@
 #include "gvc-mixer-dialog.h"
 
 struct _CcSoundPanel {
-  CcPanel parent_instance;
+  CcPanel          parent_instance;
+
+  GtkBox          *main_box;
 
   GvcMixerControl *control;
   GvcMixerDialog  *dialog;
@@ -96,6 +98,8 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-sound-panel.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, main_box);
 }
 
 static void
@@ -124,6 +128,6 @@ cc_sound_panel_init (CcSoundPanel *self)
   self->control = gvc_mixer_control_new ("GNOME Volume Control Dialog");
   gvc_mixer_control_open (self->control);
   self->dialog = gvc_mixer_dialog_new (self->control);
-  gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (self->dialog));
+  gtk_container_add (GTK_CONTAINER (self->main_box), GTK_WIDGET (self->dialog));
   gtk_widget_show (GTK_WIDGET (self->dialog));
 }
