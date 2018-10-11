@@ -166,6 +166,32 @@
                 </style>
               </object>
             </child>
+            <child>
+              <object class="GtkMenuButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="menu_model">primary_menu</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject">
+                    <property name="accessible-name" translatable="yes">Primary Menu</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">open-menu-symbolic</property>
+                  </object>
+                </child>
+                <style>
+                  <class name="image-button"/>
+                </style>
+              </object>
+              <packing>
+                <property name="pack_type">end</property>
+              </packing>
+            </child>
           </object>
         </child>
         <child>
@@ -232,5 +258,18 @@
     <property name="secondary-text" translatable="yes">This version of Settings should only be used for development purposes. You may experience incorrect system behavior, data loss, and other unexpected issues. </property>
     <signal name="response" handler="on_development_warning_dialog_responded_cb" object="CcWindow" swapped="no" />
   </object>
+
+  <menu id="primary_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
+        <attribute name="action">win.show-help-overlay</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Help</attribute>
+        <attribute name="action">app.help</attribute>
+      </item>
+    </section>
+  </menu>
 
 </interface>
