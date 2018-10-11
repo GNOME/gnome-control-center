@@ -191,7 +191,7 @@ sort_regions (gconstpointer a,
 static GtkWidget *
 padded_label_new (char *text, gboolean narrow)
 {
-        GtkWidget *widget;
+        GtkWidget *widget, *label;
 
         widget = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
         gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
@@ -199,7 +199,9 @@ padded_label_new (char *text, gboolean narrow)
         gtk_widget_set_margin_bottom (widget, 10);
         gtk_widget_set_margin_start (widget, narrow ? 10 : 80);
         gtk_widget_set_margin_end (widget, narrow ? 10 : 80);
-        gtk_container_add (GTK_CONTAINER (widget), gtk_label_new (text));
+        label = gtk_label_new (text);
+        gtk_widget_show (label);
+        gtk_container_add (GTK_CONTAINER (widget), label);
 
         return widget;
 }
@@ -222,11 +224,14 @@ region_widget_new (const gchar *locale_id,
         locale_untranslated_name = gnome_get_country_from_locale (locale_id, "C");
 
         row = gtk_list_box_row_new ();
+        gtk_widget_show (row);
         box = padded_label_new (locale_name, is_extra);
+        gtk_widget_show (box);
         gtk_container_add (GTK_CONTAINER (row), box);
 
         /* We add a check on each side of the label to keep it centered. */
         check = gtk_image_new ();
+        gtk_widget_show (check);
         gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
         gtk_widget_set_opacity (check, 0.0);
         g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
@@ -234,6 +239,7 @@ region_widget_new (const gchar *locale_id,
         gtk_box_reorder_child (GTK_BOX (box), check, 0);
 
         check = gtk_image_new ();
+        gtk_widget_show (check);
         gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
         gtk_widget_set_opacity (check, 0.0);
         g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
@@ -257,10 +263,12 @@ more_widget_new (void)
 
         row = gtk_list_box_row_new ();
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
+        gtk_widget_show (box);
         gtk_container_add (GTK_CONTAINER (row), box);
         gtk_widget_set_tooltip_text (box, _("More…"));
 
         arrow = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_MENU);
+        gtk_widget_show (arrow);
         gtk_style_context_add_class (gtk_widget_get_style_context (arrow), "dim-label");
         gtk_widget_set_hexpand (arrow, TRUE);
         gtk_widget_set_margin_top (box, 10);
@@ -303,12 +311,11 @@ add_regions (CcFormatChooser *chooser,
                 if (!widget)
                   continue;
 
+                gtk_widget_show (widget);
                 gtk_container_add (GTK_CONTAINER (chooser->region_listbox), widget);
         }
 
         gtk_container_add (GTK_CONTAINER (chooser->region_listbox), GTK_WIDGET (chooser->more_item));
-
-        gtk_widget_show_all (chooser->region_listbox);
 
         chooser->adding = FALSE;
 }
@@ -494,9 +501,10 @@ cc_format_chooser_init (CcFormatChooser *chooser)
         gtk_widget_init_template (GTK_WIDGET (chooser));
 
         chooser->more_item = more_widget_new ();
+        gtk_widget_show (GTK_WIDGET (chooser->more_item));
         /* We ref-sink here so we can reuse this widget multiple times */
         chooser->no_results = g_object_ref_sink (no_results_widget_new ());
-        gtk_widget_show_all (chooser->no_results);
+        gtk_widget_show (chooser->no_results);
 
         gtk_list_box_set_sort_func (GTK_LIST_BOX (chooser->region_listbox),
                                     (GtkListBoxSortFunc)sort_regions, chooser, NULL);
