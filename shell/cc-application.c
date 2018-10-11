@@ -227,8 +227,6 @@ static void
 cc_application_startup (GApplication *application)
 {
   CcApplication *self = CC_APPLICATION (application);
-  GMenu *section;
-  GMenu *menu;
   const gchar *help_accels[] = { "F1", NULL };
 
   g_action_map_add_action_entries (G_ACTION_MAP (self),
@@ -245,18 +243,6 @@ cc_application_startup (GApplication *application)
       return;
     }
 #endif /* HAVE_WACOM || HAVE_CHEESE */
-
-  menu = g_menu_new ();
-
-  section = g_menu_new ();
-  g_menu_append (section, _("Keyboard Shortcuts"), "win.show-help-overlay");
-  g_menu_append (section, _("Help"), "app.help");
-  g_menu_append (section, _("Quit"), "app.quit");
-
-  g_menu_append_section (menu, NULL, G_MENU_MODEL (section));
-
-  gtk_application_set_app_menu (GTK_APPLICATION (application),
-                                G_MENU_MODEL (menu));
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (application),
                                          "app.help", help_accels);
