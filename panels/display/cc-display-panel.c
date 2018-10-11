@@ -328,23 +328,31 @@ make_bin (void)
 static GtkWidget *
 wrap_in_boxes (GtkWidget *widget)
 {
-  GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, PANEL_PADDING);
-  gtk_box_pack_start (GTK_BOX (box), make_bin(), TRUE, TRUE, 0);
+  GtkWidget *box, *bin;
+
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, PANEL_PADDING);
+  bin = make_bin ();
+  gtk_widget_show (bin);
+  gtk_box_pack_start (GTK_BOX (box), bin, TRUE, TRUE, 0);
   gtk_box_pack_start (GTK_BOX (box), widget, TRUE, TRUE, 0);
-  gtk_box_pack_start (GTK_BOX (box), make_bin(), TRUE, TRUE, 0);
+  bin = make_bin ();
+  gtk_widget_show (bin);
+  gtk_box_pack_start (GTK_BOX (box), bin, TRUE, TRUE, 0);
   return box;
 }
 
 static GtkWidget *
 make_scrollable (GtkWidget *widget)
 {
-  GtkWidget *sw;
+  GtkWidget *sw, *box;
   sw = g_object_new (GTK_TYPE_SCROLLED_WINDOW,
                      "hscrollbar-policy", GTK_POLICY_NEVER,
                      "min-content-height", 450,
                      "propagate-natural-height", TRUE,
                      NULL);
-  gtk_container_add (GTK_CONTAINER (sw), wrap_in_boxes (widget));
+  box = wrap_in_boxes (widget);
+  gtk_widget_show (box);
+  gtk_container_add (GTK_CONTAINER (sw), box);
   return sw;
 }
 
@@ -389,6 +397,7 @@ make_row (GtkSizeGroup *size_group,
   row = g_object_new (CC_TYPE_LIST_BOX_ROW, NULL);
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
+  gtk_widget_show (box);
   gtk_widget_set_margin_start (box, 20);
   gtk_widget_set_margin_end (box, 20);
   gtk_widget_set_margin_top (box, 20);
@@ -426,15 +435,18 @@ make_frame (const gchar *title, const gchar *subtitle)
       GtkWidget *vbox, *label;
 
       vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, HEADING_PADDING/2);
+      gtk_widget_show (vbox);
       gtk_widget_set_margin_bottom (vbox, HEADING_PADDING);
 
       label = make_bold_label (title);
+      gtk_widget_show (label);
       gtk_widget_set_halign (label, GTK_ALIGN_START);
       gtk_container_add (GTK_CONTAINER (vbox), label);
 
       if (subtitle)
         {
           label = gtk_label_new (subtitle);
+          gtk_widget_show (label);
           gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
           gtk_label_set_xalign (GTK_LABEL (label), 0.0);
           gtk_widget_set_halign (label, GTK_ALIGN_START);
@@ -463,7 +475,7 @@ make_list_box (void)
   return listbox;
 }
 
-static GtkWidget *
+static void
 make_list_transparent (GtkWidget *listbox)
 {
   g_autoptr(GtkCssProvider) provider = NULL;
@@ -474,8 +486,6 @@ make_list_transparent (GtkWidget *listbox)
   gtk_style_context_add_provider (gtk_widget_get_style_context (listbox),
                                   GTK_STYLE_PROVIDER (provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-  return listbox;
 }
 
 static GtkWidget *
@@ -489,8 +499,9 @@ make_list_popover (GtkWidget *listbox)
                                 "max-content-height", 400,
                                 "propagate-natural-height", TRUE,
                                 NULL);
-  gtk_container_add (GTK_CONTAINER (sw), make_list_transparent (listbox));
-  gtk_widget_show_all (sw);
+  gtk_widget_show (sw);
+  make_list_transparent (listbox);
+  gtk_container_add (GTK_CONTAINER (sw), listbox);
 
   gtk_container_add (GTK_CONTAINER (popover), sw);
   g_signal_connect_object (listbox, "row-activated", G_CALLBACK (gtk_widget_hide),
@@ -552,6 +563,7 @@ make_orientation_popover (CcDisplayPanel *panel)
   guint i = 0;
 
   listbox = make_list_box ();
+  gtk_widget_show (listbox);
   g_object_set (listbox, "margin", 12, NULL);
 
   for (i = 0; i < G_N_ELEMENTS (rotations); ++i)
@@ -559,11 +571,14 @@ make_orientation_popover (CcDisplayPanel *panel)
       CcDisplayRotation rotation = rotations[i];
       if (cc_display_monitor_supports_rotation (panel->current_output, rotation))
         {
-          GtkWidget *row;
+          GtkWidget *label, *row;
 
+          label = make_popover_label (string_for_rotation (rotation));
+          gtk_widget_show (label);
           row = g_object_new (CC_TYPE_LIST_BOX_ROW,
-                              "child", make_popover_label (string_for_rotation (rotation)),
+                              "child", label,
                               NULL);
+          gtk_widget_show (row);
           g_object_set_data (G_OBJECT (row), "rotation", GUINT_TO_POINTER (rotation));
 
           g_signal_connect_object (row, "activated", G_CALLBACK (orientation_row_activated),
@@ -587,13 +602,16 @@ orientation_row_sync (GtkPopover       *popover,
 static GtkWidget *
 make_orientation_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
 {
-  GtkWidget *row, *label, *popover;
+  GtkWidget *row, *label, *heading_label, *popover;
 
   label = gtk_label_new (string_for_rotation (cc_display_monitor_get_rotation (output)));
+  gtk_widget_show (label);
   popover = make_orientation_popover (panel);
   gtk_popover_set_relative_to (GTK_POPOVER (popover), label);
 
-  row = make_row (panel->rows_size_group, gtk_label_new (_("Orientation")), label);
+  heading_label = gtk_label_new (_("Orientation"));
+  gtk_widget_show (heading_label);
+  row = make_row (panel->rows_size_group, heading_label, label);
   g_signal_connect_object (row, "activated", G_CALLBACK (gtk_popover_popup),
                            popover, G_CONNECT_SWAPPED);
   g_signal_connect_object (output, "rotation", G_CALLBACK (orientation_row_sync),
@@ -620,6 +638,7 @@ make_resolution_popover (CcDisplayPanel *panel)
   resolutions = g_object_get_data (G_OBJECT (panel->current_output), "res-list");
 
   listbox = make_list_box ();
+  gtk_widget_show (listbox);
   g_object_set (listbox, "margin", 12, NULL);
 
   for (l = resolutions; l; l = l->next)
@@ -629,10 +648,12 @@ make_resolution_popover (CcDisplayPanel *panel)
       GtkWidget *child;
 
       child = make_popover_label (get_resolution_string (mode));
+      gtk_widget_show (child);
 
       row = g_object_new (CC_TYPE_LIST_BOX_ROW,
                           "child", child,
                           NULL);
+      gtk_widget_show (row);
       g_object_set_data (G_OBJECT (row), "mode", mode);
 
       g_signal_connect_object (row, "activated", G_CALLBACK (resolution_row_activated),
@@ -654,13 +675,16 @@ resolution_row_sync (GtkPopover       *popover,
 static GtkWidget *
 make_resolution_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
 {
-  GtkWidget *row, *label, *popover;
+  GtkWidget *row, *label, *heading_label, *popover;
 
   label = gtk_label_new (get_resolution_string (cc_display_monitor_get_mode (output)));
+  gtk_widget_show (label);
   popover = make_resolution_popover (panel);
   gtk_popover_set_relative_to (GTK_POPOVER (popover), label);
 
-  row = make_row (panel->rows_size_group, gtk_label_new (_("Resolution")), label);
+  heading_label = gtk_label_new (_("Resolution"));
+  gtk_widget_show (heading_label);
+  row = make_row (panel->rows_size_group, heading_label, label);
   g_signal_connect_object (row, "activated", G_CALLBACK (gtk_popover_popup),
                            popover, G_CONNECT_SWAPPED);
   g_signal_connect_object (output, "mode", G_CALLBACK (resolution_row_sync),
@@ -690,16 +714,20 @@ make_refresh_rate_popover (CcDisplayPanel *panel)
                                get_resolution_string (cc_display_monitor_get_mode (panel->current_output)));
 
   listbox = make_list_box ();
+  gtk_widget_show (listbox);
   g_object_set (listbox, "margin", 12, NULL);
 
   for (l = freqs; l; l = l->next)
     {
       CcDisplayMode *mode = l->data;
-      GtkWidget *row;
+      GtkWidget *label, *row;
 
+      label = make_popover_label (get_frequency_string (mode));
+      gtk_widget_show (label);
       row = g_object_new (CC_TYPE_LIST_BOX_ROW,
-                          "child", make_popover_label (get_frequency_string (mode)),
+                          "child", label,
                           NULL);
+      gtk_widget_show (row);
       g_object_set_data (G_OBJECT (row), "mode", mode);
 
       g_signal_connect_object (row, "activated", G_CALLBACK (refresh_rate_row_activated),
@@ -741,20 +769,20 @@ refresh_rate_row_sync_visibility (GtkWidget        *row,
 static GtkWidget *
 make_refresh_rate_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
 {
-  GtkWidget *row, *label, *popover;
+  GtkWidget *row, *label, *heading_label, *popover;
 
   label = gtk_label_new (get_frequency_string (cc_display_monitor_get_mode (output)));
+  gtk_widget_show (label);
   popover = make_refresh_rate_popover (panel);
   gtk_popover_set_relative_to (GTK_POPOVER (popover), label);
 
-  row = make_row (panel->rows_size_group, gtk_label_new (_("Refresh Rate")), label);
+  heading_label = gtk_label_new (_("Refresh Rate"));
+  gtk_widget_show (heading_label);
+  row = make_row (panel->rows_size_group, heading_label, label);
   g_signal_connect_object (row, "activated", G_CALLBACK (gtk_popover_popup),
                            popover, G_CONNECT_SWAPPED);
   g_signal_connect_object (output, "mode", G_CALLBACK (refresh_rate_row_sync),
                            popover, G_CONNECT_SWAPPED);
-
-  gtk_widget_show_all (row);
-  gtk_widget_set_no_show_all (row, TRUE);
 
   g_signal_connect_object (output, "mode", G_CALLBACK (refresh_rate_row_sync_visibility),
                            row, G_CONNECT_SWAPPED);
@@ -843,9 +871,13 @@ setup_scale_buttons (GtkWidget        *bbox,
   group = NULL;
   for (scale = scales, i = 0; *scale != 0.0 && i < MAX_N_SCALES; scale++, i++)
     {
-      GtkWidget *button = gtk_radio_button_new_from_widget (group);
+      GtkWidget *button, *label;
 
-      gtk_button_set_image (GTK_BUTTON (button), make_label_for_scale (*scale));
+      button = gtk_radio_button_new_from_widget (group);
+      gtk_widget_show (button);
+      label = make_label_for_scale (*scale);
+      gtk_widget_show (label);
+      gtk_button_set_image (GTK_BUTTON (button), label);
       gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (button), FALSE);
 
       g_object_set_data_full (G_OBJECT (button), "scale", g_memdup (scale, sizeof (double)), g_free);
@@ -856,7 +888,7 @@ setup_scale_buttons (GtkWidget        *bbox,
       group = GTK_RADIO_BUTTON (button);
     }
 
-  gtk_widget_show_all (bbox);
+  gtk_widget_show (bbox);
 }
 #undef MAX_N_SCALES
 
@@ -883,8 +915,10 @@ make_scale_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
   GtkWidget *row, *bbox, *label;
 
   label = gtk_label_new (_("Scale"));
+  gtk_widget_show (label);
 
   bbox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+  gtk_widget_show (bbox);
   gtk_widget_set_valign (bbox, GTK_ALIGN_CENTER);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (bbox), GTK_BUTTONBOX_EXPAND);
 
@@ -901,9 +935,6 @@ make_scale_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
   g_signal_connect_object (output, "scale", G_CALLBACK (scale_buttons_sync),
                            bbox, G_CONNECT_SWAPPED);
   scale_buttons_sync (bbox, output);
-
-  gtk_widget_show_all (row);
-  gtk_widget_set_no_show_all (row, TRUE);
 
   g_signal_connect_object (output, "mode", G_CALLBACK (scale_row_sync_visibility),
                            row, G_CONNECT_SWAPPED);
@@ -926,16 +957,19 @@ static GtkWidget *
 make_underscanning_row (CcDisplayPanel   *panel,
                         CcDisplayMonitor *output)
 {
-  GtkWidget *row, *button;
+  GtkWidget *button, *label;
 
   button = gtk_switch_new ();
+  gtk_widget_show (button);
   gtk_switch_set_active (GTK_SWITCH (button),
                          cc_display_monitor_get_underscanning (output));
   g_signal_connect_object (button, "notify::active", G_CALLBACK (underscanning_switch_active),
                            panel, G_CONNECT_SWAPPED);
 
-  row = make_row (panel->rows_size_group, gtk_label_new (_("Adjust for TV")), button);
-  return row;
+  label = gtk_label_new (_("Adjust for TV"));
+  gtk_widget_show (label);
+
+  return make_row (panel->rows_size_group, label, button);
 }
 
 static gint
@@ -1004,28 +1038,38 @@ ensure_res_freqs (CcDisplayMonitor *output)
 static GtkWidget *
 make_output_ui (CcDisplayPanel *panel)
 {
-  GtkWidget *listbox;
+  GtkWidget *listbox, *row;
 
   ensure_res_freqs (panel->current_output);
 
   listbox = make_list_box ();
 
   if (should_show_rotation (panel, panel->current_output))
+    {
+      row = make_orientation_row (panel, panel->current_output);
+      gtk_widget_show (row);
       gtk_container_add (GTK_CONTAINER (listbox),
-                         make_orientation_row (panel, panel->current_output));
+                         row);
+    }
 
-  gtk_container_add (GTK_CONTAINER (listbox),
-                     make_resolution_row (panel, panel->current_output));
+  row = make_resolution_row (panel, panel->current_output);
+  gtk_widget_show (row);
+  gtk_container_add (GTK_CONTAINER (listbox), row);
 
-  gtk_container_add (GTK_CONTAINER (listbox),
-                     make_scale_row (panel, panel->current_output));
+  row = make_scale_row (panel, panel->current_output);
+  gtk_widget_show (row);
+  gtk_container_add (GTK_CONTAINER (listbox), row);
 
-  gtk_container_add (GTK_CONTAINER (listbox),
-                     make_refresh_rate_row (panel, panel->current_output));
+  row = make_refresh_rate_row (panel, panel->current_output);
+  gtk_widget_show (row);
+  gtk_container_add (GTK_CONTAINER (listbox), row);
 
   if (cc_display_monitor_supports_underscanning (panel->current_output))
-    gtk_container_add (GTK_CONTAINER (listbox),
-                       make_underscanning_row (panel, panel->current_output));
+    {
+      row = make_underscanning_row (panel, panel->current_output);
+      gtk_widget_show (row);
+      gtk_container_add (GTK_CONTAINER (listbox), row);
+    }
 
   return listbox;
 }
@@ -1033,18 +1077,24 @@ make_output_ui (CcDisplayPanel *panel)
 static GtkWidget *
 make_single_output_ui (CcDisplayPanel *panel)
 {
-  GtkWidget *vbox, *frame;
+  GtkWidget *vbox, *frame, *ui;
 
   panel->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
   vbox = make_main_vbox (panel->main_size_group);
+  gtk_widget_show (vbox);
 
   frame = make_frame (cc_display_monitor_get_ui_name (panel->current_output), NULL);
+  gtk_widget_show (frame);
   gtk_container_add (GTK_CONTAINER (vbox), frame);
 
-  gtk_container_add (GTK_CONTAINER (frame), make_output_ui (panel));
+  ui = make_output_ui (panel);
+  gtk_widget_show (ui);
+  gtk_container_add (GTK_CONTAINER (frame), ui);
 
-  gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (panel));
+  ui = make_night_light_widget (panel);
+  gtk_widget_show (ui);
+  gtk_container_add (GTK_CONTAINER (vbox), ui);
 
   g_clear_object (&panel->rows_size_group);
   return make_scrollable (vbox);
@@ -1075,6 +1125,7 @@ make_arrangement_row (CcDisplayPanel *panel)
   CcDisplayArrangement *arr;
 
   arr = cc_display_arrangement_new (panel->current_config);
+  gtk_widget_show (GTK_WIDGET (arr));
   cc_display_arrangement_set_selected_output (arr, panel->current_output);
   g_signal_connect_object (arr, "updated",
 			   G_CALLBACK (update_apply_button), panel,
@@ -1135,21 +1186,25 @@ make_primary_chooser_popover (CcDisplayPanel *panel)
   outputs = cc_display_config_get_ui_sorted_monitors (panel->current_config);
 
   listbox = make_list_box ();
+  gtk_widget_show (listbox);
   g_object_set (listbox, "margin", 12, NULL);
 
   for (l = outputs; l; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
-      GtkWidget *row;
+      GtkWidget *label, *row;
       const gchar *text;
 
       if (!cc_display_monitor_is_useful (output))
         continue;
 
       text = cc_display_monitor_get_ui_number_name (output);
+      label = make_popover_label (text);
+      gtk_widget_show (label);
       row = g_object_new (CC_TYPE_LIST_BOX_ROW,
-                          "child", make_popover_label (text),
+                          "child", label,
                           NULL);
+      gtk_widget_show (row);
       g_object_set_data (G_OBJECT (row), "output", output);
 
       g_signal_connect_object (row, "activated", G_CALLBACK (primary_chooser_row_activated),
@@ -1163,13 +1218,16 @@ make_primary_chooser_popover (CcDisplayPanel *panel)
 static GtkWidget *
 make_primary_chooser_row (CcDisplayPanel *panel)
 {
-  GtkWidget *row, *label, *popover;
+  GtkWidget *row, *label, *heading_label, *popover;
 
   label = gtk_label_new (NULL);
+  gtk_widget_show (label);
   popover = make_primary_chooser_popover (panel);
   gtk_popover_set_relative_to (GTK_POPOVER (popover), label);
 
-  row = make_row (panel->rows_size_group, gtk_label_new (_("Primary Display")), label);
+  heading_label = gtk_label_new (_("Primary Display"));
+  gtk_widget_show (heading_label);
+  row = make_row (panel->rows_size_group, heading_label, label);
   g_signal_connect_object (row, "activated", G_CALLBACK (gtk_popover_popup),
                            popover, G_CONNECT_SWAPPED);
   g_signal_connect_object (panel->current_config, "primary", G_CALLBACK (primary_chooser_sync),
@@ -1183,11 +1241,15 @@ static void
 replace_current_output_ui (GtkWidget      *frame,
                            CcDisplayPanel *panel)
 {
+  GtkWidget *ui;
+
   panel->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
   gtk_widget_destroy (gtk_bin_get_child (GTK_BIN (frame)));
-  gtk_container_add (GTK_CONTAINER (frame), make_output_ui (panel));
-  gtk_widget_show_all (frame);
+  ui = make_output_ui (panel);
+  gtk_widget_show (ui);
+  gtk_container_add (GTK_CONTAINER (frame), ui);
+  gtk_widget_show (frame);
 
   g_clear_object (&panel->rows_size_group);
 }
@@ -1195,16 +1257,21 @@ replace_current_output_ui (GtkWidget      *frame,
 static GtkWidget *
 make_arrangement_ui (CcDisplayPanel *panel)
 {
-  GtkWidget *frame, *listbox;
+  GtkWidget *frame, *listbox, *row;
 
   frame = make_frame (_("Display Arrangement"),
                       _("Drag displays to match your setup. The top bar is placed on the primary display."));
   listbox = make_list_box ();
+  gtk_widget_show (listbox);
   gtk_container_add (GTK_CONTAINER (frame), listbox);
 
-  gtk_container_add (GTK_CONTAINER (listbox), make_arrangement_row (panel));
+  row = make_arrangement_row (panel);
+  gtk_widget_show (row);
+  gtk_container_add (GTK_CONTAINER (listbox), row);
 
-  gtk_container_add (GTK_CONTAINER (listbox), make_primary_chooser_row (panel));
+  row = make_primary_chooser_row (panel);
+  gtk_widget_show (row);
+  gtk_container_add (GTK_CONTAINER (listbox), row);
 
   return frame;
 }
@@ -1256,6 +1323,7 @@ make_two_output_chooser (CcDisplayPanel *panel)
       CcDisplayMonitor *output = l->data;
       GtkWidget *button = gtk_radio_button_new_from_widget (group);
 
+      gtk_widget_show (button);
       gtk_button_set_label (GTK_BUTTON (button), cc_display_monitor_get_ui_name (output));
       gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (button), FALSE);
 
@@ -1276,27 +1344,35 @@ make_two_output_chooser (CcDisplayPanel *panel)
 static GtkWidget *
 make_two_join_ui (CcDisplayPanel *panel)
 {
-  GtkWidget *vbox, *frame, *box;
+  GtkWidget *vbox, *ui, *frame, *box;
 
   panel->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
-  gtk_container_add (GTK_CONTAINER (vbox), make_arrangement_ui (panel));
+  ui = make_arrangement_ui (panel);
+  gtk_widget_show (ui);
+  gtk_container_add (GTK_CONTAINER (vbox), ui);
 
   box = make_two_output_chooser (panel);
+  gtk_widget_show (box);
   gtk_widget_set_margin_top (box, SECTION_PADDING);
   gtk_container_add (GTK_CONTAINER (vbox), box);
 
   frame = make_frame (NULL, NULL);
+  gtk_widget_show (frame);
   gtk_widget_set_margin_top (frame, HEADING_PADDING);
   gtk_container_add (GTK_CONTAINER (vbox), frame);
 
-  gtk_container_add (GTK_CONTAINER (frame), make_output_ui (panel));
+  ui = make_output_ui (panel);
+  gtk_widget_show (ui);
+  gtk_container_add (GTK_CONTAINER (frame), ui);
   g_signal_connect_object (panel, "current-output", G_CALLBACK (replace_current_output_ui),
                            frame, G_CONNECT_SWAPPED);
 
-  gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (panel));
+  ui = make_night_light_widget (panel);
+  gtk_widget_show (ui);
+  gtk_container_add (GTK_CONTAINER (vbox), ui);
 
   g_clear_object (&panel->rows_size_group);
   return vbox;
@@ -1338,25 +1414,31 @@ connect_activate_output (GtkWidget *button,
 static GtkWidget *
 make_two_single_ui (CcDisplayPanel *panel)
 {
-  GtkWidget *vbox, *frame, *box;
+  GtkWidget *vbox, *frame, *ui, *box;
 
   panel->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
   box = make_two_output_chooser (panel);
+  gtk_widget_show (box);
   gtk_container_foreach (GTK_CONTAINER (box), connect_activate_output, panel);
   gtk_container_add (GTK_CONTAINER (vbox), box);
 
   frame = make_frame (NULL, NULL);
+  gtk_widget_show (frame);
   gtk_widget_set_margin_top (frame, HEADING_PADDING);
   gtk_container_add (GTK_CONTAINER (vbox), frame);
 
-  gtk_container_add (GTK_CONTAINER (frame), make_output_ui (panel));
+  ui = make_output_ui (panel);
+  gtk_widget_show (ui);
+  gtk_container_add (GTK_CONTAINER (frame), ui);
   g_signal_connect_object (panel, "current-output", G_CALLBACK (replace_current_output_ui),
                            frame, G_CONNECT_SWAPPED);
 
-  gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (panel));
+  ui = make_night_light_widget (panel);
+  gtk_widget_show (ui);
+  gtk_container_add (GTK_CONTAINER (vbox), ui);
 
   g_clear_object (&panel->rows_size_group);
   return vbox;
@@ -1395,16 +1477,20 @@ make_mirror_resolution_popover (CcDisplayPanel *panel)
   resolutions = g_object_get_data (G_OBJECT (panel->current_config), "mirror-res-list");
 
   listbox = make_list_box ();
+  gtk_widget_show (listbox);
   g_object_set (listbox, "margin", 12, NULL);
 
   for (l = resolutions; l; l = l->next)
     {
       CcDisplayMode *mode = l->data;
-      GtkWidget *row;
+      GtkWidget *label, *row;
 
+      label = make_popover_label (get_resolution_string (mode));
+      gtk_widget_show (label);
       row = g_object_new (CC_TYPE_LIST_BOX_ROW,
-                          "child", make_popover_label (get_resolution_string (mode)),
+                          "child", label,
                           NULL);
+      gtk_widget_show (row);
       g_object_set_data (G_OBJECT (row), "mode", mode);
 
       g_signal_connect_object (row, "activated", G_CALLBACK (mirror_resolution_row_activated),
@@ -1419,13 +1505,16 @@ static GtkWidget *
 make_mirror_resolution_row (CcDisplayPanel   *panel,
                             CcDisplayMonitor *output)
 {
-  GtkWidget *row, *label, *popover;
+  GtkWidget *row, *label, *heading_label, *popover;
 
   label = gtk_label_new (get_resolution_string (cc_display_monitor_get_mode (output)));
+  gtk_widget_show (label);
   popover = make_mirror_resolution_popover (panel);
   gtk_popover_set_relative_to (GTK_POPOVER (popover), label);
 
-  row = make_row (panel->rows_size_group, gtk_label_new (_("Resolution")), label);
+  heading_label = gtk_label_new (_("Resolution"));
+  gtk_widget_show (heading_label);
+  row = make_row (panel->rows_size_group, heading_label, label);
   g_signal_connect_object (row, "activated", G_CALLBACK (gtk_popover_popup),
                            popover, G_CONNECT_SWAPPED);
   g_signal_connect_object (output, "mode", G_CALLBACK (resolution_row_sync),
@@ -1465,7 +1554,7 @@ ensure_mirror_res_list (CcDisplayConfig *config)
 static GtkWidget *
 make_two_mirror_ui (CcDisplayPanel *panel)
 {
-  GtkWidget *vbox, *listbox, *frame;
+  GtkWidget *vbox, *listbox, *frame, *row, *ui;
 
   ensure_mirror_res_list (panel->current_config);
   if (!cc_display_config_is_cloning (panel->current_config))
@@ -1481,18 +1570,26 @@ make_two_mirror_ui (CcDisplayPanel *panel)
 
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   frame = make_frame (NULL, NULL);
+  gtk_widget_show (frame);
   gtk_container_add (GTK_CONTAINER (vbox), frame);
   listbox = make_list_box ();
+  gtk_widget_show (listbox);
   gtk_container_add (GTK_CONTAINER (frame), listbox);
 
   if (should_show_rotation (panel, panel->current_output))
-    gtk_container_add (GTK_CONTAINER (listbox),
-                       make_orientation_row (panel, panel->current_output));
+    {
+      ui = make_orientation_row (panel, panel->current_output);
+      gtk_widget_show (ui);
+      gtk_container_add (GTK_CONTAINER (listbox), ui);
+    }
 
-  gtk_container_add (GTK_CONTAINER (listbox),
-                     make_mirror_resolution_row (panel, panel->current_output));
+  row = make_mirror_resolution_row (panel, panel->current_output);
+  gtk_widget_show (row);
+  gtk_container_add (GTK_CONTAINER (listbox), row);
 
-  gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (panel));
+  ui = make_night_light_widget (panel);
+  gtk_widget_show (ui);
+  gtk_container_add (GTK_CONTAINER (vbox), ui);
 
   g_clear_object (&panel->rows_size_group);
   return vbox;
@@ -1503,7 +1600,7 @@ two_output_visible_child_changed (CcDisplayPanel *panel,
                                   GParamSpec     *pspec,
                                   GtkWidget      *stack)
 {
-  GtkWidget *bin;
+  GtkWidget *bin, *ui;
   g_autoptr(GList) children = NULL;
   GList *l;
 
@@ -1521,7 +1618,7 @@ two_output_visible_child_changed (CcDisplayPanel *panel,
 
   if (g_str_equal (gtk_stack_get_visible_child_name (GTK_STACK (stack)), "mirror"))
     {
-      gtk_container_add (GTK_CONTAINER (bin), make_two_mirror_ui (panel));
+      ui = make_two_mirror_ui (panel);
     }
   else
     {
@@ -1541,12 +1638,13 @@ two_output_visible_child_changed (CcDisplayPanel *panel,
         }
 
       if (single)
-        gtk_container_add (GTK_CONTAINER (bin), make_two_single_ui (panel));
+        ui = make_two_single_ui (panel);
       else
-        gtk_container_add (GTK_CONTAINER (bin), make_two_join_ui (panel));
+        ui = make_two_join_ui (panel);
     }
 
-  gtk_widget_show_all (stack);
+  gtk_widget_show (ui);
+  gtk_container_add (GTK_CONTAINER (bin), ui);
 
   ensure_monitor_labels (panel);
   update_apply_button (panel);
@@ -1588,8 +1686,10 @@ add_two_output_page (GtkWidget   *switcher,
   GtkWidget *button, *bin, *image;
 
   bin = make_bin ();
+  gtk_widget_show (bin);
   gtk_stack_add_named (GTK_STACK (stack), bin, name);
   image = gtk_image_new_from_icon_name (icon, GTK_ICON_SIZE_LARGE_TOOLBAR);
+  gtk_widget_show (image);
   g_object_set (G_OBJECT (image), "margin", HEADING_PADDING, NULL);
   button = g_object_new (GTK_TYPE_TOGGLE_BUTTON,
                          "image", image,
@@ -1597,6 +1697,7 @@ add_two_output_page (GtkWidget   *switcher,
                          "always-show-image", TRUE,
                          "label", title,
                          NULL);
+  gtk_widget_show (button);
   gtk_container_add (GTK_CONTAINER (switcher), button);
   g_object_bind_property_full (stack, "visible-child", button, "active", G_BINDING_BIDIRECTIONAL,
                                transform_stack_to_button, transform_button_to_stack, bin, NULL);
@@ -1605,28 +1706,34 @@ add_two_output_page (GtkWidget   *switcher,
 static GtkWidget *
 make_two_output_ui (CcDisplayPanel *panel)
 {
-  GtkWidget *vbox, *switcher, *stack, *label;
+  GtkWidget *vbox, *switcher, *stack, *bin, *label;
   gboolean show_mirror;
 
   show_mirror = g_list_length (cc_display_config_get_cloning_modes (panel->current_config)) > 0;
 
   vbox = make_main_vbox (panel->main_size_group);
+  gtk_widget_show (vbox);
 
   label = make_bold_label (_("Display Mode"));
+  gtk_widget_show (label);
   gtk_widget_set_halign (label, GTK_ALIGN_START);
   gtk_widget_set_margin_bottom (label, HEADING_PADDING);
   gtk_container_add (GTK_CONTAINER (vbox), label);
 
   switcher = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+  gtk_widget_show (switcher);
   gtk_widget_set_margin_bottom (switcher, SECTION_PADDING);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (switcher), GTK_BUTTONBOX_EXPAND);
   gtk_container_add (GTK_CONTAINER (vbox), switcher);
 
   stack = gtk_stack_new ();
+  gtk_widget_show (stack);
   gtk_container_add (GTK_CONTAINER (vbox), stack);
   /* Add a dummy first stack page so that setting the visible child
    * below triggers a visible-child-name notification. */
-  gtk_stack_add_named (GTK_STACK (stack), make_bin (), "dummy");
+  bin = make_bin ();
+  gtk_widget_show (bin);
+  gtk_stack_add_named (GTK_STACK (stack), bin, "dummy");
 
   add_two_output_page (switcher, stack, "join", _("Join Displays"),
                        "video-joined-displays-symbolic");
@@ -1636,8 +1743,6 @@ make_two_output_ui (CcDisplayPanel *panel)
 
   add_two_output_page (switcher, stack, "single", _("Single Display"),
                        "video-single-display-symbolic");
-
-  gtk_widget_show_all (stack);
 
   g_signal_connect_object (stack, "notify::visible-child-name",
                            G_CALLBACK (two_output_visible_child_changed),
@@ -1692,9 +1797,12 @@ static void
 replace_output_switch (GtkWidget      *frame,
                        CcDisplayPanel *panel)
 {
+  GtkWidget *sw;
+
   gtk_widget_destroy (gtk_bin_get_child (GTK_BIN (frame)));
-  gtk_container_add (GTK_CONTAINER (frame), make_output_switch (panel));
-  gtk_widget_show_all (frame);
+  sw = make_output_switch (panel);
+  gtk_widget_show (sw);
+  gtk_container_add (GTK_CONTAINER (frame), sw);
 }
 
 static void
@@ -1718,23 +1826,27 @@ output_chooser_sync (GtkWidget      *button,
 static GtkWidget *
 make_output_chooser_button (CcDisplayPanel *panel)
 {
-  GtkWidget *listbox, *button, *popover;
+  GtkWidget *listbox, *button, *popover, *label;
   GList *outputs, *l;
 
   outputs = cc_display_config_get_ui_sorted_monitors (panel->current_config);
 
   listbox = make_list_box ();
+  gtk_widget_show (listbox);
 
   for (l = outputs; l; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
-      GtkWidget *row;
+      GtkWidget *label, *row;
       const gchar *text;
 
       text = cc_display_monitor_get_ui_number_name (output);
+      label = make_popover_label (text);
+      gtk_widget_show (label);
       row = g_object_new (CC_TYPE_LIST_BOX_ROW,
-                          "child", make_popover_label (text),
+                          "child", label,
                           NULL);
+      gtk_widget_show (row);
       g_object_set_data (G_OBJECT (row), "output", output);
 
       g_signal_connect_object (row, "activated", G_CALLBACK (output_chooser_row_activated),
@@ -1744,7 +1856,9 @@ make_output_chooser_button (CcDisplayPanel *panel)
 
   popover = make_list_popover (listbox);
   button = gtk_menu_button_new ();
-  gtk_container_add (GTK_CONTAINER (button), make_bold_label (NULL));
+  label = make_bold_label (NULL);
+  gtk_widget_show (label);
+  gtk_container_add (GTK_CONTAINER (button), label);
   gtk_menu_button_set_popover (GTK_MENU_BUTTON (button), popover);
   g_signal_connect_object (panel, "current-output", G_CALLBACK (output_chooser_sync),
                            button, G_CONNECT_SWAPPED);
@@ -1756,35 +1870,49 @@ make_output_chooser_button (CcDisplayPanel *panel)
 static GtkWidget *
 make_multi_output_ui (CcDisplayPanel *panel)
 {
-  GtkWidget *vbox, *frame, *hbox;
+  GtkWidget *vbox, *ui, *frame, *sw, *hbox, *button;
 
   panel->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
   vbox = make_main_vbox (panel->main_size_group);
+  gtk_widget_show (vbox);
 
-  gtk_container_add (GTK_CONTAINER (vbox), make_arrangement_ui (panel));
+  ui = make_arrangement_ui (panel);
+  gtk_widget_show (ui);
+  gtk_container_add (GTK_CONTAINER (vbox), ui);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_widget_show (hbox);
   gtk_widget_set_margin_top (hbox, SECTION_PADDING);
   gtk_container_add (GTK_CONTAINER (vbox), hbox);
 
-  gtk_box_pack_start (GTK_BOX (hbox), make_output_chooser_button (panel), FALSE, FALSE, 0);
+  button = make_output_chooser_button (panel);
+  gtk_widget_show (button);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
   frame = make_bin ();
+  gtk_widget_show (frame);
   gtk_box_pack_end (GTK_BOX (hbox), frame, FALSE, FALSE, 0);
-  gtk_container_add (GTK_CONTAINER (frame), make_output_switch (panel));
+  sw = make_output_switch (panel);
+  gtk_widget_show (sw);
+  gtk_container_add (GTK_CONTAINER (frame), sw);
   g_signal_connect_object (panel, "current-output", G_CALLBACK (replace_output_switch),
                            frame, G_CONNECT_SWAPPED);
 
   frame = make_frame (NULL, NULL);
+  gtk_widget_show (frame);
   gtk_widget_set_margin_top (frame, HEADING_PADDING);
   gtk_container_add (GTK_CONTAINER (vbox), frame);
 
-  gtk_container_add (GTK_CONTAINER (frame), make_output_ui (panel));
+  ui = make_output_ui (panel);
+  gtk_widget_show (ui);
+  gtk_container_add (GTK_CONTAINER (frame), ui);
   g_signal_connect_object (panel, "current-output", G_CALLBACK (replace_current_output_ui),
                            frame, G_CONNECT_SWAPPED);
 
-  gtk_container_add (GTK_CONTAINER (vbox), make_night_light_widget (panel));
+  ui = make_night_light_widget (panel);
+  gtk_widget_show (ui);
+  gtk_container_add (GTK_CONTAINER (vbox), ui);
 
   g_clear_object (&panel->rows_size_group);
   return make_scrollable (vbox);
@@ -1867,7 +1995,7 @@ on_screen_changed (CcDisplayPanel *panel)
         main_widget = make_multi_output_ui (panel);
     }
 
-  gtk_widget_show_all (main_widget);
+  gtk_widget_show (main_widget);
   gtk_stack_add_named (GTK_STACK (panel->stack), main_widget, "main");
   gtk_stack_set_visible_child (GTK_STACK (panel->stack), main_widget);
   return;
@@ -1895,10 +2023,12 @@ show_apply_titlebar (CcDisplayPanel *panel, gboolean is_applicable)
       g_autoptr(GtkSizeGroup) size_group = NULL;
       GtkWidget *header, *button, *toplevel;
       panel->apply_titlebar = header = gtk_header_bar_new ();
+      gtk_widget_show (header);
 
       size_group = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
 
       button = gtk_button_new_with_mnemonic (_("_Cancel"));
+      gtk_widget_show (button);
       gtk_header_bar_pack_start (GTK_HEADER_BAR (header), button);
       gtk_size_group_add_widget (size_group, button);
       g_signal_connect_object (button, "clicked", G_CALLBACK (on_screen_changed),
@@ -1909,14 +2039,13 @@ show_apply_titlebar (CcDisplayPanel *panel, gboolean is_applicable)
                                button, G_CONNECT_SWAPPED);
 
       panel->apply_titlebar_apply = button = gtk_button_new_with_mnemonic (_("_Apply"));
+      gtk_widget_show (button);
       gtk_header_bar_pack_end (GTK_HEADER_BAR (header), button);
       gtk_size_group_add_widget (size_group, button);
       g_signal_connect_object (button, "clicked", G_CALLBACK (apply_current_configuration),
                                panel, G_CONNECT_SWAPPED);
       gtk_style_context_add_class (gtk_widget_get_style_context (button),
                                    GTK_STYLE_CLASS_SUGGESTED_ACTION);
-
-      gtk_widget_show_all (header);
 
       header = gtk_window_get_titlebar (GTK_WINDOW (toplevel));
       if (header)
@@ -2257,17 +2386,21 @@ make_night_light_widget (CcDisplayPanel *self)
 
   frame = make_frame (NULL, NULL);
   night_light_listbox = make_list_box ();
+  gtk_widget_show (night_light_listbox);
   gtk_container_add (GTK_CONTAINER (frame), night_light_listbox);
 
   label = gtk_label_new (_("_Night Light"));
+  gtk_widget_show (label);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
 
   state_label = gtk_label_new ("");
+  gtk_widget_show (state_label);
   g_signal_connect_object (self->settings_color, "changed",
                            G_CALLBACK (settings_color_changed_cb), state_label, 0);
   night_light_sync_label (state_label, self->settings_color);
 
   row = make_row (self->rows_size_group, label, state_label);
+  gtk_widget_show (row);
   gtk_container_add (GTK_CONTAINER (night_light_listbox), row);
   g_signal_connect_object (row, "activated",
                            G_CALLBACK (cc_display_panel_night_light_activated),
@@ -2307,24 +2440,27 @@ static void
 cc_display_panel_init (CcDisplayPanel *self)
 {
   g_autoptr (GtkCssProvider) provider = NULL;
-  GtkWidget *bin;
+  GtkWidget *bin, *label;
 
   g_resources_register (cc_display_get_resource ());
 
   self->stack = gtk_stack_new ();
+  gtk_widget_show (self->stack);
 
   bin = make_bin ();
+  gtk_widget_show (bin);
   gtk_widget_set_size_request (bin, 500, -1);
   gtk_stack_add_named (GTK_STACK (self->stack), bin, "main-size-group");
   self->main_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
   gtk_size_group_add_widget (self->main_size_group, bin);
 
+  label = gtk_label_new (_("Could not get screen information"));
+  gtk_widget_show (label);
   gtk_stack_add_named (GTK_STACK (self->stack),
-                       gtk_label_new (_("Could not get screen information")),
+                       label,
                        "error");
 
   gtk_container_add (GTK_CONTAINER (self), self->stack);
-  gtk_widget_show_all (self->stack);
 
   self->night_light_dialog = cc_night_light_dialog_new ();
   self->settings_color = g_settings_new ("org.gnome.settings-daemon.plugins.color");
