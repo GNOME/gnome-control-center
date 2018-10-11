@@ -103,6 +103,7 @@ struct _CcDateTimePanel
   GtkWidget *h_spinbutton;
   GtkWidget *listbox1;
   GtkWidget *listbox2;
+  GtkLockButton *lock_button;
   GtkWidget *m_spinbutton;
   GtkWidget *month_combobox;
   GtkListStore *month_liststore;
@@ -167,11 +168,14 @@ cc_date_time_panel_dispose (GObject *object)
   G_OBJECT_CLASS (cc_date_time_panel_parent_class)->dispose (object);
 }
 
-static GPermission *
-cc_date_time_panel_get_permission (CcPanel *panel)
+static void
+cc_date_time_panel_constructed (GObject *object)
 {
-  CcDateTimePanel *self = CC_DATE_TIME_PANEL (panel);
-  return self->permission;
+  CcDateTimePanel *self = CC_DATE_TIME_PANEL (object);
+
+  G_OBJECT_CLASS (cc_date_time_panel_parent_class)->constructed (object);
+
+  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), GTK_WIDGET (self->lock_button));
 }
 
 static const char *
@@ -1113,10 +1117,10 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
+  object_class->constructed = cc_date_time_panel_constructed;
   object_class->dispose = cc_date_time_panel_dispose;
 
-  panel_class->get_permission = cc_date_time_panel_get_permission;
-  panel_class->get_help_uri   = cc_date_time_panel_get_help_uri;
+  panel_class->get_help_uri = cc_date_time_panel_get_help_uri;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/datetime/datetime.ui");
 
@@ -1135,6 +1139,7 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, h_spinbutton);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox1);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox2);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, m_spinbutton);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_liststore);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, network_time_switch);
@@ -1222,6 +1227,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
       g_warning ("Your system does not have the '%s' PolicyKit files installed. Please check your installation",
                  DATETIME_PERMISSION);
     }
+  gtk_lock_button_set_permission (GTK_LOCK_BUTTON (self->lock_button), self->permission);
 
   self->location_settings = g_settings_new (LOCATION_SETTINGS);
   g_signal_connect (self->location_settings, "changed",
