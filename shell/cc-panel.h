@@ -79,7 +79,6 @@ struct _CcPanelClass
   /*< private >*/
   GtkBinClass parent_class;
 
-  GPermission * (* get_permission) (CcPanel *panel);
   const char  * (* get_help_uri)   (CcPanel *panel);
 
   GtkWidget *   (* get_title_widget) (CcPanel *panel);

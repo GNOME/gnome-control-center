@@ -252,17 +252,6 @@ cc_panel_get_shell (CcPanel *panel)
   return priv->shell;
 }
 
-GPermission *
-cc_panel_get_permission (CcPanel *panel)
-{
-  CcPanelClass *class = CC_PANEL_GET_CLASS (panel);
-
-  if (class->get_permission)
-    return class->get_permission (panel);
-
-  return NULL;
-}
-
 const char *
 cc_panel_get_help_uri (CcPanel *panel)
 {

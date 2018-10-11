@@ -64,7 +64,6 @@ struct _CcWindow
   GtkWidget  *search_button;
   GtkWidget  *search_bar;
   GtkWidget  *search_entry;
-  GtkWidget  *lock_button;
   GtkWidget  *development_warning_dialog;
   GtkWidget  *current_panel;
   char       *current_panel_id;
@@ -184,9 +183,6 @@ activate_panel (CcWindow          *self,
   self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, parameters));
   cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (self->current_panel));
   gtk_widget_show (self->current_panel);
-
-  gtk_lock_button_set_permission (GTK_LOCK_BUTTON (self->lock_button),
-                                  cc_panel_get_permission (CC_PANEL (self->current_panel)));
 
   gtk_stack_add_named (GTK_STACK (self->stack), self->current_panel, id);
 
@@ -836,7 +832,6 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, list_scrolled);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, previous_button);

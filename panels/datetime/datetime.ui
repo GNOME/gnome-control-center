@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.10 -->
+  <object class="GtkLockButton" id="lock_button">
+    <property name="visible">True</property>
+    <property name="can_focus">True</property>
+  </object>
   <object class="GtkListStore" id="city_liststore">
     <columns>
       <!-- column-name city-human-readable -->
