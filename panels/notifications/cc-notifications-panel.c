@@ -322,9 +322,11 @@ add_application (CcNotificationsPanel *panel,
     g_object_ref (icon);
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
+  gtk_widget_show (box);
   gtk_container_set_border_width (GTK_CONTAINER (box), 10);
 
   row = gtk_list_box_row_new ();
+  gtk_widget_show (row);
   g_object_set_qdata_full (G_OBJECT (row), application_quark (),
                            app, (GDestroyNotify) application_free);
 
@@ -335,15 +337,18 @@ add_application (CcNotificationsPanel *panel,
   gtk_container_add (GTK_CONTAINER (row), box);
 
   w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
+  gtk_widget_show (w);
   gtk_icon_size_lookup (GTK_ICON_SIZE_DND, &size, NULL);
   gtk_image_set_pixel_size (GTK_IMAGE (w), size);
   gtk_size_group_add_widget (GTK_SIZE_GROUP (gtk_builder_get_object (panel->builder, "sizegroup1")), w);
   gtk_container_add (GTK_CONTAINER (box), w);
 
   w = gtk_label_new (app_name);
+  gtk_widget_show (w);
   gtk_container_add (GTK_CONTAINER (box), w);
 
   w = gtk_label_new ("");
+  gtk_widget_show (w);
   g_settings_bind_with_mapping (app->settings, "enable",
                                 w, "label",
                                 G_SETTINGS_BIND_GET |
@@ -355,8 +360,6 @@ add_application (CcNotificationsPanel *panel,
   gtk_widget_set_margin_end (w, 12);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_box_pack_end (GTK_BOX (box), w, FALSE, FALSE, 0);
-
-  gtk_widget_show_all (row);
 
   g_hash_table_add (panel->known_applications, g_strdup (app->canonical_app_id));
 }
