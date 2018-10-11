@@ -433,6 +433,7 @@ place_query_info_ready (GObject *source,
   g_clear_object (&place->cancellable);
 
   box = gtk_bin_get_child (GTK_BIN (row));
+  gtk_widget_show (box);
 
   path = g_file_get_path (G_FILE (source));
   if (g_strcmp0 (path, g_get_home_dir ()) == 0)
@@ -441,9 +442,11 @@ place_query_info_ready (GObject *source,
     place->settings_key = TRACKER_KEY_RECURSIVE_DIRECTORIES;
 
   w = gtk_label_new (place->display_name);
+  gtk_widget_show (w);
   gtk_container_add (GTK_CONTAINER (box), w);
 
   w = gtk_switch_new ();
+  gtk_widget_show (w);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_box_pack_end (GTK_BOX (box), w, FALSE, FALSE, 0);
   g_settings_bind_with_mapping (tracker_preferences, place->settings_key,
@@ -452,8 +455,6 @@ place_query_info_ready (GObject *source,
                                 switch_tracker_get_mapping,
                                 switch_tracker_set_mapping,
                                 place, NULL);
-
-  gtk_widget_show_all (row);
 }
 
 static void
@@ -509,9 +510,11 @@ create_row_for_place (Place *place)
   GtkWidget *child, *row, *remove_button;
 
   row = gtk_list_box_row_new ();
+  gtk_widget_show (row);
   gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (row), FALSE);
   gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), FALSE);
   child = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  gtk_widget_show (child);
   gtk_container_add (GTK_CONTAINER (row), child);
   g_object_set (row, "margin", 5, "margin-left", 16, NULL);
   g_object_set_data_full (G_OBJECT (row), "place", place, (GDestroyNotify) place_free);
@@ -519,6 +522,7 @@ create_row_for_place (Place *place)
   if (place->place_type == PLACE_OTHER)
     {
       remove_button = gtk_button_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_MENU);
+      gtk_widget_show (remove_button);
       gtk_style_context_add_class (gtk_widget_get_style_context (remove_button), "flat");
       gtk_box_pack_end (GTK_BOX (child), remove_button, FALSE, FALSE, 2);
 
