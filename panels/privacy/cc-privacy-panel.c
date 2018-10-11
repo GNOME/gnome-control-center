@@ -288,13 +288,16 @@ add_row (CcPrivacyPanel *self,
   GtkWidget *box, *row, *w;
 
   row = gtk_list_box_row_new ();
+  gtk_widget_show (row);
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
+  gtk_widget_show (box);
   gtk_container_add (GTK_CONTAINER (row), box);
   g_object_set_data (G_OBJECT (row), "dialog-id", (gpointer)dialog_id);
   gtk_widget_set_hexpand (box, TRUE);
   gtk_container_add (GTK_CONTAINER (self->list_box), row);
 
   w = gtk_label_new (label);
+  gtk_widget_show (w);
   gtk_widget_set_halign (w, GTK_ALIGN_START);
   gtk_widget_set_margin_start (w, 20);
   gtk_widget_set_margin_end (w, 20);
@@ -309,8 +312,6 @@ add_row (CcPrivacyPanel *self,
   gtk_widget_set_halign (status, GTK_ALIGN_END);
   gtk_widget_set_valign (status, GTK_ALIGN_CENTER);
   gtk_box_pack_end (GTK_BOX (box), status, FALSE, FALSE, 0);
-
-  gtk_widget_show_all (row);
 
   return row;
 }
@@ -617,7 +618,9 @@ add_location_app (CcPrivacyPanel *self,
       return;
 
   row = gtk_list_box_row_new ();
+  gtk_widget_show (row);
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_widget_show (box);
   gtk_widget_set_margin_start (box, 12);
   gtk_widget_set_margin_end (box, 6);
   gtk_widget_set_margin_top (box, 12);
@@ -628,12 +631,14 @@ add_location_app (CcPrivacyPanel *self,
 
   icon = g_app_info_get_icon (G_APP_INFO (app_info));
   w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_LARGE_TOOLBAR);
+  gtk_widget_show (w);
   gtk_widget_set_halign (w, GTK_ALIGN_CENTER);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_size_group_add_widget (self->location_icon_size_group, w);
   gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 0);
 
   w = gtk_label_new (g_app_info_get_name (G_APP_INFO (app_info)));
+  gtk_widget_show (w);
   gtk_widget_set_margin_start (w, 12);
   gtk_widget_set_margin_end (w, 12);
   gtk_widget_set_halign (w, GTK_ALIGN_START);
@@ -644,6 +649,7 @@ add_location_app (CcPrivacyPanel *self,
   t = g_date_time_new_from_unix_utc (last_used);
   last_used_str = cc_util_get_smart_date (t);
   w = gtk_label_new (last_used_str);
+  gtk_widget_show (w);
   g_free (last_used_str);
   gtk_style_context_add_class (gtk_widget_get_style_context (w), "dim-label");
   gtk_widget_set_margin_start (w, 12);
@@ -653,6 +659,7 @@ add_location_app (CcPrivacyPanel *self,
   gtk_box_pack_start (GTK_BOX (box), w, TRUE, TRUE, 0);
 
   w = gtk_switch_new ();
+  gtk_widget_show (w);
   gtk_switch_set_active (GTK_SWITCH (w), enabled);
   gtk_widget_set_halign (w, GTK_ALIGN_END);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
@@ -675,8 +682,6 @@ add_location_app (CcPrivacyPanel *self,
                          data,
                          (GClosureNotify) location_app_state_data_free,
                          0);
-
-  gtk_widget_show_all (row);
 }
 
 /* Steals permissions and permissions_data references */
