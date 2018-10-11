@@ -77,6 +77,7 @@ language_widget_new (const gchar *locale_id,
         row = gtk_list_box_row_new ();
 
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+        gtk_widget_show (box);
         gtk_widget_set_margin_top (box, 12);
         gtk_widget_set_margin_bottom (box, 12);
         gtk_widget_set_margin_start (box, 18);
@@ -84,15 +85,18 @@ language_widget_new (const gchar *locale_id,
         gtk_container_add (GTK_CONTAINER (row), box);
 
         language_label = gtk_label_new (language);
+        gtk_widget_show (language_label);
         gtk_label_set_xalign (GTK_LABEL (language_label), 0.0);
         gtk_box_pack_start (GTK_BOX (box), language_label, FALSE, TRUE, 0);
 
         check = gtk_image_new ();
+        gtk_widget_show (check);
         gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
         g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
         gtk_box_pack_start (GTK_BOX (box), check, FALSE, FALSE, 0);
 
         country_label = gtk_label_new (country);
+        gtk_widget_show (country_label);
         gtk_label_set_xalign (GTK_LABEL (country_label), 1.0);
         gtk_style_context_add_class (gtk_widget_get_style_context (country_label), "dim-label");
         gtk_box_pack_start (GTK_BOX (box), country_label, TRUE, TRUE, 0);
@@ -156,12 +160,11 @@ add_languages (CcLanguageChooser *chooser,
 
                 is_initial = (g_hash_table_lookup (initial, locale_id) != NULL);
                 widget = language_widget_new (locale_id, !is_initial);
+                gtk_widget_show (widget);
                 gtk_container_add (GTK_CONTAINER (chooser->language_listbox), widget);
         }
 
         gtk_container_add (GTK_CONTAINER (chooser->language_listbox), GTK_WIDGET (chooser->more_item));
-
-        gtk_widget_show_all (chooser->language_listbox);
 }
 
 static void
@@ -386,7 +389,7 @@ cc_language_chooser_init (CcLanguageChooser *chooser)
         chooser->more_item = more_widget_new ();
         /* We ref-sink here so we can reuse this widget multiple times */
         chooser->no_results = g_object_ref_sink (no_results_widget_new ());
-        gtk_widget_show_all (chooser->no_results);
+        gtk_widget_show (chooser->no_results);
 
         gtk_list_box_set_sort_func (GTK_LIST_BOX (chooser->language_listbox),
                                     sort_languages, chooser, NULL);
