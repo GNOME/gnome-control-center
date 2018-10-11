@@ -137,10 +137,12 @@ padded_label_new (const gchar        *text,
   if (direction == ROW_TRAVEL_DIRECTION_BACKWARD)
     {
       arrow = gtk_image_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
+      gtk_widget_show (arrow);
       gtk_container_add (GTK_CONTAINER (widget), arrow);
     }
 
   label = gtk_label_new (text);
+  gtk_widget_show (label);
   gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_MIDDLE);
   gtk_widget_set_hexpand (label, TRUE);
   gtk_widget_set_halign (label, alignment);
@@ -152,6 +154,7 @@ padded_label_new (const gchar        *text,
   if (direction == ROW_TRAVEL_DIRECTION_FORWARD)
     {
       arrow = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_MENU);
+      gtk_widget_show (arrow);
       gtk_container_add (GTK_CONTAINER (widget), arrow);
     }
 
@@ -313,14 +316,13 @@ show_input_sources_for_locale (CcInputChooser *chooser,
   if (!info->back_row)
     {
       info->back_row = g_object_ref_sink (back_row_new (info->name));
+      gtk_widget_show (GTK_WIDGET (info->back_row));
       g_object_set_data (G_OBJECT (info->back_row), "back", GINT_TO_POINTER (TRUE));
       g_object_set_data (G_OBJECT (info->back_row), "locale-info", info);
     }
   gtk_container_add (GTK_CONTAINER (chooser->input_listbox), GTK_WIDGET (info->back_row));
 
   add_input_source_rows_for_locale (chooser, info);
-
-  gtk_widget_show_all (chooser->input_listbox);
 
   gtk_adjustment_set_value (chooser->adjustment,
                             gtk_adjustment_get_lower (chooser->adjustment));
@@ -364,6 +366,7 @@ show_locale_rows (CcInputChooser *chooser)
       if (!info->locale_row)
         {
           info->locale_row = g_object_ref_sink (locale_row_new (info->name));
+          gtk_widget_show (GTK_WIDGET (info->locale_row));
           g_object_set_data (G_OBJECT (info->locale_row), "locale-info", info);
 
           if (!chooser->showing_extra &&
@@ -375,8 +378,6 @@ show_locale_rows (CcInputChooser *chooser)
     }
 
   gtk_container_add (GTK_CONTAINER (chooser->input_listbox), GTK_WIDGET (chooser->more_row));
-
-  gtk_widget_show_all (chooser->input_listbox);
 
   gtk_adjustment_set_value (chooser->adjustment,
                             gtk_adjustment_get_lower (chooser->adjustment));
@@ -666,7 +667,8 @@ add_default_row (CcInputChooser *chooser,
   info->default_input_source_row = input_source_row_new (chooser, type, id);
   if (info->default_input_source_row)
     {
-      g_object_ref_sink (info->default_input_source_row);
+      gtk_widget_show (GTK_WIDGET (info->default_input_source_row));
+      g_object_ref_sink (GTK_WIDGET (info->default_input_source_row));
       g_object_set_data (G_OBJECT (info->default_input_source_row), "default", GINT_TO_POINTER (TRUE));
       g_object_set_data (G_OBJECT (info->default_input_source_row), "locale-info", info);
     }
@@ -698,6 +700,7 @@ add_rows_to_table (CcInputChooser *chooser,
       if (g_strcmp0 (id, default_id))
         {
           row = input_source_row_new (chooser, type, id);
+          gtk_widget_show (GTK_WIDGET (row));
           if (row)
             {
               g_object_set_data (G_OBJECT (row), "locale-info", info);
@@ -1010,7 +1013,7 @@ cc_input_chooser_init (CcInputChooser *chooser)
 
   chooser->more_row = g_object_ref_sink (more_row_new ());
   chooser->no_results = g_object_ref_sink (no_results_widget_new ());
-  gtk_widget_show_all (chooser->no_results);
+  gtk_widget_show (chooser->no_results);
 
   gtk_list_box_set_filter_func (GTK_LIST_BOX (chooser->input_listbox), list_filter, chooser, NULL);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (chooser->input_listbox), (GtkListBoxSortFunc)list_sort, chooser, NULL);
