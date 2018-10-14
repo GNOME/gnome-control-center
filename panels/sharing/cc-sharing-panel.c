@@ -99,7 +99,7 @@ struct _CcSharingPanelPrivate
   guint remote_desktop_name_watch;
 };
 
-#define OFF_IF_VISIBLE(x) { if (gtk_widget_is_visible(x) && gtk_widget_is_sensitive(x)) gtk_switch_set_active (GTK_SWITCH(x), FALSE); }
+#define OFF_IF_VISIBLE(x) { if ((x) != NULL && gtk_widget_is_visible(x) && gtk_widget_is_sensitive(x)) gtk_switch_set_active (GTK_SWITCH(x), FALSE); }
 
 static void
 cc_sharing_panel_master_switch_notify (GtkSwitch      *gtkswitch,
