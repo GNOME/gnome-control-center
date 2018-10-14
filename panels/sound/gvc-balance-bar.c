@@ -89,10 +89,12 @@ _scale_box_new (GvcBalanceBar *bar)
 
         bar->scale_box = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         bar->scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, bar->adjustment);
+        gtk_widget_show (bar->scale);
         gtk_scale_set_has_origin (GTK_SCALE (bar->scale), FALSE);
         gtk_widget_set_size_request (bar->scale, SCALE_SIZE, -1);
 
         bar->start_box = sbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        gtk_widget_show (sbox);
         gtk_box_pack_start (GTK_BOX (box), sbox, FALSE, FALSE, 0);
 
         gtk_box_pack_start (GTK_BOX (sbox), bar->label, FALSE, FALSE, 0);
@@ -132,6 +134,7 @@ _scale_box_new (GvcBalanceBar *bar)
         }
 
         bar->end_box = ebox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        gtk_widget_show (ebox);
         gtk_box_pack_start (GTK_BOX (box), ebox, FALSE, FALSE, 0);
 
         ca_gtk_widget_disable_sounds (bar->scale, FALSE);
@@ -296,18 +299,20 @@ gvc_balance_bar_set_balance_type (GvcBalanceBar *bar,
         default:
                 g_assert_not_reached ();
         }
+        gtk_widget_show (bar->label);
         gtk_widget_set_halign (bar->label, GTK_ALIGN_START);
         gtk_widget_set_valign (bar->label, GTK_ALIGN_START);
 
         /* frame */
         frame = gtk_frame_new (NULL);
+        gtk_widget_show (frame);
         gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
         gtk_box_pack_start (GTK_BOX (bar), frame, TRUE, TRUE, 0);
 
         /* box with scale */
         bar->scale_box = _scale_box_new (bar);
+        gtk_widget_show (bar->scale_box);
         gtk_container_add (GTK_CONTAINER (frame), bar->scale_box);
-        gtk_widget_show_all (frame);
 
         gtk_widget_set_direction (bar->scale, GTK_TEXT_DIR_LTR);
         gtk_label_set_mnemonic_widget (GTK_LABEL (bar->label),

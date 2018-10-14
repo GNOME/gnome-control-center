@@ -303,15 +303,19 @@ gvc_combo_box_init (GvcComboBox *combo_box)
                                                                G_TYPE_STRING));
 
         combo_box->label = gtk_label_new (NULL);
+        gtk_widget_show (combo_box->label);
         gtk_widget_set_halign (combo_box->label, GTK_ALIGN_START);
 
         /* frame */
         frame = gtk_frame_new (NULL);
+        gtk_widget_show (frame);
         gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
         gtk_box_pack_start (GTK_BOX (combo_box), frame, TRUE, TRUE, 0);
 
         combo_box->drop_box = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        gtk_widget_show (box);
         combo_box->combobox = gtk_combo_box_new_with_model (combo_box->model);
+        gtk_widget_show (combo_box->combobox);
         renderer = gtk_cell_renderer_text_new ();
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box->combobox),
                                     renderer, TRUE);
@@ -325,6 +329,7 @@ gvc_combo_box_init (GvcComboBox *combo_box)
         g_object_set (G_OBJECT (combo_box->combobox), "popup-fixed-width", FALSE, NULL);
 
         combo_box->start_box = sbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        gtk_widget_show (sbox);
         gtk_box_pack_start (GTK_BOX (box), sbox, FALSE, FALSE, 0);
 
         gtk_box_pack_start (GTK_BOX (sbox), combo_box->label, FALSE, FALSE, 0);
@@ -332,12 +337,13 @@ gvc_combo_box_init (GvcComboBox *combo_box)
         gtk_box_pack_start (GTK_BOX (box), combo_box->combobox, TRUE, TRUE, 0);
 
         combo_box->button = gtk_button_new_with_label ("APPLICATION BUG");
+        gtk_widget_hide (combo_box->button);
         gtk_button_set_use_underline (GTK_BUTTON (combo_box->button), TRUE);
-        gtk_widget_set_no_show_all (combo_box->button, TRUE);
         gtk_box_pack_start (GTK_BOX (box), combo_box->button, FALSE, FALSE, 0);
 
 
         combo_box->end_box = ebox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        gtk_widget_show (ebox);
         gtk_box_pack_start (GTK_BOX (box), ebox, FALSE, FALSE, 0);
 
         if (combo_box->size_group != NULL) {
@@ -349,7 +355,6 @@ gvc_combo_box_init (GvcComboBox *combo_box)
         }
 
         gtk_container_add (GTK_CONTAINER (frame), combo_box->drop_box);
-        gtk_widget_show_all (frame);
 
         gtk_label_set_mnemonic_widget (GTK_LABEL (combo_box->label),
                                        combo_box->combobox);

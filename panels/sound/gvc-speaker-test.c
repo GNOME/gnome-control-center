@@ -332,13 +332,16 @@ channel_control_new (ca_context *canberra, pa_channel_position_t position)
         if (name == NULL)
                 name = "audio-volume-medium";
         image = gtk_image_new_from_icon_name (name, GTK_ICON_SIZE_DIALOG);
+        gtk_widget_show (image);
         g_object_set_data (G_OBJECT (control), "image", image);
         gtk_box_pack_start (GTK_BOX (control), image, FALSE, FALSE, 0);
 
         label = gtk_label_new (pretty_position (position));
+        gtk_widget_show (label);
         gtk_box_pack_start (GTK_BOX (control), label, FALSE, FALSE, 0);
 
         test_button = gtk_button_new_with_label (_("Test"));
+        gtk_widget_show (test_button);
 
         g_signal_connect (G_OBJECT (test_button), "clicked",
                           G_CALLBACK (on_test_button_clicked), control);
@@ -349,10 +352,9 @@ channel_control_new (ca_context *canberra, pa_channel_position_t position)
                                      gtk_widget_get_accessible (label));
 
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        gtk_widget_show (box);
         gtk_box_pack_start (GTK_BOX (box), test_button, TRUE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (control), box, FALSE, FALSE, 0);
-
-        gtk_widget_show_all (control);
 
         return control;
 }
@@ -364,6 +366,7 @@ create_channel_controls (GvcSpeakerTest *speaker_test)
 
         for (i = 0; i < G_N_ELEMENTS (position_table); i += 3) {
                 speaker_test->channel_controls[position_table[i]] = channel_control_new (speaker_test->canberra, (pa_channel_position_t) position_table[i]);
+                gtk_widget_show (speaker_test->channel_controls[position_table[i]]);
                 gtk_grid_attach (GTK_GRID (speaker_test),
                                  speaker_test->channel_controls[position_table[i]],
                                  position_table[i+1], position_table[i+2], 1, 1);

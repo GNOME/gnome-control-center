@@ -719,6 +719,7 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
 
         str = g_strdup_printf ("<b>%s</b>", _("C_hoose an alert sound:"));
         chooser->selection_box = box = gtk_frame_new (str);
+        gtk_widget_show (box);
         label = gtk_frame_get_label_widget (GTK_FRAME (box));
         gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
         gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
@@ -728,9 +729,11 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
         gtk_box_pack_start (GTK_BOX (chooser), box, TRUE, TRUE, 6);
 
         chooser->treeview = create_alert_treeview (chooser);
+        gtk_widget_show (chooser->treeview);
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), chooser->treeview);
 
         scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+        gtk_widget_show (scrolled_window);
         setup_list_size_constraint (scrolled_window, chooser->treeview);
 
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
