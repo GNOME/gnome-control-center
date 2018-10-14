@@ -138,6 +138,7 @@ add_provider_row (CcGoaPanel  *self,
   row = gtk_list_box_row_new ();
 
   row_grid = gtk_grid_new ();
+  gtk_widget_show (row_grid);
   gtk_orientable_set_orientation (GTK_ORIENTABLE (row_grid), GTK_ORIENTATION_HORIZONTAL);
   gtk_grid_set_column_spacing (GTK_GRID (row_grid), 6);
   gtk_container_add (GTK_CONTAINER (row), row_grid);
@@ -156,11 +157,13 @@ add_provider_row (CcGoaPanel  *self,
     }
 
   image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
+  gtk_widget_show (image);
   gtk_container_add (GTK_CONTAINER (row_grid), image);
   g_object_set (image, "margin", 6, NULL);
 
   markup = g_strdup_printf ("<b>%s</b>", name);
   label = gtk_label_new (NULL);
+  gtk_widget_show (label);
   gtk_label_set_markup (GTK_LABEL (label), markup);
   gtk_container_add (GTK_CONTAINER (row_grid), label);
 
@@ -168,7 +171,7 @@ add_provider_row (CcGoaPanel  *self,
   features = goa_provider_get_provider_features (provider);
 
   if ((features & GOA_PROVIDER_FEATURE_BRANDED) != 0)
-    gtk_widget_show_all (row);
+    gtk_widget_show (row);
 
   gtk_container_add (GTK_CONTAINER (self->providers_listbox), row);
 
@@ -225,7 +228,7 @@ show_non_branded_providers (CcGoaPanel *self)
         continue;
 
       if ((goa_provider_get_provider_features (provider) & GOA_PROVIDER_FEATURE_BRANDED) == 0)
-        gtk_widget_show_all (l->data);
+        gtk_widget_show (l->data);
     }
 
   gtk_widget_hide (self->more_providers_row);
@@ -619,7 +622,7 @@ show_page_account (CcGoaPanel  *panel,
   /* Reset the dialog size */
   gtk_window_resize (GTK_WINDOW (panel->edit_account_dialog), 1, 1);
 
-  gtk_widget_show_all (panel->accounts_vbox);
+  gtk_widget_show (panel->accounts_vbox);
   gtk_widget_show (panel->edit_account_dialog);
 
   g_clear_object (&provider);
@@ -766,6 +769,7 @@ on_account_added (GoaClient *client,
 
   /* The provider icon */
   icon = gtk_image_new ();
+  gtk_widget_show (icon);
 
   error = NULL;
   gicon = g_icon_new_for_string (goa_account_get_provider_icon (account), &error);
@@ -799,11 +803,12 @@ on_account_added (GoaClient *client,
                         "use-markup", TRUE,
                         "hexpand", TRUE,
                         NULL);
+  gtk_widget_show (label);
   gtk_container_add (GTK_CONTAINER (box), label);
 
   /* "Needs attention" icon */
   icon = gtk_image_new_from_icon_name ("dialog-warning-symbolic", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_set_no_show_all (icon, TRUE);
+  gtk_widget_hide (icon);
   g_object_set (icon, "margin_end", 30, NULL);
   g_object_bind_property (goa_object_peek_account (object),
                           "attention-needed",
@@ -814,12 +819,12 @@ on_account_added (GoaClient *client,
 
   /* The row */
   row = gtk_list_box_row_new ();
+  gtk_widget_show (row);
   g_object_set_data (G_OBJECT (row), "goa-object", object);
   gtk_container_add (GTK_CONTAINER (row), box);
 
   /* Add to the listbox */
   gtk_container_add (GTK_CONTAINER (self->accounts_listbox), row);
-  gtk_widget_show_all (row);
   gtk_widget_show (self->accounts_frame);
 
   g_clear_pointer (&title, g_free);
@@ -911,7 +916,7 @@ remove_account_cb (GoaAccount    *account,
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                                 "%s",
                                                 error->message);
-      gtk_widget_show_all (dialog);
+      gtk_widget_show (dialog);
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
       g_error_free (error);
