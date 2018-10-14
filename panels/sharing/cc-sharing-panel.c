@@ -109,7 +109,7 @@ struct _CcSharingPanel
 
 CC_PANEL_REGISTER (CcSharingPanel, cc_sharing_panel)
 
-#define OFF_IF_VISIBLE(x, y) { if (gtk_widget_is_visible(x) && gtk_widget_is_sensitive(y)) gtk_switch_set_active (GTK_SWITCH(y), FALSE); }
+#define OFF_IF_VISIBLE(x, y) { if (gtk_widget_is_visible(x) && (y) != NULL && gtk_widget_is_sensitive(y)) gtk_switch_set_active (GTK_SWITCH(y), FALSE); }
 
 static void
 cc_sharing_panel_master_switch_notify (GtkSwitch      *gtkswitch,
