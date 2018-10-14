@@ -730,7 +730,7 @@ enroll_fingerprints (GtkWindow *parent,
         g_object_set_data (G_OBJECT (WID("page3")), "name", "summary");
 
         data->ass = ass;
-        gtk_widget_show_all (ass);
+        gtk_widget_show (ass);
 }
 
 void

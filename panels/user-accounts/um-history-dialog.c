@@ -180,14 +180,17 @@ add_record (GtkWidget *box, GDateTime *datetime, gchar *record_string, gint line
         str = g_strdup_printf(C_("login date-time", "%s, %s"), date, time);
 
         row = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+        gtk_widget_show (row);
         gtk_box_set_homogeneous (GTK_BOX (row), TRUE);
         gtk_container_set_border_width (GTK_CONTAINER (row), 6);
 
         label = gtk_label_new (record_string);
+        gtk_widget_show (label);
         gtk_widget_set_halign (label, GTK_ALIGN_START);
         gtk_box_pack_start (GTK_BOX (row), label, TRUE, TRUE, 0);
 
         label = gtk_label_new (str);
+        gtk_widget_show (label);
         gtk_widget_set_halign (label, GTK_ALIGN_START);
         gtk_box_pack_start (GTK_BOX (row), label, TRUE, TRUE, 0);
         g_free (str);
@@ -231,6 +234,7 @@ show_week (UmHistoryDialog *um)
 
         /* Add new session records */
         box = get_widget (um, "history-box");
+        gtk_widget_show (box);
         line = 0;
         for (;i >= 0; i--) {
                 history = g_array_index (login_history, UmLoginHistory, i);
@@ -257,8 +261,6 @@ show_week (UmHistoryDialog *um)
                         line++;
                 }
         }
-
-        gtk_widget_show_all (box);
 
         g_array_free (login_history, TRUE);
 }

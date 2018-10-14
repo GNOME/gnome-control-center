@@ -305,12 +305,12 @@ um_carousel_add (GtkContainer *container,
 
                 page = g_strdup_printf ("%d", UM_CAROUSEL_ITEM (widget)->page);
                 self->last_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+                gtk_widget_show (self->last_box);
                 gtk_widget_set_valign (self->last_box, GTK_ALIGN_CENTER);
                 gtk_stack_add_named (self->stack, self->last_box, page);
         }
 
         gtk_box_pack_start (GTK_BOX (self->last_box), widget, TRUE, FALSE, 10);
-        gtk_widget_show_all (self->last_box);
 
         update_buttons_visibility (self);
 }

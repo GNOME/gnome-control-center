@@ -113,7 +113,8 @@ um_photo_dialog_crop (UmPhotoDialog *um,
                           G_CALLBACK (crop_dialog_response), um);
 
         /* Content */
-        um->crop_area           = cc_crop_area_new ();
+        um->crop_area = cc_crop_area_new ();
+        gtk_widget_show (um->crop_area);
         cc_crop_area_set_min_size (CC_CROP_AREA (um->crop_area), 48, 48);
         cc_crop_area_set_constrain_aspect (CC_CROP_AREA (um->crop_area), TRUE);
         cc_crop_area_set_picture (CC_CROP_AREA (um->crop_area), pixbuf);
@@ -123,7 +124,7 @@ um_photo_dialog_crop (UmPhotoDialog *um,
 
         gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 300);
 
-        gtk_widget_show_all (dialog);
+        gtk_widget_show (dialog);
 }
 
 static void
