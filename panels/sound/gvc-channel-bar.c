@@ -110,25 +110,26 @@ _scale_box_new (GvcChannelBar *bar)
                 bar->scale_box = box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 
                 bar->scale = gtk_scale_new (GTK_ORIENTATION_VERTICAL, bar->adjustment);
+                gtk_widget_show (bar->scale);
 
                 gtk_widget_set_size_request (bar->scale, -1, SCALE_SIZE);
                 gtk_range_set_inverted (GTK_RANGE (bar->scale), TRUE);
 
                 bar->start_box = sbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+                gtk_widget_show (sbox);
                 gtk_box_pack_start (GTK_BOX (box), sbox, FALSE, FALSE, 0);
 
                 gtk_box_pack_start (GTK_BOX (sbox), bar->image, FALSE, FALSE, 0);
                 gtk_box_pack_start (GTK_BOX (sbox), bar->label, FALSE, FALSE, 0);
 
                 gtk_box_pack_start (GTK_BOX (sbox), bar->high_image, FALSE, FALSE, 0);
-                gtk_widget_hide (bar->high_image);
                 gtk_box_pack_start (GTK_BOX (box), bar->scale, TRUE, TRUE, 0);
 
                 bar->end_box = ebox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+                gtk_widget_show (ebox);
                 gtk_box_pack_start (GTK_BOX (box), ebox, FALSE, FALSE, 0);
 
                 gtk_box_pack_start (GTK_BOX (ebox), bar->low_image, FALSE, FALSE, 0);
-                gtk_widget_hide (bar->low_image);
 
                 gtk_box_pack_start (GTK_BOX (ebox), bar->mute_switch, FALSE, FALSE, 0);
         } else {
@@ -136,10 +137,12 @@ _scale_box_new (GvcChannelBar *bar)
                 gtk_box_pack_start (GTK_BOX (box), bar->image, FALSE, FALSE, 0);
 
                 bar->scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, bar->adjustment);
+                gtk_widget_show (bar->scale);
 
                 gtk_widget_set_size_request (bar->scale, SCALE_SIZE, -1);
 
                 bar->start_box = sbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+                gtk_widget_show (sbox);
                 gtk_box_pack_start (GTK_BOX (box), sbox, FALSE, FALSE, 0);
 
                 gtk_box_pack_end (GTK_BOX (sbox), bar->low_image, FALSE, FALSE, 0);
@@ -149,11 +152,13 @@ _scale_box_new (GvcChannelBar *bar)
                 gtk_box_pack_start (GTK_BOX (box), bar->scale, TRUE, TRUE, 0);
 
                 bar->end_box = ebox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+                gtk_widget_show (ebox);
                 gtk_box_pack_start (GTK_BOX (box), ebox, FALSE, FALSE, 0);
 
                 gtk_box_pack_start (GTK_BOX (ebox), bar->high_image, FALSE, FALSE, 0);
                 gtk_widget_show (bar->high_image);
                 gtk_box_pack_start (GTK_BOX (ebox), bar->mute_switch, FALSE, FALSE, 0);
+                gtk_widget_show (bar->mute_switch);
         }
 
         ca_gtk_widget_disable_sounds (bar->scale, FALSE);
@@ -245,6 +250,7 @@ update_layout (GvcChannelBar *bar)
         gtk_container_remove (GTK_CONTAINER (frame), box);
 
         bar->scale_box = _scale_box_new (bar);
+        gtk_widget_show (bar->scale_box);
         gtk_container_add (GTK_CONTAINER (frame), bar->scale_box);
 
         g_object_unref (bar->image);
@@ -252,8 +258,6 @@ update_layout (GvcChannelBar *bar)
         g_object_unref (bar->mute_switch);
         g_object_unref (bar->low_image);
         g_object_unref (bar->high_image);
-
-        gtk_widget_show_all (frame);
 }
 
 void
@@ -910,7 +914,7 @@ gvc_channel_bar_init (GvcChannelBar *bar)
                           bar);
 
         bar->mute_switch = gtk_switch_new ();
-        gtk_widget_set_no_show_all (bar->mute_switch, TRUE);
+        gtk_widget_hide (bar->mute_switch);
         g_signal_connect (bar->mute_switch,
                           "notify::active",
                           G_CALLBACK (on_mute_switch_toggled),
@@ -918,31 +922,29 @@ gvc_channel_bar_init (GvcChannelBar *bar)
 
         bar->low_image = gtk_image_new_from_icon_name ("audio-volume-low-symbolic",
                                                              GTK_ICON_SIZE_MENU);
+        gtk_widget_hide (bar->low_image);
         gtk_style_context_add_class (gtk_widget_get_style_context (bar->low_image), "dim-label");
-        gtk_widget_set_no_show_all (bar->low_image, TRUE);
         bar->high_image = gtk_image_new_from_icon_name ("audio-volume-high-symbolic",
                                                               GTK_ICON_SIZE_MENU);
+        gtk_widget_hide (bar->high_image);
         gtk_style_context_add_class (gtk_widget_get_style_context (bar->high_image), "dim-label");
-        gtk_widget_set_no_show_all (bar->high_image, TRUE);
 
         bar->image = gtk_image_new ();
-        gtk_widget_set_no_show_all (bar->image, TRUE);
 
         bar->label = gtk_label_new (NULL);
         gtk_widget_set_halign (bar->label, GTK_ALIGN_START);
-        gtk_widget_set_no_show_all (bar->label, TRUE);
 
         /* frame */
         frame = gtk_frame_new (NULL);
+        gtk_widget_show (frame);
         gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
         gtk_box_pack_start (GTK_BOX (bar), frame, TRUE, TRUE, 0);
-        gtk_widget_show_all (frame);
 
         /* box with scale */
         bar->scale_box = _scale_box_new (bar);
+        gtk_widget_show (bar->scale_box);
 
         gtk_container_add (GTK_CONTAINER (frame), bar->scale_box);
-        gtk_widget_show_all (frame);
 }
 
 static void
