@@ -562,6 +562,7 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
 
   row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_widget_show (box);
   gtk_container_set_border_width (GTK_CONTAINER (box), 3);
   gtk_widget_set_margin_start (box, 6);
   gtk_container_add (GTK_CONTAINER (row), box);
@@ -578,16 +579,19 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
 
   icon = special_directory_get_gicon (dir);
   w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_MENU);
+  gtk_widget_show (w);
   gtk_widget_set_margin_end (w, 12);
   gtk_container_add (GTK_CONTAINER (box), w);
 
   /* Label */
   basename = g_filename_display_basename (path);
   w = gtk_label_new (basename);
+  gtk_widget_show (w);
   gtk_container_add (GTK_CONTAINER (box), w);
 
   /* Remove button */
   w = gtk_button_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_SMALL_TOOLBAR);
+  gtk_widget_show (w);
   gtk_button_set_relief (GTK_BUTTON (w), GTK_RELIEF_NONE);
   gtk_widget_set_margin_top (w, 3);
   gtk_widget_set_margin_bottom (w, 3);
@@ -600,8 +604,6 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
 
   g_object_set_data_full (G_OBJECT (row), "path", g_steal_pointer (&path), g_free);
 
-  gtk_widget_show_all (row);
-
   return row;
 }
 
@@ -612,10 +614,12 @@ cc_sharing_panel_new_add_media_sharing_row (CcSharingPanel *self)
 
   row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_widget_show (box);
   gtk_container_set_border_width (GTK_CONTAINER (box), 3);
   gtk_container_add (GTK_CONTAINER (row), box);
 
   w = gtk_image_new_from_icon_name ("list-add-symbolic", GTK_ICON_SIZE_SMALL_TOOLBAR);
+  gtk_widget_show (w);
   gtk_container_add (GTK_CONTAINER (box), w);
   gtk_widget_set_hexpand (w, TRUE);
   gtk_widget_set_margin_top (w, 6);
@@ -624,7 +628,6 @@ cc_sharing_panel_new_add_media_sharing_row (CcSharingPanel *self)
   g_object_set_data (G_OBJECT (w), "row", row);
 
   g_object_set_data (G_OBJECT (row), "is-add", GINT_TO_POINTER (1));
-  gtk_widget_show_all (row);
 
   return row;
 }
@@ -634,7 +637,7 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
 {
   g_auto(GStrv) folders = NULL;
   GStrv list;
-  GtkWidget *networks, *w;
+  GtkWidget *row, *networks, *w;
   g_autofree gchar *path = NULL;
 
   path = g_find_program_in_path ("rygel");
@@ -658,15 +661,15 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
   list = folders;
   while (list && *list)
     {
-      GtkWidget *row;
-
       row = cc_sharing_panel_new_media_sharing_row (*list, self);
+      gtk_widget_show (row);
       gtk_list_box_insert (GTK_LIST_BOX (self->shared_folders_listbox), row, -1);
       list++;
     }
 
-  gtk_list_box_insert (GTK_LIST_BOX (self->shared_folders_listbox),
-                       cc_sharing_panel_new_add_media_sharing_row (self), -1);
+  row = cc_sharing_panel_new_add_media_sharing_row (self);
+  gtk_widget_show (row);
+  gtk_list_box_insert (GTK_LIST_BOX (self->shared_folders_listbox), row, -1);
 
   cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->shared_folders_listbox));
 
@@ -1275,12 +1278,13 @@ cc_sharing_panel_init (CcSharingPanel *self)
 
   /* create the master switch */
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  gtk_widget_show (box);
 
   self->master_switch = gtk_switch_new ();
+  gtk_widget_show (self->master_switch);
   atk_object_set_name (ATK_OBJECT (gtk_widget_get_accessible (self->master_switch)), _("Sharing"));
   gtk_widget_set_valign (self->master_switch, GTK_ALIGN_CENTER);
   gtk_box_pack_start (GTK_BOX (box), self->master_switch, FALSE, FALSE, 4);
-  gtk_widget_show_all (box);
 
   /* start the panel in the disabled state */
   gtk_switch_set_active (GTK_SWITCH (self->master_switch), FALSE);
