@@ -101,6 +101,7 @@ common_sources = files(
 )
 
 resource_data = files(
+  'cc-user-panel.ui',
   'data/icons/left-index-finger.png',
   'data/icons/left-little-finger.png',
   'data/icons/left-middle-finger.png',
@@ -121,7 +122,6 @@ resource_data = files(
   'data/join-dialog.ui',
   'data/password-dialog.ui',
   'data/user-accounts-dialog.css',
-  'data/user-accounts-dialog.ui'
 )
 
 common_sources += gnome.compile_resources(
@@ -145,6 +145,7 @@ common_sources += gnome.gdbus_codegen(
 
 sources = common_sources + files(
   'cc-crop-area.c',
+  'cc-user-panel.c',
   'run-passwd.c',
   'um-account-type.c',
   'um-carousel.c',
@@ -153,7 +154,6 @@ sources = common_sources + files(
   'um-password-dialog.c',
   'um-photo-dialog.c',
   'um-user-image.c',
-  'um-user-panel.c'
 )
 
 # Kerberos support
