@@ -19,7 +19,7 @@ i18n.merge_file(
 
 sources = files('cc-privacy-panel.c')
 
-resource_data = files('privacy.ui')
+resource_data = files('cc-privacy-panel.ui')
 
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',

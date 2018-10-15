@@ -26,8 +26,6 @@
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (self->builder, s))
-
 #define REMEMBER_RECENT_FILES "remember-recent-files"
 #define RECENT_FILES_MAX_AGE "recent-files-max-age"
 #define REMOVE_OLD_TRASH_FILES "remove-old-trash-files"
@@ -44,17 +42,36 @@ struct _CcPrivacyPanel
 {
   CcPanel     parent_instance;
 
-  GtkBuilder *builder;
-  GtkWidget  *recent_dialog;
-  GtkWidget  *screen_lock_dialog;
-  GtkWidget  *location_dialog;
-  GtkWidget  *location_label;
-  GtkWidget  *trash_dialog;
-  GtkWidget  *software_dialog;
-  GtkWidget  *list_box;
-  GtkWidget  *location_apps_list_box;
-  GtkWidget  *location_apps_label;
-  GtkWidget  *location_apps_frame;
+  GtkDialog   *abrt_dialog;
+  GtkLabel    *abrt_explanation_label;
+  GtkLabel    *abrt_policy_link_label;
+  GtkSwitch   *abrt_switch;
+  GtkSwitch   *automatic_screen_lock_switch;
+  GtkButton   *clear_recent_button;
+  GtkButton   *empty_trash_button;
+  GtkListBox  *list_box;
+  GtkFrame    *location_apps_frame;
+  GtkLabel    *location_apps_label;
+  GtkListBox  *location_apps_list_box;
+  GtkDialog   *location_dialog;
+  GtkLabel    *location_label;
+  GtkSwitch   *location_services_switch;
+  GtkComboBox *lock_after_combo;
+  GtkLabel    *lock_after_label;
+  GtkComboBox *purge_after_combo;
+  GtkButton   *purge_temp_button;
+  GtkSwitch   *purge_temp_switch;
+  GtkSwitch   *purge_trash_switch;
+  GtkDialog   *recent_dialog;
+  GtkSwitch   *recently_used_switch;
+  GtkComboBox *retain_history_combo;
+  GtkLabel    *retain_history_label;
+  GtkDialog   *screen_lock_dialog;
+  GtkGrid     *screen_lock_dialog_grid;
+  GtkSwitch   *show_notifications_switch;
+  GtkDialog   *software_dialog;
+  GtkSwitch   *software_usage_switch;
+  GtkDialog   *trash_dialog;
 
   GSettings  *lockdown_settings;
   GSettings  *lock_settings;
@@ -62,9 +79,8 @@ struct _CcPrivacyPanel
   GSettings  *notification_settings;
   GSettings  *location_settings;
 
-  GtkWidget  *abrt_dialog;
-  GtkWidget  *abrt_row;
-  guint       abrt_watch_id;
+  GtkListBoxRow *abrt_row;
+  guint          abrt_watch_id;
 
   GCancellable *cancellable;
 
@@ -164,13 +180,11 @@ get_privacy_policy_url (void)
 static void
 update_lock_screen_sensitivity (CcPrivacyPanel *self)
 {
-  GtkWidget *widget;
   gboolean   locked;
 
   locked = g_settings_get_boolean (self->lockdown_settings, "disable-lock-screen");
 
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "screen_lock_dialog_grid"));
-  gtk_widget_set_sensitive (widget, !locked);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->screen_lock_dialog_grid), !locked);
 }
 
 static void
@@ -194,7 +208,7 @@ on_off_label_mapping_get (GValue   *value,
   return TRUE;
 }
 
-static GtkWidget *
+static GtkLabel *
 get_on_off_label (GSettings *settings,
                   const gchar *key)
 {
@@ -208,7 +222,7 @@ get_on_off_label (GSettings *settings,
                                 NULL,
                                 NULL,
                                 NULL);
-  return w;
+  return GTK_LABEL (w);
 }
 
 static gboolean
@@ -240,7 +254,7 @@ get_abrt_label (GSettings *settings,
 
 typedef struct
 {
-  GtkWidget *label;
+  GtkLabel *label;
   const gchar *key1;
   const gchar *key2;
 } Label2Data;
@@ -256,10 +270,10 @@ set_on_off_label2 (GSettings   *settings,
   v1 = g_settings_get_boolean (settings, data->key1);
   v2 = g_settings_get_boolean (settings, data->key2);
 
-  gtk_label_set_label (GTK_LABEL (data->label), (v1 || v2) ? _("On") : _("Off"));
+  gtk_label_set_label (data->label, (v1 || v2) ? _("On") : _("Off"));
 }
 
-static GtkWidget *
+static GtkLabel *
 get_on_off_label2 (GSettings *settings,
                    const gchar *key1,
                    const gchar *key2)
@@ -267,7 +281,7 @@ get_on_off_label2 (GSettings *settings,
   Label2Data *data;
 
   data = g_new (Label2Data, 1);
-  data->label = gtk_label_new ("");
+  data->label = GTK_LABEL (gtk_label_new (""));
   data->key1 = g_strdup (key1);
   data->key2 = g_strdup (key2);
 
@@ -279,10 +293,10 @@ get_on_off_label2 (GSettings *settings,
   return data->label;
 }
 
-static GtkWidget *
+static GtkListBoxRow *
 add_row (CcPrivacyPanel *self,
          const gchar    *label,
-         const gchar    *dialog_id,
+         GtkDialog      *dialog,
          GtkWidget      *status)
 {
   GtkWidget *box, *row, *w;
@@ -292,7 +306,7 @@ add_row (CcPrivacyPanel *self,
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   gtk_widget_show (box);
   gtk_container_add (GTK_CONTAINER (row), box);
-  g_object_set_data (G_OBJECT (row), "dialog-id", (gpointer)dialog_id);
+  g_object_set_data (G_OBJECT (row), "dialog", dialog);
   gtk_widget_set_hexpand (box, TRUE);
   gtk_container_add (GTK_CONTAINER (self->list_box), row);
 
@@ -313,7 +327,7 @@ add_row (CcPrivacyPanel *self,
   gtk_widget_set_valign (status, GTK_ALIGN_CENTER);
   gtk_box_pack_end (GTK_BOX (box), status, FALSE, FALSE, 0);
 
-  return row;
+  return GTK_LIST_BOX_ROW (row);
 }
 
 static void
@@ -382,39 +396,31 @@ set_lock_value_for_combo (GtkComboBox    *combo_box,
 static void
 add_screen_lock (CcPrivacyPanel *self)
 {
-  GtkWidget *w;
-  GtkWidget *dialog;
-  GtkWidget *label;
+  GtkLabel *label;
 
-  w = get_on_off_label (self->lock_settings, "lock-enabled");
-  gtk_widget_show (w);
-  add_row (self, _("Screen Lock"), "screen_lock_dialog", w);
+  label = get_on_off_label (self->lock_settings, "lock-enabled");
+  gtk_widget_show (GTK_WIDGET (label));
+  add_row (self, _("Screen Lock"), self->screen_lock_dialog, GTK_WIDGET (label));
 
-  dialog = self->screen_lock_dialog;
-  g_signal_connect (dialog, "delete-event",
+  g_signal_connect (self->screen_lock_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "automatic_screen_lock"));
   g_settings_bind (self->lock_settings, "lock-enabled",
-                   w, "active",
+                   self->automatic_screen_lock_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "lock_after_combo"));
   g_settings_bind (self->lock_settings, "lock-enabled",
-                   w, "sensitive",
+                   self->lock_after_combo, "sensitive",
                    G_SETTINGS_BIND_GET);
 
-  label = GTK_WIDGET (gtk_builder_get_object (self->builder, "lock_after_label"));
+  g_object_bind_property (self->lock_after_combo, "sensitive", self->lock_after_label, "sensitive", G_BINDING_DEFAULT);
 
-  g_object_bind_property (w, "sensitive", label, "sensitive", G_BINDING_DEFAULT);
-
-  set_lock_value_for_combo (GTK_COMBO_BOX (w), self);
-  g_signal_connect (w, "changed",
+  set_lock_value_for_combo (self->lock_after_combo, self);
+  g_signal_connect (self->lock_after_combo, "changed",
                     G_CALLBACK (lock_combo_changed_cb), self);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "show_notifications"));
   g_settings_bind (self->notification_settings, "show-in-lock-screen",
-                   w, "active",
+                   self->show_notifications_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 }
 
@@ -438,14 +444,14 @@ update_location_label (CcPrivacyPanel *self)
 
   if (in_use)
     {
-      gtk_label_set_label (GTK_LABEL (self->location_label), _("In use"));
+      gtk_label_set_label (self->location_label, _("In use"));
       return;
     }
 
   on = g_settings_get_boolean (self->location_settings, LOCATION_ENABLED);
   label = on ? C_("Location services status", "On") :
                C_("Location services status", "Off");
-  gtk_label_set_label (GTK_LABEL (self->location_label), label);
+  gtk_label_set_label (self->location_label, label);
 }
 
 static void
@@ -722,8 +728,8 @@ update_perm_store (CcPrivacyPanel *self,
   children = gtk_container_get_children (GTK_CONTAINER (self->location_apps_list_box));
   if (g_list_length (children) > 0)
     {
-      gtk_widget_set_visible (self->location_apps_label, TRUE);
-      gtk_widget_set_visible (self->location_apps_frame, TRUE);
+      gtk_widget_set_visible (GTK_WIDGET (self->location_apps_label), TRUE);
+      gtk_widget_set_visible (GTK_WIDGET (self->location_apps_frame), TRUE);
     }
   g_list_free (children);
 }
@@ -816,25 +822,20 @@ on_perm_store_ready (GObject *source_object,
 static void
 add_location (CcPrivacyPanel *self)
 {
-  GtkWidget *w;
-  GtkWidget *dialog;
-
-  self->location_label = gtk_label_new ("");
-  gtk_widget_show (self->location_label);
+  self->location_label = GTK_LABEL (gtk_label_new (""));
+  gtk_widget_show (GTK_WIDGET (self->location_label));
   update_location_label (self);
 
   add_row (self,
            _("Location Services"),
-           "location_dialog",
-           self->location_label);
+           self->location_dialog,
+           GTK_WIDGET (self->location_label));
 
-  dialog = self->location_dialog;
-  g_signal_connect (dialog, "delete-event",
+  g_signal_connect (self->location_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "location_services_switch"));
   g_settings_bind (self->location_settings, LOCATION_ENABLED,
-                   w, "active",
+                   self->location_services_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   g_signal_connect_object (self->location_settings, "changed::" LOCATION_ENABLED,
@@ -942,37 +943,29 @@ clear_recent (CcPrivacyPanel *self)
 static void
 add_usage_history (CcPrivacyPanel *self)
 {
-  GtkWidget *w;
-  GtkWidget *dialog;
-  GtkWidget *label;
+  GtkLabel *label;
 
-  w = get_on_off_label (self->privacy_settings, REMEMBER_RECENT_FILES);
-  gtk_widget_show (w);
-  add_row (self, _("Usage & History"), "recent_dialog", w);
+  label = get_on_off_label (self->privacy_settings, REMEMBER_RECENT_FILES);
+  gtk_widget_show (GTK_WIDGET (label));
+  add_row (self, _("Usage & History"), self->recent_dialog, GTK_WIDGET (label));
 
-  dialog = self->recent_dialog;
-  g_signal_connect (dialog, "delete-event",
+  g_signal_connect (self->recent_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "recently_used_switch"));
   g_settings_bind (self->privacy_settings, REMEMBER_RECENT_FILES,
-                   w, "active",
+                   self->recently_used_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "retain_history_combo"));
-  set_retain_history_value_for_combo (GTK_COMBO_BOX (w), self);
-  g_signal_connect (w, "changed",
+  set_retain_history_value_for_combo (self->retain_history_combo, self);
+  g_signal_connect (self->retain_history_combo, "changed",
                     G_CALLBACK (retain_history_combo_changed_cb), self);
 
   g_settings_bind (self->privacy_settings, REMEMBER_RECENT_FILES,
-                   w, "sensitive",
+                   self->retain_history_combo, "sensitive",
                    G_SETTINGS_BIND_GET);
 
-  label = GTK_WIDGET (gtk_builder_get_object (self->builder, "retain_history_label"));
-
-  g_object_bind_property (w, "sensitive", label, "sensitive", G_BINDING_DEFAULT);
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "clear_recent_button"));
-  g_signal_connect_swapped (w, "clicked",
+  g_object_bind_property (self->retain_history_combo, "sensitive", self->retain_history_label, "sensitive", G_BINDING_DEFAULT);
+  g_signal_connect_swapped (self->clear_recent_button, "clicked",
                             G_CALLBACK (clear_recent), self);
 
 }
@@ -1074,10 +1067,8 @@ empty_trash (CcPrivacyPanel *self)
 {
   GDBusConnection *bus;
   gboolean result;
-  GtkWidget *dialog;
 
-  dialog = WID ("trash_dialog");
-  result = run_warning (GTK_WINDOW (dialog), _("Empty all items from Trash?"),
+  result = run_warning (GTK_WINDOW (self->trash_dialog), _("Empty all items from Trash?"),
                         _("All items in the Trash will be permanently deleted."),
                         _("_Empty Trash"));
 
@@ -1099,10 +1090,8 @@ purge_temp (CcPrivacyPanel *self)
 {
   GDBusConnection *bus;
   gboolean result;
-  GtkWidget *dialog;
 
-  dialog = WID ("trash_dialog");
-  result = run_warning (GTK_WINDOW (dialog), _("Delete all the temporary files?"),
+  result = run_warning (GTK_WINDOW (self->trash_dialog), _("Delete all the temporary files?"),
                         _("All the temporary files will be permanently deleted."),
                         _("_Purge Temporary Files"));
 
@@ -1122,61 +1111,50 @@ purge_temp (CcPrivacyPanel *self)
 static void
 add_trash_temp (CcPrivacyPanel *self)
 {
-  GtkWidget *w;
-  GtkWidget *dialog;
+  GtkLabel *w;
 
   w = get_on_off_label2 (self->privacy_settings, REMOVE_OLD_TRASH_FILES, REMOVE_OLD_TEMP_FILES);
-  gtk_widget_show (w);
-  add_row (self, _("Purge Trash & Temporary Files"), "trash_dialog", w);
+  gtk_widget_show (GTK_WIDGET (w));
+  add_row (self, _("Purge Trash & Temporary Files"), self->trash_dialog, GTK_WIDGET (w));
 
-  dialog = self->trash_dialog;
-  g_signal_connect (dialog, "delete-event",
+  g_signal_connect (self->trash_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "purge_trash_switch"));
   g_settings_bind (self->privacy_settings, REMOVE_OLD_TRASH_FILES,
-                   w, "active",
+                   self->purge_trash_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "purge_temp_switch"));
   g_settings_bind (self->privacy_settings, REMOVE_OLD_TEMP_FILES,
-                   w, "active",
+                   self->purge_temp_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "purge_after_combo"));
-
-  set_purge_after_value_for_combo (GTK_COMBO_BOX (w), self);
-  g_signal_connect (w, "changed",
+  set_purge_after_value_for_combo (self->purge_after_combo, self);
+  g_signal_connect (self->purge_after_combo, "changed",
                     G_CALLBACK (purge_after_combo_changed_cb), self);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "empty_trash_button"));
-  g_signal_connect_swapped (w, "clicked", G_CALLBACK (empty_trash), self);
+  g_signal_connect_swapped (self->empty_trash_button, "clicked", G_CALLBACK (empty_trash), self);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "purge_temp_button"));
-  g_signal_connect_swapped (w, "clicked", G_CALLBACK (purge_temp), self);
+  g_signal_connect_swapped (self->purge_temp_button, "clicked", G_CALLBACK (purge_temp), self);
 }
 
 static void
 add_software (CcPrivacyPanel *self)
 {
-  GtkWidget *w;
-  GtkWidget *dialog;
+  GtkLabel *w;
 
   /* disable until all the points on the bug are fixed:
    * https://bugzilla.gnome.org/show_bug.cgi?id=726234 */
   return;
 
   w = get_on_off_label (self->privacy_settings, SEND_SOFTWARE_USAGE_STATS);
-  gtk_widget_show (w);
-  add_row (self, _("Software Usage"), "software_dialog", w);
+  gtk_widget_show (GTK_WIDGET (w));
+  add_row (self, _("Software Usage"), self->software_dialog, GTK_WIDGET (w));
 
-  dialog = self->software_dialog;
-  g_signal_connect (dialog, "delete-event",
+  g_signal_connect (self->software_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "software_usage_switch"));
   g_settings_bind (self->privacy_settings, SEND_SOFTWARE_USAGE_STATS,
-                   w, "active",
+                   self->software_usage_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 }
 
@@ -1188,7 +1166,7 @@ abrt_appeared_cb (GDBusConnection *connection,
 {
   CcPrivacyPanel *self = user_data;
   g_debug ("ABRT appeared");
-  gtk_widget_show (self->abrt_row);
+  gtk_widget_show (GTK_WIDGET (self->abrt_row));
 }
 
 static void
@@ -1198,28 +1176,25 @@ abrt_vanished_cb (GDBusConnection *connection,
 {
   CcPrivacyPanel *self = user_data;
   g_debug ("ABRT vanished");
-  gtk_widget_hide (self->abrt_row);
+  gtk_widget_hide (GTK_WIDGET (self->abrt_row));
 }
 
 static void
 add_abrt (CcPrivacyPanel *self)
 {
   GtkWidget *w;
-  GtkWidget *dialog;
   char *os_name, *url, *msg;
 
   w = get_abrt_label (self->privacy_settings, REPORT_TECHNICAL_PROBLEMS);
   gtk_widget_show (w);
-  self->abrt_row = add_row (self, _("Problem Reporting"), "abrt_dialog", w);
-  gtk_widget_hide (self->abrt_row);
+  self->abrt_row = add_row (self, _("Problem Reporting"), self->abrt_dialog, GTK_WIDGET (w));
+  gtk_widget_hide (GTK_WIDGET (self->abrt_row));
 
-  dialog = self->abrt_dialog;
-  g_signal_connect (dialog, "delete-event",
+  g_signal_connect (self->abrt_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->builder, "abrt_switch"));
   g_settings_bind (self->privacy_settings, REPORT_TECHNICAL_PROBLEMS,
-                   w, "active",
+                   self->abrt_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   os_name = get_os_name ();
@@ -1227,7 +1202,7 @@ add_abrt (CcPrivacyPanel *self)
   msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports are sent anonymously and are scrubbed of personal data."),
                          os_name);
   g_free (os_name);
-  gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (self->builder, "abrt_explanation_label")), msg);
+  gtk_label_set_text (self->abrt_explanation_label, msg);
   g_free (msg);
 
   url = get_privacy_policy_url ();
@@ -1238,7 +1213,7 @@ add_abrt (CcPrivacyPanel *self)
     }
   msg = g_strdup_printf ("<a href=\"%s\">%s</a>", url, _("Privacy Policy"));
   g_free (url);
-  gtk_label_set_markup (GTK_LABEL (gtk_builder_get_object (self->builder, "abrt_policy_linklabel")), msg);
+  gtk_label_set_markup (self->abrt_policy_link_label, msg);
   g_free (msg);
 
   self->abrt_watch_id = g_bus_watch_name (G_BUS_TYPE_SYSTEM,
@@ -1262,13 +1237,12 @@ cc_privacy_panel_finalize (GObject *object)
     }
 
   g_cancellable_cancel (self->cancellable);
-  g_clear_pointer (&self->recent_dialog, gtk_widget_destroy);
-  g_clear_pointer (&self->screen_lock_dialog, gtk_widget_destroy);
-  g_clear_pointer (&self->location_dialog, gtk_widget_destroy);
-  g_clear_pointer (&self->trash_dialog, gtk_widget_destroy);
-  g_clear_pointer (&self->software_dialog, gtk_widget_destroy);
-  g_clear_pointer (&self->abrt_dialog, gtk_widget_destroy);
-  g_clear_object (&self->builder);
+  g_clear_pointer ((GtkWidget **)&self->recent_dialog, gtk_widget_destroy);
+  g_clear_pointer ((GtkWidget **)&self->screen_lock_dialog, gtk_widget_destroy);
+  g_clear_pointer ((GtkWidget **)&self->location_dialog, gtk_widget_destroy);
+  g_clear_pointer ((GtkWidget **)&self->trash_dialog, gtk_widget_destroy);
+  g_clear_pointer ((GtkWidget **)&self->software_dialog, gtk_widget_destroy);
+  g_clear_pointer ((GtkWidget **)&self->abrt_dialog, gtk_widget_destroy);
   g_clear_object (&self->lockdown_settings);
   g_clear_object (&self->lock_settings);
   g_clear_object (&self->privacy_settings);
@@ -1296,16 +1270,9 @@ activate_row (CcPrivacyPanel *self,
               GtkListBoxRow  *row)
 {
   GObject *w;
-  const gchar *dialog_id;
   GtkWidget *toplevel;
 
-  dialog_id = g_object_get_data (G_OBJECT (row), "dialog-id");
-  w = gtk_builder_get_object (self->builder, dialog_id);
-  if (w == NULL)
-    {
-      g_warning ("No such dialog: %s", dialog_id);
-      return;
-    }
+  w = g_object_get_data (G_OBJECT (row), "dialog");
 
   toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
   gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (toplevel));
@@ -1316,54 +1283,21 @@ activate_row (CcPrivacyPanel *self,
 static void
 cc_privacy_panel_init (CcPrivacyPanel *self)
 {
-  GError    *error;
-  GtkWidget *widget;
-  GtkWidget *frame;
-  guint res;
-
   g_resources_register (cc_privacy_get_resource ());
 
+  gtk_widget_init_template (GTK_WIDGET (self));
+
   self->cancellable = g_cancellable_new ();
-  self->builder = gtk_builder_new ();
 
-  error = NULL;
-  res = gtk_builder_add_from_resource (self->builder,
-                                       "/org/gnome/control-center/privacy/privacy.ui",
-                                       &error);
-
-  if (res == 0)
-    {
-      g_warning ("Could not load interface file: %s",
-                 (error != NULL) ? error->message : "unknown error");
-      g_clear_error (&error);
-      return;
-    }
-
-  self->recent_dialog = GTK_WIDGET (gtk_builder_get_object (self->builder, "recent_dialog"));
-  self->screen_lock_dialog = GTK_WIDGET (gtk_builder_get_object (self->builder, "screen_lock_dialog"));
-  self->location_dialog = GTK_WIDGET (gtk_builder_get_object (self->builder, "location_dialog"));
-  self->trash_dialog = GTK_WIDGET (gtk_builder_get_object (self->builder, "trash_dialog"));
-  self->software_dialog = GTK_WIDGET (gtk_builder_get_object (self->builder, "software_dialog"));
-  self->abrt_dialog = GTK_WIDGET (gtk_builder_get_object (self->builder, "abrt_dialog"));
-
-  frame = WID ("frame");
-  widget = gtk_list_box_new ();
-  gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
-  gtk_container_add (GTK_CONTAINER (frame), widget);
-  self->list_box = widget;
-  gtk_widget_show (widget);
-  self->location_apps_list_box = WID ("location_apps_list_box");
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->location_apps_list_box),
+  gtk_list_box_set_header_func (self->location_apps_list_box,
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
-  self->location_apps_frame = WID ("location_apps_frame");
-  self->location_apps_label = WID ("location_apps_label");
   self->location_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
-  g_signal_connect_swapped (widget, "row-activated",
+  g_signal_connect_swapped (self->list_box, "row-activated",
                             G_CALLBACK (activate_row), self);
 
-  gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
+  gtk_list_box_set_header_func (self->list_box,
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
 
@@ -1383,18 +1317,48 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   g_signal_connect (self->lockdown_settings, "changed",
                     G_CALLBACK (on_lockdown_settings_changed), self);
   update_lock_screen_sensitivity (self);
-
-  widget = WID ("privacy_vbox");
-  gtk_container_add (GTK_CONTAINER (self), widget);
 }
 
 static void
 cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
 {
-  GObjectClass *oclass = G_OBJECT_CLASS (klass);
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+  GObjectClass   *oclass       = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  CcPanelClass   *panel_class  = CC_PANEL_CLASS (klass);
 
   panel_class->get_help_uri = cc_privacy_panel_get_help_uri;
 
   oclass->finalize = cc_privacy_panel_finalize;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-privacy-panel.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, abrt_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, abrt_explanation_label);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, abrt_policy_link_label);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, abrt_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, automatic_screen_lock_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, clear_recent_button);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, empty_trash_button);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, location_apps_frame);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, location_apps_label);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, location_apps_list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, location_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, location_services_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, lock_after_combo);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, lock_after_label);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, purge_after_combo);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, purge_temp_button);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, purge_temp_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, purge_trash_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, recent_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, recently_used_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, retain_history_combo);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, retain_history_label);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, screen_lock_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, screen_lock_dialog_grid);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, show_notifications_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, software_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, software_usage_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, trash_dialog);
 }
