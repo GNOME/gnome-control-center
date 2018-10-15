@@ -1,0 +1,537 @@
+<interface>
+  <object class="GtkStack" id="headerbar_button_stack">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkLockButton" id="lock_button">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+      </object>
+      <packing>
+        <property name="name">_lock</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="add_user_button">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="label" translatable="yes">_Add User…</property>
+        <property name="use_underline">True</property>
+        <signal name="clicked" handler="add_user" object="CcUserPanel" swapped="yes"/>
+        <style>
+          <class name="suggested-action"/>
+        </style>
+      </object>
+      <packing>
+        <property name="name">_adduser</property>
+      </packing>
+    </child>
+  </object>
+  <object class="GtkListStore" id="shortname-model">
+    <columns>
+      <!-- column-name gchararray -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="language-model">
+    <columns>
+      <!-- column-name gchararray -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <template class="CcUserPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkStack" id="stack">
+        <property name="visible">True</property>
+        <property name="visible-child">empty-state</property>
+        <child>
+          <object class="GtkOverlay" id="overlay">
+            <property name="visible">True</property>
+            <child type="overlay">
+              <object class="GtkRevealer" id="notification_revealer">
+                <property name="visible">True</property>
+                <property name="halign">GTK_ALIGN_CENTER</property>
+                <property name="valign">GTK_ALIGN_START</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="spacing">6</property>
+                    <style>
+                      <class name="app-notification"/>
+                    </style>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="wrap">True</property>
+                        <property name="max_width_chars">30</property>
+                        <property name="label" translatable="yes">Your session needs to be restarted for changes to take effect</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="valign">GTK_ALIGN_CENTER</property>
+                        <property name="label" translatable="yes">Restart Now</property>
+                        <signal name="clicked" handler="restart_now" object="CcUserPanel" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="dismiss_button">
+                        <property name="visible">True</property>
+                        <property name="valign">GTK_ALIGN_CENTER</property>
+                        <signal name="clicked" handler="dismiss_notification" object="CcUserPanel" swapped="yes"/>
+                        <style>
+                          <class name="flat"/>
+                        </style>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="icon_name">window-close-symbolic</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox" id="accounts_box">
+                <property name="visible">True</property>
+                <property name="orientation">vertical</property>
+                <property name="border_width">0</property>
+                <child>
+                  <object class="UmCarousel" id="carousel">
+                    <property name="visible">True</property>
+                    <signal name="item-activated" handler="set_selected_user" object="CcUserPanel" swapped="yes"/>
+                  </object>
+                  <packing>
+                    <property name="fill">False</property>
+                    <property name="expand">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkGrid">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="column_spacing">10</property>
+                    <property name="row_spacing">10</property>
+                    <property name="margin_top">40</property>
+                    <property name="halign">GTK_ALIGN_CENTER</property>
+                    <property name="height_request">300</property>
+                    <child>
+                      <object class="GtkButton" id="fingerprint_button">
+                        <property name="visible">True</property>
+                        <property name="hexpand">True</property>
+                        <signal name="clicked" handler="change_fingerprint" object="CcUserPanel" swapped="yes"/>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">5</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="account_type_box">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="sensitive">False</property>
+                        <style>
+                          <class name="linked"/>
+                        </style>
+                        <child>
+                          <object class="GtkRadioButton" id="account_type_standard_button">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label" translatable="yes">Standard</property>
+                            <property name="draw_indicator">False</property>
+                            <property name="hexpand">True</property>
+                            <signal name="toggled" handler="account_type_changed" object="CcUserPanel" swapped="yes"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkRadioButton" id="account_type_admin_button">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label" translatable="yes">Administrator</property>
+                            <property name="draw_indicator">False</property>
+                            <property name="group">account_type_standard_button</property>
+                            <property name="hexpand">True</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="account_type_label">
+                        <property name="visible">True</property>
+                        <property name="xalign">1</property>
+                        <property name="label" translatable="yes">Account _Type</property>
+                        <property name="use_underline">True</property>
+                        <property name="mnemonic_widget">account_type_box</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="full_name_entry">
+                        <property name="visible">True</property>
+                        <property name="width-chars">30</property>
+                        <property name="max-width-chars">30</property>
+                        <property name="valign">GTK_ALIGN_CENTER</property>
+                        <signal name="activate" handler="change_name_done" object="CcUserPanel" swapped="yes"/>
+                        <signal name="focus-out-event" handler="change_name_focus_out" object="CcUserPanel" swapped="yes"/>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">0</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="password_label">
+                        <property name="visible">True</property>
+                        <property name="xalign">1</property>
+                        <property name="label" translatable="yes">_Password</property>
+                        <property name="use_underline">True</property>
+                        <property name="mnemonic_widget">password_button</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">3</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="password_button">
+                        <property name="visible">True</property>
+                        <property name="hexpand">True</property>
+                        <signal name="clicked" handler="change_password" object="CcUserPanel" swapped="yes"/>
+                        <style>
+                          <class name="text-button"/>
+                        </style>
+                        <child>
+                          <object class="GtkLabel" id="password_button_label">
+                            <property name="visible">True</property>
+                            <property name="halign">GTK_ALIGN_START</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">3</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="autologin_label">
+                        <property name="visible">True</property>
+                        <property name="xalign">1</property>
+                        <property name="label" translatable="yes">A_utomatic Login</property>
+                        <property name="use_underline">True</property>
+                        <property name="mnemonic_widget">autologin_switch</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">4</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="autologin_box">
+                        <property name="visible">True</property>
+                        <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
+                        <child>
+                          <object class="GtkSwitch" id="autologin_switch">
+                            <property name="visible">True</property>
+                            <property name="valign">GTK_ALIGN_CENTER</property>
+                            <signal name="notify::active" handler="autologin_changed" object="CcUserPanel" swapped="yes"/>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">4</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="fingerprint_label">
+                        <property name="visible">True</property>
+                        <property name="xalign">1</property>
+                        <property name="label" translatable="yes">_Fingerprint Login</property>
+                        <property name="use_underline">True</property>
+                        <property name="mnemonic_widget">fingerprint_button</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">5</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkStack" id="user_icon_stack">
+                        <property name="visible">True</property>
+                        <property name="halign">GTK_ALIGN_END</property>
+                        <child>
+                          <object class="UmUserImage" id="user_icon_image">
+                            <property name="visible">True</property>
+                            <property name="icon_name">avatar-default</property>
+                            <property name="pixel_size">96</property>
+                            <property name="halign">GTK_ALIGN_END</property>
+                            <child internal-child="accessible">
+                              <object class="AtkObject">
+                                <property name="accessible-name" translatable="yes">User Icon</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkToggleButton" id="user_icon_button">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">GTK_RELIEF_NORMAL</property>
+                            <child internal-child="accessible">
+                              <object class="AtkObject">
+                                <property name="accessible-name" translatable="yes">User Icon</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="UmUserImage" id="user_icon_image2">
+                                <property name="visible">True</property>
+                                <property name="icon_name">avatar-default</property>
+                                <property name="pixel_size">96</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">0</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="language_label">
+                        <property name="visible">True</property>
+                        <property name="xalign">1</property>
+                        <property name="label" translatable="yes">_Language</property>
+                        <property name="use_underline">True</property>
+                        <property name="mnemonic_widget">language_button</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">2</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="language_button">
+                        <property name="visible">True</property>
+                        <property name="hexpand">True</property>
+                        <signal name="clicked" handler="change_language" object="CcUserPanel" swapped="yes"/>
+                        <style>
+                          <class name="text-button"/>
+                        </style>
+                        <child>
+                          <object class="GtkLabel" id="language_button_label">
+                            <property name="visible">True</property>
+                            <property name="halign">GTK_ALIGN_START</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">2</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="last_login_label">
+                        <property name="visible">True</property>
+                        <property name="xalign">1</property>
+                        <property name="label" translatable="yes">Last Login</property>
+                        <property name="use_underline">True</property>
+                        <property name="mnemonic_widget">last_login_button</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">6</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="last_login_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <signal name="clicked" handler="show_history" object="CcUserPanel" swapped="yes"/>
+                        <style>
+                          <class name="text-button"/>
+                        </style>
+                        <child>
+                          <object class="GtkLabel" id="last_login_button_label">
+                            <property name="visible">True</property>
+                            <property name="halign">GTK_ALIGN_START</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">6</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="remove_user_button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="vexpand">True</property>
+                    <property name="halign">GTK_ALIGN_END</property>
+                    <property name="valign">GTK_ALIGN_END</property>
+                    <property name="margin_bottom">20</property>
+                    <property name="margin_top">20</property>
+                    <property name="margin_end">20</property>
+                    <property name="label" translatable="yes">Remove User…</property>
+                    <signal name="clicked" handler="delete_user" object="CcUserPanel" swapped="yes"/>
+                    <style>
+                      <class name="destructive-action"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="name">_users</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="empty-state">
+            <property name="visible">True</property>
+            <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
+            <property name="valign">GTK_ALIGN_CENTER</property>
+            <property name="spacing">12</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon_name">avatar-default-symbolic</property>
+                <property name="pixel_size">192</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes" comments="Translators: This is the empty state page label which states that there are no users to show in the panel.">No Users Found</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                  <attribute name="scale" value="1.6"/>
+                </attributes>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Unlock to add a user account.</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="name">_empty_state</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </template>
+  <object class="GtkSizeGroup">
+    <property name="mode">both</property>
+    <widgets>
+      <widget name="user_icon_button"/>
+      <widget name="user_icon_image"/>
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup">
+    <property name="mode">both</property>
+    <widgets>
+      <widget name="fingerprint_label"/>
+      <widget name="language_label"/>
+      <widget name="password_label"/>
+      <widget name="account_type_label"/>
+      <widget name="autologin_label"/>
+      <widget name="last_login_label"/>
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup">
+    <property name="mode">both</property>
+    <widgets>
+      <widget name="fingerprint_button"/>
+      <widget name="language_button"/>
+      <widget name="password_button"/>
+      <widget name="account_type_box"/>
+      <widget name="autologin_box"/>
+      <widget name="last_login_button"/>
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup">
+    <property name="mode">both</property>
+    <widgets>
+      <widget name="account_type_standard_button"/>
+      <widget name="account_type_admin_button"/>
+    </widgets>
+  </object>
+</interface>
