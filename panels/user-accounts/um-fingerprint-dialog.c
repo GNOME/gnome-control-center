@@ -45,7 +45,7 @@ enum {
 };
 
 typedef struct {
-        GtkWidget *editable_button;
+        GtkButton *editable_button;
 
         GtkWidget *ass;
         GtkBuilder *dialog;
@@ -177,7 +177,7 @@ get_error_dialog (const char *title,
 }
 
 gboolean
-set_fingerprint_label (GtkWidget *button)
+set_fingerprint_label (GtkButton *editable_button)
 {
         GDBusProxy *device;
         GVariant *result;
@@ -208,12 +208,12 @@ set_fingerprint_label (GtkWidget *button)
 
         if (fingers == NULL || g_variant_iter_n_children (fingers) == 0) {
                 is_disable = FALSE;
-                gtk_button_set_label (GTK_BUTTON (button), _("Disabled"));
+                gtk_button_set_label (editable_button, _("Disabled"));
         } else {
                 is_disable = TRUE;
-                gtk_button_set_label (GTK_BUTTON (button), _("Enabled"));
+                gtk_button_set_label (editable_button, _("Enabled"));
         }
-        gtk_widget_set_halign (gtk_bin_get_child (GTK_BIN (button)), GTK_ALIGN_START);
+        gtk_widget_set_halign (gtk_bin_get_child (GTK_BIN (editable_button)), GTK_ALIGN_START);
 
         if (result != NULL)
                 g_variant_unref (result);
@@ -247,7 +247,7 @@ delete_fingerprints (void)
 
 static void
 delete_fingerprints_question (GtkWindow *parent,
-                              GtkWidget *editable_button,
+                              GtkButton *editable_button,
                               ActUser   *user)
 {
         GtkWidget *question;
@@ -414,7 +414,7 @@ finger_combobox_changed (GtkComboBox *combobox, EnrollData *data)
 static void
 assistant_cancelled (GtkAssistant *ass, EnrollData *data)
 {
-        GtkWidget *editable_button = data->editable_button;
+        GtkButton *editable_button = data->editable_button;
 
         enroll_data_destroy (data);
         set_fingerprint_label (editable_button);
@@ -607,7 +607,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 
 static void
 enroll_fingerprints (GtkWindow *parent,
-                     GtkWidget *editable_button,
+                     GtkButton *editable_button,
                      ActUser   *user)
 {
         GDBusProxy *device = NULL;
@@ -735,7 +735,7 @@ enroll_fingerprints (GtkWindow *parent,
 
 void
 fingerprint_button_clicked (GtkWindow *parent,
-                            GtkWidget *editable_button,
+                            GtkButton *editable_button,
                             ActUser   *user)
 {
         bindtextdomain ("fprintd", GNOMELOCALEDIR);
