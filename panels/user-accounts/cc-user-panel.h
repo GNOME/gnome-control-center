@@ -24,7 +24,6 @@
 
 G_BEGIN_DECLS
 
-#define UM_TYPE_USER_PANEL (cc_user_panel_get_type ())
 G_DECLARE_FINAL_TYPE (CcUserPanel, cc_user_panel, UM, USER_PANEL, CcPanel)
 
 G_END_DECLS
