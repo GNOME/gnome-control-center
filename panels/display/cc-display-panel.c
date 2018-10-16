@@ -272,7 +272,7 @@ cc_display_panel_dispose (GObject *object)
   g_clear_object (&self->shell_cancellable);
   g_clear_object (&self->shell_proxy);
 
-  g_clear_pointer (&self->night_light_dialog, gtk_widget_destroy);
+  g_clear_pointer ((GtkWidget **) &self->night_light_dialog, gtk_widget_destroy);
 
   G_OBJECT_CLASS (cc_display_panel_parent_class)->dispose (object);
 }

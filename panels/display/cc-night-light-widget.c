@@ -119,8 +119,8 @@ cc_night_light_widget_style_updated (GtkWidget *widget)
   CcNightLightWidget *self = CC_NIGHT_LIGHT_WIDGET (widget);
   GtkIconTheme *icon_theme = gtk_icon_theme_get_default ();
 
-  g_clear_pointer (&self->surface_sunrise, (GDestroyNotify) cairo_surface_destroy);
-  g_clear_pointer (&self->surface_sunset, (GDestroyNotify) cairo_surface_destroy);
+  g_clear_pointer (&self->surface_sunrise, cairo_surface_destroy);
+  g_clear_pointer (&self->surface_sunset, cairo_surface_destroy);
 
   self->surface_sunrise =
     gtk_icon_theme_load_surface (icon_theme, "daytime-sunrise-symbolic",
@@ -152,8 +152,8 @@ cc_night_light_widget_finalize (GObject *object)
 {
   CcNightLightWidget *self = CC_NIGHT_LIGHT_WIDGET (object);
 
-  g_clear_pointer (&self->surface_sunrise, (GDestroyNotify) cairo_surface_destroy);
-  g_clear_pointer (&self->surface_sunset, (GDestroyNotify) cairo_surface_destroy);
+  g_clear_pointer (&self->surface_sunrise, cairo_surface_destroy);
+  g_clear_pointer (&self->surface_sunset, cairo_surface_destroy);
 
   G_OBJECT_CLASS (cc_night_light_widget_parent_class)->finalize (object);
 }
