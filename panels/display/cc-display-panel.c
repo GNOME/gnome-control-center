@@ -1057,11 +1057,9 @@ make_output_ui (CcDisplayPanel *panel)
   gtk_container_add (GTK_CONTAINER (listbox), row);
 
   row = make_scale_row (panel, panel->current_output);
-  gtk_widget_show (row);
   gtk_container_add (GTK_CONTAINER (listbox), row);
 
   row = make_refresh_rate_row (panel, panel->current_output);
-  gtk_widget_show (row);
   gtk_container_add (GTK_CONTAINER (listbox), row);
 
   if (cc_display_monitor_supports_underscanning (panel->current_output))
