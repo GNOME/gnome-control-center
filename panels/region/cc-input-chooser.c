@@ -171,10 +171,12 @@ more_row_new (void)
 
   row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_widget_show (box);
   gtk_container_add (GTK_CONTAINER (row), box);
   gtk_widget_set_tooltip_text (row, _("More…"));
 
   arrow = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_MENU);
+  gtk_widget_show (arrow);
   gtk_style_context_add_class (gtk_widget_get_style_context (arrow), "dim-label");
   gtk_widget_set_hexpand (arrow, TRUE);
   set_row_widget_margins (arrow);
@@ -197,6 +199,7 @@ back_row_new (const gchar *text)
 
   row = gtk_list_box_row_new ();
   widget = padded_label_new (text, ROW_LABEL_POSITION_CENTER, ROW_TRAVEL_DIRECTION_BACKWARD, TRUE);
+  gtk_widget_show (widget);
   gtk_container_add (GTK_CONTAINER (row), widget);
 
   return GTK_LIST_BOX_ROW (row);
@@ -210,6 +213,7 @@ locale_row_new (const gchar *text)
 
   row = gtk_list_box_row_new ();
   widget = padded_label_new (text, ROW_LABEL_POSITION_CENTER, ROW_TRAVEL_DIRECTION_NONE, FALSE);
+  gtk_widget_show (widget);
   gtk_container_add (GTK_CONTAINER (row), widget);
 
   return GTK_LIST_BOX_ROW (row);
@@ -234,6 +238,7 @@ input_source_row_new (CcInputChooser *self,
                                  ROW_LABEL_POSITION_START,
                                  ROW_TRAVEL_DIRECTION_NONE,
                                  FALSE);
+      gtk_widget_show (widget);
       gtk_container_add (GTK_CONTAINER (row), widget);
       g_object_set_data (G_OBJECT (row), "name", (gpointer) display_name);
       g_object_set_data_full (G_OBJECT (row), "unaccented-name",
@@ -252,8 +257,10 @@ input_source_row_new (CcInputChooser *self,
                                  ROW_LABEL_POSITION_START,
                                  ROW_TRAVEL_DIRECTION_NONE,
                                  FALSE);
+      gtk_widget_show (widget);
       gtk_container_add (GTK_CONTAINER (row), widget);
       image = gtk_image_new_from_icon_name ("system-run-symbolic", GTK_ICON_SIZE_MENU);
+      gtk_widget_show (image);
       set_row_widget_margins (image);
       gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
       gtk_container_add (GTK_CONTAINER (widget), image);
