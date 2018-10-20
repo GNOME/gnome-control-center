@@ -109,7 +109,7 @@ struct _CcSharingPanel
 
 CC_PANEL_REGISTER (CcSharingPanel, cc_sharing_panel)
 
-#define OFF_IF_VISIBLE(x) { if (gtk_widget_is_visible(x) && gtk_widget_is_sensitive(x)) gtk_switch_set_active (GTK_SWITCH(x), FALSE); }
+#define OFF_IF_VISIBLE(x, y) { if (gtk_widget_is_visible(x) && gtk_widget_is_sensitive(y)) gtk_switch_set_active (GTK_SWITCH(y), FALSE); }
 
 static void
 cc_sharing_panel_master_switch_notify (GtkSwitch      *gtkswitch,
@@ -123,9 +123,9 @@ cc_sharing_panel_master_switch_notify (GtkSwitch      *gtkswitch,
   if (!active)
     {
       /* disable all services if the master switch is not active */
-      OFF_IF_VISIBLE(self->media_sharing_switch);
-      OFF_IF_VISIBLE(self->personal_file_sharing_switch);
-      OFF_IF_VISIBLE(self->screen_sharing_switch);
+      OFF_IF_VISIBLE(self->media_sharing_button, self->media_sharing_switch);
+      OFF_IF_VISIBLE(self->personal_file_sharing_button, self->personal_file_sharing_switch);
+      OFF_IF_VISIBLE(self->screen_sharing_button, self->screen_sharing_switch);
 
       gtk_switch_set_active (GTK_SWITCH (self->remote_login_switch), FALSE);
     }
