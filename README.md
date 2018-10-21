@@ -54,7 +54,7 @@ Start the program.
 
 Reproduce the crash and when the program exits to (gdb) prompt, get the back trace.
 
-	(gdb) bt full
+    (gdb) bt full
 
 Once you have the back trace, copy and paste it into the 
 'Comments' field
