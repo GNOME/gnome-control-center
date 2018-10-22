@@ -5,13 +5,11 @@
 GNOME Settings
 ====================
 
-GNOME Settings is GNOME's main interface for configuration of various aspects of
-your desktop.
+GNOME Settings is GNOME's main interface for configuration of various aspects of your desktop.
 
 ## Contributing
 
-See `docs/CONTRIBUTING.md` for details on the contribution process, and `docs/HACKING.md`
-for the coding style guidelines.
+See `docs/CONTRIBUTING.md` for details on the contribution process, and `docs/HACKING.md` for the coding style guidelines.
 
 ## Testing Unstable Settings
 
@@ -28,17 +26,18 @@ Bugs should be reported to the GNOME bug tracking system under the product
 gnome-control-center. It is available at [GitLab Issues](https://gitlab.gnome.org/GNOME/gnome-control-center/issues).
 
 In the report please include the following information:
-* Operating system and version
-* For Linux, version of the C library
-* Exact error message
-* Steps to reproduce the bug
-* If the bug is a visual defect, attach a screenshot
-* If the bug is a crash, attach a back trace if possible [see below]
 
-### How to get a back trace
+ * Operating system and version
+ * For Linux, version of the C library
+ * Exact error message
+ * Steps to reproduce the bug
+ * If the bug is a visual defect, attach a screenshot
+ * If the bug is a crash, attach a backtrace if possible [see below]
+
+### How to get a backtrace
 
 If the crash is reproducible, follow the steps to obtain a 
-back trace:
+backtrace:
 Install debug symbols. Let's take as example
     
     sudo dnf install -y dnf-utils
@@ -52,10 +51,8 @@ Start the program.
     
     (gdb) run
 
-Reproduce the crash and when the program exits to (gdb) prompt, get the back trace.
+Reproduce the crash and when the program exits to (gdb) prompt, get the backtrace.
 
     (gdb) bt full
 
-Once you have the back trace, copy and paste it into the 
-'Comments' field
-or attach it as a file to the bug report.
+Once you have the backtrace, copy and paste it into the 'Comments' field or attach it as a file to the bug report.
