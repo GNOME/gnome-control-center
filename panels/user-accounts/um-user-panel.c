@@ -212,7 +212,7 @@ create_carousel_entry (CcUserPanel *self, ActUser *user)
 }
 
 static void
-user_added (ActUserManager *um, ActUser *user, CcUserPanel *self)
+user_added (CcUserPanel *self, ActUser *user)
 {
         GtkWidget *item, *widget;
         gboolean show_carousel;
@@ -295,7 +295,7 @@ reload_users (CcUserPanel *self, ActUser *selected_user)
         for (l = list; l; l = l->next) {
                 user = l->data;
                 g_debug ("adding user %s\n", get_real_or_user_name (user));
-                user_added (self->um, user, self);
+                user_added (self, user);
         }
         g_slist_free (list);
 
@@ -332,7 +332,7 @@ user_compare (gconstpointer i,
 }
 
 static void
-user_changed (ActUserManager *um, ActUser *user, CcUserPanel *self)
+user_changed (CcUserPanel *self, ActUser *user)
 {
         reload_users (self, self->selected_user);
 }
@@ -1087,9 +1087,7 @@ show_history (GtkButton *button, CcUserPanel *self)
 }
 
 static void
-users_loaded (ActUserManager *manager,
-              GParamSpec     *pspec,
-              CcUserPanel    *self)
+users_loaded (CcUserPanel *self)
 {
         GtkWidget *dialog;
 
@@ -1109,10 +1107,10 @@ users_loaded (ActUserManager *manager,
                 gtk_widget_set_sensitive (self->main_box, FALSE);
         }
 
-        g_signal_connect (self->um, "user-changed", G_CALLBACK (user_changed), self);
-        g_signal_connect (self->um, "user-is-logged-in-changed", G_CALLBACK (user_changed), self);
-        g_signal_connect (self->um, "user-added", G_CALLBACK (user_added), self);
-        g_signal_connect (self->um, "user-removed", G_CALLBACK (user_changed), self);
+        g_signal_connect_object (self->um, "user-changed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->um, "user-is-logged-in-changed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->um, "user-added", G_CALLBACK (user_added), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->um, "user-removed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
 
         reload_users (self, NULL);
 }
@@ -1371,9 +1369,9 @@ setup_main_window (CcUserPanel *self)
 
         g_object_get (self->um, "is-loaded", &loaded, NULL);
         if (loaded)
-                users_loaded (self->um, NULL, self);
+                users_loaded (self);
         else
-                g_signal_connect (self->um, "notify::is-loaded", G_CALLBACK (users_loaded), self);
+                g_signal_connect_object (self->um, "notify::is-loaded", G_CALLBACK (users_loaded), self, G_CONNECT_SWAPPED);
 }
 
 static GSettings *
@@ -1472,10 +1470,6 @@ cc_user_panel_dispose (GObject *object)
 
         g_clear_object (&self->login_screen_settings);
 
-        if (self->um) {
-                g_signal_handlers_disconnect_by_data (self->um, self);
-                self->um = NULL;
-        }
         g_clear_object (&self->builder);
         g_clear_pointer (&self->password_dialog, um_password_dialog_free);
         g_clear_pointer (&self->history_dialog, um_history_dialog_free);
