@@ -59,6 +59,8 @@ enum SnapDirection {
 };
 
 struct SnapData {
+  cairo_matrix_t     to_widget;
+  guint              major_snap_distance;
   gdouble            dist_x;
   gdouble            dist_y;
   gint               mon_x;
@@ -189,20 +191,20 @@ monitor_get_drawing_rect (CcDisplayArrangement *self,
 
 
 static void
-get_snap_distance (CcDisplayArrangement *self,
-                   gint                  mon_x,
-                   gint                  mon_y,
-                   gint                  new_x,
-                   gint                  new_y,
-                   gdouble              *dist_x,
-                   gdouble              *dist_y)
+get_snap_distance (struct SnapData  *snap_data,
+                   gint              mon_x,
+                   gint              mon_y,
+                   gint              new_x,
+                   gint              new_y,
+                   gdouble          *dist_x,
+                   gdouble          *dist_y)
 {
   gdouble local_dist_x, local_dist_y;
 
   local_dist_x = ABS (mon_x - new_x);
   local_dist_y = ABS (mon_y - new_y);
 
-  cairo_matrix_transform_distance (&self->to_widget, &local_dist_x, &local_dist_y);
+  cairo_matrix_transform_distance (&snap_data->to_widget, &local_dist_x, &local_dist_y);
 
   if (dist_x)
     *dist_x = local_dist_x;
@@ -211,21 +213,20 @@ get_snap_distance (CcDisplayArrangement *self,
 }
 
 static void
-maybe_update_snap (CcDisplayArrangement *self,
-                   struct SnapData      *snap_data,
-                   gint                  mon_x,
-                   gint                  mon_y,
-                   gint                  new_x,
-                   gint                  new_y,
-                   enum SnapDirection    snapped,
-                   enum SnapDirection    major_axis,
-                   gint                  minor_unlimited)
+maybe_update_snap (struct SnapData     *snap_data,
+                   gint                 mon_x,
+                   gint                 mon_y,
+                   gint                 new_x,
+                   gint                 new_y,
+                   enum SnapDirection   snapped,
+                   enum SnapDirection   major_axis,
+                   gint                 minor_unlimited)
 {
   enum SnapDirection update_snap = SNAP_DIR_NONE;
   gdouble dist_x, dist_y;
   gdouble dist;
 
-  get_snap_distance (self, mon_x, mon_y, new_x, new_y, &dist_x, &dist_y);
+  get_snap_distance (snap_data, mon_x, mon_y, new_x, new_y, &dist_x, &dist_y);
   dist = MAX (dist_x, dist_y);
 
   /* Snap by the variable max snap distance on the major axis, ensure the
@@ -233,7 +234,7 @@ maybe_update_snap (CcDisplayArrangement *self,
   switch (major_axis)
     {
       case SNAP_DIR_X:
-        if (dist_x > self->major_snap_distance)
+        if (dist_x > snap_data->major_snap_distance)
           return;
         if (dist_y > MINOR_SNAP_DISTANCE)
           {
@@ -245,7 +246,7 @@ maybe_update_snap (CcDisplayArrangement *self,
         break;
 
       case SNAP_DIR_Y:
-        if (dist_y > self->major_snap_distance)
+        if (dist_y > snap_data->major_snap_distance)
           return;
         if (dist_x > MINOR_SNAP_DISTANCE)
           {
@@ -317,10 +318,9 @@ maybe_update_snap (CcDisplayArrangement *self,
 }
 
 static void
-find_best_snapping (CcDisplayArrangement *self,
-                    CcDisplayConfig      *config,
-                    CcDisplayMonitor     *snap_output,
-                    struct SnapData      *snap_data)
+find_best_snapping (CcDisplayConfig   *config,
+                    CcDisplayMonitor  *snap_output,
+                    struct SnapData   *snap_data)
 {
   GList *outputs, *l;
   gint x1, y1, x2, y2;
@@ -365,8 +365,8 @@ find_best_snapping (CcDisplayArrangement *self,
       /* overlap on the X axis */
       if (OVERLAP (x1, x2, _x1, _x2))
         {
-          get_snap_distance (self, x1, y1, x1, top_snap_pos, NULL, &dist_y);
-          get_snap_distance (self, x1, y1, x1, bottom_snap_pos, NULL, &tmp);
+          get_snap_distance (snap_data, x1, y1, x1, top_snap_pos, NULL, &dist_y);
+          get_snap_distance (snap_data, x1, y1, x1, bottom_snap_pos, NULL, &tmp);
           dist_y = MIN(dist_y, tmp);
         }
 
@@ -374,60 +374,60 @@ find_best_snapping (CcDisplayArrangement *self,
       /* overlap on the Y axis */
       if (OVERLAP (y1, y2, _y1, _y2))
         {
-          get_snap_distance (self, x1, y1, left_snap_pos, y1, &dist_x, NULL);
-          get_snap_distance (self, x1, y1, right_snap_pos, y1, &tmp, NULL);
+          get_snap_distance (snap_data, x1, y1, left_snap_pos, y1, &dist_x, NULL);
+          get_snap_distance (snap_data, x1, y1, right_snap_pos, y1, &tmp, NULL);
           dist_x = MIN(dist_x, tmp);
         }
 
       /* We only snap horizontally or vertically to an edge of the same monitor */
       if (dist_y < dist_x)
         {
-          maybe_update_snap (self, snap_data, x1, y1, x1, top_snap_pos, SNAP_DIR_Y, SNAP_DIR_Y, 0);
-          maybe_update_snap (self, snap_data, x1, y1, x1, bottom_snap_pos, SNAP_DIR_Y, SNAP_DIR_Y, 0);
+          maybe_update_snap (snap_data, x1, y1, x1, top_snap_pos, SNAP_DIR_Y, SNAP_DIR_Y, 0);
+          maybe_update_snap (snap_data, x1, y1, x1, bottom_snap_pos, SNAP_DIR_Y, SNAP_DIR_Y, 0);
         }
       else if (dist_x < 9999)
         {
-          maybe_update_snap (self, snap_data, x1, y1, left_snap_pos, y1, SNAP_DIR_X, SNAP_DIR_X, 0);
-          maybe_update_snap (self, snap_data, x1, y1, right_snap_pos, y1, SNAP_DIR_X, SNAP_DIR_X, 0);
+          maybe_update_snap (snap_data, x1, y1, left_snap_pos, y1, SNAP_DIR_X, SNAP_DIR_X, 0);
+          maybe_update_snap (snap_data, x1, y1, right_snap_pos, y1, SNAP_DIR_X, SNAP_DIR_X, 0);
         }
 
       /* Left/right edge identical on the top */
-      maybe_update_snap (self, snap_data, x1, y1, _x1, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
-      maybe_update_snap (self, snap_data, x1, y1, _x2 - w, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+      maybe_update_snap (snap_data, x1, y1, _x1, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+      maybe_update_snap (snap_data, x1, y1, _x2 - w, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
 
       /* Left/right edge identical on the bottom */
-      maybe_update_snap (self, snap_data, x1, y1, _x1, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
-      maybe_update_snap (self, snap_data, x1, y1, _x2 - w, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+      maybe_update_snap (snap_data, x1, y1, _x1, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+      maybe_update_snap (snap_data, x1, y1, _x2 - w, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
 
       /* Top/bottom edge identical on the left */
-      maybe_update_snap (self, snap_data, x1, y1, left_snap_pos, _y1, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
-      maybe_update_snap (self, snap_data, x1, y1, left_snap_pos, _y2 - h, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
+      maybe_update_snap (snap_data, x1, y1, left_snap_pos, _y1, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
+      maybe_update_snap (snap_data, x1, y1, left_snap_pos, _y2 - h, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
 
       /* Top/bottom edge identical on the right */
-      maybe_update_snap (self, snap_data, x1, y1, right_snap_pos, _y1, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
-      maybe_update_snap (self, snap_data, x1, y1, right_snap_pos, _y2 - h, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
+      maybe_update_snap (snap_data, x1, y1, right_snap_pos, _y1, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
+      maybe_update_snap (snap_data, x1, y1, right_snap_pos, _y2 - h, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
 
       /* If snapping is infinite, then add snapping points with minimal overlap
        * to prevent detachment.
        * This is similar to the above but simply re-defines the snapping pos
        * to have only minimal overlap */
-      if (self->major_snap_distance == G_MAXUINT)
+      if (snap_data->major_snap_distance == G_MAXUINT)
         {
           /* Hanging over the left/right edge on the top */
-          maybe_update_snap (self, snap_data, x1, y1, _x1 - w + MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 1);
-          maybe_update_snap (self, snap_data, x1, y1, _x2 - MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, -1);
+          maybe_update_snap (snap_data, x1, y1, _x1 - w + MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 1);
+          maybe_update_snap (snap_data, x1, y1, _x2 - MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, -1);
 
           /* Left/right edge identical on the bottom */
-          maybe_update_snap (self, snap_data, x1, y1, _x1 - w + MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 1);
-          maybe_update_snap (self, snap_data, x1, y1, _x2 - MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, -1);
+          maybe_update_snap (snap_data, x1, y1, _x1 - w + MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 1);
+          maybe_update_snap (snap_data, x1, y1, _x2 - MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, -1);
 
           /* Top/bottom edge identical on the left */
-          maybe_update_snap (self, snap_data, x1, y1, left_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, 1);
-          maybe_update_snap (self, snap_data, x1, y1, left_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, -1);
+          maybe_update_snap (snap_data, x1, y1, left_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, 1);
+          maybe_update_snap (snap_data, x1, y1, left_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, -1);
 
           /* Top/bottom edge identical on the right */
-          maybe_update_snap (self, snap_data, x1, y1, right_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, 1);
-          maybe_update_snap (self, snap_data, x1, y1, right_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, -1);
+          maybe_update_snap (snap_data, x1, y1, right_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, 1);
+          maybe_update_snap (snap_data, x1, y1, right_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, -1);
         }
     }
 
@@ -793,10 +793,12 @@ cc_display_arrangement_motion_notify_event (GtkWidget      *widget,
   snap_data.mon_y = mon_y;
   snap_data.dist_x = 0;
   snap_data.dist_y = 0;
+  snap_data.to_widget = self->to_widget;
+  snap_data.major_snap_distance = self->major_snap_distance;
 
   cc_display_monitor_set_position (self->selected_output, mon_x, mon_y);
 
-  find_best_snapping (self, self->config, self->selected_output, &snap_data);
+  find_best_snapping (self->config, self->selected_output, &snap_data);
 
   cc_display_monitor_set_position (self->selected_output, snap_data.mon_x, snap_data.mon_y);
 
