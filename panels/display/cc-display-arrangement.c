@@ -930,3 +930,31 @@ cc_display_arrangement_set_selected_output (CcDisplayArrangement *self,
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_SELECTED_OUTPUT]);
 }
+
+void
+cc_display_config_snap_output (CcDisplayConfig  *config,
+                               CcDisplayMonitor *output)
+{
+  struct SnapData snap_data;
+  gint x, y, w, h;
+
+  if (!cc_display_monitor_is_useful (output))
+    return;
+
+  if (cc_display_config_count_useful_monitors (config) <= 1)
+    return;
+
+  get_scaled_geometry (config, output, &x, &y, &w, &h);
+
+  snap_data.snapped = SNAP_DIR_NONE;
+  snap_data.mon_x = x;
+  snap_data.mon_y = y;
+  snap_data.dist_x = 0;
+  snap_data.dist_y = 0;
+  cairo_matrix_init_identity (&snap_data.to_widget);
+  snap_data.major_snap_distance = G_MAXUINT;
+
+  find_best_snapping (config, output, &snap_data);
+
+  cc_display_monitor_set_position (output, snap_data.mon_x, snap_data.mon_y);
+}

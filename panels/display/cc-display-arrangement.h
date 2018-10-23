@@ -34,5 +34,10 @@ CcDisplayMonitor*     cc_display_arrangement_get_selected_output (CcDisplayArran
 void                  cc_display_arrangement_set_selected_output (CcDisplayArrangement *arr,
                                                                   CcDisplayMonitor     *output);
 
+/* This is a bit of an odd-ball, but it currently makes sense to have it with
+ * the arrangement widget where the snapping code lives. */
+void                  cc_display_config_snap_output              (CcDisplayConfig  *config,
+                                                                  CcDisplayMonitor *output);
+
 G_END_DECLS
 
