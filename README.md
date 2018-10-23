@@ -38,10 +38,8 @@ In the report please include the following information:
 
 If the crash is reproducible, follow the steps to obtain a 
 backtrace:
-Install debug symbols. Let's take as example
-    
-    sudo dnf install -y dnf-utils
-    sudo debuginfo-install -y --enablerepo=fedora-debuginfo $(rpm -q gnome-control-center)  # Fedora 28
+
+Install debug symbols for gnome-control-center.
 
 Run the program in gdb [the GNU debugger] or any other debugger.
 
