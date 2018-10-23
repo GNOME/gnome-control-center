@@ -310,6 +310,7 @@ um_carousel_add (GtkContainer *container,
                 gtk_stack_add_named (self->stack, self->last_box, page);
         }
 
+        gtk_widget_show_all (widget);
         gtk_box_pack_start (GTK_BOX (self->last_box), widget, TRUE, FALSE, 10);
 
         update_buttons_visibility (self);
