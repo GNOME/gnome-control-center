@@ -542,6 +542,7 @@ orientation_row_activated (CcDisplayPanel *panel,
   CcDisplayRotation rotation = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "rotation"));
 
   cc_display_monitor_set_rotation (panel->current_output, rotation);
+  cc_display_config_snap_output (panel->current_config, panel->current_output);
   update_apply_button (panel);
 }
 
@@ -629,6 +630,7 @@ resolution_row_activated (CcDisplayPanel *panel,
   if (!display_mode_supported_at_scale (mode, scale))
     cc_display_monitor_set_scale (panel->current_output, 1.0);
 
+  cc_display_config_snap_output (panel->current_config, panel->current_output);
   update_apply_button (panel);
 }
 
@@ -827,6 +829,7 @@ scale_buttons_active (CcDisplayPanel *panel,
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
     {
       cc_display_monitor_set_scale (panel->current_output, scale);
+      cc_display_config_snap_output (panel->current_config, panel->current_output);
       update_apply_button (panel);
     }
 }
@@ -948,6 +951,7 @@ underscanning_switch_active (CcDisplayPanel *panel,
 {
   cc_display_monitor_set_underscanning (panel->current_output,
                                         gtk_switch_get_active (GTK_SWITCH (button)));
+  cc_display_config_snap_output (panel->current_config, panel->current_output);
   update_apply_button (panel);
 }
 
@@ -1689,6 +1693,7 @@ output_switch_active (CcDisplayPanel *panel,
 {
   cc_display_monitor_set_active (panel->current_output,
                                  gtk_switch_get_active (GTK_SWITCH (button)));
+  cc_display_config_snap_output (panel->current_config, panel->current_output);
   update_apply_button (panel);
 }
 
