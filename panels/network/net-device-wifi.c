@@ -342,7 +342,8 @@ wireless_enabled_toggled (NMClient       *client,
 
         device_wifi->priv->updating_device = TRUE;
         gtk_switch_set_active (sw, enabled);
-        disable_scan_timeout (device_wifi);
+        if (!enabled)
+                disable_scan_timeout (device_wifi);
         device_wifi->priv->updating_device = FALSE;
 }
 
