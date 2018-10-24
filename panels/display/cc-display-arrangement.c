@@ -51,22 +51,22 @@ enum {
   PROP_LAST
 };
 
-enum SnapDirection {
+typedef enum {
   SNAP_DIR_NONE = 0,
   SNAP_DIR_X    = 1 << 0,
   SNAP_DIR_Y    = 1 << 1,
   SNAP_DIR_BOTH = (SNAP_DIR_X | SNAP_DIR_Y),
-};
+} SnapDirection;
 
-struct SnapData {
+typedef struct {
   cairo_matrix_t     to_widget;
   guint              major_snap_distance;
   gdouble            dist_x;
   gdouble            dist_y;
   gint               mon_x;
   gint               mon_y;
-  enum SnapDirection snapped;
-};
+  SnapDirection      snapped;
+} SnapData;
 
 #define MARGIN_PX  0
 #define MARGIN_MON  0.66
@@ -191,13 +191,13 @@ monitor_get_drawing_rect (CcDisplayArrangement *self,
 
 
 static void
-get_snap_distance (struct SnapData  *snap_data,
-                   gint              mon_x,
-                   gint              mon_y,
-                   gint              new_x,
-                   gint              new_y,
-                   gdouble          *dist_x,
-                   gdouble          *dist_y)
+get_snap_distance (SnapData  *snap_data,
+                   gint       mon_x,
+                   gint       mon_y,
+                   gint       new_x,
+                   gint       new_y,
+                   gdouble   *dist_x,
+                   gdouble   *dist_y)
 {
   gdouble local_dist_x, local_dist_y;
 
@@ -213,16 +213,16 @@ get_snap_distance (struct SnapData  *snap_data,
 }
 
 static void
-maybe_update_snap (struct SnapData     *snap_data,
-                   gint                 mon_x,
-                   gint                 mon_y,
-                   gint                 new_x,
-                   gint                 new_y,
-                   enum SnapDirection   snapped,
-                   enum SnapDirection   major_axis,
-                   gint                 minor_unlimited)
+maybe_update_snap (SnapData       *snap_data,
+                   gint            mon_x,
+                   gint            mon_y,
+                   gint            new_x,
+                   gint            new_y,
+                   SnapDirection   snapped,
+                   SnapDirection   major_axis,
+                   gint            minor_unlimited)
 {
-  enum SnapDirection update_snap = SNAP_DIR_NONE;
+  SnapDirection update_snap = SNAP_DIR_NONE;
   gdouble dist_x, dist_y;
   gdouble dist;
 
@@ -320,7 +320,7 @@ maybe_update_snap (struct SnapData     *snap_data,
 static void
 find_best_snapping (CcDisplayConfig   *config,
                     CcDisplayMonitor  *snap_output,
-                    struct SnapData   *snap_data)
+                    SnapData          *snap_data)
 {
   GList *outputs, *l;
   gint x1, y1, x2, y2;
@@ -756,7 +756,7 @@ cc_display_arrangement_motion_notify_event (GtkWidget      *widget,
   CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (widget);
   gdouble event_x, event_y;
   gint mon_x, mon_y;
-  struct SnapData snap_data;
+  SnapData snap_data;
 
   g_return_val_if_fail (self->config, FALSE);
 
@@ -935,7 +935,7 @@ void
 cc_display_config_snap_output (CcDisplayConfig  *config,
                                CcDisplayMonitor *output)
 {
-  struct SnapData snap_data;
+  SnapData snap_data;
   gint x, y, w, h;
 
   if (!cc_display_monitor_is_useful (output))
