@@ -120,10 +120,12 @@ more_widget_new (void)
 
         row = gtk_list_box_row_new ();
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
+        gtk_widget_show (box);
         gtk_container_add (GTK_CONTAINER (row), box);
         gtk_widget_set_tooltip_text (box, _("More…"));
 
         arrow = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_MENU);
+        gtk_widget_show (arrow);
         gtk_style_context_add_class (gtk_widget_get_style_context (arrow), "dim-label");
         gtk_widget_set_margin_top (box, 10);
         gtk_widget_set_margin_bottom (box, 10);
@@ -387,6 +389,7 @@ cc_language_chooser_init (CcLanguageChooser *chooser)
         gtk_widget_init_template (GTK_WIDGET (chooser));
 
         chooser->more_item = more_widget_new ();
+        gtk_widget_show (GTK_WIDGET (chooser->more_item));
         /* We ref-sink here so we can reuse this widget multiple times */
         chooser->no_results = g_object_ref_sink (no_results_widget_new ());
         gtk_widget_show (chooser->no_results);
