@@ -210,7 +210,7 @@ cc_panel_loader_fill_model (CcShellModel *model)
 #ifndef CC_PANEL_LOADER_NO_GTYPES
   for (i = 0; i < G_N_ELEMENTS (all_panels); i++)
     {
-      if (all_panels[i].static_init_func)
+      if (cc_shell_model_has_panel (model, all_panels[i].name) && all_panels[i].static_init_func)
         all_panels[i].static_init_func ();
     }
 #endif
