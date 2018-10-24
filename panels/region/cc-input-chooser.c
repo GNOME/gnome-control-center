@@ -1039,8 +1039,9 @@ cc_input_chooser_new (gboolean      is_login,
     self->ibus_engines = g_hash_table_ref (ibus_engines);
 
   self->more_row = g_object_ref_sink (more_row_new ());
+  gtk_widget_show (GTK_WIDGET (self->more_row));
   self->no_results = g_object_ref_sink (no_results_widget_new ());
-  gtk_widget_show_all (self->no_results);
+  gtk_widget_show (self->no_results);
 
   gtk_list_box_set_filter_func (self->input_sources_listbox, list_filter, self, NULL);
   gtk_list_box_set_sort_func (self->input_sources_listbox, list_sort, self, NULL);
