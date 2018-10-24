@@ -913,47 +913,36 @@ All the information we collect is made anonymous, and we will never share your d
   <template class="CcPrivacyPanel" parent="CcPanel">
     <property name="visible">True</property>
     <child>
-      <object class="GtkBox">
+      <object class="GtkScrolledWindow">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-
-        <!-- Stub boxes to make the content cover 1/3 of the screen -->
+        <property name="can_focus">True</property>
+        <property name="hscrollbar_policy">never</property>
+        <property name="shadow_type">none</property>
         <child>
-          <object class="GtkBox">
+          <object class="GtkViewport">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="hexpand">True</property>
-          </object>
-        </child>
-
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="hexpand">True</property>
-          </object>
-          <packing>
-            <property name="pack_type">end</property>
-          </packing>
-        </child>
-
-        <!-- Content -->
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-            <property name="margin">32</property>
-            <property name="hexpand">True</property>
             <child>
-              <object class="GtkFrame" id="frame">
+              <object class="HdyColumn">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="shadow_type">in</property>
+                <property name="maximum_width">600</property>
+                <property name="linear_growth_width">400</property>
+                <property name="margin_top">32</property>
+                <property name="margin_bottom">32</property>
+                <property name="margin_start">12</property>
+                <property name="margin_end">12</property>
                 <child>
-                  <object class="GtkListBox" id="list_box">
+                  <object class="GtkFrame" id="frame">
                     <property name="visible">True</property>
-                    <property name="selection_mode">none</property>
+                    <property name="can_focus">False</property>
+                    <property name="valign">start</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <object class="GtkListBox" id="list_box">
+                        <property name="visible">True</property>
+                        <property name="selection_mode">none</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
