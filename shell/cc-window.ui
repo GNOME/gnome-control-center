@@ -111,109 +111,115 @@
       </object>
     </child>
     <child type="titlebar">
-      <object class="GtkBox" id="header_box">
+      <object class="HdyTitleBar">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="orientation">horizontal</property>
         <child>
-          <object class="GtkHeaderBar" id="header">
+          <object class="GtkBox" id="header_box">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="show-close-button">True</property>
-            <property name="title" translatable="yes">Settings</property>
+            <property name="orientation">horizontal</property>
             <child>
-              <object class="GtkButton" id="previous_button">
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <signal name="clicked" handler="previous_button_clicked_cb" object="CcWindow" swapped="no" />
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">go-previous-symbolic</property>
-                  </object>
-                </child>
-                <child internal-child="accessible">
-                  <object class="AtkObject" id="a11y-button1">
-                    <property name="accessible-name" translatable="yes">All Settings</property>
-                  </object>
-                </child>
-                <style>
-                  <class name="image-button"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkToggleButton" id="search_button">
+              <object class="GtkHeaderBar" id="header">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <child internal-child="accessible">
-                  <object class="AtkObject">
-                    <property name="accessible-name" translatable="yes">Search</property>
+                <property name="can_focus">False</property>
+                <property name="show-close-button">True</property>
+                <property name="title" translatable="yes">Settings</property>
+                <child>
+                  <object class="GtkButton" id="previous_button">
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="previous_button_clicked_cb" object="CcWindow" swapped="no" />
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="icon_name">go-previous-symbolic</property>
+                      </object>
+                    </child>
+                    <child internal-child="accessible">
+                      <object class="AtkObject" id="a11y-button1">
+                        <property name="accessible-name" translatable="yes">All Settings</property>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="image-button"/>
+                    </style>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkImage">
+                  <object class="GtkToggleButton" id="search_button">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">edit-find-symbolic</property>
-                  </object>
-                </child>
-                <style>
-                  <class name="image-button"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkMenuButton">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="menu_model">primary_menu</property>
-                <child internal-child="accessible">
-                  <object class="AtkObject">
-                    <property name="accessible-name" translatable="yes">Primary Menu</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <child internal-child="accessible">
+                      <object class="AtkObject">
+                        <property name="accessible-name" translatable="yes">Search</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="icon_name">edit-find-symbolic</property>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="image-button"/>
+                    </style>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkImage">
+                  <object class="GtkMenuButton">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">open-menu-symbolic</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="menu_model">primary_menu</property>
+                    <child internal-child="accessible">
+                      <object class="AtkObject">
+                        <property name="accessible-name" translatable="yes">Primary Menu</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="icon_name">open-menu-symbolic</property>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="image-button"/>
+                    </style>
                   </object>
+                  <packing>
+                    <property name="pack_type">end</property>
+                  </packing>
                 </child>
-                <style>
-                  <class name="image-button"/>
-                </style>
               </object>
-              <packing>
-                <property name="pack_type">end</property>
-              </packing>
             </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkSeparator" id="header_separator">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkHeaderBar" id="panel_headerbar">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="hexpand">True</property>
-            <property name="show_close_button">True</property>
             <child>
-              <object class="GtkBox" id="top_right_box">
+              <object class="GtkSeparator" id="header_separator">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
               </object>
-              <packing>
-                <property name="pack_type">end</property>
-              </packing>
+            </child>
+            <child>
+              <object class="GtkHeaderBar" id="panel_headerbar">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="show_close_button">True</property>
+                <child>
+                  <object class="GtkBox" id="top_right_box">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="pack_type">end</property>
+                  </packing>
+                </child>
+              </object>
             </child>
           </object>
         </child>
@@ -242,15 +248,6 @@
     <widgets>
       <widget name="header"/>
       <widget name="sidebar_box"/>
-    </widgets>
-  </object>
-
-  <!-- Synchronize separators -->
-  <object class="GtkSizeGroup">
-    <property name="mode">horizontal</property>
-    <widgets>
-      <widget name="header_separator"/>
-      <widget name="panel_separator"/>
     </widgets>
   </object>
 
