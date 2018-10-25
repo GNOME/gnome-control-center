@@ -10,9 +10,11 @@
     <signal name="map-event" handler="window_map_event_cb" object="CcWindow" swapped="no" />
     <signal name="key-press-event" handler="window_key_press_event_cb" object="CcWindow" swapped="no" after="yes" />
     <child>
-      <object class="GtkBox" id="main_hbox">
+      <object class="HdyLeaflet" id="main_leaflet">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="mode-transition-type">slide</property>
+        <property name="child-transition-type">slide</property>
         <child>
           <object class="GtkBox" id="sidebar_box">
             <property name="visible">True</property>
@@ -74,9 +76,7 @@
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
+            <property name="name">sidebar</property>
           </packing>
         </child>
         <child>
@@ -88,11 +88,6 @@
               <class name="sidebar"/>
             </style>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
         <child>
           <object class="GtkStack" id="stack">
@@ -106,9 +101,7 @@
             </style>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="name">panel</property>
           </packing>
         </child>
       </object>
@@ -118,10 +111,17 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkBox" id="header_box">
+          <object class="HdyLeaflet" id="header_box">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="orientation">horizontal</property>
+            <property name="mode-transition-type" bind-source="main_leaflet" bind-property="mode-transition-type" bind-flags="bidirectional|sync-create"/>
+            <property name="mode-transition-duration" bind-source="main_leaflet" bind-property="mode-transition-duration" bind-flags="bidirectional|sync-create"/>
+            <property name="child-transition-type" bind-source="main_leaflet" bind-property="child-transition-type" bind-flags="bidirectional|sync-create"/>
+            <property name="child-transition-duration" bind-source="main_leaflet" bind-property="child-transition-duration" bind-flags="bidirectional|sync-create"/>
+            <property name="visible-child-name" bind-source="main_leaflet" bind-property="visible-child-name" bind-flags="bidirectional|sync-create"/>
+            <signal name="notify::visible-child" handler="notify_header_visible_child_cb" swapped="no"/>
+            <signal name="notify::fold" handler="notify_fold_cb" object="CcWindow" after="yes" swapped="no"/>
             <child>
               <object class="GtkHeaderBar" id="header">
                 <property name="visible">True</property>
@@ -199,6 +199,9 @@
                   </packing>
                 </child>
               </object>
+              <packing>
+                <property name="name">sidebar</property>
+              </packing>
             </child>
             <child>
               <object class="GtkSeparator" id="header_separator">
@@ -217,6 +220,40 @@
                 <property name="hexpand">True</property>
                 <property name="show_close_button">True</property>
                 <child>
+                  <object class="GtkRevealer" id="back_revealer">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="transition-type">crossfade</property>
+                    <property name="transition-duration" bind-source="main_leaflet" bind-property="mode-transition-duration" bind-flags="bidirectional|sync-create"/>
+                    <child>
+                      <object class="GtkButton" id="back">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="receives_default">False</property>
+                        <property name="valign">center</property>
+                        <property name="use-underline">True</property>
+                        <signal name="clicked" handler="back_button_clicked_cb" object="CcWindow" swapped="no" />
+                        <style>
+                          <class name="image-button"/>
+                        </style>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="a11y-back">
+                            <property name="accessible-name" translatable="yes">Back</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="back_image">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="icon_name">go-previous-symbolic</property>
+                            <property name="icon_size">1</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
                   <object class="GtkBox" id="top_right_box">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -226,6 +263,9 @@
                   </packing>
                 </child>
               </object>
+              <packing>
+                <property name="name">panel</property>
+              </packing>
             </child>
           </object>
         </child>
@@ -254,6 +294,15 @@
     <widgets>
       <widget name="header"/>
       <widget name="sidebar_box"/>
+    </widgets>
+  </object>
+
+  <!-- Synchronize separators -->
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="header_separator"/>
+      <widget name="panel_separator"/>
     </widgets>
   </object>
 
