@@ -90,7 +90,7 @@ language_widget_new (const gchar *locale_id,
         gtk_box_pack_start (GTK_BOX (box), language_label, FALSE, TRUE, 0);
 
         check = gtk_image_new ();
-        gtk_widget_show (check);
+        gtk_widget_hide (check);
         gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
         g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
         gtk_box_pack_start (GTK_BOX (box), check, FALSE, FALSE, 0);
