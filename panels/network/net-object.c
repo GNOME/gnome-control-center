@@ -26,9 +26,7 @@
 
 #include "net-object.h"
 
-#define NET_OBJECT_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_OBJECT, NetObjectPrivate))
-
-struct _NetObjectPrivate
+typedef struct
 {
         gchar                           *id;
         gchar                           *title;
@@ -36,7 +34,7 @@ struct _NetObjectPrivate
         GCancellable                    *cancellable;
         NMClient                        *client;
         CcNetworkPanel                  *panel;
-};
+} NetObjectPrivate;
 
 enum {
         PROP_0,
@@ -56,82 +54,102 @@ enum {
 };
 
 static guint signals[SIGNAL_LAST] = { 0 };
-G_DEFINE_TYPE (NetObject, net_object, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (NetObject, net_object, G_TYPE_OBJECT)
 
 void
 net_object_emit_changed (NetObject *object)
 {
+        NetObjectPrivate *priv = net_object_get_instance_private (object);
+
         g_return_if_fail (NET_IS_OBJECT (object));
-        g_debug ("NetObject: %s emit 'changed'", object->priv->id);
+        g_debug ("NetObject: %s emit 'changed'", priv->id);
         g_signal_emit (object, signals[SIGNAL_CHANGED], 0);
 }
 
 void
 net_object_emit_removed (NetObject *object)
 {
+        NetObjectPrivate *priv = net_object_get_instance_private (object);
+
         g_return_if_fail (NET_IS_OBJECT (object));
-        g_debug ("NetObject: %s emit 'removed'", object->priv->id);
+        g_debug ("NetObject: %s emit 'removed'", priv->id);
         g_signal_emit (object, signals[SIGNAL_REMOVED], 0);
 }
 
 const gchar *
 net_object_get_id (NetObject *object)
 {
+        NetObjectPrivate *priv = net_object_get_instance_private (object);
+
         g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
-        return object->priv->id;
+        return priv->id;
 }
 
 void
 net_object_set_id (NetObject *object, const gchar *id)
 {
+        NetObjectPrivate *priv = net_object_get_instance_private (object);
+
         g_return_if_fail (NET_IS_OBJECT (object));
-        g_clear_pointer (&object->priv->id, g_free);
-        object->priv->id = g_strdup (id);
+        g_clear_pointer (&priv->id, g_free);
+        priv->id = g_strdup (id);
         g_object_notify (G_OBJECT (object), "id");
 }
 
 gboolean
 net_object_get_removable (NetObject *object)
 {
+        NetObjectPrivate *priv = net_object_get_instance_private (object);
+
         g_return_val_if_fail (NET_IS_OBJECT (object), FALSE);
-        return object->priv->removable;
+        return priv->removable;
 }
 
 const gchar *
 net_object_get_title (NetObject *object)
 {
+        NetObjectPrivate *priv = net_object_get_instance_private (object);
+
         g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
-        return object->priv->title;
+        return priv->title;
 }
 
 void
 net_object_set_title (NetObject *object, const gchar *title)
 {
+        NetObjectPrivate *priv = net_object_get_instance_private (object);
+
         g_return_if_fail (NET_IS_OBJECT (object));
-        g_clear_pointer (&object->priv->title, g_free);
-        object->priv->title = g_strdup (title);
+        g_clear_pointer (&priv->title, g_free);
+        priv->title = g_strdup (title);
         g_object_notify (G_OBJECT (object), "title");
 }
 
 NMClient *
 net_object_get_client (NetObject *object)
 {
+        NetObjectPrivate *priv = net_object_get_instance_private (object);
+
         g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
-        return object->priv->client;
+        return priv->client;
 }
 
 GCancellable *
 net_object_get_cancellable (NetObject *object)
 {
+        NetObjectPrivate *priv = net_object_get_instance_private (object);
+
         g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
-        return object->priv->cancellable;
+        return priv->cancellable;
 }
 
 CcNetworkPanel *
 net_object_get_panel (NetObject *object)
 {
+        NetObjectPrivate *priv = net_object_get_instance_private (object);
+
         g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
-        return object->priv->panel;
+        return priv->panel;
 }
 
 GtkWidget *
@@ -141,15 +159,17 @@ net_object_add_to_stack (NetObject    *object,
 {
         GtkWidget *widget;
         NetObjectClass *klass = NET_OBJECT_GET_CLASS (object);
+        NetObjectPrivate *priv = net_object_get_instance_private (object);
+
         if (klass->add_to_stack != NULL) {
                 widget = klass->add_to_stack (object, stack, heading_size_group);
                 g_object_set_data_full (G_OBJECT (widget),
                                         "NetObject::id",
-                                        g_strdup (object->priv->id),
+                                        g_strdup (priv->id),
                                         g_free);
                 return widget;
         }
-        g_debug ("no klass->add_to_stack for %s", object->priv->id);
+        g_debug ("no klass->add_to_stack for %s", priv->id);
         return NULL;
 }
 
@@ -187,7 +207,7 @@ net_object_get_property (GObject *object_,
                          GParamSpec *pspec)
 {
         NetObject *object = NET_OBJECT (object_);
-        NetObjectPrivate *priv = object->priv;
+        NetObjectPrivate *priv = net_object_get_instance_private (object);
 
         switch (prop_id) {
         case PROP_ID:
@@ -224,7 +244,7 @@ net_object_set_property (GObject *object_,
                          GParamSpec *pspec)
 {
         NetObject *object = NET_OBJECT (object_);
-        NetObjectPrivate *priv = object->priv;
+        NetObjectPrivate *priv = net_object_get_instance_private (object);
 
         switch (prop_id) {
         case PROP_ID:
@@ -263,7 +283,7 @@ static void
 net_object_finalize (GObject *object)
 {
         NetObject *nm_object = NET_OBJECT (object);
-        NetObjectPrivate *priv = nm_object->priv;
+        NetObjectPrivate *priv = net_object_get_instance_private (nm_object);
 
         g_free (priv->id);
         g_free (priv->title);
@@ -326,13 +346,10 @@ net_object_class_init (NetObjectClass *klass)
                               G_STRUCT_OFFSET (NetObjectClass, changed),
                               NULL, NULL, g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE, 0);
-
-        g_type_class_add_private (klass, sizeof (NetObjectPrivate));
 }
 
 static void
 net_object_init (NetObject *object)
 {
-        object->priv = NET_OBJECT_GET_PRIVATE (object);
 }
 
