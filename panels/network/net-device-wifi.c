@@ -52,7 +52,7 @@ static void show_wifi_list (NetDeviceWifi *device_wifi);
 static void populate_ap_list (NetDeviceWifi *device_wifi);
 static void show_hotspot_ui (NetDeviceWifi *device_wifi);
 
-struct _NetDeviceWifiPrivate
+typedef struct
 {
         GtkBuilder              *builder;
         GtkWidget               *details_dialog;
@@ -63,6 +63,12 @@ struct _NetDeviceWifiPrivate
         gchar                   *selected_ap_id;
         guint                    scan_id;
         GCancellable            *cancellable;
+} NetDeviceWifiPrivate;
+
+struct _NetDeviceWifi
+{
+        NetDevice             parent;
+        NetDeviceWifiPrivate *priv;
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (NetDeviceWifi, net_device_wifi, NET_TYPE_DEVICE)
