@@ -122,12 +122,13 @@ compare_mac_device_with_mac_connection (NMDevice *device,
 static NMConnection *
 net_device_real_get_find_connection (NetDevice *device)
 {
+        NetDevicePrivate *priv = net_device_get_instance_private (device);
         GSList *list, *iterator;
         NMConnection *connection = NULL;
         NMActiveConnection *ac;
 
         /* is the device available in a active connection? */
-        ac = nm_device_get_active_connection (device->priv->nm_device);
+        ac = nm_device_get_active_connection (priv->nm_device);
         if (ac)
                 return (NMConnection*) nm_active_connection_get_connection (ac);
 
@@ -143,7 +144,7 @@ net_device_real_get_find_connection (NetDevice *device)
                 /* is there connection with the MAC address of the device? */
                 for (iterator = list; iterator; iterator = iterator->next) {
                         connection = iterator->data;
-                        if (compare_mac_device_with_mac_connection (device->priv->nm_device,
+                        if (compare_mac_device_with_mac_connection (priv->nm_device,
                                                                     connection)) {
                                 goto out;
                         }
@@ -177,8 +178,12 @@ state_changed_cb (NMDevice *device,
 NMDevice *
 net_device_get_nm_device (NetDevice *device)
 {
+        NetDevicePrivate *priv;
+
         g_return_val_if_fail (NET_IS_DEVICE (device), NULL);
-        return device->priv->nm_device;
+
+        priv = net_device_get_instance_private (device);
+        return priv->nm_device;
 }
 
 static void
@@ -211,7 +216,7 @@ net_device_get_property (GObject *device_,
                          GParamSpec *pspec)
 {
         NetDevice *net_device = NET_DEVICE (device_);
-        NetDevicePrivate *priv = net_device->priv;
+        NetDevicePrivate *priv = net_device_get_instance_private (net_device);
 
         switch (prop_id) {
         case PROP_DEVICE:
@@ -233,7 +238,7 @@ net_device_set_property (GObject *device_,
                          GParamSpec *pspec)
 {
         NetDevice *net_device = NET_DEVICE (device_);
-        NetDevicePrivate *priv = net_device->priv;
+        NetDevicePrivate *priv = net_device_get_instance_private (net_device);
 
         switch (prop_id) {
         case PROP_DEVICE:
@@ -260,7 +265,7 @@ static void
 net_device_finalize (GObject *object)
 {
         NetDevice *device = NET_DEVICE (object);
-        NetDevicePrivate *priv = device->priv;
+        NetDevicePrivate *priv = net_device_get_instance_private (device);
 
         if (priv->changed_id != 0) {
                 g_signal_handler_disconnect (priv->nm_device,
@@ -293,7 +298,6 @@ net_device_class_init (NetDeviceClass *klass)
 static void
 net_device_init (NetDevice *device)
 {
-        device->priv = net_device_get_instance_private (device);
 }
 
 NetDevice *
