@@ -30,8 +30,6 @@
 
 #include "net-device.h"
 
-#define NET_DEVICE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_DEVICE, NetDevicePrivate))
-
 struct _NetDevicePrivate
 {
         NMDevice                        *nm_device;
@@ -44,7 +42,7 @@ enum {
         PROP_LAST
 };
 
-G_DEFINE_TYPE (NetDevice, net_device, NET_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (NetDevice, net_device, NET_TYPE_OBJECT)
 
 /* return value must be freed by caller with g_free() */
 static gchar *
@@ -290,14 +288,12 @@ net_device_class_init (NetDeviceClass *klass)
                                      NM_TYPE_DEVICE,
                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_DEVICE, pspec);
-
-        g_type_class_add_private (klass, sizeof (NetDevicePrivate));
 }
 
 static void
 net_device_init (NetDevice *device)
 {
-        device->priv = NET_DEVICE_GET_PRIVATE (device);
+        device->priv = net_device_get_instance_private (device);
 }
 
 NetDevice *
