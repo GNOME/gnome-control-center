@@ -31,8 +31,6 @@
 
 #include "connection-editor/net-connection-editor.h"
 
-#define NET_VPN_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_VPN, NetVpnPrivate))
-
 struct _NetVpnPrivate
 {
         GtkBuilder              *builder;
@@ -49,7 +47,7 @@ enum {
         PROP_LAST
 };
 
-G_DEFINE_TYPE (NetVpn, net_vpn, NET_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (NetVpn, net_vpn, NET_TYPE_OBJECT)
 
 static void nm_device_refresh_vpn_ui (NetVpn *vpn);
 
@@ -412,8 +410,6 @@ net_vpn_class_init (NetVpnClass *klass)
                                      NM_TYPE_CONNECTION,
                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_CONNECTION, pspec);
-
-        g_type_class_add_private (klass, sizeof (NetVpnPrivate));
 }
 
 static void
@@ -422,7 +418,7 @@ net_vpn_init (NetVpn *vpn)
         GError *error = NULL;
         GtkWidget *widget;
 
-        vpn->priv = NET_VPN_GET_PRIVATE (vpn);
+        vpn->priv = net_vpn_get_instance_private (vpn);
 
         vpn->priv->builder = gtk_builder_new ();
         gtk_builder_add_from_resource (vpn->priv->builder,
