@@ -39,8 +39,6 @@
 
 #define PERIODIC_WIFI_SCAN_TIMEOUT 15
 
-#define NET_DEVICE_WIFI_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_DEVICE_WIFI, NetDeviceWifiPrivate))
-
 typedef enum {
   NM_AP_SEC_UNKNOWN,
   NM_AP_SEC_NONE,
@@ -67,7 +65,7 @@ struct _NetDeviceWifiPrivate
         GCancellable            *cancellable;
 };
 
-G_DEFINE_TYPE (NetDeviceWifi, net_device_wifi, NET_TYPE_DEVICE)
+G_DEFINE_TYPE_WITH_PRIVATE (NetDeviceWifi, net_device_wifi, NET_TYPE_DEVICE)
 
 enum {
         COLUMN_CONNECTION_ID,
@@ -1667,8 +1665,6 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         parent_class->add_to_stack = device_wifi_proxy_add_to_stack;
         parent_class->refresh = device_wifi_refresh;
         parent_class->edit = device_wifi_edit;
-
-        g_type_class_add_private (klass, sizeof (NetDeviceWifiPrivate));
 }
 
 static void
@@ -2269,7 +2265,7 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
         GtkSizeGroup *rows;
         GtkSizeGroup *icons;
 
-        device_wifi->priv = NET_DEVICE_WIFI_GET_PRIVATE (device_wifi);
+        device_wifi->priv = net_device_wifi_get_instance_private (device_wifi);
 
         device_wifi->priv->builder = gtk_builder_new ();
         gtk_builder_add_from_resource (device_wifi->priv->builder,
