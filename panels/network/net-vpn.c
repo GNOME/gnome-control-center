@@ -31,7 +31,7 @@
 
 #include "connection-editor/net-connection-editor.h"
 
-struct _NetVpnPrivate
+typedef struct
 {
         GtkBuilder              *builder;
         NMConnection            *connection;
@@ -39,6 +39,12 @@ struct _NetVpnPrivate
         gchar                   *service_type;
         gboolean                 valid;
         gboolean                 updating_device;
+} NetVpnPrivate;
+
+struct _NetVpn
+{
+         NetObject               parent;
+         NetVpnPrivate          *priv;
 };
 
 enum {
