@@ -31,15 +31,13 @@
 
 #include "net-device-simple.h"
 
-#define NET_DEVICE_SIMPLE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_DEVICE_SIMPLE, NetDeviceSimplePrivate))
-
 struct _NetDeviceSimplePrivate
 {
         GtkBuilder *builder;
         gboolean    updating_device;
 };
 
-G_DEFINE_TYPE (NetDeviceSimple, net_device_simple, NET_TYPE_DEVICE)
+G_DEFINE_TYPE_WITH_PRIVATE (NetDeviceSimple, net_device_simple, NET_TYPE_DEVICE)
 
 void
 net_device_simple_set_show_separator (NetDeviceSimple *device_simple,
@@ -211,8 +209,6 @@ net_device_simple_class_init (NetDeviceSimpleClass *klass)
         parent_class->add_to_stack = device_simple_proxy_add_to_stack;
         parent_class->refresh = device_simple_refresh;
         simple_class->get_speed = device_simple_get_speed;
-
-        g_type_class_add_private (klass, sizeof (NetDeviceSimplePrivate));
 }
 
 static void
@@ -221,7 +217,7 @@ net_device_simple_init (NetDeviceSimple *device_simple)
         GError *error = NULL;
         GtkWidget *widget;
 
-        device_simple->priv = NET_DEVICE_SIMPLE_GET_PRIVATE (device_simple);
+        device_simple->priv = net_device_simple_get_instance_private (device_simple);
 
         device_simple->priv->builder = gtk_builder_new ();
         gtk_builder_add_from_resource (device_simple->priv->builder,
