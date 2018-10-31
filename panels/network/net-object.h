@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __NET_OBJECT_H
-#define __NET_OBJECT_H
+#pragma once
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -31,23 +30,8 @@
 G_BEGIN_DECLS
 
 #define NET_TYPE_OBJECT          (net_object_get_type ())
-#define NET_OBJECT(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), NET_TYPE_OBJECT, NetObject))
-#define NET_OBJECT_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), NET_TYPE_OBJECT, NetObjectClass))
-#define NET_IS_OBJECT(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), NET_TYPE_OBJECT))
-#define NET_IS_OBJECT_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), NET_TYPE_OBJECT))
-#define NET_OBJECT_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), NET_TYPE_OBJECT, NetObjectClass))
 
-typedef struct _NetObjectPrivate         NetObjectPrivate;
-typedef struct _NetObject                NetObject;
-typedef struct _NetObjectClass           NetObjectClass;
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (NetObject, g_object_unref)
-
-struct _NetObject
-{
-         GObject                 parent;
-         NetObjectPrivate       *priv;
-};
+G_DECLARE_DERIVABLE_TYPE (NetObject, net_object, NET, OBJECT, GObject)
 
 struct _NetObjectClass
 {
@@ -66,7 +50,6 @@ struct _NetObjectClass
         void                     (* removed)            (NetObject      *object);
 };
 
-GType            net_object_get_type                    (void);
 const gchar     *net_object_get_id                      (NetObject      *object);
 void             net_object_set_id                      (NetObject      *object,
                                                          const gchar    *id);
@@ -89,6 +72,4 @@ void             net_object_set_removable               (NetObject      *object,
                                                          gboolean        removable);
 
 G_END_DECLS
-
-#endif /* __NET_OBJECT_H */
 
