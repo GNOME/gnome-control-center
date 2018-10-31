@@ -163,7 +163,7 @@ mobilebb_enabled_toggled (NMClient       *client,
                           GParamSpec     *pspec,
                           NetDeviceMobile *device_mobile)
 {
-        gboolean enabled;
+        gboolean enabled = FALSE;
         GtkSwitch *sw;
         NMDevice *device;
 
