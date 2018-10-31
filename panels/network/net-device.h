@@ -30,20 +30,8 @@
 G_BEGIN_DECLS
 
 #define NET_TYPE_DEVICE          (net_device_get_type ())
-#define NET_DEVICE(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), NET_TYPE_DEVICE, NetDevice))
-#define NET_DEVICE_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), NET_TYPE_DEVICE, NetDeviceClass))
-#define NET_IS_DEVICE(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), NET_TYPE_DEVICE))
-#define NET_IS_DEVICE_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), NET_TYPE_DEVICE))
-#define NET_DEVICE_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), NET_TYPE_DEVICE, NetDeviceClass))
 
-typedef struct _NetDevicePrivate         NetDevicePrivate;
-typedef struct _NetDevice                NetDevice;
-typedef struct _NetDeviceClass           NetDeviceClass;
-
-struct _NetDevice
-{
-         NetObject               parent;
-};
+G_DECLARE_DERIVABLE_TYPE (NetDevice, net_device, NET, DEVICE, NetObject)
 
 struct _NetDeviceClass
 {
@@ -52,7 +40,6 @@ struct _NetDeviceClass
         NMConnection * (*get_find_connection) (NetDevice *device);
 };
 
-GType            net_device_get_type                    (void);
 NetDevice       *net_device_new                         (void);
 NMDevice        *net_device_get_nm_device               (NetDevice      *device);
 NMConnection    *net_device_get_find_connection         (NetDevice      *device);

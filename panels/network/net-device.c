@@ -30,11 +30,11 @@
 
 #include "net-device.h"
 
-struct _NetDevicePrivate
+typedef struct
 {
         NMDevice                        *nm_device;
         guint                            changed_id;
-};
+} NetDevicePrivate;
 
 enum {
         PROP_0,
