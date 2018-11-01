@@ -28,29 +28,9 @@
 
 G_BEGIN_DECLS
 
-#define NET_TYPE_PROXY          (net_proxy_get_type ())
-#define NET_PROXY(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), NET_TYPE_PROXY, NetProxy))
-#define NET_PROXY_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), NET_TYPE_PROXY, NetProxyClass))
-#define NET_IS_PROXY(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), NET_TYPE_PROXY))
-#define NET_IS_PROXY_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), NET_TYPE_PROXY))
-#define NET_PROXY_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), NET_TYPE_PROXY, NetProxyClass))
+#define NET_TYPE_PROXY (net_proxy_get_type ())
+G_DECLARE_FINAL_TYPE (NetProxy, net_proxy, NET, PROXY, NetObject)
 
-typedef struct _NetProxyPrivate         NetProxyPrivate;
-typedef struct _NetProxy                NetProxy;
-typedef struct _NetProxyClass           NetProxyClass;
-
-struct _NetProxy
-{
-        NetObject                parent;
-        NetProxyPrivate         *priv;
-};
-
-struct _NetProxyClass
-{
-        NetObjectClass           parent_class;
-};
-
-GType            net_proxy_get_type                     (void);
 NetProxy        *net_proxy_new                          (void);
 
 G_END_DECLS

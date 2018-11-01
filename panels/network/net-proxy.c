@@ -35,11 +35,17 @@ typedef enum
         N_MODES
 } ProxyMode;
 
-struct _NetProxyPrivate
+typedef struct
 {
         GSettings        *settings;
         GtkBuilder       *builder;
         GtkToggleButton  *mode_radios[3];
+} NetProxyPrivate;
+
+struct _NetProxy
+{
+        NetObject                parent;
+        NetProxyPrivate         *priv;
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (NetProxy, net_proxy, NET_TYPE_OBJECT)
