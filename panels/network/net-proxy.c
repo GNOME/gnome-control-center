@@ -35,20 +35,16 @@ typedef enum
         N_MODES
 } ProxyMode;
 
-typedef struct
+struct _NetProxy
 {
+        NetObject         parent;
+
         GSettings        *settings;
         GtkBuilder       *builder;
         GtkToggleButton  *mode_radios[3];
-} NetProxyPrivate;
-
-struct _NetProxy
-{
-        NetObject                parent;
-        NetProxyPrivate         *priv;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (NetProxy, net_proxy, NET_TYPE_OBJECT)
+G_DEFINE_TYPE (NetProxy, net_proxy, NET_TYPE_OBJECT)
 
 static const gchar *
 panel_get_string_for_value (ProxyMode mode)
@@ -72,7 +68,7 @@ panel_update_status_label (NetProxy  *self,
         GtkLabel *label;
 
         /* update the label */
-        label = GTK_LABEL (gtk_builder_get_object (self->priv->builder, "status_label"));
+        label = GTK_LABEL (gtk_builder_get_object (self->builder, "status_label"));
         gtk_label_set_label (label, panel_get_string_for_value (mode));
 }
 
@@ -88,12 +84,12 @@ check_wpad_warning (NetProxy *proxy)
         string = g_string_new ("");
 
         /* check we're using 'Automatic' */
-        mode = g_settings_get_enum (proxy->priv->settings, "mode");
+        mode = g_settings_get_enum (proxy->settings, "mode");
         if (mode != MODE_AUTOMATIC)
                 goto out;
 
         /* see if the PAC is blank */
-        autoconfig_url = g_settings_get_string (proxy->priv->settings,
+        autoconfig_url = g_settings_get_string (proxy->settings,
                                                 "autoconfig-url");
         ret = autoconfig_url == NULL ||
               autoconfig_url[0] == '\0';
@@ -114,7 +110,7 @@ check_wpad_warning (NetProxy *proxy)
         g_string_append (string, _("This is not recommended for untrusted public networks."));
         g_string_append (string, "</small>");
 out:
-        widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
                                                      "label_proxy_warning"));
         gtk_label_set_markup (GTK_LABEL (widget), string->str);
         gtk_widget_set_visible (widget, (string->len > 0));
@@ -136,7 +132,7 @@ panel_proxy_mode_setup_widgets (NetProxy *proxy, ProxyMode value)
 {
         GtkStack *stack;
 
-        stack = GTK_STACK (gtk_builder_get_object (proxy->priv->builder, "stack"));
+        stack = GTK_STACK (gtk_builder_get_object (proxy->builder, "stack"));
 
         /* hide or show the PAC text box */
         switch (value) {
@@ -167,17 +163,17 @@ panel_proxy_mode_radio_changed_cb (GtkToggleButton *radio,
                 return;
 
         /* get selected radio */
-        if (radio == proxy->priv->mode_radios[MODE_DISABLED])
+        if (radio == proxy->mode_radios[MODE_DISABLED])
                 value = MODE_DISABLED;
-        else if (radio == proxy->priv->mode_radios[MODE_MANUAL])
+        else if (radio == proxy->mode_radios[MODE_MANUAL])
                 value = MODE_MANUAL;
-        else if (radio == proxy->priv->mode_radios[MODE_AUTOMATIC])
+        else if (radio == proxy->mode_radios[MODE_AUTOMATIC])
                 value = MODE_AUTOMATIC;
         else
                 g_assert_not_reached ();
 
         /* set */
-        g_settings_set_enum (proxy->priv->settings, "mode", value);
+        g_settings_set_enum (proxy->settings, "mode", value);
 
         /* hide or show the correct widgets */
         panel_proxy_mode_setup_widgets (proxy, value);
@@ -194,7 +190,7 @@ show_dialog_cb (GtkWidget *button,
         GtkWindow *dialog;
 
         toplevel = gtk_widget_get_toplevel (button);
-        dialog = GTK_WINDOW (gtk_builder_get_object (self->priv->builder, "dialog"));
+        dialog = GTK_WINDOW (gtk_builder_get_object (self->builder, "dialog"));
 
         gtk_window_set_transient_for (dialog, GTK_WINDOW (toplevel));
         gtk_window_present (dialog);
@@ -208,7 +204,7 @@ net_proxy_add_to_stack (NetObject    *object,
         GtkWidget *widget;
         NetProxy *proxy = NET_PROXY (object);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
                                                      "main_widget"));
         gtk_size_group_add_widget (heading_size_group, widget);
         gtk_stack_add_named (stack, widget, net_object_get_id (object));
@@ -219,14 +215,13 @@ static void
 net_proxy_finalize (GObject *object)
 {
         NetProxy *proxy = NET_PROXY (object);
-        NetProxyPrivate *priv = proxy->priv;
         GtkWidget *widget;
 
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog"));
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder, "dialog"));
         gtk_widget_destroy (widget);
 
-        g_clear_object (&priv->settings);
-        g_clear_object (&priv->builder);
+        g_clear_object (&proxy->settings);
+        g_clear_object (&proxy->builder);
 
         G_OBJECT_CLASS (net_proxy_parent_class)->finalize (object);
 }
@@ -299,10 +294,10 @@ net_proxy_init (NetProxy *proxy)
         GError *error = NULL;
         guint i;
 
-        proxy->priv = net_proxy_get_instance_private (proxy);
+        proxy = net_proxy_get_instance_private (proxy);
 
-        proxy->priv->builder = gtk_builder_new ();
-        gtk_builder_add_from_resource (proxy->priv->builder,
+        proxy->builder = gtk_builder_new ();
+        gtk_builder_add_from_resource (proxy->builder,
                                        "/org/gnome/control-center/network/network-proxy.ui",
                                        &error);
         if (error != NULL) {
@@ -311,30 +306,30 @@ net_proxy_init (NetProxy *proxy)
                 return;
         }
 
-        proxy->priv->settings = g_settings_new ("org.gnome.system.proxy");
-        g_signal_connect (proxy->priv->settings,
+        proxy->settings = g_settings_new ("org.gnome.system.proxy");
+        g_signal_connect (proxy->settings,
                           "changed",
                           G_CALLBACK (settings_changed_cb),
                           proxy);
 
         /* actions */
-        value = g_settings_get_enum (proxy->priv->settings, "mode");
+        value = g_settings_get_enum (proxy->settings, "mode");
 
         /* bind the proxy values */
-        widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
                                                      "entry_proxy_url"));
-        g_settings_bind (proxy->priv->settings, "autoconfig-url",
+        g_settings_bind (proxy->settings, "autoconfig-url",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
 
         /* bind the HTTP proxy values */
-        settings_tmp = g_settings_get_child (proxy->priv->settings, "http");
-        widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
+        settings_tmp = g_settings_get_child (proxy->settings, "http");
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
                                                      "entry_proxy_http"));
         g_settings_bind (settings_tmp, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
-        adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->priv->builder,
+        adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->builder,
                                                              "adjustment_proxy_port_http"));
         g_settings_bind (settings_tmp, "port",
                          adjustment, "value",
@@ -342,13 +337,13 @@ net_proxy_init (NetProxy *proxy)
         g_object_unref (settings_tmp);
 
         /* bind the HTTPS proxy values */
-        settings_tmp = g_settings_get_child (proxy->priv->settings, "https");
-        widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
+        settings_tmp = g_settings_get_child (proxy->settings, "https");
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
                                                      "entry_proxy_https"));
         g_settings_bind (settings_tmp, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
-        adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->priv->builder,
+        adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->builder,
                                                              "adjustment_proxy_port_https"));
         g_settings_bind (settings_tmp, "port",
                          adjustment, "value",
@@ -356,13 +351,13 @@ net_proxy_init (NetProxy *proxy)
         g_object_unref (settings_tmp);
 
         /* bind the FTP proxy values */
-        settings_tmp = g_settings_get_child (proxy->priv->settings, "ftp");
-        widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
+        settings_tmp = g_settings_get_child (proxy->settings, "ftp");
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
                                                      "entry_proxy_ftp"));
         g_settings_bind (settings_tmp, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
-        adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->priv->builder,
+        adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->builder,
                                                              "adjustment_proxy_port_ftp"));
         g_settings_bind (settings_tmp, "port",
                          adjustment, "value",
@@ -370,13 +365,13 @@ net_proxy_init (NetProxy *proxy)
         g_object_unref (settings_tmp);
 
         /* bind the SOCKS proxy values */
-        settings_tmp = g_settings_get_child (proxy->priv->settings, "socks");
-        widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
+        settings_tmp = g_settings_get_child (proxy->settings, "socks");
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
                                                      "entry_proxy_socks"));
         g_settings_bind (settings_tmp, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
-        adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->priv->builder,
+        adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->builder,
                                                              "adjustment_proxy_port_socks"));
         g_settings_bind (settings_tmp, "port",
                          adjustment, "value",
@@ -384,35 +379,35 @@ net_proxy_init (NetProxy *proxy)
         g_object_unref (settings_tmp);
 
         /* bind the proxy ignore hosts */
-        widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
                                                      "entry_proxy_ignore"));
-        g_settings_bind_with_mapping (proxy->priv->settings, "ignore-hosts",
+        g_settings_bind_with_mapping (proxy->settings, "ignore-hosts",
                                       widget, "text",
                                       G_SETTINGS_BIND_DEFAULT, get_ignore_hosts, set_ignore_hosts,
                                       NULL, NULL);
 
         /* radio buttons */
-        proxy->priv->mode_radios[MODE_DISABLED] =
-                GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->priv->builder, "radio_none"));
-        proxy->priv->mode_radios[MODE_MANUAL] =
-                GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->priv->builder, "radio_manual"));
-        proxy->priv->mode_radios[MODE_AUTOMATIC] =
-                GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->priv->builder, "radio_automatic"));
+        proxy->mode_radios[MODE_DISABLED] =
+                GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->builder, "radio_none"));
+        proxy->mode_radios[MODE_MANUAL] =
+                GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->builder, "radio_manual"));
+        proxy->mode_radios[MODE_AUTOMATIC] =
+                GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->builder, "radio_automatic"));
 
         /* setup the radio before connecting to the :toggled signal */
-        gtk_toggle_button_set_active (proxy->priv->mode_radios[value], TRUE);
+        gtk_toggle_button_set_active (proxy->mode_radios[value], TRUE);
         panel_proxy_mode_setup_widgets (proxy, value);
         panel_update_status_label (proxy, value);
 
         for (i = MODE_DISABLED; i < N_MODES; i++) {
-                g_signal_connect (proxy->priv->mode_radios[i],
+                g_signal_connect (proxy->mode_radios[i],
                                   "toggled",
                                   G_CALLBACK (panel_proxy_mode_radio_changed_cb),
                                   proxy);
         }
 
         /* show dialog button */
-        widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder, "dialog_button"));
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder, "dialog_button"));
 
         g_signal_connect (widget,
                           "clicked",
@@ -420,7 +415,7 @@ net_proxy_init (NetProxy *proxy)
                           proxy);
 
         /* prevent the dialog from being destroyed */
-        widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder, "dialog"));
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder, "dialog"));
 
         g_signal_connect (widget,
                           "delete-event",
