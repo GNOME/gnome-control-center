@@ -31,11 +31,11 @@
 
 #include "net-device-simple.h"
 
-struct _NetDeviceSimplePrivate
+typedef struct
 {
         GtkBuilder *builder;
         gboolean    updating_device;
-};
+} NetDeviceSimplePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (NetDeviceSimple, net_device_simple, NET_TYPE_DEVICE)
 
