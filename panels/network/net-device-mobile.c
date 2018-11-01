@@ -35,7 +35,7 @@
 
 static void nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile);
 
-struct _NetDeviceMobilePrivate
+typedef struct
 {
         GtkBuilder *builder;
         gboolean    updating_device;
@@ -49,6 +49,12 @@ struct _NetDeviceMobilePrivate
         guint       operator_name_updated;
 
         NMAMobileProvidersDatabase *mpd;
+} NetDeviceMobilePrivate;
+
+struct _NetDeviceMobile
+{
+         NetDevice                       parent;
+         NetDeviceMobilePrivate         *priv;
 };
 
 enum {

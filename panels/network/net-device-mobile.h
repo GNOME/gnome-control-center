@@ -29,29 +29,8 @@
 
 G_BEGIN_DECLS
 
-#define NET_TYPE_DEVICE_MOBILE          (net_device_mobile_get_type ())
-#define NET_DEVICE_MOBILE(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), NET_TYPE_DEVICE_MOBILE, NetDeviceMobile))
-#define NET_DEVICE_MOBILE_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), NET_TYPE_DEVICE_MOBILE, NetDeviceMobileClass))
-#define NET_IS_DEVICE_MOBILE(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), NET_TYPE_DEVICE_MOBILE))
-#define NET_IS_DEVICE_MOBILE_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), NET_TYPE_DEVICE_MOBILE))
-#define NET_DEVICE_MOBILE_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), NET_TYPE_DEVICE_MOBILE, NetDeviceMobileClass))
-
-typedef struct _NetDeviceMobilePrivate         NetDeviceMobilePrivate;
-typedef struct _NetDeviceMobile                NetDeviceMobile;
-typedef struct _NetDeviceMobileClass           NetDeviceMobileClass;
-
-struct _NetDeviceMobile
-{
-         NetDevice                       parent;
-         NetDeviceMobilePrivate         *priv;
-};
-
-struct _NetDeviceMobileClass
-{
-        NetDeviceClass                   parent_class;
-};
-
-GType            net_device_mobile_get_type             (void);
+#define NET_TYPE_DEVICE_MOBILE (net_device_mobile_get_type ())
+G_DECLARE_FINAL_TYPE (NetDeviceMobile, net_device_mobile, NET, DEVICE_MOBILE, NetDevice)
 
 G_END_DECLS
 
