@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __NET_DEVICE_MOBILE_H
-#define __NET_DEVICE_MOBILE_H
+#pragma once
 
 #include <glib-object.h>
 #include <NetworkManager.h>
@@ -33,6 +32,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (NetDeviceMobile, net_device_mobile, NET, DEVICE_MOBILE, NetDevice)
 
 G_END_DECLS
-
-#endif /* __NET_DEVICE_MOBILE_H */
-

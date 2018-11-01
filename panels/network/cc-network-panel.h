@@ -17,9 +17,7 @@
  *
  */
 
-
-#ifndef _CC_NETWORK_PANEL_H
-#define _CC_NETWORK_PANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -32,5 +30,3 @@ G_DECLARE_FINAL_TYPE (CcNetworkPanel, cc_network_panel, CC, NETWORK_PANEL, CcPan
 GPtrArray *cc_network_panel_get_devices (CcNetworkPanel *panel);
 
 G_END_DECLS
-
-#endif /* _CC_NETWORK_PANEL_H */

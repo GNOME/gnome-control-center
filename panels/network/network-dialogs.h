@@ -17,8 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef _NETWORK_DIALOGS_H
-#define _NETWORK_DIALOGS_H
+#pragma once
 
 #include <NetworkManager.h>
 #include <gtk/gtk.h>
@@ -37,5 +36,3 @@ void cc_network_panel_connect_to_8021x_network (GtkWidget        *toplevel,
 void cc_network_panel_connect_to_3g_network (GtkWidget        *toplevel,
                                              NMClient         *client,
                                              NMDevice         *device);
-
-#endif /* _NETWORK_DIALOGS_H */

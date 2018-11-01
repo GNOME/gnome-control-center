@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef PANEL_COMMON_H
-#define PANEL_COMMON_H
+#pragma once
 
 #include <glib-object.h>
 #include <NetworkManager.h>
@@ -51,5 +50,3 @@ gchar           *panel_get_ip4_dns_as_string                   (NMIPConfig *conf
 gchar           *panel_get_ip6_address_as_string               (NMIPConfig *config);
 
 G_END_DECLS
-
-#endif /* PANEL_COMMON_H */

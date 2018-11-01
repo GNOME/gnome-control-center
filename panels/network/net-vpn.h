@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __NET_VPN_H
-#define __NET_VPN_H
+#pragma once
 
 #include <glib-object.h>
 #include <NetworkManager.h>
@@ -36,6 +35,3 @@ void             net_vpn_set_show_separator     (NetVpn   *self,
                                                  gboolean  show_separator);
 
 G_END_DECLS
-
-#endif /* __NET_VPN_H */
-
