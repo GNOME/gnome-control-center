@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __NET_PROXY_H
-#define __NET_PROXY_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -34,6 +33,3 @@ G_DECLARE_FINAL_TYPE (NetProxy, net_proxy, NET, PROXY, NetObject)
 NetProxy        *net_proxy_new                          (void);
 
 G_END_DECLS
-
-#endif /* __NET_PROXY_H */
-

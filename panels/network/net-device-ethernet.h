@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __NET_DEVICE_ETHERNET_H
-#define __NET_DEVICE_ETHERNET_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -32,6 +31,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, NET, DEVICE_ETHERNET, NetDeviceSimple)
 
 G_END_DECLS
-
-#endif /* __NET_DEVICE_ETHERNET_H */
-

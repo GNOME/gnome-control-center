@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __NET_DEVICE_WIFI_H
-#define __NET_DEVICE_WIFI_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -35,6 +34,4 @@ GtkWidget       *net_device_wifi_get_header_widget (NetDeviceWifi *device_wifi);
 GtkWidget       *net_device_wifi_get_title_widget  (NetDeviceWifi *device_wifi);
 
 G_END_DECLS
-
-#endif /* __NET_DEVICE_WIFI_H */
 

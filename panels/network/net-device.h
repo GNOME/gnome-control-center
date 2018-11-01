@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __NET_DEVICE_H
-#define __NET_DEVICE_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -47,6 +46,3 @@ NMConnection    *net_device_get_find_connection         (NetDevice      *device)
 GSList          *net_device_get_valid_connections       (NetDevice      *device);
 
 G_END_DECLS
-
-#endif /* __NET_DEVICE_H */
-

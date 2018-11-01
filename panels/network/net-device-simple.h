@@ -20,8 +20,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __NET_DEVICE_SIMPLE_H
-#define __NET_DEVICE_SIMPLE_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -49,6 +48,3 @@ void  net_device_simple_set_show_separator     (NetDeviceSimple *device_simple,
                                                 gboolean         show_separator);
 
 G_END_DECLS
-
-#endif /* __NET_DEVICE_SIMPLE_H */
-
