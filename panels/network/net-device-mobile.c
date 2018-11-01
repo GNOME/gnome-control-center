@@ -35,8 +35,9 @@
 
 static void nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile);
 
-typedef struct
+struct _NetDeviceMobile
 {
+        NetDevice   parent;
         GtkBuilder *builder;
         gboolean    updating_device;
 
@@ -49,12 +50,6 @@ typedef struct
         guint       operator_name_updated;
 
         NMAMobileProvidersDatabase *mpd;
-} NetDeviceMobilePrivate;
-
-struct _NetDeviceMobile
-{
-         NetDevice                       parent;
-         NetDeviceMobilePrivate         *priv;
 };
 
 enum {
@@ -69,7 +64,7 @@ enum {
         PROP_LAST
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (NetDeviceMobile, net_device_mobile, NET_TYPE_DEVICE)
+G_DEFINE_TYPE (NetDeviceMobile, net_device_mobile, NET_TYPE_DEVICE)
 
 static GtkWidget *
 device_mobile_proxy_add_to_stack (NetObject    *object,
@@ -80,14 +75,14 @@ device_mobile_proxy_add_to_stack (NetObject    *object,
         NetDeviceMobile *device_mobile = NET_DEVICE_MOBILE (object);
 
         /* add widgets to size group */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
                                                      "heading_imei"));
         gtk_size_group_add_widget (heading_size_group, widget);
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
                                                      "heading_network"));
         gtk_size_group_add_widget (heading_size_group, widget);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
                                                      "vbox7"));
         gtk_stack_add_named (stack, widget, net_object_get_id (object));
         return widget;
@@ -120,7 +115,7 @@ mobile_connection_changed_cb (GtkComboBox *combo_box, NetDeviceMobile *device_mo
         CcNetworkPanel *panel;
         GtkWidget *toplevel;
 
-        if (device_mobile->priv->updating_device)
+        if (device_mobile->updating_device)
                 goto out;
 
         ret = gtk_combo_box_get_active_iter (combo_box, &iter);
@@ -191,12 +186,12 @@ mobilebb_enabled_toggled (NMClient       *client,
                 }
         }
 
-        sw = GTK_SWITCH (gtk_builder_get_object (device_mobile->priv->builder,
+        sw = GTK_SWITCH (gtk_builder_get_object (device_mobile->builder,
                                                  "device_off_switch"));
 
-        device_mobile->priv->updating_device = TRUE;
+        device_mobile->updating_device = TRUE;
         gtk_switch_set_active (sw, enabled);
-        device_mobile->priv->updating_device = FALSE;
+        device_mobile->updating_device = FALSE;
 }
 
 static void
@@ -205,7 +200,6 @@ device_add_device_connections (NetDeviceMobile *device_mobile,
                                GtkListStore *liststore,
                                GtkComboBox *combobox)
 {
-        NetDeviceMobilePrivate *priv = device_mobile->priv;
         GSList *list, *l;
         GtkTreeIter treeiter;
         NMActiveConnection *active_connection;
@@ -228,9 +222,9 @@ device_add_device_connections (NetDeviceMobile *device_mobile,
                 if (active_connection != NULL &&
                     g_strcmp0 (nm_connection_get_uuid (connection),
                                nm_active_connection_get_uuid (active_connection)) == 0) {
-                        priv->updating_device = TRUE;
+                        device_mobile->updating_device = TRUE;
                         gtk_combo_box_set_active_iter (combobox, &treeiter);
-                        priv->updating_device = FALSE;
+                        device_mobile->updating_device = FALSE;
                 }
         }
 
@@ -250,17 +244,17 @@ device_mobile_refresh_equipment_id (NetDeviceMobile *device_mobile)
 {
         const gchar *equipment_id = NULL;
 
-        if (device_mobile->priv->mm_object != NULL) {
+        if (device_mobile->mm_object != NULL) {
                 MMModem *modem;
 
                 /* Modem interface should always be present */
-                modem = mm_object_peek_modem (device_mobile->priv->mm_object);
+                modem = mm_object_peek_modem (device_mobile->mm_object);
                 equipment_id = mm_modem_get_equipment_identifier (modem);
 
                 /* Set equipment ID */
                 if (equipment_id != NULL) {
                         g_debug ("[%s] Equipment ID set to '%s'",
-                                 mm_object_get_path (device_mobile->priv->mm_object),
+                                 mm_object_get_path (device_mobile->mm_object),
                                  equipment_id);
                 }
         } else {
@@ -269,7 +263,7 @@ device_mobile_refresh_equipment_id (NetDeviceMobile *device_mobile)
                                                   "ControlCenter::EquipmentIdentifier");
         }
 
-        panel_set_device_widget_details (device_mobile->priv->builder, "imei", equipment_id);
+        panel_set_device_widget_details (device_mobile->builder, "imei", equipment_id);
 }
 
 static gchar *
@@ -280,12 +274,12 @@ device_mobile_find_provider (NetDeviceMobile *device_mobile,
         NMAMobileProvider *provider;
         GString *name = NULL;
 
-        if (device_mobile->priv->mpd == NULL) {
+        if (device_mobile->mpd == NULL) {
                 GError *error = NULL;
 
                 /* Use defaults */
-                device_mobile->priv->mpd = nma_mobile_providers_database_new_sync (NULL, NULL, NULL, &error);
-                if (device_mobile->priv->mpd == NULL) {
+                device_mobile->mpd = nma_mobile_providers_database_new_sync (NULL, NULL, NULL, &error);
+                if (device_mobile->mpd == NULL) {
                         g_debug ("Couldn't load mobile providers database: %s",
                                  error ? error->message : "");
                         g_clear_error (&error);
@@ -294,13 +288,13 @@ device_mobile_find_provider (NetDeviceMobile *device_mobile,
         }
 
         if (mccmnc != NULL) {
-                provider = nma_mobile_providers_database_lookup_3gpp_mcc_mnc (device_mobile->priv->mpd, mccmnc);
+                provider = nma_mobile_providers_database_lookup_3gpp_mcc_mnc (device_mobile->mpd, mccmnc);
                 if (provider != NULL)
                         name = g_string_new (nma_mobile_provider_get_name (provider));
         }
 
         if (sid != 0) {
-                provider = nma_mobile_providers_database_lookup_cdma_sid (device_mobile->priv->mpd, sid);
+                provider = nma_mobile_providers_database_lookup_cdma_sid (device_mobile->mpd, sid);
                 if (provider != NULL) {
                         if (name == NULL)
                                 name = g_string_new (nma_mobile_provider_get_name (provider));
@@ -315,13 +309,13 @@ device_mobile_find_provider (NetDeviceMobile *device_mobile,
 static void
 device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
 {
-        if (device_mobile->priv->mm_object != NULL) {
+        if (device_mobile->mm_object != NULL) {
                 gchar *operator_name = NULL;
                 MMModem3gpp *modem_3gpp;
                 MMModemCdma *modem_cdma;
 
-                modem_3gpp = mm_object_peek_modem_3gpp (device_mobile->priv->mm_object);
-                modem_cdma = mm_object_peek_modem_cdma (device_mobile->priv->mm_object);
+                modem_3gpp = mm_object_peek_modem_3gpp (device_mobile->mm_object);
+                modem_cdma = mm_object_peek_modem_cdma (device_mobile->mm_object);
 
                 if (modem_3gpp != NULL) {
                         const gchar *operator_name_unsafe;
@@ -347,11 +341,11 @@ device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
                 /* Set operator name */
                 if (operator_name != NULL) {
                         g_debug ("[%s] Operator name set to '%s'",
-                                 mm_object_get_path (device_mobile->priv->mm_object),
+                                 mm_object_get_path (device_mobile->mm_object),
                                  operator_name);
                 }
 
-                panel_set_device_widget_details (device_mobile->priv->builder, "provider", operator_name);
+                panel_set_device_widget_details (device_mobile->builder, "provider", operator_name);
                 g_free (operator_name);
         } else {
                 const gchar *gsm;
@@ -367,14 +361,14 @@ device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
                         gchar *both;
 
                         both = g_strdup_printf ("%s, %s", gsm, cdma);
-                        panel_set_device_widget_details (device_mobile->priv->builder, "provider", both);
+                        panel_set_device_widget_details (device_mobile->builder, "provider", both);
                         g_free (both);
                 } else if (gsm != NULL) {
-                        panel_set_device_widget_details (device_mobile->priv->builder, "provider", gsm);
+                        panel_set_device_widget_details (device_mobile->builder, "provider", gsm);
                 } else if (cdma != NULL) {
-                        panel_set_device_widget_details (device_mobile->priv->builder, "provider", cdma);
+                        panel_set_device_widget_details (device_mobile->builder, "provider", cdma);
                 } else {
-                        panel_set_device_widget_details (device_mobile->priv->builder, "provider", NULL);
+                        panel_set_device_widget_details (device_mobile->builder, "provider", NULL);
                 }
         }
 }
@@ -385,7 +379,6 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         gboolean is_connected;
         GtkListStore *liststore;
         GtkWidget *widget;
-        NetDeviceMobilePrivate *priv = device_mobile->priv;
         NMClient *client;
         NMDeviceModemCapabilities caps;
         NMDevice *nm_device;
@@ -393,20 +386,20 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         nm_device = net_device_get_nm_device (NET_DEVICE (device_mobile));
 
         /* set device kind */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder, "label_device"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "label_device"));
         g_object_bind_property (device_mobile, "title", widget, "label", 0);
 
         /* set up the device on/off switch */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder, "device_off_switch"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "device_off_switch"));
         gtk_widget_show (widget);
         client = net_object_get_client (NET_OBJECT (device_mobile));
         mobilebb_enabled_toggled (client, NULL, device_mobile);
 
         /* set device state, with status */
-        panel_set_device_status (device_mobile->priv->builder, "label_status", nm_device, NULL);
+        panel_set_device_status (device_mobile->builder, "label_status", nm_device, NULL);
 
         /* sensitive for other connection types if the device is currently connected */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
                                                      "button_options"));
         is_connected = net_device_get_find_connection (NET_DEVICE (device_mobile)) != NULL;
         gtk_widget_set_sensitive (widget, is_connected);
@@ -420,16 +413,16 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         }
 
         /* add possible connections to device */
-        liststore = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
+        liststore = GTK_LIST_STORE (gtk_builder_get_object (device_mobile->builder,
                                                             "liststore_mobile_connections"));
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "combobox_network"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "combobox_network"));
         device_add_device_connections (device_mobile,
                                        nm_device,
                                        liststore,
                                        GTK_COMBO_BOX (widget));
 
         /* set IP entries */
-        panel_set_device_widgets (priv->builder, nm_device);
+        panel_set_device_widgets (device_mobile->builder, nm_device);
 }
 
 static void
@@ -451,7 +444,7 @@ device_off_toggled (GtkSwitch *sw,
         NMConnection *connection;
         NMClient *client;
 
-        if (device_mobile->priv->updating_device)
+        if (device_mobile->updating_device)
                 return;
 
         active = gtk_switch_get_active (sw);
@@ -629,8 +622,8 @@ device_mobile_device_got_modem_manager_gsm_cb (GObject      *source_object,
         GError *error = NULL;
         NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
 
-        device_mobile->priv->gsm_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-        if (device_mobile->priv->gsm_proxy == NULL) {
+        device_mobile->gsm_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+        if (device_mobile->gsm_proxy == NULL) {
                 g_warning ("Error creating ModemManager GSM proxy: %s\n",
                            error->message);
                 g_error_free (error);
@@ -638,13 +631,13 @@ device_mobile_device_got_modem_manager_gsm_cb (GObject      *source_object,
         }
 
         /* Setup value updates */
-        g_signal_connect (device_mobile->priv->gsm_proxy,
+        g_signal_connect (device_mobile->gsm_proxy,
                           "g-signal",
                           G_CALLBACK (device_mobile_gsm_signal_cb),
                           device_mobile);
 
         /* Load initial value */
-        g_dbus_proxy_call (device_mobile->priv->gsm_proxy,
+        g_dbus_proxy_call (device_mobile->gsm_proxy,
                            "GetRegistrationInfo",
                            NULL,
                            G_DBUS_CALL_FLAGS_NONE,
@@ -701,8 +694,8 @@ device_mobile_device_got_modem_manager_cdma_cb (GObject      *source_object,
         GError *error = NULL;
         NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
 
-        device_mobile->priv->cdma_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-        if (device_mobile->priv->cdma_proxy == NULL) {
+        device_mobile->cdma_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+        if (device_mobile->cdma_proxy == NULL) {
                 g_warning ("Error creating ModemManager CDMA proxy: %s\n",
                            error->message);
                 g_error_free (error);
@@ -710,7 +703,7 @@ device_mobile_device_got_modem_manager_cdma_cb (GObject      *source_object,
         }
 
         /* Load initial value */
-        g_dbus_proxy_call (device_mobile->priv->cdma_proxy,
+        g_dbus_proxy_call (device_mobile->cdma_proxy,
                            "GetServingSystem",
                            NULL,
                            G_DBUS_CALL_FLAGS_NONE,
@@ -797,20 +790,20 @@ net_device_mobile_setup_modem_object (NetDeviceMobile *self)
 {
         MMModem3gpp *modem_3gpp;
 
-        if (self->priv->mm_object == NULL)
+        if (self->mm_object == NULL)
                 return;
 
         /* Load equipment ID initially */
         device_mobile_refresh_equipment_id (self);
 
         /* Follow changes in operator name and load initial values */
-        modem_3gpp = mm_object_peek_modem_3gpp (self->priv->mm_object);
+        modem_3gpp = mm_object_peek_modem_3gpp (self->mm_object);
         if (modem_3gpp != NULL) {
-                g_assert (self->priv->operator_name_updated == 0);
-                self->priv->operator_name_updated = g_signal_connect (modem_3gpp,
-                                                                      "notify::operator-name",
-                                                                      G_CALLBACK (operator_name_updated),
-                                                                      self);
+                g_assert (self->operator_name_updated == 0);
+                self->operator_name_updated = g_signal_connect (modem_3gpp,
+                                                                "notify::operator-name",
+                                                                G_CALLBACK (operator_name_updated),
+                                                                self);
                 device_mobile_refresh_operator_name (self);
         }
 }
@@ -826,7 +819,7 @@ net_device_mobile_get_property (GObject    *device_,
 
         switch (prop_id) {
         case PROP_MODEM_OBJECT:
-                g_value_set_object (value, self->priv->mm_object);
+                g_value_set_object (value, self->mm_object);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (self, prop_id, pspec);
@@ -844,7 +837,7 @@ net_device_mobile_set_property (GObject      *device_,
 
         switch (prop_id) {
         case PROP_MODEM_OBJECT:
-                self->priv->mm_object = g_value_dup_object (value);
+                self->mm_object = g_value_dup_object (value);
                 net_device_mobile_setup_modem_object (self);
                 break;
         default:
@@ -857,19 +850,18 @@ static void
 net_device_mobile_dispose (GObject *object)
 {
         NetDeviceMobile *device_mobile = NET_DEVICE_MOBILE (object);
-        NetDeviceMobilePrivate *priv = device_mobile->priv;
 
-        g_clear_object (&priv->builder);
-        g_clear_object (&priv->gsm_proxy);
-        g_clear_object (&priv->cdma_proxy);
+        g_clear_object (&device_mobile->builder);
+        g_clear_object (&device_mobile->gsm_proxy);
+        g_clear_object (&device_mobile->cdma_proxy);
 
-        if (priv->operator_name_updated) {
-                g_assert (priv->mm_object != NULL);
-                g_signal_handler_disconnect (mm_object_peek_modem_3gpp (priv->mm_object), priv->operator_name_updated);
-                priv->operator_name_updated = 0;
+        if (device_mobile->operator_name_updated) {
+                g_assert (device_mobile->mm_object != NULL);
+                g_signal_handler_disconnect (mm_object_peek_modem_3gpp (device_mobile->mm_object), device_mobile->operator_name_updated);
+                device_mobile->operator_name_updated = 0;
         }
-        g_clear_object (&priv->mm_object);
-        g_clear_object (&priv->mpd);
+        g_clear_object (&device_mobile->mm_object);
+        g_clear_object (&device_mobile->mpd);
 
         G_OBJECT_CLASS (net_device_mobile_parent_class)->dispose (object);
 }
@@ -904,10 +896,8 @@ net_device_mobile_init (NetDeviceMobile *device_mobile)
         GtkCellRenderer *renderer;
         GtkComboBox *combobox;
 
-        device_mobile->priv = net_device_mobile_get_instance_private (device_mobile);
-
-        device_mobile->priv->builder = gtk_builder_new ();
-        gtk_builder_add_from_resource (device_mobile->priv->builder,
+        device_mobile->builder = gtk_builder_new ();
+        gtk_builder_add_from_resource (device_mobile->builder,
                                        "/org/gnome/control-center/network/network-mobile.ui",
                                        &error);
         if (error != NULL) {
@@ -917,7 +907,7 @@ net_device_mobile_init (NetDeviceMobile *device_mobile)
         }
 
         /* setup mobile combobox model */
-        combobox = GTK_COMBO_BOX (gtk_builder_get_object (device_mobile->priv->builder,
+        combobox = GTK_COMBO_BOX (gtk_builder_get_object (device_mobile->builder,
                                                           "combobox_network"));
         g_signal_connect (combobox, "changed",
                           G_CALLBACK (mobile_connection_changed_cb),
@@ -930,12 +920,12 @@ net_device_mobile_init (NetDeviceMobile *device_mobile)
                                         "text", COLUMN_TITLE,
                                         NULL);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
                                                      "device_off_switch"));
         g_signal_connect (widget, "notify::active",
                           G_CALLBACK (device_off_toggled), device_mobile);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
                                                      "button_options"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (edit_connection), device_mobile);
