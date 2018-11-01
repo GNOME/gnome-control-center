@@ -27,8 +27,6 @@
 
 #include "net-proxy.h"
 
-#define NET_PROXY_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_PROXY, NetProxyPrivate))
-
 typedef enum
 {
         MODE_DISABLED,
@@ -44,7 +42,7 @@ struct _NetProxyPrivate
         GtkToggleButton  *mode_radios[3];
 };
 
-G_DEFINE_TYPE (NetProxy, net_proxy, NET_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (NetProxy, net_proxy, NET_TYPE_OBJECT)
 
 static const gchar *
 panel_get_string_for_value (ProxyMode mode)
@@ -235,7 +233,6 @@ net_proxy_class_init (NetProxyClass *klass)
 
         object_class->finalize = net_proxy_finalize;
         parent_class->add_to_stack = net_proxy_add_to_stack;
-        g_type_class_add_private (klass, sizeof (NetProxyPrivate));
 }
 
 static gboolean
@@ -296,7 +293,7 @@ net_proxy_init (NetProxy *proxy)
         GError *error = NULL;
         guint i;
 
-        proxy->priv = NET_PROXY_GET_PRIVATE (proxy);
+        proxy->priv = net_proxy_get_instance_private (proxy);
 
         proxy->priv->builder = gtk_builder_new ();
         gtk_builder_add_from_resource (proxy->priv->builder,
