@@ -43,10 +43,11 @@ void
 net_device_simple_set_show_separator (NetDeviceSimple *device_simple,
                                       gboolean         show_separator)
 {
+        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (device_simple);
         GtkWidget *widget;
 
         /* add widgets to size group */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_simple->priv->builder, "separator"));
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "separator"));
         gtk_widget_set_visible (widget, show_separator);
 }
 
@@ -57,9 +58,10 @@ device_simple_proxy_add_to_stack (NetObject    *object,
 {
         GtkWidget *widget;
         NetDeviceSimple *device_simple = NET_DEVICE_SIMPLE (object);
+        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (device_simple);
 
         /* add widgets to size group */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_simple->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "vbox6"));
         gtk_stack_add_named (stack, widget, net_object_get_id (object));
         return widget;
@@ -70,7 +72,9 @@ update_off_switch_from_device_state (GtkSwitch *sw,
                                      NMDeviceState state,
                                      NetDeviceSimple *device_simple)
 {
-        device_simple->priv->updating_device = TRUE;
+        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (device_simple);
+
+        priv->updating_device = TRUE;
         switch (state) {
                 case NM_DEVICE_STATE_UNMANAGED:
                 case NM_DEVICE_STATE_UNAVAILABLE:
@@ -83,13 +87,13 @@ update_off_switch_from_device_state (GtkSwitch *sw,
                         gtk_switch_set_active (sw, TRUE);
                         break;
         }
-        device_simple->priv->updating_device = FALSE;
+        priv->updating_device = FALSE;
 }
 
 static void
 nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
 {
-        NetDeviceSimplePrivate *priv = device_simple->priv;
+        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (device_simple);
         GtkWidget *widget;
         NMDevice *nm_device;
         NMDeviceState state;
@@ -125,6 +129,7 @@ device_off_toggled (GtkSwitch *sw,
                     GParamSpec *pspec,
                     NetDeviceSimple *device_simple)
 {
+        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (device_simple);
         const GPtrArray *acs;
         gboolean active;
         gint i;
@@ -132,7 +137,7 @@ device_off_toggled (GtkSwitch *sw,
         NMConnection *connection;
         NMClient *client;
 
-        if (device_simple->priv->updating_device)
+        if (priv->updating_device)
                 return;
 
         active = gtk_switch_get_active (sw);
@@ -184,7 +189,7 @@ static void
 net_device_simple_finalize (GObject *object)
 {
         NetDeviceSimple *device_simple = NET_DEVICE_SIMPLE (object);
-        NetDeviceSimplePrivate *priv = device_simple->priv;
+        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (device_simple);
 
         g_object_unref (priv->builder);
 
@@ -214,13 +219,12 @@ net_device_simple_class_init (NetDeviceSimpleClass *klass)
 static void
 net_device_simple_init (NetDeviceSimple *device_simple)
 {
+        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (device_simple);
         GError *error = NULL;
         GtkWidget *widget;
 
-        device_simple->priv = net_device_simple_get_instance_private (device_simple);
-
-        device_simple->priv->builder = gtk_builder_new ();
-        gtk_builder_add_from_resource (device_simple->priv->builder,
+        priv->builder = gtk_builder_new ();
+        gtk_builder_add_from_resource (priv->builder,
                                        "/org/gnome/control-center/network/network-simple.ui",
                                        &error);
         if (error != NULL) {
@@ -230,12 +234,12 @@ net_device_simple_init (NetDeviceSimple *device_simple)
         }
 
         /* setup simple combobox model */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_simple->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "device_off_switch"));
         g_signal_connect (widget, "notify::active",
                           G_CALLBACK (device_off_toggled), device_simple);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (device_simple->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "button_options"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (edit_connection), device_simple);
@@ -254,7 +258,7 @@ net_device_simple_add_row (NetDeviceSimple *device_simple,
                            const char      *label_string,
                            const char      *property_name)
 {
-        NetDeviceSimplePrivate *priv = device_simple->priv;
+        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (device_simple);
         GtkGrid *grid;
         GtkWidget *label, *value;
         GtkStyleContext *context;

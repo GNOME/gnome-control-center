@@ -43,7 +43,6 @@ typedef struct _NetDeviceSimpleClass     NetDeviceSimpleClass;
 struct _NetDeviceSimple
 {
          NetDevice               parent;
-         NetDeviceSimplePrivate *priv;
 };
 
 struct _NetDeviceSimpleClass
