@@ -36,7 +36,8 @@
 #include "cc-application.h"
 
 int
-main (int argc, char **argv)
+main (int    argc,
+      char **argv)
 {
   g_autoptr(GtkApplication) application = NULL;
 
