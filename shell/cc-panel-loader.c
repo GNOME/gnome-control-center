@@ -196,10 +196,6 @@ cc_panel_loader_fill_model (CcShellModel *model)
       if (G_UNLIKELY (category < 0))
         continue;
 
-      /* Consult OnlyShowIn/NotShowIn for desktop environments */
-      if (!g_desktop_app_info_get_show_in (app, NULL))
-        continue;
-
       cc_shell_model_add_item (model, category, G_APP_INFO (app), all_panels[i].name);
     }
 
