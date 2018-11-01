@@ -34,6 +34,22 @@
 
 #include "net-device-ethernet.h"
 
+struct _NetDeviceEthernet
+{
+        NetDeviceSimple parent;
+
+        GtkBuilder *builder;
+
+        GtkWidget *list;
+        GtkWidget *scrolled_window;
+        GtkWidget *details;
+        GtkWidget *details_button;
+        GtkWidget *add_profile_button;
+        gboolean   updating_device;
+
+        GHashTable *connections;
+};
+
 G_DEFINE_TYPE (NetDeviceEthernet, net_device_ethernet, NET_TYPE_DEVICE_SIMPLE)
 
 static char *
