@@ -33,8 +33,6 @@
 #include "network-dialogs.h"
 #include "net-device-mobile.h"
 
-#define NET_DEVICE_MOBILE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_DEVICE_MOBILE, NetDeviceMobilePrivate))
-
 static void nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile);
 
 struct _NetDeviceMobilePrivate
@@ -65,7 +63,7 @@ enum {
         PROP_LAST
 };
 
-G_DEFINE_TYPE (NetDeviceMobile, net_device_mobile, NET_TYPE_DEVICE)
+G_DEFINE_TYPE_WITH_PRIVATE (NetDeviceMobile, net_device_mobile, NET_TYPE_DEVICE)
 
 static GtkWidget *
 device_mobile_proxy_add_to_stack (NetObject    *object,
@@ -883,8 +881,6 @@ net_device_mobile_class_init (NetDeviceMobileClass *klass)
         parent_class->add_to_stack = device_mobile_proxy_add_to_stack;
         parent_class->refresh = device_mobile_refresh;
 
-        g_type_class_add_private (klass, sizeof (NetDeviceMobilePrivate));
-
         g_object_class_install_property (object_class,
                                          PROP_MODEM_OBJECT,
                                          g_param_spec_object ("mm-object",
@@ -902,7 +898,7 @@ net_device_mobile_init (NetDeviceMobile *device_mobile)
         GtkCellRenderer *renderer;
         GtkComboBox *combobox;
 
-        device_mobile->priv = NET_DEVICE_MOBILE_GET_PRIVATE (device_mobile);
+        device_mobile->priv = net_device_mobile_get_instance_private (device_mobile);
 
         device_mobile->priv->builder = gtk_builder_new ();
         gtk_builder_add_from_resource (device_mobile->priv->builder,
