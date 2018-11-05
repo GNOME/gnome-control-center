@@ -862,7 +862,7 @@ cc_bolt_panel_dispose (GObject *object)
   g_cancellable_cancel (panel->cancel);
 
   /* Must be destroyed in dispose, not finalize. */
-  g_clear_pointer (&panel->device_dialog, gtk_widget_destroy);
+  g_clear_pointer ((GtkWidget **) &panel->device_dialog, gtk_widget_destroy);
 
   G_OBJECT_CLASS (cc_bolt_panel_parent_class)->dispose (object);
 }
