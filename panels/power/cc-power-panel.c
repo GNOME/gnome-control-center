@@ -1197,9 +1197,12 @@ static void
 set_value_for_combo (GtkComboBox *combo_box, gint value)
 {
   GtkTreeIter iter;
-  GtkTreeIter last;
+  g_autoptr(GtkTreeIter) insert = NULL;
+  GtkTreeIter new;
   GtkTreeModel *model;
   gint value_tmp;
+  gint value_last = 0;
+  g_autofree gchar *text = NULL;
   gboolean ret;
 
   /* get entry */
@@ -1219,25 +1222,24 @@ set_value_for_combo (GtkComboBox *combo_box, gint value)
           gtk_combo_box_set_active_iter (combo_box, &iter);
           return;
         }
-      else if (value_tmp > value)
-        {
-          GtkTreeIter new;
-          g_autofree gchar *text = NULL;
 
-          /* This is an unlisted value, add it to the drop-down */
-          gtk_list_store_insert_before (GTK_LIST_STORE (model), &new, &iter);
-          text = time_to_string_text (value * 1000);
-          gtk_list_store_set (GTK_LIST_STORE (model), &new,
-                              ACTION_MODEL_TEXT, text,
-                              ACTION_MODEL_VALUE, value,
-                              -1);
-          gtk_combo_box_set_active_iter (combo_box, &new);
-          return;
-        }
-      last = iter;
+      /* Insert before if the next value is larger or the value is lower
+       * again (i.e. "Never" is zero and last). */
+      if (!insert && (value_tmp > value || value_last > value_tmp))
+        insert = gtk_tree_iter_copy (&iter);
+
+      value_last = value_tmp;
     } while (gtk_tree_model_iter_next (model, &iter));
 
-  gtk_combo_box_set_active_iter (combo_box, &last);
+  /* The value is not listed, so add it at the best point (or the end). */
+  gtk_list_store_insert_before (GTK_LIST_STORE (model), &new, insert);
+
+  text = time_to_string_text (value * 1000);
+  gtk_list_store_set (GTK_LIST_STORE (model), &new,
+                      ACTION_MODEL_TEXT, text,
+                      ACTION_MODEL_VALUE, value,
+                      -1);
+  gtk_combo_box_set_active_iter (combo_box, &new);
 }
 
 static void
