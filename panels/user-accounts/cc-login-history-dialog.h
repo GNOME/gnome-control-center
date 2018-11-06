@@ -25,9 +25,9 @@
 
 G_BEGIN_DECLS
 
-#define UM_TYPE_HISTORY_DIALOG (um_history_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (UmHistoryDialog, um_history_dialog, UM, HISTORY_DIALOG, GtkDialog)
+#define CC_TYPE_LOGIN_HISTORY_DIALOG (cc_login_history_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (CcLoginHistoryDialog, cc_login_history_dialog, CC, LOGIN_HISTORY_DIALOG, GtkDialog)
 
-UmHistoryDialog *um_history_dialog_new (ActUser *user);
+CcLoginHistoryDialog *cc_login_history_dialog_new (ActUser *user);
 
 G_END_DECLS
