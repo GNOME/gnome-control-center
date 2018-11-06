@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.8 -->
-  <template class="UmHistoryDialog" parent="GtkDialog">
+  <template class="CcLoginHistoryDialog" parent="GtkDialog">
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
@@ -24,7 +24,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="valign">center</property>
-                <signal name="clicked" handler="previous_button_clicked_cb" object="UmHistoryDialog" swapped="yes"/>
+                <signal name="clicked" handler="previous_button_clicked_cb" object="CcLoginHistoryDialog" swapped="yes"/>
                 <style>
                   <class name="image-button"/>
                 </style>
@@ -47,7 +47,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="valign">center</property>
-                <signal name="clicked" handler="next_button_clicked_cb" object="UmHistoryDialog" swapped="yes"/>
+                <signal name="clicked" handler="next_button_clicked_cb" object="CcLoginHistoryDialog" swapped="yes"/>
                 <style>
                   <class name="image-button"/>
                 </style>

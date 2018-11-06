@@ -30,13 +30,12 @@
 #include <gtk/gtk.h>
 #include <act/act.h>
 
+#include "cc-login-history-dialog.h"
 #include "cc-util.h"
-
-#include "um-history-dialog.h"
 #include "um-resources.h"
 #include "um-utils.h"
 
-struct _UmHistoryDialog
+struct _CcLoginHistoryDialog
 {
         GtkDialog     parent_instance;
 
@@ -51,21 +50,21 @@ struct _UmHistoryDialog
         ActUser      *user;
 };
 
-G_DEFINE_TYPE (UmHistoryDialog, um_history_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (CcLoginHistoryDialog, cc_login_history_dialog, GTK_TYPE_DIALOG)
 
 typedef struct {
 	gint64 login_time;
 	gint64 logout_time;
 	const gchar *type;
-} UmLoginHistory;
+} CcLoginHistory;
 
 static void
-show_week_label (UmHistoryDialog *um)
+show_week_label (CcLoginHistoryDialog *self)
 {
         g_autofree gchar *label = NULL;
         GTimeSpan span;
 
-        span = g_date_time_difference (um->current_week, um->week);
+        span = g_date_time_difference (self->current_week, self->week);
         if (span == 0) {
                 label = g_strdup (_("This Week"));
         }
@@ -77,11 +76,11 @@ show_week_label (UmHistoryDialog *um)
                 g_autofree gchar *to = NULL;
                 g_autoptr(GDateTime) date = NULL;
 
-                date = g_date_time_add_days (um->week, 6);
+                date = g_date_time_add_days (self->week, 6);
                 /* Translators: This is a date format string in the style of "Feb 18",
                    shown as the first day of a week on login history dialog. */
-                from = g_date_time_format (um->week, C_("login history week label","%b %e"));
-                if (g_date_time_get_year (um->week) == g_date_time_get_year (um->current_week)) {
+                from = g_date_time_format (self->week, C_("login history week label","%b %e"));
+                if (g_date_time_get_year (self->week) == g_date_time_get_year (self->current_week)) {
                         /* Translators: This is a date format string in the style of "Feb 24",
                            shown as the last day of a week on login history dialog. */
                         to = g_date_time_format (date, C_("login history week label","%b %e"));
@@ -97,18 +96,18 @@ show_week_label (UmHistoryDialog *um)
                 label = g_strdup_printf(C_("login history week label", "%s — %s"), from, to);
         }
 
-        gtk_header_bar_set_subtitle (um->header_bar, label);
+        gtk_header_bar_set_subtitle (self->header_bar, label);
 }
 
 static void
-clear_history (UmHistoryDialog *um)
+clear_history (CcLoginHistoryDialog *self)
 {
         g_autoptr(GList) list = NULL;
         GList *it;
 
-        list = gtk_container_get_children (GTK_CONTAINER (um->history_box));
+        list = gtk_container_get_children (GTK_CONTAINER (self->history_box));
         for (it = list; it != NULL; it = it->next) {
-                gtk_container_remove (GTK_CONTAINER (um->history_box), GTK_WIDGET (it->data));
+                gtk_container_remove (GTK_CONTAINER (self->history_box), GTK_WIDGET (it->data));
         }
 }
 
@@ -120,7 +119,7 @@ get_login_history (ActUser *user)
 	GVariant *variant;
 	const GVariant *value;
 	const gchar *key;
-	UmLoginHistory history;
+	CcLoginHistory history;
 
 	login_history = NULL;
 	value = act_user_get_login_history (user);
@@ -133,7 +132,7 @@ get_login_history (ActUser *user)
 		}
 
 		if (login_history == NULL) {
-			login_history = g_array_new (FALSE, TRUE, sizeof (UmLoginHistory));
+			login_history = g_array_new (FALSE, TRUE, sizeof (CcLoginHistory));
 		}
 
 		g_array_append_val (login_history, history);
@@ -143,25 +142,25 @@ get_login_history (ActUser *user)
 }
 
 static void
-set_sensitivity (UmHistoryDialog *um)
+set_sensitivity (CcLoginHistoryDialog *self)
 {
         g_autoptr(GArray) login_history = NULL;
-        UmLoginHistory history;
+        CcLoginHistory history;
         gboolean sensitive = FALSE;
 
-        login_history = get_login_history (um->user);
+        login_history = get_login_history (self->user);
         if (login_history != NULL) {
-                history = g_array_index (login_history, UmLoginHistory, 0);
-                sensitive = g_date_time_to_unix (um->week) > history.login_time;
+                history = g_array_index (login_history, CcLoginHistory, 0);
+                sensitive = g_date_time_to_unix (self->week) > history.login_time;
         }
-        gtk_widget_set_sensitive (GTK_WIDGET (um->previous_button), sensitive);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->previous_button), sensitive);
 
-        sensitive = (g_date_time_compare (um->current_week, um->week) == 1);
-        gtk_widget_set_sensitive (GTK_WIDGET (um->next_button), sensitive);
+        sensitive = (g_date_time_compare (self->current_week, self->week) == 1);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->next_button), sensitive);
 }
 
 static void
-add_record (UmHistoryDialog *um, GDateTime *datetime, gchar *record_string, gint line)
+add_record (CcLoginHistoryDialog *self, GDateTime *datetime, gchar *record_string, gint line)
 {
         g_autofree gchar *date = NULL;
         g_autofree gchar *time = NULL;
@@ -191,34 +190,34 @@ add_record (UmHistoryDialog *um, GDateTime *datetime, gchar *record_string, gint
         gtk_widget_set_halign (label, GTK_ALIGN_START);
         gtk_box_pack_start (GTK_BOX (row), label, TRUE, TRUE, 0);
 
-        gtk_list_box_insert (um->history_box, row, line);
+        gtk_list_box_insert (self->history_box, row, line);
 }
 
 static void
-show_week (UmHistoryDialog *um)
+show_week (CcLoginHistoryDialog *self)
 {
         g_autoptr(GArray) login_history = NULL;
         g_autoptr(GDateTime) datetime = NULL;
         g_autoptr(GDateTime) temp = NULL;
         gint64 from, to;
         gint i, line;
-        UmLoginHistory history;
+        CcLoginHistory history;
 
-        show_week_label (um);
-        clear_history (um);
-        set_sensitivity (um);
+        show_week_label (self);
+        clear_history (self);
+        set_sensitivity (self);
 
-        login_history = get_login_history (um->user);
+        login_history = get_login_history (self->user);
         if (login_history == NULL) {
                 return;
         }
 
         /* Find first record for week */
-        from = g_date_time_to_unix (um->week);
-        temp = g_date_time_add_weeks (um->week, 1);
+        from = g_date_time_to_unix (self->week);
+        temp = g_date_time_add_weeks (self->week, 1);
         to = g_date_time_to_unix (temp);
         for (i = login_history->len - 1; i >= 0; i--) {
-                history = g_array_index (login_history, UmLoginHistory, i);
+                history = g_array_index (login_history, CcLoginHistory, i);
                 if (history.login_time < to) {
                         break;
                 }
@@ -227,7 +226,7 @@ show_week (UmHistoryDialog *um)
         /* Add new session records */
         line = 0;
         for (;i >= 0; i--) {
-                history = g_array_index (login_history, UmLoginHistory, i);
+                history = g_array_index (login_history, CcLoginHistory, i);
 
                 /* Display only x-session and tty records */
                 if (!g_str_has_prefix (history.type, ":") &&
@@ -241,94 +240,94 @@ show_week (UmHistoryDialog *um)
 
                 if (history.logout_time > 0 && history.logout_time < to) {
                         datetime = g_date_time_new_from_unix_local (history.logout_time);
-                        add_record (um, datetime, _("Session Ended"), line);
+                        add_record (self, datetime, _("Session Ended"), line);
                         line++;
                 }
 
                 if (history.login_time >= from) {
                         datetime = g_date_time_new_from_unix_local (history.login_time);
-                        add_record (um, datetime, _("Session Started"), line);
+                        add_record (self, datetime, _("Session Started"), line);
                         line++;
                 }
         }
 }
 
 static void
-previous_button_clicked_cb (UmHistoryDialog *um)
+previous_button_clicked_cb (CcLoginHistoryDialog *self)
 {
         g_autoptr(GDateTime) temp = NULL;
 
-        temp = um->week;
-        um->week = g_date_time_add_weeks (um->week, -1);
+        temp = self->week;
+        self->week = g_date_time_add_weeks (self->week, -1);
 
-        show_week (um);
+        show_week (self);
 }
 
 static void
-next_button_clicked_cb (UmHistoryDialog *um)
+next_button_clicked_cb (CcLoginHistoryDialog *self)
 {
         g_autoptr(GDateTime) temp = NULL;
 
-        temp = um->week;
-        um->week = g_date_time_add_weeks (um->week, 1);
+        temp = self->week;
+        self->week = g_date_time_add_weeks (self->week, 1);
 
-        show_week (um);
+        show_week (self);
 }
 
 static void
-um_history_dialog_dispose (GObject *object)
+cc_login_history_dialog_dispose (GObject *object)
 {
-        UmHistoryDialog *um = UM_HISTORY_DIALOG (object);
+        CcLoginHistoryDialog *self = CC_LOGIN_HISTORY_DIALOG (object);
 
-        g_clear_object (&um->user);
-        g_clear_pointer (&um->week, g_date_time_unref);
-        g_clear_pointer (&um->current_week, g_date_time_unref);
+        g_clear_object (&self->user);
+        g_clear_pointer (&self->week, g_date_time_unref);
+        g_clear_pointer (&self->current_week, g_date_time_unref);
 
-        G_OBJECT_CLASS (um_history_dialog_parent_class)->dispose (object);
+        G_OBJECT_CLASS (cc_login_history_dialog_parent_class)->dispose (object);
 }
 
 void
-um_history_dialog_class_init (UmHistoryDialogClass *klass)
+cc_login_history_dialog_class_init (CcLoginHistoryDialogClass *klass)
 {
         GObjectClass   *object_class = G_OBJECT_CLASS (klass);
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-        object_class->dispose = um_history_dialog_dispose;
+        object_class->dispose = cc_login_history_dialog_dispose;
 
-        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/user-accounts/um-history-dialog.ui");
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/user-accounts/cc-login-history-dialog.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, UmHistoryDialog, header_bar);
-        gtk_widget_class_bind_template_child (widget_class, UmHistoryDialog, history_box);
-        gtk_widget_class_bind_template_child (widget_class, UmHistoryDialog, next_button);
-        gtk_widget_class_bind_template_child (widget_class, UmHistoryDialog, previous_button);
+        gtk_widget_class_bind_template_child (widget_class, CcLoginHistoryDialog, header_bar);
+        gtk_widget_class_bind_template_child (widget_class, CcLoginHistoryDialog, history_box);
+        gtk_widget_class_bind_template_child (widget_class, CcLoginHistoryDialog, next_button);
+        gtk_widget_class_bind_template_child (widget_class, CcLoginHistoryDialog, previous_button);
 
         gtk_widget_class_bind_template_callback (widget_class, next_button_clicked_cb);
         gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
 }
 
 void
-um_history_dialog_init (UmHistoryDialog *um)
+cc_login_history_dialog_init (CcLoginHistoryDialog *self)
 {
         g_resources_register (um_get_resource ());
 
-        gtk_widget_init_template (GTK_WIDGET (um));
+        gtk_widget_init_template (GTK_WIDGET (self));
 }
 
-UmHistoryDialog *
-um_history_dialog_new (ActUser *user)
+CcLoginHistoryDialog *
+cc_login_history_dialog_new (ActUser *user)
 {
-        UmHistoryDialog *um;
+        CcLoginHistoryDialog *self;
         g_autoptr(GDateTime) temp = NULL;
         g_autoptr(GDateTime) local = NULL;
         g_autofree gchar *title = NULL;
 
         g_return_val_if_fail (ACT_IS_USER (user), NULL);
 
-        um = g_object_new (UM_TYPE_HISTORY_DIALOG,
-                           "use-header-bar", 1,
-                           NULL);
+        self = g_object_new (CC_TYPE_LOGIN_HISTORY_DIALOG,
+                             "use-header-bar", 1,
+                             NULL);
 
-        um->user = g_object_ref (user);
+        self->user = g_object_ref (user);
 
         /* Set the first day of this week */
         local = g_date_time_new_now_local ();
@@ -336,16 +335,16 @@ um_history_dialog_new (ActUser *user)
                                       g_date_time_get_month (local),
                                       g_date_time_get_day_of_month (local),
                                       0, 0, 0);
-        um->week = g_date_time_add_days (temp, 1 - g_date_time_get_day_of_week (temp));
-        um->current_week = g_date_time_ref (um->week);
+        self->week = g_date_time_add_days (temp, 1 - g_date_time_get_day_of_week (temp));
+        self->current_week = g_date_time_ref (self->week);
 
         /* Translators: This is the title of the "Account Activity" dialog.
            The %s is the user real name. */
         title = g_strdup_printf (_("%s — Account Activity"),
-                                 act_user_get_real_name (um->user));
-        gtk_header_bar_set_title (um->header_bar, title);
+                                 act_user_get_real_name (self->user));
+        gtk_header_bar_set_title (self->header_bar, title);
 
-        show_week (um);
+        show_week (self);
 
-        return um;
+        return self;
 }

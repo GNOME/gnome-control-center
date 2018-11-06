@@ -42,13 +42,13 @@
 
 #include "um-account-dialog.h"
 #include "cc-language-chooser.h"
+#include "cc-login-history-dialog.h"
 #include "cc-password-dialog.h"
 #include "um-carousel.h"
 #include "um-photo-dialog.h"
 #include "um-fingerprint-dialog.h"
 #include "um-utils.h"
 #include "um-resources.h"
-#include "um-history-dialog.h"
 
 #include "cc-common-language.h"
 #include "cc-util.h"
@@ -1070,13 +1070,13 @@ change_fingerprint (CcUserPanel *self)
 static void
 show_history (CcUserPanel *self)
 {
-        UmHistoryDialog *dialog;
+        CcLoginHistoryDialog *dialog;
         ActUser *user;
         GtkWindow *parent;
         gint parent_width;
 
         user = get_selected_user (self);
-        dialog = um_history_dialog_new (user);
+        dialog = cc_login_history_dialog_new (user);
 
         parent = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
         gtk_window_get_size (parent, &parent_width, NULL);
