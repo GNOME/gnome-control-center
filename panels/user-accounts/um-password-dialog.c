@@ -249,9 +249,9 @@ action_now_radio_toggled_cb (UmPasswordDialog *um)
 static void
 update_password_match (UmPasswordDialog *um)
 {
-        const char *password;
-        const char *verify;
-        const char *message = "";
+        const gchar *password;
+        const gchar *verify;
+        const gchar *message = "";
 
         password = gtk_entry_get_text (um->password_entry);
         verify = gtk_entry_get_text (um->verify_entry);
@@ -284,7 +284,7 @@ password_entry_changed (UmPasswordDialog *um,
                         GParamSpec       *pspec,
                         GtkEntry         *entry)
 {
-        const char *password;
+        const gchar *password;
 
         if (um->password_entry_timeout_id != 0) {
                 g_source_remove (um->password_entry_timeout_id);
@@ -349,7 +349,7 @@ auth_cb (PasswdHandler    *handler,
 static gboolean
 old_password_entry_timeout (UmPasswordDialog *um)
 {
-        const char *text;
+        const gchar *text;
 
         update_sensitivity (um);
 
