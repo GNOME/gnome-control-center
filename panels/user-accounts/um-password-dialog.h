@@ -25,13 +25,9 @@
 
 G_BEGIN_DECLS
 
-typedef struct _UmPasswordDialog UmPasswordDialog;
+#define UM_TYPE_PASSWORD_DIALOG (um_password_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (UmPasswordDialog, um_password_dialog, UM, PASSWORD_DIALOG, GtkDialog)
 
-UmPasswordDialog *um_password_dialog_new      (void);
-void              um_password_dialog_free     (UmPasswordDialog *dialog);
-void              um_password_dialog_set_user (UmPasswordDialog *dialog,
-                                               ActUser          *user);
-void              um_password_dialog_show     (UmPasswordDialog *dialog,
-                                               GtkWindow        *parent);
+UmPasswordDialog *um_password_dialog_new (ActUser *user);
 
 G_END_DECLS
