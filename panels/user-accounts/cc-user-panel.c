@@ -100,7 +100,6 @@ struct _CcUserPanel {
         CcLanguageChooser *language_chooser;
 
         UmPhotoDialog *photo_dialog;
-        UmHistoryDialog *history_dialog;
 
         gint other_accounts;
 
@@ -1071,12 +1070,22 @@ change_fingerprint (CcUserPanel *self)
 static void
 show_history (CcUserPanel *self)
 {
+        UmHistoryDialog *dialog;
         ActUser *user;
+        GtkWindow *parent;
+        gint parent_width;
 
         user = get_selected_user (self);
+        dialog = um_history_dialog_new (user);
 
-        um_history_dialog_set_user (self->history_dialog, user);
-        um_history_dialog_show (self->history_dialog, GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+        parent = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+        gtk_window_get_size (parent, &parent_width, NULL);
+        gtk_window_set_default_size (GTK_WINDOW (dialog), parent_width * 0.6, -1);
+        gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
+
+        gtk_dialog_run (GTK_DIALOG (dialog));
+
+        gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 static void
@@ -1377,7 +1386,6 @@ cc_user_panel_init (CcUserPanel *self)
         self->login_screen_settings = settings_or_null ("org.gnome.login-screen");
 
         self->photo_dialog = um_photo_dialog_new (GTK_WIDGET (self->user_icon_button));
-        self->history_dialog = um_history_dialog_new ();
         setup_main_window (self);
 }
 
@@ -1391,7 +1399,6 @@ cc_user_panel_dispose (GObject *object)
 
         g_clear_object (&self->login_screen_settings);
 
-        g_clear_pointer (&self->history_dialog, um_history_dialog_free);
         if (self->account_dialog) {
                 gtk_dialog_response (GTK_DIALOG (self->account_dialog), GTK_RESPONSE_DELETE_EVENT);
                 self->account_dialog = NULL;

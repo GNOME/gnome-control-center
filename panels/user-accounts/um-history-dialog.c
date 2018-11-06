@@ -33,30 +33,31 @@
 #include "cc-util.h"
 
 #include "um-history-dialog.h"
+#include "um-resources.h"
 #include "um-utils.h"
 
-struct _UmHistoryDialog {
-        GtkWidget *dialog;
-        GtkBuilder *builder;
+struct _UmHistoryDialog
+{
+        GtkDialog     parent_instance;
 
-        GDateTime *week;
-        GDateTime *current_week;
+        GtkHeaderBar *header_bar;
+        GtkListBox   *history_box;
+        GtkButton    *next_button;
+        GtkButton    *previous_button;
 
-        ActUser *user;
+        GDateTime    *week;
+        GDateTime    *current_week;
+
+        ActUser      *user;
 };
+
+G_DEFINE_TYPE (UmHistoryDialog, um_history_dialog, GTK_TYPE_DIALOG)
 
 typedef struct {
 	gint64 login_time;
 	gint64 logout_time;
 	const gchar *type;
 } UmLoginHistory;
-
-static GtkWidget *
-get_widget (UmHistoryDialog *um,
-            const char *name)
-{
-        return (GtkWidget *)gtk_builder_get_object (um->builder, name);
-}
 
 static void
 show_week_label (UmHistoryDialog *um)
@@ -97,7 +98,7 @@ show_week_label (UmHistoryDialog *um)
                 g_free (to);
         }
 
-        gtk_header_bar_set_subtitle (GTK_HEADER_BAR (get_widget (um, "dialog-header-bar")), label);
+        gtk_header_bar_set_subtitle (um->header_bar, label);
 
         g_free (label);
 }
@@ -105,13 +106,11 @@ show_week_label (UmHistoryDialog *um)
 static void
 clear_history (UmHistoryDialog *um)
 {
-        GtkWidget *box;
         GList *list, *it;
 
-        box = get_widget (um, "history-box");
-        list = gtk_container_get_children (GTK_CONTAINER (box));
-        for (it = list; it != NULL;  it = it->next) {
-                gtk_container_remove (GTK_CONTAINER (box), GTK_WIDGET (it->data));
+        list = gtk_container_get_children (GTK_CONTAINER (um->history_box));
+        for (it = list; it != NULL; it = it->next) {
+                gtk_container_remove (GTK_CONTAINER (um->history_box), GTK_WIDGET (it->data));
         }
         g_list_free (list);
 }
@@ -159,14 +158,14 @@ set_sensitivity (UmHistoryDialog *um)
                 sensitive = g_date_time_to_unix (um->week) > history.login_time;
                 g_array_free (login_history, TRUE);
         }
-        gtk_widget_set_sensitive (get_widget (um, "previous-button"), sensitive);
+        gtk_widget_set_sensitive (GTK_WIDGET (um->previous_button), sensitive);
 
         sensitive = (g_date_time_compare (um->current_week, um->week) == 1);
-        gtk_widget_set_sensitive (get_widget (um, "next-button"), sensitive);
+        gtk_widget_set_sensitive (GTK_WIDGET (um->next_button), sensitive);
 }
 
 static void
-add_record (GtkWidget *box, GDateTime *datetime, gchar *record_string, gint line)
+add_record (UmHistoryDialog *um, GDateTime *datetime, gchar *record_string, gint line)
 {
         gchar *date, *time, *str;
         GtkWidget *label, *row;
@@ -198,7 +197,7 @@ add_record (GtkWidget *box, GDateTime *datetime, gchar *record_string, gint line
         g_free (time);
         g_date_time_unref (datetime);
 
-        gtk_list_box_insert (GTK_LIST_BOX (box), row, line);
+        gtk_list_box_insert (um->history_box, row, line);
 }
 
 static void
@@ -208,7 +207,6 @@ show_week (UmHistoryDialog *um)
         GDateTime *datetime, *temp;
         gint64 from, to;
         gint i, line;
-        GtkWidget *box;
         UmLoginHistory history;
 
         show_week_label (um);
@@ -233,8 +231,6 @@ show_week (UmHistoryDialog *um)
         }
 
         /* Add new session records */
-        box = get_widget (um, "history-box");
-        gtk_widget_show (box);
         line = 0;
         for (;i >= 0; i--) {
                 history = g_array_index (login_history, UmLoginHistory, i);
@@ -251,13 +247,13 @@ show_week (UmHistoryDialog *um)
 
                 if (history.logout_time > 0 && history.logout_time < to) {
                         datetime = g_date_time_new_from_unix_local (history.logout_time);
-                        add_record (box, datetime, _("Session Ended"), line);
+                        add_record (um, datetime, _("Session Ended"), line);
                         line++;
                 }
 
                 if (history.login_time >= from) {
                         datetime = g_date_time_new_from_unix_local (history.login_time);
-                        add_record (box, datetime, _("Session Started"), line);
+                        add_record (um, datetime, _("Session Started"), line);
                         line++;
                 }
         }
@@ -266,8 +262,7 @@ show_week (UmHistoryDialog *um)
 }
 
 static void
-show_previous (GtkButton       *button,
-               UmHistoryDialog *um)
+previous_button_clicked_cb (UmHistoryDialog *um)
 {
         GDateTime *temp;
 
@@ -279,8 +274,7 @@ show_previous (GtkButton       *button,
 }
 
 static void
-show_next (GtkButton       *button,
-           UmHistoryDialog *um)
+next_button_clicked_cb (UmHistoryDialog *um)
 {
         GDateTime *temp;
 
@@ -292,46 +286,58 @@ show_next (GtkButton       *button,
 }
 
 static void
-update_dialog_title (UmHistoryDialog *um)
+um_history_dialog_dispose (GObject *object)
 {
-        gchar *title;
+        UmHistoryDialog *um = UM_HISTORY_DIALOG (object);
 
-        /* Translators: This is the title of the "Account Activity" dialog.
-           The %s is the user real name. */
-        title = g_strdup_printf (_("%s — Account Activity"),
-                                 act_user_get_real_name (um->user));
+        g_clear_object (&um->user);
+        g_clear_pointer (&um->week, g_date_time_unref);
+        g_clear_pointer (&um->current_week, g_date_time_unref);
 
-        gtk_window_set_title (GTK_WINDOW (um->dialog), title);
-
-        g_free (title);
+        G_OBJECT_CLASS (um_history_dialog_parent_class)->dispose (object);
 }
 
 void
-um_history_dialog_set_user (UmHistoryDialog *um,
-                            ActUser         *user)
+um_history_dialog_class_init (UmHistoryDialogClass *klass)
 {
-        if (um->user) {
-                g_clear_object (&um->user);
-        }
+        GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-        if (user) {
-                um->user = g_object_ref (user);
-        }
+        object_class->dispose = um_history_dialog_dispose;
 
-        update_dialog_title (um);
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/user-accounts/um-history-dialog.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, UmHistoryDialog, header_bar);
+        gtk_widget_class_bind_template_child (widget_class, UmHistoryDialog, history_box);
+        gtk_widget_class_bind_template_child (widget_class, UmHistoryDialog, next_button);
+        gtk_widget_class_bind_template_child (widget_class, UmHistoryDialog, previous_button);
+
+        gtk_widget_class_bind_template_callback (widget_class, next_button_clicked_cb);
+        gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
 }
 
 void
-um_history_dialog_show (UmHistoryDialog *um,
-                        GtkWindow       *parent)
+um_history_dialog_init (UmHistoryDialog *um)
 {
+        g_resources_register (um_get_resource ());
+
+        gtk_widget_init_template (GTK_WIDGET (um));
+}
+
+UmHistoryDialog *
+um_history_dialog_new (ActUser *user)
+{
+        UmHistoryDialog *um;
         GDateTime *temp, *local;
-        gint parent_width;
+        g_autofree gchar *title = NULL;
 
-        if (um->week)
-                g_date_time_unref (um->week);
-        if (um->current_week)
-                g_date_time_unref (um->current_week);
+        g_return_val_if_fail (ACT_IS_USER (user), NULL);
+
+        um = g_object_new (UM_TYPE_HISTORY_DIALOG,
+                           "use-header-bar", 1,
+                           NULL);
+
+        um->user = g_object_ref (user);
 
         /* Set the first day of this week */
         local = g_date_time_new_now_local ();
@@ -344,69 +350,13 @@ um_history_dialog_show (UmHistoryDialog *um,
         g_date_time_unref (local);
         g_date_time_unref (temp);
 
+        /* Translators: This is the title of the "Account Activity" dialog.
+           The %s is the user real name. */
+        title = g_strdup_printf (_("%s — Account Activity"),
+                                 act_user_get_real_name (um->user));
+        gtk_header_bar_set_title (um->header_bar, title);
+
         show_week (um);
 
-        gtk_window_get_size (parent, &parent_width, NULL);
-        gtk_window_set_default_size (GTK_WINDOW (um->dialog), parent_width * 0.6, -1);
-        gtk_window_set_transient_for (GTK_WINDOW (um->dialog), parent);
-        gtk_window_present (GTK_WINDOW (um->dialog));
-}
-
-UmHistoryDialog *
-um_history_dialog_new (void)
-{
-        GError *error = NULL;
-        UmHistoryDialog *um;
-        GtkWidget *widget;
-
-        um = g_new0 (UmHistoryDialog, 1);
-        um->builder = gtk_builder_new ();
-
-        if (!gtk_builder_add_from_resource (um->builder, "/org/gnome/control-center/user-accounts/history-dialog.ui", &error)) {
-                g_error ("%s", error->message);
-                g_error_free (error);
-                g_free (um);
-
-                return NULL;
-        }
-
-        um->dialog = get_widget (um, "dialog");
-        g_signal_connect (um->dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
-        widget = get_widget (um, "next-button");
-        g_signal_connect (widget, "clicked", G_CALLBACK (show_next), um);
-
-        widget = get_widget (um, "previous-button");
-        g_signal_connect (widget, "clicked", G_CALLBACK (show_previous), um);
-
-        widget = get_widget (um, "next-image");
-        gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                      "go-next-symbolic",
-                                      GTK_ICON_SIZE_MENU);
-
-        widget = get_widget (um, "previous-image");
-        gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                      "go-previous-symbolic",
-                                      GTK_ICON_SIZE_MENU);
-
         return um;
-}
-
-void
-um_history_dialog_free (UmHistoryDialog *um)
-{
-        gtk_widget_destroy (um->dialog);
-
-        g_clear_object (&um->user);
-        g_clear_object (&um->builder);
-
-        if (um->week) {
-                g_date_time_unref (um->week);
-        }
-
-        if (um->current_week) {
-                g_date_time_unref (um->current_week);
-        }
-
-        g_free (um);
 }

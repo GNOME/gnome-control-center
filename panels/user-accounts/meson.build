@@ -119,9 +119,9 @@ resource_data = files(
   'data/account-fingerprint.ui',
   'data/carousel.css',
   'data/carousel.ui',
-  'data/history-dialog.ui',
   'data/join-dialog.ui',
   'data/user-accounts-dialog.css',
+  'um-history-dialog.ui',
 )
 
 common_sources += gnome.compile_resources(
