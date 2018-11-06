@@ -25,13 +25,9 @@
 
 G_BEGIN_DECLS
 
-typedef struct _UmHistoryDialog UmHistoryDialog;
+#define UM_TYPE_HISTORY_DIALOG (um_history_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (UmHistoryDialog, um_history_dialog, UM, HISTORY_DIALOG, GtkDialog)
 
-UmHistoryDialog *um_history_dialog_new      (void);
-void             um_history_dialog_free     (UmHistoryDialog *dialog);
-void             um_history_dialog_set_user (UmHistoryDialog *dialog,
-                                             ActUser         *user);
-void             um_history_dialog_show     (UmHistoryDialog *dialog,
-                                             GtkWindow       *parent);
+UmHistoryDialog *um_history_dialog_new (ActUser *user);
 
 G_END_DECLS
