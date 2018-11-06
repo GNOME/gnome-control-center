@@ -42,7 +42,7 @@
 
 #include "um-account-dialog.h"
 #include "cc-language-chooser.h"
-#include "um-password-dialog.h"
+#include "cc-password-dialog.h"
 #include "um-carousel.h"
 #include "um-photo-dialog.h"
 #include "um-fingerprint-dialog.h"
@@ -1043,11 +1043,11 @@ static void
 change_password (CcUserPanel *self)
 {
         ActUser *user;
-        UmPasswordDialog *dialog;
+        CcPasswordDialog *dialog;
         GtkWindow *parent;
 
         user = get_selected_user (self);
-        dialog = um_password_dialog_new (user);
+        dialog = cc_password_dialog_new (user);
 
         parent = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
         gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
