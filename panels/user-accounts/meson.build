@@ -120,8 +120,8 @@ resource_data = files(
   'data/carousel.ui',
   'data/history-dialog.ui',
   'data/join-dialog.ui',
-  'data/password-dialog.ui',
   'data/user-accounts-dialog.css',
+  'um-password-dialog.ui',
 )
 
 common_sources += gnome.compile_resources(
