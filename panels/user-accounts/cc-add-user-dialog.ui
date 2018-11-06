@@ -99,9 +99,12 @@
                     <property name="entry_text_column">0</property>
                     <property name="model">username-model</property>
                     <property name="hexpand">True</property>
+                    <signal name="changed" handler="local_username_changed_cb" object="CcAddUserDialog" swapped="yes"/>
+                    <signal name="focus-out-event" handler="local_username_focus_out_event_cb" after="yes" object="CcAddUserDialog" swapped="yes"/>
                     <child internal-child="entry">
                       <object class="GtkEntry" id="local_username_entry">
                         <property name="activates_default">True</property>
+                        <signal name="activate" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
                       </object>
                     </child>
                   </object>
@@ -158,6 +161,9 @@
                     <property name="can_focus">True</property>
                     <property name="activates_default">True</property>
                     <property name="hexpand">True</property>
+                    <signal name="changed" handler="local_name_changed_cb" object="CcAddUserDialog" swapped="yes"/>
+                    <signal name="focus-out-event" handler="local_name_focus_out_event_cb" after="yes" object="CcAddUserDialog" swapped="yes"/>
+                    <signal name="activate" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -279,6 +285,7 @@
                         <property name="draw_indicator">True</property>
                         <property name="group">local_password_login_radio</property>
                         <property name="use_underline">True</property>
+                        <signal name="toggled" handler="local_password_radio_changed_cb" object="CcAddUserDialog" swapped="yes"/>
                       </object>
                       <packing>
                         <property name="position">1</property>
@@ -324,6 +331,11 @@
                     <property name="hexpand">True</property>
                     <property name="activates_default">True</property>
                     <property name="input_purpose">password</property>
+                    <signal name="notify::text" handler="local_password_changed_cb" object="CcAddUserDialog" swapped="yes"/>
+                    <signal name="icon-press" handler="local_password_icon_press_cb" object="CcAddUserDialog" swapped="yes"/>
+                    <signal name="focus-out-event" handler="password_focus_out_event_cb" after="yes" object="CcAddUserDialog" swapped="yes"/>
+                    <signal name="key-press-event" handler="local_password_key_press_event_cb" object="CcAddUserDialog" swapped="yes"/>
+                    <signal name="activate" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -412,6 +424,9 @@
                     <property name="invisible_char_set">True</property>
                     <property name="hexpand">True</property>
                     <property name="input_purpose">password</property>
+                    <signal name="notify::text" handler="local_verify_changed_cb" object="CcAddUserDialog" swapped="yes"/>
+                    <signal name="focus-out-event" handler="password_focus_out_event_cb" after="yes" object="CcAddUserDialog" swapped="yes"/>
+                    <signal name="activate" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -576,6 +591,8 @@
                     <property name="has_entry">True</property>
                     <property name="entry_text_column">0</property>
                     <property name="model">enterprise_realms</property>
+                    <signal name="changed" handler="enterprise_domain_changed_cb" object="CcAddUserDialog" swapped="yes"/>
+                    <signal name="focus-out-event" handler="enterprise_domain_focus_out_event_cb" after="yes" object="CcAddUserDialog" swapped="yes"/>
                     <child internal-child="entry">
                       <object class="GtkEntry" id="enterprise_domain_entry">
                         <property name="can_focus">True</property>
@@ -626,6 +643,7 @@
                     <property name="activates_default">True</property>
                     <property name="invisible_char_set">True</property>
                     <property name="input_purpose">password</property>
+                    <signal name="changed" handler="enterprise_login_changed_cb" object="CcAddUserDialog" swapped="yes"/>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -644,6 +662,7 @@
                     <property name="activates_default">True</property>
                     <property name="invisible_char_set">True</property>
                     <property name="input_purpose">password</property>
+                    <signal name="changed" handler="enterprise_password_changed_cb" object="CcAddUserDialog" swapped="yes"/>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -768,6 +787,7 @@
                 <property name="receives_default">True</property>
                 <property name="use_underline">True</property>
                 <property name="border_width">20</property>
+                <signal name="toggled" handler="enterprise_button_toggled_cb" object="CcAddUserDialog" swapped="yes"/>
               </object>
               <packing>
                 <property name="expand">False</property>
