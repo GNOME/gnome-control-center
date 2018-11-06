@@ -339,12 +339,8 @@ local_username_timeout (CcAddUserDialog *self)
 }
 
 static gboolean
-on_username_focus_out (GtkEntry *entry,
-                       GParamSpec *pspec,
-                       gpointer user_data)
+local_username_focus_out_event_cb (CcAddUserDialog *self)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
-
         if (self->local_username_timeout_id != 0) {
                 g_source_remove (self->local_username_timeout_id);
                 self->local_username_timeout_id = 0;
@@ -356,10 +352,8 @@ on_username_focus_out (GtkEntry *entry,
 }
 
 static void
-on_username_changed (GtkComboBoxText *combo,
-                     gpointer         user_data)
+local_username_changed_cb (CcAddUserDialog *self)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         const gchar *username;
 
         username = gtk_entry_get_text (self->local_username_entry);
@@ -391,12 +385,8 @@ local_name_timeout (CcAddUserDialog *self)
 }
 
 static gboolean
-on_name_focus_out (GtkEntry *entry,
-                       GParamSpec *pspec,
-                       gpointer user_data)
+local_name_focus_out_event_cb (CcAddUserDialog *self)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
-
         if (self->local_name_timeout_id != 0) {
                 g_source_remove (self->local_name_timeout_id);
                 self->local_name_timeout_id = 0;
@@ -408,17 +398,15 @@ on_name_focus_out (GtkEntry *entry,
 }
 
 static void
-on_name_changed (GtkEditable *editable,
-                 gpointer     user_data)
+local_name_changed_cb (CcAddUserDialog *self)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         GtkTreeModel *model;
         const char *name;
 
         model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->local_username));
         gtk_list_store_clear (GTK_LIST_STORE (model));
 
-        name = gtk_entry_get_text (GTK_ENTRY (editable));
+        name = gtk_entry_get_text (self->local_name);
         if ((name == NULL || strlen (name) == 0) && !self->has_custom_username) {
                 gtk_entry_set_text (self->local_username_entry, "");
         } else if (name != NULL && strlen (name) != 0) {
@@ -432,7 +420,7 @@ on_name_changed (GtkEditable *editable,
                 self->local_name_timeout_id = 0;
         }
 
-        clear_entry_validation_error (GTK_ENTRY (editable));
+        clear_entry_validation_error (self->local_name);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
 
         self->local_name_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) local_name_timeout, self);
@@ -458,10 +446,7 @@ update_password_match (CcAddUserDialog *self)
 }
 
 static void
-on_generate (GtkEntry             *entry,
-             GtkEntryIconPosition  pos,
-             GdkEventButton       *event,
-             CcAddUserDialog      *self)
+local_password_icon_press_cb (CcAddUserDialog *self)
 {
         gchar *pwd;
 
@@ -489,12 +474,8 @@ local_password_timeout (CcAddUserDialog *self)
 }
 
 static gboolean
-on_password_focus_out (GtkEntry *entry,
-                     GParamSpec *pspec,
-                     gpointer user_data)
+password_focus_out_event_cb (CcAddUserDialog *self)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
-
         if (self->local_password_timeout_id != 0) {
                 g_source_remove (self->local_password_timeout_id);
                 self->local_password_timeout_id = 0;
@@ -506,11 +487,9 @@ on_password_focus_out (GtkEntry *entry,
 }
 
 static gboolean
-on_password_key_press_cb (GtkEntry *entry,
-                          GdkEvent *event,
-                          gpointer  user_data)
+local_password_key_press_event_cb (CcAddUserDialog *self,
+                                   GdkEvent        *event)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         GdkEventKey *key = (GdkEventKey *)event;
 
         if (key->keyval == GDK_KEY_Tab)
@@ -520,11 +499,8 @@ on_password_key_press_cb (GtkEntry *entry,
 }
 
 static void
-on_password_changed (GtkEntry *entry,
-                   GParamSpec *pspec,
-                   gpointer user_data)
+recheck_password_match (CcAddUserDialog *self)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         const char *password;
 
         if (self->local_password_timeout_id != 0) {
@@ -532,8 +508,6 @@ on_password_changed (GtkEntry *entry,
                 self->local_password_timeout_id = 0;
         }
 
-        clear_entry_validation_error (GTK_ENTRY (entry));
-        clear_entry_validation_error (self->local_verify);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
 
         password = gtk_entry_get_text (self->local_password);
@@ -545,13 +519,26 @@ on_password_changed (GtkEntry *entry,
 }
 
 static void
-on_password_radio_changed (GtkRadioButton *radio,
-                           gpointer user_data)
+local_password_changed_cb (CcAddUserDialog *self)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
+        clear_entry_validation_error (self->local_password);
+        clear_entry_validation_error (self->local_verify);
+        recheck_password_match (self);
+}
+
+static void
+local_verify_changed_cb (CcAddUserDialog *self)
+{
+        clear_entry_validation_error (self->local_verify);
+        recheck_password_match (self);
+}
+
+static void
+local_password_radio_changed_cb (CcAddUserDialog *self)
+{
         gboolean active;
 
-        active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radio));
+        active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->local_password_radio));
         self->local_password_mode = active ? ACT_USER_PASSWORD_MODE_REGULAR : ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
 
         gtk_widget_set_sensitive (GTK_WIDGET (self->local_password), active);
@@ -565,30 +552,7 @@ on_password_radio_changed (GtkRadioButton *radio,
 static void
 local_init (CcAddUserDialog *self)
 {
-        g_signal_connect (self->local_username, "changed",
-                          G_CALLBACK (on_username_changed), self);
-        g_signal_connect_after (self->local_username, "focus-out-event", G_CALLBACK (on_username_focus_out), self);
-
-        g_signal_connect_swapped (self->local_username_entry, "activate", G_CALLBACK (dialog_validate), self);
-
-        g_signal_connect (self->local_name, "changed", G_CALLBACK (on_name_changed), self);
-        g_signal_connect_after (self->local_name, "focus-out-event", G_CALLBACK (on_name_focus_out), self);
-        g_signal_connect_swapped (self->local_name, "activate", G_CALLBACK (dialog_validate), self);
-
-        g_signal_connect (self->local_password_radio, "toggled", G_CALLBACK (on_password_radio_changed), self);
-
         self->local_password_mode = ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
-
-        g_signal_connect (self->local_password, "notify::text", G_CALLBACK (on_password_changed), self);
-        g_signal_connect_after (self->local_password, "focus-out-event", G_CALLBACK (on_password_focus_out), self);
-        g_signal_connect (self->local_password, "key-press-event", G_CALLBACK (on_password_key_press_cb), self);
-        g_signal_connect_swapped (self->local_password, "activate", G_CALLBACK (dialog_validate), self);
-        g_signal_connect (self->local_password, "icon-press", G_CALLBACK (on_generate), self);
-
-        g_signal_connect (self->local_verify, "notify::text", G_CALLBACK (on_password_changed), self);
-        g_signal_connect_after (self->local_verify, "focus-out-event", G_CALLBACK (on_password_focus_out), self);
-        g_signal_connect_swapped (self->local_verify, "activate", G_CALLBACK (dialog_validate), self);
-
         dialog_validate (self);
         update_password_strength (self);
 }
@@ -1276,11 +1240,8 @@ enterprise_domain_timeout (CcAddUserDialog *self)
 }
 
 static void
-on_domain_changed (GtkComboBox *widget,
-                   gpointer user_data)
+enterprise_domain_changed_cb (CcAddUserDialog *self)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
-
         if (self->enterprise_domain_timeout_id != 0) {
                 g_source_remove (self->enterprise_domain_timeout_id);
                 self->enterprise_domain_timeout_id = 0;
@@ -1296,12 +1257,8 @@ on_domain_changed (GtkComboBox *widget,
 }
 
 static gboolean
-on_enterprise_domain_focus_out (GtkEntry *entry,
-                                GParamSpec *pspec,
-                                gpointer user_data)
+enterprise_domain_focus_out_event_cb (CcAddUserDialog *self)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
-
         if (self->enterprise_domain_timeout_id != 0) {
                 g_source_remove (self->enterprise_domain_timeout_id);
                 self->enterprise_domain_timeout_id = 0;
@@ -1315,13 +1272,17 @@ on_enterprise_domain_focus_out (GtkEntry *entry,
 }
 
 static void
-on_entry_changed (GtkEditable *editable,
-                  gpointer user_data)
+enterprise_login_changed_cb (CcAddUserDialog *self)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
-
         dialog_validate (self);
-        clear_entry_validation_error (GTK_ENTRY (editable));
+        clear_entry_validation_error (self->enterprise_login);
+        clear_entry_validation_error (self->enterprise_password);
+}
+
+static void
+enterprise_password_changed_cb (CcAddUserDialog *self)
+{
+        dialog_validate (self);
         clear_entry_validation_error (self->enterprise_password);
 }
 
@@ -1329,16 +1290,7 @@ static void
 enterprise_init (CcAddUserDialog *self)
 {
         GNetworkMonitor *monitor;
-
-        self->enterprise_check_credentials = FALSE;
-
-        g_signal_connect (self->enterprise_domain, "changed", G_CALLBACK (on_domain_changed), self);
-        g_signal_connect_after (self->enterprise_domain, "focus-out-event", G_CALLBACK (on_enterprise_domain_focus_out), self);
         enterprise_check_domain (self);
-
-        g_signal_connect (self->enterprise_login, "changed", G_CALLBACK (on_entry_changed), self);
-
-        g_signal_connect (self->enterprise_password, "changed", G_CALLBACK (on_entry_changed), self);
 
         self->realmd_watch = g_bus_watch_name (G_BUS_TYPE_SYSTEM, "org.freedesktop.realmd",
                                                G_BUS_NAME_WATCHER_FLAGS_AUTO_START,
@@ -1401,20 +1353,12 @@ mode_change (CcAddUserDialog *self,
 }
 
 static void
-on_enterprise_toggle (GtkToggleButton *toggle,
-                      gpointer user_data)
+enterprise_button_toggled_cb (CcAddUserDialog *self)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         AccountMode mode;
 
-        mode = gtk_toggle_button_get_active (toggle) ? MODE_ENTERPRISE : MODE_LOCAL;
+        mode = gtk_toggle_button_get_active (self->enterprise_button) ? MODE_ENTERPRISE : MODE_LOCAL;
         mode_change (self, mode);
-}
-
-static void
-mode_init (CcAddUserDialog *self)
-{
-        g_signal_connect (self->enterprise_button, "toggled", G_CALLBACK (on_enterprise_toggle), self);
 }
 
 static void
@@ -1425,7 +1369,6 @@ cc_add_user_dialog_init (CcAddUserDialog *self)
         local_init (self);
         enterprise_init (self);
         join_init (self);
-        mode_init (self);
 }
 
 static void
@@ -1578,6 +1521,23 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_hint);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, spinner);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, stack);
+
+        gtk_widget_class_bind_template_callback (widget_class, dialog_validate);
+        gtk_widget_class_bind_template_callback (widget_class, enterprise_button_toggled_cb);
+        gtk_widget_class_bind_template_callback (widget_class, enterprise_domain_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, enterprise_domain_focus_out_event_cb);
+        gtk_widget_class_bind_template_callback (widget_class, enterprise_login_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, enterprise_password_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, local_name_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, local_name_focus_out_event_cb);
+        gtk_widget_class_bind_template_callback (widget_class, local_password_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, local_password_icon_press_cb);
+        gtk_widget_class_bind_template_callback (widget_class, local_password_key_press_event_cb);
+        gtk_widget_class_bind_template_callback (widget_class, local_password_radio_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, local_username_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, local_username_focus_out_event_cb);
+        gtk_widget_class_bind_template_callback (widget_class, local_verify_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, password_focus_out_event_cb);
 }
 
 CcAddUserDialog *
