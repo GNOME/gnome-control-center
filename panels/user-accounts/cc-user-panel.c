@@ -575,7 +575,7 @@ delete_enterprise_user_response (GtkWidget          *dialog,
                                  gint                response_id,
                                  gpointer            user_data)
 {
-        CcUserPanel *self = UM_USER_PANEL (user_data);
+        CcUserPanel *self = CC_USER_PANEL (user_data);
         AsyncDeleteData *data;
         ActUser *user;
 
@@ -1335,7 +1335,7 @@ settings_or_null (const gchar *schema)
 static void
 cc_user_panel_constructed (GObject *object)
 {
-        CcUserPanel *self = UM_USER_PANEL (object);
+        CcUserPanel *self = CC_USER_PANEL (object);
         CcShell *shell;
 
         G_OBJECT_CLASS (cc_user_panel_parent_class)->constructed (object);
@@ -1381,7 +1381,7 @@ cc_user_panel_init (CcUserPanel *self)
 static void
 cc_user_panel_dispose (GObject *object)
 {
-        CcUserPanel *self = UM_USER_PANEL (object);
+        CcUserPanel *self = CC_USER_PANEL (object);
 
         g_cancellable_cancel (self->cancellable);
         g_clear_object (&self->cancellable);

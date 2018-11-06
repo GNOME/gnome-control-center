@@ -24,6 +24,6 @@
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CcUserPanel, cc_user_panel, UM, USER_PANEL, CcPanel)
+G_DECLARE_FINAL_TYPE (CcUserPanel, cc_user_panel, CC, USER_PANEL, CcPanel)
 
 G_END_DECLS
