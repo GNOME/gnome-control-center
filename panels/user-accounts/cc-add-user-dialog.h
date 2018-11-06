@@ -25,16 +25,16 @@
 
 G_BEGIN_DECLS
 
-#define UM_TYPE_ACCOUNT_DIALOG (um_account_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (UmAccountDialog, um_account_dialog, UM, ACCOUNT_DIALOG, GtkDialog)
+#define CC_TYPE_ADD_USER_DIALOG (cc_add_user_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (CcAddUserDialog, cc_add_user_dialog, CC, ADD_USER_DIALOG, GtkDialog)
 
-UmAccountDialog *um_account_dialog_new      (void);
-void             um_account_dialog_show     (UmAccountDialog     *self,
-                                             GtkWindow           *parent,
-                                             GPermission         *permission,
-                                             GAsyncReadyCallback  callback,
-                                             gpointer             user_data);
-ActUser *        um_account_dialog_finish   (UmAccountDialog     *self,
-                                             GAsyncResult        *result);
+CcAddUserDialog *cc_add_user_dialog_new      (void);
+void             cc_add_user_dialog_show     (CcAddUserDialog     *self,
+                                              GtkWindow           *parent,
+                                              GPermission         *permission,
+                                              GAsyncReadyCallback  callback,
+                                              gpointer             user_data);
+ActUser         *cc_add_user_dialog_finish   (CcAddUserDialog     *self,
+                                              GAsyncResult        *result);
 
 G_END_DECLS

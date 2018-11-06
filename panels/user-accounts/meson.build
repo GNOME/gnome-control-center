@@ -94,14 +94,15 @@ i18n.merge_file(
 )
 
 common_sources = files(
+  'cc-add-user-dialog.c',
   'pw-utils.c',
-  'um-account-dialog.c',
   'um-realm-manager.c',
   'um-utils.c'
 )
 
 resource_data = files(
   'cc-user-panel.ui',
+  'cc-add-user-dialog.ui',
   'data/icons/left-index-finger.png',
   'data/icons/left-little-finger.png',
   'data/icons/left-middle-finger.png',
@@ -114,7 +115,6 @@ resource_data = files(
   'data/icons/right-middle-finger.png',
   'data/icons/right-ring-finger.png',
   'data/icons/right-thumb.png',
-  'data/account-dialog.ui',
   'data/account-fingerprint.ui',
   'data/carousel.css',
   'data/carousel.ui',

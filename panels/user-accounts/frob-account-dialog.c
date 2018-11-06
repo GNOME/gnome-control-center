@@ -17,7 +17,7 @@
   * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   */
 
-#include "um-account-dialog.h"
+#include "cc-add-user-dialog.h"
 
 #include <gtk/gtk.h>
 
@@ -29,7 +29,7 @@ on_dialog_complete (GObject *object,
 	GMainLoop *loop = user_data;
 	ActUser *user;
 
-	user = um_account_dialog_finish (UM_ACCOUNT_DIALOG (object), result);
+	user = cc_add_user_dialog_finish (CC_ADD_USER_DIALOG (object), result);
 	if (user == NULL) {
 		g_printerr ("No user created\n");
 	} else {
@@ -44,15 +44,15 @@ int
 main (int argc,
       char *argv[])
 {
-	UmAccountDialog *dialog;
+	CcAddUserDialog *dialog;
 	GMainLoop *loop;
 
 	gtk_init (&argc, &argv);
 
-	dialog = um_account_dialog_new ();
+	dialog = cc_add_user_dialog_new ();
 	loop = g_main_loop_new (NULL, FALSE);
 
-	um_account_dialog_show (dialog, NULL, NULL, on_dialog_complete, loop);
+	cc_add_user_dialog_show (dialog, NULL, NULL, on_dialog_complete, loop);
 
 	g_main_loop_run (loop);
 	g_main_loop_unref (loop);
