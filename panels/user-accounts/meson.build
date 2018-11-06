@@ -101,6 +101,7 @@ common_sources = files(
 )
 
 resource_data = files(
+  'cc-password-dialog.ui',
   'cc-user-panel.ui',
   'data/icons/left-index-finger.png',
   'data/icons/left-little-finger.png',
@@ -121,7 +122,6 @@ resource_data = files(
   'data/history-dialog.ui',
   'data/join-dialog.ui',
   'data/user-accounts-dialog.css',
-  'um-password-dialog.ui',
 )
 
 common_sources += gnome.compile_resources(
@@ -145,13 +145,13 @@ common_sources += gnome.gdbus_codegen(
 
 sources = common_sources + files(
   'cc-crop-area.c',
+  'cc-password-dialog.c',
   'cc-user-panel.c',
   'run-passwd.c',
   'um-account-type.c',
   'um-carousel.c',
   'um-fingerprint-dialog.c',
   'um-history-dialog.c',
-  'um-password-dialog.c',
   'um-photo-dialog.c',
   'um-user-image.c',
 )
