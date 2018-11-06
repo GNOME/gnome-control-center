@@ -163,7 +163,7 @@ ok_button_clicked_cb (UmPasswordDialog *um)
                 case ACT_USER_PASSWORD_MODE_REGULAR:
                         if (act_user_get_uid (um->user) == getuid ()) {
                                 GdkDisplay *display;
-                                GdkCursor *cursor;
+                                g_autoptr(GdkCursor) cursor = NULL;
 
                                 /* When setting a password for the current user,
                                  * use passwd directly, to preserve the audit trail
@@ -176,7 +176,6 @@ ok_button_clicked_cb (UmPasswordDialog *um)
                                 cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
                                 gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (um)), cursor);
                                 gdk_display_flush (display);
-                                g_object_unref (cursor);
                                 return;
                         }
 
@@ -397,7 +396,7 @@ old_password_entry_changed (UmPasswordDialog *um)
 static void
 password_entry_icon_press_cb (UmPasswordDialog *um)
 {
-        gchar *pwd;
+        g_autofree gchar *pwd = NULL;
 
         pwd = pw_generate ();
         if (pwd == NULL)
@@ -407,8 +406,6 @@ password_entry_icon_press_cb (UmPasswordDialog *um)
         gtk_entry_set_text (um->verify_entry, pwd);
         gtk_entry_set_visibility (um->password_entry, TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET (um->verify_entry), TRUE);
-
-        g_free (pwd);
 }
 
 static void
