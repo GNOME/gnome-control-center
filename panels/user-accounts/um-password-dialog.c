@@ -280,9 +280,7 @@ password_entry_timeout (UmPasswordDialog *um)
 }
 
 static void
-password_entry_changed (UmPasswordDialog *um,
-                        GParamSpec       *pspec,
-                        GtkEntry         *entry)
+recheck_password_match (UmPasswordDialog *um)
 {
         const gchar *password;
 
@@ -291,8 +289,6 @@ password_entry_changed (UmPasswordDialog *um,
                 um->password_entry_timeout_id = 0;
         }
 
-        clear_entry_validation_error (entry);
-        clear_entry_validation_error (um->verify_entry);
         gtk_widget_set_sensitive (GTK_WIDGET (um->ok_button), FALSE);
 
         password = gtk_entry_get_text (um->password_entry);
@@ -303,6 +299,21 @@ password_entry_changed (UmPasswordDialog *um,
         um->password_entry_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT,
                                                        (GSourceFunc) password_entry_timeout,
                                                        um);
+}
+
+static void
+password_entry_changed (UmPasswordDialog *um)
+{
+        clear_entry_validation_error (um->password_entry);
+        clear_entry_validation_error (um->verify_entry);
+        recheck_password_match (um);
+}
+
+static void
+verify_entry_changed (UmPasswordDialog *um)
+{
+        clear_entry_validation_error (um->verify_entry);
+        recheck_password_match (um);
 }
 
 static gboolean
@@ -464,6 +475,7 @@ um_password_dialog_class_init (UmPasswordDialogClass *klass)
         gtk_widget_class_bind_template_callback (widget_class, password_entry_icon_press_cb);
         gtk_widget_class_bind_template_callback (widget_class, password_entry_key_press_cb);
         gtk_widget_class_bind_template_callback (widget_class, password_entry_timeout);
+        gtk_widget_class_bind_template_callback (widget_class, verify_entry_changed);
 }
 
 static void
