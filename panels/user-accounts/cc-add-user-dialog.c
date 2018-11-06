@@ -25,7 +25,7 @@
 #include <gtk/gtk.h>
 #include <act/act.h>
 
-#include "um-account-dialog.h"
+#include "cc-add-user-dialog.h"
 #include "um-realm-manager.h"
 #include "um-utils.h"
 #include "pw-utils.h"
@@ -34,10 +34,10 @@
 #define DOMAIN_DEFAULT_HINT _("Should match the web address of your login provider.")
 
 typedef enum {
-        UM_LOCAL,
-        UM_ENTERPRISE,
-        UM_OFFLINE
-} UmAccountMode;
+        MODE_LOCAL,
+        MODE_ENTERPRISE,
+        MODE_OFFLINE
+} AccountMode;
 
 static const char * const mode_pages[] = {
   "_local",
@@ -45,10 +45,10 @@ static const char * const mode_pages[] = {
   "_offline"
 };
 
-static void   mode_change          (UmAccountDialog *self,
-                                    UmAccountMode mode);
+static void   mode_change          (CcAddUserDialog *self,
+                                    AccountMode      mode);
 
-static void   dialog_validate      (UmAccountDialog *self);
+static void   dialog_validate      (CcAddUserDialog *self);
 
 static void   on_join_login        (GObject *source,
                                     GAsyncResult *result,
@@ -58,16 +58,10 @@ static void   on_realm_joined      (GObject *source,
                                     GAsyncResult *result,
                                     gpointer user_data);
 
-static void   um_account_dialog_response  (GtkDialog *dialog,
+static void   cc_add_user_dialog_response (GtkDialog *dialog,
                                            gint response_id);
 
-#define UM_ACCOUNT_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), UM_TYPE_ACCOUNT_DIALOG, \
-                                                                    UmAccountDialogClass))
-#define UM_IS_ACCOUNT_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), UM_TYPE_ACCOUNT_DIALOG))
-#define UM_ACCOUNT_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), UM_TYPE_ACCOUNT_DIALOG, \
-                                                                      UmAccountDialogClass))
-
-struct _UmAccountDialog {
+struct _CcAddUserDialog {
         GtkDialog parent_instance;
 
         GtkWidget *stack;
@@ -75,7 +69,7 @@ struct _UmAccountDialog {
         GCancellable *cancellable;
         GPermission *permission;
         GtkSpinner *spinner;
-        UmAccountMode mode;
+        AccountMode mode;
 
         /* Local user account widgets */
         GtkWidget *local_username;
@@ -119,12 +113,12 @@ struct _UmAccountDialog {
         gboolean join_prompted;
 };
 
-G_DEFINE_TYPE (UmAccountDialog, um_account_dialog, GTK_TYPE_DIALOG);
+G_DEFINE_TYPE (CcAddUserDialog, cc_add_user_dialog, GTK_TYPE_DIALOG);
 
 static void
-show_error_dialog (UmAccountDialog *self,
-                   const gchar *message,
-                   GError *error)
+show_error_dialog (CcAddUserDialog *self,
+                   const gchar     *message,
+                   GError          *error)
 {
         GtkWidget *dialog;
 
@@ -145,7 +139,7 @@ show_error_dialog (UmAccountDialog *self,
 }
 
 static void
-begin_action (UmAccountDialog *self)
+begin_action (CcAddUserDialog *self)
 {
         g_debug ("Beginning action, disabling dialog controls");
 
@@ -160,7 +154,7 @@ begin_action (UmAccountDialog *self)
 }
 
 static void
-finish_action (UmAccountDialog *self)
+finish_action (CcAddUserDialog *self)
 {
         g_debug ("Completed domain action");
 
@@ -175,7 +169,7 @@ finish_action (UmAccountDialog *self)
 }
 
 static void
-complete_dialog (UmAccountDialog *self,
+complete_dialog (CcAddUserDialog *self,
                  ActUser         *user)
 {
         gtk_widget_hide (GTK_WIDGET (self));
@@ -190,7 +184,7 @@ complete_dialog (UmAccountDialog *self,
 static void
 user_loaded_cb (ActUser         *user,
                 GParamSpec      *pspec,
-                UmAccountDialog *self)
+                CcAddUserDialog *self)
 {
   const gchar *password;
 
@@ -208,7 +202,7 @@ user_loaded_cb (ActUser         *user,
 static void
 create_user_done (ActUserManager  *manager,
                   GAsyncResult    *res,
-                  UmAccountDialog *self)
+                  CcAddUserDialog *self)
 {
         ActUser *user;
         GError *error;
@@ -237,7 +231,7 @@ create_user_done (ActUserManager  *manager,
 }
 
 static void
-local_create_user (UmAccountDialog *self)
+local_create_user (CcAddUserDialog *self)
 {
         ActUserManager *manager;
         const gchar *username;
@@ -263,7 +257,7 @@ local_create_user (UmAccountDialog *self)
 }
 
 static gint
-update_password_strength (UmAccountDialog *self)
+update_password_strength (CcAddUserDialog *self)
 {
         const gchar *password;
         const gchar *username;
@@ -296,7 +290,7 @@ update_password_strength (UmAccountDialog *self)
 }
 
 static gboolean
-local_validate (UmAccountDialog *self)
+local_validate (CcAddUserDialog *self)
 {
         gboolean valid_login;
         gboolean valid_name;
@@ -338,7 +332,7 @@ local_validate (UmAccountDialog *self)
 }
 
 static gboolean
-local_username_timeout (UmAccountDialog *self)
+local_username_timeout (CcAddUserDialog *self)
 {
         self->local_username_timeout_id = 0;
 
@@ -352,7 +346,7 @@ on_username_focus_out (GtkEntry *entry,
                        GParamSpec *pspec,
                        gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
 
         if (self->local_username_timeout_id != 0) {
                 g_source_remove (self->local_username_timeout_id);
@@ -368,7 +362,7 @@ static void
 on_username_changed (GtkComboBoxText *combo,
                      gpointer         user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         GtkWidget *entry;
         const gchar *username;
 
@@ -392,7 +386,7 @@ on_username_changed (GtkComboBoxText *combo,
 }
 
 static gboolean
-local_name_timeout (UmAccountDialog *self)
+local_name_timeout (CcAddUserDialog *self)
 {
         self->local_name_timeout_id = 0;
 
@@ -406,7 +400,7 @@ on_name_focus_out (GtkEntry *entry,
                        GParamSpec *pspec,
                        gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
 
         if (self->local_name_timeout_id != 0) {
                 g_source_remove (self->local_name_timeout_id);
@@ -420,9 +414,9 @@ on_name_focus_out (GtkEntry *entry,
 
 static void
 on_name_changed (GtkEditable *editable,
-                 gpointer user_data)
+                 gpointer     user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         GtkTreeModel *model;
         const char *name;
         GtkWidget *entry;
@@ -452,7 +446,7 @@ on_name_changed (GtkEditable *editable,
 }
 
 static void
-update_password_match (UmAccountDialog *self)
+update_password_match (CcAddUserDialog *self)
 {
         const gchar *password;
         const gchar *verify;
@@ -474,7 +468,7 @@ static void
 on_generate (GtkEntry             *entry,
              GtkEntryIconPosition  pos,
              GdkEventButton       *event,
-             UmAccountDialog      *self)
+             CcAddUserDialog      *self)
 {
         gchar *pwd;
 
@@ -491,7 +485,7 @@ on_generate (GtkEntry             *entry,
 }
 
 static gboolean
-local_password_timeout (UmAccountDialog *self)
+local_password_timeout (CcAddUserDialog *self)
 {
         self->local_password_timeout_id = 0;
 
@@ -506,7 +500,7 @@ on_password_focus_out (GtkEntry *entry,
                      GParamSpec *pspec,
                      gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
 
         if (self->local_password_timeout_id != 0) {
                 g_source_remove (self->local_password_timeout_id);
@@ -523,7 +517,7 @@ on_password_key_press_cb (GtkEntry *entry,
                           GdkEvent *event,
                           gpointer  user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         GdkEventKey *key = (GdkEventKey *)event;
 
         if (key->keyval == GDK_KEY_Tab)
@@ -537,7 +531,7 @@ on_password_changed (GtkEntry *entry,
                    GParamSpec *pspec,
                    gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         const char *password;
 
         if (self->local_password_timeout_id != 0) {
@@ -561,7 +555,7 @@ static void
 on_password_radio_changed (GtkRadioButton *radio,
                            gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         gboolean active;
 
         active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radio));
@@ -576,7 +570,7 @@ on_password_radio_changed (GtkRadioButton *radio,
 }
 
 static void
-local_init (UmAccountDialog *self)
+local_init (CcAddUserDialog *self)
 {
         g_signal_connect (self->local_username, "changed",
                           G_CALLBACK (on_username_changed), self);
@@ -613,7 +607,7 @@ local_init (UmAccountDialog *self)
 }
 
 static void
-local_prepare (UmAccountDialog *self)
+local_prepare (CcAddUserDialog *self)
 {
         GtkTreeModel *model;
 
@@ -626,7 +620,7 @@ local_prepare (UmAccountDialog *self)
 }
 
 static gboolean
-enterprise_validate (UmAccountDialog *self)
+enterprise_validate (CcAddUserDialog *self)
 {
         const gchar *name;
         gboolean valid_name;
@@ -648,8 +642,8 @@ enterprise_validate (UmAccountDialog *self)
 }
 
 static void
-enterprise_add_realm (UmAccountDialog *self,
-                      UmRealmObject *realm)
+enterprise_add_realm (CcAddUserDialog *self,
+                      UmRealmObject   *realm)
 {
         GtkTreeModel *model;
         GtkTreeIter iter;
@@ -707,7 +701,7 @@ on_manager_realm_added (UmRealmManager  *manager,
                         UmRealmObject   *realm,
                         gpointer         user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         enterprise_add_realm (self, realm);
 }
 
@@ -717,7 +711,7 @@ on_register_user (GObject *source,
                   GAsyncResult *result,
                   gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         GError *error = NULL;
         ActUser *user;
 
@@ -749,7 +743,7 @@ on_permit_user_login (GObject *source,
                       GAsyncResult *result,
                       gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         UmRealmCommon *common;
         ActUserManager *manager;
         GError *error = NULL;
@@ -791,7 +785,7 @@ on_permit_user_login (GObject *source,
 }
 
 static void
-enterprise_permit_user_login (UmAccountDialog *self)
+enterprise_permit_user_login (CcAddUserDialog *self)
 {
         UmRealmCommon *common;
         gchar *login;
@@ -832,7 +826,7 @@ on_join_response (GtkDialog *dialog,
                   gint response,
                   gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
 
         gtk_widget_hide (GTK_WIDGET (dialog));
         if (response != GTK_RESPONSE_OK) {
@@ -852,8 +846,8 @@ on_join_response (GtkDialog *dialog,
 }
 
 static void
-join_show_prompt (UmAccountDialog *self,
-                  GError *error)
+join_show_prompt (CcAddUserDialog *self,
+                  GError          *error)
 {
         UmRealmKerberosMembership *membership;
         UmRealmKerberos *kerberos;
@@ -907,7 +901,7 @@ on_join_login (GObject *source,
                GAsyncResult *result,
                gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         GError *error = NULL;
         GBytes *creds;
 
@@ -943,7 +937,7 @@ on_join_login (GObject *source,
 }
 
 static void
-join_init (UmAccountDialog *self)
+join_init (CcAddUserDialog *self)
 {
         GtkBuilder *builder;
         GError *error = NULL;
@@ -974,7 +968,7 @@ on_realm_joined (GObject *source,
                  GAsyncResult *result,
                  gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         GError *error = NULL;
 
         if (g_cancellable_is_cancelled (self->cancellable)) {
@@ -1012,7 +1006,7 @@ on_realm_login (GObject *source,
                 GAsyncResult *result,
                 gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         GError *error = NULL;
         GBytes *creds = NULL;
         const gchar *message;
@@ -1084,7 +1078,7 @@ on_realm_login (GObject *source,
 }
 
 static void
-enterprise_check_login (UmAccountDialog *self)
+enterprise_check_login (CcAddUserDialog *self)
 {
         g_assert (self->selected_realm);
 
@@ -1101,7 +1095,7 @@ on_realm_discover_input (GObject *source,
                          GAsyncResult *result,
                          gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         GError *error = NULL;
         GList *realms;
         gchar *message;
@@ -1156,7 +1150,7 @@ on_realm_discover_input (GObject *source,
 }
 
 static void
-enterprise_check_domain (UmAccountDialog *self)
+enterprise_check_domain (CcAddUserDialog *self)
 {
         const gchar *domain;
 
@@ -1177,7 +1171,7 @@ enterprise_check_domain (UmAccountDialog *self)
 }
 
 static void
-enterprise_add_user (UmAccountDialog *self)
+enterprise_add_user (CcAddUserDialog *self)
 {
         self->join_prompted = FALSE;
         self->enterprise_check_credentials = TRUE;
@@ -1187,7 +1181,7 @@ enterprise_add_user (UmAccountDialog *self)
 }
 
 static void
-clear_realm_manager (UmAccountDialog *self)
+clear_realm_manager (CcAddUserDialog *self)
 {
         if (self->realm_manager) {
                 g_signal_handlers_disconnect_by_func (self->realm_manager,
@@ -1200,10 +1194,10 @@ clear_realm_manager (UmAccountDialog *self)
 
 static void
 on_realm_manager_created (GObject *source,
-                           GAsyncResult *result,
-                           gpointer user_data)
+                          GAsyncResult *result,
+                          gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         GError *error = NULL;
         GList *realms, *l;
 
@@ -1246,7 +1240,7 @@ on_realmd_appeared (GDBusConnection *connection,
                     const gchar *name_owner,
                     gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         um_realm_manager_new (self->cancellable, on_realm_manager_created,
                               g_object_ref (self));
 }
@@ -1256,12 +1250,12 @@ on_realmd_disappeared (GDBusConnection *unused1,
                        const gchar *unused2,
                        gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
 
         clear_realm_manager (self);
         gtk_list_store_clear (self->enterprise_realms);
         gtk_widget_hide (self->enterprise_button);
-        mode_change (self, UM_LOCAL);
+        mode_change (self, MODE_LOCAL);
 }
 
 static void
@@ -1269,14 +1263,14 @@ on_network_changed (GNetworkMonitor *monitor,
                     gboolean available,
                     gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
 
-        if (self->mode != UM_LOCAL)
-                mode_change (self, UM_ENTERPRISE);
+        if (self->mode != MODE_LOCAL)
+                mode_change (self, MODE_ENTERPRISE);
 }
 
 static gboolean
-enterprise_domain_timeout (UmAccountDialog *self)
+enterprise_domain_timeout (CcAddUserDialog *self)
 {
         GtkTreeIter iter;
 
@@ -1298,7 +1292,7 @@ static void
 on_domain_changed (GtkComboBox *widget,
                    gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
 
         if (self->enterprise_domain_timeout_id != 0) {
                 g_source_remove (self->enterprise_domain_timeout_id);
@@ -1319,7 +1313,7 @@ on_enterprise_domain_focus_out (GtkEntry *entry,
                                 GParamSpec *pspec,
                                 gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
 
         if (self->enterprise_domain_timeout_id != 0) {
                 g_source_remove (self->enterprise_domain_timeout_id);
@@ -1337,7 +1331,7 @@ static void
 on_entry_changed (GtkEditable *editable,
                   gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
 
         dialog_validate (self);
         clear_entry_validation_error (GTK_ENTRY (editable));
@@ -1345,7 +1339,7 @@ on_entry_changed (GtkEditable *editable,
 }
 
 static void
-enterprise_init (UmAccountDialog *self)
+enterprise_init (CcAddUserDialog *self)
 {
         GNetworkMonitor *monitor;
 
@@ -1376,22 +1370,22 @@ enterprise_init (UmAccountDialog *self)
 }
 
 static void
-enterprise_prepare (UmAccountDialog *self)
+enterprise_prepare (CcAddUserDialog *self)
 {
         gtk_entry_set_text (GTK_ENTRY (self->enterprise_login), "");
         gtk_entry_set_text (GTK_ENTRY (self->enterprise_password), "");
 }
 
 static void
-dialog_validate (UmAccountDialog *self)
+dialog_validate (CcAddUserDialog *self)
 {
         gboolean valid = FALSE;
 
         switch (self->mode) {
-        case UM_LOCAL:
+        case MODE_LOCAL:
                 valid = local_validate (self);
                 break;
-        case UM_ENTERPRISE:
+        case MODE_ENTERPRISE:
                 valid = enterprise_validate (self);
                 break;
         default:
@@ -1403,22 +1397,22 @@ dialog_validate (UmAccountDialog *self)
 }
 
 static void
-mode_change (UmAccountDialog *self,
-             UmAccountMode mode)
+mode_change (CcAddUserDialog *self,
+             AccountMode      mode)
 {
         gboolean active, available;
         GNetworkMonitor *monitor;
 
-        if (mode != UM_LOCAL) {
+        if (mode != MODE_LOCAL) {
                 monitor = g_network_monitor_get_default ();
                 available = g_network_monitor_get_network_available (monitor);
-                mode = available ? UM_ENTERPRISE : UM_OFFLINE;
+                mode = available ? MODE_ENTERPRISE : MODE_OFFLINE;
         }
 
         gtk_stack_set_visible_child_name (GTK_STACK (self->stack), mode_pages[mode]);
 
         /* The enterprise toggle state */
-        active = (mode != UM_LOCAL);
+        active = (mode != MODE_LOCAL);
         if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->enterprise_button)) != active)
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->enterprise_button), active);
 
@@ -1430,21 +1424,21 @@ static void
 on_enterprise_toggle (GtkToggleButton *toggle,
                       gpointer user_data)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
-        UmAccountMode mode;
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
+        AccountMode mode;
 
-        mode = gtk_toggle_button_get_active (toggle) ? UM_ENTERPRISE : UM_LOCAL;
+        mode = gtk_toggle_button_get_active (toggle) ? MODE_ENTERPRISE : MODE_LOCAL;
         mode_change (self, mode);
 }
 
 static void
-mode_init (UmAccountDialog *self)
+mode_init (CcAddUserDialog *self)
 {
         g_signal_connect (self->enterprise_button, "toggled", G_CALLBACK (on_enterprise_toggle), self);
 }
 
 static void
-um_account_dialog_init (UmAccountDialog *self)
+cc_add_user_dialog_init (CcAddUserDialog *self)
 {
         gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -1459,15 +1453,15 @@ on_permission_acquired (GObject *source_object,
                         GAsyncResult *res,
                         gpointer user_data)
 {
-	UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
 	GError *error = NULL;
 
-	/* Paired with begin_action in um_account_dialog_response () */
+        /* Paired with begin_action in cc_add_user_dialog_response () */
 	finish_action (self);
 
 	if (g_permission_acquire_finish (self->permission, res, &error)) {
 		g_return_if_fail (g_permission_get_allowed (self->permission));
-		um_account_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_OK);
+                cc_add_user_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_OK);
 	} else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
 		g_warning ("Failed to acquire permission: %s", error->message);
 	}
@@ -1477,10 +1471,10 @@ on_permission_acquired (GObject *source_object,
 }
 
 static void
-um_account_dialog_response (GtkDialog *dialog,
-                            gint response_id)
+cc_add_user_dialog_response (GtkDialog *dialog,
+                             gint response_id)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (dialog);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (dialog);
 
         switch (response_id) {
         case GTK_RESPONSE_OK:
@@ -1493,10 +1487,10 @@ um_account_dialog_response (GtkDialog *dialog,
                 }
 
                 switch (self->mode) {
-                case UM_LOCAL:
+                case MODE_LOCAL:
                         local_create_user (self);
                         break;
-                case UM_ENTERPRISE:
+                case MODE_ENTERPRISE:
                         enterprise_add_user (self);
                         break;
                 default:
@@ -1512,9 +1506,9 @@ um_account_dialog_response (GtkDialog *dialog,
 }
 
 static void
-um_account_dialog_dispose (GObject *obj)
+cc_add_user_dialog_dispose (GObject *obj)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (obj);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (obj);
 
         if (self->cancellable)
                 g_cancellable_cancel (self->cancellable);
@@ -1553,72 +1547,72 @@ um_account_dialog_dispose (GObject *obj)
 
         g_clear_pointer ((GtkWidget **)&self->join_dialog, gtk_widget_destroy);
 
-        G_OBJECT_CLASS (um_account_dialog_parent_class)->dispose (obj);
+        G_OBJECT_CLASS (cc_add_user_dialog_parent_class)->dispose (obj);
 }
 
 static void
-um_account_dialog_finalize (GObject *obj)
+cc_add_user_dialog_finalize (GObject *obj)
 {
-        UmAccountDialog *self = UM_ACCOUNT_DIALOG (obj);
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (obj);
 
         if (self->cancellable)
                 g_object_unref (self->cancellable);
         g_clear_object (&self->permission);
         g_object_unref (self->enterprise_realms);
 
-        G_OBJECT_CLASS (um_account_dialog_parent_class)->finalize (obj);
+        G_OBJECT_CLASS (cc_add_user_dialog_parent_class)->finalize (obj);
 }
 
 static void
-um_account_dialog_class_init (UmAccountDialogClass *klass)
+cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (klass);
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-        object_class->dispose = um_account_dialog_dispose;
-        object_class->finalize = um_account_dialog_finalize;
+        object_class->dispose = cc_add_user_dialog_dispose;
+        object_class->finalize = cc_add_user_dialog_finalize;
 
-        dialog_class->response = um_account_dialog_response;
+        dialog_class->response = cc_add_user_dialog_response;
 
         gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (dialog_class),
-                                                     "/org/gnome/control-center/user-accounts/account-dialog.ui");
+                                                     "/org/gnome/control-center/user-accounts/cc-add-user-dialog.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, stack);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, local_username);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, local_username_entry);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, local_name);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, local_username_hint);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, account_type_standard);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, local_password_radio);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, local_password);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, local_verify);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, local_strength_indicator);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, local_hint);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, local_verify_hint);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, enterprise_button);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, spinner);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, enterprise_domain);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, enterprise_login);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, enterprise_password);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, enterprise_domain_hint);
-        gtk_widget_class_bind_template_child (widget_class, UmAccountDialog, enterprise_hint);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, stack);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_entry);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_name);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_hint);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, account_type_standard);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_radio);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_strength_indicator);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_hint);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_hint);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_button);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, spinner);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_login);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_password);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain_hint);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_hint);
 }
 
-UmAccountDialog *
-um_account_dialog_new (void)
+CcAddUserDialog *
+cc_add_user_dialog_new (void)
 {
-        return g_object_new (UM_TYPE_ACCOUNT_DIALOG, "use-header-bar", TRUE, NULL);
+        return g_object_new (CC_TYPE_ADD_USER_DIALOG, "use-header-bar", TRUE, NULL);
 }
 
 void
-um_account_dialog_show (UmAccountDialog     *self,
-                        GtkWindow           *parent,
-                        GPermission         *permission,
-                        GAsyncReadyCallback  callback,
-                        gpointer             user_data)
+cc_add_user_dialog_show (CcAddUserDialog     *self,
+                         GtkWindow           *parent,
+                         GPermission         *permission,
+                         GAsyncReadyCallback  callback,
+                         gpointer             user_data)
 {
-        g_return_if_fail (UM_IS_ACCOUNT_DIALOG (self));
+        g_return_if_fail (CC_IS_ADD_USER_DIALOG (self));
 
         /* Make sure not already doing an operation */
         g_return_if_fail (self->task == NULL);
@@ -1628,14 +1622,14 @@ um_account_dialog_show (UmAccountDialog     *self,
         self->cancellable = g_cancellable_new ();
 
         self->task = g_task_new (G_OBJECT (self), self->cancellable, callback, user_data);
-        g_task_set_source_tag (self->task, um_account_dialog_show);
+        g_task_set_source_tag (self->task, cc_add_user_dialog_show);
 
         g_clear_object (&self->permission);
         self->permission = permission ? g_object_ref (permission) : NULL;
 
         local_prepare (self);
         enterprise_prepare (self);
-        mode_change (self, UM_LOCAL);
+        mode_change (self, MODE_LOCAL);
         dialog_validate (self);
 
         gtk_window_set_modal (GTK_WINDOW (self), parent != NULL);
@@ -1645,12 +1639,12 @@ um_account_dialog_show (UmAccountDialog     *self,
 }
 
 ActUser *
-um_account_dialog_finish (UmAccountDialog     *self,
-                          GAsyncResult        *result)
+cc_add_user_dialog_finish (CcAddUserDialog *self,
+                           GAsyncResult    *result)
 {
-        g_return_val_if_fail (UM_IS_ACCOUNT_DIALOG (self), NULL);
+        g_return_val_if_fail (CC_IS_ADD_USER_DIALOG (self), NULL);
         g_return_val_if_fail (g_task_is_valid (result, G_OBJECT (self)), NULL);
-        g_return_val_if_fail (g_async_result_is_tagged (result, um_account_dialog_show), NULL);
+        g_return_val_if_fail (g_async_result_is_tagged (result, cc_add_user_dialog_show), NULL);
         g_return_val_if_fail (result == G_ASYNC_RESULT (self->task), NULL);
 
         return g_task_propagate_pointer (self->task, NULL);
