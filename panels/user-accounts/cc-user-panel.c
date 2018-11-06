@@ -40,11 +40,11 @@
 
 #include "um-user-image.h"
 
-#include "cc-user-accounts-resources.h"
-#include "um-account-dialog.h"
+#include "cc-add-user-dialog.h"
 #include "cc-language-chooser.h"
 #include "cc-login-history-dialog.h"
 #include "cc-password-dialog.h"
+#include "cc-user-accounts-resources.h"
 #include "um-carousel.h"
 #include "um-photo-dialog.h"
 #include "um-fingerprint-dialog.h"
@@ -103,7 +103,7 @@ struct _CcUserPanel {
 
         gint other_accounts;
 
-        UmAccountDialog *account_dialog;
+        CcAddUserDialog *account_dialog;
 };
 
 CC_PANEL_REGISTER (CcUserPanel, cc_user_panel)
@@ -360,11 +360,11 @@ select_created_user (GObject *object,
                      gpointer user_data)
 {
         CcUserPanel *self = user_data;
-        UmAccountDialog *dialog;
+        CcAddUserDialog *dialog;
         ActUser *user;
 
-        dialog = UM_ACCOUNT_DIALOG (object);
-        user = um_account_dialog_finish (dialog, result);
+        dialog = CC_ADD_USER_DIALOG (object);
+        user = cc_add_user_dialog_finish (dialog, result);
         gtk_widget_destroy (GTK_WIDGET (dialog));
         self->account_dialog = NULL;
 
@@ -377,9 +377,9 @@ select_created_user (GObject *object,
 static void
 add_user (CcUserPanel *self)
 {
-        self->account_dialog = um_account_dialog_new ();
-        um_account_dialog_show (self->account_dialog, GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
-                                self->permission, select_created_user, self);
+        self->account_dialog = cc_add_user_dialog_new ();
+        cc_add_user_dialog_show (self->account_dialog, GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+                                 self->permission, select_created_user, self);
 }
 
 static void
