@@ -21,41 +21,25 @@
 
 #include <gtk/gtk.h>
 
-static void
-on_dialog_complete (GObject *object,
-                    GAsyncResult *result,
-                    gpointer user_data)
-{
-	GMainLoop *loop = user_data;
-	ActUser *user;
-
-	user = cc_add_user_dialog_finish (CC_ADD_USER_DIALOG (object), result);
-	if (user == NULL) {
-		g_printerr ("No user created\n");
-	} else {
-		g_printerr ("User created: %s\n", act_user_get_user_name (user));
-		g_object_unref (user);
-	}
-
-	g_main_loop_quit (loop);
-}
-
 int
 main (int argc,
       char *argv[])
 {
 	CcAddUserDialog *dialog;
-	GMainLoop *loop;
+	ActUser *user;
 
 	gtk_init (&argc, &argv);
 
-	dialog = cc_add_user_dialog_new ();
-	loop = g_main_loop_new (NULL, FALSE);
+	dialog = cc_add_user_dialog_new (NULL);
 
-	cc_add_user_dialog_show (dialog, NULL, NULL, on_dialog_complete, loop);
+	gtk_dialog_run (GTK_DIALOG (dialog));
 
-	g_main_loop_run (loop);
-	g_main_loop_unref (loop);
+	user = cc_add_user_dialog_get_user (dialog);
+	if (user == NULL) {
+		g_printerr ("No user created\n");
+	} else {
+		g_printerr ("User created: %s\n", act_user_get_user_name (user));
+	}
 
 	return 0;
 }
