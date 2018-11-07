@@ -80,7 +80,7 @@ extern void cc_wacom_panel_static_init_func (void);
 
 #endif
 
-static CcPanelLoaderVtable all_panels[] =
+static CcPanelLoaderVtable default_panels[] =
 {
   PANEL_TYPE("background",       cc_background_panel_get_type,           NULL),
 #ifdef BUILD_BLUETOOTH
@@ -123,8 +123,8 @@ cc_panel_loader_get_panels (void)
   GList *l = NULL;
   guint i;
 
-  for (i = 0; i < G_N_ELEMENTS (all_panels); i++)
-    l = g_list_prepend (l, (gpointer) all_panels[i].name);
+  for (i = 0; i < G_N_ELEMENTS (default_panels); i++)
+    l = g_list_prepend (l, (gpointer) default_panels[i].name);
 
   return g_list_reverse (l);
 }
@@ -172,18 +172,18 @@ cc_panel_loader_fill_model (CcShellModel *model)
 {
   guint i;
 
-  for (i = 0; i < G_N_ELEMENTS (all_panels); i++)
+  for (i = 0; i < G_N_ELEMENTS (default_panels); i++)
     {
       g_autoptr (GDesktopAppInfo) app;
       g_autofree gchar *desktop_name = NULL;
       gint category;
 
-      desktop_name = g_strconcat ("gnome-", all_panels[i].name, "-panel.desktop", NULL);
+      desktop_name = g_strconcat ("gnome-", default_panels[i].name, "-panel.desktop", NULL);
       app = g_desktop_app_info_new (desktop_name);
 
       if (!app)
         {
-          g_warning ("Ignoring broken panel %s (missing desktop file)", all_panels[i].name);
+          g_warning ("Ignoring broken panel %s (missing desktop file)", default_panels[i].name);
           continue;
         }
 
@@ -195,7 +195,7 @@ cc_panel_loader_fill_model (CcShellModel *model)
       if (!g_desktop_app_info_get_show_in (app, NULL))
         continue;
 
-      cc_shell_model_add_item (model, category, G_APP_INFO (app), all_panels[i].name);
+      cc_shell_model_add_item (model, category, G_APP_INFO (app), default_panels[i].name);
     }
 
   /* If there's an static init function, execute it after adding all panels to
@@ -203,10 +203,10 @@ cc_panel_loader_fill_model (CcShellModel *model)
    * having an instance running.
    */
 #ifndef CC_PANEL_LOADER_NO_GTYPES
-  for (i = 0; i < G_N_ELEMENTS (all_panels); i++)
+  for (i = 0; i < G_N_ELEMENTS (default_panels); i++)
     {
-      if (all_panels[i].static_init_func)
-        all_panels[i].static_init_func ();
+      if (default_panels[i].static_init_func)
+        default_panels[i].static_init_func ();
     }
 #endif
 }
@@ -224,8 +224,8 @@ ensure_panel_types (void)
     return;
 
   panel_types = g_hash_table_new (g_str_hash, g_str_equal);
-  for (i = 0; i < G_N_ELEMENTS (all_panels); i++)
-    g_hash_table_insert (panel_types, (char*)all_panels[i].name, all_panels[i].get_type);
+  for (i = 0; i < G_N_ELEMENTS (default_panels); i++)
+    g_hash_table_insert (panel_types, (char*)default_panels[i].name, default_panels[i].get_type);
 }
 
 CcPanel *
