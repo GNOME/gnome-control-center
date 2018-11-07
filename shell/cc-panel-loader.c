@@ -243,7 +243,7 @@ cc_panel_loader_load_by_name (CcShell     *shell,
   ensure_panel_types ();
 
   get_type = g_hash_table_lookup (panel_types, name);
-  g_return_val_if_fail (get_type != NULL, NULL);
+  g_assert (get_type != NULL);
 
   return g_object_new (get_type (),
                        "shell", shell,
