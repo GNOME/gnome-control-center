@@ -35,14 +35,14 @@
 #include <cheese-camera-device-monitor.h>
 #endif /* HAVE_CHEESE */
 
-#include "um-photo-dialog.h"
+#include "cc-avatar-chooser.h"
 #include "cc-crop-area.h"
 #include "um-utils.h"
 
 #define ROW_SPAN 5
 #define AVATAR_PIXEL_SIZE 80
 
-struct _UmPhotoDialog {
+struct _CcAvatarChooser {
         GtkPopover parent;
 
         GtkWidget *popup_button;
@@ -62,43 +62,43 @@ struct _UmPhotoDialog {
         ActUser *user;
 };
 
-G_DEFINE_TYPE (UmPhotoDialog, um_photo_dialog, GTK_TYPE_POPOVER)
+G_DEFINE_TYPE (CcAvatarChooser, cc_avatar_chooser, GTK_TYPE_POPOVER)
 
 static void
-crop_dialog_response (GtkWidget     *dialog,
-                      gint           response_id,
-                      UmPhotoDialog *um)
+crop_dialog_response (GtkWidget       *dialog,
+                      gint             response_id,
+                      CcAvatarChooser *self)
 {
         GdkPixbuf *pb, *pb2;
 
         if (response_id != GTK_RESPONSE_ACCEPT) {
-                um->crop_area = NULL;
+                self->crop_area = NULL;
                 gtk_widget_destroy (dialog);
                 return;
         }
 
-        pb = cc_crop_area_get_picture (CC_CROP_AREA (um->crop_area));
+        pb = cc_crop_area_get_picture (CC_CROP_AREA (self->crop_area));
         pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);
 
-        set_user_icon_data (um->user, pb2);
+        set_user_icon_data (self->user, pb2);
 
         g_object_unref (pb2);
         g_object_unref (pb);
 
-        um->crop_area = NULL;
+        self->crop_area = NULL;
         gtk_widget_destroy (dialog);
 
-        gtk_popover_popdown (GTK_POPOVER (um));
+        gtk_popover_popdown (GTK_POPOVER (self));
 }
 
 static void
-um_photo_dialog_crop (UmPhotoDialog *um,
-                      GdkPixbuf     *pixbuf)
+cc_avatar_chooser_crop (CcAvatarChooser *self,
+                        GdkPixbuf       *pixbuf)
 {
         GtkWidget *dialog;
 
         dialog = gtk_dialog_new_with_buttons ("",
-                                              GTK_WINDOW (gtk_widget_get_toplevel (um->popup_button)),
+                                              GTK_WINDOW (gtk_widget_get_toplevel (self->popup_button)),
                                               GTK_DIALOG_USE_HEADER_BAR,
                                               _("_Cancel"),
                                               GTK_RESPONSE_CANCEL,
@@ -110,16 +110,16 @@ um_photo_dialog_crop (UmPhotoDialog *um,
         gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
 
         g_signal_connect (G_OBJECT (dialog), "response",
-                          G_CALLBACK (crop_dialog_response), um);
+                          G_CALLBACK (crop_dialog_response), self);
 
         /* Content */
-        um->crop_area = cc_crop_area_new ();
-        gtk_widget_show (um->crop_area);
-        cc_crop_area_set_min_size (CC_CROP_AREA (um->crop_area), 48, 48);
-        cc_crop_area_set_constrain_aspect (CC_CROP_AREA (um->crop_area), TRUE);
-        cc_crop_area_set_picture (CC_CROP_AREA (um->crop_area), pixbuf);
+        self->crop_area = cc_crop_area_new ();
+        gtk_widget_show (self->crop_area);
+        cc_crop_area_set_min_size (CC_CROP_AREA (self->crop_area), 48, 48);
+        cc_crop_area_set_constrain_aspect (CC_CROP_AREA (self->crop_area), TRUE);
+        cc_crop_area_set_picture (CC_CROP_AREA (self->crop_area), pixbuf);
         gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
-                            um->crop_area,
+                            self->crop_area,
                             TRUE, TRUE, 8);
 
         gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 300);
@@ -128,9 +128,9 @@ um_photo_dialog_crop (UmPhotoDialog *um,
 }
 
 static void
-file_chooser_response (GtkDialog     *chooser,
-                       gint           response,
-                       UmPhotoDialog *um)
+file_chooser_response (GtkDialog       *chooser,
+                       gint             response,
+                       CcAvatarChooser *self)
 {
         gchar *filename;
         GError *error;
@@ -156,7 +156,7 @@ file_chooser_response (GtkDialog     *chooser,
 
         gtk_widget_destroy (GTK_WIDGET (chooser));
 
-        um_photo_dialog_crop (um, pixbuf2);
+        cc_avatar_chooser_crop (self, pixbuf2);
         g_object_unref (pixbuf2);
 }
 
@@ -218,7 +218,7 @@ update_preview (GtkFileChooser               *chooser,
 }
 
 static void
-um_photo_dialog_select_file (UmPhotoDialog *um)
+cc_avatar_chooser_select_file (CcAvatarChooser *self)
 {
         GtkWidget *chooser;
         const gchar *folder;
@@ -226,7 +226,7 @@ um_photo_dialog_select_file (UmPhotoDialog *um)
         GtkFileFilter *filter;
 
         chooser = gtk_file_chooser_dialog_new (_("Browse for more pictures"),
-                                               GTK_WINDOW (gtk_widget_get_toplevel (um->popup_button)),
+                                               GTK_WINDOW (gtk_widget_get_toplevel (self->popup_button)),
                                                GTK_FILE_CHOOSER_ACTION_OPEN,
                                                _("_Cancel"), GTK_RESPONSE_CANCEL,
                                                _("_Open"), GTK_RESPONSE_ACCEPT,
@@ -245,7 +245,7 @@ um_photo_dialog_select_file (UmPhotoDialog *um)
          * Preview also has to be generated on "selection-changed" signal to reflect
          * all changes (Bug 660877). */
         g_signal_connect_after (chooser, "selection-changed",
-                                G_CALLBACK (update_preview), um->thumb_factory);
+                                G_CALLBACK (update_preview), self->thumb_factory);
 
         folder = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
         if (folder)
@@ -257,7 +257,7 @@ um_photo_dialog_select_file (UmPhotoDialog *um)
         gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (chooser), filter);
 
         g_signal_connect (chooser, "response",
-                          G_CALLBACK (file_chooser_response), um);
+                          G_CALLBACK (file_chooser_response), self);
 
         gtk_window_present (GTK_WINDOW (chooser));
 }
@@ -271,9 +271,9 @@ destroy_chooser (GtkWidget *chooser)
 }
 
 static void
-webcam_response_cb (GtkDialog     *dialog,
-                    int            response,
-                    UmPhotoDialog  *um)
+webcam_response_cb (GtkDialog        *dialog,
+                    int               response,
+                    CcAvatarChooser  *self)
 {
         if (response == GTK_RESPONSE_ACCEPT) {
                 GdkPixbuf *pb, *pb2;
@@ -281,7 +281,7 @@ webcam_response_cb (GtkDialog     *dialog,
                 g_object_get (G_OBJECT (dialog), "pixbuf", &pb, NULL);
                 pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);
 
-                set_user_icon_data (um->user, pb2);
+                set_user_icon_data (self->user, pb2);
 
                 g_object_unref (pb2);
                 g_object_unref (pb);
@@ -290,56 +290,56 @@ webcam_response_cb (GtkDialog     *dialog,
             response != GTK_RESPONSE_NONE)
                 g_idle_add ((GSourceFunc) destroy_chooser, dialog);
 
-        gtk_popover_popdown (GTK_POPOVER (um));
+        gtk_popover_popdown (GTK_POPOVER (self));
 }
 
 static void
-webcam_icon_selected (UmPhotoDialog *um)
+webcam_icon_selected (CcAvatarChooser *self)
 {
         GtkWidget *window;
 
         window = cheese_avatar_chooser_new ();
         gtk_window_set_transient_for (GTK_WINDOW (window),
-                                      GTK_WINDOW (gtk_widget_get_toplevel (um->popup_button)));
+                                      GTK_WINDOW (gtk_widget_get_toplevel (self->popup_button)));
         gtk_window_set_modal (GTK_WINDOW (window), TRUE);
         g_signal_connect (G_OBJECT (window), "response",
-                          G_CALLBACK (webcam_response_cb), um);
+                          G_CALLBACK (webcam_response_cb), self);
         gtk_widget_show (window);
 }
 
 static void
-update_photo_menu_status (UmPhotoDialog *um)
+update_photo_menu_status (CcAvatarChooser *self)
 {
-        if (um->num_cameras == 0)
-                gtk_widget_set_visible (um->take_picture_button, FALSE);
+        if (self->num_cameras == 0)
+                gtk_widget_set_visible (self->take_picture_button, FALSE);
         else
-                gtk_widget_set_sensitive (um->take_picture_button, TRUE);
+                gtk_widget_set_sensitive (self->take_picture_button, TRUE);
 }
 
 static void
-device_added (CheeseCameraDeviceMonitor *monitor,
-              CheeseCameraDevice        *device,
-              UmPhotoDialog             *um)
+device_added (CheeseCameraDeviceMonitor   *monitor,
+              CheeseCameraDevice          *device,
+              CcAvatarChooser             *self)
 {
-        um->num_cameras++;
-        update_photo_menu_status (um);
+        self->num_cameras++;
+        update_photo_menu_status (self);
 }
 
 static void
-device_removed (CheeseCameraDeviceMonitor *monitor,
-                const char                *id,
-                UmPhotoDialog             *um)
+device_removed (CheeseCameraDeviceMonitor   *monitor,
+                const char                  *id,
+                CcAvatarChooser             *self)
 {
-        um->num_cameras--;
-        update_photo_menu_status (um);
+        self->num_cameras--;
+        update_photo_menu_status (self);
 }
 
 #endif /* HAVE_CHEESE */
 
 static void
-face_widget_activated (GtkFlowBox      *flowbox,
-                       GtkFlowBoxChild *child,
-                       UmPhotoDialog   *um)
+face_widget_activated (GtkFlowBox        *flowbox,
+                       GtkFlowBoxChild   *child,
+                       CcAvatarChooser   *self)
 {
         const gchar *filename;
         GtkWidget   *image;
@@ -347,9 +347,9 @@ face_widget_activated (GtkFlowBox      *flowbox,
         image = gtk_bin_get_child (GTK_BIN (child));
         filename = g_object_get_data (G_OBJECT (image), "filename");
 
-        act_user_set_icon_file (um->user, filename);
+        act_user_set_icon_file (self->user, filename);
 
-        gtk_popover_popdown (GTK_POPOVER (um));
+        gtk_popover_popdown (GTK_POPOVER (self));
 }
 
 static GtkWidget *
@@ -374,11 +374,11 @@ create_face_widget (gpointer item,
 
 #ifdef HAVE_CHEESE
 static void
-setup_cheese_camera_device_monitor (UmPhotoDialog *um)
+setup_cheese_camera_device_monitor (CcAvatarChooser *self)
 {
-        g_signal_connect (G_OBJECT (um->monitor), "added", G_CALLBACK (device_added), um);
-        g_signal_connect (G_OBJECT (um->monitor), "removed", G_CALLBACK (device_removed), um);
-        cheese_camera_device_monitor_coldplug (um->monitor);
+        g_signal_connect (G_OBJECT (self->monitor), "added", G_CALLBACK (device_added), self);
+        g_signal_connect (G_OBJECT (self->monitor), "removed", G_CALLBACK (device_removed), self);
+        cheese_camera_device_monitor_coldplug (self->monitor);
 }
 
 static void
@@ -386,20 +386,20 @@ cheese_camera_device_monitor_new_cb (GObject *source,
                                      GAsyncResult *result,
                                      gpointer user_data)
 {
-        UmPhotoDialog *um = user_data;
+        CcAvatarChooser *self = user_data;
         GObject *ret;
 
         ret = g_async_initable_new_finish (G_ASYNC_INITABLE (source), result, NULL);
         if (ret == NULL)
                 return;
 
-        um->monitor = CHEESE_CAMERA_DEVICE_MONITOR (ret);
-        setup_cheese_camera_device_monitor (um);
+        self->monitor = CHEESE_CAMERA_DEVICE_MONITOR (ret);
+        setup_cheese_camera_device_monitor (self);
 }
 #endif /* HAVE_CHEESE */
 
 static void
-setup_photo_popup (UmPhotoDialog *um)
+setup_photo_popup (CcAvatarChooser *self)
 {
         GFile *file, *dir;
         GFileInfo *info;
@@ -410,15 +410,15 @@ setup_photo_popup (UmPhotoDialog *um)
         guint i;
         gboolean added_faces;
 
-        um->faces = g_list_store_new (G_TYPE_FILE);
-        gtk_flow_box_bind_model (GTK_FLOW_BOX (um->flowbox),
-                                 G_LIST_MODEL (um->faces),
+        self->faces = g_list_store_new (G_TYPE_FILE);
+        gtk_flow_box_bind_model (GTK_FLOW_BOX (self->flowbox),
+                                 G_LIST_MODEL (self->faces),
                                  create_face_widget,
-                                 um,
+                                 self,
                                  NULL);
 
-        g_signal_connect (um->flowbox, "child-activated",
-                          G_CALLBACK (face_widget_activated), um);
+        g_signal_connect (self->flowbox, "child-activated",
+                          G_CALLBACK (face_widget_activated), self);
 
         dirs = g_get_system_data_dirs ();
         for (i = 0; dirs[i] != NULL; i++) {
@@ -457,7 +457,7 @@ setup_photo_popup (UmPhotoDialog *um)
                         }
 
                         file = g_file_get_child (dir, g_file_info_get_name (info));
-                        g_list_store_append (um->faces, file);
+                        g_list_store_append (self->faces, file);
 
                         g_object_unref (info);
                 }
@@ -471,35 +471,36 @@ setup_photo_popup (UmPhotoDialog *um)
         }
 
 #ifdef HAVE_CHEESE
-        gtk_widget_set_visible (um->take_picture_button, TRUE);
+        gtk_widget_set_visible (self->take_picture_button, TRUE);
 
-        um->cancellable = g_cancellable_new ();
+        self->cancellable = g_cancellable_new ();
         g_async_initable_new_async (CHEESE_TYPE_CAMERA_DEVICE_MONITOR,
                                     G_PRIORITY_DEFAULT,
-                                    um->cancellable,
+                                    self->cancellable,
                                     cheese_camera_device_monitor_new_cb,
-                                    um,
+                                    self,
                                     NULL);
 #endif /* HAVE_CHEESE */
 }
 
 static void
-popup_icon_menu (GtkToggleButton *button, UmPhotoDialog *um)
+popup_icon_menu (GtkToggleButton *button,
+                 CcAvatarChooser *self)
 {
-        gtk_popover_popup (GTK_POPOVER (um));
+        gtk_popover_popup (GTK_POPOVER (self));
 }
 
 static gboolean
 on_popup_button_button_pressed (GtkToggleButton *button,
-                                GdkEventButton *event,
-                                UmPhotoDialog  *um)
+                                GdkEventButton  *event,
+                                CcAvatarChooser *self)
 {
         if (event->button == 1) {
-                if (!gtk_widget_get_visible (GTK_WIDGET (um))) {
-                        popup_icon_menu (button, um);
+                if (!gtk_widget_get_visible (GTK_WIDGET (self))) {
+                        popup_icon_menu (button, self);
                         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
                 } else {
-                        gtk_popover_popdown (GTK_POPOVER (um));
+                        gtk_popover_popdown (GTK_POPOVER (self));
                         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
                 }
 
@@ -509,79 +510,79 @@ on_popup_button_button_pressed (GtkToggleButton *button,
         return FALSE;
 }
 
-UmPhotoDialog *
-um_photo_dialog_new (GtkWidget *button)
+CcAvatarChooser *
+cc_avatar_chooser_new (GtkWidget *button)
 {
-        UmPhotoDialog *um;
+        CcAvatarChooser *self;
 
-        um = g_object_new (UM_TYPE_PHOTO_DIALOG,
-                           "relative-to", button,
-                           NULL);
+        self = g_object_new (CC_TYPE_AVATAR_CHOOSER,
+                             "relative-to", button,
+                             NULL);
 
-        um->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
+        self->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
         /* Set up the popup */
-        um->popup_button = button;
-        setup_photo_popup (um);
+        self->popup_button = button;
+        setup_photo_popup (self);
         g_signal_connect (button, "toggled",
-                          G_CALLBACK (popup_icon_menu), um);
+                          G_CALLBACK (popup_icon_menu), self);
         g_signal_connect (button, "button-press-event",
-                          G_CALLBACK (on_popup_button_button_pressed), um);
+                          G_CALLBACK (on_popup_button_button_pressed), self);
 
-        return um;
+        return self;
 }
 
 static void
-um_photo_dialog_dispose (GObject *object)
+cc_avatar_chooser_dispose (GObject *object)
 {
-        UmPhotoDialog *um = UM_PHOTO_DIALOG (object);
+        CcAvatarChooser *self = CC_AVATAR_CHOOSER (object);
 
-        g_clear_object (&um->thumb_factory);
+        g_clear_object (&self->thumb_factory);
 #ifdef HAVE_CHEESE
-        g_cancellable_cancel (um->cancellable);
-        g_clear_object (&um->cancellable);
-        g_clear_object (&um->monitor);
+        g_cancellable_cancel (self->cancellable);
+        g_clear_object (&self->cancellable);
+        g_clear_object (&self->monitor);
 #endif
-        g_clear_object (&um->user);
+        g_clear_object (&self->user);
 
-        G_OBJECT_CLASS (um_photo_dialog_parent_class)->dispose (object);
+        G_OBJECT_CLASS (cc_avatar_chooser_parent_class)->dispose (object);
 }
 
 static void
-um_photo_dialog_init (UmPhotoDialog *um)
+cc_avatar_chooser_init (CcAvatarChooser *self)
 {
-        gtk_widget_init_template (GTK_WIDGET (um));
+        gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
-um_photo_dialog_class_init (UmPhotoDialogClass *klass)
+cc_avatar_chooser_class_init (CcAvatarChooserClass *klass)
 {
         GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
         GObjectClass *oclass = G_OBJECT_CLASS (klass);
 
-        gtk_widget_class_set_template_from_resource (wclass, "/org/gnome/control-center/user-accounts/avatar-chooser.ui");
+        gtk_widget_class_set_template_from_resource (wclass, "/org/gnome/control-center/user-accounts/cc-avatar-chooser.ui");
 
-        gtk_widget_class_bind_template_child (wclass, UmPhotoDialog, flowbox);
-        gtk_widget_class_bind_template_child (wclass, UmPhotoDialog, take_picture_button);
+        gtk_widget_class_bind_template_child (wclass, CcAvatarChooser, flowbox);
+        gtk_widget_class_bind_template_child (wclass, CcAvatarChooser, take_picture_button);
 
-        gtk_widget_class_bind_template_callback (wclass, um_photo_dialog_select_file);
+        gtk_widget_class_bind_template_callback (wclass, cc_avatar_chooser_select_file);
 #ifdef HAVE_CHEESE
         gtk_widget_class_bind_template_callback (wclass, webcam_icon_selected);
 #endif
 
-        oclass->dispose = um_photo_dialog_dispose;
+        oclass->dispose = cc_avatar_chooser_dispose;
 }
 
 void
-um_photo_dialog_set_user (UmPhotoDialog *um,
-                          ActUser       *user)
+cc_avatar_chooser_set_user (CcAvatarChooser *self,
+                            ActUser         *user)
 {
-        g_return_if_fail (um != NULL);
+        g_return_if_fail (self != NULL);
 
-        if (um->user) {
-                g_object_unref (um->user);
-                um->user = NULL;
+        if (self->user) {
+                g_object_unref (self->user);
+                self->user = NULL;
         }
-        um->user = g_object_ref (user);
+        self->user = g_object_ref (user);
 }
 
