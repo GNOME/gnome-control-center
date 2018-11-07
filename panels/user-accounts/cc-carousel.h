@@ -24,27 +24,27 @@
 
 G_BEGIN_DECLS
 
-#define UM_TYPE_CAROUSEL_ITEM (um_carousel_item_get_type ())
+#define CC_TYPE_CAROUSEL_ITEM (cc_carousel_item_get_type ())
 
-G_DECLARE_FINAL_TYPE (UmCarouselItem, um_carousel_item, UM, CAROUSEL_ITEM, GtkRadioButton)
+G_DECLARE_FINAL_TYPE (CcCarouselItem, cc_carousel_item, CC, CAROUSEL_ITEM, GtkRadioButton)
 
-#define UM_TYPE_CAROUSEL (um_carousel_get_type ())
+#define CC_TYPE_CAROUSEL (cc_carousel_get_type ())
 
-G_DECLARE_FINAL_TYPE (UmCarousel, um_carousel, UM, CAROUSEL, GtkRevealer)
+G_DECLARE_FINAL_TYPE (CcCarousel, cc_carousel, CC, CAROUSEL, GtkRevealer)
 
-GtkWidget       *um_carousel_item_new    (void);
+GtkWidget       *cc_carousel_item_new    (void);
 
-UmCarousel      *um_carousel_new         (void);
+CcCarousel      *cc_carousel_new         (void);
 
-void             um_carousel_purge_items (UmCarousel     *self);
+void             cc_carousel_purge_items (CcCarousel     *self);
 
-UmCarouselItem  *um_carousel_find_item   (UmCarousel     *self,
+CcCarouselItem  *cc_carousel_find_item   (CcCarousel     *self,
                                           gconstpointer   data,
                                           GCompareFunc    func);
 
-void             um_carousel_select_item (UmCarousel     *self,
-                                          UmCarouselItem *item);
+void             cc_carousel_select_item (CcCarousel     *self,
+                                          CcCarouselItem *item);
 
-guint            um_carousel_get_item_count (UmCarousel  *self);
+guint            cc_carousel_get_item_count (CcCarousel  *self);
 
 G_END_DECLS
