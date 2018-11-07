@@ -117,18 +117,6 @@ static CcPanelLoaderVtable default_panels[] =
 #endif
 };
 
-GList *
-cc_panel_loader_get_panels (void)
-{
-  GList *l = NULL;
-  guint i;
-
-  for (i = 0; i < G_N_ELEMENTS (default_panels); i++)
-    l = g_list_prepend (l, (gpointer) default_panels[i].name);
-
-  return g_list_reverse (l);
-}
-
 static int
 parse_categories (GDesktopAppInfo *app)
 {
@@ -166,6 +154,43 @@ parse_categories (GDesktopAppInfo *app)
 
   return retval;
 }
+
+#ifndef CC_PANEL_LOADER_NO_GTYPES
+
+static GHashTable *panel_types;
+
+static void
+ensure_panel_types (void)
+{
+  int i;
+
+  if (G_LIKELY (panel_types != NULL))
+    return;
+
+  panel_types = g_hash_table_new (g_str_hash, g_str_equal);
+  for (i = 0; i < G_N_ELEMENTS (default_panels); i++)
+    g_hash_table_insert (panel_types, (char*)default_panels[i].name, default_panels[i].get_type);
+}
+
+CcPanel *
+cc_panel_loader_load_by_name (CcShell     *shell,
+                              const gchar *name,
+                              GVariant    *parameters)
+{
+  GType (*get_type) (void);
+
+  ensure_panel_types ();
+
+  get_type = g_hash_table_lookup (panel_types, name);
+  g_assert (get_type != NULL);
+
+  return g_object_new (get_type (),
+                       "shell", shell,
+                       "parameters", parameters,
+                       NULL);
+}
+
+#endif /* CC_PANEL_LOADER_NO_GTYPES */
 
 void
 cc_panel_loader_fill_model (CcShellModel *model)
@@ -211,39 +236,14 @@ cc_panel_loader_fill_model (CcShellModel *model)
 #endif
 }
 
-#ifndef CC_PANEL_LOADER_NO_GTYPES
-
-static GHashTable *panel_types;
-
-static void
-ensure_panel_types (void)
+GList *
+cc_panel_loader_get_panels (void)
 {
-  int i;
+  GList *l = NULL;
+  guint i;
 
-  if (G_LIKELY (panel_types != NULL))
-    return;
-
-  panel_types = g_hash_table_new (g_str_hash, g_str_equal);
   for (i = 0; i < G_N_ELEMENTS (default_panels); i++)
-    g_hash_table_insert (panel_types, (char*)default_panels[i].name, default_panels[i].get_type);
+    l = g_list_prepend (l, (gpointer) default_panels[i].name);
+
+  return g_list_reverse (l);
 }
-
-CcPanel *
-cc_panel_loader_load_by_name (CcShell     *shell,
-                              const char  *name,
-                              GVariant    *parameters)
-{
-  GType (*get_type) (void);
-
-  ensure_panel_types ();
-
-  get_type = g_hash_table_lookup (panel_types, name);
-  g_assert (get_type != NULL);
-
-  return g_object_new (get_type (),
-                       "shell", shell,
-                       "parameters", parameters,
-                       NULL);
-}
-
-#endif /* CC_PANEL_LOADER_NO_GTYPES */
