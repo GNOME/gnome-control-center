@@ -38,13 +38,12 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
 
-#include "um-user-image.h"
-
 #include "cc-add-user-dialog.h"
 #include "cc-language-chooser.h"
 #include "cc-login-history-dialog.h"
 #include "cc-password-dialog.h"
 #include "cc-user-accounts-resources.h"
+#include "cc-user-image.h"
 #include "um-carousel.h"
 #include "um-photo-dialog.h"
 #include "um-fingerprint-dialog.h"
@@ -91,8 +90,8 @@ struct _CcUserPanel {
         GtkButton       *remove_user_button;
         GtkStack        *stack;
         GtkToggleButton *user_icon_button;
-        UmUserImage     *user_icon_image;
-        UmUserImage     *user_icon_image2;
+        CcUserImage     *user_icon_image;
+        CcUserImage     *user_icon_image2;
         GtkStack        *user_icon_stack;
 
         ActUser *selected_user;
@@ -198,8 +197,8 @@ create_carousel_entry (CcUserPanel *self, ActUser *user)
 
         box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
-        widget = um_user_image_new ();
-        um_user_image_set_user (UM_USER_IMAGE (widget), user);
+        widget = cc_user_image_new ();
+        cc_user_image_set_user (CC_USER_IMAGE (widget), user);
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
 
         label = g_strdup_printf ("<b>%s</b>",
@@ -805,8 +804,8 @@ show_user (ActUser *user, CcUserPanel *self)
 
         self->selected_user = user;
 
-        um_user_image_set_user (self->user_icon_image, user);
-        um_user_image_set_user (self->user_icon_image2, user);
+        cc_user_image_set_user (self->user_icon_image, user);
+        cc_user_image_set_user (self->user_icon_image2, user);
 
         um_photo_dialog_set_user (self->photo_dialog, user);
 
@@ -1358,7 +1357,7 @@ cc_user_panel_init (CcUserPanel *self)
         g_resources_register (cc_user_accounts_get_resource ());
 
         /* register types that the builder might need */
-        type = um_user_image_get_type ();
+        type = cc_user_image_get_type ();
         type = um_carousel_get_type ();
 
         gtk_widget_init_template (GTK_WIDGET (self));
