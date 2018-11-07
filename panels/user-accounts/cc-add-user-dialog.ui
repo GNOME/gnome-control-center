@@ -315,6 +315,7 @@
                 <child>
                   <object class="GtkEntry" id="local_password">
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="has_tooltip">True</property>
                     <property name="visibility">False</property>
@@ -334,6 +335,7 @@
                 <child>
                   <object class="GtkLevelBar" id="local_strength_indicator">
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="mode">discrete</property>
                     <property name="max-value">5</property>
                     <property name="hexpand">True</property>
@@ -355,6 +357,7 @@
                 <child>
                   <object class="GtkLabel" id="local_hint">
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="can_focus">False</property>
                     <property name="yalign">0</property>
                     <property name="xalign">0</property>
@@ -402,6 +405,7 @@
                 <child>
                   <object class="GtkEntry" id="local_verify">
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="visibility">False</property>
                     <property name="invisible_char">●</property>
@@ -759,7 +763,7 @@
             <child>
               <object class="GtkToggleButton" id="enterprise_button">
                 <property name="label" translatable="yes">_Enterprise Login</property>
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_underline">True</property>
