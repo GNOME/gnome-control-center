@@ -95,8 +95,8 @@ i18n.merge_file(
 
 common_sources = files(
   'cc-add-user-dialog.c',
+  'cc-realm-manager.c',
   'pw-utils.c',
-  'um-realm-manager.c',
   'um-utils.c'
 )
 
@@ -136,10 +136,10 @@ common_sources += gnome.compile_resources(
 realmd_namespace = 'org.freedesktop.realmd'
 
 common_sources += gnome.gdbus_codegen(
-  'um-realm-generated',
+  'cc-realm-generated',
   'data/' + realmd_namespace + '.xml',
   interface_prefix: realmd_namespace + '.',
-  namespace: 'UmRealm',
+  namespace: 'CcRealm',
   object_manager: true,
   annotations: ['org.freedesktop.realmd.Realm', 'org.gtk.GDBus.C.Name', 'Common']
 )
