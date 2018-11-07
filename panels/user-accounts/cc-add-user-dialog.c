@@ -550,14 +550,6 @@ local_password_radio_changed_cb (CcAddUserDialog *self)
 }
 
 static void
-local_init (CcAddUserDialog *self)
-{
-        self->local_password_mode = ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
-        dialog_validate (self);
-        update_password_strength (self);
-}
-
-static void
 local_prepare (CcAddUserDialog *self)
 {
         GtkTreeModel *model;
@@ -1287,21 +1279,6 @@ enterprise_password_changed_cb (CcAddUserDialog *self)
 }
 
 static void
-enterprise_init (CcAddUserDialog *self)
-{
-        GNetworkMonitor *monitor;
-        enterprise_check_domain (self);
-
-        self->realmd_watch = g_bus_watch_name (G_BUS_TYPE_SYSTEM, "org.freedesktop.realmd",
-                                               G_BUS_NAME_WATCHER_FLAGS_AUTO_START,
-                                               on_realmd_appeared, on_realmd_disappeared,
-                                               self, NULL);
-
-        monitor = g_network_monitor_get_default ();
-        g_signal_connect_object (monitor, "network-changed", G_CALLBACK (on_network_changed), self, 0);
-}
-
-static void
 enterprise_prepare (CcAddUserDialog *self)
 {
         gtk_entry_set_text (self->enterprise_login, "");
@@ -1364,10 +1341,24 @@ enterprise_button_toggled_cb (CcAddUserDialog *self)
 static void
 cc_add_user_dialog_init (CcAddUserDialog *self)
 {
+        GNetworkMonitor *monitor;
+
         gtk_widget_init_template (GTK_WIDGET (self));
 
-        local_init (self);
-        enterprise_init (self);
+        self->local_password_mode = ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
+        dialog_validate (self);
+        update_password_strength (self);
+
+        enterprise_check_domain (self);
+
+        self->realmd_watch = g_bus_watch_name (G_BUS_TYPE_SYSTEM, "org.freedesktop.realmd",
+                                               G_BUS_NAME_WATCHER_FLAGS_AUTO_START,
+                                               on_realmd_appeared, on_realmd_disappeared,
+                                               self, NULL);
+
+        monitor = g_network_monitor_get_default ();
+        g_signal_connect_object (monitor, "network-changed", G_CALLBACK (on_network_changed), self, 0);
+
         join_init (self);
 }
 
