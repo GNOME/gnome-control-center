@@ -119,9 +119,12 @@ libpanel_loader = static_library(
 
 # libshell_test
 sources = files(
+  'cc-application.c',
   'cc-log.c',
   'cc-panel.c',
+  'cc-panel-list.c',
   'cc-shell.c',
+  'cc-shell-model.c',
   'cc-object-storage.c',
 )
 libtestshell = static_library(
