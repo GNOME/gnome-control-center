@@ -1287,6 +1287,11 @@ mode_change (CcAddUserDialog *self,
 
         gtk_stack_set_visible_child_name (self->stack, mode_pages[mode]);
 
+        if (mode == MODE_ENTERPRISE)
+                gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_domain_entry));
+        else
+                gtk_widget_grab_focus (GTK_WIDGET (self->local_name_entry));
+
         /* The enterprise toggle state */
         active = (mode != MODE_LOCAL);
         if (gtk_toggle_button_get_active (self->enterprise_button) != active)
