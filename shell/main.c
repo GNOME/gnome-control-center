@@ -33,6 +33,9 @@
 #include <cheese-gtk.h>
 #endif /* HAVE_CHEESE */
 
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
+
 #include "cc-application.h"
 
 void
@@ -46,6 +49,8 @@ initialize_dependencies (gint    *argc,
   #ifdef HAVE_CHEESE
     cheese_gtk_init (argc, argv);
   #endif /* HAVE_CHEESE */
+
+    hdy_init (argc, argv);
 }
 
 int
