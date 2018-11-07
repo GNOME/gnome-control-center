@@ -34,7 +34,7 @@
 #include "cc-user-accounts-resources.h"
 #include "pw-utils.h"
 #include "run-passwd.h"
-#include "um-utils.h"
+#include "user-utils.h"
 
 #define PASSWORD_CHECK_TIMEOUT 600
 
