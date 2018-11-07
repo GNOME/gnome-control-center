@@ -31,8 +31,8 @@
 #include <act/act.h>
 
 #include "cc-login-history-dialog.h"
+#include "cc-user-accounts-resources.h"
 #include "cc-util.h"
-#include "um-resources.h"
 #include "um-utils.h"
 
 struct _CcLoginHistoryDialog
@@ -308,7 +308,7 @@ cc_login_history_dialog_class_init (CcLoginHistoryDialogClass *klass)
 void
 cc_login_history_dialog_init (CcLoginHistoryDialog *self)
 {
-        g_resources_register (um_get_resource ());
+        g_resources_register (cc_user_accounts_get_resource ());
 
         gtk_widget_init_template (GTK_WIDGET (self));
 }
