@@ -1339,20 +1339,20 @@ on_permission_acquired (GObject *source_object,
                         gpointer user_data)
 {
         CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
-	GError *error = NULL;
+        GError *error = NULL;
 
         /* Paired with begin_action in cc_add_user_dialog_response () */
-	finish_action (self);
+        finish_action (self);
 
-	if (g_permission_acquire_finish (self->permission, res, &error)) {
-		g_return_if_fail (g_permission_get_allowed (self->permission));
+        if (g_permission_acquire_finish (self->permission, res, &error)) {
+                g_return_if_fail (g_permission_get_allowed (self->permission));
                 add_button_clicked_cb (self);
-	} else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-		g_warning ("Failed to acquire permission: %s", error->message);
-	}
+        } else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+                g_warning ("Failed to acquire permission: %s", error->message);
+        }
 
-	g_clear_error (&error);
-	g_object_unref (self);
+        g_clear_error (&error);
+        g_object_unref (self);
 }
 
 static void
