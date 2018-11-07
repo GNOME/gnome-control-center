@@ -102,8 +102,6 @@ struct _CcUserPanel {
         UmPhotoDialog *photo_dialog;
 
         gint other_accounts;
-
-        CcAddUserDialog *account_dialog;
 };
 
 CC_PANEL_REGISTER (CcUserPanel, cc_user_panel)
@@ -355,31 +353,23 @@ user_changed (CcUserPanel *self, ActUser *user)
 }
 
 static void
-select_created_user (GObject *object,
-                     GAsyncResult *result,
-                     gpointer user_data)
-{
-        CcUserPanel *self = user_data;
-        CcAddUserDialog *dialog;
-        ActUser *user;
-
-        dialog = CC_ADD_USER_DIALOG (object);
-        user = cc_add_user_dialog_finish (dialog, result);
-        gtk_widget_destroy (GTK_WIDGET (dialog));
-        self->account_dialog = NULL;
-
-        if (user == NULL)
-                return;
-
-        reload_users (self, user);
-}
-
-static void
 add_user (CcUserPanel *self)
 {
-        self->account_dialog = cc_add_user_dialog_new ();
-        cc_add_user_dialog_show (self->account_dialog, GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
-                                 self->permission, select_created_user, self);
+        CcAddUserDialog *dialog;
+        GtkWindow *toplevel;
+        ActUser *user;
+
+        dialog = cc_add_user_dialog_new (self->permission);
+        toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+        gtk_window_set_transient_for (GTK_WINDOW (dialog), toplevel);
+
+        gtk_dialog_run (GTK_DIALOG (dialog));
+
+        user = cc_add_user_dialog_get_user (dialog);
+        if (user != NULL)
+                reload_users (self, user);
+
+        gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 static void
@@ -1399,10 +1389,6 @@ cc_user_panel_dispose (GObject *object)
 
         g_clear_object (&self->login_screen_settings);
 
-        if (self->account_dialog) {
-                gtk_dialog_response (GTK_DIALOG (self->account_dialog), GTK_RESPONSE_DELETE_EVENT);
-                self->account_dialog = NULL;
-        }
         g_clear_pointer ((GtkWidget **)&self->language_chooser, gtk_widget_destroy);
         g_clear_object (&self->permission);
         G_OBJECT_CLASS (cc_user_panel_parent_class)->dispose (object);
