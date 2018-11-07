@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <interface>
   <!-- interface-requires gtk+ 3.8 -->
-  <template class="UmPhotoDialog" parent="GtkPopover">
+  <template class="CcAvatarChooser" parent="GtkPopover">
     <property name="height-request">360</property>
     <property name="width-request">480</property>
     <child>
@@ -32,7 +32,7 @@
               <object class="GtkButton">
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">Select a File…</property>
-                <signal name="clicked" handler="um_photo_dialog_select_file" swapped="yes"/>
+                <signal name="clicked" handler="cc_avatar_chooser_select_file" swapped="yes"/>
               </object>
             </child>
           </object>
