@@ -102,6 +102,7 @@ common_sources = files(
 
 resource_data = files(
   'cc-password-dialog.ui',
+  'cc-photo-dialog.ui',
   'cc-user-panel.ui',
   'data/icons/left-index-finger.png',
   'data/icons/left-little-finger.png',
@@ -147,13 +148,13 @@ sources = common_sources + files(
   'cc-carousel.c',
   'cc-crop-area.c',
   'cc-password-dialog.c',
+  'cc-photo-dialog.c',
   'cc-user-image.c',
   'cc-user-panel.c',
   'run-passwd.c',
   'um-account-type.c',
   'um-fingerprint-dialog.c',
   'um-history-dialog.c',
-  'um-photo-dialog.c',
 )
 
 # Kerberos support

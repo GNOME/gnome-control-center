@@ -25,15 +25,15 @@
 
 G_BEGIN_DECLS
 
-#define UM_TYPE_PHOTO_DIALOG (um_photo_dialog_get_type())
+#define CC_TYPE_PHOTO_DIALOG (cc_photo_dialog_get_type())
 
-G_DECLARE_FINAL_TYPE (UmPhotoDialog, um_photo_dialog, UM, PHOTO_DIALOG, GtkPopover)
+G_DECLARE_FINAL_TYPE (CcPhotoDialog, cc_photo_dialog, CC, PHOTO_DIALOG, GtkPopover)
 
-typedef struct _UmPhotoDialog UmPhotoDialog;
+typedef struct _CcPhotoDialog CcPhotoDialog;
 
-UmPhotoDialog *um_photo_dialog_new      (GtkWidget     *button);
-void           um_photo_dialog_free     (UmPhotoDialog *dialog);
-void           um_photo_dialog_set_user (UmPhotoDialog *dialog,
+CcPhotoDialog *cc_photo_dialog_new      (GtkWidget     *button);
+void           cc_photo_dialog_free     (CcPhotoDialog *dialog);
+void           cc_photo_dialog_set_user (CcPhotoDialog *dialog,
                                          ActUser       *user);
 
 G_END_DECLS
