@@ -571,6 +571,7 @@
                     <property name="hexpand">True</property>
                     <property name="has_entry">True</property>
                     <property name="entry_text_column">0</property>
+                    <property name="model">enterprise_realms</property>
                     <child internal-child="entry">
                       <object class="GtkEntry" id="enterprise_domain_entry">
                         <property name="can_focus">True</property>
@@ -826,5 +827,13 @@
       <widget name="button1"/>
       <widget name="button2"/>
     </widgets>
+  </object>
+  <object class="GtkListStore" id="enterprise_realms">
+    <columns>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+      <!-- column-name realm -->
+      <column type="GObject"/>
+    </columns>
   </object>
 </interface>
