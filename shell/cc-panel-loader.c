@@ -80,13 +80,8 @@ extern void cc_wacom_panel_static_init_func (void);
 
 #endif
 
-static struct {
-  const char *name;
-#ifndef CC_PANEL_LOADER_NO_GTYPES
-  GType (*get_type)(void);
-  CcPanelStaticInitFunc static_init_func;
-#endif
-} all_panels[] = {
+static CcPanelLoaderVtable all_panels[] =
+{
   PANEL_TYPE("background",       cc_background_panel_get_type,           NULL),
 #ifdef BUILD_BLUETOOTH
   PANEL_TYPE("bluetooth",        cc_bluetooth_panel_get_type,            NULL),
