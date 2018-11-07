@@ -31,7 +31,7 @@
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 
-#include "um-utils.h"
+#include "user-utils.h"
 
 static gboolean
 query_tooltip (GtkWidget  *widget,

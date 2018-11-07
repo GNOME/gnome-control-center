@@ -27,7 +27,7 @@
 
 #include "cc-add-user-dialog.h"
 #include "cc-realm-manager.h"
-#include "um-utils.h"
+#include "user-utils.h"
 #include "pw-utils.h"
 
 #define PASSWORD_CHECK_TIMEOUT 600
