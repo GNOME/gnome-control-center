@@ -25,15 +25,15 @@
 
 G_BEGIN_DECLS
 
-#define UM_TYPE_PHOTO_DIALOG (um_photo_dialog_get_type())
+#define CC_TYPE_AVATAR_CHOOSER (cc_avatar_chooser_get_type())
 
-G_DECLARE_FINAL_TYPE (UmPhotoDialog, um_photo_dialog, UM, PHOTO_DIALOG, GtkPopover)
+G_DECLARE_FINAL_TYPE (CcAvatarChooser, cc_avatar_chooser, CC, AVATAR_CHOOSER, GtkPopover)
 
-typedef struct _UmPhotoDialog UmPhotoDialog;
+typedef struct _CcAvatarChooser CcAvatarChooser;
 
-UmPhotoDialog *um_photo_dialog_new      (GtkWidget     *button);
-void           um_photo_dialog_free     (UmPhotoDialog *dialog);
-void           um_photo_dialog_set_user (UmPhotoDialog *dialog,
-                                         ActUser       *user);
+CcAvatarChooser *cc_avatar_chooser_new      (GtkWidget     *button);
+void             cc_avatar_chooser_free     (CcAvatarChooser *dialog);
+void             cc_avatar_chooser_set_user (CcAvatarChooser *dialog,
+                                             ActUser       *user);
 
 G_END_DECLS
