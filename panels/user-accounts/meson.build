@@ -101,6 +101,7 @@ common_sources = files(
 )
 
 resource_data = files(
+  'cc-avatar-chooser.ui',
   'cc-password-dialog.ui',
   'cc-user-panel.ui',
   'data/icons/left-index-finger.png',
@@ -144,6 +145,7 @@ common_sources += gnome.gdbus_codegen(
 )
 
 sources = common_sources + files(
+  'cc-avatar-chooser.c',
   'cc-carousel.c',
   'cc-crop-area.c',
   'cc-password-dialog.c',
@@ -152,7 +154,6 @@ sources = common_sources + files(
   'run-passwd.c',
   'um-fingerprint-dialog.c',
   'um-history-dialog.c',
-  'um-photo-dialog.c',
 )
 
 # Kerberos support
