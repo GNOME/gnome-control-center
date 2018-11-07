@@ -31,9 +31,9 @@
 #include <act/act.h>
 
 #include "cc-password-dialog.h"
+#include "cc-user-accounts-resources.h"
 #include "pw-utils.h"
 #include "run-passwd.h"
-#include "um-resources.h"
 #include "um-utils.h"
 
 #define PASSWORD_CHECK_TIMEOUT 600
@@ -481,7 +481,7 @@ cc_password_dialog_class_init (CcPasswordDialogClass *klass)
 static void
 cc_password_dialog_init (CcPasswordDialog *self)
 {
-        g_resources_register (um_get_resource ());
+        g_resources_register (cc_user_accounts_get_resource ());
 
         gtk_widget_init_template (GTK_WIDGET (self));
 }

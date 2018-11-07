@@ -40,6 +40,7 @@
 
 #include "um-user-image.h"
 
+#include "cc-user-accounts-resources.h"
 #include "um-account-dialog.h"
 #include "cc-language-chooser.h"
 #include "cc-password-dialog.h"
@@ -47,7 +48,6 @@
 #include "um-photo-dialog.h"
 #include "um-fingerprint-dialog.h"
 #include "um-utils.h"
-#include "um-resources.h"
 #include "um-history-dialog.h"
 
 #include "cc-common-language.h"
@@ -1356,7 +1356,7 @@ cc_user_panel_init (CcUserPanel *self)
         volatile GType type G_GNUC_UNUSED;
         GtkCssProvider *provider;
 
-        g_resources_register (um_get_resource ());
+        g_resources_register (cc_user_accounts_get_resource ());
 
         /* register types that the builder might need */
         type = um_user_image_get_type ();

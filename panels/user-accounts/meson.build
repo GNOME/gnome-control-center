@@ -125,9 +125,9 @@ resource_data = files(
 )
 
 common_sources += gnome.compile_resources(
-  'um-resources',
+  'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
-  c_name: 'um',
+  c_name: 'cc_user_accounts',
   dependencies: resource_data,
   export: true
 )
