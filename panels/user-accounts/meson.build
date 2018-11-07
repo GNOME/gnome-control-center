@@ -101,6 +101,7 @@ common_sources = files(
 )
 
 resource_data = files(
+  'cc-carousel.ui',
   'cc-password-dialog.ui',
   'cc-user-panel.ui',
   'data/icons/left-index-finger.png',
@@ -118,7 +119,6 @@ resource_data = files(
   'data/account-dialog.ui',
   'data/account-fingerprint.ui',
   'data/carousel.css',
-  'data/carousel.ui',
   'data/history-dialog.ui',
   'data/join-dialog.ui',
   'data/user-accounts-dialog.css',
@@ -144,12 +144,12 @@ common_sources += gnome.gdbus_codegen(
 )
 
 sources = common_sources + files(
+  'cc-carousel.c',
   'cc-crop-area.c',
   'cc-password-dialog.c',
   'cc-user-image.c',
   'cc-user-panel.c',
   'run-passwd.c',
-  'um-carousel.c',
   'um-fingerprint-dialog.c',
   'um-history-dialog.c',
   'um-photo-dialog.c',

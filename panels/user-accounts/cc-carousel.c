@@ -18,46 +18,46 @@
  * Author: Felipe Borges <felipeborges@gnome.org>
  */
 
-#include "um-carousel.h"
+#include "cc-carousel.h"
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
 #define ARROW_SIZE 20
 
-struct _UmCarouselItem {
+struct _CcCarouselItem {
         GtkRadioButton parent;
 
         gint page;
 };
 
-G_DEFINE_TYPE (UmCarouselItem, um_carousel_item, GTK_TYPE_RADIO_BUTTON)
+G_DEFINE_TYPE (CcCarouselItem, cc_carousel_item, GTK_TYPE_RADIO_BUTTON)
 
 GtkWidget *
-um_carousel_item_new (void)
+cc_carousel_item_new (void)
 {
-        return g_object_new (UM_TYPE_CAROUSEL_ITEM, NULL);
+        return g_object_new (CC_TYPE_CAROUSEL_ITEM, NULL);
 }
 
 static void
-um_carousel_item_class_init (UmCarouselItemClass *klass)
+cc_carousel_item_class_init (CcCarouselItemClass *klass)
 {
 }
 
 static void
-um_carousel_item_init (UmCarouselItem *self)
+cc_carousel_item_init (CcCarouselItem *self)
 {
         gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (self), FALSE);
         gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
                                      "carousel-item");
 }
 
-struct _UmCarousel {
+struct _CcCarousel {
         GtkRevealer parent;
 
         GList *children;
         gint visible_page;
-        UmCarouselItem *selected_item;
+        CcCarouselItem *selected_item;
         GtkWidget *last_box;
         GtkWidget *arrow;
         gint arrow_start_x;
@@ -70,7 +70,7 @@ struct _UmCarousel {
         GtkStyleProvider *provider;
 };
 
-G_DEFINE_TYPE (UmCarousel, um_carousel, GTK_TYPE_REVEALER)
+G_DEFINE_TYPE (CcCarousel, cc_carousel, GTK_TYPE_REVEALER)
 
 enum {
         ITEM_ACTIVATED,
@@ -82,8 +82,8 @@ static guint signals[NUM_SIGNALS] = { 0, };
 #define ITEMS_PER_PAGE 3
 
 static gint
-um_carousel_item_get_x (UmCarouselItem *item,
-                        UmCarousel     *carousel)
+cc_carousel_item_get_x (CcCarouselItem *item,
+                        CcCarousel     *carousel)
 {
         GtkWidget *widget, *parent;
         gint width;
@@ -106,7 +106,7 @@ um_carousel_item_get_x (UmCarouselItem *item,
 }
 
 static void
-um_carousel_move_arrow (UmCarousel *self)
+cc_carousel_move_arrow (CcCarousel *self)
 {
         GtkStyleContext *context;
         gchar *css;
@@ -115,7 +115,7 @@ um_carousel_move_arrow (UmCarousel *self)
         if (!self->selected_item)
                 return;
 
-        end_x = um_carousel_item_get_x (self->selected_item, self);
+        end_x = cc_carousel_item_get_x (self->selected_item, self);
 
         context = gtk_widget_get_style_context (self->arrow);
         if (self->provider)
@@ -138,7 +138,7 @@ um_carousel_move_arrow (UmCarousel *self)
 }
 
 static gint
-get_last_page_number (UmCarousel *self)
+get_last_page_number (CcCarousel *self)
 {
         if (g_list_length (self->children) == 0)
                 return 0;
@@ -147,28 +147,28 @@ get_last_page_number (UmCarousel *self)
 }
 
 static void
-update_buttons_visibility (UmCarousel *self)
+update_buttons_visibility (CcCarousel *self)
 {
         gtk_widget_set_visible (self->go_back_button, (self->visible_page > 0));
         gtk_widget_set_visible (self->go_next_button, (self->visible_page < get_last_page_number (self)));
 }
 
 /**
- * um_carousel_find_item:
- * @carousel: an UmCarousel instance
+ * cc_carousel_find_item:
+ * @carousel: an CcCarousel instance
  * @data: user data passed to the comparation function
  * @func: the function to call for each element.
  *      It should return 0 when the desired element is found
  *
- * Finds an UmCarousel item using the supplied function to find the
+ * Finds an CcCarousel item using the supplied function to find the
  * desired element.
  * Ideally useful for matching a model object and its correspondent
  * widget.
  *
- * Returns: the found UmCarouselItem, or %NULL if it is not found
+ * Returns: the found CcCarouselItem, or %NULL if it is not found
  */
-UmCarouselItem *
-um_carousel_find_item (UmCarousel    *self,
+CcCarouselItem *
+cc_carousel_find_item (CcCarousel    *self,
                        gconstpointer  data,
                        GCompareFunc   func)
 {
@@ -186,18 +186,18 @@ um_carousel_find_item (UmCarousel    *self,
 }
 
 static void
-on_item_toggled (UmCarouselItem *item,
+on_item_toggled (CcCarouselItem *item,
                  GdkEvent       *event,
                  gpointer        user_data)
 {
-        UmCarousel *self = UM_CAROUSEL (user_data);
+        CcCarousel *self = CC_CAROUSEL (user_data);
 
-        um_carousel_select_item (self, item);
+        cc_carousel_select_item (self, item);
 }
 
 void
-um_carousel_select_item (UmCarousel     *self,
-                         UmCarouselItem *item)
+cc_carousel_select_item (CcCarousel     *self,
+                         CcCarouselItem *item)
 {
         gchar *page_name;
         gboolean page_changed = TRUE;
@@ -214,7 +214,7 @@ um_carousel_select_item (UmCarousel     *self,
         if (self->selected_item != NULL)
         {
                 page_changed = (self->selected_item->page != item->page);
-                self->arrow_start_x = um_carousel_item_get_x (self->selected_item, self);
+                self->arrow_start_x = cc_carousel_item_get_x (self->selected_item, self);
         }
 
         self->selected_item = item;
@@ -223,7 +223,7 @@ um_carousel_select_item (UmCarousel     *self,
 
         if (!page_changed)
         {
-                um_carousel_move_arrow (self);
+                cc_carousel_move_arrow (self);
                 return;
         }
 
@@ -234,38 +234,38 @@ um_carousel_select_item (UmCarousel     *self,
 
         update_buttons_visibility (self);
 
-        /* um_carousel_move_arrow is called from on_transition_running */
+        /* cc_carousel_move_arrow is called from on_transition_running */
 }
 
 static void
-um_carousel_select_item_at_index (UmCarousel *self,
+cc_carousel_select_item_at_index (CcCarousel *self,
                                   gint        index)
 {
         GList *l = NULL;
 
         l = g_list_nth (self->children, index);
-        um_carousel_select_item (self, l->data);
+        cc_carousel_select_item (self, l->data);
 }
 
 static void
-um_carousel_goto_previous_page (GtkWidget *button,
+cc_carousel_goto_previous_page (GtkWidget *button,
                                 gpointer   user_data)
 {
-        UmCarousel *self = UM_CAROUSEL (user_data);
+        CcCarousel *self = CC_CAROUSEL (user_data);
 
         self->visible_page--;
         if (self->visible_page < 0)
                 self->visible_page = 0;
 
         /* Select first item of the page */
-        um_carousel_select_item_at_index (self, self->visible_page * ITEMS_PER_PAGE);
+        cc_carousel_select_item_at_index (self, self->visible_page * ITEMS_PER_PAGE);
 }
 
 static void
-um_carousel_goto_next_page (GtkWidget *button,
+cc_carousel_goto_next_page (GtkWidget *button,
                             gpointer   user_data)
 {
-        UmCarousel *self = UM_CAROUSEL (user_data);
+        CcCarousel *self = CC_CAROUSEL (user_data);
         gint last_page;
 
         last_page = get_last_page_number (self);
@@ -275,18 +275,18 @@ um_carousel_goto_next_page (GtkWidget *button,
                 self->visible_page = last_page;
 
         /* Select first item of the page */
-        um_carousel_select_item_at_index (self, self->visible_page * ITEMS_PER_PAGE);
+        cc_carousel_select_item_at_index (self, self->visible_page * ITEMS_PER_PAGE);
 }
 
 static void
-um_carousel_add (GtkContainer *container,
+cc_carousel_add (GtkContainer *container,
                  GtkWidget    *widget)
 {
-        UmCarousel *self = UM_CAROUSEL (container);
+        CcCarousel *self = CC_CAROUSEL (container);
         gboolean last_box_is_full;
 
-        if (!UM_IS_CAROUSEL_ITEM (widget)) {
-                GTK_CONTAINER_CLASS (um_carousel_parent_class)->add (container, widget);
+        if (!CC_IS_CAROUSEL_ITEM (widget)) {
+                GTK_CONTAINER_CLASS (cc_carousel_parent_class)->add (container, widget);
                 return;
         }
 
@@ -294,7 +294,7 @@ um_carousel_add (GtkContainer *container,
         gtk_button_set_relief (GTK_BUTTON (widget), GTK_RELIEF_NONE);
 
         self->children = g_list_append (self->children, widget);
-        UM_CAROUSEL_ITEM (widget)->page = get_last_page_number (self);
+        CC_CAROUSEL_ITEM (widget)->page = get_last_page_number (self);
         if (self->selected_item != NULL)
                 gtk_radio_button_join_group (GTK_RADIO_BUTTON (widget), GTK_RADIO_BUTTON (self->selected_item));
         g_signal_connect (widget, "button-press-event", G_CALLBACK (on_item_toggled), self);
@@ -303,7 +303,7 @@ um_carousel_add (GtkContainer *container,
         if (last_box_is_full) {
                 gchar *page;
 
-                page = g_strdup_printf ("%d", UM_CAROUSEL_ITEM (widget)->page);
+                page = g_strdup_printf ("%d", CC_CAROUSEL_ITEM (widget)->page);
                 self->last_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
                 gtk_widget_show (self->last_box);
                 gtk_widget_set_valign (self->last_box, GTK_ALIGN_CENTER);
@@ -317,7 +317,7 @@ um_carousel_add (GtkContainer *container,
 }
 
 void
-um_carousel_purge_items (UmCarousel *self)
+cc_carousel_purge_items (CcCarousel *self)
 {
         gtk_container_forall (GTK_CONTAINER (self->stack),
                               (GtkCallback) gtk_widget_destroy,
@@ -329,43 +329,43 @@ um_carousel_purge_items (UmCarousel *self)
         self->selected_item = NULL;
 }
 
-UmCarousel *
-um_carousel_new (void)
+CcCarousel *
+cc_carousel_new (void)
 {
-        return g_object_new (UM_TYPE_CAROUSEL, NULL);
+        return g_object_new (CC_TYPE_CAROUSEL, NULL);
 }
 
 static void
-um_carousel_class_init (UmCarouselClass *klass)
+cc_carousel_class_init (CcCarouselClass *klass)
 {
         GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
         GtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
 
         gtk_widget_class_set_template_from_resource (wclass,
-                                                     "/org/gnome/control-center/user-accounts/carousel.ui");
+                                                     "/org/gnome/control-center/user-accounts/cc-carousel.ui");
 
-        gtk_widget_class_bind_template_child (wclass, UmCarousel, stack);
-        gtk_widget_class_bind_template_child (wclass, UmCarousel, go_back_button);
-        gtk_widget_class_bind_template_child (wclass, UmCarousel, go_next_button);
-        gtk_widget_class_bind_template_child (wclass, UmCarousel, arrow);
+        gtk_widget_class_bind_template_child (wclass, CcCarousel, stack);
+        gtk_widget_class_bind_template_child (wclass, CcCarousel, go_back_button);
+        gtk_widget_class_bind_template_child (wclass, CcCarousel, go_next_button);
+        gtk_widget_class_bind_template_child (wclass, CcCarousel, arrow);
 
-        gtk_widget_class_bind_template_callback (wclass, um_carousel_goto_previous_page);
-        gtk_widget_class_bind_template_callback (wclass, um_carousel_goto_next_page);
+        gtk_widget_class_bind_template_callback (wclass, cc_carousel_goto_previous_page);
+        gtk_widget_class_bind_template_callback (wclass, cc_carousel_goto_next_page);
 
-        container_class->add = um_carousel_add;
+        container_class->add = cc_carousel_add;
 
         signals[ITEM_ACTIVATED] = g_signal_new ("item-activated",
-                                                UM_TYPE_CAROUSEL,
+                                                CC_TYPE_CAROUSEL,
                                                 G_SIGNAL_RUN_LAST,
                                                 0,
                                                 NULL, NULL,
                                                 g_cclosure_marshal_VOID__OBJECT,
                                                 G_TYPE_NONE, 1,
-                                                UM_TYPE_CAROUSEL_ITEM);
+                                                CC_TYPE_CAROUSEL_ITEM);
 }
 
 static void
-on_size_allocate (UmCarousel *self)
+on_size_allocate (CcCarousel *self)
 {
        if (self->selected_item == NULL)
                return;
@@ -373,19 +373,19 @@ on_size_allocate (UmCarousel *self)
        if (gtk_stack_get_transition_running (self->stack))
                return;
 
-       self->arrow_start_x = um_carousel_item_get_x (self->selected_item, self);
-       um_carousel_move_arrow (self);
+       self->arrow_start_x = cc_carousel_item_get_x (self->selected_item, self);
+       cc_carousel_move_arrow (self);
 }
 
 static void
-on_transition_running (UmCarousel *self)
+on_transition_running (CcCarousel *self)
 {
         if (!gtk_stack_get_transition_running (self->stack))
-                um_carousel_move_arrow (self);
+                cc_carousel_move_arrow (self);
 }
 
 static void
-um_carousel_init (UmCarousel *self)
+cc_carousel_init (CcCarousel *self)
 {
         GtkStyleProvider *provider;
 
@@ -406,7 +406,7 @@ um_carousel_init (UmCarousel *self)
 }
 
 guint
-um_carousel_get_item_count (UmCarousel *self)
+cc_carousel_get_item_count (CcCarousel *self)
 {
         return g_list_length (self->children);
 }
