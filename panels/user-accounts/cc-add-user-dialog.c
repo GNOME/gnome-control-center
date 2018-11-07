@@ -579,21 +579,15 @@ local_init (CcAddUserDialog *self)
 
         self->local_password_mode = ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
 
-        gtk_widget_set_sensitive (GTK_WIDGET (self->local_password), FALSE);
         g_signal_connect (self->local_password, "notify::text", G_CALLBACK (on_password_changed), self);
         g_signal_connect_after (self->local_password, "focus-out-event", G_CALLBACK (on_password_focus_out), self);
         g_signal_connect (self->local_password, "key-press-event", G_CALLBACK (on_password_key_press_cb), self);
         g_signal_connect_swapped (self->local_password, "activate", G_CALLBACK (dialog_validate), self);
         g_signal_connect (self->local_password, "icon-press", G_CALLBACK (on_generate), self);
 
-        gtk_widget_set_sensitive (GTK_WIDGET (self->local_verify), FALSE);
         g_signal_connect (self->local_verify, "notify::text", G_CALLBACK (on_password_changed), self);
         g_signal_connect_after (self->local_verify, "focus-out-event", G_CALLBACK (on_password_focus_out), self);
         g_signal_connect_swapped (self->local_verify, "activate", G_CALLBACK (dialog_validate), self);
-
-        gtk_widget_set_sensitive (GTK_WIDGET (self->local_strength_indicator), FALSE);
-
-        gtk_widget_set_sensitive (GTK_WIDGET (self->local_hint), FALSE);
 
         dialog_validate (self);
         update_password_strength (self);
@@ -1345,9 +1339,6 @@ enterprise_init (CcAddUserDialog *self)
         g_signal_connect (self->enterprise_login, "changed", G_CALLBACK (on_entry_changed), self);
 
         g_signal_connect (self->enterprise_password, "changed", G_CALLBACK (on_entry_changed), self);
-
-        /* Initially we hide the 'Enterprise Login' stuff */
-        gtk_widget_hide (GTK_WIDGET (self->enterprise_button));
 
         self->realmd_watch = g_bus_watch_name (G_BUS_TYPE_SYSTEM, "org.freedesktop.realmd",
                                                G_BUS_NAME_WATCHER_FLAGS_AUTO_START,
