@@ -46,7 +46,7 @@
 #include "cc-realm-manager.h"
 #include "cc-user-image.h"
 #include "um-fingerprint-dialog.h"
-#include "um-utils.h"
+#include "user-utils.h"
 #include "um-resources.h"
 #include "um-history-dialog.h"
 

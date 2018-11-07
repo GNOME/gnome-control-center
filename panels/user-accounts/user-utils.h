@@ -26,10 +26,10 @@
 G_BEGIN_DECLS
 
 typedef enum {
-        UM_ICON_STYLE_NONE   = 0,
-        UM_ICON_STYLE_FRAME  = 1 << 0,
-        UM_ICON_STYLE_STATUS = 1 << 1
-} UmIconStyle;
+        USER_ICON_STYLE_NONE   = 0,
+        USER_ICON_STYLE_FRAME  = 1 << 0,
+        USER_ICON_STYLE_STATUS = 1 << 1
+} UserIconStyle;
 
 void     setup_tooltip_with_embedded_icon (GtkWidget   *widget,
                                            const gchar *text,
@@ -66,7 +66,7 @@ void     generate_username_choices        (const gchar     *name,
                                            GtkListStore    *store);
 
 cairo_surface_t *render_user_icon         (ActUser         *user,
-                                           UmIconStyle      style,
+                                           UserIconStyle    style,
                                            gint             icon_size,
                                            gint             scale);
 

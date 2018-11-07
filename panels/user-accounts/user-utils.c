@@ -34,7 +34,7 @@
 #include <sys/stat.h>
 #include <glib/gstdio.h>
 
-#include "um-utils.h"
+#include "user-utils.h"
 
 typedef struct {
         gchar *text;
@@ -860,10 +860,10 @@ logged_in_pixbuf (GdkPixbuf *pixbuf, gint scale)
 #define MAX_FILE_SIZE     65536
 
 cairo_surface_t *
-render_user_icon (ActUser     *user,
-                  UmIconStyle  style,
-                  gint         icon_size,
-                  gint         scale)
+render_user_icon (ActUser      *user,
+                  UserIconStyle style,
+                  gint          icon_size,
+                  gint          scale)
 {
         GdkPixbuf    *pixbuf;
         GdkPixbuf    *framed;
@@ -908,7 +908,7 @@ render_user_icon (ActUser     *user,
 
  out:
 
-        if (pixbuf != NULL && (style & UM_ICON_STYLE_FRAME)) {
+        if (pixbuf != NULL && (style & USER_ICON_STYLE_FRAME)) {
                 framed = frame_pixbuf (pixbuf, scale);
                 if (framed != NULL) {
                         g_object_unref (pixbuf);
@@ -916,7 +916,7 @@ render_user_icon (ActUser     *user,
                 }
         }
 
-        if (pixbuf != NULL && (style & UM_ICON_STYLE_STATUS) && act_user_is_logged_in (user)) {
+        if (pixbuf != NULL && (style & USER_ICON_STYLE_STATUS) && act_user_is_logged_in (user)) {
                 framed = logged_in_pixbuf (pixbuf, scale);
                 if (framed != NULL) {
                         g_object_unref (pixbuf);
