@@ -33,7 +33,7 @@
 #include "cc-util.h"
 
 #include "um-history-dialog.h"
-#include "um-utils.h"
+#include "user-utils.h"
 
 struct _UmHistoryDialog {
         GtkWidget *dialog;

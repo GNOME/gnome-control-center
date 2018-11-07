@@ -37,7 +37,7 @@
 
 #include "cc-avatar-chooser.h"
 #include "cc-crop-area.h"
-#include "um-utils.h"
+#include "user-utils.h"
 
 #define ROW_SPAN 5
 #define AVATAR_PIXEL_SIZE 80
