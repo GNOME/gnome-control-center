@@ -40,7 +40,7 @@ typedef struct
 } CcPanelLoaderVtable;
 
 void     cc_panel_loader_fill_model     (CcShellModel  *model);
-GList   *cc_panel_loader_get_panels     (void);
+void     cc_panel_loader_list_panels    (void);
 CcPanel *cc_panel_loader_load_by_name   (CcShell       *shell,
                                          const char    *name,
                                          GVariant      *parameters);
