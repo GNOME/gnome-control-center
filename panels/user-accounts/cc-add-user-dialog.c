@@ -77,6 +77,7 @@ struct _CcAddUserDialog {
         GtkLabel        *local_hint_label;
         GtkEntry        *local_name_entry;
         GtkComboBoxText *local_username_combo;
+        GtkListStore    *local_username_model;
         GtkEntry        *local_password_entry;
         GtkRadioButton  *local_password_radio;
         GtkEntry        *local_username_entry;
@@ -401,17 +402,15 @@ local_name_entry_focus_out_event_cb (CcAddUserDialog *self)
 static void
 local_name_entry_changed_cb (CcAddUserDialog *self)
 {
-        GtkTreeModel *model;
         const char *name;
 
-        model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->local_username_combo));
-        gtk_list_store_clear (GTK_LIST_STORE (model));
+        gtk_list_store_clear (self->local_username_model);
 
         name = gtk_entry_get_text (self->local_name_entry);
         if ((name == NULL || strlen (name) == 0) && !self->has_custom_username) {
                 gtk_entry_set_text (self->local_username_entry, "");
         } else if (name != NULL && strlen (name) != 0) {
-                generate_username_choices (name, GTK_LIST_STORE (model));
+                generate_username_choices (name, self->local_username_model);
                 if (!self->has_custom_username)
                         gtk_combo_box_set_active (GTK_COMBO_BOX (self->local_username_combo), 0);
         }
@@ -553,12 +552,9 @@ local_password_radio_changed_cb (CcAddUserDialog *self)
 static void
 local_prepare (CcAddUserDialog *self)
 {
-        GtkTreeModel *model;
-
         gtk_entry_set_text (self->local_name_entry, "");
         gtk_entry_set_text (self->local_username_entry, "");
-        model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->local_username_combo));
-        gtk_list_store_clear (GTK_LIST_STORE (model));
+        gtk_list_store_clear (self->local_username_model);
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->local_account_type_standard), TRUE);
         self->has_custom_username = FALSE;
 }
@@ -575,7 +571,7 @@ enterprise_validate (CcAddUserDialog *self)
         valid_name = is_valid_name (name);
 
         if (gtk_combo_box_get_active_iter (self->enterprise_domain_combo, &iter)) {
-                gtk_tree_model_get (gtk_combo_box_get_model (self->enterprise_domain_combo),
+                gtk_tree_model_get (GTK_TREE_MODEL (self->enterprise_realm_model),
                                     &iter, 0, &name, -1);
         } else {
                 name = gtk_entry_get_text (self->enterprise_domain_entry);
@@ -1221,7 +1217,7 @@ enterprise_domain_timeout (CcAddUserDialog *self)
         self->enterprise_domain_timeout_id = 0;
 
         if (gtk_combo_box_get_active_iter (self->enterprise_domain_combo, &iter)) {
-                gtk_tree_model_get (gtk_combo_box_get_model (self->enterprise_domain_combo), &iter, 1, &self->selected_realm, -1);
+                gtk_tree_model_get (GTK_TREE_MODEL (self->enterprise_realm_model), &iter, 1, &self->selected_realm, -1);
                 set_entry_validation_checkmark (self->enterprise_domain_entry);
                 gtk_label_set_text (self->enterprise_domain_hint_label, DOMAIN_DEFAULT_HINT);
         }
@@ -1505,6 +1501,7 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_hint_label);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_name_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_combo);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_model);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_radio);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_entry);
