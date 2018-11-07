@@ -39,12 +39,12 @@
 #include <libgnome-desktop/gnome-languages.h>
 
 #include "cc-add-user-dialog.h"
+#include "cc-carousel.h"
 #include "cc-language-chooser.h"
 #include "cc-login-history-dialog.h"
 #include "cc-password-dialog.h"
 #include "cc-user-accounts-resources.h"
 #include "cc-user-image.h"
-#include "um-carousel.h"
 #include "um-photo-dialog.h"
 #include "um-fingerprint-dialog.h"
 #include "um-utils.h"
@@ -72,7 +72,7 @@ struct _CcUserPanel {
         GtkBox          *autologin_box;
         GtkLabel        *autologin_label;
         GtkSwitch       *autologin_switch;
-        UmCarousel      *carousel;
+        CcCarousel      *carousel;
         GtkButton       *fingerprint_button;
         GtkLabel        *fingerprint_label;
         GtkEntry        *full_name_entry;
@@ -175,7 +175,7 @@ get_real_or_user_name (ActUser *user)
 static void show_user (ActUser *user, CcUserPanel *self);
 
 static void
-set_selected_user (CcUserPanel *self, UmCarouselItem *item)
+set_selected_user (CcUserPanel *self, CcCarouselItem *item)
 {
         uid_t uid;
 
@@ -238,7 +238,7 @@ user_added (CcUserPanel *self, ActUser *user)
         g_debug ("user added: %d %s\n", act_user_get_uid (user), get_real_or_user_name (user));
 
         widget = create_carousel_entry (self, user);
-        item = um_carousel_item_new ();
+        item = cc_carousel_item_new ();
         gtk_container_add (GTK_CONTAINER (item), widget);
 
         g_object_set_data (G_OBJECT (item), "uid", GINT_TO_POINTER (act_user_get_uid (user)));
@@ -290,7 +290,7 @@ reload_users (CcUserPanel *self, ActUser *selected_user)
 {
         ActUser *user;
         GSList *list, *l;
-        UmCarouselItem *item = NULL;
+        CcCarouselItem *item = NULL;
         GtkSettings *settings;
         gboolean animations;
 
@@ -299,7 +299,7 @@ reload_users (CcUserPanel *self, ActUser *selected_user)
         g_object_get (settings, "gtk-enable-animations", &animations, NULL);
         g_object_set (settings, "gtk-enable-animations", FALSE, NULL);
 
-        um_carousel_purge_items (self->carousel);
+        cc_carousel_purge_items (self->carousel);
         self->other_accounts = 0;
 
         list = act_user_manager_list_users (self->um);
@@ -313,14 +313,14 @@ reload_users (CcUserPanel *self, ActUser *selected_user)
         }
         g_slist_free (list);
 
-        if (um_carousel_get_item_count (self->carousel) == 0)
+        if (cc_carousel_get_item_count (self->carousel) == 0)
                 gtk_stack_set_visible_child_name (self->stack, PAGE_NO_USERS);
         if (self->other_accounts == 0)
                 gtk_revealer_set_reveal_child (GTK_REVEALER (self->carousel), FALSE);
 
         if (selected_user)
-                item = um_carousel_find_item (self->carousel, selected_user, user_compare);
-        um_carousel_select_item (self->carousel, item);
+                item = cc_carousel_find_item (self->carousel, selected_user, user_compare);
+        cc_carousel_select_item (self->carousel, item);
 
         g_object_set (settings, "gtk-enable-animations", animations, NULL);
 }
@@ -329,12 +329,12 @@ static gint
 user_compare (gconstpointer i,
               gconstpointer u)
 {
-        UmCarouselItem *item;
+        CcCarouselItem *item;
         ActUser *user;
         gint uid_a, uid_b;
         gint result;
 
-        item = (UmCarouselItem *) i;
+        item = (CcCarouselItem *) i;
         user = ACT_USER (u);
 
         uid_a = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "uid"));
@@ -1358,7 +1358,7 @@ cc_user_panel_init (CcUserPanel *self)
 
         /* register types that the builder might need */
         type = cc_user_image_get_type ();
-        type = um_carousel_get_type ();
+        type = cc_carousel_get_type ();
 
         gtk_widget_init_template (GTK_WIDGET (self));
 
