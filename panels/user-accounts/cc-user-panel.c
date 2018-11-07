@@ -43,6 +43,7 @@
 #include "cc-carousel.h"
 #include "cc-language-chooser.h"
 #include "cc-password-dialog.h"
+#include "cc-realm-manager.h"
 #include "cc-user-image.h"
 #include "um-fingerprint-dialog.h"
 #include "um-utils.h"
@@ -51,8 +52,6 @@
 
 #include "cc-common-language.h"
 #include "cc-util.h"
-
-#include "um-realm-manager.h"
 
 #define USER_ACCOUNTS_PERMISSION "org.gnome.controlcenter.user-accounts.administration"
 
@@ -441,7 +440,7 @@ enterprise_user_revoked (GObject *source,
 {
         AsyncDeleteData *data = user_data;
         CcUserPanel *self = data->self;
-        UmRealmCommon *common = UM_REALM_COMMON (source);
+        CcRealmCommon *common = CC_REALM_COMMON (source);
         GError *error = NULL;
 
         if (g_cancellable_is_cancelled (data->cancellable)) {
@@ -449,7 +448,7 @@ enterprise_user_revoked (GObject *source,
                 return;
         }
 
-        um_realm_common_call_change_login_policy_finish (common, result, &error);
+        cc_realm_common_call_change_login_policy_finish (common, result, &error);
         if (error != NULL) {
                 show_error_dialog (self, _("Failed to revoke remotely managed user"), error);
                 g_error_free (error);
@@ -458,22 +457,22 @@ enterprise_user_revoked (GObject *source,
         async_delete_data_free (data);
 }
 
-static UmRealmCommon *
-find_matching_realm (UmRealmManager *realm_manager, const gchar *login)
+static CcRealmCommon *
+find_matching_realm (CcRealmManager *realm_manager, const gchar *login)
 {
-        UmRealmCommon *common = NULL;
+        CcRealmCommon *common = NULL;
         GList *realms, *l;
 
-        realms = um_realm_manager_get_realms (realm_manager);
+        realms = cc_realm_manager_get_realms (realm_manager);
         for (l = realms; l != NULL; l = g_list_next (l)) {
                 const gchar * const *permitted_logins;
                 gint i;
 
-                common = um_realm_object_get_common (l->data);
+                common = cc_realm_object_get_common (l->data);
                 if (common == NULL)
                         continue;
 
-                permitted_logins = um_realm_common_get_permitted_logins (common);
+                permitted_logins = cc_realm_common_get_permitted_logins (common);
                 for (i = 0; permitted_logins[i] != NULL; i++) {
                         if (g_strcmp0 (permitted_logins[i], login) == 0)
                                 break;
@@ -496,8 +495,8 @@ realm_manager_found (GObject *source,
 {
         AsyncDeleteData *data = user_data;
         CcUserPanel *self = data->self;
-        UmRealmCommon *common;
-        UmRealmManager *realm_manager;
+        CcRealmCommon *common;
+        CcRealmManager *realm_manager;
         const gchar *add[1];
         const gchar *remove[2];
         GVariant *options;
@@ -508,7 +507,7 @@ realm_manager_found (GObject *source,
                 return;
         }
 
-        realm_manager = um_realm_manager_new_finish (result, &error);
+        realm_manager = cc_realm_manager_new_finish (result, &error);
         if (error != NULL) {
                 show_error_dialog (self, _("Failed to revoke remotely managed user"), error);
                 g_error_free (error);
@@ -532,7 +531,7 @@ realm_manager_found (GObject *source,
         remove[1] = NULL;
 
         options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
-        um_realm_common_call_change_login_policy (common, "",
+        cc_realm_common_call_change_login_policy (common, "",
                                                   add, remove, options,
                                                   data->cancellable,
                                                   enterprise_user_revoked,
@@ -559,7 +558,7 @@ enterprise_user_uncached (GObject           *source,
         act_user_manager_uncache_user_finish (manager, res, &error);
         if (error == NULL) {
                 /* Find realm manager */
-                um_realm_manager_new (self->cancellable, realm_manager_found, data);
+                cc_realm_manager_new (self->cancellable, realm_manager_found, data);
         }
         else {
                 show_error_dialog (self, _("Failed to revoke remotely managed user"), error);
