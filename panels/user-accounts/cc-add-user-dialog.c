@@ -72,6 +72,7 @@ struct _CcAddUserDialog {
         GtkLabel        *enterprise_hint;
         GtkEntry        *enterprise_login;
         GtkEntry        *enterprise_password;
+        GtkListStore    *enterprise_realms;
         GtkLabel        *local_hint;
         GtkEntry        *local_name;
         GtkRadioButton  *local_password_radio;
@@ -97,7 +98,6 @@ struct _CcAddUserDialog {
         gint       local_password_timeout_id;
 
         guint realmd_watch;
-        GtkListStore *enterprise_realms;
         UmRealmManager *realm_manager;
         UmRealmObject *selected_realm;
         gboolean enterprise_check_credentials;
@@ -1336,13 +1336,10 @@ enterprise_init (CcAddUserDialog *self)
 {
         GNetworkMonitor *monitor;
 
-        self->enterprise_realms = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_OBJECT);
         self->enterprise_check_credentials = FALSE;
 
         g_signal_connect (self->enterprise_domain, "changed", G_CALLBACK (on_domain_changed), self);
         g_signal_connect_after (self->enterprise_domain, "focus-out-event", G_CALLBACK (on_enterprise_domain_focus_out), self);
-        gtk_combo_box_set_model (GTK_COMBO_BOX (self->enterprise_domain),
-                                 GTK_TREE_MODEL (self->enterprise_realms));
         enterprise_check_domain (self);
 
         g_signal_connect (self->enterprise_login, "changed", G_CALLBACK (on_entry_changed), self);
@@ -1550,7 +1547,6 @@ cc_add_user_dialog_finalize (GObject *obj)
         if (self->cancellable)
                 g_object_unref (self->cancellable);
         g_clear_object (&self->permission);
-        g_object_unref (self->enterprise_realms);
 
         G_OBJECT_CLASS (cc_add_user_dialog_parent_class)->finalize (obj);
 }
@@ -1578,6 +1574,7 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_hint);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_login);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_password);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_realms);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_hint);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_name);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_radio);
