@@ -110,10 +110,14 @@
         },
         {
             "name" : "accountservice",
-            "buildsystem" : "autotools",
+            "buildsystem" : "meson",
             "config-opts" : [
-                "--disable-systemd",
-                "--disable-elogind"
+                "-Ddocbook=false",
+                "-Delogind=false",
+                "-Dgtk_doc=false",
+                "-Dintrospection=false",
+                "-Dsystemd=false",
+                "-Dsystemdsystemunitdir=no"
             ],
             "sources" : [
                 {
