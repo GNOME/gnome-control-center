@@ -97,7 +97,7 @@ common_sources = files(
   'cc-add-user-dialog.c',
   'cc-realm-manager.c',
   'pw-utils.c',
-  'um-utils.c'
+  'user-utils.c',
 )
 
 resource_data = files(
