@@ -118,6 +118,13 @@ static CcPanelLoaderVtable default_panels[] =
 #endif
 };
 
+/* Override for the panel vtable. When NULL, the default_panels will
+ * be used.
+ */
+static CcPanelLoaderVtable *panels_vtable = default_panels;
+static gsize panels_vtable_len = G_N_ELEMENTS (default_panels);
+
+
 static int
 parse_categories (GDesktopAppInfo *app)
 {
@@ -169,8 +176,8 @@ ensure_panel_types (void)
     return;
 
   panel_types = g_hash_table_new (g_str_hash, g_str_equal);
-  for (i = 0; i < G_N_ELEMENTS (default_panels); i++)
-    g_hash_table_insert (panel_types, (char*)default_panels[i].name, default_panels[i].get_type);
+  for (i = 0; i < panels_vtable_len; i++)
+    g_hash_table_insert (panel_types, (char*)panels_vtable[i].name, panels_vtable[i].get_type);
 }
 
 CcPanel *
@@ -198,18 +205,18 @@ cc_panel_loader_fill_model (CcShellModel *model)
 {
   guint i;
 
-  for (i = 0; i < G_N_ELEMENTS (default_panels); i++)
+  for (i = 0; i < panels_vtable_len; i++)
     {
       g_autoptr (GDesktopAppInfo) app;
       g_autofree gchar *desktop_name = NULL;
       gint category;
 
-      desktop_name = g_strconcat ("gnome-", default_panels[i].name, "-panel.desktop", NULL);
+      desktop_name = g_strconcat ("gnome-", panels_vtable[i].name, "-panel.desktop", NULL);
       app = g_desktop_app_info_new (desktop_name);
 
       if (!app)
         {
-          g_warning ("Ignoring broken panel %s (missing desktop file)", default_panels[i].name);
+          g_warning ("Ignoring broken panel %s (missing desktop file)", panels_vtable[i].name);
           continue;
         }
 
@@ -221,7 +228,7 @@ cc_panel_loader_fill_model (CcShellModel *model)
       if (!g_desktop_app_info_get_show_in (app, NULL))
         continue;
 
-      cc_shell_model_add_item (model, category, G_APP_INFO (app), default_panels[i].name);
+      cc_shell_model_add_item (model, category, G_APP_INFO (app), panels_vtable[i].name);
     }
 
   /* If there's an static init function, execute it after adding all panels to
@@ -229,10 +236,10 @@ cc_panel_loader_fill_model (CcShellModel *model)
    * having an instance running.
    */
 #ifndef CC_PANEL_LOADER_NO_GTYPES
-  for (i = 0; i < G_N_ELEMENTS (default_panels); i++)
+  for (i = 0; i < panels_vtable_len; i++)
     {
-      if (default_panels[i].static_init_func)
-        default_panels[i].static_init_func ();
+      if (panels_vtable[i].static_init_func)
+        panels_vtable[i].static_init_func ();
     }
 #endif
 }
@@ -244,7 +251,20 @@ cc_panel_loader_list_panels (void)
 
   g_print ("%s\n", _("Available panels:"));
 
-  for (i = 0; i < G_N_ELEMENTS (default_panels); i++)
-    g_print ("\t%s\n", default_panels[i].name);
+  for (i = 0; i < panels_vtable_len; i++)
+    g_print ("\t%s\n", panels_vtable[i].name);
 
+}
+
+void
+cc_panel_loader_override_vtable (CcPanelLoaderVtable *override_vtable,
+                                 gsize                n_elements)
+{
+  g_assert (override_vtable != NULL);
+  g_assert (n_elements > 0);
+
+  g_debug ("Overriding default panel vtable");
+
+  panels_vtable = override_vtable;
+  panels_vtable_len = n_elements;
 }

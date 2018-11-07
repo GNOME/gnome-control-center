@@ -45,5 +45,8 @@ CcPanel *cc_panel_loader_load_by_name   (CcShell       *shell,
                                          const char    *name,
                                          GVariant      *parameters);
 
+void    cc_panel_loader_override_vtable (CcPanelLoaderVtable *override_vtable,
+                                         gsize                n_elements);
+
 G_END_DECLS
 
