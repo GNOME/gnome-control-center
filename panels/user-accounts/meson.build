@@ -145,6 +145,7 @@ common_sources += gnome.gdbus_codegen(
 
 sources = common_sources + files(
   'cc-crop-area.c',
+  'cc-user-image.c',
   'cc-user-panel.c',
   'run-passwd.c',
   'um-account-type.c',
@@ -153,7 +154,6 @@ sources = common_sources + files(
   'um-history-dialog.c',
   'um-password-dialog.c',
   'um-photo-dialog.c',
-  'um-user-image.c',
 )
 
 # Kerberos support
