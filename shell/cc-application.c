@@ -125,15 +125,7 @@ cc_application_handle_local_options (GApplication *application,
 
   if (g_variant_dict_contains (options, "list"))
     {
-      g_autoptr(GList) panels = NULL;
-      g_autoptr(GList) l = NULL;
-
-      panels = cc_panel_loader_get_panels ();
-
-      g_print ("%s\n", _("Available panels:"));
-      for (l = panels; l != NULL; l = l->next)
-        g_print ("\t%s\n", (char *) l->data);
-
+      cc_panel_loader_list_panels ();
       return 0;
     }
 

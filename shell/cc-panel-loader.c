@@ -23,6 +23,7 @@
 
 #include <string.h>
 #include <gio/gdesktopappinfo.h>
+#include <glib/gi18n.h>
 
 #include "cc-panel.h"
 #include "cc-panel-loader.h"
@@ -236,14 +237,14 @@ cc_panel_loader_fill_model (CcShellModel *model)
 #endif
 }
 
-GList *
-cc_panel_loader_get_panels (void)
+void
+cc_panel_loader_list_panels (void)
 {
-  GList *l = NULL;
   guint i;
 
-  for (i = 0; i < G_N_ELEMENTS (default_panels); i++)
-    l = g_list_prepend (l, (gpointer) default_panels[i].name);
+  g_print ("%s\n", _("Available panels:"));
 
-  return g_list_reverse (l);
+  for (i = 0; i < G_N_ELEMENTS (default_panels); i++)
+    g_print ("\t%s\n", default_panels[i].name);
+
 }
