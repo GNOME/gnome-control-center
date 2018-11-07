@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <interface>
   <!-- interface-requires gtk+ 3.8 -->
-  <template class="UmCarousel" parent="GtkRevealer">
+  <template class="CcCarousel" parent="GtkRevealer">
     <property name="transition_duration">400</property>
     <property name="reveal-child">True</property>
     <child>
@@ -43,7 +43,7 @@
                         <property name="icon_name">go-previous-symbolic</property>
                       </object>
                     </child>
-                    <signal name="clicked" handler="um_carousel_goto_previous_page" object="UmCarousel" swapped="no"/>
+                    <signal name="clicked" handler="cc_carousel_goto_previous_page" object="CcCarousel" swapped="no"/>
                   </object>
                   <packing>
                     <property name="pack_type">GTK_PACK_START</property>
@@ -64,7 +64,7 @@
                         <property name="icon_name">go-next-symbolic</property>
                       </object>
                     </child>
-                    <signal name="clicked" handler="um_carousel_goto_next_page" object="UmCarousel" swapped="no"/>
+                    <signal name="clicked" handler="cc_carousel_goto_next_page" object="CcCarousel" swapped="no"/>
                   </object>
                   <packing>
                     <property name="pack_type">GTK_PACK_END</property>
