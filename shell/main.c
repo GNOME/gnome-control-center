@@ -33,6 +33,9 @@
 #include <cheese-gtk.h>
 #endif /* HAVE_CHEESE */
 
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
+
 #include "cc-application.h"
 
 int
@@ -51,6 +54,8 @@ main (int argc, char **argv)
 #ifdef HAVE_CHEESE
   cheese_gtk_init (&argc, &argv);
 #endif /* HAVE_CHEESE */
+
+  hdy_init (&argc, &argv);
 
   application = cc_application_new ();
 
