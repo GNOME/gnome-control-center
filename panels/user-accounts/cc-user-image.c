@@ -16,23 +16,23 @@
  * (C) Copyright 2015 Red Hat, Inc.
  */
 
-#include "um-user-image.h"
+#include "cc-user-image.h"
 
 #include <gtk/gtk.h>
 #include <act/act.h>
 
 #include "um-utils.h"
 
-struct _UmUserImage {
+struct _CcUserImage {
         GtkImage parent_instance;
 
         ActUser *user;
 };
 
-G_DEFINE_TYPE (UmUserImage, um_user_image, GTK_TYPE_IMAGE)
+G_DEFINE_TYPE (CcUserImage, cc_user_image, GTK_TYPE_IMAGE)
 
 static void
-render_image (UmUserImage *image)
+render_image (CcUserImage *image)
 {
         cairo_surface_t *surface;
         gint scale, pixel_size;
@@ -51,7 +51,7 @@ render_image (UmUserImage *image)
 }
 
 void
-um_user_image_set_user (UmUserImage *image,
+cc_user_image_set_user (CcUserImage *image,
                         ActUser     *user)
 {
         g_clear_object (&image->user);
@@ -61,32 +61,32 @@ um_user_image_set_user (UmUserImage *image,
 }
 
 static void
-um_user_image_finalize (GObject *object)
+cc_user_image_finalize (GObject *object)
 {
-        UmUserImage *image = UM_USER_IMAGE (object);
+        CcUserImage *image = CC_USER_IMAGE (object);
 
         g_clear_object (&image->user);
 
-        G_OBJECT_CLASS (um_user_image_parent_class)->finalize (object);
+        G_OBJECT_CLASS (cc_user_image_parent_class)->finalize (object);
 }
 
 static void
-um_user_image_class_init (UmUserImageClass *class)
+cc_user_image_class_init (CcUserImageClass *class)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (class);
 
-        object_class->finalize = um_user_image_finalize;
+        object_class->finalize = cc_user_image_finalize;
 }
 
 static void
-um_user_image_init (UmUserImage *image)
+cc_user_image_init (CcUserImage *image)
 {
         g_signal_connect_swapped (image, "notify::scale-factor", G_CALLBACK (render_image), image);
         g_signal_connect_swapped (image, "notify::pixel-size", G_CALLBACK (render_image), image);
 }
 
 GtkWidget *
-um_user_image_new (void)
+cc_user_image_new (void)
 {
-        return g_object_new (UM_TYPE_USER_IMAGE, NULL);
+        return g_object_new (CC_TYPE_USER_IMAGE, NULL);
 }
