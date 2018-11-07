@@ -53,6 +53,7 @@
             <property name="use_action_appearance">False</property>
             <property name="use_underline">True</property>
             <property name="valign">center</property>
+            <signal name="clicked" handler="add_button_clicked_cb" object="CcAddUserDialog" swapped="yes"/>
             <style>
               <class name="text-button"/>
               <class name="suggested-action"/>
@@ -161,6 +162,7 @@
                     <property name="can_focus">True</property>
                     <property name="activates_default">True</property>
                     <property name="hexpand">True</property>
+                    <property name="has_focus">True</property>
                     <signal name="changed" handler="local_name_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
                     <signal name="focus-out-event" handler="local_name_entry_focus_out_event_cb" after="yes" object="CcAddUserDialog" swapped="yes"/>
                     <signal name="activate" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
@@ -806,7 +808,6 @@
     </child>
     <action-widgets>
       <action-widget response="-6">cancel_button</action-widget>
-      <action-widget response="-5">add_button</action-widget>
     </action-widgets>
   </template>
   <object class="GtkSizeGroup">
