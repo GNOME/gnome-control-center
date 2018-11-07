@@ -41,9 +41,9 @@
 #include "um-account-dialog.h"
 #include "cc-carousel.h"
 #include "cc-language-chooser.h"
+#include "cc-photo-dialog.h"
 #include "cc-user-image.h"
 #include "um-password-dialog.h"
-#include "um-photo-dialog.h"
 #include "um-fingerprint-dialog.h"
 #include "um-utils.h"
 #include "um-resources.h"
@@ -99,7 +99,7 @@ struct _CcUserPanel {
         CcLanguageChooser *language_chooser;
 
         UmPasswordDialog *password_dialog;
-        UmPhotoDialog *photo_dialog;
+        CcPhotoDialog *photo_dialog;
         UmHistoryDialog *history_dialog;
 
         gint other_accounts;
@@ -819,7 +819,7 @@ show_user (ActUser *user, CcUserPanel *self)
         cc_user_image_set_user (self->user_icon_image, user);
         cc_user_image_set_user (self->user_icon_image2, user);
 
-        um_photo_dialog_set_user (self->photo_dialog, user);
+        cc_photo_dialog_set_user (self->photo_dialog, user);
 
         gtk_entry_set_text (self->full_name_entry, act_user_get_real_name (user));
         gtk_widget_set_tooltip_text (GTK_WIDGET (self->full_name_entry), act_user_get_user_name (user));
@@ -1372,7 +1372,7 @@ cc_user_panel_init (CcUserPanel *self)
         self->login_screen_settings = settings_or_null ("org.gnome.login-screen");
 
         self->password_dialog = um_password_dialog_new ();
-        self->photo_dialog = um_photo_dialog_new (GTK_WIDGET (self->user_icon_button));
+        self->photo_dialog = cc_photo_dialog_new (GTK_WIDGET (self->user_icon_button));
         self->history_dialog = um_history_dialog_new ();
         setup_main_window (self);
 }
