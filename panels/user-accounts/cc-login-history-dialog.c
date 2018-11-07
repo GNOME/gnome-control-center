@@ -33,7 +33,7 @@
 #include "cc-login-history-dialog.h"
 #include "cc-util.h"
 #include "um-resources.h"
-#include "um-utils.h"
+#include "user-utils.h"
 
 struct _CcLoginHistoryDialog
 {
