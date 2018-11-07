@@ -20,54 +20,54 @@
 
 #pragma once
 
-#include "um-realm-generated.h"
+#include "cc-realm-generated.h"
 
 G_BEGIN_DECLS
 
 typedef enum {
-	UM_REALM_ERROR_BAD_LOGIN,
-	UM_REALM_ERROR_BAD_PASSWORD,
-	UM_REALM_ERROR_CANNOT_AUTH,
-	UM_REALM_ERROR_GENERIC,
-} UmRealmErrors;
+        CC_REALM_ERROR_BAD_LOGIN,
+        CC_REALM_ERROR_BAD_PASSWORD,
+        CC_REALM_ERROR_CANNOT_AUTH,
+        CC_REALM_ERROR_GENERIC,
+} CcRealmErrors;
 
-#define UM_REALM_ERROR             (um_realm_error_get_quark ())
+#define CC_REALM_ERROR (cc_realm_error_get_quark ())
 
-GQuark           um_realm_error_get_quark         (void) G_GNUC_CONST;
+GQuark           cc_realm_error_get_quark         (void) G_GNUC_CONST;
 
-#define UM_TYPE_REALM_MANAGER (um_realm_manager_get_type ())
-G_DECLARE_FINAL_TYPE (UmRealmManager, um_realm_manager, UM, REALM_MANAGER, UmRealmObjectManagerClient)
+#define CC_TYPE_REALM_MANAGER (cc_realm_manager_get_type ())
+G_DECLARE_FINAL_TYPE (CcRealmManager, cc_realm_manager, CC, REALM_MANAGER, CcRealmObjectManagerClient)
 
-void             um_realm_manager_new             (GCancellable *cancellable,
+void             cc_realm_manager_new             (GCancellable *cancellable,
                                                    GAsyncReadyCallback callback,
                                                    gpointer user_data);
 
-UmRealmManager * um_realm_manager_new_finish      (GAsyncResult *result,
+CcRealmManager * cc_realm_manager_new_finish      (GAsyncResult *result,
                                                    GError **error);
 
-void             um_realm_manager_discover        (UmRealmManager *self,
+void             cc_realm_manager_discover        (CcRealmManager *self,
                                                    const gchar *input,
                                                    GCancellable *cancellable,
                                                    GAsyncReadyCallback callback,
                                                    gpointer user_data);
 
-GList *          um_realm_manager_discover_finish (UmRealmManager *self,
+GList *          cc_realm_manager_discover_finish (CcRealmManager *self,
                                                    GAsyncResult *result,
                                                    GError **error);
 
-GList *          um_realm_manager_get_realms      (UmRealmManager *self);
+GList *          cc_realm_manager_get_realms      (CcRealmManager *self);
 
-void             um_realm_login                   (UmRealmObject *realm,
+void             cc_realm_login                   (CcRealmObject *realm,
                                                    const gchar *login,
                                                    const gchar *password,
                                                    GCancellable *cancellable,
                                                    GAsyncReadyCallback callback,
                                                    gpointer user_data);
 
-GBytes *         um_realm_login_finish            (GAsyncResult *result,
+GBytes *         cc_realm_login_finish            (GAsyncResult *result,
                                                    GError **error);
 
-gboolean         um_realm_join_as_user            (UmRealmObject *realm,
+gboolean         cc_realm_join_as_user            (CcRealmObject *realm,
                                                    const gchar *login,
                                                    const gchar *password,
                                                    GBytes *credentials,
@@ -76,7 +76,7 @@ gboolean         um_realm_join_as_user            (UmRealmObject *realm,
                                                    gpointer user_data)
                                                    G_GNUC_WARN_UNUSED_RESULT;
 
-gboolean         um_realm_join_as_admin           (UmRealmObject *realm,
+gboolean         cc_realm_join_as_admin           (CcRealmObject *realm,
                                                    const gchar *login,
                                                    const gchar *password,
                                                    GBytes *credentials,
@@ -85,13 +85,13 @@ gboolean         um_realm_join_as_admin           (UmRealmObject *realm,
                                                    gpointer user_data)
                                                    G_GNUC_WARN_UNUSED_RESULT;
 
-gboolean         um_realm_join_finish             (UmRealmObject *realm,
+gboolean         cc_realm_join_finish             (CcRealmObject *realm,
                                                    GAsyncResult *result,
                                                    GError **error);
 
-gboolean         um_realm_is_configured           (UmRealmObject *realm);
+gboolean         cc_realm_is_configured           (CcRealmObject *realm);
 
-gchar *          um_realm_calculate_login         (UmRealmCommon *realm,
+gchar *          cc_realm_calculate_login         (CcRealmCommon *realm,
                                                    const gchar *username);
 
 G_END_DECLS

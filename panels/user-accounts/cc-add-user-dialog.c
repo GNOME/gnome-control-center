@@ -26,7 +26,7 @@
 #include <act/act.h>
 
 #include "cc-add-user-dialog.h"
-#include "um-realm-manager.h"
+#include "cc-realm-manager.h"
 #include "um-utils.h"
 #include "pw-utils.h"
 
@@ -96,8 +96,8 @@ struct _CcAddUserDialog {
         gint                local_password_timeout_id;
 
         guint               realmd_watch;
-        UmRealmManager     *realm_manager;
-        UmRealmObject      *selected_realm;
+        CcRealmManager     *realm_manager;
+        CcRealmObject      *selected_realm;
         gboolean            enterprise_check_credentials;
         gint                enterprise_domain_timeout_id;
         gboolean            enterprise_domain_chosen;
@@ -557,20 +557,20 @@ enterprise_validate (CcAddUserDialog *self)
 
 static void
 enterprise_add_realm (CcAddUserDialog *self,
-                      UmRealmObject   *realm)
+                      CcRealmObject   *realm)
 {
         GtkTreeModel *model;
         GtkTreeIter iter;
-        UmRealmCommon *common;
+        CcRealmCommon *common;
         const gchar *realm_name;
         gboolean match;
         gboolean ret;
         gchar *name;
 
-        common = um_realm_object_get_common (realm);
+        common = cc_realm_object_get_common (realm);
         g_return_if_fail (common != NULL);
 
-        realm_name = um_realm_common_get_name (common);
+        realm_name = cc_realm_common_get_name (common);
 
         /*
          * Don't add a second realm if we already have one with this name.
@@ -600,7 +600,7 @@ enterprise_add_realm (CcAddUserDialog *self,
                             -1);
 
         /* Prefill domain entry by the existing one */
-        if (!self->enterprise_domain_chosen && um_realm_is_configured (realm)) {
+        if (!self->enterprise_domain_chosen && cc_realm_is_configured (realm)) {
                 gtk_entry_set_text (self->enterprise_domain_entry, realm_name);
         }
 
@@ -611,8 +611,8 @@ enterprise_add_realm (CcAddUserDialog *self,
 }
 
 static void
-on_manager_realm_added (UmRealmManager  *manager,
-                        UmRealmObject   *realm,
+on_manager_realm_added (CcRealmManager  *manager,
+                        CcRealmObject   *realm,
                         gpointer         user_data)
 {
         CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
@@ -658,7 +658,7 @@ on_permit_user_login (GObject *source,
                       gpointer user_data)
 {
         CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
-        UmRealmCommon *common;
+        CcRealmCommon *common;
         ActUserManager *manager;
         GError *error = NULL;
         gchar *login;
@@ -668,8 +668,8 @@ on_permit_user_login (GObject *source,
                 return;
         }
 
-        common = UM_REALM_COMMON (source);
-        um_realm_common_call_change_login_policy_finish (common, result, &error);
+        common = CC_REALM_COMMON (source);
+        cc_realm_common_call_change_login_policy_finish (common, result, &error);
         if (error == NULL) {
 
                 /*
@@ -678,7 +678,7 @@ on_permit_user_login (GObject *source,
                  * sure all that is functional.
                  */
                 manager = act_user_manager_get_default ();
-                login = um_realm_calculate_login (common, gtk_entry_get_text (self->enterprise_login_entry));
+                login = cc_realm_calculate_login (common, gtk_entry_get_text (self->enterprise_login_entry));
                 g_return_if_fail (login != NULL);
 
                 g_debug ("Caching remote user: %s", login);
@@ -701,13 +701,13 @@ on_permit_user_login (GObject *source,
 static void
 enterprise_permit_user_login (CcAddUserDialog *self)
 {
-        UmRealmCommon *common;
+        CcRealmCommon *common;
         gchar *login;
         const gchar *add[2];
         const gchar *remove[1];
         GVariant *options;
 
-        common = um_realm_object_get_common (self->selected_realm);
+        common = cc_realm_object_get_common (self->selected_realm);
         if (common == NULL) {
                 g_debug ("Failed to register account: failed to get d-bus interface");
                 show_error_dialog (self, _("Failed to register account"), NULL);
@@ -715,7 +715,7 @@ enterprise_permit_user_login (CcAddUserDialog *self)
                 return;
         }
 
-        login = um_realm_calculate_login (common, gtk_entry_get_text (self->enterprise_login_entry));
+        login = cc_realm_calculate_login (common, gtk_entry_get_text (self->enterprise_login_entry));
         g_return_if_fail (login != NULL);
 
         add[0] = login;
@@ -725,7 +725,7 @@ enterprise_permit_user_login (CcAddUserDialog *self)
         g_debug ("Permitting login for: %s", login);
         options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
 
-        um_realm_common_call_change_login_policy (common, "",
+        cc_realm_common_call_change_login_policy (common, "",
                                                   add, remove, options,
                                                   self->cancellable,
                                                   on_permit_user_login,
@@ -751,7 +751,7 @@ on_join_response (GtkDialog *dialog,
         g_debug ("Logging in as admin user: %s", gtk_entry_get_text (self->join_name));
 
         /* Prompted for some admin credentials, try to use them to log in */
-        um_realm_login (self->selected_realm,
+        cc_realm_login (self->selected_realm,
                         gtk_entry_get_text (self->join_name),
                         gtk_entry_get_text (self->join_password),
                         self->cancellable,
@@ -763,24 +763,24 @@ static void
 join_show_prompt (CcAddUserDialog *self,
                   GError          *error)
 {
-        UmRealmKerberosMembership *membership;
-        UmRealmKerberos *kerberos;
+        CcRealmKerberosMembership *membership;
+        CcRealmKerberos *kerberos;
         const gchar *name;
 
         gtk_entry_set_text (self->join_password, "");
         gtk_widget_grab_focus (GTK_WIDGET (self->join_password));
 
-        kerberos = um_realm_object_get_kerberos (self->selected_realm);
-        membership = um_realm_object_get_kerberos_membership (self->selected_realm);
+        kerberos = cc_realm_object_get_kerberos (self->selected_realm);
+        membership = cc_realm_object_get_kerberos_membership (self->selected_realm);
 
         gtk_label_set_text (self->join_domain,
-                            um_realm_kerberos_get_domain_name (kerberos));
+                            cc_realm_kerberos_get_domain_name (kerberos));
 
         clear_entry_validation_error (self->join_name);
         clear_entry_validation_error (self->join_password);
 
         if (!self->join_prompted) {
-                name = um_realm_kerberos_membership_get_suggested_administrator (membership);
+                name = cc_realm_kerberos_membership_get_suggested_administrator (membership);
                 if (name && !g_str_equal (name, "")) {
                         g_debug ("Suggesting admin user: %s", name);
                         gtk_entry_set_text (self->join_name, name);
@@ -788,7 +788,7 @@ join_show_prompt (CcAddUserDialog *self,
                         gtk_widget_grab_focus (GTK_WIDGET (self->join_name));
                 }
 
-        } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD)) {
+        } else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_PASSWORD)) {
                 g_debug ("Bad admin password: %s", error->message);
                 set_entry_validation_error (self->join_password, error->message);
 
@@ -824,11 +824,11 @@ on_join_login (GObject *source,
                 return;
         }
 
-        creds = um_realm_login_finish (result, &error);
+        creds = cc_realm_login_finish (result, &error);
 
         /* Logged in as admin successfully, use creds to join domain */
         if (error == NULL) {
-                if (!um_realm_join_as_admin (self->selected_realm,
+                if (!cc_realm_join_as_admin (self->selected_realm,
                                              gtk_entry_get_text (self->join_name),
                                              gtk_entry_get_text (self->join_password),
                                              creds, self->cancellable, on_realm_joined,
@@ -890,7 +890,7 @@ on_realm_joined (GObject *source,
                 return;
         }
 
-        um_realm_join_finish (self->selected_realm,
+        cc_realm_join_finish (self->selected_realm,
                               result, &error);
 
         /* Yay, joined the domain, register the user locally */
@@ -899,8 +899,8 @@ on_realm_joined (GObject *source,
                 enterprise_permit_user_login (self);
 
         /* Credential failure while joining domain, prompt for admin creds */
-        } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN) ||
-                   g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD)) {
+        } else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_LOGIN) ||
+                   g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_PASSWORD)) {
                 g_debug ("Joining realm failed due to credentials");
                 join_show_prompt (self, error);
 
@@ -930,13 +930,13 @@ on_realm_login (GObject *source,
                 return;
         }
 
-        creds = um_realm_login_finish (result, &error);
+        creds = cc_realm_login_finish (result, &error);
 
         /*
          * User login is valid, but cannot authenticate right now (eg: user needs
          * to change password at next login etc.)
          */
-        if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_CANNOT_AUTH)) {
+        if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_CANNOT_AUTH)) {
                 g_clear_error (&error);
                 creds = NULL;
         }
@@ -944,13 +944,13 @@ on_realm_login (GObject *source,
         if (error == NULL) {
 
                 /* Already joined to the domain, just register this user */
-                if (um_realm_is_configured (self->selected_realm)) {
+                if (cc_realm_is_configured (self->selected_realm)) {
                         g_debug ("Already joined to this realm");
                         enterprise_permit_user_login (self);
 
                 /* Join the domain, try using the user's creds */
                 } else if (creds == NULL ||
-                           !um_realm_join_as_user (self->selected_realm,
+                           !cc_realm_join_as_user (self->selected_realm,
                                                    gtk_entry_get_text (self->enterprise_login_entry),
                                                    gtk_entry_get_text (self->enterprise_password_entry),
                                                    creds, self->cancellable,
@@ -965,14 +965,14 @@ on_realm_login (GObject *source,
                 g_bytes_unref (creds);
 
         /* A problem with the user's login name or password */
-        } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN)) {
+        } else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_LOGIN)) {
                 g_debug ("Problem with the user's login: %s", error->message);
                 message = _("That login name didn’t work.\nPlease try again.");
                 gtk_label_set_text (self->enterprise_hint_label, message);
                 finish_action (self);
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_login_entry));
 
-        } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD)) {
+        } else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_PASSWORD)) {
                 g_debug ("Problem with the user's password: %s", error->message);
                 message = _("That login password didn’t work.\nPlease try again.");
                 gtk_label_set_text (self->enterprise_hint_label, message);
@@ -996,7 +996,7 @@ enterprise_check_login (CcAddUserDialog *self)
 {
         g_assert (self->selected_realm);
 
-        um_realm_login (self->selected_realm,
+        cc_realm_login (self->selected_realm,
                         gtk_entry_get_text (self->enterprise_login_entry),
                         gtk_entry_get_text (self->enterprise_password_entry),
                         self->cancellable,
@@ -1019,7 +1019,7 @@ on_realm_discover_input (GObject *source,
                 return;
         }
 
-        realms = um_realm_manager_discover_finish (self->realm_manager,
+        realms = cc_realm_manager_discover_finish (self->realm_manager,
                                                    result, &error);
 
         /* Found a realm, log user into domain */
@@ -1039,7 +1039,7 @@ on_realm_discover_input (GObject *source,
                 g_message ("Couldn't discover domain: %s", error->message);
                 g_dbus_error_strip_remote_error (error);
 
-                if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC)) {
+                if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_GENERIC)) {
                         message = g_strdup (_("Unable to find the domain. Maybe you misspelled it?"));
                 } else {
                         message = g_strdup_printf ("%s.", error->message);
@@ -1077,7 +1077,7 @@ enterprise_check_domain (CcAddUserDialog *self)
         begin_action (self);
 
         self->join_prompted = FALSE;
-        um_realm_manager_discover (self->realm_manager,
+        cc_realm_manager_discover (self->realm_manager,
                                    domain,
                                    self->cancellable,
                                    on_realm_discover_input,
@@ -1117,7 +1117,7 @@ on_realm_manager_created (GObject *source,
 
         clear_realm_manager (self);
 
-        self->realm_manager = um_realm_manager_new_finish (result, &error);
+        self->realm_manager = cc_realm_manager_new_finish (result, &error);
         if (error != NULL) {
                 g_warning ("Couldn't contact realmd service: %s", error->message);
                 g_object_unref (self);
@@ -1131,7 +1131,7 @@ on_realm_manager_created (GObject *source,
         }
 
         /* Lookup all the realm objects */
-        realms = um_realm_manager_get_realms (self->realm_manager);
+        realms = cc_realm_manager_get_realms (self->realm_manager);
         for (l = realms; l != NULL; l = g_list_next (l))
                 enterprise_add_realm (self, l->data);
         g_list_free (realms);
@@ -1139,7 +1139,7 @@ on_realm_manager_created (GObject *source,
                           G_CALLBACK (on_manager_realm_added), self);
 
         /* When no realms try to discover a sensible default, triggers realm-added signal */
-        um_realm_manager_discover (self->realm_manager, "", self->cancellable,
+        cc_realm_manager_discover (self->realm_manager, "", self->cancellable,
                                    NULL, NULL);
 
         /* Show the 'Enterprise Login' stuff, and update mode */
@@ -1155,7 +1155,7 @@ on_realmd_appeared (GDBusConnection *connection,
                     gpointer user_data)
 {
         CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
-        um_realm_manager_new (self->cancellable, on_realm_manager_created,
+        cc_realm_manager_new (self->cancellable, on_realm_manager_created,
                               g_object_ref (self));
 }
 
