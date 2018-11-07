@@ -23,10 +23,10 @@
 
 G_BEGIN_DECLS
 
-#define UM_TYPE_USER_IMAGE (um_user_image_get_type ())
-G_DECLARE_FINAL_TYPE (UmUserImage, um_user_image, UM, USER_IMAGE, GtkImage)
+#define CC_TYPE_USER_IMAGE (cc_user_image_get_type ())
+G_DECLARE_FINAL_TYPE (CcUserImage, cc_user_image, CC, USER_IMAGE, GtkImage)
 
-GtkWidget *um_user_image_new      (void);
-void       um_user_image_set_user (UmUserImage *image, ActUser *user);
+GtkWidget *cc_user_image_new      (void);
+void       cc_user_image_set_user (CcUserImage *image, ActUser *user);
 
 G_END_DECLS

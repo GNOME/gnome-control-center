@@ -147,12 +147,12 @@ sources = common_sources + files(
   'cc-crop-area.c',
   'cc-login-history-dialog.c',
   'cc-password-dialog.c',
+  'cc-user-image.c',
   'cc-user-panel.c',
   'run-passwd.c',
   'um-carousel.c',
   'um-fingerprint-dialog.c',
   'um-photo-dialog.c',
-  'um-user-image.c',
 )
 
 # Kerberos support
