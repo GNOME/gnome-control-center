@@ -18,8 +18,7 @@
  *
  */
 
-#ifndef _CC_PANEL_LOADER_H
-#define _CC_PANEL_LOADER_H
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -36,4 +35,3 @@ CcPanel *cc_panel_loader_load_by_name   (CcShell       *shell,
 
 G_END_DECLS
 
-#endif
