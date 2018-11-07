@@ -187,15 +187,3 @@ panels_libs += static_library(
   dependencies: deps,
   c_args: cflags
 )
-
-name = 'frob-account-dialog'
-
-sources = common_sources + files(name + '.c')
-
-executable(
-  name,
-  sources,
-  include_directories: top_inc,
-  dependencies: deps,
-  c_args: cflags
-)
