@@ -144,13 +144,13 @@ common_sources += gnome.gdbus_codegen(
 )
 
 sources = common_sources + files(
+  'cc-carousel.c',
   'cc-crop-area.c',
   'cc-password-dialog.c',
   'cc-user-image.c',
   'cc-user-panel.c',
   'run-passwd.c',
   'um-account-type.c',
-  'um-carousel.c',
   'um-fingerprint-dialog.c',
   'um-history-dialog.c',
   'um-photo-dialog.c',
