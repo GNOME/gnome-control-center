@@ -58,8 +58,7 @@ static void   on_realm_joined      (GObject *source,
                                     GAsyncResult *result,
                                     gpointer user_data);
 
-static void   cc_add_user_dialog_response (GtkDialog *dialog,
-                                           gint response_id);
+static void   add_button_clicked_cb (CcAddUserDialog *self);
 
 struct _CcAddUserDialog {
         GtkDialog        parent_instance;
@@ -88,10 +87,10 @@ struct _CcAddUserDialog {
         GtkSpinner      *spinner;
         GtkStack        *stack;
 
-        GTask *task;
         GCancellable *cancellable;
         GPermission *permission;
         AccountMode mode;
+        ActUser *user;
 
         gboolean   has_custom_username;
         gint       local_name_timeout_id;
@@ -148,7 +147,7 @@ begin_action (CcAddUserDialog *self)
                 gtk_widget_set_sensitive (GTK_WIDGET (self->stack), FALSE);
         }
         gtk_widget_set_sensitive (GTK_WIDGET (self->enterprise_button), FALSE);
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
         gtk_widget_show (GTK_WIDGET (self->spinner));
         gtk_spinner_start (self->spinner);
@@ -163,23 +162,10 @@ finish_action (CcAddUserDialog *self)
                 gtk_widget_set_sensitive (GTK_WIDGET (self->stack), TRUE);
         }
         gtk_widget_set_sensitive (GTK_WIDGET (self->enterprise_button), TRUE);
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, TRUE);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), TRUE);
 
         gtk_widget_hide (GTK_WIDGET (self->spinner));
         gtk_spinner_stop (self->spinner);
-}
-
-static void
-complete_dialog (CcAddUserDialog *self,
-                 ActUser         *user)
-{
-        gtk_widget_hide (GTK_WIDGET (self));
-
-        if (user != NULL)
-                g_object_ref (user);
-
-        g_task_return_pointer (self->task, user, g_object_unref);
-        g_clear_object (&self->task);
 }
 
 static void
@@ -197,7 +183,8 @@ user_loaded_cb (ActUser         *user,
   if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR)
         act_user_set_password (user, password, "");
 
-  complete_dialog (self, user);
+  self->user = g_object_ref (user);
+  gtk_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_CLOSE);
 }
 
 static void
@@ -371,7 +358,7 @@ local_username_combo_changed_cb (CcAddUserDialog *self)
         }
 
         clear_entry_validation_error (self->local_username_entry);
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
         self->local_username_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) local_username_timeout, self);
 }
@@ -421,7 +408,7 @@ local_name_entry_changed_cb (CcAddUserDialog *self)
         }
 
         clear_entry_validation_error (self->local_name_entry);
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
         self->local_name_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) local_name_timeout, self);
 }
@@ -508,7 +495,7 @@ recheck_password_match (CcAddUserDialog *self)
                 self->local_password_timeout_id = 0;
         }
 
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
         password = gtk_entry_get_text (self->local_password_entry);
         if (strlen (password) == 0) {
@@ -547,16 +534,6 @@ local_password_radio_changed_cb (CcAddUserDialog *self)
         gtk_widget_set_sensitive (GTK_WIDGET (self->local_hint_label), active);
 
         dialog_validate (self);
-}
-
-static void
-local_prepare (CcAddUserDialog *self)
-{
-        gtk_entry_set_text (self->local_name_entry, "");
-        gtk_entry_set_text (self->local_username_entry, "");
-        gtk_list_store_clear (self->local_username_model);
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->local_account_type_standard), TRUE);
-        self->has_custom_username = FALSE;
 }
 
 static gboolean
@@ -666,8 +643,8 @@ on_register_user (GObject *source,
         if (user != NULL) {
                 g_debug ("Successfully cached remote user: %s", act_user_get_user_name (user));
                 finish_action (self);
-                complete_dialog (self, user);
-
+                self->user = g_object_ref (user);
+                gtk_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_CLOSE);
         } else {
                 show_error_dialog (self, _("Failed to register account"), error);
                 g_message ("Couldn't cache user account: %s", error->message);
@@ -1239,7 +1216,7 @@ enterprise_domain_combo_changed_cb (CcAddUserDialog *self)
         g_clear_object (&self->selected_realm);
         clear_entry_validation_error (self->enterprise_domain_entry);
         self->enterprise_domain_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) enterprise_domain_timeout, self);
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
         self->enterprise_domain_chosen = TRUE;
         dialog_validate (self);
@@ -1276,13 +1253,6 @@ enterprise_password_entry_changed_cb (CcAddUserDialog *self)
 }
 
 static void
-enterprise_prepare (CcAddUserDialog *self)
-{
-        gtk_entry_set_text (self->enterprise_login_entry, "");
-        gtk_entry_set_text (self->enterprise_password_entry, "");
-}
-
-static void
 dialog_validate (CcAddUserDialog *self)
 {
         gboolean valid = FALSE;
@@ -1299,7 +1269,7 @@ dialog_validate (CcAddUserDialog *self)
                 break;
         }
 
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, valid);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), valid);
 }
 
 static void
@@ -1342,6 +1312,8 @@ cc_add_user_dialog_init (CcAddUserDialog *self)
 
         gtk_widget_init_template (GTK_WIDGET (self));
 
+        self->cancellable = g_cancellable_new ();
+
         self->local_password_mode = ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
         dialog_validate (self);
         update_password_strength (self);
@@ -1357,6 +1329,8 @@ cc_add_user_dialog_init (CcAddUserDialog *self)
         g_signal_connect_object (monitor, "network-changed", G_CALLBACK (on_network_changed), self, 0);
 
         join_init (self);
+
+        mode_change (self, MODE_LOCAL);
 }
 
 static void
@@ -1372,7 +1346,7 @@ on_permission_acquired (GObject *source_object,
 
 	if (g_permission_acquire_finish (self->permission, res, &error)) {
 		g_return_if_fail (g_permission_get_allowed (self->permission));
-                cc_add_user_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_OK);
+                add_button_clicked_cb (self);
 	} else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
 		g_warning ("Failed to acquire permission: %s", error->message);
 	}
@@ -1382,37 +1356,25 @@ on_permission_acquired (GObject *source_object,
 }
 
 static void
-cc_add_user_dialog_response (GtkDialog *dialog,
-                             gint response_id)
+add_button_clicked_cb (CcAddUserDialog *self)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (dialog);
+        /* We don't (or no longer) have necessary permissions */
+        if (self->permission && !g_permission_get_allowed (self->permission)) {
+                begin_action (self);
+                g_permission_acquire_async (self->permission, self->cancellable,
+                                            on_permission_acquired, g_object_ref (self));
+                return;
+        }
 
-        switch (response_id) {
-        case GTK_RESPONSE_OK:
-                /* We don't (or no longer) have necessary permissions */
-                if (self->permission && !g_permission_get_allowed (self->permission)) {
-                        begin_action (self);
-                        g_permission_acquire_async (self->permission, self->cancellable,
-                                                    on_permission_acquired, g_object_ref (self));
-                        return;
-                }
-
-                switch (self->mode) {
-                case MODE_LOCAL:
-                        local_create_user (self);
-                        break;
-                case MODE_ENTERPRISE:
-                        enterprise_add_user (self);
-                        break;
-                default:
-                        g_assert_not_reached ();
-                }
+        switch (self->mode) {
+        case MODE_LOCAL:
+                local_create_user (self);
                 break;
-        case GTK_RESPONSE_CANCEL:
-        case GTK_RESPONSE_DELETE_EVENT:
-                g_cancellable_cancel (self->cancellable);
-                complete_dialog (self, NULL);
+        case MODE_ENTERPRISE:
+                enterprise_add_user (self);
                 break;
+        default:
+                g_assert_not_reached ();
         }
 }
 
@@ -1423,6 +1385,8 @@ cc_add_user_dialog_dispose (GObject *obj)
 
         if (self->cancellable)
                 g_cancellable_cancel (self->cancellable);
+
+        g_clear_object (&self->user);
 
         if (self->realmd_watch)
                 g_bus_unwatch_name (self->realmd_watch);
@@ -1477,16 +1441,12 @@ static void
 cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (klass);
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
         object_class->dispose = cc_add_user_dialog_dispose;
         object_class->finalize = cc_add_user_dialog_finalize;
 
-        dialog_class->response = cc_add_user_dialog_response;
-
-        gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (dialog_class),
-                                                     "/org/gnome/control-center/user-accounts/cc-add-user-dialog.ui");
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/user-accounts/cc-add-user-dialog.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, add_button);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_button);
@@ -1512,6 +1472,7 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, spinner);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, stack);
 
+        gtk_widget_class_bind_template_callback (widget_class, add_button_clicked_cb);
         gtk_widget_class_bind_template_callback (widget_class, dialog_validate);
         gtk_widget_class_bind_template_callback (widget_class, enterprise_button_toggled_cb);
         gtk_widget_class_bind_template_callback (widget_class, enterprise_domain_combo_changed_cb);
@@ -1531,52 +1492,21 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
 }
 
 CcAddUserDialog *
-cc_add_user_dialog_new (void)
+cc_add_user_dialog_new (GPermission *permission)
 {
-        return g_object_new (CC_TYPE_ADD_USER_DIALOG, "use-header-bar", TRUE, NULL);
-}
+        CcAddUserDialog *self;
 
-void
-cc_add_user_dialog_show (CcAddUserDialog     *self,
-                         GtkWindow           *parent,
-                         GPermission         *permission,
-                         GAsyncReadyCallback  callback,
-                         gpointer             user_data)
-{
-        g_return_if_fail (CC_IS_ADD_USER_DIALOG (self));
+        self = g_object_new (CC_TYPE_ADD_USER_DIALOG, "use-header-bar", TRUE, NULL);
 
-        /* Make sure not already doing an operation */
-        g_return_if_fail (self->task == NULL);
+        if (permission != NULL)
+                self->permission = g_object_ref (permission);
 
-        if (self->cancellable)
-                g_object_unref (self->cancellable);
-        self->cancellable = g_cancellable_new ();
-
-        self->task = g_task_new (G_OBJECT (self), self->cancellable, callback, user_data);
-        g_task_set_source_tag (self->task, cc_add_user_dialog_show);
-
-        g_clear_object (&self->permission);
-        self->permission = permission ? g_object_ref (permission) : NULL;
-
-        local_prepare (self);
-        enterprise_prepare (self);
-        mode_change (self, MODE_LOCAL);
-        dialog_validate (self);
-
-        gtk_window_set_modal (GTK_WINDOW (self), parent != NULL);
-        gtk_window_set_transient_for (GTK_WINDOW (self), parent);
-        gtk_window_present (GTK_WINDOW (self));
-        gtk_widget_grab_focus (GTK_WIDGET (self->local_name_entry));
+        return self;
 }
 
 ActUser *
-cc_add_user_dialog_finish (CcAddUserDialog *self,
-                           GAsyncResult    *result)
+cc_add_user_dialog_get_user (CcAddUserDialog *self)
 {
         g_return_val_if_fail (CC_IS_ADD_USER_DIALOG (self), NULL);
-        g_return_val_if_fail (g_task_is_valid (result, G_OBJECT (self)), NULL);
-        g_return_val_if_fail (g_async_result_is_tagged (result, cc_add_user_dialog_show), NULL);
-        g_return_val_if_fail (result == G_ASYNC_RESULT (self->task), NULL);
-
-        return g_task_propagate_pointer (self->task, NULL);
+        return self->user;
 }

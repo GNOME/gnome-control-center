@@ -28,13 +28,7 @@ G_BEGIN_DECLS
 #define CC_TYPE_ADD_USER_DIALOG (cc_add_user_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (CcAddUserDialog, cc_add_user_dialog, CC, ADD_USER_DIALOG, GtkDialog)
 
-CcAddUserDialog *cc_add_user_dialog_new      (void);
-void             cc_add_user_dialog_show     (CcAddUserDialog     *self,
-                                              GtkWindow           *parent,
-                                              GPermission         *permission,
-                                              GAsyncReadyCallback  callback,
-                                              gpointer             user_data);
-ActUser         *cc_add_user_dialog_finish   (CcAddUserDialog     *self,
-                                              GAsyncResult        *result);
+CcAddUserDialog *cc_add_user_dialog_new      (GPermission         *permission);
+ActUser         *cc_add_user_dialog_get_user (CcAddUserDialog     *dialog);
 
 G_END_DECLS
