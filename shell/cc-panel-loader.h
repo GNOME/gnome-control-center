@@ -20,12 +20,24 @@
 
 #pragma once
 
+#include "config.h"
+
 #include <glib.h>
 #include <glib-object.h>
 #include <shell/cc-panel.h>
 #include <shell/cc-shell-model.h>
 
 G_BEGIN_DECLS
+
+typedef struct
+{
+  const gchar           *name;
+
+#ifndef CC_PANEL_LOADER_NO_GTYPES
+  GType                (*get_type)(void);
+  CcPanelStaticInitFunc static_init_func;
+#endif
+} CcPanelLoaderVtable;
 
 void     cc_panel_loader_fill_model     (CcShellModel  *model);
 GList   *cc_panel_loader_get_panels     (void);
