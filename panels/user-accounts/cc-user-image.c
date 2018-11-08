@@ -43,7 +43,6 @@ render_image (CcUserImage *image)
         pixel_size = gtk_image_get_pixel_size (GTK_IMAGE (image));
         scale = gtk_widget_get_scale_factor (GTK_WIDGET (image));
         surface = render_user_icon (image->user,
-                                    UM_ICON_STYLE_NONE,
                                     pixel_size > 0 ? pixel_size : 48,
                                     scale);
         gtk_image_set_from_surface (GTK_IMAGE (image), surface);
