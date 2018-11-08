@@ -21,20 +21,21 @@
  *
  */
 
-#include "cc-mouse-panel.h"
-#include "cc-mouse-resources.h"
-
-#include "gnome-mouse-properties.h"
-#include "gnome-mouse-test.h"
 #include <gtk/gtk.h>
 
-#include <glib/gi18n.h>
+#include "cc-mouse-panel.h"
+#include "cc-mouse-resources.h"
+#include "gnome-mouse-properties.h"
+#include "gnome-mouse-test.h"
 
 struct _CcMousePanel
 {
-  CcPanel    parent_instance;
+  CcPanel            parent_instance;
 
-  GtkWidget *stack;
+  CcMouseProperties *mouse_properties;
+  CcMouseTest       *mouse_test;
+  GtkStack          *stack;
+  GtkButton         *test_button;
 };
 
 CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
@@ -52,67 +53,55 @@ cc_mouse_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-shell_test_button_toggled (GtkToggleButton *button, CcMousePanel *panel)
+test_button_toggled_cb (CcMousePanel *self)
 {
-  gboolean active;
-
-  active = gtk_toggle_button_get_active (button);
-  gtk_stack_set_visible_child_name (GTK_STACK (panel->stack), active ? "test_widget" : "prefs_widget");
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->test_button)))
+    gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->mouse_test));
+  else
+    gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->mouse_properties));
 }
 
 static void
 cc_mouse_panel_constructed (GObject *object)
 {
   CcMousePanel *self = CC_MOUSE_PANEL (object);
-  GtkWidget *button;
   CcShell *shell;
 
   G_OBJECT_CLASS (cc_mouse_panel_parent_class)->constructed (object);
 
   /* Add test area button to shell header. */
   shell = cc_panel_get_shell (CC_PANEL (self));
-
-  button = gtk_toggle_button_new_with_mnemonic (_("Test Your _Settings"));
-  gtk_style_context_add_class (gtk_widget_get_style_context (button),
-                               "text-button");
-  gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
-  gtk_widget_set_visible (button, TRUE);
-
-  cc_shell_embed_widget_in_header (shell, button);
-
-  g_signal_connect (GTK_BUTTON (button), "toggled",
-                    G_CALLBACK (shell_test_button_toggled),
-                    self);
+  cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->test_button));
 }
 
 static void
 cc_mouse_panel_init (CcMousePanel *self)
 {
-  GtkWidget *prefs_widget, *test_widget;
-
   g_resources_register (cc_mouse_get_resource ());
 
-  prefs_widget = cc_mouse_properties_new ();
-  gtk_widget_show (prefs_widget);
-  test_widget = cc_mouse_test_new ();
-  gtk_widget_show (test_widget);
-
-  self->stack = gtk_stack_new ();
-  gtk_widget_show (self->stack);
-  gtk_stack_add_named (GTK_STACK (self->stack), prefs_widget, "prefs_widget");
-  gtk_stack_add_named (GTK_STACK (self->stack), test_widget, "test_widget");
-
-  gtk_container_add (GTK_CONTAINER (self), self->stack);
+  cc_mouse_properties_get_type ();
+  cc_mouse_test_get_type ();
+  gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
 cc_mouse_panel_class_init (CcMousePanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   panel_class->get_help_uri = cc_mouse_panel_get_help_uri;
 
   object_class->dispose = cc_mouse_panel_dispose;
   object_class->constructed = cc_mouse_panel_constructed;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/mouse/cc-mouse-panel.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_properties);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_test);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, stack);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, test_button);
+
+  gtk_widget_class_bind_template_callback (widget_class, test_button_toggled_cb);
 }
