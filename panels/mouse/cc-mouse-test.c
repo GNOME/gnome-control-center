@@ -27,7 +27,7 @@
 #include <gnome-settings-daemon/gsd-enums.h>
 #include <math.h>
 
-#include "gnome-mouse-test.h"
+#include "cc-mouse-test.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -344,7 +344,7 @@ cc_mouse_test_class_init (CcMouseTestClass *klass)
 
 	object_class->finalize = cc_mouse_test_finalize;
 
-	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/mouse/gnome-mouse-test.ui");
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/mouse/cc-mouse-test.ui");
 
 	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, button_drawing_area);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, information_label);
