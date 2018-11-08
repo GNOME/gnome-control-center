@@ -39,11 +39,6 @@ struct _CcMousePanel
 
 CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
 
-enum {
-  CC_MOUSE_PAGE_PREFS,
-  CC_MOUSE_PAGE_TEST
-};
-
 static void
 cc_mouse_panel_dispose (GObject *object)
 {
