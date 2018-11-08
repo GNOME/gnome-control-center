@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcBluetoothPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkStack" id="stack">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkBox" id="no_devices_box">
+            <property name="visible">True</property>
+            <property name="orientation">vertical</property>
+            <property name="margin_top">64</property>
+            <property name="margin_bottom">64</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
+            <property name="spacing">24</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon_name">bluetooth-active-symbolic</property>
+                <property name="pixel_size">192</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">No Bluetooth Found</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                  <attribute name="scale" value="1.2"/>
+                </attributes>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="wrap">True</property>
+                <property name="label" translatable="yes">Plug in a dongle to use Bluetooth.</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="disabled_box">
+            <property name="visible">True</property>
+            <property name="orientation">vertical</property>
+            <property name="margin_top">64</property>
+            <property name="margin_bottom">64</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
+            <property name="spacing">24</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon_name">bluetooth-active-symbolic</property>
+                <property name="pixel_size">192</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Bluetooth Turned Off</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                  <attribute name="scale" value="1.2"/>
+                </attributes>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="wrap">True</property>
+                <property name="label" translatable="yes">Turn on to connect devices and receive file transfers.</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="airplane_box">
+            <property name="visible">True</property>
+            <property name="orientation">vertical</property>
+            <property name="margin_top">64</property>
+            <property name="margin_bottom">64</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
+            <property name="spacing">24</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon_name">airplane-mode-symbolic</property>
+                <property name="pixel_size">192</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Airplane Mode is on</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                  <attribute name="scale" value="1.2"/>
+                </attributes>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="wrap">True</property>
+                <property name="label" translatable="yes">Bluetooth is disabled when airplane mode is on.</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Turn Off Airplane Mode</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <signal name="clicked" handler="airplane_mode_off_button_clicked_cb" object="CcBluetoothPanel" swapped="yes"/>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="hw_airplane_box">
+            <property name="visible">True</property>
+            <property name="orientation">vertical</property>
+            <property name="margin_top">64</property>
+            <property name="margin_bottom">64</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
+            <property name="spacing">24</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon_name">airplane-mode-symbolic</property>
+                <property name="pixel_size">192</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Hardware Airplane Mode is on</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                  <attribute name="scale" value="1.2"/>
+                </attributes>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="wrap">True</property>
+                <property name="label" translatable="yes">Turn off the Airplane mode switch to enable Bluetooth.</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="BluetoothSettingsWidget" id="settings_widget">
+            <property name="visible">True</property>
+            <signal name="panel-changed" handler="panel_changed_cb" object="CcBluetoothPanel" swapped="yes"/>
+            <signal name="adapter-status-changed" handler="adapter_status_changed_cb" object="CcBluetoothPanel" swapped="yes"/>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+  <object class="GtkBox" id="header_box">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkSwitch" id="enable_switch">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="valign">center</property>
+        <signal name="notify::active" handler="enable_switch_changed_cb" object="CcBluetoothPanel" swapped="yes"/>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="padding">4</property>
+        <property name="pack_type">end</property>
+        <property name="position">2</property>
+      </packing>
+    </child>
+  </object>
+</interface>
