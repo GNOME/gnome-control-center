@@ -66,8 +66,8 @@ sources = files(
 )
 
 resource_data = files(
+  'cc-keyboard-panel.ui',
   'enter-keyboard-shortcut.svg',
-  'gnome-keyboard-panel.ui',
   'shortcut-editor.ui'
 )
 
