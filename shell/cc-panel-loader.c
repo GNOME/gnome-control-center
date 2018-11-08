@@ -180,6 +180,15 @@ ensure_panel_types (void)
     g_hash_table_insert (panel_types, (char*)panels_vtable[i].name, panels_vtable[i].get_type);
 }
 
+/**
+ * cc_panel_loader_load_by_name:
+ * @shell: a #CcShell implementation
+ * @name: name of the panel
+ * @parameters: parameters passed to the new panel
+ *
+ * Creates a new instance of a #CcPanel from @name, and sets the
+ * @shell and @parameters properties at construction time.
+ */
 CcPanel *
 cc_panel_loader_load_by_name (CcShell     *shell,
                               const gchar *name,
@@ -200,6 +209,15 @@ cc_panel_loader_load_by_name (CcShell     *shell,
 
 #endif /* CC_PANEL_LOADER_NO_GTYPES */
 
+/**
+ * cc_panel_loader_fill_model:
+ * @model: a #CcShellModel
+ *
+ * Fills @model with information from the available panels. It
+ * iterates over the panel vtable, gathering the panel names,
+ * build the desktop filename from it, and retrieves additional
+ * information from it.
+ */
 void
 cc_panel_loader_fill_model (CcShellModel *model)
 {
@@ -244,6 +262,13 @@ cc_panel_loader_fill_model (CcShellModel *model)
 #endif
 }
 
+/**
+ * cc_panel_loader_list_panels:
+ *
+ * Prints the list of panels from the current panel vtable,
+ * usually as response to running GNOME Settings with the
+ * '--list' command line argument.
+ */
 void
 cc_panel_loader_list_panels (void)
 {
@@ -256,6 +281,16 @@ cc_panel_loader_list_panels (void)
 
 }
 
+/**
+ * cc_panel_loader_override_vtable:
+ * @override_vtable: the new panel vtable
+ * @n_elements: number of items of @override_vtable
+ *
+ * Override the default panel vtable so that GNOME Settings loads
+ * a custom set of panels. Intended to be used by tests to inject
+ * panels that exercise specific interactions with CcWindow (e.g.
+ * header widgets, permissions, etc).
+ */
 void
 cc_panel_loader_override_vtable (CcPanelLoaderVtable *override_vtable,
                                  gsize                n_elements)
