@@ -49,8 +49,8 @@ sources = files(
 )
 
 resource_data = files(
+  'cc-sharing-panel.ui',
   'networks.ui',
-  'sharing.ui'
 )
 
 sources += gnome.compile_resources(
