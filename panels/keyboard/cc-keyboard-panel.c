@@ -676,7 +676,7 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/gnome-keyboard-panel.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-keyboard-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, add_shortcut_row);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, empty_search_placeholder);
