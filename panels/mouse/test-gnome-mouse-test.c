@@ -2,7 +2,7 @@
 #include <gtk/gtk.h>
 
 #include "cc-mouse-resources.h"
-#include "gnome-mouse-test.h"
+#include "cc-mouse-test.h"
 
 static gboolean
 delete_event_cb (GtkWidget *widget, GdkEvent *event, gpointer user_data)
