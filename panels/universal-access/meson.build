@@ -23,12 +23,12 @@ sources = files(
 )
 
 resource_data = files(
+  'cc-ua-panel.ui',
   'left_ptr_24px.png',
   'left_ptr_32px.png',
   'left_ptr_48px.png',
   'left_ptr_64px.png',
   'left_ptr_96px.png',
-  'uap.ui',
   'zoom-options.ui'
 )
 

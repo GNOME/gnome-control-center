@@ -240,7 +240,7 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
 
   object_class->dispose = cc_ua_panel_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/uap.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/cc-ua-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, cursor_blinking_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, cursor_blinking_scale);
