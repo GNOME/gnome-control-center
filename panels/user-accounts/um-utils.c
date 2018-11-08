@@ -362,49 +362,6 @@ popup_menu_below_button (GtkMenu   *menu,
         *push_in = TRUE;
 }
 
-void
-rounded_rectangle (cairo_t *cr,
-                   gdouble  aspect,
-                   gdouble  x,
-                   gdouble  y,
-                   gdouble  corner_radius,
-                   gdouble  width,
-                   gdouble  height)
-{
-        gdouble radius;
-        gdouble degrees;
-
-        radius = corner_radius / aspect;
-        degrees = G_PI / 180.0;
-
-        cairo_new_sub_path (cr);
-        cairo_arc (cr,
-                   x + width - radius,
-                   y + radius,
-                   radius,
-                   -90 * degrees,
-                   0 * degrees);
-        cairo_arc (cr,
-                   x + width - radius,
-                   y + height - radius,
-                   radius,
-                   0 * degrees,
-                   90 * degrees);
-        cairo_arc (cr,
-                   x + radius,
-                   y + height - radius,
-                   radius,
-                   90 * degrees,
-                   180 * degrees);
-        cairo_arc (cr,
-                   x + radius,
-                   y + radius,
-                   radius,
-                   180 * degrees,
-                   270 * degrees);
-        cairo_close_path (cr);
-}
-
 /* Taken from defines.h in shadow-utils. On Linux, this value is much smaller
  * than the sysconf limit LOGIN_NAME_MAX, and values larger than this will
  * result in failure when running useradd. We could check UT_NAMESIZE instead,
@@ -768,105 +725,14 @@ check_user_file (const char *filename,
         return TRUE;
 }
 
-static GdkPixbuf *
-frame_pixbuf (GdkPixbuf *source, gint scale)
-{
-        GdkPixbuf       *dest;
-        cairo_t         *cr;
-        cairo_surface_t *surface;
-        guint            w;
-        guint            h;
-        int              frame_width;
-        double           radius;
-
-        frame_width = 2 * scale;
-
-        w = gdk_pixbuf_get_width (source) + frame_width * 2;
-        h = gdk_pixbuf_get_height (source) + frame_width * 2;
-        radius = w / 10;
-
-        surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
-                                              w, h);
-        cr = cairo_create (surface);
-        cairo_surface_destroy (surface);
-
-        /* set up image */
-        cairo_rectangle (cr, 0, 0, w, h);
-        cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 0.0);
-        cairo_fill (cr);
-
-        rounded_rectangle (cr, 1.0, 0.5, 0.5, radius, w - 1, h - 1);
-        cairo_set_source_rgba (cr, 0.5, 0.5, 0.5, 0.3);
-        cairo_fill_preserve (cr);
-
-        gdk_cairo_set_source_pixbuf (cr, source, frame_width, frame_width);
-        cairo_fill (cr);
-
-        dest = gdk_pixbuf_get_from_surface (surface, 0, 0, w, h);
-
-        cairo_destroy (cr);
-
-        return dest;
-}
-
-static GdkPixbuf *
-logged_in_pixbuf (GdkPixbuf *pixbuf, gint scale)
-{
-        cairo_format_t format;
-        cairo_surface_t *surface;
-        cairo_pattern_t *pattern;
-        cairo_t *cr;
-        gint width, height;
-        GdkRGBA color;
-
-        width = gdk_pixbuf_get_width (pixbuf);
-        height = gdk_pixbuf_get_height (pixbuf);
-
-        g_return_val_if_fail (width > 15 && height > 15, pixbuf);
-
-        format = gdk_pixbuf_get_has_alpha (pixbuf) ? CAIRO_FORMAT_ARGB32 : CAIRO_FORMAT_RGB24;
-        surface = cairo_image_surface_create (format, width, height);
-        cr = cairo_create (surface);
-
-        gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
-        cairo_paint (cr);
-
-        /* Draw pattern */
-        cairo_rectangle (cr, 0, 0, width, height);
-        pattern = cairo_pattern_create_radial (width - 9.5 * scale, height - 10 * scale, 0,
-                                               width - 8.5 * scale, height - 7.5 * scale, 7.7 * scale);
-        cairo_pattern_add_color_stop_rgb (pattern, 0, 0.4, 0.9, 0);
-        cairo_pattern_add_color_stop_rgb (pattern, 0.7, 0.3, 0.6, 0);
-        cairo_pattern_add_color_stop_rgb (pattern, 0.8, 0.4, 0.4, 0.4);
-        cairo_pattern_add_color_stop_rgba (pattern, 1.0, 0, 0, 0, 0);
-        cairo_set_source (cr, pattern);
-        cairo_fill (cr);
-
-        /* Draw border */
-        cairo_set_line_width (cr, 0.9 * scale);
-        cairo_arc (cr, width - 8.5 * scale, height - 8.5 * scale, 6 * scale, 0, 2 * G_PI);
-        gdk_rgba_parse (&color, "#ffffff");
-        gdk_cairo_set_source_rgba (cr, &color);
-        cairo_stroke (cr);
-
-        pixbuf = gdk_pixbuf_get_from_surface (surface, 0, 0, width, height);
-
-        cairo_surface_finish (surface);
-        cairo_destroy (cr);
-
-        return pixbuf;
-}
-
 #define MAX_FILE_SIZE     65536
 
 cairo_surface_t *
-render_user_icon (ActUser     *user,
-                  UmIconStyle  style,
-                  gint         icon_size,
-                  gint         scale)
+render_user_icon (ActUser *user,
+                  gint     icon_size,
+                  gint     scale)
 {
         GdkPixbuf    *pixbuf;
-        GdkPixbuf    *framed;
         gboolean      res;
         GError       *error;
         const gchar  *icon_file;
@@ -907,22 +773,6 @@ render_user_icon (ActUser     *user,
         }
 
  out:
-
-        if (pixbuf != NULL && (style & UM_ICON_STYLE_FRAME)) {
-                framed = frame_pixbuf (pixbuf, scale);
-                if (framed != NULL) {
-                        g_object_unref (pixbuf);
-                        pixbuf = framed;
-                }
-        }
-
-        if (pixbuf != NULL && (style & UM_ICON_STYLE_STATUS) && act_user_is_logged_in (user)) {
-                framed = logged_in_pixbuf (pixbuf, scale);
-                if (framed != NULL) {
-                        g_object_unref (pixbuf);
-                        pixbuf = framed;
-                }
-        }
 
         if (pixbuf != NULL) {
                 surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale, NULL);
