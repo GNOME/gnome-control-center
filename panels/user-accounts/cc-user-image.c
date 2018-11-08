@@ -20,8 +20,7 @@
 
 #include <gtk/gtk.h>
 #include <act/act.h>
-
-#include "um-utils.h"
+#include <sys/stat.h>
 
 struct _CcUserImage {
         GtkImage parent_instance;
@@ -30,6 +29,93 @@ struct _CcUserImage {
 };
 
 G_DEFINE_TYPE (CcUserImage, cc_user_image, GTK_TYPE_IMAGE)
+
+#define MAX_FILE_SIZE     65536
+
+static gboolean
+check_user_file (const char *filename,
+                 gssize      max_file_size)
+{
+        struct stat fileinfo;
+
+        if (max_file_size < 0) {
+                max_file_size = G_MAXSIZE;
+        }
+
+        /* Exists/Readable? */
+        if (stat (filename, &fileinfo) < 0) {
+                g_debug ("File does not exist");
+                return FALSE;
+        }
+
+        /* Is a regular file */
+        if (G_UNLIKELY (!S_ISREG (fileinfo.st_mode))) {
+                g_debug ("File is not a regular file");
+                return FALSE;
+        }
+
+        /* Size is sane? */
+        if (G_UNLIKELY (fileinfo.st_size > max_file_size)) {
+                g_debug ("File is too large");
+                return FALSE;
+        }
+
+        return TRUE;
+}
+
+static cairo_surface_t *
+render_user_icon (ActUser *user,
+                  gint     icon_size,
+                  gint     scale)
+{
+        GdkPixbuf    *pixbuf;
+        gboolean      res;
+        GError       *error;
+        const gchar  *icon_file;
+        cairo_surface_t *surface = NULL;
+
+        g_return_val_if_fail (ACT_IS_USER (user), NULL);
+        g_return_val_if_fail (icon_size > 12, NULL);
+
+        icon_file = act_user_get_icon_file (user);
+        pixbuf = NULL;
+        if (icon_file) {
+                res = check_user_file (icon_file, MAX_FILE_SIZE);
+                if (res) {
+                        pixbuf = gdk_pixbuf_new_from_file_at_size (icon_file,
+                                                                   icon_size * scale,
+                                                                   icon_size * scale,
+                                                                   NULL);
+                }
+                else {
+                        pixbuf = NULL;
+                }
+        }
+
+        if (pixbuf != NULL) {
+                goto out;
+        }
+
+        error = NULL;
+        pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
+                                           "avatar-default",
+                                           icon_size * scale,
+                                           GTK_ICON_LOOKUP_FORCE_SIZE,
+                                           &error);
+        if (error) {
+                g_warning ("%s", error->message);
+                g_error_free (error);
+        }
+
+ out:
+
+        if (pixbuf != NULL) {
+                surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale, NULL);
+                g_object_unref (pixbuf);
+        }
+
+        return surface;
+}
 
 static void
 render_image (CcUserImage *image)
