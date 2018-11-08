@@ -334,34 +334,6 @@ clear_entry_validation_error (GtkEntry *entry)
         g_object_set (entry, "caps-lock-warning", TRUE, NULL);
 }
 
-void
-popup_menu_below_button (GtkMenu   *menu,
-                         gint      *x,
-                         gint      *y,
-                         gboolean  *push_in,
-                         GtkWidget *button)
-{
-        GtkRequisition menu_req;
-        GtkTextDirection direction;
-        GtkAllocation allocation;
-
-	gtk_widget_get_preferred_size (GTK_WIDGET (menu), NULL, &menu_req);
-
-        direction = gtk_widget_get_direction (button);
-
-        gdk_window_get_origin (gtk_widget_get_window (button), x, y);
-        gtk_widget_get_allocation (button, &allocation);
-        *x += allocation.x;
-        *y += allocation.y + allocation.height;
-
-        if (direction == GTK_TEXT_DIR_LTR)
-                *x += MAX (allocation.width - menu_req.width, 0);
-        else if (menu_req.width > allocation.width)
-                *x -= menu_req.width - allocation.width;
-
-        *push_in = TRUE;
-}
-
 /* Taken from defines.h in shadow-utils. On Linux, this value is much smaller
  * than the sysconf limit LOGIN_NAME_MAX, and values larger than this will
  * result in failure when running useradd. We could check UT_NAMESIZE instead,
