@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcMousePanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkStack" id="stack">
+        <property name="visible">True</property>
+        <child>
+          <object class="CcMouseProperties" id="mouse_properties">
+            <property name="visible">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="CcMouseTest" id="mouse_test">
+            <property name="visible">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+  <object class="GtkToggleButton" id="test_button">
+    <property name="visible">True</property>
+    <property name="use_underline">True</property>
+    <property name="valign">center</property>
+    <property name="label" translatable="yes">Test Your _Settings</property>
+    <signal name="toggled" handler="test_button_toggled_cb" object="CcMousePanel" swapped="yes"/>
+    <style>
+      <class name="text-button"/>
+    </style>
+  </object>
+</interface>
