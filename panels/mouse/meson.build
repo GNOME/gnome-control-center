@@ -18,6 +18,7 @@ i18n.merge_file(
 )
 
 resource_data = files(
+  'cc-mouse-panel.ui',
   'gnome-mouse-properties.ui',
   'gnome-mouse-test.ui',
   'scroll-test-gegl.svg',
