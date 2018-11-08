@@ -215,7 +215,7 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
 
   panel_class->get_help_uri = cc_sharing_panel_get_help_uri;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sharing/sharing.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sharing/cc-sharing-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, approve_connections_radiobutton);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, hostname_entry);
