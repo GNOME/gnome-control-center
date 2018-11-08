@@ -176,7 +176,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
 
   panel_class->get_help_uri = cc_power_panel_get_help_uri;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/power.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_scroll);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_box);

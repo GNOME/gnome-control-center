@@ -19,7 +19,7 @@ i18n.merge_file(
 
 sources = files('cc-power-panel.c')
 
-resource_data = files('power.ui')
+resource_data = files('cc-power-panel.ui')
 
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
