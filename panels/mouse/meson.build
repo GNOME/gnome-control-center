@@ -20,7 +20,6 @@ i18n.merge_file(
 resource_data = files(
   'cc-mouse-panel.ui',
   'cc-mouse-test.ui',
-  'gnome-mouse-properties.ui',
   'scroll-test-gegl.svg',
   'scroll-test.svg'
 )
@@ -37,7 +36,6 @@ sources = common_sources + files(
   'cc-mouse-panel.c',
   'cc-mouse-caps-helper.c',
   'cc-mouse-test.c',
-  'gnome-mouse-properties.c',
 )
 
 deps = common_deps + [
