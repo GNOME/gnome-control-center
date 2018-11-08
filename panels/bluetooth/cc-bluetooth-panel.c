@@ -170,23 +170,22 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 static void
 airplane_mode_changed (CcBluetoothPanel *self)
 {
-	GVariant *v;
+	g_autoptr(GVariant) airplane_mode = NULL;
+	g_autoptr(GVariant) bluetooth_airplane_mode = NULL;
+	g_autoptr(GVariant) bluetooth_hardware_airplane_mode = NULL;
+	g_autoptr(GVariant) bluetooth_has_airplane_mode = NULL;
 
-	v = g_dbus_proxy_get_cached_property (self->rfkill, "AirplaneMode");
-	self->airplane_mode = g_variant_get_boolean (v);
-	g_variant_unref (v);
+	airplane_mode = g_dbus_proxy_get_cached_property (self->rfkill, "AirplaneMode");
+	self->airplane_mode = g_variant_get_boolean (airplane_mode);
 
-	v = g_dbus_proxy_get_cached_property (self->rfkill, "BluetoothAirplaneMode");
-	self->bt_airplane_mode = g_variant_get_boolean (v);
-	g_variant_unref (v);
+	bluetooth_airplane_mode = g_dbus_proxy_get_cached_property (self->rfkill, "BluetoothAirplaneMode");
+	self->bt_airplane_mode = g_variant_get_boolean (bluetooth_airplane_mode);
 
-	v = g_dbus_proxy_get_cached_property (self->rfkill, "BluetoothHardwareAirplaneMode");
-	self->hardware_airplane_mode = g_variant_get_boolean (v);
-	g_variant_unref (v);
+	bluetooth_hardware_airplane_mode = g_dbus_proxy_get_cached_property (self->rfkill, "BluetoothHardwareAirplaneMode");
+	self->hardware_airplane_mode = g_variant_get_boolean (bluetooth_hardware_airplane_mode);
 
-	v = g_dbus_proxy_get_cached_property (self->rfkill, "BluetoothHasAirplaneMode");
-	self->has_airplane_mode = g_variant_get_boolean (v);
-	g_variant_unref (v);
+	bluetooth_has_airplane_mode = g_dbus_proxy_get_cached_property (self->rfkill, "BluetoothHasAirplaneMode");
+	self->has_airplane_mode = g_variant_get_boolean (bluetooth_has_airplane_mode);
 
 	cc_bluetooth_panel_update_power (self);
 }
@@ -249,13 +248,11 @@ panel_changed (CcBluetoothPanel *self,
 	       const char       *panel)
 {
 	CcShell *shell;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 
 	shell = cc_panel_get_shell (CC_PANEL (self));
-	if (cc_shell_set_active_panel_from_id (shell, panel, NULL, &error) == FALSE) {
+	if (cc_shell_set_active_panel_from_id (shell, panel, NULL, &error) == FALSE)
 		g_warning ("Failed to activate '%s' panel: %s", panel, error->message);
-		g_error_free (error);
-	}
 }
 
 static void
