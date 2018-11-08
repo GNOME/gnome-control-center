@@ -34,6 +34,55 @@ i18n.merge_file(
 
 cflags = ['-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)]
 
+
+# Common sources between gnome-control-center and
+# libtestshell.
+common_sources = files(
+  'cc-application.c',
+  'cc-log.c',
+  'cc-object-storage.c',
+  'cc-panel-loader.c',
+  'cc-panel.c',
+  'cc-shell.c',
+  'cc-panel-list.c',
+  'cc-window.c',
+)
+
+
+###################
+# Generated files #
+###################
+
+# Debug
+debug_conf = configuration_data()
+debug_conf.set('BUGREPORT_URL', 'https://gitlab.gnome.org/GNOME/' + meson.project_name() + '/issues/new')
+debug_conf.set10('ENABLE_TRACING', enable_tracing)
+
+common_sources += configure_file(
+          input : 'cc-debug.h.in',
+         output : 'cc-debug.h',
+  configuration : debug_conf
+)
+
+#Resources
+resource_data = files(
+  'cc-panel-list.ui',
+  'cc-window.ui',
+  'help-overlay.ui',
+)
+
+common_sources += gnome.compile_resources(
+       'resources',
+  meson.project_name() + '.gresource.xml',
+     dependencies : resource_data,
+           export : true
+)
+
+
+############
+# libshell #
+############
+
 libshell = static_library(
                'shell',
               sources : 'cc-shell-model.c',
@@ -42,39 +91,24 @@ libshell = static_library(
                c_args : cflags
 )
 
-sources = files(
-  'cc-application.c',
-  'cc-log.c',
-  'cc-object-storage.c',
-  'cc-panel-loader.c',
-  'cc-panel.c',
-  'cc-shell.c',
-  'main.c'
+libshell_dep = declare_dependency(
+  include_directories : top_inc,
+            link_with : libshell
 )
 
-resource_data = files(
-  'cc-panel-list.ui',
-  'cc-window.ui',
-  'help-overlay.ui',
-)
 
-sources += gnome.compile_resources(
-  'resources',
-  meson.project_name() + '.gresource.xml',
-  dependencies: resource_data,
-  export: true
-)
+########################
+# gnome-control-center #
+########################
 
-sources += files(
-  'cc-panel-list.c',
-  'cc-window.c'
-)
+shell_sources = common_sources + files('main.c')
 
 shell_deps = common_deps + [
   libdevice_dep,
   liblanguage_dep,
   libwidgets_dep,
-  x11_dep
+  x11_dep,
+  libshell_dep,
 ]
 
 if enable_cheese
@@ -85,26 +119,20 @@ if host_is_linux_not_s390
   shell_deps += wacom_deps
 endif
 
-# Debug
-debug_conf = configuration_data()
-debug_conf.set('BUGREPORT_URL', 'https://gitlab.gnome.org/GNOME/' + meson.project_name() + '/issues/new')
-debug_conf.set10('ENABLE_TRACING', enable_tracing)
-
-sources += configure_file(
-          input : 'cc-debug.h.in',
-         output : 'cc-debug.h',
-  configuration : debug_conf
-)
-
 executable(
   meson.project_name(),
-               sources,
+         shell_sources,
   include_directories : top_inc,
          dependencies : shell_deps,
                c_args : cflags,
-            link_with : panels_libs + [libshell],
+            link_with : panels_libs,
               install : true
 )
+
+
+##################
+# lipanel_loader #
+##################
 
 # Because it is confusing and somewhat problematic to directly add and compile
 # cc-panel-loader.o by another directory (i.e. the shell search provider), we
@@ -117,23 +145,18 @@ libpanel_loader = static_library(
                c_args : cflags + ['-DCC_PANEL_LOADER_NO_GTYPES']
 )
 
-# libshell_test
-sources = files(
-  'cc-application.c',
-  'cc-log.c',
-  'cc-panel.c',
-  'cc-panel-list.c',
-  'cc-shell.c',
-  'cc-shell-model.c',
-  'cc-object-storage.c',
-)
+
+################
+# libtestshell #
+################
+
 libtestshell = static_library(
            'testshell',
-               sources,
+        common_sources,
   include_directories : top_inc,
-         dependencies : common_deps + [ libwidgets_dep ],
+         dependencies : shell_deps,
                c_args : cflags,
-            link_with : panels_libs
+            link_with : panels_libs,
 )
 libtestshell_dep = declare_dependency(
   include_directories : top_inc,
