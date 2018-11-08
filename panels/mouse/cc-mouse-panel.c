@@ -25,8 +25,8 @@
 
 #include "cc-mouse-panel.h"
 #include "cc-mouse-resources.h"
+#include "cc-mouse-test.h"
 #include "gnome-mouse-properties.h"
-#include "gnome-mouse-test.h"
 
 struct _CcMousePanel
 {
