@@ -38,12 +38,6 @@ void     set_entry_validation_error       (GtkEntry    *entry,
                                            const gchar *text);
 void     clear_entry_validation_error     (GtkEntry    *entry);
 
-void     popup_menu_below_button          (GtkMenu     *menu,
-                                           gint        *x,
-                                           gint        *y,
-                                           gboolean    *push_in,
-                                           GtkWidget   *button);
-
 gboolean is_valid_name                    (const gchar     *name);
 gboolean is_valid_username                (const gchar     *name,
                                            gchar          **tip);
