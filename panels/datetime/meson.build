@@ -117,7 +117,7 @@ resource_data = files(
   'data/timezone_9.png',
   'backward',
   'big.ui',
-  'datetime.ui',
+  'cc-datetime-panel.ui',
   'little.ui',
   'middle.ui',
   'ydm.ui'
