@@ -29,9 +29,7 @@
 #include <pwd.h>
 
 #include <gio/gio.h>
-#include <gio/gunixoutputstream.h>
 #include <glib/gi18n.h>
-#include <glib/gstdio.h>
 
 #include "um-utils.h"
 
@@ -664,44 +662,3 @@ generate_username_choices (const gchar  *name,
         g_string_free (item3, TRUE);
         g_string_free (item4, TRUE);
 }
-
-void
-set_user_icon_data (ActUser   *user,
-                    GdkPixbuf *pixbuf)
-{
-        gchar *path;
-        gint fd;
-        GOutputStream *stream;
-        GError *error;
-
-        path = g_build_filename (g_get_tmp_dir (), "gnome-control-center-user-icon-XXXXXX", NULL);
-        fd = g_mkstemp (path);
-
-        if (fd == -1) {
-                g_warning ("failed to create temporary file for image data");
-                g_free (path);
-                return;
-        }
-
-        stream = g_unix_output_stream_new (fd, TRUE);
-
-        error = NULL;
-        if (!gdk_pixbuf_save_to_stream (pixbuf, stream, "png", NULL, &error, NULL)) {
-                g_warning ("failed to save image: %s", error->message);
-                g_error_free (error);
-                g_object_unref (stream);
-                return;
-        }
-
-        g_object_unref (stream);
-
-        act_user_set_icon_file (user, path);
-
-        /* if we ever make the dbus call async, the g_remove call needs
-         * to wait for its completion
-         */
-        g_remove (path);
-
-        g_free (path);
-}
-
