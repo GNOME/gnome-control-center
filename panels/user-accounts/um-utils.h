@@ -21,7 +21,6 @@
 #pragma once
 
 #include <gtk/gtk.h>
-#include <act/act.h>
 
 G_BEGIN_DECLS
 
@@ -44,8 +43,5 @@ gboolean is_valid_username                (const gchar     *name,
 
 void     generate_username_choices        (const gchar     *name,
                                            GtkListStore    *store);
-
-void     set_user_icon_data               (ActUser         *user,
-                                           GdkPixbuf       *pixbuf);
 
 G_END_DECLS
