@@ -1109,7 +1109,7 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
 
   panel_class->get_help_uri = cc_date_time_panel_get_help_uri;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/datetime/datetime.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/datetime/cc-datetime-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, am_pm_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, am_pm_stack);
