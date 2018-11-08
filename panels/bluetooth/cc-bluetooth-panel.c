@@ -22,7 +22,6 @@
 #include <config.h>
 #endif
 
-#include <glib/gi18n-lib.h>
 #include <shell/cc-shell.h>
 #include <shell/cc-object-storage.h>
 #include <bluetooth-settings-widget.h>
@@ -30,50 +29,35 @@
 #include "cc-bluetooth-panel.h"
 #include "cc-bluetooth-resources.h"
 
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (self->builder, s))
-
 struct _CcBluetoothPanel {
-	CcPanel parent_instance;
+	CcPanel                  parent_instance;
 
-	GtkBox              *airplane_box;
-	GtkBuilder          *builder;
-	GtkBox              *disabled_box;
-	GtkWidget           *stack;
-	GtkBox              *hw_airplane_box;
-	GtkBox              *no_devices_box;
-	GtkWidget           *settings_widget;
-	GCancellable        *cancellable;
+        GtkBox                  *airplane_box;
+        GtkBox                  *disabled_box;
+        GtkSwitch               *enable_switch;
+        GtkBox                  *header_box;
+        GtkBox                  *no_devices_box;
+        GtkBox                  *hw_airplane_box;
+	BluetoothSettingsWidget *settings_widget;
+	GtkStack                *stack;
+
+	GCancellable            *cancellable;
 
 	/* Killswitch */
-	GtkWidget           *kill_switch_header;
-	GDBusProxy          *rfkill, *properties;
-	gboolean             airplane_mode;
-	gboolean             bt_airplane_mode;
-	gboolean             hardware_airplane_mode;
-	gboolean             has_airplane_mode;
+	GDBusProxy              *rfkill;
+	GDBusProxy              *properties;
+	gboolean                 airplane_mode;
+	gboolean                 bt_airplane_mode;
+	gboolean                 hardware_airplane_mode;
+	gboolean                 has_airplane_mode;
 };
 
 CC_PANEL_REGISTER (CcBluetoothPanel, cc_bluetooth_panel)
-
-static void cc_bluetooth_panel_finalize (GObject *object);
-static void cc_bluetooth_panel_constructed (GObject *object);
 
 static const char *
 cc_bluetooth_panel_get_help_uri (CcPanel *panel)
 {
 	return "help:gnome-help/bluetooth";
-}
-
-static void
-cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
-{
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
-
-	object_class->constructed = cc_bluetooth_panel_constructed;
-	object_class->finalize = cc_bluetooth_panel_finalize;
-
-	panel_class->get_help_uri = cc_bluetooth_panel_get_help_uri;
 }
 
 static void
@@ -88,7 +72,6 @@ cc_bluetooth_panel_finalize (GObject *object)
 
 	g_clear_object (&self->properties);
 	g_clear_object (&self->rfkill);
-	g_clear_object (&self->kill_switch_header);
 
 	G_OBJECT_CLASS (cc_bluetooth_panel_parent_class)->finalize (object);
 }
@@ -101,20 +84,16 @@ cc_bluetooth_panel_constructed (GObject *object)
 	G_OBJECT_CLASS (cc_bluetooth_panel_parent_class)->constructed (object);
 
 	/* add kill switch widgets  */
-	self->kill_switch_header = g_object_ref (WID ("box_power"));
 	cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
-					 self->kill_switch_header);
-	gtk_widget_show (self->kill_switch_header);
+					 GTK_WIDGET (self->header_box));
 }
 
 static void
-power_callback (GObject          *object,
-		GParamSpec       *spec,
-		CcBluetoothPanel *self)
+enable_switch_changed_cb (CcBluetoothPanel *self)
 {
 	gboolean state;
 
-	state = gtk_switch_get_active (GTK_SWITCH (WID ("switch_bluetooth")));
+	state = gtk_switch_get_active (self->enable_switch);
 	g_debug ("Power switched to %s", state ? "on" : "off");
 	g_dbus_proxy_call (self->properties,
 			   "Set",
@@ -127,10 +106,9 @@ power_callback (GObject          *object,
 }
 
 static void
-cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
+adapter_status_changed_cb (CcBluetoothPanel *self)
 {
 	GtkAlign valign;
-	GObject *toggle;
 	gboolean sensitive, powered, change_powered;
 	GtkWidget *page;
 
@@ -138,7 +116,7 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 		 self->has_airplane_mode, self->hardware_airplane_mode, self->bt_airplane_mode, self->airplane_mode);
 
 	change_powered = TRUE;
-  valign = GTK_ALIGN_CENTER;
+	valign = GTK_ALIGN_CENTER;
 
 	if (self->has_airplane_mode == FALSE) {
 		g_debug ("No Bluetooth available");
@@ -156,7 +134,7 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 		powered = FALSE;
 		page = GTK_WIDGET (self->airplane_box);
 	} else if (self->bt_airplane_mode ||
-		   !bluetooth_settings_widget_get_default_adapter_powered (BLUETOOTH_SETTINGS_WIDGET (self->settings_widget))) {
+		   !bluetooth_settings_widget_get_default_adapter_powered (self->settings_widget)) {
 		g_debug ("Default adapter is unpowered, but should be available");
 		sensitive = TRUE;
 		change_powered = FALSE;
@@ -169,17 +147,16 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 		valign = GTK_ALIGN_FILL;
 	}
 
-	gtk_widget_set_valign (self->stack, valign);
-	gtk_widget_set_sensitive (WID ("box_power") , sensitive);
+	gtk_widget_set_valign (GTK_WIDGET (self->stack), valign);
+	gtk_widget_set_sensitive (GTK_WIDGET (self->header_box), sensitive);
 
-	toggle = G_OBJECT (WID ("switch_bluetooth"));
 	if (change_powered) {
-		g_signal_handlers_block_by_func (toggle, power_callback, self);
-		gtk_switch_set_active (GTK_SWITCH (toggle), powered);
-		g_signal_handlers_unblock_by_func (toggle, power_callback, self);
+		g_signal_handlers_block_by_func (self->enable_switch, enable_switch_changed_cb, self);
+		gtk_switch_set_active (self->enable_switch, powered);
+		g_signal_handlers_unblock_by_func (self->enable_switch, enable_switch_changed_cb, self);
 	}
 
-	gtk_stack_set_visible_child (GTK_STACK (self->stack), page);
+	gtk_stack_set_visible_child (self->stack, page);
 }
 
 static void
@@ -206,12 +183,11 @@ airplane_mode_changed (GDBusProxy       *proxy,
 	self->has_airplane_mode = g_variant_get_boolean (v);
 	g_variant_unref (v);
 
-	cc_bluetooth_panel_update_power (self);
+	adapter_status_changed_cb (self);
 }
 
 static void
-on_airplane_mode_off_clicked (GtkButton        *button,
-			      CcBluetoothPanel *self)
+airplane_mode_off_button_clicked_cb (CcBluetoothPanel *self)
 {
 	g_debug ("Airplane Mode Off clicked, disabling airplane mode");
 	g_dbus_proxy_call (self->rfkill,
@@ -225,48 +201,9 @@ on_airplane_mode_off_clicked (GtkButton        *button,
 			   NULL, NULL);
 }
 
-static GtkBox *
-add_stack_page (CcBluetoothPanel *self,
-		const char       *icon_name,
-		const char       *message,
-		const char       *explanation)
-{
-	GtkWidget *label, *image, *box;
-	char *str;
-
-	box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-	gtk_widget_show (box);
-	g_object_set (G_OBJECT (box), "margin-top", 64, "margin-bottom", 64, NULL);
-	g_object_set (G_OBJECT (box), "margin-start", 12, "margin-end", 12, NULL);
-
-	image = gtk_image_new_from_icon_name (icon_name,
-					      GTK_ICON_SIZE_DIALOG);
-	gtk_widget_show (image);
-	gtk_image_set_pixel_size (GTK_IMAGE (image), 192);
-	gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
-	gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 24);
-
-	str = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>", message);
-	label = gtk_label_new ("");
-	gtk_widget_show (label);
-	gtk_label_set_markup (GTK_LABEL (label), str);
-	g_free (str);
-	gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
-
-	label = gtk_label_new (explanation);
-	gtk_widget_show (label);
-	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-	gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
-
-	gtk_container_add (GTK_CONTAINER (self->stack), box);
-
-	return GTK_BOX (box);
-}
-
 static void
-panel_changed (GtkWidget        *settings_widget,
-	       const char       *panel,
-	       CcBluetoothPanel *self)
+panel_changed_cb (CcBluetoothPanel *self,
+                  const char       *panel)
 {
 	CcShell *shell;
 	GError *error = NULL;
@@ -279,23 +216,41 @@ panel_changed (GtkWidget        *settings_widget,
 }
 
 static void
+cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+
+	object_class->constructed = cc_bluetooth_panel_constructed;
+	object_class->finalize = cc_bluetooth_panel_finalize;
+
+	panel_class->get_help_uri = cc_bluetooth_panel_get_help_uri;
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/bluetooth/cc-bluetooth-panel.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, airplane_box);
+        gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, disabled_box);
+        gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, enable_switch);
+        gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, header_box);
+        gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, no_devices_box);
+        gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, hw_airplane_box);
+        gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, settings_widget);
+        gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, stack);
+
+        gtk_widget_class_bind_template_callback (widget_class, adapter_status_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, airplane_mode_off_button_clicked_cb);
+        gtk_widget_class_bind_template_callback (widget_class, enable_switch_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, panel_changed_cb);
+}
+
+static void
 cc_bluetooth_panel_init (CcBluetoothPanel *self)
 {
-	GError *error = NULL;
-	GtkWidget *button;
-
+	bluetooth_settings_widget_get_type ();
 	g_resources_register (cc_bluetooth_get_resource ());
 
-	self->builder = gtk_builder_new ();
-	gtk_builder_set_translation_domain (self->builder, GETTEXT_PACKAGE);
-	gtk_builder_add_from_resource (self->builder,
-                                       "/org/gnome/control-center/bluetooth/cc-bluetooth-panel.ui",
-                                       &error);
-	if (error != NULL) {
-		g_warning ("Could not load ui: %s", error->message);
-		g_error_free (error);
-		return;
-	}
+        gtk_widget_init_template (GTK_WIDGET (self));
 
 	self->cancellable = g_cancellable_new ();
 
@@ -313,36 +268,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 								     "org.freedesktop.DBus.Properties",
 								     NULL, NULL);
 
-	self->stack = gtk_stack_new ();
-	gtk_stack_set_homogeneous (GTK_STACK (self->stack), TRUE);
-	self->no_devices_box = add_stack_page (self, "bluetooth-active-symbolic", _("No Bluetooth Found"), _("Plug in a dongle to use Bluetooth."));
-	self->disabled_box = add_stack_page (self, "bluetooth-active-symbolic", _("Bluetooth Turned Off"), _("Turn on to connect devices and receive file transfers."));
-	self->airplane_box = add_stack_page (self, "airplane-mode-symbolic", _("Airplane Mode is on"), _("Bluetooth is disabled when airplane mode is on."));
-	self->hw_airplane_box = add_stack_page (self, "airplane-mode-symbolic", _("Hardware Airplane Mode is on"), _("Turn off the Airplane mode switch to enable Bluetooth."));
-
-	button = gtk_button_new_with_label (_("Turn Off Airplane Mode"));
-	gtk_widget_show (button);
-	gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
-	gtk_widget_set_halign (button, GTK_ALIGN_CENTER);
-	g_signal_connect (G_OBJECT (button), "clicked",
-			  G_CALLBACK (on_airplane_mode_off_clicked), self);
-	gtk_box_pack_start (self->airplane_box, button, FALSE, FALSE, 24);
-
-	self->settings_widget = bluetooth_settings_widget_new ();
-	g_signal_connect (G_OBJECT (self->settings_widget), "panel-changed",
-			  G_CALLBACK (panel_changed), self);
-	gtk_container_add (GTK_CONTAINER (self->stack), self->settings_widget);
-	gtk_widget_show (self->settings_widget);
-	gtk_widget_show (self->stack);
-
-	gtk_container_add (GTK_CONTAINER (self), self->stack);
-
 	airplane_mode_changed (NULL, NULL, NULL, self);
 	g_signal_connect_object (self->rfkill, "g-properties-changed",
                                  G_CALLBACK (airplane_mode_changed), self, 0);
-	g_signal_connect_object (G_OBJECT (self->settings_widget), "adapter-status-changed",
-                                 G_CALLBACK (cc_bluetooth_panel_update_power), self, G_CONNECT_SWAPPED);
-
-	g_signal_connect (G_OBJECT (WID ("switch_bluetooth")), "notify::active",
-			  G_CALLBACK (power_callback), self);
 }
