@@ -39,12 +39,6 @@ typedef enum {
         MODE_OFFLINE
 } AccountMode;
 
-static const char * const mode_pages[] = {
-  "_local",
-  "_enterprise",
-  "_offline"
-};
-
 static void   mode_change          (CcAddUserDialog *self,
                                     AccountMode      mode);
 
@@ -68,11 +62,13 @@ struct _CcAddUserDialog {
         GtkComboBox        *enterprise_domain_combo;
         GtkEntry           *enterprise_domain_entry;
         GtkLabel           *enterprise_domain_hint_label;
+        GtkGrid            *enterprise_grid;
         GtkLabel           *enterprise_hint_label;
         GtkEntry           *enterprise_login_entry;
         GtkEntry           *enterprise_password_entry;
         GtkListStore       *enterprise_realm_model;
         GtkRadioButton     *local_account_type_standard;
+        GtkGrid            *local_grid;
         GtkLabel           *local_hint_label;
         GtkEntry           *local_name_entry;
         GtkComboBoxText    *local_username_combo;
@@ -84,6 +80,7 @@ struct _CcAddUserDialog {
         GtkLevelBar        *local_strength_indicator;
         GtkEntry           *local_verify_entry;
         GtkLabel           *local_verify_hint_label;
+        GtkGrid            *offline_grid;
         GtkSpinner         *spinner;
         GtkStack           *stack;
 
@@ -1276,7 +1273,7 @@ static void
 mode_change (CcAddUserDialog *self,
              AccountMode      mode)
 {
-        gboolean active, available;
+        gboolean available;
         GNetworkMonitor *monitor;
 
         if (mode != MODE_LOCAL) {
@@ -1285,17 +1282,23 @@ mode_change (CcAddUserDialog *self,
                 mode = available ? MODE_ENTERPRISE : MODE_OFFLINE;
         }
 
-        gtk_stack_set_visible_child_name (self->stack, mode_pages[mode]);
-
-        if (mode == MODE_ENTERPRISE)
-                gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_domain_entry));
-        else
+        switch (mode) {
+        default:
+        case MODE_LOCAL:
+                gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->local_grid));
                 gtk_widget_grab_focus (GTK_WIDGET (self->local_name_entry));
-
-        /* The enterprise toggle state */
-        active = (mode != MODE_LOCAL);
-        if (gtk_toggle_button_get_active (self->enterprise_button) != active)
-                gtk_toggle_button_set_active (self->enterprise_button, active);
+                gtk_toggle_button_set_active (self->enterprise_button, FALSE);
+                break;
+        case MODE_ENTERPRISE:
+                gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->enterprise_grid));
+                gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_domain_entry));
+                gtk_toggle_button_set_active (self->enterprise_button, TRUE);
+                break;
+        case MODE_OFFLINE:
+                gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->offline_grid));
+                gtk_toggle_button_set_active (self->enterprise_button, TRUE);
+                break;
+        }
 
         self->mode = mode;
         dialog_validate (self);
@@ -1458,11 +1461,13 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain_combo);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain_hint_label);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_grid);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_hint_label);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_login_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_password_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_realm_model);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_account_type_standard);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_grid);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_hint_label);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_name_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_combo);
@@ -1474,6 +1479,7 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_strength_indicator);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_hint_label);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, offline_grid);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, spinner);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, stack);
 

@@ -86,7 +86,7 @@
             <property name="can_focus">False</property>
             <property name="transition-type">none</property>
             <child>
-              <object class="GtkGrid">
+              <object class="GtkGrid" id="local_grid">
                 <property name="visible">True</property>
                 <property name="hexpand">True</property>
                 <property name="column_spacing">6</property>
@@ -469,7 +469,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkGrid">
+              <object class="GtkGrid" id="enterprise_grid">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
@@ -675,12 +675,9 @@
                   </packing>
                 </child>
               </object>
-              <packing>
-                <property name="name">_enterprise</property>
-              </packing>
             </child>
             <child>
-              <object class="GtkGrid">
+              <object class="GtkGrid" id="offline_grid">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
@@ -767,9 +764,6 @@
                   </packing>
                 </child>
               </object>
-              <packing>
-                <property name="name">_offline</property>
-              </packing>
             </child>
           </object>
           <packing>
