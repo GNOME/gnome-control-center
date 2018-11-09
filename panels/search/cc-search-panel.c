@@ -766,7 +766,7 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
   oclass->finalize = cc_search_panel_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/control-center/search/search.ui");
+                                               "/org/gnome/control-center/search/cc-search-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, up_button);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, down_button);
