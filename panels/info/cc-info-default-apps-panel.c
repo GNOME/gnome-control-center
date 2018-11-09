@@ -182,7 +182,7 @@ cc_info_default_apps_panel_class_init (CcInfoDefaultAppsPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info/info-default-apps.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info/cc-info-default-apps-panel.ui");
   gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, default_apps_grid);
   gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, web_label);
   gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, mail_label);

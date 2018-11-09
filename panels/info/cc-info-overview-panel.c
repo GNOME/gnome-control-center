@@ -871,7 +871,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   object_class->finalize = cc_info_overview_panel_finalize;
   object_class->dispose = cc_info_overview_panel_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info/info-overview.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info/cc-info-overview-panel.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, system_image);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, version_label);
