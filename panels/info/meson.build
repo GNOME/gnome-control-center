@@ -46,9 +46,9 @@ sources = files(gsd_sources) + files(
 
 resource_data = files(
   'GnomeLogoVerticalMedium.svg',
-  'info-default-apps.ui',
-  'info-overview.ui',
-  'info-removable-media.ui'
+  'cc-info-default-apps-panel.ui',
+  'cc-info-overview-panel.ui',
+  'cc-info-removable-media-panel.ui'
 )
 
 sources += gnome.compile_resources(

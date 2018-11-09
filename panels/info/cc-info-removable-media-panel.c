@@ -576,7 +576,7 @@ cc_info_removable_media_panel_class_init (CcInfoRemovableMediaPanelClass *klass)
   object_class->finalize = cc_info_removable_media_panel_finalize;
   object_class->dispose = cc_info_removable_media_panel_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info/info-removable-media.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info/cc-info-removable-media-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcInfoRemovableMediaPanel, media_handling_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcInfoRemovableMediaPanel, media_autorun_never_checkbutton);
