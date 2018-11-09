@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.22"/>
+  <template class="GtpDynamicPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="hexpand">True</property>
+            <property name="orientation">vertical</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="valign">center</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">12</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixel_size">96</property>
+                <property name="icon_name">weather-clear-night-symbolic</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="max-width-chars">50</property>
+                <property name="wrap">True</property>
+                <property name="label">Dynamic panels may hide if you don't have some hardware. Use the switch below to toggle the panel visibility:</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="label">Hide</property>
+                <signal name="clicked" handler="on_button_clicked_cb" object="GtpDynamicPanel" swapped="no" />
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="hexpand">True</property>
+            <property name="orientation">vertical</property>
+          </object>
+        </child>
+
+      </object>
+    </child>
+  </template>
+</interface>
+
