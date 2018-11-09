@@ -24,13 +24,6 @@
 
 G_BEGIN_DECLS
 
-void     setup_tooltip_with_embedded_icon (GtkWidget   *widget,
-                                           const gchar *text,
-                                           const gchar *placeholder,
-                                           GIcon       *icon);
-gboolean show_tooltip_now                 (GtkWidget   *widget,
-                                           GdkEvent    *event);
-
 void     set_entry_generation_icon        (GtkEntry    *entry);
 void     set_entry_validation_checkmark   (GtkEntry    *entry);
 void     set_entry_validation_error       (GtkEntry    *entry,
