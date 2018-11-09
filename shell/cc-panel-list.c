@@ -952,6 +952,12 @@ cc_panel_list_add_panel (CcPanelList        *self,
 
   g_hash_table_insert (self->id_to_data, data->id, data);
   g_hash_table_insert (self->id_to_search_data, search_data->id, search_data);
+
+  /* Only show the Devices/Details rows when there's at least one panel */
+  if (category == CC_CATEGORY_DEVICES)
+    gtk_widget_show (GTK_WIDGET (self->devices_row));
+  else if (category == CC_CATEGORY_DETAILS)
+    gtk_widget_show (GTK_WIDGET (self->details_row));
 }
 
 /**
