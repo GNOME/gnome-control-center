@@ -61,56 +61,56 @@ static void   on_realm_joined      (GObject *source,
 static void   add_button_clicked_cb (CcAddUserDialog *self);
 
 struct _CcAddUserDialog {
-        GtkDialog        parent_instance;
+        GtkDialog           parent_instance;
 
-        GtkButton       *add_button;
-        GtkToggleButton *enterprise_button;
-        GtkComboBox     *enterprise_domain_combo;
-        GtkEntry        *enterprise_domain_entry;
-        GtkLabel        *enterprise_domain_hint_label;
-        GtkLabel        *enterprise_hint_label;
-        GtkEntry        *enterprise_login_entry;
-        GtkEntry        *enterprise_password_entry;
-        GtkListStore    *enterprise_realm_model;
-        GtkRadioButton  *local_account_type_standard;
-        GtkLabel        *local_hint_label;
-        GtkEntry        *local_name_entry;
-        GtkComboBoxText *local_username_combo;
-        GtkListStore    *local_username_model;
-        GtkEntry        *local_password_entry;
-        GtkRadioButton  *local_password_radio;
-        GtkEntry        *local_username_entry;
-        GtkLabel        *local_username_hint_label;
-        GtkLevelBar     *local_strength_indicator;
-        GtkEntry        *local_verify_entry;
-        GtkLabel        *local_verify_hint_label;
-        GtkSpinner      *spinner;
-        GtkStack        *stack;
+        GtkButton          *add_button;
+        GtkToggleButton    *enterprise_button;
+        GtkComboBox        *enterprise_domain_combo;
+        GtkEntry           *enterprise_domain_entry;
+        GtkLabel           *enterprise_domain_hint_label;
+        GtkLabel           *enterprise_hint_label;
+        GtkEntry           *enterprise_login_entry;
+        GtkEntry           *enterprise_password_entry;
+        GtkListStore       *enterprise_realm_model;
+        GtkRadioButton     *local_account_type_standard;
+        GtkLabel           *local_hint_label;
+        GtkEntry           *local_name_entry;
+        GtkComboBoxText    *local_username_combo;
+        GtkListStore       *local_username_model;
+        GtkEntry           *local_password_entry;
+        GtkRadioButton     *local_password_radio;
+        GtkEntry           *local_username_entry;
+        GtkLabel           *local_username_hint_label;
+        GtkLevelBar        *local_strength_indicator;
+        GtkEntry           *local_verify_entry;
+        GtkLabel           *local_verify_hint_label;
+        GtkSpinner         *spinner;
+        GtkStack           *stack;
 
-        GCancellable *cancellable;
-        GPermission *permission;
-        AccountMode mode;
-        ActUser *user;
+        GCancellable       *cancellable;
+        GPermission        *permission;
+        AccountMode         mode;
+        ActUser            *user;
 
-        gboolean   has_custom_username;
-        gint       local_name_timeout_id;
-        gint       local_username_timeout_id;
+        gboolean            has_custom_username;
+        gint                local_name_timeout_id;
+        gint                local_username_timeout_id;
         ActUserPasswordMode local_password_mode;
-        gint       local_password_timeout_id;
+        gint                local_password_timeout_id;
 
-        guint realmd_watch;
-        UmRealmManager *realm_manager;
-        UmRealmObject *selected_realm;
-        gboolean enterprise_check_credentials;
-        gint       enterprise_domain_timeout_id;
-        gboolean   enterprise_domain_chosen;
+        guint               realmd_watch;
+        UmRealmManager     *realm_manager;
+        UmRealmObject      *selected_realm;
+        gboolean            enterprise_check_credentials;
+        gint                enterprise_domain_timeout_id;
+        gboolean            enterprise_domain_chosen;
 
         /* Join credential dialog */
-        GtkDialog *join_dialog;
-        GtkLabel *join_domain;
-        GtkEntry *join_name;
-        GtkEntry *join_password;
-        gboolean join_prompted;
+        GtkDialog          *join_dialog;
+        GtkLabel           *join_domain;
+        GtkEntry           *join_name;
+        GtkEntry           *join_password;
+        gboolean            join_prompted;
 };
 
 G_DEFINE_TYPE (CcAddUserDialog, cc_add_user_dialog, GTK_TYPE_DIALOG);
