@@ -4,9 +4,7 @@ subdir('common')
 #  subdir('network')
 #endif
 
-if enable_test_panels
-  subdir('interactive-panels')
-endif
+subdir('interactive-panels')
 
 subdir('printers')
 subdir('info')

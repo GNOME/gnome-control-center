@@ -44,6 +44,7 @@ gint
 main (gint   argc,
       gchar *argv[])
 {
+  const gchar *orig_data_dirs;
   g_autoptr(GtkApplication) application = NULL;
 
   /* Manually register GResources */
@@ -52,6 +53,16 @@ main (gint   argc,
 
   /* Override the panels vtable with the test panels */
   cc_panel_loader_override_vtable (test_panels, G_N_ELEMENTS (test_panels));
+
+  /* Override */
+  /*g_desktop_app_info_new_from_filename ("./gnome-dynamic-panel-panel.desktop");
+  g_desktop_app_info_new_from_filename ("./gnome-header-widget-panel.desktop");
+  g_desktop_app_info_new_from_filename ("./gnome-static-init-panel.desktop");*/
+  orig_data_dirs = g_strdup (g_getenv ("XDG_DATA_DIRS"));
+  if (orig_data_dirs)
+    g_setenv ("XDG_DATA_DIRS", g_strconcat (".", ":", orig_data_dirs, NULL), TRUE);
+  else
+    g_setenv ("XDG_DATA_DIRS", ".", TRUE);
 
   application = cc_application_new ();
 

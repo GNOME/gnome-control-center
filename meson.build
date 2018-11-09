@@ -25,9 +25,6 @@ host_is_linux_not_s390 = host_is_linux and not host_machine.cpu().contains('s390
 
 cc = meson.get_compiler('c')
 
-# Test panels
-enable_test_panels = get_option('test_panels')
-
 # Tracing
 enable_tracing = get_option('tracing')
 
@@ -275,7 +272,5 @@ output += '     IBus (Region panel IBus support) ........... ' + enable_ibus.to_
 output += '     NetworkManager (Network panel) ............. ' + host_is_linux.to_string() + '\n'
 output += '     Wacom (Wacom tablet panel) ................. ' + host_is_linux_not_s390.to_string() + '\n'
 output += '     Wayland .................................... ' + enable_wayland.to_string() + '\n'
-output += ' Tests \n'
-output += '     Panels ..................................... ' + enable_test_panels.to_string() + '\n'
 
 message(output)
