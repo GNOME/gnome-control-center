@@ -70,7 +70,8 @@ cc_display_mode_dbus_equal (const CcDisplayModeDBus *m1,
 
   return m1->width == m2->width &&
     m1->height == m2->height &&
-    m1->refresh_rate == m2->refresh_rate;
+    m1->refresh_rate == m2->refresh_rate &&
+    (m1->flags & MODE_INTERLACED) == (m2->flags & MODE_INTERLACED);
 }
 
 static void
