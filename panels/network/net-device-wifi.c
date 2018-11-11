@@ -49,7 +49,7 @@ typedef enum {
 
 static void nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi);
 static void show_wifi_list (NetDeviceWifi *device_wifi);
-static void populate_ap_list (NetDeviceWifi *device_wifi);
+static void queue_populate_ap_list (NetDeviceWifi *device_wifi);
 static void show_hotspot_ui (NetDeviceWifi *device_wifi);
 
 struct _NetDeviceWifi
@@ -64,6 +64,7 @@ struct _NetDeviceWifi
         gchar                   *selected_connection_id;
         gchar                   *selected_ap_id;
         guint                    scan_id;
+        guint                    populate_id;
         GCancellable            *cancellable;
 };
 
@@ -299,7 +300,7 @@ net_device_wifi_access_point_added (NMDeviceWifi *nm_device_wifi,
 {
         NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (user_data);
 
-        populate_ap_list (device_wifi);
+        queue_populate_ap_list (device_wifi);
         nm_device_wifi_connect_access_points (nm_device_wifi, device_wifi);
 }
 
@@ -310,7 +311,7 @@ net_device_wifi_access_point_removed (NMDeviceWifi *nm_device_wifi,
 {
         NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (user_data);
 
-        populate_ap_list (device_wifi);
+        queue_populate_ap_list (device_wifi);
 }
 
 static void
@@ -707,7 +708,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 
         /* update list of APs */
         show_wifi_list (device_wifi);
-        populate_ap_list (device_wifi);
+        queue_populate_ap_list (device_wifi);
 }
 
 static void
@@ -1519,7 +1520,7 @@ client_connection_added_cb (NMClient           *client,
                 return;
         }
 
-        populate_ap_list (device_wifi);
+        queue_populate_ap_list (device_wifi);
         show_wifi_list (device_wifi);
 }
 
@@ -1613,6 +1614,10 @@ net_device_wifi_finalize (GObject *object)
 {
         NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (object);
 
+        if (device_wifi->populate_id) {
+                g_source_remove (device_wifi->populate_id);
+                device_wifi->populate_id = 0;
+        }
         if (device_wifi->cancellable) {
                 g_cancellable_cancel (device_wifi->cancellable);
                 g_clear_object (&device_wifi->cancellable);
@@ -1683,7 +1688,7 @@ really_forgotten (GObject            *source_object,
         }
 
         /* remove the entry from the list */
-        populate_ap_list (user_data);
+        queue_populate_ap_list (user_data);
 }
 
 static void
@@ -2214,6 +2219,28 @@ populate_ap_list (NetDeviceWifi *device_wifi)
 
         g_slist_free (connections);
         g_ptr_array_free (aps_unique, TRUE);
+}
+
+static gboolean
+populate_ap_list_idle_cb (NetDeviceWifi *device_wifi)
+{
+        populate_ap_list (device_wifi);
+
+        device_wifi->populate_id = 0;
+        return FALSE;
+}
+
+static void
+queue_populate_ap_list (NetDeviceWifi *device_wifi)
+{
+        if (device_wifi->populate_id)
+                return;
+
+        /* Using the default idle priority could cause flickering. */
+        device_wifi->populate_id = g_idle_add_full (G_PRIORITY_DEFAULT,
+                                                   (GSourceFunc) populate_ap_list_idle_cb,
+                                                    device_wifi,
+                                                    NULL);
 }
 
 static void
