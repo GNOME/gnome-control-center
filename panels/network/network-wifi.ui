@@ -2,6 +2,7 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkDialog" id="details_dialog">
+    <property name="visible">False</property>
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="resizable">False</property>
@@ -1796,6 +1797,7 @@ here</property>
 
   <!-- Menu Popover -->
   <object class="GtkPopoverMenu" id="header_button_popover">
+    <property name="visible">False</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>

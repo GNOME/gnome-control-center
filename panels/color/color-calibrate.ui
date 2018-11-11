@@ -2,6 +2,7 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkDialog" id="dialog_calibrate">
+    <property name="visible">False</property>
     <property name="can_focus">False</property>
     <property name="border_width">12</property>
     <property name="title" translatable="yes">Display Calibration</property>
@@ -51,6 +52,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button_resume">
+                <property name="visible">False</property>
                 <property name="label" translatable="yes" comments="This resumes the calibration process">_Resume</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -64,6 +66,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button_done">
+                <property name="visible">False</property>
                 <property name="label" translatable="yes" comments="This button returns the user back to the color control panel">_Done</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
