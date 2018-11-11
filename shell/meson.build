@@ -87,7 +87,7 @@ endif
 
 # Debug
 debug_conf = configuration_data()
-debug_conf.set('BUGREPORT_URL', 'http://bugzilla.gnome.org/enter_bug.cgi?product=' + meson.project_name())
+debug_conf.set('BUGREPORT_URL', 'https://gitlab.gnome.org/GNOME/' + meson.project_name() + '/issues/new')
 debug_conf.set10('ENABLE_TRACING', enable_tracing)
 
 sources += configure_file(
