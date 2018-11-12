@@ -193,7 +193,7 @@ cc_panel_get_shell (CcPanel *panel)
   return priv->shell;
 }
 
-const char *
+const gchar*
 cc_panel_get_help_uri (CcPanel *panel)
 {
   CcPanelClass *class = CC_PANEL_GET_CLASS (panel);

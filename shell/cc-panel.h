@@ -47,7 +47,6 @@ typedef void (*CcPanelStaticInitFunc) (void);
 
 
 #define CC_TYPE_PANEL (cc_panel_get_type())
-
 G_DECLARE_DERIVABLE_TYPE (CcPanel, cc_panel, CC, PANEL, GtkBin)
 
 /**
@@ -77,21 +76,21 @@ G_BEGIN_DECLS
 struct _CcPanelClass
 {
   /*< private >*/
-  GtkBinClass parent_class;
+  GtkBinClass   parent_class;
 
-  const char  * (* get_help_uri)   (CcPanel *panel);
+  const gchar* (*get_help_uri)       (CcPanel *panel);
 
-  GtkWidget *   (* get_title_widget) (CcPanel *panel);
-  GtkWidget *   (* get_sidebar_widget) (CcPanel *panel);
+  GtkWidget*   (*get_title_widget)   (CcPanel *panel);
+  GtkWidget*   (*get_sidebar_widget) (CcPanel *panel);
 };
 
-CcShell*     cc_panel_get_shell        (CcPanel     *panel);
+CcShell*     cc_panel_get_shell          (CcPanel     *panel);
 
-GPermission *cc_panel_get_permission   (CcPanel     *panel);
+GPermission* cc_panel_get_permission     (CcPanel     *panel);
 
-const char  *cc_panel_get_help_uri     (CcPanel     *panel);
+const gchar* cc_panel_get_help_uri       (CcPanel     *panel);
 
-GtkWidget   *cc_panel_get_title_widget (CcPanel     *panel);
+GtkWidget*   cc_panel_get_title_widget   (CcPanel     *panel);
 
 GtkWidget*   cc_panel_get_sidebar_widget (CcPanel     *panel);
 
