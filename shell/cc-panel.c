@@ -144,70 +144,13 @@ cc_panel_finalize (GObject *object)
 }
 
 static void
-cc_panel_get_preferred_width (GtkWidget *widget,
-                              gint      *minimum,
-                              gint      *natural)
-{
-  GtkBin *bin = GTK_BIN (widget);
-  GtkWidget *child;
-
-  if (minimum != NULL)
-    *minimum = 0;
-
-  if (natural != NULL)
-    *natural = 0;
-
-  if ((child = gtk_bin_get_child (bin)))
-    gtk_widget_get_preferred_width (child, minimum, natural);
-}
-
-static void
-cc_panel_get_preferred_height (GtkWidget *widget,
-                               gint      *minimum,
-                               gint      *natural)
-{
-  GtkBin *bin = GTK_BIN (widget);
-  GtkWidget *child;
-
-  if (minimum != NULL)
-    *minimum = 0;
-
-  if (natural != NULL)
-    *natural = 0;
-
-  if ((child = gtk_bin_get_child (bin)))
-    gtk_widget_get_preferred_height (child, minimum, natural);
-}
-
-static void
-cc_panel_size_allocate (GtkWidget     *widget,
-                        GtkAllocation *allocation)
-{
-  GtkAllocation child_allocation;
-  GtkWidget *child;
-
-  gtk_widget_set_allocation (widget, allocation);
-
-  child_allocation = *allocation;
-
-  child = gtk_bin_get_child (GTK_BIN (widget));
-  g_assert (child);
-  gtk_widget_size_allocate (child, &child_allocation);
-}
-
-static void
 cc_panel_class_init (CcPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->get_property = cc_panel_get_property;
   object_class->set_property = cc_panel_set_property;
   object_class->finalize = cc_panel_finalize;
-
-  widget_class->get_preferred_width = cc_panel_get_preferred_width;
-  widget_class->get_preferred_height = cc_panel_get_preferred_height;
-  widget_class->size_allocate = cc_panel_size_allocate;
 
   properties[PROP_SHELL] = g_param_spec_object ("shell",
                                                 "Shell",
