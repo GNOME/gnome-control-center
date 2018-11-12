@@ -224,6 +224,37 @@ add_current_panel_to_history (CcShell    *shell,
   g_debug ("Added '%s' to the previous panels", self->current_panel_id);
 }
 
+static gboolean
+find_iter_for_panel_id (CcWindow    *self,
+                        const gchar *panel_id,
+                        GtkTreeIter *out_iter)
+{
+  GtkTreeIter iter;
+  gboolean valid;
+
+  valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->store), &iter);
+
+  while (valid)
+    {
+      g_autofree gchar *id = NULL;
+
+      gtk_tree_model_get (GTK_TREE_MODEL (self->store),
+                          &iter,
+                          COL_ID, &id,
+                          -1);
+
+      if (g_strcmp0 (id, panel_id) == 0)
+        break;
+
+      valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (self->store), &iter);
+    }
+
+  g_assert (out_iter != NULL);
+  *out_iter = iter;
+
+  return valid;
+}
+
 static void
 update_list_title (CcWindow *self)
 {
@@ -330,7 +361,6 @@ setup_model (CcWindow *shell)
   g_signal_connect_object (model, "row-changed", G_CALLBACK (on_row_changed_cb), shell, 0);
 }
 
-
 static gboolean
 set_active_panel_from_id (CcShell      *shell,
                           const gchar  *start_id,
@@ -344,8 +374,8 @@ set_active_panel_from_id (CcShell      *shell,
   GtkTreeIter iter;
   GtkWidget *old_panel;
   CcWindow *self;
-  gboolean iter_valid;
   gboolean activated;
+  gboolean found;
 
   self = CC_WINDOW (shell);
 
@@ -356,36 +386,21 @@ set_active_panel_from_id (CcShell      *shell,
       return TRUE;
     }
 
-  iter_valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->store), &iter);
-
-  /* find the details for this item */
-  while (iter_valid)
-    {
-      g_autofree gchar *id = NULL;
-
-      gtk_tree_model_get (GTK_TREE_MODEL (self->store), &iter,
-                          COL_NAME, &name,
-                          COL_GICON, &gicon,
-                          COL_ID, &id,
-                          COL_VISIBILITY, &visibility,
-                          -1);
-
-      if (id && strcmp (id, start_id) == 0)
-        break;
-
-      g_clear_pointer (&name, g_free);
-      g_clear_object (&gicon);
-
-      iter_valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (self->store), &iter);
-    }
-
-  old_panel = self->current_panel;
-
-  if (!name)
+  found = find_iter_for_panel_id (self, start_id, &iter);
+  if (!found)
     {
       g_warning ("Could not find settings panel \"%s\"", start_id);
       return TRUE;
     }
+
+  old_panel = self->current_panel;
+
+  gtk_tree_model_get (GTK_TREE_MODEL (self->store),
+                      &iter,
+                      COL_NAME, &name,
+                      COL_GICON, &gicon,
+                      COL_VISIBILITY, &visibility,
+                      -1);
 
   /* Activate the panel */
   activated = activate_panel (CC_WINDOW (shell), start_id, parameters, name, gicon, visibility);
