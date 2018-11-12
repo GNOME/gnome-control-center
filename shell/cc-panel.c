@@ -40,8 +40,6 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
-#define CC_PANEL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_PANEL, CcPanelPrivate))
-
 typedef struct
 {
   gchar    *id;
