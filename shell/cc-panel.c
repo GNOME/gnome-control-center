@@ -214,3 +214,21 @@ cc_panel_get_title_widget (CcPanel *panel)
 
   return NULL;
 }
+
+GtkWidget*
+cc_panel_get_sidebar_widget (CcPanel *panel)
+{
+  CcPanelClass *class = CC_PANEL_GET_CLASS (panel);
+
+  if (class->get_sidebar_widget)
+    {
+      GtkWidget *sidebar_widget;
+
+      sidebar_widget = class->get_sidebar_widget (panel);
+      g_assert (sidebar_widget != NULL);
+
+      return sidebar_widget;
+    }
+
+  return NULL;
+}
