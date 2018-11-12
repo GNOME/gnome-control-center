@@ -84,8 +84,6 @@ struct _CcPanelClass
   GtkWidget *   (* get_title_widget) (CcPanel *panel);
 };
 
-GType        cc_panel_get_type         (void);
-
 CcShell*     cc_panel_get_shell        (CcPanel     *panel);
 
 GPermission *cc_panel_get_permission   (CcPanel     *panel);
