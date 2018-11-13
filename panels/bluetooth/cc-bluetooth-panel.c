@@ -57,25 +57,10 @@ struct _CcBluetoothPanel {
 
 CC_PANEL_REGISTER (CcBluetoothPanel, cc_bluetooth_panel)
 
-static void cc_bluetooth_panel_finalize (GObject *object);
-static void cc_bluetooth_panel_constructed (GObject *object);
-
 static const char *
 cc_bluetooth_panel_get_help_uri (CcPanel *panel)
 {
 	return "help:gnome-help/bluetooth";
-}
-
-static void
-cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
-{
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
-
-	object_class->constructed = cc_bluetooth_panel_constructed;
-	object_class->finalize = cc_bluetooth_panel_finalize;
-
-	panel_class->get_help_uri = cc_bluetooth_panel_get_help_uri;
 }
 
 static void
@@ -271,6 +256,18 @@ panel_changed (CcBluetoothPanel *self,
 		g_warning ("Failed to activate '%s' panel: %s", panel, error->message);
 		g_error_free (error);
 	}
+}
+
+static void
+cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+
+	object_class->constructed = cc_bluetooth_panel_constructed;
+	object_class->finalize = cc_bluetooth_panel_finalize;
+
+	panel_class->get_help_uri = cc_bluetooth_panel_get_help_uri;
 }
 
 static void
