@@ -338,7 +338,7 @@ cc_realm_manager_discover (CcRealmManager *self,
         task = g_task_new (G_OBJECT (self), cancellable, callback, user_data);
         g_task_set_source_tag (task, cc_realm_manager_discover);
 
-	options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
+        options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
 
         cc_realm_provider_call_discover (self->provider, input, options, cancellable,
                                          on_provider_discover, task);
