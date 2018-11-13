@@ -34,6 +34,10 @@ class _GTestSingleProp(object):
         bound_method = self.__func.__get__(obj, cls)
         partial_method = functools.partial(bound_method, self.test)
         partial_method.__doc__ = bound_method.__doc__
+        # Set a qualified name using the qualified name of the class and
+        # function. Note that this is different from the generated attribute
+        # name as it is missing the test_%03d_ prefix.
+        partial_method.__qualname__ = '%s.%s' % (cls.__qualname__, self.test)
 
         return partial_method
 
