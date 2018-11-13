@@ -306,7 +306,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	self->builder = gtk_builder_new ();
 	gtk_builder_set_translation_domain (self->builder, GETTEXT_PACKAGE);
 	gtk_builder_add_from_resource (self->builder,
-                                       "/org/gnome/control-center/bluetooth/bluetooth.ui",
+                                       "/org/gnome/control-center/bluetooth/cc-bluetooth-panel.ui",
                                        &error);
 	if (error != NULL) {
 		g_warning ("Could not load ui: %s", error->message);

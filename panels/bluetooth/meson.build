@@ -19,7 +19,7 @@ i18n.merge_file(
 
 sources = files('cc-bluetooth-panel.c')
 
-resource_data = files('bluetooth.ui')
+resource_data = files('cc-bluetooth-panel.ui')
 
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
