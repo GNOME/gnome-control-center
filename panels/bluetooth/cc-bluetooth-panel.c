@@ -33,25 +33,26 @@
 #define WID(s) GTK_WIDGET (gtk_builder_get_object (self->builder, s))
 
 struct _CcBluetoothPanel {
-	CcPanel parent_instance;
+	CcPanel                  parent_instance;
 
-	GtkBox              *airplane_box;
-	GtkBuilder          *builder;
-	GtkBox              *disabled_box;
-	GtkBox              *hw_airplane_box;
-	GtkBox              *no_devices_box;
+	GtkBox                  *airplane_box;
+	GtkBuilder              *builder;
+	GtkBox                  *disabled_box;
+	GtkBox                  *hw_airplane_box;
+	GtkBox                  *no_devices_box;
 	BluetoothSettingsWidget *settings_widget;
-	GtkStack            *stack;
-	GCancellable        *cancellable;
+	GtkStack                *stack;
+
+	GCancellable            *cancellable;
 
 	/* Killswitch */
-	GtkWidget           *kill_switch_header;
-	GDBusProxy          *rfkill;
-	GDBusProxy          *properties;
-	gboolean             airplane_mode;
-	gboolean             bt_airplane_mode;
-	gboolean             hardware_airplane_mode;
-	gboolean             has_airplane_mode;
+	GtkWidget               *kill_switch_header;
+	GDBusProxy              *rfkill;
+	GDBusProxy              *properties;
+	gboolean                 airplane_mode;
+	gboolean                 bt_airplane_mode;
+	gboolean                 hardware_airplane_mode;
+	gboolean                 has_airplane_mode;
 };
 
 CC_PANEL_REGISTER (CcBluetoothPanel, cc_bluetooth_panel)
