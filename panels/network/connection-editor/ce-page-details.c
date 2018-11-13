@@ -186,8 +186,11 @@ connect_details_page (CEPageDetails *page)
         guint strength;
         NMDeviceState state;
         NMAccessPoint *active_ap;
-        const gchar *str;
+        g_autofree gchar *speed_label = NULL;
         const gchar *type;
+        const gchar *hw_address = NULL;
+        g_autofree gchar *security_string = NULL;
+        const gchar *strength_label;
         gboolean device_is_active;
 
         sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
@@ -222,42 +225,37 @@ connect_details_page (CEPageDetails *page)
                 }
         }
         if (speed > 0)
-                str = g_strdup_printf (_("%d Mb/s"), speed);
-        else
-                str = NULL;
-        panel_set_device_widget_details (CE_PAGE (page)->builder, "speed", str);
-        g_clear_pointer (&str, g_free);
+                speed_label = g_strdup_printf (_("%d Mb/s"), speed);
+        panel_set_device_widget_details (CE_PAGE (page)->builder, "speed", speed_label);
 
         if (NM_IS_DEVICE_WIFI (page->device))
-                str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (page->device));
+                hw_address = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (page->device));
         else if (NM_IS_DEVICE_ETHERNET (page->device))
-                str = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (page->device));
+                hw_address = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (page->device));
 
-        panel_set_device_widget_details (CE_PAGE (page)->builder, "mac", str);
+        panel_set_device_widget_details (CE_PAGE (page)->builder, "mac", hw_address);
 
-        str = NULL;
         if (device_is_active && active_ap)
-                str = get_ap_security_string (active_ap);
-        panel_set_device_widget_details (CE_PAGE (page)->builder, "security", str);
-        g_clear_pointer (&str, g_free);
+                security_string = get_ap_security_string (active_ap);
+        panel_set_device_widget_details (CE_PAGE (page)->builder, "security", security_string);
 
         strength = 0;
         if (page->ap != NULL)
                 strength = nm_access_point_get_strength (page->ap);
 
         if (strength <= 0)
-                str = NULL;
+                strength_label = NULL;
         else if (strength < 20)
-                str = C_("Signal strength", "None");
+                strength_label = C_("Signal strength", "None");
         else if (strength < 40)
-                str = C_("Signal strength", "Weak");
+                strength_label = C_("Signal strength", "Weak");
         else if (strength < 50)
-                str = C_("Signal strength", "Ok");
+                strength_label = C_("Signal strength", "Ok");
         else if (strength < 80)
-                str = C_("Signal strength", "Good");
+                strength_label = C_("Signal strength", "Good");
         else
-                str = C_("Signal strength", "Excellent");
-        panel_set_device_widget_details (CE_PAGE (page)->builder, "strength", str);
+                strength_label = C_("Signal strength", "Excellent");
+        panel_set_device_widget_details (CE_PAGE (page)->builder, "strength", strength_label);
 
         /* set IP entries */
         if (device_is_active)
