@@ -140,7 +140,7 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 		 self->has_airplane_mode, self->hardware_airplane_mode, self->bt_airplane_mode, self->airplane_mode);
 
 	change_powered = TRUE;
-  valign = GTK_ALIGN_CENTER;
+	valign = GTK_ALIGN_CENTER;
 
 	if (self->has_airplane_mode == FALSE) {
 		g_debug ("No Bluetooth available");
