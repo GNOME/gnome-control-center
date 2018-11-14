@@ -66,9 +66,9 @@ sources = files(
 )
 
 resource_data = files(
-  'cc-keyboard-panel.ui',
   'enter-keyboard-shortcut.svg',
-  'shortcut-editor.ui'
+  'cc-keyboard-panel.ui',
+  'cc-keyboard-shortcut-editor.ui',
 )
 
 sources += gnome.compile_resources(
