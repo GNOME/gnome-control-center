@@ -27,8 +27,8 @@ sources = files(
 )
 
 resource_data = files(
+  'cc-color-calibrate.ui',
   'cc-color-panel.ui',
-  'color-calibrate.ui',
 )
 
 sources += gnome.compile_resources(
