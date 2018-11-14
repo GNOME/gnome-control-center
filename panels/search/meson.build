@@ -23,8 +23,8 @@ sources = files(
 )
 
 resource_data = files(
+  'cc-search-locations-dialog.ui',
   'cc-search-panel.ui',
-  'search-locations-dialog.ui',
 )
 
 sources += gnome.compile_resources(
