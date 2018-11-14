@@ -884,7 +884,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/shortcut-editor.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-keyboard-shortcut-editor.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, add_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, cancel_button);
