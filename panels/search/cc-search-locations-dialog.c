@@ -684,7 +684,7 @@ cc_search_locations_dialog_class_init (CcSearchLocationsDialogClass *klass)
   object_class->finalize = cc_search_locations_dialog_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/control-center/search/search-locations-dialog.ui");
+                                               "/org/gnome/control-center/search/cc-search-locations-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, places_list);
   gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, bookmarks_list);
