@@ -1,6 +1,7 @@
 subdir('common')
 
 panels = [
+  'applications',
   'background',
   'color',
   'datetime',

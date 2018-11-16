@@ -380,6 +380,7 @@ static const gchar * const panel_order[] = {
   "universal-access",
   "online-accounts",
   "privacy",
+  "applications",
   "sharing",
   "sound",
   "power",
