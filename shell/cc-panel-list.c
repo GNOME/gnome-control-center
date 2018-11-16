@@ -613,6 +613,7 @@ row_activated_cb (GtkWidget     *listbox,
    * a custom widget, show the custom widget again.
    */
   if (g_strcmp0 (data->id, self->current_panel_id) == 0 &&
+      self->previous_view != CC_PANEL_LIST_SEARCH &&
       gtk_stack_get_child_by_name (GTK_STACK (self), "custom-widget") != NULL)
     {
       switch_to_view (self, CC_PANEL_LIST_WIDGET);
