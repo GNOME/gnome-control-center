@@ -263,7 +263,8 @@ static void
 update_list_title (CcWindow *self)
 {
   CcPanelListView view;
-  const gchar *title;
+  GtkTreeIter iter;
+  g_autofree gchar *title = NULL;
 
   view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list));
   title = NULL;
@@ -271,15 +272,23 @@ update_list_title (CcWindow *self)
   switch (view)
     {
     case CC_PANEL_LIST_DETAILS:
-      title = _("Details");
+      title = g_strdup (_("Details"));
       break;
 
     case CC_PANEL_LIST_DEVICES:
-      title = _("Devices");
+      title = g_strdup (_("Devices"));
       break;
 
     case CC_PANEL_LIST_MAIN:
-      title = _("Settings");
+      title = g_strdup (_("Settings"));
+      break;
+
+    case CC_PANEL_LIST_WIDGET:
+      find_iter_for_panel_id (self, self->current_panel_id, &iter);
+      gtk_tree_model_get (GTK_TREE_MODEL (self->store),
+                          &iter,
+                          COL_NAME, &title,
+                          -1);
       break;
 
     case CC_PANEL_LIST_SEARCH:
