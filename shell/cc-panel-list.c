@@ -90,8 +90,8 @@ static gint signals [LAST_SIGNAL] = { 0, };
  * Auxiliary methods
  */
 static GtkWidget*
-get_listbox_from_view (CcPanelList     *self,
-                       CcPanelListView  view)
+get_widget_from_view (CcPanelList     *self,
+                      CcPanelListView  view)
 {
   switch (view)
     {
@@ -195,7 +195,7 @@ switch_to_view (CcPanelList     *self,
                                  should_crossfade ? GTK_STACK_TRANSITION_TYPE_CROSSFADE :
                                                     GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT);
 
-  visible_child = get_listbox_from_view (self, view);
+  visible_child = get_widget_from_view (self, view);
 
   gtk_stack_set_visible_child (GTK_STACK (self), visible_child);
 
@@ -865,7 +865,7 @@ cc_panel_list_activate (CcPanelList *self)
 
   g_return_val_if_fail (CC_IS_PANEL_LIST (self), FALSE);
 
-  listbox = get_listbox_from_view (self, self->view);
+  listbox = get_widget_from_view (self, self->view);
 
   /* Select the first visible row */
   do
