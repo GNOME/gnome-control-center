@@ -51,8 +51,7 @@ void                 cc_panel_list_set_search_query              (CcPanelList   
 
 CcPanelListView      cc_panel_list_get_view                      (CcPanelList        *self);
 
-void                 cc_panel_list_set_view                      (CcPanelList        *self,
-                                                                  CcPanelListView     view);
+void                 cc_panel_list_go_previous                   (CcPanelList        *self);
 
 void                 cc_panel_list_add_panel                     (CcPanelList        *self,
                                                                   CcPanelCategory     category,

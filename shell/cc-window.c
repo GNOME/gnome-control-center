@@ -514,7 +514,7 @@ previous_button_clicked_cb (GtkButton *button,
   if (gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (shell->search_bar)))
     gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (shell->search_bar), FALSE);
   else
-    cc_panel_list_set_view (CC_PANEL_LIST (shell->panel_list), CC_PANEL_LIST_MAIN);
+    cc_panel_list_go_previous (CC_PANEL_LIST (shell->panel_list));
 }
 
 static void

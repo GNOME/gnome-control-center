@@ -172,6 +172,44 @@ get_view_from_listbox (CcPanelList *self,
 }
 
 static void
+switch_to_view (CcPanelList     *self,
+                CcPanelListView  view)
+{
+  GtkWidget *visible_child;
+  gboolean should_crossfade;
+
+  if (self->view == view)
+    return;
+
+  self->previous_view = self->view;
+  self->view = view;
+
+  /*
+   * When changing to or from the search view, the animation should
+   * be crossfade. Otherwise, it's the previous-forward movement.
+   */
+  should_crossfade = view == CC_PANEL_LIST_SEARCH ||
+                     self->previous_view == CC_PANEL_LIST_SEARCH;
+
+  gtk_stack_set_transition_type (GTK_STACK (self),
+                                 should_crossfade ? GTK_STACK_TRANSITION_TYPE_CROSSFADE :
+                                                    GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT);
+
+  visible_child = get_listbox_from_view (self, view);
+
+  gtk_stack_set_visible_child (GTK_STACK (self), visible_child);
+
+  /* For non-search views, make sure the displayed panel matches the
+   * newly selected row
+   */
+  if (self->autoselect_panel && view != CC_PANEL_LIST_SEARCH)
+    cc_panel_list_activate (self);
+
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_VIEW]);
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SEARCH_MODE]);
+}
+
+static void
 update_search (CcPanelList *self)
 {
   /*
@@ -182,12 +220,12 @@ update_search (CcPanelList *self)
       g_utf8_strlen (self->search_query, -1) > 0)
     {
       if (self->view == CC_PANEL_LIST_MAIN)
-        cc_panel_list_set_view (self, CC_PANEL_LIST_SEARCH);
+        switch_to_view (self, CC_PANEL_LIST_SEARCH);
     }
   else
     {
       if (self->view == CC_PANEL_LIST_SEARCH)
-        cc_panel_list_set_view (self, self->previous_view);
+        switch_to_view (self, self->previous_view);
     }
 
   gtk_list_box_invalidate_filter (GTK_LIST_BOX (self->search_listbox));
@@ -529,14 +567,14 @@ row_activated_cb (GtkWidget     *listbox,
   /* Details */
   if (row == self->details_row)
     {
-      cc_panel_list_set_view (self, CC_PANEL_LIST_DETAILS);
+      switch_to_view (self, CC_PANEL_LIST_DETAILS);
       goto out;
     }
 
   /* Devices */
   if (row == self->devices_row)
     {
-      cc_panel_list_set_view (self, CC_PANEL_LIST_DEVICES);
+      switch_to_view (self, CC_PANEL_LIST_DEVICES);
       goto out;
     }
 
@@ -560,7 +598,7 @@ row_activated_cb (GtkWidget     *listbox,
    * Since we're not sure that the activated row is in the
    * current view, set the view here.
    */
-  cc_panel_list_set_view (self, get_view_from_listbox (self, listbox));
+  switch_to_view (self, get_view_from_listbox (self, listbox));
 
   data = g_object_get_data (G_OBJECT (row), "data");
 
@@ -685,7 +723,7 @@ cc_panel_list_set_property (GObject      *object,
       break;
 
     case PROP_VIEW:
-      cc_panel_list_set_view (self, g_value_get_int (value));
+      switch_to_view (self, g_value_get_int (value));
       break;
 
     default:
@@ -883,43 +921,11 @@ cc_panel_list_get_view (CcPanelList *self)
 }
 
 void
-cc_panel_list_set_view (CcPanelList     *self,
-                        CcPanelListView  view)
+cc_panel_list_go_previous (CcPanelList *self)
 {
   g_return_if_fail (CC_IS_PANEL_LIST (self));
 
-  if (self->view != view)
-    {
-      GtkWidget *visible_child;
-      gboolean should_crossfade;
-
-      self->previous_view = self->view;
-      self->view = view;
-
-      /*
-       * When changing to or from the search view, the animation should
-       * be crossfade. Otherwise, it's the previous-forward movement.
-       */
-      should_crossfade = view == CC_PANEL_LIST_SEARCH ||
-                         self->previous_view == CC_PANEL_LIST_SEARCH;
-
-      gtk_stack_set_transition_type (GTK_STACK (self),
-                                     should_crossfade ? GTK_STACK_TRANSITION_TYPE_CROSSFADE :
-                                                        GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT);
-
-      visible_child = get_listbox_from_view (self, view);
-
-      gtk_stack_set_visible_child (GTK_STACK (self), visible_child);
-
-      /* For non-search views, make sure the displayed panel matches the
-       * newly selected row
-       */
-      if (self->autoselect_panel && view != CC_PANEL_LIST_SEARCH)
-        cc_panel_list_activate (self);
-
-      g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_VIEW]);
-      g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SEARCH_MODE]);
-    }
+  switch_to_view (self, self->previous_view);
 }
 
 void
