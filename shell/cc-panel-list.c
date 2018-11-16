@@ -181,8 +181,12 @@ switch_to_view (CcPanelList     *self,
   GtkWidget *visible_child;
   gboolean should_crossfade;
 
+  CC_ENTRY;
+
   if (self->view == view)
-    return;
+    CC_RETURN ();
+
+  CC_TRACE_MSG ("Switching to view: %d", view);
 
   self->previous_view = self->view;
   self->view = view;
@@ -214,6 +218,8 @@ switch_to_view (CcPanelList     *self,
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_VIEW]);
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SEARCH_MODE]);
+
+  CC_EXIT;
 }
 
 static void
@@ -616,6 +622,8 @@ row_activated_cb (GtkWidget     *listbox,
       self->previous_view != CC_PANEL_LIST_SEARCH &&
       gtk_stack_get_child_by_name (GTK_STACK (self), "custom-widget") != NULL)
     {
+      CC_TRACE_MSG ("Switching to panel widget");
+
       switch_to_view (self, CC_PANEL_LIST_WIDGET);
     }
 
@@ -637,6 +645,8 @@ search_row_activated_cb (GtkWidget     *listbox,
   GtkWidget *real_listbox;
   RowData *data;
   GList *children, *l;
+
+  CC_ENTRY;
 
   data = g_object_get_data (G_OBJECT (row), "data");
 
@@ -679,6 +689,8 @@ search_row_activated_cb (GtkWidget     *listbox,
     }
 
   g_list_free (children);
+
+  CC_EXIT;
 }
 
 static void
