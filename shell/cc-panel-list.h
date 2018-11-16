@@ -33,6 +33,7 @@ typedef enum
   CC_PANEL_LIST_MAIN,
   CC_PANEL_LIST_DETAILS,
   CC_PANEL_LIST_DEVICES,
+  CC_PANEL_LIST_WIDGET,
   CC_PANEL_LIST_SEARCH
 } CcPanelListView;
 
@@ -68,6 +69,9 @@ void                 cc_panel_list_set_active_panel               (CcPanelList  
 void                 cc_panel_list_set_panel_visibility          (CcPanelList        *self,
                                                                   const gchar        *id,
                                                                   CcPanelVisibility   visibility);
+
+void                 cc_panel_list_add_sidebar_widget            (CcPanelList        *self,
+                                                                  GtkWidget          *widget);
 
 G_END_DECLS
 

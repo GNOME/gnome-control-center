@@ -107,6 +107,9 @@ get_widget_from_view (CcPanelList     *self,
     case CC_PANEL_LIST_SEARCH:
       return self->search_listbox;
 
+    case CC_PANEL_LIST_WIDGET:
+      return gtk_stack_get_child_by_name (GTK_STACK (self), "custom-widget");
+
     default:
       return NULL;
     }
@@ -202,8 +205,12 @@ switch_to_view (CcPanelList     *self,
   /* For non-search views, make sure the displayed panel matches the
    * newly selected row
    */
-  if (self->autoselect_panel && view != CC_PANEL_LIST_SEARCH)
-    cc_panel_list_activate (self);
+  if (self->autoselect_panel &&
+      view != CC_PANEL_LIST_SEARCH &&
+      self->previous_view != CC_PANEL_LIST_WIDGET)
+    {
+      cc_panel_list_activate (self);
+    }
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_VIEW]);
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SEARCH_MODE]);
@@ -602,6 +609,16 @@ row_activated_cb (GtkWidget     *listbox,
 
   data = g_object_get_data (G_OBJECT (row), "data");
 
+  /* If the activated row is relative to the current panel, and it has
+   * a custom widget, show the custom widget again.
+   */
+  if (g_strcmp0 (data->id, self->current_panel_id) == 0 &&
+      self->previous_view != CC_PANEL_LIST_SEARCH &&
+      gtk_stack_get_child_by_name (GTK_STACK (self), "custom-widget") != NULL)
+    {
+      switch_to_view (self, CC_PANEL_LIST_WIDGET);
+    }
+
   g_signal_emit (self, signals[SHOW_PANEL], 0, data->id);
 
 out:
@@ -866,6 +883,8 @@ cc_panel_list_activate (CcPanelList *self)
   g_return_val_if_fail (CC_IS_PANEL_LIST (self), FALSE);
 
   listbox = get_widget_from_view (self, self->view);
+  if (!GTK_IS_LIST_BOX (listbox))
+    CC_RETURN (FALSE);
 
   /* Select the first visible row */
   do
@@ -923,9 +942,28 @@ cc_panel_list_get_view (CcPanelList *self)
 void
 cc_panel_list_go_previous (CcPanelList *self)
 {
+  CcPanelListView previous_view;
+
   g_return_if_fail (CC_IS_PANEL_LIST (self));
 
-  switch_to_view (self, self->previous_view);
+  previous_view = self->previous_view;
+
+  /* The back button is only visible and clickable outside the main view. If
+   * the previous view is the widget view itself, it means we went from:
+   *
+   *   Main → Details or Devices → Widget
+   *
+   * to
+   *   Main → Details or Devices
+   *
+   * To avoid a loop (Details or Devices → Widget → Details or Devices → ...),
+   * make sure to go back to the main view when the current view is details or
+   * devices.
+   */
+  if (previous_view == CC_PANEL_LIST_WIDGET)
+    previous_view = CC_PANEL_LIST_MAIN;
+
+  switch_to_view (self, previous_view);
 }
 
 void
@@ -1023,7 +1061,8 @@ cc_panel_list_set_active_panel (CcPanelList *self,
    */
   self->autoselect_panel = FALSE;
 
-  g_signal_emit_by_name (data->row, "activate");
+  if (self->view != CC_PANEL_LIST_WIDGET)
+    g_signal_emit_by_name (data->row, "activate");
 
   /* Store the current panel id */
   g_clear_pointer (&self->current_panel_id, g_free);
@@ -1066,4 +1105,24 @@ cc_panel_list_set_panel_visibility (CcPanelList       *self,
 
   gtk_widget_set_visible (data->row, visibility == CC_PANEL_VISIBLE);
   gtk_widget_set_visible (search_data->row, visibility =! CC_PANEL_HIDDEN);
+}
+
+void
+cc_panel_list_add_sidebar_widget (CcPanelList *self,
+                                  GtkWidget   *widget)
+{
+  g_return_if_fail (CC_IS_PANEL_LIST (self));
+
+  if (widget)
+    {
+      gtk_stack_add_named (GTK_STACK (self), widget, "custom-widget");
+      switch_to_view (self, CC_PANEL_LIST_WIDGET);
+    }
+  else
+    {
+      widget = get_widget_from_view (self, CC_PANEL_LIST_WIDGET);
+
+      if (widget)
+        gtk_container_remove (GTK_CONTAINER (self), widget);
+    }
 }
