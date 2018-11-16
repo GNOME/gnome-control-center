@@ -7,6 +7,7 @@ subdir('applications')
 sources = files(
   'gtp-dynamic-panel.c',
   'gtp-header-widget.c',
+  'gtp-sidebar-widget.c',
   'gtp-static-init.c',
   'main.c',
 )
@@ -19,6 +20,7 @@ sources = files(
 resource_data = files(
   'gtp-dynamic-panel.ui',
   'gtp-header-widget.ui',
+  'gtp-sidebar-widget.ui',
   'gtp-static-init.ui',
 )
 

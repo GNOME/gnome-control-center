@@ -31,13 +31,16 @@
 
 #include "gtp-dynamic-panel.h"
 #include "gtp-header-widget.h"
+#include "gtp-sidebar-widget.h"
 #include "gtp-static-init.h"
 
 /* Test panels */
 static CcPanelLoaderVtable test_panels[] = {
-  { "dynamic-panel", gtp_dynamic_panel_get_type, NULL                 },
-  { "header-widget", gtp_header_widget_get_type, NULL                 },
-  { "static-init",   gtp_static_init_get_type,   gtp_static_init_func },
+  { "dynamic-panel",           gtp_dynamic_panel_get_type,  NULL                 },
+  { "header-widget",           gtp_header_widget_get_type,  NULL                 },
+  { "sidebar-widget",          gtp_sidebar_widget_get_type, NULL                 },
+  { "static-init",             gtp_static_init_get_type,    gtp_static_init_func },
+  { "toplevel-sidebar-widget", gtp_sidebar_widget_get_type, NULL                 },
 };
 
 static void
