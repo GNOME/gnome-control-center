@@ -17,7 +17,15 @@ i18n.merge_file(
   install_dir : control_center_desktopdir
 )
 
-sources = files('cc-applications-panel.c')
+sources = files('cc-applications-panel.c',
+                'cc-applications-row.c',
+                'cc-toggle-row.c',
+                'cc-info-row.c',
+                'cc-action-row.c',
+                'utils.c',
+                'globs.c',
+                'search.c'
+)
 
 resource_data = files('cc-applications-panel.ui')
 
@@ -29,14 +37,14 @@ sources += gnome.compile_resources(
         export : true
 )
 
-deps = common_deps
+deps = common_deps + [ dependency('flatpak', version: '>= 1.0.0') ]
 
 cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
 
 panels_libs += static_library(
            cappletname,
               sources : sources,
-  include_directories : top_inc,
+  include_directories : [ top_inc, common_inc ],
          dependencies : deps,
                c_args : cflags
 )
