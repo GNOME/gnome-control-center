@@ -19,6 +19,7 @@
  */
 
 #include "cc-applications-panel.h"
+#include "cc-applications-row.h"
 #include "cc-applications-resources.h"
 
 struct _CcApplicationsPanel
@@ -33,7 +34,7 @@ G_DEFINE_TYPE (CcApplicationsPanel, cc_applications_panel, CC_TYPE_PANEL)
 static void
 cc_applications_panel_finalize (GObject *object)
 {
-  CcApplicationsPanel *self = (CcApplicationsPanel *)object;
+  //CcApplicationsPanel *self = (CcApplicationsPanel *)object;
 
   G_OBJECT_CLASS (cc_applications_panel_parent_class)->finalize (object);
 }
@@ -62,9 +63,46 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
 }
 
 static void
+populate_applications (CcApplicationsPanel *self)
+{
+  GList *infos, *l;
+
+  infos = g_app_info_get_all ();
+
+  for (l = infos; l; l = l->next)
+    {
+      GAppInfo *info = l->data;
+      GtkWidget *row;
+
+      if (!g_app_info_should_show (info))
+        continue;
+
+      row = GTK_WIDGET (cc_applications_row_new (info));
+      gtk_list_box_insert (GTK_LIST_BOX (self->sidebar_listbox), row, -1);
+    }
+
+  g_list_free_full (infos, g_object_unref);
+}
+
+static int
+compare_rows (GtkListBoxRow *row1,
+              GtkListBoxRow *row2,
+              gpointer       data)
+{
+  const char *key1 = cc_applications_row_get_sort_key (CC_APPLICATIONS_ROW (row1));
+  const char *key2 = cc_applications_row_get_sort_key (CC_APPLICATIONS_ROW (row2));
+
+  return strcmp (key1, key2);
+}
+
+static void
 cc_applications_panel_init (CcApplicationsPanel *self)
 {
   g_resources_register (cc_applications_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->sidebar_listbox), compare_rows, NULL, NULL);
+
+  populate_applications (self);
 }
