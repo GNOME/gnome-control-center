@@ -383,11 +383,15 @@ setup_model (CcWindow *shell)
 static void
 update_headerbar_buttons (CcWindow *self)
 {
+  CcPanelListView current_view;
   gboolean is_main_view;
 
   CC_ENTRY;
 
-  is_main_view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list)) == CC_PANEL_LIST_MAIN;
+  current_view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list));
+  is_main_view = current_view == CC_PANEL_LIST_MAIN;
+
+  CC_TRACE_MSG ("Current view: %d", current_view);
 
   gtk_widget_set_visible (self->previous_button, !is_main_view);
   gtk_widget_set_visible (self->search_button, is_main_view);
