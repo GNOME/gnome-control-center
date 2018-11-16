@@ -256,6 +256,58 @@
                           </object>
                         </child>
                         <child>
+                          <object class="GtkListBoxRow" id="mouse_acceleration_enable_row">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="activatable">false</property>
+                            <child>
+                              <object class="GtkGrid" id="mouse_acceleration_enable_grid">
+                              <property name="visible">True</property>
+                              <property name="can_focus">False</property>
+                              <property name="row_spacing">0</property>
+                              <property name="column_spacing">32</property>
+                              <property name="margin_start">20</property>
+                              <property name="margin_end">20</property>
+                              <property name="margin_top">12</property>
+                              <property name="margin_bottom">12</property>
+                              <property name="valign">center</property>
+                                <child>
+                                  <object class="GtkLabel" id="mouse_acceleration_enable_label">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="valign">end</property>
+                                    <property name="label" translatable="yes">Mouse Acceleration</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="mnemonic_widget">mouse_acceleration_enable_switch</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSwitch" id="mouse_acceleration_enable_switch">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="halign">end</property>
+                                    <property name="valign">center</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">1</property>
+                                    <property name="top_attach">0</property>
+                                    <property name="width">1</property>
+                                    <property name="height">2</property>
+                                  </packing>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
                           <object class="GtkListBoxRow" id="mouse_natural_scrolling_row">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>

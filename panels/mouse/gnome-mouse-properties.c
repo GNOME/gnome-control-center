@@ -51,6 +51,7 @@ struct _CcMouseProperties
 	GtkWidget *general_listbox;
 	GtkWidget *mouse_frame;
 	GtkWidget *mouse_listbox;
+	GtkWidget *mouse_acceleration_enable_switch;
 	GtkWidget *mouse_natural_scrolling_switch;
 	GtkWidget *mouse_speed_scale;
 	GtkWidget *primary_button_left;
@@ -215,6 +216,31 @@ touchpad_enabled_set_mapping (const GValue              *value,
         return g_variant_new_string (enabled ? "enabled" : "disabled");
 }
 
+static gboolean
+mouse_acceleration_enabled_get_mapping (GValue    *value,
+                              GVariant  *variant,
+                              gpointer   user_data)
+{
+        gboolean enabled;
+
+        enabled = g_strcmp0 (g_variant_get_string (variant, NULL), "flat") != 0;
+        g_value_set_boolean (value, enabled);
+
+        return TRUE;
+}
+
+static GVariant *
+mouse_acceleration_enabled_set_mapping (const GValue    *value,
+                              const GVariantType        *type,
+                              gpointer                   user_data)
+{
+        gboolean enabled;
+
+        enabled = g_value_get_boolean (value);
+
+        return g_variant_new_string (enabled ? "adaptive" : "flat");
+}
+
 static void
 handle_secondary_button (CcMouseProperties *self,
 			 GtkWidget         *button,
@@ -266,6 +292,13 @@ setup_dialog (CcMouseProperties *self)
 	g_settings_bind (self->mouse_settings, "speed",
 			 gtk_range_get_adjustment (GTK_RANGE (self->mouse_speed_scale)), "value",
 			 G_SETTINGS_BIND_DEFAULT);
+
+	g_settings_bind_with_mapping (self->mouse_settings, "accel-profile",
+			 self->mouse_acceleration_enable_switch, "active",
+			 G_SETTINGS_BIND_DEFAULT,
+			 mouse_acceleration_enabled_get_mapping, 
+			 mouse_acceleration_enabled_set_mapping, 
+			 NULL, NULL);
 
 	gtk_list_box_set_header_func (GTK_LIST_BOX (self->mouse_listbox), cc_list_box_update_header_func, NULL, NULL);
 
@@ -370,6 +403,7 @@ cc_mouse_properties_class_init (CcMousePropertiesClass *klass)
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, general_listbox);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, mouse_frame);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, mouse_listbox);
+	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, mouse_acceleration_enable_switch);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, mouse_natural_scrolling_switch);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, mouse_speed_scale);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, primary_button_left);
