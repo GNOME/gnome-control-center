@@ -380,6 +380,23 @@ setup_model (CcWindow *shell)
   g_signal_connect_object (model, "row-changed", G_CALLBACK (on_row_changed_cb), shell, 0);
 }
 
+static void
+update_headerbar_buttons (CcWindow *self)
+{
+  gboolean is_main_view;
+
+  CC_ENTRY;
+
+  is_main_view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list)) == CC_PANEL_LIST_MAIN;
+
+  gtk_widget_set_visible (self->previous_button, !is_main_view);
+  gtk_widget_set_visible (self->search_button, is_main_view);
+
+  update_list_title (self);
+
+  CC_EXIT;
+}
+
 static gboolean
 set_active_panel_from_id (CcShell      *shell,
                           const gchar  *start_id,
@@ -447,6 +464,8 @@ set_active_panel_from_id (CcShell      *shell,
 
   cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), start_id);
 
+  update_headerbar_buttons (self);
+
   CC_RETURN (TRUE);
 }
 
@@ -502,21 +521,6 @@ show_panel_cb (CcPanelList *panel_list,
 }
 
 static void
-panel_list_view_changed_cb (CcPanelList *panel_list,
-                            GParamSpec  *pspec,
-                            CcWindow    *self)
-{
-  gboolean is_main_view;
-
-  is_main_view = cc_panel_list_get_view (panel_list) == CC_PANEL_LIST_MAIN;
-
-  gtk_widget_set_visible (self->previous_button, !is_main_view);
-  gtk_widget_set_visible (self->search_button, is_main_view);
-
-  update_list_title (self);
-}
-
-static void
 search_entry_activate_cb (GtkEntry *entry,
                           CcWindow *self)
 {
@@ -538,6 +542,8 @@ previous_button_clicked_cb (GtkButton *button,
     gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (shell->search_bar), FALSE);
   else
     cc_panel_list_go_previous (CC_PANEL_LIST (shell->panel_list));
+
+  update_headerbar_buttons (shell);
 }
 
 static void
@@ -807,6 +813,8 @@ cc_window_constructed (GObject *object)
   else
     cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
 
+  update_headerbar_buttons (self);
+
   G_OBJECT_CLASS (cc_window_parent_class)->constructed (object);
 }
 
@@ -881,7 +889,6 @@ cc_window_class_init (CcWindowClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, gdk_window_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_development_warning_dialog_responded_cb);
-  gtk_widget_class_bind_template_callback (widget_class, panel_list_view_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, show_panel_cb);

@@ -63,7 +63,6 @@
                     <property name="search-mode" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="bidirectional" />
                     <property name="search-query" bind-source="search_entry" bind-property="text" bind-flags="default" />
                     <signal name="show-panel" handler="show_panel_cb" object="CcWindow" swapped="no" />
-                    <signal name="notify::view" handler="panel_list_view_changed_cb" object="CcWindow" swapped="no" />
                   </object>
                 </child>
               </object>
