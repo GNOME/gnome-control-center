@@ -161,6 +161,7 @@ activate_panel (CcWindow          *self,
                 CcPanelVisibility  visibility)
 {
   g_autoptr (GTimer) timer = NULL;
+  GtkWidget *sidebar_widget;
   GtkWidget *title_widget;
   gdouble ellapsed_time;
 
@@ -196,6 +197,9 @@ activate_panel (CcWindow          *self,
 
   title_widget = cc_panel_get_title_widget (CC_PANEL (self->current_panel));
   gtk_header_bar_set_custom_title (GTK_HEADER_BAR (self->panel_headerbar), title_widget);
+
+  sidebar_widget = cc_panel_get_sidebar_widget (CC_PANEL (self->current_panel));
+  cc_panel_list_add_sidebar_widget (CC_PANEL_LIST (self->panel_list), sidebar_widget);
 
   /* Finish profiling */
   g_timer_stop (timer);
