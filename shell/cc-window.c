@@ -165,11 +165,13 @@ activate_panel (CcWindow          *self,
   GtkWidget *title_widget;
   gdouble ellapsed_time;
 
+  CC_ENTRY;
+
   if (!id)
-    return FALSE;
+    CC_RETURN (FALSE);
 
   if (visibility == CC_PANEL_HIDDEN)
-    return FALSE;
+    CC_RETURN (FALSE);
 
   /* clear any custom widgets */
   remove_all_custom_widgets (self);
@@ -208,7 +210,7 @@ activate_panel (CcWindow          *self,
 
   g_debug ("Time to open panel '%s': %lfs", name, ellapsed_time);
 
-  return TRUE;
+  CC_RETURN (TRUE);
 }
 
 static void
@@ -266,6 +268,8 @@ update_list_title (CcWindow *self)
   GtkTreeIter iter;
   g_autofree gchar *title = NULL;
 
+  CC_ENTRY;
+
   view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list));
   title = NULL;
 
@@ -298,6 +302,8 @@ update_list_title (CcWindow *self)
 
   if (title)
     gtk_header_bar_set_title (GTK_HEADER_BAR (self->header), title);
+
+  CC_EXIT;
 }
 
 static void
@@ -390,20 +396,22 @@ set_active_panel_from_id (CcShell      *shell,
   gboolean activated;
   gboolean found;
 
+  CC_ENTRY;
+
   self = CC_WINDOW (shell);
 
   /* When loading the same panel again, just set its parameters */
   if (g_strcmp0 (self->current_panel_id, start_id) == 0)
     {
       g_object_set (G_OBJECT (self->current_panel), "parameters", parameters, NULL);
-      return TRUE;
+      CC_RETURN (TRUE);
     }
 
   found = find_iter_for_panel_id (self, start_id, &iter);
   if (!found)
     {
       g_warning ("Could not find settings panel \"%s\"", start_id);
-      return TRUE;
+      CC_RETURN (TRUE);
     }
 
   old_panel = self->current_panel;
@@ -423,7 +431,7 @@ set_active_panel_from_id (CcShell      *shell,
   if (!activated)
     {
       g_debug ("Failed to activate panel");
-      return TRUE;
+      CC_RETURN (TRUE);
     }
 
   if (add_to_history)
@@ -432,12 +440,14 @@ set_active_panel_from_id (CcShell      *shell,
   g_free (self->current_panel_id);
   self->current_panel_id = g_strdup (start_id);
 
+  CC_TRACE_MSG ("Current panel id: %s", start_id);
+
   if (old_panel)
     gtk_container_remove (GTK_CONTAINER (self->stack), old_panel);
 
   cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), start_id);
 
-  return TRUE;
+  CC_RETURN (TRUE);
 }
 
 static void
