@@ -27,6 +27,8 @@ struct _CcApplicationsPanel
   CcPanel     parent;
 
   GtkListBox *sidebar_listbox;
+
+  GAppInfoMonitor *monitor;
 };
 
 G_DEFINE_TYPE (CcApplicationsPanel, cc_applications_panel, CC_TYPE_PANEL)
@@ -34,7 +36,9 @@ G_DEFINE_TYPE (CcApplicationsPanel, cc_applications_panel, CC_TYPE_PANEL)
 static void
 cc_applications_panel_finalize (GObject *object)
 {
-  //CcApplicationsPanel *self = (CcApplicationsPanel *)object;
+  CcApplicationsPanel *self = (CcApplicationsPanel *)object;
+
+  g_object_unref (self->monitor);
 
   G_OBJECT_CLASS (cc_applications_panel_parent_class)->finalize (object);
 }
@@ -63,9 +67,25 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
 }
 
 static void
+container_remove_all (GtkContainer *container)
+{
+  GList *children, *l;
+
+  children = gtk_container_get_children (container);
+  for (l = children; l; l = l->next)
+    {
+      gtk_widget_destroy (GTK_WIDGET (l->data));
+    }
+
+  g_list_free (children);
+}
+
+static void
 populate_applications (CcApplicationsPanel *self)
 {
   GList *infos, *l;
+
+  container_remove_all (GTK_CONTAINER (self->sidebar_listbox));
 
   infos = g_app_info_get_all ();
 
@@ -96,6 +116,13 @@ compare_rows (GtkListBoxRow *row1,
 }
 
 static void
+apps_changed (GAppInfoMonitor *monitor,
+              CcApplicationsPanel *self)
+{
+  populate_applications (self);
+}
+
+static void
 cc_applications_panel_init (CcApplicationsPanel *self)
 {
   g_resources_register (cc_applications_get_resource ());
@@ -105,4 +132,8 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->sidebar_listbox), compare_rows, NULL, NULL);
 
   populate_applications (self);
+
+  self->monitor = g_app_info_monitor_get ();
+
+  g_signal_connect (self->monitor, "changed", G_CALLBACK (apps_changed), self);
 }
