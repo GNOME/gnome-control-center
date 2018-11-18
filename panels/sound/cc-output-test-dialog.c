@@ -20,7 +20,7 @@
 #include <glib/gi18n.h>
 
 #include "cc-output-test-dialog.h"
-#include "cc-sound-new-resources.h"
+#include "cc-sound-resources.h"
 #include "cc-speaker-test-button.h"
 
 struct _CcOutputTestDialog
@@ -64,7 +64,7 @@ cc_output_test_dialog_class_init (CcOutputTestDialogClass *klass)
 
   object_class->dispose = cc_output_test_dialog_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound-new/cc-output-test-dialog.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-output-test-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcOutputTestDialog, front_center_speaker_button);
   gtk_widget_class_bind_template_child (widget_class, CcOutputTestDialog, front_left_speaker_button);
@@ -87,7 +87,7 @@ cc_output_test_dialog_init (CcOutputTestDialog *self)
   GtkSettings *settings;
   g_autofree gchar *theme_name = NULL;
 
-  g_resources_register (cc_sound_new_get_resource ());
+  g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
