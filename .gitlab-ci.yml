@@ -317,8 +317,8 @@ ppc64le:
   services:
     - docker:dind
   only:
-    changes:
-      - '.gitlab-ci/Dockerfile'
+    variables:
+      - $CRON_TASK == "BUILD_CI_IMAGES"
 
   script:
     # Skip the build (if requested)
