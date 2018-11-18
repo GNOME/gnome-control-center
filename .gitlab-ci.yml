@@ -323,7 +323,7 @@ ppc64le:
   script:
     # Skip the build (if requested)
     - |
-      if [[ -z "${CI_COMMIT_MESSAGE##*[skip images]*}" ]]; then
+      if [[ -z "${CI_COMMIT_MESSAGE##*'[skip images]'*}" ]]; then
         echo "== Nothing to do =="
         exit 0
       fi
