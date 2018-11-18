@@ -4,59 +4,75 @@
   <template class="CcInputRow" parent="GtkListBoxRow">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
+    <property name="selectable">False</property>
+    <signal name="drag_data_received" handler="drag_data_received_cb" object="CcInputRow" swapped="yes"/>
     <child>
-      <object class="GtkBox">
+      <object class="GtkEventBox" id="drag_handle">
         <property name="visible">True</property>
-        <property name="border-width">12</property>
-        <property name="spacing">12</property>
+        <signal name="drag_data_get" handler="drag_data_get_cb" object="CcInputRow" swapped="yes"/>
+        <signal name="drag_begin" handler="drag_begin_cb" object="CcInputRow" swapped="yes"/>
+        <signal name="drag_end" handler="drag_end_cb" object="CcInputRow" swapped="yes"/>
         <child>
-          <object class="GtkLabel" id="name_label">
+          <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="xalign">0.0</property>
-            <property name="hexpand">True</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="settings_button">
-            <property name="visible">False</property>
-            <signal name="clicked" handler="settings_button_clicked_cb" object="CcInputRow" swapped="yes"/>
-            <style>
-              <class name="image-button"/>
-            </style>
+            <property name="border-width">12</property>
+            <property name="spacing">12</property>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
-                <property name="icon_name">emblem-system-symbolic</property>
+                <property name="icon_name">open-menu-symbolic</property>
               </object>
             </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="remove_button">
-            <property name="visible">True</property>
-            <signal name="clicked" handler="layout_button_clicked_cb" object="CcInputRow" swapped="yes"/>
-            <style>
-              <class name="image-button"/>
-            </style>
             <child>
-              <object class="GtkImage">
+              <object class="GtkLabel" id="name_label">
                 <property name="visible">True</property>
-                <property name="icon_name">view-layout-symbolic</property>
+                <property name="xalign">0.0</property>
+                <property name="hexpand">True</property>
               </object>
             </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton">
-            <property name="visible">True</property>
-            <signal name="clicked" handler="remove_button_clicked_cb" object="CcInputRow" swapped="yes"/>
-            <style>
-              <class name="image-button"/>
-            </style>
             <child>
-              <object class="GtkImage">
+              <object class="GtkButton" id="settings_button">
+                <property name="visible">False</property>
+                <signal name="clicked" handler="settings_button_clicked_cb" object="CcInputRow" swapped="yes"/>
+                <style>
+                  <class name="image-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="icon_name">emblem-system-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
                 <property name="visible">True</property>
-                <property name="icon_name">edit-delete-symbolic</property>
+                <signal name="clicked" handler="layout_button_clicked_cb" object="CcInputRow" swapped="yes"/>
+                <style>
+                  <class name="image-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="icon_name">view-layout-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="remove_button">
+                <property name="visible">True</property>
+                <signal name="clicked" handler="remove_button_clicked_cb" object="CcInputRow" swapped="yes"/>
+                <style>
+                  <class name="image-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="icon_name">edit-delete-symbolic</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

@@ -34,4 +34,7 @@ CcInputSource   *cc_input_row_get_source    (CcInputRow    *row);
 void             cc_input_row_set_removable (CcInputRow    *row,
                                              gboolean       removable);
 
+void             cc_input_row_set_draggable (CcInputRow    *row,
+                                             gboolean       draggable);
+
 G_END_DECLS
