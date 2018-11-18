@@ -18,27 +18,91 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#include <config.h>
+#include <glib/gi18n.h>
+
+#include <gio/gdesktopappinfo.h>
+
 #include "cc-applications-panel.h"
 #include "cc-applications-row.h"
+#include "cc-toggle-row.h"
+#include "cc-action-row.h"
 #include "cc-applications-resources.h"
+#include "list-box-helper.h"
+#include "utils.h"
+
+#include <flatpak/flatpak.h>
+
+/* Todo
+ * - search
+ * - handler section
+ * - handle cache async
+ *
+ * Missing in flatpak:
+ * - background
+ * - usb devices
+ */
 
 struct _CcApplicationsPanel
 {
   CcPanel     parent;
 
   GtkListBox *sidebar_listbox;
-
+  GtkWidget *header_button;
+  GtkWidget *title_label;
   GAppInfoMonitor *monitor;
+
+  GCancellable *cancellable;
+
+  char *current_app_id;
+
+  GDBusProxy *perm_store;
+  GSettings *notification_settings;
+
+  GtkWidget *permission_section;
+  GtkWidget *permission_list;
+
+  GtkWidget *camera;
+  GtkWidget *location;
+  GtkWidget *microphone;
+  GtkWidget *notification;
+  GtkWidget *sound;
+
+  GtkWidget *static_permissions;
+
+  GtkWidget *device_section;
+  GtkWidget *device_list;
+
+  GtkWidget *handler_section;
+  GtkWidget *handler_list;
+  GtkWidget *cache_section;
+  GtkWidget *cache_list;
+  GtkWidget *cache;
 };
 
 G_DEFINE_TYPE (CcApplicationsPanel, cc_applications_panel, CC_TYPE_PANEL)
 
 static void
+cc_applications_panel_dispose (GObject *object)
+{
+  CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
+
+  g_clear_object (&self->monitor);
+  g_clear_object (&self->perm_store);
+
+  g_cancellable_cancel (self->cancellable);
+
+  G_OBJECT_CLASS (cc_applications_panel_parent_class)->dispose (object);
+}
+
+static void
 cc_applications_panel_finalize (GObject *object)
 {
-  CcApplicationsPanel *self = (CcApplicationsPanel *)object;
+  CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
 
-  g_object_unref (self->monitor);
+  g_clear_object (&self->cancellable);
+
+  g_free (self->current_app_id);
 
   G_OBJECT_CLASS (cc_applications_panel_parent_class)->finalize (object);
 }
@@ -50,34 +114,549 @@ cc_applications_panel_get_sidebar_widget (CcPanel *panel)
   return GTK_WIDGET (self->sidebar_listbox);
 }
 
-static void
-cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
+static GtkWidget *
+cc_applications_panel_get_title_widget (CcPanel *panel)
 {
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-  object_class->finalize = cc_applications_panel_finalize;
-
-  panel_class->get_sidebar_widget = cc_applications_panel_get_sidebar_widget;
-
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-applications-panel.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_listbox);
+  CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (panel);
+  return self->title_label;
 }
 
 static void
-container_remove_all (GtkContainer *container)
+cc_applications_panel_constructed (GObject *object)
 {
-  GList *children, *l;
+  CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
+  CcShell *shell;
 
-  children = gtk_container_get_children (container);
-  for (l = children; l; l = l->next)
+  G_OBJECT_CLASS (cc_applications_panel_parent_class)->constructed (object);
+
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  cc_shell_embed_widget_in_header (shell, self->header_button);
+}
+
+static char **
+get_flatpak_permissions (CcApplicationsPanel *self,
+                         const char *table,
+                         const char *id,
+                         const char *app_id)
+{
+  g_autoptr(GVariant) ret = NULL;
+  g_autoptr(GVariantIter) iter = NULL;
+  char *key;
+  GVariant *val;
+  char **permissions = NULL;
+
+  ret = g_dbus_proxy_call_sync (self->perm_store,
+                                "Lookup",
+                                g_variant_new ("(ss)", table, id),
+                                0, G_MAXINT, NULL, NULL);
+  if (ret == NULL)
+    return NULL;
+
+  g_variant_get (ret, "(a{sas}v)", &iter, NULL);
+
+  while (g_variant_iter_loop (iter, "{s@as}", &key, &val))
     {
-      gtk_widget_destroy (GTK_WIDGET (l->data));
+      if (strcmp (key, app_id) == 0)
+        {
+          permissions = g_variant_dup_strv (val, NULL); 
+          break;
+        }
     }
 
-  g_list_free (children);
+  return permissions;
+}
+
+static void
+set_flatpak_permissions (CcApplicationsPanel *self,
+                         const char *table,
+                         const char *id,
+                         const char *app_id,
+                         const char * const *permissions)
+{
+  g_dbus_proxy_call_sync (self->perm_store,
+                          "SetPermission",
+                          g_variant_new ("(sbss^as)", table, TRUE, id, app_id, permissions),
+                          0, G_MAXINT, NULL, NULL);
+}
+
+static gboolean
+app_info_is_flatpak (GAppInfo *info)
+{
+  if (G_IS_DESKTOP_APP_INFO (info))
+    {
+      g_autofree char *marker = NULL;
+      marker = g_desktop_app_info_get_string (G_DESKTOP_APP_INFO (info), "X-Flatpak");
+      return marker != NULL;
+    }
+
+  return FALSE;
+}
+
+static gboolean
+get_notification_allowed (CcApplicationsPanel *self,
+                          const char *app_id)
+{
+  if (self->notification_settings)
+    {
+      return g_settings_get_boolean (self->notification_settings, "enable"); 
+    }
+  else
+    {
+      g_auto(GStrv) perms = get_flatpak_permissions (self,
+                                                     "notifications",
+                                                     "notification",
+                                                     app_id);
+      return perms == NULL || !g_strv_contains ((const char * const*)perms, "no");
+    }
+}
+
+static void
+notification_cb (CcToggleRow *row, CcApplicationsPanel *self)
+{
+  gboolean allowed = cc_toggle_row_get_allowed (row);
+
+  if (self->current_app_id == NULL)
+    return;
+
+  if (self->notification_settings)
+    {
+      g_settings_set_boolean (self->notification_settings, "enable", allowed); 
+    }
+  else
+    {
+      const char *perms[2] = { NULL, NULL };
+
+      perms[0] = allowed ? "yes" : "no";
+      set_flatpak_permissions (self, "notifications", "notification", self->current_app_id, perms);
+    }
+}
+
+static char *
+munge_app_id (const char *app_id)
+{
+  int i;
+  char *id = g_strdup (app_id);
+
+  g_strcanon (id,
+              "0123456789"
+              "abcdefghijklmnopqrstuvwxyz"
+              "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+              "-",
+              '-');
+  for (i = 0; id[i] != '\0'; i++)
+    id[i] = g_ascii_tolower (id[i]);
+
+  return id;
+}
+
+#define MASTER_SCHEMA "org.gnome.desktop.notifications"
+#define APP_SCHEMA MASTER_SCHEMA ".application"
+#define APP_PREFIX "/org/gnome/desktop/notifications/application/"
+
+static GSettings *
+get_notification_settings (const char *app_id)
+{
+  g_autofree char *munged_app_id = munge_app_id (app_id);
+  g_autofree char *path = g_strconcat (APP_PREFIX, munged_app_id, "/", NULL);
+  return g_settings_new_with_path (APP_SCHEMA, path);
+}
+
+static gboolean
+get_device_allowed (CcApplicationsPanel *self,
+                    const char *device,
+                    const char *app_id)
+{
+  g_auto(GStrv) perms = NULL;
+
+  perms = get_flatpak_permissions (self, "devices", device, app_id);
+
+  return perms == NULL || !g_strv_contains ((const char * const*)perms, "no");
+}
+
+static void
+set_device_allowed (CcApplicationsPanel *self,
+                    const char *device,
+                    gboolean allowed)
+{
+  const char *perms[2];
+
+  if (self->current_app_id == NULL)
+    return;
+
+  perms[0] = allowed ? "yes" : "no";
+  perms[1] = NULL;
+
+  set_flatpak_permissions (self, "devices", device, self->current_app_id, perms);
+}
+
+static void
+microphone_cb (CcToggleRow *row, CcApplicationsPanel *self)
+{
+  set_device_allowed (self, "microphone", cc_toggle_row_get_allowed (row));
+}
+
+static void
+sound_cb (CcToggleRow *row, CcApplicationsPanel *self)
+{
+  set_device_allowed (self, "speakers", cc_toggle_row_get_allowed (row));
+}
+
+static void
+camera_cb (CcToggleRow *row, CcApplicationsPanel *self)
+{
+  set_device_allowed (self, "camera", cc_toggle_row_get_allowed (row));
+}
+
+static gboolean
+get_location_allowed (CcApplicationsPanel *self,
+                      const char *app_id)
+{
+  g_auto(GStrv) perms = NULL;
+
+  perms = get_flatpak_permissions (self, "location", "location", app_id);
+
+  return perms == NULL || !g_str_equal (perms[0], "NONE");
+}
+
+static void
+set_location_allowed (CcApplicationsPanel *self,
+                      gboolean allowed)
+{
+  const char *perms[3];
+  g_autofree char *time = NULL;
+
+  if (self->current_app_id == NULL)
+    return;
+
+  // FIXME allow setting accuracy
+  perms[0] = allowed ? "EXACT" : "NONE";
+  perms[1] = "0";
+  perms[2] = NULL;
+
+  set_flatpak_permissions (self, "location", "location", self->current_app_id, perms);
+}
+
+static void
+location_cb (CcToggleRow *row, CcApplicationsPanel *self)
+{
+  set_location_allowed (self, cc_toggle_row_get_allowed (row));
+}
+
+static GFile *
+get_cache_dir (const char *app_id)
+{
+  g_autofree char *path = g_build_filename (g_get_home_dir (), ".var", "app", app_id, NULL);
+  g_autoptr(GFile) appdir = g_file_new_for_path (path);
+  return g_file_get_child (appdir, "cache");
+}
+
+static guint64
+calculate_cache_size (const char *app_id)
+{
+  g_autoptr(GFile) cachedir = get_cache_dir (app_id);
+  return file_size_recursively (cachedir);
+}
+
+static void
+update_cache_row (CcActionRow *row,
+                  const char *app_id)
+{
+  guint64 size;
+  g_autofree char *formatted_size = NULL;
+  g_autofree char *name = NULL;
+
+  size = calculate_cache_size (app_id);
+  formatted_size = g_format_size (size);
+  name = g_strdup_printf (_("Cache size: %s"), formatted_size); 
+  cc_action_row_set_name (row, name);
+  cc_action_row_set_action (row, _("Clear…"), size > 0);
+}
+
+static void
+clear_cache_cb (CcActionRow *row, CcApplicationsPanel *self)
+{
+  g_autoptr(GFile) cachedir = NULL;
+
+  if (self->current_app_id == NULL)
+    return;
+
+  cachedir = get_cache_dir (self->current_app_id);
+  file_remove_recursively (cachedir);
+  update_cache_row (CC_ACTION_ROW (self->cache), self->current_app_id);
+}
+
+static char *
+get_app_id (GAppInfo *info)
+{
+  char *app_id = g_strdup (g_app_info_get_id (info));
+
+  if (g_str_has_suffix (app_id, ".desktop"))
+    app_id[strlen (app_id) - strlen (".desktop")] = '\0';
+
+  return app_id;
+}
+
+static FlatpakInstalledRef *
+find_flatpak_ref (const char *app_id)
+{
+  g_autoptr(FlatpakInstallation) inst = NULL;
+  g_autoptr(GPtrArray) array = NULL;
+  FlatpakInstalledRef *ref;
+  int i;
+
+  inst = flatpak_installation_new_user (NULL, NULL);
+  ref = flatpak_installation_get_current_installed_app (inst, app_id, NULL, NULL);
+  if (ref)
+    return ref;
+
+  array = flatpak_get_system_installations (NULL, NULL);
+  for (i = 0; i < array->len; i++)
+    {
+      FlatpakInstallation *si = g_ptr_array_index (array, i);
+      ref = flatpak_installation_get_current_installed_app (si, app_id, NULL, NULL);
+      if (ref)
+        return ref;
+    }
+
+  return NULL;
+}
+
+static char *
+get_static_permissions (const char *app_id)
+{
+  g_autoptr(FlatpakInstalledRef) ref = NULL;
+  g_autoptr(GBytes) bytes = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GKeyFile) keyfile = NULL;
+  char **strv;
+  char *str;
+  GString *s;
+  int len;
+  
+  s = g_string_new ("");
+  g_string_append_printf (s, "<b>%s</b> ", _("Built-in permissions:"));
+
+  ref = find_flatpak_ref (app_id);
+  bytes = flatpak_installed_ref_load_metadata (ref, NULL, NULL);
+  keyfile = g_key_file_new ();
+  if (!g_key_file_load_from_data (keyfile,
+                                  g_bytes_get_data (bytes, NULL),
+                                  g_bytes_get_size (bytes),
+                                  0, &error))
+    {
+      g_warning ("%s", error->message);
+      g_string_append (s, _("Unknown."));
+
+      return g_string_free (s, FALSE);
+    }
+
+  len = s->len;
+ 
+  strv = g_key_file_get_string_list (keyfile, "Context", "sockets", NULL, NULL);
+  if (strv && g_strv_contains ((const char * const*)strv, "system-bus"))
+    {
+      if (s->len > len) g_string_append (s, ", ");
+      g_string_append (s, _("system bus"));
+    }
+  if (strv && g_strv_contains ((const char * const*)strv, "x11"))
+    {
+      if (s->len > len) g_string_append (s, ", ");
+      g_string_append (s, "X11");
+    }
+  g_strfreev (strv);
+
+  strv = g_key_file_get_string_list (keyfile, "Context", "devices", NULL, NULL);
+  if (strv && g_strv_contains ((const char * const*)strv, "all"))
+    {
+      if (s->len > len) g_string_append (s, ", ");
+      g_string_append (s, "/dev");
+    }
+  g_strfreev (strv);
+
+  strv = g_key_file_get_string_list (keyfile, "Context", "shared", NULL, NULL);
+  if (strv && g_strv_contains ((const char * const*)strv, "network"))
+    {
+      if (s->len > len) g_string_append (s, ", ");
+      g_string_append (s, _("network"));
+    }
+  g_strfreev (strv);
+
+  strv = g_key_file_get_string_list (keyfile, "Context", "filesystems", NULL, NULL);
+  if (strv && g_strv_contains ((const char * const *)strv, "home"))
+    {
+      if (s->len > len) g_string_append (s, ", ");
+      g_string_append (s, _("home directory"));
+    }
+  if (strv && g_strv_contains ((const char * const *)strv, "host"))
+    {
+      if (s->len > len) g_string_append (s, ", ");
+      g_string_append (s, _("host filesystem"));
+    }
+  g_strfreev (strv);
+
+  str = g_key_file_get_string (keyfile, "Session Bus Policy", "ca.desrt.dconf", NULL);
+  if (str && g_str_equal (str, "talk"))
+    {
+      if (s->len > len) g_string_append (s, ", ");
+      g_string_append (s, _("settings"));
+    }
+  g_free (str);
+
+  g_string_append (s, ". ");
+  g_string_append (s, _("These are set by the application and cannot be altered."));
+
+  return g_string_free (s, FALSE);
+}
+
+static void
+update_permission_section (CcApplicationsPanel *self,
+                           GAppInfo *info)
+{
+  g_autofree char *app_id = get_app_id (info);
+
+  if (app_info_is_flatpak (info))
+    {
+      g_autofree char *permissions = NULL;
+
+      g_clear_object (&self->notification_settings);
+
+      gtk_widget_show (self->camera);
+      gtk_widget_show (self->location);
+      gtk_widget_show (self->microphone);
+      gtk_widget_show (self->notification);
+      gtk_widget_show (self->sound);
+
+      permissions = get_static_permissions (app_id);
+      gtk_label_set_markup (GTK_LABEL (self->static_permissions), permissions);
+
+      cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->notification), get_notification_allowed (self, app_id));
+
+    }
+  else
+    {
+      g_set_object (&self->notification_settings, get_notification_settings (app_id));
+
+      gtk_widget_hide (self->camera);
+      gtk_widget_hide (self->location);
+      gtk_widget_hide (self->microphone);
+      gtk_widget_show (self->notification);
+      gtk_widget_hide (self->sound);
+      gtk_label_set_label (GTK_LABEL (self->static_permissions),
+                           _("This application is not sandboxed and permissions cannot be fully enforced."));
+    }
+
+  cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->camera), get_device_allowed (self, "camera", app_id));
+  cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->location), get_location_allowed (self, app_id));
+  cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->microphone), get_device_allowed (self, "microphone", app_id));
+  cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->notification), get_notification_allowed (self, app_id));
+  cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->sound), get_device_allowed (self, "speakers", app_id));
+}
+
+static void
+update_device_section (CcApplicationsPanel *self,
+                       GAppInfo *info)
+{
+  // No usb portal yet
+  gtk_widget_hide (self->device_section);
+}
+
+static void
+add_handler_row (CcApplicationsPanel *self,
+                 GAppInfo *info,
+                 const char *type)
+{
+  g_autofree char *desc = NULL;
+  CcActionRow *row;
+
+  desc = g_content_type_get_description (type);
+  row = cc_action_row_new ();
+  cc_action_row_set_name (row, desc);
+  cc_action_row_set_action (row, _("Remove"), FALSE);
+  gtk_list_box_insert (GTK_LIST_BOX (self->handler_list), GTK_WIDGET (row), -1);
+}
+
+static void
+update_handler_section (CcApplicationsPanel *self,
+                        GAppInfo *info)
+{
+  const char **types;
+  int i;
+  g_autoptr(GHashTable) hash = NULL;
+
+  container_remove_all (GTK_CONTAINER (self->handler_list));
+
+  types = g_app_info_get_supported_types (info);
+  if (types == NULL || types[0] == NULL)
+    {
+      gtk_widget_hide (self->handler_section);
+      return;
+    }
+
+  gtk_widget_show (self->handler_section);
+
+  hash = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_free);
+
+  for (i = 0; types[i]; i++)
+    {
+      char *ctype = g_content_type_from_mime_type (types[i]);
+      if (g_hash_table_contains (hash, ctype))
+        {
+          g_free (ctype);
+          continue;
+        }
+      g_hash_table_add (hash, ctype);
+      add_handler_row (self, info, ctype);
+    }
+}
+
+static void
+update_cache_section (CcApplicationsPanel *self,
+                      GAppInfo *info)
+{
+  if (app_info_is_flatpak (info))
+    {
+      g_autofree char *app_id = get_app_id (info);
+      gtk_widget_show (self->cache_section);
+      update_cache_row (CC_ACTION_ROW (self->cache), app_id);
+    }
+  else
+    {
+      gtk_widget_hide (self->cache_section);
+    }
+}
+
+static void
+update_panel (CcApplicationsPanel *self)
+{
+  GtkListBoxRow *row = gtk_list_box_get_selected_row (self->sidebar_listbox);
+  GAppInfo *info;
+
+  if (self->perm_store == NULL)
+    {
+      g_print ("no perm store proxy yet, come back later\n");
+      return;
+    }
+
+  if (row == NULL)
+    {
+      g_print ("nothing selected\n");
+      gtk_label_set_label (GTK_LABEL (self->title_label), _("Applications"));
+      // FIXME handle no-app case
+      return;
+    }
+
+  g_clear_pointer (&self->current_app_id, g_free);
+
+  info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (row));
+
+  gtk_label_set_label (GTK_LABEL (self->title_label), g_app_info_get_display_name (info));
+
+  update_permission_section (self, info);
+  update_device_section (self, info);
+  update_handler_section (self, info);
+  update_cache_section (self, info);
+
+  self->current_app_id = get_app_id (info);
 }
 
 static void
@@ -123,17 +702,137 @@ apps_changed (GAppInfoMonitor *monitor,
 }
 
 static void
+row_selected_cb (GtkListBox *list,
+                 GtkListBoxRow *row,
+                 CcApplicationsPanel *self)
+{
+  update_panel (self);
+}
+
+static void
+open_software_cb (GtkButton *button,
+                  CcApplicationsPanel *self)
+{
+  const char *argv[] = { "gnome-software", "--details", "appid", NULL };
+
+  if (self->current_app_id == NULL)
+    return;
+
+  argv[2] = self->current_app_id;
+
+  g_spawn_async (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
+}
+
+static void
+on_perm_store_ready (GObject *source_object,
+                     GAsyncResult *res,
+                     gpointer data)
+{
+  CcApplicationsPanel *self = data;
+  GDBusProxy *proxy;
+  g_autoptr(GError) error = NULL;
+
+  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (proxy == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+          g_warning ("Failed to connect to flatpak permission store: %s",
+                     error->message);
+      return;
+    }
+
+  self->perm_store = proxy;
+
+  update_panel (self);
+}
+
+static void
+cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
+{
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->dispose = cc_applications_panel_dispose;
+  object_class->finalize = cc_applications_panel_finalize;
+  object_class->constructed = cc_applications_panel_constructed;
+
+  panel_class->get_sidebar_widget = cc_applications_panel_get_sidebar_widget;
+  panel_class->get_title_widget = cc_applications_panel_get_title_widget;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-applications-panel.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, title_label);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, header_button);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_section);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_list);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, camera);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, location);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, microphone);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, notification);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sound);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, static_permissions);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, device_section);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, device_list);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_section);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_list);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, cache_section);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, cache_list);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, cache);
+
+  gtk_widget_class_bind_template_callback (widget_class, camera_cb);
+  gtk_widget_class_bind_template_callback (widget_class, location_cb);
+  gtk_widget_class_bind_template_callback (widget_class, microphone_cb);
+  gtk_widget_class_bind_template_callback (widget_class, notification_cb);
+  gtk_widget_class_bind_template_callback (widget_class, sound_cb);
+  gtk_widget_class_bind_template_callback (widget_class, clear_cache_cb);
+}
+
+static void
 cc_applications_panel_init (CcApplicationsPanel *self)
 {
+  g_autoptr(GtkStyleProvider) provider = NULL;
+
   g_resources_register (cc_applications_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
+  gtk_css_provider_load_from_resource (GTK_CSS_PROVIDER (provider),
+                                       "/org/gnome/control-center/applications/cc-applications-panel.css");
+
+  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                             provider,
+                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->sidebar_listbox), compare_rows, NULL, NULL);
+
+  g_signal_connect (self->sidebar_listbox, "row-selected", G_CALLBACK (row_selected_cb), self);
+
+  g_signal_connect (self->header_button, "clicked", G_CALLBACK (open_software_cb), self);
 
   populate_applications (self);
 
   self->monitor = g_app_info_monitor_get ();
 
   g_signal_connect (self->monitor, "changed", G_CALLBACK (apps_changed), self);
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->permission_list),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->handler_list),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.freedesktop.impl.portal.PermissionStore",
+                            "/org/freedesktop/impl/portal/PermissionStore",
+                            "org.freedesktop.impl.portal.PermissionStore",
+                            self->cancellable,
+                            on_perm_store_ready,
+                            self);
 }
