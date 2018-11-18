@@ -16,18 +16,24 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "cc-sound-new-resources.h"
-#include "cc-alert-chooser.h"
+#include "cc-sound-resources.h"
+#include "cc-fade-slider.h"
+#include "gvc-channel-map-private.h"
 
-struct _CcAlertChooser
+struct _CcFadeSlider
 {
-  GtkBox parent_instance;
+  GtkBox           parent_instance;
+
+  GtkAdjustment   *adjustment;
+
+  GvcChannelMap   *channel_map;
+  guint            volume_changed_handler;
 };
 
-G_DEFINE_TYPE (CcAlertChooser, cc_fade_slider, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcFadeSlider, cc_fade_slider, GTK_TYPE_BOX)
 
 static void
-changed_cb (CcAlertChooser *self)
+changed_cb (CcFadeSlider *self)
 {
   gdouble               value;
   const pa_channel_map *pa_map;
@@ -44,7 +50,7 @@ changed_cb (CcAlertChooser *self)
 }
 
 static void
-volume_changed_cb (CcAlertChooser *self)
+volume_changed_cb (CcFadeSlider *self)
 {
   const gdouble *volumes;
 
@@ -57,7 +63,7 @@ volume_changed_cb (CcAlertChooser *self)
 static void
 cc_fade_slider_dispose (GObject *object)
 {
-  CcAlertChooser *self = CC_ALERT_CHOOSER (object);
+  CcFadeSlider *self = CC_FADE_SLIDER (object);
 
   g_clear_object (&self->channel_map);
 
@@ -65,33 +71,33 @@ cc_fade_slider_dispose (GObject *object)
 }
 
 void
-cc_fade_slider_class_init (CcAlertChooserClass *klass)
+cc_fade_slider_class_init (CcFadeSliderClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->dispose = cc_fade_slider_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound-new/cc-alert-chooser.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-fade-slider.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, adjustment);
+  gtk_widget_class_bind_template_child (widget_class, CcFadeSlider, adjustment);
 
   gtk_widget_class_bind_template_callback (widget_class, changed_cb);
 }
 
 void
-cc_fade_slider_init (CcAlertChooser *self)
+cc_fade_slider_init (CcFadeSlider *self)
 {
-  g_resources_register (cc_sound_new_get_resource ());
+  g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 void
-cc_fade_slider_set_channel_map (CcAlertChooser  *self,
+cc_fade_slider_set_channel_map (CcFadeSlider  *self,
                                 GvcChannelMap *channel_map)
 {
-  g_return_if_fail (CC_IS_ALERT_CHOOSER (self));
+  g_return_if_fail (CC_IS_FADE_SLIDER (self));
 
   if (self->channel_map != NULL) {
     g_signal_handler_disconnect (self->channel_map, self->volume_changed_handler);
