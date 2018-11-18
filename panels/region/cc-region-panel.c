@@ -798,8 +798,6 @@ add_input_row (CcRegionPanel *self, CcInputSource *source)
         g_signal_connect_object (row, "move-row", G_CALLBACK (row_moved_cb), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (row, "remove-row", G_CALLBACK (row_removed_cb), self, G_CONNECT_SWAPPED);
         gtk_list_box_insert (GTK_LIST_BOX (self->input_list), GTK_WIDGET (row), gtk_list_box_row_get_index (self->add_input_row));
-
-        cc_list_box_adjust_scrolling (self->input_list);
 }
 
 static void
@@ -1198,8 +1196,6 @@ setup_input_section (CcRegionPanel *self)
         }
         maybe_start_ibus ();
 #endif
-
-        cc_list_box_setup_scrolling (self->input_list, 5);
 
         gtk_list_box_set_header_func (self->input_list,
                                       cc_list_box_update_header_func,
