@@ -72,8 +72,6 @@ struct _CcRegionPanel {
         GtkListBox      *language_list;
         GtkListBoxRow   *language_row;
         GtkFrame        *language_section_frame;
-        GtkButton       *move_down_input_button;
-        GtkButton       *move_up_input_button;
         GtkLabel        *next_source;
         GtkLabel        *next_source_label;
         GtkListBoxRow   *no_inputs_row;
@@ -114,24 +112,26 @@ CC_PANEL_REGISTER (CcRegionPanel, cc_region_panel)
 typedef struct
 {
         CcRegionPanel *panel;
-        CcInputRow    *row;
-        gint           offset;
+        CcInputRow    *source;
+        CcInputRow    *dest;
 } RowData;
 
 static RowData *
-row_data_new (CcRegionPanel *panel, CcInputRow *row, gint offset)
+row_data_new (CcRegionPanel *panel, CcInputRow *source, CcInputRow *dest)
 {
         RowData *data = g_malloc0 (sizeof (RowData));
         data->panel = panel;
-        data->row = g_object_ref (row);
-        data->offset = offset;
+        data->source = g_object_ref (source);
+        if (dest != NULL)
+                data->dest = g_object_ref (dest);
         return data;
 }
 
 static void
 row_data_free (RowData *data)
 {
-        g_object_unref (data->row);
+        g_clear_object (&data->source);
+        g_clear_object (&data->dest);
         g_free (data);
 }
 
@@ -764,6 +764,16 @@ row_layout_cb (CcRegionPanel *self,
         g_spawn_command_line_async (commandline, NULL);
 }
 
+static void move_input (CcRegionPanel *self, CcInputRow *source, CcInputRow *dest);
+
+static void
+row_moved_cb (CcRegionPanel *self,
+              CcInputRow    *dest_row,
+              CcInputRow    *row)
+{
+        move_input (self, row, dest_row);
+}
+
 static void remove_input (CcRegionPanel *self, CcInputRow *row);
 
 static void
@@ -792,6 +802,7 @@ update_input_rows (CcRegionPanel *self)
                 row = CC_INPUT_ROW (l->data);
 
                 cc_input_row_set_removable (row, n_input_rows > 1);
+                cc_input_row_set_draggable (row, n_input_rows > 1);
         }
 }
 
@@ -807,6 +818,7 @@ add_input_row (CcRegionPanel *self, CcInputSource *source)
         gtk_size_group_add_widget (self->input_size_group, GTK_WIDGET (row));
         g_signal_connect_object (row, "show-settings", G_CALLBACK (row_settings_cb), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (row, "show-layout", G_CALLBACK (row_layout_cb), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (row, "move-row", G_CALLBACK (row_moved_cb), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (row, "remove-row", G_CALLBACK (row_removed_cb), self, G_CONNECT_SWAPPED);
         gtk_list_box_insert (GTK_LIST_BOX (self->input_list), GTK_WIDGET (row), gtk_list_box_row_get_index (self->add_input_row));
         update_input_rows (self);
@@ -914,33 +926,6 @@ input_sources_changed (CcRegionPanel *self,
 }
 
 static void
-update_buttons (CcRegionPanel *self)
-{
-        CcInputRow *selected;
-        g_autoptr(GList) children = NULL;
-        guint n_rows;
-
-        children = gtk_container_get_children (GTK_CONTAINER (self->input_list));
-        n_rows = g_list_length (children);
-
-        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (self->input_list));
-        if (selected == NULL) {
-                gtk_widget_set_sensitive (GTK_WIDGET (self->move_up_input_button), FALSE);
-                gtk_widget_set_sensitive (GTK_WIDGET (self->move_down_input_button), FALSE);
-        } else {
-                gint index;
-
-                index = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (selected));
-
-                gtk_widget_set_sensitive (GTK_WIDGET (self->move_up_input_button), index > 1);
-                gtk_widget_set_sensitive (GTK_WIDGET (self->move_down_input_button), index < n_rows - 1);
-        }
-
-        gtk_widget_set_visible (GTK_WIDGET (self->options_button),
-                                n_rows > 1 && !self->login);
-}
-
-static void
 set_input_settings (CcRegionPanel *self)
 {
         GVariantBuilder builder;
@@ -1006,7 +991,6 @@ show_input_chooser (CcRegionPanel *self)
                 source = cc_input_chooser_get_source (chooser);
                 if (source != NULL && get_row_by_source (self, source) == NULL) {
                         add_input_row (self, source);
-                        update_buttons (self);
                         update_input (self);
                 }
         }
@@ -1072,7 +1056,6 @@ do_remove_input (CcRegionPanel *self, CcInputRow *row)
 
         cc_list_box_adjust_scrolling (self->input_list);
 
-        update_buttons (self);
         update_input (self);
         update_input_rows (self);
 }
@@ -1082,7 +1065,7 @@ remove_input_permission_cb (GObject *source, GAsyncResult *res, gpointer user_da
 {
         RowData *data = user_data;
         if (permission_acquired (G_PERMISSION (source), res, "remove input"))
-                do_remove_input (data->panel, data->row);
+                do_remove_input (data->panel, data->source);
 }
 
 static void
@@ -1096,31 +1079,24 @@ remove_input (CcRegionPanel *self, CcInputRow *row)
                 g_permission_acquire_async (self->permission,
                                             self->cancellable,
                                             remove_input_permission_cb,
-                                            row_data_new (self, row, -1));
+                                            row_data_new (self, row, NULL));
         }
 }
 
 static void
-do_move_input (CcRegionPanel *self,
-               CcInputRow    *row,
-               gint           offset)
+do_move_input (CcRegionPanel *self, CcInputRow *source, CcInputRow *dest)
 {
-        gint idx;
+        gint dest_index;
 
-        idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (row)) + offset;
+        dest_index = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (dest));
 
-        gtk_list_box_unselect_row (self->input_list, GTK_LIST_BOX_ROW (row));
-
-        g_object_ref (row);
-        gtk_container_remove (GTK_CONTAINER (self->input_list), GTK_WIDGET (row));
-        gtk_list_box_insert (self->input_list, GTK_WIDGET (row), idx);
-        g_object_unref (row);
-
-        gtk_list_box_select_row (self->input_list, GTK_LIST_BOX_ROW (row));
+        g_object_ref (source);
+        gtk_container_remove (GTK_CONTAINER (self->input_list), GTK_WIDGET (source));
+        gtk_list_box_insert (self->input_list, GTK_WIDGET (source), dest_index);
+        g_object_unref (source);
 
         cc_list_box_adjust_scrolling (self->input_list);
 
-        update_buttons (self);
         update_input (self);
 }
 
@@ -1129,23 +1105,23 @@ move_input_permission_cb (GObject *source, GAsyncResult *res, gpointer user_data
 {
         RowData *data = user_data;
         if (permission_acquired (G_PERMISSION (source), res, "move input"))
-                do_move_input (data->panel, data->row, data->offset);
+                do_move_input (data->panel, data->source, data->dest);
 }
 
 static void
 move_input (CcRegionPanel *self,
-            CcInputRow    *row,
-            gint           offset)
+            CcInputRow    *source,
+            CcInputRow    *dest)
 {
         if (!self->login) {
-                do_move_input (self, row, offset);
+                do_move_input (self, source, dest);
         } else if (g_permission_get_allowed (self->permission)) {
-                do_move_input (self, row, offset);
+                do_move_input (self, source, dest);
         } else if (g_permission_get_can_acquire (self->permission)) {
                 g_permission_acquire_async (self->permission,
                                             self->cancellable,
                                             move_input_permission_cb,
-                                            row_data_new (self, row, offset));
+                                            row_data_new (self, source, dest));
         }
 }
 
@@ -1155,30 +1131,6 @@ input_row_activated_cb (CcRegionPanel *self, GtkListBoxRow *row)
         if (row == self->add_input_row) {
                 add_input (self);
         }
-}
-
-static void
-move_selected_input_up (CcRegionPanel *self)
-{
-        GtkListBoxRow *selected;
-
-        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list));
-        if (selected == NULL)
-                return;
-
-        move_input (self, CC_INPUT_ROW (selected), -1);
-}
-
-static void
-move_selected_input_down (CcRegionPanel *self)
-{
-        GtkListBoxRow *selected;
-
-        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list));
-        if (selected == NULL)
-                return;
-
-        move_input (self, CC_INPUT_ROW (selected), 1);
 }
 
 static void
@@ -1274,19 +1226,14 @@ setup_input_section (CcRegionPanel *self)
 
         cc_list_box_setup_scrolling (self->input_list, 5);
 
-        gtk_list_box_set_selection_mode (self->input_list,
-                                         GTK_SELECTION_SINGLE);
         gtk_list_box_set_header_func (self->input_list,
                                       cc_list_box_update_header_func,
                                       NULL, NULL);
-        g_signal_connect_object (self->input_list, "row-selected",
-                                 G_CALLBACK (update_buttons), self, G_CONNECT_SWAPPED);
 
         g_signal_connect_object (self->input_settings, "changed::" KEY_INPUT_SOURCES,
                                  G_CALLBACK (input_sources_changed), self, G_CONNECT_SWAPPED);
 
         add_input_sources_from_settings (self);
-        update_buttons (self);
 
         g_object_bind_property (self->previous_source, "visible",
                                 self->previous_source_label, "visible",
@@ -1514,7 +1461,6 @@ login_changed (CcRegionPanel *self)
                 add_input_sources_from_settings (self);
 
         update_language_label (self);
-        update_buttons (self);
 }
 
 static void
@@ -1623,8 +1569,6 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_list);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_section_frame);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, move_down_input_button);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, move_up_input_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, next_source);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, next_source_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, no_inputs_row);
@@ -1638,8 +1582,6 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
 
         gtk_widget_class_bind_template_callback (widget_class, input_row_activated_cb);
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
-        gtk_widget_class_bind_template_callback (widget_class, move_selected_input_up);
-        gtk_widget_class_bind_template_callback (widget_class, move_selected_input_down);
 }
 
 static void
