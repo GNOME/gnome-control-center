@@ -50,6 +50,7 @@ cc_input_row_class_init (CcInputRowClass *klass)
   object_class->dispose = cc_input_row_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-input-row.ui");
+
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, name_label);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, icon_image);
 }
