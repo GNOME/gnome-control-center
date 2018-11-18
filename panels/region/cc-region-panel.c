@@ -80,7 +80,6 @@ struct _CcRegionPanel {
         GtkRadioButton  *per_window_source;
         GtkLabel        *previous_source;
         GtkLabel        *previous_source_label;
-        GtkButton       *remove_input_button;
         GtkButton       *restart_button;
         GtkRevealer     *restart_revealer;
         GtkRadioButton  *same_source;
@@ -717,6 +716,15 @@ maybe_start_ibus (void)
 
 #endif
 
+static void remove_input (CcRegionPanel *self, CcInputRow *row);
+
+static void
+row_removed_cb (CcRegionPanel *self,
+                CcInputRow    *row)
+{
+        remove_input (self, row);
+}
+
 static void
 add_input_row (CcRegionPanel *self, CcInputSource *source)
 {
@@ -726,6 +734,7 @@ add_input_row (CcRegionPanel *self, CcInputSource *source)
 
         row = cc_input_row_new (source);
         gtk_widget_show (GTK_WIDGET (row));
+        g_signal_connect_object (row, "remove-row", G_CALLBACK (row_removed_cb), self, G_CONNECT_SWAPPED);
         gtk_container_add (GTK_CONTAINER (self->input_list), GTK_WIDGET (row));
 
         cc_list_box_adjust_scrolling (self->input_list);
@@ -843,7 +852,6 @@ update_buttons (CcRegionPanel *self)
         selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (self->input_list));
         if (selected == NULL) {
                 gtk_widget_set_visible (GTK_WIDGET (self->show_config_button), FALSE);
-                gtk_widget_set_sensitive (GTK_WIDGET (self->remove_input_button), FALSE);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->show_layout_button), FALSE);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->move_up_input_button), FALSE);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->move_down_input_button), FALSE);
@@ -854,7 +862,6 @@ update_buttons (CcRegionPanel *self)
 
                 gtk_widget_set_visible (GTK_WIDGET (self->show_config_button), CC_IS_INPUT_SOURCE_IBUS (cc_input_row_get_source (selected)));
                 gtk_widget_set_sensitive (GTK_WIDGET (self->show_layout_button), TRUE);
-                gtk_widget_set_sensitive (GTK_WIDGET (self->remove_input_button), n_rows > 1);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->move_up_input_button), index > 1);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->move_down_input_button), index < n_rows - 1);
         }
@@ -1008,22 +1015,17 @@ remove_input_permission_cb (GObject *source, GAsyncResult *res, gpointer user_da
 }
 
 static void
-remove_selected_input (CcRegionPanel *self)
+remove_input (CcRegionPanel *self, CcInputRow *row)
 {
-        GtkListBoxRow *selected;
-
-        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->input_list));
-        g_return_if_fail (selected != NULL);
-
         if (!self->login) {
-                do_remove_input (self, CC_INPUT_ROW (selected));
+                do_remove_input (self, row);
         } else if (g_permission_get_allowed (self->permission)) {
-                do_remove_input (self, CC_INPUT_ROW (selected));
+                do_remove_input (self, row);
         } else if (g_permission_get_can_acquire (self->permission)) {
                 g_permission_acquire_async (self->permission,
                                             self->cancellable,
                                             remove_input_permission_cb,
-                                            row_data_new (self, CC_INPUT_ROW (selected), -1));
+                                            row_data_new (self, row, -1));
         }
 }
 
@@ -1605,7 +1607,6 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, per_window_source);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, previous_source);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, previous_source_label);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, remove_input_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_revealer);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, same_source);
@@ -1614,7 +1615,6 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
 
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
         gtk_widget_class_bind_template_callback (widget_class, add_input);
-        gtk_widget_class_bind_template_callback (widget_class, remove_selected_input);
         gtk_widget_class_bind_template_callback (widget_class, move_selected_input_up);
         gtk_widget_class_bind_template_callback (widget_class, move_selected_input_down);
         gtk_widget_class_bind_template_callback (widget_class, show_selected_settings);

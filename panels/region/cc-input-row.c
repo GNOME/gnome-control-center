@@ -31,6 +31,22 @@ struct _CcInputRow
 
 G_DEFINE_TYPE (CcInputRow, cc_input_row, GTK_TYPE_LIST_BOX_ROW)
 
+enum
+{
+  SIGNAL_REMOVE_ROW,
+  SIGNAL_LAST
+};
+
+static guint signals[SIGNAL_LAST] = { 0, };
+
+static void
+remove_button_clicked_cb (CcInputRow *row)
+{
+  g_signal_emit (row,
+                 signals[SIGNAL_REMOVE_ROW],
+                 0);
+}
+
 static void
 cc_input_row_dispose (GObject *object)
 {
@@ -53,6 +69,18 @@ cc_input_row_class_init (CcInputRowClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, name_label);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, icon_image);
+
+  gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
+
+  signals[SIGNAL_REMOVE_ROW] =
+    g_signal_new ("remove-row",
+                  G_TYPE_FROM_CLASS (object_class),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL,
+                  NULL,
+                  G_TYPE_NONE,
+                  0);
 }
 
 void
