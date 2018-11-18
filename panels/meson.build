@@ -17,7 +17,7 @@ panels = [
   'region',
   'search',
   'sharing',
-  'sound-new',
+  'sound',
   'universal-access',
   'user-accounts'
 ]

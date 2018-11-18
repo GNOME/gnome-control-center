@@ -38,13 +38,13 @@
 #include "cc-level-bar.h"
 #include "cc-output-test-dialog.h"
 #include "cc-profile-combo-box.h"
-#include "cc-sound-new-panel.h"
-#include "cc-sound-new-resources.h"
+#include "cc-sound-panel.h"
+#include "cc-sound-resources.h"
 #include "cc-stream-list-box.h"
 #include "cc-subwoofer-slider.h"
 #include "cc-volume-slider.h"
 
-struct _CcSoundNewPanel
+struct _CcSoundPanel
 {
   CcPanel            parent_instance;
 
@@ -74,7 +74,7 @@ struct _CcSoundNewPanel
   GSettings         *sound_settings;
 };
 
-CC_PANEL_REGISTER (CcSoundNewPanel, cc_sound_new_panel)
+CC_PANEL_REGISTER (CcSoundPanel, cc_sound_panel)
 
 enum
 {
@@ -85,14 +85,14 @@ enum
 #define KEY_SOUNDS_SCHEMA "org.gnome.desktop.sound"
 
 static void
-allow_amplified_changed_cb (CcSoundNewPanel *self)
+allow_amplified_changed_cb (CcSoundPanel *self)
 {
   cc_volume_slider_set_is_amplified (self->output_volume_slider,
                                      g_settings_get_boolean (self->sound_settings, "allow-volume-above-100-percent"));
 }
 
 static void
-output_device_changed_cb (CcSoundNewPanel *self)
+output_device_changed_cb (CcSoundPanel *self)
 {
   GvcMixerUIDevice *device;
   GvcMixerStream *stream = NULL;
@@ -125,7 +125,7 @@ output_device_changed_cb (CcSoundNewPanel *self)
 }
 
 static void
-input_device_changed_cb (CcSoundNewPanel *self)
+input_device_changed_cb (CcSoundPanel *self)
 {
   GvcMixerUIDevice *device;
   GvcMixerStream *stream = NULL;
@@ -143,7 +143,7 @@ input_device_changed_cb (CcSoundNewPanel *self)
 }
 
 static void
-test_output_configuration_button_clicked_cb (CcSoundNewPanel *self)
+test_output_configuration_button_clicked_cb (CcSoundPanel *self)
 {
   GvcMixerUIDevice *device;
   GvcMixerStream *stream = NULL;
@@ -160,55 +160,55 @@ test_output_configuration_button_clicked_cb (CcSoundNewPanel *self)
 }
 
 static const char *
-cc_sound_new_panel_get_help_uri (CcPanel *panel)
+cc_sound_panel_get_help_uri (CcPanel *panel)
 {
   return "help:gnome-help/media#sound";
 }
 
 static void
-cc_sound_new_panel_finalize (GObject *object)
+cc_sound_panel_finalize (GObject *object)
 {
-  CcSoundNewPanel *panel = CC_SOUND_NEW_PANEL (object);
+  CcSoundPanel *panel = CC_SOUND_PANEL (object);
 
   g_clear_object (&panel->mixer_control);
   g_clear_object (&panel->sound_settings);
 
-  G_OBJECT_CLASS (cc_sound_new_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_sound_panel_parent_class)->finalize (object);
 }
 
 static void
-cc_sound_new_panel_class_init (CcSoundNewPanelClass *klass)
+cc_sound_panel_class_init (CcSoundPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
-  panel_class->get_help_uri = cc_sound_new_panel_get_help_uri;
+  panel_class->get_help_uri = cc_sound_panel_get_help_uri;
 
-  object_class->finalize = cc_sound_new_panel_finalize;
+  object_class->finalize = cc_sound_panel_finalize;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound-new/cc-sound-new-panel.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-sound-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, balance_slider);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, fade_row);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, fade_slider);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, input_device_combo_box);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, input_level_bar);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, input_list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, input_profile_combo_box);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, input_profile_row);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, input_volume_slider);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, label_size_group);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, main_box);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, output_device_combo_box);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, output_level_bar);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, output_list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, output_profile_combo_box);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, output_profile_row);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, output_volume_slider);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, stream_list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, subwoofer_row);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundNewPanel, subwoofer_slider);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, balance_slider);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, fade_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, fade_slider);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_device_combo_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_level_bar);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_profile_combo_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_profile_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_volume_slider);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, label_size_group);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, main_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_device_combo_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_level_bar);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_profile_combo_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_profile_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_volume_slider);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, stream_list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, subwoofer_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, subwoofer_slider);
 
   gtk_widget_class_bind_template_callback (widget_class, input_device_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, output_device_changed_cb);
@@ -226,9 +226,9 @@ cc_sound_new_panel_class_init (CcSoundNewPanelClass *klass)
 }
 
 static void
-cc_sound_new_panel_init (CcSoundNewPanel *self)
+cc_sound_panel_init (CcSoundPanel *self)
 {
-  g_resources_register (cc_sound_new_get_resource ());
+  g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 

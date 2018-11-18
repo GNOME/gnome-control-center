@@ -22,7 +22,7 @@
 #include "config.h"
 #include "cc-alert-chooser.h"
 #include "cc-sound-button.h"
-#include "cc-sound-new-resources.h"
+#include "cc-sound-resources.h"
 
 #define KEY_SOUNDS_SCHEMA "org.gnome.desktop.sound"
 
@@ -236,7 +236,7 @@ cc_alert_chooser_class_init (CcAlertChooserClass *klass)
 
   object_class->dispose = cc_alert_chooser_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound-new/cc-alert-chooser.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-alert-chooser.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, bark_button);
   gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, drip_button);
@@ -254,7 +254,7 @@ cc_alert_chooser_init (CcAlertChooser *self)
   g_autofree gchar *alert_name = NULL;
   g_autoptr(GError) error = NULL;
 
-  g_resources_register (cc_sound_new_get_resource ());
+  g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
