@@ -19,7 +19,7 @@
 #include <gsound.h>
 #include <pulse/pulseaudio.h>
 
-#include "cc-sound-new-resources.h"
+#include "cc-sound-resources.h"
 #include "cc-speaker-test-button.h"
 
 struct _CcSpeakerTestButton
@@ -202,7 +202,7 @@ cc_speaker_test_button_class_init (CcSpeakerTestButtonClass *klass)
 
   object_class->dispose = cc_speaker_test_button_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound-new/cc-speaker-test-button.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-speaker-test-button.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSpeakerTestButton, image);
   gtk_widget_class_bind_template_child (widget_class, CcSpeakerTestButton, label);
@@ -213,7 +213,7 @@ cc_speaker_test_button_class_init (CcSpeakerTestButtonClass *klass)
 void
 cc_speaker_test_button_init (CcSpeakerTestButton *self)
 {
-  g_resources_register (cc_sound_new_get_resource ());
+  g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 

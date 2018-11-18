@@ -19,7 +19,7 @@
 #include <pulse/pulseaudio.h>
 #include <gvc-mixer-control.h>
 
-#include "cc-sound-new-resources.h"
+#include "cc-sound-resources.h"
 #include "cc-subwoofer-slider.h"
 #include "gvc-channel-map-private.h"
 
@@ -81,7 +81,7 @@ cc_subwoofer_slider_class_init (CcSubwooferSliderClass *klass)
 
   object_class->dispose = cc_subwoofer_slider_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound-new/cc-subwoofer-slider.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-subwoofer-slider.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSubwooferSlider, adjustment);
 
@@ -93,7 +93,7 @@ cc_subwoofer_slider_init (CcSubwooferSlider *self)
 {
   gdouble vol_max_norm;
 
-  g_resources_register (cc_sound_new_get_resource ());
+  g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
