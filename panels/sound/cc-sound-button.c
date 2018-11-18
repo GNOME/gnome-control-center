@@ -17,7 +17,7 @@
  */
 
 #include "cc-sound-button.h"
-#include "cc-sound-new-resources.h"
+#include "cc-sound-resources.h"
 
 struct _CcSoundButton
 {
@@ -78,7 +78,7 @@ cc_sound_button_class_init (CcSoundButtonClass *klass)
   object_class->set_property = cc_sound_button_set_property;
   object_class->get_property = cc_sound_button_get_property;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound-new/cc-sound-button.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-sound-button.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSoundButton, image);
   gtk_widget_class_bind_template_child (widget_class, CcSoundButton, label);
@@ -94,7 +94,7 @@ cc_sound_button_class_init (CcSoundButtonClass *klass)
 void
 cc_sound_button_init (CcSoundButton *self)
 {
-  g_resources_register (cc_sound_new_get_resource ());
+  g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 }
