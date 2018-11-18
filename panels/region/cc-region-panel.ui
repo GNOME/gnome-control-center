@@ -266,7 +266,6 @@
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="margin">18</property>
                                 <property name="label" translatable="yes">No input source selected</property>
                               </object>
                             </child>
@@ -609,5 +608,11 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkSizeGroup" id="input_size_group">
+    <property name="mode">vertical</property>
+    <widgets>
+      <widget name="no_inputs_row"/>
+    </widgets>
   </object>
 </interface>

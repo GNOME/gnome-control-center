@@ -65,6 +65,7 @@ struct _CcRegionPanel {
         GtkListBoxRow   *formats_row;
         GtkListBox      *input_list;
         GtkBox          *input_section_box;
+        GtkSizeGroup    *input_size_group;
         GtkToggleButton *login_button;
         GtkLabel        *login_label;
         GtkLabel        *language_label;
@@ -803,6 +804,7 @@ add_input_row (CcRegionPanel *self, CcInputSource *source)
 
         row = cc_input_row_new (source);
         gtk_widget_show (GTK_WIDGET (row));
+        gtk_size_group_add_widget (self->input_size_group, GTK_WIDGET (row));
         g_signal_connect_object (row, "show-settings", G_CALLBACK (row_settings_cb), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (row, "show-layout", G_CALLBACK (row_layout_cb), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (row, "remove-row", G_CALLBACK (row_removed_cb), self, G_CONNECT_SWAPPED);
@@ -1607,6 +1609,7 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_list);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_section_box);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_size_group);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_list);
