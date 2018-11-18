@@ -17,7 +17,7 @@
  */
 
 #include "cc-device-combo-box.h"
-#include "cc-sound-new-resources.h"
+#include "cc-sound-resources.h"
 
 struct _CcDeviceComboBox
 {
@@ -120,7 +120,7 @@ cc_device_combo_box_class_init (CcDeviceComboBoxClass *klass)
 
   object_class->dispose = cc_device_combo_box_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound-new/cc-device-combo-box.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-device-combo-box.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcDeviceComboBox, device_model);
 }
@@ -128,7 +128,7 @@ cc_device_combo_box_class_init (CcDeviceComboBoxClass *klass)
 void
 cc_device_combo_box_init (CcDeviceComboBox *self)
 {
-  g_resources_register (cc_sound_new_get_resource ());
+  g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 }

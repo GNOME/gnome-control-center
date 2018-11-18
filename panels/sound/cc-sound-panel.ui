@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <template class="CcSoundNewPanel" parent="CcPanel">
+  <template class="CcSoundPanel" parent="CcPanel">
     <property name="visible">True</property>
     <child>
       <object class="GtkScrolledWindow">
@@ -108,14 +108,14 @@
                                           <object class="CcDeviceComboBox" id="output_device_combo_box">
                                             <property name="visible">True</property>
                                             <property name="hexpand">True</property>
-                                            <signal name="changed" handler="output_device_changed_cb" object="CcSoundNewPanel" swapped="yes"/>
+                                            <signal name="changed" handler="output_device_changed_cb" object="CcSoundPanel" swapped="yes"/>
                                           </object>
                                         </child>
                                         <child>
                                           <object class="GtkButton">
                                             <property name="visible">True</property>
                                             <property name="label" translatable="yes">Test</property>
-                                            <signal name="clicked" handler="test_output_configuration_button_clicked_cb" object="CcSoundNewPanel" swapped="yes"/>
+                                            <signal name="clicked" handler="test_output_configuration_button_clicked_cb" object="CcSoundPanel" swapped="yes"/>
                                           </object>
                                         </child>
                                       </object>
@@ -289,7 +289,7 @@
                                       <object class="CcDeviceComboBox" id="input_device_combo_box">
                                         <property name="visible">True</property>
                                         <property name="hexpand">True</property>
-                                        <signal name="changed" handler="input_device_changed_cb" object="CcSoundNewPanel" swapped="yes"/>
+                                        <signal name="changed" handler="input_device_changed_cb" object="CcSoundPanel" swapped="yes"/>
                                       </object>
                                     </child>
                                     <child>
