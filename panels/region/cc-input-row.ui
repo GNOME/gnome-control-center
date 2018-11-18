@@ -17,12 +17,18 @@
           </object>
         </child>
         <child>
-          <object class="GtkImage" id="icon_image">
-            <property name="visible">True</property>
-            <property name="icon_name">system-run-symbolic</property>
+          <object class="GtkButton" id="settings_button">
+            <property name="visible">False</property>
+            <signal name="clicked" handler="settings_button_clicked_cb" object="CcInputRow" swapped="yes"/>
             <style>
-              <class name="dim-label"/>
+              <class name="image-button"/>
             </style>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon_name">emblem-system-symbolic</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
