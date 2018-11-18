@@ -9,6 +9,7 @@
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="border-width">18</property>
+        <property name="spacing">12</property>
         <child>
           <object class="GtkLabel" id="name_label">
             <property name="visible">True</property>
@@ -23,6 +24,21 @@
             <style>
               <class name="dim-label"/>
             </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="remove_button">
+            <property name="visible">True</property>
+            <signal name="clicked" handler="remove_button_clicked_cb" object="CcInputRow" swapped="yes"/>
+            <style>
+              <class name="image-button"/>
+            </style>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon_name">edit-delete-symbolic</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>
