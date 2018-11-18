@@ -27,8 +27,11 @@ G_BEGIN_DECLS
 #define CC_TYPE_INPUT_ROW (cc_input_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcInputRow, cc_input_row, CC, INPUT_ROW, GtkListBoxRow)
 
-CcInputRow      *cc_input_row_new        (CcInputSource   *source);
+CcInputRow      *cc_input_row_new           (CcInputSource *source);
 
-CcInputSource   *cc_input_row_get_source (CcInputRow      *row);
+CcInputSource   *cc_input_row_get_source    (CcInputRow    *row);
+
+void             cc_input_row_set_removable (CcInputRow    *row,
+                                             gboolean       removable);
 
 G_END_DECLS
