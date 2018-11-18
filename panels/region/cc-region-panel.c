@@ -84,7 +84,6 @@ struct _CcRegionPanel {
         GtkRevealer     *restart_revealer;
         GtkRadioButton  *same_source;
         GtkButton       *show_config_button;
-        GtkButton       *show_layout_button;
 
         gboolean     login;
         gboolean     login_auto_apply;
@@ -716,6 +715,29 @@ maybe_start_ibus (void)
 
 #endif
 
+static void
+row_layout_cb (CcRegionPanel *self,
+               CcInputRow    *row)
+{
+        CcInputSource *source;
+        const gchar *layout, *layout_variant;
+        g_autofree gchar *commandline = NULL;
+
+        source = cc_input_row_get_source (row);
+
+        layout = cc_input_source_get_layout (source);
+        layout_variant = cc_input_source_get_layout_variant (source);
+
+        if (layout_variant && layout_variant[0])
+                commandline = g_strdup_printf ("gkbd-keyboard-display -l \"%s\t%s\"",
+                                               layout, layout_variant);
+        else
+                commandline = g_strdup_printf ("gkbd-keyboard-display -l %s",
+                                               layout);
+
+        g_spawn_command_line_async (commandline, NULL);
+}
+
 static void remove_input (CcRegionPanel *self, CcInputRow *row);
 
 static void
@@ -756,6 +778,7 @@ add_input_row (CcRegionPanel *self, CcInputSource *source)
 
         row = cc_input_row_new (source);
         gtk_widget_show (GTK_WIDGET (row));
+        g_signal_connect_object (row, "show-layout", G_CALLBACK (row_layout_cb), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (row, "remove-row", G_CALLBACK (row_removed_cb), self, G_CONNECT_SWAPPED);
         gtk_container_add (GTK_CONTAINER (self->input_list), GTK_WIDGET (row));
         update_input_rows (self);
@@ -875,7 +898,6 @@ update_buttons (CcRegionPanel *self)
         selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (self->input_list));
         if (selected == NULL) {
                 gtk_widget_set_visible (GTK_WIDGET (self->show_config_button), FALSE);
-                gtk_widget_set_sensitive (GTK_WIDGET (self->show_layout_button), FALSE);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->move_up_input_button), FALSE);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->move_down_input_button), FALSE);
         } else {
@@ -884,7 +906,6 @@ update_buttons (CcRegionPanel *self)
                 index = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (selected));
 
                 gtk_widget_set_visible (GTK_WIDGET (self->show_config_button), CC_IS_INPUT_SOURCE_IBUS (cc_input_row_get_source (selected)));
-                gtk_widget_set_sensitive (GTK_WIDGET (self->show_layout_button), TRUE);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->move_up_input_button), index > 1);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->move_down_input_button), index < n_rows - 1);
         }
@@ -1153,32 +1174,6 @@ show_selected_settings (CcRegionPanel *self)
 
         if (!g_app_info_launch (G_APP_INFO (app_info), NULL, G_APP_LAUNCH_CONTEXT (ctx), &error))
                 g_warning ("Failed to launch input source setup: %s", error->message);
-}
-
-static void
-show_selected_layout (CcRegionPanel *self)
-{
-        CcInputRow *selected;
-        CcInputSource *source;
-        const gchar *layout, *layout_variant;
-        g_autofree gchar *commandline = NULL;
-
-        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (self->input_list));
-        if (selected == NULL)
-                return;
-        source = cc_input_row_get_source (selected);
-
-        layout = cc_input_source_get_layout (source);
-        layout_variant = cc_input_source_get_layout_variant (source);
-
-        if (layout_variant && layout_variant[0])
-                commandline = g_strdup_printf ("gkbd-keyboard-display -l \"%s\t%s\"",
-                                               layout, layout_variant);
-        else
-                commandline = g_strdup_printf ("gkbd-keyboard-display -l %s",
-                                               layout);
-
-        g_spawn_command_line_async (commandline, NULL);
 }
 
 static void
@@ -1635,14 +1630,12 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_revealer);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, same_source);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, show_config_button);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, show_layout_button);
 
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
         gtk_widget_class_bind_template_callback (widget_class, add_input);
         gtk_widget_class_bind_template_callback (widget_class, move_selected_input_up);
         gtk_widget_class_bind_template_callback (widget_class, move_selected_input_down);
         gtk_widget_class_bind_template_callback (widget_class, show_selected_settings);
-        gtk_widget_class_bind_template_callback (widget_class, show_selected_layout);
 }
 
 static void

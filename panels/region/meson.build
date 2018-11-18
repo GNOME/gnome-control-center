@@ -32,6 +32,7 @@ resource_data = files(
   'cc-format-chooser.ui',
   'cc-input-chooser.ui',
   'cc-region-panel.ui',
+  'view-layout-symbolic.svg',
 )
 
 sources += gnome.compile_resources(
