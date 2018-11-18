@@ -16,7 +16,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "cc-sound-new-resources.h"
+#include "cc-sound-resources.h"
 #include "cc-stream-row.h"
 #include "cc-volume-slider.h"
 
@@ -53,7 +53,7 @@ cc_stream_row_class_init (CcStreamRowClass *klass)
 
   object_class->dispose = cc_stream_row_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound-new/cc-stream-row.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-stream-row.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcStreamRow, label_box);
   gtk_widget_class_bind_template_child (widget_class, CcStreamRow, icon_image);
@@ -64,7 +64,7 @@ cc_stream_row_class_init (CcStreamRowClass *klass)
 void
 cc_stream_row_init (CcStreamRow *self)
 {
-  g_resources_register (cc_sound_new_get_resource ());
+  g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 }

@@ -16,7 +16,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "cc-sound-new-resources.h"
+#include "cc-sound-resources.h"
 #include "cc-balance-slider.h"
 #include "gvc-channel-map-private.h"
 
@@ -78,7 +78,7 @@ cc_balance_slider_class_init (CcBalanceSliderClass *klass)
 
   object_class->dispose = cc_balance_slider_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound-new/cc-balance-slider.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-balance-slider.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcBalanceSlider, adjustment);
 
@@ -88,7 +88,7 @@ cc_balance_slider_class_init (CcBalanceSliderClass *klass)
 void
 cc_balance_slider_init (CcBalanceSlider *self)
 {
-  g_resources_register (cc_sound_new_get_resource ());
+  g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 }

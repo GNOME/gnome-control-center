@@ -22,7 +22,7 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SOUND_NEW_PANEL (cc_sound_new_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcSoundNewPanel, cc_sound_new_panel, CC, SOUND_NEW_PANEL, CcPanel)
+#define CC_TYPE_SOUND_PANEL (cc_sound_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcSoundPanel, cc_sound_panel, CC, SOUND_PANEL, CcPanel)
 
 G_END_DECLS
