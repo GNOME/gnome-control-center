@@ -17,7 +17,7 @@
  */
 
 #include "cc-profile-combo-box.h"
-#include "cc-sound-new-resources.h"
+#include "cc-sound-resources.h"
 
 struct _CcProfileComboBox
 {
@@ -70,7 +70,7 @@ cc_profile_combo_box_class_init (CcProfileComboBoxClass *klass)
 
   object_class->dispose = cc_profile_combo_box_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound-new/cc-profile-combo-box.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-profile-combo-box.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcProfileComboBox, profile_model);
 
@@ -80,7 +80,7 @@ cc_profile_combo_box_class_init (CcProfileComboBoxClass *klass)
 void
 cc_profile_combo_box_init (CcProfileComboBox *self)
 {
-  g_resources_register (cc_sound_new_get_resource ());
+  g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 }
