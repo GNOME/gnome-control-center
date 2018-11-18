@@ -83,7 +83,6 @@ struct _CcRegionPanel {
         GtkButton       *restart_button;
         GtkRevealer     *restart_revealer;
         GtkRadioButton  *same_source;
-        GtkButton       *show_config_button;
 
         gboolean     login;
         gboolean     login_auto_apply;
@@ -716,6 +715,32 @@ maybe_start_ibus (void)
 #endif
 
 static void
+row_settings_cb (CcRegionPanel *self,
+                 CcInputRow    *row)
+{
+        CcInputSourceIBus *source;
+        g_autoptr(GdkAppLaunchContext) ctx = NULL;
+        GDesktopAppInfo *app_info;
+        g_autoptr(GError) error = NULL;
+
+        g_return_if_fail (CC_IS_INPUT_SOURCE_IBUS (cc_input_row_get_source (row)));
+        source = CC_INPUT_SOURCE_IBUS (cc_input_row_get_source (row));
+
+        app_info = cc_input_source_ibus_get_app_info (source);
+        if  (app_info == NULL)
+                return;
+
+        ctx = gdk_display_get_app_launch_context (gdk_display_get_default ());
+        gdk_app_launch_context_set_timestamp (ctx, gtk_get_current_event_time ());
+
+        g_app_launch_context_setenv (G_APP_LAUNCH_CONTEXT (ctx),
+                                     "IBUS_ENGINE_NAME", cc_input_source_ibus_get_engine_name (source));
+
+        if (!g_app_info_launch (G_APP_INFO (app_info), NULL, G_APP_LAUNCH_CONTEXT (ctx), &error))
+                g_warning ("Failed to launch input source setup: %s", error->message);
+}
+
+static void
 row_layout_cb (CcRegionPanel *self,
                CcInputRow    *row)
 {
@@ -778,6 +803,7 @@ add_input_row (CcRegionPanel *self, CcInputSource *source)
 
         row = cc_input_row_new (source);
         gtk_widget_show (GTK_WIDGET (row));
+        g_signal_connect_object (row, "show-settings", G_CALLBACK (row_settings_cb), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (row, "show-layout", G_CALLBACK (row_layout_cb), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (row, "remove-row", G_CALLBACK (row_removed_cb), self, G_CONNECT_SWAPPED);
         gtk_container_add (GTK_CONTAINER (self->input_list), GTK_WIDGET (row));
@@ -897,7 +923,6 @@ update_buttons (CcRegionPanel *self)
 
         selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (self->input_list));
         if (selected == NULL) {
-                gtk_widget_set_visible (GTK_WIDGET (self->show_config_button), FALSE);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->move_up_input_button), FALSE);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->move_down_input_button), FALSE);
         } else {
@@ -905,7 +930,6 @@ update_buttons (CcRegionPanel *self)
 
                 index = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (selected));
 
-                gtk_widget_set_visible (GTK_WIDGET (self->show_config_button), CC_IS_INPUT_SOURCE_IBUS (cc_input_row_get_source (selected)));
                 gtk_widget_set_sensitive (GTK_WIDGET (self->move_up_input_button), index > 1);
                 gtk_widget_set_sensitive (GTK_WIDGET (self->move_down_input_button), index < n_rows - 1);
         }
@@ -1145,35 +1169,6 @@ move_selected_input_down (CcRegionPanel *self)
                 return;
 
         move_input (self, CC_INPUT_ROW (selected), 1);
-}
-
-static void
-show_selected_settings (CcRegionPanel *self)
-{
-        CcInputRow *selected;
-        CcInputSourceIBus *source;
-        g_autoptr(GdkAppLaunchContext) ctx = NULL;
-        g_autoptr(GDesktopAppInfo) app_info = NULL;
-        g_autoptr(GError) error = NULL;
-
-        selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (self->input_list));
-        if (selected == NULL)
-                return;
-        g_return_if_fail (CC_IS_INPUT_SOURCE_IBUS (cc_input_row_get_source (selected)));
-        source = CC_INPUT_SOURCE_IBUS (cc_input_row_get_source (selected));
-
-        app_info = cc_input_source_ibus_get_app_info (source);
-        if (app_info == NULL)
-                return;
-
-        ctx = gdk_display_get_app_launch_context (gdk_display_get_default ());
-        gdk_app_launch_context_set_timestamp (ctx, gtk_get_current_event_time ());
-
-        g_app_launch_context_setenv (G_APP_LAUNCH_CONTEXT (ctx),
-                                     "IBUS_ENGINE_NAME", cc_input_source_ibus_get_engine_name (source));
-
-        if (!g_app_info_launch (G_APP_INFO (app_info), NULL, G_APP_LAUNCH_CONTEXT (ctx), &error))
-                g_warning ("Failed to launch input source setup: %s", error->message);
 }
 
 static void
@@ -1629,13 +1624,11 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_revealer);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, same_source);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, show_config_button);
 
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
         gtk_widget_class_bind_template_callback (widget_class, add_input);
         gtk_widget_class_bind_template_callback (widget_class, move_selected_input_up);
         gtk_widget_class_bind_template_callback (widget_class, move_selected_input_down);
-        gtk_widget_class_bind_template_callback (widget_class, show_selected_settings);
 }
 
 static void
