@@ -26,19 +26,28 @@ struct _CcInputRow
   CcInputSource   *source;
 
   GtkWidget       *name_label;
-  GtkWidget       *icon_image;
+  GtkWidget       *settings_button;
 };
 
 G_DEFINE_TYPE (CcInputRow, cc_input_row, GTK_TYPE_LIST_BOX_ROW)
 
 enum
 {
+  SIGNAL_SHOW_SETTINGS,
   SIGNAL_SHOW_LAYOUT,
   SIGNAL_REMOVE_ROW,
   SIGNAL_LAST
 };
 
 static guint signals[SIGNAL_LAST] = { 0, };
+
+static void
+settings_button_clicked_cb (CcInputRow *row)
+{
+  g_signal_emit (row,
+                 signals[SIGNAL_SHOW_SETTINGS],
+                 0);
+}
 
 static void
 layout_button_clicked_cb (CcInputRow *row)
@@ -77,10 +86,21 @@ cc_input_row_class_init (CcInputRowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-input-row.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, name_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInputRow, icon_image);
+  gtk_widget_class_bind_template_child (widget_class, CcInputRow, settings_button);
 
   gtk_widget_class_bind_template_callback (widget_class, layout_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, settings_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
+
+  signals[SIGNAL_SHOW_SETTINGS] =
+    g_signal_new ("show-settings",
+                  G_TYPE_FROM_CLASS (object_class),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL,
+                  NULL,
+                  G_TYPE_NONE,
+                  0);
 
   signals[SIGNAL_SHOW_LAYOUT] =
     g_signal_new ("show-layout",
@@ -127,7 +147,7 @@ cc_input_row_new (CcInputSource *source)
   g_signal_connect_object (source, "label-changed", G_CALLBACK (label_changed_cb), row, G_CONNECT_SWAPPED);
   label_changed_cb (row);
 
-  gtk_widget_set_visible (row->icon_image, CC_IS_INPUT_SOURCE_IBUS (source));
+  gtk_widget_set_visible (row->settings_button, CC_IS_INPUT_SOURCE_IBUS (source));
 
   return row;
 }
