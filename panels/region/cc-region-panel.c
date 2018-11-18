@@ -59,7 +59,7 @@
 struct _CcRegionPanel {
         CcPanel          parent_instance;
 
-        GtkButton       *add_input_button;
+        GtkListBoxRow   *add_input_row;
         GtkLabel        *alt_next_source;
         GtkLabel        *formats_label;
         GtkListBoxRow   *formats_row;
@@ -808,7 +808,7 @@ add_input_row (CcRegionPanel *self, CcInputSource *source)
         g_signal_connect_object (row, "show-settings", G_CALLBACK (row_settings_cb), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (row, "show-layout", G_CALLBACK (row_layout_cb), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (row, "remove-row", G_CALLBACK (row_removed_cb), self, G_CONNECT_SWAPPED);
-        gtk_container_add (GTK_CONTAINER (self->input_list), GTK_WIDGET (row));
+        gtk_list_box_insert (GTK_LIST_BOX (self->input_list), GTK_WIDGET (row), gtk_list_box_row_get_index (self->add_input_row));
         update_input_rows (self);
 
         cc_list_box_adjust_scrolling (self->input_list);
@@ -1146,6 +1146,14 @@ move_input (CcRegionPanel *self,
                                             self->cancellable,
                                             move_input_permission_cb,
                                             row_data_new (self, row, offset));
+        }
+}
+
+static void
+input_row_activated_cb (CcRegionPanel *self, GtkListBoxRow *row)
+{
+        if (row == self->add_input_row) {
+                add_input (self);
         }
 }
 
@@ -1603,7 +1611,7 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-region-panel.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, add_input_button);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, add_input_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, alt_next_source);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
@@ -1628,8 +1636,8 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_revealer);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, same_source);
 
+        gtk_widget_class_bind_template_callback (widget_class, input_row_activated_cb);
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
-        gtk_widget_class_bind_template_callback (widget_class, add_input);
         gtk_widget_class_bind_template_callback (widget_class, move_selected_input_up);
         gtk_widget_class_bind_template_callback (widget_class, move_selected_input_down);
 }
