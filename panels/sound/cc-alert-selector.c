@@ -16,27 +16,18 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <pulse/pulseaudio.h>
-#include <gvc-mixer-control.h>
+#include "cc-sound-resources.h"
+#include "cc-alert-chooser.h"
 
-#include "cc-sound-new-resources.h"
-#include "cc-subwoofer-slider.h"
-#include "gvc-channel-map-private.h"
-
-struct _CcSubwooferSlider
+struct _CcAlertChooser
 {
-  GtkBox           parent_instance;
-
-  GtkAdjustment   *adjustment;
-
-  GvcChannelMap   *channel_map;
-  guint            volume_changed_handler;
+  GtkBox parent_instance;
 };
 
-G_DEFINE_TYPE (CcSubwooferSlider, cc_subwoofer_slider, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcAlertChooser, cc_fade_slider, GTK_TYPE_BOX)
 
 static void
-changed_cb (CcSubwooferSlider *self)
+changed_cb (CcAlertChooser *self)
 {
   gdouble               value;
   const pa_channel_map *pa_map;
@@ -48,65 +39,59 @@ changed_cb (CcSubwooferSlider *self)
   value = gtk_adjustment_get_value (self->adjustment);
   pa_map = gvc_channel_map_get_pa_channel_map (self->channel_map);
   pa_volume = *gvc_channel_map_get_cvolume (self->channel_map);
-  pa_cvolume_set_position (&pa_volume, pa_map, PA_CHANNEL_POSITION_LFE, value);
+  pa_cvolume_set_fade (&pa_volume, pa_map, value);
   gvc_channel_map_volume_changed (self->channel_map, &pa_volume, TRUE);
 }
 
 static void
-volume_changed_cb (CcSubwooferSlider *self)
+volume_changed_cb (CcAlertChooser *self)
 {
   const gdouble *volumes;
 
   volumes = gvc_channel_map_get_volume (self->channel_map);
   g_signal_handlers_block_by_func (self->adjustment, volume_changed_cb, self);
-  gtk_adjustment_set_value (self->adjustment, volumes[BALANCE]);
+  gtk_adjustment_set_value (self->adjustment, volumes[FADE]);
   g_signal_handlers_unblock_by_func (self->adjustment, volume_changed_cb, self);
 }
 
 static void
-cc_subwoofer_slider_dispose (GObject *object)
+cc_fade_slider_dispose (GObject *object)
 {
-  CcSubwooferSlider *self = CC_SUBWOOFER_SLIDER (object);
+  CcAlertChooser *self = CC_ALERT_CHOOSER (object);
 
   g_clear_object (&self->channel_map);
 
-  G_OBJECT_CLASS (cc_subwoofer_slider_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_fade_slider_parent_class)->dispose (object);
 }
 
 void
-cc_subwoofer_slider_class_init (CcSubwooferSliderClass *klass)
+cc_fade_slider_class_init (CcAlertChooserClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->dispose = cc_subwoofer_slider_dispose;
+  object_class->dispose = cc_fade_slider_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound-new/cc-subwoofer-slider.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-alert-chooser.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcSubwooferSlider, adjustment);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, adjustment);
 
   gtk_widget_class_bind_template_callback (widget_class, changed_cb);
 }
 
 void
-cc_subwoofer_slider_init (CcSubwooferSlider *self)
+cc_fade_slider_init (CcAlertChooser *self)
 {
-  gdouble vol_max_norm;
-
-  g_resources_register (cc_sound_new_get_resource ());
+  g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  vol_max_norm = gvc_mixer_control_get_vol_max_norm (NULL);
-  gtk_adjustment_set_upper (self->adjustment, vol_max_norm);
-  gtk_adjustment_set_page_increment (self->adjustment, vol_max_norm / 100.0);
 }
 
 void
-cc_subwoofer_slider_set_channel_map (CcSubwooferSlider *self,
-                                     GvcChannelMap     *channel_map)
+cc_fade_slider_set_channel_map (CcAlertChooser  *self,
+                                GvcChannelMap *channel_map)
 {
-  g_return_if_fail (CC_IS_SUBWOOFER_SLIDER (self));
+  g_return_if_fail (CC_IS_ALERT_CHOOSER (self));
 
   if (self->channel_map != NULL) {
     g_signal_handler_disconnect (self->channel_map, self->volume_changed_handler);
