@@ -46,6 +46,8 @@ build:
   stage: build
 
   script:
+    - dnf -y install gsound-devel # FIXME: Remove when new images built
+
     - *environment_information
     - *build_procedure
 
@@ -261,6 +263,7 @@ stop_review:
   stage: manual
   when: manual
   script:
+    - dnf -y install gsound-devel # FIXME: Remove when new images built
     - *environment_information
     - *build_procedure
     - *run_tests
