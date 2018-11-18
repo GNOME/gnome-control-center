@@ -27,9 +27,26 @@ struct _CcInputRow
 
   GtkLabel        *name_label;
   GtkWidget       *icon_image;
+  GtkButton       *remove_button;
 };
 
 G_DEFINE_TYPE (CcInputRow, cc_input_row, GTK_TYPE_LIST_BOX_ROW)
+
+enum
+{
+  SIGNAL_REMOVE_ROW,
+  SIGNAL_LAST
+};
+
+static guint signals[SIGNAL_LAST] = { 0, };
+
+static void
+remove_button_clicked_cb (CcInputRow *self)
+{
+  g_signal_emit (self,
+                 signals[SIGNAL_REMOVE_ROW],
+                 0);
+}
 
 static void
 cc_input_row_dispose (GObject *object)
@@ -51,8 +68,21 @@ cc_input_row_class_init (CcInputRowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-input-row.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcInputRow, remove_button);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, name_label);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, icon_image);
+
+  gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
+
+  signals[SIGNAL_REMOVE_ROW] =
+    g_signal_new ("remove-row",
+                  G_TYPE_FROM_CLASS (object_class),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL,
+                  NULL,
+                  G_TYPE_NONE,
+                  0);
 }
 
 void
@@ -89,4 +119,12 @@ cc_input_row_get_source (CcInputRow *self)
 {
   g_return_val_if_fail (CC_IS_INPUT_ROW (self), NULL);
   return self->source;
+}
+
+void
+cc_input_row_set_removable (CcInputRow *self,
+                            gboolean    removable)
+{
+  g_return_if_fail (CC_IS_INPUT_ROW (self));
+  gtk_widget_set_sensitive (GTK_WIDGET (self->remove_button), removable);
 }
