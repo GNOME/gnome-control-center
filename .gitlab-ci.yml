@@ -58,6 +58,10 @@ build:
     # Save all but git-related files
     - rm -rf .git .gitignore .gitmodules
 
+  except:
+    variables:
+      - $CI_PIPELINE_SOURCE == "scheduled"
+
 ##
 # Stage: Test
 #
@@ -86,6 +90,7 @@ test:
 
   except:
     variables:
+      - $CI_PIPELINE_SOURCE == "scheduled"
       - $CI_COMMIT_TITLE =~ /^Update.*translation$/
 
 # Runs the coverage test.
@@ -112,6 +117,7 @@ coverage:
 
   except:
     variables:
+      - $CI_PIPELINE_SOURCE == "scheduled"
       - $CI_COMMIT_TITLE =~ /^Update.*translation$/
 
 # Runs the address sanitizer.
@@ -239,6 +245,7 @@ stop_review:
 
   except:
     variables:
+      - $CI_PIPELINE_SOURCE == "scheduled"
       - $CI_COMMIT_TITLE =~ /^Update.*translation$/
 
 asan:
@@ -289,6 +296,7 @@ msan:
 
   except:
     variables:
+      - $CI_PIPELINE_SOURCE == "scheduled"
       - $CI_COMMIT_TITLE =~ /^Update.*translation$/
 
 armv8:
