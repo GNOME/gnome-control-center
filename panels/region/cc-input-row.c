@@ -56,37 +56,37 @@ cc_input_row_class_init (CcInputRowClass *klass)
 }
 
 void
-cc_input_row_init (CcInputRow *row)
+cc_input_row_init (CcInputRow *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (row));
+  gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
-label_changed_cb (CcInputRow *row)
+label_changed_cb (CcInputRow *self)
 {
-  g_autofree gchar *label = cc_input_source_get_label (row->source);
-  gtk_label_set_text (GTK_LABEL (row->name_label), label);
+  g_autofree gchar *label = cc_input_source_get_label (self->source);
+  gtk_label_set_text (GTK_LABEL (self->name_label), label);
 }
 
 CcInputRow *
 cc_input_row_new (CcInputSource *source)
 {
-  CcInputRow *row;
+  CcInputRow *self;
 
-  row = g_object_new (CC_TYPE_INPUT_ROW, NULL);
-  row->source = g_object_ref (source);
+  self = g_object_new (CC_TYPE_INPUT_ROW, NULL);
+  self->source = g_object_ref (source);
 
-  g_signal_connect_object (source, "label-changed", G_CALLBACK (label_changed_cb), row, G_CONNECT_SWAPPED);
-  label_changed_cb (row);
+  g_signal_connect_object (source, "label-changed", G_CALLBACK (label_changed_cb), self, G_CONNECT_SWAPPED);
+  label_changed_cb (self);
 
-  gtk_widget_set_visible (row->icon_image, CC_IS_INPUT_SOURCE_IBUS (source));
+  gtk_widget_set_visible (self->icon_image, CC_IS_INPUT_SOURCE_IBUS (source));
 
-  return row;
+  return self;
 }
 
 CcInputSource *
-cc_input_row_get_source (CcInputRow *row)
+cc_input_row_get_source (CcInputRow *self)
 {
-  g_return_val_if_fail (CC_IS_INPUT_ROW (row), NULL);
-  return row->source;
+  g_return_val_if_fail (CC_IS_INPUT_ROW (self), NULL);
+  return self->source;
 }
