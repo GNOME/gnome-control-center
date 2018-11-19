@@ -966,13 +966,16 @@ cc_panel_list_go_previous (CcPanelList *self)
    *   Main → Details or Devices → Widget
    *
    * to
+   *
    *   Main → Details or Devices
+   *
+   * A similar situation may happen with search.
    *
    * To avoid a loop (Details or Devices → Widget → Details or Devices → ...),
    * make sure to go back to the main view when the current view is details or
    * devices.
    */
-  if (previous_view == CC_PANEL_LIST_WIDGET)
+  if (previous_view == CC_PANEL_LIST_WIDGET || previous_view == CC_PANEL_LIST_SEARCH)
     previous_view = CC_PANEL_LIST_MAIN;
 
   switch_to_view (self, previous_view);
