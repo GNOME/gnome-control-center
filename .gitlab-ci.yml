@@ -1,4 +1,4 @@
-image: claudioandre/settings:job-502.6_fedora.dev  # temporarily pinned to old tag
+image: registry.gitlab.gnome.org/gnome/gnome-control-center:fedora.dev
 stages:
   - build
   - test
@@ -305,7 +305,7 @@ armv8:
   when: manual
   variables:
     DOCKER_DRIVER: overlay
-    IMAGE: "claudioandre/settings:fedora.aarch64"
+    IMAGE: "registry.gitlab.gnome.org/gnome/gnome-control-center:fedora.aarch64"
 
 ppc64le:
   <<: *multiarch
@@ -314,7 +314,7 @@ ppc64le:
   allow_failure: true
   variables:
     DOCKER_DRIVER: overlay
-    IMAGE: "claudioandre/settings:fedora.ppc64le"
+    IMAGE: "registry.gitlab.gnome.org/gnome/gnome-control-center:fedora.ppc64le"
 
 #############################################
 #          Create CI Docker Images          #
