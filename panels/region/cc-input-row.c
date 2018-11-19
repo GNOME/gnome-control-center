@@ -25,7 +25,7 @@ struct _CcInputRow
 
   CcInputSource   *source;
 
-  GtkWidget       *name_label;
+  GtkLabel        *name_label;
   GtkWidget       *icon_image;
 };
 
@@ -65,7 +65,7 @@ static void
 label_changed_cb (CcInputRow *self)
 {
   g_autofree gchar *label = cc_input_source_get_label (self->source);
-  gtk_label_set_text (GTK_LABEL (self->name_label), label);
+  gtk_label_set_text (self->name_label, label);
 }
 
 CcInputRow *
