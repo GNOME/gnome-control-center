@@ -686,6 +686,7 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   gtk_container_add (GTK_CONTAINER (row), hbox);
   widget = gtk_label_new ("");
   gtk_widget_show (widget);
+  gtk_label_set_xalign (GTK_LABEL (widget), 0.0);
   gtk_widget_set_halign (widget, GTK_ALIGN_START);
   gtk_label_set_markup (GTK_LABEL (widget), description->str);
   gtk_widget_set_margin_start (widget, 20);
