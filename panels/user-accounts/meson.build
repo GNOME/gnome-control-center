@@ -18,21 +18,21 @@ i18n.merge_file(
 )
 
 image_data = files(
-  'data/faces/bicycle.jpg',
-  'data/faces/book.jpg',
-  'data/faces/calculator.jpg',
-  'data/faces/cat.jpg',
-  'data/faces/coffee2.jpg',
-  'data/faces/flower2.jpg',
-  'data/faces/gamepad.jpg',
-  'data/faces/guitar2.jpg',
-  'data/faces/headphones.jpg',
-  'data/faces/hummingbird.jpg',
-  'data/faces/mountain.jpg',
-  'data/faces/plane.jpg',
-  'data/faces/surfer.jpg',
-  'data/faces/tomatoes.jpg',
-  'data/faces/tree.jpg',
+  'data/faces/bicycle.png',
+  'data/faces/book.png',
+  'data/faces/calculator.png',
+  'data/faces/cat.png',
+  'data/faces/coffee2.png',
+  'data/faces/flower2.png',
+  'data/faces/gamepad.png',
+  'data/faces/guitar2.png',
+  'data/faces/headphones.png',
+  'data/faces/hummingbird.png',
+  'data/faces/mountain.png',
+  'data/faces/plane.png',
+  'data/faces/surfer.png',
+  'data/faces/tomatoes.png',
+  'data/faces/tree.png',
 )
 
 legacy_image_data = files(
