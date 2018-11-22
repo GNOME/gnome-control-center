@@ -103,8 +103,7 @@ pp_new_printer_finalize (GObject *object)
   g_clear_pointer (&priv->make_and_model, g_free);
   g_clear_pointer (&priv->host_name, g_free);
   g_clear_object (&priv->task);
-  if (priv->cancellable)
-    g_object_unref (priv->cancellable);
+  g_clear_object (&priv->cancellable);
 
   G_OBJECT_CLASS (pp_new_printer_parent_class)->finalize (object);
 }
@@ -347,7 +346,6 @@ pp_new_printer_init (PpNewPrinter *printer)
                                                PpNewPrinterPrivate);
 
   printer->priv->unlink_ppd_file = FALSE;
-  printer->priv->cancellable = NULL;
 }
 
 PpNewPrinter *
@@ -804,8 +802,7 @@ printer_configure_async_finish (PCData *data)
     {
       _pp_new_printer_add_async_cb (TRUE, data->new_printer);
 
-      if (data->cancellable)
-        g_object_unref (data->cancellable);
+      g_clear_object (&data->cancellable);
       g_free (data);
     }
 }
