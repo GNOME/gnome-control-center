@@ -43,8 +43,8 @@ resource_data = files(
   'details-dialog.ui',
   'jobs-dialog.ui',
   'new-printer-dialog.ui',
-  'options-dialog.ui',
   'ppd-selection-dialog.ui',
+  'pp-options-dialog.ui',
   'printer-entry.ui',
   'printers.ui'
 )
