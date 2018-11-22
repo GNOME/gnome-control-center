@@ -371,9 +371,33 @@ pp_details_dialog_init (PpDetailsDialog *self)
 }
 
 static void
+pp_details_dialog_dispose (GObject *object)
+{
+  PpDetailsDialog *self = PP_DETAILS_DIALOG (object);
+
+  g_clear_pointer (&self->printer_name, g_free);
+  g_clear_pointer (&self->printer_location, g_free);
+  g_clear_pointer (&self->ppd_file_name, g_free);
+
+  if (self->all_ppds_list != NULL)
+    {
+      ppd_list_free (self->all_ppds_list);
+      self->all_ppds_list = NULL;
+    }
+
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
+
+  G_OBJECT_CLASS (pp_details_dialog_parent_class)->dispose (object);
+}
+
+static void
 pp_details_dialog_class_init (PpDetailsDialogClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->dispose = pp_details_dialog_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-details-dialog.ui");
 
@@ -438,26 +462,4 @@ pp_details_dialog_new (GtkWindow            *parent,
   update_sensitivity (self, sensitive);
 
   return self;
-}
-
-void
-pp_details_dialog_free (PpDetailsDialog *self)
-{
-  if (self != NULL)
-    {
-      g_clear_pointer (&self->printer_name, g_free);
-      g_clear_pointer (&self->printer_location, g_free);
-      g_clear_pointer (&self->ppd_file_name, g_free);
-
-      if (self->all_ppds_list != NULL)
-        {
-          ppd_list_free (self->all_ppds_list);
-          self->all_ppds_list = NULL;
-        }
-
-      g_cancellable_cancel (self->cancellable);
-      g_clear_object (&self->cancellable);
-
-      gtk_widget_destroy (GTK_WIDGET (self));
-    }
 }
