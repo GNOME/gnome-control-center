@@ -554,7 +554,7 @@ pp_host_get_jetdirect_devices_finish (PpHost        *host,
                                       GError       **error)
 {
   g_return_val_if_fail (g_task_is_valid (res, host), NULL);
-
+  g_return_val_if_fail (error == NULL || *error == NULL, NULL);
   return g_task_propagate_pointer (G_TASK (res), error);
 }
 
@@ -764,6 +764,6 @@ pp_host_get_lpd_devices_finish (PpHost        *host,
                                 GError       **error)
 {
   g_return_val_if_fail (g_task_is_valid (res, host), NULL);
-
+  g_return_val_if_fail (error == NULL || *error == NULL, NULL);
   return g_task_propagate_pointer (G_TASK (res), error);
 }
