@@ -255,7 +255,6 @@ _pp_host_get_snmp_devices_thread (GTask        *task,
   g_autoptr(GError) error = NULL;
   gchar           **argv;
   gchar            *stdout_string = NULL;
-  gchar            *stderr_string = NULL;
   gint              exit_status;
 
   devices = g_new0 (PpDevicesList, 1);
@@ -268,11 +267,11 @@ _pp_host_get_snmp_devices_thread (GTask        *task,
   g_spawn_sync (NULL,
                 argv,
                 NULL,
-                0,
+                G_SPAWN_STDERR_TO_DEV_NULL,
                 NULL,
                 NULL,
                 &stdout_string,
-                &stderr_string,
+                NULL,
                 &exit_status,
                 &error);
 
