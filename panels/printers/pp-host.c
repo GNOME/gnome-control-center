@@ -432,9 +432,8 @@ pp_host_get_remote_cups_devices_finish (PpHost        *host,
 
 typedef struct
 {
-  PpDevicesList *devices;
-  PpHost        *host;
-  gint           port;
+  PpHost *host;
+  gint    port;
 } JetDirectData;
 
 static void
@@ -442,7 +441,6 @@ jetdirect_data_free (JetDirectData *data)
 {
   if (data != NULL)
     {
-      pp_devices_list_free (data->devices);
       g_clear_object (&data->host);
       g_free (data);
     }
@@ -457,11 +455,13 @@ jetdirect_connection_test_cb (GObject      *source_object,
   PpHostPrivate     *priv;
   PpPrintDevice     *device;
   JetDirectData     *data;
-  gpointer           result;
+  PpDevicesList     *devices;
   g_autoptr(GError)  error = NULL;
   GTask             *task = G_TASK (user_data);
 
   data = g_task_get_task_data (task);
+
+  devices = g_new0 (PpDevicesList, 1);
 
   connection = g_socket_client_connect_to_host_finish (G_SOCKET_CLIENT (source_object),
                                                        res,
@@ -492,12 +492,10 @@ jetdirect_connection_test_cb (GObject      *source_object,
 
       g_free (device_uri);
 
-      data->devices->devices = g_list_append (data->devices->devices, device);
+      devices->devices = g_list_append (devices->devices, device);
     }
 
-  result = data->devices;
-  data->devices = NULL;
-  g_task_return_pointer (task, result, (GDestroyNotify) pp_devices_list_free);
+  g_task_return_pointer (task, devices, (GDestroyNotify) pp_devices_list_free);
   g_object_unref (task);
 }
 
@@ -515,11 +513,9 @@ pp_host_get_jetdirect_devices_async (PpHost              *host,
   JetDirectData *data;
   GTask         *task;
   gchar         *address;
-  gpointer       result;
 
   data = g_new0 (JetDirectData, 1);
   data->host = g_object_ref (host);
-  data->devices = g_new0 (PpDevicesList, 1);
 
   if (priv->port == PP_HOST_UNSET_PORT)
     data->port = PP_HOST_DEFAULT_JETDIRECT_PORT;
@@ -545,9 +541,7 @@ pp_host_get_jetdirect_devices_async (PpHost              *host,
     }
   else
     {
-      result = data->devices;
-      data->devices = NULL;
-      g_task_return_pointer (task, result, (GDestroyNotify) pp_devices_list_free);
+      g_task_return_pointer (task, g_new0 (PpDevicesList, 1), (GDestroyNotify) pp_devices_list_free);
       g_object_unref (task);
     }
 
