@@ -642,7 +642,10 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
 
   address = g_strdup_printf ("%s:%d", priv->hostname, port);
   if (address == NULL || address[0] == '/')
-    goto out;
+    {
+      g_task_return_pointer (task, devices, (GDestroyNotify) pp_devices_list_free);
+      return;
+    }
 
   client = g_socket_client_new ();
 
@@ -717,7 +720,6 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
       g_list_free_full (candidates, g_free);
     }
 
-out:
   g_task_return_pointer (task, devices, (GDestroyNotify) pp_devices_list_free);
 }
 
