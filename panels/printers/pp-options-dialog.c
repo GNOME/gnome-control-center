@@ -49,7 +49,6 @@ struct _PpOptionsDialog {
   GtkNotebook      *notebook;
   GtkSpinner       *spinner;
   GtkStack         *stack;
-  GtkButton        *test_page_button;
 
   gchar       *printer_name;
 
@@ -471,15 +470,13 @@ tab_add (PpOptionsDialog *self,
 }
 
 static void
-category_selection_changed_cb (GtkTreeSelection *selection,
-                               gpointer          user_data)
+category_selection_changed_cb (PpOptionsDialog *dialog)
 {
-  PpOptionsDialog *dialog = (PpOptionsDialog *) user_data;
-  GtkTreeModel    *model;
-  GtkTreeIter      iter;
-  gint             id = -1;
+  GtkTreeModel *model;
+  GtkTreeIter   iter;
+  gint          id = -1;
 
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  if (gtk_tree_selection_get_selected (dialog->categories_selection, &model, &iter))
     {
       gtk_tree_model_get (model, &iter,
 			  CATEGORY_IDS_COLUMN, &id,
@@ -667,10 +664,6 @@ populate_options_real (PpOptionsDialog *dialog)
   tab_add (dialog, C_("Printer Option Group", "Advanced"), advanced_tab_grid);
 
   /* Select the first option group */
-  g_signal_connect (dialog->categories_selection,
-                    "changed",
-                    G_CALLBACK (category_selection_changed_cb), dialog);
-
   if ((model = gtk_tree_view_get_model (dialog->categories_treeview)) != NULL &&
       gtk_tree_model_get_iter_first (model, &iter))
     gtk_tree_selection_select_iter (dialog->categories_selection, &iter);
@@ -830,11 +823,9 @@ print_test_page_cb (GObject      *source_object,
 }
 
 static void
-test_page_cb (GtkButton *button,
-              gpointer   user_data)
+test_page_cb (PpOptionsDialog *dialog)
 {
-  PpOptionsDialog *dialog = (PpOptionsDialog*) user_data;
-  gint             i;
+  gint i;
 
   if (dialog->printer_name)
     {
@@ -908,9 +899,6 @@ pp_options_dialog_new (gchar   *printer_name,
 
   dialog->sensitive = sensitive;
 
-  /* connect signals */
-  g_signal_connect (dialog->test_page_button, "clicked", G_CALLBACK (test_page_cb), dialog);
-
   gtk_window_set_title (GTK_WINDOW (dialog), printer_name);
 
   dialog->populating_dialog = TRUE;
@@ -965,7 +953,9 @@ pp_options_dialog_class_init (PpOptionsDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, notebook);
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, spinner);
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, stack);
-  gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, test_page_button);
+
+  gtk_widget_class_bind_template_callback (widget_class, category_selection_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, test_page_cb);
 }
 
 void
