@@ -749,7 +749,6 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
 
 out:
   g_task_return_pointer (task, devices, (GDestroyNotify) pp_devices_list_free);
-  g_object_unref (task);
 
   g_free (address);
 }
@@ -760,7 +759,7 @@ pp_host_get_lpd_devices_async (PpHost              *host,
                                GAsyncReadyCallback  callback,
                                gpointer             user_data)
 {
-  GTask   *task;
+  g_autoptr(GTask) task = NULL;
 
   task = g_task_new (G_OBJECT (host), cancellable, callback, user_data);
   g_task_run_in_thread (task, _pp_host_get_lpd_devices_thread);
