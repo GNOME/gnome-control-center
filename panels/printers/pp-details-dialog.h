@@ -40,7 +40,6 @@ PpDetailsDialog *pp_details_dialog_new      (GtkWindow            *parent,
                                              gchar                *printer_address,
                                              gchar                *printer_make_and_model,
                                              gboolean              sensitive);
-void             pp_details_dialog_free     (PpDetailsDialog      *dialog);
 
 G_END_DECLS
 
