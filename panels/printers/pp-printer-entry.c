@@ -420,18 +420,9 @@ details_dialog_cb (GtkDialog *dialog,
 {
   PpPrinterEntry *self = user_data;
 
-  pp_details_dialog_free (self->pp_details_dialog);
-  self->pp_details_dialog = NULL;
+  g_clear_pointer ((GtkWidget **) &self->pp_details_dialog, gtk_widget_destroy);
 
   g_signal_emit_by_name (self, "printer-changed");
-}
-
-static void
-details_dialog_free_cb (GtkDialog *dialog,
-                        gint       response_id,
-                        gpointer   user_data)
-{
-  pp_details_dialog_free (PP_DETAILS_DIALOG (dialog));
 }
 
 static void
@@ -993,6 +984,8 @@ pp_printer_entry_dispose (GObject *object)
       g_signal_handlers_disconnect_by_data (self->pp_details_dialog, self);
       g_signal_connect (self->pp_details_dialog, "response", G_CALLBACK (details_dialog_free_cb), NULL);
     }
+
+  g_clear_pointer ((GtkWidget **) &self->pp_details_dialog, gtk_widget_destroy);
 
   if (self->pp_options_dialog != NULL)
     pp_options_dialog_set_callback (self->pp_options_dialog, printer_options_dialog_free_cb, self->pp_options_dialog);
