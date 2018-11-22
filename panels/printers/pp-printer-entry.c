@@ -81,7 +81,6 @@ struct _PpPrinterEntry
 
   /* Dialogs */
   PpDetailsDialog *pp_details_dialog;
-  PpOptionsDialog *pp_options_dialog;
   PpJobsDialog    *pp_jobs_dialog;
 
   GCancellable *get_jobs_cancellable;
@@ -452,37 +451,19 @@ on_show_printer_details_dialog (GtkButton      *button,
 }
 
 static void
-printer_options_dialog_cb (GtkDialog *dialog,
-                           gint       response_id,
-                           gpointer   user_data)
-{
-  PpPrinterEntry *self = user_data;
-
-  if (self->pp_options_dialog != NULL)
-    {
-      pp_options_dialog_free (self->pp_options_dialog);
-      self->pp_options_dialog = NULL;
-    }
-}
-
-static void
-printer_options_dialog_free_cb (GtkDialog *dialog,
-                                gint       response_id,
-                                gpointer   user_data)
-{
-  pp_options_dialog_free ((PpOptionsDialog *) user_data);
-}
-
-static void
 on_show_printer_options_dialog (GtkButton      *button,
                                 PpPrinterEntry *self)
 {
-  self->pp_options_dialog = pp_options_dialog_new (
-    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
-    printer_options_dialog_cb,
-    self,
-    self->printer_name,
-    self->is_authorized);
+  PpOptionsDialog *dialog;
+
+  dialog = pp_options_dialog_new (self->printer_name, self->is_authorized);
+
+  gtk_window_set_transient_for (GTK_WINDOW (dialog),
+                                GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+
+  gtk_dialog_run (GTK_DIALOG (dialog));
+
+  gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 static void
@@ -993,9 +974,6 @@ pp_printer_entry_dispose (GObject *object)
       g_signal_handlers_disconnect_by_data (self->pp_details_dialog, self);
       g_signal_connect (self->pp_details_dialog, "response", G_CALLBACK (details_dialog_free_cb), NULL);
     }
-
-  if (self->pp_options_dialog != NULL)
-    pp_options_dialog_set_callback (self->pp_options_dialog, printer_options_dialog_free_cb, self->pp_options_dialog);
 
   if (self->pp_jobs_dialog != NULL)
     pp_jobs_dialog_set_callback (self->pp_jobs_dialog, printer_jobs_dialog_free_cb, self->pp_jobs_dialog);
