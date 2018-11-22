@@ -13,9 +13,10 @@
       <object class="GtkHeaderBar">
         <property name="visible">True</property>
         <child>
-          <object class="GtkButton" id="test_page_button">
+          <object class="GtkButton">
             <property name="visible">True</property>
             <property name="label" translatable="yes" comments="Translators: This button triggers the printing of a test page.">Test Page</property>
+            <signal name="clicked" handler="test_page_cb" object="PpOptionsDialog" swapped="yes"/>
           </object>
           <packing>
             <property name="pack_type">start</property>
@@ -54,7 +55,9 @@
                             <property name="can_focus">True</property>
                             <property name="headers_visible">False</property>
                             <child internal-child="selection">
-                              <object class="GtkTreeSelection" id="categories_selection"/>
+                              <object class="GtkTreeSelection" id="categories_selection">
+                                <signal name="changed" handler="category_selection_changed_cb" object="PpOptionsDialog" swapped="yes"/>
+                              </object>
                             </child>
                           </object>
                         </child>
