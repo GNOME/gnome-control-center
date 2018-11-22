@@ -45,10 +45,11 @@ struct _PpOptionsDialog {
 
   GtkTreeSelection *categories_selection;
   GtkTreeView      *categories_treeview;
+  GtkBox           *main_box;
   GtkNotebook      *notebook;
   GtkSpinner       *spinner;
   GtkStack         *stack;
-  GtkButton   *test_page_button;
+  GtkButton        *test_page_button;
 
   gchar       *printer_name;
 
@@ -522,7 +523,7 @@ populate_options_real (PpOptionsDialog *self)
 
   gtk_spinner_stop (self->spinner);
 
-  gtk_stack_set_visible_child_name (self->stack, "main-box");
+  gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->main_box));
 
   if (self->ipp_attributes)
     {
@@ -769,7 +770,7 @@ populate_options (PpOptionsDialog *self)
       "orientation-requested-default",
       NULL};
 
-  gtk_stack_set_visible_child_name (self->stack, "progress-box");
+  gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->spinner));
 
   renderer = gtk_cell_renderer_text_new ();
 
@@ -970,6 +971,7 @@ pp_options_dialog_class_init (PpOptionsDialogClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, categories_selection);
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, categories_treeview);
+  gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, main_box);
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, notebook);
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, spinner);
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, stack);
