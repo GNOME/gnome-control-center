@@ -375,7 +375,7 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/details-dialog.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-details-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, dialog_title);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_name_entry);
