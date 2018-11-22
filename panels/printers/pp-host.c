@@ -157,11 +157,6 @@ pp_host_new (const gchar *hostname)
                        NULL);
 }
 
-typedef struct
-{
-  PpDevicesList *devices;
-} GSDData;
-
 static gchar **
 line_split (gchar *line)
 {
@@ -254,19 +249,16 @@ _pp_host_get_snmp_devices_thread (GTask        *task,
 {
   PpHost           *host = (PpHost *) source_object;
   PpHostPrivate    *priv = host->priv;
+  PpDevicesList    *devices;
   PpPrintDevice    *device;
   gboolean          is_network_device;
-  GSDData          *data;
   g_autoptr(GError) error = NULL;
   gchar           **argv;
   gchar            *stdout_string = NULL;
   gchar            *stderr_string = NULL;
   gint              exit_status;
 
-  data = g_task_get_task_data (task);
-
-  data->devices = g_new0 (PpDevicesList, 1);
-  data->devices->devices = NULL;
+  devices = g_new0 (PpDevicesList, 1);
 
   argv = g_new0 (gchar *, 3);
   argv[0] = g_strdup ("/usr/lib/cups/backend/snmp");
@@ -320,24 +312,14 @@ _pp_host_get_snmp_devices_thread (GTask        *task,
           if (length >= 6 && printer_informations[5][0] != '\0')
             g_object_set (device, "device-location", printer_informations[5], NULL);
 
-          data->devices->devices = g_list_append (data->devices->devices, device);
+          devices->devices = g_list_append (devices->devices, device);
         }
 
       g_strfreev (printer_informations);
       g_free (stdout_string);
     }
 
-  g_task_return_pointer (task, g_steal_pointer (&data->devices), (GDestroyNotify) pp_devices_list_free);
-}
-
-static void
-gsd_data_free (GSDData *data)
-{
-  if (data)
-    {
-      pp_devices_list_free (data->devices);
-      g_free (data);
-    }
+  g_task_return_pointer (task, devices, (GDestroyNotify) pp_devices_list_free);
 }
 
 void
@@ -371,8 +353,8 @@ _pp_host_get_remote_cups_devices_thread (GTask        *task,
   cups_dest_t   *dests = NULL;
   PpHost        *host = (PpHost *) source_object;
   PpHostPrivate *priv = host->priv;
+  PpDevicesList *devices;
   PpPrintDevice *device;
-  GSDData       *data;
   const char    *device_location;
   http_t        *http;
   gchar         *device_uri;
@@ -380,10 +362,7 @@ _pp_host_get_remote_cups_devices_thread (GTask        *task,
   gint           port;
   gint           i;
 
-  data = g_task_get_task_data (task);
-
-  data->devices = g_new0 (PpDevicesList, 1);
-  data->devices->devices = NULL;
+  devices = g_new0 (PpDevicesList, 1);
 
   if (priv->port == PP_HOST_UNSET_PORT)
     port = PP_HOST_DEFAULT_IPP_PORT;
@@ -420,14 +399,14 @@ _pp_host_get_remote_cups_devices_thread (GTask        *task,
 
               g_free (device_uri);
 
-              data->devices->devices = g_list_append (data->devices->devices, device);
+              devices->devices = g_list_append (devices->devices, device);
             }
         }
 
       httpClose (http);
     }
 
-  g_task_return_pointer (task, g_steal_pointer (&data->devices), (GDestroyNotify) pp_devices_list_free);
+  g_task_return_pointer (task, devices, (GDestroyNotify) pp_devices_list_free);
 }
 
 void
@@ -669,9 +648,8 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
   PpPrintDevice     *device;
   PpHost            *host = (PpHost *) source_object;
   PpHostPrivate     *priv = host->priv;
+  PpDevicesList     *devices;
   GSocketClient     *client;
-  PpDevicesList     *result;
-  GSDData           *data = (GSDData *) task_data;
   g_autoptr(GError)  error = NULL;
   GList             *candidates = NULL;
   GList             *iter;
@@ -687,8 +665,7 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
   else
     port = priv->port;
 
-  result = data->devices;
-  data->devices = NULL;
+  devices = g_new0 (PpDevicesList, 1);
 
   address = g_strdup_printf ("%s:%d", priv->hostname, port);
   if (address == NULL || address[0] == '/')
@@ -762,7 +739,7 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
 
           g_free (device_uri);
 
-          result->devices = g_list_append (result->devices, device);
+          devices->devices = g_list_append (devices->devices, device);
         }
 
       g_list_free_full (candidates, g_free);
@@ -771,7 +748,7 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
   g_object_unref (client);
 
 out:
-  g_task_return_pointer (task, result, (GDestroyNotify) pp_devices_list_free);
+  g_task_return_pointer (task, devices, (GDestroyNotify) pp_devices_list_free);
   g_object_unref (task);
 
   g_free (address);
@@ -783,14 +760,9 @@ pp_host_get_lpd_devices_async (PpHost              *host,
                                GAsyncReadyCallback  callback,
                                gpointer             user_data)
 {
-  GSDData *data;
   GTask   *task;
 
-  data = g_new0 (GSDData, 1);
-  data->devices = g_new0 (PpDevicesList, 1);
-
   task = g_task_new (G_OBJECT (host), cancellable, callback, user_data);
-  g_task_set_task_data (task, data, (GDestroyNotify) gsd_data_free);
   g_task_run_in_thread (task, _pp_host_get_lpd_devices_thread);
 }
 
