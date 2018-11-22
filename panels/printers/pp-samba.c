@@ -148,9 +148,9 @@ auth_fn (SMBCCTX    *smb_context,
          char       *password,
          int         pwmaxlen)
 {
-  PpSamba *samba;
-  GSource *source;
-  SMBData *data;
+  PpSamba           *samba;
+  g_autoptr(GSource) source = NULL;
+  SMBData           *data;
 
   data = (SMBData *) smbc_getOptionUserData (smb_context);
   samba = data->samba;
@@ -169,7 +169,6 @@ auth_fn (SMBCCTX    *smb_context,
                              data,
                              NULL);
       g_source_attach (source, data->context);
-      g_source_unref (source);
 
       samba->priv->waiting = TRUE;
 
@@ -362,9 +361,6 @@ _pp_samba_get_devices_thread (GTask        *task,
   static GMutex   mutex;
   SMBData        *data = (SMBData *) task_data;
   SMBCCTX        *smb_context;
-  gchar          *dirname;
-  gchar          *path;
-  gchar          *hostname = NULL;
 
   data->devices = g_new0 (PpDevicesList, 1);
   data->devices->devices = NULL;
@@ -377,6 +373,10 @@ _pp_samba_get_devices_thread (GTask        *task,
     {
       if (smbc_init_context (smb_context))
         {
+          g_autofree gchar *hostname = NULL;
+          g_autofree gchar *dirname = NULL;
+          g_autofree gchar *path = NULL;
+
           smbc_setOptionUserData (smb_context, data);
 
           g_object_get (source_object, "hostname", &hostname, NULL);
@@ -384,8 +384,6 @@ _pp_samba_get_devices_thread (GTask        *task,
             {
               dirname = g_strdup_printf ("smb://%s", hostname);
               path = g_strdup_printf ("//%s", hostname);
-
-              g_free (hostname);
             }
           else
             {
@@ -395,9 +393,6 @@ _pp_samba_get_devices_thread (GTask        *task,
 
           smbc_setFunctionAuthDataWithContext (smb_context, anonymous_auth_fn);
           list_dir (smb_context, dirname, path, cancellable, data);
-
-          g_free (dirname);
-          g_free (path);
         }
 
       smbc_free_context (smb_context, 1);
@@ -417,7 +412,7 @@ pp_samba_get_devices_async (PpSamba             *samba,
 {
   g_autoptr(GTask)  task = NULL;
   SMBData          *data;
-  gchar            *hostname = NULL;
+  g_autofree gchar *hostname = NULL;
 
   g_object_get (G_OBJECT (samba), "hostname", &hostname, NULL);
 
@@ -430,8 +425,6 @@ pp_samba_get_devices_async (PpSamba             *samba,
 
   g_task_set_task_data (task, data, (GDestroyNotify) smb_data_free);
   g_task_run_in_thread (task, _pp_samba_get_devices_thread);
-
-  g_free (hostname);
 }
 
 PpDevicesList *
