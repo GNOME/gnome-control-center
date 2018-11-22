@@ -41,13 +41,14 @@
 #include "pp-printer.h"
 
 struct _PpOptionsDialog {
-  GtkBuilder *builder;
-  GtkWidget  *parent;
+  GtkDialog    parent_instance;
 
-  GtkWidget  *dialog;
-
-  UserResponseCallback user_callback;
-  gpointer             user_data;
+  GtkTreeSelection *categories_selection;
+  GtkTreeView      *categories_treeview;
+  GtkNotebook      *notebook;
+  GtkSpinner       *spinner;
+  GtkStack         *stack;
+  GtkButton   *test_page_button;
 
   gchar       *printer_name;
 
@@ -67,7 +68,7 @@ struct _PpOptionsDialog {
   gboolean sensitive;
 };
 
-static void pp_options_dialog_hide (PpOptionsDialog *dialog);
+G_DEFINE_TYPE (PpOptionsDialog, pp_options_dialog, GTK_TYPE_DIALOG)
 
 enum
 {
@@ -346,10 +347,12 @@ ipp_option_add (IPPAttribute *attr_supported,
                                                    printer_name);
   if (widget)
     {
+      gtk_widget_show_all (widget);
       gtk_widget_set_sensitive (widget, sensitive);
       position = grid_get_height (grid);
 
       label = gtk_label_new (option_display_name);
+      gtk_widget_show (GTK_WIDGET (label));
       gtk_label_set_mnemonic_widget (label, widget);
       context = gtk_widget_get_style_context (label);
       gtk_style_context_add_class (context, "dim-label");
@@ -379,10 +382,12 @@ ppd_option_add (ppd_option_t  option,
   widget = (GtkWidget *) pp_ppd_option_widget_new (&option, printer_name);
   if (widget)
     {
+      gtk_widget_show_all (widget);
       gtk_widget_set_sensitive (widget, sensitive);
       position = grid_get_height (grid);
 
       label = gtk_label_new (ppd_option_name_translate (&option));
+      gtk_widget_show (GTK_WIDGET (label));
       gtk_label_set_mnemonic_widget (label, widget);
       context = gtk_widget_get_style_context (label);
       gtk_style_context_add_class (context, "dim-label");
@@ -404,6 +409,7 @@ tab_grid_new ()
   GtkWidget *grid;
 
   grid = gtk_grid_new ();
+  gtk_widget_show (GTK_WIDGET (grid));
   gtk_container_set_border_width (GTK_CONTAINER (grid), 20);
   gtk_grid_set_row_spacing (GTK_GRID (grid), 15);
 
@@ -411,10 +417,9 @@ tab_grid_new ()
 }
 
 static void
-tab_add (const gchar *tab_name,
-         GtkWidget   *options_notebook,
-         GtkTreeView *treeview,
-         GtkWidget   *grid)
+tab_add (PpOptionsDialog *self,
+         const gchar     *tab_name,
+         GtkWidget       *grid)
 {
   GtkListStore *store;
   GtkTreeIter   iter;
@@ -425,18 +430,19 @@ tab_add (const gchar *tab_name,
   if (!grid_is_empty (grid))
     {
       scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+      gtk_widget_show (GTK_WIDGET (scrolled_window));
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                       GTK_POLICY_NEVER,
                                       GTK_POLICY_AUTOMATIC);
       gtk_container_add (GTK_CONTAINER (scrolled_window), grid);
 
-      id = gtk_notebook_append_page (GTK_NOTEBOOK (options_notebook),
+      id = gtk_notebook_append_page (self->notebook,
                                      scrolled_window,
                                      NULL);
 
       if (id >= 0)
         {
-          store = GTK_LIST_STORE (gtk_tree_view_get_model (treeview));
+          store = GTK_LIST_STORE (gtk_tree_view_get_model (self->categories_treeview));
           if (!store)
             {
               store = gtk_list_store_new (2, G_TYPE_INT, G_TYPE_STRING);
@@ -451,7 +457,7 @@ tab_add (const gchar *tab_name,
 
           if (unref_store)
             {
-              gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (store));
+              gtk_tree_view_set_model (self->categories_treeview, GTK_TREE_MODEL (store));
               g_object_unref (store);
             }
         }
@@ -470,7 +476,6 @@ category_selection_changed_cb (GtkTreeSelection *selection,
   PpOptionsDialog *dialog = (PpOptionsDialog *) user_data;
   GtkTreeModel    *model;
   GtkTreeIter      iter;
-  GtkWidget       *options_notebook;
   gint             id = -1;
 
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
@@ -482,47 +487,30 @@ category_selection_changed_cb (GtkTreeSelection *selection,
 
   if (id >= 0)
     {
-      options_notebook = (GtkWidget*)
-        gtk_builder_get_object (dialog->builder, "options-notebook");
-
-      gtk_notebook_set_current_page (GTK_NOTEBOOK (options_notebook), id);
+      gtk_notebook_set_current_page (dialog->notebook, id);
     }
 }
 
 static void
 populate_options_real (PpOptionsDialog *dialog)
 {
-  GtkTreeSelection *selection;
-  GtkTreeModel     *model;
-  GtkTreeView      *treeview;
-  GtkTreeIter       iter;
-  ppd_file_t       *ppd_file;
-  GtkWidget        *notebook;
-  GtkWidget        *grid;
-  GtkWidget        *general_tab_grid = tab_grid_new ();
-  GtkWidget        *page_setup_tab_grid = tab_grid_new ();
-  GtkWidget        *installable_options_tab_grid = tab_grid_new ();
-  GtkWidget        *job_tab_grid = tab_grid_new ();
-  GtkWidget        *image_quality_tab_grid = tab_grid_new ();
-  GtkWidget        *color_tab_grid = tab_grid_new ();
-  GtkWidget        *finishing_tab_grid = tab_grid_new ();
-  GtkWidget        *advanced_tab_grid = tab_grid_new ();
-  GtkWidget        *widget;
-  gint              i, j;
+  GtkTreeModel *model;
+  GtkTreeIter   iter;
+  ppd_file_t   *ppd_file;
+  GtkWidget    *grid;
+  GtkWidget    *general_tab_grid = tab_grid_new ();
+  GtkWidget    *page_setup_tab_grid = tab_grid_new ();
+  GtkWidget    *installable_options_tab_grid = tab_grid_new ();
+  GtkWidget    *job_tab_grid = tab_grid_new ();
+  GtkWidget    *image_quality_tab_grid = tab_grid_new ();
+  GtkWidget    *color_tab_grid = tab_grid_new ();
+  GtkWidget    *finishing_tab_grid = tab_grid_new ();
+  GtkWidget    *advanced_tab_grid = tab_grid_new ();
+  gint          i, j;
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "options-spinner");
-  gtk_spinner_stop (GTK_SPINNER (widget));
+  gtk_spinner_stop (dialog->spinner);
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "stack");
-  gtk_stack_set_visible_child_name (GTK_STACK (widget), "main-box");
-
-  treeview = (GtkTreeView *)
-    gtk_builder_get_object (dialog->builder, "options-categories-treeview");
-
-  notebook = (GtkWidget *)
-    gtk_builder_get_object (dialog->builder, "options-notebook");
+  gtk_stack_set_visible_child_name (dialog->stack, "main-box");
 
   if (dialog->ipp_attributes)
     {
@@ -654,48 +642,39 @@ populate_options_real (PpOptionsDialog *dialog)
     }
 
   /* Translators: "General" tab contains general printer options */
-  tab_add (C_("Printer Option Group", "General"), notebook, treeview, general_tab_grid);
+  tab_add (dialog, C_("Printer Option Group", "General"), general_tab_grid);
 
   /* Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.) */
-  tab_add (C_("Printer Option Group", "Page Setup"), notebook, treeview, page_setup_tab_grid);
+  tab_add (dialog, C_("Printer Option Group", "Page Setup"), page_setup_tab_grid);
 
   /* Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.) */
-  tab_add (C_("Printer Option Group", "Installable Options"), notebook, treeview, installable_options_tab_grid);
+  tab_add (dialog, C_("Printer Option Group", "Installable Options"), installable_options_tab_grid);
 
   /* Translators: "Job" tab contains settings for jobs */
-  tab_add (C_("Printer Option Group", "Job"), notebook, treeview, job_tab_grid);
+  tab_add (dialog, C_("Printer Option Group", "Job"), job_tab_grid);
 
   /* Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution) */
-  tab_add (C_("Printer Option Group", "Image Quality"), notebook, treeview, image_quality_tab_grid);
+  tab_add (dialog, C_("Printer Option Group", "Image Quality"), image_quality_tab_grid);
 
   /* Translators: "Color" tab contains color settings (e.g. color printing) */
-  tab_add (C_("Printer Option Group", "Color"), notebook, treeview, color_tab_grid);
+  tab_add (dialog, C_("Printer Option Group", "Color"), color_tab_grid);
 
   /* Translators: "Finishing" tab contains finishing settings (e.g. booklet printing) */
-  tab_add (C_("Printer Option Group", "Finishing"), notebook, treeview, finishing_tab_grid);
+  tab_add (dialog, C_("Printer Option Group", "Finishing"), finishing_tab_grid);
 
   /* Translators: "Advanced" tab contains all others settings */
-  tab_add (C_("Printer Option Group", "Advanced"), notebook, treeview, advanced_tab_grid);
-
-  gtk_widget_show_all (GTK_WIDGET (notebook));
+  tab_add (dialog, C_("Printer Option Group", "Advanced"), advanced_tab_grid);
 
   /* Select the first option group */
-  if ((selection = gtk_tree_view_get_selection (treeview)) != NULL)
-    {
-      g_signal_connect (selection,
-                        "changed",
-                        G_CALLBACK (category_selection_changed_cb), dialog);
+  g_signal_connect (dialog->categories_selection,
+                    "changed",
+                    G_CALLBACK (category_selection_changed_cb), dialog);
 
-      if ((model = gtk_tree_view_get_model (treeview)) != NULL &&
-          gtk_tree_model_get_iter_first (model, &iter))
-        gtk_tree_selection_select_iter (selection, &iter);
-    }
+  if ((model = gtk_tree_view_get_model (dialog->categories_treeview)) != NULL &&
+      gtk_tree_model_get_iter_first (model, &iter))
+    gtk_tree_selection_select_iter (dialog->categories_selection, &iter);
 
   dialog->populating_dialog = FALSE;
-  if (dialog->response != GTK_RESPONSE_NONE)
-    {
-      dialog->user_callback (GTK_DIALOG (dialog->dialog), dialog->response, dialog->user_data);
-    }
 }
 
 static void
@@ -763,8 +742,6 @@ populate_options (PpOptionsDialog *dialog)
 {
   GtkTreeViewColumn  *column;
   GtkCellRenderer    *renderer;
-  GtkTreeView        *treeview;
-  GtkWidget          *widget;
   /*
    * Options which we need to obtain through an IPP request
    * to be able to fill the options dialog.
@@ -780,23 +757,16 @@ populate_options (PpOptionsDialog *dialog)
       "orientation-requested-default",
       NULL};
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "stack");
-  gtk_stack_set_visible_child_name (GTK_STACK (widget), "progress-box");
-
-  treeview = (GtkTreeView *)
-    gtk_builder_get_object (dialog->builder, "options-categories-treeview");
+  gtk_stack_set_visible_child_name (dialog->stack, "progress-box");
 
   renderer = gtk_cell_renderer_text_new ();
 
   column = gtk_tree_view_column_new_with_attributes ("Categories", renderer,
                                                      "text", CATEGORY_NAMES_COLUMN, NULL);
   gtk_tree_view_column_set_expand (column, TRUE);
-  gtk_tree_view_append_column (treeview, column);
+  gtk_tree_view_append_column (dialog->categories_treeview, column);
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "options-spinner");
-  gtk_spinner_start (GTK_SPINNER (widget));
+  gtk_spinner_start (dialog->spinner);
 
   printer_get_ppd_async (dialog->printer_name,
                          NULL,
@@ -914,53 +884,15 @@ test_page_cb (GtkButton *button,
     }
 }
 
-static void
-options_dialog_response_cb (GtkDialog *_dialog,
-                            gint       response_id,
-                            gpointer   user_data)
-{
-  PpOptionsDialog *dialog = (PpOptionsDialog*) user_data;
-
-  pp_options_dialog_hide (dialog);
-  dialog->response = response_id;
-
-  if (!dialog->populating_dialog)
-    dialog->user_callback (GTK_DIALOG (dialog->dialog), response_id, dialog->user_data);
-}
-
 PpOptionsDialog *
-pp_options_dialog_new (GtkWindow            *parent,
-                       UserResponseCallback  user_callback,
-                       gpointer              user_data,
-                       gchar                *printer_name,
-                       gboolean              sensitive)
+pp_options_dialog_new (gchar   *printer_name,
+                       gboolean sensitive)
 {
   PpOptionsDialog  *dialog;
-  GtkWidget        *test_page_button;
-  g_autoptr(GError) error = NULL;
-  gchar            *objects[] = { "options-dialog", NULL };
-  guint             builder_result;
 
-  dialog = g_new0 (PpOptionsDialog, 1);
-
-  dialog->builder = gtk_builder_new ();
-  dialog->parent = GTK_WIDGET (parent);
-
-  builder_result = gtk_builder_add_objects_from_resource (dialog->builder,
-                                                          "/org/gnome/control-center/printers/pp-options-dialog.ui",
-                                                          objects, &error);
-
-  if (builder_result == 0)
-    {
-      g_warning ("Could not load ui: %s", error->message);
-      return NULL;
-    }
-
-  dialog->dialog = (GtkWidget *) gtk_builder_get_object (dialog->builder, "options-dialog");
-  gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), GTK_WINDOW (parent));
-
-  dialog->user_callback = user_callback;
-  dialog->user_data = user_data;
+  dialog = g_object_new (pp_options_dialog_get_type (),
+                         "use-header-bar", 1,
+                         NULL);
 
   dialog->printer_name = g_strdup (printer_name);
 
@@ -973,18 +905,12 @@ pp_options_dialog_new (GtkWindow            *parent,
   dialog->ipp_attributes = NULL;
   dialog->ipp_attributes_set = FALSE;
 
-  dialog->response = GTK_RESPONSE_NONE;
-
   dialog->sensitive = sensitive;
 
   /* connect signals */
-  g_signal_connect (dialog->dialog, "response", G_CALLBACK (options_dialog_response_cb), dialog);
-  test_page_button = (GtkWidget*) gtk_builder_get_object (dialog->builder, "print-test-page");
-  g_signal_connect (test_page_button, "clicked", G_CALLBACK (test_page_cb), dialog);
+  g_signal_connect (dialog->test_page_button, "clicked", G_CALLBACK (test_page_cb), dialog);
 
-  gtk_window_set_title (GTK_WINDOW (dialog->dialog), printer_name);
-
-  gtk_widget_show_all (GTK_WIDGET (dialog->dialog));
+  gtk_window_set_title (GTK_WINDOW (dialog), printer_name);
 
   dialog->populating_dialog = TRUE;
   populate_options (dialog);
@@ -992,26 +918,10 @@ pp_options_dialog_new (GtkWindow            *parent,
   return dialog;
 }
 
-void
-pp_options_dialog_set_callback (PpOptionsDialog      *dialog,
-                                UserResponseCallback  user_callback,
-                                gpointer              user_data)
+static void
+pp_options_dialog_dispose (GObject *object)
 {
-  if (dialog != NULL)
-    {
-      dialog->user_callback = user_callback;
-      dialog->user_data = user_data;
-    }
-}
-
-void
-pp_options_dialog_free (PpOptionsDialog *dialog)
-{
-  gtk_widget_destroy (GTK_WIDGET (dialog->dialog));
-  dialog->dialog = NULL;
-
-  g_object_unref (dialog->builder);
-  dialog->builder = NULL;
+  PpOptionsDialog *dialog = PP_OPTIONS_DIALOG (object);
 
   g_free (dialog->printer_name);
   dialog->printer_name = NULL;
@@ -1035,11 +945,29 @@ pp_options_dialog_free (PpOptionsDialog *dialog)
       dialog->ipp_attributes = NULL;
     }
 
-  g_free (dialog);
+  G_OBJECT_CLASS (pp_options_dialog_parent_class)->dispose (object);
 }
 
-static void
-pp_options_dialog_hide (PpOptionsDialog *dialog)
+void
+pp_options_dialog_class_init (PpOptionsDialogClass *klass)
 {
-  gtk_widget_hide (GTK_WIDGET (dialog->dialog));
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->dispose = pp_options_dialog_dispose;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-options-dialog.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, categories_selection);
+  gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, categories_treeview);
+  gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, notebook);
+  gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, spinner);
+  gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, stack);
+  gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, test_page_button);
+}
+
+void
+pp_options_dialog_init (PpOptionsDialog *self)
+{
+  gtk_widget_init_template (GTK_WIDGET (self));
 }

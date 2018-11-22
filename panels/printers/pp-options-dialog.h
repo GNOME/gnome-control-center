@@ -26,17 +26,11 @@
 
 G_BEGIN_DECLS
 
-typedef struct _PpOptionsDialog PpOptionsDialog;
+#define PP_TYPE_OPTIONS_DIALOG (pp_options_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (PpOptionsDialog, pp_options_dialog, PP, OPTIONS_DIALOG, GtkDialog)
 
-PpOptionsDialog *pp_options_dialog_new          (GtkWindow            *parent,
-                                                 UserResponseCallback  user_callback,
-                                                 gpointer              user_data,
-                                                 gchar                *printer_name,
-                                                 gboolean              sensitive);
-void             pp_options_dialog_set_callback (PpOptionsDialog      *dialog,
-                                                 UserResponseCallback  user_callback,
-                                                 gpointer              user_data);
-void             pp_options_dialog_free         (PpOptionsDialog      *dialog);
+PpOptionsDialog *pp_options_dialog_new (gchar   *printer_name,
+                                        gboolean sensitive);
 
 G_END_DECLS
 
