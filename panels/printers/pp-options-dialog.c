@@ -947,7 +947,7 @@ pp_options_dialog_new (GtkWindow            *parent,
   dialog->parent = GTK_WIDGET (parent);
 
   builder_result = gtk_builder_add_objects_from_resource (dialog->builder,
-                                                          "/org/gnome/control-center/printers/options-dialog.ui",
+                                                          "/org/gnome/control-center/printers/pp-options-dialog.ui",
                                                           objects, &error);
 
   if (builder_result == 0)
