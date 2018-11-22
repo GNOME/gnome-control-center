@@ -30,7 +30,7 @@
             <property name="visible">True</property>
             <property name="homogeneous">True</property>
             <child>
-              <object class="GtkBox">
+              <object class="GtkBox" id="main_box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
@@ -87,9 +87,6 @@
                   </packing>
                 </child>
               </object>
-              <packing>
-                <property name="name">main-box</property>
-              </packing>
             </child>
             <child>
               <object class="GtkSpinner" id="spinner">
@@ -98,9 +95,6 @@
                 <property name="height_request">24</property>
                 <property name="can_focus">False</property>
               </object>
-              <packing>
-                <property name="name">progress-box</property>
-              </packing>
             </child>
           </object>
         </child>
