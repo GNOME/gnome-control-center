@@ -439,7 +439,7 @@ on_show_printer_details_dialog (GtkButton      *button,
 
   g_signal_connect (self->pp_details_dialog, "response", G_CALLBACK (details_dialog_cb), self);
   g_signal_connect (self->pp_details_dialog, "printer-renamed", G_CALLBACK (printer_renamed_cb), self);
-  gtk_widget_show_all (GTK_WIDGET (self->pp_details_dialog));
+  gtk_widget_show (GTK_WIDGET (self->pp_details_dialog));
 }
 
 static void
