@@ -346,7 +346,7 @@ select_ppd_manually (GtkButton       *button,
         {
           printer_set_ppd_file_async (self->printer_name,
                                       ppd_filename,
-                                      NULL,
+                                      self->cancellable,
                                       set_ppd_cb,
                                       self);
         }
