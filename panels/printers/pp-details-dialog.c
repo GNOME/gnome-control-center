@@ -42,6 +42,7 @@ struct _PpDetailsDialog {
   GtkDialog parent;
 
   GtkLabel *dialog_title;
+  GtkBox *loading_box;
   GtkEntry *printer_name_entry;
   GtkEntry *printer_location_entry;
   GtkLabel *printer_address_label;
@@ -119,14 +120,14 @@ get_ppd_names_cb (PPDName     **names,
           gtk_label_set_text (self->printer_model_label, _("No suitable driver found"));
         }
 
-      gtk_stack_set_visible_child_name (self->printer_model_stack, "printer_model_label");
+      gtk_stack_set_visible_child (self->printer_model_stack, GTK_WIDGET (self->printer_model_label));
     }
 }
 
 static void
 search_for_drivers (PpDetailsDialog *self)
 {
-  gtk_stack_set_visible_child_name (self->printer_model_stack, "loading");
+  gtk_stack_set_visible_child (self->printer_model_stack, GTK_WIDGET (self->loading_box));
   gtk_widget_set_sensitive (self->search_for_drivers_button, FALSE);
 
   self->get_ppd_names_cancellable = g_cancellable_new ();
@@ -339,6 +340,7 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-details-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, dialog_title);
+  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, loading_box);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_name_entry);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_location_entry);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_address_label);
