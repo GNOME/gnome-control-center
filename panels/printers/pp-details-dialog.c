@@ -62,56 +62,6 @@ struct _PpDetailsDialog {
 
 G_DEFINE_TYPE (PpDetailsDialog, pp_details_dialog, GTK_TYPE_DIALOG)
 
-enum
-{
-  PRINTER_RENAMED,
-  LAST_SIGNAL
-};
-
-static guint signals[LAST_SIGNAL] = { 0 };
-
-static void
-on_printer_rename_cb (GObject      *source_object,
-                      GAsyncResult *result,
-                      gpointer      user_data)
-{
-  pp_printer_rename_finish (PP_PRINTER (source_object), result, NULL);
-
-  g_object_unref (source_object);
-}
-
-static void
-pp_details_dialog_response_cb (GtkDialog *dialog,
-                               gint       response_id,
-                               gpointer   user_data)
-{
-  PpDetailsDialog *self = (PpDetailsDialog*) dialog;
-  const gchar *new_name;
-  const gchar *new_location;
-
-  new_location = gtk_entry_get_text (GTK_ENTRY (self->printer_location_entry));
-  if (g_strcmp0 (self->printer_location, new_location) != 0)
-    {
-      printer_set_location (self->printer_name, new_location);
-
-      self->printer_location = g_strdup (new_location);
-    }
-
-  new_name = gtk_entry_get_text (GTK_ENTRY (self->printer_name_entry));
-  if (g_strcmp0 (self->printer_name, new_name) != 0)
-    {
-      PpPrinter *printer = pp_printer_new (self->printer_name);
-
-      g_signal_emit_by_name (self, "printer-renamed", new_name);
-
-      pp_printer_rename_async (printer,
-                               new_name,
-                               NULL,
-                               on_printer_rename_cb,
-                               NULL);
-    }
-}
-
 static void
 printer_name_changed (GtkEditable *editable,
                       gpointer     user_data)
@@ -120,7 +70,7 @@ printer_name_changed (GtkEditable *editable,
   const gchar *name;
   g_autofree gchar *title = NULL;
 
-  name = gtk_entry_get_text (GTK_ENTRY (self->printer_name_entry));
+  name = pp_details_dialog_get_printer_name (self);
 
   /* Translators: This is the title of the dialog. %s is the printer name. */
   title = g_strdup_printf (_("%s Details"), name);
@@ -398,15 +348,6 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, search_for_drivers);
   gtk_widget_class_bind_template_callback (widget_class, select_ppd_in_dialog);
   gtk_widget_class_bind_template_callback (widget_class, select_ppd_manually);
-  gtk_widget_class_bind_template_callback (widget_class, pp_details_dialog_response_cb);
-
-  signals[PRINTER_RENAMED] = g_signal_new ("printer-renamed",
-                                           G_TYPE_FROM_CLASS (klass),
-                                           G_SIGNAL_RUN_LAST,
-                                           0,
-                                           NULL, NULL, NULL,
-                                           G_TYPE_NONE, 1,
-                                           G_TYPE_STRING);
 }
 
 PpDetailsDialog *
@@ -442,4 +383,18 @@ pp_details_dialog_new (gchar   *printer_name,
   update_sensitivity (self, sensitive);
 
   return self;
+}
+
+const gchar *
+pp_details_dialog_get_printer_name (PpDetailsDialog *self)
+{
+  g_return_val_if_fail (PP_IS_DETAILS_DIALOG (self), NULL);
+  return gtk_entry_get_text (GTK_ENTRY (self->printer_name_entry));
+}
+
+const gchar *
+pp_details_dialog_get_printer_location (PpDetailsDialog *self)
+{
+  g_return_val_if_fail (PP_IS_DETAILS_DIALOG (self), NULL);
+  return gtk_entry_get_text (GTK_ENTRY (self->printer_location_entry));
 }
