@@ -65,13 +65,11 @@ G_DEFINE_TYPE (PpDetailsDialog, pp_details_dialog, GTK_TYPE_DIALOG)
 static void
 printer_name_changed (PpDetailsDialog *self)
 {
-  gchar *title;
+  g_autofree gchar *title = NULL;
 
   /* Translators: This is the title of the dialog. %s is the printer name. */
   title = g_strdup_printf (_("%s Details"), pp_details_dialog_get_printer_name (self));
   gtk_label_set_label (self->dialog_title, title);
-
-  g_free (title);
 }
 
 static void
@@ -156,7 +154,7 @@ ppd_selection_dialog_response_cb (GtkDialog *dialog,
 
   if (response_id == GTK_RESPONSE_OK)
     {
-      gchar *ppd_name;
+      g_autofree gchar *ppd_name = NULL;
 
       ppd_name = pp_ppd_selection_dialog_get_ppd_name (self->pp_ppd_selection_dialog);
 
@@ -171,8 +169,6 @@ ppd_selection_dialog_response_cb (GtkDialog *dialog,
           g_clear_pointer (&self->ppd_file_name, g_free);
           self->ppd_file_name = g_strdup (ppd_name);
         }
-
-      g_free (ppd_name);
     }
 
   pp_ppd_selection_dialog_free (self->pp_ppd_selection_dialog);
@@ -195,14 +191,14 @@ get_all_ppds_async_cb (PPDList  *ppds,
 static void
 select_ppd_in_dialog (PpDetailsDialog *self)
 {
-  gchar *device_id = NULL;
-  gchar *manufacturer = NULL;
-
   g_clear_pointer (&self->ppd_file_name, g_free);
   self->ppd_file_name = g_strdup (cupsGetPPD (self->printer_name));
 
   if (!self->pp_ppd_selection_dialog)
     {
+      g_autofree gchar *device_id = NULL;
+      g_autofree gchar *manufacturer = NULL;
+
       device_id =
         get_ppd_attribute (self->ppd_file_name,
                            "1284DeviceID");
@@ -237,9 +233,6 @@ select_ppd_in_dialog (PpDetailsDialog *self)
           manufacturer,
           ppd_selection_dialog_response_cb,
           self);
-
-        g_free (manufacturer);
-        g_free (device_id);
     }
 }
 
@@ -269,7 +262,7 @@ select_ppd_manually (PpDetailsDialog *self)
 
   if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
     {
-      gchar *ppd_filename;
+      g_autofree gchar *ppd_filename = NULL;
 
       ppd_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
 
@@ -281,8 +274,6 @@ select_ppd_manually (PpDetailsDialog *self)
                                       set_ppd_cb,
                                       self);
         }
-
-      g_free (ppd_filename);
     }
 
   gtk_widget_destroy (dialog);
@@ -358,9 +349,9 @@ pp_details_dialog_new (gchar   *printer_name,
                        gchar   *printer_make_and_model,
                        gboolean sensitive)
 {
-  PpDetailsDialog *self;
-  gchar           *title;
-  gchar           *printer_url;
+  PpDetailsDialog  *self;
+  g_autofree gchar *title = NULL;
+  g_autofree gchar *printer_url = NULL;
 
   self = g_object_new (pp_details_dialog_get_type (),
                        "use-header-bar", TRUE,
@@ -373,11 +364,9 @@ pp_details_dialog_new (gchar   *printer_name,
   /* Translators: This is the title of the dialog. %s is the printer name. */
   title = g_strdup_printf (_("%s Details"), printer_name);
   gtk_label_set_label (self->dialog_title, title);
-  g_free (title);
 
   printer_url = g_strdup_printf ("<a href=\"http://%s:%d\">%s</a>", printer_address, ippPort (), printer_address);
   gtk_label_set_markup (GTK_LABEL (self->printer_address_label), printer_url);
-  g_free (printer_url);
 
   gtk_entry_set_text (GTK_ENTRY (self->printer_name_entry), printer_name);
   gtk_entry_set_text (GTK_ENTRY (self->printer_location_entry), printer_location);
