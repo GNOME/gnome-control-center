@@ -60,13 +60,6 @@ struct _PpDetailsDialog {
   PpPPDSelectionDialog *pp_ppd_selection_dialog;
 };
 
-struct _PpDetailsDialogClass
-{
-  GtkDialogClass parent_class;
-
-  void (*printer_renamed) (PpDetailsDialog *details_dialog, const gchar *new_name);
-};
-
 G_DEFINE_TYPE (PpDetailsDialog, pp_details_dialog, GTK_TYPE_DIALOG)
 
 enum
