@@ -54,8 +54,7 @@ struct _PpDetailsDialog {
   gchar        *printer_location;
   gchar        *ppd_file_name;
   PPDList      *all_ppds_list;
-  GCancellable *get_all_ppds_cancellable;
-  GCancellable *get_ppd_names_cancellable;
+  GCancellable *cancellable;
 
   /* Dialogs */
   PpPPDSelectionDialog *pp_ppd_selection_dialog;
@@ -173,7 +172,7 @@ get_ppd_names_cb (PPDName     **names,
           gtk_label_set_text (self->printer_model_label, names[0]->ppd_display_name);
           printer_set_ppd_async (printer_name,
                                  names[0]->ppd_name,
-                                 self->get_ppd_names_cancellable,
+                                 self->cancellable,
                                  set_ppd_cb,
                                  self);
           ppd_names_free (names);
@@ -194,10 +193,9 @@ search_for_drivers (GtkButton       *button,
   gtk_stack_set_visible_child_name (self->printer_model_stack, "loading");
   gtk_widget_set_sensitive (self->search_for_drivers_button, FALSE);
 
-  self->get_ppd_names_cancellable = g_cancellable_new ();
   get_ppd_names_async (self->printer_name,
                        1,
-                       self->get_ppd_names_cancellable,
+                       self->cancellable,
                        get_ppd_names_cb,
                        self);
 }
@@ -259,9 +257,6 @@ get_all_ppds_async_cb (PPDList  *ppds,
   if (self->pp_ppd_selection_dialog)
     pp_ppd_selection_dialog_set_ppd_list (self->pp_ppd_selection_dialog,
                                           self->all_ppds_list);
-
-  g_object_unref (self->get_all_ppds_cancellable);
-  self->get_all_ppds_cancellable = NULL;
 }
 
 static void
@@ -301,8 +296,7 @@ select_ppd_in_dialog (GtkButton       *button,
 
        if (self->all_ppds_list == NULL)
          {
-           self->get_all_ppds_cancellable = g_cancellable_new ();
-           get_all_ppds_async (self->get_all_ppds_cancellable, get_all_ppds_async_cb, self);
+           get_all_ppds_async (self->cancellable, get_all_ppds_async_cb, self);
          }
 
         self->pp_ppd_selection_dialog = pp_ppd_selection_dialog_new (
@@ -376,6 +370,8 @@ static void
 pp_details_dialog_init (PpDetailsDialog *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  self->cancellable = g_cancellable_new ();
 }
 
 static void
@@ -463,11 +459,8 @@ pp_details_dialog_free (PpDetailsDialog *self)
           self->all_ppds_list = NULL;
         }
 
-      g_cancellable_cancel (self->get_all_ppds_cancellable);
-      g_clear_object (&self->get_all_ppds_cancellable);
-
-      g_cancellable_cancel (self->get_ppd_names_cancellable);
-      g_clear_object (&self->get_ppd_names_cancellable);
+      g_cancellable_cancel (self->cancellable);
+      g_clear_object (&self->cancellable);
 
       gtk_widget_destroy (GTK_WIDGET (self));
     }
