@@ -28,11 +28,10 @@ G_BEGIN_DECLS
 #define PP_DETAILS_DIALOG_TYPE (pp_details_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (PpDetailsDialog, pp_details_dialog, PP, DETAILS_DIALOG, GtkDialog)
 
-PpDetailsDialog *pp_details_dialog_new      (GtkWindow            *parent,
-                                             gchar                *printer_name,
-                                             gchar                *printer_location,
-                                             gchar                *printer_address,
-                                             gchar                *printer_make_and_model,
-                                             gboolean              sensitive);
+PpDetailsDialog *pp_details_dialog_new      (gchar   *printer_name,
+                                             gchar   *printer_location,
+                                             gchar   *printer_address,
+                                             gchar   *printer_make_and_model,
+                                             gboolean sensitive);
 
 G_END_DECLS
