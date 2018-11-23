@@ -63,10 +63,8 @@ struct _PpDetailsDialog {
 G_DEFINE_TYPE (PpDetailsDialog, pp_details_dialog, GTK_TYPE_DIALOG)
 
 static void
-printer_name_changed (GtkEditable *editable,
-                      gpointer     user_data)
+printer_name_changed (PpDetailsDialog *self)
 {
-  PpDetailsDialog *self = (PpDetailsDialog *) user_data;
   gchar *title;
 
   /* Translators: This is the title of the dialog. %s is the printer name. */
@@ -127,8 +125,7 @@ get_ppd_names_cb (PPDName     **names,
 }
 
 static void
-search_for_drivers (GtkButton       *button,
-                    PpDetailsDialog *self)
+search_for_drivers (PpDetailsDialog *self)
 {
   gtk_stack_set_visible_child_name (self->printer_model_stack, "loading");
   gtk_widget_set_sensitive (self->search_for_drivers_button, FALSE);
@@ -196,8 +193,7 @@ get_all_ppds_async_cb (PPDList  *ppds,
 }
 
 static void
-select_ppd_in_dialog (GtkButton       *button,
-                      PpDetailsDialog *self)
+select_ppd_in_dialog (PpDetailsDialog *self)
 {
   gchar *device_id = NULL;
   gchar *manufacturer = NULL;
@@ -248,8 +244,7 @@ select_ppd_in_dialog (GtkButton       *button,
 }
 
 static void
-select_ppd_manually (GtkButton       *button,
-                     PpDetailsDialog *self)
+select_ppd_manually (PpDetailsDialog *self)
 {
   GtkFileFilter *filter;
   GtkWidget     *dialog;

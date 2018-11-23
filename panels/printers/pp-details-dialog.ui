@@ -54,7 +54,7 @@
                 <property name="visible">True</property>
                 <property name="halign">fill</property>
                 <property name="width_request">320</property>
-                <signal name="changed" handler="printer_name_changed"/>
+                <signal name="changed" handler="printer_name_changed" object="PpDetailsDialog" swapped="yes"/>
               </object>
               <packing>
                 <property name="left-attach">1</property>
@@ -188,7 +188,7 @@
                     <property name="visible">True</property>
                     <property name="label" translatable="yes">Search for Drivers</property>
                     <property name="halign">fill</property>
-                    <signal name="clicked" handler="search_for_drivers"/>
+                    <signal name="clicked" handler="search_for_drivers" object="PpDetailsDialog" swapped="yes"/>
                   </object>
                 </child>
 
@@ -197,7 +197,7 @@
                     <property name="visible">True</property>
                     <property name="label" translatable="yes">Select from Database…</property>
                     <property name="halign">fill</property>
-                    <signal name="clicked" handler="select_ppd_in_dialog"/>
+                    <signal name="clicked" handler="select_ppd_in_dialog" object="PpDetailsDialog" swapped="yes"/>
                   </object>
                 </child>
 
@@ -206,7 +206,7 @@
                     <property name="visible">True</property>
                     <property name="label" translatable="yes">Install PPD File…</property>
                     <property name="halign">fill</property>
-                    <signal name="clicked" handler="select_ppd_manually"/>
+                    <signal name="clicked" handler="select_ppd_manually" object="PpDetailsDialog" swapped="yes"/>
                   </object>
                 </child>
               </object>
