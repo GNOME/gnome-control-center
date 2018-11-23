@@ -18,8 +18,7 @@
  * Author: Felipe Borges <feborges@redhat.com>
  */
 
-#ifndef __PP_DETAILS_DIALOG_H__
-#define __PP_DETAILS_DIALOG_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include "pp-utils.h"
@@ -41,5 +40,3 @@ PpDetailsDialog *pp_details_dialog_new      (gchar   *printer_name,
                                              gboolean sensitive);
 
 G_END_DECLS
-
-#endif
