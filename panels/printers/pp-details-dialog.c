@@ -39,17 +39,17 @@
 #include "pp-utils.h"
 
 struct _PpDetailsDialog {
-  GtkDialog parent;
+  GtkDialog     parent_instance;
 
-  GtkLabel *dialog_title;
-  GtkBox *loading_box;
-  GtkEntry *printer_name_entry;
-  GtkEntry *printer_location_entry;
-  GtkLabel *printer_address_label;
-  GtkLabel *printer_model_label;
-  GtkStack *printer_model_stack;
-  GtkWidget *search_for_drivers_button;
-  GtkWidget *driver_buttons;
+  GtkLabel     *dialog_title;
+  GtkButtonBox *driver_buttons;
+  GtkBox       *loading_box;
+  GtkLabel     *printer_address_label;
+  GtkEntry     *printer_location_entry;
+  GtkLabel     *printer_model_label;
+  GtkStack     *printer_model_stack;
+  GtkEntry     *printer_name_entry;
+  GtkButton    *search_for_drivers_button;
 
   gchar        *printer_name;
   gchar        *printer_location;
@@ -127,7 +127,7 @@ static void
 search_for_drivers (PpDetailsDialog *self)
 {
   gtk_stack_set_visible_child (self->printer_model_stack, GTK_WIDGET (self->loading_box));
-  gtk_widget_set_sensitive (self->search_for_drivers_button, FALSE);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->search_for_drivers_button), FALSE);
 
   get_ppd_names_async (self->printer_name,
                        1,
@@ -329,14 +329,14 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-details-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, dialog_title);
+  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, driver_buttons);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, loading_box);
-  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_name_entry);
-  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_location_entry);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_address_label);
+  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_location_entry);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_model_label);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_model_stack);
+  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_name_entry);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, search_for_drivers_button);
-  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, driver_buttons);
 
   gtk_widget_class_bind_template_callback (widget_class, printer_name_changed);
   gtk_widget_class_bind_template_callback (widget_class, search_for_drivers);
