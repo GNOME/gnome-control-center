@@ -25,18 +25,13 @@
 
 G_BEGIN_DECLS
 
-#define PP_DETAILS_DIALOG_TYPE (pp_details_dialog_get_type ())
-#define PP_DETAILS_DIALOG(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), PP_DETAILS_DIALOG_TYPE, PpDetailsDialog))
+#define PP_TYPE_DETAILS_DIALOG (cc_details_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (PpDetailsDialog, pp_details_dialog, PP, DETAILS_DIALOG, GtkDialog)
 
-typedef struct _PpDetailsDialog PpDetailsDialog;
-typedef struct _PpDetailsDialogClass PpDetailsDialogClass;
-
-GType            pp_details_dialog_get_type (void);
-
-PpDetailsDialog *pp_details_dialog_new      (gchar   *printer_name,
-                                             gchar   *printer_location,
-                                             gchar   *printer_address,
-                                             gchar   *printer_make_and_model,
-                                             gboolean sensitive);
+PpDetailsDialog *pp_details_dialog_new (gchar   *printer_name,
+                                        gchar   *printer_location,
+                                        gchar   *printer_address,
+                                        gchar   *printer_make_and_model,
+                                        gboolean sensitive);
 
 G_END_DECLS
