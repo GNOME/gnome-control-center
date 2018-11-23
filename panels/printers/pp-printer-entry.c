@@ -436,12 +436,14 @@ on_show_printer_details_dialog (GtkButton      *button,
                                 PpPrinterEntry *self)
 {
   self->pp_details_dialog = pp_details_dialog_new (
-    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
     self->printer_name,
     self->printer_location,
     self->printer_hostname,
     self->printer_make_and_model,
     self->is_authorized);
+
+  gtk_window_set_transient_for (GTK_WINDOW (self->pp_details_dialog),
+                                GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
 
   g_signal_connect (self->pp_details_dialog, "response", G_CALLBACK (details_dialog_cb), self);
   g_signal_connect (self->pp_details_dialog, "printer-renamed", G_CALLBACK (printer_renamed_cb), self);
