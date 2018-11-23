@@ -225,13 +225,9 @@ ppd_selection_dialog_response_cb (GtkDialog *dialog,
 
       if (self->printer_name && ppd_name)
         {
-          GCancellable *cancellable;
-
-          cancellable = g_cancellable_new ();
-
           printer_set_ppd_async (self->printer_name,
                                  ppd_name,
-                                 cancellable,
+                                 self->cancellable,
                                  set_ppd_cb,
                                  self);
 
