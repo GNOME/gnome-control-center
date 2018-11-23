@@ -80,7 +80,6 @@ struct _PpPrinterEntry
   GtkLabel       *error_status;
 
   /* Dialogs */
-  PpDetailsDialog *pp_details_dialog;
   PpOptionsDialog *pp_options_dialog;
   PpJobsDialog    *pp_jobs_dialog;
 
@@ -410,44 +409,60 @@ supply_levels_draw_cb (GtkWidget      *widget,
 }
 
 static void
-printer_renamed_cb (PpDetailsDialog *dialog,
-                    gchar           *new_name,
-                    gpointer         user_data)
+on_printer_rename_cb (GObject      *source_object,
+                      GAsyncResult *result,
+                      gpointer      user_data)
 {
- PpPrinterEntry *self = user_data;
+  PpPrinterEntry   *self = user_data;
+  g_autofree gchar *printer_name = NULL;
 
- g_signal_emit_by_name (self, "printer-renamed", new_name);
-}
+  if (!pp_printer_rename_finish (PP_PRINTER (source_object), result, NULL))
+    return;
 
-static void
-details_dialog_cb (GtkDialog *dialog,
-                   gint       response_id,
-                   gpointer   user_data)
-{
-  PpPrinterEntry *self = user_data;
+  g_object_get (PP_PRINTER (source_object),
+                "printer-name", &printer_name,
+                NULL);
 
-  g_clear_pointer ((GtkWidget **) &self->pp_details_dialog, gtk_widget_destroy);
-
-  g_signal_emit_by_name (self, "printer-changed");
+  g_signal_emit_by_name (self, "printer-renamed", printer_name);
 }
 
 static void
 on_show_printer_details_dialog (GtkButton      *button,
                                 PpPrinterEntry *self)
 {
-  self->pp_details_dialog = pp_details_dialog_new (
-    self->printer_name,
-    self->printer_location,
-    self->printer_hostname,
-    self->printer_make_and_model,
-    self->is_authorized);
+  const gchar *new_name;
+  const gchar *new_location;
 
-  gtk_window_set_transient_for (GTK_WINDOW (self->pp_details_dialog),
+  PpDetailsDialog *dialog = pp_details_dialog_new (self->printer_name,
+                                                   self->printer_location,
+                                                   self->printer_hostname,
+                                                   self->printer_make_and_model,
+                                                   self->is_authorized);
+
+  gtk_window_set_transient_for (GTK_WINDOW (dialog),
                                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
 
-  g_signal_connect (self->pp_details_dialog, "response", G_CALLBACK (details_dialog_cb), self);
-  g_signal_connect (self->pp_details_dialog, "printer-renamed", G_CALLBACK (printer_renamed_cb), self);
-  gtk_widget_show (GTK_WIDGET (self->pp_details_dialog));
+  gtk_dialog_run (GTK_DIALOG (dialog));
+
+  new_location = pp_details_dialog_get_printer_location (dialog);
+  if (g_strcmp0 (self->printer_location, new_location) != 0)
+    printer_set_location (self->printer_name, new_location);
+
+  new_name = pp_details_dialog_get_printer_name (dialog);
+  if (g_strcmp0 (self->printer_name, new_name) != 0)
+    {
+      PpPrinter *printer = pp_printer_new (self->printer_name);
+
+      pp_printer_rename_async (printer,
+                               new_name,
+                               NULL,
+                               on_printer_rename_cb,
+                               self);
+    }
+
+  g_signal_emit_by_name (self, "printer-changed");
+
+  gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 static void
@@ -994,14 +1009,6 @@ pp_printer_entry_dispose (GObject *object)
 
   g_cancellable_cancel (self->get_jobs_cancellable);
   g_cancellable_cancel (self->check_clean_heads_cancellable);
-
-  if (self->pp_details_dialog != NULL)
-    {
-      g_signal_handlers_disconnect_by_data (self->pp_details_dialog, self);
-      g_signal_connect (self->pp_details_dialog, "response", G_CALLBACK (details_dialog_free_cb), NULL);
-    }
-
-  g_clear_pointer ((GtkWidget **) &self->pp_details_dialog, gtk_widget_destroy);
 
   if (self->pp_options_dialog != NULL)
     pp_options_dialog_set_callback (self->pp_options_dialog, printer_options_dialog_free_cb, self->pp_options_dialog);
