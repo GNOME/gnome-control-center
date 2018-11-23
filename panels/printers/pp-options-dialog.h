@@ -18,8 +18,7 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
-#ifndef __PP_OPTIONS_DIALOG_H__
-#define __PP_OPTIONS_DIALOG_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include "pp-utils.h"
@@ -33,5 +32,3 @@ PpOptionsDialog *pp_options_dialog_new (gchar   *printer_name,
                                         gboolean sensitive);
 
 G_END_DECLS
-
-#endif
