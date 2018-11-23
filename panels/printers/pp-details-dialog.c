@@ -437,19 +437,17 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
 }
 
 PpDetailsDialog *
-pp_details_dialog_new (GtkWindow            *parent,
-                       gchar                *printer_name,
-                       gchar                *printer_location,
-                       gchar                *printer_address,
-                       gchar                *printer_make_and_model,
-                       gboolean              sensitive)
+pp_details_dialog_new (gchar   *printer_name,
+                       gchar   *printer_location,
+                       gchar   *printer_address,
+                       gchar   *printer_make_and_model,
+                       gboolean sensitive)
 {
   PpDetailsDialog *self;
   gchar           *title;
   gchar           *printer_url;
 
   self = g_object_new (PP_DETAILS_DIALOG_TYPE,
-                       "transient-for", parent,
                        "use-header-bar", TRUE,
                        NULL);
 
