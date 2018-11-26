@@ -35,6 +35,19 @@
 
 #include "cc-application.h"
 
+void
+initialize_dependencies (int    *argc,
+                         char ***argv)
+{
+  #ifdef GDK_WINDOWING_X11
+    XInitThreads ();
+  #endif
+
+  #ifdef HAVE_CHEESE
+    cheese_gtk_init (argc, argv);
+  #endif /* HAVE_CHEESE */
+}
+
 int
 main (int    argc,
       char **argv)
@@ -45,13 +58,7 @@ main (int    argc,
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-#ifdef GDK_WINDOWING_X11
-  XInitThreads ();
-#endif
-
-#ifdef HAVE_CHEESE
-  cheese_gtk_init (&argc, &argv);
-#endif /* HAVE_CHEESE */
+  initialize_dependencies (&argc, &argv);
 
   application = cc_application_new ();
 
