@@ -80,7 +80,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkSeparator">
+          <object class="GtkSeparator" id="panel_separator">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
@@ -194,7 +194,7 @@
           </object>
         </child>
         <child>
-          <object class="GtkSeparator">
+          <object class="GtkSeparator" id="header_separator">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
@@ -242,6 +242,15 @@
     <widgets>
       <widget name="header"/>
       <widget name="sidebar_box"/>
+    </widgets>
+  </object>
+
+  <!-- Synchronize separators -->
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="header_separator"/>
+      <widget name="panel_separator"/>
     </widgets>
   </object>
 
