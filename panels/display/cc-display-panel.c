@@ -819,13 +819,31 @@ make_refresh_rate_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
 }
 
 static guint
-n_supported_scales (CcDisplayMode *mode)
+n_supported_scales (CcDisplayMode *mode,
+                    guint         *min_idx,
+                    guint         *max_idx)
 {
   const double *scales = cc_display_mode_get_supported_scales (mode);
+  guint i;
   guint n = 0;
 
-  while (scales[n] != 0.0 && display_mode_supported_at_scale (mode, scales[n]))
-    n++;
+  if (min_idx)
+    *min_idx = 0;
+  if (max_idx)
+    *max_idx = 0;
+
+  for (i = 0; scales[i] != 0.0; ++i)
+    {
+      if (!display_mode_supported_at_scale (mode, scales[i]))
+        continue;
+
+      if (min_idx && scales[i] < scales[*min_idx])
+        *min_idx = i;
+      if (max_idx && scales[i] > scales[*max_idx])
+        *max_idx = i;
+
+      n++;
+    }
 
   return n;
 }
@@ -834,7 +852,7 @@ static gboolean
 should_show_scale_row (CcDisplayMonitor *output)
 {
   CcDisplayMode *mode = cc_display_monitor_get_mode (output);
-  return mode ? n_supported_scales (mode) > 1 : FALSE;
+  return mode ? n_supported_scales (mode, NULL, NULL) > 1 : FALSE;
 }
 
 static void
@@ -902,6 +920,9 @@ setup_scale_buttons (GtkWidget        *bbox,
   GtkRadioButton *group;
   CcDisplayMode *mode;
   const double *scales, *scale;
+  double supported_scales[MAX_N_SCALES] = {0};
+  guint min_idx, max_idx;
+  guint supported_scales_n;
   guint i;
 
   panel = g_object_get_data (G_OBJECT (bbox), "panel");
@@ -912,8 +933,59 @@ setup_scale_buttons (GtkWidget        *bbox,
   if (!mode)
     return;
 
-  scales = cc_display_mode_get_supported_scales (mode);
   group = NULL;
+  scales = cc_display_mode_get_supported_scales (mode);
+  supported_scales_n = n_supported_scales (mode, &min_idx, &max_idx);
+
+  if (supported_scales_n > MAX_N_SCALES)
+    {
+      int needed_scales;
+      int threshold = 1;
+      double step, counter;
+      double preferred_scale = cc_display_mode_get_preferred_scale (mode);
+      double current_scale = cc_display_monitor_get_scale (output);
+
+      /* We assume that lasct and first scale are different here as per
+       * the fact that supported_scales_n has to be greater than MAX_N_SCALES
+       * which, again, we assume to be greater than 2 */
+      int accounted_scales = 2;
+
+      if (preferred_scale != scales[min_idx] && preferred_scale != scales[max_idx])
+        accounted_scales++;
+      else
+        preferred_scale = -1;
+
+      if (current_scale != scales[min_idx] && current_scale != scales[max_idx] &&
+          current_scale != preferred_scale)
+        accounted_scales++;
+      else
+        current_scale = -1;
+
+      needed_scales = MAX_N_SCALES - accounted_scales;
+      step = ((double) needed_scales) / (supported_scales_n - accounted_scales);
+
+      for (scale = scales, i = 0; *scale != 0.0 && i < MAX_N_SCALES; scale++)
+        {
+          if (!display_mode_supported_at_scale (mode, *scale))
+            continue;
+
+          counter += step;
+
+          if (*scale == scales[min_idx] || *scale == scales[max_idx] ||
+              *scale == preferred_scale || *scale == current_scale)
+            {
+              supported_scales[i++] = *scale;
+            }
+          else if ((int)counter == threshold)
+            {
+              supported_scales[i++] = *scale;
+              threshold++;
+            }
+          }
+
+      scales = supported_scales;
+    }
+
   for (scale = scales, i = 0; *scale != 0.0 && i < MAX_N_SCALES; scale++, i++)
     {
       GtkWidget *button, *label;
