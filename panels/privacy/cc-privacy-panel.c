@@ -303,8 +303,12 @@ add_row (CcPrivacyPanel *self,
 
   row = gtk_list_box_row_new ();
   gtk_widget_show (row);
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 20);
   gtk_widget_show (box);
+  gtk_widget_set_margin_start (box, 20);
+  gtk_widget_set_margin_end (box, 20);
+  gtk_widget_set_margin_top (box, 18);
+  gtk_widget_set_margin_bottom (box, 18);
   gtk_container_add (GTK_CONTAINER (row), box);
   g_object_set_data (G_OBJECT (row), "dialog", dialog);
   gtk_widget_set_hexpand (box, TRUE);
@@ -313,16 +317,10 @@ add_row (CcPrivacyPanel *self,
   w = gtk_label_new (label);
   gtk_widget_show (w);
   gtk_widget_set_halign (w, GTK_ALIGN_START);
-  gtk_widget_set_margin_start (w, 20);
-  gtk_widget_set_margin_end (w, 20);
-  gtk_widget_set_margin_top (w, 18);
-  gtk_widget_set_margin_bottom (w, 18);
   gtk_widget_set_halign (w, GTK_ALIGN_START);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_widget_set_hexpand (w, TRUE);
   gtk_box_pack_start (GTK_BOX (box), w, TRUE, TRUE, 0);
-  gtk_widget_set_margin_start (status, 20);
-  gtk_widget_set_margin_end (status, 20);
   gtk_widget_set_halign (status, GTK_ALIGN_END);
   gtk_widget_set_valign (status, GTK_ALIGN_CENTER);
   gtk_box_pack_end (GTK_BOX (box), status, FALSE, FALSE, 0);
