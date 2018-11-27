@@ -33,6 +33,8 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gdk/gdkx.h>
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
 #include <string.h>
 #include <time.h>
 
@@ -69,6 +71,7 @@ struct _CcWindow
   char       *current_panel_id;
   GQueue     *previous_panels;
 
+  HdyHeaderGroup *header_group;
   GtkSizeGroup *header_sizegroup;
 
   GPtrArray  *custom_widgets;
@@ -648,30 +651,6 @@ window_key_press_event_cb (GtkWidget   *win,
 }
 
 static void
-split_decorations_cb (GtkSettings *settings,
-                      GParamSpec  *pspec,
-                      CcWindow    *self)
-{
-  g_autofree gchar *layout = NULL;
-  g_autofree gchar *layout_start = NULL;
-  g_autofree gchar *layout_end = NULL;
-  g_auto(GStrv) buttons = NULL;
-
-  g_object_get (settings, "gtk-decoration-layout", &layout, NULL);
-
-  buttons = g_strsplit (layout, ":", -1);
-  layout_start = g_strconcat ("", buttons[0], ":", NULL);
-
-  if (g_strv_length (buttons) > 1)
-      layout_end = g_strconcat (":", buttons[1], NULL);
-  else
-      layout_end = g_strdup ("");
-
-  gtk_header_bar_set_decoration_layout (GTK_HEADER_BAR (self->header), layout_start);
-  gtk_header_bar_set_decoration_layout (GTK_HEADER_BAR (self->panel_headerbar), layout_end);
-}
-
-static void
 on_development_warning_dialog_responded_cb (GtkWidget *dialog,
                                             gint       response,
                                             CcWindow  *self)
@@ -788,19 +767,9 @@ static void
 cc_window_constructed (GObject *object)
 {
   g_autofree char *id = NULL;
-  GtkSettings *settings;
   CcWindow *self;
 
   self = CC_WINDOW (object);
-
-  /* Handle decorations for the split headers. */
-  settings = gtk_settings_get_default ();
-  g_signal_connect (settings,
-                    "notify::gtk-decoration-layout",
-                    G_CALLBACK (split_decorations_cb),
-                    self);
-
-  split_decorations_cb (settings, NULL, self);
 
   /* Add the panels */
   setup_model (self);
@@ -876,6 +845,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, development_warning_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_box);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, header_group);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, list_scrolled);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_headerbar);
