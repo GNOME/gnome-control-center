@@ -245,6 +245,15 @@
     </widgets>
   </object>
 
+  <!-- Synchronize right header and panel -->
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="panel_headerbar"/>
+      <widget name="stack"/>
+    </widgets>
+  </object>
+
   <!-- Warning dialog for development builds -->
   <object class="GtkMessageDialog" id="development_warning_dialog">
     <property name="message-type">warning</property>
