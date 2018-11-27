@@ -320,6 +320,8 @@ add_row (CcPrivacyPanel *self,
   gtk_widget_set_halign (w, GTK_ALIGN_START);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_widget_set_hexpand (w, TRUE);
+  gtk_label_set_ellipsize (GTK_LABEL (w), PANGO_ELLIPSIZE_END);
+  gtk_label_set_xalign (GTK_LABEL (w), 0.0f);
   gtk_box_pack_start (GTK_BOX (box), w, TRUE, TRUE, 0);
   gtk_widget_set_halign (status, GTK_ALIGN_END);
   gtk_widget_set_valign (status, GTK_ALIGN_CENTER);
