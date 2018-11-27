@@ -164,6 +164,8 @@ add_provider_row (CcGoaPanel  *self,
   markup = g_strdup_printf ("<b>%s</b>", name);
   label = gtk_label_new (NULL);
   gtk_widget_show (label);
+  gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
+  gtk_label_set_xalign (GTK_LABEL (label), 0.0f);
   gtk_label_set_markup (GTK_LABEL (label), markup);
   gtk_container_add (GTK_CONTAINER (row_grid), label);
 
