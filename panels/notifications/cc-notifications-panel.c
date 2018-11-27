@@ -324,6 +324,8 @@ add_application (CcNotificationsPanel *panel,
 
   w = gtk_label_new (app_name);
   gtk_widget_show (w);
+  gtk_label_set_ellipsize (GTK_LABEL (w), PANGO_ELLIPSIZE_END);
+  gtk_label_set_xalign (GTK_LABEL (w), 0.0f);
   gtk_container_add (GTK_CONTAINER (box), w);
 
   w = gtk_label_new ("");
