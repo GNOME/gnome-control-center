@@ -160,6 +160,7 @@ flatpak:
     expire_in: 2 days
 
   variables:
+    OLD_APPID: "org.gnome.Settings"
     APPID: "org.gnome.SettingsDevel"
     BUNDLE: "org.gnome.SettingsDevel.flatpak"
     MANIFEST_PATH: "org.gnome.Settings.json"
@@ -188,6 +189,10 @@ flatpak:
     # Adjust the manifest to HEAD
     - sed -i "s,<<ID>>,$APPID,g" ${MANIFEST_PATH}
     - sed -i "s,<<current>>,origin/$CI_COMMIT_REF_NAME,g" ${MANIFEST_PATH}
+
+    # Update the icon name
+    - mv data/icons/hicolor/scalable/apps/$OLD_APPID.svg data/icons/hicolor/scalable/apps/$APPID.svg
+    - mv data/icons/hicolor/symbolic/apps/$OLD_APPID-symbolic.svg data/icons/hicolor/symbolic/apps/$APPID-symbolic.svg
 
     - flatpak-builder --bundle-sources --repo=devel build ${MANIFEST_PATH}
     - flatpak build-bundle devel ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APPID}
