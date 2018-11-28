@@ -26,9 +26,11 @@
 
 enum {
   PROP_ZERO,
-  PROP_NAME,
+  PROP_TITLE,
+  PROP_SUBTITLE,
   PROP_ACTION,
-  PROP_ENABLED
+  PROP_ENABLED,
+  PROP_DESTRUCTIVE
 };
 
 static int activated_signal;
@@ -37,7 +39,8 @@ struct _CcActionRow
 {
   GtkListBoxRow parent;
 
-  GtkWidget *label;
+  GtkWidget *title;
+  GtkWidget *subtitle;
   GtkWidget *button;
 };
 
@@ -61,14 +64,21 @@ cc_action_row_get_property (GObject    *object,
 
   switch (prop_id)
     {
-    case PROP_NAME:
-      g_value_set_string (value, gtk_label_get_label (GTK_LABEL (row->label)));
+    case PROP_TITLE:
+      g_value_set_string (value, gtk_label_get_label (GTK_LABEL (row->title)));
+      break;
+    case PROP_SUBTITLE:
+      g_value_set_string (value, gtk_label_get_label (GTK_LABEL (row->subtitle)));
       break;
     case PROP_ACTION:
       g_value_set_string (value, gtk_button_get_label (GTK_BUTTON (row->button)));
       break;
     case PROP_ENABLED:
       g_value_set_boolean (value, gtk_widget_get_sensitive (row->button));
+      break;
+    case PROP_DESTRUCTIVE:
+      g_value_set_boolean (value,
+                           gtk_style_context_has_class (gtk_widget_get_style_context (row->button), "destructive-action"));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -86,14 +96,23 @@ cc_action_row_set_property (GObject      *object,
 
   switch (prop_id)
     {
-    case PROP_NAME:
-      gtk_label_set_label (GTK_LABEL (row->label), g_value_get_string (value));
+    case PROP_TITLE:
+      gtk_label_set_label (GTK_LABEL (row->title), g_value_get_string (value));
+      break;
+    case PROP_SUBTITLE:
+      gtk_label_set_label (GTK_LABEL (row->subtitle), g_value_get_string (value));
       break;
     case PROP_ACTION:
       gtk_button_set_label (GTK_BUTTON (row->button), g_value_get_string (value));
       break;
     case PROP_ENABLED:
       gtk_widget_set_sensitive (row->button, g_value_get_boolean (value));
+      break;
+    case PROP_DESTRUCTIVE:
+      if (g_value_get_boolean (value))
+        gtk_style_context_add_class (gtk_widget_get_style_context (row->button), "destructive-action");
+      else
+        gtk_style_context_remove_class (gtk_widget_get_style_context (row->button), "destructive-action");
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -112,8 +131,13 @@ cc_action_row_class_init (CcActionRowClass *klass)
   object_class->set_property = cc_action_row_set_property;
 
   g_object_class_install_property (object_class,
-                                   PROP_NAME,
-                                   g_param_spec_string ("name", "name", "name",
+                                   PROP_TITLE,
+                                   g_param_spec_string ("title", "title", "title",
+                                                        NULL, G_PARAM_READWRITE));
+
+  g_object_class_install_property (object_class,
+                                   PROP_SUBTITLE,
+                                   g_param_spec_string ("subtitle", "subtitle", "subtitle",
                                                         NULL, G_PARAM_READWRITE));
 
   g_object_class_install_property (object_class,
@@ -126,6 +150,11 @@ cc_action_row_class_init (CcActionRowClass *klass)
                                    g_param_spec_boolean ("enabled", "enabled", "enabled",
                                                          TRUE, G_PARAM_READWRITE));
 
+  g_object_class_install_property (object_class,
+                                   PROP_DESTRUCTIVE,
+                                   g_param_spec_boolean ("destructive", "destructive", "destructive",
+                                                         FALSE, G_PARAM_READWRITE));
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-action-row.ui");
 
 
@@ -137,7 +166,8 @@ cc_action_row_class_init (CcActionRowClass *klass)
                           NULL,
                           G_TYPE_NONE, 0);
 
-  gtk_widget_class_bind_template_child (widget_class, CcActionRow, label);
+  gtk_widget_class_bind_template_child (widget_class, CcActionRow, title);
+  gtk_widget_class_bind_template_child (widget_class, CcActionRow, subtitle);
   gtk_widget_class_bind_template_child (widget_class, CcActionRow, button);
 }
 
@@ -164,10 +194,17 @@ cc_action_row_new (void)
 }
 
 void
-cc_action_row_set_name (CcActionRow *row,
-                        const char  *name)
+cc_action_row_set_title (CcActionRow *row,
+                         const char  *name)
 {
-  gtk_label_set_label (GTK_LABEL (row->label), name);
+  gtk_label_set_label (GTK_LABEL (row->title), name);
+}
+
+void
+cc_action_row_set_subtitle (CcActionRow *row,
+                            const char  *name)
+{
+  gtk_label_set_label (GTK_LABEL (row->subtitle), name);
 }
 
 void

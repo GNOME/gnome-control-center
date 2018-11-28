@@ -28,8 +28,10 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcActionRow, cc_action_row, CC, ACTION_ROW, GtkListBoxRow)
 
 CcActionRow *cc_action_row_new (void);
-void         cc_action_row_set_name (CcActionRow *row,
+void         cc_action_row_set_title (CcActionRow *row,
                                      const char *label);
+void         cc_action_row_set_subtitle (CcActionRow *row,
+                                         const char *label);
 void         cc_action_row_set_action (CcActionRow *row,
                                        const char *action,
                                        gboolean    sensitive);
