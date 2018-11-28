@@ -20,6 +20,7 @@ i18n.merge_file(
 sources = files('cc-applications-panel.c',
                 'cc-applications-row.c',
                 'cc-toggle-row.c',
+                'cc-info-row.c',
                 'cc-action-row.c',
                 'utils.c'
 )

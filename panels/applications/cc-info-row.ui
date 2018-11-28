@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcToggleRow" parent="GtkListBoxRow">
+  <template class="CcInfoRow" parent="GtkListBoxRow">
     <property name="visible">True</property>
     <property name="can_focus">True</property>
     <property name="activatable">False</property>
@@ -34,9 +34,12 @@
           </object>
         </child>
         <child>
-          <object class="GtkSwitch" id="toggle">
+          <object class="GtkLabel" id="info">
             <property name="visible">True</property>
             <property name="valign">center</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
           </object>
         </child>
       </object>

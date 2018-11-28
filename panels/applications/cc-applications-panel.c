@@ -26,6 +26,7 @@
 #include "cc-applications-panel.h"
 #include "cc-applications-row.h"
 #include "cc-toggle-row.h"
+#include "cc-info-row.h"
 #include "cc-action-row.h"
 #include "cc-applications-resources.h"
 #include "list-box-helper.h"
@@ -59,24 +60,30 @@ struct _CcApplicationsPanel
   GDBusProxy *perm_store;
   GSettings *notification_settings;
 
+  GtkListBox *stack;
   GtkWidget *permission_section;
   GtkWidget *permission_list;
 
   GtkWidget *camera;
   GtkWidget *location;
   GtkWidget *microphone;
+
+  GtkWidget *permission_footer;
+
+  GtkWidget *information_section;
+  GtkWidget *information_list;
   GtkWidget *notification;
   GtkWidget *sound;
-
-  GtkWidget *static_permissions;
 
   GtkWidget *device_section;
   GtkWidget *device_list;
 
   GtkWidget *handler_section;
   GtkWidget *handler_list;
-  GtkWidget *cache_section;
-  GtkWidget *cache_list;
+  GtkWidget *storage_section;
+  GtkWidget *storage_list;
+  GtkWidget *app;
+  GtkWidget *data;
   GtkWidget *cache;
 };
 
@@ -198,7 +205,7 @@ get_notification_allowed (CcApplicationsPanel *self,
 {
   if (self->notification_settings)
     {
-      return g_settings_get_boolean (self->notification_settings, "enable"); 
+      return g_settings_get_boolean (self->notification_settings, "enable");
     }
   else
     {
@@ -206,21 +213,17 @@ get_notification_allowed (CcApplicationsPanel *self,
                                                      "notifications",
                                                      "notification",
                                                      app_id);
-      return perms == NULL || !g_strv_contains ((const char * const*)perms, "no");
+      return perms == NULL || strcmp (perms[0], "no") != 0;
     }
 }
 
 static void
-notification_cb (CcToggleRow *row, CcApplicationsPanel *self)
+set_notification_allowed (CcApplicationsPanel *self,
+                          gboolean allowed)
 {
-  gboolean allowed = cc_toggle_row_get_allowed (row);
-
-  if (self->current_app_id == NULL)
-    return;
-
   if (self->notification_settings)
     {
-      g_settings_set_boolean (self->notification_settings, "enable", allowed); 
+      g_settings_set_boolean (self->notification_settings, "enable", allowed);
     }
   else
     {
@@ -229,6 +232,13 @@ notification_cb (CcToggleRow *row, CcApplicationsPanel *self)
       perms[0] = allowed ? "yes" : "no";
       set_flatpak_permissions (self, "notifications", "notification", self->current_app_id, perms);
     }
+}
+
+static void
+notification_cb (CcApplicationsPanel *self)
+{
+  if (self->current_app_id)
+    set_notification_allowed (self, cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->notification)));
 }
 
 static char *
@@ -270,7 +280,7 @@ get_device_allowed (CcApplicationsPanel *self,
 
   perms = get_flatpak_permissions (self, "devices", device, app_id);
 
-  return perms == NULL || !g_strv_contains ((const char * const*)perms, "no");
+  return perms == NULL || strcmp (perms[0], "no") != 0;
 }
 
 static void
@@ -280,9 +290,6 @@ set_device_allowed (CcApplicationsPanel *self,
 {
   const char *perms[2];
 
-  if (self->current_app_id == NULL)
-    return;
-
   perms[0] = allowed ? "yes" : "no";
   perms[1] = NULL;
 
@@ -290,21 +297,24 @@ set_device_allowed (CcApplicationsPanel *self,
 }
 
 static void
-microphone_cb (CcToggleRow *row, CcApplicationsPanel *self)
+microphone_cb (CcApplicationsPanel *self)
 {
-  set_device_allowed (self, "microphone", cc_toggle_row_get_allowed (row));
+  if (self->current_app_id)
+    set_device_allowed (self, "microphone", cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->microphone)));
 }
 
 static void
-sound_cb (CcToggleRow *row, CcApplicationsPanel *self)
+sound_cb (CcApplicationsPanel *self)
 {
-  set_device_allowed (self, "speakers", cc_toggle_row_get_allowed (row));
+  if (self->current_app_id)
+   set_device_allowed (self, "speakers", cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->sound)));
 }
 
 static void
-camera_cb (CcToggleRow *row, CcApplicationsPanel *self)
+camera_cb (CcApplicationsPanel *self)
 {
-  set_device_allowed (self, "camera", cc_toggle_row_get_allowed (row));
+  if (self->current_app_id)
+    set_device_allowed (self, "camera", cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->camera)));
 }
 
 static gboolean
@@ -315,7 +325,7 @@ get_location_allowed (CcApplicationsPanel *self,
 
   perms = get_flatpak_permissions (self, "location", "location", app_id);
 
-  return perms == NULL || !g_str_equal (perms[0], "NONE");
+  return perms == NULL || strcmp (perms[0], "NONE") != 0;
 }
 
 static void
@@ -324,9 +334,6 @@ set_location_allowed (CcApplicationsPanel *self,
 {
   const char *perms[3];
   g_autofree char *time = NULL;
-
-  if (self->current_app_id == NULL)
-    return;
 
   // FIXME allow setting accuracy
   perms[0] = allowed ? "EXACT" : "NONE";
@@ -337,52 +344,79 @@ set_location_allowed (CcApplicationsPanel *self,
 }
 
 static void
-location_cb (CcToggleRow *row, CcApplicationsPanel *self)
+location_cb (CcApplicationsPanel *self)
 {
-  set_location_allowed (self, cc_toggle_row_get_allowed (row));
+  if (self->current_app_id)
+    set_location_allowed (self, cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->location)));
 }
 
 static GFile *
-get_cache_dir (const char *app_id)
+get_app_dir (const char *app_id,
+             const char *subdir)
 {
   g_autofree char *path = g_build_filename (g_get_home_dir (), ".var", "app", app_id, NULL);
   g_autoptr(GFile) appdir = g_file_new_for_path (path);
-  return g_file_get_child (appdir, "cache");
+  return g_file_get_child (appdir, subdir);
 }
 
 static guint64
-calculate_cache_size (const char *app_id)
+calculate_dir_size (const char *app_id,
+                    const char *subdir)
 {
-  g_autoptr(GFile) cachedir = get_cache_dir (app_id);
+  g_autoptr(GFile) cachedir = get_app_dir (app_id, subdir);
   return file_size_recursively (cachedir);
 }
 
 static void
-update_cache_row (CcActionRow *row,
-                  const char *app_id)
+update_app_row (CcActionRow *row,
+                const char *app_id)
 {
-  guint64 size;
   g_autofree char *formatted_size = NULL;
-  g_autofree char *name = NULL;
 
-  size = calculate_cache_size (app_id);
-  formatted_size = g_format_size (size);
-  name = g_strdup_printf (_("Cache size: %s"), formatted_size); 
-  cc_action_row_set_name (row, name);
-  cc_action_row_set_action (row, _("Clear…"), size > 0);
+  formatted_size = get_flatpak_app_size (app_id);
+  g_object_set (row, "subtitle", formatted_size, NULL);
 }
 
 static void
-clear_cache_cb (CcActionRow *row, CcApplicationsPanel *self)
+update_dir_row (CcActionRow *row,
+                const char *app_id,
+                const char *subdir)
 {
-  g_autoptr(GFile) cachedir = NULL;
+  guint64 size;
+  g_autofree char *formatted_size = NULL;
+
+  subdir = g_strdup (subdir);
+  g_object_set_data_full (G_OBJECT (row), "subdir", (gpointer)subdir, g_free);
+
+  size = calculate_dir_size (app_id, subdir);
+  formatted_size = g_format_size (size);
+  g_object_set (row,
+                "subtitle", formatted_size,
+                "enabled", size > 0,
+                NULL);
+}
+
+static void
+clear_cb (CcActionRow *row, CcApplicationsPanel *self)
+{
+  g_autoptr(GFile) dir = NULL;
+  const char *subdir;
 
   if (self->current_app_id == NULL)
     return;
 
-  cachedir = get_cache_dir (self->current_app_id);
-  file_remove_recursively (cachedir);
-  update_cache_row (CC_ACTION_ROW (self->cache), self->current_app_id);
+  subdir = (const char *) g_object_get_data (G_OBJECT (row), "subdir");
+  dir = get_app_dir (self->current_app_id, subdir);
+  file_remove_recursively (dir);
+  update_dir_row (CC_ACTION_ROW (row), self->current_app_id, subdir);
+}
+
+static void
+uninstall_cb (CcActionRow *row, CcApplicationsPanel *self)
+{
+  // FIXME: confirmation dialog ? undo notification ?
+
+  uninstall_flatpak_app (self->current_app_id);
 }
 
 static char *
@@ -421,8 +455,25 @@ find_flatpak_ref (const char *app_id)
   return NULL;
 }
 
-static char *
-get_static_permissions (const char *app_id)
+static void
+add_static_permission_row (CcApplicationsPanel *self,
+                           const char *title,
+                           const char *subtitle)
+{
+  GtkWidget *row;
+
+  row = g_object_new (CC_TYPE_INFO_ROW,
+                      "title", title,
+                      "subtitle", subtitle,
+                      "info", _("Built-in"),
+                      "visible", TRUE,
+                      NULL);
+  gtk_container_add (GTK_CONTAINER (self->permission_list), row);
+}
+
+static void
+add_static_permissions (CcApplicationsPanel *self,
+                        const char *app_id)
 {
   g_autoptr(FlatpakInstalledRef) ref = NULL;
   g_autoptr(GBytes) bytes = NULL;
@@ -430,12 +481,7 @@ get_static_permissions (const char *app_id)
   g_autoptr(GKeyFile) keyfile = NULL;
   char **strv;
   char *str;
-  GString *s;
-  int len;
   
-  s = g_string_new ("");
-  g_string_append_printf (s, "<b>%s</b> ", _("Built-in permissions:"));
-
   ref = find_flatpak_ref (app_id);
   bytes = flatpak_installed_ref_load_metadata (ref, NULL, NULL);
   keyfile = g_key_file_new ();
@@ -445,67 +491,57 @@ get_static_permissions (const char *app_id)
                                   0, &error))
     {
       g_warning ("%s", error->message);
-      g_string_append (s, _("Unknown."));
-
-      return g_string_free (s, FALSE);
+      return;
     }
 
-  len = s->len;
- 
   strv = g_key_file_get_string_list (keyfile, "Context", "sockets", NULL, NULL);
   if (strv && g_strv_contains ((const char * const*)strv, "system-bus"))
-    {
-      if (s->len > len) g_string_append (s, ", ");
-      g_string_append (s, _("system bus"));
-    }
+    add_static_permission_row (self, _("System Bus"), _("Has access to the system bus"));
   if (strv && g_strv_contains ((const char * const*)strv, "x11"))
-    {
-      if (s->len > len) g_string_append (s, ", ");
-      g_string_append (s, "X11");
-    }
+    add_static_permission_row (self, _("X11"), _("Has access to the display server"));
   g_strfreev (strv);
 
   strv = g_key_file_get_string_list (keyfile, "Context", "devices", NULL, NULL);
   if (strv && g_strv_contains ((const char * const*)strv, "all"))
-    {
-      if (s->len > len) g_string_append (s, ", ");
-      g_string_append (s, "/dev");
-    }
+    add_static_permission_row (self, _("Devices"), _("Has full access to /dev"));
   g_strfreev (strv);
 
   strv = g_key_file_get_string_list (keyfile, "Context", "shared", NULL, NULL);
   if (strv && g_strv_contains ((const char * const*)strv, "network"))
-    {
-      if (s->len > len) g_string_append (s, ", ");
-      g_string_append (s, _("network"));
-    }
+    add_static_permission_row (self, _("Network"), _("Has network access"));
   g_strfreev (strv);
 
   strv = g_key_file_get_string_list (keyfile, "Context", "filesystems", NULL, NULL);
-  if (strv && g_strv_contains ((const char * const *)strv, "home"))
-    {
-      if (s->len > len) g_string_append (s, ", ");
-      g_string_append (s, _("home directory"));
-    }
-  if (strv && g_strv_contains ((const char * const *)strv, "host"))
-    {
-      if (s->len > len) g_string_append (s, ", ");
-      g_string_append (s, _("host filesystem"));
-    }
+  if (strv && (g_strv_contains ((const char * const *)strv, "home") ||
+               g_strv_contains ((const char * const *)strv, "home:rw")))
+    add_static_permission_row (self, _("Home"), _("Read-write access"));
+  else if (strv && g_strv_contains ((const char * const *)strv, "home:ro"))
+    add_static_permission_row (self, _("Home"), _("Readonly access"));
+  if (strv && (g_strv_contains ((const char * const *)strv, "host") ||
+               g_strv_contains ((const char * const *)strv, "host:rw")))
+    add_static_permission_row (self, _("Filesystem"), _("Full filesystem access"));
+  else if (strv && g_strv_contains ((const char * const *)strv, "host:ro"))
+    add_static_permission_row (self, _("Filesystem"), _("Readonly access"));
   g_strfreev (strv);
 
   str = g_key_file_get_string (keyfile, "Session Bus Policy", "ca.desrt.dconf", NULL);
   if (str && g_str_equal (str, "talk"))
-    {
-      if (s->len > len) g_string_append (s, ", ");
-      g_string_append (s, _("settings"));
-    }
+    add_static_permission_row (self, _("Settings"), _("Can change settings"));
   g_free (str);
+}
 
-  g_string_append (s, ". ");
-  g_string_append (s, _("These are set by the application and cannot be altered."));
+static void
+remove_static_permissions (CcApplicationsPanel *self)
+{
+  GList *children, *l;
 
-  return g_string_free (s, FALSE);
+  children = gtk_container_get_children (GTK_CONTAINER (self->permission_list));
+  for (l = children; l; l = l->next)
+    {
+      if (CC_IS_INFO_ROW (l->data))
+        gtk_widget_destroy (GTK_WIDGET (l->data));
+    }
+  g_list_free (children);
 }
 
 static void
@@ -513,41 +549,43 @@ update_permission_section (CcApplicationsPanel *self,
                            GAppInfo *info)
 {
   g_autofree char *app_id = get_app_id (info);
+  g_autofree char *permissions = NULL;
+
+  if (!app_info_is_flatpak (info))
+    {
+      gtk_widget_hide (self->permission_section);
+      return;
+    }
+
+  gtk_widget_show (self->permission_section);
+
+  remove_static_permissions (self);
+  add_static_permissions (self, app_id);
+
+  cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->camera), get_device_allowed (self, "camera", app_id));
+  cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->location), get_location_allowed (self, app_id));
+  cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->microphone), get_device_allowed (self, "microphone", app_id));
+}
+
+static void
+update_information_section (CcApplicationsPanel *self,
+                            GAppInfo *info)
+{
+  g_autofree char *app_id = get_app_id (info);
 
   if (app_info_is_flatpak (info))
     {
-      g_autofree char *permissions = NULL;
-
       g_clear_object (&self->notification_settings);
 
-      gtk_widget_show (self->camera);
-      gtk_widget_show (self->location);
-      gtk_widget_show (self->microphone);
-      gtk_widget_show (self->notification);
       gtk_widget_show (self->sound);
-
-      permissions = get_static_permissions (app_id);
-      gtk_label_set_markup (GTK_LABEL (self->static_permissions), permissions);
-
-      cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->notification), get_notification_allowed (self, app_id));
-
     }
   else
     {
       g_set_object (&self->notification_settings, get_notification_settings (app_id));
 
-      gtk_widget_hide (self->camera);
-      gtk_widget_hide (self->location);
-      gtk_widget_hide (self->microphone);
-      gtk_widget_show (self->notification);
       gtk_widget_hide (self->sound);
-      gtk_label_set_label (GTK_LABEL (self->static_permissions),
-                           _("This application is not sandboxed and permissions cannot be fully enforced."));
     }
 
-  cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->camera), get_device_allowed (self, "camera", app_id));
-  cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->location), get_location_allowed (self, app_id));
-  cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->microphone), get_device_allowed (self, "microphone", app_id));
   cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->notification), get_notification_allowed (self, app_id));
   cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->sound), get_device_allowed (self, "speakers", app_id));
 }
@@ -570,7 +608,7 @@ add_handler_row (CcApplicationsPanel *self,
 
   desc = g_content_type_get_description (type);
   row = cc_action_row_new ();
-  cc_action_row_set_name (row, desc);
+  cc_action_row_set_title (row, desc);
   cc_action_row_set_action (row, _("Remove"), FALSE);
   gtk_list_box_insert (GTK_LIST_BOX (self->handler_list), GTK_WIDGET (row), -1);
 }
@@ -610,18 +648,20 @@ update_handler_section (CcApplicationsPanel *self,
 }
 
 static void
-update_cache_section (CcApplicationsPanel *self,
-                      GAppInfo *info)
+update_storage_section (CcApplicationsPanel *self,
+                        GAppInfo *info)
 {
   if (app_info_is_flatpak (info))
     {
       g_autofree char *app_id = get_app_id (info);
-      gtk_widget_show (self->cache_section);
-      update_cache_row (CC_ACTION_ROW (self->cache), app_id);
+      gtk_widget_show (self->storage_section);
+      update_app_row (CC_ACTION_ROW (self->app), app_id);
+      update_dir_row (CC_ACTION_ROW (self->data), app_id, "data");
+      update_dir_row (CC_ACTION_ROW (self->cache), app_id, "cache");
     }
   else
     {
-      gtk_widget_hide (self->cache_section);
+      gtk_widget_hide (self->storage_section);
     }
 }
 
@@ -639,11 +679,12 @@ update_panel (CcApplicationsPanel *self)
 
   if (row == NULL)
     {
-      g_print ("nothing selected\n");
       gtk_label_set_label (GTK_LABEL (self->title_label), _("Applications"));
-      // FIXME handle no-app case
+      gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "empty");
       return;
     }
+
+  gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "settings");
 
   g_clear_pointer (&self->current_app_id, g_free);
 
@@ -652,9 +693,10 @@ update_panel (CcApplicationsPanel *self)
   gtk_label_set_label (GTK_LABEL (self->title_label), g_app_info_get_display_name (info));
 
   update_permission_section (self, info);
+  update_information_section (self, info);
   update_device_section (self, info);
   update_handler_section (self, info);
-  update_cache_section (self, info);
+  update_storage_section (self, info);
 
   self->current_app_id = get_app_id (info);
 }
@@ -681,6 +723,26 @@ populate_applications (CcApplicationsPanel *self)
     }
 
   g_list_free_full (infos, g_object_unref);
+}
+
+static void
+prepare_content (CcApplicationsPanel *self)
+{
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->permission_list),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->information_list),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->handler_list),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->storage_list),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
 }
 
 static int
@@ -765,20 +827,25 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, title_label);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, header_button);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, camera);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, location);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, microphone);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_footer);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, information_section);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, information_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, notification);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sound);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, static_permissions);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, device_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_list);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, cache_section);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, cache_list);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_section);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_list);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, data);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, cache);
 
   gtk_widget_class_bind_template_callback (widget_class, camera_cb);
@@ -786,7 +853,8 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, microphone_cb);
   gtk_widget_class_bind_template_callback (widget_class, notification_cb);
   gtk_widget_class_bind_template_callback (widget_class, sound_cb);
-  gtk_widget_class_bind_template_callback (widget_class, clear_cache_cb);
+  gtk_widget_class_bind_template_callback (widget_class, clear_cb);
+  gtk_widget_class_bind_template_callback (widget_class, uninstall_cb);
 }
 
 static void
@@ -815,16 +883,9 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   populate_applications (self);
 
   self->monitor = g_app_info_monitor_get ();
-
   g_signal_connect (self->monitor, "changed", G_CALLBACK (apps_changed), self);
 
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->permission_list),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->handler_list),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
+  prepare_content (self);
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                             G_DBUS_PROXY_FLAGS_NONE,

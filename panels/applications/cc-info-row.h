@@ -1,4 +1,4 @@
-/* cc-toggle-row.h
+/* cc-info-row.h
  *
  * Copyright 2018 Matthias Clasen <matthias.clasen@gmail.com>
  *
@@ -24,16 +24,9 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_TOGGLE_ROW (cc_toggle_row_get_type())
-G_DECLARE_FINAL_TYPE (CcToggleRow, cc_toggle_row, CC, TOGGLE_ROW, GtkListBoxRow)
+#define CC_TYPE_INFO_ROW (cc_info_row_get_type())
+G_DECLARE_FINAL_TYPE (CcInfoRow, cc_info_row, CC, INFO_ROW, GtkListBoxRow)
 
-CcToggleRow *cc_toggle_row_new (void);
-void         cc_toggle_row_set_allowed (CcToggleRow *row,
-                                        gboolean     allowed);
-gboolean     cc_toggle_row_get_allowed (CcToggleRow *row);
-void         cc_toggle_row_set_on_subtitle (CcToggleRow *row,
-                                            const char *subtitle);
-void         cc_toggle_row_set_off_subtitle (CcToggleRow *row,
-                                             const char *subtitle);
+CcInfoRow *cc_info_row_new (void);
 
 G_END_DECLS

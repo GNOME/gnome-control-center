@@ -66,3 +66,29 @@ container_remove_all (GtkContainer *container)
   g_list_free (children);
 }
 
+char *
+get_flatpak_app_size (const char *app_id)
+{
+  const char *argv[] = { "flatpak", "info", "-s", "appid", NULL };
+  char *out;
+
+  /* FIXME: use libflatpak */
+  argv[3] = app_id;
+  
+  if (!g_spawn_sync (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, &out, NULL, NULL, NULL))
+    return NULL;
+
+  return g_strstrip (out);
+}
+
+void
+uninstall_flatpak_app (const char *app_id)
+{
+  const char *argv[] = { "flatpak", "uninstall", "--assumeyes", "appid", NULL };
+  g_autofree char *out = NULL;
+
+  /* FIXME: use libflatpak, error handling */
+  argv[3] = app_id;
+  
+  g_spawn_sync (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, &out, NULL, NULL, NULL);
+}
