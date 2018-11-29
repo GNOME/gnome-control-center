@@ -724,7 +724,7 @@ add_link_type_row (CcApplicationsPanel *self,
 
 static void
 add_file_type (CcApplicationsPanel *self,
-               GtkListBoxRow *after,
+               GtkWidget *after,
                const char *type)
 {
   CcActionRow *row;
@@ -741,7 +741,7 @@ add_file_type (CcApplicationsPanel *self,
   cc_action_row_set_action (row, _("Remove"), FALSE);
   if (after)
     {
-      pos = gtk_list_box_row_get_index (after) + 1;
+      pos = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (after)) + 1;
       g_object_bind_property (after, "expanded",
                               row, "visible",
                               G_BINDING_SYNC_CREATE);
@@ -767,21 +767,26 @@ is_hypertext_type (const char *type)
 }
 
 static void
+ensure_file_group_row (CcApplicationsPanel *self,
+                       GtkWidget **row,
+                       const char *title)
+{
+  if (*row == NULL)
+    {
+      CcInfoRow *r = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
+                                                "title", title,
+                                                "has-expander", TRUE,
+                                                NULL));
+      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (r), -1);
+      *row = GTK_WIDGET (r);
+    }
+}
+
+static void
 add_hypertext_type (CcApplicationsPanel *self,
                     const char *type)
 {
-  g_autofree char *types = NULL;
-  g_autofree char *ntypes = NULL;
-
-  if (!self->hypertext)
-    {
-      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
-                                                  "title", _("Hypertext Files"),
-                                                  "has-expander", TRUE,
-                                                  NULL));
-      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
-      self->hypertext = GTK_WIDGET (row);
-    }
+  ensure_file_group_row (self, &self->hypertext, _("Hypertext Files"));
   add_file_type (self, self->hypertext, type);
 }
 
@@ -795,18 +800,7 @@ static void
 add_text_type (CcApplicationsPanel *self,
                const char *type)
 {
-  g_autofree char *types = NULL;
-  g_autofree char *ntypes = NULL;
-
-  if (!self->text)
-    {
-      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
-                                                  "title", _("Text Files"),
-                                                  "has-expander", TRUE,
-                                                  NULL));
-      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
-      self->text = GTK_WIDGET (row);
-    }
+  ensure_file_group_row (self, &self->text, _("Text Files"));
   add_file_type (self, self->text, type);
 }
 
@@ -820,18 +814,7 @@ static void
 add_image_type (CcApplicationsPanel *self,
                 const char *type)
 {
-  g_autofree char *types = NULL;
-  g_autofree char *ntypes = NULL;
-
-  if (!self->images)
-    {
-      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
-                                                  "title", _("Image Files"),
-                                                  "has-expander", TRUE,
-                                                  NULL));
-      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
-      self->images = GTK_WIDGET (row);
-    }
+  ensure_file_group_row (self, &self->images, _("Image Files"));
   add_file_type (self, self->images, type);
 }
 
@@ -847,18 +830,7 @@ static void
 add_font_type (CcApplicationsPanel *self,
                const char *type)
 {
-  g_autofree char *types = NULL;
-  g_autofree char *ntypes = NULL;
-
-  if (!self->fonts)
-    {
-      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
-                                                  "title", _("Font Files"),
-                                                  "has-expander", TRUE,
-                                                  NULL));
-      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
-      self->fonts = GTK_WIDGET (row);
-    }
+  ensure_file_group_row (self, &self->fonts, _("Font Files"));
   add_file_type (self, self->fonts, type);
 }
 
@@ -919,18 +891,7 @@ static void
 add_archive_type (CcApplicationsPanel *self,
                   const char *type)
 {
-  g_autofree char *types = NULL;
-  g_autofree char *ntypes = NULL;
-
-  if (!self->archives)
-    {
-      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
-                                                  "title", _("Archive Files"),
-                                                  "has-expander", TRUE,
-                                                  NULL));
-      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
-      self->archives = GTK_WIDGET (row);
-    }
+  ensure_file_group_row (self, &self->archives, _("Archive Files"));
   add_file_type (self, self->archives, type);
 }
 
@@ -950,18 +911,7 @@ static void
 add_package_type (CcApplicationsPanel *self,
                   const char *type)
 {
-  g_autofree char *types = NULL;
-  g_autofree char *ntypes = NULL;
-
-  if (!self->packages)
-    {
-      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
-                                                  "title", _("Software packages"),
-                                                  "has-expander", TRUE,
-                                                  NULL));
-      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
-      self->packages = GTK_WIDGET (row);
-    }
+  ensure_file_group_row (self, &self->packages, _("Package Files"));
   add_file_type (self, self->packages, type);
 }
 
@@ -984,18 +934,7 @@ static void
 add_audio_type (CcApplicationsPanel *self,
                 const char *type)
 {
-  g_autofree char *types = NULL;
-  g_autofree char *ntypes = NULL;
-
-  if (!self->audio)
-    {
-      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
-                                                  "title", _("Audio Files"),
-                                                  "has-expander", TRUE,
-                                                  NULL));
-      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
-      self->audio = GTK_WIDGET (row);
-    }
+  ensure_file_group_row (self, &self->audio, _("Audio Files"));
   add_file_type (self, self->audio, type);
 }
 
@@ -1012,18 +951,7 @@ static void
 add_video_type (CcApplicationsPanel *self,
                 const char *type)
 {
-  g_autofree char *types = NULL;
-  g_autofree char *ntypes = NULL;
-
-  if (!self->video)
-    {
-      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
-                                                  "title", _("Video Files"),
-                                                  "has-expander", TRUE,
-                                                  NULL));
-      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
-      self->video = GTK_WIDGET (row);
-    }
+  ensure_file_group_row (self, &self->video, _("Video Files"));
   add_file_type (self, self->video, type);
 }
 
@@ -1031,18 +959,7 @@ static void
 add_other_type (CcApplicationsPanel *self,
                 const char *type)
 {
-  g_autofree char *types = NULL;
-  g_autofree char *ntypes = NULL;
-
-  if (!self->other)
-    {
-      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
-                                                  "title", _("Other Files"),
-                                                  "has-expander", TRUE,
-                                                  NULL));
-      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
-      self->other = GTK_WIDGET (row);
-    }
+  ensure_file_group_row (self, &self->other, _("Other Files"));
   add_file_type (self, self->other, type);
 }
 
