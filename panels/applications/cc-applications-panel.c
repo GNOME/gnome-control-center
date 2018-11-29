@@ -62,6 +62,8 @@ struct _CcApplicationsPanel
 
   char *current_app_id;
 
+  GHashTable *globs;
+
   GDBusProxy *perm_store;
   GSettings *notification_settings;
   GSettings *location_settings;
@@ -86,8 +88,19 @@ struct _CcApplicationsPanel
   GtkWidget *device_section;
   GtkWidget *device_list;
 
-  GtkWidget *handler_section;
-  GtkWidget *handler_list;
+  GtkWidget *file_type_section;
+  GtkWidget *file_type_list;
+  GtkWidget *hypertext;
+  GtkWidget *text;
+  GtkWidget *images;
+  GtkWidget *fonts;
+  GtkWidget *archives;
+  GtkWidget *packages;
+  GtkWidget *audio;
+  GtkWidget *video;
+  GtkWidget *other;
+  GtkWidget *link_type_section;
+  GtkWidget *link_type_list;
   GtkWidget *storage_section;
   GtkWidget *storage_list;
   GtkWidget *app;
@@ -120,6 +133,7 @@ cc_applications_panel_finalize (GObject *object)
   g_clear_object (&self->cancellable);
 
   g_free (self->current_app_id);
+  g_hash_table_unref (self->globs);
 
   G_OBJECT_CLASS (cc_applications_panel_parent_class)->finalize (object);
 }
@@ -665,38 +679,441 @@ update_device_section (CcApplicationsPanel *self,
 }
 
 static void
-add_handler_row (CcApplicationsPanel *self,
-                 GAppInfo *info,
-                 const char *type)
+add_link_type_row (CcApplicationsPanel *self,
+                   const char *type)
 {
-  g_autofree char *desc = NULL;
+  CcActionRow *row = NULL;
+
+  if (g_str_has_suffix (type, "http"))
+    {
+      row = cc_action_row_new ();
+      cc_action_row_set_title (row, _("Web Links"));
+      cc_action_row_set_subtitle (row, "http://, https://");
+      cc_action_row_set_action (row, _("Unset"), FALSE);
+    }
+  else if (g_str_has_suffix (type, "https"))
+    {
+      return; /* assume anything that handles https also handles http */
+    }
+  else if (g_str_has_suffix (type, "git"))
+    {
+      row = cc_action_row_new ();
+      cc_action_row_set_title (row, _("Git Links"));
+      cc_action_row_set_subtitle (row, "git://");
+      cc_action_row_set_action (row, _("Unset"), FALSE);
+    }
+  else
+    {
+      char *scheme = strrchr (type, '/') + 1;
+      g_autofree char *title = g_strdup_printf (_("%s Links"), scheme);
+      g_autofree char *subtitle = g_strdup_printf ("%s://", scheme);  
+
+      row = cc_action_row_new ();
+      cc_action_row_set_title (row, title);
+      cc_action_row_set_subtitle (row, subtitle);
+      cc_action_row_set_action (row, _("Unset"), FALSE);
+    }
+
+  gtk_list_box_insert (GTK_LIST_BOX (self->link_type_list), GTK_WIDGET (row), -1);
+  gtk_widget_show (self->link_type_section);
+}
+
+static void
+add_file_type (CcApplicationsPanel *self,
+               GtkListBoxRow *after,
+               const char *type)
+{
   CcActionRow *row;
+  const char *desc;
+  int pos;
+  const char *glob;
+
+  glob = g_hash_table_lookup (self->globs, type);
 
   desc = g_content_type_get_description (type);
   row = cc_action_row_new ();
   cc_action_row_set_title (row, desc);
+  cc_action_row_set_subtitle (row, glob ? glob : "");
   cc_action_row_set_action (row, _("Remove"), FALSE);
-  gtk_list_box_insert (GTK_LIST_BOX (self->handler_list), GTK_WIDGET (row), -1);
+  if (after)
+    {
+      pos = gtk_list_box_row_get_index (after) + 1;
+      g_object_bind_property (after, "expanded",
+                              row, "visible",
+                              G_BINDING_SYNC_CREATE);
+    }
+  else
+    pos = -1;
+  gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), pos);
+}
+
+static gboolean
+is_hypertext_type (const char *type)
+{
+  const char *types[] = {
+    "text/html",
+    "text/htmlh",
+    "text/xml",
+    "application/xhtml+xml",
+    "application/vnd.mozilla.xul+xml",
+    "text/mml",
+    NULL
+  };
+  return g_strv_contains (types, type);
 }
 
 static void
-update_handler_section (CcApplicationsPanel *self,
-                        GAppInfo *info)
+add_hypertext_type (CcApplicationsPanel *self,
+                    const char *type)
+{
+  g_autofree char *types = NULL;
+  g_autofree char *ntypes = NULL;
+
+  if (!self->hypertext)
+    {
+      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
+                                                  "title", _("Hypertext Files"),
+                                                  "has-expander", TRUE,
+                                                  NULL));
+      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
+      self->hypertext = GTK_WIDGET (row);
+    }
+  add_file_type (self, self->hypertext, type);
+}
+
+static gboolean
+is_text_type (const char *type)
+{
+  return g_content_type_is_a (type, "text/*");
+}
+
+static void
+add_text_type (CcApplicationsPanel *self,
+               const char *type)
+{
+  g_autofree char *types = NULL;
+  g_autofree char *ntypes = NULL;
+
+  if (!self->text)
+    {
+      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
+                                                  "title", _("Text Files"),
+                                                  "has-expander", TRUE,
+                                                  NULL));
+      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
+      self->text = GTK_WIDGET (row);
+    }
+  add_file_type (self, self->text, type);
+}
+
+static gboolean
+is_image_type (const char *type)
+{
+  return g_content_type_is_a (type, "image/*");
+}
+
+static void
+add_image_type (CcApplicationsPanel *self,
+                const char *type)
+{
+  g_autofree char *types = NULL;
+  g_autofree char *ntypes = NULL;
+
+  if (!self->images)
+    {
+      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
+                                                  "title", _("Image Files"),
+                                                  "has-expander", TRUE,
+                                                  NULL));
+      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
+      self->images = GTK_WIDGET (row);
+    }
+  add_file_type (self, self->images, type);
+}
+
+static gboolean
+is_font_type (const char *type)
+{
+  return g_content_type_is_a (type, "font/*") ||
+         g_str_equal (type, "application/x-font-pcf") ||
+         g_str_equal (type, "application/x-font-type1");
+}
+
+static void
+add_font_type (CcApplicationsPanel *self,
+               const char *type)
+{
+  g_autofree char *types = NULL;
+  g_autofree char *ntypes = NULL;
+
+  if (!self->fonts)
+    {
+      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
+                                                  "title", _("Font Files"),
+                                                  "has-expander", TRUE,
+                                                  NULL));
+      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
+      self->fonts = GTK_WIDGET (row);
+    }
+  add_file_type (self, self->fonts, type);
+}
+
+static gboolean
+is_archive_type (const char *type)
+{
+  const char *types[] = {
+    "application/bzip2",
+    "application/zip",
+    "application/x-xz-compressed-tar",
+    "application/x-xz",
+    "application/x-xar",
+    "application/x-tarz",
+    "application/x-tar",
+    "application/x-lzma-compressed-tar",
+    "application/x-lzma",
+    "application/x-lzip-compressed-tar",
+    "application/x-lzip",
+    "application/x-lha",
+    "application/gzip",
+    "application/x-cpio",
+    "application/x-compressed-tar",
+    "application/x-compress",
+    "application/x-bzip-compressed-tar",
+    "application/x-bzip",
+    "application/x-7z-compressed-tar",
+    "application/x-7z-compressed",
+    "application/x-zoo",
+    "application/x-war",
+    "application/x-stuffit",
+    "application/x-rzip-compressed-tar",
+    "application/x-rzip",
+    "application/vnd.rar",
+    "application/x-lzop-compressed-tar",
+    "application/x-lzop",
+    "application/x-lz4-compressed-tar",
+    "application/x-lz4",
+    "application/x-lrzip-compressed-tar",
+    "application/x-lrzip",
+    "application/x-lhz",
+    "application/x-java-archive",
+    "application/x-ear",
+    "application/x-cabinet",
+    "application/x-bzip1-compressed-tar",
+    "application/x-bzip1",
+    "application/x-arj",
+    "application/x-archive",
+    "application/x-ar",
+    "application/x-alz",
+    "application/x-ace",
+    "application/vnd.ms-cab-compressed",
+    NULL
+  };
+  return g_strv_contains (types, type);
+}
+
+static void
+add_archive_type (CcApplicationsPanel *self,
+                  const char *type)
+{
+  g_autofree char *types = NULL;
+  g_autofree char *ntypes = NULL;
+
+  if (!self->archives)
+    {
+      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
+                                                  "title", _("Archive Files"),
+                                                  "has-expander", TRUE,
+                                                  NULL));
+      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
+      self->archives = GTK_WIDGET (row);
+    }
+  add_file_type (self, self->archives, type);
+}
+
+static gboolean
+is_package_type (const char *type)
+{
+  const char *types[] = {
+    "application/x-source-rpm",
+    "application/x-rpm",
+    "application/vnd.debian.binary-package",
+    NULL
+  };
+  return g_strv_contains (types, type);
+}
+
+static void
+add_package_type (CcApplicationsPanel *self,
+                  const char *type)
+{
+  g_autofree char *types = NULL;
+  g_autofree char *ntypes = NULL;
+
+  if (!self->packages)
+    {
+      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
+                                                  "title", _("Software packages"),
+                                                  "has-expander", TRUE,
+                                                  NULL));
+      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
+      self->packages = GTK_WIDGET (row);
+    }
+  add_file_type (self, self->packages, type);
+}
+
+static gboolean
+is_audio_type (const char *type)
+{
+  return g_content_type_is_a (type, "audio/*") ||
+         g_str_equal (type, "application/ogg") ||
+         g_str_equal (type, "application/x-shorten") ||
+         g_str_equal (type, "application/x-matroska") ||
+         g_str_equal (type, "application/x-flac") ||
+         g_str_equal (type, "application/x-extension-mp4") ||
+         g_str_equal (type, "application/x-extension-m4a") ||
+         g_str_equal (type, "application/vnd.rn-realmedia") ||
+         g_str_equal (type, "application/ram") ||
+         g_str_equal (type, "application/vnd.ms-wpl");
+}
+
+static void
+add_audio_type (CcApplicationsPanel *self,
+                const char *type)
+{
+  g_autofree char *types = NULL;
+  g_autofree char *ntypes = NULL;
+
+  if (!self->audio)
+    {
+      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
+                                                  "title", _("Audio Files"),
+                                                  "has-expander", TRUE,
+                                                  NULL));
+      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
+      self->audio = GTK_WIDGET (row);
+    }
+  add_file_type (self, self->audio, type);
+}
+
+static gboolean
+is_video_type (const char *type)
+{
+  return g_content_type_is_a (type, "video/*") ||
+         g_str_equal (type, "application/x-smil") ||
+         g_str_equal (type, "application/vnd.ms-asf") ||
+         g_str_equal (type, "application/mxf");
+}
+
+static void
+add_video_type (CcApplicationsPanel *self,
+                const char *type)
+{
+  g_autofree char *types = NULL;
+  g_autofree char *ntypes = NULL;
+
+  if (!self->video)
+    {
+      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
+                                                  "title", _("Video Files"),
+                                                  "has-expander", TRUE,
+                                                  NULL));
+      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
+      self->video = GTK_WIDGET (row);
+    }
+  add_file_type (self, self->video, type);
+}
+
+static void
+add_other_type (CcApplicationsPanel *self,
+                const char *type)
+{
+  g_autofree char *types = NULL;
+  g_autofree char *ntypes = NULL;
+
+  if (!self->other)
+    {
+      CcInfoRow *row = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
+                                                  "title", _("Other Files"),
+                                                  "has-expander", TRUE,
+                                                  NULL));
+      gtk_list_box_insert (GTK_LIST_BOX (self->file_type_list), GTK_WIDGET (row), -1);
+      self->other = GTK_WIDGET (row);
+    }
+  add_file_type (self, self->other, type);
+}
+
+static void
+add_file_type_row (CcApplicationsPanel *self,
+                   const char *type)
+{
+  gtk_widget_show (self->file_type_section);
+
+  if (is_hypertext_type (type))
+    add_hypertext_type (self, type);
+  else if (is_font_type (type))
+    add_font_type (self, type);
+  else if (is_package_type (type))
+    add_package_type (self, type);
+  else if (is_audio_type (type))
+    add_audio_type (self, type);
+  else if (is_video_type (type))
+    add_video_type (self, type);
+  else if (is_archive_type (type))
+    add_archive_type (self, type);
+  else if (is_text_type (type))
+    add_text_type (self, type);
+  else if (is_image_type (type))
+    add_image_type (self, type);
+  else
+    add_other_type (self, type);
+}
+
+static void
+file_type_row_activated_cb (GtkListBox    *list,
+                            GtkListBoxRow *list_row,
+                            CcApplicationsPanel *self)
+{
+  GtkWidget *row = GTK_WIDGET (list_row);
+
+  if (row == self->hypertext ||
+      row == self->text ||
+      row == self->images ||
+      row == self->fonts ||
+      row == self->archives ||
+      row == self->packages ||
+      row == self->audio ||
+      row == self->video ||
+      row == self->other)
+    cc_info_row_set_expanded (CC_INFO_ROW (row),
+                              !cc_info_row_get_expanded (CC_INFO_ROW (row)));
+}
+static void
+update_handler_sections (CcApplicationsPanel *self,
+                         GAppInfo *info)
 {
   const char **types;
   int i;
   g_autoptr(GHashTable) hash = NULL;
 
-  container_remove_all (GTK_CONTAINER (self->handler_list));
+  container_remove_all (GTK_CONTAINER (self->file_type_list));
+  container_remove_all (GTK_CONTAINER (self->link_type_list));
+
+  self->hypertext = NULL;
+  self->text = NULL;
+  self->images = NULL;
+  self->fonts = NULL;
+  self->archives = NULL;
+  self->packages = NULL;
+  self->audio = NULL;
+  self->video = NULL;
+  self->other = NULL;
+
+  gtk_widget_hide (self->file_type_section);
+  gtk_widget_hide (self->link_type_section);
 
   types = g_app_info_get_supported_types (info);
   if (types == NULL || types[0] == NULL)
-    {
-      gtk_widget_hide (self->handler_section);
-      return;
-    }
-
-  gtk_widget_show (self->handler_section);
+    return;
 
   hash = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_free);
 
@@ -709,7 +1126,10 @@ update_handler_section (CcApplicationsPanel *self,
           continue;
         }
       g_hash_table_add (hash, ctype);
-      add_handler_row (self, info, ctype);
+      if (g_content_type_is_a (ctype, "x-scheme-handler/*"))
+        add_link_type_row (self, ctype);
+      else
+        add_file_type_row (self, ctype);
     }
 }
 
@@ -761,7 +1181,7 @@ update_panel (CcApplicationsPanel *self)
   update_permission_section (self, info);
   update_information_section (self, info);
   update_device_section (self, info);
-  update_handler_section (self, info);
+  update_handler_sections (self, info);
   update_storage_section (self, info);
 
   self->current_app_id = get_app_id (info);
@@ -802,7 +1222,11 @@ prepare_content (CcApplicationsPanel *self)
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
 
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->handler_list),
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->file_type_list),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->link_type_list),
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
 
@@ -932,6 +1356,32 @@ cc_applications_panel_set_property (GObject *object,
 }
 
 static void
+parse_globs (CcApplicationsPanel *self)
+{
+  g_autofree char *contents = NULL;
+
+  self->globs = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+
+  if (g_file_get_contents ("/usr/share/mime/globs", &contents, NULL, NULL))
+    {
+      g_auto(GStrv) strv = NULL;
+      int i;
+
+      strv = g_strsplit (contents, "\n", 0);
+      for (i = 0; strv[i]; i++)
+        {
+          g_auto(GStrv) parts = NULL;
+
+          if (strv[i][0] == '#' || strv[i][0] == '\0')
+            continue;
+
+          parts = g_strsplit (strv[i], ":", 2);
+          g_hash_table_insert (self->globs, g_strdup (parts[0]), g_strdup (parts[1]));
+        }
+    }
+}
+
+static void
 cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
 {
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
@@ -969,8 +1419,10 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, device_list);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_section);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_list);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, file_type_section);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, file_type_list);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, link_type_section);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, link_type_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app);
@@ -984,6 +1436,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, privacy_link_cb);
   gtk_widget_class_bind_template_callback (widget_class, sound_cb);
   gtk_widget_class_bind_template_callback (widget_class, permission_row_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, file_type_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, clear_cb);
   gtk_widget_class_bind_template_callback (widget_class, uninstall_cb);
 }
@@ -1029,4 +1482,6 @@ cc_applications_panel_init (CcApplicationsPanel *self)
                             self->cancellable,
                             on_perm_store_ready,
                             self);
+
+  parse_globs (self);
 }

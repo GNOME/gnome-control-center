@@ -246,7 +246,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkBox" id="handler_section">
+                      <object class="GtkBox" id="file_type_section">
                         <property name="visible">1</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">12</property>
@@ -262,7 +262,7 @@
                               <object class="GtkLabel">
                                 <property name="visible">1</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Default Handler</property>
+                                <property name="label" translatable="yes">File Associations</property>
                                 <style>
                                   <class name="section-title"/>
                                 </style>
@@ -272,7 +272,7 @@
                               <object class="GtkLabel">
                                 <property name="visible">1</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Links and Files that are opened by this application</property>
+                                <property name="label" translatable="yes">The types of files that this application opens.</property>
                                 <style>
                                   <class name="section-subtitle"/>
                                 </style>
@@ -281,7 +281,55 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkListBox" id="handler_list">
+                          <object class="GtkListBox" id="file_type_list">
+                            <property name="visible">1</property>
+                            <property name="selection-mode">none</property>
+                            <signal name="row-activated" handler="file_type_row_activated_cb"/>
+                            <style>
+                              <class name="view"/>
+                              <class name="frame"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="link_type_section">
+                        <property name="visible">1</property>
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">12</property>
+                        <style>
+                          <class name="section"/>
+                        </style>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">1</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">6</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">1</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Link Associations</property>
+                                <style>
+                                  <class name="section-title"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">1</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">The types of links that this application opens.</property>
+                                <style>
+                                  <class name="section-subtitle"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkListBox" id="link_type_list">
                             <property name="visible">1</property>
                             <property name="selection-mode">none</property>
                             <style>
@@ -292,6 +340,7 @@
                         </child>
                       </object>
                     </child>
+FOO
                     <child>
                       <object class="GtkBox" id="storage_section">
                         <property name="visible">1</property>
