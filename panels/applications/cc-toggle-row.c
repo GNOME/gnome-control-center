@@ -27,8 +27,6 @@
 enum {
   PROP_ZERO,
   PROP_TITLE,
-  PROP_ON_SUBTITLE,
-  PROP_OFF_SUBTITLE,
   PROP_ALLOWED
 };
 
@@ -36,12 +34,9 @@ struct _CcToggleRow
 {
   GtkListBoxRow parent;
 
-  char *on_subtitle;
-  char *off_subtitle;
-
   GtkWidget *title;
-  GtkWidget *subtitle;
   GtkWidget *toggle;
+  GtkWidget *link;
 };
 
 G_DEFINE_TYPE (CcToggleRow, cc_toggle_row, GTK_TYPE_LIST_BOX_ROW)
@@ -49,10 +44,7 @@ G_DEFINE_TYPE (CcToggleRow, cc_toggle_row, GTK_TYPE_LIST_BOX_ROW)
 static void
 cc_toggle_row_finalize (GObject *object)
 {
-  CcToggleRow *row = CC_TOGGLE_ROW (object);
-
-  g_free (row->on_subtitle);
-  g_free (row->off_subtitle);
+  //CcToggleRow *row = CC_TOGGLE_ROW (object);
 
   G_OBJECT_CLASS (cc_toggle_row_parent_class)->finalize (object);
 }
@@ -69,12 +61,6 @@ cc_toggle_row_get_property (GObject    *object,
     {
     case PROP_TITLE:
       g_value_set_string (value, gtk_label_get_label (GTK_LABEL (row->title)));
-      break;
-    case PROP_ON_SUBTITLE:
-      g_value_set_string (value, row->on_subtitle);
-      break;
-    case PROP_OFF_SUBTITLE:
-      g_value_set_string (value, row->off_subtitle);
       break;
     case PROP_ALLOWED:
       g_value_set_boolean (value, cc_toggle_row_get_allowed (row));
@@ -98,12 +84,6 @@ cc_toggle_row_set_property (GObject      *object,
     case PROP_TITLE:
       gtk_label_set_label (GTK_LABEL (row->title), g_value_get_string (value));
       break;
-    case PROP_ON_SUBTITLE:
-      cc_toggle_row_set_on_subtitle (row, g_value_get_string (value));
-      break;
-    case PROP_OFF_SUBTITLE:
-      cc_toggle_row_set_off_subtitle (row, g_value_get_string (value));
-      break;
     case PROP_ALLOWED:
       cc_toggle_row_set_allowed (row, g_value_get_boolean (value));
       break;
@@ -111,6 +91,20 @@ cc_toggle_row_set_property (GObject      *object,
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
     }
+}
+
+static guint link_activated;
+
+static void
+changed_cb (CcToggleRow *row)
+{
+  g_object_notify (G_OBJECT (row), "allowed");
+}
+
+static void
+link_clicked (CcToggleRow *row)
+{
+  g_signal_emit (row, link_activated, 0);
 }
 
 static void
@@ -131,47 +125,28 @@ cc_toggle_row_class_init (CcToggleRowClass *klass)
                                                         NULL, G_PARAM_READWRITE));
 
   g_object_class_install_property (object_class,
-                                   PROP_ON_SUBTITLE,
-                                   g_param_spec_string ("on-subtitle", "on-subtitle", "on-subtitle",
-                                                        NULL, G_PARAM_READWRITE));
-
-  g_object_class_install_property (object_class,
-                                   PROP_OFF_SUBTITLE,
-                                   g_param_spec_string ("off-subtitle", "off-subtitle", "off-subtitle",
-                                                        NULL, G_PARAM_READWRITE));
-
-  g_object_class_install_property (object_class,
                                    PROP_ALLOWED,
                                    g_param_spec_boolean ("allowed", "allowed", "allowed",
                                                          FALSE, G_PARAM_READWRITE));
 
+  link_activated = g_signal_new ("link-activated",
+                                 CC_TYPE_TOGGLE_ROW,
+                                 G_SIGNAL_RUN_FIRST,
+                                 0, NULL, NULL, NULL,
+                                 G_TYPE_NONE, 0);
+
   gtk_widget_class_bind_template_child (widget_class, CcToggleRow, title);
-  gtk_widget_class_bind_template_child (widget_class, CcToggleRow, subtitle);
   gtk_widget_class_bind_template_child (widget_class, CcToggleRow, toggle);
-}
+  gtk_widget_class_bind_template_child (widget_class, CcToggleRow, link);
 
-static void
-update_subtitle (CcToggleRow *row)
-{
-  if (gtk_switch_get_active (GTK_SWITCH (row->toggle)))
-    gtk_label_set_label (GTK_LABEL (row->subtitle), row->on_subtitle);
-  else
-    gtk_label_set_label (GTK_LABEL (row->subtitle), row->off_subtitle);
-}
-
-static void
-changed_cb (GtkSwitch *toggle, GParamSpec *pspec, CcToggleRow *row)
-{
-  update_subtitle (row);
-  g_object_notify (G_OBJECT (row), "allowed");
+  gtk_widget_class_bind_template_callback (widget_class, changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, link_clicked);
 }
 
 static void
 cc_toggle_row_init (CcToggleRow *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  g_signal_connect (self->toggle, "notify::active", G_CALLBACK (changed_cb), self);
 }
 
 CcToggleRow *
@@ -191,24 +166,4 @@ gboolean
 cc_toggle_row_get_allowed (CcToggleRow *self)
 {
   return gtk_switch_get_active (GTK_SWITCH (self->toggle));
-}
-
-void
-cc_toggle_row_set_on_subtitle (CcToggleRow *self,
-                               const char *subtitle)
-{
-  g_free (self->on_subtitle);
-  self->on_subtitle = g_strdup (subtitle);
-  update_subtitle (self);
-  g_object_notify (G_OBJECT (self), "on-subtitle");
-}
-
-void
-cc_toggle_row_set_off_subtitle (CcToggleRow *self,
-                                const char *subtitle)
-{
-  g_free (self->off_subtitle);
-  self->off_subtitle = g_strdup (subtitle);
-  update_subtitle (self);
-  g_object_notify (G_OBJECT (self), "off-subtitle");
 }

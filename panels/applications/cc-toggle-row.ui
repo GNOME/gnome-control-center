@@ -10,33 +10,37 @@
         <property name="border-width">12</property>
         <property name="spacing">12</property>
         <child>
-          <object class="GtkBox">
+          <object class="GtkLabel" id="title">
             <property name="visible">True</property>
-            <property name="spacing">4</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkLabel" id="title">
-                <property name="visible">True</property>
-                <property name="xalign">0</property>
-                <property name="hexpand">True</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="subtitle">
-                <property name="visible">True</property>
-                <property name="xalign">0</property>
-                <property name="hexpand">True</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
+            <property name="xalign">0</property>
+            <property name="hexpand">True</property>
           </object>
         </child>
         <child>
           <object class="GtkSwitch" id="toggle">
             <property name="visible">True</property>
             <property name="valign">center</property>
+            <signal name="notify::active" handler="changed_cb" swapped="yes"/>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="orientation">vertical</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="link">
+            <property name="visible">True</property>
+            <property name="valign">center</property>
+            <signal name="clicked" handler="link_clicked" swapped="yes"/>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon-name">view-more-symbolic</property>
+                <property name="icon-size">4</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>

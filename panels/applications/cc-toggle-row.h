@@ -31,9 +31,5 @@ CcToggleRow *cc_toggle_row_new (void);
 void         cc_toggle_row_set_allowed (CcToggleRow *row,
                                         gboolean     allowed);
 gboolean     cc_toggle_row_get_allowed (CcToggleRow *row);
-void         cc_toggle_row_set_on_subtitle (CcToggleRow *row,
-                                            const char *subtitle);
-void         cc_toggle_row_set_off_subtitle (CcToggleRow *row,
-                                             const char *subtitle);
 
 G_END_DECLS

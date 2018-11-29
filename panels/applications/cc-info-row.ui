@@ -10,27 +10,10 @@
         <property name="border-width">12</property>
         <property name="spacing">12</property>
         <child>
-          <object class="GtkBox">
+          <object class="GtkLabel" id="title">
             <property name="visible">True</property>
-            <property name="spacing">4</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkLabel" id="title">
-                <property name="visible">True</property>
-                <property name="xalign">0</property>
-                <property name="hexpand">True</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="subtitle">
-                <property name="visible">True</property>
-                <property name="xalign">0</property>
-                <property name="hexpand">True</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
+            <property name="xalign">0</property>
+            <property name="hexpand">True</property>
           </object>
         </child>
         <child>
@@ -40,6 +23,12 @@
             <style>
               <class name="dim-label"/>
             </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkImage" id="expander">
+            <property name="valign">center</property>
+            <property name="icon-name">pan-end-symbolic</property>
           </object>
         </child>
       </object>
