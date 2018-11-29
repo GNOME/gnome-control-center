@@ -36,12 +36,15 @@
 
 /* Todo
  * - search
- * - handler section
+ * - mime type removal
  * - handle cache async
  *
  * Missing in flatpak:
  * - background
  * - usb devices
+ * - global settings for disabling camera, microphone
+ *
+ * Update privacy panel to match
  */
 
 enum {
