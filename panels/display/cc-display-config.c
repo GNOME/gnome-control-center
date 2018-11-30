@@ -568,3 +568,19 @@ cc_display_config_is_layout_logical (CcDisplayConfig *self)
 {
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->is_layout_logical (self);
 }
+
+void
+cc_display_config_set_minimum_size (CcDisplayConfig *self,
+                                    int              width,
+                                    int              height)
+{
+  CC_DISPLAY_CONFIG_GET_CLASS (self)->set_minimum_size (self, width, height);
+}
+
+gboolean
+cc_display_config_is_scaled_mode_valid (CcDisplayConfig *self,
+                                        CcDisplayMode   *mode,
+                                        double           scale)
+{
+  return CC_DISPLAY_CONFIG_GET_CLASS (self)->is_scaled_mode_valid (self, mode, scale);
+}
