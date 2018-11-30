@@ -154,6 +154,12 @@ struct _CcDisplayConfigClass
                                  gboolean          clone);
   GList*   (*get_cloning_modes) (CcDisplayConfig  *self);
   gboolean (*is_layout_logical) (CcDisplayConfig  *self);
+  void     (*set_minimum_size)  (CcDisplayConfig  *self,
+                                 int               width,
+                                 int               height);
+  gboolean (*is_scaled_mode_valid) (CcDisplayConfig  *self,
+                                    CcDisplayMode    *mode,
+                                    double            scale);
 };
 
 
@@ -170,6 +176,12 @@ void              cc_display_config_set_cloning             (CcDisplayConfig    
                                                              gboolean            clone);
 GList*            cc_display_config_get_cloning_modes       (CcDisplayConfig    *config);
 gboolean          cc_display_config_is_layout_logical       (CcDisplayConfig    *self);
+void              cc_display_config_set_minimum_size        (CcDisplayConfig    *self,
+                                                             int                 width,
+                                                             int                 height);
+gboolean          cc_display_config_is_scaled_mode_valid    (CcDisplayConfig    *self,
+                                                             CcDisplayMode      *mode,
+                                                             double              scale);
 
 const char*       cc_display_monitor_get_display_name       (CcDisplayMonitor   *monitor);
 gboolean          cc_display_monitor_is_active              (CcDisplayMonitor   *monitor);
