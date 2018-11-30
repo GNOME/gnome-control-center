@@ -41,7 +41,7 @@ typedef struct _NetConnectionEditorClass     NetConnectionEditorClass;
 
 struct _NetConnectionEditor
 {
-         GObject parent;
+        GtkDialog parent;
 
         GtkWidget        *parent_window;
         NMClient         *client;
@@ -53,8 +53,11 @@ struct _NetConnectionEditor
         gboolean          is_changed;
         NMAccessPoint    *ap;
 
-        GtkBuilder       *builder;
-        GtkWidget        *window;
+        GtkButton        *cancel_button;
+        GtkButton        *apply_button;
+        GtkNotebook      *notebook;
+        GtkFrame         *add_connection_frame;
+        GtkNotebook      *toplevel_notebook;
 
         GSList *initializing_pages;
         GSList *pages;
@@ -68,7 +71,7 @@ struct _NetConnectionEditor
 
 struct _NetConnectionEditorClass
 {
-        GObjectClass parent_class;
+        GtkDialogClass parent_class;
 
         void (*done) (NetConnectionEditor *details, gboolean success);
 };
@@ -82,7 +85,6 @@ NetConnectionEditor *net_connection_editor_new      (GtkWindow        *parent_wi
 void                 net_connection_editor_set_title (NetConnectionEditor  *editor,
                                                       const gchar          *title);
 void                 net_connection_editor_run      (NetConnectionEditor   *editor);
-void                 net_connection_editor_present  (NetConnectionEditor   *editor);
 void                 net_connection_editor_forget   (NetConnectionEditor   *editor);
 void                 net_connection_editor_reset    (NetConnectionEditor   *editor);
 

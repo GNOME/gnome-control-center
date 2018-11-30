@@ -801,14 +801,6 @@ panel_check_network_manager_version (CcNetworkPanel *panel)
 }
 
 static void
-editor_done (NetConnectionEditor *editor,
-             gboolean             success,
-             gpointer             user_data)
-{
-        g_object_unref (editor);
-}
-
-static void
 create_connection_cb (GtkWidget      *button,
                       CcNetworkPanel *self)
 {
@@ -817,7 +809,6 @@ create_connection_cb (GtkWidget      *button,
 
         toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
         editor = net_connection_editor_new (toplevel, NULL, NULL, NULL, self->client);
-        g_signal_connect (editor, "done", G_CALLBACK (editor_done), self);
         net_connection_editor_run (editor);
 }
 
