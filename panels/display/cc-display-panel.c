@@ -1478,16 +1478,25 @@ make_two_single_ui (CcDisplayPanel *panel)
 }
 
 static void
-set_mode_on_all_outputs (CcDisplayConfig *config,
+set_mode_on_all_outputs (CcDisplayPanel  *panel,
+                         CcDisplayConfig *config,
                          CcDisplayMode   *mode)
 {
   GList *outputs, *l;
   outputs = cc_display_config_get_monitors (config);
+  double scale = cc_display_monitor_get_scale (panel->current_output);
+
+  /* Restore 1.0 scaling if the previous scale is not supported at the
+   * new resolution. */
+  if (!display_mode_supported_at_scale (panel, mode, scale))
+    scale = 1.0;
+
   for (l = outputs; l; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
       cc_display_monitor_set_mode (output, mode);
       cc_display_monitor_set_position (output, 0, 0);
+      cc_display_monitor_set_scale (output, scale);
     }
 }
 
@@ -1497,7 +1506,7 @@ mirror_resolution_row_activated (CcDisplayPanel *panel,
 {
   CcDisplayMode *mode = g_object_get_data (G_OBJECT (row), "mode");
 
-  set_mode_on_all_outputs (panel->current_config, mode);
+  set_mode_on_all_outputs (panel, panel->current_config, mode);
   update_apply_button (panel);
 }
 
@@ -1555,6 +1564,45 @@ make_mirror_resolution_row (CcDisplayPanel   *panel,
   return row;
 }
 
+static GtkWidget *
+make_mirror_scale_row (CcDisplayPanel *panel)
+{
+  GtkWidget *row, *bbox, *label;
+  GList *l;
+
+  label = gtk_label_new (_("Scale"));
+  gtk_widget_show (label);
+
+  bbox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+  gtk_widget_show (bbox);
+  gtk_widget_set_valign (bbox, GTK_ALIGN_CENTER);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (bbox), GTK_BUTTONBOX_EXPAND);
+
+  row = make_row (panel->rows_size_group, label, bbox);
+  gtk_widget_set_margin_top (gtk_bin_get_child (GTK_BIN (row)), 0);
+  gtk_widget_set_margin_bottom (gtk_bin_get_child (GTK_BIN (row)), 0);
+  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), FALSE);
+
+  for (l = cc_display_config_get_monitors (panel->current_config); l != NULL; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+      g_object_set_data (G_OBJECT (bbox), "panel", panel);
+      g_signal_connect_object (output, "mode", G_CALLBACK (setup_scale_buttons),
+                              bbox, G_CONNECT_SWAPPED);
+      g_signal_connect_object (output, "scale", G_CALLBACK (scale_buttons_sync),
+                              bbox, G_CONNECT_SWAPPED);
+      setup_scale_buttons (bbox, output);
+
+      g_object_set_data (G_OBJECT (row), "panel", panel);
+      g_signal_connect_object (output, "mode", G_CALLBACK (scale_row_sync_visibility),
+                              row, G_CONNECT_SWAPPED);
+    }
+
+  scale_row_sync_visibility (row, panel->current_output);
+
+  return row;
+}
+
 static void
 ensure_mirror_res_list (CcDisplayConfig *config)
 {
@@ -1595,7 +1643,7 @@ make_two_mirror_ui (CcDisplayPanel *panel)
       GList *modes;
       cc_display_config_set_cloning (panel->current_config, TRUE);
       modes = g_object_get_data (G_OBJECT (panel->current_config), "mirror-res-list");
-      set_mode_on_all_outputs (panel->current_config,
+      set_mode_on_all_outputs (panel, panel->current_config,
                                CC_DISPLAY_MODE (g_list_nth_data (modes, 0)));
     }
 
@@ -1618,6 +1666,9 @@ make_two_mirror_ui (CcDisplayPanel *panel)
 
   row = make_mirror_resolution_row (panel, panel->current_output);
   gtk_widget_show (row);
+  gtk_container_add (GTK_CONTAINER (listbox), row);
+
+  row = make_mirror_scale_row (panel);
   gtk_container_add (GTK_CONTAINER (listbox), row);
 
   ui = make_night_light_widget (panel);
