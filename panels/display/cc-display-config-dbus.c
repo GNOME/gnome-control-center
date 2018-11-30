@@ -1208,6 +1208,47 @@ is_scaled_mode_allowed (CcDisplayConfigDBus *self,
 }
 
 static gboolean
+is_mirroring_configured (CcDisplayConfigDBus *self)
+{
+  GList *l;
+  CcDisplayMonitorDBus *ref_monitor = NULL;
+  gboolean has_mirrors = FALSE;
+
+  for (l = self->monitors; l != NULL; l = l->next)
+    {
+      CcDisplayMonitorDBus *monitor = CC_DISPLAY_MONITOR_DBUS (l->data);
+
+      if (!monitor->current_mode)
+        continue;
+
+      if (!ref_monitor)
+        {
+          if (monitor->logical_monitor->x != 0 || monitor->logical_monitor->y != 0)
+            return FALSE;
+
+          ref_monitor = monitor;
+          continue;
+        }
+      else
+        {
+          CcDisplayModeDBus *ref_mode = CC_DISPLAY_MODE_DBUS (ref_monitor->current_mode);
+          CcDisplayModeDBus *mode = CC_DISPLAY_MODE_DBUS (monitor->current_mode);
+
+          if (!cc_display_logical_monitor_equal (ref_monitor->logical_monitor,
+                                                 monitor->logical_monitor))
+            return FALSE;
+
+          if (!cc_display_mode_dbus_equal (ref_mode, mode))
+            return FALSE;
+
+          has_mirrors = TRUE;
+        }
+    }
+
+  return has_mirrors;
+}
+
+static gboolean
 is_scale_allowed_by_all_monitors (CcDisplayConfigDBus *self,
                                   double               scale)
 {
@@ -1247,7 +1288,7 @@ cc_display_config_dbus_is_scaled_mode_valid (CcDisplayConfig *pself,
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (pself);
 
-  if (self->global_scale_required)
+  if (self->global_scale_required || is_mirroring_configured (self))
     return is_scale_allowed_by_all_monitors (self, scale);
 
   return is_scaled_mode_allowed (self, mode, scale);
