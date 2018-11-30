@@ -270,7 +270,6 @@ editor_done (NetConnectionEditor *editor,
              gboolean             success,
              NetVpn              *vpn)
 {
-        g_object_unref (editor);
         net_object_refresh (NET_OBJECT (vpn));
         g_object_unref (vpn);
 }

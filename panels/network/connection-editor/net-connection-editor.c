@@ -47,15 +47,27 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE (NetConnectionEditor, net_connection_editor, G_TYPE_OBJECT)
+G_DEFINE_TYPE (NetConnectionEditor, net_connection_editor, GTK_TYPE_DIALOG)
 
 static void page_changed (CEPage *page, gpointer user_data);
 
 static void
 cancel_editing (NetConnectionEditor *editor)
 {
-        gtk_widget_hide (editor->window);
+        gtk_widget_hide (GTK_WIDGET (editor));
         g_signal_emit (editor, signals[DONE], 0, FALSE);
+}
+
+static void
+delete_event_cb (NetConnectionEditor *editor)
+{
+        cancel_editing (editor);
+}
+
+static void
+cancel_clicked_cb (NetConnectionEditor *editor)
+{
+        cancel_editing (editor);
 }
 
 static void
@@ -72,7 +84,7 @@ static void
 update_complete (NetConnectionEditor *editor,
                  gboolean             success)
 {
-        gtk_widget_hide (editor->window);
+        gtk_widget_hide (GTK_WIDGET (editor));
         g_signal_emit (editor, signals[DONE], 0, success);
 }
 
@@ -121,7 +133,7 @@ added_connection_cb (GObject            *source_object,
 }
 
 static void
-apply_edits (NetConnectionEditor *editor)
+apply_clicked_cb (NetConnectionEditor *editor)
 {
         update_connection (editor);
 
@@ -145,38 +157,7 @@ apply_edits (NetConnectionEditor *editor)
 static void
 net_connection_editor_init (NetConnectionEditor *editor)
 {
-        GError *error = NULL;
-
-        editor->builder = gtk_builder_new ();
-
-        gtk_builder_add_from_resource (editor->builder,
-                                       "/org/gnome/control-center/network/connection-editor.ui",
-                                       &error);
-        if (error != NULL) {
-                g_warning ("Could not load ui file: %s", error->message);
-                g_error_free (error);
-                return;
-        }
-
-        editor->window = GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_dialog"));
-}
-
-void
-net_connection_editor_run (NetConnectionEditor *editor)
-{
-        GtkWidget *button;
-
-        button = GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_cancel_button"));
-        g_signal_connect_swapped (button, "clicked",
-                                  G_CALLBACK (cancel_editing), editor);
-        g_signal_connect_swapped (editor->window, "delete-event",
-                                  G_CALLBACK (cancel_editing), editor);
-
-        button = GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button"));
-        g_signal_connect_swapped (button, "clicked",
-                                  G_CALLBACK (apply_edits), editor);
-
-        net_connection_editor_present (editor);
+        gtk_widget_init_template (GTK_WIDGET (editor));
 }
 
 static void
@@ -192,12 +173,7 @@ net_connection_editor_finalize (GObject *object)
                 g_signal_handler_disconnect (editor->client, editor->permission_id);
         g_clear_object (&editor->connection);
         g_clear_object (&editor->orig_connection);
-        if (editor->window) {
-                gtk_widget_destroy (editor->window);
-                editor->window = NULL;
-        }
         g_clear_object (&editor->parent_window);
-        g_clear_object (&editor->builder);
         g_clear_object (&editor->device);
         g_clear_object (&editor->client);
         g_clear_object (&editor->ap);
@@ -209,6 +185,7 @@ static void
 net_connection_editor_class_init (NetConnectionEditorClass *class)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (class);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
 
         g_resources_register (net_connection_editor_get_resource ());
 
@@ -221,6 +198,17 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
                                       NULL, NULL,
                                       NULL,
                                       G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/connection-editor.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, add_connection_frame);
+        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, apply_button);
+        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, cancel_button);
+        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, notebook);
+        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, toplevel_notebook);
+        gtk_widget_class_bind_template_callback (widget_class, delete_event_cb);
+        gtk_widget_class_bind_template_callback (widget_class, cancel_clicked_cb);
+        gtk_widget_class_bind_template_callback (widget_class, apply_clicked_cb);
 }
 
 static void
@@ -231,8 +219,8 @@ net_connection_editor_error_dialog (NetConnectionEditor *editor,
         GtkWidget *dialog;
         GtkWindow *parent;
 
-        if (gtk_widget_is_visible (editor->window))
-                parent = GTK_WINDOW (editor->window);
+        if (gtk_widget_is_visible (GTK_WIDGET (editor)))
+                parent = GTK_WINDOW (editor);
         else
                 parent = GTK_WINDOW (editor->parent_window);
 
@@ -304,7 +292,7 @@ net_connection_editor_update_title (NetConnectionEditor *editor)
                         id = g_strdup (nm_connection_get_id (editor->connection));
                 }
         }
-        gtk_window_set_title (GTK_WINDOW (editor->window), id);
+        gtk_window_set_title (GTK_WINDOW (editor), id);
         g_free (id);
 }
 
@@ -365,7 +353,7 @@ validate (NetConnectionEditor *editor)
 
         update_sensitivity (editor);
 done:
-        gtk_widget_set_sensitive (GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button")), valid && editor->is_changed);
+        gtk_widget_set_sensitive (GTK_WIDGET (editor->apply_button), valid && editor->is_changed);
 }
 
 static void
@@ -389,16 +377,13 @@ idle_validate (gpointer user_data)
 static void
 recheck_initialization (NetConnectionEditor *editor)
 {
-        GtkNotebook *notebook;
-
         if (!editor_is_initialized (editor))
                 return;
 
-        notebook = GTK_NOTEBOOK (gtk_builder_get_object (editor->builder, "details_notebook"));
-        gtk_notebook_set_current_page (notebook, 0);
+        gtk_notebook_set_current_page (editor->notebook, 0);
 
         if (editor->show_when_initialized)
-                gtk_window_present (GTK_WINDOW (editor->window));
+                gtk_window_present (GTK_WINDOW (editor));
 
         g_idle_add (idle_validate, editor);
 }
@@ -406,18 +391,16 @@ recheck_initialization (NetConnectionEditor *editor)
 static void
 page_initialized (CEPage *page, GError *error, NetConnectionEditor *editor)
 {
-        GtkNotebook *notebook;
         GtkWidget *widget;
         GtkWidget *label;
         gint position;
         GList *children, *l;
         gint i;
 
-        notebook = GTK_NOTEBOOK (gtk_builder_get_object (editor->builder, "details_notebook"));
         widget = ce_page_get_page (page);
         position = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (page), "position"));
         g_object_set_data (G_OBJECT (widget), "position", GINT_TO_POINTER (position));
-        children = gtk_container_get_children (GTK_CONTAINER (notebook));
+        children = gtk_container_get_children (GTK_CONTAINER (editor->notebook));
         for (l = children, i = 0; l; l = l->next, i++) {
                 gint pos = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (l->data), "position"));
                 if (pos > position)
@@ -427,7 +410,7 @@ page_initialized (CEPage *page, GError *error, NetConnectionEditor *editor)
 
         label = gtk_label_new (ce_page_get_title (page));
 
-        gtk_notebook_insert_page (notebook, widget, label, i);
+        gtk_notebook_insert_page (editor->notebook, widget, label, i);
 
         editor->initializing_pages = g_slist_remove (editor->initializing_pages, page);
         editor->pages = g_slist_append (editor->pages, page);
@@ -511,10 +494,7 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
                                                                        nm_connection_get_uuid (connection));
 
         if (editor->is_new_connection) {
-                GtkWidget *button;
-
-                button = GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button"));
-                gtk_button_set_label (GTK_BUTTON (button), _("_Add"));
+                gtk_button_set_label (editor->apply_button, _("_Add"));
                 editor->is_changed = TRUE;
         }
 
@@ -623,15 +603,13 @@ complete_vpn_connection (NetConnectionEditor *editor, NMConnection *connection)
 static void
 finish_add_connection (NetConnectionEditor *editor, NMConnection *connection)
 {
-        GtkNotebook *notebook;
         GtkBin *frame;
 
-        frame = GTK_BIN (gtk_builder_get_object (editor->builder, "details_add_connection_frame"));
+        frame = GTK_BIN (editor->add_connection_frame);
         gtk_widget_destroy (gtk_bin_get_child (frame));
 
-        notebook = GTK_NOTEBOOK (gtk_builder_get_object (editor->builder, "details_toplevel_notebook"));
-        gtk_notebook_set_current_page (notebook, 0);
-        gtk_widget_show (GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button")));
+        gtk_notebook_set_current_page (editor->toplevel_notebook, 0);
+        gtk_widget_show (GTK_WIDGET (editor->apply_button));
 
         if (connection)
                 net_connection_editor_set_connection (editor, connection);
@@ -661,7 +639,7 @@ vpn_type_activated (GtkListBox *list, GtkWidget *row, NetConnectionEditor *edito
         NMSettingConnection *s_con;
 
         if (!strcmp (service_name, "import")) {
-                vpn_import (GTK_WINDOW (editor->window), vpn_import_complete, editor);
+                vpn_import (GTK_WINDOW (editor), vpn_import_complete, editor);
                 return;
         }
 
@@ -762,12 +740,10 @@ select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
 static void
 net_connection_editor_add_connection (NetConnectionEditor *editor)
 {
-        GtkNotebook *notebook;
         GtkContainer *frame;
         GtkListBox *list;
 
-        notebook = GTK_NOTEBOOK (gtk_builder_get_object (editor->builder, "details_toplevel_notebook"));
-        frame = GTK_CONTAINER (gtk_builder_get_object (editor->builder, "details_add_connection_frame"));
+        frame = GTK_CONTAINER (editor->add_connection_frame);
 
         list = GTK_LIST_BOX (gtk_list_box_new ());
         gtk_list_box_set_selection_mode (list, GTK_SELECTION_NONE);
@@ -778,9 +754,9 @@ net_connection_editor_add_connection (NetConnectionEditor *editor)
         gtk_widget_show_all (GTK_WIDGET (list));
         gtk_container_add (frame, GTK_WIDGET (list));
 
-        gtk_notebook_set_current_page (notebook, 1);
-        gtk_widget_hide (GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button")));
-        gtk_window_set_title (GTK_WINDOW (editor->window), _("Add VPN"));
+        gtk_notebook_set_current_page (editor->toplevel_notebook, 1);
+        gtk_widget_hide (GTK_WIDGET (editor->apply_button));
+        gtk_window_set_title (GTK_WINDOW (editor), _("Add VPN"));
 }
 
 static void
@@ -809,11 +785,14 @@ net_connection_editor_new (GtkWindow        *parent_window,
 {
         NetConnectionEditor *editor;
 
-        editor = g_object_new (NET_TYPE_CONNECTION_EDITOR, NULL);
+        editor = g_object_new (NET_TYPE_CONNECTION_EDITOR,
+                               /* This doesn't seem to work for a template, so it is also hardcoded. */
+                               "use-header-bar", 1,
+                               NULL);
 
         if (parent_window) {
                 editor->parent_window = GTK_WIDGET (g_object_ref (parent_window));
-                gtk_window_set_transient_for (GTK_WINDOW (editor->window),
+                gtk_window_set_transient_for (GTK_WINDOW (editor),
                                               parent_window);
         }
         if (ap)
@@ -835,13 +814,13 @@ net_connection_editor_new (GtkWindow        *parent_window,
 }
 
 void
-net_connection_editor_present (NetConnectionEditor *editor)
+net_connection_editor_run (NetConnectionEditor *editor)
 {
         if (!editor_is_initialized (editor)) {
                 editor->show_when_initialized = TRUE;
                 return;
         }
-        gtk_window_present (GTK_WINDOW (editor->window));
+        gtk_window_present (GTK_WINDOW (editor));
 }
 
 static void
@@ -886,6 +865,6 @@ void
 net_connection_editor_set_title (NetConnectionEditor *editor,
                                  const gchar         *title)
 {
-        gtk_window_set_title (GTK_WINDOW (editor->window), title);
+        gtk_window_set_title (GTK_WINDOW (editor), title);
         editor->title_set = TRUE;
 }

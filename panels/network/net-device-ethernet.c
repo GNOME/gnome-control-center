@@ -247,7 +247,6 @@ editor_done (NetConnectionEditor *editor,
              gboolean             success,
              NetDeviceEthernet   *device)
 {
-        g_object_unref (editor);
         device_ethernet_refresh_ui (device);
 }
 
