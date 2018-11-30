@@ -625,13 +625,11 @@ make_orientation_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
 }
 
 static gboolean
-display_mode_supported_at_scale (CcDisplayMode *mode, double scale)
+display_mode_supported_at_scale (CcDisplayPanel *panel,
+                                 CcDisplayMode  *mode,
+                                 double          scale)
 {
-  int width, height;
-
-  cc_display_mode_get_resolution (mode, &width, &height);
-
-  return width / scale >= MINIMUM_WIDTH && height / scale >= MINIMUM_HEIGHT;
+  return cc_display_config_is_scaled_mode_valid (panel->current_config, mode, scale);
 }
 
 static void
@@ -645,7 +643,7 @@ resolution_row_activated (CcDisplayPanel *panel,
 
   /* Restore 1.0 scaling if the previous scale is not supported at the
    * new resolution. */
-  if (!display_mode_supported_at_scale (mode, scale))
+  if (!display_mode_supported_at_scale (panel, mode, scale))
     cc_display_monitor_set_scale (panel->current_output, 1.0);
 
   cc_display_config_snap_output (panel->current_config, panel->current_output);
@@ -671,7 +669,7 @@ make_resolution_popover (CcDisplayPanel *panel)
       GtkWidget *child;
 
       /* Exclude unusable low resolutions */
-      if (!display_mode_supported_at_scale (mode, 1.0))
+      if (!display_mode_supported_at_scale (panel, mode, 1.0))
         continue;
 
       child = make_popover_label (get_resolution_string (mode));
@@ -819,29 +817,33 @@ make_refresh_rate_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
 }
 
 static guint
-n_supported_scales (CcDisplayMode *mode)
+n_supported_scales (CcDisplayPanel *panel,
+                    CcDisplayMode  *mode)
 {
   const double *scales = cc_display_mode_get_supported_scales (mode);
   guint n = 0;
 
-  while (scales[n] != 0.0 && display_mode_supported_at_scale (mode, scales[n]))
+  while (scales[n] != 0.0 && display_mode_supported_at_scale (panel, mode, scales[n]))
     n++;
 
   return n;
 }
 
 static gboolean
-should_show_scale_row (CcDisplayMonitor *output)
+should_show_scale_row (CcDisplayPanel   *panel,
+                       CcDisplayMonitor *output)
 {
   CcDisplayMode *mode = cc_display_monitor_get_mode (output);
-  return mode ? n_supported_scales (mode) > 1 : FALSE;
+  return mode ? n_supported_scales (panel, mode) > 1 : FALSE;
 }
 
 static void
 scale_row_sync_visibility (GtkWidget        *row,
                            CcDisplayMonitor *output)
 {
-  if (!should_show_scale_row (output))
+  CcDisplayPanel *panel = g_object_get_data (G_OBJECT (row), "panel");
+
+  if (!should_show_scale_row (panel, output))
     gtk_widget_hide (row);
   else
     gtk_widget_show (row);
@@ -918,7 +920,7 @@ setup_scale_buttons (GtkWidget        *bbox,
     {
       GtkWidget *button, *label;
 
-      if (!display_mode_supported_at_scale (mode, *scale))
+      if (!display_mode_supported_at_scale (panel, mode, *scale))
         continue;
 
       button = gtk_radio_button_new_from_widget (group);
@@ -967,6 +969,7 @@ make_scale_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
                            bbox, G_CONNECT_SWAPPED);
   setup_scale_buttons (bbox, output);
 
+  g_object_set_data (G_OBJECT (row), "panel", panel);
   g_signal_connect_object (output, "mode", G_CALLBACK (scale_row_sync_visibility),
                            row, G_CONNECT_SWAPPED);
   scale_row_sync_visibility (row, output);
@@ -1963,6 +1966,7 @@ reset_current_config (CcDisplayPanel *panel)
     return;
 
   panel->current_config = current;
+  cc_display_config_set_minimum_size (current, MINIMUM_WIDTH, MINIMUM_HEIGHT);
 
   outputs = cc_display_config_get_ui_sorted_monitors (panel->current_config);
   for (l = outputs; l; l = l->next)
