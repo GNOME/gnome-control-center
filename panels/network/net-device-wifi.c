@@ -1983,14 +1983,6 @@ ap_sort (gconstpointer a, gconstpointer b, gpointer data)
 }
 
 static void
-editor_done (NetConnectionEditor *editor,
-             gboolean             success,
-             NetDeviceWifi       *device_wifi)
-{
-        g_object_unref (editor);
-}
-
-static void
 show_details_for_row (GtkButton *button, NetDeviceWifi *device_wifi)
 {
         GtkWidget *row;
@@ -2010,7 +2002,6 @@ show_details_for_row (GtkButton *button, NetDeviceWifi *device_wifi)
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         client = net_object_get_client (NET_OBJECT (device_wifi));
         editor = net_connection_editor_new (GTK_WINDOW (window), connection, device, ap, client);
-        g_signal_connect (editor, "done", G_CALLBACK (editor_done), device_wifi);
         net_connection_editor_run (editor);
 }
 
