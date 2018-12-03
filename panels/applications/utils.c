@@ -20,6 +20,7 @@
 
 #include <config.h>
 #include <glib/gi18n.h>
+#include <flatpak/flatpak.h>
 
 #include "utils.h"
 
@@ -66,29 +67,39 @@ container_remove_all (GtkContainer *container)
   g_list_free (children);
 }
 
-char *
-get_flatpak_app_size (const char *app_id)
+FlatpakInstalledRef *
+find_flatpak_ref (const char *app_id)
 {
-  const char *argv[] = { "flatpak", "info", "-s", "appid", NULL };
-  char *out;
+  g_autoptr(FlatpakInstallation) inst = NULL;
+  g_autoptr(GPtrArray) array = NULL;
+  FlatpakInstalledRef *ref;
+  int i;
 
-  /* FIXME: use libflatpak */
-  argv[3] = app_id;
-  
-  if (!g_spawn_sync (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, &out, NULL, NULL, NULL))
-    return NULL;
+  inst = flatpak_installation_new_user (NULL, NULL);
+  ref = flatpak_installation_get_current_installed_app (inst, app_id, NULL, NULL);
+  if (ref)
+    return ref;
 
-  return g_strstrip (out);
+  array = flatpak_get_system_installations (NULL, NULL);
+  for (i = 0; i < array->len; i++)
+    {
+      FlatpakInstallation *si = g_ptr_array_index (array, i);
+      ref = flatpak_installation_get_current_installed_app (si, app_id, NULL, NULL);
+      if (ref)
+        return ref;
+    }
+
+  return NULL;
 }
 
-void
-uninstall_flatpak_app (const char *app_id)
+guint64
+get_flatpak_app_size (const char *app_id)
 {
-  const char *argv[] = { "flatpak", "uninstall", "--assumeyes", "appid", NULL };
-  g_autofree char *out = NULL;
+  g_autoptr(FlatpakInstalledRef) ref = NULL;
 
-  /* FIXME: use libflatpak, error handling */
-  argv[3] = app_id;
-  
-  g_spawn_sync (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, &out, NULL, NULL, NULL);
+  ref = find_flatpak_ref (app_id);
+  if (ref)
+    return flatpak_installed_ref_get_installed_size (ref);
+
+  return 0;
 }
