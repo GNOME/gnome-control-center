@@ -598,14 +598,14 @@ complete_vpn_connection (NetConnectionEditor *editor, NMConnection *connection)
 static void
 finish_add_connection (NetConnectionEditor *editor, NMConnection *connection)
 {
-        GtkNotebook *notebook;
+        GtkStack *stack;
         GtkBin *frame;
 
         frame = GTK_BIN (editor->details_add_connection_frame);
         gtk_widget_destroy (gtk_bin_get_child (frame));
 
-        notebook = GTK_NOTEBOOK (editor->details_toplevel_notebook);
-        gtk_notebook_set_current_page (notebook, 0);
+        stack = GTK_STACK (editor->details_toplevel_notebook);
+        gtk_stack_set_visible_child_name (stack, "details");
         gtk_widget_show (editor->details_apply_button);
 
         if (connection)
@@ -737,11 +737,11 @@ select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
 static void
 net_connection_editor_add_connection (NetConnectionEditor *editor)
 {
-        GtkNotebook *notebook;
+        GtkStack *stack;
         GtkContainer *frame;
         GtkListBox *list;
 
-        notebook = GTK_NOTEBOOK (editor->details_toplevel_notebook);
+        stack = GTK_STACK (editor->details_toplevel_notebook);
         frame = GTK_CONTAINER (editor->details_add_connection_frame);
 
         list = GTK_LIST_BOX (gtk_list_box_new ());
@@ -753,7 +753,7 @@ net_connection_editor_add_connection (NetConnectionEditor *editor)
         gtk_widget_show_all (GTK_WIDGET (list));
         gtk_container_add (frame, GTK_WIDGET (list));
 
-        gtk_notebook_set_current_page (notebook, 1);
+        gtk_stack_set_visible_child_name (stack, "vpn");
         gtk_widget_hide (editor->details_apply_button);
         gtk_window_set_title (GTK_WINDOW (editor), _("Add VPN"));
 }
