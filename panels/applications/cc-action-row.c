@@ -101,6 +101,7 @@ cc_action_row_set_property (GObject      *object,
       break;
     case PROP_SUBTITLE:
       gtk_label_set_label (GTK_LABEL (row->subtitle), g_value_get_string (value));
+      gtk_widget_set_visible (row->subtitle, strlen (g_value_get_string (value)) > 0);
       break;
     case PROP_ACTION:
       gtk_button_set_label (GTK_BUTTON (row->button), g_value_get_string (value));
@@ -205,6 +206,7 @@ cc_action_row_set_subtitle (CcActionRow *row,
                             const char  *name)
 {
   gtk_label_set_label (GTK_LABEL (row->subtitle), name);
+  gtk_widget_set_visible (row->subtitle, strlen (name) > 0);
 }
 
 void

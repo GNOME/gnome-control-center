@@ -23,26 +23,6 @@
             <signal name="notify::active" handler="changed_cb" swapped="yes"/>
           </object>
         </child>
-        <child>
-          <object class="GtkSeparator">
-            <property name="visible">True</property>
-            <property name="orientation">vertical</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="link">
-            <property name="visible">True</property>
-            <property name="valign">center</property>
-            <signal name="clicked" handler="link_clicked" swapped="yes"/>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="icon-name">view-more-symbolic</property>
-                <property name="icon-size">4</property>
-              </object>
-            </child>
-          </object>
-        </child>
       </object>
     </child>
   </template>
