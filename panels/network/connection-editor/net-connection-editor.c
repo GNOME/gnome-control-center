@@ -143,9 +143,21 @@ apply_edits (NetConnectionEditor *editor)
 }
 
 static void
+advanced_page_row_activated (GtkListBox    *box,
+                             GtkListBoxRow *row,
+                             gpointer       user_data)
+{
+        GtkWidget *revealer = g_object_get_data (G_OBJECT (row), "revealer");
+
+        gtk_revealer_set_reveal_child (GTK_REVEALER (revealer), TRUE);
+}
+
+static void
 net_connection_editor_init (NetConnectionEditor *editor)
 {
         gtk_widget_init_template (GTK_WIDGET (editor));
+        gtk_list_box_set_header_func (GTK_LIST_BOX (editor->details_advanced_pages_container), cc_list_box_update_header_func, NULL, NULL);
+        g_signal_connect (editor->details_advanced_pages_container, "row-activated", G_CALLBACK (advanced_page_row_activated), editor);
 }
 
 static void
@@ -192,8 +204,10 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, details_add_connection_frame);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, details_apply_button);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, details_cancel_button);
-        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, details_notebook);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, details_toplevel_notebook);
+        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, details_pages_container);
+        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, details_advanced_pages);
+        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, details_advanced_pages_container);
         gtk_widget_class_bind_template_callback_full (widget_class, "delete_event_cb", G_CALLBACK (cancel_editing));
         gtk_widget_class_bind_template_callback_full (widget_class, "cancel_clicked_cb", G_CALLBACK (cancel_editing));
         gtk_widget_class_bind_template_callback_full (widget_class, "apply_clicked_cb", G_CALLBACK (apply_edits));
@@ -365,13 +379,8 @@ idle_validate (gpointer user_data)
 static void
 recheck_initialization (NetConnectionEditor *editor)
 {
-        GtkNotebook *notebook;
-
         if (!editor_is_initialized (editor))
                 return;
-
-        notebook = GTK_NOTEBOOK (editor->details_notebook);
-        gtk_notebook_set_current_page (notebook, 0);
 
         if (editor->show_when_initialized)
                 gtk_window_present (GTK_WINDOW (editor));
@@ -382,28 +391,12 @@ recheck_initialization (NetConnectionEditor *editor)
 static void
 page_initialized (CEPage *page, GError *error, NetConnectionEditor *editor)
 {
-        GtkNotebook *notebook;
-        GtkWidget *widget;
-        GtkWidget *label;
-        gint position;
-        GList *children, *l;
-        gint i;
+        GtkWidget *parent, *widget;
 
-        notebook = GTK_NOTEBOOK (editor->details_notebook);
         widget = ce_page_get_page (page);
-        position = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (page), "position"));
-        g_object_set_data (G_OBJECT (widget), "position", GINT_TO_POINTER (position));
-        children = gtk_container_get_children (GTK_CONTAINER (notebook));
-        for (l = children, i = 0; l; l = l->next, i++) {
-                gint pos = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (l->data), "position"));
-                if (pos > position)
-                        break;
-        }
-        g_list_free (children);
-
-        label = gtk_label_new (ce_page_get_title (page));
-
-        gtk_notebook_insert_page (notebook, widget, label, i);
+        parent = GTK_WIDGET (g_object_get_data (G_OBJECT (page), "parent"));
+        gtk_widget_show (parent);
+        gtk_container_add (GTK_CONTAINER (parent), widget);
 
         editor->initializing_pages = g_slist_remove (editor->initializing_pages, page);
         editor->pages = g_slist_append (editor->pages, page);
@@ -461,12 +454,129 @@ get_secrets_for_page (NetConnectionEditor *editor,
 }
 
 static void
+reveal_button_update (GtkToggleButton *button)
+{
+        GtkWidget *image;
+        gboolean active;
+
+        g_assert (GTK_IS_TOGGLE_BUTTON (button));
+
+        image = gtk_button_get_image (GTK_BUTTON (button));
+
+        g_assert (GTK_IS_IMAGE (image));
+
+        active = gtk_toggle_button_get_active (button);
+        gtk_image_set_from_icon_name (GTK_IMAGE (image),
+                                      active ? "pan-down-symbolic" : "pan-end-symbolic",
+                                      GTK_ICON_SIZE_BUTTON);
+}
+
+static void
 add_page (NetConnectionEditor *editor, CEPage *page)
 {
-        gint position;
+        GtkWidget *parent = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
-        position = g_slist_length (editor->initializing_pages);
-        g_object_set_data (G_OBJECT (page), "position", GINT_TO_POINTER (position));
+        gtk_container_add (GTK_CONTAINER (editor->details_pages_container), parent);
+        g_object_set_data (G_OBJECT (page), "parent", parent);
+
+        editor->initializing_pages = g_slist_append (editor->initializing_pages, page);
+
+        gtk_widget_show (editor->details_pages_container);
+
+        g_signal_connect (page, "changed", G_CALLBACK (page_changed), editor);
+        g_signal_connect (page, "initialized", G_CALLBACK (page_initialized), editor);
+}
+
+static void
+add_titled_page (NetConnectionEditor *editor, CEPage *page)
+{
+        GtkWidget *title = gtk_label_new (ce_page_get_title (page));
+        PangoAttrList *attributes = pango_attr_list_new ();
+        PangoAttribute *attribute = pango_attr_weight_new (PANGO_WEIGHT_BOLD);
+        GtkWidget *parent = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+
+        gtk_widget_set_margin_bottom (title, 12);
+        gtk_label_set_xalign (GTK_LABEL (title), 0.0f);
+        pango_attr_list_insert (attributes, attribute);
+        gtk_label_set_attributes (GTK_LABEL (title), attributes);
+        pango_attr_list_unref (attributes);
+
+        gtk_widget_show (title);
+
+        gtk_container_add (GTK_CONTAINER (parent), title);
+        gtk_container_add (GTK_CONTAINER (editor->details_pages_container), parent);
+        g_object_set_data (G_OBJECT (page), "parent", parent);
+
+        gtk_widget_show (editor->details_pages_container);
+
+        editor->initializing_pages = g_slist_append (editor->initializing_pages, page);
+
+        g_signal_connect (page, "changed", G_CALLBACK (page_changed), editor);
+        g_signal_connect (page, "initialized", G_CALLBACK (page_initialized), editor);
+}
+
+static void
+add_advanced_page (NetConnectionEditor *editor, CEPage *page)
+{
+        if (editor->is_new_connection) {
+                add_titled_page (editor, page);
+                return;
+        }
+
+        GtkWidget *v_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        GtkWidget *h_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        GtkWidget *title = gtk_label_new (ce_page_get_title (page));
+        GtkWidget *button = gtk_toggle_button_new ();
+        GtkWidget *image = gtk_image_new ();
+        GtkWidget *revealer = gtk_revealer_new ();
+        GtkWidget *parent = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        GtkWidget *row;
+
+        gtk_widget_set_size_request (title, -1, 32);
+        gtk_widget_set_halign (title, GTK_ALIGN_START);
+        gtk_widget_set_hexpand (title, TRUE);
+        gtk_widget_set_margin_start (title, 12);
+        gtk_widget_set_margin_top (title, 8);
+        gtk_widget_set_margin_bottom (title, 8);
+        gtk_label_set_xalign (GTK_LABEL (title), 0.0f);
+
+        gtk_widget_set_can_focus (button, TRUE);
+        gtk_widget_set_halign (button, GTK_ALIGN_END);
+        gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
+        gtk_widget_set_margin_end (button, 12);
+        gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+        gtk_button_set_image (GTK_BUTTON (button), image);
+
+        gtk_widget_set_margin_top (parent, 6);
+        gtk_widget_set_margin_bottom (parent, 12);
+        gtk_widget_set_margin_start (parent, 12);
+        gtk_widget_set_margin_end (parent, 12);
+
+        reveal_button_update (GTK_TOGGLE_BUTTON (button));
+
+        gtk_revealer_set_transition_type (GTK_REVEALER (revealer), GTK_REVEALER_TRANSITION_TYPE_SLIDE_UP);
+        g_object_bind_property (revealer, "reveal-child", button, "active", G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+        g_signal_connect (button, "notify::active", G_CALLBACK (reveal_button_update), NULL);
+
+        gtk_widget_show (v_box);
+        gtk_widget_show (h_box);
+        gtk_widget_show (title);
+        gtk_widget_show (button);
+        gtk_widget_show (image);
+        gtk_widget_show (revealer);
+
+        gtk_container_add (GTK_CONTAINER (h_box), title);
+        gtk_container_add (GTK_CONTAINER (h_box), button);
+        gtk_container_add (GTK_CONTAINER (revealer), parent);
+        gtk_container_add (GTK_CONTAINER (v_box), h_box);
+        gtk_container_add (GTK_CONTAINER (v_box), revealer);
+        gtk_list_box_insert (GTK_LIST_BOX (editor->details_advanced_pages_container), v_box, -1);
+        g_object_set_data (G_OBJECT (page), "parent", parent);
+
+        row = gtk_widget_get_parent (v_box);
+        g_object_set_data (G_OBJECT (row), "revealer", revealer);
+
+        gtk_widget_show (editor->details_advanced_pages);
 
         editor->initializing_pages = g_slist_append (editor->initializing_pages, page);
 
@@ -507,28 +617,28 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
         is_wifi = g_str_equal (type, NM_SETTING_WIRELESS_SETTING_NAME);
         is_vpn = g_str_equal (type, NM_SETTING_VPN_SETTING_NAME);
 
+        if (is_wifi)
+                add_titled_page (editor, ce_page_security_new (editor->connection, editor->client));
+        else if (is_wired)
+                add_titled_page (editor, ce_page_8021x_security_new (editor->connection, editor->client));
+
         if (!editor->is_new_connection)
-                add_page (editor, ce_page_details_new (editor->connection, editor->client, editor->device, editor->ap, editor));
+                add_advanced_page (editor, ce_page_details_new (editor->connection, editor->client, editor->device, editor->ap, editor));
 
         if (is_wifi)
-                add_page (editor, ce_page_wifi_new (editor->connection, editor->client));
+                add_advanced_page (editor, ce_page_wifi_new (editor->connection, editor->client));
         else if (is_wired)
-                add_page (editor, ce_page_ethernet_new (editor->connection, editor->client));
+                add_advanced_page (editor, ce_page_ethernet_new (editor->connection, editor->client));
         else if (is_vpn)
-                add_page (editor, ce_page_vpn_new (editor->connection, editor->client));
+                add_advanced_page (editor, ce_page_vpn_new (editor->connection, editor->client));
         else {
                 /* Unsupported type */
                 net_connection_editor_do_fallback (editor, type);
                 return;
         }
 
-        add_page (editor, ce_page_ip4_new (editor->connection, editor->client));
-        add_page (editor, ce_page_ip6_new (editor->connection, editor->client));
-
-        if (is_wifi)
-                add_page (editor, ce_page_security_new (editor->connection, editor->client));
-        else if (is_wired)
-                add_page (editor, ce_page_8021x_security_new (editor->connection, editor->client));
+        add_advanced_page (editor, ce_page_ip4_new (editor->connection, editor->client));
+        add_advanced_page (editor, ce_page_ip6_new (editor->connection, editor->client));
 
         pages = g_slist_copy (editor->initializing_pages);
         for (l = pages; l; l = l->next) {
