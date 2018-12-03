@@ -51,7 +51,7 @@ pp_cups_class_init (PpCupsClass *klass)
 }
 
 static void
-pp_cups_init (PpCups *cups)
+pp_cups_init (PpCups *self)
 {
 }
 
@@ -89,25 +89,25 @@ _pp_cups_get_dests_thread (GTask        *task,
 }
 
 void
-pp_cups_get_dests_async (PpCups              *cups,
+pp_cups_get_dests_async (PpCups              *self,
                          GCancellable        *cancellable,
                          GAsyncReadyCallback  callback,
                          gpointer             user_data)
 {
   GTask       *task;
 
-  task = g_task_new (cups, cancellable, callback, user_data);
+  task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_return_on_cancel (task, TRUE);
   g_task_run_in_thread (task, (GTaskThreadFunc) _pp_cups_get_dests_thread);
   g_object_unref (task);
 }
 
 PpCupsDests *
-pp_cups_get_dests_finish (PpCups        *cups,
+pp_cups_get_dests_finish (PpCups        *self,
                           GAsyncResult  *res,
                           GError       **error)
 {
-  g_return_val_if_fail (g_task_is_valid (res, cups), NULL);
+  g_return_val_if_fail (g_task_is_valid (res, self), NULL);
 
   return g_task_propagate_pointer (G_TASK (res), error);
 }
@@ -130,14 +130,14 @@ connection_test_thread (GTask        *task,
 }
 
 void
-pp_cups_connection_test_async (PpCups              *cups,
+pp_cups_connection_test_async (PpCups              *self,
                                GCancellable        *cancellable,
                                GAsyncReadyCallback  callback,
                                gpointer             user_data)
 {
   GTask *task;
 
-  task = g_task_new (cups, cancellable, callback, user_data);
+  task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_return_on_cancel (task, TRUE);
   g_task_run_in_thread (task, connection_test_thread);
 
@@ -145,11 +145,11 @@ pp_cups_connection_test_async (PpCups              *cups,
 }
 
 gboolean
-pp_cups_connection_test_finish (PpCups         *cups,
+pp_cups_connection_test_finish (PpCups         *self,
                                 GAsyncResult   *result,
                                 GError        **error)
 {
-  g_return_val_if_fail (g_task_is_valid (result, cups), FALSE);
+  g_return_val_if_fail (g_task_is_valid (result, self), FALSE);
 
   return g_task_propagate_boolean (G_TASK (result), error);
 }
@@ -183,14 +183,14 @@ cancel_subscription_thread (GTask        *task,
 }
 
 void
-pp_cups_cancel_subscription_async (PpCups              *cups,
+pp_cups_cancel_subscription_async (PpCups              *self,
                                    gint                 subscription_id,
                                    GAsyncReadyCallback  callback,
                                    gpointer             user_data)
 {
   GTask *task;
 
-  task = g_task_new (cups, NULL, callback, user_data);
+  task = g_task_new (self, NULL, callback, user_data);
   g_task_set_task_data (task, GINT_TO_POINTER (subscription_id), NULL);
   g_task_run_in_thread (task, cancel_subscription_thread);
 
@@ -198,10 +198,10 @@ pp_cups_cancel_subscription_async (PpCups              *cups,
 }
 
 gboolean
-pp_cups_cancel_subscription_finish (PpCups       *cups,
+pp_cups_cancel_subscription_finish (PpCups       *self,
                                     GAsyncResult *result)
 {
-  g_return_val_if_fail (g_task_is_valid (result, cups), FALSE);
+  g_return_val_if_fail (g_task_is_valid (result, self), FALSE);
 
   return g_task_propagate_boolean (G_TASK (result), NULL);
 }
@@ -288,7 +288,7 @@ renew_subscription_thread (GTask        *task,
 }
 
 void
-pp_cups_renew_subscription_async  (PpCups               *cups,
+pp_cups_renew_subscription_async  (PpCups               *self,
                                    gint                  subscription_id,
                                    gchar               **events,
                                    gint                  lease_duration,
@@ -304,7 +304,7 @@ pp_cups_renew_subscription_async  (PpCups               *cups,
   subscription_data->events = g_strdupv (events);
   subscription_data->lease_duration = lease_duration;
 
-  task = g_task_new (cups, cancellable, callback, user_data);
+  task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_task_data (task, subscription_data, (GDestroyNotify) crs_data_free);
   g_task_run_in_thread (task, renew_subscription_thread);
 
@@ -313,10 +313,10 @@ pp_cups_renew_subscription_async  (PpCups               *cups,
 
 /* Returns id of renewed subscription or new id */
 gint
-pp_cups_renew_subscription_finish (PpCups       *cups,
+pp_cups_renew_subscription_finish (PpCups       *self,
                                    GAsyncResult *result)
 {
-  g_return_val_if_fail (g_task_is_valid (result, cups), FALSE);
+  g_return_val_if_fail (g_task_is_valid (result, self), FALSE);
 
   return g_task_propagate_int (G_TASK (result), NULL);
 }
