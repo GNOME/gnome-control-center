@@ -114,9 +114,7 @@ pp_new_printer_get_property (GObject    *object,
                              GValue     *value,
                              GParamSpec *param_spec)
 {
-  PpNewPrinter *self;
-
-  self = PP_NEW_PRINTER (object);
+  PpNewPrinter *self = PP_NEW_PRINTER (object);
 
   switch (prop_id)
     {
@@ -337,7 +335,7 @@ pp_new_printer_class_init (PpNewPrinterClass *klass)
 }
 
 static void
-pp_new_printer_init (PpNewPrinter *printer)
+pp_new_printer_init (PpNewPrinter *self)
 {
 }
 
@@ -347,29 +345,29 @@ pp_new_printer_new ()
   return g_object_new (PP_TYPE_NEW_PRINTER, NULL);
 }
 
-static void printer_configure_async (PpNewPrinter *new_printer);
+static void printer_configure_async (PpNewPrinter *self);
 
 static void
 _pp_new_printer_add_async_cb (gboolean      success,
-                              PpNewPrinter *printer)
+                              PpNewPrinter *self)
 {
   if (!success)
     {
-      g_task_return_new_error (printer->task,
+      g_task_return_new_error (self->task,
                                G_IO_ERROR,
                                G_IO_ERROR_FAILED,
                                "Installation of the new printer failed.");
       return;
     }
 
-  g_task_return_boolean (printer->task, success);
+  g_task_return_boolean (self->task, success);
 }
 
 static void
 printer_add_real_async_cb (cups_dest_t *destination,
                            gpointer     user_data)
 {
-  PpNewPrinter        *printer = (PpNewPrinter *) user_data;
+  PpNewPrinter        *self = user_data;
   gboolean             success = FALSE;
 
   if (destination)
@@ -380,11 +378,11 @@ printer_add_real_async_cb (cups_dest_t *destination,
 
   if (success)
     {
-      printer_configure_async (printer);
+      printer_configure_async (self);
     }
   else
     {
-      _pp_new_printer_add_async_cb (FALSE, printer);
+      _pp_new_printer_add_async_cb (FALSE, self);
     }
 }
 
@@ -393,7 +391,7 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
                                 GAsyncResult *res,
                                 gpointer      user_data)
 {
-  PpNewPrinter        *printer = (PpNewPrinter *) user_data;
+  PpNewPrinter        *self = user_data;
   GVariant            *output;
   g_autoptr(GError)    error = NULL;
 
@@ -409,7 +407,7 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
         {
-          g_warning ("cups-pk-helper: addition of printer %s failed: %s", printer->name, ret_error);
+          g_warning ("cups-pk-helper: addition of printer %s failed: %s", self->name, ret_error);
         }
 
       g_variant_unref (output);
@@ -422,21 +420,21 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
 
   if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     {
-      get_named_dest_async (printer->name,
+      get_named_dest_async (self->name,
                             printer_add_real_async_cb,
-                            printer);
+                            self);
     }
 }
 
 static void
-printer_add_real_async (PpNewPrinter *printer)
+printer_add_real_async (PpNewPrinter *self)
 {
   GDBusConnection     *bus;
   g_autoptr(GError)    error = NULL;
 
-  if (!printer->ppd_name && !printer->ppd_file_name)
+  if (!self->ppd_name && !self->ppd_file_name)
     {
-      _pp_new_printer_add_async_cb (FALSE, printer);
+      _pp_new_printer_add_async_cb (FALSE, self);
       return;
     }
 
@@ -444,7 +442,7 @@ printer_add_real_async (PpNewPrinter *printer)
   if (!bus)
     {
       g_warning ("Failed to get system bus: %s", error->message);
-      _pp_new_printer_add_async_cb (FALSE, printer);
+      _pp_new_printer_add_async_cb (FALSE, self);
       return;
     }
 
@@ -452,19 +450,19 @@ printer_add_real_async (PpNewPrinter *printer)
                           MECHANISM_BUS,
                           "/",
                           MECHANISM_BUS,
-                          printer->ppd_name ? "PrinterAdd" : "PrinterAddWithPpdFile",
+                          self->ppd_name ? "PrinterAdd" : "PrinterAddWithPpdFile",
                           g_variant_new ("(sssss)",
-                                         printer->name,
-                                         printer->device_uri,
-                                         printer->ppd_name ? printer->ppd_name : printer->ppd_file_name,
-                                         printer->info ? printer->info : "",
-                                         printer->location ? printer->location : ""),
+                                         self->name,
+                                         self->device_uri,
+                                         self->ppd_name ? self->ppd_name : self->ppd_file_name,
+                                         self->info ? self->info : "",
+                                         self->location ? self->location : ""),
                           G_VARIANT_TYPE ("(s)"),
                           G_DBUS_CALL_FLAGS_NONE,
                           DBUS_TIMEOUT,
                           NULL,
                           printer_add_real_async_dbus_cb,
-                          printer);
+                          self);
 }
 
 static PPDName *
@@ -532,7 +530,7 @@ printer_add_async_scb3 (GObject      *source_object,
                         GAsyncResult *res,
                         gpointer      user_data)
 {
-  PpNewPrinter        *printer = (PpNewPrinter *) user_data;
+  PpNewPrinter        *self = user_data;
   GVariant            *output;
   PPDName             *ppd_item = NULL;
   g_autoptr(GError)    error = NULL;
@@ -556,12 +554,12 @@ printer_add_async_scb3 (GObject      *source_object,
   if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED) &&
       ppd_item && ppd_item->ppd_name)
     {
-      printer->ppd_name = g_strdup (ppd_item->ppd_name);
-      printer_add_real_async (printer);
+      self->ppd_name = g_strdup (ppd_item->ppd_name);
+      printer_add_real_async (self);
     }
   else
     {
-      _pp_new_printer_add_async_cb (FALSE, printer);
+      _pp_new_printer_add_async_cb (FALSE, self);
     }
 
   if (ppd_item)
@@ -576,7 +574,7 @@ install_printer_drivers_cb (GObject      *source_object,
                             GAsyncResult *res,
                             gpointer      user_data)
 {
-  PpNewPrinter        *printer;
+  PpNewPrinter        *self = user_data;
   GVariant            *output;
   g_autoptr(GError)    error = NULL;
 
@@ -600,8 +598,6 @@ install_printer_drivers_cb (GObject      *source_object,
       GDBusConnection  *bus;
       g_autoptr(GError) bus_error = NULL;
 
-      printer = (PpNewPrinter *) user_data;
-
       /* Try whether CUPS has a driver for the new printer */
       bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &bus_error);
       if (bus)
@@ -612,20 +608,20 @@ install_printer_drivers_cb (GObject      *source_object,
                                   SCP_IFACE,
                                   "GetBestDrivers",
                                   g_variant_new ("(sss)",
-                                                 printer->device_id,
-                                                 printer->make_and_model ? printer->make_and_model : "",
-                                                 printer->device_uri ? printer->device_uri : ""),
+                                                 self->device_id,
+                                                 self->make_and_model ? self->make_and_model : "",
+                                                 self->device_uri ? self->device_uri : ""),
                                   G_VARIANT_TYPE ("(a(ss))"),
                                   G_DBUS_CALL_FLAGS_NONE,
                                   DBUS_TIMEOUT_LONG,
-                                  printer->cancellable,
+                                  self->cancellable,
                                   printer_add_async_scb3,
-                                  printer);
+                                  self);
         }
       else
         {
           g_warning ("Failed to get system bus: %s", bus_error->message);
-          _pp_new_printer_add_async_cb (FALSE, printer);
+          _pp_new_printer_add_async_cb (FALSE, self);
         }
     }
 }
@@ -635,7 +631,7 @@ printer_add_async_scb (GObject      *source_object,
                        GAsyncResult *res,
                        gpointer      user_data)
 {
-  PpNewPrinter        *printer = (PpNewPrinter *) user_data;
+  PpNewPrinter        *self = user_data;
   GDBusConnection     *bus;
   GVariantBuilder      array_builder;
   GVariant            *output;
@@ -671,7 +667,7 @@ printer_add_async_scb (GObject      *source_object,
           if (bus)
             {
               g_variant_builder_init (&array_builder, G_VARIANT_TYPE ("as"));
-              g_variant_builder_add (&array_builder, "s", printer->device_id);
+              g_variant_builder_add (&array_builder, "s", self->device_id);
 
               g_dbus_connection_call (bus,
                                       PACKAGE_KIT_BUS,
@@ -679,7 +675,7 @@ printer_add_async_scb (GObject      *source_object,
                                       PACKAGE_KIT_MODIFY_IFACE,
                                       "InstallPrinterDrivers",
                                       g_variant_new ("(uass)",
-                                                     printer->window_id,
+                                                     self->window_id,
                                                      &array_builder,
                                                      "hide-finished"),
                                       G_VARIANT_TYPE ("()"),
@@ -687,22 +683,22 @@ printer_add_async_scb (GObject      *source_object,
                                       DBUS_TIMEOUT_LONG,
                                       NULL,
                                       install_printer_drivers_cb,
-                                      printer);
+                                      self);
             }
           else
             {
               g_warning ("Failed to get session bus: %s", bus_error->message);
-              _pp_new_printer_add_async_cb (FALSE, printer);
+              _pp_new_printer_add_async_cb (FALSE, self);
             }
         }
       else if (ppd_item && ppd_item->ppd_name)
         {
-          printer->ppd_name = g_strdup (ppd_item->ppd_name);
-          printer_add_real_async (printer);
+          self->ppd_name = g_strdup (ppd_item->ppd_name);
+          printer_add_real_async (self);
         }
       else
         {
-          _pp_new_printer_add_async_cb (FALSE, printer);
+          _pp_new_printer_add_async_cb (FALSE, self);
         }
     }
 
@@ -717,17 +713,17 @@ static void
 printer_add_async_scb4 (const gchar *ppd_filename,
                         gpointer     user_data)
 {
-  PpNewPrinter        *printer = (PpNewPrinter *) user_data;
+  PpNewPrinter *self = user_data;
 
-  printer->ppd_file_name = g_strdup (ppd_filename);
-  if (printer->ppd_file_name)
+  self->ppd_file_name = g_strdup (ppd_filename);
+  if (self->ppd_file_name)
     {
-      printer->unlink_ppd_file = TRUE;
-      printer_add_real_async (printer);
+      self->unlink_ppd_file = TRUE;
+      printer_add_real_async (self);
     }
   else
     {
-      _pp_new_printer_add_async_cb (FALSE, printer);
+      _pp_new_printer_add_async_cb (FALSE, self);
     }
 }
 
@@ -767,11 +763,11 @@ typedef struct
 static void
 printer_configure_async_finish (PCData *data)
 {
-  PpNewPrinter *printer = data->new_printer;
+  PpNewPrinter *self = data->new_printer;
 
   if (data->set_accept_jobs_finished &&
       data->set_enabled_finished &&
-      (data->autoconfigure_finished || printer->is_network_device) &&
+      (data->autoconfigure_finished || self->is_network_device) &&
       data->set_media_size_finished &&
       data->install_missing_executables_finished)
     {
@@ -1180,7 +1176,7 @@ pp_maintenance_command_execute_cb (GObject      *source_object,
 }
 
 static void
-printer_configure_async (PpNewPrinter *new_printer)
+printer_configure_async (PpNewPrinter *self)
 {
   GDBusConnection      *bus;
   PCData               *data;
@@ -1189,7 +1185,7 @@ printer_configure_async (PpNewPrinter *new_printer)
   g_autoptr(GError)     error = NULL;
 
   data = g_new0 (PCData, 1);
-  data->new_printer = new_printer;
+  data->new_printer = self;
   data->set_accept_jobs_finished = FALSE;
   data->set_enabled_finished = FALSE;
   data->autoconfigure_finished = FALSE;
@@ -1197,7 +1193,7 @@ printer_configure_async (PpNewPrinter *new_printer)
   data->install_missing_executables_finished = FALSE;
 
   /* Enable printer and make it accept jobs */
-  if (new_printer->name)
+  if (self->name)
     {
       bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
       if (bus)
@@ -1208,7 +1204,7 @@ printer_configure_async (PpNewPrinter *new_printer)
                                   MECHANISM_BUS,
                                   "PrinterSetAcceptJobs",
                                   g_variant_new ("(sbs)",
-                                                 new_printer->name,
+                                                 self->name,
                                                  TRUE,
                                                  ""),
                                   G_VARIANT_TYPE ("(s)"),
@@ -1224,7 +1220,7 @@ printer_configure_async (PpNewPrinter *new_printer)
                                   MECHANISM_BUS,
                                   "PrinterSetEnabled",
                                   g_variant_new ("(sb)",
-                                                 new_printer->name,
+                                                 self->name,
                                                  TRUE),
                                   G_VARIANT_TYPE ("(s)"),
                                   G_DBUS_CALL_FLAGS_NONE,
@@ -1247,10 +1243,10 @@ printer_configure_async (PpNewPrinter *new_printer)
     }
 
   /* Run autoconfiguration of printer */
-  if (!new_printer->is_network_device)
+  if (!self->is_network_device)
     {
       PpMaintenanceCommand *command;
-      command = pp_maintenance_command_new (new_printer->name,
+      command = pp_maintenance_command_new (self->name,
                                             "autoconfigure",
                                             NULL,
       /* Translators: Name of job which makes printer to autoconfigure itself */
@@ -1266,18 +1262,18 @@ printer_configure_async (PpNewPrinter *new_printer)
   values = g_new0 (gchar *, 2);
   values[0] = g_strdup (get_page_size_from_locale ());
 
-  printer_add_option_async (new_printer->name, "PageSize", values, FALSE, NULL, pao_cb, data);
+  printer_add_option_async (self->name, "PageSize", values, FALSE, NULL, pao_cb, data);
 
   g_strfreev (values);
 
   /* Install missing executables for printer */
   ime_data = g_new0 (IMEData, 1);
-  ime_data->window_id = new_printer->window_id;
+  ime_data->window_id = self->window_id;
   if (data->cancellable)
     ime_data->cancellable = g_object_ref (data->cancellable);
   ime_data->user_data = data;
 
-  printer_get_ppd_async (new_printer->name,
+  printer_get_ppd_async (self->name,
                          NULL,
                          0,
                          printer_get_ppd_cb,
@@ -1285,22 +1281,22 @@ printer_configure_async (PpNewPrinter *new_printer)
 }
 
 void
-pp_new_printer_add_async (PpNewPrinter        *printer,
+pp_new_printer_add_async (PpNewPrinter        *self,
                           GCancellable        *cancellable,
                           GAsyncReadyCallback  callback,
                           gpointer             user_data)
 {
   g_autoptr(GTask) task = NULL;
 
-  printer->task = g_task_new (printer, cancellable, callback, user_data);
-  printer->cancellable = g_object_ref (cancellable);
+  self->task = g_task_new (self, cancellable, callback, user_data);
+  self->cancellable = g_object_ref (cancellable);
 
-  if (printer->ppd_name || printer->ppd_file_name)
+  if (self->ppd_name || self->ppd_file_name)
     {
       /* We have everything we need */
-      printer_add_real_async (printer);
+      printer_add_real_async (self);
     }
-  else if (printer->device_id)
+  else if (self->device_id)
     {
       GDBusConnection  *bus;
       g_autoptr(GError) error = NULL;
@@ -1315,43 +1311,43 @@ pp_new_printer_add_async (PpNewPrinter        *printer,
                                   SCP_IFACE,
                                   "GetBestDrivers",
                                   g_variant_new ("(sss)",
-                                                 printer->device_id,
-                                                 printer->make_and_model ? printer->make_and_model : "",
-                                                 printer->device_uri ? printer->device_uri : ""),
+                                                 self->device_id,
+                                                 self->make_and_model ? self->make_and_model : "",
+                                                 self->device_uri ? self->device_uri : ""),
                                   G_VARIANT_TYPE ("(a(ss))"),
                                   G_DBUS_CALL_FLAGS_NONE,
                                   DBUS_TIMEOUT_LONG,
                                   cancellable,
                                   printer_add_async_scb,
-                                  printer);
+                                  self);
         }
       else
         {
           g_warning ("Failed to get system bus: %s", error->message);
-          _pp_new_printer_add_async_cb (FALSE, printer);
+          _pp_new_printer_add_async_cb (FALSE, self);
         }
     }
-  else if (printer->original_name && printer->host_name)
+  else if (self->original_name && self->host_name)
     {
       /* Try to get PPD from remote CUPS */
-      printer_get_ppd_async (printer->original_name,
-                             printer->host_name,
-                             printer->host_port,
+      printer_get_ppd_async (self->original_name,
+                             self->host_name,
+                             self->host_port,
                              printer_add_async_scb4,
-                             printer);
+                             self);
     }
   else
     {
-      _pp_new_printer_add_async_cb (FALSE, printer);
+      _pp_new_printer_add_async_cb (FALSE, self);
     }
 }
 
 gboolean
-pp_new_printer_add_finish (PpNewPrinter  *printer,
+pp_new_printer_add_finish (PpNewPrinter  *self,
                            GAsyncResult  *res,
                            GError       **error)
 {
-  g_return_val_if_fail (g_task_is_valid (res, printer), FALSE);
+  g_return_val_if_fail (g_task_is_valid (res, self), FALSE);
   g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
   return g_task_propagate_boolean (G_TASK (res), error);
 }
