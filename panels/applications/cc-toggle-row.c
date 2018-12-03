@@ -36,7 +36,6 @@ struct _CcToggleRow
 
   GtkWidget *title;
   GtkWidget *toggle;
-  GtkWidget *link;
 };
 
 G_DEFINE_TYPE (CcToggleRow, cc_toggle_row, GTK_TYPE_LIST_BOX_ROW)
@@ -93,18 +92,10 @@ cc_toggle_row_set_property (GObject      *object,
     }
 }
 
-static guint link_activated;
-
 static void
 changed_cb (CcToggleRow *row)
 {
   g_object_notify (G_OBJECT (row), "allowed");
-}
-
-static void
-link_clicked (CcToggleRow *row)
-{
-  g_signal_emit (row, link_activated, 0);
 }
 
 static void
@@ -129,18 +120,10 @@ cc_toggle_row_class_init (CcToggleRowClass *klass)
                                    g_param_spec_boolean ("allowed", "allowed", "allowed",
                                                          FALSE, G_PARAM_READWRITE));
 
-  link_activated = g_signal_new ("link-activated",
-                                 CC_TYPE_TOGGLE_ROW,
-                                 G_SIGNAL_RUN_FIRST,
-                                 0, NULL, NULL, NULL,
-                                 G_TYPE_NONE, 0);
-
   gtk_widget_class_bind_template_child (widget_class, CcToggleRow, title);
   gtk_widget_class_bind_template_child (widget_class, CcToggleRow, toggle);
-  gtk_widget_class_bind_template_child (widget_class, CcToggleRow, link);
 
   gtk_widget_class_bind_template_callback (widget_class, changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, link_clicked);
 }
 
 static void

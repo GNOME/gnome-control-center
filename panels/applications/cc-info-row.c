@@ -27,6 +27,7 @@
 enum {
   PROP_ZERO,
   PROP_TITLE,
+  PROP_USE_MARKUP,
   PROP_INFO,
   PROP_HAS_EXPANDER,
   PROP_IS_LINK,
@@ -74,6 +75,9 @@ cc_info_row_get_property (GObject    *object,
     case PROP_HAS_EXPANDER:
       g_value_set_boolean (value, gtk_widget_get_visible (row->expander));
       break;
+    case PROP_USE_MARKUP:
+      g_value_set_boolean (value, gtk_label_get_use_markup (GTK_LABEL (row->title)));
+      break;
     case PROP_IS_LINK:
       g_value_set_boolean (value, row->link);
       break;
@@ -117,6 +121,9 @@ cc_info_row_set_property (GObject      *object,
       gtk_widget_set_visible (row->expander, g_value_get_boolean (value));
       gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), g_value_get_boolean (value));
       break;
+    case PROP_USE_MARKUP:
+      gtk_label_set_use_markup (GTK_LABEL (row->title), g_value_get_boolean (value));
+      break;
     case PROP_IS_LINK:
       row->link = g_value_get_boolean (value);
       update_expander (row);
@@ -151,6 +158,11 @@ cc_info_row_class_init (CcInfoRowClass *klass)
                                    PROP_INFO,
                                    g_param_spec_string ("info", "info", "info",
                                                         NULL, G_PARAM_READWRITE));
+
+  g_object_class_install_property (object_class,
+                                   PROP_USE_MARKUP,
+                                   g_param_spec_boolean ("use-markup", "use-markup", "use-markup",
+                                                         FALSE, G_PARAM_READWRITE));
 
   g_object_class_install_property (object_class,
                                    PROP_HAS_EXPANDER,

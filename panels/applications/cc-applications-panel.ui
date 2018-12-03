@@ -54,7 +54,7 @@
                               <object class="GtkLabel">
                                 <property name="visible">1</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Access and Permissions</property>
+                                <property name="label" translatable="yes">Permissions &amp; Access</property>
                                 <style>
                                   <class name="section-title"/>
                                 </style>
@@ -64,7 +64,9 @@
                               <object class="GtkLabel">
                                 <property name="visible">1</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Data and services that this app has asked for access to and permissions that it requires</property>
+                                <property name="wrap">1</property>
+                                <property name="max-width-chars">50</property>
+                                <property name="label" translatable="yes">Data and services that this app has asked for access to and permissions that it requires.</property>
                                 <style>
                                   <class name="section-subtitle"/>
                                 </style>
@@ -81,45 +83,36 @@
                               <object class="CcToggleRow" id="camera">
                                 <property name="title" translatable="yes">Camera</property>
                                 <signal name="notify::allowed" handler="camera_cb" swapped="yes"/>
-                                <signal name="link-activated" handler="privacy_link_cb"/>
                               </object>
                             </child>
                             <child>
                               <object class="CcInfoRow" id="no_camera">
                                 <property name="title" translatable="yes">Camera</property>
                                 <property name="info" translatable="yes">Disabled</property>
-                                <property name="has-expander">True</property>
-                                <property name="is-link">True</property>
                               </object>
                             </child>
                             <child>
                               <object class="CcToggleRow" id="microphone">
                                 <property name="title" translatable="yes">Microphone</property>
                                 <signal name="notify::allowed" handler="microphone_cb" swapped="yes"/>
-                                <signal name="link-activated" handler="privacy_link_cb"/>
                               </object>
                             </child>
                             <child>
                               <object class="CcInfoRow" id="no_microphone">
                                 <property name="title" translatable="yes">Microphone</property>
                                 <property name="info" translatable="yes">Disabled</property>
-                                <property name="has-expander">True</property>
-                                <property name="is-link">True</property>
                               </object>
                             </child>
                             <child>
                               <object class="CcToggleRow" id="location">
                                 <property name="title" translatable="yes">Location Services</property>
                                 <signal name="notify::allowed" handler="location_cb" swapped="yes"/>
-                                <signal name="link-activated" handler="privacy_link_cb"/>
                               </object>
                             </child>
                             <child>
                               <object class="CcInfoRow" id="no_location">
                                 <property name="title" translatable="yes">Location Services</property>
                                 <property name="info" translatable="yes">Disabled</property>
-                                <property name="has-expander">True</property>
-                                <property name="is-link">True</property>
                               </object>
                             </child>
                             <child>
@@ -127,6 +120,7 @@
                                 <property name="title" translatable="yes">Built-in Permissions</property>
                                 <property name="info" translatable="yes">Cannot be changed</property>
                                 <property name="has-expander">True</property>
+                                <property name="is-link">True</property>
                               </object>
                             </child>
                             <style>
@@ -135,65 +129,15 @@
                             </style>
                           </object>
                         </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkBox" id="information_section">
-                        <property name="visible">1</property>
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">12</property>
-                        <style>
-                          <class name="section"/>
-                        </style>
                         <child>
-                          <object class="GtkBox">
-                            <property name="visible">1</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">6</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">1</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Information</property>
-                                <style>
-                                  <class name="section-title"/>
-                                </style>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">1</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">How the application can communicate with you or provide information and feedback.</property>
-                                <style>
-                                  <class name="section-subtitle"/>
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkListBox" id="information_list">
-                            <property name="visible">1</property>
-                            <property name="selection-mode">none</property>
-                            <child>
-                              <object class="CcToggleRow" id="notification">
-                                <property name="title" translatable="yes">Notifications</property>
-                                <signal name="notify::allowed" handler="notification_cb" swapped="yes"/>
-                                <signal name="link-activated" handler="privacy_link_cb"/>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="CcToggleRow" id="sound">
-                                <property name="title" translatable="yes">Sounds</property>
-                                <signal name="notify::allowed" handler="sound_cb" swapped="yes"/>
-                                <signal name="link-activated" handler="privacy_link_cb"/>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="view"/>
-                              <class name="frame"/>
-                            </style>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="wrap">1</property>
+                            <property name="max-width-chars">50</property>
+                            <property name="label" translatable="yes">Individual permissions for applications can be reviewed in the &lt;a href="privacy"&gt;Privacy&lt;/a&gt; Settings.</property>
+                            <property name="use-markup">True</property>
+                            <signal name="activate-link" handler="privacy_link_cb" swapped="yes"/>
                           </object>
                         </child>
                       </object>
@@ -225,6 +169,8 @@
                               <object class="GtkLabel">
                                 <property name="visible">1</property>
                                 <property name="xalign">0</property>
+                                <property name="wrap">1</property>
+                                <property name="max-width-chars">50</property>
                                 <property name="label" translatable="yes">USB Devices that this application has access to</property>
                                 <style>
                                   <class name="section-subtitle"/>
@@ -246,7 +192,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkBox" id="file_type_section">
+                      <object class="GtkBox" id="integration_section">
                         <property name="visible">1</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">12</property>
@@ -262,7 +208,7 @@
                               <object class="GtkLabel">
                                 <property name="visible">1</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">File Associations</property>
+                                <property name="label" translatable="yes">Integration</property>
                                 <style>
                                   <class name="section-title"/>
                                 </style>
@@ -272,7 +218,9 @@
                               <object class="GtkLabel">
                                 <property name="visible">1</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">The types of files that this application opens.</property>
+                                <property name="wrap">1</property>
+                                <property name="max-width-chars">50</property>
+                                <property name="label" translatable="yes">System features used by this application.</property>
                                 <style>
                                   <class name="section-subtitle"/>
                                 </style>
@@ -281,10 +229,33 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkListBox" id="file_type_list">
+                          <object class="GtkListBox" id="integration_list">
                             <property name="visible">1</property>
                             <property name="selection-mode">none</property>
-                            <signal name="row-activated" handler="file_type_row_activated_cb"/>
+                            <child>
+                              <object class="CcToggleRow" id="search">
+                                <property name="title" translatable="yes">Search</property>
+                                <signal name="notify::allowed" handler="search_cb" swapped="yes"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="CcToggleRow" id="notification">
+                                <property name="title" translatable="yes">Notifications</property>
+                                <signal name="notify::allowed" handler="notification_cb" swapped="yes"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="CcToggleRow" id="sound">
+                                <property name="title" translatable="yes">Sounds</property>
+                                <signal name="notify::allowed" handler="sound_cb" swapped="yes"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="CcInfoRow" id="no_sound">
+                                <property name="title" translatable="yes">Sounds</property>
+                                <property name="info" translatable="yes">Disabled</property>
+                              </object>
+                            </child>
                             <style>
                               <class name="view"/>
                               <class name="frame"/>
@@ -294,7 +265,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkBox" id="link_type_section">
+                      <object class="GtkBox" id="handler_section">
                         <property name="visible">1</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">12</property>
@@ -310,7 +281,7 @@
                               <object class="GtkLabel">
                                 <property name="visible">1</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Link Associations</property>
+                                <property name="label" translatable="yes">Default Handlers</property>
                                 <style>
                                   <class name="section-title"/>
                                 </style>
@@ -320,7 +291,9 @@
                               <object class="GtkLabel">
                                 <property name="visible">1</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">The types of links that this application opens.</property>
+                                <property name="wrap">1</property>
+                                <property name="max-width-chars">50</property>
+                                <property name="label" translatable="yes">Types of files and links that this application opens.</property>
                                 <style>
                                   <class name="section-subtitle"/>
                                 </style>
@@ -329,9 +302,10 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkListBox" id="link_type_list">
+                          <object class="GtkListBox" id="handler_list">
                             <property name="visible">1</property>
                             <property name="selection-mode">none</property>
+                            <signal name="row-activated" handler="handler_row_activated_cb"/>
                             <style>
                               <class name="view"/>
                               <class name="frame"/>
@@ -340,9 +314,8 @@
                         </child>
                       </object>
                     </child>
-FOO
                     <child>
-                      <object class="GtkBox" id="storage_section">
+                      <object class="GtkBox" id="usage_section">
                         <property name="visible">1</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">12</property>
@@ -358,7 +331,7 @@ FOO
                               <object class="GtkLabel">
                                 <property name="visible">1</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Storage</property>
+                                <property name="label" translatable="yes">Usage</property>
                                 <style>
                                   <class name="section-title"/>
                                 </style>
@@ -368,7 +341,9 @@ FOO
                               <object class="GtkLabel">
                                 <property name="visible">1</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">How much disk space this application is occupying with app data and caches</property>
+                                <property name="wrap">1</property>
+                                <property name="max-width-chars">50</property>
+                                <property name="label" translatable="yes">How much resources this application is using.</property>
                                 <style>
                                   <class name="section-subtitle"/>
                                 </style>
@@ -377,30 +352,16 @@ FOO
                           </object>
                         </child>
                         <child>
-                          <object class="GtkListBox" id="storage_list">
+                          <object class="GtkListBox" id="usage_list">
                             <property name="visible">1</property>
                             <property name="selection-mode">none</property>
+                            <signal name="row-activated" handler="storage_row_activated_cb"/>
                             <child>
-                              <object class="CcActionRow" id="app">
-                                <property name="title" translatable="yes">App Size</property>
-                                <property name="subtitle" translatable="yes">Unknown</property>
-                                <property name="action" translatable="yes">Uninstall App…</property>
-                                <property name="destructive">True</property>
-                                <signal name="activated" handler="uninstall_cb"/>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="CcActionRow" id="data">
-                                <property name="title" translatable="yes">Data</property>
-                                <property name="action" translatable="yes">Clear Data…</property>
-                                <signal name="activated" handler="clear_cb"/>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="CcActionRow" id="cache">
-                                <property name="title" translatable="yes">Cache</property>
-                                <property name="action" translatable="yes">Clear Cache…</property>
-                                <signal name="activated" handler="clear_cb"/>
+                              <object class="CcInfoRow" id="storage">
+                                <property name="title" translatable="yes">Storage</property>
+                                <property name="info">unknown</property>
+                                <property name="has-expander">1</property>
+                                <property name="is-link">1</property>
                               </object>
                             </child>
                             <style>
@@ -443,5 +404,121 @@ FOO
   <object class="GtkListBox" id="sidebar_listbox">
     <property name="visible">1</property>
     <property name="selection-mode">browse</property>
+  </object>
+  <object class="GtkDialog" id="builtin_dialog">
+    <property name="title" translatable="yes">Built-in Permissions</property>
+    <property name="modal">1</property>
+    <property name="type_hint">dialog</property>
+    <property name="use_header_bar">1</property>
+    <property name="resizable">0</property>
+    <property name="border-width">24</property>
+    <signal name="delete-event" handler="gtk_widget_hide_on_delete"/>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="visible">1</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkLabel" id="builtin_label">
+            <property name="visible">1</property>
+            <property name="wrap">1</property>
+            <property name="max-width-chars">50</property>
+            <property name="label">Yadda Yadda</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkListBox" id="builtin_list">
+            <property name="visible">1</property>
+            <property name="selection-mode">none</property>
+            <style>
+              <class name="view"/>
+              <class name="frame"/>
+            </style>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkDialog" id="storage_dialog">
+    <property name="title" translatable="yes">Storage</property>
+    <property name="modal">1</property>
+    <property name="type_hint">dialog</property>
+    <property name="use_header_bar">1</property>
+    <property name="resizable">0</property>
+    <property name="border-width">24</property>
+    <signal name="delete-event" handler="gtk_widget_hide_on_delete"/>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="visible">1</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">1</property>
+            <property name="wrap">1</property>
+            <property name="max-width-chars">50</property>
+            <property name="label">Yadda Yadda</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkListBox" id="storage_list">
+            <property name="visible">1</property>
+            <property name="selection-mode">none</property>
+            <child>
+              <object class="CcInfoRow" id="app">
+                <property name="title" translatable="yes">Application</property>
+                <property name="info">Unknown</property>
+              </object>
+            </child>
+            <child>
+              <object class="CcInfoRow" id="data">
+                <property name="title" translatable="yes">Data</property>
+                <property name="info">Unknown</property>
+              </object>
+            </child>
+            <child>
+              <object class="CcInfoRow" id="cache">
+                <property name="title" translatable="yes">Cache</property>
+                <property name="info">Unknown</property>
+              </object>
+            </child>
+            <child>
+              <object class="CcInfoRow" id="total">
+                <property name="title" translatable="yes">&lt;b&gt;Total&lt;/b&gt;</property>
+                <property name="use-markup">1</property>
+                <property name="info">Unknown</property>
+              </object>
+            </child>
+            <style>
+              <class name="view"/>
+              <class name="frame"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">1</property>
+            <property name="wrap">1</property>
+            <property name="max-width-chars">50</property>
+            <property name="label">Yadda Yadda</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">1</property>
+            <child>
+              <object class="GtkButton" id="clear_cache_button">
+                <property name="visible">1</property>
+                <property name="label" translatable="yes">Clear Cache…</property>
+                <signal name="clicked" handler="clear_cache_cb" swapped="yes"/>
+              </object>
+              <packing>
+                <property name="pack-type">end</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
   </object>
 </interface>

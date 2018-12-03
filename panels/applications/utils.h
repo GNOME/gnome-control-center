@@ -22,13 +22,14 @@
 
 #include <gio/gio.h>
 #include <gtk/gtk.h>
+#include <flatpak/flatpak.h>
 
 G_BEGIN_DECLS
 
 void    file_remove_recursively (GFile *file);
 guint64 file_size_recursively (GFile *file);
 void    container_remove_all (GtkContainer *container);
-char *get_flatpak_app_size (const char *app_id);
-void uninstall_flatpak_app (const char *app_id);
+FlatpakInstalledRef *find_flatpak_ref (const char *app_id);
+guint64 get_flatpak_app_size (const char *app_id);
 
 G_END_DECLS
