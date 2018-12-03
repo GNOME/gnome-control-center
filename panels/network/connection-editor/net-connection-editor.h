@@ -55,9 +55,11 @@ struct _NetConnectionEditor
 
         GtkWidget        *details_cancel_button;
         GtkWidget        *details_apply_button;
-        GtkWidget        *details_notebook;
         GtkWidget        *details_add_connection_frame;
         GtkWidget        *details_toplevel_notebook;
+        GtkWidget        *details_advanced_pages;
+        GtkWidget        *details_pages_container;
+        GtkWidget        *details_advanced_pages_container;
 
         GSList *initializing_pages;
         GSList *pages;
