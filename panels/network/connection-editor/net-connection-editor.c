@@ -205,7 +205,7 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, apply_button);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, cancel_button);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, notebook);
-        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, toplevel_notebook);
+        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, toplevel_stack);
         gtk_widget_class_bind_template_callback (widget_class, delete_event_cb);
         gtk_widget_class_bind_template_callback (widget_class, cancel_clicked_cb);
         gtk_widget_class_bind_template_callback (widget_class, apply_clicked_cb);
@@ -608,7 +608,7 @@ finish_add_connection (NetConnectionEditor *editor, NMConnection *connection)
         frame = GTK_BIN (editor->add_connection_frame);
         gtk_widget_destroy (gtk_bin_get_child (frame));
 
-        gtk_notebook_set_current_page (editor->toplevel_notebook, 0);
+        gtk_stack_set_visible_child_name (editor->toplevel_stack, "details");
         gtk_widget_show (GTK_WIDGET (editor->apply_button));
 
         if (connection)
@@ -754,7 +754,7 @@ net_connection_editor_add_connection (NetConnectionEditor *editor)
         gtk_widget_show_all (GTK_WIDGET (list));
         gtk_container_add (frame, GTK_WIDGET (list));
 
-        gtk_notebook_set_current_page (editor->toplevel_notebook, 1);
+        gtk_stack_set_visible_child_name (editor->toplevel_stack, "vpn");
         gtk_widget_hide (GTK_WIDGET (editor->apply_button));
         gtk_window_set_title (GTK_WINDOW (editor), _("Add VPN"));
 }
