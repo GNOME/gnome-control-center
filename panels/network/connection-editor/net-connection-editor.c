@@ -30,6 +30,7 @@
 #include "net-connection-editor.h"
 #include "net-connection-editor-resources.h"
 #include "ce-page-details.h"
+#include "ce-page-edit.h"
 #include "ce-page-wifi.h"
 #include "ce-page-ip4.h"
 #include "ce-page-ip6.h"
@@ -621,6 +622,9 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
                 add_titled_page (editor, ce_page_security_new (editor->connection, editor->client));
         else if (is_wired)
                 add_titled_page (editor, ce_page_8021x_security_new (editor->connection, editor->client));
+
+        if (!editor->is_new_connection)
+                add_page (editor, ce_page_edit_new (editor->connection, editor->client, editor));
 
         if (!editor->is_new_connection)
                 add_advanced_page (editor, ce_page_details_new (editor->connection, editor->client, editor->device, editor->ap, editor));
