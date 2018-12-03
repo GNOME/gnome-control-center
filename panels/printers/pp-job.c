@@ -86,14 +86,14 @@ pp_job_cancel_purge_async_dbus_cb (GObject      *source_object,
 }
 
 void
-pp_job_cancel_purge_async (PpJob        *job,
+pp_job_cancel_purge_async (PpJob        *self,
                            gboolean      job_purge)
 {
   GDBusConnection *bus;
   g_autoptr(GError) error = NULL;
   gint            *job_id;
 
-  g_object_get (job, "id", &job_id, NULL);
+  g_object_get (self, "id", &job_id, NULL);
 
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!bus)
@@ -137,14 +137,14 @@ pp_job_set_hold_until_async_dbus_cb (GObject      *source_object,
 }
 
 void
-pp_job_set_hold_until_async (PpJob        *job,
+pp_job_set_hold_until_async (PpJob        *self,
                              const gchar  *job_hold_until)
 {
   GDBusConnection  *bus;
   g_autoptr(GError) error = NULL;
   gint             *job_id;
 
-  g_object_get (job, "id", &job_id, NULL);
+  g_object_get (self, "id", &job_id, NULL);
 
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!bus)
@@ -392,7 +392,7 @@ _pp_job_get_attributes_thread (GTask        *task,
 }
 
 void
-pp_job_get_attributes_async (PpJob                *job,
+pp_job_get_attributes_async (PpJob                *self,
                              gchar               **attributes_names,
                              GCancellable         *cancellable,
                              GAsyncReadyCallback   callback,
@@ -400,7 +400,7 @@ pp_job_get_attributes_async (PpJob                *job,
 {
   GTask *task;
 
-  task = g_task_new (job, cancellable, callback, user_data);
+  task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_task_data (task, g_strdupv (attributes_names), (GDestroyNotify) g_strfreev);
   g_task_run_in_thread (task, _pp_job_get_attributes_thread);
 
@@ -408,11 +408,11 @@ pp_job_get_attributes_async (PpJob                *job,
 }
 
 GVariant *
-pp_job_get_attributes_finish (PpJob         *job,
+pp_job_get_attributes_finish (PpJob         *self,
                               GAsyncResult  *result,
                               GError       **error)
 {
-  g_return_val_if_fail (g_task_is_valid (result, job), NULL);
+  g_return_val_if_fail (g_task_is_valid (result, self), NULL);
 
   return g_task_propagate_pointer (G_TASK (result), error);
 }
@@ -423,7 +423,7 @@ _pp_job_authenticate_thread (GTask        *task,
                              gpointer      task_data,
                              GCancellable *cancellable)
 {
-  PpJob         *job = PP_JOB (source_object);
+  PpJob         *self = source_object;
   gboolean       result = FALSE;
   gchar        **auth_info = task_data;
   ipp_t         *request;
@@ -433,7 +433,7 @@ _pp_job_authenticate_thread (GTask        *task,
 
   if (auth_info != NULL)
     {
-      job_uri = g_strdup_printf ("ipp://localhost/jobs/%d", job->id);
+      job_uri = g_strdup_printf ("ipp://localhost/jobs/%d", self->id);
 
       length = g_strv_length (auth_info);
 
@@ -458,7 +458,7 @@ _pp_job_authenticate_thread (GTask        *task,
 }
 
 void
-pp_job_authenticate_async (PpJob                *job,
+pp_job_authenticate_async (PpJob                *self,
                            gchar               **auth_info,
                            GCancellable         *cancellable,
                            GAsyncReadyCallback   callback,
@@ -466,7 +466,7 @@ pp_job_authenticate_async (PpJob                *job,
 {
   GTask *task;
 
-  task = g_task_new (job, cancellable, callback, user_data);
+  task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_task_data (task, g_strdupv (auth_info), (GDestroyNotify) g_strfreev);
   g_task_run_in_thread (task, _pp_job_authenticate_thread);
 
@@ -474,11 +474,11 @@ pp_job_authenticate_async (PpJob                *job,
 }
 
 gboolean
-pp_job_authenticate_finish (PpJob         *job,
+pp_job_authenticate_finish (PpJob         *self,
                             GAsyncResult  *result,
                             GError       **error)
 {
-  g_return_val_if_fail (g_task_is_valid (result, job), FALSE);
+  g_return_val_if_fail (g_task_is_valid (result, self), FALSE);
 
   return g_task_propagate_boolean (G_TASK (result), error);
 }
