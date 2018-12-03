@@ -171,7 +171,7 @@ pp_maintenance_command_class_init (PpMaintenanceCommandClass *klass)
 }
 
 static void
-pp_maintenance_command_init (PpMaintenanceCommand *command)
+pp_maintenance_command_init (PpMaintenanceCommand *self)
 {
 }
 
@@ -198,11 +198,11 @@ _pp_maintenance_command_execute_thread (GTask        *task,
                                         gpointer      task_data,
                                         GCancellable *cancellable)
 {
-  PpMaintenanceCommand        *command = PP_MAINTENANCE_COMMAND (source_object);
+  PpMaintenanceCommand        *self = PP_MAINTENANCE_COMMAND (source_object);
   gboolean                     success = FALSE;
   GError                      *error = NULL;
 
-  if (_pp_maintenance_command_is_supported (command->printer_name, command->command))
+  if (_pp_maintenance_command_is_supported (self->printer_name, self->command))
     {
       ipp_t *request;
       ipp_t *response = NULL;
@@ -211,14 +211,14 @@ _pp_maintenance_command_execute_thread (GTask        *task,
       int    fd = -1;
 
       printer_uri = g_strdup_printf ("ipp://localhost/printers/%s",
-                                     command->printer_name);
+                                     self->printer_name);
 
       request = ippNewRequest (IPP_PRINT_JOB);
 
       ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
                     "printer-uri", NULL, printer_uri);
       ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
-                    "job-name", NULL, command->title);
+                    "job-name", NULL, self->title);
       ippAddString (request, IPP_TAG_JOB, IPP_TAG_MIMETYPE,
                     "document-format", NULL, "application/vnd.cups-command");
 
@@ -230,9 +230,9 @@ _pp_maintenance_command_execute_thread (GTask        *task,
 
           file = fdopen (fd, "w");
           fprintf (file, "#CUPS-COMMAND\n");
-          fprintf (file, "%s", command->command);
-          if (command->parameters)
-            fprintf (file, " %s", command->parameters);
+          fprintf (file, "%s", self->command);
+          if (self->parameters)
+            fprintf (file, " %s", self->parameters);
           fprintf (file, "\n");
           fclose (file);
 
@@ -270,14 +270,14 @@ _pp_maintenance_command_execute_thread (GTask        *task,
 }
 
 void
-pp_maintenance_command_execute_async (PpMaintenanceCommand *command,
+pp_maintenance_command_execute_async (PpMaintenanceCommand *self,
                                       GCancellable         *cancellable,
                                       GAsyncReadyCallback   callback,
                                       gpointer              user_data)
 {
   GTask *task;
 
-  task = g_task_new (command, cancellable, callback, user_data);
+  task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_check_cancellable (task, TRUE);
   g_task_run_in_thread (task, _pp_maintenance_command_execute_thread);
 
@@ -285,11 +285,11 @@ pp_maintenance_command_execute_async (PpMaintenanceCommand *command,
 }
 
 gboolean
-pp_maintenance_command_execute_finish (PpMaintenanceCommand  *command,
+pp_maintenance_command_execute_finish (PpMaintenanceCommand  *self,
                                        GAsyncResult          *result,
                                        GError               **error)
 {
-  g_return_val_if_fail (g_task_is_valid (result, command), FALSE);
+  g_return_val_if_fail (g_task_is_valid (result, self), FALSE);
 
   return g_task_propagate_boolean (G_TASK (result), error);
 }
@@ -368,22 +368,22 @@ _pp_maintenance_command_is_supported_thread (GTask        *task,
                                              gpointer      task_data,
                                              GCancellable *cancellable)
 {
-  PpMaintenanceCommand        *command = PP_MAINTENANCE_COMMAND (source_object);
+  PpMaintenanceCommand        *self = PP_MAINTENANCE_COMMAND (source_object);
   gboolean                     success = FALSE;
 
-  success = _pp_maintenance_command_is_supported (command->printer_name, command->command);
+  success = _pp_maintenance_command_is_supported (self->printer_name, self->command);
   g_task_return_boolean (task, success);
 }
 
 void
-pp_maintenance_command_is_supported_async  (PpMaintenanceCommand *command,
+pp_maintenance_command_is_supported_async  (PpMaintenanceCommand *self,
                                             GCancellable         *cancellable,
                                             GAsyncReadyCallback   callback,
                                             gpointer              user_data)
 {
   GTask *task;
 
-  task = g_task_new (command, cancellable, callback, user_data);
+  task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_check_cancellable (task, TRUE);
   g_task_run_in_thread (task, _pp_maintenance_command_is_supported_thread);
 
@@ -391,11 +391,11 @@ pp_maintenance_command_is_supported_async  (PpMaintenanceCommand *command,
 }
 
 gboolean
-pp_maintenance_command_is_supported_finish (PpMaintenanceCommand  *command,
+pp_maintenance_command_is_supported_finish (PpMaintenanceCommand  *self,
                                             GAsyncResult          *result,
                                             GError               **error)
 {
-  g_return_val_if_fail (g_task_is_valid (result, command), FALSE);
+  g_return_val_if_fail (g_task_is_valid (result, self), FALSE);
 
   return g_task_propagate_boolean (G_TASK (result), error);
 }

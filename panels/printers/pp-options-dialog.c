@@ -67,7 +67,7 @@ struct _PpOptionsDialog {
   gboolean sensitive;
 };
 
-static void pp_options_dialog_hide (PpOptionsDialog *dialog);
+static void pp_options_dialog_hide (PpOptionsDialog *self);
 
 enum
 {
@@ -467,7 +467,7 @@ static void
 category_selection_changed_cb (GtkTreeSelection *selection,
                                gpointer          user_data)
 {
-  PpOptionsDialog *dialog = (PpOptionsDialog *) user_data;
+  PpOptionsDialog *self = (PpOptionsDialog *) user_data;
   GtkTreeModel    *model;
   GtkTreeIter      iter;
   GtkWidget       *options_notebook;
@@ -483,14 +483,14 @@ category_selection_changed_cb (GtkTreeSelection *selection,
   if (id >= 0)
     {
       options_notebook = (GtkWidget*)
-        gtk_builder_get_object (dialog->builder, "options-notebook");
+        gtk_builder_get_object (self->builder, "options-notebook");
 
       gtk_notebook_set_current_page (GTK_NOTEBOOK (options_notebook), id);
     }
 }
 
 static void
-populate_options_real (PpOptionsDialog *dialog)
+populate_options_real (PpOptionsDialog *self)
 {
   GtkTreeSelection *selection;
   GtkTreeModel     *model;
@@ -511,69 +511,69 @@ populate_options_real (PpOptionsDialog *dialog)
   gint              i, j;
 
   widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "options-spinner");
+    gtk_builder_get_object (self->builder, "options-spinner");
   gtk_spinner_stop (GTK_SPINNER (widget));
 
   widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "stack");
+    gtk_builder_get_object (self->builder, "stack");
   gtk_stack_set_visible_child_name (GTK_STACK (widget), "main-box");
 
   treeview = (GtkTreeView *)
-    gtk_builder_get_object (dialog->builder, "options-categories-treeview");
+    gtk_builder_get_object (self->builder, "options-categories-treeview");
 
   notebook = (GtkWidget *)
-    gtk_builder_get_object (dialog->builder, "options-notebook");
+    gtk_builder_get_object (self->builder, "options-notebook");
 
-  if (dialog->ipp_attributes)
+  if (self->ipp_attributes)
     {
       /* Add number-up option to Page Setup tab */
-      ipp_option_add (g_hash_table_lookup (dialog->ipp_attributes,
+      ipp_option_add (g_hash_table_lookup (self->ipp_attributes,
                                            "number-up-supported"),
-                      g_hash_table_lookup (dialog->ipp_attributes,
+                      g_hash_table_lookup (self->ipp_attributes,
                                            "number-up-default"),
                       "number-up",
                       /* Translators: This option sets number of pages printed on one sheet */
                       _("Pages per side"),
-                      dialog->printer_name,
+                      self->printer_name,
                       page_setup_tab_grid,
-                      dialog->sensitive);
+                      self->sensitive);
 
       /* Add sides option to Page Setup tab */
-      ipp_option_add (g_hash_table_lookup (dialog->ipp_attributes,
+      ipp_option_add (g_hash_table_lookup (self->ipp_attributes,
                                            "sides-supported"),
-                      g_hash_table_lookup (dialog->ipp_attributes,
+                      g_hash_table_lookup (self->ipp_attributes,
                                            "sides-default"),
                       "sides",
                       /* Translators: This option sets whether to print on both sides of paper */
                       _("Two-sided"),
-                      dialog->printer_name,
+                      self->printer_name,
                       page_setup_tab_grid,
-                      dialog->sensitive);
+                      self->sensitive);
 
       /* Add orientation-requested option to Page Setup tab */
-      ipp_option_add (g_hash_table_lookup (dialog->ipp_attributes,
+      ipp_option_add (g_hash_table_lookup (self->ipp_attributes,
                                            "orientation-requested-supported"),
-                      g_hash_table_lookup (dialog->ipp_attributes,
+                      g_hash_table_lookup (self->ipp_attributes,
                                            "orientation-requested-default"),
                       "orientation-requested",
                       /* Translators: This option sets orientation of print (portrait, landscape...) */
                       _("Orientation"),
-                      dialog->printer_name,
+                      self->printer_name,
                       page_setup_tab_grid,
-                      dialog->sensitive);
+                      self->sensitive);
     }
 
-  if (dialog->destination && dialog->ppd_filename)
+  if (self->destination && self->ppd_filename)
     {
-      ppd_file = ppdOpenFile (dialog->ppd_filename);
+      ppd_file = ppdOpenFile (self->ppd_filename);
       ppdLocalize (ppd_file);
 
       if (ppd_file)
         {
           ppdMarkDefaults (ppd_file);
           cupsMarkOptions (ppd_file,
-                           dialog->destination->num_options,
-                           dialog->destination->options);
+                           self->destination->num_options,
+                           self->destination->options);
 
           for (i = 0; i < ppd_file->num_groups; i++)
             {
@@ -620,9 +620,9 @@ populate_options_real (PpOptionsDialog *dialog)
                         grid = advanced_tab_grid;
 
                       ppd_option_add (ppd_file->groups[i].options[j],
-                                      dialog->printer_name,
+                                      self->printer_name,
                                       grid,
-                                      dialog->sensitive);
+                                      self->sensitive);
                     }
                 }
             }
@@ -631,26 +631,26 @@ populate_options_real (PpOptionsDialog *dialog)
         }
     }
 
-  dialog->ppd_filename_set = FALSE;
-  if (dialog->ppd_filename)
+  self->ppd_filename_set = FALSE;
+  if (self->ppd_filename)
     {
-      g_unlink (dialog->ppd_filename);
-      g_free (dialog->ppd_filename);
-      dialog->ppd_filename = NULL;
+      g_unlink (self->ppd_filename);
+      g_free (self->ppd_filename);
+      self->ppd_filename = NULL;
     }
 
-  dialog->destination_set = FALSE;
-  if (dialog->destination)
+  self->destination_set = FALSE;
+  if (self->destination)
     {
-      cupsFreeDests (1, dialog->destination);
-      dialog->destination = NULL;
+      cupsFreeDests (1, self->destination);
+      self->destination = NULL;
     }
 
-  dialog->ipp_attributes_set = FALSE;
-  if (dialog->ipp_attributes)
+  self->ipp_attributes_set = FALSE;
+  if (self->ipp_attributes)
     {
-      g_hash_table_unref (dialog->ipp_attributes);
-      dialog->ipp_attributes = NULL;
+      g_hash_table_unref (self->ipp_attributes);
+      self->ipp_attributes = NULL;
     }
 
   /* Translators: "General" tab contains general printer options */
@@ -684,17 +684,17 @@ populate_options_real (PpOptionsDialog *dialog)
     {
       g_signal_connect (selection,
                         "changed",
-                        G_CALLBACK (category_selection_changed_cb), dialog);
+                        G_CALLBACK (category_selection_changed_cb), self);
 
       if ((model = gtk_tree_view_get_model (treeview)) != NULL &&
           gtk_tree_model_get_iter_first (model, &iter))
         gtk_tree_selection_select_iter (selection, &iter);
     }
 
-  dialog->populating_dialog = FALSE;
-  if (dialog->response != GTK_RESPONSE_NONE)
+  self->populating_dialog = FALSE;
+  if (self->response != GTK_RESPONSE_NONE)
     {
-      dialog->user_callback (GTK_DIALOG (dialog->dialog), dialog->response, dialog->user_data);
+      self->user_callback (GTK_DIALOG (self->dialog), self->response, self->user_data);
     }
 }
 
@@ -702,21 +702,21 @@ static void
 printer_get_ppd_cb (const gchar *ppd_filename,
                     gpointer     user_data)
 {
-  PpOptionsDialog *dialog = (PpOptionsDialog *) user_data;
+  PpOptionsDialog *self = (PpOptionsDialog *) user_data;
 
-  if (dialog->ppd_filename)
+  if (self->ppd_filename)
     {
-      g_unlink (dialog->ppd_filename);
-      g_free (dialog->ppd_filename);
+      g_unlink (self->ppd_filename);
+      g_free (self->ppd_filename);
     }
 
-  dialog->ppd_filename = g_strdup (ppd_filename);
-  dialog->ppd_filename_set = TRUE;
+  self->ppd_filename = g_strdup (ppd_filename);
+  self->ppd_filename_set = TRUE;
 
-  if (dialog->destination_set &&
-      dialog->ipp_attributes_set)
+  if (self->destination_set &&
+      self->ipp_attributes_set)
     {
-      populate_options_real (dialog);
+      populate_options_real (self);
     }
 }
 
@@ -724,18 +724,18 @@ static void
 get_named_dest_cb (cups_dest_t *dest,
                    gpointer     user_data)
 {
-  PpOptionsDialog *dialog = (PpOptionsDialog *) user_data;
+  PpOptionsDialog *self = (PpOptionsDialog *) user_data;
 
-  if (dialog->destination)
-    cupsFreeDests (1, dialog->destination);
+  if (self->destination)
+    cupsFreeDests (1, self->destination);
 
-  dialog->destination = dest;
-  dialog->destination_set = TRUE;
+  self->destination = dest;
+  self->destination_set = TRUE;
 
-  if (dialog->ppd_filename_set &&
-      dialog->ipp_attributes_set)
+  if (self->ppd_filename_set &&
+      self->ipp_attributes_set)
     {
-      populate_options_real (dialog);
+      populate_options_real (self);
     }
 }
 
@@ -743,23 +743,23 @@ static void
 get_ipp_attributes_cb (GHashTable *table,
                        gpointer    user_data)
 {
-  PpOptionsDialog *dialog = (PpOptionsDialog *) user_data;
+  PpOptionsDialog *self = (PpOptionsDialog *) user_data;
 
-  if (dialog->ipp_attributes)
-    g_hash_table_unref (dialog->ipp_attributes);
+  if (self->ipp_attributes)
+    g_hash_table_unref (self->ipp_attributes);
 
-  dialog->ipp_attributes = table;
-  dialog->ipp_attributes_set = TRUE;
+  self->ipp_attributes = table;
+  self->ipp_attributes_set = TRUE;
 
-  if (dialog->ppd_filename_set &&
-      dialog->destination_set)
+  if (self->ppd_filename_set &&
+      self->destination_set)
     {
-      populate_options_real (dialog);
+      populate_options_real (self);
     }
 }
 
 static void
-populate_options (PpOptionsDialog *dialog)
+populate_options (PpOptionsDialog *self)
 {
   GtkTreeViewColumn  *column;
   GtkCellRenderer    *renderer;
@@ -781,11 +781,11 @@ populate_options (PpOptionsDialog *dialog)
       NULL};
 
   widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "stack");
+    gtk_builder_get_object (self->builder, "stack");
   gtk_stack_set_visible_child_name (GTK_STACK (widget), "progress-box");
 
   treeview = (GtkTreeView *)
-    gtk_builder_get_object (dialog->builder, "options-categories-treeview");
+    gtk_builder_get_object (self->builder, "options-categories-treeview");
 
   renderer = gtk_cell_renderer_text_new ();
 
@@ -795,23 +795,23 @@ populate_options (PpOptionsDialog *dialog)
   gtk_tree_view_append_column (treeview, column);
 
   widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "options-spinner");
+    gtk_builder_get_object (self->builder, "options-spinner");
   gtk_spinner_start (GTK_SPINNER (widget));
 
-  printer_get_ppd_async (dialog->printer_name,
+  printer_get_ppd_async (self->printer_name,
                          NULL,
                          0,
                          printer_get_ppd_cb,
-                         dialog);
+                         self);
 
-  get_named_dest_async (dialog->printer_name,
+  get_named_dest_async (self->printer_name,
                         get_named_dest_cb,
-                        dialog);
+                        self);
 
-  get_ipp_attributes_async (dialog->printer_name,
+  get_ipp_attributes_async (self->printer_name,
                             (gchar **) attributes,
                             get_ipp_attributes_cb,
-                            dialog);
+                            self);
 }
 
 static void
@@ -862,10 +862,10 @@ static void
 test_page_cb (GtkButton *button,
               gpointer   user_data)
 {
-  PpOptionsDialog *dialog = (PpOptionsDialog*) user_data;
+  PpOptionsDialog *self = (PpOptionsDialog*) user_data;
   gint             i;
 
-  if (dialog->printer_name)
+  if (self->printer_name)
     {
       const gchar  *const dirs[] = { "/usr/share/cups",
                                      "/usr/local/share/cups",
@@ -888,7 +888,7 @@ test_page_cb (GtkButton *button,
         {
           PpPrinter *printer;
 
-          printer = pp_printer_new (dialog->printer_name);
+          printer = pp_printer_new (self->printer_name);
           pp_printer_print_file_async (printer,
                                        filename,
           /* Translators: Name of job which makes printer to print test page */
@@ -903,7 +903,7 @@ test_page_cb (GtkButton *button,
         {
           PpMaintenanceCommand *command;
 
-          command = pp_maintenance_command_new (dialog->printer_name,
+          command = pp_maintenance_command_new (self->printer_name,
                                                 "PrintSelfTestPage",
                                                 NULL,
           /* Translators: Name of job which makes printer to print test page */
@@ -919,13 +919,13 @@ options_dialog_response_cb (GtkDialog *_dialog,
                             gint       response_id,
                             gpointer   user_data)
 {
-  PpOptionsDialog *dialog = (PpOptionsDialog*) user_data;
+  PpOptionsDialog *self = (PpOptionsDialog*) user_data;
 
-  pp_options_dialog_hide (dialog);
-  dialog->response = response_id;
+  pp_options_dialog_hide (self);
+  self->response = response_id;
 
-  if (!dialog->populating_dialog)
-    dialog->user_callback (GTK_DIALOG (dialog->dialog), response_id, dialog->user_data);
+  if (!self->populating_dialog)
+    self->user_callback (GTK_DIALOG (self->dialog), response_id, self->user_data);
 }
 
 PpOptionsDialog *
@@ -935,18 +935,18 @@ pp_options_dialog_new (GtkWindow            *parent,
                        gchar                *printer_name,
                        gboolean              sensitive)
 {
-  PpOptionsDialog  *dialog;
+  PpOptionsDialog  *self;
   GtkWidget        *test_page_button;
   g_autoptr(GError) error = NULL;
   gchar            *objects[] = { "options-dialog", NULL };
   guint             builder_result;
 
-  dialog = g_new0 (PpOptionsDialog, 1);
+  self = g_new0 (PpOptionsDialog, 1);
 
-  dialog->builder = gtk_builder_new ();
-  dialog->parent = GTK_WIDGET (parent);
+  self->builder = gtk_builder_new ();
+  self->parent = GTK_WIDGET (parent);
 
-  builder_result = gtk_builder_add_objects_from_resource (dialog->builder,
+  builder_result = gtk_builder_add_objects_from_resource (self->builder,
                                                           "/org/gnome/control-center/printers/options-dialog.ui",
                                                           objects, &error);
 
@@ -956,90 +956,90 @@ pp_options_dialog_new (GtkWindow            *parent,
       return NULL;
     }
 
-  dialog->dialog = (GtkWidget *) gtk_builder_get_object (dialog->builder, "options-dialog");
-  gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), GTK_WINDOW (parent));
+  self->dialog = (GtkWidget *) gtk_builder_get_object (self->builder, "options-dialog");
+  gtk_window_set_transient_for (GTK_WINDOW (self->dialog), GTK_WINDOW (parent));
 
-  dialog->user_callback = user_callback;
-  dialog->user_data = user_data;
+  self->user_callback = user_callback;
+  self->user_data = user_data;
 
-  dialog->printer_name = g_strdup (printer_name);
+  self->printer_name = g_strdup (printer_name);
 
-  dialog->ppd_filename = NULL;
-  dialog->ppd_filename_set = FALSE;
+  self->ppd_filename = NULL;
+  self->ppd_filename_set = FALSE;
 
-  dialog->destination = NULL;
-  dialog->destination_set = FALSE;
+  self->destination = NULL;
+  self->destination_set = FALSE;
 
-  dialog->ipp_attributes = NULL;
-  dialog->ipp_attributes_set = FALSE;
+  self->ipp_attributes = NULL;
+  self->ipp_attributes_set = FALSE;
 
-  dialog->response = GTK_RESPONSE_NONE;
+  self->response = GTK_RESPONSE_NONE;
 
-  dialog->sensitive = sensitive;
+  self->sensitive = sensitive;
 
   /* connect signals */
-  g_signal_connect (dialog->dialog, "response", G_CALLBACK (options_dialog_response_cb), dialog);
-  test_page_button = (GtkWidget*) gtk_builder_get_object (dialog->builder, "print-test-page");
-  g_signal_connect (test_page_button, "clicked", G_CALLBACK (test_page_cb), dialog);
+  g_signal_connect (self->dialog, "response", G_CALLBACK (options_dialog_response_cb), self);
+  test_page_button = (GtkWidget*) gtk_builder_get_object (self->builder, "print-test-page");
+  g_signal_connect (test_page_button, "clicked", G_CALLBACK (test_page_cb), self);
 
-  gtk_window_set_title (GTK_WINDOW (dialog->dialog), printer_name);
+  gtk_window_set_title (GTK_WINDOW (self->dialog), printer_name);
 
-  gtk_widget_show_all (GTK_WIDGET (dialog->dialog));
+  gtk_widget_show_all (GTK_WIDGET (self->dialog));
 
-  dialog->populating_dialog = TRUE;
-  populate_options (dialog);
+  self->populating_dialog = TRUE;
+  populate_options (self);
 
-  return dialog;
+  return self;
 }
 
 void
-pp_options_dialog_set_callback (PpOptionsDialog      *dialog,
+pp_options_dialog_set_callback (PpOptionsDialog      *self,
                                 UserResponseCallback  user_callback,
                                 gpointer              user_data)
 {
-  if (dialog != NULL)
+  if (self != NULL)
     {
-      dialog->user_callback = user_callback;
-      dialog->user_data = user_data;
+      self->user_callback = user_callback;
+      self->user_data = user_data;
     }
 }
 
 void
-pp_options_dialog_free (PpOptionsDialog *dialog)
+pp_options_dialog_free (PpOptionsDialog *self)
 {
-  gtk_widget_destroy (GTK_WIDGET (dialog->dialog));
-  dialog->dialog = NULL;
+  gtk_widget_destroy (GTK_WIDGET (self->dialog));
+  self->dialog = NULL;
 
-  g_object_unref (dialog->builder);
-  dialog->builder = NULL;
+  g_object_unref (self->builder);
+  self->builder = NULL;
 
-  g_free (dialog->printer_name);
-  dialog->printer_name = NULL;
+  g_free (self->printer_name);
+  self->printer_name = NULL;
 
-  if (dialog->ppd_filename)
+  if (self->ppd_filename)
     {
-      g_unlink (dialog->ppd_filename);
-      g_free (dialog->ppd_filename);
-      dialog->ppd_filename = NULL;
+      g_unlink (self->ppd_filename);
+      g_free (self->ppd_filename);
+      self->ppd_filename = NULL;
     }
 
-  if (dialog->destination)
+  if (self->destination)
     {
-      cupsFreeDests (1, dialog->destination);
-      dialog->destination = NULL;
+      cupsFreeDests (1, self->destination);
+      self->destination = NULL;
     }
 
-  if (dialog->ipp_attributes)
+  if (self->ipp_attributes)
     {
-      g_hash_table_unref (dialog->ipp_attributes);
-      dialog->ipp_attributes = NULL;
+      g_hash_table_unref (self->ipp_attributes);
+      self->ipp_attributes = NULL;
     }
 
-  g_free (dialog);
+  g_free (self);
 }
 
 static void
-pp_options_dialog_hide (PpOptionsDialog *dialog)
+pp_options_dialog_hide (PpOptionsDialog *self)
 {
-  gtk_widget_hide (GTK_WIDGET (dialog->dialog));
+  gtk_widget_hide (GTK_WIDGET (self->dialog));
 }

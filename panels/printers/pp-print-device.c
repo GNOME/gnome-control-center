@@ -334,7 +334,7 @@ pp_print_device_class_init (PpPrintDeviceClass *klass)
 }
 
 static void
-pp_print_device_init (PpPrintDevice *printer)
+pp_print_device_init (PpPrintDevice *self)
 {
 }
 
@@ -345,106 +345,106 @@ pp_print_device_new ()
 }
 
 gchar *
-pp_print_device_get_device_name (PpPrintDevice *device)
+pp_print_device_get_device_name (PpPrintDevice *self)
 {
-  return device->device_name;
+  return self->device_name;
 }
 
 gchar *
-pp_print_device_get_display_name (PpPrintDevice *device)
+pp_print_device_get_display_name (PpPrintDevice *self)
 {
-  return device->display_name;
+  return self->display_name;
 }
 
 gchar *
-pp_print_device_get_device_original_name (PpPrintDevice *device)
+pp_print_device_get_device_original_name (PpPrintDevice *self)
 {
-  return device->device_original_name;
+  return self->device_original_name;
 }
 
 gchar *
-pp_print_device_get_device_make_and_model (PpPrintDevice *device)
+pp_print_device_get_device_make_and_model (PpPrintDevice *self)
 {
-  return device->device_make_and_model;
+  return self->device_make_and_model;
 }
 
 gchar *
-pp_print_device_get_device_location (PpPrintDevice *device)
+pp_print_device_get_device_location (PpPrintDevice *self)
 {
-  return device->device_location;
+  return self->device_location;
 }
 
 gchar *
-pp_print_device_get_device_info (PpPrintDevice *device)
+pp_print_device_get_device_info (PpPrintDevice *self)
 {
-  return device->device_info;
+  return self->device_info;
 }
 
 gchar *
-pp_print_device_get_device_uri (PpPrintDevice *device)
+pp_print_device_get_device_uri (PpPrintDevice *self)
 {
-  return device->device_uri;
+  return self->device_uri;
 }
 
 gchar *
-pp_print_device_get_device_id (PpPrintDevice *device)
+pp_print_device_get_device_id (PpPrintDevice *self)
 {
-  return device->device_id;
+  return self->device_id;
 }
 
 gchar *
-pp_print_device_get_device_ppd (PpPrintDevice *device)
+pp_print_device_get_device_ppd (PpPrintDevice *self)
 {
-  return device->device_ppd;
+  return self->device_ppd;
 }
 
 gchar *
-pp_print_device_get_host_name (PpPrintDevice *device)
+pp_print_device_get_host_name (PpPrintDevice *self)
 {
-  return device->host_name;
+  return self->host_name;
 }
 
 gint
-pp_print_device_get_host_port (PpPrintDevice *device)
+pp_print_device_get_host_port (PpPrintDevice *self)
 {
-  return device->host_port;
+  return self->host_port;
 }
 
 gboolean
-pp_print_device_is_authenticated_server (PpPrintDevice *device)
+pp_print_device_is_authenticated_server (PpPrintDevice *self)
 {
-  return device->is_authenticated_server;
+  return self->is_authenticated_server;
 }
 
 gint
-pp_print_device_get_acquisition_method (PpPrintDevice *device)
+pp_print_device_get_acquisition_method (PpPrintDevice *self)
 {
-  return device->acquisition_method;
+  return self->acquisition_method;
 }
 
 gboolean
-pp_print_device_is_network_device (PpPrintDevice *device)
+pp_print_device_is_network_device (PpPrintDevice *self)
 {
-  return device->is_network_device;
+  return self->is_network_device;
 }
 
 PpPrintDevice *
-pp_print_device_copy (PpPrintDevice *device)
+pp_print_device_copy (PpPrintDevice *self)
 {
   return g_object_new (PP_TYPE_PRINT_DEVICE,
-                       "device-name", pp_print_device_get_device_name (device),
-                       "display-name", pp_print_device_get_display_name (device),
-                       "device-original-name", pp_print_device_get_device_original_name (device),
-                       "device-make-and-model", pp_print_device_get_device_make_and_model (device),
-                       "device-location", pp_print_device_get_device_location (device),
-                       "device-info", pp_print_device_get_device_info (device),
-                       "device-uri", pp_print_device_get_device_uri (device),
-                       "device-id", pp_print_device_get_device_id (device),
-                       "device-ppd", pp_print_device_get_device_ppd (device),
-                       "host-name", pp_print_device_get_host_name (device),
-                       "host-port", pp_print_device_get_host_port (device),
-                       "is-authenticated-server", pp_print_device_is_authenticated_server (device),
-                       "acquisition-method", pp_print_device_get_acquisition_method (device),
-                       "is-network-device", pp_print_device_is_network_device (device),
+                       "device-name", pp_print_device_get_device_name (self),
+                       "display-name", pp_print_device_get_display_name (self),
+                       "device-original-name", pp_print_device_get_device_original_name (self),
+                       "device-make-and-model", pp_print_device_get_device_make_and_model (self),
+                       "device-location", pp_print_device_get_device_location (self),
+                       "device-info", pp_print_device_get_device_info (self),
+                       "device-uri", pp_print_device_get_device_uri (self),
+                       "device-id", pp_print_device_get_device_id (self),
+                       "device-ppd", pp_print_device_get_device_ppd (self),
+                       "host-name", pp_print_device_get_host_name (self),
+                       "host-port", pp_print_device_get_host_port (self),
+                       "is-authenticated-server", pp_print_device_is_authenticated_server (self),
+                       "acquisition-method", pp_print_device_get_acquisition_method (self),
+                       "is-network-device", pp_print_device_is_network_device (self),
                        NULL);
 }
