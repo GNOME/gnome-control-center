@@ -339,7 +339,6 @@ pp_new_printer_class_init (PpNewPrinterClass *klass)
 static void
 pp_new_printer_init (PpNewPrinter *printer)
 {
-  printer->unlink_ppd_file = FALSE;
 }
 
 PpNewPrinter *
