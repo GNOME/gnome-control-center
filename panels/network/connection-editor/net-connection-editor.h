@@ -55,9 +55,11 @@ struct _NetConnectionEditor
 
         GtkButton        *cancel_button;
         GtkButton        *apply_button;
-        GtkNotebook      *notebook;
         GtkFrame         *add_connection_frame;
         GtkStack         *toplevel_stack;
+        GtkBox           *advanced_pages;
+        GtkBox           *pages_container;
+        GtkListBox       *advanced_pages_container;
 
         GSList *initializing_pages;
         GSList *pages;
