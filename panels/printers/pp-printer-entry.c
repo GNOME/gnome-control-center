@@ -414,7 +414,7 @@ printer_renamed_cb (PpDetailsDialog *dialog,
                     gchar           *new_name,
                     gpointer         user_data)
 {
- PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
+ PpPrinterEntry *self = user_data;
 
  g_signal_emit_by_name (self, "printer-renamed", new_name);
 }
@@ -424,7 +424,7 @@ details_dialog_cb (GtkDialog *dialog,
                    gint       response_id,
                    gpointer   user_data)
 {
-  PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
+  PpPrinterEntry *self = user_data;
 
   pp_details_dialog_free (self->pp_details_dialog);
   self->pp_details_dialog = NULL;
@@ -462,7 +462,7 @@ printer_options_dialog_cb (GtkDialog *dialog,
                            gint       response_id,
                            gpointer   user_data)
 {
-  PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
+  PpPrinterEntry *self = user_data;
 
   if (self->pp_options_dialog != NULL)
     {
@@ -505,6 +505,7 @@ check_clean_heads_maintenance_command_cb (GObject      *source_object,
                                           GAsyncResult *res,
                                           gpointer      user_data)
 {
+  PpPrinterEntry       *self = user_data;
   PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
   gboolean              is_supported = FALSE;
   g_autoptr(GError)     error = NULL;
@@ -518,7 +519,6 @@ check_clean_heads_maintenance_command_cb (GObject      *source_object,
 
   if (is_supported)
     {
-      PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
       gtk_widget_show (GTK_WIDGET (self->clean_heads_menuitem));
     }
 
@@ -546,7 +546,7 @@ clean_heads_maintenance_command_cb (GObject      *source_object,
                                     GAsyncResult *res,
                                     gpointer      user_data)
 {
-  PpPrinterEntry       *self = PP_PRINTER_ENTRY (user_data);
+  PpPrinterEntry       *self = user_data;
   PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
   g_autoptr(GError)     error = NULL;
 
@@ -583,7 +583,7 @@ get_jobs_cb (GObject      *source_object,
              GAsyncResult *result,
              gpointer      user_data)
 {
-  PpPrinterEntry   *self;
+  PpPrinterEntry   *self = user_data;
   PpPrinter        *printer = PP_PRINTER (source_object);
   g_autoptr(GError) error = NULL;
   GList            *jobs;
@@ -616,8 +616,6 @@ get_jobs_cb (GObject      *source_object,
       /* Translators: This is the label of the button that opens the Jobs Dialog. */
       button_label = g_strdup_printf (ngettext ("%u Job", "%u Jobs", num_jobs), num_jobs);
     }
-
-  self = PP_PRINTER_ENTRY (user_data);
 
   gtk_button_set_label (GTK_BUTTON (self->show_jobs_dialog_button), button_label);
   gtk_widget_set_sensitive (self->show_jobs_dialog_button, num_jobs > 0);
