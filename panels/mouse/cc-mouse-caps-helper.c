@@ -29,6 +29,7 @@ touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
                                  gboolean *have_edge_scrolling,
                                  gboolean *have_tap_to_click)
 {
+        GdkDisplay *gdisplay;
         Display *display;
 	g_autoptr(GList) devicelist = NULL;
 	GList *l;
@@ -37,6 +38,7 @@ touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 	unsigned long nitems, bytes_after;
 	unsigned char *data;
 
+        gdisplay = gdk_display_get_default ();
         display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 	prop_scroll_methods = XInternAtom (display, "libinput Scroll Methods Available", False);
 	prop_tapping_enabled = XInternAtom (display, "libinput Tapping Enabled", False);
@@ -47,7 +49,7 @@ touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 	*have_edge_scrolling = FALSE;
 	*have_tap_to_click = FALSE;
 
-        gdk_error_trap_push ();
+        gdk_x11_display_error_trap_push (gdisplay);
 
 	devicelist = gdk_seat_get_slaves (gdk_display_get_default_seat (gdk_display_get_default ()),
                                           GDK_SEAT_CAPABILITY_ALL_POINTING);
@@ -81,7 +83,7 @@ touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 		}
 	}
 
-        gdk_error_trap_pop_ignored ();
+        gdk_x11_display_error_trap_pop_ignored (gdisplay);
 
 	return TRUE;
 }
@@ -105,6 +107,7 @@ cc_touchpad_check_capabilities (gboolean *have_two_finger_scrolling,
 gboolean
 cc_synaptics_check (void)
 {
+        GdkDisplay *gdisplay;
         Display *display;
         g_autoptr(GList) devicelist = NULL;
         GList *l;
@@ -117,10 +120,11 @@ cc_synaptics_check (void)
         if (!GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
                 return FALSE;
 
+        gdisplay = gdk_display_get_default ();
         display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
         prop = XInternAtom (display, "Synaptics Capabilities", False);
 
-        gdk_error_trap_push ();
+        gdk_x11_display_error_trap_push (gdisplay);
 
         devicelist = gdk_seat_get_slaves (gdk_display_get_default_seat (gdk_display_get_default ()),
                                           GDK_SEAT_CAPABILITY_ALL_POINTING);
@@ -138,7 +142,7 @@ cc_synaptics_check (void)
                         break;
         }
 
-        gdk_error_trap_pop_ignored ();
+        gdk_x11_display_error_trap_pop_ignored (gdisplay);
 
         return have_synaptics;
 }
