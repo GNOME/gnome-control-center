@@ -31,12 +31,6 @@
 
 G_DEFINE_TYPE (CEPageDetails, ce_page_details, CE_TYPE_PAGE)
 
-static void
-forget_cb (GtkButton *button, CEPageDetails *page)
-{
-        net_connection_editor_forget (page->editor);
-}
-
 static gchar *
 get_ap_security_string (NMAccessPoint *ap)
 {
@@ -118,83 +112,17 @@ out:
 }
 
 static void
-all_user_changed (GtkToggleButton *b, CEPageDetails *page)
-{
-        gboolean all_users;
-        NMSettingConnection *sc;
-
-        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-        all_users = gtk_toggle_button_get_active (b);
-
-        g_object_set (sc, "permissions", NULL, NULL);
-        if (!all_users)
-                nm_setting_connection_add_permission (sc, "user", g_get_user_name (), NULL);
-}
-
-static void
-restrict_data_changed (GtkToggleButton *toggle, GParamSpec *pspec, CEPageDetails *page)
-{
-        NMSettingConnection *s_con;
-        NMMetered metered;
-
-        s_con = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-
-        if (gtk_toggle_button_get_active (toggle))
-                metered = NM_METERED_YES;
-        else
-                metered = NM_METERED_NO;
-
-        g_object_set (s_con, "metered", metered, NULL);
-}
-
-static void
-update_restrict_data (CEPageDetails *page)
-{
-        NMSettingConnection *s_con;
-        NMMetered metered;
-        GtkWidget *widget;
-        const gchar *type;
-
-        s_con = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-
-        if (s_con == NULL)
-                return;
-
-        /* Disable for VPN; NetworkManager does not implement that yet (see
-         * bug https://bugzilla.gnome.org/show_bug.cgi?id=792618) */
-        type = nm_setting_connection_get_connection_type (s_con);
-        if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME))
-                return;
-
-        metered = nm_setting_connection_get_metered (s_con);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "restrict_data_check"));
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget),
-                                      metered == NM_METERED_YES || metered == NM_METERED_GUESS_YES);
-        gtk_widget_show (widget);
-
-        g_signal_connect (widget, "notify::active", G_CALLBACK (restrict_data_changed), page);
-        g_signal_connect_swapped (widget, "notify::active", G_CALLBACK (ce_page_changed), page);
-}
-
-static void
 connect_details_page (CEPageDetails *page)
 {
-        NMSettingConnection *sc;
-        GtkWidget *widget;
         guint speed;
         guint strength;
         NMDeviceState state;
         NMAccessPoint *active_ap;
         g_autofree gchar *speed_label = NULL;
-        const gchar *type;
         const gchar *hw_address = NULL;
         g_autofree gchar *security_string = NULL;
         const gchar *strength_label;
         gboolean device_is_active;
-
-        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-        type = nm_setting_connection_get_connection_type (sc);
 
         if (NM_IS_DEVICE_WIFI (page->device))
                 active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (page->device));
@@ -267,43 +195,6 @@ connect_details_page (CEPageDetails *page)
                 update_last_used (page, CE_PAGE (page)->connection);
         else
                 panel_set_device_widget_details (CE_PAGE (page)->builder, "last_used", NULL);
-
-        /* Auto connect check */
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
-                                                     "auto_connect_check"));
-        if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME)) {
-                gtk_widget_hide (widget);
-        } else {
-                g_object_bind_property (sc, "autoconnect",
-                                        widget, "active",
-                                        G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
-                g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
-        }
-
-        /* All users check */
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
-                                                     "all_user_check"));
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget),
-                                      nm_setting_connection_get_num_permissions (sc) == 0);
-        g_signal_connect (widget, "toggled",
-                          G_CALLBACK (all_user_changed), page);
-        g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
-
-        /* Restrict Data check */
-        update_restrict_data (page);
-
-        /* Forget button */
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "button_forget"));
-        g_signal_connect (widget, "clicked", G_CALLBACK (forget_cb), page);
-
-        if (g_str_equal (type, NM_SETTING_WIRELESS_SETTING_NAME))
-                gtk_button_set_label (GTK_BUTTON (widget), _("Forget Connection"));
-        else if (g_str_equal (type, NM_SETTING_WIRED_SETTING_NAME))
-                gtk_button_set_label (GTK_BUTTON (widget), _("Remove Connection Profile"));
-        else if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME))
-                gtk_button_set_label (GTK_BUTTON (widget), _("Remove VPN"));
-        else
-                gtk_widget_hide (widget);
 }
 
 static void
