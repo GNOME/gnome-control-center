@@ -127,7 +127,7 @@ libxml_dep = dependency('libxml-2.0')
 polkit_gobject_dep = dependency('polkit-gobject-1', version: '>= 0.103')
 pulse_dep = dependency('libpulse', version: pulse_req_version)
 pulse_mainloop_dep = dependency('libpulse-mainloop-glib', version: pulse_req_version)
-upower_glib_dep = dependency('upower-glib', version: '>= 0.99.6')
+upower_glib_dep = dependency('upower-glib', version: '>= 0.99.8')
 x11_dep = dependency('x11')
 xi_dep = dependency('xi', version: '>= 1.2')
 

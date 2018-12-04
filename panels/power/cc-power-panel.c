@@ -2629,11 +2629,7 @@ cc_power_panel_init (CcPowerPanel *self)
   g_signal_connect (self->up_client, "device-added", G_CALLBACK (up_client_device_added), self);
   g_signal_connect (self->up_client, "device-removed", G_CALLBACK (up_client_device_removed), self);
 
-  self->devices = up_client_get_devices (self->up_client);
-  /* up_client_get_devices doesn't set a free function, we'll set it so we don't need to do it.
-   * https://bugs.freedesktop.org/show_bug.cgi?id=106740
-   */
-  g_ptr_array_set_free_func (self->devices, g_object_unref);
+  self->devices = up_client_get_devices2 (self->up_client);
   for (i = 0; self->devices != NULL && i < self->devices->len; i++) {
     UpDevice *device = g_ptr_array_index (self->devices, i);
     g_signal_connect (G_OBJECT (device), "notify",
