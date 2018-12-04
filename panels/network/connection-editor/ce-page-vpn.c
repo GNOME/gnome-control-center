@@ -53,12 +53,17 @@ vpn_gnome3ify_editor (GtkWidget *widget)
                         vpn_gnome3ify_editor (iter->data);
                 g_list_free (children);
         } else if (GTK_IS_LABEL (widget)) {
+                GtkStyleContext *style;
                 const char *text;
                 gfloat xalign;
                 char *newtext;
                 int len;
 
+                style = gtk_widget_get_style_context (widget);
                 xalign = gtk_label_get_xalign (GTK_LABEL (widget));
+                /* If the label is aligned at the end, it's likely a field name. */
+                if (xalign == 1.0)
+                        gtk_style_context_add_class (style, "dim-label");
                 if (xalign != 0.0)
                         return;
                 text = gtk_label_get_text (GTK_LABEL (widget));
@@ -66,6 +71,7 @@ vpn_gnome3ify_editor (GtkWidget *widget)
                 if (len < 2 || text[len - 1] != ':')
                         return;
 
+                gtk_style_context_add_class (style, "dim-label");
                 newtext = g_strndup (text, len - 1);
                 gtk_label_set_text (GTK_LABEL (widget), newtext);
                 g_free (newtext);
