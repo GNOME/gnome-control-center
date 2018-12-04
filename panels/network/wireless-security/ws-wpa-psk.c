@@ -40,7 +40,7 @@ struct _WirelessSecurityWPAPSK {
 };
 
 static void
-show_toggled_cb (GtkCheckButton *button, WirelessSecurity *sec)
+show_toggled_cb (GtkToggleButton *button, WirelessSecurity *sec)
 {
 	GtkWidget *widget;
 	gboolean visible;
@@ -210,7 +210,7 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	if (connection)
 		update_secrets (WIRELESS_SECURITY (sec), connection);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_wpa"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_togglebutton_wpa"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "toggled",
 	                  (GCallback) show_toggled_cb,

@@ -59,6 +59,17 @@ resource_data = files(
   'network-wifi.ui',
 )
 
+status_icons_files = [
+  'entry-show-symbolic.svg'
+]
+
+foreach file: status_icons_files
+  install_data(
+    file,
+    install_dir: join_paths(control_center_icondir, 'hicolor', 'scalable', 'status')
+  )
+endforeach
+
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
