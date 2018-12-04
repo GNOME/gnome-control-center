@@ -49,11 +49,43 @@
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="eap_simple_password_entry">
+          <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="visibility">False</property>
-            <property name="activates_default">True</property>
+            <property name="can_focus">False</property>
+            <style>
+              <class name="linked"/>
+            </style>
+            <child>
+              <object class="GtkEntry" id="eap_simple_password_entry">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="visibility">False</property>
+                <property name="activates_default">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkToggleButton" id="show_togglebutton_eapsimple">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject">
+                    <property name="accessible-name" translatable="yes">Show</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">entry-show-symbolic</property>
+                  </object>
+                </child>
+                <style>
+                  <class name="image-button"/>
+                </style>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="left_attach">1</property>
@@ -73,37 +105,6 @@
             <property name="left_attach">1</property>
             <property name="right_attach">2</property>
             <property name="y_options"/>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox" id="vbox5">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkCheckButton" id="show_checkbutton_eapsimple">
-                <property name="label" translatable="yes">Sho_w password</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">False</property>
-                <property name="use_underline">True</property>
-                <property name="draw_indicator">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
-            <property name="top_attach">2</property>
-            <property name="bottom_attach">3</property>
           </packing>
         </child>
       </object>

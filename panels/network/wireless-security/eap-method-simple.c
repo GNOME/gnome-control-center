@@ -346,7 +346,7 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	                  G_CALLBACK (password_storage_changed),
 	                  method);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_eapsimple"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_togglebutton_eapsimple"));
 	g_assert (widget);
 	method->show_password = GTK_TOGGLE_BUTTON (widget);
 	g_signal_connect (G_OBJECT (widget), "toggled",

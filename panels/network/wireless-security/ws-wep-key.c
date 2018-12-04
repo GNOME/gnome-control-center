@@ -41,7 +41,7 @@ struct _WirelessSecurityWEPKey {
 };
 
 static void
-show_toggled_cb (GtkCheckButton *button, WirelessSecurity *sec)
+show_toggled_cb (GtkToggleButton *button, WirelessSecurity *sec)
 {
 	GtkWidget *widget;
 	gboolean visible;
@@ -334,7 +334,7 @@ ws_wep_key_new (NMConnection *connection,
 	if (connection)
 		update_secrets (WIRELESS_SECURITY (sec), connection);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_wep"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_togglebutton_wep"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "toggled",
 	                  (GCallback) show_toggled_cb,

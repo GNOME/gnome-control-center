@@ -39,7 +39,7 @@ struct _EAPMethodTLS {
 
 
 static void
-show_toggled_cb (GtkCheckButton *button, EAPMethod *method)
+show_toggled_cb (GtkToggleButton *button, EAPMethod *method)
 {
 	GtkWidget *widget;
 	gboolean visible;
@@ -522,7 +522,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	nma_utils_setup_password_storage (widget, 0, (NMSetting *) s_8021x, parent->password_flags_name,
 	                                  FALSE, secrets_only);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_eaptls"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_togglebutton_eaptls"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "toggled",
 	                  (GCallback) show_toggled_cb,

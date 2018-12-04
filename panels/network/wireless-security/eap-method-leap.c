@@ -243,7 +243,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	nma_utils_setup_password_storage (widget, 0, (NMSetting *) s_8021x, parent->password_flags_name,
 	                                  FALSE, secrets_only);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_eapleap"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_togglebutton_eapleap"));
 	g_assert (widget);
 	method->show_password = GTK_TOGGLE_BUTTON (widget);
 	g_signal_connect (G_OBJECT (widget), "toggled",

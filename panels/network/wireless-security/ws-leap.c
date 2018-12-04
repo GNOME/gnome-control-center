@@ -36,7 +36,7 @@ struct _WirelessSecurityLEAP {
 };
 
 static void
-show_toggled_cb (GtkCheckButton *button, WirelessSecurity *sec)
+show_toggled_cb (GtkToggleButton *button, WirelessSecurity *sec)
 {
 	GtkWidget *widget;
 	gboolean visible;
@@ -202,7 +202,7 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 	if (secrets_only)
 		gtk_widget_hide (widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_leap"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_togglebutton_leap"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "toggled",
 	                  (GCallback) show_toggled_cb,
