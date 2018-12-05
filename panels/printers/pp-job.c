@@ -236,8 +236,8 @@ pp_job_finalize (GObject *object)
 {
   PpJob *self = PP_JOB (object);
 
-  g_free (self->title);
-  g_strfreev (self->auth_info_required);
+  g_clear_pointer (&self->title, g_free);
+  g_clear_pointer (&self->auth_info_required, g_strfreev);
 
   G_OBJECT_CLASS (pp_job_parent_class)->finalize (object);
 }
