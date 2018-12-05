@@ -691,12 +691,15 @@ select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
                 gtk_widget_set_margin_bottom (row_box, 12);
 
                 name_label = gtk_label_new (name);
+                gtk_label_set_ellipsize (GTK_LABEL (name_label), PANGO_ELLIPSIZE_END);
+                gtk_label_set_xalign (GTK_LABEL (name_label), 0.0f);
                 gtk_widget_set_halign (name_label, GTK_ALIGN_START);
                 gtk_box_pack_start (GTK_BOX (row_box), name_label, FALSE, TRUE, 0);
 
                 desc_label = gtk_label_new (NULL);
                 gtk_label_set_markup (GTK_LABEL (desc_label), desc_markup);
                 gtk_label_set_line_wrap (GTK_LABEL (desc_label), TRUE);
+                gtk_label_set_xalign (GTK_LABEL (desc_label), 0.0f);
                 gtk_widget_set_halign (desc_label, GTK_ALIGN_START);
                 context = gtk_widget_get_style_context (desc_label);
                 gtk_style_context_add_class (context, "dim-label");
