@@ -404,13 +404,21 @@
       </packing>
     </child>
   </object>
+  <object class="GtkSizeGroup" id="routes_sizegroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="routes_address_label" />
+      <widget name="routes_prefix_label" />
+      <widget name="routes_gateway_label" />
+    </widgets>
+  </object>
   <object class="GtkSizeGroup" id="routes_metric_sizegroup">
     <property name="mode">horizontal</property>
     <widgets>
       <widget name="routes_metric_label" />
     </widgets>
   </object>
-  <object class="GtkSizeGroup" id="routes_sizegroup">
+  <object class="GtkSizeGroup" id="routes_stub_sizegroup">
     <property name="mode">horizontal</property>
     <widgets>
       <widget name="routes_stub_box" />
@@ -423,4 +431,5 @@
     </widgets>
   </object>
 </interface>
+
 

@@ -377,27 +377,36 @@ add_route_row (CEPageIP4   *page,
         g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_routes_row), page);
         g_object_set_data (G_OBJECT (row), "address", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), address);
-        gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
+        gtk_entry_set_width_chars (GTK_ENTRY (widget), 0);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_container_add (GTK_CONTAINER (row_box), widget);
+
+        group = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_sizegroup"));
+        gtk_size_group_add_widget (group, widget);
 
         widget = gtk_entry_new ();
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_routes_row), page);
         g_object_set_data (G_OBJECT (row), "netmask", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), netmask);
-        gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
+        gtk_entry_set_width_chars (GTK_ENTRY (widget), 0);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_container_add (GTK_CONTAINER (row_box), widget);
+
+        group = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_sizegroup"));
+        gtk_size_group_add_widget (group, widget);
 
         widget = gtk_entry_new ();
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_routes_row), page);
         g_object_set_data (G_OBJECT (row), "gateway", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), gateway ? gateway : "");
-        gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
+        gtk_entry_set_width_chars (GTK_ENTRY (widget), 0);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_container_add (GTK_CONTAINER (row_box), widget);
+
+        group = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_sizegroup"));
+        gtk_size_group_add_widget (group, widget);
 
         widget = gtk_entry_new ();
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
@@ -409,7 +418,6 @@ add_route_row (CEPageIP4   *page,
                 g_free (s);
         }
         gtk_entry_set_width_chars (GTK_ENTRY (widget), 5);
-        gtk_widget_set_hexpand (widget, TRUE);
         gtk_container_add (GTK_CONTAINER (row_box), widget);
 
         group = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_metric_sizegroup"));
@@ -426,7 +434,7 @@ add_route_row (CEPageIP4   *page,
         gtk_container_add (GTK_CONTAINER (row_box), delete_button);
         g_object_set_data (G_OBJECT (row), "delete-button", delete_button);
 
-        group = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_sizegroup"));
+        group = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_stub_sizegroup"));
         gtk_size_group_add_widget (group, delete_button);
 
         gtk_container_add (GTK_CONTAINER (row), row_box);
