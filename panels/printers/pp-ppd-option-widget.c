@@ -167,45 +167,20 @@ pp_ppd_option_widget_finalize (GObject *object)
 {
   PpPPDOptionWidget        *widget = PP_PPD_OPTION_WIDGET (object);
 
+  g_cancellable_cancel (widget->cancellable);
+  if (widget->ppd_filename)
+    g_unlink (widget->ppd_filename);
+
+  g_clear_pointer (&widget->option, cups_option_free);
+  g_clear_pointer (&widget->printer_name, g_free);
+  g_clear_pointer (&widget->option_name, g_free);
   if (widget->destination)
     {
-      if (widget->option)
-        {
-          cups_option_free (widget->option);
-          widget->option = NULL;
-        }
-
-      if (widget->printer_name)
-        {
-          g_free (widget->printer_name);
-          widget->printer_name = NULL;
-        }
-
-      if (widget->option_name)
-        {
-          g_free (widget->option_name);
-          widget->option_name = NULL;
-        }
-
-      if (widget->destination)
-        {
-          cupsFreeDests (1, widget->destination);
-          widget->destination = NULL;
-        }
-
-      if (widget->ppd_filename)
-        {
-          g_unlink (widget->ppd_filename);
-          g_free (widget->ppd_filename);
-          widget->ppd_filename = NULL;
-        }
-
-      if (widget->cancellable)
-        {
-          g_cancellable_cancel (widget->cancellable);
-          g_object_unref (widget->cancellable);
-        }
+      cupsFreeDests (1, widget->destination);
+      widget->destination = NULL;
     }
+  g_clear_pointer (&widget->ppd_filename, g_free);
+  g_clear_object (&widget->cancellable);
 
   G_OBJECT_CLASS (pp_ppd_option_widget_parent_class)->finalize (object);
 }

@@ -45,7 +45,7 @@ pp_printer_dispose (GObject *object)
 {
   PpPrinter *self = PP_PRINTER (object);
 
-  g_free (self->printer_name);
+  g_clear_pointer (&self->printer_name, g_free);
 
   G_OBJECT_CLASS (pp_printer_parent_class)->dispose (object);
 }

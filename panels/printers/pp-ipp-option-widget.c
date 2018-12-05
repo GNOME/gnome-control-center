@@ -128,41 +128,14 @@ pp_ipp_option_widget_finalize (GObject *object)
 {
   PpIPPOptionWidget *widget = PP_IPP_OPTION_WIDGET (object);
 
-  if (widget->option_name)
-    {
-      g_free (widget->option_name);
-      widget->option_name = NULL;
-    }
+  g_cancellable_cancel (widget->cancellable);
 
-  if (widget->printer_name)
-    {
-      g_free (widget->printer_name);
-      widget->printer_name = NULL;
-    }
-
-  if (widget->option_supported)
-    {
-      ipp_attribute_free (widget->option_supported);
-      widget->option_supported = NULL;
-    }
-
-  if (widget->option_default)
-    {
-      ipp_attribute_free (widget->option_default);
-      widget->option_default = NULL;
-    }
-
-  if (widget->ipp_attribute)
-    {
-      g_hash_table_unref (widget->ipp_attribute);
-      widget->ipp_attribute = NULL;
-    }
- 
-  if (widget->cancellable)
-    {
-      g_cancellable_cancel (widget->cancellable);
-      g_object_unref (widget->cancellable);
-    }
+  g_clear_pointer (&widget->option_name, g_free);
+  g_clear_pointer (&widget->printer_name, g_free);
+  g_clear_pointer (&widget->option_supported, ipp_attribute_free);
+  g_clear_pointer (&widget->option_default, ipp_attribute_free);
+  g_clear_pointer (&widget->ipp_attribute, g_hash_table_unref);
+  g_clear_object (&widget->cancellable);
 
   G_OBJECT_CLASS (pp_ipp_option_widget_parent_class)->finalize (object);
 }
