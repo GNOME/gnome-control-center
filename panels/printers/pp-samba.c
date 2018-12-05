@@ -48,11 +48,11 @@ pp_samba_finalize (GObject *object)
 {
   PpSamba *self = PP_SAMBA (object);
 
-  g_free (self->server);
-  g_free (self->share);
-  g_free (self->workgroup);
-  g_free (self->username);
-  g_free (self->password);
+  g_clear_pointer (&self->server, g_free);
+  g_clear_pointer (&self->share, g_free);
+  g_clear_pointer (&self->workgroup, g_free);
+  g_clear_pointer (&self->username, g_free);
+  g_clear_pointer (&self->password, g_free);
 
   G_OBJECT_CLASS (pp_samba_parent_class)->finalize (object);
 }

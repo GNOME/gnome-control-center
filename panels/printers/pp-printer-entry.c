@@ -1001,6 +1001,9 @@ pp_printer_entry_dispose (GObject *object)
 {
   PpPrinterEntry *self = PP_PRINTER_ENTRY (object);
 
+  g_cancellable_cancel (self->get_jobs_cancellable);
+  g_cancellable_cancel (self->check_clean_heads_cancellable);
+
   if (self->pp_details_dialog != NULL)
     {
       g_signal_handlers_disconnect_by_data (self->pp_details_dialog, self);
@@ -1018,13 +1021,8 @@ pp_printer_entry_dispose (GObject *object)
   g_clear_pointer (&self->printer_make_and_model, g_free);
   g_clear_pointer (&self->printer_hostname, g_free);
   g_clear_pointer (&self->inklevel, ink_level_data_free);
-
-  g_cancellable_cancel (self->get_jobs_cancellable);
   g_clear_object (&self->get_jobs_cancellable);
-
-  g_cancellable_cancel (self->check_clean_heads_cancellable);
   g_clear_object (&self->check_clean_heads_cancellable);
-
   g_clear_object (&self->clean_command);
 
   G_OBJECT_CLASS (pp_printer_entry_parent_class)->dispose (object);
