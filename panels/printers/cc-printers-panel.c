@@ -279,89 +279,42 @@ cc_printers_panel_dispose (GObject *object)
 {
   CcPrintersPanel *self = CC_PRINTERS_PANEL (object);
 
-  if (self->pp_new_printer_dialog)
-    g_clear_object (&self->pp_new_printer_dialog);
-
-  free_dests (CC_PRINTERS_PANEL (object));
-
-  g_clear_pointer (&self->new_printer_name, g_free);
-  g_clear_pointer (&self->new_printer_location, g_free);
-  g_clear_pointer (&self->new_printer_make_and_model, g_free);
-
-  g_clear_pointer (&self->renamed_printer_name, g_free);
-  g_clear_pointer (&self->old_printer_name, g_free);
-
-  if (self->builder)
-    {
-      g_object_unref (self->builder);
-      self->builder = NULL;
-    }
-
-  if (self->lockdown_settings)
-    {
-      g_object_unref (self->lockdown_settings);
-      self->lockdown_settings = NULL;
-    }
-
-  if (self->permission)
-    {
-      g_object_unref (self->permission);
-      self->permission = NULL;
-    }
-
   g_cancellable_cancel (self->subscription_renew_cancellable);
-  g_clear_object (&self->subscription_renew_cancellable);
-
   g_cancellable_cancel (self->actualize_printers_list_cancellable);
-  g_clear_object (&self->actualize_printers_list_cancellable);
+  g_cancellable_cancel (self->cups_status_check_cancellable);
+  g_cancellable_cancel (self->get_all_ppds_cancellable);
 
   detach_from_cups_notifier (CC_PRINTERS_PANEL (object));
 
-  g_cancellable_cancel (self->cups_status_check_cancellable);
-  g_clear_object (&self->cups_status_check_cancellable);
-
-  if (self->cups_status_check_id > 0)
-    {
-      g_source_remove (self->cups_status_check_id);
-      self->cups_status_check_id = 0;
-    }
-
-  if (self->remove_printer_timeout_id > 0)
-    {
-      g_source_remove (self->remove_printer_timeout_id);
-      self->remove_printer_timeout_id = 0;
-    }
-
-  if (self->all_ppds_list)
-    {
-      ppd_list_free (self->all_ppds_list);
-      self->all_ppds_list = NULL;
-    }
-
-  if (self->get_all_ppds_cancellable)
-    {
-      g_cancellable_cancel (self->get_all_ppds_cancellable);
-      g_object_unref (self->get_all_ppds_cancellable);
-      self->get_all_ppds_cancellable = NULL;
-    }
-
   if (self->deleted_printer_name != NULL)
     {
-      PpPrinter *printer;
-
-      printer = pp_printer_new (self->deleted_printer_name);
-      g_clear_pointer (&self->deleted_printer_name, g_free);
-
+      PpPrinter *printer = pp_printer_new (self->deleted_printer_name);
       pp_printer_delete_async (printer,
                                NULL,
                                printer_removed_cb,
                                NULL);
     }
 
-  if (self->action != NULL)
-    g_variant_unref (self->action);
-
+  g_clear_object (&self->pp_new_printer_dialog);
+  g_clear_pointer (&self->new_printer_name, g_free);
+  g_clear_pointer (&self->new_printer_location, g_free);
+  g_clear_pointer (&self->new_printer_make_and_model, g_free);
+  g_clear_pointer (&self->renamed_printer_name, g_free);
+  g_clear_pointer (&self->old_printer_name, g_free);
+  g_clear_object (&self->builder);
+  g_clear_object (&self->lockdown_settings);
+  g_clear_object (&self->permission);
+  g_clear_object (&self->subscription_renew_cancellable);
+  g_clear_object (&self->actualize_printers_list_cancellable);
+  g_clear_object (&self->cups_status_check_cancellable);
+  g_clear_handle_id (&self->cups_status_check_id, g_source_remove);
+  g_clear_handle_id (&self->remove_printer_timeout_id, g_source_remove);
+  g_clear_object (&self->get_all_ppds_cancellable);
+  g_clear_pointer (&self->deleted_printer_name, g_free);
+  g_clear_pointer (&self->action, g_variant_unref);
   g_clear_pointer (&self->printer_entries, g_hash_table_destroy);
+  g_clear_pointer (&self->all_ppds_list, ppd_list_free);
+  free_dests (self);
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
 }
