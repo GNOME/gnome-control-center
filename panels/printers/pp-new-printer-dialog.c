@@ -562,40 +562,32 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
 }
 
 static void
+free_devices_list (GList *devices)
+{
+  g_list_free_full (devices, (GDestroyNotify) g_object_unref);
+}
+
+static void
 pp_new_printer_dialog_finalize (GObject *object)
 {
   PpNewPrinterDialog *dialog = PP_NEW_PRINTER_DIALOG (object);
 
+  g_cancellable_cancel (dialog->remote_host_cancellable);
+  g_cancellable_cancel (dialog->cancellable);
+
   dialog->text_renderer = NULL;
   dialog->icon_renderer = NULL;
 
-  if (dialog->host_search_timeout_id != 0)
-    {
-      g_source_remove (dialog->host_search_timeout_id);
-      dialog->host_search_timeout_id = 0;
-    }
-
-  if (dialog->remote_host_cancellable)
-    {
-      g_cancellable_cancel (dialog->remote_host_cancellable);
-      g_clear_object (&dialog->remote_host_cancellable);
-    }
-
-  if (dialog->cancellable)
-    {
-      g_cancellable_cancel (dialog->cancellable);
-      g_clear_object (&dialog->cancellable);
-    }
-
+  g_clear_handle_id (&dialog->host_search_timeout_id, g_source_remove);
+  g_clear_object (&dialog->remote_host_cancellable);
+  g_clear_object (&dialog->cancellable);
   g_clear_pointer (&dialog->dialog, gtk_widget_destroy);
-
   g_clear_pointer (&dialog->list, ppd_list_free);
-
-  if (dialog->builder)
-    g_clear_object (&dialog->builder);
-
-  g_list_free_full (dialog->local_cups_devices, (GDestroyNotify) g_object_unref);
-  dialog->local_cups_devices = NULL;
+  g_clear_object (&dialog->builder);
+  g_clear_pointer (&dialog->local_cups_devices, free_devices_list);
+  g_clear_object (&dialog->local_printer_icon);
+  g_clear_object (&dialog->remote_printer_icon);
+  g_clear_object (&dialog->authenticated_server_icon);
 
   if (dialog->num_of_dests > 0)
     {
@@ -603,10 +595,6 @@ pp_new_printer_dialog_finalize (GObject *object)
       dialog->num_of_dests = 0;
       dialog->dests = NULL;
     }
-
-  g_clear_object (&dialog->local_printer_icon);
-  g_clear_object (&dialog->remote_printer_icon);
-  g_clear_object (&dialog->authenticated_server_icon);
 
   G_OBJECT_CLASS (pp_new_printer_dialog_parent_class)->finalize (object);
 }
@@ -928,8 +916,7 @@ group_physical_devices_cb (gchar    ***device_uris,
     {
       for (iter = dialog->local_cups_devices; iter != NULL; iter = iter->next)
         set_device (dialog, (PpPrintDevice *) iter->data, NULL);
-      g_list_free_full (dialog->local_cups_devices, g_object_unref);
-      dialog->local_cups_devices = NULL;
+      g_clear_pointer (&dialog->local_cups_devices, free_devices_list);
     }
 
   update_dialog_state (dialog);
@@ -1158,7 +1145,7 @@ get_cups_devices_cb (GList    *devices,
         }
     }
 
-  g_list_free_full (devices, (GDestroyNotify) g_object_unref);
+  free_devices_list (devices);
 }
 
 static void
