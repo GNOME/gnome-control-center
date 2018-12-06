@@ -58,27 +58,41 @@ fixture_set_up_empty (NetworkPanelFixture  *fixture,
 {
   g_autoptr(GError) error = NULL;
 
+  g_print("fixture setup\n");
+
   cc_object_storage_initialize ();
+
+  g_print("storage initialized\n");
 
   /* Bring up the libnm service. */
   fixture->sinfo = nmtstc_service_init ();
 
+  g_print("test service initialized\n");
+
   fixture->client = nm_client_new (NULL, &error);
+  g_print("new client\n");
   g_assert_no_error (error);
+  g_print("no error\n");
 
   /* Insert into object storage so that we see the same events as the panel. */
   cc_object_storage_add_object (CC_OBJECT_NMCLIENT, fixture->client);
+  g_print("added into storage\n");
 
   fixture->shell = GTK_WIDGET (cc_test_window_new ());
+  g_print("shell window created\n");
 
   fixture->panel = g_object_new (cc_network_panel_get_type (),
                                  "shell", CC_SHELL (fixture->shell),
                                  NULL);
+  g_print("asdfasdf\n");
 
   g_object_ref (fixture->panel);
+  g_print("fixture panel ref'ed\n");
   cc_shell_set_active_panel (CC_SHELL (fixture->shell), fixture->panel);
+  g_print("panel activated\n");
 
   gtk_widget_show (GTK_WIDGET (fixture->shell));
+  g_print("asdfasdf\n");
 }
 
 static void
@@ -640,11 +654,17 @@ test_vpn_sorting (NetworkPanelFixture  *fixture,
 int
 main (int argc, char **argv)
 {
+  g_debug ("main 1");
   g_setenv ("GSETTINGS_BACKEND", "memory", TRUE);
+  g_debug ("main 2");
   g_setenv ("LIBNM_USE_SESSION_BUS", "1", TRUE);
+  g_debug ("main 3");
   g_setenv ("LC_ALL", "C", TRUE);
+  g_debug ("main 4");
 
   gtk_test_init (&argc, &argv, NULL);
+
+  g_debug ("main 5");
 
   g_test_add ("/network-panel-wired/empty-ui",
               NetworkPanelFixture,
