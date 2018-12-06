@@ -859,6 +859,12 @@ class NetworkManager(ExportedObj):
 
     @dbus.service.method(dbus_interface=IFACE_NM, in_signature='a{sa{sv}}oo', out_signature='oo')
     def AddAndActivateConnection(self, connection, devpath, specific_object):
+        return self.AddAndActivateConnection2(connection, devpath, specific_object, dict())
+
+    @dbus.service.method(dbus_interface=IFACE_NM, in_signature='a{sa{sv}}ooa{sv}', out_signature='oo')
+    def AddAndActivateConnection2(self, connection, devpath, specific_object, options):
+        # TODO: Do some processing of the "options" parameter.
+
         device = None
         for d in self.devices:
             if d.path == devpath:
