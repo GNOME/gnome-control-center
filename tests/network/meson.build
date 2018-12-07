@@ -20,7 +20,8 @@ exe = executable(
 envs = [
   'G_MESSAGES_DEBUG=all',
           'BUILDDIR=' + meson.current_build_dir(),
-      'TOP_BUILDDIR=' + meson.build_root()
+      'TOP_BUILDDIR=' + meson.build_root(),
+      'NO_AT_BRIDGE=1'
 ]
 
 test(
