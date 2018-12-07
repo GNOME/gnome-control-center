@@ -20,7 +20,9 @@ exe = executable(
 envs = [
   'G_MESSAGES_DEBUG=all',
           'BUILDDIR=' + meson.current_build_dir(),
-      'TOP_BUILDDIR=' + meson.build_root()
+      'TOP_BUILDDIR=' + meson.build_root(),
+# Disable ATK, this should not be required but it caused CI failures -- 2018-12-07
+      'NO_AT_BRIDGE=1'
 ]
 
 test(
