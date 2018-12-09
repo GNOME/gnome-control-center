@@ -13,6 +13,52 @@
             <child>
               <object class="GtkBox">
                 <property name="visible">1</property>
+                <property name="orientation">vertical</property>
+                <property name="valign">center</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">1</property>
+                    <property name="valign">start</property>
+                    <property name="pixel-size">80</property>
+                    <property name="icon-name">org.gnome.Software-symbolic</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="fill">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">1</property>
+                    <property name="margin-bottom">15</property>
+                    <property name="label" translatable="yes">No applications</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                    <attributes>
+                      <attribute name="scale" value="1.2"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="label" translatable="yes">Install some…</property>
+                    <property name="visible">1</property>
+                    <property name="can-focus">1</property>
+                    <property name="receives-default">1</property>
+                    <property name="halign">center</property>
+                    <signal name="clicked" handler="open_software_cb"/>
+                  </object>
+                  <packing>
+                    <property name="fill">0</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="name">empty</property>
@@ -131,12 +177,12 @@
                         </child>
                         <child>
                           <object class="GtkLabel">
-                            <property name="visible">True</property>
+                            <property name="visible">1</property>
                             <property name="xalign">0</property>
                             <property name="wrap">1</property>
                             <property name="max-width-chars">50</property>
-                            <property name="label" translatable="yes">Individual permissions for applications can be reviewed in the &lt;a href="privacy"&gt;Privacy&lt;/a&gt; Settings.</property>
-                            <property name="use-markup">True</property>
+                            <property name="label" translatable="yes">Individual permissions for applications can be reviewed in the &lt;a href=&quot;privacy&quot;&gt;Privacy&lt;/a&gt; Settings.</property>
+                            <property name="use-markup">1</property>
                             <signal name="activate-link" handler="privacy_link_cb" swapped="yes"/>
                           </object>
                         </child>
@@ -275,28 +321,46 @@
                         <child>
                           <object class="GtkBox">
                             <property name="visible">1</property>
-                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkBox">
                                 <property name="visible">1</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Default Handlers</property>
-                                <style>
-                                  <class name="section-title"/>
-                                </style>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">1</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Default Handlers</property>
+                                    <style>
+                                      <class name="section-title"/>
+                                    </style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">1</property>
+                                    <property name="xalign">0</property>
+                                    <property name="wrap">1</property>
+                                    <property name="max-width-chars">50</property>
+                                    <property name="label" translatable="yes">Types of files and links that this application opens.</property>
+                                    <style>
+                                      <class name="section-subtitle"/>
+                                    </style>
+                                  </object>
+                                </child>
                               </object>
+                              <packing>
+                                <property name="expand">1</property>
+                              </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkButton" id="handler_reset">
                                 <property name="visible">1</property>
-                                <property name="xalign">0</property>
-                                <property name="wrap">1</property>
-                                <property name="max-width-chars">50</property>
-                                <property name="label" translatable="yes">Types of files and links that this application opens.</property>
-                                <style>
-                                  <class name="section-subtitle"/>
-                                </style>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                                <property name="label" translatable="yes">Reset</property>
+                                <signal name="clicked" handler="handler_reset_cb"/>
                               </object>
                             </child>
                           </object>
@@ -408,8 +472,8 @@
   <object class="GtkDialog" id="builtin_dialog">
     <property name="title" translatable="yes">Built-in Permissions</property>
     <property name="modal">1</property>
-    <property name="type_hint">dialog</property>
-    <property name="use_header_bar">1</property>
+    <property name="type-hint">dialog</property>
+    <property name="use-header-bar">1</property>
     <property name="resizable">0</property>
     <property name="border-width">24</property>
     <signal name="delete-event" handler="gtk_widget_hide_on_delete"/>
@@ -442,8 +506,8 @@
   <object class="GtkDialog" id="storage_dialog">
     <property name="title" translatable="yes">Storage</property>
     <property name="modal">1</property>
-    <property name="type_hint">dialog</property>
-    <property name="use_header_bar">1</property>
+    <property name="type-hint">dialog</property>
+    <property name="use-header-bar">1</property>
     <property name="resizable">0</property>
     <property name="border-width">24</property>
     <signal name="delete-event" handler="gtk_widget_hide_on_delete"/>

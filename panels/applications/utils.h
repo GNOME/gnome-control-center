@@ -26,8 +26,8 @@
 
 G_BEGIN_DECLS
 
-void    file_remove_recursively (GFile *file);
-guint64 file_size_recursively (GFile *file);
+void    file_remove_async (GFile *file, GAsyncReadyCallback callback, gpointer data);
+void    file_size_async (GFile *file, GAsyncReadyCallback callback, gpointer data);
 void    container_remove_all (GtkContainer *container);
 FlatpakInstalledRef *find_flatpak_ref (const char *app_id);
 guint64 get_flatpak_app_size (const char *app_id);
