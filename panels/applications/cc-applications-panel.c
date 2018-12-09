@@ -36,14 +36,8 @@
 
 /* Todo
  * - search
- * - undo for mime type removal
- * - reset per section ?
- * - handle cache async
- * - notification visibility
- * - empty state
  *
  * Missing in flatpak:
- * - make portal write notification permissions
  * - background
  * - usb devices
  *
@@ -63,6 +57,7 @@ struct _CcApplicationsPanel
   GtkWidget *header_button;
   GtkWidget *title_label;
   GAppInfoMonitor *monitor;
+  gulong monitor_id;
 
   GCancellable *cancellable;
 
@@ -100,6 +95,7 @@ struct _CcApplicationsPanel
   GtkWidget *device_list;
 
   GtkWidget *handler_section;
+  GtkWidget *handler_reset;
   GtkWidget *handler_list;
   GtkWidget *hypertext;
   GtkWidget *text;
@@ -121,6 +117,10 @@ struct _CcApplicationsPanel
   GtkWidget *cache;
   GtkWidget *total;
   GtkWidget *clear_cache_button;
+
+  guint64 app_size;
+  guint64 cache_size;
+  guint64 data_size;
 };
 
 G_DEFINE_TYPE (CcApplicationsPanel, cc_applications_panel, CC_TYPE_PANEL)
@@ -412,14 +412,6 @@ get_app_dir (const char *app_id,
   return g_file_get_child (appdir, subdir);
 }
 
-static guint64
-calculate_dir_size (const char *app_id,
-                    const char *subdir)
-{
-  g_autoptr(GFile) cachedir = get_app_dir (app_id, subdir);
-  return file_size_recursively (cachedir);
-}
-
 static void
 privacy_link_cb (CcApplicationsPanel *self)
 {
@@ -430,36 +422,82 @@ privacy_link_cb (CcApplicationsPanel *self)
     g_warning ("Failed to switch to privacy panel: %s", error->message);
 }
 
-static guint64
-update_app_row (CcInfoRow *row,
-                const char *app_id)
+static void
+update_total_size (CcApplicationsPanel *self)
 {
-  guint64 size;
+  guint64 total;
   g_autofree char *formatted_size = NULL;
 
-  size = get_flatpak_app_size (app_id);
-  formatted_size = g_format_size (size);
-  g_object_set (row, "info", formatted_size, NULL);
-
-  return size;
+  total = self->app_size + self->data_size + self->cache_size;
+  formatted_size = g_format_size (total);
+  g_object_set (self->total, "info", formatted_size, NULL);
+  g_object_set (self->storage, "info", formatted_size, NULL);
 }
 
-static guint64
-update_dir_row (CcInfoRow *row,
-                const char *app_id,
-                const char *subdir)
+static void
+set_cache_size (GObject *source,
+                GAsyncResult *res,
+                gpointer data)
 {
-  guint64 size;
+  CcApplicationsPanel *self = data;
+  guint64 *size;
   g_autofree char *formatted_size = NULL;
 
-  size = calculate_dir_size (app_id, subdir);
-  formatted_size = g_format_size (size);
-  g_object_set (row, "info", formatted_size, NULL);
+  size = g_object_get_data (G_OBJECT (res), "size");
+  self->cache_size = *size;
 
-  return size;
+  formatted_size = g_format_size (self->cache_size);
+  g_object_set (self->cache, "info", formatted_size, NULL);
+
+  gtk_widget_set_sensitive (self->clear_cache_button, self->cache_size > 0);
+
+  update_total_size (self);
 }
 
-static void update_flatpak_sizes (CcApplicationsPanel *self, const char *app_id);
+static void
+update_cache_row (CcApplicationsPanel *self,
+                  const char          *app_id)
+{
+  g_autoptr(GFile) dir = get_app_dir (app_id, "cache");
+  g_object_set (self->cache, "info", "...", NULL);
+  file_size_async (dir, set_cache_size, self);
+}
+
+static void
+set_data_size (GObject *source,
+               GAsyncResult *res,
+               gpointer data)
+{
+  CcApplicationsPanel *self = data;
+  guint64 *size;
+  g_autofree char *formatted_size = NULL;
+
+  size = g_object_get_data (G_OBJECT (res), "size");
+  self->data_size = *size;
+
+  formatted_size = g_format_size (self->data_size);
+  g_object_set (self->data, "info", formatted_size, NULL);
+
+  update_total_size (self);
+}
+
+static void
+update_data_row (CcApplicationsPanel *self,
+                 const char          *app_id)
+{
+  g_autoptr(GFile) dir = get_app_dir (app_id, "data");
+  g_object_set (self->data, "info", "...", NULL);
+  file_size_async (dir, set_data_size, self);
+}
+
+static void
+cache_cleared (GObject *source,
+               GAsyncResult *res,
+               gpointer data)
+{
+  CcApplicationsPanel *self = data;
+  update_cache_row (self, self->current_app_id);
+}
 
 static void
 clear_cache_cb (CcApplicationsPanel *self)
@@ -470,8 +508,7 @@ clear_cache_cb (CcApplicationsPanel *self)
     return;
 
   dir = get_app_dir (self->current_app_id, "cache");
-  file_remove_recursively (dir);
-  update_flatpak_sizes (self, self->current_app_id);
+  file_remove_async (dir, cache_cleared, self);
 }
 
 static char *
@@ -1088,6 +1125,31 @@ app_info_recommended_for (GAppInfo *info,
 }
 
 static void
+handler_reset_cb (GtkButton *button, CcApplicationsPanel *self)
+{
+  GtkListBoxRow *selected;
+  GAppInfo *info;
+  const char **types;
+  int i;
+
+  selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->sidebar_listbox));
+  info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (selected));  
+
+  types = g_app_info_get_supported_types (info);
+  if (types == NULL || types[0] == NULL)
+    return;
+
+  g_signal_handler_block (self->monitor, self->monitor_id);
+  for (i = 0; types[i]; i++)
+    {
+      char *ctype = g_content_type_from_mime_type (types[i]);
+      g_app_info_add_supports_type (info, ctype, NULL);
+    }
+  g_signal_handler_unblock (self->monitor, self->monitor_id);
+  g_signal_emit_by_name (self->monitor, "changed");
+}
+
+static void
 update_handler_sections (CcApplicationsPanel *self,
                          GAppInfo *info)
 {
@@ -1116,6 +1178,7 @@ update_handler_sections (CcApplicationsPanel *self,
 
   hash = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_free);
 
+  gtk_widget_set_sensitive (self->handler_reset, FALSE);
   for (i = 0; types[i]; i++)
     {
       char *ctype = g_content_type_from_mime_type (types[i]);
@@ -1126,6 +1189,7 @@ update_handler_sections (CcApplicationsPanel *self,
         }
       if (!app_info_recommended_for (info, ctype))
         {
+          gtk_widget_set_sensitive (self->handler_reset, TRUE);
           g_free (ctype);
           continue;
         }
@@ -1151,24 +1215,28 @@ storage_row_activated_cb (GtkListBox    *list,
 }
 
 static void
+update_app_row (CcApplicationsPanel *self,
+                const char *app_id)
+{
+  g_autofree char *formatted_size = NULL;
+
+  self->app_size = get_flatpak_app_size (app_id);
+  formatted_size = g_format_size (self->app_size);
+  g_object_set (self->app, "info", formatted_size, NULL);
+  update_total_size (self);
+}
+
+static void
 update_flatpak_sizes (CcApplicationsPanel *self,
                       const char *app_id)
 {
-  g_autofree char *formatted_size = NULL;
-  guint64 total = 0;
-  guint64 cache_size;
+  gtk_widget_set_sensitive (self->clear_cache_button, FALSE);
 
-  gtk_widget_show (self->usage_section);
-  total += update_app_row (CC_INFO_ROW (self->app), app_id);
-  cache_size = update_dir_row (CC_INFO_ROW (self->data), app_id, "data");
-  total += cache_size;
-  total += update_dir_row (CC_INFO_ROW (self->cache), app_id, "cache");
+  self->app_size = self->data_size = self->cache_size = 0;
 
-  formatted_size = g_format_size (total);
-  g_object_set (self->total, "info", formatted_size, NULL);
-  g_object_set (self->storage, "info", formatted_size, NULL);
-
-  gtk_widget_set_sensitive (self->clear_cache_button, cache_size > 0);
+  update_app_row (self, app_id);
+  update_cache_row (self, app_id);
+  update_data_row (self, app_id);
 }
 
 static void
@@ -1178,6 +1246,7 @@ update_usage_section (CcApplicationsPanel *self,
   if (app_info_is_flatpak (info))
     {
       g_autofree char *app_id = get_app_id (info);
+      gtk_widget_show (self->usage_section);
       update_flatpak_sizes (self, app_id);
     }
   else
@@ -1201,10 +1270,12 @@ update_panel (CcApplicationsPanel *self,
   if (row == NULL)
     {
       gtk_label_set_label (GTK_LABEL (self->title_label), _("Applications"));
+      gtk_widget_hide (self->header_button);
       gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "empty");
       return;
     }
 
+  gtk_widget_show (self->header_button);
   gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "settings");
 
   g_clear_pointer (&self->current_app_id, g_free);
@@ -1313,9 +1384,9 @@ open_software_cb (GtkButton *button,
   const char *argv[] = { "gnome-software", "--details", "appid", NULL };
 
   if (self->current_app_id == NULL)
-    return;
-
-  argv[2] = self->current_app_id;
+    argv[1] = NULL;
+  else
+    argv[2] = self->current_app_id;
 
   g_spawn_async (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
 }
@@ -1469,6 +1540,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, device_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_section);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_reset);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, usage_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, usage_list);
@@ -1492,6 +1564,8 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, handler_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, clear_cache_cb);
   gtk_widget_class_bind_template_callback (widget_class, storage_row_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, open_software_cb);
+  gtk_widget_class_bind_template_callback (widget_class, handler_reset_cb);
 }
 
 static void
@@ -1523,7 +1597,7 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   populate_applications (self);
 
   self->monitor = g_app_info_monitor_get ();
-  g_signal_connect (self->monitor, "changed", G_CALLBACK (apps_changed), self);
+  self->monitor_id = g_signal_connect (self->monitor, "changed", G_CALLBACK (apps_changed), self);
 
   prepare_content (self);
 

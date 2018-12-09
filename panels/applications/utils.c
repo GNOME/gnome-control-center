@@ -18,39 +18,86 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#ifndef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 600
+#endif
+
 #include <config.h>
 #include <glib/gi18n.h>
 #include <flatpak/flatpak.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+#include <ftw.h>
 
 #include "utils.h"
 
-void
-file_remove_recursively (GFile *file)
+static int
+ftw_remove_cb (const char *path, const struct stat *sb, int typeflags, struct FTW *ftwbuf)
 {
-  const char *argv[] = { "rm", "-rf", "path", NULL };
-
-  /* FIXME: async, in process */
-  argv[2] = g_file_peek_path (file);
-
-  g_spawn_sync (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL, NULL, NULL);
+  remove (path);
+  return 0;
 }
 
-guint64
-file_size_recursively (GFile *file)
+static void
+file_remove_thread_func (GTask *task,
+                         gpointer source_object,
+                         gpointer task_data,
+                         GCancellable *cancellable)
 {
-  const char *argv[] = { "du", "-s", "path", NULL };
-  g_autofree char *out = NULL;
-  guint64 size = 0;
-  
-  /* FIXME: async, in process */
-  argv[2] = g_file_peek_path (file);
+  GFile *file = source_object;
+  g_autofree char *path = g_file_get_path (file);
 
-  if (!g_spawn_sync (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, &out, NULL, NULL, NULL))
-    return 0;
+  nftw (path, ftw_remove_cb, 20, FTW_DEPTH);
+}
 
-  size = strtoul (out, NULL, 10);
+void
+file_remove_async (GFile *file,
+                   GAsyncReadyCallback callback,
+                   gpointer data)
+{
+  g_autoptr(GTask) task = g_task_new (file, NULL, callback, data);
+  g_task_run_in_thread (task, file_remove_thread_func);
+}
 
-  return size;
+static GPrivate size_key = G_PRIVATE_INIT (g_free);
+
+static int
+ftw_size_cb (const char *path, const struct stat *sb, int typeflags, struct FTW *ftwbuf)
+{
+  guint64 *size = (guint64*)g_private_get (&size_key);
+  if (typeflags == FTW_F)
+    *size += sb->st_size;
+  return 0;
+}
+
+static void
+file_size_thread_func (GTask *task,
+                       gpointer source_object,
+                       gpointer task_data,
+                       GCancellable *cancellable)
+{
+  GFile *file = source_object;
+  g_autofree char *path = g_file_get_path (file);
+  guint64 *total;
+
+  g_private_replace (&size_key, g_new0 (guint64, 1));
+
+  nftw (path, ftw_size_cb, 20, FTW_DEPTH);
+
+  total = g_new0 (guint64, 1);
+  *total = *(guint64*)g_private_get (&size_key);
+
+  g_object_set_data_full (G_OBJECT (task), "size", total, g_free);
+}
+
+void
+file_size_async (GFile *file,
+                 GAsyncReadyCallback callback,
+                 gpointer data)
+{
+  g_autoptr(GTask) task = g_task_new (file, NULL, callback, data);
+  g_task_run_in_thread (task, file_size_thread_func);
 }
 
 void

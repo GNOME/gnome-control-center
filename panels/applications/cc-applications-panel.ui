@@ -13,6 +13,60 @@
             <child>
               <object class="GtkBox">
                 <property name="visible">1</property>
+                <property name="orientation">vertical</property>
+                <property name="valign">center</property>
+
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="valign">start</property>
+            <property name="pixel_size">80</property>
+            <property name="icon_name">org.gnome.Software-symbolic</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="margin_bottom">15</property>
+            <property name="label" translatable="yes">No applications</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
+            <attributes>
+              <attribute name="scale" value="1.2"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">Install some…</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">center</property>
+            <property name="relief">normal</property>
+            <signal name="clicked" handler="open_software_cb"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+
+
               </object>
               <packing>
                 <property name="name">empty</property>
@@ -275,28 +329,46 @@
                         <child>
                           <object class="GtkBox">
                             <property name="visible">1</property>
-                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkBox">
                                 <property name="visible">1</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Default Handlers</property>
-                                <style>
-                                  <class name="section-title"/>
-                                </style>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">1</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Default Handlers</property>
+                                    <style>
+                                      <class name="section-title"/>
+                                    </style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">1</property>
+                                    <property name="xalign">0</property>
+                                    <property name="wrap">1</property>
+                                    <property name="max-width-chars">50</property>
+                                    <property name="label" translatable="yes">Types of files and links that this application opens.</property>
+                                    <style>
+                                      <class name="section-subtitle"/>
+                                    </style>
+                                  </object>
+                                </child>
                               </object>
+                              <packing>
+                                <property name="expand">1</property>
+                              </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkButton" id="handler_reset">
                                 <property name="visible">1</property>
-                                <property name="xalign">0</property>
-                                <property name="wrap">1</property>
-                                <property name="max-width-chars">50</property>
-                                <property name="label" translatable="yes">Types of files and links that this application opens.</property>
-                                <style>
-                                  <class name="section-subtitle"/>
-                                </style>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                                <property name="label" translatable="yes">Reset</property>
+                                <signal name="clicked" handler="handler_reset_cb"/>
                               </object>
                             </child>
                           </object>
