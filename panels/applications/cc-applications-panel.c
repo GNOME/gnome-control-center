@@ -35,7 +35,6 @@
 #include <flatpak/flatpak.h>
 
 /* Todo
- * - search
  *
  * Missing in flatpak:
  * - background
@@ -64,11 +63,13 @@ struct _CcApplicationsPanel
   char *current_app_id;
 
   GHashTable *globs;
+  GHashTable *search_providers;
 
   GDBusProxy *perm_store;
   GSettings *notification_settings;
   GSettings *location_settings;
   GSettings *privacy_settings;
+  GSettings *search_settings;
 
   GtkListBox *stack;
   GtkWidget *permission_section;
@@ -83,13 +84,15 @@ struct _CcApplicationsPanel
   GtkWidget *no_location;
   GtkWidget *microphone;
   GtkWidget *no_microphone;
+  GtkWidget *builtin;
 
   GtkWidget *integration_section;
   GtkWidget *integration_list;
   GtkWidget *notification;
   GtkWidget *sound;
   GtkWidget *no_sound;
-  GtkWidget *builtin;
+  GtkWidget *search;
+  GtkWidget *no_search;
 
   GtkWidget *device_section;
   GtkWidget *device_list;
@@ -146,10 +149,12 @@ cc_applications_panel_finalize (GObject *object)
   g_clear_object (&self->notification_settings);
   g_clear_object (&self->location_settings);
   g_clear_object (&self->privacy_settings);
+  g_clear_object (&self->search_settings);
   g_clear_object (&self->cancellable);
 
   g_free (self->current_app_id);
   g_hash_table_unref (self->globs);
+  g_hash_table_unref (self->search_providers);
 
   G_OBJECT_CLASS (cc_applications_panel_parent_class)->finalize (object);
 }
@@ -227,9 +232,100 @@ set_flatpak_permissions (CcApplicationsPanel *self,
 }
 
 static void
+set_search_enabled (CcApplicationsPanel *self,
+                    const char *app_id,
+                    gboolean enabled)
+{
+  gpointer key, value;
+  gboolean default_disabled;
+  g_auto(GStrv) apps = NULL;
+  g_autoptr(GPtrArray) new_apps = NULL;
+  int i;
+  g_autofree char *desktop_id = g_strconcat (app_id, ".desktop", NULL);
+
+  if (!g_hash_table_lookup_extended (self->search_providers, app_id, &key, &value))
+    {
+      g_warning ("Trying to configure search for a provider-less app - this shouldn't happen");
+      return;
+    }
+
+  default_disabled = GPOINTER_TO_INT (value);
+
+  new_apps = g_ptr_array_new_with_free_func (g_free);
+  if (default_disabled)
+    {
+      apps = g_settings_get_strv (self->search_settings, "enabled");
+      for (i = 0; apps[i]; i++)
+        {
+          if (strcmp (apps[i], desktop_id) != 0)
+            g_ptr_array_add (new_apps, g_strdup (apps[i]));
+        }
+      if (enabled)
+        g_ptr_array_add (new_apps, g_strdup (desktop_id));
+      g_ptr_array_add (new_apps, NULL);
+      g_settings_set_strv (self->search_settings, "enabled",  (const char * const *)new_apps->pdata);
+    }
+  else
+    {
+      apps = g_settings_get_strv (self->search_settings, "disabled");
+      for (i = 0; apps[i]; i++)
+        {
+          if (strcmp (apps[i], desktop_id) != 0)
+            g_ptr_array_add (new_apps, g_strdup (apps[i]));
+        }
+      if (!enabled)
+        g_ptr_array_add (new_apps, g_strdup (desktop_id));
+      g_ptr_array_add (new_apps, NULL);
+      g_settings_set_strv (self->search_settings, "disabled", (const char * const *)new_apps->pdata);
+    }
+}
+
+static gboolean
+search_enabled_for_app (CcApplicationsPanel *self,
+                        const char *app_id)
+{
+  g_autofree char *desktop_id = g_strconcat (app_id, ".desktop", NULL);
+  g_auto(GStrv) apps = g_settings_get_strv (self->search_settings, "enabled");
+  return g_strv_contains ((const char * const *)apps, desktop_id);
+}
+
+static gboolean
+search_disabled_for_app (CcApplicationsPanel *self,
+                         const char *app_id)
+{
+  g_autofree char *desktop_id = g_strconcat (app_id, ".desktop", NULL);
+  g_auto(GStrv) apps = g_settings_get_strv (self->search_settings, "disabled");
+  return g_strv_contains ((const char * const *)apps, desktop_id);
+}
+
+static void
+get_search_enabled (CcApplicationsPanel *self,
+                    const char *app_id,
+                    gboolean *set,
+                    gboolean *enabled)
+{
+  gpointer key, value;
+
+  *enabled = FALSE;
+  *set = g_hash_table_lookup_extended (self->search_providers, app_id, &key, &value);
+  if (!*set)
+    return;
+
+  if (search_enabled_for_app (self, app_id))
+    *enabled = TRUE;
+  else if (search_disabled_for_app (self, app_id))
+    *enabled = FALSE;
+  else
+    *enabled = !GPOINTER_TO_INT (value); 
+}
+
+static void
 search_cb (CcApplicationsPanel *self)
 {
-  g_print ("search not implemented\n");
+  if (self->current_app_id)
+    set_search_enabled (self,
+                        self->current_app_id,
+                        cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->search)));
 }
 
 static gboolean
@@ -677,6 +773,12 @@ update_integration_section (CcApplicationsPanel *self,
   g_autofree char *app_id = get_app_id (info);
   gboolean set, allowed, disabled;
   gboolean has_any = FALSE;
+
+  disabled = g_settings_get_boolean (self->search_settings, "disable-external");
+  get_search_enabled (self, app_id, &set, &allowed);
+  cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->search), allowed);
+  gtk_widget_set_visible (self->search, set && !disabled);
+  gtk_widget_set_visible (self->no_search, set && disabled);
 
   if (app_info_is_flatpak (info))
     {
@@ -1322,35 +1424,6 @@ populate_applications (CcApplicationsPanel *self)
   g_list_free_full (infos, g_object_unref);
 }
 
-static void
-prepare_content (CcApplicationsPanel *self)
-{
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->permission_list),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->integration_list),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->handler_list),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->usage_list),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->builtin_list),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->storage_list),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-}
-
 static int
 compare_rows (GtkListBoxRow *row1,
               GtkListBoxRow *row2,
@@ -1474,27 +1547,141 @@ cc_applications_panel_set_property (GObject *object,
 static void
 parse_globs (CcApplicationsPanel *self)
 {
-  g_autofree char *contents = NULL;
+  const char * const *dirs;
+  int i;
 
   self->globs = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
-  if (g_file_get_contents ("/usr/share/mime/globs", &contents, NULL, NULL))
+  dirs = g_get_system_data_dirs ();
+
+  for (i = 0; dirs[i]; i++)
     {
-      g_auto(GStrv) strv = NULL;
-      int i;
+      g_autofree char *globs = g_build_filename (dirs[i], "mime/globs", NULL);
+      g_autofree char *contents = NULL;
 
-      strv = g_strsplit (contents, "\n", 0);
-      for (i = 0; strv[i]; i++)
+      if (g_file_get_contents (globs, &contents, NULL, NULL))
         {
-          g_auto(GStrv) parts = NULL;
+          g_auto(GStrv) strv = NULL;
+          int i;
 
-          if (strv[i][0] == '#' || strv[i][0] == '\0')
-            continue;
+          strv = g_strsplit (contents, "\n", 0);
+          for (i = 0; strv[i]; i++)
+            {
+              g_auto(GStrv) parts = NULL;
 
-          parts = g_strsplit (strv[i], ":", 2);
-          g_hash_table_insert (self->globs, g_strdup (parts[0]), g_strdup (parts[1]));
+              if (strv[i][0] == '#' || strv[i][0] == '\0')
+                continue;
+
+              parts = g_strsplit (strv[i], ":", 2);
+              g_hash_table_insert (self->globs, g_strdup (parts[0]), g_strdup (parts[1]));
+            }
         }
     }
+}
+
+#define SHELL_PROVIDER_GROUP "Shell Search Provider"
+
+static void
+add_one_provider (CcApplicationsPanel *self,
+                  GFile *provider)
+{
+  g_autofree gchar *path = NULL;
+  g_autofree gchar *app_id = NULL;
+  g_autoptr(GKeyFile) keyfile = NULL;
+  g_autoptr(GAppInfo) app_info = NULL;
+  g_autoptr(GError) error = NULL;
+  gboolean default_disabled;
+
+  path = g_file_get_path (provider);
+  keyfile = g_key_file_new ();
+  g_key_file_load_from_file (keyfile, path, G_KEY_FILE_NONE, &error);
+
+  if (error != NULL)
+    {
+      g_warning ("Error loading %s: %s - search provider will be ignored",
+                 path, error->message);
+      return;
+    }
+
+  if (!g_key_file_has_group (keyfile, SHELL_PROVIDER_GROUP))
+    {
+      g_debug ("Shell search provider group missing from '%s', ignoring", path);
+      return;
+    }
+
+  app_id = g_key_file_get_string (keyfile, SHELL_PROVIDER_GROUP, "DesktopId", &error);
+
+  if (error != NULL)
+    {
+      g_warning ("Unable to read desktop ID from %s: %s - search provider will be ignored",
+                 path, error->message);
+      return;
+    }
+
+  if (g_str_has_suffix (app_id, ".desktop"))
+    app_id[strlen (app_id) - strlen (".desktop")] = '\0';
+
+  default_disabled = g_key_file_get_boolean (keyfile, SHELL_PROVIDER_GROUP, "DefaultDisabled", NULL);
+
+  g_hash_table_insert (self->search_providers, g_strdup (app_id), GINT_TO_POINTER (default_disabled));
+}
+
+static void
+parse_search_providers_one_dir (CcApplicationsPanel *self,
+                                const char *system_dir)
+{
+  g_autofree char *providers_path = NULL;
+  g_autoptr(GFile) providers_location = NULL;
+  g_autoptr(GFileEnumerator) enumerator = NULL;
+  g_autoptr(GError) error = NULL;
+
+  providers_path = g_build_filename (system_dir, "gnome-shell", "search-providers", NULL);
+  providers_location = g_file_new_for_path (providers_path);
+
+  enumerator = g_file_enumerate_children (providers_location,
+                                          "standard::type,standard::name,standard::content-type",
+                                          G_FILE_QUERY_INFO_NONE,
+                                          NULL, &error);
+
+  if (error != NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND) &&
+          !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Error opening %s: %s - search provider configuration won't be possible",
+                   providers_path, error->message);
+      return;
+    }
+
+  while (TRUE)
+    {
+      GFile *provider = NULL;
+
+      if (!g_file_enumerator_iterate (enumerator, NULL, &provider, NULL, &error))
+        {
+          g_warning ("Error while reading %s: %s - search provider configuration won't be possible",
+                   providers_path, error->message);
+          return;
+        }
+
+      if (provider == NULL)
+        break;
+
+      add_one_provider (self, provider);
+    }
+}
+
+static void
+parse_search_providers (CcApplicationsPanel *self)
+{
+  const char * const *dirs;
+  int i;
+
+  self->search_providers = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+
+  dirs = g_get_system_data_dirs ();
+
+  for (i = 0; dirs[i]; i++)
+    parse_search_providers_one_dir (self, dirs[i]);
 }
 
 static void
@@ -1537,6 +1724,8 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, notification);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sound);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, no_sound);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, search);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, no_search);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, device_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_section);
@@ -1577,6 +1766,30 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->permission_list),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->integration_list),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->handler_list),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->usage_list),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->builtin_list),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->storage_list),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+
   provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
   gtk_css_provider_load_from_resource (GTK_CSS_PROVIDER (provider),
                                        "/org/gnome/control-center/applications/cc-applications-panel.css");
@@ -1593,13 +1806,12 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 
   self->location_settings = g_settings_new ("org.gnome.system.location");
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
+  self->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
 
   populate_applications (self);
 
   self->monitor = g_app_info_monitor_get ();
   self->monitor_id = g_signal_connect (self->monitor, "changed", G_CALLBACK (apps_changed), self);
-
-  prepare_content (self);
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                             G_DBUS_PROXY_FLAGS_NONE,
@@ -1612,4 +1824,5 @@ cc_applications_panel_init (CcApplicationsPanel *self)
                             self);
 
   parse_globs (self);
+  parse_search_providers (self);
 }
