@@ -56,6 +56,12 @@ struct _CcPrivacyPanel
   GtkDialog   *location_dialog;
   GtkLabel    *location_label;
   GtkSwitch   *location_services_switch;
+  GtkDialog   *camera_dialog;
+  GtkLabel    *camera_label;
+  GtkSwitch   *camera_switch;
+  GtkDialog   *microphone_dialog;
+  GtkLabel    *microphone_label;
+  GtkSwitch   *microphone_switch;
   GtkComboBox *lock_after_combo;
   GtkLabel    *lock_after_label;
   GtkComboBox *purge_after_combo;
@@ -869,6 +875,72 @@ add_location (CcPrivacyPanel *self)
 }
 
 static void
+update_camera_label (CcPrivacyPanel *self)
+{
+  if (g_settings_get_boolean (self->privacy_settings, "disable-camera"))
+    gtk_label_set_label (self->camera_label, C_("Camera status", "Off"));
+  else
+    gtk_label_set_label (self->camera_label, C_("Camera status", "On"));
+}
+
+static void
+add_camera (CcPrivacyPanel *self)
+{
+  self->camera_label = GTK_LABEL (gtk_label_new (""));
+  gtk_widget_show (GTK_WIDGET (self->camera_label));
+  update_camera_label (self);
+
+  add_row (self,
+           _("Camera"),
+           self->camera_dialog,
+           GTK_WIDGET (self->camera_label));
+
+  g_signal_connect (self->camera_dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+  g_settings_bind (self->privacy_settings, "disable-camera",
+                   self->camera_switch, "active",
+                   G_SETTINGS_BIND_INVERT_BOOLEAN);
+
+  g_signal_connect_object (self->privacy_settings, "changed::disable-camera",
+                           G_CALLBACK (update_camera_label), self,
+                           G_CONNECT_SWAPPED);
+}
+
+static void
+update_microphone_label (CcPrivacyPanel *self)
+{
+  if (g_settings_get_boolean (self->privacy_settings, "disable-microphone"))
+    gtk_label_set_label (self->microphone_label, C_("Microphone status", "Off"));
+  else
+    gtk_label_set_label (self->microphone_label, C_("Microphone status", "On"));
+}
+
+static void
+add_microphone (CcPrivacyPanel *self)
+{
+  self->microphone_label = GTK_LABEL (gtk_label_new (""));
+  gtk_widget_show (GTK_WIDGET (self->microphone_label));
+  update_microphone_label (self);
+
+  add_row (self,
+           _("Microphone"),
+           self->microphone_dialog,
+           GTK_WIDGET (self->microphone_label));
+
+  g_signal_connect (self->microphone_dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+  g_settings_bind (self->privacy_settings, "disable-microphone",
+                   self->microphone_switch, "active",
+                   G_SETTINGS_BIND_INVERT_BOOLEAN);
+
+  g_signal_connect_object (self->privacy_settings, "changed::disable-microphone",
+                           G_CALLBACK (update_microphone_label), self,
+                           G_CONNECT_SWAPPED);
+}
+
+static void
 retain_history_combo_changed_cb (GtkWidget      *widget,
                                  CcPrivacyPanel *self)
 {
@@ -1309,6 +1381,8 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
 
   add_screen_lock (self);
   add_location (self);
+  add_camera (self);
+  add_microphone (self);
   add_usage_history (self);
   add_trash_temp (self);
   add_software (self);
@@ -1345,6 +1419,10 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, location_apps_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, location_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, location_services_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, camera_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, camera_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, microphone_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, microphone_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, lock_after_combo);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, lock_after_label);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, purge_after_combo);
