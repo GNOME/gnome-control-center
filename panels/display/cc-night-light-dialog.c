@@ -25,7 +25,6 @@
 #include <math.h>
 
 #include "cc-night-light-dialog.h"
-#include "cc-night-light-widget.h"
 
 #include "shell/cc-object-storage.h"
 
@@ -34,7 +33,6 @@ struct _CcNightLightDialog {
 
   GtkWidget           *box_manual;
   GtkWidget           *infobar_disabled;
-  GtkWidget           *night_light_widget;
   GtkWidget           *spinbutton_from_hours;
   GtkWidget           *spinbutton_from_minutes;
   GtkWidget           *spinbutton_to_hours;
@@ -65,14 +63,6 @@ G_DEFINE_TYPE (CcNightLightDialog, cc_night_light_dialog, GTK_TYPE_DIALOG);
 #define CLOCK_SCHEMA     "org.gnome.desktop.interface"
 #define DISPLAY_SCHEMA   "org.gnome.settings-daemon.plugins.color"
 #define CLOCK_FORMAT_KEY "clock-format"
-
-static gdouble
-frac_day_from_dt (GDateTime *dt)
-{
-  return g_date_time_get_hour (dt) +
-          (gdouble) g_date_time_get_minute (dt) / 60.f +
-          (gdouble) g_date_time_get_second (dt) / 3600.f;
-}
 
 static void
 dialog_adjustments_set_frac_hours (CcNightLightDialog *self,
@@ -144,7 +134,6 @@ dialog_update_state (CcNightLightDialog *self)
   enabled = g_settings_get_boolean (self->settings_display, "night-light-enabled");
   automatic = g_settings_get_boolean (self->settings_display, "night-light-schedule-automatic");
 
-  gtk_widget_set_sensitive (self->night_light_widget, enabled);
   gtk_widget_set_sensitive (self->togglebutton_automatic, enabled);
   gtk_widget_set_sensitive (self->togglebutton_manual, enabled);
 
@@ -154,11 +143,6 @@ dialog_update_state (CcNightLightDialog *self)
   self->ignore_value_changed = FALSE;
 
   gtk_widget_set_sensitive (self->box_manual, enabled && !automatic);
-
-  /* show the sunset & sunrise icons when required */
-  cc_night_light_widget_set_mode (CC_NIGHT_LIGHT_WIDGET (self->night_light_widget),
-                                  automatic ? CC_NIGHT_LIGHT_WIDGET_MODE_AUTOMATIC :
-                                              CC_NIGHT_LIGHT_WIDGET_MODE_MANUAL);
 
   /* set from */
   if (automatic && self->proxy_color != NULL)
@@ -184,7 +168,6 @@ dialog_update_state (CcNightLightDialog *self)
                                      self->adjustment_from_hours,
                                      self->adjustment_from_minutes,
                                      self->stack_from);
-  cc_night_light_widget_set_from (CC_NIGHT_LIGHT_WIDGET (self->night_light_widget), value);
 
   /* set to */
   if (automatic && self->proxy_color != NULL)
@@ -211,10 +194,6 @@ dialog_update_state (CcNightLightDialog *self)
                                      self->adjustment_to_minutes,
                                      self->stack_to);
 
-  cc_night_light_widget_set_to (CC_NIGHT_LIGHT_WIDGET (self->night_light_widget), value);
-
-  /* set new time */
-  cc_night_light_widget_set_now (CC_NIGHT_LIGHT_WIDGET (self->night_light_widget), frac_day_from_dt (dt));
 }
 
 static gboolean
@@ -555,7 +534,6 @@ cc_night_light_dialog_class_init (CcNightLightDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, adjustment_to_minutes);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, box_manual);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, infobar_disabled);
-  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, night_light_widget);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, spinbutton_from_hours);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, spinbutton_from_minutes);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, spinbutton_to_hours);
@@ -576,7 +554,6 @@ cc_night_light_dialog_class_init (CcNightLightDialogClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, dialog_time_to_value_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, dialog_undisable_clicked_cb);
 
-  g_type_ensure (CC_TYPE_NIGHT_LIGHT_WIDGET);
 }
 
 static void
