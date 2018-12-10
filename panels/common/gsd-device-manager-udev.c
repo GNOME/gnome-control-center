@@ -125,20 +125,28 @@ add_device (GsdUdevDeviceManager *manager,
 
 static void
 remove_device (GsdUdevDeviceManager *manager,
-	       GUdevDevice	    *udev_device)
+	       GUdevDevice	    *removed_device)
 {
-	GsdDevice *device;
+	GsdDevice	*device;
+	GUdevDevice	*our_device;
+	GHashTableIter	iter;
+	gpointer	key, value;
 
-	device = g_hash_table_lookup (manager->devices, udev_device);
+	g_hash_table_iter_init (&iter, manager->devices);
+	while (g_hash_table_iter_next (&iter, &key, &value)) {
+		our_device = key;
+		device = value;
 
-	if (!device)
-		return;
+		if (g_strcmp0 (g_udev_device_get_sysfs_path (our_device),
+			       g_udev_device_get_sysfs_path (removed_device)) == 0) {
+			g_hash_table_steal (manager->devices, our_device);
+			g_signal_emit_by_name (manager, "device-removed", device);
 
-	g_hash_table_steal (manager->devices, udev_device);
-	g_signal_emit_by_name (manager, "device-removed", device);
-
-	g_object_unref (device);
-	g_object_unref (udev_device);
+			g_object_unref (device);
+			g_object_unref (our_device);
+			break;
+		}
+	}
 }
 
 static void
