@@ -25,7 +25,6 @@ sources = files(
   'cc-display-config-manager-dbus.c',
   'cc-display-config-manager.c',
   'cc-night-light-dialog.c',
-  'cc-night-light-widget.c',
 )
 
 resource_data = files(
