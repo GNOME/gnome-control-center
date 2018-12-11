@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.1 -->
+<interface>
+  <template class="CcUsagePanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="visible">true</property>
+        <property name="hscrollbar-policy">never</property>
+        <child>
+          <object class="HdyColumn">
+            <property name="visible">True</property>
+            <property name="maximum_width">600</property>
+            <property name="linear_growth_width">400</property>
+            <property name="margin_top">32</property>
+            <property name="margin_bottom">32</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
+
+            <!-- File History -->
+            <child>
+              <object class="GtkBox">
+                <property name="visible">true</property>
+                <property name="orientation">vertical</property>
+                <property name="hexpand">1</property>
+                <property name="spacing">12</property>
+
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">true</property>
+                    <property name="label" translatable="yes">File History</property>
+                    <property name="xalign">0</property>
+                    <attributes>
+                      <attribute name="weight" value="bold" />
+                    </attributes>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkLabel" id="usage_description_label">
+                    <property name="visible">true</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="label" translatable="yes">File history keeps a record of files that you have used. This information is shared between applications, and makes it easier to find files that you might want to use.</property>
+                    <property name="wrap">1</property>
+                    <property name="max-width-chars">50</property>
+                    <property name="xalign">0</property>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkListBox" id="usage_list_box">
+                    <property name="visible">true</property>
+                    <property name="can-focus">1</property>
+                    <property name="selection-mode">none</property>
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">true</property>
+                        <property name="title" translatable="yes">File H_istory</property>
+                        <property name="activatable-widget">recently_used_switch</property>
+                        <property name="use-underline">true</property>
+                        <child type="action">
+                          <object class="GtkSwitch" id="recently_used_switch">
+                            <property name="visible">true</property>
+                            <property name="halign">end</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">true</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">true</property>
+                            <property name="margin">12</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">true</property>
+                                <property name="label" translatable="yes">File _History Duration</property>
+                                <property name="use_underline">1</property>
+                                <property name="mnemonic_widget">retain_history_combo</property>
+                                <property name="sensitive" bind-source="retain_history_combo" bind-property="sensitive"/>
+                                <property name="xalign">0</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="expand">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBoxText" id="retain_history_combo">
+                                <property name="visible">true</property>
+                                <property name="valign">center</property>
+                                <property name="entry_text_column">0</property>
+                                <property name="model">retain_history_model</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="view"/>
+                      <class name="frame"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">true</property>
+                    <property name="hexpand">true</property>
+                    <property name="halign">end</property>
+                    <property name="homogeneous">true</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkButton" id="clear_recent_button">
+                        <property name="visible">true</property>
+                        <property name="valign">center</property>
+                        <property name="label" translatable="yes">_Clear History…</property>
+                        <property name="use_underline">1</property>
+                        <signal name="clicked" handler="clear_recent" swapped="yes"/>
+                        <style>
+                          <class name="destructive-action"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <!-- Trash & Temporary Files -->
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">true</property>
+                    <property name="margin-top">18</property>
+                    <property name="label" translatable="yes">Trash &amp; Temporary Files</property>
+                    <property name="xalign">0</property>
+                    <attributes>
+                      <attribute name="weight" value="bold" />
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">true</property>
+                    <property name="label" translatable="yes">Trash and temporary files can sometimes include personal or sensitive information. Automatically deleting them can help to protect privacy.</property>
+                    <property name="wrap">1</property>
+                    <property name="max-width-chars">50</property>
+                    <property name="xalign">0</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkListBox" id="trash_list_box">
+                    <property name="visible">true</property>
+                    <property name="can-focus">1</property>
+                    <property name="selection-mode">none</property>
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">true</property>
+                        <property name="title" translatable="yes">Automatically Delete _Trash Content</property>
+                        <property name="activatable-widget">purge_trash_switch</property>
+                        <property name="use-underline">true</property>
+                        <child type="action">
+                          <object class="GtkSwitch" id="purge_trash_switch">
+                            <property name="visible">true</property>
+                            <property name="halign">end</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">true</property>
+                        <property name="title" translatable="yes">Automatically Delete Temporary _Files</property>
+                        <property name="activatable-widget">purge_temp_switch</property>
+                        <property name="use-underline">true</property>
+                        <child type="action">
+                          <object class="GtkSwitch" id="purge_temp_switch">
+                            <property name="visible">true</property>
+                            <property name="halign">end</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">true</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">true</property>
+                            <property name="margin">12</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">true</property>
+                                <property name="label" translatable="yes">Automatically Delete _Period</property>
+                                <property name="use_underline">1</property>
+                                <property name="mnemonic_widget">purge_after_combo</property>
+                                <property name="sensitive" bind-source="purge_after_combo" bind-property="sensitive"/>
+                                <property name="xalign">0</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="expand">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBoxText" id="purge_after_combo">
+                                <property name="visible">true</property>
+                                <property name="valign">center</property>
+                                <property name="entry_text_column">0</property>
+                                <property name="model">purge_after_model</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="view"/>
+                      <class name="frame"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">true</property>
+                    <property name="hexpand">true</property>
+                    <property name="halign">end</property>
+                    <property name="homogeneous">true</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkButton" id="purge_trash_button">
+                        <property name="visible">true</property>
+                        <property name="halign">end</property>
+                        <property name="valign">center</property>
+                        <property name="label" translatable="yes">_Empty Trash…</property>
+                        <property name="use-underline">true</property>
+                        <style>
+                          <class name="destructive-action"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="purge_temp_button">
+                        <property name="visible">true</property>
+                        <property name="halign">end</property>
+                        <property name="valign">center</property>
+                        <property name="label" translatable="yes">_Delete Temporary Files…</property>
+                        <property name="use-underline">true</property>
+                          <style>
+                            <class name="destructive-action"/>
+                          </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+              </object>
+            </child>
+
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+
+  <object class="GtkListStore" id="purge_after_model">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="guint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes" context="purge_files" comments="Translators: Option for &quot;Purge After&quot; in &quot;Purge Trash &amp; Temporary Files&quot; dialog.">1 hour</col>
+        <col id="1">0</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="purge_files" comments="Translators: Option for &quot;Purge After&quot; in &quot;Purge Trash &amp; Temporary Files&quot; dialog.">1 day</col>
+        <col id="1">1</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="purge_files" comments="Translators: Option for &quot;Purge After&quot; in &quot;Purge Trash &amp; Temporary Files&quot; dialog.">2 days</col>
+        <col id="1">2</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="purge_files" comments="Translators: Option for &quot;Purge After&quot; in &quot;Purge Trash &amp; Temporary Files&quot; dialog.">3 days</col>
+        <col id="1">3</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="purge_files" comments="Translators: Option for &quot;Purge After&quot; in &quot;Purge Trash &amp; Temporary Files&quot; dialog.">4 days</col>
+        <col id="1">4</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="purge_files" comments="Translators: Option for &quot;Purge After&quot; in &quot;Purge Trash &amp; Temporary Files&quot; dialog.">5 days</col>
+        <col id="1">5</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="purge_files" comments="Translators: Option for &quot;Purge After&quot; in &quot;Purge Trash &amp; Temporary Files&quot; dialog.">6 days</col>
+        <col id="1">6</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="purge_files" comments="Translators: Option for &quot;Purge After&quot; in &quot;Purge Trash &amp; Temporary Files&quot; dialog.">7 days</col>
+        <col id="1">7</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="purge_files" comments="Translators: Option for &quot;Purge After&quot; in &quot;Purge Trash &amp; Temporary Files&quot; dialog.">14 days</col>
+        <col id="1">14</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="purge_files" comments="Translators: Option for &quot;Purge After&quot; in &quot;Purge Trash &amp; Temporary Files&quot; dialog.">30 days</col>
+        <col id="1">30</col>
+      </row>
+    </data>
+  </object>
+
+  <object class="GtkListStore" id="retain_history_model">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes" context="retain_history" comments="Translators: Option for &quot;Retain History&quot; in &quot;Usage &amp; History&quot; dialog.">1 day</col>
+        <col id="1">1</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="retain_history" comments="Translators: Option for &quot;Retain History&quot; in &quot;Usage &amp; History&quot; dialog.">7 days</col>
+        <col id="1">7</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="retain_history" comments="Translators: Option for &quot;Retain History&quot; in &quot;Usage &amp; History&quot; dialog.">30 days</col>
+        <col id="1">30</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="retain_history" comments="Translators: Option for &quot;Retain History&quot; in &quot;Usage &amp; History&quot; dialog.">Forever</col>
+        <col id="1">-1</col>
+      </row>
+    </data>
+  </object>
+
+</interface>
