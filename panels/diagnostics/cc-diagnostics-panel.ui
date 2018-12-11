@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.1 -->
+<interface>
+  <requires lib="gtk+" version="3.14"/>
+  <template class="CcDiagnosticsPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="visible">1</property>
+        <property name="hscrollbar-policy">never</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">1</property>
+            <!-- Stub boxes to make the content cover 1/3 of the screen -->
+            <child>
+              <object class="GtkBox">
+                <property name="visible">1</property>
+                <property name="hexpand">1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">1</property>
+                <property name="hexpand">1</property>
+              </object>
+              <packing>
+                <property name="pack-type">end</property>
+              </packing>
+            </child>
+            <!-- Content -->
+            <child>
+              <object class="GtkBox">
+                <property name="visible">1</property>
+                <property name="orientation">vertical</property>
+                <property name="margin">32</property>
+                <property name="hexpand">1</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">1</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="label" translatable="yes">Problem Reporting</property>
+                    <property name="wrap">1</property>
+                    <property name="max-width-chars">50</property>
+                    <property name="xalign">0</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="diagnostics_explanation_label">
+                    <property name="visible">1</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="label" translatable="yes">Sending reports of technical problems help us improve this operating system.</property>
+                    <property name="wrap">1</property>
+                    <property name="max-width-chars">50</property>
+                    <property name="xalign">0</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="diagnostics_learn_more_label">
+                    <property name="visible">1</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="label" translatable="yes">Reports are sent anonymously and are scrubbed of personal data.</property>
+                    <property name="use-markup">1</property>
+                    <property name="wrap">1</property>
+                    <property name="max-width-chars">50</property>
+                    <property name="xalign">0</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkListBox" id="diagnostics_list_box">
+                    <property name="visible">1</property>
+                    <property name="can-focus">1</property>
+                    <property name="selection-mode">none</property>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">1</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">1</property>
+                        <property name="margin_start">12</property>
+                        <property name="margin_end">12</property>
+                        <property name="margin_top">12</property>
+                        <property name="margin_bottom">12</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">1</property>
+                                <property name="label" translatable="yes">_Automatic Problem Reporting</property>
+                                <property name="use_underline">1</property>
+                                <property name="mnemonic_widget">abrt_switch</property>
+                                <property name="xalign">0</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="expand">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="abrt_switch">
+                                <property name="visible">1</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="view"/>
+                      <class name="frame"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
