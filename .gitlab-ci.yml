@@ -6,6 +6,9 @@ stages:
   - review
   - deploy
 
+before_script:
+  - dnf install -y https://copr-be.cloud.fedoraproject.org/results/jadahl/mutter-ci/fedora-29-x86_64/00836095-gsettings-desktop-schemas/gsettings-desktop-schemas-3.30.1-1.20181206git918efdd69be53.fc29.x86_64.rpm https://copr-be.cloud.fedoraproject.org/results/jadahl/mutter-ci/fedora-29-x86_64/00836095-gsettings-desktop-schemas/gsettings-desktop-schemas-devel-3.30.1-1.20181206git918efdd69be53.fc29.x86_64.rpm
+
 .Log files: &log_files  [./*.log, _build/meson-logs/]
 
 .Build logs: &save_build_logs
