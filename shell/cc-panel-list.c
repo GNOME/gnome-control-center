@@ -397,7 +397,6 @@ static const gchar * const panel_order[] = {
   "region",
   "universal-access",
   "online-accounts",
-  "privacy",
   "applications",
   "sharing",
   "sound",

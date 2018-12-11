@@ -18,7 +18,6 @@ panels = [
   'online-accounts',
   'power',
   'printers',
-  'privacy',
   'region',
   'search',
   'sharing',
