@@ -206,6 +206,13 @@ flatpak:
     - gnome-3-.*
     - master@GNOME/gnome-control-center
 
+##
+# Review
+#
+# Stage: review
+#
+# Starts the Flatpak review process.
+##
 review:
   stage: review
   dependencies:
@@ -229,6 +236,13 @@ review:
     - gnome-3-.*
     - master@GNOME/gnome-control-center
 
+##
+# Stop Review
+#
+# Stage: review
+#
+# Stops the Flatpak review process.
+##
 stop_review:
   stage: review
   script:
