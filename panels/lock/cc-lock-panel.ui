@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.1 -->
+<interface>
+  <requires lib="gtk+" version="3.14"/>
+  <object class="GtkListStore" id="lock_after_model">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">Screen Turns Off</col>
+        <col id="1">0</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">30 seconds</col>
+        <col id="1">30</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">1 minute</col>
+        <col id="1">60</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">2 minutes</col>
+        <col id="1">120</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">3 minutes</col>
+        <col id="1">180</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">5 minutes</col>
+        <col id="1">300</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">30 minutes</col>
+        <col id="1">1800</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">1 hour</col>
+        <col id="1">3600</col>
+      </row>
+    </data>
+  </object>
+
+  <template class="CcLockPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="visible">1</property>
+        <property name="hscrollbar-policy">never</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">1</property>
+            <!-- Stub boxes to make the content cover 1/3 of the screen -->
+            <child>
+              <object class="GtkBox">
+                <property name="visible">1</property>
+                <property name="hexpand">1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">1</property>
+                <property name="hexpand">1</property>
+              </object>
+              <packing>
+                <property name="pack-type">end</property>
+              </packing>
+            </child>
+            <!-- Content -->
+            <child>
+              <object class="GtkBox">
+                <property name="visible">1</property>
+                <property name="orientation">vertical</property>
+                <property name="margin">32</property>
+                <property name="hexpand">1</property>
+                <child>
+                  <object class="GtkLabel" id="lock_description_label">
+                    <property name="visible">1</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="label" translatable="yes">The Screen Lock protects your privacy when you are away.</property>
+                    <property name="wrap">1</property>
+                    <property name="max-width-chars">50</property>
+                    <property name="xalign">0</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkListBox" id="lock_list_box">
+                    <property name="visible">1</property>
+                    <property name="can-focus">1</property>
+                    <property name="selection-mode">none</property>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">1</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">1</property>
+                        <property name="margin_start">12</property>
+                        <property name="margin_end">12</property>
+                        <property name="margin_top">12</property>
+                        <property name="margin_bottom">12</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">1</property>
+                                <property name="label" translatable="yes">Automatic Screen _Lock</property>
+                                <property name="use_underline">1</property>
+                                <property name="mnemonic_widget">automatic_screen_lock_switch</property>
+                                <property name="xalign">0</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="expand">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="automatic_screen_lock_switch">
+                                <property name="visible">1</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">1</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">1</property>
+                        <property name="margin_start">12</property>
+                        <property name="margin_end">12</property>
+                        <property name="margin_top">12</property>
+                        <property name="margin_bottom">12</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">1</property>
+                                <property name="label" translatable="yes">Lock screen _after blank for</property>
+                                <property name="use_underline">1</property>
+                                <property name="mnemonic_widget">lock_after_combo</property>
+                                <property name="sensitive" bind-source="lock_after_combo" bind-property="sensitive"/>
+                                <property name="xalign">0</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="expand">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBoxText" id="lock_after_combo">
+                                <property name="visible">1</property>
+                                <property name="valign">center</property>
+                                <property name="entry_text_column">0</property>
+                                <property name="model">lock_after_model</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">1</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">1</property>
+                        <property name="margin_start">12</property>
+                        <property name="margin_end">12</property>
+                        <property name="margin_top">12</property>
+                        <property name="margin_bottom">12</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">1</property>
+                                <property name="use_underline">1</property>
+                                <property name="mnemonic_widget">show_notifications_switch</property>
+                                <property name="label" translatable="yes">Show _Notifications</property>
+                                <property name="xalign">0</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="expand">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="show_notifications_switch">
+                                <property name="visible">1</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="view"/>
+                      <class name="frame"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
