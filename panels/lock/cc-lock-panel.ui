@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.1 -->
+<interface>
+  <template class="CcLockPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="visible">1</property>
+        <property name="hscrollbar-policy">never</property>
+        <child>
+          <object class="HdyColumn">
+            <property name="visible">True</property>
+            <property name="maximum_width">600</property>
+            <property name="linear_growth_width">400</property>
+            <property name="margin_top">32</property>
+            <property name="margin_bottom">32</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
+
+            <child>
+              <object class="GtkBox">
+                <property name="visible">1</property>
+                <property name="orientation">vertical</property>
+                <property name="hexpand">1</property>
+                <child>
+                  <object class="GtkLabel" id="lock_description_label">
+                    <property name="visible">1</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="label" translatable="yes">Automatically locking the screen prevents others from access the computer while you're away.</property>
+                    <property name="wrap">1</property>
+                    <property name="max-width-chars">50</property>
+                    <property name="xalign">0</property>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkListBox" id="lock_list_box">
+                    <property name="visible">1</property>
+                    <property name="can-focus">1</property>
+                    <property name="selection-mode">none</property>
+
+                    <!-- Blank Screen Delay row -->
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">true</property>
+                        <property name="title" translatable="yes">Blank Screen Delay</property>
+                        <property name="subtitle" translatable="yes">Period of inactivity after which the screen will go blank.</property>
+                        <property name="activatable-widget">blank_screen_combo</property>
+                        <property name="sensitive" bind-source="blank_screen_combo" bind-property="sensitive"/>
+                        <property name="use-underline">true</property>
+                        <child type="action">
+                          <object class="GtkComboBoxText" id="blank_screen_combo">
+                            <property name="visible">1</property>
+                            <property name="valign">center</property>
+                            <property name="entry_text_column">0</property>
+                            <property name="model">blank_screen_model</property>
+                            <signal name="changed" handler="on_blank_screen_delay_changed_cb" object="CcLockPanel" swapped="no" />
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <!-- Automatic Screen Lock row -->
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">true</property>
+                        <property name="title" translatable="yes">Automatic Screen _Lock</property>
+                        <property name="activatable-widget">automatic_screen_lock_switch</property>
+                        <property name="use-underline">true</property>
+                        <child type="action">
+                          <object class="GtkSwitch" id="automatic_screen_lock_switch">
+                            <property name="visible">1</property>
+                            <property name="halign">end</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <!-- Automatic Screen Lock Delay row -->
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">true</property>
+                        <property name="title" translatable="yes">Automatic _Screen Lock Delay</property>
+                        <property name="subtitle" translatable="yes">Period after the screen blanks when the screen is automatically locked.</property>
+                        <property name="activatable-widget">lock_after_combo</property>
+                        <property name="sensitive" bind-source="lock_after_combo" bind-property="sensitive"/>
+                        <property name="use-underline">true</property>
+                        <child type="action">
+                          <object class="GtkComboBoxText" id="lock_after_combo">
+                            <property name="visible">1</property>
+                            <property name="valign">center</property>
+                            <property name="entry_text_column">0</property>
+                            <property name="model">lock_after_model</property>
+                            <signal name="changed" handler="on_lock_combo_changed_cb" object="CcLockPanel" swapped="no" />
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <!-- Show Notifications row -->
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">true</property>
+                        <property name="title" translatable="yes">Show _Notifications on Lock Screen</property>
+                        <property name="activatable-widget">show_notifications_switch</property>
+                        <property name="use-underline">true</property>
+                        <child type="action">
+                          <object class="GtkSwitch" id="show_notifications_switch">
+                            <property name="visible">1</property>
+                            <property name="halign">end</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="view"/>
+                      <class name="frame"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="blank_screen_combo" />
+      <widget name="lock_after_combo" />
+    </widgets>
+  </object>
+
+  <object class="GtkListStore" id="lock_after_model">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">Screen Turns Off</col>
+        <col id="1">0</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">30 seconds</col>
+        <col id="1">30</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">1 minute</col>
+        <col id="1">60</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">2 minutes</col>
+        <col id="1">120</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">3 minutes</col>
+        <col id="1">180</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">5 minutes</col>
+        <col id="1">300</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">30 minutes</col>
+        <col id="1">1800</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="lock_screen" comments="Translators: Option for &quot;Lock screen after blank for&quot; in &quot;Screen Lock&quot; dialog.">1 hour</col>
+        <col id="1">3600</col>
+      </row>
+    </data>
+  </object>
+
+  <object class="GtkListStore" id="blank_screen_model">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">1 minute</col>
+        <col id="1">60</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">2 minutes</col>
+        <col id="1">120</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">3 minutes</col>
+        <col id="1">180</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">4 minutes</col>
+        <col id="1">240</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">5 minutes</col>
+        <col id="1">300</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">8 minutes</col>
+        <col id="1">480</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">10 minutes</col>
+        <col id="1">600</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">12 minutes</col>
+        <col id="1">720</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">15 minutes</col>
+        <col id="1">900</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">Never</col>
+        <col id="1">0</col>
+      </row>
+    </data>
+  </object>
+</interface>
