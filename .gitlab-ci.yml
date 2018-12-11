@@ -251,6 +251,9 @@ stop_review:
   environment:
     name: review/$CI_COMMIT_REF_NAME
     action: stop
+  except:
+    variables:
+      - $CI_PIPELINE_SOURCE == "schedule"
 
 # Runs the sanitizers [address, thread, undefined, and memory].
 .sanitizer: &sanitizer
