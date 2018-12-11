@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.1 -->
+<interface>
+  <requires lib="gtk+" version="3.14"/>
+  <object class="GtkListStore" id="retain_history_model">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes" context="retain_history" comments="Translators: Option for &quot;Retain History&quot; in &quot;Usage &amp; History&quot; dialog.">1 day</col>
+        <col id="1">1</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="retain_history" comments="Translators: Option for &quot;Retain History&quot; in &quot;Usage &amp; History&quot; dialog.">7 days</col>
+        <col id="1">7</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="retain_history" comments="Translators: Option for &quot;Retain History&quot; in &quot;Usage &amp; History&quot; dialog.">30 days</col>
+        <col id="1">30</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="retain_history" comments="Translators: Option for &quot;Retain History&quot; in &quot;Usage &amp; History&quot; dialog.">Forever</col>
+        <col id="1">-1</col>
+      </row>
+    </data>
+  </object>
+  <template class="CcUsagePanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="visible">1</property>
+        <property name="hscrollbar-policy">never</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">1</property>
+            <!-- Stub boxes to make the content cover 1/3 of the screen -->
+            <child>
+              <object class="GtkBox">
+                <property name="visible">1</property>
+                <property name="hexpand">1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">1</property>
+                <property name="hexpand">1</property>
+              </object>
+              <packing>
+                <property name="pack-type">end</property>
+              </packing>
+            </child>
+            <!-- Content -->
+            <child>
+              <object class="GtkBox">
+                <property name="visible">1</property>
+                <property name="orientation">vertical</property>
+                <property name="margin">32</property>
+                <property name="hexpand">1</property>
+                <child>
+                  <object class="GtkLabel" id="usage_description_label">
+                    <property name="visible">1</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="label" translatable="yes">Remembering your history of recently used applications and files makes things easier to find again. These items are never shared over the network.</property>
+                    <property name="wrap">1</property>
+                    <property name="max-width-chars">50</property>
+                    <property name="xalign">0</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkListBox" id="usage_list_box">
+                    <property name="visible">1</property>
+                    <property name="can-focus">1</property>
+                    <property name="selection-mode">none</property>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">1</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">1</property>
+                        <property name="margin_start">12</property>
+                        <property name="margin_end">12</property>
+                        <property name="margin_top">12</property>
+                        <property name="margin_bottom">12</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">1</property>
+                                <property name="label" translatable="yes">_Recently Used</property>
+                                <property name="use_underline">1</property>
+                                <property name="mnemonic_widget">recently_used_switch</property>
+                                <property name="xalign">0</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="expand">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="recently_used_switch">
+                                <property name="visible">1</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">1</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">1</property>
+                        <property name="margin_start">12</property>
+                        <property name="margin_end">12</property>
+                        <property name="margin_top">12</property>
+                        <property name="margin_bottom">12</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">1</property>
+                                <property name="label" translatable="yes">Retain _History</property>
+                                <property name="use_underline">1</property>
+                                <property name="mnemonic_widget">retain_history_combo</property>
+                                <property name="sensitive" bind-source="retain_history_combo" bind-property="sensitive"/>
+                                <property name="xalign">0</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="expand">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBoxText" id="retain_history_combo">
+                                <property name="visible">1</property>
+                                <property name="valign">center</property>
+                                <property name="entry_text_column">0</property>
+                                <property name="model">retain_history_model</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">1</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">1</property>
+                        <property name="margin_start">12</property>
+                        <property name="margin_end">12</property>
+                        <property name="margin_top">12</property>
+                        <property name="margin_bottom">12</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">1</property>
+                                <property name="label" translatable="yes">History</property>
+                                <property name="xalign">0</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="expand">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="clear_recent_button">
+                                <property name="visible">1</property>
+                                <property name="valign">center</property>
+                                <property name="label" translatable="yes">_Clear Recent History</property>
+                                <property name="use_underline">1</property>
+                                <signal name="clicked" handler="clear_recent" swapped="yes"/>
+                                <style>
+                                  <class name="destructive-action"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="view"/>
+                      <class name="frame"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
