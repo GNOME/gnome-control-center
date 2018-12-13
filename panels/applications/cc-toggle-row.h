@@ -27,9 +27,11 @@ G_BEGIN_DECLS
 #define CC_TYPE_TOGGLE_ROW (cc_toggle_row_get_type())
 G_DECLARE_FINAL_TYPE (CcToggleRow, cc_toggle_row, CC, TOGGLE_ROW, GtkListBoxRow)
 
-CcToggleRow *cc_toggle_row_new (void);
+CcToggleRow* cc_toggle_row_new         (void);
+
 void         cc_toggle_row_set_allowed (CcToggleRow *row,
                                         gboolean     allowed);
+
 gboolean     cc_toggle_row_get_allowed (CcToggleRow *row);
 
 G_END_DECLS

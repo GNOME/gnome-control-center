@@ -32,29 +32,32 @@
 
 #include "utils.h"
 
-static int
-ftw_remove_cb (const char *path, const struct stat *sb, int typeflags, struct FTW *ftwbuf)
+static gint
+ftw_remove_cb (const gchar       *path,
+               const struct stat *sb,
+               gint               typeflags,
+               struct FTW        *ftwbuf)
 {
   remove (path);
   return 0;
 }
 
 static void
-file_remove_thread_func (GTask *task,
-                         gpointer source_object,
-                         gpointer task_data,
+file_remove_thread_func (GTask       *task,
+                         gpointer      source_object,
+                         gpointer      task_data,
                          GCancellable *cancellable)
 {
   GFile *file = source_object;
-  g_autofree char *path = g_file_get_path (file);
+  g_autofree gchar *path = g_file_get_path (file);
 
   nftw (path, ftw_remove_cb, 20, FTW_DEPTH);
 }
 
 void
-file_remove_async (GFile *file,
-                   GAsyncReadyCallback callback,
-                   gpointer data)
+file_remove_async (GFile               *file,
+                   GAsyncReadyCallback  callback,
+                   gpointer             data)
 {
   g_autoptr(GTask) task = g_task_new (file, NULL, callback, data);
   g_task_run_in_thread (task, file_remove_thread_func);
@@ -62,8 +65,11 @@ file_remove_async (GFile *file,
 
 static GPrivate size_key = G_PRIVATE_INIT (g_free);
 
-static int
-ftw_size_cb (const char *path, const struct stat *sb, int typeflags, struct FTW *ftwbuf)
+static gint
+ftw_size_cb (const gchar       *path,
+             const struct stat *sb,
+             gint               typeflags,
+             struct FTW        *ftwbuf)
 {
   guint64 *size = (guint64*)g_private_get (&size_key);
   if (typeflags == FTW_F)
@@ -72,13 +78,13 @@ ftw_size_cb (const char *path, const struct stat *sb, int typeflags, struct FTW 
 }
 
 static void
-file_size_thread_func (GTask *task,
-                       gpointer source_object,
-                       gpointer task_data,
+file_size_thread_func (GTask        *task,
+                       gpointer      source_object,
+                       gpointer      task_data,
                        GCancellable *cancellable)
 {
   GFile *file = source_object;
-  g_autofree char *path = g_file_get_path (file);
+  g_autofree gchar *path = g_file_get_path (file);
   guint64 *total;
 
   g_private_replace (&size_key, g_new0 (guint64, 1));
@@ -92,9 +98,9 @@ file_size_thread_func (GTask *task,
 }
 
 void
-file_size_async (GFile *file,
-                 GAsyncReadyCallback callback,
-                 gpointer data)
+file_size_async (GFile               *file,
+                 GAsyncReadyCallback  callback,
+                 gpointer             data)
 {
   g_autoptr(GTask) task = g_task_new (file, NULL, callback, data);
   g_task_run_in_thread (task, file_size_thread_func);
@@ -115,12 +121,12 @@ container_remove_all (GtkContainer *container)
 }
 
 FlatpakInstalledRef *
-find_flatpak_ref (const char *app_id)
+find_flatpak_ref (const gchar *app_id)
 {
   g_autoptr(FlatpakInstallation) inst = NULL;
   g_autoptr(GPtrArray) array = NULL;
   FlatpakInstalledRef *ref;
-  int i;
+  gint i;
 
   inst = flatpak_installation_new_user (NULL, NULL);
   ref = flatpak_installation_get_current_installed_app (inst, app_id, NULL, NULL);
@@ -140,7 +146,7 @@ find_flatpak_ref (const char *app_id)
 }
 
 guint64
-get_flatpak_app_size (const char *app_id)
+get_flatpak_app_size (const gchar *app_id)
 {
   g_autoptr(FlatpakInstalledRef) ref = NULL;
 
@@ -154,7 +160,7 @@ get_flatpak_app_size (const char *app_id)
 char *
 get_app_id (GAppInfo *info)
 {
-  char *app_id = g_strdup (g_app_info_get_id (info));
+  gchar *app_id = g_strdup (g_app_info_get_id (info));
 
   if (g_str_has_suffix (app_id, ".desktop"))
     app_id[strlen (app_id) - strlen (".desktop")] = '\0';

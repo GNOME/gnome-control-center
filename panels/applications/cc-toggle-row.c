@@ -24,7 +24,8 @@
 #include "cc-toggle-row.h"
 #include "cc-applications-resources.h"
 
-enum {
+enum
+{
   PROP_ZERO,
   PROP_TITLE,
   PROP_ALLOWED
@@ -34,18 +35,16 @@ struct _CcToggleRow
 {
   GtkListBoxRow parent;
 
-  GtkWidget *title;
-  GtkWidget *toggle;
+  GtkWidget    *title;
+  GtkWidget    *toggle;
 };
 
 G_DEFINE_TYPE (CcToggleRow, cc_toggle_row, GTK_TYPE_LIST_BOX_ROW)
 
 static void
-cc_toggle_row_finalize (GObject *object)
+changed_cb (CcToggleRow *row)
 {
-  //CcToggleRow *row = CC_TOGGLE_ROW (object);
-
-  G_OBJECT_CLASS (cc_toggle_row_parent_class)->finalize (object);
+  g_object_notify (G_OBJECT (row), "allowed");
 }
 
 static void
@@ -93,18 +92,11 @@ cc_toggle_row_set_property (GObject      *object,
 }
 
 static void
-changed_cb (CcToggleRow *row)
-{
-  g_object_notify (G_OBJECT (row), "allowed");
-}
-
-static void
 cc_toggle_row_class_init (CcToggleRowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->finalize = cc_toggle_row_finalize;
   object_class->get_property = cc_toggle_row_get_property;
   object_class->set_property = cc_toggle_row_set_property;
 

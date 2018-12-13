@@ -24,6 +24,6 @@
 
 G_BEGIN_DECLS
 
-GHashTable *parse_search_providers (void);
+GHashTable* parse_search_providers (void);
 
 G_END_DECLS
