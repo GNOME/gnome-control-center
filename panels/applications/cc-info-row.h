@@ -27,9 +27,11 @@ G_BEGIN_DECLS
 #define CC_TYPE_INFO_ROW (cc_info_row_get_type())
 G_DECLARE_FINAL_TYPE (CcInfoRow, cc_info_row, CC, INFO_ROW, GtkListBoxRow)
 
-CcInfoRow *cc_info_row_new (void);
+CcInfoRow* cc_info_row_new          (void);
+
 void       cc_info_row_set_expanded (CcInfoRow *row,
                                      gboolean expanded);
+
 gboolean   cc_info_row_get_expanded (CcInfoRow *row);
 
 G_END_DECLS

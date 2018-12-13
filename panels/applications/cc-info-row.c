@@ -24,7 +24,8 @@
 #include "cc-info-row.h"
 #include "cc-applications-resources.h"
 
-enum {
+enum
+{
   PROP_ZERO,
   PROP_TITLE,
   PROP_USE_MARKUP,
@@ -38,23 +39,15 @@ struct _CcInfoRow
 {
   GtkListBoxRow parent;
 
-  GtkWidget *title;
-  GtkWidget *info;
-  GtkWidget *expander;
+  GtkWidget    *title;
+  GtkWidget    *info;
+  GtkWidget    *expander;
 
-  gboolean expanded;
-  gboolean link;
+  gboolean      expanded;
+  gboolean      link;
 };
 
 G_DEFINE_TYPE (CcInfoRow, cc_info_row, GTK_TYPE_LIST_BOX_ROW)
-
-static void
-cc_info_row_finalize (GObject *object)
-{
-  //CcInfoRow *row = CC_INFO_ROW (object);
-
-  G_OBJECT_CLASS (cc_info_row_parent_class)->finalize (object);
-}
 
 static void
 cc_info_row_get_property (GObject    *object,
@@ -114,23 +107,29 @@ cc_info_row_set_property (GObject      *object,
     case PROP_TITLE:
       gtk_label_set_label (GTK_LABEL (row->title), g_value_get_string (value));
       break;
+
     case PROP_INFO:
       gtk_label_set_label (GTK_LABEL (row->info), g_value_get_string (value));
       break;
+
     case PROP_HAS_EXPANDER:
       gtk_widget_set_visible (row->expander, g_value_get_boolean (value));
       gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), g_value_get_boolean (value));
       break;
+
     case PROP_USE_MARKUP:
       gtk_label_set_use_markup (GTK_LABEL (row->title), g_value_get_boolean (value));
       break;
+
     case PROP_IS_LINK:
       row->link = g_value_get_boolean (value);
       update_expander (row);
       break;
+
     case PROP_EXPANDED:
       cc_info_row_set_expanded (row, g_value_get_boolean (value));
       break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -143,7 +142,6 @@ cc_info_row_class_init (CcInfoRowClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->finalize = cc_info_row_finalize;
   object_class->get_property = cc_info_row_get_property;
   object_class->set_property = cc_info_row_set_property;
 
@@ -204,7 +202,7 @@ cc_info_row_get_expanded (CcInfoRow *row)
 
 void
 cc_info_row_set_expanded (CcInfoRow *row,
-                          gboolean expanded)
+                          gboolean   expanded)
 {
   if (row->expanded == expanded)
     return;

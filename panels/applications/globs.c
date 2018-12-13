@@ -27,8 +27,8 @@ GHashTable *
 parse_globs (void)
 {
   GHashTable *globs;
-  const char * const *dirs;
-  int i;
+  const gchar * const *dirs;
+  gint i;
 
   globs = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
@@ -36,8 +36,8 @@ parse_globs (void)
 
   for (i = 0; dirs[i]; i++)
     {
-      g_autofree char *file = g_build_filename (dirs[i], "mime", "globs", NULL);
-      g_autofree char *contents = NULL;
+      g_autofree gchar *file = g_build_filename (dirs[i], "mime", "globs", NULL);
+      g_autofree gchar *contents = NULL;
 
       if (g_file_get_contents (file, &contents, NULL, NULL))
         {
