@@ -347,6 +347,7 @@ cc_tablet_tool_map_add_relation (CcTabletToolMap *map,
 				 CcWacomTool     *tool)
 {
 	gboolean tablets_changed = FALSE, tools_changed = FALSE;
+	gboolean new_tool_without_serial = FALSE;
 	gchar *tool_key, *device_key;
 	GError *error = NULL;
 	guint64 serial, id;
@@ -367,6 +368,7 @@ cc_tablet_tool_map_add_relation (CcTabletToolMap *map,
 			g_hash_table_insert (map->no_serial_tool_map,
 					     g_strdup (device_key),
 					     g_object_ref (tool));
+			new_tool_without_serial = TRUE;
 		}
 	} else {
 		tool_key = get_tool_key (serial);
@@ -383,12 +385,15 @@ cc_tablet_tool_map_add_relation (CcTabletToolMap *map,
 	styli = g_hash_table_lookup (map->tablet_map, device_key);
 
 	if (!g_list_find (styli, tool)) {
-		tablets_changed = TRUE;
-		keyfile_add_device_stylus (map, device_key, tool_key);
 		styli = g_list_prepend (styli, tool);
 		g_hash_table_replace (map->tablet_map,
 				      g_strdup (device_key),
 				      g_list_copy (styli));
+
+		if (serial || new_tool_without_serial) {
+			tablets_changed = TRUE;
+			keyfile_add_device_stylus (map, device_key, tool_key);
+		}
 	}
 
 	g_free (device_key);
