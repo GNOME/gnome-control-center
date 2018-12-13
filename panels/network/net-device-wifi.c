@@ -165,54 +165,56 @@ panel_get_strongest_unique_aps (const GPtrArray *aps)
         /* we will have multiple entries for typical hotspots, just
          * filter to the one with the strongest signal */
         aps_unique = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
-        if (aps != NULL)
-                for (i = 0; i < aps->len; i++) {
-                        ap = NM_ACCESS_POINT (g_ptr_array_index (aps, i));
+        if (aps == NULL)
+                return aps_unique;
 
-                        /* Hidden SSIDs don't get shown in the list */
-                        ssid = nm_access_point_get_ssid (ap);
-                        if (!ssid)
-                                continue;
+        for (i = 0; i < aps->len; i++) {
+                ap = NM_ACCESS_POINT (g_ptr_array_index (aps, i));
 
-                        add_ap = TRUE;
+                /* Hidden SSIDs don't get shown in the list */
+                ssid = nm_access_point_get_ssid (ap);
+                if (!ssid)
+                        continue;
 
-                        /* get already added list */
-                        for (j=0; j<aps_unique->len; j++) {
-                                ap_tmp = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, j));
-                                ssid_tmp = nm_access_point_get_ssid (ap_tmp);
-                                g_assert (ssid_tmp);
+                add_ap = TRUE;
 
-                                /* is this the same type and data? */
-                                if (nm_utils_same_ssid (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid),
-                                                        g_bytes_get_data (ssid_tmp, NULL), g_bytes_get_size (ssid_tmp),
-                                                        TRUE)) {
+                /* get already added list */
+                for (j=0; j<aps_unique->len; j++) {
+                        ap_tmp = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, j));
+                        ssid_tmp = nm_access_point_get_ssid (ap_tmp);
+                        g_assert (ssid_tmp);
 
-                                        g_debug ("found duplicate: %s",
+                        /* is this the same type and data? */
+                        if (nm_utils_same_ssid (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid),
+                                                g_bytes_get_data (ssid_tmp, NULL), g_bytes_get_size (ssid_tmp),
+                                                TRUE)) {
+
+                                g_debug ("found duplicate: %s",
+                                         nm_utils_escape_ssid (g_bytes_get_data (ssid_tmp, NULL),
+                                                               g_bytes_get_size (ssid_tmp)));
+
+                                /* the new access point is stronger */
+                                if (nm_access_point_get_strength (ap) >
+                                    nm_access_point_get_strength (ap_tmp)) {
+                                        g_debug ("removing %s",
                                                  nm_utils_escape_ssid (g_bytes_get_data (ssid_tmp, NULL),
                                                                        g_bytes_get_size (ssid_tmp)));
-
-                                        /* the new access point is stronger */
-                                        if (nm_access_point_get_strength (ap) >
-                                            nm_access_point_get_strength (ap_tmp)) {
-                                                g_debug ("removing %s",
-                                                         nm_utils_escape_ssid (g_bytes_get_data (ssid_tmp, NULL),
-                                                                               g_bytes_get_size (ssid_tmp)));
-                                                g_ptr_array_remove (aps_unique, ap_tmp);
-                                                add_ap = TRUE;
-                                        } else {
-                                                add_ap = FALSE;
-                                        }
-
-                                        break;
+                                        g_ptr_array_remove (aps_unique, ap_tmp);
+                                        add_ap = TRUE;
+                                } else {
+                                        add_ap = FALSE;
                                 }
-                        }
-                        if (add_ap) {
-                                g_debug ("adding %s",
-                                         nm_utils_escape_ssid (g_bytes_get_data (ssid, NULL),
-                                                               g_bytes_get_size (ssid)));
-                                g_ptr_array_add (aps_unique, g_object_ref (ap));
+
+                                break;
                         }
                 }
+                if (add_ap) {
+                        g_debug ("adding %s",
+                                 nm_utils_escape_ssid (g_bytes_get_data (ssid, NULL),
+                                                       g_bytes_get_size (ssid)));
+                        g_ptr_array_add (aps_unique, g_object_ref (ap));
+                }
+        }
         return aps_unique;
 }
 
