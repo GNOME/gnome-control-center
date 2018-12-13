@@ -17,14 +17,15 @@ i18n.merge_file(
   install_dir : control_center_desktopdir
 )
 
-sources = files('cc-applications-panel.c',
-                'cc-applications-row.c',
-                'cc-toggle-row.c',
-                'cc-info-row.c',
-                'cc-action-row.c',
-                'utils.c',
-                'globs.c',
-                'search.c'
+sources = files(
+  'cc-applications-panel.c',
+  'cc-applications-row.c',
+  'cc-toggle-row.c',
+  'cc-info-row.c',
+  'cc-action-row.c',
+  'globs.c',
+  'search.c',
+  'utils.c',
 )
 
 resource_data = files('cc-applications-panel.ui')

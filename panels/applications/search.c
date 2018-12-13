@@ -27,13 +27,12 @@
 
 static void
 add_one_provider (GHashTable *search_providers,
-                  GFile *file)
+                  GFile      *file)
 {
-  g_autofree gchar *path = NULL;
-  g_autofree gchar *app_id = NULL;
   g_autoptr(GKeyFile) keyfile = NULL;
-  g_autoptr(GAppInfo) app_info = NULL;
   g_autoptr(GError) error = NULL;
+  g_autofree gchar *app_id = NULL;
+  g_autofree gchar *path = NULL;
   gboolean default_disabled;
 
   path = g_file_get_path (file);
@@ -71,13 +70,13 @@ add_one_provider (GHashTable *search_providers,
 }
 
 static void
-parse_search_providers_one_dir (GHashTable *search_providers,
-                                const char *system_dir)
+parse_search_providers_one_dir (GHashTable  *search_providers,
+                                const gchar *system_dir)
 {
-  g_autofree char *providers_path = NULL;
-  g_autoptr(GFile) providers_location = NULL;
   g_autoptr(GFileEnumerator) enumerator = NULL;
   g_autoptr(GError) error = NULL;
+  g_autoptr(GFile) providers_location = NULL;
+  g_autofree gchar *providers_path = NULL;
 
   providers_path = g_build_filename (system_dir, "gnome-shell", "search-providers", NULL);
   providers_location = g_file_new_for_path (providers_path);
@@ -119,8 +118,8 @@ GHashTable *
 parse_search_providers (void)
 {
   GHashTable *search_providers;
-  const char * const *dirs;
-  int i;
+  const gchar * const *dirs;
+  gint i;
 
   search_providers = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 

@@ -24,6 +24,6 @@
 
 G_BEGIN_DECLS
 
-GHashTable *parse_globs (void);
+GHashTable* parse_globs (void);
 
 G_END_DECLS

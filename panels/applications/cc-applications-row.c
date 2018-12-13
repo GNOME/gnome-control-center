@@ -28,12 +28,12 @@ struct _CcApplicationsRow
 {
   GtkListBoxRow parent;
 
-  GAppInfo *info;
-  char *sortkey;
+  GAppInfo     *info;
+  gchar        *sortkey;
 
-  GtkWidget *box;
-  GtkWidget *image;
-  GtkWidget *label;
+  GtkWidget    *box;
+  GtkWidget    *image;
+  GtkWidget    *label;
 };
 
 G_DEFINE_TYPE (CcApplicationsRow, cc_applications_row, GTK_TYPE_LIST_BOX_ROW)
@@ -74,7 +74,7 @@ CcApplicationsRow *
 cc_applications_row_new (GAppInfo *info)
 {
   CcApplicationsRow *row;
-  char *key;
+  g_autofree gchar *key = NULL;
 
   row = g_object_new (CC_TYPE_APPLICATIONS_ROW, NULL);
 
@@ -82,7 +82,6 @@ cc_applications_row_new (GAppInfo *info)
 
   key = g_utf8_casefold (g_app_info_get_display_name (info), -1);
   row->sortkey = g_utf8_collate_key (key, -1);
-  g_free (key);
 
   gtk_image_set_from_gicon (GTK_IMAGE (row->image), g_app_info_get_icon (info), GTK_ICON_SIZE_BUTTON);
   gtk_label_set_label (GTK_LABEL (row->label), g_app_info_get_display_name (info));
@@ -96,7 +95,7 @@ cc_applications_row_get_info (CcApplicationsRow *row)
   return row->info;
 }
 
-const char *
+const gchar *
 cc_applications_row_get_sort_key (CcApplicationsRow *row)
 {
   return row->sortkey;
