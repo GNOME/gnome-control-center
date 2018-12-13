@@ -35,6 +35,7 @@ endforeach
 
 sources = files(
   'cc-network-panel.c',
+  'cc-wifi-connection-row.c',
   'cc-wifi-panel.c',
   'net-device.c',
   'net-device-ethernet.c',
@@ -50,6 +51,7 @@ sources = files(
 
 resource_data = files(
   'cc-network-panel.ui',
+  'cc-wifi-connection-row.ui',
   'cc-wifi-panel.ui',
   'network-ethernet.ui',
   'network-mobile.ui',
