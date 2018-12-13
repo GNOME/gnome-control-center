@@ -69,21 +69,6 @@ struct _NetDeviceWifi
 
 G_DEFINE_TYPE (NetDeviceWifi, net_device_wifi, NET_TYPE_DEVICE)
 
-enum {
-        COLUMN_CONNECTION_ID,
-        COLUMN_ACCESS_POINT_ID,
-        COLUMN_TITLE,
-        COLUMN_SORT,
-        COLUMN_STRENGTH,
-        COLUMN_MODE,
-        COLUMN_SECURITY,
-        COLUMN_ACTIVE,
-        COLUMN_AP_IN_RANGE,
-        COLUMN_AP_OUT_OF_RANGE,
-        COLUMN_AP_IS_SAVED,
-        COLUMN_LAST
-};
-
 GtkWidget *
 net_device_wifi_get_header_widget (NetDeviceWifi *device_wifi)
 {
