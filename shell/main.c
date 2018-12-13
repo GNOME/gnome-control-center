@@ -38,7 +38,7 @@
 
 #include "cc-application.h"
 
-void
+static void
 initialize_dependencies (gint    *argc,
                          gchar ***argv)
 {
