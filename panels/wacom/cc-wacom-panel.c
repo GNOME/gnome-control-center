@@ -363,6 +363,14 @@ update_current_tool (CcWacomPanel  *panel,
 
 	/* Check whether we already know this tool, nothing to do then */
 	serial = gdk_device_tool_get_serial (tool);
+
+	/* The wacom driver sends serial-less tools with a serial of
+	 * 1, libinput uses 0. No device exists with serial 1, let's reset
+	 * it here so everything else works as expected.
+	 */
+	if (serial == 1)
+		serial = 0;
+
 	stylus = cc_tablet_tool_map_lookup_tool (panel->tablet_tool_map,
 						 wacom_device, serial);
 
@@ -370,6 +378,15 @@ update_current_tool (CcWacomPanel  *panel,
 		gboolean added;
 
 		id = gdk_device_tool_get_hardware_id (tool);
+
+		/* The wacom driver sends a hw id of 0x2 for stylus and 0xa
+		 * for eraser for devices that don't have a true HW id.
+		 * Reset those to 0 so we can use the same code-paths
+		 * libinput uses.
+		 */
+		if (id == 0x2 || id == 0xa)
+			id = 0;
+
 		stylus = cc_wacom_tool_new (serial, id, wacom_device);
 		if (!stylus)
 			return;
