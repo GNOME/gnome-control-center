@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <template class="CcWifiConnectionRow" parent="GtkListBoxRow">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_start">12</property>
+        <property name="margin_end">12</property>
+        <property name="hexpand">True</property>
+        <property name="spacing">6</property>
+        <child>
+          <object class="GtkCheckButton" id="checkbutton">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="draw_indicator">True</property>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="name_label">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">start</property>
+            <property name="margin_top">12</property>
+            <property name="margin_bottom">12</property>
+            <property name="label" translatable="yes">Connection/SSID</property>
+            <property name="ellipsize">end</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkImage" id="active_icon">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="icon_name">object-select-symbolic</property>
+            <property name="icon_size">1</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkStack" id="button_stack">
+            <property name="name">button_stack</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">end</property>
+            <property name="hexpand">True</property>
+            <child>
+              <object class="GtkButton" id="configure_button">
+                <property name="name">options_button</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">emblem-system-symbolic</property>
+                    <property name="icon_size">1</property>
+                  </object>
+                </child>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="configure_button-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Options…</property>
+                  </object>
+                </child>
+                <style>
+                  <class name="image-button"/>
+                  <class name="circular"/>
+                </style>
+              </object>
+              <packing>
+                <property name="name">configure</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinner" id="connecting_spinner">
+                <property name="name">connecting_spinner</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+              </object>
+              <packing>
+                <property name="name">connecting</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkAlignment">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="name">empty</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkImage" id="encrypted_icon">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="icon_name">network-wireless-encrypted-symbolic</property>
+            <property name="icon_size">1</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkImage" id="strength_icon">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="icon_name">network-wireless-signal-excellent-symbolic</property>
+            <property name="icon_size">1</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
