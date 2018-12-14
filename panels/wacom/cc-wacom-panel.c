@@ -383,9 +383,14 @@ update_current_tool (CcWacomPanel  *panel,
 		 * for eraser for devices that don't have a true HW id.
 		 * Reset those to 0 so we can use the same code-paths
 		 * libinput uses.
+		 * The touch ID is 0x3, let's ignore that because we don't
+		 * have a touch tool and it only happens when the wacom
+		 * driver handles the touch device.
 		 */
 		if (id == 0x2 || id == 0xa)
 			id = 0;
+		else if (id == 0x3)
+			return;
 
 		stylus = cc_wacom_tool_new (serial, id, wacom_device);
 		if (!stylus)
