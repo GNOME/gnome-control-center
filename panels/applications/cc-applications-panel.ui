@@ -8,79 +8,75 @@
         <property name="visible">1</property>
         <property name="hscrollbar-policy">never</property>
         <child>
-          <object class="GtkStack" id="stack">
-            <property name="visible">1</property>
+          <object class="HdyColumn">
+            <property name="visible">True</property>
+            <property name="maximum_width">600</property>
+            <property name="linear_growth_width">400</property>
+            <property name="margin_top">32</property>
+            <property name="margin_bottom">32</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
             <child>
-              <object class="GtkBox">
-                <property name="visible">1</property>
-                <property name="orientation">vertical</property>
-                <property name="valign">center</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">1</property>
-                    <property name="valign">start</property>
-                    <property name="pixel-size">80</property>
-                    <property name="icon-name">org.gnome.Software-symbolic</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="fill">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">1</property>
-                    <property name="margin-bottom">15</property>
-                    <property name="label" translatable="yes">No applications</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                    <attributes>
-                      <attribute name="scale" value="1.2"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton">
-                    <property name="label" translatable="yes">Install some…</property>
-                    <property name="visible">1</property>
-                    <property name="can-focus">1</property>
-                    <property name="receives-default">1</property>
-                    <property name="halign">center</property>
-                    <signal name="clicked" handler="open_software_cb"/>
-                  </object>
-                  <packing>
-                    <property name="fill">0</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="name">empty</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkBox">
+              <object class="GtkStack" id="stack">
                 <property name="visible">1</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">1</property>
-                    <property name="hexpand">1</property>
+                    <property name="orientation">vertical</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">1</property>
+                        <property name="valign">start</property>
+                        <property name="pixel-size">80</property>
+                        <property name="icon-name">org.gnome.Software-symbolic</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="fill">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">1</property>
+                        <property name="margin-bottom">15</property>
+                        <property name="label" translatable="yes">No applications</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                        <attributes>
+                          <attribute name="scale" value="1.2"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="label" translatable="yes">Install some…</property>
+                        <property name="visible">1</property>
+                        <property name="can-focus">1</property>
+                        <property name="receives-default">1</property>
+                        <property name="halign">center</property>
+                        <signal name="clicked" handler="open_software_cb"/>
+                      </object>
+                      <packing>
+                        <property name="fill">0</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
                   </object>
+                  <packing>
+                    <property name="name">empty</property>
+                  </packing>
                 </child>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">1</property>
                     <property name="orientation">vertical</property>
-                    <property name="margin-top">32</property>
-                    <property name="margin-bottom">32</property>
-                    <property name="margin-left">24</property>
-                    <property name="margin-right">24</property>
                     <property name="spacing">24</property>
                     <property name="hexpand">1</property>
                     <child>
@@ -394,17 +390,11 @@
                       </object>
                     </child>
                   </object>
-                </child>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">1</property>
-                    <property name="hexpand">1</property>
-                  </object>
+                  <packing>
+                    <property name="name">settings</property>
+                  </packing>
                 </child>
               </object>
-              <packing>
-                <property name="name">settings</property>
-              </packing>
             </child>
           </object>
         </child>
@@ -426,6 +416,8 @@
     <property name="visible">1</property>
     <property name="selection-mode">browse</property>
   </object>
+
+  <!-- Built-in Permissions dialog -->
   <object class="GtkDialog" id="builtin_dialog">
     <property name="title" translatable="yes">Built-in Permissions</property>
     <property name="modal">1</property>
@@ -460,6 +452,8 @@
       </object>
     </child>
   </object>
+
+  <!-- Storage dialog -->
   <object class="GtkDialog" id="storage_dialog">
     <property name="title" translatable="yes">Storage</property>
     <property name="modal">1</property>
