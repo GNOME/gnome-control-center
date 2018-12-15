@@ -15,6 +15,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <glib/gi18n.h>
 #include <config.h>
 #include "cc-wifi-connection-row.h"
 
@@ -111,13 +112,42 @@ update_ui (CcWifiConnectionRow *self)
   if (self->connection)
     {
       NMSettingWireless *sw;
+      const gchar *name = NULL;
+      g_autofree gchar *ssid_str = NULL;
+      gchar *ssid_pos;
+
       sw = nm_connection_get_setting_wireless (self->connection);
 
       ssid = nm_setting_wireless_get_ssid (sw);
+      ssid_str = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
+      name = nm_connection_get_id (NM_CONNECTION (self->connection));
+
+      ssid_pos = strstr (name, ssid_str);
+      if (ssid_pos == name && strlen (name) == strlen (ssid_str))
+        {
+          title = g_strdup (name);
+        }
+      else if (ssid_pos)
+        {
+          g_autofree gchar *before = g_strndup (name, ssid_pos - name);
+          g_autofree gchar *after = g_strndup (ssid_pos + strlen (ssid_str), strlen(ssid_pos) - strlen(ssid_str));
+          title = g_markup_printf_escaped ("<i>%s</i>%s<i>%s</i>",
+                                           before, ssid_str, after);
+        }
+      else
+        {
+          /* TRANSLATORS: This happens when the connection name does not contain the SSID. */
+          title = g_markup_printf_escaped (C_("Wi-Fi Connection", "%s (SSID: %s)"),
+                                           name, ssid_str);
+        }
+
+      gtk_label_set_markup (self->name_label, title);
     }
   else
     {
       ssid = nm_access_point_get_ssid (self->ap);
+      title = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
+      gtk_label_set_text (self->name_label, title);
     }
 
   if (self->ap != NULL)
@@ -143,8 +173,6 @@ update_ui (CcWifiConnectionRow *self)
     }
 
 
-  title = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
-  gtk_label_set_text (self->name_label, title);
 
   if (connecting)
     {
