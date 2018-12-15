@@ -94,6 +94,34 @@ get_access_point_security (NMAccessPoint *ap)
   return type;
 }
 
+static NMAccessPointSecurity
+get_connection_security (NMConnection *con)
+{
+  NMSettingWirelessSecurity *sws;
+  const gchar *key_mgmt;
+
+  sws = nm_connection_get_setting_wireless_security (con);
+  g_debug ("getting security from %p", sws);
+  if (!sws)
+    return NM_AP_SEC_NONE;
+
+  key_mgmt = nm_setting_wireless_security_get_key_mgmt (sws);
+  g_debug ("key management is %s", key_mgmt);
+
+  if (!key_mgmt)
+    return NM_AP_SEC_NONE;
+  else if (g_str_equal (key_mgmt, "none"))
+    return NM_AP_SEC_WEP;
+  else if (g_str_equal (key_mgmt, "ieee8021x"))
+    return NM_AP_SEC_WEP;
+  else if (g_str_equal (key_mgmt, "wpa-eap"))
+    return NM_AP_SEC_WPA2;
+  else if (strncmp (key_mgmt, "wpa-", 4) == 0)
+    return NM_AP_SEC_WPA;
+  else
+    return NM_AP_SEC_UNKNOWN;
+}
+
 static void
 update_ui (CcWifiConnectionRow *self)
 {
@@ -101,8 +129,8 @@ update_ui (CcWifiConnectionRow *self)
   g_autofree gchar *title = NULL;
   gboolean active;
   gboolean connecting;
-  NMAccessPointSecurity security;
-  guint8 strength;
+  NMAccessPointSecurity security = NM_AP_SEC_UNKNOWN;
+  guint8 strength = 0;
   NMDeviceState state;
   NMAccessPoint *active_ap;
 
@@ -170,10 +198,16 @@ update_ui (CcWifiConnectionRow *self)
     {
       active = FALSE;
       connecting = FALSE;
-      security = NM_AP_SEC_UNKNOWN;
-      strength = 0;
     }
 
+  if (self->connection)
+    security = get_connection_security (self->connection);
+
+  if (self->ap != NULL)
+    {
+      security = get_access_point_security (best_ap);
+      strength = nm_access_point_get_strength (best_ap);
+    }
 
 
   if (connecting)
