@@ -1716,8 +1716,8 @@ ap_sort (gconstpointer a, gconstpointer b, gpointer data)
         NMAccessPoint *apa, *apb;
         guint sa, sb;
 
-        apa = cc_wifi_connection_row_get_access_point (CC_WIFI_CONNECTION_ROW ((gpointer) a));
-        apb = cc_wifi_connection_row_get_access_point (CC_WIFI_CONNECTION_ROW ((gpointer) b));
+        apa = cc_wifi_connection_row_best_access_point (CC_WIFI_CONNECTION_ROW ((gpointer) a));
+        apb = cc_wifi_connection_row_best_access_point (CC_WIFI_CONNECTION_ROW ((gpointer) b));
 
         if (apa)
                 sa = nm_access_point_get_strength (apa);
@@ -1756,7 +1756,7 @@ show_details_for_row (CcWifiConnectionRow *row, NetDeviceWifi *device_wifi)
         window = gtk_widget_get_toplevel (GTK_WIDGET (row));
 
         connection = cc_wifi_connection_row_get_connection (row);
-        ap = cc_wifi_connection_row_get_access_point (row);
+        ap = cc_wifi_connection_row_best_access_point (row);
 
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         client = net_object_get_client (NET_OBJECT (device_wifi));
@@ -1783,7 +1783,7 @@ open_history (NetDeviceWifi *device_wifi)
         guint i;
         NMDevice *nm_device;
         GtkWidget *list;
-        GtkWidget *row;
+        CcWifiConnectionRow *row;
 
         dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", 1, NULL);
         panel = net_object_get_panel (NET_OBJECT (device_wifi));
@@ -1858,6 +1858,8 @@ open_history (NetDeviceWifi *device_wifi)
                 if (connection_is_shared (connection))
                         continue;
 
+                row = cc_wifi_connection_row_new (NM_DEVICE_WIFI (nm_device), connection, NULL, TRUE);
+
                 setting = nm_connection_get_setting_by_name (connection, NM_SETTING_WIRELESS_SETTING_NAME);
                 ssid = nm_setting_wireless_get_ssid (NM_SETTING_WIRELESS (setting));
                 for (i = 0; i < aps_unique->len; i++) {
@@ -1867,11 +1869,8 @@ open_history (NetDeviceWifi *device_wifi)
                         if (nm_utils_same_ssid (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid),
                                                 g_bytes_get_data (ssid_ap, NULL), g_bytes_get_size (ssid_ap),
                                                 TRUE))
-                                break;
-                        ap = NULL;
+                                cc_wifi_connection_row_add_access_point (row, ap);
                 }
-
-                row = GTK_WIDGET (cc_wifi_connection_row_new (nm_device, connection, ap, TRUE));
 
                 g_signal_connect_object (row, "notify::checked",
                                          G_CALLBACK (check_toggled), forget, G_CONNECT_SWAPPED);
@@ -1879,7 +1878,7 @@ open_history (NetDeviceWifi *device_wifi)
                                          G_CALLBACK (update_forget), forget, G_CONNECT_SWAPPED);
                 g_signal_connect (row, "configure", G_CALLBACK (show_details_for_row), device_wifi);
 
-                gtk_container_add (GTK_CONTAINER (list), row);
+                gtk_container_add (GTK_CONTAINER (list), GTK_WIDGET (row));
         }
         g_slist_free (connections);
         g_ptr_array_free (aps_unique, TRUE);
@@ -1916,6 +1915,7 @@ populate_ap_list (NetDeviceWifi *device_wifi)
         aps_unique = panel_get_strongest_unique_aps (aps);
 
         for (i = 0; i < aps_unique->len; i++) {
+                g_autoptr(GPtrArray) aps = NULL;
                 GBytes *ssid_ap;
                 NMAccessPoint *ap;
                 NMConnection *connection = NULL;
@@ -1940,7 +1940,9 @@ populate_ap_list (NetDeviceWifi *device_wifi)
                         connection = NULL;
                 }
 
-                row = GTK_WIDGET (cc_wifi_connection_row_new (nm_device, connection, ap, FALSE));
+                aps = g_ptr_array_new ();
+                g_ptr_array_add (aps, ap);
+                row = GTK_WIDGET (cc_wifi_connection_row_new (NM_DEVICE_WIFI (nm_device), connection, aps, FALSE));
 
                 g_signal_connect (row, "configure", G_CALLBACK (show_details_for_row), device_wifi);
 
