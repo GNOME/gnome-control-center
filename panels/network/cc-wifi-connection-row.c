@@ -23,11 +23,13 @@ struct _CcWifiConnectionRow
 {
   GtkListBoxRow    parent_instance;
 
+  gboolean         constructed;
+
   gboolean         checkable;
   gboolean         checked;
 
   NMDeviceWifi    *device;
-  NMAccessPoint   *ap;
+  GPtrArray       *aps;
   NMConnection    *connection;
 
   GtkImage        *active_icon;
@@ -46,7 +48,7 @@ enum
   PROP_CHECKABLE,
   PROP_CHECKED,
   PROP_DEVICE,
-  PROP_AP,
+  PROP_APS,
   PROP_CONNECTION,
   PROP_LAST
 };
@@ -135,17 +137,26 @@ update_ui (CcWifiConnectionRow *self)
 {
   GBytes *ssid;
   g_autofree gchar *title = NULL;
+  NMActiveConnection *active_connection = NULL;
   gboolean active;
   gboolean connecting;
   NMAccessPointSecurity security = NM_AP_SEC_UNKNOWN;
+  NMAccessPoint *best_ap;
   guint8 strength = 0;
-  NMDeviceState state;
-  NMAccessPoint *active_ap;
+  NMActiveConnectionState state;
 
   g_assert (self->device);
-  g_assert (self->connection || self->ap);
+  g_assert (self->connection || self->aps->len > 0);
 
-  active_ap = nm_device_wifi_get_active_access_point (self->device);
+  best_ap = cc_wifi_connection_row_best_access_point (self);
+
+  if (self->connection)
+    {
+      active_connection = nm_device_get_active_connection (NM_DEVICE (self->device));
+      if (active_connection &&
+          NM_CONNECTION (nm_active_connection_get_connection (active_connection)) != self->connection)
+        active_connection = NULL;
+    }
 
   if (self->connection)
     {
@@ -183,24 +194,17 @@ update_ui (CcWifiConnectionRow *self)
     }
   else
     {
-      ssid = nm_access_point_get_ssid (self->ap);
+      ssid = nm_access_point_get_ssid (best_ap);
       title = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
       gtk_label_set_text (self->name_label, title);
     }
 
-  if (self->ap != NULL)
+  if (active_connection)
     {
-      state = nm_device_get_state (NM_DEVICE (self->device));
+      state = nm_active_connection_get_state (active_connection);
 
-      active = (self->ap == active_ap) && (state == NM_DEVICE_STATE_ACTIVATED);
-      connecting = (self->ap == active_ap) &&
-                   (state == NM_DEVICE_STATE_PREPARE ||
-                    state == NM_DEVICE_STATE_CONFIG ||
-                    state == NM_DEVICE_STATE_IP_CONFIG ||
-                    state == NM_DEVICE_STATE_IP_CHECK ||
-                    state == NM_DEVICE_STATE_NEED_AUTH);
-      security = get_access_point_security (self->ap);
-      strength = nm_access_point_get_strength (self->ap);
+      active = state == NM_ACTIVE_CONNECTION_STATE_ACTIVATED;
+      connecting = state == NM_ACTIVE_CONNECTION_STATE_ACTIVATING;
     }
   else
     {
@@ -211,7 +215,7 @@ update_ui (CcWifiConnectionRow *self)
   if (self->connection)
     security = get_connection_security (self->connection);
 
-  if (self->ap != NULL)
+  if (best_ap != NULL)
     {
       security = get_access_point_security (best_ap);
       strength = nm_access_point_get_strength (best_ap);
@@ -239,7 +243,7 @@ update_ui (CcWifiConnectionRow *self)
   else
     gtk_widget_set_child_visible (GTK_WIDGET (self->encrypted_icon), FALSE);
 
-  if (self->ap)
+  if (best_ap)
     {
       gchar *icon_name;
 
@@ -296,6 +300,8 @@ cc_wifi_connection_row_get_property (GObject    *object,
                                      GParamSpec *pspec)
 {
   CcWifiConnectionRow *self = CC_WIFI_CONNECTION_ROW (object);
+  GPtrArray *ptr_array;
+  gint i;
 
   switch (prop_id)
     {
@@ -311,8 +317,12 @@ cc_wifi_connection_row_get_property (GObject    *object,
       g_value_set_object (value, self->device);
       break;
 
-    case PROP_AP:
-      g_value_set_object (value, self->ap);
+    case PROP_APS:
+      ptr_array = g_ptr_array_new_full (self->aps->len, NULL);
+      for (i = 0; i < self->aps->len; i++)
+        g_ptr_array_add (ptr_array, g_ptr_array_index (self->aps, i));
+
+      g_value_take_boxed (value, ptr_array);
       break;
 
     case PROP_CONNECTION:
@@ -331,6 +341,8 @@ cc_wifi_connection_row_set_property (GObject      *object,
                                      GParamSpec   *pspec)
 {
   CcWifiConnectionRow *self = CC_WIFI_CONNECTION_ROW (object);
+  GPtrArray *ptr_array;
+  gint i;
 
   switch (prop_id)
     {
@@ -346,8 +358,17 @@ cc_wifi_connection_row_set_property (GObject      *object,
       self->device = g_value_dup_object (value);
       break;
 
-    case PROP_AP:
-      self->ap = g_value_dup_object (value);
+    case PROP_APS:
+      ptr_array = g_value_get_boxed (value);
+      g_ptr_array_set_size (self->aps, 0);
+
+      if (ptr_array)
+        {
+          for (i = 0; i < ptr_array->len; i++)
+            g_ptr_array_add (self->aps, g_object_ref (g_ptr_array_index (ptr_array, i)));
+        }
+      if (self->constructed)
+        update_ui (self);
       break;
 
     case PROP_CONNECTION:
@@ -365,7 +386,7 @@ cc_wifi_connection_row_finalize (GObject *object)
   CcWifiConnectionRow *self = CC_WIFI_CONNECTION_ROW (object);
 
   g_clear_object (&self->device);
-  g_clear_object (&self->ap);
+  g_clear_pointer (&self->aps, g_ptr_array_unref);
   g_clear_object (&self->connection);
 
   G_OBJECT_CLASS (cc_wifi_connection_row_parent_class)->finalize (object);
@@ -409,10 +430,10 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
                                             NM_TYPE_DEVICE_WIFI,
                                             G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  props[PROP_AP] = g_param_spec_object ("ap", "Access Point",
-                                        "The best access point for this connection  (may be NULL if there is a connection)",
-                                        NM_TYPE_ACCESS_POINT,
-                                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+  props[PROP_APS] = g_param_spec_boxed ("aps", "Access Points",
+                                        "The access points for this connection  (may be empty if a connection is given)",
+                                         G_TYPE_PTR_ARRAY,
+                                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_CONNECTION] = g_param_spec_object ("connection", "Connection",
                                                 "The NMConnection (may be NULL if there is an AP)",
@@ -445,21 +466,23 @@ cc_wifi_connection_row_init (CcWifiConnectionRow *row)
 
   g_signal_connect (row->configure_button, "clicked", G_CALLBACK (configure_clicked_cb), row);
 
+  row->aps = g_ptr_array_new_with_free_func (g_object_unref);
+
   g_object_bind_property (row, "checked",
                           row->checkbutton, "active",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
 }
 
 CcWifiConnectionRow *
-cc_wifi_connection_row_new (NMDevice      *device,
+cc_wifi_connection_row_new (NMDeviceWifi  *device,
                             NMConnection  *connection,
-                            NMAccessPoint *ap,
+                            GPtrArray     *aps,
                             gboolean       checkable)
 {
   return g_object_new (CC_TYPE_WIFI_CONNECTION_ROW,
                        "device", device,
                        "connection", connection,
-                       "ap", ap,
+                       "aps", aps,
                        "checkable", checkable,
                        NULL);
 }
@@ -488,12 +511,12 @@ cc_wifi_connection_row_get_device (CcWifiConnectionRow  *row)
   return row->device;
 }
 
-NMAccessPoint*
-cc_wifi_connection_row_get_access_point (CcWifiConnectionRow  *row)
+const GPtrArray*
+cc_wifi_connection_row_get_access_points (CcWifiConnectionRow  *row)
 {
   g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (row), NULL);
 
-  return row->ap;
+  return row->aps;
 }
 
 NMConnection*
@@ -502,5 +525,90 @@ cc_wifi_connection_row_get_connection (CcWifiConnectionRow  *row)
   g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (row), NULL);
 
   return row->connection;
+}
+
+NMAccessPoint*
+cc_wifi_connection_row_best_access_point (CcWifiConnectionRow  *row)
+{
+  NMAccessPoint *best_ap = NULL;
+  NMAccessPoint *active_ap = NULL;
+  guint8 strength = 0;
+  gint i;
+
+  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (row), NULL);
+
+  if (row->aps->len == 0)
+    return NULL;
+
+  active_ap = nm_device_wifi_get_active_access_point (row->device);
+
+  for (i = 0; i < row->aps->len; i++)
+    {
+      NMAccessPoint *cur;
+      guint8 cur_strength;
+
+      cur = g_ptr_array_index (row->aps, i);
+
+      /* Prefer the active AP in all cases */
+      if (cur == active_ap)
+        return cur;
+
+      cur_strength = nm_access_point_get_strength (cur);
+      /* Use if we don't have an AP, this is the current AP, or it is better */
+      if (!best_ap || cur_strength > strength)
+        {
+          best_ap = cur;
+          strength = cur_strength;
+        }
+    }
+
+  return best_ap;
+}
+
+void
+cc_wifi_connection_row_add_access_point (CcWifiConnectionRow  *row,
+                                         NMAccessPoint        *ap)
+{
+  g_return_if_fail (CC_WIFI_CONNECTION_ROW (row));
+
+  g_ptr_array_add (row->aps, g_object_ref (ap));
+  update_ui (row);
+}
+
+gboolean
+cc_wifi_connection_row_remove_access_point (CcWifiConnectionRow  *row,
+                                            NMAccessPoint        *ap)
+{
+  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (row), FALSE);
+
+  if (!g_ptr_array_remove (row->aps, g_object_ref (ap)))
+    return FALSE;
+
+  /* Object might be invalid; this is alright if it is deleted right away */
+  if (row->aps->len > 0 || row->connection)
+    {
+      g_object_notify_by_pspec (G_OBJECT (row), props[PROP_APS]);
+      update_ui (row);
+    }
+
+  return row->aps->len == 0;
+}
+
+gboolean
+cc_wifi_connection_row_has_access_point (CcWifiConnectionRow  *row,
+                                         NMAccessPoint        *ap)
+{
+  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (row), FALSE);
+
+  return g_ptr_array_find (row->aps, ap, NULL);
+}
+
+void
+cc_wifi_connection_row_update (CcWifiConnectionRow  *row)
+{
+  update_ui (row);
+
+  gtk_list_box_row_changed (GTK_LIST_BOX_ROW (row));
+
 }
 
