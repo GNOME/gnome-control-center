@@ -768,12 +768,8 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
                          GBytes *ssid,
                          const gchar *ap_object_path)
 {
-        GBytes *match_ssid;
         const gchar *ssid_target;
-        GSList *list, *l;
-        NMConnection *connection_activate = NULL;
         NMDevice *device;
-        NMSettingWireless *setting_wireless;
         NMClient *client;
         GCancellable *cancellable;
 
@@ -791,45 +787,9 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
         g_debug ("try to connect to WIFI network %s [%s]",
                  ssid_target, ap_object_path);
 
-        /* look for an existing connection we can use */
-        list = net_device_get_valid_connections (NET_DEVICE (device_wifi));
-        g_debug ("%i suitable remote connections to check", g_slist_length (list));
-        for (l = list; l; l = g_slist_next (l)) {
-                NMConnection *connection;
-
-                connection = NM_CONNECTION (l->data);
-                setting_wireless = nm_connection_get_setting_wireless (connection);
-                if (!NM_IS_SETTING_WIRELESS (setting_wireless))
-                        continue;
-                match_ssid = nm_setting_wireless_get_ssid (setting_wireless);
-                if (match_ssid == NULL)
-                        continue;
-                if (g_bytes_equal (ssid, match_ssid)) {
-                        g_debug ("we found an existing connection %s to activate!",
-                                 nm_connection_get_id (connection));
-                        connection_activate = connection;
-                        break;
-                }
-        }
-
-        g_slist_free (list);
-
         /* activate the connection */
         client = net_object_get_client (NET_OBJECT (device_wifi));
         cancellable = net_object_get_cancellable (NET_OBJECT (device_wifi));
-        if (connection_activate != NULL) {
-                nm_client_activate_connection_async (client,
-                                                     connection_activate,
-                                                     device,
-                                                     NULL,
-                                                     cancellable,
-                                                     connection_activate_cb,
-                                                     device_wifi);
-                goto out;
-        }
-
-        /* create one, as it's missing */
-        g_debug ("no existing connection found for %s, creating", ssid_target);
 
         if (!is_8021x (device, ap_object_path)) {
                 GPermission *permission;
