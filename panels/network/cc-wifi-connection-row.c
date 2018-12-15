@@ -15,6 +15,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <glib/gi18n.h>
 #include <config.h>
 #include "cc-wifi-connection-row.h"
 
@@ -101,6 +102,34 @@ get_access_point_security (NMAccessPoint *ap)
   return type;
 }
 
+static NMAccessPointSecurity
+get_connection_security (NMConnection *con)
+{
+  NMSettingWirelessSecurity *sws;
+  const gchar *key_mgmt;
+
+  sws = nm_connection_get_setting_wireless_security (con);
+  g_debug ("getting security from %p", sws);
+  if (!sws)
+    return NM_AP_SEC_NONE;
+
+  key_mgmt = nm_setting_wireless_security_get_key_mgmt (sws);
+  g_debug ("key management is %s", key_mgmt);
+
+  if (!key_mgmt)
+    return NM_AP_SEC_NONE;
+  else if (g_str_equal (key_mgmt, "none"))
+    return NM_AP_SEC_WEP;
+  else if (g_str_equal (key_mgmt, "ieee8021x"))
+    return NM_AP_SEC_WEP;
+  else if (g_str_equal (key_mgmt, "wpa-eap"))
+    return NM_AP_SEC_WPA2;
+  else if (strncmp (key_mgmt, "wpa-", 4) == 0)
+    return NM_AP_SEC_WPA;
+  else
+    return NM_AP_SEC_UNKNOWN;
+}
+
 static void
 update_ui (CcWifiConnectionRow *self)
 {
@@ -108,8 +137,8 @@ update_ui (CcWifiConnectionRow *self)
   g_autofree gchar *title = NULL;
   gboolean active;
   gboolean connecting;
-  NMAccessPointSecurity security;
-  guint8 strength;
+  NMAccessPointSecurity security = NM_AP_SEC_UNKNOWN;
+  guint8 strength = 0;
   NMDeviceState state;
   NMAccessPoint *active_ap;
 
@@ -120,13 +149,43 @@ update_ui (CcWifiConnectionRow *self)
 
   if (self->connection)
     {
-      NMSettingWireless *sw = nm_connection_get_setting_wireless (self->connection);
+      NMSettingWireless *sw;
+      const gchar *name = NULL;
+      g_autofree gchar *ssid_str = NULL;
+      gchar *ssid_pos;
+
+      sw = nm_connection_get_setting_wireless (self->connection);
 
       ssid = nm_setting_wireless_get_ssid (sw);
+      ssid_str = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
+      name = nm_connection_get_id (NM_CONNECTION (self->connection));
+
+      ssid_pos = strstr (name, ssid_str);
+      if (ssid_pos == name && strlen (name) == strlen (ssid_str))
+        {
+          title = g_strdup (name);
+        }
+      else if (ssid_pos)
+        {
+          g_autofree gchar *before = g_strndup (name, ssid_pos - name);
+          g_autofree gchar *after = g_strndup (ssid_pos + strlen (ssid_str), strlen(ssid_pos) - strlen(ssid_str));
+          title = g_markup_printf_escaped ("<i>%s</i>%s<i>%s</i>",
+                                           before, ssid_str, after);
+        }
+      else
+        {
+          /* TRANSLATORS: This happens when the connection name does not contain the SSID. */
+          title = g_markup_printf_escaped (C_("Wi-Fi Connection", "%s (SSID: %s)"),
+                                           name, ssid_str);
+        }
+
+      gtk_label_set_markup (self->name_label, title);
     }
   else
     {
       ssid = nm_access_point_get_ssid (self->ap);
+      title = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
+      gtk_label_set_text (self->name_label, title);
     }
 
   if (self->ap != NULL)
@@ -147,12 +206,16 @@ update_ui (CcWifiConnectionRow *self)
     {
       active = FALSE;
       connecting = FALSE;
-      security = NM_AP_SEC_UNKNOWN;
-      strength = 0;
     }
 
-  title = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
-  gtk_label_set_text (self->name_label, title);
+  if (self->connection)
+    security = get_connection_security (self->connection);
+
+  if (self->ap != NULL)
+    {
+      security = get_access_point_security (best_ap);
+      strength = nm_access_point_get_strength (best_ap);
+    }
 
   if (connecting)
     {
