@@ -527,6 +527,16 @@ cc_wifi_connection_row_get_connection (CcWifiConnectionRow  *row)
   return row->connection;
 }
 
+void
+cc_wifi_connection_row_set_checked (CcWifiConnectionRow  *row,
+                                    gboolean              value)
+{
+  g_return_if_fail (CC_WIFI_CONNECTION_ROW (row));
+
+  row->checked = value;
+  g_object_notify_by_pspec (G_OBJECT (row), props[PROP_CHECKED]);
+}
+
 NMAccessPoint*
 cc_wifi_connection_row_best_access_point (CcWifiConnectionRow  *row)
 {
