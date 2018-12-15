@@ -36,6 +36,7 @@ endforeach
 sources = files(
   'cc-network-panel.c',
   'cc-wifi-connection-row.c',
+  'cc-wifi-connection-list.c',
   'cc-wifi-panel.c',
   'net-device.c',
   'net-device-ethernet.c',
