@@ -38,6 +38,9 @@ NMDeviceWifi        *cc_wifi_connection_row_get_device          (CcWifiConnectio
 const GPtrArray     *cc_wifi_connection_row_get_access_points   (CcWifiConnectionRow   *row);
 NMConnection        *cc_wifi_connection_row_get_connection      (CcWifiConnectionRow   *row);
 
+void                 cc_wifi_connection_row_set_checked         (CcWifiConnectionRow   *row,
+                                                                 gboolean               value);
+
 NMAccessPoint       *cc_wifi_connection_row_best_access_point   (CcWifiConnectionRow   *row);
 void                 cc_wifi_connection_row_add_access_point    (CcWifiConnectionRow   *row,
                                                                  NMAccessPoint         *ap);
