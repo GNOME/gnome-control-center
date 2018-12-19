@@ -702,6 +702,19 @@ cc_wacom_page_class_init (CcWacomPageClass *klass)
 }
 
 static void
+remove_link_padding (GtkWidget *widget)
+{
+	g_autoptr(GtkCssProvider) provider = NULL;
+
+	provider = gtk_css_provider_new ();
+	gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider),
+					 ".link { padding: 0px; }", -1, NULL);
+	gtk_style_context_add_provider (gtk_widget_get_style_context (widget),
+					GTK_STYLE_PROVIDER (provider),
+					GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+}
+
+static void
 cc_wacom_page_init (CcWacomPage *page)
 {
 	GError *error = NULL;
@@ -750,9 +763,11 @@ cc_wacom_page_init (CcWacomPage *page)
 
 	g_signal_connect (G_OBJECT (WID ("display-link")), "activate-link",
 			  G_CALLBACK (display_clicked_cb), page);
+	remove_link_padding (WID ("display-link"));
 
 	g_signal_connect (G_OBJECT (WID ("mouse-link")), "activate-link",
 			  G_CALLBACK (mouse_clicked_cb), page);
+	remove_link_padding (WID ("mouse-link"));
 
 	g_signal_connect (G_OBJECT (WID ("display-mapping-button")), "clicked",
 			  G_CALLBACK (display_mapping_button_clicked_cb), page);
@@ -789,20 +804,12 @@ static void
 remove_display_link (CcWacomPage *page)
 {
 	gtk_widget_destroy (WID ("display-link"));
-
-        gtk_container_child_set (CWID ("main-grid"),
-                                 WID ("tablet-buttons-box"),
-                                 "top_attach", 2, NULL);
 }
 
 static void
 remove_mouse_link (CcWacomPage *page)
 {
         gtk_widget_destroy (WID ("mouse-link"));
-
-        gtk_container_child_set (CWID ("main-grid"),
-                                 WID ("tablet-buttons-box"),
-                                 "top_attach", 2, NULL);
 }
 
 static gboolean
