@@ -113,12 +113,11 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkGrid">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="hexpand">True</property>
-                    <property name="row_spacing">22</property>
-                    <property name="column_spacing">40</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">22</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
@@ -130,16 +129,14 @@
                           <attribute name="weight" value="bold"/>
                         </attributes>
                       </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">1</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkButtonBox" id="togglebutton_box">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="layout_style">end</property>
+                        <property name="halign">fill</property>
+                        <property name="hexpand">True</property>
+                        <property name="layout_style">expand</property>
                         <child>
                           <object class="GtkRadioButton" id="togglebutton_automatic">
                             <property name="label" translatable="yes">Sunset to Sunrise</property>
@@ -193,10 +190,6 @@
                           <class name="linked"/>
                         </style>
                       </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
@@ -211,7 +204,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="valign">start</property>
+                        <property name="valign">center</property>
                         <property name="label" translatable="yes">From</property>
                         <style>
                           <class name="dim-label"/>
@@ -422,7 +415,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="valign">start</property>
+                        <property name="valign">center</property>
                         <property name="margin_left">3</property>
                         <property name="label" translatable="yes">To</property>
                         <style>
