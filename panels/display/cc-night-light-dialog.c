@@ -39,6 +39,7 @@ struct _CcNightLightDialog {
   GtkWidget           *spinbutton_to_minutes;
   GtkStack            *stack_from;
   GtkStack            *stack_to;
+  GtkWidget           *togglebutton_box;
   GtkWidget           *togglebutton_automatic;
   GtkWidget           *togglebutton_manual;
   GtkWidget           *togglebutton_off;
@@ -146,6 +147,33 @@ dialog_update_state (CcNightLightDialog *self)
   self->ignore_value_changed = FALSE;
 
   gtk_widget_set_sensitive (self->box_manual, enabled && !automatic);
+
+  /* Don't show the off button if it can't be turned off */
+  /* Don't allow choosing Manual or "Sunset to Sunrise" if it can't be turned on */
+  if (!g_settings_is_writable (self->settings_display, "night-light-enabled"))
+    {
+        gtk_widget_set_visible (self->togglebutton_off, !enabled);
+        gtk_widget_set_sensitive (self->togglebutton_box, enabled);
+    }
+  else
+    {
+        gtk_widget_set_visible (self->togglebutton_off, TRUE);
+        gtk_widget_set_sensitive (self->togglebutton_box, TRUE);
+    }
+
+  /* Don't show the Manual buttons if Manual can't be enabled. Same for "Sunset to Sunrise". */
+  if (!g_settings_is_writable (self->settings_display, "night-light-schedule-automatic"))
+    {
+        gtk_widget_set_visible (self->togglebutton_automatic, automatic);
+        gtk_widget_set_visible (self->togglebutton_manual, !automatic);
+        gtk_widget_set_visible (self->box_manual, !automatic);
+    }
+  else
+    {
+        gtk_widget_set_visible (self->togglebutton_automatic, TRUE);
+        gtk_widget_set_visible (self->togglebutton_manual, TRUE);
+        gtk_widget_set_visible (self->box_manual, TRUE);
+    }
 
   /* set from */
   if (automatic && self->proxy_color != NULL)
@@ -551,6 +579,7 @@ cc_night_light_dialog_class_init (CcNightLightDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, spinbutton_to_minutes);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, stack_from);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, stack_to);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, togglebutton_box);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, togglebutton_automatic);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, togglebutton_manual);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightDialog, togglebutton_off);
@@ -579,6 +608,19 @@ cc_night_light_dialog_init (CcNightLightDialog *self)
   self->settings_display = g_settings_new (DISPLAY_SCHEMA);
 
   g_signal_connect (self->settings_display, "changed", G_CALLBACK (dialog_settings_changed_cb), self);
+
+  g_settings_bind_writable (self->settings_display, "night-light-schedule-from",
+                            self->spinbutton_from_hours, "sensitive",
+                            FALSE);
+  g_settings_bind_writable (self->settings_display, "night-light-schedule-from",
+                            self->spinbutton_from_minutes, "sensitive",
+                            FALSE);
+  g_settings_bind_writable (self->settings_display, "night-light-schedule-to",
+                            self->spinbutton_to_minutes, "sensitive",
+                            FALSE);
+  g_settings_bind_writable (self->settings_display, "night-light-schedule-to",
+                            self->spinbutton_to_minutes, "sensitive",
+                            FALSE);
 
   /* use custom CSS */
   provider = gtk_css_provider_new ();
