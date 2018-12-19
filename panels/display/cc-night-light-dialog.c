@@ -66,6 +66,7 @@ G_DEFINE_TYPE (CcNightLightDialog, cc_night_light_dialog, GTK_TYPE_DIALOG);
 #define CLOCK_SCHEMA     "org.gnome.desktop.interface"
 #define DISPLAY_SCHEMA   "org.gnome.settings-daemon.plugins.color"
 #define CLOCK_FORMAT_KEY "clock-format"
+#define NIGHT_LIGHT_PREVIEW_TIMEOUT_SECONDS 5
 
 static void
 dialog_adjustments_set_frac_hours (CcNightLightDialog *self,
@@ -380,6 +381,16 @@ dialog_color_temperature_value_changed_cb (GtkAdjustment      *adjustment,
   value = gtk_adjustment_get_value (adjustment);
 
   g_debug ("new value = %.0f", value);
+
+  if (self->proxy_color != NULL)
+    g_dbus_proxy_call (self->proxy_color,
+                       "NightLightPreview",
+                       g_variant_new ("(u)", NIGHT_LIGHT_PREVIEW_TIMEOUT_SECONDS),
+                       G_DBUS_CALL_FLAGS_NONE,
+                       5000,
+                       NULL,
+                       NULL,
+                       NULL);
 
   g_settings_set_uint (self->settings_display, "night-light-temperature", (guint) value);
 }
