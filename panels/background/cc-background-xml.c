@@ -200,7 +200,10 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 	      bg_uri = NULL;
 	    } else {
 	      g_autoptr(GFile) file = NULL;
-	      file = g_file_new_for_commandline_arg (content);
+	      g_autofree gchar *dirname = NULL;
+
+	      dirname = g_path_get_dirname (filename);
+	      file = g_file_new_for_commandline_arg_and_cwd (content, dirname);
 	      bg_uri = g_file_get_uri (file);
 	    }
 	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_URI);
