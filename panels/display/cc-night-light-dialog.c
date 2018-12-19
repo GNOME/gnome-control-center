@@ -380,6 +380,7 @@ dialog_color_temperature_value_changed_cb (GtkAdjustment      *adjustment,
                                            CcNightLightDialog *self)
 {
   gdouble value;
+  guint timeout;
 
   if (self->ignore_value_changed)
     return;
@@ -387,6 +388,19 @@ dialog_color_temperature_value_changed_cb (GtkAdjustment      *adjustment,
   value = gtk_adjustment_get_value (adjustment);
 
   g_debug ("new value = %.0f", value);
+
+  /* Timeout in seconds for Night Light preview*/
+  timeout = 10;
+
+  if (self->proxy_color != NULL)
+    g_dbus_proxy_call (self->proxy_color,
+                       "NightLightPreview",
+                       g_variant_new ("(u)", timeout),
+                       G_DBUS_CALL_FLAGS_NONE,
+                       5000,
+                       NULL,
+                       NULL,
+                       NULL);
 
   g_settings_set_uint (self->settings_display, "night-light-temperature", (guint) value);
 }
