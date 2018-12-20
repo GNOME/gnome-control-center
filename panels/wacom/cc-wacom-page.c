@@ -596,6 +596,32 @@ set_mode_from_gsettings (GtkComboBox *combo,
 }
 
 static void
+update_display_decoupled_sensitivity (CcWacomPage *page,
+				      gboolean	   active)
+{
+	if (get_layout_type (page->stylus) != LAYOUT_SCREEN)
+		return;
+
+	gtk_widget_set_sensitive (WID ("label-trackingmode"), active);
+	gtk_widget_set_sensitive (WID ("combo-tabletmode"), active);
+	gtk_widget_set_sensitive (WID ("display-mapping-button-2"), active);
+
+	gtk_widget_set_sensitive (WID ("button-calibrate"), !active);
+}
+
+static void
+set_display_decoupled_from_gsettings (GtkSwitch *sw,
+				      CcWacomPage *page)
+{
+	GStrv output = g_settings_get_strv (page->wacom_settings, "output");
+	gboolean active = g_strcmp0 (output[0], "") != 0;
+
+	gtk_switch_set_active (sw, active);
+	update_display_decoupled_sensitivity (page, active);
+	g_strfreev (output);
+}
+
+static void
 combobox_text_cellrenderer (GtkComboBox *combo, int name_column)
 {
 	GtkCellRenderer	*renderer;
@@ -620,6 +646,51 @@ mouse_clicked_cb (GtkButton   *button,
 {
 	cc_wacom_panel_switch_to_panel (page->panel, "mouse");
 	return TRUE;
+}
+
+static void
+decouple_display_toggled_cb (GtkSwitch	 *sw,
+			     GParamSpec	 *pspec,
+			     CcWacomPage *page)
+{
+	gboolean active = gtk_switch_get_active (sw);
+
+	update_display_decoupled_sensitivity (page, active);
+
+	if (!active) {
+		cc_wacom_device_set_output (page->stylus, NULL);
+	} else {
+		GdkScreen *screen;
+		GnomeRRScreen *rr_screen;
+		GnomeRROutput **outputs, *picked = NULL;
+		GError *error = NULL;
+		int i;
+
+		screen = gtk_widget_get_screen (GTK_WIDGET (sw));
+		rr_screen = gnome_rr_screen_new (screen, &error);
+		if (error) {
+			g_warning ("Could not connect to display manager: %s", error->message);
+			g_error_free (error);
+			return;
+		}
+
+		outputs = gnome_rr_screen_list_outputs (rr_screen);
+
+		/* Pick *some* output here. decoupled mode can only jump across
+		 * monitors, not map to the full span of those. We prefer the
+		 * builtin display, falling back to the first output found if
+		 * there's none.
+		 */
+		for (i = 0; outputs[i] != NULL; i++) {
+			if (gnome_rr_output_is_builtin_display (outputs[i]))
+				picked = outputs[i];
+		}
+
+		if (!picked)
+			picked = outputs[0];
+
+		cc_wacom_device_set_output (page->stylus, picked);
+	}
 }
 
 /* Boilerplate code goes below */
@@ -771,6 +842,10 @@ cc_wacom_page_init (CcWacomPage *page)
 
 	g_signal_connect (G_OBJECT (WID ("display-mapping-button")), "clicked",
 			  G_CALLBACK (display_mapping_button_clicked_cb), page);
+	g_signal_connect (G_OBJECT (WID ("display-mapping-button-2")), "clicked",
+			  G_CALLBACK (display_mapping_button_clicked_cb), page);
+	g_signal_connect (WID ("switch-decouple-display"), "notify::active",
+			  G_CALLBACK (decouple_display_toggled_cb), page);
 
 	page->nav = cc_wacom_nav_button_new ();
         gtk_widget_set_halign (page->nav, GTK_ALIGN_END);
@@ -812,6 +887,14 @@ remove_mouse_link (CcWacomPage *page)
         gtk_widget_destroy (WID ("mouse-link"));
 }
 
+static void
+remove_decouple_options (CcWacomPage *page)
+{
+	gtk_widget_destroy (WID ("label-decouple-display"));
+	gtk_widget_destroy (WID ("switch-decouple-display"));
+	gtk_widget_destroy (WID ("display-mapping-button-2"));
+}
+
 static gboolean
 has_monitor (CcWacomPage *page)
 {
@@ -844,27 +927,27 @@ update_tablet_ui (CcWacomPage *page,
 	case LAYOUT_NORMAL:
 		remove_left_handed (page);
 		remove_display_link (page);
+		remove_decouple_options (page);
 		break;
 	case LAYOUT_REVERSIBLE:
 		remove_display_link (page);
+		remove_decouple_options (page);
 		break;
 	case LAYOUT_SCREEN:
 		remove_left_handed (page);
 
-		gtk_widget_destroy (WID ("combo-tabletmode"));
-		gtk_widget_destroy (WID ("label-trackingmode"));
 		gtk_widget_destroy (WID ("display-mapping-button"));
 
 		gtk_widget_show (WID ("button-calibrate"));
 		gtk_widget_set_sensitive (WID ("button-calibrate"),
 					  has_monitor (page));
 
-		gtk_container_child_set (CWID ("main-grid"),
-					 WID ("tablet-buttons-box"),
-					 "top_attach", 1, NULL);
-		gtk_container_child_set (CWID ("main-grid"),
-					 WID ("display-link"),
-					 "top_attach", 2, NULL);
+		gtk_container_child_set (CWID ("main-controls-grid"),
+					 WID ("label-trackingmode"),
+					 "top_attach", 5, NULL);
+		gtk_container_child_set (CWID ("main-controls-grid"),
+					 WID ("combo-tabletmode"),
+					 "top_attach", 5, NULL);
 		break;
 	default:
 		g_assert_not_reached ();
@@ -913,6 +996,7 @@ cc_wacom_page_new (CcWacomPanel  *panel,
 	/* FIXME move this to construct */
 	page->wacom_settings  = cc_wacom_device_get_settings (stylus);
 	set_mode_from_gsettings (GTK_COMBO_BOX (WID ("combo-tabletmode")), page);
+	set_display_decoupled_from_gsettings (GTK_SWITCH (WID ("switch-decouple-display")), page);
 
 	/* Tablet name */
 	gtk_label_set_text (GTK_LABEL (WID ("label-tabletmodel")), cc_wacom_device_get_name (stylus));
