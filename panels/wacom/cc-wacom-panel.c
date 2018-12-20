@@ -346,6 +346,7 @@ update_current_tool (CcWacomPanel  *panel,
 	CcWacomTool *stylus;
 	GsdDevice *gsd_device;
 	guint64 serial, id;
+	gboolean added;
 
 	if (!tool)
 		return;
@@ -375,8 +376,6 @@ update_current_tool (CcWacomPanel  *panel,
 						 wacom_device, serial);
 
 	if (!stylus) {
-		gboolean added;
-
 		id = gdk_device_tool_get_hardware_id (tool);
 
 		/* The wacom driver sends a hw id of 0x2 for stylus and 0xa
@@ -395,24 +394,24 @@ update_current_tool (CcWacomPanel  *panel,
 		stylus = cc_wacom_tool_new (serial, id, wacom_device);
 		if (!stylus)
 			return;
+        }
 
-		added = add_stylus (panel, stylus);
+	added = add_stylus (panel, stylus);
 
-		if (added) {
-			if (panel->stylus_notebook ==
-			    gtk_stack_get_visible_child (GTK_STACK (panel->stack))) {
-				GtkWidget *widget;
-				gint page;
+	if (added) {
+		if (panel->stylus_notebook ==
+		    gtk_stack_get_visible_child (GTK_STACK (panel->stack))) {
+			GtkWidget *widget;
+			gint page;
 
-				widget = g_hash_table_lookup (panel->stylus_pages, stylus);
-				page = gtk_notebook_page_num (GTK_NOTEBOOK (panel->stylus_notebook), widget);
-				gtk_notebook_set_current_page (GTK_NOTEBOOK (panel->stylus_notebook), page);
-			} else {
-				gtk_container_child_set (GTK_CONTAINER (panel->stack),
-							 panel->stylus_notebook,
-							 "needs-attention", TRUE,
-							 NULL);
-			}
+			widget = g_hash_table_lookup (panel->stylus_pages, stylus);
+			page = gtk_notebook_page_num (GTK_NOTEBOOK (panel->stylus_notebook), widget);
+			gtk_notebook_set_current_page (GTK_NOTEBOOK (panel->stylus_notebook), page);
+		} else {
+			gtk_container_child_set (GTK_CONTAINER (panel->stack),
+						 panel->stylus_notebook,
+						 "needs-attention", TRUE,
+						 NULL);
 		}
 	}
 
