@@ -110,6 +110,10 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_domain_match_label"));
+	g_assert (widget);
+	gtk_size_group_add_widget (group, widget);
+
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
@@ -153,6 +157,12 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	text = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (text && strlen (text))
 		g_object_set (s_8021x, NM_SETTING_802_1X_ANONYMOUS_IDENTITY, text, NULL);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_domain_match_entry"));
+	g_assert (widget);
+	text = gtk_entry_get_text (GTK_ENTRY (widget));
+	if (text && strlen (text))
+		g_object_set (s_8021x, NM_SETTING_802_1X_DOMAIN_SUFFIX_MATCH, text, NULL);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_button"));
 	g_assert (widget);
@@ -450,6 +460,12 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	g_signal_connect (G_OBJECT (widget), "changed",
 	                  (GCallback) wireless_security_changed_cb,
 	                  ws_parent);
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_domain_match_entry"));
+	if (s_8021x && nm_setting_802_1x_get_domain_suffix_match (s_8021x))
+		gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_802_1x_get_domain_suffix_match (s_8021x));
+	g_signal_connect (G_OBJECT (widget), "changed",
+	                  (GCallback) wireless_security_changed_cb,
+	                  ws_parent);
 
 	widget = inner_auth_combo_init (method, connection, s_8021x, secrets_only);
 	inner_auth_combo_changed_cb (widget, (gpointer) method);
@@ -458,6 +474,10 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_anon_identity_label"));
 		gtk_widget_hide (widget);
 		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_anon_identity_entry"));
+		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_domain_match_label"));
+		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_domain_match_entry"));
 		gtk_widget_hide (widget);
 		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_label"));
 		gtk_widget_hide (widget);
