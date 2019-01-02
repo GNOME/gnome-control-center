@@ -36,8 +36,6 @@
 #include "search.h"
 #include "utils.h"
 
-#include <flatpak/flatpak.h>
-
 enum {
   PROP_0,
   PROP_PARAMETERS
@@ -521,26 +519,15 @@ add_static_permissions (CcApplicationsPanel *self,
                         GAppInfo            *info,
                         const gchar         *app_id)
 {
-  g_autoptr(FlatpakInstalledRef) ref = NULL;
-  g_autoptr(GBytes) bytes = NULL;
-  g_autoptr(GError) error = NULL;
   g_autoptr(GKeyFile) keyfile = NULL;
   gchar **strv;
   gchar *str;
   gint added = 0;
   g_autofree gchar *text = NULL;
   
-  ref = find_flatpak_ref (app_id);
-  bytes = flatpak_installed_ref_load_metadata (ref, NULL, NULL);
-  keyfile = g_key_file_new ();
-  if (!g_key_file_load_from_data (keyfile,
-                                  g_bytes_get_data (bytes, NULL),
-                                  g_bytes_get_size (bytes),
-                                  0, &error))
-    {
-      g_warning ("%s", error->message);
-      return FALSE;
-    }
+  keyfile = get_flatpak_metadata (app_id);
+  if (keyfile == NULL)
+    return FALSE;
 
   strv = g_key_file_get_string_list (keyfile, "Context", "sockets", NULL, NULL);
   if (strv && g_strv_contains ((const gchar * const*)strv, "system-bus"))

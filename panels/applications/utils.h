@@ -22,24 +22,23 @@
 
 #include <gio/gio.h>
 #include <gtk/gtk.h>
-#include <flatpak/flatpak.h>
 
 G_BEGIN_DECLS
 
-void                 file_remove_async    (GFile               *file,
-                                           GAsyncReadyCallback  callback,
-                                           gpointer             data);
+void      file_remove_async    (GFile               *file,
+                                GAsyncReadyCallback  callback,
+                                gpointer             data);
 
-void                 file_size_async      (GFile               *file,
-                                           GAsyncReadyCallback  callback,
-                                           gpointer             data);
+void      file_size_async      (GFile               *file,
+                                GAsyncReadyCallback  callback,
+                                gpointer             data);
 
-void                 container_remove_all (GtkContainer        *container);
+void      container_remove_all (GtkContainer        *container);
 
-FlatpakInstalledRef* find_flatpak_ref     (const gchar         *app_id);
+GKeyFile* get_flatpak_metadata (const gchar         *app_id);
 
-guint64              get_flatpak_app_size (const gchar         *app_id);
+guint64   get_flatpak_app_size (const gchar         *app_id);
 
-gchar*               get_app_id           (GAppInfo            *info);
+gchar*    get_app_id           (GAppInfo            *info);
 
 G_END_DECLS
