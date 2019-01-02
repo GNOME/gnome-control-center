@@ -24,7 +24,6 @@
 
 #include <config.h>
 #include <glib/gi18n.h>
-#include <flatpak/flatpak.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -120,41 +119,85 @@ container_remove_all (GtkContainer *container)
   g_list_free (children);
 }
 
-FlatpakInstalledRef *
-find_flatpak_ref (const gchar *app_id)
+static gchar *
+get_output_of (const gchar **argv)
 {
-  g_autoptr(FlatpakInstallation) inst = NULL;
-  g_autoptr(GPtrArray) array = NULL;
-  FlatpakInstalledRef *ref;
-  gint i;
+  g_autofree gchar *output = NULL;
+  int status;
 
-  inst = flatpak_installation_new_user (NULL, NULL);
-  ref = flatpak_installation_get_current_installed_app (inst, app_id, NULL, NULL);
-  if (ref)
-    return ref;
+  if (!g_spawn_sync (NULL,
+                     (gchar**) argv,
+                     NULL,
+                     G_SPAWN_SEARCH_PATH,
+                     NULL, NULL,
+                     &output, NULL,
+                     &status, NULL))
+    return NULL;
 
-  array = flatpak_get_system_installations (NULL, NULL);
-  for (i = 0; i < array->len; i++)
+  if (!g_spawn_check_exit_status (status, NULL))
+    return NULL;
+
+  return g_steal_pointer (&output);
+}
+
+GKeyFile *
+get_flatpak_metadata (const gchar *app_id)
+{
+  const gchar *argv[5] = { "flatpak", "info", "-m", "app", NULL };
+  g_autofree gchar *data = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GKeyFile) keyfile = NULL;
+
+  argv[3] = app_id;
+
+  data = get_output_of (argv);
+  if (data == NULL)
+    return NULL;
+
+  keyfile = g_key_file_new ();
+  if (!g_key_file_load_from_data (keyfile, data, -1, 0, &error))
     {
-      FlatpakInstallation *si = g_ptr_array_index (array, i);
-      ref = flatpak_installation_get_current_installed_app (si, app_id, NULL, NULL);
-      if (ref)
-        return ref;
+      g_warning ("%s", error->message);
+      return NULL;
     }
 
-  return NULL;
+  return g_steal_pointer (&keyfile);
 }
 
 guint64
 get_flatpak_app_size (const gchar *app_id)
 {
-  g_autoptr(FlatpakInstalledRef) ref = NULL;
+  const gchar *argv[5] = { "flatpak", "info", "-s", "app", NULL };
+  g_autofree gchar *data = NULL;
+  guint64 factor;
+  double val;
 
-  ref = find_flatpak_ref (app_id);
-  if (ref)
-    return flatpak_installed_ref_get_installed_size (ref);
+  argv[3] = app_id;
 
-  return 0;
+  data = get_output_of (argv);
+  if (data == NULL)
+    return 0;
+
+  data = g_strstrip (data);
+  
+  if (g_str_has_suffix (data, "kB") || g_str_has_suffix (data, "kb"))
+    factor = 1000;
+  else if (g_str_has_suffix (data, "MB") || g_str_has_suffix (data, "Mb"))
+    factor = 1000 * 1000;
+  else if (g_str_has_suffix (data, "GB") || g_str_has_suffix (data, "Gb"))
+    factor = 1000 * 1000 * 1000;
+  else if (g_str_has_suffix (data, "KiB") || g_str_has_suffix (data, "Kib"))
+    factor = 1024;
+  else if (g_str_has_suffix (data, "MiB") || g_str_has_suffix (data, "Mib"))
+    factor = 1024 * 1024;
+  else if (g_str_has_suffix (data, "GiB") || g_str_has_suffix (data, "Gib"))
+    factor = 1024 * 1024 * 1024;
+  else 
+    factor = 1;
+
+  val = g_ascii_strtod (data, NULL);
+
+  return (guint64)(val * factor);
 }
 
 char *
