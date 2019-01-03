@@ -88,7 +88,7 @@
                     <property name="hexpand">True</property>
 
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="accounts_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="wrap">True</property>
@@ -98,6 +98,9 @@
                         <attributes>
                           <attribute name="scale" value="1.66" />
                         </attributes>
+                        <accessibility>
+                          <relation target="accounts_listbox" type="label-for"/>
+                        </accessibility>
                       </object>
                     </child>
                     <child>
@@ -117,12 +120,15 @@
                             <property name="can_focus">True</property>
                             <property name="selection_mode">none</property>
                             <signal name="row-activated" handler="on_listbox_row_activated" object="CcGoaPanel" swapped="yes" />
+                            <accessibility>
+                              <relation target="accounts_label" type="labelled-by"/>
+                            </accessibility>
                           </object>
                         </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="providers_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="margin-top">20</property>
@@ -131,6 +137,9 @@
                         <attributes>
                           <attribute name="weight" value="bold" />
                         </attributes>
+                        <accessibility>
+                          <relation target="providers_listbox" type="label-for"/>
+                        </accessibility>
                       </object>
                     </child>
                     <child>
@@ -143,6 +152,9 @@
                             <property name="can_focus">True</property>
                             <property name="selection_mode">none</property>
                             <signal name="row-activated" handler="on_provider_row_activated" object="CcGoaPanel" swapped="yes" />
+                            <accessibility>
+                              <relation target="providers_label" type="labelled-by"/>
+                            </accessibility>
                             <child>
                               <object class="GtkListBoxRow" id="more_providers_row">
                                 <property name="visible">True</property>
