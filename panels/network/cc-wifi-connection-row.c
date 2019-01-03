@@ -239,9 +239,21 @@ update_ui (CcWifiConnectionRow *self)
   gtk_widget_set_visible (GTK_WIDGET (self->active_icon), active);
 
   if (security != NM_AP_SEC_UNKNOWN && security != NM_AP_SEC_NONE)
-    gtk_widget_set_child_visible (GTK_WIDGET (self->encrypted_icon), TRUE);
+    {
+      gchar *icon_name;
+
+      gtk_widget_set_child_visible (GTK_WIDGET (self->encrypted_icon), TRUE);
+      if (security == NM_AP_SEC_WEP)
+        icon_name = "channel-insecure-symbolic";
+      else
+        icon_name = "network-wireless-encrypted-symbolic";
+
+      g_object_set (self->encrypted_icon, "icon-name", icon_name, NULL);
+    }
   else
-    gtk_widget_set_child_visible (GTK_WIDGET (self->encrypted_icon), FALSE);
+    {
+      gtk_widget_set_child_visible (GTK_WIDGET (self->encrypted_icon), FALSE);
+    }
 
   if (best_ap)
     {
