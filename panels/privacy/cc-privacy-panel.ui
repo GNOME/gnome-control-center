@@ -827,6 +827,9 @@ All the information we collect is made anonymous, and we will never share your d
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">_Location Services</property>
                             <property name="use_underline">True</property>
+                            <accessibility>
+                              <relation target="location_services_switch" type="label-for"/>
+                            </accessibility>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -841,6 +844,9 @@ All the information we collect is made anonymous, and we will never share your d
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="halign">end</property>
+                            <accessibility>
+                              <relation target="location_services_label" type="labelled-by"/>
+                            </accessibility>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -876,6 +882,9 @@ All the information we collect is made anonymous, and we will never share your d
             <attributes>
               <attribute name="weight" value="bold"/>
             </attributes>
+            <accessibility>
+              <relation target="location_apps_list_box" type="label-for"/>
+            </accessibility>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -896,6 +905,9 @@ All the information we collect is made anonymous, and we will never share your d
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="selection_mode">none</property>
+                <accessibility>
+                  <relation target="location_apps_label" type="labelled-by"/>
+                </accessibility>
               </object>
             </child>
 
