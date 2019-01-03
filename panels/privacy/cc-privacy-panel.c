@@ -1206,6 +1206,39 @@ set_usbguard_value_for_combo (GtkComboBox    *combo_box,
 }
 
 static void
+on_usbguard_param_ready (GObject      *source_object,
+                         GAsyncResult *res,
+                         gpointer      user_data)
+{
+  CcPrivacyPanel *self;
+  GDBusProxy *proxy;
+  const char *name_owner;
+  g_autoptr(GError) error = NULL;
+
+  self = user_data;
+  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (proxy == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+          g_warning ("Failed to connect to USBGuard: %s",
+                     error->message);
+
+      gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), FALSE);
+      gtk_widget_set_sensitive (GTK_WIDGET (self->forbid_usb_combo), FALSE);
+      return;
+    }
+  self->perm_store = proxy;
+
+  name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (proxy));
+  if (name_owner == NULL)
+    {
+      g_debug ("Probably USBGuard is not currently installed.");
+      gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), FALSE);
+      gtk_widget_set_sensitive (GTK_WIDGET (self->forbid_usb_combo), FALSE);
+    }
+}
+
+static void
 add_usbguard (CcPrivacyPanel *self)
 {
   GtkLabel *w;
@@ -1228,6 +1261,17 @@ add_usbguard (CcPrivacyPanel *self)
   g_settings_bind (self->privacy_settings, USB_PROTECTION,
                    self->forbid_usb_combo, "sensitive",
                    G_SETTINGS_BIND_GET);
+
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.usbguard",
+                            "/org/usbguard",
+                            "org.usbguard",
+                            self->cancellable,
+                            on_usbguard_param_ready,
+                            self);
+
 }
 
 static void
