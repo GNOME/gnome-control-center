@@ -60,8 +60,9 @@ struct _CcMouseProperties
 	GtkWidget *tap_to_click_switch;
 	GtkWidget *touchpad_frame;
 	GtkWidget *touchpad_listbox;
+	GtkWidget *touchpad_natural_scrolling_row;
 	GtkWidget *touchpad_natural_scrolling_switch;
-	GtkWidget *touchpad_options_listbox;
+	GtkWidget *touchpad_speed_row;
 	GtkWidget *touchpad_speed_scale;
 	GtkWidget *touchpad_toggle_switch;
 	GtkWidget *two_finger_scrolling_row;
@@ -280,7 +281,31 @@ setup_dialog (CcMouseProperties *self)
 				      touchpad_enabled_set_mapping,
 				      NULL, NULL);
 	g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
-				      self->touchpad_options_listbox, "sensitive",
+				      self->touchpad_natural_scrolling_row, "sensitive",
+				      G_SETTINGS_BIND_GET,
+				      touchpad_enabled_get_mapping,
+				      touchpad_enabled_set_mapping,
+				      NULL, NULL);
+	g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
+				      self->touchpad_speed_row, "sensitive",
+				      G_SETTINGS_BIND_GET,
+				      touchpad_enabled_get_mapping,
+				      touchpad_enabled_set_mapping,
+				      NULL, NULL);
+	g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
+				      self->tap_to_click_row, "sensitive",
+				      G_SETTINGS_BIND_GET,
+				      touchpad_enabled_get_mapping,
+				      touchpad_enabled_set_mapping,
+				      NULL, NULL);
+	g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
+				      self->two_finger_scrolling_row, "sensitive",
+				      G_SETTINGS_BIND_GET,
+				      touchpad_enabled_get_mapping,
+				      touchpad_enabled_set_mapping,
+				      NULL, NULL);
+	g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
+				      self->edge_scrolling_row, "sensitive",
 				      G_SETTINGS_BIND_GET,
 				      touchpad_enabled_get_mapping,
 				      touchpad_enabled_set_mapping,
@@ -299,8 +324,6 @@ setup_dialog (CcMouseProperties *self)
 			 G_SETTINGS_BIND_DEFAULT);
 
 	setup_touchpad_options (self);
-
-	gtk_list_box_set_header_func (GTK_LIST_BOX (self->touchpad_options_listbox), cc_list_box_update_header_func, NULL, NULL);
 }
 
 /* Callback issued when a button is clicked on the dialog */
@@ -379,8 +402,12 @@ cc_mouse_properties_class_init (CcMousePropertiesClass *klass)
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, tap_to_click_switch);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, touchpad_frame);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, touchpad_listbox);
+	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, touchpad_natural_scrolling_row);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, touchpad_natural_scrolling_switch);
-	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, touchpad_options_listbox);
+	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, touchpad_speed_row);
+	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, tap_to_click_row);
+	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, two_finger_scrolling_row);
+	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, edge_scrolling_row);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, touchpad_speed_scale);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, touchpad_toggle_switch);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseProperties, two_finger_scrolling_row);
