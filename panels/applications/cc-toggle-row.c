@@ -24,13 +24,6 @@
 #include "cc-toggle-row.h"
 #include "cc-applications-resources.h"
 
-enum
-{
-  PROP_ZERO,
-  PROP_TITLE,
-  PROP_ALLOWED
-};
-
 struct _CcToggleRow
 {
   GtkListBoxRow parent;
@@ -40,6 +33,13 @@ struct _CcToggleRow
 };
 
 G_DEFINE_TYPE (CcToggleRow, cc_toggle_row, GTK_TYPE_LIST_BOX_ROW)
+
+enum
+{
+  PROP_0,
+  PROP_TITLE,
+  PROP_ALLOWED
+};
 
 static void
 changed_cb (CcToggleRow *row)

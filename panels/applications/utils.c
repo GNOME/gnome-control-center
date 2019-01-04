@@ -108,15 +108,12 @@ file_size_async (GFile               *file,
 void
 container_remove_all (GtkContainer *container)
 {
-  GList *children, *l;
+  g_autoptr(GList) children = NULL;
+  GList *l;
 
   children = gtk_container_get_children (container);
   for (l = children; l; l = l->next)
-    {
-      gtk_widget_destroy (GTK_WIDGET (l->data));
-    }
-
-  g_list_free (children);
+    gtk_widget_destroy (GTK_WIDGET (l->data));
 }
 
 static gchar *
