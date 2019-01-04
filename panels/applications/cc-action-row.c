@@ -24,27 +24,28 @@
 #include "cc-action-row.h"
 #include "cc-applications-resources.h"
 
-enum {
-  PROP_ZERO,
+struct _CcActionRow
+{
+  GtkListBoxRow  parent;
+
+  GtkWidget     *title;
+  GtkWidget     *subtitle;
+  GtkWidget     *button;
+};
+
+G_DEFINE_TYPE (CcActionRow, cc_action_row, GTK_TYPE_LIST_BOX_ROW)
+
+static int activated_signal;
+
+enum
+{
+  PROP_0,
   PROP_TITLE,
   PROP_SUBTITLE,
   PROP_ACTION,
   PROP_ENABLED,
   PROP_DESTRUCTIVE
 };
-
-static int activated_signal;
-
-struct _CcActionRow
-{
-  GtkListBoxRow parent;
-
-  GtkWidget *title;
-  GtkWidget *subtitle;
-  GtkWidget *button;
-};
-
-G_DEFINE_TYPE (CcActionRow, cc_action_row, GTK_TYPE_LIST_BOX_ROW)
 
 static void
 clicked_cb (GtkButton   *button,

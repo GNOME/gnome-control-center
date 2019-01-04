@@ -36,10 +36,9 @@
 #include "search.h"
 #include "utils.h"
 
-enum {
-  PROP_0,
-  PROP_PARAMETERS
-};
+#define MASTER_SCHEMA "org.gnome.desktop.notifications"
+#define APP_SCHEMA MASTER_SCHEMA ".application"
+#define APP_PREFIX "/org/gnome/desktop/notifications/application/"
 
 struct _CcApplicationsPanel
 {
@@ -121,6 +120,12 @@ static void select_app (CcApplicationsPanel *self,
                         const gchar         *app_id);
 
 G_DEFINE_TYPE (CcApplicationsPanel, cc_applications_panel, CC_TYPE_PANEL)
+
+enum
+{
+  PROP_0,
+  PROP_PARAMETERS
+};
 
 /* Callbacks */
 
@@ -212,8 +217,11 @@ static GFile *
 get_flatpak_app_dir (const gchar *app_id,
                      const gchar *subdir)
 {
-  g_autofree gchar *path = g_build_filename (g_get_home_dir (), ".var", "app", app_id, NULL);
-  g_autoptr(GFile) appdir = g_file_new_for_path (path);
+  g_autofree gchar *path = NULL;
+  g_autoptr(GFile) appdir = NULL;
+
+  path = g_build_filename (g_get_home_dir (), ".var", "app", app_id, NULL);
+  appdir = g_file_new_for_path (path);
 
   return g_file_get_child (appdir, subdir);
 }
@@ -226,11 +234,13 @@ set_search_enabled (CcApplicationsPanel *self,
                     gboolean             enabled)
 {
   g_autoptr(GPtrArray) new_apps = NULL;
-  g_autofree gchar *desktop_id = g_strconcat (app_id, ".desktop", NULL);
+  g_autofree gchar *desktop_id = NULL;
   g_auto(GStrv) apps = NULL;
   gpointer key, value;
   gboolean default_disabled;
   gint i;
+
+  desktop_id = g_strconcat (app_id, ".desktop", NULL);
 
   if (!g_hash_table_lookup_extended (self->search_providers, app_id, &key, &value))
     {
@@ -270,21 +280,31 @@ set_search_enabled (CcApplicationsPanel *self,
 }
 
 static gboolean
+search_contains_string_for_app (CcApplicationsPanel *self,
+                                const gchar         *app_id,
+                                const gchar         *setting)
+{
+  g_autofree gchar *desktop_id = NULL;
+  g_auto(GStrv) apps = NULL;
+
+  desktop_id = g_strconcat (app_id, ".desktop", NULL);
+  apps = g_settings_get_strv (self->search_settings, setting);
+
+  return g_strv_contains ((const gchar * const *)apps, desktop_id);
+}
+
+static gboolean
 search_enabled_for_app (CcApplicationsPanel *self,
                         const gchar         *app_id)
 {
-  g_autofree gchar *desktop_id = g_strconcat (app_id, ".desktop", NULL);
-  g_auto(GStrv) apps = g_settings_get_strv (self->search_settings, "enabled");
-  return g_strv_contains ((const gchar * const *)apps, desktop_id);
+  return search_contains_string_for_app (self, app_id, "enabled");
 }
 
 static gboolean
 search_disabled_for_app (CcApplicationsPanel *self,
                          const gchar         *app_id)
 {
-  g_autofree gchar *desktop_id = g_strconcat (app_id, ".desktop", NULL);
-  g_auto(GStrv) apps = g_settings_get_strv (self->search_settings, "disabled");
-  return g_strv_contains ((const gchar * const *)apps, desktop_id);
+  return search_contains_string_for_app (self, app_id, "disabled");
 }
 
 static void
@@ -327,14 +347,16 @@ get_notification_allowed (CcApplicationsPanel *self,
 {
   if (self->notification_settings)
     {
-      *set = TRUE; /* FIXME */
+      /* FIXME */
+      *set = TRUE;
       *allowed = g_settings_get_boolean (self->notification_settings, "enable");
     }
   else
     {
       g_auto(GStrv) perms = get_flatpak_permissions (self, "notifications", "notification", app_id);
       *set = perms != NULL;
-      *set = TRUE; // FIXME: needs unreleased xdg-desktop-portals to write permissions on use
+      /* FIXME: needs unreleased xdg-desktop-portals to write permissions on use */
+      *set = TRUE;
       *allowed = perms == NULL || strcmp (perms[0], "no") != 0;
     }
 }
@@ -380,10 +402,6 @@ munge_app_id (const gchar *app_id)
 
   return id;
 }
-
-#define MASTER_SCHEMA "org.gnome.desktop.notifications"
-#define APP_SCHEMA MASTER_SCHEMA ".application"
-#define APP_PREFIX "/org/gnome/desktop/notifications/application/"
 
 static GSettings *
 get_notification_settings (const gchar *app_id)
@@ -466,7 +484,7 @@ set_location_allowed (CcApplicationsPanel *self,
 {
   const gchar *perms[3];
 
-  // FIXME allow setting accuracy
+  /* FIXME allow setting accuracy */
   perms[0] = allowed ? "EXACT" : "NONE";
   perms[1] = "0";
   perms[2] = NULL;
@@ -733,7 +751,10 @@ add_scheme (CcApplicationsPanel *self,
 
   cc_action_row_set_action (row, _("Unset"), TRUE);
   g_object_set_data_full (G_OBJECT (row), "type", g_strdup (type), g_free);
-  g_signal_connect (row, "activated", G_CALLBACK (unset_cb), self);
+  g_signal_connect_object (row,
+                           "activated",
+                           G_CALLBACK (unset_cb),
+                           self, 0);
 
   if (after)
     {
@@ -776,7 +797,10 @@ add_file_type (CcApplicationsPanel *self,
                               G_BINDING_SYNC_CREATE);
     }
   else
-    pos = -1;
+    {
+      pos = -1;
+    }
+
   gtk_list_box_insert (GTK_LIST_BOX (self->handler_list), GTK_WIDGET (row), pos);
   update_group_row_count (after, 1);
 }
@@ -1046,8 +1070,10 @@ handler_row_activated_cb (GtkListBox          *list,
       row == self->video ||
       row == self->other ||
       row == self->link)
-    cc_info_row_set_expanded (CC_INFO_ROW (row),
-                              !cc_info_row_get_expanded (CC_INFO_ROW (row)));
+    {
+      cc_info_row_set_expanded (CC_INFO_ROW (row),
+                                !cc_info_row_get_expanded (CC_INFO_ROW (row)));
+    }
 }
 
 static gboolean
@@ -1055,7 +1081,8 @@ app_info_recommended_for (GAppInfo    *info,
                           const gchar *type)
 {
   /* this is horribly inefficient. I blame the mime system */
-  GList *list, *l;
+  g_autolist(GObject) list = NULL;
+  GList *l;
   gboolean ret = FALSE;
 
   list = g_app_info_get_recommended_for_type (type);
@@ -1069,8 +1096,6 @@ app_info_recommended_for (GAppInfo    *info,
           break;
         }
     }
-
-  g_list_free_full (list, g_object_unref);
 
   return ret;
 }
@@ -1105,9 +1130,9 @@ static void
 update_handler_sections (CcApplicationsPanel *self,
                          GAppInfo            *info)
 {
+  g_autoptr(GHashTable) hash = NULL;
   const gchar **types;
   gint i;
-  g_autoptr(GHashTable) hash = NULL;
 
   container_remove_all (GTK_CONTAINER (self->handler_list));
 
@@ -1134,17 +1159,20 @@ update_handler_sections (CcApplicationsPanel *self,
   for (i = 0; types[i]; i++)
     {
       gchar *ctype = g_content_type_from_mime_type (types[i]);
+
       if (g_hash_table_contains (hash, ctype))
         {
           g_free (ctype);
           continue;
         }
+
       if (!app_info_recommended_for (info, ctype))
         {
           gtk_widget_set_sensitive (self->handler_reset, TRUE);
           g_free (ctype);
           continue;
         }
+
       g_hash_table_add (hash, ctype);
       add_handler_row (self, ctype);
     }
@@ -1170,8 +1198,8 @@ storage_row_activated_cb (GtkListBox          *list,
 static void
 update_total_size (CcApplicationsPanel *self)
 {
-  guint64 total;
   g_autofree gchar *formatted_size = NULL;
+  guint64 total;
 
   total = self->app_size + self->data_size + self->cache_size;
   formatted_size = g_format_size (total);
@@ -1185,8 +1213,8 @@ set_cache_size (GObject      *source,
                 gpointer      data)
 {
   CcApplicationsPanel *self = data;
-  guint64 *size;
   g_autofree gchar *formatted_size = NULL;
+  guint64 *size;
 
   size = g_object_get_data (G_OBJECT (res), "size");
   self->cache_size = *size;
@@ -1214,8 +1242,8 @@ set_data_size (GObject      *source,
                gpointer      data)
 {
   CcApplicationsPanel *self = data;
-  guint64 *size;
   g_autofree gchar *formatted_size = NULL;
+  guint64 *size;
 
   size = g_object_get_data (G_OBJECT (res), "size");
   self->data_size = *size;
@@ -1231,6 +1259,7 @@ update_data_row (CcApplicationsPanel *self,
                  const gchar          *app_id)
 {
   g_autoptr(GFile) dir = get_flatpak_app_dir (app_id, "data");
+
   g_object_set (self->data, "info", "...", NULL);
   file_size_async (dir, set_data_size, self);
 }
@@ -1241,6 +1270,7 @@ cache_cleared (GObject      *source,
                gpointer      data)
 {
   CcApplicationsPanel *self = data;
+
   update_cache_row (self, self->current_app_id);
 }
 
@@ -1287,6 +1317,7 @@ update_usage_section (CcApplicationsPanel *self,
   if (app_info_is_flatpak (info))
     {
       g_autofree gchar *app_id = get_app_id (info);
+
       gtk_widget_show (self->usage_section);
       update_flatpak_sizes (self, app_id);
     }
@@ -1337,7 +1368,8 @@ update_panel (CcApplicationsPanel *self,
 static void
 populate_applications (CcApplicationsPanel *self)
 {
-  GList *infos, *l;
+  g_autolist(GObject) infos = NULL;
+  GList *l;
 
   container_remove_all (GTK_CONTAINER (self->sidebar_listbox));
 
@@ -1359,8 +1391,6 @@ populate_applications (CcApplicationsPanel *self)
       if (g_strcmp0 (id, self->current_app_id) == 0)
         gtk_list_box_select_row (GTK_LIST_BOX (self->sidebar_listbox), GTK_LIST_BOX_ROW (row));
     }
-
-  g_list_free_full (infos, g_object_unref);
 }
 
 static gint
@@ -1416,7 +1446,8 @@ static void
 select_app (CcApplicationsPanel *self,
             const gchar         *app_id)
 {
-  GList *children, *l;
+  g_autoptr(GList) children = NULL;
+  GList *l;
 
   children = gtk_container_get_children (GTK_CONTAINER (self->sidebar_listbox));
   for (l = children; l; l = l->next)
@@ -1429,7 +1460,6 @@ select_app (CcApplicationsPanel *self,
           break;
         }
     }
-  g_list_free (children);
 }
 
 static void

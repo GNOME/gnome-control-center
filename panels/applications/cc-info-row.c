@@ -24,17 +24,6 @@
 #include "cc-info-row.h"
 #include "cc-applications-resources.h"
 
-enum
-{
-  PROP_ZERO,
-  PROP_TITLE,
-  PROP_USE_MARKUP,
-  PROP_INFO,
-  PROP_HAS_EXPANDER,
-  PROP_IS_LINK,
-  PROP_EXPANDED
-};
-
 struct _CcInfoRow
 {
   GtkListBoxRow parent;
@@ -48,6 +37,17 @@ struct _CcInfoRow
 };
 
 G_DEFINE_TYPE (CcInfoRow, cc_info_row, GTK_TYPE_LIST_BOX_ROW)
+
+enum
+{
+  PROP_0,
+  PROP_TITLE,
+  PROP_USE_MARKUP,
+  PROP_INFO,
+  PROP_HAS_EXPANDER,
+  PROP_IS_LINK,
+  PROP_EXPANDED
+};
 
 static void
 cc_info_row_get_property (GObject    *object,
