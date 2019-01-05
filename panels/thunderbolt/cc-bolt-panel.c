@@ -56,6 +56,10 @@ struct _CcBoltPanel
   GtkLabel           *notification_label;
   GtkRevealer        *notification_revealer;
 
+  /* enrollmode */
+  GSettings          *thunderbolt_settings;
+  GtkWidget          *autoenroll_switch;
+
   /* authmode */
   GtkSwitch          *authmode_switch;
   GtkSpinner         *authmode_spinner;
@@ -180,6 +184,10 @@ bolt_client_ready (GObject      *source,
 
       return;
     }
+
+  g_settings_bind (panel->thunderbolt_settings, "autoenroll",
+                   panel->autoenroll_switch, "active",
+                   G_SETTINGS_BIND_DEFAULT);
 
   g_signal_connect_object (client,
                            "notify::g-name-owner",
@@ -846,6 +854,7 @@ cc_bolt_panel_finalize (GObject *object)
 {
   CcBoltPanel *panel = CC_BOLT_PANEL (object);
 
+  g_clear_object (&panel->thunderbolt_settings);
   g_clear_object (&panel->client);
   g_clear_pointer (&panel->devices, g_hash_table_unref);
   g_clear_object (&panel->permission);
@@ -895,6 +904,7 @@ cc_bolt_panel_class_init (CcBoltPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/thunderbolt/cc-bolt-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, autoenroll_switch);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, authmode_mode);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, authmode_spinner);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, authmode_switch);
@@ -922,6 +932,8 @@ cc_bolt_panel_init (CcBoltPanel *panel)
   g_resources_register (cc_thunderbolt_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (panel));
+
+  panel->thunderbolt_settings = g_settings_new ("org.gnome.desktop.thunderbolt");
 
   gtk_stack_set_visible_child_name (panel->container, "loading");
 
