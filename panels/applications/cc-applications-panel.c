@@ -53,6 +53,7 @@ struct _CcApplicationsPanel
   GCancellable    *cancellable;
 
   gchar           *current_app_id;
+  gchar           *current_flatpak_id;
 
   GHashTable      *globs;
   GHashTable      *search_providers;
@@ -201,16 +202,13 @@ set_flatpak_permissions (CcApplicationsPanel *self,
                           0, G_MAXINT, NULL, NULL);
 }
 
-static gboolean
-app_info_is_flatpak (GAppInfo *info)
+static char *
+get_flatpak_id (GAppInfo *info)
 {
   if (G_IS_DESKTOP_APP_INFO (info))
-    {
-      g_autofree gchar *marker = g_desktop_app_info_get_string (G_DESKTOP_APP_INFO (info), "X-Flatpak");
-      return marker != NULL;
-    }
+    return g_desktop_app_info_get_string (G_DESKTOP_APP_INFO (info), "X-Flatpak");
 
-  return FALSE;
+  return NULL;
 }
 
 static GFile *
@@ -374,7 +372,7 @@ set_notification_allowed (CcApplicationsPanel *self,
       const gchar *perms[2] = { NULL, NULL };
 
       perms[0] = allowed ? "yes" : "no";
-      set_flatpak_permissions (self, "notifications", "notification", self->current_app_id, perms);
+      set_flatpak_permissions (self, "notifications", "notification", self->current_flatpak_id, perms);
     }
 }
 
@@ -438,27 +436,27 @@ set_device_allowed (CcApplicationsPanel *self,
   perms[0] = allowed ? "yes" : "no";
   perms[1] = NULL;
 
-  set_flatpak_permissions (self, "devices", device, self->current_app_id, perms);
+  set_flatpak_permissions (self, "devices", device, self->current_flatpak_id, perms);
 }
 
 static void
 microphone_cb (CcApplicationsPanel *self)
 {
-  if (self->current_app_id)
+  if (self->current_flatpak_id)
     set_device_allowed (self, "microphone", cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->microphone)));
 }
 
 static void
 sound_cb (CcApplicationsPanel *self)
 {
-  if (self->current_app_id)
+  if (self->current_flatpak_id)
    set_device_allowed (self, "speakers", cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->sound)));
 }
 
 static void
 camera_cb (CcApplicationsPanel *self)
 {
-  if (self->current_app_id)
+  if (self->current_flatpak_id)
     set_device_allowed (self, "camera", cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->camera)));
 }
 
@@ -600,39 +598,39 @@ static void
 update_permission_section (CcApplicationsPanel *self,
                            GAppInfo            *info)
 {
-  g_autofree gchar *app_id = get_app_id (info);
+  g_autofree gchar *flatpak_id = get_flatpak_id (info);
   gboolean disabled, allowed, set;
   gboolean has_any = FALSE;
 
-  if (!app_info_is_flatpak (info))
+  if (flatpak_id == NULL)
     {
       gtk_widget_hide (self->permission_section);
       return;
     }
 
   disabled = g_settings_get_boolean (self->privacy_settings, "disable-camera");
-  get_device_allowed (self, "camera", app_id, &set, &allowed);
+  get_device_allowed (self, "camera", flatpak_id, &set, &allowed);
   cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->camera), allowed);
   gtk_widget_set_visible (self->camera, set && !disabled);
   gtk_widget_set_visible (self->no_camera, set && disabled);
   has_any |= set;
 
   disabled = g_settings_get_boolean (self->privacy_settings, "disable-microphone");
-  get_device_allowed (self, "microphone", app_id, &set, &allowed);
+  get_device_allowed (self, "microphone", flatpak_id, &set, &allowed);
   cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->microphone), allowed);
   gtk_widget_set_visible (self->microphone, set && !disabled);
   gtk_widget_set_visible (self->no_microphone, set && disabled);
   has_any |= set;
 
   disabled = !g_settings_get_boolean (self->location_settings, "enabled");
-  get_location_allowed (self, app_id, &set, &allowed);
+  get_location_allowed (self, flatpak_id, &set, &allowed);
   cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->location), allowed);
   gtk_widget_set_visible (self->location, set && !disabled);
   gtk_widget_set_visible (self->no_location, set && disabled);
   has_any |= set;
 
   remove_static_permissions (self);
-  has_any |= add_static_permissions (self, info, app_id);
+  has_any |= add_static_permissions (self, info, flatpak_id);
 
   gtk_widget_set_visible (self->permission_section, has_any);
 }
@@ -644,6 +642,7 @@ update_integration_section (CcApplicationsPanel *self,
                             GAppInfo            *info)
 {
   g_autofree gchar *app_id = get_app_id (info);
+  g_autofree gchar *flatpak_id = get_app_id (info);
   gboolean set, allowed, disabled;
   gboolean has_any = FALSE;
 
@@ -653,16 +652,16 @@ update_integration_section (CcApplicationsPanel *self,
   gtk_widget_set_visible (self->search, set && !disabled);
   gtk_widget_set_visible (self->no_search, set && disabled);
 
-  if (app_info_is_flatpak (info))
+  if (flatpak_id != NULL)
     {
       g_clear_object (&self->notification_settings);
-      get_notification_allowed (self, app_id, &set, &allowed);
+      get_notification_allowed (self, flatpak_id, &set, &allowed);
       cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->notification), allowed);
       gtk_widget_set_visible (self->notification, set);
       has_any |= set;
 
       disabled = g_settings_get_boolean (self->privacy_settings, "disable-sound-output");
-      get_device_allowed (self, "speakers", app_id, &set, &allowed);
+      get_device_allowed (self, "speakers", flatpak_id, &set, &allowed);
       cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->sound), allowed);
       gtk_widget_set_visible (self->sound, set && !disabled);
       gtk_widget_set_visible (self->no_sound, set && disabled);
@@ -1314,12 +1313,12 @@ static void
 update_usage_section (CcApplicationsPanel *self,
                       GAppInfo            *info)
 {
-  if (app_info_is_flatpak (info))
-    {
-      g_autofree gchar *app_id = get_app_id (info);
+  g_autofree gchar *flatpak_id = get_flatpak_id (info);
 
+  if (flatpak_id != NULL)
+    {
       gtk_widget_show (self->usage_section);
-      update_flatpak_sizes (self, app_id);
+      update_flatpak_sizes (self, flatpak_id);
     }
   else
     {
@@ -1356,6 +1355,7 @@ update_panel (CcApplicationsPanel *self,
   gtk_widget_show (self->header_button);
 
   g_clear_pointer (&self->current_app_id, g_free);
+  g_clear_pointer (&self->current_flatpak_id, g_free);
 
   update_permission_section (self, info);
   update_integration_section (self, info);
@@ -1363,6 +1363,7 @@ update_panel (CcApplicationsPanel *self,
   update_usage_section (self, info);
 
   self->current_app_id = get_app_id (info);
+  self->current_flatpak_id = get_flatpak_id (info);
 }
 
 static void
