@@ -164,8 +164,6 @@ cc_action_row_class_init (CcActionRowClass *klass)
                                    g_param_spec_boolean ("destructive", "destructive", "destructive",
                                                          FALSE, G_PARAM_READWRITE));
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-action-row.ui");
-
   activated_signal = g_signal_new ("activated",
                                    G_OBJECT_CLASS_TYPE (object_class),
                                    G_SIGNAL_RUN_FIRST,
@@ -173,6 +171,8 @@ cc_action_row_class_init (CcActionRowClass *klass)
                                    NULL, NULL,
                                    NULL,
                                    G_TYPE_NONE, 0);
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-action-row.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcActionRow, title);
   gtk_widget_class_bind_template_child (widget_class, CcActionRow, subtitle);
