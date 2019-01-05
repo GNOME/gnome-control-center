@@ -48,8 +48,7 @@ enum
 };
 
 static void
-clicked_cb (GtkButton   *button,
-            CcActionRow *row)
+clicked_cb (CcActionRow *row)
 {
   g_signal_emit (row, activated_signal, 0);
 }
@@ -167,7 +166,6 @@ cc_action_row_class_init (CcActionRowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-action-row.ui");
 
-
   activated_signal = g_signal_new ("activated",
                                    G_OBJECT_CLASS_TYPE (object_class),
                                    G_SIGNAL_RUN_FIRST,
@@ -179,15 +177,14 @@ cc_action_row_class_init (CcActionRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcActionRow, title);
   gtk_widget_class_bind_template_child (widget_class, CcActionRow, subtitle);
   gtk_widget_class_bind_template_child (widget_class, CcActionRow, button);
+
+  gtk_widget_class_bind_template_callback (widget_class, clicked_cb);
 }
 
 static void
 cc_action_row_init (CcActionRow *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (self), FALSE);
-  g_signal_connect (self->button, "clicked", G_CALLBACK (clicked_cb), self);
 }
 
 CcActionRow *
