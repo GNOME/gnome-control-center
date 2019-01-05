@@ -167,8 +167,8 @@ get_flatpak_permissions (CcApplicationsPanel *self,
   g_autoptr(GVariant) ret = NULL;
   g_autoptr(GVariantIter) iter = NULL;
   g_auto(GStrv) permissions = NULL;
-  GVariant *val;
-  gchar *key;
+  g_autoptr(GVariant) val = NULL;
+  g_autofree gchar *key = NULL;
 
   ret = g_dbus_proxy_call_sync (self->perm_store,
                                 "Lookup",
@@ -182,13 +182,13 @@ get_flatpak_permissions (CcApplicationsPanel *self,
   while (g_variant_iter_loop (iter, "{s@as}", &key, &val))
     {
       if (strcmp (key, app_id) == 0)
-        {
-          permissions = g_variant_dup_strv (val, NULL); 
-          break;
-        }
+        return g_variant_dup_strv (val, NULL); 
     }
 
-  return g_steal_pointer (&permissions);
+  val = NULL; /* freed by g_variant_iter_loop */
+  key = NULL;
+
+  return NULL;
 }
 
 static void
