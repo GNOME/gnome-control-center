@@ -41,10 +41,10 @@ G_DEFINE_TYPE (CcApplicationsRow, cc_applications_row, GTK_TYPE_LIST_BOX_ROW)
 static void
 cc_applications_row_finalize (GObject *object)
 {
-  CcApplicationsRow *row = CC_APPLICATIONS_ROW (object);
+  CcApplicationsRow *self = CC_APPLICATIONS_ROW (object);
 
-  g_object_unref (row->info);
-  g_free (row->sortkey);
+  g_object_unref (self->info);
+  g_free (self->sortkey);
 
   G_OBJECT_CLASS (cc_applications_row_parent_class)->finalize (object);
 }
@@ -73,30 +73,30 @@ cc_applications_row_init (CcApplicationsRow *self)
 CcApplicationsRow *
 cc_applications_row_new (GAppInfo *info)
 {
-  CcApplicationsRow *row;
+  CcApplicationsRow *self;
   g_autofree gchar *key = NULL;
 
-  row = g_object_new (CC_TYPE_APPLICATIONS_ROW, NULL);
+  self = g_object_new (CC_TYPE_APPLICATIONS_ROW, NULL);
 
-  row->info = g_object_ref (info);
+  self->info = g_object_ref (info);
 
   key = g_utf8_casefold (g_app_info_get_display_name (info), -1);
-  row->sortkey = g_utf8_collate_key (key, -1);
+  self->sortkey = g_utf8_collate_key (key, -1);
 
-  gtk_image_set_from_gicon (GTK_IMAGE (row->image), g_app_info_get_icon (info), GTK_ICON_SIZE_BUTTON);
-  gtk_label_set_label (GTK_LABEL (row->label), g_app_info_get_display_name (info));
+  gtk_image_set_from_gicon (GTK_IMAGE (self->image), g_app_info_get_icon (info), GTK_ICON_SIZE_BUTTON);
+  gtk_label_set_label (GTK_LABEL (self->label), g_app_info_get_display_name (info));
 
-  return row;
+  return self;
 }
 
 GAppInfo *
-cc_applications_row_get_info (CcApplicationsRow *row)
+cc_applications_row_get_info (CcApplicationsRow *self)
 {
-  return row->info;
+  return self->info;
 }
 
 const gchar *
-cc_applications_row_get_sort_key (CcApplicationsRow *row)
+cc_applications_row_get_sort_key (CcApplicationsRow *self)
 {
-  return row->sortkey;
+  return self->sortkey;
 }
