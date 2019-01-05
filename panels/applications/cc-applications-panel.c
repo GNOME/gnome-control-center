@@ -130,7 +130,7 @@ enum
 
 /* Callbacks */
 
-static void
+static gboolean
 privacy_link_cb (CcApplicationsPanel *self)
 {
   CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
@@ -138,6 +138,8 @@ privacy_link_cb (CcApplicationsPanel *self)
 
   if (!cc_shell_set_active_panel_from_id (shell, "privacy", NULL, &error))
     g_warning ("Failed to switch to privacy panel: %s", error->message);
+
+  return TRUE;
 }
 
 static void
