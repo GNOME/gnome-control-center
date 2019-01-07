@@ -73,6 +73,7 @@ struct _CcPrivacyPanel
   GtkSwitch   *show_notifications_switch;
   GtkDialog   *usbguard_dialog;
   GtkSwitch   *usbguard_protection_switch;
+  GtkLabel    *usbguard_label;
   GtkComboBox *forbid_usb_combo;
   GtkDialog   *software_dialog;
   GtkSwitch   *software_usage_switch;
@@ -1207,6 +1208,51 @@ set_usbguard_value_for_combo (GtkComboBox    *combo_box,
 }
 
 static void
+update_usbguard_label (CcPrivacyPanel *self)
+{
+  gchar *label;
+  guint value_level;
+  gboolean protection;
+  const char *name_owner;
+
+  name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->usb_proxy));
+  g_settings_get (self->privacy_settings, USB_PROTECTION, "b", &protection);
+  g_settings_get (self->privacy_settings, USB_PROTECTION_LEVEL, "u", &value_level);
+
+  label = _("Off");
+
+  if (protection && name_owner)
+    {
+      switch (value_level)
+        {
+          case 1:
+            label = _("With Screen Locked");
+            break;
+          case 2:
+            label = _("Always");
+            break;
+          default:
+            label = _("Never");
+            break;
+        }
+    }
+
+  gtk_label_set_label (self->usbguard_label, label);
+}
+
+static void
+on_usbguard_settings_changed (GSettings      *settings,
+                              const char     *key,
+                              CcPrivacyPanel *panel)
+{
+  if (g_str_equal (key, USB_PROTECTION) == FALSE &&
+      g_str_equal (key, USB_PROTECTION_LEVEL) == FALSE)
+    return;
+
+  update_usbguard_label (panel);
+}
+
+static void
 on_usbguard_owner_changed_cb (GObject      *source_object,
                               GAsyncResult *res,
                               gpointer      user_data)
@@ -1214,6 +1260,9 @@ on_usbguard_owner_changed_cb (GObject      *source_object,
   CcPrivacyPanel *self = user_data;
   const char *name_owner;
   gboolean active = TRUE;
+  gboolean protection;
+
+  g_settings_get (self->privacy_settings, USB_PROTECTION, "b", &protection);
 
   name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->usb_proxy));
   if (name_owner == NULL)
@@ -1223,7 +1272,11 @@ on_usbguard_owner_changed_cb (GObject      *source_object,
     }
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), active);
+  if (!protection)
+    active = FALSE;
   gtk_widget_set_sensitive (GTK_WIDGET (self->forbid_usb_combo), active);
+
+  update_usbguard_label (self);
 }
 
 static void
@@ -1245,6 +1298,7 @@ on_usbguard_param_ready (GObject      *source_object,
 
       gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), FALSE);
       gtk_widget_set_sensitive (GTK_WIDGET (self->forbid_usb_combo), FALSE);
+      gtk_label_set_label (self->usbguard_label, _("Off"));
       return;
     }
   self->usb_proxy = proxy;
@@ -1261,16 +1315,24 @@ on_usbguard_param_ready (GObject      *source_object,
 static void
 add_usbguard (CcPrivacyPanel *self)
 {
-  GtkLabel *w;
-  w = get_on_off_label (self->privacy_settings, USB_PROTECTION);
-  gtk_widget_show (GTK_WIDGET (w));
-  add_row (self, _("Forbid new USB devices"), self->usbguard_dialog, GTK_WIDGET (w));
+  self->usbguard_label = GTK_LABEL (gtk_label_new (""));
+  gtk_widget_show (GTK_WIDGET (self->usbguard_label));
+
+  add_row (self,
+           _("Forbid new USB devices"),
+           self->usbguard_dialog,
+           GTK_WIDGET (self->usbguard_label));
 
   set_usbguard_value_for_combo (self->forbid_usb_combo, self);
+
+  update_usbguard_label (self);
 
   g_settings_bind (self->privacy_settings, USB_PROTECTION,
                    self->usbguard_protection_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
+
+  g_signal_connect (self->privacy_settings, "changed",
+                    G_CALLBACK (on_usbguard_settings_changed), self);
 
   g_signal_connect (self->usbguard_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
