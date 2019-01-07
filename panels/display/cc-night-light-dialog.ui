@@ -113,17 +113,17 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkFrame">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">22</property>
-                    <child>
+                    <property name="shadow_type">none</property>
+                    <child type="label">
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
                         <property name="hexpand">True</property>
+                        <property name="margin-bottom">22</property>
                         <property name="label" translatable="yes">Schedule</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
@@ -131,64 +131,72 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkButtonBox" id="togglebutton_box">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="halign">fill</property>
-                        <property name="hexpand">True</property>
-                        <property name="layout_style">expand</property>
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">22</property>
                         <child>
-                          <object class="GtkRadioButton" id="togglebutton_automatic">
-                            <property name="label" translatable="yes">Sunset to Sunrise</property>
+                          <object class="GtkButtonBox" id="togglebutton_box">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="draw_indicator">False</property>
-                            <property name="active">True</property>
-                            <signal name="toggled" handler="dialog_mode_changed_cb" object="CcNightLightDialog" swapped="no" />
+                            <property name="can_focus">False</property>
+                            <property name="halign">fill</property>
+                            <property name="hexpand">True</property>
+                            <property name="layout_style">expand</property>
+                            <child>
+                              <object class="GtkRadioButton" id="togglebutton_automatic">
+                                <property name="label" translatable="yes">Sunset to Sunrise</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="draw_indicator">False</property>
+                                <property name="active">True</property>
+                                <signal name="toggled" handler="dialog_mode_changed_cb" object="CcNightLightDialog" swapped="no" />
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkRadioButton" id="togglebutton_manual">
+                                <property name="label" translatable="yes">Manual</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="group">togglebutton_automatic</property>
+                                <property name="draw_indicator">False</property>
+                                <signal name="toggled" handler="dialog_mode_changed_cb" object="CcNightLightDialog" swapped="no" />
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkRadioButton" id="togglebutton_off">
+                                <property name="label" translatable="yes">_Off</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="draw_indicator">False</property>
+                                <property name="group">togglebutton_automatic</property>
+                                <property name="use_underline">True</property>
+                                <signal name="toggled" handler="dialog_mode_changed_cb" object="CcNightLightDialog" swapped="no" />
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <style>
+                              <class name="linked"/>
+                            </style>
                           </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
                         </child>
-                        <child>
-                          <object class="GtkRadioButton" id="togglebutton_manual">
-                            <property name="label" translatable="yes">Manual</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="group">togglebutton_automatic</property>
-                            <property name="draw_indicator">False</property>
-                            <signal name="toggled" handler="dialog_mode_changed_cb" object="CcNightLightDialog" swapped="no" />
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkRadioButton" id="togglebutton_off">
-                            <property name="label" translatable="yes">_Off</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="draw_indicator">False</property>
-                            <property name="group">togglebutton_automatic</property>
-                            <property name="use_underline">True</property>
-                            <signal name="toggled" handler="dialog_mode_changed_cb" object="CcNightLightDialog" swapped="no" />
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                        <style>
-                          <class name="linked"/>
-                        </style>
                       </object>
                     </child>
                   </object>
