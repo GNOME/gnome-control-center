@@ -91,6 +91,7 @@ struct _CcPrivacyPanel
 
   GDBusProxy *gclue_manager;
   GDBusProxy *perm_store;
+  GDBusProxy *usb_proxy;
   GVariant *location_apps_perms;
   GVariant *location_apps_data;
   GHashTable *location_app_switches;
@@ -1206,13 +1207,32 @@ set_usbguard_value_for_combo (GtkComboBox    *combo_box,
 }
 
 static void
+on_usbguard_owner_changed_cb (GObject      *source_object,
+                              GAsyncResult *res,
+                              gpointer      user_data)
+{
+  CcPrivacyPanel *self = user_data;
+  const char *name_owner;
+  gboolean active = TRUE;
+
+  name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->usb_proxy));
+  if (name_owner == NULL)
+    {
+      g_debug ("Probably USBGuard is not running or is not installed.");
+      active = FALSE;
+    }
+
+  gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), active);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->forbid_usb_combo), active);
+}
+
+static void
 on_usbguard_param_ready (GObject      *source_object,
                          GAsyncResult *res,
                          gpointer      user_data)
 {
   CcPrivacyPanel *self;
   GDBusProxy *proxy;
-  const char *name_owner;
   g_autoptr(GError) error = NULL;
 
   self = user_data;
@@ -1227,15 +1247,15 @@ on_usbguard_param_ready (GObject      *source_object,
       gtk_widget_set_sensitive (GTK_WIDGET (self->forbid_usb_combo), FALSE);
       return;
     }
-  self->perm_store = proxy;
+  self->usb_proxy = proxy;
 
-  name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (proxy));
-  if (name_owner == NULL)
-    {
-      g_debug ("Probably USBGuard is not currently installed.");
-      gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), FALSE);
-      gtk_widget_set_sensitive (GTK_WIDGET (self->forbid_usb_combo), FALSE);
-    }
+  on_usbguard_owner_changed_cb (NULL, NULL, self);
+
+  g_signal_connect_object (self->usb_proxy,
+                           "notify::g-name-owner",
+                           G_CALLBACK (on_usbguard_owner_changed_cb),
+                           self,
+                           0);
 }
 
 static void
@@ -1389,6 +1409,7 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_object (&self->gclue_manager);
   g_clear_object (&self->cancellable);
   g_clear_object (&self->perm_store);
+  g_clear_object (&self->usb_proxy);
   g_clear_object (&self->location_icon_size_group);
   g_clear_pointer (&self->location_apps_perms, g_variant_unref);
   g_clear_pointer (&self->location_apps_data, g_variant_unref);
