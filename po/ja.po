@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2018-12-18 20:54+0000\n"
-"PO-Revision-Date: 2019-01-03 01:58+0900\n"
+"POT-Creation-Date: 2019-01-07 13:04+0000\n"
+"PO-Revision-Date: 2019-01-07 21:32+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -75,7 +75,7 @@ msgstr "引き伸ばす"
 #: panels/background/background.ui:288
 msgctxt "background, style"
 msgid "Span"
-msgstr "スパン(複数に跨げる)"
+msgstr "スパン (複数に跨げる)"
 
 #: panels/background/cc-background-chooser-dialog.c:412
 msgid "Wallpapers"
@@ -126,7 +126,7 @@ msgstr "画像を %s フォルダーに追加すると、その画像がここ�
 #: panels/network/net-device-wifi.c:1733 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:330
-#: panels/privacy/cc-privacy-panel.c:1051 panels/region/cc-format-chooser.ui:24
+#: panels/privacy/cc-privacy-panel.c:1123 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:607
 #: panels/sharing/cc-sharing-panel.c:427
@@ -1148,7 +1148,7 @@ msgstr "横方向 (逆向き)"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
 #: panels/display/cc-display-panel.c:617
-#: panels/printers/pp-options-dialog.c:558
+#: panels/printers/pp-options-dialog.c:560
 msgid "Orientation"
 msgstr "向き"
 
@@ -1163,7 +1163,7 @@ msgstr "リフレッシュレート"
 
 #: panels/display/cc-display-panel.c:950
 msgid "Scale"
-msgstr "スケール"
+msgstr "サイズ調整"
 
 #: panels/display/cc-display-panel.c:1001
 msgid "Adjust for TV"
@@ -1213,11 +1213,11 @@ msgstr "変更を適用しますか?"
 
 #: panels/display/cc-display-panel.c:2098
 msgid "Changes Cannot be Applied"
-msgstr ""
+msgstr "変更を適用できません"
 
 #: panels/display/cc-display-panel.c:2099
 msgid "This could be due to hardware limitations."
-msgstr ""
+msgstr "この原因はハードウェアの制限にある可能性があります。"
 
 #: panels/display/cc-display-panel.c:2230
 #, c-format
@@ -1228,7 +1228,7 @@ msgstr "%.2lf Hz"
 #: panels/display/cc-display-panel.c:2402
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2111 panels/power/cc-power-panel.c:2118
-#: panels/privacy/cc-privacy-panel.c:206 panels/privacy/cc-privacy-panel.c:273
+#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:279
 #: panels/universal-access/cc-ua-panel.c:478
 #: panels/universal-access/cc-ua-panel.c:841
 #: panels/universal-access/cc-ua-panel.c:854
@@ -1240,7 +1240,7 @@ msgstr "オン"
 #: panels/display/cc-display-panel.c:2402 panels/network/net-proxy.c:54
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2105 panels/power/cc-power-panel.c:2116
-#: panels/privacy/cc-privacy-panel.c:206 panels/privacy/cc-privacy-panel.c:273
+#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:279
 #: panels/universal-access/cc-ua-panel.c:478
 #: panels/universal-access/cc-ua-panel.c:841
 #: panels/universal-access/cc-ua-panel.c:854
@@ -1302,7 +1302,7 @@ msgstr "日没から日の出まで"
 #: panels/network/connection-editor/ip6-page.ui:83
 #: panels/network/net-proxy.c:56 panels/network/network-proxy.ui:113
 #: panels/network/network-wifi.ui:776 panels/network/network-wifi.ui:1053
-#: panels/privacy/cc-privacy-panel.c:233
+#: panels/privacy/cc-privacy-panel.c:239
 msgid "Manual"
 msgstr "手動"
 
@@ -1342,7 +1342,7 @@ msgstr "接続したモニターやプロジェクターの使用方法を変更
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/display/gnome-display-panel.desktop.in.in:7
 msgid "preferences-desktop-display"
-msgstr ""
+msgstr "preferences-desktop-display"
 
 #. Translators: Search terms to find the Displays panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/display/gnome-display-panel.desktop.in.in:19
@@ -1595,7 +1595,7 @@ msgstr "既定のアプリケーションを設定します"
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/info/gnome-default-apps-panel.desktop.in.in:7
 msgid "starred"
-msgstr ""
+msgstr "starred"
 
 #. Translators: Search terms to find the Default Applications panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/info/gnome-default-apps-panel.desktop.in.in:19
@@ -1644,7 +1644,7 @@ msgstr "リムーバブルメディアを設定します"
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/info/gnome-removable-media-panel.desktop.in.in:7
 msgid "media-removable"
-msgstr ""
+msgstr "media-removable"
 
 #. Translators: Search terms to find the Removable Media panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/info/gnome-removable-media-panel.desktop.in.in:19
@@ -1957,7 +1957,7 @@ msgstr "キーボードショートカットの表示や変更、タイピング
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:7
 msgid "input-keyboard"
-msgstr ""
+msgstr "input-keyboard"
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:19
@@ -2016,7 +2016,7 @@ msgid "Set"
 msgstr "設定"
 
 # Button Label
-#: panels/mouse/cc-mouse-panel.c:80 panels/wacom/cc-wacom-panel.c:449
+#: panels/mouse/cc-mouse-panel.c:80 panels/wacom/cc-wacom-panel.c:448
 msgid "Test Your _Settings"
 msgstr "設定を確認する(_S)"
 
@@ -2481,7 +2481,7 @@ msgstr "従量制課金接続のような制限のある接続に適していま
 #: panels/network/connection-editor/ip6-page.ui:291
 #: panels/network/net-proxy.c:58 panels/network/network-proxy.ui:103
 #: panels/network/wireless-security/eap-method-peap.ui:22
-#: panels/privacy/cc-privacy-panel.c:233
+#: panels/privacy/cc-privacy-panel.c:239
 msgid "Automatic"
 msgstr "自動"
 
@@ -2569,7 +2569,7 @@ msgstr "アドレス"
 #: panels/network/connection-editor/ip4-page.ui:313
 #: panels/network/connection-editor/ip6-page.ui:143
 #: panels/network/connection-editor/ip6-page.ui:327
-#: panels/printers/details-dialog.ui:87
+#: panels/printers/details-dialog.ui:89
 msgid "Address"
 msgstr "アドレス"
 
@@ -2739,7 +2739,7 @@ msgstr "ネットワークへの接続方法を設定します。"
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/network/gnome-network-panel.desktop.in.in:7
 msgid "network-workgroup"
-msgstr ""
+msgstr "network-workgroup"
 
 #. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in.in:19
@@ -2758,7 +2758,7 @@ msgstr "Wi-Fi ネットワークへの接続方法を設定します。"
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/network/gnome-wifi-panel.desktop.in.in:7
 msgid "network-wireless"
-msgstr ""
+msgstr "network-wireless"
 
 #. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in.in:19
@@ -3777,7 +3777,7 @@ msgstr "ロック画面での通知(_L)"
 
 #. List of applications.
 #: panels/notifications/cc-notifications-panel.ui:167
-#: panels/privacy/cc-privacy-panel.ui:875 panels/sound/gvc-mixer-dialog.c:1796
+#: panels/privacy/cc-privacy-panel.ui:1085 panels/sound/gvc-mixer-dialog.c:1796
 msgid "Applications"
 msgstr "アプリケーション"
 
@@ -3836,7 +3836,7 @@ msgstr "オンラインアカウントへの接続や利用方法を設定しま
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in.in:7
 msgid "goa-panel"
-msgstr ""
+msgstr "goa-panel"
 
 #. Translators: Search terms to find the Online Accounts panel.
 #. Do NOT translate or localize the semicolons!
@@ -3992,7 +3992,7 @@ msgid "Media player"
 msgstr "音楽プレイヤー"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:577 panels/wacom/cc-wacom-panel.c:829
+#: panels/power/cc-power-panel.c:577 panels/wacom/cc-wacom-panel.c:828
 msgid "Tablet"
 msgstr "タブレット"
 
@@ -4336,7 +4336,7 @@ msgstr "バッテリー状態の表示、省電力の設定をします"
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/power/gnome-power-panel.desktop.in.in:7
 msgid "gnome-power-manager"
-msgstr ""
+msgstr "gnome-power-manager"
 
 #. Translators: Search terms to find the Power panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/power/gnome-power-panel.desktop.in.in:19
@@ -4390,29 +4390,29 @@ msgstr "新しいプリンターを追加できませんでした。"
 msgid "Could not load ui: %s"
 msgstr "ui ファイルを読み込めませんでした: %s"
 
-#: panels/printers/details-dialog.ui:63 panels/printers/printer-entry.ui:223
+#: panels/printers/details-dialog.ui:64 panels/printers/printer-entry.ui:223
 msgid "Location"
 msgstr "場所"
 
 #. Translators: Name of column showing printer drivers
-#: panels/printers/details-dialog.ui:111
+#: panels/printers/details-dialog.ui:114
 #: panels/printers/pp-ppd-selection-dialog.c:250
 msgid "Driver"
 msgstr "ドライバー"
 
-#: panels/printers/details-dialog.ui:147
+#: panels/printers/details-dialog.ui:152
 msgid "Searching for preferred drivers…"
 msgstr "推奨ドライバーの検索中…"
 
-#: panels/printers/details-dialog.ui:169
+#: panels/printers/details-dialog.ui:174
 msgid "Search for Drivers"
 msgstr "ドライバーを検索する"
 
-#: panels/printers/details-dialog.ui:177
+#: panels/printers/details-dialog.ui:182
 msgid "Select from Database…"
 msgstr "データベースから選択…"
 
-#: panels/printers/details-dialog.ui:185
+#: panels/printers/details-dialog.ui:190
 msgid "Install PPD File…"
 msgstr "PPDファイルのインストール…"
 
@@ -4492,7 +4492,7 @@ msgstr ""
 
 #. Translators: This button triggers the printing of a test page.
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/options-dialog.ui:22 panels/printers/pp-options-dialog.c:893
+#: panels/printers/options-dialog.ui:22 panels/printers/pp-options-dialog.c:895
 msgid "Test Page"
 msgstr "テストページ"
 
@@ -4723,65 +4723,65 @@ msgid "GhostScript pre-filtering"
 msgstr "GhostScriptのプレフィルタリング"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: panels/printers/pp-options-dialog.c:534
+#: panels/printers/pp-options-dialog.c:536
 msgid "Pages per side"
 msgstr "片面のページ数"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: panels/printers/pp-options-dialog.c:546
+#: panels/printers/pp-options-dialog.c:548
 msgid "Two-sided"
 msgstr "両面"
 
 #. Translators: "General" tab contains general printer options
-#: panels/printers/pp-options-dialog.c:655
+#: panels/printers/pp-options-dialog.c:657
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "汎用"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: panels/printers/pp-options-dialog.c:658
+#: panels/printers/pp-options-dialog.c:660
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "ページ設定"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: panels/printers/pp-options-dialog.c:661
+#: panels/printers/pp-options-dialog.c:663
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "インストール可能なオプション"
 
 #. Translators: "Job" tab contains settings for jobs
-#: panels/printers/pp-options-dialog.c:664
+#: panels/printers/pp-options-dialog.c:666
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "ジョブ"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: panels/printers/pp-options-dialog.c:667
+#: panels/printers/pp-options-dialog.c:669
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "画質"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: panels/printers/pp-options-dialog.c:670
+#: panels/printers/pp-options-dialog.c:672
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "色"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: panels/printers/pp-options-dialog.c:673
+#: panels/printers/pp-options-dialog.c:675
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "表面処理"
 
 #. Translators: "Advanced" tab contains all others settings
-#: panels/printers/pp-options-dialog.c:676
+#: panels/printers/pp-options-dialog.c:678
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "高度"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:908
+#: panels/printers/pp-options-dialog.c:910
 msgid "Test page"
 msgstr "テストページ"
 
@@ -5010,73 +5010,102 @@ msgstr ""
 "申し訳ありません! システムの印刷サービスは\n"
 "現在、利用できないようです。"
 
-#: panels/privacy/cc-privacy-panel.c:403 panels/privacy/cc-privacy-panel.ui:280
+#: panels/privacy/cc-privacy-panel.c:409 panels/privacy/cc-privacy-panel.ui:280
 msgid "Screen Lock"
 msgstr "画面ロック"
 
-#: panels/privacy/cc-privacy-panel.c:447
+#: panels/privacy/cc-privacy-panel.c:453
 msgid "In use"
 msgstr "使用中"
 
-#: panels/privacy/cc-privacy-panel.c:452
+#: panels/privacy/cc-privacy-panel.c:458
 msgctxt "Location services status"
 msgid "On"
 msgstr "オン"
 
-#: panels/privacy/cc-privacy-panel.c:453
+#: panels/privacy/cc-privacy-panel.c:459
 msgctxt "Location services status"
 msgid "Off"
 msgstr "オフ"
 
-#: panels/privacy/cc-privacy-panel.c:830 panels/privacy/cc-privacy-panel.ui:745
+#: panels/privacy/cc-privacy-panel.c:836 panels/privacy/cc-privacy-panel.ui:955
 msgid "Location Services"
 msgstr "位置情報サービス"
 
-#: panels/privacy/cc-privacy-panel.c:950 panels/privacy/cc-privacy-panel.ui:127
+#: panels/privacy/cc-privacy-panel.c:881
+msgctxt "Camera status"
+msgid "Off"
+msgstr "オフ"
+
+#: panels/privacy/cc-privacy-panel.c:883
+msgctxt "Camera status"
+msgid "On"
+msgstr "オン"
+
+#: panels/privacy/cc-privacy-panel.c:894 panels/privacy/cc-privacy-panel.ui:745
+msgid "Camera"
+msgstr "カメラ"
+
+#: panels/privacy/cc-privacy-panel.c:914
+msgctxt "Microphone status"
+msgid "Off"
+msgstr "オフ"
+
+#: panels/privacy/cc-privacy-panel.c:916
+msgctxt "Microphone status"
+msgid "On"
+msgstr "オン"
+
+#: panels/privacy/cc-privacy-panel.c:927 panels/privacy/cc-privacy-panel.ui:850
+msgid "Microphone"
+msgstr ""
+
+#: panels/privacy/cc-privacy-panel.c:1022
+#: panels/privacy/cc-privacy-panel.ui:127
 msgid "Usage & History"
 msgstr "使用と履歴"
 
-#: panels/privacy/cc-privacy-panel.c:1071
+#: panels/privacy/cc-privacy-panel.c:1143
 msgid "Empty all items from Trash?"
 msgstr "ゴミ箱からすべてのアイテムを削除してもよろしいですか?"
 
-#: panels/privacy/cc-privacy-panel.c:1072
+#: panels/privacy/cc-privacy-panel.c:1144
 msgid "All items in the Trash will be permanently deleted."
 msgstr "ここでアイテムを削除すると元に戻すことはできません。"
 
-#: panels/privacy/cc-privacy-panel.c:1073
+#: panels/privacy/cc-privacy-panel.c:1145
 msgid "_Empty Trash"
 msgstr "ゴミ箱を空にする(_E)"
 
-#: panels/privacy/cc-privacy-panel.c:1094
+#: panels/privacy/cc-privacy-panel.c:1166
 msgid "Delete all the temporary files?"
 msgstr "一時ファイルをすべて削除しますか?"
 
-#: panels/privacy/cc-privacy-panel.c:1095
+#: panels/privacy/cc-privacy-panel.c:1167
 msgid "All the temporary files will be permanently deleted."
 msgstr "一時ファイルは完全に削除されます。"
 
-#: panels/privacy/cc-privacy-panel.c:1096
+#: panels/privacy/cc-privacy-panel.c:1168
 msgid "_Purge Temporary Files"
 msgstr "一時ファイルを削除する(_P)"
 
-#: panels/privacy/cc-privacy-panel.c:1118
+#: panels/privacy/cc-privacy-panel.c:1190
 #: panels/privacy/cc-privacy-panel.ui:432
 msgid "Purge Trash & Temporary Files"
 msgstr "ゴミ箱と一時ファイルの削除"
 
-#: panels/privacy/cc-privacy-panel.c:1151
+#: panels/privacy/cc-privacy-panel.c:1223
 #: panels/privacy/cc-privacy-panel.ui:637
 msgid "Software Usage"
 msgstr "ソフトウェアの使用状況"
 
-#: panels/privacy/cc-privacy-panel.c:1190
-#: panels/privacy/cc-privacy-panel.ui:959
+#: panels/privacy/cc-privacy-panel.c:1262
+#: panels/privacy/cc-privacy-panel.ui:1169
 msgid "Problem Reporting"
 msgstr "問題報告"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: panels/privacy/cc-privacy-panel.c:1202
+#: panels/privacy/cc-privacy-panel.c:1274
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -5086,7 +5115,7 @@ msgstr ""
 "役立てることができます。レポートは匿名で送信され、個人データは取り除かれま"
 "す。"
 
-#: panels/privacy/cc-privacy-panel.c:1214
+#: panels/privacy/cc-privacy-panel.c:1286
 #: panels/privacy/cc-privacy-panel.ui:719
 msgid "Privacy Policy"
 msgstr "プライバシーポリシー"
@@ -5308,6 +5337,26 @@ msgstr "ソフトウェアの使用統計情報を送信する(_S)"
 
 #: panels/privacy/cc-privacy-panel.ui:764
 msgid ""
+"Use of the camera allows applications to capture photos and video. Disabling "
+"the camera may cause some applications to not function properly."
+msgstr ""
+
+#: panels/privacy/cc-privacy-panel.ui:812
+msgid "_Camera"
+msgstr "カメラ(_C)"
+
+#: panels/privacy/cc-privacy-panel.ui:869
+msgid ""
+"Use of the microphone allows applications to capture sounds. Disabling the "
+"microphone may cause some applications to not function properly."
+msgstr ""
+
+#: panels/privacy/cc-privacy-panel.ui:917
+msgid "_Microphone"
+msgstr ""
+
+#: panels/privacy/cc-privacy-panel.ui:974
+msgid ""
 "Location services allow applications to know your location. Using Wi-Fi and "
 "mobile broadband increases accuracy."
 msgstr ""
@@ -5315,7 +5364,7 @@ msgstr ""
 "ようになります。Wi-Fi やモバイルブロードバンドを使用している場合、より正確な"
 "位置を取得できます。"
 
-#: panels/privacy/cc-privacy-panel.ui:778
+#: panels/privacy/cc-privacy-panel.ui:988
 msgid ""
 "Uses Mozilla Location Service: <a href='https://location.services.mozilla."
 "com/privacy'>Privacy Policy</a>"
@@ -5323,11 +5372,11 @@ msgstr ""
 "Mozilla Location Service を使用します: <a href='https://location.services."
 "mozilla.com/privacy'>プライバシーポリシー</a>"
 
-#: panels/privacy/cc-privacy-panel.ui:828
+#: panels/privacy/cc-privacy-panel.ui:1038
 msgid "_Location Services"
 msgstr "位置情報サービス(_L)"
 
-#: panels/privacy/cc-privacy-panel.ui:1026
+#: panels/privacy/cc-privacy-panel.ui:1236
 msgid "_Automatic Problem Reporting"
 msgstr "問題のレポートを自動で送信する(_A)"
 
@@ -5343,7 +5392,7 @@ msgstr "個人情報の保護と外部からの見え方を設定します"
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/privacy/gnome-privacy-panel.desktop.in.in:8
 msgid "preferences-system-privacy"
-msgstr ""
+msgstr "preferences-system-privacy"
 
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/privacy/gnome-privacy-panel.desktop.in.in:20
@@ -5527,7 +5576,7 @@ msgstr "表示言語、フォーマット、キーボードレイアウト、入
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/region/gnome-region-panel.desktop.in.in:7
 msgid "preferences-desktop-locale"
-msgstr ""
+msgstr "preferences-desktop-locale"
 
 #. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/region/gnome-region-panel.desktop.in.in:19
@@ -5568,7 +5617,7 @@ msgstr "アクティビティ画面で検索結果を表示するアプリケー
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/search/gnome-search-panel.desktop.in.in:7
 msgid "preferences-system-search"
-msgstr ""
+msgstr "preferences-system-search"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/search/gnome-search-panel.desktop.in.in:19
@@ -5748,7 +5797,7 @@ msgstr "他のユーザーと共有するものを設定します"
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:7
 msgid "preferences-system-sharing"
-msgstr ""
+msgstr "preferences-system-sharing"
 
 #. Translators: Search terms to find the Sharing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:16
@@ -5785,7 +5834,7 @@ msgstr "サウンドレベルや入力、出力、アラート音を設定しま
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/sound/data/gnome-sound-panel.desktop.in.in:7
 msgid "multimedia-volume-control"
-msgstr ""
+msgstr "multimedia-volume-control"
 
 #. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/data/gnome-sound-panel.desktop.in.in:20
@@ -6094,6 +6143,9 @@ msgid ""
 "Either the system lacks Thunderbolt support, it has been disabled in the "
 "BIOS or is set to an unsupported security level in the BIOS."
 msgstr ""
+"Thunderbolt を検出できませんでした。\n"
+"システムに Thunderbolt サポートがありません。BIOS で無効化されているか、また"
+"はサポートされていないセキュリティレベルに設定されているかのどちらかです。"
 
 #: panels/thunderbolt/cc-bolt-panel.c:504
 msgid "Thunderbolt support has been disabled in the BIOS."
@@ -6114,7 +6166,7 @@ msgstr "直接アクセス"
 
 #: panels/thunderbolt/cc-bolt-panel.ui:269
 msgid "Allow direct access to devices such as docks and external GPUs."
-msgstr ""
+msgstr "ドックや外付け GPU などのデバイスへの直接アクセスを許可します。"
 
 #: panels/thunderbolt/cc-bolt-panel.ui:289
 msgid "Only USB and Display Port devices can attach."
@@ -6513,19 +6565,22 @@ msgstr ""
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in.in:7
 msgid "preferences-desktop-accessibility"
-msgstr ""
+msgstr "preferences-desktop-accessibility"
 
 #. Translators: Search terms to find the Universal Access panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in.in:19
 msgid ""
-"Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
-"AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;Repeat;Blink;"
+"Keyboard;Mouse;a11y;Accessibility;Contrast;Cursor;Sound;Zoom;Screen;Reader;"
+"big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;"
+"click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;audio;typing;"
 msgstr ""
-"Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
-"AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;Repeat;Blink;"
-"キーボード;マウス;アクセシビリティ;コントラスト;ズーム;拡大鏡;スクリーンリー"
-"ダー;テキスト;文字;フォント;サイズ;大きさ;固定;キー;スロー;バウンス;マウス;ダ"
-"ブルクリック;ディレイ;ユーザー支援;リピート;点滅;Universal;ユニバーサルアクセ"
+"Keyboard;Mouse;a11y;Accessibility;Contrast;Cursor;Sound;Zoom;Screen;Reader;"
+"big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;"
+"click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;audio;typing;キーボード;"
+"マウス;アクセシビリティ;コントラスト;カーソル;サウンド;ズーム;拡大鏡;スクリー"
+"ンリーダー;大きい;高;大きさ;テキスト;文字;フォント;サイズ;固定;キー;スロー;バ"
+"ウンス;ダブルクリック;ディレイ;遅延;速度;スピード;ユーザー支援;リピート;点滅;"
+"ビジュアル;視覚;ヒアリング;聴覚;音声;タイピング;Universal;ユニバーサルアクセ"
 "ス;"
 
 #: panels/universal-access/zoom-options.c:334
@@ -7199,7 +7254,7 @@ msgstr "ユーザーの追加と削除、パスワードの変更を行います
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:7
 msgid "system-users"
-msgstr ""
+msgstr "system-users"
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:20
@@ -7411,7 +7466,7 @@ msgstr "ユーザー名が長すぎます。"
 
 #: panels/user-accounts/user-utils.c:432
 msgid "The username cannot start with a “-”."
-msgstr "ユーザー名の先頭文字に “-” は使えません。"
+msgstr "ユーザー名の先頭文字に“-”は使えません。"
 
 #: panels/user-accounts/user-utils.c:435
 msgid ""
@@ -7592,7 +7647,7 @@ msgstr "%d / %d"
 msgid "Display Mapping"
 msgstr "画面のマッピング"
 
-#: panels/wacom/cc-wacom-panel.c:826 panels/wacom/wacom-stylus-page.ui:119
+#: panels/wacom/cc-wacom-panel.c:825 panels/wacom/wacom-stylus-page.ui:119
 msgid "Stylus"
 msgstr "ペン"
 
@@ -7613,7 +7668,7 @@ msgstr ""
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:7
 msgid "input-tablet"
-msgstr ""
+msgstr "input-tablet"
 
 #. Translators: Search terms to find the Wacom Tablet panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:19
@@ -7779,7 +7834,7 @@ msgstr "[PANEL] [ARGUMENT…]"
 msgid "No results found"
 msgstr "結果がありません"
 
-#: shell/cc-panel-loader.c:277
+#: shell/cc-panel-loader.c:279
 msgid "Available panels:"
 msgstr "利用可能なパネル:"
 
@@ -7793,7 +7848,7 @@ msgstr "プライマリメニュー"
 
 #: shell/cc-window.ui:247
 msgid "Warning: Development Version"
-msgstr ""
+msgstr "警告: 開発バージョン"
 
 #: shell/cc-window.ui:248
 msgid ""
@@ -7801,6 +7856,8 @@ msgid ""
 "may experience incorrect system behavior, data loss, and other unexpected "
 "issues. "
 msgstr ""
+"このバージョンの“設定”は、開発目的の場合にのみ使用してください。システムの不"
+"正動作、データ消失、その他の予期せぬ不具合が発生する可能性があります。"
 
 #: shell/cc-window.ui:259
 msgid "Help"
