@@ -206,6 +206,7 @@
                         <property name="halign">start</property>
                         <property name="valign">center</property>
                         <property name="label" translatable="yes">From</property>
+                        <property name="mnemonic_widget">spinbutton_from_hours</property>
                         <style>
                           <class name="dim-label"/>
                         </style>
@@ -231,6 +232,11 @@
                             <style>
                               <class name="padded-spinbutton"/>
                             </style>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="from_h_spinbutton-atkobject">
+                                <property name="AtkObject::accessible-description" translatable="yes">Hour</property>
+                              </object>
+                            </child>
                           </object>
                         </child>
                         <child>
@@ -254,6 +260,11 @@
                             <style>
                               <class name="padded-spinbutton"/>
                             </style>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="from_m_spinbutton-atkobject">
+                                <property name="AtkObject::accessible-description" translatable="yes">Minute</property>
+                              </object>
+                            </child>
                           </object>
                         </child>
                         <child>
@@ -328,6 +339,11 @@
                             <style>
                               <class name="padded-spinbutton"/>
                             </style>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="to_h_spinbutton-atkobject">
+                                <property name="AtkObject::accessible-description" translatable="yes">Hour</property>
+                              </object>
+                            </child>
                           </object>
                         </child>
                         <child>
@@ -351,6 +367,11 @@
                             <style>
                               <class name="padded-spinbutton"/>
                             </style>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="to_m_spinbutton-atkobject">
+                                <property name="AtkObject::accessible-description" translatable="yes">Minute</property>
+                              </object>
+                            </child>
                           </object>
                         </child>
                         <child>
@@ -418,6 +439,7 @@
                         <property name="valign">center</property>
                         <property name="margin_left">3</property>
                         <property name="label" translatable="yes">To</property>
+                        <property name="mnemonic_widget">spinbutton_to_hours</property>
                         <style>
                           <class name="dim-label"/>
                         </style>
@@ -438,6 +460,7 @@
                     <property name="halign">start</property>
                     <property name="hexpand">True</property>
                     <property name="label" translatable="yes">Color Temperature</property>
+                    <property name="mnemonic_widget">scale_color_temperature</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
