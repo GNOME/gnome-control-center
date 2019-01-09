@@ -96,7 +96,7 @@ libgvc = subproject(
 )
 libgvc_dep = libgvc.get_variable('libgvc_dep')
 
-libhandy_dep = dependency('libhandy-0.0', version: '>= 0.0.4', required: false)
+libhandy_dep = dependency('libhandy-0.0', version: '>= 0.0.6', required: false)
 if not libhandy_dep.found()
   libhandy = subproject(
     'libhandy',
@@ -104,6 +104,7 @@ if not libhandy_dep.found()
       'examples=false',
       'glade_catalog=false',
       'introspection=false',
+      'package_subdir=gnome-control-center',
       'tests=false',
       'vapi=false',
     ]
