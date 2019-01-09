@@ -1421,9 +1421,9 @@ apps_changed (GAppInfoMonitor     *monitor,
 }
 
 static void
-row_selected_cb (GtkListBox          *list,
-                 GtkListBoxRow       *row,
-                 CcApplicationsPanel *self)
+row_activated_cb (GtkListBox          *list,
+                  GtkListBoxRow       *row,
+                  CcApplicationsPanel *self)
 {
   update_panel (self, row);
 }
@@ -1653,8 +1653,8 @@ cc_applications_panel_init (CcApplicationsPanel *self)
                                              provider,
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-  g_signal_connect (self->sidebar_listbox, "row-selected",
-                    G_CALLBACK (row_selected_cb), self);
+  g_signal_connect (self->sidebar_listbox, "row-activated",
+                    G_CALLBACK (row_activated_cb), self);
 
   g_signal_connect (self->header_button, "clicked", G_CALLBACK (open_software_cb), self);
 
