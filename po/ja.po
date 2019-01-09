@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-01-07 13:37+0000\n"
-"PO-Revision-Date: 2019-01-07 22:56+0900\n"
+"POT-Creation-Date: 2019-01-08 02:35+0000\n"
+"PO-Revision-Date: 2019-01-09 21:26+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -32,6 +32,334 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 2.2\n"
+
+#: panels/applications/cc-applications-panel.c:558
+#, fuzzy
+#| msgid "System Sounds"
+msgid "System Bus"
+msgstr "システムのサウンド"
+
+#: panels/applications/cc-applications-panel.c:558
+#: panels/applications/cc-applications-panel.c:560
+#: panels/applications/cc-applications-panel.c:576
+#: panels/applications/cc-applications-panel.c:581
+#, fuzzy
+#| msgid "_Full Name"
+msgid "Full access"
+msgstr "フルネーム(_F)"
+
+#: panels/applications/cc-applications-panel.c:560
+#, fuzzy
+#| msgid "Session Ended"
+msgid "Session Bus"
+msgstr "セッション終了"
+
+#: panels/applications/cc-applications-panel.c:565
+#: panels/power/cc-power-panel.c:2528 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
+#: shell/cc-window.c:283
+msgid "Devices"
+msgstr "デバイス"
+
+#: panels/applications/cc-applications-panel.c:565
+msgid "Full access to /dev"
+msgstr ""
+
+#: panels/applications/cc-applications-panel.c:570
+#: panels/network/gnome-network-panel.desktop.in.in:3
+#: panels/network/network-mobile.ui:241
+msgid "Network"
+msgstr "ネットワーク"
+
+#: panels/applications/cc-applications-panel.c:570
+#, fuzzy
+#| msgid "Network Name"
+msgid "Has network access"
+msgstr "ネットワーク名"
+
+#. translators: "Home" is used in place of the Pictures
+#. * directory in the string below when XDG_PICTURES_DIR is
+#. * undefined
+#: panels/applications/cc-applications-panel.c:576
+#: panels/applications/cc-applications-panel.c:578
+#: panels/background/cc-background-chooser-dialog.c:536
+#: panels/search/cc-search-locations-dialog.c:286
+msgid "Home"
+msgstr "ホーム"
+
+#: panels/applications/cc-applications-panel.c:578
+#: panels/applications/cc-applications-panel.c:583
+msgid "Read-only"
+msgstr "読み取り専用"
+
+#: panels/applications/cc-applications-panel.c:581
+#: panels/applications/cc-applications-panel.c:583
+msgid "File System"
+msgstr "ファイルシステム"
+
+#: panels/applications/cc-applications-panel.c:588
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:287
+#: shell/cc-window.c:927 shell/cc-window.ui:123
+#: shell/gnome-control-center.desktop.in.in:3
+msgid "Settings"
+msgstr "設定"
+
+#: panels/applications/cc-applications-panel.c:588
+msgid "Can change settings"
+msgstr ""
+
+#: panels/applications/cc-applications-panel.c:593
+#, c-format
+msgid ""
+"%s has the following permissions built-in. These cannot be altered. If you "
+"are concerned about these permissions, consider removing this application."
+msgstr ""
+
+#: panels/applications/cc-applications-panel.c:735
+msgid "Web Links"
+msgstr ""
+
+#: panels/applications/cc-applications-panel.c:745
+msgid "Git Links"
+msgstr ""
+
+#: panels/applications/cc-applications-panel.c:751
+#, c-format
+msgid "%s Links"
+msgstr ""
+
+#: panels/applications/cc-applications-panel.c:759
+#: panels/applications/cc-applications-panel.c:795
+msgid "Unset"
+msgstr ""
+
+#: panels/applications/cc-applications-panel.c:850
+#, fuzzy
+#| msgid "Link speed"
+msgid "Links"
+msgstr "リンクの速度"
+
+#: panels/applications/cc-applications-panel.c:858
+#, fuzzy
+#| msgid "_Delete Files"
+msgid "Hypertext Files"
+msgstr "ファイルを削除(_D)"
+
+#: panels/applications/cc-applications-panel.c:872
+msgid "Text Files"
+msgstr "テキストファイル"
+
+#: panels/applications/cc-applications-panel.c:886
+msgid "Image Files"
+msgstr "画像ファイル"
+
+#: panels/applications/cc-applications-panel.c:902
+msgid "Font Files"
+msgstr "フォントファイル"
+
+#: panels/applications/cc-applications-panel.c:963
+msgid "Archive Files"
+msgstr "アーカイブファイル"
+
+#: panels/applications/cc-applications-panel.c:983
+msgid "Package Files"
+msgstr "パッケージファイル"
+
+#: panels/applications/cc-applications-panel.c:1006
+msgid "Audio Files"
+msgstr "オーディオファイル"
+
+#: panels/applications/cc-applications-panel.c:1023
+msgid "Video Files"
+msgstr "ビデオファイル"
+
+#: panels/applications/cc-applications-panel.c:1031
+msgid "Other Files"
+msgstr "その他のファイル"
+
+#. List of applications.
+#: panels/applications/cc-applications-panel.c:1353
+#: panels/applications/cc-applications-panel.ui:406
+#: panels/applications/gnome-applications-panel.desktop.in.in:3
+#: panels/notifications/cc-notifications-panel.ui:167
+#: panels/privacy/cc-privacy-panel.ui:1085 panels/sound/gvc-mixer-dialog.c:1796
+msgid "Applications"
+msgstr "アプリケーション"
+
+#: panels/applications/cc-applications-panel.ui:45
+msgid "No applications"
+msgstr "アプリケーションがありません"
+
+#: panels/applications/cc-applications-panel.ui:59
+#, fuzzy
+#| msgid "Install PPD File…"
+msgid "Install some…"
+msgstr "PPDファイルのインストール…"
+
+#: panels/applications/cc-applications-panel.ui:99
+msgid "Permissions & Access"
+msgstr ""
+
+#: panels/applications/cc-applications-panel.ui:111
+msgid ""
+"Data and services that this app has asked for access to and permissions that "
+"it requires."
+msgstr ""
+
+#: panels/applications/cc-applications-panel.ui:126
+#: panels/applications/cc-applications-panel.ui:132
+#: panels/privacy/cc-privacy-panel.c:894 panels/privacy/cc-privacy-panel.ui:745
+msgid "Camera"
+msgstr "カメラ"
+
+#. This label is displayed in a treeview cell displaying
+#. * a disabled accelerator key combination.
+#.
+#. translators:
+#. * The device has been disabled
+#: panels/applications/cc-applications-panel.ui:133
+#: panels/applications/cc-applications-panel.ui:145
+#: panels/applications/cc-applications-panel.ui:157
+#: panels/applications/cc-applications-panel.ui:237
+#: panels/applications/cc-applications-panel.ui:255
+#: panels/keyboard/cc-keyboard-option.c:259
+#: panels/keyboard/cc-keyboard-option.c:378
+#: panels/keyboard/keyboard-shortcuts.c:425
+#: panels/keyboard/shortcut-editor.ui:96 panels/network/network-proxy.ui:123
+#: panels/network/network-wifi.ui:781 panels/network/network-wifi.ui:1058
+#: panels/user-accounts/um-fingerprint-dialog.c:211
+#: subprojects/gvc/gvc-mixer-control.c:1866
+msgid "Disabled"
+msgstr "無効"
+
+#: panels/applications/cc-applications-panel.ui:138
+#: panels/applications/cc-applications-panel.ui:144
+#: panels/privacy/cc-privacy-panel.c:927 panels/privacy/cc-privacy-panel.ui:850
+msgid "Microphone"
+msgstr ""
+
+#: panels/applications/cc-applications-panel.ui:150
+#: panels/applications/cc-applications-panel.ui:156
+#: panels/privacy/cc-privacy-panel.c:836 panels/privacy/cc-privacy-panel.ui:955
+msgid "Location Services"
+msgstr "位置情報サービス"
+
+#: panels/applications/cc-applications-panel.ui:162
+#: panels/applications/cc-applications-panel.ui:422
+#, fuzzy
+#| msgid "Built-in Webcam"
+msgid "Built-in Permissions"
+msgstr "組み込みのウェブカム"
+
+#: panels/applications/cc-applications-panel.ui:163
+msgid "Cannot be changed"
+msgstr "変更できません"
+
+#: panels/applications/cc-applications-panel.ui:180
+msgid ""
+"Individual permissions for applications can be reviewed in the <a href="
+"\"privacy\">Privacy</a> Settings."
+msgstr ""
+
+#: panels/applications/cc-applications-panel.ui:204
+#, fuzzy
+#| msgid "Orientation"
+msgid "Integration"
+msgstr "向き"
+
+#: panels/applications/cc-applications-panel.ui:216
+msgid "System features used by this application."
+msgstr ""
+
+#: panels/applications/cc-applications-panel.ui:230
+#: panels/applications/cc-applications-panel.ui:236
+#: panels/keyboard/01-launchers.xml.in:16
+#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:153
+msgid "Search"
+msgstr "検索"
+
+#: panels/applications/cc-applications-panel.ui:242
+#: panels/notifications/gnome-notifications-panel.desktop.in.in:3
+msgid "Notifications"
+msgstr "通知"
+
+#: panels/applications/cc-applications-panel.ui:248
+#: panels/applications/cc-applications-panel.ui:254
+msgid "Sounds"
+msgstr "サウンド"
+
+#: panels/applications/cc-applications-panel.ui:287
+#, fuzzy
+#| msgid "_Default printer"
+msgid "Default Handlers"
+msgstr "デフォルトのプリンター(_D)"
+
+#: panels/applications/cc-applications-panel.ui:299
+msgid "Types of files and links that this application opens."
+msgstr ""
+
+#: panels/applications/cc-applications-panel.ui:315
+msgid "Reset"
+msgstr "リセット"
+
+#: panels/applications/cc-applications-panel.ui:351
+msgid "Usage"
+msgstr ""
+
+#: panels/applications/cc-applications-panel.ui:363
+msgid "How much resources this application is using."
+msgstr ""
+
+#: panels/applications/cc-applications-panel.ui:378
+#: panels/applications/cc-applications-panel.ui:458
+msgid "Storage"
+msgstr ""
+
+#: panels/applications/cc-applications-panel.ui:413
+#, fuzzy
+#| msgid "_Software"
+msgid "Open in Software"
+msgstr "ソフトウェア(_S)"
+
+#: panels/applications/cc-applications-panel.ui:475
+msgid ""
+"How much disk space this application is occupying with app data and caches."
+msgstr ""
+
+#: panels/applications/cc-applications-panel.ui:484
+msgid "Application"
+msgstr "アプリケーション"
+
+#: panels/applications/cc-applications-panel.ui:490
+msgid "Data"
+msgstr ""
+
+#: panels/applications/cc-applications-panel.ui:496
+msgid "Cache"
+msgstr ""
+
+#: panels/applications/cc-applications-panel.ui:502
+msgid "<b>Total</b>"
+msgstr ""
+
+#: panels/applications/cc-applications-panel.ui:519
+msgid "Clear Cache…"
+msgstr ""
+
+#: panels/applications/gnome-applications-panel.desktop.in.in:4
+msgid "Control various application permissions and settings"
+msgstr ""
+
+#. FIXME
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: panels/applications/gnome-applications-panel.desktop.in.in:8
+msgid "application-x-executable-symbolic"
+msgstr ""
+
+#. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/applications/gnome-applications-panel.desktop.in.in:16
+msgid "application;flatpak;permission;setting;"
+msgstr ""
 
 #: panels/background/background.ui:49
 msgid "_Background"
@@ -99,14 +427,6 @@ msgstr "画像"
 msgid "No Pictures Found"
 msgstr "画像が見つかりません"
 
-#. translators: "Home" is used in place of the Pictures
-#. * directory in the string below when XDG_PICTURES_DIR is
-#. * undefined
-#: panels/background/cc-background-chooser-dialog.c:536
-#: panels/search/cc-search-locations-dialog.c:286
-msgid "Home"
-msgstr "ホーム"
-
 #. translators: %s here is the name of the Pictures directory, the string should be translated in
 #. * the context "You can add images to your Pictures folder and they will show up here"
 #: panels/background/cc-background-chooser-dialog.c:546
@@ -122,8 +442,8 @@ msgstr "画像を %s フォルダーに追加すると、その画像がここ�
 #: panels/network/connection-editor/connection-editor.ui:15
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
-#: panels/network/net-device-wifi.c:1411 panels/network/net-device-wifi.c:1491
-#: panels/network/net-device-wifi.c:1733 panels/network/network-wifi.ui:24
+#: panels/network/net-device-wifi.c:1200 panels/network/net-device-wifi.c:1280
+#: panels/network/net-device-wifi.c:1474 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:330
 #: panels/privacy/cc-privacy-panel.c:1123 panels/region/cc-format-chooser.ui:24
@@ -617,7 +937,7 @@ msgid "_Import File…"
 msgstr "ファイルを読み込む(_I)…"
 
 #: panels/color/cc-color-panel.ui:672
-#: panels/network/connection-editor/net-connection-editor.c:519
+#: panels/network/connection-editor/net-connection-editor.c:517
 #: panels/printers/new-printer-dialog.ui:80
 #: panels/region/cc-input-chooser.ui:20
 #: panels/user-accounts/cc-add-user-dialog.ui:47
@@ -1047,6 +1367,8 @@ msgid "Date & Time"
 msgstr "日付と時刻"
 
 #: panels/datetime/cc-datetime-panel.ui:113
+#: panels/display/cc-night-light-dialog.ui:245
+#: panels/display/cc-night-light-dialog.ui:352
 msgid "Hour"
 msgstr "時"
 
@@ -1056,6 +1378,8 @@ msgid "∶"
 msgstr "∶"
 
 #: panels/datetime/cc-datetime-panel.ui:152
+#: panels/display/cc-night-light-dialog.ui:273
+#: panels/display/cc-night-light-dialog.ui:380
 msgid "Minute"
 msgstr "分"
 
@@ -1283,21 +1607,15 @@ msgstr ""
 "夜間モードは画面の色を少し暖色にします。これは目の疲れを緩和し、不眠を防ぐの"
 "に役立ちます。"
 
-#. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-night-light-dialog.ui:128
-#: panels/display/cc-night-light-dialog.ui:465
-msgid "Night Light"
-msgstr "夜間モード"
-
-#: panels/display/cc-night-light-dialog.ui:144
+#: panels/display/cc-night-light-dialog.ui:127
 msgid "Schedule"
 msgstr "スケジュール"
 
-#: panels/display/cc-night-light-dialog.ui:173
+#: panels/display/cc-night-light-dialog.ui:148
 msgid "Sunset to Sunrise"
 msgstr "日没から日の出まで"
 
-#: panels/display/cc-night-light-dialog.ui:188
+#: panels/display/cc-night-light-dialog.ui:164
 #: panels/network/connection-editor/ip4-page.ui:69
 #: panels/network/connection-editor/ip6-page.ui:83
 #: panels/network/net-proxy.c:56 panels/network/network-proxy.ui:113
@@ -1306,30 +1624,43 @@ msgstr "日没から日の出まで"
 msgid "Manual"
 msgstr "手動"
 
-#: panels/display/cc-night-light-dialog.ui:223
+#: panels/display/cc-night-light-dialog.ui:180
+msgid "_Off"
+msgstr ""
+
+#: panels/display/cc-night-light-dialog.ui:216
 msgid "From"
 msgstr "開始"
 
-#: panels/display/cc-night-light-dialog.ui:255
-#: panels/display/cc-night-light-dialog.ui:352
+#: panels/display/cc-night-light-dialog.ui:254
+#: panels/display/cc-night-light-dialog.ui:361
 msgid ":"
 msgstr ":"
 
 #. This is the short form for the time period in the morning
-#: panels/display/cc-night-light-dialog.ui:280
-#: panels/display/cc-night-light-dialog.ui:377
+#: panels/display/cc-night-light-dialog.ui:284
+#: panels/display/cc-night-light-dialog.ui:391
 msgid "AM"
 msgstr "午前"
 
 #. This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-dialog.ui:296
-#: panels/display/cc-night-light-dialog.ui:393
+#: panels/display/cc-night-light-dialog.ui:300
+#: panels/display/cc-night-light-dialog.ui:407
 msgid "PM"
 msgstr "午後"
 
-#: panels/display/cc-night-light-dialog.ui:435
+#: panels/display/cc-night-light-dialog.ui:449
 msgid "To"
 msgstr "終了"
+
+#: panels/display/cc-night-light-dialog.ui:470
+msgid "Color Temperature"
+msgstr ""
+
+#. This is the redshift functionality where we suppress blue light when the sun has gone down
+#: panels/display/cc-night-light-dialog.ui:505
+msgid "Night Light"
+msgstr "夜間モード"
 
 #: panels/display/gnome-display-panel.desktop.in.in:3
 msgid "Displays"
@@ -1472,11 +1803,11 @@ msgstr "他のメディア"
 
 #: panels/info/cc-info-removable-media-panel.c:424
 msgid "Select an application for audio CDs"
-msgstr "オーディオCD用のアプリケーションを選択"
+msgstr "オーディオ CD 用のアプリケーションを選択"
 
 #: panels/info/cc-info-removable-media-panel.c:425
 msgid "Select an application for video DVDs"
-msgstr "ビデオDVD用のアプリケーションを選択"
+msgstr "ビデオ DVD 用のアプリケーションを選択"
 
 #: panels/info/cc-info-removable-media-panel.c:426
 msgid "Select an application to run when a music player is connected"
@@ -1488,7 +1819,7 @@ msgstr "カメラが接続された時に起動するアプリケーションを
 
 #: panels/info/cc-info-removable-media-panel.c:428
 msgid "Select an application for software CDs"
-msgstr "ソフトウェアの CD を開くアプリケーションを選択してください"
+msgstr "ソフトウェアの CD を開くアプリケーションを選択"
 
 #. translators: these strings are duplicates of shared-mime-info
 #. * strings, just here to fix capitalization of the English originals.
@@ -1722,12 +2053,6 @@ msgstr "ランチャー"
 msgid "Launch help browser"
 msgstr "ヘルプブラウザーを起動"
 
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:287
-#: shell/cc-window.c:927 shell/cc-window.ui:123
-#: shell/gnome-control-center.desktop.in.in:3
-msgid "Settings"
-msgstr "設定"
-
 #: panels/keyboard/01-launchers.xml.in:8
 msgid "Launch calculator"
 msgstr "電卓を起動"
@@ -1743,11 +2068,6 @@ msgstr "ウェブブラウザーを起動"
 #: panels/keyboard/01-launchers.xml.in:14
 msgid "Home folder"
 msgstr "ホームフォルダー"
-
-#: panels/keyboard/01-launchers.xml.in:16
-#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:153
-msgid "Search"
-msgstr "検索"
 
 #: panels/keyboard/01-screenshot.xml.in:2
 msgid "Screenshots"
@@ -1835,21 +2155,6 @@ msgstr "ハイコントラストのオン/オフを切り替える"
 #: panels/keyboard/cc-keyboard-manager.c:809
 msgid "Custom Shortcuts"
 msgstr "独自のショートカット"
-
-#. This label is displayed in a treeview cell displaying
-#. * a disabled accelerator key combination.
-#.
-#. translators:
-#. * The device has been disabled
-#: panels/keyboard/cc-keyboard-option.c:259
-#: panels/keyboard/cc-keyboard-option.c:378
-#: panels/keyboard/keyboard-shortcuts.c:425
-#: panels/keyboard/shortcut-editor.ui:96 panels/network/network-proxy.ui:123
-#: panels/network/network-wifi.ui:781 panels/network/network-wifi.ui:1058
-#: panels/user-accounts/um-fingerprint-dialog.c:211
-#: subprojects/gvc/gvc-mixer-control.c:1866
-msgid "Disabled"
-msgstr "無効"
 
 #. Translators: This key is also known as 'third level
 #. * chooser'. AltGr is often used for this purpose. See
@@ -2164,7 +2469,7 @@ msgid "NetworkManager needs to be running."
 msgstr "NetworkManager が動作している必要があります。"
 
 #: panels/network/cc-network-panel.ui:142
-#: panels/network/connection-editor/net-connection-editor.c:603
+#: panels/network/connection-editor/net-connection-editor.c:601
 msgid "VPN"
 msgstr "VPN"
 
@@ -2172,9 +2477,31 @@ msgstr "VPN"
 msgid "Not set up"
 msgstr "未設定"
 
+#. TRANSLATORS: This happens when the connection name does not contain the SSID.
+#: panels/network/cc-wifi-connection-row.c:189
+#, fuzzy, c-format
+#| msgctxt "timezone desc"
+#| msgid "%s (%s)"
+msgctxt "Wi-Fi Connection"
+msgid "%s (SSID: %s)"
+msgstr "%s (%s)"
+
+#: panels/network/cc-wifi-connection-row.ui:36
+#, fuzzy
+#| msgid "Connecting"
+msgid "Connection/SSID"
+msgstr "接続中"
+
+#: panels/network/cc-wifi-connection-row.ui:73
+#: panels/network/net-device-ethernet.c:360
+#: panels/network/network-ethernet.ui:120 panels/network/network-mobile.ui:394
+#: panels/network/network-simple.ui:75 panels/network/network-vpn.ui:79
+msgid "Options…"
+msgstr "オプション…"
+
 #: panels/network/cc-wifi-panel.c:281
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
-#: panels/network/network-wifi.ui:1747
+#: panels/network/network-wifi.ui:1738
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
@@ -2255,31 +2582,31 @@ msgstr "プロファイル %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:56
-#: panels/network/net-device-wifi.c:235 panels/network/net-device-wifi.c:469
+#: panels/network/net-device-wifi.c:123 panels/network/net-device-wifi.c:299
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:60
-#: panels/network/net-device-wifi.c:239 panels/network/net-device-wifi.c:474
+#: panels/network/net-device-wifi.c:127 panels/network/net-device-wifi.c:304
 #: panels/network/network-wifi.ui:592
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:64
-#: panels/network/net-device-wifi.c:243
+#: panels/network/net-device-wifi.c:131
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: panels/network/connection-editor/ce-page-details.c:69
-#: panels/network/net-device-wifi.c:248
+#: panels/network/net-device-wifi.c:136
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #: panels/network/connection-editor/ce-page-details.c:74
-#: panels/network/net-device-wifi.c:253 panels/network/net-device-wifi.c:459
+#: panels/network/net-device-wifi.c:141 panels/network/net-device-wifi.c:289
 msgctxt "Wifi security"
 msgid "None"
 msgstr "なし"
@@ -2290,7 +2617,7 @@ msgstr "しない"
 
 #: panels/network/connection-editor/ce-page-details.c:110
 #: panels/network/net-device-ethernet.c:137
-#: panels/network/net-device-wifi.c:568
+#: panels/network/net-device-wifi.c:398
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2298,37 +2625,37 @@ msgstr[0] "%i 日前"
 
 #. Translators: network device speed
 #: panels/network/connection-editor/ce-page-details.c:228
-#: panels/network/net-device-ethernet.c:66 panels/network/net-device-wifi.c:646
+#: panels/network/net-device-ethernet.c:66 panels/network/net-device-wifi.c:476
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: panels/network/connection-editor/ce-page-details.c:249
-#: panels/network/net-device-wifi.c:675
+#: panels/network/net-device-wifi.c:505
 msgctxt "Signal strength"
 msgid "None"
 msgstr "なし"
 
 #: panels/network/connection-editor/ce-page-details.c:251
-#: panels/network/net-device-wifi.c:677
+#: panels/network/net-device-wifi.c:507
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "弱い"
 
 #: panels/network/connection-editor/ce-page-details.c:253
-#: panels/network/net-device-wifi.c:679
+#: panels/network/net-device-wifi.c:509
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "OK"
 
 #: panels/network/connection-editor/ce-page-details.c:255
-#: panels/network/net-device-wifi.c:681
+#: panels/network/net-device-wifi.c:511
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "良い"
 
 #: panels/network/connection-editor/ce-page-details.c:257
-#: panels/network/net-device-wifi.c:683
+#: panels/network/net-device-wifi.c:513
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "非常に良い"
@@ -2639,11 +2966,11 @@ msgstr "接続エディターを起動できません"
 msgid "New Profile"
 msgstr "新規プロファイル"
 
-#: panels/network/connection-editor/net-connection-editor.c:751
+#: panels/network/connection-editor/net-connection-editor.c:749
 msgid "Import from file…"
 msgstr "ファイルからインポート…"
 
-#: panels/network/connection-editor/net-connection-editor.c:785
+#: panels/network/connection-editor/net-connection-editor.c:783
 msgid "Add VPN"
 msgstr "VPNの追加"
 
@@ -2727,11 +3054,6 @@ msgstr "SSID(_S)"
 msgid "_BSSID"
 msgstr "BSSID(_B)"
 
-#: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:241
-msgid "Network"
-msgstr "ネットワーク"
-
 #: panels/network/gnome-network-panel.desktop.in.in:4
 msgid "Control how you connect to the Internet"
 msgstr "ネットワークへの接続方法を設定します。"
@@ -2768,17 +3090,17 @@ msgstr ""
 "ス;ブロードバンド;"
 
 #: panels/network/net-device-ethernet.c:123
-#: panels/network/net-device-wifi.c:554
+#: panels/network/net-device-wifi.c:384
 msgid "never"
 msgstr "未接続"
 
 #: panels/network/net-device-ethernet.c:133
-#: panels/network/net-device-wifi.c:564
+#: panels/network/net-device-wifi.c:394
 msgid "today"
 msgstr "今日"
 
 #: panels/network/net-device-ethernet.c:135
-#: panels/network/net-device-wifi.c:566
+#: panels/network/net-device-wifi.c:396
 msgid "yesterday"
 msgstr "昨日"
 
@@ -2802,24 +3124,17 @@ msgstr "最後の利用"
 msgid "Wired"
 msgstr "有線"
 
-#: panels/network/net-device-ethernet.c:360
-#: panels/network/net-device-wifi.c:1894 panels/network/network-ethernet.ui:120
-#: panels/network/network-mobile.ui:394 panels/network/network-simple.ui:75
-#: panels/network/network-vpn.ui:79
-msgid "Options…"
-msgstr "オプション…"
-
 #: panels/network/net-device-mobile.c:236
 msgid "Add new connection"
 msgstr "新規の接続を追加"
 
-#: panels/network/net-device-wifi.c:1368
+#: panels/network/net-device-wifi.c:1157
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "ワイヤレスホットスポットをオンにすると <b>%s</b> の接続が切断されます。"
 
-#: panels/network/net-device-wifi.c:1372
+#: panels/network/net-device-wifi.c:1161
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2827,11 +3142,11 @@ msgstr ""
 "ホットスポットがアクティブな場合、ワイヤレスによるインターネット接続はできま"
 "せん。"
 
-#: panels/network/net-device-wifi.c:1379
+#: panels/network/net-device-wifi.c:1168
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Wi-Fi アクセスポイントをオンにしますか?"
 
-#: panels/network/net-device-wifi.c:1401
+#: panels/network/net-device-wifi.c:1190
 msgid ""
 "Wi-Fi hotspots are usually used to share an additional Internet connection "
 "over Wi-Fi."
@@ -2839,42 +3154,42 @@ msgstr ""
 "Wi-Fi アクセスポイント機能は、追加のインターネット接続を Wi-Fi 経由で共有する"
 "ために使用されます。"
 
-#: panels/network/net-device-wifi.c:1412
+#: panels/network/net-device-wifi.c:1201
 msgid "_Turn On"
 msgstr "オン(_T)"
 
-#: panels/network/net-device-wifi.c:1489
+#: panels/network/net-device-wifi.c:1278
 msgid "Stop hotspot and disconnect any users?"
 msgstr "アクセスポイントを停止し、ユーザーを切断しますか?"
 
-#: panels/network/net-device-wifi.c:1492
+#: panels/network/net-device-wifi.c:1281
 msgid "_Stop Hotspot"
 msgstr "停止(_S)"
 
-#: panels/network/net-device-wifi.c:1592
+#: panels/network/net-device-wifi.c:1337
 msgid "System policy prohibits use as a Hotspot"
 msgstr "システムのポリシーによりホットスポットとしての利用は禁止されています"
 
-#: panels/network/net-device-wifi.c:1595
+#: panels/network/net-device-wifi.c:1340
 msgid "Wireless device does not support Hotspot mode"
 msgstr "ワイヤレスデバイスがホットスポットモードに対応していません"
 
-#: panels/network/net-device-wifi.c:1730
+#: panels/network/net-device-wifi.c:1471
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
 msgstr "パスワードや独自の設定など、 選択したネットワークの詳細は失われます。"
 
-#: panels/network/net-device-wifi.c:1734 panels/network/network-wifi.ui:1350
+#: panels/network/net-device-wifi.c:1475 panels/network/network-wifi.ui:1350
 msgid "_Forget"
 msgstr "破棄(_F)"
 
-#: panels/network/net-device-wifi.c:2045 panels/network/net-device-wifi.c:2052
+#: panels/network/net-device-wifi.c:1647 panels/network/net-device-wifi.c:1654
 msgid "Known Wi-Fi Networks"
 msgstr "既知の Wi-Fi ネットワーク"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:2085
+#: panels/network/net-device-wifi.c:1691
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "破棄(_F)"
@@ -3056,44 +3371,44 @@ msgctxt "tab"
 msgid "Reset"
 msgstr "リセット"
 
-#: panels/network/network-wifi.ui:1514
+#: panels/network/network-wifi.ui:1505
 msgid "Wi-Fi Hotspot"
 msgstr "Wi-Fi アクセスポイント"
 
-#: panels/network/network-wifi.ui:1532
+#: panels/network/network-wifi.ui:1523
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr "Wi-Fiネットワークへ接続するためスイッチをオフ"
 
-#: panels/network/network-wifi.ui:1581
+#: panels/network/network-wifi.ui:1572
 msgid "Network Name"
 msgstr "ネットワーク名"
 
-#: panels/network/network-wifi.ui:1599
+#: panels/network/network-wifi.ui:1590
 msgid "Connected Devices"
 msgstr "接続しているデバイス"
 
-#: panels/network/network-wifi.ui:1617
+#: panels/network/network-wifi.ui:1608
 msgid "Security type"
 msgstr "セキュリティタイプ"
 
-#: panels/network/network-wifi.ui:1680
+#: panels/network/network-wifi.ui:1671
 msgctxt "Wi-Fi passkey"
 msgid "Password"
 msgstr "パスワード"
 
-#: panels/network/network-wifi.ui:1777
+#: panels/network/network-wifi.ui:1768
 msgid "Turn Wi-Fi off"
 msgstr "Wi-Fi をオフにする"
 
-#: panels/network/network-wifi.ui:1809
+#: panels/network/network-wifi.ui:1800
 msgid "_Connect to Hidden Network…"
 msgstr "非表示のネットワークに接続(_C)…"
 
-#: panels/network/network-wifi.ui:1819
+#: panels/network/network-wifi.ui:1810
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "Wi-Fi アクセスポイントをオンにする(_T)"
 
-#: panels/network/network-wifi.ui:1829
+#: panels/network/network-wifi.ui:1820
 msgid "_Known Wi-Fi Networks"
 msgstr "既知の Wi-Fi ネットワーク(_K)"
 
@@ -3775,16 +4090,6 @@ msgstr "通知ポップアップ(_P)"
 msgid "_Lock Screen Notifications"
 msgstr "ロック画面での通知(_L)"
 
-#. List of applications.
-#: panels/notifications/cc-notifications-panel.ui:167
-#: panels/privacy/cc-privacy-panel.ui:1085 panels/sound/gvc-mixer-dialog.c:1796
-msgid "Applications"
-msgstr "アプリケーション"
-
-#: panels/notifications/gnome-notifications-panel.desktop.in.in:3
-msgid "Notifications"
-msgstr "通知"
-
 #: panels/notifications/gnome-notifications-panel.desktop.in.in:4
 msgid "Control which notifications are displayed and what they show"
 msgstr "表示する通知およびその表示方法について設定します"
@@ -4181,12 +4486,6 @@ msgstr "自動サスペンド"
 #: panels/power/cc-power-panel.c:2416
 msgid "_When the Power Button is pressed"
 msgstr "電源ボタンを押した時の動作(_W)"
-
-#: panels/power/cc-power-panel.c:2528 panels/thunderbolt/cc-bolt-panel.ui:466
-#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
-#: shell/cc-window.c:283
-msgid "Devices"
-msgstr "デバイス"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -5028,10 +5327,6 @@ msgctxt "Location services status"
 msgid "Off"
 msgstr "オフ"
 
-#: panels/privacy/cc-privacy-panel.c:836 panels/privacy/cc-privacy-panel.ui:955
-msgid "Location Services"
-msgstr "位置情報サービス"
-
 #: panels/privacy/cc-privacy-panel.c:881
 msgctxt "Camera status"
 msgid "Off"
@@ -5042,10 +5337,6 @@ msgctxt "Camera status"
 msgid "On"
 msgstr "オン"
 
-#: panels/privacy/cc-privacy-panel.c:894 panels/privacy/cc-privacy-panel.ui:745
-msgid "Camera"
-msgstr "カメラ"
-
 #: panels/privacy/cc-privacy-panel.c:914
 msgctxt "Microphone status"
 msgid "Off"
@@ -5055,10 +5346,6 @@ msgstr "オフ"
 msgctxt "Microphone status"
 msgid "On"
 msgstr "オン"
-
-#: panels/privacy/cc-privacy-panel.c:927 panels/privacy/cc-privacy-panel.ui:850
-msgid "Microphone"
-msgstr ""
 
 #: panels/privacy/cc-privacy-panel.c:1022
 #: panels/privacy/cc-privacy-panel.ui:127
@@ -5314,7 +5601,7 @@ msgstr "ゴミ箱を空にする(_E)…"
 
 #: panels/privacy/cc-privacy-panel.ui:606
 msgid "_Purge Temporary Files…"
-msgstr "一時ファイルを削除する(_P)v"
+msgstr "一時ファイルを削除する(_P)…"
 
 #: panels/privacy/cc-privacy-panel.ui:654
 msgid ""
@@ -5339,7 +5626,8 @@ msgstr "ソフトウェアの使用統計情報を送信する(_S)"
 msgid ""
 "Use of the camera allows applications to capture photos and video. Disabling "
 "the camera may cause some applications to not function properly."
-msgstr ""
+msgstr "アプリケーションがカメラで写真や動画を撮影できるようになります。"
+"無効にすると一部のアプリケーションが正常に動作しなくなる可能性があります。"
 
 #: panels/privacy/cc-privacy-panel.ui:812
 msgid "_Camera"
@@ -6144,9 +6432,9 @@ msgid ""
 "BIOS or is set to an unsupported security level in the BIOS."
 msgstr ""
 "Thunderbolt を検出できませんでした。\n"
-"システムが Thunderbolt をサポートしていないか、または BIOS で Thunderbolt が無"
-"効化されているか、もしくは BIOS で Thunderbolt のセキュリティレベルがサポートさ"
-"れていない設定になっているかのいずれかです。"
+"システムが Thunderbolt に対応していないか、または BIOS で Thunderbolt が"
+"無効化されているか、もしくは BIOS で Thunderbolt のセキュリティレベルが対"
+"応していない設定になっています。"
 
 #: panels/thunderbolt/cc-bolt-panel.c:504
 msgid "Thunderbolt support has been disabled in the BIOS."
@@ -7706,34 +7994,34 @@ msgstr "ワコムタブレットを接続するか、電源を入れてくださ
 msgid "Bluetooth Settings"
 msgstr "Bluetooth の設定"
 
-# 参考: intuos 5 のマニュアル p.57
-#: panels/wacom/gnome-wacom-properties.ui:233
-msgid "Map to Monitor…"
-msgstr "画面にマッピング…"
-
-#: panels/wacom/gnome-wacom-properties.ui:249
-msgid "Map Buttons…"
-msgstr "ボタン割り当て…"
-
-#: panels/wacom/gnome-wacom-properties.ui:265
-msgid "Calibrate…"
-msgstr "キャリブレート…"
-
-#: panels/wacom/gnome-wacom-properties.ui:286
-msgid "Adjust display resolution"
-msgstr "ディスプレイの解像度を調整"
-
-#: panels/wacom/gnome-wacom-properties.ui:302
-msgid "Adjust mouse settings"
-msgstr "マウス設定の調整"
-
-#: panels/wacom/gnome-wacom-properties.ui:330
+#: panels/wacom/gnome-wacom-properties.ui:238
 msgid "Tracking Mode"
 msgstr "検出モード"
 
-#: panels/wacom/gnome-wacom-properties.ui:358
+#: panels/wacom/gnome-wacom-properties.ui:266
 msgid "Left-Handed Orientation"
 msgstr "左手用"
+
+# 参考: intuos 5 のマニュアル p.57
+#: panels/wacom/gnome-wacom-properties.ui:296
+msgid "Map to Monitor…"
+msgstr "画面にマッピング…"
+
+#: panels/wacom/gnome-wacom-properties.ui:309
+msgid "Map Buttons…"
+msgstr "ボタン割り当て…"
+
+#: panels/wacom/gnome-wacom-properties.ui:322
+msgid "Calibrate…"
+msgstr "キャリブレート…"
+
+#: panels/wacom/gnome-wacom-properties.ui:340
+msgid "Adjust mouse settings"
+msgstr "マウス設定の調整"
+
+#: panels/wacom/gnome-wacom-properties.ui:356
+msgid "Adjust display resolution"
+msgstr "ディスプレイの解像度を調整"
 
 #: panels/wacom/gsd-wacom-key-shortcut-button.c:217
 msgid "New shortcut…"
@@ -7849,7 +8137,7 @@ msgstr "プライマリメニュー"
 
 #: shell/cc-window.ui:247
 msgid "Warning: Development Version"
-msgstr "警告: 開発バージョン"
+msgstr "警告: 開発版です"
 
 #: shell/cc-window.ui:248
 msgid ""
@@ -8187,9 +8475,6 @@ msgstr "システムのサウンド"
 #~ msgid "Press Esc to cancel."
 #~ msgstr "Escキーでキャンセルします"
 
-#~ msgid "Reset"
-#~ msgstr "リセット"
-
 #~ msgid "Make available to other _users"
 #~ msgstr "他のユーザーにも利用可能にする(_U)"
 
@@ -8456,9 +8741,6 @@ msgstr "システムのサウンド"
 
 #~ msgid "Supply"
 #~ msgstr "サプライ"
-
-#~ msgid "_Default printer"
-#~ msgstr "デフォルトのプリンター(_D)"
 
 #~ msgid "Jobs"
 #~ msgstr "ジョブ"
