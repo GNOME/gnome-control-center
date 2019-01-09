@@ -1426,6 +1426,7 @@ row_activated_cb (GtkListBox          *list,
                   CcApplicationsPanel *self)
 {
   update_panel (self, row);
+  g_signal_emit_by_name (self, "sidebar-activated");
 }
 
 static void
