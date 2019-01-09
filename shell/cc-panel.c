@@ -55,6 +55,12 @@ G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (CcPanel, cc_panel, GTK_TYPE_BIN)
 
 enum
 {
+  SIDEBAR_ACTIVATED,
+  LAST_SIGNAL
+};
+
+enum
+{
   PROP_0,
   PROP_SHELL,
   PROP_PARAMETERS,
@@ -62,6 +68,8 @@ enum
 };
 
 static GParamSpec *properties [N_PROPS];
+
+static guint signals [LAST_SIGNAL] = { 0 };
 
 static void
 cc_panel_set_property (GObject      *object,
@@ -151,6 +159,13 @@ cc_panel_class_init (CcPanelClass *klass)
   object_class->get_property = cc_panel_get_property;
   object_class->set_property = cc_panel_set_property;
   object_class->finalize = cc_panel_finalize;
+
+  signals[SIDEBAR_ACTIVATED] = g_signal_new ("sidebar-activated",
+                                             G_TYPE_FROM_CLASS (object_class),
+                                             G_SIGNAL_RUN_LAST,
+                                             0, NULL, NULL,
+                                             g_cclosure_marshal_VOID__VOID,
+                                             G_TYPE_NONE, 0);
 
   properties[PROP_SHELL] = g_param_spec_object ("shell",
                                                 "Shell",
