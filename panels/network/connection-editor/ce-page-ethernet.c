@@ -36,10 +36,14 @@ G_DEFINE_TYPE (CEPageEthernet, ce_page_ethernet, CE_TYPE_PAGE)
 static void
 mtu_changed (GtkSpinButton *mtu, CEPageEthernet *page)
 {
-        if (gtk_spin_button_get_value_as_int (mtu) == 0)
+        if (gtk_spin_button_get_value_as_int (mtu) == 0) {
+                gtk_widget_queue_resize (page->mtu_label);
                 gtk_widget_hide (page->mtu_label);
-        else
+        }
+        else {
+                gtk_widget_queue_resize (page->mtu_label);
                 gtk_widget_show (page->mtu_label);
+        }
 }
 
 static void
