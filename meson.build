@@ -104,6 +104,7 @@ if not libhandy_dep.found()
       'examples=false',
       'glade_catalog=disabled',
       'introspection=disabled',
+      'static=true',
       'tests=false',
       'vapi=false',
     ]
