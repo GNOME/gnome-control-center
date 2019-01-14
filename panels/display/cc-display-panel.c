@@ -609,11 +609,15 @@ make_orientation_row (CcDisplayPanel *panel, CcDisplayMonitor *output)
 static gboolean
 display_mode_supported_at_scale (CcDisplayMode *mode, double scale)
 {
-  int width, height;
+  gint width, height;
+  gint scaled_width, scaled_height;
 
   cc_display_mode_get_resolution (mode, &width, &height);
 
-  return width / scale >= MINIMUM_WIDTH && height / scale >= MINIMUM_HEIGHT;
+  scaled_width = round (width / scale);
+  scaled_height = round (height / scale);
+
+  return scaled_width >= MINIMUM_WIDTH && scaled_height >= MINIMUM_HEIGHT;
 }
 
 static void

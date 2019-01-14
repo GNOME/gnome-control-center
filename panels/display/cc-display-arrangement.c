@@ -117,8 +117,8 @@ get_scaled_geometry (CcDisplayConfig  *config,
   if (cc_display_config_is_layout_logical (config))
     {
       double scale = cc_display_monitor_get_scale (output);
-      *w /= scale;
-      *h /= scale;
+      *w = round (*w / scale);
+      *h = round (*h / scale);
     }
 
   apply_rotation_to_geometry (output, w, h);
