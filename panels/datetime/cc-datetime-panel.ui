@@ -307,253 +307,71 @@
                         <signal name="row-activated" handler="list_box_row_activated" object="CcDateTimePanel" swapped="no"/>
                         <signal name="keynav-failed" handler="keynav_failed" object="CcDateTimePanel" swapped="no"/>
                         <child>
-                          <object class="GtkListBoxRow" id="auto_datetime_row">
+                          <object class="HdyActionRow" id="auto_datetime_row">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <child>
-                              <object class="GtkBox" id="box2">
+                            <property name="title" translatable="yes">Automatic _Date &amp; Time</property>
+                            <property name="subtitle" translatable="yes">Requires internet access</property>
+                            <property name="use_underline">True</property>
+                            <child type="action">
+                              <object class="GtkSwitch" id="network_time_switch">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="spacing">50</property>
-                                <child>
-                                  <object class="GtkBox" id="box2a">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="margin_start">20</property>
-                                    <property name="margin_end">20</property>
-                                    <property name="margin_top">12</property>
-                                    <property name="margin_bottom">12</property>
-                                    <property name="spacing">2</property>
-                                    <property name="orientation">vertical</property>
-                                    <child>
-                                      <object class="GtkLabel" id="network_time_label">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Automatic _Date &amp; Time</property>
-                                        <property name="use_underline">True</property>
-                                        <property name="mnemonic_widget">network_time_switch</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">True</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel" id="network_time_comment">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Requires internet access</property>
-                                        <style>
-                                          <class name="dim-label"/>
-                                        </style>
-                                        <attributes>
-                                          <attribute name="scale" value="0.88"/>
-                                        </attributes>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">True</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkSwitch" id="network_time_switch">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="valign">center</property>
-                                    <property name="margin_start">20</property>
-                                    <property name="margin_end">20</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
+                                <property name="can_focus">True</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="HdyActionRow" id="auto_timezone_row">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="title" translatable="yes">Automatic Time _Zone</property>
+                            <property name="subtitle" translatable="yes">Requires location services enabled and internet access</property>
+                            <property name="use_underline">True</property>
+                            <child type="action">
+                              <object class="GtkSwitch" id="auto_timezone_switch">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="valign">center</property>
                               </object>
                             </child>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkListBoxRow" id="auto_timezone_row">
+                          <object class="HdyActionRow" id="datetime_button">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <child>
-                              <object class="GtkBox" id="box3">
+                            <property name="title" translatable="yes">Date &amp; _Time</property>
+                            <property name="use_underline">True</property>
+                            <child type="action">
+                              <object class="GtkLabel" id="datetime_label">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="spacing">50</property>
-                                <child>
-                                  <object class="GtkBox" id="box3a">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="margin_start">20</property>
-                                    <property name="margin_end">20</property>
-                                    <property name="margin_top">12</property>
-                                    <property name="margin_bottom">12</property>
-                                    <property name="spacing">2</property>
-                                    <property name="orientation">vertical</property>
-                                    <child>
-                                      <object class="GtkLabel" id="auto_timezone_label">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Automatic Time _Zone</property>
-                                        <property name="use_underline">True</property>
-                                        <property name="mnemonic_widget">auto_timezone_switch</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">True</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel" id="auto_timezone_comment">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Requires location services enabled and internet access</property>
-                                        <style>
-                                          <class name="dim-label"/>
-                                        </style>
-                                        <attributes>
-                                          <attribute name="scale" value="0.88"/>
-                                        </attributes>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">True</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkSwitch" id="auto_timezone_switch">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="valign">center</property>
-                                    <property name="margin_start">20</property>
-                                    <property name="margin_end">20</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
+                                <property name="xalign">0</property>
+                                <property name="label">20 June 2012, 6:45 AM</property>
                               </object>
                             </child>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkListBoxRow" id="datetime_button">
+                          <object class="HdyActionRow" id="timezone_button">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <child>
-                              <object class="GtkBox" id="box4">
+                            <property name="title" translatable="yes">Time Z_one</property>
+                            <property name="use_underline">True</property>
+                            <child type="action">
+                              <object class="GtkLabel" id="timezone_label">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="spacing">50</property>
-                                <child>
-                                  <object class="GtkLabel" id="datetime_label1">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="margin_start">20</property>
-                                    <property name="margin_end">20</property>
-                                    <property name="margin_top">6</property>
-                                    <property name="margin_bottom">6</property>
-                                    <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Date &amp; _Time</property>
-                                    <property name="use_underline">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="datetime_label">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="margin_start">20</property>
-                                    <property name="margin_end">20</property>
-                                    <property name="margin_top">6</property>
-                                    <property name="margin_bottom">6</property>
-                                    <property name="xalign">0</property>
-                                    <property name="label">20 June 2012, 6:45 AM</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkListBoxRow" id="timezone_button">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <child>
-                              <object class="GtkBox" id="box5">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="spacing">50</property>
-                                <child>
-                                  <object class="GtkLabel" id="timezone_label1">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="margin_start">20</property>
-                                    <property name="margin_end">20</property>
-                                    <property name="margin_top">6</property>
-                                    <property name="margin_bottom">6</property>
-                                    <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Time Z_one</property>
-                                    <property name="use_underline">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="timezone_label">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="margin_start">20</property>
-                                    <property name="margin_end">20</property>
-                                    <property name="margin_top">6</property>
-                                    <property name="margin_bottom">6</property>
-                                    <property name="xalign">0</property>
-                                    <property name="label">GMT+1 (London, United Kingdom)</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
+                                <property name="ellipsize">end</property>
+                                <property name="xalign">0</property>
+                                <property name="label">GMT+1 (London, United Kingdom)</property>
                               </object>
                             </child>
                           </object>
@@ -581,52 +399,21 @@
                         <signal name="row-activated" handler="list_box_row_activated" object="CcDateTimePanel" swapped="no"/>
                         <signal name="keynav-failed" handler="keynav_failed" object="CcDateTimePanel" swapped="no"/>
                         <child>
-                          <object class="GtkListBoxRow" id="timeformat_row">
+                          <object class="HdyActionRow" id="timeformat_row">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <child>
-                              <object class="GtkBox" id="box1">
+                            <property name="title" translatable="yes">Time _Format</property>
+                            <property name="use_underline">True</property>
+                            <child type="action">
+                              <object class="GtkComboBoxText" id="format_combobox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="spacing">50</property>
-                                <child>
-                                  <object class="GtkLabel" id="format_label">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="margin_start">20</property>
-                                    <property name="margin_end">20</property>
-                                    <property name="margin_top">6</property>
-                                    <property name="margin_bottom">6</property>
-                                    <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Time _Format</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">format_combobox</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkComboBoxText" id="format_combobox">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="valign">center</property>
-                                    <property name="margin_start">20</property>
-                                    <property name="margin_end">20</property>
-                                    <signal name="notify::active-id" handler="change_clock_settings" object="CcDateTimePanel" swapped="no"/>
-                                    <items>
-                                      <item id="24h" translatable="yes">24-hour</item>
-                                      <item id="12h" translatable="yes">AM / PM</item>
-                                    </items>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
+                                <property name="valign">center</property>
+                                <signal name="notify::active-id" handler="change_clock_settings" object="CcDateTimePanel" swapped="no"/>
+                                <items>
+                                  <item id="24h" translatable="yes">24-hour</item>
+                                  <item id="12h" translatable="yes">AM / PM</item>
+                                </items>
                               </object>
                             </child>
                           </object>
@@ -647,15 +434,5 @@
       </object>
     </child>
   </template>
-  <object class="GtkSizeGroup" id="row_sizegroup">
-    <property name="mode">vertical</property>
-    <widgets>
-      <widget name="box1"/>
-      <widget name="box2"/>
-      <widget name="box3"/>
-      <widget name="box4"/>
-      <widget name="box5"/>
-    </widgets>
-  </object>
 </interface>
 
