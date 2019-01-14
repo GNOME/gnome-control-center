@@ -631,7 +631,7 @@ display_mode_supported_at_scale (CcDisplayMode *mode, double scale)
 
   cc_display_mode_get_resolution (mode, &width, &height);
 
-  return width / scale >= MINIMUM_WIDTH && height / scale >= MINIMUM_HEIGHT;
+  return round(width / scale) >= MINIMUM_WIDTH && round(height / scale) >= MINIMUM_HEIGHT;
 }
 
 static void
