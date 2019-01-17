@@ -111,11 +111,15 @@ cc_carousel_move_arrow (CcCarousel *self)
         GtkStyleContext *context;
         gchar *css;
         gint end_x;
+        GtkSettings *settings;
+        gboolean animations;
 
         if (!self->selected_item)
                 return;
 
         end_x = cc_carousel_item_get_x (self->selected_item, self);
+
+        g_debug ("%s: animating from %d to %d", G_STRFUNC, self->arrow_start_x, end_x);
 
         context = gtk_widget_get_style_context (self->arrow);
         if (self->provider)
@@ -129,6 +133,29 @@ cc_carousel_move_arrow (CcCarousel *self)
                                "* {\n"
                                "  animation-name: arrow_keyframes-%d;\n"
                                "}\n", end_x, self->arrow_start_x, end_x, end_x);
+
+        settings = gtk_widget_get_settings (GTK_WIDGET (self));
+        g_object_get (settings, "gtk-enable-animations", &animations, NULL);
+
+        /* Animate the arrow movement if animations are enabled. Otherwise,
+         * jump the arrow to the right location instantly. */
+        if (animations)
+        {
+                css = g_strdup_printf ("@keyframes arrow_keyframes-%d-%d {\n"
+                                       "  from { margin-left: %dpx; }\n"
+                                       "  to { margin-left: %dpx; }\n"
+                                       "}\n"
+                                       "* {\n"
+                                       "  animation-name: arrow_keyframes-%d-%d;\n"
+                                       "}\n",
+                                       self->arrow_start_x, end_x,
+                                       self->arrow_start_x, end_x,
+                                       self->arrow_start_x, end_x);
+        }
+        else
+        {
+                css = g_strdup_printf ("* { margin-left: %dpx }", end_x);
+        }
 
         self->provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
         gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (self->provider), css, -1, NULL);
