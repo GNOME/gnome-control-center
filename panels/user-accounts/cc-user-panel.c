@@ -293,7 +293,7 @@ reload_users (CcUserPanel *self, ActUser *selected_user)
         GtkSettings *settings;
         gboolean animations;
 
-        settings = gtk_settings_get_default ();
+        settings = gtk_widget_get_settings (GTK_WIDGET (self->carousel));
 
         g_object_get (settings, "gtk-enable-animations", &animations, NULL);
         g_object_set (settings, "gtk-enable-animations", FALSE, NULL);
