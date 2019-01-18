@@ -509,6 +509,21 @@ cc_display_config_is_applicable (CcDisplayConfig *self)
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->is_applicable (self);
 }
 
+void
+cc_display_config_set_mode_on_all_outputs (CcDisplayConfig *config,
+                                           CcDisplayMode   *mode)
+{
+  GList *outputs, *l;
+
+  outputs = cc_display_config_get_monitors (config);
+  for (l = outputs; l; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+      cc_display_monitor_set_mode (output, mode);
+      cc_display_monitor_set_position (output, 0, 0);
+    }
+}
+
 gboolean
 cc_display_config_equal (CcDisplayConfig *self,
                          CcDisplayConfig *other)
