@@ -1479,26 +1479,12 @@ make_two_single_ui (CcDisplayPanel *panel)
 }
 
 static void
-set_mode_on_all_outputs (CcDisplayConfig *config,
-                         CcDisplayMode   *mode)
-{
-  GList *outputs, *l;
-  outputs = cc_display_config_get_monitors (config);
-  for (l = outputs; l; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      cc_display_monitor_set_mode (output, mode);
-      cc_display_monitor_set_position (output, 0, 0);
-    }
-}
-
-static void
 mirror_resolution_row_activated (CcDisplayPanel *panel,
                                  GtkListBoxRow  *row)
 {
   CcDisplayMode *mode = g_object_get_data (G_OBJECT (row), "mode");
 
-  set_mode_on_all_outputs (panel->current_config, mode);
+  cc_display_config_set_mode_on_all_outputs (panel->current_config, mode);
   update_apply_button (panel);
 }
 
@@ -1596,8 +1582,8 @@ make_two_mirror_ui (CcDisplayPanel *panel)
       GList *modes;
       cc_display_config_set_cloning (panel->current_config, TRUE);
       modes = g_object_get_data (G_OBJECT (panel->current_config), "mirror-res-list");
-      set_mode_on_all_outputs (panel->current_config,
-                               CC_DISPLAY_MODE (g_list_nth_data (modes, 0)));
+      cc_display_config_set_mode_on_all_outputs (panel->current_config,
+                                                 CC_DISPLAY_MODE (g_list_nth_data (modes, 0)));
     }
 
   panel->rows_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
