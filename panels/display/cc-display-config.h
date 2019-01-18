@@ -169,6 +169,10 @@ gboolean          cc_display_config_is_cloning              (CcDisplayConfig    
 void              cc_display_config_set_cloning             (CcDisplayConfig    *config,
                                                              gboolean            clone);
 GList*            cc_display_config_get_cloning_modes       (CcDisplayConfig    *config);
+
+void              cc_display_config_set_mode_on_all_outputs (CcDisplayConfig *config,
+                                                             CcDisplayMode   *mode);
+
 gboolean          cc_display_config_is_layout_logical       (CcDisplayConfig    *self);
 
 const char*       cc_display_monitor_get_display_name       (CcDisplayMonitor   *monitor);
