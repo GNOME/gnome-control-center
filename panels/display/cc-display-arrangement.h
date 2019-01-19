@@ -30,6 +30,10 @@ G_DECLARE_FINAL_TYPE (CcDisplayArrangement, cc_display_arrangement, CC, DISPLAY_
 
 CcDisplayArrangement* cc_display_arrangement_new                 (CcDisplayConfig      *config);
 
+CcDisplayConfig*      cc_display_arrangement_get_config          (CcDisplayArrangement *self);
+void                  cc_display_arrangement_set_config          (CcDisplayArrangement *self,
+                                                                  CcDisplayConfig      *config);
+
 CcDisplayMonitor*     cc_display_arrangement_get_selected_output (CcDisplayArrangement *arr);
 void                  cc_display_arrangement_set_selected_output (CcDisplayArrangement *arr,
                                                                   CcDisplayMonitor     *output);
