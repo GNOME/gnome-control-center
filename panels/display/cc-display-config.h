@@ -224,6 +224,7 @@ void              cc_display_monitor_set_usable             (CcDisplayMonitor  *
 int               cc_display_monitor_get_ui_number          (CcDisplayMonitor  *monitor);
 const char*       cc_display_monitor_get_ui_name            (CcDisplayMonitor  *monitor);
 const char*       cc_display_monitor_get_ui_number_name     (CcDisplayMonitor  *monitor);
+char*             cc_display_monitor_dup_ui_number_name     (CcDisplayMonitor  *monitor);
 
 void              cc_display_mode_get_resolution            (CcDisplayMode     *mode,
                                                              int               *width,
