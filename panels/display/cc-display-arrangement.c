@@ -524,36 +524,6 @@ on_output_changed_cb (CcDisplayArrangement *self,
   gtk_widget_queue_draw (GTK_WIDGET (self));
 }
 
-static void
-cc_display_arrangement_set_config (CcDisplayArrangement *self,
-                                   CcDisplayConfig      *config)
-{
-  const gchar *signals[] = { "rotation", "mode", "primary", "active", "scale", "position-changed", "is-usable" };
-  GList *outputs, *l;
-  guint i;
-
-  g_assert (self->config == NULL);
-
-  self->config = g_object_ref (config);
-
-  /* Listen to all the signals */
-  if (self->config)
-    {
-      outputs = cc_display_config_get_monitors (self->config);
-      for (l = outputs; l; l = l->next)
-        {
-          CcDisplayMonitor *output = l->data;
-
-          for (i = 0; i < G_N_ELEMENTS (signals); ++i)
-            g_signal_connect_object (output, signals[i], G_CALLBACK (on_output_changed_cb), self, G_CONNECT_SWAPPED);
-        }
-    }
-
-  cc_display_arrangement_set_selected_output (self, NULL);
-
-  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_CONFIG]);
-}
-
 static gboolean
 cc_display_arrangement_draw (GtkWidget *widget,
                              cairo_t   *cr)
@@ -563,7 +533,8 @@ cc_display_arrangement_draw (GtkWidget *widget,
   g_autoptr(GList) outputs = NULL;
   GList *l;
 
-  g_return_val_if_fail (self->config, FALSE);
+  if (!self->config)
+    return FALSE;
 
   cc_display_arrangement_update_matrices (self);
 
@@ -694,6 +665,9 @@ cc_display_arrangement_button_press_event (GtkWidget      *widget,
   gdouble event_x, event_y;
   gint mon_x, mon_y;
 
+  if (!self->config)
+    return FALSE;
+
   /* Only handle normal presses of the left mouse button. */
   if (event->button != 1 || event->type != GDK_BUTTON_PRESS)
     return FALSE;
@@ -729,6 +703,9 @@ cc_display_arrangement_button_release_event (GtkWidget      *widget,
   CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (widget);
   CcDisplayMonitor *output;
 
+  if (!self->config)
+    return FALSE;
+
   /* Only handle left mouse button */
   if (event->button != 1)
     return FALSE;
@@ -758,7 +735,8 @@ cc_display_arrangement_motion_notify_event (GtkWidget      *widget,
   gint mon_x, mon_y;
   SnapData snap_data;
 
-  g_return_val_if_fail (self->config, FALSE);
+  if (!self->config)
+    return FALSE;
 
   if (cc_display_config_count_useful_monitors (self->config) <= 1)
     return FALSE;
@@ -879,7 +857,7 @@ cc_display_arrangement_class_init (CcDisplayArrangementClass *klass)
   props[PROP_CONFIG] = g_param_spec_object ("config", "Display Config",
                                             "The display configuration to work with",
                                             CC_TYPE_DISPLAY_CONFIG,
-                                            G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+                                            G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   props[PROP_SELECTED_OUTPUT] = g_param_spec_object ("selected-output", "Selected Output",
                                                      "The output that is currently selected on the configuration",
@@ -913,11 +891,57 @@ cc_display_arrangement_new (CcDisplayConfig *config)
   return g_object_new (CC_TYPE_DISPLAY_ARRANGEMENT, "config", config, NULL);
 }
 
+CcDisplayConfig*
+cc_display_arrangement_get_config (CcDisplayArrangement *self)
+{
+  return self->config;
+}
+
+void
+cc_display_arrangement_set_config (CcDisplayArrangement *self,
+                                   CcDisplayConfig      *config)
+{
+  const gchar *signals[] = { "rotation", "mode", "primary", "active", "scale", "position-changed", "is-usable" };
+  GList *outputs, *l;
+  guint i;
+
+  if (self->config)
+    {
+      outputs = cc_display_config_get_monitors (self->config);
+      for (l = outputs; l; l = l->next)
+        {
+          CcDisplayMonitor *output = l->data;
+
+          g_signal_handlers_disconnect_by_data (output, self);
+        }
+    }
+  g_clear_object (&self->config);
+
+  self->drag_active = FALSE;
+
+  /* Listen to all the signals */
+  if (config)
+    {
+      self->config = g_object_ref (config);
+
+      outputs = cc_display_config_get_monitors (self->config);
+      for (l = outputs; l; l = l->next)
+        {
+          CcDisplayMonitor *output = l->data;
+
+          for (i = 0; i < G_N_ELEMENTS (signals); ++i)
+            g_signal_connect_object (output, signals[i], G_CALLBACK (on_output_changed_cb), self, G_CONNECT_SWAPPED);
+        }
+    }
+
+  cc_display_arrangement_set_selected_output (self, NULL);
+
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_CONFIG]);
+}
+
 CcDisplayMonitor*
 cc_display_arrangement_get_selected_output (CcDisplayArrangement *self)
 {
-
-
   return self->selected_output;
 }
 
