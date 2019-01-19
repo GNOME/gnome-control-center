@@ -385,6 +385,12 @@ cc_display_monitor_get_ui_number_name (CcDisplayMonitor *self)
   return CC_DISPLAY_MONITOR_GET_PRIVATE (self)->ui_number_name;
 }
 
+char *
+cc_display_monitor_dup_ui_number_name (CcDisplayMonitor *self)
+{
+  return g_strdup (CC_DISPLAY_MONITOR_GET_PRIVATE (self)->ui_number_name);
+}
+
 static void
 cc_display_monitor_set_ui_info (CcDisplayMonitor *self, gint ui_number, gchar *ui_name)
 {
