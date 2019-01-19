@@ -30,6 +30,7 @@ sources = files(
 )
 
 resource_data = files(
+  'cc-display-panel.ui',
   'cc-display-settings.ui',
   'cc-night-light-dialog.ui',
 )
