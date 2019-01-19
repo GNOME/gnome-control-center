@@ -744,7 +744,7 @@ void
 cc_display_settings_set_config (CcDisplaySettings *self,
                                 CcDisplayConfig   *config)
 {
-  const gchar *signals[] = { "rotation", "mode", "scale", "is-usable" };
+  const gchar *signals[] = { "rotation", "mode", "scale", "is-usable", "active" };
   GList *outputs, *l;
   guint i;
 
