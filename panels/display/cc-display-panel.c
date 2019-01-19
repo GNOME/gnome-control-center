@@ -111,14 +111,6 @@ struct _CcDisplayPanel
 
 CC_PANEL_REGISTER (CcDisplayPanel, cc_display_panel)
 
-typedef struct
-{
-  int grab_x;
-  int grab_y;
-  int output_x;
-  int output_y;
-} GrabInfo;
-
 static void
 update_apply_button (CcDisplayPanel *panel);
 static void
