@@ -28,12 +28,17 @@ G_BEGIN_DECLS
 #define CC_TYPE_DISPLAY_SETTINGS cc_display_settings_get_type ()
 G_DECLARE_FINAL_TYPE (CcDisplaySettings, cc_display_settings, CC, DISPLAY_SETTINGS, GtkListBox);
 
-CcDisplaySettings*  cc_display_settings_new                 (CcDisplayConfig      *config,
-                                                             gboolean              has_accelerometer);
+CcDisplaySettings*  cc_display_settings_new                 (void);
 
-CcDisplayMonitor*   cc_display_settings_get_selected_output (CcDisplaySettings    *settings);
-void                cc_display_settings_set_selected_output (CcDisplaySettings    *settings,
-                                                             CcDisplayMonitor     *output);
+gboolean            cc_display_settings_get_has_accelerometer (CcDisplaySettings    *settings);
+void                cc_display_settings_set_has_accelerometer (CcDisplaySettings    *settings,
+                                                               gboolean              has_accelerometer);
+CcDisplayConfig*    cc_display_settings_get_config            (CcDisplaySettings    *settings);
+void                cc_display_settings_set_config            (CcDisplaySettings    *settings,
+                                                               CcDisplayConfig      *config);
+CcDisplayMonitor*   cc_display_settings_get_selected_output   (CcDisplaySettings    *settings);
+void                cc_display_settings_set_selected_output   (CcDisplaySettings    *settings,
+                                                               CcDisplayMonitor     *output);
 
 G_END_DECLS
 
