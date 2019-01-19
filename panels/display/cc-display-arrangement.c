@@ -930,6 +930,8 @@ cc_display_arrangement_set_selected_output (CcDisplayArrangement *self,
   /* XXX: Could check that it actually belongs to the right config object. */
   self->selected_output = output;
 
+  gtk_widget_queue_draw (GTK_WIDGET (self));
+
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_SELECTED_OUTPUT]);
 }
 
