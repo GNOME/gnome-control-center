@@ -263,6 +263,11 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
 
   cc_display_monitor_get_geometry (self->selected_output, NULL, NULL, &width, &height);
 
+  /* Selecte the first mode we can find if the monitor is disabled. */
+  current_mode = cc_display_monitor_get_mode (self->selected_output);
+  if (current_mode == NULL)
+    current_mode = cc_display_monitor_get_preferred_mode (self->selected_output);
+
   if (should_show_rotation (self))
     {
       guint i;
@@ -298,11 +303,9 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   /* Only show refresh rate if we are not in cloning mode. */
   if (!cc_display_config_is_cloning (self->config))
     {
-      CcDisplayMode *current_mode;
       GList *item;
       gdouble freq;
 
-      current_mode = cc_display_monitor_get_mode (self->selected_output);
       freq = cc_display_mode_get_freq_f (current_mode);
 
       modes = cc_display_monitor_get_modes (self->selected_output);
@@ -348,8 +351,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
     modes = cc_display_monitor_get_modes (self->selected_output);
 
   g_list_store_remove_all (self->resolution_list);
-  g_list_store_append (self->resolution_list,
-                       cc_display_monitor_get_mode (self->selected_output));
+  g_list_store_append (self->resolution_list, current_mode);
   hdy_combo_row_set_selected_index (HDY_COMBO_ROW (self->resolution_row), 0);
   for (item = modes; item != NULL; item = item->next)
     {
@@ -393,15 +395,14 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   g_list_store_remove_all (self->scale_list);
   if (!cc_display_config_is_cloning (self->config))
     {
-      CcDisplayMode *mode = cc_display_monitor_get_mode (self->selected_output);
       const gdouble *scales, *scale;
 
-      scales = cc_display_mode_get_supported_scales (mode);
+      scales = cc_display_mode_get_supported_scales (current_mode);
       for (scale = scales; *scale != 0.0; scale++)
         {
           g_autoptr(CcValueObject) obj = NULL;
 
-          if (!display_mode_supported_at_scale (mode, *scale) &&
+          if (!display_mode_supported_at_scale (current_mode, *scale) &&
               cc_display_monitor_get_scale (self->selected_output) != *scale)
             continue;
 
