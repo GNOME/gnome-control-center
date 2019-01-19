@@ -240,10 +240,11 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   GList *modes;
   GList *item;
   gint width, height;
+  CcDisplayMode *current_mode;
 
   self->idle_udpate_id = 0;
 
-  if (!self->selected_output)
+  if (!self->config || !self->selected_output)
     {
       gtk_widget_set_visible (self->orientation_row, FALSE);
       gtk_widget_set_visible (self->refresh_rate_row, FALSE);
@@ -547,36 +548,6 @@ on_underscanning_switch_active_changed_cb (GtkWidget         *widget,
 }
 
 static void
-cc_display_settings_set_config (CcDisplaySettings *self,
-                                CcDisplayConfig      *config)
-{
-  const gchar *signals[] = { "rotation", "mode", "scale", "is-usable" };
-  GList *outputs, *l;
-  guint i;
-
-  g_assert (self->config == NULL);
-
-  self->config = g_object_ref (config);
-
-  /* Listen to all the signals */
-  if (self->config)
-    {
-      outputs = cc_display_config_get_monitors (self->config);
-      for (l = outputs; l; l = l->next)
-        {
-          CcDisplayMonitor *output = l->data;
-
-          for (i = 0; i < G_N_ELEMENTS (signals); ++i)
-            g_signal_connect_object (output, signals[i], G_CALLBACK (on_output_changed_cb), self, G_CONNECT_SWAPPED);
-        }
-    }
-
-  cc_display_settings_set_selected_output (self, NULL);
-
-  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_CONFIG]);
-}
-
-static void
 cc_display_settings_get_property (GObject    *object,
                                   guint       prop_id,
                                   GValue     *value,
@@ -587,7 +558,7 @@ cc_display_settings_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_HAS_ACCELEROMETER:
-      g_value_set_boolean (value, self->has_accelerometer);
+      g_value_set_boolean (value, cc_display_settings_get_has_accelerometer (self));
       break;
 
     case PROP_CONFIG:
@@ -614,7 +585,7 @@ cc_display_settings_set_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_HAS_ACCELEROMETER:
-      self->has_accelerometer = g_value_get_boolean (value);
+      cc_display_settings_set_has_accelerometer (self, g_value_get_boolean (value));
       break;
 
     case PROP_CONFIG:
@@ -665,13 +636,13 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
     g_param_spec_boolean ("has-accelerometer", "Has Accelerometer",
                           "If an accelerometre is available for the builtin display",
                           FALSE,
-                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_CONFIG] =
     g_param_spec_object ("config", "Display Config",
                          "The display configuration to work with",
                          CC_TYPE_DISPLAY_CONFIG,
-                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_SELECTED_OUTPUT] =
     g_param_spec_object ("selected-output", "Selected Output",
@@ -740,13 +711,72 @@ cc_display_settings_init (CcDisplaySettings *self)
 }
 
 CcDisplaySettings*
-cc_display_settings_new (CcDisplayConfig *config,
-                         gboolean         has_accelerometer)
+cc_display_settings_new (void)
 {
   return g_object_new (CC_TYPE_DISPLAY_SETTINGS,
-                       "config", config,
-                       "has-accelerometer", has_accelerometer,
                        NULL);
+}
+
+gboolean
+cc_display_settings_get_has_accelerometer (CcDisplaySettings    *settings)
+{
+  return settings->has_accelerometer;
+}
+
+void
+cc_display_settings_set_has_accelerometer (CcDisplaySettings    *self,
+                                           gboolean              has_accelerometer)
+{
+  self->has_accelerometer = has_accelerometer;
+
+  cc_display_settings_rebuild_ui (self);
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_CONFIG]);
+}
+
+CcDisplayConfig*
+cc_display_settings_get_config (CcDisplaySettings *self)
+{
+  return self->config;
+}
+
+void
+cc_display_settings_set_config (CcDisplaySettings *self,
+                                CcDisplayConfig   *config)
+{
+  const gchar *signals[] = { "rotation", "mode", "scale", "is-usable" };
+  GList *outputs, *l;
+  guint i;
+
+  if (self->config)
+    {
+      outputs = cc_display_config_get_monitors (self->config);
+      for (l = outputs; l; l = l->next)
+        {
+          CcDisplayMonitor *output = l->data;
+
+          g_signal_handlers_disconnect_by_data (output, self);
+        }
+    }
+  g_clear_object (&self->config);
+
+  self->config = g_object_ref (config);
+
+  /* Listen to all the signals */
+  if (self->config)
+    {
+      outputs = cc_display_config_get_monitors (self->config);
+      for (l = outputs; l; l = l->next)
+        {
+          CcDisplayMonitor *output = l->data;
+
+          for (i = 0; i < G_N_ELEMENTS (signals); ++i)
+            g_signal_connect_object (output, signals[i], G_CALLBACK (on_output_changed_cb), self, G_CONNECT_SWAPPED);
+        }
+    }
+
+  cc_display_settings_set_selected_output (self, NULL);
+
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_CONFIG]);
 }
 
 CcDisplayMonitor*
