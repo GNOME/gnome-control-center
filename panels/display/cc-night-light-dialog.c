@@ -638,14 +638,15 @@ cc_night_light_dialog_init (CcNightLightDialog *self)
 {
   g_autoptr(GtkCssProvider) provider = NULL;
   g_autoptr(GError) error = NULL;
-  g_autofree gchar *text = NULL;
+  g_autofree gchar *text_low = NULL;
+  g_autofree gchar *text_high = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  text = g_strdup_printf ("%s", "More Warm");
+  text_low = g_strdup_printf ("%s", "More Warm");
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
                       3000, GTK_POS_BOTTOM,
-                      text);
+                      text_low);
 
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
                       4000, GTK_POS_BOTTOM,
@@ -655,10 +656,10 @@ cc_night_light_dialog_init (CcNightLightDialog *self)
                       5000, GTK_POS_BOTTOM,
                       NULL);
 
-  text = g_strdup_printf ("%s", "Less Warm");
+  text_high = g_strdup_printf ("%s", "Less Warm");
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
                       6000, GTK_POS_BOTTOM,
-                      text);
+                      text_high);
 
   self->cancellable = g_cancellable_new ();
   self->settings_display = g_settings_new (DISPLAY_SCHEMA);
