@@ -151,8 +151,24 @@ cc_display_monitor_init (CcDisplayMonitor *self)
 }
 
 static void
+cc_display_monitor_finalize (GObject *object)
+{
+  CcDisplayMonitor *self = CC_DISPLAY_MONITOR (object);
+  CcDisplayMonitorPrivate *priv = CC_DISPLAY_MONITOR_GET_PRIVATE (self);
+
+  g_clear_pointer (&priv->ui_name, g_free);
+  g_clear_pointer (&priv->ui_number_name, g_free);
+
+  G_OBJECT_CLASS (cc_display_monitor_parent_class)->finalize (object);
+}
+
+static void
 cc_display_monitor_class_init (CcDisplayMonitorClass *klass)
 {
+  GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
+
+  gobject_class->finalize = cc_display_monitor_finalize;
+
   g_signal_new ("rotation",
                 CC_TYPE_DISPLAY_MONITOR,
                 G_SIGNAL_RUN_LAST,
