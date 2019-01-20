@@ -452,6 +452,8 @@ cc_display_config_finalize (GObject *object)
   CcDisplayConfigPrivate *priv = CC_DISPLAY_CONFIG_GET_PRIVATE (self);
 
   g_list_free (priv->ui_sorted_monitors);
+
+  G_OBJECT_CLASS (cc_display_config_parent_class)->finalize (object);
 }
 
 static void
