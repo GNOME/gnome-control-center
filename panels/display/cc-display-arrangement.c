@@ -857,6 +857,8 @@ cc_display_arrangement_finalize (GObject *object)
   CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (object);
 
   g_clear_object (&self->config);
+
+  G_OBJECT_CLASS (cc_display_arrangement_parent_class)->finalize (object);
 }
 
 static void
