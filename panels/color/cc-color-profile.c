@@ -455,6 +455,8 @@ cc_color_profile_init (CcColorProfile *color_profile)
   gtk_widget_set_margin_top (color_profile->widget_description, 9);
   gtk_widget_set_margin_bottom (color_profile->widget_description, 9);
   gtk_widget_set_halign (color_profile->widget_description, GTK_ALIGN_START);
+  gtk_label_set_ellipsize (GTK_LABEL (color_profile->widget_description), PANGO_ELLIPSIZE_END);
+  gtk_label_set_xalign (GTK_LABEL (color_profile->widget_description), 0);
   gtk_box_pack_start (GTK_BOX (box), color_profile->widget_description, TRUE, TRUE, 0);
   gtk_widget_show (color_profile->widget_description);
 

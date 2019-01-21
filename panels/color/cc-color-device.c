@@ -274,6 +274,8 @@ cc_color_device_init (CcColorDevice *color_device)
   gtk_widget_set_margin_top (color_device->widget_description, 12);
   gtk_widget_set_margin_bottom (color_device->widget_description, 12);
   gtk_widget_set_halign (color_device->widget_description, GTK_ALIGN_START);
+  gtk_label_set_ellipsize (GTK_LABEL (color_device->widget_description), PANGO_ELLIPSIZE_END);
+  gtk_label_set_xalign (GTK_LABEL (color_device->widget_description), 0);
   gtk_box_pack_start (GTK_BOX (box), color_device->widget_description, TRUE, TRUE, 0);
 
   /* switch */
