@@ -2559,25 +2559,6 @@ add_device_section (CcPowerPanel *self)
 }
 
 static void
-on_content_size_changed (GtkWidget *widget, GtkAllocation *allocation, gpointer data)
-{
-  GtkWidget *box;
-
-  box = gtk_widget_get_parent (gtk_widget_get_parent (widget));
-  if (allocation->height < 490)
-    {
-      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
-                                      GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-    }
-  else
-    {
-      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
-                                      GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (box), 490);
-    }
-}
-
-static void
 cc_power_panel_init (CcPowerPanel *self)
 {
   guint i;
@@ -2636,9 +2617,6 @@ cc_power_panel_init (CcPowerPanel *self)
                       G_CALLBACK (up_client_changed), self);
   }
   up_client_changed (self->up_client, NULL, self);
-
-  g_signal_connect (self->main_box, "size-allocate",
-                    G_CALLBACK (on_content_size_changed), NULL);
 
   self->focus_adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (self->main_scroll));
   gtk_container_set_focus_vadjustment (GTK_CONTAINER (self->main_box), self->focus_adjustment);
