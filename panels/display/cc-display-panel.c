@@ -61,6 +61,7 @@ struct _CcDisplayPanel
 
   CcDisplayConfigManager *manager;
   CcDisplayConfig *current_config;
+  CcDisplayConfig *applied_config;
   CcDisplayMonitor *current_output;
 
   gboolean              rebuilding;
@@ -441,6 +442,7 @@ cc_display_panel_dispose (GObject *object)
     }
 
   g_clear_object (&self->manager);
+  g_clear_object (&self->applied_config);
   g_clear_object (&self->current_config);
   g_clear_object (&self->up_client);
   g_clear_object (&self->settings_color);
@@ -845,6 +847,10 @@ on_screen_changed (CcDisplayPanel *panel)
 
   reset_titlebar (panel);
 
+  g_clear_object (&panel->applied_config);
+  panel->applied_config = cc_display_config_manager_get_current (panel->manager);
+  cc_display_settings_set_applied_config (panel->settings, panel->applied_config);
+
   reset_current_config (panel);
   rebuild_ui (panel);
 
@@ -924,12 +930,9 @@ static void
 update_apply_button (CcDisplayPanel *panel)
 {
   gboolean config_equal;
-  g_autoptr(CcDisplayConfig) applied_config = NULL;
-
-  applied_config = cc_display_config_manager_get_current (panel->manager);
 
   config_equal = cc_display_config_equal (panel->current_config,
-                                          applied_config);
+                                          panel->applied_config);
 
   if (config_equal)
     reset_titlebar (panel);
