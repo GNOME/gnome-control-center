@@ -26,6 +26,8 @@ common_sources += gnome.mkenums(
 
 sources = files(
   'cc-hostname-entry.c',
+  # Remove once we depend on libhandy 0.8
+  'cc-value-object.c',
   'hostname-helper.c',
   'list-box-helper.c',
 )
