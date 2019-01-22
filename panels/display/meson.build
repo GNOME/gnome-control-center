@@ -24,6 +24,7 @@ sources = files(
   'cc-display-config-dbus.c',
   'cc-display-config-manager-dbus.c',
   'cc-display-config-manager.c',
+  'cc-display-scaling-preview.c',
   'cc-display-settings.c',
   'cc-night-light-dialog.c',
 )
