@@ -36,6 +36,9 @@ void                cc_display_settings_set_has_accelerometer (CcDisplaySettings
 CcDisplayConfig*    cc_display_settings_get_config            (CcDisplaySettings    *settings);
 void                cc_display_settings_set_config            (CcDisplaySettings    *settings,
                                                                CcDisplayConfig      *config);
+CcDisplayConfig*    cc_display_settings_get_applied_config    (CcDisplaySettings    *settings);
+void                cc_display_settings_set_applied_config    (CcDisplaySettings    *settings,
+                                                               CcDisplayConfig      *config);
 CcDisplayMonitor*   cc_display_settings_get_selected_output   (CcDisplaySettings    *settings);
 void                cc_display_settings_set_selected_output   (CcDisplaySettings    *settings,
                                                                CcDisplayMonitor     *output);
