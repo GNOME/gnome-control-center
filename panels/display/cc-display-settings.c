@@ -25,6 +25,7 @@
 #include <math.h>
 #include "list-box-helper.h"
 #include "cc-display-settings.h"
+#include "cc-display-scaling-preview.h"
 #include "cc-display-config.h"
 #include "cc-value-object.h"
 
@@ -52,7 +53,8 @@ struct _CcDisplaySettings
   GtkWidget        *orientation_row;
   GtkWidget        *refresh_rate_row;
   GtkWidget        *resolution_row;
-  GtkWidget        *scale_bbox;
+  GtkWidget        *scale_preview_box;
+  GtkWidget        *scale_preview_row;
   GtkWidget        *scale_row;
   GtkWidget        *underscanning_row;
   GtkWidget        *underscanning_switch;
@@ -70,6 +72,11 @@ enum {
 };
 
 G_DEFINE_TYPE (CcDisplaySettings, cc_display_settings, GTK_TYPE_LIST_BOX)
+
+static gboolean
+on_scale_preview_button_pressed_cb (CcDisplayScalingPreview *preview,
+                                    GdkEvent                *event,
+                                    CcDisplaySettings       *self);
 
 static GParamSpec *props[PROP_LAST];
 
@@ -251,6 +258,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       gtk_widget_set_visible (self->orientation_row, FALSE);
       gtk_widget_set_visible (self->refresh_rate_row, FALSE);
       gtk_widget_set_visible (self->resolution_row, FALSE);
+      gtk_widget_set_visible (self->scale_preview_row, FALSE);
       gtk_widget_set_visible (self->scale_row, FALSE);
       gtk_widget_set_visible (self->underscanning_row, FALSE);
 
@@ -395,32 +403,100 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
 
   /* Update scale row. */
   g_list_store_remove_all (self->scale_list);
+  gtk_container_foreach (GTK_CONTAINER (self->scale_preview_box), (GtkCallback) gtk_widget_destroy, NULL);
   if (!cc_display_config_is_cloning (self->config))
     {
+      gint previews_added;
+      CcDisplayMonitor *applied_output;
+      gdouble applied_scale;
+      gdouble selected_scale;
       const gdouble *scales, *scale;
+      gint scale_idx;
+      gint selected_pos = 0;
+      gint first_preview;
+      gint last_preview;
+      gint i;
+
+      /* Get the original configuration of the selected output */
+      applied_output = g_list_nth_data (cc_display_config_get_ui_sorted_monitors (self->applied_config),
+                                        g_list_index (cc_display_config_get_ui_sorted_monitors (self->config),
+                                        self->selected_output));
+      applied_scale = cc_display_monitor_get_scale (applied_output);
+
+      selected_scale = cc_display_monitor_get_scale (self->selected_output);
 
       scales = cc_display_mode_get_supported_scales (current_mode);
+      previews_added = 0;
+      scale_idx = 0;
       for (scale = scales; *scale != 0.0; scale++)
         {
           g_autoptr(CcValueObject) obj = NULL;
 
           if (!display_mode_supported_at_scale (current_mode, *scale) &&
-              cc_display_monitor_get_scale (self->selected_output) != *scale)
+              selected_scale != *scale)
             continue;
 
           obj = cc_value_object_new_collect (G_TYPE_DOUBLE, *scale);
           g_list_store_append (self->scale_list, obj);
 
-          if (cc_display_monitor_get_scale (self->selected_output) == *scale)
-            hdy_combo_row_set_selected_index (HDY_COMBO_ROW (self->scale_row),
-                                              g_list_model_get_n_items (G_LIST_MODEL (self->scale_list)) - 1);
+          if (selected_scale == *scale)
+            {
+              selected_pos = scale_idx;
+              hdy_combo_row_set_selected_index (HDY_COMBO_ROW (self->scale_row),
+                                                g_list_model_get_n_items (G_LIST_MODEL (self->scale_list)) - 1);
+            }
+
+          scale_idx += 1;
         }
 
+      first_preview = MAX(selected_pos - 2, 0);
+      last_preview = MIN(selected_pos + 2, scale_idx - 1);
+      /* This might cause overhanging, we need to adjust for that. */
+      if (last_preview - first_preview + 1 < 5)
+        first_preview = MAX(0, last_preview - 4);
+      if (last_preview - first_preview + 1 < 5)
+        last_preview = MIN(scale_idx - 1, first_preview + 4);
+
+      scale_idx = 0;
+      for (scale = scales; *scale != 0.0; scale++)
+        {
+          CcDisplayScalingPreview *preview;
+
+          if (!display_mode_supported_at_scale (current_mode, *scale) &&
+              selected_scale != *scale)
+            continue;
+
+          if (scale_idx >= first_preview && scale_idx <= last_preview)
+            {
+              preview = cc_display_scaling_preview_new ();
+              gtk_widget_show (GTK_WIDGET (preview));
+              cc_display_scaling_preview_set_scaling (preview, *scale, applied_scale);
+              cc_display_scaling_preview_set_selected (preview, cc_display_monitor_get_scale (self->selected_output) == *scale);
+              gtk_widget_add_events (GTK_WIDGET (preview), GDK_BUTTON_PRESS_MASK);
+              g_signal_connect (preview, "button-press-event", (GCallback) on_scale_preview_button_pressed_cb, self);
+
+              gtk_container_add (GTK_CONTAINER (self->scale_preview_box), GTK_WIDGET (preview));
+              previews_added += 1;
+            }
+          scale_idx += 1;
+        }
+
+     /* Fill up with dummy widgets if we didn't add 5 previews */
+     for (i = 0; i < 5 - (last_preview - first_preview + 1); i++)
+       {
+         GtkWidget *alignment;
+         alignment = gtk_alignment_new (0.0, 0.0, 0.0, 0.0);
+         gtk_widget_show (alignment);
+         gtk_container_add (GTK_CONTAINER (self->scale_preview_box), alignment);
+       }
+
       gtk_widget_set_visible (self->scale_row, g_list_model_get_n_items (G_LIST_MODEL (self->scale_list)) > 1);
+      gtk_widget_set_visible (self->scale_preview_row, g_list_model_get_n_items (G_LIST_MODEL (self->scale_list)) > 1);
     }
   else
     {
       gtk_widget_set_visible (self->scale_row, FALSE);
+      gtk_widget_set_visible (self->scale_preview_row, FALSE);
     }
 
   gtk_widget_set_visible (self->underscanning_row,
@@ -514,6 +590,23 @@ on_resolution_selection_changed_cb (GtkWidget         *widget,
     cc_display_config_set_mode_on_all_outputs (self->config, mode);
 
   g_signal_emit_by_name (G_OBJECT (self), "updated", self->selected_output);
+}
+
+static gboolean
+on_scale_preview_button_pressed_cb (CcDisplayScalingPreview *preview,
+                                    GdkEvent                *event,
+                                    CcDisplaySettings       *self)
+{
+  gdouble scale;
+  if (event->button.button != GDK_BUTTON_PRIMARY)
+    return FALSE;
+
+  cc_display_scaling_preview_get_scaling (preview, &scale, NULL);
+  cc_display_monitor_set_scale (self->selected_output, scale);
+
+  g_signal_emit_by_name (G_OBJECT (self), "updated", self->selected_output);
+
+  return TRUE;
 }
 
 static void
@@ -681,6 +774,8 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, orientation_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, refresh_rate_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, resolution_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, scale_preview_box);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, scale_preview_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, scale_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, underscanning_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, underscanning_switch);
