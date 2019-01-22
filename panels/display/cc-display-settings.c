@@ -41,6 +41,7 @@ struct _CcDisplaySettings
 
   gboolean          has_accelerometer;
   CcDisplayConfig  *config;
+  CcDisplayConfig  *applied_config;
   CcDisplayMonitor *selected_output;
 
   GListStore       *orientation_list;
@@ -63,6 +64,7 @@ enum {
   PROP_0,
   PROP_HAS_ACCELEROMETER,
   PROP_CONFIG,
+  PROP_APPLIED_CONFIG,
   PROP_SELECTED_OUTPUT,
   PROP_LAST
 };
@@ -566,6 +568,10 @@ cc_display_settings_get_property (GObject    *object,
       g_value_set_object (value, self->config);
       break;
 
+    case PROP_APPLIED_CONFIG:
+      g_value_set_object (value, self->applied_config);
+      break;
+
     case PROP_SELECTED_OUTPUT:
       g_value_set_object (value, self->selected_output);
       break;
@@ -593,6 +599,10 @@ cc_display_settings_set_property (GObject      *object,
       cc_display_settings_set_config (self, g_value_get_object (value));
       break;
 
+    case PROP_APPLIED_CONFIG:
+      cc_display_settings_set_applied_config (self, g_value_get_object (value));
+      break;
+
     case PROP_SELECTED_OUTPUT:
       cc_display_settings_set_selected_output (self, g_value_get_object (value));
       break;
@@ -608,6 +618,7 @@ cc_display_settings_finalize (GObject *object)
   CcDisplaySettings *self = CC_DISPLAY_SETTINGS (object);
 
   g_clear_object (&self->config);
+  g_clear_object (&self->applied_config);
 
   g_clear_object (&self->orientation_list);
   g_clear_object (&self->refresh_rate_list);
@@ -642,6 +653,12 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
   props[PROP_CONFIG] =
     g_param_spec_object ("config", "Display Config",
                          "The display configuration to work with",
+                         CC_TYPE_DISPLAY_CONFIG,
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
+  props[PROP_APPLIED_CONFIG] =
+    g_param_spec_object ("applied-config", "Applied Display Config",
+                         "The currently active display configuration",
                          CC_TYPE_DISPLAY_CONFIG,
                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
@@ -778,6 +795,24 @@ cc_display_settings_set_config (CcDisplaySettings *self,
   cc_display_settings_set_selected_output (self, NULL);
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_CONFIG]);
+}
+
+CcDisplayConfig*
+cc_display_settings_get_applied_config (CcDisplaySettings *self)
+{
+  return self->applied_config;
+}
+
+void
+cc_display_settings_set_applied_config (CcDisplaySettings *self,
+                                        CcDisplayConfig   *config)
+{
+  g_clear_object (&self->applied_config);
+  self->applied_config = g_object_ref (config);
+
+  cc_display_settings_rebuild_ui (self);
+
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_APPLIED_CONFIG]);
 }
 
 CcDisplayMonitor*
