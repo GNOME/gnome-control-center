@@ -106,41 +106,6 @@ in_flatpak_sandbox (void)
 }
 
 static void
-add_development_build_css (CcWindow *self)
-{
-  g_autoptr(GtkCssProvider) provider = NULL;
-  g_autoptr(GError) error = NULL;
-
-  /* This CSS snipped is added on development builds of GNOME Settings. It is
-   * not meant to be beautiful (althout it is) and is only supposed to integrate
-   * with Adwaita light (although it integrates well with dark too).
-   */
-
-  const gchar *development_build_css =
-  "window.development-version headerbar {\n"
-   "  background: @theme_bg_color linear-gradient(to top,\n"
-   "                                              alpha(@theme_selected_bg_color, 0.34),\n"
-   "                                              alpha(@theme_selected_bg_color, 0.27) 2px,\n"
-   "                                              alpha(@theme_selected_bg_color, 0.20) 3px);\n"
-   "}";
-
-  gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)), "development-version");
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_data (provider, development_build_css, -1, &error);
-
-  if (error)
-    {
-      g_error ("Failed to load CSS: %s", error->message);
-      return;
-    }
-
-  gtk_style_context_add_provider_for_screen (gtk_widget_get_screen (GTK_WIDGET (self)),
-                                             GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-}
-
-static void
 remove_all_custom_widgets (CcWindow *self)
 {
   GtkWidget *widget;
@@ -948,7 +913,7 @@ cc_window_init (CcWindow *self)
 
   /* Add a custom CSS class on development builds */
   if (in_flatpak_sandbox ())
-    add_development_build_css (self);
+    gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)), "devel");
 
   update_fold_state (self);
 }
