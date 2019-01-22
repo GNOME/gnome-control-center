@@ -1049,6 +1049,9 @@ cc_display_config_dbus_equal (CcDisplayConfig *pself,
   CcDisplayConfigDBus *other = CC_DISPLAY_CONFIG_DBUS (pother);
   GList *l;
 
+  cc_display_config_dbus_ensure_non_offset_coords (self);
+  cc_display_config_dbus_ensure_non_offset_coords (other);
+
   for (l = self->monitors; l != NULL; l = l->next)
     {
       CcDisplayMonitorDBus *m1 = l->data;
