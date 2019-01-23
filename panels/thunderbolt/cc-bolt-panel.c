@@ -470,11 +470,11 @@ cc_bolt_panel_set_no_thunderbolt (CcBoltPanel *panel,
 static void
 cc_bolt_panel_name_owner_changed (CcBoltPanel *panel)
 {
+  g_autofree char *name_owner = NULL;
   BoltClient *client = panel->client;
   BoltSecurity sl;
   gboolean notb = TRUE;
   const char *text = NULL;
-  const char *name_owner;
 
   name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (panel->client));
 
