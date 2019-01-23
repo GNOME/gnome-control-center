@@ -505,7 +505,7 @@ cc_bolt_panel_name_owner_changed (CcBoltPanel *panel)
       break;
 
     case BOLT_SECURITY_UNKNOWN:
-      text = NULL;
+      text = _("Thunderbolt security level could not be determined.");;
       break;
     }
 
