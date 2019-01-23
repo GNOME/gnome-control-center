@@ -228,12 +228,10 @@ update_display_preview (CcBackgroundPanel *panel,
                         CcBackgroundItem  *background)
 {
   GdkPixbuf *pixbuf;
-  gint scale_factor = gtk_widget_get_scale_factor (widget);
 
   pixbuf = get_or_create_cached_pixbuf (panel, widget, background);
 
   cairo_save (cr);
-  cairo_scale (cr, 1.0 / scale_factor, 1.0 / scale_factor);
   gdk_cairo_set_source_pixbuf (cr,
                                pixbuf,
                                0, 0);
