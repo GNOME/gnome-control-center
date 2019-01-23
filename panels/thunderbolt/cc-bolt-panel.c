@@ -205,6 +205,14 @@ bolt_client_ready (GObject      *source,
                            panel,
                            0);
 
+  /* Treat security-level changes, which should rarely happen, as
+   * if the name owner changed, i.e. as if boltd got restarted */
+  g_signal_connect_object (client,
+                           "notify::security-level",
+                           G_CALLBACK (on_bolt_name_owner_changed_cb),
+                           panel,
+                           0);
+
   panel->client = client;
 
   cc_bolt_device_dialog_set_client (panel->device_dialog, client);
