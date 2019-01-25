@@ -94,6 +94,7 @@ struct _CcAddUserDialog {
         gint                local_username_timeout_id;
         ActUserPasswordMode local_password_mode;
         gint                local_password_timeout_id;
+        gboolean            local_valid_username;
 
         guint               realmd_watch;
         CcRealmManager     *realm_manager;
@@ -277,22 +278,14 @@ update_password_strength (CcAddUserDialog *self)
 static gboolean
 local_validate (CcAddUserDialog *self)
 {
-        gboolean valid_login;
         gboolean valid_name;
         gboolean valid_password;
         const gchar *name;
         const gchar *password;
         const gchar *verify;
-        gchar *tip;
         gint strength;
 
-        name = gtk_combo_box_text_get_active_text (self->local_username_combo);
-        valid_login = is_valid_username (name, &tip);
-
-        gtk_label_set_label (self->local_username_hint_label, tip);
-        g_free (tip);
-
-        if (valid_login) {
+        if (self->local_valid_username) {
                 set_entry_validation_checkmark (self->local_username_entry);
         }
 
@@ -311,15 +304,50 @@ local_validate (CcAddUserDialog *self)
                 valid_password = TRUE;
         }
 
-        return valid_name && valid_login && valid_password;
+        return valid_name && self->local_valid_username && valid_password;
+}
+
+static void local_username_timeout_cb (GObject *source_object,
+                                       GAsyncResult *result,
+                                       gpointer user_data)
+{
+        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
+        gchar *tip = NULL;
+        GError *error = NULL;
+        gboolean valid;
+        gchar *name;
+        gchar *username = NULL;
+
+        valid = is_valid_username_finish (result, &tip, &username, &error);
+        if (error != NULL) {
+                g_warning ("Could not check username by usermod: %s", error->message);
+                valid = TRUE;
+                g_free (error);
+        }
+
+        name = gtk_combo_box_text_get_active_text (self->local_username_combo);
+        if (g_strcmp0 (name, username) == 0) {
+                self->local_valid_username = valid;
+                gtk_label_set_label (self->local_username_hint_label, tip);
+                dialog_validate (self);
+        }
+
+        g_free (tip);
+        g_free (username);
+        g_free (name);
+        g_object_unref (self);
 }
 
 static gboolean
 local_username_timeout (CcAddUserDialog *self)
 {
+        gchar *name;
+
         self->local_username_timeout_id = 0;
 
-        dialog_validate (self);
+        name = gtk_combo_box_text_get_active_text (self->local_username_combo);
+        is_valid_username_async (name, local_username_timeout_cb, g_object_ref (self));
+        g_free (name);
 
         return FALSE;
 }
@@ -357,6 +385,7 @@ local_username_combo_changed_cb (CcAddUserDialog *self)
         clear_entry_validation_error (self->local_username_entry);
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
+        self->local_valid_username = FALSE;
         self->local_username_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) local_username_timeout, self);
 }
 
