@@ -40,7 +40,12 @@ void     clear_entry_validation_error     (GtkEntry    *entry);
 gsize    get_username_max_length          (void);
 gboolean is_username_used                 (const gchar *username);
 gboolean is_valid_name                    (const gchar *name);
-gboolean is_valid_username                (const gchar *name,
-                                           gchar      **tip);
+void     is_valid_username_async          (const gchar *username,
+                                           GAsyncReadyCallback callback,
+                                           gpointer callback_data);
+gboolean is_valid_username_finish         (GAsyncResult *result,
+                                           gchar **tip,
+                                           gchar **username,
+                                           GError **error);
 
 G_END_DECLS
