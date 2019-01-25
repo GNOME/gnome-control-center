@@ -41,8 +41,15 @@ void     clear_entry_validation_error     (GtkEntry    *entry);
 gsize    get_username_max_length          (void);
 gboolean is_username_used                 (const gchar *username);
 gboolean is_valid_name                    (const gchar *name);
-gboolean is_valid_username                (const gchar *name,
-                                           gchar      **tip);
+void     is_valid_username_async          (const gchar *username,
+                                           GCancellable *cancellable,
+                                           GAsyncReadyCallback callback,
+                                           gpointer callback_data);
+gboolean is_valid_username_finish         (GAsyncResult *result,
+                                           gchar **tip,
+                                           gchar **username,
+                                           GError **error);
+
 GdkPixbuf *round_image                    (GdkPixbuf  *pixbuf,
                                            gint        icon_size);
 void       generate_user_avatar           (ActUser *user);
