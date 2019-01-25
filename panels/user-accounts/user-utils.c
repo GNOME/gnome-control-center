@@ -385,59 +385,138 @@ is_valid_name (const gchar *name)
         return !is_empty;
 }
 
-gboolean
-is_valid_username (const gchar *username, gchar **tip)
+typedef struct {
+        gchar *username;
+        gchar *tip;
+} isValidUsernameData;
+
+static void
+is_valid_username_data_free (isValidUsernameData *data)
 {
-        gboolean empty;
-        gboolean in_use;
-        gboolean too_long;
-        gboolean valid;
-        const gchar *c;
+        g_free (data->username);
+        g_free (data->tip);
+        g_free (data);
+}
 
-        if (username == NULL || username[0] == '\0') {
-                empty = TRUE;
-                in_use = FALSE;
-                too_long = FALSE;
-        } else {
-                empty = FALSE;
-                in_use = is_username_used (username);
-                too_long = strlen (username) > get_username_max_length ();
+static void
+is_valid_username_child_watch_cb (GPid pid,
+                                  gint status,
+                                  gpointer user_data)
+{
+        GTask *task = G_TASK (user_data);
+        isValidUsernameData *data = g_task_get_task_data (task);
+        GError *error = NULL;
+        gboolean valid = FALSE;
+        const gchar *tip = NULL;
+
+        if (WIFEXITED (status)) {
+                switch (WEXITSTATUS (status)) {
+                        case 6:
+                                valid = TRUE;
+                                break;
+                        case 3:
+                                tip = _("The username should usually only consist of lower case letters from a-z, digits and the following characters: - _");
+                                valid = FALSE;
+                                break;
+                        case 0:
+                                tip = _("Sorry, that user name isn’t available. Please try another.");
+                                valid = FALSE;
+                                break;
+                }
         }
-        valid = TRUE;
 
-        if (!in_use && !empty && !too_long) {
-                /* First char must be a letter, and it must only composed
-                 * of ASCII letters, digits, and a '.', '-', '_'
-                 */
-                for (c = username; *c; c++) {
-                        if (! ((*c >= 'a' && *c <= 'z') ||
-                               (*c >= 'A' && *c <= 'Z') ||
-                               (*c >= '0' && *c <= '9') ||
-                               (*c == '_') || (*c == '.') ||
-                               (*c == '-' && c != username)))
-                           valid = FALSE;
-                }
-        }
-
-        valid = !empty && !in_use && !too_long && valid;
-
-        if (!empty && (in_use || too_long || !valid)) {
-                if (in_use) {
-                        *tip = g_strdup (_("Sorry, that user name isn’t available. Please try another."));
-                }
-                else if (too_long) {
-                        *tip = g_strdup_printf (_("The username is too long."));
-                }
-                else if (username[0] == '-') {
-                        *tip = g_strdup (_("The username cannot start with a “-”."));
-                }
-                else {
-                        *tip = g_strdup (_("The username should only consist of upper and lower case letters from a-z, digits and the following characters: . - _"));
-                }
+        if (valid || tip != NULL) {
+                data->tip = g_strdup (tip);
+                g_task_return_boolean (task, valid);
         }
         else {
-                *tip = g_strdup (_("This will be used to name your home folder and can’t be changed."));
+                g_spawn_check_exit_status (status, &error);
+                g_task_return_error (task, error);
         }
 
-        return valid;
+        g_spawn_close_pid (pid);
+        g_object_unref (task);
+}
+
+void
+is_valid_username_async (const gchar *username,
+                         GAsyncReadyCallback callback,
+                         gpointer callback_data)
+{
+        GTask *task;
+        isValidUsernameData *data;
+        gchar *argv[5];
+        GPid pid;
+        GError *error;
+
+        task = g_task_new (NULL, NULL, callback, callback_data);
+        g_task_set_source_tag (task, is_valid_username_async);
+
+        data = g_new0 (isValidUsernameData, 1);
+        data->username = g_strdup (username);
+        g_task_set_task_data (task, data, (GDestroyNotify) is_valid_username_data_free);
+
+        if (username == NULL || username[0] == '\0') {
+                g_task_return_boolean (task, FALSE);
+                g_object_unref (task);
+
+                return;
+        }
+        else if (strlen (username) > get_username_max_length ()) {
+                data->tip = g_strdup (_("The username is too long."));
+                g_task_return_boolean (task, FALSE);
+                g_object_unref (task);
+
+                return;
+        }
+
+        /* "usermod --login" is meant to be used to change a username, but the
+         * exit codes can be safely abused to check the validity of username.
+         * However, the current "usermod" implementation may change in the
+         * future, so it would be nice to have some official way for this
+         * instead of relying on the current "--login" implementation.
+         */
+        argv[0] = "usermod";
+        argv[1] = "--login";
+        argv[2] = data->username;
+        argv[3] = data->username;
+        argv[4] = NULL;
+
+        if (!g_spawn_async (NULL, argv, NULL,
+                            G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD |
+                            G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
+                            NULL, NULL, &pid, &error)) {
+                g_task_return_error (task, error);
+                g_object_unref (task);
+
+                return;
+        }
+
+        g_child_watch_add (pid, (GChildWatchFunc) is_valid_username_child_watch_cb, task);
+}
+
+gboolean
+is_valid_username_finish (GAsyncResult *result,
+                          gchar **tip,
+                          gchar **username,
+                          GError **error)
+{
+        GTask *task;
+        isValidUsernameData *data;
+
+        g_return_val_if_fail (g_task_is_valid (result, NULL), FALSE);
+
+        task = G_TASK (result);
+        data = g_task_get_task_data (task);
+
+        if (tip != NULL) {
+                *tip = g_steal_pointer (&data->tip);
+                if (*tip == NULL)
+                        *tip = g_strdup (_("This will be used to name your home folder and can’t be changed."));
+        }
+
+        if (username != NULL)
+                *username = g_steal_pointer (&data->username);
+
+        return g_task_propagate_boolean (task, error);
 }
