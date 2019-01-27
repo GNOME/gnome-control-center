@@ -24,6 +24,8 @@
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
 #include <gtk/gtk.h>
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
 #include <polkit/polkit.h>
 
 #include "list-box-helper.h"
@@ -62,14 +64,14 @@ struct _CcRegionPanel {
         GtkButton       *add_input_button;
         GtkLabel        *alt_next_source;
         GtkLabel        *formats_label;
-        GtkListBoxRow   *formats_row;
+        HdyActionRow    *formats_row;
         GtkListBox      *input_list;
         GtkBox          *input_section_box;
         GtkToggleButton *login_button;
         GtkLabel        *login_label;
         GtkLabel        *language_label;
         GtkListBox      *language_list;
-        GtkListBoxRow   *language_row;
+        HdyActionRow    *language_row;
         GtkFrame        *language_section_frame;
         GtkButton       *move_down_input_button;
         GtkButton       *move_up_input_button;
@@ -524,7 +526,7 @@ static void
 activate_language_row (CcRegionPanel *self,
                        GtkListBoxRow *row)
 {
-        if (row == self->language_row) {
+        if (row == (GtkListBoxRow *) self->language_row) {
                 if (!self->login || g_permission_get_allowed (self->permission)) {
                         show_language_chooser (self);
                 } else if (g_permission_get_can_acquire (self->permission)) {
@@ -533,7 +535,7 @@ activate_language_row (CcRegionPanel *self,
                                                     choose_language_permission_cb,
                                                     self);
                 }
-        } else if (row == self->formats_row) {
+        } else if (row == (GtkListBoxRow *) self->formats_row) {
                 if (!self->login || g_permission_get_allowed (self->permission)) {
                         show_region_chooser (self);
                 } else if (g_permission_get_can_acquire (self->permission)) {
