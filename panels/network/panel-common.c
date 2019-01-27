@@ -25,6 +25,8 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
 #include <NetworkManager.h>
 
 #include "panel-common.h"
@@ -474,6 +476,20 @@ panel_set_device_status (GtkBuilder *builder,
         status = device_status_to_localized_string (nm_device, speed);
         gtk_label_set_label (label, status);
         g_free (status);
+}
+
+void
+panel_set_device_row_status (GtkBuilder  *builder,
+                             const gchar *row_name,
+                             NMDevice    *nm_device,
+                             const gchar *speed)
+{
+        HdyActionRow *row;
+        g_autofree gchar *status = NULL;
+
+        row = HDY_ACTION_ROW (gtk_builder_get_object (builder, row_name));
+        status = device_status_to_localized_string (nm_device, speed);
+        hdy_action_row_set_title (row, status);
 }
 
 gboolean
