@@ -33,6 +33,8 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <gtk/gtk.h>
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
 
 #include "cc-test-window.h"
 #include "shell/cc-object-storage.h"
@@ -645,6 +647,7 @@ main (int argc, char **argv)
   g_setenv ("LC_ALL", "C", TRUE);
 
   gtk_test_init (&argc, &argv, NULL);
+  hdy_init (&argc, &argv);
 
   g_test_add ("/network-panel-wired/empty-ui",
               NetworkPanelFixture,
