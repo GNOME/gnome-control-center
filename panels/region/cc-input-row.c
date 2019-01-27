@@ -21,15 +21,14 @@
 
 struct _CcInputRow
 {
-  GtkListBoxRow    parent_instance;
+  HdyActionRow    parent_instance;
 
   CcInputSource   *source;
 
-  GtkWidget       *name_label;
   GtkWidget       *icon_image;
 };
 
-G_DEFINE_TYPE (CcInputRow, cc_input_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (CcInputRow, cc_input_row, HDY_TYPE_ACTION_ROW)
 
 static void
 cc_input_row_dispose (GObject *object)
@@ -50,7 +49,6 @@ cc_input_row_class_init (CcInputRowClass *klass)
   object_class->dispose = cc_input_row_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-input-row.ui");
-  gtk_widget_class_bind_template_child (widget_class, CcInputRow, name_label);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, icon_image);
 }
 
@@ -64,7 +62,7 @@ static void
 label_changed_cb (CcInputRow *row)
 {
   g_autofree gchar *label = cc_input_source_get_label (row->source);
-  gtk_label_set_text (GTK_LABEL (row->name_label), label);
+  hdy_action_row_set_title (HDY_ACTION_ROW (row), label);
 }
 
 CcInputRow *

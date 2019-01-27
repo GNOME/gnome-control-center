@@ -19,13 +19,15 @@
 
 #include <gtk/gtk.h>
 #include <gio/gdesktopappinfo.h>
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
 
 #include "cc-input-source.h"
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_INPUT_ROW (cc_input_row_get_type ())
-G_DECLARE_FINAL_TYPE (CcInputRow, cc_input_row, CC, INPUT_ROW, GtkListBoxRow)
+G_DECLARE_FINAL_TYPE (CcInputRow, cc_input_row, CC, INPUT_ROW, HdyActionRow)
 
 CcInputRow      *cc_input_row_new        (CcInputSource   *source);
 
