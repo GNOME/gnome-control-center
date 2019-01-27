@@ -237,7 +237,7 @@ device_ethernet_refresh_ui (NetDeviceEthernet *device)
 
         if (state != NM_DEVICE_STATE_UNAVAILABLE)
                 speed = net_device_simple_get_speed (NET_DEVICE_SIMPLE (device));
-        panel_set_device_status (device->builder, "label_status", nm_device, speed);
+        panel_set_device_row_status (device->builder, "details_row", nm_device, speed);
 
         populate_ui (device);
 }
@@ -320,8 +320,8 @@ add_row (NetDeviceEthernet *device, NMConnection *connection)
         widget = gtk_label_new (nm_connection_get_id (connection));
         gtk_widget_set_margin_start (widget, 12);
         gtk_widget_set_margin_end (widget, 12);
-        gtk_widget_set_margin_top (widget, 12);
-        gtk_widget_set_margin_bottom (widget, 12);
+        gtk_widget_set_margin_top (widget, 8);
+        gtk_widget_set_margin_bottom (widget, 8);
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
 
         if (active) {
@@ -350,8 +350,8 @@ add_row (NetDeviceEthernet *device, NMConnection *connection)
         gtk_style_context_add_class (gtk_widget_get_style_context (widget), "image-button");
         gtk_widget_set_margin_start (widget, 12);
         gtk_widget_set_margin_end (widget, 12);
-        gtk_widget_set_margin_top (widget, 12);
-        gtk_widget_set_margin_bottom (widget, 12);
+        gtk_widget_set_margin_top (widget, 8);
+        gtk_widget_set_margin_bottom (widget, 8);
         gtk_widget_show (widget);
         gtk_container_add (GTK_CONTAINER (widget), image);
         gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
