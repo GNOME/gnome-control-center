@@ -51,6 +51,7 @@ struct _CcPrivacyPanel
   GtkSwitch   *automatic_screen_lock_switch;
   GtkButton   *clear_recent_button;
   GtkButton   *empty_trash_button;
+  GtkComboBox *forbid_usb_combo;
   GtkListBox  *list_box;
   GtkFrame    *location_apps_frame;
   GtkLabel    *location_apps_label;
@@ -71,13 +72,12 @@ struct _CcPrivacyPanel
   GtkDialog   *screen_lock_dialog;
   GtkGrid     *screen_lock_dialog_grid;
   GtkSwitch   *show_notifications_switch;
-  GtkDialog   *usbguard_dialog;
-  GtkSwitch   *usbguard_protection_switch;
-  GtkLabel    *usbguard_label;
-  GtkComboBox *forbid_usb_combo;
   GtkDialog   *software_dialog;
   GtkSwitch   *software_usage_switch;
   GtkDialog   *trash_dialog;
+  GtkDialog   *usbguard_dialog;
+  GtkSwitch   *usbguard_protection_switch;
+  GtkLabel    *usbguard_label;
 
   GSettings  *lockdown_settings;
   GSettings  *lock_settings;
@@ -1255,23 +1255,32 @@ on_usbguard_settings_changed (GSettings      *settings,
 }
 
 static void
-on_usbguard_owner_changed_cb (GObject      *source_object,
-                              GAsyncResult *res,
-                              gpointer      user_data)
+on_usbguard_getparameter_cb (GObject      *source_object,
+                             GAsyncResult *res,
+                             gpointer      user_data)
 {
+  /* To correctly work we require at least the version 0.7.5 of USBGuard.
+   * To check if we meet this requirement we try to get the parameter
+   * "ImplicitPolicyTarget" that will fail with version 0.7.4 and below. */
+
   CcPrivacyPanel *self = user_data;
-  const char *name_owner;
-  gboolean active = TRUE;
+  GVariant *result;
   gboolean protection;
+  gboolean active = TRUE;
+  g_autoptr(GError) error = NULL;
 
-  g_settings_get (self->privacy_settings, USB_PROTECTION, "b", &protection);
-
-  name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->usb_proxy));
-  if (name_owner == NULL)
+  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
+                                     res,
+                                     &error);
+  if (result == NULL)
     {
-      g_debug ("Probably USBGuard is not running or is not installed.");
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_debug ("Failed to fetch the required USBGuard parameter."
+                 "Probably the current USBGuard version is too old. %s", error->message);
       active = FALSE;
     }
+
+  g_settings_get (self->privacy_settings, USB_PROTECTION, "b", &protection);
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), active);
   if (!protection)
@@ -1279,6 +1288,37 @@ on_usbguard_owner_changed_cb (GObject      *source_object,
   gtk_widget_set_sensitive (GTK_WIDGET (self->forbid_usb_combo), active);
 
   update_usbguard_label (self);
+}
+
+static void
+on_usbguard_owner_changed_cb (GObject      *source_object,
+                              GAsyncResult *res,
+                              gpointer      user_data)
+{
+  CcPrivacyPanel *self = user_data;
+  GVariant *params;
+  const char *name_owner;
+
+  name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->usb_proxy));
+  if (name_owner == NULL)
+    {
+      g_debug ("Probably USBGuard is not running or is not installed.");
+      gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), FALSE);
+      gtk_widget_set_sensitive (GTK_WIDGET (self->forbid_usb_combo), FALSE);
+      update_usbguard_label (self);
+    }
+  else
+    {
+      params = g_variant_new ("(s)", "ImplicitPolicyTarget");
+      g_dbus_proxy_call (self->usb_proxy,
+                         "getParameter",
+                         params,
+                         G_DBUS_CALL_FLAGS_NONE,
+                         -1,
+                         self->cancellable,
+                         on_usbguard_getparameter_cb,
+                         self);
+    }
 }
 
 static void
