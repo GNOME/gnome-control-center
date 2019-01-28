@@ -1213,7 +1213,7 @@ update_usbguard_label (CcPrivacyPanel *self)
   gchar *label;
   guint value_level;
   gboolean protection;
-  const char *name_owner = NULL;
+  char *name_owner = NULL;
 
   if (self->usb_proxy)
     name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->usb_proxy));
@@ -1240,6 +1240,7 @@ update_usbguard_label (CcPrivacyPanel *self)
     }
 
   gtk_label_set_label (self->usbguard_label, label);
+  g_free (name_owner);
 }
 
 static void
@@ -1297,7 +1298,7 @@ on_usbguard_owner_changed_cb (GObject      *source_object,
 {
   CcPrivacyPanel *self = user_data;
   GVariant *params;
-  const char *name_owner;
+  char *name_owner;
 
   name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->usb_proxy));
   if (name_owner == NULL)
@@ -1309,6 +1310,7 @@ on_usbguard_owner_changed_cb (GObject      *source_object,
     }
   else
     {
+      g_free (name_owner);
       params = g_variant_new ("(s)", "ImplicitPolicyTarget");
       g_dbus_proxy_call (self->usb_proxy,
                          "getParameter",
