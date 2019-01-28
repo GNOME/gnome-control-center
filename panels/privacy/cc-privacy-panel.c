@@ -1213,9 +1213,11 @@ update_usbguard_label (CcPrivacyPanel *self)
   gchar *label;
   guint value_level;
   gboolean protection;
-  const char *name_owner;
+  const char *name_owner = NULL;
 
-  name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->usb_proxy));
+  if (self->usb_proxy)
+    name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->usb_proxy));
+
   g_settings_get (self->privacy_settings, USB_PROTECTION, "b", &protection);
   g_settings_get (self->privacy_settings, USB_PROTECTION_LEVEL, "u", &value_level);
 
