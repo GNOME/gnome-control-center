@@ -4,14 +4,26 @@
   <template class="CcInfoOverviewPanel" parent="CcPanel">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="valign">center</property>
-    <property name="halign">center</property>
-    <property name="expand">True</property>
-    <property name="margin">24</property>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="hscrollbar-policy">never</property>
+        <child>
+          <object class="HdyColumn">
+            <property name="visible">True</property>
+            <property name="maximum_width">600</property>
+            <property name="linear_growth_width">400</property>
+            <property name="margin_top">32</property>
+            <property name="margin_bottom">32</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="valign">center</property>
+        <property name="halign">center</property>
         <property name="spacing">18</property>
         <property name="orientation">vertical</property>
         <child>
@@ -330,6 +342,10 @@
             <property name="pack_type">end</property>
             <property name="position">3</property>
           </packing>
+        </child>
+      </object>
+    </child>
+          </object>
         </child>
       </object>
     </child>
