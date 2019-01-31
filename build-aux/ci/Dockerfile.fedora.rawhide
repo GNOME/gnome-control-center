@@ -18,7 +18,6 @@ RUN dnf -y --nogpgcheck upgrade && \
                    libXxf86misc-devel meson ModemManager-glib-devel NetworkManager-libnm-devel \
                    polkit-devel pulseaudio-libs-devel upower-devel \
                    python3-dbusmock xorg-x11-server-Xvfb mesa-dri-drivers libsecret-devel llvm && \
-     dnf install -y https://copr-be.cloud.fedoraproject.org/results/jadahl/mutter-ci/fedora-29-x86_64/00836095-gsettings-desktop-schemas/gsettings-desktop-schemas-3.30.1-1.20181206git918efdd69be53.fc29.x86_64.rpm https://copr-be.cloud.fedoraproject.org/results/jadahl/mutter-ci/fedora-29-x86_64/00836095-gsettings-desktop-schemas/gsettings-desktop-schemas-devel-3.30.1-1.20181206git918efdd69be53.fc29.x86_64.rpm && \
      dnf -y clean all
 
 CMD ["/bin/bash"]
