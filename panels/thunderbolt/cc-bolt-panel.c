@@ -666,7 +666,7 @@ on_device_entry_row_activated_cb (CcBoltPanel   *panel,
   entry = CC_BOLT_DEVICE_ENTRY (row);
   device = cc_bolt_device_entry_get_device (entry);
 
-  cc_bolt_device_dialog_set_device (panel->device_dialog, device);
+  cc_bolt_device_dialog_set_device (panel->device_dialog, device, NULL);
   gtk_window_resize (GTK_WINDOW (panel->device_dialog), 1, 1);
   gtk_widget_show (GTK_WIDGET (panel->device_dialog));
 }
@@ -680,7 +680,7 @@ on_device_dialog_delete_event_cb (GtkWidget   *widget,
 
   dialog = CC_BOLT_DEVICE_DIALOG (widget);
 
-  cc_bolt_device_dialog_set_device (dialog, NULL);
+  cc_bolt_device_dialog_set_device (dialog, NULL, NULL);
   gtk_widget_hide (widget);
 
   return TRUE;
