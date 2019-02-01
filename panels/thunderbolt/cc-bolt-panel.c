@@ -29,6 +29,7 @@
 #include "cc-bolt-device-entry.h"
 
 #include "bolt-client.h"
+#include "bolt-names.h"
 #include "bolt-str.h"
 
 #include "cc-bolt-panel.h"
@@ -657,8 +658,11 @@ static void
 on_device_entry_row_activated_cb (CcBoltPanel   *panel,
                                   GtkListBoxRow *row)
 {
+  g_autoptr(GPtrArray) parents = NULL;
   CcBoltDeviceEntry *entry;
   BoltDevice *device;
+  BoltDevice *iter;
+  const char *parent;
 
   if (!CC_IS_BOLT_DEVICE_ENTRY (row))
     return;
@@ -666,7 +670,35 @@ on_device_entry_row_activated_cb (CcBoltPanel   *panel,
   entry = CC_BOLT_DEVICE_ENTRY (row);
   device = cc_bolt_device_entry_get_device (entry);
 
-  cc_bolt_device_dialog_set_device (panel->device_dialog, device, NULL);
+  /* walk up the chain and collect all parents */
+  parents = g_ptr_array_new_with_free_func (g_object_unref);
+  iter = device;
+
+  parent = bolt_device_get_parent (iter);
+  while (parent != NULL)
+    {
+      g_autofree char *path = NULL;
+      CcBoltDeviceEntry *child;
+      BoltDevice *dev;
+
+      path = bolt_gen_object_path (BOLT_DBUS_PATH_DEVICES, parent);
+
+      /* NB: the host device is not a peripheral and thus not
+       * in the hash table; therefore when get a NULL back, we
+       * should have reached the end of the chain */
+      child = g_hash_table_lookup (panel->devices, path);
+      if (!child)
+	break;
+
+      dev = cc_bolt_device_entry_get_device (child);
+      g_ptr_array_add (parents, g_object_ref (dev));
+      iter = dev;
+
+      parent = bolt_device_get_parent (iter);
+    }
+
+  cc_bolt_device_dialog_set_device (panel->device_dialog, device, parents);
+
   gtk_window_resize (GTK_WINDOW (panel->device_dialog), 1, 1);
   gtk_widget_show (GTK_WIDGET (panel->device_dialog));
 }
