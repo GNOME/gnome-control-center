@@ -19,6 +19,8 @@
 
 #include <config.h>
 
+#include <list-box-helper.h>
+
 #include <glib/gi18n.h>
 
 #include "bolt-device.h"
@@ -28,6 +30,7 @@
 #include "cc-thunderbolt-resources.h"
 
 #include "cc-bolt-device-dialog.h"
+#include "cc-bolt-device-entry.h"
 
 struct _CcBoltDeviceDialog
 {
@@ -51,6 +54,11 @@ struct _CcBoltDeviceDialog
 
   GtkLabel *time_title;
   GtkLabel *time_label;
+
+  /* parents */
+  GtkExpander *parents_expander;
+  GtkLabel    *parents_label;
+  GtkListBox  *parents_devices;
 
   /* actions */
   GtkWidget  *button_box;
@@ -242,74 +250,72 @@ dialog_operation_done (CcBoltDeviceDialog *dialog,
 }
 
 static void
-dialog_authorize_done (CcBoltDeviceDialog *dialog,
-                       gboolean            ok,
-                       GError             *error)
+on_connect_all_done (GObject      *source_object,
+		     GAsyncResult *res,
+		     gpointer      user_data)
 {
+  g_autoptr(GError) err = NULL;
+  CcBoltDeviceDialog *dialog = CC_BOLT_DEVICE_DIALOG (user_data);
+  gboolean ok;
+
+  ok = bolt_client_connect_all_finish (dialog->client, res, &err);
+
   if (!ok)
-    g_prefix_error (&error, _("Failed to authorize device: "));
+    g_prefix_error (&err, _("Failed to authorize device: "));
 
-  dialog_operation_done (dialog, GTK_WIDGET (dialog->connect_button), error);
-}
-
-static void
-on_device_authorized (GObject      *source,
-                      GAsyncResult *res,
-                      gpointer      user_data)
-{
-  g_autoptr(GError) err = NULL;
-  CcBoltDeviceDialog *dialog = CC_BOLT_DEVICE_DIALOG (user_data);
-  gboolean ok;
-
-  ok = bolt_device_authorize_finish (BOLT_DEVICE (source), res, &err);
-  dialog_authorize_done (dialog, ok, err);
-}
-
-static void
-on_device_enrolled (GObject      *source_object,
-                    GAsyncResult *res,
-                    gpointer      user_data)
-{
-  g_autoptr(GError) err = NULL;
-  CcBoltDeviceDialog *dialog = CC_BOLT_DEVICE_DIALOG (user_data);
-  gboolean ok;
-
-  ok = bolt_client_enroll_device_finish (dialog->client, res, NULL, &err);
-  dialog_authorize_done (dialog, ok, err);
+  dialog_operation_done (dialog, GTK_WIDGET (dialog->connect_button), err);
 }
 
 static void
 on_connect_button_clicked_cb (CcBoltDeviceDialog *dialog)
 {
+  g_autoptr(GPtrArray) devices = NULL;
+  g_autoptr(GList) entries = NULL;
   BoltDevice *device = dialog->device;
-  gboolean stored;
+  GList *iter;
 
   g_return_if_fail (device != NULL);
 
   dialog_operation_start (dialog);
 
-  stored = bolt_device_is_stored (device);
-  if (stored)
-    {
-      bolt_device_authorize_async (device,
-                                   BOLT_AUTHCTRL_NONE,
-                                   dialog->cancel,
-                                   on_device_authorized,
-                                   dialog);
-    }
-  else
-    {
-      const char *uid = bolt_device_get_uid (device);
+  entries = gtk_container_get_children (GTK_CONTAINER (dialog->parents_devices));
+  devices = g_ptr_array_new ();
 
-      bolt_client_enroll_device_async (dialog->client,
-                                       uid,
-                                       BOLT_POLICY_DEFAULT,
-                                       BOLT_AUTHCTRL_NONE,
-                                       dialog->cancel,
-                                       on_device_enrolled,
-                                       dialog);
+  /* reverse the order, so to start with the devices closest to the host */
+  entries = g_list_reverse (entries);
+
+  for (iter = entries; iter; iter = iter->next)
+    {
+      CcBoltDeviceEntry *entry;
+      BoltDevice *dev;
+      BoltStatus status;
+
+      entry = (CcBoltDeviceEntry *) iter->data;
+      dev = cc_bolt_device_entry_get_device (entry);
+      status = bolt_device_get_status (dev);
+
+      /* skip any devices down in the chain that are already authorized
+       * NB: it is not possible to have gaps of non-authorized devices
+       * in the chain, i.e. once we encounter a non-authorized device,
+       * all following device (down the chain, towards the target) will
+       * also be not authorized. */
+      if (!bolt_status_is_pending (status))
+	continue;
+
+      /* device is now either !stored || pending */
+      g_ptr_array_add (devices, dev);
     }
 
+  /* finally the actual device of the dialog */
+  g_ptr_array_add (devices, device);
+
+  bolt_client_connect_all_async (dialog->client,
+				 devices,
+				 BOLT_POLICY_DEFAULT,
+				 BOLT_AUTHCTRL_NONE,
+				 dialog->cancel,
+				 on_connect_all_done,
+				 dialog);
 }
 
 static void
@@ -388,6 +394,10 @@ cc_bolt_device_dialog_class_init (CcBoltDeviceDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, time_title);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, time_label);
 
+  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, parents_expander);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, parents_label);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, parents_devices);
+
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, button_box);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, spinner);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, connect_button);
@@ -403,6 +413,11 @@ cc_bolt_device_dialog_init (CcBoltDeviceDialog *dialog)
 {
   g_resources_register (cc_thunderbolt_get_resource ());
   gtk_widget_init_template (GTK_WIDGET (dialog));
+
+  gtk_list_box_set_header_func (dialog->parents_devices,
+                                cc_list_box_update_header_func,
+                                NULL,
+                                NULL);
 }
 
 /* public functions */
@@ -427,8 +442,12 @@ cc_bolt_device_dialog_set_client (CcBoltDeviceDialog *dialog,
 
 void
 cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog,
-                                  BoltDevice         *device)
+                                  BoltDevice         *device,
+				  GPtrArray          *parents)
 {
+  g_autofree char *msg = NULL;
+  guint i;
+
   if (device == dialog->device)
     return;
 
@@ -442,6 +461,10 @@ cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog,
                                             G_CALLBACK (on_device_notify_cb),
                                             dialog);
       g_clear_object (&dialog->device);
+
+      gtk_container_foreach (GTK_CONTAINER (dialog->parents_devices),
+			     (GtkCallback) gtk_widget_destroy, NULL);
+      gtk_widget_hide (GTK_WIDGET (dialog->parents_expander));
     }
 
   if (device == NULL)
@@ -460,6 +483,29 @@ cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog,
   gtk_widget_set_sensitive (GTK_WIDGET (dialog->forget_button), TRUE);
 
   dialog_update_from_device (dialog);
+
+  /* no parents, we are done here */
+  if (!parents || parents->len == 0)
+    return;
+
+  msg = g_strdup_printf (ngettext ("Depends on %u other device",
+				   "Depends on %u other devices",
+				   parents->len), parents->len);
+
+  gtk_label_set_label (dialog->parents_label, msg);
+  gtk_widget_show (GTK_WIDGET (dialog->parents_expander));
+
+  for (i = 0; i < parents->len; i++)
+    {
+      CcBoltDeviceEntry *entry;
+      BoltDevice *parent;
+
+      parent = g_ptr_array_index (parents, i);
+
+      entry = cc_bolt_device_entry_new (parent, TRUE);
+      gtk_widget_show (GTK_WIDGET (entry));
+      gtk_container_add (GTK_CONTAINER (dialog->parents_devices), GTK_WIDGET (entry));
+    }
 }
 
 BoltDevice *
