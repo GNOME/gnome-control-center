@@ -38,6 +38,8 @@ struct _CcBoltDeviceEntry
   /* main ui */
   GtkLabel *name_label;
   GtkLabel *status_label;
+  GtkLabel *status_warning;
+  gboolean  show_warnings;
 };
 
 static const char *   device_status_to_brief_for_ui (BoltDevice *dev);
@@ -70,6 +72,7 @@ entry_update_status (CcBoltDeviceEntry *entry)
 {
   const char *brief;
   BoltStatus status;
+  gboolean warn;
 
   status = bolt_device_get_status (entry->device);
   brief = device_status_to_brief_for_ui (entry->device);
@@ -80,6 +83,9 @@ entry_update_status (CcBoltDeviceEntry *entry)
                  signals[SIGNAL_STATUS_CHANGED],
                  0,
                  status);
+
+  warn = entry->show_warnings && bolt_status_is_pending (status);
+  gtk_widget_set_visible (GTK_WIDGET (entry->status_warning), warn);
 }
 
 static void
@@ -167,6 +173,7 @@ cc_bolt_device_entry_class_init (CcBoltDeviceEntryClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, RESOURCE_UI);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceEntry, name_label);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceEntry, status_label);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceEntry, status_warning);
 
   signals[SIGNAL_STATUS_CHANGED] =
     g_signal_new ("status-changed",
@@ -189,12 +196,14 @@ cc_bolt_device_entry_init (CcBoltDeviceEntry *entry)
 /* public function */
 
 CcBoltDeviceEntry *
-cc_bolt_device_entry_new (BoltDevice *device)
+cc_bolt_device_entry_new (BoltDevice *device,
+			  gboolean    show_warnings)
 {
   CcBoltDeviceEntry *entry;
 
   entry = g_object_new (CC_TYPE_BOLT_DEVICE_ENTRY, NULL);
   entry->device = g_object_ref (device);
+  entry->show_warnings = show_warnings;
 
   entry_set_name (entry);
   entry_update_status (entry);
