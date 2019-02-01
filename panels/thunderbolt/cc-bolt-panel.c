@@ -349,25 +349,25 @@ cc_bolt_panel_add_device (CcBoltPanel *panel,
   if (type != BOLT_DEVICE_PERIPHERAL)
     return FALSE;
 
-  entry = cc_bolt_device_entry_new (dev);
+  entry = cc_bolt_device_entry_new (dev, FALSE);
   path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (dev));
 
   /* add to the list box */
-  gtk_widget_show_all (GTK_WIDGET (entry));
+  gtk_widget_show (GTK_WIDGET (entry));
 
   status = bolt_device_get_status (dev);
 
   if (bolt_status_is_pending (status))
     {
       gtk_container_add (GTK_CONTAINER (panel->pending_list), GTK_WIDGET (entry));
-      gtk_widget_show_all (GTK_WIDGET (panel->pending_list));
-      gtk_widget_show_all (GTK_WIDGET (panel->pending_box));
+      gtk_widget_show (GTK_WIDGET (panel->pending_list));
+      gtk_widget_show (GTK_WIDGET (panel->pending_box));
     }
   else
     {
       gtk_container_add (GTK_CONTAINER (panel->devices_list), GTK_WIDGET (entry));
-      gtk_widget_show_all (GTK_WIDGET (panel->devices_list));
-      gtk_widget_show_all (GTK_WIDGET (panel->devices_box));
+      gtk_widget_show (GTK_WIDGET (panel->devices_list));
+      gtk_widget_show (GTK_WIDGET (panel->devices_box));
     }
 
   g_signal_connect_object (entry,
@@ -395,7 +395,7 @@ cc_bolt_panel_del_device_entry (CcBoltPanel       *panel,
   if (cc_bolt_device_dialog_device_equal (panel->device_dialog, dev))
     {
       gtk_widget_hide (GTK_WIDGET (panel->device_dialog));
-      cc_bolt_device_dialog_set_device (panel->device_dialog, NULL);
+      cc_bolt_device_dialog_set_device (panel->device_dialog, NULL, NULL);
     }
 
   p = gtk_widget_get_parent (GTK_WIDGET (entry));
@@ -448,7 +448,7 @@ cc_panel_list_box_migrate (CcBoltPanel       *panel,
 
   gtk_container_remove (GTK_CONTAINER (from), target);
   gtk_container_add (GTK_CONTAINER (to), target);
-  gtk_widget_show_all (GTK_WIDGET (to));
+  gtk_widget_show (GTK_WIDGET (to));
 
   from_box = cc_bolt_panel_box_for_listbox (panel, from);
   to_box = cc_bolt_panel_box_for_listbox (panel, to);
