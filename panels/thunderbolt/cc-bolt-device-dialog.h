@@ -36,7 +36,9 @@ void                 cc_bolt_device_dialog_set_client (CcBoltDeviceDialog *dialo
                                                        BoltClient         *client);
 
 void                 cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog,
-                                                       BoltDevice         *device);
+                                                       BoltDevice         *device,
+						       GPtrArray          *parents);
+
 BoltDevice *         cc_bolt_device_dialog_peek_device (CcBoltDeviceDialog *dialog);
 
 gboolean             cc_bolt_device_dialog_device_equal (CcBoltDeviceDialog *dialog,
