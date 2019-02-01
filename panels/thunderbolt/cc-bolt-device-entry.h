@@ -28,7 +28,8 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcBoltDeviceEntry, cc_bolt_device_entry, CC, BOLT_DEVICE_ENTRY, GtkListBoxRow);
 
 
-CcBoltDeviceEntry * cc_bolt_device_entry_new (BoltDevice *device);
+CcBoltDeviceEntry * cc_bolt_device_entry_new (BoltDevice *device,
+					      gboolean    show_warnings);
 BoltDevice *        cc_bolt_device_entry_get_device (CcBoltDeviceEntry *entry);
 
 G_END_DECLS
