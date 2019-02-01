@@ -22,6 +22,7 @@ sources = files(
   'bolt-device.c',
   'bolt-enums.c',
   'bolt-error.c',
+  'bolt-names.c',
   'bolt-proxy.c',
   'bolt-str.c',
   'bolt-time.c',
