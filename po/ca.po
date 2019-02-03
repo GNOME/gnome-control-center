@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-01-29 11:17+0000\n"
+"POT-Creation-Date: 2019-01-30 16:27+0000\n"
 "PO-Revision-Date: 2018-06-02 20:54+0200\n"
 "Last-Translator: Carles Ferrando Garcia <carles.ferrando@gmail.com>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -106,6 +106,8 @@ msgid ""
 "%s has the following permissions built-in. These cannot be altered. If you "
 "are concerned about these permissions, consider removing this application."
 msgstr ""
+"%s té els següents permisos integrats. Aquests no poden ser alterats. Si "
+"esteu preocupats per aquests permisos, considereu suprimir aquesta aplicació."
 
 #: panels/applications/cc-applications-panel.c:735
 msgid "Web Links"
@@ -123,7 +125,7 @@ msgstr "Enllaços %s"
 #: panels/applications/cc-applications-panel.c:759
 #: panels/applications/cc-applications-panel.c:795
 msgid "Unset"
-msgstr ""
+msgstr "Desconfigura"
 
 #: panels/applications/cc-applications-panel.c:850
 msgid "Links"
@@ -191,6 +193,7 @@ msgid ""
 "Data and services that this app has asked for access to and permissions that "
 "it requires."
 msgstr ""
+"Dades i serveis que aquesta aplicació ha demanat accés i permisos que requereix."
 
 #: panels/applications/cc-applications-panel.ui:126
 #: panels/applications/cc-applications-panel.ui:132
@@ -244,6 +247,8 @@ msgid ""
 "Individual permissions for applications can be reviewed in the <a href="
 "\"privacy\">Privacy</a> Settings."
 msgstr ""
+"Els permisos individuals per aplicacions poden revisar-se a <a href="
+"\"privacy\">Privacitat</a> Paràmetres."
 
 #: panels/applications/cc-applications-panel.ui:204
 msgid "Integration"
@@ -302,8 +307,7 @@ msgstr "Obre al Programari"
 #: panels/applications/cc-applications-panel.ui:475
 msgid ""
 "How much disk space this application is occupying with app data and caches."
-msgstr ""
-"Espai en disc que aquesta aplicació ocupa amb dades i memòria cau."
+msgstr "Espai en disc que aquesta aplicació ocupa amb dades i memòria cau."
 
 #: panels/applications/cc-applications-panel.ui:484
 msgid "Application"
@@ -319,7 +323,7 @@ msgstr "Memòria cau"
 
 #: panels/applications/cc-applications-panel.ui:502
 msgid "<b>Total</b>"
-msgstr  "<b>Total</b>"
+msgstr "<b>Total</b>"
 
 #: panels/applications/cc-applications-panel.ui:519
 msgid "Clear Cache…"
@@ -327,7 +331,7 @@ msgstr "Neteja la memòria cau…"
 
 #: panels/applications/gnome-applications-panel.desktop.in.in:4
 msgid "Control various application permissions and settings"
-msgstr ""
+msgstr "Controla diversos permisos d'aplicacions i paràmetres"
 
 #. FIXME
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
@@ -424,7 +428,7 @@ msgstr "Podeu afegir imatges a la carpeta %s i apareixeran aquí"
 #: panels/network/net-device-wifi.c:1200 panels/network/net-device-wifi.c:1280
 #: panels/network/net-device-wifi.c:1474 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:330
+#: panels/printers/pp-details-dialog.c:320
 #: panels/privacy/cc-privacy-panel.c:1123 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:607
@@ -522,7 +526,7 @@ msgstr "Desactiveu el mode d'avió"
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
 #: panels/network/cc-network-panel.ui:101
-#: panels/printers/pp-new-printer-dialog.c:1805
+#: panels/printers/pp-new-printer-dialog.c:1705
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -812,7 +816,7 @@ msgstr "Qualitat del calibratge"
 
 #: panels/color/cc-color-panel.ui:137
 msgid "Select the sensor device you want to use for calibration."
-msgstr "Seleccioneu el sensor que voleu utilitzar pel calibratge."
+msgstr "Seleccioneu el sensor que voleu utilitzar per al calibratge."
 
 #: panels/color/cc-color-panel.ui:174
 msgid "Calibration Device"
@@ -1483,6 +1487,67 @@ msgstr "Activat"
 msgid "Off"
 msgstr "Desactivat"
 
+#: panels/display/cc-display-panel.ui:81
+msgid "Single Display"
+msgstr "Pantalla única"
+
+#: panels/display/cc-display-panel.ui:100
+#: panels/display/cc-display-panel.ui:329
+msgid "Join Displays"
+msgstr "Uneix pantalles"
+
+#: panels/display/cc-display-panel.ui:118
+msgid "Mirror"
+msgstr "Mirall"
+
+#: panels/display/cc-display-panel.ui:143
+msgid "Display Mode"
+msgstr "Mode de pantalla"
+
+#: panels/display/cc-display-panel.ui:201
+msgid "Drag displays to match your setup."
+msgstr "Arrossegueu les pantalles perquè coincideixen amb la vostra configuració."
+
+#: panels/display/cc-display-panel.ui:266
+msgid "Display Arrangement"
+msgstr "Disposició de les pantalles"
+
+#: panels/display/cc-display-panel.ui:447
+msgid "Display Configuration"
+msgstr "Configuració de la pantalla"
+
+#. This is the redshift functionality where we suppress blue light when the sun has gone down
+#: panels/display/cc-display-panel.ui:474
+#: panels/display/cc-display-panel.ui:492
+#: panels/display/cc-night-light-dialog.ui:505
+msgid "Night Light"
+msgstr "Llum nocturna"
+
+#: panels/display/cc-display-settings.c:103
+msgctxt "Display rotation"
+msgid "Landscape"
+msgstr "Apaïsada"
+
+#: panels/display/cc-display-settings.c:106
+msgctxt "Display rotation"
+msgid "Portrait Right"
+msgstr "Vertical dreta"
+
+#: panels/display/cc-display-settings.c:109
+msgctxt "Display rotation"
+msgid "Portrait Left"
+msgstr "Vertical esquerra"
+
+#: panels/display/cc-display-settings.c:112
+msgctxt "Display rotation"
+msgid "Landscape (flipped)"
+msgstr "Apaïsada (capgirada)"
+
+#: panels/display/cc-display-settings.c:186
+#, c-format
+msgid "%.2lf Hz"
+msgstr "%.2lf Hz"
+
 #. This cancels the redshift inhibit.
 #: panels/display/cc-night-light-dialog.ui:46
 msgid "Restart Filter"
@@ -1550,11 +1615,6 @@ msgstr "A"
 #: panels/display/cc-night-light-dialog.ui:470
 msgid "Color Temperature"
 msgstr "Temperatura del color"
-
-#. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-night-light-dialog.ui:505
-msgid "Night Light"
-msgstr "Llum nocturna"
 
 #: panels/display/gnome-display-panel.desktop.in.in:3
 msgid "Displays"
@@ -1635,45 +1695,45 @@ msgstr "32-bit"
 msgid "Version %s"
 msgstr "Versió %s"
 
-#: panels/info/cc-info-overview-panel.ui:58
+#: panels/info/cc-info-overview-panel.ui:70
 msgid "Device name"
 msgstr "Nom del dispositiu"
 
-#: panels/info/cc-info-overview-panel.ui:74
+#: panels/info/cc-info-overview-panel.ui:86
 msgid "Memory"
 msgstr "Memòria"
 
-#: panels/info/cc-info-overview-panel.ui:90
+#: panels/info/cc-info-overview-panel.ui:102
 msgid "Processor"
 msgstr "Processador"
 
-#: panels/info/cc-info-overview-panel.ui:106
+#: panels/info/cc-info-overview-panel.ui:118
 msgid "Graphics"
 msgstr "Gràfics"
 
 #. To translators: this field contains the distro name and version
-#: panels/info/cc-info-overview-panel.ui:121
+#: panels/info/cc-info-overview-panel.ui:133
 msgid "OS name"
 msgstr "Nom del sistema operatiu"
 
 #. To translators: this field contains the distro type
-#: panels/info/cc-info-overview-panel.ui:137
+#: panels/info/cc-info-overview-panel.ui:149
 msgid "OS type"
 msgstr "Tipus de sistema operatiu"
 
-#: panels/info/cc-info-overview-panel.ui:153
+#: panels/info/cc-info-overview-panel.ui:165
 msgid "Virtualization"
 msgstr "Virtualització"
 
-#: panels/info/cc-info-overview-panel.ui:169
+#: panels/info/cc-info-overview-panel.ui:181
 msgid "Disk"
 msgstr "Disc"
 
-#: panels/info/cc-info-overview-panel.ui:274
+#: panels/info/cc-info-overview-panel.ui:293
 msgid "Calculating…"
 msgstr "S'està calculant…"
 
-#: panels/info/cc-info-overview-panel.ui:314
+#: panels/info/cc-info-overview-panel.ui:333
 msgid "Check for updates"
 msgstr "Comprova si hi ha actualitzacions"
 
@@ -2884,7 +2944,7 @@ msgid "Select file to import"
 msgstr "Seleccioneu el fitxer a importar"
 
 #: panels/network/connection-editor/vpn-helpers.c:182
-#: panels/printers/pp-details-dialog.c:331
+#: panels/printers/pp-details-dialog.c:321
 #: panels/sharing/cc-sharing-panel.c:428
 #: panels/user-accounts/cc-avatar-chooser.c:273
 msgid "_Open"
@@ -4567,18 +4627,18 @@ msgid "Authentication Required"
 msgstr "Cal autenticació"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:805
+#: panels/printers/cc-printers-panel.c:715
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "S'ha suprimit la impressora «%s»"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:1052
+#: panels/printers/cc-printers-panel.c:941
 msgid "Failed to add new printer."
 msgstr "No s'ha pogut afegir una impressora nova."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1389
+#: panels/printers/cc-printers-panel.c:1253
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No s'ha pogut carregar la interfície d'usuari: %s"
@@ -4656,8 +4716,8 @@ msgstr "No hi ha tasques d'impressió actives"
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:382
-#: panels/printers/pp-new-printer-dialog.c:454
+#: panels/printers/pp-new-printer-dialog.c:363
+#: panels/printers/pp-new-printer-dialog.c:428
 msgid "Add Printer"
 msgstr "Afegeix una impressora"
 
@@ -4691,21 +4751,21 @@ msgid "Test Page"
 msgstr "Pàgina de prova"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: panels/printers/pp-details-dialog.c:134
-#: panels/printers/pp-details-dialog.c:434
+#: panels/printers/pp-details-dialog.c:133
+#: panels/printers/pp-details-dialog.c:426
 #, c-format
 msgid "%s Details"
 msgstr "Detalls %s"
 
-#: panels/printers/pp-details-dialog.c:183
+#: panels/printers/pp-details-dialog.c:182
 msgid "No suitable driver found"
 msgstr "No s'ha trobat cap controlador adequat"
 
-#: panels/printers/pp-details-dialog.c:327
+#: panels/printers/pp-details-dialog.c:317
 msgid "Select PPD File"
 msgstr "Selecció d'un fitxer PPD"
 
-#: panels/printers/pp-details-dialog.c:336
+#: panels/printers/pp-details-dialog.c:326
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4727,50 +4787,50 @@ msgid "Loading drivers database…"
 msgstr "S'està carregant la base de dades de controladors..."
 
 #. Translators: The found device is a JetDirect printer
-#: panels/printers/pp-host.c:476
+#: panels/printers/pp-host.c:472
 msgid "JetDirect Printer"
 msgstr "Impressora JetDirect"
 
 #. Translators: The found device is a Line Printer Daemon printer
-#: panels/printers/pp-host.c:711
+#: panels/printers/pp-host.c:707
 msgid "LPD Printer"
 msgstr "Impressora LPD"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:66
-#: panels/printers/pp-ppd-option-widget.c:70
+#: panels/printers/pp-ipp-option-widget.c:65
+#: panels/printers/pp-ppd-option-widget.c:69
 msgid "One Sided"
 msgstr "Una cara"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:68
-#: panels/printers/pp-ppd-option-widget.c:72
+#: panels/printers/pp-ipp-option-widget.c:67
+#: panels/printers/pp-ppd-option-widget.c:71
 msgid "Long Edge (Standard)"
 msgstr "Cantó llarg (estàndard)"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:70
-#: panels/printers/pp-ppd-option-widget.c:74
+#: panels/printers/pp-ipp-option-widget.c:69
+#: panels/printers/pp-ppd-option-widget.c:73
 msgid "Short Edge (Flip)"
 msgstr "Cantó curt (capgirat)"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:72
+#: panels/printers/pp-ipp-option-widget.c:71
 msgid "Portrait"
 msgstr "Vertical"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:74
+#: panels/printers/pp-ipp-option-widget.c:73
 msgid "Landscape"
 msgstr "Apaïsat"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:76
+#: panels/printers/pp-ipp-option-widget.c:75
 msgid "Reverse landscape"
 msgstr "Apaïsat del revés"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:78
+#: panels/printers/pp-ipp-option-widget.c:77
 msgid "Reverse portrait"
 msgstr "Vertical del revés"
 
@@ -4843,57 +4903,57 @@ msgstr "%s - tasques actives"
 msgid "Enter credentials to print from %s."
 msgstr "Introduïu les credencials per imprimir des de %s."
 
-#: panels/printers/pp-new-printer-dialog.c:400
+#: panels/printers/pp-new-printer-dialog.c:378
 msgid "Unlock Print Server"
 msgstr "Desbloqueja el servidor d'impressió"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:404
+#: panels/printers/pp-new-printer-dialog.c:382
 #, c-format
 msgid "Unlock %s."
 msgstr "Desbloqueja %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:409
+#: panels/printers/pp-new-printer-dialog.c:387
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Introduïu el nom d'usuari i la contrasenya per visualitzar les impressores a "
 "%s."
 
-#: panels/printers/pp-new-printer-dialog.c:891
+#: panels/printers/pp-new-printer-dialog.c:842
 msgid "Searching for Printers"
 msgstr "S'estan cercant les impressores"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1788
+#: panels/printers/pp-new-printer-dialog.c:1688
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1793
+#: panels/printers/pp-new-printer-dialog.c:1693
 msgid "Serial Port"
 msgstr "Port en sèrie"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1800
+#: panels/printers/pp-new-printer-dialog.c:1700
 msgid "Parallel Port"
 msgstr "Port paral·lel"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1842
+#: panels/printers/pp-new-printer-dialog.c:1741
 #, c-format
 msgid "Location: %s"
 msgstr "Ubicació: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1847
+#: panels/printers/pp-new-printer-dialog.c:1746
 #, c-format
 msgid "Address: %s"
 msgstr "Adreça: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1876
+#: panels/printers/pp-new-printer-dialog.c:1775
 msgid "Server requires authentication"
 msgstr "El servidor requereix autenticació"
 
@@ -4990,38 +5050,38 @@ msgid "Test page"
 msgstr "Pàgina de prova"
 
 #. Translators: this is an option of "Paper Source"
-#: panels/printers/pp-ppd-option-widget.c:76
-#: panels/printers/pp-ppd-option-widget.c:78
-#: panels/printers/pp-ppd-option-widget.c:86
+#: panels/printers/pp-ppd-option-widget.c:75
+#: panels/printers/pp-ppd-option-widget.c:77
+#: panels/printers/pp-ppd-option-widget.c:85
 msgid "Auto Select"
 msgstr "Selecció automàtica"
 
 #. Translators: this is an option of "Paper Source"
 #. Translators: this is an option of "Resolution"
-#: panels/printers/pp-ppd-option-widget.c:80
-#: panels/printers/pp-ppd-option-widget.c:82
-#: panels/printers/pp-ppd-option-widget.c:84
-#: panels/printers/pp-ppd-option-widget.c:88
+#: panels/printers/pp-ppd-option-widget.c:79
+#: panels/printers/pp-ppd-option-widget.c:81
+#: panels/printers/pp-ppd-option-widget.c:83
+#: panels/printers/pp-ppd-option-widget.c:87
 msgid "Printer Default"
 msgstr "Per defecte de la impressora"
 
 #. Translators: this is an option of "GhostScript"
-#: panels/printers/pp-ppd-option-widget.c:90
+#: panels/printers/pp-ppd-option-widget.c:89
 msgid "Embed GhostScript fonts only"
 msgstr "Incrusta només tipus de lletra del GhostScript"
 
 #. Translators: this is an option of "GhostScript"
-#: panels/printers/pp-ppd-option-widget.c:92
+#: panels/printers/pp-ppd-option-widget.c:91
 msgid "Convert to PS level 1"
 msgstr "Converteix a PS nivell 1"
 
 #. Translators: this is an option of "GhostScript"
-#: panels/printers/pp-ppd-option-widget.c:94
+#: panels/printers/pp-ppd-option-widget.c:93
 msgid "Convert to PS level 2"
 msgstr "Converteix a PS nivell 2"
 
 #. Translators: this is an option of "GhostScript"
-#: panels/printers/pp-ppd-option-widget.c:96
+#: panels/printers/pp-ppd-option-widget.c:95
 msgid "No pre-filtering"
 msgstr "Sense filtrat previ"
 
@@ -5044,111 +5104,111 @@ msgstr[0] "%u tasca"
 msgstr[1] "%u tasques"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:777
+#: panels/printers/pp-printer-entry.c:775
 msgid "Low on toner"
 msgstr "Tòner baix"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:779
+#: panels/printers/pp-printer-entry.c:777
 msgid "Out of toner"
 msgstr "Sense tòner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:782
+#: panels/printers/pp-printer-entry.c:780
 msgid "Low on developer"
 msgstr "Revelador baix"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:785
+#: panels/printers/pp-printer-entry.c:783
 msgid "Out of developer"
 msgstr "Sense revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:787
+#: panels/printers/pp-printer-entry.c:785
 msgid "Low on a marker supply"
 msgstr "Marcador baix"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:789
+#: panels/printers/pp-printer-entry.c:787
 msgid "Out of a marker supply"
 msgstr "Sense marcador"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:791
+#: panels/printers/pp-printer-entry.c:789
 msgid "Open cover"
 msgstr "Tapa oberta"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:793
+#: panels/printers/pp-printer-entry.c:791
 msgid "Open door"
 msgstr "Porta oberta"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:795
+#: panels/printers/pp-printer-entry.c:793
 msgid "Low on paper"
 msgstr "Paper baix"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:797
+#: panels/printers/pp-printer-entry.c:795
 msgid "Out of paper"
 msgstr "Sense paper"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:799
+#: panels/printers/pp-printer-entry.c:797
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Apagada"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:801
-#: panels/printers/pp-printer-entry.c:929
+#: panels/printers/pp-printer-entry.c:799
+#: panels/printers/pp-printer-entry.c:927
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Aturada"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:803
+#: panels/printers/pp-printer-entry.c:801
 msgid "Waste receptacle almost full"
 msgstr "El receptacle de residus està quasi ple"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:805
+#: panels/printers/pp-printer-entry.c:803
 msgid "Waste receptacle full"
 msgstr "El receptacle de residus està ple"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:807
+#: panels/printers/pp-printer-entry.c:805
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor òptic fotogràfic està al final de la seva vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:809
+#: panels/printers/pp-printer-entry.c:807
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor òptic fotogràfic ja no funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:915
+#: panels/printers/pp-printer-entry.c:913
 msgctxt "printer state"
 msgid "Ready"
 msgstr "A punt"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:920
+#: panels/printers/pp-printer-entry.c:918
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "No accepta tasques"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:925
+#: panels/printers/pp-printer-entry.c:923
 msgctxt "printer state"
 msgid "Processing"
 msgstr "S'està processant"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:949
+#: panels/printers/pp-printer-entry.c:947
 msgid "Clean print heads"
 msgstr "Neteja els capçals d'impressió"
 
@@ -5534,6 +5594,8 @@ msgid ""
 "Use of the camera allows applications to capture photos and video. Disabling "
 "the camera may cause some applications to not function properly."
 msgstr ""
+"L'ús de la càmera permet a les aplicacions capturar fotografies i vídeo. Inhabilitar "
+"la càmera pot causar que algunes aplicacions no funcionin correctament."
 
 #: panels/privacy/cc-privacy-panel.ui:812
 msgid "_Camera"
@@ -5544,8 +5606,8 @@ msgid ""
 "Use of the microphone allows applications to capture sounds. Disabling the "
 "microphone may cause some applications to not function properly."
 msgstr ""
-"L'ús del micròfon permet a les aplicacions capturar sons. Inhabilitar el micròfon "
-"pot causar que algunes aplicacions no funcionin correctament."
+"L'ús del micròfon permet a les aplicacions capturar sons. Inhabilitar el "
+"micròfon pot causar que algunes aplicacions no funcionin correctament."
 
 #: panels/privacy/cc-privacy-panel.ui:917
 msgid "_Microphone"
@@ -5688,7 +5750,7 @@ msgstr "Fonts d'entrada"
 
 #: panels/region/cc-region-panel.ui:207
 msgid "Choose keyboard layouts or input methods."
-msgstr ""
+msgstr "Escolliu disposicions de teclat o mètodes d'entrada."
 
 #: panels/region/cc-region-panel.ui:270
 msgid "No input source selected"
@@ -6328,7 +6390,7 @@ msgstr ""
 "El subsistema Thunderbolt (boltd) no està instal·lat o configurat "
 "correctament."
 
-#: panels/thunderbolt/cc-bolt-panel.c:460
+#: panels/thunderbolt/cc-bolt-panel.c:468
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -6338,11 +6400,15 @@ msgstr ""
 "O bé el sistema no és compatible amb Thunderbolt, s'ha inhabilitat al BIOS o "
 "està configurat amb un nivell de seguretat no compatible al BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:504
+#: panels/thunderbolt/cc-bolt-panel.c:512
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "El suport per a aquesta funció està inhabilitat al BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:613
+#: panels/thunderbolt/cc-bolt-panel.c:516
+msgid "Thunderbolt security level could not be determined."
+msgstr "No s'ha pogut determinar el nivell de seguretat de Thunderbolt."
+
+#: panels/thunderbolt/cc-bolt-panel.c:621
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "S'ha produït un error en canviar al mode directe: «%s»"
@@ -8041,8 +8107,7 @@ msgstr "Ajuda"
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: shell/gnome-control-center.desktop.in.in:5
 msgid "org.gnome.Settings"
-msgstr  "org.gnome.Settings"
-
+msgstr "org.gnome.Settings"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: shell/gnome-control-center.desktop.in.in:17
@@ -8125,1029 +8190,3 @@ msgstr[1] "%u entrades"
 #: subprojects/gvc/gvc-mixer-control.c:2738
 msgid "System Sounds"
 msgstr "Sons del sistema"
-
-#~ msgctxt "Display rotation"
-#~ msgid "Landscape"
-#~ msgstr "Apaïsada"
-
-#~ msgctxt "Display rotation"
-#~ msgid "Portrait Right"
-#~ msgstr "Vertical dreta"
-
-#~ msgctxt "Display rotation"
-#~ msgid "Portrait Left"
-#~ msgstr "Vertical esquerra"
-
-#~ msgctxt "Display rotation"
-#~ msgid "Landscape (flipped)"
-#~ msgstr "Apaïsada (capgirada)"
-
-#~ msgid "Refresh Rate"
-#~ msgstr "Freqüència de refresc"
-
-#~ msgid "Scale"
-#~ msgstr "Redimensiona"
-
-#~ msgid "Adjust for TV"
-#~ msgstr "Ajusta per a televisió"
-
-#~ msgid "Primary Display"
-#~ msgstr "Pantalla primària"
-
-#~ msgid "Display Arrangement"
-#~ msgstr "Disposició de les pantalles"
-
-#~ msgid ""
-#~ "Drag displays to match your setup. The top bar is placed on the primary "
-#~ "display."
-#~ msgstr ""
-#~ "Arrossegueu les pantalles per configurar-les. La barra superior se situa "
-#~ "a la pantalla primària."
-
-#~ msgid "Display Mode"
-#~ msgstr "Mode de pantalla"
-
-#~ msgid "Join Displays"
-#~ msgstr "Uneix pantalles"
-
-#~ msgid "Mirror"
-#~ msgstr "Mirall"
-
-#~ msgid "Single Display"
-#~ msgstr "Pantalla única"
-
-#~ msgid "%.2lf Hz"
-#~ msgstr "%.2lf Hz"
-
-#~ msgid "_Night Light"
-#~ msgstr "_Llum nocturna"
-
-#~ msgid "Could not get screen information"
-#~ msgstr "No s'ha pogut obtenir la informació de la pantalla"
-
-#~ msgid "My Home Network"
-#~ msgstr "La meva xarxa"
-
-#~ msgid "hardware"
-#~ msgstr "maquinari"
-
-#~ msgid "reset"
-#~ msgstr "reinicia"
-
-#~ msgid "Switch to previous source"
-#~ msgstr "Commuta a la font anterior"
-
-#~ msgid "Switch to next source"
-#~ msgstr "Commuta a la font següent"
-
-#~ msgid "Alternative switch to next source"
-#~ msgstr "Forma alternativa per canviar a la font següent"
-
-#~ msgid "English (United Kingdom)"
-#~ msgstr "Anglès (Regne Unit)"
-
-#~ msgid "United Kingdom"
-#~ msgstr "Regne Unit"
-
-#~ msgid "_Options"
-#~ msgstr "_Opcions"
-
-#~ msgctxt "Account type"
-#~ msgid "Standard"
-#~ msgstr "Estàndard"
-
-#~ msgctxt "Account type"
-#~ msgid "Administrator"
-#~ msgstr "Administrador"
-
-#~ msgid "page 3"
-#~ msgstr "pàgina 3"
-
-#~ msgid "GNOME Control Center"
-#~ msgstr "Centre de control del GNOME"
-
-#~ msgid ""
-#~ "The control center is GNOME’s main interface for configuration of various "
-#~ "aspects of your desktop."
-#~ msgstr ""
-#~ "El centre de control és la interfície principal del GNOME per a la "
-#~ "configuració de diversos aspectes de l'escriptori."
-
-#~ msgid "Quit"
-#~ msgstr "Surt"
-
-#~ msgid "gnome-control-center"
-#~ msgstr "gnome-control-center"
-
-#~ msgid "_Verify New Password"
-#~ msgstr "_Verifica la contrasenya nova"
-
-#~ msgid "Passwords do not match."
-#~ msgstr "Les contrasenyes no coincideixen."
-
-#~ msgid "Show the overview"
-#~ msgstr "Mostra la visió general"
-
-#~ msgid "Place your left thumb on %s"
-#~ msgstr "Col·loqueu el polze esquerre a %s"
-
-#~ msgid "Swipe your left thumb on %s"
-#~ msgstr "Llisca el polze esquerre a %s"
-
-#~ msgid "Place your left index finger on %s"
-#~ msgstr "Col·loqueu el dit índex esquerre a %s"
-
-#~ msgid "Swipe your left index finger on %s"
-#~ msgstr "Llisca el dit índex esquerre a %s"
-
-#~ msgid "Place your left middle finger on %s"
-#~ msgstr "Col·loqueu el dit del mig esquerre a %s"
-
-#~ msgid "Swipe your left middle finger on %s"
-#~ msgstr "Llisca el dit del mig esquerre a %s"
-
-#~ msgid "Place your left ring finger on %s"
-#~ msgstr "Col·loqueu el dit del anular esquerre a %s"
-
-#~| msgid "Left ring finger"
-#~ msgid "Swipe your left ring finger on %s"
-#~ msgstr "Llisca el dit del anular esquerre a %s"
-
-#, fuzzy
-#~| msgid "Left little finger"
-#~ msgid "Place your left little finger on %s"
-#~ msgstr "Dit petit esquerre"
-
-#, fuzzy
-#~| msgid "Left little finger"
-#~ msgid "Swipe your left little finger on %s"
-#~ msgstr "Dit petit esquerre"
-
-#, fuzzy
-#~| msgid "_Right index finger"
-#~ msgid "Place your right index finger on %s"
-#~ msgstr "Dit índex d_ret"
-
-#, fuzzy
-#~| msgid "_Right index finger"
-#~ msgid "Swipe your right index finger on %s"
-#~ msgstr "Dit índex d_ret"
-
-#, fuzzy
-#~| msgid "Right middle finger"
-#~ msgid "Place your right middle finger on %s"
-#~ msgstr "Dit del mig dret"
-
-#, fuzzy
-#~| msgid "Right middle finger"
-#~ msgid "Swipe your right middle finger on %s"
-#~ msgstr "Dit del mig dret"
-
-#, fuzzy
-#~| msgid "Right ring finger"
-#~ msgid "Place your right ring finger on %s"
-#~ msgstr "Dit anular dret"
-
-#, fuzzy
-#~| msgid "Right ring finger"
-#~ msgid "Swipe your right ring finger on %s"
-#~ msgstr "Dit anular dret"
-
-#, fuzzy
-#~| msgid "Right little finger"
-#~ msgid "Place your right little finger on %s"
-#~ msgstr "Dit petit dret"
-
-#, fuzzy
-#~| msgid "Right little finger"
-#~ msgid "Swipe your right little finger on %s"
-#~ msgstr "Dit petit dret"
-
-#~ msgid "Disable image"
-#~ msgstr "Inhabilita la imatge"
-
-#~ msgid "Browse for more pictures…"
-#~ msgstr "Cerca més imatges…"
-
-#~ msgid "Used by %s"
-#~ msgstr "Utilitzat per %s"
-
-#~ msgctxt "keybinding"
-#~ msgid "Search"
-#~ msgstr "Cerca"
-
-#~ msgid "Back­ground"
-#~ msgstr "Fons"
-
-#~ msgid "Blue­tooth"
-#~ msgstr "Bluetooth"
-
-#~ msgid "Co­lor"
-#~ msgstr "Color"
-
-#~ msgid "Section"
-#~ msgstr "Secció"
-
-#~ msgid "Overview"
-#~ msgstr "Visió general"
-
-#~ msgid "Defa­ult Applications"
-#~ msgstr "Aplicacions per defecte"
-
-#~ msgid "Ab­out"
-#~ msgstr "Quant a"
-
-#~ msgid "De­tails"
-#~ msgstr "Detalls"
-
-#~ msgid "Remo­vable Media"
-#~ msgstr "Suport extraïble"
-
-#~ msgid "Net­work"
-#~ msgstr "Xarxa"
-
-#~ msgid "invalid EAP-TLS password: missing"
-#~ msgstr "contrasenya EAP-TLS invàlida: manca la contrasenya"
-
-#~ msgid "No­ti­fi­ca­tions"
-#~ msgstr "Notificacions"
-
-#~ msgid "Po­wer"
-#~ msgstr "Energia"
-
-#~ msgid "Pri­va­cy"
-#~ msgstr "Privadesa"
-
-#~ msgid "Sha­ring"
-#~ msgstr "Compartició"
-
-#~ msgid "Uni­ver­sal Access"
-#~ msgstr "Accés universal"
-
-#~ msgid "Wa­com Tab­let"
-#~ msgstr "Tauleta gràfica Wacom"
-
-#~ msgctxt "category"
-#~ msgid "Personal"
-#~ msgstr "Personal"
-
-#~ msgctxt "category"
-#~ msgid "Hardware"
-#~ msgstr "Maquinari"
-
-#~ msgctxt "category"
-#~ msgid "System"
-#~ msgstr "Sistema"
-
-#~ msgid "Apply"
-#~ msgstr "Aplica"
-
-#~ msgid "Lid Closed"
-#~ msgstr "Tapa tancada"
-
-#~ msgid "Mirrored"
-#~ msgstr "Duplicat"
-
-#~ msgid "Secondary"
-#~ msgstr "Secundària"
-
-#~ msgid "Arrange Combined Displays"
-#~ msgstr "Organitzeu les pantalles combinades"
-
-#~ msgid "Drag displays to rearrange them"
-#~ msgstr "Arrossegueu les pantalles per a reordenar-les"
-
-#~ msgid "%d Hz (NTSC)"
-#~ msgstr "%d Hz (NTSC)"
-
-#~ msgid "%d Hz"
-#~ msgstr "%d Hz"
-
-#~ msgid "Rotate counterclockwise by 90°"
-#~ msgstr "Gira en sentit antihorari 90°"
-
-#~ msgid "Rotate by 180°"
-#~ msgstr "Gira 180°"
-
-#~ msgid "Rotate clockwise by 90°"
-#~ msgstr "Gira en sentit horari 90°"
-
-#~ msgid "Size"
-#~ msgstr "Mida"
-
-#~ msgid "Aspect Ratio"
-#~ msgstr "Relació d'aspecte"
-
-#~ msgid "Show the top bar and Activities Overview on this display"
-#~ msgstr ""
-#~ "Mostra la barra superior i la vista general d'activitats en aquesta "
-#~ "pantalla"
-
-#~ msgid "Join this display with another to create an extra workspace"
-#~ msgstr ""
-#~ "Ajunta aquesta pantalla amb una altra per crear un espai de treball "
-#~ "addicional"
-
-#~ msgid "Presentation"
-#~ msgstr "Presentació"
-
-#~ msgid "Show slideshows and media only"
-#~ msgstr "Mostra només seqüències d'imatges i multimèdia"
-
-#~ msgid "Show your existing view on both displays"
-#~ msgstr "Mostra el mateix a les dues pantalles"
-
-#~ msgid "Turn Off"
-#~ msgstr "Desactiva"
-
-#~ msgid "Don’t use this display"
-#~ msgstr "No usis aquesta pantalla"
-
-#~ msgid "_Arrange Combined Displays"
-#~ msgstr "_Organitzeu les pantalles combinades"
-
-#~ msgid "Air_plane Mode"
-#~ msgstr "_Mode d'avió"
-
-#~ msgid "Server"
-#~ msgstr "Servidor"
-
-#~ msgid "Delete DNS Server"
-#~ msgstr "Suprimeix el servidor DNS"
-
-#~ msgid "Proxy"
-#~ msgstr "Servidor intermediari"
-
-#~ msgid "_Add Profile…"
-#~ msgstr "_Afegeix un perfil…"
-
-#~ msgctxt "proxy method"
-#~ msgid "None"
-#~ msgstr "Cap"
-
-#~ msgctxt "proxy method"
-#~ msgid "Manual"
-#~ msgstr "Manual"
-
-#~ msgctxt "proxy method"
-#~ msgid "Automatic"
-#~ msgstr "Automàtic"
-
-#~ msgid "_Method"
-#~ msgstr "_Mètode"
-
-#~ msgid "VPN Type"
-#~ msgstr "Tipus de VPN"
-
-#~ msgid "Group Name"
-#~ msgstr "Nom del grup"
-
-#~ msgid "Group Password"
-#~ msgstr "Contrasenya del grup"
-
-#~ msgid "_Use as Hotspot…"
-#~ msgstr "_Utilitza com a punt d'accés Wi-Fi…"
-
-#~ msgid "_History"
-#~ msgstr "_Historial"
-
-#~ msgid "Press Esc to cancel."
-#~ msgstr "Premeu Esc per cancel·lar."
-
-#~ msgid "Make available to other _users"
-#~ msgstr "Fes-la disponible a altres _usuaris"
-
-#~ msgid ""
-#~ "Reset the settings for this network, including passwords, but remember it "
-#~ "as a preferred network"
-#~ msgstr ""
-#~ "Reinicia els paràmetres d'aquesta xarxa, incloent les contrasenyes, però "
-#~ "recorda-la com una xarxa preferida"
-
-#~ msgid ""
-#~ "Remove all details relating to this network and do not try to "
-#~ "automatically connect"
-#~ msgstr ""
-#~ "Suprimeix totes les dades relacionades amb aquesta xarxa i no intentis "
-#~ "connectar-t'hi automàticament"
-
-#~ msgid ""
-#~ "If you have a connection to the Internet other than wireless, you can set "
-#~ "up a wireless hotspot to share the connection with others."
-#~ msgstr ""
-#~ "Si teniu una connexió a Internet que no sigui la xarxa sense fil, podeu "
-#~ "establir un punt d'accés sense fil per compartir-la amb altres."
-
-#~ msgid "History"
-#~ msgstr "Historial"
-
-#~ msgid "Loading options…"
-#~ msgstr "S'estan carregant les opcions…"
-
-#~ msgid "%s %d-bit (Build ID: %s)"
-#~ msgstr "%s %d-bit (ID del muntatge: %s)"
-
-#~ msgid "%s %d-bit"
-#~ msgstr "%s %d-bit"
-
-#~ msgid "Base system"
-#~ msgstr "Sistema base"
-
-#~ msgid "Shortcut;Repeat;Blink;"
-#~ msgstr "Drecera;Repeteix;Parpelleig;"
-
-#~ msgid "Firewall _Zone"
-#~ msgstr "_Zona del tallafoc"
-
-#~ msgctxt "Firewall zone"
-#~ msgid "Default"
-#~ msgstr "Per defecte"
-
-#~ msgid "The zone defines the trust level of the connection"
-#~ msgstr "La zona defineix el nivell de confiança en la connexió"
-
-#~ msgid "2"
-#~ msgstr "2"
-
-#~ msgid "3"
-#~ msgstr "3"
-
-#~ msgid "4"
-#~ msgstr "4"
-
-#~ msgctxt "Password hint"
-#~ msgid "Try to add more letters, numbers and symbols."
-#~ msgstr "Afegiu-hi més lletres, nombres i símbols."
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: Weak"
-#~ msgstr "Seguretat: dèbil"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: Low"
-#~ msgstr "Seguretat: baixa"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: Medium"
-#~ msgstr "Seguretat: mitjana"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: Good"
-#~ msgstr "Seguretat: bona"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: High"
-#~ msgstr "Seguretat: alta"
-
-#~ msgid "<small>Your account</small>"
-#~ msgstr "<small>Compte</small>"
-
-#~ msgid "Edit"
-#~ msgstr "Edita"
-
-#~ msgctxt "button"
-#~ msgid "Set Shortcut"
-#~ msgstr "Estableix la drecera"
-
-#~ msgid "Add Account"
-#~ msgstr "Afegeix un compte"
-
-#~ msgid "Mail"
-#~ msgstr "Correu"
-
-#~ msgid "Calendar"
-#~ msgstr "Calendari"
-
-#~ msgid "Contacts"
-#~ msgstr "Contactes"
-
-#~ msgid "Chat"
-#~ msgstr "Xat"
-
-#~ msgctxt "printer state"
-#~ msgid "Configuring"
-#~ msgstr "S'està configurant"
-
-#~ msgid "Toner Level"
-#~ msgstr "Nivell del tòner"
-
-#~ msgid "Supply Level"
-#~ msgstr "Nivell dels subministraments"
-
-#~ msgctxt "printer state"
-#~ msgid "Installing"
-#~ msgstr "S'està instal·lant"
-
-#~ msgid "%u active"
-#~ msgid_plural "%u active"
-#~ msgstr[0] "%u actiu"
-#~ msgstr[1] "%u actius"
-
-#~ msgctxt "button"
-#~ msgid "Add Printer"
-#~ msgstr "Afegeix una impressora"
-
-#~ msgid "Supply"
-#~ msgstr "Subministrament"
-
-#~ msgid "Jobs"
-#~ msgstr "Tasques"
-
-#~ msgid "Show _Jobs"
-#~ msgstr "Mostra les _tasques"
-
-#~ msgid "label"
-#~ msgstr "etiqueta"
-
-#~ msgid "Setting new driver…"
-#~ msgstr "S'està establint el controlador nou…"
-
-#~ msgid "Print _Test Page"
-#~ msgstr "_Imprimeix una pàgina de prova"
-
-#~ msgid "Other Accounts"
-#~ msgstr "Altres comptes"
-
-#~ msgid "My Account"
-#~ msgstr "El meu compte"
-
-#~ msgctxt "notifications"
-#~ msgid "Notification _Banners"
-#~ msgstr "_Bàners de notificació"
-
-#~ msgid "Notification _Banners"
-#~ msgstr "_Bàners de notificació"
-
-#~ msgid "Wayland"
-#~ msgstr "Wayland"
-
-#~ msgid "Error creating account"
-#~ msgstr "S'ha produït un error en crear el compte"
-
-#~ msgid "Are you sure you want to remove the account?"
-#~ msgstr "Segur que voleu suprimir el compte?"
-
-#~ msgid "This will not remove the account on the server."
-#~ msgstr "No se suprimirà el compte al servidor."
-
-#~ msgid "_Remove"
-#~ msgstr "_Suprimeix"
-
-#~ msgid "No online accounts configured"
-#~ msgstr "No s'ha configurat cap compte en línia"
-
-#~ msgid ""
-#~ "Adding an account allows your applications to access it for documents, "
-#~ "mail, contacts, calendar, chat and more."
-#~ msgstr ""
-#~ "Afegir un compte permet a les aplicacions accedir-hi per obtenir "
-#~ "documents, correu, contactes, calendari, xat i més."
-
-#~ msgid "Add a New Printer"
-#~ msgstr "Afegeix una impressora nova"
-
-#~ msgid "No printers detected."
-#~ msgstr "No s'ha detectat cap impressora."
-
-#~ msgctxt "login history week label"
-#~ msgid "%s - %s"
-#~ msgstr "%s - %s"
-
-#~ msgctxt "Wacom tablet button"
-#~ msgid "Up"
-#~ msgstr "Amunt"
-
-#~ msgctxt "Wacom tablet button"
-#~ msgid "Down"
-#~ msgstr "Avall"
-
-#~ msgctxt "Wacom action-type"
-#~ msgid "None"
-#~ msgstr "Cap"
-
-#~ msgid "Left Ring"
-#~ msgstr "Anell esquerre"
-
-#~ msgid "Left Ring Mode #%d"
-#~ msgstr "Mode de l'anell esquerre número %d"
-
-#~ msgid "Right Ring Mode #%d"
-#~ msgstr "Mode de l'anell dret número %d"
-
-#~ msgid "Left Touchstrip"
-#~ msgstr "Banda tàctil esquerra"
-
-#~ msgid "Left Touchstrip Mode #%d"
-#~ msgstr "Mode de la banda tàctil esquerra número %d"
-
-#~ msgid "Right Touchstrip"
-#~ msgstr "Banda tàctil dreta"
-
-#~ msgid "Right Touchstrip Mode #%d"
-#~ msgstr "Mode de la banda tàctil dreta número %d"
-
-#~ msgid "Left Touchring Mode Switch"
-#~ msgstr "Mode de commutació de l'anell tàctil esquerre"
-
-#~ msgid "Right Touchring Mode Switch"
-#~ msgstr "Mode de commutació de l'anell tàctil dret"
-
-#~ msgid "Left Touchstrip Mode Switch"
-#~ msgstr "Mode de commutació de la banda tàctil esquerra"
-
-#~ msgid "Right Touchstrip Mode Switch"
-#~ msgstr "Mode de commutació de la banda tàctil dreta"
-
-#~ msgid "Mode Switch #%d"
-#~ msgstr "Mode de commutació número %d"
-
-#~ msgid "Left Button #%d"
-#~ msgstr "Botó esquerre número %d"
-
-#~ msgid "Right Button #%d"
-#~ msgstr "Botó dret número %d"
-
-#~ msgid "Top Button #%d"
-#~ msgstr "Botó superior número %d"
-
-#~ msgid "Bottom Button #%d"
-#~ msgstr "Botó inferior número %d"
-
-#~ msgid "No Action"
-#~ msgstr "Cap acció"
-
-#~ msgid "Left Mouse Button Click"
-#~ msgstr "Clic amb el botó esquerre del ratolí"
-
-#~ msgid "Scroll Up"
-#~ msgstr "Desplaça cap amunt"
-
-#~ msgid "Scroll Down"
-#~ msgstr "Desplaça cap avall"
-
-#~ msgid "Scroll Left"
-#~ msgstr "Desplaça cap a l'esquerra"
-
-#~ msgid "Scroll Right"
-#~ msgstr "Desplaça cap a la dreta"
-
-#~ msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-#~ msgstr ""
-#~ "Drecera de teclat per <b>%s</b>. Introduïu la drecera nova a canviar."
-
-#~ msgid ""
-#~ "To edit a shortcut, click the row and hold down the new keys or press "
-#~ "Backspace to clear."
-#~ msgstr ""
-#~ "Per editar una drecera, feu clic a la fila corresponent i premeu la "
-#~ "combinació de tecles nova, o premeu la tecla de retrocés per netejar-la."
-
-#~ msgid "Error logging into the account"
-#~ msgstr "S'ha produït un error en entrar al compte"
-
-#~ msgid "Credentials have expired."
-#~ msgstr "Han caducat les credencials."
-
-#~ msgid "Sign in to enable this account."
-#~ msgstr "Entreu per habilitar aquest compte."
-
-#~ msgid "_Sign In"
-#~ msgstr "_Entra"
-
-#~ msgid "Add Shortcut"
-#~ msgstr "Afegeix una drecera"
-
-#~ msgid "Remove Shortcut"
-#~ msgstr "Suprimeix una drecera"
-
-#~ msgid "<Unknown Action>"
-#~ msgstr "<acció desconeguda>"
-
-#~ msgid ""
-#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
-#~ "type using this key.\n"
-#~ "Please try with a key such as Control, Alt or Shift at the same time."
-#~ msgstr ""
-#~ "No es pot fer servir la drecera «%s» perquè no seria possible escriure "
-#~ "amb aquesta tecla.\n"
-#~ "Proveu amb una altra tecla com ara la de Control, l'Alt o de Majúscules a "
-#~ "la vegada."
-
-#~ msgid ""
-#~ "The shortcut \"%s\" is already used for\n"
-#~ "\"%s\""
-#~ msgstr ""
-#~ "Ja s'utilitza la drecera «%s» per a\n"
-#~ "«%s»"
-
-#~ msgid ""
-#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
-#~ "disabled."
-#~ msgstr ""
-#~ "Si torneu a assignar la drecera a «%s», s'inhabilitarà la drecera «%s»."
-
-#~ msgid "_Reassign"
-#~ msgstr "_Torna a assignar"
-
-#~ msgid ""
-#~ "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
-#~ "automatically set it to \"%s\"?"
-#~ msgstr ""
-#~ "La drecera «%s» té la drecera «%s» associada. Voleu canviar-la "
-#~ "automàticament a «%s»?"
-
-#~ msgid ""
-#~ "\"%s\" is currently associated with \"%s\", this shortcut will be "
-#~ "disabled if you move forward."
-#~ msgstr ""
-#~ "La drecera «%s» ja està associada amb «%s», s'inhabilitarà aquesta "
-#~ "drecera si continueu."
-
-#~ msgid "_Assign"
-#~ msgstr "_Assigna"
-
-#~ msgid "Add User Account"
-#~ msgstr "Afegeix un compte d'usuari"
-
-#~ msgid "_Account Activity"
-#~ msgstr "_Activitat del compte"
-
-#~ msgid "Bond"
-#~ msgstr "Enllaç"
-
-#~ msgid "Team"
-#~ msgstr "Equip"
-
-#~ msgid "Bridge"
-#~ msgstr "Pont"
-
-#~ msgid "VLAN"
-#~ msgstr "VLAN"
-
-#~ msgid "Could not load VPN plugins"
-#~ msgstr "No s'han pogut carregar els connectors VPN"
-
-#~ msgid "Add Network Connection"
-#~ msgstr "Afegeix una connexió de xarxa"
-
-#~ msgid "Bond slaves"
-#~ msgstr "Enllaça esclaus"
-
-#~ msgid "(none)"
-#~ msgstr "(cap)"
-
-#~ msgid "Bridge slaves"
-#~ msgstr "Fes un pont als esclaus"
-
-#~ msgid "Team slaves"
-#~ msgstr "Esclaus de l'equip"
-
-#~ msgid "InfiniBand device does not support connected mode"
-#~ msgstr "El dispositiu InfiniBand no admet el mode connectat"
-
-#~ msgid "No Certificate Authority certificate chosen"
-#~ msgstr "No s'ha triat cap certificat d'autoritat de certificació"
-
-#~ msgid ""
-#~ "Not using a Certificate Authority (CA) certificate can result in "
-#~ "connections to insecure, rogue Wi-Fi networks.  Would you like to choose "
-#~ "a Certificate Authority certificate?"
-#~ msgstr ""
-#~ "Si no utilitzeu un certificat d'autoritat de certificació (CA) podeu "
-#~ "acabar connectar-vos a xarxes sense fil dubtoses o insegures. Voleu triar "
-#~ "un certificat d'autoritat de certificació?"
-
-#~ msgid "Ignore"
-#~ msgstr "Ignora"
-
-#~ msgid "Choose CA Certificate"
-#~ msgstr "Trieu el certificat CA"
-
-#~ msgid "As_k for this password every time"
-#~ msgstr "_Sol·licita aquesta contrasenya cada vegada"
-
-#~ msgid "Don't _warn me again"
-#~ msgstr "_No em tornis a avisar"
-
-#~ msgid "No"
-#~ msgstr "No"
-
-#~ msgid "Yes"
-#~ msgstr "Sí"
-
-#~ msgctxt "Search Location"
-#~ msgid "Other"
-#~ msgstr "Altres"
-
-#~ msgid "Personal File Sharing"
-#~ msgstr "Compartició de fitxers personals"
-
-#~ msgid "_Allow Remote Control"
-#~ msgstr "_Permet el control remot"
-
-#~ msgid "_Verify"
-#~ msgstr "_Verifica"
-
-#~ msgid "Login History"
-#~ msgstr "Historial d'entrades"
-
-#~ msgid "A user with the username '%s' already exists."
-#~ msgstr "Ja existeix un usuari amb el nom d'usuari «%s»."
-
-#~ msgid "Used to determine your geographical location"
-#~ msgstr "S'utilitzen per trobar la vostra ubicació geogràfica"
-
-#~ msgid "%d ے %d"
-#~ msgstr "%d ے %d"
-
-#~ msgid "Done"
-#~ msgstr "Fet"
-
-#~ msgid "Time _Zone"
-#~ msgstr "_Fus Horari"
-
-#~ msgid "_Delay:"
-#~ msgstr "_Retard:"
-
-#~ msgctxt "keyboard, delay"
-#~ msgid "Short"
-#~ msgstr "Curt"
-
-#~ msgctxt "keyboard, speed"
-#~ msgid "Slow"
-#~ msgstr "Lenta"
-
-#~ msgctxt "keyboard, delay"
-#~ msgid "Long"
-#~ msgstr "Llarg"
-
-#~ msgctxt "keyboard, speed"
-#~ msgid "Fast"
-#~ msgstr "Ràpida"
-
-#~ msgid "S_peed:"
-#~ msgstr "Ve_locitat:"
-
-#~ msgid "Test Your Settings"
-#~ msgstr "Comprova els paràmetres"
-
-#~ msgctxt "double click, speed"
-#~ msgid "Slow"
-#~ msgstr "Lenta"
-
-#~ msgctxt "double click, speed"
-#~ msgid "Fast"
-#~ msgstr "Ràpida"
-
-#~ msgctxt "mouse, left button as primary"
-#~ msgid "_Left"
-#~ msgstr "_Esquerre"
-
-#~ msgctxt "mouse, right button as primary"
-#~ msgid "_Right"
-#~ msgstr "_Dret"
-
-#~ msgid "_Pointer speed"
-#~ msgstr "Velocitat del _punter"
-
-#~ msgctxt "mouse pointer, speed"
-#~ msgid "Slow"
-#~ msgstr "Lenta"
-
-#~ msgctxt "mouse pointer, speed"
-#~ msgid "Fast"
-#~ msgstr "Ràpida"
-
-#~ msgctxt "touchpad pointer, speed"
-#~ msgid "Slow"
-#~ msgstr "Lenta"
-
-#~ msgctxt "touchpad pointer, speed"
-#~ msgid "Fast"
-#~ msgstr "Ràpida"
-
-#~ msgid "Wireless devices require extra power"
-#~ msgstr "Els dispositius sense fil requereixen més energia"
-
-#~ msgid "No printers available"
-#~ msgstr "No hi ha cap impressora disponible"
-
-#~ msgid "Close"
-#~ msgstr "Tanca"
-
-#~ msgid "Resume Printing"
-#~ msgstr "Continua la impressió"
-
-#~ msgid "Pause Printing"
-#~ msgstr "Fes una pausa a la impressió"
-
-#~ msgctxt "print job"
-#~ msgid "Held"
-#~ msgstr "Retinguda"
-
-#~ msgid "Job Title"
-#~ msgstr "Títol de la tasca"
-
-#~ msgid "Job State"
-#~ msgstr "Estat de la tasca"
-
-#~ msgid "Time"
-#~ msgstr "Hora"
-
-#~ msgid "Add New Printer"
-#~ msgstr "Afegeix una impressora nova"
-
-#~ msgid "Options"
-#~ msgstr "Opcions"
-
-#~ msgid "Password:"
-#~ msgstr "Contrasenya:"
-
-#~ msgid "Zoom"
-#~ msgstr "Amplia"
-
-#~ msgctxt "universal access, contrast"
-#~ msgid "Color"
-#~ msgstr "Color"
-
-#~ msgid "Bluetooth is disabled"
-#~ msgstr "El Bluetooth està inhabilitat"
-
-#~ msgid "Security key"
-#~ msgstr "Clau de seguretat"
-
-#~ msgid "When battery power is _critical"
-#~ msgstr "Quan la càrrega de la bateria sigui _crítica"
-
-#~ msgid "Power off"
-#~ msgstr "Apaga"
-
-#~ msgid ""
-#~ "Bluetooth Sharing allows you to share files with other Bluetooth enabled "
-#~ "devices"
-#~ msgstr ""
-#~ "La compartició Bluetooth us permet compartir fitxers amb altres "
-#~ "dispositius Bluetooth"
-
-#~ msgid "Only Receive From Trusted Devices"
-#~ msgstr "Rep només de dispositius de confiança"
-
-#~ msgid "Save Received Files to Downloads Folder"
-#~ msgstr "Desa els fitxers rebuts a la carpeta de baixades"
-
-#~ msgid "Show help options"
-#~ msgstr "Mostra les opcions d'ajuda"
-
-#~ msgid ""
-#~ "%s\n"
-#~ "Run '%s --help' to see a full list of available command line options.\n"
-#~ msgstr ""
-#~ "%s\n"
-#~ "Executeu «%s --help» per veure una llista completa d'opcions disponibles "
-#~ "a la línia d'ordres.\n"
-
-#~ msgid "United States"
-#~ msgstr "Estats Units"
-
-#~ msgid "Germany"
-#~ msgstr "Alemanya"
-
-#~ msgid "France"
-#~ msgstr "França"
-
-#~ msgid "Spain"
-#~ msgstr "Espanya"
-
-#~ msgid "China"
-#~ msgstr "Xina"
-
-#~ msgid "Disable while _typing"
-#~ msgstr "_Inhabilita mentre s'escriu"
-
-#~ msgid "The system network services are not compatible with this version."
-#~ msgstr ""
-#~ "Els serveis de xarxa del sistema no són compatibles amb aquesta versió."
-
-#~ msgctxt "notifications"
-#~ msgid "Show Popup Banners"
-#~ msgstr "Mostra els bàners emergents"
-
-#~ msgctxt "notifications"
-#~ msgid "View in Lock Screen"
-#~ msgstr "Mostra'ls a la pantalla de bloqueig"
-
-#~ msgid "Show Pop Up Banners"
-#~ msgstr "Mostra els bàners emergents"
-
-#~ msgid "Show in Lock Screen"
-#~ msgstr "Mostra a la pantalla de bloqueig"
-
-#~ msgid "Turns off wireless devices"
-#~ msgstr "Apaga els dispositius sense fil"
-
-#~ msgid "Enter address of a printer or a text to filter results"
-#~ msgstr ""
-#~ "Introduïu l'adreça d'una impressora o un text per filtrar els resultats"
-
-#~ msgid "Sorry"
-#~ msgstr "Ho sentim"
