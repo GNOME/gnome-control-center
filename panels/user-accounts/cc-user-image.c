@@ -22,6 +22,8 @@
 #include <act/act.h>
 #include <sys/stat.h>
 
+#include "user-utils.h"
+
 struct _CcUserImage {
         GtkImage parent_instance;
 
@@ -68,7 +70,8 @@ render_user_icon (ActUser *user,
                   gint     icon_size,
                   gint     scale)
 {
-        GdkPixbuf    *pixbuf;
+        g_autoptr(GdkPixbuf) source_pixbuf = NULL;
+        GdkPixbuf    *pixbuf = NULL;
         gboolean      res;
         GError       *error;
         const gchar  *icon_file;
@@ -82,10 +85,11 @@ render_user_icon (ActUser *user,
         if (icon_file) {
                 res = check_user_file (icon_file, MAX_FILE_SIZE);
                 if (res) {
-                        pixbuf = gdk_pixbuf_new_from_file_at_size (icon_file,
-                                                                   icon_size * scale,
-                                                                   icon_size * scale,
-                                                                   NULL);
+                        source_pixbuf = gdk_pixbuf_new_from_file_at_size (icon_file,
+                                                                          icon_size * scale,
+                                                                          icon_size * scale,
+                                                                          NULL);
+                        pixbuf = round_image (source_pixbuf, icon_size * scale);
                 }
                 else {
                         pixbuf = NULL;
