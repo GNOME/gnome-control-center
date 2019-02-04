@@ -67,46 +67,6 @@ struct _CcAvatarChooser {
 G_DEFINE_TYPE (CcAvatarChooser, cc_avatar_chooser, GTK_TYPE_POPOVER)
 
 static void
-set_user_icon_data (ActUser   *user,
-                    GdkPixbuf *pixbuf)
-{
-        gchar *path;
-        gint fd;
-        GOutputStream *stream;
-        GError *error;
-
-        path = g_build_filename (g_get_tmp_dir (), "gnome-control-center-user-icon-XXXXXX", NULL);
-        fd = g_mkstemp (path);
-
-        if (fd == -1) {
-                g_warning ("failed to create temporary file for image data");
-                g_free (path);
-                return;
-        }
-
-        stream = g_unix_output_stream_new (fd, TRUE);
-
-        error = NULL;
-        if (!gdk_pixbuf_save_to_stream (pixbuf, stream, "png", NULL, &error, NULL)) {
-                g_warning ("failed to save image: %s", error->message);
-                g_error_free (error);
-                g_object_unref (stream);
-                return;
-        }
-
-        g_object_unref (stream);
-
-        act_user_set_icon_file (user, path);
-
-        /* if we ever make the dbus call async, the g_remove call needs
-         * to wait for its completion
-         */
-        g_remove (path);
-
-        g_free (path);
-}
-
-static void
 crop_dialog_response (GtkWidget       *dialog,
                       gint             response_id,
                       CcAvatarChooser *self)

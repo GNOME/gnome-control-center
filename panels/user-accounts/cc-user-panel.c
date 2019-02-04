@@ -354,6 +354,7 @@ static void
 add_user (CcUserPanel *self)
 {
         CcAddUserDialog *dialog;
+        g_autoptr(GdkPixbuf) pixbuf = NULL;
         GtkWindow *toplevel;
         ActUser *user;
 
@@ -364,6 +365,7 @@ add_user (CcUserPanel *self)
         gtk_dialog_run (GTK_DIALOG (dialog));
 
         user = cc_add_user_dialog_get_user (dialog);
+        generate_user_avatar (user);
         if (user != NULL)
                 reload_users (self, user);
 
