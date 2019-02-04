@@ -21,6 +21,7 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#include <act/act.h>
 
 G_BEGIN_DECLS
 
@@ -44,4 +45,5 @@ gboolean is_valid_username                (const gchar *name,
                                            gchar      **tip);
 GdkPixbuf *round_image                    (const gchar *icon_file,
                                            gint         icon_size);
+void       generate_user_avatar           (ActUser *user);
 G_END_DECLS

@@ -475,3 +475,144 @@ round_image (const gchar *icon_file,
 
         return dest;
 }
+
+#define IMAGE_SIZE 512
+
+static gchar *
+extract_initials_from_name (const gchar *name)
+{
+        GString *initials = g_string_new ("");
+        gchar *p;
+        gchar *normalized;
+        gunichar unichar;
+
+        p = g_utf8_strup (name, -1);
+        normalized = g_utf8_normalize (g_strstrip (p), -1, G_NORMALIZE_DEFAULT_COMPOSE);
+        g_clear_pointer (&p, g_free);
+        if (normalized == NULL) {
+                g_free (normalized);
+
+                return NULL;
+        }
+
+        unichar = g_utf8_get_char (normalized);
+        g_string_append_unichar (initials, unichar);
+
+        p = g_utf8_strrchr (normalized, -1, ' ');
+        if (p != NULL && g_utf8_next_char (p) != NULL) {
+                p = g_utf8_next_char (p);
+
+                unichar = g_utf8_get_char (p);
+                g_string_append_unichar (initials, unichar);
+        }
+
+        g_free (normalized);
+
+        return g_string_free (initials, FALSE);
+}
+
+static GdkRGBA
+get_color_for_name (const gchar *name)
+{
+        // https://gitlab.gnome.org/Community/Design/HIG-app-icons/blob/master/GNOME%20HIG.gpl
+        static gdouble gnome_color_palette[][3] = {
+                {  98, 160, 234 },
+                {  53, 132, 228 },
+                {  28, 113, 216 },
+                {  26,  95, 180 },
+                {  87, 227, 137 },
+                {  51, 209, 122 },
+                {  46, 194, 126 },
+                {  38, 162, 105 },
+                { 248, 228,  92 },
+                { 246, 211,  45 },
+                { 245, 194,  17 },
+                { 229, 165,  10 },
+                { 255, 163,  72 },
+                { 255, 120,   0 },
+                { 230,  97,   0 },
+                { 198,  70,   0 },
+                { 237,  51,  59 },
+                { 224,  27,  36 },
+                { 192,  28,  40 },
+                { 165,  29,  45 },
+                { 192,  97, 203 },
+                { 163,  71, 186 },
+                { 129,  61, 156 },
+                {  97,  53, 131 },
+                { 181, 131,  90 },
+                { 152, 106,  68 },
+                { 134,  94,  60 },
+                {  99,  69,  44 }
+        };
+
+        GdkRGBA color = { 255, 255, 255, 1.0 };
+        guint hash;
+        gint number_of_colors;
+        gint idx;
+
+        if (name == NULL || strlen (name) == 0)
+                return color;
+
+        hash = g_str_hash (name);
+        number_of_colors = G_N_ELEMENTS (gnome_color_palette);
+        idx = hash % number_of_colors;
+
+        color.red   = gnome_color_palette[idx][0];
+        color.green = gnome_color_palette[idx][1];
+        color.blue  = gnome_color_palette[idx][2];
+
+        return color;
+}
+
+static cairo_surface_t *
+generate_user_picture (const gchar *name) {
+        PangoFontDescription *font_desc;
+        g_autofree gchar *initials = extract_initials_from_name (name);
+        g_autofree gchar *font = g_strdup_printf ("Sans %d", (int)ceil (IMAGE_SIZE / 2.5));
+        PangoLayout *layout;
+        GdkRGBA color = get_color_for_name (name);
+        cairo_surface_t *surface;
+        gint width, height;
+        cairo_t *cr;
+
+        surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
+                                              IMAGE_SIZE,
+                                              IMAGE_SIZE);
+        cr = cairo_create (surface);
+
+        cairo_arc (cr, IMAGE_SIZE/2, IMAGE_SIZE/2, IMAGE_SIZE/2, 0, 2 * G_PI);
+        cairo_set_source_rgb (cr, color.red/255.0, color.green/255.0, color.blue/255.0);
+        cairo_fill (cr);
+
+        /* Draw the initials on top */
+        cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+        layout = pango_cairo_create_layout (cr);
+        pango_layout_set_text (layout, initials, -1);
+        font_desc = pango_font_description_from_string (font);
+        pango_layout_set_font_description (layout, font_desc);
+        pango_font_description_free (font_desc);
+
+        pango_layout_get_size (layout, &width, &height);
+        cairo_translate (cr, IMAGE_SIZE/2, IMAGE_SIZE/2);
+        cairo_move_to (cr, - ((double)width / PANGO_SCALE)/2, - ((double)height/PANGO_SCALE)/2);
+        pango_cairo_show_layout (cr, layout);
+        cairo_destroy (cr);
+
+        return surface;
+}
+
+void
+generate_user_avatar (ActUser *user)
+{
+        g_autofree gchar *filename = NULL;
+        cairo_surface_t *surface;
+
+        surface = generate_user_picture (act_user_get_real_name (user));
+
+        /* Save into a tmp file that later gets copied by AccountsService */
+        filename = g_build_filename (g_get_user_runtime_dir (), "avatar.png", NULL);
+        cairo_surface_write_to_png (surface, filename);
+
+        act_user_set_icon_file (user, filename);
+}
