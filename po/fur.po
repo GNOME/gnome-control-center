@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-01-30 16:27+0000\n"
-"PO-Revision-Date: 2019-02-02 10:35+0100\n"
+"POT-Creation-Date: 2019-02-04 14:04+0000\n"
+"PO-Revision-Date: 2019-02-04 16:56+0100\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
@@ -73,7 +73,6 @@ msgstr "Dome leture"
 
 #: panels/applications/cc-applications-panel.c:581
 #: panels/applications/cc-applications-panel.c:583
-#| msgid "Open System"
 msgid "File System"
 msgstr "File System"
 
@@ -2139,7 +2138,7 @@ msgstr "Ristabilìs dut"
 msgid "Reset the shortcut to its default value"
 msgstr "Torne met la scurte al so valôr predefinît"
 
-#: panels/keyboard/cc-keyboard-panel.ui:67 panels/region/cc-region-panel.ui:581
+#: panels/keyboard/cc-keyboard-panel.ui:67 panels/region/cc-region-panel.ui:404
 #: shell/cc-window.ui:334
 msgid "Keyboard Shortcuts"
 msgstr "Scurte di tastiere"
@@ -2418,14 +2417,11 @@ msgstr "No configurade"
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
 #: panels/network/cc-wifi-connection-row.c:189
 #, c-format
-#| msgctxt "timezone desc"
-#| msgid "%s (%s)"
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
 #: panels/network/cc-wifi-connection-row.ui:36
-#| msgid "Connecting"
 msgid "Connection/SSID"
 msgstr "Conession/SSID"
 
@@ -5281,7 +5277,6 @@ msgid "Off"
 msgstr "Off"
 
 #: panels/privacy/cc-privacy-panel.c:881
-#| msgid "Off"
 msgctxt "Camera status"
 msgid "Off"
 msgstr "Distudât"
@@ -5712,7 +5707,7 @@ msgstr "Zonte une sorzint input"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Nol è pussibil doprâ i metodis di input te schermade di acès"
 
-#: panels/region/cc-region-panel.c:1537
+#: panels/region/cc-region-panel.c:1505
 msgid "Login _Screen"
 msgstr "_Schermade di acès"
 
@@ -5741,73 +5736,49 @@ msgstr "Sorzints Input"
 msgid "Choose keyboard layouts or input methods."
 msgstr "Sielç lis disposizions di tastiere o i metodis di input."
 
-#: panels/region/cc-region-panel.ui:270
+#: panels/region/cc-region-panel.ui:271
 msgid "No input source selected"
 msgstr "Nissune sorzint input selezionade"
 
-#: panels/region/cc-region-panel.ui:305
-msgid "Add input source"
-msgstr "Zonte sorzint input"
-
-#: panels/region/cc-region-panel.ui:326
-msgid "Remove input source"
-msgstr "Gjave sorzint input"
-
-#: panels/region/cc-region-panel.ui:369
-msgid "Move input source up"
-msgstr "Sposte sorzint input in sù"
-
-#: panels/region/cc-region-panel.ui:390
-msgid "Move input source down"
-msgstr "Sposte sorzint input in jù"
-
-#: panels/region/cc-region-panel.ui:433
-msgid "Configure input source"
-msgstr "Configure sorzint di input"
-
-#: panels/region/cc-region-panel.ui:454
-msgid "Show input source keyboard layout"
-msgstr "Mostre disposizion tastiere de sorzint di input"
-
-#: panels/region/cc-region-panel.ui:480
+#: panels/region/cc-region-panel.ui:303
 msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "Lis impostazions di acès a vegnin dopradis di ducj i utents cuant che a "
 "fasin il login"
 
-#: panels/region/cc-region-panel.ui:524
+#: panels/region/cc-region-panel.ui:347
 msgid "Input Source Options"
 msgstr "Opzions des sorzints di input"
 
-#: panels/region/cc-region-panel.ui:539
+#: panels/region/cc-region-panel.ui:362
 msgid "Use the _same source for all windows"
 msgstr "Dopre la _stesse sorzint par ducj i barcons"
 
-#: panels/region/cc-region-panel.ui:557
+#: panels/region/cc-region-panel.ui:380
 msgid "Allow _different sources for each window"
 msgstr "Permet sorzints _diviersis par ogni barcon"
 
-#: panels/region/cc-region-panel.ui:599
+#: panels/region/cc-region-panel.ui:422
 msgid "Previous source"
 msgstr "Sorzint precedente"
 
-#: panels/region/cc-region-panel.ui:617
+#: panels/region/cc-region-panel.ui:440
 msgid "Super+Shift+Space"
 msgstr "Super+Maiusc+Spazi"
 
-#: panels/region/cc-region-panel.ui:632
+#: panels/region/cc-region-panel.ui:455
 msgid "Next source"
 msgstr "Prossime sorzint"
 
-#: panels/region/cc-region-panel.ui:650
+#: panels/region/cc-region-panel.ui:473
 msgid "Super+Space"
 msgstr "Super+Spazi"
 
-#: panels/region/cc-region-panel.ui:665
+#: panels/region/cc-region-panel.ui:488
 msgid "Left+Right Alt"
 msgstr "Alt diestri + çampe"
 
-#: panels/region/cc-region-panel.ui:681
+#: panels/region/cc-region-panel.ui:504
 msgid "These keyboard shortcuts can be changed in the keyboard settings"
 msgstr ""
 "Chestis scurtis di tastiere a puedin jessi cambiadis intes impostazions de "
@@ -6274,75 +6245,82 @@ msgstr "Subwoofer"
 msgid "Custom"
 msgstr "Personalizât"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:86
-#: panels/thunderbolt/cc-bolt-device-entry.c:119
+#: panels/thunderbolt/cc-bolt-device-dialog.c:94
+#: panels/thunderbolt/cc-bolt-device-entry.c:125
 msgctxt "Thunderbolt Device Status"
 msgid "Disconnected"
 msgstr "Daûr a disconeti"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:89
-#: panels/thunderbolt/cc-bolt-device-entry.c:122
+#: panels/thunderbolt/cc-bolt-device-dialog.c:97
+#: panels/thunderbolt/cc-bolt-device-entry.c:128
 msgctxt "Thunderbolt Device Status"
 msgid "Connecting"
 msgstr "Daûr a coneti"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:92
-#: panels/thunderbolt/cc-bolt-device-entry.c:126
-#: panels/thunderbolt/cc-bolt-device-entry.c:138
+#: panels/thunderbolt/cc-bolt-device-dialog.c:100
+#: panels/thunderbolt/cc-bolt-device-entry.c:132
+#: panels/thunderbolt/cc-bolt-device-entry.c:144
 msgctxt "Thunderbolt Device Status"
 msgid "Connected"
 msgstr "Conetût"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:95
+#: panels/thunderbolt/cc-bolt-device-dialog.c:103
 msgctxt "Thunderbolt Device Status"
 msgid "Authorization Error"
 msgstr "Erôr di autorizazion"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:98
-#: panels/thunderbolt/cc-bolt-device-entry.c:132
+#: panels/thunderbolt/cc-bolt-device-dialog.c:106
+#: panels/thunderbolt/cc-bolt-device-entry.c:138
 msgctxt "Thunderbolt Device Status"
 msgid "Authorizing"
 msgstr "Daûr a autorizâ"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:105
+#: panels/thunderbolt/cc-bolt-device-dialog.c:113
 msgctxt "Thunderbolt Device Status"
 msgid "Reduced Functionality"
 msgstr "Funzionalitât ridote"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:107
+#: panels/thunderbolt/cc-bolt-device-dialog.c:115
 msgctxt "Thunderbolt Device Status"
 msgid "Connected & Authorized"
 msgstr "Conetût e autorizât"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:113
-#: panels/thunderbolt/cc-bolt-device-entry.c:146
+#: panels/thunderbolt/cc-bolt-device-dialog.c:121
+#: panels/thunderbolt/cc-bolt-device-entry.c:152
 msgctxt "Thunderbolt Device Status"
 msgid "Unknown"
 msgstr "No cognossût"
 
 #. Translators: The time point the device was authorized.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:169
+#: panels/thunderbolt/cc-bolt-device-dialog.c:177
 msgid "Authorized at:"
 msgstr "Autorizât aes:"
 
 #. Translators: The time point the device was connected.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:175
+#: panels/thunderbolt/cc-bolt-device-dialog.c:183
 msgid "Connected at:"
 msgstr "Conetût aes:"
 
 #. Translators: The time point the device was enrolled,
 #. * i.e. authorized and stored in the device database.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:182
+#: panels/thunderbolt/cc-bolt-device-dialog.c:190
 msgid "Enrolled at:"
 msgstr "Regjistrât aes:"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:250
+#: panels/thunderbolt/cc-bolt-device-dialog.c:264
 msgid "Failed to authorize device: "
 msgstr "No i è rivâts a autorizâ il dispositîf: "
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:327
+#: panels/thunderbolt/cc-bolt-device-dialog.c:333
 msgid "Failed to forget device: "
 msgstr "No si è rivâts a dismenteâ il dispositîf: "
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:491
+#, c-format
+msgid "Depends on %u other device"
+msgid_plural "Depends on %u other devices"
+msgstr[0] "Al dipent di %u altri dispositîf"
+msgstr[1] "Al dipent di %u altris dispositîfs"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.ui:109
 msgid "Name:"
@@ -6356,32 +6334,32 @@ msgstr "Stât:"
 msgid "UUID:"
 msgstr "UUID:"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:280
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:324
 msgid "Authorize and Connect"
 msgstr "Autorize e conet"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:303
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:347
 msgid "Forget Device"
 msgstr "Dismentee dispositîf"
 
-#: panels/thunderbolt/cc-bolt-device-entry.c:129
+#: panels/thunderbolt/cc-bolt-device-entry.c:135
 msgctxt "Thunderbolt Device Status"
 msgid "Error"
 msgstr "Erôr"
 
-#: panels/thunderbolt/cc-bolt-device-entry.c:140
+#: panels/thunderbolt/cc-bolt-device-entry.c:146
 msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "Autorizât"
 
-#: panels/thunderbolt/cc-bolt-panel.c:175
+#: panels/thunderbolt/cc-bolt-panel.c:176
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr ""
 "Il sot-sisteme Thunderbolt (boltd) nol è instalât o nol è stât configurât in "
 "maniere adate."
 
-#: panels/thunderbolt/cc-bolt-panel.c:468
+#: panels/thunderbolt/cc-bolt-panel.c:469
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -6391,15 +6369,15 @@ msgstr ""
 "O al mancje tal sisteme il supuart par Thunderbolt, o al è stât disabilitât "
 "tal BIOS o al è stât configurât tal BIOS a un nivel di sigurece no supuartât."
 
-#: panels/thunderbolt/cc-bolt-panel.c:512
+#: panels/thunderbolt/cc-bolt-panel.c:513
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "Il supuart a Thunderbolt al è stât disabilitât tal BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:516
+#: panels/thunderbolt/cc-bolt-panel.c:517
 msgid "Thunderbolt security level could not be determined."
 msgstr "Impussibil determinâ il nivel di sigurece di Thunderbolt."
 
-#: panels/thunderbolt/cc-bolt-panel.c:621
+#: panels/thunderbolt/cc-bolt-panel.c:622
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Erôr tal passâ ae modalitât direte: %s"
@@ -8178,6 +8156,24 @@ msgstr[1] "%u jentradis"
 #: subprojects/gvc/gvc-mixer-control.c:2738
 msgid "System Sounds"
 msgstr "Suns di sisteme"
+
+#~ msgid "Add input source"
+#~ msgstr "Zonte sorzint input"
+
+#~ msgid "Remove input source"
+#~ msgstr "Gjave sorzint input"
+
+#~ msgid "Move input source up"
+#~ msgstr "Sposte sorzint input in sù"
+
+#~ msgid "Move input source down"
+#~ msgstr "Sposte sorzint input in jù"
+
+#~ msgid "Configure input source"
+#~ msgstr "Configure sorzint di input"
+
+#~ msgid "Show input source keyboard layout"
+#~ msgstr "Mostre disposizion tastiere de sorzint di input"
 
 #~ msgid "Refresh Rate"
 #~ msgstr "Frecuence di inzornament"
