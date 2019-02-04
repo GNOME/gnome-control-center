@@ -39,6 +39,7 @@
 
 #include "cc-avatar-chooser.h"
 #include "cc-crop-area.h"
+#include "user-utils.h"
 
 #define ROW_SPAN 5
 #define AVATAR_PIXEL_SIZE 80
@@ -397,18 +398,24 @@ static GtkWidget *
 create_face_widget (gpointer item,
                     gpointer user_data)
 {
+        g_autofree gchar *image_path = NULL;
+        GdkPixbuf *pixbuf = NULL;
         GtkWidget *image;
-        GIcon *icon;
 
-        icon = g_file_icon_new (G_FILE (item));
-        image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
+        image_path = g_file_get_path (G_FILE (item));
+
+        pixbuf = round_image (image_path, AVATAR_PIXEL_SIZE);
+        if (pixbuf == NULL)
+                return NULL;
+
+        image = gtk_image_new_from_pixbuf (pixbuf);
+        g_object_unref (pixbuf);
         gtk_image_set_pixel_size (GTK_IMAGE (image), AVATAR_PIXEL_SIZE);
-        g_object_unref (icon);
 
         gtk_widget_show (image);
 
         g_object_set_data (G_OBJECT (image),
-                           "filename", g_file_get_path (G_FILE (item)));
+                           "filename", image_path);
 
         return image;
 }

@@ -42,5 +42,6 @@ gboolean is_username_used                 (const gchar *username);
 gboolean is_valid_name                    (const gchar *name);
 gboolean is_valid_username                (const gchar *name,
                                            gchar      **tip);
-
+GdkPixbuf *round_image                    (const gchar *icon_file,
+                                           gint         icon_size);
 G_END_DECLS

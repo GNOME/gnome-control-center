@@ -22,6 +22,8 @@
 #include <act/act.h>
 #include <sys/stat.h>
 
+#include "user-utils.h"
+
 struct _CcUserImage {
         GtkImage parent_instance;
 
@@ -63,6 +65,7 @@ check_user_file (const char *filename,
         return TRUE;
 }
 
+
 static cairo_surface_t *
 render_user_icon (ActUser *user,
                   gint     icon_size,
@@ -82,10 +85,7 @@ render_user_icon (ActUser *user,
         if (icon_file) {
                 res = check_user_file (icon_file, MAX_FILE_SIZE);
                 if (res) {
-                        pixbuf = gdk_pixbuf_new_from_file_at_size (icon_file,
-                                                                   icon_size * scale,
-                                                                   icon_size * scale,
-                                                                   NULL);
+                        pixbuf = round_image (icon_file, icon_size * scale);
                 }
                 else {
                         pixbuf = NULL;

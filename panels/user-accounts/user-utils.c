@@ -441,3 +441,37 @@ is_valid_username (const gchar *username, gchar **tip)
 
         return valid;
 }
+
+GdkPixbuf *
+round_image (const gchar *icon_file,
+             gint         icon_size)
+{
+        GdkPixbuf *source = NULL;
+        GdkPixbuf *dest = NULL;
+        cairo_surface_t *surface;
+        cairo_t *cr;
+        gint size;
+
+        source = gdk_pixbuf_new_from_file_at_size (icon_file, icon_size, icon_size, NULL);
+        if (source == NULL)
+                return NULL;
+
+        size = gdk_pixbuf_get_width (source);
+        surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, size, size);
+        cr = cairo_create (surface);
+
+        /* Clip a circle */
+        cairo_arc (cr, size/2, size/2, size/2, 0, 2 * G_PI);
+        cairo_clip (cr);
+        cairo_new_path (cr);
+
+        gdk_cairo_set_source_pixbuf (cr, source, 0, 0);
+        g_object_unref (source);
+        cairo_paint (cr);
+
+        dest = gdk_pixbuf_get_from_surface (surface, 0, 0, size, size);
+        cairo_surface_destroy (surface);
+        cairo_destroy (cr);
+
+        return dest;
+}
