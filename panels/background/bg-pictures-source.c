@@ -263,7 +263,7 @@ picture_scaled (GObject *source_object,
                        bg_pictures_source_get_unique_filename (uri),
                        GINT_TO_POINTER (TRUE));
 
-  g_clear_pointer (&surface, (GDestroyNotify) cairo_surface_destroy);
+  g_clear_pointer (&surface, cairo_surface_destroy);
 }
 
 static void
@@ -576,7 +576,7 @@ add_single_file (BgPicturesSource     *bg_source,
         *ret_row_ref = NULL;
     }
   gtk_tree_path_free (path);
-  g_clear_pointer (&surface, (GDestroyNotify) cairo_surface_destroy);
+  g_clear_pointer (&surface, cairo_surface_destroy);
   return retval;
 }
 

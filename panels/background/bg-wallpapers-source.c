@@ -73,7 +73,7 @@ load_wallpapers (gchar              *key,
                       1, item,
                       2, cc_background_item_get_name (item),
                       -1);
-  g_clear_pointer (&surface, (GDestroyNotify) cairo_surface_destroy);
+  g_clear_pointer (&surface, cairo_surface_destroy);
 }
 
 static void
