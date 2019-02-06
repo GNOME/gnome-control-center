@@ -56,7 +56,7 @@ device_set_property (XDevice        *xdevice,
         if (!prop)
                 return FALSE;
 
-        gdk_error_trap_push ();
+        gdk_x11_display_error_trap_push (gdk_display_get_default ());
 
         rc = XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
                                  xdevice, prop, 0, property->nitems, False,
@@ -67,7 +67,7 @@ device_set_property (XDevice        *xdevice,
             realtype != property->type ||
             realformat != property->format ||
             nitems < property->nitems) {
-                gdk_error_trap_pop_ignored ();
+                gdk_x11_display_error_trap_pop_ignored (gdk_display_get_default ());
                 g_warning ("Error reading property \"%s\" for \"%s\"", property->name, device_name);
                 return FALSE;
         }
@@ -89,7 +89,7 @@ device_set_property (XDevice        *xdevice,
 
         XFree (data);
 
-        if (gdk_error_trap_pop ()) {
+        if (gdk_x11_display_error_trap_pop (gdk_display_get_default ())) {
                 g_warning ("Error in setting \"%s\" for \"%s\"", property->name, device_name);
                 return FALSE;
         }
@@ -137,16 +137,16 @@ supports_xinput2_devices (int *opcode)
         if (supports_xinput_devices_with_opcode (opcode) == FALSE)
                 return FALSE;
 
-        gdk_error_trap_push ();
+        gdk_x11_display_error_trap_push (gdk_display_get_default ());
 
         major = 2;
         minor = 3;
 
         if (XIQueryVersion (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &major, &minor) != Success) {
-                gdk_error_trap_pop_ignored ();
+                gdk_x11_display_error_trap_pop_ignored (gdk_display_get_default ());
                     return FALSE;
         }
-        gdk_error_trap_pop_ignored ();
+        gdk_x11_display_error_trap_pop_ignored (gdk_display_get_default ());
 
         if ((major * 1000 + minor) < (2000))
                 return FALSE;
@@ -196,16 +196,16 @@ xdevice_get_device_node (int deviceid)
         if (!prop)
                 return NULL;
 
-        gdk_error_trap_push ();
+        gdk_x11_display_error_trap_push (gdk_display_get_default ());
 
         if (!XIGetProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
                             deviceid, prop, 0, 1000, False,
                             AnyPropertyType, &act_type, &act_format,
                             &nitems, &bytes_after, &data) == Success) {
-                gdk_error_trap_pop_ignored ();
+                gdk_x11_display_error_trap_pop_ignored (gdk_display_get_default ());
                 return NULL;
         }
-        if (gdk_error_trap_pop ())
+        if (gdk_x11_display_error_trap_pop (gdk_display_get_default ()))
                 goto out;
 
         if (nitems == 0)
@@ -269,17 +269,17 @@ xdevice_get_last_tool_id (int  deviceid)
 
         data = NULL;
 
-        gdk_error_trap_push ();
+        gdk_x11_display_error_trap_push (gdk_display_get_default ());
 
         if (XIGetProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
                             deviceid, prop, 0, 1000, False,
                             AnyPropertyType, &act_type, &act_format,
                             &nitems, &bytes_after, &data) != Success) {
-                gdk_error_trap_pop_ignored ();
+                gdk_x11_display_error_trap_pop_ignored (gdk_display_get_default ());
                 goto out;
         }
 
-        if (gdk_error_trap_pop ())
+        if (gdk_x11_display_error_trap_pop (gdk_display_get_default ()))
                 goto out;
 
 	if (nitems != 4 && nitems != 5)
@@ -326,13 +326,13 @@ set_device_enabled (int device_id,
         if (!prop)
                 return FALSE;
 
-        gdk_error_trap_push ();
+        gdk_x11_display_error_trap_push (gdk_display_get_default ());
 
         value = enabled ? 1 : 0;
         XIChangeProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
                           device_id, prop, XA_INTEGER, 8, PropModeReplace, &value, 1);
 
-        if (gdk_error_trap_pop ())
+        if (gdk_x11_display_error_trap_pop (gdk_display_get_default ()))
                 return FALSE;
 
         return TRUE;
@@ -348,7 +348,7 @@ xdevice_get_wacom_tool_type (int deviceid)
         int realformat, rc;
         const gchar *ret = NULL;
 
-        gdk_error_trap_push ();
+        gdk_x11_display_error_trap_push (gdk_display_get_default ());
 
         display = gdk_display_get_default ();
         prop = gdk_x11_get_xatom_by_name ("Wacom Tool Type");
@@ -358,7 +358,7 @@ xdevice_get_wacom_tool_type (int deviceid)
                             XA_ATOM, &realtype, &realformat, &nitems,
                             &bytes_after, &data);
 
-        gdk_error_trap_pop_ignored ();
+        gdk_x11_display_error_trap_pop_ignored (gdk_display_get_default ());
 
         if (rc != Success || nitems == 0)
                 return NULL;
@@ -376,9 +376,9 @@ xdevice_get_wacom_tool_type (int deviceid)
 void
 xdevice_close (XDevice *xdevice)
 {
-    gdk_error_trap_push ();
+    gdk_x11_display_error_trap_push (gdk_display_get_default ());
     XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), xdevice);
-    gdk_error_trap_pop_ignored();
+    gdk_x11_display_error_trap_pop_ignored (gdk_display_get_default ());
 }
 
 gboolean
@@ -391,12 +391,12 @@ xdevice_get_dimensions (int    deviceid,
         guint *value, w, h;
         int i, n_info;
 
-        gdk_error_trap_push ();
+        gdk_x11_display_error_trap_push (gdk_display_get_default ());
 
         info = XIQueryDevice (GDK_DISPLAY_XDISPLAY (display), deviceid, &n_info);
         *width = *height = w = h = 0;
 
-        if (gdk_error_trap_pop ())
+        if (gdk_x11_display_error_trap_pop (gdk_display_get_default ()))
                 return FALSE;
 
         if (!info)
