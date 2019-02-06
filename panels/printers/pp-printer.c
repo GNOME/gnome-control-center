@@ -299,8 +299,6 @@ get_jobs_thread (GTask        *task,
   ipp_t            *job_response;
   ipp_t            *printer_request;
   ipp_t            *printer_response;
-  gchar            *job_uri;
-  gchar            *printer_uri;
   gchar           **auth_info_required = NULL;
   g_autofree gchar *printer_name = NULL;
   GList            *list = NULL;
