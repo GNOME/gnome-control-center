@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-01-17 21:48+0000\n"
-"PO-Revision-Date: 2019-01-18 08:46+0100\n"
+"POT-Creation-Date: 2019-02-04 14:04+0000\n"
+"PO-Revision-Date: 2019-02-06 10:34+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 3.30.1\n"
+"X-Generator: Gtranslator 3.31.90\n"
 
 #: panels/applications/cc-applications-panel.c:558
 msgid "System Bus"
@@ -49,7 +49,7 @@ msgstr "Bus de sesión"
 #: panels/applications/cc-applications-panel.c:565
 #: panels/power/cc-power-panel.c:2528 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
-#: shell/cc-window.c:283
+#: shell/cc-window.c:268
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -88,8 +88,8 @@ msgid "File System"
 msgstr "Sistema de achivos"
 
 #: panels/applications/cc-applications-panel.c:588
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:287
-#: shell/cc-window.c:927 shell/cc-window.ui:123
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:272
+#: shell/cc-window.c:930 shell/cc-window.ui:131
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Configuración"
@@ -260,7 +260,7 @@ msgstr "Características del sistema usadas por esta aplicación"
 #: panels/applications/cc-applications-panel.ui:230
 #: panels/applications/cc-applications-panel.ui:236
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:153
+#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:161
 msgid "Search"
 msgstr "Buscar"
 
@@ -337,7 +337,6 @@ msgstr "Controlar la configuración y los permisos de varias aplicaciones"
 #. FIXME
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: panels/applications/gnome-applications-panel.desktop.in.in:8
-#| msgid "application-x-executable-symbolic"
 msgid "application-x-executable"
 msgstr "application-x-executable"
 
@@ -423,14 +422,14 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 #: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/cc-color-panel.ui:657 panels/color/color-calibrate.ui:25
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:2061
-#: panels/network/connection-editor/connection-editor.ui:15
+#: panels/display/cc-display-panel.c:880
+#: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
 #: panels/network/net-device-wifi.c:1200 panels/network/net-device-wifi.c:1280
 #: panels/network/net-device-wifi.c:1474 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:330
+#: panels/printers/pp-details-dialog.c:320
 #: panels/privacy/cc-privacy-panel.c:1123 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:607
@@ -528,7 +527,7 @@ msgstr "Apagar el modo avión"
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
 #: panels/network/cc-network-panel.ui:101
-#: panels/printers/pp-new-printer-dialog.c:1805
+#: panels/printers/pp-new-printer-dialog.c:1705
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -678,7 +677,7 @@ msgid "Show color profiles for %s"
 msgstr "Mostrar perfiles de color para %s"
 
 #. not calibrated
-#: panels/color/cc-color-device.c:301
+#: panels/color/cc-color-device.c:303
 msgid "Not calibrated"
 msgstr "Sin calibrar"
 
@@ -924,7 +923,7 @@ msgid "_Import File…"
 msgstr "_Importar archivo…"
 
 #: panels/color/cc-color-panel.ui:672
-#: panels/network/connection-editor/net-connection-editor.c:517
+#: panels/network/connection-editor/net-connection-editor.c:497
 #: panels/printers/new-printer-dialog.ui:80
 #: panels/region/cc-input-chooser.ui:20
 #: panels/user-accounts/cc-add-user-dialog.ui:47
@@ -939,141 +938,141 @@ msgstr ""
 "Se han encontrado problemas. El perfil puede no funciona correctamente. <a "
 "href=\"\">Mostrar detalles.</a>"
 
-#: panels/color/cc-color-panel.ui:811
+#: panels/color/cc-color-panel.ui:790
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr ""
 "Cada dispositivo necesita un perfil de color actualizado para poder "
 "gestionar el color."
 
-#: panels/color/cc-color-panel.ui:833
+#: panels/color/cc-color-panel.ui:812
 msgid "Learn more"
 msgstr "Aprender más"
 
-#: panels/color/cc-color-panel.ui:838
+#: panels/color/cc-color-panel.ui:817
 msgid "Learn more about color management"
 msgstr "Aprenda más acerca de la gestión de color"
 
-#: panels/color/cc-color-panel.ui:886
+#: panels/color/cc-color-panel.ui:865
 msgid "_Set for all users"
 msgstr "_Establecer para todos los usuarios"
 
-#: panels/color/cc-color-panel.ui:890 panels/color/cc-color-panel.ui:905
-#: panels/color/cc-color-panel.ui:906
+#: panels/color/cc-color-panel.ui:869 panels/color/cc-color-panel.ui:884
+#: panels/color/cc-color-panel.ui:885
 msgid "Set this profile for all users on this computer"
 msgstr "Establecer este perfil para todos los usuarios de este equipo"
 
-#: panels/color/cc-color-panel.ui:901
+#: panels/color/cc-color-panel.ui:880
 msgid "_Enable"
 msgstr "_Activar"
 
-#: panels/color/cc-color-panel.ui:932
+#: panels/color/cc-color-panel.ui:911
 msgid "_Add profile"
 msgstr "_Añadir perfil"
 
-#: panels/color/cc-color-panel.ui:945
+#: panels/color/cc-color-panel.ui:924
 msgid "_Calibrate…"
 msgstr "_Calibrar…"
 
-#: panels/color/cc-color-panel.ui:949
+#: panels/color/cc-color-panel.ui:928
 msgid "Calibrate the device"
 msgstr "Calibrar el dispositivo"
 
-#: panels/color/cc-color-panel.ui:960
+#: panels/color/cc-color-panel.ui:939
 msgid "_Remove profile"
 msgstr "_Quitar perfil"
 
-#: panels/color/cc-color-panel.ui:973
+#: panels/color/cc-color-panel.ui:952
 msgid "_View details"
 msgstr "_Ver detalles"
 
-#: panels/color/cc-color-panel.ui:1009
+#: panels/color/cc-color-panel.ui:988
 msgid "Unable to detect any devices that can be color managed"
 msgstr "No se han detectado dispositivos que se puedan gestionar por color"
 
-#: panels/color/cc-color-panel.ui:1053
+#: panels/color/cc-color-panel.ui:1032
 msgid "LCD"
 msgstr "LCD"
 
-#: panels/color/cc-color-panel.ui:1058
+#: panels/color/cc-color-panel.ui:1037
 msgid "LED"
 msgstr "LED"
 
-#: panels/color/cc-color-panel.ui:1063
+#: panels/color/cc-color-panel.ui:1042
 msgid "CRT"
 msgstr "CRT"
 
-#: panels/color/cc-color-panel.ui:1068
+#: panels/color/cc-color-panel.ui:1047
 msgid "Projector"
 msgstr "Proyector"
 
-#: panels/color/cc-color-panel.ui:1073
+#: panels/color/cc-color-panel.ui:1052
 msgid "Plasma"
 msgstr "Plasma"
 
-#: panels/color/cc-color-panel.ui:1078
+#: panels/color/cc-color-panel.ui:1057
 msgid "LCD (CCFL backlight)"
 msgstr "LCD (CCFL retroiluminado)"
 
-#: panels/color/cc-color-panel.ui:1083
+#: panels/color/cc-color-panel.ui:1062
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD (RGB LED retroiluminado)"
 
-#: panels/color/cc-color-panel.ui:1088
+#: panels/color/cc-color-panel.ui:1067
 msgid "LCD (white LED backlight)"
 msgstr "LCD (LED blanco retroiluminado)"
 
-#: panels/color/cc-color-panel.ui:1093
+#: panels/color/cc-color-panel.ui:1072
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "Gama LCD amplio (CCFL retroiluminado)"
 
-#: panels/color/cc-color-panel.ui:1098
+#: panels/color/cc-color-panel.ui:1077
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "Gama LCD amplio (RGB LED retroiluminado)"
 
-#: panels/color/cc-color-panel.ui:1115
+#: panels/color/cc-color-panel.ui:1094
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Alta"
 
-#: panels/color/cc-color-panel.ui:1116
+#: panels/color/cc-color-panel.ui:1095
 msgid "40 minutes"
 msgstr "40 minutos"
 
-#: panels/color/cc-color-panel.ui:1120
+#: panels/color/cc-color-panel.ui:1099
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Media"
 
-#: panels/color/cc-color-panel.ui:1121
+#: panels/color/cc-color-panel.ui:1100
 msgid "30 minutes"
 msgstr "30 minutos"
 
-#: panels/color/cc-color-panel.ui:1125
+#: panels/color/cc-color-panel.ui:1104
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Baja"
 
-#: panels/color/cc-color-panel.ui:1126
+#: panels/color/cc-color-panel.ui:1105
 msgid "15 minutes"
 msgstr "15 minutos"
 
-#: panels/color/cc-color-panel.ui:1148
+#: panels/color/cc-color-panel.ui:1127
 msgid "Native to display"
 msgstr "Nativo de la pantalla"
 
-#: panels/color/cc-color-panel.ui:1152
+#: panels/color/cc-color-panel.ui:1131
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (Impresiones y publicaciones)"
 
-#: panels/color/cc-color-panel.ui:1156
+#: panels/color/cc-color-panel.ui:1135
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/cc-color-panel.ui:1160
+#: panels/color/cc-color-panel.ui:1139
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (Fotografía y gráficos)"
 
-#: panels/color/cc-color-panel.ui:1164
+#: panels/color/cc-color-panel.ui:1143
 msgid "D75"
 msgstr "D75"
 
@@ -1379,39 +1378,39 @@ msgstr "Zona horaria"
 msgid "Search for a city"
 msgstr "Buscar una ciudad"
 
-#: panels/datetime/cc-datetime-panel.ui:322
+#: panels/datetime/cc-datetime-panel.ui:313
 msgid "Automatic _Date & Time"
 msgstr "Fecha y _hora automáticas"
 
-#: panels/datetime/cc-datetime-panel.ui:337
+#: panels/datetime/cc-datetime-panel.ui:314
 msgid "Requires internet access"
 msgstr "Requiere conexión a Internet"
 
-#: panels/datetime/cc-datetime-panel.ui:400
+#: panels/datetime/cc-datetime-panel.ui:334
 msgid "Automatic Time _Zone"
 msgstr "_Zona horaria automática"
 
-#: panels/datetime/cc-datetime-panel.ui:415
+#: panels/datetime/cc-datetime-panel.ui:335
 msgid "Requires location services enabled and internet access"
 msgstr "Requiere activar los servicios de ubicación y el acceso a Internet"
 
-#: panels/datetime/cc-datetime-panel.ui:472
+#: panels/datetime/cc-datetime-panel.ui:350
 msgid "Date & _Time"
 msgstr "Fecha y _hora"
 
-#: panels/datetime/cc-datetime-panel.ui:520
+#: panels/datetime/cc-datetime-panel.ui:366
 msgid "Time Z_one"
 msgstr "Z_ona horaria"
 
-#: panels/datetime/cc-datetime-panel.ui:590
+#: panels/datetime/cc-datetime-panel.ui:405
 msgid "Time _Format"
 msgstr "Formato de _fecha"
 
-#: panels/datetime/cc-datetime-panel.ui:609
+#: panels/datetime/cc-datetime-panel.ui:414
 msgid "24-hour"
 msgstr "24 horas"
 
-#: panels/datetime/cc-datetime-panel.ui:610
+#: panels/datetime/cc-datetime-panel.ui:415
 msgid "AM / PM"
 msgstr "AM / PM"
 
@@ -1438,106 +1437,26 @@ msgid "To change time or date settings, you need to authenticate."
 msgstr ""
 "Para cambiar la configuración de la fecha o de la hora, debe autenticarse."
 
-#: panels/display/cc-display-panel.c:535
-msgctxt "Display rotation"
-msgid "Landscape"
-msgstr "Horizontal"
-
-#: panels/display/cc-display-panel.c:538
-msgctxt "Display rotation"
-msgid "Portrait Right"
-msgstr "Vertical derecha"
-
-#: panels/display/cc-display-panel.c:541
-msgctxt "Display rotation"
-msgid "Portrait Left"
-msgstr "Vertical izquierda"
-
-#: panels/display/cc-display-panel.c:544
-msgctxt "Display rotation"
-msgid "Landscape (flipped)"
-msgstr "Horizontal (dada la vuelta)"
-
-#. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/display/cc-display-panel.c:617
-#: panels/printers/pp-options-dialog.c:560
-msgid "Orientation"
-msgstr "Orientación"
-
-#: panels/display/cc-display-panel.c:712 panels/display/cc-display-panel.c:1545
-#: panels/printers/pp-options-dialog.c:87
-msgid "Resolution"
-msgstr "Resolución"
-
-#: panels/display/cc-display-panel.c:806
-msgid "Refresh Rate"
-msgstr "Tasa de refresco"
-
-#: panels/display/cc-display-panel.c:950
-msgid "Scale"
-msgstr "Escala"
-
-#: panels/display/cc-display-panel.c:1001
-msgid "Adjust for TV"
-msgstr "Ajustes para TV"
-
-#: panels/display/cc-display-panel.c:1258
-msgid "Primary Display"
-msgstr "Pantalla primaria"
-
-#: panels/display/cc-display-panel.c:1292
-msgid "Display Arrangement"
-msgstr "Distribución de las pantallas"
-
-#: panels/display/cc-display-panel.c:1293
-msgid ""
-"Drag displays to match your setup. The top bar is placed on the primary "
-"display."
-msgstr ""
-"Arrastre las pantallas para que coincidan con su configuración. La barra "
-"superior se mostrará en la pantalla primaria."
-
-#: panels/display/cc-display-panel.c:1747
-msgid "Display Mode"
-msgstr "Modo de la pantalla"
-
-#: panels/display/cc-display-panel.c:1768
-msgid "Join Displays"
-msgstr "Unir pantallas"
-
-#: panels/display/cc-display-panel.c:1771
-msgid "Mirror"
-msgstr "Espejo"
-
-#: panels/display/cc-display-panel.c:1774
-msgid "Single Display"
-msgstr "Pantalla única"
-
-#: panels/display/cc-display-panel.c:2072
-#: panels/network/connection-editor/connection-editor.ui:24
+#: panels/display/cc-display-panel.c:891
+#: panels/network/connection-editor/connection-editor.ui:27
 #: panels/network/network-wifi.ui:38
 msgid "_Apply"
 msgstr "_Aplicar"
 
-#: panels/display/cc-display-panel.c:2093
+#: panels/display/cc-display-panel.c:912
 msgid "Apply Changes?"
 msgstr "¿Aplicar los cambios?"
 
-#: panels/display/cc-display-panel.c:2098
+#: panels/display/cc-display-panel.c:917
 msgid "Changes Cannot be Applied"
 msgstr "No se pueden aplicar los cambios"
 
-#: panels/display/cc-display-panel.c:2099
+#: panels/display/cc-display-panel.c:918
 msgid "This could be due to hardware limitations."
 msgstr "Esto puede deber a limitaciones hardware."
 
-#: panels/display/cc-display-panel.c:2230
-#, c-format
-msgid "%.2lf Hz"
-msgstr "%.2lf Hz"
-
 #. TRANSLATORS: the state of the night light setting
-#: panels/display/cc-display-panel.c:2402
+#: panels/display/cc-display-panel.c:1091
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2111 panels/power/cc-power-panel.c:2118
 #: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:279
@@ -1549,7 +1468,7 @@ msgstr "%.2lf Hz"
 msgid "On"
 msgstr "Encendido"
 
-#: panels/display/cc-display-panel.c:2402 panels/network/net-proxy.c:54
+#: panels/display/cc-display-panel.c:1091 panels/network/net-proxy.c:54
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2105 panels/power/cc-power-panel.c:2116
 #: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:279
@@ -1569,13 +1488,68 @@ msgstr "Encendido"
 msgid "Off"
 msgstr "Apagado"
 
-#: panels/display/cc-display-panel.c:2423
-msgid "_Night Light"
-msgstr "Luz _nocturna"
+#: panels/display/cc-display-panel.ui:81
+msgid "Single Display"
+msgstr "Pantalla única"
 
-#: panels/display/cc-display-panel.c:2488
-msgid "Could not get screen information"
-msgstr "No se pudo obtener la información de la pantalla"
+#: panels/display/cc-display-panel.ui:100
+#: panels/display/cc-display-panel.ui:329
+msgid "Join Displays"
+msgstr "Unir pantallas"
+
+#: panels/display/cc-display-panel.ui:118
+msgid "Mirror"
+msgstr "Espejo"
+
+#: panels/display/cc-display-panel.ui:143
+msgid "Display Mode"
+msgstr "Modo de la pantalla"
+
+#: panels/display/cc-display-panel.ui:201
+#| msgid "Drag displays to rearrange them"
+msgid "Drag displays to match your setup."
+msgstr "Arrastre las pantallas que coincidan con su configuración."
+
+#: panels/display/cc-display-panel.ui:266
+msgid "Display Arrangement"
+msgstr "Distribución de las pantallas"
+
+#: panels/display/cc-display-panel.ui:447
+#| msgid "Display Calibration"
+msgid "Display Configuration"
+msgstr "Configuración de la pantalla"
+
+#. This is the redshift functionality where we suppress blue light when the sun has gone down
+#: panels/display/cc-display-panel.ui:474
+#: panels/display/cc-display-panel.ui:492
+#: panels/display/cc-night-light-dialog.ui:505
+msgid "Night Light"
+msgstr "Luz nocturna"
+
+#: panels/display/cc-display-settings.c:103
+msgctxt "Display rotation"
+msgid "Landscape"
+msgstr "Horizontal"
+
+#: panels/display/cc-display-settings.c:106
+msgctxt "Display rotation"
+msgid "Portrait Right"
+msgstr "Vertical derecha"
+
+#: panels/display/cc-display-settings.c:109
+msgctxt "Display rotation"
+msgid "Portrait Left"
+msgstr "Vertical izquierda"
+
+#: panels/display/cc-display-settings.c:112
+msgctxt "Display rotation"
+msgid "Landscape (flipped)"
+msgstr "Horizontal (dada la vuelta)"
+
+#: panels/display/cc-display-settings.c:186
+#, c-format
+msgid "%.2lf Hz"
+msgstr "%.2lf Hz"
 
 #. This cancels the redshift inhibit.
 #: panels/display/cc-night-light-dialog.ui:46
@@ -1644,11 +1618,6 @@ msgstr "Hasta"
 #: panels/display/cc-night-light-dialog.ui:470
 msgid "Color Temperature"
 msgstr "Temperatura del color"
-
-#. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-night-light-dialog.ui:505
-msgid "Night Light"
-msgstr "Luz nocturna"
 
 #: panels/display/gnome-display-panel.desktop.in.in:3
 msgid "Displays"
@@ -1729,45 +1698,45 @@ msgstr "32 bits"
 msgid "Version %s"
 msgstr "Versión %s"
 
-#: panels/info/cc-info-overview-panel.ui:58
+#: panels/info/cc-info-overview-panel.ui:70
 msgid "Device name"
 msgstr "Nombre del dispositivo"
 
-#: panels/info/cc-info-overview-panel.ui:74
+#: panels/info/cc-info-overview-panel.ui:86
 msgid "Memory"
 msgstr "Memoria"
 
-#: panels/info/cc-info-overview-panel.ui:90
+#: panels/info/cc-info-overview-panel.ui:102
 msgid "Processor"
 msgstr "Procesador"
 
-#: panels/info/cc-info-overview-panel.ui:106
+#: panels/info/cc-info-overview-panel.ui:118
 msgid "Graphics"
 msgstr "Gráficos"
 
 #. To translators: this field contains the distro name and version
-#: panels/info/cc-info-overview-panel.ui:121
+#: panels/info/cc-info-overview-panel.ui:133
 msgid "OS name"
 msgstr "Nombre del SO"
 
 #. To translators: this field contains the distro type
-#: panels/info/cc-info-overview-panel.ui:137
+#: panels/info/cc-info-overview-panel.ui:149
 msgid "OS type"
 msgstr "Tipo de SO"
 
-#: panels/info/cc-info-overview-panel.ui:153
+#: panels/info/cc-info-overview-panel.ui:165
 msgid "Virtualization"
 msgstr "Virtualización"
 
-#: panels/info/cc-info-overview-panel.ui:169
+#: panels/info/cc-info-overview-panel.ui:181
 msgid "Disk"
 msgstr "Disco"
 
-#: panels/info/cc-info-overview-panel.ui:274
+#: panels/info/cc-info-overview-panel.ui:293
 msgid "Calculating…"
 msgstr "Calculando…"
 
-#: panels/info/cc-info-overview-panel.ui:314
+#: panels/info/cc-info-overview-panel.ui:333
 msgid "Check for updates"
 msgstr "Comprobar si hay actualizaciones"
 
@@ -2184,8 +2153,8 @@ msgstr "Restablecer todo"
 msgid "Reset the shortcut to its default value"
 msgstr "Restablecer el valor predeterminado del atajo"
 
-#: panels/keyboard/cc-keyboard-panel.ui:67 panels/region/cc-region-panel.ui:581
-#: shell/cc-window.ui:255
+#: panels/keyboard/cc-keyboard-panel.ui:67 panels/region/cc-region-panel.ui:404
+#: shell/cc-window.ui:334
 msgid "Keyboard Shortcuts"
 msgstr "Combinaciones de teclas"
 
@@ -2355,19 +2324,19 @@ msgid "Mouse Speed"
 msgstr "Velocidad del ratón"
 
 #: panels/mouse/gnome-mouse-properties.ui:243
-#: panels/mouse/gnome-mouse-properties.ui:548
+#: panels/mouse/gnome-mouse-properties.ui:535
 msgid "Double-click timeout"
 msgstr "Tiempo de espera de la pulsación doble"
 
 #. Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
 #: panels/mouse/gnome-mouse-properties.ui:280
-#: panels/mouse/gnome-mouse-properties.ui:456
+#: panels/mouse/gnome-mouse-properties.ui:443
 msgid "Natural Scrolling"
 msgstr "Desplazamiento natural"
 
 #: panels/mouse/gnome-mouse-properties.ui:296
-#: panels/mouse/gnome-mouse-properties.ui:472
+#: panels/mouse/gnome-mouse-properties.ui:459
 msgid "Scrolling moves the content, not the view."
 msgstr "El desplazamiento mueve la vista, no el contenido."
 
@@ -2376,19 +2345,19 @@ msgstr "El desplazamiento mueve la vista, no el contenido."
 msgid "Touchpad"
 msgstr "Touchpad"
 
-#: panels/mouse/gnome-mouse-properties.ui:527
+#: panels/mouse/gnome-mouse-properties.ui:514
 msgid "Touchpad Speed"
 msgstr "Velocidad del «touchpad»"
 
-#: panels/mouse/gnome-mouse-properties.ui:586
+#: panels/mouse/gnome-mouse-properties.ui:573
 msgid "Tap to Click"
 msgstr "Tocar para pulsar"
 
-#: panels/mouse/gnome-mouse-properties.ui:638
+#: panels/mouse/gnome-mouse-properties.ui:625
 msgid "Two-finger Scrolling"
 msgstr "Desplazamiento con dos dedos"
 
-#: panels/mouse/gnome-mouse-properties.ui:691
+#: panels/mouse/gnome-mouse-properties.ui:678
 msgid "Edge Scrolling"
 msgstr "Desplazamiento en el borde"
 
@@ -2435,7 +2404,7 @@ msgstr "Proxy de la red"
 #. * vpn connections in the device list.
 #.
 #: panels/network/cc-network-panel.c:719 panels/network/net-vpn.c:167
-#: panels/network/net-vpn.c:296
+#: panels/network/net-vpn.c:295
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
@@ -2449,7 +2418,7 @@ msgid "NetworkManager needs to be running."
 msgstr "NetworkManager debe estar en ejecución."
 
 #: panels/network/cc-network-panel.ui:142
-#: panels/network/connection-editor/net-connection-editor.c:601
+#: panels/network/connection-editor/net-connection-editor.c:581
 msgid "VPN"
 msgstr "VPN"
 
@@ -2469,7 +2438,7 @@ msgid "Connection/SSID"
 msgstr "Conexión/SSID"
 
 #: panels/network/cc-wifi-connection-row.ui:73
-#: panels/network/net-device-ethernet.c:360
+#: panels/network/net-device-ethernet.c:359
 #: panels/network/network-ethernet.ui:120 panels/network/network-mobile.ui:394
 #: panels/network/network-simple.ui:75 panels/network/network-vpn.ui:79
 msgid "Options…"
@@ -2651,7 +2620,7 @@ msgstr "Quitar VPN"
 
 #: panels/network/connection-editor/ce-page-details.c:332
 #: panels/network/network-wifi.ui:1433 shell/cc-panel-list.ui:103
-#: shell/cc-window.c:279
+#: shell/cc-window.c:264
 msgid "Details"
 msgstr "Detalles"
 
@@ -2935,19 +2904,19 @@ msgstr "Automático, DHCP únicamente"
 msgid "Prefix"
 msgstr "Prefijo"
 
-#: panels/network/connection-editor/net-connection-editor.c:273
+#: panels/network/connection-editor/net-connection-editor.c:261
 msgid "Unable to open connection editor"
 msgstr "No se pudo abrir el editor de conexiones"
 
-#: panels/network/connection-editor/net-connection-editor.c:291
+#: panels/network/connection-editor/net-connection-editor.c:279
 msgid "New Profile"
 msgstr "Perfil nuevo"
 
-#: panels/network/connection-editor/net-connection-editor.c:749
+#: panels/network/connection-editor/net-connection-editor.c:727
 msgid "Import from file…"
 msgstr "Importar desde un archivo…"
 
-#: panels/network/connection-editor/net-connection-editor.c:783
+#: panels/network/connection-editor/net-connection-editor.c:759
 msgid "Add VPN"
 msgstr "Añadir VPN"
 
@@ -2978,7 +2947,7 @@ msgid "Select file to import"
 msgstr "Seleccione el archivo que importar"
 
 #: panels/network/connection-editor/vpn-helpers.c:182
-#: panels/printers/pp-details-dialog.c:331
+#: panels/printers/pp-details-dialog.c:321
 #: panels/sharing/cc-sharing-panel.c:428
 #: panels/user-accounts/cc-avatar-chooser.c:273
 msgid "_Open"
@@ -3093,7 +3062,7 @@ msgstr "Usada última vez"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: panels/network/net-device-ethernet.c:292
+#: panels/network/net-device-ethernet.c:291
 #: panels/network/network-ethernet.ui:19 panels/network/network-simple.ui:39
 msgid "Wired"
 msgstr "Cableada"
@@ -3159,12 +3128,12 @@ msgstr ""
 msgid "_Forget"
 msgstr "_Olvidar"
 
-#: panels/network/net-device-wifi.c:1647 panels/network/net-device-wifi.c:1654
+#: panels/network/net-device-wifi.c:1638 panels/network/net-device-wifi.c:1645
 msgid "Known Wi-Fi Networks"
 msgstr "Redes inalámbricas conocidas"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1691
+#: panels/network/net-device-wifi.c:1682
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Olvidar"
@@ -4662,18 +4631,18 @@ msgid "Authentication Required"
 msgstr "Se requiere autenticación"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:805
+#: panels/printers/cc-printers-panel.c:715
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Se ha eliminado la impresora «%s»"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:1052
+#: panels/printers/cc-printers-panel.c:941
 msgid "Failed to add new printer."
 msgstr "Falló al añadir una impresora nueva."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1389
+#: panels/printers/cc-printers-panel.c:1253
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No se pudo cargar la IU: %s"
@@ -4751,8 +4720,8 @@ msgstr "No hay trabajos de impresión activos"
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:382
-#: panels/printers/pp-new-printer-dialog.c:454
+#: panels/printers/pp-new-printer-dialog.c:363
+#: panels/printers/pp-new-printer-dialog.c:428
 msgid "Add Printer"
 msgstr "Añadir impresora"
 
@@ -4786,21 +4755,21 @@ msgid "Test Page"
 msgstr "Página de prueba"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: panels/printers/pp-details-dialog.c:134
-#: panels/printers/pp-details-dialog.c:434
+#: panels/printers/pp-details-dialog.c:133
+#: panels/printers/pp-details-dialog.c:426
 #, c-format
 msgid "%s Details"
 msgstr "Detalles de %s"
 
-#: panels/printers/pp-details-dialog.c:183
+#: panels/printers/pp-details-dialog.c:182
 msgid "No suitable driver found"
 msgstr "No se ha encontrado ningún controlador adecuado"
 
-#: panels/printers/pp-details-dialog.c:327
+#: panels/printers/pp-details-dialog.c:317
 msgid "Select PPD File"
 msgstr "Seleccionar archivo PPD"
 
-#: panels/printers/pp-details-dialog.c:336
+#: panels/printers/pp-details-dialog.c:326
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4822,50 +4791,50 @@ msgid "Loading drivers database…"
 msgstr "Cargando base de datos de controladores…"
 
 #. Translators: The found device is a JetDirect printer
-#: panels/printers/pp-host.c:476
+#: panels/printers/pp-host.c:472
 msgid "JetDirect Printer"
 msgstr "Impresora JetDirect"
 
 #. Translators: The found device is a Line Printer Daemon printer
-#: panels/printers/pp-host.c:711
+#: panels/printers/pp-host.c:707
 msgid "LPD Printer"
 msgstr "Impresora LPD"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:66
-#: panels/printers/pp-ppd-option-widget.c:70
+#: panels/printers/pp-ipp-option-widget.c:65
+#: panels/printers/pp-ppd-option-widget.c:69
 msgid "One Sided"
 msgstr "Una cara"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:68
-#: panels/printers/pp-ppd-option-widget.c:72
+#: panels/printers/pp-ipp-option-widget.c:67
+#: panels/printers/pp-ppd-option-widget.c:71
 msgid "Long Edge (Standard)"
 msgstr "Margen largo (estándar)"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:70
-#: panels/printers/pp-ppd-option-widget.c:74
+#: panels/printers/pp-ipp-option-widget.c:69
+#: panels/printers/pp-ppd-option-widget.c:73
 msgid "Short Edge (Flip)"
 msgstr "Margen corto (girar)"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:72
+#: panels/printers/pp-ipp-option-widget.c:71
 msgid "Portrait"
 msgstr "Vertical"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:74
+#: panels/printers/pp-ipp-option-widget.c:73
 msgid "Landscape"
 msgstr "Apaisado"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:76
+#: panels/printers/pp-ipp-option-widget.c:75
 msgid "Reverse landscape"
 msgstr "Apaisado invertido"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:78
+#: panels/printers/pp-ipp-option-widget.c:77
 msgid "Reverse portrait"
 msgstr "Vertical invertido"
 
@@ -4938,57 +4907,57 @@ msgstr "%s - trabajos activos"
 msgid "Enter credentials to print from %s."
 msgstr "Introduzca las credenciales para imprimir desde %s."
 
-#: panels/printers/pp-new-printer-dialog.c:400
+#: panels/printers/pp-new-printer-dialog.c:378
 msgid "Unlock Print Server"
 msgstr "Desbloquear servidor de impresión"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:404
+#: panels/printers/pp-new-printer-dialog.c:382
 #, c-format
 msgid "Unlock %s."
 msgstr "Desbloquear %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:409
+#: panels/printers/pp-new-printer-dialog.c:387
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Introduzca su nombre de usuario y su contraseña para ver las impresoras en "
 "%s."
 
-#: panels/printers/pp-new-printer-dialog.c:891
+#: panels/printers/pp-new-printer-dialog.c:842
 msgid "Searching for Printers"
 msgstr "Buscando impresoras"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1788
+#: panels/printers/pp-new-printer-dialog.c:1688
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1793
+#: panels/printers/pp-new-printer-dialog.c:1693
 msgid "Serial Port"
 msgstr "Puerto serie"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1800
+#: panels/printers/pp-new-printer-dialog.c:1700
 msgid "Parallel Port"
 msgstr "Puerto paralelo"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1842
+#: panels/printers/pp-new-printer-dialog.c:1741
 #, c-format
 msgid "Location: %s"
 msgstr "Ubicación: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1847
+#: panels/printers/pp-new-printer-dialog.c:1746
 #, c-format
 msgid "Address: %s"
 msgstr "Dirección: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1876
+#: panels/printers/pp-new-printer-dialog.c:1775
 msgid "Server requires authentication"
 msgstr "El servidor requiere autenticación"
 
@@ -5008,6 +4977,10 @@ msgstr "Fuente de papel"
 msgid "Output Tray"
 msgstr "Bandeja de salida"
 
+#: panels/printers/pp-options-dialog.c:87
+msgid "Resolution"
+msgstr "Resolución"
+
 #: panels/printers/pp-options-dialog.c:88
 msgid "GhostScript pre-filtering"
 msgstr "Prefiltrado GhostScript"
@@ -5021,6 +4994,11 @@ msgstr "Páginas por cara"
 #: panels/printers/pp-options-dialog.c:548
 msgid "Two-sided"
 msgstr "Dos caras"
+
+#. Translators: This option sets orientation of print (portrait, landscape...)
+#: panels/printers/pp-options-dialog.c:560
+msgid "Orientation"
+msgstr "Orientación"
 
 #. Translators: "General" tab contains general printer options
 #: panels/printers/pp-options-dialog.c:657
@@ -5076,38 +5054,38 @@ msgid "Test page"
 msgstr "Página de prueba"
 
 #. Translators: this is an option of "Paper Source"
-#: panels/printers/pp-ppd-option-widget.c:76
-#: panels/printers/pp-ppd-option-widget.c:78
-#: panels/printers/pp-ppd-option-widget.c:86
+#: panels/printers/pp-ppd-option-widget.c:75
+#: panels/printers/pp-ppd-option-widget.c:77
+#: panels/printers/pp-ppd-option-widget.c:85
 msgid "Auto Select"
 msgstr "Seleccionar automáticamente"
 
 #. Translators: this is an option of "Paper Source"
 #. Translators: this is an option of "Resolution"
-#: panels/printers/pp-ppd-option-widget.c:80
-#: panels/printers/pp-ppd-option-widget.c:82
-#: panels/printers/pp-ppd-option-widget.c:84
-#: panels/printers/pp-ppd-option-widget.c:88
+#: panels/printers/pp-ppd-option-widget.c:79
+#: panels/printers/pp-ppd-option-widget.c:81
+#: panels/printers/pp-ppd-option-widget.c:83
+#: panels/printers/pp-ppd-option-widget.c:87
 msgid "Printer Default"
 msgstr "Impresora predeterminada"
 
 #. Translators: this is an option of "GhostScript"
-#: panels/printers/pp-ppd-option-widget.c:90
+#: panels/printers/pp-ppd-option-widget.c:89
 msgid "Embed GhostScript fonts only"
 msgstr "Sólo empotrar tipografías GhostScript"
 
 #. Translators: this is an option of "GhostScript"
-#: panels/printers/pp-ppd-option-widget.c:92
+#: panels/printers/pp-ppd-option-widget.c:91
 msgid "Convert to PS level 1"
 msgstr "Convertir a PS nivel 1"
 
 #. Translators: this is an option of "GhostScript"
-#: panels/printers/pp-ppd-option-widget.c:94
+#: panels/printers/pp-ppd-option-widget.c:93
 msgid "Convert to PS level 2"
 msgstr "Convertir a PS nivel 2"
 
 #. Translators: this is an option of "GhostScript"
-#: panels/printers/pp-ppd-option-widget.c:96
+#: panels/printers/pp-ppd-option-widget.c:95
 msgid "No pre-filtering"
 msgstr "Sin prefiltrado"
 
@@ -5130,111 +5108,111 @@ msgstr[0] "%u trabajo"
 msgstr[1] "%u trabajos"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:777
+#: panels/printers/pp-printer-entry.c:775
 msgid "Low on toner"
 msgstr "Tóner bajo"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:779
+#: panels/printers/pp-printer-entry.c:777
 msgid "Out of toner"
 msgstr "Sin tóner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:782
+#: panels/printers/pp-printer-entry.c:780
 msgid "Low on developer"
 msgstr "Nivel de revelador bajo"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:785
+#: panels/printers/pp-printer-entry.c:783
 msgid "Out of developer"
 msgstr "Sin revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:787
+#: panels/printers/pp-printer-entry.c:785
 msgid "Low on a marker supply"
 msgstr "Marcador bajo"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:789
+#: panels/printers/pp-printer-entry.c:787
 msgid "Out of a marker supply"
 msgstr "Sin marcador"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:791
+#: panels/printers/pp-printer-entry.c:789
 msgid "Open cover"
 msgstr "Abrir cubierta"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:793
+#: panels/printers/pp-printer-entry.c:791
 msgid "Open door"
 msgstr "Abrir puerta"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:795
+#: panels/printers/pp-printer-entry.c:793
 msgid "Low on paper"
 msgstr "Nivel de papel bajo"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:797
+#: panels/printers/pp-printer-entry.c:795
 msgid "Out of paper"
 msgstr "Sin papel"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:799
+#: panels/printers/pp-printer-entry.c:797
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Desconectada"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:801
-#: panels/printers/pp-printer-entry.c:929
+#: panels/printers/pp-printer-entry.c:799
+#: panels/printers/pp-printer-entry.c:927
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Detenida"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:803
+#: panels/printers/pp-printer-entry.c:801
 msgid "Waste receptacle almost full"
 msgstr "Recipiente de residuos casi lleno"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:805
+#: panels/printers/pp-printer-entry.c:803
 msgid "Waste receptacle full"
 msgstr "Receptáculo de residuos lleno"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:807
+#: panels/printers/pp-printer-entry.c:805
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor óptico está cerca del final de su vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:809
+#: panels/printers/pp-printer-entry.c:807
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor óptico ya no funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:915
+#: panels/printers/pp-printer-entry.c:913
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Preparada"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:920
+#: panels/printers/pp-printer-entry.c:918
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "No aceptar trabajos"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:925
+#: panels/printers/pp-printer-entry.c:923
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:949
+#: panels/printers/pp-printer-entry.c:947
 msgid "Clean print heads"
 msgstr "Limpiar cabezales de la impresora"
 
@@ -5749,7 +5727,7 @@ msgid "Input methods can’t be used on the login screen"
 msgstr ""
 "Los métodos de entrada no se pueden usar en la pantalla de inicio de sesión"
 
-#: panels/region/cc-region-panel.c:1537
+#: panels/region/cc-region-panel.c:1505
 msgid "Login _Screen"
 msgstr "Pantalla de inicio de _sesión"
 
@@ -5778,73 +5756,49 @@ msgstr "Fuente de entrada"
 msgid "Choose keyboard layouts or input methods."
 msgstr "Elija la distribución del teclado o los métodos de entrada."
 
-#: panels/region/cc-region-panel.ui:270
+#: panels/region/cc-region-panel.ui:271
 msgid "No input source selected"
 msgstr "No se ha seleccionado ninguna fuente de entrada"
 
-#: panels/region/cc-region-panel.ui:305
-msgid "Add input source"
-msgstr "Añadir fuente de entrada"
-
-#: panels/region/cc-region-panel.ui:326
-msgid "Remove input source"
-msgstr "Quitar fuente de entrada"
-
-#: panels/region/cc-region-panel.ui:369
-msgid "Move input source up"
-msgstr "Subir la fuente de entrada"
-
-#: panels/region/cc-region-panel.ui:390
-msgid "Move input source down"
-msgstr "Bajar la fuente de entrada"
-
-#: panels/region/cc-region-panel.ui:433
-msgid "Configure input source"
-msgstr "Configurar fuente de entrada"
-
-#: panels/region/cc-region-panel.ui:454
-msgid "Show input source keyboard layout"
-msgstr "Mostrar la distribución del teclado de la fuente de entrada"
-
-#: panels/region/cc-region-panel.ui:480
+#: panels/region/cc-region-panel.ui:303
 msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "La configuración de inicio de sesión la usan todos los usuarios cuando "
 "inician sesión en el sistema"
 
-#: panels/region/cc-region-panel.ui:524
+#: panels/region/cc-region-panel.ui:347
 msgid "Input Source Options"
 msgstr "Opciones de las fuente de entrada"
 
-#: panels/region/cc-region-panel.ui:539
+#: panels/region/cc-region-panel.ui:362
 msgid "Use the _same source for all windows"
 msgstr "Usar la _misma fuente para todas las ventanas"
 
-#: panels/region/cc-region-panel.ui:557
+#: panels/region/cc-region-panel.ui:380
 msgid "Allow _different sources for each window"
 msgstr "Permitir _diferentes fuentes para cada ventana"
 
-#: panels/region/cc-region-panel.ui:599
+#: panels/region/cc-region-panel.ui:422
 msgid "Previous source"
 msgstr "Fuente anterior"
 
-#: panels/region/cc-region-panel.ui:617
+#: panels/region/cc-region-panel.ui:440
 msgid "Super+Shift+Space"
 msgstr "Súper+Mayús+Espacio"
 
-#: panels/region/cc-region-panel.ui:632
+#: panels/region/cc-region-panel.ui:455
 msgid "Next source"
 msgstr "Siguiente fuente"
 
-#: panels/region/cc-region-panel.ui:650
+#: panels/region/cc-region-panel.ui:473
 msgid "Super+Space"
 msgstr "Súper+Espacio"
 
-#: panels/region/cc-region-panel.ui:665
+#: panels/region/cc-region-panel.ui:488
 msgid "Left+Right Alt"
 msgstr "Izquierda+Alt derecha"
 
-#: panels/region/cc-region-panel.ui:681
+#: panels/region/cc-region-panel.ui:504
 msgid "These keyboard shortcuts can be changed in the keyboard settings"
 msgstr "Puede cambiar estos atajos en la configuración del teclado"
 
@@ -6313,75 +6267,82 @@ msgstr "Subwoofer"
 msgid "Custom"
 msgstr "Personalizado"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:86
-#: panels/thunderbolt/cc-bolt-device-entry.c:119
+#: panels/thunderbolt/cc-bolt-device-dialog.c:94
+#: panels/thunderbolt/cc-bolt-device-entry.c:125
 msgctxt "Thunderbolt Device Status"
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:89
-#: panels/thunderbolt/cc-bolt-device-entry.c:122
+#: panels/thunderbolt/cc-bolt-device-dialog.c:97
+#: panels/thunderbolt/cc-bolt-device-entry.c:128
 msgctxt "Thunderbolt Device Status"
 msgid "Connecting"
 msgstr "Conectando"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:92
-#: panels/thunderbolt/cc-bolt-device-entry.c:126
-#: panels/thunderbolt/cc-bolt-device-entry.c:138
+#: panels/thunderbolt/cc-bolt-device-dialog.c:100
+#: panels/thunderbolt/cc-bolt-device-entry.c:132
+#: panels/thunderbolt/cc-bolt-device-entry.c:144
 msgctxt "Thunderbolt Device Status"
 msgid "Connected"
 msgstr "Conectado"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:95
+#: panels/thunderbolt/cc-bolt-device-dialog.c:103
 msgctxt "Thunderbolt Device Status"
 msgid "Authorization Error"
 msgstr "Error de autorización"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:98
-#: panels/thunderbolt/cc-bolt-device-entry.c:132
+#: panels/thunderbolt/cc-bolt-device-dialog.c:106
+#: panels/thunderbolt/cc-bolt-device-entry.c:138
 msgctxt "Thunderbolt Device Status"
 msgid "Authorizing"
 msgstr "Autorizando"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:105
+#: panels/thunderbolt/cc-bolt-device-dialog.c:113
 msgctxt "Thunderbolt Device Status"
 msgid "Reduced Functionality"
 msgstr "Funcionalidad reducida"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:107
+#: panels/thunderbolt/cc-bolt-device-dialog.c:115
 msgctxt "Thunderbolt Device Status"
 msgid "Connected & Authorized"
 msgstr "Conectado y autorizado"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:113
-#: panels/thunderbolt/cc-bolt-device-entry.c:146
+#: panels/thunderbolt/cc-bolt-device-dialog.c:121
+#: panels/thunderbolt/cc-bolt-device-entry.c:152
 msgctxt "Thunderbolt Device Status"
 msgid "Unknown"
 msgstr "Desconocido"
 
 #. Translators: The time point the device was authorized.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:169
+#: panels/thunderbolt/cc-bolt-device-dialog.c:177
 msgid "Authorized at:"
 msgstr "Autorizado a las:"
 
 #. Translators: The time point the device was connected.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:175
+#: panels/thunderbolt/cc-bolt-device-dialog.c:183
 msgid "Connected at:"
 msgstr "Conectado a las:"
 
 #. Translators: The time point the device was enrolled,
 #. * i.e. authorized and stored in the device database.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:182
+#: panels/thunderbolt/cc-bolt-device-dialog.c:190
 msgid "Enrolled at:"
 msgstr "Unido a las:"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:250
+#: panels/thunderbolt/cc-bolt-device-dialog.c:264
 msgid "Failed to authorize device: "
 msgstr "Falló al autorizar el dispositivo: "
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:327
+#: panels/thunderbolt/cc-bolt-device-dialog.c:333
 msgid "Failed to forget device: "
 msgstr "Falló al olvidar el dispositivo: "
+
+#: panels/thunderbolt/cc-bolt-device-dialog.c:491
+#, c-format
+msgid "Depends on %u other device"
+msgid_plural "Depends on %u other devices"
+msgstr[0] "Depende de %u otro dispositivo"
+msgstr[1] "Depende de %u otros dispositivos"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.ui:109
 msgid "Name:"
@@ -6395,32 +6356,32 @@ msgstr "Estado:"
 msgid "UUID:"
 msgstr "UUID:"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:280
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:324
 msgid "Authorize and Connect"
 msgstr "Autorizar y conectar"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:303
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:347
 msgid "Forget Device"
 msgstr "Olvidar dispositivo"
 
-#: panels/thunderbolt/cc-bolt-device-entry.c:129
+#: panels/thunderbolt/cc-bolt-device-entry.c:135
 msgctxt "Thunderbolt Device Status"
 msgid "Error"
 msgstr "Error"
 
-#: panels/thunderbolt/cc-bolt-device-entry.c:140
+#: panels/thunderbolt/cc-bolt-device-entry.c:146
 msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "Autorizado"
 
-#: panels/thunderbolt/cc-bolt-panel.c:175
+#: panels/thunderbolt/cc-bolt-panel.c:176
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr ""
 "El subsistema de Thunderbolt (boltd) no está instalado o no se ha "
 "configurado correctamente."
 
-#: panels/thunderbolt/cc-bolt-panel.c:460
+#: panels/thunderbolt/cc-bolt-panel.c:469
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -6430,11 +6391,16 @@ msgstr ""
 "El sistema carece de soporte para Thunderbolt, se ha desactivado en la BIOS "
 "o se ha configurado con un nivel de seguridad no soportado en la BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:504
+#: panels/thunderbolt/cc-bolt-panel.c:513
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "El soporte de Thunderbolt se ha desactivado en la BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:613
+#: panels/thunderbolt/cc-bolt-panel.c:517
+#| msgid "The profile could not be generated."
+msgid "Thunderbolt security level could not be determined."
+msgstr "No se puede determinar el nivel de seguridad de Thunderbolt."
+
+#: panels/thunderbolt/cc-bolt-panel.c:622
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Error al cambiar al modo directo: %s"
@@ -8014,7 +7980,7 @@ msgstr "Pulsación del botón derecho del ratón"
 msgid "Right Mouse Button Click"
 msgstr "Pulsación del botón del medio del ratón"
 
-#: panels/wacom/wacom-stylus-page.ui:37
+#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:242
 msgid "Back"
 msgstr "Atrás"
 
@@ -8059,12 +8025,10 @@ msgid "Tip Pressure Feel"
 msgstr "Sensibilidad de presión del lápiz"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
-#| msgid "- Settings"
 msgid "GNOME Settings"
 msgstr "Configuración de GNOME"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:8
-#| msgid "Utilities to configure the GNOME desktop"
 msgid "Utility to configure the GNOME desktop"
 msgstr "Utilidad para configurar el escritorio GNOME"
 
@@ -8108,19 +8072,19 @@ msgstr "No se han encontrado resultados"
 msgid "Available panels:"
 msgstr "Paneles disponibles:"
 
-#: shell/cc-window.ui:138
+#: shell/cc-window.ui:146
 msgid "All Settings"
 msgstr "Todas las configuraciones"
 
-#: shell/cc-window.ui:176
+#: shell/cc-window.ui:184
 msgid "Primary Menu"
 msgstr "Menú primario"
 
-#: shell/cc-window.ui:247
+#: shell/cc-window.ui:326
 msgid "Warning: Development Version"
 msgstr "Advertencia: versión de desarrollo"
 
-#: shell/cc-window.ui:248
+#: shell/cc-window.ui:327
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -8130,7 +8094,7 @@ msgstr ""
 "Puede experimentar un comportamiento incorrecto del sistema, pérdida de "
 "datos y otros problemas inesperados."
 
-#: shell/cc-window.ui:259
+#: shell/cc-window.ui:338
 msgid "Help"
 msgstr "Ayuda"
 
@@ -8219,6 +8183,49 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2738
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
+
+#~ msgid "Refresh Rate"
+#~ msgstr "Tasa de refresco"
+
+#~ msgid "Scale"
+#~ msgstr "Escala"
+
+#~ msgid "Adjust for TV"
+#~ msgstr "Ajustes para TV"
+
+#~ msgid "Primary Display"
+#~ msgstr "Pantalla primaria"
+
+#~ msgid ""
+#~ "Drag displays to match your setup. The top bar is placed on the primary "
+#~ "display."
+#~ msgstr ""
+#~ "Arrastre las pantallas para que coincidan con su configuración. La barra "
+#~ "superior se mostrará en la pantalla primaria."
+
+#~ msgid "_Night Light"
+#~ msgstr "Luz _nocturna"
+
+#~ msgid "Could not get screen information"
+#~ msgstr "No se pudo obtener la información de la pantalla"
+
+#~ msgid "Add input source"
+#~ msgstr "Añadir fuente de entrada"
+
+#~ msgid "Remove input source"
+#~ msgstr "Quitar fuente de entrada"
+
+#~ msgid "Move input source up"
+#~ msgstr "Subir la fuente de entrada"
+
+#~ msgid "Move input source down"
+#~ msgstr "Bajar la fuente de entrada"
+
+#~ msgid "Configure input source"
+#~ msgstr "Configurar fuente de entrada"
+
+#~ msgid "Show input source keyboard layout"
+#~ msgstr "Mostrar la distribución del teclado de la fuente de entrada"
 
 #~ msgid "GNOME Control Center"
 #~ msgstr "Centro de control de GNOME"
@@ -8567,9 +8574,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Arrange Combined Displays"
 #~ msgstr "Ordenar las pantallas combinadas"
-
-#~ msgid "Drag displays to rearrange them"
-#~ msgstr "Arrastrar las pantallas para reordenarlas"
 
 #~ msgid "%d Hz (NTSC)"
 #~ msgstr "%d Hz (NTSC)"
