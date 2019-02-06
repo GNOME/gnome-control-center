@@ -350,7 +350,7 @@ ipp_option_add (IPPAttribute *attr_supported,
       position = grid_get_height (grid);
 
       label = gtk_label_new (option_display_name);
-      gtk_label_set_mnemonic_widget (label, widget);
+      gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
       context = gtk_widget_get_style_context (label);
       gtk_style_context_add_class (context, "dim-label");
       gtk_widget_set_halign (label, GTK_ALIGN_END);
@@ -383,7 +383,7 @@ ppd_option_add (ppd_option_t  option,
       position = grid_get_height (grid);
 
       label = gtk_label_new (ppd_option_name_translate (&option));
-      gtk_label_set_mnemonic_widget (label, widget);
+      gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
       context = gtk_widget_get_style_context (label);
       gtk_style_context_add_class (context, "dim-label");
       gtk_widget_set_halign (label, GTK_ALIGN_END);
