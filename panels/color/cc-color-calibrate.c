@@ -990,7 +990,7 @@ cc_color_calibrate_finalize (GObject *object)
 {
   CcColorCalibrate *calibrate = CC_COLOR_CALIBRATE (object);
 
-  g_clear_pointer (&calibrate->window, gtk_widget_destroy);
+  g_clear_pointer ((GtkWidget **)&calibrate->window, gtk_widget_destroy);
   g_clear_object (&calibrate->builder);
   g_clear_object (&calibrate->device);
   g_clear_object (&calibrate->proxy_helper);
