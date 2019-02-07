@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-02-06 11:36+0000\n"
-"PO-Revision-Date: 2019-02-06 15:10+0100\n"
+"POT-Creation-Date: 2019-02-07 08:04+0000\n"
+"PO-Revision-Date: 2019-02-07 10:24+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -131,12 +131,10 @@ msgid "Unset"
 msgstr "Nepoužívat"
 
 #: panels/applications/cc-applications-panel.c:850
-#| msgid "Link speed"
 msgid "Links"
 msgstr "Odkazy"
 
 #: panels/applications/cc-applications-panel.c:858
-#| msgid "_Delete Files"
 msgid "Hypertext Files"
 msgstr "Soubory s hypertextem"
 
@@ -177,7 +175,7 @@ msgstr "Ostatní soubory"
 #: panels/applications/cc-applications-panel.ui:406
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
 #: panels/notifications/cc-notifications-panel.ui:167
-#: panels/privacy/cc-privacy-panel.ui:1085 panels/sound/gvc-mixer-dialog.c:1796
+#: panels/privacy/cc-privacy-panel.ui:1085
 msgid "Applications"
 msgstr "Aplikace"
 
@@ -223,7 +221,7 @@ msgstr "Kamera"
 #: panels/keyboard/shortcut-editor.ui:96 panels/network/network-proxy.ui:123
 #: panels/network/network-wifi.ui:781 panels/network/network-wifi.ui:1058
 #: panels/user-accounts/um-fingerprint-dialog.c:211
-#: subprojects/gvc/gvc-mixer-control.c:1866
+#: subprojects/gvc/gvc-mixer-control.c:1864
 msgid "Disabled"
 msgstr "Vypnuto"
 
@@ -290,8 +288,6 @@ msgid "Types of files and links that this application opens."
 msgstr "Typy souborů a odkazů, které tato aplikace otevírá."
 
 #: panels/applications/cc-applications-panel.ui:315
-#| msgctxt "tab"
-#| msgid "Reset"
 msgid "Reset"
 msgstr "Výchozí"
 
@@ -442,11 +438,11 @@ msgstr "Můžete obrázky přidat do své složky %s a potom se zde objeví"
 #: panels/search/cc-search-locations-dialog.c:607
 #: panels/sharing/cc-sharing-panel.c:427
 #: panels/user-accounts/cc-add-user-dialog.ui:28
-#: panels/user-accounts/cc-avatar-chooser.c:144
-#: panels/user-accounts/cc-avatar-chooser.c:272
+#: panels/user-accounts/cc-avatar-chooser.c:105
+#: panels/user-accounts/cc-avatar-chooser.c:233
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:636
-#: panels/user-accounts/cc-user-panel.c:654
+#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:656
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/user-accounts/um-fingerprint-dialog.c:261
 msgid "_Cancel"
@@ -2231,8 +2227,6 @@ msgstr ""
 "zkratku."
 
 #: panels/keyboard/shortcut-editor.ui:156 panels/printers/details-dialog.ui:38
-#: panels/sound/gvc-mixer-dialog.c:1480
-#: panels/sound/gvc-sound-theme-chooser.c:554
 msgid "Name"
 msgstr "Název"
 
@@ -2312,10 +2306,12 @@ msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "Nastavuje pořadí fyzických tlačítek myši a touchpadu."
 
 #: panels/mouse/gnome-mouse-properties.ui:136
+#: panels/sound/cc-balance-slider.ui:13
 msgid "Left"
 msgstr "Levé"
 
 #: panels/mouse/gnome-mouse-properties.ui:146
+#: panels/sound/cc-balance-slider.ui:15
 msgid "Right"
 msgstr "Pravé"
 
@@ -2957,7 +2953,7 @@ msgstr "Vybrat soubor pro import"
 #: panels/network/connection-editor/vpn-helpers.c:182
 #: panels/printers/pp-details-dialog.c:314
 #: panels/sharing/cc-sharing-panel.c:428
-#: panels/user-accounts/cc-avatar-chooser.c:273
+#: panels/user-accounts/cc-avatar-chooser.c:234
 msgid "_Open"
 msgstr "_Otevřít"
 
@@ -4798,7 +4794,7 @@ msgid "Select Printer Driver"
 msgstr "Vyberte ovladač tiskárny"
 
 #: panels/printers/ppd-selection-dialog.ui:40
-#: panels/user-accounts/cc-avatar-chooser.c:146
+#: panels/user-accounts/cc-avatar-chooser.c:107
 msgid "Select"
 msgstr "Vybrat"
 
@@ -5748,7 +5744,7 @@ msgid "Login _Screen"
 msgstr "Při_hlašovací obrazovka"
 
 #: panels/region/cc-region-panel.ui:60
-#: panels/user-accounts/cc-user-panel.ui:358
+#: panels/user-accounts/cc-user-panel.ui:361
 msgid "_Language"
 msgstr "Jazy_k"
 
@@ -6074,212 +6070,119 @@ msgstr ""
 "Pro povolení nebo zakázání vzdáleného přihlášení je vyžadováno ověření "
 "totožnosti"
 
-#: panels/sound/data/gnome-sound-panel.desktop.in.in:3
-msgid "Sound"
-msgstr "Zvuk"
+#: panels/sound/cc-alert-chooser.c:151
+msgid "Custom"
+msgstr "Vlastní"
 
-#: panels/sound/data/gnome-sound-panel.desktop.in.in:4
-msgid "Change sound levels, inputs, outputs, and alert sounds"
-msgstr "Změnit hlasitost zvuku, vstupy, výstupy a upozornění"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/sound/data/gnome-sound-panel.desktop.in.in:7
-msgid "multimedia-volume-control"
-msgstr "multimedia-volume-control"
-
-#. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/sound/data/gnome-sound-panel.desktop.in.in:20
-msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
-msgstr ""
-"karta;mikrofon;hlasitost;prolínání;vyvážení;bluetooth;náhlavní souprava;"
-"audio;"
-
-#. Translators: This is the name of an audio file that sounds like the bark of a dog.
-#. You might want to translate it into the equivalent words of your language.
-#: panels/sound/data/sounds/gnome-sounds-default.xml.in.in:6
+#: panels/sound/cc-alert-chooser.ui:12 panels/sound/cc-alert-selector.ui:9
 msgid "Bark"
 msgstr "Štěknutí"
 
-#. Translators: This is the name of an audio file that sounds like a water drip.
-#. You might want to translate it into the equivalent words of your language.
-#: panels/sound/data/sounds/gnome-sounds-default.xml.in.in:12
+#: panels/sound/cc-alert-chooser.ui:19 panels/sound/cc-alert-selector.ui:15
 msgid "Drip"
 msgstr "Žbluňknutí"
 
-#. Translators: This is the name of an audio file that sounds like tapping glass.
-#. You might want to translate it into the equivalent words of your language.
-#: panels/sound/data/sounds/gnome-sounds-default.xml.in.in:18
+#: panels/sound/cc-alert-chooser.ui:26 panels/sound/cc-alert-selector.ui:21
 msgid "Glass"
 msgstr "Cinknutí"
 
-#. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
-#. You might want to translate it into the equivalent words of your language.
-#: panels/sound/data/sounds/gnome-sounds-default.xml.in.in:24
+#: panels/sound/cc-alert-chooser.ui:33 panels/sound/cc-alert-selector.ui:27
 msgid "Sonar"
 msgstr "Sonar"
 
-#: panels/sound/gvc-balance-bar.c:106
-msgctxt "balance"
-msgid "Left"
-msgstr "Levý"
-
-#: panels/sound/gvc-balance-bar.c:107
-msgctxt "balance"
-msgid "Right"
-msgstr "Pravý"
-
-#: panels/sound/gvc-balance-bar.c:110
-msgctxt "balance"
+#: panels/sound/cc-fade-slider.ui:13
 msgid "Rear"
 msgstr "Zadní"
 
-#: panels/sound/gvc-balance-bar.c:111
-msgctxt "balance"
+#: panels/sound/cc-fade-slider.ui:15
 msgid "Front"
 msgstr "Přední"
 
-#: panels/sound/gvc-balance-bar.c:114
-msgctxt "balance"
-msgid "Minimum"
-msgstr "Minimum"
+#: panels/sound/cc-output-test-dialog.c:134
+#, c-format
+msgid "Testing %s"
+msgstr "Testuje se %s"
 
-#: panels/sound/gvc-balance-bar.c:115
-msgctxt "balance"
-msgid "Maximum"
-msgstr "Maximum"
+#: panels/sound/cc-output-test-dialog.ui:127
+msgid "Click a speaker to test"
+msgstr "Kliknutím na reproduktor jej otestujete"
 
-#: panels/sound/gvc-balance-bar.c:291
-msgid "_Balance:"
-msgstr "_Vyvážení:"
+#: panels/sound/cc-sound-panel.ui:30
+msgid "System Volume"
+msgstr "Systémová hlasitost"
 
-#: panels/sound/gvc-balance-bar.c:294
-msgid "_Fade:"
-msgstr "_Prolínání:"
+#: panels/sound/cc-sound-panel.ui:46
+msgid "Volume Levels"
+msgstr "Úrovně hlasitosti"
 
-#: panels/sound/gvc-balance-bar.c:297
-msgid "_Subwoofer:"
-msgstr "_Subwoofer:"
+#: panels/sound/cc-sound-panel.ui:68
+msgid "Output"
+msgstr "Výstup"
 
-#: panels/sound/gvc-channel-bar.c:614 panels/sound/gvc-channel-bar.c:623
+#: panels/sound/cc-sound-panel.ui:94
+msgid "Output Device"
+msgstr "Výstupní zařízení"
+
+#: panels/sound/cc-sound-panel.ui:117
+msgid "Test"
+msgstr "Testovat"
+
+#: panels/sound/cc-sound-panel.ui:147 panels/sound/cc-sound-panel.ui:319
+msgid "Configuration"
+msgstr "Nastavení"
+
+#: panels/sound/cc-sound-panel.ui:179
+msgid "Balance"
+msgstr "Vyvážení"
+
+#: panels/sound/cc-sound-panel.ui:205
+msgid "Fade"
+msgstr "Prolínání"
+
+#: panels/sound/cc-sound-panel.ui:231
+msgid "Subwoofer"
+msgstr "Subwoofer"
+
+#: panels/sound/cc-sound-panel.ui:253
+msgid "Input"
+msgstr "Vstup"
+
+#: panels/sound/cc-sound-panel.ui:279
+msgid "Input Device"
+msgstr "Vstupní zařízení"
+
+#: panels/sound/cc-sound-panel.ui:351
+msgid "Volume"
+msgstr "Hlasitost"
+
+#: panels/sound/cc-sound-panel.ui:373
+msgid "Alert Sound"
+msgstr "Zvuk upozornění"
+
+#: panels/sound/cc-volume-slider.c:178
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: panels/sound/gvc-channel-bar.c:618
-msgctxt "volume"
-msgid "Unamplified"
-msgstr "Nezesíleno"
+#: panels/sound/gnome-sound-panel.desktop.in.in:3
+msgid "Sound"
+msgstr "Zvuk"
 
-#: panels/sound/gvc-combo-box.c:166 panels/sound/gvc-mixer-dialog.c:253
-#: panels/sound/gvc-mixer-dialog.c:520
-msgid "_Profile:"
-msgstr "_Profil:"
+#: panels/sound/gnome-sound-panel.desktop.in.in:4
+msgid "Change sound levels, inputs, outputs, and alert sounds"
+msgstr "Změnit hlasitost zvuku, vstupy, výstupy a upozornění"
 
-#: panels/sound/gvc-mixer-dialog.c:255
-msgid "_Test Speakers"
-msgstr "O_testovat reproduktory"
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: panels/sound/gnome-sound-panel.desktop.in.in:7
+msgid "multimedia-volume-control"
+msgstr "multimedia-volume-control"
 
-#: panels/sound/gvc-mixer-dialog.c:424
-msgid "Peak detect"
-msgstr "Rozpoznávání špiček"
-
-#: panels/sound/gvc-mixer-dialog.c:1499
-msgid "Device"
-msgstr "Zařízení"
-
-#: panels/sound/gvc-mixer-dialog.c:1562
-#, c-format
-msgid "Speaker Testing for %s"
-msgstr "Test reproduktorů pro %s"
-
-#: panels/sound/gvc-mixer-dialog.c:1620
-msgid "_Output volume:"
-msgstr "Výst_upní hlasitost:"
-
-#: panels/sound/gvc-mixer-dialog.c:1636
-msgid "Output"
-msgstr "Výstup"
-
-#: panels/sound/gvc-mixer-dialog.c:1642
-msgid "C_hoose a device for sound output:"
-msgstr "Zvo_lte zařízení pro zvukový výstup:"
-
-#: panels/sound/gvc-mixer-dialog.c:1667
-msgid "Settings for the selected device:"
-msgstr "Nastavení pro vybrané zařízení:"
-
-#: panels/sound/gvc-mixer-dialog.c:1681
-msgid "Input"
-msgstr "Vstup"
-
-#: panels/sound/gvc-mixer-dialog.c:1690
-msgid "_Input volume:"
-msgstr "_Vstupní hlasitost:"
-
-#: panels/sound/gvc-mixer-dialog.c:1713
-msgid "Input level:"
-msgstr "Vstupní úroveň:"
-
-#: panels/sound/gvc-mixer-dialog.c:1743
-msgid "C_hoose a device for sound input:"
-msgstr "Zvo_lte zařízení pro zvukový vstup:"
-
-#: panels/sound/gvc-mixer-dialog.c:1771
-msgid "Sound Effects"
-msgstr "Zvukové efekty"
-
-#: panels/sound/gvc-mixer-dialog.c:1780
-msgid "_Alert volume:"
-msgstr "Hl_asitost upozornění:"
-
-#: panels/sound/gvc-mixer-dialog.c:1805
-msgid "No application is currently playing or recording audio."
-msgstr "Žádná aplikace právě nepřehrává ani nezaznamenává zvuk."
-
-#: panels/sound/gvc-sound-theme-chooser.c:187
-msgid "Built-in"
-msgstr "Zabudovaný"
-
-#: panels/sound/gvc-sound-theme-chooser.c:446
-#: panels/sound/gvc-sound-theme-chooser.c:458
-#: panels/sound/gvc-sound-theme-chooser.c:470
-msgid "Sound Preferences"
-msgstr "Předvolby zvuku"
-
-#: panels/sound/gvc-sound-theme-chooser.c:449
-#: panels/sound/gvc-sound-theme-chooser.c:460
-#: panels/sound/gvc-sound-theme-chooser.c:472
-msgid "Testing event sound"
-msgstr "Testování zvukové události"
-
-#: panels/sound/gvc-sound-theme-chooser.c:544
-#: panels/wacom/wacom-stylus-page.ui:25
-msgid "Default"
-msgstr "Výchozí"
-
-#: panels/sound/gvc-sound-theme-chooser.c:545
-msgid "From theme"
-msgstr "Z motivu"
-
-#: panels/sound/gvc-sound-theme-chooser.c:720
-msgid "C_hoose an alert sound:"
-msgstr "Zvo_lte zvuk upozornění:"
-
-#: panels/sound/gvc-speaker-test.c:229
-msgid "Stop"
-msgstr "Zastavit"
-
-#: panels/sound/gvc-speaker-test.c:229 panels/sound/gvc-speaker-test.c:343
-msgid "Test"
-msgstr "Testovat"
-
-#: panels/sound/gvc-speaker-test.c:237
-msgid "Subwoofer"
-msgstr "Subwoofer"
-
-#: panels/sound/sound-theme-file-utils.c:288
-msgid "Custom"
-msgstr "Vlastní"
+#. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/sound/gnome-sound-panel.desktop.in.in:20
+msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
+msgstr ""
+"karta;mikrofon;hlasitost;prolínání;vyvážení;bluetooth;náhlavní souprava;"
+"audio;"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.c:94
 #: panels/thunderbolt/cc-bolt-device-entry.c:125
@@ -7130,7 +7033,7 @@ msgstr "Abyste mohli přidat doménové uživatele, musíte být připojeni."
 msgid "_Enterprise Login"
 msgstr "_Přihlášení do domény"
 
-#: panels/user-accounts/cc-avatar-chooser.c:269
+#: panels/user-accounts/cc-avatar-chooser.c:230
 msgid "Browse for more pictures"
 msgstr "Procházet další obrázky"
 
@@ -7178,7 +7081,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:766
+#: panels/user-accounts/cc-user-panel.c:768
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7186,7 +7089,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:770
+#: panels/user-accounts/cc-user-panel.c:772
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7274,26 +7177,26 @@ msgstr "Nelze se připojit k doméně „%s“: %s"
 msgid "Your account"
 msgstr "Váš účet"
 
-#: panels/user-accounts/cc-user-panel.c:384
+#: panels/user-accounts/cc-user-panel.c:386
 msgid "Failed to delete user"
 msgstr "Selhalo smazání účtu"
 
-#: panels/user-accounts/cc-user-panel.c:442
-#: panels/user-accounts/cc-user-panel.c:501
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:444
+#: panels/user-accounts/cc-user-panel.c:503
+#: panels/user-accounts/cc-user-panel.c:555
 msgid "Failed to revoke remotely managed user"
 msgstr "Selhalo zneplatnění vzdáleně spravovaného uživatele"
 
-#: panels/user-accounts/cc-user-panel.c:605
+#: panels/user-accounts/cc-user-panel.c:607
 msgid "You cannot delete your own account."
 msgstr "Nemůžete smazat svůj vlastní účet."
 
-#: panels/user-accounts/cc-user-panel.c:614
+#: panels/user-accounts/cc-user-panel.c:616
 #, c-format
 msgid "%s is still logged in"
 msgstr "Uživatel %s je doposud přihlášen"
 
-#: panels/user-accounts/cc-user-panel.c:618
+#: panels/user-accounts/cc-user-panel.c:620
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7301,12 +7204,12 @@ msgstr ""
 "Smazání účtu, zatímco je dotyčný uživatel přihlášen, může přivést systém do "
 "nekonzistentního stavu."
 
-#: panels/user-accounts/cc-user-panel.c:627
+#: panels/user-accounts/cc-user-panel.c:629
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Chcete zachovat soubory uživatele %s?"
 
-#: panels/user-accounts/cc-user-panel.c:631
+#: panels/user-accounts/cc-user-panel.c:633
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7314,47 +7217,47 @@ msgstr ""
 "Je možné zachovat domovskou složku, poštovní schránku a dočasné soubory, i "
 "když bude uživatelský účet smazán."
 
-#: panels/user-accounts/cc-user-panel.c:634
+#: panels/user-accounts/cc-user-panel.c:636
 msgid "_Delete Files"
 msgstr "O_dstranit soubory"
 
-#: panels/user-accounts/cc-user-panel.c:635
+#: panels/user-accounts/cc-user-panel.c:637
 msgid "_Keep Files"
 msgstr "Zacho_vat soubory"
 
-#: panels/user-accounts/cc-user-panel.c:649
+#: panels/user-accounts/cc-user-panel.c:651
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Opravdu chcete zneplatnit vzdáleně spravovaný účet uživatele %s?"
 
-#: panels/user-accounts/cc-user-panel.c:653
+#: panels/user-accounts/cc-user-panel.c:655
 msgid "_Delete"
 msgstr "O_dstranit"
 
-#: panels/user-accounts/cc-user-panel.c:703
+#: panels/user-accounts/cc-user-panel.c:705
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Účet zakázán"
 
-#: panels/user-accounts/cc-user-panel.c:711
+#: panels/user-accounts/cc-user-panel.c:713
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Bude nastaveno při příštím přihlášení"
 
-#: panels/user-accounts/cc-user-panel.c:714
+#: panels/user-accounts/cc-user-panel.c:716
 msgctxt "Password mode"
 msgid "None"
 msgstr "Žádné"
 
-#: panels/user-accounts/cc-user-panel.c:759
+#: panels/user-accounts/cc-user-panel.c:761
 msgid "Logged in"
 msgstr "právě přihlášený"
 
-#: panels/user-accounts/cc-user-panel.c:1089
+#: panels/user-accounts/cc-user-panel.c:1091
 msgid "Failed to contact the accounts service"
 msgstr "Selhalo kontaktování účtovací služby"
 
-#: panels/user-accounts/cc-user-panel.c:1091
+#: panels/user-accounts/cc-user-panel.c:1093
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Zkontrolujte prosím, že je účtovací služba AccountService nainstalovaná a "
@@ -7364,7 +7267,7 @@ msgstr ""
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1123
+#: panels/user-accounts/cc-user-panel.c:1125
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7372,12 +7275,12 @@ msgstr ""
 "Abyste mohli provést změny,\n"
 "klikněte nejprve na ikonu *"
 
-#: panels/user-accounts/cc-user-panel.c:1196
+#: panels/user-accounts/cc-user-panel.c:1198
 msgid "Create a user account"
 msgstr "Vytvořit uživatelský účet"
 
-#: panels/user-accounts/cc-user-panel.c:1207
-#: panels/user-accounts/cc-user-panel.c:1335
+#: panels/user-accounts/cc-user-panel.c:1209
+#: panels/user-accounts/cc-user-panel.c:1337
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7385,12 +7288,12 @@ msgstr ""
 "Pro vytvoření uživatelského účtu\n"
 "nejprve klikněte na ikonu *"
 
-#: panels/user-accounts/cc-user-panel.c:1216
+#: panels/user-accounts/cc-user-panel.c:1218
 msgid "Delete the selected user account"
 msgstr "Odstranit vybraný uživatelský účet"
 
-#: panels/user-accounts/cc-user-panel.c:1228
-#: panels/user-accounts/cc-user-panel.c:1339
+#: panels/user-accounts/cc-user-panel.c:1230
+#: panels/user-accounts/cc-user-panel.c:1341
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7419,24 +7322,24 @@ msgid "_Fingerprint Login"
 msgstr "Přihlášení otiskem _prstu"
 
 #: panels/user-accounts/cc-user-panel.ui:321
-#: panels/user-accounts/cc-user-panel.ui:334
+#: panels/user-accounts/cc-user-panel.ui:337
 msgid "User Icon"
 msgstr "Ikona uživatele"
 
-#: panels/user-accounts/cc-user-panel.ui:398
+#: panels/user-accounts/cc-user-panel.ui:401
 msgid "Last Login"
 msgstr "Poslední přihlášení"
 
-#: panels/user-accounts/cc-user-panel.ui:447
+#: panels/user-accounts/cc-user-panel.ui:450
 msgid "Remove User…"
 msgstr "Odebrat uživatele…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:480
+#: panels/user-accounts/cc-user-panel.ui:483
 msgid "No Users Found"
 msgstr "Žádný uživatel nebyl nalezen"
 
-#: panels/user-accounts/cc-user-panel.ui:490
+#: panels/user-accounts/cc-user-panel.ui:493
 msgid "Unlock to add a user account."
 msgstr "Odemkněte, abyste mohli přidat účet"
 
@@ -7705,20 +7608,20 @@ msgstr "Nové heslo neobsahuje dostatek různorodých znaků"
 msgid "Unknown error"
 msgstr "Neznámá chyba"
 
-#: panels/user-accounts/user-utils.c:426
+#: panels/user-accounts/user-utils.c:430
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Toto uživatelské jméno není bohužel dostupné. Zkuste prosím jiné."
 
-#: panels/user-accounts/user-utils.c:429
+#: panels/user-accounts/user-utils.c:433
 #, c-format
 msgid "The username is too long."
 msgstr "Uživatelské jméno je příliš dlouhé."
 
-#: panels/user-accounts/user-utils.c:432
+#: panels/user-accounts/user-utils.c:436
 msgid "The username cannot start with a “-”."
 msgstr "Uživatelské jméno nesmí začínat znakem „-“."
 
-#: panels/user-accounts/user-utils.c:435
+#: panels/user-accounts/user-utils.c:439
 msgid ""
 "The username should only consist of upper and lower case letters from a-z, "
 "digits and the following characters: . - _"
@@ -7726,7 +7629,7 @@ msgstr ""
 "Uživatelské jméno se musí skládat jen z malých a velkých písmen a-z, číslic "
 "a některého ze znaků: . - _"
 
-#: panels/user-accounts/user-utils.c:439
+#: panels/user-accounts/user-utils.c:443
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr ""
 "Bude použito k pojmenování vaší domovské složky a nemůže být dodatečně "
@@ -7986,6 +7889,10 @@ msgstr "Přizpůsobit rozlišení displeje"
 msgid "New shortcut…"
 msgstr "Nová klávesová zkratka…"
 
+#: panels/wacom/wacom-stylus-page.ui:25
+msgid "Default"
+msgstr "Výchozí"
+
 #: panels/wacom/wacom-stylus-page.ui:29
 msgid "Middle Mouse Button Click"
 msgstr "Kliknutí prostředním tlačítkem myši"
@@ -8177,7 +8084,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1873
+#: subprojects/gvc/gvc-mixer-control.c:1871
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -8187,7 +8094,7 @@ msgstr[2] "%u výstupů"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1883
+#: subprojects/gvc/gvc-mixer-control.c:1881
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
@@ -8195,70 +8102,6 @@ msgstr[0] "%u vstup"
 msgstr[1] "%u vstupy"
 msgstr[2] "%u vstupů"
 
-#: subprojects/gvc/gvc-mixer-control.c:2738
+#: subprojects/gvc/gvc-mixer-control.c:2736
 msgid "System Sounds"
 msgstr "Systémové zvuky"
-
-#~ msgid "Refresh Rate"
-#~ msgstr "Obnovovací frekvence"
-
-#~ msgid "Scale"
-#~ msgstr "Škálování"
-
-#~ msgid "Adjust for TV"
-#~ msgstr "Přizpůsobit televizi"
-
-#~ msgid "Primary Display"
-#~ msgstr "Hlavní displej"
-
-#~ msgid ""
-#~ "Drag displays to match your setup. The top bar is placed on the primary "
-#~ "display."
-#~ msgstr ""
-#~ "Přesuňte displeje tak, aby odpovídaly vašemu rozestavení. Horní pruh je v "
-#~ "místě hlavního displeje."
-
-#~ msgid "_Night Light"
-#~ msgstr "_Noční světlo"
-
-#~ msgid "Could not get screen information"
-#~ msgstr "Nelze získat informace o obrazovce"
-
-#~ msgid "Add input source"
-#~ msgstr "Přidat vstupní zdroj"
-
-#~ msgid "Remove input source"
-#~ msgstr "Odebrat vstupní zdroj"
-
-#~ msgid "Move input source up"
-#~ msgstr "Přesunout vstupní zdroj výš"
-
-#~ msgid "Move input source down"
-#~ msgstr "Přesunout vstupní zdroj níž"
-
-#~ msgid "Configure input source"
-#~ msgstr "Nastavit vstupní zdroj"
-
-#~ msgid "Show input source keyboard layout"
-#~ msgstr "Zobrazit rozvržení klávesnice vstupního zdroje"
-
-#~ msgctxt "Account type"
-#~ msgid "Standard"
-#~ msgstr "Normální"
-
-#~ msgctxt "Account type"
-#~ msgid "Administrator"
-#~ msgstr "Správce"
-
-#~ msgid "GNOME Control Center"
-#~ msgstr "Ovládací centrum GNOME"
-
-#~ msgid ""
-#~ "The control center is GNOME’s main interface for configuration of various "
-#~ "aspects of your desktop."
-#~ msgstr ""
-#~ "Ovládací centrum je hlavní rozhraní GNOME pro nastavení různých "
-#~ "vlastností vašeho pracovního prostředí."
-
-#~ msgid "Quit"
-#~ msgstr "Ukončit"
