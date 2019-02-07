@@ -7,14 +7,23 @@
 # KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
 # Takeshi AIHANA <takeshi.aihana@gmail.com>, 2003-2008.
 # Satoru SATOH <ss@gnome.gr.jp>, 2006.
+# Hiyoko Torisaki <torisaki.hiyoko@gmail.com>, 2009.
 # Hideki Yamane (Debian-JP) <henrich@debian.or.jp>, 2009.
+# Shushi Kurose <md81bird@hitaki.net>, 2009-2012, 2014, 2016.
 # Yasumichi Akahoshi <yasumichi@vinelinux.org>, 2010.
 # Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2010-2017.
+# GEN SAKASHITA <Unknown>, 2011.
+# Takashi Sakamoto <Unknown>, 2011.
 # Kiyotaka NISHIBORI <ml.nishibori.kiyotaka@gmail.com>, 2011.
 # Hideki Yamnane <henrich@debian.org>, 2011.
 # Noriko Mizumoto <noriko@fedoraproject.org>, 2012.
-# Ikuya Awashiro <ikuya@fruitsbasket.info>, 2014.
+# Koichi Akabe <vbkaisetsu@debian.or.jp>, 2012.
+# Kentaro KAZUHAMA <kazken3@gmail.com>, 2012, 2018.
+# Ikuya Awashiro <ikuya@fruitsbasket.info>, 2014, 2017.
 # Hajime Taira <htaira@redhat.com>, 2015-2018.
+# TakashiUshikoshi <adoredirectg59@gmail.com>, 2016.
+# Shinichirou Yamada <yamada_strong_yamada_nice_64bit@yahoo.co.jp>, 2017-2018.
+# Kenichi Ito <ken.i54k@gmail.com>, 2018.
 # sicklylife <translation@sicklylife.jp>, 2019.
 #
 msgid ""
@@ -22,8 +31,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-02-04 14:04+0000\n"
-"PO-Revision-Date: 2019-02-06 19:00+0900\n"
+"POT-Creation-Date: 2019-02-07 08:04+0000\n"
+"PO-Revision-Date: 2019-02-08 00:10+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -170,7 +179,7 @@ msgstr "その他のファイル"
 #: panels/applications/cc-applications-panel.ui:406
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
 #: panels/notifications/cc-notifications-panel.ui:167
-#: panels/privacy/cc-privacy-panel.ui:1085 panels/sound/gvc-mixer-dialog.c:1796
+#: panels/privacy/cc-privacy-panel.ui:1085
 msgid "Applications"
 msgstr "アプリケーション"
 
@@ -214,7 +223,7 @@ msgstr "カメラ"
 #: panels/keyboard/shortcut-editor.ui:96 panels/network/network-proxy.ui:123
 #: panels/network/network-wifi.ui:781 panels/network/network-wifi.ui:1058
 #: panels/user-accounts/um-fingerprint-dialog.c:211
-#: subprojects/gvc/gvc-mixer-control.c:1866
+#: subprojects/gvc/gvc-mixer-control.c:1864
 msgid "Disabled"
 msgstr "無効"
 
@@ -337,7 +346,9 @@ msgstr ""
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in.in:16
 msgid "application;flatpak;permission;setting;"
-msgstr "application;flatpak;permission;setting;アプリケーション;パーミッション;許可;設定;"
+msgstr ""
+"application;flatpak;permission;setting;アプリケーション;パーミッション;許可;"
+"設定;"
 
 #: panels/background/background.ui:49
 msgid "_Background"
@@ -423,17 +434,17 @@ msgstr "画像を %s フォルダーに追加すると、その画像がここ�
 #: panels/network/net-device-wifi.c:1200 panels/network/net-device-wifi.c:1280
 #: panels/network/net-device-wifi.c:1474 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:320
+#: panels/printers/pp-details-dialog.c:313
 #: panels/privacy/cc-privacy-panel.c:1123 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:607
 #: panels/sharing/cc-sharing-panel.c:427
 #: panels/user-accounts/cc-add-user-dialog.ui:28
-#: panels/user-accounts/cc-avatar-chooser.c:144
-#: panels/user-accounts/cc-avatar-chooser.c:272
+#: panels/user-accounts/cc-avatar-chooser.c:105
+#: panels/user-accounts/cc-avatar-chooser.c:233
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:636
-#: panels/user-accounts/cc-user-panel.c:654
+#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:656
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/user-accounts/um-fingerprint-dialog.c:261
 msgid "_Cancel"
@@ -521,7 +532,7 @@ msgstr "機内モードをオフにする"
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
 #: panels/network/cc-network-panel.ui:101
-#: panels/printers/pp-new-printer-dialog.c:1705
+#: panels/printers/pp-new-printer-dialog.c:1697
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -571,7 +582,7 @@ msgstr "ノート PC を閉じてください"
 #. * good idea why or any suggestions
 #: panels/color/cc-color-calibrate.c:397
 msgid "An internal error occurred that could not be recovered."
-msgstr "回復できないエラーが発生しました。"
+msgstr "回復不能なエラーが発生しました。"
 
 #. TRANSLATORS: Some required-at-runtime tools were not
 #. * installed, which should only affect insane distros
@@ -594,13 +605,13 @@ msgstr "対象の白色点は取得できません。"
 #. TRANSLATORS: the display calibration process is finished
 #: panels/color/cc-color-calibrate.c:453
 msgid "Complete!"
-msgstr "完了!"
+msgstr "完了しました!"
 
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
 #: panels/color/cc-color-calibrate.c:461
 msgid "Calibration failed!"
-msgstr "キャリブレーションに失敗!"
+msgstr "キャリブレーションに失敗しました!"
 
 #. TRANSLATORS: The user can now remove the sensor from the screen
 #: panels/color/cc-color-calibrate.c:468
@@ -622,7 +633,7 @@ msgstr "ラップトップ画面"
 #. TRANSLATORS: This refers to the embedded webcam on a laptop
 #: panels/color/cc-color-common.c:50
 msgid "Built-in Webcam"
-msgstr "組み込みのウェブカム"
+msgstr "ビルトインウェブカメラ"
 
 #. TRANSLATORS: an externally connected display, where %s is either the
 #. * model, vendor or ID, e.g. 'LP2480zx Monitor'
@@ -763,7 +774,7 @@ msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
 msgstr ""
-"計測器が検出できません。電源が入っていること、正しく接続されていることを確認"
+"計測器を検出できません。電源が入っていること、正しく接続されていることを確認"
 "してください。"
 
 #. TRANSLATORS: this is when the button is insensitive
@@ -774,7 +785,7 @@ msgstr "計測器がプリンターのプロファイルをサポートしてい
 #. TRANSLATORS: this is when the button is insensitive
 #: panels/color/cc-color-panel.c:1269
 msgid "The device type is not currently supported."
-msgstr "このデバイスの種類は現在サポートされていません。"
+msgstr "このデバイスの形式は現在サポートしていません。"
 
 #: panels/color/cc-color-panel.ui:6 panels/wacom/calibrator/calibrator.ui:47
 msgid "Screen Calibration"
@@ -2225,8 +2236,6 @@ msgstr ""
 "Esc でキャンセル、Backspace でキーボードショートカットをリセットできます。"
 
 #: panels/keyboard/shortcut-editor.ui:156 panels/printers/details-dialog.ui:38
-#: panels/sound/gvc-mixer-dialog.c:1480
-#: panels/sound/gvc-sound-theme-chooser.c:554
 msgid "Name"
 msgstr "名前"
 
@@ -2306,10 +2315,12 @@ msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "マウス、タッチパッドのボタンの順位を設定します。"
 
 #: panels/mouse/gnome-mouse-properties.ui:136
+#: panels/sound/cc-balance-slider.ui:13
 msgid "Left"
 msgstr "左"
 
 #: panels/mouse/gnome-mouse-properties.ui:146
+#: panels/sound/cc-balance-slider.ui:15
 msgid "Right"
 msgstr "右"
 
@@ -2933,7 +2944,7 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
-"ファイル “%s” は読み込めなかったか、または処理できる VPN 接続情報がありませ"
+"ファイル“%s”は読み込めなかったか、または処理できる VPN 接続情報がありませ"
 "ん\n"
 "\n"
 "エラー: %s"
@@ -2943,16 +2954,16 @@ msgid "Select file to import"
 msgstr "インポートするファイルを選択する"
 
 #: panels/network/connection-editor/vpn-helpers.c:182
-#: panels/printers/pp-details-dialog.c:321
+#: panels/printers/pp-details-dialog.c:314
 #: panels/sharing/cc-sharing-panel.c:428
-#: panels/user-accounts/cc-avatar-chooser.c:273
+#: panels/user-accounts/cc-avatar-chooser.c:234
 msgid "_Open"
 msgstr "開く(_O)"
 
 #: panels/network/connection-editor/vpn-helpers.c:230
 #, c-format
 msgid "A file named “%s” already exists."
-msgstr "'%s' というファイルはすでに存在します。"
+msgstr "“%s”というファイルはすでに存在します。"
 
 #: panels/network/connection-editor/vpn-helpers.c:232
 msgid "_Replace"
@@ -2974,7 +2985,7 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
-"VPN 接続 \"%s\" は %s にエクスポートできませんでした。\n"
+"VPN 接続“%s”は %s にエクスポートできませんでした。\n"
 "\n"
 "エラー: %s"
 
@@ -3633,7 +3644,7 @@ msgstr "ファームウェア未検出"
 #. TRANSLATORS: device status
 #: panels/network/panel-common.c:437
 msgid "Cable unplugged"
-msgstr "ケーブル抜け"
+msgstr "ケーブル非接続"
 
 #: panels/network/wireless-security/eap-method.c:69
 msgid "undefined error in 802.1X security (wpa-eap)"
@@ -4124,7 +4135,7 @@ msgstr "アカウントの削除"
 
 #: panels/power/cc-power-panel.c:260
 msgid "Unknown time"
-msgstr "不明"
+msgstr "残り時間は不明"
 
 #: panels/power/cc-power-panel.c:266
 #, c-format
@@ -4621,12 +4632,12 @@ msgid "Printer “%s” has been deleted"
 msgstr "プリンター“%s”を削除しました"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:941
+#: panels/printers/cc-printers-panel.c:938
 msgid "Failed to add new printer."
 msgstr "新しいプリンターを追加できませんでした。"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1253
+#: panels/printers/cc-printers-panel.c:1242
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "ui ファイルを読み込めませんでした: %s"
@@ -4704,7 +4715,7 @@ msgstr "アクティブなジョブはありません"
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
 #: panels/printers/pp-new-printer-dialog.c:363
-#: panels/printers/pp-new-printer-dialog.c:428
+#: panels/printers/pp-new-printer-dialog.c:427
 msgid "Add Printer"
 msgstr "プリンターの追加"
 
@@ -4739,20 +4750,20 @@ msgstr "テストページ"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:133
-#: panels/printers/pp-details-dialog.c:426
+#: panels/printers/pp-details-dialog.c:417
 #, c-format
 msgid "%s Details"
 msgstr "%s の詳細"
 
-#: panels/printers/pp-details-dialog.c:182
+#: panels/printers/pp-details-dialog.c:180
 msgid "No suitable driver found"
 msgstr "適切なドライバーが見つかりませんでした"
 
-#: panels/printers/pp-details-dialog.c:317
+#: panels/printers/pp-details-dialog.c:310
 msgid "Select PPD File"
 msgstr "PPDファイルの選択"
 
-#: panels/printers/pp-details-dialog.c:326
+#: panels/printers/pp-details-dialog.c:319
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4765,7 +4776,7 @@ msgid "Select Printer Driver"
 msgstr "プリンタードライバーの選択"
 
 #: panels/printers/ppd-selection-dialog.ui:40
-#: panels/user-accounts/cc-avatar-chooser.c:146
+#: panels/user-accounts/cc-avatar-chooser.c:107
 msgid "Select"
 msgstr "選択"
 
@@ -4870,7 +4881,7 @@ msgid "Completed"
 msgstr "完了"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:389
+#: panels/printers/pp-jobs-dialog.c:390
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -4884,62 +4895,62 @@ msgid "%s — Active Jobs"
 msgstr "%s — アクティブなジョブ"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:618
+#: panels/printers/pp-jobs-dialog.c:617
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "%s から印刷するにはユーザー名とパスワードを入力してください。"
 
-#: panels/printers/pp-new-printer-dialog.c:378
+#: panels/printers/pp-new-printer-dialog.c:380
 msgid "Unlock Print Server"
 msgstr "プリンターサーバーのロックを解除"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:382
+#: panels/printers/pp-new-printer-dialog.c:384
 #, c-format
 msgid "Unlock %s."
 msgstr "ロック解除 %s"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:387
+#: panels/printers/pp-new-printer-dialog.c:388
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "%s で利用可能なプリンターを表示するにはユーザー名とパスワードを入力してくださ"
 "い。"
 
-#: panels/printers/pp-new-printer-dialog.c:842
+#: panels/printers/pp-new-printer-dialog.c:838
 msgid "Searching for Printers"
 msgstr "プリンターの検索"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1688
+#: panels/printers/pp-new-printer-dialog.c:1680
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1693
+#: panels/printers/pp-new-printer-dialog.c:1685
 msgid "Serial Port"
 msgstr "シリアルポート"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1700
+#: panels/printers/pp-new-printer-dialog.c:1692
 msgid "Parallel Port"
 msgstr "パラレルポート"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1741
+#: panels/printers/pp-new-printer-dialog.c:1734
 #, c-format
 msgid "Location: %s"
 msgstr "場所: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1746
+#: panels/printers/pp-new-printer-dialog.c:1739
 #, c-format
 msgid "Address: %s"
 msgstr "アドレス: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1775
+#: panels/printers/pp-new-printer-dialog.c:1766
 msgid "Server requires authentication"
 msgstr "サーバーが認証を要求しています"
 
@@ -5031,7 +5042,7 @@ msgid "Advanced"
 msgstr "高度"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:910
+#: panels/printers/pp-options-dialog.c:908
 msgid "Test page"
 msgstr "テストページ"
 
@@ -5077,123 +5088,123 @@ msgid "Manufacturer"
 msgstr "製造元"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:612 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:606 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "アクティブなジョブがありません"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:617
+#: panels/printers/pp-printer-entry.c:611
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
 msgstr[0] "%u ジョブ"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:775
+#: panels/printers/pp-printer-entry.c:766
 msgid "Low on toner"
 msgstr "トナーの残量が少ないです"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:777
+#: panels/printers/pp-printer-entry.c:768
 msgid "Out of toner"
 msgstr "トナーが空です"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:780
+#: panels/printers/pp-printer-entry.c:771
 msgid "Low on developer"
 msgstr "現像液が少ないです"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:783
+#: panels/printers/pp-printer-entry.c:774
 msgid "Out of developer"
 msgstr "現像液が空です"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:785
+#: panels/printers/pp-printer-entry.c:776
 msgid "Low on a marker supply"
 msgstr "インクが少なくなっています"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:787
+#: panels/printers/pp-printer-entry.c:778
 msgid "Out of a marker supply"
 msgstr "インクが切れています"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:789
+#: panels/printers/pp-printer-entry.c:780
 msgid "Open cover"
 msgstr "カバーが開いています"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:791
+#: panels/printers/pp-printer-entry.c:782
 msgid "Open door"
 msgstr "扉が開いています"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:793
+#: panels/printers/pp-printer-entry.c:784
 msgid "Low on paper"
 msgstr "紙が少なくなっています"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:795
+#: panels/printers/pp-printer-entry.c:786
 msgid "Out of paper"
 msgstr "紙が空です"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:797
+#: panels/printers/pp-printer-entry.c:788
 msgctxt "printer state"
 msgid "Offline"
 msgstr "オフライン"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:799
-#: panels/printers/pp-printer-entry.c:927
+#: panels/printers/pp-printer-entry.c:790
+#: panels/printers/pp-printer-entry.c:918
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "停止中"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:801
+#: panels/printers/pp-printer-entry.c:792
 msgid "Waste receptacle almost full"
 msgstr "廃インクタンクがもう少しでいっぱいです"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:803
+#: panels/printers/pp-printer-entry.c:794
 msgid "Waste receptacle full"
 msgstr "廃インクタンクがいっぱいです"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:805
+#: panels/printers/pp-printer-entry.c:796
 msgid "The optical photo conductor is near end of life"
 msgstr "感光体の寿命が近づいています"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:807
+#: panels/printers/pp-printer-entry.c:798
 msgid "The optical photo conductor is no longer functioning"
 msgstr "感光体の寿命です"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:913
+#: panels/printers/pp-printer-entry.c:904
 msgctxt "printer state"
 msgid "Ready"
 msgstr "準備完了"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:918
+#: panels/printers/pp-printer-entry.c:909
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "ジョブ受付不可"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:923
+#: panels/printers/pp-printer-entry.c:914
 msgctxt "printer state"
 msgid "Processing"
 msgstr "処理中"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:947
+#: panels/printers/pp-printer-entry.c:938
 msgid "Clean print heads"
 msgstr "ヘッドクリーニング"
 
@@ -5712,7 +5723,7 @@ msgid "Login _Screen"
 msgstr "ログイン画面(_S)"
 
 #: panels/region/cc-region-panel.ui:60
-#: panels/user-accounts/cc-user-panel.ui:358
+#: panels/user-accounts/cc-user-panel.ui:361
 msgid "_Language"
 msgstr "言語(_L)"
 
@@ -6039,212 +6050,119 @@ msgstr "リモートログインの有効化/無効化"
 msgid "Authentication is required to enable or disable remote login"
 msgstr "リモートログインを有効化または無効化するには認証が必要になります"
 
-#: panels/sound/data/gnome-sound-panel.desktop.in.in:3
-msgid "Sound"
-msgstr "サウンド"
+#: panels/sound/cc-alert-chooser.c:151
+msgid "Custom"
+msgstr "その他"
 
-#: panels/sound/data/gnome-sound-panel.desktop.in.in:4
-msgid "Change sound levels, inputs, outputs, and alert sounds"
-msgstr "サウンドレベルや入力、出力、アラート音を設定します"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/sound/data/gnome-sound-panel.desktop.in.in:7
-msgid "multimedia-volume-control"
-msgstr "multimedia-volume-control"
-
-#. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/sound/data/gnome-sound-panel.desktop.in.in:20
-msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
-msgstr ""
-"Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;カード;マイク;音"
-"量;フェード;バランス;ブルートゥース;ヘッドセット;オーディオ;Sound;サウンド;"
-
-#. Translators: This is the name of an audio file that sounds like the bark of a dog.
-#. You might want to translate it into the equivalent words of your language.
-#: panels/sound/data/sounds/gnome-sounds-default.xml.in.in:6
+#: panels/sound/cc-alert-chooser.ui:12 panels/sound/cc-alert-selector.ui:9
 msgid "Bark"
 msgstr "犬が吠える音"
 
-#. Translators: This is the name of an audio file that sounds like a water drip.
-#. You might want to translate it into the equivalent words of your language.
-#: panels/sound/data/sounds/gnome-sounds-default.xml.in.in:12
+#: panels/sound/cc-alert-chooser.ui:19 panels/sound/cc-alert-selector.ui:15
 msgid "Drip"
 msgstr "水が滴る音"
 
-#. Translators: This is the name of an audio file that sounds like tapping glass.
-#. You might want to translate it into the equivalent words of your language.
-#: panels/sound/data/sounds/gnome-sounds-default.xml.in.in:18
+#: panels/sound/cc-alert-chooser.ui:26 panels/sound/cc-alert-selector.ui:21
 msgid "Glass"
 msgstr "ガラスを叩く音"
 
-#. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
-#. You might want to translate it into the equivalent words of your language.
-#: panels/sound/data/sounds/gnome-sounds-default.xml.in.in:24
+#: panels/sound/cc-alert-chooser.ui:33 panels/sound/cc-alert-selector.ui:27
 msgid "Sonar"
 msgstr "ソナーのピング音"
 
-#: panels/sound/gvc-balance-bar.c:106
-msgctxt "balance"
-msgid "Left"
-msgstr "左"
-
-#: panels/sound/gvc-balance-bar.c:107
-msgctxt "balance"
-msgid "Right"
-msgstr "右"
-
-#: panels/sound/gvc-balance-bar.c:110
-msgctxt "balance"
+#: panels/sound/cc-fade-slider.ui:13
 msgid "Rear"
 msgstr "リア"
 
-#: panels/sound/gvc-balance-bar.c:111
-msgctxt "balance"
+#: panels/sound/cc-fade-slider.ui:15
 msgid "Front"
 msgstr "フロント"
 
-#: panels/sound/gvc-balance-bar.c:114
-msgctxt "balance"
-msgid "Minimum"
-msgstr "最小"
+#: panels/sound/cc-output-test-dialog.c:134
+#, c-format
+msgid "Testing %s"
+msgstr ""
 
-#: panels/sound/gvc-balance-bar.c:115
-msgctxt "balance"
-msgid "Maximum"
-msgstr "最大"
+#: panels/sound/cc-output-test-dialog.ui:127
+msgid "Click a speaker to test"
+msgstr ""
 
-#: panels/sound/gvc-balance-bar.c:291
-msgid "_Balance:"
-msgstr "バランス(_B):"
+#: panels/sound/cc-sound-panel.ui:30
+msgid "System Volume"
+msgstr ""
 
-#: panels/sound/gvc-balance-bar.c:294
-msgid "_Fade:"
-msgstr "フェード(_F):"
+#: panels/sound/cc-sound-panel.ui:46
+msgid "Volume Levels"
+msgstr ""
 
-#: panels/sound/gvc-balance-bar.c:297
-msgid "_Subwoofer:"
-msgstr "サブウーファー(_S):"
+#: panels/sound/cc-sound-panel.ui:68
+msgid "Output"
+msgstr "出力"
 
-#: panels/sound/gvc-channel-bar.c:614 panels/sound/gvc-channel-bar.c:623
+#: panels/sound/cc-sound-panel.ui:94
+msgid "Output Device"
+msgstr "出力デバイス"
+
+#: panels/sound/cc-sound-panel.ui:117
+msgid "Test"
+msgstr "テスト"
+
+#: panels/sound/cc-sound-panel.ui:147 panels/sound/cc-sound-panel.ui:319
+msgid "Configuration"
+msgstr "設定"
+
+#: panels/sound/cc-sound-panel.ui:179
+msgid "Balance"
+msgstr "バランス"
+
+#: panels/sound/cc-sound-panel.ui:205
+msgid "Fade"
+msgstr "フェード"
+
+#: panels/sound/cc-sound-panel.ui:231
+msgid "Subwoofer"
+msgstr "サブウーファー"
+
+#: panels/sound/cc-sound-panel.ui:253
+msgid "Input"
+msgstr "入力"
+
+#: panels/sound/cc-sound-panel.ui:279
+msgid "Input Device"
+msgstr "入力デバイス"
+
+#: panels/sound/cc-sound-panel.ui:351
+msgid "Volume"
+msgstr "音量"
+
+#: panels/sound/cc-sound-panel.ui:373
+msgid "Alert Sound"
+msgstr "警告音"
+
+#: panels/sound/cc-volume-slider.c:178
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: panels/sound/gvc-channel-bar.c:618
-msgctxt "volume"
-msgid "Unamplified"
-msgstr "非増幅"
+#: panels/sound/gnome-sound-panel.desktop.in.in:3
+msgid "Sound"
+msgstr "サウンド"
 
-#: panels/sound/gvc-combo-box.c:166 panels/sound/gvc-mixer-dialog.c:253
-#: panels/sound/gvc-mixer-dialog.c:520
-msgid "_Profile:"
-msgstr "プロファイル(_P):"
+#: panels/sound/gnome-sound-panel.desktop.in.in:4
+msgid "Change sound levels, inputs, outputs, and alert sounds"
+msgstr "サウンドレベルや入力、出力、警告音を設定します"
 
-#: panels/sound/gvc-mixer-dialog.c:255
-msgid "_Test Speakers"
-msgstr "スピーカーのテスト(_T)"
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: panels/sound/gnome-sound-panel.desktop.in.in:7
+msgid "multimedia-volume-control"
+msgstr "multimedia-volume-control"
 
-#: panels/sound/gvc-mixer-dialog.c:424
-msgid "Peak detect"
-msgstr "ピークの検出"
-
-#: panels/sound/gvc-mixer-dialog.c:1499
-msgid "Device"
-msgstr "デバイス"
-
-#: panels/sound/gvc-mixer-dialog.c:1562
-#, c-format
-msgid "Speaker Testing for %s"
-msgstr "%s のスピーカーテスト"
-
-#: panels/sound/gvc-mixer-dialog.c:1620
-msgid "_Output volume:"
-msgstr "出力の音量(_O):"
-
-#: panels/sound/gvc-mixer-dialog.c:1636
-msgid "Output"
-msgstr "出力"
-
-#: panels/sound/gvc-mixer-dialog.c:1642
-msgid "C_hoose a device for sound output:"
-msgstr "サウンド出力デバイスの選択(_H):"
-
-#: panels/sound/gvc-mixer-dialog.c:1667
-msgid "Settings for the selected device:"
-msgstr "選択したデバイスの設定:"
-
-#: panels/sound/gvc-mixer-dialog.c:1681
-msgid "Input"
-msgstr "入力"
-
-#: panels/sound/gvc-mixer-dialog.c:1690
-msgid "_Input volume:"
-msgstr "入力の音量(_I):"
-
-#: panels/sound/gvc-mixer-dialog.c:1713
-msgid "Input level:"
-msgstr "入力レベル:"
-
-#: panels/sound/gvc-mixer-dialog.c:1743
-msgid "C_hoose a device for sound input:"
-msgstr "サウンド入力デバイスの選択(_H):"
-
-#: panels/sound/gvc-mixer-dialog.c:1771
-msgid "Sound Effects"
-msgstr "音響効果"
-
-#: panels/sound/gvc-mixer-dialog.c:1780
-msgid "_Alert volume:"
-msgstr "警告音の音量(_A):"
-
-#: panels/sound/gvc-mixer-dialog.c:1805
-msgid "No application is currently playing or recording audio."
-msgstr "音声の再生または録音を実行しているアプリケーションはありません。"
-
-#: panels/sound/gvc-sound-theme-chooser.c:187
-msgid "Built-in"
-msgstr "組み込み"
-
-#: panels/sound/gvc-sound-theme-chooser.c:446
-#: panels/sound/gvc-sound-theme-chooser.c:458
-#: panels/sound/gvc-sound-theme-chooser.c:470
-msgid "Sound Preferences"
-msgstr "サウンドの設定"
-
-#: panels/sound/gvc-sound-theme-chooser.c:449
-#: panels/sound/gvc-sound-theme-chooser.c:460
-#: panels/sound/gvc-sound-theme-chooser.c:472
-msgid "Testing event sound"
-msgstr "イベント音のテスト中"
-
-#: panels/sound/gvc-sound-theme-chooser.c:544
-#: panels/wacom/wacom-stylus-page.ui:25
-msgid "Default"
-msgstr "デフォルト"
-
-#: panels/sound/gvc-sound-theme-chooser.c:545
-msgid "From theme"
-msgstr "テーマから"
-
-#: panels/sound/gvc-sound-theme-chooser.c:720
-msgid "C_hoose an alert sound:"
-msgstr "警告音の選択(_H):"
-
-#: panels/sound/gvc-speaker-test.c:229
-msgid "Stop"
-msgstr "停止"
-
-#: panels/sound/gvc-speaker-test.c:229 panels/sound/gvc-speaker-test.c:343
-msgid "Test"
-msgstr "テスト"
-
-#: panels/sound/gvc-speaker-test.c:237
-msgid "Subwoofer"
-msgstr "サブウーファー"
-
-#: panels/sound/sound-theme-file-utils.c:288
-msgid "Custom"
-msgstr "その他"
+#. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/sound/gnome-sound-panel.desktop.in.in:20
+msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
+msgstr ""
+"Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;カード;マイク;音"
+"量;フェード;バランス;ブルートゥース;ヘッドセット;オーディオ;Sound;サウンド;"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.c:94
 #: panels/thunderbolt/cc-bolt-device-entry.c:125
@@ -7106,7 +7024,7 @@ msgstr ""
 msgid "_Enterprise Login"
 msgstr "エンタープライズのログイン(_E)"
 
-#: panels/user-accounts/cc-avatar-chooser.c:269
+#: panels/user-accounts/cc-avatar-chooser.c:230
 msgid "Browse for more pictures"
 msgstr "他の画像も参照"
 
@@ -7154,7 +7072,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:766
+#: panels/user-accounts/cc-user-panel.c:768
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%H:%M"
@@ -7162,7 +7080,7 @@ msgstr "%H:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:770
+#: panels/user-accounts/cc-user-panel.c:772
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7221,7 +7139,7 @@ msgstr "次回ログイン時にユーザー自身でパスワードを設定さ
 
 #: panels/user-accounts/cc-password-dialog.ui:267
 msgid "Set a password now"
-msgstr "いまパスワードを設定する"
+msgstr "今すぐパスワードを設定する"
 
 #: panels/user-accounts/cc-realm-manager.c:307
 msgid "Cannot automatically join this type of domain"
@@ -7250,26 +7168,26 @@ msgstr "%sドメインに接続できませんでした: %s"
 msgid "Your account"
 msgstr "あなたのアカウント"
 
-#: panels/user-accounts/cc-user-panel.c:384
+#: panels/user-accounts/cc-user-panel.c:386
 msgid "Failed to delete user"
 msgstr "ユーザーの削除に失敗しました"
 
-#: panels/user-accounts/cc-user-panel.c:442
-#: panels/user-accounts/cc-user-panel.c:501
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:444
+#: panels/user-accounts/cc-user-panel.c:503
+#: panels/user-accounts/cc-user-panel.c:555
 msgid "Failed to revoke remotely managed user"
 msgstr "リモート管理ユーザーの削除に失敗しました"
 
-#: panels/user-accounts/cc-user-panel.c:605
+#: panels/user-accounts/cc-user-panel.c:607
 msgid "You cannot delete your own account."
 msgstr "自分自身のアカウントは削除できません。"
 
-#: panels/user-accounts/cc-user-panel.c:614
+#: panels/user-accounts/cc-user-panel.c:616
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s はまだログインしています"
 
-#: panels/user-accounts/cc-user-panel.c:618
+#: panels/user-accounts/cc-user-panel.c:620
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7277,12 +7195,12 @@ msgstr ""
 "ログイン中のユーザーを削除すると、システムが不整合な状態になることがありま"
 "す。"
 
-#: panels/user-accounts/cc-user-panel.c:627
+#: panels/user-accounts/cc-user-panel.c:629
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "%s のファイルを残しますか?"
 
-#: panels/user-accounts/cc-user-panel.c:631
+#: panels/user-accounts/cc-user-panel.c:633
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7290,47 +7208,47 @@ msgstr ""
 "ユーザーアカウントを削除するときに、ユーザーのホームディレクトリ、メールス"
 "プールおよび一時ファイルを残しておくことができます。"
 
-#: panels/user-accounts/cc-user-panel.c:634
+#: panels/user-accounts/cc-user-panel.c:636
 msgid "_Delete Files"
 msgstr "ファイルを削除(_D)"
 
-#: panels/user-accounts/cc-user-panel.c:635
+#: panels/user-accounts/cc-user-panel.c:637
 msgid "_Keep Files"
 msgstr "ファイルを残す(_K)"
 
-#: panels/user-accounts/cc-user-panel.c:649
+#: panels/user-accounts/cc-user-panel.c:651
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "リモート管理の %s のアカウントを削除してもよろしいですか?"
 
-#: panels/user-accounts/cc-user-panel.c:653
+#: panels/user-accounts/cc-user-panel.c:655
 msgid "_Delete"
 msgstr "削除(_D)"
 
-#: panels/user-accounts/cc-user-panel.c:703
+#: panels/user-accounts/cc-user-panel.c:705
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "無効アカウント"
 
-#: panels/user-accounts/cc-user-panel.c:711
+#: panels/user-accounts/cc-user-panel.c:713
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "次のログイン時に設定"
 
-#: panels/user-accounts/cc-user-panel.c:714
+#: panels/user-accounts/cc-user-panel.c:716
 msgctxt "Password mode"
 msgid "None"
 msgstr "なし"
 
-#: panels/user-accounts/cc-user-panel.c:759
+#: panels/user-accounts/cc-user-panel.c:761
 msgid "Logged in"
 msgstr "ログイン中"
 
-#: panels/user-accounts/cc-user-panel.c:1089
+#: panels/user-accounts/cc-user-panel.c:1091
 msgid "Failed to contact the accounts service"
 msgstr "アカウントサービスの接続に失敗しました"
 
-#: panels/user-accounts/cc-user-panel.c:1091
+#: panels/user-accounts/cc-user-panel.c:1093
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "AccountService がインストールされ、有効になっているか確認してください。"
@@ -7339,18 +7257,18 @@ msgstr ""
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1123
+#: panels/user-accounts/cc-user-panel.c:1125
 msgid ""
 "To make changes,\n"
 "click the * icon first"
 msgstr "変更するには、まず * アイコンをクリックしてください"
 
-#: panels/user-accounts/cc-user-panel.c:1196
+#: panels/user-accounts/cc-user-panel.c:1198
 msgid "Create a user account"
 msgstr "ユーザーアカウントを作成します"
 
-#: panels/user-accounts/cc-user-panel.c:1207
-#: panels/user-accounts/cc-user-panel.c:1335
+#: panels/user-accounts/cc-user-panel.c:1209
+#: panels/user-accounts/cc-user-panel.c:1337
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7358,12 +7276,12 @@ msgstr ""
 "ユーザーアカウントを作成するには、\n"
 "まず * アイコンをクリックしてください"
 
-#: panels/user-accounts/cc-user-panel.c:1216
+#: panels/user-accounts/cc-user-panel.c:1218
 msgid "Delete the selected user account"
 msgstr "選択したユーザーアカウントを削除します"
 
-#: panels/user-accounts/cc-user-panel.c:1228
-#: panels/user-accounts/cc-user-panel.c:1339
+#: panels/user-accounts/cc-user-panel.c:1230
+#: panels/user-accounts/cc-user-panel.c:1341
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7392,24 +7310,24 @@ msgid "_Fingerprint Login"
 msgstr "指紋認証ログイン(_F)"
 
 #: panels/user-accounts/cc-user-panel.ui:321
-#: panels/user-accounts/cc-user-panel.ui:334
+#: panels/user-accounts/cc-user-panel.ui:337
 msgid "User Icon"
 msgstr "ユーザーアイコン"
 
-#: panels/user-accounts/cc-user-panel.ui:398
+#: panels/user-accounts/cc-user-panel.ui:401
 msgid "Last Login"
 msgstr "最終ログイン"
 
-#: panels/user-accounts/cc-user-panel.ui:447
+#: panels/user-accounts/cc-user-panel.ui:450
 msgid "Remove User…"
 msgstr "ユーザーの削除…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:480
+#: panels/user-accounts/cc-user-panel.ui:483
 msgid "No Users Found"
 msgstr "ユーザーが見つかりません"
 
-#: panels/user-accounts/cc-user-panel.ui:490
+#: panels/user-accounts/cc-user-panel.ui:493
 msgid "Unlock to add a user account."
 msgstr "ユーザーアカウントをアンロックします。"
 
@@ -7448,7 +7366,7 @@ msgstr "右の小指"
 #: panels/user-accounts/data/account-fingerprint.ui:39
 #: panels/user-accounts/um-fingerprint-dialog.c:677
 msgid "Enable Fingerprint Login"
-msgstr "指紋認証を有効にする"
+msgstr "指紋認証ログインを有効にする"
 
 #: panels/user-accounts/data/account-fingerprint.ui:89
 msgid "_Right index finger"
@@ -7467,8 +7385,8 @@ msgid ""
 "Your fingerprint was successfully saved. You should now be able to log in "
 "using your fingerprint reader."
 msgstr ""
-"指紋を登録しました。今から指紋リーダーを使ってログインできるようになりまし"
-"た。"
+"あなたの指紋を登録しました。今後は指紋リーダーを使ってログインできるように"
+"なりました。"
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
 msgid "Users"
@@ -7681,21 +7599,21 @@ msgstr "新しいパスワードには十分な種類の文字が含まれてい
 msgid "Unknown error"
 msgstr "原因不明のエラー"
 
-#: panels/user-accounts/user-utils.c:426
+#: panels/user-accounts/user-utils.c:430
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr ""
 "申し訳ありませんが、そのユーザー名は使用できません。 もう一度お試しください。"
 
-#: panels/user-accounts/user-utils.c:429
+#: panels/user-accounts/user-utils.c:433
 #, c-format
 msgid "The username is too long."
 msgstr "ユーザー名が長すぎます。"
 
-#: panels/user-accounts/user-utils.c:432
+#: panels/user-accounts/user-utils.c:436
 msgid "The username cannot start with a “-”."
 msgstr "ユーザー名の先頭文字に“-”は使えません。"
 
-#: panels/user-accounts/user-utils.c:435
+#: panels/user-accounts/user-utils.c:439
 msgid ""
 "The username should only consist of upper and lower case letters from a-z, "
 "digits and the following characters: . - _"
@@ -7703,7 +7621,7 @@ msgstr ""
 "ユーザー名には次の文字だけを使用してください。a から z の大文字・小文字、数"
 "字、'.'、'-'、および '_'。"
 
-#: panels/user-accounts/user-utils.c:439
+#: panels/user-accounts/user-utils.c:443
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr ""
 "ユーザー名はホームフォルダーの名前に使用されます。これは変更できません。"
@@ -7732,7 +7650,7 @@ msgstr "登録した指紋情報を削除しますか?"
 
 #: panels/user-accounts/um-fingerprint-dialog.c:264
 msgid "_Delete Fingerprints"
-msgstr "削除する(_D)"
+msgstr "指紋情報を削除(_D)"
 
 #: panels/user-accounts/um-fingerprint-dialog.c:270
 msgid ""
@@ -7751,7 +7669,7 @@ msgstr "完了です!"
 #: panels/user-accounts/um-fingerprint-dialog.c:543
 #, c-format
 msgid "Could not access “%s” device"
-msgstr "“%s” というデバイスにアクセスできません"
+msgstr "“%s”というデバイスにアクセスできません"
 
 #. translators:
 #. * The variable is the name of the device, for example:
@@ -7759,7 +7677,7 @@ msgstr "“%s” というデバイスにアクセスできません"
 #: panels/user-accounts/um-fingerprint-dialog.c:584
 #, c-format
 msgid "Could not start finger capture on “%s” device"
-msgstr "“%s” デバイスで指紋を読み取れませんでした"
+msgstr "“%s”デバイスで指紋を読み取れませんでした"
 
 #: panels/user-accounts/um-fingerprint-dialog.c:628
 msgid "Could not access any fingerprint readers"
@@ -7780,7 +7698,7 @@ msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
 "using the “%s” device."
 msgstr ""
-"指紋認証を有効にするには、“%s” のデバイスを使って、指紋を登録する必要がありま"
+"指紋認証ログインを有効にするには、“%s”のデバイスを使って、指紋を登録する必要がありま"
 "す。"
 
 #: panels/user-accounts/um-fingerprint-dialog.c:718
@@ -7964,6 +7882,10 @@ msgstr "ディスプレイの解像度を調整"
 #: panels/wacom/gsd-wacom-key-shortcut-button.c:217
 msgid "New shortcut…"
 msgstr "新しいショートカット…"
+
+#: panels/wacom/wacom-stylus-page.ui:25
+msgid "Default"
+msgstr "デフォルト"
 
 #: panels/wacom/wacom-stylus-page.ui:29
 msgid "Middle Mouse Button Click"
@@ -8151,7 +8073,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1873
+#: subprojects/gvc/gvc-mixer-control.c:1871
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -8159,15 +8081,89 @@ msgstr[0] "%u 出力"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1883
+#: subprojects/gvc/gvc-mixer-control.c:1881
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u 入力"
 
-#: subprojects/gvc/gvc-mixer-control.c:2738
+#: subprojects/gvc/gvc-mixer-control.c:2736
 msgid "System Sounds"
 msgstr "システムのサウンド"
+
+#~ msgctxt "balance"
+#~ msgid "Left"
+#~ msgstr "左"
+
+#~ msgctxt "balance"
+#~ msgid "Right"
+#~ msgstr "右"
+
+#~ msgctxt "balance"
+#~ msgid "Minimum"
+#~ msgstr "最小"
+
+#~ msgctxt "balance"
+#~ msgid "Maximum"
+#~ msgstr "最大"
+
+#~ msgid "_Subwoofer:"
+#~ msgstr "サブウーファー(_S):"
+
+#~ msgctxt "volume"
+#~ msgid "Unamplified"
+#~ msgstr "非増幅"
+
+#~ msgid "_Profile:"
+#~ msgstr "プロファイル(_P):"
+
+#~ msgid "_Test Speakers"
+#~ msgstr "スピーカーのテスト(_T)"
+
+#~ msgid "Peak detect"
+#~ msgstr "ピークの検出"
+
+#~ msgid "Device"
+#~ msgstr "デバイス"
+
+#~ msgid "Speaker Testing for %s"
+#~ msgstr "%s のスピーカーテスト"
+
+#~ msgid "C_hoose a device for sound output:"
+#~ msgstr "サウンド出力デバイスの選択(_H):"
+
+#~ msgid "Settings for the selected device:"
+#~ msgstr "選択したデバイスの設定:"
+
+#~ msgid "_Input volume:"
+#~ msgstr "入力の音量(_I):"
+
+#~ msgid "C_hoose a device for sound input:"
+#~ msgstr "サウンド入力デバイスの選択(_H):"
+
+#~ msgid "Sound Effects"
+#~ msgstr "音響効果"
+
+#~ msgid "No application is currently playing or recording audio."
+#~ msgstr "音声の再生または録音を実行しているアプリケーションはありません。"
+
+#~ msgid "Built-in"
+#~ msgstr "組み込み"
+
+#~ msgid "Sound Preferences"
+#~ msgstr "サウンドの設定"
+
+#~ msgid "Testing event sound"
+#~ msgstr "イベント音のテスト中"
+
+#~ msgid "From theme"
+#~ msgstr "テーマから"
+
+#~ msgid "C_hoose an alert sound:"
+#~ msgstr "警告音の選択(_H):"
+
+#~ msgid "Stop"
+#~ msgstr "停止"
 
 #~ msgid "Refresh Rate"
 #~ msgstr "リフレッシュレート"
