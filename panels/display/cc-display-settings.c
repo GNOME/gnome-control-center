@@ -32,6 +32,8 @@
 #define MINIMUM_WIDTH 740
 #define MINIMUM_HEIGHT 530
 
+#define MAX_SCALE_BUTTONS 5
+
 struct _CcDisplaySettings
 {
   GtkDrawingArea    object;
@@ -46,7 +48,6 @@ struct _CcDisplaySettings
   GListStore       *orientation_list;
   GListStore       *refresh_rate_list;
   GListStore       *resolution_list;
-  GListStore       *scale_list;
 
   GtkWidget        *orientation_row;
   GtkWidget        *refresh_rate_row;
@@ -70,6 +71,11 @@ enum {
 G_DEFINE_TYPE (CcDisplaySettings, cc_display_settings, GTK_TYPE_LIST_BOX)
 
 static GParamSpec *props[PROP_LAST];
+
+static void on_scale_btn_active_changed_cb (GtkWidget         *widget,
+                                            GParamSpec        *pspec,
+                                            CcDisplaySettings *self);
+
 
 static gboolean
 should_show_rotation (CcDisplaySettings *self)
@@ -204,11 +210,9 @@ round_scale_for_ui (double scale)
 }
 
 static gchar *
-get_scale_string (CcValueObject *obj)
+make_scale_string (gdouble scale)
 {
-  gdouble scale = g_value_get_double (cc_value_object_get_value (obj));
-
-  return g_strdup_printf (" %d %% ", (int) (round_scale_for_ui (scale)*100));
+  return g_strdup_printf ("%d %%", (int) (round_scale_for_ui (scale)*100));
 }
 
 static gint
@@ -258,7 +262,6 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   g_object_freeze_notify ((GObject*) self->orientation_row);
   g_object_freeze_notify ((GObject*) self->refresh_rate_row);
   g_object_freeze_notify ((GObject*) self->resolution_row);
-  g_object_freeze_notify ((GObject*) self->scale_row);
   g_object_freeze_notify ((GObject*) self->underscanning_switch);
 
   cc_display_monitor_get_geometry (self->selected_output, NULL, NULL, &width, &height);
@@ -392,29 +395,49 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
 
 
   /* Update scale row. */
-  g_list_store_remove_all (self->scale_list);
+  gtk_container_foreach (GTK_CONTAINER (self->scale_bbox), (GtkCallback) gtk_widget_destroy, NULL);
   if (!cc_display_config_is_cloning (self->config))
     {
+      GtkRadioButton *group = NULL;
+      gint buttons = 0;
       const gdouble *scales, *scale;
 
       scales = cc_display_mode_get_supported_scales (current_mode);
       for (scale = scales; *scale != 0.0; scale++)
         {
-          g_autoptr(CcValueObject) obj = NULL;
+          g_autofree gchar *scale_str = NULL;
+          GtkWidget *scale_btn;
 
           if (!display_mode_supported_at_scale (current_mode, *scale) &&
               cc_display_monitor_get_scale (self->selected_output) != *scale)
             continue;
 
-          obj = cc_value_object_new_collect (G_TYPE_DOUBLE, *scale);
-          g_list_store_append (self->scale_list, obj);
+          scale_str = make_scale_string (*scale);
+
+          scale_btn = gtk_radio_button_new_with_label_from_widget (group, scale_str);
+          if (!group)
+            group = GTK_RADIO_BUTTON (scale_btn);
+          gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (scale_btn), FALSE);
+          g_object_set_data_full (G_OBJECT (scale_btn),
+                                  "scale",
+                                  g_memdup (scale, sizeof (gdouble)),
+                                  g_free);
+          gtk_widget_show (scale_btn);
+          gtk_container_add (GTK_CONTAINER (self->scale_bbox), scale_btn);
+          g_signal_connect_object (scale_btn,
+                                   "notify::active",
+                                   G_CALLBACK (on_scale_btn_active_changed_cb),
+                                   self, 0);
 
           if (cc_display_monitor_get_scale (self->selected_output) == *scale)
-            hdy_combo_row_set_selected_index (HDY_COMBO_ROW (self->scale_row),
-                                              g_list_model_get_n_items (G_LIST_MODEL (self->scale_list)) - 1);
+            gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (scale_btn), TRUE);
+
+          buttons += 1;
+          if (buttons >= MAX_SCALE_BUTTONS)
+            break;
         }
 
-      gtk_widget_set_visible (self->scale_row, g_list_model_get_n_items (G_LIST_MODEL (self->scale_list)) > 1);
+      gtk_widget_set_visible (self->scale_row, buttons > 1);
     }
   else
     {
@@ -431,7 +454,6 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   g_object_thaw_notify ((GObject*) self->orientation_row);
   g_object_thaw_notify ((GObject*) self->refresh_rate_row);
   g_object_thaw_notify ((GObject*) self->resolution_row);
-  g_object_thaw_notify ((GObject*) self->scale_row);
   g_object_thaw_notify ((GObject*) self->underscanning_switch);
   self->updating = FALSE;
 
@@ -515,21 +537,20 @@ on_resolution_selection_changed_cb (GtkWidget         *widget,
 }
 
 static void
-on_scale_selection_changed_cb (GtkWidget         *widget,
-                               GParamSpec        *pspec,
-                               CcDisplaySettings *self)
+on_scale_btn_active_changed_cb (GtkWidget         *widget,
+                                GParamSpec        *pspec,
+                                CcDisplaySettings *self)
 {
-  gint idx;
-  g_autoptr(CcValueObject) obj = NULL;
-
+  gdouble scale;
   if (self->updating)
     return;
 
-  idx = hdy_combo_row_get_selected_index (HDY_COMBO_ROW (self->scale_row));
-  obj = g_list_model_get_item (G_LIST_MODEL (self->scale_list), idx);
+  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+    return;
 
+  scale = *(gdouble*) g_object_get_data (G_OBJECT (widget), "scale");
   cc_display_monitor_set_scale (self->selected_output,
-                                g_value_get_double (cc_value_object_get_value (obj)));
+                                scale);
 
   g_signal_emit_by_name (G_OBJECT (self), "updated", self->selected_output);
 }
@@ -612,7 +633,6 @@ cc_display_settings_finalize (GObject *object)
   g_clear_object (&self->orientation_list);
   g_clear_object (&self->refresh_rate_list);
   g_clear_object (&self->resolution_list);
-  g_clear_object (&self->scale_list);
 
   if (self->idle_udpate_id)
     g_source_remove (self->idle_udpate_id);
@@ -664,6 +684,7 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, orientation_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, refresh_rate_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, resolution_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, scale_bbox);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, scale_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, underscanning_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, underscanning_switch);
@@ -671,7 +692,6 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_orientation_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_refresh_rate_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_resolution_selection_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_scale_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_underscanning_switch_active_changed_cb);
 }
 
@@ -687,7 +707,6 @@ cc_display_settings_init (CcDisplaySettings *self)
   self->orientation_list = g_list_store_new (CC_TYPE_VALUE_OBJECT);
   self->refresh_rate_list = g_list_store_new (CC_TYPE_DISPLAY_MODE);
   self->resolution_list = g_list_store_new (CC_TYPE_DISPLAY_MODE);
-  self->scale_list = g_list_store_new (CC_TYPE_VALUE_OBJECT);
 
   self->updating = TRUE;
 
@@ -702,10 +721,6 @@ cc_display_settings_init (CcDisplaySettings *self)
   hdy_combo_row_bind_name_model (HDY_COMBO_ROW (self->resolution_row),
                                  G_LIST_MODEL (self->resolution_list),
                                  (HdyComboRowGetNameFunc) make_resolution_string,
-                                 NULL, NULL);
-  hdy_combo_row_bind_name_model (HDY_COMBO_ROW (self->scale_row),
-                                 G_LIST_MODEL (self->scale_list),
-                                 (HdyComboRowGetNameFunc) get_scale_string,
                                  NULL, NULL);
 
   self->updating = FALSE;
