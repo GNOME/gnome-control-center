@@ -501,24 +501,105 @@ get_primary_disc_info (CcInfoOverviewPanel *self)
 
   manager = udisks_client_get_object_manager (priv->client);
   objects = g_dbus_object_manager_get_objects (manager);
-  added_drives = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, NULL);
+  added_drives = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_object_unref);
 
   for (l = objects; l != NULL; l = l->next)
     {
-      UDisksDrive *drive;
-      drive = udisks_object_peek_drive (UDISKS_OBJECT (l->data));
+      g_autoptr(UDisksDrive) drive = NULL;
+      g_autoptr(UDisksMDRaid) mdraid = NULL;
+      const gchar *object_path;
+
+      drive = udisks_object_get_drive (UDISKS_OBJECT (l->data));
+      mdraid = udisks_object_get_mdraid (UDISKS_OBJECT (l->data));
+      object_path = g_dbus_object_get_object_path (G_DBUS_OBJECT (l->data));
+
+      /* Count MDRAID devices, and ignore their underlying drives */
+      if (mdraid != NULL &&
+          !g_hash_table_contains (added_drives, object_path))
+        {
+          GVariant *active_devices;
+          GVariantIter iter;
+          GVariant *child;
+
+          total_size += udisks_mdraid_get_size (mdraid);
+          g_hash_table_insert (added_drives,
+                               (gpointer) g_dbus_object_get_object_path (G_DBUS_OBJECT (l->data)),
+                               g_object_ref (mdraid));
+
+          /* Don't count the underlying devices again */
+          active_devices = udisks_mdraid_get_active_devices (mdraid);
+
+          g_variant_iter_init (&iter, active_devices);
+
+          while ((child = g_variant_iter_next_value (&iter)))
+            {
+              g_autoptr(UDisksBlock) block_device = NULL;
+              g_autoptr(GError) error = NULL;
+              GObject *existing_device;
+              const char *child_object_path, *drive_object_path;
+              GDBusObjectManagerClient *manager_client;
+
+              manager_client = G_DBUS_OBJECT_MANAGER_CLIENT (manager);
+
+              g_variant_get (child, "(&oiasta{sv})", &child_object_path, NULL, NULL, NULL, NULL, NULL);
+              block_device = udisks_block_proxy_new_sync (g_dbus_object_manager_client_get_connection (manager_client),
+                                                          G_DBUS_PROXY_FLAGS_NONE,
+                                                          g_dbus_object_manager_client_get_name (manager_client),
+                                                          child_object_path,
+                                                          NULL,
+                                                          &error);
+
+              if (block_device == NULL)
+                {
+                  g_critical ("Couldn't get proxy for block device '%s': %s", child_object_path, error->message);
+                  continue;
+                }
+
+              drive_object_path = udisks_block_get_drive (block_device);
+
+              drive = udisks_drive_proxy_new_sync (g_dbus_object_manager_client_get_connection (manager_client),
+                                                   G_DBUS_PROXY_FLAGS_NONE,
+                                                   g_dbus_object_manager_client_get_name (manager_client),
+                                                   drive_object_path,
+                                                   NULL,
+                                                   &error);
+
+              if (drive == NULL)
+                {
+                  g_critical ("Couldn't get proxy for drive device '%s': %s", drive_object_path, error->message);
+                  continue;
+                }
+
+              g_hash_table_insert (added_drives, (gpointer) drive_object_path, g_object_ref (drive));
+
+              /* Maybe we processed the underlying drive first; unprocess it */
+              existing_device = G_OBJECT (g_hash_table_lookup (added_drives,
+                                                               drive_object_path));
+              if (existing_device != NULL)
+                {
+                  guint64 size;
+
+                  /* doing this via g_object_get() works for both UDisksMDRaid
+                   * and UDisksDrive */
+                  g_object_get (existing_device, "size", &size, NULL);
+                  total_size -= size;
+                }
+            }
+
+          continue;
+        }
 
       /* Skip removable devices */
       if (drive == NULL ||
           udisks_drive_get_removable (drive) ||
           udisks_drive_get_ejectable (drive) ||
-          g_hash_table_contains (added_drives, udisks_drive_get_id (drive)))
+          g_hash_table_contains (added_drives, object_path))
         {
           continue;
         }
 
       total_size += udisks_drive_get_size (drive);
-      g_hash_table_add (added_drives, (gpointer) udisks_drive_get_id (drive));
+      g_hash_table_insert (added_drives, (gpointer) object_path, g_object_ref (drive));
     }
 
   if (total_size > 0)
