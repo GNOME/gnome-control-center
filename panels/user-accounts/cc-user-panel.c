@@ -365,9 +365,10 @@ add_user (CcUserPanel *self)
         gtk_dialog_run (GTK_DIALOG (dialog));
 
         user = cc_add_user_dialog_get_user (dialog);
-        generate_user_avatar (user);
-        if (user != NULL)
+        if (user != NULL) {
+                generate_user_avatar (user);
                 reload_users (self, user);
+        }
 
         gtk_widget_destroy (GTK_WIDGET (dialog));
 }
