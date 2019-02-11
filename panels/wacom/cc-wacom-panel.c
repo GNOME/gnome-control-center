@@ -52,6 +52,7 @@ struct _CcWacomPanel
 	GtkWidget        *stylus_notebook;
 	GtkWidget        *test_popover;
 	GtkWidget        *test_draw_area;
+	GtkWidget        *test_button;
 	GHashTable       *devices; /* key=GsdDevice, value=CcWacomDevice */
 	GHashTable       *pages; /* key=device name, value=GtkWidget */
 	GHashTable       *stylus_pages; /* key=CcWacomTool, value=GtkWidget */
@@ -337,6 +338,20 @@ add_stylus (CcWacomPanel *self,
 }
 
 static void
+update_test_button (CcWacomPanel *self)
+{
+	if (!self->test_button)
+		return;
+
+	if (g_hash_table_size (self->devices) == 0) {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->test_button), FALSE);
+		gtk_widget_set_sensitive (self->test_button, FALSE);
+	} else {
+		gtk_widget_set_sensitive (self->test_button, TRUE);
+	}
+}
+
+static void
 update_current_tool (CcWacomPanel  *panel,
 		     GdkDevice     *device,
 		     GdkDeviceTool *tool)
@@ -468,6 +483,9 @@ cc_wacom_panel_constructed (GObject *object)
 
 	g_signal_connect_object (shell, "event",
 				 G_CALLBACK (on_shell_event_cb), self, 0);
+
+	self->test_button = button;
+	update_test_button (self);
 }
 
 static const char *
@@ -603,6 +621,8 @@ update_current_page (CcWacomPanel  *self,
 		if (num_pages > 1)
 			gtk_notebook_set_current_page (GTK_NOTEBOOK (self->tablet_notebook), 1);
 	}
+
+	update_test_button (self);
 }
 
 static void
