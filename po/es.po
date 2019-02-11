@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-02-04 14:04+0000\n"
-"PO-Revision-Date: 2019-02-06 10:34+0100\n"
+"POT-Creation-Date: 2019-02-08 08:37+0000\n"
+"PO-Revision-Date: 2019-02-11 10:05+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -170,7 +170,7 @@ msgstr "Otros archivos"
 #: panels/applications/cc-applications-panel.ui:406
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
 #: panels/notifications/cc-notifications-panel.ui:167
-#: panels/privacy/cc-privacy-panel.ui:1085 panels/sound/gvc-mixer-dialog.c:1796
+#: panels/privacy/cc-privacy-panel.ui:1085
 msgid "Applications"
 msgstr "Aplicaciones"
 
@@ -216,7 +216,7 @@ msgstr "Cámara"
 #: panels/keyboard/shortcut-editor.ui:96 panels/network/network-proxy.ui:123
 #: panels/network/network-wifi.ui:781 panels/network/network-wifi.ui:1058
 #: panels/user-accounts/um-fingerprint-dialog.c:211
-#: subprojects/gvc/gvc-mixer-control.c:1866
+#: subprojects/gvc/gvc-mixer-control.c:1864
 msgid "Disabled"
 msgstr "Desactivado"
 
@@ -429,17 +429,17 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 #: panels/network/net-device-wifi.c:1200 panels/network/net-device-wifi.c:1280
 #: panels/network/net-device-wifi.c:1474 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:320
+#: panels/printers/pp-details-dialog.c:313
 #: panels/privacy/cc-privacy-panel.c:1123 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:607
 #: panels/sharing/cc-sharing-panel.c:427
 #: panels/user-accounts/cc-add-user-dialog.ui:28
-#: panels/user-accounts/cc-avatar-chooser.c:144
-#: panels/user-accounts/cc-avatar-chooser.c:272
+#: panels/user-accounts/cc-avatar-chooser.c:105
+#: panels/user-accounts/cc-avatar-chooser.c:233
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:636
-#: panels/user-accounts/cc-user-panel.c:654
+#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:656
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/user-accounts/um-fingerprint-dialog.c:261
 msgid "_Cancel"
@@ -527,7 +527,7 @@ msgstr "Apagar el modo avión"
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
 #: panels/network/cc-network-panel.ui:101
-#: panels/printers/pp-new-printer-dialog.c:1705
+#: panels/printers/pp-new-printer-dialog.c:1697
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -1506,7 +1506,6 @@ msgid "Display Mode"
 msgstr "Modo de la pantalla"
 
 #: panels/display/cc-display-panel.ui:201
-#| msgid "Drag displays to rearrange them"
 msgid "Drag displays to match your setup."
 msgstr "Arrastre las pantallas que coincidan con su configuración."
 
@@ -1515,7 +1514,6 @@ msgid "Display Arrangement"
 msgstr "Distribución de las pantallas"
 
 #: panels/display/cc-display-panel.ui:447
-#| msgid "Display Calibration"
 msgid "Display Configuration"
 msgstr "Configuración de la pantalla"
 
@@ -2228,8 +2226,6 @@ msgstr ""
 "Pulse Esc para cancelar o Retroceso para restablecer el atajo del teclado."
 
 #: panels/keyboard/shortcut-editor.ui:156 panels/printers/details-dialog.ui:38
-#: panels/sound/gvc-mixer-dialog.c:1480
-#: panels/sound/gvc-sound-theme-chooser.c:554
 msgid "Name"
 msgstr "Nombre"
 
@@ -2308,10 +2304,12 @@ msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "Establece el orden de los botones físicos en ratones y «touchpads»."
 
 #: panels/mouse/gnome-mouse-properties.ui:136
+#: panels/sound/cc-balance-slider.ui:13
 msgid "Left"
 msgstr "Izquierda"
 
 #: panels/mouse/gnome-mouse-properties.ui:146
+#: panels/sound/cc-balance-slider.ui:15
 msgid "Right"
 msgstr "Derecha"
 
@@ -2947,9 +2945,9 @@ msgid "Select file to import"
 msgstr "Seleccione el archivo que importar"
 
 #: panels/network/connection-editor/vpn-helpers.c:182
-#: panels/printers/pp-details-dialog.c:321
+#: panels/printers/pp-details-dialog.c:314
 #: panels/sharing/cc-sharing-panel.c:428
-#: panels/user-accounts/cc-avatar-chooser.c:273
+#: panels/user-accounts/cc-avatar-chooser.c:234
 msgid "_Open"
 msgstr "_Abrir"
 
@@ -4637,12 +4635,12 @@ msgid "Printer “%s” has been deleted"
 msgstr "Se ha eliminado la impresora «%s»"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:941
+#: panels/printers/cc-printers-panel.c:938
 msgid "Failed to add new printer."
 msgstr "Falló al añadir una impresora nueva."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1253
+#: panels/printers/cc-printers-panel.c:1242
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No se pudo cargar la IU: %s"
@@ -4721,7 +4719,7 @@ msgstr "No hay trabajos de impresión activos"
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
 #: panels/printers/pp-new-printer-dialog.c:363
-#: panels/printers/pp-new-printer-dialog.c:428
+#: panels/printers/pp-new-printer-dialog.c:427
 msgid "Add Printer"
 msgstr "Añadir impresora"
 
@@ -4756,20 +4754,20 @@ msgstr "Página de prueba"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:133
-#: panels/printers/pp-details-dialog.c:426
+#: panels/printers/pp-details-dialog.c:417
 #, c-format
 msgid "%s Details"
 msgstr "Detalles de %s"
 
-#: panels/printers/pp-details-dialog.c:182
+#: panels/printers/pp-details-dialog.c:180
 msgid "No suitable driver found"
 msgstr "No se ha encontrado ningún controlador adecuado"
 
-#: panels/printers/pp-details-dialog.c:317
+#: panels/printers/pp-details-dialog.c:310
 msgid "Select PPD File"
 msgstr "Seleccionar archivo PPD"
 
-#: panels/printers/pp-details-dialog.c:326
+#: panels/printers/pp-details-dialog.c:319
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4782,7 +4780,7 @@ msgid "Select Printer Driver"
 msgstr "Seleccionar el controlador de la impresora"
 
 #: panels/printers/ppd-selection-dialog.ui:40
-#: panels/user-accounts/cc-avatar-chooser.c:146
+#: panels/user-accounts/cc-avatar-chooser.c:107
 msgid "Select"
 msgstr "Seleccionar"
 
@@ -4887,7 +4885,7 @@ msgid "Completed"
 msgstr "Completado"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:389
+#: panels/printers/pp-jobs-dialog.c:390
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -4902,62 +4900,62 @@ msgid "%s — Active Jobs"
 msgstr "%s - trabajos activos"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:618
+#: panels/printers/pp-jobs-dialog.c:617
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Introduzca las credenciales para imprimir desde %s."
 
-#: panels/printers/pp-new-printer-dialog.c:378
+#: panels/printers/pp-new-printer-dialog.c:380
 msgid "Unlock Print Server"
 msgstr "Desbloquear servidor de impresión"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:382
+#: panels/printers/pp-new-printer-dialog.c:384
 #, c-format
 msgid "Unlock %s."
 msgstr "Desbloquear %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:387
+#: panels/printers/pp-new-printer-dialog.c:388
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Introduzca su nombre de usuario y su contraseña para ver las impresoras en "
 "%s."
 
-#: panels/printers/pp-new-printer-dialog.c:842
+#: panels/printers/pp-new-printer-dialog.c:838
 msgid "Searching for Printers"
 msgstr "Buscando impresoras"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1688
+#: panels/printers/pp-new-printer-dialog.c:1680
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1693
+#: panels/printers/pp-new-printer-dialog.c:1685
 msgid "Serial Port"
 msgstr "Puerto serie"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1700
+#: panels/printers/pp-new-printer-dialog.c:1692
 msgid "Parallel Port"
 msgstr "Puerto paralelo"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1741
+#: panels/printers/pp-new-printer-dialog.c:1734
 #, c-format
 msgid "Location: %s"
 msgstr "Ubicación: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1746
+#: panels/printers/pp-new-printer-dialog.c:1739
 #, c-format
 msgid "Address: %s"
 msgstr "Dirección: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1775
+#: panels/printers/pp-new-printer-dialog.c:1766
 msgid "Server requires authentication"
 msgstr "El servidor requiere autenticación"
 
@@ -5049,7 +5047,7 @@ msgid "Advanced"
 msgstr "Avanzado"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:910
+#: panels/printers/pp-options-dialog.c:908
 msgid "Test page"
 msgstr "Página de prueba"
 
@@ -5095,12 +5093,12 @@ msgid "Manufacturer"
 msgstr "Fabricante"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:612 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:606 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "No hay trabajos activos"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:617
+#: panels/printers/pp-printer-entry.c:611
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -5108,111 +5106,111 @@ msgstr[0] "%u trabajo"
 msgstr[1] "%u trabajos"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:775
+#: panels/printers/pp-printer-entry.c:766
 msgid "Low on toner"
 msgstr "Tóner bajo"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:777
+#: panels/printers/pp-printer-entry.c:768
 msgid "Out of toner"
 msgstr "Sin tóner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:780
+#: panels/printers/pp-printer-entry.c:771
 msgid "Low on developer"
 msgstr "Nivel de revelador bajo"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:783
+#: panels/printers/pp-printer-entry.c:774
 msgid "Out of developer"
 msgstr "Sin revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:785
+#: panels/printers/pp-printer-entry.c:776
 msgid "Low on a marker supply"
 msgstr "Marcador bajo"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:787
+#: panels/printers/pp-printer-entry.c:778
 msgid "Out of a marker supply"
 msgstr "Sin marcador"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:789
+#: panels/printers/pp-printer-entry.c:780
 msgid "Open cover"
 msgstr "Abrir cubierta"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:791
+#: panels/printers/pp-printer-entry.c:782
 msgid "Open door"
 msgstr "Abrir puerta"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:793
+#: panels/printers/pp-printer-entry.c:784
 msgid "Low on paper"
 msgstr "Nivel de papel bajo"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:795
+#: panels/printers/pp-printer-entry.c:786
 msgid "Out of paper"
 msgstr "Sin papel"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:797
+#: panels/printers/pp-printer-entry.c:788
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Desconectada"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:799
-#: panels/printers/pp-printer-entry.c:927
+#: panels/printers/pp-printer-entry.c:790
+#: panels/printers/pp-printer-entry.c:918
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Detenida"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:801
+#: panels/printers/pp-printer-entry.c:792
 msgid "Waste receptacle almost full"
 msgstr "Recipiente de residuos casi lleno"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:803
+#: panels/printers/pp-printer-entry.c:794
 msgid "Waste receptacle full"
 msgstr "Receptáculo de residuos lleno"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:805
+#: panels/printers/pp-printer-entry.c:796
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor óptico está cerca del final de su vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:807
+#: panels/printers/pp-printer-entry.c:798
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor óptico ya no funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:913
+#: panels/printers/pp-printer-entry.c:904
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Preparada"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:918
+#: panels/printers/pp-printer-entry.c:909
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "No aceptar trabajos"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:923
+#: panels/printers/pp-printer-entry.c:914
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:947
+#: panels/printers/pp-printer-entry.c:938
 msgid "Clean print heads"
 msgstr "Limpiar cabezales de la impresora"
 
@@ -5732,7 +5730,7 @@ msgid "Login _Screen"
 msgstr "Pantalla de inicio de _sesión"
 
 #: panels/region/cc-region-panel.ui:60
-#: panels/user-accounts/cc-user-panel.ui:358
+#: panels/user-accounts/cc-user-panel.ui:361
 msgid "_Language"
 msgstr "_Idioma"
 
@@ -6060,212 +6058,134 @@ msgstr ""
 "Se requiere autenticación para activar o desactivar el inicio de sesión "
 "remota"
 
-#: panels/sound/data/gnome-sound-panel.desktop.in.in:3
-msgid "Sound"
-msgstr "Sonido"
+#: panels/sound/cc-alert-chooser.c:151
+msgid "Custom"
+msgstr "Personalizado"
 
-#: panels/sound/data/gnome-sound-panel.desktop.in.in:4
-msgid "Change sound levels, inputs, outputs, and alert sounds"
-msgstr "Cambiar el volumen de entrada y salida de sonido y las alertas sonoras"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/sound/data/gnome-sound-panel.desktop.in.in:7
-msgid "multimedia-volume-control"
-msgstr "multimedia-volume-control"
-
-#. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/sound/data/gnome-sound-panel.desktop.in.in:20
-msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
-msgstr ""
-"tarjeta;micrófono;volumen;desvanecer;balance;bluetooth;cascos;auriculares;"
-"sonido;"
-
-#. Translators: This is the name of an audio file that sounds like the bark of a dog.
-#. You might want to translate it into the equivalent words of your language.
-#: panels/sound/data/sounds/gnome-sounds-default.xml.in.in:6
+#: panels/sound/cc-alert-chooser.ui:12 panels/sound/cc-alert-selector.ui:9
 msgid "Bark"
 msgstr "Ladrido"
 
-#. Translators: This is the name of an audio file that sounds like a water drip.
-#. You might want to translate it into the equivalent words of your language.
-#: panels/sound/data/sounds/gnome-sounds-default.xml.in.in:12
+#: panels/sound/cc-alert-chooser.ui:19 panels/sound/cc-alert-selector.ui:15
 msgid "Drip"
 msgstr "Goteo"
 
-#. Translators: This is the name of an audio file that sounds like tapping glass.
-#. You might want to translate it into the equivalent words of your language.
-#: panels/sound/data/sounds/gnome-sounds-default.xml.in.in:18
+#: panels/sound/cc-alert-chooser.ui:26 panels/sound/cc-alert-selector.ui:21
 msgid "Glass"
 msgstr "Vaso"
 
-#. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
-#. You might want to translate it into the equivalent words of your language.
-#: panels/sound/data/sounds/gnome-sounds-default.xml.in.in:24
+#: panels/sound/cc-alert-chooser.ui:33 panels/sound/cc-alert-selector.ui:27
 msgid "Sonar"
 msgstr "Sonar"
 
-#: panels/sound/gvc-balance-bar.c:106
-msgctxt "balance"
-msgid "Left"
-msgstr "Izquierda"
-
-#: panels/sound/gvc-balance-bar.c:107
-msgctxt "balance"
-msgid "Right"
-msgstr "Derecha"
-
-#: panels/sound/gvc-balance-bar.c:110
-msgctxt "balance"
+#: panels/sound/cc-fade-slider.ui:13
+#| msgctxt "balance"
+#| msgid "Rear"
 msgid "Rear"
 msgstr "Trasero"
 
-#: panels/sound/gvc-balance-bar.c:111
-msgctxt "balance"
+#: panels/sound/cc-fade-slider.ui:15
+#| msgctxt "balance"
+#| msgid "Front"
 msgid "Front"
 msgstr "Frontal"
 
-#: panels/sound/gvc-balance-bar.c:114
-msgctxt "balance"
-msgid "Minimum"
-msgstr "Mínimo"
+#: panels/sound/cc-output-test-dialog.c:134
+#, c-format
+#| msgid "Settings"
+msgid "Testing %s"
+msgstr "Probando %s"
 
-#: panels/sound/gvc-balance-bar.c:115
-msgctxt "balance"
-msgid "Maximum"
-msgstr "Máximo"
+#: panels/sound/cc-output-test-dialog.ui:127
+msgid "Click a speaker to test"
+msgstr "Pulse para probar un altavoz"
 
-#: panels/sound/gvc-balance-bar.c:291
-msgid "_Balance:"
-msgstr "_Balance:"
+#: panels/sound/cc-sound-panel.ui:30
+#| msgid "System Bus"
+msgid "System Volume"
+msgstr "Volumen del sistema"
 
-#: panels/sound/gvc-balance-bar.c:294
-msgid "_Fade:"
-msgstr "_Desvanecimiento:"
+#: panels/sound/cc-sound-panel.ui:46
+#| msgid "Volume mute"
+msgid "Volume Levels"
+msgstr "Niveles de volumen"
 
-#: panels/sound/gvc-balance-bar.c:297
-msgid "_Subwoofer:"
-msgstr "_Subwoofer:"
+#: panels/sound/cc-sound-panel.ui:68
+msgid "Output"
+msgstr "Salida"
 
-#: panels/sound/gvc-channel-bar.c:614 panels/sound/gvc-channel-bar.c:623
+#: panels/sound/cc-sound-panel.ui:94
+#| msgid "_Output volume:"
+msgid "Output Device"
+msgstr "Dispositivo de salida"
+
+#: panels/sound/cc-sound-panel.ui:117
+msgid "Test"
+msgstr "Probar"
+
+#: panels/sound/cc-sound-panel.ui:147 panels/sound/cc-sound-panel.ui:319
+#| msgid "_Configuration URL"
+msgid "Configuration"
+msgstr "Configuración"
+
+#: panels/sound/cc-sound-panel.ui:179
+#| msgid "_Balance:"
+msgid "Balance"
+msgstr "Balance"
+
+#: panels/sound/cc-sound-panel.ui:205
+#| msgid "_Fade:"
+msgid "Fade"
+msgstr "Desvanecer"
+
+#: panels/sound/cc-sound-panel.ui:231
+msgid "Subwoofer"
+msgstr "Subwoofer"
+
+#: panels/sound/cc-sound-panel.ui:253
+msgid "Input"
+msgstr "Entrada"
+
+#: panels/sound/cc-sound-panel.ui:279
+#| msgid "Input level:"
+msgid "Input Device"
+msgstr "Dispositivo de entrada"
+
+#: panels/sound/cc-sound-panel.ui:351
+#| msgid "Volume up"
+msgid "Volume"
+msgstr "Volumen"
+
+#: panels/sound/cc-sound-panel.ui:373
+#| msgctxt "Sound event"
+#| msgid "Alert sound"
+msgid "Alert Sound"
+msgstr "Sonido de alerta"
+
+#: panels/sound/cc-volume-slider.c:178
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: panels/sound/gvc-channel-bar.c:618
-msgctxt "volume"
-msgid "Unamplified"
-msgstr "Sin amplificar"
+#: panels/sound/gnome-sound-panel.desktop.in.in:3
+msgid "Sound"
+msgstr "Sonido"
 
-#: panels/sound/gvc-combo-box.c:166 panels/sound/gvc-mixer-dialog.c:253
-#: panels/sound/gvc-mixer-dialog.c:520
-msgid "_Profile:"
-msgstr "_Perfil:"
+#: panels/sound/gnome-sound-panel.desktop.in.in:4
+msgid "Change sound levels, inputs, outputs, and alert sounds"
+msgstr "Cambiar el volumen de entrada y salida de sonido y las alertas sonoras"
 
-#: panels/sound/gvc-mixer-dialog.c:255
-msgid "_Test Speakers"
-msgstr "_Probar los altavoces"
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: panels/sound/gnome-sound-panel.desktop.in.in:7
+msgid "multimedia-volume-control"
+msgstr "multimedia-volume-control"
 
-#: panels/sound/gvc-mixer-dialog.c:424
-msgid "Peak detect"
-msgstr "Detección de picos"
-
-#: panels/sound/gvc-mixer-dialog.c:1499
-msgid "Device"
-msgstr "Dispositivo"
-
-#: panels/sound/gvc-mixer-dialog.c:1562
-#, c-format
-msgid "Speaker Testing for %s"
-msgstr "Prueba de altavoces para %s"
-
-#: panels/sound/gvc-mixer-dialog.c:1620
-msgid "_Output volume:"
-msgstr "Volumen de sali_da:"
-
-#: panels/sound/gvc-mixer-dialog.c:1636
-msgid "Output"
-msgstr "Salida"
-
-#: panels/sound/gvc-mixer-dialog.c:1642
-msgid "C_hoose a device for sound output:"
-msgstr "_Elegir un dispositivo para la salida de sonido:"
-
-#: panels/sound/gvc-mixer-dialog.c:1667
-msgid "Settings for the selected device:"
-msgstr "Configuración para el dispositivo seleccionado:"
-
-#: panels/sound/gvc-mixer-dialog.c:1681
-msgid "Input"
-msgstr "Entrada"
-
-#: panels/sound/gvc-mixer-dialog.c:1690
-msgid "_Input volume:"
-msgstr "Volumen de _entrada:"
-
-#: panels/sound/gvc-mixer-dialog.c:1713
-msgid "Input level:"
-msgstr "Nivel de entrada:"
-
-#: panels/sound/gvc-mixer-dialog.c:1743
-msgid "C_hoose a device for sound input:"
-msgstr "_Elegir un dispositivo para la entrada de sonido:"
-
-#: panels/sound/gvc-mixer-dialog.c:1771
-msgid "Sound Effects"
-msgstr "Efectos de sonido"
-
-#: panels/sound/gvc-mixer-dialog.c:1780
-msgid "_Alert volume:"
-msgstr "Volumen de _alerta:"
-
-#: panels/sound/gvc-mixer-dialog.c:1805
-msgid "No application is currently playing or recording audio."
-msgstr "Actualmente ninguna aplicación está reproduciendo o grabando sonido."
-
-#: panels/sound/gvc-sound-theme-chooser.c:187
-msgid "Built-in"
-msgstr "Integrado"
-
-#: panels/sound/gvc-sound-theme-chooser.c:446
-#: panels/sound/gvc-sound-theme-chooser.c:458
-#: panels/sound/gvc-sound-theme-chooser.c:470
-msgid "Sound Preferences"
-msgstr "Preferencias de sonido"
-
-#: panels/sound/gvc-sound-theme-chooser.c:449
-#: panels/sound/gvc-sound-theme-chooser.c:460
-#: panels/sound/gvc-sound-theme-chooser.c:472
-msgid "Testing event sound"
-msgstr "Comprobando el sonido de evento"
-
-#: panels/sound/gvc-sound-theme-chooser.c:544
-#: panels/wacom/wacom-stylus-page.ui:25
-msgid "Default"
-msgstr "Predeterminado"
-
-#: panels/sound/gvc-sound-theme-chooser.c:545
-msgid "From theme"
-msgstr "Del tema"
-
-#: panels/sound/gvc-sound-theme-chooser.c:720
-msgid "C_hoose an alert sound:"
-msgstr "_Elegir un sonido de alerta:"
-
-#: panels/sound/gvc-speaker-test.c:229
-msgid "Stop"
-msgstr "Detener"
-
-#: panels/sound/gvc-speaker-test.c:229 panels/sound/gvc-speaker-test.c:343
-msgid "Test"
-msgstr "Probar"
-
-#: panels/sound/gvc-speaker-test.c:237
-msgid "Subwoofer"
-msgstr "Subwoofer"
-
-#: panels/sound/sound-theme-file-utils.c:288
-msgid "Custom"
-msgstr "Personalizado"
+#. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/sound/gnome-sound-panel.desktop.in.in:20
+msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
+msgstr ""
+"tarjeta;micrófono;volumen;desvanecer;balance;bluetooth;cascos;auriculares;"
+"sonido;"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.c:94
 #: panels/thunderbolt/cc-bolt-device-entry.c:125
@@ -6396,7 +6316,6 @@ msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "El soporte de Thunderbolt se ha desactivado en la BIOS."
 
 #: panels/thunderbolt/cc-bolt-panel.c:517
-#| msgid "The profile could not be generated."
 msgid "Thunderbolt security level could not be determined."
 msgstr "No se puede determinar el nivel de seguridad de Thunderbolt."
 
@@ -7115,7 +7034,7 @@ msgstr "Debe estar conectado para añadir usuarios corporativos."
 msgid "_Enterprise Login"
 msgstr "Inicio de s_esión corporativo"
 
-#: panels/user-accounts/cc-avatar-chooser.c:269
+#: panels/user-accounts/cc-avatar-chooser.c:230
 msgid "Browse for more pictures"
 msgstr "Examinar para buscar más imágenes"
 
@@ -7163,7 +7082,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:766
+#: panels/user-accounts/cc-user-panel.c:768
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7171,7 +7090,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:770
+#: panels/user-accounts/cc-user-panel.c:772
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7260,26 +7179,26 @@ msgstr "No se pudo conectar al dominio %s: %s"
 msgid "Your account"
 msgstr "Su cuenta"
 
-#: panels/user-accounts/cc-user-panel.c:384
+#: panels/user-accounts/cc-user-panel.c:386
 msgid "Failed to delete user"
 msgstr "Falló al eliminar el usuario"
 
-#: panels/user-accounts/cc-user-panel.c:442
-#: panels/user-accounts/cc-user-panel.c:501
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:444
+#: panels/user-accounts/cc-user-panel.c:503
+#: panels/user-accounts/cc-user-panel.c:555
 msgid "Failed to revoke remotely managed user"
 msgstr "Falló al revocar remotamente el usuario gestionado"
 
-#: panels/user-accounts/cc-user-panel.c:605
+#: panels/user-accounts/cc-user-panel.c:607
 msgid "You cannot delete your own account."
 msgstr "No puede eliminar su propia cuenta."
 
-#: panels/user-accounts/cc-user-panel.c:614
+#: panels/user-accounts/cc-user-panel.c:616
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aún está registrado en el sistema"
 
-#: panels/user-accounts/cc-user-panel.c:618
+#: panels/user-accounts/cc-user-panel.c:620
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7287,12 +7206,12 @@ msgstr ""
 "Eliminar un usuario mientras está registrado en el sistema puede dejar el "
 "sistema en un estado inconsistente."
 
-#: panels/user-accounts/cc-user-panel.c:627
+#: panels/user-accounts/cc-user-panel.c:629
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "¿Quiere mantener los archivos de %s?"
 
-#: panels/user-accounts/cc-user-panel.c:631
+#: panels/user-accounts/cc-user-panel.c:633
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7300,48 +7219,48 @@ msgstr ""
 "Es posible mantener la carpeta personal, el «spool» del correo y los "
 "archivos temporales al eliminar una cuenta de usuario."
 
-#: panels/user-accounts/cc-user-panel.c:634
+#: panels/user-accounts/cc-user-panel.c:636
 msgid "_Delete Files"
 msgstr "_Eliminar archivos"
 
-#: panels/user-accounts/cc-user-panel.c:635
+#: panels/user-accounts/cc-user-panel.c:637
 msgid "_Keep Files"
 msgstr "_Mantener archivos"
 
-#: panels/user-accounts/cc-user-panel.c:649
+#: panels/user-accounts/cc-user-panel.c:651
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr ""
 "¿Está seguro de que quiere revocar remotamente la cuenta gestionada de %s?"
 
-#: panels/user-accounts/cc-user-panel.c:653
+#: panels/user-accounts/cc-user-panel.c:655
 msgid "_Delete"
 msgstr "_Eliminar"
 
-#: panels/user-accounts/cc-user-panel.c:703
+#: panels/user-accounts/cc-user-panel.c:705
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Cuenta desactivada"
 
-#: panels/user-accounts/cc-user-panel.c:711
+#: panels/user-accounts/cc-user-panel.c:713
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar en el siguiente inicio de sesión"
 
-#: panels/user-accounts/cc-user-panel.c:714
+#: panels/user-accounts/cc-user-panel.c:716
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ninguno"
 
-#: panels/user-accounts/cc-user-panel.c:759
+#: panels/user-accounts/cc-user-panel.c:761
 msgid "Logged in"
 msgstr "Sesión iniciada"
 
-#: panels/user-accounts/cc-user-panel.c:1089
+#: panels/user-accounts/cc-user-panel.c:1091
 msgid "Failed to contact the accounts service"
 msgstr "Falló al contactar con el servicio de cuentas"
 
-#: panels/user-accounts/cc-user-panel.c:1091
+#: panels/user-accounts/cc-user-panel.c:1093
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 
@@ -7349,7 +7268,7 @@ msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1123
+#: panels/user-accounts/cc-user-panel.c:1125
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7357,12 +7276,12 @@ msgstr ""
 "Para realizar los cambios\n"
 "pulse primero el icono *"
 
-#: panels/user-accounts/cc-user-panel.c:1196
+#: panels/user-accounts/cc-user-panel.c:1198
 msgid "Create a user account"
 msgstr "Crear una cuenta de usuario"
 
-#: panels/user-accounts/cc-user-panel.c:1207
-#: panels/user-accounts/cc-user-panel.c:1335
+#: panels/user-accounts/cc-user-panel.c:1209
+#: panels/user-accounts/cc-user-panel.c:1337
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7370,12 +7289,12 @@ msgstr ""
 "Para crear un usuario\n"
 "pulse primero el icono *"
 
-#: panels/user-accounts/cc-user-panel.c:1216
+#: panels/user-accounts/cc-user-panel.c:1218
 msgid "Delete the selected user account"
 msgstr "Quitar la cuenta de usuario seleccionada"
 
-#: panels/user-accounts/cc-user-panel.c:1228
-#: panels/user-accounts/cc-user-panel.c:1339
+#: panels/user-accounts/cc-user-panel.c:1230
+#: panels/user-accounts/cc-user-panel.c:1341
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7404,24 +7323,24 @@ msgid "_Fingerprint Login"
 msgstr "Inicio de sesión con _huella"
 
 #: panels/user-accounts/cc-user-panel.ui:321
-#: panels/user-accounts/cc-user-panel.ui:334
+#: panels/user-accounts/cc-user-panel.ui:337
 msgid "User Icon"
 msgstr "Icono de usuario"
 
-#: panels/user-accounts/cc-user-panel.ui:398
+#: panels/user-accounts/cc-user-panel.ui:401
 msgid "Last Login"
 msgstr "Último inicio de sesión"
 
-#: panels/user-accounts/cc-user-panel.ui:447
+#: panels/user-accounts/cc-user-panel.ui:450
 msgid "Remove User…"
 msgstr "Quitar usuario…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:480
+#: panels/user-accounts/cc-user-panel.ui:483
 msgid "No Users Found"
 msgstr "No se han encontrado usuarios"
 
-#: panels/user-accounts/cc-user-panel.ui:490
+#: panels/user-accounts/cc-user-panel.ui:493
 msgid "Unlock to add a user account."
 msgstr "Desbloquear para añadir una cuenta de usuario."
 
@@ -7690,20 +7609,20 @@ msgstr "La contraseña nueva no contiene suficientes caracteres diferentes"
 msgid "Unknown error"
 msgstr "Error desconocido"
 
-#: panels/user-accounts/user-utils.c:426
+#: panels/user-accounts/user-utils.c:430
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "El nombre de usuario no está disponible. Pruebe con otro."
 
-#: panels/user-accounts/user-utils.c:429
+#: panels/user-accounts/user-utils.c:433
 #, c-format
 msgid "The username is too long."
 msgstr "El nombre de usuario es demasiado largo."
 
-#: panels/user-accounts/user-utils.c:432
+#: panels/user-accounts/user-utils.c:436
 msgid "The username cannot start with a “-”."
 msgstr "El nombre de usuario no puede comenzar por «-»."
 
-#: panels/user-accounts/user-utils.c:435
+#: panels/user-accounts/user-utils.c:439
 msgid ""
 "The username should only consist of upper and lower case letters from a-z, "
 "digits and the following characters: . - _"
@@ -7711,7 +7630,7 @@ msgstr ""
 "El nombre de usuario debe constar de letras mayúsculas y minúsculas de la a-"
 "z, dígitos y cualquiera de los caracteres: «.», «-» o «_»."
 
-#: panels/user-accounts/user-utils.c:439
+#: panels/user-accounts/user-utils.c:443
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr "Esto se usará para nombrar su carpeta personal y no se puede cambiar."
 
@@ -7972,6 +7891,10 @@ msgstr "Ajustar la resolución de la pantalla"
 msgid "New shortcut…"
 msgstr "Atajo nuevo..."
 
+#: panels/wacom/wacom-stylus-page.ui:25
+msgid "Default"
+msgstr "Predeterminado"
+
 #: panels/wacom/wacom-stylus-page.ui:29
 msgid "Middle Mouse Button Click"
 msgstr "Pulsación del botón derecho del ratón"
@@ -8164,7 +8087,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1873
+#: subprojects/gvc/gvc-mixer-control.c:1871
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -8173,16 +8096,94 @@ msgstr[1] "%u salidas"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1883
+#: subprojects/gvc/gvc-mixer-control.c:1881
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u entrada"
 msgstr[1] "%u entradas"
 
-#: subprojects/gvc/gvc-mixer-control.c:2738
+#: subprojects/gvc/gvc-mixer-control.c:2736
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
+
+#~ msgctxt "balance"
+#~ msgid "Left"
+#~ msgstr "Izquierda"
+
+#~ msgctxt "balance"
+#~ msgid "Right"
+#~ msgstr "Derecha"
+
+#~ msgctxt "balance"
+#~ msgid "Minimum"
+#~ msgstr "Mínimo"
+
+#~ msgctxt "balance"
+#~ msgid "Maximum"
+#~ msgstr "Máximo"
+
+#~ msgid "_Subwoofer:"
+#~ msgstr "_Subwoofer:"
+
+#~ msgctxt "volume"
+#~ msgid "Unamplified"
+#~ msgstr "Sin amplificar"
+
+#~ msgid "_Profile:"
+#~ msgstr "_Perfil:"
+
+#~ msgid "_Test Speakers"
+#~ msgstr "_Probar los altavoces"
+
+#~ msgid "Peak detect"
+#~ msgstr "Detección de picos"
+
+#~ msgid "Device"
+#~ msgstr "Dispositivo"
+
+#~ msgid "Speaker Testing for %s"
+#~ msgstr "Prueba de altavoces para %s"
+
+#~ msgid "C_hoose a device for sound output:"
+#~ msgstr "_Elegir un dispositivo para la salida de sonido:"
+
+#~ msgid "Settings for the selected device:"
+#~ msgstr "Configuración para el dispositivo seleccionado:"
+
+#~ msgid "_Input volume:"
+#~ msgstr "Volumen de _entrada:"
+
+#~ msgid "C_hoose a device for sound input:"
+#~ msgstr "_Elegir un dispositivo para la entrada de sonido:"
+
+#~ msgid "Sound Effects"
+#~ msgstr "Efectos de sonido"
+
+#~ msgid "_Alert volume:"
+#~ msgstr "Volumen de _alerta:"
+
+#~ msgid "No application is currently playing or recording audio."
+#~ msgstr ""
+#~ "Actualmente ninguna aplicación está reproduciendo o grabando sonido."
+
+#~ msgid "Built-in"
+#~ msgstr "Integrado"
+
+#~ msgid "Sound Preferences"
+#~ msgstr "Preferencias de sonido"
+
+#~ msgid "Testing event sound"
+#~ msgstr "Comprobando el sonido de evento"
+
+#~ msgid "From theme"
+#~ msgstr "Del tema"
+
+#~ msgid "C_hoose an alert sound:"
+#~ msgstr "_Elegir un sonido de alerta:"
+
+#~ msgid "Stop"
+#~ msgstr "Detener"
 
 #~ msgid "Refresh Rate"
 #~ msgstr "Tasa de refresco"
@@ -11621,10 +11622,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Enable _window and button sounds"
 #~ msgstr "Activar sonidos de _ventanas y botones"
-
-#~ msgctxt "Sound event"
-#~ msgid "Alert sound"
-#~ msgstr "Sonido de alarma"
 
 #~ msgctxt "Sound event"
 #~ msgid "Windows and Buttons"
