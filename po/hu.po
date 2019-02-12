@@ -12,23 +12,23 @@
 # Mate ORY <orymate at gmail d0t com>, 2006.
 # Richard Somloi <ricsipontaz at gmail dot com>, 2011, 2012.
 # Peter Trombitas <trombipeti at gmail dot com>, 2012.
-# Balázs Úr <urbalazs at gmail dot com>, 2013, 2014, 2015, 2016, 2017, 2018, 2019.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2013, 2014, 2015, 2016, 2017, 2018, 2019.
 # Balázs Meskó <mesko.balazs at fsf dot hu>, 2019.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-02-07 08:04+0000\n"
-"PO-Revision-Date: 2019-02-07 19:41+0100\n"
-"Last-Translator: Meskó Balázs <mesko.balazs@fsf.hu>\n"
+"POT-Creation-Date: 2019-02-11 18:04+0000\n"
+"PO-Revision-Date: 2019-02-12 22:55+0100\n"
+"Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Lokalize 1.2\n"
 
 #: panels/applications/cc-applications-panel.c:558
 msgid "System Bus"
@@ -437,8 +437,8 @@ msgstr "A %s mappába felvett képek itt megjelennek"
 #: panels/user-accounts/cc-avatar-chooser.c:105
 #: panels/user-accounts/cc-avatar-chooser.c:233
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:638
-#: panels/user-accounts/cc-user-panel.c:656
+#: panels/user-accounts/cc-user-panel.c:639
+#: panels/user-accounts/cc-user-panel.c:657
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/user-accounts/um-fingerprint-dialog.c:261
 msgid "_Cancel"
@@ -1489,7 +1489,7 @@ msgid "Single Display"
 msgstr "Másodlagos kijelző"
 
 #: panels/display/cc-display-panel.ui:100
-#: panels/display/cc-display-panel.ui:329
+#: panels/display/cc-display-panel.ui:305
 msgid "Join Displays"
 msgstr "Kijelzők egyesítése"
 
@@ -1501,46 +1501,50 @@ msgstr "Tükrözés"
 msgid "Display Mode"
 msgstr "Megjelenítés módja"
 
-#: panels/display/cc-display-panel.ui:201
-msgid "Drag displays to match your setup."
-msgstr "Húzza a kijelzőket az elrendezésnek megfelelően."
+#: panels/display/cc-display-panel.ui:235
+msgid ""
+"Drag displays to match your physical display setup. Select a display to "
+"change its settings."
+msgstr ""
+"Húzza a kijelzőket, hogy illeszkedjenek a fizikai kijelző beállításaira. "
+"Válasszon egy kijelzőt a beállításai megváltoztatásához."
 
-#: panels/display/cc-display-panel.ui:266
+#: panels/display/cc-display-panel.ui:242
 msgid "Display Arrangement"
 msgstr "Kijelzők elrendezése"
 
-#: panels/display/cc-display-panel.ui:447
+#: panels/display/cc-display-panel.ui:423
 msgid "Display Configuration"
 msgstr "Kijelzőbeállítások"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:474
-#: panels/display/cc-display-panel.ui:492
+#: panels/display/cc-display-panel.ui:450
+#: panels/display/cc-display-panel.ui:468
 #: panels/display/cc-night-light-dialog.ui:505
 msgid "Night Light"
 msgstr "Éjszakai fény"
 
-#: panels/display/cc-display-settings.c:103
+#: panels/display/cc-display-settings.c:109
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Fekvő"
 
-#: panels/display/cc-display-settings.c:106
+#: panels/display/cc-display-settings.c:112
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Álló (jobbra)"
 
-#: panels/display/cc-display-settings.c:109
+#: panels/display/cc-display-settings.c:115
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Álló (balra)"
 
-#: panels/display/cc-display-settings.c:112
+#: panels/display/cc-display-settings.c:118
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Fekvő (fordított)"
 
-#: panels/display/cc-display-settings.c:186
+#: panels/display/cc-display-settings.c:192
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -7059,7 +7063,7 @@ msgstr "%s – %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:768
+#: panels/user-accounts/cc-user-panel.c:769
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%H:%M"
@@ -7067,7 +7071,7 @@ msgstr "%H:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:772
+#: panels/user-accounts/cc-user-panel.c:773
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7155,26 +7159,26 @@ msgstr "Nem lehet csatlakozni a(z) %s tartományhoz: %s"
 msgid "Your account"
 msgstr "Az Ön fiókja"
 
-#: panels/user-accounts/cc-user-panel.c:386
+#: panels/user-accounts/cc-user-panel.c:387
 msgid "Failed to delete user"
 msgstr "A felhasználó törlése meghiúsult"
 
-#: panels/user-accounts/cc-user-panel.c:444
-#: panels/user-accounts/cc-user-panel.c:503
-#: panels/user-accounts/cc-user-panel.c:555
+#: panels/user-accounts/cc-user-panel.c:445
+#: panels/user-accounts/cc-user-panel.c:504
+#: panels/user-accounts/cc-user-panel.c:556
 msgid "Failed to revoke remotely managed user"
 msgstr "A távmenedzselt felhasználó visszavonása meghiúsult"
 
-#: panels/user-accounts/cc-user-panel.c:607
+#: panels/user-accounts/cc-user-panel.c:608
 msgid "You cannot delete your own account."
 msgstr "Nem törölheti saját fiókját."
 
-#: panels/user-accounts/cc-user-panel.c:616
+#: panels/user-accounts/cc-user-panel.c:617
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s még be van jelentkezve"
 
-#: panels/user-accounts/cc-user-panel.c:620
+#: panels/user-accounts/cc-user-panel.c:621
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7182,12 +7186,12 @@ msgstr ""
 "A bejelentkezett felhasználók törlése a rendszert inkonzisztens állapotban "
 "hagyhatja."
 
-#: panels/user-accounts/cc-user-panel.c:629
+#: panels/user-accounts/cc-user-panel.c:630
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Meg szeretné tartani %s fájljait?"
 
-#: panels/user-accounts/cc-user-panel.c:633
+#: panels/user-accounts/cc-user-panel.c:634
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7195,47 +7199,47 @@ msgstr ""
 "Felhasználói fiók törlésekor lehetősége van a saját könyvtár, a levelezési "
 "várólista és az ideiglenes fájlok megtartására."
 
-#: panels/user-accounts/cc-user-panel.c:636
+#: panels/user-accounts/cc-user-panel.c:637
 msgid "_Delete Files"
 msgstr "Fájlok _törlése"
 
-#: panels/user-accounts/cc-user-panel.c:637
+#: panels/user-accounts/cc-user-panel.c:638
 msgid "_Keep Files"
 msgstr "Fájlok _megtartása"
 
-#: panels/user-accounts/cc-user-panel.c:651
+#: panels/user-accounts/cc-user-panel.c:652
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Biztosan vissza szeretné vonni a távmenedzselt %s fiókját?"
 
-#: panels/user-accounts/cc-user-panel.c:655
+#: panels/user-accounts/cc-user-panel.c:656
 msgid "_Delete"
 msgstr "_Törlés"
 
-#: panels/user-accounts/cc-user-panel.c:705
+#: panels/user-accounts/cc-user-panel.c:706
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Fiók letiltva"
 
-#: panels/user-accounts/cc-user-panel.c:713
+#: panels/user-accounts/cc-user-panel.c:714
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Következő belépéskor állítandó be"
 
-#: panels/user-accounts/cc-user-panel.c:716
+#: panels/user-accounts/cc-user-panel.c:717
 msgctxt "Password mode"
 msgid "None"
 msgstr "Nincs"
 
-#: panels/user-accounts/cc-user-panel.c:761
+#: panels/user-accounts/cc-user-panel.c:762
 msgid "Logged in"
 msgstr "Bejelentkezve"
 
-#: panels/user-accounts/cc-user-panel.c:1091
+#: panels/user-accounts/cc-user-panel.c:1092
 msgid "Failed to contact the accounts service"
 msgstr "A fiókszolgáltatás nem érhető el"
 
-#: panels/user-accounts/cc-user-panel.c:1093
+#: panels/user-accounts/cc-user-panel.c:1094
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Győződjön meg róla, hogy az AccountService telepítve van és fut."
 
@@ -7243,7 +7247,7 @@ msgstr "Győződjön meg róla, hogy az AccountService telepítve van és fut."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1125
+#: panels/user-accounts/cc-user-panel.c:1126
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7251,12 +7255,12 @@ msgstr ""
 "A módosítások végrehajtásához\n"
 "előbb kattintson a * ikonra"
 
-#: panels/user-accounts/cc-user-panel.c:1198
+#: panels/user-accounts/cc-user-panel.c:1199
 msgid "Create a user account"
 msgstr "Felhasználói fiók létrehozása"
 
-#: panels/user-accounts/cc-user-panel.c:1209
-#: panels/user-accounts/cc-user-panel.c:1337
+#: panels/user-accounts/cc-user-panel.c:1210
+#: panels/user-accounts/cc-user-panel.c:1338
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7264,12 +7268,12 @@ msgstr ""
 "Felhasználói fiók létrehozásához\n"
 "először kattintson a * ikonra"
 
-#: panels/user-accounts/cc-user-panel.c:1218
+#: panels/user-accounts/cc-user-panel.c:1219
 msgid "Delete the selected user account"
 msgstr "Kijelölt felhasználói fiók törlése"
 
-#: panels/user-accounts/cc-user-panel.c:1230
-#: panels/user-accounts/cc-user-panel.c:1341
+#: panels/user-accounts/cc-user-panel.c:1231
+#: panels/user-accounts/cc-user-panel.c:1342
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8079,77 +8083,3 @@ msgstr[1] "%u bemenet"
 #: subprojects/gvc/gvc-mixer-control.c:2736
 msgid "System Sounds"
 msgstr "Rendszerhangok"
-
-#~ msgctxt "balance"
-#~ msgid "Left"
-#~ msgstr "Bal"
-
-#~ msgctxt "balance"
-#~ msgid "Right"
-#~ msgstr "Jobb"
-
-#~ msgctxt "balance"
-#~ msgid "Minimum"
-#~ msgstr "Minimum"
-
-#~ msgctxt "balance"
-#~ msgid "Maximum"
-#~ msgstr "Maximum"
-
-#~ msgid "_Subwoofer:"
-#~ msgstr "_Mélysugárzó:"
-
-#~ msgctxt "volume"
-#~ msgid "Unamplified"
-#~ msgstr "Erősítetlen"
-
-#~ msgid "_Profile:"
-#~ msgstr "_Profil:"
-
-#~ msgid "_Test Speakers"
-#~ msgstr "Hangszórók _tesztelése"
-
-#~ msgid "Peak detect"
-#~ msgstr "Csúcsérzékelés"
-
-#~ msgid "Device"
-#~ msgstr "Eszköz"
-
-#~ msgid "Speaker Testing for %s"
-#~ msgstr "Hangszóróteszt ehhez: %s"
-
-#~ msgid "C_hoose a device for sound output:"
-#~ msgstr "Válasszon ha_ngkimeneti eszközt:"
-
-#~ msgid "Settings for the selected device:"
-#~ msgstr "Kiválasztott eszköz beállításai:"
-
-#~ msgid "_Input volume:"
-#~ msgstr "_Bemeneti hangerő:"
-
-#~ msgid "C_hoose a device for sound input:"
-#~ msgstr "Válasszon _hangbemeneti eszközt:"
-
-#~ msgid "Sound Effects"
-#~ msgstr "Hangeffektusok"
-
-#~ msgid "No application is currently playing or recording audio."
-#~ msgstr "Jelenleg nincs hangot lejátszó vagy felvevő alkalmazás."
-
-#~ msgid "Built-in"
-#~ msgstr "Beépített"
-
-#~ msgid "Sound Preferences"
-#~ msgstr "Hangok beállításai"
-
-#~ msgid "Testing event sound"
-#~ msgstr "Eseményhang tesztelése"
-
-#~ msgid "From theme"
-#~ msgstr "Témából"
-
-#~ msgid "C_hoose an alert sound:"
-#~ msgstr "Válasszon _riasztáshangot:"
-
-#~ msgid "Stop"
-#~ msgstr "Leállítás"
