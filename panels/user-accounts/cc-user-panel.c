@@ -591,6 +591,28 @@ delete_enterprise_user_response (GtkWidget          *dialog,
 }
 
 static void
+adapt_message_dialog_for_large_names (GtkMessageDialog *message_dialog)
+{
+        g_autoptr(GList) children = NULL;
+        GtkWidget *message_area;
+        GList *l;
+
+        message_area = gtk_message_dialog_get_message_area (message_dialog);
+        g_assert (GTK_IS_CONTAINER (message_area));
+
+        children = gtk_container_get_children (GTK_CONTAINER (message_area));
+        g_assert (children != NULL);
+        g_assert (g_list_length (children) == 2);
+
+        for (l = children; l != NULL; l = g_list_next (l)) {
+                GtkLabel *label = GTK_LABEL (l->data);
+
+                gtk_label_set_max_width_chars (label, 100);
+                gtk_label_set_line_wrap_mode (label, PANGO_WRAP_WORD_CHAR);
+        }
+}
+
+static void
 delete_user (CcUserPanel *self)
 {
         ActUser *user;
@@ -667,6 +689,7 @@ delete_user (CcUserPanel *self)
                           G_CALLBACK (gtk_widget_destroy), NULL);
 
         gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+        adapt_message_dialog_for_large_names (GTK_MESSAGE_DIALOG (dialog));
 
         gtk_window_present (GTK_WINDOW (dialog));
 }
