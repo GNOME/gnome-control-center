@@ -807,6 +807,11 @@ cc_window_constructed (GObject *object)
   else
     cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
 
+  g_signal_connect_swapped (self->panel_list,
+                            "notify::view",
+                            G_CALLBACK (update_headerbar_buttons),
+                            self);
+
   update_headerbar_buttons (self);
 
   G_OBJECT_CLASS (cc_window_parent_class)->constructed (object);
