@@ -48,6 +48,7 @@ struct _BgPicturesSource
   GnomeDesktopThumbnailFactory *thumb_factory;
 
   GFileMonitor *picture_dir_monitor;
+  GFileMonitor *wallpapers_dir_monitor;
   GFileMonitor *cache_dir_monitor;
 
   GHashTable *known_items;
@@ -101,6 +102,7 @@ bg_pictures_source_finalize (GObject *object)
   g_clear_pointer (&bg_source->known_items, g_hash_table_destroy);
 
   g_clear_object (&bg_source->picture_dir_monitor);
+  g_clear_object (&bg_source->wallpapers_dir_monitor);
   g_clear_object (&bg_source->cache_dir_monitor);
 
   G_OBJECT_CLASS (bg_pictures_source_parent_class)->finalize (object);
@@ -952,6 +954,7 @@ bg_pictures_source_init (BgPicturesSource *self)
   const gchar *pictures_path;
   g_autofree gchar *cache_path = NULL;
   GtkListStore *store;
+  g_autofree gchar *wallpapers_path = NULL;
 
   self->cancellable = g_cancellable_new ();
   self->known_items = g_hash_table_new_full (g_str_hash,
@@ -964,6 +967,10 @@ bg_pictures_source_init (BgPicturesSource *self)
     pictures_path = g_get_home_dir ();
 
   self->picture_dir_monitor = monitor_path (self, pictures_path);
+
+  /* Nautilus puts wallpapers into this subdirectory: */
+  wallpapers_path = g_build_filename (pictures_path, _("Wallpapers"), NULL);
+  self->wallpapers_dir_monitor = monitor_path (self, wallpapers_path);
 
   cache_path = bg_pictures_source_get_cache_path ();
   self->cache_dir_monitor = monitor_path (self, cache_path);
