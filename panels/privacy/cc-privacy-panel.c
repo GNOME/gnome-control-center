@@ -35,7 +35,6 @@
 #define REPORT_TECHNICAL_PROBLEMS "report-technical-problems"
 #define LOCATION_ENABLED "enabled"
 #define USB_PROTECTION "usb-protection"
-#define USB_PROTECTION_LEVEL "usb-protection-level"
 
 #define APP_PERMISSIONS_TABLE "gnome"
 #define APP_PERMISSIONS_ID "geolocation"
@@ -51,7 +50,6 @@ struct _CcPrivacyPanel
   GtkSwitch   *automatic_screen_lock_switch;
   GtkButton   *clear_recent_button;
   GtkButton   *empty_trash_button;
-  GtkComboBox *forbid_usb_combo;
   GtkListBox  *list_box;
   GtkFrame    *location_apps_frame;
   GtkLabel    *location_apps_label;
@@ -1145,73 +1143,9 @@ add_trash_temp (CcPrivacyPanel *self)
 }
 
 static void
-usbguard_combo_changed_cb (GtkWidget      *widget,
-                           CcPrivacyPanel *self)
-{
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  guint value;
-  gboolean ret;
-
-  /* no selection */
-  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
-  if (!ret)
-    return;
-
-  /* get entry */
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
-  gtk_tree_model_get (model, &iter,
-                      1, &value,
-                      -1);
-  g_settings_set (self->privacy_settings, USB_PROTECTION_LEVEL, "u", value);
-}
-
-static void
-set_usbguard_value_for_combo (GtkComboBox    *combo_box,
-                              CcPrivacyPanel *self)
-{
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  guint value;
-  gint value_tmp, value_prev;
-  gboolean ret;
-  guint i;
-
-  /* get entry */
-  model = gtk_combo_box_get_model (combo_box);
-  ret = gtk_tree_model_get_iter_first (model, &iter);
-  if (!ret)
-    return;
-
-  value_prev = 0;
-  i = 0;
-
-  /* try to make the UI match the lock setting */
-  g_settings_get (self->privacy_settings, USB_PROTECTION_LEVEL, "u", &value);
-  do
-    {
-      gtk_tree_model_get (model, &iter,
-                          1, &value_tmp,
-                          -1);
-      if (value == value_tmp ||
-          (value_tmp > value_prev && value < value_tmp))
-        {
-          gtk_combo_box_set_active_iter (combo_box, &iter);
-          return;
-        }
-      value_prev = value_tmp;
-      i++;
-    } while (gtk_tree_model_iter_next (model, &iter));
-
-  /* If we didn't find the setting in the list */
-  gtk_combo_box_set_active (combo_box, i - 1);
-}
-
-static void
 update_usbguard_label (CcPrivacyPanel *self)
 {
   gchar *label;
-  guint value_level;
   gboolean protection;
   char *name_owner = NULL;
 
@@ -1219,25 +1153,8 @@ update_usbguard_label (CcPrivacyPanel *self)
     name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->usb_proxy));
 
   g_settings_get (self->privacy_settings, USB_PROTECTION, "b", &protection);
-  g_settings_get (self->privacy_settings, USB_PROTECTION_LEVEL, "u", &value_level);
 
-  label = _("Off");
-
-  if (protection && name_owner)
-    {
-      switch (value_level)
-        {
-          case 1:
-            label = _("With Screen Locked");
-            break;
-          case 2:
-            label = _("Always");
-            break;
-          default:
-            label = _("Never");
-            break;
-        }
-    }
+  label = (protection && name_owner) ? _("On") : _("Off");
 
   gtk_label_set_label (self->usbguard_label, label);
   g_free (name_owner);
@@ -1248,8 +1165,7 @@ on_usbguard_settings_changed (GSettings      *settings,
                               const char     *key,
                               CcPrivacyPanel *panel)
 {
-  if (g_str_equal (key, USB_PROTECTION) == FALSE &&
-      g_str_equal (key, USB_PROTECTION_LEVEL) == FALSE)
+  if (g_str_equal (key, USB_PROTECTION) == FALSE)
     return;
 
   update_usbguard_label (panel);
@@ -1266,7 +1182,6 @@ on_usbguard_getparameter_cb (GObject      *source_object,
 
   CcPrivacyPanel *self = user_data;
   GVariant *result;
-  gboolean protection;
   gboolean active = TRUE;
   g_autoptr(GError) error = NULL;
 
@@ -1281,12 +1196,7 @@ on_usbguard_getparameter_cb (GObject      *source_object,
       active = FALSE;
     }
 
-  g_settings_get (self->privacy_settings, USB_PROTECTION, "b", &protection);
-
   gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), active);
-  if (!protection)
-    active = FALSE;
-  gtk_widget_set_sensitive (GTK_WIDGET (self->forbid_usb_combo), active);
 
   update_usbguard_label (self);
 }
@@ -1305,7 +1215,6 @@ on_usbguard_owner_changed_cb (GObject      *source_object,
     {
       g_debug ("Probably USBGuard is not running or is not installed.");
       gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), FALSE);
-      gtk_widget_set_sensitive (GTK_WIDGET (self->forbid_usb_combo), FALSE);
       update_usbguard_label (self);
     }
   else
@@ -1341,7 +1250,6 @@ on_usbguard_param_ready (GObject      *source_object,
                      error->message);
 
       gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), FALSE);
-      gtk_widget_set_sensitive (GTK_WIDGET (self->forbid_usb_combo), FALSE);
       gtk_label_set_label (self->usbguard_label, _("Off"));
       return;
     }
@@ -1367,8 +1275,6 @@ add_usbguard (CcPrivacyPanel *self)
            self->usbguard_dialog,
            GTK_WIDGET (self->usbguard_label));
 
-  set_usbguard_value_for_combo (self->forbid_usb_combo, self);
-
   update_usbguard_label (self);
 
   g_settings_bind (self->privacy_settings, USB_PROTECTION,
@@ -1380,13 +1286,6 @@ add_usbguard (CcPrivacyPanel *self)
 
   g_signal_connect (self->usbguard_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
-  g_signal_connect (self->forbid_usb_combo, "changed",
-                    G_CALLBACK (usbguard_combo_changed_cb), self);
-
-  g_settings_bind (self->privacy_settings, USB_PROTECTION,
-                   self->forbid_usb_combo, "sensitive",
-                   G_SETTINGS_BIND_GET);
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
                             G_DBUS_PROXY_FLAGS_NONE,
@@ -1629,5 +1528,4 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, trash_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, usbguard_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, usbguard_protection_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, forbid_usb_combo);
 }
