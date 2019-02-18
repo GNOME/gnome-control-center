@@ -533,6 +533,29 @@
             ]
         },
         {
+            "name" : "util-linux",
+            "buildsystem" : "autotools",
+            "config-opts" : [
+                "--disable-makeinstall-chown"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://git.kernel.org/pub/scm/utils/util-linux/util-linux.git"
+                }
+            ]
+        },
+        {
+            "name" : "udisks",
+            "buildsystem" : "autotools",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://github.com/storaged-project/udisks.git"
+                }
+            ]
+        },
+        {
             "name" : "gnome-control-center",
             "buildsystem" : "meson",
             "sources" : [
