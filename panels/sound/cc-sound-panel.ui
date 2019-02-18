@@ -8,19 +8,18 @@
         <property name="visible">True</property>
         <property name="hscrollbar_policy">never</property>
         <child>
-          <object class="GtkBox">
+          <object class="HdyColumn">
             <property name="visible">True</property>
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="hexpand">True</property>
-              </object>
-            </child>
+            <property name="maximum_width">600</property>
+            <property name="linear_growth_width">400</property>
+            <property name="margin_top">32</property>
+            <property name="margin_bottom">32</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
             <child>
               <object class="GtkBox" id="main_box">
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
-                <property name="margin">32</property>
                 <property name="spacing">12</property>
                 <property name="hexpand">True</property>
                 <child>
@@ -90,6 +89,7 @@
                                 <child>
                                   <object class="GtkLabel" id="output_device_label">
                                     <property name="visible">True</property>
+                                    <property name="ellipsize">end</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Output Device</property>
                                   </object>
@@ -143,6 +143,7 @@
                                 <child>
                                   <object class="GtkLabel" id="output_configuration_label">
                                     <property name="visible">True</property>
+                                    <property name="ellipsize">end</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Configuration</property>
                                   </object>
@@ -175,6 +176,7 @@
                                 <child>
                                   <object class="GtkLabel" id="output_balance_label">
                                     <property name="visible">True</property>
+                                    <property name="ellipsize">end</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Balance</property>
                                   </object>
@@ -201,6 +203,7 @@
                                 <child>
                                   <object class="GtkLabel" id="output_fade_label">
                                     <property name="visible">True</property>
+                                    <property name="ellipsize">end</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Fade</property>
                                   </object>
@@ -227,6 +230,7 @@
                                 <child>
                                   <object class="GtkLabel" id="output_subwoofer_label">
                                     <property name="visible">True</property>
+                                    <property name="ellipsize">end</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Subwoofer</property>
                                   </object>
@@ -275,6 +279,7 @@
                                 <child>
                                   <object class="GtkLabel" id="input_device_label">
                                     <property name="visible">True</property>
+                                    <property name="ellipsize">end</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Input Device</property>
                                   </object>
@@ -315,6 +320,7 @@
                                 <child>
                                   <object class="GtkLabel" id="input_configuration_label">
                                     <property name="visible">True</property>
+                                    <property name="ellipsize">end</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Configuration</property>
                                   </object>
@@ -347,6 +353,7 @@
                                 <child>
                                   <object class="GtkLabel" id="input_volume_label">
                                     <property name="visible">True</property>
+                                    <property name="ellipsize">end</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Volume</property>
                                   </object>
@@ -382,12 +389,6 @@
                     <property name="hexpand">True</property>
                   </object>
                 </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="hexpand">True</property>
               </object>
             </child>
           </object>
