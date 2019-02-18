@@ -20,35 +20,118 @@
             <property name="margin_start">12</property>
             <property name="margin_end">12</property>
 
-        <!-- Content -->
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-            <property name="spacing">12</property>
-            <property name="hexpand">True</property>
+            <!-- Content -->
             <child>
-              <object class="GtkFrame" id="language_section_frame">
+              <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_bottom">18</property>
-                <property name="shadow_type">in</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">12</property>
+                <property name="hexpand">True</property>
                 <child>
-                  <object class="GtkListBox" id="language_list">
+                  <object class="GtkFrame" id="language_section_frame">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_bottom">18</property>
+                    <property name="shadow_type">in</property>
                     <child>
-                      <object class="GtkListBoxRow" id="language_row">
+                      <object class="GtkListBox" id="language_list">
                         <property name="visible">True</property>
+                        <property name="can_focus">True</property>
                         <child>
-                          <object class="GtkBox" id="language_box">
+                          <object class="GtkListBoxRow" id="language_row">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkBox" id="language_box">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_start">20</property>
+                                        <property name="margin_end">20</property>
+                                        <property name="margin_top">18</property>
+                                        <property name="margin_bottom">18</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">_Language</property>
+                                        <property name="use_underline">True</property>
+                                        <property name="hexpand">True</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="language_label">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="xalign">1</property>
+                                        <property name="margin_start">20</property>
+                                        <property name="margin_end">20</property>
+                                        <property name="margin_top">18</property>
+                                        <property name="margin_bottom">18</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkRevealer" id="restart_revealer">
+                                    <property name="visible">True</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="margin_start">20</property>
+                                            <property name="margin_end">20</property>
+                                            <property name="margin_top">12</property>
+                                            <property name="margin_bottom">12</property>
+                                            <property name="xalign">0</property>
+                                            <property name="hexpand">True</property>
+                                            <property name="wrap">True</property>
+                                            <property name="max-width-chars">35</property>
+                                            <property name="label" translatable="yes">Restart the session for changes to take effect</property>
+                                            <style>
+                                              <class name="dim-label"/>
+                                            </style>
+                                            <attributes>
+                                              <attribute name="scale" value="0.9"/>
+                                            </attributes>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="restart_button">
+                                            <property name="visible">True</property>
+                                            <property name="margin_start">20</property>
+                                            <property name="margin_end">20</property>
+                                            <property name="margin_top">12</property>
+                                            <property name="margin_bottom">12</property>
+                                            <property name="valign">end</property>
+                                            <property name="label" translatable="yes">Restart…</property>
+                                            <style>
+                                              <class name="suggested-action"/>
+                                            </style>
+                                            <signal name="clicked" handler="restart_now" object="CcRegionPanel" swapped="yes"/>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkListBoxRow" id="formats_row">
+                            <property name="visible">True</property>
                             <child>
                               <object class="GtkBox">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <child>
                                   <object class="GtkLabel">
                                     <property name="visible">True</property>
@@ -58,13 +141,13 @@
                                     <property name="margin_top">18</property>
                                     <property name="margin_bottom">18</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">_Language</property>
+                                    <property name="label" translatable="yes">_Formats</property>
                                     <property name="use_underline">True</property>
                                     <property name="hexpand">True</property>
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel" id="language_label">
+                                  <object class="GtkLabel" id="formats_label">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
@@ -76,47 +159,133 @@
                                 </child>
                               </object>
                             </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child type="label_item">
+                      <placeholder/>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="input_section_box">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <property name="hexpand">True</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="spacing">6</property>
+                        <property name="margin_bottom">12</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">6</property>
                             <child>
-                              <object class="GtkRevealer" id="restart_revealer">
+                              <object class="GtkLabel" id="input_heading_label">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Input Sources</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                                <accessibility>
+                                  <relation target="input_list" type="label-for"/>
+                                </accessibility>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Choose keyboard layouts or input methods.</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkAspectFrame">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label_xalign">0</property>
+                            <property name="shadow_type">none</property>
+                            <property name="obey_child">False</property>
+                            <property name="xalign">1.0</property>
+                            <property name="hexpand">True</property>
+                            <child>
+                              <object class="GtkMenuButton" id="options_button">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="popover">options_popover</property>
                                 <child>
-                                  <object class="GtkBox">
+                                  <object class="GtkImage">
                                     <property name="visible">True</property>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="margin_start">20</property>
-                                        <property name="margin_end">20</property>
-                                        <property name="margin_top">12</property>
-                                        <property name="margin_bottom">12</property>
-                                        <property name="xalign">0</property>
-                                        <property name="hexpand">True</property>
-                                        <property name="wrap">True</property>
-                                        <property name="max-width-chars">35</property>
-                                        <property name="label" translatable="yes">Restart the session for changes to take effect</property>
-                                        <style>
-                                          <class name="dim-label"/>
-                                        </style>
-                                        <attributes>
-                                          <attribute name="scale" value="0.9"/>
-                                        </attributes>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="restart_button">
-                                        <property name="visible">True</property>
-                                        <property name="margin_start">20</property>
-                                        <property name="margin_end">20</property>
-                                        <property name="margin_top">12</property>
-                                        <property name="margin_bottom">12</property>
-                                        <property name="valign">end</property>
-                                        <property name="label" translatable="yes">Restart…</property>
-                                        <style>
-                                          <class name="suggested-action"/>
-                                        </style>
-                                        <signal name="clicked" handler="restart_now" object="CcRegionPanel" swapped="yes"/>
-                                      </object>
-                                    </child>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">emblem-system-symbolic</property>
+                                  </object>
+                                </child>
+                                <style>
+                                  <class name="image-button"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label_xalign">0</property>
+                        <property name="shadow_type">in</property>
+                        <child>
+                          <object class="GtkListBox" id="input_list">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="selection-mode">none</property>
+                            <signal name="row_activated" handler="input_row_activated_cb" object="CcRegionPanel" swapped="yes"/>
+                            <accessibility>
+                              <relation target="input_heading_label" type="labelled-by"/>
+                            </accessibility>
+                            <child>
+                              <object class="GtkListBoxRow" id="no_inputs_row">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="selectable">False</property>
+                                <property name="activatable">False</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label" translatable="yes">No input source selected</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow" id="add_input_row">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="selectable">False</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="margin">18</property>
+                                    <property name="icon-name">list-add-symbolic</property>
                                   </object>
                                 </child>
                               </object>
@@ -125,191 +294,22 @@
                         </child>
                       </object>
                     </child>
-                    <child>
-                      <object class="GtkListBoxRow" id="formats_row">
-                        <property name="visible">True</property>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_start">20</property>
-                                <property name="margin_end">20</property>
-                                <property name="margin_top">18</property>
-                                <property name="margin_bottom">18</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">_Formats</property>
-                                <property name="use_underline">True</property>
-                                <property name="hexpand">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="formats_label">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="xalign">1</property>
-                                <property name="margin_start">20</property>
-                                <property name="margin_end">20</property>
-                                <property name="margin_top">18</property>
-                                <property name="margin_bottom">18</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child type="label_item">
-                  <placeholder/>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkBox" id="input_section_box">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
-                <property name="hexpand">True</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="spacing">6</property>
-                    <property name="margin_bottom">12</property>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">6</property>
-                        <child>
-                          <object class="GtkLabel" id="input_heading_label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="halign">start</property>
-                            <property name="label" translatable="yes">Input Sources</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                            </attributes>
-                            <accessibility>
-                              <relation target="input_list" type="label-for"/>
-                            </accessibility>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Choose keyboard layouts or input methods.</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkAspectFrame">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label_xalign">0</property>
-                        <property name="shadow_type">none</property>
-                        <property name="obey_child">False</property>
-                        <property name="xalign">1.0</property>
-                        <property name="hexpand">True</property>
-                        <child>
-                          <object class="GtkMenuButton" id="options_button">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="popover">options_popover</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="icon_name">emblem-system-symbolic</property>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="image-button"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkFrame">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label_xalign">0</property>
-                    <property name="shadow_type">in</property>
-                    <child>
-                      <object class="GtkListBox" id="input_list">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="selection-mode">none</property>
-                        <signal name="row_activated" handler="input_row_activated_cb" object="CcRegionPanel" swapped="yes"/>
-                        <accessibility>
-                          <relation target="input_heading_label" type="labelled-by"/>
-                        </accessibility>
-                        <child>
-                          <object class="GtkListBoxRow" id="no_inputs_row">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="selectable">False</property>
-                            <property name="activatable">False</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">No input source selected</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkListBoxRow" id="add_input_row">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="selectable">False</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <property name="margin">18</property>
-                                <property name="icon-name">list-add-symbolic</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+                  <object class="GtkLabel" id="login_label">
+                   <property name="valign">end</property>
+                   <property name="vexpand">True</property>
+                   <property name="hexpand">True</property>
+                   <property name="label" translatable="yes">Login settings are used by all users when logging into the system</property>
+                   <property name="margin_bottom">12</property>
+                   <style>
+                     <class name="dim-label"/>
+                   </style>
                   </object>
                 </child>
               </object>
             </child>
-            <child>
-              <object class="GtkLabel" id="login_label">
-               <property name="valign">end</property>
-               <property name="vexpand">True</property>
-               <property name="hexpand">True</property>
-               <property name="label" translatable="yes">Login settings are used by all users when logging into the system</property>
-               <property name="margin_bottom">12</property>
-               <style>
-                 <class name="dim-label"/>
-               </style>
-              </object>
-            </child>
-          </object>
-        </child>
           </object>
         </child>
       </object>
