@@ -107,6 +107,7 @@ coverage:
     - master@GNOME/gnome-control-center
 
   script:
+    - dnf -y install libudisks2-devel # FIXME: Remove when new images built
     - *environment_information
     - *build_procedure
     - *run_tests
