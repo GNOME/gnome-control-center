@@ -103,8 +103,6 @@ coverage:
   variables:
     BUILD_OPTS: "-Db_coverage=true"
     coverage: '/^Lines:.\d+.\d+.(\d+\.\d+\%)/'
-  only:
-    - master@GNOME/gnome-control-center
 
   script:
     - dnf -y install libudisks2-devel # FIXME: Remove when new images built
