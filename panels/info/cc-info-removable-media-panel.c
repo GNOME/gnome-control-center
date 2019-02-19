@@ -86,6 +86,17 @@ struct _CcInfoRemovableMediaPanel
 
 G_DEFINE_TYPE (CcInfoRemovableMediaPanel, cc_info_removable_media_panel, CC_TYPE_PANEL)
 
+static void
+ellipsize_cell_layout (GtkCellLayout *cell_layout)
+{
+  g_autoptr(GList) cells = gtk_cell_layout_get_cells (cell_layout);
+  GList *cell;
+
+  for (cell = cells; cell; cell = cell->next)
+    if (GTK_IS_CELL_RENDERER_TEXT (cell->data))
+      g_object_set (G_OBJECT (cell->data), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
+}
+
 static char **
 remove_elem_from_str_array (char       **v,
                             const char  *s)
@@ -355,6 +366,7 @@ other_type_combo_box_changed (GtkComboBox               *combo_box,
   }
 
   self->other_application_combo = gtk_app_chooser_button_new (x_content_type);
+  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->other_application_combo));
   gtk_box_pack_start (GTK_BOX (action_container), self->other_application_combo, TRUE, TRUE, 0);
   prepare_combo_box (self, self->other_application_combo, NULL);
   gtk_widget_show (self->other_application_combo);
@@ -601,6 +613,13 @@ cc_info_removable_media_panel_init (CcInfoRemovableMediaPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
   self->media_settings = g_settings_new (MEDIA_HANDLING_SCHEMA);
+
+  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->media_audio_cdda_combobox));
+  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->media_video_dvd_combobox));
+  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->media_music_player_combobox));
+  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->media_dcf_combobox));
+  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->media_software_combobox));
+  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->media_other_type_combobox));
 
   info_panel_setup_media (self);
 }
