@@ -291,8 +291,11 @@ get_on_off_label2 (GSettings *settings,
   data->key1 = g_strdup (key1);
   data->key2 = g_strdup (key2);
 
-  g_signal_connect (settings, "changed",
-                    G_CALLBACK (set_on_off_label2), data);
+  g_signal_connect_object (settings,
+                           "changed",
+                           G_CALLBACK (set_on_off_label2),
+                           data->label,
+                           0);
 
   set_on_off_label2 (settings, key1, data);
 
