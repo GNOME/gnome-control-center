@@ -57,7 +57,7 @@ struct _CcApplicationsPanel
   GCancellable    *cancellable;
 
   gchar           *current_app_id;
-  gchar           *current_flatpak_id;
+  gchar           *current_portal_app_id;
 
   GHashTable      *globs;
   GHashTable      *search_providers;
@@ -383,7 +383,7 @@ set_notification_allowed (CcApplicationsPanel *self,
       const gchar *perms[2] = { NULL, NULL };
 
       perms[0] = allowed ? "yes" : "no";
-      set_portal_permissions (self, "notifications", "notification", self->current_flatpak_id, perms);
+      set_portal_permissions (self, "notifications", "notification", self->current_portal_app_id, perms);
     }
 }
 
@@ -478,27 +478,27 @@ set_device_allowed (CcApplicationsPanel *self,
   perms[0] = allowed ? "yes" : "no";
   perms[1] = NULL;
 
-  set_portal_permissions (self, "devices", device, self->current_flatpak_id, perms);
+  set_portal_permissions (self, "devices", device, self->current_portal_app_id, perms);
 }
 
 static void
 microphone_cb (CcApplicationsPanel *self)
 {
-  if (self->current_flatpak_id)
+  if (self->current_portal_app_id)
     set_device_allowed (self, "microphone", cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->microphone)));
 }
 
 static void
 sound_cb (CcApplicationsPanel *self)
 {
-  if (self->current_flatpak_id)
+  if (self->current_portal_app_id)
    set_device_allowed (self, "speakers", cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->sound)));
 }
 
 static void
 camera_cb (CcApplicationsPanel *self)
 {
-  if (self->current_flatpak_id)
+  if (self->current_portal_app_id)
     set_device_allowed (self, "camera", cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->camera)));
 }
 
@@ -529,13 +529,13 @@ set_location_allowed (CcApplicationsPanel *self,
   perms[1] = "0";
   perms[2] = NULL;
 
-  set_portal_permissions (self, "location", "location", self->current_flatpak_id, perms);
+  set_portal_permissions (self, "location", "location", self->current_portal_app_id, perms);
 }
 
 static void
 location_cb (CcApplicationsPanel *self)
 {
-  if (self->current_flatpak_id)
+  if (self->current_portal_app_id)
     set_location_allowed (self, cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->location)));
 }
 
@@ -1418,7 +1418,7 @@ update_panel (CcApplicationsPanel *self,
   gtk_widget_show (self->header_button);
 
   g_clear_pointer (&self->current_app_id, g_free);
-  g_clear_pointer (&self->current_flatpak_id, g_free);
+  g_clear_pointer (&self->current_portal_app_id, g_free);
 
   update_permission_section (self, info);
   update_integration_section (self, info);
@@ -1426,7 +1426,7 @@ update_panel (CcApplicationsPanel *self,
   update_usage_section (self, info);
 
   self->current_app_id = get_app_id (info);
-  self->current_flatpak_id = get_flatpak_id (info);
+  self->current_portal_app_id = get_flatpak_id (info);
 }
 
 static void
@@ -1606,7 +1606,7 @@ cc_applications_panel_finalize (GObject *object)
   g_clear_object (&self->cancellable);
 
   g_free (self->current_app_id);
-  g_free (self->current_flatpak_id);
+  g_free (self->current_portal_app_id);
   g_hash_table_unref (self->globs);
   g_hash_table_unref (self->search_providers);
 
