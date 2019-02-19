@@ -495,13 +495,13 @@ set_location_allowed (CcApplicationsPanel *self,
   perms[1] = "0";
   perms[2] = NULL;
 
-  set_flatpak_permissions (self, "location", "location", self->current_app_id, perms);
+  set_flatpak_permissions (self, "location", "location", self->current_flatpak_id, perms);
 }
 
 static void
 location_cb (CcApplicationsPanel *self)
 {
-  if (self->current_app_id)
+  if (self->current_flatpak_id)
     set_location_allowed (self, cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->location)));
 }
 
@@ -650,7 +650,7 @@ update_integration_section (CcApplicationsPanel *self,
                             GAppInfo            *info)
 {
   g_autofree gchar *app_id = get_app_id (info);
-  g_autofree gchar *flatpak_id = get_app_id (info);
+  g_autofree gchar *flatpak_id = get_flatpak_id (info);
   gboolean set, allowed, disabled;
   gboolean has_any = FALSE;
 
