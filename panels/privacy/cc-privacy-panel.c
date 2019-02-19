@@ -265,38 +265,52 @@ typedef struct
   const gchar *key2;
 } Label2Data;
 
-static void
-set_on_off_label2 (GSettings   *settings,
-                   const gchar *key,
-                   gpointer     user_data)
+static const char *
+update_purge_trash_label (GSettings *settings,
+                          gchar *key,
+                          gpointer user_data)
 {
-  Label2Data *data = user_data;
-  gboolean v1, v2;
+  static const char * const interesting_keys[] = { REMOVE_OLD_TRASH_FILES,
+                                                   REMOVE_OLD_TEMP_FILES,
+                                                   NULL };
 
-  v1 = g_settings_get_boolean (settings, data->key1);
-  v2 = g_settings_get_boolean (settings, data->key2);
+  gboolean remove_old_trash, remove_old_temp;
+  GtkLabel *label;
+  const char *label_text;
 
-  gtk_label_set_label (data->label, (v1 || v2) ? _("On") : _("Off"));
+  if (!g_strv_contains (interesting_keys, key))
+    return NULL;
+
+  label = GTK_LABEL (user_data);
+
+  remove_old_trash = g_settings_get_boolean (settings, REMOVE_OLD_TRASH_FILES);
+  remove_old_temp = g_settings_get_boolean (settings, REMOVE_OLD_TEMP_FILES);
+
+  label_text = (remove_old_trash || remove_old_temp) ? _("On") : _("Off");
+
+  if (label != NULL)
+    gtk_label_set_label (label, label_text);
+
+  return label_text;
 }
 
 static GtkLabel *
-get_on_off_label2 (GSettings *settings,
-                   const gchar *key1,
-                   const gchar *key2)
+get_purge_trash_label (GSettings *settings)
 {
-  Label2Data *data;
+  GtkLabel *label;
+  const char *label_text;
 
-  data = g_new (Label2Data, 1);
-  data->label = GTK_LABEL (gtk_label_new (""));
-  data->key1 = g_strdup (key1);
-  data->key2 = g_strdup (key2);
+  label_text = update_purge_trash_label (settings, REMOVE_OLD_TEMP_FILES, NULL);
 
-  g_signal_connect (settings, "changed",
-                    G_CALLBACK (set_on_off_label2), data);
+  label = GTK_LABEL (gtk_label_new (label_text));
 
-  set_on_off_label2 (settings, key1, data);
+  g_signal_connect_object (settings,
+                           "changed",
+                           G_CALLBACK (update_purge_trash_label),
+                           label,
+                           0);
 
-  return data->label;
+  return label;
 }
 
 static GtkListBoxRow *
@@ -1185,7 +1199,7 @@ add_trash_temp (CcPrivacyPanel *self)
 {
   GtkLabel *w;
 
-  w = get_on_off_label2 (self->privacy_settings, REMOVE_OLD_TRASH_FILES, REMOVE_OLD_TEMP_FILES);
+  w = get_purge_trash_label (self->privacy_settings);
   gtk_widget_show (GTK_WIDGET (w));
   add_row (self, _("Purge Trash & Temporary Files"), self->trash_dialog, GTK_WIDGET (w));
 
