@@ -53,7 +53,7 @@ struct _CcApplicationsPanel
   GCancellable    *cancellable;
 
   gchar           *current_app_id;
-  gchar           *current_flatpak_id;
+  gchar           *current_portal_app_id;
 
   GHashTable      *globs;
   GHashTable      *search_providers;
@@ -156,13 +156,13 @@ open_software_cb (GtkButton           *button,
   g_spawn_async (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
 }
 
-/* --- flatpak permissions and utilities --- */
+/* --- portal permissions and utilities --- */
 
 static gchar **
-get_flatpak_permissions (CcApplicationsPanel *self,
-                         const gchar         *table,
-                         const gchar         *id,
-                         const gchar         *app_id)
+get_portal_permissions (CcApplicationsPanel *self,
+                        const gchar         *table,
+                        const gchar         *id,
+                        const gchar         *app_id)
 {
   g_autoptr(GVariant) ret = NULL;
   g_autoptr(GVariantIter) iter = NULL;
@@ -191,11 +191,11 @@ get_flatpak_permissions (CcApplicationsPanel *self,
 }
 
 static void
-set_flatpak_permissions (CcApplicationsPanel *self,
-                         const gchar *table,
-                         const gchar *id,
-                         const gchar *app_id,
-                         const gchar * const *permissions)
+set_portal_permissions (CcApplicationsPanel *self,
+                        const gchar *table,
+                        const gchar *id,
+                        const gchar *app_id,
+                        const gchar * const *permissions)
 {
   g_autoptr(GError) error = NULL;
 
@@ -207,7 +207,7 @@ set_flatpak_permissions (CcApplicationsPanel *self,
                           NULL,
                           &error);
   if (error)
-    g_warning ("Error setting Flatpak permissions: %s", error->message);
+    g_warning ("Error setting portal permissions: %s", error->message);
 }
 
 static char *
@@ -359,7 +359,7 @@ get_notification_allowed (CcApplicationsPanel *self,
     }
   else
     {
-      g_auto(GStrv) perms = get_flatpak_permissions (self, "notifications", "notification", app_id);
+      g_auto(GStrv) perms = get_portal_permissions (self, "notifications", "notification", app_id);
       *set = perms != NULL;
       /* FIXME: needs unreleased xdg-desktop-portals to write permissions on use */
       *set = TRUE;
@@ -380,7 +380,7 @@ set_notification_allowed (CcApplicationsPanel *self,
       const gchar *perms[2] = { NULL, NULL };
 
       perms[0] = allowed ? "yes" : "no";
-      set_flatpak_permissions (self, "notifications", "notification", self->current_flatpak_id, perms);
+      set_portal_permissions (self, "notifications", "notification", self->current_portal_app_id, perms);
     }
 }
 
@@ -428,7 +428,7 @@ get_device_allowed (CcApplicationsPanel *self,
 {
   g_auto(GStrv) perms = NULL;
 
-  perms = get_flatpak_permissions (self, "devices", device, app_id);
+  perms = get_portal_permissions (self, "devices", device, app_id);
 
   *set = perms != NULL;
   *allowed = perms == NULL || strcmp (perms[0], "no") != 0;
@@ -444,27 +444,27 @@ set_device_allowed (CcApplicationsPanel *self,
   perms[0] = allowed ? "yes" : "no";
   perms[1] = NULL;
 
-  set_flatpak_permissions (self, "devices", device, self->current_flatpak_id, perms);
+  set_portal_permissions (self, "devices", device, self->current_portal_app_id, perms);
 }
 
 static void
 microphone_cb (CcApplicationsPanel *self)
 {
-  if (self->current_flatpak_id)
+  if (self->current_portal_app_id)
     set_device_allowed (self, "microphone", cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->microphone)));
 }
 
 static void
 sound_cb (CcApplicationsPanel *self)
 {
-  if (self->current_flatpak_id)
+  if (self->current_portal_app_id)
    set_device_allowed (self, "speakers", cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->sound)));
 }
 
 static void
 camera_cb (CcApplicationsPanel *self)
 {
-  if (self->current_flatpak_id)
+  if (self->current_portal_app_id)
     set_device_allowed (self, "camera", cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->camera)));
 }
 
@@ -478,7 +478,7 @@ get_location_allowed (CcApplicationsPanel *self,
 {
   g_auto(GStrv) perms = NULL;
 
-  perms = get_flatpak_permissions (self, "location", "location", app_id);
+  perms = get_portal_permissions (self, "location", "location", app_id);
 
   *set = perms != NULL;
   *allowed = perms == NULL || strcmp (perms[0], "NONE") != 0;
@@ -495,13 +495,13 @@ set_location_allowed (CcApplicationsPanel *self,
   perms[1] = "0";
   perms[2] = NULL;
 
-  set_flatpak_permissions (self, "location", "location", self->current_flatpak_id, perms);
+  set_portal_permissions (self, "location", "location", self->current_portal_app_id, perms);
 }
 
 static void
 location_cb (CcApplicationsPanel *self)
 {
-  if (self->current_flatpak_id)
+  if (self->current_portal_app_id)
     set_location_allowed (self, cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->location)));
 }
 
@@ -1364,7 +1364,7 @@ update_panel (CcApplicationsPanel *self,
   gtk_widget_show (self->header_button);
 
   g_clear_pointer (&self->current_app_id, g_free);
-  g_clear_pointer (&self->current_flatpak_id, g_free);
+  g_clear_pointer (&self->current_portal_app_id, g_free);
 
   update_permission_section (self, info);
   update_integration_section (self, info);
@@ -1372,7 +1372,7 @@ update_panel (CcApplicationsPanel *self,
   update_usage_section (self, info);
 
   self->current_app_id = get_app_id (info);
-  self->current_flatpak_id = get_flatpak_id (info);
+  self->current_portal_app_id = get_flatpak_id (info);
 }
 
 static void
@@ -1443,7 +1443,7 @@ on_perm_store_ready (GObject      *source_object,
   if (proxy == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-          g_warning ("Failed to connect to flatpak permission store: %s",
+          g_warning ("Failed to connect to portal permission store: %s",
                      error->message);
       return;
     }
