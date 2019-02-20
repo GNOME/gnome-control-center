@@ -242,7 +242,6 @@ set_userpass_ui (EAPMethodSimple *method)
 		gtk_entry_set_text (method->password_entry, "");
 
 	gtk_toggle_button_set_active (method->show_password, method->ws_parent->show_password);
-	password_storage_changed (NULL, NULL, method);
 }
 
 static void
