@@ -361,8 +361,6 @@ page_changed (CEPage *page, gpointer user_data)
 {
         NetConnectionEditor *editor= user_data;
 
-        if (editor_is_initialized (editor))
-                editor->is_changed = TRUE;
         validate (editor);
 }
 
