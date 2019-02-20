@@ -57,13 +57,11 @@ struct _CcWindow
   GtkWidget  *stack;
   GtkWidget  *header;
   GtkWidget  *header_box;
-  GtkWidget  *main_leaflet;
   GtkWidget  *list_scrolled;
   GtkWidget  *panel_headerbar;
   GtkWidget  *search_scrolled;
   GtkWidget  *panel_list;
   GtkWidget  *previous_button;
-  GtkWidget  *back_revealer;
   GtkWidget  *top_right_box;
   GtkWidget  *search_button;
   GtkWidget  *search_bar;
@@ -82,8 +80,6 @@ struct _CcWindow
 
   CcPanel *active_panel;
   GSettings *settings;
-
-  CcPanelListView previous_list_view;
 };
 
 static void     cc_shell_iface_init         (CcShellInterface      *iface);
@@ -124,13 +120,6 @@ remove_all_custom_widgets (CcWindow *self)
   CC_EXIT;
 }
 
-static void
-on_sidebar_activated_cb (CcPanel  *panel,
-                         CcWindow *self)
-{
-  hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "panel");
-}
-
 static gboolean
 activate_panel (CcWindow          *self,
                 const gchar       *id,
@@ -162,8 +151,6 @@ activate_panel (CcWindow          *self,
   /* Begin the profile */
   g_timer_start (timer);
 
-  if (self->current_panel)
-    g_signal_handlers_disconnect_by_data (self->current_panel, self);
   self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, parameters));
   cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (self->current_panel));
   gtk_widget_show (self->current_panel);
@@ -183,10 +170,6 @@ activate_panel (CcWindow          *self,
 
   sidebar_widget = cc_panel_get_sidebar_widget (CC_PANEL (self->current_panel));
   cc_panel_list_add_sidebar_widget (CC_PANEL_LIST (self->panel_list), sidebar_widget);
-  /* Ensure we show the panel when when the leaflet is folded and a sidebar
-   * widget's row is activated.
-   */
-  g_signal_connect_object (self->current_panel, "sidebar-activated", G_CALLBACK (on_sidebar_activated_cb), self, 0);
 
   /* Finish profiling */
   g_timer_stop (timer);
@@ -387,7 +370,6 @@ set_active_panel_from_id (CcShell      *shell,
                           const gchar  *start_id,
                           GVariant     *parameters,
                           gboolean      add_to_history,
-                          gboolean      force_moving_to_the_panel,
                           GError      **error)
 {
   g_autoptr(GIcon) gicon = NULL;
@@ -396,22 +378,17 @@ set_active_panel_from_id (CcShell      *shell,
   GtkTreeIter iter;
   GtkWidget *old_panel;
   CcWindow *self;
-  CcPanelListView view;
   gboolean activated;
   gboolean found;
 
   CC_ENTRY;
 
   self = CC_WINDOW (shell);
-  view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list));
 
   /* When loading the same panel again, just set its parameters */
   if (g_strcmp0 (self->current_panel_id, start_id) == 0)
     {
       g_object_set (G_OBJECT (self->current_panel), "parameters", parameters, NULL);
-      if (force_moving_to_the_panel || self->previous_list_view == view)
-        hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "panel");
-      self->previous_list_view = view;
       CC_RETURN (TRUE);
     }
 
@@ -444,9 +421,6 @@ set_active_panel_from_id (CcShell      *shell,
 
   if (add_to_history)
     add_current_panel_to_history (shell, start_id);
-
-  if (force_moving_to_the_panel)
-    hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "panel");
 
   g_free (self->current_panel_id);
   self->current_panel_id = g_strdup (start_id);
@@ -497,39 +471,12 @@ switch_to_previous_panel (CcWindow *self)
 
   g_debug ("Going to previous panel (%s)", previous_panel_id);
 
-  set_active_panel_from_id (CC_SHELL (self), previous_panel_id, NULL, FALSE, FALSE, NULL);
+  set_active_panel_from_id (CC_SHELL (self), previous_panel_id, NULL, FALSE, NULL);
 
   CC_EXIT;
 }
 
 /* Callbacks */
-static void
-update_fold_state (CcWindow *shell)
-{
-  GtkWidget *header_child = hdy_leaflet_get_visible_child (HDY_LEAFLET (shell->header_box));
-  HdyFold fold = hdy_leaflet_get_fold (HDY_LEAFLET (shell->header_box));
-
-  hdy_header_group_set_focus (shell->header_group, fold == HDY_FOLD_FOLDED ? GTK_HEADER_BAR (header_child) : NULL);
-
-  gtk_revealer_set_reveal_child (GTK_REVEALER (shell->back_revealer), fold == HDY_FOLD_FOLDED);
-}
-
-static void
-notify_header_visible_child_cb (HdyLeaflet *leaflet,
-                                GParamSpec *pspec,
-                                CcWindow   *shell)
-{
-  update_fold_state (shell);
-}
-
-static void
-notify_fold_cb (HdyLeaflet *leaflet,
-                GParamSpec *pspec,
-                CcWindow   *shell)
-{
-  update_fold_state (shell);
-}
-
 static void
 show_panel_cb (CcPanelList *panel_list,
                const gchar *panel_id,
@@ -538,7 +485,7 @@ show_panel_cb (CcPanelList *panel_list,
   if (!panel_id)
     return;
 
-  set_active_panel_from_id (CC_SHELL (self), panel_id, NULL, TRUE, FALSE, NULL);
+  set_active_panel_from_id (CC_SHELL (self), panel_id, NULL, TRUE, NULL);
 }
 
 static void
@@ -550,13 +497,6 @@ search_entry_activate_cb (GtkEntry *entry,
   changed = cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
 
   gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (self->search_bar), !changed);
-}
-
-static void
-back_button_clicked_cb (GtkButton *button,
-                        CcWindow  *shell)
-{
-  hdy_leaflet_set_visible_child_name (HDY_LEAFLET (shell->main_leaflet), "sidebar");
 }
 
 static void
@@ -693,7 +633,7 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
                                     GVariant     *parameters,
                                     GError      **error)
 {
-  return set_active_panel_from_id (shell, start_id, parameters, TRUE, TRUE, error);
+  return set_active_panel_from_id (shell, start_id, parameters, TRUE, error);
 }
 
 static void
@@ -872,14 +812,12 @@ cc_window_class_init (CcWindowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/gtk/cc-window.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, back_revealer);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, development_warning_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_group);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, list_scrolled);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, main_leaflet);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, previous_button);
@@ -889,10 +827,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, stack);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, top_right_box);
 
-  gtk_widget_class_bind_template_callback (widget_class, back_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, gdk_window_set_cb);
-  gtk_widget_class_bind_template_callback (widget_class, notify_header_visible_child_cb);
-  gtk_widget_class_bind_template_callback (widget_class, notify_fold_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_development_warning_dialog_responded_cb);
   gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
@@ -914,13 +849,10 @@ cc_window_init (CcWindow *self)
   self->settings = g_settings_new ("org.gnome.ControlCenter");
   self->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
   self->previous_panels = g_queue_new ();
-  self->previous_list_view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list));
 
   /* Add a custom CSS class on development builds */
   if (in_flatpak_sandbox ())
     gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)), "devel");
-
-  update_fold_state (self);
 }
 
 CcWindow *
