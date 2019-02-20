@@ -354,12 +354,28 @@ ppc64le:
   only:
     variables:
       - $CRON_TASK == "BUILD_CI_IMAGES"
+    changes:
+      - build-aux/ci/Dockerfile.*
+
 
   script:
     # Skip the build (if requested)
     - |
       if [[ -z "${CI_COMMIT_MESSAGE##*'[skip images]'*}" ]]; then
         echo "== Nothing to do =="
+        exit 0
+      fi
+
+    - |
+      if [[ "${CI_COMMIT_REF_NAME}" != "master" ]]; then
+        echo "== Exiting, will only build CI images when pushing to master. =="
+        exit 0
+      fi
+
+    # Only when we have somewhere to publish to
+    - |
+      if [[ -z "${CI_REGISTRY}${CI_REGISTRY_IMAGE}${CI_REGISTRY_USER}${CI_REGISTRY_PASSWORD}" ]]; then
+        echo "== Exiting, CI registry not configured. =="
         exit 0
       fi
 
