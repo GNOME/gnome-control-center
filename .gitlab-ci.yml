@@ -354,12 +354,28 @@ ppc64le:
   only:
     variables:
       - $CRON_TASK == "BUILD_CI_IMAGES"
+    changes:
+      - build-aux/ci/Dockerfile.*
+
 
   script:
     # Skip the build (if requested)
     - |
       if [[ -z "${CI_COMMIT_MESSAGE##*'[skip images]'*}" ]]; then
         echo "== Nothing to do =="
+        exit 0
+      fi
+
+    - |
+      if [[ "${CI_COMMIT_REF_NAME}" != "master" ]]; then
+        echo "== Exiting, will only build CI images when pushing to master. =="
+        exit 0
+      fi
+
+    # Only when we have somewhere to publish to
+    - |
+      if [[ -z "${CI_REGISTRY}${CI_REGISTRY_IMAGE}${CI_REGISTRY_USER}${CI_REGISTRY_PASSWORD}" ]]; then
+        echo "== Exiting, CI registry not configured. =="
         exit 0
       fi
 
@@ -373,16 +389,11 @@ ppc64le:
     # Build using the Dockerfile
     - docker build -f "$DOCKERFILE" -t "$CI_REGISTRY_IMAGE:$NAME" .
 
-    # Prepare to publish
+    # Publish
     - docker tag "$CI_REGISTRY_IMAGE:$NAME" "$CI_REGISTRY_IMAGE:job-"$CI_JOB_ID"_$NAME"
     - docker images
     - docker login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}
-
-    # Publish (if running on a schedule)
-    - |
-      if [[ "${CI_PIPELINE_SOURCE}" == "schedule" ]]; then
-        docker push "$CI_REGISTRY_IMAGE"
-      fi
+    - docker push "$CI_REGISTRY_IMAGE"
 
 fedora.dev:
   <<: *create_docker_image
