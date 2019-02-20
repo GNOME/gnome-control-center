@@ -22,6 +22,9 @@
 
 #include <config.h>
 #include <glib/gi18n.h>
+#ifdef HAVE_SNAP
+#include <snapd-glib/snapd-glib.h>
+#endif
 
 #include <gio/gdesktopappinfo.h>
 
@@ -31,6 +34,9 @@
 #include "cc-info-row.h"
 #include "cc-action-row.h"
 #include "cc-applications-resources.h"
+#ifdef HAVE_SNAP
+#include "cc-snap-row.h"
+#endif
 #include "globs.h"
 #include "list-box-helper.h"
 #include "search.h"
@@ -227,7 +233,6 @@ get_portal_app_id (GAppInfo *info)
       snap_name = g_desktop_app_info_get_string (G_DESKTOP_APP_INFO (info), "X-SnapInstanceName");
       if (snap_name != NULL)
         return snap_name;
-
     }
 
   return NULL;
@@ -521,6 +526,96 @@ location_cb (CcApplicationsPanel *self)
 
 /* --- permissions section --- */
 
+#ifdef HAVE_SNAP
+static void
+remove_snap_permissions (CcApplicationsPanel *self)
+{
+  g_autoptr(GList) rows = NULL;
+  GList *link;
+
+  rows = gtk_container_get_children (GTK_CONTAINER (self->permission_list));
+  for (link = rows; link; link = link->next)
+    {
+      GtkWidget *row = link->data;
+
+      if (row == self->builtin)
+        break;
+
+      if (CC_IS_SNAP_ROW (row))
+        gtk_container_remove (GTK_CONTAINER (self->permission_list), GTK_WIDGET (row));
+    }
+}
+
+static gboolean
+add_snap_permissions (CcApplicationsPanel *self,
+                      GAppInfo            *info,
+                      const gchar         *app_id)
+{
+  const gchar *snap_name;
+  g_autoptr(GList) rows = NULL;
+  gint index;
+  g_autoptr(SnapdClient) client = NULL;
+  g_autoptr(GPtrArray) plugs = NULL;
+  g_autoptr(GPtrArray) slots = NULL;
+  gint added = 0;
+  g_autoptr(GError) error = NULL;
+
+  if (!g_str_has_prefix (app_id, PORTAL_SNAP_PREFIX))
+    return FALSE;
+  snap_name = app_id + strlen (PORTAL_SNAP_PREFIX);
+
+  rows = gtk_container_get_children (GTK_CONTAINER (self->permission_list));
+  index = g_list_index (rows, self->builtin);
+  g_assert (index >= 0);
+
+  client = snapd_client_new ();
+  if (!snapd_client_get_interfaces_sync (client, &plugs, &slots, NULL, &error))
+    {
+      g_warning ("Failed to get snap interfaces: %s", error->message);
+      return FALSE;
+    }
+
+  for (int i = 0; i < plugs->len; i++)
+    {
+      SnapdPlug *plug = g_ptr_array_index (plugs, i);
+      CcSnapRow *row;
+      g_autoptr(GPtrArray) available_slots = NULL;
+      const gchar * const hidden_interfaces[] = { "content",
+                                                  "desktop", "desktop-legacy",
+                                                  "mir",
+                                                  "unity7", "unity8",
+                                                  "wayland",
+                                                  "x11",
+                                                  NULL };
+
+      if (g_strcmp0 (snapd_plug_get_snap (plug), snap_name) != 0)
+        continue;
+
+      /* Ignore interfaces that are too low level to make sense to show or disable */
+      if (g_strv_contains (hidden_interfaces, snapd_plug_get_interface (plug)))
+        continue;
+
+      available_slots = g_ptr_array_new_with_free_func (g_object_unref);
+      for (int j = 0; j < slots->len; j++)
+        {
+          SnapdSlot *slot = g_ptr_array_index (slots, j);
+          if (g_strcmp0 (snapd_plug_get_interface (plug), snapd_slot_get_interface (slot)) != 0)
+            continue;
+
+          g_ptr_array_add (available_slots, g_object_ref (slot));
+        }
+
+      row = cc_snap_row_new (self->cancellable, plug, available_slots);
+      gtk_widget_show (GTK_WIDGET (row));
+      gtk_list_box_insert (GTK_LIST_BOX (self->permission_list), GTK_WIDGET (row), index);
+      index++;
+      added++;
+    }
+
+    return added > 0;
+}
+#endif
+
 static gint
 add_static_permission_row (CcApplicationsPanel *self,
                            const gchar         *title,
@@ -562,8 +657,9 @@ add_static_permissions (CcApplicationsPanel *self,
   gchar *str;
   gint added = 0;
   g_autofree gchar *text = NULL;
-  
-  keyfile = get_flatpak_metadata (app_id);
+
+  if (!g_str_has_prefix (app_id, PORTAL_SNAP_PREFIX))
+    keyfile = get_flatpak_metadata (app_id);
   if (keyfile == NULL)
     return FALSE;
 
@@ -648,6 +744,11 @@ update_permission_section (CcApplicationsPanel *self,
   gtk_widget_set_visible (self->location, set && !disabled);
   gtk_widget_set_visible (self->no_location, set && disabled);
   has_any |= set;
+
+#ifdef HAVE_SNAP
+  remove_snap_permissions (self);
+  has_any |= add_snap_permissions (self, info, portal_app_id);
+#endif
 
   remove_static_permissions (self);
   has_builtin = add_static_permissions (self, info, portal_app_id);
