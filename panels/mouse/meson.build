@@ -36,6 +36,7 @@ sources = common_sources + files(
   'cc-mouse-panel.c',
   'cc-mouse-caps-helper.c',
   'gnome-mouse-properties.c',
+  'gnome-mouse-scroll-test.c',
   'gnome-mouse-test.c'
 )
 
@@ -59,6 +60,7 @@ panels_libs += static_library(
 test_name = 'test-gnome-mouse-test'
 
 sources = common_sources + files(
+  'gnome-mouse-scroll-test.c',
   'gnome-mouse-test.c',
   test_name + '.c'
 )
