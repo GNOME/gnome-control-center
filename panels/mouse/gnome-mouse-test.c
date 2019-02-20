@@ -28,6 +28,7 @@
 #include <math.h>
 
 #include "gnome-mouse-test.h"
+#include "gnome-mouse-scroll-test.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -59,7 +60,7 @@ struct _CcMouseTest
 
 	GtkWidget *button_drawing_area;
 	GtkWidget *information_label;
-	GtkWidget *image;
+	GtkWidget *mouse_scroll_test;
 	GtkWidget *scrolled_window_adjustment;
 	GtkWidget *viewport;
 
@@ -161,18 +162,13 @@ setup_information_label (CcMouseTest *self)
 static void
 setup_scroll_image (CcMouseTest *self)
 {
-	const char *resource;
-
 	if (self->scroll_image_timeout_id != 0) {
 		g_source_remove (self->scroll_image_timeout_id);
 		self->scroll_image_timeout_id = 0;
 	}
 
-	if (self->double_click_state == DOUBLE_CLICK_TEST_GEGL)
-		resource = "/org/gnome/control-center/mouse/scroll-test-gegl.svg";
-	else
-		resource = "/org/gnome/control-center/mouse/scroll-test.svg";
-	gtk_image_set_from_resource (GTK_IMAGE (self->image), resource);
+	cc_mouse_scroll_test_set_show_gegl (CC_MOUSE_SCROLL_TEST (self->mouse_scroll_test),
+					    self->double_click_state == DOUBLE_CLICK_TEST_GEGL);
 
 	if (self->double_click_state != DOUBLE_CLICK_TEST_GEGL)
 		return;
@@ -348,7 +344,7 @@ cc_mouse_test_class_init (CcMouseTestClass *klass)
 
 	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, button_drawing_area);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, information_label);
-	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, image);
+	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, mouse_scroll_test);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, scrolled_window_adjustment);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, viewport);
 
@@ -360,6 +356,8 @@ static void
 cc_mouse_test_init (CcMouseTest *self)
 {
 	g_autoptr(GError) error = NULL;
+
+	g_type_ensure (CC_TYPE_MOUSE_SCROLL_TEST);
 
 	gtk_widget_init_template (GTK_WIDGET (self));
 
