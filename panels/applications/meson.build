@@ -42,6 +42,7 @@ deps = common_deps
 
 if enable_snap
   deps += snapd_glib_deps
+  sources += files('cc-snap-row.c')
 endif
 
 cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
