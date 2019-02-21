@@ -18,6 +18,7 @@
  *
  */
 
+#include <errno.h>
 #include <langinfo.h>
 #include <locale.h>
 #include <glib.h>
@@ -149,12 +150,22 @@ DateEndianess
 date_endian_get_for_lang (const char *lang,
 			  gboolean    verbose)
 {
-	const char *old_lang;
+	locale_t locale;
+	locale_t old_locale;
 	DateEndianess endian;
 
-	old_lang = setlocale (LC_TIME, lang);
+	locale = newlocale (LC_TIME_MASK, lang, (locale_t) 0);
+	if (locale == (locale_t) 0)
+		g_warning ("Failed to create locale %s: %s", lang, g_strerror (errno));
+	else
+		old_locale = uselocale (locale);
+
 	endian = date_endian_get_default (verbose);
-	setlocale (LC_TIME, old_lang);
+
+	if (locale != (locale_t) 0) {
+		uselocale (old_locale);
+		freelocale (locale);
+	}
 
 	return endian;
 }

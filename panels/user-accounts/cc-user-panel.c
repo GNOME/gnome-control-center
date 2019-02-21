@@ -27,6 +27,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <locale.h>
+#include <errno.h>
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -954,18 +955,22 @@ restart_now (CcUserPanel *self)
 static void
 show_restart_notification (CcUserPanel *self, const gchar *locale)
 {
-        gchar *current_locale;
+        locale_t current_locale;
+        locale_t new_locale;
 
         if (locale) {
-                current_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
-                setlocale (LC_MESSAGES, locale);
+                new_locale = newlocale (LC_MESSAGES_MASK, locale, (locale_t) 0);
+                if (new_locale == (locale_t) 0)
+                        g_warning ("Failed to create locale %s: %s", locale, g_strerror (errno));
+                else
+                        current_locale = uselocale (new_locale);
         }
 
         gtk_revealer_set_reveal_child (self->notification_revealer, TRUE);
 
-        if (locale) {
-                setlocale (LC_MESSAGES, current_locale);
-                g_free (current_locale);
+        if (locale && new_locale != (locale_t) 0) {
+                uselocale (current_locale);
+                freelocale (new_locale);
         }
 }
 

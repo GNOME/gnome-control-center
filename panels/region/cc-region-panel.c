@@ -19,6 +19,7 @@
  */
 
 #include <config.h>
+#include <errno.h>
 #include <locale.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
@@ -228,20 +229,26 @@ set_restart_notification_visible (CcRegionPanel *self,
                                   const gchar   *locale,
                                   gboolean       visible)
 {
-        g_autofree gchar *current_locale = NULL;
+        locale_t new_locale;
+        locale_t current_locale;
         g_autoptr(GFile) file = NULL;
         g_autoptr(GFileOutputStream) output_stream = NULL;
         g_autoptr(GError) error = NULL;
 
         if (locale) {
-                current_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
-                setlocale (LC_MESSAGES, locale);
+                new_locale = newlocale (LC_MESSAGES_MASK, locale, (locale_t) 0);
+                if (new_locale == (locale_t) 0)
+                        g_warning ("Failed to create locale %s: %s", locale, g_strerror (errno));
+                else
+                        current_locale = uselocale (new_locale);
         }
 
         gtk_revealer_set_reveal_child (self->restart_revealer, visible);
 
-        if (locale)
-                setlocale (LC_MESSAGES, current_locale);
+        if (locale && new_locale != (locale_t) 0) {
+                uselocale (current_locale);
+                freelocale (new_locale);
+        }
 
         file = get_needs_restart_file ();
 
