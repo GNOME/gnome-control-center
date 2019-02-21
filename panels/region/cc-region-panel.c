@@ -227,20 +227,23 @@ set_restart_notification_visible (CcRegionPanel *self,
                                   const gchar   *locale,
                                   gboolean       visible)
 {
-        g_autofree gchar *current_locale = NULL;
+	locale_t new_locale;
+        locale_t current_locale;
         g_autoptr(GFile) file = NULL;
         g_autoptr(GFileOutputStream) output_stream = NULL;
         g_autoptr(GError) error = NULL;
 
         if (locale) {
-                current_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
-                setlocale (LC_MESSAGES, locale);
+		new_locale = newlocale (LC_MESSAGES_MASK, locale, (locale_t) 0);
+		current_locale = uselocale (new_locale);
         }
 
         gtk_revealer_set_reveal_child (self->restart_revealer, visible);
 
-        if (locale)
-                setlocale (LC_MESSAGES, current_locale);
+        if (locale) {
+                uselocale (current_locale);
+		freelocale (new_locale);
+	}
 
         file = get_needs_restart_file ();
 
