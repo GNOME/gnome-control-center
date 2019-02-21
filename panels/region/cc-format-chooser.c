@@ -66,48 +66,48 @@ display_date (GtkWidget *label, GDateTime *dt, const gchar *format)
 static void
 update_format_examples (CcFormatChooser *chooser)
 {
-        g_autofree gchar *time_locale = NULL;
-        g_autofree gchar *numeric_locale = NULL;
-        g_autofree gchar *monetary_locale = NULL;
-        g_autofree gchar *measurement_locale = NULL;
-        g_autofree gchar *paper_locale = NULL;
+        locale_t locale;
+	locale_t old_locale;
         g_autoptr(GDateTime) dt = NULL;
         g_autofree gchar *s = NULL;
         const gchar *fmt;
         g_autoptr(GtkPaperSize) paper = NULL;
 
-        time_locale = g_strdup (setlocale (LC_TIME, NULL));
-        setlocale (LC_TIME, chooser->region);
+	locale = newlocale (LC_TIME_MASK, chooser->region, (locale_t) 0);
+	old_locale = uselocale (locale);
 
         dt = g_date_time_new_now_local ();
         display_date (chooser->date_format_label, dt, "%x");
         display_date (chooser->time_format_label, dt, "%X");
         display_date (chooser->date_time_format_label, dt, "%c");
 
-        setlocale (LC_TIME, time_locale);
+        uselocale (old_locale);
+	freelocale (locale);
 
-        numeric_locale = g_strdup (setlocale (LC_NUMERIC, NULL));
-        setlocale (LC_NUMERIC, chooser->region);
+	locale = newlocale (LC_NUMERIC_MASK, chooser->region, (locale_t) 0);
+	old_locale = uselocale (locale);
 
         s = g_strdup_printf ("%'.2f", 123456789.00);
         gtk_label_set_text (GTK_LABEL (chooser->number_format_label), s);
 
-        setlocale (LC_NUMERIC, numeric_locale);
+        uselocale (old_locale);
+	freelocale (locale);
 
 #if 0
-        monetary_locale = g_strdup (setlocale (LC_MONETARY, NULL));
-        setlocale (LC_MONETARY, chooser->region);
+	locale = newlocale (LC_MONETARY_MASK, chooser->region, (locale_t) 0);
+	old_locale = uselocale (locale);
 
         num_info = localeconv ();
         if (num_info != NULL)
                 gtk_label_set_text (GTK_LABEL (chooser->currency_format_label), num_info->currency_symbol);
 
-        setlocale (LC_MONETARY, monetary_locale);
+        uselocale (old_locale);
+	freelocale (locale);
 #endif
 
 #ifdef LC_MEASUREMENT
-        measurement_locale = g_strdup (setlocale (LC_MEASUREMENT, NULL));
-        setlocale (LC_MEASUREMENT, chooser->region);
+	locale = newlocale (LC_MEASUREMENT_MASK, chooser->region, (locale_t) 0);
+	old_locale = uselocale (locale);
 
         fmt = nl_langinfo (_NL_MEASUREMENT_MEASUREMENT);
         if (fmt && *fmt == 2)
@@ -115,17 +115,19 @@ update_format_examples (CcFormatChooser *chooser)
         else
                 gtk_label_set_text (GTK_LABEL (chooser->measurement_format_label), C_("measurement format", "Metric"));
 
-        setlocale (LC_MEASUREMENT, measurement_locale);
+        uselocale (old_locale);
+	freelocale (locale);
 #endif
 
 #ifdef LC_PAPER
-        paper_locale = g_strdup (setlocale (LC_PAPER, NULL));
-        setlocale (LC_PAPER, chooser->region);
+	locale = newlocale (LC_PAPER_MASK, chooser->region, (locale_t) 0);
+	old_locale = uselocale (locale);
 
         paper = gtk_paper_size_new (gtk_paper_size_get_default ());
         gtk_label_set_text (GTK_LABEL (chooser->paper_format_label), gtk_paper_size_get_display_name (paper));
 
-        setlocale (LC_PAPER, paper_locale);
+        uselocale (old_locale);
+	freelocale (locale);
 #endif
 }
 

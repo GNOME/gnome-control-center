@@ -954,18 +954,19 @@ restart_now (CcUserPanel *self)
 static void
 show_restart_notification (CcUserPanel *self, const gchar *locale)
 {
-        gchar *current_locale;
+        locale_t current_locale;
+        locale_t new_locale;
 
         if (locale) {
-                current_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
-                setlocale (LC_MESSAGES, locale);
+                new_locale = newlocale (LC_MESSAGES_MASK, locale, (locale_t) 0);
+                current_locale = uselocale (new_locale);
         }
 
         gtk_revealer_set_reveal_child (self->notification_revealer, TRUE);
 
         if (locale) {
-                setlocale (LC_MESSAGES, current_locale);
-                g_free (current_locale);
+                uselocale (current_locale);
+                freelocale (new_locale);
         }
 }
 
