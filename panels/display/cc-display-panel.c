@@ -810,6 +810,7 @@ reset_current_config (CcDisplayPanel *panel)
   panel->current_output = NULL;
 
   current = cc_display_config_manager_get_current (panel->manager);
+  cc_display_config_set_minimum_size (current, MINIMUM_WIDTH, MINIMUM_HEIGHT);
   panel->current_config = current;
 
   g_list_store_remove_all (panel->primary_display_list);
