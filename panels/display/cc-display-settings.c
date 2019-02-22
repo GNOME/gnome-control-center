@@ -27,10 +27,6 @@
 #include "cc-display-settings.h"
 #include "cc-display-config.h"
 
-/* The minimum supported size a monitor may have */
-#define MINIMUM_WIDTH 740
-#define MINIMUM_HEIGHT 530
-
 #define MAX_SCALE_BUTTONS 5
 
 struct _CcDisplaySettings
@@ -189,16 +185,6 @@ static gchar *
 get_frequency_string (CcDisplayMode *mode)
 {
   return g_strdup_printf (_("%.2lf Hz"), cc_display_mode_get_freq_f (mode));
-}
-
-static gboolean
-display_mode_supported_at_scale (CcDisplayMode *mode, double scale)
-{
-  int width, height;
-
-  cc_display_mode_get_resolution (mode, &width, &height);
-
-  return round (width / scale) >= MINIMUM_WIDTH && round (height / scale) >= MINIMUM_HEIGHT;
 }
 
 static double
@@ -368,7 +354,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       CcDisplayMode *mode = CC_DISPLAY_MODE (item->data);
 
       /* Exclude unusable low resolutions */
-      if (!display_mode_supported_at_scale (mode, 1.0))
+      if (!cc_display_config_is_scaled_mode_valid (self->config, mode, 1.0))
         continue;
 
       cc_display_mode_get_resolution (mode, &w, &h);
@@ -413,7 +399,9 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
           g_autofree gchar *scale_str = NULL;
           GtkWidget *scale_btn;
 
-          if (!display_mode_supported_at_scale (current_mode, *scale) &&
+          if (!cc_display_config_is_scaled_mode_valid (self->config,
+                                                       cc_display_monitor_get_mode (self->selected_output),
+                                                       *scale) &&
               cc_display_monitor_get_scale (self->selected_output) != *scale)
             continue;
 
