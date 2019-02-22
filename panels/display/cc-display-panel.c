@@ -170,25 +170,6 @@ cc_panel_get_selected_type (CcDisplayPanel *panel)
 }
 
 static void
-cc_panel_set_selected_type (CcDisplayPanel *panel, CcDisplayConfigType type)
-{
-  switch (type)
-    {
-    case CC_DISPLAY_CONFIG_JOIN:
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (panel->config_type_join), TRUE);
-      break;
-    case CC_DISPLAY_CONFIG_CLONE:
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (panel->config_type_mirror), TRUE);
-      break;
-    case CC_DISPLAY_CONFIG_SINGLE:
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (panel->config_type_single), TRUE);
-      break;
-    default:
-      g_assert_not_reached ();
-    }
-}
-
-static void
 config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
 {
   CcDisplayConfigType current_type = config_get_current_type (panel);
@@ -276,6 +257,27 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
     }
 
   rebuild_ui (panel);
+}
+
+static void
+cc_panel_set_selected_type (CcDisplayPanel *panel, CcDisplayConfigType type)
+{
+  switch (type)
+    {
+    case CC_DISPLAY_CONFIG_JOIN:
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (panel->config_type_join), TRUE);
+      break;
+    case CC_DISPLAY_CONFIG_CLONE:
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (panel->config_type_mirror), TRUE);
+      break;
+    case CC_DISPLAY_CONFIG_SINGLE:
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (panel->config_type_single), TRUE);
+      break;
+    default:
+      g_assert_not_reached ();
+    }
+
+  config_ensure_of_type (panel, type);
 }
 
 static void
