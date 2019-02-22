@@ -1250,7 +1250,7 @@ cc_display_config_dbus_is_scaled_mode_valid (CcDisplayConfig *pself,
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (pself);
 
-  if (self->global_scale_required)
+  if (self->global_scale_required || cc_display_config_is_cloning (pself))
     return is_scale_allowed_by_active_monitors (self, scale);
 
   return is_scaled_mode_allowed (self, mode, scale);
