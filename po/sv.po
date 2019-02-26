@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-02-12 00:45+0000\n"
-"PO-Revision-Date: 2019-02-12 16:12+0100\n"
+"POT-Creation-Date: 2019-02-26 19:51+0000\n"
+"PO-Revision-Date: 2019-02-26 22:22+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -45,7 +45,7 @@ msgstr "Sessionsbuss"
 #: panels/applications/cc-applications-panel.c:565
 #: panels/power/cc-power-panel.c:2528 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
-#: shell/cc-window.c:268
+#: shell/cc-window.c:251
 msgid "Devices"
 msgstr "Enheter"
 
@@ -84,8 +84,8 @@ msgid "File System"
 msgstr "Filsystem"
 
 #: panels/applications/cc-applications-panel.c:588
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:272
-#: shell/cc-window.c:930 shell/cc-window.ui:131
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:255
+#: shell/cc-window.c:867 shell/cc-window.ui:116
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Inställningar"
@@ -192,7 +192,7 @@ msgstr ""
 
 #: panels/applications/cc-applications-panel.ui:126
 #: panels/applications/cc-applications-panel.ui:132
-#: panels/privacy/cc-privacy-panel.c:894 panels/privacy/cc-privacy-panel.ui:745
+#: panels/privacy/cc-privacy-panel.c:908 panels/privacy/cc-privacy-panel.ui:745
 msgid "Camera"
 msgstr "Kamera"
 
@@ -218,13 +218,13 @@ msgstr "Inaktiverad"
 
 #: panels/applications/cc-applications-panel.ui:138
 #: panels/applications/cc-applications-panel.ui:144
-#: panels/privacy/cc-privacy-panel.c:927 panels/privacy/cc-privacy-panel.ui:850
+#: panels/privacy/cc-privacy-panel.c:941 panels/privacy/cc-privacy-panel.ui:850
 msgid "Microphone"
 msgstr "Mikrofon"
 
 #: panels/applications/cc-applications-panel.ui:150
 #: panels/applications/cc-applications-panel.ui:156
-#: panels/privacy/cc-privacy-panel.c:836 panels/privacy/cc-privacy-panel.ui:955
+#: panels/privacy/cc-privacy-panel.c:850 panels/privacy/cc-privacy-panel.ui:955
 msgid "Location Services"
 msgstr "Platstjänster"
 
@@ -256,7 +256,7 @@ msgstr "Systemfunktioner som används av detta program."
 #: panels/applications/cc-applications-panel.ui:230
 #: panels/applications/cc-applications-panel.ui:236
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:161
+#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:146
 msgid "Search"
 msgstr "Sök"
 
@@ -425,7 +425,7 @@ msgstr "Du kan lägga till bilder till mapp för %s så kommer de att visas här
 #: panels/network/net-device-wifi.c:1474 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:313
-#: panels/privacy/cc-privacy-panel.c:1123 panels/region/cc-format-chooser.ui:24
+#: panels/privacy/cc-privacy-panel.c:1137 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:607
 #: panels/sharing/cc-sharing-panel.c:427
@@ -433,8 +433,8 @@ msgstr "Du kan lägga till bilder till mapp för %s så kommer de att visas här
 #: panels/user-accounts/cc-avatar-chooser.c:105
 #: panels/user-accounts/cc-avatar-chooser.c:233
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:639
-#: panels/user-accounts/cc-user-panel.c:657
+#: panels/user-accounts/cc-user-panel.c:640
+#: panels/user-accounts/cc-user-panel.c:658
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/user-accounts/um-fingerprint-dialog.c:261
 msgid "_Cancel"
@@ -1445,7 +1445,7 @@ msgstr "Detta kan bero på hårdvarubegränsningar."
 #: panels/display/cc-display-panel.c:1091
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2111 panels/power/cc-power-panel.c:2118
-#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:279
+#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
 #: panels/universal-access/cc-ua-panel.c:478
 #: panels/universal-access/cc-ua-panel.c:841
 #: panels/universal-access/cc-ua-panel.c:854
@@ -1457,7 +1457,7 @@ msgstr "På"
 #: panels/display/cc-display-panel.c:1091 panels/network/net-proxy.c:54
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2105 panels/power/cc-power-panel.c:2116
-#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:279
+#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
 #: panels/universal-access/cc-ua-panel.c:478
 #: panels/universal-access/cc-ua-panel.c:841
 #: panels/universal-access/cc-ua-panel.c:854
@@ -1503,13 +1503,13 @@ msgstr ""
 msgid "Display Arrangement"
 msgstr "Skärmuppställning"
 
-#: panels/display/cc-display-panel.ui:423
+#: panels/display/cc-display-panel.ui:424
 msgid "Display Configuration"
 msgstr "Skärmkonfiguration"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:450
-#: panels/display/cc-display-panel.ui:468
+#: panels/display/cc-display-panel.ui:451
+#: panels/display/cc-display-panel.ui:469
 #: panels/display/cc-night-light-dialog.ui:505
 msgid "Night Light"
 msgstr "Nattbelysning"
@@ -1538,6 +1538,24 @@ msgstr "Liggande (omvänt)"
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
+
+#: panels/display/cc-display-settings.ui:15
+msgctxt "display setting"
+msgid "Orientation"
+msgstr "Orientering"
+
+#: panels/display/cc-display-settings.ui:24
+msgctxt "display setting"
+msgid "Resolution"
+msgstr "Upplösning"
+
+#: panels/display/cc-display-settings.ui:33
+msgid "Refresh Rate"
+msgstr "Uppdateringfrekvens"
+
+#: panels/display/cc-display-settings.ui:42
+msgid "Adjust for TV"
+msgstr "Justera för TV"
 
 #. This cancels the redshift inhibit.
 #: panels/display/cc-night-light-dialog.ui:46
@@ -1655,8 +1673,10 @@ msgid "_Photos"
 msgstr "_Foton"
 
 #. TRANSLATORS: AP type
-#: panels/info/cc-info-overview-panel.c:374
-#: panels/info/cc-info-overview-panel.c:457 panels/network/panel-common.c:123
+#: panels/info/cc-info-overview-panel.c:371
+#: panels/info/cc-info-overview-panel.c:454
+#: panels/info/cc-info-overview-panel.c:499
+#: panels/info/cc-info-overview-panel.c:529 panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "Okänd"
 
@@ -1664,24 +1684,24 @@ msgstr "Okänd"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info/cc-info-overview-panel.c:465
+#: panels/info/cc-info-overview-panel.c:462
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; Bygg-ID: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info/cc-info-overview-panel.c:482
+#: panels/info/cc-info-overview-panel.c:479
 #, c-format
 msgid "64-bit"
 msgstr "64-bitars"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info/cc-info-overview-panel.c:485
+#: panels/info/cc-info-overview-panel.c:482
 #, c-format
 msgid "32-bit"
 msgstr "32-bitars"
 
-#: panels/info/cc-info-overview-panel.c:775
+#: panels/info/cc-info-overview-panel.c:712
 #, c-format
 msgid "Version %s"
 msgstr "Version %s"
@@ -2138,8 +2158,8 @@ msgstr "Återställ alla"
 msgid "Reset the shortcut to its default value"
 msgstr "Återställ kortkommandot till dess standardvärde"
 
-#: panels/keyboard/cc-keyboard-panel.ui:67 panels/region/cc-region-panel.ui:404
-#: shell/cc-window.ui:334
+#: panels/keyboard/cc-keyboard-panel.ui:67 panels/region/cc-region-panel.ui:395
+#: shell/cc-window.ui:279
 msgid "Keyboard Shortcuts"
 msgstr "Tangentbordsgenvägar"
 
@@ -2392,7 +2412,7 @@ msgstr "Nätverksproxy"
 msgid "%s VPN"
 msgstr "%s-VPN"
 
-#: panels/network/cc-network-panel.c:783 panels/network/cc-wifi-panel.ui:303
+#: panels/network/cc-network-panel.c:783 panels/network/cc-wifi-panel.ui:304
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Hoppsan, något gick fel. Kontakta din programvaruleverantör."
 
@@ -2437,31 +2457,31 @@ msgstr "Tråd­löst"
 msgid "Airplane Mode"
 msgstr "Flygplansläge"
 
-#: panels/network/cc-wifi-panel.ui:71
+#: panels/network/cc-wifi-panel.ui:72
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
 msgstr "Inaktiverar trådlöst nätverk, Bluetooth och mobilt bredband"
 
-#: panels/network/cc-wifi-panel.ui:140
+#: panels/network/cc-wifi-panel.ui:141
 msgid "No Wi-Fi Adapter Found"
 msgstr "Ingen Wi-Fi-adapter hittades"
 
-#: panels/network/cc-wifi-panel.ui:152
+#: panels/network/cc-wifi-panel.ui:153
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Säkerställ att du har en Wi-Fi-adapter inkopplad och påslagen"
 
-#: panels/network/cc-wifi-panel.ui:187
+#: panels/network/cc-wifi-panel.ui:188
 msgid "Airplane Mode On"
 msgstr "Flygplansläge på"
 
-#: panels/network/cc-wifi-panel.ui:199
+#: panels/network/cc-wifi-panel.ui:200
 msgid "Turn off to use Wi-Fi"
 msgstr "Slå av för att använda trådlöst nätverk"
 
-#: panels/network/cc-wifi-panel.ui:225
+#: panels/network/cc-wifi-panel.ui:226
 msgid "Visible Networks"
 msgstr "Synliga nätverk"
 
-#: panels/network/cc-wifi-panel.ui:292
+#: panels/network/cc-wifi-panel.ui:293
 msgid "NetworkManager needs to be running"
 msgstr "Nätverkshanteraren måste vara aktiv"
 
@@ -2603,7 +2623,7 @@ msgstr "Ta bort VPN"
 
 #: panels/network/connection-editor/ce-page-details.c:332
 #: panels/network/network-wifi.ui:1433 shell/cc-panel-list.ui:103
-#: shell/cc-window.c:264
+#: shell/cc-window.c:247
 msgid "Details"
 msgstr "Detaljer"
 
@@ -3214,9 +3234,9 @@ msgstr "detaljer"
 #: panels/network/wireless-security/ws-leap.ui:40
 #: panels/network/wireless-security/ws-wpa-psk.ui:22
 #: panels/sharing/cc-sharing-panel.ui:357
-#: panels/user-accounts/cc-add-user-dialog.ui:309
-#: panels/user-accounts/cc-add-user-dialog.ui:546
-#: panels/user-accounts/cc-user-panel.ui:213
+#: panels/user-accounts/cc-add-user-dialog.ui:310
+#: panels/user-accounts/cc-add-user-dialog.ui:547
+#: panels/user-accounts/cc-user-panel.ui:214
 msgid "_Password"
 msgstr "_Lösenord"
 
@@ -3705,7 +3725,7 @@ msgstr "saknar EAP-LEAP-lösenord"
 #: panels/network/wireless-security/eap-method-simple.ui:26
 #: panels/network/wireless-security/ws-leap.ui:26
 #: panels/user-accounts/cc-add-user-dialog.ui:146
-#: panels/user-accounts/cc-add-user-dialog.ui:526
+#: panels/user-accounts/cc-add-user-dialog.ui:527
 msgid "_Username"
 msgstr "An_vändarnamn"
 
@@ -4597,7 +4617,7 @@ msgstr "Användarnamn"
 #. Translators: This is a password needed for printing.
 #: panels/printers/authentication-dialog.ui:96
 #: panels/printers/jobs-dialog.ui:70 panels/printers/new-printer-dialog.ui:383
-#: panels/user-accounts/cc-add-user-dialog.ui:248
+#: panels/user-accounts/cc-add-user-dialog.ui:249
 msgid "Password"
 msgstr "Lösenord"
 
@@ -4723,7 +4743,7 @@ msgstr ""
 
 #. Translators: This button triggers the printing of a test page.
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/options-dialog.ui:22 panels/printers/pp-options-dialog.c:895
+#: panels/printers/options-dialog.ui:22 panels/printers/pp-options-dialog.c:907
 msgid "Test Page"
 msgstr "Testsida"
 
@@ -4932,95 +4952,96 @@ msgstr "Adress: %s"
 msgid "Server requires authentication"
 msgstr "Server begär autentisering"
 
-#: panels/printers/pp-options-dialog.c:83
+#: panels/printers/pp-options-dialog.c:90
 msgid "Two Sided"
 msgstr "Dubbelsidig"
 
-#: panels/printers/pp-options-dialog.c:84
+#: panels/printers/pp-options-dialog.c:91
 msgid "Paper Type"
 msgstr "Papperstyp"
 
-#: panels/printers/pp-options-dialog.c:85
+#: panels/printers/pp-options-dialog.c:92
 msgid "Paper Source"
 msgstr "Papperskälla"
 
-#: panels/printers/pp-options-dialog.c:86
+#: panels/printers/pp-options-dialog.c:93
 msgid "Output Tray"
 msgstr "Utskriftsfack"
 
-#: panels/printers/pp-options-dialog.c:87
+#: panels/printers/pp-options-dialog.c:94
+msgctxt "printing option"
 msgid "Resolution"
 msgstr "Upplösning"
 
-#: panels/printers/pp-options-dialog.c:88
+#: panels/printers/pp-options-dialog.c:95
 msgid "GhostScript pre-filtering"
 msgstr "GhostScript-förfiltrering"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: panels/printers/pp-options-dialog.c:536
+#: panels/printers/pp-options-dialog.c:548
 msgid "Pages per side"
 msgstr "Sidor per blad"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: panels/printers/pp-options-dialog.c:548
+#: panels/printers/pp-options-dialog.c:560
 msgid "Two-sided"
 msgstr "Dubbelsidig"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/printers/pp-options-dialog.c:560
+#: panels/printers/pp-options-dialog.c:572
 msgid "Orientation"
 msgstr "Orientering"
 
 #. Translators: "General" tab contains general printer options
-#: panels/printers/pp-options-dialog.c:657
+#: panels/printers/pp-options-dialog.c:669
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "Allmänt"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: panels/printers/pp-options-dialog.c:660
+#: panels/printers/pp-options-dialog.c:672
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Utskriftsinställningar"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: panels/printers/pp-options-dialog.c:663
+#: panels/printers/pp-options-dialog.c:675
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Installerbara alternativ"
 
 #. Translators: "Job" tab contains settings for jobs
-#: panels/printers/pp-options-dialog.c:666
+#: panels/printers/pp-options-dialog.c:678
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Jobb"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: panels/printers/pp-options-dialog.c:669
+#: panels/printers/pp-options-dialog.c:681
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Bildkvalitet"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: panels/printers/pp-options-dialog.c:672
+#: panels/printers/pp-options-dialog.c:684
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Färg"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: panels/printers/pp-options-dialog.c:675
+#: panels/printers/pp-options-dialog.c:687
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Slutför"
 
 #. Translators: "Advanced" tab contains all others settings
-#: panels/printers/pp-options-dialog.c:678
+#: panels/printers/pp-options-dialog.c:690
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Avancerat"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:908
+#: panels/printers/pp-options-dialog.c:920
 msgid "Test page"
 msgstr "Testsida"
 
@@ -5250,90 +5271,90 @@ msgstr ""
 "Tyvärr! Systemets utskriftstjänst\n"
 "verkar inte finnas tillgänglig."
 
-#: panels/privacy/cc-privacy-panel.c:409 panels/privacy/cc-privacy-panel.ui:280
+#: panels/privacy/cc-privacy-panel.c:423 panels/privacy/cc-privacy-panel.ui:280
 msgid "Screen Lock"
 msgstr "Skärmlås"
 
-#: panels/privacy/cc-privacy-panel.c:453
+#: panels/privacy/cc-privacy-panel.c:467
 msgid "In use"
 msgstr "I bruk"
 
-#: panels/privacy/cc-privacy-panel.c:458
+#: panels/privacy/cc-privacy-panel.c:472
 msgctxt "Location services status"
 msgid "On"
 msgstr "På"
 
-#: panels/privacy/cc-privacy-panel.c:459
+#: panels/privacy/cc-privacy-panel.c:473
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Av"
 
-#: panels/privacy/cc-privacy-panel.c:881
+#: panels/privacy/cc-privacy-panel.c:895
 msgctxt "Camera status"
 msgid "Off"
 msgstr "Av"
 
-#: panels/privacy/cc-privacy-panel.c:883
+#: panels/privacy/cc-privacy-panel.c:897
 msgctxt "Camera status"
 msgid "On"
 msgstr "På"
 
-#: panels/privacy/cc-privacy-panel.c:914
+#: panels/privacy/cc-privacy-panel.c:928
 msgctxt "Microphone status"
 msgid "Off"
 msgstr "Av"
 
-#: panels/privacy/cc-privacy-panel.c:916
+#: panels/privacy/cc-privacy-panel.c:930
 msgctxt "Microphone status"
 msgid "On"
 msgstr "På"
 
-#: panels/privacy/cc-privacy-panel.c:1022
+#: panels/privacy/cc-privacy-panel.c:1036
 #: panels/privacy/cc-privacy-panel.ui:127
 msgid "Usage & History"
 msgstr "Användning & historik"
 
-#: panels/privacy/cc-privacy-panel.c:1143
+#: panels/privacy/cc-privacy-panel.c:1157
 msgid "Empty all items from Trash?"
 msgstr "Töm alla objekt i papperskorgen?"
 
-#: panels/privacy/cc-privacy-panel.c:1144
+#: panels/privacy/cc-privacy-panel.c:1158
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Alla objekt i papperskorgen kommer att tas bort permanent."
 
-#: panels/privacy/cc-privacy-panel.c:1145
+#: panels/privacy/cc-privacy-panel.c:1159
 msgid "_Empty Trash"
 msgstr "_Töm papperskorgen"
 
-#: panels/privacy/cc-privacy-panel.c:1166
+#: panels/privacy/cc-privacy-panel.c:1180
 msgid "Delete all the temporary files?"
 msgstr "Radera alla tillfälliga filer?"
 
-#: panels/privacy/cc-privacy-panel.c:1167
+#: panels/privacy/cc-privacy-panel.c:1181
 msgid "All the temporary files will be permanently deleted."
 msgstr "Alla tillfälliga filer kommer att raderas permanent."
 
-#: panels/privacy/cc-privacy-panel.c:1168
+#: panels/privacy/cc-privacy-panel.c:1182
 msgid "_Purge Temporary Files"
 msgstr "_Ta bort tillfälliga filer"
 
-#: panels/privacy/cc-privacy-panel.c:1190
+#: panels/privacy/cc-privacy-panel.c:1204
 #: panels/privacy/cc-privacy-panel.ui:432
 msgid "Purge Trash & Temporary Files"
 msgstr "Rensa papperskorgen & tillfälliga filer"
 
-#: panels/privacy/cc-privacy-panel.c:1223
+#: panels/privacy/cc-privacy-panel.c:1237
 #: panels/privacy/cc-privacy-panel.ui:637
 msgid "Software Usage"
 msgstr "Programvaruanvändning"
 
-#: panels/privacy/cc-privacy-panel.c:1262
+#: panels/privacy/cc-privacy-panel.c:1276
 #: panels/privacy/cc-privacy-panel.ui:1169
 msgid "Problem Reporting"
 msgstr "Problemrapportering"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: panels/privacy/cc-privacy-panel.c:1274
+#: panels/privacy/cc-privacy-panel.c:1288
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -5342,7 +5363,7 @@ msgstr ""
 "Att skicka in rapporter om tekniska problem hjälper oss att förbättra %s. "
 "Rapporter skickas anonymt och rensas på personliga data."
 
-#: panels/privacy/cc-privacy-panel.c:1286
+#: panels/privacy/cc-privacy-panel.c:1300
 #: panels/privacy/cc-privacy-panel.ui:719
 msgid "Privacy Policy"
 msgstr "Sekretesspolicy"
@@ -5702,73 +5723,73 @@ msgid "Login _Screen"
 msgstr "Inloggnings_skärm"
 
 # Antar att detta har att göra med jobbet...
-#: panels/region/cc-region-panel.ui:60
-#: panels/user-accounts/cc-user-panel.ui:361
+#: panels/region/cc-region-panel.ui:64
+#: panels/user-accounts/cc-user-panel.ui:362
 msgid "_Language"
 msgstr "_Språk"
 
-#: panels/region/cc-region-panel.ui:95
+#: panels/region/cc-region-panel.ui:99
 msgid "Restart the session for changes to take effect"
 msgstr "Starta om sessionen för att ändringar ska genomföras"
 
-#: panels/region/cc-region-panel.ui:112
+#: panels/region/cc-region-panel.ui:114
 msgid "Restart…"
 msgstr "Starta om…"
 
-#: panels/region/cc-region-panel.ui:143
+#: panels/region/cc-region-panel.ui:147
 msgid "_Formats"
 msgstr "_Format"
 
-#: panels/region/cc-region-panel.ui:193
+#: panels/region/cc-region-panel.ui:195
 msgid "Input Sources"
 msgstr "Inmatningskällor"
 
-#: panels/region/cc-region-panel.ui:207
+#: panels/region/cc-region-panel.ui:209
 msgid "Choose keyboard layouts or input methods."
 msgstr "Välj tangentbordslayouter eller inmatningsmetoder."
 
-#: panels/region/cc-region-panel.ui:271
+#: panels/region/cc-region-panel.ui:266
 msgid "No input source selected"
 msgstr "Ingen inmatningskälla vald"
 
-#: panels/region/cc-region-panel.ui:303
+#: panels/region/cc-region-panel.ui:300
 msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "Inloggningsinställningar används av alla användare när inloggad i systemet"
 
-#: panels/region/cc-region-panel.ui:347
+#: panels/region/cc-region-panel.ui:338
 msgid "Input Source Options"
 msgstr "Alternativ för inmatningskälla"
 
-#: panels/region/cc-region-panel.ui:362
+#: panels/region/cc-region-panel.ui:353
 msgid "Use the _same source for all windows"
 msgstr "Använd _samma källa för alla fönster"
 
-#: panels/region/cc-region-panel.ui:380
+#: panels/region/cc-region-panel.ui:371
 msgid "Allow _different sources for each window"
 msgstr "Tillåt olika källor för in_dividuella fönster"
 
-#: panels/region/cc-region-panel.ui:422
+#: panels/region/cc-region-panel.ui:413
 msgid "Previous source"
 msgstr "Föregående källa"
 
-#: panels/region/cc-region-panel.ui:440
+#: panels/region/cc-region-panel.ui:431
 msgid "Super+Shift+Space"
 msgstr "Super+skift+blanksteg"
 
-#: panels/region/cc-region-panel.ui:455
+#: panels/region/cc-region-panel.ui:446
 msgid "Next source"
 msgstr "Nästa källa"
 
-#: panels/region/cc-region-panel.ui:473
+#: panels/region/cc-region-panel.ui:464
 msgid "Super+Space"
 msgstr "Super+blanksteg"
 
-#: panels/region/cc-region-panel.ui:488
+#: panels/region/cc-region-panel.ui:479
 msgid "Left+Right Alt"
 msgstr "Vänster + höger Alt"
 
-#: panels/region/cc-region-panel.ui:504
+#: panels/region/cc-region-panel.ui:495
 msgid "These keyboard shortcuts can be changed in the keyboard settings"
 msgstr "Du kan ändra dessa tangentbordsgenvägar i tangentbordsinställningarna"
 
@@ -6062,15 +6083,15 @@ msgstr "Testar %s"
 msgid "Click a speaker to test"
 msgstr "Klicka på en högtalare för att testa"
 
-#: panels/sound/cc-sound-panel.ui:30
+#: panels/sound/cc-sound-panel.ui:29
 msgid "System Volume"
 msgstr "Systemvolym"
 
-#: panels/sound/cc-sound-panel.ui:46
+#: panels/sound/cc-sound-panel.ui:45
 msgid "Volume Levels"
 msgstr "Volymnivåer"
 
-#: panels/sound/cc-sound-panel.ui:68
+#: panels/sound/cc-sound-panel.ui:67
 msgid "Output"
 msgstr "Utgång"
 
@@ -6082,35 +6103,35 @@ msgstr "Utgångsenhet"
 msgid "Test"
 msgstr "Testa"
 
-#: panels/sound/cc-sound-panel.ui:147 panels/sound/cc-sound-panel.ui:319
+#: panels/sound/cc-sound-panel.ui:148 panels/sound/cc-sound-panel.ui:325
 msgid "Configuration"
 msgstr "Konfiguration"
 
-#: panels/sound/cc-sound-panel.ui:179
+#: panels/sound/cc-sound-panel.ui:181
 msgid "Balance"
 msgstr "Balans"
 
-#: panels/sound/cc-sound-panel.ui:205
+#: panels/sound/cc-sound-panel.ui:208
 msgid "Fade"
 msgstr "Toning"
 
-#: panels/sound/cc-sound-panel.ui:231
+#: panels/sound/cc-sound-panel.ui:235
 msgid "Subwoofer"
 msgstr "Subwoofer"
 
-#: panels/sound/cc-sound-panel.ui:253
+#: panels/sound/cc-sound-panel.ui:257
 msgid "Input"
 msgstr "Ingång"
 
-#: panels/sound/cc-sound-panel.ui:279
+#: panels/sound/cc-sound-panel.ui:284
 msgid "Input Device"
 msgstr "Ingångsenhet"
 
-#: panels/sound/cc-sound-panel.ui:351
+#: panels/sound/cc-sound-panel.ui:358
 msgid "Volume"
 msgstr "Volym"
 
-#: panels/sound/cc-sound-panel.ui:373
+#: panels/sound/cc-sound-panel.ui:380
 msgid "Alert Sound"
 msgstr "Larmljud"
 
@@ -6230,7 +6251,7 @@ msgstr "UUID:"
 msgid "Authorize and Connect"
 msgstr "Auktorisera och anslut"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:347
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:346
 msgid "Forget Device"
 msgstr "Glöm enhet"
 
@@ -6922,39 +6943,39 @@ msgstr "Kunde inte hitta domänen. Kanske felstavade du den?"
 msgid "Add User"
 msgstr "Lägg till användare"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:179
+#: panels/user-accounts/cc-add-user-dialog.ui:180
 msgid "_Full Name"
 msgstr "_Fullständigt namn"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:205
+#: panels/user-accounts/cc-add-user-dialog.ui:206
 #: panels/user-accounts/cc-user-panel.ui:151
 msgid "Standard"
 msgstr "Standard"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:215
+#: panels/user-accounts/cc-add-user-dialog.ui:216
 #: panels/user-accounts/cc-user-panel.ui:161
 msgid "Administrator"
 msgstr "Administratör"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:231
+#: panels/user-accounts/cc-add-user-dialog.ui:232
 #: panels/user-accounts/cc-user-panel.ui:179
 msgid "Account _Type"
 msgstr "Konto_typ"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:268
+#: panels/user-accounts/cc-add-user-dialog.ui:269
 msgid "Allow user to set a password when they next _login"
 msgstr "Låt användare välja lösenord vid nästa _inloggning"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:282
+#: panels/user-accounts/cc-add-user-dialog.ui:283
 msgid "Set a password _now"
 msgstr "Ange ett lösenord _nu"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:404
+#: panels/user-accounts/cc-add-user-dialog.ui:405
 msgid "_Confirm"
 msgstr "_Bekräfta"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:484
-#: panels/user-accounts/cc-add-user-dialog.ui:691
+#: panels/user-accounts/cc-add-user-dialog.ui:485
+#: panels/user-accounts/cc-add-user-dialog.ui:692
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
@@ -6964,21 +6985,21 @@ msgstr ""
 "användarkonto kan användas på denna enhet. Du kan också använda detta konto "
 "för att komma åt företagsresurser på internet."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:506
+#: panels/user-accounts/cc-add-user-dialog.ui:507
 #: panels/user-accounts/data/join-dialog.ui:116
 msgid "_Domain"
 msgstr "_Domän"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:731
+#: panels/user-accounts/cc-add-user-dialog.ui:732
 msgid "You are Offline"
 msgstr "Du är frånkopplad"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:750
+#: panels/user-accounts/cc-add-user-dialog.ui:751
 msgid "You must be online in order to add enterprise users."
 msgstr ""
 "Du måste vara ansluten till nätet för att lägga till företagsanvändare."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:781
+#: panels/user-accounts/cc-add-user-dialog.ui:782
 msgid "_Enterprise Login"
 msgstr "_Företagsinloggning"
 
@@ -7030,7 +7051,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:769
+#: panels/user-accounts/cc-user-panel.c:770
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7038,7 +7059,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:773
+#: panels/user-accounts/cc-user-panel.c:774
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7122,30 +7143,30 @@ msgstr "Ogiltigt lösenord, försök igen"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Det gick inte att ansluta till %s-domänen: %s"
 
-#: panels/user-accounts/cc-user-panel.c:212
+#: panels/user-accounts/cc-user-panel.c:213
 msgid "Your account"
 msgstr "Ditt konto"
 
-#: panels/user-accounts/cc-user-panel.c:387
+#: panels/user-accounts/cc-user-panel.c:388
 msgid "Failed to delete user"
 msgstr "Misslyckades med att ta bort användaren"
 
-#: panels/user-accounts/cc-user-panel.c:445
-#: panels/user-accounts/cc-user-panel.c:504
-#: panels/user-accounts/cc-user-panel.c:556
+#: panels/user-accounts/cc-user-panel.c:446
+#: panels/user-accounts/cc-user-panel.c:505
+#: panels/user-accounts/cc-user-panel.c:557
 msgid "Failed to revoke remotely managed user"
 msgstr "Misslyckades med att ta bort fjärrhanterad användare"
 
-#: panels/user-accounts/cc-user-panel.c:608
+#: panels/user-accounts/cc-user-panel.c:609
 msgid "You cannot delete your own account."
 msgstr "Du kan inte ta bort ditt egna konto."
 
-#: panels/user-accounts/cc-user-panel.c:617
+#: panels/user-accounts/cc-user-panel.c:618
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s är fortfarande inloggad"
 
-#: panels/user-accounts/cc-user-panel.c:621
+#: panels/user-accounts/cc-user-panel.c:622
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7153,12 +7174,12 @@ msgstr ""
 "Att ta bort en användare när de är inloggade kan medföra att systemet hamnar "
 "i ett inkonsistent tillstånd."
 
-#: panels/user-accounts/cc-user-panel.c:630
+#: panels/user-accounts/cc-user-panel.c:631
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Vill du behålla filer tillhörande %s?"
 
-#: panels/user-accounts/cc-user-panel.c:634
+#: panels/user-accounts/cc-user-panel.c:635
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7166,47 +7187,47 @@ msgstr ""
 "Det är möjligt att behålla hemkatalogen, e-postkö och tillfälliga filer när "
 "ett användarkonto tas bort."
 
-#: panels/user-accounts/cc-user-panel.c:637
+#: panels/user-accounts/cc-user-panel.c:638
 msgid "_Delete Files"
 msgstr "_Ta bort filer"
 
-#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:639
 msgid "_Keep Files"
 msgstr "_Behåll filer"
 
-#: panels/user-accounts/cc-user-panel.c:652
+#: panels/user-accounts/cc-user-panel.c:653
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Är du säker på att du vill ta bort fjärrhanterade kontot för %s?"
 
-#: panels/user-accounts/cc-user-panel.c:656
+#: panels/user-accounts/cc-user-panel.c:657
 msgid "_Delete"
 msgstr "_Ta bort"
 
-#: panels/user-accounts/cc-user-panel.c:706
+#: panels/user-accounts/cc-user-panel.c:707
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Kontot är inaktiverat"
 
-#: panels/user-accounts/cc-user-panel.c:714
+#: panels/user-accounts/cc-user-panel.c:715
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Ska ställas in vid nästa inloggning"
 
-#: panels/user-accounts/cc-user-panel.c:717
+#: panels/user-accounts/cc-user-panel.c:718
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ingen"
 
-#: panels/user-accounts/cc-user-panel.c:762
+#: panels/user-accounts/cc-user-panel.c:763
 msgid "Logged in"
 msgstr "Inloggad"
 
-#: panels/user-accounts/cc-user-panel.c:1092
+#: panels/user-accounts/cc-user-panel.c:1093
 msgid "Failed to contact the accounts service"
 msgstr "Misslyckades med att kontakta kontotjänsten"
 
-#: panels/user-accounts/cc-user-panel.c:1094
+#: panels/user-accounts/cc-user-panel.c:1095
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Försäkra dig om att kontotjänsten är installerad och aktiverad."
 
@@ -7214,7 +7235,7 @@ msgstr "Försäkra dig om att kontotjänsten är installerad och aktiverad."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1126
+#: panels/user-accounts/cc-user-panel.c:1127
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7222,12 +7243,12 @@ msgstr ""
 "Klicka först på *-ikonen\n"
 "för att göra ändringar"
 
-#: panels/user-accounts/cc-user-panel.c:1199
+#: panels/user-accounts/cc-user-panel.c:1200
 msgid "Create a user account"
 msgstr "Skapa ett användarkonto"
 
-#: panels/user-accounts/cc-user-panel.c:1210
-#: panels/user-accounts/cc-user-panel.c:1338
+#: panels/user-accounts/cc-user-panel.c:1211
+#: panels/user-accounts/cc-user-panel.c:1339
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7235,12 +7256,12 @@ msgstr ""
 "Klicka först på *-ikonen för\n"
 "att skapa ett användarkonto"
 
-#: panels/user-accounts/cc-user-panel.c:1219
+#: panels/user-accounts/cc-user-panel.c:1220
 msgid "Delete the selected user account"
 msgstr "Ta bort markerat användarkonto"
 
-#: panels/user-accounts/cc-user-panel.c:1231
-#: panels/user-accounts/cc-user-panel.c:1342
+#: panels/user-accounts/cc-user-panel.c:1232
+#: panels/user-accounts/cc-user-panel.c:1343
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7260,33 +7281,33 @@ msgstr "Din session behöver startas om för att ändringar ska genomföras"
 msgid "Restart Now"
 msgstr "Starta om nu"
 
-#: panels/user-accounts/cc-user-panel.ui:253
+#: panels/user-accounts/cc-user-panel.ui:254
 msgid "A_utomatic Login"
 msgstr "A_utomatisk inloggning"
 
-#: panels/user-accounts/cc-user-panel.ui:295
+#: panels/user-accounts/cc-user-panel.ui:296
 msgid "_Fingerprint Login"
 msgstr "_Fingeravtrycksinloggning"
 
-#: panels/user-accounts/cc-user-panel.ui:321
-#: panels/user-accounts/cc-user-panel.ui:337
+#: panels/user-accounts/cc-user-panel.ui:322
+#: panels/user-accounts/cc-user-panel.ui:338
 msgid "User Icon"
 msgstr "Användarikon"
 
-#: panels/user-accounts/cc-user-panel.ui:401
+#: panels/user-accounts/cc-user-panel.ui:402
 msgid "Last Login"
 msgstr "Senast inloggad"
 
-#: panels/user-accounts/cc-user-panel.ui:450
+#: panels/user-accounts/cc-user-panel.ui:451
 msgid "Remove User…"
 msgstr "Ta bort användare…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:483
+#: panels/user-accounts/cc-user-panel.ui:484
 msgid "No Users Found"
 msgstr "Inga användare hittades"
 
-#: panels/user-accounts/cc-user-panel.ui:493
+#: panels/user-accounts/cc-user-panel.ui:494
 msgid "Unlock to add a user account."
 msgstr "Lås upp för att lägga till ett användarkonto."
 
@@ -7846,7 +7867,7 @@ msgstr "Mittenklick med musknapp"
 msgid "Right Mouse Button Click"
 msgstr "Högerklick med musknapp"
 
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:242
+#: panels/wacom/wacom-stylus-page.ui:37
 msgid "Back"
 msgstr "Bakåt"
 
@@ -7939,19 +7960,19 @@ msgstr "Inga resultat hittades"
 msgid "Available panels:"
 msgstr "Tillgängliga paneler:"
 
-#: shell/cc-window.ui:146
+#: shell/cc-window.ui:131
 msgid "All Settings"
 msgstr "Alla inställningar"
 
-#: shell/cc-window.ui:184
+#: shell/cc-window.ui:169
 msgid "Primary Menu"
 msgstr "Primär meny"
 
-#: shell/cc-window.ui:326
+#: shell/cc-window.ui:271
 msgid "Warning: Development Version"
 msgstr "Varning: Utvecklingsversion"
 
-#: shell/cc-window.ui:327
+#: shell/cc-window.ui:272
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -7961,7 +7982,7 @@ msgstr ""
 "kan råka ut för felaktigt beteende hos systemet, dataförlust och andra "
 "oväntade problem. "
 
-#: shell/cc-window.ui:338
+#: shell/cc-window.ui:283
 msgid "Help"
 msgstr "Hjälp"
 
@@ -8049,14 +8070,8 @@ msgstr[1] "%u ingångar"
 msgid "System Sounds"
 msgstr "Systemljud"
 
-#~ msgid "Refresh Rate"
-#~ msgstr "Uppdateringfrekvens"
-
 #~ msgid "Scale"
 #~ msgstr "Skala"
-
-#~ msgid "Adjust for TV"
-#~ msgstr "Justera för TV"
 
 #~ msgid "Primary Display"
 #~ msgstr "Primär skärm"
