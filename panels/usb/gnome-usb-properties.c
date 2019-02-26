@@ -100,6 +100,7 @@ initialize_keyboards_list (CcUsbProperties *self)
   g_autoptr(GList) devices = NULL;
   const char *vendor;
 	const char *product;
+  g_autofree const char *auth = NULL;
   UsbDevice *dev;
 
   const char *devpath;
@@ -118,7 +119,9 @@ initialize_keyboards_list (CcUsbProperties *self)
 
     this_udev_device = g_udev_client_query_by_device_file (client, devpath);
 
-    dev = usb_device_new (g_udev_device_get_property (this_udev_device, "AUTHORIZED") != NULL,
+    auth = g_strdup (g_udev_device_get_property (this_udev_device, "AUTHORIZED"));
+
+    dev = usb_device_new (g_strcmp0 (auth, "1") == 0,
                           gsd_device_get_name (devices->data),
                           g_ascii_strup (product, strlen (product)),
                           g_ascii_strup (vendor, strlen (vendor)));
