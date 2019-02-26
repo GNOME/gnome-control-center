@@ -80,12 +80,12 @@ static const struct {
   const char *keyword;
   const char *translation;
 } ppd_option_translations[] = {
-  { "Duplex", N_("Two Sided") },
-  { "MediaType", N_("Paper Type") },
-  { "InputSlot", N_("Paper Source") },
-  { "OutputBin", N_("Output Tray") },
-  { "Resolution", N_("Resolution") },
-  { "PreFilter", N_("GhostScript pre-filtering") },
+  { "Duplex", NC_("printing option", "Two Sided") },
+  { "MediaType", NC_("printing option", "Paper Type") },
+  { "InputSlot", NC_("printing option", "Paper Source") },
+  { "OutputBin", NC_("printing option", "Output Tray") },
+  { "Resolution", NC_("printing option", "Resolution") },
+  { "PreFilter", NC_("printing option", "GhostScript pre-filtering") },
 };
 
 /* keep sorted when changing */
@@ -277,7 +277,7 @@ ppd_option_name_translate (ppd_option_t *option)
   for (i = 0; i < G_N_ELEMENTS (ppd_option_translations); i++)
     {
       if (g_strcmp0 (ppd_option_translations[i].keyword, option->keyword) == 0)
-	return _(ppd_option_translations[i].translation);
+	return g_dcgettext(NULL, "printing option", ppd_option_translations[i].translation);
     }
 
   return option->text;
