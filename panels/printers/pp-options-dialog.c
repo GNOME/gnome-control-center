@@ -76,16 +76,23 @@ enum
 };
 
 /* These lists come from Gtk+ */
+/* TODO: Only "Resolution" currently has a context to disambiguate it from
+ *       the display settings. All of these should have contexts, but it
+ *       was late in the release cycle and this partial solution was
+ *       preferable. See:
+ *       https://gitlab.gnome.org/GNOME/gnome-control-center/merge_requests/414#note_446778
+ */
 static const struct {
   const char *keyword;
+  const char *translation_context;
   const char *translation;
 } ppd_option_translations[] = {
-  { "Duplex", N_("Two Sided") },
-  { "MediaType", N_("Paper Type") },
-  { "InputSlot", N_("Paper Source") },
-  { "OutputBin", N_("Output Tray") },
-  { "Resolution", N_("Resolution") },
-  { "PreFilter", N_("GhostScript pre-filtering") },
+  { "Duplex", NULL, N_("Two Sided") },
+  { "MediaType", NULL, N_("Paper Type") },
+  { "InputSlot", NULL, N_("Paper Source") },
+  { "OutputBin", NULL, N_("Output Tray") },
+  { "Resolution", "printing option", NC_("printing option", "Resolution") },
+  { "PreFilter", NULL, N_("GhostScript pre-filtering") },
 };
 
 /* keep sorted when changing */
@@ -277,7 +284,12 @@ ppd_option_name_translate (ppd_option_t *option)
   for (i = 0; i < G_N_ELEMENTS (ppd_option_translations); i++)
     {
       if (g_strcmp0 (ppd_option_translations[i].keyword, option->keyword) == 0)
-	return _(ppd_option_translations[i].translation);
+        {
+          if (ppd_option_translations[i].translation_context)
+            return g_dpgettext2(NULL, ppd_option_translations[i].translation_context, ppd_option_translations[i].translation);
+          else
+            return _(ppd_option_translations[i].translation);
+        }
     }
 
   return option->text;
