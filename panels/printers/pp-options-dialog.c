@@ -80,12 +80,12 @@ static const struct {
   const char *keyword;
   const char *translation;
 } ppd_option_translations[] = {
-  { "Duplex", N_("Two Sided") },
-  { "MediaType", N_("Paper Type") },
-  { "InputSlot", N_("Paper Source") },
-  { "OutputBin", N_("Output Tray") },
-  { "Resolution", N_("Resolution") },
-  { "PreFilter", N_("GhostScript pre-filtering") },
+  { "Duplex", NC_("printing option", "Two Sided") },
+  { "MediaType", NC_("printing option", "Paper Type") },
+  { "InputSlot", NC_("printing option", "Paper Source") },
+  { "OutputBin", NC_("printing option", "Output Tray") },
+  { "Resolution", NC_("printing option", "Resolution") },
+  { "PreFilter", NC_("printing option", "GhostScript pre-filtering") },
 };
 
 /* keep sorted when changing */
