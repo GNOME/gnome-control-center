@@ -84,8 +84,6 @@ struct _CcMouseProperties
 	gboolean left_handed;
 	GtkGesture *left_gesture;
 	GtkGesture *right_gesture;
-
-	gboolean changing_scroll;
 };
 
 G_DEFINE_TYPE (CcMouseProperties, cc_mouse_properties, GTK_TYPE_BIN);
@@ -116,15 +114,7 @@ setup_touchpad_options (CcMouseProperties *self)
 	two_finger_scroll_enabled = g_settings_get_boolean (self->touchpad_settings, "two-finger-scrolling-enabled");
 	if (edge_scroll_enabled && two_finger_scroll_enabled) {
 		/* You cunning user set both, but you can only have one set in that UI */
-		self->changing_scroll = TRUE;
-		gtk_switch_set_active (GTK_SWITCH (self->two_finger_scrolling_switch), two_finger_scroll_enabled);
-		self->changing_scroll = FALSE;
 		gtk_switch_set_active (GTK_SWITCH (self->edge_scrolling_switch), FALSE);
-	} else {
-		self->changing_scroll = TRUE;
-		gtk_switch_set_active (GTK_SWITCH (self->edge_scrolling_switch), edge_scroll_enabled);
-		gtk_switch_set_active (GTK_SWITCH (self->two_finger_scrolling_switch), two_finger_scroll_enabled);
-		self->changing_scroll = FALSE;
 	}
 }
 
@@ -132,15 +122,12 @@ static void
 two_finger_scrolling_changed_event (CcMouseProperties *self,
 				    gboolean           state)
 {
-	if (self->changing_scroll)
-		return;
-
+	/* Updating the setting will cause the "state" of the switch to be updated. */
 	g_settings_set_boolean (self->touchpad_settings, "two-finger-scrolling-enabled", state);
-	gtk_switch_set_state (GTK_SWITCH (self->two_finger_scrolling_switch), state);
 
 	if (state && gtk_widget_get_visible (self->edge_scrolling_row)) {
 		/* Disable edge scrolling if two-finger scrolling is enabled */
-		gtk_switch_set_state (GTK_SWITCH (self->edge_scrolling_switch), FALSE);
+		gtk_switch_set_active (GTK_SWITCH (self->edge_scrolling_switch), FALSE);
 	}
 }
 
@@ -148,15 +135,12 @@ static void
 edge_scrolling_changed_event (CcMouseProperties *self,
 			      gboolean           state)
 {
-	if (self->changing_scroll)
-		return;
-
+	/* Updating the setting will cause the "state" of the switch to be updated. */
 	g_settings_set_boolean (self->touchpad_settings, "edge-scrolling-enabled", state);
-	gtk_switch_set_state (GTK_SWITCH (self->edge_scrolling_switch), state);
 
 	if (state && gtk_widget_get_visible (self->two_finger_scrolling_row)) {
 		/* Disable two-finger scrolling if edge scrolling is enabled */
-		gtk_switch_set_state (GTK_SWITCH (self->two_finger_scrolling_switch), FALSE);
+		gtk_switch_set_active (GTK_SWITCH (self->two_finger_scrolling_switch), FALSE);
 	}
 }
 
@@ -323,6 +307,14 @@ setup_dialog (CcMouseProperties *self)
 			 self->tap_to_click_switch, "active",
 			 G_SETTINGS_BIND_DEFAULT);
 
+	g_settings_bind (self->touchpad_settings, "two-finger-scrolling-enabled",
+                         self->two_finger_scrolling_switch, "state",
+                         G_SETTINGS_BIND_GET);
+
+	g_settings_bind (self->touchpad_settings, "edge-scrolling-enabled",
+                         self->edge_scrolling_switch, "state",
+                         G_SETTINGS_BIND_GET);
+
 	setup_touchpad_options (self);
 }
 
@@ -441,8 +433,6 @@ cc_mouse_properties_init (CcMouseProperties *self)
 	self->have_synaptics = cc_synaptics_check ();
 	if (self->have_synaptics)
 		g_warning ("Detected synaptics X driver, please migrate to libinput");
-
-	self->changing_scroll = FALSE;
 
 	setup_dialog (self);
 }
