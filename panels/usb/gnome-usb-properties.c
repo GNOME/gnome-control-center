@@ -31,7 +31,6 @@
 #include "gnome-usb-properties.h"
 #include "cc-usb-device-entry.h"
 #include "gsd-input-helper.h"
-#include "gsd-device-manager.h"
 #include "list-box-helper.h"
 
 #include <sys/types.h>
@@ -44,7 +43,6 @@ struct _CcUsbProperties
 
   GtkWidget *scrolled_window;
 
-  GsdDeviceManager *device_manager;
   guint device_added_id;
   guint device_removed_id;
 
@@ -93,8 +91,21 @@ on_device_entry_row_activated_cb (CcUsbProperties *panel,
   return;
 }
 
+static gboolean
+device_is_keyboard (GUdevDevice *device)
+{
+  const gchar *device_file;
+
+  device_file = g_udev_device_get_device_file (device);
+
+  if (!device_file || strstr (device_file, "/event") == NULL)
+    return FALSE;
+
+  return g_udev_device_get_property_as_boolean (device, "ID_INPUT_KEYBOARD");
+}
+
 static void
-add_single_device (GsdDevice *device,
+add_single_device (GUdevDevice     *device,
                    CcUsbProperties *self)
 {
   CcUsbDeviceEntry *entry;
@@ -102,27 +113,26 @@ add_single_device (GsdDevice *device,
   const gchar *devpath;
   const gchar *vendor;
   const gchar *product;
-  g_autoptr(GUdevDevice) this_udev_device = NULL;
+  const gchar *name;
   UsbDevice *dev;
-  GsdDeviceType type;
+  g_autoptr(GUdevDevice) parent = NULL;
 
-  type = gsd_device_get_device_type (device);
-  /*If the device is not a keyboard we don't add it to the list. */
-  if (!(type & GSD_DEVICE_TYPE_KEYBOARD))
-    return;
-
-  gsd_device_get_device_ids (device, &vendor, &product);
-
-  devpath = g_strdup (gsd_device_get_device_file (device));
+  vendor = g_strdup (g_udev_device_get_property (device, "ID_VENDOR_ID"));
+  product = g_strdup (g_udev_device_get_property (device, "ID_MODEL_ID"));
+  devpath = g_strdup (g_udev_device_get_device_file (device));
   g_debug ("vendor: %s product: %s devpath: %s", vendor, product, devpath);
 
-  this_udev_device = g_udev_client_query_by_device_file (self->udev_client, devpath);
-  auth = g_strdup (g_udev_device_get_property (this_udev_device, "AUTHORIZED"));
+  auth = g_strdup (g_udev_device_get_property (device, "AUTHORIZED"));
+
+  parent = g_udev_device_get_parent (device);
+  g_assert (parent != NULL);
+  name = g_udev_device_get_sysfs_attr (parent, "name");
 
   dev = usb_device_new (g_strcmp0 (auth, "1") == 0,
-                        gsd_device_get_name (device),
+                        name,
                         g_ascii_strup (product, strlen (product)),
                         g_ascii_strup (vendor, strlen (vendor)));
+
   entry = cc_usb_device_entry_new (dev);
   gtk_container_add (GTK_CONTAINER (self->devices_list), GTK_WIDGET (entry));
   g_hash_table_insert (self->devices, (gpointer) devpath, entry);
@@ -131,13 +141,57 @@ add_single_device (GsdDevice *device,
 static void
 initialize_keyboards_list (CcUsbProperties *self)
 {
-  g_autoptr(GList) kb_devices = NULL;
+  const gchar *subsystems[] = { "input", NULL };
+  g_autoptr(GList) devices = NULL;
+  GList *l;
 
-  kb_devices = gsd_device_manager_list_devices (self->device_manager, GSD_DEVICE_TYPE_KEYBOARD);
+  devices = g_udev_client_query_by_subsystem (self->udev_client,
+                subsystems[0]);
 
-  for (; kb_devices != NULL; kb_devices = kb_devices->next) {
-    add_single_device (kb_devices->data, self);
+  for (l = devices; l; l = l->next) {
+    g_autoptr(GUdevDevice) device = l->data;
+    if (device_is_keyboard (device))
+      add_single_device (device, self);
   }
+}
+
+static void
+remove_device (GUdevDevice     *device,
+               CcUsbProperties *self)
+{
+  CcUsbDeviceEntry *entry;
+  g_autofree const gchar *devpath = NULL;
+  const gchar *vendor;
+  const gchar *product;
+
+  vendor = g_strdup (g_udev_device_get_property (device, "ID_VENDOR_ID"));
+  product = g_strdup (g_udev_device_get_property (device, "ID_MODEL_ID"));
+  devpath = g_strdup (g_udev_device_get_device_file (device));
+
+  g_debug ("vendor: %s product: %s devpath: %s", vendor, product, devpath);
+  entry = g_hash_table_lookup (self->devices, devpath);
+
+  /*If the removed device was not in the list we do nothing. */
+  if (!entry)
+    return;
+
+  gtk_widget_destroy (GTK_WIDGET (entry));
+  g_hash_table_remove (self->devices, devpath);
+}
+
+static void
+udev_event_cb (GUdevClient     *client,
+               gchar           *action,
+               GUdevDevice     *device,
+               CcUsbProperties *self)
+{
+  if (!device_is_keyboard (device))
+    return;
+
+  if (g_strcmp0 (action, "add") == 0)
+    add_single_device (device, self);
+  else if (g_strcmp0 (action, "remove") == 0)
+    remove_device (device, self);
 }
 
 /* Set up the property editors in the dialog. */
@@ -148,38 +202,6 @@ setup_dialog (CcUsbProperties *self)
 
   gtk_widget_show_all (GTK_WIDGET (self->devices_list));
   gtk_widget_show_all (GTK_WIDGET (self->devices_box));
-}
-
-static void
-device_added (GsdDeviceManager *device_manager,
-              GsdDevice *device,
-              CcUsbProperties *self)
-{
-  add_single_device (device, self);
-}
-
-static void
-device_removed (GsdDeviceManager *device_manager,
-                GsdDevice *device,
-                CcUsbProperties *self)
-{
-  CcUsbDeviceEntry *entry;
-  g_autofree const gchar *devpath = NULL;
-  const gchar *vendor;
-  const gchar *product;
-
-  gsd_device_get_device_ids (device, &vendor, &product);
-
-  devpath = g_strdup (gsd_device_get_device_file (device));
-  g_debug ("vendor: %s product: %s devpath: %s", vendor, product, devpath);
-  entry = g_hash_table_lookup (self->devices, devpath);
-
-  /*If the removed device was not in the list we do nothing. */
-  if (!entry)
-    return;
-
-  gtk_widget_destroy (GTK_WIDGET (entry));
-  g_hash_table_remove (self->devices, devpath);
 }
 
 static void
@@ -199,16 +221,6 @@ on_content_size_changed (CcUsbProperties *self,
 static void
 cc_usb_properties_finalize (GObject *object)
 {
-  CcUsbProperties *self = CC_USB_PROPERTIES (object);
-
-  if (self->device_manager != NULL) {
-    g_signal_handler_disconnect (self->device_manager, self->device_added_id);
-    self->device_added_id = 0;
-    g_signal_handler_disconnect (self->device_manager, self->device_removed_id);
-    self->device_removed_id = 0;
-    self->device_manager = NULL;
-  }
-
   G_OBJECT_CLASS (cc_usb_properties_parent_class)->finalize (object);
 }
 
@@ -234,19 +246,17 @@ cc_usb_properties_class_init (CcUsbPropertiesClass *klass)
 static void
 cc_usb_properties_init (CcUsbProperties *self)
 {
-  const gchar *subsystems[] = {"usb", NULL};
+  const gchar *subsystems[] = {"input", NULL};
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->devices = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, NULL);
+  self->devices = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                         (GDestroyNotify) g_free,
+                                         (GDestroyNotify) g_object_unref);
 
-	self->udev_client = g_udev_client_new (subsystems);
-
-  self->device_manager = gsd_device_manager_get ();
-  self->device_added_id = g_signal_connect (self->device_manager, "device-added",
-                                            G_CALLBACK (device_added), self);
-  self->device_removed_id = g_signal_connect (self->device_manager, "device-removed",
-                                              G_CALLBACK (device_removed), self);
+  self->udev_client = g_udev_client_new (subsystems);
+  g_signal_connect (self->udev_client, "uevent",
+                    G_CALLBACK (udev_event_cb), self);
 
   setup_dialog (self);
 }
