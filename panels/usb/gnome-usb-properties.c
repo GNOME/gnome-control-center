@@ -122,7 +122,7 @@ add_single_device (GUdevDevice     *device,
   devpath = g_strdup (g_udev_device_get_device_file (device));
   g_debug ("vendor: %s product: %s devpath: %s", vendor, product, devpath);
 
-  auth = g_strdup (g_udev_device_get_property (device, "AUTHORIZED"));
+  auth = g_strdup (g_udev_device_get_property (device, "GNOME_KB_AUTHORIZED"));
 
   parent = g_udev_device_get_parent (device);
   g_assert (parent != NULL);

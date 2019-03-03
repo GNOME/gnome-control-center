@@ -7,9 +7,9 @@ fi
 
 if grep -Fxq $2 $1
 then
-  sed -i -e "/$2/!b;n;c \ AUTHORIZED=$3" $1
+  sed -i -e "/$2/!b;n;c \ GNOME_KB_AUTHORIZED=$3" $1
 else
-  echo -e "\n$2\n AUTHORIZED=$3" >> $1
+  echo -e "\n$2\n GNOME_KB_AUTHORIZED=$3" >> $1
 fi
 
 systemd-hwdb update
