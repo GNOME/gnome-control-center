@@ -26,9 +26,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-02-13 17:15+0000\n"
-"PO-Revision-Date: 2019-02-17 16:15+0100\n"
-"Last-Translator: Tim Sabsch <tim@sabsch.com>\n"
+"POT-Creation-Date: 2019-02-27 10:46+0000\n"
+"PO-Revision-Date: 2019-03-03 09:49+0100\n"
+"Last-Translator: Bernd Homuth <dev@hmt.im>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr "Sitzungs-Bus"
 #: panels/applications/cc-applications-panel.c:565
 #: panels/power/cc-power-panel.c:2528 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
-#: shell/cc-window.c:268
+#: shell/cc-window.c:251
 msgid "Devices"
 msgstr "Geräte"
 
@@ -94,8 +94,8 @@ msgid "File System"
 msgstr "Dateisystem"
 
 #: panels/applications/cc-applications-panel.c:588
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:272
-#: shell/cc-window.c:930 shell/cc-window.ui:131
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:255
+#: shell/cc-window.c:867 shell/cc-window.ui:116
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Einstellungen"
@@ -203,7 +203,7 @@ msgstr ""
 
 #: panels/applications/cc-applications-panel.ui:126
 #: panels/applications/cc-applications-panel.ui:132
-#: panels/privacy/cc-privacy-panel.c:894 panels/privacy/cc-privacy-panel.ui:745
+#: panels/privacy/cc-privacy-panel.c:908 panels/privacy/cc-privacy-panel.ui:745
 msgid "Camera"
 msgstr "Kamera"
 
@@ -229,13 +229,13 @@ msgstr "Deaktiviert"
 
 #: panels/applications/cc-applications-panel.ui:138
 #: panels/applications/cc-applications-panel.ui:144
-#: panels/privacy/cc-privacy-panel.c:927 panels/privacy/cc-privacy-panel.ui:850
+#: panels/privacy/cc-privacy-panel.c:941 panels/privacy/cc-privacy-panel.ui:850
 msgid "Microphone"
 msgstr "Mikrofon"
 
 #: panels/applications/cc-applications-panel.ui:150
 #: panels/applications/cc-applications-panel.ui:156
-#: panels/privacy/cc-privacy-panel.c:836 panels/privacy/cc-privacy-panel.ui:955
+#: panels/privacy/cc-privacy-panel.c:850 panels/privacy/cc-privacy-panel.ui:955
 msgid "Location Services"
 msgstr "Ortungsdienste"
 
@@ -267,7 +267,7 @@ msgstr "Systemfunktionen, die diese Anwendung verwendet."
 #: panels/applications/cc-applications-panel.ui:230
 #: panels/applications/cc-applications-panel.ui:236
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:161
+#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:146
 msgid "Search"
 msgstr "Suchen"
 
@@ -438,7 +438,7 @@ msgstr "Bilder, die Sie zu Ihrem %s-Ordner hinzufügen, werden hier auftauchen"
 #: panels/network/net-device-wifi.c:1474 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:313
-#: panels/privacy/cc-privacy-panel.c:1123 panels/region/cc-format-chooser.ui:24
+#: panels/privacy/cc-privacy-panel.c:1137 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:607
 #: panels/sharing/cc-sharing-panel.c:427
@@ -1473,7 +1473,7 @@ msgstr "Das könnte an Einschränkungen der Hardware liegen."
 #: panels/display/cc-display-panel.c:1091
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2111 panels/power/cc-power-panel.c:2118
-#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:279
+#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
 #: panels/universal-access/cc-ua-panel.c:478
 #: panels/universal-access/cc-ua-panel.c:841
 #: panels/universal-access/cc-ua-panel.c:854
@@ -1485,7 +1485,7 @@ msgstr "An"
 #: panels/display/cc-display-panel.c:1091 panels/network/net-proxy.c:54
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2105 panels/power/cc-power-panel.c:2116
-#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:279
+#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
 #: panels/universal-access/cc-ua-panel.c:478
 #: panels/universal-access/cc-ua-panel.c:841
 #: panels/universal-access/cc-ua-panel.c:854
@@ -1532,13 +1532,13 @@ msgstr ""
 msgid "Display Arrangement"
 msgstr "Bildschirmanordnung"
 
-#: panels/display/cc-display-panel.ui:423
+#: panels/display/cc-display-panel.ui:424
 msgid "Display Configuration"
 msgstr "Bildschirmeinrichtung"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:450
-#: panels/display/cc-display-panel.ui:468
+#: panels/display/cc-display-panel.ui:451
+#: panels/display/cc-display-panel.ui:469
 #: panels/display/cc-night-light-dialog.ui:505
 msgid "Night Light"
 msgstr "Nachtmodus"
@@ -1567,6 +1567,28 @@ msgstr "Kopfstehendes Querformat"
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
+
+#: panels/display/cc-display-settings.ui:15
+msgctxt "display setting"
+msgid "Orientation"
+msgstr "Ausrichtung"
+
+#: panels/display/cc-display-settings.ui:24
+msgctxt "display setting"
+msgid "Resolution"
+msgstr "Auflösung"
+
+#: panels/display/cc-display-settings.ui:33
+msgid "Refresh Rate"
+msgstr "Bildwiederholrate"
+
+#: panels/display/cc-display-settings.ui:42
+msgid "Adjust for TV"
+msgstr "Anpassung für TV"
+
+#: panels/display/cc-display-settings.ui:59
+msgid "Scale"
+msgstr "Skalieren"
 
 #. This cancels the redshift inhibit.
 #: panels/display/cc-night-light-dialog.ui:46
@@ -2171,8 +2193,8 @@ msgstr "Alles zurücksetzen"
 msgid "Reset the shortcut to its default value"
 msgstr "Die Tastenkombination auf die Vorgabe zurücksetzen"
 
-#: panels/keyboard/cc-keyboard-panel.ui:67 panels/region/cc-region-panel.ui:404
-#: shell/cc-window.ui:334
+#: panels/keyboard/cc-keyboard-panel.ui:67 panels/region/cc-region-panel.ui:395
+#: shell/cc-window.ui:279
 msgid "Keyboard Shortcuts"
 msgstr "Tastenkombinationen"
 
@@ -2435,7 +2457,7 @@ msgstr "Netzwerk-Proxy"
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: panels/network/cc-network-panel.c:783 panels/network/cc-wifi-panel.ui:303
+#: panels/network/cc-network-panel.c:783 panels/network/cc-wifi-panel.ui:304
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Hoppla, etwas ist schief gegangen. Bitte kontaktieren Sie Ihren Software-"
@@ -2482,33 +2504,33 @@ msgstr "WLAN"
 msgid "Airplane Mode"
 msgstr "Flugzeugmodus"
 
-#: panels/network/cc-wifi-panel.ui:71
+#: panels/network/cc-wifi-panel.ui:72
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
 msgstr "Deaktiviert Funknetzwerke, Bluetooth und mobiles Breitband"
 
-#: panels/network/cc-wifi-panel.ui:140
+#: panels/network/cc-wifi-panel.ui:141
 msgid "No Wi-Fi Adapter Found"
 msgstr "Kein Funknetzwerkadapter gefunden"
 
-#: panels/network/cc-wifi-panel.ui:152
+#: panels/network/cc-wifi-panel.ui:153
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr ""
 "Stellen Sie sicher, dass Ihr Funknetzwerkadapter angeschlossen und "
 "eingeschaltet ist"
 
-#: panels/network/cc-wifi-panel.ui:187
+#: panels/network/cc-wifi-panel.ui:188
 msgid "Airplane Mode On"
 msgstr "Flugzeugmodus an"
 
-#: panels/network/cc-wifi-panel.ui:199
+#: panels/network/cc-wifi-panel.ui:200
 msgid "Turn off to use Wi-Fi"
 msgstr "Ausschalten, um WLAN zu nutzen"
 
-#: panels/network/cc-wifi-panel.ui:225
+#: panels/network/cc-wifi-panel.ui:226
 msgid "Visible Networks"
 msgstr "Sichtbare Netzwerke"
 
-#: panels/network/cc-wifi-panel.ui:292
+#: panels/network/cc-wifi-panel.ui:293
 msgid "NetworkManager needs to be running"
 msgstr "NetworkManager muss laufen"
 
@@ -2650,7 +2672,7 @@ msgstr "VPN entfernen"
 
 #: panels/network/connection-editor/ce-page-details.c:332
 #: panels/network/network-wifi.ui:1433 shell/cc-panel-list.ui:103
-#: shell/cc-window.c:264
+#: shell/cc-window.c:247
 msgid "Details"
 msgstr "Details"
 
@@ -4792,7 +4814,7 @@ msgstr ""
 
 #. Translators: This button triggers the printing of a test page.
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/options-dialog.ui:22 panels/printers/pp-options-dialog.c:895
+#: panels/printers/options-dialog.ui:22 panels/printers/pp-options-dialog.c:907
 msgid "Test Page"
 msgstr "Testseite"
 
@@ -5003,95 +5025,96 @@ msgstr "Adresse: %s"
 msgid "Server requires authentication"
 msgstr "Server erfordert Legitimierung"
 
-#: panels/printers/pp-options-dialog.c:83
+#: panels/printers/pp-options-dialog.c:90
 msgid "Two Sided"
 msgstr "Beidseitig"
 
-#: panels/printers/pp-options-dialog.c:84
+#: panels/printers/pp-options-dialog.c:91
 msgid "Paper Type"
 msgstr "Papierart"
 
-#: panels/printers/pp-options-dialog.c:85
+#: panels/printers/pp-options-dialog.c:92
 msgid "Paper Source"
 msgstr "Papiereinzug"
 
-#: panels/printers/pp-options-dialog.c:86
+#: panels/printers/pp-options-dialog.c:93
 msgid "Output Tray"
 msgstr "Ausgabeschacht"
 
-#: panels/printers/pp-options-dialog.c:87
+#: panels/printers/pp-options-dialog.c:94
+msgctxt "printing option"
 msgid "Resolution"
 msgstr "Auflösung"
 
-#: panels/printers/pp-options-dialog.c:88
+#: panels/printers/pp-options-dialog.c:95
 msgid "GhostScript pre-filtering"
 msgstr "GhostScript-Vorfilterung"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: panels/printers/pp-options-dialog.c:536
+#: panels/printers/pp-options-dialog.c:548
 msgid "Pages per side"
 msgstr "Seiten pro Blatt"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: panels/printers/pp-options-dialog.c:548
+#: panels/printers/pp-options-dialog.c:560
 msgid "Two-sided"
 msgstr "Zweiseitig"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/printers/pp-options-dialog.c:560
+#: panels/printers/pp-options-dialog.c:572
 msgid "Orientation"
 msgstr "Ausrichtung"
 
 #. Translators: "General" tab contains general printer options
-#: panels/printers/pp-options-dialog.c:657
+#: panels/printers/pp-options-dialog.c:669
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "Allgemein"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: panels/printers/pp-options-dialog.c:660
+#: panels/printers/pp-options-dialog.c:672
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Seiteneinrichtung"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: panels/printers/pp-options-dialog.c:663
+#: panels/printers/pp-options-dialog.c:675
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Installierbare Optionen"
 
 #. Translators: "Job" tab contains settings for jobs
-#: panels/printers/pp-options-dialog.c:666
+#: panels/printers/pp-options-dialog.c:678
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Auftrag"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: panels/printers/pp-options-dialog.c:669
+#: panels/printers/pp-options-dialog.c:681
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Bildqualität"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: panels/printers/pp-options-dialog.c:672
+#: panels/printers/pp-options-dialog.c:684
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Farbe"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: panels/printers/pp-options-dialog.c:675
+#: panels/printers/pp-options-dialog.c:687
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Abschließen"
 
 #. Translators: "Advanced" tab contains all others settings
-#: panels/printers/pp-options-dialog.c:678
+#: panels/printers/pp-options-dialog.c:690
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Erweitert"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:908
+#: panels/printers/pp-options-dialog.c:920
 msgid "Test page"
 msgstr "Testseite"
 
@@ -5321,90 +5344,90 @@ msgstr ""
 "Es scheint, dass der Systemdruckdienst\n"
 "nicht verfügbar ist."
 
-#: panels/privacy/cc-privacy-panel.c:409 panels/privacy/cc-privacy-panel.ui:280
+#: panels/privacy/cc-privacy-panel.c:423 panels/privacy/cc-privacy-panel.ui:280
 msgid "Screen Lock"
 msgstr "Bildschirmsperre"
 
-#: panels/privacy/cc-privacy-panel.c:453
+#: panels/privacy/cc-privacy-panel.c:467
 msgid "In use"
 msgstr "In Verwendung"
 
-#: panels/privacy/cc-privacy-panel.c:458
+#: panels/privacy/cc-privacy-panel.c:472
 msgctxt "Location services status"
 msgid "On"
 msgstr "An"
 
-#: panels/privacy/cc-privacy-panel.c:459
+#: panels/privacy/cc-privacy-panel.c:473
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Aus"
 
-#: panels/privacy/cc-privacy-panel.c:881
+#: panels/privacy/cc-privacy-panel.c:895
 msgctxt "Camera status"
 msgid "Off"
 msgstr "Aus"
 
-#: panels/privacy/cc-privacy-panel.c:883
+#: panels/privacy/cc-privacy-panel.c:897
 msgctxt "Camera status"
 msgid "On"
 msgstr "An"
 
-#: panels/privacy/cc-privacy-panel.c:914
+#: panels/privacy/cc-privacy-panel.c:928
 msgctxt "Microphone status"
 msgid "Off"
 msgstr "Aus"
 
-#: panels/privacy/cc-privacy-panel.c:916
+#: panels/privacy/cc-privacy-panel.c:930
 msgctxt "Microphone status"
 msgid "On"
 msgstr "An"
 
-#: panels/privacy/cc-privacy-panel.c:1022
+#: panels/privacy/cc-privacy-panel.c:1036
 #: panels/privacy/cc-privacy-panel.ui:127
 msgid "Usage & History"
 msgstr "Verwendung und Chronik"
 
-#: panels/privacy/cc-privacy-panel.c:1143
+#: panels/privacy/cc-privacy-panel.c:1157
 msgid "Empty all items from Trash?"
 msgstr "Alle Objekte aus dem Papierkorb löschen?"
 
-#: panels/privacy/cc-privacy-panel.c:1144
+#: panels/privacy/cc-privacy-panel.c:1158
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Alle Objekte im Papierkorb werden dauerhaft gelöscht."
 
-#: panels/privacy/cc-privacy-panel.c:1145
+#: panels/privacy/cc-privacy-panel.c:1159
 msgid "_Empty Trash"
 msgstr "Papierkorb _leeren"
 
-#: panels/privacy/cc-privacy-panel.c:1166
+#: panels/privacy/cc-privacy-panel.c:1180
 msgid "Delete all the temporary files?"
 msgstr "Alle temporären Dateien löschen?"
 
-#: panels/privacy/cc-privacy-panel.c:1167
+#: panels/privacy/cc-privacy-panel.c:1181
 msgid "All the temporary files will be permanently deleted."
 msgstr "Alle temporären Dateien werden dauerhaft gelöscht."
 
-#: panels/privacy/cc-privacy-panel.c:1168
+#: panels/privacy/cc-privacy-panel.c:1182
 msgid "_Purge Temporary Files"
 msgstr "Temporäre Dateien _löschen"
 
-#: panels/privacy/cc-privacy-panel.c:1190
+#: panels/privacy/cc-privacy-panel.c:1204
 #: panels/privacy/cc-privacy-panel.ui:432
 msgid "Purge Trash & Temporary Files"
 msgstr "Papierkorb und temporäre Dateien leeren"
 
-#: panels/privacy/cc-privacy-panel.c:1223
+#: panels/privacy/cc-privacy-panel.c:1237
 #: panels/privacy/cc-privacy-panel.ui:637
 msgid "Software Usage"
 msgstr "Softwarenutzung"
 
-#: panels/privacy/cc-privacy-panel.c:1262
+#: panels/privacy/cc-privacy-panel.c:1276
 #: panels/privacy/cc-privacy-panel.ui:1169
 msgid "Problem Reporting"
 msgstr "Problemberichterstattung"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: panels/privacy/cc-privacy-panel.c:1274
+#: panels/privacy/cc-privacy-panel.c:1288
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -5414,7 +5437,7 @@ msgstr ""
 "Entwicklern %s zu verbessern. Reports sind frei von personenbezogenen Daten "
 "und werden anonym versandt."
 
-#: panels/privacy/cc-privacy-panel.c:1286
+#: panels/privacy/cc-privacy-panel.c:1300
 #: panels/privacy/cc-privacy-panel.ui:719
 msgid "Privacy Policy"
 msgstr "Datenschutzrichtlinie"
@@ -5782,74 +5805,74 @@ msgstr "Eingabequellen können nicht auf dem Anmeldebildschirm genutzt werden"
 msgid "Login _Screen"
 msgstr "Anmeldebild_schirm"
 
-#: panels/region/cc-region-panel.ui:60
+#: panels/region/cc-region-panel.ui:64
 #: panels/user-accounts/cc-user-panel.ui:362
 msgid "_Language"
 msgstr "_Sprache"
 
-#: panels/region/cc-region-panel.ui:95
+#: panels/region/cc-region-panel.ui:99
 msgid "Restart the session for changes to take effect"
 msgstr "Die Sitzung neu starten, damit die Änderungen wirksam werden"
 
-#: panels/region/cc-region-panel.ui:112
+#: panels/region/cc-region-panel.ui:114
 msgid "Restart…"
 msgstr "Neustart …"
 
-#: panels/region/cc-region-panel.ui:143
+#: panels/region/cc-region-panel.ui:147
 msgid "_Formats"
 msgstr "_Formate"
 
-#: panels/region/cc-region-panel.ui:193
+#: panels/region/cc-region-panel.ui:195
 msgid "Input Sources"
 msgstr "Eingabequellen"
 
-#: panels/region/cc-region-panel.ui:207
+#: panels/region/cc-region-panel.ui:209
 msgid "Choose keyboard layouts or input methods."
 msgstr "Auswahl der Tastaturbelegung oder der Eingabemethode."
 
-#: panels/region/cc-region-panel.ui:271
+#: panels/region/cc-region-panel.ui:266
 msgid "No input source selected"
 msgstr "Keine Eingabequelle gefunden"
 
-#: panels/region/cc-region-panel.ui:303
+#: panels/region/cc-region-panel.ui:300
 msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "Anmeldeeinstellungen werden für alle Benutzer verwendet, wenn sich diese am "
 "System anmelden."
 
-#: panels/region/cc-region-panel.ui:347
+#: panels/region/cc-region-panel.ui:338
 msgid "Input Source Options"
 msgstr "Eingabequellen-Einstellungen"
 
-#: panels/region/cc-region-panel.ui:362
+#: panels/region/cc-region-panel.ui:353
 msgid "Use the _same source for all windows"
 msgstr "Die _selbe Quelle für alle Fenster verwenden"
 
-#: panels/region/cc-region-panel.ui:380
+#: panels/region/cc-region-panel.ui:371
 msgid "Allow _different sources for each window"
 msgstr "_Verschiedene Quellen für jedes Fenster erlauben"
 
-#: panels/region/cc-region-panel.ui:422
+#: panels/region/cc-region-panel.ui:413
 msgid "Previous source"
 msgstr "Vorherige Quelle"
 
-#: panels/region/cc-region-panel.ui:440
+#: panels/region/cc-region-panel.ui:431
 msgid "Super+Shift+Space"
 msgstr "Supertaste+Umschalttaste+Leertaste"
 
-#: panels/region/cc-region-panel.ui:455
+#: panels/region/cc-region-panel.ui:446
 msgid "Next source"
 msgstr "Nächste Quelle"
 
-#: panels/region/cc-region-panel.ui:473
+#: panels/region/cc-region-panel.ui:464
 msgid "Super+Space"
 msgstr "Supertaste+Leertaste"
 
-#: panels/region/cc-region-panel.ui:488
+#: panels/region/cc-region-panel.ui:479
 msgid "Left+Right Alt"
 msgstr "Links+Rechte Alt-Taste"
 
-#: panels/region/cc-region-panel.ui:504
+#: panels/region/cc-region-panel.ui:495
 msgid "These keyboard shortcuts can be changed in the keyboard settings"
 msgstr ""
 "Sie können diese Tastenkombinationen in den Tastatureinstellungen ändern"
@@ -6149,15 +6172,15 @@ msgstr "%s wird geprüft"
 msgid "Click a speaker to test"
 msgstr "Klicken Sie zum Testen auf einen Lautsprecher"
 
-#: panels/sound/cc-sound-panel.ui:30
+#: panels/sound/cc-sound-panel.ui:29
 msgid "System Volume"
 msgstr "Systemlautstärke"
 
-#: panels/sound/cc-sound-panel.ui:46
+#: panels/sound/cc-sound-panel.ui:45
 msgid "Volume Levels"
 msgstr "Lautstärkestufen"
 
-#: panels/sound/cc-sound-panel.ui:68
+#: panels/sound/cc-sound-panel.ui:67
 msgid "Output"
 msgstr "Ausgabe"
 
@@ -6169,36 +6192,36 @@ msgstr "Ausgabegerät"
 msgid "Test"
 msgstr "Test"
 
-#: panels/sound/cc-sound-panel.ui:147 panels/sound/cc-sound-panel.ui:319
+#: panels/sound/cc-sound-panel.ui:148 panels/sound/cc-sound-panel.ui:325
 msgid "Configuration"
 msgstr "Einrichtung"
 
-#: panels/sound/cc-sound-panel.ui:179
+#: panels/sound/cc-sound-panel.ui:181
 msgid "Balance"
 msgstr "Balance"
 
 # Evtl »Übergang«?
-#: panels/sound/cc-sound-panel.ui:205
+#: panels/sound/cc-sound-panel.ui:208
 msgid "Fade"
 msgstr "Ein-/Ausblenden"
 
-#: panels/sound/cc-sound-panel.ui:231
+#: panels/sound/cc-sound-panel.ui:235
 msgid "Subwoofer"
 msgstr "Subwoofer"
 
-#: panels/sound/cc-sound-panel.ui:253
+#: panels/sound/cc-sound-panel.ui:257
 msgid "Input"
 msgstr "Eingang"
 
-#: panels/sound/cc-sound-panel.ui:279
+#: panels/sound/cc-sound-panel.ui:284
 msgid "Input Device"
 msgstr "Eingabegerät"
 
-#: panels/sound/cc-sound-panel.ui:351
+#: panels/sound/cc-sound-panel.ui:358
 msgid "Volume"
 msgstr "Lautstärke"
 
-#: panels/sound/cc-sound-panel.ui:373
+#: panels/sound/cc-sound-panel.ui:380
 msgid "Alert Sound"
 msgstr "Warnton"
 
@@ -6323,7 +6346,7 @@ msgstr "UUID:"
 msgid "Authorize and Connect"
 msgstr "Legitimieren und verbinden"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:347
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:346
 msgid "Forget Device"
 msgstr "Gerät vergessen"
 
@@ -7971,7 +7994,7 @@ msgid "Right Mouse Button Click"
 msgstr "Klick der rechten Maustaste"
 
 # CHECK upto line 505
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:242
+#: panels/wacom/wacom-stylus-page.ui:37
 msgid "Back"
 msgstr "Zurück"
 
@@ -8067,19 +8090,19 @@ msgstr "Keine Ergebnisse gefunden"
 msgid "Available panels:"
 msgstr "Verfügbare Leisten:"
 
-#: shell/cc-window.ui:146
+#: shell/cc-window.ui:131
 msgid "All Settings"
 msgstr "Alle Einstellungen"
 
-#: shell/cc-window.ui:184
+#: shell/cc-window.ui:169
 msgid "Primary Menu"
 msgstr "Primäres Menü"
 
-#: shell/cc-window.ui:326
+#: shell/cc-window.ui:271
 msgid "Warning: Development Version"
 msgstr "Warnung: Entwicklerversion"
 
-#: shell/cc-window.ui:327
+#: shell/cc-window.ui:272
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -8089,7 +8112,7 @@ msgstr ""
 "werden. Die Verwendung kann zu inkorrektem Verhalten des Systems, "
 "Datenverlust und weiteren unerwarteten Ereignissen führen."
 
-#: shell/cc-window.ui:338
+#: shell/cc-window.ui:283
 msgid "Help"
 msgstr "Hilfe"
 
@@ -8183,15 +8206,6 @@ msgstr "Systemklänge"
 #~ msgid "Drag displays to match your setup."
 #~ msgstr ""
 #~ "Platzieren Sie die Bildschirme entsprechend der tatsächlichen Anordnung."
-
-#~ msgid "Refresh Rate"
-#~ msgstr "Bildwiederholrate"
-
-#~ msgid "Scale"
-#~ msgstr "Skalieren"
-
-#~ msgid "Adjust for TV"
-#~ msgstr "Anpassung für TV"
 
 #~ msgid "Primary Display"
 #~ msgstr "Primärer Bildschirm"
