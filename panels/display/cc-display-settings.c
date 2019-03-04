@@ -26,7 +26,6 @@
 #include "list-box-helper.h"
 #include "cc-display-settings.h"
 #include "cc-display-config.h"
-#include "cc-value-object.h"
 
 /* The minimum supported size a monitor may have */
 #define MINIMUM_WIDTH 740
@@ -284,12 +283,12 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       g_list_store_remove_all (self->orientation_list);
       for (i = 0; i < G_N_ELEMENTS (rotations); i++)
         {
-          g_autoptr(CcValueObject) obj = NULL;
+          g_autoptr(HdyValueObject) obj = NULL;
 
           if (!cc_display_monitor_supports_rotation (self->selected_output, rotations[i]))
             continue;
 
-          obj = cc_value_object_new_collect (G_TYPE_STRING, string_for_rotation (rotations[i]));
+          obj = hdy_value_object_new_collect (G_TYPE_STRING, string_for_rotation (rotations[i]));
           g_list_store_append (self->orientation_list, obj);
           g_object_set_data (G_OBJECT (obj), "rotation-value", GINT_TO_POINTER (rotations[i]));
 
@@ -480,7 +479,7 @@ on_orientation_selection_changed_cb (GtkWidget         *widget,
                                      CcDisplaySettings *self)
 {
   gint idx;
-  g_autoptr(CcValueObject) obj = NULL;
+  g_autoptr(HdyValueObject) obj = NULL;
 
   if (self->updating)
     return;
@@ -704,7 +703,7 @@ cc_display_settings_init (CcDisplaySettings *self)
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
 
-  self->orientation_list = g_list_store_new (CC_TYPE_VALUE_OBJECT);
+  self->orientation_list = g_list_store_new (HDY_TYPE_VALUE_OBJECT);
   self->refresh_rate_list = g_list_store_new (CC_TYPE_DISPLAY_MODE);
   self->resolution_list = g_list_store_new (CC_TYPE_DISPLAY_MODE);
 
@@ -712,7 +711,7 @@ cc_display_settings_init (CcDisplaySettings *self)
 
   hdy_combo_row_bind_name_model (HDY_COMBO_ROW (self->orientation_row),
                                  G_LIST_MODEL (self->orientation_list),
-                                 (HdyComboRowGetNameFunc) cc_value_object_dup_string,
+                                 (HdyComboRowGetNameFunc) hdy_value_object_dup_string,
                                  NULL, NULL);
   hdy_combo_row_bind_name_model (HDY_COMBO_ROW (self->refresh_rate_row),
                                  G_LIST_MODEL (self->refresh_rate_list),
