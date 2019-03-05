@@ -497,7 +497,6 @@ cc_goa_panel_init (CcGoaPanel *panel)
                     panel);
 
   fill_accounts_listbox (panel);
-  goa_provider_get_all (get_all_providers_cb, g_object_ref_sink (panel));
 
   gtk_widget_show (GTK_WIDGET (panel));
 }
@@ -518,6 +517,8 @@ cc_goa_panel_constructed (GObject *object)
   parent = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self))));
 
   gtk_window_set_transient_for (GTK_WINDOW (self->edit_account_dialog), parent);
+
+  goa_provider_get_all (get_all_providers_cb, g_object_ref (self));
 
   G_OBJECT_CLASS (cc_goa_panel_parent_class)->constructed (object);
 }
