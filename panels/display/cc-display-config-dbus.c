@@ -1066,11 +1066,15 @@ cc_display_config_dbus_equal (CcDisplayConfig *pself,
       if (m1->underscanning != m2->underscanning)
         return FALSE;
 
-      if (!cc_display_mode_dbus_equal (CC_DISPLAY_MODE_DBUS (m1->current_mode),
-                                       CC_DISPLAY_MODE_DBUS (m2->current_mode)))
+      if (!cc_display_logical_monitor_equal (m1->logical_monitor, m2->logical_monitor))
         return FALSE;
 
-      if (!cc_display_logical_monitor_equal (m1->logical_monitor, m2->logical_monitor))
+      /* Modes should not be compared if both monitors have no logical monitor. */
+      if (m1->logical_monitor == NULL && m2->logical_monitor == NULL)
+        continue;
+
+      if (!cc_display_mode_dbus_equal (CC_DISPLAY_MODE_DBUS (m1->current_mode),
+                                       CC_DISPLAY_MODE_DBUS (m2->current_mode)))
         return FALSE;
     }
 
