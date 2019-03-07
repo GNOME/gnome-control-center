@@ -479,6 +479,13 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         case NM_DEVICE_TYPE_BRIDGE:
         /* Don't add VPN devices */
         case NM_DEVICE_TYPE_TUN:
+        case 29: /* NM_DEVICE_TYPE_WIREGUARD needs libnm 1.16 */
+        /* Don't add Open vSwitch related devices */
+        case NM_DEVICE_TYPE_OVS_INTERFACE:
+        case NM_DEVICE_TYPE_OVS_PORT:
+        case NM_DEVICE_TYPE_OVS_BRIDGE:
+        /* Wi-Fi P2P should only be used for specific purposes */
+        case 30: /* NM_DEVICE_TYPE_WIFI_P2P needs libnm 1.16. */
                 return;
         default:
                 device_g_type = NET_TYPE_DEVICE_SIMPLE;
