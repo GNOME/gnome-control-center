@@ -633,7 +633,7 @@ set_current_output (CcDisplayPanel   *panel,
     {
       if (output)
         cc_display_monitor_set_active (output, TRUE);
-      if (panel->current_output)
+      if (panel->current_output && output != panel->current_output)
         cc_display_monitor_set_active (panel->current_output, FALSE);
 
       update_apply_button (panel);
