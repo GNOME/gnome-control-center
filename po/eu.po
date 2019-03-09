@@ -10,8 +10,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2019-02-11 18:04+0000\n"
-"PO-Revision-Date: 2019-02-25 06:00+0100\n"
+"POT-Creation-Date: 2019-02-27 10:46+0000\n"
+"PO-Revision-Date: 2019-03-09 06:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asier.sarasua@gmail.com>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -1503,6 +1503,28 @@ msgstr "Horizontala (iraulita)"
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
 
+#: panels/display/cc-display-settings.ui:15
+msgctxt "display setting"
+msgid "Orientation"
+msgstr "Orientazioa"
+
+#: panels/display/cc-display-settings.ui:24
+msgctxt "display setting"
+msgid "Resolution"
+msgstr "Bereizmena"
+
+#: panels/display/cc-display-settings.ui:33
+msgid "Refresh Rate"
+msgstr "Freskatze-tasa"
+
+#: panels/display/cc-display-settings.ui:42
+msgid "Adjust for TV"
+msgstr "Doitu telebistarako"
+
+#: panels/display/cc-display-settings.ui:59
+msgid "Scale"
+msgstr "Eskalatu"
+
 #. This cancels the redshift inhibit.
 #: panels/display/cc-night-light-dialog.ui:46
 msgid "Restart Filter"
@@ -2241,12 +2263,12 @@ msgstr "Saguaren eta ukipen-teklatuaren botoi fisikoen ordena ezartzen du."
 #: panels/mouse/gnome-mouse-properties.ui:136
 #: panels/sound/cc-balance-slider.ui:13
 msgid "Left"
-msgstr "Ezkerrean"
+msgstr "Ezkerrera"
 
 #: panels/mouse/gnome-mouse-properties.ui:146
 #: panels/sound/cc-balance-slider.ui:15
 msgid "Right"
-msgstr "Eskuinean"
+msgstr "Eskuinera"
 
 #: panels/mouse/gnome-mouse-properties.ui:182
 msgid "Mouse"
@@ -3724,7 +3746,7 @@ msgstr "EAP-TLSren baliogabeko erabiltzaile-ziurtagiria: %s"
 
 #: panels/network/wireless-security/eap-method-tls.c:307
 msgid "Unencrypted private keys are insecure"
-msgstr "Enkriptatu gabeko gako pribatuak ez dira seguruak"
+msgstr "Zifratu gabeko gako pribatuak ez dira seguruak"
 
 #: panels/network/wireless-security/eap-method-tls.c:310
 msgid ""
@@ -4634,7 +4656,7 @@ msgstr "Sartu zure erabiltzaile-izena eta pasahitza inprimatze-zerbitzarian."
 
 #. Translators: This button triggers the printing of a test page.
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/options-dialog.ui:22 panels/printers/pp-options-dialog.c:895
+#: panels/printers/options-dialog.ui:22 panels/printers/pp-options-dialog.c:907
 msgid "Test Page"
 msgstr "Probako orria"
 
@@ -4841,95 +4863,96 @@ msgstr "Helbidea: %s"
 msgid "Server requires authentication"
 msgstr "Zerbitzariak autentifikazioa eskatzen du"
 
-#: panels/printers/pp-options-dialog.c:83
+#: panels/printers/pp-options-dialog.c:90
 msgid "Two Sided"
 msgstr "Alde bietatik"
 
-#: panels/printers/pp-options-dialog.c:84
+#: panels/printers/pp-options-dialog.c:91
 msgid "Paper Type"
 msgstr "Paper mota"
 
-#: panels/printers/pp-options-dialog.c:85
+#: panels/printers/pp-options-dialog.c:92
 msgid "Paper Source"
 msgstr "Paper-iturria"
 
-#: panels/printers/pp-options-dialog.c:86
+#: panels/printers/pp-options-dialog.c:93
 msgid "Output Tray"
 msgstr "Irteerako erretilua"
 
-#: panels/printers/pp-options-dialog.c:87
+#: panels/printers/pp-options-dialog.c:94
+msgctxt "printing option"
 msgid "Resolution"
 msgstr "Bereizmena"
 
-#: panels/printers/pp-options-dialog.c:88
+#: panels/printers/pp-options-dialog.c:95
 msgid "GhostScript pre-filtering"
 msgstr "GhostScript aurre-iragazketa"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: panels/printers/pp-options-dialog.c:536
+#: panels/printers/pp-options-dialog.c:548
 msgid "Pages per side"
 msgstr "Orrialdeak aldeko"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: panels/printers/pp-options-dialog.c:548
+#: panels/printers/pp-options-dialog.c:560
 msgid "Two-sided"
 msgstr "Alde bietatik"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/printers/pp-options-dialog.c:560
+#: panels/printers/pp-options-dialog.c:572
 msgid "Orientation"
 msgstr "Orientazioa"
 
 #. Translators: "General" tab contains general printer options
-#: panels/printers/pp-options-dialog.c:657
+#: panels/printers/pp-options-dialog.c:669
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "Orokorra"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: panels/printers/pp-options-dialog.c:660
+#: panels/printers/pp-options-dialog.c:672
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Orrialdearen konfigurazioa"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: panels/printers/pp-options-dialog.c:663
+#: panels/printers/pp-options-dialog.c:675
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Aukera instalagarriak"
 
 #. Translators: "Job" tab contains settings for jobs
-#: panels/printers/pp-options-dialog.c:666
+#: panels/printers/pp-options-dialog.c:678
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Lana"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: panels/printers/pp-options-dialog.c:669
+#: panels/printers/pp-options-dialog.c:681
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Irudiaren kalitatea"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: panels/printers/pp-options-dialog.c:672
+#: panels/printers/pp-options-dialog.c:684
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Kolorea"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: panels/printers/pp-options-dialog.c:675
+#: panels/printers/pp-options-dialog.c:687
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Amaierakoak"
 
 #. Translators: "Advanced" tab contains all others settings
-#: panels/printers/pp-options-dialog.c:678
+#: panels/printers/pp-options-dialog.c:690
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Aurreratua"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:908
+#: panels/printers/pp-options-dialog.c:920
 msgid "Test page"
 msgstr "Probako orria"
 
@@ -5774,7 +5797,7 @@ msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
 "Shell command:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
-msgstr "Urruneko saio-hasiera gaituta dagoenean, urruneko erabiltzaileek konekta daitezke Shell Seguruaren komandoa erabiliz: \n"
+msgstr "Urruneko saio-hasiera gaituta dagoenean, urruneko erabiltzaileek konekta daitezke Shell Seguruko komandoa erabiliz: \n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
 #: panels/sharing/cc-sharing-panel.c:728
@@ -7677,7 +7700,7 @@ msgstr "Saguaren eskuineko botoiarekin klik egitea"
 
 #: panels/wacom/wacom-stylus-page.ui:37
 msgid "Back"
-msgstr "Itzuli"
+msgstr "Atzera"
 
 #: panels/wacom/wacom-stylus-page.ui:41
 msgid "Forward"
