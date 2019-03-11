@@ -32,7 +32,7 @@ stages:
 
 .Run Tests: &run_tests
   echo "== Testing ==" &&
-  ninja -C _build test
+  meson test -C _build --verbose --no-stdsplit
 
 ##
 # Stage: Build
