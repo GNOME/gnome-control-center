@@ -76,16 +76,12 @@ test:
 
   script:
     - *environment_information
+    - *run_tests
 
     - |
       if [[ -n "${CI_COMMIT_TAG}" ]]; then
-        *run_tests
-
         echo "== Distro Test =="
         ninja dist -C _build
-      else
-        echo "== Testing =="
-        meson test -C _build --verbose --no-stdsplit
       fi
 
   except:
