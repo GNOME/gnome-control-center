@@ -414,6 +414,6 @@ fedora.ppc64le:
   <<: *create_docker_image
   variables:
     DOCKER_DRIVER: overlay
-    DOCKERFILE: "build-aux/ci/Dockerfile.ppc64le.fedora.30"
+    DOCKERFILE: "build-aux/ci/Dockerfile.ppc64le.fedora.latest"
     NAME: "fedora.ppc64le"
     TARGET_ARCH: "ppc64le"
