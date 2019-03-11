@@ -1646,6 +1646,8 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  self->cancellable = g_cancellable_new ();
+
   provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
   gtk_css_provider_load_from_resource (GTK_CSS_PROVIDER (provider),
                                        "/org/gnome/control-center/applications/cc-applications-panel.css");
