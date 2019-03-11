@@ -399,14 +399,14 @@ fedora.dev:
   <<: *create_docker_image
   variables:
     DOCKER_DRIVER: overlay
-    DOCKERFILE: "build-aux/ci/Dockerfile.fedora.rawhide"
+    DOCKERFILE: "build-aux/ci/Dockerfile.fedora.30"
     NAME: "fedora.dev"
 
 fedora.aarch64:
   <<: *create_docker_image
   variables:
     DOCKER_DRIVER: overlay
-    DOCKERFILE: "build-aux/ci/Dockerfile.arm64v8.fedora.rawhide"
+    DOCKERFILE: "build-aux/ci/Dockerfile.arm64v8.fedora.30"
     NAME: "fedora.aarch64"
     TARGET_ARCH: "aarch64"
 
@@ -414,6 +414,6 @@ fedora.ppc64le:
   <<: *create_docker_image
   variables:
     DOCKER_DRIVER: overlay
-    DOCKERFILE: "build-aux/ci/Dockerfile.ppc64le.fedora.rawhide"
+    DOCKERFILE: "build-aux/ci/Dockerfile.ppc64le.fedora.30"
     NAME: "fedora.ppc64le"
     TARGET_ARCH: "ppc64le"
