@@ -1336,7 +1336,9 @@ update_app_row (CcApplicationsPanel *self,
 {
   g_autofree gchar *formatted_size = NULL;
 
-  if (!g_str_has_prefix (app_id, PORTAL_SNAP_PREFIX))
+  if (g_str_has_prefix (app_id, PORTAL_SNAP_PREFIX))
+    self->app_size = get_snap_app_size (app_id + strlen (PORTAL_SNAP_PREFIX));
+  else
     self->app_size = get_flatpak_app_size (app_id);
   formatted_size = g_format_size (self->app_size);
   g_object_set (self->app, "info", formatted_size, NULL);
@@ -1344,8 +1346,8 @@ update_app_row (CcApplicationsPanel *self,
 }
 
 static void
-update_flatpak_sizes (CcApplicationsPanel *self,
-                      const gchar         *app_id)
+update_app_sizes (CcApplicationsPanel *self,
+                  const gchar         *app_id)
 {
   gtk_widget_set_sensitive (self->clear_cache_button, FALSE);
 
@@ -1365,7 +1367,7 @@ update_usage_section (CcApplicationsPanel *self,
   if (portal_app_id != NULL)
     {
       gtk_widget_show (self->usage_section);
-      update_flatpak_sizes (self, portal_app_id);
+      update_app_sizes (self, portal_app_id);
     }
   else
     {
