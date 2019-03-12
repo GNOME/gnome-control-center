@@ -189,6 +189,16 @@ config_h.set10('HAVE_FN_EXPLICIT_BZERO',
                cc.has_function('explicit_bzero', prefix: '''#include <string.h>'''),
                description: 'Define if explicit_bzero is available')
 
+# Snap support
+enable_snap = get_option('snap')
+if enable_snap
+  snapd_glib_deps = [
+    dependency('snapd-glib', version: '>= 1.42')
+  ]
+endif
+config_h.set('HAVE_SNAP', enable_snap,
+             description: 'Define to 1 if Snap support is enabled')
+
 if host_is_linux
   # network manager
   network_manager_deps = [
@@ -283,5 +293,6 @@ output += '     Cheese (Users panel webcam support) ........ ' + enable_cheese.t
 output += '     IBus (Region panel IBus support) ........... ' + enable_ibus.to_string() + '\n'
 output += '     NetworkManager (Network panel) ............. ' + host_is_linux.to_string() + '\n'
 output += '     Wacom (Wacom tablet panel) ................. ' + host_is_linux_not_s390.to_string() + '\n'
+output += '     Snap support ............................... ' + enable_snap.to_string() + '\n'
 
 message(output)
