@@ -1292,6 +1292,7 @@ clear_cache_cb (CcApplicationsPanel *self)
   dir = get_flatpak_app_dir (self->current_app_id, "cache");
   file_remove_async (dir, cache_cleared, self);
 }
+
 static void
 update_app_row (CcApplicationsPanel *self,
                 const gchar         *app_id)
