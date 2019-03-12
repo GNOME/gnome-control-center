@@ -42,6 +42,8 @@
 #define APP_SCHEMA MASTER_SCHEMA ".application"
 #define APP_PREFIX "/org/gnome/desktop/notifications/application/"
 
+#define PORTAL_SNAP_PREFIX "snap."
+
 struct _CcApplicationsPanel
 {
   CcPanel          parent;
@@ -214,11 +216,23 @@ set_portal_permissions (CcApplicationsPanel *self,
     g_warning ("Error setting portal permissions: %s", error->message);
 }
 
-static char *
-get_flatpak_id (GAppInfo *info)
+static gchar *
+get_portal_app_id (GAppInfo *info)
 {
   if (G_IS_DESKTOP_APP_INFO (info))
-    return g_desktop_app_info_get_string (G_DESKTOP_APP_INFO (info), "X-Flatpak");
+    {
+      gchar *flatpak_id, *snap_name;
+      g_autofree gchar *executable = NULL;
+
+      flatpak_id = g_desktop_app_info_get_string (G_DESKTOP_APP_INFO (info), "X-Flatpak");
+      if (flatpak_id != NULL)
+        return flatpak_id;
+
+      snap_name = g_desktop_app_info_get_string (G_DESKTOP_APP_INFO (info), "X-SnapInstanceName");
+      if (snap_name != NULL)
+        return snap_name;
+
+    }
 
   return NULL;
 }
@@ -606,39 +620,39 @@ static void
 update_permission_section (CcApplicationsPanel *self,
                            GAppInfo            *info)
 {
-  g_autofree gchar *flatpak_id = get_flatpak_id (info);
+  g_autofree gchar *portal_app_id = get_portal_app_id (info);
   gboolean disabled, allowed, set;
   gboolean has_any = FALSE, has_builtin = FALSE;
 
-  if (flatpak_id == NULL)
+  if (portal_app_id == NULL)
     {
       gtk_widget_hide (self->permission_section);
       return;
     }
 
   disabled = g_settings_get_boolean (self->privacy_settings, "disable-camera");
-  get_device_allowed (self, "camera", flatpak_id, &set, &allowed);
+  get_device_allowed (self, "camera", portal_app_id, &set, &allowed);
   cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->camera), allowed);
   gtk_widget_set_visible (self->camera, set && !disabled);
   gtk_widget_set_visible (self->no_camera, set && disabled);
   has_any |= set;
 
   disabled = g_settings_get_boolean (self->privacy_settings, "disable-microphone");
-  get_device_allowed (self, "microphone", flatpak_id, &set, &allowed);
+  get_device_allowed (self, "microphone", portal_app_id, &set, &allowed);
   cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->microphone), allowed);
   gtk_widget_set_visible (self->microphone, set && !disabled);
   gtk_widget_set_visible (self->no_microphone, set && disabled);
   has_any |= set;
 
   disabled = !g_settings_get_boolean (self->location_settings, "enabled");
-  get_location_allowed (self, flatpak_id, &set, &allowed);
+  get_location_allowed (self, portal_app_id, &set, &allowed);
   cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->location), allowed);
   gtk_widget_set_visible (self->location, set && !disabled);
   gtk_widget_set_visible (self->no_location, set && disabled);
   has_any |= set;
 
   remove_static_permissions (self);
-  has_builtin = add_static_permissions (self, info, flatpak_id);
+  has_builtin = add_static_permissions (self, info, portal_app_id);
   gtk_widget_set_visible (self->builtin, has_builtin);
   has_any |= has_builtin;
 
@@ -652,7 +666,7 @@ update_integration_section (CcApplicationsPanel *self,
                             GAppInfo            *info)
 {
   g_autofree gchar *app_id = get_app_id (info);
-  g_autofree gchar *flatpak_id = get_flatpak_id (info);
+  g_autofree gchar *portal_app_id = get_portal_app_id (info);
   gboolean set, allowed, disabled;
   gboolean has_any = FALSE;
 
@@ -662,16 +676,16 @@ update_integration_section (CcApplicationsPanel *self,
   gtk_widget_set_visible (self->search, set && !disabled);
   gtk_widget_set_visible (self->no_search, set && disabled);
 
-  if (flatpak_id != NULL)
+  if (portal_app_id != NULL)
     {
       g_clear_object (&self->notification_settings);
-      get_notification_allowed (self, flatpak_id, &set, &allowed);
+      get_notification_allowed (self, portal_app_id, &set, &allowed);
       cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->notification), allowed);
       gtk_widget_set_visible (self->notification, set);
       has_any |= set;
 
       disabled = g_settings_get_boolean (self->privacy_settings, "disable-sound-output");
-      get_device_allowed (self, "speakers", flatpak_id, &set, &allowed);
+      get_device_allowed (self, "speakers", portal_app_id, &set, &allowed);
       cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->sound), allowed);
       gtk_widget_set_visible (self->sound, set && !disabled);
       gtk_widget_set_visible (self->no_sound, set && disabled);
@@ -1317,7 +1331,8 @@ update_app_row (CcApplicationsPanel *self,
 {
   g_autofree gchar *formatted_size = NULL;
 
-  self->app_size = get_flatpak_app_size (app_id);
+  if (!g_str_has_prefix (app_id, PORTAL_SNAP_PREFIX))
+    self->app_size = get_flatpak_app_size (app_id);
   formatted_size = g_format_size (self->app_size);
   g_object_set (self->app, "info", formatted_size, NULL);
   update_total_size (self);
@@ -1340,12 +1355,12 @@ static void
 update_usage_section (CcApplicationsPanel *self,
                       GAppInfo            *info)
 {
-  g_autofree gchar *flatpak_id = get_flatpak_id (info);
+  g_autofree gchar *portal_app_id = get_portal_app_id (info);
 
-  if (flatpak_id != NULL)
+  if (portal_app_id != NULL)
     {
       gtk_widget_show (self->usage_section);
-      update_flatpak_sizes (self, flatpak_id);
+      update_flatpak_sizes (self, portal_app_id);
     }
   else
     {
@@ -1390,7 +1405,7 @@ update_panel (CcApplicationsPanel *self,
   update_usage_section (self, info);
 
   self->current_app_id = get_app_id (info);
-  self->current_portal_app_id = get_flatpak_id (info);
+  self->current_portal_app_id = get_portal_app_id (info);
 }
 
 static void
