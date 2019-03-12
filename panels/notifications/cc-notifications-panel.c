@@ -316,6 +316,7 @@ add_application (CcNotificationsPanel *panel,
   gtk_container_add (GTK_CONTAINER (row), box);
 
   w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
+  gtk_style_context_add_class (gtk_widget_get_style_context (w), "lowres-icon");
   gtk_widget_show (w);
   gtk_icon_size_lookup (GTK_ICON_SIZE_DND, &size, NULL);
   gtk_image_set_pixel_size (GTK_IMAGE (w), size);
