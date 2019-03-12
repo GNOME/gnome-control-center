@@ -38,12 +38,18 @@ sources += gnome.compile_resources(
         export : true
 )
 
+deps = common_deps
+
+if enable_snap
+  deps += snapd_glib_deps
+endif
+
 cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
 
 panels_libs += static_library(
            cappletname,
               sources : sources,
   include_directories : [ top_inc, common_inc ],
-         dependencies : common_deps,
+         dependencies : deps,
                c_args : cflags
 )
