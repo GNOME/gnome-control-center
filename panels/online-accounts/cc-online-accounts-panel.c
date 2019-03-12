@@ -157,6 +157,7 @@ add_provider_row (CcGoaPanel  *self,
     }
 
   image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
+  gtk_style_context_add_class (gtk_widget_get_style_context (image), "lowres-icon");
   gtk_widget_show (image);
   gtk_container_add (GTK_CONTAINER (row_grid), image);
   g_object_set (image, "margin", 6, NULL);
