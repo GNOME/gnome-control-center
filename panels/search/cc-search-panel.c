@@ -457,6 +457,7 @@ search_panel_add_one_app_info (CcSearchPanel *self,
     g_object_ref (icon);
 
   w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DND);
+  gtk_style_context_add_class (gtk_widget_get_style_context (w), "lowres-icon");
   gtk_widget_show (w);
   gtk_icon_size_lookup (GTK_ICON_SIZE_DND, &width, &height);
   gtk_image_set_pixel_size (GTK_IMAGE (w), MAX (width, height));
