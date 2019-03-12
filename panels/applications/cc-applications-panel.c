@@ -588,8 +588,6 @@ add_static_permissions (CcApplicationsPanel *self,
     added += add_static_permission_row (self, _("Settings"), _("Can change settings"));
   g_free (str);
 
-  gtk_widget_set_visible (self->builtin, added > 0);
-
   text = g_strdup_printf (_("%s has the following permissions built-in. These cannot be altered. If you are concerned about these permissions, consider removing this application."), g_app_info_get_display_name (info));
   gtk_label_set_label (GTK_LABEL (self->builtin_label), text);
 
@@ -608,7 +606,7 @@ update_permission_section (CcApplicationsPanel *self,
 {
   g_autofree gchar *flatpak_id = get_flatpak_id (info);
   gboolean disabled, allowed, set;
-  gboolean has_any = FALSE;
+  gboolean has_any = FALSE, has_builtin = FALSE;
 
   if (flatpak_id == NULL)
     {
@@ -638,7 +636,9 @@ update_permission_section (CcApplicationsPanel *self,
   has_any |= set;
 
   remove_static_permissions (self);
-  has_any |= add_static_permissions (self, info, flatpak_id);
+  has_builtin = add_static_permissions (self, info, flatpak_id);
+  gtk_widget_set_visible (self->builtin, has_builtin);
+  has_any |= has_builtin;
 
   gtk_widget_set_visible (self->permission_section, has_any);
 }
