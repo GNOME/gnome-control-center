@@ -50,6 +50,8 @@ GKeyFile* get_flatpak_metadata (const gchar         *app_id);
 
 guint64   get_flatpak_app_size (const gchar         *app_id);
 
+guint64   get_snap_app_size    (const gchar         *snap_name);
+
 gchar*    get_app_id           (GAppInfo            *info);
 
 G_END_DECLS
