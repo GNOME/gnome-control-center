@@ -42,7 +42,7 @@ ftw_remove_cb (const gchar       *path,
 }
 
 static void
-file_remove_thread_func (GTask       *task,
+file_remove_thread_func (GTask        *task,
                          gpointer      source_object,
                          gpointer      task_data,
                          GCancellable *cancellable)
@@ -51,15 +51,29 @@ file_remove_thread_func (GTask       *task,
   g_autofree gchar *path = g_file_get_path (file);
 
   nftw (path, ftw_remove_cb, 20, FTW_DEPTH);
+
+  if (g_task_set_return_on_cancel (task, FALSE))
+    g_task_return_boolean (task, TRUE);
 }
 
 void
 file_remove_async (GFile               *file,
+                   GCancellable        *cancellable,
                    GAsyncReadyCallback  callback,
                    gpointer             data)
 {
-  g_autoptr(GTask) task = g_task_new (file, NULL, callback, data);
+  g_autoptr(GTask) task = g_task_new (file, cancellable, callback, data);
+  g_task_set_return_on_cancel (task, TRUE);
   g_task_run_in_thread (task, file_remove_thread_func);
+}
+
+gboolean
+file_remove_finish (GFile        *file,
+                    GAsyncResult *result,
+                    GError      **error)
+{
+  g_return_val_if_fail (g_task_is_valid (result, file), FALSE);
+  return g_task_propagate_boolean (G_TASK (result), error);
 }
 
 static GPrivate size_key = G_PRIVATE_INIT (g_free);
@@ -93,16 +107,36 @@ file_size_thread_func (GTask        *task,
   total = g_new0 (guint64, 1);
   *total = *(guint64*)g_private_get (&size_key);
 
-  g_object_set_data_full (G_OBJECT (task), "size", total, g_free);
+  if (g_task_set_return_on_cancel (task, FALSE))
+    g_task_return_pointer (task, total, g_free);
 }
 
 void
 file_size_async (GFile               *file,
+                 GCancellable        *cancellable,
                  GAsyncReadyCallback  callback,
                  gpointer             data)
 {
-  g_autoptr(GTask) task = g_task_new (file, NULL, callback, data);
+  g_autoptr(GTask) task = g_task_new (file, cancellable, callback, data);
+  g_task_set_return_on_cancel (task, TRUE);
   g_task_run_in_thread (task, file_size_thread_func);
+}
+
+gboolean
+file_size_finish (GFile        *file,
+                  GAsyncResult *result,
+                  guint64      *size,
+                  GError      **error)
+{
+  g_autofree guint64 *data = NULL;
+
+  g_return_val_if_fail (g_task_is_valid (result, file), FALSE);
+  data = g_task_propagate_pointer (G_TASK (result), error);
+  if (data == NULL)
+    return FALSE;
+  if (size != NULL)
+    *size = *data;
+  return TRUE;
 }
 
 void
