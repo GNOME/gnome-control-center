@@ -47,8 +47,6 @@
 #include <gdk/gdkx.h>
 #endif
 
-#include "gsd-disk-space-helper.h"
-
 #include "cc-info-overview-panel.h"
 
 

@@ -33,11 +33,7 @@ cflags += [
   '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
 ]
 
-gsd_headers = ['gsd-disk-space-helper.h']
-
-gsd_sources = ['gsd-disk-space-helper.c']
-
-sources = files(gsd_sources) + files(
+sources = files(
   'cc-info-default-apps-panel.c',
   'cc-info-overview-panel.c',
   'cc-info-removable-media-panel.c',
@@ -73,26 +69,3 @@ info_panel_lib = static_library(
   c_args: cflags
 )
 panels_libs += info_panel_lib
-
-# FIXME: workaround for updating different sources code
-input_dir = join_paths(meson.source_root(), '..', 'gnome-settings-daemon', 'plugins', 'housekeeping')
-
-script_conf = configuration_data()
-script_conf.set('program', update_from_gsd.path())
-script_conf.set('input_dir', input_dir)
-script_conf.set('working_dir', meson.current_source_dir())
-script_conf.set('source_files', ' '.join(gsd_sources + gsd_headers))
-script_conf.set('source_message', 'info: Update from gnome-settings-daemon')
-
-script_name = 'update-info-from-gsd'
-
-script = configure_file(
-  input: update_from_gsd_in,
-  output: script_name + '.sh',
-  configuration: script_conf
-)
-
-run_target(
-  script_name,
-  command: script
-)
