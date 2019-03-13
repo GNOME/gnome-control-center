@@ -1221,10 +1221,16 @@ set_cache_size (GObject      *source,
 {
   CcApplicationsPanel *self = data;
   g_autofree gchar *formatted_size = NULL;
-  guint64 *size;
+  guint64 size;
+  g_autoptr(GError) error = NULL;
 
-  size = g_object_get_data (G_OBJECT (res), "size");
-  self->cache_size = *size;
+  if (!file_size_finish (G_FILE (source), res, &size, &error))
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Failed to get flatpak cache size: %s", error->message);
+      return;
+    }
+  self->cache_size = size;
 
   formatted_size = g_format_size (self->cache_size);
   g_object_set (self->cache, "info", formatted_size, NULL);
@@ -1240,7 +1246,7 @@ update_cache_row (CcApplicationsPanel *self,
 {
   g_autoptr(GFile) dir = get_flatpak_app_dir (app_id, "cache");
   g_object_set (self->cache, "info", "...", NULL);
-  file_size_async (dir, set_cache_size, self);
+  file_size_async (dir, self->cancellable, set_cache_size, self);
 }
 
 static void
@@ -1250,10 +1256,16 @@ set_data_size (GObject      *source,
 {
   CcApplicationsPanel *self = data;
   g_autofree gchar *formatted_size = NULL;
-  guint64 *size;
+  guint64 size;
+  g_autoptr(GError) error = NULL;
 
-  size = g_object_get_data (G_OBJECT (res), "size");
-  self->data_size = *size;
+  if (!file_size_finish (G_FILE (source), res, &size, &error))
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Failed to get flatpak data size: %s", error->message);
+      return;
+    }
+  self->data_size = size;
 
   formatted_size = g_format_size (self->data_size);
   g_object_set (self->data, "info", formatted_size, NULL);
@@ -1268,7 +1280,7 @@ update_data_row (CcApplicationsPanel *self,
   g_autoptr(GFile) dir = get_flatpak_app_dir (app_id, "data");
 
   g_object_set (self->data, "info", "...", NULL);
-  file_size_async (dir, set_data_size, self);
+  file_size_async (dir, self->cancellable, set_data_size, self);
 }
 
 static void
@@ -1277,6 +1289,14 @@ cache_cleared (GObject      *source,
                gpointer      data)
 {
   CcApplicationsPanel *self = data;
+  g_autoptr(GError) error = NULL;
+
+  if (!file_remove_finish (G_FILE (source), res, &error))
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Failed to remove cache: %s", error->message);
+      return;
+    }
 
   update_cache_row (self, self->current_app_id);
 }
@@ -1290,7 +1310,7 @@ clear_cache_cb (CcApplicationsPanel *self)
     return;
 
   dir = get_flatpak_app_dir (self->current_app_id, "cache");
-  file_remove_async (dir, cache_cleared, self);
+  file_remove_async (dir, self->cancellable, cache_cleared, self);
 }
 static void
 update_app_row (CcApplicationsPanel *self,

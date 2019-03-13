@@ -26,12 +26,23 @@
 G_BEGIN_DECLS
 
 void      file_remove_async    (GFile               *file,
+                                GCancellable        *cancellable,
                                 GAsyncReadyCallback  callback,
                                 gpointer             data);
 
+gboolean  file_remove_finish   (GFile               *file,
+                                GAsyncResult        *result,
+                                GError             **error);
+
 void      file_size_async      (GFile               *file,
+                                GCancellable        *cancellable,
                                 GAsyncReadyCallback  callback,
                                 gpointer             data);
+
+gboolean  file_size_finish     (GFile               *file,
+                                GAsyncResult        *result,
+                                guint64             *size,
+                                GError             **error);
 
 void      container_remove_all (GtkContainer        *container);
 
