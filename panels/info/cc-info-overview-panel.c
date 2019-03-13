@@ -546,10 +546,30 @@ get_primary_disc_info_start (CcInfoOverviewPanel *self)
                                       self);
 }
 
+static GList *
+convert_points_to_entries (GList *points)
+{
+  GList *entries = NULL;
+  GList *p;
+
+  for (p = points; p != NULL; p = p->next)
+    {
+      GUnixMountPoint *point = p->data;
+      GUnixMountEntry *mount;
+      const gchar *mount_path = g_unix_mount_point_get_mount_path (point);
+
+      mount = g_unix_mount_at (mount_path, NULL);
+      if (mount)
+        entries = g_list_append (entries, mount);
+    }
+
+  return entries;
+}
+
 static void
 get_primary_disc_info (CcInfoOverviewPanel *self)
 {
-  GList *points;
+  GList *points, *entries = NULL;
   GList *p;
   GHashTable *hash;
   CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
@@ -557,11 +577,14 @@ get_primary_disc_info (CcInfoOverviewPanel *self)
   hash = g_hash_table_new (g_str_hash, g_str_equal);
   points = g_unix_mount_points_get (NULL);
 
-  /* If we do not have /etc/fstab around, try /etc/mtab */
-  if (points == NULL)
-    points = g_unix_mounts_get (NULL);
+  entries = convert_points_to_entries (points);
+  g_list_free_full (points, (GDestroyNotify) g_unix_mount_point_free);
 
-  for (p = points; p != NULL; p = p->next)
+  /* If we do not have /etc/fstab around, try /etc/mtab */
+  if (entries == NULL)
+    entries = g_unix_mounts_get (NULL);
+
+  for (p = entries; p != NULL; p = p->next)
     {
       GUnixMountEntry *mount = p->data;
       const char *mount_path;
@@ -586,7 +609,7 @@ get_primary_disc_info (CcInfoOverviewPanel *self)
       priv->primary_mounts = g_list_prepend (priv->primary_mounts, mount);
       g_hash_table_insert (hash, (gpointer) device_path, (gpointer) device_path);
     }
-  g_list_free (points);
+  g_list_free (entries);
   g_hash_table_destroy (hash);
 
   priv->cancellable = g_cancellable_new ();
