@@ -270,36 +270,10 @@ usb_device_get_vendor (UsbDevice *dev)
   return dev->vendor;
 }
 
-gint
+void
 usb_device_set_authorization (UsbDevice *dev, gboolean authorization)
 {
-  char *command;
-  gint status;
-  GError *error = NULL;
-  g_autofree gchar *device_hwdb = NULL;
-
-  g_return_val_if_fail (dev != NULL, FALSE);
+  g_return_if_fail (dev != NULL);
 
   dev->authorized = authorization;
-
-  device_hwdb = g_strdup_printf ("evdev:input:b%sv%sp%se*",
-                                 USB_BUS_ID,
-                                 dev->vendor,
-                                 dev->product_id);
-  command = g_strdup_printf ("pkexec /bin/sh %s/usb-hwdb.sh %s '%s' '%i'",
-                             LIBEXECDIR,
-                             HWDB_PATH,
-                             device_hwdb,
-                             authorization);
-  g_spawn_command_line_sync (command,
-	                           NULL,
-	                           NULL,
-	                           &status,
-                             &error);
-  if (error != NULL) {
-    g_debug ("Ops: %s", error->message);
-    g_error_free (error);
-  }
-
-  return status;
 }

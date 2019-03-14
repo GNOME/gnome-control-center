@@ -21,28 +21,33 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <glib.h>
+
+#include <dirent.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 G_BEGIN_DECLS
 
-#define USB_TYPE_DEVICE usb_device_get_type ()
-G_DECLARE_FINAL_TYPE (UsbDevice, usb_device, USB, DEVICE, GObject);
+/* *INDENT-OFF* */
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (DIR, closedir);
+/* *INDENT-ON* */
 
-UsbDevice *   usb_device_new (gboolean        authorized,
-                              const char     *name,
-                              const char     *product_id,
-                              const char     *vendor);
+int        usb_open (const char *path,
+                     int         flags,
+                     int         mode,
+                     GError    **error);
 
-gboolean      usb_device_get_authorization (UsbDevice *device);
+gboolean   usb_close (int      fd,
+                      GError **error);
 
-void          usb_device_set_authorization (UsbDevice *device,
-                                            gboolean authorization);
+DIR *      usb_opendir (const char *path,
+                        GError    **error);
 
-const char *  usb_device_get_name (UsbDevice *dev);
-
-const char *  usb_device_get_product_id (UsbDevice *dev);
-
-const char *  usb_device_get_vendor (UsbDevice *dev);
+gboolean   usb_closedir (DIR     *d,
+                         GError **error);
 
 G_END_DECLS
 

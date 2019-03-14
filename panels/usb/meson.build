@@ -32,6 +32,8 @@ sources = files(
   'cc-usb-panel.c',
   'cc-usb-device-entry.c',
   'usb-device.c',
+  'usb-io.c',
+  'usb-store.c',
   'gnome-usb-properties.c'
 )
 

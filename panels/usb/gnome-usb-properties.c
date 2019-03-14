@@ -28,10 +28,11 @@
 #include <libudev.h>
 #include <gudev/gudev.h>
 
-#include "gnome-usb-properties.h"
 #include "cc-usb-device-entry.h"
+#include "gnome-usb-properties.h"
 #include "gsd-input-helper.h"
 #include "list-box-helper.h"
+#include "usb-store.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -51,6 +52,8 @@ struct _CcUsbProperties
 
   GHashTable *devices;
   GUdevClient *udev_client;
+
+  UsbStore *store;
 };
 
 /* Panel signals */
@@ -78,6 +81,7 @@ on_device_entry_row_activated_cb (CcUsbProperties *panel,
   CcUsbDeviceEntry *entry;
   UsbDevice *device;
   gboolean authorized;
+  g_autoptr(GError) error = NULL;
 
   if (!CC_IS_USB_DEVICE_ENTRY (row))
     return;
@@ -85,8 +89,12 @@ on_device_entry_row_activated_cb (CcUsbProperties *panel,
   entry = CC_USB_DEVICE_ENTRY (row);
   device = cc_usb_device_entry_get_device (entry);
 
-  authorized = usb_device_get_authorization (device);
-  usb_device_set_authorization (device, !authorized);
+  authorized = !usb_device_get_authorization (device);
+  usb_device_set_authorization (device, authorized);
+  if (authorized)
+    usb_store_put_device (panel->store, device, &error);
+  else
+    usb_store_del_device (panel->store, device, &error);
   entry_update_status (entry);
   return;
 }
@@ -120,6 +128,10 @@ add_single_device (GUdevDevice     *device,
   vendor = g_strdup (g_udev_device_get_property (device, "ID_VENDOR_ID"));
   product = g_strdup (g_udev_device_get_property (device, "ID_MODEL_ID"));
   devpath = g_strdup (g_udev_device_get_device_file (device));
+
+  if (vendor == NULL || product == NULL)
+      return;
+
   g_debug ("vendor: %s product: %s devpath: %s", vendor, product, devpath);
 
   auth = g_strdup (g_udev_device_get_property (device, "GNOME_KB_AUTHORIZED"));
@@ -198,6 +210,15 @@ udev_event_cb (GUdevClient     *client,
 static void
 setup_dialog (CcUsbProperties *self)
 {
+  g_autofree gchar *path = NULL;
+  g_autoptr(GError) error = NULL;
+
+  path = g_dir_make_tmp ("usb.store.XXXXXX", &error);
+  if (path == NULL)
+    g_warning ("Could not create tmp dir: %s", error->message);
+  self->store = usb_store_new (path);
+  g_debug ("Store at: %s", path);
+
   initialize_keyboards_list (self);
 
   gtk_widget_show_all (GTK_WIDGET (self->devices_list));
