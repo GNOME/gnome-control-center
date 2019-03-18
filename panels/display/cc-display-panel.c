@@ -550,7 +550,7 @@ on_primary_display_selected_index_changed_cb (CcDisplayPanel *panel)
   gint idx = hdy_combo_row_get_selected_index (panel->primary_display_row);
   g_autoptr(CcDisplayMonitor) output = NULL;
 
-  if (idx < 0)
+  if (idx < 0 || panel->rebuilding)
     return;
 
   output = g_list_model_get_item (G_LIST_MODEL (panel->primary_display_list), idx);
