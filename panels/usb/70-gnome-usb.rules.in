@@ -1,2 +1,2 @@
 
-SUBSYSTEMS=="usb", IMPORT{program}="@control_center_bindir@/cc-usb-device-helper auth $attr{idVendor} $attr{idProduct}"
+SUBSYSTEMS=="usb", IMPORT{program}="@control_center_bindir@/cc-usb-device-helper /tmp/usb auth $attr{idVendor} $attr{idProduct}"

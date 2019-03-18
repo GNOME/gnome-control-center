@@ -22,28 +22,35 @@
 #include <stdio.h>
 #include <gio/gio.h>
 
+#include <usb-store.h>
+
 static int
-get_auth (char *vendor,
+get_auth (char *path,
+          char *vendor,
           char *product)
 {
-  //TODO check the db
-  if (g_str_equal (vendor, "2516"))
-    printf ("GNOME_AUTHORIZED_AUTO=1");
-  return 0;
+  UsbStore *store;
+  UsbDevice *device;
+  g_autoptr(GError) error = NULL;
+
+  store = usb_store_new (path);
+  device = usb_store_get_device (store, vendor, product, &error);
+
+  return usb_device_get_authorization (device);
 }
 
 int
 main (int    argc,
       char **argv)
 {
-  if (argc < 4)
+  if (argc < 5)
     return 1;
 
-  if (argv[1] == NULL || argv[2] == NULL || argv[3] == NULL)
+  if (argv[1] == NULL || argv[2] == NULL || argv[3] == NULL || argv[4] == NULL)
     return 1;
 
-  if (g_str_equal (argv[1], "auth"))
-    return get_auth (argv[2], argv[3]);
+  if (g_str_equal (argv[2], "auth"))
+    return get_auth (argv[1], argv[3], argv[4]);
 
   return 1;
 }

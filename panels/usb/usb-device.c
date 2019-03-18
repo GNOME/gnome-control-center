@@ -26,9 +26,6 @@
 #include <dirent.h>
 #include <libudev.h>
 
-#define HWDB_PATH "/etc/udev/hwdb.d/70-GNOME-keyboard.hwdb"
-#define USB_BUS_ID "0003"
-
 /* internal methods */
 static void device_set_authorization_internal (UsbDevice *dev,
                                                gboolean   authorized,
@@ -222,10 +219,10 @@ device_set_authorization_internal (UsbDevice *dev,
 /* public methods */
 
 UsbDevice *
-usb_device_new (gboolean        authorized,
-                const char     *name,
-                const char     *product_id,
-                const char     *vendor)
+usb_device_new (gboolean    authorized,
+                const char *name,
+                const char *product_id,
+                const char *vendor)
 {
   UsbDevice *dev;
 

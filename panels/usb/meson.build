@@ -82,14 +82,6 @@ panels_libs += static_library(
   c_args: cflags
 )
 
-name = 'usb-hwdb'
-
-install_data(
-  name + '.sh',
-  install: true,
-  install_dir: control_center_libexecdir
-)
-
 udev_conf = configuration_data()
 udev_conf.set_quoted('top_builddir', meson.build_root())
 udev_conf.set_quoted('top_srcdir', meson.source_root())
@@ -108,17 +100,13 @@ install_data(
 
 name = 'cc-usb-device-helper'
 
-deps = [
-  gio_dep,
-  glib_dep
-]
-
 executable(
   name,
   name + '.c',
   include_directories: top_inc,
   dependencies: deps,
   c_args: cflags,
+  link_with: panels_libs,
   install: true,
   install_dir: control_center_libexecdir
 )
