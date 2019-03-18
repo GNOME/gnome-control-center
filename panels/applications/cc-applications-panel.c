@@ -1497,6 +1497,7 @@ cc_applications_panel_finalize (GObject *object)
   g_clear_object (&self->cancellable);
 
   g_free (self->current_app_id);
+  g_free (self->current_flatpak_id);
   g_hash_table_unref (self->globs);
   g_hash_table_unref (self->search_providers);
 
