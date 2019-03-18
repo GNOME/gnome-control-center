@@ -693,6 +693,13 @@ rebuild_ui (CcDisplayPanel *panel)
   g_list_store_remove_all (panel->primary_display_list);
   gtk_list_store_clear (panel->output_selection_list);
 
+  /* Ignore primary display row changes until we've added all the outputs to the
+   * model, otherwise as soon as we add the first element the 'selected-index'
+   * will change, causing a call to cc_display_monitor_set_primary on the first
+   * listed monitor (which could not be actually the primary one) that would
+   * also cause unsetting the primary flag on the real primary monitor */
+  g_object_freeze_notify (G_OBJECT (panel->primary_display_row));
+
   n_active_outputs = 0;
   n_usable_outputs = 0;
   outputs = cc_display_config_get_ui_sorted_monitors (panel->current_config);
@@ -746,6 +753,9 @@ rebuild_ui (CcDisplayPanel *panel)
             set_current_output (panel, output, FALSE);
         }
     }
+
+  /* Now update the model to actually set the primary monitor */
+  g_object_thaw_notify (G_OBJECT (panel->primary_display_row));
 
   /* Sync the rebuild lists/buttons */
   set_current_output (panel, panel->current_output, TRUE);
