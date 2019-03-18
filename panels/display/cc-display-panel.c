@@ -250,14 +250,15 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
 
     case CC_DISPLAY_CONFIG_JOIN:
       g_debug ("Creating new join config");
-      /* Enable all usable outputs */
+      /* Enable all usable outputs
+       * Note that this might result in invalid configurations as we
+       * we might not be able to drive all attached monitors. */
       cc_display_config_set_cloning (panel->current_config, FALSE);
       for (l = outputs; l; l = l->next)
         {
           CcDisplayMonitor *output = l->data;
 
           cc_display_monitor_set_active (output, cc_display_monitor_is_usable (output));
-          break;
         }
       break;
 
