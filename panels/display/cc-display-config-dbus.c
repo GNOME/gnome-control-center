@@ -951,7 +951,7 @@ build_logical_monitors_parameter (CcDisplayConfigDBus *self)
   GHashTableIter iter;
   CcDisplayLogicalMonitor *logical_monitor;
 
-  g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
+  g_variant_builder_init (&builder, G_VARIANT_TYPE ("a(iiduba(ssa{sv}))"));
   g_hash_table_iter_init (&iter, self->logical_monitors);
 
   while (g_hash_table_iter_next (&iter, (void **) &logical_monitor, NULL))
