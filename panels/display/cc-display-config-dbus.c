@@ -411,8 +411,11 @@ cc_display_monitor_dbus_set_logical_monitor (CcDisplayMonitorDBus *self,
     {
       g_hash_table_add (self->logical_monitor->monitors, self);
       g_object_ref (self->logical_monitor);
+      /* unset primary with NULL will select this monitor if it is the only one.*/
       if (was_primary)
         cc_display_config_dbus_set_primary (self->config, self);
+      else
+        cc_display_config_dbus_unset_primary (self->config, NULL);
     }
 }
 
