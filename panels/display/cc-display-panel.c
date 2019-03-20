@@ -542,8 +542,31 @@ on_output_selection_combo_changed_cb (CcDisplayPanel *panel)
 static void
 on_output_selection_two_toggled_cb (CcDisplayPanel *panel, GtkRadioButton *btn)
 {
+  CcDisplayMonitor *output;
+
+  if (panel->rebuilding_counter > 0)
+    return;
+
   if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (btn)))
     return;
+
+  output = g_object_get_data (G_OBJECT (btn), "display");
+
+  /* Stay in single mode when we are in single mode.
+   * This UI must never cause a switch between the configuration type.
+   * this is in contrast to the combobox monitor selection, which may
+   * switch to a disabled output both in SINGLE/MULTI mode without
+   * anything changing.
+   */
+  if (cc_panel_get_selected_type (panel) == CC_DISPLAY_CONFIG_SINGLE)
+    {
+      if (panel->current_output)
+        cc_display_monitor_set_active (panel->current_output, FALSE);
+      if (output)
+        cc_display_monitor_set_active (output, TRUE);
+
+      update_apply_button (panel);
+    }
 
   set_current_output (panel, g_object_get_data (G_OBJECT (btn), "display"), FALSE);
 }
@@ -634,16 +657,6 @@ set_current_output (CcDisplayPanel   *panel,
     return;
 
   panel->rebuilding_counter++;
-
-  if (changed && cc_panel_get_selected_type (panel) == CC_DISPLAY_CONFIG_SINGLE)
-    {
-      if (output)
-        cc_display_monitor_set_active (output, TRUE);
-      if (panel->current_output && output != panel->current_output)
-        cc_display_monitor_set_active (panel->current_output, FALSE);
-
-      update_apply_button (panel);
-    }
 
   panel->current_output = output;
 
