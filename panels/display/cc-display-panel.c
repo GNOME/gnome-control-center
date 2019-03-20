@@ -63,7 +63,7 @@ struct _CcDisplayPanel
   CcDisplayConfig *current_config;
   CcDisplayMonitor *current_output;
 
-  gboolean              rebuilding;
+  guint                 rebuilding;
 
   CcDisplayArrangement *arrangement;
   CcDisplaySettings    *settings;
@@ -633,6 +633,8 @@ set_current_output (CcDisplayPanel   *panel,
   if (!changed && !force)
     return;
 
+  panel->rebuilding += 1;
+
   if (changed && cc_panel_get_selected_type (panel) == CC_DISPLAY_CONFIG_SINGLE)
     {
       if (output)
@@ -684,6 +686,8 @@ set_current_output (CcDisplayPanel   *panel,
       cc_display_settings_set_selected_output (panel->settings, panel->current_output);
       cc_display_arrangement_set_selected_output (panel->arrangement, panel->current_output);
     }
+
+  panel->rebuilding -= 1;
 }
 
 static void
@@ -692,7 +696,7 @@ rebuild_ui (CcDisplayPanel *panel)
   guint n_outputs, n_active_outputs, n_usable_outputs;
   GList *outputs, *l;
 
-  panel->rebuilding = TRUE;
+  panel->rebuilding += 1;
 
   g_list_store_remove_all (panel->primary_display_list);
   gtk_list_store_clear (panel->output_selection_list);
@@ -793,7 +797,7 @@ rebuild_ui (CcDisplayPanel *panel)
         gtk_stack_set_visible_child_name (panel->output_selection_stack, "multi-selection");
     }
 
-  panel->rebuilding = FALSE;
+  panel->rebuilding -= 1;
   update_apply_button (panel);
 }
 
