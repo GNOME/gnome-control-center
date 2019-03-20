@@ -664,11 +664,13 @@ set_current_output (CcDisplayPanel   *panel,
     {
       gtk_label_set_text (panel->current_output_label, cc_display_monitor_get_ui_name (panel->current_output));
       gtk_switch_set_active (panel->output_enabled_switch, cc_display_monitor_is_active (panel->current_output));
+      gtk_widget_set_sensitive (GTK_WIDGET (panel->output_enabled_switch), cc_display_monitor_is_usable (panel->current_output));
     }
   else
     {
       gtk_label_set_text (panel->current_output_label, "");
       gtk_switch_set_active (panel->output_enabled_switch, FALSE);
+      gtk_widget_set_sensitive (GTK_WIDGET (panel->output_enabled_switch), FALSE);
     }
 
   if (g_object_get_data (G_OBJECT (panel->output_selection_two_first), "display") == output)
@@ -722,6 +724,13 @@ rebuild_ui (CcDisplayPanel *panel)
       GtkTreeIter iter;
       CcDisplayMonitor *output = l->data;
 
+      gtk_list_store_append (panel->output_selection_list, &iter);
+      gtk_list_store_set (panel->output_selection_list,
+                          &iter,
+                          0, cc_display_monitor_get_ui_number_name (output),
+                          1, output,
+                          -1);
+
       if (!cc_display_monitor_is_usable (output))
         continue;
 
@@ -743,13 +752,6 @@ rebuild_ui (CcDisplayPanel *panel)
                              "display",
                              output);
         }
-
-      gtk_list_store_append (panel->output_selection_list, &iter);
-      gtk_list_store_set (panel->output_selection_list,
-                          &iter,
-                          0, cc_display_monitor_get_ui_number_name (output),
-                          1, output,
-                          -1);
 
       if (cc_display_monitor_is_active (output))
         {
