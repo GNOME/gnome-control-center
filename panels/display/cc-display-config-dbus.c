@@ -411,8 +411,11 @@ cc_display_monitor_dbus_set_logical_monitor (CcDisplayMonitorDBus *self,
     {
       g_hash_table_add (self->logical_monitor->monitors, self);
       g_object_ref (self->logical_monitor);
+      /* unset primary with NULL will select this monitor if it is the only one.*/
       if (was_primary)
         cc_display_config_dbus_set_primary (self->config, self);
+      else
+        cc_display_config_dbus_unset_primary (self->config, NULL);
     }
 }
 
@@ -1299,6 +1302,7 @@ construct_monitors (CcDisplayConfigDBus *self,
       CcDisplayLogicalMonitor *logical_monitor;
       g_autoptr(GVariantIter) monitor_specs = NULL;
       const gchar *s1, *s2, *s3, *s4;
+      gboolean primary;
 
       if (!g_variant_iter_next (logical_monitors, "@"LOGICAL_MONITOR_FORMAT, &variant))
         break;
@@ -1309,7 +1313,7 @@ construct_monitors (CcDisplayConfigDBus *self,
                      &logical_monitor->y,
                      &logical_monitor->scale,
                      &logical_monitor->rotation,
-                     &logical_monitor->primary,
+                     &primary,
                      &monitor_specs,
                      NULL);
 
@@ -1328,11 +1332,14 @@ construct_monitors (CcDisplayConfigDBus *self,
 
       if (g_hash_table_size (logical_monitor->monitors) > 0)
         {
-          if (logical_monitor->primary)
+          if (primary)
             {
+              CcDisplayMonitorDBus *m = NULL;
               GHashTableIter iter;
               g_hash_table_iter_init (&iter, logical_monitor->monitors);
-              g_hash_table_iter_next (&iter, (void **) &self->primary, NULL);
+              g_hash_table_iter_next (&iter, (void **) &m, NULL);
+
+              cc_display_config_dbus_set_primary (self, m);
             }
         }
       else
