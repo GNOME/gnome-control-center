@@ -220,11 +220,13 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
           if (cc_display_monitor_is_primary (output))
             {
               cc_display_monitor_set_active (output, TRUE);
+              cc_display_monitor_set_mode (output, cc_display_monitor_get_preferred_mode (output));
               set_current_output (panel, output, FALSE);
             }
           else
             {
               cc_display_monitor_set_active (output, FALSE);
+              cc_display_monitor_set_mode (output, cc_display_monitor_get_preferred_mode (output));
             }
         }
       break;
@@ -240,6 +242,7 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
           CcDisplayMonitor *output = l->data;
 
           cc_display_monitor_set_active (output, cc_display_monitor_is_usable (output));
+          cc_display_monitor_set_mode (output, cc_display_monitor_get_preferred_mode (output));
         }
       break;
 
