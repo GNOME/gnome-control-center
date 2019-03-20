@@ -63,7 +63,7 @@ struct _CcDisplayPanel
   CcDisplayConfig *current_config;
   CcDisplayMonitor *current_output;
 
-  gboolean              rebuilding;
+  gint                  rebuilding_counter;
 
   CcDisplayArrangement *arrangement;
   CcDisplaySettings    *settings;
@@ -480,7 +480,7 @@ on_config_type_toggled_cb (CcDisplayPanel *panel,
 {
   CcDisplayConfigType type;
 
-  if (panel->rebuilding)
+  if (panel->rebuilding_counter > 0)
     return;
 
   if (!panel->current_config)
@@ -554,7 +554,7 @@ on_primary_display_selected_index_changed_cb (CcDisplayPanel *panel)
   gint idx = hdy_combo_row_get_selected_index (panel->primary_display_row);
   g_autoptr(CcDisplayMonitor) output = NULL;
 
-  if (idx < 0 || panel->rebuilding)
+  if (idx < 0 || panel->rebuilding_counter > 0)
     return;
 
   output = g_list_model_get_item (G_LIST_MODEL (panel->primary_display_list), idx);
@@ -633,6 +633,8 @@ set_current_output (CcDisplayPanel   *panel,
   if (!changed && !force)
     return;
 
+  panel->rebuilding_counter++;
+
   if (changed && cc_panel_get_selected_type (panel) == CC_DISPLAY_CONFIG_SINGLE)
     {
       if (output)
@@ -684,6 +686,8 @@ set_current_output (CcDisplayPanel   *panel,
       cc_display_settings_set_selected_output (panel->settings, panel->current_output);
       cc_display_arrangement_set_selected_output (panel->arrangement, panel->current_output);
     }
+
+  panel->rebuilding_counter--;
 }
 
 static void
@@ -692,7 +696,7 @@ rebuild_ui (CcDisplayPanel *panel)
   guint n_outputs, n_active_outputs, n_usable_outputs;
   GList *outputs, *l;
 
-  panel->rebuilding = TRUE;
+  panel->rebuilding_counter++;
 
   g_list_store_remove_all (panel->primary_display_list);
   gtk_list_store_clear (panel->output_selection_list);
@@ -793,7 +797,7 @@ rebuild_ui (CcDisplayPanel *panel)
         gtk_stack_set_visible_child_name (panel->output_selection_stack, "multi-selection");
     }
 
-  panel->rebuilding = FALSE;
+  panel->rebuilding_counter--;
   update_apply_button (panel);
 }
 
