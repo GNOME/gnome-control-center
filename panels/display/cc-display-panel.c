@@ -493,8 +493,32 @@ on_output_enabled_active_changed_cb (CcDisplayPanel *panel)
   if (cc_display_monitor_is_active (panel->current_output) == active)
     return;
 
-  /* Changing the active state requires a UI rebuild. */
   cc_display_monitor_set_active (panel->current_output, active);
+
+  /* Prevent the invalid configuration of disabling the last monitor
+   * by switching on a different one. */
+  if (config_get_current_type (panel) == CC_DISPLAY_CONFIG_INVALID_NONE)
+    {
+      GList *outputs, *l;
+
+      outputs = cc_display_config_get_ui_sorted_monitors (panel->current_config);
+      for (l = outputs; l; l = l->next)
+        {
+          CcDisplayMonitor *output = CC_DISPLAY_MONITOR (l->data);
+
+          if (output == panel->current_output)
+            continue;
+
+          if (!cc_display_monitor_is_usable (output))
+            continue;
+
+          cc_display_monitor_set_active (output, TRUE);
+          cc_display_monitor_set_primary (output, TRUE);
+          break;
+        }
+    }
+
+  /* Changing the active state requires a UI rebuild. */
   rebuild_ui (panel);
 }
 
