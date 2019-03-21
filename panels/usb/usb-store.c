@@ -46,16 +46,6 @@ enum {
 
 static GParamSpec *store_props[PROP_STORE_LAST] = { NULL, };
 
-
-enum {
-  SIGNAL_DEVICE_ADDED,
-  SIGNAL_DEVICE_REMOVED,
-  SIGNAL_LAST
-};
-
-static guint signals[SIGNAL_LAST] = {0};
-
-
 G_DEFINE_TYPE (UsbStore,
                usb_store,
                G_TYPE_OBJECT)
@@ -80,9 +70,9 @@ usb_store_init (UsbStore *store)
 
 static void
 usb_store_get_property (GObject    *object,
-                         guint       prop_id,
-                         GValue     *value,
-                         GParamSpec *pspec)
+                        guint       prop_id,
+                        GValue     *value,
+                        GParamSpec *pspec)
 {
   UsbStore *store = USB_STORE (object);
 
@@ -99,9 +89,9 @@ usb_store_get_property (GObject    *object,
 
 static void
 usb_store_set_property (GObject      *object,
-                         guint         prop_id,
-                         const GValue *value,
-                         GParamSpec   *pspec)
+                        guint         prop_id,
+                        const GValue *value,
+                        GParamSpec   *pspec)
 {
   UsbStore *store = USB_STORE (object);
 
@@ -147,26 +137,6 @@ usb_store_class_init (UsbStoreClass *klass)
   g_object_class_install_properties (gobject_class,
                                      PROP_STORE_LAST,
                                      store_props);
-
-  signals[SIGNAL_DEVICE_ADDED] =
-    g_signal_new ("device-added",
-                  G_TYPE_FROM_CLASS (gobject_class),
-                  G_SIGNAL_RUN_LAST,
-                  0,
-                  NULL, NULL,
-                  NULL,
-                  G_TYPE_NONE,
-                  1, G_TYPE_STRING);
-
-  signals[SIGNAL_DEVICE_REMOVED] =
-    g_signal_new ("device-removed",
-                  G_TYPE_FROM_CLASS (gobject_class),
-                  G_SIGNAL_RUN_LAST,
-                  0,
-                  NULL, NULL,
-                  NULL,
-                  G_TYPE_NONE,
-                  1, G_TYPE_STRING);
 }
 
 #define DOMAIN_GROUP "domain"
@@ -259,8 +229,6 @@ usb_store_put_device (UsbStore  *store,
                 "store", store,
                 NULL);
 
-  g_signal_emit (store, signals[SIGNAL_DEVICE_ADDED], 0, uid);
-
   return TRUE;
 }
 
@@ -337,9 +305,6 @@ usb_store_del_device (UsbStore  *store,
   devpath = g_file_get_child (store->devices, uid);
   g_debug ("%s", g_file_get_path (devpath));
   ok = g_file_delete (devpath, NULL, error);
-
-  if (ok)
-    g_signal_emit (store, signals[SIGNAL_DEVICE_REMOVED], 0, uid);
 
   return ok;
 }

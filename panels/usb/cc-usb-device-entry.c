@@ -44,14 +44,6 @@ struct _CcUsbDeviceEntry
 
 G_DEFINE_TYPE (CcUsbDeviceEntry, cc_usb_device_entry, GTK_TYPE_LIST_BOX_ROW);
 
-enum
-{
-  SIGNAL_STATUS_CHANGED,
-  SIGNAL_LAST
-};
-
-//static guint signals[SIGNAL_LAST] = { 0, };
-
 static void
 entry_set_name (CcUsbDeviceEntry *entry)
 {
@@ -113,12 +105,6 @@ cc_usb_device_entry_new (UsbDevice *device)
 
   entry_set_name (entry);
   entry_update_status (entry);
-
-//  g_signal_connect_object (entry->device,
-//                           "notify",
-//                           G_CALLBACK (on_device_notify_cb),
-//                           entry,
-//                           0);
 
   return entry;
 }
