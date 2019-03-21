@@ -301,7 +301,16 @@ panel_refresh_device_titles (CcNetworkPanel *panel)
 
         titles = nm_device_disambiguate_names (nm_devices, num_devices);
         for (i = 0; i < num_devices; i++) {
-                net_object_set_title (NET_OBJECT (devices[i]), titles[i]);
+                const gchar *bt_name = NULL;
+
+                if (NM_IS_DEVICE_BT (nm_devices[i]))
+                        bt_name = nm_device_bt_get_name (NM_DEVICE_BT (nm_devices[i]));
+
+                /* For bluetooth devices, use their device name. */
+                if (bt_name)
+                        net_object_set_title (NET_OBJECT (devices[i]), bt_name);
+                else
+                        net_object_set_title (NET_OBJECT (devices[i]), titles[i]);
                 g_free (titles[i]);
         }
         g_free (titles);
