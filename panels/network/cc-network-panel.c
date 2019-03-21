@@ -468,21 +468,18 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         case NM_DEVICE_TYPE_MODEM:
                 device_g_type = NET_TYPE_DEVICE_MOBILE;
                 break;
-        /* Let the wi-fi panel take care of wifi devices */
-        case NM_DEVICE_TYPE_WIFI:
-        /* not going to set up a cluster in GNOME */
-        case NM_DEVICE_TYPE_VETH:
-        /* enterprise features */
-        case NM_DEVICE_TYPE_BOND:
-        case NM_DEVICE_TYPE_TEAM:
-        /* Don't need the libvirtd bridge */
-        case NM_DEVICE_TYPE_BRIDGE:
-        /* Don't add VPN devices */
-        case NM_DEVICE_TYPE_TUN:
-                return;
-        default:
+        case NM_DEVICE_TYPE_BT:
                 device_g_type = NET_TYPE_DEVICE_SIMPLE;
                 break;
+
+        /* For Wi-Fi and VPN we handle connections separately; we correctly manage
+         * them, but not here.
+         */
+        case NM_DEVICE_TYPE_WIFI:
+        case NM_DEVICE_TYPE_TUN:
+        /* And the rest we simply cannot deal with currently. */
+        default:
+                return;
         }
 
         /* create device */
