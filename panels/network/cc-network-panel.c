@@ -301,7 +301,17 @@ panel_refresh_device_titles (CcNetworkPanel *panel)
 
         titles = nm_device_disambiguate_names (nm_devices, num_devices);
         for (i = 0; i < num_devices; i++) {
-                net_object_set_title (NET_OBJECT (devices[i]), titles[i]);
+                /* FIXME: Try to not simplify bluetooth devices. Otherwise we can
+                 *        end up with the informative "Bluetooth" name, which does
+                 *        not tell the user which bluetooth device they are connecting
+                 *        to.
+                 *        This logic is a bit agressive in the theoretical case that
+                 *        the user has multiple bluetooth dongles (which we currently
+                 *        don't support in GNOME). */
+                if (NM_IS_DEVICE_BT (nm_devices[i]) && nm_device_bt_get_name (NM_DEVICE_BT (nm_devices[i])))
+                        net_object_set_title (NET_OBJECT (devices[i]), nm_device_bt_get_name (NM_DEVICE_BT (nm_devices[i])));
+                else
+                        net_object_set_title (NET_OBJECT (devices[i]), titles[i]);
                 g_free (titles[i]);
         }
         g_free (titles);
