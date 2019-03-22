@@ -613,6 +613,11 @@ show_page_account (CcGoaPanel  *panel,
                                  GTK_BOX (panel->accounts_vbox),
                                  NULL,
                                  NULL);
+      /*
+       * The above call doesn't set any widgets to visible, so we have to do that.
+       * https://gitlab.gnome.org/GNOME/gnome-online-accounts/issues/56
+       */
+      gtk_widget_show_all (GTK_WIDGET (panel->accounts_vbox));
     }
 
   provider_name = goa_account_get_provider_name (account);
