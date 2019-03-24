@@ -133,8 +133,9 @@ add_single_device (GUdevDevice     *device,
       return;
 
   g_debug ("vendor: %s product: %s devpath: %s", vendor, product, devpath);
+  g_debug ("sysfspath: %s", g_udev_device_get_sysfs_path (device));
 
-  auth = g_strdup (g_udev_device_get_property (device, "GNOME_KB_AUTHORIZED"));
+  auth = g_strdup (g_udev_device_get_property (device, "GNOME_AUTHORIZED"));
 
   parent = g_udev_device_get_parent (device);
   g_assert (parent != NULL);
@@ -211,11 +212,9 @@ static void
 setup_dialog (CcUsbProperties *self)
 {
   g_autofree gchar *path = NULL;
-  g_autoptr(GError) error = NULL;
 
-  path = g_dir_make_tmp ("usb.store.XXXXXX", &error);
-  if (path == NULL)
-    g_warning ("Could not create tmp dir: %s", error->message);
+  path = g_strdup ("/tmp/usb");
+  g_mkdir_with_parents (path, 0755);
   self->store = usb_store_new (path);
   g_debug ("Store at: %s", path);
 

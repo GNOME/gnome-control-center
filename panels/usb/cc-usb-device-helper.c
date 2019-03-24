@@ -30,13 +30,20 @@ get_auth (char *path,
           char *product)
 {
   UsbStore *store;
-  UsbDevice *device;
+  UsbDevice *device = NULL;
   g_autoptr(GError) error = NULL;
+  gboolean authorized;
 
   store = usb_store_new (path);
   device = usb_store_get_device (store, vendor, product, &error);
+  if (device == NULL)
+    return 1;
+  authorized = usb_device_get_authorization (device);
 
-  return usb_device_get_authorization (device);
+  if (authorized)
+    printf ("GNOME_AUTHORIZED=1");
+
+  return 0;
 }
 
 int

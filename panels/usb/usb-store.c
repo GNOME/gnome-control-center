@@ -141,7 +141,6 @@ usb_store_class_init (UsbStoreClass *klass)
 
 #define DOMAIN_GROUP "domain"
 #define DEVICE_GROUP "device"
-#define USER_GROUP "user"
 
 /* public methods */
 
@@ -181,7 +180,7 @@ usb_store_put_device (UsbStore  *store,
   g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   vendor = usb_device_get_vendor (device);
-  product = usb_device_get_name (device);
+  product = usb_device_get_product_id (device);
   uid = g_strdup_printf ("%s_%s", vendor, product);
 
   entry = g_file_get_child (store->devices, uid);
@@ -222,14 +221,7 @@ usb_store_put_device (UsbStore  *store,
                                 NULL,
                                 NULL, error);
 
-  if (!ok)
-    return FALSE;
-
-  g_object_set (device,
-                "store", store,
-                NULL);
-
-  return TRUE;
+  return ok;
 }
 
 UsbDevice *
@@ -268,7 +260,7 @@ usb_store_get_device (UsbStore    *store,
     return NULL;
 
   name = g_key_file_get_string (kf, DEVICE_GROUP, "name", NULL);
-  authorization = g_key_file_get_boolean (kf, USER_GROUP, "authorization", FALSE);
+  authorization = g_key_file_get_boolean (kf, DEVICE_GROUP, "authorization", FALSE);
 
   if (name == NULL || vendor == NULL)
     {
@@ -299,7 +291,7 @@ usb_store_del_device (UsbStore  *store,
   g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   vendor = usb_device_get_vendor (device);
-  product_id = usb_device_get_name (device);
+  product_id = usb_device_get_product_id (device);
   uid = g_strdup_printf ("%s_%s", vendor, product_id);
 
   devpath = g_file_get_child (store->devices, uid);
