@@ -188,6 +188,9 @@ match_all (gchar       **words,
 {
         gchar **w;
 
+        if (str == NULL)
+                return FALSE;
+
         for (w = words; *w; ++w)
                 if (!strstr (str, *w))
                         return FALSE;
