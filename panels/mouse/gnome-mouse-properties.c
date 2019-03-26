@@ -213,7 +213,7 @@ touchpad_enabled_set_mapping (const GValue              *value,
 
         enabled = g_value_get_boolean (value);
 
-        return g_variant_new_string (enabled ? "enabled" : "disabled");
+        return g_variant_new_string (enabled ? "enabled" : "disabled-on-external-mouse");
 }
 
 static void
@@ -277,36 +277,6 @@ setup_dialog (CcMouseProperties *self)
 	g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
 				      self->touchpad_toggle_switch, "active",
 				      G_SETTINGS_BIND_DEFAULT,
-				      touchpad_enabled_get_mapping,
-				      touchpad_enabled_set_mapping,
-				      NULL, NULL);
-	g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
-				      self->touchpad_natural_scrolling_row, "sensitive",
-				      G_SETTINGS_BIND_GET,
-				      touchpad_enabled_get_mapping,
-				      touchpad_enabled_set_mapping,
-				      NULL, NULL);
-	g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
-				      self->touchpad_speed_row, "sensitive",
-				      G_SETTINGS_BIND_GET,
-				      touchpad_enabled_get_mapping,
-				      touchpad_enabled_set_mapping,
-				      NULL, NULL);
-	g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
-				      self->tap_to_click_row, "sensitive",
-				      G_SETTINGS_BIND_GET,
-				      touchpad_enabled_get_mapping,
-				      touchpad_enabled_set_mapping,
-				      NULL, NULL);
-	g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
-				      self->two_finger_scrolling_row, "sensitive",
-				      G_SETTINGS_BIND_GET,
-				      touchpad_enabled_get_mapping,
-				      touchpad_enabled_set_mapping,
-				      NULL, NULL);
-	g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
-				      self->edge_scrolling_row, "sensitive",
-				      G_SETTINGS_BIND_GET,
 				      touchpad_enabled_get_mapping,
 				      touchpad_enabled_set_mapping,
 				      NULL, NULL);
