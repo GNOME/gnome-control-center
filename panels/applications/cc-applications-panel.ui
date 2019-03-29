@@ -412,9 +412,29 @@
     <property name="visible">1</property>
     <property name="label" translatable="yes">Open in Software</property>
   </object>
-  <object class="GtkListBox" id="sidebar_listbox">
-    <property name="visible">1</property>
-    <property name="selection-mode">browse</property>
+
+  <!-- Sidebar -->
+  <object class="GtkBox" id="sidebar_box">
+    <property name="visible">True</property>
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkSearchEntry" id="sidebar_search_entry">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="has-focus">True</property>
+        <property name="margin">12</property>
+        <property name="margin-bottom">6</property>
+        <signal name="activate" handler="on_sidebar_search_entry_activated_cb" object="CcApplicationsPanel" swapped="no" />
+        <signal name="search-changed" handler="on_sidebar_search_entry_search_changed_cb" object="CcApplicationsPanel" swapped="no" />
+        <signal name="stop-search" handler="on_sidebar_search_entry_search_stopped_cb" object="CcApplicationsPanel" swapped="no" />
+      </object>
+    </child>
+    <child>
+      <object class="GtkListBox" id="sidebar_listbox">
+        <property name="visible">True</property>
+        <property name="selection-mode">browse</property>
+      </object>
+    </child>
   </object>
 
   <!-- Built-in Permissions dialog -->
