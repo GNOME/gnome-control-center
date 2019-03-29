@@ -55,8 +55,6 @@ struct _CcPanelList
   GtkListBoxRow      *details_row;
   GtkListBoxRow      *devices_row;
 
-  GtkWidget          *empty_search_placeholder;
-
   gchar              *current_panel_id;
   gchar              *search_query;
 
@@ -827,7 +825,6 @@ cc_panel_list_class_init (CcPanelListClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPanelList, details_row);
   gtk_widget_class_bind_template_child (widget_class, CcPanelList, devices_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPanelList, devices_row);
-  gtk_widget_class_bind_template_child (widget_class, CcPanelList, empty_search_placeholder);
   gtk_widget_class_bind_template_child (widget_class, CcPanelList, main_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPanelList, search_listbox);
 
@@ -874,8 +871,6 @@ cc_panel_list_init (CcPanelList *self)
                                 filter_func,
                                 self,
                                 NULL);
-
-  gtk_list_box_set_placeholder (GTK_LIST_BOX (self->search_listbox), self->empty_search_placeholder);
 }
 
 GtkWidget*
