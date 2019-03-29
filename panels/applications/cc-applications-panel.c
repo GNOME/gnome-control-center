@@ -1706,7 +1706,7 @@ cc_applications_panel_init (CcApplicationsPanel *self)
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
 
-  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->sidebar_listbox),
+  gtk_list_box_set_sort_func (self->sidebar_listbox,
                               compare_rows,
                               NULL, NULL);
 
