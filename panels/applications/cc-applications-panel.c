@@ -1656,12 +1656,16 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, storage_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, open_software_cb);
   gtk_widget_class_bind_template_callback (widget_class, handler_reset_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_search_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_search_stopped_cb);
 }
 
 static void
 cc_applications_panel_init (CcApplicationsPanel *self)
 {
   g_autoptr(GtkStyleProvider) provider = NULL;
+  GtkListBoxRow *row;
 
   g_resources_register (cc_applications_get_resource ());
 
@@ -1731,4 +1735,9 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 
   self->globs = parse_globs ();
   self->search_providers = parse_search_providers ();
+
+  /* Select the first row */
+  row = gtk_list_box_get_row_at_index (self->sidebar_listbox, 0);
+  gtk_list_box_select_row (self->sidebar_listbox, row);
+  g_signal_emit_by_name (row, "activate");
 }
