@@ -31,6 +31,7 @@
 #include "cc-info-row.h"
 #include "cc-action-row.h"
 #include "cc-applications-resources.h"
+#include "cc-util.h"
 #include "globs.h"
 #include "list-box-helper.h"
 #include "search.h"
@@ -44,7 +45,9 @@ struct _CcApplicationsPanel
 {
   CcPanel          parent;
 
+  GtkWidget       *sidebar_box;
   GtkListBox      *sidebar_listbox;
+  GtkEntry        *sidebar_search_entry;
   GtkWidget       *header_button;
   GtkWidget       *title_label;
   GAppInfoMonitor *monitor;
@@ -1433,6 +1436,26 @@ compare_rows (GtkListBoxRow *row1,
   return strcmp (key1, key2);
 }
 
+static gboolean
+filter_sidebar_rows (GtkListBoxRow *row,
+                     gpointer       data)
+{
+  CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (data);
+  g_autofree gchar *app_name = NULL;
+  g_autofree gchar *search_text = NULL;
+  GAppInfo *info;
+
+  /* Only filter after the second character */
+  if (gtk_entry_get_text_length (self->sidebar_search_entry) < 2)
+    return TRUE;
+
+  info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (row));
+  app_name = cc_util_normalize_casefold_and_unaccent (g_app_info_get_name (info));
+  search_text = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (self->sidebar_search_entry));
+
+  return g_strstr_len (app_name, -1, search_text) != NULL;
+}
+
 static void
 apps_changed (GAppInfoMonitor     *monitor,
               CcApplicationsPanel *self)
@@ -1490,6 +1513,40 @@ select_app (CcApplicationsPanel *self,
           break;
         }
     }
+}
+
+static void
+on_sidebar_search_entry_activated_cb (GtkSearchEntry      *search_entry,
+                                      CcApplicationsPanel *self)
+{
+  GtkListBoxRow *row;
+
+  row = gtk_list_box_get_row_at_y (self->sidebar_listbox, 0);
+
+  if (!row)
+    return;
+
+  /* Show the app */
+  gtk_list_box_select_row (self->sidebar_listbox, row);
+  g_signal_emit_by_name (row, "activate");
+
+  /* Cleanup the entry */
+  gtk_entry_set_text (self->sidebar_search_entry, "");
+  gtk_widget_grab_focus (GTK_WIDGET (self->sidebar_search_entry));
+}
+
+static void
+on_sidebar_search_entry_search_changed_cb (GtkSearchEntry      *search_entry,
+                                           CcApplicationsPanel *self)
+{
+  gtk_list_box_invalidate_filter (self->sidebar_listbox);
+}
+
+static void
+on_sidebar_search_entry_search_stopped_cb (GtkSearchEntry      *search_entry,
+                                           CcApplicationsPanel *self)
+{
+  gtk_entry_set_text (self->sidebar_search_entry, "");
 }
 
 static void
@@ -1577,7 +1634,7 @@ static GtkWidget*
 cc_applications_panel_get_sidebar_widget (CcPanel *panel)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (panel);
-  return GTK_WIDGET (self->sidebar_listbox);
+  return self->sidebar_box;
 }
 
 static GtkWidget *
@@ -1631,7 +1688,9 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, notification);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_list);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_box);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_search_entry);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, search);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sound);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, stack);
@@ -1656,6 +1715,9 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, storage_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, open_software_cb);
   gtk_widget_class_bind_template_callback (widget_class, handler_reset_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_search_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_search_stopped_cb);
 }
 
 static void
@@ -1710,6 +1772,10 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   gtk_list_box_set_sort_func (self->sidebar_listbox,
                               compare_rows,
                               NULL, NULL);
+
+  gtk_list_box_set_filter_func (self->sidebar_listbox,
+                                filter_sidebar_rows,
+                                self, NULL);
 
   self->location_settings = g_settings_new ("org.gnome.system.location");
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
