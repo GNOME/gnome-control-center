@@ -174,7 +174,7 @@ update_ui (CcWifiConnectionRow *self)
       ssid_pos = strstr (name, ssid_str);
       if (ssid_pos == name && strlen (name) == strlen (ssid_str))
         {
-          title = g_strdup (name);
+          title = g_markup_escape_text (name, -1);
         }
       else if (ssid_pos)
         {
