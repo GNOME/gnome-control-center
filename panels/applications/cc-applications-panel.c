@@ -1662,6 +1662,7 @@ static void
 cc_applications_panel_init (CcApplicationsPanel *self)
 {
   g_autoptr(GtkStyleProvider) provider = NULL;
+  GtkListBoxRow *row;
 
   g_resources_register (cc_applications_get_resource ());
 
@@ -1731,4 +1732,9 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 
   self->globs = parse_globs ();
   self->search_providers = parse_search_providers ();
+
+  /* Select the first row */
+  row = gtk_list_box_get_row_at_index (self->sidebar_listbox, 0);
+  gtk_list_box_select_row (self->sidebar_listbox, row);
+  g_signal_emit_by_name (row, "activate");
 }
