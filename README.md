@@ -12,16 +12,9 @@ GNOME Settings is GNOME's main interface for configuration of various aspects of
 See `docs/CONTRIBUTING.md` for details on the contribution process, and `docs/HACKING.md`
 for the coding style guidelines.
 
-## Testing Unstable Settings
-
-It is quite easy to test and give feedback about the development version of GNOME
-Settings. Just access https://gitlab.gnome.org/GNOME/gnome-control-center/environments,
-get the latest version, download it, double-click the file, install and run.
-
-Note that GNOME Settings Flatpak will only work if you are running
-the latest GNOME version in your host system.
-
 ## Reporting Bugs
+
+Before reporting any bugs or opening feature requests, [read the communication guidelines][communication-guidelines].
 
 Bugs should be reported to the GNOME bug tracking system under the product
 gnome-control-center. It is available at [GitLab Issues](https://gitlab.gnome.org/GNOME/gnome-control-center/issues).
@@ -56,3 +49,15 @@ Reproduce the crash and when the program exits to (gdb) prompt, get the backtrac
 
 Once you have the backtrace, copy and paste it into the 'Comments' field or attach it as
 a file to the bug report.
+
+## Testing Unstable Settings
+
+It is quite easy to test and give feedback about the development version of GNOME
+Settings. Just access https://gitlab.gnome.org/GNOME/gnome-control-center/environments,
+get the latest version, download it, double-click the file, install and run.
+
+Note that GNOME Settings Flatpak will only work if you are running
+the latest GNOME version in your host system.
+
+
+[communication-guidelines]: https://gitlab.gnome.org/GNOME/gnome-control-center/blob/master/docs/CONTRIBUTING.md#communication-guidelines
