@@ -951,7 +951,6 @@ set_input_settings (CcRegionPanel *self)
         }
 
         g_settings_set_value (self->input_settings, KEY_INPUT_SOURCES, g_variant_builder_end (&builder));
-        g_settings_apply (self->input_settings);
 }
 
 static void set_localed_input (CcRegionPanel *self);
@@ -1204,7 +1203,6 @@ static void
 setup_input_section (CcRegionPanel *self)
 {
         self->input_settings = g_settings_new (GNOME_DESKTOP_INPUT_SOURCES_DIR);
-        g_settings_delay (self->input_settings);
 
         self->xkb_info = gnome_xkb_info_new ();
 
