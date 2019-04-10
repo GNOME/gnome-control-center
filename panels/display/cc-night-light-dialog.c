@@ -22,6 +22,7 @@
 
 #include <gdesktop-enums.h>
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
 #include <math.h>
 
 #include "cc-night-light-dialog.h"
