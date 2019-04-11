@@ -331,7 +331,7 @@ monitor_labeler_show (CcDisplayPanel *self)
     return monitor_labeler_hide (self);
 
   g_dbus_proxy_call (self->shell_proxy,
-                     "ShowMonitorLabels2",
+                     "ShowMonitorLabels",
                      g_variant_builder_end (&builder),
                      G_DBUS_CALL_FLAGS_NONE,
                      -1, NULL, NULL, NULL);
