@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-02-27 10:46+0000\n"
-"PO-Revision-Date: 2019-03-03 18:50+0200\n"
+"POT-Creation-Date: 2019-04-11 14:09+0000\n"
+"PO-Revision-Date: 2019-04-11 22:51+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -165,7 +165,7 @@ msgid "Other Files"
 msgstr "Kiti failai"
 
 #. List of applications.
-#: panels/applications/cc-applications-panel.c:1353
+#: panels/applications/cc-applications-panel.c:1373
 #: panels/applications/cc-applications-panel.ui:406
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
 #: panels/notifications/cc-notifications-panel.ui:167
@@ -333,11 +333,6 @@ msgid "Control various application permissions and settings"
 msgstr "Valdyti įvairius programos leidimus bei nustatymus"
 
 #. FIXME
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/applications/gnome-applications-panel.desktop.in.in:8
-msgid "application-x-executable"
-msgstr "application-x-executable"
-
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in.in:16
 msgid "application;flatpak;permission;setting;"
@@ -420,7 +415,7 @@ msgstr "Galite pridėti paveikslėlių į aplanką %s ir juos matysite čia"
 #: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/cc-color-panel.ui:657 panels/color/color-calibrate.ui:25
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:880
+#: panels/display/cc-display-panel.c:916
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
@@ -433,8 +428,8 @@ msgstr "Galite pridėti paveikslėlių į aplanką %s ir juos matysite čia"
 #: panels/search/cc-search-locations-dialog.c:607
 #: panels/sharing/cc-sharing-panel.c:427
 #: panels/user-accounts/cc-add-user-dialog.ui:28
-#: panels/user-accounts/cc-avatar-chooser.c:105
-#: panels/user-accounts/cc-avatar-chooser.c:233
+#: panels/user-accounts/cc-avatar-chooser.c:106
+#: panels/user-accounts/cc-avatar-chooser.c:234
 #: panels/user-accounts/cc-password-dialog.ui:20
 #: panels/user-accounts/cc-user-panel.c:640
 #: panels/user-accounts/cc-user-panel.c:658
@@ -474,11 +469,6 @@ msgstr "Fonas"
 #: panels/background/gnome-background-panel.desktop.in.in:4
 msgid "Change your background image to a wallpaper or photo"
 msgstr "Pakeiskite fono paveikslėlį fonu arba nuotrauka"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/background/gnome-background-panel.desktop.in.in:7
-msgid "preferences-desktop-wallpaper"
-msgstr "preferences-desktop-wallpaper"
 
 #. Translators: Search terms to find the Background panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/background/gnome-background-panel.desktop.in.in:15
@@ -531,11 +521,6 @@ msgstr "Bluetooth"
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:4
 msgid "Turn Bluetooth on and off and connect your devices"
 msgstr "Įjunkite arba išjunkite Bluetooth ir junkitės prie savo įrenginių"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:6
-msgid "bluetooth"
-msgstr "bluetooth"
 
 #. Translators: Search terms to find the Bluetooth panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:19
@@ -1175,11 +1160,6 @@ msgstr ""
 "Kalibruokite savo įrenginių, tokių kaip vaizduokliai, kameros ar "
 "spausdintuvai, spalvas"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/color/gnome-color-panel.desktop.in.in:7
-msgid "preferences-color"
-msgstr "preferences-color"
-
 #. Translators: Search terms to find the Color panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/color/gnome-color-panel.desktop.in.in:19
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
@@ -1410,11 +1390,6 @@ msgstr "Diena / Naktis"
 msgid "Change the date and time, including time zone"
 msgstr "Keiskite datą ir laiką, įskaitant laiko juostą"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/datetime/gnome-datetime-panel.desktop.in.in:7
-msgid "preferences-system-time"
-msgstr "preferences-system-time"
-
 #. Translators: Search terms to find the Date and Time panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/datetime/gnome-datetime-panel.desktop.in.in:15
 msgid "Clock;Timezone;Location;"
@@ -1428,26 +1403,26 @@ msgstr "Keiskite sistemos laiko ir datos nustatymus"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Datos ir laiko nustatymams pakeisti reikia patvirtinti tapatybę."
 
-#: panels/display/cc-display-panel.c:891
+#: panels/display/cc-display-panel.c:927
 #: panels/network/connection-editor/connection-editor.ui:27
 #: panels/network/network-wifi.ui:38
 msgid "_Apply"
 msgstr "_Pritaikyti"
 
-#: panels/display/cc-display-panel.c:912
+#: panels/display/cc-display-panel.c:948
 msgid "Apply Changes?"
 msgstr "Pritaikyti pakeitimus?"
 
-#: panels/display/cc-display-panel.c:917
+#: panels/display/cc-display-panel.c:953
 msgid "Changes Cannot be Applied"
 msgstr "Pakeitimų negalima pritaikyti"
 
-#: panels/display/cc-display-panel.c:918
+#: panels/display/cc-display-panel.c:954
 msgid "This could be due to hardware limitations."
 msgstr "Taip gali būti dėl aparatinės įrangos apribojimų."
 
 #. TRANSLATORS: the state of the night light setting
-#: panels/display/cc-display-panel.c:1091
+#: panels/display/cc-display-panel.c:1127
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2111 panels/power/cc-power-panel.c:2118
 #: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
@@ -1459,7 +1434,7 @@ msgstr "Taip gali būti dėl aparatinės įrangos apribojimų."
 msgid "On"
 msgstr "Įjungta"
 
-#: panels/display/cc-display-panel.c:1091 panels/network/net-proxy.c:54
+#: panels/display/cc-display-panel.c:1127 panels/network/net-proxy.c:54
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2105 panels/power/cc-power-panel.c:2116
 #: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
@@ -1497,9 +1472,6 @@ msgid "Display Mode"
 msgstr "Vaizduoklio veiksena"
 
 #: panels/display/cc-display-panel.ui:235
-#| msgid ""
-#| "Drag displays to match your setup. The top bar is placed on the primary "
-#| "display."
 msgid ""
 "Drag displays to match your physical display setup. Select a display to "
 "change its settings."
@@ -1512,7 +1484,6 @@ msgid "Display Arrangement"
 msgstr "Vaizduoklių išdėstymas"
 
 #: panels/display/cc-display-panel.ui:424
-#| msgid "Display Calibration"
 msgid "Display Configuration"
 msgstr "Vaizduoklio konfigūracija"
 
@@ -1523,39 +1494,37 @@ msgstr "Vaizduoklio konfigūracija"
 msgid "Night Light"
 msgstr "Naktinis apšvietimas"
 
-#: panels/display/cc-display-settings.c:109
+#: panels/display/cc-display-settings.c:108
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Gulsčias"
 
-#: panels/display/cc-display-settings.c:112
+#: panels/display/cc-display-settings.c:111
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Stačias į dešinę"
 
-#: panels/display/cc-display-settings.c:115
+#: panels/display/cc-display-settings.c:114
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Stačias į kairę"
 
-#: panels/display/cc-display-settings.c:118
+#: panels/display/cc-display-settings.c:117
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Gulsčias (apverstas)"
 
-#: panels/display/cc-display-settings.c:192
+#: panels/display/cc-display-settings.c:191
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
 
 #: panels/display/cc-display-settings.ui:15
-#| msgid "Orientation"
 msgctxt "display setting"
 msgid "Orientation"
 msgstr "Orientacija"
 
 #: panels/display/cc-display-settings.ui:24
-#| msgid "Resolution"
 msgctxt "display setting"
 msgid "Resolution"
 msgstr "Skiriamoji geba"
@@ -1571,6 +1540,14 @@ msgstr "Derinti televizoriui"
 #: panels/display/cc-display-settings.ui:59
 msgid "Scale"
 msgstr "Ištempti"
+
+#: panels/display/cc-night-light-dialog.c:647
+msgid "More Warm"
+msgstr "Šilčiau"
+
+#: panels/display/cc-night-light-dialog.c:659
+msgid "Less Warm"
+msgstr "Šalčiau"
 
 #. This cancels the redshift inhibit.
 #: panels/display/cc-night-light-dialog.ui:46
@@ -1648,11 +1625,6 @@ msgstr "Ekranai"
 msgid "Choose how to use connected monitors and projectors"
 msgstr "Pasirinkite, kaip naudoti prijungtus monitorius ir projektorius"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/display/gnome-display-panel.desktop.in.in:7
-msgid "preferences-desktop-display"
-msgstr "preferences-desktop-display"
-
 #. Translators: Search terms to find the Displays panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/display/gnome-display-panel.desktop.in.in:19
 msgid ""
@@ -1688,10 +1660,10 @@ msgid "_Photos"
 msgstr "_Nuotraukos"
 
 #. TRANSLATORS: AP type
-#: panels/info/cc-info-overview-panel.c:371
-#: panels/info/cc-info-overview-panel.c:454
-#: panels/info/cc-info-overview-panel.c:499
-#: panels/info/cc-info-overview-panel.c:529 panels/network/panel-common.c:123
+#: panels/info/cc-info-overview-panel.c:369
+#: panels/info/cc-info-overview-panel.c:452
+#: panels/info/cc-info-overview-panel.c:497
+#: panels/info/cc-info-overview-panel.c:527 panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "Nežinomas"
 
@@ -1699,24 +1671,24 @@ msgstr "Nežinomas"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info/cc-info-overview-panel.c:462
+#: panels/info/cc-info-overview-panel.c:460
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; Sukūrimo ID: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info/cc-info-overview-panel.c:479
+#: panels/info/cc-info-overview-panel.c:477
 #, c-format
 msgid "64-bit"
 msgstr "64-bitų"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info/cc-info-overview-panel.c:482
+#: panels/info/cc-info-overview-panel.c:480
 #, c-format
 msgid "32-bit"
 msgstr "32-bitų"
 
-#: panels/info/cc-info-overview-panel.c:712
+#: panels/info/cc-info-overview-panel.c:710
 #, c-format
 msgid "Version %s"
 msgstr "Versija %s"
@@ -1763,39 +1735,39 @@ msgstr "Skaičiuojama..."
 msgid "Check for updates"
 msgstr "Tikrinti, ar yra atnaujinimų"
 
-#: panels/info/cc-info-removable-media-panel.c:298
+#: panels/info/cc-info-removable-media-panel.c:296
 msgid "Ask what to do"
 msgstr "Klausti, ką daryti"
 
-#: panels/info/cc-info-removable-media-panel.c:302
+#: panels/info/cc-info-removable-media-panel.c:300
 msgid "Do nothing"
 msgstr "Nieko nedaryti"
 
-#: panels/info/cc-info-removable-media-panel.c:306
+#: panels/info/cc-info-removable-media-panel.c:304
 msgid "Open folder"
 msgstr "Atverti aplanką"
 
-#: panels/info/cc-info-removable-media-panel.c:391
+#: panels/info/cc-info-removable-media-panel.c:389
 msgid "Other Media"
 msgstr "Kitos laikmenos"
 
-#: panels/info/cc-info-removable-media-panel.c:424
+#: panels/info/cc-info-removable-media-panel.c:422
 msgid "Select an application for audio CDs"
 msgstr "Parinkite programą, kuria norėtumėte klausytis garso CD"
 
-#: panels/info/cc-info-removable-media-panel.c:425
+#: panels/info/cc-info-removable-media-panel.c:423
 msgid "Select an application for video DVDs"
 msgstr "Parinkite programą vaizdo DVD rodymui"
 
-#: panels/info/cc-info-removable-media-panel.c:426
+#: panels/info/cc-info-removable-media-panel.c:424
 msgid "Select an application to run when a music player is connected"
 msgstr "Pasirinkite paleistiną programą, kai muzikos grotuvas prijungiamas"
 
-#: panels/info/cc-info-removable-media-panel.c:427
+#: panels/info/cc-info-removable-media-panel.c:425
 msgid "Select an application to run when a camera is connected"
 msgstr "Pasirinkite paleistiną programą, kai prijungiamas fotoaparatas"
 
-#: panels/info/cc-info-removable-media-panel.c:428
+#: panels/info/cc-info-removable-media-panel.c:426
 msgid "Select an application for software CDs"
 msgstr "Parinkite programą programinės įrangos CD paleidimui"
 
@@ -1804,51 +1776,51 @@ msgstr "Parinkite programą programinės įrangos CD paleidimui"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: panels/info/cc-info-removable-media-panel.c:440
+#: panels/info/cc-info-removable-media-panel.c:438
 msgid "audio DVD"
 msgstr "garso DVD"
 
-#: panels/info/cc-info-removable-media-panel.c:441
+#: panels/info/cc-info-removable-media-panel.c:439
 msgid "blank Blu-ray disc"
 msgstr "tuščias Blu-ray diskas"
 
-#: panels/info/cc-info-removable-media-panel.c:442
+#: panels/info/cc-info-removable-media-panel.c:440
 msgid "blank CD disc"
 msgstr "tuščias CD diskas"
 
-#: panels/info/cc-info-removable-media-panel.c:443
+#: panels/info/cc-info-removable-media-panel.c:441
 msgid "blank DVD disc"
 msgstr "tuščias DVD diskas"
 
-#: panels/info/cc-info-removable-media-panel.c:444
+#: panels/info/cc-info-removable-media-panel.c:442
 msgid "blank HD DVD disc"
 msgstr "tuščias HD DVD diskas"
 
-#: panels/info/cc-info-removable-media-panel.c:445
+#: panels/info/cc-info-removable-media-panel.c:443
 msgid "Blu-ray video disc"
 msgstr "Blu-ray vaizdo diskas"
 
-#: panels/info/cc-info-removable-media-panel.c:446
+#: panels/info/cc-info-removable-media-panel.c:444
 msgid "e-book reader"
 msgstr "el. knygų skaitytuvas"
 
-#: panels/info/cc-info-removable-media-panel.c:447
+#: panels/info/cc-info-removable-media-panel.c:445
 msgid "HD DVD video disc"
 msgstr "HD DVD vaizdo diskas"
 
-#: panels/info/cc-info-removable-media-panel.c:448
+#: panels/info/cc-info-removable-media-panel.c:446
 msgid "Picture CD"
 msgstr "Paveikslėlių CD"
 
-#: panels/info/cc-info-removable-media-panel.c:449
+#: panels/info/cc-info-removable-media-panel.c:447
 msgid "Super Video CD"
 msgstr "Super vaizdo CD"
 
-#: panels/info/cc-info-removable-media-panel.c:450
+#: panels/info/cc-info-removable-media-panel.c:448
 msgid "Video CD"
 msgstr "Vaizdo CD"
 
-#: panels/info/cc-info-removable-media-panel.c:451
+#: panels/info/cc-info-removable-media-panel.c:449
 msgid "Windows software"
 msgstr "Windows programinė įranga"
 
@@ -1900,11 +1872,6 @@ msgstr "Numatytosios programos"
 msgid "Configure Default Applications"
 msgstr "Konfigūruoti numatytąsias programas"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/info/gnome-default-apps-panel.desktop.in.in:7
-msgid "starred"
-msgstr "starred"
-
 #. Translators: Search terms to find the Default Applications panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/info/gnome-default-apps-panel.desktop.in.in:19
 msgid "default;application;preferred;media;"
@@ -1917,11 +1884,6 @@ msgstr "Apie"
 #: panels/info/gnome-info-overview-panel.desktop.in.in:4
 msgid "View information about your system"
 msgstr "Rodyti informaciją apie sistemą"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/info/gnome-info-overview-panel.desktop.in.in:7
-msgid "help-about"
-msgstr "help-about"
 
 #. Translators: Search terms to find the About panel.
 #. Do NOT translate or localize the semicolons!
@@ -1944,11 +1906,6 @@ msgstr "Išimamos laikmenos"
 #: panels/info/gnome-removable-media-panel.desktop.in.in:4
 msgid "Configure Removable Media settings"
 msgstr "Konfigūruoti išimamas laikmenas"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/info/gnome-removable-media-panel.desktop.in.in:7
-msgid "media-removable"
-msgstr "media-removable"
 
 #. Translators: Search terms to find the Removable Media panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/info/gnome-removable-media-panel.desktop.in.in:19
@@ -2228,11 +2185,6 @@ msgstr "Klaviatūra"
 msgid "View and change keyboard shortcuts and set your typing preferences"
 msgstr "Rodyti ir keisti klaviatūros trumpinius bei nustatyti rašymo nuostatas"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/keyboard/gnome-keyboard-panel.desktop.in.in:7
-msgid "input-keyboard"
-msgstr "input-keyboard"
-
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:19
 msgid ""
@@ -2300,11 +2252,6 @@ msgid ""
 msgstr ""
 "Keiskite pelės ar jutiklinio kilimėlio jautrumą bei pasirinkite kairiarankio "
 "ar dešiniarankio veikseną"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/mouse/gnome-mouse-panel.desktop.in.in:7
-msgid "input-mouse"
-msgstr "input-mouse"
 
 #. Translators: Search terms to find the Mouse and Touchpad panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/mouse/gnome-mouse-panel.desktop.in.in:19
@@ -2414,7 +2361,7 @@ msgid "Single click, secondary button"
 msgstr "Vienas paspaudimas, antraeilis mygtukas"
 
 #. add proxy to device list
-#: panels/network/cc-network-panel.c:583
+#: panels/network/cc-network-panel.c:589
 msgid "Network proxy"
 msgstr "Tarpinis tinklo serveris"
 
@@ -2422,18 +2369,18 @@ msgstr "Tarpinis tinklo serveris"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: panels/network/cc-network-panel.c:719 panels/network/net-vpn.c:167
+#: panels/network/cc-network-panel.c:725 panels/network/net-vpn.c:167
 #: panels/network/net-vpn.c:295
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: panels/network/cc-network-panel.c:783 panels/network/cc-wifi-panel.ui:304
+#: panels/network/cc-network-panel.c:789 panels/network/cc-wifi-panel.ui:304
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Oi, atsitiko kažkas negero. Susisiekite su savo programinės įrangos tiekėju."
 
-#: panels/network/cc-network-panel.c:789
+#: panels/network/cc-network-panel.c:795
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager turėtų veikti."
 
@@ -2970,7 +2917,7 @@ msgstr "Pasirinkite failą importavimui"
 #: panels/network/connection-editor/vpn-helpers.c:182
 #: panels/printers/pp-details-dialog.c:314
 #: panels/sharing/cc-sharing-panel.c:428
-#: panels/user-accounts/cc-avatar-chooser.c:234
+#: panels/user-accounts/cc-avatar-chooser.c:235
 msgid "_Open"
 msgstr "_Atverti"
 
@@ -3025,11 +2972,6 @@ msgstr "_BSSID"
 msgid "Control how you connect to the Internet"
 msgstr "Valdykite, kaip jungiatės prie interneto"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/network/gnome-network-panel.desktop.in.in:7
-msgid "network-workgroup"
-msgstr "network-workgroup"
-
 #. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in.in:19
 msgid ""
@@ -3042,11 +2984,6 @@ msgstr ""
 #: panels/network/gnome-wifi-panel.desktop.in.in:4
 msgid "Control how you connect to Wi-Fi networks"
 msgstr "Valdykite, kaip jungiatės prie belaidžių tinklų"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/network/gnome-wifi-panel.desktop.in.in:7
-msgid "network-wireless"
-msgstr "network-wireless"
 
 #. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in.in:19
@@ -4063,11 +4000,6 @@ msgstr "_Pranešimai ekrano užrakte"
 msgid "Control which notifications are displayed and what they show"
 msgstr "Valdykite, kurie pranešimai yra rodomi, ir ką jie rodo"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/notifications/gnome-notifications-panel.desktop.in.in:7
-msgid "preferences-system-notifications"
-msgstr "preferences-system-notifications"
-
 #. Translators: Search terms to find the Notifications panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/notifications/gnome-notifications-panel.desktop.in.in:20
 msgid "Notifications;Banner;Message;Tray;Popup;"
@@ -4080,19 +4012,19 @@ msgstr "Kita"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:620
+#: panels/online-accounts/cc-online-accounts-panel.c:626
 #, c-format
 msgid "%s Account"
 msgstr "%s paskyra"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:917
+#: panels/online-accounts/cc-online-accounts-panel.c:923
 msgid "Error removing account"
 msgstr "Klaida šalinant paskyrą"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:982
+#: panels/online-accounts/cc-online-accounts-panel.c:988
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "<b>%s</b> pašalinta"
@@ -4105,11 +4037,6 @@ msgstr "Internetinės paskyros"
 msgid "Connect to your online accounts and decide what to use them for"
 msgstr ""
 "Prisijunkite prie savo internetinių paskyrų ir nuspręskite, kam jas naudosite"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/online-accounts/gnome-online-accounts-panel.desktop.in.in:7
-msgid "goa-panel"
-msgstr "goa-panel"
 
 #. Translators: Search terms to find the Online Accounts panel.
 #. Do NOT translate or localize the semicolons!
@@ -4613,11 +4540,6 @@ msgstr "Energija"
 msgid "View your battery status and change power saving settings"
 msgstr "Rodyti baterijos būseną ir keisti energijos taupymo nustatymus"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/power/gnome-power-panel.desktop.in.in:7
-msgid "gnome-power-manager"
-msgstr "gnome-power-manager"
-
 #. Translators: Search terms to find the Power panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/power/gnome-power-panel.desktop.in.in:19
 msgid ""
@@ -4704,11 +4626,6 @@ msgid "Add printers, view printer jobs and decide how you want to print"
 msgstr ""
 "Pridėkite spausdintuvus, matykite spausdintuvo darbus ir nuspręskite, kaip "
 "norite spausdinti"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/printers/gnome-printers-panel.desktop.in.in:7
-msgid "printer"
-msgstr "printer"
 
 #. Translators: Search terms to find the Printers panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/printers/gnome-printers-panel.desktop.in.in:16
@@ -4804,7 +4721,7 @@ msgid "Select Printer Driver"
 msgstr "Pasirinkite spausdintuvo tvarkyklę"
 
 #: panels/printers/ppd-selection-dialog.ui:40
-#: panels/user-accounts/cc-avatar-chooser.c:107
+#: panels/user-accounts/cc-avatar-chooser.c:108
 msgid "Select"
 msgstr "Pasirinkti"
 
@@ -5001,7 +4918,6 @@ msgid "Output Tray"
 msgstr "Išvestis dėklas"
 
 #: panels/printers/pp-options-dialog.c:94
-#| msgid "Resolution"
 msgctxt "printing option"
 msgid "Resolution"
 msgstr "Skiriamoji geba"
@@ -5675,11 +5591,6 @@ msgid "Protect your personal information and control what others might see"
 msgstr "Apsaugokite asmeninę informaciją ir valdykite, ką kiti gali matyti"
 
 #. FIXME
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/privacy/gnome-privacy-panel.desktop.in.in:8
-msgid "preferences-system-privacy"
-msgstr "preferences-system-privacy"
-
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/privacy/gnome-privacy-panel.desktop.in.in:20
 msgid ""
@@ -5752,7 +5663,7 @@ msgstr "Pridėti įvesties šaltinį"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Įvesties metodų negalima naudoti prisijungimo ekrane"
 
-#: panels/region/cc-region-panel.c:1505
+#: panels/region/cc-region-panel.c:1503
 msgid "Login _Screen"
 msgstr "Pri_sijungimo ekranas"
 
@@ -5838,11 +5749,6 @@ msgstr ""
 "Pasirinkite rodymo kalbą, formatus, klaviatūros išdėstymus ir įvesties "
 "šaltinius"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/region/gnome-region-panel.desktop.in.in:7
-msgid "preferences-desktop-locale"
-msgstr "preferences-desktop-locale"
-
 #. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/region/gnome-region-panel.desktop.in.in:19
 msgid "Language;Layout;Keyboard;Input;"
@@ -5876,11 +5782,6 @@ msgstr "Nuostatos"
 msgid ""
 "Control which applications show search results in the Activities Overview"
 msgstr "Valdykite, kurios programos rodo paieškos rezultatus veiklų apžvalgoje"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/search/gnome-search-panel.desktop.in.in:7
-msgid "preferences-system-search"
-msgstr "preferences-system-search"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/search/gnome-search-panel.desktop.in.in:19
@@ -6054,11 +5955,6 @@ msgstr "Aplankai"
 msgid "Control what you want to share with others"
 msgstr "Valdykite, kuo norite dalintis su kitais"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/sharing/gnome-sharing-panel.desktop.in.in:7
-msgid "preferences-system-sharing"
-msgstr "preferences-system-sharing"
-
 #. Translators: Search terms to find the Sharing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:16
 msgid ""
@@ -6103,20 +5999,15 @@ msgid "Sonar"
 msgstr "Sonaras"
 
 #: panels/sound/cc-fade-slider.ui:13
-#| msgctxt "balance"
-#| msgid "Rear"
 msgid "Rear"
 msgstr "Užpakalinė"
 
 #: panels/sound/cc-fade-slider.ui:15
-#| msgctxt "balance"
-#| msgid "Front"
 msgid "Front"
 msgstr "Priekinė"
 
 #: panels/sound/cc-output-test-dialog.c:134
 #, c-format
-#| msgid "Settings"
 msgid "Testing %s"
 msgstr "Testuojamas %s"
 
@@ -6125,12 +6016,10 @@ msgid "Click a speaker to test"
 msgstr "Paspauskite ant garsiakalbio testavimui"
 
 #: panels/sound/cc-sound-panel.ui:29
-#| msgid "System Bus"
 msgid "System Volume"
 msgstr "Sistemos garsas"
 
 #: panels/sound/cc-sound-panel.ui:45
-#| msgid "Volume mute"
 msgid "Volume Levels"
 msgstr "Garso lygiai"
 
@@ -6139,7 +6028,6 @@ msgid "Output"
 msgstr "Išvestis"
 
 #: panels/sound/cc-sound-panel.ui:94
-#| msgid "_Output volume:"
 msgid "Output Device"
 msgstr "Išvesties įrenginys"
 
@@ -6148,17 +6036,14 @@ msgid "Test"
 msgstr "Testas"
 
 #: panels/sound/cc-sound-panel.ui:148 panels/sound/cc-sound-panel.ui:325
-#| msgid "_Configuration URL"
 msgid "Configuration"
 msgstr "Konfigūracija"
 
 #: panels/sound/cc-sound-panel.ui:181
-#| msgid "_Balance:"
 msgid "Balance"
 msgstr "Balansas"
 
 #: panels/sound/cc-sound-panel.ui:208
-#| msgid "_Fade:"
 msgid "Fade"
 msgstr "Išnykti"
 
@@ -6171,17 +6056,14 @@ msgid "Input"
 msgstr "Įvestis"
 
 #: panels/sound/cc-sound-panel.ui:284
-#| msgid "Input level:"
 msgid "Input Device"
 msgstr "Įvesties įrenginys"
 
 #: panels/sound/cc-sound-panel.ui:358
-#| msgid "Volume up"
 msgid "Volume"
 msgstr "Garsumas"
 
 #: panels/sound/cc-sound-panel.ui:380
-#| msgid "_Alert volume:"
 msgid "Alert Sound"
 msgstr "Įspėjimų garsumas"
 
@@ -6197,11 +6079,6 @@ msgstr "Garsas"
 #: panels/sound/gnome-sound-panel.desktop.in.in:4
 msgid "Change sound levels, inputs, outputs, and alert sounds"
 msgstr "Keisti garso garsumą, įvedimą ir įvykių garsus"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/sound/gnome-sound-panel.desktop.in.in:7
-msgid "multimedia-volume-control"
-msgstr "multimedia-volume-control"
 
 #. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/gnome-sound-panel.desktop.in.in:20
@@ -6337,7 +6214,6 @@ msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "Thunderbolt palaikymas buvo išjungtas BIOS."
 
 #: panels/thunderbolt/cc-bolt-panel.c:517
-#| msgid "The profile could not be generated."
 msgid "Thunderbolt security level could not be determined."
 msgstr "Nepavyko nustatyti Thunderbolt saugumo lygio."
 
@@ -6379,11 +6255,6 @@ msgstr "Thunderbolt"
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:4
 msgid "Manage Thunderbolt devices"
 msgstr "Tvarkyti Thunderbolt įrenginius"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:7
-msgid "thunderbolt"
-msgstr "thunderbolt"
 
 #. Translators: those are keywords for the thunderbolt control-center panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:19
@@ -6745,11 +6616,6 @@ msgstr "Didelis"
 msgid "Make it easier to see, hear, type, point and click"
 msgstr "Padarykite matymą, išgirdimą, rašymą, rodymą ir spaudimą paprastesnį"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/universal-access/gnome-universal-access-panel.desktop.in.in:7
-msgid "preferences-desktop-accessibility"
-msgstr "preferences-desktop-accessibility"
-
 #. Translators: Search terms to find the Universal Access panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in.in:19
 msgid ""
@@ -7053,7 +6919,7 @@ msgstr "Turite būti prisijungęs prie tinklo kompanijos naudotojams pridėti."
 msgid "_Enterprise Login"
 msgstr "_Kompanijos prisijungimas"
 
-#: panels/user-accounts/cc-avatar-chooser.c:230
+#: panels/user-accounts/cc-avatar-chooser.c:231
 msgid "Browse for more pictures"
 msgstr "Naršyti daugiau paveikslėlių"
 
@@ -7425,11 +7291,6 @@ msgstr "Naudotojai"
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:4
 msgid "Add or remove users and change your password"
 msgstr "Pridėti arba šalinti naudotojus bei keiskite savo slaptažodį"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:7
-msgid "system-users"
-msgstr "system-users"
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:20
@@ -7837,11 +7698,6 @@ msgstr ""
 "Nustatykite mygtukų susiejimus ir pritaikykite pieštuko jautrumą grafinėms "
 "planšetėms"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/wacom/gnome-wacom-panel.desktop.in.in:7
-msgid "input-tablet"
-msgstr "input-tablet"
-
 #. Translators: Search terms to find the Wacom Tablet panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:19
 msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
@@ -8037,11 +7893,6 @@ msgstr ""
 msgid "Help"
 msgstr "Žinynas"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: shell/gnome-control-center.desktop.in.in:5
-msgid "org.gnome.Settings"
-msgstr "org.gnome.Settings"
-
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: shell/gnome-control-center.desktop.in.in:17
 msgid "Preferences;Settings;"
@@ -8121,6 +7972,87 @@ msgstr[2] "%u įvesčių"
 #: subprojects/gvc/gvc-mixer-control.c:2736
 msgid "System Sounds"
 msgstr "Sistemos garsai"
+
+#~ msgid "application-x-executable"
+#~ msgstr "application-x-executable"
+
+#~ msgid "preferences-desktop-wallpaper"
+#~ msgstr "preferences-desktop-wallpaper"
+
+#~ msgid "bluetooth"
+#~ msgstr "bluetooth"
+
+#~ msgid "preferences-color"
+#~ msgstr "preferences-color"
+
+#~ msgid "preferences-system-time"
+#~ msgstr "preferences-system-time"
+
+#~ msgid "preferences-desktop-display"
+#~ msgstr "preferences-desktop-display"
+
+#~ msgid "starred"
+#~ msgstr "starred"
+
+#~ msgid "help-about"
+#~ msgstr "help-about"
+
+#~ msgid "media-removable"
+#~ msgstr "media-removable"
+
+#~ msgid "input-keyboard"
+#~ msgstr "input-keyboard"
+
+#~ msgid "input-mouse"
+#~ msgstr "input-mouse"
+
+#~ msgid "network-workgroup"
+#~ msgstr "network-workgroup"
+
+#~ msgid "network-wireless"
+#~ msgstr "network-wireless"
+
+#~ msgid "preferences-system-notifications"
+#~ msgstr "preferences-system-notifications"
+
+#~ msgid "goa-panel"
+#~ msgstr "goa-panel"
+
+#~ msgid "gnome-power-manager"
+#~ msgstr "gnome-power-manager"
+
+#~ msgid "printer"
+#~ msgstr "printer"
+
+#~ msgid "preferences-system-privacy"
+#~ msgstr "preferences-system-privacy"
+
+#~ msgid "preferences-desktop-locale"
+#~ msgstr "preferences-desktop-locale"
+
+#~ msgid "preferences-system-search"
+#~ msgstr "preferences-system-search"
+
+#~ msgid "preferences-system-sharing"
+#~ msgstr "preferences-system-sharing"
+
+#~ msgid "multimedia-volume-control"
+#~ msgstr "multimedia-volume-control"
+
+#~ msgid "thunderbolt"
+#~ msgstr "thunderbolt"
+
+#~ msgid "preferences-desktop-accessibility"
+#~ msgstr "preferences-desktop-accessibility"
+
+#~ msgid "system-users"
+#~ msgstr "system-users"
+
+#~ msgid "input-tablet"
+#~ msgstr "input-tablet"
+
+#~ msgid "org.gnome.Settings"
+#~ msgstr "org.gnome.Settings"
 
 #~ msgid "Primary Display"
 #~ msgstr "Pagrindinis vaizduoklis"
