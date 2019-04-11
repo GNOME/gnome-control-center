@@ -247,6 +247,7 @@ update_ui (CcWifiConnectionRow *self)
         icon_name = "channel-insecure-symbolic";
       else
         icon_name = "network-wireless-encrypted-symbolic";
+        gtk_tooltip_set_text (tooltip, "WEB encrypted network");
 
       g_object_set (self->encrypted_icon, "icon-name", icon_name, NULL);
     }
