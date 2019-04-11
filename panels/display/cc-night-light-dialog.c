@@ -22,6 +22,7 @@
 
 #include <gdesktop-enums.h>
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
 #include <math.h>
 
 #include "cc-night-light-dialog.h"
@@ -638,15 +639,12 @@ cc_night_light_dialog_init (CcNightLightDialog *self)
 {
   g_autoptr(GtkCssProvider) provider = NULL;
   g_autoptr(GError) error = NULL;
-  g_autofree gchar *text_low = NULL;
-  g_autofree gchar *text_high = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  text_low = g_strdup_printf ("%s", "More Warm");
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
                       3000, GTK_POS_BOTTOM,
-                      text_low);
+                      _("More Warm"));
 
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
                       4000, GTK_POS_BOTTOM,
@@ -656,10 +654,9 @@ cc_night_light_dialog_init (CcNightLightDialog *self)
                       5000, GTK_POS_BOTTOM,
                       NULL);
 
-  text_high = g_strdup_printf ("%s", "Less Warm");
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
                       6000, GTK_POS_BOTTOM,
-                      text_high);
+                      _("Less Warm"));
 
   self->cancellable = g_cancellable_new ();
   self->settings_display = g_settings_new (DISPLAY_SCHEMA);
