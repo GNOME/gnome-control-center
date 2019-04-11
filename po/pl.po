@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-02-26 19:51+0000\n"
-"PO-Revision-Date: 2019-02-26 20:55+0100\n"
+"POT-Creation-Date: 2019-04-11 14:09+0000\n"
+"PO-Revision-Date: 2019-04-11 18:15+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -160,7 +160,7 @@ msgid "Other Files"
 msgstr "Inne pliki"
 
 #. List of applications.
-#: panels/applications/cc-applications-panel.c:1353
+#: panels/applications/cc-applications-panel.c:1373
 #: panels/applications/cc-applications-panel.ui:406
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
 #: panels/notifications/cc-notifications-panel.ui:167
@@ -329,11 +329,6 @@ msgid "Control various application permissions and settings"
 msgstr "Sterowanie różnymi uprawnieniami i ustawieniami programów"
 
 #. FIXME
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/applications/gnome-applications-panel.desktop.in.in:8
-msgid "application-x-executable"
-msgstr "application-x-executable"
-
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in.in:16
 msgid "application;flatpak;permission;setting;"
@@ -418,7 +413,7 @@ msgstr "Po dodaniu obrazów do katalogu „%s” pojawią się one w tym miejsc
 #: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/cc-color-panel.ui:657 panels/color/color-calibrate.ui:25
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:880
+#: panels/display/cc-display-panel.c:916
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
@@ -431,8 +426,8 @@ msgstr "Po dodaniu obrazów do katalogu „%s” pojawią się one w tym miejsc
 #: panels/search/cc-search-locations-dialog.c:607
 #: panels/sharing/cc-sharing-panel.c:427
 #: panels/user-accounts/cc-add-user-dialog.ui:28
-#: panels/user-accounts/cc-avatar-chooser.c:105
-#: panels/user-accounts/cc-avatar-chooser.c:233
+#: panels/user-accounts/cc-avatar-chooser.c:106
+#: panels/user-accounts/cc-avatar-chooser.c:234
 #: panels/user-accounts/cc-password-dialog.ui:20
 #: panels/user-accounts/cc-user-panel.c:640
 #: panels/user-accounts/cc-user-panel.c:658
@@ -472,11 +467,6 @@ msgstr "Tło"
 #: panels/background/gnome-background-panel.desktop.in.in:4
 msgid "Change your background image to a wallpaper or photo"
 msgstr "Zmiana obrazu tła na tapetę lub zdjęcie"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/background/gnome-background-panel.desktop.in.in:7
-msgid "preferences-desktop-wallpaper"
-msgstr "preferences-desktop-wallpaper"
 
 #. Translators: Search terms to find the Background panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/background/gnome-background-panel.desktop.in.in:15
@@ -529,11 +519,6 @@ msgstr "Bluetooth"
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:4
 msgid "Turn Bluetooth on and off and connect your devices"
 msgstr "Włączanie Bluetooth i łączenie z urządzeniami"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:6
-msgid "bluetooth"
-msgstr "bluetooth"
 
 #. Translators: Search terms to find the Bluetooth panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:19
@@ -1180,11 +1165,6 @@ msgid ""
 msgstr ""
 "Kalibracja kolorów urządzeń, takich jak ekrany, aparaty, kamery i drukarki"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/color/gnome-color-panel.desktop.in.in:7
-msgid "preferences-color"
-msgstr "preferences-color"
-
 #. Translators: Search terms to find the Color panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/color/gnome-color-panel.desktop.in.in:19
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
@@ -1415,11 +1395,6 @@ msgstr "12-godzinny"
 msgid "Change the date and time, including time zone"
 msgstr "Zmiana daty i czasu, w tym strefy czasowej"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/datetime/gnome-datetime-panel.desktop.in.in:7
-msgid "preferences-system-time"
-msgstr "preferences-system-time"
-
 #. Translators: Search terms to find the Date and Time panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/datetime/gnome-datetime-panel.desktop.in.in:15
 msgid "Clock;Timezone;Location;"
@@ -1434,26 +1409,26 @@ msgstr "Zmiana ustawień czasu i daty systemu"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Wymagane jest uwierzytelnienie, aby zmienić ustawienia czasu lub daty."
 
-#: panels/display/cc-display-panel.c:891
+#: panels/display/cc-display-panel.c:927
 #: panels/network/connection-editor/connection-editor.ui:27
 #: panels/network/network-wifi.ui:38
 msgid "_Apply"
 msgstr "_Zastosuj"
 
-#: panels/display/cc-display-panel.c:912
+#: panels/display/cc-display-panel.c:948
 msgid "Apply Changes?"
 msgstr "Zastosować zmiany?"
 
-#: panels/display/cc-display-panel.c:917
+#: panels/display/cc-display-panel.c:953
 msgid "Changes Cannot be Applied"
 msgstr "Nie można zastosować zmian"
 
-#: panels/display/cc-display-panel.c:918
+#: panels/display/cc-display-panel.c:954
 msgid "This could be due to hardware limitations."
 msgstr "Może to być spowodowane ograniczeniami sprzętu."
 
 #. TRANSLATORS: the state of the night light setting
-#: panels/display/cc-display-panel.c:1091
+#: panels/display/cc-display-panel.c:1127
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2111 panels/power/cc-power-panel.c:2118
 #: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
@@ -1465,7 +1440,7 @@ msgstr "Może to być spowodowane ograniczeniami sprzętu."
 msgid "On"
 msgstr "Włączone"
 
-#: panels/display/cc-display-panel.c:1091 panels/network/net-proxy.c:54
+#: panels/display/cc-display-panel.c:1127 panels/network/net-proxy.c:54
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2105 panels/power/cc-power-panel.c:2116
 #: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
@@ -1525,27 +1500,27 @@ msgstr "Konfiguracja ekranów"
 msgid "Night Light"
 msgstr "Nocne światło"
 
-#: panels/display/cc-display-settings.c:109
+#: panels/display/cc-display-settings.c:108
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Pozioma"
 
-#: panels/display/cc-display-settings.c:112
+#: panels/display/cc-display-settings.c:111
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Pionowa (w prawo)"
 
-#: panels/display/cc-display-settings.c:115
+#: panels/display/cc-display-settings.c:114
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Pionowa (w lewo)"
 
-#: panels/display/cc-display-settings.c:118
+#: panels/display/cc-display-settings.c:117
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Pozioma (odwrócona)"
 
-#: panels/display/cc-display-settings.c:192
+#: panels/display/cc-display-settings.c:191
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -1567,6 +1542,18 @@ msgstr "Częstotliwość odświeżania"
 #: panels/display/cc-display-settings.ui:42
 msgid "Adjust for TV"
 msgstr "Dostosowanie do telewizora"
+
+#: panels/display/cc-display-settings.ui:59
+msgid "Scale"
+msgstr "Skalowanie"
+
+#: panels/display/cc-night-light-dialog.c:647
+msgid "More Warm"
+msgstr "Bardziej ciepła"
+
+#: panels/display/cc-night-light-dialog.c:659
+msgid "Less Warm"
+msgstr "Mniej ciepła"
 
 #. This cancels the redshift inhibit.
 #: panels/display/cc-night-light-dialog.ui:46
@@ -1644,11 +1631,6 @@ msgstr "Ekrany"
 msgid "Choose how to use connected monitors and projectors"
 msgstr "Wybór sposobu używania podłączonych monitorów i projektorów"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/display/gnome-display-panel.desktop.in.in:7
-msgid "preferences-desktop-display"
-msgstr "preferences-desktop-display"
-
 #. Translators: Search terms to find the Displays panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/display/gnome-display-panel.desktop.in.in:19
 msgid ""
@@ -1685,10 +1667,10 @@ msgid "_Photos"
 msgstr "_Zdjęcia"
 
 #. TRANSLATORS: AP type
-#: panels/info/cc-info-overview-panel.c:371
-#: panels/info/cc-info-overview-panel.c:454
-#: panels/info/cc-info-overview-panel.c:499
-#: panels/info/cc-info-overview-panel.c:529 panels/network/panel-common.c:123
+#: panels/info/cc-info-overview-panel.c:369
+#: panels/info/cc-info-overview-panel.c:452
+#: panels/info/cc-info-overview-panel.c:497
+#: panels/info/cc-info-overview-panel.c:527 panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "Nieznany"
 
@@ -1696,24 +1678,24 @@ msgstr "Nieznany"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info/cc-info-overview-panel.c:462
+#: panels/info/cc-info-overview-panel.c:460
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s, identyfikator: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info/cc-info-overview-panel.c:479
+#: panels/info/cc-info-overview-panel.c:477
 #, c-format
 msgid "64-bit"
 msgstr "64-bitowy"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info/cc-info-overview-panel.c:482
+#: panels/info/cc-info-overview-panel.c:480
 #, c-format
 msgid "32-bit"
 msgstr "32-bitowy"
 
-#: panels/info/cc-info-overview-panel.c:712
+#: panels/info/cc-info-overview-panel.c:710
 #, c-format
 msgid "Version %s"
 msgstr "Wersja %s"
@@ -1760,39 +1742,39 @@ msgstr "Obliczanie…"
 msgid "Check for updates"
 msgstr "Wyszukaj aktualizacje"
 
-#: panels/info/cc-info-removable-media-panel.c:298
+#: panels/info/cc-info-removable-media-panel.c:296
 msgid "Ask what to do"
 msgstr "Pytanie, co robić"
 
-#: panels/info/cc-info-removable-media-panel.c:302
+#: panels/info/cc-info-removable-media-panel.c:300
 msgid "Do nothing"
 msgstr "Nierobienie niczego"
 
-#: panels/info/cc-info-removable-media-panel.c:306
+#: panels/info/cc-info-removable-media-panel.c:304
 msgid "Open folder"
 msgstr "Otwarcie katalogu"
 
-#: panels/info/cc-info-removable-media-panel.c:391
+#: panels/info/cc-info-removable-media-panel.c:389
 msgid "Other Media"
 msgstr "Inne nośniki"
 
-#: panels/info/cc-info-removable-media-panel.c:424
+#: panels/info/cc-info-removable-media-panel.c:422
 msgid "Select an application for audio CDs"
 msgstr "Wybór programu dla płyt CD-Audio"
 
-#: panels/info/cc-info-removable-media-panel.c:425
+#: panels/info/cc-info-removable-media-panel.c:423
 msgid "Select an application for video DVDs"
 msgstr "Wybór programu dla płyt wideo DVD"
 
-#: panels/info/cc-info-removable-media-panel.c:426
+#: panels/info/cc-info-removable-media-panel.c:424
 msgid "Select an application to run when a music player is connected"
 msgstr "Wybór programu do uruchomienia po podłączeniu odtwarzacza multimediów"
 
-#: panels/info/cc-info-removable-media-panel.c:427
+#: panels/info/cc-info-removable-media-panel.c:425
 msgid "Select an application to run when a camera is connected"
 msgstr "Wybór programu do uruchomienia po podłączeniu aparatu"
 
-#: panels/info/cc-info-removable-media-panel.c:428
+#: panels/info/cc-info-removable-media-panel.c:426
 msgid "Select an application for software CDs"
 msgstr "Wybór programu dla płyt CD z oprogramowaniem"
 
@@ -1801,51 +1783,51 @@ msgstr "Wybór programu dla płyt CD z oprogramowaniem"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: panels/info/cc-info-removable-media-panel.c:440
+#: panels/info/cc-info-removable-media-panel.c:438
 msgid "audio DVD"
 msgstr "Płyta DVD-Audio"
 
-#: panels/info/cc-info-removable-media-panel.c:441
+#: panels/info/cc-info-removable-media-panel.c:439
 msgid "blank Blu-ray disc"
 msgstr "Pusta płyta Blu-ray"
 
-#: panels/info/cc-info-removable-media-panel.c:442
+#: panels/info/cc-info-removable-media-panel.c:440
 msgid "blank CD disc"
 msgstr "Pusta płyta CD"
 
-#: panels/info/cc-info-removable-media-panel.c:443
+#: panels/info/cc-info-removable-media-panel.c:441
 msgid "blank DVD disc"
 msgstr "Pusta płyta DVD"
 
-#: panels/info/cc-info-removable-media-panel.c:444
+#: panels/info/cc-info-removable-media-panel.c:442
 msgid "blank HD DVD disc"
 msgstr "Pusta płyta HD DVD"
 
-#: panels/info/cc-info-removable-media-panel.c:445
+#: panels/info/cc-info-removable-media-panel.c:443
 msgid "Blu-ray video disc"
 msgstr "Płyta wideo Blu-ray"
 
-#: panels/info/cc-info-removable-media-panel.c:446
+#: panels/info/cc-info-removable-media-panel.c:444
 msgid "e-book reader"
 msgstr "Czytnik e-booków"
 
-#: panels/info/cc-info-removable-media-panel.c:447
+#: panels/info/cc-info-removable-media-panel.c:445
 msgid "HD DVD video disc"
 msgstr "Płyta wideo HD DVD"
 
-#: panels/info/cc-info-removable-media-panel.c:448
+#: panels/info/cc-info-removable-media-panel.c:446
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: panels/info/cc-info-removable-media-panel.c:449
+#: panels/info/cc-info-removable-media-panel.c:447
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: panels/info/cc-info-removable-media-panel.c:450
+#: panels/info/cc-info-removable-media-panel.c:448
 msgid "Video CD"
 msgstr "Video CD"
 
-#: panels/info/cc-info-removable-media-panel.c:451
+#: panels/info/cc-info-removable-media-panel.c:449
 msgid "Windows software"
 msgstr "Oprogramowanie systemu Windows"
 
@@ -1897,11 +1879,6 @@ msgstr "Domyślne programy"
 msgid "Configure Default Applications"
 msgstr "Konfiguracja domyślnych programów"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/info/gnome-default-apps-panel.desktop.in.in:7
-msgid "starred"
-msgstr "starred"
-
 #. Translators: Search terms to find the Default Applications panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/info/gnome-default-apps-panel.desktop.in.in:19
 msgid "default;application;preferred;media;"
@@ -1914,11 +1891,6 @@ msgstr "Informacje"
 #: panels/info/gnome-info-overview-panel.desktop.in.in:4
 msgid "View information about your system"
 msgstr "Wyświetlanie informacji o systemie"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/info/gnome-info-overview-panel.desktop.in.in:7
-msgid "help-about"
-msgstr "help-about"
 
 #. Translators: Search terms to find the About panel.
 #. Do NOT translate or localize the semicolons!
@@ -1941,11 +1913,6 @@ msgstr "Nośniki wymienne"
 #: panels/info/gnome-removable-media-panel.desktop.in.in:4
 msgid "Configure Removable Media settings"
 msgstr "Konfiguracja nośników wymiennych"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/info/gnome-removable-media-panel.desktop.in.in:7
-msgid "media-removable"
-msgstr "media-removable"
 
 #. Translators: Search terms to find the Removable Media panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/info/gnome-removable-media-panel.desktop.in.in:19
@@ -2229,11 +2196,6 @@ msgstr ""
 "Wyświetlanie i zmiana skrótów klawiszowych oraz ustawianie preferencji "
 "pisania"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/keyboard/gnome-keyboard-panel.desktop.in.in:7
-msgid "input-keyboard"
-msgstr "input-keyboard"
-
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:19
 msgid ""
@@ -2300,11 +2262,6 @@ msgid ""
 msgstr ""
 "Zmiana wrażliwości myszy i panelu dotykowego oraz wybór trybu praworęcznego "
 "lub leworęcznego"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/mouse/gnome-mouse-panel.desktop.in.in:7
-msgid "input-mouse"
-msgstr "input-mouse"
 
 #. Translators: Search terms to find the Mouse and Touchpad panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/mouse/gnome-mouse-panel.desktop.in.in:19
@@ -2414,7 +2371,7 @@ msgid "Single click, secondary button"
 msgstr "Pojedyncze kliknięcie, przycisk pomocniczy"
 
 #. add proxy to device list
-#: panels/network/cc-network-panel.c:583
+#: panels/network/cc-network-panel.c:589
 msgid "Network proxy"
 msgstr "Pośrednik sieciowy"
 
@@ -2422,18 +2379,18 @@ msgstr "Pośrednik sieciowy"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: panels/network/cc-network-panel.c:719 panels/network/net-vpn.c:167
+#: panels/network/cc-network-panel.c:725 panels/network/net-vpn.c:167
 #: panels/network/net-vpn.c:295
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: panels/network/cc-network-panel.c:783 panels/network/cc-wifi-panel.ui:304
+#: panels/network/cc-network-panel.c:789 panels/network/cc-wifi-panel.ui:304
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Coś się nie powiodło. Proszę skontaktować się z producentem oprogramowania."
 
-#: panels/network/cc-network-panel.c:789
+#: panels/network/cc-network-panel.c:795
 msgid "NetworkManager needs to be running."
 msgstr "Usługa NetworkManager musi być uruchomiona."
 
@@ -2970,7 +2927,7 @@ msgstr "Wybór pliku do zaimportowania"
 #: panels/network/connection-editor/vpn-helpers.c:182
 #: panels/printers/pp-details-dialog.c:314
 #: panels/sharing/cc-sharing-panel.c:428
-#: panels/user-accounts/cc-avatar-chooser.c:234
+#: panels/user-accounts/cc-avatar-chooser.c:235
 msgid "_Open"
 msgstr "_Otwórz"
 
@@ -3025,11 +2982,6 @@ msgstr "_BSSID"
 msgid "Control how you connect to the Internet"
 msgstr "Sterowanie sposobem łączenia z Internetem"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/network/gnome-network-panel.desktop.in.in:7
-msgid "network-workgroup"
-msgstr "network-workgroup"
-
 #. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in.in:19
 msgid ""
@@ -3042,11 +2994,6 @@ msgstr ""
 #: panels/network/gnome-wifi-panel.desktop.in.in:4
 msgid "Control how you connect to Wi-Fi networks"
 msgstr "Sterowanie sposobem łączenia z sieciami Wi-Fi"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/network/gnome-wifi-panel.desktop.in.in:7
-msgid "network-wireless"
-msgstr "network-wireless"
 
 #. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in.in:19
@@ -4070,11 +4017,6 @@ msgstr "Powiadomienia na ekranie _blokady"
 msgid "Control which notifications are displayed and what they show"
 msgstr "Sterowanie wyświetlaniem powiadomień i ich treści"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/notifications/gnome-notifications-panel.desktop.in.in:7
-msgid "preferences-system-notifications"
-msgstr "preferences-system-notifications"
-
 #. Translators: Search terms to find the Notifications panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/notifications/gnome-notifications-panel.desktop.in.in:20
 msgid "Notifications;Banner;Message;Tray;Popup;"
@@ -4089,19 +4031,19 @@ msgstr "Inne"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:620
+#: panels/online-accounts/cc-online-accounts-panel.c:626
 #, c-format
 msgid "%s Account"
 msgstr "Konto %s"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:917
+#: panels/online-accounts/cc-online-accounts-panel.c:923
 msgid "Error removing account"
 msgstr "Błąd podczas usuwania konta"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:982
+#: panels/online-accounts/cc-online-accounts-panel.c:988
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "Usunięto „<b>%s</b>”"
@@ -4113,11 +4055,6 @@ msgstr "Konta online"
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in.in:4
 msgid "Connect to your online accounts and decide what to use them for"
 msgstr "Łączenie z kontami online i ustalanie, do czego mają być używane"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/online-accounts/gnome-online-accounts-panel.desktop.in.in:7
-msgid "goa-panel"
-msgstr "goa-panel"
 
 #. Translators: Search terms to find the Online Accounts panel.
 #. Do NOT translate or localize the semicolons!
@@ -4625,11 +4562,6 @@ msgstr ""
 "Wyświetlanie stanu naładowania akumulatora i zmiana ustawień oszczędzania "
 "energii"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/power/gnome-power-panel.desktop.in.in:7
-msgid "gnome-power-manager"
-msgstr "gnome-power-manager"
-
 #. Translators: Search terms to find the Power panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/power/gnome-power-panel.desktop.in.in:19
 msgid ""
@@ -4718,11 +4650,6 @@ msgid "Add printers, view printer jobs and decide how you want to print"
 msgstr ""
 "Dodawanie drukarek, wyświetlanie zadań drukowania i ustalanie sposobu "
 "drukowania"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/printers/gnome-printers-panel.desktop.in.in:7
-msgid "printer"
-msgstr "printer"
 
 #. Translators: Search terms to find the Printers panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/printers/gnome-printers-panel.desktop.in.in:16
@@ -4818,7 +4745,7 @@ msgid "Select Printer Driver"
 msgstr "Wybór sterownika drukarki"
 
 #: panels/printers/ppd-selection-dialog.ui:40
-#: panels/user-accounts/cc-avatar-chooser.c:107
+#: panels/user-accounts/cc-avatar-chooser.c:108
 msgid "Select"
 msgstr "Wybierz"
 
@@ -5688,11 +5615,6 @@ msgid "Protect your personal information and control what others might see"
 msgstr "Ochrona informacji osobistych i kontrola nad tym, co widzą inni"
 
 #. FIXME
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/privacy/gnome-privacy-panel.desktop.in.in:8
-msgid "preferences-system-privacy"
-msgstr "preferences-system-privacy"
-
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/privacy/gnome-privacy-panel.desktop.in.in:20
 msgid ""
@@ -5767,7 +5689,7 @@ msgstr "Dodanie źródła wprowadzania"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Metody wprowadzania nie mogą być używane na ekranie logowania"
 
-#: panels/region/cc-region-panel.c:1505
+#: panels/region/cc-region-panel.c:1503
 msgid "Login _Screen"
 msgstr "_Ekran logowania"
 
@@ -5852,11 +5774,6 @@ msgid ""
 msgstr ""
 "Wybór języka wyświetlania, formatów, układów klawiatury i źródeł wprowadzania"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/region/gnome-region-panel.desktop.in.in:7
-msgid "preferences-desktop-locale"
-msgstr "preferences-desktop-locale"
-
 #. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/region/gnome-region-panel.desktop.in.in:19
 msgid "Language;Layout;Keyboard;Input;"
@@ -5891,11 +5808,6 @@ msgid ""
 "Control which applications show search results in the Activities Overview"
 msgstr ""
 "Sterowanie programami wyświetlającymi wyniki wyszukiwania na ekranie podglądu"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/search/gnome-search-panel.desktop.in.in:7
-msgid "preferences-system-search"
-msgstr "preferences-system-search"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/search/gnome-search-panel.desktop.in.in:19
@@ -6070,11 +5982,6 @@ msgstr "Katalogi"
 msgid "Control what you want to share with others"
 msgstr "Sterowanie udostępnianiem innym użytkownikom"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/sharing/gnome-sharing-panel.desktop.in.in:7
-msgid "preferences-system-sharing"
-msgstr "preferences-system-sharing"
-
 #. Translators: Search terms to find the Sharing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:16
 msgid ""
@@ -6201,11 +6108,6 @@ msgstr "Dźwięk"
 msgid "Change sound levels, inputs, outputs, and alert sounds"
 msgstr ""
 "Zmiana poziomu głośności, wejść i wyjść dźwięku oraz zdarzeń dźwiękowych"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/sound/gnome-sound-panel.desktop.in.in:7
-msgid "multimedia-volume-control"
-msgstr "multimedia-volume-control"
 
 #. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/gnome-sound-panel.desktop.in.in:20
@@ -6386,11 +6288,6 @@ msgstr "Thunderbolt"
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:4
 msgid "Manage Thunderbolt devices"
 msgstr "Zarządzanie urządzeniami Thunderbolt"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:7
-msgid "thunderbolt"
-msgstr "thunderbolt"
 
 #. Translators: those are keywords for the thunderbolt control-center panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:19
@@ -6753,11 +6650,6 @@ msgstr "Duży"
 msgid "Make it easier to see, hear, type, point and click"
 msgstr "Ułatwienia widzenia, słyszenia, pisania oraz wskazywania i klikania"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/universal-access/gnome-universal-access-panel.desktop.in.in:7
-msgid "preferences-desktop-accessibility"
-msgstr "preferences-desktop-accessibility"
-
 #. Translators: Search terms to find the Universal Access panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in.in:19
 msgid ""
@@ -7063,7 +6955,7 @@ msgstr "Firmowe konta logowania można dodawać tylko w trybie online."
 msgid "_Enterprise Login"
 msgstr "L_ogowania firmowe"
 
-#: panels/user-accounts/cc-avatar-chooser.c:230
+#: panels/user-accounts/cc-avatar-chooser.c:231
 msgid "Browse for more pictures"
 msgstr "Przeglądanie innych obrazów"
 
@@ -7436,11 +7328,6 @@ msgstr "Użytkownicy"
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:4
 msgid "Add or remove users and change your password"
 msgstr "Dodawanie lub usuwanie użytkowników i zmienianie hasła"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:7
-msgid "system-users"
-msgstr "system-users"
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:20
@@ -7854,11 +7741,6 @@ msgstr ""
 "Ustawienie mapowania przycisków i dostosowanie wrażliwości rysika dla "
 "tabletów graficznych"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: panels/wacom/gnome-wacom-panel.desktop.in.in:7
-msgid "input-tablet"
-msgstr "input-tablet"
-
 #. Translators: Search terms to find the Wacom Tablet panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:19
 msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
@@ -8054,11 +7936,6 @@ msgstr ""
 msgid "Help"
 msgstr "Pomoc"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: shell/gnome-control-center.desktop.in.in:5
-msgid "org.gnome.Settings"
-msgstr "org.gnome.Settings"
-
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: shell/gnome-control-center.desktop.in.in:17
 msgid "Preferences;Settings;"
@@ -8141,6 +8018,3 @@ msgstr[2] "%u wejść"
 #: subprojects/gvc/gvc-mixer-control.c:2736
 msgid "System Sounds"
 msgstr "Dźwięki systemowe"
-
-msgid "Scale"
-msgstr "Skalowanie"
