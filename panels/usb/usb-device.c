@@ -1,6 +1,7 @@
 /* -*- Mode: C; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*-
  *
  * Copyright (C) 2019 GNOME
+ * Copyright (C) 2019 Collabora Ltd
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,6 +40,7 @@ struct _UsbDevice
   gboolean   authorized;
   char      *name;
   char      *product_id;
+  char      *sysfs_path;
   char      *vendor;
 };
 
@@ -53,6 +55,7 @@ enum {
   PROP_AUTHORIZATION,
   PROP_NAME,
   PROP_PRODUCT_ID,
+  PROP_SYSFS_PATH,
   PROP_VENDOR
 };
 
@@ -76,6 +79,7 @@ usb_device_finalize (GObject *object)
 
   g_free (dev->name);
   g_free (dev->product_id);
+  g_free (dev->sysfs_path);
   g_free (dev->vendor);
 }
 
@@ -104,6 +108,10 @@ usb_device_get_property (GObject    *object,
 
       case PROP_PRODUCT_ID:
         g_value_set_string (value, dev->product_id);
+        break;
+
+      case PROP_SYSFS_PATH:
+        g_value_set_string (value, dev->sysfs_path);
         break;
 
       case PROP_VENDOR:
@@ -139,6 +147,11 @@ usb_device_set_property (GObject      *object,
       case PROP_PRODUCT_ID:
         g_return_if_fail (dev->product_id == NULL);
         dev->product_id = g_value_dup_string (value);
+        break;
+
+      case PROP_SYSFS_PATH:
+        g_clear_pointer (&dev->sysfs_path, g_free);
+        dev->sysfs_path = g_value_dup_string (value);
         break;
 
       case PROP_VENDOR:
@@ -190,6 +203,15 @@ usb_device_class_init (UsbDeviceClass *klass)
                                                         G_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_SYSFS_PATH,
+                                   g_param_spec_string ("sysfs_path",
+                                                        "sysfs_path",
+                                                        NULL,
+                                                        NULL,
+                                                        G_PARAM_CONSTRUCT_ONLY |
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_VENDOR,
                                    g_param_spec_string ("vendor",
                                                         "vendor",
@@ -222,6 +244,7 @@ UsbDevice *
 usb_device_new (gboolean    authorized,
                 const char *name,
                 const char *product_id,
+                const char *sysfs_path,
                 const char *vendor)
 {
   UsbDevice *dev;
@@ -230,6 +253,7 @@ usb_device_new (gboolean    authorized,
                       "authorization", authorized,
                       "name", name,
                       "product_id", product_id,
+                      "sysfs_path", sysfs_path,
                       "vendor", vendor,
                       NULL);
   return dev;
@@ -257,6 +281,14 @@ usb_device_get_authorization (UsbDevice *dev)
   g_return_val_if_fail (dev != NULL, FALSE);
 
   return dev->authorized;
+}
+
+const char *
+usb_device_get_sysfs_path (UsbDevice *dev)
+{
+  g_return_val_if_fail (USB_IS_DEVICE (dev), NULL);
+
+  return dev->sysfs_path;
 }
 
 const char *

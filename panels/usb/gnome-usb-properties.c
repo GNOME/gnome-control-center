@@ -122,18 +122,20 @@ add_single_device (GUdevDevice     *device,
   const gchar *vendor;
   const gchar *product;
   const gchar *name;
+  const gchar *sysfs_path;
   UsbDevice *dev;
   g_autoptr(GUdevDevice) parent = NULL;
 
   vendor = g_strdup (g_udev_device_get_property (device, "ID_VENDOR_ID"));
   product = g_strdup (g_udev_device_get_property (device, "ID_MODEL_ID"));
   devpath = g_strdup (g_udev_device_get_device_file (device));
+  sysfs_path = g_strdup (g_udev_device_get_sysfs_path (device));
 
   if (vendor == NULL || product == NULL)
       return;
 
   g_debug ("vendor: %s product: %s devpath: %s", vendor, product, devpath);
-  g_debug ("sysfspath: %s", g_udev_device_get_sysfs_path (device));
+  g_debug ("sysfspath: %s", sysfs_path);
 
   auth = g_strdup (g_udev_device_get_property (device, "GNOME_AUTHORIZED"));
 
@@ -144,6 +146,7 @@ add_single_device (GUdevDevice     *device,
   dev = usb_device_new (g_strcmp0 (auth, "1") == 0,
                         name,
                         product,
+                        sysfs_path,
                         vendor);
 
   entry = cc_usb_device_entry_new (dev);

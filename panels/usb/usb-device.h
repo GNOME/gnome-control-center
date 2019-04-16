@@ -31,6 +31,7 @@ G_DECLARE_FINAL_TYPE (UsbDevice, usb_device, USB, DEVICE, GObject);
 UsbDevice *   usb_device_new (gboolean        authorized,
                               const char     *name,
                               const char     *product_id,
+                              const char     *sysfs_path,
                               const char     *vendor);
 
 gboolean      usb_device_get_authorization (UsbDevice *device);
@@ -41,6 +42,8 @@ void          usb_device_set_authorization (UsbDevice *device,
 const char *  usb_device_get_name (UsbDevice *dev);
 
 const char *  usb_device_get_product_id (UsbDevice *dev);
+
+const char *  usb_device_get_sysfs_path (UsbDevice *dev);
 
 const char *  usb_device_get_vendor (UsbDevice *dev);
 
