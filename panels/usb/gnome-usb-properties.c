@@ -143,8 +143,8 @@ add_single_device (GUdevDevice     *device,
 
   dev = usb_device_new (g_strcmp0 (auth, "1") == 0,
                         name,
-                        g_ascii_strup (product, strlen (product)),
-                        g_ascii_strup (vendor, strlen (vendor)));
+                        product,
+                        vendor);
 
   entry = cc_usb_device_entry_new (dev);
   gtk_container_add (GTK_CONTAINER (self->devices_list), GTK_WIDGET (entry));
