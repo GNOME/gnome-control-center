@@ -32,14 +32,17 @@
 
 struct _CcUsbPanel
 {
-  CcPanel       parent_instance;
+  CcPanel        parent_instance;
 
-  GCancellable *cancel;
+  GCancellable  *cancel;
 
   GtkLockButton *lock_button;
 
+  /* Polkit */
+  GPermission   *permission;
+
   /* Main UI */
-  GtkWidget    *stack;
+  GtkWidget     *stack;
 };
 
 CC_PANEL_REGISTER (CcUsbPanel, cc_usb_panel)
@@ -53,13 +56,40 @@ cc_usb_panel_dispose (GObject *object)
 static void
 cc_usb_panel_constructed (GObject *object)
 {
+  CcUsbPanel *self = CC_USB_PANEL (object);
+  CcShell *shell;
+  GtkWidget *button;
+
   G_OBJECT_CLASS (cc_usb_panel_parent_class)->constructed (object);
+
+  /* Add Unlock button to shell header */
+  shell = cc_panel_get_shell (CC_PANEL (self));
+
+  button = gtk_lock_button_new (self->permission);
+
+  gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
+  gtk_widget_set_visible (button, TRUE);
+
+  cc_shell_embed_widget_in_header (shell, button);
 }
+
+static void
+on_permission_notify_cb (GPermission *permission,
+                         GParamSpec  *pspec,
+                         CcUsbPanel *panel)
+{
+  gboolean is_allowed = g_permission_get_allowed (permission);
+  g_debug ("permission: %i", is_allowed);
+
+  //gtk_widget_set_sensitive (GTK_WIDGET (panel->authmode_switch), is_allowed);
+}
+
 
 static void
 cc_usb_panel_init (CcUsbPanel *self)
 {
   GtkWidget *prefs_widget;
+  g_autoptr(GError) error = NULL;
 
   g_resources_register (cc_usb_get_resource ());
 
@@ -71,6 +101,20 @@ cc_usb_panel_init (CcUsbPanel *self)
   gtk_stack_add_named (GTK_STACK (self->stack), prefs_widget, "prefs_widget");
 
   gtk_container_add (GTK_CONTAINER (self), self->stack);
+
+  self->permission = (GPermission *)polkit_permission_new_sync (USB_PERMISSION, NULL, NULL, &error);
+  if (self->permission != NULL) {
+    g_signal_connect_object (self->permission, "notify",
+                             G_CALLBACK (on_permission_notify_cb),
+                             self,
+                             G_CONNECT_AFTER);
+
+    g_debug ("Polkit permission initialized");
+    //on_permission_changed (self);
+  } else {
+    g_warning ("Cannot create '%s' permission: %s", USB_PERMISSION, error->message);
+  }
+
 }
 
 static void
