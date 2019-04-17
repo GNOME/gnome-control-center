@@ -36,7 +36,7 @@ UsbDevice *   usb_device_new (gboolean        authorized,
 
 gboolean      usb_device_get_authorization (UsbDevice *device);
 
-void          usb_device_set_authorization (UsbDevice *device,
+gboolean      usb_device_set_authorization (UsbDevice *device,
                                             gboolean authorization);
 
 const char *  usb_device_get_name (UsbDevice *dev);

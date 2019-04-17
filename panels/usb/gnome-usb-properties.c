@@ -90,12 +90,9 @@ on_device_entry_row_activated_cb (CcUsbProperties *panel,
   device = cc_usb_device_entry_get_device (entry);
 
   authorized = !usb_device_get_authorization (device);
-  usb_device_set_authorization (device, authorized);
-  if (authorized)
-    usb_store_put_device (panel->store, device, &error);
-  else
-    usb_store_del_device (panel->store, device, &error);
-  entry_update_status (entry);
+
+  if (usb_device_set_authorization (device, authorized))
+    entry_update_status (entry);
   return;
 }
 
@@ -214,13 +211,6 @@ udev_event_cb (GUdevClient     *client,
 static void
 setup_dialog (CcUsbProperties *self)
 {
-  g_autofree gchar *path = NULL;
-
-  path = g_strdup ("/tmp/usb");
-  g_mkdir_with_parents (path, 0755);
-  self->store = usb_store_new (path);
-  g_debug ("Store at: %s", path);
-
   initialize_keyboards_list (self);
 
   gtk_widget_show_all (GTK_WIDGET (self->devices_list));

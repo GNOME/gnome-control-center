@@ -299,10 +299,42 @@ usb_device_get_vendor (UsbDevice *dev)
   return dev->vendor;
 }
 
-void
+gboolean
 usb_device_set_authorization (UsbDevice *dev, gboolean authorization)
 {
-  g_return_if_fail (dev != NULL);
+  char *command;
+  char *auth_str;
+  gint status;
+  g_autoptr(GError) error = NULL;
+
+  g_return_val_if_fail (dev != NULL, FALSE);
+
+  if (authorization)
+    auth_str = "authorized";
+  else
+    auth_str = "not_authorized";
+
+  command = g_strdup_printf ("pkexec %s/cc-usb-device-helper %s %s \"%s\" %s %s \"%s\" %s",
+                             LIBEXECDIR,
+                             "/tmp/usb",
+                             "set_auth",
+                             dev->name,
+                             dev->vendor,
+                             dev->product_id,
+                             dev->sysfs_path,
+                             auth_str);
+
+  g_spawn_command_line_sync (command,
+                             NULL, NULL,
+                             &status,
+                             &error);
+
+  if (error != NULL) {
+    g_warning ("An error occurred launching the USB helper: %s", error->message);
+    return FALSE;
+  }
 
   dev->authorized = authorization;
+
+  return TRUE;
 }
