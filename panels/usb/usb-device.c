@@ -316,7 +316,7 @@ usb_device_set_authorization (UsbDevice *dev, gboolean authorization)
 
   command = g_strdup_printf ("pkexec %s/cc-usb-device-helper %s %s \"%s\" %s %s \"%s\" %s",
                              LIBEXECDIR,
-                             "/tmp/usb",
+                             USBDBDIR,
                              "set_auth",
                              dev->name,
                              dev->vendor,

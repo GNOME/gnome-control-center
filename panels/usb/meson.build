@@ -1,5 +1,8 @@
 panels_list += cappletname
 
+statedir = get_option('localstatedir')
+usbdbdir = join_paths('/', statedir, 'lib/usb')
+
 desktop = 'gnome-@0@-panel.desktop'.format(cappletname)
 desktop_in = configure_file(
   input: desktop + '.in.in',
@@ -70,6 +73,7 @@ deps = common_deps + [
 deps += wayland_deps
 
 cflags += [
+  '-DUSBDBDIR="@0@"'.format(usbdbdir),
   '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir),
   '-DLIBEXECDIR="@0@"'.format(control_center_libexecdir)
 ]
