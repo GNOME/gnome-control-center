@@ -36,13 +36,12 @@ sources = files(
   'cc-usb-device-entry.c',
   'usb-device.c',
   'usb-io.c',
-  'usb-store.c',
-  'gnome-usb-properties.c'
+  'usb-store.c'
 )
 
 resource_data = files(
   'cc-usb-device-entry.ui',
-  'gnome-usb-properties.ui'
+  'cc-usb-panel.ui'
 )
 
 

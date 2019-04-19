@@ -16,7 +16,7 @@
     <property name="step_increment">100</property>
     <property name="page_increment">100</property>
   </object>
-  <template class="CcUsbProperties" parent="GtkBin">
+  <template class="CcUsbPanel" parent="CcPanel">
     <property name="visible">True</property>
     <property name="can_focus">True</property>
     <child>
@@ -25,7 +25,7 @@
         <property name="can_focus">True</property>
         <property name="shadow_type">none</property>
         <property name="hscrollbar_policy">never</property>
-        <signal name="size-allocate" handler="on_content_size_changed" object="CcUsbProperties" swapped="yes"/>
+        <signal name="size-allocate" handler="on_content_size_changed" object="CcUsbPanel" swapped="yes"/>
         <child>
           <object class="GtkBox" id="prefs_widget">
             <property name="visible">True</property>
@@ -119,7 +119,7 @@
                         <property name="active">True</property>
                         <signal name="state-set"
                                 handler="on_keyboard_protection_state_set_cb"
-                                object="CcUsbProperties"
+                                object="CcUsbPanel"
                                 swapped="yes" />
                       </object>
                     </child>
@@ -194,7 +194,7 @@
                                 <property name="can_focus">True</property>
                                 <signal name="row-activated"
                                         handler="on_device_entry_row_activated_cb"
-                                        object="CcUsbProperties"
+                                        object="CcUsbPanel"
                                         swapped="yes" />
                               </object>
                             </child>
