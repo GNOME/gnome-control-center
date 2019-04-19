@@ -243,8 +243,8 @@ on_permission_notify_cb (GPermission *permission,
                          CcUsbPanel  *panel)
 {
   gboolean is_allowed = g_permission_get_allowed (permission);
-  g_debug ("permission: %i", is_allowed);
 
+  gtk_widget_set_sensitive (GTK_WIDGET (panel->devices_box), is_allowed);
 }
 
 
@@ -274,6 +274,7 @@ cc_usb_panel_init (CcUsbPanel *self)
                              G_CONNECT_AFTER);
 
     g_debug ("Polkit permission initialized");
+    on_permission_notify_cb (self->permission, NULL, self);
   } else {
     g_warning ("Cannot create '%s' permission: %s", USB_PERMISSION, error->message);
   }
