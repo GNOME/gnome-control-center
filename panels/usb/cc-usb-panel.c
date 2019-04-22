@@ -55,6 +55,7 @@ struct _CcUsbPanel
   GtkBox *devices_box;
   GtkListBox *devices_list;
   GtkStack *devices_stack;
+  GtkSwitch *keyboard_protection_switch;
 
   GHashTable *devices;
   GUdevClient *udev_client;
@@ -252,6 +253,7 @@ on_permission_notify_cb (GPermission *permission,
   gboolean is_allowed = g_permission_get_allowed (permission);
 
   gtk_widget_set_sensitive (GTK_WIDGET (panel->devices_box), is_allowed);
+  gtk_widget_set_sensitive (GTK_WIDGET (panel->keyboard_protection_switch), is_allowed);
 }
 
 
@@ -301,6 +303,7 @@ cc_usb_panel_class_init (CcUsbPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUsbPanel, devices_box);
   gtk_widget_class_bind_template_child (widget_class, CcUsbPanel, devices_list);
   gtk_widget_class_bind_template_child (widget_class, CcUsbPanel, devices_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcUsbPanel, keyboard_protection_switch);
 
   gtk_widget_class_bind_template_callback (widget_class, on_keyboard_protection_state_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_device_entry_row_activated_cb);
