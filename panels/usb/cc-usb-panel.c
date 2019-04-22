@@ -54,6 +54,7 @@ struct _CcUsbPanel
 
   GtkBox *devices_box;
   GtkListBox *devices_list;
+  GtkStack *devices_stack;
 
   GHashTable *devices;
   GUdevClient *udev_client;
@@ -159,6 +160,8 @@ add_single_device (GUdevDevice     *device,
   entry = cc_usb_device_entry_new (dev);
   gtk_container_add (GTK_CONTAINER (self->devices_list), GTK_WIDGET (entry));
   g_hash_table_insert (self->devices, (gpointer) devpath, entry);
+
+  gtk_stack_set_visible_child_name (self->devices_stack, "have-keyboards");
 }
 
 static void
@@ -200,6 +203,10 @@ remove_device (GUdevDevice *device,
 
   gtk_widget_destroy (GTK_WIDGET (entry));
   g_hash_table_remove (self->devices, devpath);
+
+  if (g_hash_table_size (self->devices) == 0)
+    gtk_stack_set_visible_child_name (self->devices_stack, "no-keyboards");
+
 }
 
 static void
@@ -279,6 +286,7 @@ cc_usb_panel_init (CcUsbPanel *self)
     g_warning ("Cannot create '%s' permission: %s", USB_PERMISSION, error->message);
   }
 
+  gtk_stack_set_visible_child_name (self->devices_stack, "no-keyboards");
   initialize_keyboards_list (self);
 }
 
@@ -292,6 +300,7 @@ cc_usb_panel_class_init (CcUsbPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcUsbPanel, devices_box);
   gtk_widget_class_bind_template_child (widget_class, CcUsbPanel, devices_list);
+  gtk_widget_class_bind_template_child (widget_class, CcUsbPanel, devices_stack);
 
   gtk_widget_class_bind_template_callback (widget_class, on_keyboard_protection_state_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_device_entry_row_activated_cb);
