@@ -73,6 +73,9 @@ extern GType cc_wacom_panel_get_type (void);
 #ifdef BUILD_NETWORK
 extern void cc_wifi_panel_static_init_func (void);
 #endif /* BUILD_NETWORK */
+#ifdef HAVE_WAYLAND
+extern void cc_usb_panel_static_init_func (void);
+#endif /* HAVE_WAYLAND */
 #ifdef BUILD_WACOM
 extern void cc_wacom_panel_static_init_func (void);
 #endif /* BUILD_WACOM */
@@ -118,7 +121,7 @@ static CcPanelLoaderVtable default_panels[] =
 #endif
   PANEL_TYPE("universal-access", cc_ua_panel_get_type,                   NULL),
 #ifdef HAVE_WAYLAND
-  PANEL_TYPE("usb",              cc_usb_panel_get_type,                  NULL),
+  PANEL_TYPE("usb",              cc_usb_panel_get_type,                  cc_usb_panel_static_init_func),
 #endif
   PANEL_TYPE("user-accounts",    cc_user_panel_get_type,                 NULL),
 #ifdef BUILD_WACOM

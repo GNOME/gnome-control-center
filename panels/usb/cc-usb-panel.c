@@ -20,6 +20,7 @@
  *
  */
 
+#include "shell/cc-application.h"
 #include "cc-usb-panel.h"
 #include "cc-usb-resources.h"
 
@@ -30,6 +31,10 @@
 
 #include <glib/gi18n.h>
 #include <polkit/polkit.h>
+
+#ifdef GDK_WINDOWING_WAYLAND
+#include <gdk/gdkwayland.h>
+#endif
 
 #define USB_PERMISSION "org.gnome.controlcenter.usb"
 #define KEYBOARD_PROTECTION "keyboard-protection"
@@ -68,6 +73,27 @@ static void on_device_entry_row_activated_cb (CcUsbPanel    *panel,
                                               GtkListBoxRow *row);
 
 CC_PANEL_REGISTER (CcUsbPanel, cc_usb_panel)
+
+void cc_usb_panel_static_init_func (void)
+{
+  CcApplication *application;
+  GdkDisplay *display;
+  gboolean is_wayland = FALSE;
+
+  #ifdef GDK_WINDOWING_WAYLAND
+    display = gdk_display_get_default ();
+    if (GDK_IS_WAYLAND_DISPLAY (display))
+      is_wayland = TRUE;
+  #endif /* GDK_WINDOWING_WAYLAND */
+
+  application = CC_APPLICATION (g_application_get_default ());
+
+  cc_shell_model_set_panel_visibility (cc_application_get_model (application),
+                                       "usb",
+                                       is_wayland ? CC_PANEL_VISIBLE : CC_PANEL_HIDDEN);
+
+  g_debug ("USB panel visible: %s", is_wayland ? "yes" : "no");
+}
 
 static void
 on_device_entry_row_activated_cb (CcUsbPanel    *panel,
