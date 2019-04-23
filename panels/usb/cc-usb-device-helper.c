@@ -76,13 +76,15 @@ set_auth (char    *path,
 
   uevent_path = g_strconcat (sysfs_path, "/uevent", NULL);
 
+  /* To reload the udev rules we echo "change" into the "uevent" sysfs attribute
+   * of the device. The same thing that "udevadm trigger" does. */
   command = g_strdup_printf ("/bin/sh -c 'echo change | /usr/bin/tee %s'", uevent_path);
   g_spawn_command_line_sync (command,
                              NULL, NULL,
                              &status,
                              &error);
-  /* If we succeeded at storing devices properties we return TRUE even if we fail
-   * at reloading these properties. If that's the case the user just need to
+  /* If we succeeded at storing devices properties we return TRUE, even if we fail
+   * at reloading these properties. If it happens, the user just need to
    * unplug and replug the device. */
   if (error != NULL)
     g_warning ("Error reloading device properties: %s", error->message);
