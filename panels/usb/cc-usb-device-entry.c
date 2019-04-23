@@ -63,7 +63,7 @@ entry_update_status (CcUsbDeviceEntry *entry)
   g_autofree char *label = NULL;
 
   authorized = usb_device_get_authorization (entry->device);
-  label = authorized ? g_strdup_printf ("Full") : g_strdup_printf ("Limited");
+  label = authorized ? g_strdup_printf (_("Full")) : g_strdup_printf (_("Limited"));
   gtk_label_set_label (entry->status_label, label);
 }
 
