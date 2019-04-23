@@ -32,12 +32,13 @@
 #include <polkit/polkit.h>
 
 #define USB_PERMISSION "org.gnome.controlcenter.usb"
+#define KEYBOARD_PROTECTION "keyboard-protection"
 
 struct _CcUsbPanel
 {
   CcPanel        parent_instance;
 
-  GCancellable  *cancel;
+  GSettings     *privacy_settings;
 
   /* Headerbar */
   GtkLockButton *lock_button;
@@ -49,24 +50,19 @@ struct _CcUsbPanel
   GtkWidget     *stack;
 
   /* Devices */
-  guint device_added_id;
-  guint device_removed_id;
+  guint          device_added_id;
+  guint          device_removed_id;
 
-  GtkBox *devices_box;
-  GtkListBox *devices_list;
-  GtkStack *devices_stack;
-  GtkSwitch *keyboard_protection_switch;
+  GtkBox        *devices_box;
+  GtkListBox    *devices_list;
+  GtkStack      *devices_stack;
+  GtkSwitch     *keyboard_protection_switch;
 
-  GHashTable *devices;
-  GUdevClient *udev_client;
+  GHashTable    *devices;
+  GUdevClient   *udev_client;
 
-  UsbStore *store;
+  UsbStore      *store;
 };
-
-/* Panel signals */
-static gboolean on_keyboard_protection_state_set_cb (CcUsbPanel *panel,
-                                                     gboolean    state,
-                                                     GtkSwitch  *toggle);
 
 static void on_device_entry_row_activated_cb (CcUsbPanel    *panel,
                                               GtkListBoxRow *row);
@@ -77,14 +73,6 @@ static void
 cc_usb_panel_dispose (GObject *object)
 {
   G_OBJECT_CLASS (cc_usb_panel_parent_class)->dispose (object);
-}
-
-static gboolean
-on_keyboard_protection_state_set_cb (CcUsbPanel *panel,
-                                     gboolean    enable,
-                                     GtkSwitch  *toggle)
-{
-  return TRUE;
 }
 
 static void
@@ -211,6 +199,23 @@ remove_device (GUdevDevice *device,
 }
 
 static void
+on_keyboard_settings_changed (GSettings  *settings,
+                              const char *key,
+                              CcUsbPanel *panel)
+{
+  gboolean protection;
+  gboolean is_allowed;
+
+  if (g_str_equal (key, KEYBOARD_PROTECTION) == FALSE)
+    return;
+
+  protection = g_settings_get_boolean (settings, KEYBOARD_PROTECTION);
+  is_allowed = g_permission_get_allowed (panel->permission);
+
+  gtk_widget_set_sensitive (GTK_WIDGET (panel->devices_box), protection && is_allowed);
+}
+
+static void
 udev_event_cb (GUdevClient *client,
                gchar       *action,
                GUdevDevice *device,
@@ -250,9 +255,13 @@ on_permission_notify_cb (GPermission *permission,
                          GParamSpec  *pspec,
                          CcUsbPanel  *panel)
 {
-  gboolean is_allowed = g_permission_get_allowed (permission);
+  gboolean protection;
+  gboolean is_allowed;
 
-  gtk_widget_set_sensitive (GTK_WIDGET (panel->devices_box), is_allowed);
+  protection = g_settings_get_boolean (panel->privacy_settings, KEYBOARD_PROTECTION);
+  is_allowed = g_permission_get_allowed (permission);
+
+  gtk_widget_set_sensitive (GTK_WIDGET (panel->devices_box), protection && is_allowed);
   gtk_widget_set_sensitive (GTK_WIDGET (panel->keyboard_protection_switch), is_allowed);
 }
 
@@ -266,6 +275,14 @@ cc_usb_panel_init (CcUsbPanel *self)
   g_resources_register (cc_usb_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
+  g_settings_bind (self->privacy_settings, KEYBOARD_PROTECTION,
+                   self->keyboard_protection_switch, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  g_signal_connect (self->privacy_settings, "changed",
+                    G_CALLBACK (on_keyboard_settings_changed), self);
 
   self->devices = g_hash_table_new_full (g_str_hash, g_str_equal,
                                          (GDestroyNotify) g_free,
@@ -305,7 +322,6 @@ cc_usb_panel_class_init (CcUsbPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUsbPanel, devices_stack);
   gtk_widget_class_bind_template_child (widget_class, CcUsbPanel, keyboard_protection_switch);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_keyboard_protection_state_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_device_entry_row_activated_cb);
 
   object_class->dispose = cc_usb_panel_dispose;
