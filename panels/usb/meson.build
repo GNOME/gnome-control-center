@@ -62,14 +62,9 @@ deps = common_deps + [
   polkit_gobject_dep,
   x11_dep,
   xi_dep,
-  libudev
+  libudev,
+  wayland_deps
 ]
-
-#if enable_wayland
-#  deps += wayland_deps
-#endif
-
-deps += wayland_deps
 
 cflags += [
   '-DUSBDBDIR="@0@"'.format(usbdbdir),
