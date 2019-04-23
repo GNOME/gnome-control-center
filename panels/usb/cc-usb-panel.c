@@ -70,12 +70,6 @@ static void on_device_entry_row_activated_cb (CcUsbPanel    *panel,
 CC_PANEL_REGISTER (CcUsbPanel, cc_usb_panel)
 
 static void
-cc_usb_panel_dispose (GObject *object)
-{
-  G_OBJECT_CLASS (cc_usb_panel_parent_class)->dispose (object);
-}
-
-static void
 on_device_entry_row_activated_cb (CcUsbPanel    *panel,
                                   GtkListBoxRow *row)
 {
@@ -265,6 +259,23 @@ on_permission_notify_cb (GPermission *permission,
   gtk_widget_set_sensitive (GTK_WIDGET (panel->keyboard_protection_switch), is_allowed);
 }
 
+static void
+cc_usb_panel_dispose (GObject *object)
+{
+  G_OBJECT_CLASS (cc_usb_panel_parent_class)->dispose (object);
+}
+
+static void
+cc_usb_panel_finalize (GObject *object)
+{
+  CcUsbPanel *self = CC_USB_PANEL (object);
+
+  g_clear_pointer (&self->devices, g_hash_table_unref);
+  g_clear_object (&self->permission);
+  g_clear_object (&self->privacy_settings);
+
+  G_OBJECT_CLASS (cc_usb_panel_parent_class)->finalize (object);
+}
 
 static void
 cc_usb_panel_init (CcUsbPanel *self)
@@ -285,8 +296,7 @@ cc_usb_panel_init (CcUsbPanel *self)
                     G_CALLBACK (on_keyboard_settings_changed), self);
 
   self->devices = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                         (GDestroyNotify) g_free,
-                                         (GDestroyNotify) g_object_unref);
+                                         g_free, NULL);
 
   self->udev_client = g_udev_client_new (subsystems);
   g_signal_connect (self->udev_client, "uevent",
@@ -326,4 +336,5 @@ cc_usb_panel_class_init (CcUsbPanelClass *klass)
 
   object_class->dispose = cc_usb_panel_dispose;
   object_class->constructed = cc_usb_panel_constructed;
+  object_class->finalize = cc_usb_panel_finalize;
 }

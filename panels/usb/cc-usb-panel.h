@@ -25,7 +25,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_USB_PANEL (cc_usb_panel_get_type ())
+#define CC_TYPE_USB_PANEL cc_usb_panel_get_type ()
+
 G_DECLARE_FINAL_TYPE (CcUsbPanel, cc_usb_panel, CC, USB_PANEL, CcPanel)
 
 G_END_DECLS
