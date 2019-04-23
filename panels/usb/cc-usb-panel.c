@@ -54,10 +54,6 @@ struct _CcUsbPanel
   /* Main UI */
   GtkWidget     *stack;
 
-  /* Devices */
-  guint          device_added_id;
-  guint          device_removed_id;
-
   GtkBox        *devices_box;
   GtkListBox    *devices_list;
   GtkStack      *devices_stack;
