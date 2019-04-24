@@ -263,6 +263,15 @@ cc_wacom_stylus_page_class_init (CcWacomStylusPageClass *klass)
 }
 
 static void
+add_marks (GtkScale *scale)
+{
+	gint i;
+
+	for (i = 0; i < N_PRESSURE_CURVES; i++)
+		gtk_scale_add_mark (scale, i, GTK_POS_BOTTOM, NULL);
+}
+
+static void
 cc_wacom_stylus_page_init (CcWacomStylusPage *page)
 {
 	GError *error = NULL;
@@ -292,6 +301,9 @@ cc_wacom_stylus_page_init (CcWacomStylusPage *page)
 	box = WID ("stylus-grid");
 	gtk_container_add (GTK_CONTAINER (page), box);
 	gtk_widget_set_vexpand (GTK_WIDGET (box), TRUE);
+
+	add_marks (GTK_SCALE (WID ("scale-tip-feel")));
+	add_marks (GTK_SCALE (WID ("scale-eraser-feel")));
 
 	g_signal_connect (WID ("scale-tip-feel"), "value-changed",
 			  G_CALLBACK (tip_feel_value_changed_cb), page);
