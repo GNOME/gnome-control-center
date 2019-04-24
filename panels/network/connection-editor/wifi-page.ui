@@ -76,12 +76,17 @@
       </packing>
     </child>
     <child>
-      <object class="GtkEntry" id="entry_cloned_mac">
+      <object class="GtkComboBoxText" id="combo_cloned_mac">
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
+        <property name="can_focus">False</property>
+        <property name="has_entry">True</property>
         <property name="hexpand">True</property>
-        <property name="invisible_char">●</property>
-        <property name="invisible_char_set">True</property>
+        <property name="active_id">0</property>
+        <child internal-child="entry">
+          <object class="GtkEntry">
+            <property name="can_focus">True</property>
+          </object>
+        </child>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -96,7 +101,7 @@
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">_Cloned Address</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">entry_cloned_mac</property>
+        <property name="mnemonic_widget">combo_cloned_mac</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
