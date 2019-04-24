@@ -389,6 +389,50 @@ ce_page_trim_address (const gchar *addr)
         return g_strdup (addr);
 }
 
+void
+ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo, const char *current)
+{
+       GtkWidget *entry;
+       static const char *entries[][2] = { { "preserve",  N_("Preserve") },
+                                           { "permanent", N_("Permanent") },
+                                           { "random",    N_("Random") },
+                                           { "stable",    N_("Stable") } };
+       int i, active = -1;
+
+       gtk_widget_set_tooltip_text (GTK_WIDGET (combo),
+               _("The MAC address entered here will be used as hardware address for "
+                 "the network device this connection is activated on. This feature is "
+                 "known as MAC cloning or spoofing. Example: 00:11:22:33:44:55"));
+
+       gtk_combo_box_text_remove_all (combo);
+
+       for (i = 0; i < G_N_ELEMENTS (entries); i++) {
+               gtk_combo_box_text_append (combo, entries[i][0], _(entries[i][1]));
+               if (g_strcmp0 (current, entries[i][0]) == 0)
+                       active = i;
+       }
+
+       if (active != -1) {
+               gtk_combo_box_set_active (GTK_COMBO_BOX (combo), active);
+       } else if (current && current[0]) {
+               entry = gtk_bin_get_child (GTK_BIN (combo));
+               g_assert (entry);
+               gtk_entry_set_text (GTK_ENTRY (entry), current);
+       }
+}
+
+char *
+ce_page_cloned_mac_get (GtkComboBoxText *combo)
+{
+       const char *id;
+
+       id = gtk_combo_box_get_active_id (GTK_COMBO_BOX (combo));
+       if (id)
+               return g_strdup (id);
+
+       return gtk_combo_box_text_get_active_text (combo);
+}
+
 gboolean
 ce_page_address_is_valid (const gchar *addr)
 {
@@ -429,6 +473,19 @@ ce_page_address_is_valid (const gchar *addr)
         }
 
         return TRUE;
+}
+
+gboolean
+ce_page_cloned_mac_combo_valid (GtkComboBoxText *combo)
+{
+       g_autofree gchar *active_text = NULL;
+
+       if (gtk_combo_box_get_active (GTK_COMBO_BOX (combo)) != -1)
+               return TRUE;
+
+       active_text = gtk_combo_box_text_get_active_text (combo);
+
+       return ce_page_address_is_valid (active_text);
 }
 
 const gchar *

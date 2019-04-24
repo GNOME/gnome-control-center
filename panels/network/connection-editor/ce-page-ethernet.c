@@ -65,7 +65,7 @@ connect_ethernet_page (CEPageEthernet *page)
 
         /* Cloned MAC address */
         cloned_mac = nm_setting_wired_get_cloned_mac_address (setting);
-        gtk_entry_set_text (GTK_ENTRY (page->cloned_mac), cloned_mac ? cloned_mac : "");
+        ce_page_setup_cloned_mac_combo (page->cloned_mac, cloned_mac);
         g_signal_connect_swapped (page->cloned_mac, "changed", G_CALLBACK (ce_page_changed), page);
 
         /* MTU */
@@ -89,6 +89,7 @@ ui_to_setting (CEPageEthernet *page)
         gchar *cloned_mac = NULL;
         const gchar *text;
         GtkWidget *entry;
+        GtkComboBoxText *combo;
 
         entry = gtk_bin_get_child (GTK_BIN (page->device_mac));
         if (entry) {
@@ -96,8 +97,8 @@ ui_to_setting (CEPageEthernet *page)
                 device_mac = ce_page_trim_address (text);
         }
 
-        text = gtk_entry_get_text (GTK_ENTRY (page->cloned_mac));
-        cloned_mac = ce_page_trim_address (text);
+        combo = page->cloned_mac;
+        cloned_mac = ce_page_cloned_mac_get (combo);
 
         g_object_set (page->setting_wired,
                       NM_SETTING_WIRED_MAC_ADDRESS, device_mac,
@@ -120,6 +121,7 @@ validate (CEPage        *page,
 {
         CEPageEthernet *self = CE_PAGE_ETHERNET (page);
         GtkWidget *entry;
+        GtkComboBoxText *combo;
         gboolean ret = TRUE;
 
         entry = gtk_bin_get_child (GTK_BIN (self->device_mac));
@@ -132,11 +134,12 @@ validate (CEPage        *page,
                 }
         }
 
-        if (!ce_page_address_is_valid (gtk_entry_get_text (GTK_ENTRY (self->cloned_mac)))) {
-                widget_set_error (GTK_WIDGET (self->cloned_mac));
+        combo = self->cloned_mac;
+        if (!ce_page_cloned_mac_combo_valid (combo)) {
+                widget_set_error (gtk_bin_get_child (GTK_BIN (combo)));
                 ret = FALSE;
         } else {
-                widget_unset_error (GTK_WIDGET (self->cloned_mac));
+                widget_unset_error (gtk_bin_get_child (GTK_BIN (combo)));
         }
 
         if (!ret)
@@ -175,7 +178,7 @@ ce_page_ethernet_new (NMConnection     *connection,
 
         page->name = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (page)->builder, "entry_name"));
         page->device_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_mac"));
-        page->cloned_mac = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (page)->builder, "entry_cloned_mac"));
+        page->cloned_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_cloned_mac"));
         page->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "spin_mtu"));
         page->mtu_label = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "label_mtu"));
 
