@@ -105,10 +105,12 @@ on_device_entry_row_activated_cb (CcUsbPanel    *panel,
   entry = CC_USB_DEVICE_ENTRY (row);
   device = cc_usb_device_entry_get_device (entry);
 
+  /* We toggle the authorization level */
   authorized = !usb_device_get_authorization (device);
 
   if (usb_device_set_authorization (device, authorized))
     entry_update_status (entry);
+
   return;
 }
 
@@ -126,8 +128,8 @@ device_is_keyboard (GUdevDevice *device)
 }
 
 static void
-add_single_device (GUdevDevice     *device,
-                   CcUsbPanel *self)
+add_single_device (GUdevDevice *device,
+                   CcUsbPanel  *self)
 {
   CcUsbDeviceEntry *entry;
   g_autofree const char *auth = NULL;
@@ -192,14 +194,8 @@ remove_device (GUdevDevice *device,
 {
   CcUsbDeviceEntry *entry;
   g_autofree const gchar *devpath = NULL;
-  const gchar *vendor;
-  const gchar *product;
 
-  vendor = g_strdup (g_udev_device_get_property (device, "ID_VENDOR_ID"));
-  product = g_strdup (g_udev_device_get_property (device, "ID_MODEL_ID"));
   devpath = g_strdup (g_udev_device_get_device_file (device));
-
-  g_debug ("vendor: %s product: %s devpath: %s", vendor, product, devpath);
   entry = g_hash_table_lookup (self->devices, devpath);
 
   /*If the removed device was not in the list we do nothing. */
@@ -211,7 +207,6 @@ remove_device (GUdevDevice *device,
 
   if (g_hash_table_size (self->devices) == 0)
     gtk_stack_set_visible_child_name (self->devices_stack, "no-keyboards");
-
 }
 
 static void
@@ -222,6 +217,7 @@ on_keyboard_settings_changed (GSettings  *settings,
   gboolean protection;
   gboolean is_allowed;
 
+  /* We react only if the keyboard-protection property changed. */
   if (g_str_equal (key, KEYBOARD_PROTECTION) == FALSE)
     return;
 

@@ -31,20 +31,20 @@ G_BEGIN_DECLS
 #define USB_TYPE_STORE usb_store_get_type ()
 G_DECLARE_FINAL_TYPE (UsbStore, usb_store, USB, STORE, GObject);
 
-UsbStore *       usb_store_new (const char *path);
+UsbStore *  usb_store_new (const char *path);
 
-gboolean          usb_store_put_device (UsbStore  *store,
-                                        UsbDevice *device,
-                                        GError   **error);
+gboolean    usb_store_put_device (UsbStore  *store,
+                                  UsbDevice *device,
+                                  GError   **error);
 
-UsbDevice *      usb_store_get_device (UsbStore    *store,
-                                       const gchar *vendor,
-                                       const gchar *product_id,
-                                       GError     **error);
+UsbDevice * usb_store_get_device (UsbStore    *store,
+                                  const gchar *vendor,
+                                  const gchar *product_id,
+                                  GError     **error);
 
-gboolean          usb_store_del_device (UsbStore  *store,
-                                        UsbDevice *device,
-                                        GError   **error);
+gboolean    usb_store_del_device (UsbStore  *store,
+                                  UsbDevice *device,
+                                  GError   **error);
 
 G_END_DECLS
 

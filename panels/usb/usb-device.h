@@ -28,11 +28,11 @@ G_BEGIN_DECLS
 #define USB_TYPE_DEVICE usb_device_get_type ()
 G_DECLARE_FINAL_TYPE (UsbDevice, usb_device, USB, DEVICE, GObject);
 
-UsbDevice *   usb_device_new (gboolean        authorized,
-                              const char     *name,
-                              const char     *product_id,
-                              const char     *sysfs_path,
-                              const char     *vendor);
+UsbDevice *   usb_device_new (gboolean    authorized,
+                              const char *name,
+                              const char *product_id,
+                              const char *sysfs_path,
+                              const char *vendor);
 
 gboolean      usb_device_get_authorization (UsbDevice *device);
 

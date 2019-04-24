@@ -26,12 +26,13 @@
 
 #include <string.h>
 
+#define DEVICE_GROUP "device"
+
 struct _UsbStore
 {
   GObject object;
 
   GFile  *root;
-  GFile  *domains;
   GFile  *devices;
 };
 
@@ -57,7 +58,6 @@ usb_store_finalize (GObject *object)
   UsbStore *store = USB_STORE (object);
 
   g_clear_object (&store->root);
-  g_clear_object (&store->domains);
   g_clear_object (&store->devices);
 
   G_OBJECT_CLASS (usb_store_parent_class)->finalize (object);
@@ -112,7 +112,6 @@ usb_store_constructed (GObject *obj)
   UsbStore *store = USB_STORE (obj);
 
   store->devices = g_file_get_child (store->root, "devices");
-  store->domains = g_file_get_child (store->root, "domains");
 }
 
 static void
@@ -139,11 +138,7 @@ usb_store_class_init (UsbStoreClass *klass)
                                      store_props);
 }
 
-#define DOMAIN_GROUP "domain"
-#define DEVICE_GROUP "device"
-
 /* public methods */
-
 UsbStore *
 usb_store_new (const char *path)
 {
@@ -242,6 +237,7 @@ usb_store_get_device (UsbStore    *store,
   g_return_val_if_fail (USB_IS_STORE (store), NULL);
   g_return_val_if_fail (error == NULL || *error == NULL, NULL);
 
+  /* As an uid we use a combination of vendor and product id. */
   uid = g_strdup_printf ("%s_%s", vendor, product_id);
 
   db = g_file_get_child (store->devices, uid);
@@ -292,10 +288,12 @@ usb_store_del_device (UsbStore  *store,
 
   vendor = usb_device_get_vendor (device);
   product_id = usb_device_get_product_id (device);
+
+  /* As an uid we use a combination of vendor and product id. */
   uid = g_strdup_printf ("%s_%s", vendor, product_id);
 
   devpath = g_file_get_child (store->devices, uid);
-  g_debug ("%s", g_file_get_path (devpath));
+  g_debug ("Deleting the device: %s", g_file_get_path (devpath));
   ok = g_file_delete (devpath, NULL, error);
 
   return ok;

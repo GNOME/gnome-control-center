@@ -34,9 +34,9 @@ G_DEFINE_AUTOPTR_CLEANUP_FUNC (FILE, fclose);
 
 int
 usb_open (const char *path,
-          int flags,
-          int mode,
-          GError **error)
+          int         flags,
+          int         mode,
+          GError    **error)
 {
   int fd;
 
@@ -57,7 +57,7 @@ usb_open (const char *path,
 }
 
 gboolean
-usb_close (int fd,
+usb_close (int      fd,
            GError **error)
 {
   int r;

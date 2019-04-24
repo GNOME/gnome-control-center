@@ -48,25 +48,12 @@ struct _UsbDevice
 enum {
   PROP_0,
 
-  /* internal properties */
-  PROP_OBJECT_ID,
-
-  /* exported properties */
   PROP_AUTHORIZATION,
   PROP_NAME,
   PROP_PRODUCT_ID,
   PROP_SYSFS_PATH,
   PROP_VENDOR
 };
-
-//static GParamSpec *props[PROP_LAST] = {NULL, };
-
-enum {
-  SIGNAL_AUTHORIZATION_CHANGED,
-  SIGNAL_LAST
-};
-
-static guint signals[SIGNAL_LAST] = {0};
 
 G_DEFINE_TYPE (UsbDevice,
                usb_device,
@@ -145,7 +132,7 @@ usb_device_set_property (GObject      *object,
         break;
 
       case PROP_PRODUCT_ID:
-        g_return_if_fail (dev->product_id == NULL);
+        g_clear_pointer (&dev->product_id, g_free);
         dev->product_id = g_value_dup_string (value);
         break;
 
@@ -234,8 +221,6 @@ device_set_authorization_internal (UsbDevice *dev,
     return;
 
   dev->authorized = authorized;
-
-  g_signal_emit (dev, signals[SIGNAL_AUTHORIZATION_CHANGED], 0, before);
 }
 
 /* public methods */
@@ -278,7 +263,7 @@ usb_device_get_product_id (UsbDevice *dev)
 gboolean
 usb_device_get_authorization (UsbDevice *dev)
 {
-  g_return_val_if_fail (dev != NULL, FALSE);
+  g_return_val_if_fail (USB_IS_DEVICE (dev), FALSE);
 
   return dev->authorized;
 }
