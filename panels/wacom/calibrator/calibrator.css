@@ -1,25 +1,25 @@
-window {
+#calibrator {
     background-color: #000;
 }
 
-* {
+#calibrator * {
     color: #fff;
 }
 
-label {
+#calibrator label {
     font-size: larger;
 }
 
-#title {
+#calibrator #title {
     font-weight: bold;
     color: #888;
 }
 
-#error {
+#calibrator #error {
     font-weight: bold;
 }
 
-#target {
+#calibrator #target {
     background-image: url('target.svg');
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -36,12 +36,12 @@ label {
     100% { background-size: 0px }
 }
 
-#target:not(disabled) {
+#calibrator #target:not(disabled) {
     animation: target-enabled-animation 1 ease 0.5s;
     background-size: 100px;
 }
 
-#target:disabled {
+#calibrator #target:disabled {
     animation: target-disabled-animation 1 ease 0.2s;
     background-size: 0px;
 }
