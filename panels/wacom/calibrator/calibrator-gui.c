@@ -46,6 +46,7 @@ struct CalibArea
   GtkBuilder *builder;
   GtkWidget  *error_revealer;
   GtkWidget  *clock;
+  GtkCssProvider *style_provider;
 
   FinishCallback callback;
   gpointer       user_data;
@@ -310,7 +311,6 @@ calib_area_new (GdkScreen      *screen,
   GdkWindow *window;
   GdkCursor *cursor;
 #endif /* FAKE_AREA */
-  GtkCssProvider *provider;
   GtkGesture *press;
 
   g_return_val_if_fail (callback, NULL);
@@ -328,11 +328,10 @@ calib_area_new (GdkScreen      *screen,
   calib_area->window = GTK_WIDGET (gtk_builder_get_object (calib_area->builder, "window"));
   calib_area->error_revealer = GTK_WIDGET (gtk_builder_get_object (calib_area->builder, "error_revealer"));
   calib_area->clock = GTK_WIDGET (gtk_builder_get_object (calib_area->builder, "clock"));
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/wacom/calibrator/calibrator.css");
+  calib_area->style_provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (calib_area->style_provider, "/org/gnome/control-center/wacom/calibrator/calibrator.css");
   gtk_style_context_add_provider_for_screen (gtk_widget_get_screen (calib_area->window),
-                                             GTK_STYLE_PROVIDER (provider),
+                                             GTK_STYLE_PROVIDER (calib_area->style_provider),
                                              GTK_STYLE_PROVIDER_PRIORITY_USER);
 
   cc_clock_set_duration (CC_CLOCK (calib_area->clock), MAX_TIME);
@@ -420,6 +419,8 @@ calib_area_free (CalibArea *area)
 {
   g_return_if_fail (area != NULL);
 
+  gtk_style_context_remove_provider_for_screen (gtk_widget_get_screen (area->window),
+                                                GTK_STYLE_PROVIDER (area->style_provider));
   gtk_widget_destroy (area->window);
   g_free (area);
 }
