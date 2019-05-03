@@ -447,8 +447,7 @@ is_valid_username (const gchar *username, gchar **tip)
 }
 
 GdkPixbuf *
-round_image (GdkPixbuf *pixbuf,
-             gint       icon_size)
+round_image (GdkPixbuf *pixbuf)
 {
         GdkPixbuf *dest = NULL;
         cairo_surface_t *surface;
