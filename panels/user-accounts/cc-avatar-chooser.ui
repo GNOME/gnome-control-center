@@ -2,17 +2,29 @@
 <interface>
   <!-- interface-requires gtk+ 3.8 -->
   <template class="CcAvatarChooser" parent="GtkPopover">
-    <property name="height-request">360</property>
-    <property name="width-request">480</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
+        <property name="border-width">10</property>
+        <child>
+          <object class="GtkFlowBox" id="user_flowbox">
+            <property name="visible">True</property>
+            <property name="border-width">10</property>
+            <property name="selection-mode">none</property>
+            <property name="homogeneous">True</property>
+            <property name="max-children-per-line">5</property>
+            <property name="column-spacing">10</property>
+          </object>
+        </child>
         <child>
           <object class="GtkFlowBox" id="flowbox">
             <property name="visible">True</property>
-            <property name="border-width">20</property>
+            <property name="border-width">10</property>
             <property name="selection-mode">none</property>
+            <property name="homogeneous">True</property>
+            <property name="max-children-per-line">5</property>
+            <property name="column-spacing">10</property>
           </object>
         </child>
         <child>

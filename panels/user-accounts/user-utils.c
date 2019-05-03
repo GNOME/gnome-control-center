@@ -559,11 +559,11 @@ get_color_for_name (const gchar *name)
 }
 
 static cairo_surface_t *
-generate_user_picture (const gchar *name)
+generate_user_picture (const gchar *name, gint size)
 {
         PangoFontDescription *font_desc;
         g_autofree gchar *initials = extract_initials_from_name (name);
-        g_autofree gchar *font = g_strdup_printf ("Sans %d", (int)ceil (IMAGE_SIZE / 2.5));
+        g_autofree gchar *font = g_strdup_printf ("Sans %d", (int)ceil (size / 2.5));
         PangoLayout *layout;
         GdkRGBA color = get_color_for_name (name);
         cairo_surface_t *surface;
@@ -571,10 +571,10 @@ generate_user_picture (const gchar *name)
         cairo_t *cr;
 
         surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
-                                              IMAGE_SIZE,
-                                              IMAGE_SIZE);
+                                              size,
+                                              size);
         cr = cairo_create (surface);
-        cairo_rectangle (cr, 0, 0, IMAGE_SIZE, IMAGE_SIZE);
+        cairo_rectangle (cr, 0, 0, size, size);
         cairo_set_source_rgb (cr, color.red/255.0, color.green/255.0, color.blue/255.0);
         cairo_fill (cr);
 
@@ -587,7 +587,7 @@ generate_user_picture (const gchar *name)
         pango_font_description_free (font_desc);
 
         pango_layout_get_size (layout, &width, &height);
-        cairo_translate (cr, IMAGE_SIZE/2, IMAGE_SIZE/2);
+        cairo_translate (cr, size/2, size/2);
         cairo_move_to (cr, - ((double)width / PANGO_SCALE)/2, - ((double)height/PANGO_SCALE)/2);
         pango_cairo_show_layout (cr, layout);
         cairo_destroy (cr);
@@ -635,16 +635,26 @@ set_user_icon_data (ActUser   *user,
         g_free (path);
 }
 
-void
-generate_user_avatar (ActUser *user)
+GdkPixbuf *
+generate_default_avatar (ActUser *user, gint size)
 {
-        g_autoptr(GdkPixbuf) pixbuf = NULL;
+        GdkPixbuf *pixbuf = NULL;
         cairo_surface_t *surface;
 
-        surface = generate_user_picture (act_user_get_real_name (user));
+        surface = generate_user_picture (act_user_get_real_name (user), size);
 
-        pixbuf = gdk_pixbuf_get_from_surface (surface, 0, 0, IMAGE_SIZE, IMAGE_SIZE);
+        pixbuf = gdk_pixbuf_get_from_surface (surface, 0, 0, size, size);
         cairo_surface_destroy (surface);
+
+        return pixbuf;
+}
+
+void
+set_default_avatar (ActUser *user)
+{
+        g_autoptr(GdkPixbuf) pixbuf = NULL;
+
+        pixbuf = generate_default_avatar (user, IMAGE_SIZE);
 
         set_user_icon_data (user, pixbuf);
 }
