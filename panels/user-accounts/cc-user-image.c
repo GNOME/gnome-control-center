@@ -54,7 +54,7 @@ render_user_icon (ActUser *user,
                                                                   icon_size * scale,
                                                                   NULL);
                 if (source_pixbuf)
-                        pixbuf = round_image (source_pixbuf, icon_size * scale);
+                        pixbuf = round_image (source_pixbuf);
         }
 
         if (pixbuf != NULL) {

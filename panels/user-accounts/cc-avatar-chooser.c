@@ -373,7 +373,7 @@ create_face_widget (gpointer item,
         if (source_pixbuf == NULL)
                 return NULL;
 
-        pixbuf = round_image (source_pixbuf, AVATAR_CHOOSER_PIXEL_SIZE);
+        pixbuf = round_image (source_pixbuf);
         image = gtk_image_new_from_pixbuf (pixbuf);
         gtk_image_set_pixel_size (GTK_IMAGE (image), AVATAR_CHOOSER_PIXEL_SIZE);
         gtk_widget_show (image);
