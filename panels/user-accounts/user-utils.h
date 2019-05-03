@@ -44,7 +44,9 @@ gboolean is_valid_name                    (const gchar *name);
 gboolean is_valid_username                (const gchar *name,
                                            gchar      **tip);
 GdkPixbuf *round_image                    (GdkPixbuf   *pixbuf);
-void       generate_user_avatar           (ActUser *user);
+GdkPixbuf *generate_default_avatar        (ActUser     *user,
+                                           gint         size);
+void       set_default_avatar             (ActUser     *user);
 void       set_user_icon_data             (ActUser     *user,
                                            GdkPixbuf   *pixbuf);
 

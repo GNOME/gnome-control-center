@@ -50,6 +50,7 @@ struct _CcAvatarChooser {
 
         GtkWidget *popup_button;
         GtkWidget *crop_area;
+        GtkWidget *user_flowbox;
         GtkWidget *flowbox;
         GtkWidget *take_picture_button;
 
@@ -574,6 +575,7 @@ cc_avatar_chooser_class_init (CcAvatarChooserClass *klass)
 
         gtk_widget_class_set_template_from_resource (wclass, "/org/gnome/control-center/user-accounts/cc-avatar-chooser.ui");
 
+        gtk_widget_class_bind_template_child (wclass, CcAvatarChooser, user_flowbox);
         gtk_widget_class_bind_template_child (wclass, CcAvatarChooser, flowbox);
         gtk_widget_class_bind_template_child (wclass, CcAvatarChooser, take_picture_button);
 
@@ -585,16 +587,39 @@ cc_avatar_chooser_class_init (CcAvatarChooserClass *klass)
         oclass->dispose = cc_avatar_chooser_dispose;
 }
 
+static void
+user_flowbox_activated (GtkFlowBox        *flowbox,
+                        GtkFlowBoxChild   *child,
+                        CcAvatarChooser   *self)
+{
+        set_default_avatar (self->user);
+
+        gtk_popover_popdown (GTK_POPOVER (self));
+}
+
 void
 cc_avatar_chooser_set_user (CcAvatarChooser *self,
                             ActUser         *user)
 {
+        g_autoptr(GdkPixbuf) source_pixbuf = NULL;
+        g_autoptr(GdkPixbuf) pixbuf = NULL;
+        GtkWidget *image;
+
         g_return_if_fail (self != NULL);
 
         if (self->user) {
+                gtk_container_foreach (GTK_CONTAINER (self->user_flowbox), (GtkCallback) gtk_widget_destroy, NULL);
                 g_object_unref (self->user);
                 self->user = NULL;
         }
         self->user = g_object_ref (user);
+
+        source_pixbuf = generate_default_avatar (user, AVATAR_CHOOSER_PIXEL_SIZE);
+        pixbuf = round_image (source_pixbuf);
+        image = gtk_image_new_from_pixbuf (pixbuf);
+        gtk_image_set_pixel_size (GTK_IMAGE (image), AVATAR_CHOOSER_PIXEL_SIZE);
+        gtk_widget_show (image);
+        gtk_container_add (GTK_CONTAINER (self->user_flowbox), image);
+        g_signal_connect (self->user_flowbox, "child-activated", G_CALLBACK (user_flowbox_activated), self);
 }
 

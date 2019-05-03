@@ -367,7 +367,7 @@ add_user (CcUserPanel *self)
 
         user = cc_add_user_dialog_get_user (dialog);
         if (user != NULL) {
-                generate_user_avatar (user);
+                set_default_avatar (user);
                 reload_users (self, user);
         }
 
