@@ -872,8 +872,13 @@ up_client_changed (UpClient     *client,
       for (i = 0; self->devices != NULL && i < self->devices->len; i++)
         {
           UpDevice *device = (UpDevice*) g_ptr_array_index (self->devices, i);
-          g_object_get (device, "kind", &kind, NULL);
-          if (kind == UP_DEVICE_KIND_BATTERY)
+          gboolean is_power_supply = FALSE;
+          g_object_get (device,
+                        "kind", &kind,
+                        "power-supply", &is_power_supply,
+                        NULL);
+          if (kind == UP_DEVICE_KIND_BATTERY &&
+              is_power_supply)
             {
               n_batteries++;
               if (is_extra_battery == FALSE)
@@ -897,7 +902,11 @@ up_client_changed (UpClient     *client,
   for (i = 0; self->devices != NULL && i < self->devices->len; i++)
     {
       UpDevice *device = (UpDevice*) g_ptr_array_index (self->devices, i);
-      g_object_get (device, "kind", &kind, NULL);
+      gboolean is_power_supply = FALSE;
+      g_object_get (device,
+                    "kind", &kind,
+                    "power-supply", &is_power_supply,
+                    NULL);
       if (kind == UP_DEVICE_KIND_LINE_POWER)
         {
           /* do nothing */
@@ -906,11 +915,11 @@ up_client_changed (UpClient     *client,
         {
           set_primary (self, device);
         }
-      else if (kind == UP_DEVICE_KIND_BATTERY && !on_ups && n_batteries == 1)
+      else if (kind == UP_DEVICE_KIND_BATTERY && is_power_supply && !on_ups && n_batteries == 1)
         {
           set_primary (self, device);
         }
-      else if (kind == UP_DEVICE_KIND_BATTERY)
+      else if (kind == UP_DEVICE_KIND_BATTERY && is_power_supply)
         {
           add_battery (self, device);
         }
