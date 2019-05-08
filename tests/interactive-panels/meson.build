@@ -42,6 +42,7 @@ includes = [top_inc]
 
 exe = executable(
   'test-interactive-panels',
+        common_sources,
                sources,
   include_directories : includes,
          dependencies : shell_deps + [libtestshell_dep],

@@ -21,6 +21,7 @@ cflags = [
 foreach unit: test_units
   exe = executable(
                     unit,
+               resources,
            [unit + '.c'],
     include_directories : includes,
            dependencies : common_deps + [m_dep],
