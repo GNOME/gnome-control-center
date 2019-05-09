@@ -437,7 +437,7 @@ get_os_name (void)
   os_info = get_os_info ();
 
   if (!os_info)
-    return NULL;
+    g_strdup (_("Unknown"));
 
   name = g_hash_table_lookup (os_info, "NAME");
   version_id = g_hash_table_lookup (os_info, "VERSION_ID");
