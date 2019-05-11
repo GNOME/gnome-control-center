@@ -12,21 +12,22 @@
 # Daniel PUENTES <blatberk@openmailbox.org>, 2015.
 # Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>, 2010, 2011, 2012, 2013, 2015, 2017, 2018, 2019.
 # Carmen Bianca BAKKER <carmen@carmenbianca.eu>, 2018-2019.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-04-11 12:52+0000\n"
-"PO-Revision-Date: 2019-04-29 21:49+0200\n"
-"Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
+"POT-Creation-Date: 2019-05-02 21:31+0000\n"
+"PO-Revision-Date: 2019-05-09 20:15+0200\n"
+"Last-Translator: Carmen Bianca BAKKER <carmen@carmenbianca.eu>\n"
 "Language-Team: Esperanto <gnome-eo-list@gnome.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 3.32.0\n"
 "X-Project-Style: gnome\n"
 
 #: panels/applications/cc-applications-panel.c:561
@@ -772,7 +773,7 @@ msgstr "La mezurilo ne subtenas presilprofiladon."
 msgid "The device type is not currently supported."
 msgstr "La aparatspeco ne estas aktuale subtenita."
 
-#: panels/color/cc-color-panel.ui:6 panels/wacom/calibrator/calibrator.ui:47
+#: panels/color/cc-color-panel.ui:6 panels/wacom/calibrator/calibrator.ui:48
 msgid "Screen Calibration"
 msgstr "Ekran-laŭnormigo"
 
@@ -1550,7 +1551,6 @@ msgid "Adjust for TV"
 msgstr "Ĝustigi por televizio"
 
 #: panels/display/cc-display-settings.ui:59
-#| msgid "Scale"
 msgctxt "display setting"
 msgid "Scale"
 msgstr "Skali"
@@ -2204,7 +2204,6 @@ msgstr ""
 "Laŭteco;"
 
 #: panels/keyboard/shortcut-editor.ui:68 panels/keyboard/shortcut-editor.ui:318
-#| msgid "Press Esc to cancel or Backspace to reset the keyboard shortcut."
 msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
 msgstr ""
 "Premu eskapan klavon por nuligi aŭ retropaŝan klavon por reagordi la "
@@ -2371,7 +2370,7 @@ msgid "Single click, secondary button"
 msgstr "Unuobla klako, duaranga butono"
 
 #. add proxy to device list
-#: panels/network/cc-network-panel.c:589
+#: panels/network/cc-network-panel.c:590
 msgid "Network proxy"
 msgstr "Retprokurilo"
 
@@ -2379,17 +2378,17 @@ msgstr "Retprokurilo"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: panels/network/cc-network-panel.c:725 panels/network/net-vpn.c:167
+#: panels/network/cc-network-panel.c:726 panels/network/net-vpn.c:167
 #: panels/network/net-vpn.c:295
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPR"
 
-#: panels/network/cc-network-panel.c:789 panels/network/cc-wifi-panel.ui:304
+#: panels/network/cc-network-panel.c:790 panels/network/cc-wifi-panel.ui:304
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Ups, io fiaskis. Bonvolu kontakti vian programaran vendiston."
 
-#: panels/network/cc-network-panel.c:795
+#: panels/network/cc-network-panel.c:796
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager devas esti rulanta."
 
@@ -2980,9 +2979,11 @@ msgstr "Regi kiel vi konektas al la interreto"
 
 #. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in.in:19
-msgid ""
-"Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
-"DNS;"
+#, fuzzy
+#| msgid ""
+#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
+#| "vpn;DNS;"
+msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
 msgstr ""
 "Reto;Sendrata;Vifio;IP;LAN;Prokurilo;WAN;Larĝkapacita;Modemo;Bludento;VPR;"
 "DNS;"
@@ -3355,7 +3356,7 @@ msgstr "Konektante"
 #. TRANSLATORS: VPN status
 #: panels/network/panel-common.c:169 panels/network/panel-common.c:211
 msgid "Authentication required"
-msgstr "Aŭtentigo estas bezonata"
+msgstr "Aŭtentigo necesas"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
@@ -4571,7 +4572,7 @@ msgstr "Pasvorto"
 #: panels/printers/authentication-dialog.ui:139
 #: panels/printers/new-printer-dialog.ui:337
 msgid "Authentication Required"
-msgstr "Aŭtentigo estas bezonata"
+msgstr "Aŭtentigo necesas"
 
 #. Translators: %s is the printer name
 #: panels/printers/cc-printers-panel.c:715
@@ -4788,7 +4789,7 @@ msgstr "Paŭzita"
 #: panels/printers/pp-jobs-dialog.c:245
 msgctxt "print job"
 msgid "Authentication required"
-msgstr "Aŭtentigo estas bezonata"
+msgstr "Aŭtentigo necesas"
 
 #. Translators: Job's state (job is currently printing)
 #: panels/printers/pp-jobs-dialog.c:250
@@ -4910,7 +4911,6 @@ msgid "Output Tray"
 msgstr "Eliga pleto"
 
 #: panels/printers/pp-options-dialog.c:94
-#| msgid "Resolution"
 msgctxt "printing option"
 msgid "Resolution"
 msgstr "Distingivo"
@@ -5475,7 +5475,6 @@ msgid "Lock screen _after blank for"
 msgstr "Ŝ_losi ekranon post ekrano estas malplena por"
 
 #: panels/privacy/cc-privacy-panel.ui:394
-#| msgid "_Lock Screen Notifications"
 msgid "Lock Screen _Notifications"
 msgstr "Sciigoj sur ŝ_losa ekrano"
 
@@ -5966,7 +5965,7 @@ msgstr "Ŝalti aŭ malŝalti deforan salutadon"
 
 #: panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
 msgid "Authentication is required to enable or disable remote login"
-msgstr "Aŭtentigo estas bezonata por ŝalti aŭ malŝalti deforan salutadon"
+msgstr "Aŭtentigo necesas por ŝalti aŭ malŝalti deforan salutadon"
 
 #: panels/sound/cc-alert-chooser.c:151
 msgid "Custom"
@@ -7317,7 +7316,7 @@ msgstr "Mastrumi uzanto-kontojn"
 
 #: panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr "Aŭtentigo estas bezonata por ŝanĝi uzanto-datumon"
+msgstr "Aŭtentigo necesas por ŝanĝi uzanto-datumojn"
 
 #: panels/user-accounts/pw-utils.c:94
 msgctxt "Password hint"
@@ -7606,7 +7605,7 @@ msgstr ""
 "klavkombina butono, kaj premu la novajn klavojn, aŭ premu la retropaŝan "
 "klavon por vakigi."
 
-#: panels/wacom/calibrator/calibrator.ui:60
+#: panels/wacom/calibrator/calibrator.ui:61
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -7614,7 +7613,7 @@ msgstr ""
 "Bonvolu bateti la celajn indikilojn kiam ili aperas sur la ekrano por "
 "laŭnormigi la tabulkomputilo."
 
-#: panels/wacom/calibrator/calibrator.ui:77
+#: panels/wacom/calibrator/calibrator.ui:78
 msgid "Mis-click detected, restarting…"
 msgstr "Misalklako dekektita, restartante…"
 
