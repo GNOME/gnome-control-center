@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-05-02 21:31+0000\n"
-"PO-Revision-Date: 2019-05-03 14:26+0200\n"
+"POT-Creation-Date: 2019-05-14 01:59+0000\n"
+"PO-Revision-Date: 2019-05-16 12:34+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -47,7 +47,7 @@ msgid "Session Bus"
 msgstr "Bus de sesión"
 
 #: panels/applications/cc-applications-panel.c:568
-#: panels/power/cc-power-panel.c:2453 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2462 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
 #: shell/cc-window.c:268
 msgid "Devices"
@@ -1442,7 +1442,7 @@ msgstr "Esto puede deber a limitaciones hardware."
 #. TRANSLATORS: the state of the night light setting
 #: panels/display/cc-display-panel.c:1127
 #: panels/notifications/cc-notifications-panel.c:270
-#: panels/power/cc-power-panel.c:2056 panels/power/cc-power-panel.c:2063
+#: panels/power/cc-power-panel.c:2065 panels/power/cc-power-panel.c:2072
 #: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
 #: panels/universal-access/cc-ua-panel.c:478
 #: panels/universal-access/cc-ua-panel.c:841
@@ -1454,7 +1454,7 @@ msgstr "Encendido"
 
 #: panels/display/cc-display-panel.c:1127 panels/network/net-proxy.c:54
 #: panels/notifications/cc-notifications-panel.c:270
-#: panels/power/cc-power-panel.c:2050 panels/power/cc-power-panel.c:2061
+#: panels/power/cc-power-panel.c:2059 panels/power/cc-power-panel.c:2070
 #: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
 #: panels/universal-access/cc-ua-panel.c:478
 #: panels/universal-access/cc-ua-panel.c:841
@@ -2987,11 +2987,9 @@ msgstr "Controlar cómo se conecta a Internet"
 
 #. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in.in:19
-#| msgid ""
-#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
-#| "vpn;DNS;"
-msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
-msgstr "Red;IP;LAN;Proxy;WAN;Banda;ancha;Módem;Bluetooth;vpn;DNS;"
+#| msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
+msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;Proxy;"
+msgstr "Red;IP;LAN;Proxy;WAN;Banda;ancha;Módem;Bluetooth;vpn;DNS;proxy;"
 
 #: panels/network/gnome-wifi-panel.desktop.in.in:4
 msgid "Control how you connect to Wi-Fi networks"
@@ -2999,8 +2997,10 @@ msgstr "Controlar cómo se conecta a redes inalámbricas"
 
 #. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in.in:19
-msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;"
-msgstr "Red;Inalámbrica;Wireless;Wi-Fi;Wifi;IP;LAN;Banda;ancha;DNS;"
+#| msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;"
+msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
+msgstr ""
+"Red;Inalámbrica;Wireless;Wi-Fi;Wifi;IP;LAN;Banda;ancha;DNS;punto;acceso;"
 
 #: panels/network/net-device-ethernet.c:123
 #: panels/network/net-device-wifi.c:384
@@ -4225,8 +4225,8 @@ msgid "Gaming input device"
 msgstr "Mando de juegos"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:638 panels/power/cc-power-panel.c:891
-#: panels/power/cc-power-panel.c:2406
+#: panels/power/cc-power-panel.c:638 panels/power/cc-power-panel.c:896
+#: panels/power/cc-power-panel.c:2415
 msgid "Battery"
 msgstr "Batería"
 
@@ -4266,25 +4266,25 @@ msgctxt "Battery power"
 msgid "Empty"
 msgstr "Vacía"
 
-#: panels/power/cc-power-panel.c:889
+#: panels/power/cc-power-panel.c:894
 msgid "Batteries"
 msgstr "Baterías"
 
-#: panels/power/cc-power-panel.c:1250
+#: panels/power/cc-power-panel.c:1259
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d hora"
 msgstr[1] "%d horas"
 
-#: panels/power/cc-power-panel.c:1252
+#: panels/power/cc-power-panel.c:1261
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuto"
 msgstr[1] "%d minutos"
 
-#: panels/power/cc-power-panel.c:1255
+#: panels/power/cc-power-panel.c:1264
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -4292,116 +4292,116 @@ msgstr[0] "%d segundo"
 msgstr[1] "%d segundos"
 
 #. 5 hours 2 minutes 12 seconds
-#: panels/power/cc-power-panel.c:1260
+#: panels/power/cc-power-panel.c:1269
 #, c-format
 msgctxt "time"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. 2 minutes 12 seconds
-#: panels/power/cc-power-panel.c:1263
+#: panels/power/cc-power-panel.c:1272
 #, c-format
 msgctxt "time"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 0 seconds
-#: panels/power/cc-power-panel.c:1269
+#: panels/power/cc-power-panel.c:1278
 msgid "0 seconds"
 msgstr "0 seconds"
 
-#: panels/power/cc-power-panel.c:1366
+#: panels/power/cc-power-panel.c:1375
 msgid "When _idle"
 msgstr "Cuando esté _inactivo"
 
-#: panels/power/cc-power-panel.c:1811
+#: panels/power/cc-power-panel.c:1820
 msgid "Power Saving"
 msgstr "Ahorro de energía"
 
-#: panels/power/cc-power-panel.c:1845
+#: panels/power/cc-power-panel.c:1854
 msgid "_Screen brightness"
 msgstr "_Brillo de la pantalla"
 
-#: panels/power/cc-power-panel.c:1866
+#: panels/power/cc-power-panel.c:1875
 msgid "Automatic brightness"
 msgstr "Brillo automático"
 
-#: panels/power/cc-power-panel.c:1879
+#: panels/power/cc-power-panel.c:1888
 msgid "_Keyboard brightness"
 msgstr "_Brillo del teclado"
 
-#: panels/power/cc-power-panel.c:1890
+#: panels/power/cc-power-panel.c:1899
 msgid "_Dim screen when inactive"
 msgstr "_Oscurecer la pantalla cuando esté inactiva"
 
-#: panels/power/cc-power-panel.c:1908
+#: panels/power/cc-power-panel.c:1917
 msgid "_Blank screen"
 msgstr "_Apagar la pantalla"
 
-#: panels/power/cc-power-panel.c:1931
+#: panels/power/cc-power-panel.c:1940
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.c:1932
+#: panels/power/cc-power-panel.c:1941
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Se puede apagar la Wi-Fi para ahorrar energía."
 
-#: panels/power/cc-power-panel.c:1948
+#: panels/power/cc-power-panel.c:1957
 msgid "_Mobile broadband"
 msgstr "Banda ancha _móvil"
 
-#: panels/power/cc-power-panel.c:1949
+#: panels/power/cc-power-panel.c:1958
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
 "Se puede apagar la banda ancha móvil (3G, 4G, LTE, etc.) para ahorrar "
 "energía."
 
-#: panels/power/cc-power-panel.c:1999
+#: panels/power/cc-power-panel.c:2008
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:2000
+#: panels/power/cc-power-panel.c:2009
 msgid "Bluetooth can be turned off to save power."
 msgstr "Se puede apagar el Bluetooth para ahorrar energía."
 
-#: panels/power/cc-power-panel.c:2052
+#: panels/power/cc-power-panel.c:2061
 msgid "When on battery power"
 msgstr "En modo batería"
 
-#: panels/power/cc-power-panel.c:2054
+#: panels/power/cc-power-panel.c:2063
 msgid "When plugged in"
 msgstr "Cuando está conectado a la red"
 
-#: panels/power/cc-power-panel.c:2148
+#: panels/power/cc-power-panel.c:2157
 msgid "Suspend"
 msgstr "Suspender"
 
-#: panels/power/cc-power-panel.c:2149
+#: panels/power/cc-power-panel.c:2158
 msgid "Power Off"
 msgstr "Apagar"
 
-#: panels/power/cc-power-panel.c:2150
+#: panels/power/cc-power-panel.c:2159
 msgid "Hibernate"
 msgstr "Hibernar"
 
-#: panels/power/cc-power-panel.c:2151
+#: panels/power/cc-power-panel.c:2160
 msgid "Nothing"
 msgstr "Nada"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2251
+#: panels/power/cc-power-panel.c:2260
 msgid "Suspend & Power Button"
 msgstr "Botón de suspender y apagar"
 
-#: panels/power/cc-power-panel.c:2292
+#: panels/power/cc-power-panel.c:2301
 msgid "_Automatic suspend"
 msgstr "Suspender _automáticamente"
 
-#: panels/power/cc-power-panel.c:2293
+#: panels/power/cc-power-panel.c:2302
 msgid "Automatic suspend"
 msgstr "Suspender automáticamente"
 
-#: panels/power/cc-power-panel.c:2350
+#: panels/power/cc-power-panel.c:2359
 msgid "_When the Power Button is pressed"
 msgstr "Al pulsar el b_otón de encendido"
 
@@ -6095,10 +6095,12 @@ msgstr "Cambiar el volumen de entrada y salida de sonido y las alertas sonoras"
 
 #. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/gnome-sound-panel.desktop.in.in:20
-msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
+#| msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
+msgid ""
+"Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;Output;Input;"
 msgstr ""
 "tarjeta;micrófono;volumen;desvanecer;balance;bluetooth;cascos;auriculares;"
-"sonido;"
+"sonido;entrada;salida;"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.c:94
 #: panels/thunderbolt/cc-bolt-device-entry.c:125
