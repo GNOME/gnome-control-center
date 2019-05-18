@@ -57,43 +57,6 @@
             ]
         },
         {
-            "name" : "mozjs52",
-            "build-options" : {
-                "arch" : {
-                    "i386" : {
-                        "config-opts" : [
-                            "--host=i586-unknown-linux-gnu"
-                        ]
-                    },
-                    "arm" : {
-                        "config-opts" : [
-                            "--host=arm-unknown-linux-gnueabi"
-                        ]
-                    }
-                }
-            },
-            "config-opts": [
-                "--enable-posix-nspr-emulation",
-                "--with-system-zlib",
-                "--without-system-icu",
-                "--with-intl-api",
-                "--disable-jemalloc",
-                "AUTOCONF=autoconf"
-            ],
-            "builddir" : true,
-            "subdir" : "js/src",
-            "sources" : [
-                {
-                    "type" : "archive",
-                    "url" : "https://download.gnome.org/teams/releng/tarballs-needing-help/mozjs/mozjs-52.2.1gnome1.tar.gz",
-                    "sha256" : "31697943b1dbbb51ba9aee35b8269a353c487d7af4d336010b90054dc4f9b0af"
-                }
-            ],
-            "cleanup" : [
-                "libjs_static.ajs"
-            ]
-        },
-        {
             "name" : "polkit",
             "buildsystem" : "autotools",
             "config-opts" : [
