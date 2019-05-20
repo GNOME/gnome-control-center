@@ -1,6 +1,6 @@
 {
     "app-id" : "org.gnome.Settings",
-    "runtime" : "org.gnome.Platform",
+    "runtime" : "org.gnome.Sdk",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
     "command" : "gnome-control-center",
@@ -191,7 +191,11 @@
                 "-Dbash_completion=false",
                 "-Dman=false",
                 "-Dudev_rules=false",
-                "-Dsystemd=false"
+                "-Dsystemd=false",
+                "-Dvapi=false",
+                "-Ddocs=false",
+                "-Dtests=false",
+                "-Dinstalled_tests=false"
             ],
             "sources" : [
                 {
@@ -225,13 +229,14 @@
         },
         {
             "name" : "gnome-online-accounts",
-            "buildsystem" : "autotools",
+            "buildsystem" : "meson",
             "build-options" : {
                 "cflags" : "-Wno-error"
             },
             "config-opts" : [
-                "--disable-telepathy",
-                "--disable-documentation"
+                "-Dgtk_doc=false",
+                "-Dintrospection=false",
+                "-Dvapi=false"
             ],
             "sources" : [
                 {
@@ -253,6 +258,11 @@
         {
             "name" : "geocode-glib",
             "buildsystem" : "meson",
+            "config-opts" : [
+            	"-Denable-gtk-doc=false",
+            	"-Denable-introspection=false",
+            	"-Denable-installed-tests=false"
+            ],
             "sources" : [
                 {
                     "type" : "git",
@@ -263,6 +273,11 @@
         {
             "name" : "libgweather",
             "buildsystem" : "meson",
+            "config-opts" : [
+            	"-Dglade_catalog=false",
+            	"-Denable_vala=false",
+            	"-Dgtk_doc=false"
+            ],
             "sources" : [
                 {
                     "type" : "git",
@@ -273,6 +288,13 @@
         {
             "name" : "upower",
             "buildsystem" : "autotools",
+            "config-opts" : [
+            	"--prefix=/app",
+            	"--with-systemdsystemunitdir=/app/lib/systemd/system",
+            	"--disable-gtk-doc",
+            	"--disable-man-pages",
+            	"--disable-tests"
+            ],
             "sources" : [
                 {
                     "type" : "git",
@@ -367,6 +389,7 @@
                 "--disable-introspection",
                 "--disable-vala",
                 "--with-udev-base-dir=/app/lib",
+                "--with-systemdsystemunitdir=/app/lib/systemd/system",
                 "--without-mbim",
                 "--without-qmi"
             ],
@@ -514,6 +537,47 @@
                 {
                     "type" : "git",
                     "url" : "https://gitlab.gnome.org/GNOME/gsound.git"
+                }
+            ]
+        },
+        {
+            "name" : "libkmod",
+            "
+        },
+        {
+            "name" : "libblockdev",
+            "buildsystem" : "autotools",
+            "config-opts" : [
+                "--with-btrfs=no",
+                "--with-crypto=no",
+                "--with-dm=no",
+                "--with-kbd=no",
+                "--with-lvm=no",
+                "--with-lvm-dbus=no",
+                "--with-mdraid=no",
+                "--with-mpath=no",
+                "--with-nvdimm=no",
+                "--with-part=no",
+                "--with-tools=no",
+                "--with-vdo=no"
+            ],
+            "sources" : [
+                {
+                    "type": "git",
+                    "url" : "https://github.com/storaged-project/libblockdev.git"
+                }
+            ]
+        },
+        {
+            "name" : "udisks",
+            "buildsystem" : "autotools",
+            "config-opts" : [
+                "--disable-lvm2"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://github.com/storaged-project/udisks.git"
                 }
             ]
         },
