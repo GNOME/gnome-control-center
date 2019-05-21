@@ -241,7 +241,7 @@ cc_printers_panel_constructed (GObject *object)
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->constructed (object);
 
   shell = cc_panel_get_shell (CC_PANEL (self));
-  cc_shell_embed_widget_in_header (shell, self->headerbar_buttons);
+  cc_shell_embed_widget_in_header (shell, self->headerbar_buttons, GTK_POS_RIGHT);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (self->builder, "lock-button");
@@ -249,7 +249,7 @@ cc_printers_panel_constructed (GObject *object)
 
   widget = (GtkWidget*)
     gtk_builder_get_object (self->builder, "search-button");
-  cc_shell_embed_widget_in_header (shell, widget);
+  cc_shell_embed_widget_in_header (shell, widget, GTK_POS_RIGHT);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (self->builder, "search-bar");

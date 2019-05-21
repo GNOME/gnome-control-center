@@ -38,7 +38,7 @@ gtp_header_widget_constructed (GObject *object)
   G_OBJECT_CLASS (gtp_header_widget_parent_class)->constructed (object);
 
   shell = cc_panel_get_shell (CC_PANEL (self));
-  cc_shell_embed_widget_in_header (shell, self->header_widget);
+  cc_shell_embed_widget_in_header (shell, self->header_widget, GTK_POS_LEFT);
 }
 
 static void

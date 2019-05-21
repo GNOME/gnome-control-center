@@ -652,7 +652,7 @@ cc_keyboard_panel_constructed (GObject *object)
   toplevel = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self))));
   gtk_window_set_transient_for (GTK_WINDOW (self->shortcut_editor), toplevel);
 
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), self->search_button);
+  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), self->search_button, GTK_POS_RIGHT);
 
   self->search_bar_handler_id =
     g_signal_connect_swapped (toplevel,

@@ -1627,7 +1627,7 @@ cc_applications_panel_constructed (GObject *object)
   G_OBJECT_CLASS (cc_applications_panel_parent_class)->constructed (object);
 
   shell = cc_panel_get_shell (CC_PANEL (self));
-  cc_shell_embed_widget_in_header (shell, self->header_button);
+  cc_shell_embed_widget_in_header (shell, self->header_button, GTK_POS_RIGHT);
 }
 
 static GtkWidget*

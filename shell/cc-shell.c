@@ -152,7 +152,9 @@ cc_shell_get_toplevel (CcShell *shell)
 }
 
 void
-cc_shell_embed_widget_in_header (CcShell *shell, GtkWidget *widget)
+cc_shell_embed_widget_in_header (CcShell         *shell,
+                                 GtkWidget       *widget,
+                                 GtkPositionType  position)
 {
   CcShellInterface *iface;
 
@@ -168,6 +170,6 @@ cc_shell_embed_widget_in_header (CcShell *shell, GtkWidget *widget)
     }
   else
     {
-      iface->embed_widget_in_header (shell, widget);
+      iface->embed_widget_in_header (shell, widget, position);
     }
 }

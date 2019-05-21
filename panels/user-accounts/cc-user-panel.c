@@ -1384,7 +1384,7 @@ cc_user_panel_constructed (GObject *object)
         G_OBJECT_CLASS (cc_user_panel_parent_class)->constructed (object);
 
         shell = cc_panel_get_shell (CC_PANEL (self));
-        cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->headerbar_button_stack));
+        cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->headerbar_button_stack), GTK_POS_RIGHT);
 
         gtk_lock_button_set_permission (self->lock_button, self->permission);
 }
