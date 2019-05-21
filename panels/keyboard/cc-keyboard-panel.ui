@@ -54,22 +54,6 @@
                 <property name="spacing">12</property>
                 <property name="halign">center</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="hexpand">True</property>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Reset All…</property>
-                        <property name="tooltip-text" translatable="yes">Reset all shortcuts to their default keybindings</property>
-                        <signal name="clicked" handler="reset_all_clicked_cb" object="CcKeyboardPanel" swapped="yes" />
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
                   <object class="GtkFrame">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -112,6 +96,8 @@
       </object>
     </child>
   </template>
+
+  <!-- Header widgets -->
   <object class="GtkToggleButton" id="search_button">
     <property name="visible">True</property>
     <style>
@@ -124,6 +110,14 @@
       </object>
     </child>
   </object>
+  <object class="GtkButton" id="reset_button">
+    <property name="visible">True</property>
+    <property name="can_focus">True</property>
+    <property name="label" translatable="yes">Reset All…</property>
+    <property name="tooltip-text" translatable="yes">Reset all shortcuts to their default keybindings</property>
+    <signal name="clicked" handler="reset_all_clicked_cb" object="CcKeyboardPanel" swapped="yes" />
+  </object>
+
   <object class="GtkBox" id="empty_search_placeholder">
     <property name="visible">True</property>
     <property name="can_focus">False</property>

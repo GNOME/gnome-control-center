@@ -47,6 +47,7 @@ struct _CcKeyboardPanel
 
   /* Search */
   GtkWidget          *empty_search_placeholder;
+  GtkWidget          *reset_button;
   GtkWidget          *search_bar;
   GtkWidget          *search_button;
   GtkWidget          *search_entry;
@@ -645,14 +646,17 @@ cc_keyboard_panel_constructed (GObject *object)
 {
   CcKeyboardPanel *self = CC_KEYBOARD_PANEL (object);
   GtkWindow *toplevel;
+  CcShell *shell;
 
   G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->constructed (object);
 
   /* Setup the dialog's transient parent */
-  toplevel = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self))));
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  toplevel = GTK_WINDOW (cc_shell_get_toplevel (shell));
   gtk_window_set_transient_for (GTK_WINDOW (self->shortcut_editor), toplevel);
 
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), self->search_button, GTK_POS_RIGHT);
+  cc_shell_embed_widget_in_header (shell, self->reset_button, GTK_POS_LEFT);
+  cc_shell_embed_widget_in_header (shell, self->search_button, GTK_POS_RIGHT);
 
   self->search_bar_handler_id =
     g_signal_connect_swapped (toplevel,
@@ -681,6 +685,7 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, add_shortcut_row);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, empty_search_placeholder);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, reset_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_entry);
