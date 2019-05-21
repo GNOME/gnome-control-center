@@ -466,7 +466,7 @@ cc_wacom_panel_constructed (GObject *object)
 	gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
 	gtk_widget_set_visible (button, TRUE);
 
-	cc_shell_embed_widget_in_header (shell, button);
+	cc_shell_embed_widget_in_header (shell, button, GTK_POS_RIGHT);
 
 	self->test_popover = gtk_popover_new (button);
 	gtk_container_set_border_width (GTK_CONTAINER (self->test_popover), 6);

@@ -64,6 +64,7 @@ struct _CcWindow
   GtkWidget  *panel_list;
   GtkWidget  *previous_button;
   GtkWidget  *back_revealer;
+  GtkWidget  *top_left_box;
   GtkWidget  *top_right_box;
   GtkWidget  *search_button;
   GtkWidget  *search_bar;
@@ -108,6 +109,7 @@ in_flatpak_sandbox (void)
 static void
 remove_all_custom_widgets (CcWindow *self)
 {
+  GtkWidget *parent;
   GtkWidget *widget;
   guint i;
 
@@ -117,7 +119,10 @@ remove_all_custom_widgets (CcWindow *self)
   for (i = 0; i < self->custom_widgets->len; i++)
     {
       widget = g_ptr_array_index (self->custom_widgets, i);
-      gtk_container_remove (GTK_CONTAINER (self->top_right_box), widget);
+      parent = gtk_widget_get_parent (widget);
+
+      g_assert (parent == self->top_right_box || parent == self->top_left_box);
+      gtk_container_remove (GTK_CONTAINER (parent), widget);
     }
   g_ptr_array_set_size (self->custom_widgets, 0);
 
@@ -511,6 +516,7 @@ update_fold_state (CcWindow *shell)
 
   hdy_header_group_set_focus (shell->header_group, fold == HDY_FOLD_FOLDED ? GTK_HEADER_BAR (header_child) : NULL);
 
+  gtk_widget_set_visible (shell->back_revealer, fold == HDY_FOLD_FOLDED);
   gtk_revealer_set_reveal_child (GTK_REVEALER (shell->back_revealer), fold == HDY_FOLD_FOLDED);
 }
 
@@ -697,15 +703,32 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
 }
 
 static void
-cc_window_embed_widget_in_header (CcShell   *shell,
-                                  GtkWidget *widget)
+cc_window_embed_widget_in_header (CcShell         *shell,
+                                  GtkWidget       *widget,
+                                  GtkPositionType  position)
 {
   CcWindow *self = CC_WINDOW (shell);
 
   CC_ENTRY;
 
   /* add to header */
-  gtk_box_pack_end (GTK_BOX (self->top_right_box), widget, FALSE, FALSE, 0);
+  switch (position)
+    {
+    case GTK_POS_RIGHT:
+      gtk_container_add (GTK_CONTAINER (self->top_right_box), widget);
+      break;
+
+    case GTK_POS_LEFT:
+      gtk_container_add (GTK_CONTAINER (self->top_left_box), widget);
+      break;
+
+    case GTK_POS_TOP:
+    case GTK_POS_BOTTOM:
+    default:
+      g_warning ("Invalid position passed");
+      return;
+    }
+
   g_ptr_array_add (self->custom_widgets, g_object_ref (widget));
 
   gtk_size_group_add_widget (self->header_sizegroup, widget);
@@ -887,6 +910,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_entry);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, stack);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, top_left_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, top_right_box);
 
   gtk_widget_class_bind_template_callback (widget_class, back_button_clicked_cb);

@@ -920,7 +920,7 @@ cc_bolt_panel_constructed (GObject *object)
   G_OBJECT_CLASS (cc_bolt_panel_parent_class)->constructed (object);
 
   shell = cc_panel_get_shell (CC_PANEL (panel));
-  cc_shell_embed_widget_in_header (shell, GTK_WIDGET (panel->headerbar_box));
+  cc_shell_embed_widget_in_header (shell, GTK_WIDGET (panel->headerbar_box), GTK_POS_RIGHT);
 }
 
 static void

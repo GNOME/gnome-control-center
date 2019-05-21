@@ -222,7 +222,6 @@
                 <property name="show_close_button">True</property>
                 <child>
                   <object class="GtkRevealer" id="back_revealer">
-                    <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="transition-type">crossfade</property>
                     <property name="transition-duration" bind-source="main_leaflet" bind-property="mode-transition-duration" bind-flags="bidirectional|sync-create"/>
@@ -252,6 +251,12 @@
                         </child>
                       </object>
                     </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="top_left_box">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
                   </object>
                 </child>
                 <child>

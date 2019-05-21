@@ -716,7 +716,7 @@ cc_search_panel_constructed (GObject *object)
                           G_BINDING_DEFAULT |
                           G_BINDING_SYNC_CREATE);
 
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), box);
+  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), box, GTK_POS_RIGHT);
 }
 
 static void

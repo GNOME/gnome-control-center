@@ -572,7 +572,7 @@ cc_wifi_panel_constructed (GObject *object)
 
   G_OBJECT_CLASS (cc_wifi_panel_parent_class)->constructed (object);
 
-  cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->header_stack));
+  cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->header_stack), GTK_POS_RIGHT);
 }
 
 static void
