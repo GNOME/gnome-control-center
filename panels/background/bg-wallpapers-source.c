@@ -160,8 +160,8 @@ bg_wallpapers_source_class_init (BgWallpapersSourceClass *klass)
 }
 
 BgWallpapersSource *
-bg_wallpapers_source_new (GtkWindow *window)
+bg_wallpapers_source_new (GtkWidget *widget)
 {
-  return g_object_new (BG_TYPE_WALLPAPERS_SOURCE, "window", window, NULL);
+  return g_object_new (BG_TYPE_WALLPAPERS_SOURCE, "widget", widget, NULL);
 }
 
