@@ -249,8 +249,8 @@ bg_colors_source_class_init (BgColorsSourceClass *klass)
 }
 
 BgColorsSource *
-bg_colors_source_new (GtkWindow *window)
+bg_colors_source_new (GtkWidget *widget)
 {
-  return g_object_new (BG_TYPE_COLORS_SOURCE, "window", window, NULL);
+  return g_object_new (BG_TYPE_COLORS_SOURCE, "widget", widget, NULL);
 }
 

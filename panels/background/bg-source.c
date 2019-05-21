@@ -29,7 +29,7 @@
 typedef struct
 {
   GtkListStore *store;
-  GtkWidget *window;
+  GtkWidget *widget;
   gint thumbnail_height;
   gint thumbnail_width;
 } BgSourcePrivate;
@@ -39,7 +39,7 @@ G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (BgSource, bg_source, G_TYPE_OBJECT)
 enum
 {
   PROP_LISTSTORE = 1,
-  PROP_WINDOW
+  PROP_WIDGET
 };
 
 
@@ -52,10 +52,10 @@ bg_source_calculate_thumbnail_dimensions (BgSource *source)
   priv->thumbnail_height = THUMBNAIL_HEIGHT;
   priv->thumbnail_width = THUMBNAIL_WIDTH;
 
-  if (priv->window == NULL)
+  if (priv->widget == NULL)
     return;
 
-  scale_factor = gtk_widget_get_scale_factor (priv->window);
+  scale_factor = gtk_widget_get_scale_factor (priv->widget);
   if (scale_factor > 1)
     {
       priv->thumbnail_height *= scale_factor;
@@ -101,8 +101,8 @@ bg_source_set_property (GObject      *object,
 
   switch (property_id)
     {
-    case PROP_WINDOW:
-      priv->window = GTK_WIDGET (g_value_get_object (value));
+    case PROP_WIDGET:
+      priv->widget = GTK_WIDGET (g_value_get_object (value));
       break;
 
     default:
@@ -139,12 +139,12 @@ bg_source_class_init (BgSourceClass *klass)
                                G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
   g_object_class_install_property (object_class, PROP_LISTSTORE, pspec);
 
-  pspec = g_param_spec_object ("window",
-                               "Window",
-                               "Toplevel window used to view the source",
-                               GTK_TYPE_WINDOW,
+  pspec = g_param_spec_object ("widget",
+                               "Widget",
+                               "Widget used to view the source",
+                               GTK_TYPE_WIDGET,
                                G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
-  g_object_class_install_property (object_class, PROP_WINDOW, pspec);
+  g_object_class_install_property (object_class, PROP_WIDGET, pspec);
 }
 
 static void
@@ -173,7 +173,7 @@ bg_source_get_scale_factor (BgSource *source)
   g_return_val_if_fail (BG_IS_SOURCE (source), 1);
 
   priv = bg_source_get_instance_private (source);
-  return gtk_widget_get_scale_factor (priv->window);
+  return gtk_widget_get_scale_factor (priv->widget);
 }
 
 gint
