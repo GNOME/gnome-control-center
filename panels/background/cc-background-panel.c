@@ -586,7 +586,7 @@ cc_background_panel_init (CcBackgroundPanel *panel)
 
   panel->builder = gtk_builder_new ();
   gtk_builder_add_objects_from_resource (panel->builder,
-                                         "/org/gnome/control-center/background/background.ui",
+                                         "/org/gnome/control-center/background/cc-background-panel.ui",
                                          objects, &err);
 
   if (err)
