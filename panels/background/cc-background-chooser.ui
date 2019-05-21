@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcBackgroundChooser" parent="GtkBox">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="orientation">vertical</property>
+
+    <child>
+      <object class="GtkSeparator">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="expand">True</property>
+        <property name="shadow-type">none</property>
+        <property name="hscrollbar-policy">never</property>
+        <property name="vscrollbar-policy">automatic</property>
+        <child>
+          <object class="GtkIconView" id="icon_view">
+            <property name="visible">True</property>
+            <signal name="item-activated" handler="on_item_activated_cb" object="CcBackgroundChooser" swapped="no" />
+            <signal name="selection-changed" handler="on_selection_changed_cb" object="CcBackgroundChooser" swapped="no" />
+            <style>
+              <class name="view" />
+            </style>
+          </object>
+        </child>
+      </object>
+    </child>
+
+  </template>
+
+  <!-- Desktop & Lock Screen Popover -->
+  <object class="GtkPopover" id="selection_popover">
+    <property name="relative-to">icon_view</property>
+    <property name="position">bottom</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">6</property>
+        <property name="margin">12</property>
+        <child>
+          <object class="GtkButton">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Set Background and Lock Screen</property>
+            <signal name="clicked" handler="on_selection_desktop_lock_clicked_cb" object="CcBackgroundChooser" swapped="no" />
+            <style>
+              <class name="suggested-action" />
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Set Background</property>
+            <signal name="clicked" handler="on_selection_desktop_clicked_cb" object="CcBackgroundChooser" swapped="no" />
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Set Lock Screen</property>
+            <signal name="clicked" handler="on_selection_lock_clicked_cb" object="CcBackgroundChooser" swapped="no" />
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
