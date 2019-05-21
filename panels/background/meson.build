@@ -59,7 +59,10 @@ common_sources += gnome.mkenums(
   vtail: '      { 0, NULL, NULL }\n    };\n    etype = g_@type@_register_static ("@EnumName@", values);\n  }\n  return etype;\n}\n'
 )
 
-resource_data = files('cc-background-panel.ui')
+resource_data = files(
+  'cc-background-chooser.ui',
+  'cc-background-panel.ui',
+)
 
 common_sources += gnome.compile_resources(
   'cc-@0@-resources'.format(cappletname),
@@ -74,6 +77,7 @@ sources = common_sources + files(
   'bg-pictures-source.c',
   'bg-source.c',
   'bg-wallpapers-source.c',
+  'cc-background-chooser.c',
   'cc-background-chooser-dialog.c',
   'cc-background-grilo-miner.c',
   'cc-background-item.c',
