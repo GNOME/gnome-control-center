@@ -29,6 +29,7 @@
 
 #include "cc-background-panel.h"
 
+#include "cc-background-chooser.h"
 #include "cc-background-chooser-dialog.h"
 #include "cc-background-item.h"
 #include "cc-background-resources.h"
@@ -305,6 +306,7 @@ copy_finished_cb (GObject      *source_object,
   if (create_save_dir ())
     cc_background_xml_save (current_background, filename);
 }
+
 static void
 set_background (CcBackgroundPanel *panel,
                 GSettings         *settings,
@@ -434,51 +436,19 @@ set_background (CcBackgroundPanel *panel,
     }
 }
 
-static void
-on_chooser_dialog_response (GtkDialog         *dialog,
-                            int                response_id,
-                            CcBackgroundPanel *panel)
-{
-  if (response_id == GTK_RESPONSE_OK)
-    {
-      g_autoptr(CcBackgroundItem) item = NULL;
-
-      item = cc_background_chooser_dialog_get_item (CC_BACKGROUND_CHOOSER_DIALOG (dialog));
-      if (item != NULL)
-          set_background (panel, g_object_get_data (G_OBJECT (dialog), "settings"), item);
-    }
-
-  gtk_widget_destroy (GTK_WIDGET (dialog));
-}
 
 static void
-launch_chooser (CcBackgroundPanel *panel,
-                GSettings         *settings)
+on_chooser_background_chosen_cb (CcBackgroundChooser        *chooser,
+                                 CcBackgroundItem           *item,
+                                 CcBackgroundSelectionFlags  flags,
+                                 CcBackgroundPanel          *self)
 {
-  GtkWidget *toplevel;
-  GtkWidget *dialog;
 
-  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (panel));
-  dialog = cc_background_chooser_dialog_new (GTK_WINDOW (toplevel));
-  g_object_set_data (G_OBJECT (dialog), "settings", settings);
-  gtk_widget_show (dialog);
-  g_signal_connect (dialog, "response", G_CALLBACK (on_chooser_dialog_response), panel);
-  panel->chooser = dialog;
-  g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer *) &panel->chooser);
-}
+  if (flags & CC_BACKGROUND_SELECTION_DESKTOP)
+    set_background (self, self->settings, item);
 
-static void
-on_background_button_clicked_cb (GtkButton         *button,
-                                 CcBackgroundPanel *panel)
-{
-  launch_chooser (panel, panel->settings);
-}
-
-static void
-on_lock_button_clicked_cb (GtkButton         *button,
-                           CcBackgroundPanel *panel)
-{
-  launch_chooser (panel, panel->lock_settings);
+  if (flags & CC_BACKGROUND_SELECTION_LOCK_SCREEN)
+    set_background (self, self->lock_settings, item);
 }
 
 static gboolean
@@ -541,6 +511,8 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
+  g_type_ensure (CC_TYPE_BACKGROUND_CHOOSER);
+
   panel_class->get_help_uri = cc_background_panel_get_help_uri;
 
   object_class->dispose = cc_background_panel_dispose;
@@ -554,8 +526,7 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, lock_drawing_area);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, lock_slide_image);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_background_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_lock_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_chooser_background_chosen_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_lock_preview_draw_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_preview_draw_cb);
 }
