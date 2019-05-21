@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkBox" id="background-panel">
+  <template class="CcBackgroundPanel" parent="CcPanel">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="margin">32</property>
-    <property name="spacing">12</property>
-    <property name="valign">center</property>
     <child>
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">24</property>
+        <property name="margin">32</property>
+        <property name="valign">center</property>
         <child>
           <object class="GtkBox" id="vbox3">
             <property name="visible">True</property>
@@ -24,6 +23,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <signal name="clicked" handler="on_background_button_clicked_cb" object="CcBackgroundPanel" swapped="no" />
                 <child>
                   <object class="GtkBox" id="box2">
                     <property name="visible">True</property>
@@ -32,7 +32,7 @@
                     <property name="spacing">6</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkDrawingArea" id="background-desktop-drawingarea">
+                      <object class="GtkDrawingArea" id="desktop_drawing_area">
                         <property name="width_request">310</property>
                         <property name="height_request">170</property>
                         <property name="visible">True</property>
@@ -40,6 +40,7 @@
                         <property name="valign">center</property>
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
+                        <signal name="draw" handler="on_preview_draw_cb" object="CcBackgroundPanel" swapped="no" />
                       </object>
                     </child>
                     <child>
@@ -56,7 +57,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkBox" id="bottom-hbox">
+              <object class="GtkBox" id="bottom_hbox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="spacing">12</property>
@@ -68,7 +69,7 @@
                     <property name="margin_top">12</property>
                     <property name="spacing">2</property>
                     <child>
-                      <object class="GtkImage" id="slide_image">
+                      <object class="GtkImage" id="desktop_slide_image">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="icon_name">slideshow-symbolic</property>
@@ -92,8 +93,8 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="slide-label">
-                        <property name="visible">True</property>
+                      <object class="GtkLabel" id="desktop_slide_label">
+                        <property name="visible" bind-source="desktop_slide_image" bind-property="visible" bind-flags="default|sync-create" />
                         <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes" comments="This refers to a slideshow background">Changes throughout the day</property>
@@ -137,6 +138,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <signal name="clicked" handler="on_lock_button_clicked_cb" object="CcBackgroundPanel" swapped="no" />
                 <child>
                   <object class="GtkBox" id="box3">
                     <property name="visible">True</property>
@@ -145,7 +147,7 @@
                     <property name="spacing">6</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkDrawingArea" id="background-lock-drawingarea">
+                      <object class="GtkDrawingArea" id="lock_drawing_area">
                         <property name="width_request">310</property>
                         <property name="height_request">170</property>
                         <property name="visible">True</property>
@@ -153,6 +155,7 @@
                         <property name="valign">center</property>
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
+                        <signal name="draw" handler="on_lock_preview_draw_cb" object="CcBackgroundPanel" swapped="no" />
                       </object>
                     </child>
                     <child>
@@ -181,7 +184,7 @@
                     <property name="margin_top">12</property>
                     <property name="spacing">2</property>
                     <child>
-                      <object class="GtkImage" id="slide_image1">
+                      <object class="GtkImage" id="lock_slide_image">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="icon_name">slideshow-symbolic</property>
@@ -205,8 +208,8 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="slide-label1">
-                        <property name="visible">True</property>
+                      <object class="GtkLabel">
+                        <property name="visible" bind-source="lock_slide_image" bind-property="visible" bind-flags="default|sync-create" />
                         <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes" comments="This refers to a slideshow background">Changes throughout the day</property>
@@ -239,62 +242,6 @@
           </packing>
         </child>
       </object>
-      <packing>
-        <property name="expand">True</property>
-        <property name="fill">True</property>
-        <property name="position">0</property>
-      </packing>
     </child>
-  </object>
-  <object class="GtkListStore" id="sources-liststore">
-    <columns>
-      <!-- column-name source-name -->
-      <column type="gchararray"/>
-      <!-- column-name source-id -->
-      <column type="guint"/>
-      <!-- column-name source-pointer -->
-      <column type="gpointer"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="style-liststore">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-      <!-- column-name value -->
-      <column type="gint"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes" context="background, style">Tile</col>
-        <col id="1">1</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="background, style">Zoom</col>
-        <col id="1">5</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="background, style">Center</col>
-        <col id="1">2</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="background, style">Scale</col>
-        <col id="1">3</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="background, style">Fill</col>
-        <col id="1">4</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="background, style">Span</col>
-        <col id="1">6</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkSizeGroup" id="sizegroup">
-    <property name="mode">vertical</property>
-    <widgets>
-      <widget name="slide-label"/>
-      <widget name="strut"/>
-    </widgets>
-  </object>
+  </template>
 </interface>
