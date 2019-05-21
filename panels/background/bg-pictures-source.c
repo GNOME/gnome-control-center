@@ -989,9 +989,9 @@ bg_pictures_source_init (BgPicturesSource *self)
 }
 
 BgPicturesSource *
-bg_pictures_source_new (GtkWindow *window)
+bg_pictures_source_new (GtkWidget *widget)
 {
-  return g_object_new (BG_TYPE_PICTURES_SOURCE, "window", window, NULL);
+  return g_object_new (BG_TYPE_PICTURES_SOURCE, "widget", widget, NULL);
 }
 
 const char * const *

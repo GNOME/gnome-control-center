@@ -31,7 +31,7 @@ G_BEGIN_DECLS
 #define BG_TYPE_WALLPAPERS_SOURCE (bg_wallpapers_source_get_type ())
 G_DECLARE_FINAL_TYPE (BgWallpapersSource, bg_wallpapers_source, BG, WALLPAPERS_SOURCE, BgSource)
 
-BgWallpapersSource *bg_wallpapers_source_new (GtkWindow *window);
+BgWallpapersSource *bg_wallpapers_source_new (GtkWidget *widget);
 
 G_END_DECLS
 

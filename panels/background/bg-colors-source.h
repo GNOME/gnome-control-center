@@ -30,7 +30,7 @@ G_BEGIN_DECLS
 #define BG_TYPE_COLORS_SOURCE (bg_colors_source_get_type ())
 G_DECLARE_FINAL_TYPE (BgColorsSource, bg_colors_source, BG, COLORS_SOURCE, BgSource)
 
-BgColorsSource *bg_colors_source_new (GtkWindow *window);
+BgColorsSource *bg_colors_source_new (GtkWidget *widget);
 
 gboolean bg_colors_source_add        (BgColorsSource       *self,
                                       GdkRGBA              *rgba,
