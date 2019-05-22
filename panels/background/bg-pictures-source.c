@@ -45,8 +45,6 @@ struct _BgPicturesSource
 
   CcBackgroundGriloMiner *grl_miner;
 
-  GnomeDesktopThumbnailFactory *thumb_factory;
-
   GFileMonitor *picture_dir_monitor;
   GFileMonitor *cache_dir_monitor;
 
@@ -86,7 +84,6 @@ bg_pictures_source_dispose (GObject *object)
     }
 
   g_clear_object (&source->grl_miner);
-  g_clear_object (&source->thumb_factory);
 
   G_OBJECT_CLASS (bg_pictures_source_parent_class)->dispose (object);
 }
@@ -95,8 +92,6 @@ static void
 bg_pictures_source_finalize (GObject *object)
 {
   BgPicturesSource *bg_source = BG_PICTURES_SOURCE (object);
-
-  g_clear_object (&bg_source->thumb_factory);
 
   g_clear_pointer (&bg_source->known_items, g_hash_table_destroy);
 
@@ -116,23 +111,26 @@ bg_pictures_source_class_init (BgPicturesSourceClass *klass)
 }
 
 static void
-remove_placeholder (BgPicturesSource *bg_source, CcBackgroundItem *item)
+remove_placeholder (BgPicturesSource *bg_source,
+                    CcBackgroundItem *item)
 {
-  GtkListStore *store;
-  GtkTreeIter iter;
-  GtkTreePath *path;
-  GtkTreeRowReference *row_ref;
+  GListStore *store;
+  guint i;
 
   store = bg_source_get_liststore (BG_SOURCE (bg_source));
-  row_ref = g_object_get_data (G_OBJECT (item), "row-ref");
-  if (row_ref == NULL)
-    return;
 
-  path = gtk_tree_row_reference_get_path (row_ref);
-  if (!gtk_tree_model_get_iter (GTK_TREE_MODEL (store), &iter, path))
-    return;
+  for (i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (store)); i++)
+    {
+      g_autoptr(CcBackgroundItem) item_n = NULL;
 
-  gtk_list_store_remove (store, &iter);
+      item_n = g_list_model_get_item (G_LIST_MODEL (store), i);
+
+      if (item_n == item)
+        {
+          g_list_store_remove (store, i);
+          break;
+        }
+    }
 }
 
 static gboolean
@@ -163,6 +161,27 @@ swap_rotated_pixbuf (GdkPixbuf *pixbuf)
   return tmp_pixbuf;
 }
 
+static int
+sort_func (gconstpointer a,
+           gconstpointer b,
+           gpointer      user_data)
+{
+  CcBackgroundItem *item_a;
+  CcBackgroundItem *item_b;
+  guint64 modified_a;
+  guint64 modified_b;
+  int retval;
+
+  item_a = (CcBackgroundItem *) a;
+  item_b = (CcBackgroundItem *) b;
+  modified_a = cc_background_item_get_modified (item_a);
+  modified_b = cc_background_item_get_modified (item_b);
+
+  retval = modified_b - modified_a;
+
+  return retval;
+}
+
 static void
 picture_scaled (GObject *source_object,
                 GAsyncResult *res,
@@ -174,10 +193,7 @@ picture_scaled (GObject *source_object,
   g_autoptr(GdkPixbuf) pixbuf = NULL;
   const char *software;
   const char *uri;
-  GtkTreeIter iter;
-  GtkTreePath *path;
-  GtkTreeRowReference *row_ref;
-  GtkListStore *store;
+  GListStore *store;
   cairo_surface_t *surface = NULL;
   int scale_factor;
   gboolean rotation_applied;
@@ -238,26 +254,8 @@ picture_scaled (GObject *source_object,
   surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
   cc_background_item_load (item, NULL);
 
-  row_ref = g_object_get_data (G_OBJECT (item), "row-ref");
-  if (row_ref == NULL)
-    {
-      /* insert the item into the liststore if it did not exist */
-      gtk_list_store_insert_with_values (store, NULL, -1,
-                                         0, surface,
-                                         1, item,
-                                         -1);
-    }
-  else
-    {
-      path = gtk_tree_row_reference_get_path (row_ref);
-      if (gtk_tree_model_get_iter (GTK_TREE_MODEL (store), &iter, path))
-        {
-          /* otherwise update the thumbnail */
-          gtk_list_store_set (store, &iter,
-                              0, surface,
-                              -1);
-        }
-    }
+  /* insert the item into the liststore */
+  g_list_store_insert_sorted (store, item, sort_func, bg_source);
 
   g_hash_table_insert (bg_source->known_items,
                        bg_pictures_source_get_unique_filename (uri),
@@ -367,67 +365,6 @@ in_content_types (const char *content_type)
 	return FALSE;
 }
 
-static gboolean
-in_screenshot_types (const char *content_type)
-{
-	guint i;
-	for (i = 0; screenshot_types[i]; i++)
-		if (g_str_equal (screenshot_types[i], content_type))
-			return TRUE;
-	return FALSE;
-}
-
-static cairo_surface_t *
-get_content_loading_icon (BgSource *source)
-{
-  GtkIconTheme *theme;
-  g_autoptr(GtkIconInfo) icon_info = NULL;
-  g_autoptr(GdkPixbuf) pixbuf = NULL;
-  g_autoptr(GdkPixbuf) ret = NULL;
-  g_autoptr(GError) error = NULL;
-  int scale_factor;
-  cairo_surface_t *surface;
-  int thumbnail_height;
-  int thumbnail_width;
-
-  theme = gtk_icon_theme_get_default ();
-  icon_info = gtk_icon_theme_lookup_icon (theme,
-                                          "content-loading-symbolic",
-                                          16,
-                                          GTK_ICON_LOOKUP_FORCE_SIZE | GTK_ICON_LOOKUP_GENERIC_FALLBACK);
-  if (icon_info == NULL)
-    {
-      g_warning ("Failed to find placeholder icon");
-      return NULL;
-    }
-
-  pixbuf = gtk_icon_info_load_icon (icon_info, &error);
-  if (pixbuf == NULL)
-    {
-      g_warning ("Failed to load placeholder icon: %s", error->message);
-      return NULL;
-    }
-
-  thumbnail_height = bg_source_get_thumbnail_height (source);
-  thumbnail_width = bg_source_get_thumbnail_width (source);
-  ret = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
-                        TRUE,
-                        8, thumbnail_width, thumbnail_height);
-  gdk_pixbuf_fill (ret, 0x00000000);
-
-  /* Put the icon in the middle */
-  gdk_pixbuf_copy_area (pixbuf, 0, 0,
-			gdk_pixbuf_get_width (pixbuf), gdk_pixbuf_get_height (pixbuf),
-			ret,
-			(thumbnail_width - gdk_pixbuf_get_width (pixbuf)) / 2,
-			(thumbnail_height - gdk_pixbuf_get_height (pixbuf)) / 2);
-
-  scale_factor = bg_source_get_scale_factor (source);
-  surface = gdk_cairo_surface_create_from_pixbuf (ret, scale_factor, NULL);
-
-  return surface;
-}
-
 static GFile *
 bg_pictures_source_get_cache_file (void)
 {
@@ -444,16 +381,10 @@ static gboolean
 add_single_file (BgPicturesSource     *bg_source,
                  GFile                *file,
                  const gchar          *content_type,
-                 guint64               mtime,
-                 GtkTreeRowReference **ret_row_ref)
+                 guint64               mtime)
 {
   g_autoptr(CcBackgroundItem) item = NULL;
   CcBackgroundItemFlags flags = 0;
-  GtkListStore *store;
-  GtkTreeIter iter;
-  GtkTreePath *path = NULL;
-  GtkTreeRowReference *row_ref = NULL;
-  cairo_surface_t *surface = NULL;
   g_autofree gchar *source_uri = NULL;
   g_autofree gchar *uri = NULL;
   gboolean needs_download;
@@ -500,25 +431,6 @@ add_single_file (BgPicturesSource     *bg_source,
                 "needs-download", needs_download,
                 "source-url", source_uri,
 		NULL);
-
-  if (!ret_row_ref && in_screenshot_types (content_type))
-    goto read_file;
-
-  surface = get_content_loading_icon (BG_SOURCE (bg_source));
-  store = bg_source_get_liststore (BG_SOURCE (bg_source));
-
-  /* insert the item into the liststore */
-  gtk_list_store_insert_with_values (store, &iter, -1,
-                                     0, surface,
-                                     1, item,
-                                     -1);
-
-  path = gtk_tree_model_get_path (GTK_TREE_MODEL (store), &iter);
-  row_ref = gtk_tree_row_reference_new (GTK_TREE_MODEL (store), path);
-  g_object_set_data_full (G_OBJECT (item), "row-ref", row_ref, (GDestroyNotify) gtk_tree_row_reference_free);
-
-
- read_file:
 
   media = g_object_get_data (G_OBJECT (file), "grl-media");
   if (media == NULL)
@@ -568,30 +480,20 @@ add_single_file (BgPicturesSource     *bg_source,
   retval = TRUE;
 
  out:
-  if (ret_row_ref)
-    {
-      if (row_ref && retval != FALSE)
-        *ret_row_ref = gtk_tree_row_reference_copy (row_ref);
-      else
-        *ret_row_ref = NULL;
-    }
-  gtk_tree_path_free (path);
-  g_clear_pointer (&surface, cairo_surface_destroy);
   return retval;
 }
 
 static gboolean
-add_single_file_from_info (BgPicturesSource     *bg_source,
-                           GFile                *file,
-                           GFileInfo            *info,
-                           GtkTreeRowReference **ret_row_ref)
+add_single_file_from_info (BgPicturesSource *bg_source,
+                           GFile            *file,
+                           GFileInfo        *info)
 {
   const gchar *content_type;
   guint64 mtime;
 
   content_type = g_file_info_get_content_type (info);
   mtime = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
-  return add_single_file (bg_source, file, content_type, mtime, ret_row_ref);
+  return add_single_file (bg_source, file, content_type, mtime);
 }
 
 static gboolean
@@ -616,7 +518,7 @@ add_single_file_from_media (BgPicturesSource *bg_source,
   else
     mtime_unix = g_get_real_time () / G_USEC_PER_SEC;
 
-  return add_single_file (bg_source, file, content_type, (guint64) mtime_unix, NULL);
+  return add_single_file (bg_source, file, content_type, (guint64) mtime_unix);
 }
 
 gboolean
@@ -633,7 +535,7 @@ bg_pictures_source_add (BgPicturesSource     *bg_source,
   if (info == NULL)
     return FALSE;
 
-  retval = add_single_file_from_info (bg_source, file, info, ret_row_ref);
+  retval = add_single_file_from_info (bg_source, file, info);
 
   return retval;
 }
@@ -642,21 +544,19 @@ gboolean
 bg_pictures_source_remove (BgPicturesSource *bg_source,
                            const char       *uri)
 {
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-  gboolean cont;
+  GListStore *store;
   gboolean retval;
+  guint i;
 
   retval = FALSE;
-  model = GTK_TREE_MODEL (bg_source_get_liststore (BG_SOURCE (bg_source)));
+  store = bg_source_get_liststore (BG_SOURCE (bg_source));
 
-  cont = gtk_tree_model_get_iter_first (model, &iter);
-  while (cont)
+  for (i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (store)); i++)
     {
       g_autoptr(CcBackgroundItem) tmp_item = NULL;
       const char *tmp_uri;
 
-      gtk_tree_model_get (model, &iter, 1, &tmp_item, -1);
+      tmp_item = g_list_model_get_item (G_LIST_MODEL (store), i);
       tmp_uri = cc_background_item_get_uri (tmp_item);
       if (g_str_equal (tmp_uri, uri))
         {
@@ -665,11 +565,10 @@ bg_pictures_source_remove (BgPicturesSource *bg_source,
           g_hash_table_insert (bg_source->known_items,
 			       uuid, NULL);
 
-          gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+          g_list_store_remove (store, i);
           retval = TRUE;
           break;
         }
-      cont = gtk_tree_model_iter_next (model, &iter);
     }
   return retval;
 }
@@ -726,7 +625,7 @@ file_info_async_ready (GObject      *source,
 
       file = g_file_get_child (parent, g_file_info_get_name (info));
 
-      add_single_file_from_info (bg_source, file, info, NULL);
+      add_single_file_from_info (bg_source, file, info);
     }
 
   g_list_foreach (files, (GFunc) g_object_unref, NULL);
@@ -810,33 +709,6 @@ bg_pictures_source_is_known (BgPicturesSource *bg_source,
   return GPOINTER_TO_INT (g_hash_table_lookup (bg_source->known_items, uuid));
 }
 
-static int
-sort_func (GtkTreeModel *model,
-           GtkTreeIter *a,
-           GtkTreeIter *b,
-           BgPicturesSource *bg_source)
-{
-  g_autoptr(CcBackgroundItem) item_a = NULL;
-  g_autoptr(CcBackgroundItem) item_b = NULL;
-  guint64 modified_a;
-  guint64 modified_b;
-  int retval;
-
-  gtk_tree_model_get (model, a,
-                      1, &item_a,
-                      -1);
-  gtk_tree_model_get (model, b,
-                      1, &item_b,
-                      -1);
-
-  modified_a = cc_background_item_get_modified (item_a);
-  modified_b = cc_background_item_get_modified (item_b);
-
-  retval = modified_b - modified_a;
-
-  return retval;
-}
-
 static void
 file_info_ready (GObject      *object,
                  GAsyncResult *res,
@@ -856,7 +728,7 @@ file_info_ready (GObject      *object,
       return;
     }
 
-  add_single_file_from_info (BG_PICTURES_SOURCE (user_data), file, info, NULL);
+  add_single_file_from_info (BG_PICTURES_SOURCE (user_data), file, info);
 }
 
 static void
@@ -951,7 +823,6 @@ bg_pictures_source_init (BgPicturesSource *self)
 {
   const gchar *pictures_path;
   g_autofree gchar *cache_path = NULL;
-  GtkListStore *store;
 
   self->cancellable = g_cancellable_new ();
   self->known_items = g_hash_table_new_full (g_str_hash,
@@ -971,21 +842,6 @@ bg_pictures_source_init (BgPicturesSource *self)
   self->grl_miner = cc_background_grilo_miner_new ();
   g_signal_connect_swapped (self->grl_miner, "media-found", G_CALLBACK (media_found_cb), self);
   cc_background_grilo_miner_start (self->grl_miner);
-
-  self->thumb_factory =
-    gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
-
-  store = bg_source_get_liststore (BG_SOURCE (self));
-
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (store),
-                                   1,
-                                   (GtkTreeIterCompareFunc)sort_func,
-                                   self,
-                                   NULL);
-
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),
-                                        1,
-                                        GTK_SORT_ASCENDING);
 }
 
 BgPicturesSource *
