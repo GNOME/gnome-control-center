@@ -31,6 +31,7 @@
 
 #include "cc-background-chooser.h"
 #include "cc-background-item.h"
+#include "cc-background-preview.h"
 #include "cc-background-resources.h"
 #include "cc-background-xml.h"
 
@@ -61,51 +62,14 @@ struct _CcBackgroundPanel
   GCancellable *copy_cancellable;
 
   GtkWidget *bottom_hbox;
-  GtkWidget *desktop_drawing_area;
-  GtkWidget *desktop_slide_image;
-  GtkWidget *lock_drawing_area;
-  GtkWidget *lock_slide_image;
+  CcBackgroundPreview *desktop_preview;
+  CcBackgroundPreview *lock_screen_preview;
 
   GtkWidget *spinner;
   GtkWidget *chooser;
 };
 
 CC_PANEL_REGISTER (CcBackgroundPanel, cc_background_panel)
-
-static GdkPixbuf*
-get_or_create_cached_pixbuf (CcBackgroundPanel *panel,
-                             GtkWidget         *widget,
-                             CcBackgroundItem  *background)
-{
-  const gint preview_width = 309;
-  const gint preview_height = 168;
-  gint scale_factor;
-  GdkPixbuf *pixbuf;
-
-  scale_factor = gtk_widget_get_scale_factor (widget);
-  pixbuf = cc_background_item_get_frame_thumbnail (background,
-                                                   panel->thumb_factory,
-                                                   preview_width,
-                                                   preview_height,
-                                                   scale_factor,
-                                                   -2, TRUE);
-
-  return pixbuf;
-}
-
-static void
-update_display_preview (CcBackgroundPanel *panel,
-                        GtkWidget         *widget,
-                        cairo_t           *cr,
-                        CcBackgroundItem  *background)
-{
-  g_autoptr(GdkPixbuf) pixbuf = NULL;
-
-  pixbuf = get_or_create_cached_pixbuf (panel, widget, background);
-
-  gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
-  cairo_paint (cr);
-}
 
 static CcBackgroundItem *
 get_current_background (CcBackgroundPanel *panel,
@@ -122,7 +86,6 @@ update_preview (CcBackgroundPanel *panel,
                 GSettings         *settings,
                 CcBackgroundItem  *item)
 {
-  gboolean changes_with_time;
   CcBackgroundItem *current_background;
 
   current_background = get_current_background (panel, settings);
@@ -138,23 +101,10 @@ update_preview (CcBackgroundPanel *panel,
       cc_background_item_load (current_background, NULL);
     }
 
-  changes_with_time = FALSE;
-
-  if (current_background)
-    {
-      changes_with_time = cc_background_item_changes_with_time (current_background);
-    }
-
   if (settings == panel->settings)
-    {
-      gtk_widget_set_visible (panel->desktop_slide_image, changes_with_time);
-      gtk_widget_queue_draw (panel->desktop_drawing_area);
-    }
+    cc_background_preview_set_item (panel->desktop_preview, current_background);
   else
-    {
-      gtk_widget_set_visible (panel->lock_slide_image, changes_with_time);
-      gtk_widget_queue_draw (panel->lock_drawing_area);
-    }
+    cc_background_preview_set_item (panel->lock_screen_preview, current_background);
 }
 
 static gchar *
@@ -439,24 +389,6 @@ on_chooser_background_chosen_cb (CcBackgroundChooser        *chooser,
     set_background (self, self->lock_settings, item);
 }
 
-static gboolean
-on_preview_draw_cb (GtkWidget         *widget,
-                    cairo_t           *cr,
-                    CcBackgroundPanel *panel)
-{
-  update_display_preview (panel, widget, cr, panel->current_background);
-  return TRUE;
-}
-
-static gboolean
-on_lock_preview_draw_cb (GtkWidget         *widget,
-                         cairo_t           *cr,
-                         CcBackgroundPanel *panel)
-{
-  update_display_preview (panel, widget, cr, panel->current_lock_background);
-  return TRUE;
-}
-
 static const char *
 cc_background_panel_get_help_uri (CcPanel *panel)
 {
@@ -500,6 +432,7 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   g_type_ensure (CC_TYPE_BACKGROUND_CHOOSER);
+  g_type_ensure (CC_TYPE_BACKGROUND_PREVIEW);
 
   panel_class->get_help_uri = cc_background_panel_get_help_uri;
 
@@ -509,14 +442,10 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/background/cc-background-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, bottom_hbox);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, desktop_drawing_area);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, desktop_slide_image);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, lock_drawing_area);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, lock_slide_image);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, desktop_preview);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, lock_screen_preview);
 
   gtk_widget_class_bind_template_callback (widget_class, on_chooser_background_chosen_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_lock_preview_draw_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_preview_draw_cb);
 }
 
 static void
