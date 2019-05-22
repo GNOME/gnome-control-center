@@ -28,7 +28,8 @@
 
 typedef struct
 {
-  GtkListStore *store;
+  GnomeDesktopThumbnailFactory *thumbnail_factory;
+  GListStore *store;
   GtkWidget *widget;
   gint thumbnail_height;
   gint thumbnail_width;
@@ -116,6 +117,7 @@ bg_source_dispose (GObject *object)
   BgSource *source = BG_SOURCE (object);
   BgSourcePrivate *priv = bg_source_get_instance_private (source);
 
+  g_clear_object (&priv->thumbnail_factory);
   g_clear_object (&priv->store);
 
   G_OBJECT_CLASS (bg_source_parent_class)->dispose (object);
@@ -135,7 +137,7 @@ bg_source_class_init (BgSourceClass *klass)
   pspec = g_param_spec_object ("liststore",
                                "Liststore",
                                "Liststore used in the source",
-                               GTK_TYPE_LIST_STORE,
+                               G_TYPE_LIST_STORE,
                                G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
   g_object_class_install_property (object_class, PROP_LISTSTORE, pspec);
 
@@ -151,10 +153,11 @@ static void
 bg_source_init (BgSource *self)
 {
   BgSourcePrivate *priv = bg_source_get_instance_private (self);
-  priv->store = gtk_list_store_new (3, CAIRO_GOBJECT_TYPE_SURFACE, G_TYPE_OBJECT, G_TYPE_STRING);
+  priv->store = g_list_store_new (CC_TYPE_BACKGROUND_ITEM);
+  priv->thumbnail_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 }
 
-GtkListStore*
+GListStore*
 bg_source_get_liststore (BgSource *source)
 {
   BgSourcePrivate *priv;
@@ -196,4 +199,15 @@ bg_source_get_thumbnail_width (BgSource *source)
 
   priv = bg_source_get_instance_private (source);
   return priv->thumbnail_width;
+}
+
+GnomeDesktopThumbnailFactory*
+bg_source_get_thumbnail_factory (BgSource *source)
+{
+  BgSourcePrivate *priv;
+
+  g_return_val_if_fail (BG_IS_SOURCE (source), NULL);
+
+  priv = bg_source_get_instance_private (source);
+  return priv->thumbnail_factory;
 }
