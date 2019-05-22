@@ -62,6 +62,8 @@ common_sources += gnome.mkenums(
 resource_data = files(
   'cc-background-chooser.ui',
   'cc-background-panel.ui',
+  'cc-background-preview.ui',
+  'preview.css',
 )
 
 common_sources += gnome.compile_resources(
@@ -81,6 +83,7 @@ sources = common_sources + files(
   'cc-background-grilo-miner.c',
   'cc-background-item.c',
   'cc-background-panel.c',
+  'cc-background-preview.c',
   'cc-background-xml.c',
 )
 
