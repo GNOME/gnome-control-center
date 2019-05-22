@@ -67,8 +67,10 @@ create_widget_func (gpointer model_item,
   g_autoptr(GdkPixbuf) pixbuf = NULL;
   CcBackgroundChooser *self;
   CcBackgroundItem *item;
+  GtkWidget *overlay;
   GtkWidget *child;
   GtkWidget *image;
+  GtkWidget *icon;
 
   self = CC_BACKGROUND_CHOOSER (user_data);
   item = CC_BACKGROUND_ITEM (model_item);
@@ -80,11 +82,26 @@ create_widget_func (gpointer model_item,
   image = gtk_image_new_from_pixbuf (pixbuf);
   gtk_widget_show (image);
 
+  icon = g_object_new (GTK_TYPE_IMAGE,
+                       "icon-name", "slideshow-emblem",
+                       "pixel-size", 16,
+                       "margin", 8,
+                       "halign", GTK_ALIGN_END,
+                       "valign", GTK_ALIGN_END,
+                       "visible", cc_background_item_changes_with_time (item),
+                       NULL);
+  gtk_style_context_add_class (gtk_widget_get_style_context (icon), "slideshow-emblem");
+
+  overlay = gtk_overlay_new ();
+  gtk_container_add (GTK_CONTAINER (overlay), image);
+  gtk_overlay_add_overlay (GTK_OVERLAY (overlay), icon);
+  gtk_widget_show (overlay);
+
   child = g_object_new (GTK_TYPE_FLOW_BOX_CHILD,
                         "halign", GTK_ALIGN_CENTER,
                         "valign", GTK_ALIGN_CENTER,
                         NULL);
-  gtk_container_add (GTK_CONTAINER (child), image);
+  gtk_container_add (GTK_CONTAINER (child), overlay);
   gtk_widget_show (child);
 
   g_object_set_data_full (G_OBJECT (child), "item", g_object_ref (item), g_object_unref);
