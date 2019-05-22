@@ -96,19 +96,15 @@ get_or_create_cached_pixbuf (CcBackgroundPanel *panel,
 static void
 update_display_preview (CcBackgroundPanel *panel,
                         GtkWidget         *widget,
+                        cairo_t           *cr,
                         CcBackgroundItem  *background)
 {
-  GdkPixbuf *pixbuf;
-  cairo_t *cr;
+  g_autoptr(GdkPixbuf) pixbuf = NULL;
 
   pixbuf = get_or_create_cached_pixbuf (panel, widget, background);
 
-  cr = gdk_cairo_create (gtk_widget_get_window (widget));
-  gdk_cairo_set_source_pixbuf (cr,
-                               pixbuf,
-                               0, 0);
+  gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
   cairo_paint (cr);
-  cairo_destroy (cr);
 }
 
 static CcBackgroundItem *
@@ -448,7 +444,7 @@ on_preview_draw_cb (GtkWidget         *widget,
                     cairo_t           *cr,
                     CcBackgroundPanel *panel)
 {
-  update_display_preview (panel, widget, panel->current_background);
+  update_display_preview (panel, widget, cr, panel->current_background);
   return TRUE;
 }
 
@@ -457,7 +453,7 @@ on_lock_preview_draw_cb (GtkWidget         *widget,
                          cairo_t           *cr,
                          CcBackgroundPanel *panel)
 {
-  update_display_preview (panel, widget, panel->current_lock_background);
+  update_display_preview (panel, widget, cr, panel->current_lock_background);
   return TRUE;
 }
 
