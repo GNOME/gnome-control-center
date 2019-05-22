@@ -41,6 +41,7 @@ device_added_cb (CcDeviceComboBox *self,
   GvcMixerUIDevice *device = NULL;
   g_autofree gchar *label = NULL;
   g_autofree gchar *icon_name = NULL;
+  gchar *origin;
   GtkTreeIter iter;
 
   if (self->is_output)
@@ -50,7 +51,12 @@ device_added_cb (CcDeviceComboBox *self,
   if (device == NULL)
     return;
 
-  label = g_strdup_printf ("%s - %s", gvc_mixer_ui_device_get_description (device), gvc_mixer_ui_device_get_origin (device));
+  origin = gvc_mixer_ui_device_get_origin (device);
+  if (origin && g_strcmp0 (origin, "") != 0)
+    label = g_strdup_printf ("%s - %s", gvc_mixer_ui_device_get_description (device), gvc_mixer_ui_device_get_origin (device));
+  else
+    label = g_strdup (gvc_mixer_ui_device_get_description (device));
+
   if (gvc_mixer_ui_device_get_icon_name (device) != NULL)
     icon_name = g_strdup_printf ("%s-symbolic", gvc_mixer_ui_device_get_icon_name (device));
 
