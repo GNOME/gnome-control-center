@@ -57,6 +57,14 @@ struct _CcBackgroundItem
         char            *mime_type;
         int              width;
         int              height;
+
+        struct {
+                int        width;
+                int        height;
+                int        frame;
+                int        scale_factor;
+                GdkPixbuf *thumbnail;
+        } cached_thumbnail;
 };
 
 enum {
@@ -227,6 +235,14 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
 	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
 	g_return_val_if_fail (width > 0 && height > 0, NULL);
 
+        /* Use the cached thumbnail if the sizes match */
+        if (item->cached_thumbnail.thumbnail &&
+            item->cached_thumbnail.width == width &&
+            item->cached_thumbnail.height == height &&
+            item->cached_thumbnail.scale_factor == scale_factor &&
+            item->cached_thumbnail.frame == frame)
+                    return g_object_ref (item->cached_thumbnail.thumbnail);
+
         set_bg_properties (item);
 
         if (force_size) {
@@ -271,6 +287,13 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                  &item->height);
 
         update_size (item);
+
+        /* Cache the new thumbnail */
+        g_set_object (&item->cached_thumbnail.thumbnail, retval);
+        item->cached_thumbnail.width = width;
+        item->cached_thumbnail.height = height;
+        item->cached_thumbnail.scale_factor = scale_factor;
+        item->cached_thumbnail.frame = frame;
 
         return g_steal_pointer (&retval);
 }
@@ -820,6 +843,7 @@ cc_background_item_finalize (GObject *object)
 
         g_return_if_fail (item != NULL);
 
+        g_clear_object (&item->cached_thumbnail.thumbnail);
         g_free (item->name);
         g_free (item->uri);
         g_free (item->primary_color);
