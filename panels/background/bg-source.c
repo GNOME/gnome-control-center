@@ -24,7 +24,7 @@
 #include <cairo-gobject.h>
 
 #define THUMBNAIL_WIDTH 256
-#define THUMBNAIL_HEIGHT (THUMBNAIL_WIDTH * 3 / 4)
+#define THUMBNAIL_HEIGHT (THUMBNAIL_WIDTH * 9 / 16)
 
 typedef struct
 {
