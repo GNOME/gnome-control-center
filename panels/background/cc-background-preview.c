@@ -24,6 +24,7 @@ struct _CcBackgroundPreview
 {
   GtkBox            parent;
 
+  GtkWidget        *animated_background_icon;
   GtkLabel         *desktop_clock_label;
   GtkWidget        *drawing_area;
   GtkLabel         *lock_screen_label;
@@ -272,6 +273,7 @@ cc_background_preview_class_init (CcBackgroundPreviewClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/background/cc-background-preview.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, animated_background_icon);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, desktop_clock_label);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, drawing_area);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, lock_screen_label);
@@ -315,6 +317,9 @@ cc_background_preview_set_item (CcBackgroundPreview *self,
 
   if (!g_set_object (&self->item, item))
     return;
+
+  gtk_widget_set_visible (self->animated_background_icon,
+                          cc_background_item_changes_with_time (item));
 
   gtk_widget_queue_draw (self->drawing_area);
 
