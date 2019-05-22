@@ -30,7 +30,6 @@
 #include "cc-background-panel.h"
 
 #include "cc-background-chooser.h"
-#include "cc-background-chooser-dialog.h"
 #include "cc-background-item.h"
 #include "cc-background-resources.h"
 #include "cc-background-xml.h"
