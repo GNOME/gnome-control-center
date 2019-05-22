@@ -22,6 +22,7 @@
 #define _BG_SOURCE_H
 
 #include <gtk/gtk.h>
+#include <libgnome-desktop/gnome-desktop-thumbnail.h>
 
 G_BEGIN_DECLS
 
@@ -33,13 +34,15 @@ struct _BgSourceClass
   GObjectClass parent_class;
 };
 
-GtkListStore* bg_source_get_liststore (BgSource *source);
+GListStore* bg_source_get_liststore (BgSource *source);
 
 gint bg_source_get_scale_factor (BgSource *source);
 
 gint bg_source_get_thumbnail_height (BgSource *source);
 
 gint bg_source_get_thumbnail_width (BgSource *source);
+
+GnomeDesktopThumbnailFactory* bg_source_get_thumbnail_factory (BgSource *source);
 
 G_END_DECLS
 
