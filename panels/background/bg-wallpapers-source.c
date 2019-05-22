@@ -25,13 +25,11 @@
 #include "cc-background-xml.h"
 
 #include <cairo-gobject.h>
-#include <libgnome-desktop/gnome-desktop-thumbnail.h>
 #include <gio/gio.h>
 
 struct _BgWallpapersSource
 {
   BgSource parent_instance;
-  GnomeDesktopThumbnailFactory *thumb_factory;
   CcBackgroundXml *xml;
 };
 
@@ -42,38 +40,15 @@ load_wallpapers (gchar              *key,
                  CcBackgroundItem   *item,
                  BgWallpapersSource *source)
 {
-  GtkTreeIter iter;
-  g_autoptr(GdkPixbuf) pixbuf = NULL;
-  GtkListStore *store = bg_source_get_liststore (BG_SOURCE (source));
-  cairo_surface_t *surface;
+  GListStore *store = bg_source_get_liststore (BG_SOURCE (source));
   gboolean deleted;
-  gint scale_factor;
-  gint thumbnail_height;
-  gint thumbnail_width;
 
   g_object_get (G_OBJECT (item), "is-deleted", &deleted, NULL);
 
   if (deleted)
     return;
 
-  gtk_list_store_append (store, &iter);
-
-  scale_factor = bg_source_get_scale_factor (BG_SOURCE (source));
-  thumbnail_height = bg_source_get_thumbnail_height (BG_SOURCE (source));
-  thumbnail_width = bg_source_get_thumbnail_width (BG_SOURCE (source));
-  pixbuf = cc_background_item_get_thumbnail (item, source->thumb_factory,
-					     thumbnail_width, thumbnail_height,
-					     scale_factor);
-  if (pixbuf == NULL)
-    return;
-
-  surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
-  gtk_list_store_set (store, &iter,
-                      0, surface,
-                      1, item,
-                      2, cc_background_item_get_name (item),
-                      -1);
-  g_clear_pointer (&surface, cairo_surface_destroy);
+  g_list_store_append (store, item);
 }
 
 static void
@@ -136,7 +111,6 @@ bg_wallpapers_source_dispose (GObject *object)
 {
   BgWallpapersSource *self = BG_WALLPAPERS_SOURCE (object);
 
-  g_clear_object (&self->thumb_factory);
   g_clear_object (&self->xml);
 
   G_OBJECT_CLASS (bg_wallpapers_source_parent_class)->dispose (object);
@@ -145,8 +119,6 @@ bg_wallpapers_source_dispose (GObject *object)
 static void
 bg_wallpapers_source_init (BgWallpapersSource *self)
 {
-  self->thumb_factory =
-    gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
   self->xml = cc_background_xml_new ();
 }
 
