@@ -78,25 +78,18 @@ get_or_create_cached_pixbuf (CcBackgroundPanel *panel,
                              GtkWidget         *widget,
                              CcBackgroundItem  *background)
 {
-  GtkAllocation allocation;
   const gint preview_width = 309;
   const gint preview_height = 168;
   gint scale_factor;
   GdkPixbuf *pixbuf;
 
-  pixbuf = g_object_get_data (G_OBJECT (background), "pixbuf");
-  if (pixbuf == NULL)
-    {
-      gtk_widget_get_allocation (widget, &allocation);
-      scale_factor = gtk_widget_get_scale_factor (widget);
-      pixbuf = cc_background_item_get_frame_thumbnail (background,
-                                                       panel->thumb_factory,
-                                                       preview_width,
-                                                       preview_height,
-                                                       scale_factor,
-                                                       -2, TRUE);
-      g_object_set_data_full (G_OBJECT (background), "pixbuf", pixbuf, g_object_unref);
-    }
+  scale_factor = gtk_widget_get_scale_factor (widget);
+  pixbuf = cc_background_item_get_frame_thumbnail (background,
+                                                   panel->thumb_factory,
+                                                   preview_width,
+                                                   preview_height,
+                                                   scale_factor,
+                                                   -2, TRUE);
 
   return pixbuf;
 }
