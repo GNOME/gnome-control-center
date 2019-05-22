@@ -52,7 +52,6 @@ struct _CcBackgroundItem
         guint64          modified;
 
         /* internal */
-        GdkPixbuf       *slideshow_emblem;
         GnomeBG         *bg;
         char            *mime_type;
         int              width;
@@ -87,64 +86,6 @@ enum {
 static void     cc_background_item_finalize       (GObject               *object);
 
 G_DEFINE_TYPE (CcBackgroundItem, cc_background_item, G_TYPE_OBJECT)
-
-static GdkPixbuf *slideshow_emblem = NULL;
-
-static GdkPixbuf *
-get_emblemed_pixbuf (CcBackgroundItem *item, GdkPixbuf *pixbuf, gint scale_factor)
-{
-        int eh;
-        int ew;
-        int h;
-        int w;
-        int x;
-        int y;
-
-        if (item->slideshow_emblem == NULL) {
-                if (slideshow_emblem == NULL) {
-                        g_autoptr(GIcon) icon = NULL;
-                        GtkIconTheme *theme;
-                        g_autoptr(GtkIconInfo) icon_info = NULL;
-                        g_autoptr(GError) error = NULL;
-
-                        icon = g_themed_icon_new ("slideshow-emblem");
-                        theme = gtk_icon_theme_get_default ();
-                        icon_info = gtk_icon_theme_lookup_by_gicon_for_scale (theme,
-                                                                              icon,
-                                                                              16,
-                                                                              scale_factor,
-                                                                              GTK_ICON_LOOKUP_FORCE_SIZE |
-                                                                              GTK_ICON_LOOKUP_USE_BUILTIN);
-                        if (icon_info == NULL) {
-                                g_warning ("Your icon theme is missing the slideshow-emblem icon, "
-                                           "please file a bug against it");
-                                return g_object_ref (pixbuf);
-                        }
-
-                        slideshow_emblem = gtk_icon_info_load_icon (icon_info, &error);
-                        if (slideshow_emblem == NULL) {
-                                g_warning ("Failed to load slideshow emblem: %s", error->message);
-                                return g_object_ref (pixbuf);
-                        }
-
-                        g_object_add_weak_pointer (G_OBJECT (slideshow_emblem), (gpointer *) (&slideshow_emblem));
-                        item->slideshow_emblem = slideshow_emblem;
-                } else {
-                        item->slideshow_emblem = g_object_ref (slideshow_emblem);
-                }
-        }
-
-        eh = gdk_pixbuf_get_height (slideshow_emblem);
-        ew = gdk_pixbuf_get_width (slideshow_emblem);
-        h = gdk_pixbuf_get_height (pixbuf);
-        w = gdk_pixbuf_get_width (pixbuf);
-        x = w - ew;
-        y = h - eh;
-
-        gdk_pixbuf_composite (slideshow_emblem, pixbuf, x, y, ew, eh, x, y, 1.0, 1.0, GDK_INTERP_BILINEAR, 255);
-
-        return g_object_ref (pixbuf);
-}
 
 static void
 set_bg_properties (CcBackgroundItem *item)
@@ -271,13 +212,7 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                 }
         }
 
-        if (pixbuf != NULL
-            && frame != -2
-            && gnome_bg_changes_with_time (item->bg)) {
-                retval = get_emblemed_pixbuf (item, pixbuf, scale_factor);
-        } else {
-                retval = g_steal_pointer (&pixbuf);
-	}
+        retval = g_steal_pointer (&pixbuf);
 
         gnome_bg_get_image_size (item->bg,
                                  thumbs,
@@ -855,8 +790,6 @@ cc_background_item_finalize (GObject *object)
 
         if (item->bg != NULL)
                 g_object_unref (item->bg);
-
-        g_clear_object (&item->slideshow_emblem);
 
         G_OBJECT_CLASS (cc_background_item_parent_class)->finalize (object);
 }
