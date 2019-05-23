@@ -89,9 +89,9 @@ void
 pp_job_cancel_purge_async (PpJob        *self,
                            gboolean      job_purge)
 {
-  GDBusConnection *bus;
+  GDBusConnection  *bus;
   g_autoptr(GError) error = NULL;
-  gint            *job_id;
+  gint              job_id;
 
   g_object_get (self, "id", &job_id, NULL);
 
@@ -142,7 +142,7 @@ pp_job_set_hold_until_async (PpJob        *self,
 {
   GDBusConnection  *bus;
   g_autoptr(GError) error = NULL;
-  gint             *job_id;
+  gint              job_id;
 
   g_object_get (self, "id", &job_id, NULL);
 
