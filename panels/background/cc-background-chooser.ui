@@ -29,6 +29,43 @@
             <style>
               <class name="view" />
             </style>
+
+            <!-- Recent -->
+            <child>
+              <object class="GtkBox" id="recent_box">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="orientation">vertical</property>
+                <property name="halign">center</property>
+
+                <child>
+                  <object class="GtkFlowBox" id="recent_flowbox">
+                    <property name="visible">True</property>
+                    <property name="margin">12</property>
+                    <property name="column-spacing">12</property>
+                    <property name="row-spacing">12</property>
+                    <property name="homogeneous">True</property>
+                    <property name="halign">center</property>
+                    <property name="min-children-per-line">1</property>
+                    <property name="max-children-per-line">8</property>
+                    <property name="activate-on-single-click">True</property>
+                    <property name="selection-mode">single</property>
+                    <signal name="child-activated" handler="on_item_activated_cb" object="CcBackgroundChooser" swapped="no" />
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkSeparator">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
+                  </object>
+                </child>
+
+              </object>
+            </child>
+
             <child>
               <object class="GtkFlowBox" id="flowbox">
                 <property name="visible">True</property>
@@ -83,6 +120,33 @@
             <property name="visible">True</property>
             <property name="label" translatable="yes">Set Lock Screen</property>
             <signal name="clicked" handler="on_selection_lock_clicked_cb" object="CcBackgroundChooser" swapped="no" />
+          </object>
+        </child>
+
+        <!-- Recent items section -->
+        <child>
+          <object class="GtkBox" id="popover_recent_box">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">6</property>
+            <child>
+              <object class="GtkSeparator">
+                <property name="visible">True</property>
+                <property name="margin-top">12</property>
+                <property name="margin-bottom">12</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Delete Background</property>
+                <signal name="clicked" handler="on_delete_background_clicked_cb" object="CcBackgroundChooser" swapped="no" />
+                <style>
+                  <class name="destructive-action" />
+                </style>
+              </object>
+            </child>
           </object>
         </child>
       </object>
