@@ -34,4 +34,6 @@ typedef enum
 #define CC_TYPE_BACKGROUND_CHOOSER (cc_background_chooser_get_type())
 G_DECLARE_FINAL_TYPE (CcBackgroundChooser, cc_background_chooser, CC, BACKGROUND_CHOOSER, GtkBox)
 
+void cc_background_chooser_select_file (CcBackgroundChooser *self);
+
 G_END_DECLS
