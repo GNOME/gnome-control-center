@@ -77,6 +77,7 @@ common_sources += gnome.compile_resources(
 sources = common_sources + files(
   'bg-colors-source.c',
   'bg-pictures-source.c',
+  'bg-recent-source.c',
   'bg-source.c',
   'bg-wallpapers-source.c',
   'cc-background-chooser.c',
