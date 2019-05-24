@@ -95,8 +95,32 @@ pp_job_cancel_purge_async (PpJob        *self,
 
   g_object_get (self, "id", &job_id, NULL);
 
+  bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+  if (bus == NULL)
+    {
+      g_warning ("Failed to get session bus: %s", error->message);
+      return;
+    }
+
+  g_dbus_connection_call (bus,
+                          "org.gnome.SettingsDaemon.PrintNotifications",
+                          "/org/gnome/SettingsDaemon/PrintNotifications",
+                          "org.gnome.SettingsDaemon.PrintNotifications",
+                          "DoNotNotifyJob",
+                          g_variant_new ("(it)",
+                                         job_id,
+                                         1 << IPP_JSTATE_CANCELED),
+                          NULL,
+                          G_DBUS_CALL_FLAGS_NONE,
+                          -1,
+                          NULL,
+                          NULL,
+                          NULL);
+
+  g_object_unref (bus);
+
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
-  if (!bus)
+  if (bus == NULL)
     {
       g_warning ("Failed to get session bus: %s", error->message);
       return;
@@ -143,11 +167,40 @@ pp_job_set_hold_until_async (PpJob        *self,
   GDBusConnection  *bus;
   g_autoptr(GError) error = NULL;
   gint              job_id;
+  gboolean          resuming;
 
   g_object_get (self, "id", &job_id, NULL);
+  if (g_strcmp0 (job_hold_until, "no-hold") == 0)
+    resuming = TRUE;
+  else
+    resuming = FALSE;
+
+  bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+  if (bus == NULL)
+    {
+      g_warning ("Failed to get session bus: %s", error->message);
+      return;
+    }
+
+  g_dbus_connection_call (bus,
+                          "org.gnome.SettingsDaemon.PrintNotifications",
+                          "/org/gnome/SettingsDaemon/PrintNotifications",
+                          "org.gnome.SettingsDaemon.PrintNotifications",
+                          "DoNotNotifyJob",
+                          g_variant_new ("(it)",
+                                         job_id,
+                                         resuming ? 1 << IPP_JSTATE_PROCESSING : 1 << IPP_JSTATE_HELD),
+                          NULL,
+                          G_DBUS_CALL_FLAGS_NONE,
+                          -1,
+                          NULL,
+                          NULL,
+                          NULL);
+
+  g_object_unref (bus);
 
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
-  if (!bus)
+  if (bus == NULL)
     {
       g_warning ("Failed to get session bus: %s", error->message);
       return;
