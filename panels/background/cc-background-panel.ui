@@ -18,43 +18,19 @@
             <property name="margin">32</property>
             <property name="halign">center</property>
             <child>
-              <object class="GtkBox" id="vbox3">
+              <object class="CcBackgroundPreview" id="desktop_preview">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="CcBackgroundPreview" id="desktop_preview">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkBox" id="bottom_hbox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="spacing">12</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
-              <object class="GtkBox">
+              <object class="CcBackgroundPreview" id="lock_screen_preview">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
-                <property name="halign">start</property>
+                <property name="is-lock-screen">True</property>
                 <property name="valign">center</property>
-                <child>
-                  <object class="CcBackgroundPreview" id="lock_screen_preview">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="is-lock-screen">True</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
