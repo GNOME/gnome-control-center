@@ -61,6 +61,8 @@ struct _CcBackgroundPanel
 
   GCancellable *copy_cancellable;
 
+  CcBackgroundChooser *background_chooser;
+  GtkWidget *add_picture_button;
   GtkWidget *bottom_hbox;
   CcBackgroundPreview *desktop_preview;
   CcBackgroundPreview *lock_screen_preview;
@@ -389,10 +391,31 @@ on_chooser_background_chosen_cb (CcBackgroundChooser        *chooser,
     set_background (self, self->lock_settings, item);
 }
 
+static void
+on_add_picture_button_clicked_cb (GtkWidget         *button,
+                                  CcBackgroundPanel *self)
+{
+  cc_background_chooser_select_file (self->background_chooser);
+}
+
 static const char *
 cc_background_panel_get_help_uri (CcPanel *panel)
 {
   return "help:gnome-help/look-background";
+}
+
+static void
+cc_background_panel_constructed (GObject *object)
+{
+  CcBackgroundPanel *self;
+  CcShell *shell;
+
+  self = CC_BACKGROUND_PANEL (object);
+  shell = cc_panel_get_shell (CC_PANEL (self));
+
+  cc_shell_embed_widget_in_header (shell, self->add_picture_button, GTK_POS_RIGHT);
+
+  G_OBJECT_CLASS (cc_background_panel_parent_class)->constructed (object);
 }
 
 static void
@@ -436,16 +459,20 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
 
   panel_class->get_help_uri = cc_background_panel_get_help_uri;
 
+  object_class->constructed = cc_background_panel_constructed;
   object_class->dispose = cc_background_panel_dispose;
   object_class->finalize = cc_background_panel_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/background/cc-background-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, add_picture_button);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, background_chooser);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, bottom_hbox);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, desktop_preview);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, lock_screen_preview);
 
   gtk_widget_class_bind_template_callback (widget_class, on_chooser_background_chosen_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_add_picture_button_clicked_cb);
 }
 
 static void
