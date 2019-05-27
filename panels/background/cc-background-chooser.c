@@ -22,6 +22,7 @@
 
 #include "bg-colors-source.h"
 #include "bg-pictures-source.h"
+#include "bg-recent-source.h"
 #include "bg-wallpapers-source.h"
 #include "cc-background-chooser.h"
 
@@ -30,9 +31,15 @@ struct _CcBackgroundChooser
   GtkBox              parent;
 
   GtkFlowBox         *flowbox;
+  GtkWidget          *popover_recent_box;
+  GtkWidget          *recent_box;
+  GtkFlowBox         *recent_flowbox;
   GtkPopover         *selection_popover;
 
+  gboolean            recent_selected;
+
   BgWallpapersSource *wallpapers_source;
+  BgRecentSource     *recent_source;
 };
 
 G_DEFINE_TYPE (CcBackgroundChooser, cc_background_chooser, GTK_TYPE_BOX)
@@ -51,13 +58,17 @@ emit_background_chosen (CcBackgroundChooser        *self,
 {
   g_autoptr(GList) list = NULL;
   CcBackgroundItem *item;
+  GtkFlowBox *flowbox;
 
-  list = gtk_flow_box_get_selected_children (self->flowbox);
+  flowbox = self->recent_selected ? self->recent_flowbox : self->flowbox;
+  list = gtk_flow_box_get_selected_children (flowbox);
   g_assert (g_list_length (list) == 1);
 
   item = g_object_get_data (list->data, "item");
 
   g_signal_emit (self, signals[BACKGROUND_CHOSEN], 0, item, flags);
+
+  gtk_flow_box_unselect_all (flowbox);
 }
 
 static GtkWidget*
@@ -65,20 +76,20 @@ create_widget_func (gpointer model_item,
                     gpointer user_data)
 {
   g_autoptr(GdkPixbuf) pixbuf = NULL;
-  CcBackgroundChooser *self;
   CcBackgroundItem *item;
   GtkWidget *overlay;
   GtkWidget *child;
   GtkWidget *image;
   GtkWidget *icon;
+  BgSource *source;
 
-  self = CC_BACKGROUND_CHOOSER (user_data);
+  source = BG_SOURCE (user_data);
   item = CC_BACKGROUND_ITEM (model_item);
   pixbuf = cc_background_item_get_thumbnail (item,
-                                             bg_source_get_thumbnail_factory (BG_SOURCE (self->wallpapers_source)),
-                                             bg_source_get_thumbnail_width (BG_SOURCE (self->wallpapers_source)),
-                                             bg_source_get_thumbnail_height (BG_SOURCE (self->wallpapers_source)),
-                                             bg_source_get_scale_factor (BG_SOURCE (self->wallpapers_source)));
+                                             bg_source_get_thumbnail_factory (source),
+                                             bg_source_get_thumbnail_width (source),
+                                             bg_source_get_thumbnail_height (source),
+                                             bg_source_get_scale_factor (source));
   image = gtk_image_new_from_pixbuf (pixbuf);
   gtk_widget_show (image);
 
@@ -110,6 +121,18 @@ create_widget_func (gpointer model_item,
 }
 
 static void
+update_recent_visibility (CcBackgroundChooser *self)
+{
+  GListStore *store;
+  gboolean has_items;
+
+  store = bg_source_get_liststore (BG_SOURCE (self->recent_source));
+  has_items = g_list_model_get_n_items (G_LIST_MODEL (store)) != 0;
+
+  gtk_widget_set_visible (self->recent_box, has_items);
+}
+
+static void
 setup_flowbox (CcBackgroundChooser *self)
 {
   GListStore *store;
@@ -119,8 +142,38 @@ setup_flowbox (CcBackgroundChooser *self)
   gtk_flow_box_bind_model (self->flowbox,
                            G_LIST_MODEL (store),
                            create_widget_func,
-                           self,
+                           self->wallpapers_source,
                            NULL);
+
+  store = bg_source_get_liststore (BG_SOURCE (self->recent_source));
+
+  gtk_flow_box_bind_model (self->recent_flowbox,
+                           G_LIST_MODEL (store),
+                           create_widget_func,
+                           self->recent_source,
+                           NULL);
+
+  update_recent_visibility (self);
+  g_signal_connect_object (store,
+                           "items-changed",
+                           G_CALLBACK (update_recent_visibility),
+                           self,
+                           G_CONNECT_SWAPPED);
+}
+
+static void
+on_delete_background_clicked_cb (GtkButton           *button,
+                                 CcBackgroundChooser *self)
+{
+  g_autoptr(GList) list = NULL;
+  CcBackgroundItem *item;
+
+  list = gtk_flow_box_get_selected_children (self->recent_flowbox);
+  g_assert (g_list_length (list) == 1);
+
+  item = g_object_get_data (list->data, "item");
+
+  bg_recent_source_remove_item (self->recent_source, item);
 }
 
 static void
@@ -152,6 +205,9 @@ on_item_activated_cb (GtkFlowBox          *flowbox,
                       GtkFlowBoxChild     *child,
                       CcBackgroundChooser *self)
 {
+  self->recent_selected = flowbox == self->recent_flowbox;
+  gtk_widget_set_visible (self->popover_recent_box, self->recent_selected);
+
   gtk_popover_set_relative_to (self->selection_popover, GTK_WIDGET (child));
   gtk_popover_popup (self->selection_popover);
 }
@@ -163,6 +219,7 @@ cc_background_chooser_finalize (GObject *object)
 {
   CcBackgroundChooser *self = (CcBackgroundChooser *)object;
 
+  g_clear_object (&self->recent_source);
   g_clear_object (&self->wallpapers_source);
 
   G_OBJECT_CLASS (cc_background_chooser_parent_class)->finalize (object);
@@ -188,8 +245,12 @@ cc_background_chooser_class_init (CcBackgroundChooserClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/background/cc-background-chooser.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundChooser, flowbox);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundChooser, popover_recent_box);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundChooser, recent_box);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundChooser, recent_flowbox);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundChooser, selection_popover);
 
+  gtk_widget_class_bind_template_callback (widget_class, on_delete_background_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_item_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_selection_desktop_lock_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_selection_desktop_clicked_cb);
@@ -201,6 +262,7 @@ cc_background_chooser_init (CcBackgroundChooser *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  self->recent_source = bg_recent_source_new (GTK_WIDGET (self));
   self->wallpapers_source = bg_wallpapers_source_new (GTK_WIDGET (self));
   setup_flowbox (self);
 }
