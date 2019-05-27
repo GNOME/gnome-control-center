@@ -71,4 +71,11 @@
       </object>
     </child>
   </template>
+
+  <!-- Header button -->
+  <object class="GtkButton" id="add_picture_button">
+    <property name="visible">True</property>
+    <property name="label" translatable="yes">Add Picture…</property>
+    <signal name="clicked" handler="on_add_picture_button_clicked_cb" object="CcBackgroundPanel" swapped="no" />
+  </object>
 </interface>
