@@ -71,7 +71,6 @@ get_colors_dir (void)
 
 static void
 bg_colors_source_add_color (BgColorsSource               *self,
-                            GnomeDesktopThumbnailFactory *thumb_factory,
                             GListStore                   *store,
                             const char                   *color)
 {
@@ -104,7 +103,6 @@ static void
 bg_colors_source_constructed (GObject *object)
 {
   BgColorsSource *self = BG_COLORS_SOURCE (object);
-  g_autoptr(GnomeDesktopThumbnailFactory) thumb_factory = NULL;
   guint i;
   GListStore *store;
   g_autoptr(GKeyFile) keyfile = NULL;
@@ -113,10 +111,9 @@ bg_colors_source_constructed (GObject *object)
   G_OBJECT_CLASS (bg_colors_source_parent_class)->constructed (object);
 
   store = bg_source_get_liststore (BG_SOURCE (self));
-  thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
   for (i = 0; i < G_N_ELEMENTS (items); i++)
-    bg_colors_source_add_color (self, thumb_factory, store, items[i].pcolor);
+    bg_colors_source_add_color (self, store, items[i].pcolor);
 
   keyfile = g_key_file_new ();
   path = get_colors_path ();
@@ -126,7 +123,7 @@ bg_colors_source_constructed (GObject *object)
 
       colors = g_key_file_get_string_list (keyfile, "Colors", "custom-colors", NULL, NULL);
       for (i = 0; colors != NULL && colors[i] != NULL; i++)
-        bg_colors_source_add_color (self, thumb_factory, store, colors[i]);
+        bg_colors_source_add_color (self, store, colors[i]);
     }
 }
 
@@ -135,7 +132,6 @@ bg_colors_source_add (BgColorsSource       *self,
                       GdkRGBA              *rgba,
                       GtkTreeRowReference **ret_row_ref)
 {
-  GnomeDesktopThumbnailFactory *thumb_factory;
   GListStore *store;
   g_autofree gchar *c = NULL;
   g_auto(GStrv) colors = NULL;
@@ -150,10 +146,9 @@ bg_colors_source_add (BgColorsSource       *self,
                        (int)(255*rgba->green),
                        (int)(255*rgba->blue));
 
-  thumb_factory = bg_source_get_thumbnail_factory (BG_SOURCE (self));
   store = bg_source_get_liststore (BG_SOURCE (self));
 
-  bg_colors_source_add_color (self, thumb_factory, store, c);
+  bg_colors_source_add_color (self, store, c);
 
   /* Save to the keyfile */
   dir = get_colors_dir ();
