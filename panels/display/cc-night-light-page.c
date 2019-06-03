@@ -618,19 +618,19 @@ cc_night_light_page_init (CcNightLightPage *self)
   gtk_list_box_set_header_func (self->listbox, cc_list_box_update_header_func, NULL, NULL);
 
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
-                      3000, GTK_POS_BOTTOM,
+                      1700, GTK_POS_BOTTOM,
                       _("More Warm"));
 
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
-                      4000, GTK_POS_BOTTOM,
+                      2700, GTK_POS_BOTTOM,
                       NULL);
 
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
-                      5000, GTK_POS_BOTTOM,
+                      3700, GTK_POS_BOTTOM,
                       NULL);
 
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
-                      6000, GTK_POS_BOTTOM,
+                      4700, GTK_POS_BOTTOM,
                       _("Less Warm"));
 
   self->cancellable = g_cancellable_new ();
