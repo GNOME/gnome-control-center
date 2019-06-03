@@ -84,9 +84,11 @@ mouse_tracking_radio_toggled_cb (GtkWidget *widget, ZoomOptions *self)
 {
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)) == TRUE)
 	  {
-        g_settings_set_string (self->settings, "mouse-tracking",
-	                           gtk_buildable_get_name (GTK_BUILDABLE (widget)));
-      }
+	    const gchar *widget_name = gtk_buildable_get_name (GTK_BUILDABLE (widget));
+	    g_settings_set_string (self->settings, "mouse-tracking",
+	      /* drop the "_radio" suffix */
+	      g_strndup (widget_name, strlen (widget_name) - 6));
+	  }
 }
 
 static void
@@ -99,7 +101,7 @@ init_mouse_mode_radio_group (GSList *mode_group, ZoomOptions *self)
 	for (; mode_group != NULL; mode_group = mode_group->next)
 	  {
 	    name = (gchar *) gtk_buildable_get_name (GTK_BUILDABLE (mode_group->data));
-	    if (g_strcmp0 (name, mode) == 0)
+	    if (g_strcmp0 (name, g_strdup_printf ("%s_radio", mode)) == 0)
 	      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (mode_group->data), TRUE);
 	    else
 	      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (mode_group->data), FALSE);
