@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-05-14 01:59+0000\n"
-"PO-Revision-Date: 2019-05-16 12:34+0200\n"
+"POT-Creation-Date: 2019-05-31 18:46+0000\n"
+"PO-Revision-Date: 2019-06-03 11:55+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -49,7 +49,7 @@ msgstr "Bus de sesión"
 #: panels/applications/cc-applications-panel.c:568
 #: panels/power/cc-power-panel.c:2462 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
-#: shell/cc-window.c:268
+#: shell/cc-window.c:273
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -67,12 +67,8 @@ msgstr "Red"
 msgid "Has network access"
 msgstr "Tiene acceso a la red"
 
-#. translators: "Home" is used in place of the Pictures
-#. * directory in the string below when XDG_PICTURES_DIR is
-#. * undefined
 #: panels/applications/cc-applications-panel.c:579
 #: panels/applications/cc-applications-panel.c:581
-#: panels/background/cc-background-chooser-dialog.c:536
 #: panels/search/cc-search-locations-dialog.c:286
 msgid "Home"
 msgstr "Domicilio"
@@ -88,8 +84,8 @@ msgid "File System"
 msgstr "Sistema de achivos"
 
 #: panels/applications/cc-applications-panel.c:591
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:272
-#: shell/cc-window.c:935 shell/cc-window.ui:131
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:277
+#: shell/cc-window.c:959 shell/cc-window.ui:131
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Configuración"
@@ -308,7 +304,7 @@ msgid "No results found"
 msgstr "No se han encontrado resultados"
 
 #: panels/applications/cc-applications-panel.ui:474
-#: panels/keyboard/cc-keyboard-panel.ui:175 shell/cc-panel-list.ui:201
+#: panels/keyboard/cc-keyboard-panel.ui:157 shell/cc-panel-list.ui:201
 msgid "Try a different search"
 msgstr "Pruebe una búsqueda diferente"
 
@@ -349,80 +345,12 @@ msgstr "Controlar la configuración y los permisos de varias aplicaciones"
 msgid "application;flatpak;permission;setting;"
 msgstr "aplicación;flatpak;permisos;configuración;"
 
-#: panels/background/background.ui:49
-msgid "_Background"
-msgstr "_Fondo"
+#: panels/background/cc-background-chooser.c:348
+#| msgid "Select an input source"
+msgid "Select a picture"
+msgstr "Seleccionar una imagen"
 
-#. This refers to a slideshow background
-#: panels/background/background.ui:99 panels/background/background.ui:212
-msgid "Changes throughout the day"
-msgstr "Cambia a lo largo del día"
-
-#. To translators: This is a noun, not a verb
-#: panels/background/background.ui:162
-msgid "_Lock Screen"
-msgstr "Pantalla de _bloqueo"
-
-#: panels/background/background.ui:268
-msgctxt "background, style"
-msgid "Tile"
-msgstr "Mosaico"
-
-#: panels/background/background.ui:272
-msgctxt "background, style"
-msgid "Zoom"
-msgstr "Ampliación"
-
-#: panels/background/background.ui:276
-msgctxt "background, style"
-msgid "Center"
-msgstr "Centrar"
-
-#: panels/background/background.ui:280
-msgctxt "background, style"
-msgid "Scale"
-msgstr "Escalar"
-
-#: panels/background/background.ui:284
-msgctxt "background, style"
-msgid "Fill"
-msgstr "Rellenar"
-
-#: panels/background/background.ui:288
-msgctxt "background, style"
-msgid "Span"
-msgstr "Expandir"
-
-#: panels/background/cc-background-chooser-dialog.c:412
-msgid "Wallpapers"
-msgstr "Fondos de escritorio"
-
-#: panels/background/cc-background-chooser-dialog.c:423
-msgid "Colors"
-msgstr "Colores"
-
-#. translators: This is the title of the wallpaper chooser dialog.
-#: panels/background/cc-background-chooser-dialog.c:455
-msgid "Select Background"
-msgstr "Seleccionar fondo"
-
-#: panels/background/cc-background-chooser-dialog.c:484
-msgid "Pictures"
-msgstr "Imágenes"
-
-#. translators: No pictures were found
-#: panels/background/cc-background-chooser-dialog.c:519
-msgid "No Pictures Found"
-msgstr "No se han encontrado imágenes"
-
-#. translators: %s here is the name of the Pictures directory, the string should be translated in
-#. * the context "You can add images to your Pictures folder and they will show up here"
-#: panels/background/cc-background-chooser-dialog.c:546
-#, c-format
-msgid "You can add images to your %s folder and they will show up here"
-msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
-
-#: panels/background/cc-background-chooser-dialog.c:550
+#: panels/background/cc-background-chooser.c:351
 #: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/cc-color-panel.ui:657 panels/color/color-calibrate.ui:25
 #: panels/common/cc-language-chooser.ui:24
@@ -437,10 +365,10 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 #: panels/privacy/cc-privacy-panel.c:1137 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:607
-#: panels/sharing/cc-sharing-panel.c:427
+#: panels/sharing/cc-sharing-panel.c:428
 #: panels/user-accounts/cc-add-user-dialog.ui:28
-#: panels/user-accounts/cc-avatar-chooser.c:106
-#: panels/user-accounts/cc-avatar-chooser.c:234
+#: panels/user-accounts/cc-avatar-chooser.c:107
+#: panels/user-accounts/cc-avatar-chooser.c:235
 #: panels/user-accounts/cc-password-dialog.ui:20
 #: panels/user-accounts/cc-user-panel.c:640
 #: panels/user-accounts/cc-user-panel.c:658
@@ -449,29 +377,63 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: panels/background/cc-background-chooser-dialog.c:551
-#: panels/common/cc-language-chooser.ui:12
-msgid "_Select"
-msgstr "_Seleccionar"
+#: panels/background/cc-background-chooser.c:352
+#: panels/network/connection-editor/vpn-helpers.c:182
+#: panels/printers/pp-details-dialog.c:314
+#: panels/sharing/cc-sharing-panel.c:429
+#: panels/user-accounts/cc-avatar-chooser.c:236
+msgid "_Open"
+msgstr "_Abrir"
 
-#: panels/background/cc-background-item.c:191
+#: panels/background/cc-background-chooser.ui:104
+#| msgid "Show in Lock Screen"
+msgid "Set Background and Lock Screen"
+msgstr "Establecer fondo y pantalla de bloqueo"
+
+#: panels/background/cc-background-chooser.ui:114
+#| msgid "Select Background"
+msgid "Set Background"
+msgstr "Establecer fondo"
+
+#: panels/background/cc-background-chooser.ui:121
+#| msgid "_Lock Screen"
+msgid "Set Lock Screen"
+msgstr "Establecer pantalla de bloqueo"
+
+#: panels/background/cc-background-chooser.ui:143
+#| msgid "Select Background"
+msgid "Delete Background"
+msgstr "Eliminar fondo"
+
+#: panels/background/cc-background-item.c:140
 msgid "multiple sizes"
 msgstr "tamaños múltiples"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:195
+#: panels/background/cc-background-item.c:144
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:320
+#: panels/background/cc-background-item.c:278
 msgid "No Desktop Background"
 msgstr "Sin fondo de escritorio"
 
-#: panels/background/cc-background-panel.c:291
+#: panels/background/cc-background-panel.c:145
 msgid "Current background"
 msgstr "Fondo actual"
+
+#: panels/background/cc-background-panel.ui:54
+#| msgid "Add a Printer…"
+msgid "Add Picture…"
+msgstr "Añadir imagen…"
+
+#: panels/background/cc-background-preview.ui:55
+#| msgctxt "service is active"
+#| msgid "Active"
+msgid "Activities"
+msgstr "Actividades"
 
 #: panels/background/gnome-background-panel.desktop.in.in:3
 msgid "Background"
@@ -1199,6 +1161,10 @@ msgstr "No se han encontrado idiomas"
 msgid "Select Language"
 msgstr "Seleccionar idioma"
 
+#: panels/common/cc-language-chooser.ui:12
+msgid "_Select"
+msgstr "_Seleccionar"
+
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:106
 msgid "Today"
@@ -1241,17 +1207,17 @@ msgid "Year"
 msgstr "Año"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:332
+#: panels/datetime/cc-datetime-panel.c:334
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%d/%b/%Y, %I:%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:337
+#: panels/datetime/cc-datetime-panel.c:339
 msgid "%e %B %Y, %R"
 msgstr "%d/%b/%Y, %H:%M"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:502
+#: panels/datetime/cc-datetime-panel.c:504
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1259,7 +1225,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:529
+#: panels/datetime/cc-datetime-panel.c:531
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1267,23 +1233,23 @@ msgstr "%s (%s)"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: panels/datetime/cc-datetime-panel.c:536
+#: panels/datetime/cc-datetime-panel.c:538
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:541
+#: panels/datetime/cc-datetime-panel.c:543
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:546
+#: panels/datetime/cc-datetime-panel.c:548
 msgid "%R"
 msgstr "%R"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: panels/datetime/cc-datetime-panel.c:551
+#: panels/datetime/cc-datetime-panel.c:553
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
@@ -1680,6 +1646,7 @@ msgstr "_Fotos"
 
 #. TRANSLATORS: AP type
 #: panels/info/cc-info-overview-panel.c:369
+#: panels/info/cc-info-overview-panel.c:440
 #: panels/info/cc-info-overview-panel.c:452
 #: panels/info/cc-info-overview-panel.c:497
 #: panels/info/cc-info-overview-panel.c:527 panels/network/panel-common.c:123
@@ -1942,8 +1909,9 @@ msgid "Sound and Media"
 msgstr "Sonido y medios"
 
 #: panels/keyboard/00-multimedia.xml.in:4
-msgid "Volume mute"
-msgstr "Silenciar"
+#| msgid "Volume mute"
+msgid "Volume mute/unmute"
+msgstr "Silenciar o no el volumen"
 
 #: panels/keyboard/00-multimedia.xml.in:6
 msgid "Volume down"
@@ -1954,30 +1922,35 @@ msgid "Volume up"
 msgstr "Subir volumen"
 
 #: panels/keyboard/00-multimedia.xml.in:10
+#| msgid "Microphone"
+msgid "Microphone mute/unmute"
+msgstr "Silenciar o no el micrófono"
+
+#: panels/keyboard/00-multimedia.xml.in:12
 msgid "Launch media player"
 msgstr "Lanzar el reproductor multimedia"
 
-#: panels/keyboard/00-multimedia.xml.in:12
+#: panels/keyboard/00-multimedia.xml.in:14
 msgid "Play (or play/pause)"
 msgstr "Reproducir (o reproducir/pausar)"
 
-#: panels/keyboard/00-multimedia.xml.in:14
+#: panels/keyboard/00-multimedia.xml.in:16
 msgid "Pause playback"
 msgstr "Pausar la reproducción"
 
-#: panels/keyboard/00-multimedia.xml.in:16
+#: panels/keyboard/00-multimedia.xml.in:18
 msgid "Stop playback"
 msgstr "Detener la reproducción"
 
-#: panels/keyboard/00-multimedia.xml.in:18
+#: panels/keyboard/00-multimedia.xml.in:20
 msgid "Previous track"
 msgstr "Pista anterior"
 
-#: panels/keyboard/00-multimedia.xml.in:20
+#: panels/keyboard/00-multimedia.xml.in:22
 msgid "Next track"
 msgstr "Siguiente pista"
 
-#: panels/keyboard/00-multimedia.xml.in:22
+#: panels/keyboard/00-multimedia.xml.in:24
 msgid "Eject"
 msgstr "Expulsar"
 
@@ -2125,11 +2098,11 @@ msgstr "Tecla de composición"
 msgid "Modifiers-only switch to next source"
 msgstr "Sólo los modificadores cambian a la fuente siguiente"
 
-#: panels/keyboard/cc-keyboard-panel.c:179
+#: panels/keyboard/cc-keyboard-panel.c:180
 msgid "Reset All Shortcuts?"
 msgstr "¿Restablecer todos los atajos?"
 
-#: panels/keyboard/cc-keyboard-panel.c:182
+#: panels/keyboard/cc-keyboard-panel.c:183
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2137,35 +2110,30 @@ msgstr ""
 "Restablecer todos los atajos puede afectar a sus atajos personalizados. Esto "
 "no se puede deshacer."
 
-#: panels/keyboard/cc-keyboard-panel.c:186
+#: panels/keyboard/cc-keyboard-panel.c:187
 #: panels/keyboard/shortcut-editor.ui:346
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: panels/keyboard/cc-keyboard-panel.c:187
+#: panels/keyboard/cc-keyboard-panel.c:188
 msgid "Reset All"
 msgstr "Restablecer todo"
 
-#: panels/keyboard/cc-keyboard-panel.c:283
+#: panels/keyboard/cc-keyboard-panel.c:284
 msgid "Reset the shortcut to its default value"
 msgstr "Restablecer el valor predeterminado del atajo"
 
-#: panels/keyboard/cc-keyboard-panel.ui:67 panels/region/cc-region-panel.ui:395
-#: shell/cc-window.ui:334
-msgid "Keyboard Shortcuts"
-msgstr "Combinaciones de teclas"
-
-#: panels/keyboard/cc-keyboard-panel.ui:77
+#: panels/keyboard/cc-keyboard-panel.ui:116
 msgid "Reset All…"
 msgstr "Restablecer todo…"
 
-#: panels/keyboard/cc-keyboard-panel.ui:78
+#: panels/keyboard/cc-keyboard-panel.ui:117
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Restablecer todos los atajos a sus valores predeterminados"
 
-#: panels/keyboard/cc-keyboard-panel.ui:164
+#: panels/keyboard/cc-keyboard-panel.ui:146
 msgid "No keyboard shortcut found"
 msgstr "No se ha encontrado un atajo del teclado"
 
@@ -2195,8 +2163,9 @@ msgid "Add Custom Shortcut"
 msgstr "Añadir un atajo personalizado"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:3
-msgid "Keyboard"
-msgstr "Teclado"
+#: panels/region/cc-region-panel.ui:395 shell/cc-window.ui:339
+msgid "Keyboard Shortcuts"
+msgstr "Combinaciones de teclas"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
 msgid "View and change keyboard shortcuts and set your typing preferences"
@@ -2601,7 +2570,7 @@ msgstr "Quitar VPN"
 
 #: panels/network/connection-editor/ce-page-details.c:332
 #: panels/network/network-wifi.ui:1433 shell/cc-panel-list.ui:103
-#: shell/cc-window.c:264
+#: shell/cc-window.c:269
 msgid "Details"
 msgstr "Detalles"
 
@@ -2927,13 +2896,6 @@ msgstr ""
 msgid "Select file to import"
 msgstr "Seleccione el archivo que importar"
 
-#: panels/network/connection-editor/vpn-helpers.c:182
-#: panels/printers/pp-details-dialog.c:314
-#: panels/sharing/cc-sharing-panel.c:428
-#: panels/user-accounts/cc-avatar-chooser.c:235
-msgid "_Open"
-msgstr "_Abrir"
-
 #: panels/network/connection-editor/vpn-helpers.c:230
 #, c-format
 msgid "A file named “%s” already exists."
@@ -2987,9 +2949,9 @@ msgstr "Controlar cómo se conecta a Internet"
 
 #. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in.in:19
-#| msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
-msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;Proxy;"
-msgstr "Red;IP;LAN;Proxy;WAN;Banda;ancha;Módem;Bluetooth;vpn;DNS;proxy;"
+#| msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;Proxy;"
+msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
+msgstr "Red;IP;LAN;Proxy;WAN;Banda;ancha;Módem;Bluetooth;vpn;DNS;"
 
 #: panels/network/gnome-wifi-panel.desktop.in.in:4
 msgid "Control how you connect to Wi-Fi networks"
@@ -2997,7 +2959,6 @@ msgstr "Controlar cómo se conecta a redes inalámbricas"
 
 #. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in.in:19
-#| msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;"
 msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 msgstr ""
 "Red;Inalámbrica;Wireless;Wi-Fi;Wifi;IP;LAN;Banda;ancha;DNS;punto;acceso;"
@@ -4732,7 +4693,7 @@ msgid "Select Printer Driver"
 msgstr "Seleccionar el controlador de la impresora"
 
 #: panels/printers/ppd-selection-dialog.ui:40
-#: panels/user-accounts/cc-avatar-chooser.c:108
+#: panels/user-accounts/cc-avatar-chooser.c:109
 msgid "Select"
 msgstr "Seleccionar"
 
@@ -5673,7 +5634,7 @@ msgid "Input methods can’t be used on the login screen"
 msgstr ""
 "Los métodos de entrada no se pueden usar en la pantalla de inicio de sesión"
 
-#: panels/region/cc-region-panel.c:1503
+#: panels/region/cc-region-panel.c:1504
 msgid "Login _Screen"
 msgstr "Pantalla de inicio de _sesión"
 
@@ -5821,31 +5782,31 @@ msgstr "Otra"
 msgid "No networks selected for sharing"
 msgstr "No se han seleccionado redes para compartir"
 
-#: panels/sharing/cc-sharing-panel.c:319
+#: panels/sharing/cc-sharing-panel.c:320
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Encendido"
 
-#: panels/sharing/cc-sharing-panel.c:321 panels/sharing/cc-sharing-panel.c:348
+#: panels/sharing/cc-sharing-panel.c:322 panels/sharing/cc-sharing-panel.c:349
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Apagado"
 
-#: panels/sharing/cc-sharing-panel.c:351
+#: panels/sharing/cc-sharing-panel.c:352
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Activado"
 
-#: panels/sharing/cc-sharing-panel.c:354
+#: panels/sharing/cc-sharing-panel.c:355
 msgctxt "service is active"
 msgid "Active"
 msgstr "Activo"
 
-#: panels/sharing/cc-sharing-panel.c:424
+#: panels/sharing/cc-sharing-panel.c:425
 msgid "Choose a Folder"
 msgstr "Elija una carpeta"
 
-#: panels/sharing/cc-sharing-panel.c:724
+#: panels/sharing/cc-sharing-panel.c:725
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5855,7 +5816,7 @@ msgstr ""
 "«Público» con otros en su red actual usando: <a href=\"dav://%s\">dav://%s</"
 "a>"
 
-#: panels/sharing/cc-sharing-panel.c:726
+#: panels/sharing/cc-sharing-panel.c:727
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5866,7 +5827,7 @@ msgstr ""
 "conectarse usando el comando de shell segura:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:728
+#: panels/sharing/cc-sharing-panel.c:729
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
@@ -5875,11 +5836,11 @@ msgstr ""
 "La compartición de pantalla permite a los usuarios remotos ver o controlar "
 "su pantalla conectándose a: <a href=\"vnc://%s\">vnc://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:832
+#: panels/sharing/cc-sharing-panel.c:833
 msgid "Copy"
 msgstr "Copiar"
 
-#: panels/sharing/cc-sharing-panel.c:1285
+#: panels/sharing/cc-sharing-panel.c:1286
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "Compartir"
@@ -6095,7 +6056,6 @@ msgstr "Cambiar el volumen de entrada y salida de sonido y las alertas sonoras"
 
 #. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/gnome-sound-panel.desktop.in.in:20
-#| msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
 msgid ""
 "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;Output;Input;"
 msgstr ""
@@ -6939,15 +6899,15 @@ msgstr "Debe estar conectado para añadir usuarios corporativos."
 msgid "_Enterprise Login"
 msgstr "Inicio de s_esión corporativo"
 
-#: panels/user-accounts/cc-avatar-chooser.c:231
+#: panels/user-accounts/cc-avatar-chooser.c:232
 msgid "Browse for more pictures"
 msgstr "Examinar para buscar más imágenes"
 
-#: panels/user-accounts/cc-avatar-chooser.ui:27
+#: panels/user-accounts/cc-avatar-chooser.ui:39
 msgid "Take a Picture…"
 msgstr "Hacer una foto…"
 
-#: panels/user-accounts/cc-avatar-chooser.ui:34
+#: panels/user-accounts/cc-avatar-chooser.ui:46
 msgid "Select a File…"
 msgstr "Seleccionar un archivo…"
 
@@ -7798,7 +7758,7 @@ msgstr "Pulsación del botón derecho del ratón"
 msgid "Right Mouse Button Click"
 msgstr "Pulsación del botón del medio del ratón"
 
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:242
+#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:241
 msgid "Back"
 msgstr "Atrás"
 
@@ -7894,11 +7854,11 @@ msgstr "Todas las configuraciones"
 msgid "Primary Menu"
 msgstr "Menú primario"
 
-#: shell/cc-window.ui:326
+#: shell/cc-window.ui:331
 msgid "Warning: Development Version"
 msgstr "Advertencia: versión de desarrollo"
 
-#: shell/cc-window.ui:327
+#: shell/cc-window.ui:332
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -7908,7 +7868,7 @@ msgstr ""
 "Puede experimentar un comportamiento incorrecto del sistema, pérdida de "
 "datos y otros problemas inesperados."
 
-#: shell/cc-window.ui:338
+#: shell/cc-window.ui:343
 msgid "Help"
 msgstr "Ayuda"
 
@@ -7992,6 +7952,54 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2736
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
+
+#~ msgid "_Background"
+#~ msgstr "_Fondo"
+
+#~ msgid "Changes throughout the day"
+#~ msgstr "Cambia a lo largo del día"
+
+#~ msgctxt "background, style"
+#~ msgid "Tile"
+#~ msgstr "Mosaico"
+
+#~ msgctxt "background, style"
+#~ msgid "Zoom"
+#~ msgstr "Ampliación"
+
+#~ msgctxt "background, style"
+#~ msgid "Center"
+#~ msgstr "Centrar"
+
+#~ msgctxt "background, style"
+#~ msgid "Scale"
+#~ msgstr "Escalar"
+
+#~ msgctxt "background, style"
+#~ msgid "Fill"
+#~ msgstr "Rellenar"
+
+#~ msgctxt "background, style"
+#~ msgid "Span"
+#~ msgstr "Expandir"
+
+#~ msgid "Wallpapers"
+#~ msgstr "Fondos de escritorio"
+
+#~ msgid "Colors"
+#~ msgstr "Colores"
+
+#~ msgid "Pictures"
+#~ msgstr "Imágenes"
+
+#~ msgid "No Pictures Found"
+#~ msgstr "No se han encontrado imágenes"
+
+#~ msgid "You can add images to your %s folder and they will show up here"
+#~ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
+
+#~ msgid "Keyboard"
+#~ msgstr "Teclado"
 
 #~ msgid "application-x-executable"
 #~ msgstr "application-x-executable"
@@ -9284,9 +9292,6 @@ msgstr "Sonidos del sistema"
 #~ msgid "Show Pop Up Banners"
 #~ msgstr "Mostrar los banners emergentes"
 
-#~ msgid "Show in Lock Screen"
-#~ msgstr "Mostrar en la pantalla de bloqueo"
-
 #~ msgid "Enter address of a printer or a text to filter results"
 #~ msgstr ""
 #~ "Introducir la dirección de una impresa o un texto para filtrar los "
@@ -9949,9 +9954,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Change your region and language settings"
 #~ msgstr "Cambiar su configuración de región e idioma"
-
-#~ msgid "Select an input source"
-#~ msgstr "Seleccionar una fuente de entrada"
 
 #~ msgid ""
 #~ "The login screen, system accounts and new user accounts use the system-"
