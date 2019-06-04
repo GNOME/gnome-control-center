@@ -92,7 +92,7 @@ mouse_tracking_radio_toggled_cb (GtkWidget *widget, ZoomOptions *self)
 static void
 init_mouse_mode_radio_group (GSList *mode_group, ZoomOptions *self)
 {
-    gchar *mode;
+    g_autofree gchar *mode = NULL;
     gchar *name;
 
     mode = g_settings_get_string (self->settings, "mouse-tracking");
@@ -173,7 +173,7 @@ mouse_tracking_notify_cb (GSettings   *settings,
                           const gchar *key,
                           ZoomOptions *self)
 {
-  gchar *tracking;
+  g_autofree gchar *tracking = NULL;
 
   tracking = g_settings_get_string (settings, key);
   if (g_strcmp0 (tracking, "proportional") == 0)
@@ -222,7 +222,7 @@ screen_position_notify_cb (GSettings *settings,
                            const gchar *key,
                            ZoomOptions *self)
 {
-  gchar *position;
+  g_autofree gchar *position = NULL;
   GtkTreeIter iter;
   GtkTreeModel *model;
   GtkComboBox *combobox;
@@ -258,7 +258,7 @@ screen_position_notify_cb (GSettings *settings,
 static void
 init_xhairs_color_opacity (GtkColorButton *color_button, GSettings *settings)
 {
-    gchar *color_setting;
+    g_autofree gchar *color_setting = NULL;
     GdkRGBA rgba;
 
     color_setting = g_settings_get_string (settings, "cross-hairs-color");
