@@ -70,7 +70,6 @@ static gchar *contrast_keys[] = {
 };
 
 static void set_enable_screen_part_ui (GtkWidget *widget, ZoomOptions *self);
-static void mouse_tracking_notify_cb (GSettings *settings, const gchar *key, ZoomOptions *self);
 static void scale_label (GtkBin *toggle, PangoAttrList *attrs);
 static void xhairs_color_opacity_changed (GtkColorButton *button, ZoomOptions *self);
 static void xhairs_length_add_marks (ZoomOptions *self, GtkScale *scale);
@@ -80,41 +79,37 @@ static void contrast_slider_notify_cb (GSettings *settings, const gchar *key, Zo
 static void effects_slider_changed (GtkRange *slider, ZoomOptions *self);
 
 static void
-mouse_tracking_radio_toggled_cb (GtkWidget *widget, ZoomOptions *self)
+mouse_tracking_radio_toggled_cb (ZoomOptions *self, GtkWidget *widget)
 {
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)) == TRUE)
-	  {
-        g_settings_set_string (self->settings, "mouse-tracking",
-	                           gtk_buildable_get_name (GTK_BUILDABLE (widget)));
-      }
+  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+    return;
+
+  if (widget == self->centered_radio)
+      g_settings_set_string (self->settings, "mouse-tracking", "centered");
+  else if (widget == self->proportional_radio)
+      g_settings_set_string (self->settings, "mouse-tracking", "proportional");
+  else if (widget == self->push_radio)
+      g_settings_set_string (self->settings, "mouse-tracking", "push");
 }
 
 static void
-init_mouse_mode_radio_group (GSList *mode_group, ZoomOptions *self)
+mouse_tracking_notify_cb (ZoomOptions *self)
 {
-    g_autofree gchar *mode = NULL;
-    gchar *name;
+    g_autofree gchar *tracking = NULL;
 
-    mode = g_settings_get_string (self->settings, "mouse-tracking");
-	for (; mode_group != NULL; mode_group = mode_group->next)
-	  {
-	    name = (gchar *) gtk_buildable_get_name (GTK_BUILDABLE (mode_group->data));
-	    if (g_strcmp0 (name, mode) == 0)
-	      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (mode_group->data), TRUE);
-	    else
-	      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (mode_group->data), FALSE);
-
-	    g_signal_connect (G_OBJECT (mode_group->data), "toggled",
-                          G_CALLBACK(mouse_tracking_radio_toggled_cb),
-                          self);
-	  }
+    tracking = g_settings_get_string (self->settings, "mouse-tracking");
+    if (g_strcmp0 (tracking, "centered") == 0)
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->centered_radio), TRUE);
+    else if (g_strcmp0 (tracking, "proportional") == 0)
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->proportional_radio), TRUE);
+    else
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->push_radio), TRUE);
 }
 
 static void
 init_screen_part_section (ZoomOptions *self, PangoAttrList *pango_attrs)
 {
   gboolean lens_mode;
-  GSList *mouse_mode_group;
 
   /* Scale the labels of the toggles */
   scale_label (GTK_BIN (self->follow_mouse_radio), pango_attrs);
@@ -128,8 +123,6 @@ init_screen_part_section (ZoomOptions *self, PangoAttrList *pango_attrs)
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->follow_mouse_radio), lens_mode);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->screen_part_radio), !lens_mode);
 
-  mouse_mode_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (self->centered_radio));
-  init_mouse_mode_radio_group (mouse_mode_group, self);
   set_enable_screen_part_ui (self->screen_part_radio, self);
 
   g_settings_bind (self->settings, "lens-mode",
@@ -143,8 +136,9 @@ init_screen_part_section (ZoomOptions *self, PangoAttrList *pango_attrs)
   g_signal_connect (G_OBJECT (self->screen_part_radio), "toggled",
                     G_CALLBACK (set_enable_screen_part_ui), self);
 
-  g_signal_connect (G_OBJECT (self->settings), "changed::mouse-tracking",
-                    G_CALLBACK (mouse_tracking_notify_cb), self);
+  mouse_tracking_notify_cb (self);
+  g_signal_connect_object (G_OBJECT (self->settings), "changed::mouse-tracking",
+                           G_CALLBACK (mouse_tracking_notify_cb), self, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -166,28 +160,6 @@ set_enable_screen_part_ui (GtkWidget *widget, ZoomOptions *self)
     gtk_widget_set_sensitive (self->push_radio, screen_part);
     gtk_widget_set_sensitive (self->proportional_radio, screen_part);
     gtk_widget_set_sensitive (self->extend_beyond_checkbox, screen_part);
-}
-
-static void
-mouse_tracking_notify_cb (GSettings   *settings,
-                          const gchar *key,
-                          ZoomOptions *self)
-{
-  g_autofree gchar *tracking = NULL;
-
-  tracking = g_settings_get_string (settings, key);
-  if (g_strcmp0 (tracking, "proportional") == 0)
-    {
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->proportional_radio), TRUE);
-    }
-  else if (g_strcmp0 (tracking, "centered") == 0)
-    {
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->centered_radio), TRUE);
-    }
-  else
-    {
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->push_radio), TRUE);
-    }
 }
 
 static void
@@ -549,6 +521,8 @@ zoom_options_class_init (ZoomOptionsClass *klass)
   gtk_widget_class_bind_template_child (widget_class, ZoomOptions, screen_part_radio);
   gtk_widget_class_bind_template_child (widget_class, ZoomOptions, screen_position_combobox);
   gtk_widget_class_bind_template_child (widget_class, ZoomOptions, seeing_zoom_switch);
+
+  gtk_widget_class_bind_template_callback (widget_class, mouse_tracking_radio_toggled_cb);
 }
 
 static void
