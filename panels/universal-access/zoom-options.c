@@ -228,7 +228,6 @@ screen_position_notify_cb (GSettings *settings,
   GtkComboBox *combobox;
   gboolean valid;
 
-  position = g_settings_get_string (settings, key);
   position = g_settings_get_string (self->settings, key);
   combobox = GTK_COMBO_BOX (self->screen_position_combobox);
   model = gtk_combo_box_get_model (combobox);
