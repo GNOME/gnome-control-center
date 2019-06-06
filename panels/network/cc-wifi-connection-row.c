@@ -39,6 +39,7 @@ struct _CcWifiConnectionRow
   GtkSpinner      *connecting_spinner;
   GtkImage        *encrypted_icon;
   GtkLabel        *name_label;
+  GtkStack        *separator_stack;
   GtkImage        *strength_icon;
 };
 
@@ -225,15 +226,22 @@ update_ui (CcWifiConnectionRow *self)
     {
       gtk_stack_set_visible_child_name (self->button_stack, "connecting");
       gtk_spinner_start (self->connecting_spinner);
+      gtk_stack_set_visible_child_name (self->separator_stack, "separate");
     }
   else
     {
       gtk_spinner_stop (self->connecting_spinner);
 
       if (self->connection)
-        gtk_stack_set_visible_child_name (self->button_stack, "configure");
+        {
+          gtk_stack_set_visible_child_name (self->button_stack, "configure");
+          gtk_stack_set_visible_child_name (self->separator_stack, "separate");
+        }
       else
-        gtk_stack_set_visible_child_name (self->button_stack, "empty");
+        {
+          gtk_stack_set_visible_child_name (self->button_stack, "empty");
+          gtk_stack_set_visible_child_name (self->separator_stack, "empty");
+        }
     }
 
   gtk_widget_set_visible (GTK_WIDGET (self->active_icon), active);
@@ -420,6 +428,7 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, active_icon);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, button_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, separator_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, checkbutton);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, configure_button);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, connecting_spinner);
