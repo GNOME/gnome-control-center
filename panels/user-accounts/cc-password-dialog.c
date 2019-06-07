@@ -324,7 +324,8 @@ password_entry_focus_out_cb (CcPasswordDialog *self)
                 self->password_entry_timeout_id = 0;
         }
 
-        password_entry_timeout (self);
+        if (self->user != NULL)
+                password_entry_timeout (self);
 
         return FALSE;
 }
@@ -382,7 +383,8 @@ old_password_entry_focus_out_cb (CcPasswordDialog *self)
                 self->old_password_entry_timeout_id = 0;
         }
 
-        old_password_entry_timeout (self);
+        if (self->user != NULL)
+                old_password_entry_timeout (self);
 
         return FALSE;
 }
