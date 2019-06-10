@@ -223,8 +223,9 @@ row_title_new (const gchar  *title,
   GtkWidget *box, *label;
 
   box = (GtkWidget *) g_object_new (GTK_TYPE_BOX,
-                                    "margin-bottom", 6,
-                                    "margin-top", 6,
+                                    "spacing", 6,
+                                    "margin-bottom", 12,
+                                    "margin-top", 12,
                                     "orientation", GTK_ORIENTATION_VERTICAL,
                                     "valign", GTK_ALIGN_CENTER,
                                     "visible", TRUE,
@@ -469,14 +470,14 @@ set_primary (CcPowerPanel *panel, UpDevice *device)
 
   row = no_prelight_row_new ();
   gtk_widget_show (row);
-  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_widget_show (box);
   gtk_container_add (GTK_CONTAINER (row), box);
 
   gtk_widget_set_margin_start (box, 12);
   gtk_widget_set_margin_end (box, 12);
-  gtk_widget_set_margin_top (box, 6);
-  gtk_widget_set_margin_bottom (box, 6);
+  gtk_widget_set_margin_top (box, 12);
+  gtk_widget_set_margin_bottom (box, 12);
 
   levelbar = gtk_level_bar_new ();
   gtk_widget_show (levelbar);
