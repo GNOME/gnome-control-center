@@ -76,6 +76,7 @@ struct _CcPowerPanel
   GList         *boxes;
   GList         *boxes_reverse;
 
+  GtkSizeGroup  *battery_row_sizegroup;
   GtkSizeGroup  *row_sizegroup;
   GtkSizeGroup  *battery_sizegroup;
   GtkSizeGroup  *charge_sizegroup;
@@ -223,6 +224,7 @@ row_title_new (const gchar  *title,
   GtkWidget *box, *label;
 
   box = (GtkWidget *) g_object_new (GTK_TYPE_BOX,
+                                    "spacing", 4,
                                     "margin-bottom", 6,
                                     "margin-top", 6,
                                     "orientation", GTK_ORIENTATION_VERTICAL,
@@ -469,14 +471,14 @@ set_primary (CcPowerPanel *panel, UpDevice *device)
 
   row = no_prelight_row_new ();
   gtk_widget_show (row);
-  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);
   gtk_widget_show (box);
   gtk_container_add (GTK_CONTAINER (row), box);
 
   gtk_widget_set_margin_start (box, 12);
   gtk_widget_set_margin_end (box, 12);
-  gtk_widget_set_margin_top (box, 6);
-  gtk_widget_set_margin_bottom (box, 6);
+  gtk_widget_set_margin_top (box, 16);
+  gtk_widget_set_margin_bottom (box, 14);
 
   levelbar = gtk_level_bar_new ();
   gtk_widget_show (levelbar);
@@ -512,7 +514,7 @@ set_primary (CcPowerPanel *panel, UpDevice *device)
                                gtk_widget_get_accessible (label));
 
   gtk_container_add (GTK_CONTAINER (panel->battery_list), row);
-  gtk_size_group_add_widget (panel->row_sizegroup, row);
+  gtk_size_group_add_widget (panel->battery_row_sizegroup, row);
 
   g_object_set_data (G_OBJECT (row), "primary", GINT_TO_POINTER (TRUE));
 
@@ -551,7 +553,13 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
   row = no_prelight_row_new ();
   gtk_widget_show (row);
   box = row_box_new ();
+  gtk_box_set_spacing (GTK_BOX (box), 10);
   gtk_container_add (GTK_CONTAINER (row), box);
+
+  gtk_widget_set_margin_start (box, 12);
+  gtk_widget_set_margin_end (box, 12);
+  gtk_widget_set_margin_top (box, 16);
+  gtk_widget_set_margin_bottom (box, 14);
 
   box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (box2);
@@ -603,7 +611,7 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
 
   g_object_set_data (G_OBJECT (row), "kind", GINT_TO_POINTER (kind));
   gtk_container_add (GTK_CONTAINER (panel->battery_list), row);
-  gtk_size_group_add_widget (panel->row_sizegroup, row);
+  gtk_size_group_add_widget (panel->battery_row_sizegroup, row);
 
   gtk_widget_set_visible (panel->battery_section, TRUE);
 }
@@ -2536,6 +2544,7 @@ cc_power_panel_init (CcPowerPanel *self)
   self->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
   self->session_settings = g_settings_new ("org.gnome.desktop.session");
 
+  self->battery_row_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
   self->row_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
   self->battery_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
   self->charge_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
