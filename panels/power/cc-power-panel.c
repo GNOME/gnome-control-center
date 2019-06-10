@@ -1851,7 +1851,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_container_add (GTK_CONTAINER (box), widget);
   gtk_box_pack_start (GTK_BOX (self->vbox_power), box, FALSE, TRUE, 0);
 
-  row = add_brightness_row (self, _("_Screen brightness"), &self->brightness_scale);
+  row = add_brightness_row (self, _("_Screen Brightness"), &self->brightness_scale);
   gtk_widget_show (row);
   self->brightness_row = row;
 
@@ -1872,7 +1872,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_show (row);
   box = row_box_new ();
   gtk_container_add (GTK_CONTAINER (row), box);
-  title = row_title_new (_("Automatic brightness"), NULL, &label);
+  title = row_title_new (_("Automatic Brightness"), NULL, &label);
   gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
 
   self->als_switch = gtk_switch_new ();
@@ -1885,7 +1885,7 @@ add_power_saving_section (CcPowerPanel *self)
   g_signal_connect (G_OBJECT (self->als_switch), "notify::active",
                     G_CALLBACK (als_switch_changed), self);
 
-  row = add_brightness_row (self, _("_Keyboard brightness"), &self->kbd_brightness_scale);
+  row = add_brightness_row (self, _("_Keyboard Brightness"), &self->kbd_brightness_scale);
   gtk_widget_show (row);
   self->kbd_brightness_row = row;
 
@@ -1896,7 +1896,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_show (row);
   box = row_box_new ();
   gtk_container_add (GTK_CONTAINER (row), box);
-  title = row_title_new (_("_Dim screen when inactive"), NULL, &label);
+  title = row_title_new (_("_Dim Screen When Inactive"), NULL, &label);
   gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
 
   sw = gtk_switch_new ();
@@ -1914,7 +1914,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_show (row);
   box = row_box_new ();
   gtk_container_add (GTK_CONTAINER (row), box);
-  title = row_title_new (_("_Blank screen"), NULL, &label);
+  title = row_title_new (_("_Blank Screen"), NULL, &label);
   gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
 
   combo = gtk_combo_box_text_new ();
@@ -1954,7 +1954,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_hide (row);
   box = row_box_new ();
   gtk_container_add (GTK_CONTAINER (row), box);
-  title = row_title_new (_("_Mobile broadband"),
+  title = row_title_new (_("_Mobile Broadband"),
                          _("Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."),
                          NULL);
   gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
@@ -2298,7 +2298,7 @@ add_suspend_and_power_off_section (CcPowerPanel *self)
       gtk_widget_show (row);
       box = row_box_new ();
       gtk_container_add (GTK_CONTAINER (row), box);
-      title = row_title_new (_("_Automatic suspend"), NULL, NULL);
+      title = row_title_new (_("_Automatic Suspend"), NULL, NULL);
       atk_object_set_name (ATK_OBJECT (gtk_widget_get_accessible (self->automatic_suspend_row)), _("Automatic suspend"));
       gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
 
@@ -2356,7 +2356,7 @@ add_suspend_and_power_off_section (CcPowerPanel *self)
   box = row_box_new ();
   gtk_container_add (GTK_CONTAINER (row), box);
 
-  title = row_title_new (_("_When the Power Button is pressed"), NULL, &label);
+  title = row_title_new (_("Po_wer Button Action"), NULL, &label);
   gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
 
   combo = gtk_combo_box_text_new ();
