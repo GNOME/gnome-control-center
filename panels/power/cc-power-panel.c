@@ -219,6 +219,7 @@ row_title_new (const gchar  *title,
                const gchar  *subtitle,
                GtkWidget   **title_label)
 {
+  PangoAttrList *attributes;
   GtkWidget *box, *label;
 
   box = (GtkWidget *) g_object_new (GTK_TYPE_BOX,
@@ -245,6 +246,9 @@ row_title_new (const gchar  *title,
   if (subtitle == NULL)
     return box;
 
+  attributes = pango_attr_list_new ();
+  pango_attr_list_insert (attributes, pango_attr_scale_new (0.9));
+
   label = (GtkWidget *) g_object_new (GTK_TYPE_LABEL,
                                       "ellipsize", PANGO_ELLIPSIZE_END,
                                       "halign", GTK_ALIGN_START,
@@ -253,10 +257,13 @@ row_title_new (const gchar  *title,
                                       "use-underline", TRUE,
                                       "visible", TRUE,
                                       "xalign", 0.0,
+                                      "attributes", attributes,
                                       NULL);
   gtk_style_context_add_class (gtk_widget_get_style_context (label),
                                GTK_STYLE_CLASS_DIM_LABEL);
   gtk_container_add (GTK_CONTAINER (box), label);
+
+  pango_attr_list_unref (attributes);
 
   return box;
 }
