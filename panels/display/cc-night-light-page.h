@@ -24,9 +24,9 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_NIGHT_LIGHT_DIALOG (cc_night_light_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcNightLightDialog, cc_night_light_dialog, CC, NIGHT_LIGHT_DIALOG, GtkDialog)
+#define CC_TYPE_NIGHT_LIGHT_PAGE (cc_night_light_page_get_type ())
+G_DECLARE_FINAL_TYPE (CcNightLightPage, cc_night_light_page, CC, NIGHT_LIGHT_PAGE, GtkBin)
 
-CcNightLightDialog* cc_night_light_dialog_new (void);
+CcNightLightPage* cc_night_light_page_new (void);
 
 G_END_DECLS
