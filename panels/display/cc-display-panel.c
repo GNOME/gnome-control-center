@@ -36,7 +36,7 @@
 #include "cc-display-config-manager-dbus.h"
 #include "cc-display-config.h"
 #include "cc-display-arrangement.h"
-#include "cc-night-light-dialog.h"
+#include "cc-night-light-page.h"
 #include "cc-display-resources.h"
 #include "cc-display-settings.h"
 
@@ -73,7 +73,8 @@ struct _CcDisplayPanel
 
   guint           focus_id;
 
-  CcNightLightDialog *night_light_dialog;
+  CcNightLightPage *night_light_page;
+  GtkDialog *night_light_dialog;
   GSettings *settings_color;
 
   UpClient *up_client;
@@ -478,6 +479,19 @@ on_night_light_list_box_row_activated_cb (CcDisplayPanel *panel)
 {
   GtkWindow *toplevel;
   toplevel = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel))));
+
+  if (!panel->night_light_dialog)
+    {
+      GtkWidget *content_area;
+
+      panel->night_light_dialog = (GtkDialog *)gtk_dialog_new ();
+
+      content_area = gtk_dialog_get_content_area (panel->night_light_dialog);
+      gtk_container_add (GTK_CONTAINER (content_area),
+                         GTK_WIDGET (panel->night_light_page));
+      gtk_widget_show (GTK_WIDGET (panel->night_light_page));
+    }
+
   gtk_window_set_transient_for (GTK_WINDOW (panel->night_light_dialog), toplevel);
   gtk_window_present (GTK_WINDOW (panel->night_light_dialog));
 }
@@ -1208,7 +1222,7 @@ cc_display_panel_init (CcDisplayPanel *self)
                                  0);
   gtk_cell_renderer_set_visible (renderer, TRUE);
 
-  self->night_light_dialog = cc_night_light_dialog_new ();
+  self->night_light_page = cc_night_light_page_new ();
   self->settings_color = g_settings_new ("org.gnome.settings-daemon.plugins.color");
 
   g_signal_connect_object (self->settings_color, "changed",
