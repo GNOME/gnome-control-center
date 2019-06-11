@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-04-26 14:07+0000\n"
-"PO-Revision-Date: 2019-04-26 16:13+0200\n"
+"POT-Creation-Date: 2019-06-10 16:49+0000\n"
+"PO-Revision-Date: 2019-06-11 11:11+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: panels/applications/cc-applications-panel.c:561
 msgid "System Bus"
@@ -36,9 +36,9 @@ msgid "Session Bus"
 msgstr "Bus di session"
 
 #: panels/applications/cc-applications-panel.c:568
-#: panels/power/cc-power-panel.c:2453 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2462 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
-#: shell/cc-window.c:268
+#: shell/cc-window.c:273
 msgid "Devices"
 msgstr "Dispositîfs"
 
@@ -56,12 +56,8 @@ msgstr "Rêt"
 msgid "Has network access"
 msgstr "Al à acès ae rêt"
 
-#. translators: "Home" is used in place of the Pictures
-#. * directory in the string below when XDG_PICTURES_DIR is
-#. * undefined
 #: panels/applications/cc-applications-panel.c:579
 #: panels/applications/cc-applications-panel.c:581
-#: panels/background/cc-background-chooser-dialog.c:536
 #: panels/search/cc-search-locations-dialog.c:286
 msgid "Home"
 msgstr "Cjase"
@@ -77,8 +73,8 @@ msgid "File System"
 msgstr "File System"
 
 #: panels/applications/cc-applications-panel.c:591
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:272
-#: shell/cc-window.c:935 shell/cc-window.ui:131
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:277
+#: shell/cc-window.c:959 shell/cc-window.ui:131
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Impostazions"
@@ -297,7 +293,7 @@ msgid "No results found"
 msgstr "Nissun risultât cjatât"
 
 #: panels/applications/cc-applications-panel.ui:474
-#: panels/keyboard/cc-keyboard-panel.ui:175 shell/cc-panel-list.ui:201
+#: panels/keyboard/cc-keyboard-panel.ui:157 shell/cc-panel-list.ui:201
 msgid "Try a different search"
 msgstr "Prove une ricercje diferente"
 
@@ -338,81 +334,11 @@ msgstr "Controle i permès e lis impostazions des varis aplicazions"
 msgid "application;flatpak;permission;setting;"
 msgstr "aplicazion;flatpak;permès;impostazion;"
 
-#: panels/background/background.ui:49
-msgid "_Background"
-msgstr "_Sfont"
+#: panels/background/cc-background-chooser.c:348
+msgid "Select a picture"
+msgstr "Selezione un imagjin"
 
-#. This refers to a slideshow background
-#: panels/background/background.ui:99 panels/background/background.ui:212
-msgid "Changes throughout the day"
-msgstr "Al cambie dilunc il dì"
-
-#. To translators: This is a noun, not a verb
-#: panels/background/background.ui:162
-msgid "_Lock Screen"
-msgstr "_Bloche schermi"
-
-#: panels/background/background.ui:268
-msgctxt "background, style"
-msgid "Tile"
-msgstr "Mosaic"
-
-#: panels/background/background.ui:272
-msgctxt "background, style"
-msgid "Zoom"
-msgstr "Ingrandìs"
-
-#: panels/background/background.ui:276
-msgctxt "background, style"
-msgid "Center"
-msgstr "Centre"
-
-#: panels/background/background.ui:280
-msgctxt "background, style"
-msgid "Scale"
-msgstr "Scjale"
-
-#: panels/background/background.ui:284
-msgctxt "background, style"
-msgid "Fill"
-msgstr "Jemple"
-
-#: panels/background/background.ui:288
-msgctxt "background, style"
-msgid "Span"
-msgstr "Slargje"
-
-#: panels/background/cc-background-chooser-dialog.c:412
-msgid "Wallpapers"
-msgstr "Rivestiments"
-
-#: panels/background/cc-background-chooser-dialog.c:423
-msgid "Colors"
-msgstr "Colôrs"
-
-#. translators: This is the title of the wallpaper chooser dialog.
-#: panels/background/cc-background-chooser-dialog.c:455
-msgid "Select Background"
-msgstr "Selezione sfont"
-
-#: panels/background/cc-background-chooser-dialog.c:484
-msgid "Pictures"
-msgstr "Imagjins"
-
-#. translators: No pictures were found
-#: panels/background/cc-background-chooser-dialog.c:519
-msgid "No Pictures Found"
-msgstr "Nissune imagjin cjatade"
-
-#. translators: %s here is the name of the Pictures directory, the string should be translated in
-#. * the context "You can add images to your Pictures folder and they will show up here"
-#: panels/background/cc-background-chooser-dialog.c:546
-#, c-format
-msgid "You can add images to your %s folder and they will show up here"
-msgstr ""
-"Al è pussibil zontâ imagjins ae tô cartele %s e a vegnaran mostradis a chi"
-
-#: panels/background/cc-background-chooser-dialog.c:550
+#: panels/background/cc-background-chooser.c:351
 #: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/cc-color-panel.ui:657 panels/color/color-calibrate.ui:25
 #: panels/common/cc-language-chooser.ui:24
@@ -427,10 +353,10 @@ msgstr ""
 #: panels/privacy/cc-privacy-panel.c:1137 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:607
-#: panels/sharing/cc-sharing-panel.c:427
+#: panels/sharing/cc-sharing-panel.c:428
 #: panels/user-accounts/cc-add-user-dialog.ui:28
-#: panels/user-accounts/cc-avatar-chooser.c:106
-#: panels/user-accounts/cc-avatar-chooser.c:234
+#: panels/user-accounts/cc-avatar-chooser.c:107
+#: panels/user-accounts/cc-avatar-chooser.c:235
 #: panels/user-accounts/cc-password-dialog.ui:20
 #: panels/user-accounts/cc-user-panel.c:640
 #: panels/user-accounts/cc-user-panel.c:658
@@ -439,29 +365,56 @@ msgstr ""
 msgid "_Cancel"
 msgstr "_Anule"
 
-#: panels/background/cc-background-chooser-dialog.c:551
-#: panels/common/cc-language-chooser.ui:12
-msgid "_Select"
-msgstr "_Selezione"
+#: panels/background/cc-background-chooser.c:352
+#: panels/network/connection-editor/vpn-helpers.c:182
+#: panels/printers/pp-details-dialog.c:314
+#: panels/sharing/cc-sharing-panel.c:429
+#: panels/user-accounts/cc-avatar-chooser.c:236
+msgid "_Open"
+msgstr "_Vierç"
 
-#: panels/background/cc-background-item.c:191
+#: panels/background/cc-background-chooser.ui:104
+msgid "Set Background and Lock Screen"
+msgstr "Stabilìs Fonts e Bloc schermi"
+
+#: panels/background/cc-background-chooser.ui:114
+msgid "Set Background"
+msgstr "Stabilìs fonts"
+
+#: panels/background/cc-background-chooser.ui:121
+msgid "Set Lock Screen"
+msgstr "Stabilìs Bloc schermi"
+
+#: panels/background/cc-background-chooser.ui:143
+msgid "Delete Background"
+msgstr "Elimine fonts"
+
+#: panels/background/cc-background-item.c:140
 msgid "multiple sizes"
 msgstr "dimensions multiplis"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:195
+#: panels/background/cc-background-item.c:144
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:320
+#: panels/background/cc-background-item.c:278
 msgid "No Desktop Background"
-msgstr "Nissun sfont pe scrivanie"
+msgstr "Nissun fonts pe scrivanie"
 
-#: panels/background/cc-background-panel.c:291
+#: panels/background/cc-background-panel.c:145
 msgid "Current background"
-msgstr "Sfont atuâl"
+msgstr "Fonts atuâl"
+
+#: panels/background/cc-background-panel.ui:54
+msgid "Add Picture…"
+msgstr "Zonte imagjin…"
+
+#: panels/background/cc-background-preview.ui:55
+msgid "Activities"
+msgstr "Ativitâts"
 
 #: panels/background/gnome-background-panel.desktop.in.in:3
 msgid "Background"
@@ -469,12 +422,12 @@ msgstr "Fondâl"
 
 #: panels/background/gnome-background-panel.desktop.in.in:4
 msgid "Change your background image to a wallpaper or photo"
-msgstr "Cambie la tô imagjin di sfont cuntun rivestiment o une foto"
+msgstr "Cambie la tô imagjin di fonts cuntun rivestiment o une foto"
 
 #. Translators: Search terms to find the Background panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/background/gnome-background-panel.desktop.in.in:15
 msgid "Wallpaper;Screen;Desktop;"
-msgstr "Rivestiment;Sfont;Scrivanie;Desktop;"
+msgstr "Rivestiment;Fonts;Scrivanie;Desktop;"
 
 #: panels/bluetooth/cc-bluetooth-panel.c:309
 msgid "No Bluetooth Found"
@@ -766,7 +719,7 @@ msgstr "Il strument di misure nol supuarte il profiling de stampant."
 msgid "The device type is not currently supported."
 msgstr "Il gjenar di dispositîf nol è al moment supuartât."
 
-#: panels/color/cc-color-panel.ui:6 panels/wacom/calibrator/calibrator.ui:47
+#: panels/color/cc-color-panel.ui:6 panels/wacom/calibrator/calibrator.ui:48
 msgid "Screen Calibration"
 msgstr "Calibrazion schermi"
 
@@ -1188,6 +1141,10 @@ msgstr "Nissune lenghe cjatade"
 msgid "Select Language"
 msgstr "Selezione lenghe"
 
+#: panels/common/cc-language-chooser.ui:12
+msgid "_Select"
+msgstr "_Selezione"
+
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:106
 msgid "Today"
@@ -1230,17 +1187,17 @@ msgid "Year"
 msgstr "Àn"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:332
+#: panels/datetime/cc-datetime-panel.c:334
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %I:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:337
+#: panels/datetime/cc-datetime-panel.c:339
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %H:%M"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:502
+#: panels/datetime/cc-datetime-panel.c:504
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1248,7 +1205,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:529
+#: panels/datetime/cc-datetime-panel.c:531
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1256,23 +1213,23 @@ msgstr "%s (%s)"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: panels/datetime/cc-datetime-panel.c:536
+#: panels/datetime/cc-datetime-panel.c:538
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:541
+#: panels/datetime/cc-datetime-panel.c:543
 msgid "%l:%M %p"
 msgstr "%I:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:546
+#: panels/datetime/cc-datetime-panel.c:548
 msgid "%R"
 msgstr "%H:%M"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: panels/datetime/cc-datetime-panel.c:551
+#: panels/datetime/cc-datetime-panel.c:553
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
@@ -1431,7 +1388,7 @@ msgstr "Chest al podarès jessi par vie di limitazions hardware."
 #. TRANSLATORS: the state of the night light setting
 #: panels/display/cc-display-panel.c:1127
 #: panels/notifications/cc-notifications-panel.c:270
-#: panels/power/cc-power-panel.c:2056 panels/power/cc-power-panel.c:2063
+#: panels/power/cc-power-panel.c:2065 panels/power/cc-power-panel.c:2072
 #: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
 #: panels/universal-access/cc-ua-panel.c:478
 #: panels/universal-access/cc-ua-panel.c:841
@@ -1443,7 +1400,7 @@ msgstr "Impiât"
 
 #: panels/display/cc-display-panel.c:1127 panels/network/net-proxy.c:54
 #: panels/notifications/cc-notifications-panel.c:270
-#: panels/power/cc-power-panel.c:2050 panels/power/cc-power-panel.c:2061
+#: panels/power/cc-power-panel.c:2059 panels/power/cc-power-panel.c:2070
 #: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
 #: panels/universal-access/cc-ua-panel.c:478
 #: panels/universal-access/cc-ua-panel.c:841
@@ -1669,6 +1626,7 @@ msgstr "_Fotografiis"
 
 #. TRANSLATORS: AP type
 #: panels/info/cc-info-overview-panel.c:369
+#: panels/info/cc-info-overview-panel.c:440
 #: panels/info/cc-info-overview-panel.c:452
 #: panels/info/cc-info-overview-panel.c:497
 #: panels/info/cc-info-overview-panel.c:527 panels/network/panel-common.c:123
@@ -1929,8 +1887,8 @@ msgid "Sound and Media"
 msgstr "Audio e Media"
 
 #: panels/keyboard/00-multimedia.xml.in:4
-msgid "Volume mute"
-msgstr "Cidine il volum"
+msgid "Volume mute/unmute"
+msgstr "Cidine/Impie il volum"
 
 #: panels/keyboard/00-multimedia.xml.in:6
 msgid "Volume down"
@@ -1941,30 +1899,34 @@ msgid "Volume up"
 msgstr "Alce il volum"
 
 #: panels/keyboard/00-multimedia.xml.in:10
+msgid "Microphone mute/unmute"
+msgstr "Cidine/Impie il microfon"
+
+#: panels/keyboard/00-multimedia.xml.in:12
 msgid "Launch media player"
 msgstr "Invie il letôr multimediâl"
 
-#: panels/keyboard/00-multimedia.xml.in:12
+#: panels/keyboard/00-multimedia.xml.in:14
 msgid "Play (or play/pause)"
 msgstr "Riprodûs (o riprodûs/pause)"
 
-#: panels/keyboard/00-multimedia.xml.in:14
+#: panels/keyboard/00-multimedia.xml.in:16
 msgid "Pause playback"
 msgstr "Pause"
 
-#: panels/keyboard/00-multimedia.xml.in:16
+#: panels/keyboard/00-multimedia.xml.in:18
 msgid "Stop playback"
 msgstr "Ferme la riproduzion"
 
-#: panels/keyboard/00-multimedia.xml.in:18
+#: panels/keyboard/00-multimedia.xml.in:20
 msgid "Previous track"
 msgstr "Piste/linie precedent"
 
-#: panels/keyboard/00-multimedia.xml.in:20
+#: panels/keyboard/00-multimedia.xml.in:22
 msgid "Next track"
 msgstr "Piste/linie sucessive"
 
-#: panels/keyboard/00-multimedia.xml.in:22
+#: panels/keyboard/00-multimedia.xml.in:24
 msgid "Eject"
 msgstr "Pare fûr"
 
@@ -2112,11 +2074,11 @@ msgstr "Tast Compose"
 msgid "Modifiers-only switch to next source"
 msgstr "Dome i \"modificadôrs\" a passin ae sorzint sucessive"
 
-#: panels/keyboard/cc-keyboard-panel.c:179
+#: panels/keyboard/cc-keyboard-panel.c:180
 msgid "Reset All Shortcuts?"
 msgstr "Ristabilìs dutis lis scurtis?"
 
-#: panels/keyboard/cc-keyboard-panel.c:182
+#: panels/keyboard/cc-keyboard-panel.c:183
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2124,35 +2086,30 @@ msgstr ""
 "Ristabilint lis scurtis al podarès influençâ lis tôs scurtis personalizadis. "
 "Cheste operazion no pues jessi anulade."
 
-#: panels/keyboard/cc-keyboard-panel.c:186
+#: panels/keyboard/cc-keyboard-panel.c:187
 #: panels/keyboard/shortcut-editor.ui:346
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
 msgid "Cancel"
 msgstr "Anule"
 
-#: panels/keyboard/cc-keyboard-panel.c:187
+#: panels/keyboard/cc-keyboard-panel.c:188
 msgid "Reset All"
 msgstr "Ristabilìs dut"
 
-#: panels/keyboard/cc-keyboard-panel.c:283
+#: panels/keyboard/cc-keyboard-panel.c:284
 msgid "Reset the shortcut to its default value"
 msgstr "Torne met la scurte al so valôr predefinît"
 
-#: panels/keyboard/cc-keyboard-panel.ui:67 panels/region/cc-region-panel.ui:395
-#: shell/cc-window.ui:334
-msgid "Keyboard Shortcuts"
-msgstr "Scurte di tastiere"
-
-#: panels/keyboard/cc-keyboard-panel.ui:77
+#: panels/keyboard/cc-keyboard-panel.ui:116
 msgid "Reset All…"
 msgstr "Ristabilìs dut…"
 
-#: panels/keyboard/cc-keyboard-panel.ui:78
+#: panels/keyboard/cc-keyboard-panel.ui:117
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Torne met la scurte ae sô cumbinazion di tascj predefinide"
 
-#: panels/keyboard/cc-keyboard-panel.ui:164
+#: panels/keyboard/cc-keyboard-panel.ui:146
 msgid "No keyboard shortcut found"
 msgstr "Nissune scurte di tastiere cjatade"
 
@@ -2184,8 +2141,9 @@ msgid "Add Custom Shortcut"
 msgstr "Zonte scurte personalizade"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:3
-msgid "Keyboard"
-msgstr "Tastiere"
+#: panels/region/cc-region-panel.ui:395 shell/cc-window.ui:339
+msgid "Keyboard Shortcuts"
+msgstr "Scurte di tastiere"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
 msgid "View and change keyboard shortcuts and set your typing preferences"
@@ -2590,7 +2548,7 @@ msgstr "Gjave VPN"
 
 #: panels/network/connection-editor/ce-page-details.c:332
 #: panels/network/network-wifi.ui:1433 shell/cc-panel-list.ui:103
-#: shell/cc-window.c:264
+#: shell/cc-window.c:269
 msgid "Details"
 msgstr "Detais"
 
@@ -2916,13 +2874,6 @@ msgstr ""
 msgid "Select file to import"
 msgstr "Selezione un file di impuartâ"
 
-#: panels/network/connection-editor/vpn-helpers.c:182
-#: panels/printers/pp-details-dialog.c:314
-#: panels/sharing/cc-sharing-panel.c:428
-#: panels/user-accounts/cc-avatar-chooser.c:235
-msgid "_Open"
-msgstr "_Vierç"
-
 #: panels/network/connection-editor/vpn-helpers.c:230
 #, c-format
 msgid "A file named “%s” already exists."
@@ -2976,12 +2927,9 @@ msgstr "Controle ce mût conetiti a Internet"
 
 #. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in.in:19
-msgid ""
-"Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
-"DNS;"
+msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
 msgstr ""
-"Rêt;Network;Wireless;Cence fîl;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;"
-"Bluetooth;vpn;DNS;"
+"Rêt;Network;IP;LAN;Proxy;WAN;Broadband;Bande largje;Modem;Bluetooth;vpn;DNS;"
 
 #: panels/network/gnome-wifi-panel.desktop.in.in:4
 msgid "Control how you connect to Wi-Fi networks"
@@ -2989,9 +2937,10 @@ msgstr "Controle ce mût conetiti aes rêts Wi-Fi"
 
 #. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in.in:19
-msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;"
+msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 msgstr ""
 "Rêt;Network;Wireless;Cence fîl;Wi-Fi;Wifi;IP;LAN;Broadband;Bande largje;DNS;"
+"Hotspot;"
 
 #: panels/network/net-device-ethernet.c:123
 #: panels/network/net-device-wifi.c:384
@@ -3191,7 +3140,7 @@ msgstr "detais"
 #: panels/sharing/cc-sharing-panel.ui:351
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:214
+#: panels/user-accounts/cc-user-panel.ui:216
 msgid "_Password"
 msgstr "_Password"
 
@@ -4212,8 +4161,8 @@ msgid "Gaming input device"
 msgstr "Dispositîf di input par zuiâ"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:638 panels/power/cc-power-panel.c:891
-#: panels/power/cc-power-panel.c:2406
+#: panels/power/cc-power-panel.c:638 panels/power/cc-power-panel.c:896
+#: panels/power/cc-power-panel.c:2415
 msgid "Battery"
 msgstr "Batarie"
 
@@ -4253,25 +4202,25 @@ msgctxt "Battery power"
 msgid "Empty"
 msgstr "Scjarie"
 
-#: panels/power/cc-power-panel.c:889
+#: panels/power/cc-power-panel.c:894
 msgid "Batteries"
 msgstr "Batariis"
 
-#: panels/power/cc-power-panel.c:1250
+#: panels/power/cc-power-panel.c:1259
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d ore"
 msgstr[1] "%d oris"
 
-#: panels/power/cc-power-panel.c:1252
+#: panels/power/cc-power-panel.c:1261
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minût"
 msgstr[1] "%d minûts"
 
-#: panels/power/cc-power-panel.c:1255
+#: panels/power/cc-power-panel.c:1264
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -4279,116 +4228,116 @@ msgstr[0] "%d secont"
 msgstr[1] "%d seconts"
 
 #. 5 hours 2 minutes 12 seconds
-#: panels/power/cc-power-panel.c:1260
+#: panels/power/cc-power-panel.c:1269
 #, c-format
 msgctxt "time"
 msgid "%s %s %s"
 msgstr "%s %s e %s"
 
 #. 2 minutes 12 seconds
-#: panels/power/cc-power-panel.c:1263
+#: panels/power/cc-power-panel.c:1272
 #, c-format
 msgctxt "time"
 msgid "%s %s"
 msgstr "%s e %s"
 
 #. 0 seconds
-#: panels/power/cc-power-panel.c:1269
+#: panels/power/cc-power-panel.c:1278
 msgid "0 seconds"
 msgstr "0 seconts"
 
-#: panels/power/cc-power-panel.c:1366
+#: panels/power/cc-power-panel.c:1375
 msgid "When _idle"
 msgstr "Cuant _inatîf"
 
-#: panels/power/cc-power-panel.c:1811
+#: panels/power/cc-power-panel.c:1820
 msgid "Power Saving"
 msgstr "Risparmi energjetic"
 
-#: panels/power/cc-power-panel.c:1845
+#: panels/power/cc-power-panel.c:1854
 msgid "_Screen brightness"
 msgstr "Luminositât dal _schermi"
 
-#: panels/power/cc-power-panel.c:1866
+#: panels/power/cc-power-panel.c:1875
 msgid "Automatic brightness"
 msgstr "Luminositât automatiche"
 
-#: panels/power/cc-power-panel.c:1879
+#: panels/power/cc-power-panel.c:1888
 msgid "_Keyboard brightness"
 msgstr "Luminositât de _tastiere"
 
-#: panels/power/cc-power-panel.c:1890
+#: panels/power/cc-power-panel.c:1899
 msgid "_Dim screen when inactive"
 msgstr "_Scurî il schermi cuant che al è inatîf"
 
-#: panels/power/cc-power-panel.c:1908
+#: panels/power/cc-power-panel.c:1917
 msgid "_Blank screen"
 msgstr "Schermi _neri"
 
-#: panels/power/cc-power-panel.c:1931
+#: panels/power/cc-power-panel.c:1940
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.c:1932
+#: panels/power/cc-power-panel.c:1941
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Si pues distudâ il Wi-Fi par sparagnâ curint."
 
-#: panels/power/cc-power-panel.c:1948
+#: panels/power/cc-power-panel.c:1957
 msgid "_Mobile broadband"
 msgstr "Bande largje _mobil"
 
-#: panels/power/cc-power-panel.c:1949
+#: panels/power/cc-power-panel.c:1958
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
 "Si pues distudâ la bande largje mobile (3G, 4G, LTE, ecc.) par sparagnâ "
 "curint."
 
-#: panels/power/cc-power-panel.c:1999
+#: panels/power/cc-power-panel.c:2008
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:2000
+#: panels/power/cc-power-panel.c:2009
 msgid "Bluetooth can be turned off to save power."
 msgstr "Si pues distudâ il Bluetooth par sparagnâ curint."
 
-#: panels/power/cc-power-panel.c:2052
+#: panels/power/cc-power-panel.c:2061
 msgid "When on battery power"
 msgstr "Cuant che si dopre la batarie"
 
-#: panels/power/cc-power-panel.c:2054
+#: panels/power/cc-power-panel.c:2063
 msgid "When plugged in"
 msgstr "Cuant che al è alimentât"
 
-#: panels/power/cc-power-panel.c:2148
+#: panels/power/cc-power-panel.c:2157
 msgid "Suspend"
 msgstr "Sospindi"
 
-#: panels/power/cc-power-panel.c:2149
+#: panels/power/cc-power-panel.c:2158
 msgid "Power Off"
 msgstr "Distudâ"
 
-#: panels/power/cc-power-panel.c:2150
+#: panels/power/cc-power-panel.c:2159
 msgid "Hibernate"
 msgstr "Ibernâ"
 
-#: panels/power/cc-power-panel.c:2151
+#: panels/power/cc-power-panel.c:2160
 msgid "Nothing"
 msgstr "Nissune azion"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2251
+#: panels/power/cc-power-panel.c:2260
 msgid "Suspend & Power Button"
 msgstr "Sospension e boton par distudâ"
 
-#: panels/power/cc-power-panel.c:2292
+#: panels/power/cc-power-panel.c:2301
 msgid "_Automatic suspend"
 msgstr "Sospension _Automatiche"
 
-#: panels/power/cc-power-panel.c:2293
+#: panels/power/cc-power-panel.c:2302
 msgid "Automatic suspend"
 msgstr "Sospension automatiche"
 
-#: panels/power/cc-power-panel.c:2350
+#: panels/power/cc-power-panel.c:2359
 msgid "_When the Power Button is pressed"
 msgstr "_Cuant che si frache il boton Distude"
 
@@ -4715,7 +4664,7 @@ msgid "Select Printer Driver"
 msgstr "Selezione driver stampant"
 
 #: panels/printers/ppd-selection-dialog.ui:40
-#: panels/user-accounts/cc-avatar-chooser.c:108
+#: panels/user-accounts/cc-avatar-chooser.c:109
 msgid "Select"
 msgstr "Selezione"
 
@@ -5655,12 +5604,12 @@ msgstr "Zonte une sorzint input"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Nol è pussibil doprâ i metodis di input te schermade di acès"
 
-#: panels/region/cc-region-panel.c:1503
+#: panels/region/cc-region-panel.c:1504
 msgid "Login _Screen"
 msgstr "_Schermade di acès"
 
 #: panels/region/cc-region-panel.ui:64
-#: panels/user-accounts/cc-user-panel.ui:362
+#: panels/user-accounts/cc-user-panel.ui:364
 msgid "_Language"
 msgstr "_Lenghe"
 
@@ -5805,31 +5754,31 @@ msgstr "Altri"
 msgid "No networks selected for sharing"
 msgstr "Nissune rêt selezionade pe condivision"
 
-#: panels/sharing/cc-sharing-panel.c:319
+#: panels/sharing/cc-sharing-panel.c:320
 msgctxt "service is enabled"
 msgid "On"
 msgstr "On"
 
-#: panels/sharing/cc-sharing-panel.c:321 panels/sharing/cc-sharing-panel.c:348
+#: panels/sharing/cc-sharing-panel.c:322 panels/sharing/cc-sharing-panel.c:349
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Off"
 
-#: panels/sharing/cc-sharing-panel.c:351
+#: panels/sharing/cc-sharing-panel.c:352
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Abilitât"
 
-#: panels/sharing/cc-sharing-panel.c:354
+#: panels/sharing/cc-sharing-panel.c:355
 msgctxt "service is active"
 msgid "Active"
 msgstr "Atîf"
 
-#: panels/sharing/cc-sharing-panel.c:424
+#: panels/sharing/cc-sharing-panel.c:425
 msgid "Choose a Folder"
 msgstr "Sielzi une cartele"
 
-#: panels/sharing/cc-sharing-panel.c:724
+#: panels/sharing/cc-sharing-panel.c:725
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5838,7 +5787,7 @@ msgstr ""
 "La condivision di file e permet di condividi cun altris la proprie cartele "
 "Public su pe rêt atuâl doprant: <a href=\\\"dav://%s\\\">dav://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:726
+#: panels/sharing/cc-sharing-panel.c:727
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5849,7 +5798,7 @@ msgstr ""
 "doprant il comant Secure Shell:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:728
+#: panels/sharing/cc-sharing-panel.c:729
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
@@ -5858,11 +5807,11 @@ msgstr ""
 "La condivision dal visôr e permet ai utents rimots di viodi o controlâ il to "
 "schermi tacantsi a <a href=\"vnc://%s\">vnc://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:832
+#: panels/sharing/cc-sharing-panel.c:833
 msgid "Copy"
 msgstr "Copie"
 
-#: panels/sharing/cc-sharing-panel.c:1285
+#: panels/sharing/cc-sharing-panel.c:1286
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "Condivision"
@@ -6076,9 +6025,11 @@ msgstr "Comede i nivei dal audio, i ingrès, lis jessudis e i suns di alerte"
 
 #. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/gnome-sound-panel.desktop.in.in:20
-msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
+msgid ""
+"Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;Output;Input;"
 msgstr ""
 "Schede;Microfon;Volum;Sfantâ;Belançament;Bluetooth;Auricolâr;Scufis;Sun;"
+"Jessude;Jentrade;Ingrès;"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.c:94
 #: panels/thunderbolt/cc-bolt-device-entry.c:125
@@ -6622,27 +6573,27 @@ msgstr ""
 "AccessX;Tascj;Singui;Tacadiçs;Sticky;Lents;Slow;Sbalçâts;Bounce;Mouse;Dopli;"
 "clic;Ritart;Assist;Ripet;Lampâ;visuâl;sintî;audio;scriture;"
 
-#: panels/universal-access/zoom-options.c:334
+#: panels/universal-access/zoom-options.c:305
 msgctxt "Distance"
 msgid "Short"
 msgstr "Curt"
 
-#: panels/universal-access/zoom-options.c:335
+#: panels/universal-access/zoom-options.c:306
 msgctxt "Distance"
 msgid "¼ Screen"
 msgstr "¼ di schermi"
 
-#: panels/universal-access/zoom-options.c:336
+#: panels/universal-access/zoom-options.c:307
 msgctxt "Distance"
 msgid "½ Screen"
 msgstr "½ schermi"
 
-#: panels/universal-access/zoom-options.c:337
+#: panels/universal-access/zoom-options.c:308
 msgctxt "Distance"
 msgid "¾ Screen"
 msgstr "¾ di schermi"
 
-#: panels/universal-access/zoom-options.c:338
+#: panels/universal-access/zoom-options.c:309
 msgctxt "Distance"
 msgid "Long"
 msgstr "Lungje"
@@ -6691,110 +6642,110 @@ msgstr "L'ingranditôr si _slargje fûr dal visôr"
 msgid "_Keep magnifier cursor centered"
 msgstr "_Tegnî il cursôr dal ingranditôr tal mieç"
 
-#: panels/universal-access/zoom-options.ui:369
+#: panels/universal-access/zoom-options.ui:370
 msgid "Magnifier cursor _pushes contents around"
 msgstr "Il cursôr dal ingranditôr al _sburte il contignût"
 
-#: panels/universal-access/zoom-options.ui:388
+#: panels/universal-access/zoom-options.ui:390
 msgid "Magnifier cursor moves with _contents"
 msgstr "Il cursôr dal ingranditôr si sposte cui _contignûts"
 
-#: panels/universal-access/zoom-options.ui:422
+#: panels/universal-access/zoom-options.ui:425
 msgid "Magnifier Position:"
 msgstr "Posizion dal ingranditôr:"
 
-#: panels/universal-access/zoom-options.ui:443
+#: panels/universal-access/zoom-options.ui:446
 msgid "Magnifier"
 msgstr "Ingranditôr"
 
-#: panels/universal-access/zoom-options.ui:490
+#: panels/universal-access/zoom-options.ui:493
 msgid "_Thickness:"
 msgstr "_Spessôr:"
 
-#: panels/universal-access/zoom-options.ui:516
+#: panels/universal-access/zoom-options.ui:519
 msgctxt "universal access, thickness"
 msgid "Thin"
 msgstr "Fin"
 
-#: panels/universal-access/zoom-options.ui:548
+#: panels/universal-access/zoom-options.ui:551
 msgctxt "universal access, thickness"
 msgid "Thick"
 msgstr "Spes"
 
-#: panels/universal-access/zoom-options.ui:574
+#: panels/universal-access/zoom-options.ui:577
 msgid "_Length:"
 msgstr "_Lungjece:"
 
 #. The color of the accessibility crosshair
-#: panels/universal-access/zoom-options.ui:623
+#: panels/universal-access/zoom-options.ui:626
 msgid "Co_lor:"
 msgstr "Co_lôr:"
 
-#: panels/universal-access/zoom-options.ui:687
+#: panels/universal-access/zoom-options.ui:690
 msgid "_Crosshairs:"
 msgstr "S_mire:"
 
-#: panels/universal-access/zoom-options.ui:735
+#: panels/universal-access/zoom-options.ui:738
 msgid "_Overlaps mouse cursor"
 msgstr "_Al sta parsore dal cursôr dal mouse"
 
-#: panels/universal-access/zoom-options.ui:773
+#: panels/universal-access/zoom-options.ui:776
 msgid "Crosshairs"
 msgstr "Smiris"
 
-#: panels/universal-access/zoom-options.ui:822
+#: panels/universal-access/zoom-options.ui:825
 msgid "_White on black:"
 msgstr "Blanc su _neri:"
 
-#: panels/universal-access/zoom-options.ui:842
+#: panels/universal-access/zoom-options.ui:845
 msgid "_Brightness:"
 msgstr "L_uminositât:"
 
-#: panels/universal-access/zoom-options.ui:863
+#: panels/universal-access/zoom-options.ui:866
 msgid "_Contrast:"
 msgstr "_Contrast:"
 
 #. The contrast scale goes from Color to None (grayscale)
-#: panels/universal-access/zoom-options.ui:883
+#: panels/universal-access/zoom-options.ui:886
 msgctxt "universal access, contrast"
 msgid "Co_lor"
 msgstr "Co_lôr"
 
-#: panels/universal-access/zoom-options.ui:908
+#: panels/universal-access/zoom-options.ui:911
 msgctxt "universal access, color"
 msgid "None"
 msgstr "Nissun"
 
-#: panels/universal-access/zoom-options.ui:940
+#: panels/universal-access/zoom-options.ui:943
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "Plen"
 
-#: panels/universal-access/zoom-options.ui:1003
+#: panels/universal-access/zoom-options.ui:1006
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Basse"
 
-#: panels/universal-access/zoom-options.ui:1036
+#: panels/universal-access/zoom-options.ui:1039
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Alte"
 
-#: panels/universal-access/zoom-options.ui:1067
+#: panels/universal-access/zoom-options.ui:1070
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Ridot"
 
-#: panels/universal-access/zoom-options.ui:1100
+#: panels/universal-access/zoom-options.ui:1103
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Elevât"
 
-#: panels/universal-access/zoom-options.ui:1136
+#: panels/universal-access/zoom-options.ui:1139
 msgid "Color Effects:"
 msgstr "Efiets colôr:"
 
-#: panels/universal-access/zoom-options.ui:1161
+#: panels/universal-access/zoom-options.ui:1164
 msgid "Color Effects"
 msgstr "Efiets colôr"
 
@@ -6859,17 +6810,17 @@ msgid "_Full Name"
 msgstr "Non _complet"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:206
-#: panels/user-accounts/cc-user-panel.ui:151
+#: panels/user-accounts/cc-user-panel.ui:153
 msgid "Standard"
 msgstr "Normâl"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:216
-#: panels/user-accounts/cc-user-panel.ui:161
+#: panels/user-accounts/cc-user-panel.ui:163
 msgid "Administrator"
 msgstr "Aministradôr"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:232
-#: panels/user-accounts/cc-user-panel.ui:179
+#: panels/user-accounts/cc-user-panel.ui:181
 msgid "Account _Type"
 msgstr "_Gjenar di account"
 
@@ -6913,15 +6864,15 @@ msgstr "Tu scugnis jessi in rêt par zontâ utents enterprise."
 msgid "_Enterprise Login"
 msgstr "Account _enterprise"
 
-#: panels/user-accounts/cc-avatar-chooser.c:231
+#: panels/user-accounts/cc-avatar-chooser.c:232
 msgid "Browse for more pictures"
 msgstr "Esplore altris imagjins"
 
-#: panels/user-accounts/cc-avatar-chooser.ui:27
+#: panels/user-accounts/cc-avatar-chooser.ui:39
 msgid "Take a Picture…"
 msgstr "Scate une foto…"
 
-#: panels/user-accounts/cc-avatar-chooser.ui:34
+#: panels/user-accounts/cc-avatar-chooser.ui:46
 msgid "Select a File…"
 msgstr "Selezione un file…"
 
@@ -7191,33 +7142,33 @@ msgstr "Al è necessari tornâ a inviâ la session par aplicâ lis modifichis"
 msgid "Restart Now"
 msgstr "Torne invie cumò"
 
-#: panels/user-accounts/cc-user-panel.ui:254
+#: panels/user-accounts/cc-user-panel.ui:256
 msgid "A_utomatic Login"
 msgstr "Acès automatic"
 
-#: panels/user-accounts/cc-user-panel.ui:296
+#: panels/user-accounts/cc-user-panel.ui:298
 msgid "_Fingerprint Login"
 msgstr "Acès cun impronte"
 
-#: panels/user-accounts/cc-user-panel.ui:322
-#: panels/user-accounts/cc-user-panel.ui:338
+#: panels/user-accounts/cc-user-panel.ui:324
+#: panels/user-accounts/cc-user-panel.ui:340
 msgid "User Icon"
 msgstr "Icone utent"
 
-#: panels/user-accounts/cc-user-panel.ui:402
+#: panels/user-accounts/cc-user-panel.ui:404
 msgid "Last Login"
 msgstr "Ultin acès"
 
-#: panels/user-accounts/cc-user-panel.ui:451
+#: panels/user-accounts/cc-user-panel.ui:453
 msgid "Remove User…"
 msgstr "Gjave utent…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:484
+#: panels/user-accounts/cc-user-panel.ui:486
 msgid "No Users Found"
 msgstr "Nissun utent cjatât"
 
-#: panels/user-accounts/cc-user-panel.ui:494
+#: panels/user-accounts/cc-user-panel.ui:496
 msgid "Unlock to add a user account."
 msgstr "Sbloche par zontâ un account utent."
 
@@ -7615,7 +7566,7 @@ msgstr ""
 "boton de scurte de tastiere e tignî scliçâts i gnûfs tascj, o se no scliçâ "
 "Backspace par scancelâle."
 
-#: panels/wacom/calibrator/calibrator.ui:60
+#: panels/wacom/calibrator/calibrator.ui:61
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -7623,7 +7574,7 @@ msgstr ""
 "Fâs \"tap\" sui segnepuest cuant che a vegnin fûr sul visôr par calibrâ la "
 "taulete grafiche."
 
-#: panels/wacom/calibrator/calibrator.ui:77
+#: panels/wacom/calibrator/calibrator.ui:78
 msgid "Mis-click detected, restarting…"
 msgstr "Rilevât clic sbaliât, si torne a inviâ…"
 
@@ -7771,7 +7722,7 @@ msgstr "Clic boton di mieç dal mouse"
 msgid "Right Mouse Button Click"
 msgstr "Clic boton diestri dal mouse"
 
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:242
+#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:241
 msgid "Back"
 msgstr "Indaûr"
 
@@ -7867,11 +7818,11 @@ msgstr "Dutis lis impostazions"
 msgid "Primary Menu"
 msgstr "Menù primari"
 
-#: shell/cc-window.ui:326
+#: shell/cc-window.ui:331
 msgid "Warning: Development Version"
 msgstr "Avertiment: Version di svilup"
 
-#: shell/cc-window.ui:327
+#: shell/cc-window.ui:332
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -7881,7 +7832,7 @@ msgstr ""
 "svilup. A puedin capitâ compuartaments dal sisteme sbaliâts, pierditis di "
 "dâts e altris problemis inspietâts. "
 
-#: shell/cc-window.ui:338
+#: shell/cc-window.ui:343
 msgid "Help"
 msgstr "Jutori"
 
@@ -7966,6 +7917,55 @@ msgstr[1] "%u jentradis"
 #: subprojects/gvc/gvc-mixer-control.c:2736
 msgid "System Sounds"
 msgstr "Suns di sisteme"
+
+#~ msgid "_Background"
+#~ msgstr "_Sfont"
+
+#~ msgid "Changes throughout the day"
+#~ msgstr "Al cambie dilunc il dì"
+
+#~ msgctxt "background, style"
+#~ msgid "Tile"
+#~ msgstr "Mosaic"
+
+#~ msgctxt "background, style"
+#~ msgid "Zoom"
+#~ msgstr "Ingrandìs"
+
+#~ msgctxt "background, style"
+#~ msgid "Center"
+#~ msgstr "Centre"
+
+#~ msgctxt "background, style"
+#~ msgid "Scale"
+#~ msgstr "Scjale"
+
+#~ msgctxt "background, style"
+#~ msgid "Fill"
+#~ msgstr "Jemple"
+
+#~ msgctxt "background, style"
+#~ msgid "Span"
+#~ msgstr "Slargje"
+
+#~ msgid "Wallpapers"
+#~ msgstr "Rivestiments"
+
+#~ msgid "Colors"
+#~ msgstr "Colôrs"
+
+#~ msgid "Pictures"
+#~ msgstr "Imagjins"
+
+#~ msgid "No Pictures Found"
+#~ msgstr "Nissune imagjin cjatade"
+
+#~ msgid "You can add images to your %s folder and they will show up here"
+#~ msgstr ""
+#~ "Al è pussibil zontâ imagjins ae tô cartele %s e a vegnaran mostradis a chi"
+
+#~ msgid "Keyboard"
+#~ msgstr "Tastiere"
 
 #~ msgid "Connection/SSID"
 #~ msgstr "Conession/SSID"
