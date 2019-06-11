@@ -98,382 +98,345 @@
               <object class="GtkFrame">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="shadow_type">none</property>
-                <child type="label">
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">start</property>
-                    <property name="hexpand">True</property>
-                    <property name="margin-bottom">22</property>
-                    <property name="label" translatable="yes">Schedule</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkListBox" id="listbox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">22</property>
+                    <property name="selection-mode">none</property>
+
+                    <!-- Schedule -->
                     <child>
-                      <object class="GtkButtonBox" id="togglebutton_box">
+                      <object class="HdyActionRow">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="halign">fill</property>
-                        <property name="hexpand">True</property>
-                        <property name="layout_style">expand</property>
-                        <child>
-                          <object class="GtkRadioButton" id="togglebutton_automatic">
-                            <property name="label" translatable="yes">Sunset to Sunrise</property>
+                        <property name="title" translatable="yes">Schedule</property>
+                        <property name="activatable-widget">night_light_toggle_switch</property>
+
+                        <child type="action">
+                          <object class="GtkSwitch" id="night_light_toggle_switch">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="draw_indicator">False</property>
-                            <property name="active">True</property>
-                            <signal name="toggled" handler="dialog_mode_changed_cb" object="CcNightLightPage" swapped="no" />
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkRadioButton" id="togglebutton_manual">
-                            <property name="label" translatable="yes">Manual</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="group">togglebutton_automatic</property>
-                            <property name="draw_indicator">False</property>
-                            <signal name="toggled" handler="dialog_mode_changed_cb" object="CcNightLightPage" swapped="no" />
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkRadioButton" id="togglebutton_off">
-                            <property name="label" translatable="yes">_Off</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="draw_indicator">False</property>
-                            <property name="group">togglebutton_automatic</property>
-                            <property name="use_underline">True</property>
-                            <signal name="toggled" handler="dialog_mode_changed_cb" object="CcNightLightPage" swapped="no" />
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                        <style>
-                          <class name="linked"/>
-                        </style>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkBox" id="box_manual">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin-top">12</property>
-                <property name="spacing">18</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">start</property>
-                    <property name="valign">center</property>
-                    <property name="label" translatable="yes">From</property>
-                    <property name="mnemonic_widget">spinbutton_from_hours</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="spacing">6</property>
-                    <child>
-                      <object class="GtkSpinButton" id="spinbutton_from_hours">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="max_width_chars">2</property>
-                        <property name="text">4</property>
-                        <property name="orientation">vertical</property>
-                        <property name="adjustment">adjustment_from_hours</property>
-                        <property name="numeric">True</property>
-                        <property name="wrap">True</property>
-                        <property name="value">4</property>
-                        <signal name="output" handler="dialog_format_hours_combobox" object="CcNightLightPage" swapped="no" />
-                        <style>
-                          <class name="padded-spinbutton"/>
-                        </style>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="from_h_spinbutton-atkobject">
-                            <property name="AtkObject::accessible-description" translatable="yes">Hour</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">:</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSpinButton" id="spinbutton_from_minutes">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="max_width_chars">2</property>
-                        <property name="text">0</property>
-                        <property name="orientation">vertical</property>
-                        <property name="adjustment">adjustment_from_minutes</property>
-                        <property name="numeric">True</property>
-                        <property name="wrap">True</property>
-                        <signal name="output" handler="dialog_format_minutes_combobox" object="CcNightLightPage" swapped="no" />
-                        <style>
-                          <class name="padded-spinbutton"/>
-                        </style>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="from_m_spinbutton-atkobject">
-                            <property name="AtkObject::accessible-description" translatable="yes">Minute</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkStack" id="stack_from">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkButton" id="button_from_am">
-                            <property name="label" translatable="yes" comments="This is the short form for the time period in the morning">AM</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
                             <property name="valign">center</property>
-                            <signal name="clicked" handler="dialog_am_pm_from_button_clicked_cb" object="CcNightLightPage" swapped="no" />
-                            <style>
-                              <class name="unpadded-button"/>
-                            </style>
                           </object>
-                          <packing>
-                            <property name="name">am</property>
-                          </packing>
                         </child>
-                        <child>
-                          <object class="GtkButton" id="button_from_pm">
-                            <property name="label" translatable="yes" comments="This is the short form for the time period in the afternoon">PM</property>
+                      </object>
+                    </child>
+
+                    <!-- Schedule Type -->
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">True</property>
+                        <property name="title" translatable="yes">Schedule Type</property>
+                        <property name="sensitive" bind-source="night_light_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
+
+                        <child type="action">
+                          <object class="GtkComboBoxText" id="schedule_type_combo">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
                             <property name="valign">center</property>
-                            <signal name="clicked" handler="dialog_am_pm_from_button_clicked_cb" object="CcNightLightPage" swapped="no" />
-                            <style>
-                              <class name="unpadded-button"/>
-                            </style>
+                            <signal name="notify::active" handler="on_schedule_type_combo_active_changed_cb" object="CcNightLightPage" swapped="no" />
+                            <items>
+                              <item translatable="yes" id="automatic">Sunset to Sunrise</item>
+                              <item translatable="yes" id="manual">Set Time</item>
+                            </items>
                           </object>
-                          <packing>
-                            <property name="name">pm</property>
-                            <property name="position">1</property>
-                          </packing>
                         </child>
-                        <child>
-                          <object class="GtkLabel">
+                      </object>
+                    </child>
+
+                    <!-- Time -->
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">True</property>
+                        <property name="title" translatable="yes">Times</property>
+                        <property name="sensitive" bind-source="night_light_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
+
+                        <child type="action">
+                          <object class="GtkBox" id="box_manual">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="spacing">6</property>
+                            <property name="margin-top">12</property>
+                            <property name="margin-bottom">12</property>
+                            <style>
+                              <class name="time-widget" />
+                            </style>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">From</property>
+                                <property name="mnemonic_widget">spinbutton_from_hours</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="spacing">4</property>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbutton_from_hours">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="max_width_chars">2</property>
+                                    <property name="text">4</property>
+                                    <property name="orientation">vertical</property>
+                                    <property name="adjustment">adjustment_from_hours</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="value">4</property>
+                                    <signal name="output" handler="dialog_format_hours_combobox" object="CcNightLightPage" swapped="no" />
+                                    <style>
+                                      <class name="padded-spinbutton"/>
+                                    </style>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="from_h_spinbutton-atkobject">
+                                        <property name="AtkObject::accessible-description" translatable="yes">Hour</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label" translatable="yes">:</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbutton_from_minutes">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="max_width_chars">2</property>
+                                    <property name="text">0</property>
+                                    <property name="orientation">vertical</property>
+                                    <property name="adjustment">adjustment_from_minutes</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <signal name="output" handler="dialog_format_minutes_combobox" object="CcNightLightPage" swapped="no" />
+                                    <style>
+                                      <class name="padded-spinbutton"/>
+                                    </style>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="from_m_spinbutton-atkobject">
+                                        <property name="AtkObject::accessible-description" translatable="yes">Minute</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkStack" id="stack_from">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="homogeneous">False</property>
+                                    <child>
+                                      <object class="GtkButton" id="button_from_am">
+                                        <property name="label" translatable="yes" comments="This is the short form for the time period in the morning">AM</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="valign">center</property>
+                                        <signal name="clicked" handler="dialog_am_pm_from_button_clicked_cb" object="CcNightLightPage" swapped="no" />
+                                        <style>
+                                          <class name="unpadded-button"/>
+                                        </style>
+                                      </object>
+                                      <packing>
+                                        <property name="name">am</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkButton" id="button_from_pm">
+                                        <property name="label" translatable="yes" comments="This is the short form for the time period in the afternoon">PM</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="valign">center</property>
+                                        <signal name="clicked" handler="dialog_am_pm_from_button_clicked_cb" object="CcNightLightPage" swapped="no" />
+                                        <style>
+                                          <class name="unpadded-button"/>
+                                        </style>
+                                      </object>
+                                      <packing>
+                                        <property name="name">pm</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                      </object>
+                                      <packing>
+                                        <property name="name">blank</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin-start">6</property>
+                                <property name="label" translatable="yes">To</property>
+                                <property name="mnemonic_widget">spinbutton_to_hours</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="spacing">4</property>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbutton_to_hours">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="max_width_chars">2</property>
+                                    <property name="text">4</property>
+                                    <property name="input_purpose">number</property>
+                                    <property name="orientation">vertical</property>
+                                    <property name="adjustment">adjustment_to_hours</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="value">4</property>
+                                    <signal name="output" handler="dialog_format_hours_combobox" object="CcNightLightPage" swapped="no" />
+                                    <style>
+                                      <class name="padded-spinbutton"/>
+                                    </style>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="to_h_spinbutton-atkobject">
+                                        <property name="AtkObject::accessible-description" translatable="yes">Hour</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label" translatable="yes">:</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbutton_to_minutes">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="max_width_chars">2</property>
+                                    <property name="text">0</property>
+                                    <property name="orientation">vertical</property>
+                                    <property name="adjustment">adjustment_to_minutes</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <signal name="output" handler="dialog_format_minutes_combobox" object="CcNightLightPage" swapped="no" />
+                                    <style>
+                                      <class name="padded-spinbutton"/>
+                                    </style>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="to_m_spinbutton-atkobject">
+                                        <property name="AtkObject::accessible-description" translatable="yes">Minute</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkStack" id="stack_to">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="homogeneous">False</property>
+                                    <child>
+                                      <object class="GtkButton" id="button_to_am">
+                                        <property name="label" translatable="yes">AM</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="valign">center</property>
+                                        <signal name="clicked" handler="dialog_am_pm_to_button_clicked_cb" object="CcNightLightPage" swapped="no" />
+                                        <style>
+                                          <class name="unpadded-button"/>
+                                        </style>
+                                      </object>
+                                      <packing>
+                                        <property name="name">am</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkButton" id="button_to_pm">
+                                        <property name="label" translatable="yes">PM</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="valign">center</property>
+                                        <signal name="clicked" handler="dialog_am_pm_to_button_clicked_cb" object="CcNightLightPage" swapped="no" />
+                                        <style>
+                                          <class name="unpadded-button"/>
+                                        </style>
+                                      </object>
+                                      <packing>
+                                        <property name="name">pm</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                      </object>
+                                      <packing>
+                                        <property name="name">blank</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
                           </object>
-                          <packing>
-                            <property name="name">blank</property>
-                            <property name="position">2</property>
-                          </packing>
                         </child>
                       </object>
                     </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="spacing">6</property>
+
+                    <!-- Color Temperature -->
                     <child>
-                      <object class="GtkSpinButton" id="spinbutton_to_hours">
+                      <object class="HdyActionRow">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="max_width_chars">2</property>
-                        <property name="text">4</property>
-                        <property name="input_purpose">number</property>
-                        <property name="orientation">vertical</property>
-                        <property name="adjustment">adjustment_to_hours</property>
-                        <property name="numeric">True</property>
-                        <property name="wrap">True</property>
-                        <property name="value">4</property>
-                        <signal name="output" handler="dialog_format_hours_combobox" object="CcNightLightPage" swapped="no" />
-                        <style>
-                          <class name="padded-spinbutton"/>
-                        </style>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="to_h_spinbutton-atkobject">
-                            <property name="AtkObject::accessible-description" translatable="yes">Hour</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">:</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSpinButton" id="spinbutton_to_minutes">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="max_width_chars">2</property>
-                        <property name="text">0</property>
-                        <property name="orientation">vertical</property>
-                        <property name="adjustment">adjustment_to_minutes</property>
-                        <property name="numeric">True</property>
-                        <property name="wrap">True</property>
-                        <signal name="output" handler="dialog_format_minutes_combobox" object="CcNightLightPage" swapped="no" />
-                        <style>
-                          <class name="padded-spinbutton"/>
-                        </style>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="to_m_spinbutton-atkobject">
-                            <property name="AtkObject::accessible-description" translatable="yes">Minute</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkStack" id="stack_to">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkButton" id="button_to_am">
-                            <property name="label" translatable="yes">AM</property>
+                        <property name="title" translatable="yes">Color Temperature</property>
+                        <property name="sensitive" bind-source="night_light_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
+
+                        <child type="action">
+                          <object class="GtkScale" id="scale_color_temperature">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="valign">center</property>
-                            <signal name="clicked" handler="dialog_am_pm_to_button_clicked_cb" object="CcNightLightPage" swapped="no" />
+                            <property name="hexpand">True</property>
+                            <property name="margin-top">12</property>
+                            <property name="margin-bottom">12</property>
+                            <property name="width-request">280</property>
+                            <property name="adjustment">adjustment_color_temperature</property>
+                            <property name="inverted">True</property>
+                            <property name="restrict_to_fill_level">False</property>
+                            <property name="fill_level">1</property>
+                            <property name="digits">0</property>
+                            <property name="draw_value">False</property>
+                            <property name="has_origin">False</property>
+                            <property name="value_pos">bottom</property>
                             <style>
-                              <class name="unpadded-button"/>
+                              <class name="night-light-temperature"/>
                             </style>
                           </object>
-                          <packing>
-                            <property name="name">am</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="button_to_pm">
-                            <property name="label" translatable="yes">PM</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="valign">center</property>
-                            <signal name="clicked" handler="dialog_am_pm_to_button_clicked_cb" object="CcNightLightPage" swapped="no" />
-                            <style>
-                              <class name="unpadded-button"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="name">pm</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                          </object>
-                          <packing>
-                            <property name="name">blank</property>
-                            <property name="position">2</property>
-                          </packing>
                         </child>
                       </object>
                     </child>
+
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="pack_type">end</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">start</property>
-                    <property name="valign">center</property>
-                    <property name="margin_left">3</property>
-                    <property name="label" translatable="yes">To</property>
-                    <property name="mnemonic_widget">spinbutton_to_hours</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="pack_type">end</property>
-                    <property name="position">3</property>
-                  </packing>
                 </child>
               </object>
             </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="hexpand">True</property>
-                <property name="label" translatable="yes">Color Temperature</property>
-                <property name="mnemonic_widget">scale_color_temperature</property>
-                <attributes>
-                  <attribute name="weight" value="bold"/>
-                </attributes>
-              </object>
-            </child>
-            <child>
-              <object class="GtkScale" id="scale_color_temperature">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hexpand">True</property>
-                <property name="adjustment">adjustment_color_temperature</property>
-                <property name="inverted">True</property>
-                <property name="restrict_to_fill_level">False</property>
-                <property name="fill_level">1</property>
-                <property name="digits">0</property>
-                <property name="draw_value">False</property>
-                <property name="has_origin">False</property>
-                <property name="value_pos">bottom</property>
-                <style>
-                  <class name="night-light-temperature"/>
-                </style>
-              </object>
-            </child>
+
           </object>
         </child>
       </object>
