@@ -491,40 +491,6 @@ on_rfkill_proxy_properties_changed_cb (GDBusProxy  *proxy,
 }
 
 static void
-rfkill_proxy_acquired_cb (GObject      *source_object,
-                          GAsyncResult *res,
-                          gpointer      user_data)
-{
-  CcWifiPanel *self;
-  GDBusProxy *proxy;
-  GError *error;
-
-  error = NULL;
-  proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
-
-  if (error)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_printerr ("Error creating rfkill proxy: %s\n", error->message);
-
-      g_error_free (error);
-      return;
-    }
-
-  self = CC_WIFI_PANEL (user_data);
-
-  self->rfkill_proxy = proxy;
-
-  g_signal_connect_object (proxy,
-                           "g-properties-changed",
-                           G_CALLBACK (on_rfkill_proxy_properties_changed_cb),
-                           self,
-                           0);
-
-  sync_airplane_mode_switch (self);
-}
-
-static void
 rfkill_switch_notify_activate_cb (GtkSwitch   *rfkill_switch,
                                   GParamSpec  *pspec,
                                   CcWifiPanel *self)
@@ -696,6 +662,8 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
 static void
 cc_wifi_panel_init (CcWifiPanel *self)
 {
+  g_autoptr(GError) error = NULL;
+
   g_resources_register (cc_network_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -736,14 +704,29 @@ cc_wifi_panel_init (CcWifiPanel *self)
   load_wifi_devices (self);
 
   /* Acquire Airplane Mode proxy */
-  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
-                                       G_DBUS_PROXY_FLAGS_NONE,
-                                       "org.gnome.SettingsDaemon.Rfkill",
-                                       "/org/gnome/SettingsDaemon/Rfkill",
-                                       "org.gnome.SettingsDaemon.Rfkill",
-                                       self->cancellable,
-                                       rfkill_proxy_acquired_cb,
-                                       self);
+  self->rfkill_proxy = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
+                                                                 G_DBUS_PROXY_FLAGS_NONE,
+                                                                 "org.gnome.SettingsDaemon.Rfkill",
+                                                                 "/org/gnome/SettingsDaemon/Rfkill",
+                                                                 "org.gnome.SettingsDaemon.Rfkill",
+                                                                 self->cancellable,
+                                                                 &error);
+
+  if (error)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_printerr ("Error creating rfkill proxy: %s\n", error->message);
+    }
+  else
+    {
+      g_signal_connect_object (self->rfkill_proxy,
+                               "g-properties-changed",
+                               G_CALLBACK (on_rfkill_proxy_properties_changed_cb),
+                               self,
+                               0);
+
+      sync_airplane_mode_switch (self);
+    }
 
   /* Handle comment-line arguments after loading devices */
   handle_argv (self);
