@@ -47,6 +47,7 @@
 #define MASTER_SCHEMA "org.gnome.desktop.notifications"
 #define APP_SCHEMA MASTER_SCHEMA ".application"
 #define APP_PREFIX "/org/gnome/desktop/notifications/application/"
+#define EOS_LINK_PREFIX "eos-link-"
 
 #define PORTAL_SNAP_PREFIX "snap."
 
@@ -1601,13 +1602,13 @@ populate_applications (CcApplicationsPanel *self)
       GtkWidget *row;
       g_autofree gchar *id = NULL;
 
-      if (!g_app_info_should_show (info))
+      id = get_app_id (info);
+      if (!g_app_info_should_show (info) || g_str_has_prefix (id, EOS_LINK_PREFIX))
         continue;
 
       row = GTK_WIDGET (cc_applications_row_new (info));
       gtk_list_box_insert (GTK_LIST_BOX (self->sidebar_listbox), row, -1);
 
-      id = get_app_id (info);
       if (g_strcmp0 (id, self->current_app_id) == 0)
         gtk_list_box_select_row (GTK_LIST_BOX (self->sidebar_listbox), GTK_LIST_BOX_ROW (row));
     }
