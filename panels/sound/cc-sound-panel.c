@@ -107,8 +107,8 @@ output_device_changed_cb (CcSoundPanel *self)
   if (device != NULL)
     stream = gvc_mixer_control_get_stream_from_device (self->mixer_control, device);
 
-  cc_volume_slider_set_stream (self->output_volume_slider, stream);
-  cc_level_bar_set_stream (self->output_level_bar, stream, CC_LEVEL_BAR_STREAM_TYPE_OUTPUT);
+  cc_volume_slider_set_stream (self->output_volume_slider, stream, CC_STREAM_TYPE_OUTPUT);
+  cc_level_bar_set_stream (self->output_level_bar, stream, CC_STREAM_TYPE_OUTPUT);
 
   if (stream != NULL)
     {
@@ -141,8 +141,8 @@ input_device_changed_cb (CcSoundPanel *self)
   if (device != NULL)
     stream = gvc_mixer_control_get_stream_from_device (self->mixer_control, device);
 
-  cc_volume_slider_set_stream (self->input_volume_slider, stream);
-  cc_level_bar_set_stream (self->input_level_bar, stream, CC_LEVEL_BAR_STREAM_TYPE_INPUT);
+  cc_volume_slider_set_stream (self->input_volume_slider, stream, CC_STREAM_TYPE_INPUT);
+  cc_level_bar_set_stream (self->input_level_bar, stream, CC_STREAM_TYPE_INPUT);
 
   if (device != NULL)
     gvc_mixer_control_change_input (self->mixer_control, device);

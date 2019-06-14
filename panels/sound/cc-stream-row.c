@@ -19,6 +19,7 @@
 #include "cc-sound-resources.h"
 #include "cc-stream-row.h"
 #include "cc-volume-slider.h"
+#include "cc-sound-enums.h"
 
 #define SPEECH_DISPATCHER_PREFIX "speech-dispatcher-"
 
@@ -74,7 +75,8 @@ cc_stream_row_init (CcStreamRow *self)
 CcStreamRow *
 cc_stream_row_new (GtkSizeGroup   *size_group,
                    GvcMixerStream *stream,
-                   guint           id)
+                   guint           id,
+                   CcStreamType    stream_type)
 {
   CcStreamRow *self;
   g_autoptr(GtkIconInfo) icon_info = NULL;
@@ -107,7 +109,7 @@ cc_stream_row_new (GtkSizeGroup   *size_group,
   gtk_image_set_from_gicon (self->icon_image, gicon, GTK_ICON_SIZE_LARGE_TOOLBAR);
 
   gtk_label_set_label (self->name_label, gvc_mixer_stream_get_name (stream));
-  cc_volume_slider_set_stream (self->volume_slider, stream);
+  cc_volume_slider_set_stream (self->volume_slider, stream, stream_type);
 
   gtk_size_group_add_widget (size_group, GTK_WIDGET (self->label_box));
 
