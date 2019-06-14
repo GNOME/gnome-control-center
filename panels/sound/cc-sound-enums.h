@@ -1,6 +1,5 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
- *
- * Copyright (C) 2018 Canonical Ltd.
+/*
+ * Copyright (C) 2019 Jordan Petridis <jpetridis@gnome.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,19 +17,14 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
-#include <pulse/pulseaudio.h>
-#include <gvc-mixer-stream.h>
-
-#include "cc-sound-enums.h"
+#include <glib.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_LEVEL_BAR (cc_level_bar_get_type ())
-G_DECLARE_FINAL_TYPE (CcLevelBar, cc_level_bar, CC, LEVEL_BAR, GtkWidget)
-
-void cc_level_bar_set_stream (CcLevelBar     *bar,
-                              GvcMixerStream *stream,
-                              CcStreamType    type);
+typedef enum
+{
+  CC_STREAM_TYPE_OUTPUT,
+  CC_STREAM_TYPE_INPUT,
+} CcStreamType;
 
 G_END_DECLS
