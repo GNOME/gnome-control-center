@@ -166,8 +166,6 @@ add_wifi_device (CcWifiPanel *self,
                              "id", nm_device_get_udi (device),
                              NULL);
 
-  net_object_add_to_stack (net_device, self->stack, self->sizegroup);
-
   /* And add to the header widgets */
   header_widget = net_device_wifi_get_header_widget (NET_DEVICE_WIFI (net_device));
 
@@ -177,6 +175,9 @@ add_wifi_device (CcWifiPanel *self,
   g_ptr_array_add (self->devices, net_device);
 
   update_devices_names (self);
+
+  /* Needs to be added after the device is added to the self->devices array */
+  net_object_add_to_stack (net_device, self->stack, self->sizegroup);
 }
 
 static void
