@@ -45,6 +45,8 @@ if enable_snap
   sources += files('cc-snap-row.c')
 endif
 
+deps += dependency('malcontent-0', version: '>= 0.3.0')
+
 panels_libs += static_library(
            cappletname,
               sources : sources,

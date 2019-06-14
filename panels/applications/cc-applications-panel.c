@@ -26,6 +26,7 @@
 #ifdef HAVE_SNAP
 #include <snapd-glib/snapd-glib.h>
 #endif
+#include <libmalcontent/malcontent.h>
 
 #include <gio/gdesktopappinfo.h>
 
@@ -62,6 +63,12 @@ struct _CcApplicationsPanel
   GtkWidget       *title_label;
   GAppInfoMonitor *monitor;
   gulong           monitor_id;
+
+  GCancellable    *cancellable;
+
+  MctAppFilter    *app_filter;
+  MctManager      *manager;
+  guint            app_filter_id;
 
   gchar           *current_app_id;
   gchar           *current_portal_app_id;
@@ -1594,6 +1601,7 @@ populate_applications (CcApplicationsPanel *self)
 
   container_remove_all (GTK_CONTAINER (self->sidebar_listbox));
 
+  g_signal_handler_block (self->manager, self->app_filter_id);
   infos = g_app_info_get_all ();
 
   for (l = infos; l; l = l->next)
@@ -1603,8 +1611,12 @@ populate_applications (CcApplicationsPanel *self)
       g_autofree gchar *id = NULL;
 
       id = get_app_id (info);
-      if (!g_app_info_should_show (info) || g_str_has_prefix (id, EOS_LINK_PREFIX))
-        continue;
+      if (!g_app_info_should_show (info) ||
+          !mct_app_filter_is_appinfo_allowed (self->app_filter, info) ||
+          g_str_has_prefix (id, EOS_LINK_PREFIX))
+        {
+          continue;
+        }
 
       row = GTK_WIDGET (cc_applications_row_new (info));
       gtk_list_box_insert (GTK_LIST_BOX (self->sidebar_listbox), row, -1);
@@ -1612,6 +1624,8 @@ populate_applications (CcApplicationsPanel *self)
       if (g_strcmp0 (id, self->current_app_id) == 0)
         gtk_list_box_select_row (GTK_LIST_BOX (self->sidebar_listbox), GTK_LIST_BOX_ROW (row));
     }
+
+  g_signal_handler_unblock (self->manager, self->app_filter_id);
 }
 
 static gint
@@ -1643,6 +1657,14 @@ filter_sidebar_rows (GtkListBoxRow *row,
   search_text = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (self->sidebar_search_entry));
 
   return g_strstr_len (app_name, -1, search_text) != NULL;
+}
+
+static void
+app_filter_changed_cb (MctAppFilter        *app_filter,
+                       uid_t               uid,
+                       CcApplicationsPanel *self)
+{
+  populate_applications (self);
 }
 
 static void
@@ -1754,6 +1776,14 @@ cc_applications_panel_finalize (GObject *object)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
 
+  if (self->app_filter != NULL && self->app_filter_id != 0)
+    {
+      g_signal_handler_disconnect (self->manager, self->app_filter_id);
+      self->app_filter_id = 0;
+    }
+  g_clear_pointer (&self->app_filter, mct_app_filter_unref);
+
+  g_clear_object (&self->manager);
   g_clear_object (&self->notification_settings);
   g_clear_object (&self->location_settings);
   g_clear_object (&self->privacy_settings);
@@ -1914,6 +1944,8 @@ static void
 cc_applications_panel_init (CcApplicationsPanel *self)
 {
   g_autoptr(GtkStyleProvider) provider = NULL;
+  g_autoptr(GDBusConnection) system_bus = NULL;
+  g_autoptr(GError) error = NULL;
   GtkListBoxRow *row;
 
   g_resources_register (cc_applications_get_resource ());
@@ -1968,6 +2000,30 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   self->location_settings = g_settings_new ("org.gnome.system.location");
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
   self->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
+
+   /* FIXME: should become asynchronous */
+  system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, self->cancellable, &error);
+  if (system_bus == NULL)
+    {
+      g_warning ("Error getting system bus while setting up app permissions: %s", error->message);
+      return;
+    }
+
+  /* Load the user’s parental controls settings too, so we can filter the list. */
+  self->manager = mct_manager_new (system_bus);
+  self->app_filter = mct_manager_get_app_filter (self->manager,
+                                                 getuid (),
+                                                 MCT_GET_APP_FILTER_FLAGS_NONE,
+                                                 self->cancellable,
+                                                 &error);
+  if (error)
+    {
+      g_warning ("Error retrieving app filter: %s", error->message);
+      return;
+    }
+
+  self->app_filter_id = g_signal_connect (self->manager, "app-filter-changed",
+                                          G_CALLBACK (app_filter_changed_cb), self);
 
   populate_applications (self);
 
