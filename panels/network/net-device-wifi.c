@@ -61,8 +61,19 @@ struct _NetDeviceWifi
         gchar                   *selected_ssid_title;
         gchar                   *selected_connection_id;
         gchar                   *selected_ap_id;
+
+        gint64                   last_scan;
+        gboolean                 scanning;
+
+        guint                    monitor_scanning_id;
         guint                    scan_id;
         GCancellable            *cancellable;
+};
+
+enum {
+        PROP_0,
+        PROP_SCANNING,
+        PROP_LAST,
 };
 
 G_DEFINE_TYPE (NetDeviceWifi, net_device_wifi, NET_TYPE_DEVICE)
@@ -147,6 +158,10 @@ static void
 disable_scan_timeout (NetDeviceWifi *device_wifi)
 {
         g_debug ("Disabling periodic Wi-Fi scan");
+        if (device_wifi->monitor_scanning_id > 0) {
+                g_source_remove (device_wifi->monitor_scanning_id);
+                device_wifi->monitor_scanning_id = 0;
+        }
         if (device_wifi->scan_id > 0) {
                 g_source_remove (device_wifi->scan_id);
                 device_wifi->scan_id = 0;
@@ -407,6 +422,42 @@ out:
         g_free (last_used);
 }
 
+static void
+set_scanning (NetDeviceWifi *self,
+              gboolean       scanning,
+              gint64         last_scan)
+{
+        gboolean scanning_changed = self->scanning != scanning;
+
+        self->scanning = scanning;
+        self->last_scan = last_scan;
+
+        if (scanning_changed)
+                g_object_notify (G_OBJECT (self), "scanning");
+}
+
+static gboolean
+update_scanning (gpointer user_data)
+{
+        NetDeviceWifi *device_wifi = user_data;
+        NMDevice *nm_device;
+        gint64 last_scan;
+
+        nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
+        last_scan = nm_device_wifi_get_last_scan (NM_DEVICE_WIFI (nm_device));
+
+        /* The last_scan property is updated after the device finished scanning,
+         * so notify about it and stop monitoring for changes.
+         */
+        if (device_wifi->last_scan != last_scan) {
+                set_scanning (device_wifi, FALSE, last_scan);
+                device_wifi->monitor_scanning_id = 0;
+                return G_SOURCE_REMOVE;
+        }
+
+        return G_SOURCE_CONTINUE;
+}
+
 static gboolean
 request_scan (gpointer user_data)
 {
@@ -416,6 +467,15 @@ request_scan (gpointer user_data)
         g_debug ("Periodic Wi-Fi scan requested");
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
+
+        set_scanning (device_wifi, TRUE,
+                      nm_device_wifi_get_last_scan (NM_DEVICE_WIFI (nm_device)));
+
+        if (device_wifi->monitor_scanning_id == 0) {
+                device_wifi->monitor_scanning_id = g_timeout_add (1500, update_scanning,
+                                                                  device_wifi);
+        }
+
         nm_device_wifi_request_scan_async (NM_DEVICE_WIFI (nm_device),
                                            device_wifi->cancellable, NULL, NULL);
 
@@ -1395,6 +1455,24 @@ device_wifi_edit (NetObject *object)
 }
 
 static void
+net_device_wifi_get_property (GObject    *object,
+                              guint       prop_id,
+                              GValue     *value,
+                              GParamSpec *pspec)
+{
+        NetDeviceWifi *self = NET_DEVICE_WIFI (object);
+
+        switch (prop_id) {
+        case PROP_SCANNING:
+                g_value_set_boolean (value, self->scanning);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+                break;
+        }
+}
+
+static void
 net_device_wifi_class_init (NetDeviceWifiClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -1402,9 +1480,18 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
 
         object_class->finalize = net_device_wifi_finalize;
         object_class->constructed = net_device_wifi_constructed;
+        object_class->get_property = net_device_wifi_get_property;
         parent_class->add_to_stack = device_wifi_proxy_add_to_stack;
         parent_class->refresh = device_wifi_refresh;
         parent_class->edit = device_wifi_edit;
+
+        g_object_class_install_property (object_class,
+                                         PROP_SCANNING,
+                                         g_param_spec_boolean ("scanning",
+                                                               "Scanning",
+                                                               "Whether the device is scanning for access points",
+                                                               FALSE,
+                                                               G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 }
 
 static void
