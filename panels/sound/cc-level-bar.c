@@ -17,13 +17,14 @@
  */
 
 #include "cc-level-bar.h"
+#include "cc-sound-enums.h"
 #include "gvc-mixer-stream-private.h"
 
 struct _CcLevelBar
 {
   GtkWidget             parent_instance;
 
-  CcLevelBarStreamType  type;
+  CcStreamType          type;
   pa_stream            *level_stream;
   gdouble               last_input_peak;
 
@@ -139,10 +140,10 @@ cc_level_bar_draw (GtkWidget *widget,
   switch (self->type)
   {
   default:
-  case CC_LEVEL_BAR_STREAM_TYPE_OUTPUT:
+  case CC_STREAM_TYPE_OUTPUT:
     gdk_rgba_parse (&active_color, "#4a90d9");
     break;
-  case CC_LEVEL_BAR_STREAM_TYPE_INPUT:
+  case CC_STREAM_TYPE_INPUT:
     gdk_rgba_parse (&active_color, "#ff0000");
     break;
   }
@@ -214,9 +215,9 @@ cc_level_bar_init (CcLevelBar *self)
 }
 
 void
-cc_level_bar_set_stream (CcLevelBar          *self,
-                         GvcMixerStream      *stream,
-                         CcLevelBarStreamType type)
+cc_level_bar_set_stream (CcLevelBar     *self,
+                         GvcMixerStream *stream,
+                         CcStreamType    type)
 {
   pa_context *context;
   pa_sample_spec sample_spec;

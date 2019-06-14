@@ -30,6 +30,7 @@ struct _CcVolumeSlider
   GtkBox           parent_instance;
 
   GtkToggleButton *mute_button;
+  GtkImage        *stream_type_icon;
   GtkAdjustment   *volume_adjustment;
   GtkScale        *volume_scale;
 
@@ -109,6 +110,7 @@ cc_volume_slider_class_init (CcVolumeSliderClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-volume-slider.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcVolumeSlider, mute_button);
+  gtk_widget_class_bind_template_child (widget_class, CcVolumeSlider, stream_type_icon);
   gtk_widget_class_bind_template_child (widget_class, CcVolumeSlider, volume_adjustment);
   gtk_widget_class_bind_template_child (widget_class, CcVolumeSlider, volume_scale);
 
@@ -132,7 +134,8 @@ cc_volume_slider_init (CcVolumeSlider *self)
 
 void
 cc_volume_slider_set_stream (CcVolumeSlider *self,
-                             GvcMixerStream *stream)
+                             GvcMixerStream *stream,
+                             CcStreamType    type)
 {
   g_return_if_fail (CC_IS_VOLUME_SLIDER (self));
 
@@ -144,6 +147,25 @@ cc_volume_slider_set_stream (CcVolumeSlider *self,
       self->notify_is_muted_handler_id = 0;
     }
   g_clear_object (&self->stream);
+
+  switch (type)
+    {
+    case CC_STREAM_TYPE_INPUT:
+      gtk_image_set_from_icon_name (self->stream_type_icon,
+                                    "microphone-sensitivity-muted-symbolic",
+                                    GTK_ICON_SIZE_BUTTON);
+      break;
+
+    case CC_STREAM_TYPE_OUTPUT:
+      gtk_image_set_from_icon_name (self->stream_type_icon,
+                                    "audio-volume-muted-symbolic",
+                                    GTK_ICON_SIZE_BUTTON);
+      break;
+
+    default:
+      g_assert_not_reached ();
+      break;
+    }
 
   if (stream != NULL)
     {
