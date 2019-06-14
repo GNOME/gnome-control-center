@@ -220,12 +220,12 @@
                             <property name="hexpand">True</property>
                             <property name="halign">start</property>
                             <property name="spacing">6</property>
+                            <property name="margin_bottom">12</property>
                             <child>
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="label" translatable="yes">Visible Networks</property>
                                 <property name="xalign">0.0</property>
-                                <property name="margin_bottom">12</property>
                                 <attributes>
                                   <attribute name="weight" value="bold"/>
                                 </attributes>
@@ -233,6 +233,7 @@
                             </child>
                             <child>
                               <object class="GtkSpinner" id="spinner">
+                                <property name="visible">True</property>
                                 <property name="hexpand">True</property>
                               </object>
                             </child>
@@ -253,6 +254,7 @@
                                 <property name="hexpand">True</property>
                                 <property name="vexpand">True</property>
                                 <property name="transition_type">crossfade</property>
+                                <signal name="notify::visible-child-name" handler="on_stack_visible_child_changed_cb" object="CcWifiPanel" swapped="no" />
                               </object>
                             </child>
                           </object>
