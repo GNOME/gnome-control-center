@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-05-27 20:51+0000\n"
-"PO-Revision-Date: 2019-05-31 10:45+0700\n"
+"POT-Creation-Date: 2019-06-10 16:49+0000\n"
+"PO-Revision-Date: 2019-06-14 17:39+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural= n!=1;\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: panels/applications/cc-applications-panel.c:561
 msgid "System Bus"
@@ -59,12 +59,8 @@ msgstr "Jaringan"
 msgid "Has network access"
 msgstr "Memiliki akses jaringan"
 
-#. translators: "Home" is used in place of the Pictures
-#. * directory in the string below when XDG_PICTURES_DIR is
-#. * undefined
 #: panels/applications/cc-applications-panel.c:579
 #: panels/applications/cc-applications-panel.c:581
-#: panels/background/cc-background-chooser-dialog.c:536
 #: panels/search/cc-search-locations-dialog.c:286
 msgid "Home"
 msgstr "Rumah"
@@ -341,81 +337,11 @@ msgstr "Kontrol berbagai izin dan pengaturan aplikasi"
 msgid "application;flatpak;permission;setting;"
 msgstr "aplikasi;flatpak;izin;pengaturan;"
 
-#: panels/background/background.ui:49
-msgid "_Background"
-msgstr "Latar _Belakang"
+#: panels/background/cc-background-chooser.c:348
+msgid "Select a picture"
+msgstr "Pilih gambar"
 
-#. This refers to a slideshow background
-#: panels/background/background.ui:99 panels/background/background.ui:212
-msgid "Changes throughout the day"
-msgstr "Perubahan sepanjang hari"
-
-#. To translators: This is a noun, not a verb
-#: panels/background/background.ui:162
-msgid "_Lock Screen"
-msgstr "Kunci _Layar"
-
-#: panels/background/background.ui:268
-msgctxt "background, style"
-msgid "Tile"
-msgstr "Ubin"
-
-#: panels/background/background.ui:272
-msgctxt "background, style"
-msgid "Zoom"
-msgstr "Zum"
-
-#: panels/background/background.ui:276
-msgctxt "background, style"
-msgid "Center"
-msgstr "Pusat"
-
-#: panels/background/background.ui:280
-msgctxt "background, style"
-msgid "Scale"
-msgstr "Skala"
-
-#: panels/background/background.ui:284
-msgctxt "background, style"
-msgid "Fill"
-msgstr "Isi"
-
-#: panels/background/background.ui:288
-msgctxt "background, style"
-msgid "Span"
-msgstr "Jarak"
-
-#: panels/background/cc-background-chooser-dialog.c:412
-msgid "Wallpapers"
-msgstr "Gambar latar"
-
-#: panels/background/cc-background-chooser-dialog.c:423
-msgid "Colors"
-msgstr "Warna"
-
-#. translators: This is the title of the wallpaper chooser dialog.
-#: panels/background/cc-background-chooser-dialog.c:455
-msgid "Select Background"
-msgstr "Pilih Latar Belakang"
-
-#: panels/background/cc-background-chooser-dialog.c:484
-msgid "Pictures"
-msgstr "Gambar"
-
-#. translators: No pictures were found
-#: panels/background/cc-background-chooser-dialog.c:519
-msgid "No Pictures Found"
-msgstr "Tak Ditemukan Gambar"
-
-#. translators: %s here is the name of the Pictures directory, the string should be translated in
-#. * the context "You can add images to your Pictures folder and they will show up here"
-#: panels/background/cc-background-chooser-dialog.c:546
-#, c-format
-msgid "You can add images to your %s folder and they will show up here"
-msgstr ""
-"Anda dapat menambahkan citra ke folder %s Anda dan mereka akan muncul di sini"
-
-#: panels/background/cc-background-chooser-dialog.c:550
+#: panels/background/cc-background-chooser.c:351
 #: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/cc-color-panel.ui:657 panels/color/color-calibrate.ui:25
 #: panels/common/cc-language-chooser.ui:24
@@ -442,29 +368,56 @@ msgstr ""
 msgid "_Cancel"
 msgstr "Ba_tal"
 
-#: panels/background/cc-background-chooser-dialog.c:551
-#: panels/common/cc-language-chooser.ui:12
-msgid "_Select"
-msgstr "_Pilih"
+#: panels/background/cc-background-chooser.c:352
+#: panels/network/connection-editor/vpn-helpers.c:182
+#: panels/printers/pp-details-dialog.c:314
+#: panels/sharing/cc-sharing-panel.c:429
+#: panels/user-accounts/cc-avatar-chooser.c:236
+msgid "_Open"
+msgstr "_Buka"
 
-#: panels/background/cc-background-item.c:191
+#: panels/background/cc-background-chooser.ui:104
+msgid "Set Background and Lock Screen"
+msgstr "Atur Latar Belakang dan Layar Kunci"
+
+#: panels/background/cc-background-chooser.ui:114
+msgid "Set Background"
+msgstr "Atur Latar Belakang"
+
+#: panels/background/cc-background-chooser.ui:121
+msgid "Set Lock Screen"
+msgstr "Atur Layar Kunci"
+
+#: panels/background/cc-background-chooser.ui:143
+msgid "Delete Background"
+msgstr "Hapus Latar Belakang"
+
+#: panels/background/cc-background-item.c:140
 msgid "multiple sizes"
 msgstr "ukuran berganda"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:195
+#: panels/background/cc-background-item.c:144
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:320
+#: panels/background/cc-background-item.c:278
 msgid "No Desktop Background"
 msgstr "Tanpa Latar Belakang Desktop"
 
-#: panels/background/cc-background-panel.c:291
+#: panels/background/cc-background-panel.c:145
 msgid "Current background"
 msgstr "Latar belakang kini"
+
+#: panels/background/cc-background-panel.ui:54
+msgid "Add Picture…"
+msgstr "Tambah Gambar…"
+
+#: panels/background/cc-background-preview.ui:55
+msgid "Activities"
+msgstr "Aktivitas"
 
 #: panels/background/gnome-background-panel.desktop.in.in:3
 msgid "Background"
@@ -477,7 +430,7 @@ msgstr "Ubah gambar latar Anda ke suatu wallpaper atau foto"
 #. Translators: Search terms to find the Background panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/background/gnome-background-panel.desktop.in.in:15
 msgid "Wallpaper;Screen;Desktop;"
-msgstr "Gambar latar;Layar;Desktop;"
+msgstr "Gambar latar;Layar;Destop;"
 
 #: panels/bluetooth/cc-bluetooth-panel.c:309
 msgid "No Bluetooth Found"
@@ -1186,6 +1139,10 @@ msgstr "Tak ada bahasa yang ditemukan"
 #: panels/common/cc-language-chooser.ui:5
 msgid "Select Language"
 msgstr "Pilih Bahasa"
+
+#: panels/common/cc-language-chooser.ui:12
+msgid "_Select"
+msgstr "_Pilih"
 
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:106
@@ -2911,13 +2868,6 @@ msgstr ""
 msgid "Select file to import"
 msgstr "Pilih berkas untuk diimpor"
 
-#: panels/network/connection-editor/vpn-helpers.c:182
-#: panels/printers/pp-details-dialog.c:314
-#: panels/sharing/cc-sharing-panel.c:429
-#: panels/user-accounts/cc-avatar-chooser.c:236
-msgid "_Open"
-msgstr "_Buka"
-
 #: panels/network/connection-editor/vpn-helpers.c:230
 #, c-format
 msgid "A file named “%s” already exists."
@@ -3182,7 +3132,7 @@ msgstr "rincian"
 #: panels/sharing/cc-sharing-panel.ui:351
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:214
+#: panels/user-accounts/cc-user-panel.ui:216
 msgid "_Password"
 msgstr "Kata _Sandi"
 
@@ -5653,7 +5603,7 @@ msgid "Login _Screen"
 msgstr "Layar Log Ma_suk"
 
 #: panels/region/cc-region-panel.ui:64
-#: panels/user-accounts/cc-user-panel.ui:362
+#: panels/user-accounts/cc-user-panel.ui:364
 msgid "_Language"
 msgstr "_Bahasa"
 
@@ -6617,27 +6567,27 @@ msgstr ""
 "Tetikus;Dobel;klik;Tunda;Kecepatan;Bantu;Ulangi; Berkedip;visual;mendengar;"
 "audio;mengetik;"
 
-#: panels/universal-access/zoom-options.c:334
+#: panels/universal-access/zoom-options.c:305
 msgctxt "Distance"
 msgid "Short"
 msgstr "Pendek"
 
-#: panels/universal-access/zoom-options.c:335
+#: panels/universal-access/zoom-options.c:306
 msgctxt "Distance"
 msgid "¼ Screen"
 msgstr "¼ Layar"
 
-#: panels/universal-access/zoom-options.c:336
+#: panels/universal-access/zoom-options.c:307
 msgctxt "Distance"
 msgid "½ Screen"
 msgstr "½ Layar"
 
-#: panels/universal-access/zoom-options.c:337
+#: panels/universal-access/zoom-options.c:308
 msgctxt "Distance"
 msgid "¾ Screen"
 msgstr "¾ Layar"
 
-#: panels/universal-access/zoom-options.c:338
+#: panels/universal-access/zoom-options.c:309
 msgctxt "Distance"
 msgid "Long"
 msgstr "Panjang"
@@ -6686,110 +6636,110 @@ msgstr "Pembesar meng_embang sampai ke luar layar"
 msgid "_Keep magnifier cursor centered"
 msgstr "Jaga _kursor pembesar di tengah"
 
-#: panels/universal-access/zoom-options.ui:369
+#: panels/universal-access/zoom-options.ui:370
 msgid "Magnifier cursor _pushes contents around"
 msgstr "Kursor _pembesar mendorong isi ke sekitar"
 
-#: panels/universal-access/zoom-options.ui:388
+#: panels/universal-access/zoom-options.ui:390
 msgid "Magnifier cursor moves with _contents"
 msgstr "Kursor pembesar bergerak _dengan isi"
 
-#: panels/universal-access/zoom-options.ui:422
+#: panels/universal-access/zoom-options.ui:425
 msgid "Magnifier Position:"
 msgstr "Posisi Pembesar:"
 
-#: panels/universal-access/zoom-options.ui:443
+#: panels/universal-access/zoom-options.ui:446
 msgid "Magnifier"
 msgstr "Pembesar"
 
-#: panels/universal-access/zoom-options.ui:490
+#: panels/universal-access/zoom-options.ui:493
 msgid "_Thickness:"
 msgstr "Ke_tebalan:"
 
-#: panels/universal-access/zoom-options.ui:516
+#: panels/universal-access/zoom-options.ui:519
 msgctxt "universal access, thickness"
 msgid "Thin"
 msgstr "Tipis"
 
-#: panels/universal-access/zoom-options.ui:548
+#: panels/universal-access/zoom-options.ui:551
 msgctxt "universal access, thickness"
 msgid "Thick"
 msgstr "Tebal"
 
-#: panels/universal-access/zoom-options.ui:574
+#: panels/universal-access/zoom-options.ui:577
 msgid "_Length:"
 msgstr "_Panjang:"
 
 #. The color of the accessibility crosshair
-#: panels/universal-access/zoom-options.ui:623
+#: panels/universal-access/zoom-options.ui:626
 msgid "Co_lor:"
 msgstr "_Warna:"
 
-#: panels/universal-access/zoom-options.ui:687
+#: panels/universal-access/zoom-options.ui:690
 msgid "_Crosshairs:"
 msgstr "Pem_bidik silang:"
 
-#: panels/universal-access/zoom-options.ui:735
+#: panels/universal-access/zoom-options.ui:738
 msgid "_Overlaps mouse cursor"
 msgstr "Kurs_or tetikus bertindih"
 
-#: panels/universal-access/zoom-options.ui:773
+#: panels/universal-access/zoom-options.ui:776
 msgid "Crosshairs"
 msgstr "Pembidik silang"
 
-#: panels/universal-access/zoom-options.ui:822
+#: panels/universal-access/zoom-options.ui:825
 msgid "_White on black:"
 msgstr "_Putih di atas hitam:"
 
-#: panels/universal-access/zoom-options.ui:842
+#: panels/universal-access/zoom-options.ui:845
 msgid "_Brightness:"
 msgstr "Kecera_han:"
 
-#: panels/universal-access/zoom-options.ui:863
+#: panels/universal-access/zoom-options.ui:866
 msgid "_Contrast:"
 msgstr "_Kontras:"
 
 #. The contrast scale goes from Color to None (grayscale)
-#: panels/universal-access/zoom-options.ui:883
+#: panels/universal-access/zoom-options.ui:886
 msgctxt "universal access, contrast"
 msgid "Co_lor"
 msgstr "_Warna"
 
-#: panels/universal-access/zoom-options.ui:908
+#: panels/universal-access/zoom-options.ui:911
 msgctxt "universal access, color"
 msgid "None"
 msgstr "Tak Ada"
 
-#: panels/universal-access/zoom-options.ui:940
+#: panels/universal-access/zoom-options.ui:943
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "Penuh"
 
-#: panels/universal-access/zoom-options.ui:1003
+#: panels/universal-access/zoom-options.ui:1006
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Rendah"
 
-#: panels/universal-access/zoom-options.ui:1036
+#: panels/universal-access/zoom-options.ui:1039
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Tinggi"
 
-#: panels/universal-access/zoom-options.ui:1067
+#: panels/universal-access/zoom-options.ui:1070
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Rendah"
 
-#: panels/universal-access/zoom-options.ui:1100
+#: panels/universal-access/zoom-options.ui:1103
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Tinggi"
 
-#: panels/universal-access/zoom-options.ui:1136
+#: panels/universal-access/zoom-options.ui:1139
 msgid "Color Effects:"
 msgstr "Efek Warna:"
 
-#: panels/universal-access/zoom-options.ui:1161
+#: panels/universal-access/zoom-options.ui:1164
 msgid "Color Effects"
 msgstr "Efek Warna"
 
@@ -6854,17 +6804,17 @@ msgid "_Full Name"
 msgstr "Nama _Lengkap"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:206
-#: panels/user-accounts/cc-user-panel.ui:151
+#: panels/user-accounts/cc-user-panel.ui:153
 msgid "Standard"
 msgstr "Standar"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:216
-#: panels/user-accounts/cc-user-panel.ui:161
+#: panels/user-accounts/cc-user-panel.ui:163
 msgid "Administrator"
 msgstr "Administrator"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:232
-#: panels/user-accounts/cc-user-panel.ui:179
+#: panels/user-accounts/cc-user-panel.ui:181
 msgid "Account _Type"
 msgstr "_Tipe Akun"
 
@@ -7186,33 +7136,33 @@ msgstr "Sesi Anda perlu dimulai ulang agar perubahan berefek"
 msgid "Restart Now"
 msgstr "Nyalakan Ulang Sekarang"
 
-#: panels/user-accounts/cc-user-panel.ui:254
+#: panels/user-accounts/cc-user-panel.ui:256
 msgid "A_utomatic Login"
 msgstr "Log Mas_uk Otomatis"
 
-#: panels/user-accounts/cc-user-panel.ui:296
+#: panels/user-accounts/cc-user-panel.ui:298
 msgid "_Fingerprint Login"
 msgstr "Log Masuk _Sidik Jari"
 
-#: panels/user-accounts/cc-user-panel.ui:322
-#: panels/user-accounts/cc-user-panel.ui:338
+#: panels/user-accounts/cc-user-panel.ui:324
+#: panels/user-accounts/cc-user-panel.ui:340
 msgid "User Icon"
 msgstr "Ikon Pengguna"
 
-#: panels/user-accounts/cc-user-panel.ui:402
+#: panels/user-accounts/cc-user-panel.ui:404
 msgid "Last Login"
 msgstr "Log Masuk Terakhir"
 
-#: panels/user-accounts/cc-user-panel.ui:451
+#: panels/user-accounts/cc-user-panel.ui:453
 msgid "Remove User…"
 msgstr "Hapus Pengguna…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:484
+#: panels/user-accounts/cc-user-panel.ui:486
 msgid "No Users Found"
 msgstr "Tak Ditemukan Pengguna"
 
-#: panels/user-accounts/cc-user-panel.ui:494
+#: panels/user-accounts/cc-user-panel.ui:496
 msgid "Unlock to add a user account."
 msgstr "Buka kunci untuk menambahkan akun pengguna."
 
@@ -7958,6 +7908,53 @@ msgstr[1] "%u Masukan"
 #: subprojects/gvc/gvc-mixer-control.c:2736
 msgid "System Sounds"
 msgstr "Suara Sistem"
+
+#~ msgid "_Background"
+#~ msgstr "Latar _Belakang"
+
+#~ msgid "Changes throughout the day"
+#~ msgstr "Perubahan sepanjang hari"
+
+#~ msgctxt "background, style"
+#~ msgid "Tile"
+#~ msgstr "Ubin"
+
+#~ msgctxt "background, style"
+#~ msgid "Zoom"
+#~ msgstr "Zum"
+
+#~ msgctxt "background, style"
+#~ msgid "Center"
+#~ msgstr "Pusat"
+
+#~ msgctxt "background, style"
+#~ msgid "Scale"
+#~ msgstr "Skala"
+
+#~ msgctxt "background, style"
+#~ msgid "Fill"
+#~ msgstr "Isi"
+
+#~ msgctxt "background, style"
+#~ msgid "Span"
+#~ msgstr "Jarak"
+
+#~ msgid "Wallpapers"
+#~ msgstr "Gambar latar"
+
+#~ msgid "Colors"
+#~ msgstr "Warna"
+
+#~ msgid "Pictures"
+#~ msgstr "Gambar"
+
+#~ msgid "No Pictures Found"
+#~ msgstr "Tak Ditemukan Gambar"
+
+#~ msgid "You can add images to your %s folder and they will show up here"
+#~ msgstr ""
+#~ "Anda dapat menambahkan citra ke folder %s Anda dan mereka akan muncul di "
+#~ "sini"
 
 #~ msgid "Keyboard"
 #~ msgstr "Papan Ketik"
