@@ -20,6 +20,8 @@
 #include "cc-stream-row.h"
 #include "cc-volume-slider.h"
 
+#define SPEECH_DISPATCHER_PREFIX "speech-dispatcher-"
+
 struct _CcStreamRow
 {
   GtkListBoxRow   parent_instance;
@@ -75,12 +77,34 @@ cc_stream_row_new (GtkSizeGroup   *size_group,
                    guint           id)
 {
   CcStreamRow *self;
+  g_autoptr(GtkIconInfo) icon_info = NULL;
+  g_autoptr(GIcon) gicon = NULL;
+  const gchar *stream_name;
+  const gchar *icon_name;
 
   self = g_object_new (CC_TYPE_STREAM_ROW, NULL);
   self->stream = g_object_ref (stream);
   self->id = id;
 
-  gtk_image_set_from_gicon (self->icon_image, gvc_mixer_stream_get_gicon (stream), GTK_ICON_SIZE_LARGE_TOOLBAR);
+  icon_name = gvc_mixer_stream_get_icon_name (stream);
+  stream_name = gvc_mixer_stream_get_name (stream);
+
+  /* Explicitly lookup for the icon, since some streams may give us an
+   * icon name (e.g. "audio") that doesn't really exist in the theme.
+   */
+  icon_info = gtk_icon_theme_lookup_icon (gtk_icon_theme_get_default (),
+                                          icon_name,
+                                          24,
+                                          GTK_ICON_LOOKUP_GENERIC_FALLBACK);
+
+  if (icon_info)
+    gicon = g_themed_icon_new_with_default_fallbacks (icon_name);
+  else if (g_str_has_prefix (stream_name, SPEECH_DISPATCHER_PREFIX))
+    gicon = g_themed_icon_new_with_default_fallbacks ("preferences-desktop-accessibility-symbolic");
+  else
+    gicon = g_themed_icon_new_with_default_fallbacks ("application-x-executable-symbolic");
+
+  gtk_image_set_from_gicon (self->icon_image, gicon, GTK_ICON_SIZE_LARGE_TOOLBAR);
 
   gtk_label_set_label (self->name_label, gvc_mixer_stream_get_name (stream));
   cc_volume_slider_set_stream (self->volume_slider, stream);
