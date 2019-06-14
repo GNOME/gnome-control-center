@@ -22,13 +22,16 @@
 #include <pulse/pulseaudio.h>
 #include <gvc-mixer-stream.h>
 
+#include "cc-sound-enums.h"
+
 G_BEGIN_DECLS
 
 #define CC_TYPE_VOLUME_SLIDER (cc_volume_slider_get_type ())
 G_DECLARE_FINAL_TYPE (CcVolumeSlider, cc_volume_slider, CC, VOLUME_SLIDER, GtkBox)
 
 void cc_volume_slider_set_stream       (CcVolumeSlider *slider,
-                                        GvcMixerStream *stream);
+                                        GvcMixerStream *stream,
+                                        CcStreamType    type);
 
 void cc_volume_slider_set_is_amplified (CcVolumeSlider *slider,
                                         gboolean        is_amplified);
