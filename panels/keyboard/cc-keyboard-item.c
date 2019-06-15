@@ -424,11 +424,119 @@ cc_keyboard_item_new (CcKeyboardItemType type)
   return CC_KEYBOARD_ITEM (object);
 }
 
+static guint *
+get_above_tab_keysyms (void)
+{
+  GdkKeymap *keymap = gdk_keymap_get_for_display (gdk_display_get_default ());
+  guint keycode = 0x29 /* KEY_GRAVE */ + 8;
+  g_autofree guint *keyvals = NULL;
+  GArray *keysyms;
+  int n_entries, i, j;
+
+  keysyms = g_array_new (TRUE, FALSE, sizeof (guint));
+
+  if (!gdk_keymap_get_entries_for_keycode (keymap, keycode, NULL, &keyvals, &n_entries))
+    goto out;
+
+  for (i = 0; i < n_entries; i++)
+    {
+      gboolean found = FALSE;
+
+      for (j = 0; j < keysyms->len; j++)
+        if (g_array_index (keysyms, guint, j) == keyvals[i])
+          {
+            found = TRUE;
+            break;
+          }
+
+      if (!found)
+        g_array_append_val (keysyms, keyvals[i]);
+    }
+
+out:
+  return (guint *)g_array_free (keysyms, FALSE);
+}
+
+/*
+ * translate_above_tab:
+ *
+ * @original_bindings: A list of accelerator strings
+ * @new_bindings: (out): Translated bindings if translation is needed
+ *
+ * Translate accelerator strings that contain the Above_Tab fake keysym
+ * used by mutter to strings that use the real keysyms that correspond
+ * to the key that is located physically above the tab key.
+ *
+ * Returns: %TRUE if strings were translated, %FALSE if @original_bindings
+ *   can be used unmodified
+ */
+static gboolean
+translate_above_tab (char **original_bindings,
+                     char ***new_bindings)
+{
+  GPtrArray *replaced_bindings;
+  g_autofree guint *above_tab_keysyms = NULL;
+  gboolean needs_translation = FALSE;
+  char **str;
+
+  for (str = original_bindings; *str && !needs_translation; str++)
+    needs_translation = strstr (*str, "Above_Tab") != NULL;
+
+  if (!needs_translation)
+    return FALSE;
+
+  above_tab_keysyms = get_above_tab_keysyms ();
+
+  replaced_bindings = g_ptr_array_new ();
+
+  for (str = original_bindings; *str; str++)
+    {
+      if (strstr (*str, "Above_Tab") == NULL)
+        {
+          g_ptr_array_add (replaced_bindings, g_strdup (*str));
+        }
+      else
+        {
+          g_auto (GStrv) split_str = g_strsplit (*str, "Above_Tab", -1);
+          int i;
+
+          for (i = 0; above_tab_keysyms[i]; i++)
+            {
+              g_autofree char *sym = NULL;
+
+              sym = gtk_accelerator_name (above_tab_keysyms[i], 0);
+              g_ptr_array_add (replaced_bindings, g_strjoinv (sym, split_str));
+            }
+        }
+      g_ptr_array_add (replaced_bindings, NULL);
+    }
+
+  *new_bindings = (char **)g_ptr_array_free (replaced_bindings, FALSE);
+  return TRUE;
+}
+
+static char *
+translate_binding_string (const char *str)
+{
+  g_autofree guint *above_tab_keysyms = NULL;
+  g_autofree char *symname = NULL;
+  g_auto (GStrv) split_str = NULL;
+
+  if (str == NULL || strstr (str, "Above_Tab") == NULL)
+    return g_strdup (str);
+
+  above_tab_keysyms = get_above_tab_keysyms ();
+  symname = gtk_accelerator_name (above_tab_keysyms[0], 0);
+
+  split_str = g_strsplit (str, "Above_Tab", -1);
+  return g_strjoinv (symname, split_str);
+}
+
 static GList *
 variant_get_key_combos (GVariant *variant)
 {
   GList *combos = NULL;
-  char **bindings = NULL, **str;
+  char **bindings = NULL, **translated_bindings, **str;
 
   if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING))
     {
@@ -438,6 +546,12 @@ variant_get_key_combos (GVariant *variant)
   else if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
     {
       bindings = g_variant_dup_strv (variant, NULL);
+    }
+
+  if (translate_above_tab (bindings, &translated_bindings))
+    {
+      g_strfreev (bindings);
+      bindings = translated_bindings;
     }
 
   for (str = bindings; *str; str++)
@@ -480,13 +594,13 @@ settings_get_binding (GSettings  *settings,
 
   variant = g_settings_get_value (settings, key);
   if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING))
-    value = g_variant_dup_string (variant, NULL);
+    value = translate_binding_string (g_variant_get_string (variant, NULL));
   else if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
     {
       const char **str_array;
 
       str_array = g_variant_get_strv (variant, NULL);
-      value = g_strdup (str_array[0]);
+      value = translate_binding_string (str_array[0]);
       g_free (str_array);
     }
   g_variant_unref (variant);
