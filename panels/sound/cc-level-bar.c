@@ -172,8 +172,6 @@ cc_level_bar_draw (GtkWidget *widget,
 static void
 close_stream (pa_stream *stream)
 {
-  g_autoptr(GMainLoop) loop = NULL;
-
   if (stream == NULL)
     return;
 
