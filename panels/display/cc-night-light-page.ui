@@ -104,11 +104,11 @@
                     <property name="can_focus">False</property>
                     <property name="selection-mode">none</property>
 
-                    <!-- Schedule -->
+                    <!-- Night Light -->
                     <child>
                       <object class="HdyActionRow">
                         <property name="visible">True</property>
-                        <property name="title" translatable="yes">Schedule</property>
+                        <property name="title" translatable="yes">Night Light</property>
                         <property name="activatable-widget">night_light_toggle_switch</property>
 
                         <child type="action">
@@ -120,11 +120,11 @@
                       </object>
                     </child>
 
-                    <!-- Schedule Type -->
+                    <!-- Schedule -->
                     <child>
                       <object class="HdyActionRow">
                         <property name="visible">True</property>
-                        <property name="title" translatable="yes">Schedule Type</property>
+                        <property name="title" translatable="yes">Schedule</property>
                         <property name="sensitive" bind-source="night_light_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
 
                         <child type="action">
@@ -134,7 +134,7 @@
                             <signal name="notify::active" handler="on_schedule_type_combo_active_changed_cb" object="CcNightLightPage" swapped="no" />
                             <items>
                               <item translatable="yes" id="automatic">Sunset to Sunrise</item>
-                              <item translatable="yes" id="manual">Set Time</item>
+                              <item translatable="yes" id="manual">Manual Schedule</item>
                             </items>
                           </object>
                         </child>
