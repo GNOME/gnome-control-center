@@ -2,7 +2,7 @@ project(
   'gnome-control-center', 'c',
         version : '3.32.1',
         license : 'GPL2+',
-  meson_version : '>= 0.48.0'
+  meson_version : '>= 0.50.0'
 )
 
 control_center_prefix = get_option('prefix')
