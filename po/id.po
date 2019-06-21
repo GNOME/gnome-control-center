@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-06-14 10:40+0000\n"
-"PO-Revision-Date: 2019-06-14 17:57+0700\n"
+"POT-Creation-Date: 2019-06-17 13:26+0000\n"
+"PO-Revision-Date: 2019-06-21 17:41+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -39,7 +39,7 @@ msgid "Session Bus"
 msgstr "Bus Sesi"
 
 #: panels/applications/cc-applications-panel.c:568
-#: panels/power/cc-power-panel.c:2462 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2477 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
 #: shell/cc-window.c:273
 msgid "Devices"
@@ -204,7 +204,7 @@ msgstr "Kamera"
 #: panels/keyboard/shortcut-editor.ui:96 panels/network/network-proxy.ui:123
 #: panels/network/network-wifi.ui:781 panels/network/network-wifi.ui:1058
 #: panels/user-accounts/um-fingerprint-dialog.c:211
-#: subprojects/gvc/gvc-mixer-control.c:1864
+#: subprojects/gvc/gvc-mixer-control.c:1876
 msgid "Disabled"
 msgstr "Dimatikan"
 
@@ -345,12 +345,12 @@ msgstr "Pilih gambar"
 #: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/cc-color-panel.ui:657 panels/color/color-calibrate.ui:25
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:916
+#: panels/display/cc-display-panel.c:940
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
-#: panels/network/net-device-wifi.c:1200 panels/network/net-device-wifi.c:1280
-#: panels/network/net-device-wifi.c:1474 panels/network/network-wifi.ui:24
+#: panels/network/net-device-wifi.c:1260 panels/network/net-device-wifi.c:1340
+#: panels/network/net-device-wifi.c:1561 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:313
 #: panels/privacy/cc-privacy-panel.c:1137 panels/region/cc-format-chooser.ui:24
@@ -470,7 +470,7 @@ msgstr "Matikan Mode Pesawat Terbang"
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/network/cc-network-panel.ui:101
+#: panels/network/cc-network-panel.ui:102
 #: panels/printers/pp-new-printer-dialog.c:1697
 msgid "Bluetooth"
 msgstr "Bluetooth"
@@ -1288,8 +1288,8 @@ msgid "Date & Time"
 msgstr "Tanggal & Waktu"
 
 #: panels/datetime/cc-datetime-panel.ui:113
-#: panels/display/cc-night-light-dialog.ui:245
-#: panels/display/cc-night-light-dialog.ui:352
+#: panels/display/cc-night-light-page.ui:194
+#: panels/display/cc-night-light-page.ui:314
 msgid "Hour"
 msgstr "Jam"
 
@@ -1299,8 +1299,8 @@ msgid "∶"
 msgstr "∶"
 
 #: panels/datetime/cc-datetime-panel.ui:152
-#: panels/display/cc-night-light-dialog.ui:273
-#: panels/display/cc-night-light-dialog.ui:380
+#: panels/display/cc-night-light-page.ui:222
+#: panels/display/cc-night-light-page.ui:342
 msgid "Minute"
 msgstr "Menit"
 
@@ -1365,75 +1365,42 @@ msgstr "Ubah pengaturan waktu dan tanggal sistem"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Untuk mengubah tatanan waktu atau tanggal, Anda perlu diautentikasi."
 
-#: panels/display/cc-display-panel.c:927
+#: panels/display/cc-display-panel.c:951
 #: panels/network/connection-editor/connection-editor.ui:27
 #: panels/network/network-wifi.ui:38
 msgid "_Apply"
 msgstr "Ter_apkan"
 
-#: panels/display/cc-display-panel.c:948
+#: panels/display/cc-display-panel.c:972
 msgid "Apply Changes?"
 msgstr "Terapkan Perubahan?"
 
-#: panels/display/cc-display-panel.c:953
+#: panels/display/cc-display-panel.c:977
 msgid "Changes Cannot be Applied"
 msgstr "Perubahan Tidak Dapat Diterapkan"
 
-#: panels/display/cc-display-panel.c:954
+#: panels/display/cc-display-panel.c:978
 msgid "This could be due to hardware limitations."
 msgstr "Ini mungkin karena keterbatasan perangkat keras."
 
-#. TRANSLATORS: the state of the night light setting
-#: panels/display/cc-display-panel.c:1127
-#: panels/notifications/cc-notifications-panel.c:270
-#: panels/power/cc-power-panel.c:2065 panels/power/cc-power-panel.c:2072
-#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
-#: panels/universal-access/cc-ua-panel.c:478
-#: panels/universal-access/cc-ua-panel.c:841
-#: panels/universal-access/cc-ua-panel.c:854
-#: panels/universal-access/cc-ua-panel.c:866
-#: panels/universal-access/cc-ua-panel.c:1031
-msgid "On"
-msgstr "Nyala"
-
-#: panels/display/cc-display-panel.c:1127 panels/network/net-proxy.c:54
-#: panels/notifications/cc-notifications-panel.c:270
-#: panels/power/cc-power-panel.c:2059 panels/power/cc-power-panel.c:2070
-#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
-#: panels/universal-access/cc-ua-panel.c:478
-#: panels/universal-access/cc-ua-panel.c:841
-#: panels/universal-access/cc-ua-panel.c:854
-#: panels/universal-access/cc-ua-panel.c:866
-#: panels/universal-access/cc-ua-panel.c:1031
-#: panels/universal-access/cc-ua-panel.ui:338
-#: panels/universal-access/cc-ua-panel.ui:384
-#: panels/universal-access/cc-ua-panel.ui:430
-#: panels/universal-access/cc-ua-panel.ui:536
-#: panels/universal-access/cc-ua-panel.ui:689
-#: panels/universal-access/cc-ua-panel.ui:735
-#: panels/universal-access/cc-ua-panel.ui:781
-#: panels/universal-access/cc-ua-panel.ui:933
-msgid "Off"
-msgstr "Mati"
-
-#: panels/display/cc-display-panel.ui:81
+#: panels/display/cc-display-panel.ui:91
 msgid "Single Display"
 msgstr "Tampilan Tunggal"
 
-#: panels/display/cc-display-panel.ui:100
-#: panels/display/cc-display-panel.ui:305
+#: panels/display/cc-display-panel.ui:110
+#: panels/display/cc-display-panel.ui:315
 msgid "Join Displays"
 msgstr "Gabungkan Tampilan"
 
-#: panels/display/cc-display-panel.ui:118
+#: panels/display/cc-display-panel.ui:128
 msgid "Mirror"
 msgstr "Cermin"
 
-#: panels/display/cc-display-panel.ui:143
+#: panels/display/cc-display-panel.ui:153
 msgid "Display Mode"
 msgstr "Mode Tampilan"
 
-#: panels/display/cc-display-panel.ui:235
+#: panels/display/cc-display-panel.ui:245
 msgid ""
 "Drag displays to match your physical display setup. Select a display to "
 "change its settings."
@@ -1441,18 +1408,22 @@ msgstr ""
 "Seret tampilan untuk mencocokkan pengaturan tampilan fisik Anda. Pilih "
 "tampilan untuk mengubah pengaturannya."
 
-#: panels/display/cc-display-panel.ui:242
+#: panels/display/cc-display-panel.ui:252
 msgid "Display Arrangement"
 msgstr "Pengaturan Tampilan"
 
-#: panels/display/cc-display-panel.ui:424
+#: panels/display/cc-display-panel.ui:434
 msgid "Display Configuration"
 msgstr "Konfigurasi Tampilan"
 
+#: panels/display/cc-display-panel.ui:453
+#: panels/display/gnome-display-panel.desktop.in.in:3
+msgid "Displays"
+msgstr "Tampilan"
+
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:451
-#: panels/display/cc-display-panel.ui:469
-#: panels/display/cc-night-light-dialog.ui:505
+#: panels/display/cc-display-panel.ui:464
+#: panels/display/cc-night-light-page.ui:111
 msgid "Night Light"
 msgstr "Terang Malam"
 
@@ -1504,25 +1475,25 @@ msgctxt "display setting"
 msgid "Scale"
 msgstr "Skala"
 
-#: panels/display/cc-night-light-dialog.c:647
+#: panels/display/cc-night-light-page.c:622
 msgid "More Warm"
 msgstr "Lebih Hangat"
 
-#: panels/display/cc-night-light-dialog.c:659
+#: panels/display/cc-night-light-page.c:634
 msgid "Less Warm"
 msgstr "Kurang Hangat"
 
 #. This cancels the redshift inhibit.
-#: panels/display/cc-night-light-dialog.ui:46
+#: panels/display/cc-night-light-page.ui:28
 msgid "Restart Filter"
 msgstr "Mulai Ulang Filter"
 
 #. Inhibit the redshift functionality until the next day starts
-#: panels/display/cc-night-light-dialog.ui:79
+#: panels/display/cc-night-light-page.ui:61
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Sementara Dinonaktifkan Sampai Besok"
 
-#: panels/display/cc-night-light-dialog.ui:106
+#: panels/display/cc-night-light-page.ui:88
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
@@ -1530,59 +1501,51 @@ msgstr ""
 "Cahaya malam membuat warna layar lebih hangat. Ini dapat membantu mencegah "
 "mata tegang dan mengantuk."
 
-#: panels/display/cc-night-light-dialog.ui:127
+#: panels/display/cc-night-light-page.ui:127
 msgid "Schedule"
 msgstr "Jadwal"
 
-#: panels/display/cc-night-light-dialog.ui:148
+#: panels/display/cc-night-light-page.ui:136
 msgid "Sunset to Sunrise"
 msgstr "Matahari Terbenam sampai Terbit"
 
-#: panels/display/cc-night-light-dialog.ui:164
-#: panels/network/connection-editor/ip4-page.ui:69
-#: panels/network/connection-editor/ip6-page.ui:83
-#: panels/network/net-proxy.c:56 panels/network/network-proxy.ui:113
-#: panels/network/network-wifi.ui:776 panels/network/network-wifi.ui:1053
-#: panels/privacy/cc-privacy-panel.c:239
-msgid "Manual"
-msgstr "Manual"
+#: panels/display/cc-night-light-page.ui:137
+msgid "Manual Schedule"
+msgstr "Jadwal Manual"
 
-#: panels/display/cc-night-light-dialog.ui:180
-msgid "_Off"
-msgstr "Mat_i"
+#: panels/display/cc-night-light-page.ui:148
+#: panels/region/cc-format-chooser.ui:154
+msgid "Times"
+msgstr "Waktu"
 
-#: panels/display/cc-night-light-dialog.ui:216
+#: panels/display/cc-night-light-page.ui:165
 msgid "From"
 msgstr "Dari"
 
-#: panels/display/cc-night-light-dialog.ui:254
-#: panels/display/cc-night-light-dialog.ui:361
+#: panels/display/cc-night-light-page.ui:203
+#: panels/display/cc-night-light-page.ui:323
 msgid ":"
 msgstr ":"
 
 #. This is the short form for the time period in the morning
-#: panels/display/cc-night-light-dialog.ui:284
-#: panels/display/cc-night-light-dialog.ui:391
+#: panels/display/cc-night-light-page.ui:234
+#: panels/display/cc-night-light-page.ui:354
 msgid "AM"
 msgstr "AM"
 
 #. This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-dialog.ui:300
-#: panels/display/cc-night-light-dialog.ui:407
+#: panels/display/cc-night-light-page.ui:250
+#: panels/display/cc-night-light-page.ui:370
 msgid "PM"
 msgstr "PM"
 
-#: panels/display/cc-night-light-dialog.ui:449
+#: panels/display/cc-night-light-page.ui:284
 msgid "To"
 msgstr "Dari"
 
-#: panels/display/cc-night-light-dialog.ui:470
+#: panels/display/cc-night-light-page.ui:408
 msgid "Color Temperature"
 msgstr "Temperatur Warna"
-
-#: panels/display/gnome-display-panel.desktop.in.in:3
-msgid "Displays"
-msgstr "Tampilan"
 
 #: panels/display/gnome-display-panel.desktop.in.in:4
 msgid "Choose how to use connected monitors and projectors"
@@ -2339,7 +2302,7 @@ msgstr "Proxy jaringan"
 msgid "%s VPN"
 msgstr "VPN %s"
 
-#: panels/network/cc-network-panel.c:790 panels/network/cc-wifi-panel.ui:304
+#: panels/network/cc-network-panel.c:790 panels/network/cc-wifi-panel.ui:306
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Ups, ada sesuatu yang salah. Harap hubungi vendor perangkat lunak Anda."
@@ -2348,12 +2311,12 @@ msgstr ""
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager perlu berjalan."
 
-#: panels/network/cc-network-panel.ui:142
+#: panels/network/cc-network-panel.ui:143
 #: panels/network/connection-editor/net-connection-editor.c:581
 msgid "VPN"
 msgstr "VPN"
 
-#: panels/network/cc-network-panel.ui:194
+#: panels/network/cc-network-panel.ui:195
 msgid "Not set up"
 msgstr "Belum ditata"
 
@@ -2364,14 +2327,14 @@ msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.ui:73
+#: panels/network/cc-wifi-connection-row.ui:102
 #: panels/network/net-device-ethernet.c:359
 #: panels/network/network-ethernet.ui:120 panels/network/network-mobile.ui:394
 #: panels/network/network-simple.ui:75 panels/network/network-vpn.ui:79
 msgid "Options…"
 msgstr "Opsi…"
 
-#: panels/network/cc-wifi-panel.c:281
+#: panels/network/cc-wifi-panel.c:284
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
 #: panels/network/network-wifi.ui:1738
 msgid "Wi-Fi"
@@ -2401,11 +2364,11 @@ msgstr "Mode Pesawat Terbang Aktif"
 msgid "Turn off to use Wi-Fi"
 msgstr "Matikan untuk menggunakan Wi-Fi"
 
-#: panels/network/cc-wifi-panel.ui:226
+#: panels/network/cc-wifi-panel.ui:227
 msgid "Visible Networks"
 msgstr "Jaringan Terlihat"
 
-#: panels/network/cc-wifi-panel.ui:293
+#: panels/network/cc-wifi-panel.ui:295
 msgid "NetworkManager needs to be running"
 msgstr "NetworkManager perlu berjalan"
 
@@ -2454,31 +2417,31 @@ msgstr "Profil %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:56
-#: panels/network/net-device-wifi.c:123 panels/network/net-device-wifi.c:299
+#: panels/network/net-device-wifi.c:134 panels/network/net-device-wifi.c:314
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:60
-#: panels/network/net-device-wifi.c:127 panels/network/net-device-wifi.c:304
+#: panels/network/net-device-wifi.c:138 panels/network/net-device-wifi.c:319
 #: panels/network/network-wifi.ui:592
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:64
-#: panels/network/net-device-wifi.c:131
+#: panels/network/net-device-wifi.c:142
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: panels/network/connection-editor/ce-page-details.c:69
-#: panels/network/net-device-wifi.c:136
+#: panels/network/net-device-wifi.c:147
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #: panels/network/connection-editor/ce-page-details.c:74
-#: panels/network/net-device-wifi.c:141 panels/network/net-device-wifi.c:289
+#: panels/network/net-device-wifi.c:152 panels/network/net-device-wifi.c:304
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Nihil"
@@ -2489,7 +2452,7 @@ msgstr "Tak pernah"
 
 #: panels/network/connection-editor/ce-page-details.c:110
 #: panels/network/net-device-ethernet.c:137
-#: panels/network/net-device-wifi.c:398
+#: panels/network/net-device-wifi.c:413
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2498,37 +2461,37 @@ msgstr[1] "%i hari yang lalu"
 
 #. Translators: network device speed
 #: panels/network/connection-editor/ce-page-details.c:228
-#: panels/network/net-device-ethernet.c:66 panels/network/net-device-wifi.c:476
+#: panels/network/net-device-ethernet.c:66 panels/network/net-device-wifi.c:536
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: panels/network/connection-editor/ce-page-details.c:249
-#: panels/network/net-device-wifi.c:505
+#: panels/network/net-device-wifi.c:565
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Nihil"
 
 #: panels/network/connection-editor/ce-page-details.c:251
-#: panels/network/net-device-wifi.c:507
+#: panels/network/net-device-wifi.c:567
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Lemah"
 
 #: panels/network/connection-editor/ce-page-details.c:253
-#: panels/network/net-device-wifi.c:509
+#: panels/network/net-device-wifi.c:569
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Ok"
 
 #: panels/network/connection-editor/ce-page-details.c:255
-#: panels/network/net-device-wifi.c:511
+#: panels/network/net-device-wifi.c:571
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Bagus"
 
 #: panels/network/connection-editor/ce-page-details.c:257
-#: panels/network/net-device-wifi.c:513
+#: panels/network/net-device-wifi.c:573
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Sempurna"
@@ -2755,6 +2718,14 @@ msgstr "Otomatis (DHCP)"
 msgid "Link-Local Only"
 msgstr "Hanya Link-Lokal"
 
+#: panels/network/connection-editor/ip4-page.ui:69
+#: panels/network/connection-editor/ip6-page.ui:83
+#: panels/network/net-proxy.c:56 panels/network/network-proxy.ui:113
+#: panels/network/network-wifi.ui:776 panels/network/network-wifi.ui:1053
+#: panels/privacy/cc-privacy-panel.c:239
+msgid "Manual"
+msgstr "Manual"
+
 #: panels/network/connection-editor/ip4-page.ui:83
 #: panels/network/connection-editor/ip6-page.ui:97
 msgid "Disable"
@@ -2941,17 +2912,17 @@ msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 msgstr "Jaringan;Nirkabel;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 
 #: panels/network/net-device-ethernet.c:123
-#: panels/network/net-device-wifi.c:384
+#: panels/network/net-device-wifi.c:399
 msgid "never"
 msgstr "tak pernah"
 
 #: panels/network/net-device-ethernet.c:133
-#: panels/network/net-device-wifi.c:394
+#: panels/network/net-device-wifi.c:409
 msgid "today"
 msgstr "hari ini"
 
 #: panels/network/net-device-ethernet.c:135
-#: panels/network/net-device-wifi.c:396
+#: panels/network/net-device-wifi.c:411
 msgid "yesterday"
 msgstr "kemarin"
 
@@ -2979,12 +2950,12 @@ msgstr "Kabel"
 msgid "Add new connection"
 msgstr "Tambah sambungan baru"
 
-#: panels/network/net-device-wifi.c:1157
+#: panels/network/net-device-wifi.c:1217
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Mengaktifkan hotspot nirkabel akan memutuskan Anda dari <b>%s</b>."
 
-#: panels/network/net-device-wifi.c:1161
+#: panels/network/net-device-wifi.c:1221
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2992,11 +2963,11 @@ msgstr ""
 "Anda tidak dapat mengakses Internet melalui nirkabel Anda selama hotspot "
 "aktif."
 
-#: panels/network/net-device-wifi.c:1168
+#: panels/network/net-device-wifi.c:1228
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Hidupkan Hotspot Wi-Fi?"
 
-#: panels/network/net-device-wifi.c:1190
+#: panels/network/net-device-wifi.c:1250
 msgid ""
 "Wi-Fi hotspots are usually used to share an additional Internet connection "
 "over Wi-Fi."
@@ -3004,27 +2975,27 @@ msgstr ""
 "Wi-Fi hotspot biasanya digunakan untuk berbagi koneksi internet tambahan "
 "melalui Wi-Fi."
 
-#: panels/network/net-device-wifi.c:1201
+#: panels/network/net-device-wifi.c:1261
 msgid "_Turn On"
 msgstr "Ak_tifkan"
 
-#: panels/network/net-device-wifi.c:1278
+#: panels/network/net-device-wifi.c:1338
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Hentikan hotspot dan putuskan semua pengguna?"
 
-#: panels/network/net-device-wifi.c:1281
+#: panels/network/net-device-wifi.c:1341
 msgid "_Stop Hotspot"
 msgstr "_Stop Hotspot"
 
-#: panels/network/net-device-wifi.c:1337
+#: panels/network/net-device-wifi.c:1397
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Kebijakan sistem melarang pemakaian sebagai Hotspot"
 
-#: panels/network/net-device-wifi.c:1340
+#: panels/network/net-device-wifi.c:1400
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Perangkat nirkabel tak mendukung mode Hotspot"
 
-#: panels/network/net-device-wifi.c:1471
+#: panels/network/net-device-wifi.c:1558
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -3032,19 +3003,39 @@ msgstr ""
 "Rincian jaringan bagi jaringan yang dipilih, termasuk kata sandi dan "
 "sebarang konfigurasi gubahan akan hilang."
 
-#: panels/network/net-device-wifi.c:1475 panels/network/network-wifi.ui:1350
+#: panels/network/net-device-wifi.c:1562 panels/network/network-wifi.ui:1350
 msgid "_Forget"
 msgstr "_Lupakan"
 
-#: panels/network/net-device-wifi.c:1638 panels/network/net-device-wifi.c:1645
+#: panels/network/net-device-wifi.c:1725 panels/network/net-device-wifi.c:1732
 msgid "Known Wi-Fi Networks"
 msgstr "Jaringan Wi-Fi yang Dikenal"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1682
+#: panels/network/net-device-wifi.c:1769
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Lupakan"
+
+#: panels/network/net-proxy.c:54
+#: panels/notifications/cc-notifications-panel.c:270
+#: panels/power/cc-power-panel.c:2074 panels/power/cc-power-panel.c:2085
+#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
+#: panels/universal-access/cc-ua-panel.c:478
+#: panels/universal-access/cc-ua-panel.c:841
+#: panels/universal-access/cc-ua-panel.c:854
+#: panels/universal-access/cc-ua-panel.c:866
+#: panels/universal-access/cc-ua-panel.c:1031
+#: panels/universal-access/cc-ua-panel.ui:338
+#: panels/universal-access/cc-ua-panel.ui:384
+#: panels/universal-access/cc-ua-panel.ui:430
+#: panels/universal-access/cc-ua-panel.ui:536
+#: panels/universal-access/cc-ua-panel.ui:689
+#: panels/universal-access/cc-ua-panel.ui:735
+#: panels/universal-access/cc-ua-panel.ui:781
+#: panels/universal-access/cc-ua-panel.ui:933
+msgid "Off"
+msgstr "Mati"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: panels/network/net-proxy.c:102
@@ -3936,6 +3927,17 @@ msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "_Tampilkan Isi Pesan dalam Layar Kunci"
 
+#: panels/notifications/cc-notifications-panel.c:270
+#: panels/power/cc-power-panel.c:2080 panels/power/cc-power-panel.c:2087
+#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
+#: panels/universal-access/cc-ua-panel.c:478
+#: panels/universal-access/cc-ua-panel.c:841
+#: panels/universal-access/cc-ua-panel.c:854
+#: panels/universal-access/cc-ua-panel.c:866
+#: panels/universal-access/cc-ua-panel.c:1031
+msgid "On"
+msgstr "Nyala"
+
 #: panels/notifications/cc-notifications-panel.ui:70
 msgid "Notification _Popups"
 msgstr "_Popup Notifikasi"
@@ -4020,18 +4022,18 @@ msgstr "Tambah akun"
 msgid "Remove Account"
 msgstr "Hapus Akun"
 
-#: panels/power/cc-power-panel.c:318
+#: panels/power/cc-power-panel.c:327
 msgid "Unknown time"
 msgstr "Waktu tak diketahui"
 
-#: panels/power/cc-power-panel.c:324
+#: panels/power/cc-power-panel.c:333
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i menit"
 msgstr[1] "%i menit"
 
-#: panels/power/cc-power-panel.c:336
+#: panels/power/cc-power-panel.c:345
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -4040,182 +4042,182 @@ msgstr[1] "%i jam"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: panels/power/cc-power-panel.c:344
+#: panels/power/cc-power-panel.c:353
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: panels/power/cc-power-panel.c:345
+#: panels/power/cc-power-panel.c:354
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "jam"
 msgstr[1] "jam"
 
-#: panels/power/cc-power-panel.c:346
+#: panels/power/cc-power-panel.c:355
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "menit"
 msgstr[1] "menit"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:364
+#: panels/power/cc-power-panel.c:373
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s sampai terisi penuh"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:371
+#: panels/power/cc-power-panel.c:380
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Hati-hati: %s tersisa"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:376
+#: panels/power/cc-power-panel.c:385
 #, c-format
 msgid "%s remaining"
 msgstr "%s tersisa"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:381 panels/power/cc-power-panel.c:411
+#: panels/power/cc-power-panel.c:390 panels/power/cc-power-panel.c:420
 msgid "Fully charged"
 msgstr "Terisi penuh"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:385 panels/power/cc-power-panel.c:415
+#: panels/power/cc-power-panel.c:394 panels/power/cc-power-panel.c:424
 msgid "Not charging"
 msgstr "Tidak Mengisi"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:389 panels/power/cc-power-panel.c:419
+#: panels/power/cc-power-panel.c:398 panels/power/cc-power-panel.c:428
 msgid "Empty"
 msgstr "Kosong"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:402
+#: panels/power/cc-power-panel.c:411
 msgid "Charging"
 msgstr "Mengisi"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:407
+#: panels/power/cc-power-panel.c:416
 msgid "Discharging"
 msgstr "Mengosongkan"
 
-#: panels/power/cc-power-panel.c:540
+#: panels/power/cc-power-panel.c:549
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Utama"
 
-#: panels/power/cc-power-panel.c:542
+#: panels/power/cc-power-panel.c:551
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Ekstra"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:611
+#: panels/power/cc-power-panel.c:626
 msgid "Wireless mouse"
 msgstr "Tetikus nirkabel"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:614
+#: panels/power/cc-power-panel.c:629
 msgid "Wireless keyboard"
 msgstr "Papan tik nirkabel"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:617
+#: panels/power/cc-power-panel.c:632
 msgid "Uninterruptible power supply"
 msgstr "Pasokan tenaga tak putus"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:620
+#: panels/power/cc-power-panel.c:635
 msgid "Personal digital assistant"
 msgstr "Asisten dijital pribadi"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:623
+#: panels/power/cc-power-panel.c:638
 msgid "Cellphone"
 msgstr "Telepon seluler"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:626
+#: panels/power/cc-power-panel.c:641
 msgid "Media player"
 msgstr "Pemutar media"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:629 panels/wacom/cc-wacom-panel.c:848
+#: panels/power/cc-power-panel.c:644 panels/wacom/cc-wacom-panel.c:848
 msgid "Tablet"
 msgstr "Tablet"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:632
+#: panels/power/cc-power-panel.c:647
 msgid "Computer"
 msgstr "Komputer"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:635
+#: panels/power/cc-power-panel.c:650
 msgid "Gaming input device"
 msgstr "Perangkat masukan permainan"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:638 panels/power/cc-power-panel.c:896
-#: panels/power/cc-power-panel.c:2415
+#: panels/power/cc-power-panel.c:653 panels/power/cc-power-panel.c:911
+#: panels/power/cc-power-panel.c:2430
 msgid "Battery"
 msgstr "Baterai"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:699
+#: panels/power/cc-power-panel.c:714
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Mengisi"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:706
+#: panels/power/cc-power-panel.c:721
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Awas"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:711
+#: panels/power/cc-power-panel.c:726
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Lemah"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:716
+#: panels/power/cc-power-panel.c:731
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Bagus"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:721
+#: panels/power/cc-power-panel.c:736
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Terisi penuh"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:725
+#: panels/power/cc-power-panel.c:740
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Kosong"
 
-#: panels/power/cc-power-panel.c:894
+#: panels/power/cc-power-panel.c:909
 msgid "Batteries"
 msgstr "Batera"
 
-#: panels/power/cc-power-panel.c:1259
+#: panels/power/cc-power-panel.c:1274
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d jam"
 msgstr[1] "%d jam"
 
-#: panels/power/cc-power-panel.c:1261
+#: panels/power/cc-power-panel.c:1276
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d menit"
 msgstr[1] "%d menit"
 
-#: panels/power/cc-power-panel.c:1264
+#: panels/power/cc-power-panel.c:1279
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -4223,116 +4225,116 @@ msgstr[0] "%d detik"
 msgstr[1] "%d detik"
 
 #. 5 hours 2 minutes 12 seconds
-#: panels/power/cc-power-panel.c:1269
+#: panels/power/cc-power-panel.c:1284
 #, c-format
 msgctxt "time"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. 2 minutes 12 seconds
-#: panels/power/cc-power-panel.c:1272
+#: panels/power/cc-power-panel.c:1287
 #, c-format
 msgctxt "time"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 0 seconds
-#: panels/power/cc-power-panel.c:1278
+#: panels/power/cc-power-panel.c:1293
 msgid "0 seconds"
 msgstr "0 detik"
 
-#: panels/power/cc-power-panel.c:1375
+#: panels/power/cc-power-panel.c:1390
 msgid "When _idle"
 msgstr "Ket_ika menganggur"
 
-#: panels/power/cc-power-panel.c:1820
+#: panels/power/cc-power-panel.c:1835
 msgid "Power Saving"
 msgstr "Penghematan Daya"
 
-#: panels/power/cc-power-panel.c:1854
-msgid "_Screen brightness"
-msgstr "Kecerahan _layar"
+#: panels/power/cc-power-panel.c:1869
+msgid "_Screen Brightness"
+msgstr "Kecerahan _Layar"
 
-#: panels/power/cc-power-panel.c:1875
-msgid "Automatic brightness"
-msgstr "Kecerahan otomatis"
+#: panels/power/cc-power-panel.c:1890
+msgid "Automatic Brightness"
+msgstr "Kecerahan Otomatis"
 
-#: panels/power/cc-power-panel.c:1888
-msgid "_Keyboard brightness"
-msgstr "_Kecerahan papan tik"
+#: panels/power/cc-power-panel.c:1903
+msgid "_Keyboard Brightness"
+msgstr "_Kecerahan Papan Tik"
 
-#: panels/power/cc-power-panel.c:1899
-msgid "_Dim screen when inactive"
-msgstr "Re_dupkan layar ketika tak aktif"
+#: panels/power/cc-power-panel.c:1914
+msgid "_Dim Screen When Inactive"
+msgstr "Re_dupkan Layar Ketika Tak Aktif"
 
-#: panels/power/cc-power-panel.c:1917
-msgid "_Blank screen"
-msgstr "Kosongkan layar"
+#: panels/power/cc-power-panel.c:1932
+msgid "_Blank Screen"
+msgstr "K_osongkan Layar"
 
-#: panels/power/cc-power-panel.c:1940
+#: panels/power/cc-power-panel.c:1955
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.c:1941
+#: panels/power/cc-power-panel.c:1956
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Wi-Fi dapat dimatikan untuk menghemat daya."
 
-#: panels/power/cc-power-panel.c:1957
-msgid "_Mobile broadband"
-msgstr "Data _seluler"
+#: panels/power/cc-power-panel.c:1972
+msgid "_Mobile Broadband"
+msgstr "Data _Seluler"
 
-#: panels/power/cc-power-panel.c:1958
+#: panels/power/cc-power-panel.c:1973
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr "Data seluler (3G, 4G, LTE, dsb.) dapat dimatikan untuk menghemat daya."
 
-#: panels/power/cc-power-panel.c:2008
+#: panels/power/cc-power-panel.c:2023
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:2009
+#: panels/power/cc-power-panel.c:2024
 msgid "Bluetooth can be turned off to save power."
 msgstr "Bluetooth dapat dimatikan untuk menghemat daya."
 
-#: panels/power/cc-power-panel.c:2061
+#: panels/power/cc-power-panel.c:2076
 msgid "When on battery power"
 msgstr "Ketika memakai baterai"
 
-#: panels/power/cc-power-panel.c:2063
+#: panels/power/cc-power-panel.c:2078
 msgid "When plugged in"
 msgstr "Ketika ditancapkan"
 
-#: panels/power/cc-power-panel.c:2157
+#: panels/power/cc-power-panel.c:2172
 msgid "Suspend"
 msgstr "Suspensi"
 
-#: panels/power/cc-power-panel.c:2158
+#: panels/power/cc-power-panel.c:2173
 msgid "Power Off"
 msgstr "Matikan"
 
-#: panels/power/cc-power-panel.c:2159
+#: panels/power/cc-power-panel.c:2174
 msgid "Hibernate"
 msgstr "Hibernasi"
 
-#: panels/power/cc-power-panel.c:2160
+#: panels/power/cc-power-panel.c:2175
 msgid "Nothing"
 msgstr "Bukan apapun"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2260
+#: panels/power/cc-power-panel.c:2275
 msgid "Suspend & Power Button"
 msgstr "Tombol Suspensi & Daya"
 
-#: panels/power/cc-power-panel.c:2301
-msgid "_Automatic suspend"
-msgstr "Suspensi otom_atis"
+#: panels/power/cc-power-panel.c:2316
+msgid "_Automatic Suspend"
+msgstr "Suspensi Otom_atis"
 
-#: panels/power/cc-power-panel.c:2302
+#: panels/power/cc-power-panel.c:2317
 msgid "Automatic suspend"
 msgstr "Suspensi otomatis"
 
-#: panels/power/cc-power-panel.c:2359
-msgid "_When the Power Button is pressed"
-msgstr "Ketika Tombol Po_wer ditekan"
+#: panels/power/cc-power-panel.c:2374
+msgid "Po_wer Button Action"
+msgstr "Aksi Tombol Da_ya"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -5566,10 +5568,6 @@ msgstr "Pratayang"
 msgid "Dates"
 msgstr "Tanggal"
 
-#: panels/region/cc-format-chooser.ui:154
-msgid "Times"
-msgstr "Waktu"
-
 #: panels/region/cc-format-chooser.ui:185
 msgid "Dates & Times"
 msgstr "Tanggal & Waktu"
@@ -6009,7 +6007,7 @@ msgstr "Volume"
 msgid "Alert Sound"
 msgstr "Suara Waspada"
 
-#: panels/sound/cc-volume-slider.c:178
+#: panels/sound/cc-volume-slider.c:200
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
@@ -7894,7 +7892,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1871
+#: subprojects/gvc/gvc-mixer-control.c:1883
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -7903,16 +7901,25 @@ msgstr[1] "%u Keluaran"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1881
+#: subprojects/gvc/gvc-mixer-control.c:1893
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u Masukan"
 msgstr[1] "%u Masukan"
 
-#: subprojects/gvc/gvc-mixer-control.c:2736
+#: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Suara Sistem"
+
+#~ msgid "_Off"
+#~ msgstr "Mat_i"
+
+#~ msgid "_Automatic suspend"
+#~ msgstr "Suspensi otom_atis"
+
+#~ msgid "_When the Power Button is pressed"
+#~ msgstr "Ketika Tombol Po_wer ditekan"
 
 #~ msgid "_Background"
 #~ msgstr "Latar _Belakang"
