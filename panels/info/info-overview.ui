@@ -4,16 +4,17 @@
   <template class="CcInfoOverviewPanel" parent="CcPanel">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="valign">center</property>
-    <property name="halign">center</property>
     <property name="expand">True</property>
-    <property name="margin">24</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">6</property>
         <property name="orientation">vertical</property>
+        <property name="margin_top">63</property>
+        <property name="margin_start">12</property>
+        <property name="margin_end">12</property>
+        <property name="margin_bottom">12</property>
         <child>
           <object class="GtkImage" id="system_image">
             <property name="visible">True</property>
@@ -303,26 +304,143 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButtonBox" id="hbuttonbox1">
+          <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
             <property name="orientation">horizontal</property>
+            <property name="margin_top">12</property>
+            <property name="spacing">12</property>
             <child>
-              <placeholder/>
+              <object class="GtkStack" id="subscription_stack">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">System Not Registered</property>
+                            <attributes>
+                              <attribute name="scale" value="0.95"/>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Register this system to receive software updates.</property>
+                            <attributes>
+                              <attribute name="scale" value="0.8"/>
+                            </attributes>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="register_button">
+                        <property name="label" translatable="yes">_Register…</property>
+                        <property name="can_focus">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="hexpand">True</property>
+                        <property name="halign">end</property>
+                        <property name="visible">True</property>
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">not-registered</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Registered System</property>
+                            <attributes>
+                              <attribute name="scale" value="0.95"/>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">System is registered and able to receive software updates.</property>
+                            <attributes>
+                              <attribute name="scale" value="0.8"/>
+                            </attributes>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="details_button">
+                        <property name="label" translatable="yes">_Details</property>
+                        <property name="can_focus">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="hexpand">True</property>
+                        <property name="halign">end</property>
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">registered</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSeparator" id="updates_separator">
+                <property name="visible">True</property>
+              </object>
             </child>
             <child>
               <object class="GtkButton" id="updates_button">
-                <property name="label" translatable="yes">Check for updates</property>
+                <property name="label" translatable="yes">_View Updates</property>
                 <property name="can_focus">True</property>
+                <property name="use_underline">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
+                <property name="halign">end</property>
                 <property name="visible">True</property>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="pack_type">end</property>
               </packing>
             </child>
           </object>
