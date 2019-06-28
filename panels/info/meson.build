@@ -41,11 +41,15 @@ sources = files(gsd_sources) + files(
   'cc-info-default-apps-panel.c',
   'cc-info-overview-panel.c',
   'cc-info-removable-media-panel.c',
+  'cc-subscription-details-dialog.c',
+  'cc-subscription-register-dialog.c',
   'info-cleanup.c'
 )
 
 resource_data = files(
   'GnomeLogoVerticalMedium.svg',
+  'cc-subscription-details-dialog.ui',
+  'cc-subscription-register-dialog.ui',
   'info-default-apps.ui',
   'info-overview.ui',
   'info-removable-media.ui'
