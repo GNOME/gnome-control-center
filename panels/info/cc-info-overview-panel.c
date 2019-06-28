@@ -24,6 +24,8 @@
 #include "shell/cc-hostname-entry.h"
 
 #include "cc-info-resources.h"
+#include "cc-subscription-details-dialog.h"
+#include "cc-subscription-register-dialog.h"
 #include "info-cleanup.h"
 
 #include <glib.h>
@@ -68,6 +70,10 @@ typedef struct
   GtkWidget      *disk_label;
   GtkWidget      *graphics_label;
   GtkWidget      *virt_type_label;
+  GtkWidget      *subscription_stack;
+  GtkWidget      *details_button;
+  GtkWidget      *register_button;
+  GtkWidget      *updates_separator;
   GtkWidget      *updates_button;
 
   /* Virtualisation labels */
@@ -86,6 +92,8 @@ typedef struct
   guint64         total_bytes;
 
   GraphicsData   *graphics_data;
+
+  GDBusProxy     *subscription_proxy;
 } CcInfoOverviewPanelPrivate;
 
 struct _CcInfoOverviewPanel
@@ -586,7 +594,6 @@ get_primary_disc_info (CcInfoOverviewPanel *self)
   g_list_free (points);
   g_hash_table_destroy (hash);
 
-  priv->cancellable = g_cancellable_new ();
   get_primary_disc_info_start (self);
 }
 
@@ -793,6 +800,137 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   gtk_label_set_markup (GTK_LABEL (priv->graphics_label), priv->graphics_data->hardware_string);
 }
 
+typedef enum {
+  GSD_SUBMAN_SUBSCRIPTION_STATUS_UNKNOWN,
+  GSD_SUBMAN_SUBSCRIPTION_STATUS_VALID,
+  GSD_SUBMAN_SUBSCRIPTION_STATUS_INVALID,
+  GSD_SUBMAN_SUBSCRIPTION_STATUS_DISABLED,
+  GSD_SUBMAN_SUBSCRIPTION_STATUS_PARTIALLY_VALID,
+  GSD_SUBMAN_SUBSCRIPTION_STATUS_LAST
+} GsdSubmanSubscriptionStatus;
+
+static gboolean
+get_subscription_status (CcInfoOverviewPanel *self, GsdSubmanSubscriptionStatus *status)
+{
+  CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
+  g_autoptr(GVariant) status_variant = NULL;
+  guint32 u;
+
+  status_variant = g_dbus_proxy_get_cached_property (priv->subscription_proxy, "SubscriptionStatus");
+  if (!status_variant)
+    {
+      g_debug ("Unable to get SubscriptionStatus property");
+      return FALSE;
+    }
+
+  g_variant_get (status_variant, "u", &u);
+  *status = u;
+
+  return TRUE;
+}
+
+static void
+reload_subscription_status (CcInfoOverviewPanel *self)
+{
+  CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
+  GsdSubmanSubscriptionStatus status;
+
+  if (priv->subscription_proxy == NULL)
+    {
+      gtk_widget_hide (priv->subscription_stack);
+      return;
+    }
+
+  if (!get_subscription_status (self, &status))
+    {
+      gtk_widget_hide (priv->subscription_stack);
+      return;
+    }
+
+  switch (status)
+    {
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_UNKNOWN:
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_INVALID:
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_DISABLED:
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_PARTIALLY_VALID:
+      gtk_stack_set_visible_child_name (GTK_STACK (priv->subscription_stack), "not-registered");
+      gtk_widget_set_sensitive (priv->updates_button, FALSE);
+      break;
+
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_VALID:
+      gtk_stack_set_visible_child_name (GTK_STACK (priv->subscription_stack), "registered");
+      gtk_widget_set_sensitive (priv->updates_button, TRUE);
+      break;
+
+    default:
+      g_assert_not_reached ();
+      break;
+    }
+}
+
+static void
+on_details_button_clicked (GtkWidget           *widget,
+                           CcInfoOverviewPanel *self)
+{
+  CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
+  CcSubscriptionDetailsDialog *dialog;
+  GtkWindow *toplevel;
+
+  dialog = cc_subscription_details_dialog_new (priv->subscription_proxy);
+  toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), toplevel);
+
+  gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (GTK_WIDGET (dialog));
+
+  reload_subscription_status (self);
+}
+
+static void
+on_register_button_clicked (GtkWidget           *widget,
+                            CcInfoOverviewPanel *self)
+{
+  CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
+  CcSubscriptionRegisterDialog *dialog;
+  GtkWindow *toplevel;
+
+  dialog = cc_subscription_register_dialog_new (priv->subscription_proxy);
+  toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), toplevel);
+
+  gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (GTK_WIDGET (dialog));
+
+  reload_subscription_status (self);
+}
+
+static void
+info_overview_panel_setup_subscriptions (CcInfoOverviewPanel *self)
+{
+  CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
+  g_autoptr(GError) error = NULL;
+
+  priv->subscription_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                            G_DBUS_PROXY_FLAGS_NONE,
+                                                            NULL,
+                                                            "org.gnome.SettingsDaemon.Subscription",
+                                                            "/org/gnome/SettingsDaemon/Subscription",
+                                                            "org.gnome.SettingsDaemon.Subscription",
+                                                            NULL, &error);
+  if (error != NULL)
+    {
+      g_debug ("Unable to create a proxy for org.gnome.SettingsDaemon.Subscription: %s",
+               error->message);
+      reload_subscription_status (self);
+      return;
+    }
+
+  g_signal_connect (priv->details_button, "clicked", G_CALLBACK (on_details_button_clicked), self);
+  g_signal_connect (priv->register_button, "clicked", G_CALLBACK (on_register_button_clicked), self);
+
+  reload_subscription_status (self);
+}
+
 static gboolean
 does_gnome_software_exist (void)
 {
@@ -856,6 +994,8 @@ cc_info_overview_panel_finalize (GObject *object)
   g_free (priv->gnome_date);
   g_free (priv->gnome_distributor);
 
+  g_clear_object (&priv->subscription_proxy);
+
   G_OBJECT_CLASS (cc_info_overview_panel_parent_class)->finalize (object);
 }
 
@@ -880,6 +1020,10 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, disk_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, graphics_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, virt_type_label);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, subscription_stack);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, details_button);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, register_button);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, updates_separator);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, updates_button);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, label8);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, grid1);
@@ -897,15 +1041,24 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 
   g_resources_register (cc_info_get_resource ());
 
+  priv->cancellable = g_cancellable_new ();
+
   priv->graphics_data = get_graphics_data ();
 
   if (does_gnome_software_exist () || does_gpk_update_viewer_exist ())
     g_signal_connect (priv->updates_button, "clicked", G_CALLBACK (on_updates_button_clicked), self);
   else
-    gtk_widget_destroy (priv->updates_button);
+    gtk_widget_hide (priv->updates_button);
 
   info_overview_panel_setup_overview (self);
   info_overview_panel_setup_virt (self);
+  info_overview_panel_setup_subscriptions (self);
+
+  /* show separator when both items are visible */
+  if (gtk_widget_get_visible (priv->subscription_stack) && gtk_widget_get_visible (priv->updates_button))
+    gtk_widget_show (priv->updates_separator);
+  else
+    gtk_widget_hide (priv->updates_separator);
 }
 
 GtkWidget *
