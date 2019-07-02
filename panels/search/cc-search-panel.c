@@ -32,8 +32,6 @@ struct _CcSearchPanel
   CcPanel     parent_instance;
 
   GtkWidget  *list_box;
-  GtkWidget  *up_button;
-  GtkWidget  *down_button;
   GtkWidget  *search_vbox;
   GtkWidget  *search_frame;
   GtkWidget  *settings_button;
@@ -95,26 +93,6 @@ list_sort_func (gconstpointer a,
 }
 
 static void
-search_panel_invalidate_button_state (CcSearchPanel *self)
-{
-  g_autoptr(GList) children = NULL;
-  gboolean is_first, is_last;
-  GtkListBoxRow *row;
-
-  row = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->list_box));
-  children = gtk_container_get_children (GTK_CONTAINER (self->list_box));
-
-  if (!row || !children)
-    return;
-
-  is_first = (row == g_list_first (children)->data);
-  is_last = (row == g_list_last (children)->data);
-
-  gtk_widget_set_sensitive (self->up_button, !is_first);
-  gtk_widget_set_sensitive (self->down_button, !is_last);
-}
-
-static void
 search_panel_invalidate_sort_order (CcSearchPanel *self)
 {
   g_auto(GStrv) sort_order = NULL;
@@ -127,8 +105,6 @@ search_panel_invalidate_sort_order (CcSearchPanel *self)
     g_hash_table_insert (self->sort_order, g_strdup (sort_order[idx]), GINT_TO_POINTER (idx + 1));
 
   gtk_list_box_invalidate_sort (GTK_LIST_BOX (self->list_box));
-
-  search_panel_invalidate_button_state (self);
 }
 
 static gint
@@ -301,20 +277,6 @@ row_moved_cb (CcSearchPanel    *self,
   down = (source_idx - dest_idx) < 0;
   for (int i = 0; i < ABS (source_idx - dest_idx); i++)
     search_panel_move_selected (self, down);
-}
-
-static void
-down_button_clicked (GtkWidget *widget,
-                     CcSearchPanel *self)
-{
-  search_panel_move_selected (self, TRUE);
-}
-
-static void
-up_button_clicked (GtkWidget *widget,
-                   CcSearchPanel *self)
-{
-  search_panel_move_selected (self, FALSE);
 }
 
 static void
@@ -718,14 +680,6 @@ cc_search_panel_init (CcSearchPanel *self)
                               (GtkListBoxSortFunc)list_sort_func, self, NULL);
   gtk_list_box_set_header_func (GTK_LIST_BOX (self->list_box), cc_list_box_update_header_func, NULL, NULL);
 
-  g_signal_connect (self->up_button, "clicked",
-                    G_CALLBACK (up_button_clicked), self);
-  gtk_widget_set_sensitive (self->up_button, FALSE);
-
-  g_signal_connect (self->down_button, "clicked",
-                    G_CALLBACK (down_button_clicked), self);
-  gtk_widget_set_sensitive (self->down_button, FALSE);
-
   gtk_widget_set_sensitive (self->settings_button, cc_search_locations_dialog_is_available ());
 
   self->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
@@ -752,12 +706,9 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
                                                "/org/gnome/control-center/search/cc-search-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, up_button);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, down_button);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_frame);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, settings_button);
 
-  gtk_widget_class_bind_template_callback (widget_class, search_panel_invalidate_button_state);
   gtk_widget_class_bind_template_callback (widget_class, settings_button_clicked);
 }
