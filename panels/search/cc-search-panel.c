@@ -60,8 +60,8 @@ list_sort_func (gconstpointer a,
   gint idx_a, idx_b;
   gpointer lookup;
 
-  app_a = CC_SEARCH_PANEL_ROW ((gpointer*)a)->app_info;
-  app_b = CC_SEARCH_PANEL_ROW ((gpointer*)b)->app_info;
+  app_a = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW ((gpointer*)a));
+  app_b = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW ((gpointer*)b));
 
   id_a = g_app_info_get_id (app_a);
   id_b = g_app_info_get_id (app_b);
@@ -194,7 +194,7 @@ search_panel_move_selected (CcSearchPanel *self,
   GList *l, *other;
 
   row = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->list_box));
-  app_info = CC_SEARCH_PANEL_ROW (row)->app_info;
+  app_info = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (row));
   app_id = g_app_info_get_id (app_info);
 
   children = gtk_container_get_children (GTK_CONTAINER (self->list_box));
@@ -209,7 +209,7 @@ search_panel_move_selected (CcSearchPanel *self,
   g_assert (other != NULL);
 
   other_row = other->data;
-  other_app_info = CC_SEARCH_PANEL_ROW (other_row)->app_info;
+  other_app_info = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (other_row));
   other_app_id = g_app_info_get_id (other_app_info);
 
   g_assert (other_app_id != NULL);
@@ -235,7 +235,7 @@ search_panel_move_selected (CcSearchPanel *self,
           break;
         }
 
-      tmp = CC_SEARCH_PANEL_ROW (l->data)->app_info;
+      tmp = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (l->data));
       tmp_id = g_app_info_get_id (tmp);
 
       last_good_app = tmp_id;
@@ -268,7 +268,7 @@ search_panel_move_selected (CcSearchPanel *self,
       GAppInfo *tmp;
       const char *tmp_id;
 
-      tmp = CC_SEARCH_PANEL_ROW (l->data)->app_info;
+      tmp = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (l->data));
       tmp_id = g_app_info_get_id (tmp);
 
       g_hash_table_replace (self->sort_order, g_strdup (tmp_id), GINT_TO_POINTER (idx));
@@ -285,6 +285,22 @@ search_panel_move_selected (CcSearchPanel *self,
   g_hash_table_replace (self->sort_order, g_strdup (app_id), GINT_TO_POINTER (idx));
 
   search_panel_propagate_sort_order (self);
+}
+
+static void
+row_moved_cb (CcSearchPanel    *self,
+              CcSearchPanelRow *dest_row,
+              CcSearchPanelRow *row)
+{
+  gint source_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (row));
+  gint dest_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (dest_row));
+  gboolean down;
+
+  gtk_list_box_select_row (GTK_LIST_BOX (self->list_box), GTK_LIST_BOX_ROW (row));
+
+  down = (source_idx - dest_idx) < 0;
+  for (int i = 0; i < ABS (source_idx - dest_idx); i++)
+    search_panel_move_selected (self, down);
 }
 
 static void
@@ -324,7 +340,7 @@ switch_settings_mapping_set_generic (const GValue *value,
                                      gboolean default_enabled)
 {
   CcSearchPanel *self = g_object_get_data (G_OBJECT (row), "self");
-  GAppInfo *app_info = CC_SEARCH_PANEL_ROW (row)->app_info;
+  GAppInfo *app_info = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (row));
   g_auto(GStrv) apps = NULL;
   g_autoptr(GPtrArray) new_apps = NULL;
   gint idx;
@@ -381,7 +397,7 @@ switch_settings_mapping_get_generic (GValue *value,
                                      GtkWidget *row,
                                      gboolean default_enabled)
 {
-  GAppInfo *app_info = CC_SEARCH_PANEL_ROW (row)->app_info;
+  GAppInfo *app_info = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (row));
   g_autofree const gchar **apps = NULL;
   gint idx;
   gboolean found;
@@ -439,13 +455,16 @@ search_panel_add_one_app_info (CcSearchPanel *self,
   gtk_widget_set_valign (self->list_box, GTK_ALIGN_FILL);
 
   row = cc_search_panel_row_new (app_info);
+  g_signal_connect_object (row, "move-row",
+                           G_CALLBACK (row_moved_cb), self,
+                           G_CONNECT_SWAPPED);
   g_object_set_data (G_OBJECT (row), "self", self);
   gtk_container_add (GTK_CONTAINER (self->list_box), GTK_WIDGET (row));
 
   if (default_enabled)
     {
       g_settings_bind_with_mapping (self->search_settings, "disabled",
-                                    row->switcher, "active",
+                                    cc_search_panel_row_get_switch (row), "active",
                                     G_SETTINGS_BIND_DEFAULT,
                                     switch_settings_mapping_get_default_enabled,
                                     switch_settings_mapping_set_default_enabled,
@@ -454,7 +473,7 @@ search_panel_add_one_app_info (CcSearchPanel *self,
   else
     {
       g_settings_bind_with_mapping (self->search_settings, "enabled",
-                                    row->switcher, "active",
+                                    cc_search_panel_row_get_switch (row), "active",
                                     G_SETTINGS_BIND_DEFAULT,
                                     switch_settings_mapping_get_default_disabled,
                                     switch_settings_mapping_set_default_disabled,

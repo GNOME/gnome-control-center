@@ -24,21 +24,12 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_SEARCH_PANEL_ROW (cc_search_panel_row_get_type())
-
 G_DECLARE_FINAL_TYPE (CcSearchPanelRow, cc_search_panel_row, CC, SEARCH_PANEL_ROW, GtkListBoxRow)
 
-struct _CcSearchPanelRow
-{
-  GtkListBoxRow  parent_instance;
+CcSearchPanelRow *cc_search_panel_row_new          (GAppInfo         *app_info);
 
-  GAppInfo      *app_info;
+GAppInfo         *cc_search_panel_row_get_app_info (CcSearchPanelRow *row);
 
-  GtkImage      *icon;
-  GtkLabel      *app_name;
-  GtkSwitch     *switcher;
-};
-
-
-CcSearchPanelRow *cc_search_panel_row_new (GAppInfo *app_info);
+GtkWidget        *cc_search_panel_row_get_switch   (CcSearchPanelRow *row);
 
 G_END_DECLS
