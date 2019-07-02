@@ -288,6 +288,22 @@ search_panel_move_selected (CcSearchPanel *self,
 }
 
 static void
+row_moved_cb (CcSearchPanel    *self,
+              CcSearchPanelRow *dest_row,
+              CcSearchPanelRow *row)
+{
+  gint source_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (row));
+  gint dest_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (dest_row));
+  gboolean down;
+
+  gtk_list_box_select_row (GTK_LIST_BOX (self->list_box), GTK_LIST_BOX_ROW (row));
+
+  down = (source_idx - dest_idx) < 0;
+  for (int i = 0; i < ABS (source_idx - dest_idx); i++)
+    search_panel_move_selected (self, down);
+}
+
+static void
 down_button_clicked (GtkWidget *widget,
                      CcSearchPanel *self)
 {
@@ -439,6 +455,9 @@ search_panel_add_one_app_info (CcSearchPanel *self,
   gtk_widget_set_valign (self->list_box, GTK_ALIGN_FILL);
 
   row = cc_search_panel_row_new (app_info);
+  g_signal_connect_object (row, "move-row",
+                           G_CALLBACK (row_moved_cb), self,
+                           G_CONNECT_SWAPPED);
   g_object_set_data (G_OBJECT (row), "self", self);
   gtk_container_add (GTK_CONTAINER (self->list_box), GTK_WIDGET (row));
 
