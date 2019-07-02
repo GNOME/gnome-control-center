@@ -46,6 +46,43 @@ enum
 static guint signals[SIGNAL_LAST] = { 0, };
 
 static void
+move_up_button_clicked (GtkButton        *button,
+                        CcSearchPanelRow *self)
+{
+  GtkListBox *list_box = GTK_LIST_BOX (gtk_widget_get_parent (GTK_WIDGET (self)));
+  gint previous_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) - 1;
+  GtkListBoxRow *previous_row = gtk_list_box_get_row_at_index (list_box, previous_idx);
+
+  if (previous_row == NULL)
+    return;
+
+  gtk_list_box_select_row (list_box, GTK_LIST_BOX_ROW (self));
+  g_signal_emit (self,
+                 signals[SIGNAL_MOVE_ROW],
+                 0,
+                 previous_row);
+}
+
+static void
+move_down_button_clicked (GtkButton    *button,
+                          CcSearchPanelRow *self)
+{
+  GtkListBox *list_box = GTK_LIST_BOX (gtk_widget_get_parent (GTK_WIDGET (self)));
+  gint next_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) + 1;
+  GtkListBoxRow *next_row = gtk_list_box_get_row_at_index (list_box, next_idx);
+
+  if (next_row == NULL)
+    return;
+
+  g_signal_emit (next_row,
+                 signals[SIGNAL_MOVE_ROW],
+                 0,
+                 self);
+
+  gtk_list_box_select_row (list_box, GTK_LIST_BOX_ROW (self));
+}
+
+static void
 drag_begin_cb (CcSearchPanelRow *self,
                GdkDragContext   *drag_context)
 {
@@ -134,6 +171,8 @@ cc_search_panel_row_class_init (CcSearchPanelRowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, drag_end_cb);
   gtk_widget_class_bind_template_callback (widget_class, drag_data_get_cb);
   gtk_widget_class_bind_template_callback (widget_class, drag_data_received_cb);
+  gtk_widget_class_bind_template_callback (widget_class, move_up_button_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, move_down_button_clicked);
 
   signals[SIGNAL_MOVE_ROW] =
     g_signal_new ("move-row",
