@@ -26,6 +26,12 @@
                 <child>
                   <object class="GtkFrame" id="search_frame">
                     <property name="visible">True</property>
+                    <child>
+                      <object class="GtkListBox" id="list_box">
+                        <property name="visible">True</property>
+                        <signal name="row-selected" handler="search_panel_invalidate_button_state" swapped="yes"/>
+                      </object>
+                    </child>
                   </object>
                 </child>
                 <child>
