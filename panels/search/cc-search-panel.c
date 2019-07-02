@@ -19,6 +19,7 @@
  */
 
 #include "cc-search-panel.h"
+#include "cc-search-panel-row.h"
 #include "cc-search-locations-dialog.h"
 #include "cc-search-resources.h"
 #include "list-box-helper.h"
@@ -59,8 +60,8 @@ list_sort_func (gconstpointer a,
   gint idx_a, idx_b;
   gpointer lookup;
 
-  app_a = g_object_get_data (G_OBJECT (a), "app-info");
-  app_b = g_object_get_data (G_OBJECT (b), "app-info");
+  app_a = CC_SEARCH_PANEL_ROW ((gpointer*)a)->app_info;
+  app_b = CC_SEARCH_PANEL_ROW ((gpointer*)b)->app_info;
 
   id_a = g_app_info_get_id (app_a);
   id_b = g_app_info_get_id (app_b);
@@ -193,7 +194,7 @@ search_panel_move_selected (CcSearchPanel *self,
   GList *l, *other;
 
   row = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->list_box));
-  app_info = g_object_get_data (G_OBJECT (row), "app-info");
+  app_info = CC_SEARCH_PANEL_ROW (row)->app_info;
   app_id = g_app_info_get_id (app_info);
 
   children = gtk_container_get_children (GTK_CONTAINER (self->list_box));
@@ -208,7 +209,7 @@ search_panel_move_selected (CcSearchPanel *self,
   g_assert (other != NULL);
 
   other_row = other->data;
-  other_app_info = g_object_get_data (G_OBJECT (other_row), "app-info");
+  other_app_info = CC_SEARCH_PANEL_ROW (other_row)->app_info;
   other_app_id = g_app_info_get_id (other_app_info);
 
   g_assert (other_app_id != NULL);
@@ -234,7 +235,7 @@ search_panel_move_selected (CcSearchPanel *self,
           break;
         }
 
-      tmp =  g_object_get_data (G_OBJECT (l->data), "app-info");
+      tmp = CC_SEARCH_PANEL_ROW (l->data)->app_info;
       tmp_id = g_app_info_get_id (tmp);
 
       last_good_app = tmp_id;
@@ -267,7 +268,7 @@ search_panel_move_selected (CcSearchPanel *self,
       GAppInfo *tmp;
       const char *tmp_id;
 
-      tmp = g_object_get_data (G_OBJECT (l->data), "app-info");
+      tmp = CC_SEARCH_PANEL_ROW (l->data)->app_info;
       tmp_id = g_app_info_get_id (tmp);
 
       g_hash_table_replace (self->sort_order, g_strdup (tmp_id), GINT_TO_POINTER (idx));
@@ -323,7 +324,7 @@ switch_settings_mapping_set_generic (const GValue *value,
                                      gboolean default_enabled)
 {
   CcSearchPanel *self = g_object_get_data (G_OBJECT (row), "self");
-  GAppInfo *app_info = g_object_get_data (G_OBJECT (row), "app-info");
+  GAppInfo *app_info = CC_SEARCH_PANEL_ROW (row)->app_info;
   g_auto(GStrv) apps = NULL;
   g_autoptr(GPtrArray) new_apps = NULL;
   gint idx;
@@ -380,7 +381,7 @@ switch_settings_mapping_get_generic (GValue *value,
                                      GtkWidget *row,
                                      gboolean default_enabled)
 {
-  GAppInfo *app_info = g_object_get_data (G_OBJECT (row), "app-info");
+  GAppInfo *app_info = CC_SEARCH_PANEL_ROW (row)->app_info;
   g_autofree const gchar **apps = NULL;
   gint idx;
   gboolean found;
@@ -425,9 +426,8 @@ search_panel_add_one_app_info (CcSearchPanel *self,
                                GAppInfo *app_info,
                                gboolean default_enabled)
 {
-  GtkWidget *row, *box, *w;
+  CcSearchPanelRow *row;
   g_autoptr(GIcon) icon = NULL;
-  gint width, height;
 
   /* gnome-control-center is special cased in the shell,
      and is not configurable */
@@ -438,46 +438,14 @@ search_panel_add_one_app_info (CcSearchPanel *self,
   /* reset valignment of the list box */
   gtk_widget_set_valign (self->list_box, GTK_ALIGN_FILL);
 
-  row = gtk_list_box_row_new ();
-  gtk_widget_show (row);
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
-  gtk_widget_show (box);
-  gtk_container_add (GTK_CONTAINER (row), box);
-  gtk_widget_set_hexpand (box, TRUE);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 10);
-  g_object_set_data_full (G_OBJECT (row), "app-info",
-                          g_object_ref (app_info), g_object_unref);
+  row = cc_search_panel_row_new (app_info);
   g_object_set_data (G_OBJECT (row), "self", self);
-  gtk_container_add (GTK_CONTAINER (self->list_box), row);
-
-  icon = g_app_info_get_icon (app_info);
-  if (icon == NULL)
-    icon = g_themed_icon_new ("application-x-executable");
-  else
-    g_object_ref (icon);
-
-  w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DND);
-  gtk_style_context_add_class (gtk_widget_get_style_context (w), "lowres-icon");
-  gtk_widget_show (w);
-  gtk_icon_size_lookup (GTK_ICON_SIZE_DND, &width, &height);
-  gtk_image_set_pixel_size (GTK_IMAGE (w), MAX (width, height));
-  gtk_container_add (GTK_CONTAINER (box), w);
-
-  w = gtk_label_new (g_app_info_get_name (app_info));
-  gtk_widget_show (w);
-  gtk_label_set_ellipsize (GTK_LABEL (w), PANGO_ELLIPSIZE_END);
-  gtk_label_set_xalign (GTK_LABEL (w), 0.0f);
-  gtk_container_add (GTK_CONTAINER (box), w);
-
-  w = gtk_switch_new ();
-  gtk_widget_show (w);
-  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_box_pack_end (GTK_BOX (box), w, FALSE, FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (self->list_box), GTK_WIDGET (row));
 
   if (default_enabled)
     {
       g_settings_bind_with_mapping (self->search_settings, "disabled",
-                                    w, "active",
+                                    row->switcher, "active",
                                     G_SETTINGS_BIND_DEFAULT,
                                     switch_settings_mapping_get_default_enabled,
                                     switch_settings_mapping_set_default_enabled,
@@ -486,7 +454,7 @@ search_panel_add_one_app_info (CcSearchPanel *self,
   else
     {
       g_settings_bind_with_mapping (self->search_settings, "enabled",
-                                    w, "active",
+                                    row->switcher, "active",
                                     G_SETTINGS_BIND_DEFAULT,
                                     switch_settings_mapping_get_default_disabled,
                                     switch_settings_mapping_set_default_disabled,
