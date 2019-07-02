@@ -726,15 +726,9 @@ cc_search_panel_init (CcSearchPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->list_box = GTK_WIDGET (gtk_list_box_new ());
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->list_box),
                               (GtkListBoxSortFunc)list_sort_func, self, NULL);
   gtk_list_box_set_header_func (GTK_LIST_BOX (self->list_box), cc_list_box_update_header_func, NULL, NULL);
-  gtk_container_add (GTK_CONTAINER (self->search_frame), self->list_box);
-  gtk_widget_show (self->list_box);
-
-  g_signal_connect_swapped (self->list_box, "row-selected",
-                            G_CALLBACK (search_panel_invalidate_button_state), self);
 
   g_signal_connect (self->up_button, "clicked",
                     G_CALLBACK (up_button_clicked), self);
@@ -771,9 +765,12 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/search/cc-search-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, list_box);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, up_button);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, down_button);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_frame);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, settings_button);
+
+  gtk_widget_class_bind_template_callback (widget_class, search_panel_invalidate_button_state);
 }
