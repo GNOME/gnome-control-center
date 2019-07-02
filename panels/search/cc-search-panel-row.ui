@@ -4,14 +4,27 @@
   <template class="CcSearchPanelRow" parent="GtkListBoxRow">
     <property name="visible">True</property>
     <property name="can-focus">True</property>
+    <signal name="drag_data_received" handler="drag_data_received_cb" object="CcSearchPanelRow" swapped="yes"/>
     <child>
       <object class="GtkEventBox" id="drag_handle">
         <property name="visible">True</property>
+        <signal name="drag_data_get" handler="drag_data_get_cb" object="CcSearchPanelRow" swapped="yes"/>
+        <signal name="drag-begin" handler="drag_begin_cb" object="CcSearchPanelRow" swapped="yes"/>
+        <signal name="drag_end" handler="drag_end_cb" object="CcSearchPanelRow" swapped="yes"/>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="spacing">10</property>
             <property name="border-width">10</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon-name">list-drag-handle-symbolic</property>
+                <style>
+                  <class name="drag-handle"/>
+                </style>
+              </object>
+            </child>
             <child>
               <object class="GtkImage" id="icon">
                 <property name="visible">True</property>
