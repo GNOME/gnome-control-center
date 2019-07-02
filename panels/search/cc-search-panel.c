@@ -703,6 +703,7 @@ cc_search_panel_constructed (GObject *object)
                           G_BINDING_DEFAULT |
                           G_BINDING_SYNC_CREATE);
 
+  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), self->settings_button, GTK_POS_LEFT);
   cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), box, GTK_POS_RIGHT);
 }
 
@@ -725,8 +726,6 @@ cc_search_panel_init (CcSearchPanel *self)
                     G_CALLBACK (down_button_clicked), self);
   gtk_widget_set_sensitive (self->down_button, FALSE);
 
-  g_signal_connect (self->settings_button, "clicked",
-                    G_CALLBACK (settings_button_clicked), self);
   gtk_widget_set_sensitive (self->settings_button, cc_search_locations_dialog_is_available ());
 
   self->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
@@ -760,4 +759,5 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, settings_button);
 
   gtk_widget_class_bind_template_callback (widget_class, search_panel_invalidate_button_state);
+  gtk_widget_class_bind_template_callback (widget_class, settings_button_clicked);
 }
