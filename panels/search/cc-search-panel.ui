@@ -97,33 +97,6 @@
                         <property name="expand">True</property>
                       </packing>
                     </child>
-                    <child>
-                      <object class="GtkToolItem" id="settings_item">
-                        <property name="visible">True</property>
-                        <child>
-                          <object class="GtkBox" id="i_s_ud_box">
-                            <property name="visible">True</property>
-                            <child>
-                               <object class="GtkButton" id="settings_button">
-                                 <property name="visible">True</property>
-                                 <child internal-child="accessible">
-                                   <object class="AtkObject" id="settings_button_a11y">
-                                     <property name="accessible-name" translatable="yes">Preferences</property>
-                                   </object>
-                                 </child>
-                                 <child>
-                                    <object class="GtkImage" id="settings_image">
-                                      <property name="visible">True</property>
-                                      <property name="icon-name">emblem-system-symbolic</property>
-                                      <property name="icon-size">1</property>
-                                    </object>
-                                 </child>
-                               </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -138,4 +111,12 @@
       </object>
     </child>
   </template>
+
+  <!-- Header widget -->
+  <object class="GtkButton" id="settings_button">
+    <property name="visible">True</property>
+    <property name="can-focus">True</property>
+    <property name="label" translatable="yes">Search Locations</property>
+    <signal name="clicked" handler="settings_button_clicked" object="CcSearchPanel" swapped="yes"/>
+  </object>
 </interface>
