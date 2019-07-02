@@ -269,6 +269,12 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   current_mode = cc_display_monitor_get_mode (self->selected_output);
   if (current_mode == NULL)
     current_mode = cc_display_monitor_get_preferred_mode (self->selected_output);
+  if (current_mode == NULL) {
+    modes = cc_display_monitor_get_modes (self->selected_output);
+    /* Lets assume that a monitor always has at least one mode. */
+    g_assert (modes);
+    current_mode = CC_DISPLAY_MODE (modes->data);
+  }
 
   if (should_show_rotation (self))
     {

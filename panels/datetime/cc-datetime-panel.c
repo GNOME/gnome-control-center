@@ -175,7 +175,9 @@ cc_date_time_panel_constructed (GObject *object)
 
   G_OBJECT_CLASS (cc_date_time_panel_parent_class)->constructed (object);
 
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), GTK_WIDGET (self->lock_button));
+  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
+                                   GTK_WIDGET (self->lock_button),
+                                   GTK_POS_RIGHT);
 }
 
 static const char *

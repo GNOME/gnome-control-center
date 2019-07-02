@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcBackgroundPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="spacing">24</property>
+            <property name="margin">32</property>
+            <property name="halign">center</property>
+            <child>
+              <object class="CcBackgroundPreview" id="desktop_preview">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">end</property>
+                <property name="valign">center</property>
+              </object>
+            </child>
+            <child>
+              <object class="CcBackgroundPreview" id="lock_screen_preview">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="is-lock-screen">True</property>
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="CcBackgroundChooser" id="background_chooser">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="expand">True</property>
+            <signal name="background-chosen" handler="on_chooser_background_chosen_cb" object="CcBackgroundPanel" swapped="no" />
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+
+  <!-- Header button -->
+  <object class="GtkButton" id="add_picture_button">
+    <property name="visible">True</property>
+    <property name="label" translatable="yes">Add Picture…</property>
+    <signal name="clicked" handler="on_add_picture_button_clicked_cb" object="CcBackgroundPanel" swapped="no" />
+  </object>
+</interface>

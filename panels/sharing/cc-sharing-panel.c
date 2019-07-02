@@ -142,7 +142,8 @@ cc_sharing_panel_constructed (GObject *object)
 
   /* add the master switch */
   cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (object)),
-                                   gtk_widget_get_parent (self->master_switch));
+                                   gtk_widget_get_parent (self->master_switch),
+                                   GTK_POS_RIGHT);
 }
 
 static void

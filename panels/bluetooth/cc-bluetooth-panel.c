@@ -90,7 +90,7 @@ cc_bluetooth_panel_constructed (GObject *object)
 	/* add kill switch widgets  */
 	self->kill_switch_header = g_object_ref (WID ("box_power"));
 	cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
-					 self->kill_switch_header);
+					 self->kill_switch_header, GTK_POS_RIGHT);
 	gtk_widget_show (self->kill_switch_header);
 }
 

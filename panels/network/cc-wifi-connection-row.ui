@@ -27,6 +27,15 @@
           </object>
         </child>
         <child>
+          <object class="GtkImage" id="strength_icon">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_right">6</property>
+            <property name="icon_name">network-wireless-signal-excellent-symbolic</property>
+            <property name="icon_size">1</property>
+          </object>
+        </child>
+        <child>
           <object class="GtkLabel" id="name_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
@@ -46,12 +55,32 @@
           </object>
         </child>
         <child>
+          <object class="GtkImage" id="encrypted_icon">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="halign">end</property>
+            <property name="icon_name">network-wireless-encrypted-symbolic</property>
+            <property name="icon_size">1</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="configure_separator">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_bottom">6</property>
+            <property name="margin_left">6</property>
+            <property name="margin_right">6</property>
+            <property name="margin_top">6</property>
+          </object>
+        </child>
+        <child>
           <object class="GtkStack" id="button_stack">
             <property name="name">button_stack</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="halign">end</property>
-            <property name="hexpand">True</property>
+            <property name="hexpand">False</property>
             <child>
               <object class="GtkButton" id="configure_button">
                 <property name="name">options_button</property>
@@ -96,34 +125,14 @@
               </packing>
             </child>
             <child>
-              <object class="GtkAlignment">
+              <object class="GtkBox">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <child>
-                  <placeholder/>
-                </child>
+                <property name="name">empty_box</property>
               </object>
               <packing>
                 <property name="name">empty</property>
-                <property name="position">2</property>
               </packing>
             </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkImage" id="encrypted_icon">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="icon_name">network-wireless-encrypted-symbolic</property>
-            <property name="icon_size">1</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkImage" id="strength_icon">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="icon_name">network-wireless-signal-excellent-symbolic</property>
-            <property name="icon_size">1</property>
           </object>
         </child>
       </object>

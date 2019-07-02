@@ -187,7 +187,8 @@ cc_region_panel_constructed (GObject *object)
 
         if (self->permission)
                 cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (object)),
-                                                 GTK_WIDGET (self->login_button));
+                                                 GTK_WIDGET (self->login_button),
+                                                 GTK_POS_RIGHT);
 }
 
 static const char *

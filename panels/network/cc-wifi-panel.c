@@ -53,12 +53,14 @@ struct _CcWifiPanel
   GtkStack           *header_stack;
   GtkStack           *main_stack;
   GtkSizeGroup       *sizegroup;
+  GtkWidget          *spinner;
   GtkStack           *stack;
 
   NMClient           *client;
 
   GPtrArray          *devices;
 
+  GBinding           *spinner_binding;
   GCancellable       *cancellable;
 
   /* Command-line arguments */
@@ -166,8 +168,6 @@ add_wifi_device (CcWifiPanel *self,
                              "id", nm_device_get_udi (device),
                              NULL);
 
-  net_object_add_to_stack (net_device, self->stack, self->sizegroup);
-
   /* And add to the header widgets */
   header_widget = net_device_wifi_get_header_widget (NET_DEVICE_WIFI (net_device));
 
@@ -177,6 +177,9 @@ add_wifi_device (CcWifiPanel *self,
   g_ptr_array_add (self->devices, net_device);
 
   update_devices_names (self);
+
+  /* Needs to be added after the device is added to the self->devices array */
+  net_object_add_to_stack (net_device, self->stack, self->sizegroup);
 }
 
 static void
@@ -545,6 +548,34 @@ rfkill_switch_notify_activate_cb (GtkSwitch   *rfkill_switch,
                      NULL);
 }
 
+static void
+on_stack_visible_child_changed_cb (GtkStack    *stack,
+                                   GParamSpec  *pspec,
+                                   CcWifiPanel *self)
+{
+  const gchar *visible_device_id = NULL;
+  guint i;
+
+  /* Remove previous bindings */
+  g_clear_pointer (&self->spinner_binding, g_binding_unbind);
+
+  visible_device_id = gtk_stack_get_visible_child_name (stack);
+  for (i = 0; i < self->devices->len; i++)
+    {
+      NetObject *object = g_ptr_array_index (self->devices, i);
+
+      if (g_strcmp0 (net_object_get_id (object), visible_device_id) == 0)
+        {
+          self->spinner_binding = g_object_bind_property (object,
+                                                          "scanning",
+                                                          self->spinner,
+                                                          "active",
+                                                          G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
+          break;
+        }
+    }
+}
+
 /* Overrides */
 
 static const gchar *
@@ -572,7 +603,7 @@ cc_wifi_panel_constructed (GObject *object)
 
   G_OBJECT_CLASS (cc_wifi_panel_parent_class)->constructed (object);
 
-  cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->header_stack));
+  cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->header_stack), GTK_POS_RIGHT);
 }
 
 static void
@@ -686,9 +717,11 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_switch);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_widget);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, sizegroup);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, spinner);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, stack);
 
   gtk_widget_class_bind_template_callback (widget_class, rfkill_switch_notify_activate_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_stack_visible_child_changed_cb);
 
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 }

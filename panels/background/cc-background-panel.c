@@ -29,8 +29,9 @@
 
 #include "cc-background-panel.h"
 
-#include "cc-background-chooser-dialog.h"
+#include "cc-background-chooser.h"
 #include "cc-background-item.h"
+#include "cc-background-preview.h"
 #include "cc-background-resources.h"
 #include "cc-background-xml.h"
 
@@ -48,7 +49,6 @@ struct _CcBackgroundPanel
 {
   CcPanel parent_instance;
 
-  GtkBuilder *builder;
   GDBusConnection *connection;
 
   GSettings *settings;
@@ -61,77 +61,20 @@ struct _CcBackgroundPanel
 
   GCancellable *copy_cancellable;
 
+  CcBackgroundChooser *background_chooser;
+  GtkWidget *add_picture_button;
+  CcBackgroundPreview *desktop_preview;
+  CcBackgroundPreview *lock_screen_preview;
+
   GtkWidget *spinner;
   GtkWidget *chooser;
 };
 
 CC_PANEL_REGISTER (CcBackgroundPanel, cc_background_panel)
 
-#define WID(y) (GtkWidget *) gtk_builder_get_object (panel->builder, y)
-
-static const char *
-cc_background_panel_get_help_uri (CcPanel *panel)
-{
-  return "help:gnome-help/look-background";
-}
-
-static void
-cc_background_panel_dispose (GObject *object)
-{
-  CcBackgroundPanel *panel = CC_BACKGROUND_PANEL (object);
-
-  g_clear_object (&panel->builder);
-
-  /* destroying the builder object will also destroy the spinner */
-  panel->spinner = NULL;
-
-  g_clear_object (&panel->settings);
-  g_clear_object (&panel->lock_settings);
-
-  if (panel->copy_cancellable)
-    {
-      /* cancel any copy operation */
-      g_cancellable_cancel (panel->copy_cancellable);
-
-      g_clear_object (&panel->copy_cancellable);
-    }
-
-  if (panel->chooser)
-    {
-      gtk_widget_destroy (panel->chooser);
-      panel->chooser = NULL;
-    }
-
-  g_clear_object (&panel->thumb_factory);
-
-  G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
-}
-
-static void
-cc_background_panel_finalize (GObject *object)
-{
-  CcBackgroundPanel *panel = CC_BACKGROUND_PANEL (object);
-
-  g_clear_object (&panel->current_background);
-  g_clear_object (&panel->current_lock_background);
-
-  G_OBJECT_CLASS (cc_background_panel_parent_class)->finalize (object);
-}
-
-static void
-cc_background_panel_class_init (CcBackgroundPanelClass *klass)
-{
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
-
-  panel_class->get_help_uri = cc_background_panel_get_help_uri;
-
-  object_class->dispose = cc_background_panel_dispose;
-  object_class->finalize = cc_background_panel_finalize;
-}
-
 static CcBackgroundItem *
-get_current_background (CcBackgroundPanel *panel, GSettings *settings)
+get_current_background (CcBackgroundPanel *panel,
+                        GSettings         *settings)
 {
   if (settings == panel->settings)
     return panel->current_background;
@@ -144,7 +87,6 @@ update_preview (CcBackgroundPanel *panel,
                 GSettings         *settings,
                 CcBackgroundItem  *item)
 {
-  gboolean changes_with_time;
   CcBackgroundItem *current_background;
 
   current_background = get_current_background (panel, settings);
@@ -160,27 +102,10 @@ update_preview (CcBackgroundPanel *panel,
       cc_background_item_load (current_background, NULL);
     }
 
-  changes_with_time = FALSE;
-
-  if (current_background)
-    {
-      changes_with_time = cc_background_item_changes_with_time (current_background);
-    }
-
   if (settings == panel->settings)
-    {
-      gtk_widget_set_visible (WID ("slide_image"), changes_with_time);
-      gtk_widget_set_visible (WID ("slide-label"), changes_with_time);
-
-      gtk_widget_queue_draw (WID ("background-desktop-drawingarea"));
-    }
+    cc_background_preview_set_item (panel->desktop_preview, current_background);
   else
-    {
-      gtk_widget_set_visible (WID ("slide_image1"), changes_with_time);
-      gtk_widget_set_visible (WID ("slide-label1"), changes_with_time);
-
-      gtk_widget_queue_draw (WID ("background-lock-drawingarea"));
-    }
+    cc_background_preview_set_item (panel->lock_screen_preview, current_background);
 }
 
 static gchar *
@@ -191,71 +116,6 @@ get_save_path (CcBackgroundPanel *panel, GSettings *settings)
                            "backgrounds",
                            settings == panel->settings ? "last-edited.xml" : "last-edited-lock.xml",
                            NULL);
-}
-
-static GdkPixbuf*
-get_or_create_cached_pixbuf (CcBackgroundPanel *panel,
-                             GtkWidget         *widget,
-                             CcBackgroundItem  *background)
-{
-  GtkAllocation allocation;
-  const gint preview_width = 309;
-  const gint preview_height = 168;
-  gint scale_factor;
-  GdkPixbuf *pixbuf;
-
-  pixbuf = g_object_get_data (G_OBJECT (background), "pixbuf");
-  if (pixbuf == NULL)
-    {
-      gtk_widget_get_allocation (widget, &allocation);
-      scale_factor = gtk_widget_get_scale_factor (widget);
-      pixbuf = cc_background_item_get_frame_thumbnail (background,
-                                                       panel->thumb_factory,
-                                                       preview_width,
-                                                       preview_height,
-                                                       scale_factor,
-                                                       -2, TRUE);
-      g_object_set_data_full (G_OBJECT (background), "pixbuf", pixbuf, g_object_unref);
-    }
-
-  return pixbuf;
-}
-
-static void
-update_display_preview (CcBackgroundPanel *panel,
-                        GtkWidget         *widget,
-                        CcBackgroundItem  *background)
-{
-  GdkPixbuf *pixbuf;
-  cairo_t *cr;
-
-  pixbuf = get_or_create_cached_pixbuf (panel, widget, background);
-
-  cr = gdk_cairo_create (gtk_widget_get_window (widget));
-  gdk_cairo_set_source_pixbuf (cr,
-                               pixbuf,
-                               0, 0);
-  cairo_paint (cr);
-  cairo_destroy (cr);
-}
-
-static gboolean
-on_preview_draw (GtkWidget         *widget,
-                 cairo_t           *cr,
-                 CcBackgroundPanel *panel)
-{
-  update_display_preview (panel, widget, panel->current_background);
-
-  return TRUE;
-}
-
-static gboolean
-on_lock_preview_draw (GtkWidget         *widget,
-                      cairo_t           *cr,
-                      CcBackgroundPanel *panel)
-{
-  update_display_preview (panel, widget, panel->current_lock_background);
-  return TRUE;
 }
 
 static void
@@ -275,14 +135,8 @@ reload_current_bg (CcBackgroundPanel *panel,
   /* initalise the current background information from settings */
   uri = g_settings_get_string (settings, WP_URI_KEY);
   if (uri && *uri == '\0')
-    {
-      g_clear_pointer (&uri, g_free);
-    }
-  else
-    {
-      g_autoptr(GFile) file = NULL;
-      file = g_file_new_for_commandline_arg (uri);
-    }
+    g_clear_pointer (&uri, g_free);
+
   configured = cc_background_item_new (uri);
 
   pcolor = g_settings_get_string (settings, WP_PCOLOR_KEY);
@@ -341,64 +195,14 @@ create_save_dir (void)
 }
 
 static void
-copy_finished_cb (GObject      *source_object,
-                  GAsyncResult *result,
-                  gpointer      pointer)
-{
-  g_autoptr(GError) err = NULL;
-  g_autoptr(CcBackgroundPanel) panel = (CcBackgroundPanel *) pointer;
-  CcBackgroundItem *item;
-  CcBackgroundItem *current_background;
-  GSettings *settings;
-
-  if (!g_file_copy_finish (G_FILE (source_object), result, &err))
-    {
-      if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-        return;
-      }
-      g_warning ("Failed to copy image to cache location: %s", err->message);
-    }
-  item = g_object_get_data (source_object, "item");
-  settings = g_object_get_data (source_object, "settings");
-  current_background = get_current_background (panel, settings);
-
-  g_settings_apply (settings);
-
-  /* the panel may have been destroyed before the callback is run, so be sure
-   * to check the widgets are not NULL */
-
-  if (panel->spinner)
-    {
-      gtk_widget_destroy (GTK_WIDGET (panel->spinner));
-      panel->spinner = NULL;
-    }
-
-  if (current_background)
-    cc_background_item_load (current_background, NULL);
-
-  if (panel->builder)
-    {
-      g_autofree gchar *filename = NULL;
-
-      update_preview (panel, settings, item);
-      current_background = get_current_background (panel, settings);
-
-      /* Save the source XML if there is one */
-      filename = get_save_path (panel, settings);
-      if (create_save_dir ())
-        cc_background_xml_save (current_background, filename);
-    }
-}
-
-static void
 set_background (CcBackgroundPanel *panel,
                 GSettings         *settings,
                 CcBackgroundItem  *item)
 {
   GDesktopBackgroundStyle style;
-  gboolean save_settings = TRUE;
-  const char *uri;
   CcBackgroundItemFlags flags;
+  g_autofree gchar *filename = NULL;
+  const char *uri;
 
   if (item == NULL)
     return;
@@ -406,86 +210,7 @@ set_background (CcBackgroundPanel *panel,
   uri = cc_background_item_get_uri (item);
   flags = cc_background_item_get_flags (item);
 
-  if ((flags & CC_BACKGROUND_ITEM_HAS_URI) && uri == NULL)
-    {
-      g_settings_set_enum (settings, WP_OPTIONS_KEY, G_DESKTOP_BACKGROUND_STYLE_NONE);
-      g_settings_set_string (settings, WP_URI_KEY, "");
-    }
-  else if (cc_background_item_get_source_url (item) != NULL &&
-           cc_background_item_get_needs_download (item))
-    {
-      g_autoptr(GFile) source = NULL;
-      g_autoptr(GFile) dest = NULL;
-      g_autofree gchar *cache_path = NULL;
-      g_autofree gchar *basename = NULL;
-      g_autofree gchar *display_name = NULL;
-      g_autofree gchar *dest_path = NULL;
-      g_autofree gchar *dest_uri = NULL;
-      g_autoptr(GdkPixbuf) pixbuf = NULL;
-
-      cache_path = bg_pictures_source_get_cache_path ();
-      if (g_mkdir_with_parents (cache_path, USER_DIR_MODE) < 0)
-        {
-          g_warning ("Failed to create directory '%s'", cache_path);
-          return;
-        }
-
-      dest_path = bg_pictures_source_get_unique_path (cc_background_item_get_source_url (item));
-      dest = g_file_new_for_path (dest_path);
-      source = g_file_new_for_uri (cc_background_item_get_source_url (item));
-      basename = g_file_get_basename (source);
-      display_name = g_filename_display_name (basename);
-      dest_path = g_file_get_path (dest);
-
-      /* create a blank image to use until the source image is ready */
-      pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 1, 1);
-      gdk_pixbuf_fill (pixbuf, 0x00000000);
-      gdk_pixbuf_save (pixbuf, dest_path, "png", NULL, NULL);
-
-      if (panel->copy_cancellable)
-        {
-          g_cancellable_cancel (panel->copy_cancellable);
-          g_cancellable_reset (panel->copy_cancellable);
-        }
-
-      if (panel->spinner)
-        {
-          gtk_widget_destroy (GTK_WIDGET (panel->spinner));
-          panel->spinner = NULL;
-        }
-
-      /* create a spinner while the file downloads */
-      panel->spinner = gtk_spinner_new ();
-      gtk_spinner_start (GTK_SPINNER (panel->spinner));
-      gtk_box_pack_start (GTK_BOX (WID ("bottom-hbox")), panel->spinner, FALSE,
-                          FALSE, 6);
-      gtk_widget_show (panel->spinner);
-
-      /* reference the panel in case it is removed before the copy is
-       * finished */
-      g_object_ref (panel);
-      g_object_set_data_full (G_OBJECT (source), "item", g_object_ref (item), g_object_unref);
-      g_object_set_data (G_OBJECT (source), "settings", settings);
-      g_file_copy_async (source, dest, G_FILE_COPY_OVERWRITE,
-                         G_PRIORITY_DEFAULT, panel->copy_cancellable,
-                         NULL, NULL,
-                         copy_finished_cb, panel);
-      dest_uri = g_file_get_uri (dest);
-
-      g_settings_set_string (settings, WP_URI_KEY, dest_uri);
-      g_object_set (G_OBJECT (item),
-                    "uri", dest_uri,
-                    "needs-download", FALSE,
-                    "name", display_name,
-                    NULL);
-
-      /* delay the updated drawing of the preview until the copy finishes */
-      save_settings = FALSE;
-    }
-  else
-    {
-      g_settings_set_string (settings, WP_URI_KEY, uri);
-    }
+  g_settings_set_string (settings, WP_URI_KEY, uri);
 
   /* Also set the placement if we have a URI and the previous value was none */
   if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT)
@@ -505,64 +230,111 @@ set_background (CcBackgroundPanel *panel,
   g_settings_set_string (settings, WP_PCOLOR_KEY, cc_background_item_get_pcolor (item));
   g_settings_set_string (settings, WP_SCOLOR_KEY, cc_background_item_get_scolor (item));
 
-  /* update the preview information */
-  if (save_settings != FALSE)
-    {
-      g_autofree gchar *filename = NULL;
+  /* Apply all changes */
+  g_settings_apply (settings);
 
-      /* Apply all changes */
-      g_settings_apply (settings);
+  /* Save the source XML if there is one */
+  filename = get_save_path (panel, settings);
+  if (create_save_dir ())
+    cc_background_xml_save (get_current_background (panel, settings), filename);
+}
 
-      /* Save the source XML if there is one */
-      filename = get_save_path (panel, settings);
-      if (create_save_dir ())
-        cc_background_xml_save (get_current_background (panel, settings), filename);
-    }
+
+static void
+on_chooser_background_chosen_cb (CcBackgroundChooser        *chooser,
+                                 CcBackgroundItem           *item,
+                                 CcBackgroundSelectionFlags  flags,
+                                 CcBackgroundPanel          *self)
+{
+
+  if (flags & CC_BACKGROUND_SELECTION_DESKTOP)
+    set_background (self, self->settings, item);
+
+  if (flags & CC_BACKGROUND_SELECTION_LOCK_SCREEN)
+    set_background (self, self->lock_settings, item);
 }
 
 static void
-on_chooser_dialog_response (GtkDialog         *dialog,
-                            int                response_id,
-                            CcBackgroundPanel *panel)
+on_add_picture_button_clicked_cb (GtkWidget         *button,
+                                  CcBackgroundPanel *self)
 {
-  if (response_id == GTK_RESPONSE_OK)
-    {
-      g_autoptr(CcBackgroundItem) item = NULL;
+  cc_background_chooser_select_file (self->background_chooser);
+}
 
-      item = cc_background_chooser_dialog_get_item (CC_BACKGROUND_CHOOSER_DIALOG (dialog));
-      if (item != NULL)
-          set_background (panel, g_object_get_data (G_OBJECT (dialog), "settings"), item);
-    }
-
-  gtk_widget_destroy (GTK_WIDGET (dialog));
+static const char *
+cc_background_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/look-background";
 }
 
 static void
-launch_chooser (CcBackgroundPanel *panel,
-                GSettings         *settings)
+cc_background_panel_constructed (GObject *object)
 {
-  GtkWidget *dialog;
+  CcBackgroundPanel *self;
+  CcShell *shell;
 
-  dialog = cc_background_chooser_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (WID ("background-panel"))));
-  g_object_set_data (G_OBJECT (dialog), "settings", settings);
-  gtk_widget_show (dialog);
-  g_signal_connect (dialog, "response", G_CALLBACK (on_chooser_dialog_response), panel);
-  panel->chooser = dialog;
-  g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer *) &panel->chooser);
+  self = CC_BACKGROUND_PANEL (object);
+  shell = cc_panel_get_shell (CC_PANEL (self));
+
+  cc_shell_embed_widget_in_header (shell, self->add_picture_button, GTK_POS_RIGHT);
+
+  G_OBJECT_CLASS (cc_background_panel_parent_class)->constructed (object);
 }
 
 static void
-on_background_button_clicked (GtkButton         *button,
-                              CcBackgroundPanel *panel)
+cc_background_panel_dispose (GObject *object)
 {
-  launch_chooser (panel, panel->settings);
+  CcBackgroundPanel *panel = CC_BACKGROUND_PANEL (object);
+
+  /* cancel any copy operation */
+  g_cancellable_cancel (panel->copy_cancellable);
+
+  g_clear_object (&panel->settings);
+  g_clear_object (&panel->lock_settings);
+  g_clear_object (&panel->copy_cancellable);
+  g_clear_object (&panel->thumb_factory);
+
+  g_clear_pointer (&panel->chooser, gtk_widget_destroy);
+
+  G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
 }
 
 static void
-on_lock_button_clicked (GtkButton         *button,
-                        CcBackgroundPanel *panel)
+cc_background_panel_finalize (GObject *object)
 {
-  launch_chooser (panel, panel->lock_settings);
+  CcBackgroundPanel *panel = CC_BACKGROUND_PANEL (object);
+
+  g_clear_object (&panel->current_background);
+  g_clear_object (&panel->current_lock_background);
+
+  G_OBJECT_CLASS (cc_background_panel_parent_class)->finalize (object);
+}
+
+static void
+cc_background_panel_class_init (CcBackgroundPanelClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  g_type_ensure (CC_TYPE_BACKGROUND_CHOOSER);
+  g_type_ensure (CC_TYPE_BACKGROUND_PREVIEW);
+
+  panel_class->get_help_uri = cc_background_panel_get_help_uri;
+
+  object_class->constructed = cc_background_panel_constructed;
+  object_class->dispose = cc_background_panel_dispose;
+  object_class->finalize = cc_background_panel_finalize;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/background/cc-background-panel.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, add_picture_button);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, background_chooser);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, desktop_preview);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, lock_screen_preview);
+
+  gtk_widget_class_bind_template_callback (widget_class, on_chooser_background_chosen_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_add_picture_button_clicked_cb);
 }
 
 static void
@@ -577,45 +349,20 @@ on_settings_changed (GSettings         *settings,
 static void
 cc_background_panel_init (CcBackgroundPanel *panel)
 {
-  gchar *objects[] = {"background-panel", NULL };
-  g_autoptr(GError) err = NULL;
-  GtkWidget *widget;
-
-  panel->connection = g_application_get_dbus_connection (g_application_get_default ());
   g_resources_register (cc_background_get_resource ());
 
-  panel->builder = gtk_builder_new ();
-  gtk_builder_add_objects_from_resource (panel->builder,
-                                         "/org/gnome/control-center/background/background.ui",
-                                         objects, &err);
+  gtk_widget_init_template (GTK_WIDGET (panel));
 
-  if (err)
-    {
-      g_warning ("Could not load ui: %s", err->message);
-      return;
-    }
+  panel->connection = g_application_get_dbus_connection (g_application_get_default ());
+
+  panel->copy_cancellable = g_cancellable_new ();
+  panel->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
   panel->settings = g_settings_new (WP_PATH_ID);
   g_settings_delay (panel->settings);
 
   panel->lock_settings = g_settings_new (WP_LOCK_PATH_ID);
   g_settings_delay (panel->lock_settings);
-
-  /* add the top level widget */
-  widget = WID ("background-panel");
-
-  gtk_container_add (GTK_CONTAINER (panel), widget);
-  gtk_widget_show (GTK_WIDGET (panel));
-
-  /* setup preview area */
-  widget = WID ("background-desktop-drawingarea");
-  g_signal_connect (widget, "draw", G_CALLBACK (on_preview_draw), panel);
-  widget = WID ("background-lock-drawingarea");
-  g_signal_connect (widget, "draw", G_CALLBACK (on_lock_preview_draw), panel);
-
-  panel->copy_cancellable = g_cancellable_new ();
-
-  panel->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
   /* Load the backgrounds */
   reload_current_bg (panel, panel->settings);
@@ -626,10 +373,4 @@ cc_background_panel_init (CcBackgroundPanel *panel)
   /* Background settings */
   g_signal_connect (panel->settings, "changed", G_CALLBACK (on_settings_changed), panel);
   g_signal_connect (panel->lock_settings, "changed", G_CALLBACK (on_settings_changed), panel);
-
-  /* Background buttons */
-  widget = WID ("background-set-button");
-  g_signal_connect (widget, "clicked", G_CALLBACK (on_background_button_clicked), panel);
-  widget = WID ("background-lock-set-button");
-  g_signal_connect (widget, "clicked", G_CALLBACK (on_lock_button_clicked), panel);
 }

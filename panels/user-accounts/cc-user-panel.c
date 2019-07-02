@@ -367,7 +367,7 @@ add_user (CcUserPanel *self)
 
         user = cc_add_user_dialog_get_user (dialog);
         if (user != NULL) {
-                generate_user_avatar (user);
+                set_default_avatar (user);
                 reload_users (self, user);
         }
 
@@ -1384,7 +1384,7 @@ cc_user_panel_constructed (GObject *object)
         G_OBJECT_CLASS (cc_user_panel_parent_class)->constructed (object);
 
         shell = cc_panel_get_shell (CC_PANEL (self));
-        cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->headerbar_button_stack));
+        cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->headerbar_button_stack), GTK_POS_RIGHT);
 
         gtk_lock_button_set_permission (self->lock_button, self->permission);
 }

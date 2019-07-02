@@ -25,13 +25,13 @@ sources = files(
   'cc-display-config-manager-dbus.c',
   'cc-display-config-manager.c',
   'cc-display-settings.c',
-  'cc-night-light-dialog.c',
+  'cc-night-light-page.c',
 )
 
 resource_data = files(
   'cc-display-panel.ui',
   'cc-display-settings.ui',
-  'cc-night-light-dialog.ui',
+  'cc-night-light-page.ui',
 )
 
 sources += gnome.compile_resources(

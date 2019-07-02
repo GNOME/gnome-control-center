@@ -94,8 +94,9 @@ cc_test_window_set_active_panel_from_id (CcShell      *shell,
 }
 
 static void
-cc_test_window_embed_widget_in_header (CcShell   *shell,
-                                       GtkWidget *widget)
+cc_test_window_embed_widget_in_header (CcShell         *shell,
+                                       GtkWidget       *widget,
+                                       GtkPositionType  position)
 {
   CcTestWindow *self = CC_TEST_WINDOW (shell);
 

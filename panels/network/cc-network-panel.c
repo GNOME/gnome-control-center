@@ -472,6 +472,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         /* map the NMDeviceType to the GType, or ignore */
         switch (type) {
         case NM_DEVICE_TYPE_ETHERNET:
+        case NM_DEVICE_TYPE_INFINIBAND:
                 device_g_type = NET_TYPE_DEVICE_ETHERNET;
                 break;
         case NM_DEVICE_TYPE_MODEM:

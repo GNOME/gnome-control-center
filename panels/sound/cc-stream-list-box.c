@@ -22,6 +22,7 @@
 
 #include "cc-stream-list-box.h"
 #include "cc-stream-row.h"
+#include "cc-sound-enums.h"
 
 struct _CcStreamListBox
 {
@@ -29,6 +30,7 @@ struct _CcStreamListBox
 
   GtkSizeGroup    *label_size_group;
   GvcMixerControl *mixer_control;
+  CcStreamType     stream_type;
   guint            stream_added_handler_id;
   guint            stream_removed_handler_id;
 };
@@ -97,7 +99,7 @@ stream_added_cb (CcStreamListBox *self,
       return;
     }
 
-  row = cc_stream_row_new (self->label_size_group, stream, id);
+  row = cc_stream_row_new (self->label_size_group, stream, id, self->stream_type);
   gtk_widget_show (GTK_WIDGET (row));
   gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), FALSE);
   gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (row));
@@ -229,4 +231,12 @@ cc_stream_list_box_set_mixer_control (CcStreamListBox *self,
                                                              "stream-removed",
                                                              G_CALLBACK (stream_removed_cb),
                                                              self, G_CONNECT_SWAPPED);
+}
+
+void cc_stream_list_box_set_stream_type   (CcStreamListBox *self,
+                                           CcStreamType     stream_type)
+{
+  g_return_if_fail (CC_IS_STREAM_LIST_BOX (self));
+
+  self->stream_type = stream_type;
 }
