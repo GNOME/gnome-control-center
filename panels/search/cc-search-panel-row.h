@@ -33,9 +33,12 @@ struct _CcSearchPanelRow
 
   GAppInfo      *app_info;
 
+  GtkEventBox   *drag_handle;
   GtkImage      *icon;
   GtkLabel      *app_name;
   GtkSwitch     *switcher;
+
+  GtkListBox    *drag_widget;
 };
 
 
