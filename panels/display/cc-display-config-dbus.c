@@ -1055,6 +1055,9 @@ cc_display_config_dbus_equal (CcDisplayConfig *pself,
   CcDisplayConfigDBus *other = CC_DISPLAY_CONFIG_DBUS (pother);
   GList *l;
 
+  g_return_val_if_fail (pself, FALSE);
+  g_return_val_if_fail (pother, FALSE);
+
   cc_display_config_dbus_ensure_non_offset_coords (self);
   cc_display_config_dbus_ensure_non_offset_coords (other);
 
