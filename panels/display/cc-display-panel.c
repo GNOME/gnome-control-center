@@ -721,6 +721,12 @@ rebuild_ui (CcDisplayPanel *panel)
   g_list_store_remove_all (panel->primary_display_list);
   gtk_list_store_clear (panel->output_selection_list);
 
+  if (!panel->current_config)
+    {
+      panel->rebuilding_counter--;
+      return;
+    }
+
   n_active_outputs = 0;
   n_usable_outputs = 0;
   outputs = cc_display_config_get_ui_sorted_monitors (panel->current_config);
@@ -961,6 +967,12 @@ update_apply_button (CcDisplayPanel *panel)
 {
   gboolean config_equal;
   g_autoptr(CcDisplayConfig) applied_config = NULL;
+
+  if (!panel->current_config)
+    {
+      reset_titlebar (panel);
+      return;
+    }
 
   applied_config = cc_display_config_manager_get_current (panel->manager);
 
