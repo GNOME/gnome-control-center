@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-06-17 13:26+0000\n"
-"PO-Revision-Date: 2019-06-21 17:41+0700\n"
+"POT-Creation-Date: 2019-07-06 16:29+0000\n"
+"PO-Revision-Date: 2019-07-08 15:37+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -361,8 +361,8 @@ msgstr "Pilih gambar"
 #: panels/user-accounts/cc-avatar-chooser.c:107
 #: panels/user-accounts/cc-avatar-chooser.c:235
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:640
-#: panels/user-accounts/cc-user-panel.c:658
+#: panels/user-accounts/cc-user-panel.c:641
+#: panels/user-accounts/cc-user-panel.c:659
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/user-accounts/um-fingerprint-dialog.c:261
 msgid "_Cancel"
@@ -1128,7 +1128,7 @@ msgid "Other…"
 msgstr "Lainnya…"
 
 #: panels/common/cc-language-chooser.c:125
-#: panels/region/cc-format-chooser.c:268 panels/region/cc-input-chooser.c:178
+#: panels/region/cc-format-chooser.c:296 panels/region/cc-input-chooser.c:178
 msgid "More…"
 msgstr "Lebih banyak…"
 
@@ -2406,11 +2406,37 @@ msgstr "halaman 2"
 msgid "Security"
 msgstr "Keamanan"
 
-#: panels/network/connection-editor/ce-page.c:481
+#: panels/network/connection-editor/ce-page.c:396
+msgid "Preserve"
+msgstr "Pertahankan"
+
+#: panels/network/connection-editor/ce-page.c:397
+msgid "Permanent"
+msgstr "Permanen"
+
+#: panels/network/connection-editor/ce-page.c:398
+msgid "Random"
+msgstr "Acak"
+
+#: panels/network/connection-editor/ce-page.c:399
+msgid "Stable"
+msgstr "Stabil"
+
+#: panels/network/connection-editor/ce-page.c:403
+msgid ""
+"The MAC address entered here will be used as hardware address for the "
+"network device this connection is activated on. This feature is known as MAC "
+"cloning or spoofing. Example: 00:11:22:33:44:55"
+msgstr ""
+"Alamat MAC yang dimasukkan di sini akan digunakan sebagai alamat perangkat "
+"keras untuk perangkat jaringan tempat koneksi ini diaktifkan. Fitur ini "
+"dikenal sebagai MAC cloning atau spoofing. Contoh: 00: 11: 22: 33: 44: 55"
+
+#: panels/network/connection-editor/ce-page.c:538
 msgid "automatic"
 msgstr "otomatis"
 
-#: panels/network/connection-editor/ce-page.c:521
+#: panels/network/connection-editor/ce-page.c:578
 #, c-format
 msgid "Profile %d"
 msgstr "Profil %d"
@@ -2514,9 +2540,9 @@ msgstr "Hapus VPN"
 msgid "Details"
 msgstr "Rincian"
 
-#: panels/network/connection-editor/ce-page-ethernet.c:174
+#: panels/network/connection-editor/ce-page-ethernet.c:177
 #: panels/network/connection-editor/ce-page-vpn.c:188
-#: panels/network/connection-editor/ce-page-wifi.c:194
+#: panels/network/connection-editor/ce-page-wifi.c:196
 #: panels/network/network-wifi.ui:1437
 msgid "Identity"
 msgstr "Identitas"
@@ -2691,16 +2717,16 @@ msgstr "_Nama"
 msgid "_MAC Address"
 msgstr "Alamat _MAC"
 
-#: panels/network/connection-editor/ethernet-page.ui:146
+#: panels/network/connection-editor/ethernet-page.ui:151
 msgid "M_TU"
 msgstr "M_TU"
 
-#: panels/network/connection-editor/ethernet-page.ui:163
-#: panels/network/connection-editor/wifi-page.ui:97
+#: panels/network/connection-editor/ethernet-page.ui:168
+#: panels/network/connection-editor/wifi-page.ui:102
 msgid "_Cloned Address"
 msgstr "Alamat yang di_klon"
 
-#: panels/network/connection-editor/ethernet-page.ui:178
+#: panels/network/connection-editor/ethernet-page.ui:183
 msgid "bytes"
 msgstr "byte"
 
@@ -5542,17 +5568,17 @@ msgstr ""
 "layar;kunci;diagnostik;crash;privat;terkini;temporer;tmp;indeks;nama;"
 "jaringan;identitas;"
 
-#: panels/region/cc-format-chooser.c:114
+#: panels/region/cc-format-chooser.c:133
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Kerajaan"
 
-#: panels/region/cc-format-chooser.c:116
+#: panels/region/cc-format-chooser.c:135
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrik"
 
-#: panels/region/cc-format-chooser.c:286
+#: panels/region/cc-format-chooser.c:314
 msgid "No regions found"
 msgstr "Wilayah tak ditemukan"
 
@@ -5601,7 +5627,7 @@ msgstr "Tambah Sumber Masukan"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Metoda masukan tak dapat dipakai pada layar log masuk"
 
-#: panels/region/cc-region-panel.c:1504
+#: panels/region/cc-region-panel.c:1511
 msgid "Login _Screen"
 msgstr "Layar Log Ma_suk"
 
@@ -6909,7 +6935,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:770
+#: panels/user-accounts/cc-user-panel.c:771
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6917,7 +6943,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:774
+#: panels/user-accounts/cc-user-panel.c:775
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7001,30 +7027,30 @@ msgstr "Kata sandi salah, harap coba lagi"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Tak bisa menyambung ke domain %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:213
+#: panels/user-accounts/cc-user-panel.c:214
 msgid "Your account"
 msgstr "Akun Anda"
 
-#: panels/user-accounts/cc-user-panel.c:388
+#: panels/user-accounts/cc-user-panel.c:389
 msgid "Failed to delete user"
 msgstr "Gagal menghapus pengguna"
 
-#: panels/user-accounts/cc-user-panel.c:446
-#: panels/user-accounts/cc-user-panel.c:505
-#: panels/user-accounts/cc-user-panel.c:557
+#: panels/user-accounts/cc-user-panel.c:447
+#: panels/user-accounts/cc-user-panel.c:506
+#: panels/user-accounts/cc-user-panel.c:558
 msgid "Failed to revoke remotely managed user"
 msgstr "Gagal mencabut pengguna yang dikelola jarak jauh"
 
-#: panels/user-accounts/cc-user-panel.c:609
+#: panels/user-accounts/cc-user-panel.c:610
 msgid "You cannot delete your own account."
 msgstr "Anda tak bisa menghapus akunmu sendiri."
 
-#: panels/user-accounts/cc-user-panel.c:618
+#: panels/user-accounts/cc-user-panel.c:619
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s masih log masuk"
 
-#: panels/user-accounts/cc-user-panel.c:622
+#: panels/user-accounts/cc-user-panel.c:623
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7032,12 +7058,12 @@ msgstr ""
 "Menghapus pengguna saat mereka log masuk dapat menjerumuskan sistem ke dalam "
 "keadaan tak konsisten."
 
-#: panels/user-accounts/cc-user-panel.c:631
+#: panels/user-accounts/cc-user-panel.c:632
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Apakah Anda ingin mempertahankan berkas milik %s?"
 
-#: panels/user-accounts/cc-user-panel.c:635
+#: panels/user-accounts/cc-user-panel.c:636
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7045,47 +7071,47 @@ msgstr ""
 "Dimungkinkan untuk mempertahankan direktori rumah, spool surel, dan berkas "
 "temporer ketika menghapus suatu akun pengguna."
 
-#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:639
 msgid "_Delete Files"
 msgstr "_Hapus Berkas"
 
-#: panels/user-accounts/cc-user-panel.c:639
+#: panels/user-accounts/cc-user-panel.c:640
 msgid "_Keep Files"
 msgstr "Biarkan Berkas"
 
-#: panels/user-accounts/cc-user-panel.c:653
+#: panels/user-accounts/cc-user-panel.c:654
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Anda yakin ingin mencabut akun %s yang dikelola jarak jauh?"
 
-#: panels/user-accounts/cc-user-panel.c:657
+#: panels/user-accounts/cc-user-panel.c:658
 msgid "_Delete"
 msgstr "_Hapus"
 
-#: panels/user-accounts/cc-user-panel.c:707
+#: panels/user-accounts/cc-user-panel.c:708
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Akun dimatikan"
 
-#: panels/user-accounts/cc-user-panel.c:715
+#: panels/user-accounts/cc-user-panel.c:716
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Untuk ditata saat log masuk berikutnya"
 
-#: panels/user-accounts/cc-user-panel.c:718
+#: panels/user-accounts/cc-user-panel.c:719
 msgctxt "Password mode"
 msgid "None"
 msgstr "Tak ada"
 
-#: panels/user-accounts/cc-user-panel.c:763
+#: panels/user-accounts/cc-user-panel.c:764
 msgid "Logged in"
 msgstr "Log masuk"
 
-#: panels/user-accounts/cc-user-panel.c:1093
+#: panels/user-accounts/cc-user-panel.c:1098
 msgid "Failed to contact the accounts service"
 msgstr "Gagal menghubungi layanan akun"
 
-#: panels/user-accounts/cc-user-panel.c:1095
+#: panels/user-accounts/cc-user-panel.c:1100
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Pastikan bahwa AccountService ini telah terpasang dan diaktifkan."
 
@@ -7093,7 +7119,7 @@ msgstr "Pastikan bahwa AccountService ini telah terpasang dan diaktifkan."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1127
+#: panels/user-accounts/cc-user-panel.c:1132
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7101,12 +7127,12 @@ msgstr ""
 "Untuk melakukan perubahan,\n"
 "pertama kali klik ikon *"
 
-#: panels/user-accounts/cc-user-panel.c:1200
+#: panels/user-accounts/cc-user-panel.c:1205
 msgid "Create a user account"
 msgstr "Buat akun pengguna"
 
-#: panels/user-accounts/cc-user-panel.c:1211
-#: panels/user-accounts/cc-user-panel.c:1339
+#: panels/user-accounts/cc-user-panel.c:1216
+#: panels/user-accounts/cc-user-panel.c:1344
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7114,12 +7140,12 @@ msgstr ""
 "Untuk membuat akun pengguna,\n"
 "pertama kali klik ikon *"
 
-#: panels/user-accounts/cc-user-panel.c:1220
+#: panels/user-accounts/cc-user-panel.c:1225
 msgid "Delete the selected user account"
 msgstr "Hapus akun pengguna yang dipilih"
 
-#: panels/user-accounts/cc-user-panel.c:1232
-#: panels/user-accounts/cc-user-panel.c:1343
+#: panels/user-accounts/cc-user-panel.c:1237
+#: panels/user-accounts/cc-user-panel.c:1348
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8072,9 +8098,6 @@ msgstr "Suara Sistem"
 
 #~ msgid "hardware"
 #~ msgstr "perangkat keras"
-
-#~ msgid "reset"
-#~ msgstr "reset"
 
 #~ msgid "Switch to previous source"
 #~ msgstr "Bertukar ke sumber sebelumnya"
