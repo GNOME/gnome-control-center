@@ -98,6 +98,7 @@ drag_begin_cb (CcSearchPanelRow *self,
 
   self->drag_widget = GTK_LIST_BOX (gtk_list_box_new ());
   gtk_widget_show (GTK_WIDGET (self->drag_widget));
+  gtk_widget_hide (GTK_WIDGET (self));
   gtk_widget_set_size_request (GTK_WIDGET (self->drag_widget), alloc.width, alloc.height);
 
   drag_row = cc_search_panel_row_new (self->app_info);
@@ -111,6 +112,8 @@ drag_begin_cb (CcSearchPanelRow *self,
 static void
 drag_end_cb (CcSearchPanelRow *self)
 {
+  gtk_widget_show (GTK_WIDGET (self));
+
   g_clear_pointer ((GtkWidget **) &self->drag_widget, gtk_widget_destroy);
 }
 
