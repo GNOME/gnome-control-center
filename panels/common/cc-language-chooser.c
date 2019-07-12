@@ -37,7 +37,7 @@
 #include <libgnome-desktop/gnome-languages.h>
 
 struct _CcLanguageChooser {
-        GtkDialog parent_instance;
+        HdyDialog parent_instance;
 
         GtkWidget *select_button;
         GtkWidget *no_results;
@@ -50,7 +50,7 @@ struct _CcLanguageChooser {
         gchar **filter_words;
 };
 
-G_DEFINE_TYPE (CcLanguageChooser, cc_language_chooser, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (CcLanguageChooser, cc_language_chooser, HDY_TYPE_DIALOG)
 
 static GtkWidget *
 language_widget_new (const gchar *locale_id,
@@ -87,6 +87,7 @@ language_widget_new (const gchar *locale_id,
         language_label = gtk_label_new (language);
         gtk_widget_show (language_label);
         gtk_label_set_xalign (GTK_LABEL (language_label), 0.0);
+        gtk_label_set_ellipsize (GTK_LABEL (language_label), PANGO_ELLIPSIZE_END);
         gtk_box_pack_start (GTK_BOX (box), language_label, FALSE, TRUE, 0);
 
         check = gtk_image_new ();
@@ -98,6 +99,7 @@ language_widget_new (const gchar *locale_id,
         country_label = gtk_label_new (country);
         gtk_widget_show (country_label);
         gtk_label_set_xalign (GTK_LABEL (country_label), 1.0);
+        gtk_label_set_ellipsize (GTK_LABEL (country_label), PANGO_ELLIPSIZE_END);
         gtk_style_context_add_class (gtk_widget_get_style_context (country_label), "dim-label");
         gtk_box_pack_start (GTK_BOX (box), country_label, TRUE, TRUE, 0);
 
