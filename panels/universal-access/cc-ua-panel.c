@@ -203,6 +203,7 @@ cc_ua_panel_dispose (GObject *object)
 {
   CcUaPanel *self = CC_UA_PANEL (object);
 
+  g_clear_pointer (&self->zoom_options, gtk_widget_destroy);
   g_slist_free_full (self->toplevels, (GDestroyNotify)gtk_widget_destroy);
   self->toplevels = NULL;
 
@@ -214,8 +215,6 @@ cc_ua_panel_dispose (GObject *object)
   g_clear_object (&self->kb_desktop_settings);
   g_clear_object (&self->application_settings);
   g_clear_object (&self->gsd_mouse_settings);
-
-  g_clear_object (&self->zoom_options);
 
   g_clear_pointer (&self->sections, g_list_free);
   g_clear_pointer (&self->sections_reverse, g_list_free);
