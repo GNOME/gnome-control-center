@@ -62,16 +62,23 @@ language_widget_new (const gchar *locale_id,
         g_autofree gchar *country = NULL;
         g_autofree gchar *language_local = NULL;
         g_autofree gchar *country_local = NULL;
+        g_autofree gchar *modifier = NULL;
         GtkWidget *row;
         GtkWidget *box;
         GtkWidget *language_label;
         GtkWidget *check;
         GtkWidget *country_label;
 
-        gnome_parse_locale (locale_id, &language_code, &country_code, NULL, NULL);
-        language = gnome_get_language_from_code (language_code, locale_id);
+        gnome_parse_locale (locale_id, &language_code, &country_code, NULL, &modifier);
+        language = g_strdup_printf ("%s%s%s",
+            gnome_get_language_from_code (language_code, locale_id),
+            modifier ? " - " : "",
+            modifier ? gnome_get_translated_modifier (modifier, locale_id) : "");
         country = gnome_get_country_from_code (country_code, locale_id);
-        language_local = gnome_get_language_from_code (language_code, NULL);
+        language_local = g_strdup_printf ("%s%s%s",
+            gnome_get_language_from_code (language_code, NULL),
+            modifier ? " - " : "",
+            modifier ? gnome_get_translated_modifier (modifier, NULL) : "");
         country_local = gnome_get_country_from_code (country_code, NULL);
 
         row = gtk_list_box_row_new ();
