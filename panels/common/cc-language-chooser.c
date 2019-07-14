@@ -72,12 +72,12 @@ language_widget_new (const gchar *locale_id,
         gnome_parse_locale (locale_id, &language_code, &country_code, NULL, &modifier);
         language = g_strdup_printf ("%s%s%s",
             gnome_get_language_from_code (language_code, locale_id),
-            modifier ? " - " : "",
+            modifier ? " — " : "",
             modifier ? gnome_get_translated_modifier (modifier, locale_id) : "");
         country = gnome_get_country_from_code (country_code, locale_id);
         language_local = g_strdup_printf ("%s%s%s",
             gnome_get_language_from_code (language_code, NULL),
-            modifier ? " - " : "",
+            modifier ? " — " : "",
             modifier ? gnome_get_translated_modifier (modifier, NULL) : "");
         country_local = gnome_get_country_from_code (country_code, NULL);
 
