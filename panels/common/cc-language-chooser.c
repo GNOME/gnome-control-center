@@ -57,18 +57,16 @@ get_language_label (const gchar *language_code,
                     const gchar *modifier,
                     const gchar *locale_id)
 {
-        gchar             *retval;
-        g_autofree gchar  *language = NULL;
-        g_autofree gchar  *t_mod = NULL;
+        g_autofree gchar *language = NULL;
 
         language = gnome_get_language_from_code (language_code, locale_id);
-        if (modifier == NULL) {
-                retval = g_strdup (language);
-        } else {
-                t_mod = gnome_get_translated_modifier (modifier, locale_id);
-                retval = g_strdup_printf ("%s%s%s", language, " — ", t_mod);
+
+        if (modifier == NULL)
+                return g_steal_pointer (&language);
+        else {
+                g_autofree gchar *t_mod = gnome_get_translated_modifier (modifier, locale_id);
+                return g_strdup_printf ("%s — %s", language, t_mod);
         }
-        return retval;
 }
 
 static GtkWidget *
