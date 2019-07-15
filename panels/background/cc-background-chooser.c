@@ -18,6 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#undef G_LOG_DOMAIN
 #define G_LOG_DOMAIN "cc-background-chooser"
 
 #include <glib/gi18n.h>
