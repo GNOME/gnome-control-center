@@ -52,6 +52,25 @@ struct _CcLanguageChooser {
 
 G_DEFINE_TYPE (CcLanguageChooser, cc_language_chooser, GTK_TYPE_DIALOG)
 
+static gchar *
+get_language_label (const gchar *language_code,
+                    const gchar *modifier,
+                    const gchar *locale_id)
+{
+        gchar             *retval;
+        g_autofree gchar  *language = NULL;
+        g_autofree gchar  *t_mod = NULL;
+
+        language = gnome_get_language_from_code (language_code, locale_id);
+        if (modifier == NULL) {
+                retval = g_strdup (language);
+        } else {
+                t_mod = gnome_get_translated_modifier (modifier, locale_id);
+                retval = g_strdup_printf ("%s%s%s", language, " — ", t_mod);
+        }
+        return retval;
+}
+
 static GtkWidget *
 language_widget_new (const gchar *locale_id,
                      gboolean     is_extra)
@@ -70,15 +89,9 @@ language_widget_new (const gchar *locale_id,
         GtkWidget *country_label;
 
         gnome_parse_locale (locale_id, &language_code, &country_code, NULL, &modifier);
-        language = g_strdup_printf ("%s%s%s",
-            gnome_get_language_from_code (language_code, locale_id),
-            modifier ? " — " : "",
-            modifier ? gnome_get_translated_modifier (modifier, locale_id) : "");
+        language = get_language_label (language_code, modifier, locale_id);
         country = gnome_get_country_from_code (country_code, locale_id);
-        language_local = g_strdup_printf ("%s%s%s",
-            gnome_get_language_from_code (language_code, NULL),
-            modifier ? " — " : "",
-            modifier ? gnome_get_translated_modifier (modifier, NULL) : "");
+        language_local = get_language_label (language_code, modifier, NULL);
         country_local = gnome_get_country_from_code (country_code, NULL);
 
         row = gtk_list_box_row_new ();
