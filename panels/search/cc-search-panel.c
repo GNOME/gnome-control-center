@@ -35,6 +35,7 @@ struct _CcSearchPanel
   GtkWidget  *search_vbox;
   GtkWidget  *search_frame;
   GtkWidget  *settings_button;
+  CcSearchPanelRow  *selected_row;
 
   GCancellable *load_cancellable;
   GSettings  *search_settings;
@@ -169,7 +170,7 @@ search_panel_move_selected (CcSearchPanel *self,
   g_autoptr(GList) children = NULL;
   GList *l, *other;
 
-  row = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->list_box));
+  row = GTK_LIST_BOX_ROW (self->selected_row);
   app_info = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (row));
   app_id = g_app_info_get_id (app_info);
 
@@ -272,7 +273,7 @@ row_moved_cb (CcSearchPanel    *self,
   gint dest_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (dest_row));
   gboolean down;
 
-  gtk_list_box_select_row (GTK_LIST_BOX (self->list_box), GTK_LIST_BOX_ROW (row));
+  self->selected_row = row;
 
   down = (source_idx - dest_idx) < 0;
   for (int i = 0; i < ABS (source_idx - dest_idx); i++)
