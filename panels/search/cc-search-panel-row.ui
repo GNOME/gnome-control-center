@@ -4,6 +4,7 @@
   <template class="CcSearchPanelRow" parent="GtkListBoxRow">
     <property name="visible">True</property>
     <property name="can-focus">True</property>
+    <property name="selectable">False</property>
     <signal name="drag_data_received" handler="drag_data_received_cb" object="CcSearchPanelRow" swapped="yes"/>
     <child>
       <object class="GtkEventBox" id="drag_handle">
