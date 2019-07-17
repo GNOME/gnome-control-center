@@ -20,11 +20,13 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#define HANDY_USE_UNSTABLE_API 1
+#include <handy.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_APP_NOTIFICATIONS_DIALOG (cc_app_notifications_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcAppNotificationsDialog, cc_app_notifications_dialog, CC, APP_NOTIFICATIONS_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (CcAppNotificationsDialog, cc_app_notifications_dialog, CC, APP_NOTIFICATIONS_DIALOG, HdyDialog)
 
 CcAppNotificationsDialog *cc_app_notifications_dialog_new (const gchar          *app_id,
                                                            const gchar          *title,
