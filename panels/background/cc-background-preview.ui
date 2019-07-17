@@ -4,9 +4,8 @@
   <template class="CcBackgroundPreview" parent="GtkBox">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="expand">False</property>
-    <property name="width-request">384</property>
-    <property name="height-request">208</property>
+    <property name="hexpand">True</property>
+    <property name="vexpand">False</property>
     <style>
       <class name="frame" />
     </style>
@@ -15,6 +14,7 @@
       <object class="GtkOverlay">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
+        <property name="hexpand">True</property>
 
         <!-- Wallpaper -->
         <child>
