@@ -247,6 +247,53 @@ cc_background_preview_set_property (GObject      *object,
     }
 }
 
+static GtkSizeRequestMode
+cc_background_preview_get_request_mode (GtkWidget *widget)
+{
+  return GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH;
+}
+
+static gfloat
+get_primary_monitor_aspect_ratio (void)
+{
+  GdkDisplay *display = gdk_display_get_default ();
+  GdkMonitor *primary_monitor = gdk_display_get_primary_monitor (display);
+  gfloat aspect_ratio;
+
+  if (primary_monitor)
+    {
+      GdkRectangle monitor_layout;
+      gdk_monitor_get_geometry (primary_monitor, &monitor_layout);
+      aspect_ratio = monitor_layout.width / (gfloat) monitor_layout.height;
+    }
+  else
+    aspect_ratio = 16.0 / 9.0;
+
+  return aspect_ratio;
+}
+
+static void
+cc_background_preview_get_preferred_height_for_width (GtkWidget *widget,
+                                                      gint       width,
+                                                      gint      *minimum,
+                                                      gint      *natural)
+{
+  gfloat aspect_ratio = get_primary_monitor_aspect_ratio ();
+
+  *minimum = *natural = MAX (2, width / aspect_ratio);
+}
+
+static void
+cc_background_preview_get_preferred_width_for_height (GtkWidget *widget,
+                                                      gint       height,
+                                                      gint      *minimum,
+                                                      gint      *natural)
+{
+  gfloat aspect_ratio = get_primary_monitor_aspect_ratio ();
+
+  *minimum = *natural = MAX (2, height * aspect_ratio);
+}
+
 static void
 cc_background_preview_class_init (CcBackgroundPreviewClass *klass)
 {
@@ -256,6 +303,10 @@ cc_background_preview_class_init (CcBackgroundPreviewClass *klass)
   object_class->finalize = cc_background_preview_finalize;
   object_class->get_property = cc_background_preview_get_property;
   object_class->set_property = cc_background_preview_set_property;
+
+  widget_class->get_request_mode = cc_background_preview_get_request_mode;
+  widget_class->get_preferred_height_for_width = cc_background_preview_get_preferred_height_for_width;
+  widget_class->get_preferred_width_for_height = cc_background_preview_get_preferred_width_for_height;
 
   properties[PROP_IS_LOCK_SCREEN] = g_param_spec_boolean ("is-lock-screen",
                                                           "Lock screen",
