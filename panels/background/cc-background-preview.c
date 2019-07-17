@@ -247,6 +247,32 @@ cc_background_preview_set_property (GObject      *object,
     }
 }
 
+static GtkSizeRequestMode
+cc_background_preview_get_request_mode (GtkWidget *widget)
+{
+  return GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH;
+}
+
+static void
+cc_background_preview_get_preferred_height_for_width (GtkWidget *widget,
+                                                      gint       width,
+                                                      gint      *minimum,
+                                                      gint      *natural)
+{
+  *minimum = MIN (2, (gint)(width / 1.8));
+  *natural = MAX (2, (gint)(width / 1.8));
+}
+
+static void
+cc_background_preview_get_preferred_width_for_height (GtkWidget *widget,
+                                                      gint       height,
+                                                      gint      *minimum,
+                                                      gint      *natural)
+{
+  *minimum = MIN (2, (gint)(height * 1.8));
+  *natural = MAX (2, (gint)(height * 1.8));
+}
+
 static void
 cc_background_preview_class_init (CcBackgroundPreviewClass *klass)
 {
@@ -256,6 +282,10 @@ cc_background_preview_class_init (CcBackgroundPreviewClass *klass)
   object_class->finalize = cc_background_preview_finalize;
   object_class->get_property = cc_background_preview_get_property;
   object_class->set_property = cc_background_preview_set_property;
+
+  widget_class->get_request_mode = cc_background_preview_get_request_mode;
+  widget_class->get_preferred_height_for_width = cc_background_preview_get_preferred_height_for_width;
+  widget_class->get_preferred_width_for_height = cc_background_preview_get_preferred_width_for_height;
 
   properties[PROP_IS_LOCK_SCREEN] = g_param_spec_boolean ("is-lock-screen",
                                                           "Lock screen",
