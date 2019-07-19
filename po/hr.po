@@ -7,9 +7,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 2.0\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-06-17 13:26+0000\n"
-"PO-Revision-Date: 2019-06-22 01:46+0200\n"
-"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"POT-Creation-Date: 2019-07-11 07:07+0000\n"
+"PO-Revision-Date: 2019-07-19 23:31+0200\n"
+"Last-Translator: gogo <linux.hr@protonmail.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
@@ -358,8 +358,8 @@ msgstr "Odaberi sliku"
 #: panels/user-accounts/cc-avatar-chooser.c:107
 #: panels/user-accounts/cc-avatar-chooser.c:235
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:640
-#: panels/user-accounts/cc-user-panel.c:658
+#: panels/user-accounts/cc-user-panel.c:641
+#: panels/user-accounts/cc-user-panel.c:659
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/user-accounts/um-fingerprint-dialog.c:261
 msgid "_Cancel"
@@ -1126,7 +1126,7 @@ msgid "Other…"
 msgstr "Ostalo…"
 
 #: panels/common/cc-language-chooser.c:125
-#: panels/region/cc-format-chooser.c:268 panels/region/cc-input-chooser.c:178
+#: panels/region/cc-format-chooser.c:296 panels/region/cc-input-chooser.c:178
 msgid "More…"
 msgstr "Više…"
 
@@ -2406,11 +2406,37 @@ msgstr "stranica 2"
 msgid "Security"
 msgstr "Sigurnost"
 
-#: panels/network/connection-editor/ce-page.c:481
+#: panels/network/connection-editor/ce-page.c:396
+msgid "Preserve"
+msgstr "Očuvano"
+
+#: panels/network/connection-editor/ce-page.c:397
+msgid "Permanent"
+msgstr "Trajno"
+
+#: panels/network/connection-editor/ce-page.c:398
+msgid "Random"
+msgstr "Naizmjenično"
+
+#: panels/network/connection-editor/ce-page.c:399
+msgid "Stable"
+msgstr "Stabilno"
+
+#: panels/network/connection-editor/ce-page.c:403
+msgid ""
+"The MAC address entered here will be used as hardware address for the "
+"network device this connection is activated on. This feature is known as MAC "
+"cloning or spoofing. Example: 00:11:22:33:44:55"
+msgstr ""
+"MAC adresa koja je ovdje upisana, koristit će se kao hardverska adresa za "
+"mrežni uređaj na kojemu je aktivirano ovo povezivanje. Ova mogućnost je "
+"poznata kao MAC kloniranje ili zavaravanje. Primjer: 00:11:22:33:44:55"
+
+#: panels/network/connection-editor/ce-page.c:538
 msgid "automatic"
 msgstr "automatski"
 
-#: panels/network/connection-editor/ce-page.c:521
+#: panels/network/connection-editor/ce-page.c:578
 #, c-format
 msgid "Profile %d"
 msgstr "Profil %d"
@@ -2515,9 +2541,9 @@ msgstr "Ukloni VPN"
 msgid "Details"
 msgstr "Pojedinosti"
 
-#: panels/network/connection-editor/ce-page-ethernet.c:174
+#: panels/network/connection-editor/ce-page-ethernet.c:177
 #: panels/network/connection-editor/ce-page-vpn.c:188
-#: panels/network/connection-editor/ce-page-wifi.c:194
+#: panels/network/connection-editor/ce-page-wifi.c:196
 #: panels/network/network-wifi.ui:1437
 msgid "Identity"
 msgstr "Identitet"
@@ -2692,16 +2718,16 @@ msgstr "_Naziv"
 msgid "_MAC Address"
 msgstr "_MAC adresa"
 
-#: panels/network/connection-editor/ethernet-page.ui:146
+#: panels/network/connection-editor/ethernet-page.ui:151
 msgid "M_TU"
 msgstr "M_TU"
 
-#: panels/network/connection-editor/ethernet-page.ui:163
-#: panels/network/connection-editor/wifi-page.ui:97
+#: panels/network/connection-editor/ethernet-page.ui:168
+#: panels/network/connection-editor/wifi-page.ui:102
 msgid "_Cloned Address"
 msgstr "_Klonirana adresa"
 
-#: panels/network/connection-editor/ethernet-page.ui:178
+#: panels/network/connection-editor/ethernet-page.ui:183
 msgid "bytes"
 msgstr "bajtova"
 
@@ -5555,17 +5581,17 @@ msgstr ""
 "zaslon;zaključaj;dijagnostika;rušenje;privatno;nedavno;privremeno;tmp;"
 "sadržaj;naziv;mreža;identitet;"
 
-#: panels/region/cc-format-chooser.c:114
+#: panels/region/cc-format-chooser.c:133
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Imperijalne"
 
-#: panels/region/cc-format-chooser.c:116
+#: panels/region/cc-format-chooser.c:135
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrički"
 
-#: panels/region/cc-format-chooser.c:286
+#: panels/region/cc-format-chooser.c:314
 msgid "No regions found"
 msgstr "Nema pronađenih regija"
 
@@ -5614,7 +5640,7 @@ msgstr "Dodaj izvor ulaza"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Način unosa ne može se koristi na zaslonu prijave"
 
-#: panels/region/cc-region-panel.c:1504
+#: panels/region/cc-region-panel.c:1511
 msgid "Login _Screen"
 msgstr "Zaslon _prijave"
 
@@ -6918,7 +6944,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:770
+#: panels/user-accounts/cc-user-panel.c:771
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6926,7 +6952,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:774
+#: panels/user-accounts/cc-user-panel.c:775
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7010,30 +7036,30 @@ msgstr "Neispravna lozinka, pokušajte ponovno"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Nemoguće povezivanje s %s domenom: %s"
 
-#: panels/user-accounts/cc-user-panel.c:213
+#: panels/user-accounts/cc-user-panel.c:214
 msgid "Your account"
 msgstr "Vaš račun"
 
-#: panels/user-accounts/cc-user-panel.c:388
+#: panels/user-accounts/cc-user-panel.c:389
 msgid "Failed to delete user"
 msgstr "Neuspjelo brisanje korisnika"
 
-#: panels/user-accounts/cc-user-panel.c:446
-#: panels/user-accounts/cc-user-panel.c:505
-#: panels/user-accounts/cc-user-panel.c:557
+#: panels/user-accounts/cc-user-panel.c:447
+#: panels/user-accounts/cc-user-panel.c:506
+#: panels/user-accounts/cc-user-panel.c:558
 msgid "Failed to revoke remotely managed user"
 msgstr "Nemoguće je opozvati udaljeno upravljanog korisnika"
 
-#: panels/user-accounts/cc-user-panel.c:609
+#: panels/user-accounts/cc-user-panel.c:610
 msgid "You cannot delete your own account."
 msgstr "Ne možete obrisati vlastiti račun."
 
-#: panels/user-accounts/cc-user-panel.c:618
+#: panels/user-accounts/cc-user-panel.c:619
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s je još prijavljen"
 
-#: panels/user-accounts/cc-user-panel.c:622
+#: panels/user-accounts/cc-user-panel.c:623
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7041,12 +7067,12 @@ msgstr ""
 "Brisanje korisnika dok su prijavljeni može ostaviti sustav u neupotrebljivom "
 "stanju."
 
-#: panels/user-accounts/cc-user-panel.c:631
+#: panels/user-accounts/cc-user-panel.c:632
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Želite li zadržati %s's datoteke?"
 
-#: panels/user-accounts/cc-user-panel.c:635
+#: panels/user-accounts/cc-user-panel.c:636
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7054,47 +7080,47 @@ msgstr ""
 "Moguće je očuvati osobnu mapu, e-poštu i privremene datoteke kada se briše "
 "korisnički račun."
 
-#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:639
 msgid "_Delete Files"
 msgstr "_Obriši datoteke"
 
-#: panels/user-accounts/cc-user-panel.c:639
+#: panels/user-accounts/cc-user-panel.c:640
 msgid "_Keep Files"
 msgstr "_Zadrži datoteke"
 
-#: panels/user-accounts/cc-user-panel.c:653
+#: panels/user-accounts/cc-user-panel.c:654
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Sigurno želite opozvati udaljeno upravljani %s's račun?"
 
-#: panels/user-accounts/cc-user-panel.c:657
+#: panels/user-accounts/cc-user-panel.c:658
 msgid "_Delete"
 msgstr "_Obriši"
 
-#: panels/user-accounts/cc-user-panel.c:707
+#: panels/user-accounts/cc-user-panel.c:708
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Račun onemogućen"
 
-#: panels/user-accounts/cc-user-panel.c:715
+#: panels/user-accounts/cc-user-panel.c:716
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Biti će postavljen kod sljedeće prijave"
 
-#: panels/user-accounts/cc-user-panel.c:718
+#: panels/user-accounts/cc-user-panel.c:719
 msgctxt "Password mode"
 msgid "None"
 msgstr "Nepoznata"
 
-#: panels/user-accounts/cc-user-panel.c:763
+#: panels/user-accounts/cc-user-panel.c:764
 msgid "Logged in"
 msgstr "Prijavljeni"
 
-#: panels/user-accounts/cc-user-panel.c:1093
+#: panels/user-accounts/cc-user-panel.c:1098
 msgid "Failed to contact the accounts service"
 msgstr "Neuspjelo kontaktiranje usluge računa"
 
-#: panels/user-accounts/cc-user-panel.c:1095
+#: panels/user-accounts/cc-user-panel.c:1100
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Pobrinite se da je AccountService instaliran i omogućen."
 
@@ -7102,7 +7128,7 @@ msgstr "Pobrinite se da je AccountService instaliran i omogućen."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1127
+#: panels/user-accounts/cc-user-panel.c:1132
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7110,12 +7136,12 @@ msgstr ""
 "Kako bi napravili promjene\n"
 "prvo kliknite * ikonu"
 
-#: panels/user-accounts/cc-user-panel.c:1200
+#: panels/user-accounts/cc-user-panel.c:1205
 msgid "Create a user account"
 msgstr "Napravite korisnički račun"
 
-#: panels/user-accounts/cc-user-panel.c:1211
-#: panels/user-accounts/cc-user-panel.c:1339
+#: panels/user-accounts/cc-user-panel.c:1216
+#: panels/user-accounts/cc-user-panel.c:1344
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7123,12 +7149,12 @@ msgstr ""
 "Kako biste napravili korisnički račun,\n"
 "najprije kliknite na ikonu *"
 
-#: panels/user-accounts/cc-user-panel.c:1220
+#: panels/user-accounts/cc-user-panel.c:1225
 msgid "Delete the selected user account"
 msgstr "Obrišite odabrani korisnički račun"
 
-#: panels/user-accounts/cc-user-panel.c:1232
-#: panels/user-accounts/cc-user-panel.c:1343
+#: panels/user-accounts/cc-user-panel.c:1237
+#: panels/user-accounts/cc-user-panel.c:1348
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8200,9 +8226,6 @@ msgstr "Zvukovi sustava"
 
 #~ msgid "hardware"
 #~ msgstr "hardver"
-
-#~ msgid "reset"
-#~ msgstr "vrati izvorno"
 
 #~ msgid "English (United Kingdom)"
 #~ msgstr "Engleski (Ujedinjeno Kraljevstvo)"
