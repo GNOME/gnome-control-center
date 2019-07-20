@@ -11,26 +11,35 @@
         <property name="orientation">vertical</property>
 
         <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="spacing">24</property>
-            <property name="margin">32</property>
-            <property name="halign">center</property>
+          <object class="HdyColumn">
+            <property name="visible">1</property>
+            <property name="maximum_width">600</property>
+            <property name="linear_growth_width">400</property>
             <child>
-              <object class="CcBackgroundPreview" id="desktop_preview">
+              <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">end</property>
-                <property name="valign">center</property>
-              </object>
-            </child>
-            <child>
-              <object class="CcBackgroundPreview" id="lock_screen_preview">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="is-lock-screen">True</property>
-                <property name="valign">center</property>
+                <property name="spacing">24</property>
+                <property name="margin-start">12</property>
+                <property name="margin-end">12</property>
+                <property name="margin-top">18</property>
+                <property name="margin-bottom">18</property>
+                <property name="hexpand">True</property>
+                <child>
+                  <object class="CcBackgroundPreview" id="desktop_preview">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcBackgroundPreview" id="lock_screen_preview">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="is-lock-screen">True</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
