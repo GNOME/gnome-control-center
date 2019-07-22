@@ -18,9 +18,9 @@ Please note we have a Code of Conduct, please follow it in all your interactions
    component: <summary>
    ‌
    A paragraph explaining the problem and its context.
-‌
+   ‌
    Another one explaining how you solved that.
-‌
+   ‌
    <link to the issue>
    ```
 4. You may merge the pull request in once you have the sign-off of the maintainers, or if you
