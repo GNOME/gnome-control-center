@@ -31,7 +31,7 @@
 struct _GsdX11DeviceManager
 {
 	GsdDeviceManager parent_instance;
-	GdkDeviceManager *device_manager;
+	GdkSeat *seat;
 	GHashTable *devices;
 	GHashTable *gdk_devices;
 };
@@ -141,14 +141,12 @@ remove_device (GsdX11DeviceManager *manager,
 }
 
 static void
-init_devices (GsdX11DeviceManager *manager,
-	      GdkDeviceType	   device_type)
+init_devices (GsdX11DeviceManager *manager)
 {
 	g_autoptr(GList) devices = NULL;
 	GList *l;
 
-	devices = gdk_device_manager_list_devices (manager->device_manager,
-						   device_type);
+	devices = gdk_seat_get_slaves (manager->seat, GDK_SEAT_CAPABILITY_ALL);
 
 	for (l = devices; l; l = l->next)
 		add_device (manager, l->data);
@@ -163,15 +161,14 @@ gsd_x11_device_manager_init (GsdX11DeviceManager *manager)
 						  (GDestroyNotify) g_object_unref);
 
 	display = gdk_display_get_default ();
-	manager->device_manager = gdk_display_get_device_manager (display);
+	manager->seat = gdk_display_get_default_seat (display);
 
-	g_signal_connect_swapped (manager->device_manager, "device-added",
+	g_signal_connect_swapped (manager->seat, "device-added",
 				  G_CALLBACK (add_device), manager);
-	g_signal_connect_swapped (manager->device_manager, "device-removed",
+	g_signal_connect_swapped (manager->seat, "device-removed",
 				  G_CALLBACK (remove_device), manager);
 
-	init_devices (manager, GDK_DEVICE_TYPE_SLAVE);
-	init_devices (manager, GDK_DEVICE_TYPE_FLOATING);
+	init_devices (manager);
 }
 
 static GList *
