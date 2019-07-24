@@ -36,7 +36,6 @@
 #include <glibtop/mountlist.h>
 #include <glibtop/mem.h>
 #include <glibtop/sysinfo.h>
-#include <udisks/udisks.h>
 
 #include <gdk/gdk.h>
 
@@ -79,8 +78,6 @@ typedef struct
   char           *gnome_date;
 
   GCancellable   *cancellable;
-
-  UDisksClient   *client;
 
   GraphicsData   *graphics_data;
 } CcInfoOverviewPanelPrivate;
@@ -483,38 +480,70 @@ get_os_type (void)
 static void
 get_primary_disc_info (CcInfoOverviewPanel *self)
 {
-  CcInfoOverviewPanelPrivate *priv;
+  CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
+  g_autoptr(GError) error = NULL;
   GDBusObjectManager *manager;
   g_autolist(GDBusObject) objects = NULL;
   GList *l;
-  guint64 total_size;
+  guint64 total_size = 0;
 
-  priv = cc_info_overview_panel_get_instance_private (self);
-  total_size = 0;
-
-  if (!priv->client)
+  manager = g_dbus_object_manager_client_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                           G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE,
+                                                           "org.freedesktop.UDisks2",
+                                                           "/org/freedesktop/UDisks2",
+                                                           NULL,
+                                                           NULL,
+                                                           NULL,
+                                                           NULL,
+                                                           &error);
+  if (error != NULL)
     {
+      g_warning ("Unable to get UDisks client: %s. Disk information will not be available.",
+                 error->message);
       gtk_label_set_text (GTK_LABEL (priv->disk_label), _("Unknown"));
       return;
     }
 
-  manager = udisks_client_get_object_manager (priv->client);
   objects = g_dbus_object_manager_get_objects (manager);
 
   for (l = objects; l != NULL; l = l->next)
     {
-      UDisksDrive *drive;
-      drive = udisks_object_peek_drive (UDISKS_OBJECT (l->data));
+      GDBusInterface *interface = g_dbus_object_get_interface(l->data, "org.freedesktop.UDisks2.Drive");
+      if (interface == NULL)
+        continue;
 
-      /* Skip removable devices */
-      if (drive == NULL ||
-          udisks_drive_get_removable (drive) ||
-          udisks_drive_get_ejectable (drive))
+      GDBusProxy *drive = G_DBUS_PROXY (interface);
+      GVariant *variant;
+
+      gboolean removable = FALSE;
+      variant = g_dbus_proxy_get_cached_property (drive, "Removable");
+      if (variant != NULL)
         {
-          continue;
+          removable = g_variant_get_boolean (variant);
+          g_variant_unref (variant);
         }
 
-      total_size += udisks_drive_get_size (drive);
+      gboolean ejectable = FALSE;
+      variant = g_dbus_proxy_get_cached_property (drive, "Ejectable");
+      if (variant != NULL)
+        {
+          ejectable = g_variant_get_boolean (variant);
+          g_variant_unref (variant);
+        }
+
+      guint64 size = 0;
+      variant = g_dbus_proxy_get_cached_property (drive, "Size");
+      if (variant != NULL)
+        {
+          size = g_variant_get_uint64 (variant);
+          g_variant_unref (variant);
+        }
+
+      /* Skip removable devices */
+      if (removable || ejectable)
+        continue;
+
+      total_size += size;
     }
 
   if (total_size > 0)
@@ -787,8 +816,6 @@ cc_info_overview_panel_finalize (GObject *object)
       g_clear_object (&priv->cancellable);
     }
 
-  g_clear_object (&priv->client);
-
   g_free (priv->gnome_version);
   g_free (priv->gnome_date);
   g_free (priv->gnome_distributor);
@@ -829,7 +856,6 @@ static void
 cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 {
   CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
-  g_autoptr(GError) error = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -841,12 +867,6 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
     g_signal_connect (priv->updates_button, "clicked", G_CALLBACK (on_updates_button_clicked), self);
   else
     gtk_widget_destroy (priv->updates_button);
-
-  priv->client = udisks_client_new_sync (NULL, &error);
-
-  if (error != NULL)
-      g_warning ("Unable to get UDisks client: %s. Disk information will not be available.",
-                 error->message);
 
   info_overview_panel_setup_overview (self);
   info_overview_panel_setup_virt (self);
