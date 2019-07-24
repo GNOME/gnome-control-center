@@ -379,7 +379,7 @@ get_os_info (void)
 
   hashtable = NULL;
 
-  if (g_file_get_contents ("/etc/os-release", &buffer, NULL, NULL))
+  if (g_file_get_contents (ETC_OS_RELEASE, &buffer, NULL, NULL))
     {
       g_auto(GStrv) lines = NULL;
       gint i;
