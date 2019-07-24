@@ -192,5 +192,11 @@ datetime_panel_lib = static_library(
 )
 panels_libs += datetime_panel_lib
 
+datetime_panel_lib_dep = declare_dependency(
+              sources : resources,
+  include_directories : [top_inc, include_directories('.')],
+            link_with : datetime_panel_lib
+)
+
 subdir('po-timezones')
 subdir('icons')
