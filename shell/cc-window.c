@@ -537,6 +537,34 @@ notify_fold_cb (HdyLeaflet *leaflet,
 }
 
 static void
+main_view_notify_fold_cb (CcWindow *self)
+{
+  GtkWidget *list_box;
+  GtkSelectionMode selection_mode;
+
+  g_assert (CC_IS_WINDOW (self));
+
+  selection_mode = GTK_SELECTION_SINGLE;
+
+  if (hdy_leaflet_get_fold (HDY_LEAFLET (self->main_leaflet)) == HDY_FOLD_FOLDED)
+    selection_mode = GTK_SELECTION_NONE;
+
+  list_box = gtk_stack_get_child_by_name (GTK_STACK (self->panel_list), "main");
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (list_box), selection_mode);
+
+  list_box = gtk_stack_get_child_by_name (GTK_STACK (self->panel_list), "devices");
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (list_box), selection_mode);
+
+  list_box = gtk_stack_get_child_by_name (GTK_STACK (self->panel_list), "details");
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (list_box), selection_mode);
+
+  /* When selection mode changed, selection will be lost.  So reselect */
+  if (selection_mode == GTK_SELECTION_SINGLE)
+    cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list),
+                                    self->current_panel_id);
+}
+
+static void
 show_panel_cb (CcPanelList *panel_list,
                const gchar *panel_id,
                CcWindow    *self)
@@ -917,6 +945,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, gdk_window_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, notify_header_visible_child_cb);
   gtk_widget_class_bind_template_callback (widget_class, notify_fold_cb);
+  gtk_widget_class_bind_template_callback (widget_class, main_view_notify_fold_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_development_warning_dialog_responded_cb);
   gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
