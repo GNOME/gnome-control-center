@@ -73,6 +73,9 @@ void                 cc_panel_list_set_panel_visibility          (CcPanelList   
 void                 cc_panel_list_add_sidebar_widget            (CcPanelList        *self,
                                                                   GtkWidget          *widget);
 
+void                 cc_panel_list_set_selection_mode            (CcPanelList        *self,
+                                                                  GtkSelectionMode    selection_mode);
+
 G_END_DECLS
 
 #endif /* CC_PANEL_LIST_H */
