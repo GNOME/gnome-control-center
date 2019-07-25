@@ -1137,3 +1137,26 @@ cc_panel_list_add_sidebar_widget (CcPanelList *self,
         gtk_container_remove (GTK_CONTAINER (self), widget);
     }
 }
+
+void
+cc_panel_list_set_selection_mode (CcPanelList      *self,
+                                  GtkSelectionMode  selection_mode)
+{
+  g_return_if_fail (CC_IS_PANEL_LIST (self));
+
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->main_listbox), selection_mode);
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->devices_listbox), selection_mode);
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->details_listbox), selection_mode);
+
+  /* When selection mode changed, selection will be lost.  So reselect */
+  if (selection_mode == GTK_SELECTION_SINGLE && self->current_panel_id)
+    {
+      GtkWidget *listbox;
+      RowData *data;
+
+      data = g_hash_table_lookup (self->id_to_data, self->current_panel_id);
+      listbox = gtk_widget_get_parent (data->row);
+      gtk_list_box_select_row (GTK_LIST_BOX (listbox), GTK_LIST_BOX_ROW (data->row));
+    }
+}
+
