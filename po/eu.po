@@ -10,15 +10,14 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2019-07-20 02:22+0000\n"
-"PO-Revision-Date: 2019-07-20 06:00+0100\n"
+"POT-Creation-Date: 2019-07-22 21:34+0000\n"
+"PO-Revision-Date: 2019-07-25 06:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asier.sarasua@gmail.com>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: OmegaT 4.1.5\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: panels/applications/cc-applications-panel.c:561
@@ -335,7 +334,7 @@ msgstr "Hautatu argazki bat"
 #: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/cc-color-panel.ui:657 panels/color/color-calibrate.ui:25
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:941
+#: panels/display/cc-display-panel.c:947
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
@@ -379,8 +378,8 @@ msgid "Set Lock Screen"
 msgstr "Ezarri blokeo-pantaila"
 
 #: panels/background/cc-background-chooser.ui:143
-msgid "Delete Background"
-msgstr "Ezabatu atzeko planoa"
+msgid "Remove Background"
+msgstr "Kendu atzeko planoa"
 
 #: panels/background/cc-background-item.c:140
 msgid "multiple sizes"
@@ -460,7 +459,6 @@ msgstr "Itzali hegazkin modua"
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/network/cc-network-panel.ui:102
 #: panels/printers/pp-new-printer-dialog.c:1697
 msgid "Bluetooth"
 msgstr "Bluetooth"
@@ -1331,21 +1329,21 @@ msgstr "Aldatu sistemaren ordua eta dataren ezarpenak"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Sistemaren ordua eta dataren ezarpenak aldatzeko, autentifikatu egin behar zara."
 
-#: panels/display/cc-display-panel.c:952
+#: panels/display/cc-display-panel.c:958
 #: panels/network/connection-editor/connection-editor.ui:27
 #: panels/network/network-wifi.ui:38
 msgid "_Apply"
 msgstr "_Aplikatu"
 
-#: panels/display/cc-display-panel.c:973
+#: panels/display/cc-display-panel.c:979
 msgid "Apply Changes?"
 msgstr "Aplikatu aldaketak?"
 
-#: panels/display/cc-display-panel.c:978
+#: panels/display/cc-display-panel.c:984
 msgid "Changes Cannot be Applied"
 msgstr "Aldaketak ezin dira aplikatu"
 
-#: panels/display/cc-display-panel.c:979
+#: panels/display/cc-display-panel.c:985
 msgid "This could be due to hardware limitations."
 msgstr "Hardwarearen mugen erruz izan daiteke."
 
@@ -1847,7 +1845,7 @@ msgid "Eject"
 msgstr "Egotzi"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:580
+#: panels/universal-access/cc-ua-panel.ui:565
 msgid "Typing"
 msgstr "Idazketa"
 
@@ -2256,6 +2254,10 @@ msgstr "Zerbait gaizki joan da. Jar zaitez harremanetan softwarearen sortzailear
 #: panels/network/cc-network-panel.c:796
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager exekutatzen egon behar da."
+
+#: panels/network/cc-network-panel.ui:102
+msgid "Other Devices"
+msgstr "Beste gailuak"
 
 #: panels/network/cc-network-panel.ui:143
 #: panels/network/connection-editor/net-connection-editor.c:581
@@ -2984,14 +2986,14 @@ msgstr "_Ahaztu"
 #: panels/universal-access/cc-ua-panel.c:853
 #: panels/universal-access/cc-ua-panel.c:865
 #: panels/universal-access/cc-ua-panel.c:1030
-#: panels/universal-access/cc-ua-panel.ui:338
-#: panels/universal-access/cc-ua-panel.ui:384
-#: panels/universal-access/cc-ua-panel.ui:430
-#: panels/universal-access/cc-ua-panel.ui:536
-#: panels/universal-access/cc-ua-panel.ui:689
-#: panels/universal-access/cc-ua-panel.ui:735
-#: panels/universal-access/cc-ua-panel.ui:781
-#: panels/universal-access/cc-ua-panel.ui:933
+#: panels/universal-access/cc-ua-panel.ui:323
+#: panels/universal-access/cc-ua-panel.ui:369
+#: panels/universal-access/cc-ua-panel.ui:415
+#: panels/universal-access/cc-ua-panel.ui:521
+#: panels/universal-access/cc-ua-panel.ui:674
+#: panels/universal-access/cc-ua-panel.ui:720
+#: panels/universal-access/cc-ua-panel.ui:766
+#: panels/universal-access/cc-ua-panel.ui:918
 msgid "Off"
 msgstr "Desaktibatuta"
 
@@ -4412,7 +4414,7 @@ msgid "On _Battery Power"
 msgstr "_Bateriaren energiarekin"
 
 #: panels/power/cc-power-panel.ui:233 panels/power/cc-power-panel.ui:293
-#: panels/universal-access/cc-ua-panel.ui:1507
+#: panels/universal-access/cc-ua-panel.ui:1495
 msgid "Delay"
 msgstr "Atzerapena"
 
@@ -6123,316 +6125,316 @@ msgid_plural "%d pixels"
 msgstr[0] "%d pixel"
 msgstr[1] "%d pixel"
 
-#: panels/universal-access/cc-ua-panel.ui:93
+#: panels/universal-access/cc-ua-panel.ui:78
 msgid "_Always Show Universal Access Menu"
 msgstr "Erakutsi _beti sarbide unibertsalaren menua"
 
-#: panels/universal-access/cc-ua-panel.ui:135
+#: panels/universal-access/cc-ua-panel.ui:120
 msgid "Seeing"
 msgstr "Ikusmena"
 
-#: panels/universal-access/cc-ua-panel.ui:181
+#: panels/universal-access/cc-ua-panel.ui:166
 msgid "_High Contrast"
 msgstr "Kontraste _altua"
 
-#: panels/universal-access/cc-ua-panel.ui:228
+#: panels/universal-access/cc-ua-panel.ui:213
 msgid "_Large Text"
 msgstr "Testu _handia"
 
-#: panels/universal-access/cc-ua-panel.ui:273
+#: panels/universal-access/cc-ua-panel.ui:258
 msgid "C_ursor Size"
 msgstr "Kurtsorearen _tamaina"
 
-#: panels/universal-access/cc-ua-panel.ui:320
+#: panels/universal-access/cc-ua-panel.ui:305
 #: panels/universal-access/zoom-options.ui:99
 msgid "_Zoom"
 msgstr "_Zooma"
 
-#: panels/universal-access/cc-ua-panel.ui:366
+#: panels/universal-access/cc-ua-panel.ui:351
 msgid "Screen _Reader"
 msgstr "Pantaila _irakurlea"
 
-#: panels/universal-access/cc-ua-panel.ui:412
-#: panels/universal-access/cc-ua-panel.ui:1243
+#: panels/universal-access/cc-ua-panel.ui:397
+#: panels/universal-access/cc-ua-panel.ui:1231
 msgid "_Sound Keys"
 msgstr "_Teklak soinuarekin"
 
-#: panels/universal-access/cc-ua-panel.ui:474
+#: panels/universal-access/cc-ua-panel.ui:459
 msgid "Hearing"
 msgstr "Entzumena"
 
-#: panels/universal-access/cc-ua-panel.ui:518
-#: panels/universal-access/cc-ua-panel.ui:1346
+#: panels/universal-access/cc-ua-panel.ui:503
+#: panels/universal-access/cc-ua-panel.ui:1334
 msgid "_Visual Alerts"
 msgstr "Abisu _bisualak"
 
-#: panels/universal-access/cc-ua-panel.ui:626
+#: panels/universal-access/cc-ua-panel.ui:611
 msgid "Screen _Keyboard"
 msgstr "Pantailako _teklatua"
 
-#: panels/universal-access/cc-ua-panel.ui:671
+#: panels/universal-access/cc-ua-panel.ui:656
 msgid "R_epeat Keys"
 msgstr "E_rrepikatze-teklak"
 
-#: panels/universal-access/cc-ua-panel.ui:717
+#: panels/universal-access/cc-ua-panel.ui:702
 msgid "Cursor _Blinking"
 msgstr "Kurtsore _keinukaria"
 
-#: panels/universal-access/cc-ua-panel.ui:763
+#: panels/universal-access/cc-ua-panel.ui:748
 msgid "_Typing Assist (AccessX)"
 msgstr "_Idazketaren laguntzailea (AccessX)"
 
-#: panels/universal-access/cc-ua-panel.ui:824
+#: panels/universal-access/cc-ua-panel.ui:809
 msgid "Pointing & Clicking"
 msgstr "Kokatzea eta klik egitea"
 
-#: panels/universal-access/cc-ua-panel.ui:870
+#: panels/universal-access/cc-ua-panel.ui:855
 msgid "_Mouse Keys"
 msgstr "_Sagu-teklak"
 
-#: panels/universal-access/cc-ua-panel.ui:915
+#: panels/universal-access/cc-ua-panel.ui:900
 msgid "_Click Assist"
 msgstr "_Klik egitearen laguntzailea"
 
-#: panels/universal-access/cc-ua-panel.ui:961
+#: panels/universal-access/cc-ua-panel.ui:946
 msgid "_Double-Click Delay"
 msgstr "_Klik bikoitzaren atzerapena"
 
-#: panels/universal-access/cc-ua-panel.ui:981
+#: panels/universal-access/cc-ua-panel.ui:966
 msgid "Double-Click Delay"
 msgstr "Klik bikoitzaren atzerapena"
 
-#: panels/universal-access/cc-ua-panel.ui:1048
+#: panels/universal-access/cc-ua-panel.ui:1036
 msgid "Cursor Size"
 msgstr "Kurtsorearen tamaina"
 
-#: panels/universal-access/cc-ua-panel.ui:1075
+#: panels/universal-access/cc-ua-panel.ui:1063
 msgid ""
 "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgstr "Kurtsorearen tamaina zoomarekin erabil daiteke kurtsorea errazago ikus ahal izateko."
 
-#: panels/universal-access/cc-ua-panel.ui:1111
+#: panels/universal-access/cc-ua-panel.ui:1099
 msgid "Screen Reader"
 msgstr "Pantaila irakurlea"
 
-#: panels/universal-access/cc-ua-panel.ui:1128
+#: panels/universal-access/cc-ua-panel.ui:1116
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr "Pantailaren irakurleak bistaratutako testua irakurtzen du fokua mugitzen duzun arabera."
 
-#: panels/universal-access/cc-ua-panel.ui:1161
+#: panels/universal-access/cc-ua-panel.ui:1149
 msgid "_Screen Reader"
 msgstr "Pantaila _irakurlea"
 
-#: panels/universal-access/cc-ua-panel.ui:1200
+#: panels/universal-access/cc-ua-panel.ui:1188
 msgid "Sound Keys"
 msgstr "Teklak soinuarekin"
 
-#: panels/universal-access/cc-ua-panel.ui:1218
+#: panels/universal-access/cc-ua-panel.ui:1206
 msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr "Jo soinua Blok. Zenb edo Blok Maius pizten edo itzaltzen direnean."
 
-#: panels/universal-access/cc-ua-panel.ui:1288
+#: panels/universal-access/cc-ua-panel.ui:1276
 msgid "Visual Alerts"
 msgstr "Abisu bisualak"
 
-#: panels/universal-access/cc-ua-panel.ui:1292
+#: panels/universal-access/cc-ua-panel.ui:1280
 msgid "_Test flash"
 msgstr "_Probatu flasha"
 
-#: panels/universal-access/cc-ua-panel.ui:1321
+#: panels/universal-access/cc-ua-panel.ui:1309
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "Erabili adierazle bisuala soinuaren abisua gertatzean."
 
-#: panels/universal-access/cc-ua-panel.ui:1372
+#: panels/universal-access/cc-ua-panel.ui:1360
 msgid "Flash the _window title"
 msgstr "Distiratu _leihoaren titulu-barra"
 
-#: panels/universal-access/cc-ua-panel.ui:1390
+#: panels/universal-access/cc-ua-panel.ui:1378
 msgid "Flash the entire _screen"
 msgstr "Distiratu _pantaila osoa"
 
-#: panels/universal-access/cc-ua-panel.ui:1435
+#: panels/universal-access/cc-ua-panel.ui:1423
 msgid "Repeat Keys"
 msgstr "Errepikatze-teklak"
 
-#: panels/universal-access/cc-ua-panel.ui:1465
+#: panels/universal-access/cc-ua-panel.ui:1453
 msgid "Key presses repeat when key is held down."
 msgstr "Tekla sakatuta dagoen bitartean, tekla hori behin eta berriz errepikatzen da."
 
-#: panels/universal-access/cc-ua-panel.ui:1545
+#: panels/universal-access/cc-ua-panel.ui:1533
 msgid "Repeat keys delay"
 msgstr "Tekla-errepikatzeen atzerapena"
 
-#: panels/universal-access/cc-ua-panel.ui:1593
-#: panels/universal-access/cc-ua-panel.ui:1728
+#: panels/universal-access/cc-ua-panel.ui:1581
+#: panels/universal-access/cc-ua-panel.ui:1716
 msgid "Speed"
 msgstr "Abiadura"
 
-#: panels/universal-access/cc-ua-panel.ui:1632
+#: panels/universal-access/cc-ua-panel.ui:1620
 msgid "Repeat keys speed"
 msgstr "Tekla-errepikatzeen abiadura"
 
-#: panels/universal-access/cc-ua-panel.ui:1656
+#: panels/universal-access/cc-ua-panel.ui:1644
 msgid "Cursor Blinking"
 msgstr "Kurtsore keinukaria"
 
-#: panels/universal-access/cc-ua-panel.ui:1686
+#: panels/universal-access/cc-ua-panel.ui:1674
 msgid "Cursor blinks in text fields."
 msgstr "Kurtsorea keinuka testu-eremuetan."
 
-#: panels/universal-access/cc-ua-panel.ui:1765
+#: panels/universal-access/cc-ua-panel.ui:1753
 msgid "Cursor blinking speed"
 msgstr "Kurtsore-keinuaren abiadura"
 
-#: panels/universal-access/cc-ua-panel.ui:1801
+#: panels/universal-access/cc-ua-panel.ui:1789
 msgid "Typing Assist"
 msgstr "Idazketaren laguntzailea"
 
-#: panels/universal-access/cc-ua-panel.ui:1840
+#: panels/universal-access/cc-ua-panel.ui:1828
 msgid "_Sticky Keys"
 msgstr "Tekla _itsaskorrak"
 
-#: panels/universal-access/cc-ua-panel.ui:1857
+#: panels/universal-access/cc-ua-panel.ui:1845
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Tratatu tekla aldatzaileen sekuentzia bat tekla konbinazio bat bezala"
 
-#: panels/universal-access/cc-ua-panel.ui:1881
+#: panels/universal-access/cc-ua-panel.ui:1869
 msgid "_Disable if two keys are pressed together"
 msgstr "_Desgaitu bi tekla batera sakatzen badira"
 
-#: panels/universal-access/cc-ua-panel.ui:1899
+#: panels/universal-access/cc-ua-panel.ui:1887
 msgid "Beep when a _modifier key is pressed"
 msgstr "Jo soinua _tekla aldatzailea sakatzean"
 
-#: panels/universal-access/cc-ua-panel.ui:1947
+#: panels/universal-access/cc-ua-panel.ui:1935
 msgid "S_low Keys"
 msgstr "Tekla _motelak"
 
-#: panels/universal-access/cc-ua-panel.ui:1964
+#: panels/universal-access/cc-ua-panel.ui:1952
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Jarri atzerapena tekla bat sakatzen denetik onartu bitartekoa"
 
-#: panels/universal-access/cc-ua-panel.ui:1997
-#: panels/universal-access/cc-ua-panel.ui:2210
-#: panels/universal-access/cc-ua-panel.ui:2547
+#: panels/universal-access/cc-ua-panel.ui:1985
+#: panels/universal-access/cc-ua-panel.ui:2198
+#: panels/universal-access/cc-ua-panel.ui:2535
 msgid "A_cceptance delay:"
 msgstr "_Onarpenaren atzerapena:"
 
-#: panels/universal-access/cc-ua-panel.ui:2019
+#: panels/universal-access/cc-ua-panel.ui:2007
 msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Laburra"
 
-#: panels/universal-access/cc-ua-panel.ui:2038
+#: panels/universal-access/cc-ua-panel.ui:2026
 msgid "Slow keys typing delay"
 msgstr "Tekla motelak sakatzearen atzerapena"
 
-#: panels/universal-access/cc-ua-panel.ui:2053
+#: panels/universal-access/cc-ua-panel.ui:2041
 msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Luzea"
 
-#: panels/universal-access/cc-ua-panel.ui:2080
+#: panels/universal-access/cc-ua-panel.ui:2068
 msgid "Beep when a key is pr_essed"
 msgstr "Jo soinua _tekla bat sakatzean"
 
-#: panels/universal-access/cc-ua-panel.ui:2097
+#: panels/universal-access/cc-ua-panel.ui:2085
 msgid "Beep when a key is _accepted"
 msgstr "Jo soinua tekla bat _onartzean"
 
-#: panels/universal-access/cc-ua-panel.ui:2114
-#: panels/universal-access/cc-ua-panel.ui:2293
+#: panels/universal-access/cc-ua-panel.ui:2102
+#: panels/universal-access/cc-ua-panel.ui:2281
 msgid "Beep when a key is _rejected"
 msgstr "Jo soinua tekla bat e_zesten bada"
 
-#: panels/universal-access/cc-ua-panel.ui:2160
+#: panels/universal-access/cc-ua-panel.ui:2148
 msgid "_Bounce Keys"
 msgstr "_Errebote-teklak"
 
-#: panels/universal-access/cc-ua-panel.ui:2177
+#: panels/universal-access/cc-ua-panel.ui:2165
 msgid "Ignores fast duplicate keypresses"
 msgstr "Ez ikusi egin azkar sakatutako bikoiztutako teklei"
 
-#: panels/universal-access/cc-ua-panel.ui:2232
+#: panels/universal-access/cc-ua-panel.ui:2220
 msgctxt "bounce keys delay"
 msgid "Short"
 msgstr "Laburra"
 
-#: panels/universal-access/cc-ua-panel.ui:2251
+#: panels/universal-access/cc-ua-panel.ui:2239
 msgid "Bounce keys typing delay"
 msgstr "Errebote-teklak sakatzearen atzerapena"
 
-#: panels/universal-access/cc-ua-panel.ui:2266
+#: panels/universal-access/cc-ua-panel.ui:2254
 msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "Luzea"
 
-#: panels/universal-access/cc-ua-panel.ui:2379
+#: panels/universal-access/cc-ua-panel.ui:2367
 msgid "_Enable by Keyboard"
 msgstr "_Gaitu teklatuaren bidez"
 
-#: panels/universal-access/cc-ua-panel.ui:2396
+#: panels/universal-access/cc-ua-panel.ui:2384
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Aktibatu erabilgarritasunaren funtzionalitatea teklatutik"
 
-#: panels/universal-access/cc-ua-panel.ui:2460
+#: panels/universal-access/cc-ua-panel.ui:2448
 msgid "Click Assist"
 msgstr "Klik egitearen laguntzailea"
 
-#: panels/universal-access/cc-ua-panel.ui:2496
+#: panels/universal-access/cc-ua-panel.ui:2484
 msgid "_Simulated Secondary Click"
 msgstr "_2. mailako klik simulatua"
 
-#: panels/universal-access/cc-ua-panel.ui:2514
+#: panels/universal-access/cc-ua-panel.ui:2502
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Abiarazi 2. mailako klik egitea botoi nagusia sakatuta edukitzean"
 
-#: panels/universal-access/cc-ua-panel.ui:2568
+#: panels/universal-access/cc-ua-panel.ui:2556
 msgctxt "secondary click"
 msgid "Short"
 msgstr "Laburra"
 
-#: panels/universal-access/cc-ua-panel.ui:2587
+#: panels/universal-access/cc-ua-panel.ui:2575
 msgid "Secondary click delay"
 msgstr "2. mailako klik egitearen atzerapena"
 
-#: panels/universal-access/cc-ua-panel.ui:2602
+#: panels/universal-access/cc-ua-panel.ui:2590
 msgctxt "secondary click delay"
 msgid "Long"
 msgstr "Luzea"
 
-#: panels/universal-access/cc-ua-panel.ui:2659
+#: panels/universal-access/cc-ua-panel.ui:2647
 msgid "_Hover Click"
 msgstr "_Egin klik gainetik igarotzean"
 
-#: panels/universal-access/cc-ua-panel.ui:2677
+#: panels/universal-access/cc-ua-panel.ui:2665
 msgid "Trigger a click when the pointer hovers"
-msgstr "Abiarazi klik-a erakuslea gainean kokatzean"
+msgstr "Abiarazi klika erakuslea gainean kokatzean"
 
-#: panels/universal-access/cc-ua-panel.ui:2710
+#: panels/universal-access/cc-ua-panel.ui:2698
 msgid "D_elay:"
 msgstr "_Atzerapena:"
 
-#: panels/universal-access/cc-ua-panel.ui:2732
+#: panels/universal-access/cc-ua-panel.ui:2720
 msgctxt "dwell click delay"
 msgid "Short"
 msgstr "Laburra"
 
-#: panels/universal-access/cc-ua-panel.ui:2763
+#: panels/universal-access/cc-ua-panel.ui:2751
 msgctxt "dwell click delay"
 msgid "Long"
 msgstr "Luzea"
 
-#: panels/universal-access/cc-ua-panel.ui:2799
+#: panels/universal-access/cc-ua-panel.ui:2787
 msgid "Motion _threshold:"
 msgstr "_Mugimenduaren atalasea:"
 
-#: panels/universal-access/cc-ua-panel.ui:2821
+#: panels/universal-access/cc-ua-panel.ui:2809
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Txikia"
 
-#: panels/universal-access/cc-ua-panel.ui:2852
+#: panels/universal-access/cc-ua-panel.ui:2840
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Handia"
@@ -7743,3 +7745,5 @@ msgstr[1] "%u sarrera"
 msgid "System Sounds"
 msgstr "Sistemaren soinuak"
 
+#~ msgid "Delete Background"
+#~ msgstr "Ezabatu atzeko planoa"
