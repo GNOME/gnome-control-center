@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcAppNotificationsDialog" parent="GtkDialog">
-    <property name="width_request">450</property>
+  <template class="CcAppNotificationsDialog" parent="HdyDialog">
+    <property name="width_request">360</property>
     <property name="can_focus">False</property>
-    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="type_hint">dialog</property>
     <signal name="response" handler="gtk_widget_destroy" swapped="no"/>
