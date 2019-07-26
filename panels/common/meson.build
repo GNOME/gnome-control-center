@@ -76,28 +76,17 @@ liblanguage_dep = declare_dependency(
 
 gsd_headers = [
   'gsd-device-manager.h',
-  'gsd-device-manager-udev.h',
-  'gsd-device-manager-x11.h',
   'gsd-input-helper.h'
 ]
 
-gsd_sources_udev = ['gsd-device-manager-udev.c']
-
 gsd_sources = [
   'gsd-device-manager.c',
-  'gsd-device-manager-x11.c',
   'gsd-input-helper.c'
 ]
 
 sources = common_sources + files(gsd_sources)
 
-deps = common_deps
-
-if enable_wayland
-  sources += files(gsd_sources_udev)
-
-  deps += wayland_deps
-endif
+deps = common_deps + [ gudev_dep ]
 
 libdevice = static_library(
   'device',
