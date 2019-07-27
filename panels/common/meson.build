@@ -116,26 +116,3 @@ install_data(
   install_dir: join_paths(control_center_datadir, 'polkit-1', 'rules.d')
 )
 
-# FIXME: workaround for updating different sources code
-input_dir = join_paths(meson.source_root(), '..', 'gnome-settings-daemon', 'plugins', 'common')
-
-script_conf = configuration_data()
-script_conf.set('program', update_from_gsd.path())
-script_conf.set('input_dir', input_dir)
-script_conf.set('working_dir', meson.current_source_dir())
-script_conf.set('source_files', ' '.join(gsd_sources + gsd_sources_udev + gsd_headers))
-script_conf.set('source_message', 'common: Update from gnome-settings-daemon')
-
-script_name = 'update-common-from-gsd'
-
-script = configure_file(
-  input: update_from_gsd_in,
-  output: script_name + '.sh',
-  configuration: script_conf
-)
-
-run_target(
-  script_name,
-  command: script
-)
-
