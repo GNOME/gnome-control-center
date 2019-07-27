@@ -60,6 +60,7 @@ mouse_is_present (void)
 char *
 xdevice_get_device_node (int deviceid)
 {
+        GdkDisplay    *display;
         Atom           prop;
         Atom           act_type;
         int            act_format;
@@ -67,22 +68,23 @@ xdevice_get_device_node (int deviceid)
         unsigned char *data;
         char          *ret;
 
-        gdk_display_sync (gdk_display_get_default ());
+        display = gdk_display_get_default ();
+        gdk_display_sync (display);
 
-        prop = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "Device Node", False);
+        prop = XInternAtom (GDK_DISPLAY_XDISPLAY (display), "Device Node", False);
         if (!prop)
                 return NULL;
 
-        gdk_error_trap_push ();
+        gdk_x11_display_error_trap_push (display);
 
-        if (!XIGetProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
+        if (!XIGetProperty (GDK_DISPLAY_XDISPLAY (display),
                             deviceid, prop, 0, 1000, False,
                             AnyPropertyType, &act_type, &act_format,
                             &nitems, &bytes_after, &data) == Success) {
-                gdk_error_trap_pop_ignored ();
+                gdk_x11_display_error_trap_pop_ignored (display);
                 return NULL;
         }
-        if (gdk_error_trap_pop ())
+        if (gdk_x11_display_error_trap_pop (display))
                 goto out;
 
         if (nitems == 0)
