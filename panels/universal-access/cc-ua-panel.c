@@ -49,6 +49,7 @@
 #define KEY_CURSOR_BLINKING          "cursor-blink"
 #define KEY_CURSOR_BLINKING_TIME     "cursor-blink-time"
 #define KEY_MOUSE_CURSOR_SIZE        "cursor-size"
+#define KEY_LOCATE_POINTER           "locate-pointer"
 
 /* application settings */
 #define APPLICATION_SETTINGS         "org.gnome.desktop.a11y.applications"
@@ -111,6 +112,7 @@ struct _CcUaPanel
   GtkWidget *list_seeing;
   GtkWidget *list_typing;
   GtkWidget *mouse_keys_switch;
+  GtkWidget *locate_pointer_switch;
   GtkWidget *pointing_dialog;
   GtkWidget *pointing_dwell_delay_box;
   GtkWidget *pointing_dwell_delay_scale;
@@ -251,6 +253,7 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, list_seeing);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, list_typing);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, mouse_keys_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, locate_pointer_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_dwell_delay_box);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_dwell_delay_scale);
@@ -1048,6 +1051,10 @@ cc_ua_panel_init_mouse (CcUaPanel *self)
 
   g_settings_bind (self->kb_settings, KEY_MOUSEKEYS_ENABLED,
                    self->mouse_keys_switch, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  g_settings_bind (self->interface_settings, KEY_LOCATE_POINTER,
+                   self->locate_pointer_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   g_signal_connect (self->mouse_settings, "changed",
