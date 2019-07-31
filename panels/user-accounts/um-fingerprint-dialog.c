@@ -32,7 +32,7 @@
 #include "fingerprint-strings.h"
 
 /* This must match the number of images on the 2nd page in the UI file */
-#define MAX_ENROLL_STAGES 5
+#define MAX_ENROLL_STAGES 10
 
 static GDBusProxy *manager = NULL;
 static GDBusConnection *connection = NULL;
