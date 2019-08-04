@@ -917,6 +917,11 @@ get_locale_infos (CcInputChooser *self)
       g_hash_table_replace (self->locales, g_strdup (simple_locale), info);
       add_locale_to_table (self->locales_by_language, lang_code, info);
 
+      /* Skip XKB input sources for CJK languages. */
+      if (strcmp(lang_code, "ja") == 0 || strcmp(lang_code, "ko") == 0 ||
+	  strcmp(lang_code, "zh") == 0)
+	continue;
+
       if (gnome_get_input_source_from_locale (simple_locale, &type, &id) &&
           g_str_equal (type, INPUT_SOURCE_TYPE_XKB))
         {
