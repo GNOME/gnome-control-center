@@ -917,18 +917,23 @@ get_locale_infos (CcInputChooser *self)
       g_hash_table_replace (self->locales, g_strdup (simple_locale), info);
       add_locale_to_table (self->locales_by_language, lang_code, info);
 
+      /* We don't own these ids */
+      info->layout_rows_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                       NULL, g_object_unref);
+      info->engine_rows_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                       NULL, g_object_unref);
+
+      /* Skip XKB input sources for CJK languages. */
+      if (strcmp(lang_code, "ja") == 0 || strcmp(lang_code, "ko") == 0 ||
+	  strcmp(lang_code, "zh") == 0)
+	continue;
+
       if (gnome_get_input_source_from_locale (simple_locale, &type, &id) &&
           g_str_equal (type, INPUT_SOURCE_TYPE_XKB))
         {
           add_default_row (self, info, type, id);
           g_hash_table_add (layouts_with_locale, (gpointer) id);
         }
-
-      /* We don't own these ids */
-      info->layout_rows_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                       NULL, g_object_unref);
-      info->engine_rows_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                       NULL, g_object_unref);
 
       language_layouts = gnome_xkb_info_get_layouts_for_language (self->xkb_info, lang_code);
       add_rows_to_table (self, info, language_layouts, INPUT_SOURCE_TYPE_XKB, id);
