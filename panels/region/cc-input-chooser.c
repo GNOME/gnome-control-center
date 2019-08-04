@@ -930,6 +930,11 @@ get_locale_infos (CcInputChooser *self)
       info->engine_rows_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                        NULL, g_object_unref);
 
+      /* Skip XKB input sources for CJK languages. */
+      if (strcmp(lang_code, "ja") == 0 || strcmp(lang_code, "ko") == 0 ||
+	  strcmp(lang_code, "zh") == 0)
+        continue;
+
       language_layouts = gnome_xkb_info_get_layouts_for_language (self->xkb_info, lang_code);
       add_rows_to_table (self, info, language_layouts, INPUT_SOURCE_TYPE_XKB, id);
       add_ids_to_set (layouts_with_locale, language_layouts);
