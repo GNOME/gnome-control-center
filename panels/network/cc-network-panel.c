@@ -655,7 +655,6 @@ manager_running (NMClient *client, GParamSpec *pspec, gpointer user_data)
         /* clear all devices we added */
         if (!nm_client_get_nm_running (client)) {
                 g_debug ("NM disappeared");
-                panel_add_proxy_device (panel);
                 goto out;
         }
 
