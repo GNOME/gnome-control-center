@@ -1,5 +1,5 @@
 subdir('common')
-subdir('datetime')
+#subdir('datetime')
 if host_is_linux
   subdir('network')
 endif
