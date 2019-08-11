@@ -21,28 +21,10 @@
 
 #include <config.h>
 
-#include "cc-info-resources.h"
-#include "info-cleanup.h"
-
-#include <glib.h>
 #include <glib/gi18n.h>
-#include <gio/gio.h>
-#include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
-
-#include <glibtop/fsusage.h>
-#include <glibtop/mountlist.h>
-#include <glibtop/mem.h>
-#include <glibtop/sysinfo.h>
-
-#ifdef GDK_WINDOWING_WAYLAND
-#include <gdk/gdkwayland.h>
-#endif
-#ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
-#endif
 
 #include "cc-info-default-apps-panel.h"
+#include "cc-info-resources.h"
 
 typedef struct
 {
