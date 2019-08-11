@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef CC_INFO_DEFAULT_APPS_PANEL_H
-#define CC_INFO_DEFAULT_APPS_PANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -29,7 +28,4 @@ G_DECLARE_FINAL_TYPE (CcInfoDefaultAppsPanel, cc_info_default_apps_panel, CC, IN
 
 GtkWidget *cc_info_default_apps_panel_new (void);
 
-
 G_END_DECLS
-
-#endif /* CC_INFO_DEFAULT_APPS_PANEL_H */
