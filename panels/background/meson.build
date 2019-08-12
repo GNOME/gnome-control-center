@@ -98,7 +98,6 @@ deps = common_deps + [
 ]
 
 cflags += [
-  '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir),
   '-DDATADIR="@0@"'.format(control_center_datadir),
   '-DGNOME_DESKTOP_USE_UNSTABLE_API'
 ]

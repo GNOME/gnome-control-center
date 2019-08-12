@@ -30,8 +30,6 @@ sources += gnome.gdbus_codegen(
          namespace : 'Cc'
 )
 
-cflags = '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
-
 libs = [
   libpanel_loader,
   libshell
