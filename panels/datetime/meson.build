@@ -179,8 +179,7 @@ deps = common_deps + [
 ]
 
 cflags += [
-  '-DGNOMECC_DATA_DIR="@0@"'.format(control_center_pkgdatadir),
-  '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
+  '-DGNOMECC_DATA_DIR="@0@"'.format(control_center_pkgdatadir)
 ]
 
 datetime_panel_lib = static_library(
