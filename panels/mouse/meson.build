@@ -46,8 +46,6 @@ deps = common_deps + [
   xi_dep
 ]
 
-cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
-
 panels_libs += static_library(
   cappletname + '-properties',
   sources: sources,
