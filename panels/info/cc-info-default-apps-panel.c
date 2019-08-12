@@ -48,7 +48,7 @@ typedef struct
 {
   const char *content_type;
   gint label_offset;
-  /* A pattern used to filter supported mime types
+  /* Patterns used to filter supported mime types
      when changing preferred applications. NULL
      means no other types should be changed */
   const char *extra_type_filter;
@@ -96,17 +96,32 @@ default_app_changed (GtkAppChooserButton    *button,
 
   if (app_data->extra_type_filter)
     {
+      g_auto(GStrv) entries = NULL;
       const char *const *mime_types;
-      g_autoptr(GPatternSpec) pattern = NULL;
+      g_autoptr(GPtrArray) patterns = NULL;
 
-      pattern = g_pattern_spec_new (app_data->extra_type_filter);
+      entries = g_strsplit (app_data->extra_type_filter, ";", -1);
+      patterns = g_ptr_array_new_with_free_func ((GDestroyNotify) g_pattern_spec_free);
+      for (i = 0; entries[i] != NULL; i++)
+        {
+          GPatternSpec *pattern = g_pattern_spec_new (entries[i]);
+          g_ptr_array_add (patterns, pattern);
+        }
+
       mime_types = g_app_info_get_supported_types (info);
-
       for (i = 0; mime_types && mime_types[i]; i++)
         {
+          int j;
+          gboolean matched = FALSE;
           g_autoptr(GError) local_error = NULL;
 
-          if (!g_pattern_match_string (pattern, mime_types[i]))
+          for (j = 0; j < patterns->len; j++)
+            {
+              GPatternSpec *pattern = g_ptr_array_index (patterns, j);
+              if (g_pattern_match_string (pattern, mime_types[i]))
+                matched = TRUE;
+            }
+          if (!matched)
             continue;
 
           if (g_app_info_set_as_default_for_type (info, mime_types[i], &local_error) == FALSE)
@@ -158,11 +173,7 @@ info_panel_setup_default_app (CcInfoDefaultAppsPanel *self,
 }
 
 static DefaultAppData preferred_app_infos[] = {
-  /* for web, we need to support text/html,
-     application/xhtml+xml and x-scheme-handler/https,
-     hence the "*" pattern
-  */
-  { "x-scheme-handler/http", OFFSET (web_label), "*" },
+  { "x-scheme-handler/http", OFFSET (web_label), "text/html;application/xhtml+xml;x-scheme-handler/https" },
   { "x-scheme-handler/mailto", OFFSET (mail_label), NULL },
   { "text/calendar", OFFSET (calendar_label), NULL },
   { "audio/x-vorbis+ogg", OFFSET (music_label), "audio/*" },
