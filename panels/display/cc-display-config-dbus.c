@@ -1211,13 +1211,18 @@ is_scaled_mode_allowed (CcDisplayConfigDBus *self,
                         CcDisplayMode       *pmode,
                         double               scale)
 {
+  gint width, height;
   CcDisplayModeDBus *mode = CC_DISPLAY_MODE_DBUS (pmode);
 
   if (!cc_display_mode_dbus_is_supported_scale (pmode, scale))
     return FALSE;
 
-  return (round (mode->width / scale) >= self->min_width &&
-          round (mode->height / scale) >= self->min_height);
+  /* Do the math as if the monitor is always in landscape mode. */
+  width = round (mode->width / scale);
+  height = round (mode->height / scale);
+
+  return (MAX (width, height) >= self->min_width &&
+          MIN (width, height) >= self->min_height);
 }
 
 static gboolean

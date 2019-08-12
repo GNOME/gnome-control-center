@@ -40,7 +40,10 @@
 #include "cc-display-resources.h"
 #include "cc-display-settings.h"
 
-/* The minimum supported size for the panel */
+/* The minimum supported size for the panel
+ * Note that WIDTH is assumed to be the larger size and we accept portrait
+ * mode too effectively (in principle we should probably restrict the rotation
+ * setting in that case). */
 #define MINIMUM_WIDTH 740
 #define MINIMUM_HEIGHT 530
 
