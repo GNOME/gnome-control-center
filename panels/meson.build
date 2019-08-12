@@ -5,6 +5,7 @@ panels = [
   'background',
   'color',
   'datetime',
+  'default-apps',
   'display',
   'info',
   'keyboard',
