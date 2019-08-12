@@ -91,13 +91,20 @@ cc_subwoofer_slider_class_init (CcSubwooferSliderClass *klass)
 void
 cc_subwoofer_slider_init (CcSubwooferSlider *self)
 {
-  gdouble vol_max_norm;
-
   g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
+}
 
-  vol_max_norm = gvc_mixer_control_get_vol_max_norm (NULL);
+void
+cc_subwoofer_slider_set_mixer_control (CcSubwooferSlider *self,
+                                       GvcMixerControl   *mixer_control)
+{
+  gdouble vol_max_norm;
+
+  g_return_if_fail (CC_IS_SUBWOOFER_SLIDER (self));
+
+  vol_max_norm = gvc_mixer_control_get_vol_max_norm (mixer_control);
   gtk_adjustment_set_upper (self->adjustment, vol_max_norm);
   gtk_adjustment_set_page_increment (self->adjustment, vol_max_norm / 100.0);
 }
