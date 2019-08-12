@@ -1,8 +1,5 @@
-desktop = 'gnome-@0@-panel.desktop'.format('info-overview')
-
-panels_list += 'info-overview'
-
-desktop = 'gnome-info-overview-panel.desktop'
+panels_list += cappletname
+desktop = 'gnome-@0@-panel.desktop'.format(cappletname)
 
 desktop_in = configure_file(
   input: desktop + '.in.in',
@@ -40,7 +37,7 @@ resource_data = files(
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
-  c_name: 'cc_' + cappletname,
+  c_name: 'cc_' + cappletname.underscorify (),
   dependencies: resource_data,
   export: true
 )

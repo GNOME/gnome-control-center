@@ -7,7 +7,7 @@ panels = [
   'datetime',
   'default-apps',
   'display',
-  'info',
+  'info-overview',
   'keyboard',
   'mouse',
   'notifications',
