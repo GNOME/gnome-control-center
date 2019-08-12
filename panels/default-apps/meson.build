@@ -18,10 +18,12 @@ i18n.merge_file(
 )
 
 sources = files(
+  'cc-default-app-row.c',
   'cc-default-apps-panel.c'
 )
 
 resource_data = files(
+  'cc-default-app-row.ui',
   'cc-default-apps-panel.ui'
 )
 
