@@ -1,5 +1,4 @@
 panel_names = [
-  'default-apps',
   'info-overview',
   'removable-media'
 ]
@@ -33,7 +32,6 @@ cflags += [
 ]
 
 sources = files(
-  'cc-info-default-apps-panel.c',
   'cc-info-overview-panel.c',
   'cc-info-removable-media-panel.c',
   'info-cleanup.c'
@@ -41,7 +39,6 @@ sources = files(
 
 resource_data = files(
   'GnomeLogoVerticalMedium.svg',
-  'cc-info-default-apps-panel.ui',
   'cc-info-overview-panel.ui',
   'cc-info-removable-media-panel.ui'
 )

@@ -21,8 +21,8 @@
 
 #include <config.h>
 
-#include "cc-info-default-apps-panel.h"
-#include "cc-info-resources.h"
+#include "cc-default-apps-panel.h"
+#include "cc-default-apps-resources.h"
 
 typedef struct
 {
@@ -34,7 +34,7 @@ typedef struct
   const char *extra_type_filter;
 } DefaultAppData;
 
-struct _CcInfoDefaultAppsPanel
+struct _CcDefaultAppsPanel
 {
   CcPanel    parent_instance;
 
@@ -49,11 +49,11 @@ struct _CcInfoDefaultAppsPanel
 };
 
 
-G_DEFINE_TYPE (CcInfoDefaultAppsPanel, cc_info_default_apps_panel, CC_TYPE_PANEL)
+G_DEFINE_TYPE (CcDefaultAppsPanel, cc_default_apps_panel, CC_TYPE_PANEL)
 
 static void
-default_app_changed (GtkAppChooserButton    *button,
-                     CcInfoDefaultAppsPanel *self)
+default_app_changed (GtkAppChooserButton *button,
+                     CcDefaultAppsPanel  *self)
 {
   g_autoptr(GAppInfo) info = NULL;
   g_autoptr(GError) error = NULL;
@@ -119,14 +119,14 @@ default_app_changed (GtkAppChooserButton    *button,
     }
 }
 
-#define OFFSET(x)             (G_STRUCT_OFFSET (CcInfoDefaultAppsPanel, x))
+#define OFFSET(x)             (G_STRUCT_OFFSET (CcDefaultAppsPanel, x))
 #define WIDGET_FROM_OFFSET(x) (G_STRUCT_MEMBER (GtkWidget*, self, x))
 
 static void
-info_panel_setup_default_app (CcInfoDefaultAppsPanel *self,
-                              DefaultAppData         *data,
-                              guint                   left_attach,
-                              guint                   top_attach)
+info_panel_setup_default_app (CcDefaultAppsPanel *self,
+                              DefaultAppData     *data,
+                              guint               left_attach,
+                              guint               top_attach)
 {
   GtkWidget *button;
   GtkWidget *label;
@@ -162,7 +162,7 @@ static DefaultAppData preferred_app_infos[] = {
 };
 
 static void
-info_panel_setup_default_apps (CcInfoDefaultAppsPanel *self)
+info_panel_setup_default_apps (CcDefaultAppsPanel *self)
 {
   int i;
 
@@ -174,24 +174,24 @@ info_panel_setup_default_apps (CcInfoDefaultAppsPanel *self)
 }
 
 static void
-cc_info_default_apps_panel_class_init (CcInfoDefaultAppsPanelClass *klass)
+cc_default_apps_panel_class_init (CcDefaultAppsPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info/cc-info-default-apps-panel.ui");
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, default_apps_grid);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, web_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, mail_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, calendar_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, music_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, video_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, photos_label);
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/default-apps/cc-default-apps-panel.ui");
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, default_apps_grid);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, web_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, mail_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, calendar_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, music_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, video_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, photos_label);
 }
 
 static void
-cc_info_default_apps_panel_init (CcInfoDefaultAppsPanel *self)
+cc_default_apps_panel_init (CcDefaultAppsPanel *self)
 {
-  g_resources_register (cc_info_get_resource ());
+  g_resources_register (cc_default_apps_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -199,8 +199,8 @@ cc_info_default_apps_panel_init (CcInfoDefaultAppsPanel *self)
 }
 
 GtkWidget *
-cc_info_default_apps_panel_new (void)
+cc_default_apps_panel_new (void)
 {
-  return g_object_new (CC_TYPE_INFO_DEFAULT_APPS_PANEL,
+  return g_object_new (CC_TYPE_DEFAULT_APPS_PANEL,
                        NULL);
 }
