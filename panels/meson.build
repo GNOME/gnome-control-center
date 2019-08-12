@@ -16,6 +16,7 @@ panels = [
   'printers',
   'privacy',
   'region',
+  'removable-media',
   'search',
   'sharing',
   'sound',
