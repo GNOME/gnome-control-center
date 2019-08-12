@@ -203,7 +203,7 @@ cc_ua_panel_dispose (GObject *object)
 {
   CcUaPanel *self = CC_UA_PANEL (object);
 
-  g_clear_pointer (&self->zoom_options, gtk_widget_destroy);
+  g_clear_pointer ((GtkWidget **)&self->zoom_options, gtk_widget_destroy);
   g_slist_free_full (self->toplevels, (GDestroyNotify)gtk_widget_destroy);
   self->toplevels = NULL;
 
