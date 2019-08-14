@@ -231,7 +231,10 @@ padded_label_new (const char *text)
         GtkWidget *widget, *label;
 
         widget = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
-        g_object_set (widget, "margin", 10, NULL);
+        g_object_set (widget, "margin-top", 4, NULL);
+        g_object_set (widget, "margin-bottom", 4, NULL);
+        g_object_set (widget, "margin-start", 10, NULL);
+        g_object_set (widget, "margin-end", 10, NULL);
 
         label = gtk_label_new (text);
         gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
