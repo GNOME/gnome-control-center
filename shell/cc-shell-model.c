@@ -455,7 +455,8 @@ cc_shell_model_set_panel_visibility (CcShellModel      *self,
    * panel was found or not. It is a programming error to try to set
    * the visibility of a non-existant panel.
    */
-  g_assert (valid);
+  if (!valid);
+    return
 
   gtk_list_store_set (GTK_LIST_STORE (self), &iter, COL_VISIBILITY, visibility, -1);
 }
