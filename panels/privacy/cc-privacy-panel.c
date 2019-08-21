@@ -19,6 +19,7 @@
  */
 
 #include "list-box-helper.h"
+#include "cc-os-release.h"
 #include "cc-privacy-panel.h"
 #include "cc-privacy-resources.h"
 #include "cc-util.h"
@@ -100,88 +101,6 @@ struct _CcPrivacyPanel
 };
 
 CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
-
-static char *
-get_os_name (void)
-{
-  char *buffer;
-  char *name;
-
-  name = NULL;
-
-  if (g_file_get_contents ("/etc/os-release", &buffer, NULL, NULL))
-    {
-       char *start, *end;
-
-       start = end = NULL;
-       if ((start = strstr (buffer, "NAME=")) != NULL)
-         {
-           start += strlen ("NAME=");
-           end = strchr (start, '\n');
-         }
-
-       if (start != NULL && end != NULL)
-         {
-           name = g_strndup (start, end - start);
-         }
-
-       g_free (buffer);
-    }
-
-  if (name && *name != '\0')
-    {
-      char *tmp;
-      tmp = g_shell_unquote (name, NULL);
-      g_free (name);
-      name = tmp;
-    }
-
-  if (name == NULL)
-    name = g_strdup ("GNOME");
-
-  return name;
-}
-
-static char *
-get_privacy_policy_url (void)
-{
-  char *buffer;
-  char *url;
-
-  url = NULL;
-
-  if (g_file_get_contents ("/etc/os-release", &buffer, NULL, NULL))
-    {
-       char *start, *end;
-
-       start = end = NULL;
-       if ((start = strstr (buffer, "PRIVACY_POLICY_URL=")) != NULL)
-         {
-           start += strlen ("PRIVACY_POLICY_URL=");
-           end = strchr (start, '\n');
-         }
-
-       if (start != NULL && end != NULL)
-         {
-           url = g_strndup (start, end - start);
-         }
-
-       g_free (buffer);
-    }
-
-  if (url && *url != '\0')
-    {
-      char *tmp;
-      tmp = g_shell_unquote (url, NULL);
-      g_free (url);
-      url = tmp;
-    }
-
-  if (url == NULL)
-    url = g_strdup ("http://www.gnome.org/privacy-policy");
-
-  return url;
-}
 
 static void
 update_lock_screen_sensitivity (CcPrivacyPanel *self)
@@ -1269,7 +1188,9 @@ static void
 add_abrt (CcPrivacyPanel *self)
 {
   GtkWidget *w;
-  char *os_name, *url, *msg;
+  g_autofree gchar *os_name = NULL;
+  g_autofree gchar *url = NULL;
+  char *msg;
 
   w = get_abrt_label (self->privacy_settings, REPORT_TECHNICAL_PROBLEMS);
   gtk_widget_show (w);
@@ -1283,22 +1204,19 @@ add_abrt (CcPrivacyPanel *self)
                    self->abrt_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  os_name = get_os_name ();
+  os_name = cc_os_release_get_value ("NAME");
+  if (os_name == NULL)
+    os_name = g_strdup ("GNOME");
   /* translators: '%s' is the distributor's name, such as 'Fedora' */
   msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports are sent anonymously and are scrubbed of personal data."),
                          os_name);
-  g_free (os_name);
   gtk_label_set_text (self->abrt_explanation_label, msg);
   g_free (msg);
 
-  url = get_privacy_policy_url ();
-  if (!url)
-    {
-      g_debug ("Not watching for ABRT appearing, /etc/os-release lacks a privacy policy URL");
-      return;
-    }
+  url = cc_os_release_get_value ("PRIVACY_POLICY_URL");
+  if (url == NULL)
+    url = g_strdup ("http://www.gnome.org/privacy-policy");
   msg = g_strdup_printf ("<a href=\"%s\">%s</a>", url, _("Privacy Policy"));
-  g_free (url);
   gtk_label_set_markup (self->abrt_policy_link_label, msg);
   g_free (msg);
 
