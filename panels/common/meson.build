@@ -26,6 +26,7 @@ common_sources += gnome.mkenums(
 
 sources = files(
   'cc-hostname-entry.c',
+  'cc-os-release.c',
   'hostname-helper.c',
   'list-box-helper.c',
 )
