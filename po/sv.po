@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-08-12 17:06+0000\n"
-"PO-Revision-Date: 2019-08-13 19:02+0200\n"
+"POT-Creation-Date: 2019-08-26 13:31+0000\n"
+"PO-Revision-Date: 2019-08-26 16:20+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -65,7 +65,7 @@ msgstr "Har nätverksåtkomst"
 
 #: panels/applications/cc-applications-panel.c:579
 #: panels/applications/cc-applications-panel.c:581
-#: panels/search/cc-search-locations-dialog.c:286
+#: panels/search/cc-search-locations-dialog.c:292
 msgid "Home"
 msgstr "Hem"
 
@@ -358,7 +358,7 @@ msgstr "Välj en bild"
 #: panels/printers/pp-details-dialog.c:313
 #: panels/privacy/cc-privacy-panel.c:1137 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
-#: panels/search/cc-search-locations-dialog.c:607
+#: panels/search/cc-search-locations-dialog.c:613
 #: panels/sharing/cc-sharing-panel.c:428
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
@@ -5719,11 +5719,11 @@ msgstr ""
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Språk;Layout;Tangentbord;Inmatning;"
 
-#: panels/search/cc-search-locations-dialog.c:604
+#: panels/search/cc-search-locations-dialog.c:610
 msgid "Select Location"
 msgstr "Välj plats"
 
-#: panels/search/cc-search-locations-dialog.c:608
+#: panels/search/cc-search-locations-dialog.c:614
 msgid "_OK"
 msgstr "_OK"
 
@@ -6044,7 +6044,7 @@ msgstr "Volym"
 msgid "Alert Sound"
 msgstr "Larmljud"
 
-#: panels/sound/cc-volume-slider.c:200
+#: panels/sound/cc-volume-slider.c:63
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
@@ -6786,30 +6786,30 @@ msgstr "Färgeffekter"
 msgid "Should match the web address of your login provider."
 msgstr "Ska matcha din inloggningsleverantörs webbadress."
 
-#: panels/user-accounts/cc-add-user-dialog.c:204
+#: panels/user-accounts/cc-add-user-dialog.c:205
 msgid "Failed to add account"
 msgstr "Misslyckades med att lägga till konto"
 
-#: panels/user-accounts/cc-add-user-dialog.c:652
+#: panels/user-accounts/cc-add-user-dialog.c:676
 #: panels/user-accounts/cc-password-dialog.c:261
 msgid "The passwords do not match."
 msgstr "Lösenorden stämmer inte överens."
 
-#: panels/user-accounts/cc-add-user-dialog.c:874
-#: panels/user-accounts/cc-add-user-dialog.c:920
-#: panels/user-accounts/cc-add-user-dialog.c:941
+#: panels/user-accounts/cc-add-user-dialog.c:898
+#: panels/user-accounts/cc-add-user-dialog.c:944
+#: panels/user-accounts/cc-add-user-dialog.c:965
 msgid "Failed to register account"
 msgstr "Misslyckades med att registrera konto"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1064
+#: panels/user-accounts/cc-add-user-dialog.c:1088
 msgid "No supported way to authenticate with this domain"
 msgstr "Inget stöd för att autentisera med denna domän"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1137
+#: panels/user-accounts/cc-add-user-dialog.c:1161
 msgid "Failed to join domain"
 msgstr "Misslyckades med att ansluta till domänen"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1198
+#: panels/user-accounts/cc-add-user-dialog.c:1222
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6817,7 +6817,7 @@ msgstr ""
 "Inloggningsnamnet fungerade inte.\n"
 "Prova igen."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1205
+#: panels/user-accounts/cc-add-user-dialog.c:1229
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6825,11 +6825,11 @@ msgstr ""
 "Inloggningslösenordet fungerade inte.\n"
 "Prova igen."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1213
+#: panels/user-accounts/cc-add-user-dialog.c:1237
 msgid "Failed to log into domain"
 msgstr "Misslyckades med att logga in på domänen"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1271
+#: panels/user-accounts/cc-add-user-dialog.c:1295
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Kunde inte hitta domänen. Kanske felstavade du den?"
 
@@ -7250,7 +7250,7 @@ msgstr "_Vänster pekfinger"
 msgid "_Other finger:"
 msgstr "A_nnat finger:"
 
-#: panels/user-accounts/data/account-fingerprint.ui:262
+#: panels/user-accounts/data/account-fingerprint.ui:324
 msgid ""
 "Your fingerprint was successfully saved. You should now be able to log in "
 "using your fingerprint reader."
@@ -7461,28 +7461,23 @@ msgstr "Det nya lösenordet innehåller inte tillräckligt många olika tecken"
 msgid "Unknown error"
 msgstr "Okänt fel"
 
-#: panels/user-accounts/user-utils.c:430
+#: panels/user-accounts/user-utils.c:427
+msgid ""
+"The username should usually only consist of lower case letters from a-z, "
+"digits and the following characters: - _"
+msgstr ""
+"Användarnamnet får vanligen endast innehålla små bokstäver från a-z, siffror "
+"och följande tecken: - _"
+
+#: panels/user-accounts/user-utils.c:431
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Det användarnamnet är tyvärr inte tillgängligt. Försök med ett annat."
 
-#: panels/user-accounts/user-utils.c:433
-#, c-format
+#: panels/user-accounts/user-utils.c:476
 msgid "The username is too long."
 msgstr "Användarnamnet är för långt."
 
-#: panels/user-accounts/user-utils.c:436
-msgid "The username cannot start with a “-”."
-msgstr "Användarnamnet får inte börja med ett ”-”."
-
-#: panels/user-accounts/user-utils.c:439
-msgid ""
-"The username should only consist of upper and lower case letters from a-z, "
-"digits and the following characters: . - _"
-msgstr ""
-"Användarnamnet får endast innehålla stora och små bokstäver från a-z, "
-"siffror och föjande tecken: . - _"
-
-#: panels/user-accounts/user-utils.c:443
+#: panels/user-accounts/user-utils.c:526
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr ""
 "Det här kommer att användas för att namnge din hemmapp och kan inte ändras."
@@ -7940,6 +7935,9 @@ msgstr[1] "%u ingångar"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Systemljud"
+
+#~ msgid "The username cannot start with a “-”."
+#~ msgstr "Användarnamnet får inte börja med ett ”-”."
 
 #~ msgid "Preferences"
 #~ msgstr "Inställningar"
