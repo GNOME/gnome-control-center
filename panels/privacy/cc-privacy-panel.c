@@ -34,6 +34,7 @@
 #define SEND_SOFTWARE_USAGE_STATS "send-software-usage-stats"
 #define REPORT_TECHNICAL_PROBLEMS "report-technical-problems"
 #define LOCATION_ENABLED "enabled"
+#define USB_PROTECTION "usb-protection"
 
 #define APP_PERMISSIONS_TABLE "location"
 #define APP_PERMISSIONS_ID "location"
@@ -78,6 +79,9 @@ struct _CcPrivacyPanel
   GtkDialog   *software_dialog;
   GtkSwitch   *software_usage_switch;
   GtkDialog   *trash_dialog;
+  GtkDialog   *usbguard_dialog;
+  GtkSwitch   *usbguard_protection_switch;
+  GtkLabel    *usbguard_label;
 
   GSettings  *lockdown_settings;
   GSettings  *lock_settings;
@@ -92,6 +96,7 @@ struct _CcPrivacyPanel
 
   GDBusProxy *gclue_manager;
   GDBusProxy *perm_store;
+  GDBusProxy *usb_proxy;
   GVariant *location_apps_perms;
   GVariant *location_apps_data;
   GHashTable *location_app_switches;
@@ -1224,6 +1229,163 @@ add_trash_temp (CcPrivacyPanel *self)
 }
 
 static void
+update_usbguard_label (CcPrivacyPanel *self)
+{
+  gchar *label;
+  gboolean protection;
+  char *name_owner = NULL;
+
+  if (self->usb_proxy)
+    name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->usb_proxy));
+
+  g_settings_get (self->privacy_settings, USB_PROTECTION, "b", &protection);
+
+  label = (protection && name_owner) ? _("On") : _("Off");
+
+  gtk_label_set_label (self->usbguard_label, label);
+  g_free (name_owner);
+}
+
+static void
+on_usbguard_settings_changed (GSettings      *settings,
+                              const char     *key,
+                              CcPrivacyPanel *panel)
+{
+  if (g_str_equal (key, USB_PROTECTION) == FALSE)
+    return;
+
+  update_usbguard_label (panel);
+}
+
+static void
+on_usbguard_getparameter_cb (GObject      *source_object,
+                             GAsyncResult *res,
+                             gpointer      user_data)
+{
+  /* To correctly work we require at least the version 0.7.5 of USBGuard.
+   * To check if we meet this requirement we try to get the parameter
+   * "ImplicitPolicyTarget" that will fail with version 0.7.4 and below. */
+
+  CcPrivacyPanel *self = user_data;
+  GVariant *result;
+  gboolean active = TRUE;
+  g_autoptr(GError) error = NULL;
+
+  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
+                                     res,
+                                     &error);
+  if (result == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_debug ("Failed to fetch the required USBGuard parameter."
+                 "Probably the current USBGuard version is too old. %s", error->message);
+      active = FALSE;
+    }
+
+  gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), active);
+
+  update_usbguard_label (self);
+}
+
+static void
+on_usbguard_owner_changed_cb (GObject      *source_object,
+                              GAsyncResult *res,
+                              gpointer      user_data)
+{
+  CcPrivacyPanel *self = user_data;
+  GVariant *params;
+  char *name_owner;
+
+  name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->usb_proxy));
+  if (name_owner == NULL)
+    {
+      g_debug ("Probably USBGuard is not running or is not installed.");
+      gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), FALSE);
+      update_usbguard_label (self);
+    }
+  else
+    {
+      g_free (name_owner);
+      params = g_variant_new ("(s)", "ImplicitPolicyTarget");
+      g_dbus_proxy_call (self->usb_proxy,
+                         "getParameter",
+                         params,
+                         G_DBUS_CALL_FLAGS_NONE,
+                         -1,
+                         self->cancellable,
+                         on_usbguard_getparameter_cb,
+                         self);
+    }
+}
+
+static void
+on_usbguard_param_ready (GObject      *source_object,
+                         GAsyncResult *res,
+                         gpointer      user_data)
+{
+  CcPrivacyPanel *self;
+  GDBusProxy *proxy;
+  g_autoptr(GError) error = NULL;
+
+  self = user_data;
+  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (proxy == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+          g_warning ("Failed to connect to USBGuard: %s",
+                     error->message);
+
+      gtk_widget_set_sensitive (GTK_WIDGET (self->usbguard_protection_switch), FALSE);
+      gtk_label_set_label (self->usbguard_label, _("Off"));
+      return;
+    }
+  self->usb_proxy = proxy;
+
+  on_usbguard_owner_changed_cb (NULL, NULL, self);
+
+  g_signal_connect_object (self->usb_proxy,
+                           "notify::g-name-owner",
+                           G_CALLBACK (on_usbguard_owner_changed_cb),
+                           self,
+                           0);
+}
+
+static void
+add_usbguard (CcPrivacyPanel *self)
+{
+  self->usbguard_label = GTK_LABEL (gtk_label_new (""));
+  gtk_widget_show (GTK_WIDGET (self->usbguard_label));
+
+  add_row (self,
+           _("Forbid new USB devices"),
+           self->usbguard_dialog,
+           GTK_WIDGET (self->usbguard_label));
+
+  update_usbguard_label (self);
+
+  g_settings_bind (self->privacy_settings, USB_PROTECTION,
+                   self->usbguard_protection_switch, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  g_signal_connect (self->privacy_settings, "changed",
+                    G_CALLBACK (on_usbguard_settings_changed), self);
+
+  g_signal_connect (self->usbguard_dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.usbguard",
+                            "/org/usbguard",
+                            "org.usbguard",
+                            self->cancellable,
+                            on_usbguard_param_ready,
+                            self);
+
+}
+
+static void
 add_software (CcPrivacyPanel *self)
 {
   GtkLabel *w;
@@ -1329,6 +1491,7 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_pointer ((GtkWidget **)&self->trash_dialog, gtk_widget_destroy);
   g_clear_pointer ((GtkWidget **)&self->software_dialog, gtk_widget_destroy);
   g_clear_pointer ((GtkWidget **)&self->abrt_dialog, gtk_widget_destroy);
+  g_clear_pointer ((GtkWidget **)&self->usbguard_dialog, gtk_widget_destroy);
   g_clear_object (&self->lockdown_settings);
   g_clear_object (&self->lock_settings);
   g_clear_object (&self->privacy_settings);
@@ -1337,6 +1500,7 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_object (&self->gclue_manager);
   g_clear_object (&self->cancellable);
   g_clear_object (&self->perm_store);
+  g_clear_object (&self->usb_proxy);
   g_clear_object (&self->location_icon_size_group);
   g_clear_pointer (&self->location_apps_perms, g_variant_unref);
   g_clear_pointer (&self->location_apps_data, g_variant_unref);
@@ -1399,6 +1563,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   add_microphone (self);
   add_usage_history (self);
   add_trash_temp (self);
+  add_usbguard (self);
   add_software (self);
   add_abrt (self);
 
@@ -1453,4 +1618,6 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, software_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, software_usage_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, trash_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, usbguard_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, usbguard_protection_switch);
 }
