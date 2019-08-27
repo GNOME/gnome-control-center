@@ -36,7 +36,6 @@
 #include <glibtop/mountlist.h>
 #include <glibtop/mem.h>
 #include <glibtop/sysinfo.h>
-#include <udisks/udisks.h>
 
 #include <gdk/gdk.h>
 
@@ -64,13 +63,11 @@ typedef struct
   GtkWidget      *processor_label;
   GtkWidget      *os_name_label;
   GtkWidget      *os_type_label;
-  GtkWidget      *disk_label;
   GtkWidget      *graphics_label;
   GtkWidget      *virt_type_label;
   GtkWidget      *updates_button;
 
   /* Virtualisation labels */
-  GtkWidget      *label8;
   GtkWidget      *grid1;
   GtkWidget      *label18;
 
@@ -79,8 +76,6 @@ typedef struct
   char           *gnome_date;
 
   GCancellable   *cancellable;
-
-  UDisksClient   *client;
 
   GraphicsData   *graphics_data;
 } CcInfoOverviewPanelPrivate;
@@ -480,54 +475,6 @@ get_os_type (void)
     return g_strdup_printf (_("32-bit"));
 }
 
-static void
-get_primary_disc_info (CcInfoOverviewPanel *self)
-{
-  CcInfoOverviewPanelPrivate *priv;
-  GDBusObjectManager *manager;
-  g_autolist(GDBusObject) objects = NULL;
-  GList *l;
-  guint64 total_size;
-
-  priv = cc_info_overview_panel_get_instance_private (self);
-  total_size = 0;
-
-  if (!priv->client)
-    {
-      gtk_label_set_text (GTK_LABEL (priv->disk_label), _("Unknown"));
-      return;
-    }
-
-  manager = udisks_client_get_object_manager (priv->client);
-  objects = g_dbus_object_manager_get_objects (manager);
-
-  for (l = objects; l != NULL; l = l->next)
-    {
-      UDisksDrive *drive;
-      drive = udisks_object_peek_drive (UDISKS_OBJECT (l->data));
-
-      /* Skip removable devices */
-      if (drive == NULL ||
-          udisks_drive_get_removable (drive) ||
-          udisks_drive_get_ejectable (drive))
-        {
-          continue;
-        }
-
-      total_size += udisks_drive_get_size (drive);
-    }
-
-  if (total_size > 0)
-    {
-      g_autofree gchar *size = g_format_size (total_size);
-      gtk_label_set_text (GTK_LABEL (priv->disk_label), size);
-    }
-  else
-    {
-      gtk_label_set_text (GTK_LABEL (priv->disk_label), _("Unknown"));
-    }
-}
-
 static char *
 get_cpu_info (const glibtop_sysinfo *info)
 {
@@ -583,22 +530,6 @@ get_cpu_info (const glibtop_sysinfo *info)
   return g_strdup (cpu->str);
 }
 
-static void
-move_one_up (GtkWidget *grid,
-             GtkWidget *child)
-{
-  int top_attach;
-
-  gtk_container_child_get (GTK_CONTAINER (grid),
-                           child,
-                           "top-attach", &top_attach,
-                           NULL);
-  gtk_container_child_set (GTK_CONTAINER (grid),
-                           child,
-                           "top-attach", top_attach - 1,
-                           NULL);
-}
-
 static struct {
   const char *id;
   const char *display;
@@ -629,8 +560,6 @@ set_virtualization_label (CcInfoOverviewPanel *self,
   {
     gtk_widget_hide (priv->virt_type_label);
     gtk_widget_hide (priv->label18);
-    move_one_up (priv->grid1, priv->label8);
-    move_one_up (priv->grid1, priv->disk_label);
     return;
   }
 
@@ -726,8 +655,6 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   os_name_text = get_os_name ();
   gtk_label_set_text (GTK_LABEL (priv->os_name_label), os_name_text ? os_name_text : "");
 
-  get_primary_disc_info (self);
-
   gtk_label_set_markup (GTK_LABEL (priv->graphics_label), priv->graphics_data->hardware_string);
 }
 
@@ -787,8 +714,6 @@ cc_info_overview_panel_finalize (GObject *object)
       g_clear_object (&priv->cancellable);
     }
 
-  g_clear_object (&priv->client);
-
   g_free (priv->gnome_version);
   g_free (priv->gnome_date);
   g_free (priv->gnome_distributor);
@@ -814,11 +739,9 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, processor_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, os_name_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, os_type_label);
-  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, disk_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, graphics_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, virt_type_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, updates_button);
-  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, label8);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, grid1);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, label18);
 
@@ -841,12 +764,6 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
     g_signal_connect (priv->updates_button, "clicked", G_CALLBACK (on_updates_button_clicked), self);
   else
     gtk_widget_destroy (priv->updates_button);
-
-  priv->client = udisks_client_new_sync (NULL, &error);
-
-  if (error != NULL)
-      g_warning ("Unable to get UDisks client: %s. Disk information will not be available.",
-                 error->message);
 
   info_overview_panel_setup_overview (self);
   info_overview_panel_setup_virt (self);
