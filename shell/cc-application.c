@@ -276,9 +276,17 @@ cc_application_class_init (CcApplicationClass *klass)
 static void
 cc_application_init (CcApplication *self)
 {
+  g_autoptr(GtkCssProvider) provider = NULL;
+
   cc_object_storage_initialize ();
 
   g_application_add_main_option_entries (G_APPLICATION (self), all_options);
+
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (provider, "/org/gnome/ControlCenter/gtk/style.css");
+  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                             GTK_STYLE_PROVIDER (provider),
+                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 GtkApplication *

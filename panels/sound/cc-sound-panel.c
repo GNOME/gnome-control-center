@@ -260,6 +260,9 @@ cc_sound_panel_init (CcSoundPanel *self)
   gvc_mixer_control_open (self->mixer_control);
 
   cc_stream_list_box_set_mixer_control (self->stream_list_box, self->mixer_control);
+  cc_volume_slider_set_mixer_control (self->input_volume_slider, self->mixer_control);
+  cc_volume_slider_set_mixer_control (self->output_volume_slider, self->mixer_control);
+  cc_subwoofer_slider_set_mixer_control (self->subwoofer_slider, self->mixer_control);
   cc_device_combo_box_set_mixer_control (self->input_device_combo_box, self->mixer_control, FALSE);
   cc_device_combo_box_set_mixer_control (self->output_device_combo_box, self->mixer_control, TRUE);
 }

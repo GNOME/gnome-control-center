@@ -76,28 +76,17 @@ liblanguage_dep = declare_dependency(
 
 gsd_headers = [
   'gsd-device-manager.h',
-  'gsd-device-manager-udev.h',
-  'gsd-device-manager-x11.h',
   'gsd-input-helper.h'
 ]
 
-gsd_sources_udev = ['gsd-device-manager-udev.c']
-
 gsd_sources = [
   'gsd-device-manager.c',
-  'gsd-device-manager-x11.c',
   'gsd-input-helper.c'
 ]
 
 sources = common_sources + files(gsd_sources)
 
-deps = common_deps
-
-if enable_wayland
-  sources += files(gsd_sources_udev)
-
-  deps += wayland_deps
-endif
+deps = common_deps + [ gudev_dep ]
 
 libdevice = static_library(
   'device',
@@ -114,28 +103,5 @@ libdevice_dep = declare_dependency(
 install_data(
   'gnome-control-center.rules',
   install_dir: join_paths(control_center_datadir, 'polkit-1', 'rules.d')
-)
-
-# FIXME: workaround for updating different sources code
-input_dir = join_paths(meson.source_root(), '..', 'gnome-settings-daemon', 'plugins', 'common')
-
-script_conf = configuration_data()
-script_conf.set('program', update_from_gsd.path())
-script_conf.set('input_dir', input_dir)
-script_conf.set('working_dir', meson.current_source_dir())
-script_conf.set('source_files', ' '.join(gsd_sources + gsd_sources_udev + gsd_headers))
-script_conf.set('source_message', 'common: Update from gnome-settings-daemon')
-
-script_name = 'update-common-from-gsd'
-
-script = configure_file(
-  input: update_from_gsd_in,
-  output: script_name + '.sh',
-  configuration: script_conf
-)
-
-run_target(
-  script_name,
-  command: script
 )
 

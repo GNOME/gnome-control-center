@@ -39,7 +39,8 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">center</property>
-                        <property name="xalign">0</property>
+                        <property name="justify">center</property>
+                        <property name="wrap">True</property>
                         <property name="label" translatable="yes">Select how media should be handled</property>
                         <property name="margin_bottom">12</property>
                         <style>
@@ -269,16 +270,23 @@
             </child>
             <child>
               <object class="GtkCheckButton" id="media_autorun_never_checkbutton">
-                <property name="label" translatable="yes">_Never prompt or start programs on media insertion</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="use_action_appearance">False</property>
-                <property name="use_underline">True</property>
-                <property name="xalign">0</property>
                 <property name="draw_indicator">True</property>
                 <property name="valign">end</property>
                 <property name="vexpand">False</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="wrap">True</property>
+                    <property name="xalign">0</property>
+                    <property name="use_underline">True</property>
+                    <property name="label" translatable="yes">_Never prompt or start programs on media insertion</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>

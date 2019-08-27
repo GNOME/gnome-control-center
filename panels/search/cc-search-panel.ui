@@ -24,106 +24,26 @@
                 <property name="orientation">vertical</property>
                 <property name="hexpand">True</property>
                 <child>
-                  <object class="GtkFrame" id="search_frame">
+                  <object class="GtkLabel">
                     <property name="visible">True</property>
+                    <property name="xalign">0.0</property>
+                    <property name="margin-bottom">20</property>
+                    <property name="wrap">True</property>
+                    <property name="label" translatable="yes">Control which search results are shown in the Activities Overview. The order of search results can also be changed by moving rows in the list.</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkToolbar" id="search_toolbar">
+                  <object class="GtkFrame" id="search_frame">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="toolbar_style">icons</property>
-                    <property name="show_arrow">False</property>
-                    <property name="icon_size">1</property>
-                    <style>
-                      <class name="inline-toolbar"/>
-                    </style>
                     <child>
-                      <object class="GtkToolItem" id="up_down_item">
+                      <object class="GtkListBox" id="list_box">
                         <property name="visible">True</property>
-                        <child>
-                          <object class="GtkBox" id="up_down_box">
-                            <property name="visible">True</property>
-                            <child>
-                               <object class="GtkButton" id="up_button">
-                                 <property name="visible">True</property>
-                                 <child internal-child="accessible">
-                                   <object class="AtkObject" id="up_button_a11y">
-                                     <property name="accessible-name" translatable="yes">Move Up</property>
-                                   </object>
-                                 </child>
-                                 <child>
-                                    <object class="GtkImage" id="up_image">
-                                      <property name="visible">True</property>
-                                      <property name="icon-name">go-up-symbolic</property>
-                                      <property name="icon-size">1</property>
-                                    </object>
-                                 </child>
-                               </object>
-                            </child>
-                            <child>
-                               <object class="GtkButton" id="down_button">
-                                 <property name="visible">True</property>
-                                 <child internal-child="accessible">
-                                   <object class="AtkObject" id="down_button_a11y">
-                                     <property name="accessible-name" translatable="yes">Move Down</property>
-                                   </object>
-                                 </child>
-                                 <child>
-                                    <object class="GtkImage" id="down_image">
-                                      <property name="visible">True</property>
-                                      <property name="icon-name">go-down-symbolic</property>
-                                      <property name="icon-size">1</property>
-                                    </object>
-                                 </child>
-                               </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSeparatorToolItem" id="sep1">
-                        <property name="visible">True</property>
-                        <property name="draw">False</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkToolItem" id="settings_item">
-                        <property name="visible">True</property>
-                        <child>
-                          <object class="GtkBox" id="i_s_ud_box">
-                            <property name="visible">True</property>
-                            <child>
-                               <object class="GtkButton" id="settings_button">
-                                 <property name="visible">True</property>
-                                 <child internal-child="accessible">
-                                   <object class="AtkObject" id="settings_button_a11y">
-                                     <property name="accessible-name" translatable="yes">Preferences</property>
-                                   </object>
-                                 </child>
-                                 <child>
-                                    <object class="GtkImage" id="settings_image">
-                                      <property name="visible">True</property>
-                                      <property name="icon-name">emblem-system-symbolic</property>
-                                      <property name="icon-size">1</property>
-                                    </object>
-                                 </child>
-                               </object>
-                            </child>
-                          </object>
-                        </child>
                       </object>
                     </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
                 </child>
               </object>
            </child>
@@ -132,4 +52,12 @@
       </object>
     </child>
   </template>
+
+  <!-- Header widget -->
+  <object class="GtkButton" id="settings_button">
+    <property name="visible">True</property>
+    <property name="can-focus">True</property>
+    <property name="label" translatable="yes">Search Locations</property>
+    <signal name="clicked" handler="settings_button_clicked" object="CcSearchPanel" swapped="no"/>
+  </object>
 </interface>
