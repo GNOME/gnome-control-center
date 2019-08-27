@@ -31,8 +31,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-08-25 13:26+0000\n"
-"PO-Revision-Date: 2019-08-26 20:40+0900\n"
+"POT-Creation-Date: 2019-08-26 13:31+0000\n"
+"PO-Revision-Date: 2019-08-26 20:50+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -79,7 +79,7 @@ msgstr "ネットワークアクセス"
 
 #: panels/applications/cc-applications-panel.c:579
 #: panels/applications/cc-applications-panel.c:581
-#: panels/search/cc-search-locations-dialog.c:286
+#: panels/search/cc-search-locations-dialog.c:292
 msgid "Home"
 msgstr "ホーム"
 
@@ -370,7 +370,7 @@ msgstr "画像の選択"
 #: panels/printers/pp-details-dialog.c:313
 #: panels/privacy/cc-privacy-panel.c:1137 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
-#: panels/search/cc-search-locations-dialog.c:607
+#: panels/search/cc-search-locations-dialog.c:613
 #: panels/sharing/cc-sharing-panel.c:428
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
@@ -1423,7 +1423,7 @@ msgid ""
 "change its settings."
 msgstr ""
 "実際の配置に合わせてディスプレイをドラッグしてください。設定を変更するには、"
-"各ディスプレイを選択してください。"
+"ディスプレイを選択してください。"
 
 #: panels/display/cc-display-panel.ui:252
 msgid "Display Arrangement"
@@ -5744,11 +5744,11 @@ msgstr ""
 "Language;Layout;Keyboard;Input;言語;レイアウト;キーボード;入力;インプット;"
 "Region;地域;"
 
-#: panels/search/cc-search-locations-dialog.c:604
+#: panels/search/cc-search-locations-dialog.c:610
 msgid "Select Location"
 msgstr "場所の選択"
 
-#: panels/search/cc-search-locations-dialog.c:608
+#: panels/search/cc-search-locations-dialog.c:614
 msgid "_OK"
 msgstr "OK(_O)"
 
@@ -6831,30 +6831,30 @@ msgstr "色の設定"
 msgid "Should match the web address of your login provider."
 msgstr "ログイン提供者のウェブアドレスと一致させる必要があります。"
 
-#: panels/user-accounts/cc-add-user-dialog.c:204
+#: panels/user-accounts/cc-add-user-dialog.c:205
 msgid "Failed to add account"
 msgstr "アカウントの追加に失敗しました"
 
-#: panels/user-accounts/cc-add-user-dialog.c:652
+#: panels/user-accounts/cc-add-user-dialog.c:676
 #: panels/user-accounts/cc-password-dialog.c:261
 msgid "The passwords do not match."
 msgstr "パスワードが一致しません。"
 
-#: panels/user-accounts/cc-add-user-dialog.c:874
-#: panels/user-accounts/cc-add-user-dialog.c:920
-#: panels/user-accounts/cc-add-user-dialog.c:941
+#: panels/user-accounts/cc-add-user-dialog.c:898
+#: panels/user-accounts/cc-add-user-dialog.c:944
+#: panels/user-accounts/cc-add-user-dialog.c:965
 msgid "Failed to register account"
 msgstr "アカウントの登録に失敗しました"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1064
+#: panels/user-accounts/cc-add-user-dialog.c:1088
 msgid "No supported way to authenticate with this domain"
 msgstr "このドメインで認証を行う方法はサポートされていません"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1137
+#: panels/user-accounts/cc-add-user-dialog.c:1161
 msgid "Failed to join domain"
 msgstr "ドメインの参加に失敗しました"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1198
+#: panels/user-accounts/cc-add-user-dialog.c:1222
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6862,7 +6862,7 @@ msgstr ""
 "ログイン名に問題がありました。\n"
 "やり直してください。"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1205
+#: panels/user-accounts/cc-add-user-dialog.c:1229
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6870,11 +6870,11 @@ msgstr ""
 "パスワードに問題がありました。\n"
 "やり直してください。"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1213
+#: panels/user-accounts/cc-add-user-dialog.c:1237
 msgid "Failed to log into domain"
 msgstr "ドメインへのログインに失敗しました"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1271
+#: panels/user-accounts/cc-add-user-dialog.c:1295
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "ドメインを見つけられません。スペルミスがないか確認してください。"
 
@@ -7509,29 +7509,23 @@ msgstr "新しいパスワードには十分な種類の文字が含まれてい
 msgid "Unknown error"
 msgstr "原因不明のエラー"
 
-#: panels/user-accounts/user-utils.c:430
+#: panels/user-accounts/user-utils.c:427
+msgid ""
+"The username should usually only consist of lower case letters from a-z, "
+"digits and the following characters: - _"
+msgstr ""
+"ユーザー名には小文字の“a”から“z”、数字の“0”から“9”、記号の“-”と“_”のみを使用してください。"
+
+#: panels/user-accounts/user-utils.c:431
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr ""
 "申し訳ありませんが、そのユーザー名は使用できません。 もう一度お試しください。"
 
-#: panels/user-accounts/user-utils.c:433
-#, c-format
+#: panels/user-accounts/user-utils.c:476
 msgid "The username is too long."
 msgstr "ユーザー名が長すぎます。"
 
-#: panels/user-accounts/user-utils.c:436
-msgid "The username cannot start with a “-”."
-msgstr "ユーザー名の先頭文字に“-”は使えません。"
-
-#: panels/user-accounts/user-utils.c:439
-msgid ""
-"The username should only consist of upper and lower case letters from a-z, "
-"digits and the following characters: . - _"
-msgstr ""
-"ユーザー名には次の文字だけを使用してください。a から z の大文字・小文字、数"
-"字、'.'、'-'、および '_'。"
-
-#: panels/user-accounts/user-utils.c:443
+#: panels/user-accounts/user-utils.c:526
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr ""
 "ユーザー名はホームフォルダーの名前に使用されます。これは変更できません。"
@@ -7986,6 +7980,9 @@ msgstr[0] "%u 入力"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "システムのサウンド"
+
+#~ msgid "The username cannot start with a “-”."
+#~ msgstr "ユーザー名の先頭文字に“-”は使えません。"
 
 #~ msgid "_Background"
 #~ msgstr "背景(_B)"
