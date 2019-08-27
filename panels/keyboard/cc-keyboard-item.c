@@ -425,7 +425,7 @@ cc_keyboard_item_new (CcKeyboardItemType type)
 }
 
 static guint *
-get_above_tab_keysyms ()
+get_above_tab_keysyms (void)
 {
   GdkKeymap *keymap = gdk_keymap_get_for_display (gdk_display_get_default ());
   guint keycode = 0x29 /* KEY_GRAVE */ + 8;
