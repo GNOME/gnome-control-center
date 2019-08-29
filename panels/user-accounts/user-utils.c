@@ -458,7 +458,7 @@ is_valid_username_async (const gchar *username,
         isValidUsernameData *data;
         gchar *argv[6];
         GPid pid;
-        GError *error;
+        GError *error = NULL;
 
         task = g_task_new (NULL, cancellable, callback, callback_data);
         g_task_set_source_tag (task, is_valid_username_async);
