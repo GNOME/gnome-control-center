@@ -201,8 +201,8 @@ create_carousel_entry (CcUserPanel *self, ActUser *user)
         cc_user_image_set_user (CC_USER_IMAGE (widget), user);
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
 
-        label = g_strdup_printf ("<b>%s</b>",
-                                 get_real_or_user_name (user));
+        label = g_markup_printf_escaped ("<b>%s</b>",
+                                         get_real_or_user_name (user));
         widget = gtk_label_new (label);
         gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
         gtk_label_set_ellipsize (GTK_LABEL (widget), PANGO_ELLIPSIZE_END);
