@@ -23,6 +23,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <limits.h>
 #include <unistd.h>
 #include <utmpx.h>
