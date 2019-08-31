@@ -388,7 +388,9 @@ add_regions (CcFormatChooser *chooser,
         g_autoptr(GList) initial_locales = NULL;
         GtkWidget *widget;
         GList *l;
+        gboolean has_common_locale;
 
+        has_common_locale = FALSE;
         chooser->adding = TRUE;
         initial_locales = g_hash_table_get_keys (initial);
 
@@ -397,13 +399,20 @@ add_regions (CcFormatChooser *chooser,
                 if (!cc_common_language_has_font (l->data))
                         continue;
 
+                if (!g_strv_contains ((const char * const*)locale_ids, l->data))
+                        continue;
+
                 widget = region_widget_new (chooser, l->data);
                 if (!widget)
                         continue;
 
+                has_common_locale = TRUE;
                 gtk_widget_show (widget);
                 gtk_container_add (GTK_CONTAINER (chooser->common_region_listbox), widget);
           }
+
+        gtk_widget_set_visible (GTK_WIDGET (chooser->common_region_listbox), has_common_locale);
+        gtk_widget_set_visible (GTK_WIDGET (chooser->common_region_title), has_common_locale);
 
         /* Populate All locales */
         while (*locale_ids) {
