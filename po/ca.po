@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-08-16 06:00+0000\n"
+"POT-Creation-Date: 2019-08-26 13:31+0000\n"
 "PO-Revision-Date: 2019-08-03 21:04+0200\n"
 "Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -71,7 +71,7 @@ msgstr "Té accés a la xarxa"
 
 #: panels/applications/cc-applications-panel.c:579
 #: panels/applications/cc-applications-panel.c:581
-#: panels/search/cc-search-locations-dialog.c:286
+#: panels/search/cc-search-locations-dialog.c:292
 msgid "Home"
 msgstr "Inici"
 
@@ -363,7 +363,7 @@ msgstr "Selecciona una imatge"
 #: panels/printers/pp-details-dialog.c:313
 #: panels/privacy/cc-privacy-panel.c:1137 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
-#: panels/search/cc-search-locations-dialog.c:607
+#: panels/search/cc-search-locations-dialog.c:613
 #: panels/sharing/cc-sharing-panel.c:428
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
@@ -836,7 +836,7 @@ msgstr "Copia el perfil"
 
 #: panels/color/cc-color-panel.ui:456
 msgid "Requires writable media"
-msgstr "Requereix un suport al qual s'hi pugui escriure"
+msgstr "Requereix un suport al qual es pugui escriure"
 
 #: panels/color/cc-color-panel.ui:519
 msgid "Upload profile"
@@ -1237,7 +1237,7 @@ msgstr "%l∶%M %p"
 #. Translators: This is the time format used in 24-hour mode.
 #: panels/datetime/cc-datetime-panel.c:548
 msgid "%R"
-msgstr "%R"
+msgstr "%-H:%M"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
@@ -5752,11 +5752,11 @@ msgstr ""
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Idioma;Disposició;Teclat;Entrada;"
 
-#: panels/search/cc-search-locations-dialog.c:604
+#: panels/search/cc-search-locations-dialog.c:610
 msgid "Select Location"
 msgstr "Seleccioneu una ubicació"
 
-#: panels/search/cc-search-locations-dialog.c:608
+#: panels/search/cc-search-locations-dialog.c:614
 msgid "_OK"
 msgstr "_D'acord"
 
@@ -5777,8 +5777,9 @@ msgid ""
 "Control which search results are shown in the Activities Overview. The order "
 "of search results can also be changed by moving rows in the list."
 msgstr ""
-"Controla quins resultats de la cerca es mostren a la vista general d'activitats. L'ordre "
-"dels resultats de la cerca es pot canviar movent les files de la llista."
+"Controla quins resultats de la cerca es mostren a la vista general "
+"d'activitats. L'ordre dels resultats de la cerca es pot canviar movent les "
+"files de la llista."
 
 #: panels/search/cc-search-panel.ui:60
 #: panels/search/search-locations-dialog.ui:9
@@ -5804,7 +5805,8 @@ msgid ""
 "Folders which are searched by system applications, such as Files, Photos and "
 "Videos."
 msgstr ""
-"Carpetes que es cerquen per les aplicacions del sistema, com Fitxers, Fotos i Vídeos."
+"Carpetes que es cerquen per les aplicacions del sistema, com Fitxers, Fotos "
+"i Vídeos."
 
 #: panels/search/search-locations-dialog.ui:52
 msgid "Places"
@@ -6079,7 +6081,7 @@ msgstr "Volum"
 msgid "Alert Sound"
 msgstr "So d'alerta"
 
-#: panels/sound/cc-volume-slider.c:200
+#: panels/sound/cc-volume-slider.c:63
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
@@ -6824,30 +6826,30 @@ msgstr "Efectes de color"
 msgid "Should match the web address of your login provider."
 msgstr "Ha de coincidir amb l'adreça web del proveïdor del compte."
 
-#: panels/user-accounts/cc-add-user-dialog.c:204
+#: panels/user-accounts/cc-add-user-dialog.c:205
 msgid "Failed to add account"
 msgstr "No s'ha pogut afegir el compte"
 
-#: panels/user-accounts/cc-add-user-dialog.c:652
+#: panels/user-accounts/cc-add-user-dialog.c:676
 #: panels/user-accounts/cc-password-dialog.c:261
 msgid "The passwords do not match."
 msgstr "Les contrasenyes no coincideixen."
 
-#: panels/user-accounts/cc-add-user-dialog.c:874
-#: panels/user-accounts/cc-add-user-dialog.c:920
-#: panels/user-accounts/cc-add-user-dialog.c:941
+#: panels/user-accounts/cc-add-user-dialog.c:898
+#: panels/user-accounts/cc-add-user-dialog.c:944
+#: panels/user-accounts/cc-add-user-dialog.c:965
 msgid "Failed to register account"
 msgstr "No s'ha pogut registrar el compte"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1064
+#: panels/user-accounts/cc-add-user-dialog.c:1088
 msgid "No supported way to authenticate with this domain"
 msgstr "No hi ha cap manera compatible per autenticar-se amb aquest domini"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1137
+#: panels/user-accounts/cc-add-user-dialog.c:1161
 msgid "Failed to join domain"
 msgstr "No s'ha pogut unir al domini"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1198
+#: panels/user-accounts/cc-add-user-dialog.c:1222
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6855,7 +6857,7 @@ msgstr ""
 "El nom d'usuari no és correcte.\n"
 "Torneu-ho a provar."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1205
+#: panels/user-accounts/cc-add-user-dialog.c:1229
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6863,11 +6865,11 @@ msgstr ""
 "La contrasenya no és vàlida.\n"
 "Torneu-ho a provar."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1213
+#: panels/user-accounts/cc-add-user-dialog.c:1237
 msgid "Failed to log into domain"
 msgstr "No s'ha pogut entrar al domini"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1271
+#: panels/user-accounts/cc-add-user-dialog.c:1295
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "No s'ha trobat el domini. Potser l'heu escrit malament?"
 
@@ -7499,28 +7501,23 @@ msgstr "La contrasenya nova no conté suficients caràcters diferents"
 msgid "Unknown error"
 msgstr "Error desconegut"
 
-#: panels/user-accounts/user-utils.c:430
+#: panels/user-accounts/user-utils.c:427
+msgid ""
+"The username should usually only consist of lower case letters from a-z, "
+"digits and the following characters: - _"
+msgstr ""
+"El nom d'usuari normalment només conté lletres minúscules de "
+"la «a» a la «z», dígits i els caràcters: «-» i «_»"
+
+#: panels/user-accounts/user-utils.c:431
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "El nom d'usuari no està disponible. Trieu-ne un altre."
 
-#: panels/user-accounts/user-utils.c:433
-#, c-format
+#: panels/user-accounts/user-utils.c:476
 msgid "The username is too long."
 msgstr "El nom d'usuari és massa llarg."
 
-#: panels/user-accounts/user-utils.c:436
-msgid "The username cannot start with a “-”."
-msgstr "El nom d'usuari no pot començar amb un «-»."
-
-#: panels/user-accounts/user-utils.c:439
-msgid ""
-"The username should only consist of upper and lower case letters from a-z, "
-"digits and the following characters: . - _"
-msgstr ""
-"El nom d'usuari només ha de consistir en lletres minúscules i majúscules de "
-"la «a» a la «z», dígits i qualsevol dels caràcters «.», «-» i «_»"
-
-#: panels/user-accounts/user-utils.c:443
+#: panels/user-accounts/user-utils.c:526
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr ""
 "Es farà servir per anomenar la vostra carpeta personal i no es pot canviar."
@@ -7985,6 +7982,3 @@ msgstr[1] "%u entrades"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Sons del sistema"
-
-#~ msgid "Preferences"
-#~ msgstr "Preferències"
