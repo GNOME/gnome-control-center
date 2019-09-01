@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-08-24 18:27+0000\n"
-"PO-Revision-Date: 2019-08-25 19:03+0200\n"
+"POT-Creation-Date: 2019-08-26 13:31+0000\n"
+"PO-Revision-Date: 2019-09-01 23:05+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician\n"
 "Language: gl\n"
@@ -69,7 +69,7 @@ msgstr "Ten acceso á rede"
 
 #: panels/applications/cc-applications-panel.c:579
 #: panels/applications/cc-applications-panel.c:581
-#: panels/search/cc-search-locations-dialog.c:286
+#: panels/search/cc-search-locations-dialog.c:292
 msgid "Home"
 msgstr "Cartafol persoal"
 
@@ -362,7 +362,7 @@ msgstr "Seleccione unha imaxe"
 #: panels/printers/pp-details-dialog.c:313
 #: panels/privacy/cc-privacy-panel.c:1137 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
-#: panels/search/cc-search-locations-dialog.c:607
+#: panels/search/cc-search-locations-dialog.c:613
 #: panels/sharing/cc-sharing-panel.c:428
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
@@ -5741,11 +5741,11 @@ msgstr ""
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Idioma:Distribución;Teclado;Entrada;"
 
-#: panels/search/cc-search-locations-dialog.c:604
+#: panels/search/cc-search-locations-dialog.c:610
 msgid "Select Location"
 msgstr "Seleccionar localización"
 
-#: panels/search/cc-search-locations-dialog.c:608
+#: panels/search/cc-search-locations-dialog.c:614
 msgid "_OK"
 msgstr "_Aceptar"
 
@@ -6069,7 +6069,7 @@ msgstr "Volume"
 msgid "Alert Sound"
 msgstr "Son de alerta"
 
-#: panels/sound/cc-volume-slider.c:200
+#: panels/sound/cc-volume-slider.c:63
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
@@ -6809,30 +6809,30 @@ msgstr "Efectos de cor"
 msgid "Should match the web address of your login provider."
 msgstr "Debería coincidir co enderezo web do seu fornecedor de conta."
 
-#: panels/user-accounts/cc-add-user-dialog.c:204
+#: panels/user-accounts/cc-add-user-dialog.c:205
 msgid "Failed to add account"
 msgstr "Produciuse un erro ao engadir a conta"
 
-#: panels/user-accounts/cc-add-user-dialog.c:652
+#: panels/user-accounts/cc-add-user-dialog.c:676
 #: panels/user-accounts/cc-password-dialog.c:261
 msgid "The passwords do not match."
 msgstr "Os contrasinais non coinciden."
 
-#: panels/user-accounts/cc-add-user-dialog.c:874
-#: panels/user-accounts/cc-add-user-dialog.c:920
-#: panels/user-accounts/cc-add-user-dialog.c:941
+#: panels/user-accounts/cc-add-user-dialog.c:898
+#: panels/user-accounts/cc-add-user-dialog.c:944
+#: panels/user-accounts/cc-add-user-dialog.c:965
 msgid "Failed to register account"
 msgstr "Produciuse un erro ao rexistrar a conta"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1064
+#: panels/user-accounts/cc-add-user-dialog.c:1088
 msgid "No supported way to authenticate with this domain"
 msgstr "Non hai unha maneira admitida de autenticar con este dominio"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1137
+#: panels/user-accounts/cc-add-user-dialog.c:1161
 msgid "Failed to join domain"
 msgstr "Produciuse un erro ao unirse ao dominio"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1198
+#: panels/user-accounts/cc-add-user-dialog.c:1222
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6840,7 +6840,7 @@ msgstr ""
 "Ese nome de inicio de sesión non funcionou.\n"
 "Ténteo de novo."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1205
+#: panels/user-accounts/cc-add-user-dialog.c:1229
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6848,11 +6848,11 @@ msgstr ""
 "Ese contrasinal de inicio de sesión non funcionou.\n"
 "Ténteo de novo."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1213
+#: panels/user-accounts/cc-add-user-dialog.c:1237
 msgid "Failed to log into domain"
 msgstr "Produciuse un erro ao iniciar sesión no dominio"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1271
+#: panels/user-accounts/cc-add-user-dialog.c:1295
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Non foi posíbel atopar o dominio. Pode ser que o escribira mal?"
 
@@ -7486,28 +7486,23 @@ msgstr "O novo contrasinal non contén suficientes caracteres diferentes"
 msgid "Unknown error"
 msgstr "Erro descoñecido"
 
-#: panels/user-accounts/user-utils.c:430
+#: panels/user-accounts/user-utils.c:427
+msgid ""
+"The username should usually only consist of lower case letters from a-z, "
+"digits and the following characters: - _"
+msgstr ""
+"O nome de usuario debe estar formado por letras en maiúsculas desde o «a» ao "
+"«z», díxitos, e o caracteres: - _"
+
+#: panels/user-accounts/user-utils.c:431
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Desculpe, o nome de usuario non está dispoñíbel. Probe outro."
 
-#: panels/user-accounts/user-utils.c:433
-#, c-format
+#: panels/user-accounts/user-utils.c:476
 msgid "The username is too long."
 msgstr "O nome de usuario é demasiado longo."
 
-#: panels/user-accounts/user-utils.c:436
-msgid "The username cannot start with a “-”."
-msgstr "O nome de usuario non pode comezar con «-»."
-
-#: panels/user-accounts/user-utils.c:439
-msgid ""
-"The username should only consist of upper and lower case letters from a-z, "
-"digits and the following characters: . - _"
-msgstr ""
-"O nome de usuario debe estar formado por letras en maiúsculas e minúsculas "
-"desde o «a» ao «z», díxitos, e o caracteres: . - _"
-
-#: panels/user-accounts/user-utils.c:443
+#: panels/user-accounts/user-utils.c:526
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr "Usarase como nome para o seu cartafol persoal e non pode cambiarse."
 
@@ -7970,6 +7965,9 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Sistemas de son"
+
+#~ msgid "The username cannot start with a “-”."
+#~ msgstr "O nome de usuario non pode comezar con «-»."
 
 #~ msgid "application-x-executable"
 #~ msgstr "application-x-executable"
