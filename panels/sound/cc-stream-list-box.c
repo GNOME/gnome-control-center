@@ -99,7 +99,7 @@ stream_added_cb (CcStreamListBox *self,
       return;
     }
 
-  row = cc_stream_row_new (self->label_size_group, stream, id, self->stream_type);
+  row = cc_stream_row_new (self->label_size_group, stream, id, self->stream_type, self->mixer_control);
   gtk_widget_show (GTK_WIDGET (row));
   gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), FALSE);
   gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (row));
