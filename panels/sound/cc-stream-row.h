@@ -20,6 +20,7 @@
 
 #include <gtk/gtk.h>
 #include <pulse/pulseaudio.h>
+#include <gvc-mixer-control.h>
 #include <gvc-mixer-stream.h>
 
 #include "cc-sound-enums.h"
@@ -29,13 +30,17 @@ G_BEGIN_DECLS
 #define CC_TYPE_STREAM_ROW (cc_stream_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcStreamRow, cc_stream_row, CC, STREAM_ROW, GtkListBoxRow)
 
-CcStreamRow     *cc_stream_row_new       (GtkSizeGroup   *size_group,
-                                          GvcMixerStream *stream,
-                                          guint           id,
-                                          CcStreamType    stream_type);
+CcStreamRow     *cc_stream_row_new              (GtkSizeGroup    *size_group,
+                                                 GvcMixerStream  *stream,
+                                                 guint            id,
+                                                 CcStreamType     stream_type,
+                                                 GvcMixerControl *mixer_control);
 
-GvcMixerStream *cc_stream_row_get_stream (CcStreamRow    *row);
+GvcMixerStream *cc_stream_row_get_stream        (CcStreamRow    *row);
 
-guint           cc_stream_row_get_id     (CcStreamRow    *row);
+guint           cc_stream_row_get_id            (CcStreamRow    *row);
+
+void            cc_stream_row_set_mixer_control (CcStreamRow     *row,
+                                                 GvcMixerControl *mixer_control);
 
 G_END_DECLS

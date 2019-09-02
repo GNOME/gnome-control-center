@@ -99,7 +99,7 @@ stream_added_cb (CcStreamListBox *self,
       return;
     }
 
-  row = cc_stream_row_new (self->label_size_group, stream, id, self->stream_type);
+  row = cc_stream_row_new (self->label_size_group, stream, id, self->stream_type, self->mixer_control);
   gtk_widget_show (GTK_WIDGET (row));
   gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), FALSE);
   gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (row));
@@ -206,6 +206,16 @@ cc_stream_list_box_init (CcStreamListBox *self)
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self), sort_cb, self, NULL);
 }
 
+static void
+update_mixer_control (GtkWidget *widget,
+                      gpointer   user_data)
+{
+    CcStreamRow *row = CC_STREAM_ROW (widget);
+    GvcMixerControl *mixer_control = GVC_MIXER_CONTROL (user_data);
+
+    cc_stream_row_set_mixer_control (row, mixer_control);
+}
+
 void
 cc_stream_list_box_set_mixer_control (CcStreamListBox *self,
                                       GvcMixerControl *mixer_control)
@@ -231,6 +241,8 @@ cc_stream_list_box_set_mixer_control (CcStreamListBox *self,
                                                              "stream-removed",
                                                              G_CALLBACK (stream_removed_cb),
                                                              self, G_CONNECT_SWAPPED);
+
+  gtk_container_foreach (GTK_CONTAINER (self), update_mixer_control, self->mixer_control);
 }
 
 void cc_stream_list_box_set_stream_type   (CcStreamListBox *self,
