@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 2.0\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-07-11 07:07+0000\n"
-"PO-Revision-Date: 2019-07-19 23:31+0200\n"
+"POT-Creation-Date: 2019-08-26 13:31+0000\n"
+"PO-Revision-Date: 2019-09-03 16:00+0200\n"
 "Last-Translator: gogo <linux.hr@protonmail.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "Language: hr\n"
@@ -58,7 +58,7 @@ msgstr "Ima pristup mreži"
 
 #: panels/applications/cc-applications-panel.c:579
 #: panels/applications/cc-applications-panel.c:581
-#: panels/search/cc-search-locations-dialog.c:286
+#: panels/search/cc-search-locations-dialog.c:292
 msgid "Home"
 msgstr "Osobna mapa"
 
@@ -342,7 +342,7 @@ msgstr "Odaberi sliku"
 #: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/cc-color-panel.ui:657 panels/color/color-calibrate.ui:25
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:940
+#: panels/display/cc-display-panel.c:947
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
@@ -352,7 +352,7 @@ msgstr "Odaberi sliku"
 #: panels/printers/pp-details-dialog.c:313
 #: panels/privacy/cc-privacy-panel.c:1137 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
-#: panels/search/cc-search-locations-dialog.c:607
+#: panels/search/cc-search-locations-dialog.c:613
 #: panels/sharing/cc-sharing-panel.c:428
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
@@ -386,8 +386,8 @@ msgid "Set Lock Screen"
 msgstr "Postavi zaključavanje zaslona"
 
 #: panels/background/cc-background-chooser.ui:143
-msgid "Delete Background"
-msgstr "Obriši pozadinu"
+msgid "Remove Background"
+msgstr "Ukloni pozadinu"
 
 #: panels/background/cc-background-item.c:140
 msgid "multiple sizes"
@@ -408,7 +408,7 @@ msgstr "Bez pozadine radne površine"
 msgid "Current background"
 msgstr "Trenutna pozadina"
 
-#: panels/background/cc-background-panel.ui:54
+#: panels/background/cc-background-panel.ui:63
 msgid "Add Picture…"
 msgstr "Dodaj sliku…"
 
@@ -467,7 +467,6 @@ msgstr "Isključi način rada u zrakoplovu"
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/network/cc-network-panel.ui:102
 #: panels/printers/pp-new-printer-dialog.c:1697
 msgid "Bluetooth"
 msgstr "Bluetooth"
@@ -1363,21 +1362,21 @@ msgstr "Promijeni postavke vremena i datuma sustava"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Morate se ovjeriti kako bi promijenili postavke vremena ili datuma."
 
-#: panels/display/cc-display-panel.c:951
+#: panels/display/cc-display-panel.c:958
 #: panels/network/connection-editor/connection-editor.ui:27
 #: panels/network/network-wifi.ui:38
 msgid "_Apply"
 msgstr "_Primijeni"
 
-#: panels/display/cc-display-panel.c:972
+#: panels/display/cc-display-panel.c:979
 msgid "Apply Changes?"
 msgstr "Primijeni promjene?"
 
-#: panels/display/cc-display-panel.c:977
+#: panels/display/cc-display-panel.c:984
 msgid "Changes Cannot be Applied"
 msgstr "Promjene se ne mogu primijeniti"
 
-#: panels/display/cc-display-panel.c:978
+#: panels/display/cc-display-panel.c:985
 msgid "This could be due to hardware limitations."
 msgstr "To može biti uzrokovano ograničenjem hardvera."
 
@@ -1425,27 +1424,27 @@ msgstr "Zasloni"
 msgid "Night Light"
 msgstr "Noćno svjetlo"
 
-#: panels/display/cc-display-settings.c:108
+#: panels/display/cc-display-settings.c:104
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Položeno"
 
-#: panels/display/cc-display-settings.c:111
+#: panels/display/cc-display-settings.c:107
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Uspravno desno"
 
-#: panels/display/cc-display-settings.c:114
+#: panels/display/cc-display-settings.c:110
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Uspravno lijevo"
 
-#: panels/display/cc-display-settings.c:117
+#: panels/display/cc-display-settings.c:113
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Obrnuto položeno"
 
-#: panels/display/cc-display-settings.c:191
+#: panels/display/cc-display-settings.c:187
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -1579,7 +1578,7 @@ msgid "_Video"
 msgstr "_Video"
 
 #: panels/info/cc-info-default-apps-panel.ui:162
-#: panels/info/cc-info-removable-media-panel.ui:161
+#: panels/info/cc-info-removable-media-panel.ui:162
 msgid "_Photos"
 msgstr "_Fotografije"
 
@@ -1660,40 +1659,40 @@ msgstr "Izračunavanje…"
 msgid "Check for updates"
 msgstr "Provjeri nadopune"
 
-#: panels/info/cc-info-removable-media-panel.c:296
+#: panels/info/cc-info-removable-media-panel.c:307
 msgid "Ask what to do"
 msgstr "Pitaj što učiniti"
 
-#: panels/info/cc-info-removable-media-panel.c:300
+#: panels/info/cc-info-removable-media-panel.c:311
 msgid "Do nothing"
 msgstr "Ne čini ništa"
 
-#: panels/info/cc-info-removable-media-panel.c:304
+#: panels/info/cc-info-removable-media-panel.c:315
 msgid "Open folder"
 msgstr "Otvori mapu"
 
-#: panels/info/cc-info-removable-media-panel.c:389
+#: panels/info/cc-info-removable-media-panel.c:401
 msgid "Other Media"
 msgstr "Ostali mediji"
 
-#: panels/info/cc-info-removable-media-panel.c:422
+#: panels/info/cc-info-removable-media-panel.c:434
 msgid "Select an application for audio CDs"
 msgstr "Odaberite aplikaciju za glazbene CD-e"
 
-#: panels/info/cc-info-removable-media-panel.c:423
+#: panels/info/cc-info-removable-media-panel.c:435
 msgid "Select an application for video DVDs"
 msgstr "Odaberite aplikaciju za video DVD-e"
 
-#: panels/info/cc-info-removable-media-panel.c:424
+#: panels/info/cc-info-removable-media-panel.c:436
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Odaberite aplikaciju koja će se pokrenuti kada je glazbeni svirač spojen"
 
-#: panels/info/cc-info-removable-media-panel.c:425
+#: panels/info/cc-info-removable-media-panel.c:437
 msgid "Select an application to run when a camera is connected"
 msgstr "Odaberite aplikaciju koja će se pokrenuti kada je kamera spojena"
 
-#: panels/info/cc-info-removable-media-panel.c:426
+#: panels/info/cc-info-removable-media-panel.c:438
 msgid "Select an application for software CDs"
 msgstr "Odaberite aplikaciju za softverske CD-e"
 
@@ -1702,91 +1701,91 @@ msgstr "Odaberite aplikaciju za softverske CD-e"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: panels/info/cc-info-removable-media-panel.c:438
+#: panels/info/cc-info-removable-media-panel.c:450
 msgid "audio DVD"
 msgstr "Glazbeni DVD"
 
-#: panels/info/cc-info-removable-media-panel.c:439
+#: panels/info/cc-info-removable-media-panel.c:451
 msgid "blank Blu-ray disc"
 msgstr "Prazni Blu-ray disk"
 
-#: panels/info/cc-info-removable-media-panel.c:440
+#: panels/info/cc-info-removable-media-panel.c:452
 msgid "blank CD disc"
 msgstr "Prazni CD disk"
 
-#: panels/info/cc-info-removable-media-panel.c:441
+#: panels/info/cc-info-removable-media-panel.c:453
 msgid "blank DVD disc"
 msgstr "Prazni DVD disk"
 
-#: panels/info/cc-info-removable-media-panel.c:442
+#: panels/info/cc-info-removable-media-panel.c:454
 msgid "blank HD DVD disc"
 msgstr "Prazni HD DVD disk"
 
-#: panels/info/cc-info-removable-media-panel.c:443
+#: panels/info/cc-info-removable-media-panel.c:455
 msgid "Blu-ray video disc"
 msgstr "Blu-ray video disk"
 
-#: panels/info/cc-info-removable-media-panel.c:444
+#: panels/info/cc-info-removable-media-panel.c:456
 msgid "e-book reader"
 msgstr "Čitač e-knjiga"
 
-#: panels/info/cc-info-removable-media-panel.c:445
+#: panels/info/cc-info-removable-media-panel.c:457
 msgid "HD DVD video disc"
 msgstr "HD DVD video disk"
 
-#: panels/info/cc-info-removable-media-panel.c:446
+#: panels/info/cc-info-removable-media-panel.c:458
 msgid "Picture CD"
 msgstr "Slikovni CD"
 
-#: panels/info/cc-info-removable-media-panel.c:447
+#: panels/info/cc-info-removable-media-panel.c:459
 msgid "Super Video CD"
 msgstr "Super video CD"
 
-#: panels/info/cc-info-removable-media-panel.c:448
+#: panels/info/cc-info-removable-media-panel.c:460
 msgid "Video CD"
 msgstr "Video CD"
 
-#: panels/info/cc-info-removable-media-panel.c:449
+#: panels/info/cc-info-removable-media-panel.c:461
 msgid "Windows software"
 msgstr "Windows softver"
 
-#: panels/info/cc-info-removable-media-panel.ui:43
+#: panels/info/cc-info-removable-media-panel.ui:44
 msgid "Select how media should be handled"
 msgstr "Odaberite kako bi se trebalo rukovati pojedinim medijima"
 
-#: panels/info/cc-info-removable-media-panel.ui:74
+#: panels/info/cc-info-removable-media-panel.ui:75
 msgid "CD _audio"
 msgstr "Glazbeni _CD"
 
-#: panels/info/cc-info-removable-media-panel.ui:91
+#: panels/info/cc-info-removable-media-panel.ui:92
 msgid "_DVD video"
 msgstr "_DVD video"
 
-#: panels/info/cc-info-removable-media-panel.ui:132
+#: panels/info/cc-info-removable-media-panel.ui:133
 msgid "_Music player"
 msgstr "_Glazbeni svirač"
 
-#: panels/info/cc-info-removable-media-panel.ui:190
+#: panels/info/cc-info-removable-media-panel.ui:191
 msgid "_Software"
 msgstr "_Softver"
 
-#: panels/info/cc-info-removable-media-panel.ui:228
+#: panels/info/cc-info-removable-media-panel.ui:229
 msgid "_Other Media…"
 msgstr "_Ostali mediji…"
 
-#: panels/info/cc-info-removable-media-panel.ui:272
+#: panels/info/cc-info-removable-media-panel.ui:287
 msgid "_Never prompt or start programs on media insertion"
 msgstr "_Nikad ne pitaj niti pokreći programe pri umetanju medija"
 
-#: panels/info/cc-info-removable-media-panel.ui:331
+#: panels/info/cc-info-removable-media-panel.ui:339
 msgid "Select how other media should be handled"
 msgstr "Odaberite kako će se rukovati s ostalim medijima"
 
-#: panels/info/cc-info-removable-media-panel.ui:370
+#: panels/info/cc-info-removable-media-panel.ui:378
 msgid "_Action:"
 msgstr "_Radnja:"
 
-#: panels/info/cc-info-removable-media-panel.ui:393
+#: panels/info/cc-info-removable-media-panel.ui:401
 msgid "_Type:"
 msgstr "_Vrsta:"
 
@@ -1890,7 +1889,7 @@ msgid "Eject"
 msgstr "Izbaci"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:580
+#: panels/universal-access/cc-ua-panel.ui:565
 msgid "Typing"
 msgstr "Tipkanje"
 
@@ -2104,7 +2103,7 @@ msgid "Add Custom Shortcut"
 msgstr "Dodaj prilagođeni prečac"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:3
-#: panels/region/cc-region-panel.ui:395 shell/cc-window.ui:339
+#: panels/region/cc-region-panel.ui:394 shell/cc-window.ui:339
 msgid "Keyboard Shortcuts"
 msgstr "Prečaci tipkovnice"
 
@@ -2296,20 +2295,24 @@ msgstr "Mrežni proxy"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: panels/network/cc-network-panel.c:726 panels/network/net-vpn.c:167
+#: panels/network/cc-network-panel.c:725 panels/network/net-vpn.c:167
 #: panels/network/net-vpn.c:295
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: panels/network/cc-network-panel.c:790 panels/network/cc-wifi-panel.ui:306
+#: panels/network/cc-network-panel.c:789 panels/network/cc-wifi-panel.ui:306
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Ups, nešto je pošlo po krivu. Kontaktirajte svojeg dobavljača softvera."
 
-#: panels/network/cc-network-panel.c:796
+#: panels/network/cc-network-panel.c:795
 msgid "NetworkManager needs to be running."
 msgstr "Mrežni upravitelj mora biti pokrenut."
+
+#: panels/network/cc-network-panel.ui:102
+msgid "Other Devices"
+msgstr "Ostali uređaji"
 
 #: panels/network/cc-network-panel.ui:143
 #: panels/network/connection-editor/net-connection-editor.c:581
@@ -3050,19 +3053,19 @@ msgstr "_Zaboravi"
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2074 panels/power/cc-power-panel.c:2085
 #: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
-#: panels/universal-access/cc-ua-panel.c:478
-#: panels/universal-access/cc-ua-panel.c:841
-#: panels/universal-access/cc-ua-panel.c:854
-#: panels/universal-access/cc-ua-panel.c:866
-#: panels/universal-access/cc-ua-panel.c:1031
-#: panels/universal-access/cc-ua-panel.ui:338
-#: panels/universal-access/cc-ua-panel.ui:384
-#: panels/universal-access/cc-ua-panel.ui:430
-#: panels/universal-access/cc-ua-panel.ui:536
-#: panels/universal-access/cc-ua-panel.ui:689
-#: panels/universal-access/cc-ua-panel.ui:735
-#: panels/universal-access/cc-ua-panel.ui:781
-#: panels/universal-access/cc-ua-panel.ui:933
+#: panels/universal-access/cc-ua-panel.c:477
+#: panels/universal-access/cc-ua-panel.c:840
+#: panels/universal-access/cc-ua-panel.c:853
+#: panels/universal-access/cc-ua-panel.c:865
+#: panels/universal-access/cc-ua-panel.c:1030
+#: panels/universal-access/cc-ua-panel.ui:323
+#: panels/universal-access/cc-ua-panel.ui:369
+#: panels/universal-access/cc-ua-panel.ui:415
+#: panels/universal-access/cc-ua-panel.ui:521
+#: panels/universal-access/cc-ua-panel.ui:674
+#: panels/universal-access/cc-ua-panel.ui:720
+#: panels/universal-access/cc-ua-panel.ui:766
+#: panels/universal-access/cc-ua-panel.ui:918
 msgid "Off"
 msgstr "Isključeno"
 
@@ -3591,13 +3594,13 @@ msgstr "nedostaje EAP-FAST PAC datoteka"
 
 #: panels/network/wireless-security/eap-method-fast.c:268
 #: panels/network/wireless-security/eap-method-peap.c:302
-#: panels/network/wireless-security/eap-method-ttls.c:351
+#: panels/network/wireless-security/eap-method-ttls.c:361
 msgid "GTC"
 msgstr "GTC"
 
 #: panels/network/wireless-security/eap-method-fast.c:283
 #: panels/network/wireless-security/eap-method-peap.c:272
-#: panels/network/wireless-security/eap-method-ttls.c:289
+#: panels/network/wireless-security/eap-method-ttls.c:299
 msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
@@ -3627,7 +3630,7 @@ msgstr "PAC _datoteka"
 
 #: panels/network/wireless-security/eap-method-fast.ui:122
 #: panels/network/wireless-security/eap-method-peap.ui:146
-#: panels/network/wireless-security/eap-method-ttls.ui:97
+#: panels/network/wireless-security/eap-method-ttls.ui:123
 msgid "_Inner authentication"
 msgstr "_Unutrašnja ovjera"
 
@@ -3669,14 +3672,14 @@ msgid "invalid EAP-PEAP CA certificate: no certificate specified"
 msgstr "nevaljana EAP-PEAP CA vjerodajnica: vjerodajnica nije određena"
 
 #: panels/network/wireless-security/eap-method-peap.c:287
-#: panels/network/wireless-security/eap-method-ttls.c:336
+#: panels/network/wireless-security/eap-method-ttls.c:346
 #: panels/network/wireless-security/wireless-security.c:441
 msgid "MD5"
 msgstr "MD5"
 
 #: panels/network/wireless-security/eap-method-peap.c:381
 #: panels/network/wireless-security/eap-method-tls.c:492
-#: panels/network/wireless-security/eap-method-ttls.c:430
+#: panels/network/wireless-security/eap-method-ttls.c:440
 msgid "Choose a Certificate Authority certificate"
 msgstr "Odaberite vjerodajnicu izdavatelja vjerodajnice"
 
@@ -3690,13 +3693,13 @@ msgstr "Inačica 1"
 
 #: panels/network/wireless-security/eap-method-peap.ui:74
 #: panels/network/wireless-security/eap-method-tls.ui:75
-#: panels/network/wireless-security/eap-method-ttls.ui:57
+#: panels/network/wireless-security/eap-method-ttls.ui:82
 msgid "C_A certificate"
 msgstr "C_A vjerodajnica"
 
 #: panels/network/wireless-security/eap-method-peap.ui:96
 #: panels/network/wireless-security/eap-method-tls.ui:97
-#: panels/network/wireless-security/eap-method-ttls.ui:79
+#: panels/network/wireless-security/eap-method-ttls.ui:105
 msgid "No CA certificate is _required"
 msgstr "CA vjerodajnica nije _potrebna"
 
@@ -3786,21 +3789,27 @@ msgstr "nevaljana EAP-TTLS CA vjerodajnica: %s"
 msgid "invalid EAP-TTLS CA certificate: no certificate specified"
 msgstr "nevaljana EAP-TTLS CA vjerodajnica: vjerodajnica nije određena"
 
-#: panels/network/wireless-security/eap-method-ttls.c:259
+#: panels/network/wireless-security/eap-method-ttls.c:269
 msgid "PAP"
 msgstr "PAP"
 
-#: panels/network/wireless-security/eap-method-ttls.c:274
+#: panels/network/wireless-security/eap-method-ttls.c:284
 msgid "MSCHAP"
 msgstr "MSCHAP"
 
-#: panels/network/wireless-security/eap-method-ttls.c:305
+#: panels/network/wireless-security/eap-method-ttls.c:315
 msgid "MSCHAPv2 (no EAP)"
 msgstr "MSCHAPv2 (bez EAP)"
 
-#: panels/network/wireless-security/eap-method-ttls.c:321
+#: panels/network/wireless-security/eap-method-ttls.c:331
 msgid "CHAP"
 msgstr "CHAP"
+
+#: panels/network/wireless-security/eap-method-ttls.ui:56
+#: panels/user-accounts/cc-add-user-dialog.ui:507
+#: panels/user-accounts/data/join-dialog.ui:116
+msgid "_Domain"
+msgstr "_Domena"
 
 #: panels/network/wireless-security/wireless-security.c:87
 msgid "Unknown error validating 802.1X security"
@@ -3917,23 +3926,23 @@ msgid "_Type"
 msgstr "_Vrsta"
 
 #. This is the per application switch for message tray usage.
-#: panels/notifications/cc-app-notifications-dialog.ui:61
+#: panels/notifications/cc-app-notifications-dialog.ui:60
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "_Obavijesti"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/cc-app-notifications-dialog.ui:113
+#: panels/notifications/cc-app-notifications-dialog.ui:112
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "Zvučna _upozorenja"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:169
+#: panels/notifications/cc-app-notifications-dialog.ui:168
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "_Skočne obavijesti"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:185
+#: panels/notifications/cc-app-notifications-dialog.ui:184
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
@@ -3942,17 +3951,17 @@ msgstr ""
 "obavijesti onemoguće."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/cc-app-notifications-dialog.ui:250
+#: panels/notifications/cc-app-notifications-dialog.ui:249
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "Prikaži sadržaj _poruke u skočnim obavijestima"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:301
+#: panels/notifications/cc-app-notifications-dialog.ui:300
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "_Obavijesti zaključanog zaslona"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:352
+#: panels/notifications/cc-app-notifications-dialog.ui:351
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Prikaži sadržaj _poruke na zaključanom zaslonu"
@@ -3960,11 +3969,11 @@ msgstr "Prikaži sadržaj _poruke na zaključanom zaslonu"
 #: panels/notifications/cc-notifications-panel.c:270
 #: panels/power/cc-power-panel.c:2080 panels/power/cc-power-panel.c:2087
 #: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
-#: panels/universal-access/cc-ua-panel.c:478
-#: panels/universal-access/cc-ua-panel.c:841
-#: panels/universal-access/cc-ua-panel.c:854
-#: panels/universal-access/cc-ua-panel.c:866
-#: panels/universal-access/cc-ua-panel.c:1031
+#: panels/universal-access/cc-ua-panel.c:477
+#: panels/universal-access/cc-ua-panel.c:840
+#: panels/universal-access/cc-ua-panel.c:853
+#: panels/universal-access/cc-ua-panel.c:865
+#: panels/universal-access/cc-ua-panel.c:1030
 msgid "On"
 msgstr "Uključeno"
 
@@ -4508,7 +4517,7 @@ msgid "On _Battery Power"
 msgstr "Na _bateriji"
 
 #: panels/power/cc-power-panel.ui:233 panels/power/cc-power-panel.ui:293
-#: panels/universal-access/cc-ua-panel.ui:1507
+#: panels/universal-access/cc-ua-panel.ui:1495
 msgid "Delay"
 msgstr "Odgoda"
 
@@ -5677,39 +5686,39 @@ msgstr "Nema odabranih načina unosa"
 msgid "Login settings are used by all users when logging into the system"
 msgstr "Postavke prijave koriste svi korisnici prilikom prijave u sustav"
 
-#: panels/region/cc-region-panel.ui:338
+#: panels/region/cc-region-panel.ui:337
 msgid "Input Source Options"
 msgstr "Mogućnosti načina unosa"
 
-#: panels/region/cc-region-panel.ui:353
+#: panels/region/cc-region-panel.ui:352
 msgid "Use the _same source for all windows"
 msgstr "Koristi _isti način unosa za sve prozore"
 
-#: panels/region/cc-region-panel.ui:371
+#: panels/region/cc-region-panel.ui:370
 msgid "Allow _different sources for each window"
 msgstr "Dopusti _drugačiji način unosa za pojedini prozor"
 
-#: panels/region/cc-region-panel.ui:413
+#: panels/region/cc-region-panel.ui:412
 msgid "Previous source"
 msgstr "Prijašnji izvor"
 
-#: panels/region/cc-region-panel.ui:431
+#: panels/region/cc-region-panel.ui:430
 msgid "Super+Shift+Space"
 msgstr "Super+Shift+Space"
 
-#: panels/region/cc-region-panel.ui:446
+#: panels/region/cc-region-panel.ui:445
 msgid "Next source"
 msgstr "Sljedeći izvor"
 
-#: panels/region/cc-region-panel.ui:464
+#: panels/region/cc-region-panel.ui:463
 msgid "Super+Space"
 msgstr "Super+Space"
 
-#: panels/region/cc-region-panel.ui:479
+#: panels/region/cc-region-panel.ui:478
 msgid "Left+Right Alt"
 msgstr "Left+Right Alt"
 
-#: panels/region/cc-region-panel.ui:495
+#: panels/region/cc-region-panel.ui:494
 msgid "These keyboard shortcuts can be changed in the keyboard settings"
 msgstr "Ove prečace možete promijeniti u postavkama tipkovnice"
 
@@ -5728,29 +5737,39 @@ msgstr ""
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Jezik;Raspored;Tipkovnica;ulaz;"
 
-#: panels/search/cc-search-locations-dialog.c:604
+#: panels/search/cc-search-locations-dialog.c:610
 msgid "Select Location"
 msgstr "Odaberi lokaciju"
 
-#: panels/search/cc-search-locations-dialog.c:608
+#: panels/search/cc-search-locations-dialog.c:614
 msgid "_OK"
 msgstr "_U redu"
 
-#: panels/search/cc-search-panel.c:175
+#: panels/search/cc-search-panel.c:153
 msgid "No applications found"
 msgstr "Aplikacije nisu pronađene"
 
-#: panels/search/cc-search-panel.ui:52
+#: panels/search/cc-search-panel-row.ui:92
 msgid "Move Up"
 msgstr "Pomakni gore"
 
-#: panels/search/cc-search-panel.ui:69
+#: panels/search/cc-search-panel-row.ui:102
 msgid "Move Down"
 msgstr "Pomakni dolje"
 
-#: panels/search/cc-search-panel.ui:105
-msgid "Preferences"
-msgstr "Osobitosti"
+#: panels/search/cc-search-panel.ui:32
+msgid ""
+"Control which search results are shown in the Activities Overview. The order "
+"of search results can also be changed by moving rows in the list."
+msgstr ""
+"Upravljajte koji će se rezultati pretrage prikazati u pregledu aktivnosti. "
+"Redoslijed rezultata pretrage se isto može mijenjati pomicanjem redaka u "
+"popisu."
+
+#: panels/search/cc-search-panel.ui:60
+#: panels/search/search-locations-dialog.ui:9
+msgid "Search Locations"
+msgstr "Pretraži lokacije"
 
 #: panels/search/gnome-search-panel.desktop.in.in:4
 msgid ""
@@ -5764,19 +5783,25 @@ msgstr ""
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "Pretraga;Pretraži;Sadržaj;Sakrij;Privatnost;Rezultati;"
 
-#: panels/search/search-locations-dialog.ui:9
-msgid "Search Locations"
-msgstr "Pretraži lokacije"
+#: panels/search/search-locations-dialog.ui:32
+#: panels/search/search-locations-dialog.ui:69
+#: panels/search/search-locations-dialog.ui:107
+msgid ""
+"Folders which are searched by system applications, such as Files, Photos and "
+"Videos."
+msgstr ""
+"Mape koje se pretražuju aplikacijama sustava, poput Datoteka, Fotografija i "
+"Snimaka."
 
-#: panels/search/search-locations-dialog.ui:43
+#: panels/search/search-locations-dialog.ui:52
 msgid "Places"
 msgstr "Lokacije"
 
-#: panels/search/search-locations-dialog.ui:73
+#: panels/search/search-locations-dialog.ui:91
 msgid "Bookmarks"
 msgstr "Zabilješke"
 
-#: panels/search/search-locations-dialog.ui:130
+#: panels/search/search-locations-dialog.ui:156
 msgid "Other"
 msgstr "Ostalo"
 
@@ -5881,49 +5906,49 @@ msgid "_Require Password"
 msgstr "_Potrebna je lozinka"
 
 #: panels/sharing/cc-sharing-panel.ui:424
-#: panels/sharing/cc-sharing-panel.ui:496
+#: panels/sharing/cc-sharing-panel.ui:494
 msgid "Remote Login"
 msgstr "Udaljena prijava"
 
-#: panels/sharing/cc-sharing-panel.ui:519
-#: panels/sharing/cc-sharing-panel.ui:765
+#: panels/sharing/cc-sharing-panel.ui:517
+#: panels/sharing/cc-sharing-panel.ui:763
 msgid "Screen Sharing"
 msgstr "Dijeljenje zaslona"
 
-#: panels/sharing/cc-sharing-panel.ui:577
+#: panels/sharing/cc-sharing-panel.ui:575
 msgid "_Allow connections to control the screen"
 msgstr "_Dopusti povezivanjima da upravljaju zaslonom"
 
-#: panels/sharing/cc-sharing-panel.ui:622
+#: panels/sharing/cc-sharing-panel.ui:620
 msgid "_Password:"
 msgstr "_Lozinka:"
 
-#: panels/sharing/cc-sharing-panel.ui:652
+#: panels/sharing/cc-sharing-panel.ui:650
 msgid "_Show Password"
 msgstr "_Prikaži lozinku"
 
-#: panels/sharing/cc-sharing-panel.ui:683
+#: panels/sharing/cc-sharing-panel.ui:681
 msgid "Access Options"
 msgstr "Mogućnosti pristupa"
 
-#: panels/sharing/cc-sharing-panel.ui:697
+#: panels/sharing/cc-sharing-panel.ui:695
 msgid "_New connections must ask for access"
 msgstr "_Nova povezivanja moraju upitati za pristup"
 
-#: panels/sharing/cc-sharing-panel.ui:715
+#: panels/sharing/cc-sharing-panel.ui:713
 msgid "_Require a password"
 msgstr "_Potrebna je lozinka"
 
-#: panels/sharing/cc-sharing-panel.ui:776
-#: panels/sharing/cc-sharing-panel.ui:870
+#: panels/sharing/cc-sharing-panel.ui:774
+#: panels/sharing/cc-sharing-panel.ui:868
 msgid "Media Sharing"
 msgstr "Dijeljenje medija"
 
-#: panels/sharing/cc-sharing-panel.ui:809
+#: panels/sharing/cc-sharing-panel.ui:807
 msgid "Share music, photos and videos over the network."
 msgstr "Dijelite glazbu, fotografije i video snimke diljem mreže."
 
-#: panels/sharing/cc-sharing-panel.ui:824
+#: panels/sharing/cc-sharing-panel.ui:822
 msgid "Folders"
 msgstr "Mape"
 
@@ -6041,7 +6066,7 @@ msgstr "Glasnoća zvuka"
 msgid "Alert Sound"
 msgstr "Zvuk upozorenja"
 
-#: panels/sound/cc-volume-slider.c:200
+#: panels/sound/cc-volume-slider.c:63
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
@@ -6237,32 +6262,32 @@ msgstr "Thunderbolt;"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:498
+#: panels/universal-access/cc-ua-panel.c:497
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Uobičajena"
 
-#: panels/universal-access/cc-ua-panel.c:501
+#: panels/universal-access/cc-ua-panel.c:500
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Srednja"
 
-#: panels/universal-access/cc-ua-panel.c:504
+#: panels/universal-access/cc-ua-panel.c:503
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Velika"
 
-#: panels/universal-access/cc-ua-panel.c:507
+#: panels/universal-access/cc-ua-panel.c:506
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Veća"
 
-#: panels/universal-access/cc-ua-panel.c:510
+#: panels/universal-access/cc-ua-panel.c:509
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Najveća"
 
-#: panels/universal-access/cc-ua-panel.c:514
+#: panels/universal-access/cc-ua-panel.c:513
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -6270,322 +6295,322 @@ msgstr[0] "%d piksel"
 msgstr[1] "%d piksela"
 msgstr[2] "%d piksela"
 
-#: panels/universal-access/cc-ua-panel.ui:93
+#: panels/universal-access/cc-ua-panel.ui:78
 msgid "_Always Show Universal Access Menu"
 msgstr "_Uvijek prikaži izbornik univerzalnog pristupa"
 
-#: panels/universal-access/cc-ua-panel.ui:135
+#: panels/universal-access/cc-ua-panel.ui:120
 msgid "Seeing"
 msgstr "Gledanje"
 
-#: panels/universal-access/cc-ua-panel.ui:181
+#: panels/universal-access/cc-ua-panel.ui:166
 msgid "_High Contrast"
 msgstr "_Visok kontrast"
 
-#: panels/universal-access/cc-ua-panel.ui:228
+#: panels/universal-access/cc-ua-panel.ui:213
 msgid "_Large Text"
 msgstr "_Velik tekst"
 
-#: panels/universal-access/cc-ua-panel.ui:273
+#: panels/universal-access/cc-ua-panel.ui:258
 msgid "C_ursor Size"
 msgstr "V_eličina pokazivača"
 
-#: panels/universal-access/cc-ua-panel.ui:320
+#: panels/universal-access/cc-ua-panel.ui:305
 #: panels/universal-access/zoom-options.ui:99
 msgid "_Zoom"
 msgstr "_Uvećanje"
 
-#: panels/universal-access/cc-ua-panel.ui:366
+#: panels/universal-access/cc-ua-panel.ui:351
 msgid "Screen _Reader"
 msgstr "Čitač _zaslona"
 
-#: panels/universal-access/cc-ua-panel.ui:412
-#: panels/universal-access/cc-ua-panel.ui:1243
+#: panels/universal-access/cc-ua-panel.ui:397
+#: panels/universal-access/cc-ua-panel.ui:1231
 msgid "_Sound Keys"
 msgstr "_Zvučne tipke"
 
-#: panels/universal-access/cc-ua-panel.ui:474
+#: panels/universal-access/cc-ua-panel.ui:459
 msgid "Hearing"
 msgstr "Slušanje"
 
-#: panels/universal-access/cc-ua-panel.ui:518
-#: panels/universal-access/cc-ua-panel.ui:1346
+#: panels/universal-access/cc-ua-panel.ui:503
+#: panels/universal-access/cc-ua-panel.ui:1334
 msgid "_Visual Alerts"
 msgstr "_Vizualna upozorenja"
 
-#: panels/universal-access/cc-ua-panel.ui:626
+#: panels/universal-access/cc-ua-panel.ui:611
 msgid "Screen _Keyboard"
 msgstr "Zaslonska _tipkovnica"
 
-#: panels/universal-access/cc-ua-panel.ui:671
+#: panels/universal-access/cc-ua-panel.ui:656
 msgid "R_epeat Keys"
 msgstr "T_ipke ponavljanja"
 
-#: panels/universal-access/cc-ua-panel.ui:717
+#: panels/universal-access/cc-ua-panel.ui:702
 msgid "Cursor _Blinking"
 msgstr "Treptanje _pokazivača"
 
-#: panels/universal-access/cc-ua-panel.ui:763
+#: panels/universal-access/cc-ua-panel.ui:748
 msgid "_Typing Assist (AccessX)"
 msgstr "_Pomoć tipkanja (AccessX)"
 
-#: panels/universal-access/cc-ua-panel.ui:824
+#: panels/universal-access/cc-ua-panel.ui:809
 msgid "Pointing & Clicking"
 msgstr "Usmjeravanje i klikanje"
 
-#: panels/universal-access/cc-ua-panel.ui:870
+#: panels/universal-access/cc-ua-panel.ui:855
 msgid "_Mouse Keys"
 msgstr "_Tipke miša"
 
-#: panels/universal-access/cc-ua-panel.ui:915
+#: panels/universal-access/cc-ua-panel.ui:900
 msgid "_Click Assist"
 msgstr "_Pomoć klikanja"
 
-#: panels/universal-access/cc-ua-panel.ui:961
+#: panels/universal-access/cc-ua-panel.ui:946
 msgid "_Double-Click Delay"
 msgstr "_Odgoda dvostrukog klika"
 
-#: panels/universal-access/cc-ua-panel.ui:981
+#: panels/universal-access/cc-ua-panel.ui:966
 msgid "Double-Click Delay"
 msgstr "Odgoda dvostrukog klika"
 
-#: panels/universal-access/cc-ua-panel.ui:1048
+#: panels/universal-access/cc-ua-panel.ui:1036
 msgid "Cursor Size"
 msgstr "Veličina pokazivača"
 
-#: panels/universal-access/cc-ua-panel.ui:1075
+#: panels/universal-access/cc-ua-panel.ui:1063
 msgid ""
 "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgstr ""
 "Veličina pokazivača se može kombinirati sa uvećavanjem/udaljavanjem kako bi "
 "se lakše pokazivač vidio."
 
-#: panels/universal-access/cc-ua-panel.ui:1111
+#: panels/universal-access/cc-ua-panel.ui:1099
 msgid "Screen Reader"
 msgstr "Čitač zaslona"
 
-#: panels/universal-access/cc-ua-panel.ui:1128
+#: panels/universal-access/cc-ua-panel.ui:1116
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr "Čitač zaslona čita prikazani tekst kako se pomičete fokus."
 
-#: panels/universal-access/cc-ua-panel.ui:1161
+#: panels/universal-access/cc-ua-panel.ui:1149
 msgid "_Screen Reader"
 msgstr "_Čitač zaslona"
 
-#: panels/universal-access/cc-ua-panel.ui:1200
+#: panels/universal-access/cc-ua-panel.ui:1188
 msgid "Sound Keys"
 msgstr "Zvučne tipke"
 
-#: panels/universal-access/cc-ua-panel.ui:1218
+#: panels/universal-access/cc-ua-panel.ui:1206
 msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr "Oglasi zvučni signal pri uključivanju ili isključivanju velikih slova."
 
-#: panels/universal-access/cc-ua-panel.ui:1288
+#: panels/universal-access/cc-ua-panel.ui:1276
 msgid "Visual Alerts"
 msgstr "Vizualna upozorenja"
 
-#: panels/universal-access/cc-ua-panel.ui:1292
+#: panels/universal-access/cc-ua-panel.ui:1280
 msgid "_Test flash"
 msgstr "_Testiraj bljeskanje"
 
-#: panels/universal-access/cc-ua-panel.ui:1321
+#: panels/universal-access/cc-ua-panel.ui:1309
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "Koristi vizualno upozorenje kada zvuk upozorenja nastane."
 
-#: panels/universal-access/cc-ua-panel.ui:1372
+#: panels/universal-access/cc-ua-panel.ui:1360
 msgid "Flash the _window title"
 msgstr "Zabljeni _naslov prozora"
 
-#: panels/universal-access/cc-ua-panel.ui:1390
+#: panels/universal-access/cc-ua-panel.ui:1378
 msgid "Flash the entire _screen"
 msgstr "Zabljeni _cijeli zaslon"
 
-#: panels/universal-access/cc-ua-panel.ui:1435
+#: panels/universal-access/cc-ua-panel.ui:1423
 msgid "Repeat Keys"
 msgstr "Ponovljene tipke"
 
-#: panels/universal-access/cc-ua-panel.ui:1465
+#: panels/universal-access/cc-ua-panel.ui:1453
 msgid "Key presses repeat when key is held down."
 msgstr "Pritisak tipke se ponavlja kada je tipka pritisnuta."
 
-#: panels/universal-access/cc-ua-panel.ui:1545
+#: panels/universal-access/cc-ua-panel.ui:1533
 msgid "Repeat keys delay"
 msgstr "Odgoda ponavljanja tipka"
 
-#: panels/universal-access/cc-ua-panel.ui:1593
-#: panels/universal-access/cc-ua-panel.ui:1728
+#: panels/universal-access/cc-ua-panel.ui:1581
+#: panels/universal-access/cc-ua-panel.ui:1716
 msgid "Speed"
 msgstr "Brzina"
 
-#: panels/universal-access/cc-ua-panel.ui:1632
+#: panels/universal-access/cc-ua-panel.ui:1620
 msgid "Repeat keys speed"
 msgstr "Brzina ponavljanja znakova"
 
-#: panels/universal-access/cc-ua-panel.ui:1656
+#: panels/universal-access/cc-ua-panel.ui:1644
 msgid "Cursor Blinking"
 msgstr "Treptanje pokazivača"
 
-#: panels/universal-access/cc-ua-panel.ui:1686
+#: panels/universal-access/cc-ua-panel.ui:1674
 msgid "Cursor blinks in text fields."
 msgstr "Pokazivač treperi u tekstnim poljima."
 
-#: panels/universal-access/cc-ua-panel.ui:1765
+#: panels/universal-access/cc-ua-panel.ui:1753
 msgid "Cursor blinking speed"
 msgstr "Brzina treptanja pokazivača"
 
-#: panels/universal-access/cc-ua-panel.ui:1801
+#: panels/universal-access/cc-ua-panel.ui:1789
 msgid "Typing Assist"
 msgstr "Pomoć tipkanja"
 
-#: panels/universal-access/cc-ua-panel.ui:1840
+#: panels/universal-access/cc-ua-panel.ui:1828
 msgid "_Sticky Keys"
 msgstr "_Pričvrstive tipke"
 
-#: panels/universal-access/cc-ua-panel.ui:1857
+#: panels/universal-access/cc-ua-panel.ui:1845
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Tretira niz promjenjivih tipki kao kombinaciju tipki"
 
-#: panels/universal-access/cc-ua-panel.ui:1881
+#: panels/universal-access/cc-ua-panel.ui:1869
 msgid "_Disable if two keys are pressed together"
 msgstr "_Onemogući ako su dvije tipke istodobno pritisnute"
 
-#: panels/universal-access/cc-ua-panel.ui:1899
+#: panels/universal-access/cc-ua-panel.ui:1887
 msgid "Beep when a _modifier key is pressed"
 msgstr "Oglasi zvučni signal kada se pritisne _promjenjiva tipka"
 
-#: panels/universal-access/cc-ua-panel.ui:1947
+#: panels/universal-access/cc-ua-panel.ui:1935
 msgid "S_low Keys"
 msgstr "S_pore tipke"
 
-#: panels/universal-access/cc-ua-panel.ui:1964
+#: panels/universal-access/cc-ua-panel.ui:1952
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr ""
 "Stavlja odgodu između vremena kada se tipka pritisne i kada se prihvati "
 "signal tipke"
 
-#: panels/universal-access/cc-ua-panel.ui:1997
-#: panels/universal-access/cc-ua-panel.ui:2210
-#: panels/universal-access/cc-ua-panel.ui:2547
+#: panels/universal-access/cc-ua-panel.ui:1985
+#: panels/universal-access/cc-ua-panel.ui:2198
+#: panels/universal-access/cc-ua-panel.ui:2535
 msgid "A_cceptance delay:"
 msgstr "O_dgoda prihvaćanja:"
 
-#: panels/universal-access/cc-ua-panel.ui:2019
+#: panels/universal-access/cc-ua-panel.ui:2007
 msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Kratko"
 
-#: panels/universal-access/cc-ua-panel.ui:2038
+#: panels/universal-access/cc-ua-panel.ui:2026
 msgid "Slow keys typing delay"
 msgstr "Odgoda tipkanja za spore tipke"
 
-#: panels/universal-access/cc-ua-panel.ui:2053
+#: panels/universal-access/cc-ua-panel.ui:2041
 msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Dugo"
 
-#: panels/universal-access/cc-ua-panel.ui:2080
+#: panels/universal-access/cc-ua-panel.ui:2068
 msgid "Beep when a key is pr_essed"
 msgstr "Oglasi zvčni signal kada je p_ritisnuta tipka"
 
-#: panels/universal-access/cc-ua-panel.ui:2097
+#: panels/universal-access/cc-ua-panel.ui:2085
 msgid "Beep when a key is _accepted"
 msgstr "Oglasi zvčni signal kada je tipka _prihvačena"
 
-#: panels/universal-access/cc-ua-panel.ui:2114
-#: panels/universal-access/cc-ua-panel.ui:2293
+#: panels/universal-access/cc-ua-panel.ui:2102
+#: panels/universal-access/cc-ua-panel.ui:2281
 msgid "Beep when a key is _rejected"
 msgstr "Oglasi zvučni signal kada je tipka _odbijena"
 
-#: panels/universal-access/cc-ua-panel.ui:2160
+#: panels/universal-access/cc-ua-panel.ui:2148
 msgid "_Bounce Keys"
 msgstr "_Odbijanje tipki"
 
-#: panels/universal-access/cc-ua-panel.ui:2177
+#: panels/universal-access/cc-ua-panel.ui:2165
 msgid "Ignores fast duplicate keypresses"
 msgstr "Zanemaruje brze dvostruke pritiske tipki"
 
-#: panels/universal-access/cc-ua-panel.ui:2232
+#: panels/universal-access/cc-ua-panel.ui:2220
 msgctxt "bounce keys delay"
 msgid "Short"
 msgstr "Kratko"
 
-#: panels/universal-access/cc-ua-panel.ui:2251
+#: panels/universal-access/cc-ua-panel.ui:2239
 msgid "Bounce keys typing delay"
 msgstr "Odgoda tipkanja za odbijene tipke"
 
-#: panels/universal-access/cc-ua-panel.ui:2266
+#: panels/universal-access/cc-ua-panel.ui:2254
 msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "Dugo"
 
-#: panels/universal-access/cc-ua-panel.ui:2379
+#: panels/universal-access/cc-ua-panel.ui:2367
 msgid "_Enable by Keyboard"
 msgstr "_Omogući tipkovnicom"
 
-#: panels/universal-access/cc-ua-panel.ui:2396
+#: panels/universal-access/cc-ua-panel.ui:2384
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr ""
 "Uključi mogućnosti isključivanja i uključivanja pristupačnosti koristeći "
 "tipkovnicu"
 
-#: panels/universal-access/cc-ua-panel.ui:2460
+#: panels/universal-access/cc-ua-panel.ui:2448
 msgid "Click Assist"
 msgstr "Pomoć klikanja"
 
-#: panels/universal-access/cc-ua-panel.ui:2496
+#: panels/universal-access/cc-ua-panel.ui:2484
 msgid "_Simulated Secondary Click"
 msgstr "_Simuliraj drugi klik"
 
-#: panels/universal-access/cc-ua-panel.ui:2514
+#: panels/universal-access/cc-ua-panel.ui:2502
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Pokreni drugi klik držeći prvu tipku"
 
-#: panels/universal-access/cc-ua-panel.ui:2568
+#: panels/universal-access/cc-ua-panel.ui:2556
 msgctxt "secondary click"
 msgid "Short"
 msgstr "Kratko"
 
-#: panels/universal-access/cc-ua-panel.ui:2587
+#: panels/universal-access/cc-ua-panel.ui:2575
 msgid "Secondary click delay"
 msgstr "Odgoda drugog klika"
 
-#: panels/universal-access/cc-ua-panel.ui:2602
+#: panels/universal-access/cc-ua-panel.ui:2590
 msgctxt "secondary click delay"
 msgid "Long"
 msgstr "Dugo"
 
-#: panels/universal-access/cc-ua-panel.ui:2659
+#: panels/universal-access/cc-ua-panel.ui:2647
 msgid "_Hover Click"
 msgstr "_Klik lebdenja"
 
-#: panels/universal-access/cc-ua-panel.ui:2677
+#: panels/universal-access/cc-ua-panel.ui:2665
 msgid "Trigger a click when the pointer hovers"
 msgstr "Obavi klik kada pokazivač prijeđe preko"
 
-#: panels/universal-access/cc-ua-panel.ui:2710
+#: panels/universal-access/cc-ua-panel.ui:2698
 msgid "D_elay:"
 msgstr "O_dgoda:"
 
-#: panels/universal-access/cc-ua-panel.ui:2732
+#: panels/universal-access/cc-ua-panel.ui:2720
 msgctxt "dwell click delay"
 msgid "Short"
 msgstr "Kratko"
 
-#: panels/universal-access/cc-ua-panel.ui:2763
+#: panels/universal-access/cc-ua-panel.ui:2751
 msgctxt "dwell click delay"
 msgid "Long"
 msgstr "Dugo"
 
-#: panels/universal-access/cc-ua-panel.ui:2799
+#: panels/universal-access/cc-ua-panel.ui:2787
 msgid "Motion _threshold:"
 msgstr "Prag _pomicanja:"
 
-#: panels/universal-access/cc-ua-panel.ui:2821
+#: panels/universal-access/cc-ua-panel.ui:2809
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Mala"
 
-#: panels/universal-access/cc-ua-panel.ui:2852
+#: panels/universal-access/cc-ua-panel.ui:2840
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Velika"
@@ -6785,30 +6810,30 @@ msgstr "Efekti boje"
 msgid "Should match the web address of your login provider."
 msgstr "Treba se podudarati web adresa vašeg pružatelja računa."
 
-#: panels/user-accounts/cc-add-user-dialog.c:204
+#: panels/user-accounts/cc-add-user-dialog.c:205
 msgid "Failed to add account"
 msgstr "Dodavanje računa nije upjelo"
 
-#: panels/user-accounts/cc-add-user-dialog.c:652
+#: panels/user-accounts/cc-add-user-dialog.c:676
 #: panels/user-accounts/cc-password-dialog.c:261
 msgid "The passwords do not match."
 msgstr "Lozinka se ne podudara."
 
-#: panels/user-accounts/cc-add-user-dialog.c:874
-#: panels/user-accounts/cc-add-user-dialog.c:920
-#: panels/user-accounts/cc-add-user-dialog.c:941
+#: panels/user-accounts/cc-add-user-dialog.c:898
+#: panels/user-accounts/cc-add-user-dialog.c:944
+#: panels/user-accounts/cc-add-user-dialog.c:965
 msgid "Failed to register account"
 msgstr "Registracija računa nije uspjela"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1064
+#: panels/user-accounts/cc-add-user-dialog.c:1088
 msgid "No supported way to authenticate with this domain"
 msgstr "Nema podaržanog načina za ovjeru s ovom domenom"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1137
+#: panels/user-accounts/cc-add-user-dialog.c:1161
 msgid "Failed to join domain"
 msgstr "Pridruživanje s domenom nije uspjelo"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1198
+#: panels/user-accounts/cc-add-user-dialog.c:1222
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6816,7 +6841,7 @@ msgstr ""
 "To ime prijave ne radi.\n"
 "Pokušajte ponovno."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1205
+#: panels/user-accounts/cc-add-user-dialog.c:1229
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6824,11 +6849,11 @@ msgstr ""
 "Ta lozinka prijave ne radi.\n"
 "Pokušajte ponovno."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1213
+#: panels/user-accounts/cc-add-user-dialog.c:1237
 msgid "Failed to log into domain"
 msgstr "Prijava na domenu nije uspjela"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1271
+#: panels/user-accounts/cc-add-user-dialog.c:1295
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Nemoguće je pronaći domenu. Možda ste ju pogrešno upisali?"
 
@@ -6878,11 +6903,6 @@ msgstr ""
 "Poslovna prijava dopušta centralizirano upravljanje postojećim korisničkim "
 "računom kako bi se mogao koristiti na ovom uređaju. Taj račun možete "
 "koristiti isto za pristup resursima tvrtke na internetu."
-
-#: panels/user-accounts/cc-add-user-dialog.ui:507
-#: panels/user-accounts/data/join-dialog.ui:116
-msgid "_Domain"
-msgstr "_Domena"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:732
 msgid "You are Offline"
@@ -7253,7 +7273,7 @@ msgstr "_Lijevi kažiprst"
 msgid "_Other finger:"
 msgstr "_Drugi prst:"
 
-#: panels/user-accounts/data/account-fingerprint.ui:262
+#: panels/user-accounts/data/account-fingerprint.ui:324
 msgid ""
 "Your fingerprint was successfully saved. You should now be able to log in "
 "using your fingerprint reader."
@@ -7462,28 +7482,23 @@ msgstr "Nova lozinka ne sadrži dovoljno različitih znakova"
 msgid "Unknown error"
 msgstr "Nepoznata greška"
 
-#: panels/user-accounts/user-utils.c:430
+#: panels/user-accounts/user-utils.c:427
+msgid ""
+"The username should usually only consist of lower case letters from a-z, "
+"digits and the following characters: - _"
+msgstr ""
+"Korisničko ime može sadržavati samo mala i velika slova od a-z, brojke i ove "
+"znakove: - _"
+
+#: panels/user-accounts/user-utils.c:431
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Nažalost, to korisničko ime nije dostupno. Pokušajte s drugim."
 
-#: panels/user-accounts/user-utils.c:433
-#, c-format
+#: panels/user-accounts/user-utils.c:476
 msgid "The username is too long."
 msgstr "Korisnčko ime je predugačko."
 
-#: panels/user-accounts/user-utils.c:436
-msgid "The username cannot start with a “-”."
-msgstr "Korisničko ime ne može početi s ”-”."
-
-#: panels/user-accounts/user-utils.c:439
-msgid ""
-"The username should only consist of upper and lower case letters from a-z, "
-"digits and the following characters: . - _"
-msgstr ""
-"Korisničko ime može sadržavati samo mala i velika slova od a-z, brojke i ove "
-"znakove: . - _"
-
-#: panels/user-accounts/user-utils.c:443
+#: panels/user-accounts/user-utils.c:526
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr ""
 "To će se koristiti kao naziv vaše osobne mape i ne može se promijeniti."
@@ -7944,6 +7959,15 @@ msgstr[2] "%u ulaza"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Zvukovi sustava"
+
+#~ msgid "Delete Background"
+#~ msgstr "Obriši pozadinu"
+
+#~ msgid "Preferences"
+#~ msgstr "Osobitosti"
+
+#~ msgid "The username cannot start with a “-”."
+#~ msgstr "Korisničko ime ne može početi s ”-”."
 
 #~ msgid "_Background"
 #~ msgstr "_Pozadina"
