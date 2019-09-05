@@ -15,6 +15,7 @@
 # Noriko Mizumoto <noriko@fedoraproject.org>, 2012.
 # Ikuya Awashiro <ikuya@fruitsbasket.info>, 2014.
 # Hajime Taira <htaira@redhat.com>, 2015-2017
+# sicklylife <translation@sicklylife.jp>, 2019.
 #
 msgid ""
 msgstr ""
@@ -22,8 +23,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
 "POT-Creation-Date: 2019-08-24 18:26+0000\n"
-"PO-Revision-Date: 2017-09-19 22:58+0900\n"
-"Last-Translator: Jiro Matsuzawa <jmatsuzawa@gnome.org>\n"
+"PO-Revision-Date: 2019-09-05 00:00+0900\n"
+"Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -73,7 +74,7 @@ msgstr "引き伸ばす"
 #: panels/background/background.ui:288
 msgctxt "background, style"
 msgid "Span"
-msgstr "スパン(複数に跨げる)"
+msgstr "スパン (複数に跨げる)"
 
 #: panels/background/cc-background-chooser-dialog.c:424
 msgid "Wallpapers"
@@ -162,14 +163,12 @@ msgid "Current background"
 msgstr "現在の背景"
 
 #: panels/background/gnome-background-panel.desktop.in.in:3
-#, fuzzy
-#| msgid "_Background"
 msgid "Background"
-msgstr "背景(_B)"
+msgstr "背景"
 
 #: panels/background/gnome-background-panel.desktop.in.in:4
 msgid "Change your background image to a wallpaper or photo"
-msgstr "背景画像を変更します。"
+msgstr "背景画像を壁紙や写真に変更します"
 
 #. Translators: Search terms to find the Background panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/background/gnome-background-panel.desktop.in.in:15
@@ -194,8 +193,7 @@ msgstr "Bluetooth がオフになっています"
 
 #: panels/bluetooth/cc-bluetooth-panel.c:331
 msgid "Turn on to connect devices and receive file transfers."
-msgstr ""
-"デバイスの接続やファイルの受信を行うには Bluetooth をオンにしてください。"
+msgstr "デバイスの接続やファイルの受信を行うには Bluetooth をオンにしてください。"
 
 #: panels/bluetooth/cc-bluetooth-panel.c:332
 msgid "Airplane Mode is on"
@@ -260,7 +258,7 @@ msgstr "ノート PC を閉じてください"
 #. * good idea why or any suggestions
 #: panels/color/cc-color-calibrate.c:410
 msgid "An internal error occurred that could not be recovered."
-msgstr "回復できないエラーが発生しました。"
+msgstr "回復不能なエラーが発生しました。"
 
 #. TRANSLATORS: Some required-at-runtime tools were not
 #. * installed, which should only affect insane distros
@@ -283,13 +281,13 @@ msgstr "対象の白色点は取得できません。"
 #. TRANSLATORS: the display calibration process is finished
 #: panels/color/cc-color-calibrate.c:467
 msgid "Complete!"
-msgstr "完了!"
+msgstr "完了しました!"
 
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
 #: panels/color/cc-color-calibrate.c:475
 msgid "Calibration failed!"
-msgstr "キャリブレーションに失敗!"
+msgstr "キャリブレーションに失敗しました!"
 
 #. TRANSLATORS: The user can now remove the sensor from the screen
 #: panels/color/cc-color-calibrate.c:482
@@ -311,7 +309,7 @@ msgstr "ラップトップ画面"
 #. TRANSLATORS: This refers to the embedded webcam on a laptop
 #: panels/color/cc-color-common.c:50
 msgid "Built-in Webcam"
-msgstr "組み込みのウェブカム"
+msgstr "ビルトインウェブカメラ"
 
 #. TRANSLATORS: an externally connected display, where %s is either the
 #. * model, vendor or ID, e.g. 'LP2480zx Monitor'
@@ -370,7 +368,7 @@ msgstr "デフォルト: "
 #. * profile his a standard space like AdobeRGB
 #: panels/color/cc-color-panel.c:149
 msgid "Colorspace: "
-msgstr "色空間:"
+msgstr "色空間: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
@@ -452,7 +450,7 @@ msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
 msgstr ""
-"計測器が検出できません。電源が入っていること、正しく接続されていることを確認"
+"計測器を検出できません。電源が入っていること、正しく接続されていることを確認"
 "してください。"
 
 #. TRANSLATORS: this is when the button is insensitive
@@ -463,7 +461,7 @@ msgstr "計測器がプリンターのプロファイルをサポートしてい
 #. TRANSLATORS: this is when the button is insensitive
 #: panels/color/cc-color-panel.c:1385
 msgid "The device type is not currently supported."
-msgstr "このデバイスの種類は現在サポートされていません。"
+msgstr "このデバイスの形式は現在サポートしていません。"
 
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
@@ -1033,7 +1031,7 @@ msgstr "時"
 #. Translator: this is the separator between hours and minutes, like in HH∶MM
 #: panels/datetime/datetime.ui:121
 msgid "∶"
-msgstr "∶"
+msgstr ":"
 
 #: panels/datetime/datetime.ui:143
 msgid "Minute"
@@ -1103,25 +1101,19 @@ msgid "Landscape"
 msgstr "横方向"
 
 #: panels/display/cc-display-panel.c:735
-#, fuzzy
-#| msgid "Portrait"
 msgctxt "Display rotation"
 msgid "Portrait Right"
-msgstr "縦方向"
+msgstr "縦方向 (右向き)"
 
 #: panels/display/cc-display-panel.c:738
-#, fuzzy
-#| msgid "Portrait"
 msgctxt "Display rotation"
 msgid "Portrait Left"
-msgstr "縦方向"
+msgstr "縦方向 (左向き)"
 
 #: panels/display/cc-display-panel.c:741
-#, fuzzy
-#| msgid "Landscape"
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
-msgstr "横方向 (逆)"
+msgstr "横方向 (逆向き)"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
 #: panels/display/cc-display-panel.c:808
@@ -1139,43 +1131,34 @@ msgid "Refresh Rate"
 msgstr "リフレッシュレート"
 
 #: panels/display/cc-display-panel.c:1098
-#, fuzzy
-#| msgctxt "background, style"
-#| msgid "Scale"
 msgid "Scale"
 msgstr "サイズ調整"
 
 #: panels/display/cc-display-panel.c:1151
 msgid "Adjust for TV"
-msgstr "TV向けに調整"
+msgstr "TV 向けに調整"
 
 #: panels/display/cc-display-panel.c:1413
-#, fuzzy
-#| msgid "Secondary Display"
 msgid "Primary Display"
-msgstr "セカンダリディスプレイ"
+msgstr "プライマリディスプレイ"
 
 #: panels/display/cc-display-panel.c:1442
-#, fuzzy
-#| msgid "Display Mapping"
 msgid "Display Arrangement"
-msgstr "画面のマッピング"
+msgstr "ディスプレイの配置"
 
 #: panels/display/cc-display-panel.c:1443
 msgid ""
 "Drag displays to match your setup. The top bar is placed on the primary "
 "display."
-msgstr ""
+msgstr "あなたの調整に合うようにディスプレイをドラッグしてください。トップバーはプライマリディスプレイに配置されます。"
 
 #: panels/display/cc-display-panel.c:1866
 msgid "Display Mode"
 msgstr "ディスプレイモード"
 
 #: panels/display/cc-display-panel.c:1882
-#, fuzzy
-#| msgid "Dis­plays"
 msgid "Join Displays"
-msgstr "ディスプレイ"
+msgstr "画面を拡張"
 
 #: panels/display/cc-display-panel.c:1885
 msgid "Mirror"
@@ -1300,8 +1283,6 @@ msgid "To"
 msgstr "終了"
 
 #: panels/display/gnome-display-panel.desktop.in.in:3
-#, fuzzy
-#| msgid "Dis­plays"
 msgid "Displays"
 msgstr "ディスプレイ"
 
@@ -1370,11 +1351,11 @@ msgstr "他のメディア"
 
 #: panels/info/cc-info-removable-media-panel.c:424
 msgid "Select an application for audio CDs"
-msgstr "オーディオCD用のアプリケーションを選択"
+msgstr "オーディオ CD 用のアプリケーションを選択"
 
 #: panels/info/cc-info-removable-media-panel.c:425
 msgid "Select an application for video DVDs"
-msgstr "ビデオDVD用のアプリケーションを選択"
+msgstr "ビデオ DVD 用のアプリケーションを選択"
 
 #: panels/info/cc-info-removable-media-panel.c:426
 msgid "Select an application to run when a music player is connected"
@@ -1386,7 +1367,7 @@ msgstr "カメラが接続された時に起動するアプリケーションを
 
 #: panels/info/cc-info-removable-media-panel.c:428
 msgid "Select an application for software CDs"
-msgstr "ソフトウェアの CD を開くアプリケーションを選択してください"
+msgstr "ソフトウェアの CD を開くアプリケーションを選択"
 
 #. translators: these strings are duplicates of shared-mime-info
 #. * strings, just here to fix capitalization of the English originals.
@@ -1458,11 +1439,11 @@ msgstr ""
 
 #: panels/info/gnome-info-overview-panel.desktop.in.in:3
 msgid "About"
-msgstr ""
+msgstr "このシステムについて"
 
 #: panels/info/gnome-info-overview-panel.desktop.in.in:4
 msgid "View information about your system"
-msgstr "システム情報を表示します。"
+msgstr "システム情報を表示します"
 
 #. Translators: Search terms to find the About panel.
 #. Do NOT translate or localize the semicolons!
@@ -1547,7 +1528,7 @@ msgstr "OS 名"
 #. To translators: this field contains the distro type
 #: panels/info/info-overview.ui:137
 msgid "OS type"
-msgstr "OSの種類"
+msgstr "OS の種類"
 
 #: panels/info/info-overview.ui:153
 msgid "Virtualization"
@@ -1879,8 +1860,6 @@ msgid "Add Custom Shortcut"
 msgstr "ショートカットの追加"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:3
-#, fuzzy
-#| msgid "Key­board"
 msgid "Keyboard"
 msgstr "キーボード"
 
@@ -1971,8 +1950,6 @@ msgid "Test Your _Settings"
 msgstr "設定を確認する(_S)"
 
 #: panels/mouse/gnome-mouse-panel.desktop.in.in:3
-#, fuzzy
-#| msgid "Mouse & Touch­pad"
 msgid "Mouse & Touchpad"
 msgstr "マウスとタッチパッド"
 
@@ -2375,11 +2352,11 @@ msgstr "他のユーザーも利用可能(_O)"
 
 #: panels/network/connection-editor/details-page.ui:376
 msgid "Restrict background data usage"
-msgstr ""
+msgstr "バックグラウンドデータの使用を制限"
 
 #: panels/network/connection-editor/details-page.ui:386
 msgid "Appropriate for connections that have data charges or limits."
-msgstr ""
+msgstr "従量制課金接続のような制限のある接続に適しています。"
 
 #: panels/network/connection-editor/ethernet-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:39
@@ -2578,7 +2555,7 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
-"ファイル “%s” は読み込めなかったか、または処理できる VPN 接続情報がありませ"
+"ファイル“%s”は読み込めなかったか、または処理できる VPN 接続情報がありませ"
 "ん\n"
 "\n"
 "エラー: %s"
@@ -2597,7 +2574,7 @@ msgstr "開く(_O)"
 #: panels/network/connection-editor/vpn-helpers.c:230
 #, c-format
 msgid "A file named “%s” already exists."
-msgstr "'%s' というファイルはすでに存在します。"
+msgstr "“%s”というファイルはすでに存在します。"
 
 #: panels/network/connection-editor/vpn-helpers.c:232
 msgid "_Replace"
@@ -2619,7 +2596,7 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
-"VPN 接続 \"%s\" は %s にエクスポートできませんでした。\n"
+"VPN 接続“%s”は %s にエクスポートできませんでした。\n"
 "\n"
 "エラー: %s"
 
@@ -2653,7 +2630,7 @@ msgstr "ネットワーク"
 
 #: panels/network/gnome-network-panel.desktop.in.in:4
 msgid "Control how you connect to the Internet"
-msgstr "ネットワークへの接続方法を設定します。"
+msgstr "ネットワークへの接続方法を設定します"
 
 #. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in.in:19
@@ -2667,7 +2644,7 @@ msgstr ""
 
 #: panels/network/gnome-wifi-panel.desktop.in.in:4
 msgid "Control how you connect to Wi-Fi networks"
-msgstr "Wi-Fi ネットワークへの接続方法を設定します。"
+msgstr "Wi-Fi ネットワークへの接続方法を設定します"
 
 #. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in.in:19
@@ -2998,8 +2975,6 @@ msgid "Security type"
 msgstr "セキュリティタイプ"
 
 #: panels/network/network-wifi.ui:1702
-#, fuzzy
-#| msgid "Password"
 msgctxt "Wi-Fi passkey"
 msgid "Password"
 msgstr "パスワード"
@@ -3030,7 +3005,7 @@ msgstr "Wi-Fi アダプターが装着されオンになっていることを確
 
 #: panels/network/wifi.ui:127
 msgid "Airplane Mode"
-msgstr "機内モード(_P)"
+msgstr "機内モード"
 
 #: panels/network/wifi.ui:142
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
@@ -3323,7 +3298,7 @@ msgstr "ファームウェア未検出"
 #. TRANSLATORS: device status
 #: panels/network/panel-common.c:437
 msgid "Cable unplugged"
-msgstr "ケーブル抜け"
+msgstr "ケーブル非接続"
 
 #: panels/network/wireless-security/eap-method.c:69
 msgid "undefined error in 802.1X security (wpa-eap)"
@@ -3715,11 +3690,8 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "ロック画面にメッセージの内容を表示する(_O)"
 
 #: panels/notifications/gnome-notifications-panel.desktop.in.in:3
-#, fuzzy
-#| msgctxt "notifications"
-#| msgid "_Notifications"
 msgid "Notifications"
-msgstr "通知(_N)"
+msgstr "通知"
 
 #: panels/notifications/gnome-notifications-panel.desktop.in.in:4
 msgid "Control which notifications are displayed and what they show"
@@ -3771,8 +3743,6 @@ msgid "<b>%s</b> removed"
 msgstr "<b>%s</b> 削除しました"
 
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in.in:3
-#, fuzzy
-#| msgid "On­line Accounts"
 msgid "Online Accounts"
 msgstr "オンラインアカウント"
 
@@ -3819,7 +3789,7 @@ msgstr "アカウントの削除"
 
 #: panels/power/cc-power-panel.c:253
 msgid "Unknown time"
-msgstr "不明"
+msgstr "残り時間は不明"
 
 #: panels/power/cc-power-panel.c:259
 #, c-format
@@ -3941,7 +3911,7 @@ msgstr "コンピューター"
 #. TRANSLATORS: secondary battery
 #: panels/power/cc-power-panel.c:561
 msgid "Gaming input device"
-msgstr ""
+msgstr "ゲーム用入力デバイス"
 
 #. TRANSLATORS: secondary battery, misc
 #: panels/power/cc-power-panel.c:564 panels/power/cc-power-panel.c:804
@@ -4038,10 +4008,8 @@ msgid "_Bluetooth"
 msgstr "Bluetooth(_B)"
 
 #: panels/power/cc-power-panel.c:1931
-#, fuzzy
-#| msgid "Turn off Wi-Fi to save power."
 msgid "Turn off Bluetooth to save power."
-msgstr "Wi-Fi をオフにして節電します。"
+msgstr ""
 
 #: panels/power/cc-power-panel.c:1990
 msgid "When on battery power"
@@ -4090,10 +4058,8 @@ msgid "Devices"
 msgstr "デバイス"
 
 #: panels/power/gnome-power-panel.desktop.in.in:3
-#, fuzzy
-#| msgid "Power Off"
 msgid "Power"
-msgstr "電源オフ"
+msgstr "電源管理"
 
 #: panels/power/gnome-power-panel.desktop.in.in:4
 msgid "View your battery status and change power saving settings"
@@ -4109,16 +4075,12 @@ msgstr ""
 "ニター;画面;ディスプレイ;アイドル;待機;"
 
 #: panels/power/power.ui:17
-#, fuzzy
-#| msgid "2 minutes"
 msgid "20 minutes"
-msgstr "2 分"
+msgstr "20 分"
 
 #: panels/power/power.ui:21
-#, fuzzy
-#| msgid "5 minutes"
 msgid "25 minutes"
-msgstr "5 分"
+msgstr "25 分"
 
 #: panels/power/power.ui:29
 msgid "45 minutes"
@@ -4264,8 +4226,6 @@ msgid "Install PPD File…"
 msgstr "PPDファイルのインストール…"
 
 #: panels/printers/gnome-printers-panel.desktop.in.in:3
-#, fuzzy
-#| msgid "Prin­ters"
 msgid "Printers"
 msgstr "プリンター"
 
@@ -4281,10 +4241,8 @@ msgstr ""
 
 #. Translators: This is a windows domain used with SMB protocol.
 #: panels/printers/jobs-dialog.ui:44
-#, fuzzy
-#| msgid "_Domain"
 msgid "Domain"
-msgstr "ドメイン(_D)"
+msgstr "ドメイン"
 
 #. Translators: This button authenticates all print jobs and send them for printing.
 #: panels/printers/jobs-dialog.ui:123
@@ -4298,10 +4256,8 @@ msgstr "すべてクリア"
 
 #. Translators: This button pop up authentication dialog for print jobs which need credentials.
 #: panels/printers/jobs-dialog.ui:225
-#, fuzzy
-#| msgid "Authenticate"
 msgid "_Authenticate"
-msgstr "認証"
+msgstr "認証(_A)"
 
 #. Translators: this label describes the dialog empty state, with no jobs listed.
 #: panels/printers/jobs-dialog.ui:354
@@ -4442,8 +4398,6 @@ msgstr "一時停止"
 
 #. Translators: Job's state (job needs authentication to proceed further)
 #: panels/printers/pp-jobs-dialog.c:245
-#, fuzzy
-#| msgid "Authentication required"
 msgctxt "print job"
 msgid "Authentication required"
 msgstr "認証が要求されました"
@@ -4480,11 +4434,10 @@ msgstr "完了"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
 #: panels/printers/pp-jobs-dialog.c:390
-#, fuzzy, c-format
-#| msgid "Server requires authentication"
+#, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
-msgstr[0] "サーバーが認証を要求しています"
+msgstr[0] "%u 件のジョブで認証が要求されています"
 
 #. Translators: This is the printer name for which we are showing the active jobs
 #: panels/printers/pp-jobs-dialog.c:620
@@ -4495,12 +4448,9 @@ msgstr "%s — アクティブなジョブ"
 
 #. Translators: The printer needs authentication info to print.
 #: panels/printers/pp-jobs-dialog.c:625
-#, fuzzy, c-format
-#| msgid "Enter username and password to view printers on %s."
+#, c-format
 msgid "Enter credentials to print from %s."
-msgstr ""
-"%s で利用可能なプリンターを表示するにはユーザー名とパスワードを入力してくださ"
-"い。"
+msgstr "%s から印刷するにはユーザー名とパスワードを入力してください。"
 
 #: panels/printers/pp-new-printer-dialog.c:402
 msgid "Unlock Print Server"
@@ -5070,7 +5020,7 @@ msgstr "ゴミ箱を空にする(_E)…"
 
 #: panels/privacy/privacy.ui:606
 msgid "_Purge Temporary Files…"
-msgstr "一時ファイルを削除する(_P)v"
+msgstr "一時ファイルを削除する(_P)…"
 
 #: panels/privacy/privacy.ui:654
 msgid ""
@@ -5105,6 +5055,8 @@ msgid ""
 "Uses Mozilla Location Service: <a href='https://location.services.mozilla."
 "com/privacy'>Privacy Policy</a>"
 msgstr ""
+"Mozilla Location Service を使用します: <a "
+"href='https://location.services.mozilla.com/privacy'>プライバシーポリシー</a>"
 
 #: panels/privacy/privacy.ui:828
 msgid "_Location Services"
@@ -5178,8 +5130,6 @@ msgid "Paper"
 msgstr "用紙サイズ"
 
 #: panels/region/gnome-region-panel.desktop.in.in:3
-#, fuzzy
-#| msgid "Re­gion & Lan­guage"
 msgid "Region & Language"
 msgstr "地域と言語"
 
@@ -5386,15 +5336,12 @@ msgid "Choose a Folder"
 msgstr "フォルダーの選択"
 
 #: panels/sharing/cc-sharing-panel.c:693
-#, fuzzy, c-format
-#| msgid ""
-#| "Personal File Sharing allows you to share your Public folder with others "
-#| "on your current network using: <a href=\"dav://%s\">dav://%s</a>"
+#, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
 "current network using: <a href=\"dav://%s\">dav://%s</a>"
 msgstr ""
-"パーソナルファイル共有を利用して、現在のネットワークの他ユーザーが次の URI に"
+"ファイル共有を利用して、現在のネットワークの他ユーザーが次の URI に"
 "接続し、あなたの公開フォルダーを共有できるようにします: <a href=\"dav://%s"
 "\">dav://%s</a>"
 
@@ -5537,7 +5484,7 @@ msgstr "サウンド"
 
 #: panels/sound/data/gnome-sound-panel.desktop.in.in:4
 msgid "Change sound levels, inputs, outputs, and alert sounds"
-msgstr "サウンドレベルや入力、出力、アラート音を設定します"
+msgstr "サウンドレベルや入力、出力、警告音を設定します"
 
 #. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/data/gnome-sound-panel.desktop.in.in:20
@@ -5902,7 +5849,7 @@ msgstr "Caps Lock と Num Lock のON/OFFが切り替わるとビープ音を鳴�
 
 #: panels/universal-access/uap.ui:1282
 msgid "Visual Alerts"
-msgstr "視覚警告"
+msgstr "視覚的な警告"
 
 #: panels/universal-access/uap.ui:1286
 msgid "_Test flash"
@@ -6385,7 +6332,7 @@ msgstr "右の小指"
 #: panels/user-accounts/data/account-fingerprint.ui:39
 #: panels/user-accounts/um-fingerprint-dialog.c:677
 msgid "Enable Fingerprint Login"
-msgstr "指紋認証を有効にする"
+msgstr "指紋認証ログインを有効にする"
 
 #: panels/user-accounts/data/account-fingerprint.ui:89
 msgid "_Right index finger"
@@ -6403,21 +6350,15 @@ msgstr "別の指(_O):"
 msgid ""
 "Your fingerprint was successfully saved. You should now be able to log in "
 "using your fingerprint reader."
-msgstr ""
-"指紋を登録しました。今から指紋リーダーを使ってログインできるようになりまし"
-"た。"
+msgstr "あなたの指紋を登録しました。今後は指紋リーダーを使ってログインできるようになりました。"
 
 #: panels/user-accounts/data/avatar-chooser.ui:27
-#, fuzzy
-#| msgid "Take a photo…"
 msgid "Take a Picture…"
 msgstr "写真を撮る…"
 
 #: panels/user-accounts/data/avatar-chooser.ui:34
-#, fuzzy
-#| msgid "Select PPD File"
 msgid "Select a File…"
-msgstr "PPDファイルの選択"
+msgstr "ファイルの選択…"
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
 msgid "Users"
@@ -6487,7 +6428,7 @@ msgstr "次回ログイン時にユーザー自身でパスワードを設定さ
 
 #: panels/user-accounts/data/password-dialog.ui:256
 msgid "Set a password now"
-msgstr "いまパスワードを設定する"
+msgstr "今すぐパスワードを設定する"
 
 #: panels/user-accounts/data/user-accounts-dialog.ui:20
 msgid "_Add User…"
@@ -6524,16 +6465,12 @@ msgstr "ユーザーの削除…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
 #: panels/user-accounts/data/user-accounts-dialog.ui:466
-#, fuzzy
-#| msgid "No Printers Found"
 msgid "No Users Found"
-msgstr "プリンターが見つかりません"
+msgstr "ユーザーが見つかりません"
 
 #: panels/user-accounts/data/user-accounts-dialog.ui:476
-#, fuzzy
-#| msgid "Create a user account"
 msgid "Unlock to add a user account."
-msgstr "ユーザーアカウントを作成します"
+msgstr "ユーザーアカウントをアンロックします。"
 
 #: panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
@@ -6783,7 +6720,7 @@ msgstr "登録した指紋情報を削除しますか?"
 
 #: panels/user-accounts/um-fingerprint-dialog.c:264
 msgid "_Delete Fingerprints"
-msgstr "削除する(_D)"
+msgstr "指紋情報を削除(_D)"
 
 #: panels/user-accounts/um-fingerprint-dialog.c:270
 msgid ""
@@ -6802,7 +6739,7 @@ msgstr "完了です!"
 #: panels/user-accounts/um-fingerprint-dialog.c:543
 #, c-format
 msgid "Could not access “%s” device"
-msgstr "“%s” というデバイスにアクセスできません"
+msgstr "“%s”というデバイスにアクセスできません"
 
 #. translators:
 #. * The variable is the name of the device, for example:
@@ -6810,7 +6747,7 @@ msgstr "“%s” というデバイスにアクセスできません"
 #: panels/user-accounts/um-fingerprint-dialog.c:584
 #, c-format
 msgid "Could not start finger capture on “%s” device"
-msgstr "“%s” デバイスで指紋を読み取れませんでした"
+msgstr "“%s”デバイスで指紋を読み取れませんでした"
 
 #: panels/user-accounts/um-fingerprint-dialog.c:628
 msgid "Could not access any fingerprint readers"
@@ -6831,7 +6768,7 @@ msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
 "using the “%s” device."
 msgstr ""
-"指紋認証を有効にするには、“%s” のデバイスを使って、指紋を登録する必要がありま"
+"指紋認証ログインを有効にするには、“%s”のデバイスを使って、指紋を登録する必要がありま"
 "す。"
 
 #: panels/user-accounts/um-fingerprint-dialog.c:718
@@ -7015,12 +6952,12 @@ msgstr "削除(_D)"
 #: panels/user-accounts/um-user-panel.c:701
 msgctxt "Password mode"
 msgid "Account disabled"
-msgstr "無効アカウント"
+msgstr "アカウントは無効です"
 
 #: panels/user-accounts/um-user-panel.c:709
 msgctxt "Password mode"
 msgid "To be set at next login"
-msgstr "次のログイン時に設定"
+msgstr "次回ログイン時に設定"
 
 #: panels/user-accounts/um-user-panel.c:712
 msgctxt "Password mode"
@@ -7088,7 +7025,7 @@ msgstr "ユーザー名が長すぎます。"
 
 #: panels/user-accounts/um-utils.c:502
 msgid "The username cannot start with a “-”."
-msgstr "ユーザー名の先頭文字に “-” は使えません。"
+msgstr "ユーザー名の先頭文字に“-”は使えません。"
 
 #: panels/user-accounts/um-utils.c:505
 msgid ""
@@ -7317,10 +7254,8 @@ msgid "Lower Button"
 msgstr "下のサイドスイッチ"
 
 #: panels/wacom/wacom-stylus-page.ui:299
-#, fuzzy
-#| msgid "Lower Button"
 msgid "Lowest Button"
-msgstr "下のサイドスイッチ"
+msgstr "一番下のボタン"
 
 #: panels/wacom/wacom-stylus-page.ui:328
 msgid "Tip Pressure Feel"
