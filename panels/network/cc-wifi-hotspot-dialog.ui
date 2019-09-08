@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcWifiHotspotDialog" parent="HdyDialog">
+    <property name="title" translatable="yes">Set Up Wifi Hotspot</property>
+    <property name="default-height">480</property>
+    <property name="default-width">360</property>
+    <signal name="delete-event" handler="gtk_widget_hide_on_delete"/>
+
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="visible">1</property>
+        <property name="margin-start">12</property>
+        <property name="margin-end">12</property>
+        <property name="margin-top">18</property>
+        <property name="margin-bottom">18</property>
+
+        <child>
+          <object class="GtkLabel" id="main_label">
+            <property name="visible">1</property>
+            <property name="margin-bottom">18</property>
+            <property name="wrap">1</property>
+            <property name="use-markup">1</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkListBox" id="list_box">
+            <property name="visible">1</property>
+            <property name="margin-bottom">18</property>
+            <property name="selection-mode">none</property>
+            <style>
+              <class name="frame" />
+            </style>
+
+            <!-- Network Name/SSID row -->
+            <child>
+              <object class="GtkListBoxRow">
+                <property name="visible">1</property>
+                <property name="margin-top">6</property>
+                <property name="margin-bottom">6</property>
+                <property name="margin-start">12</property>
+                <property name="margin-end">12</property>
+                <property name="activatable">0</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">1</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">1</property>
+                        <property name="hexpand">1</property>
+                        <property name="xalign">0.0</property>
+                        <property name="label" translatable="yes">Name</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="name_entry">
+                        <property name="visible">1</property>
+                        <signal name="changed" handler="hotspot_entry_changed_cb" swapped="yes" />
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <!-- Password row -->
+            <child>
+              <object class="GtkListBoxRow" id="password_row">
+                <property name="visible">1</property>
+                <property name="margin-top">6</property>
+                <property name="margin-bottom">6</property>
+                <property name="margin-start">12</property>
+                <property name="margin-end">12</property>
+                <property name="activatable">0</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">1</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">1</property>
+                        <property name="hexpand">1</property>
+                        <property name="xalign">0.0</property>
+                        <property name="label" translatable="yes">Password</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="password_entry">
+                        <property name="visible">1</property>
+                        <property name="placeholder-text" translatable="yes">Autogenerate</property>
+                        <signal name="changed" handler="hotspot_entry_changed_cb" swapped="yes" />
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <!-- Security row -->
+            <child>
+              <object class="HdyComboRow" id="security_method_row">
+                <property name="visible">1</property>
+                <property name="title">Security</property>
+                <signal name="notify::selected-index" handler="hotspot_security_changed_cb" swapped="yes" />
+              </object>
+            </child>
+
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">1</property>
+            <property name="wrap">1</property>
+            <property name="xalign">0.0</property>
+            <property name="label" translatable="yes">Wi-Fi hotspots are usually used to share an additional Internet connection over Wi-Fi.</property>
+            <style>
+              <class name="dim-label" />
+            </style>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child type="action">
+      <object class="GtkButton" id="cancel_button">
+        <property name="visible">1</property>
+        <property name="use-underline">1</property>
+        <property name="label" translatable="yes">_Cancel</property>
+      </object>
+    </child>
+    <child type="action">
+      <object class="GtkButton" id="ok_button">
+        <property name="visible">1</property>
+        <property name="can-default">1</property>
+        <property name="use-underline">1</property>
+        <property name="label" translatable="yes">_Turn On</property>
+        <style>
+          <class name="suggested-action "/>
+        </style>
+      </object>
+    </child>
+
+    <action-widgets>
+      <action-widget response="cancel">cancel_button</action-widget>
+      <action-widget response="apply" default="true">ok_button</action-widget>
+    </action-widgets>
+  </template>
+</interface>
