@@ -42,7 +42,9 @@ set_defines = [
   ['PACKAGE_VERSION', meson.project_version()],
   ['VERSION', meson.project_version()],
   # i18n
-  ['GETTEXT_PACKAGE', control_center_gettext]
+  ['GETTEXT_PACKAGE', control_center_gettext],
+  # /etc/os-release
+  ['ETC_OS_RELEASE', get_option('etc_os_release')]
 ]
 
 foreach define: set_defines
