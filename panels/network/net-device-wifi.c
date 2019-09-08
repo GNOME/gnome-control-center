@@ -21,6 +21,9 @@
 
 #include "config.h"
 
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
+
 #include <glib-object.h>
 #include <glib/gi18n.h>
 
@@ -1718,7 +1721,7 @@ open_history (NetDeviceWifi *device_wifi)
         GtkWidget *list;
         GList *list_rows;
 
-        dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", 1, NULL);
+        dialog = g_object_new (HDY_TYPE_DIALOG, "use-header-bar", 1, NULL);
         panel = net_object_get_panel (NET_OBJECT (device_wifi));
         window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
