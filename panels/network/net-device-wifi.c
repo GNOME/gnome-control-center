@@ -35,6 +35,7 @@
 #include "panel-common.h"
 
 #include "connection-editor/net-connection-editor.h"
+#include "cc-wifi-hotspot-dialog.h"
 #include "net-device-wifi.h"
 
 #include "cc-wifi-connection-list.h"
@@ -61,6 +62,7 @@ struct _NetDeviceWifi
         gchar                   *selected_ssid_title;
         gchar                   *selected_connection_id;
         gchar                   *selected_ap_id;
+        CcWifiHotspotDialog     *hotspot_dialog;
 
         gint64                   last_scan;
         gboolean                 scanning;
@@ -829,71 +831,6 @@ get_hostname (void)
         return str;
 }
 
-static GBytes *
-generate_ssid_for_hotspot (NetDeviceWifi *device_wifi)
-{
-        GBytes *ssid_bytes;
-        gchar *hostname, *ssid;
-
-        hostname = get_hostname ();
-        ssid = pretty_hostname_to_ssid (hostname);
-        g_free (hostname);
-
-        ssid_bytes = g_bytes_new_with_free_func (ssid,
-                                                 strlen (ssid),
-                                                 g_free,
-                                                 NULL);
-
-        return ssid_bytes;
-}
-
-#define WPA_PASSKEY_SIZE 8
-static void
-set_wpa_key (NMSettingWirelessSecurity *sws)
-{
-        /* generate a 8-chars ASCII WPA key */
-        char key[WPA_PASSKEY_SIZE + 1];
-        guint i;
-
-        for (i = 0; i < WPA_PASSKEY_SIZE; i++) {
-                gint c;
-                c = g_random_int_range (33, 126);
-                /* too many non alphanumeric characters are hard to remember for humans */
-                while (!g_ascii_isalnum (c))
-                        c = g_random_int_range (33, 126);
-
-                key[i] = (gchar) c;
-        }
-        key[WPA_PASSKEY_SIZE] = '\0';
-
-        g_object_set (sws,
-                      "key-mgmt", "wpa-psk",
-                      "psk", key,
-                      NULL);
-}
-
-static void
-set_wep_key (NMSettingWirelessSecurity *sws)
-{
-        gchar key[11];
-        gint i;
-        const gchar *hexdigits = "0123456789abcdef";
-
-        /* generate a 10-digit hex WEP key */
-        for (i = 0; i < 10; i++) {
-                gint digit;
-                digit = g_random_int_range (0, 16);
-                key[i] = hexdigits[digit];
-        }
-        key[10] = 0;
-
-        g_object_set (sws,
-                      "key-mgmt", "none",
-                      "wep-key0", key,
-                      "wep-key-type", NM_WEP_KEY_TYPE_KEY,
-                      NULL);
-}
-
 static gboolean
 is_hotspot_connection (NMConnection *connection)
 {
@@ -1038,234 +975,58 @@ overwrite_ssid_cb (GObject      *source_object,
 }
 
 static void
-start_shared_connection (NetDeviceWifi *device_wifi)
-{
-        NMConnection *c;
-        NMSettingConnection *sc;
-        NMSettingWireless *sw;
-        NMSettingIP4Config *sip;
-        NMSettingWirelessSecurity *sws;
-        NMDevice *device;
-        GBytes *ssid;
-        const gchar *str_mac;
-        struct ether_addr *bin_mac;
-        NMClient *client;
-        const char *mode;
-        NMDeviceWifiCapabilities caps;
-        GCancellable *cancellable;
-
-        device = net_device_get_nm_device (NET_DEVICE (device_wifi));
-        g_assert (nm_device_get_device_type (device) == NM_DEVICE_TYPE_WIFI);
-
-        c = net_device_wifi_get_hotspot_connection (device_wifi);
-
-        ssid = generate_ssid_for_hotspot (device_wifi);
-
-        client = net_object_get_client (NET_OBJECT (device_wifi));
-        cancellable = net_object_get_cancellable (NET_OBJECT (device_wifi));
-        if (c != NULL) {
-                NMSettingWireless *sw;
-                const char *c_path;
-                NMRemoteConnection *connection;
-
-                sw = nm_connection_get_setting_wireless (c);
-                g_object_set (sw, "ssid", ssid, NULL);
-                g_bytes_unref (ssid);
-
-                c_path = nm_connection_get_path (c);
-                connection = nm_client_get_connection_by_path (client, c_path);
-
-                g_debug ("overwriting ssid to %s", (char *) g_bytes_get_data (ssid, NULL));
-
-                nm_remote_connection_commit_changes_async (connection,
-                                                           TRUE,
-                                                           cancellable,
-                                                           overwrite_ssid_cb,
-                                                           device_wifi);
-                return;
-        }
-
-        g_debug ("create new hotspot connection with SSID '%s'",
-                 (char *) g_bytes_get_data (ssid, NULL));
-        c = nm_simple_connection_new ();
-
-        sc = (NMSettingConnection *)nm_setting_connection_new ();
-        g_object_set (sc,
-                      "type", "802-11-wireless",
-                      "id", "Hotspot",
-                      "autoconnect", FALSE,
-                      NULL);
-        nm_connection_add_setting (c, (NMSetting *)sc);
-
-        sw = (NMSettingWireless *)nm_setting_wireless_new ();
-
-	/* Use real AP mode if the device supports it */
-        caps = nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (device));
-        if (caps & NM_WIFI_DEVICE_CAP_AP)
-		mode = NM_SETTING_WIRELESS_MODE_AP;
-        else
-                mode = NM_SETTING_WIRELESS_MODE_ADHOC;
-
-        g_object_set (sw,
-                      "mode", mode,
-                      NULL);
-
-        str_mac = nm_device_wifi_get_permanent_hw_address (NM_DEVICE_WIFI (device));
-        bin_mac = ether_aton (str_mac);
-        if (bin_mac) {
-                GByteArray *hw_address;
-
-                hw_address = g_byte_array_sized_new (ETH_ALEN);
-                g_byte_array_append (hw_address, bin_mac->ether_addr_octet, ETH_ALEN);
-                g_object_set (sw,
-                              "mac-address", hw_address,
-                              NULL);
-                g_byte_array_unref (hw_address);
-        }
-        nm_connection_add_setting (c, (NMSetting *)sw);
-
-        sip = (NMSettingIP4Config*) nm_setting_ip4_config_new ();
-        g_object_set (sip, "method", "shared", NULL);
-        nm_connection_add_setting (c, (NMSetting *)sip);
-
-        g_object_set (sw, "ssid", ssid, NULL);
-        g_bytes_unref (ssid);
-
-        sws = (NMSettingWirelessSecurity*) nm_setting_wireless_security_new ();
-
-        if (g_strcmp0 (mode, NM_SETTING_WIRELESS_MODE_AP) == 0) {
-                if (caps & NM_WIFI_DEVICE_CAP_RSN) {
-                        set_wpa_key (sws);
-                        nm_setting_wireless_security_add_proto (sws, "rsn");
-                        nm_setting_wireless_security_add_pairwise (sws, "ccmp");
-                        nm_setting_wireless_security_add_group (sws, "ccmp");
-                } else if (caps & NM_WIFI_DEVICE_CAP_WPA) {
-                        set_wpa_key (sws);
-                        nm_setting_wireless_security_add_proto (sws, "wpa");
-                        nm_setting_wireless_security_add_pairwise (sws, "tkip");
-                        nm_setting_wireless_security_add_group (sws, "tkip");
-                } else {
-                        set_wep_key (sws);
-                }
-        } else {
-                set_wep_key (sws);
-        }
-
-        nm_connection_add_setting (c, (NMSetting *)sws);
-
-        nm_client_add_and_activate_connection_async (client,
-                                                     c,
-                                                     device,
-                                                     NULL,
-                                                     cancellable,
-                                                     activate_new_cb,
-                                                     device_wifi);
-
-        g_object_unref (c);
-}
-
-static void
-start_hotspot_response_cb (GtkWidget *dialog, gint response, NetDeviceWifi *device_wifi)
-{
-        if (response == GTK_RESPONSE_OK) {
-                start_shared_connection (device_wifi);
-        }
-        gtk_widget_destroy (dialog);
-}
-
-static void
 start_hotspot (GtkButton *button, NetDeviceWifi *device_wifi)
 {
+        NMConnection *c;
         NMDevice *device;
-        const GPtrArray *connections;
-        gchar *active_ssid;
         NMClient *client;
-        GtkWidget *dialog;
         GtkWidget *window;
-        GtkWidget *message_area;
-        GtkWidget *label;
-        GString *str;
-
-        active_ssid = NULL;
+        g_autofree gchar *hostname = NULL;
+        g_autofree gchar *ssid = NULL;
+        gint response;
 
         client = net_object_get_client (NET_OBJECT (device_wifi));
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
-        connections = nm_client_get_active_connections (client);
-        if (connections) {
-                gint i;
-                for (i = 0; i < connections->len; i++) {
-                        NMActiveConnection *c;
-                        const GPtrArray *devices;
-                        c = (NMActiveConnection *)connections->pdata[i];
-                        devices = nm_active_connection_get_devices (c);
-                        if (devices && devices->pdata[0] == device) {
-                                NMAccessPoint *ap;
-                                GBytes *ssid;
-                                ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (device));
-                                ssid = nm_access_point_get_ssid (ap);
-                                active_ssid = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
-                                break;
-                        }
-                }
-        }
-
         window = gtk_widget_get_toplevel (GTK_WIDGET (button));
 
-        str = g_string_new ("");
+        if (!device_wifi->hotspot_dialog)
+                device_wifi->hotspot_dialog = cc_wifi_hotspot_dialog_new (GTK_WINDOW (window));
 
-        if (active_ssid) {
-                g_string_append_printf (str, _("Switching on the wireless hotspot will disconnect you from <b>%s</b>."), active_ssid);
-                g_string_append (str, " ");
+        cc_wifi_hotspot_dialog_set_device (device_wifi->hotspot_dialog, NM_DEVICE_WIFI (device));
+        hostname = get_hostname ();
+        ssid =  pretty_hostname_to_ssid (hostname);
+        cc_wifi_hotspot_dialog_set_hostname (device_wifi->hotspot_dialog, ssid);
+
+        c = net_device_wifi_get_hotspot_connection (device_wifi);
+        if (c)
+                cc_wifi_hotspot_dialog_set_connection (device_wifi->hotspot_dialog, c);
+
+        response = gtk_dialog_run (GTK_DIALOG (device_wifi->hotspot_dialog));
+
+        if (response == GTK_RESPONSE_APPLY) {
+                NMConnection *connection;
+                GCancellable *cancellable;
+
+                cancellable = net_object_get_cancellable (NET_OBJECT (device_wifi));
+
+                connection = cc_wifi_hotspot_dialog_get_connection (device_wifi->hotspot_dialog);
+                if (NM_IS_REMOTE_CONNECTION (connection))
+                        nm_remote_connection_commit_changes_async (NM_REMOTE_CONNECTION (connection),
+                                                                   TRUE,
+                                                                   cancellable,
+                                                                   overwrite_ssid_cb,
+                                                                   device_wifi);
+                else
+                        nm_client_add_and_activate_connection_async (client,
+                                                                     connection,
+                                                                     device,
+                                                                     NULL,
+                                                                     cancellable,
+                                                                     activate_new_cb,
+                                                                     device_wifi);
         }
 
-        g_string_append (str, _("It is not possible to access the Internet through your wireless while the hotspot is active."));
-
-        dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW (window),
-                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                     GTK_MESSAGE_OTHER,
-                                                     GTK_BUTTONS_NONE,
-                                                     "<big><b>%s</b></big>",
-                                                     _("Turn On Wi-Fi Hotspot?"));
-
-        /* Because we can't control the text alignment with markup, add
-         * the strings as labels directly */
-        message_area = gtk_message_dialog_get_message_area (GTK_MESSAGE_DIALOG (dialog));
-
-        label = g_object_new (GTK_TYPE_LABEL,
-                              "use-markup", TRUE,
-                              "xalign", 0.5,
-                              "max-width-chars", 50,
-                              "wrap", TRUE,
-                              "label", str->str,
-                              "justify", GTK_JUSTIFY_CENTER,
-                              "halign", GTK_ALIGN_CENTER,
-                              NULL);
-        gtk_container_add (GTK_CONTAINER (message_area), label);
-
-        label = g_object_new (GTK_TYPE_LABEL,
-                              "use-markup", TRUE,
-                              "xalign", 0.5,
-                              "max-width-chars", 50,
-                              "wrap", TRUE,
-                              "label", _("Wi-Fi hotspots are usually used to share an additional Internet connection over Wi-Fi."),
-                              "justify", GTK_JUSTIFY_CENTER,
-                              "halign", GTK_ALIGN_CENTER,
-                              NULL);
-        gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
-        gtk_container_add (GTK_CONTAINER (message_area), label);
-
-        gtk_widget_show_all (message_area);
-
-        gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                                _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                _("_Turn On"), GTK_RESPONSE_OK,
-                                NULL);
-        g_signal_connect (dialog, "response",
-                          G_CALLBACK (start_hotspot_response_cb), device_wifi);
-
-        gtk_window_present (GTK_WINDOW (dialog));
-        g_free (active_ssid);
-        g_string_free (str, TRUE);
+        gtk_widget_hide (GTK_WIDGET (device_wifi->hotspot_dialog));
 }
 
 static void
