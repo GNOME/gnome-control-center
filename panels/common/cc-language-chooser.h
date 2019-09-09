@@ -23,10 +23,13 @@
 #include <gtk/gtk.h>
 #include <glib-object.h>
 
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
+
 G_BEGIN_DECLS
 
 #define CC_TYPE_LANGUAGE_CHOOSER (cc_language_chooser_get_type ())
-G_DECLARE_FINAL_TYPE (CcLanguageChooser, cc_language_chooser, CC, LANGUAGE_CHOOSER, GtkDialog)
+G_DECLARE_FINAL_TYPE (CcLanguageChooser, cc_language_chooser, CC, LANGUAGE_CHOOSER, HdyDialog)
 
 CcLanguageChooser *cc_language_chooser_new          (void);
 void               cc_language_chooser_clear_filter (CcLanguageChooser *chooser);
