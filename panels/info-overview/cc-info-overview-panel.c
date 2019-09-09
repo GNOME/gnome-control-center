@@ -24,7 +24,7 @@
 #include "cc-hostname-entry.h"
 #include "cc-os-release.h"
 
-#include "cc-info-resources.h"
+#include "cc-info-overview-resources.h"
 #include "info-cleanup.h"
 
 #include <glib.h>
@@ -749,7 +749,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   object_class->finalize = cc_info_overview_panel_finalize;
   object_class->dispose = cc_info_overview_panel_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info/cc-info-overview-panel.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-info-overview-panel.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, system_image);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, version_label);
@@ -777,7 +777,7 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  g_resources_register (cc_info_get_resource ());
+  g_resources_register (cc_info_overview_get_resource ());
 
   priv->graphics_data = get_graphics_data ();
 

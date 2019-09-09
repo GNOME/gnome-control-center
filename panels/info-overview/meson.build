@@ -1,30 +1,21 @@
-panel_names = [
-  'default-apps',
-  'info-overview',
-  'removable-media'
-]
+panels_list += cappletname
+desktop = 'gnome-@0@-panel.desktop'.format(cappletname)
 
-panels_list += panel_names
+desktop_in = configure_file(
+  input: desktop + '.in.in',
+  output: desktop + '.in',
+  configuration: desktop_conf
+)
 
-foreach name: panel_names
-  desktop = 'gnome-' + name + '-panel.desktop'
-
-  desktop_in = configure_file(
-    input: desktop + '.in.in',
-    output: desktop + '.in',
-    configuration: desktop_conf
-  )
-
-  i18n.merge_file(
-    desktop,
-    type: 'desktop',
-    input: desktop_in,
-    output: desktop,
-    po_dir: po_dir,
-    install: true,
-    install_dir: control_center_desktopdir
-  )
-endforeach
+i18n.merge_file(
+  desktop,
+  type: 'desktop',
+  input: desktop_in,
+  output: desktop,
+  po_dir: po_dir,
+  install: true,
+  install_dir: control_center_desktopdir
+)
 
 cflags += [
   '-DBINDIR="@0@"'.format(control_center_bindir),
@@ -33,29 +24,24 @@ cflags += [
 ]
 
 sources = files(
-  'cc-info-default-apps-panel.c',
   'cc-info-overview-panel.c',
-  'cc-info-removable-media-panel.c',
   'info-cleanup.c'
 )
 
 resource_data = files(
   'GnomeLogoVerticalMedium.svg',
-  'cc-info-default-apps-panel.ui',
-  'cc-info-overview-panel.ui',
-  'cc-info-removable-media-panel.ui'
+  'cc-info-overview-panel.ui'
 )
 
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
-  c_name: 'cc_' + cappletname,
+  c_name: 'cc_' + cappletname.underscorify (),
   dependencies: resource_data,
   export: true
 )
 
 deps = common_deps + [
-  polkit_gobject_dep,
   dependency('udisks2', version: '>= 2.1.8'),
   dependency('libgtop-2.0')
 ]

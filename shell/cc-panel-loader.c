@@ -38,10 +38,9 @@ extern GType cc_bluetooth_panel_get_type (void);
 #endif /* BUILD_BLUETOOTH */
 extern GType cc_color_panel_get_type (void);
 extern GType cc_date_time_panel_get_type (void);
+extern GType cc_default_apps_panel_get_type (void);
 extern GType cc_display_panel_get_type (void);
 extern GType cc_info_overview_panel_get_type (void);
-extern GType cc_info_default_apps_panel_get_type (void);
-extern GType cc_info_removable_media_panel_get_type (void);
 extern GType cc_keyboard_panel_get_type (void);
 extern GType cc_mouse_panel_get_type (void);
 #ifdef BUILD_NETWORK
@@ -54,6 +53,7 @@ extern GType cc_power_panel_get_type (void);
 extern GType cc_printers_panel_get_type (void);
 extern GType cc_privacy_panel_get_type (void);
 extern GType cc_region_panel_get_type (void);
+extern GType cc_removable_media_panel_get_type (void);
 extern GType cc_search_panel_get_type (void);
 extern GType cc_sharing_panel_get_type (void);
 extern GType cc_sound_panel_get_type (void);
@@ -91,10 +91,9 @@ static CcPanelLoaderVtable default_panels[] =
 #endif
   PANEL_TYPE("color",            cc_color_panel_get_type,                NULL),
   PANEL_TYPE("datetime",         cc_date_time_panel_get_type,            NULL),
+  PANEL_TYPE("default-apps",     cc_default_apps_panel_get_type,         NULL),
   PANEL_TYPE("display",          cc_display_panel_get_type,              NULL),
   PANEL_TYPE("info-overview",    cc_info_overview_panel_get_type,        NULL),
-  PANEL_TYPE("default-apps",     cc_info_default_apps_panel_get_type,    NULL),
-  PANEL_TYPE("removable-media",  cc_info_removable_media_panel_get_type, NULL),
   PANEL_TYPE("keyboard",         cc_keyboard_panel_get_type,             NULL),
   PANEL_TYPE("mouse",            cc_mouse_panel_get_type,                NULL),
 #ifdef BUILD_NETWORK
@@ -107,6 +106,7 @@ static CcPanelLoaderVtable default_panels[] =
   PANEL_TYPE("printers",         cc_printers_panel_get_type,             NULL),
   PANEL_TYPE("privacy",          cc_privacy_panel_get_type,              NULL),
   PANEL_TYPE("region",           cc_region_panel_get_type,               NULL),
+  PANEL_TYPE("removable-media",  cc_removable_media_panel_get_type,      NULL),
   PANEL_TYPE("search",           cc_search_panel_get_type,               NULL),
   PANEL_TYPE("sharing",          cc_sharing_panel_get_type,              NULL),
   PANEL_TYPE("sound",            cc_sound_panel_get_type,                NULL),

@@ -17,17 +17,17 @@
  *
  */
 
-#ifndef CC_INFO_REMOVABLE_MEDIA_PANEL_H
-#define CC_INFO_REMOVABLE_MEDIA_PANEL_H
+#ifndef CC_REMOVABLE_MEDIA_PANEL_H
+#define CC_REMOVABLE_MEDIA_PANEL_H
 
 #include <shell/cc-panel.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_INFO_REMOVABLE_MEDIA_PANEL (cc_info_removable_media_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcInfoRemovableMediaPanel, cc_info_removable_media_panel, CC, INFO_REMOVABLE_MEDIA_PANEL, CcPanel)
+#define CC_TYPE_REMOVABLE_MEDIA_PANEL (cc_removable_media_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcRemovableMediaPanel, cc_removable_media_panel, CC, REMOVABLE_MEDIA_PANEL, CcPanel)
 
 
 G_END_DECLS
 
-#endif /* CC_INFO_REMOVABLE_MEDIA_PANEL_H */
+#endif /* CC_REMOVABLE_MEDIA_PANEL_H */
