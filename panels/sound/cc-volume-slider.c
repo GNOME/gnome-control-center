@@ -44,6 +44,36 @@ struct _CcVolumeSlider
 G_DEFINE_TYPE (CcVolumeSlider, cc_volume_slider, GTK_TYPE_BOX)
 
 static void
+volume_changed_cb (CcVolumeSlider *self)
+{
+  gdouble volume, rounded;
+
+  if (self->stream == NULL)
+    return;
+
+  volume = gtk_adjustment_get_value (self->volume_adjustment);
+  rounded = round (volume);
+
+  gtk_toggle_button_set_active (self->mute_button, volume == 0.0);
+
+  if (gvc_mixer_stream_set_volume (self->stream, (pa_volume_t) rounded))
+      gvc_mixer_stream_push_volume (self->stream);
+}
+
+static void
+notify_volume_cb (CcVolumeSlider *self)
+{
+  g_signal_handlers_block_by_func (self->volume_adjustment, volume_changed_cb, self);
+
+  if (gtk_toggle_button_get_active (self->mute_button))
+    gtk_adjustment_set_value (self->volume_adjustment, 0.0);
+  else
+    gtk_adjustment_set_value (self->volume_adjustment, gvc_mixer_stream_get_volume (self->stream));
+
+  g_signal_handlers_unblock_by_func (self->volume_adjustment, volume_changed_cb, self);
+}
+
+static void
 update_ranges (CcVolumeSlider *self)
 {
   gdouble vol_max_norm;
@@ -67,25 +97,9 @@ update_ranges (CcVolumeSlider *self)
       gtk_adjustment_set_upper (self->volume_adjustment, vol_max_norm);
     }
   gtk_adjustment_set_page_increment (self->volume_adjustment, vol_max_norm / 100.0);
-}
 
-static void
-volume_changed_cb (CcVolumeSlider *self)
-{
-  gdouble volume, rounded;
-
-  if (self->stream == NULL)
-    return;
-
-  volume = gtk_adjustment_get_value (self->volume_adjustment);
-  rounded = round (volume);
-
-  gtk_toggle_button_set_active (self->mute_button, volume == 0.0);
-  if (gvc_mixer_stream_set_volume (self->stream,
-                                   (pa_volume_t) rounded))
-    {
-      gvc_mixer_stream_push_volume (self->stream);
-    }
+  if (self->stream)
+    notify_volume_cb (self);
 }
 
 static void
@@ -95,17 +109,6 @@ mute_button_toggled_cb (CcVolumeSlider *self)
     return;
 
   gvc_mixer_stream_change_is_muted (self->stream, gtk_toggle_button_get_active (self->mute_button));
-}
-
-static void
-notify_volume_cb (CcVolumeSlider *self)
-{
-  g_signal_handlers_block_by_func (self->volume_adjustment, volume_changed_cb, self);
-  if (gtk_toggle_button_get_active (self->mute_button))
-    gtk_adjustment_set_value (self->volume_adjustment, 0.0);
-  else
-    gtk_adjustment_set_value (self->volume_adjustment, gvc_mixer_stream_get_volume (self->stream));
-  g_signal_handlers_unblock_by_func (self->volume_adjustment, volume_changed_cb, self);
 }
 
 static void
