@@ -42,8 +42,6 @@ sources += gnome.compile_resources(
 
 deps = common_deps + [m_dep]
 
-cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
-
 panels_libs += static_library(
   cappletname,
   sources: sources,

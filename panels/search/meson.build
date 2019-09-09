@@ -37,8 +37,7 @@ sources += gnome.compile_resources(
 )
 
 cflags += [
-  '-DDATADIR="@0@"'.format(control_center_datadir),
-  '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
+  '-DDATADIR="@0@"'.format(control_center_datadir)
 ]
 
 panels_libs += static_library(

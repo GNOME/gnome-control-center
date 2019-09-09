@@ -48,7 +48,6 @@ deps = common_deps + [
 ]
 
 cflags += [
-  '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir),
   '-DBINDIR="@0@"'.format(control_center_bindir)
 ]
 
