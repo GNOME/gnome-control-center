@@ -210,7 +210,7 @@ gsd_wacom_key_shortcut_remove_editing_mode (GsdWacomKeyShortcutButton *self)
 static void
 gsd_wacom_key_shortcut_button_changed (GsdWacomKeyShortcutButton *self)
 {
-  gchar *text;
+  g_autofree gchar *text = NULL;
 
   if (self->editing_mode)
     {
@@ -231,7 +231,6 @@ gsd_wacom_key_shortcut_button_changed (GsdWacomKeyShortcutButton *self)
 
   text = gtk_accelerator_get_label (self->keyval, self->mods);
   gtk_button_set_label (GTK_BUTTON (self), text);
-  g_free (text);
 }
 
 static void
