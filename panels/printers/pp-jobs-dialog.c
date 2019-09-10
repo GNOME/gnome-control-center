@@ -79,22 +79,16 @@ static gboolean
 is_info_required (PpJobsDialog *self,
                   const gchar  *info)
 {
-  gboolean  required = FALSE;
-  gint      i;
+  gint i;
 
-  if (self != NULL && self->actual_auth_info_required != NULL)
-    {
-      for (i = 0; self->actual_auth_info_required[i] != NULL; i++)
-        {
-          if (g_strcmp0 (self->actual_auth_info_required[i], info) == 0)
-            {
-              required = TRUE;
-              break;
-            }
-        }
-    }
+  if (self->actual_auth_info_required == NULL)
+    return FALSE;
 
-  return required;
+  for (i = 0; self->actual_auth_info_required[i] != NULL; i++)
+    if (g_strcmp0 (self->actual_auth_info_required[i], info) == 0)
+      return TRUE;
+
+  return FALSE;
 }
 
 static gboolean
