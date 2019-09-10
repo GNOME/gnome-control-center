@@ -10,7 +10,6 @@
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
     <property name="use-header-bar">1</property>
-    <signal name="response" handler="pp_details_dialog_response_cb"/>
     <child internal-child="headerbar">
       <object class="GtkHeaderBar">
         <property name="visible">True</property>
@@ -27,14 +26,17 @@
     </child>
     <child internal-child="vbox">
       <object class="GtkBox">
+        <property name="visible">True</property>
         <property name="margin">20</property>
         <property name="halign">center</property>
         <child>
           <object class="GtkGrid">
+            <property name="visible">True</property>
             <property name="row-spacing">10</property>
             <property name="column-spacing">10</property>
             <child>
               <object class="GtkLabel">
+                <property name="visible">True</property>
                 <property name="label" translatable="yes">Name</property>
                 <property name="halign">end</property>
                 <property name="mnemonic_widget">printer_name_entry</property>
@@ -49,9 +51,10 @@
             </child>
             <child>
               <object class="GtkEntry" id="printer_name_entry">
+                <property name="visible">True</property>
                 <property name="halign">fill</property>
                 <property name="width_request">320</property>
-                <signal name="changed" handler="printer_name_changed"/>
+                <signal name="changed" handler="printer_name_changed" object="PpDetailsDialog" swapped="yes"/>
               </object>
               <packing>
                 <property name="left-attach">1</property>
@@ -61,6 +64,7 @@
 
             <child>
               <object class="GtkLabel">
+                <property name="visible">True</property>
                 <property name="label" translatable="yes">Location</property>
                 <property name="halign">end</property>
                 <property name="mnemonic_widget">printer_location_entry</property>
@@ -75,6 +79,7 @@
             </child>
             <child>
               <object class="GtkEntry" id="printer_location_entry">
+                <property name="visible">True</property>
                 <property name="width_request">320</property>
                 <property name="halign">fill</property>
               </object>
@@ -86,6 +91,7 @@
 
             <child>
               <object class="GtkLabel">
+                <property name="visible">True</property>
                 <property name="label" translatable="yes">Address</property>
                 <property name="halign">end</property>
                 <property name="mnemonic_widget">printer_address_label</property>
@@ -100,6 +106,7 @@
             </child>
             <child>
               <object class="GtkLabel" id="printer_address_label">
+                <property name="visible">True</property>
                 <property name="label">192.168.0.1</property>
                 <property name="halign">start</property>
               </object>
@@ -111,6 +118,7 @@
 
             <child>
               <object class="GtkLabel">
+                <property name="visible">True</property>
                 <property name="label" translatable="yes">Driver</property>
                 <property name="halign">end</property>
                 <property name="mnemonic_widget">printer_model_label</property>
@@ -125,37 +133,36 @@
             </child>
             <child>
               <object class="GtkStack" id="printer_model_stack">
+                <property name="visible">True</property>
                 <property name="halign">start</property>
                 <child>
                   <object class="GtkLabel" id="printer_model_label">
+                    <property name="visible">True</property>
                     <property name="halign">start</property>
                     <property name="label">HP Inkjet Delux 9000</property>
                     <property name="selectable">True</property>
                   </object>
-                  <packing>
-                    <property name="name">printer_model_label</property>
-                  </packing>
                 </child>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkBox" id="loading_box">
+                    <property name="visible">True</property>
                     <property name="halign">start</property>
                     <property name="spacing">5</property>
                     <child>
                       <object class="GtkSpinner">
+                        <property name="visible">True</property>
                         <property name="active">True</property>
                         <property name="halign">start</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkLabel">
+                        <property name="visible">True</property>
                         <property name="halign">start</property>
                         <property name="label" translatable="yes">Searching for preferred drivers…</property>
                       </object>
                     </child>
                   </object>
-                  <packing>
-                    <property name="name">loading</property>
-                  </packing>
                 </child>
               </object>
               <packing>
@@ -166,30 +173,34 @@
 
             <child>
               <object class="GtkButtonBox" id="driver_buttons">
+                <property name="visible">True</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">10</property>
                 <property name="halign">start</property>
                 <child>
                   <object class="GtkButton" id="search_for_drivers_button">
+                    <property name="visible">True</property>
                     <property name="label" translatable="yes">Search for Drivers</property>
                     <property name="halign">fill</property>
-                    <signal name="clicked" handler="search_for_drivers"/>
+                    <signal name="clicked" handler="search_for_drivers" object="PpDetailsDialog" swapped="yes"/>
                   </object>
                 </child>
 
                 <child>
                   <object class="GtkButton" id="select_from_database_button">
+                    <property name="visible">True</property>
                     <property name="label" translatable="yes">Select from Database…</property>
                     <property name="halign">fill</property>
-                    <signal name="clicked" handler="select_ppd_in_dialog"/>
+                    <signal name="clicked" handler="select_ppd_in_dialog" object="PpDetailsDialog" swapped="yes"/>
                   </object>
                 </child>
 
                 <child>
                   <object class="GtkButton" id="install_ppd_button">
+                    <property name="visible">True</property>
                     <property name="label" translatable="yes">Install PPD File…</property>
                     <property name="halign">fill</property>
-                    <signal name="clicked" handler="select_ppd_manually"/>
+                    <signal name="clicked" handler="select_ppd_manually" object="PpDetailsDialog" swapped="yes"/>
                   </object>
                 </child>
               </object>

@@ -39,16 +39,17 @@
 #include "pp-utils.h"
 
 struct _PpDetailsDialog {
-  GtkDialog parent;
+  GtkDialog     parent_instance;
 
-  GtkLabel *dialog_title;
-  GtkEntry *printer_name_entry;
-  GtkEntry *printer_location_entry;
-  GtkLabel *printer_address_label;
-  GtkLabel *printer_model_label;
-  GtkStack *printer_model_stack;
-  GtkWidget *search_for_drivers_button;
-  GtkWidget *driver_buttons;
+  GtkLabel     *dialog_title;
+  GtkButtonBox *driver_buttons;
+  GtkBox       *loading_box;
+  GtkLabel     *printer_address_label;
+  GtkEntry     *printer_location_entry;
+  GtkLabel     *printer_model_label;
+  GtkStack     *printer_model_stack;
+  GtkEntry     *printer_name_entry;
+  GtkButton    *search_for_drivers_button;
 
   gchar        *printer_name;
   gchar        *printer_location;
@@ -60,74 +61,15 @@ struct _PpDetailsDialog {
   PpPPDSelectionDialog *pp_ppd_selection_dialog;
 };
 
-struct _PpDetailsDialogClass
-{
-  GtkDialogClass parent_class;
-
-  void (*printer_renamed) (PpDetailsDialog *details_dialog, const gchar *new_name);
-};
-
 G_DEFINE_TYPE (PpDetailsDialog, pp_details_dialog, GTK_TYPE_DIALOG)
 
-enum
-{
-  PRINTER_RENAMED,
-  LAST_SIGNAL
-};
-
-static guint signals[LAST_SIGNAL] = { 0 };
-
 static void
-on_printer_rename_cb (GObject      *source_object,
-                      GAsyncResult *result,
-                      gpointer      user_data)
+printer_name_changed (PpDetailsDialog *self)
 {
-  pp_printer_rename_finish (PP_PRINTER (source_object), result, NULL);
-
-  g_object_unref (source_object);
-}
-
-static void
-pp_details_dialog_response_cb (GtkDialog *dialog,
-                               gint       response_id,
-                               gpointer   user_data)
-{
-  PpDetailsDialog *self = (PpDetailsDialog*) dialog;
-  const gchar *new_name;
-  const gchar *new_location;
-
-  new_location = gtk_entry_get_text (GTK_ENTRY (self->printer_location_entry));
-  if (g_strcmp0 (self->printer_location, new_location) != 0)
-    {
-      printer_set_location (self->printer_name, new_location);
-
-      self->printer_location = g_strdup (new_location);
-    }
-
-  new_name = gtk_entry_get_text (GTK_ENTRY (self->printer_name_entry));
-  if (g_strcmp0 (self->printer_name, new_name) != 0)
-    {
-      PpPrinter *printer = pp_printer_new (self->printer_name);
-
-      g_signal_emit_by_name (self, "printer-renamed", new_name);
-
-      pp_printer_rename_async (printer,
-                               new_name,
-                               NULL,
-                               on_printer_rename_cb,
-                               NULL);
-    }
-}
-
-static void
-printer_name_changed (GtkEditable *editable,
-                      gpointer     user_data)
-{
-  PpDetailsDialog *self = (PpDetailsDialog *) user_data;
   const gchar *name;
   g_autofree gchar *title = NULL;
 
-  name = gtk_entry_get_text (GTK_ENTRY (self->printer_name_entry));
+  name = pp_details_dialog_get_printer_name (self);
 
   /* Translators: This is the title of the dialog. %s is the printer name. */
   title = g_strdup_printf (_("%s Details"), name);
@@ -180,16 +122,15 @@ get_ppd_names_cb (PPDName     **names,
           gtk_label_set_text (self->printer_model_label, _("No suitable driver found"));
         }
 
-      gtk_stack_set_visible_child_name (self->printer_model_stack, "printer_model_label");
+      gtk_stack_set_visible_child (self->printer_model_stack, GTK_WIDGET (self->printer_model_label));
     }
 }
 
 static void
-search_for_drivers (GtkButton       *button,
-                    PpDetailsDialog *self)
+search_for_drivers (PpDetailsDialog *self)
 {
-  gtk_stack_set_visible_child_name (self->printer_model_stack, "loading");
-  gtk_widget_set_sensitive (self->search_for_drivers_button, FALSE);
+  gtk_stack_set_visible_child (self->printer_model_stack, GTK_WIDGET (self->loading_box));
+  gtk_widget_set_sensitive (GTK_WIDGET (self->search_for_drivers_button), FALSE);
 
   get_ppd_names_async (self->printer_name,
                        1,
@@ -252,8 +193,7 @@ get_all_ppds_async_cb (PPDList  *ppds,
 }
 
 static void
-select_ppd_in_dialog (GtkButton       *button,
-                      PpDetailsDialog *self)
+select_ppd_in_dialog (PpDetailsDialog *self)
 {
   g_autofree gchar *device_id = NULL;
   g_autofree gchar *manufacturer = NULL;
@@ -301,8 +241,7 @@ select_ppd_in_dialog (GtkButton       *button,
 }
 
 static void
-select_ppd_manually (GtkButton       *button,
-                     PpDetailsDialog *self)
+select_ppd_manually (PpDetailsDialog *self)
 {
   GtkFileFilter *filter;
   GtkWidget     *dialog;
@@ -362,50 +301,64 @@ pp_details_dialog_init (PpDetailsDialog *self)
 }
 
 static void
+pp_details_dialog_dispose (GObject *object)
+{
+  PpDetailsDialog *self = PP_DETAILS_DIALOG (object);
+
+  g_clear_pointer (&self->printer_name, g_free);
+  g_clear_pointer (&self->printer_location, g_free);
+  g_clear_pointer (&self->ppd_file_name, g_free);
+
+  if (self->all_ppds_list != NULL)
+    {
+      ppd_list_free (self->all_ppds_list);
+      self->all_ppds_list = NULL;
+    }
+
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
+
+  G_OBJECT_CLASS (pp_details_dialog_parent_class)->dispose (object);
+}
+
+static void
 pp_details_dialog_class_init (PpDetailsDialogClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/details-dialog.ui");
+  object_class->dispose = pp_details_dialog_dispose;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-details-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, dialog_title);
-  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_name_entry);
-  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_location_entry);
+  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, driver_buttons);
+  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, loading_box);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_address_label);
+  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_location_entry);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_model_label);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_model_stack);
+  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_name_entry);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, search_for_drivers_button);
-  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, driver_buttons);
 
   gtk_widget_class_bind_template_callback (widget_class, printer_name_changed);
   gtk_widget_class_bind_template_callback (widget_class, search_for_drivers);
   gtk_widget_class_bind_template_callback (widget_class, select_ppd_in_dialog);
   gtk_widget_class_bind_template_callback (widget_class, select_ppd_manually);
-  gtk_widget_class_bind_template_callback (widget_class, pp_details_dialog_response_cb);
-
-  signals[PRINTER_RENAMED] = g_signal_new ("printer-renamed",
-                                           G_TYPE_FROM_CLASS (klass),
-                                           G_SIGNAL_RUN_LAST,
-                                           0,
-                                           NULL, NULL, NULL,
-                                           G_TYPE_NONE, 1,
-                                           G_TYPE_STRING);
 }
 
 PpDetailsDialog *
-pp_details_dialog_new (GtkWindow            *parent,
-                       gchar                *printer_name,
-                       gchar                *printer_location,
-                       gchar                *printer_address,
-                       gchar                *printer_make_and_model,
-                       gboolean              sensitive)
+pp_details_dialog_new (gchar   *printer_name,
+                       gchar   *printer_location,
+                       gchar   *printer_address,
+                       gchar   *printer_make_and_model,
+                       gboolean sensitive)
 {
   PpDetailsDialog *self;
   g_autofree gchar *title = NULL;
   g_autofree gchar *printer_url = NULL;
 
   self = g_object_new (PP_DETAILS_DIALOG_TYPE,
-                       "transient-for", parent,
                        "use-header-bar", TRUE,
                        NULL);
 
@@ -429,24 +382,16 @@ pp_details_dialog_new (GtkWindow            *parent,
   return self;
 }
 
-void
-pp_details_dialog_free (PpDetailsDialog *self)
+const gchar *
+pp_details_dialog_get_printer_name (PpDetailsDialog *self)
 {
-  if (self != NULL)
-    {
-      g_clear_pointer (&self->printer_name, g_free);
-      g_clear_pointer (&self->printer_location, g_free);
-      g_clear_pointer (&self->ppd_file_name, g_free);
+  g_return_val_if_fail (PP_IS_DETAILS_DIALOG (self), NULL);
+  return gtk_entry_get_text (GTK_ENTRY (self->printer_name_entry));
+}
 
-      if (self->all_ppds_list != NULL)
-        {
-          ppd_list_free (self->all_ppds_list);
-          self->all_ppds_list = NULL;
-        }
-
-      g_cancellable_cancel (self->cancellable);
-      g_clear_object (&self->cancellable);
-
-      gtk_widget_destroy (GTK_WIDGET (self));
-    }
+const gchar *
+pp_details_dialog_get_printer_location (PpDetailsDialog *self)
+{
+  g_return_val_if_fail (PP_IS_DETAILS_DIALOG (self), NULL);
+  return gtk_entry_get_text (GTK_ENTRY (self->printer_location_entry));
 }
