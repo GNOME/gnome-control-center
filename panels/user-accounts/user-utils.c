@@ -23,10 +23,15 @@
 #include <math.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <limits.h>
 #include <unistd.h>
 #include <utmpx.h>
 #include <pwd.h>
+
+#ifdef __FreeBSD__
+#include <sysexits.h>
+#endif
 
 #include <gio/gio.h>
 #include <gio/gunixoutputstream.h>
@@ -402,10 +407,17 @@ is_valid_username_data_free (isValidUsernameData *data)
         g_free (data);
 }
 
+#ifdef __FreeBSD__
+/* Taken from pw(8) man page. */
+#define E_SUCCESS EX_OK
+#define E_BAD_ARG EX_DATAERR
+#define E_NOTFOUND EX_NOUSER
+#else
 /* Taken from usermod.c in shadow-utils. */
 #define E_SUCCESS 0
 #define E_BAD_ARG 3
 #define E_NOTFOUND 6
+#endif
 
 static void
 is_valid_username_child_watch_cb (GPid pid,
@@ -457,7 +469,7 @@ is_valid_username_async (const gchar *username,
         isValidUsernameData *data;
         gchar *argv[6];
         GPid pid;
-        GError *error;
+        GError *error = NULL;
 
         task = g_task_new (NULL, cancellable, callback, callback_data);
         g_task_set_source_tag (task, is_valid_username_async);
@@ -480,6 +492,17 @@ is_valid_username_async (const gchar *username,
                 return;
         }
 
+#ifdef __FreeBSD__
+        /* Abuse "pw usershow -n <name>" in the same way as the code below. We
+         * don't use "pw usermod -n <name> -N -l <newname>" here because it has
+         * a special case for "root" to reject changes to the root user.
+         */
+        argv[0] = "pw";
+        argv[1] = "usershow";
+        argv[2] = "-n";
+        argv[3] = data->username;
+        argv[4] = NULL;
+#else
         /* "usermod --login" is meant to be used to change a username, but the
          * exit codes can be safely abused to check the validity of username.
          * However, the current "usermod" implementation may change in the
@@ -492,6 +515,7 @@ is_valid_username_async (const gchar *username,
         argv[3] = "--";
         argv[4] = data->username;
         argv[5] = NULL;
+#endif
 
         if (!g_spawn_async (NULL, argv, NULL,
                             G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD |
