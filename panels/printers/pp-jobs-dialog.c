@@ -47,7 +47,6 @@ static void pp_jobs_dialog_hide (PpJobsDialog *self);
 
 struct _PpJobsDialog {
   GtkBuilder *builder;
-  GtkWidget  *parent;
 
   GtkWidget  *dialog;
   GListStore *store;
@@ -550,8 +549,7 @@ key_press_event_cb (GtkWidget   *widget,
 }
 
 PpJobsDialog *
-pp_jobs_dialog_new (GtkWindow            *parent,
-                    UserResponseCallback  user_callback,
+pp_jobs_dialog_new (UserResponseCallback  user_callback,
                     gpointer              user_data,
                     gchar                *printer_name)
 {
@@ -566,7 +564,6 @@ pp_jobs_dialog_new (GtkWindow            *parent,
   self = g_new0 (PpJobsDialog, 1);
 
   self->builder = gtk_builder_new ();
-  self->parent = GTK_WIDGET (parent);
 
   builder_result = gtk_builder_add_objects_from_resource (self->builder,
                                                           "/org/gnome/control-center/printers/jobs-dialog.ui",
@@ -627,7 +624,6 @@ pp_jobs_dialog_new (GtkWindow            *parent,
 
   update_jobs_list (self);
 
-  gtk_window_set_transient_for (GTK_WINDOW (self->dialog), GTK_WINDOW (parent));
   gtk_window_present (GTK_WINDOW (self->dialog));
   gtk_widget_show_all (GTK_WIDGET (self->dialog));
 
