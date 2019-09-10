@@ -27,8 +27,7 @@ G_BEGIN_DECLS
 
 typedef struct _PpJobsDialog PpJobsDialog;
 
-PpJobsDialog *pp_jobs_dialog_new               (GtkWindow            *parent,
-                                                UserResponseCallback  user_callback,
+PpJobsDialog *pp_jobs_dialog_new               (UserResponseCallback  user_callback,
                                                 gpointer              user_data,
                                                 gchar                *printer_name);
 void          pp_jobs_dialog_update            (PpJobsDialog         *dialog);
