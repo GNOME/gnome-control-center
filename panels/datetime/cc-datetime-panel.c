@@ -738,7 +738,7 @@ on_permission_changed (CcDateTimePanel *self)
   gtk_widget_set_sensitive (self->auto_datetime_row, allowed);
   gtk_widget_set_sensitive (self->auto_timezone_row, location_allowed && (allowed || tz_allowed));
   gtk_widget_set_sensitive (self->datetime_button, allowed && !using_ntp);
-  gtk_widget_set_sensitive (self->timezone_button, (allowed || tz_allowed) && !auto_timezone);
+  gtk_widget_set_sensitive (self->timezone_button, (allowed || tz_allowed) && (!auto_timezone || !location_allowed));
 
   /* Hide the subdialogs if we no longer have permissions */
   if (!allowed)
@@ -842,12 +842,14 @@ tz_switch_to_row_transform_func (GBinding        *binding,
 {
   gboolean active;
   gboolean allowed;
+  gboolean location_allowed;
 
   active = g_value_get_boolean (source_value);
   allowed = (self->permission != NULL && g_permission_get_allowed (self->permission)) ||
             (self->tz_permission != NULL && g_permission_get_allowed (self->tz_permission));
+  location_allowed = g_settings_get_boolean (self->location_settings, LOCATION_ENABLED);
 
-  g_value_set_boolean (target_value, !active && allowed);
+  g_value_set_boolean (target_value, allowed && (!active || !location_allowed));
 
   return TRUE;
 }
