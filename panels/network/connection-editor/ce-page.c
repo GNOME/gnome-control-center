@@ -222,7 +222,7 @@ ce_page_new (GType             type,
              const gchar      *title)
 {
         CEPage *page;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         page = CE_PAGE (g_object_new (type,
                                       "connection", connection,
@@ -233,7 +233,6 @@ ce_page_new (GType             type,
         if (ui_resource) {
                 if (!gtk_builder_add_from_resource (page->builder, ui_resource, &error)) {
                         g_warning ("Couldn't load builder file: %s", error->message);
-                        g_error_free (error);
                         g_object_unref (page);
                         return NULL;
                 }

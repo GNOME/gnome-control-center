@@ -65,7 +65,7 @@ vpn_get_plugins (void)
 	plugins = NULL;
 	while (p) {
 		NMVpnPluginInfo *plugin_info = NM_VPN_PLUGIN_INFO (p->data);
-		GError *error = NULL;
+		g_autoptr(GError) error = NULL;
 
 		/* load the editor plugin, and preserve only those NMVpnPluginInfo that can
 		 * successfully load the plugin. */
@@ -88,7 +88,6 @@ vpn_get_plugins (void)
 				           nm_vpn_plugin_info_get_filename (plugin_info),
 				           error->message);
 			}
-			g_clear_error (&error);
 			g_object_unref (plugin_info);
 		}
 		p = g_slist_delete_link (p, p);
@@ -110,7 +109,7 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 	char *filename = NULL;
 	ActionInfo *info = (ActionInfo *) user_data;
 	NMConnection *connection = NULL;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 	GSList *iter;
 
 	if (response != GTK_RESPONSE_ACCEPT)
@@ -147,7 +146,6 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 		g_signal_connect (err_dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 		gtk_dialog_run (GTK_DIALOG (err_dialog));
 	}
-	g_clear_error (&error);
 	g_free (filename);
 
 out:
@@ -200,7 +198,7 @@ export_vpn_to_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 {
 	NMConnection *connection = NM_CONNECTION (user_data);
 	char *filename = NULL;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 	NMVpnEditorPlugin *plugin;
 	NMSettingConnection *s_con = NULL;
 	NMSettingVpn *s_vpn = NULL;
@@ -279,8 +277,6 @@ done:
 	}
 
 out:
-	if (error)
-		g_error_free (error);
 	g_object_unref (connection);
 
 	gtk_widget_hide (dialog);

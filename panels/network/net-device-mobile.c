@@ -93,12 +93,11 @@ connection_activate_cb (GObject *source_object,
                         GAsyncResult *res,
                         gpointer user_data)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         if (!nm_client_activate_connection_finish (NM_CLIENT (source_object), res, &error)) {
                 /* failed to activate */
                 nm_device_mobile_refresh_ui (user_data);
-                g_error_free (error);
         }
 }
 
@@ -275,14 +274,13 @@ device_mobile_find_provider (NetDeviceMobile *device_mobile,
         GString *name = NULL;
 
         if (device_mobile->mpd == NULL) {
-                GError *error = NULL;
+                g_autoptr(GError) error = NULL;
 
                 /* Use defaults */
                 device_mobile->mpd = nma_mobile_providers_database_new_sync (NULL, NULL, NULL, &error);
                 if (device_mobile->mpd == NULL) {
                         g_debug ("Couldn't load mobile providers database: %s",
                                  error ? error->message : "");
-                        g_clear_error (&error);
                         return NULL;
                 }
         }
@@ -487,7 +485,7 @@ device_mobile_device_got_modem_manager_cb (GObject *source_object,
                                            GAsyncResult *res,
                                            gpointer user_data)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         GVariant *result = NULL;
         GDBusProxy *proxy;
         NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
@@ -496,7 +494,6 @@ device_mobile_device_got_modem_manager_cb (GObject *source_object,
         if (!proxy) {
                 g_warning ("Error creating ModemManager proxy: %s",
                            error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -542,7 +539,7 @@ device_mobile_get_registration_info_cb (GObject      *source_object,
                                         gpointer      user_data)
 {
         gchar *operator_code = NULL;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         guint registration_status;
         GVariant *result = NULL;
         gchar *operator_name = NULL;
@@ -552,7 +549,6 @@ device_mobile_get_registration_info_cb (GObject      *source_object,
         if (result == NULL) {
                 g_warning ("Error getting registration info: %s\n",
                            error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -619,14 +615,13 @@ device_mobile_device_got_modem_manager_gsm_cb (GObject      *source_object,
                                                GAsyncResult *res,
                                                gpointer      user_data)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
 
         device_mobile->gsm_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
         if (device_mobile->gsm_proxy == NULL) {
                 g_warning ("Error creating ModemManager GSM proxy: %s\n",
                            error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -654,7 +649,7 @@ device_mobile_get_serving_system_cb (GObject      *source_object,
 {
         NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
         GVariant *result = NULL;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         guint32 band_class;
         gchar *band;
@@ -665,7 +660,6 @@ device_mobile_get_serving_system_cb (GObject      *source_object,
         if (result == NULL) {
                 g_warning ("Error getting serving system: %s\n",
                            error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -691,14 +685,13 @@ device_mobile_device_got_modem_manager_cdma_cb (GObject      *source_object,
                                                 GAsyncResult *res,
                                                 gpointer      user_data)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
 
         device_mobile->cdma_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
         if (device_mobile->cdma_proxy == NULL) {
                 g_warning ("Error creating ModemManager CDMA proxy: %s\n",
                            error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -891,7 +884,7 @@ net_device_mobile_class_init (NetDeviceMobileClass *klass)
 static void
 net_device_mobile_init (NetDeviceMobile *device_mobile)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         GtkWidget *widget;
         GtkCellRenderer *renderer;
         GtkComboBox *combobox;
@@ -902,7 +895,6 @@ net_device_mobile_init (NetDeviceMobile *device_mobile)
                                        &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
-                g_error_free (error);
                 return;
         }
 

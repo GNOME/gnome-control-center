@@ -147,7 +147,7 @@ eap_method_init (gsize obj_size,
                  gboolean phase2)
 {
 	EAPMethod *method;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 
 	g_return_val_if_fail (obj_size > 0, NULL);
 	g_return_val_if_fail (ui_resource != NULL, NULL);
@@ -169,7 +169,6 @@ eap_method_init (gsize obj_size,
 	if (!gtk_builder_add_from_resource (method->builder, ui_resource, &error)) {
 		g_warning ("Couldn't load UI builder resource %s: %s",
 		           ui_resource, error->message);
-		g_error_free (error);
 		eap_method_unref (method);
 		return NULL;
 	}

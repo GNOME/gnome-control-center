@@ -220,7 +220,7 @@ static void
 net_device_simple_init (NetDeviceSimple *device_simple)
 {
         NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (device_simple);
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         GtkWidget *widget;
 
         priv->builder = gtk_builder_new ();
@@ -229,7 +229,6 @@ net_device_simple_init (NetDeviceSimple *device_simple)
                                        &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
-                g_error_free (error);
                 return;
         }
 

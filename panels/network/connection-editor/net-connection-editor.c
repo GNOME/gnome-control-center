@@ -94,14 +94,13 @@ updated_connection_cb (GObject            *source_object,
                        gpointer            user_data)
 {
         NetConnectionEditor *editor;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         gboolean success = TRUE;
 
         if (!nm_remote_connection_commit_changes_finish (NM_REMOTE_CONNECTION (source_object),
                                                          res, &error)) {
                 g_warning ("Failed to commit changes: %s", error->message);
                 success = FALSE;
-                g_error_free (error);
                 //return; FIXME return if cancelled
         }
 
@@ -117,13 +116,12 @@ added_connection_cb (GObject            *source_object,
                      gpointer            user_data)
 {
         NetConnectionEditor *editor;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         gboolean success = TRUE;
 
         if (!nm_client_add_connection_finish (NM_CLIENT (source_object), res, &error)) {
                 g_warning ("Failed to add connection: %s", error->message);
                 success = FALSE;
-                g_error_free (error);
                 /* Leave the editor open */
                 // return; FIXME return if cancelled
         }
@@ -244,7 +242,7 @@ static void
 net_connection_editor_do_fallback (NetConnectionEditor *editor, const gchar *type)
 {
         gchar *cmdline;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         if (editor->is_new_connection) {
                 cmdline = g_strdup_printf ("nm-connection-editor --type='%s' --create", type);
@@ -256,12 +254,10 @@ net_connection_editor_do_fallback (NetConnectionEditor *editor, const gchar *typ
         g_spawn_command_line_async (cmdline, &error);
         g_free (cmdline);
 
-        if (error) {
+        if (error)
                 net_connection_editor_error_dialog (editor,
                                                     _("Unable to open connection editor"),
                                                     error->message);
-                g_error_free (error);
-        }
 
         g_signal_emit (editor, signals[DONE], 0, FALSE);
 }
@@ -338,13 +334,12 @@ validate (NetConnectionEditor *editor)
 
         valid = TRUE;
         for (l = editor->pages; l; l = l->next) {
-                GError *error = NULL;
+                g_autoptr(GError) error = NULL;
 
                 if (!ce_page_validate (CE_PAGE (l->data), editor->connection, &error)) {
                         valid = FALSE;
                         if (error) {
                                 g_debug ("Invalid setting %s: %s", ce_page_get_title (CE_PAGE (l->data)), error->message);
-                                g_error_free (error);
                         } else {
                                 g_debug ("Invalid setting %s", ce_page_get_title (CE_PAGE (l->data)));
                         }
@@ -830,14 +825,13 @@ forgotten_cb (GObject *source_object,
 {
         NMRemoteConnection *connection = NM_REMOTE_CONNECTION (source_object);
         NetConnectionEditor *editor = user_data;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         if (!nm_remote_connection_delete_finish (connection, res, &error)) {
                 if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
                         g_warning ("Failed to delete connection %s: %s",
                                    nm_connection_get_id (NM_CONNECTION (connection)),
                                    error->message);
-                g_error_free (error);
                 return;
         }
 
