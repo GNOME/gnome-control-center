@@ -486,7 +486,8 @@ static void
 nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 {
         const gchar *str;
-        gchar *str_tmp = NULL;
+        gchar *speed_text = NULL;
+        gchar *security_text = NULL;
         gint strength = 0;
         guint speed = 0;
         NMAccessPoint *active_ap;
@@ -533,11 +534,12 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         speed /= 1000;
         if (speed > 0) {
                 /* Translators: network device speed */
-                str_tmp = g_strdup_printf (_("%d Mb/s"), speed);
+                speed_text = g_strdup_printf (_("%d Mb/s"), speed);
         }
         panel_set_device_widget_details (device_wifi->builder,
                                          "speed",
-                                         str_tmp);
+                                         speed_text);
+        g_free (speed_text);
 
         /* device MAC */
         str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
@@ -545,14 +547,12 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                                          "mac",
                                          str);
         /* security */
-        if (ap != active_ap)
-                str_tmp = NULL;
-        else if (active_ap != NULL)
-                str_tmp = get_ap_security_string (active_ap);
+        if (ap == active_ap && active_ap != NULL)
+                security_text = get_ap_security_string (active_ap);
         panel_set_device_widget_details (device_wifi->builder,
                                          "security",
-                                         str_tmp);
-        g_free (str_tmp);
+                                         security_text);
+        g_free (security_text);
 
         /* signal strength */
         if (ap != NULL)
