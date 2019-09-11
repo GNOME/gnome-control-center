@@ -265,7 +265,6 @@ ce_page_complete_init (CEPage      *page,
                        GVariant    *secrets,
                        GError      *error)
 {
-	GError *update_error = NULL;
 	GVariant *setting_dict;
 	gboolean ignore_error = FALSE;
 
@@ -302,7 +301,7 @@ ce_page_complete_init (CEPage      *page,
 	if (nm_connection_update_secrets (page->connection,
 	                                  setting_name,
 	                                  secrets,
-	                                  &update_error)) {
+	                                  NULL)) {
 		/* Success */
 		emit_initialized (page, NULL);
 		return;
