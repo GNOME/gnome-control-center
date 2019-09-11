@@ -823,6 +823,7 @@ get_hostname (void)
         if (res != NULL) {
                 g_variant_get (res, "(v)", &inner);
                 str = g_variant_dup_string (inner, NULL);
+                g_variant_unref (inner);
                 g_variant_unref (res);
         }
 
