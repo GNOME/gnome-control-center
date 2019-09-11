@@ -222,7 +222,7 @@ ce_page_new (GType             type,
              const gchar      *title)
 {
         CEPage *page;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         page = CE_PAGE (g_object_new (type,
                                       "connection", connection,
@@ -233,7 +233,6 @@ ce_page_new (GType             type,
         if (ui_resource) {
                 if (!gtk_builder_add_from_resource (page->builder, ui_resource, &error)) {
                         g_warning ("Couldn't load builder file: %s", error->message);
-                        g_error_free (error);
                         g_object_unref (page);
                         return NULL;
                 }
@@ -265,7 +264,7 @@ ce_page_complete_init (CEPage      *page,
                        GVariant    *secrets,
                        GError      *error)
 {
-	GError *update_error = NULL;
+	g_autoptr(GError) update_error = NULL;
 	GVariant *setting_dict;
 	gboolean ignore_error = FALSE;
 
@@ -304,7 +303,6 @@ ce_page_complete_init (CEPage      *page,
 	                                  secrets,
 	                                  &update_error)) {
 		g_warning ("Couldn't update secrets: %s", update_error->message);
-		g_error_free (update_error);
 		/* Success */
 		emit_initialized (page, NULL);
 		return;

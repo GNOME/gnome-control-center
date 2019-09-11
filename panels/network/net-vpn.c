@@ -411,7 +411,7 @@ net_vpn_class_init (NetVpnClass *klass)
 static void
 net_vpn_init (NetVpn *vpn)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         GtkWidget *widget;
 
         vpn = net_vpn_get_instance_private (vpn);
@@ -422,7 +422,6 @@ net_vpn_init (NetVpn *vpn)
                                        &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
-                g_error_free (error);
                 return;
         }
 

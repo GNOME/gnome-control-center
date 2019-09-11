@@ -500,9 +500,8 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
 {
   CcWifiPanel *self;
   GDBusProxy *proxy;
-  GError *error;
+  g_autoptr(GError) error = NULL;
 
-  error = NULL;
   proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
 
   if (error)
@@ -510,7 +509,6 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_printerr ("Error creating rfkill proxy: %s\n", error->message);
 
-      g_error_free (error);
       return;
     }
 

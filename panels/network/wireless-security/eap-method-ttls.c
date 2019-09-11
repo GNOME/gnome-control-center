@@ -57,11 +57,10 @@ validate (EAPMethod *parent, GError **error)
 	GtkTreeIter iter;
 	EAPMethod *eap = NULL;
 	gboolean valid = FALSE;
-	GError *local = NULL;
+	g_autoptr(GError) local_error = NULL;
 
-	if (!eap_method_validate_filepicker (parent->builder, "eap_ttls_ca_cert_button", TYPE_CA_CERT, NULL, NULL, &local)) {
-		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TTLS CA certificate: %s"), local->message);
-		g_clear_error (&local);
+	if (!eap_method_validate_filepicker (parent->builder, "eap_ttls_ca_cert_button", TYPE_CA_CERT, NULL, NULL, &local_error)) {
+		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TTLS CA certificate: %s"), local_error->message);
 		return FALSE;
 	}
 	if (eap_method_ca_cert_required (parent->builder, "eap_ttls_ca_cert_not_required_checkbox", "eap_ttls_ca_cert_button")) {
@@ -144,7 +143,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	EAPMethod *eap = NULL;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 	gboolean ca_cert_error = FALSE;
 
 	s_8021x = nm_connection_get_setting_802_1x (connection);
@@ -169,7 +168,6 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
 	if (!nm_setting_802_1x_set_ca_cert (s_8021x, filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
 		g_warning ("Couldn't read CA certificate '%s': %s", filename, error ? error->message : "(unknown)");
-		g_clear_error (&error);
 		ca_cert_error = TRUE;
 	}
 	eap_method_ca_cert_ignore_set (parent, connection, filename, ca_cert_error);

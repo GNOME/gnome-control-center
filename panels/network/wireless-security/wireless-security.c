@@ -166,7 +166,7 @@ wireless_security_init (gsize obj_size,
                         const char *default_field)
 {
 	WirelessSecurity *sec;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 
 	g_return_val_if_fail (obj_size > 0, NULL);
 	g_return_val_if_fail (ui_resource != NULL, NULL);
@@ -190,7 +190,6 @@ wireless_security_init (gsize obj_size,
 	if (!gtk_builder_add_from_resource (sec->builder, ui_resource, &error)) {
 		g_warning ("Couldn't load UI builder resource %s: %s",
 		           ui_resource, error->message);
-		g_error_free (error);
 		wireless_security_unref (sec);
 		return NULL;
 	}

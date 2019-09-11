@@ -609,7 +609,7 @@ net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
 static void
 net_device_ethernet_init (NetDeviceEthernet *device)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         device->builder = gtk_builder_new ();
         gtk_builder_add_from_resource (device->builder,
@@ -617,7 +617,6 @@ net_device_ethernet_init (NetDeviceEthernet *device)
                                        &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
-                g_error_free (error);
                 return;
         }
 

@@ -860,7 +860,7 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         GtkWidget *toplevel;
         GDBusConnection *system_bus;
         const GPtrArray *connections;
@@ -901,17 +901,14 @@ cc_network_panel_init (CcNetworkPanel *panel)
         if (system_bus == NULL) {
                 g_warning ("Error connecting to system D-Bus: %s",
                            error->message);
-                g_clear_error (&error);
         } else {
                 panel->modem_manager = mm_manager_new_sync (system_bus,
                                                             G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE,
                                                             NULL,
                                                             &error);
-                if (panel->modem_manager == NULL) {
+                if (panel->modem_manager == NULL)
                         g_warning ("Error connecting to ModemManager: %s",
                                    error->message);
-                        g_clear_error (&error);
-                }
                 g_object_unref (system_bus);
         }
 

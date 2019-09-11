@@ -76,12 +76,10 @@ activate_existing_cb (GObject *source_object,
                       GAsyncResult *res,
                       gpointer user_data)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
-        if (!nm_client_activate_connection_finish (NM_CLIENT (source_object), res, &error)) {
+        if (!nm_client_activate_connection_finish (NM_CLIENT (source_object), res, &error))
 		g_warning ("Failed to activate connection: (%d) %s", error->code, error->message);
-		g_error_free (error);
-	}
 }
 
 static void
@@ -89,12 +87,10 @@ activate_new_cb (GObject *source_object,
                  GAsyncResult *res,
                  gpointer user_data)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
-        if (!nm_client_add_and_activate_connection_finish (NM_CLIENT (source_object), res, &error)) {
+        if (!nm_client_add_and_activate_connection_finish (NM_CLIENT (source_object), res, &error))
 		g_warning ("Failed to add new connection: (%d) %s", error->code, error->message);
-		g_error_free (error);
-	}
 }
 
 static void

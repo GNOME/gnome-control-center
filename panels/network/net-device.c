@@ -191,7 +191,7 @@ net_device_edit (NetObject *object)
 {
         const gchar *uuid;
         gchar *cmdline;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         NetDevice *device = NET_DEVICE (object);
         NMConnection *connection;
 
@@ -199,10 +199,8 @@ net_device_edit (NetObject *object)
         uuid = nm_connection_get_uuid (connection);
         cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
         g_debug ("Launching '%s'\n", cmdline);
-        if (!g_spawn_command_line_async (cmdline, &error)) {
+        if (!g_spawn_command_line_async (cmdline, &error))
                 g_warning ("Failed to launch nm-connection-editor: %s", error->message);
-                g_error_free (error);
-        }
         g_free (cmdline);
 }
 

@@ -266,13 +266,12 @@ get_secrets_cb (GObject            *source_object,
 {
         NetDeviceWifi *device_wifi = data;
         GVariant *secrets;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         secrets = nm_remote_connection_get_secrets_finish (NM_REMOTE_CONNECTION (source_object), res, &error);
         if (!secrets) {
                 if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
                         g_warning ("Could not get secrets: %s", error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -646,7 +645,7 @@ connection_add_activate_cb (GObject *source_object,
                             gpointer user_data)
 {
         NMActiveConnection *conn;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         conn = nm_client_add_and_activate_connection_finish (NM_CLIENT (source_object), res, &error);
         if (!conn) {
@@ -657,7 +656,6 @@ connection_add_activate_cb (GObject *source_object,
                                    error->code,
                                    error->message);
                 }
-                g_error_free (error);
                 return;
         }
 }
@@ -667,7 +665,7 @@ connection_activate_cb (GObject *source_object,
                         GAsyncResult *res,
                         gpointer user_data)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         if (!nm_client_activate_connection_finish (NM_CLIENT (source_object), res, &error)) {
                 if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
@@ -677,7 +675,6 @@ connection_activate_cb (GObject *source_object,
                                  error->code,
                                  error->message);
                 }
-                g_error_free (error);
                 return;
         }
 }
@@ -791,14 +788,11 @@ get_hostname (void)
         GVariant *res;
         GVariant *inner;
         gchar *str;
-        GError *error;
+        g_autoptr(GError) error = NULL;
 
-        error = NULL;
         bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
         if (bus == NULL) {
                 g_warning ("Failed to get system bus connection: %s", error->message);
-                g_error_free (error);
-
                 return NULL;
         }
         res = g_dbus_connection_call_sync (bus,
@@ -816,10 +810,8 @@ get_hostname (void)
                                            &error);
         g_object_unref (bus);
 
-        if (res == NULL) {
+        if (res == NULL)
                 g_warning ("Getting pretty hostname failed: %s", error->message);
-                g_error_free (error);
-        }
 
         str = NULL;
 
@@ -946,13 +938,12 @@ activate_cb (GObject            *source_object,
              GAsyncResult       *res,
              gpointer            user_data)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         if (nm_client_activate_connection_finish (NM_CLIENT (source_object), res, &error) == NULL) {
                 g_warning ("Failed to add new connection: (%d) %s",
                            error->code,
                            error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -966,7 +957,7 @@ activate_new_cb (GObject            *source_object,
                  gpointer            user_data)
 {
         NMActiveConnection *conn;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         conn = nm_client_add_and_activate_connection_finish (NM_CLIENT (source_object),
                                                              res, &error);
@@ -974,7 +965,6 @@ activate_new_cb (GObject            *source_object,
                 g_warning ("Failed to add new connection: (%d) %s",
                            error->code,
                            error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -1006,7 +996,7 @@ overwrite_ssid_cb (GObject      *source_object,
                    GAsyncResult *res,
                    gpointer      user_data)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         NMClient *client;
         NMRemoteConnection *connection;
         NMDevice *device;
@@ -1020,7 +1010,6 @@ overwrite_ssid_cb (GObject      *source_object,
                 if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
                         g_warning ("Failed to save hotspot's settings to disk: %s",
                                    error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -1436,7 +1425,7 @@ device_wifi_edit (NetObject *object)
 {
         const gchar *uuid;
         gchar *cmdline;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         NetDeviceWifi *device = NET_DEVICE_WIFI (object);
         NMClient *client;
         NMRemoteConnection *connection;
@@ -1450,10 +1439,8 @@ device_wifi_edit (NetObject *object)
         uuid = nm_connection_get_uuid (NM_CONNECTION (connection));
         cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
         g_debug ("Launching '%s'\n", cmdline);
-        if (!g_spawn_command_line_async (cmdline, &error)) {
+        if (!g_spawn_command_line_async (cmdline, &error))
                 g_warning ("Failed to launch nm-connection-editor: %s", error->message);
-                g_error_free (error);
-        }
         g_free (cmdline);
 }
 
@@ -1503,7 +1490,7 @@ really_forgotten (GObject              *source_object,
                   gpointer              user_data)
 {
         CcWifiConnectionList *list = user_data;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         cc_wifi_connection_list_thaw (list);
         g_object_unref (list);
@@ -1512,7 +1499,6 @@ really_forgotten (GObject              *source_object,
                 g_warning ("failed to delete connection %s: %s",
                            nm_object_get_path (NM_OBJECT (source_object)),
                            error->message);
-                g_error_free (error);
                 return;
         }
 }
@@ -1853,7 +1839,7 @@ ap_activated (GtkListBox *list, GtkListBoxRow *row, NetDeviceWifi *device_wifi)
 static void
 net_device_wifi_init (NetDeviceWifi *device_wifi)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         GtkWidget *widget;
 
         device_wifi->builder = gtk_builder_new ();
@@ -1862,7 +1848,6 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                        &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
-                g_error_free (error);
                 return;
         }
 

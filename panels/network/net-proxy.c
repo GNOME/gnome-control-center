@@ -291,7 +291,7 @@ net_proxy_init (NetProxy *proxy)
         GSettings *settings_tmp;
         ProxyMode value;
         GtkWidget *widget;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         guint i;
 
         proxy = net_proxy_get_instance_private (proxy);
@@ -302,7 +302,6 @@ net_proxy_init (NetProxy *proxy)
                                        &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
-                g_error_free (error);
                 return;
         }
 
