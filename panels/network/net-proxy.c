@@ -76,7 +76,7 @@ static void
 check_wpad_warning (NetProxy *proxy)
 {
         GtkWidget *widget;
-        gchar *autoconfig_url = NULL;
+        g_autofree gchar *autoconfig_url = NULL;
         GString *string = NULL;
         gboolean ret = FALSE;
         guint mode;
@@ -115,7 +115,6 @@ out:
         gtk_label_set_markup (GTK_LABEL (widget), string->str);
         gtk_widget_set_visible (widget, (string->len > 0));
 
-        g_free (autoconfig_url);
         g_string_free (string, TRUE);
 }
 
@@ -243,7 +242,8 @@ get_ignore_hosts (GValue   *value,
 {
         GVariantIter iter;
         const gchar *s;
-        gchar **av, **p;
+        g_autofree gchar **av = NULL;
+        gchar **p;
         gsize n;
 
         n = g_variant_iter_init (&iter, variant);
@@ -256,7 +256,6 @@ get_ignore_hosts (GValue   *value,
                 }
 
         g_value_take_string (value, g_strjoinv (", ", av));
-        g_free (av);
 
         return TRUE;
 }

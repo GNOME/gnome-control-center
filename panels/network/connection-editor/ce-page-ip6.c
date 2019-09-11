@@ -277,13 +277,12 @@ add_address_section (CEPageIP6 *page)
 
         for (i = 0; i < nm_setting_ip_config_get_num_addresses (page->setting); i++) {
                 NMIPAddress *addr;
-                char *netmask;
+                g_autofree gchar *netmask = NULL;
 
                 addr = nm_setting_ip_config_get_address (page->setting, i);
                 netmask = g_strdup_printf ("%u", nm_ip_address_get_prefix (addr));
                 add_address_row (page, nm_ip_address_get_address (addr), netmask,
                                  i == 0 ? nm_setting_ip_config_get_gateway (page->setting) : NULL);
-                g_free (netmask);
         }
         if (nm_setting_ip_config_get_num_addresses (page->setting) == 0)
                 ensure_empty_address_row (page);
@@ -448,7 +447,8 @@ add_routes_section (CEPageIP6 *page)
 
         for (i = 0; i < nm_setting_ip_config_get_num_routes (page->setting); i++) {
                 NMIPRoute *route;
-                char *prefix, *metric;
+                g_autofree gchar *prefix = NULL;
+                g_autofree gchar *metric = NULL;
 
                 route = nm_setting_ip_config_get_route (page->setting, i);
                 prefix = g_strdup_printf ("%u", nm_ip_route_get_prefix (route));
@@ -457,8 +457,6 @@ add_routes_section (CEPageIP6 *page)
                                prefix,
                                nm_ip_route_get_next_hop (route),
                                metric);
-                g_free (prefix);
-                g_free (metric);
         }
         if (nm_setting_ip_config_get_num_routes (page->setting) == 0)
                 add_empty_route_row (page);

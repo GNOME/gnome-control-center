@@ -241,7 +241,7 @@ net_connection_editor_error_dialog (NetConnectionEditor *editor,
 static void
 net_connection_editor_do_fallback (NetConnectionEditor *editor, const gchar *type)
 {
-        gchar *cmdline;
+        g_autofree gchar *cmdline = NULL;
         g_autoptr(GError) error = NULL;
 
         if (editor->is_new_connection) {
@@ -252,7 +252,6 @@ net_connection_editor_do_fallback (NetConnectionEditor *editor, const gchar *typ
         }
 
         g_spawn_command_line_async (cmdline, &error);
-        g_free (cmdline);
 
         if (error)
                 net_connection_editor_error_dialog (editor,
@@ -265,7 +264,7 @@ net_connection_editor_do_fallback (NetConnectionEditor *editor, const gchar *typ
 static void
 net_connection_editor_update_title (NetConnectionEditor *editor)
 {
-        gchar *id;
+        g_autofree gchar *id = NULL;
 
         if (editor->title_set)
                 return;
@@ -289,7 +288,6 @@ net_connection_editor_update_title (NetConnectionEditor *editor)
                 }
         }
         gtk_window_set_title (GTK_WINDOW (editor), id);
-        g_free (id);
 }
 
 static gboolean
@@ -561,23 +559,21 @@ complete_vpn_connection (NetConnectionEditor *editor, NMConnection *connection)
         }
 
         if (!nm_setting_connection_get_uuid (s_con)) {
-                gchar *uuid = nm_utils_uuid_generate ();
+                g_autofree gchar *uuid = nm_utils_uuid_generate ();
                 g_object_set (s_con,
                               NM_SETTING_CONNECTION_UUID, uuid,
                               NULL);
-                g_free (uuid);
         }
 
         if (!nm_setting_connection_get_id (s_con)) {
                 const GPtrArray *connections;
-                gchar *id;
+                g_autofree gchar *id = NULL;
 
                 connections = nm_client_get_connections (editor->client);
                 id = ce_page_get_next_available_name (connections, NAME_FORMAT_TYPE, _("VPN"));
                 g_object_set (s_con,
                               NM_SETTING_CONNECTION_ID, id,
                               NULL);
-                g_free (id);
         }
 
         s_type = nm_connection_get_setting (connection, NM_TYPE_SETTING_VPN);
@@ -670,7 +666,10 @@ select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
         /* Add the VPN types */
         for (iter = vpn_plugins; iter; iter = iter->next) {
                 NMVpnEditorPlugin *plugin = nm_vpn_plugin_info_get_editor_plugin (iter->data);
-                char *name, *desc, *desc_markup, *service_name;
+                g_autofree gchar *name = NULL;
+                g_autofree gchar *desc = NULL;
+                g_autofree gchar *desc_markup = NULL;
+                g_autofree gchar *service_name = NULL;
                 GtkStyleContext *context;
 
                 g_object_get (plugin,
@@ -700,13 +699,9 @@ select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
                 gtk_style_context_add_class (context, "dim-label");
                 gtk_box_pack_start (GTK_BOX (row_box), desc_label, FALSE, TRUE, 0);
 
-                g_free (name);
-                g_free (desc);
-                g_free (desc_markup);
-
                 gtk_container_add (GTK_CONTAINER (row), row_box);
                 gtk_widget_show_all (row);
-                g_object_set_data_full (G_OBJECT (row), "service_name", service_name, g_free);
+                g_object_set_data_full (G_OBJECT (row), "service_name", g_steal_pointer (&service_name), g_free);
                 gtk_container_add (GTK_CONTAINER (list), row);
         }
 

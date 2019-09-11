@@ -227,7 +227,7 @@ eap_method_validate_filepicker (GtkBuilder *builder,
                                 GError **error)
 {
 	GtkWidget *widget;
-	char *filename;
+	g_autofree gchar *filename = NULL;
 	NMSetting8021x *setting;
 	gboolean success = TRUE;
 
@@ -270,8 +270,6 @@ eap_method_validate_filepicker (GtkBuilder *builder,
 	g_object_unref (setting);
 
 out:
-	g_free (filename);
-
 	if (!success && error && !*error)
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("unspecified error validating eap-method file"));
 
@@ -285,7 +283,8 @@ out:
 static gboolean
 file_has_extension (const char *filename, const char *extensions[])
 {
-	char *p, *ext;
+	char *p;
+	g_autofree gchar *ext = NULL;
 	int i = 0;
 	gboolean found = FALSE;
 
@@ -302,7 +301,6 @@ file_has_extension (const char *filename, const char *extensions[])
 			}
 		}
 	}
-	g_free (ext);
 
 	return found;
 }
@@ -486,7 +484,6 @@ eap_method_is_encrypted_private_key (const char *path)
 gboolean
 eap_method_ca_cert_required (GtkBuilder *builder, const char *id_ca_cert_not_required_checkbutton, const char *id_ca_cert_chooser)
 {
-	char *filename;
 	GtkWidget *widget;
 
 	g_assert (builder && id_ca_cert_not_required_checkbutton && id_ca_cert_chooser);
@@ -495,13 +492,14 @@ eap_method_ca_cert_required (GtkBuilder *builder, const char *id_ca_cert_not_req
 	g_assert (widget && GTK_IS_TOGGLE_BUTTON (widget));
 
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
+		g_autofree gchar *filename = NULL;
+
 		widget = GTK_WIDGET (gtk_builder_get_object (builder, id_ca_cert_chooser));
 		g_assert (widget && GTK_IS_FILE_CHOOSER (widget));
 
 		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
 		if (!filename)
 			return TRUE;
-		g_free (filename);
 	}
 	return FALSE;
 }
@@ -510,7 +508,8 @@ eap_method_ca_cert_required (GtkBuilder *builder, const char *id_ca_cert_not_req
 void
 eap_method_ca_cert_not_required_toggled (GtkBuilder *builder, const char *id_ca_cert_not_required_checkbutton, const char *id_ca_cert_chooser)
 {
-	char *filename, *filename_old;
+	g_autofree gchar *filename = NULL;
+	g_autofree gchar *filename_old = NULL;
 	gboolean is_not_required;
 	GtkWidget *widget;
 
@@ -527,20 +526,17 @@ eap_method_ca_cert_not_required_toggled (GtkBuilder *builder, const char *id_ca_
 	filename_old = g_object_steal_data (G_OBJECT (widget), "filename-old");
 	if (is_not_required) {
 		g_free (filename_old);
-		filename_old = filename;
-		filename = NULL;
+		filename_old = g_steal_pointer (&filename);
 	} else {
 		g_free (filename);
-		filename = filename_old;
-		filename_old = NULL;
+		filename = g_steal_pointer (&filename_old);
 	}
 	gtk_widget_set_sensitive (widget, !is_not_required);
 	if (filename)
 		gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (widget), filename);
 	else
 		gtk_file_chooser_unselect_all (GTK_FILE_CHOOSER (widget));
-	g_free (filename);
-	g_object_set_data_full (G_OBJECT (widget), "filename-old", filename_old, g_free);
+	g_object_set_data_full (G_OBJECT (widget), "filename-old", g_steal_pointer (&filename_old), g_free);
 }
 
 /* Used as both GSettings keys and GObject data tags */
@@ -604,7 +600,7 @@ static GSettings *
 _get_ca_ignore_settings (NMConnection *connection)
 {
 	GSettings *settings;
-	char *path = NULL;
+	g_autofree gchar *path = NULL;
 	const char *uuid;
 
 	g_return_val_if_fail (connection, NULL);
@@ -614,7 +610,6 @@ _get_ca_ignore_settings (NMConnection *connection)
 
 	path = g_strdup_printf ("/org/gnome/nm-applet/eap/%s/", uuid);
 	settings = g_settings_new_with_path ("org.gnome.nm-applet.eap", path);
-	g_free (path);
 
 	return settings;
 }

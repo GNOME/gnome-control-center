@@ -346,9 +346,9 @@ static void
 nm_device_wifi_refresh_hotspot (NetDeviceWifi *device_wifi)
 {
         GBytes *ssid;
-        gchar *hotspot_secret = NULL;
-        gchar *hotspot_security = NULL;
-        gchar *hotspot_ssid = NULL;
+        g_autofree gchar *hotspot_secret = NULL;
+        g_autofree gchar *hotspot_security = NULL;
+        g_autofree gchar *hotspot_ssid = NULL;
         NMDevice *nm_device;
 
         /* refresh hotspot ui */
@@ -376,16 +376,12 @@ nm_device_wifi_refresh_hotspot (NetDeviceWifi *device_wifi)
         panel_set_device_widget_details (device_wifi->builder,
                                          "hotspot_connected",
                                          NULL);
-
-        g_free (hotspot_secret);
-        g_free (hotspot_security);
-        g_free (hotspot_ssid);
 }
 
 static void
 update_last_used (NetDeviceWifi *device_wifi, NMConnection *connection)
 {
-        gchar *last_used = NULL;
+        g_autofree gchar *last_used = NULL;
         GDateTime *now = NULL;
         GDateTime *then = NULL;
         gint days;
@@ -421,7 +417,6 @@ out:
                 g_date_time_unref (now);
         if (then != NULL)
                 g_date_time_unref (then);
-        g_free (last_used);
 }
 
 static void
@@ -488,8 +483,8 @@ static void
 nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 {
         const gchar *str;
-        gchar *speed_text = NULL;
-        gchar *security_text = NULL;
+        g_autofree gchar *speed_text = NULL;
+        g_autofree gchar *security_text = NULL;
         gint strength = 0;
         guint speed = 0;
         NMAccessPoint *active_ap;
@@ -541,7 +536,6 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         panel_set_device_widget_details (device_wifi->builder,
                                          "speed",
                                          speed_text);
-        g_free (speed_text);
 
         /* device MAC */
         str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
@@ -554,7 +548,6 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         panel_set_device_widget_details (device_wifi->builder,
                                          "security",
                                          security_text);
-        g_free (security_text);
 
         /* signal strength */
         if (ap != NULL)
@@ -828,11 +821,11 @@ static GBytes *
 generate_ssid_for_hotspot (NetDeviceWifi *device_wifi)
 {
         GBytes *ssid_bytes;
-        gchar *hostname, *ssid;
+        g_autofree gchar *hostname = NULL;
+        gchar *ssid;
 
         hostname = get_hostname ();
         ssid = pretty_hostname_to_ssid (hostname);
-        g_free (hostname);
 
         ssid_bytes = g_bytes_new_with_free_func (ssid,
                                                  strlen (ssid),
@@ -1170,15 +1163,13 @@ start_hotspot (GtkButton *button, NetDeviceWifi *device_wifi)
 {
         NMDevice *device;
         const GPtrArray *connections;
-        gchar *active_ssid;
+        g_autofree gchar *active_ssid = NULL;
         NMClient *client;
         GtkWidget *dialog;
         GtkWidget *window;
         GtkWidget *message_area;
         GtkWidget *label;
         GString *str;
-
-        active_ssid = NULL;
 
         client = net_object_get_client (NET_OBJECT (device_wifi));
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
@@ -1256,7 +1247,6 @@ start_hotspot (GtkButton *button, NetDeviceWifi *device_wifi)
                           G_CALLBACK (start_hotspot_response_cb), device_wifi);
 
         gtk_window_present (GTK_WINDOW (dialog));
-        g_free (active_ssid);
         g_string_free (str, TRUE);
 }
 
@@ -1424,7 +1414,7 @@ static void
 device_wifi_edit (NetObject *object)
 {
         const gchar *uuid;
-        gchar *cmdline;
+        g_autofree gchar *cmdline = NULL;
         g_autoptr(GError) error = NULL;
         NetDeviceWifi *device = NET_DEVICE_WIFI (object);
         NMClient *client;
@@ -1441,7 +1431,6 @@ device_wifi_edit (NetObject *object)
         g_debug ("Launching '%s'\n", cmdline);
         if (!g_spawn_command_line_async (cmdline, &error))
                 g_warning ("Failed to launch nm-connection-editor: %s", error->message);
-        g_free (cmdline);
 }
 
 static void

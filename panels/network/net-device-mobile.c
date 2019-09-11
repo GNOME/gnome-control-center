@@ -105,7 +105,7 @@ static void
 mobile_connection_changed_cb (GtkComboBox *combo_box, NetDeviceMobile *device_mobile)
 {
         gboolean ret;
-        gchar *object_path = NULL;
+        g_autofree gchar *object_path = NULL;
         GtkTreeIter iter;
         GtkTreeModel *model;
         NMConnection *connection;
@@ -115,15 +115,15 @@ mobile_connection_changed_cb (GtkComboBox *combo_box, NetDeviceMobile *device_mo
         GtkWidget *toplevel;
 
         if (device_mobile->updating_device)
-                goto out;
+                return;
 
         ret = gtk_combo_box_get_active_iter (combo_box, &iter);
         if (!ret)
-                goto out;
+                return;
 
         device = net_device_get_nm_device (NET_DEVICE (device_mobile));
         if (device == NULL)
-                goto out;
+                return;
         client = net_object_get_client (NET_OBJECT (device_mobile));
 
         /* get entry */
@@ -137,7 +137,7 @@ mobile_connection_changed_cb (GtkComboBox *combo_box, NetDeviceMobile *device_mo
                 cc_network_panel_connect_to_3g_network (toplevel,
                                                         client,
                                                         device);
-                goto out;
+                return;
         }
 
         /* activate the connection */
@@ -150,10 +150,8 @@ mobile_connection_changed_cb (GtkComboBox *combo_box, NetDeviceMobile *device_mo
                                                      device, NULL, NULL,
                                                      connection_activate_cb,
                                                      device_mobile);
-                goto out;
+                return;
         }
-out:
-        g_free (object_path);
 }
 
 static void
@@ -308,7 +306,7 @@ static void
 device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
 {
         if (device_mobile->mm_object != NULL) {
-                gchar *operator_name = NULL;
+                g_autofree gchar *operator_name = NULL;
                 MMModem3gpp *modem_3gpp;
                 MMModemCdma *modem_cdma;
 
@@ -344,7 +342,6 @@ device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
                 }
 
                 panel_set_device_widget_details (device_mobile->builder, "provider", operator_name);
-                g_free (operator_name);
         } else {
                 const gchar *gsm;
                 const gchar *cdma;
@@ -356,11 +353,8 @@ device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
                                           "ControlCenter::OperatorNameCdma");
 
                 if (gsm != NULL && cdma != NULL) {
-                        gchar *both;
-
-                        both = g_strdup_printf ("%s, %s", gsm, cdma);
+                        g_autofree gchar *both = g_strdup_printf ("%s, %s", gsm, cdma);
                         panel_set_device_widget_details (device_mobile->builder, "provider", both);
-                        g_free (both);
                 } else if (gsm != NULL) {
                         panel_set_device_widget_details (device_mobile->builder, "provider", gsm);
                 } else if (cdma != NULL) {
@@ -538,11 +532,11 @@ device_mobile_get_registration_info_cb (GObject      *source_object,
                                         GAsyncResult *res,
                                         gpointer      user_data)
 {
-        gchar *operator_code = NULL;
+        g_autofree gchar *operator_code = NULL;
         g_autoptr(GError) error = NULL;
         guint registration_status;
         GVariant *result = NULL;
-        gchar *operator_name = NULL;
+        g_autofree gchar *operator_name = NULL;
         NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
 
         result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
@@ -569,8 +563,6 @@ device_mobile_get_registration_info_cb (GObject      *source_object,
                                           "ControlCenter::OperatorNameGsm",
                                           operator_name);
 
-        g_free (operator_name);
-        g_free (operator_code);
         g_variant_unref (result);
 }
 
@@ -582,8 +574,8 @@ device_mobile_gsm_signal_cb (GDBusProxy *proxy,
                              gpointer    user_data)
 {
         guint registration_status = 0;
-        gchar *operator_code = NULL;
-        gchar *operator_name = NULL;
+        g_autofree gchar *operator_code = NULL;
+        g_autofree gchar *operator_name = NULL;
         NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
 
         if (!g_str_equal (signal_name, "RegistrationInfo"))
@@ -605,9 +597,6 @@ device_mobile_gsm_signal_cb (GDBusProxy *proxy,
         device_mobile_save_operator_name (device_mobile,
                                           "ControlCenter::OperatorNameGsm",
                                           operator_name);
-
-        g_free (operator_code);
-        g_free (operator_name);
 }
 
 static void
@@ -652,7 +641,7 @@ device_mobile_get_serving_system_cb (GObject      *source_object,
         g_autoptr(GError) error = NULL;
 
         guint32 band_class;
-        gchar *band;
+        g_autofree gchar *band = NULL;
         guint32 sid;
         gchar *operator_name;
 
@@ -676,7 +665,6 @@ device_mobile_get_serving_system_cb (GObject      *source_object,
                                           "ControlCenter::OperatorNameCdma",
                                           operator_name);
 
-        g_free (band);
         g_variant_unref (result);
 }
 

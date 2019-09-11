@@ -102,21 +102,18 @@ compare_mac_device_with_mac_connection (NMDevice *device,
                                         NMConnection *connection)
 {
         const gchar *mac_dev = NULL;
-        gchar *mac_conn = NULL;
+        g_autofree gchar *mac_conn = NULL;
 
         mac_dev = get_mac_address_of_device (device);
-        if (mac_dev != NULL) {
-                mac_conn = get_mac_address_of_connection (connection);
-                if (mac_conn) {
-                        /* compare both MACs */
-                        if (g_strcmp0 (mac_dev, mac_conn) == 0) {
-                                g_free (mac_conn);
-                                return TRUE;
-                        }
-                        g_free (mac_conn);
-                }
-        }
-        return FALSE;
+        if (mac_dev == NULL)
+                return FALSE;
+
+        mac_conn = get_mac_address_of_connection (connection);
+        if (mac_conn == NULL)
+                return FALSE;
+
+        /* compare both MACs */
+        return g_strcmp0 (mac_dev, mac_conn) == 0;
 }
 
 static NMConnection *
@@ -190,7 +187,7 @@ static void
 net_device_edit (NetObject *object)
 {
         const gchar *uuid;
-        gchar *cmdline;
+        g_autofree gchar *cmdline = NULL;
         g_autoptr(GError) error = NULL;
         NetDevice *device = NET_DEVICE (object);
         NMConnection *connection;
@@ -201,7 +198,6 @@ net_device_edit (NetObject *object)
         g_debug ("Launching '%s'\n", cmdline);
         if (!g_spawn_command_line_async (cmdline, &error))
                 g_warning ("Failed to launch nm-connection-editor: %s", error->message);
-        g_free (cmdline);
 }
 
 /**

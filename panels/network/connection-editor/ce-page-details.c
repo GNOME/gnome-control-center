@@ -79,7 +79,7 @@ get_ap_security_string (NMAccessPoint *ap)
 static void
 update_last_used (CEPageDetails *page, NMConnection *connection)
 {
-        gchar *last_used = NULL;
+        g_autofree gchar *last_used = NULL;
         GDateTime *now = NULL;
         GDateTime *then = NULL;
         gint days;
@@ -114,7 +114,6 @@ out:
                 g_date_time_unref (now);
         if (then != NULL)
                 g_date_time_unref (then);
-        g_free (last_used);
 }
 
 static void
