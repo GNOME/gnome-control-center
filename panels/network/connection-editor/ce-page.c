@@ -221,7 +221,7 @@ ce_page_new (GType             type,
              const gchar      *ui_resource,
              const gchar      *title)
 {
-        CEPage *page;
+        g_autoptr(CEPage) page = NULL;
         g_autoptr(GError) error = NULL;
 
         page = CE_PAGE (g_object_new (type,
@@ -233,20 +233,18 @@ ce_page_new (GType             type,
         if (ui_resource) {
                 if (!gtk_builder_add_from_resource (page->builder, ui_resource, &error)) {
                         g_warning ("Couldn't load builder file: %s", error->message);
-                        g_object_unref (page);
                         return NULL;
                 }
                 page->page = GTK_WIDGET (gtk_builder_get_object (page->builder, "page"));
                 if (!page->page) {
                         g_warning ("Couldn't load page widget from %s", ui_resource);
-                        g_object_unref (page);
                         return NULL;
                 }
 
                 g_object_ref_sink (page->page);
         }
 
-        return page;
+        return g_steal_pointer (&page);
 }
 
 static void
@@ -264,7 +262,7 @@ ce_page_complete_init (CEPage      *page,
                        GVariant    *secrets,
                        GError      *error)
 {
-	GVariant *setting_dict;
+	g_autoptr(GVariant) setting_dict = NULL;
 	gboolean ignore_error = FALSE;
 
 	g_return_if_fail (page != NULL);
@@ -294,7 +292,6 @@ ce_page_complete_init (CEPage      *page,
 		emit_initialized (page, NULL);
 		return;
 	}
-	g_variant_unref (setting_dict);
 
 	/* Update the connection with the new secrets */
 	if (nm_connection_update_secrets (page->connection,

@@ -150,5 +150,7 @@ void ws_802_1x_update_secrets (WirelessSecurity *sec,
                                const char *combo_name,
                                NMConnection *connection);
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (WirelessSecurity, wireless_security_unref)
+
 #endif /* WIRELESS_SECURITY_H */
 

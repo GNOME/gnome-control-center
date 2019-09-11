@@ -122,13 +122,11 @@ eap_method_phase2_update_secrets_helper (EAPMethod *method,
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 	if (gtk_tree_model_get_iter_first (model, &iter)) {
 		do {
-			EAPMethod *eap = NULL;
+			g_autoptr(EAPMethod) eap = NULL;
 
 			gtk_tree_model_get (model, &iter, column, &eap, -1);
-			if (eap) {
+			if (eap)
 				eap_method_update_secrets (eap, connection);
-				eap_method_unref (eap);
-			}
 		} while (gtk_tree_model_iter_next (model, &iter));
 	}
 }
@@ -145,7 +143,7 @@ eap_method_init (gsize obj_size,
                  const char *default_field,
                  gboolean phase2)
 {
-	EAPMethod *method;
+	g_autoptr(EAPMethod) method = NULL;
 	g_autoptr(GError) error = NULL;
 
 	g_return_val_if_fail (obj_size > 0, NULL);
@@ -168,7 +166,6 @@ eap_method_init (gsize obj_size,
 	if (!gtk_builder_add_from_resource (method->builder, ui_resource, &error)) {
 		g_warning ("Couldn't load UI builder resource %s: %s",
 		           ui_resource, error->message);
-		eap_method_unref (method);
 		return NULL;
 	}
 
@@ -176,14 +173,13 @@ eap_method_init (gsize obj_size,
 	if (!method->ui_widget) {
 		g_warning ("Couldn't load UI widget '%s' from UI file %s",
 		           ui_widget_name, ui_resource);
-		eap_method_unref (method);
 		return NULL;
 	}
 	g_object_ref_sink (method->ui_widget);
 
 	method->destroy = destroy;
 
-	return method;
+	return g_steal_pointer (&method);
 }
 
 
@@ -227,7 +223,7 @@ eap_method_validate_filepicker (GtkBuilder *builder,
 {
 	GtkWidget *widget;
 	g_autofree gchar *filename = NULL;
-	NMSetting8021x *setting;
+	g_autoptr(NMSetting8021x) setting = NULL;
 	gboolean success = TRUE;
 
 	if (item_type == TYPE_PRIVATE_KEY) {
@@ -265,8 +261,6 @@ eap_method_validate_filepicker (GtkBuilder *builder,
 			success = TRUE;
 	} else
 		g_warning ("%s: invalid item type %d.", __func__, item_type);
-
-	g_object_unref (setting);
 
 out:
 	if (!success && error && !*error)
@@ -624,7 +618,7 @@ void
 eap_method_ca_cert_ignore_save (NMConnection *connection)
 {
 	NMSetting8021x *s_8021x;
-	GSettings *settings;
+	g_autoptr(GSettings) settings = NULL;
 	gboolean ignore = FALSE, phase2_ignore = FALSE;
 
 	g_return_if_fail (connection);
@@ -641,7 +635,6 @@ eap_method_ca_cert_ignore_save (NMConnection *connection)
 
 	g_settings_set_boolean (settings, IGNORE_CA_CERT_TAG, ignore);
 	g_settings_set_boolean (settings, IGNORE_PHASE2_CA_CERT_TAG, phase2_ignore);
-	g_object_unref (settings);
 }
 
 /**
@@ -654,7 +647,7 @@ eap_method_ca_cert_ignore_save (NMConnection *connection)
 void
 eap_method_ca_cert_ignore_load (NMConnection *connection)
 {
-	GSettings *settings;
+	g_autoptr(GSettings) settings = NULL;
 	NMSetting8021x *s_8021x;
 	gboolean ignore, phase2_ignore;
 
@@ -677,6 +670,5 @@ eap_method_ca_cert_ignore_load (NMConnection *connection)
 	g_object_set_data (G_OBJECT (s_8021x),
 	                   IGNORE_PHASE2_CA_CERT_TAG,
 	                   GUINT_TO_POINTER (phase2_ignore));
-	g_object_unref (settings);
 }
 

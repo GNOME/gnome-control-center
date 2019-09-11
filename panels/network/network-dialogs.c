@@ -100,7 +100,8 @@ wireless_dialog_response_cb (GtkDialog *foo,
 {
 	NMAWifiDialog *dialog = NMA_WIFI_DIALOG (foo);
 	WirelessDialogClosure *closure = user_data;
-	NMConnection *connection, *fuzzy_match = NULL;
+	g_autoptr(NMConnection) connection = NULL;
+	NMConnection *fuzzy_match = NULL;
 	NMDevice *device;
 	NMAccessPoint *ap;
 	const GPtrArray *all;
@@ -163,9 +164,6 @@ wireless_dialog_response_cb (GtkDialog *foo,
 		                                             activate_new_cb,
 		                                             NULL);
 	}
-
-	/* Balance nma_wifi_dialog_get_connection() */
-	g_object_unref (connection);
 
 done:
 	gtk_widget_hide (GTK_WIDGET (dialog));

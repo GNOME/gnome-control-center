@@ -287,7 +287,10 @@ static void
 net_proxy_init (NetProxy *proxy)
 {
         GtkAdjustment *adjustment;
-        GSettings *settings_tmp;
+        g_autoptr(GSettings) http_settings = NULL;
+        g_autoptr(GSettings) https_settings = NULL;
+        g_autoptr(GSettings) ftp_settings = NULL;
+        g_autoptr(GSettings) socks_settings = NULL;
         ProxyMode value;
         GtkWidget *widget;
         g_autoptr(GError) error = NULL;
@@ -321,60 +324,56 @@ net_proxy_init (NetProxy *proxy)
                          G_SETTINGS_BIND_DEFAULT);
 
         /* bind the HTTP proxy values */
-        settings_tmp = g_settings_get_child (proxy->settings, "http");
+        http_settings = g_settings_get_child (proxy->settings, "http");
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
                                                      "entry_proxy_http"));
-        g_settings_bind (settings_tmp, "host",
+        g_settings_bind (http_settings, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
         adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->builder,
                                                              "adjustment_proxy_port_http"));
-        g_settings_bind (settings_tmp, "port",
+        g_settings_bind (http_settings, "port",
                          adjustment, "value",
                          G_SETTINGS_BIND_DEFAULT);
-        g_object_unref (settings_tmp);
 
         /* bind the HTTPS proxy values */
-        settings_tmp = g_settings_get_child (proxy->settings, "https");
+        https_settings = g_settings_get_child (proxy->settings, "https");
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
                                                      "entry_proxy_https"));
-        g_settings_bind (settings_tmp, "host",
+        g_settings_bind (https_settings, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
         adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->builder,
                                                              "adjustment_proxy_port_https"));
-        g_settings_bind (settings_tmp, "port",
+        g_settings_bind (https_settings, "port",
                          adjustment, "value",
                          G_SETTINGS_BIND_DEFAULT);
-        g_object_unref (settings_tmp);
 
         /* bind the FTP proxy values */
-        settings_tmp = g_settings_get_child (proxy->settings, "ftp");
+        ftp_settings = g_settings_get_child (proxy->settings, "ftp");
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
                                                      "entry_proxy_ftp"));
-        g_settings_bind (settings_tmp, "host",
+        g_settings_bind (ftp_settings, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
         adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->builder,
                                                              "adjustment_proxy_port_ftp"));
-        g_settings_bind (settings_tmp, "port",
+        g_settings_bind (ftp_settings, "port",
                          adjustment, "value",
                          G_SETTINGS_BIND_DEFAULT);
-        g_object_unref (settings_tmp);
 
         /* bind the SOCKS proxy values */
-        settings_tmp = g_settings_get_child (proxy->settings, "socks");
+        socks_settings = g_settings_get_child (proxy->settings, "socks");
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
                                                      "entry_proxy_socks"));
-        g_settings_bind (settings_tmp, "host",
+        g_settings_bind (socks_settings, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
         adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->builder,
                                                              "adjustment_proxy_port_socks"));
-        g_settings_bind (settings_tmp, "port",
+        g_settings_bind (socks_settings, "port",
                          adjustment, "value",
                          G_SETTINGS_BIND_DEFAULT);
-        g_object_unref (settings_tmp);
 
         /* bind the proxy ignore hosts */
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,

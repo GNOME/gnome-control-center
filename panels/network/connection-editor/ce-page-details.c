@@ -80,8 +80,8 @@ static void
 update_last_used (CEPageDetails *page, NMConnection *connection)
 {
         g_autofree gchar *last_used = NULL;
-        GDateTime *now = NULL;
-        GDateTime *then = NULL;
+        g_autoptr(GDateTime) now = NULL;
+        g_autoptr(GDateTime) then = NULL;
         gint days;
         GTimeSpan diff;
         guint64 timestamp;
@@ -110,10 +110,6 @@ update_last_used (CEPageDetails *page, NMConnection *connection)
                 last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
 out:
         panel_set_device_widget_details (CE_PAGE (page)->builder, "last_used", last_used);
-        if (now != NULL)
-                g_date_time_unref (now);
-        if (then != NULL)
-                g_date_time_unref (then);
 }
 
 static void

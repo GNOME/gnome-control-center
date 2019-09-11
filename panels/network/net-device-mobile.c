@@ -480,8 +480,8 @@ device_mobile_device_got_modem_manager_cb (GObject *source_object,
                                            gpointer user_data)
 {
         g_autoptr(GError) error = NULL;
-        GVariant *result = NULL;
-        GDBusProxy *proxy;
+        g_autoptr(GVariant) result = NULL;
+        g_autoptr(GDBusProxy) proxy = NULL;
         NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
 
         proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
@@ -496,16 +496,13 @@ device_mobile_device_got_modem_manager_cb (GObject *source_object,
                                                    "EquipmentIdentifier");
 
         /* save */
-        if (result) {
+        if (result)
                 g_object_set_data_full (G_OBJECT (device_mobile),
                                         "ControlCenter::EquipmentIdentifier",
                                         g_variant_dup_string (result, NULL),
                                         g_free);
-                g_variant_unref (result);
-        }
 
         device_mobile_refresh_equipment_id (device_mobile);
-        g_object_unref (proxy);
 }
 
 static void
@@ -535,7 +532,7 @@ device_mobile_get_registration_info_cb (GObject      *source_object,
         g_autofree gchar *operator_code = NULL;
         g_autoptr(GError) error = NULL;
         guint registration_status;
-        GVariant *result = NULL;
+        g_autoptr(GVariant) result = NULL;
         g_autofree gchar *operator_name = NULL;
         NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
 
@@ -562,8 +559,6 @@ device_mobile_get_registration_info_cb (GObject      *source_object,
         device_mobile_save_operator_name (device_mobile,
                                           "ControlCenter::OperatorNameGsm",
                                           operator_name);
-
-        g_variant_unref (result);
 }
 
 static void
@@ -637,7 +632,7 @@ device_mobile_get_serving_system_cb (GObject      *source_object,
                                      gpointer      user_data)
 {
         NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
-        GVariant *result = NULL;
+        g_autoptr(GVariant) result = NULL;
         g_autoptr(GError) error = NULL;
 
         guint32 band_class;
@@ -664,8 +659,6 @@ device_mobile_get_serving_system_cb (GObject      *source_object,
         device_mobile_save_operator_name (device_mobile,
                                           "ControlCenter::OperatorNameCdma",
                                           operator_name);
-
-        g_variant_unref (result);
 }
 
 static void
