@@ -64,13 +64,13 @@ vpn_get_plugins (void)
 	p = nm_vpn_plugin_info_list_load ();
 	plugins = NULL;
 	while (p) {
-		NMVpnPluginInfo *plugin_info = NM_VPN_PLUGIN_INFO (p->data);
+		g_autoptr(NMVpnPluginInfo) plugin_info = NM_VPN_PLUGIN_INFO (p->data);
 		g_autoptr(GError) error = NULL;
 
 		/* load the editor plugin, and preserve only those NMVpnPluginInfo that can
 		 * successfully load the plugin. */
 		if (nm_vpn_plugin_info_load_editor_plugin (plugin_info, &error))
-			plugins = g_slist_prepend (plugins, plugin_info);
+			plugins = g_slist_prepend (plugins, g_steal_pointer (&plugin_info));
 		else {
 			if (   !nm_vpn_plugin_info_get_plugin (plugin_info)
 			    && nm_vpn_plugin_info_lookup_property (plugin_info, NM_VPN_PLUGIN_INFO_KF_GROUP_GNOME, "properties")) {
@@ -88,7 +88,6 @@ vpn_get_plugins (void)
 				           nm_vpn_plugin_info_get_filename (plugin_info),
 				           error->message);
 			}
-			g_object_unref (plugin_info);
 		}
 		p = g_slist_delete_link (p, p);
 	}
@@ -194,7 +193,7 @@ vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data)
 static void
 export_vpn_to_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 {
-	NMConnection *connection = NM_CONNECTION (user_data);
+	g_autoptr(NMConnection) connection = NM_CONNECTION (user_data);
 	char *filename = NULL;
 	g_autoptr(GError) error = NULL;
 	NMVpnEditorPlugin *plugin;
@@ -273,8 +272,6 @@ done:
 	}
 
 out:
-	g_object_unref (connection);
-
 	gtk_widget_hide (dialog);
 	gtk_widget_destroy (dialog);
 }

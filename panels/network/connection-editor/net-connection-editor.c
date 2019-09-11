@@ -73,11 +73,10 @@ cancel_clicked_cb (NetConnectionEditor *editor)
 static void
 update_connection (NetConnectionEditor *editor)
 {
-        GVariant *settings;
+        g_autoptr(GVariant) settings = NULL;
 
         settings = nm_connection_to_dbus (editor->connection, NM_CONNECTION_SERIALIZE_ALL);
         nm_connection_replace_settings (editor->orig_connection, settings, NULL);
-        g_variant_unref (settings);
 }
 
 static void
@@ -843,11 +842,10 @@ net_connection_editor_forget (NetConnectionEditor *editor)
 void
 net_connection_editor_reset (NetConnectionEditor *editor)
 {
-        GVariant *settings;
+        g_autoptr(GVariant) settings = NULL;
 
         settings = nm_connection_to_dbus (editor->orig_connection, NM_CONNECTION_SERIALIZE_ALL);
         nm_connection_replace_settings (editor->connection, settings, NULL);
-        g_variant_unref (settings);
 }
 
 void

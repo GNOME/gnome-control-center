@@ -199,7 +199,7 @@ static NMConnection *
 find_connection_for_device (NetDeviceWifi *device_wifi,
                             NMDevice       *device)
 {
-        NetDevice *tmp;
+        g_autoptr(NetDevice) tmp = NULL;
         NMConnection *connection;
         NMClient *client;
 
@@ -209,7 +209,6 @@ find_connection_for_device (NetDeviceWifi *device_wifi,
                             "nm-device", device,
                             NULL);
         connection = net_device_get_find_connection (tmp);
-        g_object_unref (tmp);
         return connection;
 }
 
@@ -382,8 +381,8 @@ static void
 update_last_used (NetDeviceWifi *device_wifi, NMConnection *connection)
 {
         g_autofree gchar *last_used = NULL;
-        GDateTime *now = NULL;
-        GDateTime *then = NULL;
+        g_autoptr(GDateTime) now = NULL;
+        g_autoptr(GDateTime) then = NULL;
         gint days;
         GTimeSpan diff;
         guint64 timestamp;
@@ -413,10 +412,6 @@ out:
         panel_set_device_widget_details (device_wifi->builder,
                                          "last_used",
                                          last_used);
-        if (now != NULL)
-                g_date_time_unref (now);
-        if (then != NULL)
-                g_date_time_unref (then);
 }
 
 static void
@@ -705,14 +700,14 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
         GCancellable *cancellable;
 
         if (device_wifi->updating_device)
-                goto out;
+                return;
 
         if (ap_object_path == NULL || ap_object_path[0] == 0)
-                goto out;
+                return;
 
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         if (device == NULL)
-                goto out;
+                return;
 
         ssid_target = nm_utils_escape_ssid ((gpointer) g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
         g_debug ("try to connect to WIFI network %s [%s]",
@@ -723,16 +718,14 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
         cancellable = net_object_get_cancellable (NET_OBJECT (device_wifi));
 
         if (!is_8021x (device, ap_object_path)) {
-                GPermission *permission;
+                g_autoptr(GPermission) permission = NULL;
                 gboolean allowed_to_share = FALSE;
-                NMConnection *partial = NULL;
+                g_autoptr(NMConnection) partial = NULL;
 
                 permission = polkit_permission_new_sync ("org.freedesktop.NetworkManager.settings.modify.system",
                                                          NULL, NULL, NULL);
-                if (permission) {
+                if (permission)
                         allowed_to_share = g_permission_get_allowed (permission);
-                        g_object_unref (permission);
-                }
 
                 if (!allowed_to_share) {
                         NMSettingConnection *s_con;
@@ -751,11 +744,9 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
                                                              cancellable,
                                                              connection_add_activate_cb,
                                                              device_wifi);
-                if (!allowed_to_share)
-                        g_object_unref (partial);
         } else {
                 CcNetworkPanel *panel;
-                GVariantBuilder *builder;
+                g_autoptr(GVariantBuilder) builder = NULL;
                 GVariant *parameters;
 
                 g_debug ("no existing connection found for %s, creating", ssid_target);
@@ -767,20 +758,15 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
 
                 panel = net_object_get_panel (NET_OBJECT (device_wifi));
                 g_object_set (G_OBJECT (panel), "parameters", parameters, NULL);
-
-                g_variant_builder_unref (builder);
         }
-out:
-        return;
 }
 
 static gchar *
 get_hostname (void)
 {
-        GDBusConnection *bus;
-        GVariant *res;
-        GVariant *inner;
-        gchar *str;
+        g_autoptr(GDBusConnection) bus = NULL;
+        g_autoptr(GVariant) res = NULL;
+        g_autoptr(GVariant) inner = NULL;
         g_autoptr(GError) error = NULL;
 
         bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
@@ -801,21 +787,14 @@ get_hostname (void)
                                            -1,
                                            NULL,
                                            &error);
-        g_object_unref (bus);
 
-        if (res == NULL)
+        if (res == NULL) {
                 g_warning ("Getting pretty hostname failed: %s", error->message);
-
-        str = NULL;
-
-        if (res != NULL) {
-                g_variant_get (res, "(v)", &inner);
-                str = g_variant_dup_string (inner, NULL);
-                g_variant_unref (inner);
-                g_variant_unref (res);
+                return NULL;
         }
 
-        return str;
+        g_variant_get (res, "(v)", &inner);
+        return g_variant_dup_string (inner, NULL);
 }
 
 static GBytes *
@@ -1026,13 +1005,14 @@ overwrite_ssid_cb (GObject      *source_object,
 static void
 start_shared_connection (NetDeviceWifi *device_wifi)
 {
-        NMConnection *c;
+        NMConnection *hotspot_connection;
+        g_autoptr(NMConnection) c = NULL;
         NMSettingConnection *sc;
         NMSettingWireless *sw;
         NMSettingIP4Config *sip;
         NMSettingWirelessSecurity *sws;
         NMDevice *device;
-        GBytes *ssid;
+        g_autoptr(GBytes) ssid = NULL;
         const gchar *str_mac;
         struct ether_addr *bin_mac;
         NMClient *client;
@@ -1043,22 +1023,21 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         g_assert (nm_device_get_device_type (device) == NM_DEVICE_TYPE_WIFI);
 
-        c = net_device_wifi_get_hotspot_connection (device_wifi);
+        hotspot_connection = net_device_wifi_get_hotspot_connection (device_wifi);
 
         ssid = generate_ssid_for_hotspot (device_wifi);
 
         client = net_object_get_client (NET_OBJECT (device_wifi));
         cancellable = net_object_get_cancellable (NET_OBJECT (device_wifi));
-        if (c != NULL) {
+        if (hotspot_connection != NULL) {
                 NMSettingWireless *sw;
                 const char *c_path;
                 NMRemoteConnection *connection;
 
-                sw = nm_connection_get_setting_wireless (c);
+                sw = nm_connection_get_setting_wireless (hotspot_connection);
                 g_object_set (sw, "ssid", ssid, NULL);
-                g_bytes_unref (ssid);
 
-                c_path = nm_connection_get_path (c);
+                c_path = nm_connection_get_path (hotspot_connection);
                 connection = nm_client_get_connection_by_path (client, c_path);
 
                 g_debug ("overwriting ssid to %s", (char *) g_bytes_get_data (ssid, NULL));
@@ -1099,14 +1078,13 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         str_mac = nm_device_wifi_get_permanent_hw_address (NM_DEVICE_WIFI (device));
         bin_mac = ether_aton (str_mac);
         if (bin_mac) {
-                GByteArray *hw_address;
+                g_autoptr(GByteArray) hw_address = NULL;
 
                 hw_address = g_byte_array_sized_new (ETH_ALEN);
                 g_byte_array_append (hw_address, bin_mac->ether_addr_octet, ETH_ALEN);
                 g_object_set (sw,
                               "mac-address", hw_address,
                               NULL);
-                g_byte_array_unref (hw_address);
         }
         nm_connection_add_setting (c, (NMSetting *)sw);
 
@@ -1115,7 +1093,6 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         nm_connection_add_setting (c, (NMSetting *)sip);
 
         g_object_set (sw, "ssid", ssid, NULL);
-        g_bytes_unref (ssid);
 
         sws = (NMSettingWirelessSecurity*) nm_setting_wireless_security_new ();
 
@@ -1146,8 +1123,6 @@ start_shared_connection (NetDeviceWifi *device_wifi)
                                                      cancellable,
                                                      activate_new_cb,
                                                      device_wifi);
-
-        g_object_unref (c);
 }
 
 static void
@@ -1479,18 +1454,15 @@ really_forgotten (GObject              *source_object,
                   GAsyncResult         *res,
                   gpointer              user_data)
 {
-        CcWifiConnectionList *list = user_data;
+        g_autoptr(CcWifiConnectionList) list = user_data;
         g_autoptr(GError) error = NULL;
 
         cc_wifi_connection_list_thaw (list);
-        g_object_unref (list);
 
-        if (!nm_remote_connection_delete_finish (NM_REMOTE_CONNECTION (source_object), res, &error)) {
+        if (!nm_remote_connection_delete_finish (NM_REMOTE_CONNECTION (source_object), res, &error))
                 g_warning ("failed to delete connection %s: %s",
                            nm_object_get_path (NM_OBJECT (source_object)),
                            error->message);
-                return;
-        }
 }
 
 static void

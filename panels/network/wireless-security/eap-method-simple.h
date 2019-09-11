@@ -59,5 +59,8 @@ EAPMethodSimple *eap_method_simple_new (WirelessSecurity *ws_parent,
                                         EAPMethodSimpleType type,
                                         EAPMethodSimpleFlags flags);
 
+static void eap_method_simple_unref (EAPMethodSimple *method) { eap_method_unref (EAP_METHOD (method)); }
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (EAPMethodSimple, eap_method_simple_unref)
+
 #endif /* EAP_METHOD_SIMPLE_H */
 

@@ -111,6 +111,8 @@ gchar * ce_page_get_next_available_name (const GPtrArray *connections,
                                          const gchar *type_name);
 
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (CEPage, g_object_unref)
+
 
 G_END_DECLS
 

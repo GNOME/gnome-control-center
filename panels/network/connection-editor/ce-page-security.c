@@ -125,7 +125,7 @@ security_combo_changed (GtkComboBox *combo,
         CEPageSecurity *page = CE_PAGE_SECURITY (user_data);
         GtkWidget *vbox;
         GList *l, *children;
-        WirelessSecurity *sec;
+        g_autoptr(WirelessSecurity) sec = NULL;
 
         wsec_size_group_clear (page->group);
 
@@ -150,7 +150,6 @@ security_combo_changed (GtkComboBox *combo,
                 wireless_security_add_to_size_group (sec, page->group);
 
                 gtk_container_add (GTK_CONTAINER (vbox), sec_widget);
-                wireless_security_unref (sec);
         }
 
         ce_page_changed (CE_PAGE (page));
@@ -204,7 +203,7 @@ finish_setup (CEPageSecurity *page)
         NMSettingWireless *sw;
         NMSettingWirelessSecurity *sws;
         gboolean is_adhoc = FALSE;
-        GtkListStore *sec_model;
+        g_autoptr(GtkListStore) sec_model = NULL;
         GtkTreeIter iter;
         const gchar *mode;
         guint32 dev_caps = 0;
@@ -345,7 +344,6 @@ finish_setup (CEPageSecurity *page)
         gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (combo), renderer, set_sensitive, &page->adhoc, NULL);
 
         gtk_combo_box_set_active (combo, active < 0 ? 0 : (guint32) active);
-        g_object_unref (G_OBJECT (sec_model));
 
         page->security_combo = combo;
 
@@ -360,7 +358,7 @@ validate (CEPage        *page,
           GError       **error)
 {
         NMSettingWireless *sw;
-        WirelessSecurity *sec;
+        g_autoptr(WirelessSecurity) sec = NULL;
         gboolean valid = FALSE;
         const char *mode;
 
@@ -393,8 +391,6 @@ validate (CEPage        *page,
                                 valid = FALSE;
                         }
                 }
-
-                wireless_security_unref (sec);
         } else {
                 /* No security, unencrypted */
                 nm_connection_remove_setting (connection, NM_TYPE_SETTING_WIRELESS_SECURITY);

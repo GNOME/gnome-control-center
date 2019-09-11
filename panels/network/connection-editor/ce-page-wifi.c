@@ -93,7 +93,7 @@ connect_wifi_page (CEPageWifi *page)
 static void
 ui_to_setting (CEPageWifi *page)
 {
-        GBytes *ssid;
+        g_autoptr(GBytes) ssid = NULL;
         const gchar *utf8_ssid, *bssid;
         GtkWidget *entry;
         GtkComboBoxText *combo;
@@ -122,9 +122,6 @@ ui_to_setting (CEPageWifi *page)
                       NM_SETTING_WIRELESS_MAC_ADDRESS, device_mac,
                       NM_SETTING_WIRELESS_CLONED_MAC_ADDRESS, cloned_mac,
                       NULL);
-
-        if (ssid)
-                g_bytes_unref (ssid);
 }
 
 static gboolean

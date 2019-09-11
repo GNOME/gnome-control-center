@@ -107,9 +107,8 @@ add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar
 static gchar *
 get_last_used_string (NMConnection *connection)
 {
-        gchar *last_used = NULL;
-        GDateTime *now = NULL;
-        GDateTime *then = NULL;
+        g_autoptr(GDateTime) now = NULL;
+        g_autoptr(GDateTime) then = NULL;
         gint days;
         GTimeSpan diff;
         guint64 timestamp;
@@ -117,12 +116,10 @@ get_last_used_string (NMConnection *connection)
 
         s_con = nm_connection_get_setting_connection (connection);
         if (s_con == NULL)
-                goto out;
+                return NULL;
         timestamp = nm_setting_connection_get_timestamp (s_con);
-        if (timestamp == 0) {
-                last_used = g_strdup (_("never"));
-                goto out;
-        }
+        if (timestamp == 0)
+                return g_strdup (_("never"));
 
         /* calculate the amount of time that has elapsed */
         now = g_date_time_new_now_utc ();
@@ -130,18 +127,11 @@ get_last_used_string (NMConnection *connection)
         diff = g_date_time_difference  (now, then);
         days = diff / G_TIME_SPAN_DAY;
         if (days == 0)
-                last_used = g_strdup (_("today"));
+                return g_strdup (_("today"));
         else if (days == 1)
-                last_used = g_strdup (_("yesterday"));
+                return g_strdup (_("yesterday"));
         else
-                last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
-out:
-        if (now != NULL)
-                g_date_time_unref (now);
-        if (then != NULL)
-                g_date_time_unref (then);
-
-        return last_used;
+                return g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
 }
 
 static void

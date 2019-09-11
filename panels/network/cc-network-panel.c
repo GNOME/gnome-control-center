@@ -175,7 +175,7 @@ cc_network_panel_set_property (GObject      *object,
 
                 parameters = g_value_get_variant (value);
                 if (parameters) {
-                        GPtrArray *array;
+                        g_autoptr(GPtrArray) array = NULL;
                         const gchar **args;
                         array = variant_av_to_string_array (parameters);
                         args = (const gchar **) array->pdata;
@@ -191,10 +191,8 @@ cc_network_panel_set_property (GObject      *object,
 
                         if (verify_argv (self, (const char **) args) == FALSE) {
                                 reset_command_line_args (self);
-                                g_ptr_array_unref (array);
                                 return;
                         }
-                        g_ptr_array_unref (array);
                         g_debug ("Calling handle_argv() after setting property");
                         handle_argv (self);
                 }
@@ -368,20 +366,21 @@ handle_argv (CcNetworkPanel *panel)
 
         for (i = 0; i < panel->devices->len; i++) {
                 GObject *object_tmp;
-                NMDevice *device;
-                NMConnection *connection;
                 gboolean done = FALSE;
 
                 object_tmp = g_ptr_array_index (panel->devices, i);
 
                 if (NET_IS_DEVICE (object_tmp)) {
+                        NMDevice *device = NULL; /* Autoptr macro not available: https://gitlab.freedesktop.org/NetworkManager/NetworkManager/merge_requests/270 */
+
                         g_object_get (object_tmp, "nm-device", &device, NULL);
                         done = handle_argv_for_device (panel, device);
                         g_object_unref (device);
                 } else if (NET_IS_VPN (object_tmp)) {
+                        g_autoptr(NMConnection) connection = NULL;
+
                         g_object_get (object_tmp, "connection", &connection, NULL);
                         done = handle_argv_for_connection (panel, connection);
-                        g_object_unref (connection);
                 }
 
                 if (done)
@@ -502,7 +501,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 
         if (type == NM_DEVICE_TYPE_MODEM &&
             g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager1/Modem/")) {
-                GDBusObject *modem_object;
+                g_autoptr(GDBusObject) modem_object;
 
                 if (panel->modem_manager == NULL) {
                         g_warning ("Cannot grab information for modem at %s: No ModemManager support",
@@ -522,7 +521,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                 g_object_set (net_device,
                               "mm-object", modem_object,
                               NULL);
-                g_object_unref (modem_object);
         }
 
         /* add as a panel */
@@ -858,7 +856,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
 {
         g_autoptr(GError) error = NULL;
         GtkWidget *toplevel;
-        GDBusConnection *system_bus;
+        g_autoptr(GDBusConnection) system_bus = NULL;
         const GPtrArray *connections;
         guint i;
 
@@ -875,9 +873,8 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         /* Create and store a NMClient instance if it doesn't exist yet */
         if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT)) {
-                NMClient *client = nm_client_new (NULL, NULL);
+                g_autoptr(NMClient) client = nm_client_new (NULL, NULL);
                 cc_object_storage_add_object (CC_OBJECT_NMCLIENT, client);
-                g_object_unref (client);
         }
 
         /* use NetworkManager client */
@@ -905,7 +902,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
                 if (panel->modem_manager == NULL)
                         g_warning ("Error connecting to ModemManager: %s",
                                    error->message);
-                g_object_unref (system_bus);
         }
 
         /* add remote settings such as VPN settings as virtual devices */

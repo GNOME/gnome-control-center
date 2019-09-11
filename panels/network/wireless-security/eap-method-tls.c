@@ -262,7 +262,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 static void
 private_key_picker_helper (EAPMethod *parent, const char *filename, gboolean changed)
 {
-	NMSetting8021x *setting;
+	g_autoptr(NMSetting8021x) setting = NULL;
 	NMSetting8021xCKFormat cert_format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	const char *password;
 	GtkWidget *widget;
@@ -273,7 +273,6 @@ private_key_picker_helper (EAPMethod *parent, const char *filename, gboolean cha
 
 	setting = (NMSetting8021x *) nm_setting_802_1x_new ();
 	nm_setting_802_1x_set_private_key (setting, filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &cert_format, NULL);
-	g_object_unref (setting);
 
 	/* With PKCS#12, the client cert must be the same as the private key */
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_user_cert_button"));
