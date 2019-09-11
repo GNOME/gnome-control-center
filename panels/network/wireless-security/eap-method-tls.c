@@ -163,7 +163,8 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	NMSetting8021x *s_8021x;
 	NMSettingSecretFlags secret_flags;
 	GtkWidget *widget, *passwd_entry;
-	char *ca_filename, *pk_filename, *cc_filename;
+	g_autofree gchar *ca_filename = NULL;
+	g_autofree gchar *pk_filename = NULL;
 	const char *password = NULL;
 	gboolean ca_cert_error = FALSE;
 
@@ -200,7 +201,6 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 		if (!nm_setting_802_1x_set_private_key (s_8021x, pk_filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
 			g_warning ("Couldn't read private key '%s': %s", pk_filename, error ? error->message : "(unknown)");
 	}
-	g_free (pk_filename);
 
 	/* Save 802.1X password flags to the connection */
 	secret_flags = nma_utils_menu_to_secret_flags (passwd_entry);
@@ -215,6 +215,8 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 
 	/* TLS client certificate */
 	if (format != NM_SETTING_802_1X_CK_FORMAT_PKCS12) {
+		g_autofree gchar *cc_filename = NULL;
+
 		/* If the key is pkcs#12 nm_setting_802_1x_set_private_key() already
 		 * set the client certificate for us.
 		 */
@@ -233,7 +235,6 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 			if (!nm_setting_802_1x_set_client_cert (s_8021x, cc_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
 				g_warning ("Couldn't read client certificate '%s': %s", cc_filename, error ? error->message : "(unknown)");
 		}
-		g_free (cc_filename);
 	}
 
 	/* TLS CA certificate */
@@ -256,7 +257,6 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 		}
 	}
 	eap_method_ca_cert_ignore_set (parent, connection, ca_filename, ca_cert_error);
-	g_free (ca_filename);
 }
 
 static void
@@ -311,12 +311,11 @@ static void
 private_key_picker_file_set_cb (GtkWidget *chooser, gpointer user_data)
 {
 	EAPMethod *parent = (EAPMethod *) user_data;
-	char *filename;
+	g_autofree gchar *filename = NULL;
 
 	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
 	if (filename)
 		private_key_picker_helper (parent, filename, TRUE);
-	g_free (filename);
 }
 
 static void reset_filter (GtkWidget *widget, GParamSpec *spec, gpointer user_data)

@@ -149,10 +149,10 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
 {
         NMIPConfig *ip4_config = NULL;
         NMIPConfig *ip6_config = NULL;
-        gchar *ip4_address = NULL;
-        gchar *ip4_route = NULL;
-        gchar *ip4_dns = NULL;
-        gchar *ip6_address = NULL;
+        g_autofree gchar *ip4_address = NULL;
+        g_autofree gchar *ip4_route = NULL;
+        g_autofree gchar *ip4_dns = NULL;
+        g_autofree gchar *ip6_address = NULL;
         gint i = 0;
 
         ip4_config = nm_device_get_ip4_config (device);
@@ -184,16 +184,10 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
                 add_details_row (details, i++, _("DNS"), ip4_dns);
 
         if (nm_device_get_state (device) != NM_DEVICE_STATE_ACTIVATED) {
-                gchar *last_used;
+                g_autofree gchar *last_used = NULL;
                 last_used = get_last_used_string (connection);
                 add_details_row (details, i++, _("Last used"), last_used);
-                g_free (last_used);
         }
-
-        g_free (ip4_address);
-        g_free (ip4_route);
-        g_free (ip4_dns);
-        g_free (ip6_address);
 }
 
 static void populate_ui (NetDeviceEthernet *device);
@@ -437,7 +431,8 @@ add_profile (GtkButton *button, NetDeviceEthernet *device)
 {
         NMConnection *connection;
         NMSettingConnection *sc;
-        gchar *uuid, *id;
+        g_autofree gchar *uuid = NULL;
+        g_autofree gchar *id = NULL;
         NetConnectionEditor *editor;
         GtkWidget *window;
         NMClient *client;
@@ -462,9 +457,6 @@ add_profile (GtkButton *button, NetDeviceEthernet *device)
                       NULL);
 
         nm_connection_add_setting (connection, nm_setting_wired_new ());
-
-        g_free (uuid);
-        g_free (id);
 
         window = gtk_widget_get_toplevel (GTK_WIDGET (button));
 

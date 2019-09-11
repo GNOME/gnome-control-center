@@ -139,7 +139,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	GtkWidget *widget;
 	const char *text;
-	char *filename;
+	g_autofree gchar *filename = NULL;
 	EAPMethod *eap = NULL;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
@@ -166,7 +166,6 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 		ca_cert_error = TRUE;
 	}
 	eap_method_ca_cert_ignore_set (parent, connection, filename, ca_cert_error);
-	g_free (filename);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_version_combo"));
 	peapver_active = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));

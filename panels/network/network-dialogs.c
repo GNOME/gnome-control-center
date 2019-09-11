@@ -230,7 +230,7 @@ cc_network_panel_connect_to_8021x_network (GtkWidget        *toplevel,
 	NMSetting8021x *s_8021x;
 	NM80211ApSecurityFlags wpa_flags, rsn_flags;
 	GtkWidget *dialog;
-	char *uuid;
+	g_autofree gchar *uuid = NULL;
         NMAccessPoint *ap;
 
         g_debug ("connect to 8021x wifi");
@@ -258,7 +258,6 @@ cc_network_panel_connect_to_8021x_network (GtkWidget        *toplevel,
         s_con = (NMSettingConnection *) nm_setting_connection_new ();
         uuid = nm_utils_uuid_generate ();
         g_object_set (s_con, NM_SETTING_CONNECTION_UUID, uuid, NULL);
-        g_free (uuid);
         nm_connection_add_setting (connection, NM_SETTING (s_con));
 
         s_wifi = (NMSettingWireless *) nm_setting_wireless_new ();
@@ -315,7 +314,8 @@ cdma_mobile_wizard_done (NMAMobileWizard *wizard,
 
 	if (!canceled && method) {
 		NMSetting *setting;
-		char *uuid, *id;
+		g_autofree gchar *uuid = NULL;
+		g_autofree gchar *id = NULL;
 
 		if (method->devtype != NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) {
 			g_warning ("Unexpected device type (not CDMA).");
@@ -357,8 +357,6 @@ cdma_mobile_wizard_done (NMAMobileWizard *wizard,
 		              NM_SETTING_CONNECTION_AUTOCONNECT, FALSE,
 		              NM_SETTING_CONNECTION_UUID, uuid,
 		              NULL);
-		g_free (uuid);
-		g_free (id);
 		nm_connection_add_setting (connection, setting);
 	}
 
@@ -377,7 +375,8 @@ gsm_mobile_wizard_done (NMAMobileWizard *wizard,
 
 	if (!canceled && method) {
 		NMSetting *setting;
-		char *uuid, *id;
+		g_autofree gchar *uuid = NULL;
+		g_autofree gchar *id = NULL;
 
 		if (method->devtype != NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) {
 			g_warning ("Unexpected device type (not GSM).");
@@ -420,8 +419,6 @@ gsm_mobile_wizard_done (NMAMobileWizard *wizard,
 		              NM_SETTING_CONNECTION_AUTOCONNECT, FALSE,
 		              NM_SETTING_CONNECTION_UUID, uuid,
 		              NULL);
-		g_free (uuid);
-		g_free (id);
 		nm_connection_add_setting (connection, setting);
 	}
 

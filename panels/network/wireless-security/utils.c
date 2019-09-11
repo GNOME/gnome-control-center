@@ -42,7 +42,7 @@ utils_filter_editable_on_insert_text (GtkEditable *editable,
                                       gpointer block_func)
 {
 	int i, count = 0;
-	gchar *result = g_new (gchar, length+1);
+	g_autofree gchar *result = g_new (gchar, length+1);
 
 	for (i = 0; i < length; i++) {
 		if (validate_character (text[i]))
@@ -64,8 +64,6 @@ utils_filter_editable_on_insert_text (GtkEditable *editable,
 		}
 	}
 	g_signal_stop_emission_by_name (G_OBJECT (editable), "insert-text");
-
-	g_free (result);
 
 	return count > 0;
 }

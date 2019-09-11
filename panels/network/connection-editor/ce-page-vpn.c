@@ -55,7 +55,7 @@ vpn_gnome3ify_editor (GtkWidget *widget)
         } else if (GTK_IS_LABEL (widget)) {
                 const char *text;
                 gfloat xalign;
-                char *newtext;
+                g_autofree gchar *newtext = NULL;
                 int len;
 
                 xalign = gtk_label_get_xalign (GTK_LABEL (widget));
@@ -68,7 +68,6 @@ vpn_gnome3ify_editor (GtkWidget *widget)
 
                 newtext = g_strndup (text, len - 1);
                 gtk_label_set_text (GTK_LABEL (widget), newtext);
-                g_free (newtext);
                 gtk_label_set_xalign (GTK_LABEL (widget), 1.0);
         }
 }

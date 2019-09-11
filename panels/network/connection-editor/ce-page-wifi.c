@@ -38,7 +38,7 @@ connect_wifi_page (CEPageWifi *page)
 {
         GtkWidget *widget;
         GBytes *ssid;
-        gchar *utf8_ssid;
+        g_autofree gchar *utf8_ssid = NULL;
         GPtrArray *bssid_array;
         gchar **bssid_list;
         const char *s_bssid_str;
@@ -56,7 +56,6 @@ connect_wifi_page (CEPageWifi *page)
         else
                 utf8_ssid = g_strdup ("");
         gtk_entry_set_text (GTK_ENTRY (widget), utf8_ssid);
-        g_free (utf8_ssid);
 
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
 
@@ -98,7 +97,8 @@ ui_to_setting (CEPageWifi *page)
         const gchar *utf8_ssid, *bssid;
         GtkWidget *entry;
         GtkComboBoxText *combo;
-        char *device_mac, *cloned_mac;
+        g_autofree gchar *device_mac = NULL;
+        g_autofree gchar *cloned_mac = NULL;
 
         entry = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "entry_ssid"));
         utf8_ssid = gtk_entry_get_text (GTK_ENTRY (entry));
@@ -125,8 +125,6 @@ ui_to_setting (CEPageWifi *page)
 
         if (ssid)
                 g_bytes_unref (ssid);
-        g_free (cloned_mac);
-        g_free (device_mac);
 }
 
 static gboolean

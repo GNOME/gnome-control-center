@@ -85,8 +85,8 @@ connect_ethernet_page (CEPageEthernet *page)
 static void
 ui_to_setting (CEPageEthernet *page)
 {
-        gchar *device_mac = NULL;
-        gchar *cloned_mac = NULL;
+        g_autofree gchar *device_mac = NULL;
+        g_autofree gchar *cloned_mac = NULL;
         const gchar *text;
         GtkWidget *entry;
         GtkComboBoxText *combo;
@@ -109,9 +109,6 @@ ui_to_setting (CEPageEthernet *page)
         g_object_set (page->setting_connection,
                       NM_SETTING_CONNECTION_ID, gtk_entry_get_text (page->name),
                       NULL);
-
-        g_free (cloned_mac);
-        g_free (device_mac);
 }
 
 static gboolean

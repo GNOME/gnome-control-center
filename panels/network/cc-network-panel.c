@@ -277,7 +277,7 @@ panel_refresh_device_titles (CcNetworkPanel *panel)
         GPtrArray *ndarray, *nmdarray;
         NetDevice **devices;
         NMDevice **nm_devices, *nm_device;
-        gchar **titles;
+        g_auto(GStrv) titles = NULL;
         gint i, num_devices;
 
         ndarray = cc_network_panel_get_devices (panel);
@@ -311,9 +311,7 @@ panel_refresh_device_titles (CcNetworkPanel *panel)
                         net_object_set_title (NET_OBJECT (devices[i]), bt_name);
                 else
                         net_object_set_title (NET_OBJECT (devices[i]), titles[i]);
-                g_free (titles[i]);
         }
-        g_free (titles);
         g_ptr_array_free (ndarray, TRUE);
         g_ptr_array_free (nmdarray, TRUE);
 }
@@ -698,7 +696,7 @@ static void
 panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 {
         GtkWidget *stack;
-        gchar *title;
+        g_autofree gchar *title = NULL;
         NetVpn *net_vpn;
         const gchar *id;
 
@@ -728,8 +726,6 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 
         /* store in the devices array */
         g_ptr_array_add (panel->devices, net_vpn);
-
-        g_free (title);
 
         /* update vpn widgets */
         update_vpn_section (panel);
@@ -771,14 +767,15 @@ notify_connection_added_cb (NMClient           *client,
 static void
 panel_check_network_manager_version (CcNetworkPanel *panel)
 {
-        GtkWidget *box;
-        GtkWidget *label;
-        gchar *markup;
         const gchar *version;
 
         /* parse running version */
         version = nm_client_get_version (panel->client);
         if (version == NULL) {
+                GtkWidget *box;
+                GtkWidget *label;
+                g_autofree gchar *markup = NULL;
+
                 gtk_container_remove (GTK_CONTAINER (panel), gtk_bin_get_child (GTK_BIN (panel)));
 
                 box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 20);
@@ -800,7 +797,6 @@ panel_check_network_manager_version (CcNetworkPanel *panel)
                 gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
                 gtk_widget_show_all (box);
-                g_free (markup);
         } else {
                 manager_running (panel->client, NULL, panel);
         }

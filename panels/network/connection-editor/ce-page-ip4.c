@@ -404,9 +404,8 @@ add_route_row (CEPageIP4   *page,
         g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_routes_row), page);
         g_object_set_data (G_OBJECT (row), "metric", widget);
         if (metric >= 0) {
-                gchar *s = g_strdup_printf ("%d", metric);
+                g_autofree gchar *s = g_strdup_printf ("%d", metric);
                 gtk_entry_set_text (GTK_ENTRY (widget), s);
-                g_free (s);
         }
         gtk_entry_set_width_chars (GTK_ENTRY (widget), 5);
         gtk_widget_set_hexpand (widget, TRUE);
