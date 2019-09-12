@@ -464,6 +464,7 @@ cc_sharing_panel_add_folder (GtkListBox     *box,
       row = cc_sharing_panel_new_media_sharing_row (folder, self);
       i = g_list_length (rows);
       gtk_list_box_insert (GTK_LIST_BOX (self->shared_folders_listbox), row, i - 1);
+      gtk_widget_set_visible (row, TRUE);
     }
   cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->shared_folders_listbox));
 
