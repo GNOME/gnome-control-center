@@ -23,6 +23,8 @@
 #ifndef EAP_METHOD_H
 #define EAP_METHOD_H
 
+#include <NetworkManager.h>
+
 typedef struct _EAPMethod EAPMethod;
 
 typedef void        (*EMAddToSizeGroupFunc) (EAPMethod *method, GtkSizeGroup *group);
