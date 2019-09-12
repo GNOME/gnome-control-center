@@ -1330,7 +1330,8 @@ add_input_sources_from_localed (CcRegionPanel *self)
                 n = 0;
 
         for (i = 0; i < n && layouts[i][0]; i++) {
-                g_autoptr(CcInputSourceXkb) source = cc_input_source_xkb_new (self->xkb_info, layouts[i], variants[i]);
+                const char *variant = variants ? variants[i] : NULL;
+                g_autoptr(CcInputSourceXkb) source = cc_input_source_xkb_new (self->xkb_info, layouts[i], variant);
                 add_input_row (self, CC_INPUT_SOURCE (source));
         }
         gtk_widget_set_visible (GTK_WIDGET (self->no_inputs_row), n == 0);
