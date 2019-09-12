@@ -30,7 +30,6 @@
 #include <unistd.h>
 
 #include "eap-method.h"
-#include "nm-utils.h"
 #include "utils.h"
 #include "helpers.h"
 
