@@ -303,6 +303,7 @@ ce_page_complete_init (CEPage      *page,
 	                                  setting_name,
 	                                  secrets,
 	                                  &update_error)) {
+		g_warning ("Couldn't update secrets: %s", update_error->message);
 		g_error_free (update_error);
 		/* Success */
 		emit_initialized (page, NULL);
