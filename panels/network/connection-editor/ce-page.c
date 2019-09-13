@@ -299,16 +299,14 @@ ce_page_complete_init (CEPage      *page,
 	g_variant_unref (setting_dict);
 
 	/* Update the connection with the new secrets */
-	if (nm_connection_update_secrets (page->connection,
-	                                  setting_name,
-	                                  secrets,
-	                                  &update_error)) {
-		/* Success */
-		emit_initialized (page, NULL);
-		return;
+	if (!nm_connection_update_secrets (page->connection,
+	                                   setting_name,
+	                                   secrets,
+	                                   &update_error)) {
+		g_warning ("Couldn't update secrets: %s", update_error->message);
+		g_error_free (update_error);
 	}
 
-	g_warning ("Failed to update connection secrets due to an unknown error.");
 	emit_initialized (page, NULL);
 }
 
