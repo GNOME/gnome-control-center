@@ -57,7 +57,9 @@ validate (EAPMethod *parent, GError **error)
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	GtkWidget *widget;
 	const char *password, *identity;
-	GError *local = NULL;
+	g_autoptr(GError) ca_cert_error = NULL;
+	g_autoptr(GError) private_key_error = NULL;
+	g_autoptr(GError) user_cert_error = NULL;
 	gboolean ret = TRUE;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_identity_entry"));
@@ -71,13 +73,12 @@ validate (EAPMethod *parent, GError **error)
 		widget_unset_error (widget);
 	}
 
-	if (!eap_method_validate_filepicker (parent->builder, "eap_tls_ca_cert_button", TYPE_CA_CERT, NULL, NULL, &local)) {
+	if (!eap_method_validate_filepicker (parent->builder, "eap_tls_ca_cert_button", TYPE_CA_CERT, NULL, NULL, &ca_cert_error)) {
 		widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button")));
 		if (ret) {
-			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: %s"), local->message);
+			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: %s"), ca_cert_error->message);
 			ret = FALSE;
 		}
-		g_clear_error (&local);
 	} else if (eap_method_ca_cert_required (parent->builder, "eap_tls_ca_cert_not_required_checkbox", "eap_tls_ca_cert_button")) {
 		widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button")));
 		if (ret) {
@@ -95,22 +96,20 @@ validate (EAPMethod *parent, GError **error)
 	                                     TYPE_PRIVATE_KEY,
 	                                     password,
 	                                     &format,
-	                                     &local)) {
+	                                     &private_key_error)) {
 		if (ret) {
-			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS private-key: %s"), local->message);
+			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS private-key: %s"), private_key_error->message);
 			ret = FALSE;
 		}
-		g_clear_error (&local);
 		widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_private_key_button")));
 	}
 
 	if (format != NM_SETTING_802_1X_CK_FORMAT_PKCS12) {
-		if (!eap_method_validate_filepicker (parent->builder, "eap_tls_user_cert_button", TYPE_CLIENT_CERT, NULL, NULL, &local)) {
+		if (!eap_method_validate_filepicker (parent->builder, "eap_tls_user_cert_button", TYPE_CLIENT_CERT, NULL, NULL, &user_cert_error)) {
 			if (ret) {
-				g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS user-certificate: %s"), local->message);
+				g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS user-certificate: %s"), user_cert_error->message);
 				ret = FALSE;
 			}
-			g_clear_error (&local);
 			widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_user_cert_button")));
 		}
 	}
@@ -164,9 +163,9 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	NMSetting8021x *s_8021x;
 	NMSettingSecretFlags secret_flags;
 	GtkWidget *widget, *passwd_entry;
-	char *ca_filename, *pk_filename, *cc_filename;
+	g_autofree gchar *ca_filename = NULL;
+	g_autofree gchar *pk_filename = NULL;
 	const char *password = NULL;
-	GError *error = NULL;
 	gboolean ca_cert_error = FALSE;
 
 	s_8021x = nm_connection_get_setting_802_1x (connection);
@@ -194,17 +193,14 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	g_assert (pk_filename);
 
 	if (parent->phase2) {
-		if (!nm_setting_802_1x_set_phase2_private_key (s_8021x, pk_filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
+		g_autoptr(GError) error = NULL;
+		if (!nm_setting_802_1x_set_phase2_private_key (s_8021x, pk_filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
 			g_warning ("Couldn't read phase2 private key '%s': %s", pk_filename, error ? error->message : "(unknown)");
-			g_clear_error (&error);
-		}
 	} else {
-		if (!nm_setting_802_1x_set_private_key (s_8021x, pk_filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
+		g_autoptr(GError) error = NULL;
+		if (!nm_setting_802_1x_set_private_key (s_8021x, pk_filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
 			g_warning ("Couldn't read private key '%s': %s", pk_filename, error ? error->message : "(unknown)");
-			g_clear_error (&error);
-		}
 	}
-	g_free (pk_filename);
 
 	/* Save 802.1X password flags to the connection */
 	secret_flags = nma_utils_menu_to_secret_flags (passwd_entry);
@@ -219,6 +215,8 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 
 	/* TLS client certificate */
 	if (format != NM_SETTING_802_1X_CK_FORMAT_PKCS12) {
+		g_autofree gchar *cc_filename = NULL;
+
 		/* If the key is pkcs#12 nm_setting_802_1x_set_private_key() already
 		 * set the client certificate for us.
 		 */
@@ -229,17 +227,14 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 
 		format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 		if (parent->phase2) {
-			if (!nm_setting_802_1x_set_phase2_client_cert (s_8021x, cc_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
+			g_autoptr(GError) error = NULL;
+			if (!nm_setting_802_1x_set_phase2_client_cert (s_8021x, cc_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
 				g_warning ("Couldn't read phase2 client certificate '%s': %s", cc_filename, error ? error->message : "(unknown)");
-				g_clear_error (&error);
-			}
 		} else {
-			if (!nm_setting_802_1x_set_client_cert (s_8021x, cc_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
+			g_autoptr(GError) error = NULL;
+			if (!nm_setting_802_1x_set_client_cert (s_8021x, cc_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
 				g_warning ("Couldn't read client certificate '%s': %s", cc_filename, error ? error->message : "(unknown)");
-				g_clear_error (&error);
-			}
 		}
-		g_free (cc_filename);
 	}
 
 	/* TLS CA certificate */
@@ -249,26 +244,25 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 
 	format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	if (parent->phase2) {
+		g_autoptr(GError) error = NULL;
 		if (!nm_setting_802_1x_set_phase2_ca_cert (s_8021x, ca_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
 			g_warning ("Couldn't read phase2 CA certificate '%s': %s", ca_filename, error ? error->message : "(unknown)");
-			g_clear_error (&error);
 			ca_cert_error = TRUE;
 		}
 	} else {
+		g_autoptr(GError) error = NULL;
 		if (!nm_setting_802_1x_set_ca_cert (s_8021x, ca_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
 			g_warning ("Couldn't read CA certificate '%s': %s", ca_filename, error ? error->message : "(unknown)");
-			g_clear_error (&error);
 			ca_cert_error = TRUE;
 		}
 	}
 	eap_method_ca_cert_ignore_set (parent, connection, ca_filename, ca_cert_error);
-	g_free (ca_filename);
 }
 
 static void
 private_key_picker_helper (EAPMethod *parent, const char *filename, gboolean changed)
 {
-	NMSetting8021x *setting;
+	g_autoptr(NMSetting8021x) setting = NULL;
 	NMSetting8021xCKFormat cert_format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	const char *password;
 	GtkWidget *widget;
@@ -279,7 +273,6 @@ private_key_picker_helper (EAPMethod *parent, const char *filename, gboolean cha
 
 	setting = (NMSetting8021x *) nm_setting_802_1x_new ();
 	nm_setting_802_1x_set_private_key (setting, filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &cert_format, NULL);
-	g_object_unref (setting);
 
 	/* With PKCS#12, the client cert must be the same as the private key */
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_user_cert_button"));
@@ -317,12 +310,11 @@ static void
 private_key_picker_file_set_cb (GtkWidget *chooser, gpointer user_data)
 {
 	EAPMethod *parent = (EAPMethod *) user_data;
-	char *filename;
+	g_autofree gchar *filename = NULL;
 
 	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
 	if (filename)
 		private_key_picker_helper (parent, filename, TRUE);
-	g_free (filename);
 }
 
 static void reset_filter (GtkWidget *widget, GParamSpec *spec, gpointer user_data)

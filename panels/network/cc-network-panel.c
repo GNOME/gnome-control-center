@@ -175,7 +175,7 @@ cc_network_panel_set_property (GObject      *object,
 
                 parameters = g_value_get_variant (value);
                 if (parameters) {
-                        GPtrArray *array;
+                        g_autoptr(GPtrArray) array = NULL;
                         const gchar **args;
                         array = variant_av_to_string_array (parameters);
                         args = (const gchar **) array->pdata;
@@ -191,10 +191,8 @@ cc_network_panel_set_property (GObject      *object,
 
                         if (verify_argv (self, (const char **) args) == FALSE) {
                                 reset_command_line_args (self);
-                                g_ptr_array_unref (array);
                                 return;
                         }
-                        g_ptr_array_unref (array);
                         g_debug ("Calling handle_argv() after setting property");
                         handle_argv (self);
                 }
@@ -277,7 +275,7 @@ panel_refresh_device_titles (CcNetworkPanel *panel)
         GPtrArray *ndarray, *nmdarray;
         NetDevice **devices;
         NMDevice **nm_devices, *nm_device;
-        gchar **titles;
+        g_auto(GStrv) titles = NULL;
         gint i, num_devices;
 
         ndarray = cc_network_panel_get_devices (panel);
@@ -311,9 +309,7 @@ panel_refresh_device_titles (CcNetworkPanel *panel)
                         net_object_set_title (NET_OBJECT (devices[i]), bt_name);
                 else
                         net_object_set_title (NET_OBJECT (devices[i]), titles[i]);
-                g_free (titles[i]);
         }
-        g_free (titles);
         g_ptr_array_free (ndarray, TRUE);
         g_ptr_array_free (nmdarray, TRUE);
 }
@@ -370,20 +366,21 @@ handle_argv (CcNetworkPanel *panel)
 
         for (i = 0; i < panel->devices->len; i++) {
                 GObject *object_tmp;
-                NMDevice *device;
-                NMConnection *connection;
                 gboolean done = FALSE;
 
                 object_tmp = g_ptr_array_index (panel->devices, i);
 
                 if (NET_IS_DEVICE (object_tmp)) {
+                        NMDevice *device = NULL; /* Autoptr macro not available: https://gitlab.freedesktop.org/NetworkManager/NetworkManager/merge_requests/270 */
+
                         g_object_get (object_tmp, "nm-device", &device, NULL);
                         done = handle_argv_for_device (panel, device);
                         g_object_unref (device);
                 } else if (NET_IS_VPN (object_tmp)) {
+                        g_autoptr(NMConnection) connection = NULL;
+
                         g_object_get (object_tmp, "connection", &connection, NULL);
                         done = handle_argv_for_connection (panel, connection);
-                        g_object_unref (connection);
                 }
 
                 if (done)
@@ -504,7 +501,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 
         if (type == NM_DEVICE_TYPE_MODEM &&
             g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager1/Modem/")) {
-                GDBusObject *modem_object;
+                g_autoptr(GDBusObject) modem_object;
 
                 if (panel->modem_manager == NULL) {
                         g_warning ("Cannot grab information for modem at %s: No ModemManager support",
@@ -524,7 +521,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                 g_object_set (net_device,
                               "mm-object", modem_object,
                               NULL);
-                g_object_unref (modem_object);
         }
 
         /* add as a panel */
@@ -698,7 +694,7 @@ static void
 panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 {
         GtkWidget *stack;
-        gchar *title;
+        g_autofree gchar *title = NULL;
         NetVpn *net_vpn;
         const gchar *id;
 
@@ -728,8 +724,6 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 
         /* store in the devices array */
         g_ptr_array_add (panel->devices, net_vpn);
-
-        g_free (title);
 
         /* update vpn widgets */
         update_vpn_section (panel);
@@ -771,14 +765,15 @@ notify_connection_added_cb (NMClient           *client,
 static void
 panel_check_network_manager_version (CcNetworkPanel *panel)
 {
-        GtkWidget *box;
-        GtkWidget *label;
-        gchar *markup;
         const gchar *version;
 
         /* parse running version */
         version = nm_client_get_version (panel->client);
         if (version == NULL) {
+                GtkWidget *box;
+                GtkWidget *label;
+                g_autofree gchar *markup = NULL;
+
                 gtk_container_remove (GTK_CONTAINER (panel), gtk_bin_get_child (GTK_BIN (panel)));
 
                 box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 20);
@@ -800,7 +795,6 @@ panel_check_network_manager_version (CcNetworkPanel *panel)
                 gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
                 gtk_widget_show_all (box);
-                g_free (markup);
         } else {
                 manager_running (panel->client, NULL, panel);
         }
@@ -860,9 +854,9 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         GtkWidget *toplevel;
-        GDBusConnection *system_bus;
+        g_autoptr(GDBusConnection) system_bus = NULL;
         const GPtrArray *connections;
         guint i;
 
@@ -879,9 +873,8 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         /* Create and store a NMClient instance if it doesn't exist yet */
         if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT)) {
-                NMClient *client = nm_client_new (NULL, NULL);
+                g_autoptr(NMClient) client = nm_client_new (NULL, NULL);
                 cc_object_storage_add_object (CC_OBJECT_NMCLIENT, client);
-                g_object_unref (client);
         }
 
         /* use NetworkManager client */
@@ -901,18 +894,14 @@ cc_network_panel_init (CcNetworkPanel *panel)
         if (system_bus == NULL) {
                 g_warning ("Error connecting to system D-Bus: %s",
                            error->message);
-                g_clear_error (&error);
         } else {
                 panel->modem_manager = mm_manager_new_sync (system_bus,
                                                             G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE,
                                                             NULL,
                                                             &error);
-                if (panel->modem_manager == NULL) {
+                if (panel->modem_manager == NULL)
                         g_warning ("Error connecting to ModemManager: %s",
                                    error->message);
-                        g_clear_error (&error);
-                }
-                g_object_unref (system_bus);
         }
 
         /* add remote settings such as VPN settings as virtual devices */

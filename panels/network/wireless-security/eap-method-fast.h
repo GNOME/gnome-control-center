@@ -32,5 +32,8 @@ EAPMethodFAST *eap_method_fast_new (WirelessSecurity *ws_parent,
                                     gboolean is_editor,
                                     gboolean secrets_only);
 
+static void eap_method_fast_unref (EAPMethodFAST *method) { eap_method_unref (EAP_METHOD (method)); }
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (EAPMethodFAST, eap_method_fast_unref)
+
 #endif /* EAP_METHOD_FAST_H */
 

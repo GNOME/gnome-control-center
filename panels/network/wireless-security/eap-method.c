@@ -30,7 +30,6 @@
 #include <unistd.h>
 
 #include "eap-method.h"
-#include "nm-utils.h"
 #include "utils.h"
 #include "helpers.h"
 
@@ -123,13 +122,11 @@ eap_method_phase2_update_secrets_helper (EAPMethod *method,
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 	if (gtk_tree_model_get_iter_first (model, &iter)) {
 		do {
-			EAPMethod *eap = NULL;
+			g_autoptr(EAPMethod) eap = NULL;
 
 			gtk_tree_model_get (model, &iter, column, &eap, -1);
-			if (eap) {
+			if (eap)
 				eap_method_update_secrets (eap, connection);
-				eap_method_unref (eap);
-			}
 		} while (gtk_tree_model_iter_next (model, &iter));
 	}
 }
@@ -146,8 +143,8 @@ eap_method_init (gsize obj_size,
                  const char *default_field,
                  gboolean phase2)
 {
-	EAPMethod *method;
-	GError *error = NULL;
+	g_autoptr(EAPMethod) method = NULL;
+	g_autoptr(GError) error = NULL;
 
 	g_return_val_if_fail (obj_size > 0, NULL);
 	g_return_val_if_fail (ui_resource != NULL, NULL);
@@ -169,7 +166,6 @@ eap_method_init (gsize obj_size,
 	if (!gtk_builder_add_from_resource (method->builder, ui_resource, &error)) {
 		g_warning ("Couldn't load UI builder resource %s: %s",
 		           ui_resource, error->message);
-		eap_method_unref (method);
 		return NULL;
 	}
 
@@ -177,14 +173,13 @@ eap_method_init (gsize obj_size,
 	if (!method->ui_widget) {
 		g_warning ("Couldn't load UI widget '%s' from UI file %s",
 		           ui_widget_name, ui_resource);
-		eap_method_unref (method);
 		return NULL;
 	}
 	g_object_ref_sink (method->ui_widget);
 
 	method->destroy = destroy;
 
-	return method;
+	return g_steal_pointer (&method);
 }
 
 
@@ -227,8 +222,8 @@ eap_method_validate_filepicker (GtkBuilder *builder,
                                 GError **error)
 {
 	GtkWidget *widget;
-	char *filename;
-	NMSetting8021x *setting;
+	g_autofree gchar *filename = NULL;
+	g_autoptr(NMSetting8021x) setting = NULL;
 	gboolean success = TRUE;
 
 	if (item_type == TYPE_PRIVATE_KEY) {
@@ -267,11 +262,7 @@ eap_method_validate_filepicker (GtkBuilder *builder,
 	} else
 		g_warning ("%s: invalid item type %d.", __func__, item_type);
 
-	g_object_unref (setting);
-
 out:
-	g_free (filename);
-
 	if (!success && error && !*error)
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("unspecified error validating eap-method file"));
 
@@ -285,7 +276,8 @@ out:
 static gboolean
 file_has_extension (const char *filename, const char *extensions[])
 {
-	char *p, *ext;
+	char *p;
+	g_autofree gchar *ext = NULL;
 	int i = 0;
 	gboolean found = FALSE;
 
@@ -302,7 +294,6 @@ file_has_extension (const char *filename, const char *extensions[])
 			}
 		}
 	}
-	g_free (ext);
 
 	return found;
 }
@@ -486,7 +477,6 @@ eap_method_is_encrypted_private_key (const char *path)
 gboolean
 eap_method_ca_cert_required (GtkBuilder *builder, const char *id_ca_cert_not_required_checkbutton, const char *id_ca_cert_chooser)
 {
-	char *filename;
 	GtkWidget *widget;
 
 	g_assert (builder && id_ca_cert_not_required_checkbutton && id_ca_cert_chooser);
@@ -495,13 +485,14 @@ eap_method_ca_cert_required (GtkBuilder *builder, const char *id_ca_cert_not_req
 	g_assert (widget && GTK_IS_TOGGLE_BUTTON (widget));
 
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
+		g_autofree gchar *filename = NULL;
+
 		widget = GTK_WIDGET (gtk_builder_get_object (builder, id_ca_cert_chooser));
 		g_assert (widget && GTK_IS_FILE_CHOOSER (widget));
 
 		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
 		if (!filename)
 			return TRUE;
-		g_free (filename);
 	}
 	return FALSE;
 }
@@ -510,7 +501,8 @@ eap_method_ca_cert_required (GtkBuilder *builder, const char *id_ca_cert_not_req
 void
 eap_method_ca_cert_not_required_toggled (GtkBuilder *builder, const char *id_ca_cert_not_required_checkbutton, const char *id_ca_cert_chooser)
 {
-	char *filename, *filename_old;
+	g_autofree gchar *filename = NULL;
+	g_autofree gchar *filename_old = NULL;
 	gboolean is_not_required;
 	GtkWidget *widget;
 
@@ -527,20 +519,17 @@ eap_method_ca_cert_not_required_toggled (GtkBuilder *builder, const char *id_ca_
 	filename_old = g_object_steal_data (G_OBJECT (widget), "filename-old");
 	if (is_not_required) {
 		g_free (filename_old);
-		filename_old = filename;
-		filename = NULL;
+		filename_old = g_steal_pointer (&filename);
 	} else {
 		g_free (filename);
-		filename = filename_old;
-		filename_old = NULL;
+		filename = g_steal_pointer (&filename_old);
 	}
 	gtk_widget_set_sensitive (widget, !is_not_required);
 	if (filename)
 		gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (widget), filename);
 	else
 		gtk_file_chooser_unselect_all (GTK_FILE_CHOOSER (widget));
-	g_free (filename);
-	g_object_set_data_full (G_OBJECT (widget), "filename-old", filename_old, g_free);
+	g_object_set_data_full (G_OBJECT (widget), "filename-old", g_steal_pointer (&filename_old), g_free);
 }
 
 /* Used as both GSettings keys and GObject data tags */
@@ -604,7 +593,7 @@ static GSettings *
 _get_ca_ignore_settings (NMConnection *connection)
 {
 	GSettings *settings;
-	char *path = NULL;
+	g_autofree gchar *path = NULL;
 	const char *uuid;
 
 	g_return_val_if_fail (connection, NULL);
@@ -614,7 +603,6 @@ _get_ca_ignore_settings (NMConnection *connection)
 
 	path = g_strdup_printf ("/org/gnome/nm-applet/eap/%s/", uuid);
 	settings = g_settings_new_with_path ("org.gnome.nm-applet.eap", path);
-	g_free (path);
 
 	return settings;
 }
@@ -630,7 +618,7 @@ void
 eap_method_ca_cert_ignore_save (NMConnection *connection)
 {
 	NMSetting8021x *s_8021x;
-	GSettings *settings;
+	g_autoptr(GSettings) settings = NULL;
 	gboolean ignore = FALSE, phase2_ignore = FALSE;
 
 	g_return_if_fail (connection);
@@ -647,7 +635,6 @@ eap_method_ca_cert_ignore_save (NMConnection *connection)
 
 	g_settings_set_boolean (settings, IGNORE_CA_CERT_TAG, ignore);
 	g_settings_set_boolean (settings, IGNORE_PHASE2_CA_CERT_TAG, phase2_ignore);
-	g_object_unref (settings);
 }
 
 /**
@@ -660,7 +647,7 @@ eap_method_ca_cert_ignore_save (NMConnection *connection)
 void
 eap_method_ca_cert_ignore_load (NMConnection *connection)
 {
-	GSettings *settings;
+	g_autoptr(GSettings) settings = NULL;
 	NMSetting8021x *s_8021x;
 	gboolean ignore, phase2_ignore;
 
@@ -683,6 +670,5 @@ eap_method_ca_cert_ignore_load (NMConnection *connection)
 	g_object_set_data (G_OBJECT (s_8021x),
 	                   IGNORE_PHASE2_CA_CERT_TAG,
 	                   GUINT_TO_POINTER (phase2_ignore));
-	g_object_unref (settings);
 }
 

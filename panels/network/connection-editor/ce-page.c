@@ -221,8 +221,8 @@ ce_page_new (GType             type,
              const gchar      *ui_resource,
              const gchar      *title)
 {
-        CEPage *page;
-        GError *error = NULL;
+        g_autoptr(CEPage) page = NULL;
+        g_autoptr(GError) error = NULL;
 
         page = CE_PAGE (g_object_new (type,
                                       "connection", connection,
@@ -233,21 +233,18 @@ ce_page_new (GType             type,
         if (ui_resource) {
                 if (!gtk_builder_add_from_resource (page->builder, ui_resource, &error)) {
                         g_warning ("Couldn't load builder file: %s", error->message);
-                        g_error_free (error);
-                        g_object_unref (page);
                         return NULL;
                 }
                 page->page = GTK_WIDGET (gtk_builder_get_object (page->builder, "page"));
                 if (!page->page) {
                         g_warning ("Couldn't load page widget from %s", ui_resource);
-                        g_object_unref (page);
                         return NULL;
                 }
 
                 g_object_ref_sink (page->page);
         }
 
-        return page;
+        return g_steal_pointer (&page);
 }
 
 static void
@@ -265,8 +262,8 @@ ce_page_complete_init (CEPage      *page,
                        GVariant    *secrets,
                        GError      *error)
 {
-	GError *update_error = NULL;
-	GVariant *setting_dict;
+	g_autoptr(GError) update_error = NULL;
+	g_autoptr(GVariant) setting_dict = NULL;
 	gboolean ignore_error = FALSE;
 
 	g_return_if_fail (page != NULL);
@@ -296,13 +293,13 @@ ce_page_complete_init (CEPage      *page,
 		emit_initialized (page, NULL);
 		return;
 	}
-	g_variant_unref (setting_dict);
 
 	/* Update the connection with the new secrets */
 	if (nm_connection_update_secrets (page->connection,
 	                                  setting_name,
 	                                  secrets,
 	                                  &update_error)) {
+		g_warning ("Couldn't update secrets: %s", update_error->message);
 		/* Success */
 		emit_initialized (page, NULL);
 		return;
@@ -326,7 +323,8 @@ ce_page_get_mac_list (NMClient    *client,
         for (i = 0; devices && (i < devices->len); i++) {
                 NMDevice *dev = g_ptr_array_index (devices, i);
                 const char *iface;
-                char *mac, *item;
+                g_autofree gchar *mac = NULL;
+                g_autofree gchar *item = NULL;
 
                 if (!G_TYPE_CHECK_INSTANCE_TYPE (dev, device_type))
                         continue;
@@ -334,8 +332,7 @@ ce_page_get_mac_list (NMClient    *client,
                 g_object_get (G_OBJECT (dev), mac_property, &mac, NULL);
                 iface = nm_device_get_iface (NM_DEVICE (dev));
                 item = g_strdup_printf ("%s (%s)", mac, iface);
-                g_free (mac);
-                g_ptr_array_add (macs, item);
+                g_ptr_array_add (macs, g_steal_pointer (&item));
         }
 
         g_ptr_array_add (macs, NULL);
@@ -443,7 +440,7 @@ ce_page_address_is_valid (const gchar *addr)
                 {0x00, 0x30, 0xb4, 0x00, 0x00, 0x00}, /* prism54 dummy MAC */
         };
         guint8 addr_bin[ETH_ALEN];
-        char *trimmed_addr;
+        g_autofree gchar *trimmed_addr = NULL;
         guint i;
 
         if (!addr || *addr == '\0')
@@ -451,17 +448,11 @@ ce_page_address_is_valid (const gchar *addr)
 
         trimmed_addr = ce_page_trim_address (addr);
 
-        if (!nm_utils_hwaddr_valid (trimmed_addr, -1)) {
-                g_free (trimmed_addr);
+        if (!nm_utils_hwaddr_valid (trimmed_addr, -1))
                 return FALSE;
-        }
 
-        if (!nm_utils_hwaddr_aton (trimmed_addr, addr_bin, ETH_ALEN)) {
-                g_free (trimmed_addr);
+        if (!nm_utils_hwaddr_aton (trimmed_addr, addr_bin, ETH_ALEN))
                 return FALSE;
-        }
-
-        g_free (trimmed_addr);
 
         /* Check for multicast address */
         if ((((guint8 *) addr_bin)[0]) & 0x01)
@@ -531,7 +522,7 @@ ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data)
 {
         gint defvalue = GPOINTER_TO_INT (user_data);
         gint val;
-        gchar *buf = NULL;
+        g_autofree gchar *buf = NULL;
 
         val = gtk_spin_button_get_value_as_int (spin);
         if (val == defvalue)
@@ -542,7 +533,6 @@ ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data)
         if (strcmp (buf, gtk_entry_get_text (GTK_ENTRY (spin))))
                 gtk_entry_set_text (GTK_ENTRY (spin), buf);
 
-        g_free (buf);
         return TRUE;
 }
 
@@ -567,7 +557,7 @@ ce_page_get_next_available_name (const GPtrArray *connections,
 
         /* Find the next available unique connection name */
         while (!cname && (i++ < 10000)) {
-                gchar *temp;
+                g_autofree gchar *temp = NULL;
                 gboolean found = FALSE;
 
                 switch (format) {
@@ -588,9 +578,7 @@ ce_page_get_next_available_name (const GPtrArray *connections,
                         }
                 }
                 if (!found)
-                        cname = temp;
-                else
-                        g_free (temp);
+                        cname = g_steal_pointer (&temp);
         }
         g_slist_free (names);
 

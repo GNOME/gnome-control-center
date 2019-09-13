@@ -55,13 +55,12 @@ validate (EAPMethod *parent, GError **error)
 	GtkWidget *widget;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	EAPMethod *eap = NULL;
+	g_autoptr(EAPMethod) eap = NULL;
 	gboolean valid = FALSE;
-	GError *local = NULL;
+	g_autoptr(GError) local_error = NULL;
 
-	if (!eap_method_validate_filepicker (parent->builder, "eap_ttls_ca_cert_button", TYPE_CA_CERT, NULL, NULL, &local)) {
-		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TTLS CA certificate: %s"), local->message);
-		g_clear_error (&local);
+	if (!eap_method_validate_filepicker (parent->builder, "eap_ttls_ca_cert_button", TYPE_CA_CERT, NULL, NULL, &local_error)) {
+		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TTLS CA certificate: %s"), local_error->message);
 		return FALSE;
 	}
 	if (eap_method_ca_cert_required (parent->builder, "eap_ttls_ca_cert_not_required_checkbox", "eap_ttls_ca_cert_button")) {
@@ -77,7 +76,6 @@ validate (EAPMethod *parent, GError **error)
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
 	valid = eap_method_validate (eap, error);
-	eap_method_unref (eap);
 	return valid;
 }
 
@@ -96,7 +94,7 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 	GtkWidget *widget;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	EAPMethod *eap;
+	g_autoptr(EAPMethod) eap = NULL;
 
 	if (method->size_group)
 		g_object_unref (method->size_group);
@@ -130,7 +128,6 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
 	eap_method_add_to_size_group (eap, group);
-	eap_method_unref (eap);
 }
 
 static void
@@ -140,11 +137,11 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	GtkWidget *widget;
 	const char *text;
-	char *filename;
-	EAPMethod *eap = NULL;
+	g_autofree gchar *filename = NULL;
+	g_autoptr(EAPMethod) eap = NULL;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 	gboolean ca_cert_error = FALSE;
 
 	s_8021x = nm_connection_get_setting_802_1x (connection);
@@ -169,11 +166,9 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
 	if (!nm_setting_802_1x_set_ca_cert (s_8021x, filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
 		g_warning ("Couldn't read CA certificate '%s': %s", filename, error ? error->message : "(unknown)");
-		g_clear_error (&error);
 		ca_cert_error = TRUE;
 	}
 	eap_method_ca_cert_ignore_set (parent, connection, filename, ca_cert_error);
-	g_free (filename);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_combo"));
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
@@ -182,7 +177,6 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	g_assert (eap);
 
 	eap_method_fill_connection (eap, connection, flags);
-	eap_method_unref (eap);
 }
 
 static void
@@ -191,7 +185,7 @@ inner_auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 	EAPMethod *parent = (EAPMethod *) user_data;
 	EAPMethodTTLS *method = (EAPMethodTTLS *) parent;
 	GtkWidget *vbox;
-	EAPMethod *eap = NULL;
+	g_autoptr(EAPMethod) eap = NULL;
 	GList *elt, *children;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
@@ -219,8 +213,6 @@ inner_auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 		eap_method_add_to_size_group (eap, method->size_group);
 	gtk_container_add (GTK_CONTAINER (vbox), eap_widget);
 
-	eap_method_unref (eap);
-
 	wireless_security_changed_cb (combo, method->sec_parent);
 }
 
@@ -232,15 +224,15 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 {
 	EAPMethod *parent = (EAPMethod *) method;
 	GtkWidget *combo;
-	GtkListStore *auth_model;
+	g_autoptr(GtkListStore) auth_model = NULL;
 	GtkTreeIter iter;
-	EAPMethodSimple *em_pap;
-	EAPMethodSimple *em_mschap;
-	EAPMethodSimple *em_mschap_v2;
-	EAPMethodSimple *em_plain_mschap_v2;
-	EAPMethodSimple *em_chap;
-	EAPMethodSimple *em_md5;
-	EAPMethodSimple *em_gtc;
+	g_autoptr(EAPMethodSimple) em_pap = NULL;
+	g_autoptr(EAPMethodSimple) em_mschap = NULL;
+	g_autoptr(EAPMethodSimple) em_mschap_v2 = NULL;
+	g_autoptr(EAPMethodSimple) em_plain_mschap_v2 = NULL;
+	g_autoptr(EAPMethodSimple) em_chap = NULL;
+	g_autoptr(EAPMethodSimple) em_md5 = NULL;
+	g_autoptr(EAPMethodSimple) em_gtc = NULL;
 	guint32 active = 0;
 	const char *phase2_auth = NULL;
 	EAPMethodSimpleFlags simple_flags;
@@ -269,7 +261,6 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	                    I_NAME_COLUMN, _("PAP"),
 	                    I_METHOD_COLUMN, em_pap,
 	                    -1);
-	eap_method_unref (EAP_METHOD (em_pap));
 
 	/* Check for defaulting to PAP */
 	if (phase2_auth && !strcasecmp (phase2_auth, "pap"))
@@ -284,7 +275,6 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	                    I_NAME_COLUMN, _("MSCHAP"),
 	                    I_METHOD_COLUMN, em_mschap,
 	                    -1);
-	eap_method_unref (EAP_METHOD (em_mschap));
 
 	/* Check for defaulting to MSCHAP */
 	if (phase2_auth && !strcasecmp (phase2_auth, "mschap"))
@@ -299,7 +289,6 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	                    I_NAME_COLUMN, _("MSCHAPv2"),
 	                    I_METHOD_COLUMN, em_mschap_v2,
 	                    -1);
-	eap_method_unref (EAP_METHOD (em_mschap_v2));
 
 	/* Check for defaulting to MSCHAPv2 */
 	if (phase2_auth && !strcasecmp (phase2_auth, "mschapv2") &&
@@ -315,7 +304,6 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	                    I_NAME_COLUMN, _("MSCHAPv2 (no EAP)"),
 	                    I_METHOD_COLUMN, em_plain_mschap_v2,
 	                    -1);
-	eap_method_unref (EAP_METHOD (em_plain_mschap_v2));
 
 	/* Check for defaulting to plain MSCHAPv2 */
 	if (phase2_auth && !strcasecmp (phase2_auth, "mschapv2") &&
@@ -331,7 +319,6 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	                    I_NAME_COLUMN, _("CHAP"),
 	                    I_METHOD_COLUMN, em_chap,
 	                    -1);
-	eap_method_unref (EAP_METHOD (em_chap));
 
 	/* Check for defaulting to CHAP */
 	if (phase2_auth && !strcasecmp (phase2_auth, "chap"))
@@ -346,7 +333,6 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	                    I_NAME_COLUMN, _("MD5"),
 	                    I_METHOD_COLUMN, em_md5,
 	                    -1);
-	eap_method_unref (EAP_METHOD (em_md5));
 
 	/* Check for defaulting to MD5 */
 	if (phase2_auth && !strcasecmp (phase2_auth, "md5"))
@@ -361,7 +347,6 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	                    I_NAME_COLUMN, _("GTC"),
 	                    I_METHOD_COLUMN, em_gtc,
 	                    -1);
-	eap_method_unref (EAP_METHOD (em_gtc));
 
 	/* Check for defaulting to GTC */
 	if (phase2_auth && !strcasecmp (phase2_auth, "gtc"))
@@ -371,7 +356,6 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	g_assert (combo);
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (auth_model));
-	g_object_unref (G_OBJECT (auth_model));
 	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), active);
 
 	g_signal_connect (G_OBJECT (combo), "changed",

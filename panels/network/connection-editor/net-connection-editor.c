@@ -73,11 +73,10 @@ cancel_clicked_cb (NetConnectionEditor *editor)
 static void
 update_connection (NetConnectionEditor *editor)
 {
-        GVariant *settings;
+        g_autoptr(GVariant) settings = NULL;
 
         settings = nm_connection_to_dbus (editor->connection, NM_CONNECTION_SERIALIZE_ALL);
         nm_connection_replace_settings (editor->orig_connection, settings, NULL);
-        g_variant_unref (settings);
 }
 
 static void
@@ -94,14 +93,13 @@ updated_connection_cb (GObject            *source_object,
                        gpointer            user_data)
 {
         NetConnectionEditor *editor;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         gboolean success = TRUE;
 
         if (!nm_remote_connection_commit_changes_finish (NM_REMOTE_CONNECTION (source_object),
                                                          res, &error)) {
                 g_warning ("Failed to commit changes: %s", error->message);
                 success = FALSE;
-                g_error_free (error);
                 //return; FIXME return if cancelled
         }
 
@@ -117,13 +115,12 @@ added_connection_cb (GObject            *source_object,
                      gpointer            user_data)
 {
         NetConnectionEditor *editor;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         gboolean success = TRUE;
 
         if (!nm_client_add_connection_finish (NM_CLIENT (source_object), res, &error)) {
                 g_warning ("Failed to add connection: %s", error->message);
                 success = FALSE;
-                g_error_free (error);
                 /* Leave the editor open */
                 // return; FIXME return if cancelled
         }
@@ -243,8 +240,8 @@ net_connection_editor_error_dialog (NetConnectionEditor *editor,
 static void
 net_connection_editor_do_fallback (NetConnectionEditor *editor, const gchar *type)
 {
-        gchar *cmdline;
-        GError *error = NULL;
+        g_autofree gchar *cmdline = NULL;
+        g_autoptr(GError) error = NULL;
 
         if (editor->is_new_connection) {
                 cmdline = g_strdup_printf ("nm-connection-editor --type='%s' --create", type);
@@ -254,14 +251,11 @@ net_connection_editor_do_fallback (NetConnectionEditor *editor, const gchar *typ
         }
 
         g_spawn_command_line_async (cmdline, &error);
-        g_free (cmdline);
 
-        if (error) {
+        if (error)
                 net_connection_editor_error_dialog (editor,
                                                     _("Unable to open connection editor"),
                                                     error->message);
-                g_error_free (error);
-        }
 
         g_signal_emit (editor, signals[DONE], 0, FALSE);
 }
@@ -269,7 +263,7 @@ net_connection_editor_do_fallback (NetConnectionEditor *editor, const gchar *typ
 static void
 net_connection_editor_update_title (NetConnectionEditor *editor)
 {
-        gchar *id;
+        g_autofree gchar *id = NULL;
 
         if (editor->title_set)
                 return;
@@ -293,7 +287,6 @@ net_connection_editor_update_title (NetConnectionEditor *editor)
                 }
         }
         gtk_window_set_title (GTK_WINDOW (editor), id);
-        g_free (id);
 }
 
 static gboolean
@@ -338,13 +331,12 @@ validate (NetConnectionEditor *editor)
 
         valid = TRUE;
         for (l = editor->pages; l; l = l->next) {
-                GError *error = NULL;
+                g_autoptr(GError) error = NULL;
 
                 if (!ce_page_validate (CE_PAGE (l->data), editor->connection, &error)) {
                         valid = FALSE;
                         if (error) {
                                 g_debug ("Invalid setting %s: %s", ce_page_get_title (CE_PAGE (l->data)), error->message);
-                                g_error_free (error);
                         } else {
                                 g_debug ("Invalid setting %s", ce_page_get_title (CE_PAGE (l->data)));
                         }
@@ -566,23 +558,21 @@ complete_vpn_connection (NetConnectionEditor *editor, NMConnection *connection)
         }
 
         if (!nm_setting_connection_get_uuid (s_con)) {
-                gchar *uuid = nm_utils_uuid_generate ();
+                g_autofree gchar *uuid = nm_utils_uuid_generate ();
                 g_object_set (s_con,
                               NM_SETTING_CONNECTION_UUID, uuid,
                               NULL);
-                g_free (uuid);
         }
 
         if (!nm_setting_connection_get_id (s_con)) {
                 const GPtrArray *connections;
-                gchar *id;
+                g_autofree gchar *id = NULL;
 
                 connections = nm_client_get_connections (editor->client);
                 id = ce_page_get_next_available_name (connections, NAME_FORMAT_TYPE, _("VPN"));
                 g_object_set (s_con,
                               NM_SETTING_CONNECTION_ID, id,
                               NULL);
-                g_free (id);
         }
 
         s_type = nm_connection_get_setting (connection, NM_TYPE_SETTING_VPN);
@@ -675,7 +665,10 @@ select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
         /* Add the VPN types */
         for (iter = vpn_plugins; iter; iter = iter->next) {
                 NMVpnEditorPlugin *plugin = nm_vpn_plugin_info_get_editor_plugin (iter->data);
-                char *name, *desc, *desc_markup, *service_name;
+                g_autofree gchar *name = NULL;
+                g_autofree gchar *desc = NULL;
+                g_autofree gchar *desc_markup = NULL;
+                g_autofree gchar *service_name = NULL;
                 GtkStyleContext *context;
 
                 g_object_get (plugin,
@@ -705,13 +698,9 @@ select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
                 gtk_style_context_add_class (context, "dim-label");
                 gtk_box_pack_start (GTK_BOX (row_box), desc_label, FALSE, TRUE, 0);
 
-                g_free (name);
-                g_free (desc);
-                g_free (desc_markup);
-
                 gtk_container_add (GTK_CONTAINER (row), row_box);
                 gtk_widget_show_all (row);
-                g_object_set_data_full (G_OBJECT (row), "service_name", service_name, g_free);
+                g_object_set_data_full (G_OBJECT (row), "service_name", g_steal_pointer (&service_name), g_free);
                 gtk_container_add (GTK_CONTAINER (list), row);
         }
 
@@ -830,14 +819,13 @@ forgotten_cb (GObject *source_object,
 {
         NMRemoteConnection *connection = NM_REMOTE_CONNECTION (source_object);
         NetConnectionEditor *editor = user_data;
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         if (!nm_remote_connection_delete_finish (connection, res, &error)) {
                 if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
                         g_warning ("Failed to delete connection %s: %s",
                                    nm_connection_get_id (NM_CONNECTION (connection)),
                                    error->message);
-                g_error_free (error);
                 return;
         }
 
@@ -854,11 +842,10 @@ net_connection_editor_forget (NetConnectionEditor *editor)
 void
 net_connection_editor_reset (NetConnectionEditor *editor)
 {
-        GVariant *settings;
+        g_autoptr(GVariant) settings = NULL;
 
         settings = nm_connection_to_dbus (editor->orig_connection, NM_CONNECTION_SERIALIZE_ALL);
         nm_connection_replace_settings (editor->connection, settings, NULL);
-        g_variant_unref (settings);
 }
 
 void

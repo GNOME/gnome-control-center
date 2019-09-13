@@ -120,12 +120,12 @@ validate (CEPage *cepage, NMConnection *connection, GError **error)
 	gboolean valid = TRUE;
 
 	if (gtk_switch_get_active (page->enabled)) {
-		NMConnection *tmp_connection;
 		NMSetting *s_8021x;
 
 		/* FIXME: get failed property and error out of wireless security objects */
 		valid = wireless_security_validate (page->security, error);
 		if (valid) {
+			g_autoptr(NMConnection) tmp_connection = NULL;
 			NMSetting *s_con;
 
 			/* Here's a nice hack to work around the fact that ws_802_1x_fill_connection needs wireless setting. */
@@ -142,8 +142,6 @@ validate (CEPage *cepage, NMConnection *connection, GError **error)
 
 			s_8021x = nm_connection_get_setting (tmp_connection, NM_TYPE_SETTING_802_1X);
 			nm_connection_add_setting (connection, NM_SETTING (g_object_ref (s_8021x)));
-
-			g_object_unref (tmp_connection);
 		}
 	} else {
 		nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);

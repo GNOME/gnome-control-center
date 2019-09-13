@@ -154,7 +154,7 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
         NMActiveConnection *a;
         gint i;
         NMVpnConnectionState state;
-        gchar *title;
+        g_autofree gchar *title = NULL;
         NMClient *client;
 
         /* update title */
@@ -167,7 +167,6 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (vpn->connection));
         net_object_set_title (NET_OBJECT (vpn), title);
         gtk_label_set_label (GTK_LABEL (widget), title);
-        g_free (title);
 
         if (vpn->active_connection) {
                 g_signal_handlers_disconnect_by_func (vpn->active_connection,
@@ -281,7 +280,7 @@ vpn_proxy_edit (NetObject *object)
         GtkWidget *button, *window;
         NetConnectionEditor *editor;
         NMClient *client;
-        gchar *title;
+        g_autofree gchar *title = NULL;
 
         button = GTK_WIDGET (gtk_builder_get_object (vpn->builder,
                                                      "button_options"));
@@ -294,7 +293,6 @@ vpn_proxy_edit (NetObject *object)
                                             NULL, NULL, client);
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (vpn->connection));
         net_connection_editor_set_title (editor, title);
-        g_free (title);
 
         g_signal_connect (editor, "done", G_CALLBACK (editor_done), g_object_ref (vpn));
         net_connection_editor_run (editor);
@@ -411,7 +409,7 @@ net_vpn_class_init (NetVpnClass *klass)
 static void
 net_vpn_init (NetVpn *vpn)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
         GtkWidget *widget;
 
         vpn = net_vpn_get_instance_private (vpn);
@@ -422,7 +420,6 @@ net_vpn_init (NetVpn *vpn)
                                        &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
-                g_error_free (error);
                 return;
         }
 

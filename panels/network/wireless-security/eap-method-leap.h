@@ -31,5 +31,8 @@ EAPMethodLEAP *eap_method_leap_new (WirelessSecurity *ws_parent,
                                     NMConnection *connection,
                                     gboolean secrets_only);
 
+static void eap_method_leap_unref (EAPMethodLEAP *method) { eap_method_unref (EAP_METHOD (method)); }
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (EAPMethodLEAP, eap_method_leap_unref)
+
 #endif /* EAP_METHOD_LEAP_H */
 

@@ -107,9 +107,8 @@ add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar
 static gchar *
 get_last_used_string (NMConnection *connection)
 {
-        gchar *last_used = NULL;
-        GDateTime *now = NULL;
-        GDateTime *then = NULL;
+        g_autoptr(GDateTime) now = NULL;
+        g_autoptr(GDateTime) then = NULL;
         gint days;
         GTimeSpan diff;
         guint64 timestamp;
@@ -117,12 +116,10 @@ get_last_used_string (NMConnection *connection)
 
         s_con = nm_connection_get_setting_connection (connection);
         if (s_con == NULL)
-                goto out;
+                return NULL;
         timestamp = nm_setting_connection_get_timestamp (s_con);
-        if (timestamp == 0) {
-                last_used = g_strdup (_("never"));
-                goto out;
-        }
+        if (timestamp == 0)
+                return g_strdup (_("never"));
 
         /* calculate the amount of time that has elapsed */
         now = g_date_time_new_now_utc ();
@@ -130,18 +127,11 @@ get_last_used_string (NMConnection *connection)
         diff = g_date_time_difference  (now, then);
         days = diff / G_TIME_SPAN_DAY;
         if (days == 0)
-                last_used = g_strdup (_("today"));
+                return g_strdup (_("today"));
         else if (days == 1)
-                last_used = g_strdup (_("yesterday"));
+                return g_strdup (_("yesterday"));
         else
-                last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
-out:
-        if (now != NULL)
-                g_date_time_unref (now);
-        if (then != NULL)
-                g_date_time_unref (then);
-
-        return last_used;
+                return g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
 }
 
 static void
@@ -149,10 +139,10 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
 {
         NMIPConfig *ip4_config = NULL;
         NMIPConfig *ip6_config = NULL;
-        gchar *ip4_address = NULL;
-        gchar *ip4_route = NULL;
-        gchar *ip4_dns = NULL;
-        gchar *ip6_address = NULL;
+        g_autofree gchar *ip4_address = NULL;
+        g_autofree gchar *ip4_route = NULL;
+        g_autofree gchar *ip4_dns = NULL;
+        g_autofree gchar *ip6_address = NULL;
         gint i = 0;
 
         ip4_config = nm_device_get_ip4_config (device);
@@ -184,16 +174,10 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
                 add_details_row (details, i++, _("DNS"), ip4_dns);
 
         if (nm_device_get_state (device) != NM_DEVICE_STATE_ACTIVATED) {
-                gchar *last_used;
+                g_autofree gchar *last_used = NULL;
                 last_used = get_last_used_string (connection);
                 add_details_row (details, i++, _("Last used"), last_used);
-                g_free (last_used);
         }
-
-        g_free (ip4_address);
-        g_free (ip4_route);
-        g_free (ip4_dns);
-        g_free (ip6_address);
 }
 
 static void populate_ui (NetDeviceEthernet *device);
@@ -437,7 +421,8 @@ add_profile (GtkButton *button, NetDeviceEthernet *device)
 {
         NMConnection *connection;
         NMSettingConnection *sc;
-        gchar *uuid, *id;
+        g_autofree gchar *uuid = NULL;
+        g_autofree gchar *id = NULL;
         NetConnectionEditor *editor;
         GtkWidget *window;
         NMClient *client;
@@ -462,9 +447,6 @@ add_profile (GtkButton *button, NetDeviceEthernet *device)
                       NULL);
 
         nm_connection_add_setting (connection, nm_setting_wired_new ());
-
-        g_free (uuid);
-        g_free (id);
 
         window = gtk_widget_get_toplevel (GTK_WIDGET (button));
 
@@ -609,7 +591,7 @@ net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
 static void
 net_device_ethernet_init (NetDeviceEthernet *device)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         device->builder = gtk_builder_new ();
         gtk_builder_add_from_resource (device->builder,
@@ -617,7 +599,6 @@ net_device_ethernet_init (NetDeviceEthernet *device)
                                        &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
-                g_error_free (error);
                 return;
         }
 

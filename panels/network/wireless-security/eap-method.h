@@ -23,6 +23,8 @@
 #ifndef EAP_METHOD_H
 #define EAP_METHOD_H
 
+#include <NetworkManager.h>
+
 typedef struct _EAPMethod EAPMethod;
 
 typedef void        (*EMAddToSizeGroupFunc) (EAPMethod *method, GtkSizeGroup *group);
@@ -127,5 +129,7 @@ gboolean eap_method_ca_cert_ignore_get (EAPMethod *method, NMConnection *connect
 
 void eap_method_ca_cert_ignore_save (NMConnection *connection);
 void eap_method_ca_cert_ignore_load (NMConnection *connection);
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (EAPMethod, eap_method_unref)
 
 #endif /* EAP_METHOD_H */

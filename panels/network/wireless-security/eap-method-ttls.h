@@ -32,5 +32,8 @@ EAPMethodTTLS *eap_method_ttls_new (WirelessSecurity *ws_parent,
                                     gboolean is_editor,
                                     gboolean secrets_only);
 
-#endif /* EAP_METHOD_TLS_H */
+static void eap_method_ttls_unref (EAPMethodTTLS *method) { eap_method_unref (EAP_METHOD (method)); }
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (EAPMethodTTLS, eap_method_ttls_unref)
+
+#endif /* EAP_METHOD_TTLS_H */
 

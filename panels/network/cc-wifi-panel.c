@@ -121,16 +121,15 @@ update_panel_visibility (NMClient *client)
 void
 cc_wifi_panel_static_init_func (void)
 {
-  NMClient *client;
+  g_autoptr(NMClient) client = NULL;
 
   g_debug ("Monitoring NetworkManager for Wi-Fi devices");
 
   /* Create and store a NMClient instance if it doesn't exist yet */
   if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT))
     {
-      client = nm_client_new (NULL, NULL);
-      cc_object_storage_add_object (CC_OBJECT_NMCLIENT, client);
-      g_object_unref (client);
+      g_autoptr(NMClient) new_client = nm_client_new (NULL, NULL);
+      cc_object_storage_add_object (CC_OBJECT_NMCLIENT, new_client);
     }
 
   client = cc_object_storage_get_object (CC_OBJECT_NMCLIENT);
@@ -141,8 +140,6 @@ cc_wifi_panel_static_init_func (void)
   g_signal_connect (client, "device-removed", G_CALLBACK (update_panel_visibility), NULL);
 
   update_panel_visibility (client);
-
-  g_object_unref (client);
 }
 
 /* Auxiliary methods */
@@ -500,9 +497,8 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
 {
   CcWifiPanel *self;
   GDBusProxy *proxy;
-  GError *error;
+  g_autoptr(GError) error = NULL;
 
-  error = NULL;
   proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
 
   if (error)
@@ -510,7 +506,6 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_printerr ("Error creating rfkill proxy: %s\n", error->message);
 
-      g_error_free (error);
       return;
     }
 
@@ -651,7 +646,7 @@ cc_wifi_panel_set_property (GObject      *object,
 
       if (parameters)
         {
-          GPtrArray *array;
+          g_autoptr(GPtrArray) array = NULL;
           const gchar **args;
 
           array = variant_av_to_string_array (parameters);
@@ -679,11 +674,8 @@ cc_wifi_panel_set_property (GObject      *object,
           if (!verify_argv (self, (const char **) args))
             {
               reset_command_line_args (self);
-              g_ptr_array_unref (array);
               return;
             }
-
-          g_ptr_array_unref (array);
 
           handle_argv (self);
         }
@@ -739,9 +731,8 @@ cc_wifi_panel_init (CcWifiPanel *self)
   /* Create and store a NMClient instance if it doesn't exist yet */
   if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT))
     {
-      NMClient *client = nm_client_new (NULL, NULL);
+      g_autoptr(NMClient) client = nm_client_new (NULL, NULL);
       cc_object_storage_add_object (CC_OBJECT_NMCLIENT, client);
-      g_object_unref (client);
     }
 
   /* Load NetworkManager */
