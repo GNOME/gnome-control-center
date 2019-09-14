@@ -18,6 +18,8 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
+#include "config.h"
+
 #include "pp-host.h"
 
 #include <glib/gi18n.h>
@@ -356,7 +358,12 @@ _pp_host_get_remote_cups_devices_thread (GTask        *task,
     port = priv->port;
 
   /* Connect to remote CUPS server and get its devices */
+#ifdef HAVE_CUPS_HTTPCONNECT2
+  http = httpConnect2 (priv->hostname, port, NULL, AF_UNSPEC,
+                       HTTP_ENCRYPTION_IF_REQUESTED, 1, 30000, NULL);
+#else
   http = httpConnect (priv->hostname, port);
+#endif
   if (http)
     {
       num_of_devices = cupsGetDests2 (http, &dests);
