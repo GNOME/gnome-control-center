@@ -165,6 +165,10 @@ foreach header: check_headers
   assert(cc.has_header(header[1], args: cups_cflags), 'CUPS headers not found: ' + header[1])
 endforeach
 
+config_h.set10('HAVE_CUPS_HTTPCONNECT2',
+               cc.has_function('httpConnect2', dependencies: cups_dep),
+               description: 'Define if httpConnect2() is available in CUPS')
+
 # Optional dependency for the user accounts panel
 enable_cheese = get_option('cheese')
 if enable_cheese
