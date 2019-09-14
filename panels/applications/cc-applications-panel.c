@@ -18,8 +18,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#define G_LOG_DOMAIN "cc-applications-panel"
-
 #include <config.h>
 #include <glib/gi18n.h>
 

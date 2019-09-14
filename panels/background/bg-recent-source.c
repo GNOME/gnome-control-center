@@ -18,6 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#undef G_LOG_DOMAIN  /* tell compiler that the redefinition is intentional */
 #define G_LOG_DOMAIN "bg-recent-source"
 
 #include "bg-recent-source.h"
