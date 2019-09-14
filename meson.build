@@ -152,7 +152,7 @@ assert(cups_dep.found(), 'CUPS 1.4 or newer not found')
 # https://bugzilla.gnome.org/show_bug.cgi?id=696766
 cups_cflags = []
 if cups_dep.version().version_compare('>= 1.6')
-  cups_cflags += '-D_PPD_DEPRECATED=""'
+  cups_cflags += '-D_PPD_DEPRECATED='
 endif
 
 # cups headers
