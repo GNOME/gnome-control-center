@@ -32,6 +32,7 @@
 #include <NetworkManager.h>
 #include <polkit/polkit.h>
 
+#include "cc-wifi-hotspot-dialog.h"
 #include "list-box-helper.h"
 #include "hostname-helper.h"
 #include "network-dialogs.h"
@@ -64,6 +65,7 @@ struct _NetDeviceWifi
         gchar                   *selected_ssid_title;
         gchar                   *selected_connection_id;
         gchar                   *selected_ap_id;
+        CcWifiHotspotDialog     *hotspot_dialog;
 
         gint64                   last_scan;
         gboolean                 scanning;
@@ -1146,6 +1148,10 @@ start_hotspot (GtkButton *button, NetDeviceWifi *device_wifi)
         GtkWidget *message_area;
         GtkWidget *label;
         GString *str;
+        NMConnection *c;
+        g_autofree gchar *hostname = NULL;
+        g_autofree gchar *ssid = NULL;
+        gint response;
 
         client = net_object_get_client (NET_OBJECT (device_wifi));
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
@@ -1169,6 +1175,45 @@ start_hotspot (GtkButton *button, NetDeviceWifi *device_wifi)
         }
 
         window = gtk_widget_get_toplevel (GTK_WIDGET (button));
+
+        if (!device_wifi->hotspot_dialog)
+                device_wifi->hotspot_dialog = cc_wifi_hotspot_dialog_new (GTK_WINDOW (window));
+        cc_wifi_hotspot_dialog_set_device (device_wifi->hotspot_dialog, NM_DEVICE_WIFI (device));
+        hostname = get_hostname ();
+        ssid =  pretty_hostname_to_ssid (hostname);
+        cc_wifi_hotspot_dialog_set_hostname (device_wifi->hotspot_dialog, ssid);
+                c = net_device_wifi_get_hotspot_connection (device_wifi);
+        if (c)
+                cc_wifi_hotspot_dialog_set_connection (device_wifi->hotspot_dialog, c);
+
+        response = gtk_dialog_run (GTK_DIALOG (device_wifi->hotspot_dialog));
+
+        if (response == GTK_RESPONSE_APPLY) {
+                NMConnection *connection;
+                GCancellable *cancellable;
+
+                cancellable = net_object_get_cancellable (NET_OBJECT (device_wifi));
+
+                connection = cc_wifi_hotspot_dialog_get_connection (device_wifi->hotspot_dialog);
+                if (NM_IS_REMOTE_CONNECTION (connection))
+                        nm_remote_connection_commit_changes_async (NM_REMOTE_CONNECTION (connection),
+                                                                   TRUE,
+                                                                   cancellable,
+                                                                   overwrite_ssid_cb,
+                                                                   device_wifi);
+                else
+                        nm_client_add_and_activate_connection_async (client,
+                                                                     connection,
+                                                                     device,
+                                                                     NULL,
+                                                                     cancellable,
+                                                                     activate_new_cb,
+                                                                     device_wifi);
+        }
+
+        gtk_widget_hide (GTK_WIDGET (device_wifi->hotspot_dialog));
+
+        return;
 
         str = g_string_new ("");
 
