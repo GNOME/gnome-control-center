@@ -367,8 +367,13 @@ printer_rename (const gchar *old_name,
   /*
    * Gather additional informations about the original printer
    */
-  if ((http = httpConnectEncrypt (cupsServer (), ippPort (),
-                                  cupsEncryption ())) != NULL)
+#ifdef HAVE_CUPS_HTTPCONNECT2
+  http = httpConnect2 (cupsServer (), ippPort (), NULL, AF_UNSPEC,
+                       cupsEncryption (), 1, 30000, NULL);
+#else
+  http = httpConnectEncrypt (cupsServer (), ippPort (), cupsEncryption ());
+#endif
+  if (http != NULL)
     {
       request = ippNewRequest (IPP_GET_PRINTER_ATTRIBUTES);
       ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
@@ -3005,7 +3010,12 @@ printer_get_ppd_func (gpointer user_data)
     {
       http_t *http;
 
+#ifdef HAVE_CUPS_HTTPCONNECT2
+      http = httpConnect2 (data->host_name, data->port, NULL, AF_UNSPEC,
+                           HTTP_ENCRYPTION_IF_REQUESTED, 1, 30000, NULL);
+#else
       http = httpConnect (data->host_name, data->port);
+#endif
       if (http)
         {
           data->result = g_strdup (cupsGetPPD2 (http, data->printer_name));

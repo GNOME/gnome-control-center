@@ -69,7 +69,7 @@ printers_panel_lib = static_library(
   sources: sources,
   include_directories: [top_inc, common_inc, shell_inc],
   dependencies: deps,
-  c_args: cflags
+  c_args: cflags + cups_cflags,
 )
 panels_libs += [ printers_panel_lib ]
 
