@@ -406,35 +406,57 @@ cheese_camera_device_monitor_new_cb (GObject *source,
 }
 #endif /* HAVE_CHEESE */
 
-static void
-setup_photo_popup (CcAvatarChooser *self)
+static GStrv
+get_settings_facesdirs (void)
+{
+        g_autoptr(GSettings) settings = g_settings_new ("org.gnome.desktop.interface");
+        g_auto(GStrv) settings_dirs = g_settings_get_strv (settings, "avatar-directories");
+        GPtrArray *facesdirs = g_ptr_array_new ();
+
+        if (settings_dirs != NULL) {
+                int i;
+                for (i = 0; settings_dirs[i] != NULL; i++) {
+                        char *path = settings_dirs[i];
+                        if (g_strcmp0 (path, "") != 0)
+                                g_ptr_array_add (facesdirs, g_strdup (path));
+                }
+        }
+        g_ptr_array_add (facesdirs, NULL);
+
+        return (GStrv) g_ptr_array_steal (facesdirs, NULL);
+}
+
+static GStrv
+get_system_facesdirs (void)
+{
+        const char * const * data_dirs;
+        GPtrArray *facesdirs;
+        int i;
+
+        facesdirs = g_ptr_array_new ();
+
+        data_dirs = g_get_system_data_dirs ();
+        for (i = 0; data_dirs[i] != NULL; i++) {
+                char *path = g_build_filename (data_dirs[i], "pixmaps", "faces", NULL);
+                g_ptr_array_add (facesdirs, path);
+        }
+        g_ptr_array_add (facesdirs, NULL);
+        return (GStrv) g_ptr_array_steal (facesdirs, NULL);
+}
+
+static gboolean
+add_faces_from_dirs (GListStore *faces, GStrv facesdirs, gboolean add_all)
 {
         GFile *file, *dir;
         GFileInfo *info;
         GFileEnumerator *enumerator;
         GFileType type;
         const gchar *target;
-        const gchar * const * dirs;
         guint i;
-        gboolean added_faces;
+        gboolean added_faces = FALSE;
 
-        self->faces = g_list_store_new (G_TYPE_FILE);
-        gtk_flow_box_bind_model (GTK_FLOW_BOX (self->flowbox),
-                                 G_LIST_MODEL (self->faces),
-                                 create_face_widget,
-                                 self,
-                                 NULL);
-
-        g_signal_connect_object (self->flowbox, "child-activated",
-                                 G_CALLBACK (face_widget_activated), self, G_CONNECT_SWAPPED);
-
-        dirs = g_get_system_data_dirs ();
-        for (i = 0; dirs[i] != NULL; i++) {
-                char *path;
-
-                path = g_build_filename (dirs[i], "pixmaps", "faces", NULL);
-                dir = g_file_new_for_path (path);
-                g_free (path);
+        for (i = 0; facesdirs[i] != NULL; i++) {
+                dir = g_file_new_for_path (facesdirs[i]);
 
                 enumerator = g_file_enumerate_children (dir,
                                                         G_FILE_ATTRIBUTE_STANDARD_NAME ","
@@ -449,8 +471,6 @@ setup_photo_popup (CcAvatarChooser *self)
                 }
 
                 while ((info = g_file_enumerator_next_file (enumerator, NULL, NULL)) != NULL) {
-                        added_faces = TRUE;
-
                         type = g_file_info_get_file_type (info);
                         if (type != G_FILE_TYPE_REGULAR &&
                             type != G_FILE_TYPE_SYMBOLIC_LINK) {
@@ -465,17 +485,43 @@ setup_photo_popup (CcAvatarChooser *self)
                         }
 
                         file = g_file_get_child (dir, g_file_info_get_name (info));
-                        g_list_store_append (self->faces, file);
+                        g_list_store_append (faces, file);
 
                         g_object_unref (info);
+                        added_faces = TRUE;
                 }
 
                 g_file_enumerator_close (enumerator, NULL, NULL);
                 g_object_unref (enumerator);
                 g_object_unref (dir);
 
-                if (added_faces)
+                if (added_faces && !add_all)
                         break;
+        }
+        return added_faces;
+}
+
+
+static void
+setup_photo_popup (CcAvatarChooser *self)
+{
+        g_auto(GStrv) settings_facesdirs = NULL;
+
+        self->faces = g_list_store_new (G_TYPE_FILE);
+        gtk_flow_box_bind_model (GTK_FLOW_BOX (self->flowbox),
+                                 G_LIST_MODEL (self->faces),
+                                 create_face_widget,
+                                 self,
+                                 NULL);
+
+        g_signal_connect_object (self->flowbox, "child-activated",
+                                 G_CALLBACK (face_widget_activated), self, G_CONNECT_SWAPPED);
+
+        settings_facesdirs = get_settings_facesdirs ();
+
+        if (!add_faces_from_dirs (self->faces, settings_facesdirs, TRUE)) {
+                g_auto(GStrv) system_facesdirs = get_system_facesdirs ();
+                add_faces_from_dirs (self->faces, system_facesdirs, FALSE);
         }
 
 #ifdef HAVE_CHEESE
