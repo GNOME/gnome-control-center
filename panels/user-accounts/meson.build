@@ -82,6 +82,16 @@ meson.add_install_script('sh', '-c',
                           ln -sf legacy/$(basename $f) $DESTDIR@1@/$(basename $f);
                           done'''.format(legacy_image_dir, image_dir))
 
+schemaconf = configuration_data()
+schemaconf.set('GETTEXT_PACKAGE', meson.project_name())
+schemadir = join_paths(control_center_datadir, 'glib-2.0', 'schemas')
+schema = configure_file(
+  input: 'org.gnome.controlcenter.user-accounts.gschema.xml.in',
+  output: 'org.gnome.controlcenter.user-accounts.gschema.xml',
+  configuration: schemaconf,
+  install_dir: schemadir
+)
+
 polkit = 'org.gnome.controlcenter.@0@.policy'.format(cappletname)
 
 i18n.merge_file(
