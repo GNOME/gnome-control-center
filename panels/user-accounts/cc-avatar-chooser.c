@@ -411,17 +411,112 @@ cheese_camera_device_monitor_new_cb (GObject *source,
 }
 #endif /* HAVE_CHEESE */
 
+static GSList *
+get_settings_facesdirs (void)
+{
+        GSList *facesdirs = NULL;
+        int i;
+
+        GSettingsSchemaSource *source = g_settings_schema_source_get_default ();
+        g_autoptr(GSettingsSchema) schema = NULL;
+        g_autoptr(GSettings) settings = NULL;
+        g_auto(GStrv) settings_dirs = NULL;
+
+        if (source) {
+                schema = g_settings_schema_source_lookup (source,
+                                                          "org.gnome.desktop.interface",
+                                                          FALSE);
+        }
+
+        if (schema) {
+                settings = g_settings_new_with_path ("org.gnome.desktop.interface",
+                                                     "/org/gnome/desktop/interface/");
+                settings_dirs = g_settings_get_strv (settings, "facesdirs");
+
+                if (settings_dirs != NULL) {
+                        for (i = 0; settings_dirs[i] != NULL; i++) {
+                                char *path = settings_dirs[i];
+                                if (path != NULL && g_strcmp0 (path, "") != 0)
+                                        facesdirs = g_slist_prepend (facesdirs, g_strdup (path));
+                        }
+                }
+        }
+
+        return g_slist_reverse (facesdirs);
+}
+
+static GSList *
+get_system_facesdirs (void)
+{
+        GSList *facesdirs = NULL;
+        const char * const * data_dirs;
+        int i;
+
+        data_dirs = g_get_system_data_dirs ();
+        for (i = 0; data_dirs[i] != NULL; i++) {
+                char *path = g_build_filename (data_dirs[i], "pixmaps", "faces", NULL);
+                facesdirs = g_slist_prepend (facesdirs, path);
+        }
+
+        return g_slist_reverse (facesdirs);
+}
+
+static gboolean
+add_faces_from_dirs (GListStore *faces, GSList *facesdirs, gboolean add_all)
+{
+        GSList *facesdir_it;
+        gboolean added_faces = FALSE;
+        const gchar *target;
+        GFileType type;
+
+        for (facesdir_it = facesdirs; facesdir_it; facesdir_it = facesdir_it->next) {
+                g_autoptr(GFileEnumerator) enumerator = NULL;
+                g_autoptr(GFile) dir = NULL;
+                gpointer infoptr;
+                const char *path = facesdir_it->data;
+
+                dir = g_file_new_for_path (path);
+                enumerator = g_file_enumerate_children (dir,
+                                                        G_FILE_ATTRIBUTE_STANDARD_NAME ","
+                                                        G_FILE_ATTRIBUTE_STANDARD_TYPE ","
+                                                        G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK ","
+                                                        G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET,
+                                                        G_FILE_QUERY_INFO_NONE,
+                                                        NULL, NULL);
+
+                if (enumerator == NULL)
+                        continue;
+
+                while ((infoptr = g_file_enumerator_next_file (enumerator, NULL, NULL)) != NULL) {
+                        g_autoptr (GFileInfo) info = infoptr;
+                        g_autoptr (GFile) face_file = NULL;
+
+                        type = g_file_info_get_file_type (info);
+                        if (type != G_FILE_TYPE_REGULAR && type != G_FILE_TYPE_SYMBOLIC_LINK)
+                                continue;
+
+                        target = g_file_info_get_symlink_target (info);
+                        if (target != NULL && g_str_has_prefix (target , "legacy/"))
+                                continue;
+
+                        face_file = g_file_get_child (dir, g_file_info_get_name (info));
+                        g_list_store_append (faces, face_file);
+                        added_faces = TRUE;
+                }
+
+                g_file_enumerator_close (enumerator, NULL, NULL);
+
+                if (added_faces && !add_all)
+                        break;
+        }
+        return added_faces;
+}
+
 static void
 setup_photo_popup (CcAvatarChooser *self)
 {
-        GFile *file, *dir;
-        GFileInfo *info;
-        GFileEnumerator *enumerator;
-        GFileType type;
-        const gchar *target;
-        const gchar * const * dirs;
-        guint i;
-        gboolean added_faces;
+        GSList *facesdirs;
+        gboolean added_faces = FALSE;
 
         self->faces = g_list_store_new (G_TYPE_FILE);
         gtk_flow_box_bind_model (GTK_FLOW_BOX (self->flowbox),
@@ -433,54 +528,14 @@ setup_photo_popup (CcAvatarChooser *self)
         g_signal_connect (self->flowbox, "child-activated",
                           G_CALLBACK (face_widget_activated), self);
 
-        dirs = g_get_system_data_dirs ();
-        for (i = 0; dirs[i] != NULL; i++) {
-                char *path;
+        facesdirs = get_settings_facesdirs ();
+        added_faces = add_faces_from_dirs (self->faces, facesdirs, TRUE);
+        g_slist_free_full (facesdirs, g_free);
 
-                path = g_build_filename (dirs[i], "pixmaps", "faces", NULL);
-                dir = g_file_new_for_path (path);
-                g_free (path);
-
-                enumerator = g_file_enumerate_children (dir,
-                                                        G_FILE_ATTRIBUTE_STANDARD_NAME ","
-                                                        G_FILE_ATTRIBUTE_STANDARD_TYPE ","
-                                                        G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK ","
-                                                        G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET,
-                                                        G_FILE_QUERY_INFO_NONE,
-                                                        NULL, NULL);
-                if (enumerator == NULL) {
-                        g_object_unref (dir);
-                        continue;
-                }
-
-                while ((info = g_file_enumerator_next_file (enumerator, NULL, NULL)) != NULL) {
-                        added_faces = TRUE;
-
-                        type = g_file_info_get_file_type (info);
-                        if (type != G_FILE_TYPE_REGULAR &&
-                            type != G_FILE_TYPE_SYMBOLIC_LINK) {
-                                g_object_unref (info);
-                                continue;
-                        }
-
-                        target = g_file_info_get_symlink_target (info);
-                        if (target != NULL && g_str_has_prefix (target , "legacy/")) {
-                                g_object_unref (info);
-                                continue;
-                        }
-
-                        file = g_file_get_child (dir, g_file_info_get_name (info));
-                        g_list_store_append (self->faces, file);
-
-                        g_object_unref (info);
-                }
-
-                g_file_enumerator_close (enumerator, NULL, NULL);
-                g_object_unref (enumerator);
-                g_object_unref (dir);
-
-                if (added_faces)
-                        break;
+        if (!added_faces) {
+                facesdirs = get_system_facesdirs ();
+                add_faces_from_dirs (self->faces, facesdirs, FALSE);
+                g_slist_free_full (facesdirs, g_free);
         }
 
 #ifdef HAVE_CHEESE
