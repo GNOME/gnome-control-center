@@ -411,6 +411,42 @@ cheese_camera_device_monitor_new_cb (GObject *source,
 }
 #endif /* HAVE_CHEESE */
 
+static GSList *
+get_facesdirs (void)
+{
+        GSList *facesdirs = NULL;
+        const gchar * const * data_dirs;
+        int i;
+
+        GSettingsSchemaSource *source = g_settings_schema_source_get_default ();
+        g_autoptr(GSettingsSchema) schema = NULL;
+        g_autoptr(GSettings) settings = NULL;
+        g_autofree char *facesdir = NULL;
+
+        if (source) {
+                schema = g_settings_schema_source_lookup (source,
+                                                          "org.gnome.desktop.interface",
+                                                          FALSE);
+        }
+
+        if (schema) {
+                settings = g_settings_new_with_path ("org.gnome.desktop.interface",
+                                                     "/org/gnome/desktop/interface/");
+
+                facesdir = g_settings_get_string (settings, "facesdir");
+                if (facesdir != NULL && g_strcmp0 (facesdir, "") != 0)
+                        facesdirs = g_slist_prepend (facesdirs, g_strdup (facesdir));
+        }
+
+        data_dirs = g_get_system_data_dirs ();
+        for (i = 0; data_dirs[i] != NULL; i++) {
+                char *path = g_build_filename (data_dirs[i], "pixmaps", "faces", NULL);
+                facesdirs = g_slist_prepend (facesdirs, path);
+        }
+
+        return g_slist_reverse (facesdirs);
+}
+
 static void
 setup_photo_popup (CcAvatarChooser *self)
 {
@@ -419,8 +455,7 @@ setup_photo_popup (CcAvatarChooser *self)
         GFileEnumerator *enumerator;
         GFileType type;
         const gchar *target;
-        const gchar * const * dirs;
-        guint i;
+        GSList *facesdirs, *facesdir_it;
         gboolean added_faces;
 
         self->faces = g_list_store_new (G_TYPE_FILE);
@@ -433,13 +468,11 @@ setup_photo_popup (CcAvatarChooser *self)
         g_signal_connect (self->flowbox, "child-activated",
                           G_CALLBACK (face_widget_activated), self);
 
-        dirs = g_get_system_data_dirs ();
-        for (i = 0; dirs[i] != NULL; i++) {
-                char *path;
+        facesdirs = get_facesdirs ();
+        for (facesdir_it = facesdirs; facesdir_it; facesdir_it = facesdir_it->next) {
+                const char *path = facesdir_it->data;
 
-                path = g_build_filename (dirs[i], "pixmaps", "faces", NULL);
                 dir = g_file_new_for_path (path);
-                g_free (path);
 
                 enumerator = g_file_enumerate_children (dir,
                                                         G_FILE_ATTRIBUTE_STANDARD_NAME ","
@@ -482,6 +515,8 @@ setup_photo_popup (CcAvatarChooser *self)
                 if (added_faces)
                         break;
         }
+
+        g_slist_free_full (facesdirs, g_free);
 
 #ifdef HAVE_CHEESE
         gtk_widget_set_visible (self->take_picture_button, TRUE);
