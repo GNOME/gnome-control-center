@@ -72,11 +72,13 @@
               <object class="GtkBox" id="add_connection_outer_box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
                 <child>
                   <object class="GtkBox" id="add_connection_inner_box">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
+                    <property name="vexpand">True</property>
                     <child>
                       <object class="GtkFrame" id="add_connection_frame">
                         <property name="width_request">300</property>
@@ -84,12 +86,14 @@
                         <property name="can_focus">False</property>
                         <property name="label_xalign">0</property>
                         <property name="shadow_type">in</property>
+                        <property name="vexpand">True</property>
+                        <property name="valign">center</property>
                         <child>
                           <placeholder/>
                         </child>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
+                        <property name="expand">True</property>
                         <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
