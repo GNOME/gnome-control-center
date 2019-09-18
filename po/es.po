@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-08-26 13:31+0000\n"
-"PO-Revision-Date: 2019-08-28 09:11+0200\n"
+"POT-Creation-Date: 2019-09-17 22:33+0000\n"
+"PO-Revision-Date: 2019-09-18 13:33+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 3.32.1\n"
+"X-Generator: Gtranslator 3.34.0\n"
 
 #: panels/applications/cc-applications-panel.c:561
 msgid "System Bus"
@@ -85,7 +85,7 @@ msgstr "Sistema de achivos"
 
 #: panels/applications/cc-applications-panel.c:591
 #: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:277
-#: shell/cc-window.c:959 shell/cc-window.ui:131
+#: shell/cc-window.c:975 shell/cc-window.ui:132
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Configuración"
@@ -256,7 +256,7 @@ msgstr "Características del sistema usadas por esta aplicación"
 #: panels/applications/cc-applications-panel.ui:230
 #: panels/applications/cc-applications-panel.ui:236
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:161
+#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:162
 msgid "Search"
 msgstr "Buscar"
 
@@ -353,7 +353,7 @@ msgstr "Seleccionar una imagen"
 #: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/cc-color-panel.ui:657 panels/color/color-calibrate.ui:25
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:947
+#: panels/display/cc-display-panel.c:950
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
@@ -1378,21 +1378,21 @@ msgid "To change time or date settings, you need to authenticate."
 msgstr ""
 "Para cambiar la configuración de la fecha o de la hora, debe autenticarse."
 
-#: panels/display/cc-display-panel.c:958
+#: panels/display/cc-display-panel.c:961
 #: panels/network/connection-editor/connection-editor.ui:27
 #: panels/network/network-wifi.ui:38
 msgid "_Apply"
 msgstr "_Aplicar"
 
-#: panels/display/cc-display-panel.c:979
+#: panels/display/cc-display-panel.c:982
 msgid "Apply Changes?"
 msgstr "¿Aplicar los cambios?"
 
-#: panels/display/cc-display-panel.c:984
+#: panels/display/cc-display-panel.c:987
 msgid "Changes Cannot be Applied"
 msgstr "No se pueden aplicar los cambios"
 
-#: panels/display/cc-display-panel.c:985
+#: panels/display/cc-display-panel.c:988
 msgid "This could be due to hardware limitations."
 msgstr "Esto puede deber a limitaciones hardware."
 
@@ -2120,7 +2120,7 @@ msgid "Add Custom Shortcut"
 msgstr "Añadir un atajo personalizado"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:3
-#: panels/region/cc-region-panel.ui:394 shell/cc-window.ui:339
+#: panels/region/cc-region-panel.ui:394 shell/cc-window.ui:340
 msgid "Keyboard Shortcuts"
 msgstr "Combinaciones de teclas"
 
@@ -2675,10 +2675,11 @@ msgid "Make available to _other users"
 msgstr "Hacer disponible para _otros usuarios"
 
 #: panels/network/connection-editor/details-page.ui:376
-msgid "Restrict background data usage"
-msgstr "Restringir el uso de datos en segundo plano"
+#| msgid "Restrict background data usage"
+msgid "Restrict _background data usage"
+msgstr "Restringir el uso de datos en _segundo plano"
 
-#: panels/network/connection-editor/details-page.ui:386
+#: panels/network/connection-editor/details-page.ui:387
 msgid "Appropriate for connections that have data charges or limits."
 msgstr "Adecuado para conexiones que consumen o limitan los datos."
 
@@ -4022,19 +4023,19 @@ msgstr "Otra"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:626
+#: panels/online-accounts/cc-online-accounts-panel.c:627
 #, c-format
 msgid "%s Account"
 msgstr "Cuenta de %s"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:923
+#: panels/online-accounts/cc-online-accounts-panel.c:924
 msgid "Error removing account"
 msgstr "Error al quitar la cuenta"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:988
+#: panels/online-accounts/cc-online-accounts-panel.c:989
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "<b>%s</b> eliminado"
@@ -5661,7 +5662,7 @@ msgid "Input methods can’t be used on the login screen"
 msgstr ""
 "Los métodos de entrada no se pueden usar en la pantalla de inicio de sesión"
 
-#: panels/region/cc-region-panel.c:1511
+#: panels/region/cc-region-panel.c:1512
 msgid "Login _Screen"
 msgstr "Pantalla de inicio de _sesión"
 
@@ -5849,7 +5850,7 @@ msgstr "Activo"
 msgid "Choose a Folder"
 msgstr "Elija una carpeta"
 
-#: panels/sharing/cc-sharing-panel.c:725
+#: panels/sharing/cc-sharing-panel.c:726
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5859,7 +5860,7 @@ msgstr ""
 "«Público» con otros en su red actual usando: <a href=\"dav://%s\">dav://%s</"
 "a>"
 
-#: panels/sharing/cc-sharing-panel.c:727
+#: panels/sharing/cc-sharing-panel.c:728
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5870,7 +5871,7 @@ msgstr ""
 "conectarse usando el comando de shell segura:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:729
+#: panels/sharing/cc-sharing-panel.c:730
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
@@ -5879,11 +5880,11 @@ msgstr ""
 "La compartición de pantalla permite a los usuarios remotos ver o controlar "
 "su pantalla conectándose a: <a href=\"vnc://%s\">vnc://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:833
+#: panels/sharing/cc-sharing-panel.c:834
 msgid "Copy"
 msgstr "Copiar"
 
-#: panels/sharing/cc-sharing-panel.c:1286
+#: panels/sharing/cc-sharing-panel.c:1287
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "Compartir"
@@ -6084,7 +6085,7 @@ msgstr "Volumen"
 msgid "Alert Sound"
 msgstr "Sonido de alerta"
 
-#: panels/sound/cc-volume-slider.c:63
+#: panels/sound/cc-volume-slider.c:93
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
@@ -7508,9 +7509,6 @@ msgid "Unknown error"
 msgstr "Error desconocido"
 
 #: panels/user-accounts/user-utils.c:427
-#| msgid ""
-#| "The username should only consist of upper and lower case letters from a-"
-#| "z, digits and the following characters: . - _"
 msgid ""
 "The username should usually only consist of lower case letters from a-z, "
 "digits and the following characters: - _"
@@ -7794,7 +7792,7 @@ msgstr "Pulsación del botón derecho del ratón"
 msgid "Right Mouse Button Click"
 msgstr "Pulsación del botón del medio del ratón"
 
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:241
+#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:242
 msgid "Back"
 msgstr "Atrás"
 
@@ -7882,19 +7880,19 @@ msgstr "[PANEL] [ARGUMENTO…]"
 msgid "Available panels:"
 msgstr "Paneles disponibles:"
 
-#: shell/cc-window.ui:146
+#: shell/cc-window.ui:147
 msgid "All Settings"
 msgstr "Todas las configuraciones"
 
-#: shell/cc-window.ui:184
+#: shell/cc-window.ui:185
 msgid "Primary Menu"
 msgstr "Menú primario"
 
-#: shell/cc-window.ui:331
+#: shell/cc-window.ui:332
 msgid "Warning: Development Version"
 msgstr "Advertencia: versión de desarrollo"
 
-#: shell/cc-window.ui:332
+#: shell/cc-window.ui:333
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -7904,7 +7902,7 @@ msgstr ""
 "Puede experimentar un comportamiento incorrecto del sistema, pérdida de "
 "datos y otros problemas inesperados."
 
-#: shell/cc-window.ui:343
+#: shell/cc-window.ui:344
 msgid "Help"
 msgstr "Ayuda"
 
