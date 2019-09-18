@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-08-26 13:31+0000\n"
-"PO-Revision-Date: 2019-09-04 10:51+0200\n"
+"POT-Creation-Date: 2019-09-17 22:33+0000\n"
+"PO-Revision-Date: 2019-09-18 08:11+0200\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italiano <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -78,7 +78,7 @@ msgstr "File system"
 
 #: panels/applications/cc-applications-panel.c:591
 #: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:277
-#: shell/cc-window.c:959 shell/cc-window.ui:131
+#: shell/cc-window.c:975 shell/cc-window.ui:132
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Impostazioni"
@@ -249,7 +249,7 @@ msgstr "Funzionalità di sistema utilizzate da questa applicazione."
 #: panels/applications/cc-applications-panel.ui:230
 #: panels/applications/cc-applications-panel.ui:236
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:161
+#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:162
 msgid "Search"
 msgstr "Cerca"
 
@@ -344,7 +344,7 @@ msgstr "Seleziona un'immagine"
 #: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/cc-color-panel.ui:657 panels/color/color-calibrate.ui:25
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:947
+#: panels/display/cc-display-panel.c:950
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
@@ -1377,21 +1377,21 @@ msgid "To change time or date settings, you need to authenticate."
 msgstr ""
 "Per cambiare le impostazioni dell'ora e della data è necessario autenticarsi."
 
-#: panels/display/cc-display-panel.c:958
+#: panels/display/cc-display-panel.c:961
 #: panels/network/connection-editor/connection-editor.ui:27
 #: panels/network/network-wifi.ui:38
 msgid "_Apply"
 msgstr "_Applica"
 
-#: panels/display/cc-display-panel.c:979
+#: panels/display/cc-display-panel.c:982
 msgid "Apply Changes?"
 msgstr "Applicare le modifiche?"
 
-#: panels/display/cc-display-panel.c:984
+#: panels/display/cc-display-panel.c:987
 msgid "Changes Cannot be Applied"
 msgstr "Le modifiche non possono essere applicate"
 
-#: panels/display/cc-display-panel.c:985
+#: panels/display/cc-display-panel.c:988
 msgid "This could be due to hardware limitations."
 msgstr "Ciò potrebbe essere dovuto a limitazioni hardware."
 
@@ -2123,7 +2123,7 @@ msgid "Add Custom Shortcut"
 msgstr "Aggiungi scorciatoia personalizzata"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:3
-#: panels/region/cc-region-panel.ui:394 shell/cc-window.ui:339
+#: panels/region/cc-region-panel.ui:394 shell/cc-window.ui:340
 msgid "Keyboard Shortcuts"
 msgstr "Scorciatoie da tastiera"
 
@@ -2680,10 +2680,10 @@ msgid "Make available to _other users"
 msgstr "Rendere disponibile agli altri _utenti"
 
 #: panels/network/connection-editor/details-page.ui:376
-msgid "Restrict background data usage"
-msgstr "Limita l'utilizzo di dati"
+msgid "Restrict _background data usage"
+msgstr "Limita l'utilizzo di _dati"
 
-#: panels/network/connection-editor/details-page.ui:386
+#: panels/network/connection-editor/details-page.ui:387
 msgid "Appropriate for connections that have data charges or limits."
 msgstr ""
 "Utile per le connessioni con un limite massimo di dati o che applicano "
@@ -2951,9 +2951,6 @@ msgstr "Regola la connessione a Internet"
 
 #. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in.in:19
-#| msgid ""
-#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
-#| "vpn;DNS;"
 msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
 msgstr ""
 "rete;network;IP;LAN;proxy;WAN;boradband;banda larga;modem;bluetooth;vpn;DNS;"
@@ -4030,19 +4027,19 @@ msgstr "Altro"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:626
+#: panels/online-accounts/cc-online-accounts-panel.c:627
 #, c-format
 msgid "%s Account"
 msgstr "Account %s"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:923
+#: panels/online-accounts/cc-online-accounts-panel.c:924
 msgid "Error removing account"
 msgstr "Errore nel rimuovere l'account"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:988
+#: panels/online-accounts/cc-online-accounts-panel.c:989
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "Account <b>%s</b> rimosso"
@@ -5675,7 +5672,7 @@ msgstr "Aggiungi una sorgente di input"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Non è possibile usare i metodi di input nella schermata di accesso"
 
-#: panels/region/cc-region-panel.c:1511
+#: panels/region/cc-region-panel.c:1512
 msgid "Login _Screen"
 msgstr "Schermata di _accesso"
 
@@ -5864,7 +5861,7 @@ msgstr "Attivo"
 msgid "Choose a Folder"
 msgstr "Scegliere una cartella"
 
-#: panels/sharing/cc-sharing-panel.c:725
+#: panels/sharing/cc-sharing-panel.c:726
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5874,7 +5871,7 @@ msgstr ""
 "propria cartella Pubblici sulla rete attuale usando: <a href=\"dav://%s"
 "\">dav://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:727
+#: panels/sharing/cc-sharing-panel.c:728
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5885,7 +5882,7 @@ msgstr ""
 "usando il comando Secure Shell:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:729
+#: panels/sharing/cc-sharing-panel.c:730
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
@@ -5895,11 +5892,11 @@ msgstr ""
 "controllare il proprio schermo connettendosi a <a href=\"vnc://%s\">vnc://"
 "%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:833
+#: panels/sharing/cc-sharing-panel.c:834
 msgid "Copy"
 msgstr "Copia"
 
-#: panels/sharing/cc-sharing-panel.c:1286
+#: panels/sharing/cc-sharing-panel.c:1287
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "Condivisione"
@@ -6099,7 +6096,7 @@ msgstr "Volume"
 msgid "Alert Sound"
 msgstr "Suono di avviso"
 
-#: panels/sound/cc-volume-slider.c:63
+#: panels/sound/cc-volume-slider.c:93
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
@@ -7814,7 +7811,7 @@ msgstr "Clic pulsante centrale del mouse"
 msgid "Right Mouse Button Click"
 msgstr "Clic pulsante destro del mouse"
 
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:241
+#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:242
 msgid "Back"
 msgstr "Indietro"
 
@@ -7904,19 +7901,19 @@ msgstr "[PANNELLO] [ARGOMENTO..]"
 msgid "Available panels:"
 msgstr "Pannelli disponibili:"
 
-#: shell/cc-window.ui:146
+#: shell/cc-window.ui:147
 msgid "All Settings"
 msgstr "Tutte le impostazioni"
 
-#: shell/cc-window.ui:184
+#: shell/cc-window.ui:185
 msgid "Primary Menu"
 msgstr "Menù primario"
 
-#: shell/cc-window.ui:331
+#: shell/cc-window.ui:332
 msgid "Warning: Development Version"
 msgstr "Attenzione: versione di sviluppo"
 
-#: shell/cc-window.ui:332
+#: shell/cc-window.ui:333
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -7926,7 +7923,7 @@ msgstr ""
 "sviluppo. È possibile incorrere in problemi di sistema, perdita di dati e "
 "altri problemi inattesi. "
 
-#: shell/cc-window.ui:343
+#: shell/cc-window.ui:344
 msgid "Help"
 msgstr "Aiuto"
 
