@@ -75,6 +75,25 @@ cc_search_locations_dialog_init (CcSearchLocationsDialog *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 }
 
+static Place *
+place_new (CcSearchLocationsDialog *dialog,
+           GFile *location,
+           gchar *display_name,
+           PlaceType place_type)
+{
+  Place *new_place = g_slice_new0 (Place);
+
+  new_place->dialog = dialog;
+  new_place->location = location;
+  if (display_name != NULL)
+    new_place->display_name = display_name;
+  else
+    new_place->display_name = g_file_get_basename (location);
+  new_place->place_type = place_type;
+
+  return new_place;
+}
+
 static void
 place_free (Place * p)
 {
@@ -125,16 +144,10 @@ get_bookmarks (CcSearchLocationsDialog *self)
                   label = g_strdup (space + 1);
                 }
 
-              bookmark = g_slice_new0 (Place);
-              bookmark->dialog = self;
-              bookmark->location = g_file_new_for_uri (lines[idx]);
-
-              if (label != NULL)
-                bookmark->display_name = label;
-              else
-                bookmark->display_name = g_file_get_basename (bookmark->location);
-
-              bookmark->place_type = PLACE_BOOKMARKS;
+              bookmark = place_new (self,
+                                    g_file_new_for_uri (lines[idx]),
+                                    label,
+                                    PLACE_BOOKMARKS);
 
               bookmarks = g_list_prepend (bookmarks, bookmark);
             }
@@ -174,11 +187,10 @@ get_xdg_dirs (CcSearchLocationsDialog *self)
           idx == G_USER_DIRECTORY_DESKTOP)
         continue;
 
-      xdg_dir = g_slice_new0 (Place);
-      xdg_dir->dialog = self;
-      xdg_dir->location = g_file_new_for_path (path);
-      xdg_dir->display_name = g_file_get_basename (xdg_dir->location);
-      xdg_dir->place_type = PLACE_XDG;
+      xdg_dir = place_new (self,
+                           g_file_new_for_path (path),
+                           NULL,
+                           PLACE_XDG);
 
       xdg_dirs = g_list_prepend (xdg_dirs, xdg_dir);
     }
@@ -260,12 +272,10 @@ get_tracker_locations (CcSearchLocationsDialog *self)
     {
       path = path_from_tracker_dir (locations[idx]);
 
-      location = g_slice_new0 (Place);
-      location->dialog = self;
-      location->location = g_file_new_for_commandline_arg (path);
-      location->display_name = g_file_get_basename (location->location);
-      location->place_type = PLACE_OTHER;
-
+      location = place_new (self,
+                            g_file_new_for_commandline_arg (path),
+                            NULL,
+                            PLACE_OTHER);
       list = g_list_prepend (list, location);
     }
 
@@ -286,11 +296,10 @@ get_places_list (CcSearchLocationsDialog *self)
   places = g_hash_table_new_full (g_file_hash, (GEqualFunc) g_file_equal, NULL, (GDestroyNotify) place_free);
 
   /* add home */
-  place = g_slice_new0 (Place);
-  place->dialog = self;
-  place->location = g_file_new_for_path (g_get_home_dir ());
-  place->place_type = PLACE_XDG;
-  place->display_name = g_strdup (_("Home"));
+  place = place_new (self,
+                     g_file_new_for_path (g_get_home_dir ()),
+                     g_strdup (_("Home")),
+                     PLACE_XDG);
   g_hash_table_insert (places, place->location, place);
 
   /* first, load the XDG dirs */
@@ -591,11 +600,12 @@ add_file_chooser_response (CcSearchLocationsDialog *self,
       return;
     }
 
-  place = g_slice_new0 (Place);
-  place->dialog = self;
-  place->location = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (widget));
+  place = place_new (self,
+                     gtk_file_chooser_get_file (GTK_FILE_CHOOSER (widget)),
+                     NULL,
+                     0);
+
   place->settings_key = TRACKER_KEY_RECURSIVE_DIRECTORIES;
-  place->display_name = g_file_get_basename (place->location);
 
   new_values = place_get_new_settings_values (self, place, FALSE);
   g_settings_set_strv (self->tracker_preferences, place->settings_key, (const gchar **) new_values->pdata);
