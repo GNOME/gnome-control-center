@@ -261,6 +261,7 @@ get_tracker_locations (CcSearchLocationsDialog *self)
       path = path_from_tracker_dir (locations[idx]);
 
       location = g_slice_new0 (Place);
+      location->dialog = self;
       location->location = g_file_new_for_commandline_arg (path);
       location->display_name = g_file_get_basename (location->location);
       location->place_type = PLACE_OTHER;
