@@ -81,7 +81,7 @@ place_new (CcSearchLocationsDialog *dialog,
            gchar *display_name,
            PlaceType place_type)
 {
-  Place *new_place = g_slice_new0 (Place);
+  Place *new_place = g_new0 (Place, 1);
 
   new_place->dialog = dialog;
   new_place->location = location;
@@ -103,7 +103,7 @@ place_free (Place * p)
   g_object_unref (p->location);
   g_free (p->display_name);
 
-  g_slice_free (Place, p);
+  g_free (p);
 }
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (Place, place_free)
