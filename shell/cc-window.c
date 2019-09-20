@@ -851,6 +851,7 @@ cc_window_constructed (GObject *object)
                             self);
 
   update_headerbar_buttons (self);
+  hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "sidebar");
 
   G_OBJECT_CLASS (cc_window_parent_class)->constructed (object);
 }
