@@ -20,7 +20,6 @@
 #include <math.h>
 #include <pulse/pulseaudio.h>
 #include <gvc-mixer-control.h>
-#include <canberra-gtk.h>
 
 #include "cc-sound-resources.h"
 #include "cc-volume-slider.h"
