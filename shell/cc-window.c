@@ -143,8 +143,7 @@ show_sidebar (CcWindow *self)
 }
 
 static void
-on_sidebar_activated_cb (CcPanel  *panel,
-                         CcWindow *self)
+on_sidebar_activated_cb (CcWindow *self)
 {
   show_panel (self);
 }
@@ -204,7 +203,7 @@ activate_panel (CcWindow          *self,
   /* Ensure we show the panel when when the leaflet is folded and a sidebar
    * widget's row is activated.
    */
-  g_signal_connect_object (self->current_panel, "sidebar-activated", G_CALLBACK (on_sidebar_activated_cb), self, 0);
+  g_signal_connect_object (self->current_panel, "sidebar-activated", G_CALLBACK (on_sidebar_activated_cb), self, G_CONNECT_SWAPPED);
 
   /* Finish profiling */
   g_timer_stop (timer);
@@ -310,10 +309,10 @@ update_list_title (CcWindow *self)
 }
 
 static void
-on_row_changed_cb (GtkTreeModel *model,
+on_row_changed_cb (CcWindow     *self,
                    GtkTreePath  *path,
                    GtkTreeIter  *iter,
-                   CcWindow     *self)
+                   GtkTreeModel *model)
 {
   g_autofree gchar *id = NULL;
   CcPanelVisibility visibility;
@@ -380,7 +379,7 @@ setup_model (CcWindow *shell)
     }
 
   /* React to visibility changes */
-  g_signal_connect_object (model, "row-changed", G_CALLBACK (on_row_changed_cb), shell, 0);
+  g_signal_connect_object (model, "row-changed", G_CALLBACK (on_row_changed_cb), shell, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -534,19 +533,15 @@ update_fold_state (CcWindow *shell)
 }
 
 static void
-notify_header_visible_child_cb (HdyLeaflet *leaflet,
-                                GParamSpec *pspec,
-                                CcWindow   *shell)
+notify_header_visible_child_cb (CcWindow *self)
 {
-  update_fold_state (shell);
+  update_fold_state (self);
 }
 
 static void
-notify_fold_cb (HdyLeaflet *leaflet,
-                GParamSpec *pspec,
-                CcWindow   *shell)
+notify_fold_cb (CcWindow *self)
 {
-  update_fold_state (shell);
+  update_fold_state (self);
 }
 
 static void
@@ -565,9 +560,8 @@ on_main_leaflet_fold_changed_cb (CcWindow *self)
 }
 
 static void
-show_panel_cb (CcPanelList *panel_list,
-               const gchar *panel_id,
-               CcWindow    *self)
+show_panel_cb (CcWindow    *self,
+               const gchar *panel_id)
 {
   if (!panel_id)
     return;
@@ -576,8 +570,7 @@ show_panel_cb (CcPanelList *panel_list,
 }
 
 static void
-search_entry_activate_cb (GtkEntry *entry,
-                          CcWindow *self)
+search_entry_activate_cb (CcWindow *self)
 {
   gboolean changed;
 
@@ -587,15 +580,13 @@ search_entry_activate_cb (GtkEntry *entry,
 }
 
 static void
-back_button_clicked_cb (GtkButton *button,
-                        CcWindow  *self)
+back_button_clicked_cb (CcWindow *self)
 {
   show_sidebar (self);
 }
 
 static void
-previous_button_clicked_cb (GtkButton *button,
-                            CcWindow  *shell)
+previous_button_clicked_cb (CcWindow *shell)
 {
   g_debug ("Num previous panels? %d", g_queue_get_length (shell->previous_panels));
 
@@ -609,9 +600,7 @@ previous_button_clicked_cb (GtkButton *button,
 }
 
 static void
-gdk_window_set_cb (GObject    *object,
-                   GParamSpec *pspec,
-                   CcWindow   *self)
+gdk_window_set_cb (CcWindow *self)
 {
   GdkWindow *window;
   g_autofree gchar *str = NULL;
@@ -629,9 +618,7 @@ gdk_window_set_cb (GObject    *object,
 }
 
 static gboolean
-window_map_event_cb (GtkWidget *widget,
-                     GdkEvent  *event,
-                     CcWindow  *self)
+window_map_event_cb (CcWindow *self)
 {
   /* If focus ends up in a category icon view one of the items is
    * immediately selected which looks odd when we are starting up, so
@@ -641,9 +628,8 @@ window_map_event_cb (GtkWidget *widget,
 }
 
 static gboolean
-window_key_press_event_cb (GtkWidget   *win,
-                           GdkEventKey *event,
-                           CcWindow    *self)
+window_key_press_event_cb (CcWindow    *self,
+                           GdkEventKey *event)
 {
   GdkModifierType state;
   CcPanelListView view;
@@ -653,11 +639,11 @@ window_key_press_event_cb (GtkWidget   *win,
 
   retval = GDK_EVENT_PROPAGATE;
   state = event->state;
-  keymap = gdk_keymap_get_for_display (gtk_widget_get_display (win));
+  keymap = gdk_keymap_get_for_display (gtk_widget_get_display (GTK_WIDGET (self)));
   gdk_keymap_add_virtual_modifiers (keymap, &state);
 
   state = state & gtk_accelerator_get_default_mod_mask ();
-  is_rtl = gtk_widget_get_direction (win) == GTK_TEXT_DIR_RTL;
+  is_rtl = gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL;
   view = cc_panel_list_get_view (self->panel_list);
 
   /* The search only happens when we're in the MAIN view */
@@ -710,14 +696,12 @@ window_key_press_event_cb (GtkWidget   *win,
 }
 
 static void
-on_development_warning_dialog_responded_cb (GtkWidget *dialog,
-                                            gint       response,
-                                            CcWindow  *self)
+on_development_warning_dialog_responded_cb (CcWindow *self)
 {
   g_debug ("Disabling development build warning dialog");
   g_settings_set_boolean (self->settings, "show-development-warning", FALSE);
 
-  gtk_widget_hide (dialog);
+  gtk_widget_hide (GTK_WIDGET (self->development_warning_dialog));
 }
 
 /* CcShell implementation */
