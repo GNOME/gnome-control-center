@@ -58,6 +58,7 @@ struct _CcWindow
   GtkWidget  *header;
   GtkWidget  *header_box;
   GtkWidget  *main_leaflet;
+  GtkWidget  *sidebar_box;
   GtkWidget  *list_scrolled;
   GtkWidget  *panel_headerbar;
   GtkWidget  *search_scrolled;
@@ -130,10 +131,24 @@ remove_all_custom_widgets (CcWindow *self)
 }
 
 static void
+show_panel (CcWindow *self)
+{
+  hdy_leaflet_set_visible_child (HDY_LEAFLET (self->main_leaflet), self->stack);
+  hdy_leaflet_set_visible_child (HDY_LEAFLET (self->header_box), self->panel_headerbar);
+}
+
+static void
+show_sidebar (CcWindow *self)
+{
+  hdy_leaflet_set_visible_child (HDY_LEAFLET (self->main_leaflet), self->sidebar_box);
+  hdy_leaflet_set_visible_child (HDY_LEAFLET (self->header_box), self->header);
+}
+
+static void
 on_sidebar_activated_cb (CcPanel  *panel,
                          CcWindow *self)
 {
-  hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "panel");
+  show_panel (self);
 }
 
 static gboolean
@@ -415,7 +430,7 @@ set_active_panel_from_id (CcShell      *shell,
     {
       g_object_set (G_OBJECT (self->current_panel), "parameters", parameters, NULL);
       if (force_moving_to_the_panel || self->previous_list_view == view)
-        hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "panel");
+        show_panel (self);
       self->previous_list_view = view;
       CC_RETURN (TRUE);
     }
@@ -451,7 +466,7 @@ set_active_panel_from_id (CcShell      *shell,
     add_current_panel_to_history (shell, start_id);
 
   if (force_moving_to_the_panel)
-    hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "panel");
+    show_panel (self);
 
   g_free (self->current_panel_id);
   self->current_panel_id = g_strdup (start_id);
@@ -575,9 +590,9 @@ search_entry_activate_cb (GtkEntry *entry,
 
 static void
 back_button_clicked_cb (GtkButton *button,
-                        CcWindow  *shell)
+                        CcWindow  *self)
 {
-  hdy_leaflet_set_visible_child_name (HDY_LEAFLET (shell->main_leaflet), "sidebar");
+  show_sidebar (self);
 }
 
 static void
@@ -851,7 +866,7 @@ cc_window_constructed (GObject *object)
                             self);
 
   update_headerbar_buttons (self);
-  hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "sidebar");
+  show_sidebar (self);
 
   G_OBJECT_CLASS (cc_window_parent_class)->constructed (object);
 }
@@ -919,6 +934,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, list_scrolled);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, main_leaflet);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, sidebar_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, previous_button);

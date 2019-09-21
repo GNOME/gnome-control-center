@@ -76,9 +76,6 @@
               </packing>
             </child>
           </object>
-          <packing>
-            <property name="name">sidebar</property>
-          </packing>
         </child>
         <child>
           <object class="GtkSeparator" id="panel_separator">
@@ -102,9 +99,6 @@
               <class name="background"/>
             </style>
           </object>
-          <packing>
-            <property name="name">panel</property>
-          </packing>
         </child>
       </object>
     </child>
@@ -121,7 +115,6 @@
             <property name="mode-transition-duration" bind-source="main_leaflet" bind-property="mode-transition-duration" bind-flags="bidirectional|sync-create"/>
             <property name="child-transition-type" bind-source="main_leaflet" bind-property="child-transition-type" bind-flags="bidirectional|sync-create"/>
             <property name="child-transition-duration" bind-source="main_leaflet" bind-property="child-transition-duration" bind-flags="bidirectional|sync-create"/>
-            <property name="visible-child-name" bind-source="main_leaflet" bind-property="visible-child-name" bind-flags="bidirectional|sync-create"/>
             <signal name="notify::visible-child" handler="notify_header_visible_child_cb" swapped="no"/>
             <signal name="notify::fold" handler="notify_fold_cb" object="CcWindow" after="yes" swapped="no"/>
             <child>
@@ -201,9 +194,6 @@
                   </packing>
                 </child>
               </object>
-              <packing>
-                <property name="name">sidebar</property>
-              </packing>
             </child>
             <child>
               <object class="GtkSeparator" id="header_separator">
@@ -270,9 +260,6 @@
                   </packing>
                 </child>
               </object>
-              <packing>
-                <property name="name">panel</property>
-              </packing>
             </child>
           </object>
         </child>
