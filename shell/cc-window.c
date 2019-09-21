@@ -59,9 +59,7 @@ struct _CcWindow
   GtkWidget  *header_box;
   GtkWidget  *main_leaflet;
   GtkWidget  *sidebar_box;
-  GtkWidget  *list_scrolled;
   GtkWidget  *panel_headerbar;
-  GtkWidget  *search_scrolled;
   GtkWidget  *panel_list;
   GtkWidget  *previous_button;
   GtkWidget  *back_revealer;
@@ -932,7 +930,6 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_group);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_sizegroup);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, list_scrolled);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, main_leaflet);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, sidebar_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_headerbar);
