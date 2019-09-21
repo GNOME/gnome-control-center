@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkAdjustment" id="adjustment1">
+    <property name="lower">-1</property>
+    <property name="upper">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment11">
+    <property name="lower">-1</property>
+    <property name="upper">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment4">
+    <property name="lower">100</property>
+    <property name="upper">1000</property>
+    <property name="value">400</property>
+    <property name="step_increment">100</property>
+    <property name="page_increment">100</property>
+  </object>
+  <template class="CcUsbPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <property name="can_focus">True</property>
+    <child>
+      <object class="GtkScrolledWindow" id="scrolled_window">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="shadow_type">none</property>
+        <property name="hscrollbar_policy">never</property>
+        <signal name="size-allocate" handler="on_content_size_changed" object="CcUsbPanel" swapped="yes"/>
+        <child>
+          <object class="GtkBox" id="prefs_widget">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="margin_top">32</property>
+            <property name="margin_bottom">32</property>
+            <property name="orientation">vertical</property>
+
+
+            <!-- Protection switch -->
+            <child>
+              <object class="GtkBox" id="keyboard_protection_box">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">horizontal</property>
+                <property name="spacing">12</property>
+                <property name="margin_bottom">32</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="hexpand">False</property>
+                        <property name="halign">start</property>
+                        <property name="xalign">0.0</property>
+                        <property name="label" translatable="yes">Keyboard Protection</property>
+                        <property name="mnemonic_widget">keyboard_protection_switch</property>
+                        <attributes>
+                          <attribute name="weight" value="bold" />
+                        </attributes>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkStack" id="keyboard_protection_mode">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="transition-type">crossfade</property>
+                        <property name="homogeneous">True</property>
+
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="margin_left">0</property>
+                            <property name="hexpand">False</property>
+                            <property name="vexpand">False</property>
+                            <property name="label" translatable="yes">Limit the allowed number of keys for untrusted USB keyboards.</property>
+                            <property name="use_markup">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">0.0</property>
+                            <property name="yalign">0.0</property>
+                            <property name="max-width-chars">45</property>
+                          </object>
+                          <packing>
+                            <property name="name">enabled</property>
+                          </packing>
+                        </child>
+
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">6</property>
+                    <property name="halign">center</property>
+                    <property name="valign">start</property>
+
+                    <child>
+                      <object class="GtkSwitch" id="keyboard_protection_switch">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="halign">end</property>
+                        <property name="valign">start</property>
+                        <property name="active">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                    <property name="pack-type">end</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+
+            <!-- Keyboard list -->
+            <child>
+              <object class="GtkStack" id="devices_stack">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="transition-type">crossfade</property>
+
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">32</property>
+
+                    <!-- Device List  -->
+                    <child>
+                      <object class="GtkBox" id="devices_box">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">12</property>
+
+                        <!-- Device List: Header  -->
+                        <child>
+                          <object class="GtkBox" id="devices_header">
+                            <property name="visible">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="halign">start</property>
+                            <property name="spacing">6</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">Devices</property>
+                                <property name="xalign">0.0</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                        <!-- Device List: Devices  -->
+                        <child>
+                          <object class="GtkFrame">
+                            <property name="visible">True</property>
+                            <property name="valign">start</property>
+                            <property name="vexpand">False</property>
+                            <style>
+                              <class name="view" />
+                            </style>
+                            <child>
+                              <object class="GtkListBox" id="devices_list">
+                                <property name="visible">True</property>
+                                <property name="selection-mode">none</property>
+                                <property name="can_focus">True</property>
+                                <signal name="row-activated"
+                                        handler="on_device_entry_row_activated_cb"
+                                        object="CcUsbPanel"
+                                        swapped="yes" />
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                      </object>
+                    </child>
+
+                  </object>
+                  <packing>
+                    <property name="name">have-keyboards</property>
+                  </packing>
+                </child>
+
+                <!-- No Devices  -->
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="halign">start</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Devices</property>
+                        <property name="xalign">0.0</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">No USB keyboards attached</property>
+                        <property name="xalign">0.0</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">no-keyboards</property>
+                  </packing>
+                </child> <!-- End of: No Devices  -->
+
+              </object>
+            </child> <!-- End of Stack: devices/no-devices -->
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

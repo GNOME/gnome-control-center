@@ -193,6 +193,13 @@ config_h.set10('HAVE_FN_EXPLICIT_BZERO',
                cc.has_function('explicit_bzero', prefix: '''#include <string.h>'''),
                description: 'Define if explicit_bzero is available')
 
+# USB keyboards protection
+udev_rules_dir = get_option('udev_rules_dir')
+if udev_rules_dir == ''
+        udev = dependency('udev', required : false)
+        udev_rules_dir = join_paths(udev.get_pkgconfig_variable('udevdir'), 'rules.d')
+endif
+
 if host_is_linux
   # network manager
   network_manager_deps = [

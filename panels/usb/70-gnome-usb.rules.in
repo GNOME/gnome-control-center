@@ -1,0 +1,2 @@
+
+SUBSYSTEM=="input", IMPORT{program}="@control_center_bindir@/cc-usb-device-helper @usbdbdir@ get_auth $env{ID_VENDOR_ID} $env{ID_MODEL_ID}"

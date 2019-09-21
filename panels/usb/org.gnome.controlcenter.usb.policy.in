@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+
+<policyconfig>
+  <vendor>The GNOME Project</vendor>
+  <vendor_url>http://www.gnome.org/</vendor_url>
+
+  <action id="org.gnome.controlcenter.usb">
+    <description>Manage USB keyboards authorization</description>
+    <message>Authentication is required to change USB keyboards permission</message>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">@libexecdir@/cc-usb-device-helper</annotate>
+  </action>
+
+</policyconfig>
