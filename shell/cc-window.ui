@@ -6,9 +6,9 @@
     <property name="window_position">center</property>
     <property name="default-width">980</property>
     <property name="default-height">640</property>
-    <signal name="notify::window" handler="gdk_window_set_cb" object="CcWindow" swapped="no" />
-    <signal name="map-event" handler="window_map_event_cb" object="CcWindow" swapped="no" />
-    <signal name="key-press-event" handler="window_key_press_event_cb" object="CcWindow" swapped="no" after="yes" />
+    <signal name="notify::window" handler="gdk_window_set_cb" object="CcWindow" swapped="yes" />
+    <signal name="map-event" handler="window_map_event_cb" object="CcWindow" swapped="yes" />
+    <signal name="key-press-event" handler="window_key_press_event_cb" object="CcWindow" swapped="yes" after="yes" />
     <child>
       <object class="HdyLeaflet" id="main_leaflet">
         <property name="visible">True</property>
@@ -38,7 +38,7 @@
                     <property name="primary_icon_name">edit-find-symbolic</property>
                     <property name="primary_icon_activatable">False</property>
                     <property name="primary_icon_sensitive">False</property>
-                    <signal name="activate" handler="search_entry_activate_cb" object="CcWindow" swapped="no" />
+                    <signal name="activate" handler="search_entry_activate_cb" object="CcWindow" swapped="yes" />
                     <signal name="notify::text" handler="update_list_title" object="CcWindow" swapped="yes" />
                   </object>
                 </child>
@@ -50,7 +50,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkScrolledWindow" id="list_scrolled">
+              <object class="GtkScrolledWindow">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="vexpand">True</property>
@@ -65,7 +65,7 @@
                     <property name="can_focus">True</property>
                     <property name="search-mode" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="bidirectional" />
                     <property name="search-query" bind-source="search_entry" bind-property="text" bind-flags="default" />
-                    <signal name="show-panel" handler="show_panel_cb" object="CcWindow" swapped="no" />
+                    <signal name="show-panel" handler="show_panel_cb" object="CcWindow" swapped="yes" />
                   </object>
                 </child>
               </object>
@@ -76,9 +76,6 @@
               </packing>
             </child>
           </object>
-          <packing>
-            <property name="name">sidebar</property>
-          </packing>
         </child>
         <child>
           <object class="GtkSeparator" id="panel_separator">
@@ -102,9 +99,6 @@
               <class name="background"/>
             </style>
           </object>
-          <packing>
-            <property name="name">panel</property>
-          </packing>
         </child>
       </object>
     </child>
@@ -121,9 +115,8 @@
             <property name="mode-transition-duration" bind-source="main_leaflet" bind-property="mode-transition-duration" bind-flags="bidirectional|sync-create"/>
             <property name="child-transition-type" bind-source="main_leaflet" bind-property="child-transition-type" bind-flags="bidirectional|sync-create"/>
             <property name="child-transition-duration" bind-source="main_leaflet" bind-property="child-transition-duration" bind-flags="bidirectional|sync-create"/>
-            <property name="visible-child-name" bind-source="main_leaflet" bind-property="visible-child-name" bind-flags="bidirectional|sync-create"/>
-            <signal name="notify::visible-child" handler="notify_header_visible_child_cb" swapped="no"/>
-            <signal name="notify::fold" handler="notify_fold_cb" object="CcWindow" after="yes" swapped="no"/>
+            <signal name="notify::visible-child" handler="notify_header_visible_child_cb" swapped="yes"/>
+            <signal name="notify::fold" handler="notify_fold_cb" object="CcWindow" after="yes" swapped="yes"/>
             <child>
               <object class="GtkHeaderBar" id="header">
                 <property name="visible">True</property>
@@ -134,7 +127,7 @@
                   <object class="GtkButton" id="previous_button">
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <signal name="clicked" handler="previous_button_clicked_cb" object="CcWindow" swapped="no" />
+                    <signal name="clicked" handler="previous_button_clicked_cb" object="CcWindow" swapped="yes" />
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
@@ -201,9 +194,6 @@
                   </packing>
                 </child>
               </object>
-              <packing>
-                <property name="name">sidebar</property>
-              </packing>
             </child>
             <child>
               <object class="GtkSeparator" id="header_separator">
@@ -233,7 +223,7 @@
                         <property name="receives_default">False</property>
                         <property name="valign">center</property>
                         <property name="use-underline">True</property>
-                        <signal name="clicked" handler="back_button_clicked_cb" object="CcWindow" swapped="no" />
+                        <signal name="clicked" handler="back_button_clicked_cb" object="CcWindow" swapped="yes" />
                         <style>
                           <class name="image-button"/>
                         </style>
@@ -270,9 +260,6 @@
                   </packing>
                 </child>
               </object>
-              <packing>
-                <property name="name">panel</property>
-              </packing>
             </child>
           </object>
         </child>
@@ -331,7 +318,7 @@
     <property name="buttons">ok</property>
     <property name="text" translatable="yes">Warning: Development Version</property>
     <property name="secondary-text" translatable="yes">This version of Settings should only be used for development purposes. You may experience incorrect system behavior, data loss, and other unexpected issues. </property>
-    <signal name="response" handler="on_development_warning_dialog_responded_cb" object="CcWindow" swapped="no" />
+    <signal name="response" handler="on_development_warning_dialog_responded_cb" object="CcWindow" swapped="yes" />
   </object>
 
   <menu id="primary_menu">
