@@ -447,7 +447,12 @@ cc_wifi_hotspot_dialog_class_init (CcWifiHotspotDialogClass *klass)
 static void
 cc_wifi_hotspot_dialog_init (CcWifiHotspotDialog *self)
 {
+  g_autofree gchar *title = NULL;
+
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  title = g_strdup_printf ("<big><b>%s</b></big>", _("Turn On Wi-Fi Hotspot?"));
+  gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (self), title);
 }
 
 CcWifiHotspotDialog *
