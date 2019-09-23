@@ -262,7 +262,10 @@ subdir('po')
 subdir('panels')
 subdir('shell')
 subdir('search-provider')
-subdir('tests')
+
+if get_option('tests')
+  subdir('tests')
+endif
 
 if get_option('documentation')
   subdir('man')
@@ -278,6 +281,7 @@ output += '\n        ' + meson.project_name() + ' - ' + meson.project_version() 
 output += '    ===================================\n'
 output += ' Options \n'
 output += '     Documentation .............................. ' + get_option('documentation').to_string() + '\n'
+output += '     Build Tests ................................ ' + get_option('tests').to_string() + '\n'
 output += '     Tracing .................................... ' + enable_tracing.to_string() + '\n'
 output += '     gnome-session libexecdir ................... ' + gnome_session_libexecdir + '\n'
 output += '     Optimized .................................. ' + control_center_optimized.to_string() + '\n'
