@@ -299,12 +299,12 @@ ce_page_complete_init (CEPage      *page,
 	                                  setting_name,
 	                                  secrets,
 	                                  &update_error)) {
-		g_warning ("Couldn't update secrets: %s", update_error->message);
 		/* Success */
 		emit_initialized (page, NULL);
 		return;
 	}
 
+        g_warning ("Couldn't update secrets: %s", update_error->message);
 	g_warning ("Failed to update connection secrets due to an unknown error.");
 	emit_initialized (page, NULL);
 }
