@@ -110,6 +110,8 @@ wifi_hotspot_dialog_update_main_label (CcWifiHotspotDialog *self)
 
   g_assert (CC_IS_WIFI_HOTSPOT_DIALOG (self));
 
+  gtk_label_set_markup (self->connection_label, "");
+
   if (!self->device)
     return;
 
