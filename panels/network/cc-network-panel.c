@@ -501,7 +501,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 
         if (type == NM_DEVICE_TYPE_MODEM &&
             g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager1/Modem/")) {
-                g_autoptr(GDBusObject) modem_object;
+                g_autoptr(GDBusObject) modem_object = NULL;
 
                 if (panel->modem_manager == NULL) {
                         g_warning ("Cannot grab information for modem at %s: No ModemManager support",
