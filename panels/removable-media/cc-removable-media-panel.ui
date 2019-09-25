@@ -21,7 +21,7 @@
             <property name="spacing">18</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkBox" id="media_handling_vbox">
+              <object class="GtkBox" id="handlers_box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="spacing">10</property>
@@ -74,7 +74,7 @@
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">CD _audio</property>
                                 <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">media_audio_cdda_combobox</property>
+                                <property name="mnemonic_widget">audio_cdda_chooser</property>
                                 <style>
                                  <class name="dim-label"/>
                                 </style>
@@ -91,7 +91,7 @@
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">_DVD video</property>
                                 <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">media_video_dvd_combobox</property>
+                                <property name="mnemonic_widget">video_dvd_chooser</property>
                                 <style>
                                  <class name="dim-label"/>
                                 </style>
@@ -102,7 +102,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkAppChooserButton" id="media_audio_cdda_combobox">
+                              <object class="GtkAppChooserButton" id="audio_cdda_chooser">
                                 <property name="visible">True</property>
                                 <property name="hexpand">True</property>
                                 <property name="can_focus">False</property>
@@ -114,7 +114,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkAppChooserButton" id="media_video_dvd_combobox">
+                              <object class="GtkAppChooserButton" id="video_dvd_chooser">
                                 <property name="visible">True</property>
                                 <property name="hexpand">True</property>
                                 <property name="can_focus">False</property>
@@ -132,7 +132,7 @@
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">_Music player</property>
                                 <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">media_music_player_combobox</property>
+                                <property name="mnemonic_widget">music_player_chooser</property>
                                 <style>
                                  <class name="dim-label"/>
                                 </style>
@@ -143,7 +143,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkAppChooserButton" id="media_music_player_combobox">
+                              <object class="GtkAppChooserButton" id="music_player_chooser">
                                 <property name="visible">True</property>
                                 <property name="hexpand">True</property>
                                 <property name="can_focus">False</property>
@@ -161,7 +161,7 @@
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">_Photos</property>
                                 <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">media_dcf_combobox</property>
+                                <property name="mnemonic_widget">dcf_chooser</property>
                                 <style>
                                  <class name="dim-label"/>
                                 </style>
@@ -172,7 +172,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkAppChooserButton" id="media_dcf_combobox">
+                              <object class="GtkAppChooserButton" id="dcf_chooser">
                                 <property name="visible">True</property>
                                 <property name="hexpand">True</property>
                                 <property name="can_focus">False</property>
@@ -190,7 +190,7 @@
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">_Software</property>
                                 <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">media_software_combobox</property>
+                                <property name="mnemonic_widget">software_chooser</property>
                                 <style>
                                  <class name="dim-label"/>
                                 </style>
@@ -201,7 +201,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkAppChooserButton" id="media_software_combobox">
+                              <object class="GtkAppChooserButton" id="software_chooser">
                                 <property name="visible">True</property>
                                 <property name="hexpand">True</property>
                                 <property name="can_focus">False</property>
@@ -270,7 +270,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkCheckButton" id="media_autorun_never_checkbutton">
+              <object class="GtkCheckButton" id="autorun_never_checkbutton">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
@@ -306,7 +306,7 @@
     </child>
   </template>
 
-  <object class="GtkDialog" id="media_dialog">
+  <object class="GtkDialog" id="other_type_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">10</property>
     <property name="resizable">False</property>
@@ -364,10 +364,10 @@
                         <property name="column_spacing">6</property>
                         <property name="row_spacing">10</property>
                         <child>
-                          <object class="GtkComboBox" id="media_other_type_combobox">
+                          <object class="GtkComboBox" id="other_type_combo_box">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="model">media_other_type_list_store</property>
+                            <property name="model">other_type_list_store</property>
                             <signal name="changed" handler="on_other_type_combo_box_changed" object="CcRemovableMediaPanel" swapped="yes"/>
                             <child>
                               <object class="GtkCellRendererText"/>
@@ -382,7 +382,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="media_other_action_label">
+                          <object class="GtkLabel" id="other_action_label">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="xalign">0</property>
@@ -395,7 +395,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="media_other_action_container">
+                          <object class="GtkBox" id="other_action_box">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                           </object>
@@ -411,7 +411,7 @@
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">_Type:</property>
                             <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">media_other_type_combobox</property>
+                            <property name="mnemonic_widget">other_type_combo_box</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -449,7 +449,7 @@
       </object>
     </child>
   </object>
-  <object class="GtkListStore" id="media_other_type_list_store">
+  <object class="GtkListStore" id="other_type_list_store">
     <columns>
       <!-- column-name description -->
       <column type="gchararray"/>
