@@ -70,10 +70,6 @@ typedef struct
   GtkWidget      *virt_type_title_label;
   GtkWidget      *updates_button;
 
-  char           *gnome_version;
-  char           *gnome_distributor;
-  char           *gnome_date;
-
   GCancellable   *cancellable;
 
   UDisksClient   *client;
@@ -613,7 +609,7 @@ info_overview_panel_setup_virt (CcInfoOverviewPanel *self)
 static void
 info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 {
-  gboolean    res;
+  g_autofree gchar *gnome_version = NULL;
   glibtop_mem mem;
   const glibtop_sysinfo *info;
   g_autofree char *memory_text = NULL;
@@ -622,13 +618,10 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   g_autofree char *os_name_text = NULL;
   CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
 
-  res = load_gnome_version (&priv->gnome_version,
-                            &priv->gnome_distributor,
-                            &priv->gnome_date);
-  if (res)
+  if (load_gnome_version (&gnome_version, NULL, NULL))
     {
       g_autofree gchar *text = NULL;
-      text = g_strdup_printf (_("Version %s"), priv->gnome_version);
+      text = g_strdup_printf (_("Version %s"), gnome_version);
       gtk_label_set_text (GTK_LABEL (priv->version_label), text);
     }
 
@@ -708,10 +701,6 @@ cc_info_overview_panel_finalize (GObject *object)
     }
 
   g_clear_object (&priv->client);
-
-  g_free (priv->gnome_version);
-  g_free (priv->gnome_date);
-  g_free (priv->gnome_distributor);
 
   G_OBJECT_CLASS (cc_info_overview_panel_parent_class)->finalize (object);
 }
