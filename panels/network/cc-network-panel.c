@@ -694,7 +694,6 @@ static void
 panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 {
         GtkWidget *stack;
-        g_autofree gchar *title = NULL;
         NetVpn *net_vpn;
         const gchar *id;
 
@@ -718,9 +717,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         stack = add_device_stack (panel, NET_OBJECT (net_vpn));
         gtk_container_add (GTK_CONTAINER (panel->box_vpn), stack);
 
-        title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (connection));
-
-        net_object_set_title (NET_OBJECT (net_vpn), title);
+        net_object_set_title (NET_OBJECT (net_vpn), nm_connection_get_id (connection));
 
         /* store in the devices array */
         g_ptr_array_add (panel->devices, net_vpn);
