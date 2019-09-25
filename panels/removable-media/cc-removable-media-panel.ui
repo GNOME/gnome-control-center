@@ -232,6 +232,7 @@
                                 <property name="receives_default">True</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <signal name="clicked" handler="on_extra_options_button_clicked" object="CcRemovableMediaPanel" swapped="yes"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -313,6 +314,8 @@
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
+    <signal name="delete-event" handler="gtk_widget_hide_on_delete"/>
+    <signal name="response" handler="on_extra_options_dialog_response" object="CcRemovableMediaPanel" swapped="yes"/>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="visible">True</property>

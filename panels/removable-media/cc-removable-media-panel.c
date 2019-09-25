@@ -236,11 +236,10 @@ autorun_set_preferences (CcRemovableMediaPanel *self,
 }
 
 static void
-custom_item_activated_cb (GtkAppChooserButton *button,
-                          const gchar         *item,
-                          gpointer             user_data)
+custom_item_activated_cb (CcRemovableMediaPanel *self,
+                          const gchar           *item,
+                          GtkAppChooserButton   *button)
 {
-  CcRemovableMediaPanel *self = user_data;
   g_autofree gchar *content_type = NULL;
 
   content_type = gtk_app_chooser_get_content_type (GTK_APP_CHOOSER (button));
@@ -258,10 +257,9 @@ custom_item_activated_cb (GtkAppChooserButton *button,
 }
 
 static void
-combo_box_changed_cb (GtkComboBox *combo_box,
-                      gpointer     user_data)
+combo_box_changed_cb (CcRemovableMediaPanel *self,
+                      GtkComboBox           *combo_box)
 {
-  CcRemovableMediaPanel *self = user_data;
   g_autoptr(GAppInfo) info = NULL;
   g_autofree gchar *content_type = NULL;
 
@@ -328,10 +326,10 @@ prepare_combo_box (CcRemovableMediaPanel *self,
     gtk_app_chooser_button_set_active_custom_item (app_chooser, CUSTOM_ITEM_OPEN_FOLDER);
   }
 
-  g_signal_connect (app_chooser, "changed",
-                    G_CALLBACK (combo_box_changed_cb), self);
-  g_signal_connect (app_chooser, "custom-item-activated",
-                    G_CALLBACK (custom_item_activated_cb), self);
+  g_signal_connect_object (app_chooser, "changed",
+                           G_CALLBACK (combo_box_changed_cb), self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (app_chooser, "custom-item-activated",
+                           G_CALLBACK (custom_item_activated_cb), self, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -362,11 +360,9 @@ on_other_type_combo_box_changed (CcRemovableMediaPanel *self)
 }
 
 static void
-on_extra_options_dialog_response (GtkWidget             *dialog,
-                                  int                    response,
-                                  CcRemovableMediaPanel *self)
+on_extra_options_dialog_response (CcRemovableMediaPanel *self)
 {
-  gtk_widget_hide (dialog);
+  gtk_widget_hide (self->media_dialog);
 
   if (self->other_application_combo != NULL) {
     gtk_widget_destroy (self->other_application_combo);
@@ -375,21 +371,12 @@ on_extra_options_dialog_response (GtkWidget             *dialog,
 }
 
 static void
-on_extra_options_button_clicked (GtkWidget             *button,
-                                 CcRemovableMediaPanel *self)
+on_extra_options_button_clicked (CcRemovableMediaPanel *self)
 {
   gtk_window_set_transient_for (GTK_WINDOW (self->media_dialog),
                                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
   gtk_window_set_modal (GTK_WINDOW (self->media_dialog), TRUE);
   gtk_window_set_title (GTK_WINDOW (self->media_dialog), _("Other Media"));
-  g_signal_connect (self->media_dialog,
-                    "response",
-                    G_CALLBACK (on_extra_options_dialog_response),
-                    self);
-  g_signal_connect (self->media_dialog,
-                    "delete-event",
-                    G_CALLBACK (gtk_widget_hide_on_delete),
-                    NULL);
   /* update other_application_combo */
   on_other_type_combo_box_changed (self);
   gtk_window_present (GTK_WINDOW (self->media_dialog));
@@ -403,7 +390,6 @@ info_panel_setup_media (CcRemovableMediaPanel *self)
 {
   guint n;
   GList *l, *content_types;
-  GtkWidget *extras_button;
   GtkTreeIter iter;
 
   struct {
@@ -497,12 +483,6 @@ info_panel_setup_media (CcRemovableMediaPanel *self)
 
   gtk_combo_box_set_active (GTK_COMBO_BOX (self->media_other_type_combobox), 0);
 
-  extras_button = self->extra_options_button;
-  g_signal_connect (extras_button,
-                    "clicked",
-                    G_CALLBACK (on_extra_options_button_clicked),
-                    self);
-
   g_settings_bind (self->media_settings,
                    PREF_MEDIA_AUTORUN_NEVER,
                    self->media_autorun_never_checkbutton,
@@ -564,6 +544,8 @@ cc_removable_media_panel_class_init (CcRemovableMediaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, media_other_action_label);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, media_other_action_container);
 
+  gtk_widget_class_bind_template_callback (widget_class, on_extra_options_dialog_response);
+  gtk_widget_class_bind_template_callback (widget_class, on_extra_options_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_other_type_combo_box_changed);
 }
 
