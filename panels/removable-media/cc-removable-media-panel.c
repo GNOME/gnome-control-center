@@ -21,28 +21,11 @@
 
 #include <config.h>
 
-#include "cc-removable-media-resources.h"
-
 #include <glib.h>
 #include <glib/gi18n.h>
-#include <gio/gio.h>
-#include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
-
-#include <glibtop/fsusage.h>
-#include <glibtop/mountlist.h>
-#include <glibtop/mem.h>
-#include <glibtop/sysinfo.h>
-
-#ifdef GDK_WINDOWING_WAYLAND
-#include <gdk/gdkwayland.h>
-#endif
-#ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
-#endif
 
 #include "cc-removable-media-panel.h"
-
+#include "cc-removable-media-resources.h"
 
 /* Autorun options */
 #define PREF_MEDIA_AUTORUN_NEVER                "autorun-never"
