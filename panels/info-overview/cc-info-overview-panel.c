@@ -65,8 +65,6 @@ typedef struct
   GtkWidget      *virt_type_title_label;
   GtkWidget      *updates_button;
 
-  GCancellable   *cancellable;
-
   UDisksClient   *client;
 } CcInfoOverviewPanelPrivate;
 
@@ -668,12 +666,6 @@ static void
 cc_info_overview_panel_finalize (GObject *object)
 {
   CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (CC_INFO_OVERVIEW_PANEL (object));
-
-  if (priv->cancellable)
-    {
-      g_cancellable_cancel (priv->cancellable);
-      g_clear_object (&priv->cancellable);
-    }
 
   g_clear_object (&priv->client);
 
