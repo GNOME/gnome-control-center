@@ -64,8 +64,6 @@ typedef struct
   GtkWidget      *virt_type_label;
   GtkWidget      *virt_type_title_label;
   GtkWidget      *updates_button;
-
-  UDisksClient   *client;
 } CcInfoOverviewPanelPrivate;
 
 struct _CcInfoOverviewPanel
@@ -400,21 +398,26 @@ static void
 get_primary_disc_info (CcInfoOverviewPanel *self)
 {
   CcInfoOverviewPanelPrivate *priv;
+  g_autoptr(UDisksClient) client = NULL;
   GDBusObjectManager *manager;
   g_autolist(GDBusObject) objects = NULL;
   GList *l;
   guint64 total_size;
+  g_autoptr(GError) error = NULL;
 
   priv = cc_info_overview_panel_get_instance_private (self);
   total_size = 0;
 
-  if (!priv->client)
+  client = udisks_client_new_sync (NULL, &error);
+  if (client == NULL)
     {
+      g_warning ("Unable to get UDisks client: %s. Disk information will not be available.",
+                 error->message);
       gtk_label_set_text (GTK_LABEL (priv->disk_label), _("Unknown"));
       return;
     }
 
-  manager = udisks_client_get_object_manager (priv->client);
+  manager = udisks_client_get_object_manager (client);
   objects = g_dbus_object_manager_get_objects (manager);
 
   for (l = objects; l != NULL; l = l->next)
@@ -663,22 +666,9 @@ on_updates_button_clicked (CcInfoOverviewPanel *self)
 }
 
 static void
-cc_info_overview_panel_finalize (GObject *object)
-{
-  CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (CC_INFO_OVERVIEW_PANEL (object));
-
-  g_clear_object (&priv->client);
-
-  G_OBJECT_CLASS (cc_info_overview_panel_parent_class)->finalize (object);
-}
-
-static void
 cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-  object_class->finalize = cc_info_overview_panel_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-info-overview-panel.ui");
 
@@ -703,7 +693,6 @@ static void
 cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 {
   CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
-  g_autoptr(GError) error = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -711,12 +700,6 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 
   if (!does_gnome_software_exist () && !does_gpk_update_viewer_exist ())
     gtk_widget_destroy (GTK_WIDGET (priv->updates_button));
-
-  priv->client = udisks_client_new_sync (NULL, &error);
-
-  if (error != NULL)
-      g_warning ("Unable to get UDisks client: %s. Disk information will not be available.",
-                 error->message);
 
   info_overview_panel_setup_overview (self);
   info_overview_panel_setup_virt (self);
