@@ -364,6 +364,14 @@
                           <object class="GtkComboBox" id="media_other_type_combobox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="model">media_other_type_list_store</property>
+                            <signal name="changed" handler="on_other_type_combo_box_changed" object="CcRemovableMediaPanel" swapped="yes"/>
+                            <child>
+                              <object class="GtkCellRendererText"/>
+                              <attributes>
+                                <attribute name="text">0</attribute>
+                              </attributes>
+                            </child>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -437,5 +445,13 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkListStore" id="media_other_type_list_store">
+    <columns>
+      <!-- column-name description -->
+      <column type="gchararray"/>
+      <!-- column-name content-type -->
+      <column type="gchararray"/>
+    </columns>
   </object>
 </interface>

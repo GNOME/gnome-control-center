@@ -76,6 +76,7 @@ struct _CcRemovableMediaPanel
 
   GtkWidget *media_dialog;
   GtkWidget *media_other_type_combobox;
+  GtkListStore *media_other_type_list_store;
   GtkWidget *media_other_action_label;
   GtkWidget *media_other_action_container;
 };
@@ -334,29 +335,18 @@ prepare_combo_box (CcRemovableMediaPanel *self,
 }
 
 static void
-other_type_combo_box_changed (GtkComboBox           *combo_box,
-                              CcRemovableMediaPanel *self)
+on_other_type_combo_box_changed (CcRemovableMediaPanel *self)
 {
   GtkTreeIter iter;
-  GtkTreeModel *model;
   g_autofree gchar *x_content_type = NULL;
-  GtkWidget *action_container;
-  GtkWidget *action_label;
 
-  if (!gtk_combo_box_get_active_iter (combo_box, &iter)) {
+  if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self->media_other_type_combobox), &iter)) {
     return;
   }
 
-  model = gtk_combo_box_get_model (combo_box);
-  if (model == NULL) {
-    return;
-  }
-
-  gtk_tree_model_get (model, &iter,
+  gtk_tree_model_get (GTK_TREE_MODEL (self->media_other_type_list_store), &iter,
                       1, &x_content_type,
                       -1);
-
-  action_container = self->media_other_action_container;
 
   if (self->other_application_combo != NULL) {
     gtk_widget_destroy (self->other_application_combo);
@@ -364,13 +354,11 @@ other_type_combo_box_changed (GtkComboBox           *combo_box,
 
   self->other_application_combo = gtk_app_chooser_button_new (x_content_type);
   ellipsize_cell_layout (GTK_CELL_LAYOUT (self->other_application_combo));
-  gtk_box_pack_start (GTK_BOX (action_container), self->other_application_combo, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (self->media_other_action_container), self->other_application_combo, TRUE, TRUE, 0);
   prepare_combo_box (self, self->other_application_combo, NULL);
   gtk_widget_show (self->other_application_combo);
 
-  action_label = self->media_other_action_label;
-
-  gtk_label_set_mnemonic_widget (GTK_LABEL (action_label), self->other_application_combo);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (self->media_other_action_label), self->other_application_combo);
 }
 
 static void
@@ -390,10 +378,6 @@ static void
 on_extra_options_button_clicked (GtkWidget             *button,
                                  CcRemovableMediaPanel *self)
 {
-  GtkWidget *combo_box;
-
-  combo_box = self->media_other_type_combobox;
-
   gtk_window_set_transient_for (GTK_WINDOW (self->media_dialog),
                                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
   gtk_window_set_modal (GTK_WINDOW (self->media_dialog), TRUE);
@@ -407,7 +391,7 @@ on_extra_options_button_clicked (GtkWidget             *button,
                     G_CALLBACK (gtk_widget_hide_on_delete),
                     NULL);
   /* update other_application_combo */
-  other_type_combo_box_changed (GTK_COMBO_BOX (combo_box), self);
+  on_other_type_combo_box_changed (self);
   gtk_window_present (GTK_WINDOW (self->media_dialog));
 }
 
@@ -419,10 +403,7 @@ info_panel_setup_media (CcRemovableMediaPanel *self)
 {
   guint n;
   GList *l, *content_types;
-  GtkWidget *other_type_combo_box;
   GtkWidget *extras_button;
-  GtkListStore *other_type_list_store;
-  GtkCellRenderer *renderer;
   GtkTreeIter iter;
 
   struct {
@@ -466,13 +447,7 @@ info_panel_setup_media (CcRemovableMediaPanel *self)
                        defs[n].heading);
   }
 
-  other_type_combo_box = self->media_other_type_combobox;
-
-  other_type_list_store = gtk_list_store_new (2,
-                                              G_TYPE_STRING,
-                                              G_TYPE_STRING);
-
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (other_type_list_store),
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (self->media_other_type_list_store),
                                         1, GTK_SORT_ASCENDING);
 
 
@@ -508,9 +483,9 @@ info_panel_setup_media (CcRemovableMediaPanel *self)
       description = g_content_type_get_description (content_type);
     }
 
-    gtk_list_store_append (other_type_list_store, &iter);
+    gtk_list_store_append (self->media_other_type_list_store, &iter);
 
-    gtk_list_store_set (other_type_list_store, &iter,
+    gtk_list_store_set (self->media_other_type_list_store, &iter,
                         0, description,
                         1, content_type,
                         -1);
@@ -520,21 +495,7 @@ info_panel_setup_media (CcRemovableMediaPanel *self)
 
   g_list_free_full (content_types, g_free);
 
-  gtk_combo_box_set_model (GTK_COMBO_BOX (other_type_combo_box),
-                           GTK_TREE_MODEL (other_type_list_store));
-
-  renderer = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (other_type_combo_box), renderer, TRUE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (other_type_combo_box), renderer,
-                                  "text", 0,
-                                  NULL);
-
-  g_signal_connect (other_type_combo_box,
-                    "changed",
-                    G_CALLBACK (other_type_combo_box_changed),
-                    self);
-
-  gtk_combo_box_set_active (GTK_COMBO_BOX (other_type_combo_box), 0);
+  gtk_combo_box_set_active (GTK_COMBO_BOX (self->media_other_type_combobox), 0);
 
   extras_button = self->extra_options_button;
   g_signal_connect (extras_button,
@@ -599,8 +560,11 @@ cc_removable_media_panel_class_init (CcRemovableMediaPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, media_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, media_other_type_combobox);
+  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, media_other_type_list_store);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, media_other_action_label);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, media_other_action_container);
+
+  gtk_widget_class_bind_template_callback (widget_class, on_other_type_combo_box_changed);
 }
 
 static void
