@@ -27,7 +27,7 @@
                 <property name="spacing">18</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkImage" id="system_image">
+                  <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="resource">/org/gnome/control-center/info-overview/GnomeLogoVerticalMedium.svg</property>
@@ -55,7 +55,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkGrid" id="grid1">
+                  <object class="GtkGrid">
                     <property name="visible">True</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
@@ -63,7 +63,7 @@
                     <property name="column-spacing">12</property>
                     <property name="row-spacing">5</property>
                     <child>
-                      <object class="GtkLabel" id="label4">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">1</property>
@@ -79,7 +79,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label5">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">1</property>
@@ -95,7 +95,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label6">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">1</property>
@@ -111,7 +111,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label14">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">1</property>
@@ -126,7 +126,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label7">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">1</property>
@@ -142,7 +142,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label17">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">1</property>
@@ -158,7 +158,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label18">
+                      <object class="GtkLabel" id="virt_type_title_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">1</property>
@@ -174,7 +174,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label8">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">1</property>
@@ -299,7 +299,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="dummy1">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label">    </property>
@@ -320,7 +320,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButtonBox" id="hbuttonbox1">
+                  <object class="GtkButtonBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="layout_style">end</property>
@@ -335,6 +335,7 @@
                         <property name="receives_default">True</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
+                        <signal name="clicked" handler="on_updates_button_clicked" object="CcInfoOverviewPanel" swapped="yes"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
