@@ -51,11 +51,6 @@
 #include "cc-info-overview-panel.h"
 
 
-typedef struct {
-  /* Will be one or 2 GPU name strings, or "Unknown" */
-  char *hardware_string;
-} GraphicsData;
-
 typedef struct
 {
   GtkWidget      *version_label;
@@ -73,8 +68,6 @@ typedef struct
   GCancellable   *cancellable;
 
   UDisksClient   *client;
-
-  GraphicsData   *graphics_data;
 } CcInfoOverviewPanelPrivate;
 
 struct _CcInfoOverviewPanel
@@ -207,13 +200,6 @@ load_gnome_version (char **version,
   return FALSE;
 };
 
-static void
-graphics_data_free (GraphicsData *gdata)
-{
-  g_free (gdata->hardware_string);
-  g_slice_free (GraphicsData, gdata);
-}
-
 static char *
 get_renderer_from_session (void)
 {
@@ -319,13 +305,10 @@ has_dual_gpu (void)
   return ret;
 }
 
-static GraphicsData *
-get_graphics_data (void)
+static gchar *
+get_graphics_hardware_string (void)
 {
-  GraphicsData *result;
   GdkDisplay *display;
-
-  result = g_slice_new0 (GraphicsData);
 
   display = gdk_display_get_default ();
 
@@ -348,19 +331,19 @@ get_graphics_data (void)
         renderer = get_renderer_from_helper (FALSE);
       if (has_dual_gpu ())
         discrete_renderer = get_renderer_from_helper (TRUE);
-      if (!discrete_renderer)
-        result->hardware_string = g_strdup (renderer);
-      else
-        result->hardware_string = g_strdup_printf ("%s / %s",
-                                                   renderer,
-                                                   discrete_renderer);
+
+      if (renderer != NULL)
+        {
+          if (discrete_renderer != NULL)
+            return g_strdup_printf ("%s / %s",
+                                    renderer,
+                                    discrete_renderer);
+          return g_strdup (renderer);
+        }
     }
 #endif
 
-  if (!result->hardware_string)
-    result->hardware_string = g_strdup (_("Unknown"));
-
-  return result;
+  return g_strdup (_("Unknown"));
 }
 
 static char *
@@ -616,6 +599,7 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   g_autofree char *cpu_text = NULL;
   g_autofree char *os_type_text = NULL;
   g_autofree char *os_name_text = NULL;
+  g_autofree gchar *graphics_hardware_string = NULL;
   CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
 
   if (load_gnome_version (&gnome_version, NULL, NULL))
@@ -642,7 +626,8 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 
   get_primary_disc_info (self);
 
-  gtk_label_set_markup (GTK_LABEL (priv->graphics_label), priv->graphics_data->hardware_string);
+  graphics_hardware_string = get_graphics_hardware_string ();
+  gtk_label_set_markup (GTK_LABEL (priv->graphics_label), graphics_hardware_string);
 }
 
 static gboolean
@@ -680,16 +665,6 @@ on_updates_button_clicked (CcInfoOverviewPanel *self)
 }
 
 static void
-cc_info_overview_panel_dispose (GObject *object)
-{
-  CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (CC_INFO_OVERVIEW_PANEL (object));
-
-  g_clear_pointer (&priv->graphics_data, graphics_data_free);
-
-  G_OBJECT_CLASS (cc_info_overview_panel_parent_class)->dispose (object);
-}
-
-static void
 cc_info_overview_panel_finalize (GObject *object)
 {
   CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (CC_INFO_OVERVIEW_PANEL (object));
@@ -712,7 +687,6 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->finalize = cc_info_overview_panel_finalize;
-  object_class->dispose = cc_info_overview_panel_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-info-overview-panel.ui");
 
@@ -742,8 +716,6 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   g_resources_register (cc_info_overview_get_resource ());
-
-  priv->graphics_data = get_graphics_data ();
 
   if (!does_gnome_software_exist () && !does_gpk_update_viewer_exist ())
     gtk_widget_destroy (GTK_WIDGET (priv->updates_button));
