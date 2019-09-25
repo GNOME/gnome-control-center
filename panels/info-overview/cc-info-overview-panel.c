@@ -665,8 +665,7 @@ does_gpk_update_viewer_exist (void)
 }
 
 static void
-on_updates_button_clicked (GtkWidget           *widget,
-                           CcInfoOverviewPanel *self)
+on_updates_button_clicked (CcInfoOverviewPanel *self)
 {
   g_autoptr(GError) error = NULL;
   gboolean ret;
@@ -740,6 +739,8 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, updates_button);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, virt_type_title_label);
 
+  gtk_widget_class_bind_template_callback (widget_class, on_updates_button_clicked);
+
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
 }
 
@@ -755,10 +756,8 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 
   priv->graphics_data = get_graphics_data ();
 
-  if (does_gnome_software_exist () || does_gpk_update_viewer_exist ())
-    g_signal_connect (priv->updates_button, "clicked", G_CALLBACK (on_updates_button_clicked), self);
-  else
-    gtk_widget_destroy (priv->updates_button);
+  if (!does_gnome_software_exist () && !does_gpk_update_viewer_exist ())
+    gtk_widget_destroy (GTK_WIDGET (priv->updates_button));
 
   priv->client = udisks_client_new_sync (NULL, &error);
 
