@@ -58,17 +58,17 @@ typedef struct {
 
 typedef struct
 {
-  GtkWidget      *version_label;
-  GtkWidget      *name_entry;
-  GtkWidget      *memory_label;
-  GtkWidget      *processor_label;
-  GtkWidget      *os_name_label;
-  GtkWidget      *os_type_label;
-  GtkWidget      *disk_label;
-  GtkWidget      *graphics_label;
-  GtkWidget      *virt_type_label;
-  GtkWidget      *virt_type_title_label;
-  GtkWidget      *updates_button;
+  GtkLabel       *disk_label;
+  GtkLabel       *graphics_label;
+  GtkLabel       *memory_label;
+  GtkLabel       *name_entry;
+  GtkLabel       *os_name_label;
+  GtkLabel       *os_type_label;
+  GtkLabel       *processor_label;
+  GtkButton      *updates_button;
+  GtkLabel       *version_label;
+  GtkLabel       *virt_type_label;
+  GtkLabel       *virt_type_title_label;
 
   GCancellable   *cancellable;
 
@@ -429,7 +429,7 @@ get_primary_disc_info (CcInfoOverviewPanel *self)
 
   if (!priv->client)
     {
-      gtk_label_set_text (GTK_LABEL (priv->disk_label), _("Unknown"));
+      gtk_label_set_text (priv->disk_label, _("Unknown"));
       return;
     }
 
@@ -455,11 +455,11 @@ get_primary_disc_info (CcInfoOverviewPanel *self)
   if (total_size > 0)
     {
       g_autofree gchar *size = g_format_size (total_size);
-      gtk_label_set_text (GTK_LABEL (priv->disk_label), size);
+      gtk_label_set_text (priv->disk_label, size);
     }
   else
     {
-      gtk_label_set_text (GTK_LABEL (priv->disk_label), _("Unknown"));
+      gtk_label_set_text (priv->disk_label, _("Unknown"));
     }
 }
 
@@ -546,8 +546,8 @@ set_virtualization_label (CcInfoOverviewPanel *self,
 
   if (virt == NULL || *virt == '\0')
   {
-    gtk_widget_hide (priv->virt_type_label);
-    gtk_widget_hide (priv->virt_type_title_label);
+    gtk_widget_hide (GTK_WIDGET (priv->virt_type_label));
+    gtk_widget_hide (GTK_WIDGET (priv->virt_type_title_label));
     return;
   }
 
@@ -561,7 +561,7 @@ set_virtualization_label (CcInfoOverviewPanel *self,
         }
     }
 
-  gtk_label_set_text (GTK_LABEL (priv->virt_type_label), display_name ? display_name : virt);
+  gtk_label_set_text (priv->virt_type_label, display_name ? display_name : virt);
 }
 
 static void
@@ -622,27 +622,27 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
     {
       g_autofree gchar *text = NULL;
       text = g_strdup_printf (_("Version %s"), gnome_version);
-      gtk_label_set_text (GTK_LABEL (priv->version_label), text);
+      gtk_label_set_text (priv->version_label, text);
     }
 
   glibtop_get_mem (&mem);
   memory_text = g_format_size_full (mem.total, G_FORMAT_SIZE_IEC_UNITS);
-  gtk_label_set_text (GTK_LABEL (priv->memory_label), memory_text ? memory_text : "");
+  gtk_label_set_text (priv->memory_label, memory_text ? memory_text : "");
 
   info = glibtop_get_sysinfo ();
 
   cpu_text = get_cpu_info (info);
-  gtk_label_set_markup (GTK_LABEL (priv->processor_label), cpu_text ? cpu_text : "");
+  gtk_label_set_markup (priv->processor_label, cpu_text ? cpu_text : "");
 
   os_type_text = get_os_type ();
-  gtk_label_set_text (GTK_LABEL (priv->os_type_label), os_type_text ? os_type_text : "");
+  gtk_label_set_text (priv->os_type_label, os_type_text ? os_type_text : "");
 
   os_name_text = get_os_name ();
-  gtk_label_set_text (GTK_LABEL (priv->os_name_label), os_name_text ? os_name_text : "");
+  gtk_label_set_text (priv->os_name_label, os_name_text ? os_name_text : "");
 
   get_primary_disc_info (self);
 
-  gtk_label_set_markup (GTK_LABEL (priv->graphics_label), priv->graphics_data->hardware_string);
+  gtk_label_set_markup (priv->graphics_label, priv->graphics_data->hardware_string);
 }
 
 static gboolean
@@ -716,16 +716,16 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-info-overview-panel.ui");
 
-  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, version_label);
-  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, name_entry);
-  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, memory_label);
-  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, processor_label);
-  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, os_name_label);
-  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, os_type_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, disk_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, graphics_label);
-  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, virt_type_label);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, memory_label);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, name_entry);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, os_name_label);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, os_type_label);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, processor_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, updates_button);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, version_label);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, virt_type_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, virt_type_title_label);
 
   gtk_widget_class_bind_template_callback (widget_class, on_updates_button_clicked);
