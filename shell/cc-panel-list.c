@@ -255,6 +255,26 @@ update_search (CcPanelList *self)
   gtk_list_box_unselect_all (GTK_LIST_BOX (self->search_listbox));
 }
 
+static const gchar*
+get_panel_id_from_row (CcPanelList   *self,
+                       GtkListBoxRow *row)
+{
+
+  RowData *row_data;
+
+  if (row == self->details_row)
+    return "details";
+  else if (row == self->devices_row)
+    return "devices";
+  else if (row == self->privacy_row)
+    return "privacy";
+
+  row_data = g_object_get_data (G_OBJECT (row), "data");
+
+  g_assert (row_data != NULL);
+  return row_data->id;
+}
+
 /*
  * RowData functions
  */
@@ -398,6 +418,9 @@ static const gchar * const panel_order[] = {
   "sound",
   "power",
   "network",
+  "privacy",
+  "devices",
+  "details",
 
   /* Privacy page */
   "location",
@@ -445,32 +468,12 @@ sort_function (GtkListBoxRow *a,
                gpointer       user_data)
 {
   CcPanelList *self = CC_PANEL_LIST (user_data);
-  RowData *a_data, *b_data;
-  GtkListBoxRow *special[3] = { self->privacy_row, self->devices_row, self->details_row };
-  int ai = -1;
-  int bi = -1;
-  int i;
+  const gchar *a_id, *b_id;
 
-  for (i = 0; i < 3; i++)
-    {
-      if (a == special[i]) ai = i;
-      if (b == special[i]) bi = i;
-    }
+  a_id = get_panel_id_from_row (self, a);
+  b_id = get_panel_id_from_row (self, b);
 
-  if (ai >= 0 || bi >= 0)
-    return ai - bi;
-
-  /*
-   * We can only retrieve the data after assuring that none
-   * of the rows are Devices and Details.
-   */
-  a_data = g_object_get_data (G_OBJECT (a), "data");
-  b_data = g_object_get_data (G_OBJECT (b), "data");
-
-  if (a_data->category != b_data->category)
-    return a_data->category - b_data->category;
-
-  return get_panel_id_index (a_data->id) - get_panel_id_index (b_data->id);
+  return get_panel_id_index (a_id) - get_panel_id_index (b_id);
 }
 
 static gint
