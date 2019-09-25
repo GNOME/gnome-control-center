@@ -140,23 +140,6 @@ add_elem_to_str_array (char       **v,
   return (char **) g_ptr_array_free (array, FALSE);
 }
 
-static int
-media_panel_g_strv_find (char       **strv,
-                         const char  *find_me)
-{
-  guint index;
-
-  g_return_val_if_fail (find_me != NULL, -1);
-
-  for (index = 0; strv[index] != NULL; ++index) {
-    if (g_strcmp0 (strv[index], find_me) == 0) {
-      return index;
-    }
-  }
-
-  return -1;
-}
-
 static void
 autorun_get_preferences (CcRemovableMediaPanel *self,
                          const char            *x_content_type,
@@ -182,13 +165,13 @@ autorun_get_preferences (CcRemovableMediaPanel *self,
   x_content_open_folder = g_settings_get_strv (self->media_settings,
                                                PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
   if (x_content_start_app != NULL) {
-    *pref_start_app = media_panel_g_strv_find (x_content_start_app, x_content_type) != -1;
+    *pref_start_app = g_strv_contains ((const gchar * const *) x_content_start_app, x_content_type);
   }
   if (x_content_ignore != NULL) {
-    *pref_ignore = media_panel_g_strv_find (x_content_ignore, x_content_type) != -1;
+    *pref_ignore = g_strv_contains ((const gchar * const *) x_content_ignore, x_content_type);
   }
   if (x_content_open_folder != NULL) {
-    *pref_open_folder = media_panel_g_strv_find (x_content_open_folder, x_content_type) != -1;
+    *pref_open_folder = g_strv_contains ((const gchar * const *) x_content_open_folder, x_content_type);
   }
 }
 
