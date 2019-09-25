@@ -58,7 +58,6 @@ typedef struct {
 
 typedef struct
 {
-  GtkWidget      *system_image;
   GtkWidget      *version_label;
   GtkWidget      *name_entry;
   GtkWidget      *memory_label;
@@ -751,7 +750,6 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-info-overview-panel.ui");
 
-  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, system_image);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, version_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, name_entry);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, memory_label);
