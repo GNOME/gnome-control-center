@@ -67,10 +67,8 @@ typedef struct
   GtkWidget      *disk_label;
   GtkWidget      *graphics_label;
   GtkWidget      *virt_type_label;
+  GtkWidget      *virt_type_title_label;
   GtkWidget      *updates_button;
-
-  /* Virtualisation labels */
-  GtkWidget      *label18;
 
   char           *gnome_version;
   char           *gnome_distributor;
@@ -553,7 +551,7 @@ set_virtualization_label (CcInfoOverviewPanel *self,
   if (virt == NULL || *virt == '\0')
   {
     gtk_widget_hide (priv->virt_type_label);
-    gtk_widget_hide (priv->label18);
+    gtk_widget_hide (priv->virt_type_title_label);
     return;
   }
 
@@ -740,7 +738,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, graphics_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, virt_type_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, updates_button);
-  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, label18);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, virt_type_title_label);
 
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
 }
