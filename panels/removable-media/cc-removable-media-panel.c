@@ -41,27 +41,24 @@
 
 struct _CcRemovableMediaPanel
 {
-  CcPanel    parent_instance;
+  CcPanel              parent_instance;
 
-  /* Media */
-  GSettings *settings;
-  GtkWidget *other_application_chooser;
+  GtkAppChooserButton *audio_cdda_chooser;
+  GtkCheckButton      *autorun_never_checkbutton;
+  GtkAppChooserButton *dcf_chooser;
+  GtkButton           *extra_options_button;
+  GtkBox              *handlers_box;
+  GtkAppChooserButton *music_player_chooser;
+  GtkDialog           *other_type_dialog;
+  GtkLabel            *other_action_label;
+  GtkBox              *other_action_box;
+  GtkComboBox         *other_type_combo_box;
+  GtkListStore        *other_type_list_store;
+  GtkAppChooserButton *software_chooser;
+  GtkAppChooserButton *video_dvd_chooser;
 
-  GtkWidget *extra_options_button;
-  GtkWidget *autorun_never_checkbutton;
-  GtkWidget *handlers_box;
-
-  GtkWidget *audio_cdda_chooser;
-  GtkWidget *video_dvd_chooser;
-  GtkWidget *music_player_chooser;
-  GtkWidget *dcf_chooser;
-  GtkWidget *software_chooser;
-
-  GtkWidget *other_type_dialog;
-  GtkWidget *other_type_combo_box;
-  GtkListStore *other_type_list_store;
-  GtkWidget *other_action_label;
-  GtkWidget *other_action_box;
+  GtkAppChooserButton *other_application_chooser;
+  GSettings           *settings;
 };
 
 
@@ -303,7 +300,7 @@ on_other_type_combo_box_changed (CcRemovableMediaPanel *self)
   GtkTreeIter iter;
   g_autofree gchar *x_content_type = NULL;
 
-  if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self->other_type_combo_box), &iter)) {
+  if (!gtk_combo_box_get_active_iter (self->other_type_combo_box, &iter)) {
     return;
   }
 
@@ -312,25 +309,25 @@ on_other_type_combo_box_changed (CcRemovableMediaPanel *self)
                       -1);
 
   if (self->other_application_chooser != NULL) {
-    gtk_widget_destroy (self->other_application_chooser);
+    gtk_widget_destroy (GTK_WIDGET (self->other_application_chooser));
   }
 
-  self->other_application_chooser = gtk_app_chooser_button_new (x_content_type);
+  self->other_application_chooser = GTK_APP_CHOOSER_BUTTON (gtk_app_chooser_button_new (x_content_type));
   ellipsize_cell_layout (GTK_CELL_LAYOUT (self->other_application_chooser));
-  gtk_box_pack_start (GTK_BOX (self->other_action_box), self->other_application_chooser, TRUE, TRUE, 0);
-  prepare_chooser (self, GTK_APP_CHOOSER_BUTTON (self->other_application_chooser), NULL);
-  gtk_widget_show (self->other_application_chooser);
+  gtk_box_pack_start (self->other_action_box, GTK_WIDGET (self->other_application_chooser), TRUE, TRUE, 0);
+  prepare_chooser (self, self->other_application_chooser, NULL);
+  gtk_widget_show (GTK_WIDGET (self->other_application_chooser));
 
-  gtk_label_set_mnemonic_widget (GTK_LABEL (self->other_action_label), self->other_application_chooser);
+  gtk_label_set_mnemonic_widget (self->other_action_label, GTK_WIDGET (self->other_application_chooser));
 }
 
 static void
 on_extra_options_dialog_response (CcRemovableMediaPanel *self)
 {
-  gtk_widget_hide (self->other_type_dialog);
+  gtk_widget_hide (GTK_WIDGET (self->other_type_dialog));
 
   if (self->other_application_chooser != NULL) {
-    gtk_widget_destroy (self->other_application_chooser);
+    gtk_widget_destroy (GTK_WIDGET (self->other_application_chooser));
     self->other_application_chooser = NULL;
   }
 }
@@ -446,7 +443,7 @@ info_panel_setup_media (CcRemovableMediaPanel *self)
 
   g_list_free_full (content_types, g_free);
 
-  gtk_combo_box_set_active (GTK_COMBO_BOX (self->other_type_combo_box), 0);
+  gtk_combo_box_set_active (self->other_type_combo_box, 0);
 
   g_settings_bind (self->settings,
                    PREF_MEDIA_AUTORUN_NEVER,
@@ -477,7 +474,7 @@ cc_removable_media_panel_dispose (GObject *object)
 {
   CcRemovableMediaPanel *self = CC_REMOVABLE_MEDIA_PANEL (object);
 
-  g_clear_pointer (&self->other_type_dialog, gtk_widget_destroy);
+  g_clear_pointer ((GtkWidget **) &self->other_type_dialog, gtk_widget_destroy);
 
   G_OBJECT_CLASS (cc_removable_media_panel_parent_class)->dispose (object);
 }
@@ -493,21 +490,19 @@ cc_removable_media_panel_class_init (CcRemovableMediaPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/removable-media/cc-removable-media-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, handlers_box);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, autorun_never_checkbutton);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, extra_options_button);
-
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, audio_cdda_chooser);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, video_dvd_chooser);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, music_player_chooser);
+  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, autorun_never_checkbutton);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, dcf_chooser);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, software_chooser);
-
+  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, extra_options_button);
+  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, handlers_box);
+  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, music_player_chooser);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, other_type_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, other_action_box);
+  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, other_action_label);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, other_type_combo_box);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, other_type_list_store);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, other_action_label);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, other_action_box);
+  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, software_chooser);
+  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, video_dvd_chooser);
 
   gtk_widget_class_bind_template_callback (widget_class, on_extra_options_dialog_response);
   gtk_widget_class_bind_template_callback (widget_class, on_extra_options_button_clicked);
