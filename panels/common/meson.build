@@ -105,8 +105,12 @@ libdevice_dep = declare_dependency(
   link_with: libdevice
 )
 
-install_data(
-  'gnome-control-center.rules',
+polkit_conf = configuration_data()
+polkit_conf.set('PRIVILEGED_GROUP', get_option('privileged_group'))
+configure_file(
+  input: 'gnome-control-center.rules.in',
+  output: 'gnome-control-center.rules',
+  configuration: polkit_conf,
   install_dir: join_paths(control_center_datadir, 'polkit-1', 'rules.d')
 )
 

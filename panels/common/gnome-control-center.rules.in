@@ -6,7 +6,7 @@ polkit.addRule(function(action, subject) {
 	     action.id == "org.gnome.controlcenter.datetime.configure") &&
 	    subject.local &&
 	    subject.active &&
-	    subject.isInGroup ("wheel")) {
+	    subject.isInGroup ("@PRIVILEGED_GROUP@")) {
 		    return polkit.Result.YES;
 	    }
 });
