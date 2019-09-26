@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-09-22 08:38+0000\n"
-"PO-Revision-Date: 2019-09-25 14:25+0200\n"
+"POT-Creation-Date: 2019-09-25 12:28+0000\n"
+"PO-Revision-Date: 2019-09-26 09:52+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -183,10 +183,9 @@ msgstr "Žiadne aplikácie"
 
 # gtk_image_menu_item
 #: panels/applications/cc-applications-panel.ui:59
-#, fuzzy
 #| msgid "Install PPD File…"
 msgid "Install some…"
-msgstr "Inštalovať súbor PPD…"
+msgstr "Nainštalovať nejaké…"
 
 #: panels/applications/cc-applications-panel.ui:99
 msgid "Permissions & Access"
@@ -197,6 +196,7 @@ msgid ""
 "Data and services that this app has asked for access to and permissions that "
 "it requires."
 msgstr ""
+"Požadované oprávnenia na údaje a služby, ktoré si vyžiadala táto aplikácia."
 
 #: panels/applications/cc-applications-panel.ui:126
 #: panels/applications/cc-applications-panel.ui:132
@@ -253,6 +253,8 @@ msgid ""
 "Individual permissions for applications can be reviewed in the <a href="
 "\"privacy\">Privacy</a> Settings."
 msgstr ""
+"Jednotlivé oprávnenia aplikácií môžu byť prezreté v nastaveniach <a href="
+"\"privacy\">Súkromia</a>."
 
 #: panels/applications/cc-applications-panel.ui:204
 msgid "Integration"
@@ -3896,7 +3898,7 @@ msgstr "Klient DHCP zlyhal pri štarte"
 #. TRANSLATORS: device status reason
 #: panels/network/panel-common.c:296
 msgid "DHCP client error"
-msgstr "Chyba klienta DHCP "
+msgstr "Chyba klienta DHCP"
 
 #. TRANSLATORS: device status reason
 #: panels/network/panel-common.c:300
@@ -6301,6 +6303,9 @@ msgid ""
 "Use of the camera allows applications to capture photos and video. Disabling "
 "the camera may cause some applications to not function properly."
 msgstr ""
+"Použitie fotoaparátu umožňuje aplikáciám snímať fotografie a videá. "
+"Zakázanie fotoaparátu môže spôsobiť nesprávne fungovanie niektorých "
+"aplikácií."
 
 #: panels/privacy/cc-privacy-panel.ui:812
 msgid "_Camera"
@@ -6311,6 +6316,8 @@ msgid ""
 "Use of the microphone allows applications to capture sounds. Disabling the "
 "microphone may cause some applications to not function properly."
 msgstr ""
+"Použitie mikrofónu umožňuje aplikáciám zachytávať zvuky. Zakázanie mikrofónu "
+"môže spôsobiť nesprávne fungovanie niektorých aplikácií."
 
 #: panels/privacy/cc-privacy-panel.ui:917
 msgid "_Microphone"
@@ -6462,7 +6469,7 @@ msgstr "Zdroje vstupu"
 
 #: panels/region/cc-region-panel.ui:209
 msgid "Choose keyboard layouts or input methods."
-msgstr ""
+msgstr "Zvoľte rozloženia klávesnice alebo metódy vstupu."
 
 #: panels/region/cc-region-panel.ui:266
 msgid "No input source selected"
@@ -6590,6 +6597,8 @@ msgid ""
 "Folders which are searched by system applications, such as Files, Photos and "
 "Videos."
 msgstr ""
+"Priečinky, ktoré sú prehľadávané systémovými aplikáciami, ako sú Súbory, "
+"Fotografie a Videá."
 
 #: panels/search/search-locations-dialog.ui:52
 msgid "Places"
@@ -6926,13 +6935,11 @@ msgstr "Mení hlasitosť zvuku, vstupy, výstupy a zvukové varovania"
 
 #. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/gnome-sound-panel.desktop.in.in:20
-#, fuzzy
-#| msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
 msgid ""
 "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;Output;Input;"
 msgstr ""
-"Karta;Mikrofón;Reproduktor;Hlasitosť;Rovnováha;Bluetooth;Slúchadlo;Slúchadlá;"
-"Zvuk;Stereo;Mono;Efekty;Prelínanie;"
+"karta;mikrofón;hlasitosť;rovnováha;vyváženie;bluetooth;sláchladlo;náhlavná;"
+"súprava;zvuk;audio;výstup;vstup;"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.c:94
 #: panels/thunderbolt/cc-bolt-device-entry.c:125
@@ -7088,6 +7095,8 @@ msgstr "Priamy prístup"
 #: panels/thunderbolt/cc-bolt-panel.ui:269
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr ""
+"Umožnenie priameho prístupu k zariadeniami, ako sú doky a externé grafické "
+"procesory."
 
 #: panels/thunderbolt/cc-bolt-panel.ui:289
 msgid "Only USB and Display Port devices can attach."
@@ -8486,9 +8495,7 @@ msgstr "Nové heslo je rovnaké ako staré"
 #: panels/user-accounts/run-passwd.c:528
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
-msgstr ""
-"Vaše heslo sa od pôvodného overenia totožnosti zmenilo! Overte svoju "
-"totožnosť znova, prosím."
+msgstr "Vaše heslo sa od pôvodného overenia totožnosti zmenilo!"
 
 #: panels/user-accounts/run-passwd.c:532
 #, c-format
@@ -8939,6 +8946,9 @@ msgid ""
 "may experience incorrect system behavior, data loss, and other unexpected "
 "issues. "
 msgstr ""
+"Táto verzia aplikácie Nastavenia by mala byť použitá iba za účelom vývoja. "
+"Môže sa vyskytnúť nesprávne správanie systému, strata údajov a iné "
+"neočakávané problémy. "
 
 #: shell/cc-window.ui:344
 msgid "Help"
@@ -8997,11 +9007,13 @@ msgstr ""
 #: shell/org.gnome.ControlCenter.gschema.xml:13
 msgid "Show warning when running a development build of Settings"
 msgstr ""
+"Zobraziť upozornenie pri spustení vývojovej zostavy aplikácie Nastavenia"
 
 #: shell/org.gnome.ControlCenter.gschema.xml:14
 msgid ""
 "Whether Settings should show a warning when running a development build."
 msgstr ""
+"Určuje, či sa má zobraziť upozornenie, keď je spustená vývojová zostava."
 
 #. translators:
 #. * The number of sound outputs on a particular device
