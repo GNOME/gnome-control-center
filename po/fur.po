@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-08-26 13:31+0000\n"
-"PO-Revision-Date: 2019-08-28 08:58+0200\n"
+"POT-Creation-Date: 2019-09-22 10:55+0000\n"
+"PO-Revision-Date: 2019-09-26 16:22+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
@@ -58,7 +58,7 @@ msgstr "Al à acès ae rêt"
 
 #: panels/applications/cc-applications-panel.c:579
 #: panels/applications/cc-applications-panel.c:581
-#: panels/search/cc-search-locations-dialog.c:292
+#: panels/search/cc-search-locations-dialog.c:293
 msgid "Home"
 msgstr "Cjase"
 
@@ -74,7 +74,7 @@ msgstr "File System"
 
 #: panels/applications/cc-applications-panel.c:591
 #: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:277
-#: shell/cc-window.c:959 shell/cc-window.ui:131
+#: shell/cc-window.c:975 shell/cc-window.ui:132
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Impostazions"
@@ -245,7 +245,7 @@ msgstr "Funzionalitâts di sisteme dopradis di cheste aplicazion."
 #: panels/applications/cc-applications-panel.ui:230
 #: panels/applications/cc-applications-panel.ui:236
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:161
+#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:162
 msgid "Search"
 msgstr "Cîr"
 
@@ -342,7 +342,7 @@ msgstr "Selezione un imagjin"
 #: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/cc-color-panel.ui:657 panels/color/color-calibrate.ui:25
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:947
+#: panels/display/cc-display-panel.c:950
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
@@ -352,7 +352,7 @@ msgstr "Selezione un imagjin"
 #: panels/printers/pp-details-dialog.c:313
 #: panels/privacy/cc-privacy-panel.c:1137 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
-#: panels/search/cc-search-locations-dialog.c:613
+#: panels/search/cc-search-locations-dialog.c:614
 #: panels/sharing/cc-sharing-panel.c:428
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
@@ -1366,21 +1366,21 @@ msgid "To change time or date settings, you need to authenticate."
 msgstr ""
 "Par cambiâ lis impostazions de ore e de date al è necessari autenticâsi."
 
-#: panels/display/cc-display-panel.c:958
+#: panels/display/cc-display-panel.c:961
 #: panels/network/connection-editor/connection-editor.ui:27
 #: panels/network/network-wifi.ui:38
 msgid "_Apply"
 msgstr "_Apliche"
 
-#: panels/display/cc-display-panel.c:979
+#: panels/display/cc-display-panel.c:982
 msgid "Apply Changes?"
 msgstr "Aplicâ lis modifichis?"
 
-#: panels/display/cc-display-panel.c:984
+#: panels/display/cc-display-panel.c:987
 msgid "Changes Cannot be Applied"
 msgstr "Lis modifichis no puedin jessi aplicadis"
 
-#: panels/display/cc-display-panel.c:985
+#: panels/display/cc-display-panel.c:988
 msgid "This could be due to hardware limitations."
 msgstr "Chest al podarès jessi par vie di limitazions hardware."
 
@@ -2108,7 +2108,7 @@ msgid "Add Custom Shortcut"
 msgstr "Zonte scurte personalizade"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:3
-#: panels/region/cc-region-panel.ui:394 shell/cc-window.ui:339
+#: panels/region/cc-region-panel.ui:394 shell/cc-window.ui:340
 msgid "Keyboard Shortcuts"
 msgstr "Scurte di tastiere"
 
@@ -2664,10 +2664,10 @@ msgid "Make available to _other users"
 msgstr "Rindi disponibil a chei _altris utents"
 
 #: panels/network/connection-editor/details-page.ui:376
-msgid "Restrict background data usage"
-msgstr "Limite l'ûs di dâts in secont plan"
+msgid "Restrict _background data usage"
+msgstr "Limite l'ûs di dâts in _sotfont"
 
-#: panels/network/connection-editor/details-page.ui:386
+#: panels/network/connection-editor/details-page.ui:387
 msgid "Appropriate for connections that have data charges or limits."
 msgstr "Indicât par conessions cun adebit o limits di dâts."
 
@@ -4008,19 +4008,19 @@ msgstr "Altri"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:626
+#: panels/online-accounts/cc-online-accounts-panel.c:627
 #, c-format
 msgid "%s Account"
 msgstr "Account di %s"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:923
+#: panels/online-accounts/cc-online-accounts-panel.c:924
 msgid "Error removing account"
 msgstr "Erôr tal gjava l'account"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:988
+#: panels/online-accounts/cc-online-accounts-panel.c:989
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "<b>%s</b> gjavât"
@@ -5643,7 +5643,7 @@ msgstr "Zonte une sorzint input"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Nol è pussibil doprâ i metodis di input te schermade di acès"
 
-#: panels/region/cc-region-panel.c:1511
+#: panels/region/cc-region-panel.c:1512
 msgid "Login _Screen"
 msgstr "_Schermade di acès"
 
@@ -5736,11 +5736,11 @@ msgstr ""
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Lenghe;Disposizion;Layout;Tastiere;Input;"
 
-#: panels/search/cc-search-locations-dialog.c:610
+#: panels/search/cc-search-locations-dialog.c:611
 msgid "Select Location"
 msgstr "Selezione posizion"
 
-#: panels/search/cc-search-locations-dialog.c:614
+#: panels/search/cc-search-locations-dialog.c:615
 msgid "_OK"
 msgstr "_OK"
 
@@ -5833,7 +5833,7 @@ msgstr "Atîf"
 msgid "Choose a Folder"
 msgstr "Sielzi une cartele"
 
-#: panels/sharing/cc-sharing-panel.c:725
+#: panels/sharing/cc-sharing-panel.c:726
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5842,7 +5842,7 @@ msgstr ""
 "La condivision di file e permet di condividi cun altris la proprie cartele "
 "Public su pe rêt atuâl doprant: <a href=\\\"dav://%s\\\">dav://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:727
+#: panels/sharing/cc-sharing-panel.c:728
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5853,7 +5853,7 @@ msgstr ""
 "doprant il comant Secure Shell:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:729
+#: panels/sharing/cc-sharing-panel.c:730
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
@@ -5862,11 +5862,11 @@ msgstr ""
 "La condivision dal visôr e permet ai utents rimots di viodi o controlâ il to "
 "schermi tacantsi a <a href=\"vnc://%s\">vnc://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:833
+#: panels/sharing/cc-sharing-panel.c:834
 msgid "Copy"
 msgstr "Copie"
 
-#: panels/sharing/cc-sharing-panel.c:1286
+#: panels/sharing/cc-sharing-panel.c:1287
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "Condivision"
@@ -6065,7 +6065,7 @@ msgstr "Volum"
 msgid "Alert Sound"
 msgstr "Sun di avîs"
 
-#: panels/sound/cc-volume-slider.c:63
+#: panels/sound/cc-volume-slider.c:92
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
@@ -7767,7 +7767,7 @@ msgstr "Clic boton di mieç dal mouse"
 msgid "Right Mouse Button Click"
 msgstr "Clic boton diestri dal mouse"
 
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:241
+#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:242
 msgid "Back"
 msgstr "Indaûr"
 
@@ -7855,19 +7855,19 @@ msgstr "[PANEL] [ARGOMENT…]"
 msgid "Available panels:"
 msgstr "Panei disponibii:"
 
-#: shell/cc-window.ui:146
+#: shell/cc-window.ui:147
 msgid "All Settings"
 msgstr "Dutis lis impostazions"
 
-#: shell/cc-window.ui:184
+#: shell/cc-window.ui:185
 msgid "Primary Menu"
 msgstr "Menù primari"
 
-#: shell/cc-window.ui:331
+#: shell/cc-window.ui:332
 msgid "Warning: Development Version"
 msgstr "Avertiment: Version di svilup"
 
-#: shell/cc-window.ui:332
+#: shell/cc-window.ui:333
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -7877,7 +7877,7 @@ msgstr ""
 "svilup. A puedin capitâ compuartaments dal sisteme sbaliâts, pierditis di "
 "dâts e altris problemis inspietâts. "
 
-#: shell/cc-window.ui:343
+#: shell/cc-window.ui:344
 msgid "Help"
 msgstr "Jutori"
 
