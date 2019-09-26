@@ -335,7 +335,9 @@ filter_func (GtkListBoxRow *row,
 {
   CcPanelList *self;
   RowData *data;
-  gchar *search_text, *panel_text, *panel_description;
+  g_autofree gchar *search_text = NULL;
+  g_autofree gchar *panel_text = NULL;
+  g_autofree gchar *panel_description = NULL;
   gboolean retval = FALSE;
   gint i;
 
@@ -364,10 +366,6 @@ filter_func (GtkListBoxRow *row,
 
   retval = retval || g_strstr_len (panel_text, -1, search_text) != NULL ||
            g_strstr_len (panel_description, -1, search_text) != NULL;
-
-  g_free (panel_text);
-  g_free (search_text);
-  g_free (panel_description);
 
   return retval;
 }
@@ -462,9 +460,11 @@ search_sort_function (GtkListBoxRow *a,
 {
   CcPanelList *self;
   RowData *a_data, *b_data;
-  gchar *a_name, *b_name, *search, *a_strstr, *b_strstr;
+  g_autofree gchar *a_name = NULL;
+  g_autofree gchar *b_name = NULL;
+  g_autofree gchar *search = NULL;
+  gchar *a_strstr, *b_strstr;
   gint a_distance, b_distance;
-  gint retval;
 
   self = CC_PANEL_LIST (user_data);
   search = NULL;
@@ -486,10 +486,7 @@ search_sort_function (GtkListBoxRow *a,
 
   /* Default result for empty search */
   if (!search || g_utf8_strlen (search, -1) == 0)
-    {
-      retval = g_strcmp0 (a_name, b_name);
-      goto out;
-    }
+    return g_strcmp0 (a_name, b_name);
 
   a_strstr = g_strstr_len (a_name, -1, search);
   b_strstr = g_strstr_len (b_name, -1, search);
@@ -500,14 +497,7 @@ search_sort_function (GtkListBoxRow *a,
   if (b_strstr)
     b_distance = g_strstr_len (b_name, -1, search) - b_name;
 
-  retval = a_distance - b_distance;
-
-out:
-  g_free (a_name);
-  g_free (b_name);
-  g_free (search);
-
-  return retval;
+  return a_distance - b_distance;
 }
 
 static void

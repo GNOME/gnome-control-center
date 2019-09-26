@@ -59,7 +59,7 @@ log_handler (const gchar    *domain,
   time_t t;
   const gchar *level;
   gchar ftime[32];
-  gchar *buffer;
+  g_autofree gchar *buffer = NULL;
 
   /* Skip ignored log domains */
   if (domain && g_strv_contains (ignored_domains, domain))
@@ -84,8 +84,6 @@ log_handler (const gchar    *domain,
   g_io_channel_flush (standard_channel, NULL);
 
   G_UNLOCK (channel_lock);
-
-  g_free (buffer);
 }
 
 void
