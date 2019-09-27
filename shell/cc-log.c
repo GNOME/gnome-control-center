@@ -54,11 +54,9 @@ log_handler (const gchar    *domain,
              const gchar    *message,
              gpointer        user_data)
 {
-  GTimeVal tv;
-  struct tm tt;
-  time_t t;
+  g_autoptr(GDateTime) now = NULL;
   const gchar *level;
-  gchar ftime[32];
+  g_autofree gchar *ftime = NULL;
   gchar *buffer;
 
   /* Skip ignored log domains */
@@ -66,13 +64,11 @@ log_handler (const gchar    *domain,
     return;
 
   level = log_level_str (log_level);
-  g_get_current_time (&tv);
-  t = (time_t) tv.tv_sec;
-  tt = *localtime (&t);
-  strftime (ftime, sizeof (ftime), "%H:%M:%S", &tt);
-  buffer = g_strdup_printf ("%s.%04ld  %24s: %s: %s\n",
+  now = g_date_time_new_now_local ();
+  ftime = g_date_time_format (now, "%H:%M:%S");
+  buffer = g_strdup_printf ("%s.%04d  %24s: %s: %s\n",
                             ftime,
-                            tv.tv_usec / 1000,
+                            g_date_time_get_microsecond (now) / 1000,
                             domain,
                             level,
                             message);
