@@ -1,20 +1,29 @@
 # gnome-control-center ja.po.
-# Copyright (C) 1998-2013 Free Software Foundation, Inc.
+# Copyright (C) 1998-2019 Free Software Foundation, Inc.
 # Yukihiro Nakai <Nakai@abricot.co.jp>, 1998.
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1999.
 # Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000, 2009, 2010-2013.
 # Akira TAGOH <tagoh@gnome.gr.jp>, 2001.
-# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2003-2008.
 # KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
+# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2003-2008.
 # Satoru SATOH <ss@gnome.gr.jp>, 2006.
+# Hiyoko Torisaki <torisaki.hiyoko@gmail.com>, 2009.
 # Hideki Yamane (Debian-JP) <henrich@debian.or.jp>, 2009.
+# Shushi Kurose <md81bird@hitaki.net>, 2009-2012, 2014, 2016.
 # Yasumichi Akahoshi <yasumichi@vinelinux.org>, 2010.
-# Kiyotaka NISHIBORI <ml.nishibori.kiyotaka@gmail.com>, 2011.
 # Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2010-2017.
+# GEN SAKASHITA <Unknown>, 2011.
+# Takashi Sakamoto <Unknown>, 2011.
+# Kiyotaka NISHIBORI <ml.nishibori.kiyotaka@gmail.com>, 2011.
 # Hideki Yamnane <henrich@debian.org>, 2011.
 # Noriko Mizumoto <noriko@fedoraproject.org>, 2012.
-# Ikuya Awashiro <ikuya@fruitsbasket.info>, 2014.
-# Hajime Taira <htaira@redhat.com>, 2015-2017
+# Koichi Akabe <vbkaisetsu@debian.or.jp>, 2012.
+# Kentaro KAZUHAMA <kazken3@gmail.com>, 2012, 2018.
+# Ikuya Awashiro <ikuya@fruitsbasket.info>, 2014, 2017.
+# Hajime Taira <htaira@redhat.com>, 2015-2018.
+# TakashiUshikoshi <adoredirectg59@gmail.com>, 2016.
+# Shinichirou Yamada <yamada_strong_yamada_nice_64bit@yahoo.co.jp>, 2017-2018.
+# Kenichi Ito <ken.i54k@gmail.com>, 2018.
 # sicklylife <translation@sicklylife.jp>, 2019.
 #
 msgid ""
@@ -22,8 +31,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-08-24 18:26+0000\n"
-"PO-Revision-Date: 2019-09-05 00:00+0900\n"
+"POT-Creation-Date: 2019-09-05 11:42+0000\n"
+"PO-Revision-Date: 2019-09-27 23:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -193,7 +202,8 @@ msgstr "Bluetooth がオフになっています"
 
 #: panels/bluetooth/cc-bluetooth-panel.c:331
 msgid "Turn on to connect devices and receive file transfers."
-msgstr "デバイスの接続やファイルの受信を行うには Bluetooth をオンにしてください。"
+msgstr ""
+"デバイスの接続やファイルの受信を行うには Bluetooth をオンにしてください。"
 
 #: panels/bluetooth/cc-bluetooth-panel.c:332
 msgid "Airplane Mode is on"
@@ -309,7 +319,7 @@ msgstr "ラップトップ画面"
 #. TRANSLATORS: This refers to the embedded webcam on a laptop
 #: panels/color/cc-color-common.c:50
 msgid "Built-in Webcam"
-msgstr "ビルトインウェブカメラ"
+msgstr "組み込みのウェブカム"
 
 #. TRANSLATORS: an externally connected display, where %s is either the
 #. * model, vendor or ID, e.g. 'LP2480zx Monitor'
@@ -896,12 +906,12 @@ msgstr "昨日"
 #. Translators: This is a date format string in the style of "Feb 24".
 #: panels/common/cc-util.c:138
 msgid "%b %e"
-msgstr "%m月%d日"
+msgstr "%B%-e日"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
 #: panels/common/cc-util.c:143
 msgid "%b %e, %Y"
-msgstr "%Y年%m月%d日"
+msgstr "%Y年%B%-e日"
 
 #: panels/common/language-chooser.ui:5
 msgid "Language"
@@ -925,12 +935,12 @@ msgstr "年"
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: panels/datetime/cc-datetime-panel.c:333
 msgid "%e %B %Y, %l:%M %p"
-msgstr "%Y年%B%d日 %p%I:%M"
+msgstr "%Y年%B%-e日 %p %I:%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
 #: panels/datetime/cc-datetime-panel.c:338
 msgid "%e %B %Y, %R"
-msgstr "%Y年%B%d日 %R"
+msgstr "%Y年%B%-e日 %H:%M"
 
 #. Translators: "city, country"
 #: panels/datetime/cc-datetime-panel.c:503
@@ -961,7 +971,7 @@ msgstr "%p%I:%M"
 #. Translators: This is the time format used in 24-hour mode.
 #: panels/datetime/cc-datetime-panel.c:547
 msgid "%R"
-msgstr "%R"
+msgstr "%H:%M"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
@@ -1150,7 +1160,9 @@ msgstr "ディスプレイの配置"
 msgid ""
 "Drag displays to match your setup. The top bar is placed on the primary "
 "display."
-msgstr "あなたの調整に合うようにディスプレイをドラッグしてください。トップバーはプライマリディスプレイに配置されます。"
+msgstr ""
+"あなたの調整に合うようにディスプレイをドラッグしてください。トップバーはプラ"
+"イマリディスプレイに配置されます。"
 
 #: panels/display/cc-display-panel.c:1866
 msgid "Display Mode"
@@ -1895,7 +1907,7 @@ msgstr "キーボードショートカットがありません"
 
 #: panels/keyboard/gnome-keyboard-panel.ui:175 shell/panel-list.ui:206
 msgid "Try a different search"
-msgstr "別の検索を試す"
+msgstr "他のキーワードを試してください"
 
 #: panels/keyboard/shortcut-editor.ui:68 panels/keyboard/shortcut-editor.ui:318
 msgid "Press Esc to cancel or Backspace to reset the keyboard shortcut."
@@ -2502,7 +2514,7 @@ msgstr "メトリック"
 #: panels/network/connection-editor/ip6-page.ui:398
 #: panels/network/network-wifi.ui:933 panels/network/network-wifi.ui:1210
 msgid "Use this connection _only for resources on its network"
-msgstr "この接続はネットワーク上のリソースのためだけに使用(_O)"
+msgstr "この接続はネットワーク上のリソースのためだけに使用する(_O)"
 
 #: panels/network/connection-editor/ip6-page.ui:27
 msgid "IPv_6 Method"
@@ -2555,8 +2567,7 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
-"ファイル“%s”は読み込めなかったか、または処理できる VPN 接続情報がありませ"
-"ん\n"
+"ファイル“%s”は読み込めなかったか、または処理できる VPN 接続情報がありません\n"
 "\n"
 "エラー: %s"
 
@@ -3993,7 +4004,7 @@ msgstr "Wi-Fi(_W)"
 
 #: panels/power/cc-power-panel.c:1843
 msgid "Turn off Wi-Fi to save power."
-msgstr "Wi-Fi をオフにして節電します。"
+msgstr "Wi-Fi をオフにすると節電できます。"
 
 #: panels/power/cc-power-panel.c:1868
 msgid "_Mobile broadband"
@@ -4001,7 +4012,7 @@ msgstr "モバイルブロードバンド(_M)"
 
 #: panels/power/cc-power-panel.c:1873
 msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
-msgstr "モバイルブロードバンド (3G、4G、LTE など) をオフにして節電します。"
+msgstr "モバイルブロードバンド (LTE、4G、3G など) をオフにすると節電できます。"
 
 #: panels/power/cc-power-panel.c:1926
 msgid "_Bluetooth"
@@ -4009,7 +4020,7 @@ msgstr "Bluetooth(_B)"
 
 #: panels/power/cc-power-panel.c:1931
 msgid "Turn off Bluetooth to save power."
-msgstr ""
+msgstr "Bluetooth をオフにすると節電できます。"
 
 #: panels/power/cc-power-panel.c:1990
 msgid "When on battery power"
@@ -4524,7 +4535,7 @@ msgstr "出力トレイ"
 
 #: panels/printers/pp-options-dialog.c:88
 msgid "GhostScript pre-filtering"
-msgstr "GhostScriptのプレフィルタリング"
+msgstr "GhostScript のプレフィルタリング"
 
 #. Translators: This option sets number of pages printed on one sheet
 #: panels/printers/pp-options-dialog.c:534
@@ -5055,8 +5066,8 @@ msgid ""
 "Uses Mozilla Location Service: <a href='https://location.services.mozilla."
 "com/privacy'>Privacy Policy</a>"
 msgstr ""
-"Mozilla Location Service を使用します: <a "
-"href='https://location.services.mozilla.com/privacy'>プライバシーポリシー</a>"
+"Mozilla Location Service を使用します: <a href='https://location.services."
+"mozilla.com/privacy'>プライバシーポリシー</a>"
 
 #: panels/privacy/privacy.ui:828
 msgid "_Location Services"
@@ -5341,9 +5352,9 @@ msgid ""
 "File Sharing allows you to share your Public folder with others on your "
 "current network using: <a href=\"dav://%s\">dav://%s</a>"
 msgstr ""
-"ファイル共有を利用して、現在のネットワークの他ユーザーが次の URI に"
-"接続し、あなたの公開フォルダーを共有できるようにします: <a href=\"dav://%s"
-"\">dav://%s</a>"
+"ファイル共有を利用して、現在のネットワークの他ユーザーが次の URI に接続し、あ"
+"なたの公開フォルダーを共有できるようにします: <a href=\"dav://%s\">dav://%s</"
+"a>"
 
 #: panels/sharing/cc-sharing-panel.c:695
 #, c-format
@@ -5849,7 +5860,7 @@ msgstr "Caps Lock と Num Lock のON/OFFが切り替わるとビープ音を鳴�
 
 #: panels/universal-access/uap.ui:1282
 msgid "Visual Alerts"
-msgstr "視覚的な警告"
+msgstr "視覚警告"
 
 #: panels/universal-access/uap.ui:1286
 msgid "_Test flash"
@@ -6350,7 +6361,9 @@ msgstr "別の指(_O):"
 msgid ""
 "Your fingerprint was successfully saved. You should now be able to log in "
 "using your fingerprint reader."
-msgstr "あなたの指紋を登録しました。今後は指紋リーダーを使ってログインできるようになりました。"
+msgstr ""
+"あなたの指紋を登録しました。今後は指紋リーダーを使ってログインできるようにな"
+"りました。"
 
 #: panels/user-accounts/data/avatar-chooser.ui:27
 msgid "Take a Picture…"
@@ -6768,8 +6781,8 @@ msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
 "using the “%s” device."
 msgstr ""
-"指紋認証ログインを有効にするには、“%s”のデバイスを使って、指紋を登録する必要がありま"
-"す。"
+"指紋認証ログインを有効にするには、“%s”のデバイスを使って、指紋を登録する必要"
+"があります。"
 
 #: panels/user-accounts/um-fingerprint-dialog.c:718
 msgid "Selecting finger"
@@ -6795,14 +6808,14 @@ msgstr "先週"
 #: panels/user-accounts/um-history-dialog.c:83
 msgctxt "login history week label"
 msgid "%b %e"
-msgstr "%m月%d日"
+msgstr "%B%-e日"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
 #: panels/user-accounts/um-history-dialog.c:88
 msgctxt "login history week label"
 msgid "%b %e, %Y"
-msgstr "%Y年%m月%d日"
+msgstr "%Y年%B%-e日"
 
 #. Translators: This indicates a week label on a login history.
 #. The first %s is the first day of a week, and the second %s the last day.
@@ -6952,12 +6965,12 @@ msgstr "削除(_D)"
 #: panels/user-accounts/um-user-panel.c:701
 msgctxt "Password mode"
 msgid "Account disabled"
-msgstr "アカウントは無効です"
+msgstr "無効アカウント"
 
 #: panels/user-accounts/um-user-panel.c:709
 msgctxt "Password mode"
 msgid "To be set at next login"
-msgstr "次回ログイン時に設定"
+msgstr "次のログイン時に設定"
 
 #: panels/user-accounts/um-user-panel.c:712
 msgctxt "Password mode"
@@ -7271,7 +7284,7 @@ msgstr "GNOME コントロールセンター"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:8
 msgid "Utilities to configure the GNOME desktop"
-msgstr "GNOME デスクトップの設定ユーティリティー"
+msgstr "GNOME デスクトップの設定ユーティリティ"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:10
 msgid ""
@@ -7400,6 +7413,630 @@ msgstr[0] "%u 入力"
 msgid "System Sounds"
 msgstr "システムのサウンド"
 
+#~ msgid "System Bus"
+#~ msgstr "システムバス"
+
+#~ msgid "Full access"
+#~ msgstr "フルアクセス"
+
+#~ msgid "Session Bus"
+#~ msgstr "セッションバス"
+
+#~ msgid "Full access to /dev"
+#~ msgstr "/dev へのフルアクセス"
+
+#~ msgid "Has network access"
+#~ msgstr "ネットワークアクセス"
+
+#~ msgid "Read-only"
+#~ msgstr "読み取り専用"
+
+#~ msgid "File System"
+#~ msgstr "ファイルシステム"
+
+#~ msgid "Can change settings"
+#~ msgstr "設定の変更"
+
+#~ msgid ""
+#~ "%s has the following permissions built-in. These cannot be altered. If "
+#~ "you are concerned about these permissions, consider removing this "
+#~ "application."
+#~ msgstr ""
+#~ "%s には次の変更できない権限が組み込まれています。これらの権限に問題がある"
+#~ "場合は、このアプリケーションの削除を検討してください。"
+
+#~ msgid "Web Links"
+#~ msgstr "ウェブリンク"
+
+#~ msgid "Git Links"
+#~ msgstr "Git リンク"
+
+#~ msgid "%s Links"
+#~ msgstr "%s リンク"
+
+#~ msgid "Unset"
+#~ msgstr "削除"
+
+#~ msgid "Links"
+#~ msgstr "リンク"
+
+#~ msgid "Hypertext Files"
+#~ msgstr "ハイパーテキストファイル"
+
+#~ msgid "Text Files"
+#~ msgstr "テキストファイル"
+
+#~ msgid "Image Files"
+#~ msgstr "画像ファイル"
+
+#~ msgid "Font Files"
+#~ msgstr "フォントファイル"
+
+#~ msgid "Archive Files"
+#~ msgstr "アーカイブファイル"
+
+#~ msgid "Package Files"
+#~ msgstr "パッケージファイル"
+
+#~ msgid "Audio Files"
+#~ msgstr "オーディオファイル"
+
+#~ msgid "Video Files"
+#~ msgstr "ビデオファイル"
+
+#~ msgid "Other Files"
+#~ msgstr "その他のファイル"
+
+#~ msgid "No applications"
+#~ msgstr "アプリケーションがありません"
+
+#~ msgid "Install some…"
+#~ msgstr "インストール…"
+
+#~ msgid "Permissions & Access"
+#~ msgstr "パーミッションとアクセス"
+
+#~ msgid "Camera"
+#~ msgstr "カメラ"
+
+#~ msgid "Microphone"
+#~ msgstr "マイク"
+
+#~ msgid "Built-in Permissions"
+#~ msgstr "組み込みの権限"
+
+#~ msgid "Cannot be changed"
+#~ msgstr "変更できません"
+
+#~ msgid "Integration"
+#~ msgstr "統合"
+
+#~ msgid "System features used by this application."
+#~ msgstr "このアプリケーションが使用するシステムの機能です。"
+
+#~ msgid "Sounds"
+#~ msgstr "サウンド"
+
+#~ msgid "Default Handlers"
+#~ msgstr "デフォルトのハンドラ"
+
+#~ msgid "Types of files and links that this application opens."
+#~ msgstr "このアプリケーションで開くファイルとリンクの種類です。"
+
+#~ msgid "Usage"
+#~ msgstr "使用"
+
+#~ msgid "How much resources this application is using."
+#~ msgstr "このアプリケーションが使用中のリソース量です。"
+
+#~ msgid "Storage"
+#~ msgstr "ストレージ"
+
+#~ msgid "Open in Software"
+#~ msgstr "ソフトウェアで開く"
+
+#~ msgid ""
+#~ "How much disk space this application is occupying with app data and "
+#~ "caches."
+#~ msgstr ""
+#~ "このアプリケーションがデータとキャッシュで占有しているディスク容量です。"
+
+#~ msgid "Application"
+#~ msgstr "アプリケーション"
+
+#~ msgid "Data"
+#~ msgstr "データ"
+
+#~ msgid "Cache"
+#~ msgstr "キャッシュ"
+
+#~ msgid "<b>Total</b>"
+#~ msgstr "<b>合計</b>"
+
+#~ msgid "Clear Cache…"
+#~ msgstr "キャッシュの消去…"
+
+#~ msgid "Control various application permissions and settings"
+#~ msgstr "アプリケーションの権限や設定を変更します"
+
+#~ msgid "application;flatpak;permission;setting;"
+#~ msgstr ""
+#~ "application;flatpak;permission;setting;アプリケーション;パーミッション;許"
+#~ "可;権限;設定;"
+
+#~ msgid "Select a picture"
+#~ msgstr "画像の選択"
+
+#~ msgid "Set Background and Lock Screen"
+#~ msgstr "背景とロック画面に設定"
+
+#~ msgid "Set Lock Screen"
+#~ msgstr "ロック画面に設定"
+
+#~ msgid "Remove Background"
+#~ msgstr "背景から削除"
+
+#~ msgid "Add Picture…"
+#~ msgstr "写真の追加…"
+
+#~ msgid "Activities"
+#~ msgstr "アクティビティ"
+
+#~ msgid "Select Language"
+#~ msgstr "言語の選択"
+
+#~ msgid "Requires location services enabled and internet access"
+#~ msgstr "位置サービスの有効化とインターネットアクセスが必要です"
+
+#~ msgid "Changes Cannot be Applied"
+#~ msgstr "変更を適用できません"
+
+#~ msgid "This could be due to hardware limitations."
+#~ msgstr "この原因はハードウェアの制限にある可能性があります。"
+
+#~ msgid "Display Configuration"
+#~ msgstr "ディスプレイの設定"
+
+#~ msgctxt "display setting"
+#~ msgid "Orientation"
+#~ msgstr "向き"
+
+#~ msgid "More Warm"
+#~ msgstr "濃い暖色"
+
+#~ msgid "Less Warm"
+#~ msgstr "薄い暖色"
+
+#~ msgid "Manual Schedule"
+#~ msgstr "手動スケジュール"
+
+#~ msgid "Color Temperature"
+#~ msgstr "色温度"
+
+#~ msgid "Volume mute/unmute"
+#~ msgstr "ミュートを切り替える"
+
+#~ msgid "Microphone mute/unmute"
+#~ msgstr "マイクのミュートを切り替える"
+
+#~ msgid "Other Devices"
+#~ msgstr "その他のデバイス"
+
+#~ msgid "Airplane Mode On"
+#~ msgstr "機内モードオン"
+
+#~ msgid "Turn off to use Wi-Fi"
+#~ msgstr "Wi-Fi の使用をオフ"
+
+#~ msgid "Not charging"
+#~ msgstr "放電中"
+
+#~ msgid "%d hour"
+#~ msgid_plural "%d hours"
+#~ msgstr[0] "%d 時間"
+
+#~ msgid "%d minute"
+#~ msgid_plural "%d minutes"
+#~ msgstr[0] "%d 分"
+
+#~ msgid "%d second"
+#~ msgid_plural "%d seconds"
+#~ msgstr[0] "%d 秒"
+
+#~ msgctxt "time"
+#~ msgid "%s %s %s"
+#~ msgstr "%s %s %s"
+
+#~ msgctxt "time"
+#~ msgid "%s %s"
+#~ msgstr "%s %s"
+
+#~ msgid "0 seconds"
+#~ msgstr "0 秒"
+
+#~ msgid "_Automatic Suspend"
+#~ msgstr "自動サスペンド(_A)"
+
+#~ msgid "Po_wer Button Action"
+#~ msgstr "電源ボタンの動作(_W)"
+
+#~ msgctxt "automatic_suspend"
+#~ msgid "15 minutes"
+#~ msgstr "15 分"
+
+#~ msgctxt "automatic_suspend"
+#~ msgid "30 minutes"
+#~ msgstr "30 分"
+
+#~ msgctxt "blank_screen"
+#~ msgid "15 minutes"
+#~ msgstr "15 分"
+
+#~ msgctxt "blank_screen"
+#~ msgid "Never"
+#~ msgstr "しない"
+
+#~ msgctxt "printing option"
+#~ msgid "Resolution"
+#~ msgstr "解像度"
+
+#~ msgctxt "Camera status"
+#~ msgid "Off"
+#~ msgstr "オフ"
+
+#~ msgctxt "Camera status"
+#~ msgid "On"
+#~ msgstr "オン"
+
+#~ msgctxt "Microphone status"
+#~ msgid "Off"
+#~ msgstr "オフ"
+
+#~ msgctxt "Microphone status"
+#~ msgid "On"
+#~ msgstr "オン"
+
+#~ msgctxt "lock_screen"
+#~ msgid "1 minute"
+#~ msgstr "1 分"
+
+#~ msgctxt "lock_screen"
+#~ msgid "2 minutes"
+#~ msgstr "2 分"
+
+#~ msgctxt "lock_screen"
+#~ msgid "3 minutes"
+#~ msgstr "3 分"
+
+#~ msgctxt "lock_screen"
+#~ msgid "5 minutes"
+#~ msgstr "5 分"
+
+#~ msgctxt "lock_screen"
+#~ msgid "30 minutes"
+#~ msgstr "30 分"
+
+#~ msgctxt "lock_screen"
+#~ msgid "1 hour"
+#~ msgstr "1 時間"
+
+#~ msgctxt "purge_files"
+#~ msgid "1 hour"
+#~ msgstr "1 時間"
+
+#~ msgctxt "retain_history"
+#~ msgid "1 day"
+#~ msgstr "1 日"
+
+#~ msgctxt "retain_history"
+#~ msgid "7 days"
+#~ msgstr "7 日"
+
+#~ msgctxt "retain_history"
+#~ msgid "30 days"
+#~ msgstr "30 日"
+
+#~ msgid "Lock Screen _Notifications"
+#~ msgstr "ロック画面での通知(_N)"
+
+#~ msgid ""
+#~ "Use of the camera allows applications to capture photos and video. "
+#~ "Disabling the camera may cause some applications to not function properly."
+#~ msgstr ""
+#~ "アプリケーションがカメラで写真や動画を撮影できるようになります。無効にする"
+#~ "と一部のアプリケーションが正常に動作しなくなる可能性があります。"
+
+#~ msgid "_Camera"
+#~ msgstr "カメラ(_C)"
+
+#~ msgid ""
+#~ "Use of the microphone allows applications to capture sounds. Disabling "
+#~ "the microphone may cause some applications to not function properly."
+#~ msgstr ""
+#~ "アプリケーションがマイクで録音できるようになります。無効にすると一部のアプ"
+#~ "リケーションが正常に動作しなくなる可能性があります。"
+
+#~ msgid "_Microphone"
+#~ msgstr "マイク(_M)"
+
+#~ msgid "Choose keyboard layouts or input methods."
+#~ msgstr "キーボードレイアウトかインプットメソッドを選択してください。"
+
+#~ msgid "Previous source"
+#~ msgstr "前のソース"
+
+#~ msgid "Next source"
+#~ msgstr "次のソース"
+
+#~ msgid ""
+#~ "Control which search results are shown in the Activities Overview. The "
+#~ "order of search results can also be changed by moving rows in the list."
+#~ msgstr ""
+#~ "アクティビティ画面で、どれの検索結果を表示するかを設定します。一覧の項目を"
+#~ "入れ替えると、検索結果の表示順が変更されます。"
+
+#~ msgid ""
+#~ "Folders which are searched by system applications, such as Files, Photos "
+#~ "and Videos."
+#~ msgstr ""
+#~ "システムアプリケーション (ファイル、ビデオ、写真など) が検索対象にするフォ"
+#~ "ルダーです。"
+
+#~ msgid "Testing %s"
+#~ msgstr "%s のテスト中"
+
+#~ msgid "Click a speaker to test"
+#~ msgstr "スピーカーをクリックしてテストしてください"
+
+#~ msgid "System Volume"
+#~ msgstr "システムの音量"
+
+#~ msgid "Volume Levels"
+#~ msgstr "音量レベル"
+
+#~ msgid "Output Device"
+#~ msgstr "出力デバイス"
+
+#~ msgid "Configuration"
+#~ msgstr "設定"
+
+#~ msgid "Volume"
+#~ msgstr "音量"
+
+#~ msgid "Alert Sound"
+#~ msgstr "警告音"
+
+#~ msgctxt "Thunderbolt Device Status"
+#~ msgid "Disconnected"
+#~ msgstr "切断"
+
+#~ msgctxt "Thunderbolt Device Status"
+#~ msgid "Connecting"
+#~ msgstr "接続中"
+
+#~ msgctxt "Thunderbolt Device Status"
+#~ msgid "Connected"
+#~ msgstr "接続"
+
+#~ msgctxt "Thunderbolt Device Status"
+#~ msgid "Authorization Error"
+#~ msgstr "認証エラー"
+
+#~ msgctxt "Thunderbolt Device Status"
+#~ msgid "Authorizing"
+#~ msgstr "認証中"
+
+#~ msgctxt "Thunderbolt Device Status"
+#~ msgid "Connected & Authorized"
+#~ msgstr "接続 & 認証"
+
+#~ msgctxt "Thunderbolt Device Status"
+#~ msgid "Unknown"
+#~ msgstr "不明"
+
+#~ msgid "Authorized at:"
+#~ msgstr "認証日時:"
+
+#~ msgid "Connected at:"
+#~ msgstr "接続日時:"
+
+#~ msgid "Enrolled at:"
+#~ msgstr "登録日時:"
+
+#~ msgid "Failed to authorize device: "
+#~ msgstr "デバイスの認証に失敗しました: "
+
+#~ msgid "Failed to forget device: "
+#~ msgstr "デバイスの削除に失敗しました: "
+
+#~ msgid "Name:"
+#~ msgstr "名前:"
+
+#~ msgid "Status:"
+#~ msgstr "ステータス:"
+
+#~ msgid "UUID:"
+#~ msgstr "UUID:"
+
+#~ msgid "Authorize and Connect"
+#~ msgstr "認証と接続"
+
+#~ msgid "Forget Device"
+#~ msgstr "デバイスの削除"
+
+#~ msgctxt "Thunderbolt Device Status"
+#~ msgid "Error"
+#~ msgstr "エラー"
+
+#~ msgctxt "Thunderbolt Device Status"
+#~ msgid "Authorized"
+#~ msgstr "認証済み"
+
+#~ msgid ""
+#~ "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
+#~ msgstr ""
+#~ "Thunderbolt サブシステム (boltd) がインストールされていないか、正しくセッ"
+#~ "トアップされていません。"
+
+#~ msgid ""
+#~ "Thunderbolt could not be detected.\n"
+#~ "Either the system lacks Thunderbolt support, it has been disabled in the "
+#~ "BIOS or is set to an unsupported security level in the BIOS."
+#~ msgstr ""
+#~ "Thunderbolt を検出できませんでした。\n"
+#~ "システムが Thunderbolt に対応していないか、または BIOS で Thunderbolt が無"
+#~ "効になっているか、もしくは BIOS で Thunderbolt のセキュリティレベルが対応"
+#~ "していない設定になっているかのいずれかです。"
+
+#~ msgid "Thunderbolt support has been disabled in the BIOS."
+#~ msgstr "Thunderbolt サポートは BIOS で無効化されています。"
+
+#~ msgid "Thunderbolt security level could not be determined."
+#~ msgstr "Thunderbolt のセキュリティレベルを確認できませんでした。"
+
+#~ msgid "Error switching direct mode: %s"
+#~ msgstr "ダイレクトモードの切り替え中にエラーが発生しました: %s"
+
+#~ msgid "No Thunderbolt support"
+#~ msgstr "Thunderbolt サポートがありません"
+
+#~ msgid "Direct Access"
+#~ msgstr "ダイレクトアクセス"
+
+#~ msgid "Allow direct access to devices such as docks and external GPUs."
+#~ msgstr ""
+#~ "ドックや外付け GPU などのデバイスへのダイレクトアクセスを許可します。"
+
+#~ msgid "Only USB and Display Port devices can attach."
+#~ msgstr "USB デバイスと DisplayPort デバイスのみ接続できます。"
+
+#~ msgid "Pending Devices"
+#~ msgstr "保留中のデバイス"
+
+#~ msgid "No devices attached"
+#~ msgstr "デバイスが接続されていません"
+
+#~ msgid "Thunderbolt"
+#~ msgstr "Thunderbolt"
+
+#~ msgid "Manage Thunderbolt devices"
+#~ msgstr "Thunderbolt デバイスの管理"
+
+#~ msgid "_Confirm New Password"
+#~ msgstr "新しいパスワードの確認(_C)"
+
+#~ msgid "The GNOME Project"
+#~ msgstr "The GNOME Project"
+
+#~ msgid "Primary Menu"
+#~ msgstr "プライマリメニュー"
+
+#~ msgid "Warning: Development Version"
+#~ msgstr "警告: 開発版です"
+
+#~ msgid ""
+#~ "This version of Settings should only be used for development purposes. "
+#~ "You may experience incorrect system behavior, data loss, and other "
+#~ "unexpected issues. "
+#~ msgstr ""
+#~ "このバージョンの“設定”は、開発目的の場合にのみ使用してください。システムの"
+#~ "不正動作、データ消失、その他の予期せぬ不具合が発生する可能性があります。"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Go back to previous panel"
+#~ msgstr "前の画面に戻る"
+
+#~ msgid "Show warning when running a development build of Settings"
+#~ msgstr "“設定”の開発版を起動したときに警告を表示する"
+
+#~ msgid ""
+#~ "Whether Settings should show a warning when running a development build."
+#~ msgstr "開発版を起動したときに“設定”が警告を表示するかどうかです。"
+
+#~ msgid "preferences-desktop-wallpaper"
+#~ msgstr "preferences-desktop-wallpaper"
+
+#~ msgid "bluetooth"
+#~ msgstr "bluetooth"
+
+#~ msgid "preferences-color"
+#~ msgstr "preferences-color"
+
+#~ msgid "preferences-system-time"
+#~ msgstr "preferences-system-time"
+
+#~ msgid "_Off"
+#~ msgstr "オフ(_O)"
+
+#~ msgid "preferences-desktop-display"
+#~ msgstr "preferences-desktop-display"
+
+#~ msgid "starred"
+#~ msgstr "starred"
+
+#~ msgid "help-about"
+#~ msgstr "help-about"
+
+#~ msgid "media-removable"
+#~ msgstr "media-removable"
+
+#~ msgid "input-keyboard"
+#~ msgstr "input-keyboard"
+
+#~ msgid "input-mouse"
+#~ msgstr "input-mouse"
+
+#~ msgid "network-workgroup"
+#~ msgstr "network-workgroup"
+
+#~ msgid "network-wireless"
+#~ msgstr "network-wireless"
+
+#~ msgid "preferences-system-notifications"
+#~ msgstr "preferences-system-notifications"
+
+#~ msgid "goa-panel"
+#~ msgstr "goa-panel"
+
+#~ msgid "gnome-power-manager"
+#~ msgstr "gnome-power-manager"
+
+#~ msgid "printer"
+#~ msgstr "printer"
+
+#~ msgid "preferences-system-privacy"
+#~ msgstr "preferences-system-privacy"
+
+#~ msgid "preferences-desktop-locale"
+#~ msgstr "preferences-desktop-locale"
+
+#~ msgid "preferences-system-search"
+#~ msgstr "preferences-system-search"
+
+#~ msgid "preferences-system-sharing"
+#~ msgstr "preferences-system-sharing"
+
+#~ msgid "multimedia-volume-control"
+#~ msgstr "multimedia-volume-control"
+
+#~ msgid "thunderbolt"
+#~ msgstr "thunderbolt"
+
+#~ msgid "preferences-desktop-accessibility"
+#~ msgstr "preferences-desktop-accessibility"
+
+#~ msgid "system-users"
+#~ msgstr "system-users"
+
+#~ msgid "input-tablet"
+#~ msgstr "input-tablet"
+
+#~ msgid "org.gnome.Settings"
+#~ msgstr "org.gnome.Settings"
+
+#~ msgid "Drag displays to match your setup."
+#~ msgstr "あなたの調整に合うようにディスプレイをドラッグしてください。"
+
 #~ msgid "Back­ground"
 #~ msgstr "背景"
 
@@ -7478,17 +8115,11 @@ msgstr "システムのサウンド"
 #~ msgid "Mirrored"
 #~ msgstr "ミラー済み"
 
-#~ msgid "Primary"
-#~ msgstr "プライマリ"
-
 #~ msgid "Secondary"
 #~ msgstr "セカンダリ"
 
 #~ msgid "Arrange Combined Displays"
 #~ msgstr "ディスプレイの配置の調整"
-
-#~ msgid "Drag displays to rearrange them"
-#~ msgstr "ディスプレイをドラッグして位置を調整してください"
 
 #~ msgid "%d Hz (NTSC)"
 #~ msgstr "%d Hz (NTSC)"
@@ -7562,12 +8193,6 @@ msgstr "システムのサウンド"
 #~ msgid "_Method"
 #~ msgstr "メソッド(_M)"
 
-#~ msgid "Add Device"
-#~ msgstr "デバイスの追加"
-
-#~ msgid "Remove Device"
-#~ msgstr "デバイスの削除"
-
 #~ msgid "VPN Type"
 #~ msgstr "VPN の種類"
 
@@ -7598,9 +8223,6 @@ msgstr "システムのサウンド"
 
 #~ msgid "Press Esc to cancel."
 #~ msgstr "Escキーでキャンセルします"
-
-#~ msgid "Reset"
-#~ msgstr "リセット"
 
 #~ msgid "Make available to other _users"
 #~ msgstr "他のユーザーにも利用可能にする(_U)"
@@ -7679,9 +8301,6 @@ msgstr "システムのサウンド"
 
 #~ msgid "Wayland"
 #~ msgstr "Wayland"
-
-#~ msgid "_Name:"
-#~ msgstr "名前(_N):"
 
 #~ msgid ""
 #~ "To edit a shortcut, click the row and hold down the new keys or press "
@@ -7817,9 +8436,6 @@ msgstr "システムのサウンド"
 #~ msgid "Chat"
 #~ msgstr "チャット"
 
-#~ msgid "Resources"
-#~ msgstr "リソース"
-
 #~ msgid "Error logging into the account"
 #~ msgstr "アカウントのログインに失敗"
 
@@ -7874,9 +8490,6 @@ msgstr "システムのサウンド"
 
 #~ msgid "Supply"
 #~ msgstr "サプライ"
-
-#~ msgid "_Default printer"
-#~ msgstr "デフォルトのプリンター(_D)"
 
 #~ msgid "Jobs"
 #~ msgstr "ジョブ"
