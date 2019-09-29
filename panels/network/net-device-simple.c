@@ -250,6 +250,7 @@ net_device_simple_init (NetDeviceSimple *self)
 
         g_signal_connect_swapped (priv->options_button, "clicked",
                                   G_CALLBACK (edit_connection), self);
+        gtk_widget_set_visible (priv->options_button, g_find_program_in_path ("nm-connection-editor") != NULL);
 }
 
 char *
