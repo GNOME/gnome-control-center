@@ -252,6 +252,7 @@ net_device_simple_init (NetDeviceSimple *device_simple)
                                                      "button_options"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (edit_connection), device_simple);
+        gtk_widget_set_visible (widget, g_find_program_in_path ("nm-connection-editor") != NULL);
 }
 
 char *
