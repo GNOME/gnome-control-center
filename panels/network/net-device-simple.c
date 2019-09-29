@@ -112,7 +112,7 @@ nm_device_simple_refresh_ui (NetDeviceSimple *self)
         update_off_switch_from_device_state (priv->device_off_switch, state, self);
 
         /* set up the Options button */
-        gtk_widget_set_visible (GTK_WIDGET (priv->options_button), state != NM_DEVICE_STATE_UNMANAGED);
+        gtk_widget_set_visible (GTK_WIDGET (priv->options_button), state != NM_DEVICE_STATE_UNMANAGED && g_find_program_in_path ("nm-connection-editor") != NULL);
 }
 
 static void
@@ -250,6 +250,7 @@ net_device_simple_init (NetDeviceSimple *self)
 
         g_signal_connect_swapped (priv->options_button, "clicked",
                                   G_CALLBACK (edit_connection), self);
+        gtk_widget_set_visible (priv->options_button, g_find_program_in_path ("nm-connection-editor") != NULL);
 }
 
 char *
