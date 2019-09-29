@@ -174,14 +174,6 @@ net_object_add_to_stack (NetObject    *object,
 }
 
 void
-net_object_delete (NetObject *object)
-{
-        NetObjectClass *klass = NET_OBJECT_GET_CLASS (object);
-        if (klass->delete != NULL)
-                klass->delete (object);
-}
-
-void
 net_object_refresh (NetObject *object)
 {
         NetObjectClass *klass = NET_OBJECT_GET_CLASS (object);
