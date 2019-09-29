@@ -259,12 +259,6 @@ device_off_toggled (GtkSwitch *sw,
 }
 
 static void
-edit_connection (GtkButton *button, NetVpn *vpn)
-{
-        net_object_edit (NET_OBJECT (vpn));
-}
-
-static void
 editor_done (NetConnectionEditor *editor,
              gboolean             success,
              NetVpn              *vpn)
@@ -274,19 +268,16 @@ editor_done (NetConnectionEditor *editor,
 }
 
 static void
-vpn_proxy_edit (NetObject *object)
+edit_connection (GtkButton *button, NetVpn *vpn)
 {
-        NetVpn *vpn = NET_VPN (object);
-        GtkWidget *button, *window;
+        GtkWidget *window;
         NetConnectionEditor *editor;
         NMClient *client;
         g_autofree gchar *title = NULL;
 
-        button = GTK_WIDGET (gtk_builder_get_object (vpn->builder,
-                                                     "button_options"));
-        window = gtk_widget_get_toplevel (button);
+        window = gtk_widget_get_toplevel (GTK_WIDGET (button));
 
-        client = net_object_get_client (object);
+        client = net_object_get_client (NET_OBJECT (vpn));
 
         editor = net_connection_editor_new (GTK_WINDOW (window),
                                             vpn->connection,
@@ -398,7 +389,6 @@ net_vpn_class_init (NetVpnClass *klass)
         parent_class->add_to_stack = vpn_proxy_add_to_stack;
         parent_class->delete = vpn_proxy_delete;
         parent_class->refresh = vpn_proxy_refresh;
-        parent_class->edit = vpn_proxy_edit;
 
         pspec = g_param_spec_object ("connection", NULL, NULL,
                                      NM_TYPE_CONNECTION,

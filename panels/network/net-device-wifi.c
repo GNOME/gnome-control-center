@@ -1155,29 +1155,6 @@ net_device_wifi_finalize (GObject *object)
 }
 
 static void
-device_wifi_edit (NetObject *object)
-{
-        const gchar *uuid;
-        g_autofree gchar *cmdline = NULL;
-        g_autoptr(GError) error = NULL;
-        NetDeviceWifi *device = NET_DEVICE_WIFI (object);
-        NMClient *client;
-        NMRemoteConnection *connection;
-
-        client = net_object_get_client (object);
-        connection = nm_client_get_connection_by_path (client, device->selected_connection_id);
-        if (connection == NULL) {
-                g_warning ("failed to get remote connection");
-                return;
-        }
-        uuid = nm_connection_get_uuid (NM_CONNECTION (connection));
-        cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
-        g_debug ("Launching '%s'\n", cmdline);
-        if (!g_spawn_command_line_async (cmdline, &error))
-                g_warning ("Failed to launch nm-connection-editor: %s", error->message);
-}
-
-static void
 net_device_wifi_get_property (GObject    *object,
                               guint       prop_id,
                               GValue     *value,
@@ -1206,7 +1183,6 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         object_class->get_property = net_device_wifi_get_property;
         parent_class->add_to_stack = device_wifi_proxy_add_to_stack;
         parent_class->refresh = device_wifi_refresh;
-        parent_class->edit = device_wifi_edit;
 
         g_object_class_install_property (object_class,
                                          PROP_SCANNING,
