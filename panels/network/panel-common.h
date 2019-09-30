@@ -38,9 +38,6 @@ void             panel_set_device_row_status                   (GtkBuilder *buil
 gboolean         panel_set_device_widget_details               (GtkBuilder *builder,
                                                                 const gchar *widget_suffix,
                                                                 const gchar *value);
-gboolean         panel_set_device_widget_header                (GtkBuilder *builder,
-                                                                const gchar *widget_suffix,
-                                                                const gchar *value);
 void             panel_set_device_widgets                      (GtkBuilder *builder,
                                                                 NMDevice *device);
 void             panel_unset_device_widgets                    (GtkBuilder *builder);

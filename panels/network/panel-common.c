@@ -377,7 +377,7 @@ panel_set_device_widget_details (GtkBuilder *builder,
 }
 
 
-gboolean
+static gboolean
 panel_set_device_widget_header (GtkBuilder *builder,
                                 const gchar *widget_suffix,
                                 const gchar *heading)
