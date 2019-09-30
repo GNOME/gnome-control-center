@@ -203,7 +203,7 @@ device_ethernet_refresh_ui (NetDeviceEthernet *device)
         NMDevice *nm_device;
         NMDeviceState state;
         GtkWidget *widget;
-        gchar *speed = NULL;
+        g_autofree gchar *speed = NULL;
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device));
 
