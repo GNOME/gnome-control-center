@@ -491,6 +491,8 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         NMAccessPoint *ap;
         NMConnection *connection;
         GtkWidget *dialog;
+        GtkWidget *widget;
+        g_autofree gchar *status = NULL;
 
         if (device_is_hotspot (device_wifi)) {
                 nm_device_wifi_refresh_hotspot (device_wifi);
@@ -585,7 +587,9 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         else
                 panel_set_device_widget_details (device_wifi->builder, "last_used", NULL);
 
-        panel_set_device_status (device_wifi->builder, "heading_status", nm_device, NULL);
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_status"));
+        status = panel_device_status_to_localized_string (nm_device, NULL);
+        gtk_label_set_label (GTK_LABEL (widget), status);
 
         /* update list of APs */
         show_wifi_list (device_wifi);

@@ -269,9 +269,9 @@ device_state_reason_to_localized_string (NMDevice *device)
         return value;
 }
 
-static gchar *
-device_status_to_localized_string (NMDevice *nm_device,
-                                   const gchar *speed)
+gchar *
+panel_device_status_to_localized_string (NMDevice *nm_device,
+                                         const gchar *speed)
 {
         NMDeviceState state;
         GString *string;
@@ -312,34 +312,6 @@ device_status_to_localized_string (NMDevice *nm_device,
         }
 
         return g_string_free (string, FALSE);
-}
-
-void
-panel_set_device_status (GtkBuilder *builder,
-                         const gchar *label_name,
-                         NMDevice *nm_device,
-                         const gchar *speed)
-{
-        GtkLabel *label;
-        g_autofree gchar *status = NULL;
-
-        label = GTK_LABEL (gtk_builder_get_object (builder, label_name));
-        status = device_status_to_localized_string (nm_device, speed);
-        gtk_label_set_label (label, status);
-}
-
-void
-panel_set_device_row_status (GtkBuilder  *builder,
-                             const gchar *row_name,
-                             NMDevice    *nm_device,
-                             const gchar *speed)
-{
-        HdyActionRow *row;
-        g_autofree gchar *status = NULL;
-
-        row = HDY_ACTION_ROW (gtk_builder_get_object (builder, row_name));
-        status = device_status_to_localized_string (nm_device, speed);
-        hdy_action_row_set_title (row, status);
 }
 
 gboolean

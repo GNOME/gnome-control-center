@@ -21,19 +21,12 @@
 
 #pragma once
 
-#include <glib-object.h>
 #include <NetworkManager.h>
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-void             panel_set_device_status                       (GtkBuilder *builder,
-                                                                const gchar *label_name,
-                                                                NMDevice *nm_device,
-                                                                const gchar *speed);
-void             panel_set_device_row_status                   (GtkBuilder *builder,
-                                                                const gchar *row_name,
-                                                                NMDevice *nm_device,
+gchar           *panel_device_status_to_localized_string       (NMDevice *nm_device,
                                                                 const gchar *speed);
 gboolean         panel_set_device_widget_details               (GtkBuilder *builder,
                                                                 const gchar *widget_suffix,

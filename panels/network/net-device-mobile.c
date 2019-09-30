@@ -374,6 +374,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         NMClient *client;
         NMDeviceModemCapabilities caps;
         NMDevice *nm_device;
+        g_autofree gchar *status = NULL;
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device_mobile));
 
@@ -388,7 +389,9 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         mobilebb_enabled_toggled (client, NULL, device_mobile);
 
         /* set device state, with status */
-        panel_set_device_status (device_mobile->builder, "label_status", nm_device, NULL);
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "label_status"));
+        status = panel_device_status_to_localized_string (nm_device, NULL);
+        gtk_label_set_label (GTK_LABEL (widget), status);
 
         /* sensitive for other connection types if the device is currently connected */
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
