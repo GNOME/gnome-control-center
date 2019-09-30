@@ -393,7 +393,7 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          destroy,
 	                          "/org/gnome/ControlCenter/network/eap-method-ttls.ui",
-	                          "eap_ttls_notebook",
+	                          "eap_ttls_grid",
 	                          "eap_ttls_anon_identity_entry",
 	                          FALSE);
 	if (!parent)
