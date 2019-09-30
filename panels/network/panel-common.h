@@ -27,11 +27,6 @@
 
 G_BEGIN_DECLS
 
-const gchar     *panel_device_to_icon_name                     (NMDevice *device,
-                                                                gboolean  symbolic);
-gint             panel_device_get_sort_category                (NMDevice *device);
-const gchar     *panel_ap_mode_to_localized_string             (NM80211Mode mode);
-const gchar     *panel_vpn_state_to_localized_string           (NMVpnConnectionState type);
 void             panel_set_device_status                       (GtkBuilder *builder,
                                                                 const gchar *label_name,
                                                                 NMDevice *nm_device,
