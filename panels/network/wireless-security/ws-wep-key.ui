@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.4"/>
-  <object class="GtkListStore" id="model4">
+  <object class="GtkListStore" id="key_index_model">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -21,7 +21,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model3">
+  <object class="GtkListStore" id="auth_method_model">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -113,7 +113,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="hexpand">True</property>
-        <property name="model">model3</property>
+        <property name="model">auth_method_model</property>
         <child>
           <object class="GtkCellRendererText"/>
           <attributes>
@@ -145,7 +145,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="hexpand">True</property>
-        <property name="model">model4</property>
+        <property name="model">key_index_model</property>
         <child>
           <object class="GtkCellRendererText"/>
           <attributes>

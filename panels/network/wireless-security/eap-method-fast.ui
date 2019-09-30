@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.4"/>
-  <object class="GtkListStore" id="model8">
+  <object class="GtkListStore" id="eap_fast_inner_auth_model">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -12,7 +12,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model9">
+  <object class="GtkListStore" id="eap_fast_pac_provision_model">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -120,7 +120,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="hexpand">True</property>
-        <property name="model">model8</property>
+        <property name="model">eap_fast_inner_auth_model</property>
         <child>
           <object class="GtkCellRendererText"/>
           <attributes>
@@ -152,7 +152,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="hexpand">True</property>
-        <property name="model">model9</property>
+        <property name="model">eap_fast_pac_provision_model</property>
         <child>
           <object class="GtkCellRendererText"/>
           <attributes>
