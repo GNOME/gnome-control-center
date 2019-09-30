@@ -110,7 +110,7 @@ ws_dynamic_wep_new (NMConnection *connection,
 	                                 update_secrets,
 	                                 destroy,
 	                                 "/org/gnome/ControlCenter/network/ws-dynamic-wep.ui",
-	                                 "dynamic_wep_table",
+	                                 "dynamic_wep_grid",
 	                                 NULL);
 	if (!parent)
 		return NULL;
