@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.4"/>
-  <object class="GtkListStore" id="model7">
+  <object class="GtkListStore" id="dynamic_wep_auth_model">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -36,7 +36,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="hexpand">True</property>
-        <property name="model">model7</property>
+        <property name="model">dynamic_wep_auth_model</property>
         <child>
           <object class="GtkCellRendererText"/>
           <attributes>
