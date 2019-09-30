@@ -232,10 +232,6 @@ cc_background_preview_set_property (GObject      *object,
       self->is_lock_screen = g_value_get_boolean (value);
       gtk_stack_set_visible_child_name (self->stack,
                                         self->is_lock_screen ? "lock" : "desktop");
-      if (self->is_lock_screen)
-        start_monitor_time (self);
-      else
-        stop_monitor_time (self);
       break;
 
     case PROP_ITEM:
@@ -351,6 +347,7 @@ cc_background_preview_init (CcBackgroundPreview *self)
 
   update_clock_format (self);
   load_custom_css (self);
+  start_monitor_time (self);
 }
 
 CcBackgroundItem*
