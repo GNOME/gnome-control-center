@@ -155,7 +155,7 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 	                                 update_secrets,
 	                                 NULL,
 	                                 "/org/gnome/ControlCenter/network/ws-leap.ui",
-	                                 "leap_notebook",
+	                                 "leap_table",
 	                                 "leap_username_entry");
 	if (!parent)
 		return NULL;
