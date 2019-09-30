@@ -174,7 +174,7 @@ destroy (EAPMethod *parent)
 	EAPMethodLEAP *method = (EAPMethodLEAP *) parent;
 	GtkWidget *widget;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_notebook"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_table"));
 	g_assert (widget);
 	g_signal_handlers_disconnect_by_data (widget, method);
 
@@ -200,7 +200,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          destroy,
 	                          "/org/gnome/ControlCenter/network/eap-method-leap.ui",
-	                          "eap_leap_notebook",
+	                          "eap_leap_table",
 	                          "eap_leap_username_entry",
 	                          FALSE);
 	if (!parent)
@@ -211,7 +211,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	method->editing_connection = secrets_only ? FALSE : TRUE;
 	method->ws_parent = ws_parent;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_notebook"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_table"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "realize",
 	                  (GCallback) widgets_realized,
