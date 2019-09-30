@@ -338,7 +338,7 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          destroy,
 	                          "/org/gnome/ControlCenter/network/eap-method-peap.ui",
-	                          "eap_peap_notebook",
+	                          "eap_peap_grid",
 	                          "eap_peap_anon_identity_entry",
 	                          FALSE);
 	if (!parent)
