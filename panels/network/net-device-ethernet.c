@@ -23,7 +23,8 @@
 
 #include <glib-object.h>
 #include <glib/gi18n.h>
-
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
 #include <NetworkManager.h>
 
 #include "panel-common.h"
@@ -203,7 +204,8 @@ device_ethernet_refresh_ui (NetDeviceEthernet *device)
         NMDevice *nm_device;
         NMDeviceState state;
         GtkWidget *widget;
-        gchar *speed = NULL;
+        g_autofree gchar *speed = NULL;
+        g_autofree gchar *status = NULL;
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device));
 
@@ -221,7 +223,9 @@ device_ethernet_refresh_ui (NetDeviceEthernet *device)
 
         if (state != NM_DEVICE_STATE_UNAVAILABLE)
                 speed = net_device_simple_get_speed (NET_DEVICE_SIMPLE (device));
-        panel_set_device_row_status (device->builder, "details_row", nm_device, speed);
+        widget = GTK_WIDGET (gtk_builder_get_object (device->builder, "details_row"));
+        status = panel_device_status_to_localized_string (nm_device, speed);
+        hdy_action_row_set_title (HDY_ACTION_ROW (widget), status);
 
         populate_ui (device);
 }

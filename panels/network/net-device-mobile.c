@@ -240,6 +240,7 @@ static void
 device_mobile_refresh_equipment_id (NetDeviceMobile *device_mobile)
 {
         const gchar *equipment_id = NULL;
+        GtkWidget *heading, *widget;
 
         if (device_mobile->mm_object != NULL) {
                 MMModem *modem;
@@ -260,7 +261,9 @@ device_mobile_refresh_equipment_id (NetDeviceMobile *device_mobile)
                                                   "ControlCenter::EquipmentIdentifier");
         }
 
-        panel_set_device_widget_details (device_mobile->builder, "imei", equipment_id);
+        heading = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "heading_imei"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "label_imei"));
+        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), equipment_id);
 }
 
 static gchar *
@@ -305,6 +308,11 @@ device_mobile_find_provider (NetDeviceMobile *device_mobile,
 static void
 device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
 {
+        GtkWidget *heading, *widget;
+
+        heading = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "heading_provider"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "label_provider"));
+
         if (device_mobile->mm_object != NULL) {
                 g_autofree gchar *operator_name = NULL;
                 MMModem3gpp *modem_3gpp;
@@ -341,7 +349,7 @@ device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
                                  operator_name);
                 }
 
-                panel_set_device_widget_details (device_mobile->builder, "provider", operator_name);
+                panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), operator_name);
         } else {
                 const gchar *gsm;
                 const gchar *cdma;
@@ -354,13 +362,13 @@ device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
 
                 if (gsm != NULL && cdma != NULL) {
                         g_autofree gchar *both = g_strdup_printf ("%s, %s", gsm, cdma);
-                        panel_set_device_widget_details (device_mobile->builder, "provider", both);
+                        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), both);
                 } else if (gsm != NULL) {
-                        panel_set_device_widget_details (device_mobile->builder, "provider", gsm);
+                        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), gsm);
                 } else if (cdma != NULL) {
-                        panel_set_device_widget_details (device_mobile->builder, "provider", cdma);
+                        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), cdma);
                 } else {
-                        panel_set_device_widget_details (device_mobile->builder, "provider", NULL);
+                        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), NULL);
                 }
         }
 }
@@ -374,6 +382,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         NMClient *client;
         NMDeviceModemCapabilities caps;
         NMDevice *nm_device;
+        g_autofree gchar *status = NULL;
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device_mobile));
 
@@ -388,7 +397,9 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         mobilebb_enabled_toggled (client, NULL, device_mobile);
 
         /* set device state, with status */
-        panel_set_device_status (device_mobile->builder, "label_status", nm_device, NULL);
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "label_status"));
+        status = panel_device_status_to_localized_string (nm_device, NULL);
+        gtk_label_set_label (GTK_LABEL (widget), status);
 
         /* sensitive for other connection types if the device is currently connected */
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
