@@ -337,8 +337,6 @@ panel_set_device_widget_details (GtkLabel *heading,
 gchar *
 panel_get_ip4_address_as_string (NMIPConfig *ip4_config, const char *what)
 {
-        const gchar *str = NULL;
-
         /* we only care about one address */
         if (!strcmp (what, "address")) {
                 GPtrArray *array;
@@ -346,15 +344,14 @@ panel_get_ip4_address_as_string (NMIPConfig *ip4_config, const char *what)
 
                 array = nm_ip_config_get_addresses (ip4_config);
                 if (array->len < 1)
-                        goto out;
+                        return NULL;
                 address = array->pdata[0];
-                str = nm_ip_address_get_address (address);
+                return g_strdup (nm_ip_address_get_address (address));
         } else if (!strcmp (what, "gateway")) {
-                str = nm_ip_config_get_gateway (ip4_config);
+                return g_strdup (nm_ip_config_get_gateway (ip4_config));
         }
 
-out:
-        return g_strdup (str);
+        return NULL;
 }
 
 gchar *
