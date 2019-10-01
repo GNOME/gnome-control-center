@@ -33,7 +33,6 @@ gboolean         panel_set_device_widget_details               (GtkBuilder *buil
                                                                 const gchar *value);
 void             panel_set_device_widgets                      (GtkBuilder *builder,
                                                                 NMDevice *device);
-void             panel_unset_device_widgets                    (GtkBuilder *builder);
 gchar           *panel_get_ip4_address_as_string               (NMIPConfig *config, const gchar *what);
 gchar           *panel_get_ip4_dns_as_string                   (NMIPConfig *config);
 gchar           *panel_get_ip6_address_as_string               (NMIPConfig *config);

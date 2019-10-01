@@ -578,7 +578,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 
         /* set IP entries */
         if (ap != active_ap)
-                panel_unset_device_widgets (device_wifi->builder);
+                panel_set_device_widgets (device_wifi->builder, NULL);
         else
                 panel_set_device_widgets (device_wifi->builder, nm_device);
 

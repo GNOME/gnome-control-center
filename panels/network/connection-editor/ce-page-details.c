@@ -256,7 +256,7 @@ connect_details_page (CEPageDetails *page)
         if (device_is_active)
                 panel_set_device_widgets (CE_PAGE (page)->builder, page->device);
         else
-                panel_unset_device_widgets (CE_PAGE (page)->builder);
+                panel_set_device_widgets (CE_PAGE (page)->builder, NULL);
 
         if (!device_is_active && CE_PAGE (page)->connection)
                 update_last_used (page, CE_PAGE (page)->connection);
