@@ -134,8 +134,7 @@ static void
 update_secrets (WirelessSecurity *parent, NMConnection *connection)
 {
 	helper_fill_secret_entry (connection,
-	                          parent->builder,
-	                          "leap_password_entry",
+	                          GTK_ENTRY (gtk_builder_get_object (parent->builder, "leap_password_entry")),
 	                          NM_TYPE_SETTING_WIRELESS_SECURITY,
 	                          (HelperSecretFunc) nm_setting_wireless_security_get_leap_password);
 }

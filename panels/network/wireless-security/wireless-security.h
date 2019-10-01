@@ -119,32 +119,29 @@ void wireless_security_clear_ciphers (NMConnection *connection);
 #define AUTH_NAME_COLUMN   0
 #define AUTH_METHOD_COLUMN 1
 
-GtkWidget *ws_802_1x_auth_combo_init (WirelessSecurity *sec,
-                                      const char *combo_name,
-                                      const char *combo_label,
-                                      GCallback auth_combo_changed_cb,
-                                      NMConnection *connection,
-                                      gboolean is_editor,
-                                      gboolean secrets_only);
+void ws_802_1x_auth_combo_init (WirelessSecurity *sec,
+                                GtkComboBox *combo,
+                                GtkLabel *label,
+                                GCallback auth_combo_changed_cb,
+                                NMConnection *connection,
+                                gboolean is_editor,
+                                gboolean secrets_only);
 
 void ws_802_1x_auth_combo_changed (GtkWidget *combo,
                                    WirelessSecurity *sec,
-                                   const char *vbox_name,
+                                   GtkBox *vbox,
                                    GtkSizeGroup *size_group);
 
-gboolean ws_802_1x_validate (WirelessSecurity *sec, const char *combo_name, GError **error);
+gboolean ws_802_1x_validate (GtkComboBox *combo, GError **error);
 
-void ws_802_1x_add_to_size_group (WirelessSecurity *sec,
-                                  GtkSizeGroup *size_group,
-                                  const char *label_name,
-                                  const char *combo_name);
+void ws_802_1x_add_to_size_group (GtkSizeGroup *size_group,
+                                  GtkLabel *label,
+                                  GtkComboBox *combo);
 
-void ws_802_1x_fill_connection (WirelessSecurity *sec,
-                                const char *combo_name,
+void ws_802_1x_fill_connection (GtkComboBox *combo,
                                 NMConnection *connection);
 
-void ws_802_1x_update_secrets (WirelessSecurity *sec,
-                               const char *combo_name,
+void ws_802_1x_update_secrets (GtkComboBox *combo,
                                NMConnection *connection);
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (WirelessSecurity, wireless_security_unref)
