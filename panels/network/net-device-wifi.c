@@ -582,10 +582,15 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), str);
 
         /* set IP entries */
-        if (ap != active_ap)
-                panel_set_device_widgets (device_wifi->builder, NULL);
-        else
-                panel_set_device_widgets (device_wifi->builder, nm_device);
+        panel_set_device_widgets (GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "heading_ipv4")),
+                                  GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "label_ipv4")),
+                                  GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "heading_ipv6")),
+                                  GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "label_ipv6")),
+                                  GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "heading_dns")),
+                                  GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "label_dns")),
+                                  GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "heading_route")),
+                                  GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "label_route")),
+                                  ap == active_ap ? nm_device : NULL);
 
         if (ap != active_ap && connection)
                 update_last_used (device_wifi, connection);
