@@ -189,8 +189,7 @@ static void
 update_secrets (EAPMethod *parent, NMConnection *connection)
 {
 	helper_fill_secret_entry (connection,
-	                          parent->builder,
-	                          "eap_simple_password_entry",
+	                          GTK_ENTRY (gtk_builder_get_object (parent->builder, "eap_simple_password_entry")),
 	                          NM_TYPE_SETTING_802_1X,
 	                          (HelperSecretFunc) nm_setting_802_1x_get_password);
 }
