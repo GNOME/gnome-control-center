@@ -46,7 +46,7 @@ destroy (WirelessSecurity *parent)
 static gboolean
 validate (WirelessSecurity *parent, GError **error)
 {
-	return ws_802_1x_validate (parent, "dynamic_wep_auth_combo", error);
+	return ws_802_1x_validate (GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "dynamic_wep_auth_combo")), error);
 }
 
 static void
@@ -58,10 +58,9 @@ add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 		g_object_unref (sec->size_group);
 	sec->size_group = g_object_ref (group);
 
-	ws_802_1x_add_to_size_group (parent,
-	                             sec->size_group,
-	                             "dynamic_wep_auth_label",
-	                             "dynamic_wep_auth_combo");
+	ws_802_1x_add_to_size_group (sec->size_group,
+	                             GTK_LABEL (gtk_builder_get_object (parent->builder, "dynamic_wep_auth_label")),
+	                             GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "dynamic_wep_auth_combo")));
 }
 
 static void
@@ -69,7 +68,7 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 {
 	NMSettingWirelessSecurity *s_wireless_sec;
 
-	ws_802_1x_fill_connection (parent, "dynamic_wep_auth_combo", connection);
+	ws_802_1x_fill_connection (GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "dynamic_wep_auth_combo")), connection);
 
 	s_wireless_sec = nm_connection_get_setting_wireless_security (connection);
 	g_assert (s_wireless_sec);
@@ -85,14 +84,14 @@ auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 
 	ws_802_1x_auth_combo_changed (combo,
 	                              parent,
-	                              "dynamic_wep_method_vbox",
+	                              GTK_BOX (gtk_builder_get_object (parent->builder, "dynamic_wep_method_vbox")),
 	                              sec->size_group);
 }
 
 static void
 update_secrets (WirelessSecurity *parent, NMConnection *connection)
 {
-	ws_802_1x_update_secrets (parent, "dynamic_wep_auth_combo", connection);
+	ws_802_1x_update_secrets (GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "dynamic_wep_auth_combo")), connection);
 }
 
 WirelessSecurityDynamicWEP *
@@ -101,7 +100,6 @@ ws_dynamic_wep_new (NMConnection *connection,
                     gboolean secrets_only)
 {
 	WirelessSecurity *parent;
-	GtkWidget *widget;
 
 	parent = wireless_security_init (sizeof (WirelessSecurityDynamicWEP),
 	                                 validate,
@@ -117,14 +115,14 @@ ws_dynamic_wep_new (NMConnection *connection,
 	wireless_security_set_adhoc_compatible (parent, FALSE);
 	wireless_security_set_hotspot_compatible (parent, FALSE);
 
-	widget = ws_802_1x_auth_combo_init (parent,
-	                                    "dynamic_wep_auth_combo",
-	                                    "dynamic_wep_auth_label",
-	                                    (GCallback) auth_combo_changed_cb,
-	                                    connection,
-	                                    is_editor,
-	                                    secrets_only);
-	auth_combo_changed_cb (widget, (gpointer) parent);
+	ws_802_1x_auth_combo_init (parent,
+	                           GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "dynamic_wep_auth_combo")),
+	                           GTK_LABEL (gtk_builder_get_object (parent->builder, "dynamic_wep_auth_label")),
+	                           (GCallback) auth_combo_changed_cb,
+	                           connection,
+	                           is_editor,
+	                           secrets_only);
+	auth_combo_changed_cb (GTK_WIDGET (gtk_builder_get_object (parent->builder, "dynamic_wep_auth_combo")), (gpointer) parent);
 
 	return (WirelessSecurityDynamicWEP *) parent;
 }

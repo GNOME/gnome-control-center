@@ -59,11 +59,13 @@ validate (EAPMethod *parent, GError **error)
 	gboolean valid = FALSE;
 	g_autoptr(GError) local_error = NULL;
 
-	if (!eap_method_validate_filepicker (parent->builder, "eap_peap_ca_cert_button", TYPE_CA_CERT, NULL, NULL, &local_error)) {
+	if (!eap_method_validate_filepicker (GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_button")),
+	                                     TYPE_CA_CERT, NULL, NULL, &local_error)) {
 		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-PEAP CA certificate: %s"), local_error->message);
 		return FALSE;
 	}
-	if (eap_method_ca_cert_required (parent->builder, "eap_peap_ca_cert_not_required_checkbox", "eap_peap_ca_cert_button")) {
+	if (eap_method_ca_cert_required (GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_not_required_checkbox")),
+	                                 GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_button")))) {
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-PEAP CA certificate: no certificate specified"));
 		return FALSE;
 	}
@@ -84,7 +86,8 @@ ca_cert_not_required_toggled (GtkWidget *ignored, gpointer user_data)
 {
 	EAPMethod *parent = user_data;
 
-	eap_method_ca_cert_not_required_toggled (parent->builder, "eap_peap_ca_cert_not_required_checkbox", "eap_peap_ca_cert_button");
+	eap_method_ca_cert_not_required_toggled (GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_not_required_checkbox")),
+	                                         GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_button")));
 }
 
 static void
@@ -314,7 +317,7 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 {
 	eap_method_phase2_update_secrets_helper (parent,
 	                                         connection,
-	                                         "eap_peap_inner_auth_combo",
+	                                         GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "eap_peap_inner_auth_combo")),
 	                                         I_METHOD_COLUMN);
 }
 

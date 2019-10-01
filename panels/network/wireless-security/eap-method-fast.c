@@ -299,7 +299,7 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 {
 	eap_method_phase2_update_secrets_helper (parent,
 	                                         connection,
-	                                         "eap_fast_inner_auth_combo",
+	                                         GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo")),
 	                                         I_METHOD_COLUMN);
 }
 
