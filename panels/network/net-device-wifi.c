@@ -351,6 +351,7 @@ nm_device_wifi_refresh_hotspot (NetDeviceWifi *device_wifi)
         g_autofree gchar *hotspot_security = NULL;
         g_autofree gchar *hotspot_ssid = NULL;
         NMDevice *nm_device;
+        GtkWidget *heading, *widget;
 
         /* refresh hotspot ui */
         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
@@ -365,18 +366,18 @@ nm_device_wifi_refresh_hotspot (NetDeviceWifi *device_wifi)
         g_debug ("Refreshing hotspot labels to name: '%s', security key: '%s', security: '%s'",
                  hotspot_ssid, hotspot_secret, hotspot_security);
 
-        panel_set_device_widget_details (device_wifi->builder,
-                                         "hotspot_network_name",
-                                         hotspot_ssid);
-        panel_set_device_widget_details (device_wifi->builder,
-                                         "hotspot_security_key",
-                                         hotspot_secret);
-        panel_set_device_widget_details (device_wifi->builder,
-                                         "hotspot_security",
-                                         hotspot_security);
-        panel_set_device_widget_details (device_wifi->builder,
-                                         "hotspot_connected",
-                                         NULL);
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_hotspot_network_name"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_hotspot_network_name"));
+        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), hotspot_ssid);
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_hotspot_security_key"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_hotspot_security_key"));
+        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), hotspot_secret);
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_hotspot_security"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_hotspot_security"));
+        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), hotspot_security);
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_hotspot_connected"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_hotspot_connected"));
+        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), NULL);
 }
 
 static void
@@ -389,6 +390,7 @@ update_last_used (NetDeviceWifi *device_wifi, NMConnection *connection)
         GTimeSpan diff;
         guint64 timestamp;
         NMSettingConnection *s_con;
+        GtkWidget *heading, *widget;
 
         s_con = nm_connection_get_setting_connection (connection);
         if (s_con == NULL)
@@ -411,9 +413,9 @@ update_last_used (NetDeviceWifi *device_wifi, NMConnection *connection)
         else
                 last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
 out:
-        panel_set_device_widget_details (device_wifi->builder,
-                                         "last_used",
-                                         last_used);
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_last_used"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_last_used"));
+        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), last_used);
 }
 
 static void
@@ -491,7 +493,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         NMAccessPoint *ap;
         NMConnection *connection;
         GtkWidget *dialog;
-        GtkWidget *widget;
+        GtkWidget *heading, *widget;
         g_autofree gchar *status = NULL;
 
         if (device_is_hotspot (device_wifi)) {
@@ -532,21 +534,22 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                 /* Translators: network device speed */
                 speed_text = g_strdup_printf (_("%d Mb/s"), speed);
         }
-        panel_set_device_widget_details (device_wifi->builder,
-                                         "speed",
-                                         speed_text);
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_speed"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_speed"));
+        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), speed_text);
 
         /* device MAC */
         str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
-        panel_set_device_widget_details (device_wifi->builder,
-                                         "mac",
-                                         str);
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_mac"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_mac"));
+        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), str);
+
         /* security */
         if (ap == active_ap && active_ap != NULL)
                 security_text = get_ap_security_string (active_ap);
-        panel_set_device_widget_details (device_wifi->builder,
-                                         "security",
-                                         security_text);
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_security"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_security"));
+        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), security_text);
 
         /* signal strength */
         if (ap != NULL)
@@ -565,16 +568,18 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                 str = C_("Signal strength", "Good");
         else
                 str = C_("Signal strength", "Excellent");
-        panel_set_device_widget_details (device_wifi->builder,
-                                         "strength",
-                                         str);
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_strength"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_strength"));
+        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), str);
 
         /* device MAC */
         if (ap != active_ap)
                 str = NULL;
         else
                 str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
-        panel_set_device_widget_details (device_wifi->builder, "mac", str);
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_mac"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_mac"));
+        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), str);
 
         /* set IP entries */
         if (ap != active_ap)
@@ -584,8 +589,11 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 
         if (ap != active_ap && connection)
                 update_last_used (device_wifi, connection);
-        else
-                panel_set_device_widget_details (device_wifi->builder, "last_used", NULL);
+        else {
+                heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_last_used"));
+                widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_last_used"));
+                panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), NULL);
+        }
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_status"));
         status = panel_device_status_to_localized_string (nm_device, NULL);

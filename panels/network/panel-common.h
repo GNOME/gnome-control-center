@@ -28,8 +28,8 @@ G_BEGIN_DECLS
 
 gchar           *panel_device_status_to_localized_string       (NMDevice *nm_device,
                                                                 const gchar *speed);
-gboolean         panel_set_device_widget_details               (GtkBuilder *builder,
-                                                                const gchar *widget_suffix,
+gboolean         panel_set_device_widget_details               (GtkLabel *heading,
+                                                                GtkLabel *widget,
                                                                 const gchar *value);
 void             panel_set_device_widgets                      (GtkBuilder *builder,
                                                                 NMDevice *device);

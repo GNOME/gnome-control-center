@@ -315,55 +315,22 @@ panel_device_status_to_localized_string (NMDevice *nm_device,
 }
 
 gboolean
-panel_set_device_widget_details (GtkBuilder *builder,
-                                 const gchar *widget_suffix,
+panel_set_device_widget_details (GtkLabel *heading,
+                                 GtkLabel *widget,
                                  const gchar *value)
 {
-        g_autofree gchar *heading_id = NULL;
-        g_autofree gchar *label_id = NULL;
-        GtkWidget *heading;
-        GtkWidget *widget;
-
         /* hide the row if there is no value */
-        heading_id = g_strdup_printf ("heading_%s", widget_suffix);
-        label_id = g_strdup_printf ("label_%s", widget_suffix);
-        heading = GTK_WIDGET (gtk_builder_get_object (builder, heading_id));
-        widget = GTK_WIDGET (gtk_builder_get_object (builder, label_id));
-        if (heading == NULL || widget == NULL) {
-                g_critical ("no widgets %s, %s found", heading_id, label_id);
-                return FALSE;
-        }
-
         if (value == NULL) {
-                gtk_widget_hide (heading);
-                gtk_widget_hide (widget);
+                gtk_widget_hide (GTK_WIDGET (heading));
+                gtk_widget_hide (GTK_WIDGET (widget));
         } else {
                 /* there exists a value */
-                gtk_widget_show (heading);
-                gtk_widget_show (widget);
-                gtk_label_set_label (GTK_LABEL (widget), value);
-                gtk_label_set_max_width_chars (GTK_LABEL (widget), 50);
-                gtk_label_set_ellipsize (GTK_LABEL (widget), PANGO_ELLIPSIZE_END);
+                gtk_widget_show (GTK_WIDGET (heading));
+                gtk_widget_show (GTK_WIDGET (widget));
+                gtk_label_set_label (widget, value);
+                gtk_label_set_max_width_chars (widget, 50);
+                gtk_label_set_ellipsize (widget, PANGO_ELLIPSIZE_END);
         }
-        return TRUE;
-}
-
-
-static gboolean
-panel_set_device_widget_header (GtkBuilder *builder,
-                                const gchar *widget_suffix,
-                                const gchar *heading)
-{
-        g_autofree gchar *label_id = NULL;
-        GtkWidget *widget;
-
-        label_id = g_strdup_printf ("heading_%s", widget_suffix);
-        widget = GTK_WIDGET (gtk_builder_get_object (builder, label_id));
-        if (widget == NULL) {
-                g_critical ("no widget %s found", label_id);
-                return FALSE;
-        }
-        gtk_label_set_label (GTK_LABEL (widget), heading);
         return TRUE;
 }
 
@@ -413,11 +380,22 @@ panel_get_ip6_address_as_string (NMIPConfig *ip6_config)
 void
 panel_set_device_widgets (GtkBuilder *builder, NMDevice *device)
 {
+        GtkWidget *ipv4_heading, *ipv6_heading, *dns_heading, *route_heading;
+        GtkWidget *ipv4_widget, *ipv6_widget, *dns_widget, *route_widget;
         g_autofree gchar *ipv4_text = NULL;
         g_autofree gchar *ipv6_text = NULL;
         g_autofree gchar *dns_text = NULL;
         g_autofree gchar *route_text = NULL;
         gboolean has_ip4, has_ip6;
+
+        ipv4_heading = GTK_WIDGET (gtk_builder_get_object (builder, "heading_ipv4"));
+        ipv4_widget = GTK_WIDGET (gtk_builder_get_object (builder, "label_ipv4"));
+        ipv6_heading = GTK_WIDGET (gtk_builder_get_object (builder, "heading_ipv6"));
+        ipv6_widget = GTK_WIDGET (gtk_builder_get_object (builder, "label_ipv6"));
+        dns_heading = GTK_WIDGET (gtk_builder_get_object (builder, "heading_dns"));
+        dns_widget = GTK_WIDGET (gtk_builder_get_object (builder, "label_dns"));
+        route_heading = GTK_WIDGET (gtk_builder_get_object (builder, "heading_route"));
+        route_widget = GTK_WIDGET (gtk_builder_get_object (builder, "label_route"));
 
         if (device != NULL) {
                 NMIPConfig *ip4_config, *ip6_config;
@@ -433,19 +411,19 @@ panel_set_device_widgets (GtkBuilder *builder, NMDevice *device)
                         ipv6_text = panel_get_ip6_address_as_string (ip6_config);
         }
 
-        panel_set_device_widget_details (builder, "ipv4", ipv4_text);
-        panel_set_device_widget_details (builder, "ipv6", ipv6_text);
-        panel_set_device_widget_details (builder, "dns", dns_text);
-        panel_set_device_widget_details (builder, "route", route_text);
+        panel_set_device_widget_details (GTK_LABEL (ipv4_heading), GTK_LABEL (ipv4_widget), ipv4_text);
+        panel_set_device_widget_details (GTK_LABEL (ipv6_heading), GTK_LABEL (ipv6_widget), ipv6_text);
+        panel_set_device_widget_details (GTK_LABEL (dns_heading), GTK_LABEL (dns_widget), dns_text);
+        panel_set_device_widget_details (GTK_LABEL (route_heading), GTK_LABEL (route_widget), route_text);
 
         has_ip4 = ipv4_text != NULL;
         has_ip6 = ipv6_text != NULL;
         if (has_ip4 && has_ip6) {
-                panel_set_device_widget_header (builder, "ipv4", _("IPv4 Address"));
-                panel_set_device_widget_header (builder, "ipv6", _("IPv6 Address"));
+                gtk_label_set_label (GTK_LABEL (ipv4_heading), _("IPv4 Address"));
+                gtk_label_set_label (GTK_LABEL (ipv6_heading), _("IPv6 Address"));
         } else if (has_ip4) {
-                panel_set_device_widget_header (builder, "ipv4", _("IP Address"));
+                gtk_label_set_label (GTK_LABEL (ipv4_heading), _("IP Address"));
         } else if (has_ip6) {
-                panel_set_device_widget_header (builder, "ipv6", _("IP Address"));
+                gtk_label_set_label (GTK_LABEL (ipv6_heading), _("IP Address"));
         }
 }
