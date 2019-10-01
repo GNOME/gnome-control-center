@@ -102,8 +102,7 @@ gboolean eap_method_is_encrypted_private_key (const char *path);
 #define TYPE_CA_CERT     1
 #define TYPE_PRIVATE_KEY 2
 
-gboolean eap_method_validate_filepicker (GtkBuilder *builder,
-                                         const char *name,
+gboolean eap_method_validate_filepicker (GtkFileChooser *chooser,
                                          guint32 item_type,
                                          const char *password,
                                          NMSetting8021xCKFormat *out_format,
@@ -111,15 +110,13 @@ gboolean eap_method_validate_filepicker (GtkBuilder *builder,
 
 void eap_method_phase2_update_secrets_helper (EAPMethod *method,
                                               NMConnection *connection,
-                                              const char *combo_name,
+                                              GtkComboBox *combo,
                                               guint32 column);
 
-gboolean eap_method_ca_cert_required (GtkBuilder *builder,
-                                      const char *id_ca_cert_is_not_required_checkbox,
-                                      const char *id_ca_cert_chooser);
-void eap_method_ca_cert_not_required_toggled (GtkBuilder *builder,
-                                              const char *id_ca_cert_is_not_required_checkbox,
-                                              const char *id_ca_cert_chooser);
+gboolean eap_method_ca_cert_required (GtkToggleButton *id_ca_cert_is_not_required_checkbutton,
+                                      GtkFileChooser *id_ca_cert_chooser);
+void eap_method_ca_cert_not_required_toggled (GtkToggleButton *id_ca_cert_is_not_required_checkbox,
+                                              GtkFileChooser *id_ca_cert_chooser);
 
 void eap_method_ca_cert_ignore_set (EAPMethod *method,
                                     NMConnection *connection,

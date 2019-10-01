@@ -264,10 +264,15 @@ connect_details_page (CEPageDetails *page)
         panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), strength_label);
 
         /* set IP entries */
-        if (device_is_active)
-                panel_set_device_widgets (CE_PAGE (page)->builder, page->device);
-        else
-                panel_set_device_widgets (CE_PAGE (page)->builder, NULL);
+        panel_set_device_widgets (GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_ipv4")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_ipv4")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_ipv6")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_ipv6")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_dns")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_dns")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_route")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_route")),
+                                  device_is_active ? page->device : NULL);
 
         if (!device_is_active && CE_PAGE (page)->connection)
                 update_last_used (page, CE_PAGE (page)->connection);
