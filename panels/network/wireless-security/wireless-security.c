@@ -387,44 +387,33 @@ wireless_security_clear_ciphers (NMConnection *connection)
 }
 
 void
-ws_802_1x_add_to_size_group (WirelessSecurity *sec,
-                             GtkSizeGroup *size_group,
-                             const char *label_name,
-                             const char *combo_name)
+ws_802_1x_add_to_size_group (GtkSizeGroup *size_group,
+                             GtkLabel *label,
+                             GtkComboBox *combo)
 {
-	GtkWidget *widget;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	g_autoptr(EAPMethod) eap = NULL;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, label_name));
-	g_assert (widget);
-	gtk_size_group_add_widget (size_group, widget);
+	gtk_size_group_add_widget (size_group, GTK_WIDGET (label));
 
-	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, combo_name));
-	g_assert (widget);
-
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
+	model = gtk_combo_box_get_model (combo);
+	gtk_combo_box_get_active_iter (combo, &iter);
 	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
 	eap_method_add_to_size_group (eap, size_group);
 }
 
 gboolean
-ws_802_1x_validate (WirelessSecurity *sec, const char *combo_name, GError **error)
+ws_802_1x_validate (GtkComboBox *combo, GError **error)
 {
-	GtkWidget *widget;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	g_autoptr(EAPMethod) eap = NULL;
 	gboolean valid = FALSE;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, combo_name));
-	g_assert (widget);
-
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
+	model = gtk_combo_box_get_model (combo);
+	gtk_combo_box_get_active_iter (combo, &iter);
 	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
 	valid = eap_method_validate (eap, error);
@@ -434,19 +423,15 @@ ws_802_1x_validate (WirelessSecurity *sec, const char *combo_name, GError **erro
 void
 ws_802_1x_auth_combo_changed (GtkWidget *combo,
                               WirelessSecurity *sec,
-                              const char *vbox_name,
+                              GtkBox *vbox,
                               GtkSizeGroup *size_group)
 {
-	GtkWidget *vbox;
 	g_autoptr(EAPMethod) eap = NULL;
 	GList *elt, *children;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	GtkWidget *eap_widget;
 	GtkWidget *eap_default_widget = NULL;
-
-	vbox = GTK_WIDGET (gtk_builder_get_object (sec->builder, vbox_name));
-	g_assert (vbox);
 
 	/* Remove any previous wireless security widgets */
 	children = gtk_container_get_children (GTK_CONTAINER (vbox));
@@ -476,16 +461,15 @@ ws_802_1x_auth_combo_changed (GtkWidget *combo,
 	wireless_security_changed_cb (combo, WIRELESS_SECURITY (sec));
 }
 
-GtkWidget *
+void
 ws_802_1x_auth_combo_init (WirelessSecurity *sec,
-                           const char *combo_name,
-                           const char *combo_label,
+                           GtkComboBox *combo,
+                           GtkLabel *label,
                            GCallback auth_combo_changed_cb,
                            NMConnection *connection,
                            gboolean is_editor,
                            gboolean secrets_only)
 {
-	GtkWidget *combo, *widget;
 	g_autoptr(GtkListStore) auth_model = NULL;
 	GtkTreeIter iter;
 	g_autoptr(EAPMethodTLS) em_tls = NULL;
@@ -603,29 +587,21 @@ ws_802_1x_auth_combo_init (WirelessSecurity *sec,
 		active = item;
 	item++;
 
-	combo = GTK_WIDGET (gtk_builder_get_object (sec->builder, combo_name));
-	g_assert (combo);
-
-	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (auth_model));
-	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), active < 0 ? 0 : (guint32) active);
+	gtk_combo_box_set_model (combo, GTK_TREE_MODEL (auth_model));
+	gtk_combo_box_set_active (combo, active < 0 ? 0 : (guint32) active);
 
 	g_signal_connect (G_OBJECT (combo), "changed", auth_combo_changed_cb, sec);
 
 	if (secrets_only) {
-		gtk_widget_hide (combo);
-		widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, combo_label));
-		gtk_widget_hide (widget);
+		gtk_widget_hide (GTK_WIDGET (combo));
+		gtk_widget_hide (GTK_WIDGET (label));
 	}
-
-	return combo;
 }
 
 void
-ws_802_1x_fill_connection (WirelessSecurity *sec,
-                           const char *combo_name,
+ws_802_1x_fill_connection (GtkComboBox *combo,
                            NMConnection *connection)
 {
-	GtkWidget *widget;
 	NMSettingWirelessSecurity *s_wireless_sec;
 	NMSetting8021x *s_8021x;
 	NMSettingSecretFlags secret_flags = NM_SETTING_SECRET_FLAG_NONE;
@@ -634,9 +610,8 @@ ws_802_1x_fill_connection (WirelessSecurity *sec,
 	GtkTreeIter iter;
 
 	/* Get the EAPMethod object */
-	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, combo_name));
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
+	model = gtk_combo_box_get_model (combo);
+	gtk_combo_box_get_active_iter (combo, &iter);
 	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
 
@@ -659,21 +634,16 @@ ws_802_1x_fill_connection (WirelessSecurity *sec,
 }
 
 void
-ws_802_1x_update_secrets (WirelessSecurity *sec,
-                          const char *combo_name,
+ws_802_1x_update_secrets (GtkComboBox *combo,
                           NMConnection *connection)
 {
-	GtkWidget *widget;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 
-	g_return_if_fail (sec != NULL);
-	g_return_if_fail (combo_name != NULL);
+	g_return_if_fail (combo != NULL);
 	g_return_if_fail (connection != NULL);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, combo_name));
-	g_return_if_fail (widget != NULL);
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+	model = gtk_combo_box_get_model (combo);
 
 	/* Let each EAP method try to update its secrets */
 	if (gtk_tree_model_get_iter_first (model, &iter)) {

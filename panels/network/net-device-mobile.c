@@ -425,7 +425,15 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
                                        GTK_COMBO_BOX (widget));
 
         /* set IP entries */
-        panel_set_device_widgets (device_mobile->builder, nm_device);
+        panel_set_device_widgets (GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_ipv4")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_ipv4")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_ipv6")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_ipv6")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_dns")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_dns")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_route")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_route")),
+                                  nm_device);
 }
 
 static void
