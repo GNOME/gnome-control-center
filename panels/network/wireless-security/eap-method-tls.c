@@ -73,13 +73,15 @@ validate (EAPMethod *parent, GError **error)
 		widget_unset_error (widget);
 	}
 
-	if (!eap_method_validate_filepicker (parent->builder, "eap_tls_ca_cert_button", TYPE_CA_CERT, NULL, NULL, &ca_cert_error)) {
+	if (!eap_method_validate_filepicker (GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button")),
+	                                     TYPE_CA_CERT, NULL, NULL, &ca_cert_error)) {
 		widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button")));
 		if (ret) {
 			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: %s"), ca_cert_error->message);
 			ret = FALSE;
 		}
-	} else if (eap_method_ca_cert_required (parent->builder, "eap_tls_ca_cert_not_required_checkbox", "eap_tls_ca_cert_button")) {
+	} else if (eap_method_ca_cert_required (GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_not_required_checkbox")),
+	                                        GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button")))) {
 		widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button")));
 		if (ret) {
 			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: no certificate specified"));
@@ -91,8 +93,7 @@ validate (EAPMethod *parent, GError **error)
 	g_assert (widget);
 	password = gtk_entry_get_text (GTK_ENTRY (widget));
 
-	if (!eap_method_validate_filepicker (parent->builder,
-	                                     "eap_tls_private_key_button",
+	if (!eap_method_validate_filepicker (GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_tls_private_key_button")),
 	                                     TYPE_PRIVATE_KEY,
 	                                     password,
 	                                     &format,
@@ -105,7 +106,8 @@ validate (EAPMethod *parent, GError **error)
 	}
 
 	if (format != NM_SETTING_802_1X_CK_FORMAT_PKCS12) {
-		if (!eap_method_validate_filepicker (parent->builder, "eap_tls_user_cert_button", TYPE_CLIENT_CERT, NULL, NULL, &user_cert_error)) {
+		if (!eap_method_validate_filepicker (GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_tls_user_cert_button")),
+		                                     TYPE_CLIENT_CERT, NULL, NULL, &user_cert_error)) {
 			if (ret) {
 				g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS user-certificate: %s"), user_cert_error->message);
 				ret = FALSE;
@@ -122,7 +124,8 @@ ca_cert_not_required_toggled (GtkWidget *ignored, gpointer user_data)
 {
 	EAPMethod *parent = user_data;
 
-	eap_method_ca_cert_not_required_toggled (parent->builder, "eap_tls_ca_cert_not_required_checkbox", "eap_tls_ca_cert_button");
+	eap_method_ca_cert_not_required_toggled (GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_not_required_checkbox")),
+	                                         GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button")));
 }
 
 static void
@@ -330,8 +333,7 @@ typedef const char * (*PathFunc) (NMSetting8021x *setting);
 typedef NMSetting8021xCKScheme (*SchemeFunc)  (NMSetting8021x *setting);
 
 static void
-setup_filepicker (GtkBuilder *builder,
-                  const char *name,
+setup_filepicker (GtkFileChooserButton *button,
                   const char *title,
                   WirelessSecurity *ws_parent,
                   EAPMethod *parent,
@@ -341,20 +343,17 @@ setup_filepicker (GtkBuilder *builder,
                   gboolean privkey,
                   gboolean client_cert)
 {
-	GtkWidget *widget;
 	GtkFileFilter *filter;
 	const char *filename = NULL;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (builder, name));
-	g_assert (widget);
-	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (widget), TRUE);
-	gtk_file_chooser_button_set_title (GTK_FILE_CHOOSER_BUTTON (widget), title);
+	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (button), TRUE);
+	gtk_file_chooser_button_set_title (button, title);
 
 	if (s_8021x && path_func && scheme_func) {
 		if (scheme_func (s_8021x) == NM_SETTING_802_1X_CK_SCHEME_PATH) {
 			filename = path_func (s_8021x);
 			if (filename)
-				gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (widget), filename);
+				gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (button), filename);
 		}
 	}
 
@@ -362,19 +361,19 @@ setup_filepicker (GtkBuilder *builder,
 	 * and desensitize the user cert button.
 	 */
 	if (privkey) {
-		g_signal_connect (G_OBJECT (widget), "selection-changed",
+		g_signal_connect (button, "selection-changed",
 		                  (GCallback) private_key_picker_file_set_cb,
 		                  parent);
 		if (filename)
 			private_key_picker_helper (parent, filename, FALSE);
 	}
 
-	g_signal_connect (G_OBJECT (widget), "selection-changed",
+	g_signal_connect (button, "selection-changed",
 	                  (GCallback) wireless_security_changed_cb,
 	                  ws_parent);
 
 	filter = eap_method_default_file_chooser_filter_new (privkey);
-	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (widget), filter);
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (button), filter);
 
 	/* For some reason, GTK+ calls set_current_filter (..., NULL) from 
 	 * gtkfilechooserdefault.c::show_and_select_files_finished_loading() on our
@@ -382,7 +381,7 @@ setup_filepicker (GtkBuilder *builder,
 	 * it gets cleared.
 	 */
 	if (client_cert)
-		g_signal_connect (G_OBJECT (widget), "notify::filter", (GCallback) reset_filter, filter);
+		g_signal_connect (button, "notify::filter", (GCallback) reset_filter, filter);
 }
 
 static void
@@ -406,8 +405,7 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 	}
 
 	helper_fill_secret_entry (connection,
-	                          parent->builder,
-	                          "eap_tls_private_key_password_entry",
+	                          GTK_ENTRY (gtk_builder_get_object (parent->builder, "eap_tls_private_key_password_entry")),
 	                          NM_TYPE_SETTING_802_1X,
 	                          password_func);
 
@@ -474,19 +472,19 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	if (s_8021x && nm_setting_802_1x_get_identity (s_8021x))
 		gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_802_1x_get_identity (s_8021x));
 
-	setup_filepicker (parent->builder, "eap_tls_user_cert_button",
+	setup_filepicker (GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "eap_tls_user_cert_button")),
 	                  _("Choose your personal certificate"),
 	                  ws_parent, parent, s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_client_cert_scheme : nm_setting_802_1x_get_client_cert_scheme,
 	                  phase2 ? nm_setting_802_1x_get_phase2_client_cert_path : nm_setting_802_1x_get_client_cert_path,
 	                  FALSE, TRUE);
-	setup_filepicker (parent->builder, "eap_tls_ca_cert_button",
+	setup_filepicker (GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button")),
 	                  _("Choose a Certificate Authority certificate"),
 	                  ws_parent, parent, s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_ca_cert_scheme : nm_setting_802_1x_get_ca_cert_scheme,
 	                  phase2 ? nm_setting_802_1x_get_phase2_ca_cert_path : nm_setting_802_1x_get_ca_cert_path,
 	                  FALSE, FALSE);
-	setup_filepicker (parent->builder, "eap_tls_private_key_button",
+	setup_filepicker (GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "eap_tls_private_key_button")),
 	                  _("Choose your private key"),
 	                  ws_parent, parent, s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_private_key_scheme : nm_setting_802_1x_get_private_key_scheme,
