@@ -375,24 +375,17 @@ panel_get_ip6_address_as_string (NMIPConfig *ip6_config)
 }
 
 void
-panel_set_device_widgets (GtkBuilder *builder, NMDevice *device)
+panel_set_device_widgets (GtkLabel *heading_ipv4, GtkLabel *label_ipv4,
+                          GtkLabel *heading_ipv6, GtkLabel *label_ipv6,
+                          GtkLabel *heading_dns, GtkLabel *label_dns,
+                          GtkLabel *heading_route, GtkLabel *label_route,
+                          NMDevice *device)
 {
-        GtkWidget *ipv4_heading, *ipv6_heading, *dns_heading, *route_heading;
-        GtkWidget *ipv4_widget, *ipv6_widget, *dns_widget, *route_widget;
         g_autofree gchar *ipv4_text = NULL;
         g_autofree gchar *ipv6_text = NULL;
         g_autofree gchar *dns_text = NULL;
         g_autofree gchar *route_text = NULL;
         gboolean has_ip4, has_ip6;
-
-        ipv4_heading = GTK_WIDGET (gtk_builder_get_object (builder, "heading_ipv4"));
-        ipv4_widget = GTK_WIDGET (gtk_builder_get_object (builder, "label_ipv4"));
-        ipv6_heading = GTK_WIDGET (gtk_builder_get_object (builder, "heading_ipv6"));
-        ipv6_widget = GTK_WIDGET (gtk_builder_get_object (builder, "label_ipv6"));
-        dns_heading = GTK_WIDGET (gtk_builder_get_object (builder, "heading_dns"));
-        dns_widget = GTK_WIDGET (gtk_builder_get_object (builder, "label_dns"));
-        route_heading = GTK_WIDGET (gtk_builder_get_object (builder, "heading_route"));
-        route_widget = GTK_WIDGET (gtk_builder_get_object (builder, "label_route"));
 
         if (device != NULL) {
                 NMIPConfig *ip4_config, *ip6_config;
@@ -408,19 +401,19 @@ panel_set_device_widgets (GtkBuilder *builder, NMDevice *device)
                         ipv6_text = panel_get_ip6_address_as_string (ip6_config);
         }
 
-        panel_set_device_widget_details (GTK_LABEL (ipv4_heading), GTK_LABEL (ipv4_widget), ipv4_text);
-        panel_set_device_widget_details (GTK_LABEL (ipv6_heading), GTK_LABEL (ipv6_widget), ipv6_text);
-        panel_set_device_widget_details (GTK_LABEL (dns_heading), GTK_LABEL (dns_widget), dns_text);
-        panel_set_device_widget_details (GTK_LABEL (route_heading), GTK_LABEL (route_widget), route_text);
+        panel_set_device_widget_details (heading_ipv4, label_ipv4, ipv4_text);
+        panel_set_device_widget_details (heading_ipv6, label_ipv6, ipv6_text);
+        panel_set_device_widget_details (heading_dns, label_dns, dns_text);
+        panel_set_device_widget_details (heading_route, label_route, route_text);
 
         has_ip4 = ipv4_text != NULL;
         has_ip6 = ipv6_text != NULL;
         if (has_ip4 && has_ip6) {
-                gtk_label_set_label (GTK_LABEL (ipv4_heading), _("IPv4 Address"));
-                gtk_label_set_label (GTK_LABEL (ipv6_heading), _("IPv6 Address"));
+                gtk_label_set_label (heading_ipv4, _("IPv4 Address"));
+                gtk_label_set_label (heading_ipv6, _("IPv6 Address"));
         } else if (has_ip4) {
-                gtk_label_set_label (GTK_LABEL (ipv4_heading), _("IP Address"));
+                gtk_label_set_label (heading_ipv4, _("IP Address"));
         } else if (has_ip6) {
-                gtk_label_set_label (GTK_LABEL (ipv6_heading), _("IP Address"));
+                gtk_label_set_label (heading_ipv6, _("IP Address"));
         }
 }

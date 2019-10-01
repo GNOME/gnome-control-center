@@ -26,8 +26,7 @@
 typedef const char * (*HelperSecretFunc)(NMSetting *);
 
 void helper_fill_secret_entry (NMConnection *connection,
-                               GtkBuilder *builder,
-                               const char *entry_name,
+                               GtkEntry *entry,
                                GType setting_type,
                                HelperSecretFunc func);
 
