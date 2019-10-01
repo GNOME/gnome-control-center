@@ -1607,13 +1607,16 @@ search_address (const gchar        *text,
 
       if (text && text[0] != '\0')
         {
+          g_autoptr(GSocketConnectable) conn;
           gchar *scheme = NULL;
           gchar *host = NULL;
           gint   port;
 
           parse_uri (text, &scheme, &host, &port);
 
-          if (host)
+          conn = g_network_address_parse_uri (host, port, NULL);
+
+          if (host != NULL && conn != NULL)
             {
               THostSearchData *search_data;
 
