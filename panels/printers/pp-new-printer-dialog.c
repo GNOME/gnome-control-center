@@ -1607,7 +1607,7 @@ search_address (const gchar        *text,
 
       if (text && text[0] != '\0')
         {
-          g_autoptr(GSocketConnectable) conn;
+          g_autoptr(GSocketConnectable) conn = NULL;
           gchar *scheme = NULL;
           gchar *host = NULL;
           gint   port;
