@@ -1260,9 +1260,9 @@ static char *
 time_to_string_text (gint64 msecs)
 {
 	int sec, min, hour, _time;
-	g_autofree gchar *hours;
-	g_autofree gchar *mins;
-	g_autofree gchar *secs;
+	g_autofree gchar *hours = NULL;
+	g_autofree gchar *mins = NULL;
+	g_autofree gchar *secs = NULL;
 
 	_time = (int) (msecs / 1000);
 	sec = _time % 60;

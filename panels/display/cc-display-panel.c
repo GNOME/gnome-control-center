@@ -343,7 +343,7 @@ monitor_labeler_show (CcDisplayPanel *self)
 static void
 ensure_monitor_labels (CcDisplayPanel *self)
 {
-  g_autoptr(GList) windows;
+  g_autoptr(GList) windows = NULL;
   GList *w;
 
   windows = gtk_window_list_toplevels ();

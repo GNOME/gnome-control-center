@@ -227,7 +227,7 @@ cc_panel_loader_fill_model (CcShellModel *model)
 
   for (i = 0; i < panels_vtable_len; i++)
     {
-      g_autoptr (GDesktopAppInfo) app;
+      g_autoptr(GDesktopAppInfo) app = NULL;
       g_autofree gchar *desktop_name = NULL;
       gint category;
 

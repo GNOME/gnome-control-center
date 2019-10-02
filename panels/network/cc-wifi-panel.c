@@ -222,7 +222,7 @@ static inline gboolean
 get_cached_rfkill_property (CcWifiPanel *self,
                             const gchar *property)
 {
-  g_autoptr (GVariant) result;
+  g_autoptr(GVariant) result = NULL;
 
   result = g_dbus_proxy_get_cached_property (self->rfkill_proxy, property);
   return result ? g_variant_get_boolean (result) : FALSE;

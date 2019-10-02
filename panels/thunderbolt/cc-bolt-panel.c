@@ -615,7 +615,7 @@ on_authmode_ready (GObject      *source_object,
   ok = bolt_client_set_authmode_finish (BOLT_CLIENT (source_object), res, &error);
   if (!ok)
     {
-      g_autofree char *text;
+      g_autofree char *text = NULL;
 
       g_warning ("Could not set authmode: %s", error->message);
 
