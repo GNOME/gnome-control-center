@@ -122,7 +122,7 @@ remove_duplicate_whitespace (const char *old)
 char *
 info_cleanup (const char *input)
 {
-  g_autofree char *pretty;
+  g_autofree char *pretty = NULL;
 
   pretty = prettify_info (input);
   return remove_duplicate_whitespace (pretty);
