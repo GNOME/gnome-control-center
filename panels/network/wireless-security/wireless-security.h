@@ -32,11 +32,12 @@ typedef struct _WirelessSecurityPrivate WirelessSecurityPrivate;
 
 typedef void (*WSChangedFunc) (WirelessSecurity *sec, gpointer user_data);
 
-typedef void (*WSAddToSizeGroupFunc) (WirelessSecurity *sec, GtkSizeGroup *group);
-typedef void (*WSFillConnectionFunc) (WirelessSecurity *sec, NMConnection *connection);
-typedef void (*WSUpdateSecretsFunc)  (WirelessSecurity *sec, NMConnection *connection);
-typedef void (*WSDestroyFunc)        (WirelessSecurity *sec);
-typedef gboolean (*WSValidateFunc)   (WirelessSecurity *sec, GError **error);
+typedef void (*WSAddToSizeGroupFunc)  (WirelessSecurity *sec, GtkSizeGroup *group);
+typedef void (*WSFillConnectionFunc)  (WirelessSecurity *sec, NMConnection *connection);
+typedef void (*WSUpdateSecretsFunc)   (WirelessSecurity *sec, NMConnection *connection);
+typedef void (*WSDestroyFunc)         (WirelessSecurity *sec);
+typedef gboolean (*WSValidateFunc)    (WirelessSecurity *sec, GError **error);
+typedef GtkWidget* (*WSGetWidgetFunc) (WirelessSecurity *sec);
 
 struct _WirelessSecurity {
 	WirelessSecurityPrivate *priv;
@@ -104,13 +105,13 @@ GType wireless_security_get_type (void);
 #include "ws-dynamic-wep.h"
 
 WirelessSecurity *wireless_security_init (gsize obj_size,
+                                          WSGetWidgetFunc get_widget,
                                           WSValidateFunc validate,
                                           WSAddToSizeGroupFunc add_to_size_group,
                                           WSFillConnectionFunc fill_connection,
                                           WSUpdateSecretsFunc update_secrets,
                                           WSDestroyFunc destroy,
-                                          const char *ui_resource,
-                                          const char *ui_widget_name);
+                                          const char *ui_resource);
 
 void wireless_security_changed_cb (GtkWidget *entry, gpointer user_data);
 

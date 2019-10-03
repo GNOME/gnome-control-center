@@ -32,7 +32,6 @@
 struct _WirelessSecurityPrivate {
 	guint32 refcount;
 	gsize obj_size;
-	GtkWidget *ui_widget;
 	WSChangedFunc changed_notify;
 	gpointer changed_notify_data;
 	gboolean adhoc_compatible;
@@ -43,6 +42,7 @@ struct _WirelessSecurityPrivate {
 
 	WSAddToSizeGroupFunc add_to_size_group;
 	WSFillConnectionFunc fill_connection;
+	WSGetWidgetFunc get_widget;
 	WSUpdateSecretsFunc update_secrets;
 	WSValidateFunc validate;
 	WSDestroyFunc destroy;
@@ -70,7 +70,8 @@ wireless_security_get_widget (WirelessSecurity *sec)
 	WirelessSecurityPrivate *priv = sec->priv;
 	g_return_val_if_fail (sec != NULL, NULL);
 
-	return priv->ui_widget;
+	g_assert (priv->get_widget);
+	return (*(priv->get_widget)) (sec);
 }
 
 void
@@ -181,8 +182,6 @@ wireless_security_unref (WirelessSecurity *sec)
 
 		if (sec->builder)
 			g_object_unref (sec->builder);
-		if (priv->ui_widget)
-			g_object_unref (priv->ui_widget);
 		g_slice_free1 (priv->obj_size, sec);
 		g_free (priv);
 	}
@@ -190,13 +189,13 @@ wireless_security_unref (WirelessSecurity *sec)
 
 WirelessSecurity *
 wireless_security_init (gsize obj_size,
+                        WSGetWidgetFunc get_widget,
                         WSValidateFunc validate,
                         WSAddToSizeGroupFunc add_to_size_group,
                         WSFillConnectionFunc fill_connection,
                         WSUpdateSecretsFunc update_secrets,
                         WSDestroyFunc destroy,
-                        const char *ui_resource,
-                        const char *ui_widget_name)
+                        const char *ui_resource)
 {
 	g_autoptr(WirelessSecurity) sec = NULL;
 	WirelessSecurityPrivate *priv;
@@ -204,7 +203,6 @@ wireless_security_init (gsize obj_size,
 
 	g_return_val_if_fail (obj_size > 0, NULL);
 	g_return_val_if_fail (ui_resource != NULL, NULL);
-	g_return_val_if_fail (ui_widget_name != NULL, NULL);
 
 	g_type_ensure (WIRELESS_TYPE_SECURITY);
 
@@ -215,6 +213,7 @@ wireless_security_init (gsize obj_size,
 	priv->refcount = 1;
 	priv->obj_size = obj_size;
 
+	priv->get_widget = get_widget;
 	priv->validate = validate;
 	priv->add_to_size_group = add_to_size_group;
 	priv->fill_connection = fill_connection;
@@ -226,14 +225,6 @@ wireless_security_init (gsize obj_size,
 		           ui_resource, error->message);
 		return NULL;
 	}
-
-	priv->ui_widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, ui_widget_name));
-	if (!priv->ui_widget) {
-		g_warning ("Couldn't load UI widget '%s' from UI file %s",
-		           ui_widget_name, ui_resource);
-		return NULL;
-	}
-	g_object_ref_sink (priv->ui_widget);
 
 	priv->destroy = destroy;
 	priv->adhoc_compatible = TRUE;
