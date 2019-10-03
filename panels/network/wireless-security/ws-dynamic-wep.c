@@ -43,6 +43,12 @@ destroy (WirelessSecurity *parent)
 		g_object_unref (sec->size_group);
 }
 
+static GtkWidget *
+get_widget (WirelessSecurity *parent)
+{
+	return GTK_WIDGET (gtk_builder_get_object (parent->builder, "dynamic_wep_grid"));
+}
+
 static gboolean
 validate (WirelessSecurity *parent, GError **error)
 {
@@ -102,13 +108,13 @@ ws_dynamic_wep_new (NMConnection *connection,
 	WirelessSecurity *parent;
 
 	parent = wireless_security_init (sizeof (WirelessSecurityDynamicWEP),
+	                                 get_widget,
 	                                 validate,
 	                                 add_to_size_group,
 	                                 fill_connection,
 	                                 update_secrets,
 	                                 destroy,
-	                                 "/org/gnome/ControlCenter/network/ws-dynamic-wep.ui",
-	                                 "dynamic_wep_grid")
+	                                 "/org/gnome/ControlCenter/network/ws-dynamic-wep.ui");
 	if (!parent)
 		return NULL;
 

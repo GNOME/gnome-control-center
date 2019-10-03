@@ -90,6 +90,12 @@ destroy (WirelessSecurity *parent)
 		memset (sec->keys[i], 0, sizeof (sec->keys[i]));
 }
 
+static GtkWidget *
+get_widget (WirelessSecurity *parent)
+{
+	return GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_grid"));
+}
+
 static gboolean
 validate (WirelessSecurity *parent, GError **error)
 {
@@ -259,13 +265,13 @@ ws_wep_key_new (NMConnection *connection,
 	gboolean is_shared_key = FALSE;
 
 	parent = wireless_security_init (sizeof (WirelessSecurityWEPKey),
+	                                 get_widget,
 	                                 validate,
 	                                 add_to_size_group,
 	                                 fill_connection,
 	                                 update_secrets,
 	                                 destroy,
-	                                 "/org/gnome/ControlCenter/network/ws-wep-key.ui",
-	                                 "wep_key_grid");
+	                                 "/org/gnome/ControlCenter/network/ws-wep-key.ui");
 	if (!parent)
 		return NULL;
 
