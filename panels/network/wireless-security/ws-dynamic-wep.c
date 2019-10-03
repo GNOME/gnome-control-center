@@ -110,8 +110,7 @@ ws_dynamic_wep_new (NMConnection *connection,
 	                                 update_secrets,
 	                                 destroy,
 	                                 "/org/gnome/ControlCenter/network/ws-dynamic-wep.ui",
-	                                 "dynamic_wep_notebook",
-	                                 NULL);
+	                                 "dynamic_wep_notebook");
 	if (!parent)
 		return NULL;
 

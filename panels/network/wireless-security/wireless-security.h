@@ -45,7 +45,6 @@ struct _WirelessSecurity {
 	GtkWidget *ui_widget;
 	WSChangedFunc changed_notify;
 	gpointer changed_notify_data;
-	const char *default_field;
 	gboolean adhoc_compatible;
 	gboolean hotspot_compatible;
 
@@ -112,8 +111,7 @@ WirelessSecurity *wireless_security_init (gsize obj_size,
                                           WSUpdateSecretsFunc update_secrets,
                                           WSDestroyFunc destroy,
                                           const char *ui_resource,
-                                          const char *ui_widget_name,
-                                          const char *default_field);
+                                          const char *ui_widget_name);
 
 void wireless_security_changed_cb (GtkWidget *entry, gpointer user_data);
 

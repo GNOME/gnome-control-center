@@ -162,8 +162,7 @@ wireless_security_init (gsize obj_size,
                         WSUpdateSecretsFunc update_secrets,
                         WSDestroyFunc destroy,
                         const char *ui_resource,
-                        const char *ui_widget_name,
-                        const char *default_field)
+                        const char *ui_widget_name)
 {
 	g_autoptr(WirelessSecurity) sec = NULL;
 	g_autoptr(GError) error = NULL;
@@ -184,7 +183,6 @@ wireless_security_init (gsize obj_size,
 	sec->add_to_size_group = add_to_size_group;
 	sec->fill_connection = fill_connection;
 	sec->update_secrets = update_secrets;
-	sec->default_field = default_field;
 
 	sec->builder = gtk_builder_new ();
 	if (!gtk_builder_add_from_resource (sec->builder, ui_resource, &error)) {
