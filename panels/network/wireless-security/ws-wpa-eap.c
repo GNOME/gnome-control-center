@@ -111,8 +111,7 @@ ws_wpa_eap_new (NMConnection *connection,
 	                                 update_secrets,
 	                                 destroy,
 	                                 "/org/gnome/ControlCenter/network/ws-wpa-eap.ui",
-	                                 "wpa_eap_notebook",
-	                                 NULL);
+	                                 "wpa_eap_notebook");
 	if (!parent)
 		return NULL;
 
