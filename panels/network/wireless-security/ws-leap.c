@@ -48,6 +48,12 @@ show_toggled_cb (GtkCheckButton *button, WirelessSecurity *sec)
 	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
 }
 
+static GtkWidget *
+get_widget (WirelessSecurity *parent)
+{
+	return GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_notebook"));
+}
+
 static gboolean
 validate (WirelessSecurity *parent, GError **error)
 {
@@ -148,13 +154,13 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 	NMSettingWirelessSecurity *wsec = NULL;
 
 	parent = wireless_security_init (sizeof (WirelessSecurityLEAP),
+	                                 get_widget,
 	                                 validate,
 	                                 add_to_size_group,
 	                                 fill_connection,
 	                                 update_secrets,
 	                                 NULL,
-	                                 "/org/gnome/ControlCenter/network/ws-leap.ui",
-	                                 "leap_notebook");
+	                                 "/org/gnome/ControlCenter/network/ws-leap.ui");
 	if (!parent)
 		return NULL;
 
