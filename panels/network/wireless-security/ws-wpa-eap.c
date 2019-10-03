@@ -44,6 +44,12 @@ destroy (WirelessSecurity *parent)
 		g_object_unref (sec->size_group);
 }
 
+static GtkWidget *
+get_widget (WirelessSecurity *parent)
+{
+	return GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_eap_notebook"));
+}
+
 static gboolean
 validate (WirelessSecurity *parent, GError **error)
 {
@@ -103,13 +109,13 @@ ws_wpa_eap_new (NMConnection *connection,
 	WirelessSecurity *parent;
 
 	parent = wireless_security_init (sizeof (WirelessSecurityWPAEAP),
+	                                 get_widget,
 	                                 validate,
 	                                 add_to_size_group,
 	                                 fill_connection,
 	                                 update_secrets,
 	                                 destroy,
-	                                 "/org/gnome/ControlCenter/network/ws-wpa-eap.ui",
-	                                 "wpa_eap_notebook");
+	                                 "/org/gnome/ControlCenter/network/ws-wpa-eap.ui");
 	if (!parent)
 		return NULL;
 
