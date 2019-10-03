@@ -39,6 +39,12 @@ struct _WirelessSecurityWPAPSK {
 	const char *password_flags_name;
 };
 
+static GtkWidget *
+get_widget (WirelessSecurity *parent)
+{
+	return GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_grid"));
+}
+
 static void
 show_toggled_cb (GtkCheckButton *button, WirelessSecurity *sec)
 {
@@ -176,13 +182,13 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	GtkWidget *widget;
 
 	parent = wireless_security_init (sizeof (WirelessSecurityWPAPSK),
+	                                 get_widget,
 	                                 validate,
 	                                 add_to_size_group,
 	                                 fill_connection,
 	                                 update_secrets,
 	                                 NULL,
-	                                 "/org/gnome/ControlCenter/network/ws-wpa-psk.ui",
-	                                 "wpa_psk_grid");
+	                                 "/org/gnome/ControlCenter/network/ws-wpa-psk.ui");
 	if (!parent)
 		return NULL;
 
