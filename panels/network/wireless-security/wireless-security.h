@@ -28,6 +28,7 @@
 #define WIRELESS_TYPE_SECURITY (wireless_security_get_type ())
 
 typedef struct _WirelessSecurity WirelessSecurity;
+typedef struct _WirelessSecurityPrivate WirelessSecurityPrivate;
 
 typedef void (*WSChangedFunc) (WirelessSecurity *sec, gpointer user_data);
 
@@ -38,23 +39,8 @@ typedef void (*WSDestroyFunc)        (WirelessSecurity *sec);
 typedef gboolean (*WSValidateFunc)   (WirelessSecurity *sec, GError **error);
 
 struct _WirelessSecurity {
-	guint32 refcount;
-	gsize obj_size;
+	WirelessSecurityPrivate *priv;
 	GtkBuilder *builder;
-	GtkWidget *ui_widget;
-	WSChangedFunc changed_notify;
-	gpointer changed_notify_data;
-	gboolean adhoc_compatible;
-	gboolean hotspot_compatible;
-
-	char *username, *password;
-	gboolean always_ask, show_password;
-
-	WSAddToSizeGroupFunc add_to_size_group;
-	WSFillConnectionFunc fill_connection;
-	WSUpdateSecretsFunc update_secrets;
-	WSValidateFunc validate;
-	WSDestroyFunc destroy;
 };
 
 #define WIRELESS_SECURITY(x) ((WirelessSecurity *) x)
@@ -77,9 +63,23 @@ void wireless_security_fill_connection (WirelessSecurity *sec,
 void wireless_security_update_secrets (WirelessSecurity *sec,
                                        NMConnection *connection);
 
+void wireless_security_set_adhoc_compatible (WirelessSecurity *sec,
+                                             gboolean adhoc_compatible);
+
 gboolean wireless_security_adhoc_compatible (WirelessSecurity *sec);
 
+void wireless_security_set_hotspot_compatible (WirelessSecurity *sec,
+                                               gboolean hotspot_compatible);
+
 gboolean wireless_security_hotspot_compatible (WirelessSecurity *sec);
+
+const gchar *wireless_security_get_username (WirelessSecurity *sec);
+
+const gchar *wireless_security_get_password (WirelessSecurity *sec);
+
+gboolean wireless_security_get_always_ask (WirelessSecurity *sec);
+
+gboolean wireless_security_get_show_password (WirelessSecurity *sec);
 
 void wireless_security_set_userpass (WirelessSecurity *sec,
                                      const char *user,
