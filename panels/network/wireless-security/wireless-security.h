@@ -36,7 +36,6 @@ typedef void (*WSFillConnectionFunc) (WirelessSecurity *sec, NMConnection *conne
 typedef void (*WSUpdateSecretsFunc)  (WirelessSecurity *sec, NMConnection *connection);
 typedef void (*WSDestroyFunc)        (WirelessSecurity *sec);
 typedef gboolean (*WSValidateFunc)   (WirelessSecurity *sec, GError **error);
-typedef GtkWidget * (*WSNagUserFunc) (WirelessSecurity *sec);
 
 struct _WirelessSecurity {
 	guint32 refcount;
