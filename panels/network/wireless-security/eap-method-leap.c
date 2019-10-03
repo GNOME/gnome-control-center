@@ -139,17 +139,17 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 static void
 set_userpass_ui (EAPMethodLEAP *method)
 {
-	if (method->ws_parent->username)
-		gtk_entry_set_text (method->username_entry, method->ws_parent->username);
+	if (wireless_security_get_username (method->ws_parent))
+		gtk_entry_set_text (method->username_entry, wireless_security_get_username (method->ws_parent));
 	else
 		gtk_entry_set_text (method->username_entry, "");
 
-	if (method->ws_parent->password && !method->ws_parent->always_ask)
-		gtk_entry_set_text (method->password_entry, method->ws_parent->password);
+	if (wireless_security_get_password (method->ws_parent) && !wireless_security_get_always_ask (method->ws_parent))
+		gtk_entry_set_text (method->password_entry, wireless_security_get_password (method->ws_parent));
 	else
 		gtk_entry_set_text (method->password_entry, "");
 
-	gtk_toggle_button_set_active (method->show_password, method->ws_parent->show_password);
+	gtk_toggle_button_set_active (method->show_password, wireless_security_get_show_password (method->ws_parent));
 }
 
 static void
