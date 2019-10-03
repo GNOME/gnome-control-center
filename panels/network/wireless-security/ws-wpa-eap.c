@@ -111,8 +111,7 @@ ws_wpa_eap_new (NMConnection *connection,
 	                                 update_secrets,
 	                                 destroy,
 	                                 "/org/gnome/ControlCenter/network/ws-wpa-eap.ui",
-	                                 "wpa_eap_grid",
-	                                 NULL);
+	                                 "wpa_eap_grid");
 	if (!parent)
 		return NULL;
 

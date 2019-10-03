@@ -265,8 +265,7 @@ ws_wep_key_new (NMConnection *connection,
 	                                 update_secrets,
 	                                 destroy,
 	                                 "/org/gnome/ControlCenter/network/ws-wep-key.ui",
-	                                 "wep_key_grid",
-	                                 "wep_key_entry");
+	                                 "wep_key_grid");
 	if (!parent)
 		return NULL;
 
