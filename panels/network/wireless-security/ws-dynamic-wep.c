@@ -114,8 +114,8 @@ ws_dynamic_wep_new (NMConnection *connection,
 	if (!parent)
 		return NULL;
 
-	parent->adhoc_compatible = FALSE;
-	parent->hotspot_compatible = FALSE;
+	wireless_security_set_adhoc_compatible (parent, FALSE);
+	wireless_security_set_hotspot_compatible (parent, FALSE);
 
 	widget = ws_802_1x_auth_combo_init (parent,
 	                                    "dynamic_wep_auth_combo",
