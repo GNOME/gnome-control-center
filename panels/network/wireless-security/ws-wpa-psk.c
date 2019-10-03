@@ -183,8 +183,7 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	                                 update_secrets,
 	                                 NULL,
 	                                 "/org/gnome/ControlCenter/network/ws-wpa-psk.ui",
-	                                 "wpa_psk_notebook",
-	                                 "wpa_psk_entry");
+	                                 "wpa_psk_notebook");
 	if (!parent)
 		return NULL;
 
