@@ -29,6 +29,25 @@
 #include "eap-method.h"
 #include "utils.h"
 
+struct _WirelessSecurityPrivate {
+	guint32 refcount;
+	gsize obj_size;
+	GtkWidget *ui_widget;
+	WSChangedFunc changed_notify;
+	gpointer changed_notify_data;
+	gboolean adhoc_compatible;
+	gboolean hotspot_compatible;
+
+	char *username, *password;
+	gboolean always_ask, show_password;
+
+	WSAddToSizeGroupFunc add_to_size_group;
+	WSFillConnectionFunc fill_connection;
+	WSUpdateSecretsFunc update_secrets;
+	WSValidateFunc validate;
+	WSDestroyFunc destroy;
+};
+
 GType
 wireless_security_get_type (void)
 {
@@ -48,9 +67,10 @@ wireless_security_get_type (void)
 GtkWidget *
 wireless_security_get_widget (WirelessSecurity *sec)
 {
+	WirelessSecurityPrivate *priv = sec->priv;
 	g_return_val_if_fail (sec != NULL, NULL);
 
-	return sec->ui_widget;
+	return priv->ui_widget;
 }
 
 void
@@ -58,31 +78,34 @@ wireless_security_set_changed_notify (WirelessSecurity *sec,
                                       WSChangedFunc func,
                                       gpointer user_data)
 {
+	WirelessSecurityPrivate *priv = sec->priv;
 	g_return_if_fail (sec != NULL);
 
-	sec->changed_notify = func;
-	sec->changed_notify_data = user_data;
+	priv->changed_notify = func;
+	priv->changed_notify_data = user_data;
 }
 
 void
 wireless_security_changed_cb (GtkWidget *ignored, gpointer user_data)
 {
 	WirelessSecurity *sec = WIRELESS_SECURITY (user_data);
+	WirelessSecurityPrivate *priv = sec->priv;
 
-	if (sec->changed_notify)
-		(*(sec->changed_notify)) (sec, sec->changed_notify_data);
+	if (priv->changed_notify)
+		(*(priv->changed_notify)) (sec, priv->changed_notify_data);
 }
 
 gboolean
 wireless_security_validate (WirelessSecurity *sec, GError **error)
 {
+	WirelessSecurityPrivate *priv = sec->priv;
 	gboolean result;
 
 	g_return_val_if_fail (sec != NULL, FALSE);
 	g_return_val_if_fail (!error || !*error, FALSE);
 
-	g_assert (sec->validate);
-	result = (*(sec->validate)) (sec, error);
+	g_assert (priv->validate);
+	result = (*(priv->validate)) (sec, error);
 	if (!result && error && !*error)
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("Unknown error validating 802.1X security"));
 	return result;
@@ -91,66 +114,77 @@ wireless_security_validate (WirelessSecurity *sec, GError **error)
 void
 wireless_security_add_to_size_group (WirelessSecurity *sec, GtkSizeGroup *group)
 {
+	WirelessSecurityPrivate *priv = sec->priv;
+
 	g_return_if_fail (sec != NULL);
 	g_return_if_fail (group != NULL);
 
-	g_assert (sec->add_to_size_group);
-	return (*(sec->add_to_size_group)) (sec, group);
+	g_assert (priv->add_to_size_group);
+	return (*(priv->add_to_size_group)) (sec, group);
 }
 
 void
 wireless_security_fill_connection (WirelessSecurity *sec,
                                    NMConnection *connection)
 {
+	WirelessSecurityPrivate *priv = sec->priv;
+
 	g_return_if_fail (sec != NULL);
 	g_return_if_fail (connection != NULL);
 
-	g_assert (sec->fill_connection);
-	return (*(sec->fill_connection)) (sec, connection);
+	g_assert (priv->fill_connection);
+	return (*(priv->fill_connection)) (sec, connection);
 }
 
 void
 wireless_security_update_secrets (WirelessSecurity *sec, NMConnection *connection)
 {
+	WirelessSecurityPrivate *priv = sec->priv;
+
 	g_return_if_fail (sec != NULL);
 	g_return_if_fail (connection != NULL);
 
-	if (sec->update_secrets)
-		sec->update_secrets (sec, connection);
+	if (priv->update_secrets)
+		priv->update_secrets (sec, connection);
 }
 
 WirelessSecurity *
 wireless_security_ref (WirelessSecurity *sec)
 {
-	g_return_val_if_fail (sec != NULL, NULL);
-	g_return_val_if_fail (sec->refcount > 0, NULL);
+	WirelessSecurityPrivate *priv = sec->priv;
 
-	sec->refcount++;
+	g_return_val_if_fail (sec != NULL, NULL);
+	g_return_val_if_fail (priv->refcount > 0, NULL);
+
+	priv->refcount++;
 	return sec;
 }
 
 void
 wireless_security_unref (WirelessSecurity *sec)
 {
+	WirelessSecurityPrivate *priv = sec->priv;
+
 	g_return_if_fail (sec != NULL);
-	g_return_if_fail (sec->refcount > 0);
+	g_return_if_fail (priv->refcount > 0);
 
-	sec->refcount--;
-	if (sec->refcount == 0) {
-		if (sec->destroy)
-			sec->destroy (sec);
+	priv->refcount--;
+	if (priv->refcount == 0) {
+		if (priv->destroy)
+			priv->destroy (sec);
 
-		g_free (sec->username);
-		if (sec->password) {
-			memset (sec->password, 0, strlen (sec->password));
-			g_free (sec->password);
+		g_free (priv->username);
+		if (priv->password) {
+			memset (priv->password, 0, strlen (priv->password));
+			g_free (priv->password);
 		}
 
 		if (sec->builder)
 			g_object_unref (sec->builder);
-		if (sec->ui_widget)
-			g_object_unref (sec->ui_widget);
-		g_slice_free1 (sec->obj_size, sec);
+		if (priv->ui_widget)
+			g_object_unref (priv->ui_widget);
+		g_slice_free1 (priv->obj_size, sec);
+		g_free (priv);
 	}
 }
 
@@ -165,6 +199,7 @@ wireless_security_init (gsize obj_size,
                         const char *ui_widget_name)
 {
 	g_autoptr(WirelessSecurity) sec = NULL;
+	WirelessSecurityPrivate *priv;
 	g_autoptr(GError) error = NULL;
 
 	g_return_val_if_fail (obj_size > 0, NULL);
@@ -175,14 +210,15 @@ wireless_security_init (gsize obj_size,
 
 	sec = g_slice_alloc0 (obj_size);
 	g_assert (sec);
+	sec->priv = priv = g_new0 (WirelessSecurityPrivate, 1);
 
-	sec->refcount = 1;
-	sec->obj_size = obj_size;
+	priv->refcount = 1;
+	priv->obj_size = obj_size;
 
-	sec->validate = validate;
-	sec->add_to_size_group = add_to_size_group;
-	sec->fill_connection = fill_connection;
-	sec->update_secrets = update_secrets;
+	priv->validate = validate;
+	priv->add_to_size_group = add_to_size_group;
+	priv->fill_connection = fill_connection;
+	priv->update_secrets = update_secrets;
 
 	sec->builder = gtk_builder_new ();
 	if (!gtk_builder_add_from_resource (sec->builder, ui_resource, &error)) {
@@ -191,35 +227,99 @@ wireless_security_init (gsize obj_size,
 		return NULL;
 	}
 
-	sec->ui_widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, ui_widget_name));
-	if (!sec->ui_widget) {
+	priv->ui_widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, ui_widget_name));
+	if (!priv->ui_widget) {
 		g_warning ("Couldn't load UI widget '%s' from UI file %s",
 		           ui_widget_name, ui_resource);
 		return NULL;
 	}
-	g_object_ref_sink (sec->ui_widget);
+	g_object_ref_sink (priv->ui_widget);
 
-	sec->destroy = destroy;
-	sec->adhoc_compatible = TRUE;
-	sec->hotspot_compatible = TRUE;
+	priv->destroy = destroy;
+	priv->adhoc_compatible = TRUE;
+	priv->hotspot_compatible = TRUE;
 
 	return g_steal_pointer (&sec);
+}
+
+void
+wireless_security_set_adhoc_compatible (WirelessSecurity *sec, gboolean adhoc_compatible)
+{
+	WirelessSecurityPrivate *priv = sec->priv;
+
+	g_return_if_fail (sec != NULL);
+
+	priv->adhoc_compatible = adhoc_compatible;
 }
 
 gboolean
 wireless_security_adhoc_compatible (WirelessSecurity *sec)
 {
+	WirelessSecurityPrivate *priv = sec->priv;
+
 	g_return_val_if_fail (sec != NULL, FALSE);
 
-	return sec->adhoc_compatible;
+	return priv->adhoc_compatible;
+}
+
+void
+wireless_security_set_hotspot_compatible (WirelessSecurity *sec, gboolean hotspot_compatible)
+{
+	WirelessSecurityPrivate *priv = sec->priv;
+
+	g_return_if_fail (sec != NULL);
+
+	priv->hotspot_compatible = hotspot_compatible;
 }
 
 gboolean
 wireless_security_hotspot_compatible (WirelessSecurity *sec)
 {
+	WirelessSecurityPrivate *priv = sec->priv;
+
 	g_return_val_if_fail (sec != NULL, FALSE);
 
-	return sec->hotspot_compatible;
+	return priv->hotspot_compatible;
+}
+
+const gchar *
+wireless_security_get_username (WirelessSecurity *sec)
+{
+	WirelessSecurityPrivate *priv = sec->priv;
+
+	g_return_val_if_fail (sec != NULL, NULL);
+
+	return priv->username;
+}
+
+const gchar *
+wireless_security_get_password (WirelessSecurity *sec)
+{
+	WirelessSecurityPrivate *priv = sec->priv;
+
+	g_return_val_if_fail (sec != NULL, NULL);
+
+	return priv->password;
+}
+
+gboolean
+wireless_security_get_always_ask (WirelessSecurity *sec)
+{
+	WirelessSecurityPrivate *priv = sec->priv;
+
+	g_return_val_if_fail (sec != NULL, FALSE);
+
+	return priv->always_ask;
+}
+
+gboolean
+wireless_security_get_show_password (WirelessSecurity *sec)
+{
+	WirelessSecurityPrivate *priv = sec->priv;
+
+	g_return_val_if_fail (sec != NULL, FALSE);
+
+	return priv->show_password;
 }
 
 void
@@ -229,18 +329,20 @@ wireless_security_set_userpass (WirelessSecurity *sec,
                                 gboolean always_ask,
                                 gboolean show_password)
 {
-	g_free (sec->username);
-	sec->username = g_strdup (user);
+	WirelessSecurityPrivate *priv = sec->priv;
 
-	if (sec->password) {
-		memset (sec->password, 0, strlen (sec->password));
-		g_free (sec->password);
+	g_free (priv->username);
+	priv->username = g_strdup (user);
+
+	if (priv->password) {
+		memset (priv->password, 0, strlen (priv->password));
+		g_free (priv->password);
 	}
-	sec->password = g_strdup (password);
+	priv->password = g_strdup (password);
 
 	if (always_ask != (gboolean) -1)
-		sec->always_ask = always_ask;
-	sec->show_password = show_password;
+		priv->always_ask = always_ask;
+	priv->show_password = show_password;
 }
 
 void

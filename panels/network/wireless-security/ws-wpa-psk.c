@@ -187,7 +187,7 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	if (!parent)
 		return NULL;
 
-	parent->adhoc_compatible = FALSE;
+	wireless_security_set_adhoc_compatible (parent, FALSE);
 	sec = (WirelessSecurityWPAPSK *) parent;
 	sec->editing_connection = secrets_only ? FALSE : TRUE;
 	sec->password_flags_name = NM_SETTING_WIRELESS_SECURITY_PSK;
