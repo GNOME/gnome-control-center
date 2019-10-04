@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcWwanPanel" parent="CcPanel">
+    <property name="visible">1</property>
+
+    <child>
+      <object class="GtkOverlay">
+        <property name="visible">1</property>
+
+        <!-- Notification Revealer -->
+        <child type="overlay">
+          <object class="GtkRevealer" id="notification_revealer">
+            <property name="visible">1</property>
+            <property name="halign">center</property>
+            <property name="valign">start</property>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">1</property>
+                <property name="spacing">12</property>
+                <style>
+                  <class name="frame" />
+                  <class name="app-notification" />
+                </style>
+                <child>
+                  <object class="GtkLabel" id="notification_label">
+                    <property name="visible">1</property>
+                    <property name="wrap">1</property>
+                    <property name="wrap-mode">word</property>
+                    <property name="use-markup">1</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="visible">1</property>
+                    <property name="relief">none</property>
+                    <signal name="clicked" handler="wwan_notification_close_clicked_cb" swapped="yes" />
+                    <child internal-child="accessible">
+                      <object class="AtkObject">
+                        <property name="accessible-name" translatable="yes">Close</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">1</property>
+                        <property name="icon-name">window-close-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="visible">1</property>
+            <property name="hscrollbar-policy">never</property>
+            <property name="min-content-height">500</property>
+            <child>
+              <object class="HdyClamp">
+                <property name="visible">1</property>
+                <property name="margin-top">0</property>
+                <property name="margin-bottom">32</property>
+                <property name="margin-start">18</property>
+                <property name="margin-end">18</property>
+
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">1</property>
+                    <property name="hexpand">1</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkStack" id="main_stack">
+                        <property name="visible">1</property>
+                        <property name="homogeneous">0</property>
+                        <property name="transition-type">crossfade</property>
+
+                        <!-- "No WWAN Adapter" page -->
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">1</property>
+                            <property name="expand">1</property>
+                            <property name="valign">center</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="visible">1</property>
+                                <property name="icon-name">network-cellular-offline-symbolic</property>
+                                <property name="pixel-size">192</property>
+                                <property name="margin-bottom">18</property>
+                                <style>
+                                 <class name="dim-label" />
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">1</property>
+                                <property name="wrap">1</property>
+                                <property name="label" translatable="yes">No WWAN Adapter Found</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold" />
+                                  <attribute name="scale" value="1.2" />
+                                </attributes>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">1</property>
+                                <property name="wrap">1</property>
+                                <property name="label" translatable="yes">Make sure you have a Wireless Wan/Cellular device</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="name">no-wwan-devices</property>
+                          </packing>
+                        </child>
+
+                        <!-- "Airplane Mode" page -->
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">1</property>
+                            <property name="expand">1</property>
+                            <property name="orientation">vertical</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="visible">1</property>
+                                <property name="icon-name">airplane-mode-symbolic</property>
+                                <property name="pixel-size">192</property>
+                                <property name="margin-bottom">18</property>
+                                <style>
+                                 <class name="dim-label" />
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">1</property>
+                                <property name="wrap">1</property>
+                                <property name="label" translatable="yes">Airplane Mode On</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold" />
+                                  <attribute name="scale" value="1.2" />
+                                </attributes>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">1</property>
+                                <property name="wrap">1</property>
+                                <property name="label" translatable="yes">Wireless Wan is disabled when airplane mode is on</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton">
+                                <property name="visible">1</property>
+                                <property name="halign">center</property>
+                                <property name="use-underline">1</property>
+                                <property name="margin-top">24</property>
+                                <property name="label" translatable="yes">_Turn off Airplane Mode</property>
+                                <signal name="clicked" handler="wwan_on_airplane_off_clicked_cb" swapped="yes" />
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="name">airplane-mode</property>
+                          </packing>
+                        </child>
+
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">1</property>
+                            <property name="orientation">vertical</property>
+
+                            <child>
+                              <object class="GtkRevealer" id="multi_device_revealer">
+                                <property name="visible">1</property>
+                                <property name="margin-top">18</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">1</property>
+                                    <property name="orientation">vertical</property>
+
+                                    <!-- Data SIM selector -->
+                                    <child>
+                                      <object class="GtkListBox" id="data_sim_select_listbox">
+                                        <property name="visible">1</property>
+                                        <property name="selection-mode">none</property>
+                                        <property name="margin-bottom">32</property>
+                                        <signal name="row-activated" handler="wwan_data_selector_clicked_cb" swapped="yes" />
+                                        <style>
+                                         <class name="frame" />
+                                        </style>
+                                        <child>
+                                          <object class="GtkGrid">
+                                            <property name="visible">1</property>
+                                            <property name="border-width">9</property>
+                                            <property name="margin-start">9</property>
+                                            <property name="margin-end">9</property>
+                                            <property name="column-spacing">12</property>
+
+                                            <!-- Title -->
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="visible">1</property>
+                                                <property name="hexpand">1</property>
+                                                <property name="label" translatable="yes">Data Connection</property>
+                                                <property name="xalign">0.0</property>
+                                              </object>
+                                              <packing>
+                                                <property name="left-attach">0</property>
+                                                <property name="top-attach">0</property>
+                                              </packing>
+                                            </child>
+
+                                            <!-- SubTitle -->
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="visible">1</property>
+                                                <property name="hexpand">1</property>
+                                                <property name="label" translatable="yes">SIM card used for internet</property>
+                                                <property name="xalign">0.0</property>
+                                                <attributes>
+                                                  <attribute name="scale" value="0.88" />
+                                                </attributes>
+                                                <style>
+                                                  <class name="dim-label" />
+                                                </style>
+                                              </object>
+                                              <packing>
+                                                <property name="left-attach">0</property>
+                                                <property name="top-attach">1</property>
+                                              </packing>
+                                            </child>
+
+                                            <!-- Network Name -->
+                                            <child>
+                                              <object class="GtkLabel" id="data_sim_label">
+                                                <property name="visible">1</property>
+                                                <property name="valign">center</property>
+                                              </object>
+                                              <packing>
+                                                <property name="left-attach">1</property>
+                                                <property name="top-attach">0</property>
+                                                <property name="height">2</property>
+                                              </packing>
+                                            </child>
+
+                                            <!-- Popover Arrow -->
+                                            <child>
+                                              <object class="GtkImage" id="popover_arrow">
+                                                <property name="visible">1</property>
+                                                <property name="valign">center</property>
+                                                <property name="icon-name">pan-down-symbolic</property>
+                                              </object>
+                                              <packing>
+                                                <property name="left-attach">2</property>
+                                                <property name="top-attach">0</property>
+                                                <property name="height">2</property>
+                                              </packing>
+                                            </child>
+
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+
+                                    <!-- Device (SIM) Name -->
+                                    <child>
+                                      <object class="GtkStackSwitcher" id="devices_switcher">
+                                        <property name="stack">devices_stack</property>
+                                        <property name="visible">1</property>
+                                        <property name="hexpand">1</property>
+                                        <property name="halign">center</property>
+                                      </object>
+                                    </child>
+
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+
+                            <!-- Device (SIM) settings page -->
+                            <child>
+                              <object class="GtkStack" id="devices_stack">
+                                <property name="visible">1</property>
+                                <property name="homogeneous">0</property>
+                              </object>
+                            </child>
+
+                          </object>
+                          <packing>
+                            <property name="name">device-settings</property>
+                          </packing>
+                        </child>
+
+                      </object> <!-- ./GtkStack main_stack -->
+                    </child>
+                  </object>
+                </child>
+
+              </object> <!-- ./HdyClamp -->
+            </child>
+          </object> <!-- ./GtkScrolledWindow -->
+        </child>
+
+      </object>
+    </child>
+
+  </template>
+
+  <object class="GtkPopover" id="data_select_popover">
+    <property name="position">bottom</property>
+    <property name="relative-to">popover_arrow</property>
+    <child>
+      <object class="GtkListBox" id="data_select_listbox">
+        <property name="visible">1</property>
+        <property name="selection-mode">none</property>
+        <signal name="row-activated" handler="cc_wwan_data_item_activate_cb" swapped="yes" />
+      </object>
+    </child>
+  </object>
+
+  <!-- Cellular panel on/off switch -->
+  <object class="GtkSwitch" id="enable_switch">
+    <property name="visible">1</property>
+    <child internal-child="accessible">
+      <object class="AtkObject">
+        <property name="accessible-name" translatable="yes">Enable Mobile Network</property>
+      </object>
+    </child>
+  </object>
+</interface>
