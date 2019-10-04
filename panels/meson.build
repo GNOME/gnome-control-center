@@ -21,7 +21,8 @@ panels = [
   'sharing',
   'sound',
   'universal-access',
-  'user-accounts'
+  'user-accounts',
+  'wwan',
 ]
 
 if host_is_linux
