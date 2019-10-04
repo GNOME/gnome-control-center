@@ -445,6 +445,27 @@ add_device_stack (CcNetworkPanel *self, NetObject *object)
         return stack;
 }
 
+static gboolean
+wwan_panel_supports_modem (GDBusObject *object)
+{
+        MMObject *mm_object;
+        MMModem *modem;
+        MMModemCapability capability;
+
+        g_assert (G_IS_DBUS_OBJECT (object));
+
+        mm_object = MM_OBJECT (object);
+        modem = mm_object_get_modem (mm_object);
+        capability = mm_modem_get_current_capabilities (modem);
+
+        if (capability & (MM_MODEM_CAPABILITY_GSM_UMTS |
+                          MM_MODEM_CAPABILITY_LTE |
+                          MM_MODEM_CAPABILITY_LTE_ADVANCED))
+                return TRUE;
+
+        return FALSE;
+}
+
 static void
 panel_add_device (CcNetworkPanel *self, NMDevice *device)
 {
@@ -515,6 +536,10 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                                    nm_device_get_udi (device));
                         return;
                 }
+
+                /* This will be handled by cellular panel */
+                if (wwan_panel_supports_modem (modem_object))
+                        return;
 
                 /* Set the modem object in the NetDeviceMobile */
                 g_object_set (net_device,
