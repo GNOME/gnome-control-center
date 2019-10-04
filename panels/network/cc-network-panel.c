@@ -382,6 +382,27 @@ update_bluetooth_section (CcNetworkPanel *self)
         gtk_widget_set_visible (self->container_bluetooth, self->bluetooth_devices->len > 0);
 }
 
+static gboolean
+wwan_panel_supports_modem (GDBusObject *object)
+{
+        MMObject *mm_object;
+        MMModem *modem;
+        MMModemCapability capability;
+
+        g_assert (G_IS_DBUS_OBJECT (object));
+
+        mm_object = MM_OBJECT (object);
+        modem = mm_object_get_modem (mm_object);
+        capability = mm_modem_get_current_capabilities (modem);
+
+        if (capability & (MM_MODEM_CAPABILITY_GSM_UMTS |
+                          MM_MODEM_CAPABILITY_LTE |
+                          MM_MODEM_CAPABILITY_LTE_ADVANCED))
+                return TRUE;
+
+        return FALSE;
+}
+
 static void
 panel_add_device (CcNetworkPanel *self, NMDevice *device)
 {
@@ -428,6 +449,10 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                                            nm_device_get_udi (device));
                                 return;
                         }
+
+                        /* This will be handled by cellular panel */
+                        if (wwan_panel_supports_modem (modem_object))
+                                return;
                 }
 
                 device_mobile = net_device_mobile_new (self->client, device, modem_object);
