@@ -217,6 +217,10 @@ config_h.set('BUILD_NETWORK', host_is_linux,
              description: 'Define to 1 to build the Network panel')
 config_h.set('HAVE_NETWORK_MANAGER', host_is_linux,
              description: 'Define to 1 if NetworkManager is available')
+config_h.set('BUILD_WWAN', host_is_linux,
+             description: 'Define to 1 to build the WWan panel')
+config_h.set('HAVE_WWAN', host_is_linux,
+             description: 'Define to 1 if WWan is available')
 
 if host_is_linux_not_s390
   # gnome-bluetooth
