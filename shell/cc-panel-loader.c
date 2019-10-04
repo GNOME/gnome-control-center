@@ -64,6 +64,9 @@ extern GType cc_user_panel_get_type (void);
 #ifdef BUILD_WACOM
 extern GType cc_wacom_panel_get_type (void);
 #endif /* BUILD_WACOM */
+#ifdef BUILD_WWAN
+extern GType cc_wwan_panel_get_type (void);
+#endif /* BUILD_WWAN */
 extern GType cc_location_panel_get_type (void);
 extern GType cc_camera_panel_get_type (void);
 extern GType cc_microphone_panel_get_type (void);
@@ -79,6 +82,9 @@ extern void cc_wifi_panel_static_init_func (void);
 #ifdef BUILD_WACOM
 extern void cc_wacom_panel_static_init_func (void);
 #endif /* BUILD_WACOM */
+#ifdef BUILD_WWAN
+extern void cc_wwan_panel_static_init_func (void);
+#endif /* BUILD_WWAN */
 
 #define PANEL_TYPE(name, get_type, init_func) { name, get_type, init_func }
 
@@ -128,6 +134,9 @@ static CcPanelLoaderVtable default_panels[] =
   PANEL_TYPE("user-accounts",    cc_user_panel_get_type,                 NULL),
 #ifdef BUILD_WACOM
   PANEL_TYPE("wacom",            cc_wacom_panel_get_type,                cc_wacom_panel_static_init_func),
+#endif
+#ifdef BUILD_WWAN
+  PANEL_TYPE("wwan",             cc_wwan_panel_get_type,                 cc_wwan_panel_static_init_func),
 #endif
 };
 
