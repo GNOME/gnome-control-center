@@ -424,13 +424,19 @@ ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo, const char *current)
 char *
 ce_page_cloned_mac_get (GtkComboBoxText *combo)
 {
+       g_autofree gchar *active_text = NULL;
        const char *id;
 
        id = gtk_combo_box_get_active_id (GTK_COMBO_BOX (combo));
        if (id)
                return g_strdup (id);
 
-       return gtk_combo_box_text_get_active_text (combo);
+       active_text = gtk_combo_box_text_get_active_text (combo);
+
+       if (active_text[0] == '\0')
+               return NULL;
+
+       return g_steal_pointer (&active_text);
 }
 
 gboolean
@@ -485,7 +491,7 @@ ce_page_cloned_mac_combo_valid (GtkComboBoxText *combo)
 
        active_text = gtk_combo_box_text_get_active_text (combo);
 
-       return ce_page_address_is_valid (active_text);
+       return active_text[0] == '\0' || ce_page_address_is_valid (active_text);
 }
 
 const gchar *
