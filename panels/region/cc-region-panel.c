@@ -1347,8 +1347,7 @@ set_localed_locale (CcRegionPanel *self)
         lang_value = g_strconcat ("LANG=", self->system_language, NULL);
         g_variant_builder_add (b, "s", lang_value);
 
-        if (self->system_region != NULL &&
-            g_strcmp0 (self->system_language, self->system_region) != 0) {
+        if (self->system_region != NULL) {
                 g_autofree gchar *time_value = NULL;
                 g_autofree gchar *numeric_value = NULL;
                 g_autofree gchar *monetary_value = NULL;
