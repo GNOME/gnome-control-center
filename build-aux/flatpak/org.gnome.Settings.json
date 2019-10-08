@@ -537,9 +537,11 @@
         },
         {
             "name" : "cheese",
-            "buildsystem" : "autotools",
+            "buildsystem" : "meson",
             "config-opts" : [
-                "--disable-introspection"
+                "-Dintrospection=false",
+                "-Dgtk_doc=false",
+                "-Dman=false"
             ],
             "sources" : [
                 {
