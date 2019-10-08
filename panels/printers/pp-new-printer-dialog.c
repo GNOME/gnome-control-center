@@ -1607,43 +1607,57 @@ search_address (const gchar        *text,
 
       if (text && text[0] != '\0')
         {
-          g_autoptr(GSocketConnectable) conn;
+          g_autoptr(GSocketConnectable) conn = NULL;
+          g_autofree gchar *test_uri = NULL;
+          g_autofree gchar *test_port = NULL;
           gchar *scheme = NULL;
           gchar *host = NULL;
           gint   port;
 
           parse_uri (text, &scheme, &host, &port);
 
-          conn = g_network_address_parse_uri (host, port, NULL);
-
-          if (host != NULL && conn != NULL)
+          if (host != NULL)
             {
-              THostSearchData *search_data;
-
-              search_data = g_new (THostSearchData, 1);
-              search_data->host_scheme = scheme;
-              search_data->host_name = host;
-              search_data->host_port = port;
-              search_data->dialog = self;
-
-              if (self->host_search_timeout_id != 0)
-                {
-                  g_source_remove (self->host_search_timeout_id);
-                  self->host_search_timeout_id = 0;
-                }
-
-              if (delay_search)
-                {
-                  self->host_search_timeout_id = g_timeout_add_full (G_PRIORITY_DEFAULT,
-                                                                     HOST_SEARCH_DELAY,
-                                                                     (GSourceFunc) search_for_remote_printers,
-                                                                     search_data,
-                                                                     (GDestroyNotify) search_for_remote_printers_free);
-                }
+              if (port >= 0)
+                test_port = g_strdup_printf (":%d", port);
               else
+                test_port = g_strdup ("");
+
+              test_uri = g_strdup_printf ("%s://%s%s",
+                                          scheme != NULL && scheme[0] != '\0' ? scheme : "none",
+                                          host,
+                                          test_port);
+
+              conn = g_network_address_parse_uri (test_uri, 0, NULL);
+              if (conn != NULL)
                 {
-                  search_for_remote_printers (search_data);
-                  search_for_remote_printers_free (search_data);
+                  THostSearchData *search_data;
+
+                  search_data = g_new (THostSearchData, 1);
+                  search_data->host_scheme = scheme;
+                  search_data->host_name = host;
+                  search_data->host_port = port;
+                  search_data->dialog = self;
+
+                  if (self->host_search_timeout_id != 0)
+                    {
+                      g_source_remove (self->host_search_timeout_id);
+                      self->host_search_timeout_id = 0;
+                    }
+
+                  if (delay_search)
+                    {
+                      self->host_search_timeout_id = g_timeout_add_full (G_PRIORITY_DEFAULT,
+                                                                         HOST_SEARCH_DELAY,
+                                                                         (GSourceFunc) search_for_remote_printers,
+                                                                         search_data,
+                                                                         (GDestroyNotify) search_for_remote_printers_free);
+                    }
+                  else
+                    {
+                      search_for_remote_printers (search_data);
+                      search_for_remote_printers_free (search_data);
+                    }
                 }
             }
         }
