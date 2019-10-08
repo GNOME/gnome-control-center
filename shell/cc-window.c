@@ -102,7 +102,7 @@ enum
 static gboolean
 in_flatpak_sandbox (void)
 {
-  return g_file_test ("/.flatpak-info", G_FILE_TEST_EXISTS);
+  return g_strcmp0 (PROFILE, "development") == 0;
 }
 
 static void
