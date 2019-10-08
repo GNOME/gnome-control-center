@@ -27,7 +27,7 @@ stages:
 .Build procedure: &build_procedure
   echo "== Building ==" &&
   rm -rf _build/ &&
-  meson . _build ${BUILD_OPTS} &&
+  meson . _build ${BUILD_OPTS} -Dprofile=development &&
   ninja -C _build 2>&1 | tee compilation.log
 
 .Run Tests: &run_tests
