@@ -397,7 +397,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       GtkWidget *scale_btn;
 
       if (!cc_display_config_is_scaled_mode_valid (self->config,
-                                                   cc_display_monitor_get_mode (self->selected_output),
+                                                   current_mode,
                                                    *scale) &&
           cc_display_monitor_get_scale (self->selected_output) != *scale)
         continue;
