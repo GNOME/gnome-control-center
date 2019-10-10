@@ -107,8 +107,10 @@ cc_display_mode_dbus_is_supported_scale (CcDisplayMode *pself,
                                          double scale)
 {
   CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (pself);
-
   guint i;
+
+  g_return_val_if_fail (pself != NULL, FALSE);
+
   for (i = 0; i < self->supported_scales->len; i++)
     if (g_array_index (self->supported_scales, double, i) == scale)
       return TRUE;
