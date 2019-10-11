@@ -232,6 +232,9 @@ autorun_set_preferences (CcRemovableMediaPanel *self,
   g_settings_set_strv (self->media_settings,
                        PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER, (const gchar * const*) x_content_open_folder);
 
+  /* Software can be represented as either of these content types. */
+  if (g_strcmp0 (x_content_type, "x-content/unix-software") == 0)
+    autorun_set_preferences (self, "x-content/ostree-repository", pref_start_app, pref_ignore, pref_open_folder);
 }
 
 static void
