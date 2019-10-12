@@ -1,5 +1,6 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*-
  *
+ * Copyright (C) 2019 Purism SPC
  * Copyright (C) 2017 Mohammed Sadiq <sadiq@sadiqpk.org>
  * Copyright (C) 2010 Red Hat, Inc
  * Copyright (C) 2008 William Jon McCann <jmccann@redhat.com>
@@ -48,23 +49,30 @@
 #include <gdk/gdkx.h>
 #endif
 
+#include "cc-list-row.h"
+#include "list-box-helper.h"
 #include "cc-info-overview-panel.h"
 
 struct _CcInfoOverviewPanel
 {
-  CcPanel parent_instance;
+  CcPanel          parent_instance;
 
-  GtkLabel  *disk_label;
-  GtkLabel  *graphics_label;
-  GtkLabel  *memory_label;
-  GtkLabel  *name_entry;
-  GtkLabel  *os_name_label;
-  GtkLabel  *os_type_label;
-  GtkLabel  *processor_label;
-  GtkButton *updates_button;
-  GtkLabel  *version_label;
-  GtkLabel  *virt_type_label;
-  GtkLabel  *virt_type_title_label;
+  GtkEntry        *device_name_entry;
+  CcListRow       *disk_row;
+  CcListRow       *gnome_version_row;
+  CcListRow       *graphics_row;
+  GtkListBox      *hardware_box;
+  GtkDialog       *hostname_editor;
+  CcHostnameEntry *hostname_entry;
+  CcListRow       *hostname_row;
+  CcListRow       *memory_row;
+  GtkListBox      *os_box;
+  CcListRow       *os_name_row;
+  CcListRow       *os_type_row;
+  CcListRow       *os_version_row;
+  CcListRow       *processor_row;
+  CcListRow       *software_updates_row;
+  CcListRow       *virtualization_row;
 };
 
 typedef struct
@@ -404,7 +412,7 @@ get_primary_disc_info (CcInfoOverviewPanel *self)
     {
       g_warning ("Unable to get UDisks client: %s. Disk information will not be available.",
                  error->message);
-      gtk_label_set_text (self->disk_label, _("Unknown"));
+      cc_list_row_set_secondary_label (self->disk_row,  _("Unknown"));
       return;
     }
 
@@ -430,11 +438,11 @@ get_primary_disc_info (CcInfoOverviewPanel *self)
   if (total_size > 0)
     {
       g_autofree gchar *size = g_format_size (total_size);
-      gtk_label_set_text (self->disk_label, size);
+      cc_list_row_set_secondary_label (self->disk_row, size);
     }
   else
     {
-      gtk_label_set_text (self->disk_label, _("Unknown"));
+      cc_list_row_set_secondary_label (self->disk_row,  _("Unknown"));
     }
 }
 
@@ -519,11 +527,12 @@ set_virtualization_label (CcInfoOverviewPanel *self,
   guint i;
 
   if (virt == NULL || *virt == '\0')
-  {
-    gtk_widget_hide (GTK_WIDGET (self->virt_type_label));
-    gtk_widget_hide (GTK_WIDGET (self->virt_type_title_label));
-    return;
-  }
+    {
+      gtk_widget_hide (GTK_WIDGET (self->virtualization_row));
+      return;
+    }
+
+  gtk_widget_show (GTK_WIDGET (self->virtualization_row));
 
   display_name = NULL;
   for (i = 0; i < G_N_ELEMENTS (virt_tech); i++)
@@ -535,7 +544,7 @@ set_virtualization_label (CcInfoOverviewPanel *self,
         }
     }
 
-  gtk_label_set_text (self->virt_type_label, display_name ? display_name : virt);
+  cc_list_row_set_secondary_label (self->virtualization_row, display_name ? display_name : virt);
 }
 
 static void
@@ -594,30 +603,29 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 
   if (load_gnome_version (&gnome_version, NULL, NULL))
     {
-      g_autofree gchar *text = NULL;
-      text = g_strdup_printf (_("Version %s"), gnome_version);
-      gtk_label_set_text (self->version_label, text);
+      cc_list_row_set_secondary_label (self->os_version_row, gnome_version);
+      cc_list_row_set_secondary_label (self->gnome_version_row, gnome_version);
     }
 
   glibtop_get_mem (&mem);
   memory_text = g_format_size_full (mem.total, G_FORMAT_SIZE_IEC_UNITS);
-  gtk_label_set_text (self->memory_label, memory_text ? memory_text : "");
+  cc_list_row_set_secondary_label (self->memory_row, memory_text);
 
   info = glibtop_get_sysinfo ();
 
   cpu_text = get_cpu_info (info);
-  gtk_label_set_markup (self->processor_label, cpu_text ? cpu_text : "");
+  cc_list_row_set_secondary_markup (self->processor_row, cpu_text);
 
   os_type_text = get_os_type ();
-  gtk_label_set_text (self->os_type_label, os_type_text ? os_type_text : "");
+  cc_list_row_set_secondary_label (self->os_type_row, os_type_text);
 
   os_name_text = get_os_name ();
-  gtk_label_set_text (self->os_name_label, os_name_text ? os_name_text : "");
+  cc_list_row_set_secondary_label (self->os_name_row, os_name_text);
 
   get_primary_disc_info (self);
 
   graphics_hardware_string = get_graphics_hardware_string ();
-  gtk_label_set_markup (self->graphics_label, graphics_hardware_string);
+  cc_list_row_set_secondary_markup (self->graphics_row, graphics_hardware_string);
 }
 
 static gboolean
@@ -633,7 +641,7 @@ does_gpk_update_viewer_exist (void)
 }
 
 static void
-on_updates_button_clicked (CcInfoOverviewPanel *self)
+open_software_update (CcInfoOverviewPanel *self)
 {
   g_autoptr(GError) error = NULL;
   gboolean ret;
@@ -655,26 +663,76 @@ on_updates_button_clicked (CcInfoOverviewPanel *self)
 }
 
 static void
+open_hostname_edit_dialog (CcInfoOverviewPanel *self)
+{
+  GtkWindow *toplevel;
+  CcShell *shell;
+  const gchar *hostname;
+  gint response;
+
+  g_assert (CC_IS_INFO_OVERVIEW_PANEL (self));
+
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  toplevel = GTK_WINDOW (cc_shell_get_toplevel (shell));
+  gtk_window_set_transient_for (GTK_WINDOW (self->hostname_editor), toplevel);
+
+  hostname = gtk_entry_get_text (GTK_ENTRY (self->hostname_entry));
+  gtk_entry_set_text (self->device_name_entry, hostname);
+  gtk_widget_grab_focus (GTK_WIDGET (self->device_name_entry));
+
+  response = gtk_dialog_run (self->hostname_editor);
+  gtk_widget_hide (GTK_WIDGET (self->hostname_editor));
+
+  if (response != GTK_RESPONSE_APPLY)
+    return;
+
+  /* We simply change the CcHostnameEntry text.  CcHostnameEntry
+   * listens to changes and updates hostname on change.
+   */
+  hostname = gtk_entry_get_text (self->device_name_entry);
+  gtk_entry_set_text (GTK_ENTRY (self->hostname_entry), hostname);
+}
+
+static void
+cc_info_panel_row_activated_cb (CcInfoOverviewPanel *self,
+                                CcListRow           *row)
+{
+  g_assert (CC_IS_INFO_OVERVIEW_PANEL (self));
+  g_assert (CC_IS_LIST_ROW (row));
+
+  if (row == self->hostname_row)
+    open_hostname_edit_dialog (self);
+  else if (row == self->software_updates_row)
+    open_software_update (self);
+}
+
+static void
 cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-info-overview-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, disk_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, graphics_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, memory_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, name_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_name_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_type_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, processor_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, updates_button);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, version_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, virt_type_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, virt_type_title_label);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, device_name_entry);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, disk_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, gnome_version_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, graphics_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hardware_box);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_editor);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_entry);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, memory_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_box);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_name_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_type_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_version_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, processor_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, software_updates_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, virtualization_row);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_updates_button_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, cc_info_panel_row_activated_cb);
 
+  g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
 }
 
@@ -682,11 +740,13 @@ static void
 cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
+  gtk_list_box_set_header_func (self->hardware_box, cc_list_box_update_header_func, NULL, NULL);
+  gtk_list_box_set_header_func (self->os_box, cc_list_box_update_header_func, NULL, NULL);
 
   g_resources_register (cc_info_overview_get_resource ());
 
   if (!does_gnome_software_exist () && !does_gpk_update_viewer_exist ())
-    gtk_widget_destroy (GTK_WIDGET (self->updates_button));
+    gtk_widget_hide (GTK_WIDGET (self->software_updates_row));
 
   info_overview_panel_setup_overview (self);
   info_overview_panel_setup_virt (self);
