@@ -158,7 +158,6 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 	                                 validate,
 	                                 add_to_size_group,
 	                                 fill_connection,
-	                                 update_secrets,
 	                                 NULL,
 	                                 "/org/gnome/ControlCenter/network/ws-leap.ui");
 	if (!parent)
