@@ -95,12 +95,6 @@ auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 	                              sec->size_group);
 }
 
-static void
-update_secrets (WirelessSecurity *parent, NMConnection *connection)
-{
-	ws_802_1x_update_secrets (GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "wpa_eap_auth_combo")), connection);
-}
-
 WirelessSecurityWPAEAP *
 ws_wpa_eap_new (NMConnection *connection,
                 gboolean is_editor,
@@ -113,7 +107,6 @@ ws_wpa_eap_new (NMConnection *connection,
 	                                 validate,
 	                                 add_to_size_group,
 	                                 fill_connection,
-	                                 update_secrets,
 	                                 destroy,
 	                                 "/org/gnome/ControlCenter/network/ws-wpa-eap.ui");
 	if (!parent)
