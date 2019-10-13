@@ -34,7 +34,6 @@ typedef void (*WSChangedFunc) (WirelessSecurity *sec, gpointer user_data);
 
 typedef void (*WSAddToSizeGroupFunc)  (WirelessSecurity *sec, GtkSizeGroup *group);
 typedef void (*WSFillConnectionFunc)  (WirelessSecurity *sec, NMConnection *connection);
-typedef void (*WSUpdateSecretsFunc)   (WirelessSecurity *sec, NMConnection *connection);
 typedef void (*WSDestroyFunc)         (WirelessSecurity *sec);
 typedef gboolean (*WSValidateFunc)    (WirelessSecurity *sec, GError **error);
 typedef GtkWidget* (*WSGetWidgetFunc) (WirelessSecurity *sec);
@@ -60,9 +59,6 @@ void wireless_security_add_to_size_group (WirelessSecurity *sec,
 
 void wireless_security_fill_connection (WirelessSecurity *sec,
                                         NMConnection *connection);
-
-void wireless_security_update_secrets (WirelessSecurity *sec,
-                                       NMConnection *connection);
 
 void wireless_security_set_adhoc_compatible (WirelessSecurity *sec,
                                              gboolean adhoc_compatible);
@@ -109,7 +105,6 @@ WirelessSecurity *wireless_security_init (gsize obj_size,
                                           WSValidateFunc validate,
                                           WSAddToSizeGroupFunc add_to_size_group,
                                           WSFillConnectionFunc fill_connection,
-                                          WSUpdateSecretsFunc update_secrets,
                                           WSDestroyFunc destroy,
                                           const char *ui_resource);
 
