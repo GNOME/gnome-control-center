@@ -43,7 +43,6 @@ struct _WirelessSecurityPrivate {
 	WSAddToSizeGroupFunc add_to_size_group;
 	WSFillConnectionFunc fill_connection;
 	WSGetWidgetFunc get_widget;
-	WSUpdateSecretsFunc update_secrets;
 	WSValidateFunc validate;
 	WSDestroyFunc destroy;
 };
@@ -137,18 +136,6 @@ wireless_security_fill_connection (WirelessSecurity *sec,
 	return (*(priv->fill_connection)) (sec, connection);
 }
 
-void
-wireless_security_update_secrets (WirelessSecurity *sec, NMConnection *connection)
-{
-	WirelessSecurityPrivate *priv = sec->priv;
-
-	g_return_if_fail (sec != NULL);
-	g_return_if_fail (connection != NULL);
-
-	if (priv->update_secrets)
-		priv->update_secrets (sec, connection);
-}
-
 WirelessSecurity *
 wireless_security_ref (WirelessSecurity *sec)
 {
@@ -193,7 +180,6 @@ wireless_security_init (gsize obj_size,
                         WSValidateFunc validate,
                         WSAddToSizeGroupFunc add_to_size_group,
                         WSFillConnectionFunc fill_connection,
-                        WSUpdateSecretsFunc update_secrets,
                         WSDestroyFunc destroy,
                         const char *ui_resource)
 {
@@ -217,7 +203,6 @@ wireless_security_init (gsize obj_size,
 	priv->validate = validate;
 	priv->add_to_size_group = add_to_size_group;
 	priv->fill_connection = fill_connection;
-	priv->update_secrets = update_secrets;
 
 	sec->builder = gtk_builder_new ();
 	if (!gtk_builder_add_from_resource (sec->builder, ui_resource, &error)) {

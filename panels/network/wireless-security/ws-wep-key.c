@@ -269,7 +269,6 @@ ws_wep_key_new (NMConnection *connection,
 	                                 validate,
 	                                 add_to_size_group,
 	                                 fill_connection,
-	                                 update_secrets,
 	                                 destroy,
 	                                 "/org/gnome/ControlCenter/network/ws-wep-key.ui");
 	if (!parent)
