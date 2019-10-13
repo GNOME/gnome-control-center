@@ -94,12 +94,6 @@ auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 	                              sec->size_group);
 }
 
-static void
-update_secrets (WirelessSecurity *parent, NMConnection *connection)
-{
-	ws_802_1x_update_secrets (GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "dynamic_wep_auth_combo")), connection);
-}
-
 WirelessSecurityDynamicWEP *
 ws_dynamic_wep_new (NMConnection *connection,
                     gboolean is_editor,
@@ -112,7 +106,6 @@ ws_dynamic_wep_new (NMConnection *connection,
 	                                 validate,
 	                                 add_to_size_group,
 	                                 fill_connection,
-	                                 update_secrets,
 	                                 destroy,
 	                                 "/org/gnome/ControlCenter/network/ws-dynamic-wep.ui");
 	if (!parent)
