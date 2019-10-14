@@ -612,6 +612,8 @@ cc_background_xml_finalize (GObject *object)
 		xml->item_added_id = 0;
 	}
 	g_clear_pointer (&xml->item_added_queue, g_async_queue_unref);
+
+        G_OBJECT_CLASS (cc_background_xml_parent_class)->finalize (object);
 }
 
 static void
