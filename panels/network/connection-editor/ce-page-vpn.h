@@ -45,11 +45,12 @@ struct _CEPageVpn
 {
         CEPage parent;
 
+        GtkLabel *failure_label;
+        GtkEntry *name_entry;
+        GtkBox   *page;
+
         NMSettingConnection *setting_connection;
         NMSettingVpn *setting_vpn;
-
-        GtkEntry *name;
-        GtkBox   *box;
 
 	NMVpnEditorPlugin *plugin;
 	NMVpnEditor *editor;
