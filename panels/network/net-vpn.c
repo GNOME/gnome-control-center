@@ -37,6 +37,12 @@ struct _NetVpn
         NetObject               parent;
 
         GtkBuilder              *builder;
+        GtkBox                  *box;
+        GtkLabel                *device_label;
+        GtkSwitch               *device_off_switch;
+        GtkButton               *options_button;
+        GtkSeparator            *separator;
+
         NMConnection            *connection;
         NMActiveConnection      *active_connection;
         gchar                   *service_type;
@@ -58,10 +64,7 @@ void
 net_vpn_set_show_separator (NetVpn   *self,
                             gboolean  show_separator)
 {
-        GtkWidget *separator;
-
-        separator = GTK_WIDGET (gtk_builder_get_object (self->builder, "separator"));
-        gtk_widget_set_visible (separator, show_separator);
+        gtk_widget_set_visible (GTK_WIDGET (self->separator), show_separator);
 }
 
 static void
@@ -135,21 +138,16 @@ vpn_proxy_add_to_stack (NetObject    *object,
                         GtkStack     *stack,
                         GtkSizeGroup *heading_size_group)
 {
-        GtkWidget *widget;
         NetVpn *vpn = NET_VPN (object);
 
         /* add widgets to size group */
-        widget = GTK_WIDGET (gtk_builder_get_object (vpn->builder,
-                                                     "box"));
-        gtk_stack_add_named (stack, widget, net_object_get_id (object));
-        return widget;
+        gtk_stack_add_named (stack, GTK_WIDGET (vpn->box), net_object_get_id (object));
+        return GTK_WIDGET (vpn->box);
 }
 
 static void
 nm_device_refresh_vpn_ui (NetVpn *vpn)
 {
-        GtkWidget *widget;
-        GtkWidget *sw;
         const GPtrArray *acs;
         NMActiveConnection *a;
         gint i;
@@ -158,15 +156,13 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
         NMClient *client;
 
         /* update title */
-        widget = GTK_WIDGET (gtk_builder_get_object (vpn->builder,
-                                                     "device_label"));
         /* Translators: this is the title of the connection details
          * window for vpn connections, it is also used to display
          * vpn connections in the device list.
          */
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (vpn->connection));
         net_object_set_title (NET_OBJECT (vpn), title);
-        gtk_label_set_label (GTK_LABEL (widget), title);
+        gtk_label_set_label (vpn->device_label, title);
 
         if (vpn->active_connection) {
                 g_signal_handlers_disconnect_by_func (vpn->active_connection,
@@ -202,8 +198,7 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
         }
 
         vpn->updating_device = TRUE;
-        sw = GTK_WIDGET (gtk_builder_get_object (vpn->builder, "device_off_switch"));
-        gtk_switch_set_active (GTK_SWITCH (sw),
+        gtk_switch_set_active (vpn->device_off_switch,
                                state != NM_VPN_CONNECTION_STATE_FAILED &&
                                state != NM_VPN_CONNECTION_STATE_DISCONNECTED);
         vpn->updating_device = FALSE;
@@ -277,14 +272,12 @@ static void
 vpn_proxy_edit (NetObject *object)
 {
         NetVpn *vpn = NET_VPN (object);
-        GtkWidget *button, *window;
+        GtkWidget *window;
         NetConnectionEditor *editor;
         NMClient *client;
         g_autofree gchar *title = NULL;
 
-        button = GTK_WIDGET (gtk_builder_get_object (vpn->builder,
-                                                     "options_button"));
-        window = gtk_widget_get_toplevel (button);
+        window = gtk_widget_get_toplevel (GTK_WIDGET (vpn->options_button));
 
         client = net_object_get_client (object);
 
@@ -410,7 +403,6 @@ static void
 net_vpn_init (NetVpn *vpn)
 {
         g_autoptr(GError) error = NULL;
-        GtkWidget *widget;
 
         vpn = net_vpn_get_instance_private (vpn);
 
@@ -423,13 +415,15 @@ net_vpn_init (NetVpn *vpn)
                 return;
         }
 
-        widget = GTK_WIDGET (gtk_builder_get_object (vpn->builder,
-                                                     "device_off_switch"));
-        g_signal_connect (widget, "notify::active",
+        vpn->box = GTK_BOX (gtk_builder_get_object (vpn->builder, "box"));
+        vpn->device_label = GTK_LABEL (gtk_builder_get_object (vpn->builder, "device_label"));
+        vpn->device_off_switch = GTK_SWITCH (gtk_builder_get_object (vpn->builder, "device_off_switch"));
+        vpn->options_button = GTK_BUTTON (gtk_builder_get_object (vpn->builder, "options_button"));
+        vpn->separator = GTK_SEPARATOR (gtk_builder_get_object (vpn->builder, "separator"));
+
+        g_signal_connect (vpn->device_off_switch, "notify::active",
                           G_CALLBACK (device_off_toggled), vpn);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (vpn->builder,
-                                                     "options_button"));
-        g_signal_connect (widget, "clicked",
+        g_signal_connect (vpn->options_button, "clicked",
                           G_CALLBACK (edit_connection), vpn);
 }

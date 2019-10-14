@@ -128,16 +128,14 @@ security_combo_changed (GtkComboBox *combo,
                         gpointer     user_data)
 {
         CEPageSecurity *page = CE_PAGE_SECURITY (user_data);
-        GtkWidget *vbox;
         GList *l, *children;
         g_autoptr(WirelessSecurity) sec = NULL;
 
         wsec_size_group_clear (page->group);
 
-        vbox = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "box"));
-        children = gtk_container_get_children (GTK_CONTAINER (vbox));
+        children = gtk_container_get_children (GTK_CONTAINER (page->box));
         for (l = children; l; l = l->next) {
-                gtk_container_remove (GTK_CONTAINER (vbox), GTK_WIDGET (l->data));
+                gtk_container_remove (GTK_CONTAINER (page->box), GTK_WIDGET (l->data));
         }
 
         sec = security_combo_get_active (page);
@@ -151,10 +149,10 @@ security_combo_changed (GtkComboBox *combo,
                 if (parent)
                         gtk_container_remove (GTK_CONTAINER (parent), sec_widget);
 
-                gtk_size_group_add_widget (page->group, page->security_heading);
+                gtk_size_group_add_widget (page->group, GTK_WIDGET (page->security_label));
                 wireless_security_add_to_size_group (sec, page->group);
 
-                gtk_container_add (GTK_CONTAINER (vbox), sec_widget);
+                gtk_container_add (GTK_CONTAINER (page->box), sec_widget);
         }
 
         ce_page_changed (CE_PAGE (page));
@@ -215,7 +213,6 @@ finish_setup (CEPageSecurity *page)
         NMUtilsSecurityType default_type = NMU_SEC_NONE;
         int active = -1;
         int item = 0;
-        GtkComboBox *combo;
         GtkCellRenderer *renderer;
 
         sw = nm_connection_get_setting_wireless (connection);
@@ -223,8 +220,9 @@ finish_setup (CEPageSecurity *page)
 
         page->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-        page->security_heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "security_label"));
-        page->security_combo = combo = GTK_COMBO_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "security_combo"));
+        page->box = GTK_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "box"));
+        page->security_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "security_label"));
+        page->security_combo = GTK_COMBO_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "security_combo"));
 
         dev_caps =   NM_WIFI_DEVICE_CAP_CIPHER_WEP40
                    | NM_WIFI_DEVICE_CAP_CIPHER_WEP104
@@ -340,20 +338,18 @@ finish_setup (CEPageSecurity *page)
                 }
         }
 
-        gtk_combo_box_set_model (combo, GTK_TREE_MODEL (sec_model));
-        gtk_cell_layout_clear (GTK_CELL_LAYOUT (combo));
+        gtk_combo_box_set_model (page->security_combo, GTK_TREE_MODEL (sec_model));
+        gtk_cell_layout_clear (GTK_CELL_LAYOUT (page->security_combo));
 
         renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), renderer, TRUE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo), renderer, "text", S_NAME_COLUMN, NULL);
-        gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (combo), renderer, set_sensitive, &page->adhoc, NULL);
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (page->security_combo), renderer, TRUE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (page->security_combo), renderer, "text", S_NAME_COLUMN, NULL);
+        gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (page->security_combo), renderer, set_sensitive, &page->adhoc, NULL);
 
-        gtk_combo_box_set_active (combo, active < 0 ? 0 : (guint32) active);
+        gtk_combo_box_set_active (page->security_combo, active < 0 ? 0 : (guint32) active);
 
-        page->security_combo = combo;
-
-        security_combo_changed (combo, page);
-        g_signal_connect (combo, "changed",
+        security_combo_changed (page->security_combo, page);
+        g_signal_connect (page->security_combo, "changed",
                           G_CALLBACK (security_combo_changed), page);
 }
 
