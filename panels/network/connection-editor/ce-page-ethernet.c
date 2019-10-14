@@ -174,8 +174,8 @@ ce_page_ethernet_new (NMConnection     *connection,
                                               _("Identity")));
 
         page->name = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (page)->builder, "entry_name"));
-        page->device_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_mac"));
-        page->cloned_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_cloned_mac"));
+        page->device_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "mac_combo"));
+        page->cloned_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "cloned_mac_combo"));
         page->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "spin_mtu"));
         page->mtu_label = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "label_mtu"));
 

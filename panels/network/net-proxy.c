@@ -387,9 +387,9 @@ net_proxy_init (NetProxy *proxy)
         proxy->mode_radios[MODE_DISABLED] =
                 GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->builder, "radio_none"));
         proxy->mode_radios[MODE_MANUAL] =
-                GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->builder, "radio_manual"));
+                GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->builder, "manual_radio"));
         proxy->mode_radios[MODE_AUTOMATIC] =
-                GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->builder, "radio_automatic"));
+                GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->builder, "automatic_radio"));
 
         /* setup the radio before connecting to the :toggled signal */
         gtk_toggle_button_set_active (proxy->mode_radios[value], TRUE);
