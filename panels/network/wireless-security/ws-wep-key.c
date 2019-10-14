@@ -42,23 +42,25 @@ struct _WirelessSecurityWEPKey {
 };
 
 static void
-show_toggled_cb (GtkCheckButton *button, WirelessSecurity *sec)
+show_toggled_cb (WirelessSecurityWEPKey *self)
 {
-	GtkWidget *widget;
+	WirelessSecurity *parent = (WirelessSecurity *) self;
+	GtkWidget *widget, *button;
 	gboolean visible;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, "wep_key_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_entry"));
 	g_assert (widget);
 
+	button = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_wep"));
 	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
 }
 
 static void
-key_index_combo_changed_cb (GtkWidget *combo, WirelessSecurity *parent)
+key_index_combo_changed_cb (WirelessSecurityWEPKey *self)
 {
-	WirelessSecurityWEPKey *sec = (WirelessSecurityWEPKey *) parent;
-	GtkWidget *entry;
+	WirelessSecurity *parent = (WirelessSecurity *) self;
+	GtkWidget *combo, *entry;
 	const char *key;
 	int key_index;
 
@@ -66,17 +68,18 @@ key_index_combo_changed_cb (GtkWidget *combo, WirelessSecurity *parent)
 	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_entry"));
 	key = gtk_entry_get_text (GTK_ENTRY (entry));
 	if (key)
-		g_strlcpy (sec->keys[sec->cur_index], key, sizeof (sec->keys[sec->cur_index]));
+		g_strlcpy (self->keys[self->cur_index], key, sizeof (self->keys[self->cur_index]));
 	else
-		memset (sec->keys[sec->cur_index], 0, sizeof (sec->keys[sec->cur_index]));
+		memset (self->keys[self->cur_index], 0, sizeof (self->keys[self->cur_index]));
 
+	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "key_index_combo"));
 	key_index = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
 	g_return_if_fail (key_index <= 3);
 	g_return_if_fail (key_index >= 0);
 
 	/* Populate entry with key from new index */
-	gtk_entry_set_text (GTK_ENTRY (entry), sec->keys[key_index]);
-	sec->cur_index = key_index;
+	gtk_entry_set_text (GTK_ENTRY (entry), self->keys[key_index]);
+	self->cur_index = key_index;
 
 	wireless_security_notify_changed (parent);
 }
@@ -213,15 +216,16 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 }
 
 static void
-wep_entry_filter_cb (GtkEditable *editable,
+wep_entry_filter_cb (WirelessSecurityWEPKey *self,
                      gchar *text,
                      gint length,
-                     gint *position,
-                     gpointer data)
+                     gint *position)
 {
-	WirelessSecurityWEPKey *sec = (WirelessSecurityWEPKey *) data;
+	WirelessSecurity *parent = (WirelessSecurity *) self;
+	GtkWidget *widget;
 
-	if (sec->type == NM_WEP_KEY_TYPE_KEY) {
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_entry"));
+	if (self->type == NM_WEP_KEY_TYPE_KEY) {
 		int i, count = 0;
 		g_autofree gchar *result = g_new (gchar, length+1);
 
@@ -232,15 +236,11 @@ wep_entry_filter_cb (GtkEditable *editable,
 		result[count] = 0;
 
 		if (count > 0) {
-			g_signal_handlers_block_by_func (G_OBJECT (editable),
-			                                 G_CALLBACK (wep_entry_filter_cb),
-			                                 data);
-			gtk_editable_insert_text (editable, result, count, position);
-			g_signal_handlers_unblock_by_func (G_OBJECT (editable),
-			                                   G_CALLBACK (wep_entry_filter_cb),
-			                                   data);
+			g_signal_handlers_block_by_func (widget, G_CALLBACK (wep_entry_filter_cb), self);
+			gtk_editable_insert_text (GTK_EDITABLE (widget), result, count, position);
+			g_signal_handlers_unblock_by_func (widget, G_CALLBACK (wep_entry_filter_cb), self);
 		}
-		g_signal_stop_emission_by_name (G_OBJECT (editable), "insert-text");
+		g_signal_stop_emission_by_name (widget, "insert-text");
 	}
 }
 
@@ -329,9 +329,7 @@ ws_wep_key_new (NMConnection *connection,
 	}
 
 	g_signal_connect_swapped (G_OBJECT (widget), "changed", G_CALLBACK (changed_cb), sec);
-	g_signal_connect (G_OBJECT (widget), "insert-text",
-	                  (GCallback) wep_entry_filter_cb,
-	                  sec);
+	g_signal_connect_swapped (widget, "insert-text", G_CALLBACK (wep_entry_filter_cb), sec);
 	if (sec->type == NM_WEP_KEY_TYPE_KEY)
 		gtk_entry_set_max_length (GTK_ENTRY (widget), 26);
 	else if (sec->type == NM_WEP_KEY_TYPE_PASSPHRASE)
@@ -343,9 +341,7 @@ ws_wep_key_new (NMConnection *connection,
 
 	gtk_combo_box_set_active (GTK_COMBO_BOX (widget), default_key_idx);
 	sec->cur_index = default_key_idx;
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) key_index_combo_changed_cb,
-	                  sec);
+	g_signal_connect_swapped (widget, "changed", G_CALLBACK (key_index_combo_changed_cb), sec);
 
 	/* Key index is useless with adhoc networks */
 	if (is_adhoc || secrets_only) {
@@ -360,9 +356,7 @@ ws_wep_key_new (NMConnection *connection,
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_wep"));
 	g_assert (widget);
-	g_signal_connect (G_OBJECT (widget), "toggled",
-	                  (GCallback) show_toggled_cb,
-	                  sec);
+	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (show_toggled_cb), sec);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "auth_method_combo"));
 	gtk_combo_box_set_active (GTK_COMBO_BOX (widget), is_shared_key ? 1 : 0);
