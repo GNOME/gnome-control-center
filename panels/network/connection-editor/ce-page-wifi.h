@@ -43,6 +43,11 @@ struct _CEPageWifi
 {
         CEPage parent;
 
+        GtkComboBoxText *bssid_combo;
+        GtkComboBoxText *cloned_mac_combo;
+        GtkComboBoxText *mac_combo;
+        GtkEntry        *ssid_entry;
+
         NMSettingWireless *setting;
 };
 

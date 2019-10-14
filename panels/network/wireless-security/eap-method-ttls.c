@@ -35,6 +35,17 @@
 struct _EAPMethodTTLS {
 	EAPMethod parent;
 
+	GtkEntry             *anon_identity_entry;
+	GtkLabel             *anon_identity_label;
+	GtkFileChooserButton *ca_cert_button;
+	GtkLabel             *ca_cert_label;
+	GtkCheckButton       *ca_cert_not_required_check;
+	GtkEntry             *domain_match_entry;
+	GtkLabel             *domain_match_label;
+	GtkComboBox          *inner_auth_combo;
+	GtkLabel             *inner_auth_label;
+	GtkBox               *inner_auth_box;
+
 	GtkSizeGroup *size_group;
 	WirelessSecurity *sec_parent;
 	gboolean is_editor;
@@ -52,29 +63,26 @@ destroy (EAPMethod *parent)
 static gboolean
 validate (EAPMethod *parent, GError **error)
 {
-	GtkWidget *widget;
+	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	g_autoptr(EAPMethod) eap = NULL;
 	gboolean valid = FALSE;
 	g_autoptr(GError) local_error = NULL;
 
-	if (!eap_method_validate_filepicker (GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "ca_cert_button")),
+	if (!eap_method_validate_filepicker (GTK_FILE_CHOOSER (self->ca_cert_button),
 	                                     TYPE_CA_CERT, NULL, NULL, &local_error)) {
 		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TTLS CA certificate: %s"), local_error->message);
 		return FALSE;
 	}
-	if (eap_method_ca_cert_required (GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check")),
-	                                 GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "ca_cert_button")))) {
+	if (eap_method_ca_cert_required (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check),
+	                                 GTK_FILE_CHOOSER (self->ca_cert_button))) {
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TTLS CA certificate: no certificate specified"));
 		return FALSE;
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
-	g_assert (widget);
-
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
+	model = gtk_combo_box_get_model (self->inner_auth_combo);
+	gtk_combo_box_get_active_iter (self->inner_auth_combo, &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
 	valid = eap_method_validate (eap, error);
@@ -84,9 +92,8 @@ validate (EAPMethod *parent, GError **error)
 static void
 ca_cert_not_required_toggled (EAPMethodTTLS *self)
 {
-	EAPMethod *parent = (EAPMethod *) self;
-	eap_method_ca_cert_not_required_toggled (GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check")),
-	                                         GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "ca_cert_button")));
+	eap_method_ca_cert_not_required_toggled (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check),
+	                                         GTK_FILE_CHOOSER (self->ca_cert_button));
 	wireless_security_notify_changed (self->sec_parent);
 }
 
@@ -94,7 +101,6 @@ static void
 add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 {
 	EAPMethodTTLS *method = (EAPMethodTTLS *) parent;
-	GtkWidget *widget;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	g_autoptr(EAPMethod) eap = NULL;
@@ -103,31 +109,14 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 		g_object_unref (method->size_group);
 	method->size_group = g_object_ref (group);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
-	g_assert (widget);
-	gtk_size_group_add_widget (group, widget);
+	gtk_size_group_add_widget (group, GTK_WIDGET (method->ca_cert_not_required_check));
+	gtk_size_group_add_widget (group, GTK_WIDGET (method->anon_identity_label));
+	gtk_size_group_add_widget (group, GTK_WIDGET (method->domain_match_label));
+	gtk_size_group_add_widget (group, GTK_WIDGET (method->ca_cert_label));
+	gtk_size_group_add_widget (group, GTK_WIDGET (method->inner_auth_label));
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_label"));
-	g_assert (widget);
-	gtk_size_group_add_widget (group, widget);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "domain_match_label"));
-	g_assert (widget);
-	gtk_size_group_add_widget (group, widget);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_label"));
-	g_assert (widget);
-	gtk_size_group_add_widget (group, widget);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_label"));
-	g_assert (widget);
-	gtk_size_group_add_widget (group, widget);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
-	g_assert (widget);
-
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
+	model = gtk_combo_box_get_model (method->inner_auth_combo);
+	gtk_combo_box_get_active_iter (method->inner_auth_combo, &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
 	eap_method_add_to_size_group (eap, group);
@@ -136,9 +125,9 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 static void
 fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFlags flags)
 {
+	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
 	NMSetting8021x *s_8021x;
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
-	GtkWidget *widget;
 	const char *text;
 	g_autofree gchar *filename = NULL;
 	g_autoptr(EAPMethod) eap = NULL;
@@ -152,30 +141,23 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 
 	nm_setting_802_1x_add_eap_method (s_8021x, "ttls");
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
-	g_assert (widget);
-	text = gtk_entry_get_text (GTK_ENTRY (widget));
+	text = gtk_entry_get_text (self->anon_identity_entry);
 	if (text && strlen (text))
 		g_object_set (s_8021x, NM_SETTING_802_1X_ANONYMOUS_IDENTITY, text, NULL);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "domain_match_entry"));
-	g_assert (widget);
-	text = gtk_entry_get_text (GTK_ENTRY (widget));
+	text = gtk_entry_get_text (self->domain_match_entry);
 	if (text && strlen (text))
 		g_object_set (s_8021x, NM_SETTING_802_1X_DOMAIN_SUFFIX_MATCH, text, NULL);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_button"));
-	g_assert (widget);
-	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
+	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
 	if (!nm_setting_802_1x_set_ca_cert (s_8021x, filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
 		g_warning ("Couldn't read CA certificate '%s': %s", filename, error ? error->message : "(unknown)");
 		ca_cert_error = TRUE;
 	}
 	eap_method_ca_cert_ignore_set (parent, connection, filename, ca_cert_error);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
+	model = gtk_combo_box_get_model (self->inner_auth_combo);
+	gtk_combo_box_get_active_iter (self->inner_auth_combo, &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
 
@@ -185,26 +167,20 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 static void
 inner_auth_combo_changed_cb (EAPMethodTTLS *self)
 {
-	EAPMethod *parent = (EAPMethod *) self;
-	GtkWidget *combo, *box;
 	g_autoptr(EAPMethod) eap = NULL;
 	GList *elt, *children;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	GtkWidget *eap_widget;
 
-	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
-	box = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_box"));
-	g_assert (box);
-
 	/* Remove any previous wireless security widgets */
-	children = gtk_container_get_children (GTK_CONTAINER (box));
+	children = gtk_container_get_children (GTK_CONTAINER (self->inner_auth_box));
 	for (elt = children; elt; elt = g_list_next (elt))
-		gtk_container_remove (GTK_CONTAINER (box), GTK_WIDGET (elt->data));
+		gtk_container_remove (GTK_CONTAINER (self->inner_auth_box), GTK_WIDGET (elt->data));
 	g_list_free (children);
 
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter);
+	model = gtk_combo_box_get_model (self->inner_auth_combo);
+	gtk_combo_box_get_active_iter (self->inner_auth_combo, &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
 
@@ -214,19 +190,17 @@ inner_auth_combo_changed_cb (EAPMethodTTLS *self)
 
 	if (self->size_group)
 		eap_method_add_to_size_group (eap, self->size_group);
-	gtk_container_add (GTK_CONTAINER (box), eap_widget);
+	gtk_container_add (GTK_CONTAINER (self->inner_auth_box), eap_widget);
 
 	wireless_security_notify_changed (self->sec_parent);
 }
 
-static GtkWidget *
+static void
 inner_auth_combo_init (EAPMethodTTLS *method,
                        NMConnection *connection,
                        NMSetting8021x *s_8021x,
                        gboolean secrets_only)
 {
-	EAPMethod *parent = (EAPMethod *) method;
-	GtkWidget *combo;
 	g_autoptr(GtkListStore) auth_model = NULL;
 	GtkTreeIter iter;
 	g_autoptr(EAPMethodSimple) em_pap = NULL;
@@ -355,22 +329,19 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	if (phase2_auth && !strcasecmp (phase2_auth, "gtc"))
 		active = 6;
 
-	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
-	g_assert (combo);
+	gtk_combo_box_set_model (method->inner_auth_combo, GTK_TREE_MODEL (auth_model));
+	gtk_combo_box_set_active (method->inner_auth_combo, active);
 
-	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (auth_model));
-	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), active);
-
-	g_signal_connect_swapped (combo, "changed", G_CALLBACK (inner_auth_combo_changed_cb), method);
-	return combo;
+	g_signal_connect_swapped (method->inner_auth_combo, "changed", G_CALLBACK (inner_auth_combo_changed_cb), method);
 }
 
 static void
 update_secrets (EAPMethod *parent, NMConnection *connection)
 {
+	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
 	eap_method_phase2_update_secrets_helper (parent,
 	                                         connection,
-	                                         GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "inner_auth_combo")),
+	                                         self->inner_auth_combo,
 	                                         I_METHOD_COLUMN);
 }
 
@@ -388,7 +359,6 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 {
 	EAPMethod *parent;
 	EAPMethodTTLS *method;
-	GtkWidget *widget, *widget_ca_not_required_checkbox;
 	GtkFileFilter *filter;
 	NMSetting8021x *s_8021x = NULL;
 	const char *filename;
@@ -411,64 +381,59 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	method->sec_parent = ws_parent;
 	method->is_editor = is_editor;
 
+	method->anon_identity_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
+	method->anon_identity_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "anon_identity_label"));
+	method->ca_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_button"));
+	method->ca_cert_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "ca_cert_label"));
+	method->ca_cert_not_required_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
+	method->domain_match_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "domain_match_entry"));
+	method->domain_match_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "domain_match_label"));
+	method->inner_auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
+	method->inner_auth_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "inner_auth_label"));
+	method->inner_auth_box = GTK_BOX (gtk_builder_get_object (parent->builder, "inner_auth_box"));
+
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
-	g_assert (widget);
-	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ca_cert_not_required_toggled), method);
-	widget_ca_not_required_checkbox = widget;
+	g_signal_connect_swapped (method->ca_cert_not_required_check, "toggled", G_CALLBACK (ca_cert_not_required_toggled), method);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_button"));
-	g_assert (widget);
-	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (widget), TRUE);
-	gtk_file_chooser_button_set_title (GTK_FILE_CHOOSER_BUTTON (widget),
+	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (method->ca_cert_button), TRUE);
+	gtk_file_chooser_button_set_title (method->ca_cert_button,
 	                                   _("Choose a Certificate Authority certificate"));
-	g_signal_connect_swapped (widget, "selection-changed", G_CALLBACK (changed_cb), method);
+	g_signal_connect_swapped (method->ca_cert_button, "selection-changed", G_CALLBACK (changed_cb), method);
 	filter = eap_method_default_file_chooser_filter_new (FALSE);
-	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (widget), filter);
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (method->ca_cert_button), filter);
 	if (connection && s_8021x) {
 		filename = NULL;
 		if (nm_setting_802_1x_get_ca_cert_scheme (s_8021x) == NM_SETTING_802_1X_CK_SCHEME_PATH) {
 			filename = nm_setting_802_1x_get_ca_cert_path (s_8021x);
 			if (filename)
-				gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (widget), filename);
+				gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (method->ca_cert_button), filename);
 		}
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget_ca_not_required_checkbox),
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (method->ca_cert_not_required_check),
 		                              !filename && eap_method_ca_cert_ignore_get (parent, connection));
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
 	if (s_8021x && nm_setting_802_1x_get_anonymous_identity (s_8021x))
-		gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_802_1x_get_anonymous_identity (s_8021x));
-	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "domain_match_entry"));
+		gtk_entry_set_text (method->anon_identity_entry, nm_setting_802_1x_get_anonymous_identity (s_8021x));
+	g_signal_connect_swapped (method->anon_identity_entry, "changed", G_CALLBACK (changed_cb), method);
 	if (s_8021x && nm_setting_802_1x_get_domain_suffix_match (s_8021x))
-		gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_802_1x_get_domain_suffix_match (s_8021x));
-	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
+		gtk_entry_set_text (method->domain_match_entry, nm_setting_802_1x_get_domain_suffix_match (s_8021x));
+	g_signal_connect_swapped (method->domain_match_entry, "changed", G_CALLBACK (changed_cb), method);
 
-	widget = inner_auth_combo_init (method, connection, s_8021x, secrets_only);
+	inner_auth_combo_init (method, connection, s_8021x, secrets_only);
 	inner_auth_combo_changed_cb (method);
 
 	if (secrets_only) {
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_label"));
-		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
-		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "domain_match_label"));
-		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "domain_match_entry"));
-		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_label"));
-		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_button"));
-		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
-		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_label"));
-		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
-		gtk_widget_hide (widget);
+		gtk_widget_hide (GTK_WIDGET (method->anon_identity_label));
+		gtk_widget_hide (GTK_WIDGET (method->anon_identity_entry));
+		gtk_widget_hide (GTK_WIDGET (method->domain_match_label));
+		gtk_widget_hide (GTK_WIDGET (method->domain_match_entry));
+		gtk_widget_hide (GTK_WIDGET (method->ca_cert_label));
+		gtk_widget_hide (GTK_WIDGET (method->ca_cert_button));
+		gtk_widget_hide (GTK_WIDGET (method->ca_cert_not_required_check));
+		gtk_widget_hide (GTK_WIDGET (method->inner_auth_label));
+		gtk_widget_hide (GTK_WIDGET (method->inner_auth_combo));
 	}
 
 	return method;
