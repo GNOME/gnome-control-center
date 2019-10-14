@@ -429,7 +429,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
                                   GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_ipv4")),
                                   GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_ipv6")),
                                   GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_ipv6")),
-                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_dns")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "dns_label")),
                                   GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_dns")),
                                   GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_route")),
                                   GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_route")),

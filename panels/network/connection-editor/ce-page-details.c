@@ -268,7 +268,7 @@ connect_details_page (CEPageDetails *page)
                                   GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_ipv4")),
                                   GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_ipv6")),
                                   GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_ipv6")),
-                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_dns")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "dns_label")),
                                   GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_dns")),
                                   GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_route")),
                                   GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_route")),

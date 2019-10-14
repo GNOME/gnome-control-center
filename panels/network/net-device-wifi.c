@@ -586,7 +586,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                                   GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "label_ipv4")),
                                   GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "heading_ipv6")),
                                   GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "label_ipv6")),
-                                  GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "heading_dns")),
+                                  GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "dns_label")),
                                   GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "label_dns")),
                                   GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "heading_route")),
                                   GTK_LABEL (gtk_builder_get_object (device_wifi->builder, "label_route")),
