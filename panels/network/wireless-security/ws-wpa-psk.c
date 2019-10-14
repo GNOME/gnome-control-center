@@ -174,6 +174,12 @@ update_secrets (WirelessSecurity *parent, NMConnection *connection)
 	                          (HelperSecretFunc) nm_setting_wireless_security_get_psk);
 }
 
+static void
+changed_cb (WirelessSecurityWPAPSK *self)
+{
+	wireless_security_notify_changed ((WirelessSecurity *) self);
+}
+
 WirelessSecurityWPAPSK *
 ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 {
@@ -199,9 +205,7 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_entry"));
 	g_assert (widget);
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  sec);
+	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), sec);
 	gtk_entry_set_width_chars (GTK_ENTRY (widget), 28);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */

@@ -102,7 +102,7 @@ WirelessSecurity *wireless_security_init (gsize obj_size,
                                           WSDestroyFunc destroy,
                                           const char *ui_resource);
 
-void wireless_security_changed_cb (GtkWidget *entry, gpointer user_data);
+void wireless_security_notify_changed (WirelessSecurity *sec);
 
 void wireless_security_clear_ciphers (NMConnection *connection);
 
