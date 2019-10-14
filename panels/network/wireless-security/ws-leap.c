@@ -146,6 +146,12 @@ update_secrets (WirelessSecurity *parent, NMConnection *connection)
 	                          (HelperSecretFunc) nm_setting_wireless_security_get_leap_password);
 }
 
+static void
+changed_cb (WirelessSecurityLEAP *self)
+{
+	wireless_security_notify_changed ((WirelessSecurity *) self);
+}
+
 WirelessSecurityLEAP *
 ws_leap_new (NMConnection *connection, gboolean secrets_only)
 {
@@ -184,9 +190,7 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_entry"));
 	g_assert (widget);
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  sec);
+	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), sec);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
 	nma_utils_setup_password_storage (widget, 0, (NMSetting *) wsec, sec->password_flags_name,
@@ -197,9 +201,7 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_username_entry"));
 	g_assert (widget);
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  sec);
+	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), sec);
 	if (wsec)
 		gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_wireless_security_get_leap_username (wsec));
 

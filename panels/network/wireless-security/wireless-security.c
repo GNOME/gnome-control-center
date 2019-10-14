@@ -86,9 +86,8 @@ wireless_security_set_changed_notify (WirelessSecurity *sec,
 }
 
 void
-wireless_security_changed_cb (GtkWidget *ignored, gpointer user_data)
+wireless_security_notify_changed (WirelessSecurity *sec)
 {
-	WirelessSecurity *sec = WIRELESS_SECURITY (user_data);
 	WirelessSecurityPrivate *priv = sec->priv;
 
 	if (priv->changed_notify)
@@ -434,7 +433,7 @@ ws_802_1x_auth_combo_changed (GtkWidget *combo,
 			gtk_widget_grab_focus (eap_default_widget);
 	}
 
-	wireless_security_changed_cb (combo, WIRELESS_SECURITY (sec));
+	wireless_security_notify_changed (WIRELESS_SECURITY (sec));
 }
 
 void
