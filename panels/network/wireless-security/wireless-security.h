@@ -94,12 +94,6 @@ GType wireless_security_get_type (void);
 
 /* Below for internal use only */
 
-#include "ws-wep-key.h"
-#include "ws-wpa-psk.h"
-#include "ws-leap.h"
-#include "ws-wpa-eap.h"
-#include "ws-dynamic-wep.h"
-
 WirelessSecurity *wireless_security_init (gsize obj_size,
                                           WSGetWidgetFunc get_widget,
                                           WSValidateFunc validate,

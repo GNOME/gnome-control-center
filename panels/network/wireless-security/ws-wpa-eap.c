@@ -25,6 +25,7 @@
 #include <ctype.h>
 #include <string.h>
 
+#include "ws-wpa-eap.h"
 #include "wireless-security.h"
 #include "eap-method.h"
 
