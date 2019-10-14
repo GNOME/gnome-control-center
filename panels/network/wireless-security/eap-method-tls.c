@@ -40,15 +40,16 @@ struct _EAPMethodTLS {
 
 
 static void
-show_toggled_cb (GtkCheckButton *button, EAPMethod *method)
+show_toggled_cb (EAPMethodTLS *self)
 {
+	EAPMethod *method = (EAPMethod *) self;
 	GtkWidget *widget;
 	gboolean visible;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (method->builder, "eap_tls_private_key_password_entry"));
-	g_assert (widget);
+	widget = GTK_WIDGET (gtk_builder_get_object (method->builder, "show_checkbutton_eaptls"));
+	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
-	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+	widget = GTK_WIDGET (gtk_builder_get_object (method->builder, "eap_tls_private_key_password_entry"));
 	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
 }
 
@@ -121,9 +122,9 @@ validate (EAPMethod *parent, GError **error)
 }
 
 static void
-ca_cert_not_required_toggled (GtkWidget *ignored, gpointer user_data)
+ca_cert_not_required_toggled (EAPMethodTLS *self)
 {
-	EAPMethod *parent = user_data;
+	EAPMethod *parent = (EAPMethod *) self;
 
 	eap_method_ca_cert_not_required_toggled (GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_not_required_checkbox")),
 	                                         GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button")));
@@ -372,7 +373,7 @@ setup_filepicker (GtkBuilder *builder,
 	 * and desensitize the user cert button.
 	 */
 	if (privkey) {
-		g_signal_connect (G_OBJECT (widget), "selection-changed",
+		g_signal_connect (widget, "selection-changed",
 		                  (GCallback) private_key_picker_file_set_cb,
 		                  parent);
 		if (filename)
@@ -467,9 +468,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_not_required_checkbox"));
 	g_assert (widget);
-	g_signal_connect (G_OBJECT (widget), "toggled",
-	                  (GCallback) ca_cert_not_required_toggled,
-	                  parent);
+	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ca_cert_not_required_toggled), method);
 	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (changed_cb), method);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_identity_entry"));
@@ -518,9 +517,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_eaptls"));
 	g_assert (widget);
-	g_signal_connect (G_OBJECT (widget), "toggled",
-	                  (GCallback) show_toggled_cb,
-	                  parent);
+	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (show_toggled_cb), method);
 
 	if (secrets_only) {
 		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_identity_entry"));
