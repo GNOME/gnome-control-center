@@ -19,7 +19,7 @@
         <property name="xalign">1</property>
         <property name="label" translatable="yes">_SSID</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">entry_ssid</property>
+        <property name="mnemonic_widget">ssid_entry</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -35,7 +35,7 @@
         <property name="xalign">1</property>
         <property name="label" translatable="yes">_BSSID</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">combo_bssid</property>
+        <property name="mnemonic_widget">bssid_combo</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -45,7 +45,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkEntry" id="entry_ssid">
+      <object class="GtkEntry" id="ssid_entry">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="hexpand">True</property>
@@ -66,7 +66,7 @@
         <property name="xalign">1</property>
         <property name="label" translatable="yes">_MAC Address</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">combo_mac</property>
+        <property name="mnemonic_widget">mac_combo</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -76,7 +76,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkComboBoxText" id="combo_cloned_mac">
+      <object class="GtkComboBoxText" id="cloned_mac_combo">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="has_entry">True</property>
@@ -101,7 +101,7 @@
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">_Cloned Address</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">combo_cloned_mac</property>
+        <property name="mnemonic_widget">cloned_mac_combo</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -111,7 +111,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkComboBoxText" id="combo_bssid">
+      <object class="GtkComboBoxText" id="bssid_combo">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="has_entry">True</property>
@@ -126,7 +126,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkComboBoxText" id="combo_mac">
+      <object class="GtkComboBoxText" id="mac_combo">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="has_entry">True</property>
