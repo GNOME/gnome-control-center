@@ -44,7 +44,10 @@ typedef struct CEPage8021xSecurityClass CEPage8021xSecurityClass;
 struct CEPage8021xSecurity {
 	CEPage parent;
 
-        GtkSwitch *enabled;
+        GtkBox    *box;
+        GtkSwitch *enable_8021x_switch;
+        GtkLabel  *security_label;
+
         GtkWidget *security_widget;
         WirelessSecurity *security;
         GtkSizeGroup *group;

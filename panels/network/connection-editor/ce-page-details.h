@@ -44,6 +44,29 @@ struct _CEPageDetails
 {
         CEPage parent;
 
+        GtkCheckButton *all_user_check;
+        GtkCheckButton *auto_connect_check;
+        GtkLabel *dns_heading_label;
+        GtkLabel *dns_label;
+        GtkButton *forget_button;
+        GtkLabel *ipv4_heading_label;
+        GtkLabel *ipv4_label;
+        GtkLabel *ipv6_heading_label;
+        GtkLabel *ipv6_label;
+        GtkLabel *last_used_heading_label;
+        GtkLabel *last_used_label;
+        GtkLabel *mac_heading_label;
+        GtkLabel *mac_label;
+        GtkCheckButton *restrict_data_check;
+        GtkLabel *route_heading_label;
+        GtkLabel *route_label;
+        GtkLabel *security_heading_label;
+        GtkLabel *security_label;
+        GtkLabel *speed_heading_label;
+        GtkLabel *speed_label;
+        GtkLabel *strength_heading_label;
+        GtkLabel *strength_label;
+
         NMDevice *device;
         NMAccessPoint *ap;
         NetConnectionEditor *editor;
