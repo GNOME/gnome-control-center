@@ -220,7 +220,7 @@ inner_auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 		eap_method_add_to_size_group (eap, method->size_group);
 	gtk_container_add (GTK_CONTAINER (vbox), eap_widget);
 
-	wireless_security_changed_cb (combo, method->sec_parent);
+	wireless_security_notify_changed (method->sec_parent);
 }
 
 static GtkWidget *
@@ -318,7 +318,13 @@ pac_toggled_cb (GtkWidget *widget, gpointer user_data)
 
 	gtk_widget_set_sensitive (provision_combo, enabled);
 
-	wireless_security_changed_cb (widget, method->sec_parent);
+	wireless_security_notify_changed (method->sec_parent);
+}
+
+static void
+changed_cb (EAPMethodFAST *self)
+{
+	wireless_security_notify_changed (self->sec_parent);
 }
 
 EAPMethodFAST *
@@ -376,9 +382,7 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 		}
 	}
 	gtk_widget_set_sensitive (widget, provisioning_enabled);
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (G_OBJECT (widget), "changed", G_CALLBACK (changed_cb), method);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), provisioning_enabled);
@@ -387,18 +391,14 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_anon_identity_entry"));
 	if (s_8021x && nm_setting_802_1x_get_anonymous_identity (s_8021x))
 		gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_802_1x_get_anonymous_identity (s_8021x));
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (G_OBJECT (widget), "changed", G_CALLBACK (changed_cb), method);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_button"));
 	g_assert (widget);
 	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (widget), TRUE);
 	gtk_file_chooser_button_set_title (GTK_FILE_CHOOSER_BUTTON (widget),
 	                                   _("Choose a PAC file"));
-	g_signal_connect (G_OBJECT (widget), "selection-changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (G_OBJECT (widget), "selection-changed", G_CALLBACK (changed_cb), method);
 
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_add_pattern (filter, "*.pac");

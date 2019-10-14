@@ -182,6 +182,12 @@ destroy (EAPMethod *parent)
 	g_signal_handlers_disconnect_by_data (method->show_password, method);
 }
 
+static void
+changed_cb (EAPMethodLEAP *self)
+{
+	wireless_security_notify_changed (self->ws_parent);
+}
+
 EAPMethodLEAP *
 eap_method_leap_new (WirelessSecurity *ws_parent,
                      NMConnection *connection,
@@ -222,9 +228,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_username_entry"));
 	g_assert (widget);
 	method->username_entry = GTK_ENTRY (widget);
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (G_OBJECT (widget), "changed", G_CALLBACK (changed_cb), method);
 
 	if (secrets_only)
 		gtk_widget_set_sensitive (widget, FALSE);
@@ -232,9 +236,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_password_entry"));
 	g_assert (widget);
 	method->password_entry = GTK_ENTRY (widget);
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (G_OBJECT (widget), "changed", G_CALLBACK (changed_cb), method);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
 	if (connection)
