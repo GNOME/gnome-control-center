@@ -34,38 +34,36 @@
 G_DEFINE_TYPE (CEPageEthernet, ce_page_ethernet, CE_TYPE_PAGE)
 
 static void
-mtu_changed (GtkSpinButton *mtu, CEPageEthernet *page)
+mtu_changed (CEPageEthernet *page)
 {
-        if (gtk_spin_button_get_value_as_int (mtu) == 0)
+        if (gtk_spin_button_get_value_as_int (page->mtu) == 0)
                 gtk_widget_hide (page->mtu_label);
         else
                 gtk_widget_show (page->mtu_label);
 }
 
-static gint
-ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data)
+static void
+mtu_output_cb (CEPageEthernet *page)
 {
-        gint defvalue = GPOINTER_TO_INT (user_data);
+        gint defvalue;
         gint val;
         g_autofree gchar *buf = NULL;
 
-        val = gtk_spin_button_get_value_as_int (spin);
+        val = gtk_spin_button_get_value_as_int (page->mtu);
+        defvalue = ce_get_property_default (NM_SETTING (page->setting_wired), NM_SETTING_WIRED_MTU);
         if (val == defvalue)
                 buf = g_strdup (_("automatic"));
         else
                 buf = g_strdup_printf ("%d", val);
 
-        if (strcmp (buf, gtk_entry_get_text (GTK_ENTRY (spin))))
-                gtk_entry_set_text (GTK_ENTRY (spin), buf);
-
-        return TRUE;
+        if (strcmp (buf, gtk_entry_get_text (GTK_ENTRY (page->mtu))))
+                gtk_entry_set_text (GTK_ENTRY (page->mtu), buf);
 }
 
 static void
 connect_ethernet_page (CEPageEthernet *page)
 {
         NMSettingWired *setting = page->setting_wired;
-        int mtu_def;
         char **mac_list;
         const char *s_mac_str;
         const gchar *name;
@@ -88,14 +86,10 @@ connect_ethernet_page (CEPageEthernet *page)
         g_signal_connect_swapped (page->cloned_mac, "changed", G_CALLBACK (ce_page_changed), page);
 
         /* MTU */
-        mtu_def = ce_get_property_default (NM_SETTING (setting), NM_SETTING_WIRED_MTU);
-        g_signal_connect (page->mtu, "output",
-                          G_CALLBACK (ce_spin_output_with_default),
-                          GINT_TO_POINTER (mtu_def));
+        g_signal_connect_swapped (page->mtu, "output", G_CALLBACK (mtu_output_cb), page);
         gtk_spin_button_set_value (page->mtu, (gdouble) nm_setting_wired_get_mtu (setting));
-        g_signal_connect (page->mtu, "value-changed",
-                          G_CALLBACK (mtu_changed), page);
-        mtu_changed (page->mtu, page);
+        g_signal_connect_swapped (page->mtu, "value-changed", G_CALLBACK (mtu_changed), page);
+        mtu_changed (page);
 
         g_signal_connect_swapped (page->name, "changed", G_CALLBACK (ce_page_changed), page);
         g_signal_connect_swapped (page->mtu, "value-changed", G_CALLBACK (ce_page_changed), page);

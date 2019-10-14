@@ -187,17 +187,17 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 }
 
 static void
-inner_auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
+inner_auth_combo_changed_cb (EAPMethodFAST *self)
 {
-	EAPMethod *parent = (EAPMethod *) user_data;
-	EAPMethodFAST *method = (EAPMethodFAST *) parent;
-	GtkWidget *vbox;
+	EAPMethod *parent = (EAPMethod *) self;
+	GtkWidget *combo, *vbox;
 	g_autoptr(EAPMethod) eap = NULL;
 	GList *elt, *children;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	GtkWidget *eap_widget;
 
+	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
 	vbox = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_vbox"));
 	g_assert (vbox);
 
@@ -216,11 +216,11 @@ inner_auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 	g_assert (eap_widget);
 	gtk_widget_unparent (eap_widget);
 
-	if (method->size_group)
-		eap_method_add_to_size_group (eap, method->size_group);
+	if (self->size_group)
+		eap_method_add_to_size_group (eap, self->size_group);
 	gtk_container_add (GTK_CONTAINER (vbox), eap_widget);
 
-	wireless_security_notify_changed (method->sec_parent);
+	wireless_security_notify_changed (self->sec_parent);
 }
 
 static GtkWidget *
@@ -288,9 +288,7 @@ inner_auth_combo_init (EAPMethodFAST *method,
 	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (auth_model));
 	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), active);
 
-	g_signal_connect (G_OBJECT (combo), "changed",
-	                  (GCallback) inner_auth_combo_changed_cb,
-	                  method);
+	g_signal_connect_swapped (combo, "changed", G_CALLBACK (inner_auth_combo_changed_cb), method);
 	return combo;
 }
 
@@ -304,21 +302,22 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 }
 
 static void
-pac_toggled_cb (GtkWidget *widget, gpointer user_data)
+pac_toggled_cb (EAPMethodFAST *self)
 {
-	EAPMethod *parent = (EAPMethod *) user_data;
-	EAPMethodFAST *method = (EAPMethodFAST *) parent;
+	GtkWidget *widget;
+	EAPMethod *parent = (EAPMethod *) self;
 	gboolean enabled = FALSE;
 	GtkWidget *provision_combo;
 
 	provision_combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_combo"));
 	g_return_if_fail (provision_combo);
 
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
 	enabled = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
 	gtk_widget_set_sensitive (provision_combo, enabled);
 
-	wireless_security_notify_changed (method->sec_parent);
+	wireless_security_notify_changed (self->sec_parent);
 }
 
 static void
@@ -386,7 +385,7 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), provisioning_enabled);
-	g_signal_connect (G_OBJECT (widget), "toggled", G_CALLBACK (pac_toggled_cb), parent);
+	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (pac_toggled_cb), method);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_anon_identity_entry"));
 	if (s_8021x && nm_setting_802_1x_get_anonymous_identity (s_8021x))
@@ -416,7 +415,7 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 	}
 
 	widget = inner_auth_combo_init (method, connection, s_8021x, secrets_only);
-	inner_auth_combo_changed_cb (widget, (gpointer) method);
+	inner_auth_combo_changed_cb (method);
 
 	if (secrets_only) {
 		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_anon_identity_label"));

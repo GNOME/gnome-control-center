@@ -125,9 +125,7 @@ device_simple_refresh (NetObject *object)
 }
 
 static void
-device_off_toggled (GtkSwitch *sw,
-                    GParamSpec *pspec,
-                    NetDeviceSimple *device_simple)
+device_off_toggled (NetDeviceSimple *device_simple)
 {
         NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (device_simple);
         const GPtrArray *acs;
@@ -140,7 +138,7 @@ device_off_toggled (GtkSwitch *sw,
         if (priv->updating_device)
                 return;
 
-        active = gtk_switch_get_active (sw);
+        active = gtk_switch_get_active (GTK_SWITCH (gtk_builder_get_object (priv->builder, "device_off_switch")));
         if (active) {
                 client = net_object_get_client (NET_OBJECT (device_simple));
                 connection = net_device_get_find_connection (NET_DEVICE (device_simple));
@@ -170,7 +168,7 @@ device_off_toggled (GtkSwitch *sw,
 }
 
 static void
-edit_connection (GtkButton *button, NetDeviceSimple *device_simple)
+edit_connection (NetDeviceSimple *device_simple)
 {
         net_object_edit (NET_OBJECT (device_simple));
 }
@@ -235,13 +233,13 @@ net_device_simple_init (NetDeviceSimple *device_simple)
         /* setup simple combobox model */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "device_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), device_simple);
+        g_signal_connect_swapped (widget, "notify::active",
+                                  G_CALLBACK (device_off_toggled), device_simple);
 
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "button_options"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (edit_connection), device_simple);
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (edit_connection), device_simple);
 }
 
 char *

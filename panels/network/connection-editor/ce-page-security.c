@@ -124,10 +124,8 @@ wsec_size_group_clear (GtkSizeGroup *group)
 }
 
 static void
-security_combo_changed (GtkComboBox *combo,
-                        gpointer     user_data)
+security_combo_changed (CEPageSecurity *page)
 {
-        CEPageSecurity *page = CE_PAGE_SECURITY (user_data);
         GtkWidget *vbox;
         GList *l, *children;
         g_autoptr(WirelessSecurity) sec = NULL;
@@ -352,9 +350,9 @@ finish_setup (CEPageSecurity *page)
 
         page->security_combo = combo;
 
-        security_combo_changed (combo, page);
-        g_signal_connect (combo, "changed",
-                          G_CALLBACK (security_combo_changed), page);
+        security_combo_changed (page);
+        g_signal_connect_swapped (combo, "changed",
+                                  G_CALLBACK (security_combo_changed), page);
 }
 
 static gboolean

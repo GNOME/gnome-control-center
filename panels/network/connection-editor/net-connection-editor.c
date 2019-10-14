@@ -49,7 +49,7 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 G_DEFINE_TYPE (NetConnectionEditor, net_connection_editor, GTK_TYPE_DIALOG)
 
-static void page_changed (CEPage *page, gpointer user_data);
+static void page_changed (NetConnectionEditor *editor);
 
 static void
 cancel_editing (NetConnectionEditor *editor)
@@ -349,10 +349,8 @@ done:
 }
 
 static void
-page_changed (CEPage *page, gpointer user_data)
+page_changed (NetConnectionEditor *editor)
 {
-        NetConnectionEditor *editor= user_data;
-
         if (editor_is_initialized (editor))
                 editor->is_changed = TRUE;
         validate (editor);
@@ -381,7 +379,7 @@ recheck_initialization (NetConnectionEditor *editor)
 }
 
 static void
-page_initialized (CEPage *page, GError *error, NetConnectionEditor *editor)
+page_initialized (NetConnectionEditor *editor, GError *error, CEPage *page)
 {
         GtkWidget *widget;
         GtkWidget *label;
@@ -467,8 +465,8 @@ add_page (NetConnectionEditor *editor, CEPage *page)
 
         editor->initializing_pages = g_slist_append (editor->initializing_pages, page);
 
-        g_signal_connect (page, "changed", G_CALLBACK (page_changed), editor);
-        g_signal_connect (page, "initialized", G_CALLBACK (page_initialized), editor);
+        g_signal_connect_swapped (page, "changed", G_CALLBACK (page_changed), editor);
+        g_signal_connect_swapped (page, "initialized", G_CALLBACK (page_initialized), editor);
 }
 
 static void
