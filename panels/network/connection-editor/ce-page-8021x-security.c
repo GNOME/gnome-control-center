@@ -139,7 +139,7 @@ validate (CEPage *cepage, NMConnection *connection, GError **error)
 			s_con = nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
 			nm_connection_add_setting (tmp_connection, nm_setting_duplicate (s_con));
 
-			ws_802_1x_fill_connection (GTK_COMBO_BOX (gtk_builder_get_object (page->security->builder, "wpa_eap_auth_combo")), tmp_connection);
+			ws_802_1x_fill_connection (GTK_COMBO_BOX (gtk_builder_get_object (page->security->builder, "auth_combo")), tmp_connection);
 
 			s_8021x = nm_connection_get_setting (tmp_connection, NM_TYPE_SETTING_802_1X);
 			nm_connection_add_setting (connection, NM_SETTING (g_object_ref (s_8021x)));
