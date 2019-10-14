@@ -237,7 +237,7 @@ cc_network_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-object_removed_cb (NetObject *object, CcNetworkPanel *panel)
+object_removed_cb (CcNetworkPanel *panel, NetObject *object)
 {
         GtkWidget *stack;
 
@@ -545,7 +545,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                 update_simple_section (panel);
 
         g_signal_connect_object (net_device, "removed",
-                                 G_CALLBACK (object_removed_cb), panel, 0);
+                                 G_CALLBACK (object_removed_cb), panel, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -560,7 +560,7 @@ panel_remove_device (CcNetworkPanel *panel, NMDevice *device)
                 return;
 
         /* NMObject will not fire the "removed" signal, so handle the UI removal explicitly */
-        object_removed_cb (object, panel);
+        object_removed_cb (panel, object);
         g_ptr_array_remove (panel->devices, object);
 
         /* update vpn widgets */
@@ -591,19 +591,18 @@ panel_add_proxy_device (CcNetworkPanel *panel)
 }
 
 static void
-connection_state_changed (NMActiveConnection *c, GParamSpec *pspec, CcNetworkPanel *panel)
+connection_state_changed (CcNetworkPanel *panel)
 {
 }
 
 static void
-active_connections_changed (NMClient *client, GParamSpec *pspec, gpointer user_data)
+active_connections_changed (CcNetworkPanel *panel)
 {
-        CcNetworkPanel *panel = user_data;
         const GPtrArray *connections;
         int i, j;
 
         g_debug ("Active connections changed:");
-        connections = nm_client_get_active_connections (client);
+        connections = nm_client_get_active_connections (panel->client);
         for (i = 0; connections && (i < connections->len); i++) {
                 NMActiveConnection *connection;
                 const GPtrArray *devices;
@@ -618,14 +617,14 @@ active_connections_changed (NMClient *client, GParamSpec *pspec, gpointer user_d
 
                 if (g_object_get_data (G_OBJECT (connection), "has-state-changed-handler") == NULL) {
                         g_signal_connect_object (connection, "notify::state",
-                                                 G_CALLBACK (connection_state_changed), panel, 0);
+                                                 G_CALLBACK (connection_state_changed), panel, G_CONNECT_SWAPPED);
                         g_object_set_data (G_OBJECT (connection), "has-state-changed-handler", GINT_TO_POINTER (TRUE));
                 }
         }
 }
 
 static void
-device_added_cb (NMClient *client, NMDevice *device, CcNetworkPanel *panel)
+device_added_cb (CcNetworkPanel *panel, NMDevice *device)
 {
         g_debug ("New device added");
         panel_add_device (panel, device);
@@ -633,7 +632,7 @@ device_added_cb (NMClient *client, NMDevice *device, CcNetworkPanel *panel)
 }
 
 static void
-device_removed_cb (NMClient *client, NMDevice *device, CcNetworkPanel *panel)
+device_removed_cb (CcNetworkPanel *panel, NMDevice *device)
 {
         g_debug ("Device removed");
         panel_remove_device (panel, device);
@@ -641,21 +640,20 @@ device_removed_cb (NMClient *client, NMDevice *device, CcNetworkPanel *panel)
 }
 
 static void
-manager_running (NMClient *client, GParamSpec *pspec, gpointer user_data)
+manager_running (CcNetworkPanel *panel)
 {
         const GPtrArray *devices;
         int i;
         NMDevice *device_tmp;
-        CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
 
         /* clear all devices we added */
-        if (!nm_client_get_nm_running (client)) {
+        if (!nm_client_get_nm_running (panel->client)) {
                 g_debug ("NM disappeared");
                 goto out;
         }
 
         g_debug ("coldplugging devices");
-        devices = nm_client_get_devices (client);
+        devices = nm_client_get_devices (panel->client);
         if (devices == NULL) {
                 g_debug ("No devices to add");
                 return;
@@ -711,7 +709,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
                                 "client", panel->client,
                                 NULL);
         g_signal_connect_object (net_vpn, "removed",
-                                 G_CALLBACK (object_removed_cb), panel, 0);
+                                 G_CALLBACK (object_removed_cb), panel, G_CONNECT_SWAPPED);
 
         /* add as a panel */
         stack = add_device_stack (panel, NET_OBJECT (net_vpn));
@@ -752,9 +750,7 @@ add_connection (CcNetworkPanel *panel,
 }
 
 static void
-notify_connection_added_cb (NMClient           *client,
-                            NMRemoteConnection *connection,
-                            CcNetworkPanel     *panel)
+notify_connection_added_cb (CcNetworkPanel *panel, NMRemoteConnection *connection)
 {
         add_connection (panel, NM_CONNECTION (connection));
 }
@@ -793,7 +789,7 @@ panel_check_network_manager_version (CcNetworkPanel *panel)
 
                 gtk_widget_show_all (box);
         } else {
-                manager_running (panel->client, NULL, panel);
+                manager_running (panel);
         }
 }
 
@@ -878,13 +874,13 @@ cc_network_panel_init (CcNetworkPanel *panel)
         panel->client = cc_object_storage_get_object (CC_OBJECT_NMCLIENT);
 
         g_signal_connect_object (panel->client, "notify::nm-running" ,
-                                 G_CALLBACK (manager_running), panel, 0);
+                                 G_CALLBACK (manager_running), panel, G_CONNECT_SWAPPED);
         g_signal_connect_object (panel->client, "notify::active-connections",
-                                 G_CALLBACK (active_connections_changed), panel, 0);
+                                 G_CALLBACK (active_connections_changed), panel, G_CONNECT_SWAPPED);
         g_signal_connect_object (panel->client, "device-added",
-                                 G_CALLBACK (device_added_cb), panel, 0);
+                                 G_CALLBACK (device_added_cb), panel, G_CONNECT_SWAPPED);
         g_signal_connect_object (panel->client, "device-removed",
-                                 G_CALLBACK (device_removed_cb), panel, 0);
+                                 G_CALLBACK (device_removed_cb), panel, G_CONNECT_SWAPPED);
 
         /* Setup ModemManager client */
         system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
@@ -903,7 +899,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         /* add remote settings such as VPN settings as virtual devices */
         g_signal_connect_object (panel->client, NM_CLIENT_CONNECTION_ADDED,
-                                 G_CALLBACK (notify_connection_added_cb), panel, 0);
+                                 G_CALLBACK (notify_connection_added_cb), panel, G_CONNECT_SWAPPED);
 
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         g_signal_connect_after (toplevel, "map", G_CALLBACK (on_toplevel_map), panel);

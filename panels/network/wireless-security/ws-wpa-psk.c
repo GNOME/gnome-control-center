@@ -47,15 +47,16 @@ get_widget (WirelessSecurity *parent)
 }
 
 static void
-show_toggled_cb (GtkCheckButton *button, WirelessSecurity *sec)
+show_toggled_cb (WirelessSecurityWPAPSK *self)
 {
+	WirelessSecurity *sec = (WirelessSecurity *) self;
 	GtkWidget *widget;
 	gboolean visible;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, "wpa_psk_entry"));
-	g_assert (widget);
+	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, "show_checkbutton_wpa"));
+	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
-	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, "wpa_psk_entry"));
 	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
 }
 
@@ -220,9 +221,7 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_wpa"));
 	g_assert (widget);
-	g_signal_connect (G_OBJECT (widget), "toggled",
-	                  (GCallback) show_toggled_cb,
-	                  sec);
+	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (show_toggled_cb), sec);
 
 	/* Hide WPA/RSN for now since this can be autodetected by NM and the
 	 * supplicant when connecting to the AP.

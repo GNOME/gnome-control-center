@@ -481,8 +481,7 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
 }
 
 static void
-configure_clicked_cb (GtkButton           *btn,
-                      CcWifiConnectionRow *row)
+configure_clicked_cb (CcWifiConnectionRow *row)
 {
   g_signal_emit_by_name (row, "configure");
 }
@@ -492,7 +491,7 @@ cc_wifi_connection_row_init (CcWifiConnectionRow *row)
 {
   gtk_widget_init_template (GTK_WIDGET (row));
 
-  g_signal_connect (row->configure_button, "clicked", G_CALLBACK (configure_clicked_cb), row);
+  g_signal_connect_swapped (row->configure_button, "clicked", G_CALLBACK (configure_clicked_cb), row);
 
   row->aps = g_ptr_array_new_with_free_func (g_object_unref);
 

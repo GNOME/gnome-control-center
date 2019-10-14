@@ -53,7 +53,7 @@ enum {
 };
 
 static void
-method_changed (GtkToggleButton *radio, CEPageIP4 *page)
+method_changed (CEPageIP4 *page)
 {
         gboolean addr_enabled;
         gboolean dns_enabled;
@@ -77,14 +77,6 @@ method_changed (GtkToggleButton *radio, CEPageIP4 *page)
         gtk_widget_set_sensitive (page->never_default, routes_enabled);
 
         ce_page_changed (CE_PAGE (page));
-}
-
-static void
-switch_toggled (GObject    *object,
-                GParamSpec *pspec,
-                CEPage     *page)
-{
-        ce_page_changed (page);
 }
 
 static void
@@ -134,13 +126,13 @@ update_row_gateway_sensitivity (CEPageIP4 *page)
 }
 
 static void
-remove_row (GtkButton *button, CEPageIP4 *page)
+remove_row (CEPageIP4 *page)
 {
         GtkWidget *list;
         GtkWidget *row;
         GtkWidget *row_box;
 
-        row_box = gtk_widget_get_parent (GTK_WIDGET (button));
+        row_box = gtk_widget_get_parent (GTK_WIDGET (CE_PAGE (page)->page));
         row = gtk_widget_get_parent (row_box);
         list = gtk_widget_get_parent (row);
 
@@ -246,7 +238,7 @@ add_address_row (CEPageIP4   *page,
         delete_button = gtk_button_new ();
         gtk_widget_set_sensitive (delete_button, FALSE);
         gtk_style_context_add_class (gtk_widget_get_style_context (delete_button), "image-button");
-        g_signal_connect (delete_button, "clicked", G_CALLBACK (remove_row), page);
+        g_signal_connect_swapped (delete_button, "clicked", G_CALLBACK (remove_row), page);
         image = gtk_image_new_from_icon_name ("edit-delete-symbolic", GTK_ICON_SIZE_MENU);
         atk_object_set_name (gtk_widget_get_accessible (delete_button), _("Delete Address"));
         gtk_button_set_image (GTK_BUTTON (delete_button), image);
@@ -329,7 +321,7 @@ add_dns_section (CEPageIP4 *page)
 
         page->auto_dns = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_dns_switch"));
         gtk_switch_set_active (page->auto_dns, !nm_setting_ip_config_get_ignore_auto_dns (page->setting));
-        g_signal_connect (page->auto_dns, "notify::active", G_CALLBACK (switch_toggled), page);
+        g_signal_connect_swapped (page->auto_dns, "notify::active", G_CALLBACK (ce_page_changed), page);
 
         page->dns_entry = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "dns_entry"));
         entry = GTK_ENTRY (page->dns_entry);
@@ -416,7 +408,7 @@ add_route_row (CEPageIP4   *page,
 
         delete_button = gtk_button_new ();
         gtk_style_context_add_class (gtk_widget_get_style_context (delete_button), "image-button");
-        g_signal_connect (delete_button, "clicked", G_CALLBACK (remove_row), page);
+        g_signal_connect_swapped (delete_button, "clicked", G_CALLBACK (remove_row), page);
         image = gtk_image_new_from_icon_name ("edit-delete-symbolic", GTK_ICON_SIZE_MENU);
         atk_object_set_name (gtk_widget_get_accessible (delete_button), _("Delete Route"));
         gtk_button_set_image (GTK_BUTTON (delete_button), image);
@@ -469,7 +461,7 @@ add_routes_section (CEPageIP4 *page)
         gtk_container_add (GTK_CONTAINER (widget), list);
         page->auto_routes = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_routes_switch"));
         gtk_switch_set_active (page->auto_routes, !nm_setting_ip_config_get_ignore_auto_routes (page->setting));
-        g_signal_connect (page->auto_routes, "notify::active", G_CALLBACK (switch_toggled), page);
+        g_signal_connect_swapped (page->auto_routes, "notify::active", G_CALLBACK (ce_page_changed), page);
 
 
         for (i = 0; i < nm_setting_ip_config_get_num_routes (page->setting); i++) {
@@ -552,7 +544,7 @@ connect_ip4_page (CEPageIP4 *page)
         radios[RADIO_DISABLED] = page->disabled;
 
         for (i = RADIO_AUTOMATIC; i < RADIO_DISABLED; i++)
-                g_signal_connect (radios[i], "toggled", G_CALLBACK (method_changed), page);
+                g_signal_connect_swapped (radios[i], "toggled", G_CALLBACK (method_changed), page);
 
         switch (method) {
         case IP4_METHOD_AUTO:
@@ -571,7 +563,7 @@ connect_ip4_page (CEPageIP4 *page)
                 break;
         }
 
-        method_changed (NULL, page);
+        method_changed (page);
 }
 
 static gboolean
