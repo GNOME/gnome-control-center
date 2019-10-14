@@ -34,26 +34,27 @@
 struct _EAPMethodSimple {
 	EAPMethod parent;
 
+	GtkGrid         *grid;
+	GtkEntry        *password_entry;
+	GtkLabel        *password_label;
+	GtkToggleButton *show_password_check;
+	GtkEntry        *username_entry;
+	GtkLabel        *username_label;
+
 	WirelessSecurity *ws_parent;
 
 	EAPMethodSimpleType type;
 	EAPMethodSimpleFlags flags;
 
-	GtkEntry *username_entry;
-	GtkEntry *password_entry;
-	GtkToggleButton *show_password;
 	guint idle_func_id;
 };
 
 static void
 show_toggled_cb (EAPMethodSimple *self)
 {
-	EAPMethod *parent = (EAPMethod *) self;
-	GtkWidget *widget;
 	gboolean visible;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_password_check"));
-	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->show_password_check));
 	gtk_entry_set_visibility (self->password_entry, visible);
 }
 
@@ -100,15 +101,9 @@ validate (EAPMethod *parent, GError **error)
 static void
 add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 {
-	GtkWidget *widget;
-
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "username_label"));
-	g_assert (widget);
-	gtk_size_group_add_widget (group, widget);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_label"));
-	g_assert (widget);
-	gtk_size_group_add_widget (group, widget);
+	EAPMethodSimple *self = (EAPMethodSimple *) parent;
+	gtk_size_group_add_widget (group, GTK_WIDGET (self->username_label));
+	gtk_size_group_add_widget (group, GTK_WIDGET (self->password_label));
 }
 
 typedef struct {
@@ -180,10 +175,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 
 	/* Update secret flags and popup when editing the connection */
 	if (!(method->flags & EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY)) {
-		GtkWidget *passwd_entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_entry"));
-		g_assert (passwd_entry);
-
-		nma_utils_update_password_storage (passwd_entry, flags,
+		nma_utils_update_password_storage (GTK_WIDGET (method->password_entry), flags,
 		                                   NM_SETTING (s_8021x), parent->password_flags_name);
 	}
 }
@@ -191,8 +183,9 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 static void
 update_secrets (EAPMethod *parent, NMConnection *connection)
 {
+	EAPMethodSimple *self = (EAPMethodSimple *) parent;
 	helper_fill_secret_entry (connection,
-	                          GTK_ENTRY (gtk_builder_get_object (parent->builder, "password_entry")),
+	                          self->password_entry,
 	                          NM_TYPE_SETTING_802_1X,
 	                          (HelperSecretFunc) nm_setting_802_1x_get_password);
 }
@@ -216,10 +209,10 @@ password_storage_changed (EAPMethodSimple *method)
 	if (always_ask && !secrets_only) {
 		/* we always clear this button and do not restore it
 		 * (because we want to hide the password). */
-		gtk_toggle_button_set_active (method->show_password, FALSE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (method->show_password_check), FALSE);
 	}
 
-	gtk_widget_set_sensitive (GTK_WIDGET (method->show_password),
+	gtk_widget_set_sensitive (GTK_WIDGET (method->show_password_check),
 	                          !always_ask || secrets_only);
 
 	if (!method->idle_func_id)
@@ -241,7 +234,7 @@ set_userpass_ui (EAPMethodSimple *method)
 	else
 		gtk_entry_set_text (method->password_entry, "");
 
-	gtk_toggle_button_set_active (method->show_password, wireless_security_get_show_password (method->ws_parent));
+	gtk_toggle_button_set_active (method->show_password_check, wireless_security_get_show_password (method->ws_parent));
 }
 
 static void
@@ -257,23 +250,19 @@ widgets_unrealized (EAPMethodSimple *method)
 	                                gtk_entry_get_text (method->username_entry),
 	                                gtk_entry_get_text (method->password_entry),
 	                                always_ask_selected (method->password_entry),
-	                                gtk_toggle_button_get_active (method->show_password));
+	                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (method->show_password_check)));
 }
 
 static void
 destroy (EAPMethod *parent)
 {
 	EAPMethodSimple *method = (EAPMethodSimple *) parent;
-	GtkWidget *widget;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "grid"));
-	g_assert (widget);
-	g_signal_handlers_disconnect_by_data (widget, method);
-
+	g_signal_handlers_disconnect_by_data (method->grid, method);
 	g_signal_handlers_disconnect_by_data (method->username_entry, method->ws_parent);
 	g_signal_handlers_disconnect_by_data (method->password_entry, method->ws_parent);
 	g_signal_handlers_disconnect_by_data (method->password_entry, method);
-	g_signal_handlers_disconnect_by_data (method->show_password, method);
+	g_signal_handlers_disconnect_by_data (method->show_password_check, method);
 
 	nm_clear_g_source (&method->idle_func_id);
 }
@@ -292,7 +281,6 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 {
 	EAPMethod *parent;
 	EAPMethodSimple *method;
-	GtkWidget *widget;
 	NMSetting8021x *s_8021x = NULL;
 
 	parent = eap_method_init (sizeof (EAPMethodSimple),
@@ -315,36 +303,32 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	method->type = type;
 	g_assert (type < EAP_METHOD_SIMPLE_TYPE_LAST);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "grid"));
-	g_assert (widget);
-	g_signal_connect_swapped (widget, "realize", G_CALLBACK (widgets_realized), method);
-	g_signal_connect_swapped (widget, "unrealize", G_CALLBACK (widgets_unrealized), method);
+	method->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
+	method->password_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "password_label"));
+	method->username_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "username_label"));
+	method->password_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "password_entry"));
+	method->show_password_check = GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "show_password_check"));
+	method->username_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "username_entry"));
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "username_entry"));
-	g_assert (widget);
-	method->username_entry = GTK_ENTRY (widget);
-	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
+	g_signal_connect_swapped (method->grid, "realize", G_CALLBACK (widgets_realized), method);
+	g_signal_connect_swapped (method->grid, "unrealize", G_CALLBACK (widgets_unrealized), method);
+
+	g_signal_connect_swapped (method->username_entry, "changed", G_CALLBACK (changed_cb), method);
 
 	if (method->flags & EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY)
-		gtk_widget_set_sensitive (widget, FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (method->username_entry), FALSE);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_entry"));
-	g_assert (widget);
-	method->password_entry = GTK_ENTRY (widget);
-	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
+	g_signal_connect_swapped (method->password_entry, "changed", G_CALLBACK (changed_cb), method);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
-	nma_utils_setup_password_storage (widget, 0, (NMSetting *) s_8021x, parent->password_flags_name,
+	nma_utils_setup_password_storage (GTK_WIDGET (method->password_entry), 0, (NMSetting *) s_8021x, parent->password_flags_name,
 	                                  FALSE, flags & EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY);
 
 	g_signal_connect_swapped (method->password_entry, "notify::secondary-icon-name", G_CALLBACK (password_storage_changed), method);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_password_check"));
-	g_assert (widget);
-	method->show_password = GTK_TOGGLE_BUTTON (widget);
-	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (show_toggled_cb), method);
+	g_signal_connect_swapped (method->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), method);
 
 	/* Initialize the UI fields with the security settings from method->ws_parent.
 	 * This will be done again when the widget gets realized. It must be done here as well,
