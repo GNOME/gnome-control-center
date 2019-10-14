@@ -132,7 +132,7 @@ security_combo_changed (CEPageSecurity *page)
 
         wsec_size_group_clear (page->group);
 
-        vbox = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "vbox"));
+        vbox = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "box"));
         children = gtk_container_get_children (GTK_CONTAINER (vbox));
         for (l = children; l; l = l->next) {
                 gtk_container_remove (GTK_CONTAINER (vbox), GTK_WIDGET (l->data));
@@ -221,8 +221,8 @@ finish_setup (CEPageSecurity *page)
 
         page->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-        page->security_heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_sec"));
-        page->security_combo = combo = GTK_COMBO_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_sec"));
+        page->security_heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "security_label"));
+        page->security_combo = combo = GTK_COMBO_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "security_combo"));
 
         dev_caps =   NM_WIFI_DEVICE_CAP_CIPHER_WEP40
                    | NM_WIFI_DEVICE_CAP_CIPHER_WEP104

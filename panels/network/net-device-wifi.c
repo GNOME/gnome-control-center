@@ -106,7 +106,7 @@ device_wifi_proxy_add_to_stack (NetObject    *object,
         nmdevice = net_device_get_nm_device (NET_DEVICE (object));
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder,
-                                                     "notebook_view"));
+                                                     "notebook"));
         gtk_stack_add_titled (stack, widget,
                               net_object_get_id (object),
                               nm_device_get_description (nmdevice));
@@ -321,17 +321,17 @@ nm_device_wifi_refresh_hotspot (NetDeviceWifi *device_wifi)
         g_debug ("Refreshing hotspot labels to name: '%s', security key: '%s', security: '%s'",
                  hotspot_ssid, hotspot_secret, hotspot_security);
 
-        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_hotspot_network_name"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_hotspot_network_name"));
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "hotspot_network_name_heading_label"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "hotspot_network_name_label"));
         panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), hotspot_ssid);
-        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_hotspot_security_key"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_hotspot_security_key"));
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "hotspot_security_key_heading_label"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "hotspot_security_key_label"));
         panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), hotspot_secret);
-        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_hotspot_security"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_hotspot_security"));
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "hotspot_security_heading_label"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "hotspot_security_label"));
         panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), hotspot_security);
-        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_hotspot_connected"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_hotspot_connected"));
+        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "hotspot_connected_heading_label"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "hotspot_connected_label"));
         panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), NULL);
 }
 
@@ -424,7 +424,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         /* keep this in sync with the signal handler setup in cc_network_panel_init */
         wireless_enabled_toggled (client, NULL, device_wifi);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_status"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "status_label"));
         status = panel_device_status_to_localized_string (nm_device, NULL);
         gtk_label_set_label (GTK_LABEL (widget), status);
 
@@ -673,7 +673,7 @@ show_hotspot_ui (NetDeviceWifi *device_wifi)
         GtkWidget *widget;
 
         /* show hotspot tab */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "notebook_view"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "notebook"));
         gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
 
         /* force switch to on as this succeeded */
@@ -912,7 +912,7 @@ static void
 show_wifi_list (NetDeviceWifi *device_wifi)
 {
         GtkWidget *widget;
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "notebook_view"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "notebook"));
         gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
 }
 
@@ -965,7 +965,7 @@ net_device_wifi_constructed (GObject *object)
         } else
                 gtk_widget_set_sensitive (widget, TRUE);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_list"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "title_label"));
         g_object_bind_property (device_wifi, "title", widget, "label", 0);
 
         nm_device_wifi_refresh_ui (device_wifi);
@@ -1427,7 +1427,7 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
 
         /* setup view */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder,
-                                                     "notebook_view"));
+                                                     "notebook"));
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (widget), FALSE);
         gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
 
@@ -1447,7 +1447,7 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                   G_CALLBACK (open_history), device_wifi);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder,
-                                                     "switch_hotspot_off"));
+                                                     "hotspot_off_switch"));
         device_wifi->hotspot_switch = GTK_SWITCH (widget);
         g_signal_connect_swapped (widget, "notify::active",
                                   G_CALLBACK (switch_hotspot_changed_cb), device_wifi);

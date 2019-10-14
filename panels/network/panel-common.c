@@ -375,10 +375,10 @@ panel_get_ip6_address_as_string (NMIPConfig *ip6_config)
 }
 
 void
-panel_set_device_widgets (GtkLabel *heading_ipv4, GtkLabel *label_ipv4,
-                          GtkLabel *heading_ipv6, GtkLabel *label_ipv6,
-                          GtkLabel *heading_dns, GtkLabel *label_dns,
-                          GtkLabel *heading_route, GtkLabel *label_route,
+panel_set_device_widgets (GtkLabel *ipv4_heading_label, GtkLabel *ipv4_label,
+                          GtkLabel *ipv6_heading_label, GtkLabel *ipv6_label,
+                          GtkLabel *heading_dns, GtkLabel *dns_label,
+                          GtkLabel *route_heading_label, GtkLabel *route_label,
                           NMDevice *device)
 {
         g_autofree gchar *ipv4_text = NULL;
@@ -401,19 +401,19 @@ panel_set_device_widgets (GtkLabel *heading_ipv4, GtkLabel *label_ipv4,
                         ipv6_text = panel_get_ip6_address_as_string (ip6_config);
         }
 
-        panel_set_device_widget_details (heading_ipv4, label_ipv4, ipv4_text);
-        panel_set_device_widget_details (heading_ipv6, label_ipv6, ipv6_text);
-        panel_set_device_widget_details (heading_dns, label_dns, dns_text);
-        panel_set_device_widget_details (heading_route, label_route, route_text);
+        panel_set_device_widget_details (ipv4_heading_label, ipv4_label, ipv4_text);
+        panel_set_device_widget_details (ipv6_heading_label, ipv6_label, ipv6_text);
+        panel_set_device_widget_details (heading_dns, dns_label, dns_text);
+        panel_set_device_widget_details (route_heading_label, route_label, route_text);
 
         has_ip4 = ipv4_text != NULL;
         has_ip6 = ipv6_text != NULL;
         if (has_ip4 && has_ip6) {
-                gtk_label_set_label (heading_ipv4, _("IPv4 Address"));
-                gtk_label_set_label (heading_ipv6, _("IPv6 Address"));
+                gtk_label_set_label (ipv4_heading_label, _("IPv4 Address"));
+                gtk_label_set_label (ipv6_heading_label, _("IPv6 Address"));
         } else if (has_ip4) {
-                gtk_label_set_label (heading_ipv4, _("IP Address"));
+                gtk_label_set_label (ipv4_heading_label, _("IP Address"));
         } else if (has_ip6) {
-                gtk_label_set_label (heading_ipv6, _("IP Address"));
+                gtk_label_set_label (ipv6_heading_label, _("IP Address"));
         }
 }
