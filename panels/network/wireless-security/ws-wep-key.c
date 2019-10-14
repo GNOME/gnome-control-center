@@ -24,6 +24,7 @@
 
 #include <string.h>
 
+#include "ws-wep-key.h"
 #include "wireless-security.h"
 #include "utils.h"
 #include "helpers.h"
