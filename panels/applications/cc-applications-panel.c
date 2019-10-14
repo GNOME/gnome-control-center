@@ -551,7 +551,6 @@ add_static_permissions (CcApplicationsPanel *self,
   g_auto(GStrv) devices = NULL;
   g_auto(GStrv) shared = NULL;
   g_auto(GStrv) filesystems = NULL;
-  gchar **strv;
   g_autofree gchar *str = NULL;
   gint added = 0;
   g_autofree gchar *text = NULL;
