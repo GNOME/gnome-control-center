@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.4"/>
-  <object class="GtkGrid" id="wpa_psk_grid">
+  <object class="GtkGrid" id="grid">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="column_spacing">6</property>
     <property name="row_spacing">6</property>
     <child>
-      <object class="GtkLabel" id="wpa_psk_label">
+      <object class="GtkLabel" id="password_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">_Password</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">wpa_psk_entry</property>
+        <property name="mnemonic_widget">password_entry</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -21,7 +21,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkEntry" id="wpa_psk_entry">
+      <object class="GtkEntry" id="password_entry">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="hexpand">True</property>
@@ -35,13 +35,13 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="wpa_psk_type_label">
+      <object class="GtkLabel" id="type_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">_Type</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">wpa_psk_type_combo</property>
+        <property name="mnemonic_widget">type_combo</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -60,7 +60,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkCheckButton" id="show_checkbutton_wpa">
+      <object class="GtkCheckButton" id="show_password_check">
         <property name="label" translatable="yes">Sho_w password</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
@@ -75,7 +75,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkComboBox" id="wpa_psk_type_combo">
+      <object class="GtkComboBox" id="type_combo">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="hexpand">True</property>

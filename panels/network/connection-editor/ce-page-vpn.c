@@ -186,7 +186,7 @@ ce_page_vpn_new (NMConnection     *connection,
 					 "/org/gnome/control-center/network/vpn-page.ui",
 					 _("Identity")));
 
-        page->name = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (page)->builder, "entry_name"));
+        page->name = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (page)->builder, "name_entry"));
         page->box = GTK_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "page"));
 
         g_signal_connect (page, "initialized", G_CALLBACK (finish_setup), NULL);

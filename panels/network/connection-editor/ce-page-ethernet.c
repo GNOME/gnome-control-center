@@ -172,11 +172,11 @@ ce_page_ethernet_new (NMConnection     *connection,
                                               "/org/gnome/control-center/network/ethernet-page.ui",
                                               _("Identity")));
 
-        page->name = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (page)->builder, "entry_name"));
-        page->device_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_mac"));
-        page->cloned_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_cloned_mac"));
-        page->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "spin_mtu"));
-        page->mtu_label = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "label_mtu"));
+        page->name = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (page)->builder, "name_entry"));
+        page->device_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "mac_combo"));
+        page->cloned_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "cloned_mac_combo"));
+        page->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "mtu_spin"));
+        page->mtu_label = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "mtu_label"));
 
         page->setting_connection = nm_connection_get_setting_connection (connection);
         page->setting_wired = nm_connection_get_setting_wired (connection);
