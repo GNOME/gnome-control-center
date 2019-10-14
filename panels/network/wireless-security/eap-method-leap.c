@@ -34,24 +34,23 @@
 struct _EAPMethodLEAP {
 	EAPMethod parent;
 
+	GtkGrid        *grid;
+	GtkEntry       *password_entry;
+	GtkLabel       *password_label;
+	GtkCheckButton *show_password_check;
+	GtkEntry       *username_entry;
+	GtkLabel       *username_label;
+
 	WirelessSecurity *ws_parent;
 
 	gboolean editing_connection;
-
-	GtkEntry *username_entry;
-	GtkEntry *password_entry;
-	GtkToggleButton *show_password;
 };
 
 static void
 show_toggled_cb (EAPMethodLEAP *method)
 {
-	EAPMethod *parent = (EAPMethod *) method;
-	GtkWidget *widget;
 	gboolean visible;
-
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_password_check"));
-	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (method->show_password_check));
 	gtk_entry_set_visibility (method->password_entry, visible);
 }
 
@@ -86,15 +85,9 @@ validate (EAPMethod *parent, GError **error)
 static void
 add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 {
-	GtkWidget *widget;
-
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "username_label"));
-	g_assert (widget);
-	gtk_size_group_add_widget (group, widget);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_label"));
-	g_assert (widget);
-	gtk_size_group_add_widget (group, widget);
+	EAPMethodLEAP *self = (EAPMethodLEAP *) parent;
+	gtk_size_group_add_widget (group, GTK_WIDGET (self->username_label));
+	gtk_size_group_add_widget (group, GTK_WIDGET (self->password_label));
 }
 
 static void
@@ -103,7 +96,6 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	EAPMethodLEAP *method = (EAPMethodLEAP *) parent;
 	NMSetting8021x *s_8021x;
 	NMSettingSecretFlags secret_flags;
-	GtkWidget *passwd_entry;
 
 	s_8021x = nm_connection_get_setting_802_1x (connection);
 	g_assert (s_8021x);
@@ -113,25 +105,23 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	g_object_set (s_8021x, NM_SETTING_802_1X_IDENTITY, gtk_entry_get_text (method->username_entry), NULL);
 	g_object_set (s_8021x, NM_SETTING_802_1X_PASSWORD, gtk_entry_get_text (method->password_entry), NULL);
 
-	passwd_entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_entry"));
-	g_assert (passwd_entry);
-
 	/* Save 802.1X password flags to the connection */
-	secret_flags = nma_utils_menu_to_secret_flags (passwd_entry);
+	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (method->password_entry));
 	nm_setting_set_secret_flags (NM_SETTING (s_8021x), parent->password_flags_name,
 	                             secret_flags, NULL);
 
 	/* Update secret flags and popup when editing the connection */
 	if (method->editing_connection)
-		nma_utils_update_password_storage (passwd_entry, secret_flags,
+		nma_utils_update_password_storage (GTK_WIDGET (method->password_entry), secret_flags,
 		                                   NM_SETTING (s_8021x), parent->password_flags_name);
 }
 
 static void
 update_secrets (EAPMethod *parent, NMConnection *connection)
 {
+	EAPMethodLEAP *self = (EAPMethodLEAP *) parent;
 	helper_fill_secret_entry (connection,
-	                          GTK_ENTRY (gtk_builder_get_object (parent->builder, "password_entry")),
+	                          self->password_entry,
 	                          NM_TYPE_SETTING_802_1X,
 	                          (HelperSecretFunc) nm_setting_802_1x_get_password);
 }
@@ -151,7 +141,7 @@ set_userpass_ui (EAPMethodLEAP *method)
 	else
 		gtk_entry_set_text (method->password_entry, "");
 
-	gtk_toggle_button_set_active (method->show_password, wireless_security_get_show_password (method->ws_parent));
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (method->show_password_check), wireless_security_get_show_password (method->ws_parent));
 }
 
 static void
@@ -167,22 +157,18 @@ widgets_unrealized (EAPMethodLEAP *method)
 	                                gtk_entry_get_text (method->username_entry),
 	                                gtk_entry_get_text (method->password_entry),
 	                                (gboolean) -1,
-	                                gtk_toggle_button_get_active (method->show_password));
+	                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (method->show_password_check)));
 }
 
 static void
 destroy (EAPMethod *parent)
 {
 	EAPMethodLEAP *method = (EAPMethodLEAP *) parent;
-	GtkWidget *widget;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "grid"));
-	g_assert (widget);
-	g_signal_handlers_disconnect_by_data (widget, method);
-
+	g_signal_handlers_disconnect_by_data (method->grid, method);
 	g_signal_handlers_disconnect_by_data (method->username_entry, method->ws_parent);
 	g_signal_handlers_disconnect_by_data (method->password_entry, method->ws_parent);
-	g_signal_handlers_disconnect_by_data (method->show_password, method);
+	g_signal_handlers_disconnect_by_data (method->show_password_check, method);
 }
 
 static void
@@ -198,7 +184,6 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 {
 	EAPMethodLEAP *method;
 	EAPMethod *parent;
-	GtkWidget *widget;
 	NMSetting8021x *s_8021x = NULL;
 
 	parent = eap_method_init (sizeof (EAPMethodLEAP),
@@ -219,34 +204,30 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	method->editing_connection = secrets_only ? FALSE : TRUE;
 	method->ws_parent = ws_parent;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "grid"));
-	g_assert (widget);
-	g_signal_connect_swapped (widget, "realize", G_CALLBACK (widgets_realized), method);
-	g_signal_connect_swapped (widget, "unrealize", G_CALLBACK (widgets_unrealized), method);
+	method->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
+	method->password_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "password_entry"));
+	method->password_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "password_label"));
+	method->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "show_password_check"));
+	method->username_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "username_entry"));
+	method->username_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "username_label"));
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "username_entry"));
-	g_assert (widget);
-	method->username_entry = GTK_ENTRY (widget);
-	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
+	g_signal_connect_swapped (method->grid, "realize", G_CALLBACK (widgets_realized), method);
+	g_signal_connect_swapped (method->grid, "unrealize", G_CALLBACK (widgets_unrealized), method);
+
+	g_signal_connect_swapped (method->username_entry, "changed", G_CALLBACK (changed_cb), method);
 
 	if (secrets_only)
-		gtk_widget_set_sensitive (widget, FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (method->username_entry), FALSE);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_entry"));
-	g_assert (widget);
-	method->password_entry = GTK_ENTRY (widget);
-	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
+	g_signal_connect_swapped (method->password_entry, "changed", G_CALLBACK (changed_cb), method);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
-	nma_utils_setup_password_storage (widget, 0, (NMSetting *) s_8021x, parent->password_flags_name,
+	nma_utils_setup_password_storage (GTK_WIDGET (method->password_entry), 0, (NMSetting *) s_8021x, parent->password_flags_name,
 	                                  FALSE, secrets_only);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_password_check"));
-	g_assert (widget);
-	method->show_password = GTK_TOGGLE_BUTTON (widget);
-	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (show_toggled_cb), method);
+	g_signal_connect_swapped (method->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), method);
 
 	/* Initialize the UI fields with the security settings from method->ws_parent.
 	 * This will be done again when the widget gets realized. It must be done here as well,
