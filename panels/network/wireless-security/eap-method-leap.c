@@ -50,7 +50,7 @@ show_toggled_cb (EAPMethodLEAP *method)
 	GtkWidget *widget;
 	gboolean visible;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_eapleap"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_password_check"));
 	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 	gtk_entry_set_visibility (method->password_entry, visible);
 }
@@ -88,11 +88,11 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 {
 	GtkWidget *widget;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_username_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "username_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_password_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 }
@@ -113,7 +113,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	g_object_set (s_8021x, NM_SETTING_802_1X_IDENTITY, gtk_entry_get_text (method->username_entry), NULL);
 	g_object_set (s_8021x, NM_SETTING_802_1X_PASSWORD, gtk_entry_get_text (method->password_entry), NULL);
 
-	passwd_entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_password_entry"));
+	passwd_entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_entry"));
 	g_assert (passwd_entry);
 
 	/* Save 802.1X password flags to the connection */
@@ -131,7 +131,7 @@ static void
 update_secrets (EAPMethod *parent, NMConnection *connection)
 {
 	helper_fill_secret_entry (connection,
-	                          GTK_ENTRY (gtk_builder_get_object (parent->builder, "eap_leap_password_entry")),
+	                          GTK_ENTRY (gtk_builder_get_object (parent->builder, "password_entry")),
 	                          NM_TYPE_SETTING_802_1X,
 	                          (HelperSecretFunc) nm_setting_802_1x_get_password);
 }
@@ -176,7 +176,7 @@ destroy (EAPMethod *parent)
 	EAPMethodLEAP *method = (EAPMethodLEAP *) parent;
 	GtkWidget *widget;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_notebook"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "notebook"));
 	g_assert (widget);
 	g_signal_handlers_disconnect_by_data (widget, method);
 
@@ -208,8 +208,8 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          destroy,
 	                          "/org/gnome/ControlCenter/network/eap-method-leap.ui",
-	                          "eap_leap_notebook",
-	                          "eap_leap_username_entry",
+	                          "notebook",
+	                          "username_entry",
 	                          FALSE);
 	if (!parent)
 		return NULL;
@@ -219,12 +219,12 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	method->editing_connection = secrets_only ? FALSE : TRUE;
 	method->ws_parent = ws_parent;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_notebook"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "notebook"));
 	g_assert (widget);
 	g_signal_connect_swapped (widget, "realize", G_CALLBACK (widgets_realized), method);
 	g_signal_connect_swapped (widget, "unrealize", G_CALLBACK (widgets_unrealized), method);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_username_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "username_entry"));
 	g_assert (widget);
 	method->username_entry = GTK_ENTRY (widget);
 	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
@@ -232,7 +232,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	if (secrets_only)
 		gtk_widget_set_sensitive (widget, FALSE);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_password_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_entry"));
 	g_assert (widget);
 	method->password_entry = GTK_ENTRY (widget);
 	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
@@ -243,7 +243,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	nma_utils_setup_password_storage (widget, 0, (NMSetting *) s_8021x, parent->password_flags_name,
 	                                  FALSE, secrets_only);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_eapleap"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_password_check"));
 	g_assert (widget);
 	method->show_password = GTK_TOGGLE_BUTTON (widget);
 	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (show_toggled_cb), method);

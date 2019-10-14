@@ -31,8 +31,8 @@ gchar           *panel_device_status_to_localized_string       (NMDevice *nm_dev
 gboolean         panel_set_device_widget_details               (GtkLabel *heading,
                                                                 GtkLabel *widget,
                                                                 const gchar *value);
-void             panel_set_device_widgets                      (GtkLabel *heading_ipv4, GtkLabel *label_ipv4,
-                                                                GtkLabel *heading_ipv6, GtkLabel *label_ipv6,
+void             panel_set_device_widgets                      (GtkLabel *heading_ipv4, GtkLabel *ipv4_label,
+                                                                GtkLabel *heading_ipv6, GtkLabel *ipv6_label,
                                                                 GtkLabel *heading_dns, GtkLabel *label_dns,
                                                                 GtkLabel *heading_route, GtkLabel *label_route,
                                                                 NMDevice *device);
