@@ -83,7 +83,7 @@ device_mobile_proxy_add_to_stack (NetObject    *object,
         gtk_size_group_add_widget (heading_size_group, widget);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
-                                                     "vbox7"));
+                                                     "box"));
         gtk_stack_add_named (stack, widget, net_object_get_id (object));
         return widget;
 }
@@ -387,7 +387,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         nm_device = net_device_get_nm_device (NET_DEVICE (device_mobile));
 
         /* set device kind */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "label_device"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "device_label"));
         g_object_bind_property (device_mobile, "title", widget, "label", 0);
 
         /* set up the device on/off switch */
@@ -418,7 +418,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         /* add possible connections to device */
         liststore = GTK_LIST_STORE (gtk_builder_get_object (device_mobile->builder,
                                                             "liststore_mobile_connections"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "combobox_network"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "network_combo"));
         device_add_device_connections (device_mobile,
                                        nm_device,
                                        liststore,
@@ -426,10 +426,10 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
 
         /* set IP entries */
         panel_set_device_widgets (GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_ipv4")),
-                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_ipv4")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "ipv4_label")),
                                   GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_ipv6")),
-                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_ipv6")),
-                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_dns")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "ipv6_label")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "dns_label")),
                                   GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_dns")),
                                   GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_route")),
                                   GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_route")),
@@ -900,7 +900,7 @@ net_device_mobile_init (NetDeviceMobile *device_mobile)
 
         /* setup mobile combobox model */
         combobox = GTK_COMBO_BOX (gtk_builder_get_object (device_mobile->builder,
-                                                          "combobox_network"));
+                                                          "network_combo"));
         g_signal_connect (combobox, "changed",
                           G_CALLBACK (mobile_connection_changed_cb),
                           device_mobile);

@@ -375,8 +375,8 @@ panel_get_ip6_address_as_string (NMIPConfig *ip6_config)
 }
 
 void
-panel_set_device_widgets (GtkLabel *heading_ipv4, GtkLabel *label_ipv4,
-                          GtkLabel *heading_ipv6, GtkLabel *label_ipv6,
+panel_set_device_widgets (GtkLabel *heading_ipv4, GtkLabel *ipv4_label,
+                          GtkLabel *heading_ipv6, GtkLabel *ipv6_label,
                           GtkLabel *heading_dns, GtkLabel *label_dns,
                           GtkLabel *heading_route, GtkLabel *label_route,
                           NMDevice *device)
@@ -401,8 +401,8 @@ panel_set_device_widgets (GtkLabel *heading_ipv4, GtkLabel *label_ipv4,
                         ipv6_text = panel_get_ip6_address_as_string (ip6_config);
         }
 
-        panel_set_device_widget_details (heading_ipv4, label_ipv4, ipv4_text);
-        panel_set_device_widget_details (heading_ipv6, label_ipv6, ipv6_text);
+        panel_set_device_widget_details (heading_ipv4, ipv4_label, ipv4_text);
+        panel_set_device_widget_details (heading_ipv6, ipv6_label, ipv6_text);
         panel_set_device_widget_details (heading_dns, label_dns, dns_text);
         panel_set_device_widget_details (heading_route, label_route, route_text);
 
