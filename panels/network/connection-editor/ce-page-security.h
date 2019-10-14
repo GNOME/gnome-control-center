@@ -43,8 +43,10 @@ struct _CEPageSecurity
 {
         CEPage parent;
 
+        GtkBox      *box;
         GtkComboBox *security_combo;
-        GtkWidget   *security_heading;
+        GtkLabel    *security_label;
+
         GtkSizeGroup *group;
         gboolean     adhoc;
 };

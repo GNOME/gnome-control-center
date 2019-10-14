@@ -43,15 +43,26 @@ struct _CEPageIP6
 {
         CEPage parent;
 
+        GtkBox         *address_box;
+        GtkSizeGroup   *address_sizegroup;
+        GtkSwitch      *auto_dns_switch;
+        GtkSwitch      *auto_routes_switch;
+        GtkRadioButton *automatic_radio;
+        GtkBox         *content_box;
+        GtkRadioButton *dhcp_radio;
+        GtkRadioButton *disabled_radio;
+        GtkEntry       *dns_entry;
+        GtkRadioButton *local_radio;
+        GtkRadioButton *manual_radio;
+        GtkCheckButton *never_default_check;
+        GtkBox         *routes_box;
+        GtkSizeGroup   *routes_metric_sizegroup;
+        GtkSizeGroup   *routes_sizegroup;
+
         NMSettingIPConfig *setting;
 
-        GtkToggleButton *disabled;
         GtkWidget       *address_list;
-        GtkSwitch       *auto_dns;
-        GtkWidget       *dns_entry;
-        GtkSwitch       *auto_routes;
         GtkWidget       *routes_list;
-        GtkWidget       *never_default;
 };
 
 struct _CEPageIP6Class
