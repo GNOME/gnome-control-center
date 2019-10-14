@@ -32,8 +32,6 @@
 #include "ce-page-ip4.h"
 #include "ui-helpers.h"
 
-#define RADIO_IS_ACTIVE(x) (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(CE_PAGE (page)->builder, x))))
-
 static void ensure_empty_address_row (CEPageIP4 *page);
 static void ensure_empty_routes_row (CEPageIP4 *page);
 
@@ -58,23 +56,21 @@ method_changed (GtkToggleButton *radio, CEPageIP4 *page)
         gboolean addr_enabled;
         gboolean dns_enabled;
         gboolean routes_enabled;
-        GtkWidget *widget;
 
-        if (RADIO_IS_ACTIVE ("disabled_radio")) {
+        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (page->disabled_radio))) {
                 addr_enabled = FALSE;
                 dns_enabled = FALSE;
                 routes_enabled = FALSE;
         } else {
-                addr_enabled = RADIO_IS_ACTIVE ("manual_radio");
-                dns_enabled = !RADIO_IS_ACTIVE ("local_radio");
-                routes_enabled = !RADIO_IS_ACTIVE ("local_radio");
+                addr_enabled = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (page->manual_radio));
+                dns_enabled = !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (page->local_radio));
+                routes_enabled = !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (page->local_radio));
         }
 
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "address_box"));
-        gtk_widget_set_visible (widget, addr_enabled);
-        gtk_widget_set_sensitive (page->dns_entry, dns_enabled);
-        gtk_widget_set_sensitive (page->routes_list, routes_enabled);
-        gtk_widget_set_sensitive (page->never_default, routes_enabled);
+        gtk_widget_set_visible (GTK_WIDGET (page->address_box), addr_enabled);
+        gtk_widget_set_sensitive (GTK_WIDGET (page->dns_entry), dns_enabled);
+        gtk_widget_set_sensitive (GTK_WIDGET (page->routes_list), routes_enabled);
+        gtk_widget_set_sensitive (GTK_WIDGET (page->never_default_check), routes_enabled);
 
         ce_page_changed (CE_PAGE (page));
 }
@@ -204,7 +200,6 @@ add_address_row (CEPageIP4   *page,
                  const gchar *network,
                  const gchar *gateway)
 {
-        GtkSizeGroup *group;
         GtkWidget *row;
         GtkWidget *row_box;
         GtkWidget *widget;
@@ -253,8 +248,7 @@ add_address_row (CEPageIP4   *page,
         gtk_container_add (GTK_CONTAINER (row_box), delete_button);
         g_object_set_data (G_OBJECT (row), "delete-button", delete_button);
 
-        group = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (page)->builder, "address_sizegroup"));
-        gtk_size_group_add_widget (group, delete_button);
+        gtk_size_group_add_widget (page->address_sizegroup, delete_button);
 
         gtk_container_add (GTK_CONTAINER (row), row_box);
         gtk_widget_show_all (row);
@@ -285,17 +279,14 @@ ensure_empty_address_row (CEPageIP4 *page)
 static void
 add_address_box (CEPageIP4 *page)
 {
-        GtkWidget *widget;
         GtkWidget *list;
         gint i;
-
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "address_box"));
 
         page->address_list = list = gtk_list_box_new ();
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
         gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
-        gtk_container_add (GTK_CONTAINER (widget), list);
+        gtk_container_add (GTK_CONTAINER (page->address_box), list);
 
         for (i = 0; i < nm_setting_ip_config_get_num_addresses (page->setting); i++) {
                 NMIPAddress *addr;
@@ -317,22 +308,18 @@ add_address_box (CEPageIP4 *page)
         if (nm_setting_ip_config_get_num_addresses (page->setting) == 0)
                 ensure_empty_address_row (page);
 
-        gtk_widget_show_all (widget);
+        gtk_widget_show_all (GTK_WIDGET (page->address_box));
 }
 
 static void
 add_dns_section (CEPageIP4 *page)
 {
-        GtkEntry *entry;
         GString *string;
         gint i;
 
-        page->auto_dns = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_dns_switch"));
-        gtk_switch_set_active (page->auto_dns, !nm_setting_ip_config_get_ignore_auto_dns (page->setting));
-        g_signal_connect (page->auto_dns, "notify::active", G_CALLBACK (switch_toggled), page);
+        gtk_switch_set_active (page->auto_dns_switch, !nm_setting_ip_config_get_ignore_auto_dns (page->setting));
+        g_signal_connect (page->auto_dns_switch, "notify::active", G_CALLBACK (switch_toggled), page);
 
-        page->dns_entry = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "dns_entry"));
-        entry = GTK_ENTRY (page->dns_entry);
         string = g_string_new ("");
 
         for (i = 0; i < nm_setting_ip_config_get_num_dns (page->setting); i++) {
@@ -346,9 +333,9 @@ add_dns_section (CEPageIP4 *page)
                 g_string_append (string, address);
         }
 
-        gtk_entry_set_text (entry, string->str);
+        gtk_entry_set_text (page->dns_entry, string->str);
 
-        g_signal_connect_swapped (entry, "notify::text", G_CALLBACK (ce_page_changed), page);
+        g_signal_connect_swapped (page->dns_entry, "notify::text", G_CALLBACK (ce_page_changed), page);
 
         g_string_free (string, TRUE);
 }
@@ -360,7 +347,6 @@ add_route_row (CEPageIP4   *page,
                const gchar *gateway,
                gint         metric)
 {
-        GtkSizeGroup *group;
         GtkWidget *row;
         GtkWidget *row_box;
         GtkWidget *widget;
@@ -411,8 +397,7 @@ add_route_row (CEPageIP4   *page,
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_container_add (GTK_CONTAINER (row_box), widget);
 
-        group = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_metric_sizegroup"));
-        gtk_size_group_add_widget (group, widget);
+        gtk_size_group_add_widget (page->routes_metric_sizegroup, widget);
 
         delete_button = gtk_button_new ();
         gtk_style_context_add_class (gtk_widget_get_style_context (delete_button), "image-button");
@@ -425,8 +410,7 @@ add_route_row (CEPageIP4   *page,
         gtk_container_add (GTK_CONTAINER (row_box), delete_button);
         g_object_set_data (G_OBJECT (row), "delete-button", delete_button);
 
-        group = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_sizegroup"));
-        gtk_size_group_add_widget (group, delete_button);
+        gtk_size_group_add_widget (page->routes_sizegroup, delete_button);
 
         gtk_container_add (GTK_CONTAINER (row), row_box);
         gtk_widget_show_all (row);
@@ -456,20 +440,16 @@ ensure_empty_routes_row (CEPageIP4 *page)
 static void
 add_routes_box (CEPageIP4 *page)
 {
-        GtkWidget *widget;
         GtkWidget *list;
         gint i;
-
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_box"));
 
         page->routes_list = list = gtk_list_box_new ();
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
         gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
-        gtk_container_add (GTK_CONTAINER (widget), list);
-        page->auto_routes = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_routes_switch"));
-        gtk_switch_set_active (page->auto_routes, !nm_setting_ip_config_get_ignore_auto_routes (page->setting));
-        g_signal_connect (page->auto_routes, "notify::active", G_CALLBACK (switch_toggled), page);
+        gtk_container_add (GTK_CONTAINER (page->routes_box), list);
+        gtk_switch_set_active (page->auto_routes_switch, !nm_setting_ip_config_get_ignore_auto_routes (page->setting));
+        g_signal_connect (page->auto_routes_switch, "notify::active", G_CALLBACK (switch_toggled), page);
 
 
         for (i = 0; i < nm_setting_ip_config_get_num_routes (page->setting); i++) {
@@ -493,7 +473,7 @@ add_routes_box (CEPageIP4 *page)
         if (nm_setting_ip_config_get_num_routes (page->setting) == 0)
                 ensure_empty_routes_row (page);
 
-        gtk_widget_show_all (widget);
+        gtk_widget_show_all (GTK_WIDGET (page->routes_box));
 }
 
 enum
@@ -508,25 +488,35 @@ enum
 static void
 connect_ip4_page (CEPageIP4 *page)
 {
-        GtkToggleButton *radios[N_RADIO];
-        GtkWidget *content;
         const gchar *str_method;
         gboolean disabled;
-        guint method, i;
+        guint method;
+
+        page->address_box = GTK_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "address_box"));
+        page->address_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (page)->builder, "address_sizegroup"));
+        page->auto_dns_switch = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_dns_switch"));
+        page->auto_routes_switch = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_routes_switch"));
+        page->automatic_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "automatic_radio"));
+        page->content_box = GTK_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "content_box"));
+        page->disabled_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "disabled_radio"));
+        page->dns_entry = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (page)->builder, "dns_entry"));
+        page->local_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "local_radio"));
+        page->manual_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "manual_radio"));
+        page->never_default_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "never_default_check"));
+        page->routes_box = GTK_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_box"));
+        page->routes_metric_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_metric_sizegroup"));
+        page->routes_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_sizegroup"));
 
         add_address_box (page);
         add_dns_section (page);
         add_routes_box (page);
 
-        page->disabled = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "disabled_radio"));
-
         str_method = nm_setting_ip_config_get_method (page->setting);
         disabled = g_strcmp0 (str_method, NM_SETTING_IP4_CONFIG_METHOD_DISABLED) == 0;
-        gtk_toggle_button_set_active (page->disabled, disabled);
-        g_signal_connect_swapped (page->disabled, "notify::active", G_CALLBACK (ce_page_changed), page);
-        content = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "content_box"));
-        g_object_bind_property (page->disabled, "active",
-                                content, "sensitive",
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (page->disabled_radio), disabled);
+        g_signal_connect_swapped (page->disabled_radio, "notify::active", G_CALLBACK (ce_page_changed), page);
+        g_object_bind_property (page->disabled_radio, "active",
+                                page->content_box, "sensitive",
                                 G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
 
         method = IP4_METHOD_AUTO;
@@ -540,32 +530,27 @@ connect_ip4_page (CEPageIP4 *page)
                 method = IP4_METHOD_DISABLED;
         }
 
-        page->never_default = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "never_default_check"));
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (page->never_default),
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (page->never_default_check),
                                       nm_setting_ip_config_get_never_default (page->setting));
-        g_signal_connect_swapped (page->never_default, "toggled", G_CALLBACK (ce_page_changed), page);
+        g_signal_connect_swapped (page->never_default_check, "toggled", G_CALLBACK (ce_page_changed), page);
 
-        /* Connect radio buttons */
-        radios[RADIO_AUTOMATIC] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "automatic_radio"));
-        radios[RADIO_LOCAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "local_radio"));
-        radios[RADIO_MANUAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "manual_radio"));
-        radios[RADIO_DISABLED] = page->disabled;
-
-        for (i = RADIO_AUTOMATIC; i < RADIO_DISABLED; i++)
-                g_signal_connect (radios[i], "toggled", G_CALLBACK (method_changed), page);
+        g_signal_connect (page->automatic_radio, "toggled", G_CALLBACK (method_changed), page);
+        g_signal_connect (page->local_radio, "toggled", G_CALLBACK (method_changed), page);
+        g_signal_connect (page->manual_radio, "toggled", G_CALLBACK (method_changed), page);
+        g_signal_connect (page->disabled_radio, "toggled", G_CALLBACK (method_changed), page);
 
         switch (method) {
         case IP4_METHOD_AUTO:
-                gtk_toggle_button_set_active (radios[RADIO_AUTOMATIC], TRUE);
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (page->automatic_radio), TRUE);
                 break;
         case IP4_METHOD_LINK_LOCAL:
-                gtk_toggle_button_set_active (radios[RADIO_LOCAL], TRUE);
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (page->local_radio), TRUE);
                 break;
         case IP4_METHOD_MANUAL:
-                gtk_toggle_button_set_active (radios[RADIO_MANUAL], TRUE);
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (page->manual_radio), TRUE);
                 break;
         case IP4_METHOD_DISABLED:
-                gtk_toggle_button_set_active (radios[RADIO_DISABLED], TRUE);
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (page->disabled_radio), TRUE);
                 break;
         default:
                 break;
@@ -617,14 +602,14 @@ ui_to_setting (CEPageIP4 *page)
         gchar *dns_text = NULL;
         guint i;
 
-        if (gtk_toggle_button_get_active (page->disabled)) {
+        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (page->disabled_radio))) {
                 method = NM_SETTING_IP4_CONFIG_METHOD_DISABLED;
         } else {
-                if (RADIO_IS_ACTIVE ("automatic_radio"))
+                if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (page->automatic_radio)))
                         method = NM_SETTING_IP4_CONFIG_METHOD_AUTO;
-                else if (RADIO_IS_ACTIVE ("local_radio"))
+                else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (page->local_radio)))
                         method = NM_SETTING_IP4_CONFIG_METHOD_LINK_LOCAL;
-                else if (RADIO_IS_ACTIVE ("manual_radio"))
+                else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (page->manual_radio)))
                         method = NM_SETTING_IP4_CONFIG_METHOD_MANUAL;
         }
 
@@ -724,11 +709,11 @@ ui_to_setting (CEPageIP4 *page)
 
                 if (!nm_utils_ipaddr_valid (AF_INET, text)) {
                         g_ptr_array_remove_range (dns_servers, 0, dns_servers->len);
-                        widget_set_error (page->dns_entry);
+                        widget_set_error (GTK_WIDGET (page->dns_entry));
                         ret = FALSE;
                         break;
                 } else {
-                        widget_unset_error (page->dns_entry);
+                        widget_unset_error (GTK_WIDGET (page->dns_entry));
                         g_ptr_array_add (dns_servers, g_strdup (text));
                 }
         }
@@ -828,9 +813,9 @@ ui_to_setting (CEPageIP4 *page)
         if (!ret)
                 goto out;
 
-        ignore_auto_dns = !gtk_switch_get_active (page->auto_dns);
-        ignore_auto_routes = !gtk_switch_get_active (page->auto_routes);
-        never_default = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (page->never_default));
+        ignore_auto_dns = !gtk_switch_get_active (page->auto_dns_switch);
+        ignore_auto_routes = !gtk_switch_get_active (page->auto_routes_switch);
+        never_default = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (page->never_default_check));
 
         g_object_set (page->setting,
                       NM_SETTING_IP_CONFIG_METHOD, method,
