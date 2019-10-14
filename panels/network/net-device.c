@@ -162,11 +162,7 @@ net_device_get_find_connection (NetDevice *device)
 }
 
 static void
-state_changed_cb (NMDevice *device,
-                  NMDeviceState new_state,
-                  NMDeviceState old_state,
-                  NMDeviceStateReason reason,
-                  NetDevice *net_device)
+state_changed_cb (NetDevice *net_device)
 {
         net_object_emit_changed (NET_OBJECT (net_device));
         net_object_refresh (NET_OBJECT (net_device));
@@ -242,10 +238,10 @@ net_device_set_property (GObject *device_,
                 }
                 priv->nm_device = g_value_dup_object (value);
                 if (priv->nm_device) {
-                        priv->changed_id = g_signal_connect (priv->nm_device,
-                                                             "state-changed",
-                                                             G_CALLBACK (state_changed_cb),
-                                                             net_device);
+                        priv->changed_id = g_signal_connect_swapped (priv->nm_device,
+                                                                     "state-changed",
+                                                                     G_CALLBACK (state_changed_cb),
+                                                                     net_device);
                 } else
                         priv->changed_id = 0;
                 break;

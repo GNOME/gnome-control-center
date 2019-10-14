@@ -41,7 +41,7 @@ struct _NetProxy
 
         GSettings        *settings;
         GtkBuilder       *builder;
-        GtkToggleButton  *mode_radios[3];
+        GtkRadioButton   *mode_radios[3];
 };
 
 G_DEFINE_TYPE (NetProxy, net_proxy, NET_TYPE_OBJECT)
@@ -119,9 +119,7 @@ out:
 }
 
 static void
-settings_changed_cb (GSettings *settings,
-                     const gchar *key,
-                     NetProxy *proxy)
+settings_changed_cb (NetProxy *proxy)
 {
         check_wpad_warning (proxy);
 }
@@ -153,12 +151,11 @@ panel_proxy_mode_setup_widgets (NetProxy *proxy, ProxyMode value)
 }
 
 static void
-panel_proxy_mode_radio_changed_cb (GtkToggleButton *radio,
-                                   NetProxy        *proxy)
+panel_proxy_mode_radio_changed_cb (NetProxy *proxy, GtkRadioButton *radio)
 {
         ProxyMode value;
 
-        if (!gtk_toggle_button_get_active (radio))
+        if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radio)))
                 return;
 
         /* get selected radio */
@@ -182,13 +179,12 @@ panel_proxy_mode_radio_changed_cb (GtkToggleButton *radio,
 }
 
 static void
-show_dialog_cb (GtkWidget *button,
-                NetProxy  *self)
+show_dialog_cb (NetProxy *self)
 {
         GtkWidget *toplevel;
         GtkWindow *dialog;
 
-        toplevel = gtk_widget_get_toplevel (button);
+        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (gtk_builder_get_object (self->builder, "main_widget")));
         dialog = GTK_WINDOW (gtk_builder_get_object (self->builder, "dialog"));
 
         gtk_window_set_transient_for (dialog, GTK_WINDOW (toplevel));
@@ -306,10 +302,10 @@ net_proxy_init (NetProxy *proxy)
         }
 
         proxy->settings = g_settings_new ("org.gnome.system.proxy");
-        g_signal_connect (proxy->settings,
-                          "changed",
-                          G_CALLBACK (settings_changed_cb),
-                          proxy);
+        g_signal_connect_swapped (proxy->settings,
+                                  "changed",
+                                  G_CALLBACK (settings_changed_cb),
+                                  proxy);
 
         /* actions */
         value = g_settings_get_enum (proxy->settings, "mode");
@@ -383,31 +379,31 @@ net_proxy_init (NetProxy *proxy)
 
         /* radio buttons */
         proxy->mode_radios[MODE_DISABLED] =
-                GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->builder, "radio_none"));
+                GTK_RADIO_BUTTON (gtk_builder_get_object (proxy->builder, "radio_none"));
         proxy->mode_radios[MODE_MANUAL] =
-                GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->builder, "radio_manual"));
+                GTK_RADIO_BUTTON (gtk_builder_get_object (proxy->builder, "radio_manual"));
         proxy->mode_radios[MODE_AUTOMATIC] =
-                GTK_TOGGLE_BUTTON (gtk_builder_get_object (proxy->builder, "radio_automatic"));
+                GTK_RADIO_BUTTON (gtk_builder_get_object (proxy->builder, "radio_automatic"));
 
         /* setup the radio before connecting to the :toggled signal */
-        gtk_toggle_button_set_active (proxy->mode_radios[value], TRUE);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (proxy->mode_radios[value]), TRUE);
         panel_proxy_mode_setup_widgets (proxy, value);
         panel_update_status_label (proxy, value);
 
         for (i = MODE_DISABLED; i < N_MODES; i++) {
-                g_signal_connect (proxy->mode_radios[i],
-                                  "toggled",
-                                  G_CALLBACK (panel_proxy_mode_radio_changed_cb),
-                                  proxy);
+                g_signal_connect_swapped (proxy->mode_radios[i],
+                                          "toggled",
+                                          G_CALLBACK (panel_proxy_mode_radio_changed_cb),
+                                          proxy);
         }
 
         /* show dialog button */
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder, "dialog_button"));
 
-        g_signal_connect (widget,
-                          "clicked",
-                          G_CALLBACK (show_dialog_cb),
-                          proxy);
+        g_signal_connect_swapped (widget,
+                                  "clicked",
+                                  G_CALLBACK (show_dialog_cb),
+                                  proxy);
 
         /* prevent the dialog from being destroyed */
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder, "dialog"));
