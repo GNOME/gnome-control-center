@@ -77,7 +77,7 @@ device_ethernet_add_to_stack (NetObject    *object,
         NetDeviceEthernet *device = NET_DEVICE_ETHERNET (object);
         GtkWidget *vbox;
 
-        vbox = GTK_WIDGET (gtk_builder_get_object (device->builder, "vbox6"));
+        vbox = GTK_WIDGET (gtk_builder_get_object (device->builder, "box"));
         gtk_stack_add_named (stack, vbox, net_object_get_id (object));
         return vbox;
 }
@@ -209,7 +209,7 @@ device_ethernet_refresh_ui (NetDeviceEthernet *device)
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device));
 
-        widget = GTK_WIDGET (gtk_builder_get_object (device->builder, "label_device"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device->builder, "device_label"));
         gtk_label_set_label (GTK_LABEL (widget), net_object_get_title (NET_OBJECT (device)));
 
         widget = GTK_WIDGET (gtk_builder_get_object (device->builder, "device_off_switch"));
