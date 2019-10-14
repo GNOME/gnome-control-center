@@ -126,7 +126,7 @@ validate (WirelessSecurity *parent, GError **error)
 			}
 		} else if ((strlen (key) == 5) || (strlen (key) == 13)) {
 			for (i = 0; i < strlen (key); i++) {
-				if (!utils_char_is_ascii_print (key[i])) {
+				if (!g_ascii_isprint (key[i])) {
 					widget_set_error (entry);
 					g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid wep-key: key with a length of %zu must contain only ascii characters"), strlen (key));
 					return FALSE;
@@ -222,10 +222,25 @@ wep_entry_filter_cb (GtkEditable *editable,
 	WirelessSecurityWEPKey *sec = (WirelessSecurityWEPKey *) data;
 
 	if (sec->type == NM_WEP_KEY_TYPE_KEY) {
-		utils_filter_editable_on_insert_text (editable,
-		                                      text, length, position, data,
-		                                      utils_char_is_ascii_print,
-		                                      wep_entry_filter_cb);
+		int i, count = 0;
+		g_autofree gchar *result = g_new (gchar, length+1);
+
+		for (i = 0; i < length; i++) {
+			if (g_ascii_isprint (text[i]))
+				result[count++] = text[i];
+		}
+		result[count] = 0;
+
+		if (count > 0) {
+			g_signal_handlers_block_by_func (G_OBJECT (editable),
+			                                 G_CALLBACK (wep_entry_filter_cb),
+			                                 data);
+			gtk_editable_insert_text (editable, result, count, position);
+			g_signal_handlers_unblock_by_func (G_OBJECT (editable),
+			                                   G_CALLBACK (wep_entry_filter_cb),
+			                                   data);
+		}
+		g_signal_stop_emission_by_name (G_OBJECT (editable), "insert-text");
 	}
 }
 
