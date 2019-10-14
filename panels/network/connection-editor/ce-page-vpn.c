@@ -75,8 +75,7 @@ vpn_gnome3ify_editor (GtkWidget *widget)
 static void
 load_vpn_plugin (CEPageVpn *page, NMConnection *connection)
 {
-	CEPage *parent = CE_PAGE (page);
-        GtkWidget *ui_widget, *failure;
+        GtkWidget *ui_widget;
 
         page->editor = nm_vpn_editor_plugin_get_editor (page->plugin,
                                                         connection,
@@ -92,10 +91,9 @@ load_vpn_plugin (CEPageVpn *page, NMConnection *connection)
 	}
         vpn_gnome3ify_editor (ui_widget);
 
-        failure = GTK_WIDGET (gtk_builder_get_object (parent->builder, "failure_label"));
-        gtk_widget_destroy (failure);
+        gtk_widget_destroy (GTK_WIDGET (page->failure_label));
 
-        gtk_box_pack_start (page->box, ui_widget, TRUE, TRUE, 0);
+        gtk_box_pack_start (page->page, ui_widget, TRUE, TRUE, 0);
 	gtk_widget_show_all (ui_widget);
 
         g_signal_connect_swapped (page->editor, "changed", G_CALLBACK (ce_page_changed), page);
@@ -107,8 +105,8 @@ connect_vpn_page (CEPageVpn *page)
         const gchar *name;
 
         name = nm_setting_connection_get_id (page->setting_connection);
-        gtk_entry_set_text (page->name, name);
-        g_signal_connect_swapped (page->name, "changed", G_CALLBACK (ce_page_changed), page);
+        gtk_entry_set_text (page->name_entry, name);
+        g_signal_connect_swapped (page->name_entry, "changed", G_CALLBACK (ce_page_changed), page);
 }
 
 static gboolean
@@ -119,7 +117,7 @@ validate (CEPage        *page,
         CEPageVpn *self = CE_PAGE_VPN (page);
 
         g_object_set (self->setting_connection,
-                      NM_SETTING_CONNECTION_ID, gtk_entry_get_text (self->name),
+                      NM_SETTING_CONNECTION_ID, gtk_entry_get_text (self->name_entry),
                       NULL);
 
         if (!nm_setting_verify (NM_SETTING (self->setting_connection), NULL, error))
@@ -186,8 +184,9 @@ ce_page_vpn_new (NMConnection     *connection,
 					 "/org/gnome/control-center/network/vpn-page.ui",
 					 _("Identity")));
 
-        page->name = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (page)->builder, "name_entry"));
-        page->box = GTK_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "page"));
+        page->failure_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "failure_label"));
+        page->name_entry = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (page)->builder, "name_entry"));
+        page->page = GTK_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "page"));
 
         g_signal_connect (page, "initialized", G_CALLBACK (finish_setup), NULL);
 
