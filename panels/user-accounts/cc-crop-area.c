@@ -694,18 +694,11 @@ cc_crop_area_finalize (GObject *object)
 {
         CcCropArea *area = CC_CROP_AREA (object);
 
-        if (area->browse_pixbuf) {
-                g_object_unref (area->browse_pixbuf);
-                area->browse_pixbuf = NULL;
-        }
-        if (area->pixbuf) {
-                g_object_unref (area->pixbuf);
-                area->pixbuf = NULL;
-        }
-        if (area->color_shifted) {
-                g_object_unref (area->color_shifted);
-                area->color_shifted = NULL;
-        }
+        g_clear_object (&area->browse_pixbuf);
+        g_clear_object (&area->pixbuf);
+        g_clear_object (&area->color_shifted);
+
+        G_OBJECT_CLASS (cc_crop_area_parent_class)->finalize (object);
 }
 
 static void
