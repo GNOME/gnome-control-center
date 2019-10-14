@@ -28,6 +28,11 @@
 
 #include "wireless-security.h"
 #include "ce-page-security.h"
+#include "ws-dynamic-wep.h"
+#include "ws-leap.h"
+#include "ws-wep-key.h"
+#include "ws-wpa-eap.h"
+#include "ws-wpa-psk.h"
 
 G_DEFINE_TYPE (CEPageSecurity, ce_page_security, CE_TYPE_PAGE)
 
