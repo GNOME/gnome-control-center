@@ -46,12 +46,15 @@ struct _EAPMethodSimple {
 };
 
 static void
-show_toggled_cb (GtkToggleButton *button, EAPMethodSimple *method)
+show_toggled_cb (EAPMethodSimple *self)
 {
+	EAPMethod *parent = (EAPMethod *) self;
+	GtkWidget *widget;
 	gboolean visible;
 
-	visible = gtk_toggle_button_get_active (button);
-	gtk_entry_set_visibility (method->password_entry, visible);
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_eapsimple"));
+	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+	gtk_entry_set_visibility (self->password_entry, visible);
 }
 
 static gboolean
@@ -203,9 +206,7 @@ stuff_changed (EAPMethodSimple *method)
 }
 
 static void
-password_storage_changed (GObject *entry,
-                          GParamSpec *pspec,
-                          EAPMethodSimple *method)
+password_storage_changed (EAPMethodSimple *method)
 {
 	gboolean always_ask;
 	gboolean secrets_only = method->flags & EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
@@ -244,13 +245,13 @@ set_userpass_ui (EAPMethodSimple *method)
 }
 
 static void
-widgets_realized (GtkWidget *widget, EAPMethodSimple *method)
+widgets_realized (EAPMethodSimple *method)
 {
 	set_userpass_ui (method);
 }
 
 static void
-widgets_unrealized (GtkWidget *widget, EAPMethodSimple *method)
+widgets_unrealized (EAPMethodSimple *method)
 {
 	wireless_security_set_userpass (method->ws_parent,
 	                                gtk_entry_get_text (method->username_entry),
@@ -316,12 +317,8 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_notebook"));
 	g_assert (widget);
-	g_signal_connect (G_OBJECT (widget), "realize",
-	                  (GCallback) widgets_realized,
-	                  method);
-	g_signal_connect (G_OBJECT (widget), "unrealize",
-	                  (GCallback) widgets_unrealized,
-	                  method);
+	g_signal_connect_swapped (widget, "realize", G_CALLBACK (widgets_realized), method);
+	g_signal_connect_swapped (widget, "unrealize", G_CALLBACK (widgets_unrealized), method);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_username_entry"));
 	g_assert (widget);
@@ -342,16 +339,12 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	nma_utils_setup_password_storage (widget, 0, (NMSetting *) s_8021x, parent->password_flags_name,
 	                                  FALSE, flags & EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY);
 
-	g_signal_connect (method->password_entry, "notify::secondary-icon-name",
-	                  G_CALLBACK (password_storage_changed),
-	                  method);
+	g_signal_connect_swapped (method->password_entry, "notify::secondary-icon-name", G_CALLBACK (password_storage_changed), method);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_eapsimple"));
 	g_assert (widget);
 	method->show_password = GTK_TOGGLE_BUTTON (widget);
-	g_signal_connect (G_OBJECT (widget), "toggled",
-	                  (GCallback) show_toggled_cb,
-	                  method);
+	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (show_toggled_cb), method);
 
 	/* Initialize the UI fields with the security settings from method->ws_parent.
 	 * This will be done again when the widget gets realized. It must be done here as well,
