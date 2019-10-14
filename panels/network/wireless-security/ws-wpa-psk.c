@@ -43,7 +43,7 @@ struct _WirelessSecurityWPAPSK {
 static GtkWidget *
 get_widget (WirelessSecurity *parent)
 {
-	return GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_grid"));
+	return GTK_WIDGET (gtk_builder_get_object (parent->builder, "grid"));
 }
 
 static void
@@ -53,10 +53,10 @@ show_toggled_cb (WirelessSecurityWPAPSK *self)
 	GtkWidget *widget;
 	gboolean visible;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, "show_checkbutton_wpa"));
+	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, "show_password_check"));
 	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
-	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, "wpa_psk_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, "password_entry"));
 	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
 }
 
@@ -68,7 +68,7 @@ validate (WirelessSecurity *parent, GError **error)
 	gsize len;
 	int i;
 
-	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_entry"));
+	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_entry"));
 	g_assert (entry);
 
 	key = gtk_entry_get_text (GTK_ENTRY (entry));
@@ -101,10 +101,10 @@ add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 {
 	GtkWidget *widget;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_type_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "type_label"));
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_label"));
 	gtk_size_group_add_widget (group, widget);
 }
 
@@ -131,7 +131,7 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	s_wireless_sec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
 	nm_connection_add_setting (connection, (NMSetting *) s_wireless_sec);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_entry"));
 	passwd_entry = widget;
 	key = gtk_entry_get_text (GTK_ENTRY (widget));
 	g_object_set (s_wireless_sec, NM_SETTING_WIRELESS_SECURITY_PSK, key, NULL);
@@ -170,7 +170,7 @@ static void
 update_secrets (WirelessSecurity *parent, NMConnection *connection)
 {
 	helper_fill_secret_entry (connection,
-	                          GTK_ENTRY (gtk_builder_get_object (parent->builder, "wpa_psk_entry")),
+	                          GTK_ENTRY (gtk_builder_get_object (parent->builder, "password_entry")),
 	                          NM_TYPE_SETTING_WIRELESS_SECURITY,
 	                          (HelperSecretFunc) nm_setting_wireless_security_get_psk);
 }
@@ -204,7 +204,7 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	sec->editing_connection = secrets_only ? FALSE : TRUE;
 	sec->password_flags_name = NM_SETTING_WIRELESS_SECURITY_PSK;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_entry"));
 	g_assert (widget);
 	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), sec);
 	gtk_entry_set_width_chars (GTK_ENTRY (widget), 28);
@@ -219,7 +219,7 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	if (connection)
 		update_secrets (WIRELESS_SECURITY (sec), connection);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_wpa"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_password_check"));
 	g_assert (widget);
 	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (show_toggled_cb), sec);
 
@@ -227,11 +227,11 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	 * supplicant when connecting to the AP.
 	 */
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_type_combo"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "type_combo"));
 	g_assert (widget);
 	gtk_widget_hide (widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_type_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "type_label"));
 	g_assert (widget);
 	gtk_widget_hide (widget);
 
