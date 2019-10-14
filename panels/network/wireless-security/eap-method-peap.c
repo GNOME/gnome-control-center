@@ -223,7 +223,7 @@ inner_auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 		eap_method_add_to_size_group (eap, method->size_group);
 	gtk_container_add (GTK_CONTAINER (vbox), eap_widget);
 
-	wireless_security_changed_cb (combo, method->sec_parent);
+	wireless_security_notify_changed (method->sec_parent);
 }
 
 static GtkWidget *
@@ -321,6 +321,12 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 	                                         I_METHOD_COLUMN);
 }
 
+static void
+changed_cb (EAPMethodPEAP *self)
+{
+	wireless_security_notify_changed (self->sec_parent);
+}
+
 EAPMethodPEAP *
 eap_method_peap_new (WirelessSecurity *ws_parent,
                      NMConnection *connection,
@@ -360,9 +366,7 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 	g_signal_connect (G_OBJECT (widget), "toggled",
 	                  (GCallback) ca_cert_not_required_toggled,
 	                  parent);
-	g_signal_connect (G_OBJECT (widget), "toggled",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (G_OBJECT (widget), "toggled", G_CALLBACK (changed_cb), method);
 	widget_ca_not_required_checkbox = widget;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_button"));
@@ -370,9 +374,7 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (widget), TRUE);
 	gtk_file_chooser_button_set_title (GTK_FILE_CHOOSER_BUTTON (widget),
 	                                   _("Choose a Certificate Authority certificate"));
-	g_signal_connect (G_OBJECT (widget), "selection-changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (G_OBJECT (widget), "selection-changed", G_CALLBACK (changed_cb), method);
 	filter = eap_method_default_file_chooser_filter_new (FALSE);
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (widget), filter);
 	if (connection && s_8021x) {
@@ -404,16 +406,12 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 				gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 2);
 		}
 	}
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (G_OBJECT (widget), "changed", G_CALLBACK (changed_cb), method);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_anon_identity_entry"));
 	if (s_8021x && nm_setting_802_1x_get_anonymous_identity (s_8021x))
 		gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_802_1x_get_anonymous_identity (s_8021x));
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (G_OBJECT (widget), "changed", G_CALLBACK (changed_cb), method);
 
 	if (secrets_only) {
 		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_anon_identity_label"));

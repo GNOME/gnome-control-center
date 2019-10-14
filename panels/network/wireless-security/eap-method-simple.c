@@ -197,7 +197,7 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 static gboolean
 stuff_changed (EAPMethodSimple *method)
 {
-	wireless_security_changed_cb (NULL, method->ws_parent);
+	wireless_security_notify_changed (method->ws_parent);
 	method->idle_func_id = 0;
 	return FALSE;
 }
@@ -277,6 +277,12 @@ destroy (EAPMethod *parent)
 	nm_clear_g_source (&method->idle_func_id);
 }
 
+static void
+changed_cb (EAPMethodSimple *self)
+{
+	wireless_security_notify_changed (self->ws_parent);
+}
+
 EAPMethodSimple *
 eap_method_simple_new (WirelessSecurity *ws_parent,
                        NMConnection *connection,
@@ -320,9 +326,7 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_username_entry"));
 	g_assert (widget);
 	method->username_entry = GTK_ENTRY (widget);
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (G_OBJECT (widget), "changed", G_CALLBACK (changed_cb), method);
 
 	if (method->flags & EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY)
 		gtk_widget_set_sensitive (widget, FALSE);
@@ -330,9 +334,7 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_password_entry"));
 	g_assert (widget);
 	method->password_entry = GTK_ENTRY (widget);
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (G_OBJECT (widget), "changed", G_CALLBACK (changed_cb), method);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
 	if (connection)
