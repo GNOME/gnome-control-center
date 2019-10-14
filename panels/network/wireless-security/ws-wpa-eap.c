@@ -32,6 +32,11 @@
 struct _WirelessSecurityWPAEAP {
 	WirelessSecurity parent;
 
+	GtkComboBox *auth_combo;
+	GtkLabel    *auth_label;
+	GtkBox      *method_box;
+	GtkNotebook *notebook;
+
 	GtkSizeGroup *size_group;
 };
 
@@ -48,13 +53,15 @@ destroy (WirelessSecurity *parent)
 static GtkWidget *
 get_widget (WirelessSecurity *parent)
 {
-	return GTK_WIDGET (gtk_builder_get_object (parent->builder, "notebook"));
+	WirelessSecurityWPAEAP *self = (WirelessSecurityWPAEAP *) parent;
+	return GTK_WIDGET (self->notebook);
 }
 
 static gboolean
 validate (WirelessSecurity *parent, GError **error)
 {
-	return ws_802_1x_validate (GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "auth_combo")), error);
+	WirelessSecurityWPAEAP *self = (WirelessSecurityWPAEAP *) parent;
+	return ws_802_1x_validate (self->auth_combo, error);
 }
 
 static void
@@ -66,17 +73,16 @@ add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 		g_object_unref (sec->size_group);
 	sec->size_group = g_object_ref (group);
 
-	ws_802_1x_add_to_size_group (sec->size_group,
-	                             GTK_LABEL (gtk_builder_get_object (parent->builder, "auth_label")),
-	                             GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "auth_combo")));
+	ws_802_1x_add_to_size_group (sec->size_group, sec->auth_label, sec->auth_combo);
 }
 
 static void
 fill_connection (WirelessSecurity *parent, NMConnection *connection)
 {
+	WirelessSecurityWPAEAP *self = (WirelessSecurityWPAEAP *) parent;
 	NMSettingWirelessSecurity *s_wireless_sec;
 
-	ws_802_1x_fill_connection (GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "auth_combo")), connection);
+	ws_802_1x_fill_connection (self->auth_combo, connection);
 
 	s_wireless_sec = nm_connection_get_setting_wireless_security (connection);
 	g_assert (s_wireless_sec);
@@ -92,7 +98,7 @@ auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 
 	ws_802_1x_auth_combo_changed (combo,
 	                              parent,
-	                              GTK_BOX (gtk_builder_get_object (parent->builder, "method_box")),
+	                              sec->method_box,
 	                              sec->size_group);
 }
 
@@ -102,6 +108,7 @@ ws_wpa_eap_new (NMConnection *connection,
                 gboolean secrets_only)
 {
 	WirelessSecurity *parent;
+	WirelessSecurityWPAEAP *self;
 
 	parent = wireless_security_init (sizeof (WirelessSecurityWPAEAP),
 	                                 get_widget,
@@ -112,18 +119,24 @@ ws_wpa_eap_new (NMConnection *connection,
 	                                 "/org/gnome/ControlCenter/network/ws-wpa-eap.ui");
 	if (!parent)
 		return NULL;
+	self = (WirelessSecurityWPAEAP *) parent;
+
+	self->auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "auth_combo"));
+	self->auth_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "auth_label"));
+	self->method_box = GTK_BOX (gtk_builder_get_object (parent->builder, "method_box"));
+	self->notebook = GTK_NOTEBOOK (gtk_builder_get_object (parent->builder, "notebook"));
 
 	wireless_security_set_adhoc_compatible (parent, FALSE);
 	wireless_security_set_hotspot_compatible (parent, FALSE);
 
 	ws_802_1x_auth_combo_init (parent,
-	                           GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "auth_combo")),
-	                           GTK_LABEL (gtk_builder_get_object (parent->builder, "auth_label")),
+	                           self->auth_combo,
+	                           self->auth_label,
 	                           (GCallback) auth_combo_changed_cb,
 	                           connection,
 	                           is_editor,
 	                           secrets_only);
-	auth_combo_changed_cb (GTK_WIDGET (gtk_builder_get_object (parent->builder, "auth_combo")), parent);
+	auth_combo_changed_cb (GTK_WIDGET (self->auth_combo), parent);
 
 	return (WirelessSecurityWPAEAP *) parent;
 }
