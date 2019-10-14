@@ -24,6 +24,7 @@
 
 #include <string.h>
 
+#include "ws-leap.h"
 #include "wireless-security.h"
 #include "helpers.h"
 #include "nma-ui-utils.h"
