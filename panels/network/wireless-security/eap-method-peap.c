@@ -59,18 +59,18 @@ validate (EAPMethod *parent, GError **error)
 	gboolean valid = FALSE;
 	g_autoptr(GError) local_error = NULL;
 
-	if (!eap_method_validate_filepicker (GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_button")),
+	if (!eap_method_validate_filepicker (GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "ca_cert_button")),
 	                                     TYPE_CA_CERT, NULL, NULL, &local_error)) {
 		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-PEAP CA certificate: %s"), local_error->message);
 		return FALSE;
 	}
-	if (eap_method_ca_cert_required (GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_not_required_checkbox")),
-	                                 GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_button")))) {
+	if (eap_method_ca_cert_required (GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check")),
+	                                 GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "ca_cert_button")))) {
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-PEAP CA certificate: no certificate specified"));
 		return FALSE;
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_inner_auth_combo"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 	g_assert (widget);
 
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
@@ -86,8 +86,8 @@ ca_cert_not_required_toggled (EAPMethodPEAP *self)
 {
 	EAPMethod *parent = (EAPMethod *) self;
 
-	eap_method_ca_cert_not_required_toggled (GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_not_required_checkbox")),
-	                                         GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_button")));
+	eap_method_ca_cert_not_required_toggled (GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check")),
+	                                         GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "ca_cert_button")));
 	wireless_security_notify_changed (self->sec_parent);
 }
 
@@ -104,27 +104,27 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 		g_object_unref (method->size_group);
 	method->size_group = g_object_ref (group);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_not_required_checkbox"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_anon_identity_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_version_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "version_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_inner_auth_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_inner_auth_combo"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 	g_assert (widget);
 
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
@@ -154,13 +154,13 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 
 	nm_setting_802_1x_add_eap_method (s_8021x, "peap");
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_anon_identity_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
 	g_assert (widget);
 	text = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (text && strlen (text))
 		g_object_set (s_8021x, NM_SETTING_802_1X_ANONYMOUS_IDENTITY, text, NULL);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_button"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_button"));
 	g_assert (widget);
 	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
 	if (!nm_setting_802_1x_set_ca_cert (s_8021x, filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
@@ -169,7 +169,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	}
 	eap_method_ca_cert_ignore_set (parent, connection, filename, ca_cert_error);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_version_combo"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "version_combo"));
 	peapver_active = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
 	switch (peapver_active) {
 	case 1:  /* PEAP v0 */
@@ -183,7 +183,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 		break;
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_inner_auth_combo"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
 	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
@@ -195,22 +195,22 @@ static void
 inner_auth_combo_changed_cb (EAPMethodPEAP *self)
 {
 	EAPMethod *parent = (EAPMethod *) self;
-	GtkWidget *combo, *vbox;
+	GtkWidget *combo, *box;
 	g_autoptr(EAPMethod) eap = NULL;
 	GList *elt, *children;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	GtkWidget *eap_widget;
 
-	vbox = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_inner_auth_vbox"));
-	g_assert (vbox);
+	box = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_box"));
+	g_assert (box);
 
 	/* Remove any previous wireless security widgets */
-	children = gtk_container_get_children (GTK_CONTAINER (vbox));
+	children = gtk_container_get_children (GTK_CONTAINER (box));
 	for (elt = children; elt; elt = g_list_next (elt))
-		gtk_container_remove (GTK_CONTAINER (vbox), GTK_WIDGET (elt->data));
+		gtk_container_remove (GTK_CONTAINER (box), GTK_WIDGET (elt->data));
 
-	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_inner_auth_combo"));
+	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
@@ -222,7 +222,7 @@ inner_auth_combo_changed_cb (EAPMethodPEAP *self)
 
 	if (self->size_group)
 		eap_method_add_to_size_group (eap, self->size_group);
-	gtk_container_add (GTK_CONTAINER (vbox), eap_widget);
+	gtk_container_add (GTK_CONTAINER (box), eap_widget);
 
 	wireless_security_notify_changed (self->sec_parent);
 }
@@ -301,7 +301,7 @@ inner_auth_combo_init (EAPMethodPEAP *method,
 	if (phase2_auth && !strcasecmp (phase2_auth, "gtc"))
 		active = 2;
 
-	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_inner_auth_combo"));
+	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 	g_assert (combo);
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (auth_model));
@@ -316,7 +316,7 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 {
 	eap_method_phase2_update_secrets_helper (parent,
 	                                         connection,
-	                                         GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "eap_peap_inner_auth_combo")),
+	                                         GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "inner_auth_combo")),
 	                                         I_METHOD_COLUMN);
 }
 
@@ -346,8 +346,8 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          destroy,
 	                          "/org/gnome/ControlCenter/network/eap-method-peap.ui",
-	                          "eap_peap_grid",
-	                          "eap_peap_anon_identity_entry",
+	                          "grid",
+	                          "anon_identity_entry",
 	                          FALSE);
 	if (!parent)
 		return NULL;
@@ -360,12 +360,12 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_not_required_checkbox"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
 	g_assert (widget);
 	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ca_cert_not_required_toggled), method);
 	widget_ca_not_required_checkbox = widget;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_button"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_button"));
 	g_assert (widget);
 	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (widget), TRUE);
 	gtk_file_chooser_button_set_title (GTK_FILE_CHOOSER_BUTTON (widget),
@@ -387,7 +387,7 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 	widget = inner_auth_combo_init (method, connection, s_8021x, secrets_only);
 	inner_auth_combo_changed_cb (method);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_version_combo"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "version_combo"));
 	g_assert (widget);
 	gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
 	if (s_8021x) {
@@ -404,29 +404,29 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 	}
 	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_anon_identity_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
 	if (s_8021x && nm_setting_802_1x_get_anonymous_identity (s_8021x))
 		gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_802_1x_get_anonymous_identity (s_8021x));
 	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
 
 	if (secrets_only) {
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_anon_identity_label"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_label"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_anon_identity_entry"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_label"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_label"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_button"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_button"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_not_required_checkbox"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_inner_auth_label"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_label"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_inner_auth_combo"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_version_label"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "version_label"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_version_combo"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "version_combo"));
 		gtk_widget_hide (widget);
 	}
 

@@ -137,7 +137,7 @@ vpn_proxy_add_to_stack (NetObject    *object,
 
         /* add widgets to size group */
         widget = GTK_WIDGET (gtk_builder_get_object (vpn->builder,
-                                                     "vbox9"));
+                                                     "box"));
         gtk_stack_add_named (stack, widget, net_object_get_id (object));
         return widget;
 }
@@ -156,7 +156,7 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
 
         /* update title */
         widget = GTK_WIDGET (gtk_builder_get_object (vpn->builder,
-                                                     "label_device"));
+                                                     "device_label"));
         /* Translators: this is the title of the connection details
          * window for vpn connections, it is also used to display
          * vpn connections in the device list.
@@ -276,7 +276,7 @@ vpn_proxy_edit (NetObject *object)
         g_autofree gchar *title = NULL;
 
         button = GTK_WIDGET (gtk_builder_get_object (vpn->builder,
-                                                     "button_options"));
+                                                     "options_button"));
         window = gtk_widget_get_toplevel (button);
 
         client = net_object_get_client (object);
@@ -422,7 +422,7 @@ net_vpn_init (NetVpn *vpn)
                                   G_CALLBACK (device_off_toggled), vpn);
 
         widget = GTK_WIDGET (gtk_builder_get_object (vpn->builder,
-                                                     "button_options"));
+                                                     "options_button"));
         g_signal_connect_swapped (widget, "clicked",
                                   G_CALLBACK (edit_connection), vpn);
 }
