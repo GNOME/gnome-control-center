@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkNotebook" id="notebook_view">
+  <object class="GtkNotebook" id="notebook">
     <property name="visible">True</property>
     <property name="can_focus">True</property>
     <property name="show_tabs">False</property>
@@ -72,7 +72,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch" id="switch_hotspot_off">
+              <object class="GtkSwitch" id="hotspot_off_switch">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="halign">end</property>
@@ -101,12 +101,12 @@
             <property name="column_spacing">6</property>
             <property name="column-homogeneous">True</property>
             <child>
-              <object class="GtkLabel" id="heading_hotspot_network_name">
+              <object class="GtkLabel" id="hotspot_network_name_heading_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">1</property>
                 <property name="label" translatable="yes">Network Name</property>
-                <property name="mnemonic_widget">label_hotspot_network_name</property>
+                <property name="mnemonic_widget">hotspot_network_name_label</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
@@ -119,12 +119,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="heading_hotspot_connected">
+              <object class="GtkLabel" id="hotspot_connected_heading_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">1</property>
                 <property name="label" translatable="yes">Connected Devices</property>
-                <property name="mnemonic_widget">label_hotspot_connected</property>
+                <property name="mnemonic_widget">hotspot_connected_label</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
@@ -137,12 +137,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="heading_hotspot_security">
+              <object class="GtkLabel" id="hotspot_security_heading_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">1</property>
                 <property name="label" translatable="yes">Security type</property>
-                <property name="mnemonic_widget">label_hotspot_security</property>
+                <property name="mnemonic_widget">hotspot_security_label</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
@@ -155,7 +155,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_hotspot_network_name">
+              <object class="GtkLabel" id="hotspot_network_name_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -170,7 +170,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_hotspot_connected">
+              <object class="GtkLabel" id="hotspot_connected_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -185,7 +185,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_hotspot_security">
+              <object class="GtkLabel" id="hotspot_security_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -200,12 +200,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="heading_hotspot_security_key">
+              <object class="GtkLabel" id="hotspot_security_key_heading_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">1</property>
                 <property name="label" context="Wi-Fi passkey" translatable="yes">Password</property>
-                <property name="mnemonic_widget">label_hotspot_security_key</property>
+                <property name="mnemonic_widget">hotspot_security_key_label</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
@@ -218,7 +218,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_hotspot_security_key">
+              <object class="GtkLabel" id="hotspot_security_key_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -257,7 +257,7 @@
     <property name="halign">center</property>
     <property name="valign">center</property>
     <child>
-      <object class="GtkLabel" id="heading_list">
+      <object class="GtkLabel" id="title_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">Wi-Fi</property>
@@ -267,7 +267,7 @@
       </object>
     </child>
     <child>
-      <object class="GtkLabel" id="heading_status">
+      <object class="GtkLabel" id="status_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <style>

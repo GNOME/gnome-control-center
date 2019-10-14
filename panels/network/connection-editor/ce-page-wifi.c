@@ -48,7 +48,7 @@ connect_wifi_page (CEPageWifi *page)
         gint i;
 
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
-                                                     "entry_ssid"));
+                                                     "ssid_entry"));
 
         ssid = nm_setting_wireless_get_ssid (page->setting);
         if (ssid)
@@ -60,7 +60,7 @@ connect_wifi_page (CEPageWifi *page)
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
 
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
-                                                     "combo_bssid"));
+                                                     "bssid_combo"));
 
         bssid_array = g_ptr_array_new ();
         for (i = 0; i < nm_setting_wireless_get_num_seen_bssids (page->setting); i++) {
@@ -74,7 +74,7 @@ connect_wifi_page (CEPageWifi *page)
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
 
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
-                                                     "combo_mac"));
+                                                     "mac_combo"));
         mac_list = ce_page_get_mac_list (CE_PAGE (page)->client, NM_TYPE_DEVICE_WIFI,
                                          NM_DEVICE_WIFI_PERMANENT_HW_ADDRESS);
         s_mac_str = nm_setting_wireless_get_mac_address (page->setting);
@@ -84,7 +84,7 @@ connect_wifi_page (CEPageWifi *page)
 
 
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
-                                                     "combo_cloned_mac"));
+                                                     "cloned_mac_combo"));
         cloned_mac = nm_setting_wireless_get_cloned_mac_address (page->setting);
         ce_page_setup_cloned_mac_combo (GTK_COMBO_BOX_TEXT (widget), cloned_mac);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
@@ -100,20 +100,20 @@ ui_to_setting (CEPageWifi *page)
         g_autofree gchar *device_mac = NULL;
         g_autofree gchar *cloned_mac = NULL;
 
-        entry = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "entry_ssid"));
+        entry = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "ssid_entry"));
         utf8_ssid = gtk_entry_get_text (GTK_ENTRY (entry));
         if (!utf8_ssid || !*utf8_ssid)
                 ssid = NULL;
         else {
                 ssid = g_bytes_new_static (utf8_ssid, strlen (utf8_ssid));
         }
-        entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_bssid")));
+        entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (CE_PAGE (page)->builder, "bssid_combo")));
         bssid = gtk_entry_get_text (GTK_ENTRY (entry));
         if (*bssid == '\0')
                 bssid = NULL;
-        entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_mac")));
+        entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (CE_PAGE (page)->builder, "mac_combo")));
         device_mac = ce_page_trim_address (gtk_entry_get_text (GTK_ENTRY (entry)));
-        combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_cloned_mac"));
+        combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "cloned_mac_combo"));
         cloned_mac = ce_page_cloned_mac_get (combo);
 
         g_object_set (page->setting,
@@ -133,7 +133,7 @@ validate (CEPage        *page,
         GtkComboBoxText *combo;
         gboolean ret = TRUE;
 
-        entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (page->builder, "combo_bssid")));
+        entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (page->builder, "bssid_combo")));
         if (!ce_page_address_is_valid (gtk_entry_get_text (GTK_ENTRY (entry)))) {
                 widget_set_error (entry);
                 ret = FALSE;
@@ -141,7 +141,7 @@ validate (CEPage        *page,
                 widget_unset_error (entry);
         }
 
-        entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (page->builder, "combo_mac")));
+        entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (page->builder, "mac_combo")));
         if (!ce_page_address_is_valid (gtk_entry_get_text (GTK_ENTRY (entry)))) {
                 widget_set_error (entry);
                 ret = FALSE;
@@ -149,7 +149,7 @@ validate (CEPage        *page,
                 widget_unset_error (entry);
         }
 
-        combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (page->builder, "combo_cloned_mac"));
+        combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (page->builder, "cloned_mac_combo"));
         if (!ce_page_cloned_mac_combo_valid (combo)) {
                 widget_set_error (gtk_bin_get_child (GTK_BIN (combo)));
                 ret = FALSE;

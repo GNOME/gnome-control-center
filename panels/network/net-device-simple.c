@@ -62,7 +62,7 @@ device_simple_proxy_add_to_stack (NetObject    *object,
 
         /* add widgets to size group */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "vbox6"));
+                                                     "box"));
         gtk_stack_add_named (stack, widget, net_object_get_id (object));
         return widget;
 }
@@ -101,7 +101,7 @@ nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
         nm_device = net_device_get_nm_device (NET_DEVICE (device_simple));
 
         /* set device kind */
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_device"));
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "device_label"));
         g_object_bind_property (device_simple, "title", widget, "label", 0);
 
         /* set up the device on/off switch */
@@ -113,7 +113,7 @@ nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
         update_off_switch_from_device_state (GTK_SWITCH (widget), state, device_simple);
 
         /* set up the Options button */
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_options"));
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "options_button"));
         gtk_widget_set_visible (widget, state != NM_DEVICE_STATE_UNMANAGED);
 }
 
@@ -239,7 +239,7 @@ net_device_simple_init (NetDeviceSimple *device_simple)
                           G_CALLBACK (device_off_toggled), device_simple);
 
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "button_options"));
+                                                     "options_button"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (edit_connection), device_simple);
 }

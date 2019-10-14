@@ -110,8 +110,8 @@ update_last_used (CEPageDetails *page, NMConnection *connection)
         else
                 last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
 out:
-        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_last_used"));
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "label_last_used"));
+        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "last_used_heading_label"));
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "last_used_label"));
         panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), last_used);
 }
 
@@ -224,8 +224,8 @@ connect_details_page (CEPageDetails *page)
         }
         if (speed > 0)
                 speed_label = g_strdup_printf (_("%d Mb/s"), speed);
-        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_speed"));
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "label_speed"));
+        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "speed_heading_label"));
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "speed_label"));
         panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), speed_label);
 
         if (NM_IS_DEVICE_WIFI (page->device))
@@ -233,14 +233,14 @@ connect_details_page (CEPageDetails *page)
         else if (NM_IS_DEVICE_ETHERNET (page->device))
                 hw_address = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (page->device));
 
-        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_mac"));
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "label_mac"));
+        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "mac_heading_label"));
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "mac_label"));
         panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), hw_address);
 
         if (device_is_active && active_ap)
                 security_string = get_ap_security_string (active_ap);
-        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_security"));
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "label_security"));
+        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "security_heading_label"));
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "security_label"));
         panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), security_string);
 
         strength = 0;
@@ -259,26 +259,26 @@ connect_details_page (CEPageDetails *page)
                 strength_label = C_("Signal strength", "Good");
         else
                 strength_label = C_("Signal strength", "Excellent");
-        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_strength"));
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "label_strength"));
+        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "strength_heading_label"));
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "strength_label"));
         panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), strength_label);
 
         /* set IP entries */
-        panel_set_device_widgets (GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_ipv4")),
-                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_ipv4")),
-                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_ipv6")),
-                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_ipv6")),
-                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_dns")),
-                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_dns")),
-                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_route")),
-                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_route")),
+        panel_set_device_widgets (GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "ipv4_heading_label")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "ipv4_label")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "ipv6_heading_label")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "ipv6_label")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "dns_heading_label")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "dns_label")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "route_heading_label")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "route_label")),
                                   device_is_active ? page->device : NULL);
 
         if (!device_is_active && CE_PAGE (page)->connection)
                 update_last_used (page, CE_PAGE (page)->connection);
         else {
-                heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_last_used"));
-                widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "label_last_used"));
+                heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "last_used_heading_label"));
+                widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "last_used_label"));
                 panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), NULL);
         }
 
@@ -307,7 +307,7 @@ connect_details_page (CEPageDetails *page)
         update_restrict_data (page);
 
         /* Forget button */
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "button_forget"));
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "forget_button"));
         g_signal_connect (widget, "clicked", G_CALLBACK (forget_cb), page);
 
         if (g_str_equal (type, NM_SETTING_WIRELESS_SETTING_NAME))

@@ -61,17 +61,17 @@ method_changed (GtkToggleButton *button, CEPageIP6 *page)
         gboolean routes_enabled;
         GtkWidget *widget;
 
-        if (RADIO_IS_ACTIVE ("radio_disabled")) {
+        if (RADIO_IS_ACTIVE ("disabled_radio")) {
                 addr_enabled = FALSE;
                 dns_enabled = FALSE;
                 routes_enabled = FALSE;
         } else {
-                addr_enabled = RADIO_IS_ACTIVE ("radio_manual");
-                dns_enabled = !RADIO_IS_ACTIVE ("radio_local");
-                routes_enabled = !RADIO_IS_ACTIVE ("radio_local");
+                addr_enabled = RADIO_IS_ACTIVE ("manual_radio");
+                dns_enabled = !RADIO_IS_ACTIVE ("local_radio");
+                routes_enabled = !RADIO_IS_ACTIVE ("local_radio");
         }
 
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "address_section"));
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "address_box"));
         gtk_widget_set_visible (widget, addr_enabled);
         gtk_widget_set_sensitive (page->dns_entry, dns_enabled);
         gtk_widget_set_sensitive (page->routes_list, routes_enabled);
@@ -261,13 +261,13 @@ ensure_empty_address_row (CEPageIP6 *page)
 }
 
 static void
-add_address_section (CEPageIP6 *page)
+add_address_box (CEPageIP6 *page)
 {
         GtkWidget *widget;
         GtkWidget *list;
         gint i;
 
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "address_section"));
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "address_box"));
 
         page->address_list = list = gtk_list_box_new ();
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
@@ -428,13 +428,13 @@ add_empty_route_row (CEPageIP6 *page)
 }
 
 static void
-add_routes_section (CEPageIP6 *page)
+add_routes_box (CEPageIP6 *page)
 {
         GtkWidget *widget;
         GtkWidget *list;
         gint i;
 
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_section"));
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "routes_box"));
 
         page->routes_list = list = gtk_list_box_new ();
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
@@ -483,17 +483,17 @@ connect_ip6_page (CEPageIP6 *page)
         gboolean disabled;
         guint method, i;
 
-        add_address_section (page);
+        add_address_box (page);
         add_dns_section (page);
-        add_routes_section (page);
+        add_routes_box (page);
 
-        page->disabled = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_disabled"));
+        page->disabled = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "disabled_radio"));
 
         str_method = nm_setting_ip_config_get_method (page->setting);
         disabled = g_strcmp0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_IGNORE) == 0;
         gtk_toggle_button_set_active (page->disabled, disabled);
         g_signal_connect_swapped (page->disabled, "notify::active", G_CALLBACK (ce_page_changed), page);
-        content = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "page_content"));
+        content = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "content_box"));
         g_object_bind_property (page->disabled, "active",
                                 content, "sensitive",
                                 G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
@@ -518,10 +518,10 @@ connect_ip6_page (CEPageIP6 *page)
 
 
         /* Connect radio buttons */
-        radios[RADIO_AUTOMATIC] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_automatic"));
-        radios[RADIO_DHCP] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_dhcp"));
-        radios[RADIO_LOCAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_local"));
-        radios[RADIO_MANUAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_manual"));
+        radios[RADIO_AUTOMATIC] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "automatic_radio"));
+        radios[RADIO_DHCP] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "dhcp_radio"));
+        radios[RADIO_LOCAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "local_radio"));
+        radios[RADIO_MANUAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "manual_radio"));
         radios[RADIO_DISABLED] = page->disabled;
 
         for (i = RADIO_AUTOMATIC; i < RADIO_DISABLED; i++)
@@ -566,13 +566,13 @@ ui_to_setting (CEPageIP6 *page)
         if (gtk_toggle_button_get_active (page->disabled)) {
                 method = NM_SETTING_IP6_CONFIG_METHOD_IGNORE;
         } else {
-                if (RADIO_IS_ACTIVE ("radio_manual")) {
+                if (RADIO_IS_ACTIVE ("manual_radio")) {
                         method = NM_SETTING_IP6_CONFIG_METHOD_MANUAL;
-                } else if (RADIO_IS_ACTIVE ("radio_local")) {
+                } else if (RADIO_IS_ACTIVE ("local_radio")) {
                         method = NM_SETTING_IP6_CONFIG_METHOD_LINK_LOCAL;
-                } else if (RADIO_IS_ACTIVE ("radio_dhcp")) {
+                } else if (RADIO_IS_ACTIVE ("dhcp_radio")) {
                         method = NM_SETTING_IP6_CONFIG_METHOD_DHCP;
-                } else if (RADIO_IS_ACTIVE ("radio_automatic")) {
+                } else if (RADIO_IS_ACTIVE ("automatic_radio")) {
                         method = NM_SETTING_IP6_CONFIG_METHOD_AUTO;
                 }
         }
