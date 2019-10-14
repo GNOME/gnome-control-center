@@ -78,7 +78,7 @@ key_index_combo_changed_cb (GtkWidget *combo, WirelessSecurity *parent)
 	gtk_entry_set_text (GTK_ENTRY (entry), sec->keys[key_index]);
 	sec->cur_index = key_index;
 
-	wireless_security_changed_cb (combo, parent);
+	wireless_security_notify_changed (parent);
 }
 
 static void
@@ -250,6 +250,12 @@ update_secrets (WirelessSecurity *parent, NMConnection *connection)
 		gtk_entry_set_text (GTK_ENTRY (widget), sec->keys[sec->cur_index]);
 }
 
+static void
+changed_cb (WirelessSecurityWEPKey *self)
+{
+	wireless_security_notify_changed ((WirelessSecurity *) self);
+}
+
 WirelessSecurityWEPKey *
 ws_wep_key_new (NMConnection *connection,
                 NMWepKeyType type,
@@ -307,9 +313,7 @@ ws_wep_key_new (NMConnection *connection,
 		}
 	}
 
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  sec);
+	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), sec);
 	g_signal_connect (G_OBJECT (widget), "insert-text",
 	                  (GCallback) wep_entry_filter_cb,
 	                  sec);
@@ -348,9 +352,7 @@ ws_wep_key_new (NMConnection *connection,
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "auth_method_combo"));
 	gtk_combo_box_set_active (GTK_COMBO_BOX (widget), is_shared_key ? 1 : 0);
 
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  sec);
+	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), sec);
 
 	/* Don't show auth method for adhoc (which always uses open-system) or
 	 * when in "simple" mode.

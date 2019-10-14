@@ -34,6 +34,7 @@
 struct _EAPMethodTLS {
 	EAPMethod parent;
 
+	WirelessSecurity *sec_parent;
 	gboolean editing_connection;
 };
 
@@ -333,6 +334,12 @@ typedef const char * (*PathFunc) (NMSetting8021x *setting);
 typedef NMSetting8021xCKScheme (*SchemeFunc)  (NMSetting8021x *setting);
 
 static void
+changed_cb (EAPMethodTLS *self)
+{
+	wireless_security_notify_changed (self->sec_parent);
+}
+
+static void
 setup_filepicker (GtkFileChooserButton *button,
                   const char *title,
                   WirelessSecurity *ws_parent,
@@ -368,9 +375,7 @@ setup_filepicker (GtkFileChooserButton *button,
 			private_key_picker_helper (parent, filename, FALSE);
 	}
 
-	g_signal_connect (button, "selection-changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (button, "selection-changed", G_CALLBACK (changed_cb), parent);
 
 	filter = eap_method_default_file_chooser_filter_new (privkey);
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (button), filter);
@@ -450,6 +455,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	                                NM_SETTING_802_1X_PHASE2_PRIVATE_KEY_PASSWORD :
 	                                NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD;
 	method = (EAPMethodTLS *) parent;
+	method->sec_parent = ws_parent;
 	method->editing_connection = secrets_only ? FALSE : TRUE;
 
 	if (connection)
@@ -460,15 +466,11 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	g_signal_connect (G_OBJECT (widget), "toggled",
 	                  (GCallback) ca_cert_not_required_toggled,
 	                  parent);
-	g_signal_connect (G_OBJECT (widget), "toggled",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (changed_cb), method);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_identity_entry"));
 	g_assert (widget);
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
 	if (s_8021x && nm_setting_802_1x_get_identity (s_8021x))
 		gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_802_1x_get_identity (s_8021x));
 
@@ -504,9 +506,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_private_key_password_entry"));
 	g_assert (widget);
-	g_signal_connect (G_OBJECT (widget), "changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
+	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
 	nma_utils_setup_password_storage (widget, 0, (NMSetting *) s_8021x, parent->password_flags_name,
