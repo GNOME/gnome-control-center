@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.4"/>
-  <object class="GtkListStore" id="model8">
+  <object class="GtkListStore" id="auth_model">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -12,7 +12,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model9">
+  <object class="GtkListStore" id="version_model">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -29,19 +29,19 @@
       </row>
     </data>
   </object>
-  <object class="GtkGrid" id="eap_peap_grid">
+  <object class="GtkGrid" id="grid">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="column_spacing">6</property>
     <property name="row_spacing">6</property>
     <child>
-      <object class="GtkLabel" id="eap_peap_anon_identity_label">
+      <object class="GtkLabel" id="anon_identity_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">Anony_mous identity</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">eap_peap_anon_identity_entry</property>
+        <property name="mnemonic_widget">anon_identity_entry</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -49,7 +49,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkEntry" id="eap_peap_anon_identity_entry">
+      <object class="GtkEntry" id="anon_identity_entry">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="hexpand">True</property>
@@ -61,13 +61,13 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="eap_peap_ca_cert_label">
+      <object class="GtkLabel" id="ca_cert_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">C_A certificate</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">eap_peap_ca_cert_button</property>
+        <property name="mnemonic_widget">ca_cert_button</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -75,7 +75,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkFileChooserButton" id="eap_peap_ca_cert_button">
+      <object class="GtkFileChooserButton" id="ca_cert_button">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="hexpand">True</property>
@@ -86,7 +86,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkCheckButton" id="eap_peap_ca_cert_not_required_checkbox">
+      <object class="GtkCheckButton" id="ca_cert_not_required_check">
         <property name="label" translatable="yes">No CA certificate is _required</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
@@ -101,13 +101,13 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="eap_peap_version_label">
+      <object class="GtkLabel" id="version_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">PEAP _version</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">eap_peap_version_combo</property>
+        <property name="mnemonic_widget">version_combo</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -115,11 +115,11 @@
       </packing>
     </child>
     <child>
-      <object class="GtkComboBox" id="eap_peap_version_combo">
+      <object class="GtkComboBox" id="version_combo">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="hexpand">True</property>
-        <property name="model">model9</property>
+        <property name="model">version_model</property>
         <child>
           <object class="GtkCellRendererText"/>
           <attributes>
@@ -133,13 +133,13 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="eap_peap_inner_auth_label">
+      <object class="GtkLabel" id="inner_auth_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">_Inner authentication</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">eap_peap_inner_auth_combo</property>
+        <property name="mnemonic_widget">inner_auth_combo</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -147,11 +147,11 @@
       </packing>
     </child>
     <child>
-      <object class="GtkComboBox" id="eap_peap_inner_auth_combo">
+      <object class="GtkComboBox" id="inner_auth_combo">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="hexpand">True</property>
-        <property name="model">model8</property>
+        <property name="model">auth_model</property>
         <child>
           <object class="GtkCellRendererText"/>
           <attributes>
@@ -165,7 +165,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkBox" id="eap_peap_inner_auth_vbox">
+      <object class="GtkBox" id="inner_auth_box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>

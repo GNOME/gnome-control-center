@@ -61,10 +61,10 @@ validate (EAPMethod *parent, GError **error)
 	gboolean provisioning;
 	gboolean valid = TRUE;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_provision_check"));
 	g_assert (widget);
 	provisioning = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_button"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_file_button"));
 	g_assert (widget);
 	file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
 	if (!provisioning && !file) {
@@ -74,7 +74,7 @@ validate (EAPMethod *parent, GError **error)
 	} else
 		widget_unset_error (widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 	g_assert (widget);
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
 	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
@@ -97,23 +97,23 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 		g_object_unref (method->size_group);
 	method->size_group = g_object_ref (group);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_anon_identity_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_file_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_provision_check"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 	g_assert (widget);
 
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
@@ -141,24 +141,24 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 
 	nm_setting_802_1x_add_eap_method (s_8021x, "fast");
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_anon_identity_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
 	g_assert (widget);
 	text = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (text && strlen (text))
 		g_object_set (s_8021x, NM_SETTING_802_1X_ANONYMOUS_IDENTITY, text, NULL);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_button"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_file_button"));
 	g_assert (widget);
 	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
 	g_object_set (s_8021x, NM_SETTING_802_1X_PAC_FILE, filename, NULL);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_provision_check"));
 	enabled = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
 	if (!enabled)
 		g_object_set (G_OBJECT (s_8021x), NM_SETTING_802_1X_PHASE1_FAST_PROVISIONING, "0", NULL);
 	else {
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_combo"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_provision_combo"));
 		pac_provisioning = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
 
 		switch (pac_provisioning) {
@@ -177,7 +177,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 		}
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
 	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
@@ -197,8 +197,8 @@ inner_auth_combo_changed_cb (EAPMethodFAST *self)
 	GtkTreeIter iter;
 	GtkWidget *eap_widget;
 
-	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
-	vbox = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_vbox"));
+	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
+	vbox = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_box"));
 	g_assert (vbox);
 
 	/* Remove any previous wireless security widgets */
@@ -282,7 +282,7 @@ inner_auth_combo_init (EAPMethodFAST *method,
 	if (phase2_auth && !strcasecmp (phase2_auth, "mschapv2"))
 		active = 1;
 
-	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
+	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 	g_assert (combo);
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (auth_model));
@@ -297,7 +297,7 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 {
 	eap_method_phase2_update_secrets_helper (parent,
 	                                         connection,
-	                                         GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo")),
+	                                         GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "inner_auth_combo")),
 	                                         I_METHOD_COLUMN);
 }
 
@@ -309,10 +309,10 @@ pac_toggled_cb (EAPMethodFAST *self)
 	gboolean enabled = FALSE;
 	GtkWidget *provision_combo;
 
-	provision_combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_combo"));
+	provision_combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_provision_combo"));
 	g_return_if_fail (provision_combo);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_provision_check"));
 	enabled = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
 	gtk_widget_set_sensitive (provision_combo, enabled);
@@ -347,8 +347,8 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          destroy,
 	                          "/org/gnome/ControlCenter/network/eap-method-fast.ui",
-	                          "eap_fast_grid",
-	                          "eap_fast_anon_identity_entry",
+	                          "grid",
+	                          "anon_identity_entry",
 	                          FALSE);
 	if (!parent)
 		return NULL;
@@ -362,7 +362,7 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 		s_8021x = nm_connection_get_setting_802_1x (connection);
 
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_combo"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_provision_combo"));
 	g_assert (widget);
 	gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
 	if (s_8021x) {
@@ -383,16 +383,16 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 	gtk_widget_set_sensitive (widget, provisioning_enabled);
 	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_provision_check"));
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), provisioning_enabled);
 	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (pac_toggled_cb), method);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_anon_identity_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
 	if (s_8021x && nm_setting_802_1x_get_anonymous_identity (s_8021x))
 		gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_802_1x_get_anonymous_identity (s_8021x));
 	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), method);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_button"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_file_button"));
 	g_assert (widget);
 	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (widget), TRUE);
 	gtk_file_chooser_button_set_title (GTK_FILE_CHOOSER_BUTTON (widget),
@@ -418,21 +418,21 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 	inner_auth_combo_changed_cb (method);
 
 	if (secrets_only) {
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_anon_identity_label"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_label"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_anon_identity_entry"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_provision_check"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_combo"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_provision_combo"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_label"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_file_label"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_button"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "pac_file_button"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_label"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_label"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 		gtk_widget_hide (widget);
 	}
 
