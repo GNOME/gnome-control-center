@@ -48,10 +48,10 @@ show_toggled_cb (WirelessSecurityWEPKey *self)
 	GtkWidget *widget, *button;
 	gboolean visible;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "key_entry"));
 	g_assert (widget);
 
-	button = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_wep"));
+	button = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_key_check"));
 	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
 }
@@ -65,7 +65,7 @@ key_index_combo_changed_cb (WirelessSecurityWEPKey *self)
 	int key_index;
 
 	/* Save WEP key for old key index */
-	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_entry"));
+	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "key_entry"));
 	key = gtk_entry_get_text (GTK_ENTRY (entry));
 	if (key)
 		g_strlcpy (self->keys[self->cur_index], key, sizeof (self->keys[self->cur_index]));
@@ -97,7 +97,7 @@ destroy (WirelessSecurity *parent)
 static GtkWidget *
 get_widget (WirelessSecurity *parent)
 {
-	return GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_notebook"));
+	return GTK_WIDGET (gtk_builder_get_object (parent->builder, "notebook"));
 }
 
 static gboolean
@@ -108,7 +108,7 @@ validate (WirelessSecurity *parent, GError **error)
 	const char *key;
 	int i;
 
-	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_entry"));
+	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "key_entry"));
 	g_assert (entry);
 
 	key = gtk_entry_get_text (GTK_ENTRY (entry));
@@ -163,7 +163,7 @@ add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "auth_method_label"));
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "key_label"));
 	gtk_size_group_add_widget (group, widget);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "key_index_label"));
@@ -184,7 +184,7 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "auth_method_combo"));
 	auth_alg = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "key_entry"));
 	passwd_entry = widget;
 	key = gtk_entry_get_text (GTK_ENTRY (widget));
 	g_strlcpy (sec->keys[sec->cur_index], key, sizeof (sec->keys[sec->cur_index]));
@@ -224,7 +224,7 @@ wep_entry_filter_cb (WirelessSecurityWEPKey *self,
 	WirelessSecurity *parent = (WirelessSecurity *) self;
 	GtkWidget *widget;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "key_entry"));
 	if (self->type == NM_WEP_KEY_TYPE_KEY) {
 		int i, count = 0;
 		g_autofree gchar *result = g_new (gchar, length+1);
@@ -260,7 +260,7 @@ update_secrets (WirelessSecurity *parent, NMConnection *connection)
 			g_strlcpy (sec->keys[i], tmp, sizeof (sec->keys[i]));
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "key_entry"));
 	if (strlen (sec->keys[sec->cur_index]))
 		gtk_entry_set_text (GTK_ENTRY (widget), sec->keys[sec->cur_index]);
 }
@@ -301,7 +301,7 @@ ws_wep_key_new (NMConnection *connection,
 	sec->password_flags_name = NM_SETTING_WIRELESS_SECURITY_WEP_KEY0;
 	sec->type = type;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "key_entry"));
 	g_assert (widget);
 	gtk_entry_set_width_chars (GTK_ENTRY (widget), 28);
 
@@ -354,7 +354,7 @@ ws_wep_key_new (NMConnection *connection,
 	if (connection)
 		update_secrets (WIRELESS_SECURITY (sec), connection);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_wep"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_key_check"));
 	g_assert (widget);
 	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (show_toggled_cb), sec);
 

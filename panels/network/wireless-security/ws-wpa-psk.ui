@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.4"/>
-  <object class="GtkNotebook" id="wpa_psk_notebook">
+  <object class="GtkNotebook" id="notebook">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="show_tabs">False</property>
     <property name="show_border">False</property>
     <child>
-      <object class="GtkTable" id="wpa_psk_table">
+      <object class="GtkTable">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="n_rows">3</property>
@@ -15,13 +15,13 @@
         <property name="column_spacing">6</property>
         <property name="row_spacing">6</property>
         <child>
-          <object class="GtkLabel" id="wpa_psk_label">
+          <object class="GtkLabel" id="password_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="xalign">1</property>
             <property name="label" translatable="yes">_Password</property>
             <property name="use_underline">True</property>
-            <property name="mnemonic_widget">wpa_psk_entry</property>
+            <property name="mnemonic_widget">password_entry</property>
           </object>
           <packing>
             <property name="x_options">GTK_FILL</property>
@@ -29,7 +29,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="wpa_psk_entry">
+          <object class="GtkEntry" id="password_entry">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="max_length">64</property>
@@ -43,13 +43,13 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="wpa_psk_type_label">
+          <object class="GtkLabel" id="type_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="xalign">1</property>
             <property name="label" translatable="yes">_Type</property>
             <property name="use_underline">True</property>
-            <property name="mnemonic_widget">wpa_psk_type_combo</property>
+            <property name="mnemonic_widget">type_combo</property>
           </object>
           <packing>
             <property name="top_attach">2</property>
@@ -59,7 +59,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="label32">
+          <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="xalign">0</property>
@@ -72,7 +72,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkCheckButton" id="show_checkbutton_wpa">
+          <object class="GtkCheckButton" id="show_password_check">
             <property name="label" translatable="yes">Sho_w password</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -90,7 +90,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkComboBox" id="wpa_psk_type_combo">
+          <object class="GtkComboBox" id="type_combo">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
           </object>
