@@ -48,6 +48,7 @@
             "name" : "pwquality",
             "buildsystem" : "autotools",
             "config-opts" : [
+                "--disable-python-bindings"
             ],
             "sources" : [
                 {
@@ -57,19 +58,54 @@
             ]
         },
         {
+            "name": "intltool",
+            "cleanup": [ "*" ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
+                    "sha256": "67c74d94196b153b774ab9f89b2fa6c6ba79352407037c8c14d5aeb334e959cd"
+                }
+            ]
+        },
+        {
             "name" : "polkit",
             "buildsystem" : "autotools",
             "config-opts" : [
+                "--disable-polkitd",
                 "--disable-man-pages",
                 "--disable-introspection",
+                "--disable-examples",
+                "--disable-gtk-doc",
                 "--disable-libelogind",
-                "--enable-libsystemd-login=no",
-                "--with-systemdsystemunitdir=no"
+                "--disable-libsystemd-login",
+                "--with-systemdsystemunitdir=no",
+                "--with-authdb=dummy",
+                "--with-authfw=none"
+            ],
+            "rm-configure" : true,
+            "cleanup" : [
+                "/bin/*",
+                "/etc/pam.d",
+                "/etc/dbus-1",
+                "/share/dbus-1/system-services/*",
+                "/share/polkit-1",
+                "/lib/polkit-1"
             ],
             "sources" : [
                 {
-                    "type" : "git",
-                    "url" : "git://anongit.freedesktop.org/polkit"
+                    "type" : "archive",
+                    "url" : "https://www.freedesktop.org/software/polkit/releases/polkit-0.116.tar.gz",
+                    "sha256" : "88170c9e711e8db305a12fdb8234fac5706c61969b94e084d0f117d8ec5d34b1"
+                },
+                {
+                    "type" : "patch",
+                    "path" : "polkit-build-Add-option-to-build-without-polkitd.patch"
+                },
+                {
+                    "type" : "file",
+                    "path" : "polkit-autogen",
+                    "dest-filename" : "autogen.sh"
                 }
             ]
         },
@@ -457,13 +493,32 @@
             ]
         },
         {
-            "name" : "samba",
-            "buildsystem" : "autotools",
+            "name" : "lmdb",
+            "buildsystem" : "simple",
+            "build-commands" : [
+                "cd libraries/liblmdb/ && make prefix=/app install"
+            ],
             "sources" : [
                 {
                     "type" : "archive",
-                    "url" : "https://download.samba.org/pub/samba/stable/samba-4.8.1.tar.gz",
-                    "sha256" : "8ef7367507f16b7a5e2f6aed5bcdbd1143feca79aa2a07c9b21292b17d7f789d"
+                    "url" : "https://github.com/LMDB/lmdb/archive/LMDB_0.9.23.tar.gz",
+                    "sha256" : "abf42e91f046787ed642d9eb21812a5c473f3ba5854124484d16eadbe0aa9c81"
+                }
+            ]
+        },
+        {
+            "name" : "samba",
+            "buildsystem" : "autotools",
+            "config-opts" : [
+                "--without-json",
+                "--without-ad-dc",
+                "--without-pam"
+            ],
+            "sources" : [
+                {
+                    "type" : "archive",
+                    "url" : "https://download.samba.org/pub/samba/stable/samba-4.11.0.tar.gz",
+                    "sha256" : "6adf1c74afff1f3f7e14060cc5a36111a6721d644ea51ed1b22da46051e48e9c"
                 }
             ]
         },
@@ -482,9 +537,11 @@
         },
         {
             "name" : "cheese",
-            "buildsystem" : "autotools",
+            "buildsystem" : "meson",
             "config-opts" : [
-                "--disable-introspection"
+                "-Dintrospection=false",
+                "-Dgtk_doc=false",
+                "-Dman=false"
             ],
             "sources" : [
                 {
@@ -709,7 +766,8 @@
                 }
             ],
             "config-opts" : [
-                "-Dtracing=true"
+                "-Dtracing=true",
+                "-Dprofile=development"
             ]
         }
     ]
