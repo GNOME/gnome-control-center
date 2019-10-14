@@ -36,7 +36,7 @@ nm_applet_sources = [
   'ws-wpa-psk.c'
 ]
 
-sources = files(nm_applet_sources) + files('utils.c')
+sources = files(nm_applet_sources)
 
 nm_resource_data = [
   'eap-method-fast.ui',
