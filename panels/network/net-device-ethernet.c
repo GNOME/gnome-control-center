@@ -231,15 +231,13 @@ device_ethernet_refresh_ui (NetDeviceEthernet *device)
 }
 
 static void
-editor_done (NetConnectionEditor *editor,
-             gboolean             success,
-             NetDeviceEthernet   *device)
+editor_done (NetDeviceEthernet *device)
 {
         device_ethernet_refresh_ui (device);
 }
 
 static void
-show_details (GtkButton *button, NetDeviceEthernet *device, const gchar *title)
+show_details (NetDeviceEthernet *device, GtkButton *button, const gchar *title)
 {
         GtkWidget *row;
         NMConnection *connection;
@@ -248,7 +246,7 @@ show_details (GtkButton *button, NetDeviceEthernet *device, const gchar *title)
         NMClient *client;
         NMDevice *nmdev;
 
-        window = gtk_widget_get_toplevel (GTK_WIDGET (button));
+        window = gtk_widget_get_toplevel (GTK_WIDGET (gtk_builder_get_object (device->builder, "vbox6")));
 
         row = g_object_get_data (G_OBJECT (button), "row");
         connection = NM_CONNECTION (g_object_get_data (G_OBJECT (row), "connection"));
@@ -258,25 +256,25 @@ show_details (GtkButton *button, NetDeviceEthernet *device, const gchar *title)
         editor = net_connection_editor_new (GTK_WINDOW (window), connection, nmdev, NULL, client);
         if (title)
                 net_connection_editor_set_title (editor, title);
-        g_signal_connect (editor, "done", G_CALLBACK (editor_done), device);
+        g_signal_connect_swapped (editor, "done", G_CALLBACK (editor_done), device);
         net_connection_editor_run (editor);
 }
 
 static void
-show_details_for_row (GtkButton *button, NetDeviceEthernet *device)
+show_details_for_row (NetDeviceEthernet *device, GtkButton *button)
 {
-        show_details (button, device, NULL);
+        show_details (device, button, NULL);
 }
 
 static void
-show_details_for_wired (GtkButton *button, NetDeviceEthernet *device)
+show_details_for_wired (NetDeviceEthernet *device)
 {
         /* Translators: This is used as the title of the connection
          * details window for ethernet, if there is only a single
          * profile. It is also used to display ethernet in the
          * device list.
          */
-        show_details (button, device, _("Wired"));
+        show_details (device, GTK_BUTTON (device->details_button), _("Wired"));
 }
 
 static void
@@ -348,8 +346,7 @@ add_row (NetDeviceEthernet *device, NMConnection *connection)
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
         g_object_set_data (G_OBJECT (widget), "edit", widget);
         g_object_set_data (G_OBJECT (widget), "row", row);
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (show_details_for_row), device);
+        g_signal_connect_swapped (widget, "clicked", G_CALLBACK (show_details_for_row), device);
 
         gtk_widget_show_all (row);
 
@@ -421,7 +418,7 @@ client_connection_added_cb (NMClient           *client,
 }
 
 static void
-add_profile (GtkButton *button, NetDeviceEthernet *device)
+add_profile (NetDeviceEthernet *device)
 {
         NMConnection *connection;
         NMSettingConnection *sc;
@@ -452,18 +449,16 @@ add_profile (GtkButton *button, NetDeviceEthernet *device)
 
         nm_connection_add_setting (connection, nm_setting_wired_new ());
 
-        window = gtk_widget_get_toplevel (GTK_WIDGET (button));
+        window = gtk_widget_get_toplevel (GTK_WIDGET (gtk_builder_get_object (device->builder, "vbox6")));
 
         nmdev = net_device_get_nm_device (NET_DEVICE (device));
         editor = net_connection_editor_new (GTK_WINDOW (window), connection, nmdev, NULL, client);
-        g_signal_connect (editor, "done", G_CALLBACK (editor_done), device);
+        g_signal_connect_swapped (editor, "done", G_CALLBACK (editor_done), device);
         net_connection_editor_run (editor);
 }
 
 static void
-device_off_toggled (GtkSwitch         *sw,
-                    GParamSpec        *pspec,
-                    NetDeviceEthernet *device)
+device_off_toggled (NetDeviceEthernet *device)
 {
         NMClient *client;
         NMDevice *nm_device;
@@ -475,7 +470,7 @@ device_off_toggled (GtkSwitch         *sw,
         client = net_object_get_client (NET_OBJECT (device));
         nm_device = net_device_get_nm_device (NET_DEVICE (device));
 
-        if (gtk_switch_get_active (sw)) {
+        if (gtk_switch_get_active (GTK_SWITCH (gtk_builder_get_object (device->builder, "device_off_switch")))) {
                 connection = net_device_get_find_connection (NET_DEVICE (device));
                 if (connection != NULL) {
                         nm_client_activate_connection_async (client,
@@ -489,15 +484,13 @@ device_off_toggled (GtkSwitch         *sw,
 }
 
 static void
-device_title_changed (NetDeviceEthernet *device,
-                      GParamSpec        *pspec,
-                      gpointer           user_data)
+device_title_changed (NetDeviceEthernet *device)
 {
         device_ethernet_refresh_ui (device);
 }
 
 static void
-connection_activated (GtkListBox *list, GtkListBoxRow *row, NetDeviceEthernet *device)
+connection_activated (NetDeviceEthernet *device, GtkListBoxRow *row)
 {
         NMClient *client;
         NMDevice *nm_device;
@@ -529,27 +522,27 @@ device_ethernet_constructed (GObject *object)
 
         widget = GTK_WIDGET (gtk_builder_get_object (device->builder,
                                                      "device_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), device);
+        g_signal_connect_swapped (widget, "notify::active",
+                                  G_CALLBACK (device_off_toggled), device);
 
         device->scrolled_window = swin = GTK_WIDGET (gtk_builder_get_object (device->builder, "list"));
         device->list = list = GTK_WIDGET (gtk_list_box_new ());
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
         gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (swin), list);
-        g_signal_connect (list, "row-activated",
-                          G_CALLBACK (connection_activated), device);
+        g_signal_connect_swapped (list, "row-activated",
+                                  G_CALLBACK (connection_activated), device);
         gtk_widget_show (list);
 
         device->details = GTK_WIDGET (gtk_builder_get_object (device->builder, "details"));
 
         device->details_button = GTK_WIDGET (gtk_builder_get_object (device->builder, "details_button"));
-        g_signal_connect (device->details_button, "clicked",
-                          G_CALLBACK (show_details_for_wired), device);
+        g_signal_connect_swapped (device->details_button, "clicked",
+                                  G_CALLBACK (show_details_for_wired), device);
 
         device->add_profile_button = GTK_WIDGET (gtk_builder_get_object (device->builder, "add_profile_button"));
-        g_signal_connect (device->add_profile_button, "clicked",
-                          G_CALLBACK (add_profile), device);
+        g_signal_connect_swapped (device->add_profile_button, "clicked",
+                                  G_CALLBACK (add_profile), device);
 
         client = net_object_get_client (NET_OBJECT (object));
         g_signal_connect_object (client, NM_CLIENT_CONNECTION_ADDED,

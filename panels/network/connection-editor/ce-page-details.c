@@ -116,13 +116,13 @@ out:
 }
 
 static void
-all_user_changed (GtkToggleButton *b, CEPageDetails *page)
+all_user_changed (CEPageDetails *page)
 {
         gboolean all_users;
         NMSettingConnection *sc;
 
         sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-        all_users = gtk_toggle_button_get_active (b);
+        all_users = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON ((gtk_builder_get_object (CE_PAGE (page)->builder, "all_user_check"))));
 
         g_object_set (sc, "permissions", NULL, NULL);
         if (!all_users)
@@ -299,8 +299,8 @@ connect_details_page (CEPageDetails *page)
                                                      "all_user_check"));
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget),
                                       nm_setting_connection_get_num_permissions (sc) == 0);
-        g_signal_connect (widget, "toggled",
-                          G_CALLBACK (all_user_changed), page);
+        g_signal_connect_swapped (widget, "toggled",
+                                  G_CALLBACK (all_user_changed), page);
         g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
 
         /* Restrict Data check */

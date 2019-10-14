@@ -102,7 +102,7 @@ connection_activate_cb (GObject *source_object,
 }
 
 static void
-mobile_connection_changed_cb (GtkComboBox *combo_box, NetDeviceMobile *device_mobile)
+mobile_connection_changed_cb (NetDeviceMobile *device_mobile)
 {
         gboolean ret;
         g_autofree gchar *object_path = NULL;
@@ -117,7 +117,7 @@ mobile_connection_changed_cb (GtkComboBox *combo_box, NetDeviceMobile *device_mo
         if (device_mobile->updating_device)
                 return;
 
-        ret = gtk_combo_box_get_active_iter (combo_box, &iter);
+        ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX (gtk_builder_get_object (device_mobile->builder, "combobox_network")), &iter);
         if (!ret)
                 return;
 
@@ -127,7 +127,7 @@ mobile_connection_changed_cb (GtkComboBox *combo_box, NetDeviceMobile *device_mo
         client = net_object_get_client (NET_OBJECT (device_mobile));
 
         /* get entry */
-        model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo_box));
+        model = gtk_combo_box_get_model (GTK_COMBO_BOX (gtk_builder_get_object (device_mobile->builder, "combobox_network")));
         gtk_tree_model_get (model, &iter,
                             COLUMN_ID, &object_path,
                             -1);
@@ -444,9 +444,7 @@ device_mobile_refresh (NetObject *object)
 }
 
 static void
-device_off_toggled (GtkSwitch *sw,
-                    GParamSpec *pspec,
-                    NetDeviceMobile *device_mobile)
+device_off_toggled (NetDeviceMobile *device_mobile)
 {
         const GPtrArray *acs;
         gboolean active;
@@ -458,7 +456,7 @@ device_off_toggled (GtkSwitch *sw,
         if (device_mobile->updating_device)
                 return;
 
-        active = gtk_switch_get_active (sw);
+        active = gtk_switch_get_active (GTK_SWITCH (gtk_builder_get_object (device_mobile->builder, "device_off_switch")));
         if (active) {
                 client = net_object_get_client (NET_OBJECT (device_mobile));
                 connection = net_device_get_find_connection (NET_DEVICE (device_mobile));
@@ -488,7 +486,7 @@ device_off_toggled (GtkSwitch *sw,
 }
 
 static void
-edit_connection (GtkButton *button, NetDeviceMobile *device_mobile)
+edit_connection (NetDeviceMobile *device_mobile)
 {
         net_object_edit (NET_OBJECT (device_mobile));
 }
@@ -581,16 +579,14 @@ device_mobile_get_registration_info_cb (GObject      *source_object,
 }
 
 static void
-device_mobile_gsm_signal_cb (GDBusProxy *proxy,
-                             gchar      *sender_name,
-                             gchar      *signal_name,
-                             GVariant   *parameters,
-                             gpointer    user_data)
+device_mobile_gsm_signal_cb (NetDeviceMobile *device_mobile,
+                             const gchar     *sender_name,
+                             const gchar     *signal_name,
+                             GVariant        *parameters)
 {
         guint registration_status = 0;
         g_autofree gchar *operator_code = NULL;
         g_autofree gchar *operator_name = NULL;
-        NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
 
         if (!g_str_equal (signal_name, "RegistrationInfo"))
                 return;
@@ -629,10 +625,10 @@ device_mobile_device_got_modem_manager_gsm_cb (GObject      *source_object,
         }
 
         /* Setup value updates */
-        g_signal_connect (device_mobile->gsm_proxy,
-                          "g-signal",
-                          G_CALLBACK (device_mobile_gsm_signal_cb),
-                          device_mobile);
+        g_signal_connect_swapped (device_mobile->gsm_proxy,
+                                  "g-signal",
+                                  G_CALLBACK (device_mobile_gsm_signal_cb),
+                                  device_mobile);
 
         /* Load initial value */
         g_dbus_proxy_call (device_mobile->gsm_proxy,
@@ -771,9 +767,7 @@ net_device_mobile_constructed (GObject *object)
 }
 
 static void
-operator_name_updated (MMModem3gpp     *modem_3gpp_iface,
-                       GParamSpec      *pspec,
-                       NetDeviceMobile *self)
+operator_name_updated (NetDeviceMobile *self)
 {
         device_mobile_refresh_operator_name (self);
 }
@@ -793,10 +787,10 @@ net_device_mobile_setup_modem_object (NetDeviceMobile *self)
         modem_3gpp = mm_object_peek_modem_3gpp (self->mm_object);
         if (modem_3gpp != NULL) {
                 g_assert (self->operator_name_updated == 0);
-                self->operator_name_updated = g_signal_connect (modem_3gpp,
-                                                                "notify::operator-name",
-                                                                G_CALLBACK (operator_name_updated),
-                                                                self);
+                self->operator_name_updated = g_signal_connect_swapped (modem_3gpp,
+                                                                        "notify::operator-name",
+                                                                        G_CALLBACK (operator_name_updated),
+                                                                        self);
                 device_mobile_refresh_operator_name (self);
         }
 }
@@ -901,9 +895,9 @@ net_device_mobile_init (NetDeviceMobile *device_mobile)
         /* setup mobile combobox model */
         combobox = GTK_COMBO_BOX (gtk_builder_get_object (device_mobile->builder,
                                                           "combobox_network"));
-        g_signal_connect (combobox, "changed",
-                          G_CALLBACK (mobile_connection_changed_cb),
-                          device_mobile);
+        g_signal_connect_swapped (combobox, "changed",
+                                  G_CALLBACK (mobile_connection_changed_cb),
+                                  device_mobile);
         renderer = gtk_cell_renderer_text_new ();
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
                                     renderer,
@@ -914,11 +908,11 @@ net_device_mobile_init (NetDeviceMobile *device_mobile)
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
                                                      "device_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), device_mobile);
+        g_signal_connect_swapped (widget, "notify::active",
+                                  G_CALLBACK (device_off_toggled), device_mobile);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
                                                      "button_options"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (edit_connection), device_mobile);
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (edit_connection), device_mobile);
 }
