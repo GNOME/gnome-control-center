@@ -76,14 +76,14 @@ device_mobile_proxy_add_to_stack (NetObject    *object,
 
         /* add widgets to size group */
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
-                                                     "heading_imei"));
+                                                     "imei_heading_label"));
         gtk_size_group_add_widget (heading_size_group, widget);
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
-                                                     "heading_network"));
+                                                     "network_label"));
         gtk_size_group_add_widget (heading_size_group, widget);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
-                                                     "vbox7"));
+                                                     "box"));
         gtk_stack_add_named (stack, widget, net_object_get_id (object));
         return widget;
 }
@@ -259,8 +259,8 @@ device_mobile_refresh_equipment_id (NetDeviceMobile *device_mobile)
                                                   "ControlCenter::EquipmentIdentifier");
         }
 
-        heading = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "heading_imei"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "label_imei"));
+        heading = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "imei_heading_label"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "imei_label"));
         panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), equipment_id);
 }
 
@@ -308,8 +308,8 @@ device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
 {
         GtkWidget *heading, *widget;
 
-        heading = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "heading_provider"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "label_provider"));
+        heading = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "provider_heading_label"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "provider_label"));
 
         if (device_mobile->mm_object != NULL) {
                 g_autofree gchar *operator_name = NULL;
@@ -384,7 +384,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         nm_device = net_device_get_nm_device (NET_DEVICE (device_mobile));
 
         /* set device kind */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "label_device"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "device_label"));
         g_object_bind_property (device_mobile, "title", widget, "label", 0);
 
         /* set up the device on/off switch */
@@ -393,13 +393,13 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         mobilebb_enabled_toggled (device_mobile);
 
         /* set device state, with status */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "label_status"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "status_label"));
         status = panel_device_status_to_localized_string (nm_device, NULL);
         gtk_label_set_label (GTK_LABEL (widget), status);
 
         /* sensitive for other connection types if the device is currently connected */
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
-                                                     "button_options"));
+                                                     "options_button"));
         is_connected = net_device_get_find_connection (NET_DEVICE (device_mobile)) != NULL;
         gtk_widget_set_sensitive (widget, is_connected);
 
@@ -413,22 +413,22 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
 
         /* add possible connections to device */
         liststore = GTK_LIST_STORE (gtk_builder_get_object (device_mobile->builder,
-                                                            "liststore_mobile_connections"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "combobox_network"));
+                                                            "mobile_connections_list_store"));
+        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder, "network_combo"));
         device_add_device_connections (device_mobile,
                                        nm_device,
                                        liststore,
                                        GTK_COMBO_BOX (widget));
 
         /* set IP entries */
-        panel_set_device_widgets (GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_ipv4")),
-                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_ipv4")),
-                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_ipv6")),
-                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_ipv6")),
-                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_dns")),
-                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_dns")),
-                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "heading_route")),
-                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "label_route")),
+        panel_set_device_widgets (GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "ipv4_heading_label")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "ipv4_label")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "ipv6_heading_label")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "ipv6_label")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "dns_heading_label")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "dns_label")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "route_heading_label")),
+                                  GTK_LABEL (gtk_builder_get_object (device_mobile->builder, "route_label")),
                                   nm_device);
 }
 
@@ -890,7 +890,7 @@ net_device_mobile_init (NetDeviceMobile *device_mobile)
 
         /* setup mobile combobox model */
         combobox = GTK_COMBO_BOX (gtk_builder_get_object (device_mobile->builder,
-                                                          "combobox_network"));
+                                                          "network_combo"));
         g_signal_connect_swapped (combobox, "changed",
                                   G_CALLBACK (mobile_connection_changed_cb),
                                   device_mobile);
@@ -908,7 +908,7 @@ net_device_mobile_init (NetDeviceMobile *device_mobile)
                                   G_CALLBACK (device_off_toggled), device_mobile);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->builder,
-                                                     "button_options"));
+                                                     "options_button"));
         g_signal_connect_swapped (widget, "clicked",
                                   G_CALLBACK (edit_connection), device_mobile);
 }

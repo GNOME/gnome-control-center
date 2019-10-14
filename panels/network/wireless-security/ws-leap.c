@@ -43,17 +43,17 @@ show_toggled_cb (WirelessSecurityLEAP *self)
 	GtkWidget *widget;
 	gboolean visible;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, "show_checkbutton_leap"));
+	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, "show_password_check"));
 	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
-	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, "leap_password_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, "password_entry"));
 	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
 }
 
 static GtkWidget *
 get_widget (WirelessSecurity *parent)
 {
-	return GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_grid"));
+	return GTK_WIDGET (gtk_builder_get_object (parent->builder, "grid"));
 }
 
 static gboolean
@@ -63,7 +63,7 @@ validate (WirelessSecurity *parent, GError **error)
 	const char *text;
 	gboolean ret = TRUE;
 
-	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_username_entry"));
+	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "username_entry"));
 	g_assert (entry);
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
 	if (!text || !strlen (text)) {
@@ -73,7 +73,7 @@ validate (WirelessSecurity *parent, GError **error)
 	} else
 		widget_unset_error (entry);
 
-	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_entry"));
+	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_entry"));
 	g_assert (entry);
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
 	if (!text || !strlen (text)) {
@@ -93,10 +93,10 @@ add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 {
 	GtkWidget *widget;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_username_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "username_label"));
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_label"));
 	gtk_size_group_add_widget (group, widget);
 }
 
@@ -113,10 +113,10 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	s_wireless_sec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
 	nm_connection_add_setting (connection, (NMSetting *) s_wireless_sec);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_username_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "username_entry"));
 	leap_username = gtk_entry_get_text (GTK_ENTRY (widget));
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_entry"));
 	passwd_entry = widget;
 	leap_password = gtk_entry_get_text (GTK_ENTRY (widget));
 
@@ -142,7 +142,7 @@ static void
 update_secrets (WirelessSecurity *parent, NMConnection *connection)
 {
 	helper_fill_secret_entry (connection,
-	                          GTK_ENTRY (gtk_builder_get_object (parent->builder, "leap_password_entry")),
+	                          GTK_ENTRY (gtk_builder_get_object (parent->builder, "password_entry")),
 	                          NM_TYPE_SETTING_WIRELESS_SECURITY,
 	                          (HelperSecretFunc) nm_setting_wireless_security_get_leap_password);
 }
@@ -189,7 +189,7 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 	sec->editing_connection = secrets_only ? FALSE : TRUE;
 	sec->password_flags_name = NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "password_entry"));
 	g_assert (widget);
 	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), sec);
 
@@ -200,7 +200,7 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 	if (wsec)
 		update_secrets (WIRELESS_SECURITY (sec), connection);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_username_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "username_entry"));
 	g_assert (widget);
 	g_signal_connect_swapped (widget, "changed", G_CALLBACK (changed_cb), sec);
 	if (wsec)
@@ -209,7 +209,7 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 	if (secrets_only)
 		gtk_widget_hide (widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_leap"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_password_check"));
 	g_assert (widget);
 	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (show_toggled_cb), sec);
 

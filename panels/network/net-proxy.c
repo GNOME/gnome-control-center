@@ -111,7 +111,7 @@ check_wpad_warning (NetProxy *proxy)
         g_string_append (string, "</small>");
 out:
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
-                                                     "label_proxy_warning"));
+                                                     "proxy_warning_label"));
         gtk_label_set_markup (GTK_LABEL (widget), string->str);
         gtk_widget_set_visible (widget, (string->len > 0));
 
@@ -312,7 +312,7 @@ net_proxy_init (NetProxy *proxy)
 
         /* bind the proxy values */
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
-                                                     "entry_proxy_url"));
+                                                     "proxy_url_entry"));
         g_settings_bind (proxy->settings, "autoconfig-url",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
@@ -320,12 +320,12 @@ net_proxy_init (NetProxy *proxy)
         /* bind the HTTP proxy values */
         http_settings = g_settings_get_child (proxy->settings, "http");
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
-                                                     "entry_proxy_http"));
+                                                     "proxy_http_entry"));
         g_settings_bind (http_settings, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
         adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->builder,
-                                                             "adjustment_proxy_port_http"));
+                                                             "proxy_port_http_adjustment"));
         g_settings_bind (http_settings, "port",
                          adjustment, "value",
                          G_SETTINGS_BIND_DEFAULT);
@@ -333,12 +333,12 @@ net_proxy_init (NetProxy *proxy)
         /* bind the HTTPS proxy values */
         https_settings = g_settings_get_child (proxy->settings, "https");
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
-                                                     "entry_proxy_https"));
+                                                     "proxy_https_entry"));
         g_settings_bind (https_settings, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
         adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->builder,
-                                                             "adjustment_proxy_port_https"));
+                                                             "proxy_port_https_adjustment"));
         g_settings_bind (https_settings, "port",
                          adjustment, "value",
                          G_SETTINGS_BIND_DEFAULT);
@@ -346,12 +346,12 @@ net_proxy_init (NetProxy *proxy)
         /* bind the FTP proxy values */
         ftp_settings = g_settings_get_child (proxy->settings, "ftp");
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
-                                                     "entry_proxy_ftp"));
+                                                     "proxy_ftp_entry"));
         g_settings_bind (ftp_settings, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
         adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->builder,
-                                                             "adjustment_proxy_port_ftp"));
+                                                             "proxy_port_ftp_adjustment"));
         g_settings_bind (ftp_settings, "port",
                          adjustment, "value",
                          G_SETTINGS_BIND_DEFAULT);
@@ -359,19 +359,19 @@ net_proxy_init (NetProxy *proxy)
         /* bind the SOCKS proxy values */
         socks_settings = g_settings_get_child (proxy->settings, "socks");
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
-                                                     "entry_proxy_socks"));
+                                                     "proxy_socks_entry"));
         g_settings_bind (socks_settings, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
         adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (proxy->builder,
-                                                             "adjustment_proxy_port_socks"));
+                                                             "proxy_port_socks_adjustment"));
         g_settings_bind (socks_settings, "port",
                          adjustment, "value",
                          G_SETTINGS_BIND_DEFAULT);
 
         /* bind the proxy ignore hosts */
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->builder,
-                                                     "entry_proxy_ignore"));
+                                                     "proxy_ignore_entry"));
         g_settings_bind_with_mapping (proxy->settings, "ignore-hosts",
                                       widget, "text",
                                       G_SETTINGS_BIND_DEFAULT, get_ignore_hosts, set_ignore_hosts,
@@ -379,11 +379,11 @@ net_proxy_init (NetProxy *proxy)
 
         /* radio buttons */
         proxy->mode_radios[MODE_DISABLED] =
-                GTK_RADIO_BUTTON (gtk_builder_get_object (proxy->builder, "radio_none"));
+                GTK_RADIO_BUTTON (gtk_builder_get_object (proxy->builder, "none_radio"));
         proxy->mode_radios[MODE_MANUAL] =
-                GTK_RADIO_BUTTON (gtk_builder_get_object (proxy->builder, "radio_manual"));
+                GTK_RADIO_BUTTON (gtk_builder_get_object (proxy->builder, "manual_radio"));
         proxy->mode_radios[MODE_AUTOMATIC] =
-                GTK_RADIO_BUTTON (gtk_builder_get_object (proxy->builder, "radio_automatic"));
+                GTK_RADIO_BUTTON (gtk_builder_get_object (proxy->builder, "automatic_radio"));
 
         /* setup the radio before connecting to the :toggled signal */
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (proxy->mode_radios[value]), TRUE);
