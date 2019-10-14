@@ -82,9 +82,9 @@ validate (EAPMethod *parent, GError **error)
 }
 
 static void
-ca_cert_not_required_toggled (GtkWidget *ignored, gpointer user_data)
+ca_cert_not_required_toggled (EAPMethodPEAP *self)
 {
-	EAPMethod *parent = user_data;
+	EAPMethod *parent = (EAPMethod *) self;
 
 	eap_method_ca_cert_not_required_toggled (GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_not_required_checkbox")),
 	                                         GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_button")));
@@ -191,11 +191,10 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	eap_method_fill_connection (eap, connection, flags);
 }
 static void
-inner_auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
+inner_auth_combo_changed_cb (EAPMethodPEAP *self)
 {
-	EAPMethod *parent = (EAPMethod *) user_data;
-	EAPMethodPEAP *method = (EAPMethodPEAP *) parent;
-	GtkWidget *vbox;
+	EAPMethod *parent = (EAPMethod *) self;
+	GtkWidget *combo, *vbox;
 	g_autoptr(EAPMethod) eap = NULL;
 	GList *elt, *children;
 	GtkTreeModel *model;
@@ -210,6 +209,7 @@ inner_auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 	for (elt = children; elt; elt = g_list_next (elt))
 		gtk_container_remove (GTK_CONTAINER (vbox), GTK_WIDGET (elt->data));
 
+	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_inner_auth_combo"));
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
@@ -219,11 +219,11 @@ inner_auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 	g_assert (eap_widget);
 	gtk_widget_unparent (eap_widget);
 
-	if (method->size_group)
-		eap_method_add_to_size_group (eap, method->size_group);
+	if (self->size_group)
+		eap_method_add_to_size_group (eap, self->size_group);
 	gtk_container_add (GTK_CONTAINER (vbox), eap_widget);
 
-	wireless_security_notify_changed (method->sec_parent);
+	wireless_security_notify_changed (self->sec_parent);
 }
 
 static GtkWidget *
@@ -306,9 +306,7 @@ inner_auth_combo_init (EAPMethodPEAP *method,
 	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (auth_model));
 	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), active);
 
-	g_signal_connect (G_OBJECT (combo), "changed",
-	                  (GCallback) inner_auth_combo_changed_cb,
-	                  method);
+	g_signal_connect_swapped (combo, "changed", G_CALLBACK (inner_auth_combo_changed_cb), method);
 	return combo;
 }
 
@@ -363,9 +361,7 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_ca_cert_not_required_checkbox"));
 	g_assert (widget);
-	g_signal_connect (G_OBJECT (widget), "toggled",
-	                  (GCallback) ca_cert_not_required_toggled,
-	                  parent);
+	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ca_cert_not_required_toggled), method);
 	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (changed_cb), method);
 	widget_ca_not_required_checkbox = widget;
 
@@ -389,7 +385,7 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 	}
 
 	widget = inner_auth_combo_init (method, connection, s_8021x, secrets_only);
-	inner_auth_combo_changed_cb (widget, (gpointer) method);
+	inner_auth_combo_changed_cb (method);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_peap_version_combo"));
 	g_assert (widget);
