@@ -23,22 +23,11 @@
 #include <nm-setting-wired.h>
 #include <nm-setting-connection.h>
 
-gboolean utils_char_is_ascii_print (char character);
-
 #define NMA_ERROR (g_quark_from_static_string ("nma-error-quark"))
 
 typedef enum  {
 	NMA_ERROR_GENERIC
 } NMAError;
-
-typedef gboolean (*UtilsFilterGtkEditableFunc) (char character);
-gboolean utils_filter_editable_on_insert_text (GtkEditable *editable,
-					       const gchar *text,
-					       gint length,
-					       gint *position,
-					       void *user_data,
-					       UtilsFilterGtkEditableFunc validate_character,
-					       gpointer block_func);
 
 extern void widget_set_error (GtkWidget *widget);
 extern void widget_unset_error (GtkWidget *widget);
