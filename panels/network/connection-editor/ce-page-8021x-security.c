@@ -29,6 +29,7 @@
 
 #include <NetworkManager.h>
 
+#include "ws-wpa-eap.h"
 #include "wireless-security.h"
 #include "ce-page-ethernet.h"
 #include "ce-page-8021x-security.h"

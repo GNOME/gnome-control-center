@@ -25,6 +25,7 @@
 #include <ctype.h>
 #include <string.h>
 
+#include "ws-wpa-psk.h"
 #include "wireless-security.h"
 #include "helpers.h"
 #include "nma-ui-utils.h"
