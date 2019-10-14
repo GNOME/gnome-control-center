@@ -234,7 +234,7 @@ connect_details_page (CEPageDetails *page)
                 hw_address = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (page->device));
 
         heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_mac"));
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "label_mac"));
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "mac_label"));
         panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), hw_address);
 
         if (device_is_active && active_ap)
@@ -265,10 +265,10 @@ connect_details_page (CEPageDetails *page)
 
         /* set IP entries */
         panel_set_device_widgets (GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_ipv4")),
-                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_ipv4")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "ipv4_label")),
                                   GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_ipv6")),
-                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_ipv6")),
-                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_dns")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "ipv6_label")),
+                                  GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "dns_label")),
                                   GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_dns")),
                                   GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_route")),
                                   GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "label_route")),
