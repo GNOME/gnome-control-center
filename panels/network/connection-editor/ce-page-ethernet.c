@@ -34,9 +34,9 @@
 G_DEFINE_TYPE (CEPageEthernet, ce_page_ethernet, CE_TYPE_PAGE)
 
 static void
-mtu_changed (GtkSpinButton *mtu, CEPageEthernet *page)
+mtu_changed (CEPageEthernet *page)
 {
-        if (gtk_spin_button_get_value_as_int (mtu) == 0)
+        if (gtk_spin_button_get_value_as_int (page->mtu) == 0)
                 gtk_widget_hide (page->mtu_label);
         else
                 gtk_widget_show (page->mtu_label);
@@ -74,9 +74,8 @@ connect_ethernet_page (CEPageEthernet *page)
                           G_CALLBACK (ce_spin_output_with_default),
                           GINT_TO_POINTER (mtu_def));
         gtk_spin_button_set_value (page->mtu, (gdouble) nm_setting_wired_get_mtu (setting));
-        g_signal_connect (page->mtu, "value-changed",
-                          G_CALLBACK (mtu_changed), page);
-        mtu_changed (page->mtu, page);
+        g_signal_connect_swapped (page->mtu, "value-changed", G_CALLBACK (mtu_changed), page);
+        mtu_changed (page);
 
         g_signal_connect_swapped (page->name, "changed", G_CALLBACK (ce_page_changed), page);
         g_signal_connect_swapped (page->mtu, "value-changed", G_CALLBACK (ce_page_changed), page);

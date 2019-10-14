@@ -37,10 +37,8 @@
 G_DEFINE_TYPE (CEPage8021xSecurity, ce_page_8021x_security, CE_TYPE_PAGE)
 
 static void
-enable_toggled (GObject *sw, GParamSpec *pspec, gpointer user_data)
+enable_toggled (CEPage8021xSecurity *page)
 {
-	CEPage8021xSecurity *page = CE_PAGE_8021X_SECURITY (user_data);
-
 	gtk_widget_set_sensitive (page->security_widget, gtk_switch_get_active (page->enabled));
 	ce_page_changed (CE_PAGE (page));
 }
@@ -79,7 +77,7 @@ finish_setup (CEPage8021xSecurity *page, gpointer unused, GError *error, gpointe
 		gtk_container_remove (GTK_CONTAINER (parent), page->security_widget);
 
 	gtk_switch_set_active (page->enabled, page->initial_have_8021x);
-	g_signal_connect (page->enabled, "notify::active", G_CALLBACK (enable_toggled), page);
+	g_signal_connect_swapped (page->enabled, "notify::active", G_CALLBACK (enable_toggled), page);
 	gtk_widget_set_sensitive (page->security_widget, page->initial_have_8021x);
 
         gtk_size_group_add_widget (page->group, heading);

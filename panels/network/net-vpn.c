@@ -223,9 +223,7 @@ vpn_proxy_refresh (NetObject *object)
 }
 
 static void
-device_off_toggled (GtkSwitch *sw,
-                    GParamSpec *pspec,
-                    NetVpn *vpn)
+device_off_toggled (NetVpn *vpn)
 {
         const GPtrArray *acs;
         gboolean active;
@@ -236,7 +234,7 @@ device_off_toggled (GtkSwitch *sw,
         if (vpn->updating_device)
                 return;
 
-        active = gtk_switch_get_active (sw);
+        active = gtk_switch_get_active (GTK_SWITCH (gtk_builder_get_object (vpn->builder, "device_off_switch")));
         if (active) {
                 client = net_object_get_client (NET_OBJECT (vpn));
                 nm_client_activate_connection_async (client,
@@ -259,15 +257,13 @@ device_off_toggled (GtkSwitch *sw,
 }
 
 static void
-edit_connection (GtkButton *button, NetVpn *vpn)
+edit_connection (NetVpn *vpn)
 {
         net_object_edit (NET_OBJECT (vpn));
 }
 
 static void
-editor_done (NetConnectionEditor *editor,
-             gboolean             success,
-             NetVpn              *vpn)
+editor_done (NetVpn *vpn)
 {
         net_object_refresh (NET_OBJECT (vpn));
         g_object_unref (vpn);
@@ -294,7 +290,7 @@ vpn_proxy_edit (NetObject *object)
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (vpn->connection));
         net_connection_editor_set_title (editor, title);
 
-        g_signal_connect (editor, "done", G_CALLBACK (editor_done), g_object_ref (vpn));
+        g_signal_connect_swapped (editor, "done", G_CALLBACK (editor_done), g_object_ref (vpn));
         net_connection_editor_run (editor);
 }
 
@@ -425,11 +421,11 @@ net_vpn_init (NetVpn *vpn)
 
         widget = GTK_WIDGET (gtk_builder_get_object (vpn->builder,
                                                      "device_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), vpn);
+        g_signal_connect_swapped (widget, "notify::active",
+                                  G_CALLBACK (device_off_toggled), vpn);
 
         widget = GTK_WIDGET (gtk_builder_get_object (vpn->builder,
                                                      "button_options"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (edit_connection), vpn);
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (edit_connection), vpn);
 }
