@@ -87,6 +87,7 @@ ca_cert_not_required_toggled (EAPMethodTTLS *self)
 	EAPMethod *parent = (EAPMethod *) self;
 	eap_method_ca_cert_not_required_toggled (GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_not_required_checkbox")),
 	                                         GTK_FILE_CHOOSER (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_button")));
+	wireless_security_notify_changed (self->sec_parent);
 }
 
 static void
@@ -416,7 +417,6 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_not_required_checkbox"));
 	g_assert (widget);
 	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ca_cert_not_required_toggled), method);
-	g_signal_connect_swapped (widget, "toggled", G_CALLBACK (changed_cb), method);
 	widget_ca_not_required_checkbox = widget;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_button"));
