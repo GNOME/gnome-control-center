@@ -330,7 +330,8 @@ on_file_copied_cb (GObject      *source,
                    GAsyncResult *result,
                    gpointer      user_data)
 {
-  BgRecentSource *self = BG_RECENT_SOURCE (user_data);
+  g_autoptr(BgRecentSource) self = BG_RECENT_SOURCE (user_data);
+  g_autofree gchar *original_file = NULL;
   g_autoptr(GError) error = NULL;
 
   g_file_copy_finish (G_FILE (source), result, &error);
@@ -339,14 +340,11 @@ on_file_copied_cb (GObject      *source,
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_critical ("Failed to copy file: %s", error->message);
-    }
-  else
-    {
-      g_autofree gchar *original_file = g_file_get_path (G_FILE (source));
-      g_debug ("Successfully copied wallpaper: %s", original_file);
+      return;
     }
 
-  g_object_unref (self);
+   original_file = g_file_get_path (G_FILE (source));
+   g_debug ("Successfully copied wallpaper: %s", original_file);
 }
 
 static void
@@ -354,7 +352,8 @@ on_file_deleted_cb (GObject      *source,
                     GAsyncResult *result,
                     gpointer      user_data)
 {
-  BgRecentSource *self = BG_RECENT_SOURCE (user_data);
+  g_autoptr(BgRecentSource) self = BG_RECENT_SOURCE (user_data);
+  g_autofree gchar *original_file = NULL;
   g_autoptr(GError) error = NULL;
 
   g_file_delete_finish (G_FILE (source), result, &error);
@@ -363,14 +362,11 @@ on_file_deleted_cb (GObject      *source,
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_critical ("Failed to delete wallpaper: %s", error->message);
-    }
-  else
-    {
-      g_autofree gchar *original_file = g_file_get_path (G_FILE (source));
-      g_debug ("Successfully deleted wallpaper: %s", original_file);
+      return;
     }
 
-  g_object_unref (self);
+  original_file = g_file_get_path (G_FILE (source));
+  g_debug ("Successfully deleted wallpaper: %s", original_file);
 }
 
 /* GObject overrides */
