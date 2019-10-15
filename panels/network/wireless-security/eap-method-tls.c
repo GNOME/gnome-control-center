@@ -442,7 +442,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          NULL,
 	                          "/org/gnome/ControlCenter/network/eap-method-tls.ui",
-	                          "eap_tls_notebook",
+	                          "eap_tls_grid",
 	                          "eap_tls_identity_entry",
 	                          phase2);
 	if (!parent)

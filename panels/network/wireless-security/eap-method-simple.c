@@ -266,7 +266,7 @@ destroy (EAPMethod *parent)
 	EAPMethodSimple *method = (EAPMethodSimple *) parent;
 	GtkWidget *widget;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_notebook"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_grid"));
 	g_assert (widget);
 	g_signal_handlers_disconnect_by_data (widget, method);
 
@@ -296,7 +296,7 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          destroy,
 	                          "/org/gnome/ControlCenter/network/eap-method-simple.ui",
-	                          "eap_simple_notebook",
+	                          "eap_simple_grid",
 	                          "eap_simple_username_entry",
 	                          flags & EAP_METHOD_SIMPLE_FLAG_PHASE2);
 	if (!parent)
@@ -309,7 +309,7 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	method->type = type;
 	g_assert (type < EAP_METHOD_SIMPLE_TYPE_LAST);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_notebook"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_grid"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "realize",
 	                  (GCallback) widgets_realized,

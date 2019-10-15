@@ -342,7 +342,7 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          destroy,
 	                          "/org/gnome/ControlCenter/network/eap-method-fast.ui",
-	                          "eap_fast_notebook",
+	                          "eap_fast_grid",
 	                          "eap_fast_anon_identity_entry",
 	                          FALSE);
 	if (!parent)
