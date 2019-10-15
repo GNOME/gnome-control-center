@@ -59,7 +59,6 @@ struct _NetDeviceWifi
         NetDevice                parent;
 
         GtkBuilder              *builder;
-        GtkWidget               *details_dialog;
         GtkSwitch               *hotspot_switch;
         gboolean                 updating_device;
         gchar                   *selected_ssid_title;
@@ -106,11 +105,6 @@ device_wifi_proxy_add_to_stack (NetObject    *object,
 
         nmdevice = net_device_get_nm_device (NET_DEVICE (object));
 
-        /* add widgets to size group */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder,
-                                                     "heading_ipv4"));
-        gtk_size_group_add_widget (heading_size_group, widget);
-
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder,
                                                      "notebook_view"));
         gtk_stack_add_titled (stack, widget,
@@ -118,45 +112,6 @@ device_wifi_proxy_add_to_stack (NetObject    *object,
                               nm_device_get_description (nmdevice));
 
         return widget;
-}
-
-static gchar *
-get_ap_security_string (NMAccessPoint *ap)
-{
-        NM80211ApSecurityFlags wpa_flags, rsn_flags;
-        NM80211ApFlags flags;
-        GString *str;
-
-        flags = nm_access_point_get_flags (ap);
-        wpa_flags = nm_access_point_get_wpa_flags (ap);
-        rsn_flags = nm_access_point_get_rsn_flags (ap);
-
-        str = g_string_new ("");
-        if ((flags & NM_802_11_AP_FLAGS_PRIVACY) &&
-            (wpa_flags == NM_802_11_AP_SEC_NONE) &&
-            (rsn_flags == NM_802_11_AP_SEC_NONE)) {
-                /* TRANSLATORS: this WEP WiFi security */
-                g_string_append_printf (str, "%s, ", _("WEP"));
-        }
-        if (wpa_flags != NM_802_11_AP_SEC_NONE) {
-                /* TRANSLATORS: this WPA WiFi security */
-                g_string_append_printf (str, "%s, ", _("WPA"));
-        }
-        if (rsn_flags != NM_802_11_AP_SEC_NONE) {
-                /* TRANSLATORS: this WPA WiFi security */
-                g_string_append_printf (str, "%s, ", _("WPA2"));
-        }
-        if ((wpa_flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X) ||
-            (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X)) {
-                /* TRANSLATORS: this Enterprise WiFi security */
-                g_string_append_printf (str, "%s, ", _("Enterprise"));
-        }
-        if (str->len > 0)
-                g_string_set_size (str, str->len - 2);
-        else {
-                g_string_append (str, C_("Wifi security", "None"));
-        }
-        return g_string_free (str, FALSE);
 }
 
 static void
@@ -381,44 +336,6 @@ nm_device_wifi_refresh_hotspot (NetDeviceWifi *device_wifi)
 }
 
 static void
-update_last_used (NetDeviceWifi *device_wifi, NMConnection *connection)
-{
-        g_autofree gchar *last_used = NULL;
-        g_autoptr(GDateTime) now = NULL;
-        g_autoptr(GDateTime) then = NULL;
-        gint days;
-        GTimeSpan diff;
-        guint64 timestamp;
-        NMSettingConnection *s_con;
-        GtkWidget *heading, *widget;
-
-        s_con = nm_connection_get_setting_connection (connection);
-        if (s_con == NULL)
-                goto out;
-        timestamp = nm_setting_connection_get_timestamp (s_con);
-        if (timestamp == 0) {
-                last_used = g_strdup (_("never"));
-                goto out;
-        }
-
-        /* calculate the amount of time that has elapsed */
-        now = g_date_time_new_now_utc ();
-        then = g_date_time_new_from_unix_utc (timestamp);
-        diff = g_date_time_difference  (now, then);
-        days = diff / G_TIME_SPAN_DAY;
-        if (days == 0)
-                last_used = g_strdup (_("today"));
-        else if (days == 1)
-                last_used = g_strdup (_("yesterday"));
-        else
-                last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
-out:
-        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_last_used"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_last_used"));
-        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), last_used);
-}
-
-static void
 set_scanning (NetDeviceWifi *self,
               gboolean       scanning,
               gint64         last_scan)
@@ -481,19 +398,9 @@ request_scan (gpointer user_data)
 static void
 nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 {
-        const gchar *str;
-        g_autofree gchar *speed_text = NULL;
-        g_autofree gchar *security_text = NULL;
-        gint strength = 0;
-        guint speed = 0;
-        NMAccessPoint *active_ap;
         NMDevice *nm_device;
-        NMDeviceState state;
         NMClient *client;
-        NMAccessPoint *ap;
-        NMConnection *connection;
-        GtkWidget *dialog;
-        GtkWidget *heading, *widget;
+        GtkWidget *widget;
         g_autofree gchar *status = NULL;
 
         if (device_is_hotspot (device_wifi)) {
@@ -512,88 +419,10 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                 request_scan (device_wifi);
         }
 
-        dialog = device_wifi->details_dialog;
-
-        ap = g_object_get_data (G_OBJECT (dialog), "ap");
-        connection = g_object_get_data (G_OBJECT (dialog), "connection");
-
         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
-        active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (nm_device));
-
-        state = nm_device_get_state (nm_device);
 
         /* keep this in sync with the signal handler setup in cc_network_panel_init */
         wireless_enabled_toggled (client, NULL, device_wifi);
-
-        if (ap != active_ap)
-                speed = 0;
-        else if (state != NM_DEVICE_STATE_UNAVAILABLE)
-                speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (nm_device));
-        speed /= 1000;
-        if (speed > 0) {
-                /* Translators: network device speed */
-                speed_text = g_strdup_printf (_("%d Mb/s"), speed);
-        }
-        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_speed"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_speed"));
-        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), speed_text);
-
-        /* device MAC */
-        str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
-        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_mac"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_mac"));
-        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), str);
-
-        /* security */
-        if (ap == active_ap && active_ap != NULL)
-                security_text = get_ap_security_string (active_ap);
-        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_security"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_security"));
-        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), security_text);
-
-        /* signal strength */
-        if (ap != NULL)
-                strength = nm_access_point_get_strength (ap);
-        else
-                strength = 0;
-        if (strength <= 0)
-                str = NULL;
-        else if (strength < 20)
-                str = C_("Signal strength", "None");
-        else if (strength < 40)
-                str = C_("Signal strength", "Weak");
-        else if (strength < 50)
-                str = C_("Signal strength", "Ok");
-        else if (strength < 80)
-                str = C_("Signal strength", "Good");
-        else
-                str = C_("Signal strength", "Excellent");
-        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_strength"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_strength"));
-        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), str);
-
-        /* device MAC */
-        if (ap != active_ap)
-                str = NULL;
-        else
-                str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
-        heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_mac"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_mac"));
-        panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), str);
-
-        /* set IP entries */
-        if (ap != active_ap)
-                panel_set_device_widgets (device_wifi->builder, NULL);
-        else
-                panel_set_device_widgets (device_wifi->builder, nm_device);
-
-        if (ap != active_ap && connection)
-                update_last_used (device_wifi, connection);
-        else {
-                heading = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_last_used"));
-                widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "label_last_used"));
-                panel_set_device_widget_details (GTK_LABEL (heading), GTK_LABEL (widget), NULL);
-        }
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder, "heading_status"));
         status = panel_device_status_to_localized_string (nm_device, NULL);
@@ -1157,7 +986,6 @@ net_device_wifi_finalize (GObject *object)
         }
         disable_scan_timeout (device_wifi);
 
-        g_clear_pointer (&device_wifi->details_dialog, gtk_widget_destroy);
         g_object_unref (device_wifi->builder);
         g_free (device_wifi->selected_ssid_title);
         g_free (device_wifi->selected_connection_id);
@@ -1594,10 +1422,6 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
         }
 
         device_wifi->cancellable = g_cancellable_new ();
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder,
-                                                     "details_dialog"));
-        device_wifi->details_dialog = widget;
 
         /* setup wifi views */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->builder,
