@@ -97,8 +97,6 @@ resource_data = files(
   'data/timezone_7_dim.png',
   'data/timezone_-7.png',
   'data/timezone_7.png',
-  'data/timezone_8.5_dim.png',
-  'data/timezone_8.5.png',
   'data/timezone_8.75_dim.png',
   'data/timezone_8.75.png',
   'data/timezone_-8_dim.png',
