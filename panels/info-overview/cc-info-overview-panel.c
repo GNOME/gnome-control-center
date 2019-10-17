@@ -196,79 +196,11 @@ load_gnome_version (char **version,
   return FALSE;
 };
 
-static char *
-get_renderer_from_session (void)
-{
-  g_autoptr(GDBusProxy) session_proxy = NULL;
-  g_autoptr(GVariant) renderer_variant = NULL;
-  char *renderer;
-  g_autoptr(GError) error = NULL;
-
-  session_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                                 G_DBUS_PROXY_FLAGS_NONE,
-                                                 NULL,
-                                                 "org.gnome.SessionManager",
-                                                 "/org/gnome/SessionManager",
-                                                 "org.gnome.SessionManager",
-                                                 NULL, &error);
-  if (error != NULL)
-    {
-      g_warning ("Unable to connect to create a proxy for org.gnome.SessionManager: %s",
-                 error->message);
-      return NULL;
-    }
-
-  renderer_variant = g_dbus_proxy_get_cached_property (session_proxy, "Renderer");
-
-  if (!renderer_variant)
-    {
-      g_warning ("Unable to retrieve org.gnome.SessionManager.Renderer property");
-      return NULL;
-    }
-
-  renderer = info_cleanup (g_variant_get_string (renderer_variant, NULL));
-
-  return renderer;
-}
-
-static char *
-get_renderer_from_helper (gboolean discrete_gpu)
-{
-  int status;
-  char *argv[] = { GNOME_SESSION_DIR "/gnome-session-check-accelerated", NULL };
-  g_auto(GStrv) envp = NULL;
-  g_autofree char *renderer = NULL;
-  g_autoptr(GError) error = NULL;
-
-  if (discrete_gpu)
-    {
-      envp = g_get_environ ();
-      envp = g_environ_setenv (envp, "DRI_PRIME", "1", TRUE);
-    }
-
-  if (!g_spawn_sync (NULL, (char **) argv, envp, 0, NULL, NULL, &renderer, NULL, &status, &error))
-    {
-      g_debug ("Failed to get %s GPU: %s",
-               discrete_gpu ? "discrete" : "integrated",
-               error->message);
-      return NULL;
-    }
-
-  if (!g_spawn_check_exit_status (status, NULL))
-    return NULL;
-
-  if (renderer == NULL || *renderer == '\0')
-    return NULL;
-
-  return info_cleanup (renderer);
-}
-
-static gboolean
-has_dual_gpu (void)
+static char **
+get_gpus_from_switcheroo (void)
 {
   g_autoptr(GDBusProxy) switcheroo_proxy = NULL;
-  g_autoptr(GVariant) dualgpu_variant = NULL;
-  gboolean ret;
+  g_autoptr(GVariant) variant = NULL;
   g_autoptr(GError) error = NULL;
 
   switcheroo_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
@@ -285,61 +217,38 @@ has_dual_gpu (void)
       return FALSE;
     }
 
-  dualgpu_variant = g_dbus_proxy_get_cached_property (switcheroo_proxy, "HasDualGpu");
+  variant = g_dbus_proxy_get_cached_property (switcheroo_proxy, "GPUs");
 
-  if (!dualgpu_variant)
+  if (!variant)
     {
-      g_debug ("Unable to retrieve net.hadess.SwitcherooControl.HasDualGpu property, the daemon is likely not running");
-      return FALSE;
+      g_debug ("Unable to retrieve net.hadess.SwitcherooControl.GPUs property, the daemon is likely not running");
+      return NULL;
     }
 
-  ret = g_variant_get_boolean (dualgpu_variant);
-
-  if (ret)
-    g_debug ("Dual-GPU machine detected");
-
-  return ret;
+  return g_strdupv ((char **) g_variant_get_strv (variant, NULL));
 }
 
 static gchar *
 get_graphics_hardware_string (void)
 {
-  GdkDisplay *display;
+  char **gpus;
+  GString *s;
+  guint i;
 
-  display = gdk_display_get_default ();
+  gpus = get_gpus_from_switcheroo ();
+  if (!gpus)
+    return g_strdup (_("Unknown"));
 
-#if defined(GDK_WINDOWING_X11) || defined(GDK_WINDOWING_WAYLAND)
-  gboolean x11_or_wayland = FALSE;
-#ifdef GDK_WINDOWING_X11
-  x11_or_wayland = GDK_IS_X11_DISPLAY (display);
-#endif
-#ifdef GDK_WINDOWING_WAYLAND
-  x11_or_wayland = x11_or_wayland || GDK_IS_WAYLAND_DISPLAY (display);
-#endif
-
-  if (x11_or_wayland)
+  s = g_string_new (NULL);
+  for (i = 0; gpus[i] != NULL; i++)
     {
-      g_autofree char *discrete_renderer = NULL;
-      g_autofree char *renderer = NULL;
-
-      renderer = get_renderer_from_session ();
-      if (!renderer)
-        renderer = get_renderer_from_helper (FALSE);
-      if (has_dual_gpu ())
-        discrete_renderer = get_renderer_from_helper (TRUE);
-
-      if (renderer != NULL)
-        {
-          if (discrete_renderer != NULL)
-            return g_strdup_printf ("%s / %s",
-                                    renderer,
-                                    discrete_renderer);
-          return g_strdup (renderer);
-        }
+      g_string_append (s, gpus[i]);
+      if (gpus[i + 1] != NULL)
+        g_string_append (s, " / ");
     }
-#endif
 
-  return g_strdup (_("Unknown"));
+  g_strfreev (gpus);
+  return g_string_free (s, FALSE);
 }
 
 static char *
