@@ -518,25 +518,6 @@ ce_get_property_default (NMSetting *setting, const gchar *property_name)
         return 0;
 }
 
-gint
-ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data)
-{
-        gint defvalue = GPOINTER_TO_INT (user_data);
-        gint val;
-        g_autofree gchar *buf = NULL;
-
-        val = gtk_spin_button_get_value_as_int (spin);
-        if (val == defvalue)
-                buf = g_strdup (_("automatic"));
-        else
-                buf = g_strdup_printf ("%d", val);
-
-        if (strcmp (buf, gtk_entry_get_text (GTK_ENTRY (spin))))
-                gtk_entry_set_text (GTK_ENTRY (spin), buf);
-
-        return TRUE;
-}
-
 gchar *
 ce_page_get_next_available_name (const GPtrArray *connections,
                                  NameFormat format,
