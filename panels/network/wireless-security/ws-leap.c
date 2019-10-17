@@ -91,15 +91,15 @@ validate (WirelessSecurity *parent, GError **error)
 static void
 add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 {
-	WirelessSecurityLEAP *sec = (WirelessSecurityLEAP *) parent;
-	gtk_size_group_add_widget (group, GTK_WIDGET (sec->username_label));
-	gtk_size_group_add_widget (group, GTK_WIDGET (sec->password_label));
+	WirelessSecurityLEAP *self = (WirelessSecurityLEAP *) parent;
+	gtk_size_group_add_widget (group, GTK_WIDGET (self->username_label));
+	gtk_size_group_add_widget (group, GTK_WIDGET (self->password_label));
 }
 
 static void
 fill_connection (WirelessSecurity *parent, NMConnection *connection)
 {
-	WirelessSecurityLEAP *sec = (WirelessSecurityLEAP *) parent;
+	WirelessSecurityLEAP *self = (WirelessSecurityLEAP *) parent;
 	NMSettingWirelessSecurity *s_wireless_sec;
 	NMSettingSecretFlags secret_flags;
 	const char *leap_password = NULL, *leap_username = NULL;
@@ -108,8 +108,8 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	s_wireless_sec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
 	nm_connection_add_setting (connection, (NMSetting *) s_wireless_sec);
 
-	leap_username = gtk_entry_get_text (sec->username_entry);
-	leap_password = gtk_entry_get_text (sec->password_entry);
+	leap_username = gtk_entry_get_text (self->username_entry);
+	leap_password = gtk_entry_get_text (self->password_entry);
 
 	g_object_set (s_wireless_sec,
 	              NM_SETTING_WIRELESS_SECURITY_KEY_MGMT, "ieee8021x",
@@ -119,14 +119,14 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	              NULL);
 
 	/* Save LEAP_PASSWORD_FLAGS to the connection */
-	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (sec->password_entry));
-	nm_setting_set_secret_flags (NM_SETTING (s_wireless_sec), sec->password_flags_name,
+	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->password_entry));
+	nm_setting_set_secret_flags (NM_SETTING (s_wireless_sec), self->password_flags_name,
 	                             secret_flags, NULL);
 
 	/* Update secret flags and popup when editing the connection */
-	if (sec->editing_connection)
-		nma_utils_update_password_storage (GTK_WIDGET (sec->password_entry), secret_flags,
-		                                   NM_SETTING (s_wireless_sec), sec->password_flags_name);
+	if (self->editing_connection)
+		nma_utils_update_password_storage (GTK_WIDGET (self->password_entry), secret_flags,
+		                                   NM_SETTING (s_wireless_sec), self->password_flags_name);
 }
 
 static void
@@ -149,7 +149,7 @@ WirelessSecurityLEAP *
 ws_leap_new (NMConnection *connection, gboolean secrets_only)
 {
 	WirelessSecurity *parent;
-	WirelessSecurityLEAP *sec;
+	WirelessSecurityLEAP *self;
 	NMSettingWirelessSecurity *wsec = NULL;
 
 	parent = wireless_security_init (sizeof (WirelessSecurityLEAP),
@@ -176,35 +176,35 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 
 	wireless_security_set_adhoc_compatible (parent, FALSE);
 	wireless_security_set_hotspot_compatible (parent, FALSE);
-	sec = (WirelessSecurityLEAP *) parent;
-	sec->editing_connection = secrets_only ? FALSE : TRUE;
-	sec->password_flags_name = NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD;
+	self = (WirelessSecurityLEAP *) parent;
+	self->editing_connection = secrets_only ? FALSE : TRUE;
+	self->password_flags_name = NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD;
 
-	sec->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
-	sec->password_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "password_entry"));
-	sec->password_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "password_label"));
-	sec->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "show_password_check"));
-	sec->username_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "username_entry"));
-	sec->username_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "username_label"));
+	self->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
+	self->password_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "password_entry"));
+	self->password_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "password_label"));
+	self->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "show_password_check"));
+	self->username_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "username_entry"));
+	self->username_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "username_label"));
 
-	g_signal_connect_swapped (sec->password_entry, "changed", G_CALLBACK (changed_cb), sec);
+	g_signal_connect_swapped (self->password_entry, "changed", G_CALLBACK (changed_cb), self);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
-	nma_utils_setup_password_storage (GTK_WIDGET (sec->password_entry), 0, (NMSetting *) wsec, sec->password_flags_name,
+	nma_utils_setup_password_storage (GTK_WIDGET (self->password_entry), 0, (NMSetting *) wsec, self->password_flags_name,
 	                                  FALSE, secrets_only);
 
 	if (wsec)
-		update_secrets (WIRELESS_SECURITY (sec), connection);
+		update_secrets (WIRELESS_SECURITY (self), connection);
 
-	g_signal_connect_swapped (sec->username_entry, "changed", G_CALLBACK (changed_cb), sec);
+	g_signal_connect_swapped (self->username_entry, "changed", G_CALLBACK (changed_cb), self);
 	if (wsec)
-		gtk_entry_set_text (sec->username_entry, nm_setting_wireless_security_get_leap_username (wsec));
+		gtk_entry_set_text (self->username_entry, nm_setting_wireless_security_get_leap_username (wsec));
 
 	if (secrets_only)
-		gtk_widget_hide (GTK_WIDGET (sec->username_entry));
+		gtk_widget_hide (GTK_WIDGET (self->username_entry));
 
-	g_signal_connect_swapped (sec->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), sec);
+	g_signal_connect_swapped (self->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), self);
 
-	return sec;
+	return self;
 }
 

@@ -149,7 +149,7 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 static void
 fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFlags flags)
 {
-	EAPMethodTLS *method = (EAPMethodTLS *) parent;
+	EAPMethodTLS *self = (EAPMethodTLS *) parent;
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	NMSetting8021x *s_8021x;
 	NMSettingSecretFlags secret_flags;
@@ -166,12 +166,12 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	else
 		nm_setting_802_1x_add_eap_method (s_8021x, "tls");
 
-	g_object_set (s_8021x, NM_SETTING_802_1X_IDENTITY, gtk_entry_get_text (method->identity_entry), NULL);
+	g_object_set (s_8021x, NM_SETTING_802_1X_IDENTITY, gtk_entry_get_text (self->identity_entry), NULL);
 
 	/* TLS private key */
-	password = gtk_entry_get_text (method->private_key_password_entry);
+	password = gtk_entry_get_text (self->private_key_password_entry);
 
-	pk_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (method->private_key_button));
+	pk_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->private_key_button));
 	g_assert (pk_filename);
 
 	if (parent->phase2) {
@@ -185,13 +185,13 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	}
 
 	/* Save 802.1X password flags to the connection */
-	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (method->private_key_password_entry));
+	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->private_key_password_entry));
 	nm_setting_set_secret_flags (NM_SETTING (s_8021x), parent->password_flags_name,
 	                             secret_flags, NULL);
 
 	/* Update secret flags and popup when editing the connection */
-	if (method->editing_connection) {
-		nma_utils_update_password_storage (GTK_WIDGET (method->private_key_password_entry), secret_flags,
+	if (self->editing_connection) {
+		nma_utils_update_password_storage (GTK_WIDGET (self->private_key_password_entry), secret_flags,
 		                                   NM_SETTING (s_8021x), parent->password_flags_name);
 	}
 
@@ -202,7 +202,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 		/* If the key is pkcs#12 nm_setting_802_1x_set_private_key() already
 		 * set the client certificate for us.
 		 */
-		cc_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (method->user_cert_button));
+		cc_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->user_cert_button));
 		g_assert (cc_filename);
 
 		format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
@@ -218,7 +218,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	}
 
 	/* TLS CA certificate */
-	ca_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (method->ca_cert_button));
+	ca_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
 
 	format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	if (parent->phase2) {
@@ -400,7 +400,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
                     gboolean phase2,
                     gboolean secrets_only)
 {
-	EAPMethodTLS *method;
+	EAPMethodTLS *self;
 	EAPMethod *parent;
 	NMSetting8021x *s_8021x = NULL;
 	gboolean ca_not_required = FALSE;
@@ -421,45 +421,45 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	parent->password_flags_name = phase2 ?
 	                                NM_SETTING_802_1X_PHASE2_PRIVATE_KEY_PASSWORD :
 	                                NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD;
-	method = (EAPMethodTLS *) parent;
-	method->sec_parent = ws_parent;
-	method->editing_connection = secrets_only ? FALSE : TRUE;
+	self = (EAPMethodTLS *) parent;
+	self->sec_parent = ws_parent;
+	self->editing_connection = secrets_only ? FALSE : TRUE;
 
-	method->ca_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_button"));
-	method->ca_cert_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "ca_cert_label"));
-	method->ca_cert_not_required_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
-	method->identity_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "identity_entry"));
-	method->identity_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "identity_label"));
-	method->private_key_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "private_key_button"));
-	method->private_key_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "private_key_label"));
-	method->private_key_password_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "private_key_password_entry"));
-	method->private_key_password_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "private_key_password_label"));
-	method->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "show_password_check"));
-	method->user_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "user_cert_button"));
-	method->user_cert_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "user_cert_label"));
+	self->ca_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_button"));
+	self->ca_cert_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "ca_cert_label"));
+	self->ca_cert_not_required_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
+	self->identity_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "identity_entry"));
+	self->identity_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "identity_label"));
+	self->private_key_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "private_key_button"));
+	self->private_key_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "private_key_label"));
+	self->private_key_password_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "private_key_password_entry"));
+	self->private_key_password_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "private_key_password_label"));
+	self->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "show_password_check"));
+	self->user_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "user_cert_button"));
+	self->user_cert_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "user_cert_label"));
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
 
-	g_signal_connect_swapped (method->ca_cert_not_required_check, "toggled", G_CALLBACK (ca_cert_not_required_toggled), method);
+	g_signal_connect_swapped (self->ca_cert_not_required_check, "toggled", G_CALLBACK (ca_cert_not_required_toggled), self);
 
-	g_signal_connect_swapped (method->identity_entry, "changed", G_CALLBACK (changed_cb), method);
+	g_signal_connect_swapped (self->identity_entry, "changed", G_CALLBACK (changed_cb), self);
 	if (s_8021x && nm_setting_802_1x_get_identity (s_8021x))
-		gtk_entry_set_text (method->identity_entry, nm_setting_802_1x_get_identity (s_8021x));
+		gtk_entry_set_text (self->identity_entry, nm_setting_802_1x_get_identity (s_8021x));
 
-	setup_filepicker (method->user_cert_button,
+	setup_filepicker (self->user_cert_button,
 	                  _("Choose your personal certificate"),
 	                  ws_parent, parent, s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_client_cert_scheme : nm_setting_802_1x_get_client_cert_scheme,
 	                  phase2 ? nm_setting_802_1x_get_phase2_client_cert_path : nm_setting_802_1x_get_client_cert_path,
 	                  FALSE, TRUE);
-	setup_filepicker (method->ca_cert_button,
+	setup_filepicker (self->ca_cert_button,
 	                  _("Choose a Certificate Authority certificate"),
 	                  ws_parent, parent, s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_ca_cert_scheme : nm_setting_802_1x_get_ca_cert_scheme,
 	                  phase2 ? nm_setting_802_1x_get_phase2_ca_cert_path : nm_setting_802_1x_get_ca_cert_path,
 	                  FALSE, FALSE);
-	setup_filepicker (method->private_key_button,
+	setup_filepicker (self->private_key_button,
 	                  _("Choose your private key"),
 	                  ws_parent, parent, s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_private_key_scheme : nm_setting_802_1x_get_private_key_scheme,
@@ -467,32 +467,32 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	                  TRUE, FALSE);
 
 	if (connection && eap_method_ca_cert_ignore_get (parent, connection))
-		ca_not_required = !gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (method->ca_cert_button));
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (method->ca_cert_not_required_check), ca_not_required);
+		ca_not_required = !gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check), ca_not_required);
 
 	/* Fill secrets, if any */
 	if (connection)
 		update_secrets (parent, connection);
 
-	g_signal_connect_swapped (method->private_key_password_entry, "changed", G_CALLBACK (changed_cb), method);
+	g_signal_connect_swapped (self->private_key_password_entry, "changed", G_CALLBACK (changed_cb), self);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
-	nma_utils_setup_password_storage (GTK_WIDGET (method->private_key_password_entry), 0, (NMSetting *) s_8021x, parent->password_flags_name,
+	nma_utils_setup_password_storage (GTK_WIDGET (self->private_key_password_entry), 0, (NMSetting *) s_8021x, parent->password_flags_name,
 	                                  FALSE, secrets_only);
 
-	g_signal_connect_swapped (method->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), method);
+	g_signal_connect_swapped (self->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), self);
 
 	if (secrets_only) {
-		gtk_widget_set_sensitive (GTK_WIDGET (method->identity_entry), FALSE);
-		gtk_widget_hide (GTK_WIDGET (method->user_cert_label));
-		gtk_widget_hide (GTK_WIDGET (method->user_cert_button));
-		gtk_widget_hide (GTK_WIDGET (method->private_key_label));
-		gtk_widget_hide (GTK_WIDGET (method->private_key_button));
-		gtk_widget_hide (GTK_WIDGET (method->ca_cert_label));
-		gtk_widget_hide (GTK_WIDGET (method->ca_cert_button));
-		gtk_widget_hide (GTK_WIDGET (method->ca_cert_not_required_check));
+		gtk_widget_set_sensitive (GTK_WIDGET (self->identity_entry), FALSE);
+		gtk_widget_hide (GTK_WIDGET (self->user_cert_label));
+		gtk_widget_hide (GTK_WIDGET (self->user_cert_button));
+		gtk_widget_hide (GTK_WIDGET (self->private_key_label));
+		gtk_widget_hide (GTK_WIDGET (self->private_key_button));
+		gtk_widget_hide (GTK_WIDGET (self->ca_cert_label));
+		gtk_widget_hide (GTK_WIDGET (self->ca_cert_button));
+		gtk_widget_hide (GTK_WIDGET (self->ca_cert_not_required_check));
 	}
 
-	return method;
+	return self;
 }
 
