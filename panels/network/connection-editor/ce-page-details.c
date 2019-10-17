@@ -32,9 +32,9 @@
 G_DEFINE_TYPE (CEPageDetails, ce_page_details, CE_TYPE_PAGE)
 
 static void
-forget_cb (GtkButton *button, CEPageDetails *page)
+forget_cb (GtkButton *button, CEPageDetails *self)
 {
-        net_connection_editor_forget (page->editor);
+        net_connection_editor_forget (self->editor);
 }
 
 static gchar *
@@ -77,7 +77,7 @@ get_ap_security_string (NMAccessPoint *ap)
 }
 
 static void
-update_last_used (CEPageDetails *page, NMConnection *connection)
+update_last_used (CEPageDetails *self, NMConnection *connection)
 {
         g_autofree gchar *last_used = NULL;
         g_autoptr(GDateTime) now = NULL;
@@ -109,17 +109,17 @@ update_last_used (CEPageDetails *page, NMConnection *connection)
         else
                 last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
 out:
-        panel_set_device_widget_details (page->last_used_heading_label, page->last_used_label, last_used);
+        panel_set_device_widget_details (self->last_used_heading_label, self->last_used_label, last_used);
 }
 
 static void
-all_user_changed (CEPageDetails *page)
+all_user_changed (CEPageDetails *self)
 {
         gboolean all_users;
         NMSettingConnection *sc;
 
-        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-        all_users = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (page->all_user_check));
+        sc = nm_connection_get_setting_connection (CE_PAGE (self)->connection);
+        all_users = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->all_user_check));
 
         g_object_set (sc, "permissions", NULL, NULL);
         if (!all_users)
@@ -127,12 +127,12 @@ all_user_changed (CEPageDetails *page)
 }
 
 static void
-restrict_data_changed (GtkToggleButton *toggle, GParamSpec *pspec, CEPageDetails *page)
+restrict_data_changed (GtkToggleButton *toggle, GParamSpec *pspec, CEPageDetails *self)
 {
         NMSettingConnection *s_con;
         NMMetered metered;
 
-        s_con = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
+        s_con = nm_connection_get_setting_connection (CE_PAGE (self)->connection);
 
         if (gtk_toggle_button_get_active (toggle))
                 metered = NM_METERED_YES;
@@ -143,13 +143,13 @@ restrict_data_changed (GtkToggleButton *toggle, GParamSpec *pspec, CEPageDetails
 }
 
 static void
-update_restrict_data (CEPageDetails *page)
+update_restrict_data (CEPageDetails *self)
 {
         NMSettingConnection *s_con;
         NMMetered metered;
         const gchar *type;
 
-        s_con = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
+        s_con = nm_connection_get_setting_connection (CE_PAGE (self)->connection);
 
         if (s_con == NULL)
                 return;
@@ -162,16 +162,16 @@ update_restrict_data (CEPageDetails *page)
 
         metered = nm_setting_connection_get_metered (s_con);
 
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (page->restrict_data_check),
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->restrict_data_check),
                                       metered == NM_METERED_YES || metered == NM_METERED_GUESS_YES);
-        gtk_widget_show (GTK_WIDGET (page->restrict_data_check));
+        gtk_widget_show (GTK_WIDGET (self->restrict_data_check));
 
-        g_signal_connect (page->restrict_data_check, "notify::active", G_CALLBACK (restrict_data_changed), page);
-        g_signal_connect_swapped (page->restrict_data_check, "notify::active", G_CALLBACK (ce_page_changed), page);
+        g_signal_connect (self->restrict_data_check, "notify::active", G_CALLBACK (restrict_data_changed), self);
+        g_signal_connect_swapped (self->restrict_data_check, "notify::active", G_CALLBACK (ce_page_changed), self);
 }
 
 static void
-connect_details_page (CEPageDetails *page)
+connect_details_page (CEPageDetails *self)
 {
         NMSettingConnection *sc;
         guint speed;
@@ -185,55 +185,55 @@ connect_details_page (CEPageDetails *page)
         const gchar *strength_label;
         gboolean device_is_active;
 
-        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
+        sc = nm_connection_get_setting_connection (CE_PAGE (self)->connection);
         type = nm_setting_connection_get_connection_type (sc);
 
-        if (NM_IS_DEVICE_WIFI (page->device))
-                active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (page->device));
+        if (NM_IS_DEVICE_WIFI (self->device))
+                active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (self->device));
         else
                 active_ap = NULL;
 
-        state = page->device ? nm_device_get_state (page->device) : NM_DEVICE_STATE_DISCONNECTED;
+        state = self->device ? nm_device_get_state (self->device) : NM_DEVICE_STATE_DISCONNECTED;
 
         device_is_active = FALSE;
         speed = 0;
-        if (active_ap && page->ap == active_ap && state != NM_DEVICE_STATE_UNAVAILABLE) {
+        if (active_ap && self->ap == active_ap && state != NM_DEVICE_STATE_UNAVAILABLE) {
                 device_is_active = TRUE;
-                if (NM_IS_DEVICE_WIFI (page->device))
-                        speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (page->device)) / 1000;
-        } else if (page->device) {
+                if (NM_IS_DEVICE_WIFI (self->device))
+                        speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (self->device)) / 1000;
+        } else if (self->device) {
                 NMActiveConnection *ac;
                 const gchar *p1, *p2;
 
-                ac = nm_device_get_active_connection (page->device);
+                ac = nm_device_get_active_connection (self->device);
                 p1 = ac ? nm_active_connection_get_uuid (ac) : NULL;
-                p2 = nm_connection_get_uuid (CE_PAGE (page)->connection);
+                p2 = nm_connection_get_uuid (CE_PAGE (self)->connection);
                 if (g_strcmp0 (p1, p2) == 0) {
                         device_is_active = TRUE;
-                        if (NM_IS_DEVICE_WIFI (page->device))
-                                speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (page->device)) / 1000;
-                        else if (NM_IS_DEVICE_ETHERNET (page->device))
-                                speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (page->device));
+                        if (NM_IS_DEVICE_WIFI (self->device))
+                                speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (self->device)) / 1000;
+                        else if (NM_IS_DEVICE_ETHERNET (self->device))
+                                speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (self->device));
                 }
         }
         if (speed > 0)
                 speed_label = g_strdup_printf (_("%d Mb/s"), speed);
-        panel_set_device_widget_details (page->speed_heading_label, page->speed_label, speed_label);
+        panel_set_device_widget_details (self->speed_heading_label, self->speed_label, speed_label);
 
-        if (NM_IS_DEVICE_WIFI (page->device))
-                hw_address = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (page->device));
-        else if (NM_IS_DEVICE_ETHERNET (page->device))
-                hw_address = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (page->device));
+        if (NM_IS_DEVICE_WIFI (self->device))
+                hw_address = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (self->device));
+        else if (NM_IS_DEVICE_ETHERNET (self->device))
+                hw_address = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (self->device));
 
-        panel_set_device_widget_details (page->mac_heading_label, page->mac_label, hw_address);
+        panel_set_device_widget_details (self->mac_heading_label, self->mac_label, hw_address);
 
         if (device_is_active && active_ap)
                 security_string = get_ap_security_string (active_ap);
-        panel_set_device_widget_details (page->security_heading_label, page->security_label, security_string);
+        panel_set_device_widget_details (self->security_heading_label, self->security_label, security_string);
 
         strength = 0;
-        if (page->ap != NULL)
-                strength = nm_access_point_get_strength (page->ap);
+        if (self->ap != NULL)
+                strength = nm_access_point_get_strength (self->ap);
 
         if (strength <= 0)
                 strength_label = NULL;
@@ -247,55 +247,55 @@ connect_details_page (CEPageDetails *page)
                 strength_label = C_("Signal strength", "Good");
         else
                 strength_label = C_("Signal strength", "Excellent");
-        panel_set_device_widget_details (page->strength_heading_label, page->strength_label, strength_label);
+        panel_set_device_widget_details (self->strength_heading_label, self->strength_label, strength_label);
 
         /* set IP entries */
-        panel_set_device_widgets (page->ipv4_heading_label, page->ipv4_label,
-                                  page->ipv6_heading_label, page->ipv6_label,
-                                  page->dns_heading_label, page->dns_label,
-                                  page->route_heading_label, page->route_label,
-                                  device_is_active ? page->device : NULL);
+        panel_set_device_widgets (self->ipv4_heading_label, self->ipv4_label,
+                                  self->ipv6_heading_label, self->ipv6_label,
+                                  self->dns_heading_label, self->dns_label,
+                                  self->route_heading_label, self->route_label,
+                                  device_is_active ? self->device : NULL);
 
-        if (!device_is_active && CE_PAGE (page)->connection)
-                update_last_used (page, CE_PAGE (page)->connection);
+        if (!device_is_active && CE_PAGE (self)->connection)
+                update_last_used (self, CE_PAGE (self)->connection);
         else
-                panel_set_device_widget_details (page->last_used_heading_label, page->last_used_label, NULL);
+                panel_set_device_widget_details (self->last_used_heading_label, self->last_used_label, NULL);
 
         /* Auto connect check */
         if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME)) {
-                gtk_widget_hide (GTK_WIDGET (page->auto_connect_check));
+                gtk_widget_hide (GTK_WIDGET (self->auto_connect_check));
         } else {
                 g_object_bind_property (sc, "autoconnect",
-                                        page->auto_connect_check, "active",
+                                        self->auto_connect_check, "active",
                                         G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
-                g_signal_connect_swapped (page->auto_connect_check, "toggled", G_CALLBACK (ce_page_changed), page);
+                g_signal_connect_swapped (self->auto_connect_check, "toggled", G_CALLBACK (ce_page_changed), self);
         }
 
         /* All users check */
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (page->all_user_check),
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->all_user_check),
                                       nm_setting_connection_get_num_permissions (sc) == 0);
-        g_signal_connect_swapped (page->all_user_check, "toggled",
-                                  G_CALLBACK (all_user_changed), page);
-        g_signal_connect_swapped (page->all_user_check, "toggled", G_CALLBACK (ce_page_changed), page);
+        g_signal_connect_swapped (self->all_user_check, "toggled",
+                                  G_CALLBACK (all_user_changed), self);
+        g_signal_connect_swapped (self->all_user_check, "toggled", G_CALLBACK (ce_page_changed), self);
 
         /* Restrict Data check */
-        update_restrict_data (page);
+        update_restrict_data (self);
 
         /* Forget button */
-        g_signal_connect (page->forget_button, "clicked", G_CALLBACK (forget_cb), page);
+        g_signal_connect (self->forget_button, "clicked", G_CALLBACK (forget_cb), self);
 
         if (g_str_equal (type, NM_SETTING_WIRELESS_SETTING_NAME))
-                gtk_button_set_label (page->forget_button, _("Forget Connection"));
+                gtk_button_set_label (self->forget_button, _("Forget Connection"));
         else if (g_str_equal (type, NM_SETTING_WIRED_SETTING_NAME))
-                gtk_button_set_label (page->forget_button, _("Remove Connection Profile"));
+                gtk_button_set_label (self->forget_button, _("Remove Connection Profile"));
         else if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME))
-                gtk_button_set_label (page->forget_button, _("Remove VPN"));
+                gtk_button_set_label (self->forget_button, _("Remove VPN"));
         else
-                gtk_widget_hide (GTK_WIDGET (page->forget_button));
+                gtk_widget_hide (GTK_WIDGET (self->forget_button));
 }
 
 static void
-ce_page_details_init (CEPageDetails *page)
+ce_page_details_init (CEPageDetails *self)
 {
 }
 
@@ -311,42 +311,42 @@ ce_page_details_new (NMConnection        *connection,
                      NMAccessPoint       *ap,
                      NetConnectionEditor *editor)
 {
-        CEPageDetails *page;
+        CEPageDetails *self;
 
-        page = CE_PAGE_DETAILS (ce_page_new (CE_TYPE_PAGE_DETAILS,
+        self = CE_PAGE_DETAILS (ce_page_new (CE_TYPE_PAGE_DETAILS,
                                              connection,
                                              client,
                                              "/org/gnome/control-center/network/details-page.ui",
                                              _("Details")));
 
-        page->all_user_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "all_user_check"));
-        page->auto_connect_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_connect_check"));
-        page->dns_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "dns_heading_label"));
-        page->dns_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "dns_label"));
-        page->forget_button = GTK_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "forget_button"));
-        page->ipv4_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "ipv4_heading_label"));
-        page->ipv4_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "ipv4_label"));
-        page->ipv6_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "ipv6_heading_label"));
-        page->ipv6_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "ipv6_label"));
-        page->last_used_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "last_used_heading_label"));
-        page->last_used_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "last_used_label"));
-        page->mac_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "mac_heading_label"));
-        page->mac_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "mac_label"));
-        page->restrict_data_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "restrict_data_check"));
-        page->route_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "route_heading_label"));
-        page->route_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "route_label"));
-        page->security_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "security_heading_label"));
-        page->security_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "security_label"));
-        page->speed_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "speed_heading_label"));
-        page->speed_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "speed_label"));
-        page->strength_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "strength_heading_label"));
-        page->strength_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "strength_label"));
+        self->all_user_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "all_user_check"));
+        self->auto_connect_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "auto_connect_check"));
+        self->dns_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "dns_heading_label"));
+        self->dns_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "dns_label"));
+        self->forget_button = GTK_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "forget_button"));
+        self->ipv4_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "ipv4_heading_label"));
+        self->ipv4_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "ipv4_label"));
+        self->ipv6_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "ipv6_heading_label"));
+        self->ipv6_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "ipv6_label"));
+        self->last_used_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "last_used_heading_label"));
+        self->last_used_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "last_used_label"));
+        self->mac_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "mac_heading_label"));
+        self->mac_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "mac_label"));
+        self->restrict_data_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "restrict_data_check"));
+        self->route_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "route_heading_label"));
+        self->route_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "route_label"));
+        self->security_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "security_heading_label"));
+        self->security_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "security_label"));
+        self->speed_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "speed_heading_label"));
+        self->speed_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "speed_label"));
+        self->strength_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "strength_heading_label"));
+        self->strength_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "strength_label"));
 
-        page->editor = editor;
-        page->device = device;
-        page->ap = ap;
+        self->editor = editor;
+        self->device = device;
+        self->ap = ap;
 
-        connect_details_page (page);
+        connect_details_page (self);
 
-        return CE_PAGE (page);
+        return CE_PAGE (self);
 }

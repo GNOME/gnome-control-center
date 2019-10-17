@@ -240,9 +240,9 @@ update_connections (CcWifiConnectionList *self)
 }
 
 static void
-on_row_configured_cb (CcWifiConnectionRow *row, CcWifiConnectionList *list)
+on_row_configured_cb (CcWifiConnectionRow *row, CcWifiConnectionList *self)
 {
-  g_signal_emit_by_name (list, "configure", row);
+  g_signal_emit_by_name (self, "configure", row);
 }
 
 static void
@@ -732,28 +732,28 @@ cc_wifi_connection_list_new (NMClient     *client,
 }
 
 void
-cc_wifi_connection_list_freeze (CcWifiConnectionList  *list)
+cc_wifi_connection_list_freeze (CcWifiConnectionList *self)
 {
-  g_return_if_fail (CC_WIFI_CONNECTION_LIST (list));
+  g_return_if_fail (CC_WIFI_CONNECTION_LIST (self));
 
-  if (list->freeze_count == 0)
+  if (self->freeze_count == 0)
     g_debug ("wifi connection list has been frozen");
 
-  list->freeze_count += 1;
+  self->freeze_count += 1;
 }
 
 void
-cc_wifi_connection_list_thaw (CcWifiConnectionList  *list)
+cc_wifi_connection_list_thaw (CcWifiConnectionList *self)
 {
-  g_return_if_fail (CC_WIFI_CONNECTION_LIST (list));
+  g_return_if_fail (CC_WIFI_CONNECTION_LIST (self));
 
-  g_return_if_fail (list->freeze_count > 0);
+  g_return_if_fail (self->freeze_count > 0);
 
-  list->freeze_count -= 1;
+  self->freeze_count -= 1;
 
-  if (list->freeze_count == 0)
+  if (self->freeze_count == 0)
     {
       g_debug ("wifi connection list has been thawed");
-      update_connections (list);
+      update_connections (self);
     }
 }
