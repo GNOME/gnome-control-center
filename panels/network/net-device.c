@@ -117,9 +117,9 @@ compare_mac_device_with_mac_connection (NMDevice *device,
 }
 
 static NMConnection *
-net_device_real_get_find_connection (NetDevice *device)
+net_device_real_get_find_connection (NetDevice *self)
 {
-        NetDevicePrivate *priv = net_device_get_instance_private (device);
+        NetDevicePrivate *priv = net_device_get_instance_private (self);
         GSList *list, *iterator;
         NMConnection *connection = NULL;
         NMActiveConnection *ac;
@@ -130,7 +130,7 @@ net_device_real_get_find_connection (NetDevice *device)
                 return (NMConnection*) nm_active_connection_get_connection (ac);
 
         /* not found in active connections - check all available connections */
-        list = net_device_get_valid_connections (device);
+        list = net_device_get_valid_connections (self);
         if (list != NULL) {
                 /* if list has only one connection, use this connection */
                 if (g_slist_length (list) == 1) {
@@ -156,9 +156,9 @@ out:
 }
 
 NMConnection *
-net_device_get_find_connection (NetDevice *device)
+net_device_get_find_connection (NetDevice *self)
 {
-        return NET_DEVICE_GET_CLASS (device)->get_find_connection (device);
+        return NET_DEVICE_GET_CLASS (self)->get_find_connection (self);
 }
 
 static void
@@ -169,13 +169,13 @@ state_changed_cb (NetDevice *net_device)
 }
 
 NMDevice *
-net_device_get_nm_device (NetDevice *device)
+net_device_get_nm_device (NetDevice *self)
 {
         NetDevicePrivate *priv;
 
-        g_return_val_if_fail (NET_IS_DEVICE (device), NULL);
+        g_return_val_if_fail (NET_IS_DEVICE (self), NULL);
 
-        priv = net_device_get_instance_private (device);
+        priv = net_device_get_instance_private (self);
         return priv->nm_device;
 }
 
@@ -185,10 +185,10 @@ net_device_edit (NetObject *object)
         const gchar *uuid;
         g_autofree gchar *cmdline = NULL;
         g_autoptr(GError) error = NULL;
-        NetDevice *device = NET_DEVICE (object);
+        NetDevice *self = NET_DEVICE (object);
         NMConnection *connection;
 
-        connection = net_device_get_find_connection (device);
+        connection = net_device_get_find_connection (self);
         uuid = nm_connection_get_uuid (connection);
         cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
         g_debug ("Launching '%s'\n", cmdline);
@@ -200,12 +200,12 @@ net_device_edit (NetObject *object)
  * net_device_get_property:
  **/
 static void
-net_device_get_property (GObject *device_,
+net_device_get_property (GObject *object,
                          guint prop_id,
                          GValue *value,
                          GParamSpec *pspec)
 {
-        NetDevice *net_device = NET_DEVICE (device_);
+        NetDevice *net_device = NET_DEVICE (object);
         NetDevicePrivate *priv = net_device_get_instance_private (net_device);
 
         switch (prop_id) {
@@ -213,7 +213,7 @@ net_device_get_property (GObject *device_,
                 g_value_set_object (value, priv->nm_device);
                 break;
         default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (net_device, prop_id, pspec);
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
         }
 }
@@ -222,12 +222,12 @@ net_device_get_property (GObject *device_,
  * net_device_set_property:
  **/
 static void
-net_device_set_property (GObject *device_,
+net_device_set_property (GObject *object,
                          guint prop_id,
                          const GValue *value,
                          GParamSpec *pspec)
 {
-        NetDevice *net_device = NET_DEVICE (device_);
+        NetDevice *net_device = NET_DEVICE (object);
         NetDevicePrivate *priv = net_device_get_instance_private (net_device);
 
         switch (prop_id) {
@@ -246,7 +246,7 @@ net_device_set_property (GObject *device_,
                         priv->changed_id = 0;
                 break;
         default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (net_device, prop_id, pspec);
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
         }
 }
@@ -254,8 +254,8 @@ net_device_set_property (GObject *device_,
 static void
 net_device_finalize (GObject *object)
 {
-        NetDevice *device = NET_DEVICE (object);
-        NetDevicePrivate *priv = net_device_get_instance_private (device);
+        NetDevice *self = NET_DEVICE (object);
+        NetDevicePrivate *priv = net_device_get_instance_private (self);
 
         if (priv->changed_id != 0) {
                 g_signal_handler_disconnect (priv->nm_device,
@@ -286,22 +286,20 @@ net_device_class_init (NetDeviceClass *klass)
 }
 
 static void
-net_device_init (NetDevice *device)
+net_device_init (NetDevice *self)
 {
 }
 
 NetDevice *
 net_device_new (void)
 {
-        NetDevice *device;
-        device = g_object_new (NET_TYPE_DEVICE,
-                               "removable", FALSE,
-                               NULL);
-        return NET_DEVICE (device);
+        return g_object_new (NET_TYPE_DEVICE,
+                             "removable", FALSE,
+                             NULL);
 }
 
 GSList *
-net_device_get_valid_connections (NetDevice *device)
+net_device_get_valid_connections (NetDevice *self)
 {
         GSList *valid;
         NMConnection *connection;
@@ -312,10 +310,10 @@ net_device_get_valid_connections (NetDevice *device)
         GPtrArray *filtered;
         guint i;
 
-        all = nm_client_get_connections (net_object_get_client (NET_OBJECT (device)));
-        filtered = nm_device_filter_connections (net_device_get_nm_device (device), all);
+        all = nm_client_get_connections (net_object_get_client (NET_OBJECT (self)));
+        filtered = nm_device_filter_connections (net_device_get_nm_device (self), all);
 
-        active_connection = nm_device_get_active_connection (net_device_get_nm_device (device));
+        active_connection = nm_device_get_active_connection (net_device_get_nm_device (self));
         active_uuid = active_connection ? nm_active_connection_get_uuid (active_connection) : NULL;
 
         valid = NULL;
