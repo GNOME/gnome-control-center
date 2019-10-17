@@ -296,8 +296,6 @@ net_proxy_init (NetProxy *proxy)
         g_autoptr(GError) error = NULL;
         guint i;
 
-        proxy = net_proxy_get_instance_private (proxy);
-
         proxy->builder = gtk_builder_new ();
         gtk_builder_add_from_resource (proxy->builder,
                                        "/org/gnome/control-center/network/network-proxy.ui",
