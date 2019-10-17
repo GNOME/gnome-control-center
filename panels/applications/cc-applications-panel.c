@@ -785,7 +785,7 @@ add_file_type (CcApplicationsPanel *self,
                const gchar         *type)
 {
   CcActionRow *row;
-  const gchar *desc;
+  g_autofree gchar *desc = NULL;
   gint pos;
   const gchar *glob;
 
