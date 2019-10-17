@@ -94,8 +94,6 @@ void         ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo,
                                              const char      *current);
 gint         ce_get_property_default (NMSetting        *setting,
                                       const gchar      *property_name);
-gint         ce_spin_output_with_default (GtkSpinButton *spin,
-                                          gpointer       user_data);
 gboolean     ce_page_address_is_valid (const gchar *addr);
 gchar       *ce_page_trim_address (const gchar *addr);
 char        *ce_page_cloned_mac_get (GtkComboBoxText *combo);
