@@ -44,10 +44,10 @@ struct _WirelessSecurityWPAEAP {
 static void
 destroy (WirelessSecurity *parent)
 {
-	WirelessSecurityWPAEAP *sec = (WirelessSecurityWPAEAP *) parent;
+	WirelessSecurityWPAEAP *self = (WirelessSecurityWPAEAP *) parent;
 
-	if (sec->size_group)
-		g_object_unref (sec->size_group);
+	if (self->size_group)
+		g_object_unref (self->size_group);
 }
 
 static GtkWidget *
@@ -67,13 +67,13 @@ validate (WirelessSecurity *parent, GError **error)
 static void
 add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 {
-	WirelessSecurityWPAEAP *sec = (WirelessSecurityWPAEAP *) parent;
+	WirelessSecurityWPAEAP *self = (WirelessSecurityWPAEAP *) parent;
 
-	if (sec->size_group)
-		g_object_unref (sec->size_group);
-	sec->size_group = g_object_ref (group);
+	if (self->size_group)
+		g_object_unref (self->size_group);
+	self->size_group = g_object_ref (group);
 
-	ws_802_1x_add_to_size_group (sec->size_group, sec->auth_label, sec->auth_combo);
+	ws_802_1x_add_to_size_group (self->size_group, self->auth_label, self->auth_combo);
 }
 
 static void
@@ -94,12 +94,12 @@ static void
 auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 {
 	WirelessSecurity *parent = WIRELESS_SECURITY (user_data);
-	WirelessSecurityWPAEAP *sec = (WirelessSecurityWPAEAP *) parent;
+	WirelessSecurityWPAEAP *self = (WirelessSecurityWPAEAP *) parent;
 
 	ws_802_1x_auth_combo_changed (combo,
 	                              parent,
-	                              sec->method_box,
-	                              sec->size_group);
+	                              self->method_box,
+	                              self->size_group);
 }
 
 WirelessSecurityWPAEAP *
@@ -138,6 +138,6 @@ ws_wpa_eap_new (NMConnection *connection,
 	                           secrets_only);
 	auth_combo_changed_cb (GTK_WIDGET (self->auth_combo), parent);
 
-	return (WirelessSecurityWPAEAP *) parent;
+	return self;
 }
 

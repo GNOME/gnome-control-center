@@ -54,10 +54,10 @@ struct _EAPMethodFAST {
 static void
 destroy (EAPMethod *parent)
 {
-	EAPMethodFAST *method = (EAPMethodFAST *) parent;
+	EAPMethodFAST *self = (EAPMethodFAST *) parent;
 
-	if (method->size_group)
-		g_object_unref (method->size_group);
+	if (self->size_group)
+		g_object_unref (self->size_group);
 }
 
 static gboolean
@@ -91,22 +91,22 @@ validate (EAPMethod *parent, GError **error)
 static void
 add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 {
-	EAPMethodFAST *method = (EAPMethodFAST *) parent;
+	EAPMethodFAST *self = (EAPMethodFAST *) parent;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	g_autoptr(EAPMethod) eap = NULL;
 
-	if (method->size_group)
-		g_object_unref (method->size_group);
-	method->size_group = g_object_ref (group);
+	if (self->size_group)
+		g_object_unref (self->size_group);
+	self->size_group = g_object_ref (group);
 
-	gtk_size_group_add_widget (group, GTK_WIDGET (method->anon_identity_label));
-	gtk_size_group_add_widget (group, GTK_WIDGET (method->pac_file_label));
-	gtk_size_group_add_widget (group, GTK_WIDGET (method->pac_provision_check));
-	gtk_size_group_add_widget (group, GTK_WIDGET (method->inner_auth_label));
+	gtk_size_group_add_widget (group, GTK_WIDGET (self->anon_identity_label));
+	gtk_size_group_add_widget (group, GTK_WIDGET (self->pac_file_label));
+	gtk_size_group_add_widget (group, GTK_WIDGET (self->pac_provision_check));
+	gtk_size_group_add_widget (group, GTK_WIDGET (self->inner_auth_label));
 
-	model = gtk_combo_box_get_model (method->inner_auth_combo);
-	gtk_combo_box_get_active_iter (method->inner_auth_combo, &iter);
+	model = gtk_combo_box_get_model (self->inner_auth_combo);
+	gtk_combo_box_get_active_iter (self->inner_auth_combo, &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
 	eap_method_add_to_size_group (eap, group);
@@ -200,7 +200,7 @@ inner_auth_combo_changed_cb (EAPMethodFAST *self)
 }
 
 static void
-inner_auth_combo_init (EAPMethodFAST *method,
+inner_auth_combo_init (EAPMethodFAST *self,
                        NMConnection *connection,
                        NMSetting8021x *s_8021x,
                        gboolean secrets_only)
@@ -223,12 +223,12 @@ inner_auth_combo_init (EAPMethodFAST *method,
 	}
 
 	simple_flags = EAP_METHOD_SIMPLE_FLAG_PHASE2;
-	if (method->is_editor)
+	if (self->is_editor)
 		simple_flags |= EAP_METHOD_SIMPLE_FLAG_IS_EDITOR;
 	if (secrets_only)
 		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
 
-	em_gtc = eap_method_simple_new (method->sec_parent,
+	em_gtc = eap_method_simple_new (self->sec_parent,
 	                                connection,
 	                                EAP_METHOD_SIMPLE_TYPE_GTC,
 	                                simple_flags);
@@ -242,7 +242,7 @@ inner_auth_combo_init (EAPMethodFAST *method,
 	if (phase2_auth && !strcasecmp (phase2_auth, "gtc"))
 		active = 0;
 
-	em_mschap_v2 = eap_method_simple_new (method->sec_parent,
+	em_mschap_v2 = eap_method_simple_new (self->sec_parent,
 	                                      connection,
 	                                      EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2,
 	                                      simple_flags);
@@ -256,10 +256,10 @@ inner_auth_combo_init (EAPMethodFAST *method,
 	if (phase2_auth && !strcasecmp (phase2_auth, "mschapv2"))
 		active = 1;
 
-	gtk_combo_box_set_model (method->inner_auth_combo, GTK_TREE_MODEL (auth_model));
-	gtk_combo_box_set_active (method->inner_auth_combo, active);
+	gtk_combo_box_set_model (self->inner_auth_combo, GTK_TREE_MODEL (auth_model));
+	gtk_combo_box_set_active (self->inner_auth_combo, active);
 
-	g_signal_connect_swapped (method->inner_auth_combo, "changed", G_CALLBACK (inner_auth_combo_changed_cb), method);
+	g_signal_connect_swapped (self->inner_auth_combo, "changed", G_CALLBACK (inner_auth_combo_changed_cb), self);
 }
 
 static void
@@ -296,7 +296,7 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
                      gboolean secrets_only)
 {
 	EAPMethod *parent;
-	EAPMethodFAST *method;
+	EAPMethodFAST *self;
 	GtkFileFilter *filter;
 	NMSetting8021x *s_8021x = NULL;
 	const char *filename;
@@ -316,24 +316,24 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 		return NULL;
 
 	parent->password_flags_name = NM_SETTING_802_1X_PASSWORD;
-	method = (EAPMethodFAST *) parent;
-	method->sec_parent = ws_parent;
-	method->is_editor = is_editor;
+	self = (EAPMethodFAST *) parent;
+	self->sec_parent = ws_parent;
+	self->is_editor = is_editor;
 
-	method->anon_identity_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
-	method->anon_identity_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "anon_identity_label"));
-	method->inner_auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
-	method->inner_auth_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "inner_auth_label"));
-	method->inner_auth_box = GTK_BOX (gtk_builder_get_object (parent->builder, "inner_auth_box"));
-	method->pac_file_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "pac_file_button"));
-	method->pac_file_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "pac_file_label"));
-	method->pac_provision_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "pac_provision_check"));
-	method->pac_provision_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "pac_provision_combo"));
+	self->anon_identity_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
+	self->anon_identity_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "anon_identity_label"));
+	self->inner_auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
+	self->inner_auth_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "inner_auth_label"));
+	self->inner_auth_box = GTK_BOX (gtk_builder_get_object (parent->builder, "inner_auth_box"));
+	self->pac_file_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "pac_file_button"));
+	self->pac_file_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "pac_file_label"));
+	self->pac_provision_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "pac_provision_check"));
+	self->pac_provision_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "pac_provision_combo"));
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
 
-	gtk_combo_box_set_active (method->pac_provision_combo, 0);
+	gtk_combo_box_set_active (self->pac_provision_combo, 0);
 	if (s_8021x) {
 		const char *fast_prov;
 
@@ -342,57 +342,57 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 			if (!strcmp (fast_prov, "0"))
 				provisioning_enabled = FALSE;
 			else if (!strcmp (fast_prov, "1"))
-				gtk_combo_box_set_active (method->pac_provision_combo, 0);
+				gtk_combo_box_set_active (self->pac_provision_combo, 0);
 			else if (!strcmp (fast_prov, "2"))
-				gtk_combo_box_set_active (method->pac_provision_combo, 1);
+				gtk_combo_box_set_active (self->pac_provision_combo, 1);
 			else if (!strcmp (fast_prov, "3"))
-				gtk_combo_box_set_active (method->pac_provision_combo, 2);
+				gtk_combo_box_set_active (self->pac_provision_combo, 2);
 		}
 	}
-	gtk_widget_set_sensitive (GTK_WIDGET (method->pac_provision_combo), provisioning_enabled);
-	g_signal_connect_swapped (method->pac_provision_combo, "changed", G_CALLBACK (changed_cb), method);
+	gtk_widget_set_sensitive (GTK_WIDGET (self->pac_provision_combo), provisioning_enabled);
+	g_signal_connect_swapped (self->pac_provision_combo, "changed", G_CALLBACK (changed_cb), self);
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (method->pac_provision_check), provisioning_enabled);
-	g_signal_connect_swapped (method->pac_provision_check, "toggled", G_CALLBACK (pac_toggled_cb), method);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->pac_provision_check), provisioning_enabled);
+	g_signal_connect_swapped (self->pac_provision_check, "toggled", G_CALLBACK (pac_toggled_cb), self);
 
 	if (s_8021x && nm_setting_802_1x_get_anonymous_identity (s_8021x))
-		gtk_entry_set_text (method->anon_identity_entry, nm_setting_802_1x_get_anonymous_identity (s_8021x));
-	g_signal_connect_swapped (method->anon_identity_entry, "changed", G_CALLBACK (changed_cb), method);
+		gtk_entry_set_text (self->anon_identity_entry, nm_setting_802_1x_get_anonymous_identity (s_8021x));
+	g_signal_connect_swapped (self->anon_identity_entry, "changed", G_CALLBACK (changed_cb), self);
 
-	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (method->pac_file_button), TRUE);
-	gtk_file_chooser_button_set_title (method->pac_file_button,
+	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (self->pac_file_button), TRUE);
+	gtk_file_chooser_button_set_title (self->pac_file_button,
 	                                   _("Choose a PAC file"));
-	g_signal_connect_swapped (method->pac_file_button, "selection-changed", G_CALLBACK (changed_cb), method);
+	g_signal_connect_swapped (self->pac_file_button, "selection-changed", G_CALLBACK (changed_cb), self);
 
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_add_pattern (filter, "*.pac");
 	gtk_file_filter_set_name (filter, _("PAC files (*.pac)"));
-	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (method->pac_file_button), filter);
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (self->pac_file_button), filter);
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_add_pattern (filter, "*");
 	gtk_file_filter_set_name (filter, _("All files"));
-	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (method->pac_file_button), filter);
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (self->pac_file_button), filter);
 
 	if (connection && s_8021x) {
 		filename = nm_setting_802_1x_get_pac_file (s_8021x);
 		if (filename)
-			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (method->pac_file_button), filename);
+			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (self->pac_file_button), filename);
 	}
 
-	inner_auth_combo_init (method, connection, s_8021x, secrets_only);
-	inner_auth_combo_changed_cb (method);
+	inner_auth_combo_init (self, connection, s_8021x, secrets_only);
+	inner_auth_combo_changed_cb (self);
 
 	if (secrets_only) {
-		gtk_widget_hide (GTK_WIDGET (method->anon_identity_label));
-		gtk_widget_hide (GTK_WIDGET (method->anon_identity_entry));
-		gtk_widget_hide (GTK_WIDGET (method->pac_provision_check));
-		gtk_widget_hide (GTK_WIDGET (method->pac_provision_combo));
-		gtk_widget_hide (GTK_WIDGET (method->pac_file_label));
-		gtk_widget_hide (GTK_WIDGET (method->pac_file_button));
-		gtk_widget_hide (GTK_WIDGET (method->inner_auth_label));
-		gtk_widget_hide (GTK_WIDGET (method->inner_auth_combo));
+		gtk_widget_hide (GTK_WIDGET (self->anon_identity_label));
+		gtk_widget_hide (GTK_WIDGET (self->anon_identity_entry));
+		gtk_widget_hide (GTK_WIDGET (self->pac_provision_check));
+		gtk_widget_hide (GTK_WIDGET (self->pac_provision_combo));
+		gtk_widget_hide (GTK_WIDGET (self->pac_file_label));
+		gtk_widget_hide (GTK_WIDGET (self->pac_file_button));
+		gtk_widget_hide (GTK_WIDGET (self->inner_auth_label));
+		gtk_widget_hide (GTK_WIDGET (self->inner_auth_combo));
 	}
 
-	return method;
+	return self;
 }
 
