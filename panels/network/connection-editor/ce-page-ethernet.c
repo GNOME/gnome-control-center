@@ -42,6 +42,25 @@ mtu_changed (GtkSpinButton *mtu, CEPageEthernet *page)
                 gtk_widget_show (page->mtu_label);
 }
 
+static gint
+ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data)
+{
+        gint defvalue = GPOINTER_TO_INT (user_data);
+        gint val;
+        g_autofree gchar *buf = NULL;
+
+        val = gtk_spin_button_get_value_as_int (spin);
+        if (val == defvalue)
+                buf = g_strdup (_("automatic"));
+        else
+                buf = g_strdup_printf ("%d", val);
+
+        if (strcmp (buf, gtk_entry_get_text (GTK_ENTRY (spin))))
+                gtk_entry_set_text (GTK_ENTRY (spin), buf);
+
+        return TRUE;
+}
+
 static void
 connect_ethernet_page (CEPageEthernet *page)
 {
