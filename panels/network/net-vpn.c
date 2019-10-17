@@ -412,8 +412,6 @@ net_vpn_init (NetVpn *vpn)
         g_autoptr(GError) error = NULL;
         GtkWidget *widget;
 
-        vpn = net_vpn_get_instance_private (vpn);
-
         vpn->builder = gtk_builder_new ();
         gtk_builder_add_from_resource (vpn->builder,
                                        "/org/gnome/control-center/network/network-vpn.ui",
