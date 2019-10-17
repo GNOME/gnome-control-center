@@ -97,14 +97,14 @@ get_default_type_for_security (NMSettingWirelessSecurity *sec)
 }
 
 static WirelessSecurity *
-security_combo_get_active (CEPageSecurity *page)
+security_combo_get_active (CEPageSecurity *self)
 {
         GtkTreeIter iter;
         GtkTreeModel *model;
         WirelessSecurity *sec = NULL;
 
-        model = gtk_combo_box_get_model (page->security_combo);
-        gtk_combo_box_get_active_iter (page->security_combo, &iter);
+        model = gtk_combo_box_get_model (self->security_combo);
+        gtk_combo_box_get_active_iter (self->security_combo, &iter);
         gtk_tree_model_get (model, &iter, S_SEC_COLUMN, &sec, -1);
 
         return sec;
@@ -124,19 +124,19 @@ wsec_size_group_clear (GtkSizeGroup *group)
 }
 
 static void
-security_combo_changed (CEPageSecurity *page)
+security_combo_changed (CEPageSecurity *self)
 {
         GList *l, *children;
         g_autoptr(WirelessSecurity) sec = NULL;
 
-        wsec_size_group_clear (page->group);
+        wsec_size_group_clear (self->group);
 
-        children = gtk_container_get_children (GTK_CONTAINER (page->box));
+        children = gtk_container_get_children (GTK_CONTAINER (self->box));
         for (l = children; l; l = l->next) {
-                gtk_container_remove (GTK_CONTAINER (page->box), GTK_WIDGET (l->data));
+                gtk_container_remove (GTK_CONTAINER (self->box), GTK_WIDGET (l->data));
         }
 
-        sec = security_combo_get_active (page);
+        sec = security_combo_get_active (self);
         if (sec) {
                 GtkWidget *sec_widget;
                 GtkWidget *parent;
@@ -147,13 +147,13 @@ security_combo_changed (CEPageSecurity *page)
                 if (parent)
                         gtk_container_remove (GTK_CONTAINER (parent), sec_widget);
 
-                gtk_size_group_add_widget (page->group, GTK_WIDGET (page->security_label));
-                wireless_security_add_to_size_group (sec, page->group);
+                gtk_size_group_add_widget (self->group, GTK_WIDGET (self->security_label));
+                wireless_security_add_to_size_group (sec, self->group);
 
-                gtk_container_add (GTK_CONTAINER (page->box), sec_widget);
+                gtk_container_add (GTK_CONTAINER (self->box), sec_widget);
         }
 
-        ce_page_changed (CE_PAGE (page));
+        ce_page_changed (CE_PAGE (self));
 }
 
 static void
@@ -163,14 +163,14 @@ stuff_changed_cb (WirelessSecurity *sec, gpointer user_data)
 }
 
 static void
-add_security_item (CEPageSecurity   *page,
+add_security_item (CEPageSecurity   *self,
                    WirelessSecurity *sec,
                    GtkListStore     *model,
                    GtkTreeIter      *iter,
                    const char       *text,
                    gboolean          adhoc_valid)
 {
-        wireless_security_set_changed_notify (sec, stuff_changed_cb, page);
+        wireless_security_set_changed_notify (sec, stuff_changed_cb, self);
         gtk_list_store_append (model, iter);
         gtk_list_store_set (model, iter,
                             S_NAME_COLUMN, text,
@@ -198,9 +198,9 @@ set_sensitive (GtkCellLayout *cell_layout,
 }
 
 static void
-finish_setup (CEPageSecurity *page)
+finish_setup (CEPageSecurity *self)
 {
-        NMConnection *connection = CE_PAGE (page)->connection;
+        NMConnection *connection = CE_PAGE (self)->connection;
         NMSettingWireless *sw;
         NMSettingWirelessSecurity *sws;
         gboolean is_adhoc = FALSE;
@@ -216,11 +216,11 @@ finish_setup (CEPageSecurity *page)
         sw = nm_connection_get_setting_wireless (connection);
         g_assert (sw);
 
-        page->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+        self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-        page->box = GTK_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "box"));
-        page->security_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (page)->builder, "security_label"));
-        page->security_combo = GTK_COMBO_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "security_combo"));
+        self->box = GTK_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "box"));
+        self->security_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "security_label"));
+        self->security_combo = GTK_COMBO_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "security_combo"));
 
         dev_caps =   NM_WIFI_DEVICE_CAP_CIPHER_WEP40
                    | NM_WIFI_DEVICE_CAP_CIPHER_WEP104
@@ -232,7 +232,7 @@ finish_setup (CEPageSecurity *page)
         mode = nm_setting_wireless_get_mode (sw);
         if (mode && !strcmp (mode, "adhoc"))
                 is_adhoc = TRUE;
-        page->adhoc = is_adhoc;
+        self->adhoc = is_adhoc;
 
         sws = nm_connection_get_setting_wireless_security (connection);
         if (sws)
@@ -264,7 +264,7 @@ finish_setup (CEPageSecurity *page)
 
                 ws_wep = ws_wep_key_new (connection, NM_WEP_KEY_TYPE_KEY, FALSE, FALSE);
                 if (ws_wep) {
-                        add_security_item (page, WIRELESS_SECURITY (ws_wep), sec_model,
+                        add_security_item (self, WIRELESS_SECURITY (ws_wep), sec_model,
                                            &iter, _("WEP 40/128-bit Key (Hex or ASCII)"),
                                            TRUE);
                         if ((active < 0) && (default_type == NMU_SEC_STATIC_WEP) && (wep_type == NM_WEP_KEY_TYPE_KEY))
@@ -274,7 +274,7 @@ finish_setup (CEPageSecurity *page)
 
                 ws_wep = ws_wep_key_new (connection, NM_WEP_KEY_TYPE_PASSPHRASE, FALSE, FALSE);
                 if (ws_wep) {
-                        add_security_item (page, WIRELESS_SECURITY (ws_wep), sec_model,
+                        add_security_item (self, WIRELESS_SECURITY (ws_wep), sec_model,
                                            &iter, _("WEP 128-bit Passphrase"), TRUE);
                         if ((active < 0) && (default_type == NMU_SEC_STATIC_WEP) && (wep_type == NM_WEP_KEY_TYPE_PASSPHRASE))
                                 active = item;
@@ -287,7 +287,7 @@ finish_setup (CEPageSecurity *page)
 
                 ws_leap = ws_leap_new (connection, FALSE);
                 if (ws_leap) {
-                        add_security_item (page, WIRELESS_SECURITY (ws_leap), sec_model,
+                        add_security_item (self, WIRELESS_SECURITY (ws_leap), sec_model,
                                            &iter, _("LEAP"), FALSE);
                         if ((active < 0) && (default_type == NMU_SEC_LEAP))
                                 active = item;
@@ -300,7 +300,7 @@ finish_setup (CEPageSecurity *page)
 
                 ws_dynamic_wep = ws_dynamic_wep_new (connection, TRUE, FALSE);
                 if (ws_dynamic_wep) {
-                        add_security_item (page, WIRELESS_SECURITY (ws_dynamic_wep), sec_model,
+                        add_security_item (self, WIRELESS_SECURITY (ws_dynamic_wep), sec_model,
                                            &iter, _("Dynamic WEP (802.1x)"), FALSE);
                         if ((active < 0) && (default_type == NMU_SEC_DYNAMIC_WEP))
                                 active = item;
@@ -314,7 +314,7 @@ finish_setup (CEPageSecurity *page)
 
                 ws_wpa_psk = ws_wpa_psk_new (connection, FALSE);
                 if (ws_wpa_psk) {
-                        add_security_item (page, WIRELESS_SECURITY (ws_wpa_psk), sec_model,
+                        add_security_item (self, WIRELESS_SECURITY (ws_wpa_psk), sec_model,
                                            &iter, _("WPA & WPA2 Personal"), FALSE);
                         if ((active < 0) && ((default_type == NMU_SEC_WPA_PSK) || (default_type == NMU_SEC_WPA2_PSK)))
                                 active = item;
@@ -328,7 +328,7 @@ finish_setup (CEPageSecurity *page)
 
                 ws_wpa_eap = ws_wpa_eap_new (connection, TRUE, FALSE);
                 if (ws_wpa_eap) {
-                        add_security_item (page, WIRELESS_SECURITY (ws_wpa_eap), sec_model,
+                        add_security_item (self, WIRELESS_SECURITY (ws_wpa_eap), sec_model,
                                            &iter, _("WPA & WPA2 Enterprise"), FALSE);
                         if ((active < 0) && ((default_type == NMU_SEC_WPA_ENTERPRISE) || (default_type == NMU_SEC_WPA2_ENTERPRISE)))
                                 active = item;
@@ -336,19 +336,19 @@ finish_setup (CEPageSecurity *page)
                 }
         }
 
-        gtk_combo_box_set_model (page->security_combo, GTK_TREE_MODEL (sec_model));
-        gtk_cell_layout_clear (GTK_CELL_LAYOUT (page->security_combo));
+        gtk_combo_box_set_model (self->security_combo, GTK_TREE_MODEL (sec_model));
+        gtk_cell_layout_clear (GTK_CELL_LAYOUT (self->security_combo));
 
         renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (page->security_combo), renderer, TRUE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (page->security_combo), renderer, "text", S_NAME_COLUMN, NULL);
-        gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (page->security_combo), renderer, set_sensitive, &page->adhoc, NULL);
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (self->security_combo), renderer, TRUE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (self->security_combo), renderer, "text", S_NAME_COLUMN, NULL);
+        gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (self->security_combo), renderer, set_sensitive, &self->adhoc, NULL);
 
-        gtk_combo_box_set_active (page->security_combo, active < 0 ? 0 : (guint32) active);
+        gtk_combo_box_set_active (self->security_combo, active < 0 ? 0 : (guint32) active);
 
-        security_combo_changed (page);
-        g_signal_connect_swapped (page->security_combo, "changed",
-                                  G_CALLBACK (security_combo_changed), page);
+        security_combo_changed (self);
+        g_signal_connect_swapped (self->security_combo, "changed",
+                                  G_CALLBACK (security_combo_changed), self);
 }
 
 static gboolean
@@ -356,6 +356,7 @@ validate (CEPage        *page,
           NMConnection  *connection,
           GError       **error)
 {
+        CEPageSecurity *self = CE_PAGE_SECURITY (page);
         NMSettingWireless *sw;
         g_autoptr(WirelessSecurity) sec = NULL;
         gboolean valid = FALSE;
@@ -365,11 +366,11 @@ validate (CEPage        *page,
 
         mode = nm_setting_wireless_get_mode (sw);
         if (g_strcmp0 (mode, NM_SETTING_WIRELESS_MODE_ADHOC) == 0)
-                CE_PAGE_SECURITY (page)->adhoc = TRUE;
+                CE_PAGE_SECURITY (self)->adhoc = TRUE;
         else
-                CE_PAGE_SECURITY (page)->adhoc = FALSE;
+                CE_PAGE_SECURITY (self)->adhoc = FALSE;
 
-        sec = security_combo_get_active (CE_PAGE_SECURITY (page));
+        sec = security_combo_get_active (CE_PAGE_SECURITY (self));
         if (sec) {
                 GBytes *ssid = nm_setting_wireless_get_ssid (sw);
 
@@ -383,7 +384,7 @@ validate (CEPage        *page,
                         valid = FALSE;
                 }
 
-                if (CE_PAGE_SECURITY (page)->adhoc) {
+                if (self->adhoc) {
                         if (!wireless_security_adhoc_compatible (sec)) {
                                 if (valid)
                                         g_set_error (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_INVALID_SETTING, "Security not compatible with Ad-Hoc mode");
@@ -401,16 +402,16 @@ validate (CEPage        *page,
 }
 
 static void
-ce_page_security_init (CEPageSecurity *page)
+ce_page_security_init (CEPageSecurity *self)
 {
 }
 
 static void
 dispose (GObject *object)
 {
-        CEPageSecurity *page = CE_PAGE_SECURITY (object);
+        CEPageSecurity *self = CE_PAGE_SECURITY (object);
 
-        g_clear_object (&page->group);
+        g_clear_object (&self->group);
 
         G_OBJECT_CLASS (ce_page_security_parent_class)->dispose (object);
 }
@@ -429,11 +430,11 @@ CEPage *
 ce_page_security_new (NMConnection      *connection,
                       NMClient          *client)
 {
-        CEPageSecurity *page;
+        CEPageSecurity *self;
         NMUtilsSecurityType default_type = NMU_SEC_NONE;
         NMSettingWirelessSecurity *sws;
 
-        page = CE_PAGE_SECURITY (ce_page_new (CE_TYPE_PAGE_SECURITY,
+        self = CE_PAGE_SECURITY (ce_page_new (CE_TYPE_PAGE_SECURITY,
                                               connection,
                                               client,
                                               "/org/gnome/control-center/network/security-page.ui",
@@ -447,16 +448,16 @@ ce_page_security_new (NMConnection      *connection,
             default_type == NMU_SEC_LEAP ||
             default_type == NMU_SEC_WPA_PSK ||
             default_type == NMU_SEC_WPA2_PSK) {
-                CE_PAGE (page)->security_setting = NM_SETTING_WIRELESS_SECURITY_SETTING_NAME;
+                CE_PAGE (self)->security_setting = NM_SETTING_WIRELESS_SECURITY_SETTING_NAME;
         }
 
         if (default_type == NMU_SEC_DYNAMIC_WEP ||
             default_type == NMU_SEC_WPA_ENTERPRISE ||
             default_type == NMU_SEC_WPA2_ENTERPRISE) {
-                CE_PAGE (page)->security_setting = NM_SETTING_802_1X_SETTING_NAME;
+                CE_PAGE (self)->security_setting = NM_SETTING_802_1X_SETTING_NAME;
         }
 
-        g_signal_connect (page, "initialized", G_CALLBACK (finish_setup), NULL);
+        g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
 
-        return CE_PAGE (page);
+        return CE_PAGE (self);
 }
