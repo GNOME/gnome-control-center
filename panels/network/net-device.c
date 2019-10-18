@@ -116,8 +116,8 @@ compare_mac_device_with_mac_connection (NMDevice *device,
         return g_strcmp0 (mac_dev, mac_conn) == 0;
 }
 
-static NMConnection *
-net_device_real_get_find_connection (NetDevice *self)
+NMConnection *
+net_device_get_find_connection (NetDevice *self)
 {
         NetDevicePrivate *priv = net_device_get_instance_private (self);
         GSList *list, *iterator;
@@ -153,12 +153,6 @@ net_device_real_get_find_connection (NetDevice *self)
 out:
         g_slist_free (list);
         return connection;
-}
-
-NMConnection *
-net_device_get_find_connection (NetDevice *self)
-{
-        return NET_DEVICE_GET_CLASS (self)->get_find_connection (self);
 }
 
 static void
@@ -277,7 +271,6 @@ net_device_class_init (NetDeviceClass *klass)
         object_class->get_property = net_device_get_property;
         object_class->set_property = net_device_set_property;
         parent_class->edit = net_device_edit;
-        klass->get_find_connection = net_device_real_get_find_connection;
 
         pspec = g_param_spec_object ("nm-device", NULL, NULL,
                                      NM_TYPE_DEVICE,

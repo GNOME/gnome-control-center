@@ -35,8 +35,6 @@ G_DECLARE_DERIVABLE_TYPE (NetDevice, net_device, NET, DEVICE, NetObject)
 struct _NetDeviceClass
 {
         NetObjectClass               parent_class;
-
-        NMConnection * (*get_find_connection) (NetDevice *device);
 };
 
 NetDevice       *net_device_new                         (void);
