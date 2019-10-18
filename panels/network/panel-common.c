@@ -314,7 +314,7 @@ panel_device_status_to_localized_string (NMDevice *nm_device,
         return g_string_free (string, FALSE);
 }
 
-gboolean
+static gboolean
 panel_set_device_widget_details (GtkLabel *heading,
                                  GtkLabel *widget,
                                  const gchar *value)

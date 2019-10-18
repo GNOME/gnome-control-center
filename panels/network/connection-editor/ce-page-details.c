@@ -109,7 +109,9 @@ update_last_used (CEPageDetails *self, NMConnection *connection)
         else
                 last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
 out:
-        panel_set_device_widget_details (self->last_used_heading_label, self->last_used_label, last_used);
+        gtk_label_set_label (self->last_used_label, last_used);
+        gtk_widget_set_visible (GTK_WIDGET (self->last_used_heading_label), last_used != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->last_used_label), last_used != NULL);
 }
 
 static void
@@ -218,18 +220,24 @@ connect_details_page (CEPageDetails *self)
         }
         if (speed > 0)
                 speed_label = g_strdup_printf (_("%d Mb/s"), speed);
-        panel_set_device_widget_details (self->speed_heading_label, self->speed_label, speed_label);
+        gtk_label_set_label (self->speed_label, speed_label);
+        gtk_widget_set_visible (GTK_WIDGET (self->speed_heading_label), speed_label != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->speed_label), speed_label != NULL);
 
         if (NM_IS_DEVICE_WIFI (self->device))
                 hw_address = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (self->device));
         else if (NM_IS_DEVICE_ETHERNET (self->device))
                 hw_address = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (self->device));
 
-        panel_set_device_widget_details (self->mac_heading_label, self->mac_label, hw_address);
+        gtk_label_set_label (self->mac_label, hw_address);
+        gtk_widget_set_visible (GTK_WIDGET (self->mac_heading_label), hw_address != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->mac_label), hw_address != NULL);
 
         if (device_is_active && active_ap)
                 security_string = get_ap_security_string (active_ap);
-        panel_set_device_widget_details (self->security_heading_label, self->security_label, security_string);
+        gtk_label_set_label (self->security_label, security_string);
+        gtk_widget_set_visible (GTK_WIDGET (self->security_heading_label), security_string != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->security_label), security_string != NULL);
 
         strength = 0;
         if (self->ap != NULL)
@@ -247,7 +255,9 @@ connect_details_page (CEPageDetails *self)
                 strength_label = C_("Signal strength", "Good");
         else
                 strength_label = C_("Signal strength", "Excellent");
-        panel_set_device_widget_details (self->strength_heading_label, self->strength_label, strength_label);
+        gtk_label_set_label (self->strength_label, strength_label);
+        gtk_widget_set_visible (GTK_WIDGET (self->strength_heading_label), strength_label != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->strength_label), strength_label != NULL);
 
         /* set IP entries */
         panel_set_device_widgets (self->ipv4_heading_label, self->ipv4_label,
@@ -258,8 +268,10 @@ connect_details_page (CEPageDetails *self)
 
         if (!device_is_active && CE_PAGE (self)->connection)
                 update_last_used (self, CE_PAGE (self)->connection);
-        else
-                panel_set_device_widget_details (self->last_used_heading_label, self->last_used_label, NULL);
+        else {
+                gtk_widget_set_visible (GTK_WIDGET (self->last_used_heading_label), FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->last_used_label), FALSE);
+        }
 
         /* Auto connect check */
         if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME)) {
