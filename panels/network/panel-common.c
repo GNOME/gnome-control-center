@@ -313,36 +313,3 @@ panel_device_status_to_localized_string (NMDevice *nm_device,
 
         return g_string_free (string, FALSE);
 }
-
-gchar *
-panel_get_ip4_address_as_string (NMIPConfig *ip4_config)
-{
-        GPtrArray *array;
-        NMIPAddress *address;
-
-        array = nm_ip_config_get_addresses (ip4_config);
-        if (array->len < 1)
-                return NULL;
-        address = array->pdata[0];
-        return g_strdup (nm_ip_address_get_address (address));
-}
-
-gchar *
-panel_get_ip4_dns_as_string (NMIPConfig *ip4_config)
-{
-        return g_strjoinv (" ",
-                           (char **) nm_ip_config_get_nameservers (ip4_config));
-}
-
-gchar *
-panel_get_ip6_address_as_string (NMIPConfig *ip6_config)
-{
-        GPtrArray *array;
-        NMIPAddress *address;
-
-        array = nm_ip_config_get_addresses (ip6_config);
-        if (array->len < 1)
-                return NULL;
-        address = array->pdata[0];
-        return g_strdup (nm_ip_address_get_address (address));
-}

@@ -26,7 +26,6 @@
 
 #include <NetworkManager.h>
 
-#include "../panel-common.h"
 #include "ce-page-details.h"
 
 G_DEFINE_TYPE (CEPageDetails, ce_page_details, CE_TYPE_PAGE)
@@ -264,17 +263,20 @@ connect_details_page (CEPageDetails *self)
         if (device_is_active && self->device != NULL)
                 ipv4_config = nm_device_get_ip4_config (self->device);
         if (ipv4_config != NULL) {
-                g_autofree gchar *ipv4_text = NULL;
+                GPtrArray *addresses;
+                const gchar *ipv4_text = NULL;
                 g_autofree gchar *dns_text = NULL;
                 const gchar *route_text;
 
-                ipv4_text = panel_get_ip4_address_as_string (ipv4_config);
+                addresses = nm_ip_config_get_addresses (ipv4_config);
+                if (addresses->len > 0)
+                        ipv4_text = nm_ip_address_get_address (g_ptr_array_index (addresses, 0));
                 gtk_label_set_label (self->ipv4_label, ipv4_text);
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv4_heading_label), ipv4_text != NULL);
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv4_label), ipv4_text != NULL);
                 have_ipv4_address = ipv4_text != NULL;
 
-                dns_text = panel_get_ip4_dns_as_string (ipv4_config);
+                dns_text = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ipv4_config));
                 gtk_label_set_label (self->dns_label, dns_text);
                 gtk_widget_set_visible (GTK_WIDGET (self->dns_heading_label), dns_text != NULL);
                 gtk_widget_set_visible (GTK_WIDGET (self->dns_label), dns_text != NULL);
@@ -295,9 +297,12 @@ connect_details_page (CEPageDetails *self)
         if (device_is_active && self->device != NULL)
                 ipv6_config = nm_device_get_ip6_config (self->device);
         if (ipv6_config != NULL) {
-                g_autofree gchar *ipv6_text = NULL;
+                GPtrArray *addresses;
+                const gchar *ipv6_text = NULL;
 
-                ipv6_text = panel_get_ip6_address_as_string (ipv6_config);
+                addresses = nm_ip_config_get_addresses (ipv6_config);
+                if (addresses->len > 0)
+                        ipv6_text = nm_ip_address_get_address (g_ptr_array_index (addresses, 0));
                 gtk_label_set_label (self->ipv6_label, ipv6_text);
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv6_heading_label), ipv6_text != NULL);
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv6_label), ipv6_text != NULL);
