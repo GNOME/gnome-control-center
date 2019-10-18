@@ -173,23 +173,6 @@ net_device_get_nm_device (NetDevice *self)
         return priv->nm_device;
 }
 
-static void
-net_device_edit (NetObject *object)
-{
-        const gchar *uuid;
-        g_autofree gchar *cmdline = NULL;
-        g_autoptr(GError) error = NULL;
-        NetDevice *self = NET_DEVICE (object);
-        NMConnection *connection;
-
-        connection = net_device_get_find_connection (self);
-        uuid = nm_connection_get_uuid (connection);
-        cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
-        g_debug ("Launching '%s'\n", cmdline);
-        if (!g_spawn_command_line_async (cmdline, &error))
-                g_warning ("Failed to launch nm-connection-editor: %s", error->message);
-}
-
 /**
  * net_device_get_property:
  **/
@@ -265,12 +248,10 @@ net_device_class_init (NetDeviceClass *klass)
 {
         GParamSpec *pspec;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
 
         object_class->finalize = net_device_finalize;
         object_class->get_property = net_device_get_property;
         object_class->set_property = net_device_set_property;
-        parent_class->edit = net_device_edit;
 
         pspec = g_param_spec_object ("nm-device", NULL, NULL,
                                      NM_TYPE_DEVICE,
