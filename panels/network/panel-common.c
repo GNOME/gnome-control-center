@@ -314,24 +314,6 @@ panel_device_status_to_localized_string (NMDevice *nm_device,
         return g_string_free (string, FALSE);
 }
 
-static gboolean
-panel_set_device_widget_details (GtkLabel *heading,
-                                 GtkLabel *widget,
-                                 const gchar *value)
-{
-        /* hide the row if there is no value */
-        if (value == NULL) {
-                gtk_widget_hide (GTK_WIDGET (heading));
-                gtk_widget_hide (GTK_WIDGET (widget));
-        } else {
-                /* there exists a value */
-                gtk_widget_show (GTK_WIDGET (heading));
-                gtk_widget_show (GTK_WIDGET (widget));
-                gtk_label_set_label (widget, value);
-        }
-        return TRUE;
-}
-
 gchar *
 panel_get_ip4_address_as_string (NMIPConfig *ip4_config, const char *what)
 {
@@ -370,48 +352,4 @@ panel_get_ip6_address_as_string (NMIPConfig *ip6_config)
                 return NULL;
         address = array->pdata[0];
         return g_strdup (nm_ip_address_get_address (address));
-}
-
-void
-panel_set_device_widgets (GtkLabel *ipv4_heading_label, GtkLabel *ipv4_label,
-                          GtkLabel *ipv6_heading_label, GtkLabel *ipv6_label,
-                          GtkLabel *heading_dns, GtkLabel *dns_label,
-                          GtkLabel *route_heading_label, GtkLabel *route_label,
-                          NMDevice *device)
-{
-        g_autofree gchar *ipv4_text = NULL;
-        g_autofree gchar *ipv6_text = NULL;
-        g_autofree gchar *dns_text = NULL;
-        g_autofree gchar *route_text = NULL;
-        gboolean has_ip4, has_ip6;
-
-        if (device != NULL) {
-                NMIPConfig *ip4_config, *ip6_config;
-
-                ip4_config = nm_device_get_ip4_config (device);
-                if (ip4_config != NULL) {
-                        ipv4_text = panel_get_ip4_address_as_string (ip4_config, "address");
-                        dns_text = panel_get_ip4_dns_as_string (ip4_config);
-                        route_text = panel_get_ip4_address_as_string (ip4_config, "gateway");
-                }
-                ip6_config = nm_device_get_ip6_config (device);
-                if (ip6_config != NULL)
-                        ipv6_text = panel_get_ip6_address_as_string (ip6_config);
-        }
-
-        panel_set_device_widget_details (ipv4_heading_label, ipv4_label, ipv4_text);
-        panel_set_device_widget_details (ipv6_heading_label, ipv6_label, ipv6_text);
-        panel_set_device_widget_details (heading_dns, dns_label, dns_text);
-        panel_set_device_widget_details (route_heading_label, route_label, route_text);
-
-        has_ip4 = ipv4_text != NULL;
-        has_ip6 = ipv6_text != NULL;
-        if (has_ip4 && has_ip6) {
-                gtk_label_set_label (ipv4_heading_label, _("IPv4 Address"));
-                gtk_label_set_label (ipv6_heading_label, _("IPv6 Address"));
-        } else if (has_ip4) {
-                gtk_label_set_label (ipv4_heading_label, _("IP Address"));
-        } else if (has_ip6) {
-                gtk_label_set_label (ipv6_heading_label, _("IP Address"));
-        }
 }

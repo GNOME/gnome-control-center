@@ -186,6 +186,8 @@ connect_details_page (CEPageDetails *self)
         g_autofree gchar *security_string = NULL;
         const gchar *strength_label;
         gboolean device_is_active;
+        NMIPConfig *ipv4_config = NULL, *ipv6_config = NULL;
+        gboolean have_ipv4_address = FALSE, have_ipv6_address = FALSE;
 
         sc = nm_connection_get_setting_connection (CE_PAGE (self)->connection);
         type = nm_setting_connection_get_connection_type (sc);
@@ -259,12 +261,60 @@ connect_details_page (CEPageDetails *self)
         gtk_widget_set_visible (GTK_WIDGET (self->strength_heading_label), strength_label != NULL);
         gtk_widget_set_visible (GTK_WIDGET (self->strength_label), strength_label != NULL);
 
-        /* set IP entries */
-        panel_set_device_widgets (self->ipv4_heading_label, self->ipv4_label,
-                                  self->ipv6_heading_label, self->ipv6_label,
-                                  self->dns_heading_label, self->dns_label,
-                                  self->route_heading_label, self->route_label,
-                                  device_is_active ? self->device : NULL);
+        if (device_is_active && self->device != NULL)
+                ipv4_config = nm_device_get_ip4_config (self->device);
+        if (ipv4_config != NULL) {
+                g_autofree gchar *ipv4_text = NULL;
+                g_autofree gchar *dns_text = NULL;
+                g_autofree gchar *route_text = NULL;
+
+                ipv4_text = panel_get_ip4_address_as_string (ipv4_config, "address");
+                gtk_label_set_label (self->ipv4_label, ipv4_text);
+                gtk_widget_set_visible (GTK_WIDGET (self->ipv4_heading_label), ipv4_text != NULL);
+                gtk_widget_set_visible (GTK_WIDGET (self->ipv4_label), ipv4_text != NULL);
+                have_ipv4_address = ipv4_text != NULL;
+
+                dns_text = panel_get_ip4_dns_as_string (ipv4_config);
+                gtk_label_set_label (self->dns_label, dns_text);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns_heading_label), dns_text != NULL);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns_label), dns_text != NULL);
+
+                route_text = panel_get_ip4_address_as_string (ipv4_config, "gateway");
+                gtk_label_set_label (self->route_label, route_text);
+                gtk_widget_set_visible (GTK_WIDGET (self->route_heading_label), route_text != NULL);
+                gtk_widget_set_visible (GTK_WIDGET (self->route_label), route_text != NULL);
+        } else {
+                gtk_widget_hide (GTK_WIDGET (self->ipv4_heading_label));
+                gtk_widget_hide (GTK_WIDGET (self->ipv4_label));
+                gtk_widget_hide (GTK_WIDGET (self->dns_heading_label));
+                gtk_widget_hide (GTK_WIDGET (self->dns_label));
+                gtk_widget_hide (GTK_WIDGET (self->route_heading_label));
+                gtk_widget_hide (GTK_WIDGET (self->route_label));
+        }
+
+        if (device_is_active && self->device != NULL)
+                ipv6_config = nm_device_get_ip6_config (self->device);
+        if (ipv6_config != NULL) {
+                g_autofree gchar *ipv6_text = NULL;
+
+                ipv6_text = panel_get_ip6_address_as_string (ipv6_config);
+                gtk_label_set_label (self->ipv6_label, ipv6_text);
+                gtk_widget_set_visible (GTK_WIDGET (self->ipv6_heading_label), ipv6_text != NULL);
+                gtk_widget_set_visible (GTK_WIDGET (self->ipv6_label), ipv6_text != NULL);
+                have_ipv6_address = ipv6_text != NULL;
+        } else {
+                gtk_widget_hide (GTK_WIDGET (self->ipv6_heading_label));
+                gtk_widget_hide (GTK_WIDGET (self->ipv6_label));
+        }
+
+        if (have_ipv4_address && have_ipv6_address) {
+                gtk_label_set_label (self->ipv4_heading_label, _("IPv4 Address"));
+                gtk_label_set_label (self->ipv6_heading_label, _("IPv6 Address"));
+        }
+        else {
+                gtk_label_set_label (self->ipv4_heading_label, _("IP Address"));
+                gtk_label_set_label (self->ipv6_heading_label, _("IP Address"));
+        }
 
         if (!device_is_active && CE_PAGE (self)->connection)
                 update_last_used (self, CE_PAGE (self)->connection);
