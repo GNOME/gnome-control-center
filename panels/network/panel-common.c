@@ -315,23 +315,16 @@ panel_device_status_to_localized_string (NMDevice *nm_device,
 }
 
 gchar *
-panel_get_ip4_address_as_string (NMIPConfig *ip4_config, const char *what)
+panel_get_ip4_address_as_string (NMIPConfig *ip4_config)
 {
-        /* we only care about one address */
-        if (!strcmp (what, "address")) {
-                GPtrArray *array;
-                NMIPAddress *address;
+        GPtrArray *array;
+        NMIPAddress *address;
 
-                array = nm_ip_config_get_addresses (ip4_config);
-                if (array->len < 1)
-                        return NULL;
-                address = array->pdata[0];
-                return g_strdup (nm_ip_address_get_address (address));
-        } else if (!strcmp (what, "gateway")) {
-                return g_strdup (nm_ip_config_get_gateway (ip4_config));
-        }
-
-        return NULL;
+        array = nm_ip_config_get_addresses (ip4_config);
+        if (array->len < 1)
+                return NULL;
+        address = array->pdata[0];
+        return g_strdup (nm_ip_address_get_address (address));
 }
 
 gchar *
