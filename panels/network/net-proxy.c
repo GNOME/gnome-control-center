@@ -408,7 +408,6 @@ NetProxy *
 net_proxy_new (void)
 {
         return g_object_new (NET_TYPE_PROXY,
-                             "removable", FALSE,
                              "id", "proxy",
                              NULL);
 }

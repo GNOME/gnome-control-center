@@ -158,7 +158,6 @@ add_wifi_device (CcWifiPanel *self,
   /* Create the NetDevice */
   net_device = g_object_new (NET_TYPE_DEVICE_WIFI,
                              "panel", self,
-                             "removable", FALSE,
                              "cancellable", self->cancellable,
                              "client", self->client,
                              "nm-device", device,
