@@ -249,12 +249,6 @@ device_off_toggled (NetVpn *self)
 }
 
 static void
-edit_connection (NetVpn *self)
-{
-        net_object_edit (NET_OBJECT (self));
-}
-
-static void
 editor_done (NetVpn *self)
 {
         net_object_refresh (NET_OBJECT (self));
@@ -262,9 +256,8 @@ editor_done (NetVpn *self)
 }
 
 static void
-vpn_proxy_edit (NetObject *object)
+edit_connection (NetVpn *self)
 {
-        NetVpn *self = NET_VPN (object);
         GtkWidget *window;
         NetConnectionEditor *editor;
         NMClient *client;
@@ -272,7 +265,7 @@ vpn_proxy_edit (NetObject *object)
 
         window = gtk_widget_get_toplevel (GTK_WIDGET (self->options_button));
 
-        client = net_object_get_client (object);
+        client = net_object_get_client (NET_OBJECT (self));
 
         editor = net_connection_editor_new (GTK_WINDOW (window),
                                             self->connection,
@@ -384,7 +377,6 @@ net_vpn_class_init (NetVpnClass *klass)
         parent_class->add_to_stack = vpn_proxy_add_to_stack;
         parent_class->delete = vpn_proxy_delete;
         parent_class->refresh = vpn_proxy_refresh;
-        parent_class->edit = vpn_proxy_edit;
 
         pspec = g_param_spec_object ("connection", NULL, NULL,
                                      NM_TYPE_CONNECTION,

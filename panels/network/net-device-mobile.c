@@ -529,7 +529,17 @@ device_off_toggled (NetDeviceMobile *self)
 static void
 edit_connection (NetDeviceMobile *self)
 {
-        net_object_edit (NET_OBJECT (self));
+        const gchar *uuid;
+        g_autofree gchar *cmdline = NULL;
+        g_autoptr(GError) error = NULL;
+        NMConnection *connection;
+
+        connection = net_device_get_find_connection (NET_DEVICE (self));
+        uuid = nm_connection_get_uuid (connection);
+        cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
+        g_debug ("Launching '%s'\n", cmdline);
+        if (!g_spawn_command_line_async (cmdline, &error))
+                g_warning ("Failed to launch nm-connection-editor: %s", error->message);
 }
 
 static void
