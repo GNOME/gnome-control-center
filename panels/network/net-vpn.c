@@ -122,14 +122,6 @@ net_vpn_set_connection (NetVpn *self, NMConnection *connection)
         self->service_type = net_vpn_connection_to_type (self->connection);
 }
 
-static void
-vpn_proxy_delete (NetObject *object)
-{
-        NetVpn *self = NET_VPN (object);
-        nm_remote_connection_delete_async (NM_REMOTE_CONNECTION (self->connection),
-                                           NULL, NULL, self);
-}
-
 static GtkWidget *
 vpn_proxy_add_to_stack (NetObject    *object,
                         GtkStack     *stack,
@@ -375,7 +367,6 @@ net_vpn_class_init (NetVpnClass *klass)
         object_class->constructed = net_vpn_constructed;
         object_class->finalize = net_vpn_finalize;
         parent_class->add_to_stack = vpn_proxy_add_to_stack;
-        parent_class->delete = vpn_proxy_delete;
         parent_class->refresh = vpn_proxy_refresh;
 
         pspec = g_param_spec_object ("connection", NULL, NULL,
