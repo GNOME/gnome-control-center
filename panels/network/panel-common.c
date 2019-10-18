@@ -22,12 +22,7 @@
 
 #include "config.h"
 
-#include <glib.h>
 #include <glib/gi18n.h>
-#include <gtk/gtk.h>
-#define HANDY_USE_UNSTABLE_API
-#include <handy.h>
-#include <NetworkManager.h>
 
 #include "panel-common.h"
 
