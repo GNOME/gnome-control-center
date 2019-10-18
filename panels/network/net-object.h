@@ -43,7 +43,6 @@ struct _NetObjectClass
                                                         GtkSizeGroup    *heading_size_group);
         void                     (*delete)              (NetObject       *object);
         void                     (*refresh)             (NetObject       *object);
-        void                     (*edit)                (NetObject       *object);
 };
 
 const gchar     *net_object_get_id                      (NetObject      *object);
@@ -59,7 +58,6 @@ void             net_object_emit_changed                (NetObject      *object)
 void             net_object_emit_removed                (NetObject      *object);
 void             net_object_delete                      (NetObject      *object);
 void             net_object_refresh                     (NetObject      *object);
-void             net_object_edit                        (NetObject      *object);
 GtkWidget       *net_object_add_to_stack                (NetObject      *object,
                                                          GtkStack       *stack,
                                                          GtkSizeGroup   *heading_size_group);

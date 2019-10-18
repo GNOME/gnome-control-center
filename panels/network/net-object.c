@@ -178,14 +178,6 @@ net_object_refresh (NetObject *self)
                 klass->refresh (self);
 }
 
-void
-net_object_edit (NetObject *self)
-{
-        NetObjectClass *klass = NET_OBJECT_GET_CLASS (self);
-        if (klass->edit != NULL)
-                klass->edit (self);
-}
-
 /**
  * net_object_get_property:
  **/
