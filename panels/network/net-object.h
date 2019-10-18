@@ -44,10 +44,6 @@ struct _NetObjectClass
         void                     (*delete)              (NetObject       *object);
         void                     (*refresh)             (NetObject       *object);
         void                     (*edit)                (NetObject       *object);
-
-        /* signal */
-        void                     (* changed)            (NetObject      *object);
-        void                     (* removed)            (NetObject      *object);
 };
 
 const gchar     *net_object_get_id                      (NetObject      *object);

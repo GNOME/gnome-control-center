@@ -337,13 +337,13 @@ net_object_class_init (NetObjectClass *klass)
         signals[SIGNAL_CHANGED] =
                 g_signal_new ("changed",
                               G_TYPE_FROM_CLASS (object_class), G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (NetObjectClass, changed),
+                              0,
                               NULL, NULL, g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE, 0);
         signals[SIGNAL_REMOVED] =
                 g_signal_new ("removed",
                               G_TYPE_FROM_CLASS (object_class), G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (NetObjectClass, changed),
+                              0,
                               NULL, NULL, g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE, 0);
 }
