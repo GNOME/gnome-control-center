@@ -30,7 +30,6 @@ typedef struct
 {
         gchar                           *id;
         gchar                           *title;
-        gboolean                         removable;
         GCancellable                    *cancellable;
         NMClient                        *client;
         CcNetworkPanel                  *panel;
@@ -40,7 +39,6 @@ enum {
         PROP_0,
         PROP_ID,
         PROP_TITLE,
-        PROP_REMOVABLE,
         PROP_CLIENT,
         PROP_CANCELLABLE,
         PROP_PANEL,
@@ -94,15 +92,6 @@ net_object_set_id (NetObject *self, const gchar *id)
         g_clear_pointer (&priv->id, g_free);
         priv->id = g_strdup (id);
         g_object_notify (G_OBJECT (self), "id");
-}
-
-gboolean
-net_object_get_removable (NetObject *self)
-{
-        NetObjectPrivate *priv = net_object_get_instance_private (self);
-
-        g_return_val_if_fail (NET_IS_OBJECT (self), FALSE);
-        return priv->removable;
 }
 
 const gchar *
@@ -216,9 +205,6 @@ net_object_get_property (GObject *object,
         case PROP_TITLE:
                 g_value_set_string (value, priv->title);
                 break;
-        case PROP_REMOVABLE:
-                g_value_set_boolean (value, priv->removable);
-                break;
         case PROP_CLIENT:
                 g_value_set_pointer (value, priv->client);
                 break;
@@ -254,9 +240,6 @@ net_object_set_property (GObject *object,
         case PROP_TITLE:
                 g_free (priv->title);
                 priv->title = g_strdup (g_value_get_string (value));
-                break;
-        case PROP_REMOVABLE:
-                priv->removable = g_value_get_boolean (value);
                 break;
         case PROP_CLIENT:
                 priv->client = g_value_get_pointer (value);
@@ -315,11 +298,6 @@ net_object_class_init (NetObjectClass *klass)
                                      NULL,
                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_TITLE, pspec);
-
-        pspec = g_param_spec_boolean ("removable", NULL, NULL,
-                                      TRUE,
-                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
-        g_object_class_install_property (object_class, PROP_REMOVABLE, pspec);
 
         pspec = g_param_spec_pointer ("client", NULL, NULL,
                                       G_PARAM_READWRITE | G_PARAM_CONSTRUCT);

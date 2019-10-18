@@ -492,7 +492,6 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         /* create device */
         net_device = g_object_new (device_g_type,
                                    "panel", self,
-                                   "removable", FALSE,
                                    "cancellable", self->cancellable,
                                    "client", self->client,
                                    "nm-device", device,
@@ -703,7 +702,6 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
         /* add as a VPN object */
         net_vpn = g_object_new (NET_TYPE_VPN,
                                 "panel", self,
-                                "removable", TRUE,
                                 "id", id,
                                 "connection", connection,
                                 "client", self->client,

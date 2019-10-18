@@ -287,7 +287,6 @@ NetDevice *
 net_device_new (void)
 {
         return g_object_new (NET_TYPE_DEVICE,
-                             "removable", FALSE,
                              NULL);
 }
 
