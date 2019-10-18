@@ -28,11 +28,6 @@ G_BEGIN_DECLS
 
 gchar           *panel_device_status_to_localized_string       (NMDevice *nm_device,
                                                                 const gchar *speed);
-void             panel_set_device_widgets                      (GtkLabel *ipv4_heading_label, GtkLabel *ipv4_label,
-                                                                GtkLabel *ipv6_heading_label, GtkLabel *ipv6_label,
-                                                                GtkLabel *heading_dns, GtkLabel *dns_label,
-                                                                GtkLabel *route_heading_label, GtkLabel *route_label,
-                                                                NMDevice *device);
 gchar           *panel_get_ip4_address_as_string               (NMIPConfig *config, const gchar *what);
 gchar           *panel_get_ip4_dns_as_string                   (NMIPConfig *config);
 gchar           *panel_get_ip6_address_as_string               (NMIPConfig *config);
