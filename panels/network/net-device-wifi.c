@@ -64,8 +64,6 @@ struct _NetDeviceWifi
         GtkSwitch               *device_off_switch;
         GtkBox                  *header_box;
         GtkButton               *history_button;
-        GtkLabel                *hotspot_connected_heading_label;
-        GtkLabel                *hotspot_connected_label;
         GtkLabel                *hotspot_network_name_heading_label;
         GtkLabel                *hotspot_network_name_label;
         GtkSwitch               *hotspot_off_switch;
@@ -334,7 +332,6 @@ nm_device_wifi_refresh_hotspot (NetDeviceWifi *self)
         panel_set_device_widget_details (self->hotspot_network_name_heading_label, self->hotspot_network_name_label, hotspot_ssid);
         panel_set_device_widget_details (self->hotspot_security_key_heading_label, self->hotspot_security_key_label, hotspot_secret);
         panel_set_device_widget_details (self->hotspot_security_heading_label, self->hotspot_security_label, hotspot_security);
-        panel_set_device_widget_details (self->hotspot_connected_heading_label, self->hotspot_connected_label, NULL);
 }
 
 static void
@@ -1410,8 +1407,6 @@ net_device_wifi_init (NetDeviceWifi *self)
         self->device_off_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "device_off_switch"));
         self->header_box = GTK_BOX (gtk_builder_get_object (self->builder, "header_box"));
         self->history_button = GTK_BUTTON (gtk_builder_get_object (self->builder, "history_button"));
-        self->hotspot_connected_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "hotspot_connected_heading_label"));
-        self->hotspot_connected_label = GTK_LABEL (gtk_builder_get_object (self->builder, "hotspot_connected_label"));
         self->hotspot_network_name_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "hotspot_network_name_heading_label"));
         self->hotspot_network_name_label = GTK_LABEL (gtk_builder_get_object (self->builder, "hotspot_network_name_label"));
         self->hotspot_off_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "hotspot_off_switch"));
