@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 
 gchar           *panel_device_status_to_localized_string       (NMDevice *nm_device,
                                                                 const gchar *speed);
-gchar           *panel_get_ip4_address_as_string               (NMIPConfig *config, const gchar *what);
+gchar           *panel_get_ip4_address_as_string               (NMIPConfig *config);
 gchar           *panel_get_ip4_dns_as_string                   (NMIPConfig *config);
 gchar           *panel_get_ip6_address_as_string               (NMIPConfig *config);
 
