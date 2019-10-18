@@ -269,7 +269,9 @@ device_mobile_refresh_equipment_id (NetDeviceMobile *self)
                                                   "ControlCenter::EquipmentIdentifier");
         }
 
-        panel_set_device_widget_details (self->imei_heading_label, self->imei_label, equipment_id);
+        gtk_label_set_label (self->imei_label, equipment_id);
+        gtk_widget_set_visible (GTK_WIDGET (self->imei_heading_label), equipment_id != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->imei_label), equipment_id != NULL);
 }
 
 static gchar *
@@ -314,8 +316,9 @@ device_mobile_find_provider (NetDeviceMobile *self,
 static void
 device_mobile_refresh_operator_name (NetDeviceMobile *self)
 {
+        g_autofree gchar *operator_name = NULL;
+
         if (self->mm_object != NULL) {
-                g_autofree gchar *operator_name = NULL;
                 MMModem3gpp *modem_3gpp;
                 MMModemCdma *modem_cdma;
 
@@ -350,7 +353,6 @@ device_mobile_refresh_operator_name (NetDeviceMobile *self)
                                  operator_name);
                 }
 
-                panel_set_device_widget_details (self->provider_heading_label, self->provider_label, operator_name);
         } else {
                 const gchar *gsm;
                 const gchar *cdma;
@@ -361,17 +363,17 @@ device_mobile_refresh_operator_name (NetDeviceMobile *self)
                 cdma = g_object_get_data (G_OBJECT (self),
                                           "ControlCenter::OperatorNameCdma");
 
-                if (gsm != NULL && cdma != NULL) {
-                        g_autofree gchar *both = g_strdup_printf ("%s, %s", gsm, cdma);
-                        panel_set_device_widget_details (self->provider_heading_label, self->provider_label, both);
-                } else if (gsm != NULL) {
-                        panel_set_device_widget_details (self->provider_heading_label, self->provider_label, gsm);
-                } else if (cdma != NULL) {
-                        panel_set_device_widget_details (self->provider_heading_label, self->provider_label, cdma);
-                } else {
-                        panel_set_device_widget_details (self->provider_heading_label, self->provider_label, NULL);
-                }
+                if (gsm != NULL && cdma != NULL)
+                        operator_name = g_strdup_printf ("%s, %s", gsm, cdma);
+                else if (gsm != NULL)
+                        operator_name = g_strdup (gsm);
+                else if (cdma != NULL)
+                        operator_name = g_strdup (cdma);
         }
+
+        gtk_label_set_label (self->provider_label, operator_name);
+        gtk_widget_set_visible (GTK_WIDGET (self->provider_heading_label), operator_name != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->provider_label), operator_name != NULL);
 }
 
 static void

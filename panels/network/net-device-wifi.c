@@ -329,9 +329,17 @@ nm_device_wifi_refresh_hotspot (NetDeviceWifi *self)
         g_debug ("Refreshing hotspot labels to name: '%s', security key: '%s', security: '%s'",
                  hotspot_ssid, hotspot_secret, hotspot_security);
 
-        panel_set_device_widget_details (self->hotspot_network_name_heading_label, self->hotspot_network_name_label, hotspot_ssid);
-        panel_set_device_widget_details (self->hotspot_security_key_heading_label, self->hotspot_security_key_label, hotspot_secret);
-        panel_set_device_widget_details (self->hotspot_security_heading_label, self->hotspot_security_label, hotspot_security);
+        gtk_label_set_label (self->hotspot_network_name_label, hotspot_ssid);
+        gtk_widget_set_visible (GTK_WIDGET (self->hotspot_network_name_heading_label), hotspot_ssid != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->hotspot_network_name_label), hotspot_ssid != NULL);
+
+        gtk_label_set_label (self->hotspot_security_key_label, hotspot_secret);
+        gtk_widget_set_visible (GTK_WIDGET (self->hotspot_security_key_heading_label), hotspot_secret != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->hotspot_security_key_label), hotspot_secret != NULL);
+
+        gtk_label_set_label (self->hotspot_security_label, hotspot_security);
+        gtk_widget_set_visible (GTK_WIDGET (self->hotspot_security_heading_label), hotspot_security != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->hotspot_security_label), hotspot_security != NULL);
 }
 
 static void
