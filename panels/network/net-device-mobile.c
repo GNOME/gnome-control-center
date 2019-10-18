@@ -421,9 +421,9 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
         if (ipv4_config != NULL) {
                 g_autofree gchar *ipv4_text = NULL;
                 g_autofree gchar *dns_text = NULL;
-                g_autofree gchar *route_text = NULL;
+                const gchar *route_text;
 
-                ipv4_text = panel_get_ip4_address_as_string (ipv4_config, "address");
+                ipv4_text = panel_get_ip4_address_as_string (ipv4_config);
                 gtk_label_set_label (self->ipv4_label, ipv4_text);
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv4_heading_label), ipv4_text != NULL);
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv4_label), ipv4_text != NULL);
@@ -434,7 +434,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
                 gtk_widget_set_visible (GTK_WIDGET (self->dns_heading_label), dns_text != NULL);
                 gtk_widget_set_visible (GTK_WIDGET (self->dns_label), dns_text != NULL);
 
-                route_text = panel_get_ip4_address_as_string (ipv4_config, "gateway");
+                route_text = nm_ip_config_get_gateway (ipv4_config);
                 gtk_label_set_label (self->route_label, route_text);
                 gtk_widget_set_visible (GTK_WIDGET (self->route_heading_label), route_text != NULL);
                 gtk_widget_set_visible (GTK_WIDGET (self->route_label), route_text != NULL);
