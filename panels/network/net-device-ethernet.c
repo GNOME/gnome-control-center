@@ -142,21 +142,30 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
 {
         NMIPConfig *ip4_config = NULL;
         NMIPConfig *ip6_config = NULL;
-        g_autofree gchar *ip4_address = NULL;
+        const gchar *ip4_address = NULL;
         const gchar *ip4_route = NULL;
         g_autofree gchar *ip4_dns = NULL;
-        g_autofree gchar *ip6_address = NULL;
+        const gchar *ip6_address = NULL;
         gint i = 0;
 
         ip4_config = nm_device_get_ip4_config (device);
         if (ip4_config) {
-                ip4_address = panel_get_ip4_address_as_string (ip4_config);
+                GPtrArray *addresses;
+
+                addresses = nm_ip_config_get_addresses (ip4_config);
+                if (addresses->len > 0)
+                        ip4_address = nm_ip_address_get_address (g_ptr_array_index (addresses, 0));
+
                 ip4_route = nm_ip_config_get_gateway (ip4_config);
-                ip4_dns = panel_get_ip4_dns_as_string (ip4_config);
+                ip4_dns = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ip4_config));
         }
         ip6_config = nm_device_get_ip6_config (device);
         if (ip6_config) {
-                ip6_address = panel_get_ip6_address_as_string (ip6_config);
+                GPtrArray *addresses;
+
+                addresses = nm_ip_config_get_addresses (ip6_config);
+                if (addresses->len > 0)
+                        ip6_address = nm_ip_address_get_address (g_ptr_array_index (addresses, 0));
         }
 
         if (ip4_address && ip6_address) {
