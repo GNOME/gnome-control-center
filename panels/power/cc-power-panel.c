@@ -1767,6 +1767,7 @@ add_brightness_row (CcPowerPanel  *self,
   gtk_scale_set_draw_value (GTK_SCALE (scale), FALSE);
   gtk_box_pack_start (GTK_BOX (box2), scale, TRUE, TRUE, 0);
   gtk_size_group_add_widget (self->level_sizegroup, scale);
+  gtk_range_set_round_digits (GTK_RANGE (scale), 0);
   g_signal_connect (scale, "value-changed",
                     G_CALLBACK (brightness_slider_value_changed_cb), self);
 
