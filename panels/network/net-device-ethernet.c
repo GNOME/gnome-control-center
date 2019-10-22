@@ -57,22 +57,6 @@ struct _NetDeviceEthernet
 
 G_DEFINE_TYPE (NetDeviceEthernet, net_device_ethernet, NET_TYPE_DEVICE_SIMPLE)
 
-static char *
-device_ethernet_get_speed (NetDeviceSimple *device_simple)
-{
-        NMDevice *nm_device;
-        guint speed;
-
-        nm_device = net_device_get_nm_device (NET_DEVICE (device_simple));
-
-        speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (nm_device));
-        if (speed > 0) {
-                /* Translators: network device speed */
-                return g_strdup_printf (_("%d Mb/s"), speed);
-        } else
-                return NULL;
-}
-
 static GtkWidget *
 device_ethernet_add_to_stack (NetObject    *object,
                               GtkStack     *stack,
@@ -214,7 +198,7 @@ device_ethernet_refresh_ui (NetDeviceEthernet *self)
 {
         NMDevice *nm_device;
         NMDeviceState state;
-        g_autofree gchar *speed = NULL;
+        g_autofree gchar *speed_text = NULL;
         g_autofree gchar *status = NULL;
 
         nm_device = net_device_get_nm_device (NET_DEVICE (self));
@@ -229,9 +213,14 @@ device_ethernet_refresh_ui (NetDeviceEthernet *self)
         gtk_switch_set_active (self->device_off_switch, device_state_to_off_switch (state));
         self->updating_device = FALSE;
 
-        if (state != NM_DEVICE_STATE_UNAVAILABLE)
-                speed = net_device_simple_get_speed (NET_DEVICE_SIMPLE (self));
-        status = panel_device_status_to_localized_string (nm_device, speed);
+        if (state != NM_DEVICE_STATE_UNAVAILABLE) {
+                guint speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (nm_device));
+                if (speed > 0) {
+                        /* Translators: network device speed */
+                        speed_text = g_strdup_printf (_("%d Mb/s"), speed);
+                }
+        }
+        status = panel_device_status_to_localized_string (nm_device, speed_text);
         hdy_action_row_set_title (self->details_row, status);
 
         populate_ui (self);
@@ -567,11 +556,9 @@ device_ethernet_refresh (NetObject *object)
 static void
 net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
 {
-        NetDeviceSimpleClass *simple_class = NET_DEVICE_SIMPLE_CLASS (klass);
         NetObjectClass *obj_class = NET_OBJECT_CLASS (klass);
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-        simple_class->get_speed = device_ethernet_get_speed;
         obj_class->refresh = device_ethernet_refresh;
         obj_class->add_to_stack = device_ethernet_add_to_stack;
         object_class->constructed = device_ethernet_constructed;
