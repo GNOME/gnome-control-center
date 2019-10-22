@@ -605,3 +605,19 @@ net_device_ethernet_init (NetDeviceEthernet *self)
 
         g_signal_connect (self, "notify::title", G_CALLBACK (device_title_changed), NULL);
 }
+
+NetDeviceEthernet *
+net_device_ethernet_new (CcPanel      *panel,
+                         GCancellable *cancellable,
+                         NMClient     *client,
+                         NMDevice     *device,
+                         const gchar  *id)
+{
+        return g_object_new (NET_TYPE_DEVICE_ETHERNET,
+                             "panel", panel,
+                             "cancellable", cancellable,
+                             "client", client,
+                             "nm-device", device,
+                             "id", id,
+                             NULL);
+}

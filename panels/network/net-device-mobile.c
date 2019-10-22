@@ -980,3 +980,19 @@ net_device_mobile_init (NetDeviceMobile *self)
         g_signal_connect_swapped (self->options_button, "clicked",
                                   G_CALLBACK (edit_connection), self);
 }
+
+NetDeviceMobile *
+net_device_mobile_new (CcPanel      *panel,
+                       GCancellable *cancellable,
+                       NMClient     *client,
+                       NMDevice     *device,
+                       const gchar  *id)
+{
+        return g_object_new (NET_TYPE_DEVICE_MOBILE,
+                             "panel", panel,
+                             "cancellable", cancellable,
+                             "client", client,
+                             "nm-device", device,
+                             "id", id,
+                             NULL);
+}
