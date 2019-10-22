@@ -124,7 +124,6 @@ mobile_connection_changed_cb (NetDeviceMobile *self)
         NMConnection *connection;
         NMDevice *device;
         NMClient *client;
-        CcNetworkPanel *panel;
         GtkWidget *toplevel;
 
         if (self->updating_device)
@@ -145,8 +144,7 @@ mobile_connection_changed_cb (NetDeviceMobile *self)
                             COLUMN_ID, &object_path,
                             -1);
         if (g_strcmp0 (object_path, NULL) == 0) {
-                panel = net_object_get_panel (NET_OBJECT (self));
-                toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
+                toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self->box));
                 cc_network_panel_connect_to_3g_network (toplevel,
                                                         client,
                                                         device);
@@ -981,14 +979,12 @@ net_device_mobile_init (NetDeviceMobile *self)
 }
 
 NetDeviceMobile *
-net_device_mobile_new (CcPanel      *panel,
-                       GCancellable *cancellable,
+net_device_mobile_new (GCancellable *cancellable,
                        NMClient     *client,
                        NMDevice     *device,
                        const gchar  *id)
 {
         return g_object_new (NET_TYPE_DEVICE_MOBILE,
-                             "panel", panel,
                              "cancellable", cancellable,
                              "client", client,
                              "nm-device", device,

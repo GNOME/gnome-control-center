@@ -77,6 +77,7 @@ struct _NetDeviceWifi
         GtkLabel                *status_label;
         GtkLabel                *title_label;
 
+        CcPanel                 *panel;
         gboolean                 updating_device;
         gchar                   *selected_ssid_title;
         gchar                   *selected_connection_id;
@@ -106,13 +107,14 @@ net_device_wifi_new (CcPanel      *panel,
                      NMDevice     *device,
                      const gchar  *id)
 {
-        return g_object_new (NET_TYPE_DEVICE_WIFI,
-                             "panel", panel,
-                             "cancellable", cancellable,
-                             "client", client,
-                             "nm-device", device,
-                             "id", id,
-                             NULL);
+        NetDeviceWifi *self = g_object_new (NET_TYPE_DEVICE_WIFI,
+                                            "cancellable", cancellable,
+                                            "client", client,
+                                            "nm-device", device,
+                                            "id", id,
+                                            NULL);
+        self->panel = panel;
+        return self;
 }
 
 GtkWidget *
@@ -472,12 +474,10 @@ static void
 connect_to_hidden_network (NetDeviceWifi *self)
 {
         NMClient *client;
-        CcNetworkPanel *panel;
         GtkWidget *toplevel;
 
         client = net_object_get_client (NET_OBJECT (self));
-        panel = net_object_get_panel (NET_OBJECT (self));
-        toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
+        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self->notebook));
         cc_network_panel_connect_to_hidden_network (toplevel, client);
 }
 
@@ -599,7 +599,6 @@ wireless_try_to_connect (NetDeviceWifi *self,
                                                              connection_add_activate_cb,
                                                              self);
         } else {
-                CcNetworkPanel *panel;
                 g_autoptr(GVariantBuilder) builder = NULL;
                 GVariant *parameters;
 
@@ -610,8 +609,7 @@ wireless_try_to_connect (NetDeviceWifi *self,
                 g_variant_builder_add (builder, "v", g_variant_new_string (ap_object_path));
                 parameters = g_variant_new ("av", builder);
 
-                panel = net_object_get_panel (NET_OBJECT (self));
-                g_object_set (G_OBJECT (panel), "parameters", parameters, NULL);
+                g_object_set (self->panel, "parameters", parameters, NULL);
         }
 }
 
@@ -897,13 +895,11 @@ switch_hotspot_changed_cb (NetDeviceWifi *self)
 {
         GtkWidget *dialog;
         GtkWidget *window;
-        CcNetworkPanel *panel;
 
         if (self->updating_device)
                 return;
 
-        panel = net_object_get_panel (NET_OBJECT (self));
-        window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
+        window = gtk_widget_get_toplevel (GTK_WIDGET (self->notebook));
         dialog = gtk_message_dialog_new (GTK_WINDOW (window),
                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                          GTK_MESSAGE_OTHER,
@@ -1239,7 +1235,6 @@ open_history (NetDeviceWifi *self)
 {
         GtkWidget *dialog;
         GtkWidget *window;
-        CcNetworkPanel *panel;
         GtkWidget *forget;
         GtkWidget *header;
         GtkWidget *swin;
@@ -1250,8 +1245,7 @@ open_history (NetDeviceWifi *self)
         GList *list_rows;
 
         dialog = g_object_new (HDY_TYPE_DIALOG, "use-header-bar", 1, NULL);
-        panel = net_object_get_panel (NET_OBJECT (self));
-        window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
+        window = gtk_widget_get_toplevel (GTK_WIDGET (self->notebook));
         gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
         gtk_window_set_title (GTK_WINDOW (dialog), _("Known Wi-Fi Networks"));
         gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
