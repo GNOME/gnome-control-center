@@ -334,22 +334,18 @@ net_vpn_finalize (GObject *object)
         NetVpn *self = NET_VPN (object);
         NMClient *client = net_object_get_client (NET_OBJECT (object));
 
-        if (client) {
+        if (client)
                 g_signal_handlers_disconnect_by_func (client,
                                                       nm_active_connections_changed,
                                                       self);
-        }
-
-        if (self->active_connection) {
+        if (self->active_connection)
                 g_signal_handlers_disconnect_by_func (self->active_connection,
                                                       nm_device_refresh_vpn_ui,
                                                       self);
-                g_object_unref (self->active_connection);
-        }
 
-        g_object_unref (self->connection);
-        g_free (self->service_type);
-
+        g_clear_object (&self->active_connection);
+        g_clear_object (&self->connection);
+        g_clear_pointer (&self->service_type, g_free);
         g_clear_object (&self->builder);
 
         G_OBJECT_CLASS (net_vpn_parent_class)->finalize (object);

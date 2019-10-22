@@ -363,7 +363,7 @@ cc_wifi_hotspot_dialog_finalize (GObject *object)
 {
   CcWifiHotspotDialog *self = (CcWifiHotspotDialog *)object;
 
-  g_free (self->host_name);
+  g_clear_pointer (&self->host_name, g_free);
   g_clear_object (&self->device);
   g_clear_object (&self->connection);
 
@@ -474,7 +474,7 @@ cc_wifi_hotspot_dialog_set_hostname (CcWifiHotspotDialog *self,
 {
   g_return_if_fail (CC_IS_WIFI_HOTSPOT_DIALOG (self));
 
-  g_free (self->host_name);
+  g_clear_pointer (&self->host_name, g_free);
   self->host_name = g_strdup (host_name);
 }
 

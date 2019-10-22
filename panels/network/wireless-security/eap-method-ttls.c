@@ -56,8 +56,7 @@ destroy (EAPMethod *parent)
 {
 	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
 
-	if (self->size_group)
-		g_object_unref (self->size_group);
+	g_clear_object (&self->size_group);
 }
 
 static gboolean
@@ -105,8 +104,7 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 	GtkTreeIter iter;
 	g_autoptr(EAPMethod) eap = NULL;
 
-	if (self->size_group)
-		g_object_unref (self->size_group);
+	g_clear_object (&self->size_group);
 	self->size_group = g_object_ref (group);
 
 	gtk_size_group_add_widget (group, GTK_WIDGET (self->ca_cert_not_required_check));

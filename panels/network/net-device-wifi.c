@@ -970,16 +970,14 @@ net_device_wifi_finalize (GObject *object)
 {
         NetDeviceWifi *self = NET_DEVICE_WIFI (object);
 
-        if (self->cancellable) {
-                g_cancellable_cancel (self->cancellable);
-                g_clear_object (&self->cancellable);
-        }
+        g_cancellable_cancel (self->cancellable);
+        g_clear_object (&self->cancellable);
         disable_scan_timeout (self);
 
-        g_object_unref (self->builder);
-        g_free (self->selected_ssid_title);
-        g_free (self->selected_connection_id);
-        g_free (self->selected_ap_id);
+        g_clear_object (&self->builder);
+        g_clear_pointer (&self->selected_ssid_title, g_free);
+        g_clear_pointer (&self->selected_connection_id, g_free);
+        g_clear_pointer (&self->selected_ap_id, g_free);
 
         G_OBJECT_CLASS (net_device_wifi_parent_class)->finalize (object);
 }

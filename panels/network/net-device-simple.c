@@ -197,7 +197,7 @@ net_device_simple_finalize (GObject *object)
         NetDeviceSimple *self = NET_DEVICE_SIMPLE (object);
         NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (self);
 
-        g_object_unref (priv->builder);
+        g_clear_object (&priv->builder);
 
         G_OBJECT_CLASS (net_device_simple_parent_class)->finalize (object);
 }
