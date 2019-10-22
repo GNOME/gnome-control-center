@@ -160,14 +160,13 @@ wireless_security_unref (WirelessSecurity *self)
 		if (priv->destroy)
 			priv->destroy (self);
 
-		g_free (priv->username);
-		if (priv->password) {
+		if (priv->password)
 			memset (priv->password, 0, strlen (priv->password));
-			g_free (priv->password);
-		}
 
-		if (self->builder)
-			g_object_unref (self->builder);
+		g_clear_pointer (&priv->username, g_free);
+		g_clear_pointer (&priv->password, g_free);
+
+		g_clear_object (&self->builder);
 		g_slice_free1 (priv->obj_size, self);
 		g_free (priv);
 	}
@@ -306,13 +305,13 @@ wireless_security_set_userpass (WirelessSecurity *self,
 {
 	WirelessSecurityPrivate *priv = self->priv;
 
-	g_free (priv->username);
+	g_clear_pointer (&priv->username, g_free);
 	priv->username = g_strdup (user);
 
-	if (priv->password) {
+	if (priv->password)
 		memset (priv->password, 0, strlen (priv->password));
-		g_free (priv->password);
-	}
+
+	g_clear_pointer (&priv->password, g_free);
 	priv->password = g_strdup (password);
 
 	if (always_ask != (gboolean) -1)
