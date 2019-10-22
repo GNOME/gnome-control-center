@@ -33,8 +33,7 @@ G_DECLARE_FINAL_TYPE (NetDeviceWifi, net_device_wifi, NET, DEVICE_WIFI, NetDevic
 NetDeviceWifi *net_device_wifi_new               (CcPanel       *panel,
                                                   GCancellable  *cancellable,
                                                   NMClient      *client,
-                                                  NMDevice      *device,
-                                                  const gchar   *id);
+                                                  NMDevice      *device);
 
 GtkWidget     *net_device_wifi_get_header_widget (NetDeviceWifi *device_wifi);
 

@@ -31,11 +31,13 @@ G_BEGIN_DECLS
 #define NET_TYPE_VPN (net_vpn_get_type ())
 G_DECLARE_FINAL_TYPE (NetVpn, net_vpn, NET, VPN, NetObject)
 
-NetVpn *net_vpn_new                (const gchar  *id,
-                                    NMConnection *connection,
-                                    NMClient     *client);
+NetVpn       *net_vpn_new                (NMConnection *connection,
+                                          NMClient     *client);
 
-void    net_vpn_set_show_separator (NetVpn       *self,
-                                    gboolean      show_separator);
+NMConnection *net_vpn_get_connection     (NetVpn       *vpn);
+
+
+void          net_vpn_set_show_separator (NetVpn       *vpn,
+                                          gboolean      show_separator);
 
 G_END_DECLS

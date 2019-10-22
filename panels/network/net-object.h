@@ -43,9 +43,6 @@ struct _NetObjectClass
         void                     (*refresh)             (NetObject       *object);
 };
 
-const gchar     *net_object_get_id                      (NetObject      *object);
-void             net_object_set_id                      (NetObject      *object,
-                                                         const gchar    *id);
 const gchar     *net_object_get_title                   (NetObject      *object);
 void             net_object_set_title                   (NetObject      *object,
                                                          const gchar    *title);
