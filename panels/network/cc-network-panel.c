@@ -32,6 +32,7 @@
 
 #include "net-device.h"
 #include "net-device-mobile.h"
+#include "net-device-simple.h"
 #include "net-device-wifi.h"
 #include "net-device-ethernet.h"
 #include "net-object.h"
