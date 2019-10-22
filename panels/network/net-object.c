@@ -32,7 +32,6 @@ typedef struct
         gchar                           *title;
         GCancellable                    *cancellable;
         NMClient                        *client;
-        CcNetworkPanel                  *panel;
 } NetObjectPrivate;
 
 enum {
@@ -41,7 +40,6 @@ enum {
         PROP_TITLE,
         PROP_CLIENT,
         PROP_CANCELLABLE,
-        PROP_PANEL,
         PROP_LAST
 };
 
@@ -132,15 +130,6 @@ net_object_get_cancellable (NetObject *self)
         return priv->cancellable;
 }
 
-CcNetworkPanel *
-net_object_get_panel (NetObject *self)
-{
-        NetObjectPrivate *priv = net_object_get_instance_private (self);
-
-        g_return_val_if_fail (NET_IS_OBJECT (self), NULL);
-        return priv->panel;
-}
-
 GtkWidget *
 net_object_get_widget (NetObject    *self,
                        GtkSizeGroup *heading_size_group)
@@ -191,9 +180,6 @@ net_object_get_property (GObject *object,
         case PROP_CANCELLABLE:
                 g_value_set_object (value, priv->cancellable);
                 break;
-        case PROP_PANEL:
-                g_value_set_pointer (value, priv->panel);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -230,12 +216,6 @@ net_object_set_property (GObject *object,
                 g_assert (!priv->cancellable);
                 priv->cancellable = g_value_dup_object (value);
                 break;
-        case PROP_PANEL:
-                g_assert (!priv->panel);
-                priv->panel = g_value_get_pointer (value);
-                if (priv->panel)
-                        g_object_add_weak_pointer (G_OBJECT (priv->panel), (gpointer *) (&priv->panel));
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -254,8 +234,6 @@ net_object_finalize (GObject *object)
 
         if (priv->client)
                 g_object_remove_weak_pointer (G_OBJECT (priv->client), (gpointer *) (&priv->client));
-        if (priv->panel)
-                g_object_remove_weak_pointer (G_OBJECT (priv->panel), (gpointer *) (&priv->panel));
 
         G_OBJECT_CLASS (net_object_parent_class)->finalize (object);
 }
@@ -287,10 +265,6 @@ net_object_class_init (NetObjectClass *klass)
                                      G_TYPE_CANCELLABLE,
                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_CANCELLABLE, pspec);
-
-        pspec = g_param_spec_pointer ("panel", NULL, NULL,
-                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
-        g_object_class_install_property (object_class, PROP_PANEL, pspec);
 
         signals[SIGNAL_CHANGED] =
                 g_signal_new ("changed",

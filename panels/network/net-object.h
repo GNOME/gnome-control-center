@@ -51,7 +51,6 @@ void             net_object_set_title                   (NetObject      *object,
                                                          const gchar    *title);
 NMClient        *net_object_get_client                  (NetObject      *object);
 GCancellable    *net_object_get_cancellable             (NetObject      *object);
-CcNetworkPanel  *net_object_get_panel                   (NetObject      *object);
 void             net_object_emit_changed                (NetObject      *object);
 void             net_object_emit_removed                (NetObject      *object);
 void             net_object_refresh                     (NetObject      *object);

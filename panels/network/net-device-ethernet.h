@@ -30,8 +30,7 @@ G_BEGIN_DECLS
 #define NET_TYPE_DEVICE_ETHERNET          (net_device_ethernet_get_type ())
 G_DECLARE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, NET, DEVICE_ETHERNET, NetDevice)
 
-NetDeviceEthernet *net_device_ethernet_new (CcPanel      *panel,
-                                            GCancellable *cancellable,
+NetDeviceEthernet *net_device_ethernet_new (GCancellable *cancellable,
                                             NMClient     *client,
                                             NMDevice     *device,
                                             const gchar  *id);
