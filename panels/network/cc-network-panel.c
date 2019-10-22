@@ -452,6 +452,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         NetDevice *net_device;
         GType device_g_type;
         const char *udi;
+        GtkWidget *stack;
 
         if (!nm_device_get_managed (device))
                 return;
@@ -523,16 +524,11 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         }
 
         /* add as a panel */
-        if (device_g_type != NET_TYPE_DEVICE) {
-                GtkWidget *stack;
-
-                stack = add_device_stack (self, NET_OBJECT (net_device));
-
-                if (device_g_type == NET_TYPE_DEVICE_SIMPLE)
-                        gtk_container_add (GTK_CONTAINER (self->box_simple), stack);
-                else
-                        gtk_container_add (GTK_CONTAINER (self->box_wired), stack);
-        }
+        stack = add_device_stack (self, NET_OBJECT (net_device));
+        if (device_g_type == NET_TYPE_DEVICE_SIMPLE)
+                gtk_container_add (GTK_CONTAINER (self->box_simple), stack);
+        else
+                gtk_container_add (GTK_CONTAINER (self->box_wired), stack);
 
         /* Add to the devices array */
         g_ptr_array_add (self->devices, net_device);
