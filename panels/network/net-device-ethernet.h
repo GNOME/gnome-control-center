@@ -32,7 +32,6 @@ G_DECLARE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, NET, DEVICE_ETHERN
 
 NetDeviceEthernet *net_device_ethernet_new (GCancellable *cancellable,
                                             NMClient     *client,
-                                            NMDevice     *device,
-                                            const gchar  *id);
+                                            NMDevice     *device);
 
 G_END_DECLS

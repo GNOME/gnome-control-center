@@ -90,7 +90,6 @@ enum {
         PROP_PARAMETERS
 };
 
-static NetObject *find_net_object_by_id (CcNetworkPanel *self, const gchar *id);
 static void handle_argv (CcNetworkPanel *self);
 
 CC_PANEL_REGISTER (CcNetworkPanel, cc_network_panel)
@@ -378,10 +377,7 @@ handle_argv (CcNetworkPanel *self)
                         done = handle_argv_for_device (self, device);
                         g_object_unref (device);
                 } else if (NET_IS_VPN (object_tmp)) {
-                        g_autoptr(NMConnection) connection = NULL;
-
-                        g_object_get (object_tmp, "connection", &connection, NULL);
-                        done = handle_argv_for_connection (self, connection);
+                        done = handle_argv_for_connection (self, net_vpn_get_connection (NET_VPN (object_tmp)));
                 }
 
                 if (done)
@@ -446,20 +442,23 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
 {
         NMDeviceType type;
         NetDevice *net_device;
-        const char *udi;
+        guint i;
 
         if (!nm_device_get_managed (device))
                 return;
 
-        /* do we have an existing object with this id? */
-        udi = nm_device_get_udi (device);
-        if (find_net_object_by_id (self, udi) != NULL)
-                return;
+        /* does already exist */
+        for (i = 0; i < self->devices->len; i++) {
+                NetObject *o = g_ptr_array_index (self->devices, i);
+
+                if (NET_IS_DEVICE (o) && net_device_get_nm_device (NET_DEVICE (o)) == device)
+                        return;
+        }
 
         type = nm_device_get_device_type (device);
 
         g_debug ("device %s type %i path %s",
-                 udi, type, nm_object_get_path (NM_OBJECT (device)));
+                 nm_device_get_udi (device), type, nm_object_get_path (NM_OBJECT (device)));
 
         /* map the NMDeviceType to the GType, or ignore */
         switch (type) {
@@ -467,22 +466,19 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         case NM_DEVICE_TYPE_INFINIBAND:
                 net_device = NET_DEVICE (net_device_ethernet_new (self->cancellable,
                                                                   self->client,
-                                                                  device,
-                                                                  nm_device_get_udi (device)));
+                                                                  device));
                 add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_wired));
                 break;
         case NM_DEVICE_TYPE_MODEM:
                 net_device = NET_DEVICE (net_device_mobile_new (self->cancellable,
                                                                 self->client,
-                                                                device,
-                                                                nm_device_get_udi (device)));
+                                                                device));
                 add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_wired));
                 break;
         case NM_DEVICE_TYPE_BT:
                 net_device = NET_DEVICE (net_device_bluetooth_new (self->cancellable,
                                                                    self->client,
-                                                                   device,
-                                                                   nm_device_get_udi (device)));
+                                                                   device));
                 add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_bluetooth));
                 break;
 
@@ -537,10 +533,16 @@ static void
 panel_remove_device (CcNetworkPanel *self, NMDevice *device)
 {
         NetObject *object;
+        guint i;
 
-        /* remove device from array */
-        object = find_net_object_by_id (self, nm_device_get_udi (device));
+        for (i = 0; i < self->devices->len; i++) {
+                NetObject *o = g_ptr_array_index (self->devices, i);
 
+                if (NET_IS_DEVICE (o) && net_device_get_nm_device (NET_DEVICE (o)) == device) {
+                        object = o;
+                        break;
+                }
+        }
         if (object == NULL)
                 return;
 
@@ -652,39 +654,22 @@ out:
         handle_argv (self);
 }
 
-static NetObject *
-find_net_object_by_id (CcNetworkPanel *self, const gchar *id)
-{
-        NetObject *object_tmp;
-        NetObject *object = NULL;
-        guint i;
-
-        for (i = 0; i < self->devices->len; i++) {
-                object_tmp = g_ptr_array_index (self->devices, i);
-
-                if (g_strcmp0 (net_object_get_id (object_tmp), id) == 0) {
-                        object = object_tmp;
-                        break;
-                }
-        }
-
-        return object;
-}
-
 static void
 panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
 {
         NetVpn *net_vpn;
-        const gchar *id;
+        guint i;
 
         /* does already exist */
-        id = nm_connection_get_path (connection);
-        if (find_net_object_by_id (self, id) != NULL)
-                return;
+        for (i = 0; i < self->devices->len; i++) {
+                NetObject *o = g_ptr_array_index (self->devices, i);
+
+                if (NET_IS_VPN (o) && net_vpn_get_connection (NET_VPN (o)) == connection)
+                        return;
+        }
 
         /* add as a VPN object */
-        net_vpn = net_vpn_new (id,
-                               connection,
+        net_vpn = net_vpn_new (connection,
                                self->client);
         g_signal_connect_object (net_vpn, "removed",
                                  G_CALLBACK (object_removed_cb), self, G_CONNECT_SWAPPED);

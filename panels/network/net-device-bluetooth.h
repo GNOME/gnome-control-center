@@ -33,8 +33,7 @@ G_DECLARE_FINAL_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET, DEVICE_BLUE
 
 NetDeviceBluetooth *net_device_bluetooth_new                (GCancellable       *cancellable,
                                                              NMClient           *client,
-                                                             NMDevice           *device,
-                                                             const gchar        *id);
+                                                             NMDevice           *device);
 
 void                net_device_bluetooth_set_show_separator (NetDeviceBluetooth *device_bluetooth,
                                                              gboolean            show_separator);
