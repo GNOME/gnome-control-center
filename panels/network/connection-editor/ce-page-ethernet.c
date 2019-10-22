@@ -34,56 +34,69 @@
 G_DEFINE_TYPE (CEPageEthernet, ce_page_ethernet, CE_TYPE_PAGE)
 
 static void
-mtu_changed (GtkSpinButton *mtu, CEPageEthernet *page)
+mtu_changed (CEPageEthernet *self)
 {
-        if (gtk_spin_button_get_value_as_int (mtu) == 0)
-                gtk_widget_hide (page->mtu_label);
+        if (gtk_spin_button_get_value_as_int (self->mtu) == 0)
+                gtk_widget_hide (self->mtu_label);
         else
-                gtk_widget_show (page->mtu_label);
+                gtk_widget_show (self->mtu_label);
 }
 
 static void
-connect_ethernet_page (CEPageEthernet *page)
+mtu_output_cb (CEPageEthernet *self)
 {
-        NMSettingWired *setting = page->setting_wired;
-        int mtu_def;
+        gint defvalue;
+        gint val;
+        g_autofree gchar *buf = NULL;
+
+        val = gtk_spin_button_get_value_as_int (self->mtu);
+        defvalue = ce_get_property_default (NM_SETTING (self->setting_wired), NM_SETTING_WIRED_MTU);
+        if (val == defvalue)
+                buf = g_strdup (_("automatic"));
+        else
+                buf = g_strdup_printf ("%d", val);
+
+        if (strcmp (buf, gtk_entry_get_text (GTK_ENTRY (self->mtu))))
+                gtk_entry_set_text (GTK_ENTRY (self->mtu), buf);
+}
+
+static void
+connect_ethernet_page (CEPageEthernet *self)
+{
+        NMSettingWired *setting = self->setting_wired;
         char **mac_list;
         const char *s_mac_str;
         const gchar *name;
         const gchar *cloned_mac;
 
-        name = nm_setting_connection_get_id (page->setting_connection);
-        gtk_entry_set_text (page->name, name);
+        name = nm_setting_connection_get_id (self->setting_connection);
+        gtk_entry_set_text (self->name, name);
 
         /* Device MAC address */
-        mac_list = ce_page_get_mac_list (CE_PAGE (page)->client, NM_TYPE_DEVICE_ETHERNET,
+        mac_list = ce_page_get_mac_list (CE_PAGE (self)->client, NM_TYPE_DEVICE_ETHERNET,
                                          NM_DEVICE_ETHERNET_PERMANENT_HW_ADDRESS);
         s_mac_str = nm_setting_wired_get_mac_address (setting);
-        ce_page_setup_mac_combo (page->device_mac, s_mac_str, mac_list);
+        ce_page_setup_mac_combo (self->device_mac, s_mac_str, mac_list);
         g_strfreev (mac_list);
-        g_signal_connect_swapped (page->device_mac, "changed", G_CALLBACK (ce_page_changed), page);
+        g_signal_connect_swapped (self->device_mac, "changed", G_CALLBACK (ce_page_changed), self);
 
         /* Cloned MAC address */
         cloned_mac = nm_setting_wired_get_cloned_mac_address (setting);
-        ce_page_setup_cloned_mac_combo (page->cloned_mac, cloned_mac);
-        g_signal_connect_swapped (page->cloned_mac, "changed", G_CALLBACK (ce_page_changed), page);
+        ce_page_setup_cloned_mac_combo (self->cloned_mac, cloned_mac);
+        g_signal_connect_swapped (self->cloned_mac, "changed", G_CALLBACK (ce_page_changed), self);
 
         /* MTU */
-        mtu_def = ce_get_property_default (NM_SETTING (setting), NM_SETTING_WIRED_MTU);
-        g_signal_connect (page->mtu, "output",
-                          G_CALLBACK (ce_spin_output_with_default),
-                          GINT_TO_POINTER (mtu_def));
-        gtk_spin_button_set_value (page->mtu, (gdouble) nm_setting_wired_get_mtu (setting));
-        g_signal_connect (page->mtu, "value-changed",
-                          G_CALLBACK (mtu_changed), page);
-        mtu_changed (page->mtu, page);
+        g_signal_connect_swapped (self->mtu, "output", G_CALLBACK (mtu_output_cb), self);
+        gtk_spin_button_set_value (self->mtu, (gdouble) nm_setting_wired_get_mtu (setting));
+        g_signal_connect_swapped (self->mtu, "value-changed", G_CALLBACK (mtu_changed), self);
+        mtu_changed (self);
 
-        g_signal_connect_swapped (page->name, "changed", G_CALLBACK (ce_page_changed), page);
-        g_signal_connect_swapped (page->mtu, "value-changed", G_CALLBACK (ce_page_changed), page);
+        g_signal_connect_swapped (self->name, "changed", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_swapped (self->mtu, "value-changed", G_CALLBACK (ce_page_changed), self);
 }
 
 static void
-ui_to_setting (CEPageEthernet *page)
+ui_to_setting (CEPageEthernet *self)
 {
         g_autofree gchar *device_mac = NULL;
         g_autofree gchar *cloned_mac = NULL;
@@ -91,23 +104,23 @@ ui_to_setting (CEPageEthernet *page)
         GtkWidget *entry;
         GtkComboBoxText *combo;
 
-        entry = gtk_bin_get_child (GTK_BIN (page->device_mac));
+        entry = gtk_bin_get_child (GTK_BIN (self->device_mac));
         if (entry) {
                 text = gtk_entry_get_text (GTK_ENTRY (entry));
                 device_mac = ce_page_trim_address (text);
         }
 
-        combo = page->cloned_mac;
+        combo = self->cloned_mac;
         cloned_mac = ce_page_cloned_mac_get (combo);
 
-        g_object_set (page->setting_wired,
+        g_object_set (self->setting_wired,
                       NM_SETTING_WIRED_MAC_ADDRESS, device_mac,
                       NM_SETTING_WIRED_CLONED_MAC_ADDRESS, cloned_mac,
-                      NM_SETTING_WIRED_MTU, (guint32) gtk_spin_button_get_value_as_int (page->mtu),
+                      NM_SETTING_WIRED_MTU, (guint32) gtk_spin_button_get_value_as_int (self->mtu),
                       NULL);
 
-        g_object_set (page->setting_connection,
-                      NM_SETTING_CONNECTION_ID, gtk_entry_get_text (page->name),
+        g_object_set (self->setting_connection,
+                      NM_SETTING_CONNECTION_ID, gtk_entry_get_text (self->name),
                       NULL);
 }
 
@@ -149,7 +162,7 @@ validate (CEPage        *page,
 }
 
 static void
-ce_page_ethernet_init (CEPageEthernet *page)
+ce_page_ethernet_init (CEPageEthernet *self)
 {
 }
 
@@ -165,24 +178,24 @@ CEPage *
 ce_page_ethernet_new (NMConnection     *connection,
                       NMClient         *client)
 {
-        CEPageEthernet *page;
+        CEPageEthernet *self;
 
-        page = CE_PAGE_ETHERNET (ce_page_new (CE_TYPE_PAGE_ETHERNET,
+        self = CE_PAGE_ETHERNET (ce_page_new (CE_TYPE_PAGE_ETHERNET,
                                               connection,
                                               client,
                                               "/org/gnome/control-center/network/ethernet-page.ui",
                                               _("Identity")));
 
-        page->name = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (page)->builder, "entry_name"));
-        page->device_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_mac"));
-        page->cloned_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_cloned_mac"));
-        page->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "spin_mtu"));
-        page->mtu_label = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "label_mtu"));
+        self->name = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (self)->builder, "name_entry"));
+        self->device_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "mac_combo"));
+        self->cloned_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "cloned_mac_combo"));
+        self->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "mtu_spin"));
+        self->mtu_label = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (self)->builder, "mtu_label"));
 
-        page->setting_connection = nm_connection_get_setting_connection (connection);
-        page->setting_wired = nm_connection_get_setting_wired (connection);
+        self->setting_connection = nm_connection_get_setting_connection (connection);
+        self->setting_wired = nm_connection_get_setting_wired (connection);
 
-        connect_ethernet_page (page);
+        connect_ethernet_page (self);
 
-        return CE_PAGE (page);
+        return CE_PAGE (self);
 }

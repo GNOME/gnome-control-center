@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkBox" id="vbox9">
+  <object class="GtkBox" id="box">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="hexpand">True</property>
@@ -37,7 +37,7 @@
                 <property name="margin_end">12</property>
                 <property name="spacing">12</property>
                 <child>
-                  <object class="GtkLabel" id="label_device">
+                  <object class="GtkLabel" id="device_label">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
@@ -52,14 +52,14 @@
                     <property name="halign">end</property>
                     <property name="valign">center</property>
                     <child internal-child="accessible">
-                      <object class="AtkObject" id="device_off_switch-accessible">
+                      <object class="AtkObject">
                         <property name="accessible-name" translatable="yes">Turn VPN connection off</property>
                       </object>
                     </child>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button_options">
+                  <object class="GtkButton" id="options_button">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
@@ -75,7 +75,7 @@
                       </object>
                     </child>
                     <child internal-child="accessible">
-                      <object class="AtkObject" id="button_options-accessible">
+                      <object class="AtkObject">
                         <property name="accessible-name" translatable="yes">Options…</property>
                       </object>
                     </child>

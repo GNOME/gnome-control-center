@@ -11,12 +11,12 @@
     <property name="row_spacing">12</property>
     <property name="column_spacing">12</property>
     <child>
-      <object class="GtkLabel" id="heading_strength">
+      <object class="GtkLabel" id="strength_heading_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">Signal Strength</property>
-        <property name="mnemonic_widget">label_strength</property>
+        <property name="mnemonic_widget">strength_label</property>
         <style>
           <class name="dim-label"/>
         </style>
@@ -29,13 +29,15 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="label_strength">
+      <object class="GtkLabel" id="strength_label">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="hexpand">True</property>
         <property name="xalign">0</property>
         <property name="label">Weak</property>
         <property name="selectable">True</property>
+        <property name="max-width-chars">50</property>
+        <property name="ellipsize">end</property>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -45,12 +47,12 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="heading_speed">
+      <object class="GtkLabel" id="speed_heading_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">Link speed</property>
-        <property name="mnemonic_widget">label_speed</property>
+        <property name="mnemonic_widget">speed_label</property>
         <style>
           <class name="dim-label"/>
         </style>
@@ -63,13 +65,15 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="label_speed">
+      <object class="GtkLabel" id="speed_label">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="xalign">0</property>
         <property name="label">1Mb/sec</property>
         <property name="selectable">True</property>
         <property name="hexpand">True</property>
+        <property name="max-width-chars">50</property>
+        <property name="ellipsize">end</property>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -79,12 +83,12 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="heading_security">
+      <object class="GtkLabel" id="security_heading_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">Security</property>
-        <property name="mnemonic_widget">label_security</property>
+        <property name="mnemonic_widget">security_label</property>
         <style>
           <class name="dim-label"/>
         </style>
@@ -97,12 +101,12 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="heading_ipv4">
+      <object class="GtkLabel" id="ipv4_heading_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">IPv4 Address</property>
-        <property name="mnemonic_widget">label_ipv4</property>
+        <property name="mnemonic_widget">ipv4_label</property>
         <style>
           <class name="dim-label"/>
         </style>
@@ -115,12 +119,12 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="heading_ipv6">
+      <object class="GtkLabel" id="ipv6_heading_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">IPv6 Address</property>
-        <property name="mnemonic_widget">label_ipv6</property>
+        <property name="mnemonic_widget">ipv6_label</property>
         <style>
           <class name="dim-label"/>
         </style>
@@ -133,12 +137,12 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="heading_mac">
+      <object class="GtkLabel" id="mac_heading_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">Hardware Address</property>
-        <property name="mnemonic_widget">label_mac</property>
+        <property name="mnemonic_widget">mac_label</property>
         <style>
           <class name="dim-label"/>
         </style>
@@ -151,12 +155,12 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="heading_route">
+      <object class="GtkLabel" id="route_heading_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">Default Route</property>
-        <property name="mnemonic_widget">label_route</property>
+        <property name="mnemonic_widget">route_label</property>
         <style>
           <class name="dim-label"/>
         </style>
@@ -169,13 +173,13 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="heading_dns">
+      <object class="GtkLabel" id="dns_heading_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="yalign">0</property>
         <property name="label" translatable="yes">DNS</property>
-        <property name="mnemonic_widget">label_dns</property>
+        <property name="mnemonic_widget">dns_label</property>
         <style>
           <class name="dim-label"/>
         </style>
@@ -188,12 +192,12 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="heading_last_used">
+      <object class="GtkLabel" id="last_used_heading_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">Last Used</property>
-        <property name="mnemonic_widget">label_last_used</property>
+        <property name="mnemonic_widget">last_used_label</property>
         <style>
           <class name="dim-label"/>
         </style>
@@ -206,13 +210,15 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="label_security">
+      <object class="GtkLabel" id="security_label">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="xalign">0</property>
         <property name="label">WPA</property>
         <property name="selectable">True</property>
         <property name="hexpand">True</property>
+        <property name="max-width-chars">50</property>
+        <property name="ellipsize">end</property>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -222,13 +228,15 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="label_ipv4">
+      <object class="GtkLabel" id="ipv4_label">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="xalign">0</property>
         <property name="label">127.0.0.1</property>
         <property name="selectable">True</property>
         <property name="hexpand">True</property>
+        <property name="max-width-chars">50</property>
+        <property name="ellipsize">end</property>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -238,13 +246,15 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="label_ipv6">
+      <object class="GtkLabel" id="ipv6_label">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="xalign">0</property>
         <property name="label">::1</property>
         <property name="selectable">True</property>
         <property name="hexpand">True</property>
+        <property name="max-width-chars">50</property>
+        <property name="ellipsize">end</property>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -254,13 +264,15 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="label_mac">
+      <object class="GtkLabel" id="mac_label">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="xalign">0</property>
         <property name="label">AA:BB:CC:DD:55:66:77:88</property>
         <property name="selectable">True</property>
         <property name="hexpand">True</property>
+        <property name="max-width-chars">50</property>
+        <property name="ellipsize">end</property>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -270,13 +282,15 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="label_route">
+      <object class="GtkLabel" id="route_label">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="xalign">0</property>
         <property name="label">127.0.0.1</property>
         <property name="selectable">True</property>
         <property name="hexpand">True</property>
+        <property name="max-width-chars">50</property>
+        <property name="ellipsize">end</property>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -286,7 +300,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="label_dns">
+      <object class="GtkLabel" id="dns_label">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="xalign">0</property>
@@ -295,6 +309,8 @@
         <property name="wrap">True</property>
         <property name="selectable">True</property>
         <property name="hexpand">True</property>
+        <property name="max-width-chars">50</property>
+        <property name="ellipsize">end</property>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -304,13 +320,15 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="label_last_used">
+      <object class="GtkLabel" id="last_used_label">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="xalign">0</property>
         <property name="label">today</property>
         <property name="selectable">True</property>
         <property name="hexpand">True</property>
+        <property name="max-width-chars">50</property>
+        <property name="ellipsize">end</property>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -408,7 +426,7 @@
     </child>
 
     <child>
-      <object class="GtkButton" id="button_forget">
+      <object class="GtkButton" id="forget_button">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="use_underline">True</property>

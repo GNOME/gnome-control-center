@@ -50,13 +50,13 @@ enum {
 static guint signals[LAST_SIGNAL] = { 0 };
 
 gboolean
-ce_page_validate (CEPage *page, NMConnection *connection, GError **error)
+ce_page_validate (CEPage *self, NMConnection *connection, GError **error)
 {
-        g_return_val_if_fail (CE_IS_PAGE (page), FALSE);
+        g_return_val_if_fail (CE_IS_PAGE (self), FALSE);
         g_return_val_if_fail (NM_IS_CONNECTION (connection), FALSE);
 
-        if (CE_PAGE_GET_CLASS (page)->validate)
-                return CE_PAGE_GET_CLASS (page)->validate (page, connection, error);
+        if (CE_PAGE_GET_CLASS (self)->validate)
+                return CE_PAGE_GET_CLASS (self)->validate (self, connection, error);
 
         return TRUE;
 }
@@ -221,43 +221,43 @@ ce_page_new (GType             type,
              const gchar      *ui_resource,
              const gchar      *title)
 {
-        g_autoptr(CEPage) page = NULL;
+        g_autoptr(CEPage) self = NULL;
         g_autoptr(GError) error = NULL;
 
-        page = CE_PAGE (g_object_new (type,
+        self = CE_PAGE (g_object_new (type,
                                       "connection", connection,
                                       NULL));
-        page->title = g_strdup (title);
-        page->client = client;
+        self->title = g_strdup (title);
+        self->client = client;
 
         if (ui_resource) {
-                if (!gtk_builder_add_from_resource (page->builder, ui_resource, &error)) {
+                if (!gtk_builder_add_from_resource (self->builder, ui_resource, &error)) {
                         g_warning ("Couldn't load builder file: %s", error->message);
                         return NULL;
                 }
-                page->page = GTK_WIDGET (gtk_builder_get_object (page->builder, "page"));
-                if (!page->page) {
+                self->page = GTK_WIDGET (gtk_builder_get_object (self->builder, "page"));
+                if (!self->page) {
                         g_warning ("Couldn't load page widget from %s", ui_resource);
                         return NULL;
                 }
 
-                g_object_ref_sink (page->page);
+                g_object_ref_sink (self->page);
         }
 
-        return g_steal_pointer (&page);
+        return g_steal_pointer (&self);
 }
 
 static void
-emit_initialized (CEPage *page,
+emit_initialized (CEPage *self,
                   GError *error)
 {
-        page->initialized = TRUE;
-        g_signal_emit (page, signals[INITIALIZED], 0, error);
+        self->initialized = TRUE;
+        g_signal_emit (self, signals[INITIALIZED], 0, error);
         g_clear_error (&error);
 }
 
 void
-ce_page_complete_init (CEPage      *page,
+ce_page_complete_init (CEPage      *self,
                        const gchar *setting_name,
                        GVariant    *secrets,
                        GError      *error)
@@ -266,8 +266,8 @@ ce_page_complete_init (CEPage      *page,
 	g_autoptr(GVariant) setting_dict = NULL;
 	gboolean ignore_error = FALSE;
 
-	g_return_if_fail (page != NULL);
-	g_return_if_fail (CE_IS_PAGE (page));
+	g_return_if_fail (self != NULL);
+	g_return_if_fail (CE_IS_PAGE (self));
 
 	if (error) {
 		ignore_error = g_error_matches (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_SETTING_NOT_FOUND) ||
@@ -276,11 +276,11 @@ ce_page_complete_init (CEPage      *page,
 
 	/* Ignore missing settings errors */
 	if (error && !ignore_error) {
-		emit_initialized (page, error);
+		emit_initialized (self, error);
 		return;
 	} else if (!setting_name || !secrets || g_variant_n_children (secrets) == 0) {
 		/* Success, no secrets */
-		emit_initialized (page, NULL);
+		emit_initialized (self, NULL);
 		return;
 	}
 
@@ -290,18 +290,18 @@ ce_page_complete_init (CEPage      *page,
 	setting_dict = g_variant_lookup_value (secrets, setting_name, NM_VARIANT_TYPE_SETTING);
 	if (!setting_dict) {
 		/* Success, no secrets */
-		emit_initialized (page, NULL);
+		emit_initialized (self, NULL);
 		return;
 	}
 
 	/* Update the connection with the new secrets */
-	if (!nm_connection_update_secrets (page->connection,
+	if (!nm_connection_update_secrets (self->connection,
                                            setting_name,
                                            secrets,
                                            &update_error))
                 g_warning ("Couldn't update secrets: %s", update_error->message);
 
-	emit_initialized (page, NULL);
+	emit_initialized (self, NULL);
 }
 
 gchar **
@@ -481,9 +481,9 @@ ce_page_cloned_mac_combo_valid (GtkComboBoxText *combo)
 }
 
 const gchar *
-ce_page_get_security_setting (CEPage *page)
+ce_page_get_security_setting (CEPage *self)
 {
-        return page->security_setting;
+        return self->security_setting;
 }
 
 gint
@@ -516,25 +516,6 @@ ce_get_property_default (NMSetting *setting, const gchar *property_name)
                 return (int) g_value_get_uchar (&value);
         g_return_val_if_fail (FALSE, 0);
         return 0;
-}
-
-gint
-ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data)
-{
-        gint defvalue = GPOINTER_TO_INT (user_data);
-        gint val;
-        g_autofree gchar *buf = NULL;
-
-        val = gtk_spin_button_get_value_as_int (spin);
-        if (val == defvalue)
-                buf = g_strdup (_("automatic"));
-        else
-                buf = g_strdup_printf ("%d", val);
-
-        if (strcmp (buf, gtk_entry_get_text (GTK_ENTRY (spin))))
-                gtk_entry_set_text (GTK_ENTRY (spin), buf);
-
-        return TRUE;
 }
 
 gchar *

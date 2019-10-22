@@ -41,13 +41,7 @@ struct _NetObjectClass
         GtkWidget               *(*add_to_stack)       (NetObject       *object,
                                                         GtkStack        *stack,
                                                         GtkSizeGroup    *heading_size_group);
-        void                     (*delete)              (NetObject       *object);
         void                     (*refresh)             (NetObject       *object);
-        void                     (*edit)                (NetObject       *object);
-
-        /* signal */
-        void                     (* changed)            (NetObject      *object);
-        void                     (* removed)            (NetObject      *object);
 };
 
 const gchar     *net_object_get_id                      (NetObject      *object);
@@ -61,15 +55,10 @@ GCancellable    *net_object_get_cancellable             (NetObject      *object)
 CcNetworkPanel  *net_object_get_panel                   (NetObject      *object);
 void             net_object_emit_changed                (NetObject      *object);
 void             net_object_emit_removed                (NetObject      *object);
-void             net_object_delete                      (NetObject      *object);
 void             net_object_refresh                     (NetObject      *object);
-void             net_object_edit                        (NetObject      *object);
 GtkWidget       *net_object_add_to_stack                (NetObject      *object,
                                                          GtkStack       *stack,
                                                          GtkSizeGroup   *heading_size_group);
-gboolean         net_object_get_removable               (NetObject      *object);
-void             net_object_set_removable               (NetObject      *object,
-                                                         gboolean        removable);
 
 G_END_DECLS
 

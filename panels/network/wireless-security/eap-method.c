@@ -48,78 +48,74 @@ eap_method_get_type (void)
 }
 
 GtkWidget *
-eap_method_get_widget (EAPMethod *method)
+eap_method_get_widget (EAPMethod *self)
 {
-	g_return_val_if_fail (method != NULL, NULL);
+	g_return_val_if_fail (self != NULL, NULL);
 
-	return method->ui_widget;
+	return self->ui_widget;
 }
 
 gboolean
-eap_method_validate (EAPMethod *method, GError **error)
+eap_method_validate (EAPMethod *self, GError **error)
 {
 	gboolean result;
 
-	g_return_val_if_fail (method != NULL, FALSE);
+	g_return_val_if_fail (self != NULL, FALSE);
 
-	g_assert (method->validate);
-	result = (*(method->validate)) (method, error);
+	g_assert (self->validate);
+	result = (*(self->validate)) (self, error);
 	if (!result && error && !*error)
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("undefined error in 802.1X security (wpa-eap)"));
 	return result;
 }
 
 void
-eap_method_add_to_size_group (EAPMethod *method, GtkSizeGroup *group)
+eap_method_add_to_size_group (EAPMethod *self, GtkSizeGroup *group)
 {
-	g_return_if_fail (method != NULL);
+	g_return_if_fail (self != NULL);
 	g_return_if_fail (group != NULL);
 
-	g_assert (method->add_to_size_group);
-	return (*(method->add_to_size_group)) (method, group);
+	g_assert (self->add_to_size_group);
+	return (*(self->add_to_size_group)) (self, group);
 }
 
 void
-eap_method_fill_connection (EAPMethod *method,
+eap_method_fill_connection (EAPMethod *self,
                             NMConnection *connection,
                             NMSettingSecretFlags flags)
 {
-	g_return_if_fail (method != NULL);
+	g_return_if_fail (self != NULL);
 	g_return_if_fail (connection != NULL);
 
-	g_assert (method->fill_connection);
-	return (*(method->fill_connection)) (method, connection, flags);
+	g_assert (self->fill_connection);
+	return (*(self->fill_connection)) (self, connection, flags);
 }
 
 void
-eap_method_update_secrets (EAPMethod *method, NMConnection *connection)
+eap_method_update_secrets (EAPMethod *self, NMConnection *connection)
 {
-	g_return_if_fail (method != NULL);
+	g_return_if_fail (self != NULL);
 	g_return_if_fail (connection != NULL);
 
-	if (method->update_secrets)
-		method->update_secrets (method, connection);
+	if (self->update_secrets)
+		self->update_secrets (self, connection);
 }
 
 void
-eap_method_phase2_update_secrets_helper (EAPMethod *method,
+eap_method_phase2_update_secrets_helper (EAPMethod *self,
                                          NMConnection *connection,
-                                         const char *combo_name,
+                                         GtkComboBox *combo,
                                          guint32 column)
 {
-	GtkWidget *combo;
 	GtkTreeIter iter;
 	GtkTreeModel *model;
 
-	g_return_if_fail (method != NULL);
+	g_return_if_fail (self != NULL);
 	g_return_if_fail (connection != NULL);
-	g_return_if_fail (combo_name != NULL);
-
-	combo = GTK_WIDGET (gtk_builder_get_object (method->builder, combo_name));
-	g_assert (combo);
+	g_return_if_fail (combo != NULL);
 
 	/* Let each EAP phase2 method try to update its secrets */
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+	model = gtk_combo_box_get_model (combo);
 	if (gtk_tree_model_get_iter_first (model, &iter)) {
 		do {
 			g_autoptr(EAPMethod) eap = NULL;
@@ -143,85 +139,83 @@ eap_method_init (gsize obj_size,
                  const char *default_field,
                  gboolean phase2)
 {
-	g_autoptr(EAPMethod) method = NULL;
+	g_autoptr(EAPMethod) self = NULL;
 	g_autoptr(GError) error = NULL;
 
 	g_return_val_if_fail (obj_size > 0, NULL);
 	g_return_val_if_fail (ui_resource != NULL, NULL);
 	g_return_val_if_fail (ui_widget_name != NULL, NULL);
 
-	method = g_slice_alloc0 (obj_size);
-	g_assert (method);
+	self = g_slice_alloc0 (obj_size);
+	g_assert (self);
 
-	method->refcount = 1;
-	method->obj_size = obj_size;
-	method->validate = validate;
-	method->add_to_size_group = add_to_size_group;
-	method->fill_connection = fill_connection;
-	method->update_secrets = update_secrets;
-	method->default_field = default_field;
-	method->phase2 = phase2;
+	self->refcount = 1;
+	self->obj_size = obj_size;
+	self->validate = validate;
+	self->add_to_size_group = add_to_size_group;
+	self->fill_connection = fill_connection;
+	self->update_secrets = update_secrets;
+	self->default_field = default_field;
+	self->phase2 = phase2;
 
-	method->builder = gtk_builder_new ();
-	if (!gtk_builder_add_from_resource (method->builder, ui_resource, &error)) {
+	self->builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_resource (self->builder, ui_resource, &error)) {
 		g_warning ("Couldn't load UI builder resource %s: %s",
 		           ui_resource, error->message);
 		return NULL;
 	}
 
-	method->ui_widget = GTK_WIDGET (gtk_builder_get_object (method->builder, ui_widget_name));
-	if (!method->ui_widget) {
+	self->ui_widget = GTK_WIDGET (gtk_builder_get_object (self->builder, ui_widget_name));
+	if (!self->ui_widget) {
 		g_warning ("Couldn't load UI widget '%s' from UI file %s",
 		           ui_widget_name, ui_resource);
 		return NULL;
 	}
-	g_object_ref_sink (method->ui_widget);
+	g_object_ref_sink (self->ui_widget);
 
-	method->destroy = destroy;
+	self->destroy = destroy;
 
-	return g_steal_pointer (&method);
+	return g_steal_pointer (&self);
 }
 
 
 EAPMethod *
-eap_method_ref (EAPMethod *method)
+eap_method_ref (EAPMethod *self)
 {
-	g_return_val_if_fail (method != NULL, NULL);
-	g_return_val_if_fail (method->refcount > 0, NULL);
+	g_return_val_if_fail (self != NULL, NULL);
+	g_return_val_if_fail (self->refcount > 0, NULL);
 
-	method->refcount++;
-	return method;
+	self->refcount++;
+	return self;
 }
 
 void
-eap_method_unref (EAPMethod *method)
+eap_method_unref (EAPMethod *self)
 {
-	g_return_if_fail (method != NULL);
-	g_return_if_fail (method->refcount > 0);
+	g_return_if_fail (self != NULL);
+	g_return_if_fail (self->refcount > 0);
 
-	method->refcount--;
-	if (method->refcount == 0) {
-		if (method->destroy)
-			method->destroy (method);
+	self->refcount--;
+	if (self->refcount == 0) {
+		if (self->destroy)
+			self->destroy (self);
 
-		if (method->builder)
-			g_object_unref (method->builder);
-		if (method->ui_widget)
-			g_object_unref (method->ui_widget);
+		if (self->builder)
+			g_object_unref (self->builder);
+		if (self->ui_widget)
+			g_object_unref (self->ui_widget);
 
-		g_slice_free1 (method->obj_size, method);
+		g_slice_free1 (self->obj_size, self);
 	}
 }
 
 gboolean
-eap_method_validate_filepicker (GtkBuilder *builder,
-                                const char *name,
+eap_method_validate_filepicker (GtkFileChooser *chooser,
                                 guint32 item_type,
                                 const char *password,
                                 NMSetting8021xCKFormat *out_format,
                                 GError **error)
 {
-	GtkWidget *widget;
 	g_autofree gchar *filename = NULL;
 	g_autoptr(NMSetting8021x) setting = NULL;
 	gboolean success = TRUE;
@@ -231,9 +225,7 @@ eap_method_validate_filepicker (GtkBuilder *builder,
 			success = FALSE;
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (builder, name));
-	g_assert (widget);
-	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
+	filename = gtk_file_chooser_get_filename (chooser);
 	if (!filename) {
 		if (item_type != TYPE_CA_CERT) {
 			success = FALSE;
@@ -267,9 +259,9 @@ out:
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("unspecified error validating eap-method file"));
 
 	if (success)
-		widget_unset_error (widget);
+		widget_unset_error (GTK_WIDGET (chooser));
 	else
-		widget_set_error (widget);
+		widget_set_error (GTK_WIDGET (chooser));
 	return success;
 }
 
@@ -475,22 +467,14 @@ eap_method_is_encrypted_private_key (const char *path)
  * selected.
  */
 gboolean
-eap_method_ca_cert_required (GtkBuilder *builder, const char *id_ca_cert_not_required_checkbutton, const char *id_ca_cert_chooser)
+eap_method_ca_cert_required (GtkToggleButton *id_ca_cert_not_required_checkbutton, GtkFileChooser *id_ca_cert_chooser)
 {
-	GtkWidget *widget;
+	g_assert (id_ca_cert_not_required_checkbutton && id_ca_cert_chooser);
 
-	g_assert (builder && id_ca_cert_not_required_checkbutton && id_ca_cert_chooser);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (builder, id_ca_cert_not_required_checkbutton));
-	g_assert (widget && GTK_IS_TOGGLE_BUTTON (widget));
-
-	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
+	if (!gtk_toggle_button_get_active (id_ca_cert_not_required_checkbutton)) {
 		g_autofree gchar *filename = NULL;
 
-		widget = GTK_WIDGET (gtk_builder_get_object (builder, id_ca_cert_chooser));
-		g_assert (widget && GTK_IS_FILE_CHOOSER (widget));
-
-		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
+		filename = gtk_file_chooser_get_filename (id_ca_cert_chooser);
 		if (!filename)
 			return TRUE;
 	}
@@ -499,24 +483,18 @@ eap_method_ca_cert_required (GtkBuilder *builder, const char *id_ca_cert_not_req
 
 
 void
-eap_method_ca_cert_not_required_toggled (GtkBuilder *builder, const char *id_ca_cert_not_required_checkbutton, const char *id_ca_cert_chooser)
+eap_method_ca_cert_not_required_toggled (GtkToggleButton *id_ca_cert_not_required_checkbutton, GtkFileChooser *id_ca_cert_chooser)
 {
 	g_autofree gchar *filename = NULL;
 	g_autofree gchar *filename_old = NULL;
 	gboolean is_not_required;
-	GtkWidget *widget;
 
-	g_assert (builder && id_ca_cert_not_required_checkbutton && id_ca_cert_chooser);
+	g_assert (id_ca_cert_not_required_checkbutton && id_ca_cert_chooser);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (builder, id_ca_cert_not_required_checkbutton));
-	g_assert (widget && GTK_IS_TOGGLE_BUTTON (widget));
-	is_not_required = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+	is_not_required = gtk_toggle_button_get_active (id_ca_cert_not_required_checkbutton);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (builder, id_ca_cert_chooser));
-	g_assert (widget && GTK_IS_FILE_CHOOSER (widget));
-
-	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
-	filename_old = g_object_steal_data (G_OBJECT (widget), "filename-old");
+	filename = gtk_file_chooser_get_filename (id_ca_cert_chooser);
+	filename_old = g_object_steal_data (G_OBJECT (id_ca_cert_chooser), "filename-old");
 	if (is_not_required) {
 		g_free (filename_old);
 		filename_old = g_steal_pointer (&filename);
@@ -524,12 +502,12 @@ eap_method_ca_cert_not_required_toggled (GtkBuilder *builder, const char *id_ca_
 		g_free (filename);
 		filename = g_steal_pointer (&filename_old);
 	}
-	gtk_widget_set_sensitive (widget, !is_not_required);
+	gtk_widget_set_sensitive (GTK_WIDGET (id_ca_cert_chooser), !is_not_required);
 	if (filename)
-		gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (widget), filename);
+		gtk_file_chooser_set_filename (id_ca_cert_chooser, filename);
 	else
-		gtk_file_chooser_unselect_all (GTK_FILE_CHOOSER (widget));
-	g_object_set_data_full (G_OBJECT (widget), "filename-old", g_steal_pointer (&filename_old), g_free);
+		gtk_file_chooser_unselect_all (id_ca_cert_chooser);
+	g_object_set_data_full (G_OBJECT (id_ca_cert_chooser), "filename-old", g_steal_pointer (&filename_old), g_free);
 }
 
 /* Used as both GSettings keys and GObject data tags */
@@ -551,7 +529,7 @@ eap_method_ca_cert_not_required_toggled (GtkBuilder *builder, const char *id_ca_
  * ignore the CA cert)..
  */
 void
-eap_method_ca_cert_ignore_set (EAPMethod *method,
+eap_method_ca_cert_ignore_set (EAPMethod *self,
                                NMConnection *connection,
                                const char *filename,
                                gboolean ca_cert_error)
@@ -563,7 +541,7 @@ eap_method_ca_cert_ignore_set (EAPMethod *method,
 	if (s_8021x) {
 		ignore = !ca_cert_error && filename == NULL;
 		g_object_set_data (G_OBJECT (s_8021x),
-		                   method->phase2 ? IGNORE_PHASE2_CA_CERT_TAG : IGNORE_CA_CERT_TAG,
+		                   self->phase2 ? IGNORE_PHASE2_CA_CERT_TAG : IGNORE_CA_CERT_TAG,
 		                   GUINT_TO_POINTER (ignore));
 	}
 }
@@ -577,14 +555,14 @@ eap_method_ca_cert_ignore_set (EAPMethod *method,
  * certificate should be required for the connection to be valid.
  */
 gboolean
-eap_method_ca_cert_ignore_get (EAPMethod *method, NMConnection *connection)
+eap_method_ca_cert_ignore_get (EAPMethod *self, NMConnection *connection)
 {
 	NMSetting8021x *s_8021x;
 
 	s_8021x = nm_connection_get_setting_802_1x (connection);
 	if (s_8021x) {
 		return !!g_object_get_data (G_OBJECT (s_8021x),
-		                            method->phase2 ? IGNORE_PHASE2_CA_CERT_TAG : IGNORE_CA_CERT_TAG);
+		                            self->phase2 ? IGNORE_PHASE2_CA_CERT_TAG : IGNORE_CA_CERT_TAG);
 	}
 	return FALSE;
 }

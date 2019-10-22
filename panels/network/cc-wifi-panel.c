@@ -158,7 +158,6 @@ add_wifi_device (CcWifiPanel *self,
   /* Create the NetDevice */
   net_device = g_object_new (NET_TYPE_DEVICE_WIFI,
                              "panel", self,
-                             "removable", FALSE,
                              "cancellable", self->cancellable,
                              "client", self->client,
                              "nm-device", device,
@@ -423,18 +422,14 @@ verify_argv (CcWifiPanel  *self,
 /* Callbacks */
 
 static void
-device_added_cb (NMClient    *client,
-                 NMDevice    *device,
-                 CcWifiPanel *self)
+device_added_cb (CcWifiPanel *self, NMDevice *device)
 {
   add_wifi_device (self, device);
   check_main_stack_page (self);
 }
 
 static void
-device_removed_cb (NMClient    *client,
-                   NMDevice    *device,
-                   CcWifiPanel *self)
+device_removed_cb (CcWifiPanel *self, NMDevice *device)
 {
   GtkWidget *child;
   const gchar *id;
@@ -472,18 +467,13 @@ device_removed_cb (NMClient    *client,
 }
 
 static void
-wireless_enabled_cb (NMClient    *client,
-                     NMDevice    *device,
-                     CcWifiPanel *self)
+wireless_enabled_cb (CcWifiPanel *self)
 {
   check_main_stack_page (self);
 }
 
 static void
-on_rfkill_proxy_properties_changed_cb (GDBusProxy  *proxy,
-                                       GVariant    *changed_properties,
-                                       GStrv        invalidated_properties,
-                                       CcWifiPanel *self)
+on_rfkill_proxy_properties_changed_cb (CcWifiPanel *self)
 {
   g_debug ("Rfkill properties changed");
 
@@ -517,7 +507,7 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
                            "g-properties-changed",
                            G_CALLBACK (on_rfkill_proxy_properties_changed_cb),
                            self,
-                           0);
+                           G_CONNECT_SWAPPED);
 
   sync_airplane_mode_switch (self);
 }
@@ -742,19 +732,19 @@ cc_wifi_panel_init (CcWifiPanel *self)
                            "device-added",
                            G_CALLBACK (device_added_cb),
                            self,
-                           0);
+                           G_CONNECT_SWAPPED);
 
   g_signal_connect_object (self->client,
                            "device-removed",
                            G_CALLBACK (device_removed_cb),
                            self,
-                           0);
+                           G_CONNECT_SWAPPED);
 
   g_signal_connect_object (self->client,
                            "notify::wireless-enabled",
                            G_CALLBACK (wireless_enabled_cb),
                            self,
-                           0);
+                           G_CONNECT_SWAPPED);
 
   /* Load Wi-Fi devices */
   load_wifi_devices (self);

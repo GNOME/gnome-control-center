@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkBox" id="vbox6">
+  <object class="GtkBox" id="box">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="spacing">6</property>
     <property name="orientation">vertical</property>
     <child>
-      <object class="GtkBox" id="actions">
+      <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkLabel" id="label_device">
+          <object class="GtkLabel" id="device_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="hexpand">True</property>
@@ -48,7 +48,7 @@
         <property name="orientation">vertical</property>
         <property name="spacing">6</property>
         <child>
-          <object class="GtkScrolledWindow" id="list">
+          <object class="GtkScrolledWindow" id="scrolled_window">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="hexpand">True</property>
@@ -60,12 +60,12 @@
 
         <!-- Single profile row -->
         <child>
-          <object class="GtkFrame" id="details">
+          <object class="GtkFrame" id="details_frame">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="expand">True</property>
             <child>
-              <object class="GtkListBox" id="single_profile_listbox">
+              <object class="GtkListBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="selection_mode">none</property>
@@ -90,7 +90,7 @@
                           </object>
                         </child>
                         <child internal-child="accessible">
-                          <object class="AtkObject" id="details_button-accessible">
+                          <object class="AtkObject">
                             <property name="accessible-name" translatable="yes">Options…</property>
                           </object>
                        </child>
@@ -113,5 +113,4 @@
       </object>
     </child>
   </object>
-  <object class="GtkSizeGroup" id="sizegroup1"/>
 </interface>
