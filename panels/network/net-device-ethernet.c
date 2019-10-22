@@ -592,14 +592,12 @@ net_device_ethernet_init (NetDeviceEthernet *self)
 }
 
 NetDeviceEthernet *
-net_device_ethernet_new (CcPanel      *panel,
-                         GCancellable *cancellable,
+net_device_ethernet_new (GCancellable *cancellable,
                          NMClient     *client,
                          NMDevice     *device,
                          const gchar  *id)
 {
         return g_object_new (NET_TYPE_DEVICE_ETHERNET,
-                             "panel", panel,
                              "cancellable", cancellable,
                              "client", client,
                              "nm-device", device,

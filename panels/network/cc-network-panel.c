@@ -465,24 +465,21 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         switch (type) {
         case NM_DEVICE_TYPE_ETHERNET:
         case NM_DEVICE_TYPE_INFINIBAND:
-                net_device = NET_DEVICE (net_device_ethernet_new (CC_PANEL (self),
-                                                                  self->cancellable,
+                net_device = NET_DEVICE (net_device_ethernet_new (self->cancellable,
                                                                   self->client,
                                                                   device,
                                                                   nm_device_get_udi (device)));
                 add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_wired));
                 break;
         case NM_DEVICE_TYPE_MODEM:
-                net_device = NET_DEVICE (net_device_mobile_new (CC_PANEL (self),
-                                                                self->cancellable,
+                net_device = NET_DEVICE (net_device_mobile_new (self->cancellable,
                                                                 self->client,
                                                                 device,
                                                                 nm_device_get_udi (device)));
                 add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_wired));
                 break;
         case NM_DEVICE_TYPE_BT:
-                net_device = NET_DEVICE (net_device_bluetooth_new (CC_PANEL (self),
-                                                                   self->cancellable,
+                net_device = NET_DEVICE (net_device_bluetooth_new (self->cancellable,
                                                                    self->client,
                                                                    device,
                                                                    nm_device_get_udi (device)));
@@ -686,8 +683,7 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
                 return;
 
         /* add as a VPN object */
-        net_vpn = net_vpn_new (CC_PANEL (self),
-                               id,
+        net_vpn = net_vpn_new (id,
                                connection,
                                self->client);
         g_signal_connect_object (net_vpn, "removed",
