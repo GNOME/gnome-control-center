@@ -31,4 +31,10 @@ G_BEGIN_DECLS
 #define NET_TYPE_DEVICE_MOBILE (net_device_mobile_get_type ())
 G_DECLARE_FINAL_TYPE (NetDeviceMobile, net_device_mobile, NET, DEVICE_MOBILE, NetDevice)
 
+NetDeviceMobile *net_device_mobile_new (CcPanel      *panel,
+                                        GCancellable *cancellable,
+                                        NMClient     *client,
+                                        NMDevice     *device,
+                                        const gchar  *id);
+
 G_END_DECLS

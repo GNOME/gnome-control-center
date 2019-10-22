@@ -38,13 +38,19 @@ struct _NetDeviceSimpleClass
         char                    *(*get_speed)  (NetDeviceSimple *device_simple);
 };
 
-char *net_device_simple_get_speed              (NetDeviceSimple *device_simple);
+NetDeviceSimple *net_device_simple_new                (CcPanel      *panel,
+                                                       GCancellable *cancellable,
+                                                       NMClient     *client,
+                                                       NMDevice     *device,
+                                                       const gchar  *id);
 
-void  net_device_simple_add_row                (NetDeviceSimple *device_simple,
-                                                const char      *label,
-                                                const char      *property_name);
+char            *net_device_simple_get_speed          (NetDeviceSimple *device_simple);
 
-void  net_device_simple_set_show_separator     (NetDeviceSimple *device_simple,
-                                                gboolean         show_separator);
+void             net_device_simple_add_row            (NetDeviceSimple *device_simple,
+                                                       const char      *label,
+                                                       const char      *property_name);
+
+void             net_device_simple_set_show_separator (NetDeviceSimple *device_simple,
+                                                       gboolean         show_separator);
 
 G_END_DECLS
