@@ -134,17 +134,9 @@ GtkWidget *
 net_object_get_widget (NetObject    *self,
                        GtkSizeGroup *heading_size_group)
 {
-        GtkWidget *widget;
         NetObjectClass *klass = NET_OBJECT_GET_CLASS (self);
-        NetObjectPrivate *priv = net_object_get_instance_private (self);
 
-        widget = klass->get_widget (self, heading_size_group);
-        g_object_set_data_full (G_OBJECT (widget),
-                                "NetObject::id",
-                                g_strdup (priv->id),
-                                g_free);
-
-        return widget;
+        return klass->get_widget (self, heading_size_group);
 }
 
 void
