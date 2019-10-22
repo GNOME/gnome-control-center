@@ -31,7 +31,7 @@
 
 #include "net-device-simple.h"
 
-typedef struct
+struct _NetDeviceSimple
 {
         GtkBuilder   *builder;
         GtkBox       *box;
@@ -41,18 +41,16 @@ typedef struct
         GtkSeparator *separator;
 
         gboolean    updating_device;
-} NetDeviceSimplePrivate;
+};
 
-G_DEFINE_TYPE_WITH_PRIVATE (NetDeviceSimple, net_device_simple, NET_TYPE_DEVICE)
+G_DEFINE_TYPE (NetDeviceSimple, net_device_simple, NET_TYPE_DEVICE)
 
 void
 net_device_simple_set_show_separator (NetDeviceSimple *self,
                                       gboolean         show_separator)
 {
-        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (self);
-
         /* add widgets to size group */
-        gtk_widget_set_visible (GTK_WIDGET (priv->separator), show_separator);
+        gtk_widget_set_visible (GTK_WIDGET (self->separator), show_separator);
 }
 
 static GtkWidget *
@@ -61,11 +59,10 @@ device_simple_proxy_add_to_stack (NetObject    *object,
                                   GtkSizeGroup *heading_size_group)
 {
         NetDeviceSimple *self = NET_DEVICE_SIMPLE (object);
-        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (self);
 
         /* add widgets to size group */
-        gtk_stack_add_named (stack, GTK_WIDGET (priv->box), net_object_get_id (object));
-        return GTK_WIDGET (priv->box);
+        gtk_stack_add_named (stack, GTK_WIDGET (self->box), net_object_get_id (object));
+        return GTK_WIDGET (self->box);
 }
 
 static void
@@ -73,9 +70,7 @@ update_off_switch_from_device_state (GtkSwitch *sw,
                                      NMDeviceState state,
                                      NetDeviceSimple *self)
 {
-        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (self);
-
-        priv->updating_device = TRUE;
+        self->updating_device = TRUE;
         switch (state) {
                 case NM_DEVICE_STATE_UNMANAGED:
                 case NM_DEVICE_STATE_UNAVAILABLE:
@@ -88,30 +83,29 @@ update_off_switch_from_device_state (GtkSwitch *sw,
                         gtk_switch_set_active (sw, TRUE);
                         break;
         }
-        priv->updating_device = FALSE;
+        self->updating_device = FALSE;
 }
 
 static void
 nm_device_simple_refresh_ui (NetDeviceSimple *self)
 {
-        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (self);
         NMDevice *nm_device;
         NMDeviceState state;
 
         nm_device = net_device_get_nm_device (NET_DEVICE (self));
 
         /* set device kind */
-        g_object_bind_property (self, "title", priv->device_label, "label", 0);
+        g_object_bind_property (self, "title", self->device_label, "label", 0);
 
         /* set up the device on/off switch */
         state = nm_device_get_state (nm_device);
-        gtk_widget_set_visible (GTK_WIDGET (priv->device_off_switch),
+        gtk_widget_set_visible (GTK_WIDGET (self->device_off_switch),
                                 state != NM_DEVICE_STATE_UNAVAILABLE
                                 && state != NM_DEVICE_STATE_UNMANAGED);
-        update_off_switch_from_device_state (priv->device_off_switch, state, self);
+        update_off_switch_from_device_state (self->device_off_switch, state, self);
 
         /* set up the Options button */
-        gtk_widget_set_visible (GTK_WIDGET (priv->options_button), state != NM_DEVICE_STATE_UNMANAGED && g_find_program_in_path ("nm-connection-editor") != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->options_button), state != NM_DEVICE_STATE_UNMANAGED && g_find_program_in_path ("nm-connection-editor") != NULL);
 }
 
 static void
@@ -124,7 +118,6 @@ device_simple_refresh (NetObject *object)
 static void
 device_off_toggled (NetDeviceSimple *self)
 {
-        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (self);
         const GPtrArray *acs;
         gboolean active;
         gint i;
@@ -132,10 +125,10 @@ device_off_toggled (NetDeviceSimple *self)
         NMConnection *connection;
         NMClient *client;
 
-        if (priv->updating_device)
+        if (self->updating_device)
                 return;
 
-        active = gtk_switch_get_active (priv->device_off_switch);
+        active = gtk_switch_get_active (self->device_off_switch);
         if (active) {
                 client = net_object_get_client (NET_OBJECT (self));
                 connection = net_device_get_find_connection (NET_DEVICE (self));
@@ -194,9 +187,8 @@ static void
 net_device_simple_finalize (GObject *object)
 {
         NetDeviceSimple *self = NET_DEVICE_SIMPLE (object);
-        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (self);
 
-        g_clear_object (&priv->builder);
+        g_clear_object (&self->builder);
 
         G_OBJECT_CLASS (net_device_simple_parent_class)->finalize (object);
 }
@@ -216,11 +208,10 @@ net_device_simple_class_init (NetDeviceSimpleClass *klass)
 static void
 net_device_simple_init (NetDeviceSimple *self)
 {
-        NetDeviceSimplePrivate *priv = net_device_simple_get_instance_private (self);
         g_autoptr(GError) error = NULL;
 
-        priv->builder = gtk_builder_new ();
-        gtk_builder_add_from_resource (priv->builder,
+        self->builder = gtk_builder_new ();
+        gtk_builder_add_from_resource (self->builder,
                                        "/org/gnome/control-center/network/network-simple.ui",
                                        &error);
         if (error != NULL) {
@@ -228,19 +219,19 @@ net_device_simple_init (NetDeviceSimple *self)
                 return;
         }
 
-        priv->box = GTK_BOX (gtk_builder_get_object (priv->builder, "box"));
-        priv->device_label = GTK_LABEL (gtk_builder_get_object (priv->builder, "device_label"));
-        priv->device_off_switch = GTK_SWITCH (gtk_builder_get_object (priv->builder, "device_off_switch"));
-        priv->options_button = GTK_BUTTON (gtk_builder_get_object (priv->builder, "options_button"));
-        priv->separator = GTK_SEPARATOR (gtk_builder_get_object (priv->builder, "separator"));
+        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
+        self->device_label = GTK_LABEL (gtk_builder_get_object (self->builder, "device_label"));
+        self->device_off_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "device_off_switch"));
+        self->options_button = GTK_BUTTON (gtk_builder_get_object (self->builder, "options_button"));
+        self->separator = GTK_SEPARATOR (gtk_builder_get_object (self->builder, "separator"));
 
         /* setup simple combobox model */
-        g_signal_connect_swapped (priv->device_off_switch, "notify::active",
+        g_signal_connect_swapped (self->device_off_switch, "notify::active",
                                   G_CALLBACK (device_off_toggled), self);
 
-        g_signal_connect_swapped (priv->options_button, "clicked",
+        g_signal_connect_swapped (self->options_button, "clicked",
                                   G_CALLBACK (edit_connection), self);
-        gtk_widget_set_visible (GTK_WIDGET (priv->options_button), g_find_program_in_path ("nm-connection-editor") != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->options_button), g_find_program_in_path ("nm-connection-editor") != NULL);
 }
 
 NetDeviceSimple *
