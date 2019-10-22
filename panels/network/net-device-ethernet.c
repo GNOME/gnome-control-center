@@ -551,7 +551,7 @@ device_ethernet_finalize (GObject *object)
 {
         NetDeviceEthernet *self = NET_DEVICE_ETHERNET (object);
 
-        g_object_unref (self->builder);
+        g_clear_object (&self->builder);
         g_hash_table_destroy (self->connections);
 
         G_OBJECT_CLASS (net_device_ethernet_parent_class)->finalize (object);

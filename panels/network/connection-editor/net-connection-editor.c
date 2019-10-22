@@ -420,20 +420,17 @@ get_secrets_cb (GObject *source_object,
                 gpointer user_data)
 {
         NMRemoteConnection *connection;
-        GetSecretsInfo *info = user_data;
+        g_autofree GetSecretsInfo *info = user_data;
         g_autoptr(GError) error = NULL;
         g_autoptr(GVariant) variant = NULL;
 
         connection = NM_REMOTE_CONNECTION (source_object);
         variant = nm_remote_connection_get_secrets_finish (connection, res, &error);
 
-        if (!variant && g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-                g_free (info);
+        if (!variant && g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
                 return;
-        }
 
         ce_page_complete_init (info->page, info->setting_name, variant, g_steal_pointer (&error));
-        g_free (info);
 }
 
 static void

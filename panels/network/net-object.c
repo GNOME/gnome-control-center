@@ -252,8 +252,8 @@ net_object_finalize (GObject *object)
         NetObject *self = NET_OBJECT (object);
         NetObjectPrivate *priv = net_object_get_instance_private (self);
 
-        g_free (priv->id);
-        g_free (priv->title);
+        g_clear_pointer (&priv->id, g_free);
+        g_clear_pointer (&priv->title, g_free);
         g_clear_object (&priv->cancellable);
 
         if (priv->client)
