@@ -475,6 +475,8 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                                                                   self->client,
                                                                   device,
                                                                   nm_device_get_udi (device)));
+                stack = add_device_stack (self, NET_OBJECT (net_device));
+                gtk_container_add (GTK_CONTAINER (self->box_wired), stack);
                 break;
         case NM_DEVICE_TYPE_MODEM:
                 net_device = NET_DEVICE (net_device_mobile_new (CC_PANEL (self),
@@ -482,6 +484,8 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                                                                 self->client,
                                                                 device,
                                                                 nm_device_get_udi (device)));
+                stack = add_device_stack (self, NET_OBJECT (net_device));
+                gtk_container_add (GTK_CONTAINER (self->box_wired), stack);
                 break;
         case NM_DEVICE_TYPE_BT:
                 net_device = NET_DEVICE (net_device_bluetooth_new (CC_PANEL (self),
@@ -489,6 +493,8 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                                                                    self->client,
                                                                    device,
                                                                    nm_device_get_udi (device)));
+                stack = add_device_stack (self, NET_OBJECT (net_device));
+                gtk_container_add (GTK_CONTAINER (self->box_bluetooth), stack);
                 break;
 
         /* For Wi-Fi and VPN we handle connections separately; we correctly manage
@@ -525,19 +531,13 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                               NULL);
         }
 
-        stack = add_device_stack (self, NET_OBJECT (net_device));
-        if (type == NM_DEVICE_TYPE_BT)
-                gtk_container_add (GTK_CONTAINER (self->box_bluetooth), stack);
-        else
-                gtk_container_add (GTK_CONTAINER (self->box_wired), stack);
-
         /* Add to the devices array */
         g_ptr_array_add (self->devices, net_device);
 
         /* Update the device_bluetooth section if we're adding a bluetooth
          * device. This is a temporary solution though, for these will
          * be handled by the future Mobile Broadband panel */
-        if (type == NM_DEVICE_TYPE_BT)
+        if (NET_IS_DEVICE_BLUETOOTH (net_device))
                 update_bluetooth_section (self);
 
         g_signal_connect_object (net_device, "removed",
