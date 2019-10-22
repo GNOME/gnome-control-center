@@ -42,10 +42,6 @@ NetDeviceSimple *net_device_simple_new                (CcPanel      *panel,
                                                        NMDevice     *device,
                                                        const gchar  *id);
 
-void             net_device_simple_add_row            (NetDeviceSimple *device_simple,
-                                                       const char      *label,
-                                                       const char      *property_name);
-
 void             net_device_simple_set_show_separator (NetDeviceSimple *device_simple,
                                                        gboolean         show_separator);
 
