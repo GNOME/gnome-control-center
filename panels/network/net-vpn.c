@@ -60,6 +60,20 @@ G_DEFINE_TYPE (NetVpn, net_vpn, NET_TYPE_OBJECT)
 
 static void nm_device_refresh_vpn_ui (NetVpn *self);
 
+NetVpn *
+net_vpn_new (CcPanel      *panel,
+             const gchar  *id,
+             NMConnection *connection,
+             NMClient     *client)
+{
+        return g_object_new (NET_TYPE_VPN,
+                             "panel", panel,
+                             "id", id,
+                             "connection", connection,
+                             "client", client,
+                             NULL);
+}
+
 void
 net_vpn_set_show_separator (NetVpn   *self,
                             gboolean  show_separator)

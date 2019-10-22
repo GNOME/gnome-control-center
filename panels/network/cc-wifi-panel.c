@@ -149,25 +149,23 @@ add_wifi_device (CcWifiPanel *self,
                  NMDevice    *device)
 {
   GtkWidget *header_widget;
-  NetObject *net_device;
+  NetDeviceWifi *net_device;
 
   /* Only manage Wi-Fi devices */
   if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
     return;
 
   /* Create the NetDevice */
-  net_device = g_object_new (NET_TYPE_DEVICE_WIFI,
-                             "panel", self,
-                             "cancellable", self->cancellable,
-                             "client", self->client,
-                             "nm-device", device,
-                             "id", nm_device_get_udi (device),
-                             NULL);
+  net_device = net_device_wifi_new (CC_PANEL (self),
+                                    self->cancellable,
+                                    self->client,
+                                    device,
+                                    nm_device_get_udi (device));
 
   /* And add to the header widgets */
-  header_widget = net_device_wifi_get_header_widget (NET_DEVICE_WIFI (net_device));
+  header_widget = net_device_wifi_get_header_widget (net_device);
 
-  gtk_stack_add_named (self->header_stack, header_widget, net_object_get_id (net_device));
+  gtk_stack_add_named (self->header_stack, header_widget, net_object_get_id (NET_OBJECT (net_device)));
 
   /* Setup custom title properties */
   g_ptr_array_add (self->devices, net_device);
@@ -175,7 +173,7 @@ add_wifi_device (CcWifiPanel *self,
   update_devices_names (self);
 
   /* Needs to be added after the device is added to the self->devices array */
-  net_object_add_to_stack (net_device, self->stack, self->sizegroup);
+  net_object_add_to_stack (NET_OBJECT (net_device), self->stack, self->sizegroup);
 }
 
 static void
