@@ -104,14 +104,12 @@ NetDeviceWifi *
 net_device_wifi_new (CcPanel      *panel,
                      GCancellable *cancellable,
                      NMClient     *client,
-                     NMDevice     *device,
-                     const gchar  *id)
+                     NMDevice     *device)
 {
         NetDeviceWifi *self = g_object_new (NET_TYPE_DEVICE_WIFI,
                                             "cancellable", cancellable,
                                             "client", client,
                                             "nm-device", device,
-                                            "id", id,
                                             NULL);
         self->panel = panel;
         return self;

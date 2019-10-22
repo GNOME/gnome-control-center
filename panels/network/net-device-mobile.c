@@ -981,13 +981,11 @@ net_device_mobile_init (NetDeviceMobile *self)
 NetDeviceMobile *
 net_device_mobile_new (GCancellable *cancellable,
                        NMClient     *client,
-                       NMDevice     *device,
-                       const gchar  *id)
+                       NMDevice     *device)
 {
         return g_object_new (NET_TYPE_DEVICE_MOBILE,
                              "cancellable", cancellable,
                              "client", client,
                              "nm-device", device,
-                             "id", id,
                              NULL);
 }

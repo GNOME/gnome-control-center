@@ -235,13 +235,11 @@ net_device_bluetooth_init (NetDeviceBluetooth *self)
 NetDeviceBluetooth *
 net_device_bluetooth_new (GCancellable *cancellable,
                           NMClient     *client,
-                          NMDevice     *device,
-                          const gchar  *id)
+                          NMDevice     *device)
 {
         return g_object_new (NET_TYPE_DEVICE_BLUETOOTH,
                              "cancellable", cancellable,
                              "client", client,
                              "nm-device", device,
-                             "id", id,
                              NULL);
 }

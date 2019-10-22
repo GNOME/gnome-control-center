@@ -406,7 +406,5 @@ net_proxy_init (NetProxy *self)
 NetProxy *
 net_proxy_new (void)
 {
-        return g_object_new (NET_TYPE_PROXY,
-                             "id", "proxy",
-                             NULL);
+        return g_object_new (NET_TYPE_PROXY, NULL);
 }

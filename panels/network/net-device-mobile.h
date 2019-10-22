@@ -33,7 +33,6 @@ G_DECLARE_FINAL_TYPE (NetDeviceMobile, net_device_mobile, NET, DEVICE_MOBILE, Ne
 
 NetDeviceMobile *net_device_mobile_new (GCancellable *cancellable,
                                         NMClient     *client,
-                                        NMDevice     *device,
-                                        const gchar  *id);
+                                        NMDevice     *device);
 
 G_END_DECLS
