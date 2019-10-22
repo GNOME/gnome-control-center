@@ -28,16 +28,16 @@
 
 G_BEGIN_DECLS
 
-#define NET_TYPE_DEVICE_SIMPLE (net_device_simple_get_type ())
-G_DECLARE_FINAL_TYPE (NetDeviceSimple, net_device_simple, NET, DEVICE_SIMPLE, NetDevice)
+#define NET_TYPE_DEVICE_BLUETOOTH (net_device_bluetooth_get_type ())
+G_DECLARE_FINAL_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET, DEVICE_BLUETOOTH, NetDevice)
 
-NetDeviceSimple *net_device_simple_new                (CcPanel      *panel,
-                                                       GCancellable *cancellable,
-                                                       NMClient     *client,
-                                                       NMDevice     *device,
-                                                       const gchar  *id);
+NetDeviceBluetooth *net_device_bluetooth_new                (CcPanel            *panel,
+                                                             GCancellable       *cancellable,
+                                                             NMClient           *client,
+                                                             NMDevice           *device,
+                                                             const gchar        *id);
 
-void             net_device_simple_set_show_separator (NetDeviceSimple *device_simple,
-                                                       gboolean         show_separator);
+void                net_device_bluetooth_set_show_separator (NetDeviceBluetooth *device_bluetooth,
+                                                             gboolean            show_separator);
 
 G_END_DECLS
