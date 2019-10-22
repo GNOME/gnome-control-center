@@ -60,25 +60,6 @@ G_DEFINE_TYPE (NetVpn, net_vpn, NET_TYPE_OBJECT)
 
 static void nm_device_refresh_vpn_ui (NetVpn *self);
 
-NetVpn *
-net_vpn_new (const gchar  *id,
-             NMConnection *connection,
-             NMClient     *client)
-{
-        return g_object_new (NET_TYPE_VPN,
-                             "id", id,
-                             "connection", connection,
-                             "client", client,
-                             NULL);
-}
-
-void
-net_vpn_set_show_separator (NetVpn   *self,
-                            gboolean  show_separator)
-{
-        gtk_widget_set_visible (GTK_WIDGET (self->separator), show_separator);
-}
-
 static void
 connection_changed_cb (NetVpn *self)
 {
@@ -405,4 +386,29 @@ net_vpn_init (NetVpn *self)
 
         g_signal_connect_swapped (self->options_button, "clicked",
                                   G_CALLBACK (edit_connection), self);
+}
+
+NetVpn *
+net_vpn_new (NMConnection *connection,
+             NMClient     *client)
+{
+        return g_object_new (NET_TYPE_VPN,
+                             "connection", connection,
+                             "client", client,
+                             NULL);
+}
+
+NMConnection *
+net_vpn_get_connection (NetVpn *self)
+{
+        g_return_val_if_fail (NET_IS_VPN (self), NULL);
+        return self->connection;
+}
+
+void
+net_vpn_set_show_separator (NetVpn   *self,
+                            gboolean  show_separator)
+{
+        g_return_if_fail (NET_IS_VPN (self));
+        gtk_widget_set_visible (GTK_WIDGET (self->separator), show_separator);
 }

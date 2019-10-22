@@ -160,13 +160,12 @@ add_wifi_device (CcWifiPanel *self,
   net_device = net_device_wifi_new (CC_PANEL (self),
                                     self->cancellable,
                                     self->client,
-                                    device,
-                                    nm_device_get_udi (device));
+                                    device);
 
   /* And add to the header widgets */
   header_widget = net_device_wifi_get_header_widget (net_device);
 
-  gtk_stack_add_named (self->header_stack, header_widget, net_object_get_id (NET_OBJECT (net_device)));
+  gtk_stack_add_named (self->header_stack, header_widget, nm_device_get_udi (device));
 
   /* Setup custom title properties */
   g_ptr_array_add (self->devices, net_device);
@@ -176,7 +175,7 @@ add_wifi_device (CcWifiPanel *self,
   /* Needs to be added after the device is added to the self->devices array */
   widget = net_object_get_widget (NET_OBJECT (net_device), self->sizegroup);
   gtk_stack_add_titled (self->stack, widget,
-                        net_object_get_id (NET_OBJECT (net_device)),
+                        nm_device_get_udi (device),
                         nm_device_get_description (device));
 }
 
@@ -356,7 +355,7 @@ handle_argv_for_device (CcWifiPanel *self,
         }
       else if (self->arg_operation == OPERATION_SHOW_DEVICE)
         {
-          gtk_stack_set_visible_child_name (self->stack, net_object_get_id (net_object));
+          gtk_stack_set_visible_child_name (self->stack, nm_device_get_udi (device));
           ret = TRUE;
         }
     }
@@ -454,7 +453,7 @@ device_removed_cb (CcWifiPanel *self, NMDevice *device)
     {
       NetObject *object = g_ptr_array_index (self->devices, i);
 
-      if (g_strcmp0 (net_object_get_id (object), id) == 0)
+      if (net_device_get_nm_device (NET_DEVICE (object)) == device)
         {
           g_ptr_array_remove (self->devices, object);
           break;
@@ -551,7 +550,7 @@ on_stack_visible_child_changed_cb (GtkStack    *stack,
     {
       NetObject *object = g_ptr_array_index (self->devices, i);
 
-      if (g_strcmp0 (net_object_get_id (object), visible_device_id) == 0)
+      if (g_strcmp0 (nm_device_get_udi (net_device_get_nm_device (NET_DEVICE (object))), visible_device_id) == 0)
         {
           self->spinner_binding = g_object_bind_property (object,
                                                           "scanning",
