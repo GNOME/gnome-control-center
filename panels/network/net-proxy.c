@@ -193,14 +193,13 @@ show_dialog_cb (NetProxy *self)
 }
 
 static GtkWidget *
-net_proxy_add_to_stack (NetObject    *object,
-                        GtkStack     *stack,
-                        GtkSizeGroup *heading_size_group)
+net_proxy_get_widget (NetObject    *object,
+                      GtkSizeGroup *heading_size_group)
 {
         NetProxy *self = NET_PROXY (object);
 
         gtk_size_group_add_widget (heading_size_group, GTK_WIDGET (self->main_widget));
-        gtk_stack_add_named (stack, GTK_WIDGET (self->main_widget), net_object_get_id (object));
+
         return GTK_WIDGET (self->main_widget);
 }
 
@@ -224,7 +223,7 @@ net_proxy_class_init (NetProxyClass *klass)
         NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
 
         object_class->finalize = net_proxy_finalize;
-        parent_class->add_to_stack = net_proxy_add_to_stack;
+        parent_class->get_widget = net_proxy_get_widget;
 }
 
 static gboolean
