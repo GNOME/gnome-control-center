@@ -30,8 +30,15 @@ G_BEGIN_DECLS
 #define NET_TYPE_DEVICE_WIFI          (net_device_wifi_get_type ())
 G_DECLARE_FINAL_TYPE (NetDeviceWifi, net_device_wifi, NET, DEVICE_WIFI, NetDevice)
 
-GtkWidget       *net_device_wifi_get_header_widget (NetDeviceWifi *device_wifi);
-GtkWidget       *net_device_wifi_get_title_widget  (NetDeviceWifi *device_wifi);
+NetDeviceWifi *net_device_wifi_new               (CcPanel       *panel,
+                                                  GCancellable  *cancellable,
+                                                  NMClient      *client,
+                                                  NMDevice      *device,
+                                                  const gchar   *id);
+
+GtkWidget     *net_device_wifi_get_header_widget (NetDeviceWifi *device_wifi);
+
+GtkWidget     *net_device_wifi_get_title_widget  (NetDeviceWifi *device_wifi);
 
 G_END_DECLS
 

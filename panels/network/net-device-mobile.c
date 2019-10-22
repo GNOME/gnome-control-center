@@ -981,3 +981,19 @@ net_device_mobile_init (NetDeviceMobile *self)
                                   G_CALLBACK (edit_connection), self);
         gtk_widget_set_visible (GTK_WIDGET (self->options_button), g_find_program_in_path ("nm-connection-editor") != NULL);
 }
+
+NetDeviceMobile *
+net_device_mobile_new (CcPanel      *panel,
+                       GCancellable *cancellable,
+                       NMClient     *client,
+                       NMDevice     *device,
+                       const gchar  *id)
+{
+        return g_object_new (NET_TYPE_DEVICE_MOBILE,
+                             "panel", panel,
+                             "cancellable", cancellable,
+                             "client", client,
+                             "nm-device", device,
+                             "id", id,
+                             NULL);
+}

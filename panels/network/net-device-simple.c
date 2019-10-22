@@ -253,6 +253,22 @@ net_device_simple_init (NetDeviceSimple *self)
         gtk_widget_set_visible (GTK_WIDGET (priv->options_button), g_find_program_in_path ("nm-connection-editor") != NULL);
 }
 
+NetDeviceSimple *
+net_device_simple_new (CcPanel      *panel,
+                       GCancellable *cancellable,
+                       NMClient     *client,
+                       NMDevice     *device,
+                       const gchar  *id)
+{
+        return g_object_new (NET_TYPE_DEVICE_SIMPLE,
+                             "panel", panel,
+                             "cancellable", cancellable,
+                             "client", client,
+                             "nm-device", device,
+                             "id", id,
+                             NULL);
+}
+
 char *
 net_device_simple_get_speed (NetDeviceSimple *self)
 {
@@ -290,4 +306,3 @@ net_device_simple_add_row (NetDeviceSimple *self,
         gtk_grid_attach (priv->grid, value, 1, top_attach, 1, 1);
         gtk_widget_show (value);
 }
-

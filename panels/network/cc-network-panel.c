@@ -450,7 +450,6 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
 {
         NMDeviceType type;
         NetDevice *net_device;
-        GType device_g_type;
         const char *udi;
         GtkWidget *stack;
 
@@ -471,13 +470,25 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         switch (type) {
         case NM_DEVICE_TYPE_ETHERNET:
         case NM_DEVICE_TYPE_INFINIBAND:
-                device_g_type = NET_TYPE_DEVICE_ETHERNET;
+                net_device = NET_DEVICE (net_device_ethernet_new (CC_PANEL (self),
+                                                                  self->cancellable,
+                                                                  self->client,
+                                                                  device,
+                                                                  nm_device_get_udi (device)));
                 break;
         case NM_DEVICE_TYPE_MODEM:
-                device_g_type = NET_TYPE_DEVICE_MOBILE;
+                net_device = NET_DEVICE (net_device_mobile_new (CC_PANEL (self),
+                                                                self->cancellable,
+                                                                self->client,
+                                                                device,
+                                                                nm_device_get_udi (device)));
                 break;
         case NM_DEVICE_TYPE_BT:
-                device_g_type = NET_TYPE_DEVICE_SIMPLE;
+                net_device = NET_DEVICE (net_device_simple_new (CC_PANEL (self),
+                                                                self->cancellable,
+                                                                self->client,
+                                                                device,
+                                                                nm_device_get_udi (device)));
                 break;
 
         /* For Wi-Fi and VPN we handle connections separately; we correctly manage
@@ -489,15 +500,6 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         default:
                 return;
         }
-
-        /* create device */
-        net_device = g_object_new (device_g_type,
-                                   "panel", self,
-                                   "cancellable", self->cancellable,
-                                   "client", self->client,
-                                   "nm-device", device,
-                                   "id", nm_device_get_udi (device),
-                                   NULL);
 
         if (type == NM_DEVICE_TYPE_MODEM &&
             g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager1/Modem/")) {
@@ -523,9 +525,8 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                               NULL);
         }
 
-        /* add as a panel */
         stack = add_device_stack (self, NET_OBJECT (net_device));
-        if (device_g_type == NET_TYPE_DEVICE_SIMPLE)
+        if (type == NM_DEVICE_TYPE_BT)
                 gtk_container_add (GTK_CONTAINER (self->box_simple), stack);
         else
                 gtk_container_add (GTK_CONTAINER (self->box_wired), stack);
@@ -536,7 +537,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         /* Update the device_simple section if we're adding a simple
          * device. This is a temporary solution though, for these will
          * be handled by the future Mobile Broadband panel */
-        if (device_g_type == NET_TYPE_DEVICE_SIMPLE)
+        if (type == NM_DEVICE_TYPE_BT)
                 update_simple_section (self);
 
         g_signal_connect_object (net_device, "removed",
@@ -696,12 +697,10 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
                 return;
 
         /* add as a VPN object */
-        net_vpn = g_object_new (NET_TYPE_VPN,
-                                "panel", self,
-                                "id", id,
-                                "connection", connection,
-                                "client", self->client,
-                                NULL);
+        net_vpn = net_vpn_new (CC_PANEL (self),
+                               id,
+                               connection,
+                               self->client);
         g_signal_connect_object (net_vpn, "removed",
                                  G_CALLBACK (object_removed_cb), self, G_CONNECT_SWAPPED);
 
