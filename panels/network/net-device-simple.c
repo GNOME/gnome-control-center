@@ -202,24 +202,16 @@ net_device_simple_finalize (GObject *object)
         G_OBJECT_CLASS (net_device_simple_parent_class)->finalize (object);
 }
 
-static char *
-device_simple_get_speed (NetDeviceSimple *simple)
-{
-        return NULL;
-}
-
 static void
 net_device_simple_class_init (NetDeviceSimpleClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
-        NetDeviceSimpleClass *simple_class = NET_DEVICE_SIMPLE_CLASS (klass);
 
         object_class->finalize = net_device_simple_finalize;
         object_class->constructed = net_device_simple_constructed;
         parent_class->add_to_stack = device_simple_proxy_add_to_stack;
         parent_class->refresh = device_simple_refresh;
-        simple_class->get_speed = device_simple_get_speed;
 }
 
 static void
@@ -267,14 +259,6 @@ net_device_simple_new (CcPanel      *panel,
                              "nm-device", device,
                              "id", id,
                              NULL);
-}
-
-char *
-net_device_simple_get_speed (NetDeviceSimple *self)
-{
-        NetDeviceSimpleClass *klass = NET_DEVICE_SIMPLE_GET_CLASS (self);
-
-        return klass->get_speed (self);
 }
 
 void
