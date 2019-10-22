@@ -29,12 +29,7 @@
 G_BEGIN_DECLS
 
 #define NET_TYPE_DEVICE_SIMPLE (net_device_simple_get_type ())
-G_DECLARE_DERIVABLE_TYPE (NetDeviceSimple, net_device_simple, NET, DEVICE_SIMPLE, NetDevice)
-
-struct _NetDeviceSimpleClass
-{
-        NetDeviceClass parent_class;
-};
+G_DECLARE_FINAL_TYPE (NetDeviceSimple, net_device_simple, NET, DEVICE_SIMPLE, NetDevice)
 
 NetDeviceSimple *net_device_simple_new                (CcPanel      *panel,
                                                        GCancellable *cancellable,
