@@ -78,11 +78,9 @@ finalize (GObject *object)
 {
         CEPage *self = CE_PAGE (object);
 
-        g_free (self->title);
-        if (self->cancellable) {
-                g_cancellable_cancel (self->cancellable);
-                g_object_unref (self->cancellable);
-        }
+        g_clear_pointer (&self->title, g_free);
+        g_cancellable_cancel (self->cancellable);
+        g_clear_object (&self->cancellable);
 
         G_OBJECT_CLASS (ce_page_parent_class)->finalize (object);
 }
@@ -150,8 +148,7 @@ set_property (GObject      *object,
 
         switch (prop_id) {
         case PROP_CONNECTION:
-                if (self->connection)
-                        g_object_unref (self->connection);
+                g_clear_object (&self->connection);
                 self->connection = g_value_dup_object (value);
                 break;
         default:

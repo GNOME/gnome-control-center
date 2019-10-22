@@ -40,8 +40,8 @@ wireless_dialog_closure_closure_notify (gpointer data,
                                         GClosure *gclosure)
 {
         WirelessDialogClosure *closure = data;
-        g_object_unref (closure->client);
 
+        g_clear_object (&closure->client);
         g_slice_free (WirelessDialogClosure, data);
 }
 
@@ -49,9 +49,9 @@ static void
 mobile_dialog_closure_free (gpointer data)
 {
         MobileDialogClosure *closure = data;
-        g_object_unref (closure->client);
-        g_object_unref (closure->device);
 
+        g_clear_object (&closure->client);
+        g_clear_object (&closure->device);
         g_slice_free (MobileDialogClosure, data);
 }
 

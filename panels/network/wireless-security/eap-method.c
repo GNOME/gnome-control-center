@@ -200,10 +200,8 @@ eap_method_unref (EAPMethod *self)
 		if (self->destroy)
 			self->destroy (self);
 
-		if (self->builder)
-			g_object_unref (self->builder);
-		if (self->ui_widget)
-			g_object_unref (self->ui_widget);
+		g_clear_object (&self->builder);
+		g_clear_object (&self->ui_widget);
 
 		g_slice_free1 (self->obj_size, self);
 	}
