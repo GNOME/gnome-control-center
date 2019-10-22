@@ -31,10 +31,10 @@
 #include <NetworkManager.h>
 
 #include "net-device.h"
-#include "net-device-mobile.h"
-#include "net-device-simple.h"
-#include "net-device-wifi.h"
+#include "net-device-bluetooth.h"
 #include "net-device-ethernet.h"
+#include "net-device-mobile.h"
+#include "net-device-wifi.h"
 #include "net-object.h"
 #include "net-proxy.h"
 #include "net-vpn.h"
@@ -65,11 +65,11 @@ struct _CcNetworkPanel
         gboolean          updating_device;
 
         /* widgets */
+        GtkWidget        *box_bluetooth;
         GtkWidget        *box_proxy;
-        GtkWidget        *box_simple;
         GtkWidget        *box_vpn;
         GtkWidget        *box_wired;
-        GtkWidget        *container_simple;
+        GtkWidget        *container_bluetooth;
         GtkWidget        *empty_listbox;
 
         /* wireless dialog stuff */
@@ -414,22 +414,21 @@ update_vpn_section (CcNetworkPanel *self)
 }
 
 static void
-update_simple_section (CcNetworkPanel *self)
+update_bluetooth_section (CcNetworkPanel *self)
 {
-        guint i, n_simple;
+        guint i, n_bluetooth;
 
-        for (i = 0, n_simple = 0; i < self->devices->len; i++) {
+        for (i = 0, n_bluetooth = 0; i < self->devices->len; i++) {
                 NetObject *net_object = g_ptr_array_index (self->devices, i);
 
-                /* NetDeviceSimple but none of the subclasses */
-                if (G_OBJECT_TYPE (net_object) != NET_TYPE_DEVICE_SIMPLE)
+                if (!NET_IS_DEVICE_BLUETOOTH (net_object))
                         continue;
 
-                net_device_simple_set_show_separator (NET_DEVICE_SIMPLE (net_object), n_simple > 0);
-                n_simple++;
+                net_device_bluetooth_set_show_separator (NET_DEVICE_BLUETOOTH (net_object), n_bluetooth > 0);
+                n_bluetooth++;
         }
 
-        gtk_widget_set_visible (self->container_simple, n_simple > 0);
+        gtk_widget_set_visible (self->container_bluetooth, n_bluetooth > 0);
 }
 
 static GtkWidget *
@@ -485,11 +484,11 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                                                                 nm_device_get_udi (device)));
                 break;
         case NM_DEVICE_TYPE_BT:
-                net_device = NET_DEVICE (net_device_simple_new (CC_PANEL (self),
-                                                                self->cancellable,
-                                                                self->client,
-                                                                device,
-                                                                nm_device_get_udi (device)));
+                net_device = NET_DEVICE (net_device_bluetooth_new (CC_PANEL (self),
+                                                                   self->cancellable,
+                                                                   self->client,
+                                                                   device,
+                                                                   nm_device_get_udi (device)));
                 break;
 
         /* For Wi-Fi and VPN we handle connections separately; we correctly manage
@@ -528,18 +527,18 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
 
         stack = add_device_stack (self, NET_OBJECT (net_device));
         if (type == NM_DEVICE_TYPE_BT)
-                gtk_container_add (GTK_CONTAINER (self->box_simple), stack);
+                gtk_container_add (GTK_CONTAINER (self->box_bluetooth), stack);
         else
                 gtk_container_add (GTK_CONTAINER (self->box_wired), stack);
 
         /* Add to the devices array */
         g_ptr_array_add (self->devices, net_device);
 
-        /* Update the device_simple section if we're adding a simple
+        /* Update the device_bluetooth section if we're adding a bluetooth
          * device. This is a temporary solution though, for these will
          * be handled by the future Mobile Broadband panel */
         if (type == NM_DEVICE_TYPE_BT)
-                update_simple_section (self);
+                update_bluetooth_section (self);
 
         g_signal_connect_object (net_device, "removed",
                                  G_CALLBACK (object_removed_cb), self, G_CONNECT_SWAPPED);
@@ -563,8 +562,8 @@ panel_remove_device (CcNetworkPanel *self, NMDevice *device)
         /* update vpn widgets */
         update_vpn_section (self);
 
-        /* update device_simple widgets */
-        update_simple_section (self);
+        /* update device_bluetooth widgets */
+        update_bluetooth_section (self);
 }
 
 static void
@@ -827,11 +826,11 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-network-panel.ui");
 
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_bluetooth);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_proxy);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_simple);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_vpn);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, container_simple);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, container_bluetooth);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, empty_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, sizegroup);
 
