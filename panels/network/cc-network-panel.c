@@ -57,7 +57,7 @@ struct _CcNetworkPanel
         CcPanel           parent;
 
         GCancellable     *cancellable;
-        GHashTable       *device_to_stack;
+        GHashTable       *device_to_widget;
         GPtrArray        *devices;
         NMClient         *client;
         MMManager        *modem_manager;
@@ -215,7 +215,7 @@ cc_network_panel_dispose (GObject *object)
         g_clear_object (&self->client);
         g_clear_object (&self->modem_manager);
 
-        g_clear_pointer (&self->device_to_stack, g_hash_table_destroy);
+        g_clear_pointer (&self->device_to_widget, g_hash_table_destroy);
         g_clear_pointer (&self->devices, g_ptr_array_unref);
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
@@ -240,12 +240,12 @@ cc_network_panel_get_help_uri (CcPanel *self)
 static void
 object_removed_cb (CcNetworkPanel *self, NetObject *object)
 {
-        GtkWidget *stack;
+        GtkWidget *widget;
 
         /* remove device */
-        stack = g_hash_table_lookup (self->device_to_stack, object);
-        if (stack != NULL)
-                gtk_widget_destroy (stack);
+        widget = g_hash_table_lookup (self->device_to_widget, object);
+        if (widget != NULL)
+                gtk_widget_destroy (widget);
 }
 
 GPtrArray *
@@ -431,18 +431,14 @@ update_bluetooth_section (CcNetworkPanel *self)
         gtk_widget_set_visible (self->container_bluetooth, n_bluetooth > 0);
 }
 
-static GtkWidget *
-add_device_stack (CcNetworkPanel *self, NetObject *object)
+static void
+add_object (CcNetworkPanel *self, NetObject *object, GtkContainer *container)
 {
-        GtkWidget *stack;
+        GtkWidget *widget;
 
-        stack = gtk_stack_new ();
-        gtk_widget_show (stack);
-        g_hash_table_insert (self->device_to_stack, object, stack);
-
-        net_object_add_to_stack (object, GTK_STACK (stack), self->sizegroup);
-
-        return stack;
+        widget = net_object_get_widget (object, self->sizegroup);
+        g_hash_table_insert (self->device_to_widget, object, widget);
+        gtk_container_add (container, widget);
 }
 
 static void
@@ -451,7 +447,6 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         NMDeviceType type;
         NetDevice *net_device;
         const char *udi;
-        GtkWidget *stack;
 
         if (!nm_device_get_managed (device))
                 return;
@@ -475,8 +470,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                                                                   self->client,
                                                                   device,
                                                                   nm_device_get_udi (device)));
-                stack = add_device_stack (self, NET_OBJECT (net_device));
-                gtk_container_add (GTK_CONTAINER (self->box_wired), stack);
+                add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_wired));
                 break;
         case NM_DEVICE_TYPE_MODEM:
                 net_device = NET_DEVICE (net_device_mobile_new (CC_PANEL (self),
@@ -484,8 +478,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                                                                 self->client,
                                                                 device,
                                                                 nm_device_get_udi (device)));
-                stack = add_device_stack (self, NET_OBJECT (net_device));
-                gtk_container_add (GTK_CONTAINER (self->box_wired), stack);
+                add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_wired));
                 break;
         case NM_DEVICE_TYPE_BT:
                 net_device = NET_DEVICE (net_device_bluetooth_new (CC_PANEL (self),
@@ -493,8 +486,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                                                                    self->client,
                                                                    device,
                                                                    nm_device_get_udi (device)));
-                stack = add_device_stack (self, NET_OBJECT (net_device));
-                gtk_container_add (GTK_CONTAINER (self->box_bluetooth), stack);
+                add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_bluetooth));
                 break;
 
         /* For Wi-Fi and VPN we handle connections separately; we correctly manage
@@ -569,14 +561,12 @@ panel_remove_device (CcNetworkPanel *self, NMDevice *device)
 static void
 panel_add_proxy_device (CcNetworkPanel *self)
 {
-        GtkWidget *stack;
         NetProxy *proxy;
 
         proxy = net_proxy_new ();
 
         /* add proxy to stack */
-        stack = add_device_stack (self, NET_OBJECT (proxy));
-        gtk_container_add (GTK_CONTAINER (self->box_proxy), stack);
+        add_object (self, NET_OBJECT (proxy), GTK_CONTAINER (self->box_proxy));
 
         /* add proxy to device list */
         net_object_set_title (NET_OBJECT (proxy), _("Network proxy"));
@@ -687,7 +677,6 @@ find_net_object_by_id (CcNetworkPanel *self, const gchar *id)
 static void
 panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
 {
-        GtkWidget *stack;
         NetVpn *net_vpn;
         const gchar *id;
 
@@ -705,8 +694,7 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
                                  G_CALLBACK (object_removed_cb), self, G_CONNECT_SWAPPED);
 
         /* add as a panel */
-        stack = add_device_stack (self, NET_OBJECT (net_vpn));
-        gtk_container_add (GTK_CONTAINER (self->box_vpn), stack);
+        add_object (self, NET_OBJECT (net_vpn), GTK_CONTAINER (self->box_vpn));
 
         net_object_set_title (NET_OBJECT (net_vpn), nm_connection_get_id (connection));
 
@@ -852,7 +840,7 @@ cc_network_panel_init (CcNetworkPanel *self)
 
         self->cancellable = g_cancellable_new ();
         self->devices = g_ptr_array_new_with_free_func (g_object_unref);
-        self->device_to_stack = g_hash_table_new (g_direct_hash, g_direct_equal);
+        self->device_to_widget = g_hash_table_new (g_direct_hash, g_direct_equal);
 
         /* add the virtual proxy device */
         panel_add_proxy_device (self);

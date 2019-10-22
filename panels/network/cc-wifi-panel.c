@@ -150,6 +150,7 @@ add_wifi_device (CcWifiPanel *self,
 {
   GtkWidget *header_widget;
   NetDeviceWifi *net_device;
+  GtkWidget *widget;
 
   /* Only manage Wi-Fi devices */
   if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
@@ -173,7 +174,10 @@ add_wifi_device (CcWifiPanel *self,
   update_devices_names (self);
 
   /* Needs to be added after the device is added to the self->devices array */
-  net_object_add_to_stack (NET_OBJECT (net_device), self->stack, self->sizegroup);
+  widget = net_object_get_widget (NET_OBJECT (net_device), self->sizegroup);
+  gtk_stack_add_titled (self->stack, widget,
+                        net_object_get_id (NET_OBJECT (net_device)),
+                        nm_device_get_description (device));
 }
 
 static void

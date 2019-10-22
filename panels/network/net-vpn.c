@@ -137,14 +137,11 @@ net_vpn_set_connection (NetVpn *self, NMConnection *connection)
 }
 
 static GtkWidget *
-vpn_proxy_add_to_stack (NetObject    *object,
-                        GtkStack     *stack,
-                        GtkSizeGroup *heading_size_group)
+vpn_proxy_get_widget (NetObject    *object,
+                      GtkSizeGroup *heading_size_group)
 {
         NetVpn *self = NET_VPN (object);
 
-        /* add widgets to size group */
-        gtk_stack_add_named (stack, GTK_WIDGET (self->box), net_object_get_id (object));
         return GTK_WIDGET (self->box);
 }
 
@@ -376,7 +373,7 @@ net_vpn_class_init (NetVpnClass *klass)
         object_class->set_property = net_vpn_set_property;
         object_class->constructed = net_vpn_constructed;
         object_class->finalize = net_vpn_finalize;
-        parent_class->add_to_stack = vpn_proxy_add_to_stack;
+        parent_class->get_widget = vpn_proxy_get_widget;
         parent_class->refresh = vpn_proxy_refresh;
 
         pspec = g_param_spec_object ("connection", NULL, NULL,

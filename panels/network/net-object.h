@@ -38,8 +38,7 @@ struct _NetObjectClass
         GObjectClass             parent_class;
 
         /* vtable */
-        GtkWidget               *(*add_to_stack)       (NetObject       *object,
-                                                        GtkStack        *stack,
+        GtkWidget               *(*get_widget)         (NetObject       *object,
                                                         GtkSizeGroup    *heading_size_group);
         void                     (*refresh)             (NetObject       *object);
 };
@@ -56,8 +55,7 @@ CcNetworkPanel  *net_object_get_panel                   (NetObject      *object)
 void             net_object_emit_changed                (NetObject      *object);
 void             net_object_emit_removed                (NetObject      *object);
 void             net_object_refresh                     (NetObject      *object);
-GtkWidget       *net_object_add_to_stack                (NetObject      *object,
-                                                         GtkStack       *stack,
+GtkWidget       *net_object_get_widget                  (NetObject      *object,
                                                          GtkSizeGroup   *heading_size_group);
 
 G_END_DECLS
