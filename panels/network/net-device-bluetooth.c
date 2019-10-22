@@ -56,14 +56,11 @@ net_device_bluetooth_set_show_separator (NetDeviceBluetooth *self,
 }
 
 static GtkWidget *
-device_bluetooth_add_to_stack (NetObject    *object,
-                               GtkStack     *stack,
-                               GtkSizeGroup *heading_size_group)
+device_bluetooth_get_widget (NetObject    *object,
+                             GtkSizeGroup *heading_size_group)
 {
         NetDeviceBluetooth *self = NET_DEVICE_BLUETOOTH (object);
 
-        /* add widgets to size group */
-        gtk_stack_add_named (stack, GTK_WIDGET (self->box), net_object_get_id (object));
         return GTK_WIDGET (self->box);
 }
 
@@ -203,7 +200,7 @@ net_device_bluetooth_class_init (NetDeviceBluetoothClass *klass)
 
         object_class->finalize = net_device_bluetooth_finalize;
         object_class->constructed = net_device_bluetooth_constructed;
-        parent_class->add_to_stack = device_bluetooth_add_to_stack;
+        parent_class->get_widget = device_bluetooth_get_widget;
         parent_class->refresh = device_bluetooth_refresh;
 }
 

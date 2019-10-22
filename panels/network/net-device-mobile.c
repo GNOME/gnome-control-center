@@ -89,9 +89,8 @@ enum {
 G_DEFINE_TYPE (NetDeviceMobile, net_device_mobile, NET_TYPE_DEVICE)
 
 static GtkWidget *
-device_mobile_proxy_add_to_stack (NetObject    *object,
-                                  GtkStack     *stack,
-                                  GtkSizeGroup *heading_size_group)
+device_mobile_get_widget (NetObject    *object,
+                          GtkSizeGroup *heading_size_group)
 {
         NetDeviceMobile *self = NET_DEVICE_MOBILE (object);
 
@@ -99,7 +98,6 @@ device_mobile_proxy_add_to_stack (NetObject    *object,
         gtk_size_group_add_widget (heading_size_group, GTK_WIDGET (self->imei_heading_label));
         gtk_size_group_add_widget (heading_size_group, GTK_WIDGET (self->network_label));
 
-        gtk_stack_add_named (stack, GTK_WIDGET (self->box), net_object_get_id (object));
         return GTK_WIDGET (self->box);
 }
 
@@ -914,7 +912,7 @@ net_device_mobile_class_init (NetDeviceMobileClass *klass)
         object_class->constructed = net_device_mobile_constructed;
         object_class->get_property = net_device_mobile_get_property;
         object_class->set_property = net_device_mobile_set_property;
-        parent_class->add_to_stack = device_mobile_proxy_add_to_stack;
+        parent_class->get_widget = device_mobile_get_widget;
         parent_class->refresh = device_mobile_refresh;
 
         g_object_class_install_property (object_class,
