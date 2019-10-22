@@ -264,13 +264,6 @@ net_device_init (NetDevice *self)
 {
 }
 
-NetDevice *
-net_device_new (void)
-{
-        return g_object_new (NET_TYPE_DEVICE,
-                             NULL);
-}
-
 GSList *
 net_device_get_valid_connections (NetDevice *self)
 {
