@@ -29,10 +29,12 @@
 
 #include "panel-common.h"
 
-#include "net-device-simple.h"
+#include "net-device-bluetooth.h"
 
-struct _NetDeviceSimple
+struct _NetDeviceBluetooth
 {
+        NetDevice     parent;
+
         GtkBuilder   *builder;
         GtkBox       *box;
         GtkLabel     *device_label;
@@ -43,22 +45,22 @@ struct _NetDeviceSimple
         gboolean    updating_device;
 };
 
-G_DEFINE_TYPE (NetDeviceSimple, net_device_simple, NET_TYPE_DEVICE)
+G_DEFINE_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET_TYPE_DEVICE)
 
 void
-net_device_simple_set_show_separator (NetDeviceSimple *self,
-                                      gboolean         show_separator)
+net_device_bluetooth_set_show_separator (NetDeviceBluetooth *self,
+                                         gboolean            show_separator)
 {
         /* add widgets to size group */
         gtk_widget_set_visible (GTK_WIDGET (self->separator), show_separator);
 }
 
 static GtkWidget *
-device_simple_proxy_add_to_stack (NetObject    *object,
-                                  GtkStack     *stack,
-                                  GtkSizeGroup *heading_size_group)
+device_bluetooth_add_to_stack (NetObject    *object,
+                               GtkStack     *stack,
+                               GtkSizeGroup *heading_size_group)
 {
-        NetDeviceSimple *self = NET_DEVICE_SIMPLE (object);
+        NetDeviceBluetooth *self = NET_DEVICE_BLUETOOTH (object);
 
         /* add widgets to size group */
         gtk_stack_add_named (stack, GTK_WIDGET (self->box), net_object_get_id (object));
@@ -68,7 +70,7 @@ device_simple_proxy_add_to_stack (NetObject    *object,
 static void
 update_off_switch_from_device_state (GtkSwitch *sw,
                                      NMDeviceState state,
-                                     NetDeviceSimple *self)
+                                     NetDeviceBluetooth *self)
 {
         self->updating_device = TRUE;
         switch (state) {
@@ -87,7 +89,7 @@ update_off_switch_from_device_state (GtkSwitch *sw,
 }
 
 static void
-nm_device_simple_refresh_ui (NetDeviceSimple *self)
+nm_device_bluetooth_refresh_ui (NetDeviceBluetooth *self)
 {
         NMDevice *nm_device;
         NMDeviceState state;
@@ -109,14 +111,14 @@ nm_device_simple_refresh_ui (NetDeviceSimple *self)
 }
 
 static void
-device_simple_refresh (NetObject *object)
+device_bluetooth_refresh (NetObject *object)
 {
-        NetDeviceSimple *self = NET_DEVICE_SIMPLE (object);
-        nm_device_simple_refresh_ui (self);
+        NetDeviceBluetooth *self = NET_DEVICE_BLUETOOTH (object);
+        nm_device_bluetooth_refresh_ui (self);
 }
 
 static void
-device_off_toggled (NetDeviceSimple *self)
+device_off_toggled (NetDeviceBluetooth *self)
 {
         const GPtrArray *acs;
         gboolean active;
@@ -158,7 +160,7 @@ device_off_toggled (NetDeviceSimple *self)
 }
 
 static void
-edit_connection (NetDeviceSimple *self)
+edit_connection (NetDeviceBluetooth *self)
 {
         const gchar *uuid;
         g_autofree gchar *cmdline = NULL;
@@ -174,45 +176,45 @@ edit_connection (NetDeviceSimple *self)
 }
 
 static void
-net_device_simple_constructed (GObject *object)
+net_device_bluetooth_constructed (GObject *object)
 {
-        NetDeviceSimple *self = NET_DEVICE_SIMPLE (object);
+        NetDeviceBluetooth *self = NET_DEVICE_BLUETOOTH (object);
 
-        G_OBJECT_CLASS (net_device_simple_parent_class)->constructed (object);
+        G_OBJECT_CLASS (net_device_bluetooth_parent_class)->constructed (object);
 
         net_object_refresh (NET_OBJECT (self));
 }
 
 static void
-net_device_simple_finalize (GObject *object)
+net_device_bluetooth_finalize (GObject *object)
 {
-        NetDeviceSimple *self = NET_DEVICE_SIMPLE (object);
+        NetDeviceBluetooth *self = NET_DEVICE_BLUETOOTH (object);
 
         g_clear_object (&self->builder);
 
-        G_OBJECT_CLASS (net_device_simple_parent_class)->finalize (object);
+        G_OBJECT_CLASS (net_device_bluetooth_parent_class)->finalize (object);
 }
 
 static void
-net_device_simple_class_init (NetDeviceSimpleClass *klass)
+net_device_bluetooth_class_init (NetDeviceBluetoothClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
 
-        object_class->finalize = net_device_simple_finalize;
-        object_class->constructed = net_device_simple_constructed;
-        parent_class->add_to_stack = device_simple_proxy_add_to_stack;
-        parent_class->refresh = device_simple_refresh;
+        object_class->finalize = net_device_bluetooth_finalize;
+        object_class->constructed = net_device_bluetooth_constructed;
+        parent_class->add_to_stack = device_bluetooth_add_to_stack;
+        parent_class->refresh = device_bluetooth_refresh;
 }
 
 static void
-net_device_simple_init (NetDeviceSimple *self)
+net_device_bluetooth_init (NetDeviceBluetooth *self)
 {
         g_autoptr(GError) error = NULL;
 
         self->builder = gtk_builder_new ();
         gtk_builder_add_from_resource (self->builder,
-                                       "/org/gnome/control-center/network/network-simple.ui",
+                                       "/org/gnome/control-center/network/network-bluetooth.ui",
                                        &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
@@ -225,7 +227,6 @@ net_device_simple_init (NetDeviceSimple *self)
         self->options_button = GTK_BUTTON (gtk_builder_get_object (self->builder, "options_button"));
         self->separator = GTK_SEPARATOR (gtk_builder_get_object (self->builder, "separator"));
 
-        /* setup simple combobox model */
         g_signal_connect_swapped (self->device_off_switch, "notify::active",
                                   G_CALLBACK (device_off_toggled), self);
 
@@ -233,14 +234,14 @@ net_device_simple_init (NetDeviceSimple *self)
                                   G_CALLBACK (edit_connection), self);
 }
 
-NetDeviceSimple *
-net_device_simple_new (CcPanel      *panel,
-                       GCancellable *cancellable,
-                       NMClient     *client,
-                       NMDevice     *device,
-                       const gchar  *id)
+NetDeviceBluetooth *
+net_device_bluetooth_new (CcPanel      *panel,
+                          GCancellable *cancellable,
+                          NMClient     *client,
+                          NMDevice     *device,
+                          const gchar  *id)
 {
-        return g_object_new (NET_TYPE_DEVICE_SIMPLE,
+        return g_object_new (NET_TYPE_DEVICE_BLUETOOTH,
                              "panel", panel,
                              "cancellable", cancellable,
                              "client", client,
