@@ -264,7 +264,7 @@ enumerate_children_finished_cb (GObject      *source,
                                 GAsyncResult *result,
                                 gpointer      user_data)
 {
-  BgRecentSource *self = BG_RECENT_SOURCE (user_data);
+  BgRecentSource *self;
   g_autoptr(GFileEnumerator) enumerator = NULL;
   g_autoptr(GError) error = NULL;
 
@@ -277,6 +277,7 @@ enumerate_children_finished_cb (GObject      *source,
       return;
     }
 
+  self = BG_RECENT_SOURCE (user_data);
   g_file_enumerator_next_files_async (enumerator,
                                       G_MAXINT,
                                       G_PRIORITY_DEFAULT,
