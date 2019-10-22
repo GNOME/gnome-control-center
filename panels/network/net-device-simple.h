@@ -33,9 +33,7 @@ G_DECLARE_DERIVABLE_TYPE (NetDeviceSimple, net_device_simple, NET, DEVICE_SIMPLE
 
 struct _NetDeviceSimpleClass
 {
-        NetDeviceClass           parent_class;
-
-        char                    *(*get_speed)  (NetDeviceSimple *device_simple);
+        NetDeviceClass parent_class;
 };
 
 NetDeviceSimple *net_device_simple_new                (CcPanel      *panel,
@@ -43,8 +41,6 @@ NetDeviceSimple *net_device_simple_new                (CcPanel      *panel,
                                                        NMClient     *client,
                                                        NMDevice     *device,
                                                        const gchar  *id);
-
-char            *net_device_simple_get_speed          (NetDeviceSimple *device_simple);
 
 void             net_device_simple_add_row            (NetDeviceSimple *device_simple,
                                                        const char      *label,
