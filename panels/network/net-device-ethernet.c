@@ -58,13 +58,11 @@ struct _NetDeviceEthernet
 G_DEFINE_TYPE (NetDeviceEthernet, net_device_ethernet, NET_TYPE_DEVICE)
 
 static GtkWidget *
-device_ethernet_add_to_stack (NetObject    *object,
-                              GtkStack     *stack,
-                              GtkSizeGroup *heading_size_group)
+device_ethernet_get_widget (NetObject    *object,
+                            GtkSizeGroup *heading_size_group)
 {
         NetDeviceEthernet *self = NET_DEVICE_ETHERNET (object);
 
-        gtk_stack_add_named (stack, GTK_WIDGET (self->box), net_object_get_id (object));
         return GTK_WIDGET (self->box);
 }
 
@@ -560,7 +558,7 @@ net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         obj_class->refresh = device_ethernet_refresh;
-        obj_class->add_to_stack = device_ethernet_add_to_stack;
+        obj_class->get_widget = device_ethernet_get_widget;
         object_class->constructed = device_ethernet_constructed;
         object_class->finalize = device_ethernet_finalize;
 }

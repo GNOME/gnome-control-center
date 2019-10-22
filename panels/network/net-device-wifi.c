@@ -128,18 +128,10 @@ net_device_wifi_get_title_widget (NetDeviceWifi *self)
 }
 
 static GtkWidget *
-device_wifi_proxy_add_to_stack (NetObject    *object,
-                                GtkStack     *stack,
-                                GtkSizeGroup *heading_size_group)
+device_wifi_proxy_get_widget (NetObject    *object,
+                              GtkSizeGroup *heading_size_group)
 {
-        NMDevice *nmdevice;
         NetDeviceWifi *self = NET_DEVICE_WIFI (object);
-
-        nmdevice = net_device_get_nm_device (NET_DEVICE (object));
-
-        gtk_stack_add_titled (stack, GTK_WIDGET (self->notebook),
-                              net_object_get_id (object),
-                              nm_device_get_description (nmdevice));
 
         return GTK_WIDGET (self->notebook);
 }
@@ -1025,7 +1017,7 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         object_class->finalize = net_device_wifi_finalize;
         object_class->constructed = net_device_wifi_constructed;
         object_class->get_property = net_device_wifi_get_property;
-        parent_class->add_to_stack = device_wifi_proxy_add_to_stack;
+        parent_class->get_widget = device_wifi_proxy_get_widget;
         parent_class->refresh = device_wifi_refresh;
 
         g_object_class_install_property (object_class,
