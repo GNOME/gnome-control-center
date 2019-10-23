@@ -348,11 +348,8 @@ handle_argv (CcNetworkPanel *self)
                 object_tmp = g_ptr_array_index (self->devices, i);
 
                 if (NET_IS_DEVICE (object_tmp)) {
-                        NMDevice *device = NULL; /* Autoptr macro not available: https://gitlab.freedesktop.org/NetworkManager/NetworkManager/merge_requests/270 */
-
-                        g_object_get (object_tmp, "nm-device", &device, NULL);
+                        NMDevice *device = net_device_get_nm_device (NET_DEVICE (object_tmp));
                         done = handle_argv_for_device (self, device);
-                        g_object_unref (device);
                 } else if (NET_IS_VPN (object_tmp)) {
                         done = handle_argv_for_connection (self, net_vpn_get_connection (NET_VPN (object_tmp)));
                 }
