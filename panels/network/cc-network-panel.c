@@ -243,51 +243,34 @@ object_removed_cb (CcNetworkPanel *self, NetObject *object)
                 gtk_widget_destroy (widget);
 }
 
-GPtrArray *
-cc_network_panel_get_devices (CcNetworkPanel *self)
+static void
+panel_refresh_device_titles (CcNetworkPanel *self)
 {
-        GPtrArray *devices;
-        guint i;
+        g_autoptr(GPtrArray) ndarray = NULL;
+        g_autoptr(GPtrArray) nmdarray = NULL;
+        NetDevice **devices;
+        NMDevice **nm_devices;
+        g_auto(GStrv) titles = NULL;
+        guint i, num_devices;
 
-        g_return_val_if_fail (CC_IS_NETWORK_PANEL (self), NULL);
-
-        devices = g_ptr_array_new_with_free_func (g_object_unref);
-
+        ndarray = g_ptr_array_new ();
+        nmdarray = g_ptr_array_new ();
         for (i = 0; i < self->devices->len; i++) {
                 NetObject *object = g_ptr_array_index (self->devices, i);
+                NMDevice *nm_device;
 
                 if (!NET_IS_DEVICE (object))
                         continue;
 
-                g_ptr_array_add (devices, g_object_ref (object));
-        }
-
-        return devices;
-}
-
-static void
-panel_refresh_device_titles (CcNetworkPanel *self)
-{
-        GPtrArray *ndarray, *nmdarray;
-        NetDevice **devices;
-        NMDevice **nm_devices, *nm_device;
-        g_auto(GStrv) titles = NULL;
-        gint i, num_devices;
-
-        ndarray = cc_network_panel_get_devices (self);
-        if (!ndarray->len) {
-                g_ptr_array_free (ndarray, TRUE);
-                return;
-        }
-
-        nmdarray = g_ptr_array_new ();
-        for (i = 0; i < ndarray->len; i++) {
-                nm_device = net_device_get_nm_device (ndarray->pdata[i]);
-                if (nm_device)
+                nm_device = net_device_get_nm_device (NET_DEVICE (object));
+                if (nm_device != NULL) {
+                        g_ptr_array_add (ndarray, object);
                         g_ptr_array_add (nmdarray, nm_device);
-                else
-                        g_ptr_array_remove_index (ndarray, i--);
+                }
         }
+
+        if (ndarray->len == 0)
+                return;
 
         devices = (NetDevice **)ndarray->pdata;
         nm_devices = (NMDevice **)nmdarray->pdata;
@@ -306,8 +289,6 @@ panel_refresh_device_titles (CcNetworkPanel *self)
                 else
                         net_object_set_title (NET_OBJECT (devices[i]), titles[i]);
         }
-        g_ptr_array_free (ndarray, TRUE);
-        g_ptr_array_free (nmdarray, TRUE);
 }
 
 static gboolean
