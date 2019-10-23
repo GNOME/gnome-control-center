@@ -58,6 +58,7 @@ struct _CcNetworkPanel
 
         GHashTable       *device_to_widget;
         GPtrArray        *devices;
+        GPtrArray        *vpns;
         NMClient         *client;
         MMManager        *modem_manager;
         GtkSizeGroup     *sizegroup;
@@ -206,6 +207,7 @@ cc_network_panel_dispose (GObject *object)
 
         g_clear_pointer (&self->device_to_widget, g_hash_table_destroy);
         g_clear_pointer (&self->devices, g_ptr_array_unref);
+        g_clear_pointer (&self->vpns, g_ptr_array_unref);
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
 }
@@ -250,15 +252,12 @@ panel_refresh_device_titles (CcNetworkPanel *self)
         ndarray = g_ptr_array_new ();
         nmdarray = g_ptr_array_new ();
         for (i = 0; i < self->devices->len; i++) {
-                NetObject *object = g_ptr_array_index (self->devices, i);
+                NetDevice *device = g_ptr_array_index (self->devices, i);
                 NMDevice *nm_device;
 
-                if (!NET_IS_DEVICE (object))
-                        continue;
-
-                nm_device = net_device_get_nm_device (NET_DEVICE (object));
+                nm_device = net_device_get_nm_device (device);
                 if (nm_device != NULL) {
-                        g_ptr_array_add (ndarray, object);
+                        g_ptr_array_add (ndarray, device);
                         g_ptr_array_add (nmdarray, nm_device);
                 }
         }
@@ -336,19 +335,18 @@ handle_argv (CcNetworkPanel *self)
                 return;
 
         for (i = 0; i < self->devices->len; i++) {
-                GObject *object_tmp;
-                gboolean done = FALSE;
+                NetDevice *net_device = g_ptr_array_index (self->devices, i);
+                NMDevice *device;
 
-                object_tmp = g_ptr_array_index (self->devices, i);
+                device = net_device_get_nm_device (net_device);
+                if (handle_argv_for_device (self, device))
+                        return;
+        }
 
-                if (NET_IS_DEVICE (object_tmp)) {
-                        NMDevice *device = net_device_get_nm_device (NET_DEVICE (object_tmp));
-                        done = handle_argv_for_device (self, device);
-                } else if (NET_IS_VPN (object_tmp)) {
-                        done = handle_argv_for_connection (self, net_vpn_get_connection (NET_VPN (object_tmp)));
-                }
+        for (i = 0; i < self->vpns->len; i++) {
+                NetVpn *vpn = g_ptr_array_index (self->vpns, i);
 
-                if (done)
+                if (handle_argv_for_connection (self, net_vpn_get_connection (vpn)))
                         return;
         }
 
@@ -364,13 +362,10 @@ update_vpn_section (CcNetworkPanel *self)
 {
         guint i, n_vpns;
 
-        for (i = 0, n_vpns = 0; i < self->devices->len; i++) {
-                NetObject *net_object = g_ptr_array_index (self->devices, i);
+        for (i = 0, n_vpns = 0; i < self->vpns->len; i++) {
+                NetVpn *vpn = g_ptr_array_index (self->vpns, i);
 
-                if (!NET_IS_VPN (net_object))
-                        continue;
-
-                net_vpn_set_show_separator (NET_VPN (net_object), n_vpns > 0);
+                net_vpn_set_show_separator (vpn, n_vpns > 0);
                 n_vpns++;
         }
 
@@ -418,9 +413,8 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
 
         /* does already exist */
         for (i = 0; i < self->devices->len; i++) {
-                NetObject *o = g_ptr_array_index (self->devices, i);
-
-                if (NET_IS_DEVICE (o) && net_device_get_nm_device (NET_DEVICE (o)) == device)
+                net_device = g_ptr_array_index (self->devices, i);
+                if (net_device_get_nm_device (net_device) == device)
                         return;
         }
 
@@ -487,23 +481,20 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
 static void
 panel_remove_device (CcNetworkPanel *self, NMDevice *device)
 {
-        NetObject *object;
+        NetDevice *net_device = NULL;
         guint i;
 
         for (i = 0; i < self->devices->len; i++) {
-                NetObject *o = g_ptr_array_index (self->devices, i);
-
-                if (NET_IS_DEVICE (o) && net_device_get_nm_device (NET_DEVICE (o)) == device) {
-                        object = o;
+                NetDevice *d = g_ptr_array_index (self->devices, i);
+                if (net_device_get_nm_device (d) == device) {
+                        net_device = d;
                         break;
                 }
         }
-        if (object == NULL)
-                return;
 
         /* NMObject will not fire the "removed" signal, so handle the UI removal explicitly */
-        object_removed_cb (self, object);
-        g_ptr_array_remove (self->devices, object);
+        object_removed_cb (self, NET_OBJECT (net_device));
+        g_ptr_array_remove (self->devices, net_device);
 
         /* update vpn widgets */
         update_vpn_section (self);
@@ -612,10 +603,9 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
         guint i;
 
         /* does already exist */
-        for (i = 0; i < self->devices->len; i++) {
-                NetObject *o = g_ptr_array_index (self->devices, i);
-
-                if (NET_IS_VPN (o) && net_vpn_get_connection (NET_VPN (o)) == connection)
+        for (i = 0; i < self->vpns->len; i++) {
+                net_vpn = g_ptr_array_index (self->vpns, i);
+                if (net_vpn_get_connection (net_vpn) == connection)
                         return;
         }
 
@@ -631,7 +621,7 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
         net_object_set_title (NET_OBJECT (net_vpn), nm_connection_get_id (connection));
 
         /* store in the devices array */
-        g_ptr_array_add (self->devices, net_vpn);
+        g_ptr_array_add (self->vpns, net_vpn);
 
         /* update vpn widgets */
         update_vpn_section (self);
@@ -771,6 +761,7 @@ cc_network_panel_init (CcNetworkPanel *self)
         gtk_widget_init_template (GTK_WIDGET (self));
 
         self->devices = g_ptr_array_new_with_free_func (g_object_unref);
+        self->vpns = g_ptr_array_new_with_free_func (g_object_unref);
         self->device_to_widget = g_hash_table_new (g_direct_hash, g_direct_equal);
 
         /* add the virtual proxy device */
