@@ -58,6 +58,7 @@ struct _CcNetworkPanel
 
         GHashTable       *device_to_widget;
         GPtrArray        *devices;
+        GHashTable       *nm_device_to_device;
         GPtrArray        *vpns;
         NMClient         *client;
         MMManager        *modem_manager;
@@ -207,6 +208,7 @@ cc_network_panel_dispose (GObject *object)
 
         g_clear_pointer (&self->device_to_widget, g_hash_table_destroy);
         g_clear_pointer (&self->devices, g_ptr_array_unref);
+        g_clear_pointer (&self->nm_device_to_device, g_hash_table_destroy);
         g_clear_pointer (&self->vpns, g_ptr_array_unref);
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
@@ -406,17 +408,14 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         NMDeviceType type;
         NetDevice *net_device;
         g_autoptr(GDBusObject) modem_object = NULL;
-        guint i;
 
         if (!nm_device_get_managed (device))
                 return;
 
         /* does already exist */
-        for (i = 0; i < self->devices->len; i++) {
-                net_device = g_ptr_array_index (self->devices, i);
-                if (net_device_get_nm_device (net_device) == device)
-                        return;
-        }
+        net_device = g_hash_table_lookup (self->nm_device_to_device, device);
+        if (net_device != NULL)
+                return;
 
         type = nm_device_get_device_type (device);
 
@@ -467,6 +466,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
 
         /* Add to the devices array */
         g_ptr_array_add (self->devices, net_device);
+        g_hash_table_insert (self->nm_device_to_device, device, net_device);
 
         /* Update the device_bluetooth section if we're adding a bluetooth
          * device. This is a temporary solution though, for these will
@@ -482,19 +482,15 @@ static void
 panel_remove_device (CcNetworkPanel *self, NMDevice *device)
 {
         NetDevice *net_device = NULL;
-        guint i;
 
-        for (i = 0; i < self->devices->len; i++) {
-                NetDevice *d = g_ptr_array_index (self->devices, i);
-                if (net_device_get_nm_device (d) == device) {
-                        net_device = d;
-                        break;
-                }
-        }
+        net_device = g_hash_table_lookup (self->nm_device_to_device, device);
+        if (net_device == NULL)
+                return;
 
         /* NMObject will not fire the "removed" signal, so handle the UI removal explicitly */
         object_removed_cb (self, NET_OBJECT (net_device));
         g_ptr_array_remove (self->devices, net_device);
+        g_hash_table_remove (self->nm_device_to_device, device);
 
         /* update vpn widgets */
         update_vpn_section (self);
@@ -763,6 +759,7 @@ cc_network_panel_init (CcNetworkPanel *self)
         self->devices = g_ptr_array_new_with_free_func (g_object_unref);
         self->vpns = g_ptr_array_new_with_free_func (g_object_unref);
         self->device_to_widget = g_hash_table_new (g_direct_hash, g_direct_equal);
+        self->nm_device_to_device = g_hash_table_new (g_direct_hash, g_direct_equal);
 
         /* add the virtual proxy device */
         panel_add_proxy_device (self);
