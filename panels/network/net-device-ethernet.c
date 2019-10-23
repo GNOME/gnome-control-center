@@ -370,7 +370,7 @@ populate_ui (NetDeviceEthernet *self)
         }
         g_list_free (children);
 
-        connections = net_device_get_valid_connections (NET_DEVICE (self));
+        connections = net_device_get_valid_connections (net_object_get_client (NET_OBJECT (self)), net_device_get_nm_device (NET_DEVICE (self)));
         for (l = connections; l; l = l->next) {
                 NMConnection *connection = l->data;
                 if (!g_hash_table_contains (self->connections, connection)) {
@@ -461,7 +461,7 @@ device_off_toggled (NetDeviceEthernet *self)
         nm_device = net_device_get_nm_device (NET_DEVICE (self));
 
         if (gtk_switch_get_active (self->device_off_switch)) {
-                connection = net_device_get_find_connection (NET_DEVICE (self));
+                connection = net_device_get_find_connection (client, nm_device);
                 if (connection != NULL) {
                         nm_client_activate_connection_async (client,
                                                              connection,
