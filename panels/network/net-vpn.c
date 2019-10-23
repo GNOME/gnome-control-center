@@ -43,17 +43,12 @@ struct _NetVpn
         GtkButton               *options_button;
         GtkSeparator            *separator;
 
+        NMClient                *client;
         NMConnection            *connection;
         NMActiveConnection      *active_connection;
         gchar                   *service_type;
         gboolean                 valid;
         gboolean                 updating_device;
-};
-
-enum {
-        PROP_0,
-        PROP_CONNECTION,
-        PROP_LAST
 };
 
 G_DEFINE_TYPE (NetVpn, net_vpn, NET_TYPE_OBJECT)
@@ -85,36 +80,6 @@ net_vpn_connection_to_type (NMConnection *connection)
         return g_strdup (p ? p + 1 : type);
 }
 
-static void
-net_vpn_set_connection (NetVpn *self, NMConnection *connection)
-{
-        NMClient *client;
-
-        /*
-         * vpnc config exmaple:
-         * key=IKE DH Group, value=dh2
-         * key=xauth-password-type, value=ask
-         * key=ipsec-secret-type, value=save
-         * key=IPSec gateway, value=66.187.233.252
-         * key=NAT Traversal Mode, value=natt
-         * key=IPSec ID, value=rh-vpn
-         * key=Xauth username, value=rhughes
-         */
-        self->connection = g_object_ref (connection);
-
-        client = net_object_get_client (NET_OBJECT (self));
-        g_signal_connect_object (client,
-                                 NM_CLIENT_CONNECTION_REMOVED,
-                                 G_CALLBACK (connection_removed_cb),
-                                 self, G_CONNECT_SWAPPED);
-        g_signal_connect_object (connection,
-                                 NM_CONNECTION_CHANGED,
-                                 G_CALLBACK (connection_changed_cb),
-                                 self, G_CONNECT_SWAPPED);
-
-        self->service_type = net_vpn_connection_to_type (self->connection);
-}
-
 static GtkWidget *
 vpn_proxy_get_widget (NetObject    *object,
                       GtkSizeGroup *heading_size_group)
@@ -132,7 +97,6 @@ nm_device_refresh_vpn_ui (NetVpn *self)
         gint i;
         NMVpnConnectionState state;
         g_autofree gchar *title = NULL;
-        NMClient *client;
 
         /* update title */
         /* Translators: this is the title of the connection details
@@ -153,8 +117,7 @@ nm_device_refresh_vpn_ui (NetVpn *self)
 
         /* Default to disconnected if there is no active connection */
         state = NM_VPN_CONNECTION_STATE_DISCONNECTED;
-        client = net_object_get_client (NET_OBJECT (self));
-        acs = nm_client_get_active_connections (client);
+        acs = nm_client_get_active_connections (self->client);
         if (acs != NULL) {
                 const gchar *uuid;
                 uuid = nm_connection_get_uuid (self->connection);
@@ -203,27 +166,24 @@ device_off_toggled (NetVpn *self)
         gboolean active;
         gint i;
         NMActiveConnection *a;
-        NMClient *client;
 
         if (self->updating_device)
                 return;
 
         active = gtk_switch_get_active (self->device_off_switch);
         if (active) {
-                client = net_object_get_client (NET_OBJECT (self));
-                nm_client_activate_connection_async (client,
+                nm_client_activate_connection_async (self->client,
                                                      self->connection, NULL, NULL,
                                                      NULL, NULL, NULL);
         } else {
                 const gchar *uuid;
 
                 uuid = nm_connection_get_uuid (self->connection);
-                client = net_object_get_client (NET_OBJECT (self));
-                acs = nm_client_get_active_connections (client);
+                acs = nm_client_get_active_connections (self->client);
                 for (i = 0; acs && i < acs->len; i++) {
                         a = (NMActiveConnection*)acs->pdata[i];
                         if (strcmp (nm_active_connection_get_uuid (a), uuid) == 0) {
-                                nm_client_deactivate_connection (client, a, NULL, NULL);
+                                nm_client_deactivate_connection (self->client, a, NULL, NULL);
                                 break;
                         }
                 }
@@ -242,16 +202,13 @@ edit_connection (NetVpn *self)
 {
         GtkWidget *window;
         NetConnectionEditor *editor;
-        NMClient *client;
         g_autofree gchar *title = NULL;
 
         window = gtk_widget_get_toplevel (GTK_WIDGET (self->options_button));
 
-        client = net_object_get_client (NET_OBJECT (self));
-
         editor = net_connection_editor_new (GTK_WINDOW (window),
                                             self->connection,
-                                            NULL, NULL, client);
+                                            NULL, NULL, self->client);
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (self->connection));
         net_connection_editor_set_title (editor, title);
 
@@ -259,81 +216,18 @@ edit_connection (NetVpn *self)
         net_connection_editor_run (editor);
 }
 
-/**
- * net_vpn_get_property:
- **/
-static void
-net_vpn_get_property (GObject *object,
-                      guint prop_id,
-                      GValue *value,
-                      GParamSpec *pspec)
-{
-        NetVpn *self = NET_VPN (object);
-
-        switch (prop_id) {
-        case PROP_CONNECTION:
-                g_value_set_object (value, self->connection);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (self, prop_id, pspec);
-                break;
-        }
-}
-
-/**
- * net_vpn_set_property:
- **/
-static void
-net_vpn_set_property (GObject *object,
-                      guint prop_id,
-                      const GValue *value,
-                      GParamSpec *pspec)
-{
-        NetVpn *self = NET_VPN (object);
-
-        switch (prop_id) {
-        case PROP_CONNECTION:
-                net_vpn_set_connection (self, g_value_get_object (value));
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (self, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-net_vpn_constructed (GObject *object)
-{
-        NetVpn *self = NET_VPN (object);
-        NMClient *client = net_object_get_client (NET_OBJECT (object));
-
-        G_OBJECT_CLASS (net_vpn_parent_class)->constructed (object);
-
-        nm_device_refresh_vpn_ui (self);
-
-        g_signal_connect_swapped (client,
-                                  "notify::active-connections",
-                                  G_CALLBACK (nm_active_connections_changed),
-                                  self);
-
-}
-
 static void
 net_vpn_finalize (GObject *object)
 {
         NetVpn *self = NET_VPN (object);
-        NMClient *client = net_object_get_client (NET_OBJECT (object));
 
-        if (client)
-                g_signal_handlers_disconnect_by_func (client,
-                                                      nm_active_connections_changed,
-                                                      self);
         if (self->active_connection)
                 g_signal_handlers_disconnect_by_func (self->active_connection,
                                                       nm_device_refresh_vpn_ui,
                                                       self);
 
         g_clear_object (&self->active_connection);
+        g_clear_object (&self->client);
         g_clear_object (&self->connection);
         g_clear_pointer (&self->service_type, g_free);
         g_clear_object (&self->builder);
@@ -344,21 +238,12 @@ net_vpn_finalize (GObject *object)
 static void
 net_vpn_class_init (NetVpnClass *klass)
 {
-        GParamSpec *pspec;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
 
-        object_class->get_property = net_vpn_get_property;
-        object_class->set_property = net_vpn_set_property;
-        object_class->constructed = net_vpn_constructed;
         object_class->finalize = net_vpn_finalize;
         parent_class->get_widget = vpn_proxy_get_widget;
         parent_class->refresh = vpn_proxy_refresh;
-
-        pspec = g_param_spec_object ("connection", NULL, NULL,
-                                     NM_TYPE_CONNECTION,
-                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
-        g_object_class_install_property (object_class, PROP_CONNECTION, pspec);
 }
 
 static void
@@ -392,10 +277,31 @@ NetVpn *
 net_vpn_new (NMConnection *connection,
              NMClient     *client)
 {
-        return g_object_new (NET_TYPE_VPN,
-                             "connection", connection,
-                             "client", client,
-                             NULL);
+        NetVpn *self;
+
+        self = g_object_new (NET_TYPE_VPN, NULL);
+        self->client = g_object_ref (client);
+        self->connection = g_object_ref (connection);
+
+        g_signal_connect_object (self->client,
+                                 NM_CLIENT_CONNECTION_REMOVED,
+                                 G_CALLBACK (connection_removed_cb),
+                                 self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (connection,
+                                 NM_CONNECTION_CHANGED,
+                                 G_CALLBACK (connection_changed_cb),
+                                 self, G_CONNECT_SWAPPED);
+
+        self->service_type = net_vpn_connection_to_type (self->connection);
+
+        nm_device_refresh_vpn_ui (self);
+
+        g_signal_connect_object (client,
+                                 "notify::active-connections",
+                                 G_CALLBACK (nm_active_connections_changed),
+                                 self, G_CONNECT_SWAPPED);
+
+        return self;
 }
 
 NMConnection *
