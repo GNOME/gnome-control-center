@@ -169,17 +169,7 @@ static NMConnection *
 find_connection_for_device (NetDeviceWifi *self,
                             NMDevice       *device)
 {
-        g_autoptr(NetDevice) tmp = NULL;
-        NMConnection *connection;
-        NMClient *client;
-
-        client = net_object_get_client (NET_OBJECT (self));
-        tmp = g_object_new (NET_TYPE_DEVICE,
-                            "client", client,
-                            "nm-device", device,
-                            NULL);
-        connection = net_device_get_find_connection (tmp);
-        return connection;
+        return net_device_get_find_connection (net_object_get_client (NET_OBJECT (self)), device);
 }
 
 static gboolean
@@ -726,7 +716,7 @@ net_device_wifi_get_hotspot_connection (NetDeviceWifi *self)
         GSList *connections, *l;
         NMConnection *c = NULL;
 
-        connections = net_device_get_valid_connections (NET_DEVICE (self));
+        connections = net_device_get_valid_connections (net_object_get_client (NET_OBJECT (self)), net_device_get_nm_device (NET_DEVICE (self)));
         for (l = connections; l; l = l->next) {
                 NMConnection *tmp = l->data;
                 if (is_hotspot_connection (tmp)) {

@@ -210,7 +210,7 @@ device_add_device_connections (NetDeviceMobile *self,
         NMConnection *connection;
 
         /* get the list of available connections for this device */
-        list = net_device_get_valid_connections (NET_DEVICE (self));
+        list = net_device_get_valid_connections (net_object_get_client (NET_OBJECT (self)), nm_device);
         gtk_list_store_clear (liststore);
         active_connection = nm_device_get_active_connection (nm_device);
         for (l = list; l; l = g_slist_next (l)) {
@@ -398,7 +398,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
         gtk_label_set_label (self->status_label, status);
 
         /* sensitive for other connection types if the device is currently connected */
-        is_connected = net_device_get_find_connection (NET_DEVICE (self)) != NULL;
+        is_connected = net_device_get_find_connection (net_object_get_client (NET_OBJECT (self)), nm_device) != NULL;
         gtk_widget_set_sensitive (GTK_WIDGET (self->options_button), is_connected);
 
         caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
@@ -495,12 +495,13 @@ device_off_toggled (NetDeviceMobile *self)
         if (self->updating_device)
                 return;
 
+        client = net_object_get_client (NET_OBJECT (self));
+        connection = net_device_get_find_connection (client, net_device_get_nm_device (NET_DEVICE (self)));
+        if (connection == NULL)
+                return;
+
         active = gtk_switch_get_active (self->device_off_switch);
         if (active) {
-                client = net_object_get_client (NET_OBJECT (self));
-                connection = net_device_get_find_connection (NET_DEVICE (self));
-                if (connection == NULL)
-                        return;
                 nm_client_activate_connection_async (client,
                                                      connection,
                                                      net_device_get_nm_device (NET_DEVICE (self)),
@@ -508,11 +509,7 @@ device_off_toggled (NetDeviceMobile *self)
         } else {
                 const gchar *uuid;
 
-                connection = net_device_get_find_connection (NET_DEVICE (self));
-                if (connection == NULL)
-                        return;
                 uuid = nm_connection_get_uuid (connection);
-                client = net_object_get_client (NET_OBJECT (self));
                 acs = nm_client_get_active_connections (client);
                 for (i = 0; acs && i < acs->len; i++) {
                         a = (NMActiveConnection*)acs->pdata[i];
@@ -532,7 +529,7 @@ edit_connection (NetDeviceMobile *self)
         g_autoptr(GError) error = NULL;
         NMConnection *connection;
 
-        connection = net_device_get_find_connection (NET_DEVICE (self));
+        connection = net_device_get_find_connection (net_object_get_client (NET_OBJECT (self)), net_device_get_nm_device (NET_DEVICE (self)));
         uuid = nm_connection_get_uuid (connection);
         cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
         g_debug ("Launching '%s'\n", cmdline);
