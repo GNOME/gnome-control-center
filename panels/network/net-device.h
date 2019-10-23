@@ -21,9 +21,6 @@
 
 #pragma once
 
-#include <glib-object.h>
-
-#include <NetworkManager.h>
 #include "net-object.h"
 
 G_BEGIN_DECLS
@@ -38,11 +35,5 @@ struct _NetDeviceClass
 };
 
 NMDevice     *net_device_get_nm_device         (NetDevice *device);
-
-NMConnection *net_device_get_find_connection   (NMClient *client,
-                                                NMDevice *device);
-
-GSList       *net_device_get_valid_connections (NMClient *client,
-                                                NMDevice *device);
 
 G_END_DECLS
