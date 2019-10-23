@@ -117,20 +117,19 @@ compare_mac_device_with_mac_connection (NMDevice *device,
 }
 
 NMConnection *
-net_device_get_find_connection (NetDevice *self)
+net_device_get_find_connection (NMClient *client, NMDevice *device)
 {
-        NetDevicePrivate *priv = net_device_get_instance_private (self);
         GSList *list, *iterator;
         NMConnection *connection = NULL;
         NMActiveConnection *ac;
 
         /* is the device available in a active connection? */
-        ac = nm_device_get_active_connection (priv->nm_device);
+        ac = nm_device_get_active_connection (device);
         if (ac)
                 return (NMConnection*) nm_active_connection_get_connection (ac);
 
         /* not found in active connections - check all available connections */
-        list = net_device_get_valid_connections (self);
+        list = net_device_get_valid_connections (client, device);
         if (list != NULL) {
                 /* if list has only one connection, use this connection */
                 if (g_slist_length (list) == 1) {
@@ -141,7 +140,7 @@ net_device_get_find_connection (NetDevice *self)
                 /* is there connection with the MAC address of the device? */
                 for (iterator = list; iterator; iterator = iterator->next) {
                         connection = iterator->data;
-                        if (compare_mac_device_with_mac_connection (priv->nm_device,
+                        if (compare_mac_device_with_mac_connection (device,
                                                                     connection)) {
                                 goto out;
                         }
@@ -265,7 +264,7 @@ net_device_init (NetDevice *self)
 }
 
 GSList *
-net_device_get_valid_connections (NetDevice *self)
+net_device_get_valid_connections (NMClient *client, NMDevice *device)
 {
         GSList *valid;
         NMConnection *connection;
@@ -276,10 +275,10 @@ net_device_get_valid_connections (NetDevice *self)
         GPtrArray *filtered;
         guint i;
 
-        all = nm_client_get_connections (net_object_get_client (NET_OBJECT (self)));
-        filtered = nm_device_filter_connections (net_device_get_nm_device (self), all);
+        all = nm_client_get_connections (client);
+        filtered = nm_device_filter_connections (device, all);
 
-        active_connection = nm_device_get_active_connection (net_device_get_nm_device (self));
+        active_connection = nm_device_get_active_connection (device);
         active_uuid = active_connection ? nm_active_connection_get_uuid (active_connection) : NULL;
 
         valid = NULL;
