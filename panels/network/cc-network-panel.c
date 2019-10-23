@@ -530,10 +530,6 @@ panel_add_proxy_device (CcNetworkPanel *self)
 
         /* add proxy to device list */
         net_object_set_title (NET_OBJECT (proxy), _("Network proxy"));
-
-        /* NOTE: No connect to notify::title here as it is guaranteed to not
-         *       be changed by anyone.*/
-        g_ptr_array_add (self->devices, proxy);
 }
 
 static void
