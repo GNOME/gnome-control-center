@@ -470,9 +470,9 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
 }
 
 static void
-device_mobile_refresh (NetObject *object)
+device_state_changed_cb (NetDeviceMobile *self)
 {
-        NetDeviceMobile *self = NET_DEVICE_MOBILE (object);
+        net_object_emit_changed (NET_OBJECT (self));
         nm_device_mobile_refresh_ui (self);
 }
 
@@ -779,7 +779,6 @@ net_device_mobile_class_init (NetDeviceMobileClass *klass)
 
         object_class->dispose = net_device_mobile_dispose;
         parent_class->get_widget = device_mobile_get_widget;
-        parent_class->refresh = device_mobile_refresh;
 }
 
 static void
@@ -850,6 +849,8 @@ net_device_mobile_new (NMClient *client, NMDevice *device, GDBusObject *modem)
                              "nm-device", device,
                              NULL);
         self->client = g_object_ref (client);
+
+        g_signal_connect_object (device, "state-changed", G_CALLBACK (device_state_changed_cb), self, G_CONNECT_SWAPPED);
 
         if (modem != NULL)  {
                 MMModem3gpp *modem_3gpp;

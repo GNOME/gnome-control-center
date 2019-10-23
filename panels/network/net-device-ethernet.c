@@ -406,6 +406,13 @@ client_connection_added_cb (NetDeviceEthernet  *self)
 }
 
 static void
+device_state_changed_cb (NetDeviceEthernet *self)
+{
+        net_object_emit_changed (NET_OBJECT (self));
+        device_ethernet_refresh_ui (self);
+}
+
+static void
 add_profile (NetDeviceEthernet *self)
 {
         NMConnection *connection;
@@ -506,19 +513,11 @@ device_ethernet_finalize (GObject *object)
 }
 
 static void
-device_ethernet_refresh (NetObject *object)
-{
-        NetDeviceEthernet *self = NET_DEVICE_ETHERNET (object);
-        device_ethernet_refresh_ui (self);
-}
-
-static void
 net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
 {
         NetObjectClass *obj_class = NET_OBJECT_CLASS (klass);
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-        obj_class->refresh = device_ethernet_refresh;
         obj_class->get_widget = device_ethernet_get_widget;
         object_class->finalize = device_ethernet_finalize;
 }
@@ -580,6 +579,8 @@ net_device_ethernet_new (NMClient *client, NMDevice *device)
                                  G_CALLBACK (client_connection_added_cb), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (client, NM_CLIENT_CONNECTION_REMOVED,
                                  G_CALLBACK (connection_removed), self, G_CONNECT_SWAPPED);
+
+        g_signal_connect_object (device, "state-changed", G_CALLBACK (device_state_changed_cb), self, G_CONNECT_SWAPPED);
 
         g_signal_connect (self, "notify::title", G_CALLBACK (device_title_changed), NULL);
         device_ethernet_refresh_ui (self);

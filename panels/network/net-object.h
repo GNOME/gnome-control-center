@@ -40,7 +40,6 @@ struct _NetObjectClass
         /* vtable */
         GtkWidget               *(*get_widget)         (NetObject       *object,
                                                         GtkSizeGroup    *heading_size_group);
-        void                     (*refresh)             (NetObject       *object);
 };
 
 const gchar     *net_object_get_title                   (NetObject      *object);
@@ -48,7 +47,6 @@ void             net_object_set_title                   (NetObject      *object,
                                                          const gchar    *title);
 void             net_object_emit_changed                (NetObject      *object);
 void             net_object_emit_removed                (NetObject      *object);
-void             net_object_refresh                     (NetObject      *object);
 GtkWidget       *net_object_get_widget                  (NetObject      *object,
                                                          GtkSizeGroup   *heading_size_group);
 
