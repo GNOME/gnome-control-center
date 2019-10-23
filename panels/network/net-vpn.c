@@ -140,13 +140,6 @@ nm_active_connections_changed (NetVpn *self)
 }
 
 static void
-vpn_proxy_refresh (NetObject *object)
-{
-        NetVpn *self = NET_VPN (object);
-        nm_device_refresh_vpn_ui (self);
-}
-
-static void
 device_off_toggled (NetVpn *self)
 {
         const GPtrArray *acs;
@@ -180,7 +173,7 @@ device_off_toggled (NetVpn *self)
 static void
 editor_done (NetVpn *self)
 {
-        net_object_refresh (NET_OBJECT (self));
+        nm_device_refresh_vpn_ui (self);
         g_object_unref (self);
 }
 
@@ -229,7 +222,6 @@ net_vpn_class_init (NetVpnClass *klass)
 
         object_class->finalize = net_vpn_finalize;
         parent_class->get_widget = vpn_proxy_get_widget;
-        parent_class->refresh = vpn_proxy_refresh;
 }
 
 static void
