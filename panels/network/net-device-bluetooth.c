@@ -227,7 +227,7 @@ net_device_bluetooth_new (NMClient *client, NMDevice *device)
                              NULL);
         self->client = g_object_ref (client);
 
-        net_object_refresh (NET_OBJECT (self));
+        nm_device_bluetooth_refresh_ui (self);
 
         return self;
 }
