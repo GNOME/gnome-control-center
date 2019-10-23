@@ -592,12 +592,9 @@ net_device_ethernet_init (NetDeviceEthernet *self)
 }
 
 NetDeviceEthernet *
-net_device_ethernet_new (GCancellable *cancellable,
-                         NMClient     *client,
-                         NMDevice     *device)
+net_device_ethernet_new (NMClient *client, NMDevice *device)
 {
         return g_object_new (NET_TYPE_DEVICE_ETHERNET,
-                             "cancellable", cancellable,
                              "client", client,
                              "nm-device", device,
                              NULL);
