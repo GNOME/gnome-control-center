@@ -406,9 +406,9 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *self)
 }
 
 static void
-device_wifi_refresh (NetObject *object)
+device_state_changed_cb (NetDeviceWifi *self)
 {
-        NetDeviceWifi *self = NET_DEVICE_WIFI (object);
+        net_object_emit_changed (NET_OBJECT (self));
         nm_device_wifi_refresh_ui (self);
 }
 
@@ -903,7 +903,6 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         object_class->finalize = net_device_wifi_finalize;
         object_class->get_property = net_device_wifi_get_property;
         parent_class->get_widget = device_wifi_proxy_get_widget;
-        parent_class->refresh = device_wifi_refresh;
 
         g_object_class_install_property (object_class,
                                          PROP_SCANNING,
@@ -1324,6 +1323,8 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
 
         g_signal_connect_object (client, "notify::wireless-enabled",
                                  G_CALLBACK (wireless_enabled_toggled), self, G_CONNECT_SWAPPED);
+
+        g_signal_connect_object (device, "state-changed", G_CALLBACK (device_state_changed_cb), self, G_CONNECT_SWAPPED);
 
         list = GTK_WIDGET (cc_wifi_connection_list_new (client, NM_DEVICE_WIFI (device), TRUE, TRUE, FALSE));
         gtk_widget_show (list);

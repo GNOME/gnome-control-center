@@ -264,6 +264,76 @@ device_state_reason_to_localized_string (NMDevice *device)
         return value;
 }
 
+static gchar *
+get_mac_address_of_connection (NMConnection *connection)
+{
+        if (!connection)
+                return NULL;
+
+        /* check the connection type */
+        if (nm_connection_is_type (connection,
+                                   NM_SETTING_WIRELESS_SETTING_NAME)) {
+                /* check wireless settings */
+                NMSettingWireless *s_wireless = nm_connection_get_setting_wireless (connection);
+                if (!s_wireless)
+                        return NULL;
+                return g_strdup (nm_setting_wireless_get_mac_address (s_wireless));
+        } else if (nm_connection_is_type (connection,
+                                          NM_SETTING_WIRED_SETTING_NAME)) {
+                /* check wired settings */
+                NMSettingWired *s_wired = nm_connection_get_setting_wired (connection);
+                if (!s_wired)
+                        return NULL;
+                return g_strdup (nm_setting_wired_get_mac_address (s_wired));
+        }
+        /* no MAC address found */
+        return NULL;
+}
+
+static const gchar *
+get_mac_address_of_device (NMDevice *device)
+{
+        const gchar *mac = NULL;
+        switch (nm_device_get_device_type (device)) {
+        case NM_DEVICE_TYPE_WIFI:
+        {
+                NMDeviceWifi *device_wifi = NM_DEVICE_WIFI (device);
+                mac = nm_device_wifi_get_hw_address (device_wifi);
+                break;
+        }
+        case NM_DEVICE_TYPE_ETHERNET:
+        {
+                NMDeviceEthernet *device_ethernet = NM_DEVICE_ETHERNET (device);
+                mac = nm_device_ethernet_get_hw_address (device_ethernet);
+                break;
+        }
+        default:
+                break;
+        }
+        /* no MAC address found */
+        return mac;
+}
+
+/* returns TRUE if both MACs are equal */
+static gboolean
+compare_mac_device_with_mac_connection (NMDevice *device,
+                                        NMConnection *connection)
+{
+        const gchar *mac_dev = NULL;
+        g_autofree gchar *mac_conn = NULL;
+
+        mac_dev = get_mac_address_of_device (device);
+        if (mac_dev == NULL)
+                return FALSE;
+
+        mac_conn = get_mac_address_of_connection (connection);
+        if (mac_conn == NULL)
+                return FALSE;
+
+        /* compare both MACs */
+        return g_strcmp0 (mac_dev, mac_conn) == 0;
+}
+
 gchar *
 panel_device_status_to_localized_string (NMDevice *nm_device,
                                          const gchar *speed)
@@ -307,4 +377,78 @@ panel_device_status_to_localized_string (NMDevice *nm_device,
         }
 
         return g_string_free (string, FALSE);
+}
+
+NMConnection *
+net_device_get_find_connection (NMClient *client, NMDevice *device)
+{
+        GSList *list, *iterator;
+        NMConnection *connection = NULL;
+        NMActiveConnection *ac;
+
+        /* is the device available in a active connection? */
+        ac = nm_device_get_active_connection (device);
+        if (ac)
+                return (NMConnection*) nm_active_connection_get_connection (ac);
+
+        /* not found in active connections - check all available connections */
+        list = net_device_get_valid_connections (client, device);
+        if (list != NULL) {
+                /* if list has only one connection, use this connection */
+                if (g_slist_length (list) == 1) {
+                        connection = list->data;
+                        goto out;
+                }
+
+                /* is there connection with the MAC address of the device? */
+                for (iterator = list; iterator; iterator = iterator->next) {
+                        connection = iterator->data;
+                        if (compare_mac_device_with_mac_connection (device,
+                                                                    connection)) {
+                                goto out;
+                        }
+                }
+        }
+
+        /* no connection found for the given device */
+        connection = NULL;
+out:
+        g_slist_free (list);
+        return connection;
+}
+
+GSList *
+net_device_get_valid_connections (NMClient *client, NMDevice *device)
+{
+        GSList *valid;
+        NMConnection *connection;
+        NMSettingConnection *s_con;
+        NMActiveConnection *active_connection;
+        const char *active_uuid;
+        const GPtrArray *all;
+        GPtrArray *filtered;
+        guint i;
+
+        all = nm_client_get_connections (client);
+        filtered = nm_device_filter_connections (device, all);
+
+        active_connection = nm_device_get_active_connection (device);
+        active_uuid = active_connection ? nm_active_connection_get_uuid (active_connection) : NULL;
+
+        valid = NULL;
+        for (i = 0; i < filtered->len; i++) {
+                connection = g_ptr_array_index (filtered, i);
+                s_con = nm_connection_get_setting_connection (connection);
+                if (!s_con)
+                        continue;
+
+                if (nm_setting_connection_get_master (s_con) &&
+                    g_strcmp0 (nm_setting_connection_get_uuid (s_con), active_uuid) != 0)
+                        continue;
+
+                valid = g_slist_prepend (valid, connection);
+        }
+        g_ptr_array_free (filtered, FALSE);
+
+        return g_slist_reverse (valid);
 }

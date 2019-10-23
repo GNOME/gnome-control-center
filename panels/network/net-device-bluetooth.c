@@ -109,9 +109,9 @@ nm_device_bluetooth_refresh_ui (NetDeviceBluetooth *self)
 }
 
 static void
-device_bluetooth_refresh (NetObject *object)
+device_state_changed_cb (NetDeviceBluetooth *self)
 {
-        NetDeviceBluetooth *self = NET_DEVICE_BLUETOOTH (object);
+        net_object_emit_changed (NET_OBJECT (self));
         nm_device_bluetooth_refresh_ui (self);
 }
 
@@ -187,7 +187,6 @@ net_device_bluetooth_class_init (NetDeviceBluetoothClass *klass)
 
         object_class->finalize = net_device_bluetooth_finalize;
         parent_class->get_widget = device_bluetooth_get_widget;
-        parent_class->refresh = device_bluetooth_refresh;
 }
 
 static void
@@ -226,6 +225,8 @@ net_device_bluetooth_new (NMClient *client, NMDevice *device)
                              "nm-device", device,
                              NULL);
         self->client = g_object_ref (client);
+
+        g_signal_connect_object (device, "state-changed", G_CALLBACK (device_state_changed_cb), self, G_CONNECT_SWAPPED);
 
         nm_device_bluetooth_refresh_ui (self);
 

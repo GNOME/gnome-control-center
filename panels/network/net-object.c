@@ -89,14 +89,6 @@ net_object_get_widget (NetObject    *self,
         return klass->get_widget (self, heading_size_group);
 }
 
-void
-net_object_refresh (NetObject *self)
-{
-        NetObjectClass *klass = NET_OBJECT_GET_CLASS (self);
-        if (klass->refresh != NULL)
-                klass->refresh (self);
-}
-
 /**
  * net_object_get_property:
  **/
