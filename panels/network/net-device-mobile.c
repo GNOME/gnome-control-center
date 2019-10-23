@@ -61,6 +61,8 @@ struct _NetDeviceMobile
         GtkLabel     *route_label;
         GtkLabel     *status_label;
 
+        GCancellable *cancellable;
+
         gboolean    updating_device;
 
         /* Old MM < 0.7 support */
@@ -752,7 +754,6 @@ device_mobile_device_got_modem_manager_cdma_cb (GObject      *source_object,
 static void
 net_device_mobile_constructed (GObject *object)
 {
-        GCancellable *cancellable;
         NetDeviceMobile *self = NET_DEVICE_MOBILE (object);
         NMClient *client;
         NMDevice *device;
@@ -761,7 +762,6 @@ net_device_mobile_constructed (GObject *object)
         G_OBJECT_CLASS (net_device_mobile_parent_class)->constructed (object);
 
         device = net_device_get_nm_device (NET_DEVICE (self));
-        cancellable = net_object_get_cancellable (NET_OBJECT (self));
 
         caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
 
@@ -776,7 +776,7 @@ net_device_mobile_constructed (GObject *object)
                                           "org.freedesktop.ModemManager",
                                           nm_device_get_udi (device),
                                           "org.freedesktop.ModemManager.Modem",
-                                          cancellable,
+                                          self->cancellable,
                                           device_mobile_device_got_modem_manager_cb,
                                           self);
 
@@ -788,7 +788,7 @@ net_device_mobile_constructed (GObject *object)
                                                   "org.freedesktop.ModemManager",
                                                   nm_device_get_udi (device),
                                                   "org.freedesktop.ModemManager.Modem.Gsm.Network",
-                                                  cancellable,
+                                                  self->cancellable,
                                                   device_mobile_device_got_modem_manager_gsm_cb,
                                                   self);
                 }
@@ -800,7 +800,7 @@ net_device_mobile_constructed (GObject *object)
                                                   "org.freedesktop.ModemManager",
                                                   nm_device_get_udi (device),
                                                   "org.freedesktop.ModemManager.Modem.Cdma",
-                                                  cancellable,
+                                                  self->cancellable,
                                                   device_mobile_device_got_modem_manager_cdma_cb,
                                                   self);
                 }
@@ -885,7 +885,10 @@ net_device_mobile_dispose (GObject *object)
 {
         NetDeviceMobile *self = NET_DEVICE_MOBILE (object);
 
+        g_cancellable_cancel (self->cancellable);
+
         g_clear_object (&self->builder);
+        g_clear_object (&self->cancellable);
         g_clear_object (&self->gsm_proxy);
         g_clear_object (&self->cdma_proxy);
 
@@ -958,6 +961,8 @@ net_device_mobile_init (NetDeviceMobile *self)
         self->route_label = GTK_LABEL (gtk_builder_get_object (self->builder, "route_label"));
         self->status_label = GTK_LABEL (gtk_builder_get_object (self->builder, "status_label"));
 
+        self->cancellable = g_cancellable_new ();
+
         /* setup mobile combobox model */
         g_signal_connect_swapped (self->network_combo, "changed",
                                   G_CALLBACK (mobile_connection_changed_cb),
@@ -978,12 +983,9 @@ net_device_mobile_init (NetDeviceMobile *self)
 }
 
 NetDeviceMobile *
-net_device_mobile_new (GCancellable *cancellable,
-                       NMClient     *client,
-                       NMDevice     *device)
+net_device_mobile_new (NMClient *client, NMDevice *device)
 {
         return g_object_new (NET_TYPE_DEVICE_MOBILE,
-                             "cancellable", cancellable,
                              "client", client,
                              "nm-device", device,
                              NULL);

@@ -56,7 +56,6 @@ struct _CcNetworkPanel
 {
         CcPanel           parent;
 
-        GCancellable     *cancellable;
         GHashTable       *device_to_widget;
         GPtrArray        *devices;
         NMClient         *client;
@@ -208,9 +207,6 @@ cc_network_panel_dispose (GObject *object)
 {
         CcNetworkPanel *self = CC_NETWORK_PANEL (object);
 
-        g_cancellable_cancel (self->cancellable);
-
-        g_clear_object (&self->cancellable);
         g_clear_object (&self->client);
         g_clear_object (&self->modem_manager);
 
@@ -464,21 +460,15 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         switch (type) {
         case NM_DEVICE_TYPE_ETHERNET:
         case NM_DEVICE_TYPE_INFINIBAND:
-                net_device = NET_DEVICE (net_device_ethernet_new (self->cancellable,
-                                                                  self->client,
-                                                                  device));
+                net_device = NET_DEVICE (net_device_ethernet_new (self->client, device));
                 add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_wired));
                 break;
         case NM_DEVICE_TYPE_MODEM:
-                net_device = NET_DEVICE (net_device_mobile_new (self->cancellable,
-                                                                self->client,
-                                                                device));
+                net_device = NET_DEVICE (net_device_mobile_new (self->client, device));
                 add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_wired));
                 break;
         case NM_DEVICE_TYPE_BT:
-                net_device = NET_DEVICE (net_device_bluetooth_new (self->cancellable,
-                                                                   self->client,
-                                                                   device));
+                net_device = NET_DEVICE (net_device_bluetooth_new (self->client, device));
                 add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_bluetooth));
                 break;
 
@@ -819,7 +809,6 @@ cc_network_panel_init (CcNetworkPanel *self)
 
         gtk_widget_init_template (GTK_WIDGET (self));
 
-        self->cancellable = g_cancellable_new ();
         self->devices = g_ptr_array_new_with_free_func (g_object_unref);
         self->device_to_widget = g_hash_table_new (g_direct_hash, g_direct_equal);
 

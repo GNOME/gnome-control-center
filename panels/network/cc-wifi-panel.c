@@ -158,7 +158,6 @@ add_wifi_device (CcWifiPanel *self,
 
   /* Create the NetDevice */
   net_device = net_device_wifi_new (CC_PANEL (self),
-                                    self->cancellable,
                                     self->client,
                                     device);
 
