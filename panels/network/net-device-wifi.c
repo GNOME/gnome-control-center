@@ -101,13 +101,9 @@ enum {
 G_DEFINE_TYPE (NetDeviceWifi, net_device_wifi, NET_TYPE_DEVICE)
 
 NetDeviceWifi *
-net_device_wifi_new (CcPanel      *panel,
-                     GCancellable *cancellable,
-                     NMClient     *client,
-                     NMDevice     *device)
+net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
 {
         NetDeviceWifi *self = g_object_new (NET_TYPE_DEVICE_WIFI,
-                                            "cancellable", cancellable,
                                             "client", client,
                                             "nm-device", device,
                                             NULL);
@@ -300,10 +296,9 @@ device_get_hotspot_security_details (NetDeviceWifi *self,
          * We'll refresh the UI when secrets arrive.
          */
         if (tmp_secret == NULL) {
-                GCancellable *cancellable = net_object_get_cancellable (NET_OBJECT (self));
                 nm_remote_connection_get_secrets_async ((NMRemoteConnection*)c,
                                                         NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                                        cancellable,
+                                                        self->cancellable,
                                                         get_secrets_cb,
                                                         self);
                 return;
@@ -549,7 +544,6 @@ wireless_try_to_connect (NetDeviceWifi *self,
         const gchar *ssid_target;
         NMDevice *device;
         NMClient *client;
-        GCancellable *cancellable;
 
         if (self->updating_device)
                 return;
@@ -567,7 +561,6 @@ wireless_try_to_connect (NetDeviceWifi *self,
 
         /* activate the connection */
         client = net_object_get_client (NET_OBJECT (self));
-        cancellable = net_object_get_cancellable (NET_OBJECT (self));
 
         if (!is_8021x (device, ap_object_path)) {
                 g_autoptr(GPermission) permission = NULL;
@@ -593,7 +586,7 @@ wireless_try_to_connect (NetDeviceWifi *self,
                                                              partial,
                                                              device,
                                                              ap_object_path,
-                                                             cancellable,
+                                                             self->cancellable,
                                                              connection_add_activate_cb,
                                                              self);
         } else {
@@ -757,7 +750,6 @@ overwrite_ssid_cb (GObject      *source_object,
         NMDevice *device;
         NMConnection *c;
         NetDeviceWifi *self;
-        GCancellable *cancellable;
 
         connection = NM_REMOTE_CONNECTION (source_object);
 
@@ -771,7 +763,6 @@ overwrite_ssid_cb (GObject      *source_object,
         self = user_data;
         device = net_device_get_nm_device (NET_DEVICE (self));
         client = net_object_get_client (NET_OBJECT (self));
-        cancellable = net_object_get_cancellable (NET_OBJECT (self));
         c = net_device_wifi_get_hotspot_connection (self);
 
         g_debug ("activate existing hotspot connection\n");
@@ -779,7 +770,7 @@ overwrite_ssid_cb (GObject      *source_object,
                                              c,
                                              device,
                                              NULL,
-                                             cancellable,
+                                             self->cancellable,
                                              activate_cb,
                                              self);
 }
@@ -815,15 +806,12 @@ start_hotspot (NetDeviceWifi *self)
 
         if (response == GTK_RESPONSE_APPLY) {
                 NMConnection *connection;
-                GCancellable *cancellable;
-
-                cancellable = net_object_get_cancellable (NET_OBJECT (self));
 
                 connection = cc_wifi_hotspot_dialog_get_connection (self->hotspot_dialog);
                 if (NM_IS_REMOTE_CONNECTION (connection))
                         nm_remote_connection_commit_changes_async (NM_REMOTE_CONNECTION (connection),
                                                                    TRUE,
-                                                                   cancellable,
+                                                                   self->cancellable,
                                                                    overwrite_ssid_cb,
                                                                    self);
                 else
@@ -831,7 +819,7 @@ start_hotspot (NetDeviceWifi *self)
                                                                      connection,
                                                                      device,
                                                                      NULL,
-                                                                     cancellable,
+                                                                     self->cancellable,
                                                                      activate_new_cb,
                                                                      self);
         }
@@ -1048,7 +1036,6 @@ really_forget (GtkDialog *dialog, gint response, gpointer data)
         GList *r;
         NMRemoteConnection *connection;
         NetDeviceWifi *self;
-        GCancellable *cancellable;
 
         gtk_widget_destroy (GTK_WIDGET (dialog));
 
@@ -1056,12 +1043,11 @@ really_forget (GtkDialog *dialog, gint response, gpointer data)
                 return;
 
         self = NET_DEVICE_WIFI (g_object_get_data (G_OBJECT (forget), "net"));
-        cancellable = net_object_get_cancellable (NET_OBJECT (self));
         rows = g_object_steal_data (G_OBJECT (forget), "rows");
         for (r = rows; r; r = r->next) {
                 row = r->data;
                 connection = NM_REMOTE_CONNECTION (cc_wifi_connection_row_get_connection (row));
-                nm_remote_connection_delete_async (connection, cancellable, really_forgotten, g_object_ref (data));
+                nm_remote_connection_delete_async (connection, self->cancellable, really_forgotten, g_object_ref (data));
                 gtk_widget_hide (GTK_WIDGET (row));
         }
         g_list_free (rows);
@@ -1338,7 +1324,6 @@ ap_activated (NetDeviceWifi *self, GtkListBoxRow *row)
         NMAccessPoint *ap;
         NMClient *client;
         NMDevice *nm_device;
-        GCancellable *cancellable;
 
         /* The mockups want a row to connecto hidden networks; this could
          * be handeled here. */
@@ -1354,10 +1339,9 @@ ap_activated (NetDeviceWifi *self, GtkListBoxRow *row)
                 if (connection != NULL) {
                         client = net_object_get_client (NET_OBJECT (self));
                         nm_device = net_device_get_nm_device (NET_DEVICE (self));
-                        cancellable = net_object_get_cancellable (NET_OBJECT (self));
                         nm_client_activate_connection_async (client,
                                                              connection,
-                                                             nm_device, NULL, cancellable,
+                                                             nm_device, NULL, self->cancellable,
                                                              connection_activate_cb, self);
                 } else {
                         GBytes *ssid;
