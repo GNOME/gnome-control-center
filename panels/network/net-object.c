@@ -29,13 +29,11 @@
 typedef struct
 {
         gchar                           *title;
-        NMClient                        *client;
 } NetObjectPrivate;
 
 enum {
         PROP_0,
         PROP_TITLE,
-        PROP_CLIENT,
         PROP_LAST
 };
 
@@ -82,15 +80,6 @@ net_object_set_title (NetObject *self, const gchar *title)
         g_object_notify (G_OBJECT (self), "title");
 }
 
-NMClient *
-net_object_get_client (NetObject *self)
-{
-        NetObjectPrivate *priv = net_object_get_instance_private (self);
-
-        g_return_val_if_fail (NET_IS_OBJECT (self), NULL);
-        return priv->client;
-}
-
 GtkWidget *
 net_object_get_widget (NetObject    *self,
                        GtkSizeGroup *heading_size_group)
@@ -124,9 +113,6 @@ net_object_get_property (GObject *object,
         case PROP_TITLE:
                 g_value_set_string (value, priv->title);
                 break;
-        case PROP_CLIENT:
-                g_value_set_pointer (value, priv->client);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -150,11 +136,6 @@ net_object_set_property (GObject *object,
                 g_free (priv->title);
                 priv->title = g_strdup (g_value_get_string (value));
                 break;
-        case PROP_CLIENT:
-                priv->client = g_value_get_pointer (value);
-                if (priv->client)
-                        g_object_add_weak_pointer (G_OBJECT (priv->client), (gpointer *) (&priv->client));
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -168,9 +149,6 @@ net_object_finalize (GObject *object)
         NetObjectPrivate *priv = net_object_get_instance_private (self);
 
         g_clear_pointer (&priv->title, g_free);
-
-        if (priv->client)
-                g_object_remove_weak_pointer (G_OBJECT (priv->client), (gpointer *) (&priv->client));
 
         G_OBJECT_CLASS (net_object_parent_class)->finalize (object);
 }
@@ -188,10 +166,6 @@ net_object_class_init (NetObjectClass *klass)
                                      NULL,
                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_TITLE, pspec);
-
-        pspec = g_param_spec_pointer ("client", NULL, NULL,
-                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
-        g_object_class_install_property (object_class, PROP_CLIENT, pspec);
 
         signals[SIGNAL_CHANGED] =
                 g_signal_new ("changed",
