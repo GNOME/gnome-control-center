@@ -79,12 +79,6 @@ struct _CcNetworkPanel
 };
 
 enum {
-        PANEL_DEVICES_COLUMN_ICON,
-        PANEL_DEVICES_COLUMN_OBJECT,
-        PANEL_DEVICES_COLUMN_LAST
-};
-
-enum {
         PROP_0,
         PROP_PARAMETERS
 };
