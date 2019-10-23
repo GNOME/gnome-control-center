@@ -62,6 +62,7 @@ struct _NetDeviceMobile
         GtkLabel     *status_label;
 
         NMClient     *client;
+        GDBusObject  *modem;
         GCancellable *cancellable;
 
         gboolean    updating_device;
@@ -81,12 +82,6 @@ enum {
         COLUMN_ID,
         COLUMN_TITLE,
         COLUMN_LAST
-};
-
-enum {
-        PROP_0,
-        PROP_MODEM_OBJECT,
-        PROP_LAST
 };
 
 G_DEFINE_TYPE (NetDeviceMobile, net_device_mobile, NET_TYPE_DEVICE)
@@ -752,67 +747,6 @@ operator_name_updated (NetDeviceMobile *self)
 }
 
 static void
-net_device_mobile_setup_modem_object (NetDeviceMobile *self)
-{
-        MMModem3gpp *modem_3gpp;
-
-        if (self->mm_object == NULL)
-                return;
-
-        /* Load equipment ID initially */
-        device_mobile_refresh_equipment_id (self);
-
-        /* Follow changes in operator name and load initial values */
-        modem_3gpp = mm_object_peek_modem_3gpp (self->mm_object);
-        if (modem_3gpp != NULL) {
-                g_assert (self->operator_name_updated == 0);
-                self->operator_name_updated = g_signal_connect_swapped (modem_3gpp,
-                                                                        "notify::operator-name",
-                                                                        G_CALLBACK (operator_name_updated),
-                                                                        self);
-                device_mobile_refresh_operator_name (self);
-        }
-}
-
-
-static void
-net_device_mobile_get_property (GObject    *device_,
-                                guint       prop_id,
-                                GValue     *value,
-                                GParamSpec *pspec)
-{
-        NetDeviceMobile *self = NET_DEVICE_MOBILE (device_);
-
-        switch (prop_id) {
-        case PROP_MODEM_OBJECT:
-                g_value_set_object (value, self->mm_object);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (self, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-net_device_mobile_set_property (GObject      *device_,
-                                guint         prop_id,
-                                const GValue *value,
-                                GParamSpec   *pspec)
-{
-        NetDeviceMobile *self = NET_DEVICE_MOBILE (device_);
-
-        switch (prop_id) {
-        case PROP_MODEM_OBJECT:
-                self->mm_object = g_value_dup_object (value);
-                net_device_mobile_setup_modem_object (self);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (self, prop_id, pspec);
-                break;
-        }
-}
-
-static void
 net_device_mobile_dispose (GObject *object)
 {
         NetDeviceMobile *self = NET_DEVICE_MOBILE (object);
@@ -821,6 +755,7 @@ net_device_mobile_dispose (GObject *object)
 
         g_clear_object (&self->builder);
         g_clear_object (&self->client);
+        g_clear_object (&self->modem);
         g_clear_object (&self->cancellable);
         g_clear_object (&self->gsm_proxy);
         g_clear_object (&self->cdma_proxy);
@@ -843,18 +778,8 @@ net_device_mobile_class_init (NetDeviceMobileClass *klass)
         NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
 
         object_class->dispose = net_device_mobile_dispose;
-        object_class->get_property = net_device_mobile_get_property;
-        object_class->set_property = net_device_mobile_set_property;
         parent_class->get_widget = device_mobile_get_widget;
         parent_class->refresh = device_mobile_refresh;
-
-        g_object_class_install_property (object_class,
-                                         PROP_MODEM_OBJECT,
-                                         g_param_spec_object ("mm-object",
-                                                              NULL,
-                                                              NULL,
-                                                              MM_TYPE_OBJECT,
-                                                              G_PARAM_READWRITE));
 }
 
 static void
@@ -916,7 +841,7 @@ net_device_mobile_init (NetDeviceMobile *self)
 }
 
 NetDeviceMobile *
-net_device_mobile_new (NMClient *client, NMDevice *device)
+net_device_mobile_new (NMClient *client, NMDevice *device, GDBusObject *modem)
 {
         NetDeviceMobile *self;
         NMDeviceModemCapabilities caps;
@@ -925,6 +850,26 @@ net_device_mobile_new (NMClient *client, NMDevice *device)
                              "nm-device", device,
                              NULL);
         self->client = g_object_ref (client);
+
+        if (modem != NULL)  {
+                MMModem3gpp *modem_3gpp;
+
+                self->modem = g_object_ref (modem);
+
+                /* Load equipment ID initially */
+                device_mobile_refresh_equipment_id (self);
+
+                /* Follow changes in operator name and load initial values */
+                modem_3gpp = mm_object_peek_modem_3gpp (self->mm_object);
+                if (modem_3gpp != NULL) {
+                        g_assert (self->operator_name_updated == 0);
+                        self->operator_name_updated = g_signal_connect_swapped (modem_3gpp,
+                                                                                "notify::operator-name",
+                                                                                G_CALLBACK (operator_name_updated),
+                                                                                self);
+                        device_mobile_refresh_operator_name (self);
+                }
+        }
 
         caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
 

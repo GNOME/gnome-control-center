@@ -438,6 +438,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
 {
         NMDeviceType type;
         NetDevice *net_device;
+        g_autoptr(GDBusObject) modem_object = NULL;
         guint i;
 
         if (!nm_device_get_managed (device))
@@ -464,7 +465,23 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                 add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_wired));
                 break;
         case NM_DEVICE_TYPE_MODEM:
-                net_device = NET_DEVICE (net_device_mobile_new (self->client, device));
+                if (g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager1/Modem/")) {
+                        if (self->modem_manager == NULL) {
+                                g_warning ("Cannot grab information for modem at %s: No ModemManager support",
+                                           nm_device_get_udi (device));
+                                return;
+                        }
+
+                        modem_object = g_dbus_object_manager_get_object (G_DBUS_OBJECT_MANAGER (self->modem_manager),
+                                                                         nm_device_get_udi (device));
+                        if (modem_object == NULL) {
+                                g_warning ("Cannot grab information for modem at %s: Not found",
+                                           nm_device_get_udi (device));
+                                return;
+                        }
+                }
+
+                net_device = NET_DEVICE (net_device_mobile_new (self->client, device, modem_object));
                 add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_wired));
                 break;
         case NM_DEVICE_TYPE_BT:
@@ -480,30 +497,6 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         /* And the rest we simply cannot deal with currently. */
         default:
                 return;
-        }
-
-        if (type == NM_DEVICE_TYPE_MODEM &&
-            g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager1/Modem/")) {
-                g_autoptr(GDBusObject) modem_object = NULL;
-
-                if (self->modem_manager == NULL) {
-                        g_warning ("Cannot grab information for modem at %s: No ModemManager support",
-                                   nm_device_get_udi (device));
-                        return;
-                }
-
-                modem_object = g_dbus_object_manager_get_object (G_DBUS_OBJECT_MANAGER (self->modem_manager),
-                                                                 nm_device_get_udi (device));
-                if (modem_object == NULL) {
-                        g_warning ("Cannot grab information for modem at %s: Not found",
-                                   nm_device_get_udi (device));
-                        return;
-                }
-
-                /* Set the modem object in the NetDeviceMobile */
-                g_object_set (net_device,
-                              "mm-object", modem_object,
-                              NULL);
         }
 
         /* Add to the devices array */
