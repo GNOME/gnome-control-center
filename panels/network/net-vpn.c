@@ -46,8 +46,6 @@ struct _NetVpn
         NMClient                *client;
         NMConnection            *connection;
         NMActiveConnection      *active_connection;
-        gchar                   *service_type;
-        gboolean                 valid;
         gboolean                 updating_device;
 };
 
@@ -67,17 +65,6 @@ connection_removed_cb (NetVpn *self, NMConnection *connection)
 {
         if (self->connection == connection)
                 net_object_emit_removed (NET_OBJECT (self));
-}
-
-static char *
-net_vpn_connection_to_type (NMConnection *connection)
-{
-        const gchar *type, *p;
-
-        type = nm_setting_vpn_get_service_type (nm_connection_get_setting_vpn (connection));
-        /* Go from "org.freedesktop.NetworkManager.vpnc" to "vpnc" for example */
-        p = strrchr (type, '.');
-        return g_strdup (p ? p + 1 : type);
 }
 
 static GtkWidget *
@@ -229,7 +216,6 @@ net_vpn_finalize (GObject *object)
         g_clear_object (&self->active_connection);
         g_clear_object (&self->client);
         g_clear_object (&self->connection);
-        g_clear_pointer (&self->service_type, g_free);
         g_clear_object (&self->builder);
 
         G_OBJECT_CLASS (net_vpn_parent_class)->finalize (object);
@@ -291,8 +277,6 @@ net_vpn_new (NMConnection *connection,
                                  NM_CONNECTION_CHANGED,
                                  G_CALLBACK (connection_changed_cb),
                                  self, G_CONNECT_SWAPPED);
-
-        self->service_type = net_vpn_connection_to_type (self->connection);
 
         nm_device_refresh_vpn_ui (self);
 
