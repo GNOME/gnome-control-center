@@ -31,8 +31,7 @@ G_BEGIN_DECLS
 #define NET_TYPE_DEVICE_BLUETOOTH (net_device_bluetooth_get_type ())
 G_DECLARE_FINAL_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET, DEVICE_BLUETOOTH, NetDevice)
 
-NetDeviceBluetooth *net_device_bluetooth_new                (GCancellable       *cancellable,
-                                                             NMClient           *client,
+NetDeviceBluetooth *net_device_bluetooth_new                (NMClient           *client,
                                                              NMDevice           *device);
 
 void                net_device_bluetooth_set_show_separator (NetDeviceBluetooth *device_bluetooth,
