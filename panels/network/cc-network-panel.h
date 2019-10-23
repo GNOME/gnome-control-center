@@ -27,6 +27,4 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (CcNetworkPanel, cc_network_panel, CC, NETWORK_PANEL, CcPanel)
 
-GPtrArray *cc_network_panel_get_devices (CcNetworkPanel *panel);
-
 G_END_DECLS
