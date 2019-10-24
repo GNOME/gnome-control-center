@@ -31,10 +31,13 @@ G_BEGIN_DECLS
 #define NET_TYPE_DEVICE_MOBILE (net_device_mobile_get_type ())
 G_DECLARE_FINAL_TYPE (NetDeviceMobile, net_device_mobile, NET, DEVICE_MOBILE, NetObject)
 
-NetDeviceMobile *net_device_mobile_new          (NMClient    *client,
-                                                 NMDevice    *device,
-                                                 GDBusObject *modem);
+NetDeviceMobile *net_device_mobile_new          (NMClient        *client,
+                                                 NMDevice        *device,
+                                                 GDBusObject     *modem);
 
 NMDevice          *net_device_mobile_get_device (NetDeviceMobile *device);
+
+void               net_device_mobile_set_title  (NetDeviceMobile *device,
+                                                 const gchar     *title);
 
 G_END_DECLS

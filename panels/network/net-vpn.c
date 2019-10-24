@@ -84,7 +84,6 @@ nm_device_refresh_vpn_ui (NetVpn *self)
          * vpn connections in the device list.
          */
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (self->connection));
-        net_object_set_title (NET_OBJECT (self), title);
         gtk_label_set_label (self->device_label, title);
 
         if (self->active_connection) {

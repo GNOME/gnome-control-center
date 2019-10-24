@@ -199,8 +199,6 @@ device_ethernet_refresh_ui (NetDeviceEthernet *self)
         g_autofree gchar *speed_text = NULL;
         g_autofree gchar *status = NULL;
 
-        gtk_label_set_label (self->device_label, net_object_get_title (NET_OBJECT (self)));
-
         state = nm_device_get_state (self->device);
         gtk_widget_set_sensitive (GTK_WIDGET (self->device_off_switch),
                                   state != NM_DEVICE_STATE_UNAVAILABLE
@@ -464,12 +462,6 @@ device_off_toggled (NetDeviceEthernet *self)
 }
 
 static void
-device_title_changed (NetDeviceEthernet *self)
-{
-        device_ethernet_refresh_ui (self);
-}
-
-static void
 connection_activated (NetDeviceEthernet *self, GtkListBoxRow *row)
 {
         NMConnection *connection;
@@ -568,7 +560,6 @@ net_device_ethernet_new (NMClient *client, NMDevice *device)
 
         g_signal_connect_object (device, "state-changed", G_CALLBACK (device_state_changed_cb), self, G_CONNECT_SWAPPED);
 
-        g_signal_connect (self, "notify::title", G_CALLBACK (device_title_changed), NULL);
         device_ethernet_refresh_ui (self);
 
         return self;
@@ -579,4 +570,11 @@ net_device_ethernet_get_device (NetDeviceEthernet *self)
 {
         g_return_val_if_fail (NET_IS_DEVICE_ETHERNET (self), NULL);
         return self->device;
+}
+
+void
+net_device_ethernet_set_title (NetDeviceEthernet *self, const gchar *title)
+{
+        g_return_if_fail (NET_IS_DEVICE_ETHERNET (self));
+        gtk_label_set_label (self->device_label, title);
 }

@@ -271,16 +271,12 @@ panel_refresh_device_titles (CcNetworkPanel *self)
 
         titles = nm_device_disambiguate_names (nm_devices, num_devices);
         for (i = 0; i < num_devices; i++) {
-                const gchar *bt_name = NULL;
-
                 if (NM_IS_DEVICE_BT (nm_devices[i]))
-                        bt_name = nm_device_bt_get_name (NM_DEVICE_BT (nm_devices[i]));
-
-                /* For bluetooth devices, use their device name. */
-                if (bt_name)
-                        net_object_set_title (devices[i], bt_name);
-                else
-                        net_object_set_title (devices[i], titles[i]);
+                        net_device_bluetooth_set_title (NET_DEVICE_BLUETOOTH (devices[i]), nm_device_bt_get_name (NM_DEVICE_BT (nm_devices[i])));
+                else if (NET_IS_DEVICE_ETHERNET (devices[i]))
+                        net_device_ethernet_set_title (NET_DEVICE_ETHERNET (devices[i]), titles[i]);
+                else if (NET_IS_DEVICE_MOBILE (devices[i]))
+                        net_device_mobile_set_title (NET_DEVICE_MOBILE (devices[i]), titles[i]);
         }
 }
 
@@ -501,20 +497,6 @@ panel_remove_device (CcNetworkPanel *self, NMDevice *device)
 }
 
 static void
-panel_add_proxy_device (CcNetworkPanel *self)
-{
-        NetProxy *proxy;
-
-        proxy = net_proxy_new ();
-
-        /* add proxy to stack */
-        add_object (self, NET_OBJECT (proxy), GTK_CONTAINER (self->box_proxy));
-
-        /* add proxy to device list */
-        net_object_set_title (NET_OBJECT (proxy), _("Network proxy"));
-}
-
-static void
 connection_state_changed (CcNetworkPanel *self)
 {
 }
@@ -613,8 +595,6 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
 
         /* add as a panel */
         add_object (self, NET_OBJECT (net_vpn), GTK_CONTAINER (self->box_vpn));
-
-        net_object_set_title (NET_OBJECT (net_vpn), nm_connection_get_id (connection));
 
         /* store in the devices array */
         g_ptr_array_add (self->vpns, net_vpn);
@@ -755,6 +735,7 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 static void
 cc_network_panel_init (CcNetworkPanel *self)
 {
+        NetProxy *proxy;
         g_autoptr(GError) error = NULL;
         GtkWidget *toplevel;
         g_autoptr(GDBusConnection) system_bus = NULL;
@@ -773,7 +754,8 @@ cc_network_panel_init (CcNetworkPanel *self)
         self->nm_device_to_device = g_hash_table_new (g_direct_hash, g_direct_equal);
 
         /* add the virtual proxy device */
-        panel_add_proxy_device (self);
+        proxy = net_proxy_new ();
+        add_object (self, NET_OBJECT (proxy), GTK_CONTAINER (self->box_proxy));
 
         /* Create and store a NMClient instance if it doesn't exist yet */
         if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT)) {
