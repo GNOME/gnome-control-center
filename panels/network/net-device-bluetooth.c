@@ -43,6 +43,7 @@ struct _NetDeviceBluetooth
         GtkSeparator *separator;
 
         NMClient     *client;
+        NMDevice     *device;
         gboolean      updating_device;
 };
 
@@ -89,16 +90,13 @@ update_off_switch_from_device_state (GtkSwitch *sw,
 static void
 nm_device_bluetooth_refresh_ui (NetDeviceBluetooth *self)
 {
-        NMDevice *nm_device;
         NMDeviceState state;
-
-        nm_device = net_device_get_nm_device (NET_DEVICE (self));
 
         /* set device kind */
         g_object_bind_property (self, "title", self->device_label, "label", 0);
 
         /* set up the device on/off switch */
-        state = nm_device_get_state (nm_device);
+        state = nm_device_get_state (self->device);
         gtk_widget_set_visible (GTK_WIDGET (self->device_off_switch),
                                 state != NM_DEVICE_STATE_UNAVAILABLE
                                 && state != NM_DEVICE_STATE_UNMANAGED);
@@ -127,7 +125,7 @@ device_off_toggled (NetDeviceBluetooth *self)
         if (self->updating_device)
                 return;
 
-        connection = net_device_get_find_connection (self->client, net_device_get_nm_device (NET_DEVICE (self)));
+        connection = net_device_get_find_connection (self->client, self->device);
         if (connection == NULL)
                 return;
 
@@ -135,7 +133,7 @@ device_off_toggled (NetDeviceBluetooth *self)
         if (active) {
                 nm_client_activate_connection_async (self->client,
                                                      connection,
-                                                     net_device_get_nm_device (NET_DEVICE (self)),
+                                                     self->device,
                                                      NULL, NULL, NULL, NULL);
         } else {
                 const gchar *uuid;
@@ -160,7 +158,7 @@ edit_connection (NetDeviceBluetooth *self)
         g_autoptr(GError) error = NULL;
         NMConnection *connection;
 
-        connection = net_device_get_find_connection (self->client, net_device_get_nm_device (NET_DEVICE (self)));
+        connection = net_device_get_find_connection (self->client, self->device);
         uuid = nm_connection_get_uuid (connection);
         cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
         g_debug ("Launching '%s'\n", cmdline);
@@ -175,6 +173,7 @@ net_device_bluetooth_finalize (GObject *object)
 
         g_clear_object (&self->builder);
         g_clear_object (&self->client);
+        g_clear_object (&self->device);
 
         G_OBJECT_CLASS (net_device_bluetooth_parent_class)->finalize (object);
 }
@@ -222,14 +221,20 @@ net_device_bluetooth_new (NMClient *client, NMDevice *device)
 {
         NetDeviceBluetooth *self;
 
-        self = g_object_new (NET_TYPE_DEVICE_BLUETOOTH,
-                             "nm-device", device,
-                             NULL);
+        self = g_object_new (NET_TYPE_DEVICE_BLUETOOTH, NULL);
         self->client = g_object_ref (client);
+        self->device = g_object_ref (device);
 
         g_signal_connect_object (device, "state-changed", G_CALLBACK (device_state_changed_cb), self, G_CONNECT_SWAPPED);
 
         nm_device_bluetooth_refresh_ui (self);
 
         return self;
+}
+
+NMDevice *
+net_device_bluetooth_get_device (NetDeviceBluetooth *self)
+{
+        g_return_val_if_fail (NET_IS_DEVICE_BLUETOOTH (self), NULL);
+        return self->device;
 }

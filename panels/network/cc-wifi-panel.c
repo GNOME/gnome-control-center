@@ -290,7 +290,7 @@ update_devices_names (CcWifiPanel *self)
           NMDevice *device;
 
           net_device = g_ptr_array_index (self->devices, i);
-          device = net_device_get_nm_device (NET_DEVICE (net_device));
+          device = net_device_wifi_get_device (net_device);
 
           net_object_set_title (NET_OBJECT (net_device), nm_device_get_description (device));
         }
@@ -328,7 +328,7 @@ handle_argv_for_device (CcWifiPanel *self, NetDeviceWifi *net_device)
   gboolean ret;
 
   toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
-  device = net_device_get_nm_device (NET_DEVICE (net_device));
+  device = net_device_wifi_get_device (net_device);
   ret = FALSE;
 
   if (self->arg_operation == OPERATION_CREATE_WIFI)
@@ -451,7 +451,7 @@ device_removed_cb (CcWifiPanel *self, NMDevice *device)
     {
       NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);
 
-      if (net_device_get_nm_device (NET_DEVICE (net_device)) == device)
+      if (net_device_wifi_get_device (net_device) == device)
         {
           g_ptr_array_remove (self->devices, net_device);
           break;
@@ -548,7 +548,7 @@ on_stack_visible_child_changed_cb (GtkStack    *stack,
     {
       NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);
 
-      if (g_strcmp0 (nm_device_get_udi (net_device_get_nm_device (NET_DEVICE (net_device))), visible_device_id) == 0)
+      if (g_strcmp0 (nm_device_get_udi (net_device_wifi_get_device (net_device)), visible_device_id) == 0)
         {
           self->spinner_binding = g_object_bind_property (net_device,
                                                           "scanning",

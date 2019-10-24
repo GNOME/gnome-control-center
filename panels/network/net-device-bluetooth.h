@@ -34,7 +34,9 @@ G_DECLARE_FINAL_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET, DEVICE_BLUE
 NetDeviceBluetooth *net_device_bluetooth_new                (NMClient           *client,
                                                              NMDevice           *device);
 
-void                net_device_bluetooth_set_show_separator (NetDeviceBluetooth *device_bluetooth,
+NMDevice           *net_device_bluetooth_get_device         (NetDeviceBluetooth *device);
+
+void                net_device_bluetooth_set_show_separator (NetDeviceBluetooth *device,
                                                              gboolean            show_separator);
 
 G_END_DECLS

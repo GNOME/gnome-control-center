@@ -62,6 +62,7 @@ struct _NetDeviceMobile
         GtkLabel     *status_label;
 
         NMClient     *client;
+        NMDevice     *device;
         GDBusObject  *modem;
         GCancellable *cancellable;
 
@@ -120,7 +121,6 @@ mobile_connection_changed_cb (NetDeviceMobile *self)
         GtkTreeIter iter;
         GtkTreeModel *model;
         NMConnection *connection;
-        NMDevice *device;
         GtkWidget *toplevel;
 
         if (self->updating_device)
@@ -130,10 +130,6 @@ mobile_connection_changed_cb (NetDeviceMobile *self)
         if (!ret)
                 return;
 
-        device = net_device_get_nm_device (NET_DEVICE (self));
-        if (device == NULL)
-                return;
-
         /* get entry */
         model = gtk_combo_box_get_model (self->network_combo);
         gtk_tree_model_get (model, &iter,
@@ -141,9 +137,7 @@ mobile_connection_changed_cb (NetDeviceMobile *self)
                             -1);
         if (g_strcmp0 (object_path, NULL) == 0) {
                 toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self->box));
-                cc_network_panel_connect_to_3g_network (toplevel,
-                                                        self->client,
-                                                        device);
+                cc_network_panel_connect_to_3g_network (toplevel, self->client, self->device);
                 return;
         }
 
@@ -151,10 +145,10 @@ mobile_connection_changed_cb (NetDeviceMobile *self)
         g_debug ("try to switch to connection %s", object_path);
         connection = (NMConnection*) nm_client_get_connection_by_path (self->client, object_path);
         if (connection != NULL) {
-                nm_device_disconnect (device, NULL, NULL);
+                nm_device_disconnect (self->device, NULL, NULL);
                 nm_client_activate_connection_async (self->client,
                                                      connection,
-                                                     device, NULL, NULL,
+                                                     self->device, NULL, NULL,
                                                      connection_activate_cb,
                                                      self);
                 return;
@@ -165,16 +159,11 @@ static void
 mobilebb_enabled_toggled (NetDeviceMobile *self)
 {
         gboolean enabled = FALSE;
-        NMDevice *device;
-
-        device = net_device_get_nm_device (NET_DEVICE (self));
-        if (nm_device_get_device_type (device) != NM_DEVICE_TYPE_MODEM)
-                return;
 
         if (nm_client_wwan_get_enabled (self->client)) {
                 NMDeviceState state;
 
-                state = nm_device_get_state (device);
+                state = nm_device_get_state (self->device);
                 if (state == NM_DEVICE_STATE_UNKNOWN ||
                     state == NM_DEVICE_STATE_UNMANAGED ||
                     state == NM_DEVICE_STATE_UNAVAILABLE ||
@@ -373,12 +362,9 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
 {
         gboolean is_connected;
         NMDeviceModemCapabilities caps;
-        NMDevice *nm_device;
         g_autofree gchar *status = NULL;
         NMIPConfig *ipv4_config = NULL, *ipv6_config = NULL;
         gboolean have_ipv4_address = FALSE, have_ipv6_address = FALSE;
-
-        nm_device = net_device_get_nm_device (NET_DEVICE (self));
 
         /* set device kind */
         g_object_bind_property (self, "title", self->device_label, "label", 0);
@@ -388,14 +374,14 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
         mobilebb_enabled_toggled (self);
 
         /* set device state, with status */
-        status = panel_device_status_to_localized_string (nm_device, NULL);
+        status = panel_device_status_to_localized_string (self->device, NULL);
         gtk_label_set_label (self->status_label, status);
 
         /* sensitive for other connection types if the device is currently connected */
-        is_connected = net_device_get_find_connection (self->client, nm_device) != NULL;
+        is_connected = net_device_get_find_connection (self->client, self->device) != NULL;
         gtk_widget_set_sensitive (GTK_WIDGET (self->options_button), is_connected);
 
-        caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
+        caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (self->device));
         if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
             (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) ||
             (caps & NM_DEVICE_MODEM_CAPABILITY_LTE)) {
@@ -405,11 +391,11 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
 
         /* add possible connections to device */
         device_add_device_connections (self,
-                                       nm_device,
+                                       self->device,
                                        self->mobile_connections_list_store,
                                        self->network_combo);
 
-        ipv4_config = nm_device_get_ip4_config (nm_device);
+        ipv4_config = nm_device_get_ip4_config (self->device);
         if (ipv4_config != NULL) {
                 GPtrArray *addresses;
                 const gchar *ipv4_text = NULL;
@@ -442,7 +428,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
                 gtk_widget_hide (GTK_WIDGET (self->route_label));
         }
 
-        ipv6_config = nm_device_get_ip6_config (nm_device);
+        ipv6_config = nm_device_get_ip6_config (self->device);
         if (ipv6_config != NULL) {
                 GPtrArray *addresses;
                 const gchar *ipv6_text = NULL;
@@ -488,7 +474,7 @@ device_off_toggled (NetDeviceMobile *self)
         if (self->updating_device)
                 return;
 
-        connection = net_device_get_find_connection (self->client, net_device_get_nm_device (NET_DEVICE (self)));
+        connection = net_device_get_find_connection (self->client, self->device);
         if (connection == NULL)
                 return;
 
@@ -496,7 +482,7 @@ device_off_toggled (NetDeviceMobile *self)
         if (active) {
                 nm_client_activate_connection_async (self->client,
                                                      connection,
-                                                     net_device_get_nm_device (NET_DEVICE (self)),
+                                                     self->device,
                                                      NULL, NULL, NULL, NULL);
         } else {
                 const gchar *uuid;
@@ -521,7 +507,7 @@ edit_connection (NetDeviceMobile *self)
         g_autoptr(GError) error = NULL;
         NMConnection *connection;
 
-        connection = net_device_get_find_connection (self->client, net_device_get_nm_device (NET_DEVICE (self)));
+        connection = net_device_get_find_connection (self->client, self->device);
         uuid = nm_connection_get_uuid (connection);
         cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
         g_debug ("Launching '%s'\n", cmdline);
@@ -755,6 +741,7 @@ net_device_mobile_dispose (GObject *object)
 
         g_clear_object (&self->builder);
         g_clear_object (&self->client);
+        g_clear_object (&self->device);
         g_clear_object (&self->modem);
         g_clear_object (&self->cancellable);
         g_clear_object (&self->gsm_proxy);
@@ -845,10 +832,9 @@ net_device_mobile_new (NMClient *client, NMDevice *device, GDBusObject *modem)
         NetDeviceMobile *self;
         NMDeviceModemCapabilities caps;
 
-        self = g_object_new (NET_TYPE_DEVICE_MOBILE,
-                             "nm-device", device,
-                             NULL);
+        self = g_object_new (NET_TYPE_DEVICE_MOBILE, NULL);
         self->client = g_object_ref (client);
+        self->device = g_object_ref (device);
 
         g_signal_connect_object (device, "state-changed", G_CALLBACK (device_state_changed_cb), self, G_CONNECT_SWAPPED);
 
@@ -921,4 +907,11 @@ net_device_mobile_new (NMClient *client, NMDevice *device, GDBusObject *modem)
         nm_device_mobile_refresh_ui (self);
 
         return self;
+}
+
+NMDevice *
+net_device_mobile_get_device (NetDeviceMobile *self)
+{
+        g_return_val_if_fail (NET_IS_DEVICE_MOBILE (self), NULL);
+        return self->device;
 }
