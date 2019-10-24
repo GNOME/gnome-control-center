@@ -366,9 +366,6 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
         NMIPConfig *ipv4_config = NULL, *ipv6_config = NULL;
         gboolean have_ipv4_address = FALSE, have_ipv6_address = FALSE;
 
-        /* set device kind */
-        g_object_bind_property (self, "title", self->device_label, "label", 0);
-
         /* set up the device on/off switch */
         gtk_widget_show (GTK_WIDGET (self->device_off_switch));
         mobilebb_enabled_toggled (self);
@@ -913,4 +910,11 @@ net_device_mobile_get_device (NetDeviceMobile *self)
 {
         g_return_val_if_fail (NET_IS_DEVICE_MOBILE (self), NULL);
         return self->device;
+}
+
+void
+net_device_mobile_set_title (NetDeviceMobile *self, const gchar *title)
+{
+        g_return_if_fail (NET_IS_DEVICE_MOBILE (self));
+        gtk_label_set_label (self->device_label, title);
 }
