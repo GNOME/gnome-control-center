@@ -39,7 +39,6 @@ sources = files(
   'cc-wifi-connection-list.c',
   'cc-wifi-panel.c',
   'cc-wifi-hotspot-dialog.c',
-  'net-device.c',
   'net-device-bluetooth.c',
   'net-device-ethernet.c',
   'net-device-mobile.c',

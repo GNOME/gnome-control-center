@@ -37,7 +37,7 @@ static void nm_device_mobile_refresh_ui (NetDeviceMobile *self);
 
 struct _NetDeviceMobile
 {
-        NetDevice   parent;
+        NetObject     parent;
 
         GtkBuilder   *builder;
         GtkBox       *box;
@@ -85,7 +85,7 @@ enum {
         COLUMN_LAST
 };
 
-G_DEFINE_TYPE (NetDeviceMobile, net_device_mobile, NET_TYPE_DEVICE)
+G_DEFINE_TYPE (NetDeviceMobile, net_device_mobile, NET_TYPE_OBJECT)
 
 static GtkWidget *
 device_mobile_get_widget (NetObject    *object,

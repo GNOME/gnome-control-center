@@ -24,12 +24,12 @@
 #include <glib-object.h>
 #include <NetworkManager.h>
 
-#include "net-device.h"
+#include "net-object.h"
 
 G_BEGIN_DECLS
 
 #define NET_TYPE_DEVICE_MOBILE (net_device_mobile_get_type ())
-G_DECLARE_FINAL_TYPE (NetDeviceMobile, net_device_mobile, NET, DEVICE_MOBILE, NetDevice)
+G_DECLARE_FINAL_TYPE (NetDeviceMobile, net_device_mobile, NET, DEVICE_MOBILE, NetObject)
 
 NetDeviceMobile *net_device_mobile_new          (NMClient    *client,
                                                  NMDevice    *device,
