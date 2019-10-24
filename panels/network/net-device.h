@@ -34,6 +34,4 @@ struct _NetDeviceClass
         NetObjectClass               parent_class;
 };
 
-NMDevice     *net_device_get_nm_device         (NetDevice *device);
-
 G_END_DECLS
