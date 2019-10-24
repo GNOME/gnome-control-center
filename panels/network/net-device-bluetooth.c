@@ -92,9 +92,6 @@ nm_device_bluetooth_refresh_ui (NetDeviceBluetooth *self)
 {
         NMDeviceState state;
 
-        /* set device kind */
-        g_object_bind_property (self, "title", self->device_label, "label", 0);
-
         /* set up the device on/off switch */
         state = nm_device_get_state (self->device);
         gtk_widget_set_visible (GTK_WIDGET (self->device_off_switch),
@@ -237,4 +234,11 @@ net_device_bluetooth_get_device (NetDeviceBluetooth *self)
 {
         g_return_val_if_fail (NET_IS_DEVICE_BLUETOOTH (self), NULL);
         return self->device;
+}
+
+void
+net_device_bluetooth_set_title (NetDeviceBluetooth *self, const gchar *title)
+{
+        g_return_if_fail (NET_IS_DEVICE_BLUETOOTH (self));
+        gtk_label_set_label (self->device_label, title);
 }

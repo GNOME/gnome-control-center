@@ -1317,8 +1317,6 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
         } else
                 gtk_widget_set_sensitive (GTK_WIDGET (self->start_hotspot_button), TRUE);
 
-        g_object_bind_property (self, "title", self->title_label, "label", 0);
-
         nm_device_wifi_refresh_ui (self);
 
         return self;
@@ -1329,6 +1327,13 @@ net_device_wifi_get_device (NetDeviceWifi *self)
 {
         g_return_val_if_fail (NET_IS_DEVICE_WIFI (self), NULL);
         return self->device;
+}
+
+void
+net_device_wifi_set_title (NetDeviceWifi *self, const gchar *title)
+{
+        g_return_if_fail (NET_IS_DEVICE_WIFI (self));
+        gtk_label_set_label (self->title_label, title);
 }
 
 GtkWidget *
