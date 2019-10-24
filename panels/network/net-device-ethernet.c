@@ -39,7 +39,6 @@ struct _NetDeviceEthernet
 {
         GtkBox             parent;
 
-        GtkButton         *add_profile_button;
         GtkButton         *details_button;
         GtkFrame          *details_frame;
         HdyActionRow      *details_row;
@@ -242,7 +241,7 @@ show_details_for_row (NetDeviceEthernet *self, GtkButton *button)
 }
 
 static void
-show_details_for_wired (NetDeviceEthernet *self)
+details_button_clicked_cb (NetDeviceEthernet *self)
 {
         /* Translators: This is used as the title of the connection
          * details window for ethernet, if there is only a single
@@ -387,7 +386,7 @@ client_connection_added_cb (NetDeviceEthernet  *self)
 }
 
 static void
-add_profile (NetDeviceEthernet *self)
+add_profile_button_clicked_cb (NetDeviceEthernet *self)
 {
         NMConnection *connection;
         NMSettingConnection *sc;
@@ -423,7 +422,7 @@ add_profile (NetDeviceEthernet *self)
 }
 
 static void
-device_off_toggled (NetDeviceEthernet *self)
+device_off_switch_changed_cb (NetDeviceEthernet *self)
 {
         NMConnection *connection;
 
@@ -482,13 +481,16 @@ net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-ethernet.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, add_profile_button);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_button);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_frame);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_row);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, device_label);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, device_off_switch);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, scrolled_window);
+
+        gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, details_button_clicked_cb);
+        gtk_widget_class_bind_template_callback (widget_class, add_profile_button_clicked_cb);
 }
 
 static void
@@ -505,15 +507,6 @@ net_device_ethernet_init (NetDeviceEthernet *self)
         g_signal_connect_swapped (self->list, "row-activated",
                                   G_CALLBACK (connection_activated), self);
         gtk_widget_show (GTK_WIDGET (self->list));
-
-        g_signal_connect_swapped (self->device_off_switch, "notify::active",
-                                  G_CALLBACK (device_off_toggled), self);
-
-        g_signal_connect_swapped (self->details_button, "clicked",
-                                  G_CALLBACK (show_details_for_wired), self);
-
-        g_signal_connect_swapped (self->add_profile_button, "clicked",
-                                  G_CALLBACK (add_profile), self);
 }
 
 NetDeviceEthernet *

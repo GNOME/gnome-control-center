@@ -59,10 +59,8 @@ struct _NetDeviceWifi
         GtkStack                 parent;
 
         GtkBox                  *center_box;
-        GtkButton               *connect_hidden_button;
         GtkSwitch               *device_off_switch;
         GtkBox                  *header_box;
-        GtkButton               *history_button;
         GtkBox                  *hotspot_box;
         GtkLabel                *hotspot_network_name_heading_label;
         GtkLabel                *hotspot_network_name_label;
@@ -380,7 +378,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *self)
 }
 
 static void
-device_off_toggled (NetDeviceWifi *self)
+device_off_switch_changed_cb (NetDeviceWifi *self)
 {
         gboolean active;
 
@@ -394,7 +392,7 @@ device_off_toggled (NetDeviceWifi *self)
 }
 
 static void
-connect_to_hidden_network (NetDeviceWifi *self)
+connect_hidden_button_clicked_cb (NetDeviceWifi *self)
 {
         GtkWidget *toplevel;
 
@@ -692,7 +690,7 @@ overwrite_ssid_cb (GObject      *source_object,
 }
 
 static void
-start_hotspot (NetDeviceWifi *self)
+start_hotspot_button_clicked_cb (NetDeviceWifi *self)
 {
         g_autofree gchar *active_ssid = NULL;
         GtkWidget *window;
@@ -784,7 +782,7 @@ stop_hotspot_response_cb (NetDeviceWifi *self, gint response, GtkWidget *dialog)
 }
 
 static void
-switch_hotspot_changed_cb (NetDeviceWifi *self)
+hotspot_off_switch_changed_cb (NetDeviceWifi *self)
 {
         GtkWidget *dialog;
         GtkWidget *window;
@@ -847,44 +845,6 @@ net_device_wifi_get_property (GObject    *object,
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
         }
-}
-
-static void
-net_device_wifi_class_init (NetDeviceWifiClass *klass)
-{
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-        object_class->finalize = net_device_wifi_finalize;
-        object_class->get_property = net_device_wifi_get_property;
-
-        g_object_class_install_property (object_class,
-                                         PROP_SCANNING,
-                                         g_param_spec_boolean ("scanning",
-                                                               "Scanning",
-                                                               "Whether the device is scanning for access points",
-                                                               FALSE,
-                                                               G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
-
-        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-wifi.ui");
-
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, center_box);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, connect_hidden_button);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, device_off_switch);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, header_box);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, history_button);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_box);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_network_name_heading_label);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_network_name_label);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_off_switch);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_security_heading_label);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_security_key_heading_label);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_security_key_label);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_security_label);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, listbox_box);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, start_hotspot_button);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, status_label);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, title_label);
 }
 
 static void
@@ -1087,7 +1047,7 @@ on_connection_list_row_activated_cb (NetDeviceWifi        *self,
 }
 
 static void
-open_history (NetDeviceWifi *self)
+history_button_clicked_cb (NetDeviceWifi *self)
 {
         GtkWidget *dialog;
         GtkWidget *window;
@@ -1220,27 +1180,53 @@ ap_activated (NetDeviceWifi *self, GtkListBoxRow *row)
 }
 
 static void
+net_device_wifi_class_init (NetDeviceWifiClass *klass)
+{
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+        object_class->finalize = net_device_wifi_finalize;
+        object_class->get_property = net_device_wifi_get_property;
+
+        g_object_class_install_property (object_class,
+                                         PROP_SCANNING,
+                                         g_param_spec_boolean ("scanning",
+                                                               "Scanning",
+                                                               "Whether the device is scanning for access points",
+                                                               FALSE,
+                                                               G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-wifi.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, center_box);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, device_off_switch);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, header_box);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_box);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_network_name_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_network_name_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_off_switch);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_security_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_security_key_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_security_key_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_security_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, listbox_box);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, start_hotspot_button);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, status_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, title_label);
+
+        gtk_widget_class_bind_template_callback (widget_class, connect_hidden_button_clicked_cb);
+        gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, history_button_clicked_cb);
+        gtk_widget_class_bind_template_callback (widget_class, hotspot_off_switch_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, start_hotspot_button_clicked_cb);
+}
+
+static void
 net_device_wifi_init (NetDeviceWifi *self)
 {
         gtk_widget_init_template (GTK_WIDGET (self));
 
         self->cancellable = g_cancellable_new ();
-
-        /* setup wifi views */
-        g_signal_connect_swapped (self->device_off_switch, "notify::active",
-                                  G_CALLBACK (device_off_toggled), self);
-
-        g_signal_connect_swapped (self->start_hotspot_button, "clicked",
-                                  G_CALLBACK (start_hotspot), self);
-
-        g_signal_connect_swapped (self->connect_hidden_button, "clicked",
-                                  G_CALLBACK (connect_to_hidden_network), self);
-
-        g_signal_connect_swapped (self->history_button, "clicked",
-                                  G_CALLBACK (open_history), self);
-
-        g_signal_connect_swapped (self->hotspot_off_switch, "notify::active",
-                                  G_CALLBACK (switch_hotspot_changed_cb), self);
 }
 
 NetDeviceWifi *

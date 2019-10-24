@@ -93,7 +93,7 @@ nm_device_bluetooth_refresh_ui (NetDeviceBluetooth *self)
 }
 
 static void
-device_off_toggled (NetDeviceBluetooth *self)
+device_off_switch_changed_cb (NetDeviceBluetooth *self)
 {
         const GPtrArray *acs;
         gboolean active;
@@ -130,7 +130,7 @@ device_off_toggled (NetDeviceBluetooth *self)
 }
 
 static void
-edit_connection (NetDeviceBluetooth *self)
+options_button_clicked_cb (NetDeviceBluetooth *self)
 {
         const gchar *uuid;
         g_autofree gchar *cmdline = NULL;
@@ -170,18 +170,16 @@ net_device_bluetooth_class_init (NetDeviceBluetoothClass *klass)
         gtk_widget_class_bind_template_child (widget_class, NetDeviceBluetooth, device_off_switch);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceBluetooth, options_button);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceBluetooth, separator);
+
+        gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, options_button_clicked_cb);
+
 }
 
 static void
 net_device_bluetooth_init (NetDeviceBluetooth *self)
 {
         gtk_widget_init_template (GTK_WIDGET (self));
-
-        g_signal_connect_swapped (self->device_off_switch, "notify::active",
-                                  G_CALLBACK (device_off_toggled), self);
-
-        g_signal_connect_swapped (self->options_button, "clicked",
-                                  G_CALLBACK (edit_connection), self);
 }
 
 NetDeviceBluetooth *
