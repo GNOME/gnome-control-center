@@ -24,12 +24,12 @@
 
 #include <glib-object.h>
 
-#include "net-device.h"
+#include "net-object.h"
 
 G_BEGIN_DECLS
 
 #define NET_TYPE_DEVICE_BLUETOOTH (net_device_bluetooth_get_type ())
-G_DECLARE_FINAL_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET, DEVICE_BLUETOOTH, NetDevice)
+G_DECLARE_FINAL_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET, DEVICE_BLUETOOTH, NetObject)
 
 NetDeviceBluetooth *net_device_bluetooth_new                (NMClient           *client,
                                                              NMDevice           *device);

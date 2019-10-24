@@ -19,7 +19,6 @@
 
 #include "cc-network-resources.h"
 #include "cc-wifi-panel.h"
-#include "net-device.h"
 #include "net-device-wifi.h"
 #include "network-dialogs.h"
 
