@@ -17,7 +17,7 @@
     <property name="upper">65535</property>
     <property name="step_increment">1</property>
   </object>
-  <object class="GtkFrame" id="main_widget">
+  <template class="NetProxy" parent="GtkFrame">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
@@ -82,7 +82,7 @@
         </child>
       </object>
     </child>
-  </object>
+  </template>
   <object class="GtkDialog" id="dialog">
     <property name="use_header_bar">1</property>
     <property name="can_focus">False</property>
