@@ -34,9 +34,11 @@ NetDeviceWifi *net_device_wifi_new               (CcPanel       *panel,
                                                   NMClient      *client,
                                                   NMDevice      *device);
 
-GtkWidget     *net_device_wifi_get_header_widget (NetDeviceWifi *device_wifi);
+NMDevice      *net_device_wifi_get_device        (NetDeviceWifi *device);
 
-GtkWidget     *net_device_wifi_get_title_widget  (NetDeviceWifi *device_wifi);
+GtkWidget     *net_device_wifi_get_header_widget (NetDeviceWifi *device);
+
+GtkWidget     *net_device_wifi_get_title_widget  (NetDeviceWifi *device);
 
 G_END_DECLS
 
