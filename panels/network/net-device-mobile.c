@@ -770,20 +770,9 @@ net_device_mobile_class_init (NetDeviceMobileClass *klass)
 static void
 net_device_mobile_init (NetDeviceMobile *self)
 {
-        GtkCellRenderer *renderer;
-
         gtk_widget_init_template (GTK_WIDGET (self));
 
         self->cancellable = g_cancellable_new ();
-
-        /* setup mobile combobox model */
-        renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (self->network_combo),
-                                    renderer,
-                                    FALSE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (self->network_combo), renderer,
-                                        "text", COLUMN_TITLE,
-                                        NULL);
 
         gtk_widget_set_visible (GTK_WIDGET (self->options_button), g_find_program_in_path ("nm-connection-editor") != NULL);
 }
