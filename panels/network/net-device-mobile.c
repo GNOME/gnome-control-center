@@ -453,13 +453,6 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
 }
 
 static void
-device_state_changed_cb (NetDeviceMobile *self)
-{
-        net_object_emit_changed (NET_OBJECT (self));
-        nm_device_mobile_refresh_ui (self);
-}
-
-static void
 device_off_toggled (NetDeviceMobile *self)
 {
         const GPtrArray *acs;
@@ -832,7 +825,7 @@ net_device_mobile_new (NMClient *client, NMDevice *device, GDBusObject *modem)
         self->client = g_object_ref (client);
         self->device = g_object_ref (device);
 
-        g_signal_connect_object (device, "state-changed", G_CALLBACK (device_state_changed_cb), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (device, "state-changed", G_CALLBACK (nm_device_mobile_refresh_ui), self, G_CONNECT_SWAPPED);
 
         if (modem != NULL)  {
                 MMModem3gpp *modem_3gpp;

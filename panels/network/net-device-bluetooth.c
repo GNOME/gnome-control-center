@@ -104,13 +104,6 @@ nm_device_bluetooth_refresh_ui (NetDeviceBluetooth *self)
 }
 
 static void
-device_state_changed_cb (NetDeviceBluetooth *self)
-{
-        net_object_emit_changed (NET_OBJECT (self));
-        nm_device_bluetooth_refresh_ui (self);
-}
-
-static void
 device_off_toggled (NetDeviceBluetooth *self)
 {
         const GPtrArray *acs;
@@ -221,7 +214,7 @@ net_device_bluetooth_new (NMClient *client, NMDevice *device)
         self->client = g_object_ref (client);
         self->device = g_object_ref (device);
 
-        g_signal_connect_object (device, "state-changed", G_CALLBACK (device_state_changed_cb), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (device, "state-changed", G_CALLBACK (nm_device_bluetooth_refresh_ui), self, G_CONNECT_SWAPPED);
 
         nm_device_bluetooth_refresh_ui (self);
 
