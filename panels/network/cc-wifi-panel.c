@@ -276,7 +276,7 @@ update_devices_names (CcWifiPanel *self)
       gtk_stack_add_named (self->center_stack, title_widget, "single");
       gtk_stack_set_visible_child_name (self->center_stack, "single");
 
-      net_object_set_title (NET_OBJECT (net_device), _("Wi-Fi"));
+      net_device_wifi_set_title (net_device, _("Wi-Fi"));
     }
   else
     {
@@ -291,7 +291,7 @@ update_devices_names (CcWifiPanel *self)
           net_device = g_ptr_array_index (self->devices, i);
           device = net_device_wifi_get_device (net_device);
 
-          net_object_set_title (NET_OBJECT (net_device), nm_device_get_description (device));
+          net_device_wifi_set_title (net_device, nm_device_get_description (device));
         }
 
       /* Remove the widget at the "single" page */

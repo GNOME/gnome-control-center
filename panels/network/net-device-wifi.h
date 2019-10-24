@@ -36,6 +36,9 @@ NetDeviceWifi *net_device_wifi_new               (CcPanel       *panel,
 
 NMDevice      *net_device_wifi_get_device        (NetDeviceWifi *device);
 
+void           net_device_wifi_set_title         (NetDeviceWifi *device,
+                                                  const gchar   *title);
+
 GtkWidget     *net_device_wifi_get_header_widget (NetDeviceWifi *device);
 
 GtkWidget     *net_device_wifi_get_title_widget  (NetDeviceWifi *device);

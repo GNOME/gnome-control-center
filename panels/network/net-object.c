@@ -26,50 +26,19 @@
 
 #include "net-object.h"
 
-typedef struct
-{
-        gchar                           *title;
-} NetObjectPrivate;
-
-enum {
-        PROP_0,
-        PROP_TITLE,
-        PROP_LAST
-};
-
 enum {
         SIGNAL_CHANGED,
         SIGNAL_LAST
 };
 
 static guint signals[SIGNAL_LAST] = { 0 };
-G_DEFINE_TYPE_WITH_PRIVATE (NetObject, net_object, G_TYPE_OBJECT)
+G_DEFINE_TYPE (NetObject, net_object, G_TYPE_OBJECT)
 
 void
 net_object_emit_changed (NetObject *self)
 {
         g_return_if_fail (NET_IS_OBJECT (self));
         g_signal_emit (self, signals[SIGNAL_CHANGED], 0);
-}
-
-const gchar *
-net_object_get_title (NetObject *self)
-{
-        NetObjectPrivate *priv = net_object_get_instance_private (self);
-
-        g_return_val_if_fail (NET_IS_OBJECT (self), NULL);
-        return priv->title;
-}
-
-void
-net_object_set_title (NetObject *self, const gchar *title)
-{
-        NetObjectPrivate *priv = net_object_get_instance_private (self);
-
-        g_return_if_fail (NET_IS_OBJECT (self));
-        g_clear_pointer (&priv->title, g_free);
-        priv->title = g_strdup (title);
-        g_object_notify (G_OBJECT (self), "title");
 }
 
 GtkWidget *
@@ -81,75 +50,10 @@ net_object_get_widget (NetObject    *self,
         return klass->get_widget (self, heading_size_group);
 }
 
-/**
- * net_object_get_property:
- **/
-static void
-net_object_get_property (GObject *object,
-                         guint prop_id,
-                         GValue *value,
-                         GParamSpec *pspec)
-{
-        NetObject *self = NET_OBJECT (object);
-        NetObjectPrivate *priv = net_object_get_instance_private (self);
-
-        switch (prop_id) {
-        case PROP_TITLE:
-                g_value_set_string (value, priv->title);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-/**
- * net_object_set_property:
- **/
-static void
-net_object_set_property (GObject *object,
-                         guint prop_id,
-                         const GValue *value,
-                         GParamSpec *pspec)
-{
-        NetObject *self = NET_OBJECT (object);
-        NetObjectPrivate *priv = net_object_get_instance_private (self);
-
-        switch (prop_id) {
-        case PROP_TITLE:
-                g_free (priv->title);
-                priv->title = g_strdup (g_value_get_string (value));
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-net_object_finalize (GObject *object)
-{
-        NetObject *self = NET_OBJECT (object);
-        NetObjectPrivate *priv = net_object_get_instance_private (self);
-
-        g_clear_pointer (&priv->title, g_free);
-
-        G_OBJECT_CLASS (net_object_parent_class)->finalize (object);
-}
-
 static void
 net_object_class_init (NetObjectClass *klass)
 {
-        GParamSpec *pspec;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        object_class->finalize = net_object_finalize;
-        object_class->get_property = net_object_get_property;
-        object_class->set_property = net_object_set_property;
-
-        pspec = g_param_spec_string ("title", NULL, NULL,
-                                     NULL,
-                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
-        g_object_class_install_property (object_class, PROP_TITLE, pspec);
 
         signals[SIGNAL_CHANGED] =
                 g_signal_new ("changed",
