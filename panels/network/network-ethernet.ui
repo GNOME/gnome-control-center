@@ -23,11 +23,12 @@
           </object>
         </child>
         <child>
-          <object class="GtkButton" id="add_profile_button">
+          <object class="GtkButton">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="relief">none</property>
+            <signal name="clicked" handler="add_profile_button_clicked_cb" object="NetDeviceEthernet" swapped="yes"/>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
@@ -81,6 +82,7 @@
                         <property name="receives_default">True</property>
                         <property name="halign">end</property>
                         <property name="valign">center</property>
+                        <signal name="clicked" handler="details_button_clicked_cb" object="NetDeviceEthernet" swapped="yes"/>
                         <child>
                           <object class="GtkImage">
                             <property name="visible">True</property>
@@ -101,6 +103,7 @@
                         <property name="can_focus">True</property>
                         <property name="halign">end</property>
                         <property name="valign">center</property>
+                        <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceEthernet" swapped="yes"/>
                       </object>
                     </child>
                   </object>
