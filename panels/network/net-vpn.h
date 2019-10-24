@@ -28,8 +28,8 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (NetVpn, net_vpn, NET, VPN, GtkBox)
 
-NetVpn       *net_vpn_new                (NMConnection *connection,
-                                          NMClient     *client);
+NetVpn       *net_vpn_new                (NMClient     *client,
+                                          NMConnection *connection);
 
 NMConnection *net_vpn_get_connection     (NetVpn       *vpn);
 

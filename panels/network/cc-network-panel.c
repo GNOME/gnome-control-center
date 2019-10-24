@@ -588,7 +588,7 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
                         return;
         }
 
-        net_vpn = net_vpn_new (connection, self->client);
+        net_vpn = net_vpn_new (self->client, connection);
         gtk_widget_show (GTK_WIDGET (net_vpn));
         gtk_container_add (GTK_CONTAINER (self->box_vpn), GTK_WIDGET (net_vpn));
 
