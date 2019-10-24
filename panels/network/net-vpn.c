@@ -60,13 +60,6 @@ connection_changed_cb (NetVpn *self)
         nm_device_refresh_vpn_ui (self);
 }
 
-static void
-connection_removed_cb (NetVpn *self, NMConnection *connection)
-{
-        if (self->connection == connection)
-                net_object_emit_removed (NET_OBJECT (self));
-}
-
 static GtkWidget *
 vpn_proxy_get_widget (NetObject    *object,
                       GtkSizeGroup *heading_size_group)
@@ -261,10 +254,6 @@ net_vpn_new (NMConnection *connection,
         self->client = g_object_ref (client);
         self->connection = g_object_ref (connection);
 
-        g_signal_connect_object (self->client,
-                                 NM_CLIENT_CONNECTION_REMOVED,
-                                 G_CALLBACK (connection_removed_cb),
-                                 self, G_CONNECT_SWAPPED);
         g_signal_connect_object (connection,
                                  NM_CONNECTION_CHANGED,
                                  G_CALLBACK (connection_changed_cb),
