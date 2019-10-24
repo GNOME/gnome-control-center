@@ -398,13 +398,6 @@ client_connection_added_cb (NetDeviceEthernet  *self)
 }
 
 static void
-device_state_changed_cb (NetDeviceEthernet *self)
-{
-        net_object_emit_changed (NET_OBJECT (self));
-        device_ethernet_refresh_ui (self);
-}
-
-static void
 add_profile (NetDeviceEthernet *self)
 {
         NMConnection *connection;
@@ -558,7 +551,7 @@ net_device_ethernet_new (NMClient *client, NMDevice *device)
         g_signal_connect_object (client, NM_CLIENT_CONNECTION_REMOVED,
                                  G_CALLBACK (connection_removed), self, G_CONNECT_SWAPPED);
 
-        g_signal_connect_object (device, "state-changed", G_CALLBACK (device_state_changed_cb), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (device, "state-changed", G_CALLBACK (device_ethernet_refresh_ui), self, G_CONNECT_SWAPPED);
 
         device_ethernet_refresh_ui (self);
 

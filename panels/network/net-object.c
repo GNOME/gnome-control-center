@@ -26,20 +26,7 @@
 
 #include "net-object.h"
 
-enum {
-        SIGNAL_CHANGED,
-        SIGNAL_LAST
-};
-
-static guint signals[SIGNAL_LAST] = { 0 };
 G_DEFINE_TYPE (NetObject, net_object, G_TYPE_OBJECT)
-
-void
-net_object_emit_changed (NetObject *self)
-{
-        g_return_if_fail (NET_IS_OBJECT (self));
-        g_signal_emit (self, signals[SIGNAL_CHANGED], 0);
-}
 
 GtkWidget *
 net_object_get_widget (NetObject    *self,
@@ -53,14 +40,6 @@ net_object_get_widget (NetObject    *self,
 static void
 net_object_class_init (NetObjectClass *klass)
 {
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        signals[SIGNAL_CHANGED] =
-                g_signal_new ("changed",
-                              G_TYPE_FROM_CLASS (object_class), G_SIGNAL_RUN_LAST,
-                              0,
-                              NULL, NULL, g_cclosure_marshal_VOID__VOID,
-                              G_TYPE_NONE, 0);
 }
 
 static void
