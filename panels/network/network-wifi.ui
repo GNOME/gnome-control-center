@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkNotebook" id="notebook">
-    <property name="visible">True</property>
-    <property name="can_focus">True</property>
-    <property name="show_tabs">False</property>
-    <property name="show_border">False</property>
+  <template class="NetDeviceWifi" parent="GtkStack">
     <child>
       <object class="GtkBox" id="listbox_box">
         <property name="visible">True</property>
@@ -14,7 +10,7 @@
       </object>
     </child>
     <child>
-      <object class="GtkBox">
+      <object class="GtkBox" id="hotspot_box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="border_width">12</property>
@@ -220,7 +216,7 @@
         <property name="position">1</property>
       </packing>
     </child>
-  </object>
+  </template>
 
   <!-- Center widget -->
   <object class="GtkBox" id="center_box">

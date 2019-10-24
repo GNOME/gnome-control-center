@@ -149,7 +149,6 @@ add_wifi_device (CcWifiPanel *self,
 {
   GtkWidget *header_widget;
   NetDeviceWifi *net_device;
-  GtkWidget *widget;
 
   /* Only manage Wi-Fi devices */
   if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
@@ -159,6 +158,7 @@ add_wifi_device (CcWifiPanel *self,
   net_device = net_device_wifi_new (CC_PANEL (self),
                                     self->client,
                                     device);
+  gtk_widget_show (GTK_WIDGET (net_device));
 
   /* And add to the header widgets */
   header_widget = net_device_wifi_get_header_widget (net_device);
@@ -171,8 +171,7 @@ add_wifi_device (CcWifiPanel *self,
   update_devices_names (self);
 
   /* Needs to be added after the device is added to the self->devices array */
-  widget = net_object_get_widget (NET_OBJECT (net_device), self->sizegroup);
-  gtk_stack_add_titled (self->stack, widget,
+  gtk_stack_add_titled (self->stack, GTK_WIDGET (net_device),
                         nm_device_get_udi (device),
                         nm_device_get_description (device));
 }
@@ -714,7 +713,7 @@ cc_wifi_panel_init (CcWifiPanel *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->cancellable = g_cancellable_new ();
-  self->devices = g_ptr_array_new_with_free_func (g_object_unref);
+  self->devices = g_ptr_array_new ();
 
   /* Create and store a NMClient instance if it doesn't exist yet */
   if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT))
