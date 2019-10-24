@@ -99,7 +99,7 @@ connection_activate_cb (GObject *source_object,
 }
 
 static void
-mobile_connection_changed_cb (NetDeviceMobile *self)
+network_combo_changed_cb (NetDeviceMobile *self)
 {
         gboolean ret;
         g_autofree gchar *object_path = NULL;
@@ -438,7 +438,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
 }
 
 static void
-device_off_toggled (NetDeviceMobile *self)
+device_off_switch_changed_cb (NetDeviceMobile *self)
 {
         const GPtrArray *acs;
         gboolean active;
@@ -475,7 +475,7 @@ device_off_toggled (NetDeviceMobile *self)
 }
 
 static void
-edit_connection (NetDeviceMobile *self)
+options_button_clicked_cb (NetDeviceMobile *self)
 {
         const gchar *uuid;
         g_autofree gchar *cmdline = NULL;
@@ -761,6 +761,10 @@ net_device_mobile_class_init (NetDeviceMobileClass *klass)
         gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, route_heading_label);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, route_label);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, status_label);
+
+        gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, network_combo_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, options_button_clicked_cb);
 }
 
 static void
@@ -773,9 +777,6 @@ net_device_mobile_init (NetDeviceMobile *self)
         self->cancellable = g_cancellable_new ();
 
         /* setup mobile combobox model */
-        g_signal_connect_swapped (self->network_combo, "changed",
-                                  G_CALLBACK (mobile_connection_changed_cb),
-                                  self);
         renderer = gtk_cell_renderer_text_new ();
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (self->network_combo),
                                     renderer,
@@ -784,11 +785,6 @@ net_device_mobile_init (NetDeviceMobile *self)
                                         "text", COLUMN_TITLE,
                                         NULL);
 
-        g_signal_connect_swapped (self->device_off_switch, "notify::active",
-                                  G_CALLBACK (device_off_toggled), self);
-
-        g_signal_connect_swapped (self->options_button, "clicked",
-                                  G_CALLBACK (edit_connection), self);
         gtk_widget_set_visible (self->options_button, g_find_program_in_path ("nm-connection-editor") != NULL);
 }
 

@@ -267,6 +267,7 @@
                 <property name="can_focus">False</property>
                 <property name="model">mobile_connections_list_store</property>
                 <property name="entry_text_column">1</property>
+                <signal name="changed" handler="network_combo_changed_cb" object="NetDeviceMobile" swapped="yes"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -349,6 +350,7 @@
                     <property name="can_focus">True</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
+                    <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceMobile" swapped="yes"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -389,6 +391,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_underline">True</property>
+                <signal name="clicked" handler="options_button_clicked_cb" object="NetDeviceMobile" swapped="yes"/>
                 <style>
                   <class name="image-button"/>
                 </style>
