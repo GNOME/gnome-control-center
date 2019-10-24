@@ -43,7 +43,6 @@ sources = files(
   'net-device-ethernet.c',
   'net-device-mobile.c',
   'net-device-wifi.c',
-  'net-object.c',
   'net-proxy.c',
   'net-vpn.c',
   'network-dialogs.c',
