@@ -588,13 +588,9 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
                         return;
         }
 
-        /* add as a VPN object */
-        net_vpn = net_vpn_new (connection,
-                               self->client);
-
-
-        /* add as a panel */
-        add_object (self, NET_OBJECT (net_vpn), GTK_CONTAINER (self->box_vpn));
+        net_vpn = net_vpn_new (connection, self->client);
+        gtk_widget_show (GTK_WIDGET (net_vpn));
+        gtk_container_add (GTK_CONTAINER (self->box_vpn), GTK_WIDGET (net_vpn));
 
         /* store in the devices array */
         g_ptr_array_add (self->vpns, net_vpn);
@@ -635,9 +631,8 @@ client_connection_removed_cb (CcNetworkPanel *self, NMConnection *connection)
         for (i = 0; i < self->vpns->len; i++) {
                 NetVpn *vpn = g_ptr_array_index (self->vpns, i);
                 if (net_vpn_get_connection (vpn) == connection) {
-                        GtkWidget *widget = g_hash_table_lookup (self->device_to_widget, vpn);
-                        if (widget != NULL)
-                                gtk_widget_destroy (widget);
+                        g_ptr_array_remove (self->vpns, vpn);
+                        gtk_widget_destroy (GTK_WIDGET (vpn));
                         return;
                 }
         }
@@ -749,7 +744,7 @@ cc_network_panel_init (CcNetworkPanel *self)
         self->bluetooth_devices = g_ptr_array_new_with_free_func (g_object_unref);
         self->ethernet_devices = g_ptr_array_new_with_free_func (g_object_unref);
         self->mobile_devices = g_ptr_array_new_with_free_func (g_object_unref);
-        self->vpns = g_ptr_array_new_with_free_func (g_object_unref);
+        self->vpns = g_ptr_array_new ();
         self->device_to_widget = g_hash_table_new (g_direct_hash, g_direct_equal);
         self->nm_device_to_device = g_hash_table_new (g_direct_hash, g_direct_equal);
 
