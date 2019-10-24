@@ -51,7 +51,6 @@ struct _CcWifiPanel
   GtkStack           *center_stack;
   GtkStack           *header_stack;
   GtkStack           *main_stack;
-  GtkSizeGroup       *sizegroup;
   GtkWidget          *spinner;
   GtkStack           *stack;
 
@@ -695,7 +694,6 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, main_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_switch);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_widget);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, spinner);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, stack);
 
