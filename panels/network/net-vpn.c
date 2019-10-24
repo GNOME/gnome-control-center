@@ -51,15 +51,6 @@ struct _NetVpn
 
 G_DEFINE_TYPE (NetVpn, net_vpn, NET_TYPE_OBJECT)
 
-static void nm_device_refresh_vpn_ui (NetVpn *self);
-
-static void
-connection_changed_cb (NetVpn *self)
-{
-        net_object_emit_changed (NET_OBJECT (self));
-        nm_device_refresh_vpn_ui (self);
-}
-
 static GtkWidget *
 vpn_proxy_get_widget (NetObject    *object,
                       GtkSizeGroup *heading_size_group)
@@ -255,7 +246,7 @@ net_vpn_new (NMConnection *connection,
 
         g_signal_connect_object (connection,
                                  NM_CONNECTION_CHANGED,
-                                 G_CALLBACK (connection_changed_cb),
+                                 G_CALLBACK (nm_device_refresh_vpn_ui),
                                  self, G_CONNECT_SWAPPED);
 
         nm_device_refresh_vpn_ui (self);
