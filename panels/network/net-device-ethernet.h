@@ -23,12 +23,12 @@
 
 #include <glib-object.h>
 
-#include "net-device.h"
+#include "net-object.h"
 
 G_BEGIN_DECLS
 
 #define NET_TYPE_DEVICE_ETHERNET          (net_device_ethernet_get_type ())
-G_DECLARE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, NET, DEVICE_ETHERNET, NetDevice)
+G_DECLARE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, NET, DEVICE_ETHERNET, NetObject)
 
 NetDeviceEthernet *net_device_ethernet_new        (NMClient *client,
                                                    NMDevice *device);

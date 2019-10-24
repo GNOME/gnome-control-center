@@ -33,7 +33,7 @@
 
 struct _NetDeviceBluetooth
 {
-        NetDevice     parent;
+        NetObject     parent;
 
         GtkBuilder   *builder;
         GtkBox       *box;
@@ -47,7 +47,7 @@ struct _NetDeviceBluetooth
         gboolean      updating_device;
 };
 
-G_DEFINE_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET_TYPE_DEVICE)
+G_DEFINE_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET_TYPE_OBJECT)
 
 void
 net_device_bluetooth_set_show_separator (NetDeviceBluetooth *self,

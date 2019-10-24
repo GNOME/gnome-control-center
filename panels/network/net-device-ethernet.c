@@ -37,7 +37,7 @@
 
 struct _NetDeviceEthernet
 {
-        NetDevice          parent;
+        NetObject          parent;
 
         GtkBuilder        *builder;
         GtkButton         *add_profile_button;
@@ -56,7 +56,7 @@ struct _NetDeviceEthernet
         GHashTable        *connections;
 };
 
-G_DEFINE_TYPE (NetDeviceEthernet, net_device_ethernet, NET_TYPE_DEVICE)
+G_DEFINE_TYPE (NetDeviceEthernet, net_device_ethernet, NET_TYPE_OBJECT)
 
 static GtkWidget *
 device_ethernet_get_widget (NetObject    *object,
