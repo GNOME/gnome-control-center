@@ -214,8 +214,8 @@ net_vpn_init (NetVpn *self)
 }
 
 NetVpn *
-net_vpn_new (NMConnection *connection,
-             NMClient     *client)
+net_vpn_new (NMClient     *client,
+             NMConnection *connection)
 {
         NetVpn *self;
 
