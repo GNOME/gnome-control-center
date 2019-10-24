@@ -39,7 +39,6 @@ enum {
 
 enum {
         SIGNAL_CHANGED,
-        SIGNAL_REMOVED,
         SIGNAL_LAST
 };
 
@@ -51,13 +50,6 @@ net_object_emit_changed (NetObject *self)
 {
         g_return_if_fail (NET_IS_OBJECT (self));
         g_signal_emit (self, signals[SIGNAL_CHANGED], 0);
-}
-
-void
-net_object_emit_removed (NetObject *self)
-{
-        g_return_if_fail (NET_IS_OBJECT (self));
-        g_signal_emit (self, signals[SIGNAL_REMOVED], 0);
 }
 
 const gchar *
@@ -161,12 +153,6 @@ net_object_class_init (NetObjectClass *klass)
 
         signals[SIGNAL_CHANGED] =
                 g_signal_new ("changed",
-                              G_TYPE_FROM_CLASS (object_class), G_SIGNAL_RUN_LAST,
-                              0,
-                              NULL, NULL, g_cclosure_marshal_VOID__VOID,
-                              G_TYPE_NONE, 0);
-        signals[SIGNAL_REMOVED] =
-                g_signal_new ("removed",
                               G_TYPE_FROM_CLASS (object_class), G_SIGNAL_RUN_LAST,
                               0,
                               NULL, NULL, g_cclosure_marshal_VOID__VOID,

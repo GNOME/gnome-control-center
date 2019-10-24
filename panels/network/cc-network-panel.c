@@ -235,17 +235,6 @@ cc_network_panel_get_help_uri (CcPanel *self)
 }
 
 static void
-object_removed_cb (CcNetworkPanel *self, NetObject *object)
-{
-        GtkWidget *widget;
-
-        /* remove device */
-        widget = g_hash_table_lookup (self->device_to_widget, object);
-        if (widget != NULL)
-                gtk_widget_destroy (widget);
-}
-
-static void
 panel_refresh_device_titles (CcNetworkPanel *self)
 {
         g_autoptr(GPtrArray) ndarray = NULL;
@@ -483,22 +472,22 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
          * be handled by the future Mobile Broadband panel */
         if (NET_IS_DEVICE_BLUETOOTH (net_device))
                 update_bluetooth_section (self);
-
-        g_signal_connect_object (net_device, "removed",
-                                 G_CALLBACK (object_removed_cb), self, G_CONNECT_SWAPPED);
 }
 
 static void
 panel_remove_device (CcNetworkPanel *self, NMDevice *device)
 {
         NetObject *net_device = NULL;
+        GtkWidget *widget;
 
         net_device = g_hash_table_lookup (self->nm_device_to_device, device);
         if (net_device == NULL)
                 return;
 
-        /* NMObject will not fire the "removed" signal, so handle the UI removal explicitly */
-        object_removed_cb (self, net_device);
+        widget = g_hash_table_lookup (self->device_to_widget, device);
+        if (widget != NULL)
+                gtk_widget_destroy (widget);
+
         g_ptr_array_remove (self->bluetooth_devices, net_device);
         g_ptr_array_remove (self->ethernet_devices, net_device);
         g_ptr_array_remove (self->mobile_devices, net_device);
@@ -620,8 +609,7 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
         /* add as a VPN object */
         net_vpn = net_vpn_new (connection,
                                self->client);
-        g_signal_connect_object (net_vpn, "removed",
-                                 G_CALLBACK (object_removed_cb), self, G_CONNECT_SWAPPED);
+
 
         /* add as a panel */
         add_object (self, NET_OBJECT (net_vpn), GTK_CONTAINER (self->box_vpn));
@@ -636,8 +624,7 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
 }
 
 static void
-add_connection (CcNetworkPanel *self,
-                NMConnection *connection)
+add_connection (CcNetworkPanel *self, NMConnection *connection)
 {
         NMSettingConnection *s_con;
         const gchar *type, *iface;
@@ -661,9 +648,19 @@ add_connection (CcNetworkPanel *self,
 }
 
 static void
-notify_connection_added_cb (CcNetworkPanel *self, NMRemoteConnection *connection)
+client_connection_removed_cb (CcNetworkPanel *self, NMConnection *connection)
 {
-        add_connection (self, NM_CONNECTION (connection));
+        guint i;
+
+        for (i = 0; i < self->vpns->len; i++) {
+                NetVpn *vpn = g_ptr_array_index (self->vpns, i);
+                if (net_vpn_get_connection (vpn) == connection) {
+                        GtkWidget *widget = g_hash_table_lookup (self->device_to_widget, vpn);
+                        if (widget != NULL)
+                                gtk_widget_destroy (widget);
+                        return;
+                }
+        }
 }
 
 static void
@@ -813,7 +810,9 @@ cc_network_panel_init (CcNetworkPanel *self)
 
         /* add remote settings such as VPN settings as virtual devices */
         g_signal_connect_object (self->client, NM_CLIENT_CONNECTION_ADDED,
-                                 G_CALLBACK (notify_connection_added_cb), self, G_CONNECT_SWAPPED);
+                                 G_CALLBACK (add_connection), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->client, NM_CLIENT_CONNECTION_ADDED,
+                                 G_CALLBACK (client_connection_removed_cb), self, G_CONNECT_SWAPPED);
 
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
         g_signal_connect_after (toplevel, "map", G_CALLBACK (on_toplevel_map), self);
