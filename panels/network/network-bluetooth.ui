@@ -44,6 +44,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="valign">center</property>
+                    <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceBluetooth" swapped="yes"/>
                     <child internal-child="accessible">
                       <object class="AtkObject">
                         <property name="accessible-name" translatable="yes">Turn device off</property>
@@ -58,6 +59,7 @@
                     <property name="receives_default">True</property>
                     <property name="valign">center</property>
                     <property name="use_underline">True</property>
+                    <signal name="clicked" handler="options_button_clicked_cb" object="NetDeviceBluetooth" swapped="yes"/>
                     <style>
                       <class name="image-button"/>
                     </style>
