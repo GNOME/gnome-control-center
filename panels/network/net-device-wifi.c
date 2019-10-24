@@ -56,7 +56,7 @@ static void show_details_for_row (NetDeviceWifi *self, CcWifiConnectionRow *row,
 
 struct _NetDeviceWifi
 {
-        NetDevice                parent;
+        NetObject                parent;
 
         GtkBuilder              *builder;
         GtkBox                  *center_box;
@@ -100,7 +100,7 @@ enum {
         PROP_LAST,
 };
 
-G_DEFINE_TYPE (NetDeviceWifi, net_device_wifi, NET_TYPE_DEVICE)
+G_DEFINE_TYPE (NetDeviceWifi, net_device_wifi, NET_TYPE_OBJECT)
 
 static GtkWidget *
 device_wifi_proxy_get_widget (NetObject    *object,

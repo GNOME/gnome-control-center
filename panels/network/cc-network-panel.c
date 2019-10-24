@@ -30,7 +30,6 @@
 
 #include <NetworkManager.h>
 
-#include "net-device.h"
 #include "net-device-bluetooth.h"
 #include "net-device-ethernet.h"
 #include "net-device-mobile.h"
@@ -251,7 +250,7 @@ panel_refresh_device_titles (CcNetworkPanel *self)
 {
         g_autoptr(GPtrArray) ndarray = NULL;
         g_autoptr(GPtrArray) nmdarray = NULL;
-        NetDevice **devices;
+        NetObject **devices;
         NMDevice **nm_devices;
         g_auto(GStrv) titles = NULL;
         guint i, num_devices;
@@ -277,7 +276,7 @@ panel_refresh_device_titles (CcNetworkPanel *self)
         if (ndarray->len == 0)
                 return;
 
-        devices = (NetDevice **)ndarray->pdata;
+        devices = (NetObject **)ndarray->pdata;
         nm_devices = (NMDevice **)nmdarray->pdata;
         num_devices = ndarray->len;
 
@@ -290,9 +289,9 @@ panel_refresh_device_titles (CcNetworkPanel *self)
 
                 /* For bluetooth devices, use their device name. */
                 if (bt_name)
-                        net_object_set_title (NET_OBJECT (devices[i]), bt_name);
+                        net_object_set_title (devices[i], bt_name);
                 else
-                        net_object_set_title (NET_OBJECT (devices[i]), titles[i]);
+                        net_object_set_title (devices[i], titles[i]);
         }
 }
 
@@ -416,7 +415,7 @@ static void
 panel_add_device (CcNetworkPanel *self, NMDevice *device)
 {
         NMDeviceType type;
-        NetDevice *net_device;
+        NetObject *net_device;
         g_autoptr(GDBusObject) modem_object = NULL;
 
         if (!nm_device_get_managed (device))
@@ -436,8 +435,8 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         switch (type) {
         case NM_DEVICE_TYPE_ETHERNET:
         case NM_DEVICE_TYPE_INFINIBAND:
-                net_device = NET_DEVICE (net_device_ethernet_new (self->client, device));
-                add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_wired));
+                net_device = NET_OBJECT (net_device_ethernet_new (self->client, device));
+                add_object (self, net_device, GTK_CONTAINER (self->box_wired));
                 g_ptr_array_add (self->ethernet_devices, net_device);
                 break;
         case NM_DEVICE_TYPE_MODEM:
@@ -457,13 +456,13 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                         }
                 }
 
-                net_device = NET_DEVICE (net_device_mobile_new (self->client, device, modem_object));
-                add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_wired));
+                net_device = NET_OBJECT (net_device_mobile_new (self->client, device, modem_object));
+                add_object (self, net_device, GTK_CONTAINER (self->box_wired));
                 g_ptr_array_add (self->mobile_devices, net_device);
                 break;
         case NM_DEVICE_TYPE_BT:
-                net_device = NET_DEVICE (net_device_bluetooth_new (self->client, device));
-                add_object (self, NET_OBJECT (net_device), GTK_CONTAINER (self->box_bluetooth));
+                net_device = NET_OBJECT (net_device_bluetooth_new (self->client, device));
+                add_object (self, net_device, GTK_CONTAINER (self->box_bluetooth));
                 g_ptr_array_add (self->bluetooth_devices, net_device);
                 break;
 
@@ -492,14 +491,14 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
 static void
 panel_remove_device (CcNetworkPanel *self, NMDevice *device)
 {
-        NetDevice *net_device = NULL;
+        NetObject *net_device = NULL;
 
         net_device = g_hash_table_lookup (self->nm_device_to_device, device);
         if (net_device == NULL)
                 return;
 
         /* NMObject will not fire the "removed" signal, so handle the UI removal explicitly */
-        object_removed_cb (self, NET_OBJECT (net_device));
+        object_removed_cb (self, net_device);
         g_ptr_array_remove (self->bluetooth_devices, net_device);
         g_ptr_array_remove (self->ethernet_devices, net_device);
         g_ptr_array_remove (self->mobile_devices, net_device);

@@ -23,12 +23,12 @@
 
 #include <glib-object.h>
 
-#include "net-device.h"
+#include "net-object.h"
 
 G_BEGIN_DECLS
 
 #define NET_TYPE_DEVICE_WIFI          (net_device_wifi_get_type ())
-G_DECLARE_FINAL_TYPE (NetDeviceWifi, net_device_wifi, NET, DEVICE_WIFI, NetDevice)
+G_DECLARE_FINAL_TYPE (NetDeviceWifi, net_device_wifi, NET, DEVICE_WIFI, NetObject)
 
 NetDeviceWifi *net_device_wifi_new               (CcPanel       *panel,
                                                   NMClient      *client,
