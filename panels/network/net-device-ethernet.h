@@ -21,14 +21,12 @@
 
 #pragma once
 
-#include <glib-object.h>
-
-#include "net-object.h"
+#include <gtk/gtk.h>
+#include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-#define NET_TYPE_DEVICE_ETHERNET          (net_device_ethernet_get_type ())
-G_DECLARE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, NET, DEVICE_ETHERNET, NetObject)
+G_DECLARE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, NET, DEVICE_ETHERNET, GtkBox)
 
 NetDeviceEthernet *net_device_ethernet_new        (NMClient          *client,
                                                    NMDevice          *device);

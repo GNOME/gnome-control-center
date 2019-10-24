@@ -37,11 +37,9 @@
 
 struct _NetDeviceEthernet
 {
-        NetObject          parent;
+        GtkBox             parent;
 
-        GtkBuilder        *builder;
         GtkButton         *add_profile_button;
-        GtkBox            *box;
         GtkButton         *details_button;
         GtkFrame          *details_frame;
         HdyActionRow      *details_row;
@@ -56,16 +54,7 @@ struct _NetDeviceEthernet
         GHashTable        *connections;
 };
 
-G_DEFINE_TYPE (NetDeviceEthernet, net_device_ethernet, NET_TYPE_OBJECT)
-
-static GtkWidget *
-device_ethernet_get_widget (NetObject    *object,
-                            GtkSizeGroup *heading_size_group)
-{
-        NetDeviceEthernet *self = NET_DEVICE_ETHERNET (object);
-
-        return GTK_WIDGET (self->box);
-}
+G_DEFINE_TYPE (NetDeviceEthernet, net_device_ethernet, GTK_TYPE_BOX)
 
 static void
 add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar *value)
@@ -234,7 +223,7 @@ show_details (NetDeviceEthernet *self, GtkButton *button, const gchar *title)
         GtkWidget *window;
         NetConnectionEditor *editor;
 
-        window = gtk_widget_get_toplevel (GTK_WIDGET (self->box));
+        window = gtk_widget_get_toplevel (GTK_WIDGET (self));
 
         row = g_object_get_data (G_OBJECT (button), "row");
         connection = NM_CONNECTION (g_object_get_data (G_OBJECT (row), "connection"));
@@ -426,7 +415,7 @@ add_profile (NetDeviceEthernet *self)
 
         nm_connection_add_setting (connection, nm_setting_wired_new ());
 
-        window = gtk_widget_get_toplevel (GTK_WIDGET (self->box));
+        window = gtk_widget_get_toplevel (GTK_WIDGET (self));
 
         editor = net_connection_editor_new (GTK_WINDOW (window), connection, self->device, NULL, self->client);
         g_signal_connect_swapped (editor, "done", G_CALLBACK (editor_done), self);
@@ -476,7 +465,6 @@ device_ethernet_finalize (GObject *object)
 {
         NetDeviceEthernet *self = NET_DEVICE_ETHERNET (object);
 
-        g_clear_object (&self->builder);
         g_clear_object (&self->client);
         g_clear_object (&self->device);
         g_hash_table_destroy (self->connections);
@@ -487,35 +475,26 @@ device_ethernet_finalize (GObject *object)
 static void
 net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
 {
-        NetObjectClass *obj_class = NET_OBJECT_CLASS (klass);
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-        obj_class->get_widget = device_ethernet_get_widget;
         object_class->finalize = device_ethernet_finalize;
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-ethernet.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, add_profile_button);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_button);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_frame);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_row);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, device_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, device_off_switch);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, scrolled_window);
 }
 
 static void
 net_device_ethernet_init (NetDeviceEthernet *self)
 {
-        g_autoptr(GError) error = NULL;
-
-        self->builder = gtk_builder_new ();
-        gtk_builder_add_from_resource (self->builder,
-                                       "/org/gnome/control-center/network/network-ethernet.ui",
-                                       &error);
-        if (error != NULL) {
-                g_warning ("Could not load interface file: %s", error->message);
-                return;
-        }
-
-        self->add_profile_button = GTK_BUTTON (gtk_builder_get_object (self->builder, "add_profile_button"));
-        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
-        self->details_button = GTK_BUTTON (gtk_builder_get_object (self->builder, "details_button"));
-        self->details_frame = GTK_FRAME (gtk_builder_get_object (self->builder, "details_frame"));
-        self->details_row = HDY_ACTION_ROW (gtk_builder_get_object (self->builder, "details_row"));
-        self->device_label = GTK_LABEL (gtk_builder_get_object (self->builder, "device_label"));
-        self->device_off_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "device_off_switch"));
-        self->scrolled_window = GTK_SCROLLED_WINDOW (gtk_builder_get_object (self->builder, "scrolled_window"));
+        gtk_widget_init_template (GTK_WIDGET (self));
 
         self->connections = g_hash_table_new (NULL, NULL);
 
@@ -542,7 +521,7 @@ net_device_ethernet_new (NMClient *client, NMDevice *device)
 {
         NetDeviceEthernet *self;
 
-        self = g_object_new (NET_TYPE_DEVICE_ETHERNET, NULL);
+        self = g_object_new (net_device_ethernet_get_type (), NULL);
         self->client = g_object_ref (client);
         self->device = g_object_ref (device);
 
