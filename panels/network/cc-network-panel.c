@@ -755,7 +755,8 @@ cc_network_panel_init (CcNetworkPanel *self)
 
         /* add the virtual proxy device */
         proxy = net_proxy_new ();
-        add_object (self, NET_OBJECT (proxy), GTK_CONTAINER (self->box_proxy));
+        gtk_widget_show (GTK_WIDGET (proxy));
+        gtk_container_add (GTK_CONTAINER (self->box_proxy), GTK_WIDGET (proxy));
 
         /* Create and store a NMClient instance if it doesn't exist yet */
         if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT)) {
