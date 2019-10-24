@@ -31,12 +31,10 @@
 
 #include "connection-editor/net-connection-editor.h"
 
-
 struct _NetVpn
 {
-        NetObject               parent;
+        GtkBox                   parent;
 
-        GtkBuilder              *builder;
         GtkBox                  *box;
         GtkLabel                *device_label;
         GtkSwitch               *device_off_switch;
@@ -49,16 +47,7 @@ struct _NetVpn
         gboolean                 updating_device;
 };
 
-G_DEFINE_TYPE (NetVpn, net_vpn, NET_TYPE_OBJECT)
-
-static GtkWidget *
-vpn_proxy_get_widget (NetObject    *object,
-                      GtkSizeGroup *heading_size_group)
-{
-        NetVpn *self = NET_VPN (object);
-
-        return GTK_WIDGET (self->box);
-}
+G_DEFINE_TYPE (NetVpn, net_vpn, GTK_TYPE_BOX)
 
 static void
 nm_device_refresh_vpn_ui (NetVpn *self)
@@ -192,7 +181,6 @@ net_vpn_finalize (GObject *object)
         g_clear_object (&self->active_connection);
         g_clear_object (&self->client);
         g_clear_object (&self->connection);
-        g_clear_object (&self->builder);
 
         G_OBJECT_CLASS (net_vpn_parent_class)->finalize (object);
 }
@@ -201,31 +189,22 @@ static void
 net_vpn_class_init (NetVpnClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
         object_class->finalize = net_vpn_finalize;
-        parent_class->get_widget = vpn_proxy_get_widget;
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-vpn.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, NetVpn, device_label);
+        gtk_widget_class_bind_template_child (widget_class, NetVpn, device_off_switch);
+        gtk_widget_class_bind_template_child (widget_class, NetVpn, options_button);
+        gtk_widget_class_bind_template_child (widget_class, NetVpn, separator);
 }
 
 static void
 net_vpn_init (NetVpn *self)
 {
-        g_autoptr(GError) error = NULL;
-
-        self->builder = gtk_builder_new ();
-        gtk_builder_add_from_resource (self->builder,
-                                       "/org/gnome/control-center/network/network-vpn.ui",
-                                       &error);
-        if (error != NULL) {
-                g_warning ("Could not load interface file: %s", error->message);
-                return;
-        }
-
-        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
-        self->device_label = GTK_LABEL (gtk_builder_get_object (self->builder, "device_label"));
-        self->device_off_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "device_off_switch"));
-        self->options_button = GTK_BUTTON (gtk_builder_get_object (self->builder, "options_button"));
-        self->separator = GTK_SEPARATOR (gtk_builder_get_object (self->builder, "separator"));
+        gtk_widget_init_template (GTK_WIDGET (self));
 
         g_signal_connect_swapped (self->device_off_switch, "notify::active",
                                   G_CALLBACK (device_off_toggled), self);
@@ -240,7 +219,7 @@ net_vpn_new (NMConnection *connection,
 {
         NetVpn *self;
 
-        self = g_object_new (NET_TYPE_VPN, NULL);
+        self = g_object_new (net_vpn_get_type (), NULL);
         self->client = g_object_ref (client);
         self->connection = g_object_ref (connection);
 

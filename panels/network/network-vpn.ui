@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkBox" id="box">
-    <property name="visible">True</property>
+  <template class="NetVpn" parent="GtkBox">
     <property name="can_focus">False</property>
     <property name="hexpand">True</property>
     <property name="orientation">vertical</property>
@@ -87,5 +86,5 @@
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>
