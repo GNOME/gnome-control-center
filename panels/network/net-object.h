@@ -42,9 +42,6 @@ struct _NetObjectClass
                                                         GtkSizeGroup    *heading_size_group);
 };
 
-const gchar     *net_object_get_title                   (NetObject      *object);
-void             net_object_set_title                   (NetObject      *object,
-                                                         const gchar    *title);
 void             net_object_emit_changed                (NetObject      *object);
 GtkWidget       *net_object_get_widget                  (NetObject      *object,
                                                          GtkSizeGroup   *heading_size_group);

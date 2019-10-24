@@ -30,9 +30,12 @@ G_BEGIN_DECLS
 #define NET_TYPE_DEVICE_ETHERNET          (net_device_ethernet_get_type ())
 G_DECLARE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, NET, DEVICE_ETHERNET, NetObject)
 
-NetDeviceEthernet *net_device_ethernet_new        (NMClient *client,
-                                                   NMDevice *device);
+NetDeviceEthernet *net_device_ethernet_new        (NMClient          *client,
+                                                   NMDevice          *device);
 
 NMDevice          *net_device_ethernet_get_device (NetDeviceEthernet *device);
+
+void               net_device_ethernet_set_title  (NetDeviceEthernet *device,
+                                                   const gchar       *title);
 
 G_END_DECLS
