@@ -22,14 +22,12 @@
 
 #pragma once
 
-#include <glib-object.h>
-
-#include "net-object.h"
+#include <gtk/gtk.h>
+#include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-#define NET_TYPE_DEVICE_BLUETOOTH (net_device_bluetooth_get_type ())
-G_DECLARE_FINAL_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET, DEVICE_BLUETOOTH, NetObject)
+G_DECLARE_FINAL_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET, DEVICE_BLUETOOTH, GtkBox)
 
 NetDeviceBluetooth *net_device_bluetooth_new                (NMClient           *client,
                                                              NMDevice           *device);

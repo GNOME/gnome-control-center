@@ -37,10 +37,8 @@ static void nm_device_mobile_refresh_ui (NetDeviceMobile *self);
 
 struct _NetDeviceMobile
 {
-        NetObject     parent;
+        GtkBox        parent;
 
-        GtkBuilder   *builder;
-        GtkBox       *box;
         GtkLabel     *device_label;
         GtkSwitch    *device_off_switch;
         GtkLabel     *dns_heading_label;
@@ -85,20 +83,7 @@ enum {
         COLUMN_LAST
 };
 
-G_DEFINE_TYPE (NetDeviceMobile, net_device_mobile, NET_TYPE_OBJECT)
-
-static GtkWidget *
-device_mobile_get_widget (NetObject    *object,
-                          GtkSizeGroup *heading_size_group)
-{
-        NetDeviceMobile *self = NET_DEVICE_MOBILE (object);
-
-        /* add widgets to size group */
-        gtk_size_group_add_widget (heading_size_group, GTK_WIDGET (self->imei_heading_label));
-        gtk_size_group_add_widget (heading_size_group, GTK_WIDGET (self->network_label));
-
-        return GTK_WIDGET (self->box);
-}
+G_DEFINE_TYPE (NetDeviceMobile, net_device_mobile, GTK_TYPE_BOX)
 
 static void
 connection_activate_cb (GObject *source_object,
@@ -136,7 +121,7 @@ mobile_connection_changed_cb (NetDeviceMobile *self)
                             COLUMN_ID, &object_path,
                             -1);
         if (g_strcmp0 (object_path, NULL) == 0) {
-                toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self->box));
+                toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
                 cc_network_panel_connect_to_3g_network (toplevel, self->client, self->device);
                 return;
         }
@@ -729,7 +714,6 @@ net_device_mobile_dispose (GObject *object)
 
         g_cancellable_cancel (self->cancellable);
 
-        g_clear_object (&self->builder);
         g_clear_object (&self->client);
         g_clear_object (&self->device);
         g_clear_object (&self->modem);
@@ -752,47 +736,39 @@ static void
 net_device_mobile_class_init (NetDeviceMobileClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
         object_class->dispose = net_device_mobile_dispose;
-        parent_class->get_widget = device_mobile_get_widget;
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-mobile.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, device_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, device_off_switch);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, dns_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, dns_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, imei_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, imei_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, ipv4_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, ipv4_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, ipv6_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, ipv6_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, mobile_connections_list_store);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, network_combo);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, network_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, options_button);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, provider_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, provider_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, route_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, route_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, status_label);
 }
 
 static void
 net_device_mobile_init (NetDeviceMobile *self)
 {
-        g_autoptr(GError) error = NULL;
         GtkCellRenderer *renderer;
 
-        self->builder = gtk_builder_new ();
-        gtk_builder_add_from_resource (self->builder,
-                                       "/org/gnome/control-center/network/network-mobile.ui",
-                                       &error);
-        if (error != NULL) {
-                g_warning ("Could not load interface file: %s", error->message);
-                return;
-        }
-
-        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
-        self->device_label = GTK_LABEL (gtk_builder_get_object (self->builder, "device_label"));
-        self->device_off_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "device_off_switch"));
-        self->dns_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "dns_heading_label"));
-        self->dns_label = GTK_LABEL (gtk_builder_get_object (self->builder, "dns_label"));
-        self->imei_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "imei_heading_label"));
-        self->imei_label = GTK_LABEL (gtk_builder_get_object (self->builder, "imei_label"));
-        self->ipv4_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv4_heading_label"));
-        self->ipv4_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv4_label"));
-        self->ipv6_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv6_heading_label"));
-        self->ipv6_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv6_label"));
-        self->mobile_connections_list_store = GTK_LIST_STORE (gtk_builder_get_object (self->builder, "mobile_connections_list_store"));
-        self->network_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "network_combo"));
-        self->network_label = GTK_LABEL (gtk_builder_get_object (self->builder, "network_label"));
-        self->options_button = GTK_BUTTON (gtk_builder_get_object (self->builder, "options_button"));
-        self->provider_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "provider_heading_label"));
-        self->provider_label = GTK_LABEL (gtk_builder_get_object (self->builder, "provider_label"));
-        self->route_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "route_heading_label"));
-        self->route_label = GTK_LABEL (gtk_builder_get_object (self->builder, "route_label"));
-        self->status_label = GTK_LABEL (gtk_builder_get_object (self->builder, "status_label"));
+        gtk_widget_init_template (GTK_WIDGET (self));
 
         self->cancellable = g_cancellable_new ();
 
@@ -821,7 +797,7 @@ net_device_mobile_new (NMClient *client, NMDevice *device, GDBusObject *modem)
         NetDeviceMobile *self;
         NMDeviceModemCapabilities caps;
 
-        self = g_object_new (NET_TYPE_DEVICE_MOBILE, NULL);
+        self = g_object_new (net_device_mobile_get_type (), NULL);
         self->client = g_object_ref (client);
         self->device = g_object_ref (device);
 

@@ -34,7 +34,6 @@
 #include "net-device-ethernet.h"
 #include "net-device-mobile.h"
 #include "net-device-wifi.h"
-#include "net-object.h"
 #include "net-proxy.h"
 #include "net-vpn.h"
 
@@ -59,12 +58,10 @@ struct _CcNetworkPanel
         GPtrArray        *ethernet_devices;
         GPtrArray        *mobile_devices;
         GPtrArray        *vpns;
-        GHashTable       *device_to_widget;
         GHashTable       *nm_device_to_device;
 
         NMClient         *client;
         MMManager        *modem_manager;
-        GtkSizeGroup     *sizegroup;
         gboolean          updating_device;
 
         /* widgets */
@@ -212,7 +209,6 @@ cc_network_panel_dispose (GObject *object)
         g_clear_pointer (&self->ethernet_devices, g_ptr_array_unref);
         g_clear_pointer (&self->mobile_devices, g_ptr_array_unref);
         g_clear_pointer (&self->vpns, g_ptr_array_unref);
-        g_clear_pointer (&self->device_to_widget, g_hash_table_destroy);
         g_clear_pointer (&self->nm_device_to_device, g_hash_table_destroy);
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
@@ -239,7 +235,7 @@ panel_refresh_device_titles (CcNetworkPanel *self)
 {
         g_autoptr(GPtrArray) ndarray = NULL;
         g_autoptr(GPtrArray) nmdarray = NULL;
-        NetObject **devices;
+        GtkWidget **devices;
         NMDevice **nm_devices;
         g_auto(GStrv) titles = NULL;
         guint i, num_devices;
@@ -265,7 +261,7 @@ panel_refresh_device_titles (CcNetworkPanel *self)
         if (ndarray->len == 0)
                 return;
 
-        devices = (NetObject **)ndarray->pdata;
+        devices = (GtkWidget **)ndarray->pdata;
         nm_devices = (NMDevice **)nmdarray->pdata;
         num_devices = ndarray->len;
 
@@ -387,28 +383,19 @@ update_bluetooth_section (CcNetworkPanel *self)
 }
 
 static void
-add_object (CcNetworkPanel *self, NetObject *object, GtkContainer *container)
-{
-        GtkWidget *widget;
-
-        widget = net_object_get_widget (object, self->sizegroup);
-        g_hash_table_insert (self->device_to_widget, object, widget);
-        gtk_container_add (container, widget);
-}
-
-static void
 panel_add_device (CcNetworkPanel *self, NMDevice *device)
 {
         NMDeviceType type;
-        NetObject *net_device;
+        NetDeviceEthernet *device_ethernet;
+        NetDeviceMobile *device_mobile;
+        NetDeviceBluetooth *device_bluetooth;
         g_autoptr(GDBusObject) modem_object = NULL;
 
         if (!nm_device_get_managed (device))
                 return;
 
         /* does already exist */
-        net_device = g_hash_table_lookup (self->nm_device_to_device, device);
-        if (net_device != NULL)
+        if (g_hash_table_lookup (self->nm_device_to_device, device) != NULL)
                 return;
 
         type = nm_device_get_device_type (device);
@@ -420,9 +407,11 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         switch (type) {
         case NM_DEVICE_TYPE_ETHERNET:
         case NM_DEVICE_TYPE_INFINIBAND:
-                net_device = NET_OBJECT (net_device_ethernet_new (self->client, device));
-                add_object (self, net_device, GTK_CONTAINER (self->box_wired));
-                g_ptr_array_add (self->ethernet_devices, net_device);
+                device_ethernet = net_device_ethernet_new (self->client, device);
+                gtk_widget_show (GTK_WIDGET (device_ethernet));
+                gtk_container_add (GTK_CONTAINER (self->box_wired), GTK_WIDGET (device_ethernet));
+                g_ptr_array_add (self->ethernet_devices, device_ethernet);
+                g_hash_table_insert (self->nm_device_to_device, device, device_ethernet);
                 break;
         case NM_DEVICE_TYPE_MODEM:
                 if (g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager1/Modem/")) {
@@ -441,14 +430,23 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                         }
                 }
 
-                net_device = NET_OBJECT (net_device_mobile_new (self->client, device, modem_object));
-                add_object (self, net_device, GTK_CONTAINER (self->box_wired));
-                g_ptr_array_add (self->mobile_devices, net_device);
+                device_mobile = net_device_mobile_new (self->client, device, modem_object);
+                gtk_widget_show (GTK_WIDGET (device_mobile));
+                gtk_container_add (GTK_CONTAINER (self->box_wired), GTK_WIDGET (device_mobile));
+                g_ptr_array_add (self->mobile_devices, device_mobile);
+                g_hash_table_insert (self->nm_device_to_device, device, device_mobile);
                 break;
         case NM_DEVICE_TYPE_BT:
-                net_device = NET_OBJECT (net_device_bluetooth_new (self->client, device));
-                add_object (self, net_device, GTK_CONTAINER (self->box_bluetooth));
-                g_ptr_array_add (self->bluetooth_devices, net_device);
+                device_bluetooth = net_device_bluetooth_new (self->client, device);
+                gtk_widget_show (GTK_WIDGET (device_bluetooth));
+                gtk_container_add (GTK_CONTAINER (self->box_bluetooth), GTK_WIDGET (device_bluetooth));
+                g_ptr_array_add (self->bluetooth_devices, device_bluetooth);
+                g_hash_table_insert (self->nm_device_to_device, device, device_bluetooth);
+
+                /* Update the device_bluetooth section if we're adding a bluetooth
+                 * device. This is a temporary solution though, for these will
+                 * be handled by the future Mobile Broadband panel */
+                update_bluetooth_section (self);
                 break;
 
         /* For Wi-Fi and VPN we handle connections separately; we correctly manage
@@ -460,34 +458,23 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         default:
                 return;
         }
-
-        g_hash_table_insert (self->nm_device_to_device, device, net_device);
-
-        /* Update the device_bluetooth section if we're adding a bluetooth
-         * device. This is a temporary solution though, for these will
-         * be handled by the future Mobile Broadband panel */
-        if (NET_IS_DEVICE_BLUETOOTH (net_device))
-                update_bluetooth_section (self);
 }
 
 static void
 panel_remove_device (CcNetworkPanel *self, NMDevice *device)
 {
-        NetObject *net_device = NULL;
-        GtkWidget *widget;
+        GtkWidget *net_device;
 
         net_device = g_hash_table_lookup (self->nm_device_to_device, device);
         if (net_device == NULL)
                 return;
 
-        widget = g_hash_table_lookup (self->device_to_widget, device);
-        if (widget != NULL)
-                gtk_widget_destroy (widget);
-
         g_ptr_array_remove (self->bluetooth_devices, net_device);
         g_ptr_array_remove (self->ethernet_devices, net_device);
         g_ptr_array_remove (self->mobile_devices, net_device);
         g_hash_table_remove (self->nm_device_to_device, device);
+
+        gtk_widget_destroy (net_device);
 
         /* update vpn widgets */
         update_vpn_section (self);
@@ -722,7 +709,6 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, container_bluetooth);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, empty_listbox);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, sizegroup);
 
         gtk_widget_class_bind_template_callback (widget_class, create_connection_cb);
 }
@@ -741,11 +727,10 @@ cc_network_panel_init (CcNetworkPanel *self)
 
         gtk_widget_init_template (GTK_WIDGET (self));
 
-        self->bluetooth_devices = g_ptr_array_new_with_free_func (g_object_unref);
-        self->ethernet_devices = g_ptr_array_new_with_free_func (g_object_unref);
-        self->mobile_devices = g_ptr_array_new_with_free_func (g_object_unref);
+        self->bluetooth_devices = g_ptr_array_new ();
+        self->ethernet_devices = g_ptr_array_new ();
+        self->mobile_devices = g_ptr_array_new ();
         self->vpns = g_ptr_array_new ();
-        self->device_to_widget = g_hash_table_new (g_direct_hash, g_direct_equal);
         self->nm_device_to_device = g_hash_table_new (g_direct_hash, g_direct_equal);
 
         /* add the virtual proxy device */

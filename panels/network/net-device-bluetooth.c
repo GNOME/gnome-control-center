@@ -33,10 +33,8 @@
 
 struct _NetDeviceBluetooth
 {
-        NetObject     parent;
+        GtkBox        parent;
 
-        GtkBuilder   *builder;
-        GtkBox       *box;
         GtkLabel     *device_label;
         GtkSwitch    *device_off_switch;
         GtkButton    *options_button;
@@ -47,7 +45,7 @@ struct _NetDeviceBluetooth
         gboolean      updating_device;
 };
 
-G_DEFINE_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET_TYPE_OBJECT)
+G_DEFINE_TYPE (NetDeviceBluetooth, net_device_bluetooth, GTK_TYPE_BOX)
 
 void
 net_device_bluetooth_set_show_separator (NetDeviceBluetooth *self,
@@ -55,15 +53,6 @@ net_device_bluetooth_set_show_separator (NetDeviceBluetooth *self,
 {
         /* add widgets to size group */
         gtk_widget_set_visible (GTK_WIDGET (self->separator), show_separator);
-}
-
-static GtkWidget *
-device_bluetooth_get_widget (NetObject    *object,
-                             GtkSizeGroup *heading_size_group)
-{
-        NetDeviceBluetooth *self = NET_DEVICE_BLUETOOTH (object);
-
-        return GTK_WIDGET (self->box);
 }
 
 static void
@@ -161,7 +150,6 @@ net_device_bluetooth_finalize (GObject *object)
 {
         NetDeviceBluetooth *self = NET_DEVICE_BLUETOOTH (object);
 
-        g_clear_object (&self->builder);
         g_clear_object (&self->client);
         g_clear_object (&self->device);
 
@@ -172,31 +160,22 @@ static void
 net_device_bluetooth_class_init (NetDeviceBluetoothClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
         object_class->finalize = net_device_bluetooth_finalize;
-        parent_class->get_widget = device_bluetooth_get_widget;
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-bluetooth.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceBluetooth, device_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceBluetooth, device_off_switch);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceBluetooth, options_button);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceBluetooth, separator);
 }
 
 static void
 net_device_bluetooth_init (NetDeviceBluetooth *self)
 {
-        g_autoptr(GError) error = NULL;
-
-        self->builder = gtk_builder_new ();
-        gtk_builder_add_from_resource (self->builder,
-                                       "/org/gnome/control-center/network/network-bluetooth.ui",
-                                       &error);
-        if (error != NULL) {
-                g_warning ("Could not load interface file: %s", error->message);
-                return;
-        }
-
-        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
-        self->device_label = GTK_LABEL (gtk_builder_get_object (self->builder, "device_label"));
-        self->device_off_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "device_off_switch"));
-        self->options_button = GTK_BUTTON (gtk_builder_get_object (self->builder, "options_button"));
-        self->separator = GTK_SEPARATOR (gtk_builder_get_object (self->builder, "separator"));
+        gtk_widget_init_template (GTK_WIDGET (self));
 
         g_signal_connect_swapped (self->device_off_switch, "notify::active",
                                   G_CALLBACK (device_off_toggled), self);
@@ -210,7 +189,7 @@ net_device_bluetooth_new (NMClient *client, NMDevice *device)
 {
         NetDeviceBluetooth *self;
 
-        self = g_object_new (NET_TYPE_DEVICE_BLUETOOTH, NULL);
+        self = g_object_new (net_device_bluetooth_get_type (), NULL);
         self->client = g_object_ref (client);
         self->device = g_object_ref (device);
 
