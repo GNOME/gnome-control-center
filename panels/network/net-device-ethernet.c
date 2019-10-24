@@ -39,6 +39,7 @@ struct _NetDeviceEthernet
 {
         GtkBox             parent;
 
+        GtkListBox        *connection_list;
         GtkButton         *details_button;
         GtkFrame          *details_frame;
         HdyActionRow      *details_row;
@@ -48,7 +49,6 @@ struct _NetDeviceEthernet
 
         NMClient          *client;
         NMDevice          *device;
-        GtkListBox        *list;
         gboolean           updating_device;
         GHashTable        *connections;
 };
@@ -324,7 +324,7 @@ add_row (NetDeviceEthernet *self, NMConnection *connection)
 
         g_object_set_data (G_OBJECT (row), "connection", connection);
 
-        gtk_container_add (GTK_CONTAINER (self->list), row);
+        gtk_container_add (GTK_CONTAINER (self->connection_list), row);
 }
 
 static void
@@ -342,9 +342,9 @@ populate_ui (NetDeviceEthernet *self)
         NMConnection *connection;
         gint n_connections;
 
-        children = gtk_container_get_children (GTK_CONTAINER (self->list));
+        children = gtk_container_get_children (GTK_CONTAINER (self->connection_list));
         for (c = children; c; c = c->next) {
-                gtk_container_remove (GTK_CONTAINER (self->list), c->data);
+                gtk_container_remove (GTK_CONTAINER (self->connection_list), c->data);
         }
         g_list_free (children);
 
@@ -443,7 +443,7 @@ device_off_switch_changed_cb (NetDeviceEthernet *self)
 }
 
 static void
-connection_activated (NetDeviceEthernet *self, GtkListBoxRow *row)
+connection_list_row_activated_cb (NetDeviceEthernet *self, GtkListBoxRow *row)
 {
         NMConnection *connection;
 
@@ -481,6 +481,7 @@ net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-ethernet.ui");
 
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, connection_list);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_button);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_frame);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_row);
@@ -488,6 +489,7 @@ net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, device_off_switch);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, scrolled_window);
 
+        gtk_widget_class_bind_template_callback (widget_class, connection_list_row_activated_cb);
         gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
         gtk_widget_class_bind_template_callback (widget_class, details_button_clicked_cb);
         gtk_widget_class_bind_template_callback (widget_class, add_profile_button_clicked_cb);
@@ -500,13 +502,7 @@ net_device_ethernet_init (NetDeviceEthernet *self)
 
         self->connections = g_hash_table_new (NULL, NULL);
 
-        self->list = GTK_LIST_BOX (gtk_list_box_new ());
-        gtk_list_box_set_selection_mode (self->list, GTK_SELECTION_NONE);
-        gtk_list_box_set_header_func (self->list, cc_list_box_update_header_func, NULL, NULL);
-        gtk_container_add (GTK_CONTAINER (self->scrolled_window), GTK_WIDGET (self->list));
-        g_signal_connect_swapped (self->list, "row-activated",
-                                  G_CALLBACK (connection_activated), self);
-        gtk_widget_show (GTK_WIDGET (self->list));
+        gtk_list_box_set_header_func (self->connection_list, cc_list_box_update_header_func, NULL, NULL);
 }
 
 NetDeviceEthernet *
