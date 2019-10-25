@@ -244,6 +244,8 @@ get_renderer_from_helper (gboolean discrete_gpu)
     {
       envp = g_get_environ ();
       envp = g_environ_setenv (envp, "DRI_PRIME", "1", TRUE);
+      envp = g_environ_setenv (envp, "__NV_PRIME_RENDER_OFFLOAD", "1", TRUE);
+      envp = g_environ_setenv (envp, "__GLX_VENDOR_LIBRARY_NAME", "nvidia", TRUE);
     }
 
   if (!g_spawn_sync (NULL, (char **) argv, envp, 0, NULL, NULL, &renderer, NULL, &status, &error))
