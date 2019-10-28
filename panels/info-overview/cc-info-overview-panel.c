@@ -304,40 +304,23 @@ has_dual_gpu (void)
 static gchar *
 get_graphics_hardware_string (void)
 {
-  GdkDisplay *display;
+  g_autofree char *discrete_renderer = NULL;
+  g_autofree char *renderer = NULL;
 
-  display = gdk_display_get_default ();
+  renderer = get_renderer_from_session ();
+  if (!renderer)
+    renderer = get_renderer_from_helper (FALSE);
+  if (has_dual_gpu ())
+    discrete_renderer = get_renderer_from_helper (TRUE);
 
-#if defined(GDK_WINDOWING_X11) || defined(GDK_WINDOWING_WAYLAND)
-  gboolean x11_or_wayland = FALSE;
-#ifdef GDK_WINDOWING_X11
-  x11_or_wayland = GDK_IS_X11_DISPLAY (display);
-#endif
-#ifdef GDK_WINDOWING_WAYLAND
-  x11_or_wayland = x11_or_wayland || GDK_IS_WAYLAND_DISPLAY (display);
-#endif
-
-  if (x11_or_wayland)
+  if (renderer != NULL)
     {
-      g_autofree char *discrete_renderer = NULL;
-      g_autofree char *renderer = NULL;
-
-      renderer = get_renderer_from_session ();
-      if (!renderer)
-        renderer = get_renderer_from_helper (FALSE);
-      if (has_dual_gpu ())
-        discrete_renderer = get_renderer_from_helper (TRUE);
-
-      if (renderer != NULL)
-        {
-          if (discrete_renderer != NULL)
-            return g_strdup_printf ("%s / %s",
-                                    renderer,
-                                    discrete_renderer);
-          return g_strdup (renderer);
-        }
+      if (discrete_renderer != NULL)
+        return g_strdup_printf ("%s / %s",
+                                renderer,
+                                discrete_renderer);
+      return g_strdup (renderer);
     }
-#endif
 
   return g_strdup (_("Unknown"));
 }
