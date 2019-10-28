@@ -231,8 +231,10 @@ get_renderer_from_session (void)
   return renderer;
 }
 
+/* @env is an array of strings with each pair of strings being the
+ * key followed by the value */
 static char *
-get_renderer_from_helper (gboolean discrete_gpu)
+get_renderer_from_helper (const char **env)
 {
   int status;
   char *argv[] = { GNOME_SESSION_DIR "/gnome-session-check-accelerated", NULL };
@@ -240,17 +242,17 @@ get_renderer_from_helper (gboolean discrete_gpu)
   g_autofree char *renderer = NULL;
   g_autoptr(GError) error = NULL;
 
-  if (discrete_gpu)
+  if (env != NULL)
     {
+      guint i;
       envp = g_get_environ ();
-      envp = g_environ_setenv (envp, "DRI_PRIME", "1", TRUE);
+      for (i = 0; env[i] != NULL; i = i + 2)
+        envp = g_environ_setenv (envp, env[i], env[i+1], TRUE);
     }
 
   if (!g_spawn_sync (NULL, (char **) argv, envp, 0, NULL, NULL, &renderer, NULL, &status, &error))
     {
-      g_debug ("Failed to get %s GPU: %s",
-               discrete_gpu ? "discrete" : "integrated",
-               error->message);
+      g_debug ("Failed to get GPU: %s", error->message);
       return NULL;
     }
 
@@ -263,13 +265,40 @@ get_renderer_from_helper (gboolean discrete_gpu)
   return info_cleanup (renderer);
 }
 
-static gboolean
-has_dual_gpu (void)
+typedef struct {
+	char *name;
+	gboolean is_default;
+} GpuData;
+
+static int
+gpu_data_sort (gconstpointer a, gconstpointer b)
+{
+  GpuData *gpu_a = (GpuData *) a;
+  GpuData *gpu_b = (GpuData *) b;
+
+  if (gpu_a->is_default)
+    return 1;
+  if (gpu_b->is_default)
+    return -1;
+  return 0;
+}
+
+static void
+gpu_data_free (GpuData *data)
+{
+  g_free (data->name);
+  g_free (data);
+}
+
+static char *
+get_renderer_from_switcheroo (void)
 {
   g_autoptr(GDBusProxy) switcheroo_proxy = NULL;
-  g_autoptr(GVariant) dualgpu_variant = NULL;
-  gboolean ret;
+  g_autoptr(GVariant) variant = NULL;
   g_autoptr(GError) error = NULL;
+  GString *renderers_string;
+  guint i, num_children;
+  GSList *renderers, *l;
 
   switcheroo_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                     G_DBUS_PROXY_FLAGS_NONE,
@@ -282,23 +311,71 @@ has_dual_gpu (void)
     {
       g_debug ("Unable to connect to create a proxy for net.hadess.SwitcherooControl: %s",
                error->message);
-      return FALSE;
+      return NULL;
     }
 
-  dualgpu_variant = g_dbus_proxy_get_cached_property (switcheroo_proxy, "HasDualGpu");
+  variant = g_dbus_proxy_get_cached_property (switcheroo_proxy, "GPUs");
 
-  if (!dualgpu_variant)
+  if (!variant)
     {
-      g_debug ("Unable to retrieve net.hadess.SwitcherooControl.HasDualGpu property, the daemon is likely not running");
-      return FALSE;
+      g_debug ("Unable to retrieve net.hadess.SwitcherooControl.GPUs property, the daemon is likely not running");
+      return NULL;
     }
 
-  ret = g_variant_get_boolean (dualgpu_variant);
+  renderers_string = g_string_new (NULL);
+  num_children = g_variant_n_children (variant);
+  renderers = NULL;
+  for (i = 0; i < num_children; i++)
+    {
+      g_autoptr(GVariant) gpu;
+      g_autoptr(GVariant) name = NULL;
+      g_autoptr(GVariant) env = NULL;
+      g_autoptr(GVariant) is_default = NULL;
+      const char *name_s, **env_s;
+      g_autofree char *renderer = NULL;
+      GpuData *gpu_data;
 
-  if (ret)
-    g_debug ("Dual-GPU machine detected");
+      gpu = g_variant_get_child_value (variant, i);
+      if (!gpu)
+        continue;
 
-  return ret;
+      name = g_variant_lookup_value (gpu, "Name", NULL);
+      env = g_variant_lookup_value (gpu, "Environment", NULL);
+      if (!name || !env)
+        continue;
+      name_s = g_variant_get_string (name, NULL);
+      g_debug ("Getting renderer from helper for GPU '%s'", name_s);
+      env_s = g_variant_get_strv (env, NULL);
+      renderer = get_renderer_from_helper (env_s);
+      g_free (env_s);
+
+      /* We could give up if we don't have a renderer, but that
+       * might just mean gnome-session isn't installed. We fall back
+       * to the device name in udev instead, which is better than nothing */
+
+      gpu_data = g_new0 (GpuData, 1);
+      gpu_data->name = g_strdup (renderer ? renderer : name_s);
+      gpu_data->is_default = is_default ? g_variant_get_boolean (is_default) : FALSE;
+      renderers = g_slist_prepend (renderers, gpu_data);
+    }
+
+  renderers = g_slist_sort (renderers, gpu_data_sort);
+  for (l = renderers; l != NULL; l = l->next)
+    {
+      GpuData *data = l->data;
+      if (renderers_string->len > 0)
+        g_string_append (renderers_string, " / ");
+      g_string_append (renderers_string, data->name);
+    }
+  g_slist_free_full (renderers, (GDestroyNotify) gpu_data_free);
+
+  if (renderers_string->len == 0)
+    {
+      g_string_free (renderers_string, TRUE);
+      return NULL;
+    }
+
+  return g_string_free (renderers_string, FALSE);
 }
 
 static gchar *
@@ -307,22 +384,14 @@ get_graphics_hardware_string (void)
   g_autofree char *discrete_renderer = NULL;
   g_autofree char *renderer = NULL;
 
-  renderer = get_renderer_from_session ();
+  renderer = get_renderer_from_switcheroo ();
   if (!renderer)
-    renderer = get_renderer_from_helper (FALSE);
-  if (has_dual_gpu ())
-    discrete_renderer = get_renderer_from_helper (TRUE);
-
-  if (renderer != NULL)
-    {
-      if (discrete_renderer != NULL)
-        return g_strdup_printf ("%s / %s",
-                                renderer,
-                                discrete_renderer);
-      return g_strdup (renderer);
-    }
-
-  return g_strdup (_("Unknown"));
+    renderer = get_renderer_from_session ();
+  if (!renderer)
+    renderer = get_renderer_from_helper (NULL);
+  if (!renderer)
+    return g_strdup (_("Unknown"));
+  return g_strdup (renderer);
 }
 
 static char *
