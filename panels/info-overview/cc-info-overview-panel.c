@@ -60,6 +60,7 @@ struct _CcInfoOverviewPanel
   GtkEntry        *device_name_entry;
   CcListRow       *disk_row;
   CcListRow       *gnome_version_row;
+  CcListRow       *windowing_system_row;
   CcListRow       *graphics_row;
   GtkListBox      *hardware_box;
   GtkDialog       *hostname_editor;
@@ -588,6 +589,24 @@ info_overview_panel_setup_virt (CcInfoOverviewPanel *self)
   set_virtualization_label (self, g_variant_get_string (inner, NULL));
 }
 
+static const char *
+get_windowing_system (void)
+{
+  GdkDisplay *display;
+
+  display = gdk_display_get_default ();
+
+#if defined(GDK_WINDOWING_X11)
+  if (GDK_IS_X11_DISPLAY (display))
+    return N_("X11");
+#endif /* GDK_WINDOWING_X11 */
+#if defined(GDK_WINDOWING_WAYLAND)
+  if (GDK_IS_WAYLAND_DISPLAY (display))
+    return N_("Wayland");
+#endif /* GDK_WINDOWING_WAYLAND */
+  return N_("Unknown");
+}
+
 static void
 info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 {
@@ -602,6 +621,9 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 
   if (load_gnome_version (&gnome_version, NULL, NULL))
     cc_list_row_set_secondary_label (self->gnome_version_row, gnome_version);
+
+  cc_list_row_set_secondary_label (self->windowing_system_row,
+                                   _(get_windowing_system ()));
 
   glibtop_get_mem (&mem);
   memory_text = g_format_size_full (mem.total, G_FORMAT_SIZE_IEC_UNITS);
@@ -712,6 +734,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, device_name_entry);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, disk_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, gnome_version_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, windowing_system_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, graphics_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hardware_box);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_editor);
