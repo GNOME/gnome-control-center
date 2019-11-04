@@ -72,6 +72,7 @@ struct _CcInfoOverviewPanel
   CcListRow       *processor_row;
   CcListRow       *software_updates_row;
   CcListRow       *virtualization_row;
+  CcListRow       *windowing_system_row;
 };
 
 typedef struct
@@ -588,6 +589,24 @@ info_overview_panel_setup_virt (CcInfoOverviewPanel *self)
   set_virtualization_label (self, g_variant_get_string (inner, NULL));
 }
 
+static const char *
+get_windowing_system (void)
+{
+  GdkDisplay *display;
+
+  display = gdk_display_get_default ();
+
+#if defined(GDK_WINDOWING_X11)
+  if (GDK_IS_X11_DISPLAY (display))
+    return _("X11");
+#endif /* GDK_WINDOWING_X11 */
+#if defined(GDK_WINDOWING_WAYLAND)
+  if (GDK_IS_WAYLAND_DISPLAY (display))
+    return _("Wayland");
+#endif /* GDK_WINDOWING_WAYLAND */
+  return C_("Windowing system (Wayland, X11, or Unknown)", "Unknown");
+}
+
 static void
 info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 {
@@ -602,6 +621,8 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 
   if (load_gnome_version (&gnome_version, NULL, NULL))
     cc_list_row_set_secondary_label (self->gnome_version_row, gnome_version);
+
+  cc_list_row_set_secondary_label (self->windowing_system_row, get_windowing_system ());
 
   glibtop_get_mem (&mem);
   memory_text = g_format_size_full (mem.total, G_FORMAT_SIZE_IEC_UNITS);
@@ -724,6 +745,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, processor_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, software_updates_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, virtualization_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, windowing_system_row);
 
   gtk_widget_class_bind_template_callback (widget_class, cc_info_panel_row_activated_cb);
 
