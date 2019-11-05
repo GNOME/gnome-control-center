@@ -133,6 +133,7 @@ upower_glib_dep = dependency('upower-glib', version: '>= 0.99.8')
 gudev_dep = dependency('gudev-1.0')
 x11_dep = dependency('x11')
 xi_dep = dependency('xi', version: '>= 1.2')
+epoxy_dep = dependency('epoxy')
 
 m_dep = cc.find_library('m')
 
@@ -238,6 +239,7 @@ gnome_session_libexecdir = get_option('gnome_session_libexecdir')
 if gnome_session_libexecdir == ''
   gnome_session_libexecdir = control_center_libexecdir
 endif
+
 
 gnome = import('gnome')
 i18n = import('i18n')
