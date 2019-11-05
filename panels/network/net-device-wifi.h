@@ -21,17 +21,26 @@
 
 #pragma once
 
-#include <glib-object.h>
-
-#include "net-device.h"
+#include <gtk/gtk.h>
+#include <shell/cc-panel.h>
+#include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-#define NET_TYPE_DEVICE_WIFI          (net_device_wifi_get_type ())
-G_DECLARE_FINAL_TYPE (NetDeviceWifi, net_device_wifi, NET, DEVICE_WIFI, NetDevice)
+G_DECLARE_FINAL_TYPE (NetDeviceWifi, net_device_wifi, NET, DEVICE_WIFI, GtkStack)
 
-GtkWidget       *net_device_wifi_get_header_widget (NetDeviceWifi *device_wifi);
-GtkWidget       *net_device_wifi_get_title_widget  (NetDeviceWifi *device_wifi);
+NetDeviceWifi *net_device_wifi_new               (CcPanel       *panel,
+                                                  NMClient      *client,
+                                                  NMDevice      *device);
+
+NMDevice      *net_device_wifi_get_device        (NetDeviceWifi *device);
+
+void           net_device_wifi_set_title         (NetDeviceWifi *device,
+                                                  const gchar   *title);
+
+GtkWidget     *net_device_wifi_get_header_widget (NetDeviceWifi *device);
+
+GtkWidget     *net_device_wifi_get_title_widget  (NetDeviceWifi *device);
 
 G_END_DECLS
 

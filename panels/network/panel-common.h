@@ -28,4 +28,10 @@ G_BEGIN_DECLS
 gchar           *panel_device_status_to_localized_string       (NMDevice *nm_device,
                                                                 const gchar *speed);
 
+NMConnection *net_device_get_find_connection   (NMClient *client,
+                                                NMDevice *device);
+
+GSList       *net_device_get_valid_connections (NMClient *client,
+                                                NMDevice *device);
+
 G_END_DECLS

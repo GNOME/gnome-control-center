@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkNotebook" id="notebook">
-    <property name="visible">True</property>
-    <property name="can_focus">True</property>
-    <property name="show_tabs">False</property>
-    <property name="show_border">False</property>
+  <template class="NetDeviceWifi" parent="GtkStack">
     <child>
       <object class="GtkBox" id="listbox_box">
         <property name="visible">True</property>
@@ -14,7 +10,7 @@
       </object>
     </child>
     <child>
-      <object class="GtkBox">
+      <object class="GtkBox" id="hotspot_box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="border_width">12</property>
@@ -77,6 +73,7 @@
                 <property name="can_focus">True</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
+                <signal name="notify::active" handler="hotspot_off_switch_changed_cb" object="NetDeviceWifi" swapped="yes"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -220,7 +217,7 @@
         <property name="position">1</property>
       </packing>
     </child>
-  </object>
+  </template>
 
   <!-- Center widget -->
   <object class="GtkBox" id="center_box">
@@ -261,6 +258,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="valign">center</property>
+        <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceWifi" swapped="yes"/>
         <child internal-child="accessible">
           <object class="AtkObject">
             <property name="accessible-name" translatable="yes">Turn Wi-Fi off</property>
@@ -294,13 +292,14 @@
         <property name="spacing">6</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkModelButton" id="connect_hidden_button">
+          <object class="GtkModelButton">
             <property name="label" translatable="yes">_Connect to Hidden Network…</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="use_underline">True</property>
             <property name="xalign">0.0</property>
+            <signal name="clicked" handler="connect_hidden_button_clicked_cb" object="NetDeviceWifi" swapped="yes"/>
           </object>
         </child>
         <child>
@@ -311,16 +310,18 @@
             <property name="receives_default">True</property>
             <property name="use_underline">True</property>
             <property name="xalign">0.0</property>
+            <signal name="clicked" handler="start_hotspot_button_clicked_cb" object="NetDeviceWifi" swapped="yes"/>
           </object>
         </child>
         <child>
-          <object class="GtkModelButton" id="history_button">
+          <object class="GtkModelButton">
             <property name="label" translatable="yes">_Known Wi-Fi Networks</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="use_underline">True</property>
             <property name="xalign">0.0</property>
+            <signal name="clicked" handler="history_button_clicked_cb" object="NetDeviceWifi" swapped="yes"/>
           </object>
         </child>
       </object>

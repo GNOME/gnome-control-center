@@ -19,7 +19,6 @@
 
 #include "cc-network-resources.h"
 #include "cc-wifi-panel.h"
-#include "net-device.h"
 #include "net-device-wifi.h"
 #include "network-dialogs.h"
 
@@ -52,7 +51,6 @@ struct _CcWifiPanel
   GtkStack           *center_stack;
   GtkStack           *header_stack;
   GtkStack           *main_stack;
-  GtkSizeGroup       *sizegroup;
   GtkWidget          *spinner;
   GtkStack           *stack;
 
@@ -149,25 +147,22 @@ add_wifi_device (CcWifiPanel *self,
                  NMDevice    *device)
 {
   GtkWidget *header_widget;
-  NetObject *net_device;
+  NetDeviceWifi *net_device;
 
   /* Only manage Wi-Fi devices */
   if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
     return;
 
   /* Create the NetDevice */
-  net_device = g_object_new (NET_TYPE_DEVICE_WIFI,
-                             "panel", self,
-                             "cancellable", self->cancellable,
-                             "client", self->client,
-                             "nm-device", device,
-                             "id", nm_device_get_udi (device),
-                             NULL);
+  net_device = net_device_wifi_new (CC_PANEL (self),
+                                    self->client,
+                                    device);
+  gtk_widget_show (GTK_WIDGET (net_device));
 
   /* And add to the header widgets */
-  header_widget = net_device_wifi_get_header_widget (NET_DEVICE_WIFI (net_device));
+  header_widget = net_device_wifi_get_header_widget (net_device);
 
-  gtk_stack_add_named (self->header_stack, header_widget, net_object_get_id (net_device));
+  gtk_stack_add_named (self->header_stack, header_widget, nm_device_get_udi (device));
 
   /* Setup custom title properties */
   g_ptr_array_add (self->devices, net_device);
@@ -175,7 +170,9 @@ add_wifi_device (CcWifiPanel *self,
   update_devices_names (self);
 
   /* Needs to be added after the device is added to the self->devices array */
-  net_object_add_to_stack (net_device, self->stack, self->sizegroup);
+  gtk_stack_add_titled (self->stack, GTK_WIDGET (net_device),
+                        nm_device_get_udi (device),
+                        nm_device_get_description (device));
 }
 
 static void
@@ -269,15 +266,15 @@ update_devices_names (CcWifiPanel *self)
   if (number_of_devices == 1)
     {
       GtkWidget *title_widget;
-      NetObject *net_device;
+      NetDeviceWifi *net_device;
 
       net_device = g_ptr_array_index (self->devices, 0);
-      title_widget = net_device_wifi_get_title_widget (NET_DEVICE_WIFI (net_device));
+      title_widget = net_device_wifi_get_title_widget (net_device);
 
       gtk_stack_add_named (self->center_stack, title_widget, "single");
       gtk_stack_set_visible_child_name (self->center_stack, "single");
 
-      net_object_set_title (net_device, _("Wi-Fi"));
+      net_device_wifi_set_title (net_device, _("Wi-Fi"));
     }
   else
     {
@@ -286,13 +283,13 @@ update_devices_names (CcWifiPanel *self)
 
       for (i = 0; i < number_of_devices; i++)
         {
-          NetObject *object;
+          NetDeviceWifi *net_device;
           NMDevice *device;
 
-          object = g_ptr_array_index (self->devices, i);
-          device = net_device_get_nm_device (NET_DEVICE (object));
+          net_device = g_ptr_array_index (self->devices, i);
+          device = net_device_wifi_get_device (net_device);
 
-          net_object_set_title (object, nm_device_get_description (device));
+          net_device_wifi_set_title (net_device, nm_device_get_description (device));
         }
 
       /* Remove the widget at the "single" page */
@@ -321,15 +318,14 @@ reset_command_line_args (CcWifiPanel *self)
 }
 
 static gboolean
-handle_argv_for_device (CcWifiPanel *self,
-                        NetObject   *net_object)
+handle_argv_for_device (CcWifiPanel *self, NetDeviceWifi *net_device)
 {
   GtkWidget *toplevel;
   NMDevice *device;
   gboolean ret;
 
   toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
-  device = net_device_get_nm_device (NET_DEVICE (net_object));
+  device = net_device_wifi_get_device (net_device);
   ret = FALSE;
 
   if (self->arg_operation == OPERATION_CREATE_WIFI)
@@ -354,7 +350,7 @@ handle_argv_for_device (CcWifiPanel *self,
         }
       else if (self->arg_operation == OPERATION_SHOW_DEVICE)
         {
-          gtk_stack_set_visible_child_name (self->stack, net_object_get_id (net_object));
+          gtk_stack_set_visible_child_name (self->stack, nm_device_get_udi (device));
           ret = TRUE;
         }
     }
@@ -450,11 +446,11 @@ device_removed_cb (CcWifiPanel *self, NMDevice *device)
   /* Remove from the devices list */
   for (i = 0; i < self->devices->len; i++)
     {
-      NetObject *object = g_ptr_array_index (self->devices, i);
+      NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);
 
-      if (g_strcmp0 (net_object_get_id (object), id) == 0)
+      if (net_device_wifi_get_device (net_device) == device)
         {
-          g_ptr_array_remove (self->devices, object);
+          g_ptr_array_remove (self->devices, net_device);
           break;
         }
     }
@@ -547,11 +543,11 @@ on_stack_visible_child_changed_cb (GtkStack    *stack,
   visible_device_id = gtk_stack_get_visible_child_name (stack);
   for (i = 0; i < self->devices->len; i++)
     {
-      NetObject *object = g_ptr_array_index (self->devices, i);
+      NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);
 
-      if (g_strcmp0 (net_object_get_id (object), visible_device_id) == 0)
+      if (g_strcmp0 (nm_device_get_udi (net_device_wifi_get_device (net_device)), visible_device_id) == 0)
         {
-          self->spinner_binding = g_object_bind_property (object,
+          self->spinner_binding = g_object_bind_property (net_device,
                                                           "scanning",
                                                           self->spinner,
                                                           "active",
@@ -698,7 +694,6 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, main_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_switch);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_widget);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, spinner);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, stack);
 
@@ -716,7 +711,7 @@ cc_wifi_panel_init (CcWifiPanel *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->cancellable = g_cancellable_new ();
-  self->devices = g_ptr_array_new_with_free_func (g_object_unref);
+  self->devices = g_ptr_array_new ();
 
   /* Create and store a NMClient instance if it doesn't exist yet */
   if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT))

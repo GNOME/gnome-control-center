@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkBox" id="box">
-    <property name="visible">True</property>
+  <template class="NetDeviceEthernet" parent="GtkBox">
     <property name="can_focus">False</property>
     <property name="spacing">6</property>
     <property name="orientation">vertical</property>
@@ -24,11 +23,12 @@
           </object>
         </child>
         <child>
-          <object class="GtkButton" id="add_profile_button">
+          <object class="GtkButton">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="relief">none</property>
+            <signal name="clicked" handler="add_profile_button_clicked_cb" object="NetDeviceEthernet" swapped="yes"/>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
@@ -55,6 +55,13 @@
             <property name="hscrollbar_policy">never</property>
             <property name="vscrollbar_policy">never</property>
             <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkListBox" id="connection_list">
+                <property name="visible">True</property>
+                <property name="selection-mode">none</property>
+                <signal name="row-activated" handler="connection_list_row_activated_cb" object="NetDeviceEthernet" swapped="yes"/>
+              </object>
+            </child>
           </object>
         </child>
 
@@ -82,6 +89,7 @@
                         <property name="receives_default">True</property>
                         <property name="halign">end</property>
                         <property name="valign">center</property>
+                        <signal name="clicked" handler="details_button_clicked_cb" object="NetDeviceEthernet" swapped="yes"/>
                         <child>
                           <object class="GtkImage">
                             <property name="visible">True</property>
@@ -102,6 +110,7 @@
                         <property name="can_focus">True</property>
                         <property name="halign">end</property>
                         <property name="valign">center</property>
+                        <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceEthernet" swapped="yes"/>
                       </object>
                     </child>
                   </object>
@@ -112,5 +121,5 @@
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>

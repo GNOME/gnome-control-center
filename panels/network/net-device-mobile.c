@@ -37,10 +37,8 @@ static void nm_device_mobile_refresh_ui (NetDeviceMobile *self);
 
 struct _NetDeviceMobile
 {
-        NetDevice   parent;
+        GtkBox        parent;
 
-        GtkBuilder   *builder;
-        GtkBox       *box;
         GtkLabel     *device_label;
         GtkSwitch    *device_off_switch;
         GtkLabel     *dns_heading_label;
@@ -61,6 +59,11 @@ struct _NetDeviceMobile
         GtkLabel     *route_label;
         GtkLabel     *status_label;
 
+        NMClient     *client;
+        NMDevice     *device;
+        GDBusObject  *modem;
+        GCancellable *cancellable;
+
         gboolean    updating_device;
 
         /* Old MM < 0.7 support */
@@ -80,28 +83,7 @@ enum {
         COLUMN_LAST
 };
 
-enum {
-        PROP_0,
-        PROP_MODEM_OBJECT,
-        PROP_LAST
-};
-
-G_DEFINE_TYPE (NetDeviceMobile, net_device_mobile, NET_TYPE_DEVICE)
-
-static GtkWidget *
-device_mobile_proxy_add_to_stack (NetObject    *object,
-                                  GtkStack     *stack,
-                                  GtkSizeGroup *heading_size_group)
-{
-        NetDeviceMobile *self = NET_DEVICE_MOBILE (object);
-
-        /* add widgets to size group */
-        gtk_size_group_add_widget (heading_size_group, GTK_WIDGET (self->imei_heading_label));
-        gtk_size_group_add_widget (heading_size_group, GTK_WIDGET (self->network_label));
-
-        gtk_stack_add_named (stack, GTK_WIDGET (self->box), net_object_get_id (object));
-        return GTK_WIDGET (self->box);
-}
+G_DEFINE_TYPE (NetDeviceMobile, net_device_mobile, GTK_TYPE_BOX)
 
 static void
 connection_activate_cb (GObject *source_object,
@@ -117,16 +99,13 @@ connection_activate_cb (GObject *source_object,
 }
 
 static void
-mobile_connection_changed_cb (NetDeviceMobile *self)
+network_combo_changed_cb (NetDeviceMobile *self)
 {
         gboolean ret;
         g_autofree gchar *object_path = NULL;
         GtkTreeIter iter;
         GtkTreeModel *model;
         NMConnection *connection;
-        NMDevice *device;
-        NMClient *client;
-        CcNetworkPanel *panel;
         GtkWidget *toplevel;
 
         if (self->updating_device)
@@ -136,33 +115,25 @@ mobile_connection_changed_cb (NetDeviceMobile *self)
         if (!ret)
                 return;
 
-        device = net_device_get_nm_device (NET_DEVICE (self));
-        if (device == NULL)
-                return;
-        client = net_object_get_client (NET_OBJECT (self));
-
         /* get entry */
         model = gtk_combo_box_get_model (self->network_combo);
         gtk_tree_model_get (model, &iter,
                             COLUMN_ID, &object_path,
                             -1);
         if (g_strcmp0 (object_path, NULL) == 0) {
-                panel = net_object_get_panel (NET_OBJECT (self));
-                toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
-                cc_network_panel_connect_to_3g_network (toplevel,
-                                                        client,
-                                                        device);
+                toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+                cc_network_panel_connect_to_3g_network (toplevel, self->client, self->device);
                 return;
         }
 
         /* activate the connection */
         g_debug ("try to switch to connection %s", object_path);
-        connection = (NMConnection*) nm_client_get_connection_by_path (client, object_path);
+        connection = (NMConnection*) nm_client_get_connection_by_path (self->client, object_path);
         if (connection != NULL) {
-                nm_device_disconnect (device, NULL, NULL);
-                nm_client_activate_connection_async (client,
+                nm_device_disconnect (self->device, NULL, NULL);
+                nm_client_activate_connection_async (self->client,
                                                      connection,
-                                                     device, NULL, NULL,
+                                                     self->device, NULL, NULL,
                                                      connection_activate_cb,
                                                      self);
                 return;
@@ -173,16 +144,11 @@ static void
 mobilebb_enabled_toggled (NetDeviceMobile *self)
 {
         gboolean enabled = FALSE;
-        NMDevice *device;
 
-        device = net_device_get_nm_device (NET_DEVICE (self));
-        if (nm_device_get_device_type (device) != NM_DEVICE_TYPE_MODEM)
-                return;
-
-        if (nm_client_wwan_get_enabled (net_object_get_client (NET_OBJECT (self)))) {
+        if (nm_client_wwan_get_enabled (self->client)) {
                 NMDeviceState state;
 
-                state = nm_device_get_state (device);
+                state = nm_device_get_state (self->device);
                 if (state == NM_DEVICE_STATE_UNKNOWN ||
                     state == NM_DEVICE_STATE_UNMANAGED ||
                     state == NM_DEVICE_STATE_UNAVAILABLE ||
@@ -212,7 +178,7 @@ device_add_device_connections (NetDeviceMobile *self,
         NMConnection *connection;
 
         /* get the list of available connections for this device */
-        list = net_device_get_valid_connections (NET_DEVICE (self));
+        list = net_device_get_valid_connections (self->client, nm_device);
         gtk_list_store_clear (liststore);
         active_connection = nm_device_get_active_connection (nm_device);
         for (l = list; l; l = g_slist_next (l)) {
@@ -381,29 +347,23 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
 {
         gboolean is_connected;
         NMDeviceModemCapabilities caps;
-        NMDevice *nm_device;
         g_autofree gchar *status = NULL;
         NMIPConfig *ipv4_config = NULL, *ipv6_config = NULL;
         gboolean have_ipv4_address = FALSE, have_ipv6_address = FALSE;
-
-        nm_device = net_device_get_nm_device (NET_DEVICE (self));
-
-        /* set device kind */
-        g_object_bind_property (self, "title", self->device_label, "label", 0);
 
         /* set up the device on/off switch */
         gtk_widget_show (GTK_WIDGET (self->device_off_switch));
         mobilebb_enabled_toggled (self);
 
         /* set device state, with status */
-        status = panel_device_status_to_localized_string (nm_device, NULL);
+        status = panel_device_status_to_localized_string (self->device, NULL);
         gtk_label_set_label (self->status_label, status);
 
         /* sensitive for other connection types if the device is currently connected */
-        is_connected = net_device_get_find_connection (NET_DEVICE (self)) != NULL;
+        is_connected = net_device_get_find_connection (self->client, self->device) != NULL;
         gtk_widget_set_sensitive (GTK_WIDGET (self->options_button), is_connected);
 
-        caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
+        caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (self->device));
         if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
             (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) ||
             (caps & NM_DEVICE_MODEM_CAPABILITY_LTE)) {
@@ -413,11 +373,11 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
 
         /* add possible connections to device */
         device_add_device_connections (self,
-                                       nm_device,
+                                       self->device,
                                        self->mobile_connections_list_store,
                                        self->network_combo);
 
-        ipv4_config = nm_device_get_ip4_config (nm_device);
+        ipv4_config = nm_device_get_ip4_config (self->device);
         if (ipv4_config != NULL) {
                 GPtrArray *addresses;
                 const gchar *ipv4_text = NULL;
@@ -450,7 +410,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
                 gtk_widget_hide (GTK_WIDGET (self->route_label));
         }
 
-        ipv6_config = nm_device_get_ip6_config (nm_device);
+        ipv6_config = nm_device_get_ip6_config (self->device);
         if (ipv6_config != NULL) {
                 GPtrArray *addresses;
                 const gchar *ipv6_text = NULL;
@@ -478,48 +438,36 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
 }
 
 static void
-device_mobile_refresh (NetObject *object)
-{
-        NetDeviceMobile *self = NET_DEVICE_MOBILE (object);
-        nm_device_mobile_refresh_ui (self);
-}
-
-static void
-device_off_toggled (NetDeviceMobile *self)
+device_off_switch_changed_cb (NetDeviceMobile *self)
 {
         const GPtrArray *acs;
         gboolean active;
         gint i;
         NMActiveConnection *a;
         NMConnection *connection;
-        NMClient *client;
 
         if (self->updating_device)
                 return;
 
+        connection = net_device_get_find_connection (self->client, self->device);
+        if (connection == NULL)
+                return;
+
         active = gtk_switch_get_active (self->device_off_switch);
         if (active) {
-                client = net_object_get_client (NET_OBJECT (self));
-                connection = net_device_get_find_connection (NET_DEVICE (self));
-                if (connection == NULL)
-                        return;
-                nm_client_activate_connection_async (client,
+                nm_client_activate_connection_async (self->client,
                                                      connection,
-                                                     net_device_get_nm_device (NET_DEVICE (self)),
+                                                     self->device,
                                                      NULL, NULL, NULL, NULL);
         } else {
                 const gchar *uuid;
 
-                connection = net_device_get_find_connection (NET_DEVICE (self));
-                if (connection == NULL)
-                        return;
                 uuid = nm_connection_get_uuid (connection);
-                client = net_object_get_client (NET_OBJECT (self));
-                acs = nm_client_get_active_connections (client);
+                acs = nm_client_get_active_connections (self->client);
                 for (i = 0; acs && i < acs->len; i++) {
                         a = (NMActiveConnection*)acs->pdata[i];
                         if (strcmp (nm_active_connection_get_uuid (a), uuid) == 0) {
-                                nm_client_deactivate_connection (client, a, NULL, NULL);
+                                nm_client_deactivate_connection (self->client, a, NULL, NULL);
                                 break;
                         }
                 }
@@ -527,14 +475,14 @@ device_off_toggled (NetDeviceMobile *self)
 }
 
 static void
-edit_connection (NetDeviceMobile *self)
+options_button_clicked_cb (NetDeviceMobile *self)
 {
         const gchar *uuid;
         g_autofree gchar *cmdline = NULL;
         g_autoptr(GError) error = NULL;
         NMConnection *connection;
 
-        connection = net_device_get_find_connection (NET_DEVICE (self));
+        connection = net_device_get_find_connection (self->client, self->device);
         uuid = nm_connection_get_uuid (connection);
         cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
         g_debug ("Launching '%s'\n", cmdline);
@@ -754,134 +702,9 @@ device_mobile_device_got_modem_manager_cdma_cb (GObject      *source_object,
 }
 
 static void
-net_device_mobile_constructed (GObject *object)
-{
-        GCancellable *cancellable;
-        NetDeviceMobile *self = NET_DEVICE_MOBILE (object);
-        NMClient *client;
-        NMDevice *device;
-        NMDeviceModemCapabilities caps;
-
-        G_OBJECT_CLASS (net_device_mobile_parent_class)->constructed (object);
-
-        device = net_device_get_nm_device (NET_DEVICE (self));
-        cancellable = net_object_get_cancellable (NET_OBJECT (self));
-
-        caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
-
-        /* Only load proxies if we have broadband modems of the OLD ModemManager interface */
-        if (g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager/") &&
-            ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
-             (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) ||
-             (caps & NM_DEVICE_MODEM_CAPABILITY_LTE))) {
-                g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
-                                          G_DBUS_PROXY_FLAGS_NONE,
-                                          NULL,
-                                          "org.freedesktop.ModemManager",
-                                          nm_device_get_udi (device),
-                                          "org.freedesktop.ModemManager.Modem",
-                                          cancellable,
-                                          device_mobile_device_got_modem_manager_cb,
-                                          self);
-
-                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
-                    (caps & NM_DEVICE_MODEM_CAPABILITY_LTE)) {
-                        g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
-                                                  G_DBUS_PROXY_FLAGS_NONE,
-                                                  NULL,
-                                                  "org.freedesktop.ModemManager",
-                                                  nm_device_get_udi (device),
-                                                  "org.freedesktop.ModemManager.Modem.Gsm.Network",
-                                                  cancellable,
-                                                  device_mobile_device_got_modem_manager_gsm_cb,
-                                                  self);
-                }
-
-                if (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) {
-                        g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
-                                                  G_DBUS_PROXY_FLAGS_NONE,
-                                                  NULL,
-                                                  "org.freedesktop.ModemManager",
-                                                  nm_device_get_udi (device),
-                                                  "org.freedesktop.ModemManager.Modem.Cdma",
-                                                  cancellable,
-                                                  device_mobile_device_got_modem_manager_cdma_cb,
-                                                  self);
-                }
-        }
-
-        client = net_object_get_client (NET_OBJECT (self));
-        g_signal_connect_object (client, "notify::wwan-enabled",
-                                 G_CALLBACK (mobilebb_enabled_toggled),
-                                 self, G_CONNECT_SWAPPED);
-        nm_device_mobile_refresh_ui (self);
-}
-
-static void
 operator_name_updated (NetDeviceMobile *self)
 {
         device_mobile_refresh_operator_name (self);
-}
-
-static void
-net_device_mobile_setup_modem_object (NetDeviceMobile *self)
-{
-        MMModem3gpp *modem_3gpp;
-
-        if (self->mm_object == NULL)
-                return;
-
-        /* Load equipment ID initially */
-        device_mobile_refresh_equipment_id (self);
-
-        /* Follow changes in operator name and load initial values */
-        modem_3gpp = mm_object_peek_modem_3gpp (self->mm_object);
-        if (modem_3gpp != NULL) {
-                g_assert (self->operator_name_updated == 0);
-                self->operator_name_updated = g_signal_connect_swapped (modem_3gpp,
-                                                                        "notify::operator-name",
-                                                                        G_CALLBACK (operator_name_updated),
-                                                                        self);
-                device_mobile_refresh_operator_name (self);
-        }
-}
-
-
-static void
-net_device_mobile_get_property (GObject    *device_,
-                                guint       prop_id,
-                                GValue     *value,
-                                GParamSpec *pspec)
-{
-        NetDeviceMobile *self = NET_DEVICE_MOBILE (device_);
-
-        switch (prop_id) {
-        case PROP_MODEM_OBJECT:
-                g_value_set_object (value, self->mm_object);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (self, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-net_device_mobile_set_property (GObject      *device_,
-                                guint         prop_id,
-                                const GValue *value,
-                                GParamSpec   *pspec)
-{
-        NetDeviceMobile *self = NET_DEVICE_MOBILE (device_);
-
-        switch (prop_id) {
-        case PROP_MODEM_OBJECT:
-                self->mm_object = g_value_dup_object (value);
-                net_device_mobile_setup_modem_object (self);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (self, prop_id, pspec);
-                break;
-        }
 }
 
 static void
@@ -889,7 +712,12 @@ net_device_mobile_dispose (GObject *object)
 {
         NetDeviceMobile *self = NET_DEVICE_MOBILE (object);
 
-        g_clear_object (&self->builder);
+        g_cancellable_cancel (self->cancellable);
+
+        g_clear_object (&self->client);
+        g_clear_object (&self->device);
+        g_clear_object (&self->modem);
+        g_clear_object (&self->cancellable);
         g_clear_object (&self->gsm_proxy);
         g_clear_object (&self->cdma_proxy);
 
@@ -908,76 +736,140 @@ static void
 net_device_mobile_class_init (NetDeviceMobileClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
         object_class->dispose = net_device_mobile_dispose;
-        object_class->constructed = net_device_mobile_constructed;
-        object_class->get_property = net_device_mobile_get_property;
-        object_class->set_property = net_device_mobile_set_property;
-        parent_class->add_to_stack = device_mobile_proxy_add_to_stack;
-        parent_class->refresh = device_mobile_refresh;
 
-        g_object_class_install_property (object_class,
-                                         PROP_MODEM_OBJECT,
-                                         g_param_spec_object ("mm-object",
-                                                              NULL,
-                                                              NULL,
-                                                              MM_TYPE_OBJECT,
-                                                              G_PARAM_READWRITE));
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-mobile.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, device_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, device_off_switch);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, dns_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, dns_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, imei_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, imei_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, ipv4_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, ipv4_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, ipv6_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, ipv6_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, mobile_connections_list_store);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, network_combo);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, network_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, options_button);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, provider_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, provider_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, route_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, route_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, status_label);
+
+        gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, network_combo_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, options_button_clicked_cb);
 }
 
 static void
 net_device_mobile_init (NetDeviceMobile *self)
 {
-        g_autoptr(GError) error = NULL;
-        GtkCellRenderer *renderer;
+        gtk_widget_init_template (GTK_WIDGET (self));
 
-        self->builder = gtk_builder_new ();
-        gtk_builder_add_from_resource (self->builder,
-                                       "/org/gnome/control-center/network/network-mobile.ui",
-                                       &error);
-        if (error != NULL) {
-                g_warning ("Could not load interface file: %s", error->message);
-                return;
+        self->cancellable = g_cancellable_new ();
+
+        gtk_widget_set_visible (GTK_WIDGET (self->options_button), g_find_program_in_path ("nm-connection-editor") != NULL);
+}
+
+NetDeviceMobile *
+net_device_mobile_new (NMClient *client, NMDevice *device, GDBusObject *modem)
+{
+        NetDeviceMobile *self;
+        NMDeviceModemCapabilities caps;
+
+        self = g_object_new (net_device_mobile_get_type (), NULL);
+        self->client = g_object_ref (client);
+        self->device = g_object_ref (device);
+
+        g_signal_connect_object (device, "state-changed", G_CALLBACK (nm_device_mobile_refresh_ui), self, G_CONNECT_SWAPPED);
+
+        if (modem != NULL)  {
+                MMModem3gpp *modem_3gpp;
+
+                self->modem = g_object_ref (modem);
+
+                /* Load equipment ID initially */
+                device_mobile_refresh_equipment_id (self);
+
+                /* Follow changes in operator name and load initial values */
+                modem_3gpp = mm_object_peek_modem_3gpp (self->mm_object);
+                if (modem_3gpp != NULL) {
+                        g_assert (self->operator_name_updated == 0);
+                        self->operator_name_updated = g_signal_connect_swapped (modem_3gpp,
+                                                                                "notify::operator-name",
+                                                                                G_CALLBACK (operator_name_updated),
+                                                                                self);
+                        device_mobile_refresh_operator_name (self);
+                }
         }
 
-        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
-        self->device_label = GTK_LABEL (gtk_builder_get_object (self->builder, "device_label"));
-        self->device_off_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "device_off_switch"));
-        self->dns_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "dns_heading_label"));
-        self->dns_label = GTK_LABEL (gtk_builder_get_object (self->builder, "dns_label"));
-        self->imei_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "imei_heading_label"));
-        self->imei_label = GTK_LABEL (gtk_builder_get_object (self->builder, "imei_label"));
-        self->ipv4_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv4_heading_label"));
-        self->ipv4_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv4_label"));
-        self->ipv6_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv6_heading_label"));
-        self->ipv6_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv6_label"));
-        self->mobile_connections_list_store = GTK_LIST_STORE (gtk_builder_get_object (self->builder, "mobile_connections_list_store"));
-        self->network_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "network_combo"));
-        self->network_label = GTK_LABEL (gtk_builder_get_object (self->builder, "network_label"));
-        self->options_button = GTK_BUTTON (gtk_builder_get_object (self->builder, "options_button"));
-        self->provider_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "provider_heading_label"));
-        self->provider_label = GTK_LABEL (gtk_builder_get_object (self->builder, "provider_label"));
-        self->route_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "route_heading_label"));
-        self->route_label = GTK_LABEL (gtk_builder_get_object (self->builder, "route_label"));
-        self->status_label = GTK_LABEL (gtk_builder_get_object (self->builder, "status_label"));
+        caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
 
-        /* setup mobile combobox model */
-        g_signal_connect_swapped (self->network_combo, "changed",
-                                  G_CALLBACK (mobile_connection_changed_cb),
-                                  self);
-        renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (self->network_combo),
-                                    renderer,
-                                    FALSE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (self->network_combo), renderer,
-                                        "text", COLUMN_TITLE,
-                                        NULL);
+        /* Only load proxies if we have broadband modems of the OLD ModemManager interface */
+        if (g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager/") &&
+            ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+             (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) ||
+             (caps & NM_DEVICE_MODEM_CAPABILITY_LTE))) {
+                g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                                          G_DBUS_PROXY_FLAGS_NONE,
+                                          NULL,
+                                          "org.freedesktop.ModemManager",
+                                          nm_device_get_udi (device),
+                                          "org.freedesktop.ModemManager.Modem",
+                                          self->cancellable,
+                                          device_mobile_device_got_modem_manager_cb,
+                                          self);
 
-        g_signal_connect_swapped (self->device_off_switch, "notify::active",
-                                  G_CALLBACK (device_off_toggled), self);
+                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+                    (caps & NM_DEVICE_MODEM_CAPABILITY_LTE)) {
+                        g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                                                  G_DBUS_PROXY_FLAGS_NONE,
+                                                  NULL,
+                                                  "org.freedesktop.ModemManager",
+                                                  nm_device_get_udi (device),
+                                                  "org.freedesktop.ModemManager.Modem.Gsm.Network",
+                                                  self->cancellable,
+                                                  device_mobile_device_got_modem_manager_gsm_cb,
+                                                  self);
+                }
 
-        g_signal_connect_swapped (self->options_button, "clicked",
-                                  G_CALLBACK (edit_connection), self);
-        gtk_widget_set_visible (self->options_button, g_find_program_in_path ("nm-connection-editor") != NULL);
+                if (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) {
+                        g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                                                  G_DBUS_PROXY_FLAGS_NONE,
+                                                  NULL,
+                                                  "org.freedesktop.ModemManager",
+                                                  nm_device_get_udi (device),
+                                                  "org.freedesktop.ModemManager.Modem.Cdma",
+                                                  self->cancellable,
+                                                  device_mobile_device_got_modem_manager_cdma_cb,
+                                                  self);
+                }
+        }
+
+        g_signal_connect_object (client, "notify::wwan-enabled",
+                                 G_CALLBACK (mobilebb_enabled_toggled),
+                                 self, G_CONNECT_SWAPPED);
+        nm_device_mobile_refresh_ui (self);
+
+        return self;
+}
+
+NMDevice *
+net_device_mobile_get_device (NetDeviceMobile *self)
+{
+        g_return_val_if_fail (NET_IS_DEVICE_MOBILE (self), NULL);
+        return self->device;
+}
+
+void
+net_device_mobile_set_title (NetDeviceMobile *self, const gchar *title)
+{
+        g_return_if_fail (NET_IS_DEVICE_MOBILE (self));
+        gtk_label_set_label (self->device_label, title);
 }

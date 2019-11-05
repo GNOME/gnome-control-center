@@ -1,6 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2011 Richard Hughes <richard@hughsie.com>
+ * Copyright (C) 2011-2012 Richard Hughes <richard@hughsie.com>
+ * Copyright (C) 2012 Red Hat, Inc.
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -21,26 +22,22 @@
 
 #pragma once
 
-#include <glib-object.h>
-
+#include <gtk/gtk.h>
 #include <NetworkManager.h>
-#include "net-object.h"
 
 G_BEGIN_DECLS
 
-#define NET_TYPE_DEVICE          (net_device_get_type ())
+G_DECLARE_FINAL_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET, DEVICE_BLUETOOTH, GtkBox)
 
-G_DECLARE_DERIVABLE_TYPE (NetDevice, net_device, NET, DEVICE, NetObject)
+NetDeviceBluetooth *net_device_bluetooth_new                (NMClient           *client,
+                                                             NMDevice           *device);
 
-struct _NetDeviceClass
-{
-        NetObjectClass               parent_class;
-};
+NMDevice           *net_device_bluetooth_get_device         (NetDeviceBluetooth *device);
 
-NetDevice       *net_device_new                         (void);
-NMDevice        *net_device_get_nm_device               (NetDevice      *device);
-NMConnection    *net_device_get_find_connection         (NetDevice      *device);
+void                net_device_bluetooth_set_title          (NetDeviceBluetooth *device,
+                                                             const gchar        *title);
 
-GSList          *net_device_get_valid_connections       (NetDevice      *device);
+void                net_device_bluetooth_set_show_separator (NetDeviceBluetooth *device,
+                                                             gboolean            show_separator);
 
 G_END_DECLS

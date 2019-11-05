@@ -45,8 +45,7 @@ destroy (WirelessSecurity *parent)
 {
 	WirelessSecurityDynamicWEP *self = (WirelessSecurityDynamicWEP *) parent;
 
-	if (self->size_group)
-		g_object_unref (self->size_group);
+	g_clear_object (&self->size_group);
 }
 
 static GtkWidget *
@@ -68,8 +67,7 @@ add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 {
 	WirelessSecurityDynamicWEP *self = (WirelessSecurityDynamicWEP *) parent;
 
-	if (self->size_group)
-		g_object_unref (self->size_group);
+	g_clear_object (&self->size_group);
 	self->size_group = g_object_ref (group);
 
 	ws_802_1x_add_to_size_group (self->size_group, self->auth_label, self->auth_combo);

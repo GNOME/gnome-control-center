@@ -21,15 +21,12 @@
 
 #pragma once
 
-#include <glib-object.h>
-
-#include "net-object.h"
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-#define NET_TYPE_PROXY (net_proxy_get_type ())
-G_DECLARE_FINAL_TYPE (NetProxy, net_proxy, NET, PROXY, NetObject)
+G_DECLARE_FINAL_TYPE (NetProxy, net_proxy, NET, PROXY, GtkFrame)
 
-NetProxy        *net_proxy_new                          (void);
+NetProxy *net_proxy_new (void);
 
 G_END_DECLS
