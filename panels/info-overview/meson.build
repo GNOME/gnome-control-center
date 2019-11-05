@@ -54,3 +54,13 @@ info_panel_lib = static_library(
   c_args: cflags
 )
 panels_libs += info_panel_lib
+
+executable(
+  'gnome-control-center-print-renderer',
+  'gnome-control-center-print-renderer.c',
+  include_directories: [ top_inc ],
+  dependencies: [ deps, epoxy_dep ],
+  c_args: cflags,
+  install: true,
+  install_dir: control_center_libexecdir,
+)
