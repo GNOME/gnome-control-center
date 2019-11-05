@@ -979,5 +979,5 @@ net_device_mobile_init (NetDeviceMobile *self)
 
         g_signal_connect_swapped (self->options_button, "clicked",
                                   G_CALLBACK (edit_connection), self);
-        gtk_widget_set_visible (self->options_button, g_find_program_in_path ("nm-connection-editor") != NULL);
+        gtk_widget_set_visible (GTK_WIDGET (self->options_button), g_find_program_in_path ("nm-connection-editor") != NULL);
 }
