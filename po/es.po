@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-10-28 21:19+0000\n"
-"PO-Revision-Date: 2019-10-29 15:28+0100\n"
+"POT-Creation-Date: 2019-11-04 22:06+0000\n"
+"PO-Revision-Date: 2019-11-05 15:06+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -47,7 +47,7 @@ msgid "Session Bus"
 msgstr "Bus de sesión"
 
 #: panels/applications/cc-applications-panel.c:570
-#: panels/power/cc-power-panel.c:2477 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2478 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
 #: shell/cc-window.c:281
 msgid "Devices"
@@ -69,7 +69,7 @@ msgstr "Tiene acceso a la red"
 
 #: panels/applications/cc-applications-panel.c:579
 #: panels/applications/cc-applications-panel.c:581
-#: panels/search/cc-search-locations-dialog.c:293
+#: panels/search/cc-search-locations-dialog.c:301
 msgid "Home"
 msgstr "Domicilio"
 
@@ -353,7 +353,7 @@ msgstr "Seleccionar una imagen"
 #: panels/color/cc-color-panel.c:894 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
 #: panels/display/cc-display-panel.c:950
-#: panels/info-overview/cc-info-overview-panel.ui:226
+#: panels/info-overview/cc-info-overview-panel.ui:235
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:176
@@ -363,7 +363,7 @@ msgstr "Seleccionar una imagen"
 #: panels/printers/pp-details-dialog.c:252
 #: panels/privacy/cc-privacy-panel.c:1056 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
-#: panels/search/cc-search-locations-dialog.c:614
+#: panels/search/cc-search-locations-dialog.c:624
 #: panels/sharing/cc-sharing-panel.c:428
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
@@ -1622,11 +1622,11 @@ msgstr ""
 "Panel;Proyector;xranrd;Pantalla;Resolución;Actualizar;Monitor;Noche;Luz;Azul;"
 "color;amanecer;atardecer;ocaso;"
 
-#: panels/info-overview/cc-info-overview-panel.c:342
-#: panels/info-overview/cc-info-overview-panel.c:356
-#: panels/info-overview/cc-info-overview-panel.c:368
-#: panels/info-overview/cc-info-overview-panel.c:414
-#: panels/info-overview/cc-info-overview-panel.c:444
+#: panels/info-overview/cc-info-overview-panel.c:343
+#: panels/info-overview/cc-info-overview-panel.c:357
+#: panels/info-overview/cc-info-overview-panel.c:369
+#: panels/info-overview/cc-info-overview-panel.c:415
+#: panels/info-overview/cc-info-overview-panel.c:445
 msgid "Unknown"
 msgstr "Desconocido"
 
@@ -1634,25 +1634,38 @@ msgstr "Desconocido"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:376
+#: panels/info-overview/cc-info-overview-panel.c:377
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; ID de construcción: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:391
+#: panels/info-overview/cc-info-overview-panel.c:392
 #, c-format
 msgid "64-bit"
 msgstr "64 bits"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:394
+#: panels/info-overview/cc-info-overview-panel.c:395
 #, c-format
 msgid "32-bit"
 msgstr "32 bits"
 
+#: panels/info-overview/cc-info-overview-panel.c:601
+msgid "X11"
+msgstr "X11"
+
+#: panels/info-overview/cc-info-overview-panel.c:605
+msgid "Wayland"
+msgstr "Wayland"
+
+#: panels/info-overview/cc-info-overview-panel.c:607
+#| msgid "Unknown"
+msgctxt "Windowing system (Wayland, X11, or Unknown)"
+msgid "Unknown"
+msgstr "Desconocido"
+
 #: panels/info-overview/cc-info-overview-panel.ui:54
-#| msgid "Device name"
 msgid "Device Name"
 msgstr "Nombre del dispositivo"
 
@@ -1678,35 +1691,35 @@ msgstr "Calculando…"
 
 #. translators: this field contains the distro name and version
 #: panels/info-overview/cc-info-overview-panel.ui:126
-#| msgid "Name"
 msgid "OS Name"
 msgstr "Nombre del SO"
 
 #: panels/info-overview/cc-info-overview-panel.ui:135
-#| msgid "Type"
 msgid "OS Type"
 msgstr "Tipo de SO"
 
 #: panels/info-overview/cc-info-overview-panel.ui:144
-#| msgid "GNOME Terminal"
 msgid "GNOME Version"
 msgstr "Versión de GNOME"
 
-#: panels/info-overview/cc-info-overview-panel.ui:153
+#: panels/info-overview/cc-info-overview-panel.ui:154
+#| msgid "Windows software"
+msgid "Windowing System"
+msgstr "Sistema de ventanas"
+
+#: panels/info-overview/cc-info-overview-panel.ui:162
 msgid "Virtualization"
 msgstr "Virtualización"
 
-#: panels/info-overview/cc-info-overview-panel.ui:162
-#| msgid "Software Usage"
+#: panels/info-overview/cc-info-overview-panel.ui:171
 msgid "Software Updates"
 msgstr "Actualizaciones de software"
 
-#: panels/info-overview/cc-info-overview-panel.ui:183
-#| msgid "Remove a device"
+#: panels/info-overview/cc-info-overview-panel.ui:192
 msgid "Rename Device"
 msgstr "renombrar un dispositivo"
 
-#: panels/info-overview/cc-info-overview-panel.ui:200
+#: panels/info-overview/cc-info-overview-panel.ui:209
 msgid ""
 "The device name is used to identify this device when it is viewed over the "
 "network, or when pairing Bluetooth devices."
@@ -1714,8 +1727,7 @@ msgstr ""
 "El nombre del dispositivo se usa para identificarlo cuando se ve en la red o "
 "al emparejar dispositivos Bluetooth."
 
-#: panels/info-overview/cc-info-overview-panel.ui:217
-#| msgid "Rename..."
+#: panels/info-overview/cc-info-overview-panel.ui:226
 msgid "_Rename"
 msgstr "_Renombrar"
 
@@ -1733,9 +1745,6 @@ msgstr "Ver información sobre su sistema"
 #. "Preferred Applications" is the old name for the preference, so make
 #. sure that you use the same "translation" for those keywords
 #: panels/info-overview/gnome-info-overview-panel.desktop.in.in:23
-#| msgid ""
-#| "device;system;information;memory;processor;version;default;application;"
-#| "preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgid ""
 "device;system;information;hostname;memory;processor;version;default;"
 "application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
@@ -2909,7 +2918,7 @@ msgstr "_Olvidar"
 
 #: panels/network/net-proxy.c:72
 #: panels/notifications/cc-notifications-panel.c:270
-#: panels/power/cc-power-panel.c:2074 panels/power/cc-power-panel.c:2085
+#: panels/power/cc-power-panel.c:2075 panels/power/cc-power-panel.c:2086
 #: panels/privacy/cc-privacy-panel.c:131 panels/privacy/cc-privacy-panel.c:208
 #: panels/universal-access/cc-ua-panel.c:477
 #: panels/universal-access/cc-ua-panel.c:840
@@ -3723,7 +3732,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Mostrar el c_ontenido del mensaje en la pantalla de bloqueo"
 
 #: panels/notifications/cc-notifications-panel.c:270
-#: panels/power/cc-power-panel.c:2080 panels/power/cc-power-panel.c:2087
+#: panels/power/cc-power-panel.c:2081 panels/power/cc-power-panel.c:2088
 #: panels/privacy/cc-privacy-panel.c:131 panels/privacy/cc-privacy-panel.c:208
 #: panels/universal-access/cc-ua-panel.c:477
 #: panels/universal-access/cc-ua-panel.c:840
@@ -3953,7 +3962,7 @@ msgstr "Mando de juegos"
 
 #. TRANSLATORS: secondary battery, misc
 #: panels/power/cc-power-panel.c:653 panels/power/cc-power-panel.c:911
-#: panels/power/cc-power-panel.c:2430
+#: panels/power/cc-power-panel.c:2431
 msgid "Battery"
 msgstr "Batería"
 
@@ -4041,94 +4050,94 @@ msgstr "0 seconds"
 msgid "When _idle"
 msgstr "Cuando esté _inactivo"
 
-#: panels/power/cc-power-panel.c:1835
+#: panels/power/cc-power-panel.c:1836
 msgid "Power Saving"
 msgstr "Ahorro de energía"
 
-#: panels/power/cc-power-panel.c:1869
+#: panels/power/cc-power-panel.c:1870
 msgid "_Screen Brightness"
 msgstr "_Brillo de la pantalla"
 
-#: panels/power/cc-power-panel.c:1890
+#: panels/power/cc-power-panel.c:1891
 msgid "Automatic Brightness"
 msgstr "Brillo automático"
 
-#: panels/power/cc-power-panel.c:1903
+#: panels/power/cc-power-panel.c:1904
 msgid "_Keyboard Brightness"
 msgstr "_Brillo del teclado"
 
-#: panels/power/cc-power-panel.c:1914
+#: panels/power/cc-power-panel.c:1915
 msgid "_Dim Screen When Inactive"
 msgstr "_Oscurecer la pantalla cuando esté inactiva"
 
-#: panels/power/cc-power-panel.c:1932
+#: panels/power/cc-power-panel.c:1933
 msgid "_Blank Screen"
 msgstr "_Apagar la pantalla"
 
-#: panels/power/cc-power-panel.c:1955
+#: panels/power/cc-power-panel.c:1956
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.c:1956
+#: panels/power/cc-power-panel.c:1957
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Se puede apagar la Wi-Fi para ahorrar energía."
 
-#: panels/power/cc-power-panel.c:1972
+#: panels/power/cc-power-panel.c:1973
 msgid "_Mobile Broadband"
 msgstr "Banda ancha _móvil"
 
-#: panels/power/cc-power-panel.c:1973
+#: panels/power/cc-power-panel.c:1974
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
 "Se puede apagar la banda ancha móvil (3G, 4G, LTE, etc.) para ahorrar "
 "energía."
 
-#: panels/power/cc-power-panel.c:2023
+#: panels/power/cc-power-panel.c:2024
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:2024
+#: panels/power/cc-power-panel.c:2025
 msgid "Bluetooth can be turned off to save power."
 msgstr "Se puede apagar el Bluetooth para ahorrar energía."
 
-#: panels/power/cc-power-panel.c:2076
+#: panels/power/cc-power-panel.c:2077
 msgid "When on battery power"
 msgstr "En modo batería"
 
-#: panels/power/cc-power-panel.c:2078
+#: panels/power/cc-power-panel.c:2079
 msgid "When plugged in"
 msgstr "Cuando está conectado a la red"
 
-#: panels/power/cc-power-panel.c:2172
+#: panels/power/cc-power-panel.c:2173
 msgid "Suspend"
 msgstr "Suspender"
 
-#: panels/power/cc-power-panel.c:2173
+#: panels/power/cc-power-panel.c:2174
 msgid "Power Off"
 msgstr "Apagar"
 
-#: panels/power/cc-power-panel.c:2174
+#: panels/power/cc-power-panel.c:2175
 msgid "Hibernate"
 msgstr "Hibernar"
 
-#: panels/power/cc-power-panel.c:2175
+#: panels/power/cc-power-panel.c:2176
 msgid "Nothing"
 msgstr "Nada"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2275
+#: panels/power/cc-power-panel.c:2276
 msgid "Suspend & Power Button"
 msgstr "Botón de suspender y apagar"
 
-#: panels/power/cc-power-panel.c:2316
+#: panels/power/cc-power-panel.c:2317
 msgid "_Automatic Suspend"
 msgstr "Suspender _automáticamente"
 
-#: panels/power/cc-power-panel.c:2317
+#: panels/power/cc-power-panel.c:2318
 msgid "Automatic suspend"
 msgstr "Suspender automáticamente"
 
-#: panels/power/cc-power-panel.c:2374
+#: panels/power/cc-power-panel.c:2375
 msgid "Po_wer Button Action"
 msgstr "Acción del botón de _encendido"
 
@@ -5480,41 +5489,41 @@ msgstr ""
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Idioma;Distribución;Teclado;Entrada;"
 
-#: panels/removable-media/cc-removable-media-panel.c:306
+#: panels/removable-media/cc-removable-media-panel.c:267
 msgid "Ask what to do"
 msgstr "Preguntar qué hacer"
 
-#: panels/removable-media/cc-removable-media-panel.c:310
+#: panels/removable-media/cc-removable-media-panel.c:271
 msgid "Do nothing"
 msgstr "No hacer nada"
 
-#: panels/removable-media/cc-removable-media-panel.c:314
+#: panels/removable-media/cc-removable-media-panel.c:275
 msgid "Open folder"
 msgstr "Abrir carpeta"
 
-#: panels/removable-media/cc-removable-media-panel.c:400
+#: panels/removable-media/cc-removable-media-panel.c:341
 msgid "Other Media"
 msgstr "Otros soportes"
 
-#: panels/removable-media/cc-removable-media-panel.c:433
+#: panels/removable-media/cc-removable-media-panel.c:362
 msgid "Select an application for audio CDs"
 msgstr "Seleccionar una aplicación para CD de sonido"
 
-#: panels/removable-media/cc-removable-media-panel.c:434
+#: panels/removable-media/cc-removable-media-panel.c:363
 msgid "Select an application for video DVDs"
 msgstr "Seleccionar una aplicación para DVD de vídeo"
 
-#: panels/removable-media/cc-removable-media-panel.c:435
+#: panels/removable-media/cc-removable-media-panel.c:364
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Seleccionar una aplicación que ejecutar cuando se conecta un reproductor de "
 "música"
 
-#: panels/removable-media/cc-removable-media-panel.c:436
+#: panels/removable-media/cc-removable-media-panel.c:365
 msgid "Select an application to run when a camera is connected"
 msgstr "Seleccionar una aplicación que ejecutar cuando se conecta una cámara"
 
-#: panels/removable-media/cc-removable-media-panel.c:437
+#: panels/removable-media/cc-removable-media-panel.c:366
 msgid "Select an application for software CDs"
 msgstr "Seleccionar una aplicación para CD de software"
 
@@ -5523,51 +5532,51 @@ msgstr "Seleccionar una aplicación para CD de software"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: panels/removable-media/cc-removable-media-panel.c:449
+#: panels/removable-media/cc-removable-media-panel.c:378
 msgid "audio DVD"
 msgstr "DVD de sonido"
 
-#: panels/removable-media/cc-removable-media-panel.c:450
+#: panels/removable-media/cc-removable-media-panel.c:379
 msgid "blank Blu-ray disc"
 msgstr "disco Blu-ray virgen"
 
-#: panels/removable-media/cc-removable-media-panel.c:451
+#: panels/removable-media/cc-removable-media-panel.c:380
 msgid "blank CD disc"
 msgstr "CD virgen"
 
-#: panels/removable-media/cc-removable-media-panel.c:452
+#: panels/removable-media/cc-removable-media-panel.c:381
 msgid "blank DVD disc"
 msgstr "DVD virgen"
 
-#: panels/removable-media/cc-removable-media-panel.c:453
+#: panels/removable-media/cc-removable-media-panel.c:382
 msgid "blank HD DVD disc"
 msgstr "disco HD DVD virgen"
 
-#: panels/removable-media/cc-removable-media-panel.c:454
+#: panels/removable-media/cc-removable-media-panel.c:383
 msgid "Blu-ray video disc"
 msgstr "Disco Blu-ray de vídeo"
 
-#: panels/removable-media/cc-removable-media-panel.c:455
+#: panels/removable-media/cc-removable-media-panel.c:384
 msgid "e-book reader"
 msgstr "lector de libros electrónicos"
 
-#: panels/removable-media/cc-removable-media-panel.c:456
+#: panels/removable-media/cc-removable-media-panel.c:385
 msgid "HD DVD video disc"
 msgstr "Disco HD DVD de vídeo"
 
-#: panels/removable-media/cc-removable-media-panel.c:457
+#: panels/removable-media/cc-removable-media-panel.c:386
 msgid "Picture CD"
 msgstr "CD de imágenes"
 
-#: panels/removable-media/cc-removable-media-panel.c:458
+#: panels/removable-media/cc-removable-media-panel.c:387
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: panels/removable-media/cc-removable-media-panel.c:459
+#: panels/removable-media/cc-removable-media-panel.c:388
 msgid "Video CD"
 msgstr "Video CD"
 
-#: panels/removable-media/cc-removable-media-panel.c:460
+#: panels/removable-media/cc-removable-media-panel.c:389
 msgid "Windows software"
 msgstr "Software de Windows"
 
@@ -5595,19 +5604,19 @@ msgstr "Soft_ware"
 msgid "_Other Media…"
 msgstr "_Otros soportes…"
 
-#: panels/removable-media/cc-removable-media-panel.ui:287
+#: panels/removable-media/cc-removable-media-panel.ui:288
 msgid "_Never prompt or start programs on media insertion"
 msgstr "_Nunca preguntar ni iniciar programas al introducir soportes"
 
-#: panels/removable-media/cc-removable-media-panel.ui:339
+#: panels/removable-media/cc-removable-media-panel.ui:342
 msgid "Select how other media should be handled"
 msgstr "Seleccionar cómo se deben manejar otros soportes"
 
-#: panels/removable-media/cc-removable-media-panel.ui:378
+#: panels/removable-media/cc-removable-media-panel.ui:389
 msgid "_Action:"
 msgstr "_Acción:"
 
-#: panels/removable-media/cc-removable-media-panel.ui:401
+#: panels/removable-media/cc-removable-media-panel.ui:412
 msgid "_Type:"
 msgstr "_Tipo:"
 
@@ -5628,11 +5637,11 @@ msgstr ""
 "dispositivo;sistema;predeterminado;aplicación;preferido;cd;dvd;usb;sonido;"
 "vídeo;disco;extraíble;medio;autoejecutar;"
 
-#: panels/search/cc-search-locations-dialog.c:611
+#: panels/search/cc-search-locations-dialog.c:621
 msgid "Select Location"
 msgstr "Seleccionar ubicación"
 
-#: panels/search/cc-search-locations-dialog.c:615
+#: panels/search/cc-search-locations-dialog.c:625
 msgid "_OK"
 msgstr "_Aceptar"
 
@@ -8986,9 +8995,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Scroll Right"
 #~ msgstr "Desplazar hacia la derecha"
-
-#~ msgid "Wayland"
-#~ msgstr "Wayland"
 
 #~ msgid "Add a New Printer"
 #~ msgstr "Añadir una impresora nueva"
