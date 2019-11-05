@@ -234,13 +234,6 @@ config_h.set('HAVE_WACOM', host_is_linux_not_s390,
 config_h.set('BUILD_THUNDERBOLT', host_is_linux_not_s390,
              description: 'Define to 1 to build the Thunderbolt panel')
 
-# Check for info panel
-gnome_session_libexecdir = get_option('gnome_session_libexecdir')
-if gnome_session_libexecdir == ''
-  gnome_session_libexecdir = control_center_libexecdir
-endif
-
-
 gnome = import('gnome')
 i18n = import('i18n')
 pkg = import('pkgconfig')
@@ -286,7 +279,6 @@ output += ' Options \n'
 output += '     Documentation .............................. ' + get_option('documentation').to_string() + '\n'
 output += '     Build Tests ................................ ' + get_option('tests').to_string() + '\n'
 output += '     Tracing .................................... ' + enable_tracing.to_string() + '\n'
-output += '     gnome-session libexecdir ................... ' + gnome_session_libexecdir + '\n'
 output += '     Optimized .................................. ' + control_center_optimized.to_string() + '\n'
 output += ' Panels \n'
 output += '     GNOME Bluetooth (Bluetooth panel) .......... ' + host_is_linux_not_s390.to_string() + '\n'
