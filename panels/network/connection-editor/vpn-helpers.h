@@ -36,6 +36,4 @@ void vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_da
 
 void vpn_export (NMConnection *connection);
 
-gboolean vpn_supports_ipv6 (NMConnection *connection);
-
 #endif  /* _VPN_HELPERS_H_ */
