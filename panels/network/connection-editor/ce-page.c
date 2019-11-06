@@ -33,13 +33,7 @@
 #include "ce-page.h"
 
 
-G_DEFINE_ABSTRACT_TYPE (CEPage, ce_page, G_TYPE_OBJECT)
-
-enum {
-        PROP_0,
-        PROP_CONNECTION,
-        PROP_INITIALIZED,
-};
+G_DEFINE_INTERFACE (CEPage, ce_page, G_TYPE_OBJECT)
 
 enum {
         CHANGED,
@@ -55,42 +49,10 @@ ce_page_validate (CEPage *self, NMConnection *connection, GError **error)
         g_return_val_if_fail (CE_IS_PAGE (self), FALSE);
         g_return_val_if_fail (NM_IS_CONNECTION (connection), FALSE);
 
-        if (CE_PAGE_GET_CLASS (self)->validate)
-                return CE_PAGE_GET_CLASS (self)->validate (self, connection, error);
+        if (CE_PAGE_GET_IFACE (self)->validate)
+                return CE_PAGE_GET_IFACE (self)->validate (self, connection, error);
 
         return TRUE;
-}
-
-static void
-dispose (GObject *object)
-{
-        CEPage *self = CE_PAGE (object);
-
-        g_clear_object (&self->page);
-        g_clear_object (&self->builder);
-        g_clear_object (&self->connection);
-
-        G_OBJECT_CLASS (ce_page_parent_class)->dispose (object);
-}
-
-static void
-finalize (GObject *object)
-{
-        CEPage *self = CE_PAGE (object);
-
-        g_clear_pointer (&self->title, g_free);
-        g_cancellable_cancel (self->cancellable);
-        g_clear_object (&self->cancellable);
-
-        G_OBJECT_CLASS (ce_page_parent_class)->finalize (object);
-}
-
-GtkWidget *
-ce_page_get_page (CEPage *self)
-{
-        g_return_val_if_fail (CE_IS_PAGE (self), NULL);
-
-        return self->page;
 }
 
 const char *
@@ -98,15 +60,7 @@ ce_page_get_title (CEPage *self)
 {
         g_return_val_if_fail (CE_IS_PAGE (self), NULL);
 
-        return self->title;
-}
-
-gboolean
-ce_page_get_initialized (CEPage *self)
-{
-        g_return_val_if_fail (CE_IS_PAGE (self), FALSE);
-
-        return self->initialized;
+        return CE_PAGE_GET_IFACE (self)->get_title (self);
 }
 
 void
@@ -118,146 +72,41 @@ ce_page_changed (CEPage *self)
 }
 
 static void
-get_property (GObject    *object,
-              guint       prop_id,
-              GValue     *value,
-              GParamSpec *pspec)
+ce_page_default_init (CEPageInterface *iface)
 {
-        CEPage *self = CE_PAGE (object);
-
-        switch (prop_id) {
-        case PROP_CONNECTION:
-                g_value_set_object (value, self->connection);
-                break;
-        case PROP_INITIALIZED:
-                g_value_set_boolean (value, self->initialized);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-set_property (GObject      *object,
-              guint         prop_id,
-              const GValue *value,
-              GParamSpec   *pspec)
-{
-        CEPage *self = CE_PAGE (object);
-
-        switch (prop_id) {
-        case PROP_CONNECTION:
-                g_clear_object (&self->connection);
-                self->connection = g_value_dup_object (value);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-ce_page_init (CEPage *self)
-{
-        self->builder = gtk_builder_new ();
-        self->cancellable = g_cancellable_new ();
-}
-
-static void
-ce_page_class_init (CEPageClass *page_class)
-{
-        GObjectClass *object_class = G_OBJECT_CLASS (page_class);
-
-        /* virtual methods */
-        object_class->dispose      = dispose;
-        object_class->finalize     = finalize;
-        object_class->get_property = get_property;
-        object_class->set_property = set_property;
-
-        /* Properties */
-        g_object_class_install_property
-                (object_class, PROP_CONNECTION,
-                 g_param_spec_object ("connection",
-                                      "Connection",
-                                      "Connection",
-                                      NM_TYPE_CONNECTION,
-                                      G_PARAM_READABLE | G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
-
-        g_object_class_install_property
-                (object_class, PROP_INITIALIZED,
-                 g_param_spec_boolean ("initialized",
-                                       "Initialized",
-                                       "Initialized",
-                                       FALSE,
-                                       G_PARAM_READABLE));
-
         signals[CHANGED] =
                 g_signal_new ("changed",
-                              G_OBJECT_CLASS_TYPE (object_class),
+                              G_TYPE_FROM_INTERFACE (iface),
                               G_SIGNAL_RUN_FIRST,
-                              G_STRUCT_OFFSET (CEPageClass, changed),
+                              0,
                               NULL, NULL,
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE, 0);
 
         signals[INITIALIZED] =
                 g_signal_new ("initialized",
-                              G_OBJECT_CLASS_TYPE (object_class),
+                              G_TYPE_FROM_INTERFACE (iface),
                               G_SIGNAL_RUN_FIRST,
-                              G_STRUCT_OFFSET (CEPageClass, initialized),
+                              0,
                               NULL, NULL,
                               g_cclosure_marshal_VOID__POINTER,
                               G_TYPE_NONE, 1, G_TYPE_POINTER);
-}
-
-CEPage *
-ce_page_new (GType             type,
-             NMConnection     *connection,
-             NMClient         *client,
-             const gchar      *ui_resource,
-             const gchar      *title)
-{
-        g_autoptr(CEPage) self = NULL;
-        g_autoptr(GError) error = NULL;
-
-        self = CE_PAGE (g_object_new (type,
-                                      "connection", connection,
-                                      NULL));
-        self->title = g_strdup (title);
-        self->client = client;
-
-        if (ui_resource) {
-                if (!gtk_builder_add_from_resource (self->builder, ui_resource, &error)) {
-                        g_warning ("Couldn't load builder file: %s", error->message);
-                        return NULL;
-                }
-                self->page = GTK_WIDGET (gtk_builder_get_object (self->builder, "page"));
-                if (!self->page) {
-                        g_warning ("Couldn't load page widget from %s", ui_resource);
-                        return NULL;
-                }
-
-                g_object_ref_sink (self->page);
-        }
-
-        return g_steal_pointer (&self);
 }
 
 static void
 emit_initialized (CEPage *self,
                   GError *error)
 {
-        self->initialized = TRUE;
         g_signal_emit (self, signals[INITIALIZED], 0, error);
         g_clear_error (&error);
 }
 
 void
-ce_page_complete_init (CEPage      *self,
-                       const gchar *setting_name,
-                       GVariant    *secrets,
-                       GError      *error)
+ce_page_complete_init (CEPage       *self,
+                       NMConnection *connection,
+                       const gchar  *setting_name,
+                       GVariant     *secrets,
+                       GError       *error)
 {
 	g_autoptr(GError) update_error = NULL;
 	g_autoptr(GVariant) setting_dict = NULL;
@@ -292,7 +141,7 @@ ce_page_complete_init (CEPage      *self,
 	}
 
 	/* Update the connection with the new secrets */
-	if (!nm_connection_update_secrets (self->connection,
+	if (!nm_connection_update_secrets (connection,
                                            setting_name,
                                            secrets,
                                            &update_error))
@@ -480,7 +329,10 @@ ce_page_cloned_mac_combo_valid (GtkComboBoxText *combo)
 const gchar *
 ce_page_get_security_setting (CEPage *self)
 {
-        return self->security_setting;
+        if (CE_PAGE_GET_IFACE (self)->get_security_setting)
+                return CE_PAGE_GET_IFACE (self)->get_security_setting (self);
+
+        return NULL;
 }
 
 gint

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkScrolledWindow" id="page">
+  <template class="CEPageIP4" parent="GtkScrolledWindow">
     <property name="visible">True</property>
     <property name="can_focus">True</property>
     <property name="hscrollbar_policy">never</property>
@@ -406,7 +406,7 @@
         </child>
       </object>
     </child>
-  </object>
+  </template>
   <object class="GtkSizeGroup" id="routes_metric_sizegroup">
     <property name="mode">horizontal</property>
     <widgets>

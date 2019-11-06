@@ -21,17 +21,31 @@
 
 #include "config.h"
 
-#include <glib-object.h>
 #include <glib/gi18n.h>
-
 #include <NetworkManager.h>
-
 #include <net/if_arp.h>
 
+#include "ce-page.h"
 #include "ce-page-wifi.h"
 #include "ui-helpers.h"
 
-G_DEFINE_TYPE (CEPageWifi, ce_page_wifi, CE_TYPE_PAGE)
+struct _CEPageWifi
+{
+        GtkGrid parent;
+
+        GtkComboBoxText *bssid_combo;
+        GtkComboBoxText *cloned_mac_combo;
+        GtkComboBoxText *mac_combo;
+        GtkEntry        *ssid_entry;
+
+        NMClient          *client;
+        NMSettingWireless *setting;
+};
+
+static void ce_page_iface_init (CEPageInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (CEPageWifi, ce_page_wifi, GTK_TYPE_GRID,
+                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
 connect_wifi_page (CEPageWifi *self)
@@ -66,7 +80,7 @@ connect_wifi_page (CEPageWifi *self)
         g_strfreev (bssid_list);
         g_signal_connect_swapped (self->bssid_combo, "changed", G_CALLBACK (ce_page_changed), self);
 
-        mac_list = ce_page_get_mac_list (CE_PAGE (self)->client, NM_TYPE_DEVICE_WIFI,
+        mac_list = ce_page_get_mac_list (self->client, NM_TYPE_DEVICE_WIFI,
                                          NM_DEVICE_WIFI_PERMANENT_HW_ADDRESS);
         s_mac_str = nm_setting_wireless_get_mac_address (self->setting);
         ce_page_setup_mac_combo (self->mac_combo, s_mac_str, mac_list);
@@ -109,10 +123,16 @@ ui_to_setting (CEPageWifi *self)
                       NULL);
 }
 
+static const gchar *
+ce_page_wifi_get_title (CEPage *page)
+{
+        return _("Identity");
+}
+
 static gboolean
-validate (CEPage        *parent,
-          NMConnection  *connection,
-          GError       **error)
+ce_page_wifi_class_validate (CEPage        *parent,
+                             NMConnection  *connection,
+                             GError       **error)
 {
         CEPageWifi *self = (CEPageWifi *) parent;
         GtkWidget *entry;
@@ -152,36 +172,41 @@ validate (CEPage        *parent,
 static void
 ce_page_wifi_init (CEPageWifi *self)
 {
+        gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
-ce_page_wifi_class_init (CEPageWifiClass *class)
+ce_page_wifi_class_init (CEPageWifiClass *klass)
 {
-        CEPageClass *page_class= CE_PAGE_CLASS (class);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-        page_class->validate = validate;
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/wifi-page.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, CEPageWifi, bssid_combo);
+        gtk_widget_class_bind_template_child (widget_class, CEPageWifi, cloned_mac_combo);
+        gtk_widget_class_bind_template_child (widget_class, CEPageWifi, mac_combo);
+        gtk_widget_class_bind_template_child (widget_class, CEPageWifi, ssid_entry);
 }
 
-CEPage *
+static void
+ce_page_iface_init (CEPageInterface *iface)
+{
+        iface->get_title = ce_page_wifi_get_title;
+        iface->validate = ce_page_wifi_class_validate;
+}
+
+CEPageWifi *
 ce_page_wifi_new (NMConnection     *connection,
                   NMClient         *client)
 {
         CEPageWifi *self;
 
-        self = CE_PAGE_WIFI (ce_page_new (CE_TYPE_PAGE_WIFI,
-                                          connection,
-                                          client,
-                                          "/org/gnome/control-center/network/wifi-page.ui",
-                                          _("Identity")));
+        self = CE_PAGE_WIFI (g_object_new (ce_page_wifi_get_type (), NULL));
 
-        self->bssid_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "bssid_combo"));
-        self->cloned_mac_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "cloned_mac_combo"));
-        self->mac_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "mac_combo"));
-        self->ssid_entry = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (self)->builder, "ssid_entry"));
-
+        self->client = client;
         self->setting = nm_connection_get_setting_wireless (connection);
 
         connect_wifi_page (self);
 
-        return CE_PAGE (self);
+        return self;
 }

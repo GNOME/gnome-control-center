@@ -29,6 +29,7 @@
 #include "list-box-helper.h"
 #include "net-connection-editor.h"
 #include "net-connection-editor-resources.h"
+#include "ce-page.h"
 #include "ce-page-details.h"
 #include "ce-page-wifi.h"
 #include "ce-page-ip4.h"
@@ -46,6 +47,37 @@ enum {
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
+
+struct _NetConnectionEditor
+{
+        GtkDialog parent;
+
+        GtkBox           *add_connection_box;
+        GtkFrame         *add_connection_frame;
+        GtkButton        *apply_button;
+        GtkButton        *cancel_button;
+        GtkNotebook      *notebook;
+        GtkStack         *toplevel_stack;
+
+        GtkWidget        *parent_window;
+        NMClient         *client;
+        NMDevice         *device;
+
+        NMConnection     *connection;
+        NMConnection     *orig_connection;
+        gboolean          is_new_connection;
+        gboolean          is_changed;
+        NMAccessPoint    *ap;
+
+        GSList *initializing_pages;
+        GSList *pages;
+
+        guint                    permission_id;
+        NMClientPermissionResult can_modify;
+
+        gboolean          title_set;
+        gboolean          show_when_initialized;
+};
 
 G_DEFINE_TYPE (NetConnectionEditor, net_connection_editor, GTK_TYPE_DIALOG)
 
@@ -191,18 +223,20 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
         signals[DONE] = g_signal_new ("done",
                                       G_OBJECT_CLASS_TYPE (object_class),
                                       G_SIGNAL_RUN_FIRST,
-                                      G_STRUCT_OFFSET (NetConnectionEditorClass, done),
+                                      0,
                                       NULL, NULL,
                                       NULL,
                                       G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/connection-editor.ui");
 
+        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, add_connection_box);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, add_connection_frame);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, apply_button);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, cancel_button);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, notebook);
-        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, toplevel_notebook);
+        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, toplevel_stack);
+
         gtk_widget_class_bind_template_callback (widget_class, delete_event_cb);
         gtk_widget_class_bind_template_callback (widget_class, cancel_clicked_cb);
         gtk_widget_class_bind_template_callback (widget_class, apply_clicked_cb);
@@ -300,7 +334,6 @@ update_sensitivity (NetConnectionEditor *self)
 {
         NMSettingConnection *sc;
         gboolean sensitive;
-        GtkWidget *widget;
         GSList *l;
 
         if (!editor_is_initialized (self))
@@ -314,10 +347,8 @@ update_sensitivity (NetConnectionEditor *self)
                 sensitive = self->can_modify;
         }
 
-        for (l = self->pages; l; l = l->next) {
-                widget = ce_page_get_page (CE_PAGE (l->data));
-                gtk_widget_set_sensitive (widget, sensitive);
-        }
+        for (l = self->pages; l; l = l->next)
+                gtk_widget_set_sensitive (GTK_WIDGET (l->data), sensitive);
 }
 
 static void
@@ -381,15 +412,13 @@ recheck_initialization (NetConnectionEditor *self)
 static void
 page_initialized (NetConnectionEditor *self, GError *error, CEPage *page)
 {
-        GtkWidget *widget;
         GtkWidget *label;
         gint position;
         GList *children, *l;
         gint i;
 
-        widget = ce_page_get_page (page);
         position = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (page), "position"));
-        g_object_set_data (G_OBJECT (widget), "position", GINT_TO_POINTER (position));
+        g_object_set_data (G_OBJECT (page), "position", GINT_TO_POINTER (position));
         children = gtk_container_get_children (GTK_CONTAINER (self->notebook));
         for (l = children, i = 0; l; l = l->next, i++) {
                 gint pos = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (l->data), "position"));
@@ -400,7 +429,7 @@ page_initialized (NetConnectionEditor *self, GError *error, CEPage *page)
 
         label = gtk_label_new (ce_page_get_title (page));
 
-        gtk_notebook_insert_page (self->notebook, widget, label, i);
+        gtk_notebook_insert_page (self->notebook, GTK_WIDGET (page), label, i);
 
         self->initializing_pages = g_slist_remove (self->initializing_pages, page);
         self->pages = g_slist_append (self->pages, page);
@@ -430,7 +459,7 @@ get_secrets_cb (GObject *source_object,
         if (!variant && g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
                 return;
 
-        ce_page_complete_init (info->page, info->setting_name, variant, g_steal_pointer (&error));
+        ce_page_complete_init (info->page, info->editor->connection, info->setting_name, variant, g_steal_pointer (&error));
 }
 
 static void
@@ -500,27 +529,27 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
         is_vpn = g_str_equal (type, NM_SETTING_VPN_SETTING_NAME);
 
         if (!self->is_new_connection)
-                add_page (self, ce_page_details_new (self->connection, self->client, self->device, self->ap, self));
+                add_page (self, CE_PAGE (ce_page_details_new (self->connection, self->device, self->ap, self)));
 
         if (is_wifi)
-                add_page (self, ce_page_wifi_new (self->connection, self->client));
+                add_page (self, CE_PAGE (ce_page_wifi_new (self->connection, self->client)));
         else if (is_wired)
-                add_page (self, ce_page_ethernet_new (self->connection, self->client));
+                add_page (self, CE_PAGE (ce_page_ethernet_new (self->connection, self->client)));
         else if (is_vpn)
-                add_page (self, ce_page_vpn_new (self->connection, self->client));
+                add_page (self, CE_PAGE (ce_page_vpn_new (self->connection)));
         else {
                 /* Unsupported type */
                 net_connection_editor_do_fallback (self, type);
                 return;
         }
 
-        add_page (self, ce_page_ip4_new (self->connection, self->client));
-        add_page (self, ce_page_ip6_new (self->connection, self->client));
+        add_page (self, CE_PAGE (ce_page_ip4_new (self->connection, self->client)));
+        add_page (self, CE_PAGE (ce_page_ip6_new (self->connection, self->client)));
 
         if (is_wifi)
-                add_page (self, ce_page_security_new (self->connection, self->client));
+                add_page (self, CE_PAGE (ce_page_security_new (self->connection)));
         else if (is_wired)
-                add_page (self, ce_page_8021x_security_new (self->connection, self->client));
+                add_page (self, CE_PAGE (ce_page_8021x_security_new (self->connection)));
 
         pages = g_slist_copy (self->initializing_pages);
         for (l = pages; l; l = l->next) {
@@ -529,7 +558,7 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
 
                 security_setting = ce_page_get_security_setting (page);
                 if (!security_setting || self->is_new_connection) {
-                        ce_page_complete_init (page, NULL, NULL, NULL);
+                        ce_page_complete_init (page, NULL, NULL, NULL, NULL);
                 } else {
                         get_secrets_for_page (self, page, security_setting);
                 }
@@ -593,7 +622,7 @@ finish_add_connection (NetConnectionEditor *self, NMConnection *connection)
         frame = GTK_BIN (self->add_connection_frame);
         gtk_widget_destroy (gtk_bin_get_child (frame));
 
-        gtk_notebook_set_current_page (self->toplevel_notebook, 0);
+        gtk_stack_set_visible_child (self->toplevel_stack, GTK_WIDGET (self->notebook));
         gtk_widget_show (GTK_WIDGET (self->apply_button));
 
         if (connection)
@@ -738,7 +767,7 @@ net_connection_editor_add_connection (NetConnectionEditor *self)
         gtk_widget_show_all (GTK_WIDGET (list));
         gtk_container_add (frame, GTK_WIDGET (list));
 
-        gtk_notebook_set_current_page (self->toplevel_notebook, 1);
+        gtk_stack_set_visible_child (self->toplevel_stack, GTK_WIDGET (self->add_connection_box));
         gtk_widget_hide (GTK_WIDGET (self->apply_button));
         gtk_window_set_title (GTK_WINDOW (self), _("Add VPN"));
 }
@@ -769,7 +798,7 @@ net_connection_editor_new (GtkWindow        *parent_window,
 {
         NetConnectionEditor *self;
 
-        self = g_object_new (NET_TYPE_CONNECTION_EDITOR,
+        self = g_object_new (net_connection_editor_get_type (),
                              /* This doesn't seem to work for a template, so it is also hardcoded. */
                              "use-header-bar", 1,
                              NULL);
@@ -832,15 +861,6 @@ net_connection_editor_forget (NetConnectionEditor *self)
 {
         nm_remote_connection_delete_async (NM_REMOTE_CONNECTION (self->orig_connection),
                                            NULL, forgotten_cb, self);
-}
-
-void
-net_connection_editor_reset (NetConnectionEditor *self)
-{
-        g_autoptr(GVariant) settings = NULL;
-
-        settings = nm_connection_to_dbus (self->orig_connection, NM_CONNECTION_SERIALIZE_ALL);
-        nm_connection_replace_settings (self->connection, settings, NULL);
 }
 
 void
