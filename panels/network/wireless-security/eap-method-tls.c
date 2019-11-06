@@ -50,6 +50,7 @@ struct _EAPMethodTLS {
 	GtkFileChooserButton *user_cert_button;
 	GtkLabel             *user_cert_label;
 
+	const gchar *password_flags_name;
 	WirelessSecurity *sec_parent;
 	gboolean editing_connection;
 };
@@ -196,13 +197,13 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 
 	/* Save 802.1X password flags to the connection */
 	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->private_key_password_entry));
-	nm_setting_set_secret_flags (NM_SETTING (s_8021x), parent->password_flags_name,
+	nm_setting_set_secret_flags (NM_SETTING (s_8021x), self->password_flags_name,
 	                             secret_flags, NULL);
 
 	/* Update secret flags and popup when editing the connection */
 	if (self->editing_connection) {
 		nma_utils_update_password_storage (GTK_WIDGET (self->private_key_password_entry), secret_flags,
-		                                   NM_SETTING (s_8021x), parent->password_flags_name);
+		                                   NM_SETTING (s_8021x), self->password_flags_name);
 	}
 
 	/* TLS client certificate */
@@ -418,6 +419,13 @@ get_default_field (EAPMethod *parent)
 	return GTK_WIDGET (self->identity_entry);
 }
 
+static const gchar *
+get_password_flags_name (EAPMethod *parent)
+{
+	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+	return self->password_flags_name;
+}
+
 EAPMethodTLS *
 eap_method_tls_new (WirelessSecurity *ws_parent,
                     NMConnection *connection,
@@ -437,15 +445,16 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          get_widget,
 	                          get_default_field,
+	                          get_password_flags_name,
 	                          destroy,
 	                          phase2);
 	if (!parent)
 		return NULL;
 
-	parent->password_flags_name = phase2 ?
-	                                NM_SETTING_802_1X_PHASE2_PRIVATE_KEY_PASSWORD :
-	                                NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD;
 	self = (EAPMethodTLS *) parent;
+	self->password_flags_name = phase2 ?
+	                            NM_SETTING_802_1X_PHASE2_PRIVATE_KEY_PASSWORD :
+	                            NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD;
 	self->sec_parent = ws_parent;
 	self->editing_connection = secrets_only ? FALSE : TRUE;
 
@@ -508,7 +517,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	g_signal_connect_swapped (self->private_key_password_entry, "changed", G_CALLBACK (changed_cb), self);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
-	nma_utils_setup_password_storage (GTK_WIDGET (self->private_key_password_entry), 0, (NMSetting *) s_8021x, parent->password_flags_name,
+	nma_utils_setup_password_storage (GTK_WIDGET (self->private_key_password_entry), 0, (NMSetting *) s_8021x, self->password_flags_name,
 	                                  FALSE, secrets_only);
 
 	g_signal_connect_swapped (self->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), self);
