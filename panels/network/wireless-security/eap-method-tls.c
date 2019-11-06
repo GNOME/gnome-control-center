@@ -35,6 +35,7 @@
 struct _EAPMethodTLS {
 	EAPMethod parent;
 
+	GtkBuilder           *builder;
 	GtkFileChooserButton *ca_cert_button;
 	GtkLabel             *ca_cert_label;
 	GtkCheckButton       *ca_cert_not_required_check;
@@ -53,6 +54,13 @@ struct _EAPMethodTLS {
 	gboolean editing_connection;
 };
 
+static void
+destroy (EAPMethod *parent)
+{
+	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+
+	g_clear_object (&self->builder);
+}
 
 static void
 show_toggled_cb (EAPMethodTLS *self)
@@ -420,6 +428,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	EAPMethod *parent;
 	NMSetting8021x *s_8021x = NULL;
 	gboolean ca_not_required = FALSE;
+	g_autoptr(GError) error = NULL;
 
 	parent = eap_method_init (sizeof (EAPMethodTLS),
 	                          validate,
@@ -428,8 +437,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          get_widget,
 	                          get_default_field,
-	                          NULL,
-	                          "/org/gnome/ControlCenter/network/eap-method-tls.ui",
+	                          destroy,
 	                          phase2);
 	if (!parent)
 		return NULL;
@@ -441,19 +449,25 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	self->sec_parent = ws_parent;
 	self->editing_connection = secrets_only ? FALSE : TRUE;
 
-	self->ca_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_button"));
-	self->ca_cert_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "ca_cert_label"));
-	self->ca_cert_not_required_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
-	self->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
-	self->identity_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "identity_entry"));
-	self->identity_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "identity_label"));
-	self->private_key_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "private_key_button"));
-	self->private_key_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "private_key_label"));
-	self->private_key_password_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "private_key_password_entry"));
-	self->private_key_password_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "private_key_password_label"));
-	self->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "show_password_check"));
-	self->user_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "user_cert_button"));
-	self->user_cert_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "user_cert_label"));
+	self->builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/eap-method-tls.ui", &error)) {
+		g_warning ("Couldn't load UI builder resource: %s", error->message);
+		return NULL;
+	}
+
+	self->ca_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (self->builder, "ca_cert_button"));
+	self->ca_cert_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ca_cert_label"));
+	self->ca_cert_not_required_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "ca_cert_not_required_check"));
+	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
+	self->identity_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "identity_entry"));
+	self->identity_label = GTK_LABEL (gtk_builder_get_object (self->builder, "identity_label"));
+	self->private_key_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (self->builder, "private_key_button"));
+	self->private_key_label = GTK_LABEL (gtk_builder_get_object (self->builder, "private_key_label"));
+	self->private_key_password_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "private_key_password_entry"));
+	self->private_key_password_label = GTK_LABEL (gtk_builder_get_object (self->builder, "private_key_password_label"));
+	self->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "show_password_check"));
+	self->user_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (self->builder, "user_cert_button"));
+	self->user_cert_label = GTK_LABEL (gtk_builder_get_object (self->builder, "user_cert_label"));
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);

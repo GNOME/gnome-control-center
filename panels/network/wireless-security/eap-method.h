@@ -38,8 +38,6 @@ struct _EAPMethod {
 	guint32 refcount;
 	gsize obj_size;
 
-	GtkBuilder *builder;
-
 	const char *password_flags_name;
 
 	gboolean phase2;
@@ -84,7 +82,6 @@ EAPMethod *eap_method_init (gsize obj_size,
                             EMGetWidgetFunc get_widget,
                             EMGetWidgetFunc get_default_field,
                             EMDestroyFunc destroy,
-                            const char *ui_resource,
                             gboolean phase2);
 
 GtkFileFilter * eap_method_default_file_chooser_filter_new (gboolean privkey);
