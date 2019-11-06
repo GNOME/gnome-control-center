@@ -40,7 +40,7 @@ struct _CEPage8021xSecurity {
         GtkBuilder  *builder;
         GtkBox      *box;
         GtkSwitch   *enable_8021x_switch;
-        GtkNotebook *notebook;
+        GtkGrid     *grid;
         GtkLabel    *security_label;
 
         GtkWidget *security_widget;
@@ -116,7 +116,7 @@ ce_page_8021x_security_new (NMConnection     *connection,
 
         self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
         self->enable_8021x_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "enable_8021x_switch"));
-        self->notebook = GTK_NOTEBOOK (gtk_builder_get_object (self->builder, "notebook"));
+        self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
         self->security_label = GTK_LABEL (gtk_builder_get_object (self->builder, "security_label"));
 
 	if (nm_connection_get_setting_802_1x (connection))
@@ -142,7 +142,7 @@ static GtkWidget *
 ce_page_8021x_security_get_widget (CEPage *page)
 {
         CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (page);
-        return GTK_WIDGET (self->notebook);
+        return GTK_WIDGET (self->grid);
 }
 
 static const gchar *

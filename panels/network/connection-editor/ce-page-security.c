@@ -40,7 +40,7 @@ struct _CEPageSecurity
 
         GtkBuilder  *builder;
         GtkBox      *box;
-        GtkNotebook *notebook;
+        GtkGrid     *grid;
         GtkComboBox *security_combo;
         GtkLabel    *security_label;
 
@@ -383,7 +383,7 @@ static GtkWidget *
 ce_page_security_get_widget (CEPage *page)
 {
         CEPageSecurity *self = CE_PAGE_SECURITY (page);
-        return GTK_WIDGET (self->notebook);
+        return GTK_WIDGET (self->grid);
 }
 
 static const gchar *
@@ -480,7 +480,7 @@ ce_page_security_new (NMConnection      *connection,
         }
 
         self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
-        self->notebook = GTK_NOTEBOOK (gtk_builder_get_object (self->builder, "notebook"));
+        self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
         self->security_label = GTK_LABEL (gtk_builder_get_object (self->builder, "security_label"));
         self->security_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "security_combo"));
 
