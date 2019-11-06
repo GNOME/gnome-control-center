@@ -525,7 +525,7 @@ ws_802_1x_fill_connection (GtkComboBox *combo,
 	/* Get previous pasword flags, if any. Otherwise default to agent-owned secrets */
 	s_8021x = nm_connection_get_setting_802_1x (connection);
 	if (s_8021x)
-		nm_setting_get_secret_flags (NM_SETTING (s_8021x), eap->password_flags_name, &secret_flags, NULL);
+		nm_setting_get_secret_flags (NM_SETTING (s_8021x), eap_method_get_password_flags_name (eap), &secret_flags, NULL);
 	else
 		secret_flags = NM_SETTING_SECRET_FLAG_AGENT_OWNED;
 

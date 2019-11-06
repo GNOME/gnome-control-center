@@ -362,6 +362,12 @@ get_default_field (EAPMethod *parent)
 	return GTK_WIDGET (self->anon_identity_entry);
 }
 
+static const gchar *
+get_password_flags_name (EAPMethod *parent)
+{
+	return NM_SETTING_802_1X_PASSWORD;
+}
+
 static void
 changed_cb (EAPMethodTTLS *self)
 {
@@ -388,12 +394,12 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          get_widget,
 	                          get_default_field,
+	                          get_password_flags_name,
 	                          destroy,
 	                          FALSE);
 	if (!parent)
 		return NULL;
 
-	parent->password_flags_name = NM_SETTING_802_1X_PASSWORD;
 	self = (EAPMethodTTLS *) parent;
 	self->sec_parent = ws_parent;
 	self->is_editor = is_editor;

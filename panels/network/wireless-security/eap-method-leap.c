@@ -109,13 +109,13 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 
 	/* Save 802.1X password flags to the connection */
 	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->password_entry));
-	nm_setting_set_secret_flags (NM_SETTING (s_8021x), parent->password_flags_name,
+	nm_setting_set_secret_flags (NM_SETTING (s_8021x), NM_SETTING_802_1X_PASSWORD,
 	                             secret_flags, NULL);
 
 	/* Update secret flags and popup when editing the connection */
 	if (self->editing_connection)
 		nma_utils_update_password_storage (GTK_WIDGET (self->password_entry), secret_flags,
-		                                   NM_SETTING (s_8021x), parent->password_flags_name);
+		                                   NM_SETTING (s_8021x), NM_SETTING_802_1X_PASSWORD);
 }
 
 static void
@@ -140,6 +140,12 @@ get_default_field (EAPMethod *parent)
 {
 	EAPMethodLEAP *self = (EAPMethodLEAP *) parent;
 	return GTK_WIDGET (self->username_entry);
+}
+
+static const gchar *
+get_password_flags_name (EAPMethod *parent)
+{
+	return NM_SETTING_802_1X_PASSWORD;
 }
 
 /* Set the UI fields for user, password and show_password to the
@@ -211,12 +217,12 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          get_widget,
 	                          get_default_field,
+	                          get_password_flags_name,
 	                          destroy,
 	                          FALSE);
 	if (!parent)
 		return NULL;
 
-	parent->password_flags_name = NM_SETTING_802_1X_PASSWORD;
 	self = (EAPMethodLEAP *) parent;
 	self->editing_connection = secrets_only ? FALSE : TRUE;
 	self->ws_parent = ws_parent;
@@ -247,7 +253,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
-	nma_utils_setup_password_storage (GTK_WIDGET (self->password_entry), 0, (NMSetting *) s_8021x, parent->password_flags_name,
+	nma_utils_setup_password_storage (GTK_WIDGET (self->password_entry), 0, (NMSetting *) s_8021x, NM_SETTING_802_1X_PASSWORD,
 	                                  FALSE, secrets_only);
 
 	g_signal_connect_swapped (self->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), self);
