@@ -33,7 +33,7 @@
 #include "utils.h"
 
 struct _EAPMethodLEAP {
-	EAPMethod parent;
+	GObject parent;
 
 	GtkBuilder     *builder;
 	GtkGrid        *grid;
@@ -47,6 +47,11 @@ struct _EAPMethodLEAP {
 
 	gboolean editing_connection;
 };
+
+static void eap_method_iface_init (EAPMethodInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (EAPMethodLEAP, eap_method_leap, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (eap_method_get_type (), eap_method_iface_init))
 
 static void
 show_toggled_cb (EAPMethodLEAP *self)
@@ -183,15 +188,17 @@ widgets_unrealized (EAPMethodLEAP *self)
 }
 
 static void
-destroy (EAPMethod *parent)
+eap_method_leap_dispose (GObject *object)
 {
-	EAPMethodLEAP *self = (EAPMethodLEAP *) parent;
+	EAPMethodLEAP *self = EAP_METHOD_LEAP (object);
 
 	g_clear_object (&self->builder);
 	g_signal_handlers_disconnect_by_data (self->grid, self);
 	g_signal_handlers_disconnect_by_data (self->username_entry, self->ws_parent);
 	g_signal_handlers_disconnect_by_data (self->password_entry, self->ws_parent);
 	g_signal_handlers_disconnect_by_data (self->show_password_check, self);
+
+	G_OBJECT_CLASS (eap_method_leap_parent_class)->dispose (object);
 }
 
 static void
@@ -200,30 +207,41 @@ changed_cb (EAPMethodLEAP *self)
 	wireless_security_notify_changed (self->ws_parent);
 }
 
+static void
+eap_method_leap_init (EAPMethodLEAP *self)
+{
+}
+
+static void
+eap_method_leap_class_init (EAPMethodLEAPClass *klass)
+{
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	object_class->dispose = eap_method_leap_dispose;
+}
+
+static void
+eap_method_iface_init (EAPMethodInterface *iface)
+{
+	iface->validate = validate;
+	iface->add_to_size_group = add_to_size_group;
+	iface->fill_connection = fill_connection;
+	iface->update_secrets = update_secrets;
+	iface->get_widget = get_widget;
+	iface->get_default_field = get_default_field;
+	iface->get_password_flags_name = get_password_flags_name;
+}
+
 EAPMethodLEAP *
 eap_method_leap_new (WirelessSecurity *ws_parent,
                      NMConnection *connection,
                      gboolean secrets_only)
 {
 	EAPMethodLEAP *self;
-	EAPMethod *parent;
 	NMSetting8021x *s_8021x = NULL;
 	g_autoptr(GError) error = NULL;
 
-	parent = eap_method_init (sizeof (EAPMethodLEAP),
-	                          validate,
-	                          add_to_size_group,
-	                          fill_connection,
-	                          update_secrets,
-	                          get_widget,
-	                          get_default_field,
-	                          get_password_flags_name,
-	                          NULL,
-	                          destroy);
-	if (!parent)
-		return NULL;
-
-	self = (EAPMethodLEAP *) parent;
+	self = g_object_new (eap_method_leap_get_type (), NULL);
 	self->editing_connection = secrets_only ? FALSE : TRUE;
 	self->ws_parent = ws_parent;
 

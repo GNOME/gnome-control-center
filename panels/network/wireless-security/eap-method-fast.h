@@ -20,20 +20,19 @@
  * (C) Copyright 2012 Red Hat, Inc.
  */
 
-#ifndef EAP_METHOD_FAST_H
-#define EAP_METHOD_FAST_H
+#pragma once
+
+#include <NetworkManager.h>
 
 #include "wireless-security.h"
 
-typedef struct _EAPMethodFAST EAPMethodFAST;
+G_BEGIN_DECLS
+
+G_DECLARE_FINAL_TYPE (EAPMethodFAST, eap_method_fast, EAP, METHOD_FAST, GObject)
 
 EAPMethodFAST *eap_method_fast_new (WirelessSecurity *ws_parent,
                                     NMConnection *connection,
                                     gboolean is_editor,
                                     gboolean secrets_only);
 
-static void eap_method_fast_unref (EAPMethodFAST *method) { eap_method_unref (EAP_METHOD (method)); }
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (EAPMethodFAST, eap_method_fast_unref)
-
-#endif /* EAP_METHOD_FAST_H */
-
+G_END_DECLS
