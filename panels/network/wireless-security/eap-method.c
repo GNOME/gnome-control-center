@@ -134,14 +134,11 @@ eap_method_init (gsize obj_size,
                  EMGetWidgetFunc get_widget,
                  EMGetWidgetFunc get_default_field,
                  EMDestroyFunc destroy,
-                 const char *ui_resource,
                  gboolean phase2)
 {
 	g_autoptr(EAPMethod) self = NULL;
-	g_autoptr(GError) error = NULL;
 
 	g_return_val_if_fail (obj_size > 0, NULL);
-	g_return_val_if_fail (ui_resource != NULL, NULL);
 
 	self = g_slice_alloc0 (obj_size);
 	g_assert (self);
@@ -155,14 +152,6 @@ eap_method_init (gsize obj_size,
 	self->get_widget = get_widget;
 	self->get_default_field = get_default_field;
 	self->phase2 = phase2;
-
-	self->builder = gtk_builder_new ();
-	if (!gtk_builder_add_from_resource (self->builder, ui_resource, &error)) {
-		g_warning ("Couldn't load UI builder resource %s: %s",
-		           ui_resource, error->message);
-		return NULL;
-	}
-
 	self->destroy = destroy;
 
 	return g_steal_pointer (&self);
@@ -189,8 +178,6 @@ eap_method_unref (EAPMethod *self)
 	if (self->refcount == 0) {
 		if (self->destroy)
 			self->destroy (self);
-
-		g_clear_object (&self->builder);
 
 		g_slice_free1 (self->obj_size, self);
 	}
