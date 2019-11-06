@@ -33,12 +33,11 @@ typedef void        (*EMUpdateSecretsFunc)  (EAPMethod *method, NMConnection *co
 typedef void        (*EMDestroyFunc)        (EAPMethod *method);
 typedef gboolean    (*EMValidateFunc)       (EAPMethod *method, GError **error);
 typedef GtkWidget*  (*EMGetWidgetFunc)      (EAPMethod *method);
+typedef const gchar* (*EMGetStringFunc)     (EAPMethod *method);
 
 struct _EAPMethod {
 	guint32 refcount;
 	gsize obj_size;
-
-	const char *password_flags_name;
 
 	gboolean phase2;
 
@@ -48,6 +47,7 @@ struct _EAPMethod {
 	EMValidateFunc validate;
 	EMGetWidgetFunc get_widget;
 	EMGetWidgetFunc get_default_field;
+	EMGetStringFunc get_password_flags_name;
 	EMDestroyFunc destroy;
 };
 
@@ -57,6 +57,8 @@ struct _EAPMethod {
 GtkWidget *eap_method_get_widget (EAPMethod *method);
 
 GtkWidget *eap_method_get_default_field (EAPMethod *method);
+
+const gchar *eap_method_get_password_flags_name (EAPMethod *method);
 
 gboolean eap_method_validate (EAPMethod *method, GError **error);
 
@@ -81,6 +83,7 @@ EAPMethod *eap_method_init (gsize obj_size,
                             EMUpdateSecretsFunc update_secrets,
                             EMGetWidgetFunc get_widget,
                             EMGetWidgetFunc get_default_field,
+                            EMGetStringFunc get_password_flags_name,
                             EMDestroyFunc destroy,
                             gboolean phase2);
 
