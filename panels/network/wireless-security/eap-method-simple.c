@@ -191,6 +191,20 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 	                          (HelperSecretFunc) nm_setting_802_1x_get_password);
 }
 
+static GtkWidget *
+get_widget (EAPMethod *parent)
+{
+	EAPMethodSimple *self = (EAPMethodSimple *) parent;
+	return GTK_WIDGET (self->grid);
+}
+
+static GtkWidget *
+get_default_field (EAPMethod *parent)
+{
+	EAPMethodSimple *self = (EAPMethodSimple *) parent;
+	return GTK_WIDGET (self->username_entry);
+}
+
 static gboolean
 stuff_changed (EAPMethodSimple *self)
 {
@@ -289,10 +303,10 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	                          add_to_size_group,
 	                          fill_connection,
 	                          update_secrets,
+	                          get_widget,
+	                          get_default_field,
 	                          destroy,
 	                          "/org/gnome/ControlCenter/network/eap-method-simple.ui",
-	                          "grid",
-	                          "username_entry",
 	                          flags & EAP_METHOD_SIMPLE_FLAG_PHASE2);
 	if (!parent)
 		return NULL;
