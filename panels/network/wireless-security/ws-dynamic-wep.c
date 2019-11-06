@@ -32,6 +32,7 @@
 struct _WirelessSecurityDynamicWEP {
 	WirelessSecurity parent;
 
+	GtkBuilder  *builder;
 	GtkComboBox *auth_combo;
 	GtkLabel    *auth_label;
 	GtkGrid     *grid;
@@ -45,6 +46,7 @@ destroy (WirelessSecurity *parent)
 {
 	WirelessSecurityDynamicWEP *self = (WirelessSecurityDynamicWEP *) parent;
 
+	g_clear_object (&self->builder);
 	g_clear_object (&self->size_group);
 }
 
@@ -105,22 +107,28 @@ ws_dynamic_wep_new (NMConnection *connection,
 {
 	WirelessSecurity *parent;
 	WirelessSecurityDynamicWEP *self;
+	g_autoptr(GError) error = NULL;
 
 	parent = wireless_security_init (sizeof (WirelessSecurityDynamicWEP),
 	                                 get_widget,
 	                                 validate,
 	                                 add_to_size_group,
 	                                 fill_connection,
-	                                 destroy,
-	                                 "/org/gnome/ControlCenter/network/ws-dynamic-wep.ui");
+	                                 destroy);
 	if (!parent)
 		return NULL;
 	self = (WirelessSecurityDynamicWEP *) parent;
 
-	self->auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "auth_combo"));
-	self->auth_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "auth_label"));
-	self->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
-	self->method_box = GTK_BOX (gtk_builder_get_object (parent->builder, "method_box"));
+	self->builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/ws-dynamic-wep.ui", &error)) {
+		g_warning ("Couldn't load UI builder resource: %s", error->message);
+		return NULL;
+	}
+
+	self->auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "auth_combo"));
+	self->auth_label = GTK_LABEL (gtk_builder_get_object (self->builder, "auth_label"));
+	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
+	self->method_box = GTK_BOX (gtk_builder_get_object (self->builder, "method_box"));
 
 	wireless_security_set_adhoc_compatible (parent, FALSE);
 

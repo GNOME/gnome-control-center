@@ -40,7 +40,6 @@ typedef GtkWidget* (*WSGetWidgetFunc) (WirelessSecurity *sec);
 
 struct _WirelessSecurity {
 	WirelessSecurityPrivate *priv;
-	GtkBuilder *builder;
 };
 
 #define WIRELESS_SECURITY(x) ((WirelessSecurity *) x)
@@ -92,8 +91,7 @@ WirelessSecurity *wireless_security_init (gsize obj_size,
                                           WSValidateFunc validate,
                                           WSAddToSizeGroupFunc add_to_size_group,
                                           WSFillConnectionFunc fill_connection,
-                                          WSDestroyFunc destroy,
-                                          const char *ui_resource);
+                                          WSDestroyFunc destroy);
 
 void wireless_security_notify_changed (WirelessSecurity *sec);
 
