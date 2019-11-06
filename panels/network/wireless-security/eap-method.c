@@ -75,6 +75,17 @@ eap_method_get_password_flags_name (EAPMethod *self)
 }
 
 gboolean
+eap_method_get_phase2 (EAPMethod *self)
+{
+	g_return_val_if_fail (self != NULL, FALSE);
+
+	if (self->get_phase2)
+		return self->get_phase2 (self);
+	else
+		return FALSE;
+}
+
+gboolean
 eap_method_validate (EAPMethod *self, GError **error)
 {
 	gboolean result;
@@ -145,8 +156,8 @@ eap_method_init (gsize obj_size,
                  EMGetWidgetFunc get_widget,
                  EMGetWidgetFunc get_default_field,
                  EMGetStringFunc get_password_flags_name,
-                 EMDestroyFunc destroy,
-                 gboolean phase2)
+                 EMGetBooleanFunc get_phase2,
+                 EMDestroyFunc destroy)
 {
 	g_autoptr(EAPMethod) self = NULL;
 
@@ -164,8 +175,8 @@ eap_method_init (gsize obj_size,
 	self->get_widget = get_widget;
 	self->get_default_field = get_default_field;
 	self->get_password_flags_name = get_password_flags_name;
+	self->get_phase2 = get_phase2;
 	self->destroy = destroy;
-	self->phase2 = phase2;
 
 	return g_steal_pointer (&self);
 }
@@ -528,7 +539,7 @@ eap_method_ca_cert_ignore_set (EAPMethod *self,
 	if (s_8021x) {
 		ignore = !ca_cert_error && filename == NULL;
 		g_object_set_data (G_OBJECT (s_8021x),
-		                   self->phase2 ? IGNORE_PHASE2_CA_CERT_TAG : IGNORE_CA_CERT_TAG,
+		                   eap_method_get_phase2 (self) ? IGNORE_PHASE2_CA_CERT_TAG : IGNORE_CA_CERT_TAG,
 		                   GUINT_TO_POINTER (ignore));
 	}
 }
@@ -549,7 +560,7 @@ eap_method_ca_cert_ignore_get (EAPMethod *self, NMConnection *connection)
 	s_8021x = nm_connection_get_setting_802_1x (connection);
 	if (s_8021x) {
 		return !!g_object_get_data (G_OBJECT (s_8021x),
-		                            self->phase2 ? IGNORE_PHASE2_CA_CERT_TAG : IGNORE_CA_CERT_TAG);
+		                            eap_method_get_phase2 (self) ? IGNORE_PHASE2_CA_CERT_TAG : IGNORE_CA_CERT_TAG);
 	}
 	return FALSE;
 }
