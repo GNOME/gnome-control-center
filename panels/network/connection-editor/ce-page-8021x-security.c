@@ -41,7 +41,7 @@ struct _CEPage8021xSecurity {
 
         NMConnection *connection;
         GtkWidget *security_widget;
-        WirelessSecurity *security;
+        WirelessSecurityWPAEAP *security;
         GtkSizeGroup *group;
         gboolean initial_have_8021x;
 };
@@ -74,14 +74,14 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 
         self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-	self->security = (WirelessSecurity *) ws_wpa_eap_new (self->connection, TRUE, FALSE);
+	self->security = ws_wpa_eap_new (self->connection, TRUE, FALSE);
 	if (!self->security) {
 		g_warning ("Could not load 802.1x user interface.");
 		return;
 	}
 
-	wireless_security_set_changed_notify (self->security, stuff_changed, self);
-	self->security_widget = wireless_security_get_widget (self->security);
+	wireless_security_set_changed_notify (WIRELESS_SECURITY (self->security), stuff_changed, self);
+	self->security_widget = wireless_security_get_widget (WIRELESS_SECURITY (self->security));
 	parent = gtk_widget_get_parent (self->security_widget);
 	if (parent)
 		gtk_container_remove (GTK_CONTAINER (parent), self->security_widget);
@@ -91,7 +91,7 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 	gtk_widget_set_sensitive (self->security_widget, self->initial_have_8021x);
 
         gtk_size_group_add_widget (self->group, GTK_WIDGET (self->security_label));
-        wireless_security_add_to_size_group (self->security, self->group);
+        wireless_security_add_to_size_group (WIRELESS_SECURITY (self->security), self->group);
 
 	gtk_container_add (GTK_CONTAINER (self->box), self->security_widget);
 
@@ -124,7 +124,7 @@ ce_page_8021x_security_validate (CEPage *cepage, NMConnection *connection, GErro
 		NMSetting *s_8021x;
 
 		/* FIXME: get failed property and error out of wireless security objects */
-		valid = wireless_security_validate (self->security, error);
+		valid = wireless_security_validate (WIRELESS_SECURITY (self->security), error);
 		if (valid) {
 			g_autoptr(NMConnection) tmp_connection = NULL;
 			NMSetting *s_con;
@@ -139,7 +139,7 @@ ce_page_8021x_security_validate (CEPage *cepage, NMConnection *connection, GErro
 			s_con = nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
 			nm_connection_add_setting (tmp_connection, nm_setting_duplicate (s_con));
 
-			ws_802_1x_fill_connection (GTK_COMBO_BOX (gtk_builder_get_object (self->security->builder, "auth_combo")), tmp_connection);
+			ws_802_1x_fill_connection (ws_wpa_eap_get_auth_combo (self->security), tmp_connection);
 
 			s_8021x = nm_connection_get_setting (tmp_connection, NM_TYPE_SETTING_802_1X);
 			nm_connection_add_setting (connection, NM_SETTING (g_object_ref (s_8021x)));
@@ -164,7 +164,7 @@ ce_page_8021x_security_dispose (GObject *object)
 	CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (object);
 
         g_clear_object (&self->connection);
-        g_clear_pointer (&self->security, wireless_security_unref);
+        g_clear_pointer ((WirelessSecurity**) &self->security, wireless_security_unref);
         g_clear_object (&self->group);
 
 	G_OBJECT_CLASS (ce_page_8021x_security_parent_class)->dispose (object);
