@@ -33,18 +33,11 @@
 #include "utils.h"
 #include "helpers.h"
 
-GType
-eap_method_get_type (void)
+G_DEFINE_INTERFACE (EAPMethod, eap_method, G_TYPE_OBJECT)
+
+static void
+eap_method_default_init (EAPMethodInterface *iface)
 {
-       static GType type_id = 0;
-
-       if (!type_id) {
-               type_id = g_boxed_type_register_static ("CcEAPMethod",
-                                                       (GBoxedCopyFunc) eap_method_ref,
-                                                       (GBoxedFreeFunc) eap_method_unref);
-       }
-
-       return type_id;
 }
 
 GtkWidget *
@@ -52,7 +45,7 @@ eap_method_get_widget (EAPMethod *self)
 {
 	g_return_val_if_fail (self != NULL, NULL);
 
-	return self->get_widget (self);
+	return EAP_METHOD_GET_IFACE (self)->get_widget (self);
 }
 
 GtkWidget *
@@ -60,7 +53,7 @@ eap_method_get_default_field (EAPMethod *self)
 {
 	g_return_val_if_fail (self != NULL, NULL);
 
-	return self->get_default_field (self);
+	return EAP_METHOD_GET_IFACE (self)->get_default_field (self);
 }
 
 const gchar *
@@ -68,8 +61,8 @@ eap_method_get_password_flags_name (EAPMethod *self)
 {
 	g_return_val_if_fail (self != NULL, NULL);
 
-	if (self->get_password_flags_name)
-		return self->get_password_flags_name (self);
+	if (EAP_METHOD_GET_IFACE (self)->get_password_flags_name)
+		return EAP_METHOD_GET_IFACE (self)->get_password_flags_name (self);
 	else
 		return NULL;
 }
@@ -79,8 +72,8 @@ eap_method_get_phase2 (EAPMethod *self)
 {
 	g_return_val_if_fail (self != NULL, FALSE);
 
-	if (self->get_phase2)
-		return self->get_phase2 (self);
+	if (EAP_METHOD_GET_IFACE (self)->get_phase2)
+		return EAP_METHOD_GET_IFACE (self)->get_phase2 (self);
 	else
 		return FALSE;
 }
@@ -92,8 +85,7 @@ eap_method_validate (EAPMethod *self, GError **error)
 
 	g_return_val_if_fail (self != NULL, FALSE);
 
-	g_assert (self->validate);
-	result = (*(self->validate)) (self, error);
+	result = (*(EAP_METHOD_GET_IFACE (self)->validate)) (self, error);
 	if (!result && error && !*error)
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("undefined error in 802.1X security (wpa-eap)"));
 	return result;
@@ -105,8 +97,7 @@ eap_method_add_to_size_group (EAPMethod *self, GtkSizeGroup *group)
 	g_return_if_fail (self != NULL);
 	g_return_if_fail (group != NULL);
 
-	g_assert (self->add_to_size_group);
-	return (*(self->add_to_size_group)) (self, group);
+	return (*(EAP_METHOD_GET_IFACE (self)->add_to_size_group)) (self, group);
 }
 
 void
@@ -117,8 +108,7 @@ eap_method_fill_connection (EAPMethod *self,
 	g_return_if_fail (self != NULL);
 	g_return_if_fail (connection != NULL);
 
-	g_assert (self->fill_connection);
-	return (*(self->fill_connection)) (self, connection, flags);
+	return (*(EAP_METHOD_GET_IFACE (self)->fill_connection)) (self, connection, flags);
 }
 
 void
@@ -141,69 +131,9 @@ eap_method_phase2_update_secrets_helper (EAPMethod *self,
 			g_autoptr(EAPMethod) eap = NULL;
 
 			gtk_tree_model_get (model, &iter, column, &eap, -1);
-			if (eap && eap->update_secrets)
-				eap->update_secrets (self, connection);
+			if (eap && EAP_METHOD_GET_IFACE (eap)->update_secrets)
+				EAP_METHOD_GET_IFACE (eap)->update_secrets (self, connection);
 		} while (gtk_tree_model_iter_next (model, &iter));
-	}
-}
-
-EAPMethod *
-eap_method_init (gsize obj_size,
-                 EMValidateFunc validate,
-                 EMAddToSizeGroupFunc add_to_size_group,
-                 EMFillConnectionFunc fill_connection,
-                 EMUpdateSecretsFunc update_secrets,
-                 EMGetWidgetFunc get_widget,
-                 EMGetWidgetFunc get_default_field,
-                 EMGetStringFunc get_password_flags_name,
-                 EMGetBooleanFunc get_phase2,
-                 EMDestroyFunc destroy)
-{
-	g_autoptr(EAPMethod) self = NULL;
-
-	g_return_val_if_fail (obj_size > 0, NULL);
-
-	self = g_slice_alloc0 (obj_size);
-	g_assert (self);
-
-	self->refcount = 1;
-	self->obj_size = obj_size;
-	self->validate = validate;
-	self->add_to_size_group = add_to_size_group;
-	self->fill_connection = fill_connection;
-	self->update_secrets = update_secrets;
-	self->get_widget = get_widget;
-	self->get_default_field = get_default_field;
-	self->get_password_flags_name = get_password_flags_name;
-	self->get_phase2 = get_phase2;
-	self->destroy = destroy;
-
-	return g_steal_pointer (&self);
-}
-
-
-EAPMethod *
-eap_method_ref (EAPMethod *self)
-{
-	g_return_val_if_fail (self != NULL, NULL);
-	g_return_val_if_fail (self->refcount > 0, NULL);
-
-	self->refcount++;
-	return self;
-}
-
-void
-eap_method_unref (EAPMethod *self)
-{
-	g_return_if_fail (self != NULL);
-	g_return_if_fail (self->refcount > 0);
-
-	self->refcount--;
-	if (self->refcount == 0) {
-		if (self->destroy)
-			self->destroy (self);
-
-		g_slice_free1 (self->obj_size, self);
 	}
 }
 

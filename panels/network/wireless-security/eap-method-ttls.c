@@ -35,7 +35,7 @@
 #define I_METHOD_COLUMN 1
 
 struct _EAPMethodTTLS {
-	EAPMethod parent;
+	GObject parent;
 
 	GtkBuilder           *builder;
 	GtkEntry             *anon_identity_entry;
@@ -55,19 +55,26 @@ struct _EAPMethodTTLS {
 	gboolean is_editor;
 };
 
+static void eap_method_iface_init (EAPMethodInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (EAPMethodTTLS, eap_method_ttls, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (eap_method_get_type (), eap_method_iface_init))
+
 static void
-destroy (EAPMethod *parent)
+eap_method_ttls_dispose (GObject *object)
 {
-	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
+	EAPMethodTTLS *self = EAP_METHOD_TTLS (object);
 
 	g_clear_object (&self->builder);
 	g_clear_object (&self->size_group);
+
+	G_OBJECT_CLASS (eap_method_ttls_parent_class)->dispose (object);
 }
 
 static gboolean
-validate (EAPMethod *parent, GError **error)
+validate (EAPMethod *method, GError **error)
 {
-	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
+	EAPMethodTTLS *self = EAP_METHOD_TTLS (method);
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	g_autoptr(EAPMethod) eap = NULL;
@@ -102,9 +109,9 @@ ca_cert_not_required_toggled (EAPMethodTTLS *self)
 }
 
 static void
-add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
+add_to_size_group (EAPMethod *method, GtkSizeGroup *group)
 {
-	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
+	EAPMethodTTLS *self = EAP_METHOD_TTLS (method);
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	g_autoptr(EAPMethod) eap = NULL;
@@ -126,9 +133,9 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 }
 
 static void
-fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFlags flags)
+fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFlags flags)
 {
-	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
+	EAPMethodTTLS *self = EAP_METHOD_TTLS (method);
 	NMSetting8021x *s_8021x;
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	const char *text;
@@ -157,7 +164,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 		g_warning ("Couldn't read CA certificate '%s': %s", filename, error ? error->message : "(unknown)");
 		ca_cert_error = TRUE;
 	}
-	eap_method_ca_cert_ignore_set (parent, connection, filename, ca_cert_error);
+	eap_method_ca_cert_ignore_set (method, connection, filename, ca_cert_error);
 
 	model = gtk_combo_box_get_model (self->inner_auth_combo);
 	gtk_combo_box_get_active_iter (self->inner_auth_combo, &iter);
@@ -339,31 +346,31 @@ inner_auth_combo_init (EAPMethodTTLS *self,
 }
 
 static void
-update_secrets (EAPMethod *parent, NMConnection *connection)
+update_secrets (EAPMethod *method, NMConnection *connection)
 {
-	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
-	eap_method_phase2_update_secrets_helper (parent,
+	EAPMethodTTLS *self = EAP_METHOD_TTLS (method);
+	eap_method_phase2_update_secrets_helper (method,
 	                                         connection,
 	                                         self->inner_auth_combo,
 	                                         I_METHOD_COLUMN);
 }
 
 static GtkWidget *
-get_widget (EAPMethod *parent)
+get_widget (EAPMethod *method)
 {
-	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
+	EAPMethodTTLS *self = EAP_METHOD_TTLS (method);
 	return GTK_WIDGET (self->grid);
 }
 
 static GtkWidget *
-get_default_field (EAPMethod *parent)
+get_default_field (EAPMethod *method)
 {
-	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
+	EAPMethodTTLS *self = EAP_METHOD_TTLS (method);
 	return GTK_WIDGET (self->anon_identity_entry);
 }
 
 static const gchar *
-get_password_flags_name (EAPMethod *parent)
+get_password_flags_name (EAPMethod *method)
 {
 	return NM_SETTING_802_1X_PASSWORD;
 }
@@ -374,33 +381,44 @@ changed_cb (EAPMethodTTLS *self)
 	wireless_security_notify_changed (self->sec_parent);
 }
 
+static void
+eap_method_ttls_init (EAPMethodTTLS *self)
+{
+}
+
+static void
+eap_method_ttls_class_init (EAPMethodTTLSClass *klass)
+{
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	object_class->dispose = eap_method_ttls_dispose;
+}
+
+static void
+eap_method_iface_init (EAPMethodInterface *iface)
+{
+	iface->validate = validate;
+	iface->add_to_size_group = add_to_size_group;
+	iface->fill_connection = fill_connection;
+	iface->update_secrets = update_secrets;
+	iface->get_widget = get_widget;
+	iface->get_default_field = get_default_field;
+	iface->get_password_flags_name = get_password_flags_name;
+}
+
 EAPMethodTTLS *
 eap_method_ttls_new (WirelessSecurity *ws_parent,
                      NMConnection *connection,
                      gboolean is_editor,
                      gboolean secrets_only)
 {
-	EAPMethod *parent;
 	EAPMethodTTLS *self;
 	GtkFileFilter *filter;
 	NMSetting8021x *s_8021x = NULL;
 	const char *filename;
 	g_autoptr(GError) error = NULL;
 
-	parent = eap_method_init (sizeof (EAPMethodTTLS),
-	                          validate,
-	                          add_to_size_group,
-	                          fill_connection,
-	                          update_secrets,
-	                          get_widget,
-	                          get_default_field,
-	                          get_password_flags_name,
-	                          NULL,
-	                          destroy);
-	if (!parent)
-		return NULL;
-
-	self = (EAPMethodTTLS *) parent;
+	self = g_object_new (eap_method_ttls_get_type (), NULL);
 	self->sec_parent = ws_parent;
 	self->is_editor = is_editor;
 
@@ -441,7 +459,7 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 				gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (self->ca_cert_button), filename);
 		}
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check),
-		                              !filename && eap_method_ca_cert_ignore_get (parent, connection));
+		                              !filename && eap_method_ca_cert_ignore_get (EAP_METHOD (self), connection));
 	}
 
 	if (s_8021x && nm_setting_802_1x_get_anonymous_identity (s_8021x))

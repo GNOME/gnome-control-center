@@ -33,7 +33,7 @@
 #include "utils.h"
 
 struct _EAPMethodSimple {
-	EAPMethod parent;
+	GObject parent;
 
 	GtkBuilder      *builder;
 	GtkGrid         *grid;
@@ -50,6 +50,11 @@ struct _EAPMethodSimple {
 
 	guint idle_func_id;
 };
+
+static void eap_method_iface_init (EAPMethodInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (EAPMethodSimple, eap_method_simple, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (eap_method_get_type (), eap_method_iface_init))
 
 static void
 show_toggled_cb (EAPMethodSimple *self)
@@ -68,9 +73,9 @@ always_ask_selected (GtkEntry *passwd_entry)
 }
 
 static gboolean
-validate (EAPMethod *parent, GError **error)
+validate (EAPMethod *method, GError **error)
 {
-	EAPMethodSimple *self = (EAPMethodSimple *)parent;
+	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
 	const char *text;
 	gboolean ret = TRUE;
 
@@ -101,9 +106,9 @@ validate (EAPMethod *parent, GError **error)
 }
 
 static void
-add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
+add_to_size_group (EAPMethod *method, GtkSizeGroup *group)
 {
-	EAPMethodSimple *self = (EAPMethodSimple *) parent;
+	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
 	gtk_size_group_add_widget (group, GTK_WIDGET (self->username_label));
 	gtk_size_group_add_widget (group, GTK_WIDGET (self->password_label));
 }
@@ -126,9 +131,9 @@ static const EapType eap_table[EAP_METHOD_SIMPLE_TYPE_LAST] = {
 };
 
 static void
-fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFlags prev_flags)
+fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFlags prev_flags)
 {
-	EAPMethodSimple *self = (EAPMethodSimple *) parent;
+	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
 	NMSetting8021x *s_8021x;
 	gboolean not_saved = FALSE;
 	NMSettingSecretFlags flags;
@@ -140,11 +145,11 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	/* If this is the main EAP method, clear any existing methods because the
 	 * user-selected on will replace it.
 	 */
-	if (eap_method_get_phase2 (parent) == FALSE)
+	if (eap_method_get_phase2 (method) == FALSE)
 		nm_setting_802_1x_clear_eap_methods (s_8021x);
 
 	eap_type = &eap_table[self->type];
-	if (eap_method_get_phase2 (parent)) {
+	if (eap_method_get_phase2 (method)) {
 		/* If the outer EAP method (TLS, TTLS, PEAP, etc) allows inner/phase2
 		 * EAP methods (which only TTLS allows) *and* the inner/phase2 method
 		 * supports being an inner EAP method, then set PHASE2_AUTHEAP.
@@ -183,9 +188,9 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 }
 
 static void
-update_secrets (EAPMethod *parent, NMConnection *connection)
+update_secrets (EAPMethod *method, NMConnection *connection)
 {
-	EAPMethodSimple *self = (EAPMethodSimple *) parent;
+	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
 	helper_fill_secret_entry (connection,
 	                          self->password_entry,
 	                          NM_TYPE_SETTING_802_1X,
@@ -193,29 +198,29 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 }
 
 static GtkWidget *
-get_widget (EAPMethod *parent)
+get_widget (EAPMethod *method)
 {
-	EAPMethodSimple *self = (EAPMethodSimple *) parent;
+	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
 	return GTK_WIDGET (self->grid);
 }
 
 static GtkWidget *
-get_default_field (EAPMethod *parent)
+get_default_field (EAPMethod *method)
 {
-	EAPMethodSimple *self = (EAPMethodSimple *) parent;
+	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
 	return GTK_WIDGET (self->username_entry);
 }
 
 static const gchar *
-get_password_flags_name (EAPMethod *parent)
+get_password_flags_name (EAPMethod *method)
 {
 	return NM_SETTING_802_1X_PASSWORD;
 }
 
 static const gboolean
-get_phase2 (EAPMethod *parent)
+get_phase2 (EAPMethod *method)
 {
-	EAPMethodSimple *self = (EAPMethodSimple *) parent;
+	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
 	return self->flags & EAP_METHOD_SIMPLE_FLAG_PHASE2;
 }
 
@@ -283,9 +288,9 @@ widgets_unrealized (EAPMethodSimple *self)
 }
 
 static void
-destroy (EAPMethod *parent)
+eap_method_simple_dispose (GObject *object)
 {
-	EAPMethodSimple *self = (EAPMethodSimple *) parent;
+	EAPMethodSimple *self = EAP_METHOD_SIMPLE (object);
 
 	g_clear_object (&self->builder);
 	g_signal_handlers_disconnect_by_data (self->grid, self);
@@ -295,6 +300,8 @@ destroy (EAPMethod *parent)
 	g_signal_handlers_disconnect_by_data (self->show_password_check, self);
 
 	nm_clear_g_source (&self->idle_func_id);
+
+	G_OBJECT_CLASS (eap_method_simple_parent_class)->dispose (object);
 }
 
 static void
@@ -303,31 +310,43 @@ changed_cb (EAPMethodSimple *self)
 	wireless_security_notify_changed (self->ws_parent);
 }
 
+static void
+eap_method_simple_init (EAPMethodSimple *self)
+{
+}
+
+static void
+eap_method_simple_class_init (EAPMethodSimpleClass *klass)
+{
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	object_class->dispose = eap_method_simple_dispose;
+}
+
+static void
+eap_method_iface_init (EAPMethodInterface *iface)
+{
+	iface->validate = validate;
+	iface->add_to_size_group = add_to_size_group;
+	iface->fill_connection = fill_connection;
+	iface->update_secrets = update_secrets;
+	iface->get_widget = get_widget;
+	iface->get_default_field = get_default_field;
+	iface->get_password_flags_name = get_password_flags_name;
+	iface->get_phase2 = get_phase2;
+}
+
 EAPMethodSimple *
 eap_method_simple_new (WirelessSecurity *ws_parent,
                        NMConnection *connection,
                        EAPMethodSimpleType type,
                        EAPMethodSimpleFlags flags)
 {
-	EAPMethod *parent;
 	EAPMethodSimple *self;
 	NMSetting8021x *s_8021x = NULL;
 	g_autoptr(GError) error = NULL;
 
-	parent = eap_method_init (sizeof (EAPMethodSimple),
-	                          validate,
-	                          add_to_size_group,
-	                          fill_connection,
-	                          update_secrets,
-	                          get_widget,
-	                          get_default_field,
-	                          get_password_flags_name,
-	                          get_phase2,
-	                          destroy);
-	if (!parent)
-		return NULL;
-
-	self = (EAPMethodSimple *) parent;
+	self = g_object_new (eap_method_simple_get_type (), NULL);
 	self->ws_parent = ws_parent;
 	self->flags = flags;
 	self->type = type;
