@@ -33,7 +33,7 @@
 #include "utils.h"
 
 struct _EAPMethodTLS {
-	EAPMethod parent;
+	GObject parent;
 
 	GtkBuilder           *builder;
 	GtkFileChooserButton *ca_cert_button;
@@ -56,12 +56,19 @@ struct _EAPMethodTLS {
 	gboolean editing_connection;
 };
 
+static void eap_method_iface_init (EAPMethodInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (EAPMethodTLS, eap_method_tls, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (eap_method_get_type (), eap_method_iface_init))
+
 static void
-destroy (EAPMethod *parent)
+eap_method_tls_dispose (GObject *object)
 {
-	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+	EAPMethodTLS *self = EAP_METHOD_TLS (object);
 
 	g_clear_object (&self->builder);
+
+	G_OBJECT_CLASS (eap_method_tls_parent_class)->dispose (object);
 }
 
 static void
@@ -74,9 +81,9 @@ show_toggled_cb (EAPMethodTLS *self)
 }
 
 static gboolean
-validate (EAPMethod *parent, GError **error)
+validate (EAPMethod *method, GError **error)
 {
-	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	const char *password, *identity;
 	g_autoptr(GError) ca_cert_error = NULL;
@@ -146,9 +153,9 @@ ca_cert_not_required_toggled (EAPMethodTLS *self)
 }
 
 static void
-add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
+add_to_size_group (EAPMethod *method, GtkSizeGroup *group)
 {
-	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
 
 	gtk_size_group_add_widget (group, GTK_WIDGET (self->ca_cert_not_required_check));
 	gtk_size_group_add_widget (group, GTK_WIDGET (self->identity_label));
@@ -159,9 +166,9 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 }
 
 static void
-fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFlags flags)
+fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFlags flags)
 {
-	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	NMSetting8021x *s_8021x;
 	NMSettingSecretFlags secret_flags;
@@ -246,13 +253,12 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 			ca_cert_error = TRUE;
 		}
 	}
-	eap_method_ca_cert_ignore_set (parent, connection, ca_filename, ca_cert_error);
+	eap_method_ca_cert_ignore_set (method, connection, ca_filename, ca_cert_error);
 }
 
 static void
-private_key_picker_helper (EAPMethod *parent, const char *filename, gboolean changed)
+private_key_picker_helper (EAPMethodTLS *self, const char *filename, gboolean changed)
 {
-	EAPMethodTLS *self = (EAPMethodTLS *) parent;
 	g_autoptr(NMSetting8021x) setting = NULL;
 	NMSetting8021xCKFormat cert_format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	const char *password;
@@ -296,12 +302,12 @@ private_key_picker_helper (EAPMethod *parent, const char *filename, gboolean cha
 static void
 private_key_picker_file_set_cb (GtkWidget *chooser, gpointer user_data)
 {
-	EAPMethod *parent = (EAPMethod *) user_data;
+	EAPMethodTLS *self = user_data;
 	g_autofree gchar *filename = NULL;
 
 	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
 	if (filename)
-		private_key_picker_helper (parent, filename, TRUE);
+		private_key_picker_helper (self, filename, TRUE);
 }
 
 static void reset_filter (GtkWidget *widget, GParamSpec *spec, gpointer user_data)
@@ -323,10 +329,10 @@ changed_cb (EAPMethodTLS *self)
 }
 
 static void
-setup_filepicker (GtkFileChooserButton *button,
+setup_filepicker (EAPMethodTLS *self,
+                  GtkFileChooserButton *button,
                   const char *title,
                   WirelessSecurity *ws_parent,
-                  EAPMethod *parent,
                   NMSetting8021x *s_8021x,
                   SchemeFunc scheme_func,
                   PathFunc path_func,
@@ -353,12 +359,12 @@ setup_filepicker (GtkFileChooserButton *button,
 	if (privkey) {
 		g_signal_connect (button, "selection-changed",
 		                  (GCallback) private_key_picker_file_set_cb,
-		                  parent);
+		                  self);
 		if (filename)
-			private_key_picker_helper (parent, filename, FALSE);
+			private_key_picker_helper (self, filename, FALSE);
 	}
 
-	g_signal_connect_swapped (button, "selection-changed", G_CALLBACK (changed_cb), parent);
+	g_signal_connect_swapped (button, "selection-changed", G_CALLBACK (changed_cb), self);
 
 	filter = eap_method_default_file_chooser_filter_new (privkey);
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (button), filter);
@@ -373,9 +379,9 @@ setup_filepicker (GtkFileChooserButton *button,
 }
 
 static void
-update_secrets (EAPMethod *parent, NMConnection *connection)
+update_secrets (EAPMethod *method, NMConnection *connection)
 {
-	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
 	NMSetting8021x *s_8021x;
 	HelperSecretFunc password_func;
 	SchemeFunc scheme_func;
@@ -407,31 +413,57 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 }
 
 static GtkWidget *
-get_widget (EAPMethod *parent)
+get_widget (EAPMethod *method)
 {
-	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
 	return GTK_WIDGET (self->grid);
 }
 
 static GtkWidget *
-get_default_field (EAPMethod *parent)
+get_default_field (EAPMethod *method)
 {
-	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
 	return GTK_WIDGET (self->identity_entry);
 }
 
 static const gchar *
-get_password_flags_name (EAPMethod *parent)
+get_password_flags_name (EAPMethod *method)
 {
-	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
 	return self->password_flags_name;
 }
 
 static gboolean
-get_phase2 (EAPMethod *parent)
+get_phase2 (EAPMethod *method)
 {
-	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
 	return self->phase2;
+}
+
+static void
+eap_method_tls_init (EAPMethodTLS *self)
+{
+}
+
+static void
+eap_method_tls_class_init (EAPMethodTLSClass *klass)
+{
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	object_class->dispose = eap_method_tls_dispose;
+}
+
+static void
+eap_method_iface_init (EAPMethodInterface *iface)
+{
+	iface->validate = validate;
+	iface->add_to_size_group = add_to_size_group;
+	iface->fill_connection = fill_connection;
+	iface->update_secrets = update_secrets;
+	iface->get_widget = get_widget;
+	iface->get_default_field = get_default_field;
+	iface->get_password_flags_name = get_password_flags_name;
+	iface->get_phase2 = get_phase2;
 }
 
 EAPMethodTLS *
@@ -441,25 +473,11 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
                     gboolean secrets_only)
 {
 	EAPMethodTLS *self;
-	EAPMethod *parent;
 	NMSetting8021x *s_8021x = NULL;
 	gboolean ca_not_required = FALSE;
 	g_autoptr(GError) error = NULL;
 
-	parent = eap_method_init (sizeof (EAPMethodTLS),
-	                          validate,
-	                          add_to_size_group,
-	                          fill_connection,
-	                          update_secrets,
-	                          get_widget,
-	                          get_default_field,
-	                          get_password_flags_name,
-	                          get_phase2,
-	                          destroy);
-	if (!parent)
-		return NULL;
-
-	self = (EAPMethodTLS *) parent;
+	self = g_object_new (eap_method_tls_get_type (), NULL);
 	self->phase2 = phase2;
 	self->password_flags_name = phase2 ?
 	                            NM_SETTING_802_1X_PHASE2_PRIVATE_KEY_PASSWORD :
@@ -496,32 +514,35 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	if (s_8021x && nm_setting_802_1x_get_identity (s_8021x))
 		gtk_entry_set_text (self->identity_entry, nm_setting_802_1x_get_identity (s_8021x));
 
-	setup_filepicker (self->user_cert_button,
+	setup_filepicker (self,
+	                  self->user_cert_button,
 	                  _("Choose your personal certificate"),
-	                  ws_parent, parent, s_8021x,
+	                  ws_parent, s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_client_cert_scheme : nm_setting_802_1x_get_client_cert_scheme,
 	                  phase2 ? nm_setting_802_1x_get_phase2_client_cert_path : nm_setting_802_1x_get_client_cert_path,
 	                  FALSE, TRUE);
-	setup_filepicker (self->ca_cert_button,
+	setup_filepicker (self,
+	                  self->ca_cert_button,
 	                  _("Choose a Certificate Authority certificate"),
-	                  ws_parent, parent, s_8021x,
+	                  ws_parent, s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_ca_cert_scheme : nm_setting_802_1x_get_ca_cert_scheme,
 	                  phase2 ? nm_setting_802_1x_get_phase2_ca_cert_path : nm_setting_802_1x_get_ca_cert_path,
 	                  FALSE, FALSE);
-	setup_filepicker (self->private_key_button,
+	setup_filepicker (self,
+	                  self->private_key_button,
 	                  _("Choose your private key"),
-	                  ws_parent, parent, s_8021x,
+	                  ws_parent, s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_private_key_scheme : nm_setting_802_1x_get_private_key_scheme,
 	                  phase2 ? nm_setting_802_1x_get_phase2_private_key_path : nm_setting_802_1x_get_private_key_path,
 	                  TRUE, FALSE);
 
-	if (connection && eap_method_ca_cert_ignore_get (parent, connection))
+	if (connection && eap_method_ca_cert_ignore_get (EAP_METHOD (self), connection))
 		ca_not_required = !gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check), ca_not_required);
 
 	/* Fill secrets, if any */
 	if (connection)
-		update_secrets (parent, connection);
+		update_secrets (EAP_METHOD (self), connection);
 
 	g_signal_connect_swapped (self->private_key_password_entry, "changed", G_CALLBACK (changed_cb), self);
 

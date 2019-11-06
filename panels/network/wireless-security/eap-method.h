@@ -20,39 +20,27 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#ifndef EAP_METHOD_H
-#define EAP_METHOD_H
+#pragma once
 
+#include <glib-object.h>
 #include <NetworkManager.h>
 
-typedef struct _EAPMethod EAPMethod;
+G_BEGIN_DECLS
 
-typedef void        (*EMAddToSizeGroupFunc) (EAPMethod *method, GtkSizeGroup *group);
-typedef void        (*EMFillConnectionFunc) (EAPMethod *method, NMConnection *connection, NMSettingSecretFlags flags);
-typedef void        (*EMUpdateSecretsFunc)  (EAPMethod *method, NMConnection *connection);
-typedef void        (*EMDestroyFunc)        (EAPMethod *method);
-typedef gboolean    (*EMValidateFunc)       (EAPMethod *method, GError **error);
-typedef GtkWidget*  (*EMGetWidgetFunc)      (EAPMethod *method);
-typedef const gchar* (*EMGetStringFunc)     (EAPMethod *method);
-typedef gboolean    (*EMGetBooleanFunc)     (EAPMethod *method);
+G_DECLARE_INTERFACE (EAPMethod, eap_method, EAP, METHOD, GObject)
 
-struct _EAPMethod {
-	guint32 refcount;
-	gsize obj_size;
+struct _EAPMethodInterface {
+	GTypeInterface g_iface;
 
-	EMAddToSizeGroupFunc add_to_size_group;
-	EMFillConnectionFunc fill_connection;
-	EMUpdateSecretsFunc update_secrets;
-	EMValidateFunc validate;
-	EMGetWidgetFunc get_widget;
-	EMGetWidgetFunc get_default_field;
-	EMGetStringFunc get_password_flags_name;
-	EMGetBooleanFunc get_phase2;
-	EMDestroyFunc destroy;
+	void         (*add_to_size_group)       (EAPMethod *method, GtkSizeGroup *group);
+	void         (*fill_connection)         (EAPMethod *method, NMConnection *connection, NMSettingSecretFlags flags);
+	void         (*update_secrets)          (EAPMethod *method, NMConnection *connection);
+	gboolean     (*validate)                (EAPMethod *method, GError **error);
+	GtkWidget*   (*get_widget)              (EAPMethod *method);
+	GtkWidget*   (*get_default_field)       (EAPMethod *method);
+	const gchar* (*get_password_flags_name) (EAPMethod *method);
+	gboolean     (*get_phase2)              (EAPMethod *method);
 };
-
-#define EAP_METHOD(x) ((EAPMethod *) x)
-
 
 GtkWidget *eap_method_get_widget (EAPMethod *method);
 
@@ -70,24 +58,7 @@ void eap_method_fill_connection (EAPMethod *method,
                                  NMConnection *connection,
                                  NMSettingSecretFlags flags);
 
-EAPMethod *eap_method_ref (EAPMethod *method);
-
-void eap_method_unref (EAPMethod *method);
-
-GType eap_method_get_type (void);
-
 /* Below for internal use only */
-
-EAPMethod *eap_method_init (gsize obj_size,
-                            EMValidateFunc validate,
-                            EMAddToSizeGroupFunc add_to_size_group,
-                            EMFillConnectionFunc fill_connection,
-                            EMUpdateSecretsFunc update_secrets,
-                            EMGetWidgetFunc get_widget,
-                            EMGetWidgetFunc get_default_field,
-                            EMGetStringFunc get_password_flags_name,
-                            EMGetBooleanFunc get_phase2,
-                            EMDestroyFunc destroy);
 
 GtkFileFilter * eap_method_default_file_chooser_filter_new (gboolean privkey);
 
@@ -122,6 +93,4 @@ gboolean eap_method_ca_cert_ignore_get (EAPMethod *method, NMConnection *connect
 void eap_method_ca_cert_ignore_save (NMConnection *connection);
 void eap_method_ca_cert_ignore_load (NMConnection *connection);
 
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (EAPMethod, eap_method_unref)
-
-#endif /* EAP_METHOD_H */
+G_END_DECLS
