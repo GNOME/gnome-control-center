@@ -35,15 +35,13 @@
 #define I_METHOD_COLUMN 1
 
 struct _EAPMethodPEAP {
-	GObject parent;
+	GtkGrid parent;
 
-	GtkBuilder           *builder;
 	GtkEntry             *anon_identity_entry;
 	GtkLabel             *anon_identity_label;
 	GtkFileChooserButton *ca_cert_button;
 	GtkLabel             *ca_cert_label;
 	GtkCheckButton       *ca_cert_not_required_check;
-	GtkGrid              *grid;
 	GtkBox               *inner_auth_box;
 	GtkComboBox          *inner_auth_combo;
 	GtkLabel             *inner_auth_label;
@@ -57,7 +55,7 @@ struct _EAPMethodPEAP {
 
 static void eap_method_iface_init (EAPMethodInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (EAPMethodPEAP, eap_method_peap, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (EAPMethodPEAP, eap_method_peap, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (eap_method_get_type (), eap_method_iface_init))
 
 static void
@@ -65,7 +63,6 @@ eap_method_peap_dispose (GObject *object)
 {
 	EAPMethodPEAP *self = EAP_METHOD_PEAP (object);
 
-	g_clear_object (&self->builder);
 	g_clear_object (&self->size_group);
 
 	G_OBJECT_CLASS (eap_method_peap_parent_class)->dispose (object);
@@ -191,7 +188,6 @@ inner_auth_combo_changed_cb (EAPMethodPEAP *self)
 	GList *elt, *children;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	GtkWidget *eap_widget;
 
 	/* Remove any previous wireless security widgets */
 	children = gtk_container_get_children (GTK_CONTAINER (self->inner_auth_box));
@@ -203,13 +199,10 @@ inner_auth_combo_changed_cb (EAPMethodPEAP *self)
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
 
-	eap_widget = eap_method_get_widget (eap);
-	g_assert (eap_widget);
-	gtk_widget_unparent (eap_widget);
-
+	gtk_widget_unparent (GTK_WIDGET (eap));
 	if (self->size_group)
 		eap_method_add_to_size_group (eap, self->size_group);
-	gtk_container_add (GTK_CONTAINER (self->inner_auth_box), eap_widget);
+	gtk_container_add (GTK_CONTAINER (self->inner_auth_box), g_object_ref (GTK_WIDGET (eap)));
 
 	wireless_security_notify_changed (self->sec_parent);
 }
@@ -303,13 +296,6 @@ update_secrets (EAPMethod *method, NMConnection *connection)
 }
 
 static GtkWidget *
-get_widget (EAPMethod *method)
-{
-	EAPMethodPEAP *self = EAP_METHOD_PEAP (method);
-	return GTK_WIDGET (self->grid);
-}
-
-static GtkWidget *
 get_default_field (EAPMethod *method)
 {
 	EAPMethodPEAP *self = EAP_METHOD_PEAP (method);
@@ -331,14 +317,29 @@ changed_cb (EAPMethodPEAP *self)
 static void
 eap_method_peap_init (EAPMethodPEAP *self)
 {
+	gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
 eap_method_peap_class_init (EAPMethodPEAPClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
 	object_class->dispose = eap_method_peap_dispose;
+
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/eap-method-peap.ui");
+
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodPEAP, anon_identity_entry);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodPEAP, anon_identity_label);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodPEAP, ca_cert_button);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodPEAP, ca_cert_label);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodPEAP, ca_cert_not_required_check);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodPEAP, inner_auth_box);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodPEAP, inner_auth_combo);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodPEAP, inner_auth_label);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodPEAP, version_combo);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodPEAP, version_label);
 }
 
 static void
@@ -348,7 +349,6 @@ eap_method_iface_init (EAPMethodInterface *iface)
 	iface->add_to_size_group = add_to_size_group;
 	iface->fill_connection = fill_connection;
 	iface->update_secrets = update_secrets;
-	iface->get_widget = get_widget;
 	iface->get_default_field = get_default_field;
 	iface->get_password_flags_name = get_password_flags_name;
 }
@@ -363,29 +363,10 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 	GtkFileFilter *filter;
 	NMSetting8021x *s_8021x = NULL;
 	const char *filename;
-	g_autoptr(GError) error = NULL;
 
 	self = g_object_new (eap_method_peap_get_type (), NULL);
 	self->sec_parent = ws_parent;
 	self->is_editor = is_editor;
-
-	self->builder = gtk_builder_new ();
-	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/eap-method-peap.ui", &error)) {
-		g_warning ("Couldn't load UI builder resource: %s", error->message);
-		return NULL;
-	}
-
-	self->anon_identity_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "anon_identity_entry"));
-	self->anon_identity_label = GTK_LABEL (gtk_builder_get_object (self->builder, "anon_identity_label"));
-	self->ca_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (self->builder, "ca_cert_button"));
-	self->ca_cert_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ca_cert_label"));
-	self->ca_cert_not_required_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "ca_cert_not_required_check"));
-	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
-	self->inner_auth_box = GTK_BOX (gtk_builder_get_object (self->builder, "inner_auth_box"));
-	self->inner_auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "inner_auth_combo"));
-	self->inner_auth_label = GTK_LABEL (gtk_builder_get_object (self->builder, "inner_auth_label"));
-	self->version_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "version_combo"));
-	self->version_label = GTK_LABEL (gtk_builder_get_object (self->builder, "version_label"));
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
