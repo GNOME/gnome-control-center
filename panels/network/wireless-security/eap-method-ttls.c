@@ -37,6 +37,7 @@
 struct _EAPMethodTTLS {
 	EAPMethod parent;
 
+	GtkBuilder           *builder;
 	GtkEntry             *anon_identity_entry;
 	GtkLabel             *anon_identity_label;
 	GtkFileChooserButton *ca_cert_button;
@@ -59,6 +60,7 @@ destroy (EAPMethod *parent)
 {
 	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
 
+	g_clear_object (&self->builder);
 	g_clear_object (&self->size_group);
 }
 
@@ -377,6 +379,7 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	GtkFileFilter *filter;
 	NMSetting8021x *s_8021x = NULL;
 	const char *filename;
+	g_autoptr(GError) error = NULL;
 
 	parent = eap_method_init (sizeof (EAPMethodTTLS),
 	                          validate,
@@ -386,7 +389,6 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	                          get_widget,
 	                          get_default_field,
 	                          destroy,
-	                          "/org/gnome/ControlCenter/network/eap-method-ttls.ui",
 	                          FALSE);
 	if (!parent)
 		return NULL;
@@ -396,17 +398,23 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	self->sec_parent = ws_parent;
 	self->is_editor = is_editor;
 
-	self->anon_identity_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
-	self->anon_identity_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "anon_identity_label"));
-	self->ca_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_button"));
-	self->ca_cert_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "ca_cert_label"));
-	self->ca_cert_not_required_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
-	self->domain_match_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "domain_match_entry"));
-	self->domain_match_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "domain_match_label"));
-	self->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
-	self->inner_auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
-	self->inner_auth_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "inner_auth_label"));
-	self->inner_auth_box = GTK_BOX (gtk_builder_get_object (parent->builder, "inner_auth_box"));
+	self->builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/eap-method-ttls.ui", &error)) {
+		g_warning ("Couldn't load UI builder resource: %s", error->message);
+		return NULL;
+	}
+
+	self->anon_identity_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "anon_identity_entry"));
+	self->anon_identity_label = GTK_LABEL (gtk_builder_get_object (self->builder, "anon_identity_label"));
+	self->ca_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (self->builder, "ca_cert_button"));
+	self->ca_cert_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ca_cert_label"));
+	self->ca_cert_not_required_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "ca_cert_not_required_check"));
+	self->domain_match_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "domain_match_entry"));
+	self->domain_match_label = GTK_LABEL (gtk_builder_get_object (self->builder, "domain_match_label"));
+	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
+	self->inner_auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "inner_auth_combo"));
+	self->inner_auth_label = GTK_LABEL (gtk_builder_get_object (self->builder, "inner_auth_label"));
+	self->inner_auth_box = GTK_BOX (gtk_builder_get_object (self->builder, "inner_auth_box"));
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
