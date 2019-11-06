@@ -60,8 +60,6 @@ struct _CEPageClass
 
         gboolean     (*validate)  (CEPage *page, NMConnection *connection, GError **error);
         const gchar *(*get_title) (CEPage *page);
-        void (*changed)     (CEPage *page);
-        void (*initialized) (CEPage *page, GError *error);
 };
 
 GType        ce_page_get_type        (void);

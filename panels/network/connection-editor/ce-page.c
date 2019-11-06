@@ -195,7 +195,7 @@ ce_page_class_init (CEPageClass *page_class)
                 g_signal_new ("changed",
                               G_OBJECT_CLASS_TYPE (object_class),
                               G_SIGNAL_RUN_FIRST,
-                              G_STRUCT_OFFSET (CEPageClass, changed),
+                              0,
                               NULL, NULL,
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE, 0);
@@ -204,7 +204,7 @@ ce_page_class_init (CEPageClass *page_class)
                 g_signal_new ("initialized",
                               G_OBJECT_CLASS_TYPE (object_class),
                               G_SIGNAL_RUN_FIRST,
-                              G_STRUCT_OFFSET (CEPageClass, initialized),
+                              0,
                               NULL, NULL,
                               g_cclosure_marshal_VOID__POINTER,
                               G_TYPE_NONE, 1, G_TYPE_POINTER);
