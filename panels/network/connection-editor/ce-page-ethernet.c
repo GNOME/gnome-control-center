@@ -33,7 +33,7 @@
 
 struct _CEPageEthernet
 {
-        CEPage parent;
+        GObject parent;
 
         GtkBuilder      *builder;
         GtkComboBoxText *cloned_mac;
@@ -48,7 +48,10 @@ struct _CEPageEthernet
         NMSettingWired *setting_wired;
 };
 
-G_DEFINE_TYPE (CEPageEthernet, ce_page_ethernet, CE_TYPE_PAGE)
+static void ce_page_iface_init (CEPageInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (CEPageEthernet, ce_page_ethernet, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
 mtu_changed (CEPageEthernet *self)
@@ -210,12 +213,16 @@ static void
 ce_page_ethernet_class_init (CEPageEthernetClass *class)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (class);
-        CEPageClass *page_class = CE_PAGE_CLASS (class);
 
         object_class->dispose = ce_page_ethernet_dispose;
-        page_class->get_widget = ce_page_ethernet_get_widget;
-        page_class->get_title = ce_page_ethernet_get_title;
-        page_class->validate = ce_page_ethernet_validate;
+}
+
+static void
+ce_page_iface_init (CEPageInterface *iface)
+{
+        iface->get_widget = ce_page_ethernet_get_widget;
+        iface->get_title = ce_page_ethernet_get_title;
+        iface->validate = ce_page_ethernet_validate;
 }
 
 CEPage *

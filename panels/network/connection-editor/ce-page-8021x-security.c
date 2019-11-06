@@ -35,7 +35,7 @@
 #include "ce-page-8021x-security.h"
 
 struct _CEPage8021xSecurity {
-	CEPage parent;
+	GObject parent;
 
         GtkBuilder  *builder;
         GtkBox      *box;
@@ -50,7 +50,10 @@ struct _CEPage8021xSecurity {
         gboolean initial_have_8021x;
 };
 
-G_DEFINE_TYPE (CEPage8021xSecurity, ce_page_8021x_security, CE_TYPE_PAGE)
+static void ce_page_iface_init (CEPageInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (CEPage8021xSecurity, ce_page_8021x_security, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
 enable_toggled (CEPage8021xSecurity *self)
@@ -182,13 +185,17 @@ static void
 ce_page_8021x_security_class_init (CEPage8021xSecurityClass *security_class)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (security_class);
-	CEPageClass *parent_class = CE_PAGE_CLASS (security_class);
 
 	object_class->dispose = ce_page_8021x_security_dispose;
-        parent_class->get_security_setting = ce_page_8021x_security_get_security_setting;
-        parent_class->get_widget = ce_page_8021x_security_get_widget;
-        parent_class->get_title = ce_page_8021x_security_get_title;
-	parent_class->validate = ce_page_8021x_security_validate;
+}
+
+static void
+ce_page_iface_init (CEPageInterface *iface)
+{
+        iface->get_security_setting = ce_page_8021x_security_get_security_setting;
+        iface->get_widget = ce_page_8021x_security_get_widget;
+        iface->get_title = ce_page_8021x_security_get_title;
+	iface->validate = ce_page_8021x_security_validate;
 }
 
 CEPage *

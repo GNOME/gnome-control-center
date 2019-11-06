@@ -36,7 +36,7 @@
 
 struct _CEPageSecurity
 {
-        CEPage parent;
+        GObject parent;
 
         GtkBuilder  *builder;
         GtkBox      *box;
@@ -50,7 +50,10 @@ struct _CEPageSecurity
         gboolean     adhoc;
 };
 
-G_DEFINE_TYPE (CEPageSecurity, ce_page_security, CE_TYPE_PAGE)
+static void ce_page_iface_init (CEPageInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (CEPageSecurity, ce_page_security, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 enum {
         S_NAME_COLUMN,
@@ -452,13 +455,17 @@ static void
 ce_page_security_class_init (CEPageSecurityClass *class)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (class);
-        CEPageClass *page_class = CE_PAGE_CLASS (class);
 
         object_class->dispose = ce_page_security_dispose;
-        page_class->get_security_setting = ce_page_security_get_security_setting;
-        page_class->get_widget = ce_page_security_get_widget;
-        page_class->get_title = ce_page_security_get_title;
-        page_class->validate = ce_page_security_validate;
+}
+
+static void
+ce_page_iface_init (CEPageInterface *iface)
+{
+        iface->get_security_setting = ce_page_security_get_security_setting;
+        iface->get_widget = ce_page_security_get_widget;
+        iface->get_title = ce_page_security_get_title;
+        iface->validate = ce_page_security_validate;
 }
 
 CEPage *

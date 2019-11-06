@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CEPageSecurity, ce_page_security, CE, PAGE_SECURITY, CEPage)
+G_DECLARE_FINAL_TYPE (CEPageSecurity, ce_page_security, CE, PAGE_SECURITY, GObject)
 
 CEPage *ce_page_security_new (NMConnection *connection);
 

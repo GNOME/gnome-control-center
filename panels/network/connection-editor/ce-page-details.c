@@ -30,7 +30,7 @@
 
 struct _CEPageDetails
 {
-        CEPage parent;
+        GObject parent;
 
         GtkBuilder *builder;
         GtkCheckButton *all_user_check;
@@ -63,7 +63,10 @@ struct _CEPageDetails
         NetConnectionEditor *editor;
 };
 
-G_DEFINE_TYPE (CEPageDetails, ce_page_details, CE_TYPE_PAGE)
+static void ce_page_iface_init (CEPageInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (CEPageDetails, ce_page_details, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
 forget_cb (CEPageDetails *self)
@@ -429,11 +432,15 @@ static void
 ce_page_details_class_init (CEPageDetailsClass *class)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (class);
-        CEPageClass *page_class = CE_PAGE_CLASS (class);
 
         object_class->dispose = ce_page_details_dispose;
-        page_class->get_widget = ce_page_details_get_widget;
-        page_class->get_title = ce_page_details_get_title;
+}
+
+static void
+ce_page_iface_init (CEPageInterface *iface)
+{
+        iface->get_widget = ce_page_details_get_widget;
+        iface->get_title = ce_page_details_get_title;
 }
 
 CEPage *

@@ -33,7 +33,7 @@
 
 struct _CEPageWifi
 {
-        CEPage parent;
+        GObject parent;
 
         GtkBuilder      *builder;
         GtkComboBoxText *bssid_combo;
@@ -46,7 +46,10 @@ struct _CEPageWifi
         NMSettingWireless *setting;
 };
 
-G_DEFINE_TYPE (CEPageWifi, ce_page_wifi, CE_TYPE_PAGE)
+static void ce_page_iface_init (CEPageInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (CEPageWifi, ce_page_wifi, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
 connect_wifi_page (CEPageWifi *self)
@@ -196,12 +199,16 @@ static void
 ce_page_wifi_class_init (CEPageWifiClass *class)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (class);
-        CEPageClass *page_class = CE_PAGE_CLASS (class);
 
         object_class->dispose = ce_page_wifi_dispose;
-        page_class->get_widget = ce_page_wifi_get_widget;
-        page_class->get_title = ce_page_wifi_get_title;
-        page_class->validate = ce_page_wifi_class_validate;
+}
+
+static void
+ce_page_iface_init (CEPageInterface *iface)
+{
+        iface->get_widget = ce_page_wifi_get_widget;
+        iface->get_title = ce_page_wifi_get_title;
+        iface->validate = ce_page_wifi_class_validate;
 }
 
 CEPage *

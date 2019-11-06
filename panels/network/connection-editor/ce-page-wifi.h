@@ -25,7 +25,7 @@
 
 #include "ce-page.h"
 
-G_DECLARE_FINAL_TYPE (CEPageWifi, ce_page_wifi, CE, PAGE_WIFI, CEPage)
+G_DECLARE_FINAL_TYPE (CEPageWifi, ce_page_wifi, CE, PAGE_WIFI, GObject)
 
 CEPage *ce_page_wifi_new (NMConnection     *connection,
                           NMClient         *client);

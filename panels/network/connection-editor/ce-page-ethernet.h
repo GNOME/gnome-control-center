@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CEPageEthernet, ce_page_ethernet, CE, PAGE_ETHERNET, CEPage)
+G_DECLARE_FINAL_TYPE (CEPageEthernet, ce_page_ethernet, CE, PAGE_ETHERNET, GObject)
 
 CEPage *ce_page_ethernet_new (NMConnection     *connection,
                               NMClient         *client);

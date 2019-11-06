@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __CE_PAGE_H
-#define __CE_PAGE_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -30,32 +29,17 @@
 
 G_BEGIN_DECLS
 
-#define CE_TYPE_PAGE          (ce_page_get_type ())
-#define CE_PAGE(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), CE_TYPE_PAGE, CEPage))
-#define CE_PAGE_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), CE_TYPE_PAGE, CEPageClass))
-#define CE_IS_PAGE(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), CE_TYPE_PAGE))
-#define CE_IS_PAGE_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), CE_TYPE_PAGE))
-#define CE_PAGE_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), CE_TYPE_PAGE, CEPageClass))
+G_DECLARE_INTERFACE (CEPage, ce_page, CE, PAGE, GObject)
 
-typedef struct _CEPage          CEPage;
-typedef struct _CEPageClass     CEPageClass;
-
-struct _CEPage
+struct _CEPageInterface
 {
-        GObject parent;
-};
-
-struct _CEPageClass
-{
-        GObjectClass parent_class;
+        GTypeInterface g_iface;
 
         gboolean     (*validate)             (CEPage *page, NMConnection *connection, GError **error);
         GtkWidget   *(*get_widget)           (CEPage *page);
         const gchar *(*get_title)            (CEPage *page);
         const gchar *(*get_security_setting) (CEPage *page);
 };
-
-GType        ce_page_get_type        (void);
 
 GtkWidget   *ce_page_get_widget      (CEPage           *page);
 const gchar *ce_page_get_title       (CEPage           *page);
@@ -94,11 +78,4 @@ gchar * ce_page_get_next_available_name (const GPtrArray *connections,
                                          NameFormat format,
                                          const gchar *type_name);
 
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (CEPage, g_object_unref)
-
-
 G_END_DECLS
-
-#endif /* __CE_PAGE_H */
-

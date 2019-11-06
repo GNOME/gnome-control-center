@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CEPageIP6, ce_page_ip6, CE, PAGE_IP6, CEPage)
+G_DECLARE_FINAL_TYPE (CEPageIP6, ce_page_ip6, CE, PAGE_IP6, GObject)
 
 CEPage *ce_page_ip6_new (NMConnection     *connection,
                          NMClient         *client);

@@ -31,7 +31,7 @@
 
 struct _CEPageVpn
 {
-        CEPage parent;
+        GObject parent;
 
         GtkBuilder *builder;
         GtkBox     *box;
@@ -46,7 +46,10 @@ struct _CEPageVpn
 	NMVpnEditor *editor;
 };
 
-G_DEFINE_TYPE (CEPageVpn, ce_page_vpn, CE_TYPE_PAGE)
+static void ce_page_iface_init (CEPageInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (CEPageVpn, ce_page_vpn, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 /* Hack to make the plugin-provided editor widget fit in better with
  * the control center by changing
@@ -185,14 +188,18 @@ ce_page_vpn_init (CEPageVpn *self)
 static void
 ce_page_vpn_class_init (CEPageVpnClass *class)
 {
-        CEPageClass *page_class = CE_PAGE_CLASS (class);
         GObjectClass *object_class = G_OBJECT_CLASS (class);
 
         object_class->dispose = ce_page_vpn_dispose;
-        page_class->get_security_setting = ce_page_vpn_get_security_setting;
-        page_class->get_widget = ce_page_vpn_get_widget;
-        page_class->get_title = ce_page_vpn_get_title;
-        page_class->validate = ce_page_vpn_validate;
+}
+
+static void
+ce_page_iface_init (CEPageInterface *iface)
+{
+        iface->get_security_setting = ce_page_vpn_get_security_setting;
+        iface->get_widget = ce_page_vpn_get_widget;
+        iface->get_title = ce_page_vpn_get_title;
+        iface->validate = ce_page_vpn_validate;
 }
 
 static void

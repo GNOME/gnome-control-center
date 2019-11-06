@@ -38,7 +38,7 @@ static void ensure_empty_routes_row (CEPageIP6 *self);
 
 struct _CEPageIP6
 {
-        CEPage parent;
+        GObject parent;
 
         GtkBuilder        *builder;
         GtkBox            *address_box;
@@ -64,7 +64,10 @@ struct _CEPageIP6
         GtkWidget       *routes_list;
 };
 
-G_DEFINE_TYPE (CEPageIP6, ce_page_ip6, CE_TYPE_PAGE)
+static void ce_page_iface_init (CEPageInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (CEPageIP6, ce_page_ip6, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 enum {
         METHOD_COL_NAME,
@@ -813,12 +816,16 @@ static void
 ce_page_ip6_class_init (CEPageIP6Class *class)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (class);
-        CEPageClass *page_class = CE_PAGE_CLASS (class);
 
         object_class->dispose = ce_page_ip6_dispose;
-        page_class->get_widget = ce_page_ip6_get_widget;
-        page_class->get_title = ce_page_ip6_get_title;
-        page_class->validate = ce_page_ip6_validate;
+}
+
+static void
+ce_page_iface_init (CEPageInterface *iface)
+{
+        iface->get_widget = ce_page_ip6_get_widget;
+        iface->get_title = ce_page_ip6_get_title;
+        iface->validate = ce_page_ip6_validate;
 }
 
 CEPage *

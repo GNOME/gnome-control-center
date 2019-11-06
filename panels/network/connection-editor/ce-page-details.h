@@ -28,7 +28,7 @@
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CEPageDetails, ce_page_details, CE, PAGE_DETAILS, CEPage)
+G_DECLARE_FINAL_TYPE (CEPageDetails, ce_page_details, CE, PAGE_DETAILS, GObject)
 
 CEPage *ce_page_details_new (NMConnection        *connection,
                              NMDevice            *device,

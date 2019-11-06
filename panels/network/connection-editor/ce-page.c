@@ -33,7 +33,7 @@
 #include "ce-page.h"
 
 
-G_DEFINE_ABSTRACT_TYPE (CEPage, ce_page, G_TYPE_OBJECT)
+G_DEFINE_INTERFACE (CEPage, ce_page, G_TYPE_OBJECT)
 
 enum {
         CHANGED,
@@ -49,8 +49,8 @@ ce_page_validate (CEPage *self, NMConnection *connection, GError **error)
         g_return_val_if_fail (CE_IS_PAGE (self), FALSE);
         g_return_val_if_fail (NM_IS_CONNECTION (connection), FALSE);
 
-        if (CE_PAGE_GET_CLASS (self)->validate)
-                return CE_PAGE_GET_CLASS (self)->validate (self, connection, error);
+        if (CE_PAGE_GET_IFACE (self)->validate)
+                return CE_PAGE_GET_IFACE (self)->validate (self, connection, error);
 
         return TRUE;
 }
@@ -60,7 +60,7 @@ ce_page_get_widget (CEPage *self)
 {
         g_return_val_if_fail (CE_IS_PAGE (self), NULL);
 
-        return CE_PAGE_GET_CLASS (self)->get_widget (self);
+        return CE_PAGE_GET_IFACE (self)->get_widget (self);
 }
 
 const char *
@@ -68,7 +68,7 @@ ce_page_get_title (CEPage *self)
 {
         g_return_val_if_fail (CE_IS_PAGE (self), NULL);
 
-        return CE_PAGE_GET_CLASS (self)->get_title (self);
+        return CE_PAGE_GET_IFACE (self)->get_title (self);
 }
 
 void
@@ -80,18 +80,11 @@ ce_page_changed (CEPage *self)
 }
 
 static void
-ce_page_init (CEPage *self)
+ce_page_default_init (CEPageInterface *iface)
 {
-}
-
-static void
-ce_page_class_init (CEPageClass *page_class)
-{
-        GObjectClass *object_class = G_OBJECT_CLASS (page_class);
-
         signals[CHANGED] =
                 g_signal_new ("changed",
-                              G_OBJECT_CLASS_TYPE (object_class),
+                              G_TYPE_FROM_INTERFACE (iface),
                               G_SIGNAL_RUN_FIRST,
                               0,
                               NULL, NULL,
@@ -100,7 +93,7 @@ ce_page_class_init (CEPageClass *page_class)
 
         signals[INITIALIZED] =
                 g_signal_new ("initialized",
-                              G_OBJECT_CLASS_TYPE (object_class),
+                              G_TYPE_FROM_INTERFACE (iface),
                               G_SIGNAL_RUN_FIRST,
                               0,
                               NULL, NULL,
@@ -344,8 +337,8 @@ ce_page_cloned_mac_combo_valid (GtkComboBoxText *combo)
 const gchar *
 ce_page_get_security_setting (CEPage *self)
 {
-        if (CE_PAGE_GET_CLASS (self)->get_security_setting)
-                return CE_PAGE_GET_CLASS (self)->get_security_setting (self);
+        if (CE_PAGE_GET_IFACE (self)->get_security_setting)
+                return CE_PAGE_GET_IFACE (self)->get_security_setting (self);
 
         return NULL;
 }
