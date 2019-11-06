@@ -50,6 +50,7 @@ struct _EAPMethodTLS {
 	GtkFileChooserButton *user_cert_button;
 	GtkLabel             *user_cert_label;
 
+	gboolean phase2;
 	const gchar *password_flags_name;
 	WirelessSecurity *sec_parent;
 	gboolean editing_connection;
@@ -172,7 +173,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	s_8021x = nm_connection_get_setting_802_1x (connection);
 	g_assert (s_8021x);
 
-	if (parent->phase2)
+	if (self->phase2)
 		g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, "tls", NULL);
 	else
 		nm_setting_802_1x_add_eap_method (s_8021x, "tls");
@@ -185,7 +186,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	pk_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->private_key_button));
 	g_assert (pk_filename);
 
-	if (parent->phase2) {
+	if (self->phase2) {
 		g_autoptr(GError) error = NULL;
 		if (!nm_setting_802_1x_set_phase2_private_key (s_8021x, pk_filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
 			g_warning ("Couldn't read phase2 private key '%s': %s", pk_filename, error ? error->message : "(unknown)");
@@ -217,7 +218,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 		g_assert (cc_filename);
 
 		format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
-		if (parent->phase2) {
+		if (self->phase2) {
 			g_autoptr(GError) error = NULL;
 			if (!nm_setting_802_1x_set_phase2_client_cert (s_8021x, cc_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
 				g_warning ("Couldn't read phase2 client certificate '%s': %s", cc_filename, error ? error->message : "(unknown)");
@@ -232,7 +233,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	ca_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
 
 	format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
-	if (parent->phase2) {
+	if (self->phase2) {
 		g_autoptr(GError) error = NULL;
 		if (!nm_setting_802_1x_set_phase2_ca_cert (s_8021x, ca_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
 			g_warning ("Couldn't read phase2 CA certificate '%s': %s", ca_filename, error ? error->message : "(unknown)");
@@ -381,7 +382,7 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 	PathFunc path_func;
 	const char *filename;
 
-	if (parent->phase2) {
+	if (self->phase2) {
 		password_func = (HelperSecretFunc) nm_setting_802_1x_get_phase2_private_key_password;
 		scheme_func = nm_setting_802_1x_get_phase2_private_key_scheme;
 		path_func = nm_setting_802_1x_get_phase2_private_key_path;
@@ -426,6 +427,13 @@ get_password_flags_name (EAPMethod *parent)
 	return self->password_flags_name;
 }
 
+static gboolean
+get_phase2 (EAPMethod *parent)
+{
+	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+	return self->phase2;
+}
+
 EAPMethodTLS *
 eap_method_tls_new (WirelessSecurity *ws_parent,
                     NMConnection *connection,
@@ -446,12 +454,13 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	                          get_widget,
 	                          get_default_field,
 	                          get_password_flags_name,
-	                          destroy,
-	                          phase2);
+	                          get_phase2,
+	                          destroy);
 	if (!parent)
 		return NULL;
 
 	self = (EAPMethodTLS *) parent;
+	self->phase2 = phase2;
 	self->password_flags_name = phase2 ?
 	                            NM_SETTING_802_1X_PHASE2_PRIVATE_KEY_PASSWORD :
 	                            NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD;

@@ -34,12 +34,11 @@ typedef void        (*EMDestroyFunc)        (EAPMethod *method);
 typedef gboolean    (*EMValidateFunc)       (EAPMethod *method, GError **error);
 typedef GtkWidget*  (*EMGetWidgetFunc)      (EAPMethod *method);
 typedef const gchar* (*EMGetStringFunc)     (EAPMethod *method);
+typedef gboolean    (*EMGetBooleanFunc)     (EAPMethod *method);
 
 struct _EAPMethod {
 	guint32 refcount;
 	gsize obj_size;
-
-	gboolean phase2;
 
 	EMAddToSizeGroupFunc add_to_size_group;
 	EMFillConnectionFunc fill_connection;
@@ -48,6 +47,7 @@ struct _EAPMethod {
 	EMGetWidgetFunc get_widget;
 	EMGetWidgetFunc get_default_field;
 	EMGetStringFunc get_password_flags_name;
+	EMGetBooleanFunc get_phase2;
 	EMDestroyFunc destroy;
 };
 
@@ -59,6 +59,8 @@ GtkWidget *eap_method_get_widget (EAPMethod *method);
 GtkWidget *eap_method_get_default_field (EAPMethod *method);
 
 const gchar *eap_method_get_password_flags_name (EAPMethod *method);
+
+gboolean eap_method_get_phase2 (EAPMethod *method);
 
 gboolean eap_method_validate (EAPMethod *method, GError **error);
 
@@ -84,8 +86,8 @@ EAPMethod *eap_method_init (gsize obj_size,
                             EMGetWidgetFunc get_widget,
                             EMGetWidgetFunc get_default_field,
                             EMGetStringFunc get_password_flags_name,
-                            EMDestroyFunc destroy,
-                            gboolean phase2);
+                            EMGetBooleanFunc get_phase2,
+                            EMDestroyFunc destroy);
 
 GtkFileFilter * eap_method_default_file_chooser_filter_new (gboolean privkey);
 
