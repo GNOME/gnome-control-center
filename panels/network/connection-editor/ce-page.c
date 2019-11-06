@@ -71,14 +71,6 @@ ce_page_get_title (CEPage *self)
         return CE_PAGE_GET_CLASS (self)->get_title (self);
 }
 
-gboolean
-ce_page_get_initialized (CEPage *self)
-{
-        g_return_val_if_fail (CE_IS_PAGE (self), FALSE);
-
-        return self->initialized;
-}
-
 void
 ce_page_changed (CEPage *self)
 {
@@ -120,7 +112,6 @@ static void
 emit_initialized (CEPage *self,
                   GError *error)
 {
-        self->initialized = TRUE;
         g_signal_emit (self, signals[INITIALIZED], 0, error);
         g_clear_error (&error);
 }

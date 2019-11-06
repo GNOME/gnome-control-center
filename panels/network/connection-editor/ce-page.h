@@ -43,8 +43,6 @@ typedef struct _CEPageClass     CEPageClass;
 struct _CEPage
 {
         GObject parent;
-
-        gboolean initialized;
 };
 
 struct _CEPageClass
@@ -65,7 +63,6 @@ const gchar *ce_page_get_security_setting (CEPage           *page);
 gboolean     ce_page_validate        (CEPage           *page,
                                       NMConnection     *connection,
                                       GError          **error);
-gboolean     ce_page_get_initialized (CEPage           *page);
 void         ce_page_changed         (CEPage           *page);
 void         ce_page_complete_init   (CEPage           *page,
                                       NMConnection     *connection,
