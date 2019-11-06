@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-G_DECLARE_INTERFACE (EAPMethod, eap_method, EAP, METHOD, GObject)
+G_DECLARE_INTERFACE (EAPMethod, eap_method, EAP, METHOD, GtkGrid)
 
 struct _EAPMethodInterface {
 	GTypeInterface g_iface;
@@ -36,13 +36,10 @@ struct _EAPMethodInterface {
 	void         (*fill_connection)         (EAPMethod *method, NMConnection *connection, NMSettingSecretFlags flags);
 	void         (*update_secrets)          (EAPMethod *method, NMConnection *connection);
 	gboolean     (*validate)                (EAPMethod *method, GError **error);
-	GtkWidget*   (*get_widget)              (EAPMethod *method);
 	GtkWidget*   (*get_default_field)       (EAPMethod *method);
 	const gchar* (*get_password_flags_name) (EAPMethod *method);
 	gboolean     (*get_phase2)              (EAPMethod *method);
 };
-
-GtkWidget *eap_method_get_widget (EAPMethod *method);
 
 GtkWidget *eap_method_get_default_field (EAPMethod *method);
 
