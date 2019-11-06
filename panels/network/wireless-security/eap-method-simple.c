@@ -26,6 +26,7 @@
 #include <string.h>
 
 #include "eap-method.h"
+#include "eap-method-simple.h"
 #include "wireless-security.h"
 #include "helpers.h"
 #include "nma-ui-utils.h"

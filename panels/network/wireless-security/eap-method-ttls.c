@@ -26,6 +26,8 @@
 #include <string.h>
 
 #include "eap-method.h"
+#include "eap-method-simple.h"
+#include "eap-method-ttls.h"
 #include "wireless-security.h"
 #include "utils.h"
 

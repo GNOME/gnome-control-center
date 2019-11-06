@@ -27,6 +27,12 @@
 #include "wireless-security.h"
 #include "wireless-security-resources.h"
 #include "eap-method.h"
+#include "eap-method-fast.h"
+#include "eap-method-leap.h"
+#include "eap-method-peap.h"
+#include "eap-method-simple.h"
+#include "eap-method-tls.h"
+#include "eap-method-ttls.h"
 #include "utils.h"
 
 struct _WirelessSecurityPrivate {
