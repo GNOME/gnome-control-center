@@ -63,6 +63,17 @@ eap_method_get_default_field (EAPMethod *self)
 	return self->get_default_field (self);
 }
 
+const gchar *
+eap_method_get_password_flags_name (EAPMethod *self)
+{
+	g_return_val_if_fail (self != NULL, NULL);
+
+	if (self->get_password_flags_name)
+		return self->get_password_flags_name (self);
+	else
+		return NULL;
+}
+
 gboolean
 eap_method_validate (EAPMethod *self, GError **error)
 {
@@ -133,6 +144,7 @@ eap_method_init (gsize obj_size,
                  EMUpdateSecretsFunc update_secrets,
                  EMGetWidgetFunc get_widget,
                  EMGetWidgetFunc get_default_field,
+                 EMGetStringFunc get_password_flags_name,
                  EMDestroyFunc destroy,
                  gboolean phase2)
 {
@@ -151,8 +163,9 @@ eap_method_init (gsize obj_size,
 	self->update_secrets = update_secrets;
 	self->get_widget = get_widget;
 	self->get_default_field = get_default_field;
-	self->phase2 = phase2;
+	self->get_password_flags_name = get_password_flags_name;
 	self->destroy = destroy;
+	self->phase2 = phase2;
 
 	return g_steal_pointer (&self);
 }

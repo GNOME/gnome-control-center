@@ -178,7 +178,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	/* Update secret flags and popup when editing the connection */
 	if (!(self->flags & EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY)) {
 		nma_utils_update_password_storage (GTK_WIDGET (self->password_entry), flags,
-		                                   NM_SETTING (s_8021x), parent->password_flags_name);
+		                                   NM_SETTING (s_8021x), NM_SETTING_802_1X_PASSWORD);
 	}
 }
 
@@ -204,6 +204,12 @@ get_default_field (EAPMethod *parent)
 {
 	EAPMethodSimple *self = (EAPMethodSimple *) parent;
 	return GTK_WIDGET (self->username_entry);
+}
+
+static const gchar *
+get_password_flags_name (EAPMethod *parent)
+{
+	return NM_SETTING_802_1X_PASSWORD;
 }
 
 static gboolean
@@ -308,12 +314,12 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	                          update_secrets,
 	                          get_widget,
 	                          get_default_field,
+	                          get_password_flags_name,
 	                          destroy,
 	                          flags & EAP_METHOD_SIMPLE_FLAG_PHASE2);
 	if (!parent)
 		return NULL;
 
-	parent->password_flags_name = NM_SETTING_802_1X_PASSWORD;
 	self = (EAPMethodSimple *) parent;
 	self->ws_parent = ws_parent;
 	self->flags = flags;
@@ -346,7 +352,7 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
-	nma_utils_setup_password_storage (GTK_WIDGET (self->password_entry), 0, (NMSetting *) s_8021x, parent->password_flags_name,
+	nma_utils_setup_password_storage (GTK_WIDGET (self->password_entry), 0, (NMSetting *) s_8021x, NM_SETTING_802_1X_PASSWORD,
 	                                  FALSE, flags & EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY);
 
 	g_signal_connect_swapped (self->password_entry, "notify::secondary-icon-name", G_CALLBACK (password_storage_changed), self);
