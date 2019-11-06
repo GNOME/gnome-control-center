@@ -21,20 +21,18 @@
 
 #include "config.h"
 
-#include <glib-object.h>
 #include <glib/gi18n.h>
 
 #include <NetworkManager.h>
 
+#include "ce-page.h"
 #include "ce-page-vpn.h"
 #include "vpn-helpers.h"
 
 struct _CEPageVpn
 {
-        GObject parent;
+        GtkBox parent;
 
-        GtkBuilder *builder;
-        GtkBox     *box;
         GtkLabel   *failure_label;
         GtkEntry   *name_entry;
 
@@ -48,7 +46,7 @@ struct _CEPageVpn
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPageVpn, ce_page_vpn, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (CEPageVpn, ce_page_vpn, GTK_TYPE_BOX,
                          G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 /* Hack to make the plugin-provided editor widget fit in better with
@@ -113,7 +111,7 @@ load_vpn_plugin (CEPageVpn *self)
 
         gtk_widget_destroy (GTK_WIDGET (self->failure_label));
 
-        gtk_box_pack_start (self->box, ui_widget, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (self), ui_widget, TRUE, TRUE, 0);
 	gtk_widget_show_all (ui_widget);
 
         g_signal_connect_swapped (self->editor, "changed", G_CALLBACK (ce_page_changed), self);
@@ -134,7 +132,6 @@ ce_page_vpn_dispose (GObject *object)
 {
         CEPageVpn *self = CE_PAGE_VPN (object);
 
-        g_clear_object (&self->builder);
         g_clear_object (&self->connection);
         g_clear_object (&self->editor);
 
@@ -145,13 +142,6 @@ static const gchar *
 ce_page_vpn_get_security_setting (CEPage *page)
 {
         return NM_SETTING_VPN_SETTING_NAME;
-}
-
-static GtkWidget *
-ce_page_vpn_get_widget (CEPage *page)
-{
-        CEPageVpn *self = CE_PAGE_VPN (page);
-        return GTK_WIDGET (self->box);
 }
 
 static const gchar *
@@ -183,21 +173,27 @@ ce_page_vpn_validate (CEPage        *page,
 static void
 ce_page_vpn_init (CEPageVpn *self)
 {
+        gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
 ce_page_vpn_class_init (CEPageVpnClass *class)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (class);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
 
         object_class->dispose = ce_page_vpn_dispose;
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/vpn-page.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, CEPageVpn, failure_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageVpn, name_entry);
 }
 
 static void
 ce_page_iface_init (CEPageInterface *iface)
 {
         iface->get_security_setting = ce_page_vpn_get_security_setting;
-        iface->get_widget = ce_page_vpn_get_widget;
         iface->get_title = ce_page_vpn_get_title;
         iface->validate = ce_page_vpn_validate;
 }
@@ -218,27 +214,16 @@ finish_setup (CEPageVpn *self, gpointer unused, GError *error, gpointer user_dat
         connect_vpn_page (self);
 }
 
-CEPage *
+CEPageVpn *
 ce_page_vpn_new (NMConnection *connection)
 {
         CEPageVpn *self;
-        g_autoptr(GError) error = NULL;
 
         self = CE_PAGE_VPN (g_object_new (ce_page_vpn_get_type (), NULL));
-
-        self->builder = gtk_builder_new ();
-        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/vpn-page.ui", &error)) {
-                g_warning ("Couldn't load builder file: %s", error->message);
-                return NULL;
-        }
-
-        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
-        self->failure_label = GTK_LABEL (gtk_builder_get_object (self->builder, "failure_label"));
-        self->name_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "name_entry"));
 
         self->connection = g_object_ref (connection);
 
         g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
 
-        return CE_PAGE (self);
+        return self;
 }

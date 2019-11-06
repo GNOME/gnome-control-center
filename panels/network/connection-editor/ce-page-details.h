@@ -21,18 +21,18 @@
 
 #pragma once
 
+#include <gtk/gtk.h>
 #include <NetworkManager.h>
 
-#include "ce-page.h"
 #include "net-connection-editor.h"
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CEPageDetails, ce_page_details, CE, PAGE_DETAILS, GObject)
+G_DECLARE_FINAL_TYPE (CEPageDetails, ce_page_details, CE, PAGE_DETAILS, GtkGrid)
 
-CEPage *ce_page_details_new (NMConnection        *connection,
-                             NMDevice            *device,
-                             NMAccessPoint       *ap,
-                             NetConnectionEditor *editor);
+CEPageDetails *ce_page_details_new (NMConnection        *connection,
+                                    NMDevice            *device,
+                                    NMAccessPoint       *ap,
+                                    NetConnectionEditor *editor);
 
 G_END_DECLS

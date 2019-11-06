@@ -21,15 +21,14 @@
 
 #pragma once
 
+#include <gtk/gtk.h>
 #include <NetworkManager.h>
-
-#include "ce-page.h"
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CEPageEthernet, ce_page_ethernet, CE, PAGE_ETHERNET, GObject)
+G_DECLARE_FINAL_TYPE (CEPageEthernet, ce_page_ethernet, CE, PAGE_ETHERNET, GtkGrid)
 
-CEPage *ce_page_ethernet_new (NMConnection     *connection,
-                              NMClient         *client);
+CEPageEthernet *ce_page_ethernet_new (NMConnection     *connection,
+                                      NMClient         *client);
 
 G_END_DECLS

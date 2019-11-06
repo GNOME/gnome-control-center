@@ -29,6 +29,7 @@
 #include "list-box-helper.h"
 #include "net-connection-editor.h"
 #include "net-connection-editor-resources.h"
+#include "ce-page.h"
 #include "ce-page-details.h"
 #include "ce-page-wifi.h"
 #include "ce-page-ip4.h"
@@ -333,7 +334,6 @@ update_sensitivity (NetConnectionEditor *self)
 {
         NMSettingConnection *sc;
         gboolean sensitive;
-        GtkWidget *widget;
         GSList *l;
 
         if (!editor_is_initialized (self))
@@ -347,10 +347,8 @@ update_sensitivity (NetConnectionEditor *self)
                 sensitive = self->can_modify;
         }
 
-        for (l = self->pages; l; l = l->next) {
-                widget = ce_page_get_widget (CE_PAGE (l->data));
-                gtk_widget_set_sensitive (widget, sensitive);
-        }
+        for (l = self->pages; l; l = l->next)
+                gtk_widget_set_sensitive (GTK_WIDGET (l->data), sensitive);
 }
 
 static void
@@ -414,15 +412,13 @@ recheck_initialization (NetConnectionEditor *self)
 static void
 page_initialized (NetConnectionEditor *self, GError *error, CEPage *page)
 {
-        GtkWidget *widget;
         GtkWidget *label;
         gint position;
         GList *children, *l;
         gint i;
 
-        widget = ce_page_get_widget (page);
         position = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (page), "position"));
-        g_object_set_data (G_OBJECT (widget), "position", GINT_TO_POINTER (position));
+        g_object_set_data (G_OBJECT (page), "position", GINT_TO_POINTER (position));
         children = gtk_container_get_children (GTK_CONTAINER (self->notebook));
         for (l = children, i = 0; l; l = l->next, i++) {
                 gint pos = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (l->data), "position"));
@@ -433,7 +429,7 @@ page_initialized (NetConnectionEditor *self, GError *error, CEPage *page)
 
         label = gtk_label_new (ce_page_get_title (page));
 
-        gtk_notebook_insert_page (self->notebook, widget, label, i);
+        gtk_notebook_insert_page (self->notebook, GTK_WIDGET (page), label, i);
 
         self->initializing_pages = g_slist_remove (self->initializing_pages, page);
         self->pages = g_slist_append (self->pages, page);
@@ -533,27 +529,27 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
         is_vpn = g_str_equal (type, NM_SETTING_VPN_SETTING_NAME);
 
         if (!self->is_new_connection)
-                add_page (self, ce_page_details_new (self->connection, self->device, self->ap, self));
+                add_page (self, CE_PAGE (ce_page_details_new (self->connection, self->device, self->ap, self)));
 
         if (is_wifi)
-                add_page (self, ce_page_wifi_new (self->connection, self->client));
+                add_page (self, CE_PAGE (ce_page_wifi_new (self->connection, self->client)));
         else if (is_wired)
-                add_page (self, ce_page_ethernet_new (self->connection, self->client));
+                add_page (self, CE_PAGE (ce_page_ethernet_new (self->connection, self->client)));
         else if (is_vpn)
-                add_page (self, ce_page_vpn_new (self->connection));
+                add_page (self, CE_PAGE (ce_page_vpn_new (self->connection)));
         else {
                 /* Unsupported type */
                 net_connection_editor_do_fallback (self, type);
                 return;
         }
 
-        add_page (self, ce_page_ip4_new (self->connection, self->client));
-        add_page (self, ce_page_ip6_new (self->connection, self->client));
+        add_page (self, CE_PAGE (ce_page_ip4_new (self->connection, self->client)));
+        add_page (self, CE_PAGE (ce_page_ip6_new (self->connection, self->client)));
 
         if (is_wifi)
-                add_page (self, ce_page_security_new (self->connection));
+                add_page (self, CE_PAGE (ce_page_security_new (self->connection)));
         else if (is_wired)
-                add_page (self, ce_page_8021x_security_new (self->connection));
+                add_page (self, CE_PAGE (ce_page_8021x_security_new (self->connection)));
 
         pages = g_slist_copy (self->initializing_pages);
         for (l = pages; l; l = l->next) {

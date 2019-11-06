@@ -55,14 +55,6 @@ ce_page_validate (CEPage *self, NMConnection *connection, GError **error)
         return TRUE;
 }
 
-GtkWidget *
-ce_page_get_widget (CEPage *self)
-{
-        g_return_val_if_fail (CE_IS_PAGE (self), NULL);
-
-        return CE_PAGE_GET_IFACE (self)->get_widget (self);
-}
-
 const char *
 ce_page_get_title (CEPage *self)
 {

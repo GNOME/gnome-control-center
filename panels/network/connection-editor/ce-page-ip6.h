@@ -21,15 +21,14 @@
 
 #pragma once
 
+#include <gtk/gtk.h>
 #include <NetworkManager.h>
-
-#include "ce-page.h"
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CEPageIP6, ce_page_ip6, CE, PAGE_IP6, GObject)
+G_DECLARE_FINAL_TYPE (CEPageIP6, ce_page_ip6, CE, PAGE_IP6, GtkScrolledWindow)
 
-CEPage *ce_page_ip6_new (NMConnection     *connection,
-                         NMClient         *client);
+CEPageIP6 *ce_page_ip6_new (NMConnection     *connection,
+                            NMClient         *client);
 
 G_END_DECLS

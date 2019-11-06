@@ -21,13 +21,13 @@
 
 #include "config.h"
 
-#include <glib-object.h>
 #include <glib/gi18n.h>
 
 #include <NetworkManager.h>
 
-#include "wireless-security.h"
+#include "ce-page.h"
 #include "ce-page-security.h"
+#include "wireless-security.h"
 #include "ws-dynamic-wep.h"
 #include "ws-leap.h"
 #include "ws-wep-key.h"
@@ -36,11 +36,9 @@
 
 struct _CEPageSecurity
 {
-        GObject parent;
+        GtkGrid parent;
 
-        GtkBuilder  *builder;
         GtkBox      *box;
-        GtkGrid     *grid;
         GtkComboBox *security_combo;
         GtkLabel    *security_label;
 
@@ -52,7 +50,7 @@ struct _CEPageSecurity
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPageSecurity, ce_page_security, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (CEPageSecurity, ce_page_security, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 enum {
@@ -370,7 +368,6 @@ ce_page_security_dispose (GObject *object)
 {
         CEPageSecurity *self = CE_PAGE_SECURITY (object);
 
-        g_clear_object (&self->builder);
         g_clear_object (&self->connection);
         g_clear_object (&self->group);
 
@@ -381,13 +378,6 @@ static const gchar *
 ce_page_security_get_security_setting (CEPage *page)
 {
         return CE_PAGE_SECURITY (page)->security_setting;
-}
-
-static GtkWidget *
-ce_page_security_get_widget (CEPage *page)
-{
-        CEPageSecurity *self = CE_PAGE_SECURITY (page);
-        return GTK_WIDGET (self->grid);
 }
 
 static const gchar *
@@ -449,45 +439,40 @@ ce_page_security_validate (CEPage        *page,
 static void
 ce_page_security_init (CEPageSecurity *self)
 {
+        gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
-ce_page_security_class_init (CEPageSecurityClass *class)
+ce_page_security_class_init (CEPageSecurityClass *klass)
 {
-        GObjectClass *object_class = G_OBJECT_CLASS (class);
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
         object_class->dispose = ce_page_security_dispose;
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/security-page.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, CEPageSecurity, box);
+        gtk_widget_class_bind_template_child (widget_class, CEPageSecurity, security_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageSecurity, security_combo);
 }
 
 static void
 ce_page_iface_init (CEPageInterface *iface)
 {
         iface->get_security_setting = ce_page_security_get_security_setting;
-        iface->get_widget = ce_page_security_get_widget;
         iface->get_title = ce_page_security_get_title;
         iface->validate = ce_page_security_validate;
 }
 
-CEPage *
+CEPageSecurity *
 ce_page_security_new (NMConnection *connection)
 {
         CEPageSecurity *self;
         NMUtilsSecurityType default_type = NMU_SEC_NONE;
         NMSettingWirelessSecurity *sws;
-        g_autoptr(GError) error = NULL;
 
         self = CE_PAGE_SECURITY (g_object_new (ce_page_security_get_type (), NULL));
-
-        self->builder = gtk_builder_new ();
-        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/security-page.ui", &error)) {
-                g_warning ("Couldn't load builder file: %s", error->message);
-                return NULL;
-        }
-
-        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
-        self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
-        self->security_label = GTK_LABEL (gtk_builder_get_object (self->builder, "security_label"));
-        self->security_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "security_combo"));
 
         self->connection = g_object_ref (connection);
 
@@ -510,5 +495,5 @@ ce_page_security_new (NMConnection *connection)
 
         g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
 
-        return CE_PAGE (self);
+        return self;
 }

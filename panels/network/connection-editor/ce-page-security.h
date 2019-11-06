@@ -21,14 +21,13 @@
 
 #pragma once
 
+#include <gtk/gtk.h>
 #include <NetworkManager.h>
-
-#include "ce-page.h"
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CEPageSecurity, ce_page_security, CE, PAGE_SECURITY, GObject)
+G_DECLARE_FINAL_TYPE (CEPageSecurity, ce_page_security, CE, PAGE_SECURITY, GtkGrid)
 
-CEPage *ce_page_security_new (NMConnection *connection);
+CEPageSecurity *ce_page_security_new (NMConnection *connection);
 
 G_END_DECLS

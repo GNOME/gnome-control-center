@@ -21,13 +21,12 @@
 
 #pragma once
 
+#include <gtk/gtk.h>
 #include <NetworkManager.h>
 
-#include "ce-page.h"
+G_DECLARE_FINAL_TYPE (CEPageWifi, ce_page_wifi, CE, PAGE_WIFI, GtkGrid)
 
-G_DECLARE_FINAL_TYPE (CEPageWifi, ce_page_wifi, CE, PAGE_WIFI, GObject)
-
-CEPage *ce_page_wifi_new (NMConnection     *connection,
-                          NMClient         *client);
+CEPageWifi *ce_page_wifi_new (NMConnection *connection,
+                              NMClient     *client);
 
 G_END_DECLS

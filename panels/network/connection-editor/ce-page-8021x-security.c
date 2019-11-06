@@ -22,25 +22,21 @@
 
 #include "config.h"
 
-#include <string.h>
-
-#include <gtk/gtk.h>
 #include <glib/gi18n.h>
-
 #include <NetworkManager.h>
+#include <string.h>
 
 #include "ws-wpa-eap.h"
 #include "wireless-security.h"
+#include "ce-page.h"
 #include "ce-page-ethernet.h"
 #include "ce-page-8021x-security.h"
 
 struct _CEPage8021xSecurity {
-	GObject parent;
+	GtkGrid parent;
 
-        GtkBuilder  *builder;
         GtkBox      *box;
         GtkSwitch   *enable_8021x_switch;
-        GtkGrid     *grid;
         GtkLabel    *security_label;
 
         NMConnection *connection;
@@ -52,7 +48,7 @@ struct _CEPage8021xSecurity {
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPage8021xSecurity, ce_page_8021x_security, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (CEPage8021xSecurity, ce_page_8021x_security, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
@@ -112,13 +108,6 @@ ce_page_8021x_security_get_security_setting (CEPage *page)
         return NULL;
 }
 
-static GtkWidget *
-ce_page_8021x_security_get_widget (CEPage *page)
-{
-        CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (page);
-        return GTK_WIDGET (self->grid);
-}
-
 static const gchar *
 ce_page_8021x_security_get_title (CEPage *page)
 {
@@ -166,6 +155,7 @@ ce_page_8021x_security_validate (CEPage *cepage, NMConnection *connection, GErro
 static void
 ce_page_8021x_security_init (CEPage8021xSecurity *self)
 {
+        gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
@@ -173,7 +163,6 @@ ce_page_8021x_security_dispose (GObject *object)
 {
 	CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (object);
 
-        g_clear_object (&self->builder);
         g_clear_object (&self->connection);
         g_clear_pointer (&self->security, wireless_security_unref);
         g_clear_object (&self->group);
@@ -182,40 +171,34 @@ ce_page_8021x_security_dispose (GObject *object)
 }
 
 static void
-ce_page_8021x_security_class_init (CEPage8021xSecurityClass *security_class)
+ce_page_8021x_security_class_init (CEPage8021xSecurityClass *klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (security_class);
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
 	object_class->dispose = ce_page_8021x_security_dispose;
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/8021x-security-page.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, CEPage8021xSecurity, box);
+        gtk_widget_class_bind_template_child (widget_class, CEPage8021xSecurity, enable_8021x_switch);
+        gtk_widget_class_bind_template_child (widget_class, CEPage8021xSecurity, security_label);
 }
 
 static void
 ce_page_iface_init (CEPageInterface *iface)
 {
         iface->get_security_setting = ce_page_8021x_security_get_security_setting;
-        iface->get_widget = ce_page_8021x_security_get_widget;
         iface->get_title = ce_page_8021x_security_get_title;
 	iface->validate = ce_page_8021x_security_validate;
 }
 
-CEPage *
+CEPage8021xSecurity *
 ce_page_8021x_security_new (NMConnection *connection)
 {
 	CEPage8021xSecurity *self;
-        g_autoptr(GError) error = NULL;
 
         self = CE_PAGE_8021X_SECURITY (g_object_new (ce_page_8021x_security_get_type (), NULL));
-
-        self->builder = gtk_builder_new ();
-        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/8021x-security-page.ui", &error)) {
-                g_warning ("Couldn't load builder file: %s", error->message);
-                return NULL;
-        }
-
-        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
-        self->enable_8021x_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "enable_8021x_switch"));
-        self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
-        self->security_label = GTK_LABEL (gtk_builder_get_object (self->builder, "security_label"));
 
         self->connection = g_object_ref (connection);
 
@@ -224,5 +207,5 @@ ce_page_8021x_security_new (NMConnection *connection)
 
 	g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
 
-	return CE_PAGE (self);
+	return self;
 }

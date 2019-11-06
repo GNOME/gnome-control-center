@@ -36,12 +36,10 @@ struct _CEPageInterface
         GTypeInterface g_iface;
 
         gboolean     (*validate)             (CEPage *page, NMConnection *connection, GError **error);
-        GtkWidget   *(*get_widget)           (CEPage *page);
         const gchar *(*get_title)            (CEPage *page);
         const gchar *(*get_security_setting) (CEPage *page);
 };
 
-GtkWidget   *ce_page_get_widget      (CEPage           *page);
 const gchar *ce_page_get_title       (CEPage           *page);
 const gchar *ce_page_get_security_setting (CEPage           *page);
 gboolean     ce_page_validate        (CEPage           *page,

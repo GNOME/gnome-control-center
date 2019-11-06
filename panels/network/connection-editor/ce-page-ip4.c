@@ -24,11 +24,11 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <arpa/inet.h>
-#include <glib-object.h>
 #include <glib/gi18n.h>
 #include <NetworkManager.h>
 
 #include "list-box-helper.h"
+#include "ce-page.h"
 #include "ce-page-ip4.h"
 #include "ui-helpers.h"
 
@@ -37,9 +37,8 @@ static void ensure_empty_routes_row (CEPageIP4 *self);
 
 struct _CEPageIP4
 {
-        GObject parent;
+        GtkScrolledWindow parent;
 
-        GtkBuilder        *builder;
         GtkBox            *address_box;
         GtkSizeGroup      *address_sizegroup;
         GtkSwitch         *auto_dns_switch;
@@ -54,7 +53,6 @@ struct _CEPageIP4
         GtkBox            *routes_box;
         GtkSizeGroup      *routes_metric_sizegroup;
         GtkSizeGroup      *routes_sizegroup;
-        GtkScrolledWindow *scrolled_window;
 
         NMSettingIPConfig *setting;
 
@@ -64,7 +62,7 @@ struct _CEPageIP4
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPageIP4, ce_page_ip4, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (CEPageIP4, ce_page_ip4, GTK_TYPE_SCROLLED_WINDOW,
                          G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 enum {
@@ -158,7 +156,7 @@ remove_row (CEPageIP4 *self)
         GtkWidget *row;
         GtkWidget *row_box;
 
-        row_box = gtk_widget_get_parent (GTK_WIDGET (self->scrolled_window));
+        row_box = gtk_widget_get_parent (GTK_WIDGET (self));
         row = gtk_widget_get_parent (row_box);
         list = gtk_widget_get_parent (row);
 
@@ -850,23 +848,6 @@ out:
         return ret;
 }
 
-static void
-ce_page_ip4_dispose (GObject *object)
-{
-        CEPageIP4 *self = CE_PAGE_IP4 (object);
-
-        g_clear_object (&self->builder);
-
-        G_OBJECT_CLASS (ce_page_ip4_parent_class)->dispose (object);
-}
-
-static GtkWidget *
-ce_page_ip4_get_widget (CEPage *page)
-{
-        CEPageIP4 *self = CE_PAGE_IP4 (page);
-        return GTK_WIDGET (self->scrolled_window);
-}
-
 static const gchar *
 ce_page_ip4_get_title (CEPage *page)
 {
@@ -887,54 +868,46 @@ ce_page_ip4_validate (CEPage        *self,
 static void
 ce_page_ip4_init (CEPageIP4 *self)
 {
+        gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
-ce_page_ip4_class_init (CEPageIP4Class *class)
+ce_page_ip4_class_init (CEPageIP4Class *klass)
 {
-        GObjectClass *object_class = G_OBJECT_CLASS (class);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-        object_class->dispose = ce_page_ip4_dispose;
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/ip4-page.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, address_box);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, address_sizegroup);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, auto_dns_switch);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, auto_routes_switch);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, automatic_radio);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, content_box);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, disabled_radio);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, dns_entry);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, local_radio);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, manual_radio);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, never_default_check);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_box);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_metric_sizegroup);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_sizegroup);
 }
 
 static void
 ce_page_iface_init (CEPageInterface *iface)
 {
-        iface->get_widget = ce_page_ip4_get_widget;
         iface->get_title = ce_page_ip4_get_title;
         iface->validate = ce_page_ip4_validate;
 }
 
-CEPage *
+CEPageIP4 *
 ce_page_ip4_new (NMConnection     *connection,
                  NMClient         *client)
 {
         CEPageIP4 *self;
-        g_autoptr(GError) error = NULL;
 
         self = CE_PAGE_IP4 (g_object_new (ce_page_ip4_get_type (), NULL));
-
-        self->builder = gtk_builder_new ();
-        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/ip4-page.ui", &error)) {
-                g_warning ("Couldn't load builder file: %s", error->message);
-                return NULL;
-        }
-
-        self->address_box = GTK_BOX (gtk_builder_get_object (self->builder, "address_box"));
-        self->address_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (self->builder, "address_sizegroup"));
-        self->auto_dns_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "auto_dns_switch"));
-        self->auto_routes_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "auto_routes_switch"));
-        self->automatic_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (self->builder, "automatic_radio"));
-        self->content_box = GTK_BOX (gtk_builder_get_object (self->builder, "content_box"));
-        self->disabled_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (self->builder, "disabled_radio"));
-        self->dns_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "dns_entry"));
-        self->local_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (self->builder, "local_radio"));
-        self->manual_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (self->builder, "manual_radio"));
-        self->never_default_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "never_default_check"));
-        self->routes_box = GTK_BOX (gtk_builder_get_object (self->builder, "routes_box"));
-        self->routes_metric_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (self->builder, "routes_metric_sizegroup"));
-        self->routes_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (self->builder, "routes_sizegroup"));
-        self->scrolled_window = GTK_SCROLLED_WINDOW (gtk_builder_get_object (self->builder, "scrolled_window"));
 
         self->setting = nm_connection_get_setting_ip4_config (connection);
         if (!self->setting) {
@@ -944,5 +917,5 @@ ce_page_ip4_new (NMConnection     *connection,
 
         connect_ip4_page (self);
 
-        return CE_PAGE (self);
+        return self;
 }

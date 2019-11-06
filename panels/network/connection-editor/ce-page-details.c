@@ -21,24 +21,22 @@
 
 #include "config.h"
 
-#include <glib-object.h>
 #include <glib/gi18n.h>
 
 #include <NetworkManager.h>
 
+#include "ce-page.h"
 #include "ce-page-details.h"
 
 struct _CEPageDetails
 {
-        GObject parent;
+        GtkGrid parent;
 
-        GtkBuilder *builder;
         GtkCheckButton *all_user_check;
         GtkCheckButton *auto_connect_check;
         GtkLabel *dns_heading_label;
         GtkLabel *dns_label;
         GtkButton *forget_button;
-        GtkGrid *grid;
         GtkLabel *ipv4_heading_label;
         GtkLabel *ipv4_label;
         GtkLabel *ipv6_heading_label;
@@ -65,7 +63,7 @@ struct _CEPageDetails
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPageDetails, ce_page_details, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (CEPageDetails, ce_page_details, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
@@ -404,17 +402,9 @@ ce_page_details_dispose (GObject *object)
 {
         CEPageDetails *self = CE_PAGE_DETAILS (object);
 
-        g_clear_object (&self->builder);
         g_clear_object (&self->connection);
 
         G_OBJECT_CLASS (ce_page_details_parent_class)->dispose (object);
-}
-
-static GtkWidget *
-ce_page_details_get_widget (CEPage *page)
-{
-        CEPageDetails *self = CE_PAGE_DETAILS (page);
-        return GTK_WIDGET (self->grid);
 }
 
 static const gchar *
@@ -426,63 +416,58 @@ ce_page_details_get_title (CEPage *page)
 static void
 ce_page_details_init (CEPageDetails *self)
 {
+        gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
-ce_page_details_class_init (CEPageDetailsClass *class)
+ce_page_details_class_init (CEPageDetailsClass *klass)
 {
-        GObjectClass *object_class = G_OBJECT_CLASS (class);
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
         object_class->dispose = ce_page_details_dispose;
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/details-page.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, all_user_check);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, auto_connect_check);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, dns_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, dns_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, forget_button);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, ipv4_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, ipv4_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, ipv6_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, ipv6_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, last_used_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, last_used_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, mac_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, mac_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, restrict_data_check);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, route_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, route_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, security_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, security_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, speed_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, speed_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, strength_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, strength_label);
 }
 
 static void
 ce_page_iface_init (CEPageInterface *iface)
 {
-        iface->get_widget = ce_page_details_get_widget;
         iface->get_title = ce_page_details_get_title;
 }
 
-CEPage *
+CEPageDetails *
 ce_page_details_new (NMConnection        *connection,
                      NMDevice            *device,
                      NMAccessPoint       *ap,
                      NetConnectionEditor *editor)
 {
         CEPageDetails *self;
-        g_autoptr(GError) error = NULL;
 
         self = CE_PAGE_DETAILS (g_object_new (ce_page_details_get_type (), NULL));
-
-        self->builder = gtk_builder_new ();
-        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/details-page.ui", &error)) {
-                g_warning ("Couldn't load builder file: %s", error->message);
-                return NULL;
-        }
-
-        self->all_user_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "all_user_check"));
-        self->auto_connect_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "auto_connect_check"));
-        self->dns_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "dns_heading_label"));
-        self->dns_label = GTK_LABEL (gtk_builder_get_object (self->builder, "dns_label"));
-        self->forget_button = GTK_BUTTON (gtk_builder_get_object (self->builder, "forget_button"));
-        self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
-        self->ipv4_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv4_heading_label"));
-        self->ipv4_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv4_label"));
-        self->ipv6_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv6_heading_label"));
-        self->ipv6_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv6_label"));
-        self->last_used_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "last_used_heading_label"));
-        self->last_used_label = GTK_LABEL (gtk_builder_get_object (self->builder, "last_used_label"));
-        self->mac_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "mac_heading_label"));
-        self->mac_label = GTK_LABEL (gtk_builder_get_object (self->builder, "mac_label"));
-        self->restrict_data_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "restrict_data_check"));
-        self->route_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "route_heading_label"));
-        self->route_label = GTK_LABEL (gtk_builder_get_object (self->builder, "route_label"));
-        self->security_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "security_heading_label"));
-        self->security_label = GTK_LABEL (gtk_builder_get_object (self->builder, "security_label"));
-        self->speed_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "speed_heading_label"));
-        self->speed_label = GTK_LABEL (gtk_builder_get_object (self->builder, "speed_label"));
-        self->strength_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "strength_heading_label"));
-        self->strength_label = GTK_LABEL (gtk_builder_get_object (self->builder, "strength_label"));
 
         self->connection = g_object_ref (connection);
         self->editor = editor;
@@ -491,5 +476,5 @@ ce_page_details_new (NMConnection        *connection,
 
         connect_details_page (self);
 
-        return CE_PAGE (self);
+        return self;
 }
