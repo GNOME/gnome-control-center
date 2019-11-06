@@ -342,8 +342,8 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 	                          get_widget,
 	                          get_default_field,
 	                          get_password_flags_name,
-	                          destroy,
-	                          FALSE);
+	                          NULL,
+	                          destroy);
 	if (!parent)
 		return NULL;
 
