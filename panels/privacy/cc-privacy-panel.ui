@@ -120,12 +120,11 @@
       </row>
     </data>
   </object>
-  <object class="GtkDialog" id="recent_dialog">
+  <object class="HdyDialog" id="recent_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">0</property>
     <property name="type_hint">dialog</property>
     <property name="title" translatable="yes">Usage &amp; History</property>
-    <property name="resizable">False</property>
     <property name="use_header_bar">1</property>
     <child internal-child="vbox">
       <object class="GtkBox">
@@ -274,11 +273,9 @@
       <action-widget response="0">clear_recent_button</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkDialog" id="screen_lock_dialog">
+  <object class="HdyDialog" id="screen_lock_dialog">
     <property name="can_focus">False</property>
-    <property name="border_width">5</property>
     <property name="title" translatable="yes">Screen Lock</property>
-    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
     <child internal-child="vbox">
@@ -286,7 +283,6 @@
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">6</property>
-        <property name="margin_start">12</property>
         <property name="margin_end">12</property>
         <property name="margin_top">12</property>
         <property name="margin_bottom">12</property>
@@ -298,6 +294,7 @@
             <property name="margin_end">12</property>
             <property name="margin_top">6</property>
             <property name="margin_bottom">12</property>
+            <property name="wrap">1</property>
             <property name="label" translatable="yes">The Screen Lock protects your privacy when you are away.</property>
             <style>
               <class name="dim-label"/>
@@ -426,11 +423,10 @@
       </object>
     </child>
   </object>
-  <object class="GtkDialog" id="trash_dialog">
+  <object class="HdyDialog" id="trash_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">0</property>
     <property name="title" translatable="yes">Purge Trash &amp; Temporary Files</property>
-    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
     <child internal-child="vbox">
@@ -488,7 +484,7 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
+                <property name="width">2</property>
                 <property name="height">1</property>
               </packing>
             </child>
@@ -500,7 +496,7 @@
                 <property name="valign">center</property>
               </object>
               <packing>
-                <property name="left_attach">1</property>
+                <property name="left_attach">2</property>
                 <property name="top_attach">0</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
@@ -519,7 +515,7 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
+                <property name="width">2</property>
                 <property name="height">1</property>
               </packing>
             </child>
@@ -531,7 +527,7 @@
                 <property name="valign">center</property>
               </object>
               <packing>
-                <property name="left_attach">1</property>
+                <property name="left_attach">2</property>
                 <property name="top_attach">1</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
@@ -564,7 +560,7 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
+                <property name="width">2</property>
                 <property name="height">1</property>
               </packing>
             </child>
@@ -576,11 +572,15 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox">
+          <object class="GtkFlowBox">
             <property name="can_focus">False</property>
             <property name="orientation">horizontal</property>
             <property name="visible">True</property>
-            <property name="spacing">12</property>
+            <property name="min-children-per-line">1</property>
+            <property name="row-spacing">12</property>
+            <property name="column-spacing">12</property>
+            <property name="selection-mode">none</property>
+            <property name="hexpand">0</property>
             <property name="margin_start">12</property>
             <property name="margin_end">6</property>
             <property name="margin_top">12</property>
@@ -591,15 +591,10 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="halign">center</property>
+                <property name="halign">fill</property>
                 <property name="valign">center</property>
                 <property name="use_underline">True</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
             </child>
             <child>
               <object class="GtkButton" id="purge_temp_button">
@@ -607,15 +602,10 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="halign">center</property>
+                <property name="halign">fill</property>
                 <property name="valign">center</property>
                 <property name="use_underline">True</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
             </child>
           </object>
           <packing>
@@ -631,11 +621,10 @@
       <action-widget response="0">purge_temp_button</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkDialog" id="software_dialog">
+  <object class="HdyDialog" id="software_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Software Usage</property>
-    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
     <child internal-child="vbox">
@@ -739,11 +728,10 @@ All the information we collect is made anonymous, and we will never share your d
       </object>
     </child>
   </object>
-  <object class="GtkDialog" id="camera_dialog">
+  <object class="HdyDialog" id="camera_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Camera</property>
-    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
     <child internal-child="vbox">
@@ -844,11 +832,10 @@ All the information we collect is made anonymous, and we will never share your d
       </object>
     </child>
   </object>
-  <object class="GtkDialog" id="microphone_dialog">
+  <object class="HdyDialog" id="microphone_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Microphone</property>
-    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
     <child internal-child="vbox">
@@ -949,11 +936,10 @@ All the information we collect is made anonymous, and we will never share your d
       </object>
     </child>
   </object>
-  <object class="GtkDialog" id="location_dialog">
+  <object class="HdyDialog" id="location_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Location Services</property>
-    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
     <child internal-child="vbox">
@@ -1163,11 +1149,10 @@ All the information we collect is made anonymous, and we will never share your d
     </child>
   </template>
 
-  <object class="GtkDialog" id="abrt_dialog">
+  <object class="HdyDialog" id="abrt_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Problem Reporting</property>
-    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
     <child internal-child="vbox">
