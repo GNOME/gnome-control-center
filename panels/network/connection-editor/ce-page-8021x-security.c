@@ -115,10 +115,18 @@ ce_page_8021x_security_new (NMConnection     *connection,
 
 	g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
 
-	if (self->initial_have_8021x)
-                CE_PAGE (self)->security_setting = NM_SETTING_802_1X_SETTING_NAME;
-
 	return CE_PAGE (self);
+}
+
+static const gchar *
+ce_page_8021x_security_get_security_setting (CEPage *page)
+{
+	CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (page);
+
+	if (self->initial_have_8021x)
+                return NM_SETTING_802_1X_SETTING_NAME;
+
+        return NULL;
 }
 
 static const gchar *
@@ -194,6 +202,7 @@ ce_page_8021x_security_class_init (CEPage8021xSecurityClass *security_class)
 	/* virtual methods */
 	object_class->dispose = dispose;
 
+        parent_class->get_security_setting = ce_page_8021x_security_get_security_setting;
         parent_class->get_title = ce_page_8021x_security_get_title;
 	parent_class->validate = ce_page_8021x_security_validate;
 }

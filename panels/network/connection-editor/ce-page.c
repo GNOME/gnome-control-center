@@ -477,7 +477,10 @@ ce_page_cloned_mac_combo_valid (GtkComboBoxText *combo)
 const gchar *
 ce_page_get_security_setting (CEPage *self)
 {
-        return self->security_setting;
+        if (CE_PAGE_GET_CLASS (self)->get_security_setting)
+                return CE_PAGE_GET_CLASS (self)->get_security_setting (self);
+
+        return NULL;
 }
 
 gint

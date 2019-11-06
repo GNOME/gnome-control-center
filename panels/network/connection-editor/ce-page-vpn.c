@@ -135,6 +135,12 @@ ce_page_vpn_dispose (GObject *object)
 }
 
 static const gchar *
+ce_page_vpn_get_security_setting (CEPage *page)
+{
+        return NM_SETTING_VPN_SETTING_NAME;
+}
+
+static const gchar *
 ce_page_vpn_get_title (CEPage *page)
 {
         return _("Identity");
@@ -172,6 +178,7 @@ ce_page_vpn_class_init (CEPageVpnClass *class)
         GObjectClass *object_class = G_OBJECT_CLASS (class);
 
         object_class->dispose = ce_page_vpn_dispose;
+        page_class->get_security_setting = ce_page_vpn_get_security_setting;
         page_class->get_title = ce_page_vpn_get_title;
         page_class->validate = ce_page_vpn_validate;
 }
@@ -209,8 +216,6 @@ ce_page_vpn_new (NMConnection     *connection,
         self->page = GTK_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "page"));
 
         g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
-
-        CE_PAGE (self)->security_setting = NM_SETTING_VPN_SETTING_NAME;
 
         return CE_PAGE (self);
 }

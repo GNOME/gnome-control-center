@@ -42,6 +42,7 @@ struct _CEPageSecurity
         GtkComboBox *security_combo;
         GtkLabel    *security_label;
 
+        const gchar  *security_setting;
         GtkSizeGroup *group;
         gboolean     adhoc;
 };
@@ -374,6 +375,12 @@ ce_page_security_dispose (GObject *object)
 }
 
 static const gchar *
+ce_page_security_get_security_setting (CEPage *page)
+{
+        return CE_PAGE_SECURITY (page)->security_setting;
+}
+
+static const gchar *
 ce_page_security_get_title (CEPage *page)
 {
         return _("Security");
@@ -441,6 +448,7 @@ ce_page_security_class_init (CEPageSecurityClass *class)
         CEPageClass *page_class = CE_PAGE_CLASS (class);
 
         object_class->dispose = ce_page_security_dispose;
+        page_class->get_security_setting = ce_page_security_get_security_setting;
         page_class->get_title = ce_page_security_get_title;
         page_class->validate = ce_page_security_validate;
 }
@@ -466,13 +474,13 @@ ce_page_security_new (NMConnection      *connection,
             default_type == NMU_SEC_LEAP ||
             default_type == NMU_SEC_WPA_PSK ||
             default_type == NMU_SEC_WPA2_PSK) {
-                CE_PAGE (self)->security_setting = NM_SETTING_WIRELESS_SECURITY_SETTING_NAME;
+                self->security_setting = NM_SETTING_WIRELESS_SECURITY_SETTING_NAME;
         }
 
         if (default_type == NMU_SEC_DYNAMIC_WEP ||
             default_type == NMU_SEC_WPA_ENTERPRISE ||
             default_type == NMU_SEC_WPA2_ENTERPRISE) {
-                CE_PAGE (self)->security_setting = NM_SETTING_802_1X_SETTING_NAME;
+                self->security_setting = NM_SETTING_802_1X_SETTING_NAME;
         }
 
         g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
