@@ -73,13 +73,6 @@ GType eap_method_get_type (void);
 
 /* Below for internal use only */
 
-#include "eap-method-tls.h"
-#include "eap-method-leap.h"
-#include "eap-method-fast.h"
-#include "eap-method-ttls.h"
-#include "eap-method-peap.h"
-#include "eap-method-simple.h"
-
 EAPMethod *eap_method_init (gsize obj_size,
                             EMValidateFunc validate,
                             EMAddToSizeGroupFunc add_to_size_group,
