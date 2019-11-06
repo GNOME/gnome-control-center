@@ -171,7 +171,6 @@ wireless_security_unref (WirelessSecurity *self)
 		g_clear_pointer (&priv->username, g_free);
 		g_clear_pointer (&priv->password, g_free);
 
-		g_clear_object (&self->builder);
 		g_slice_free1 (priv->obj_size, self);
 		g_free (priv);
 	}
@@ -183,15 +182,12 @@ wireless_security_init (gsize obj_size,
                         WSValidateFunc validate,
                         WSAddToSizeGroupFunc add_to_size_group,
                         WSFillConnectionFunc fill_connection,
-                        WSDestroyFunc destroy,
-                        const char *ui_resource)
+                        WSDestroyFunc destroy)
 {
 	g_autoptr(WirelessSecurity) self = NULL;
 	WirelessSecurityPrivate *priv;
-	g_autoptr(GError) error = NULL;
 
 	g_return_val_if_fail (obj_size > 0, NULL);
-	g_return_val_if_fail (ui_resource != NULL, NULL);
 
 	g_type_ensure (WIRELESS_TYPE_SECURITY);
 
@@ -206,14 +202,6 @@ wireless_security_init (gsize obj_size,
 	priv->validate = validate;
 	priv->add_to_size_group = add_to_size_group;
 	priv->fill_connection = fill_connection;
-
-	self->builder = gtk_builder_new ();
-	if (!gtk_builder_add_from_resource (self->builder, ui_resource, &error)) {
-		g_warning ("Couldn't load UI builder resource %s: %s",
-		           ui_resource, error->message);
-		return NULL;
-	}
-
 	priv->destroy = destroy;
 	priv->adhoc_compatible = TRUE;
 

@@ -33,6 +33,7 @@
 struct _WirelessSecurityWEPKey {
 	WirelessSecurity parent;
 
+	GtkBuilder     *builder;
 	GtkComboBox    *auth_method_combo;
 	GtkLabel       *auth_method_label;
 	GtkGrid        *grid;
@@ -89,6 +90,7 @@ destroy (WirelessSecurity *parent)
 	WirelessSecurityWEPKey *self = (WirelessSecurityWEPKey *) parent;
 	int i;
 
+	g_clear_object (&self->builder);
 	for (i = 0; i < 4; i++)
 		memset (self->keys[i], 0, sizeof (self->keys[i]));
 }
@@ -264,26 +266,32 @@ ws_wep_key_new (NMConnection *connection,
 	guint8 default_key_idx = 0;
 	gboolean is_adhoc = adhoc_create;
 	gboolean is_shared_key = FALSE;
+	g_autoptr(GError) error = NULL;
 
 	parent = wireless_security_init (sizeof (WirelessSecurityWEPKey),
 	                                 get_widget,
 	                                 validate,
 	                                 add_to_size_group,
 	                                 fill_connection,
-	                                 destroy,
-	                                 "/org/gnome/ControlCenter/network/ws-wep-key.ui");
+	                                 destroy);
 	if (!parent)
 		return NULL;
 	self = (WirelessSecurityWEPKey *) parent;
 
-	self->auth_method_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "auth_method_combo"));
-	self->auth_method_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "auth_method_label"));
-	self->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
-	self->key_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "key_entry"));
-	self->key_index_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "key_index_combo"));
-	self->key_index_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "key_index_label"));
-	self->key_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "key_label"));
-	self->show_key_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "show_key_check"));
+	self->builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/ws-wep-key.ui", &error)) {
+		g_warning ("Couldn't load UI builder resource: %s", error->message);
+		return NULL;
+	}
+
+	self->auth_method_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "auth_method_combo"));
+	self->auth_method_label = GTK_LABEL (gtk_builder_get_object (self->builder, "auth_method_label"));
+	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
+	self->key_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "key_entry"));
+	self->key_index_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "key_index_combo"));
+	self->key_index_label = GTK_LABEL (gtk_builder_get_object (self->builder, "key_index_label"));
+	self->key_label = GTK_LABEL (gtk_builder_get_object (self->builder, "key_label"));
+	self->show_key_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "show_key_check"));
 
 	self->editing_connection = secrets_only ? FALSE : TRUE;
 	self->password_flags_name = NM_SETTING_WIRELESS_SECURITY_WEP_KEY0;
