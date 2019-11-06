@@ -211,9 +211,7 @@ ce_page_wifi_new (NMConnection     *connection,
         CEPageWifi *self;
         g_autoptr(GError) error = NULL;
 
-        self = CE_PAGE_WIFI (g_object_new (ce_page_wifi_get_type (),
-                                           "connection", connection,
-                                           NULL));
+        self = CE_PAGE_WIFI (g_object_new (ce_page_wifi_get_type (), NULL));
 
         self->builder = gtk_builder_new ();
         if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/wifi-page.ui", &error)) {

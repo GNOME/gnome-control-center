@@ -45,7 +45,6 @@ struct _CEPage
         GObject parent;
 
         gboolean initialized;
-        NMConnection *connection;
 };
 
 struct _CEPageClass
@@ -69,6 +68,7 @@ gboolean     ce_page_validate        (CEPage           *page,
 gboolean     ce_page_get_initialized (CEPage           *page);
 void         ce_page_changed         (CEPage           *page);
 void         ce_page_complete_init   (CEPage           *page,
+                                      NMConnection     *connection,
                                       const gchar      *setting_name,
                                       GVariant         *variant,
                                       GError           *error);

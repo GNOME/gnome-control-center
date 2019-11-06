@@ -57,6 +57,7 @@ struct _CEPageDetails
         GtkLabel *strength_heading_label;
         GtkLabel *strength_label;
 
+        NMConnection *connection;
         NMDevice *device;
         NMAccessPoint *ap;
         NetConnectionEditor *editor;
@@ -153,7 +154,7 @@ all_user_changed (CEPageDetails *self)
         gboolean all_users;
         NMSettingConnection *sc;
 
-        sc = nm_connection_get_setting_connection (CE_PAGE (self)->connection);
+        sc = nm_connection_get_setting_connection (self->connection);
         all_users = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->all_user_check));
 
         g_object_set (sc, "permissions", NULL, NULL);
@@ -167,7 +168,7 @@ restrict_data_changed (CEPageDetails *self)
         NMSettingConnection *s_con;
         NMMetered metered;
 
-        s_con = nm_connection_get_setting_connection (CE_PAGE (self)->connection);
+        s_con = nm_connection_get_setting_connection (self->connection);
 
         if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->restrict_data_check)))
                 metered = NM_METERED_YES;
@@ -184,7 +185,7 @@ update_restrict_data (CEPageDetails *self)
         NMMetered metered;
         const gchar *type;
 
-        s_con = nm_connection_get_setting_connection (CE_PAGE (self)->connection);
+        s_con = nm_connection_get_setting_connection (self->connection);
 
         if (s_con == NULL)
                 return;
@@ -222,7 +223,7 @@ connect_details_page (CEPageDetails *self)
         NMIPConfig *ipv4_config = NULL, *ipv6_config = NULL;
         gboolean have_ipv4_address = FALSE, have_ipv6_address = FALSE;
 
-        sc = nm_connection_get_setting_connection (CE_PAGE (self)->connection);
+        sc = nm_connection_get_setting_connection (self->connection);
         type = nm_setting_connection_get_connection_type (sc);
 
         if (NM_IS_DEVICE_WIFI (self->device))
@@ -244,7 +245,7 @@ connect_details_page (CEPageDetails *self)
 
                 ac = nm_device_get_active_connection (self->device);
                 p1 = ac ? nm_active_connection_get_uuid (ac) : NULL;
-                p2 = nm_connection_get_uuid (CE_PAGE (self)->connection);
+                p2 = nm_connection_get_uuid (self->connection);
                 if (g_strcmp0 (p1, p2) == 0) {
                         device_is_active = TRUE;
                         if (NM_IS_DEVICE_WIFI (self->device))
@@ -355,8 +356,8 @@ connect_details_page (CEPageDetails *self)
                 gtk_label_set_label (self->ipv6_heading_label, _("IP Address"));
         }
 
-        if (!device_is_active && CE_PAGE (self)->connection)
-                update_last_used (self, CE_PAGE (self)->connection);
+        if (!device_is_active && self->connection)
+                update_last_used (self, self->connection);
         else {
                 gtk_widget_set_visible (GTK_WIDGET (self->last_used_heading_label), FALSE);
                 gtk_widget_set_visible (GTK_WIDGET (self->last_used_label), FALSE);
@@ -401,6 +402,7 @@ ce_page_details_dispose (GObject *object)
         CEPageDetails *self = CE_PAGE_DETAILS (object);
 
         g_clear_object (&self->builder);
+        g_clear_object (&self->connection);
 
         G_OBJECT_CLASS (ce_page_details_parent_class)->dispose (object);
 }
@@ -436,7 +438,6 @@ ce_page_details_class_init (CEPageDetailsClass *class)
 
 CEPage *
 ce_page_details_new (NMConnection        *connection,
-                     NMClient            *client,
                      NMDevice            *device,
                      NMAccessPoint       *ap,
                      NetConnectionEditor *editor)
@@ -444,9 +445,7 @@ ce_page_details_new (NMConnection        *connection,
         CEPageDetails *self;
         g_autoptr(GError) error = NULL;
 
-        self = CE_PAGE_DETAILS (g_object_new (ce_page_details_get_type (),
-                                              "connection", connection,
-                                              NULL));
+        self = CE_PAGE_DETAILS (g_object_new (ce_page_details_get_type (), NULL));
 
         self->builder = gtk_builder_new ();
         if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/details-page.ui", &error)) {
@@ -478,6 +477,7 @@ ce_page_details_new (NMConnection        *connection,
         self->strength_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "strength_heading_label"));
         self->strength_label = GTK_LABEL (gtk_builder_get_object (self->builder, "strength_label"));
 
+        self->connection = g_object_ref (connection);
         self->editor = editor;
         self->device = device;
         self->ap = ap;

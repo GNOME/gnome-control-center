@@ -463,7 +463,7 @@ get_secrets_cb (GObject *source_object,
         if (!variant && g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
                 return;
 
-        ce_page_complete_init (info->page, info->setting_name, variant, g_steal_pointer (&error));
+        ce_page_complete_init (info->page, info->editor->connection, info->setting_name, variant, g_steal_pointer (&error));
 }
 
 static void
@@ -533,14 +533,14 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
         is_vpn = g_str_equal (type, NM_SETTING_VPN_SETTING_NAME);
 
         if (!self->is_new_connection)
-                add_page (self, ce_page_details_new (self->connection, self->client, self->device, self->ap, self));
+                add_page (self, ce_page_details_new (self->connection, self->device, self->ap, self));
 
         if (is_wifi)
                 add_page (self, ce_page_wifi_new (self->connection, self->client));
         else if (is_wired)
                 add_page (self, ce_page_ethernet_new (self->connection, self->client));
         else if (is_vpn)
-                add_page (self, ce_page_vpn_new (self->connection, self->client));
+                add_page (self, ce_page_vpn_new (self->connection));
         else {
                 /* Unsupported type */
                 net_connection_editor_do_fallback (self, type);
@@ -551,9 +551,9 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
         add_page (self, ce_page_ip6_new (self->connection, self->client));
 
         if (is_wifi)
-                add_page (self, ce_page_security_new (self->connection, self->client));
+                add_page (self, ce_page_security_new (self->connection));
         else if (is_wired)
-                add_page (self, ce_page_8021x_security_new (self->connection, self->client));
+                add_page (self, ce_page_8021x_security_new (self->connection));
 
         pages = g_slist_copy (self->initializing_pages);
         for (l = pages; l; l = l->next) {
@@ -562,7 +562,7 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
 
                 security_setting = ce_page_get_security_setting (page);
                 if (!security_setting || self->is_new_connection) {
-                        ce_page_complete_init (page, NULL, NULL, NULL);
+                        ce_page_complete_init (page, NULL, NULL, NULL, NULL);
                 } else {
                         get_secrets_for_page (self, page, security_setting);
                 }

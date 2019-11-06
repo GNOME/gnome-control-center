@@ -905,9 +905,7 @@ ce_page_ip4_new (NMConnection     *connection,
         CEPageIP4 *self;
         g_autoptr(GError) error = NULL;
 
-        self = CE_PAGE_IP4 (g_object_new (ce_page_ip4_get_type (),
-                                          "connection", connection,
-                                          NULL));
+        self = CE_PAGE_IP4 (g_object_new (ce_page_ip4_get_type (), NULL));
 
         self->builder = gtk_builder_new ();
         if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/ip4-page.ui", &error)) {

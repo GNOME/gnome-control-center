@@ -43,6 +43,7 @@ struct _CEPage8021xSecurity {
         GtkGrid     *grid;
         GtkLabel    *security_label;
 
+        NMConnection *connection;
         GtkWidget *security_widget;
         WirelessSecurity *security;
         GtkSizeGroup *group;
@@ -74,7 +75,7 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 
         self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-	self->security = (WirelessSecurity *) ws_wpa_eap_new (CE_PAGE (self)->connection, TRUE, FALSE);
+	self->security = (WirelessSecurity *) ws_wpa_eap_new (self->connection, TRUE, FALSE);
 	if (!self->security) {
 		g_warning ("Could not load 802.1x user interface.");
 		return;
@@ -95,36 +96,6 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 
 	gtk_container_add (GTK_CONTAINER (self->box), self->security_widget);
 
-}
-
-CEPage *
-ce_page_8021x_security_new (NMConnection     *connection,
-                            NMClient         *client)
-{
-	CEPage8021xSecurity *self;
-        g_autoptr(GError) error = NULL;
-
-        self = CE_PAGE_8021X_SECURITY (g_object_new (ce_page_8021x_security_get_type (),
-                                                     "connection", connection,
-                                                     NULL));
-
-        self->builder = gtk_builder_new ();
-        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/8021x-security-page.ui", &error)) {
-                g_warning ("Couldn't load builder file: %s", error->message);
-                return NULL;
-        }
-
-        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
-        self->enable_8021x_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "enable_8021x_switch"));
-        self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
-        self->security_label = GTK_LABEL (gtk_builder_get_object (self->builder, "security_label"));
-
-	if (nm_connection_get_setting_802_1x (connection))
-		self->initial_have_8021x = TRUE;
-
-	g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
-
-	return CE_PAGE (self);
 }
 
 static const gchar *
@@ -195,11 +166,12 @@ ce_page_8021x_security_init (CEPage8021xSecurity *self)
 }
 
 static void
-dispose (GObject *object)
+ce_page_8021x_security_dispose (GObject *object)
 {
 	CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (object);
 
         g_clear_object (&self->builder);
+        g_clear_object (&self->connection);
         g_clear_pointer (&self->security, wireless_security_unref);
         g_clear_object (&self->group);
 
@@ -212,11 +184,38 @@ ce_page_8021x_security_class_init (CEPage8021xSecurityClass *security_class)
 	GObjectClass *object_class = G_OBJECT_CLASS (security_class);
 	CEPageClass *parent_class = CE_PAGE_CLASS (security_class);
 
-	/* virtual methods */
-	object_class->dispose = dispose;
-
+	object_class->dispose = ce_page_8021x_security_dispose;
         parent_class->get_security_setting = ce_page_8021x_security_get_security_setting;
         parent_class->get_widget = ce_page_8021x_security_get_widget;
         parent_class->get_title = ce_page_8021x_security_get_title;
 	parent_class->validate = ce_page_8021x_security_validate;
+}
+
+CEPage *
+ce_page_8021x_security_new (NMConnection *connection)
+{
+	CEPage8021xSecurity *self;
+        g_autoptr(GError) error = NULL;
+
+        self = CE_PAGE_8021X_SECURITY (g_object_new (ce_page_8021x_security_get_type (), NULL));
+
+        self->builder = gtk_builder_new ();
+        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/8021x-security-page.ui", &error)) {
+                g_warning ("Couldn't load builder file: %s", error->message);
+                return NULL;
+        }
+
+        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
+        self->enable_8021x_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "enable_8021x_switch"));
+        self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
+        self->security_label = GTK_LABEL (gtk_builder_get_object (self->builder, "security_label"));
+
+        self->connection = g_object_ref (connection);
+
+	if (nm_connection_get_setting_802_1x (connection))
+		self->initial_have_8021x = TRUE;
+
+	g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
+
+	return CE_PAGE (self);
 }

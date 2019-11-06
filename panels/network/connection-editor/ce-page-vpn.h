@@ -29,7 +29,6 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (CEPageVpn, ce_page_vpn, CE, PAGE_VPN, CEPage)
 
-CEPage *ce_page_vpn_new (NMConnection     *connection,
-                         NMClient         *client);
+CEPage *ce_page_vpn_new (NMConnection *connection);
 
 G_END_DECLS

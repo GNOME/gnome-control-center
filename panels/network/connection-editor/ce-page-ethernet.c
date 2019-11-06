@@ -225,9 +225,7 @@ ce_page_ethernet_new (NMConnection     *connection,
         CEPageEthernet *self;
         g_autoptr(GError) error = NULL;
 
-        self = CE_PAGE_ETHERNET (g_object_new (ce_page_ethernet_get_type (),
-                                               "connection", connection,
-                                               NULL));
+        self = CE_PAGE_ETHERNET (g_object_new (ce_page_ethernet_get_type (), NULL));
 
         self->builder = gtk_builder_new ();
         if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/ethernet-page.ui", &error)) {

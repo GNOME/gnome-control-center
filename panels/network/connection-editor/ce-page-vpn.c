@@ -38,6 +38,7 @@ struct _CEPageVpn
         GtkLabel   *failure_label;
         GtkEntry   *name_entry;
 
+        NMConnection *connection;
         NMSettingConnection *setting_connection;
         NMSettingVpn *setting_vpn;
 
@@ -89,12 +90,12 @@ vpn_gnome3ify_editor (GtkWidget *widget)
 }
 
 static void
-load_vpn_plugin (CEPageVpn *self, NMConnection *connection)
+load_vpn_plugin (CEPageVpn *self)
 {
         GtkWidget *ui_widget;
 
         self->editor = nm_vpn_editor_plugin_get_editor (self->plugin,
-                                                        connection,
+                                                        self->connection,
                                                         NULL);
         ui_widget = NULL;
         if (self->editor)
@@ -131,6 +132,7 @@ ce_page_vpn_dispose (GObject *object)
         CEPageVpn *self = CE_PAGE_VPN (object);
 
         g_clear_object (&self->builder);
+        g_clear_object (&self->connection);
         g_clear_object (&self->editor);
 
         G_OBJECT_CLASS (ce_page_vpn_parent_class)->dispose (object);
@@ -196,30 +198,26 @@ ce_page_vpn_class_init (CEPageVpnClass *class)
 static void
 finish_setup (CEPageVpn *self, gpointer unused, GError *error, gpointer user_data)
 {
-        NMConnection *connection = CE_PAGE (self)->connection;
         const char *vpn_type;
 
-        self->setting_connection = nm_connection_get_setting_connection (connection);
-        self->setting_vpn = nm_connection_get_setting_vpn (connection);
+        self->setting_connection = nm_connection_get_setting_connection (self->connection);
+        self->setting_vpn = nm_connection_get_setting_vpn (self->connection);
         vpn_type = nm_setting_vpn_get_service_type (self->setting_vpn);
 
         self->plugin = vpn_get_plugin_by_service (vpn_type);
         if (self->plugin)
-                load_vpn_plugin (self, connection);
+                load_vpn_plugin (self);
 
         connect_vpn_page (self);
 }
 
 CEPage *
-ce_page_vpn_new (NMConnection     *connection,
-		 NMClient         *client)
+ce_page_vpn_new (NMConnection *connection)
 {
         CEPageVpn *self;
         g_autoptr(GError) error = NULL;
 
-        self = CE_PAGE_VPN (g_object_new (ce_page_vpn_get_type (),
-                                          "connection", connection,
-                                          NULL));
+        self = CE_PAGE_VPN (g_object_new (ce_page_vpn_get_type (), NULL));
 
         self->builder = gtk_builder_new ();
         if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/vpn-page.ui", &error)) {
@@ -230,6 +228,8 @@ ce_page_vpn_new (NMConnection     *connection,
         self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
         self->failure_label = GTK_LABEL (gtk_builder_get_object (self->builder, "failure_label"));
         self->name_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "name_entry"));
+
+        self->connection = g_object_ref (connection);
 
         g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
 

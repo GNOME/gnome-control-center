@@ -31,7 +31,6 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CEPageDetails, ce_page_details, CE, PAGE_DETAILS, CEPage)
 
 CEPage *ce_page_details_new (NMConnection        *connection,
-                             NMClient            *client,
                              NMDevice            *device,
                              NMAccessPoint       *ap,
                              NetConnectionEditor *editor);

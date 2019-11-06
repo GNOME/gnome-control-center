@@ -36,12 +36,6 @@
 G_DEFINE_ABSTRACT_TYPE (CEPage, ce_page, G_TYPE_OBJECT)
 
 enum {
-        PROP_0,
-        PROP_CONNECTION,
-        PROP_INITIALIZED,
-};
-
-enum {
         CHANGED,
         INITIALIZED,
         LAST_SIGNAL
@@ -59,16 +53,6 @@ ce_page_validate (CEPage *self, NMConnection *connection, GError **error)
                 return CE_PAGE_GET_CLASS (self)->validate (self, connection, error);
 
         return TRUE;
-}
-
-static void
-dispose (GObject *object)
-{
-        CEPage *self = CE_PAGE (object);
-
-        g_clear_object (&self->connection);
-
-        G_OBJECT_CLASS (ce_page_parent_class)->dispose (object);
 }
 
 GtkWidget *
@@ -104,46 +88,6 @@ ce_page_changed (CEPage *self)
 }
 
 static void
-get_property (GObject    *object,
-              guint       prop_id,
-              GValue     *value,
-              GParamSpec *pspec)
-{
-        CEPage *self = CE_PAGE (object);
-
-        switch (prop_id) {
-        case PROP_CONNECTION:
-                g_value_set_object (value, self->connection);
-                break;
-        case PROP_INITIALIZED:
-                g_value_set_boolean (value, self->initialized);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-set_property (GObject      *object,
-              guint         prop_id,
-              const GValue *value,
-              GParamSpec   *pspec)
-{
-        CEPage *self = CE_PAGE (object);
-
-        switch (prop_id) {
-        case PROP_CONNECTION:
-                g_clear_object (&self->connection);
-                self->connection = g_value_dup_object (value);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
 ce_page_init (CEPage *self)
 {
 }
@@ -152,28 +96,6 @@ static void
 ce_page_class_init (CEPageClass *page_class)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (page_class);
-
-        /* virtual methods */
-        object_class->dispose      = dispose;
-        object_class->get_property = get_property;
-        object_class->set_property = set_property;
-
-        /* Properties */
-        g_object_class_install_property
-                (object_class, PROP_CONNECTION,
-                 g_param_spec_object ("connection",
-                                      "Connection",
-                                      "Connection",
-                                      NM_TYPE_CONNECTION,
-                                      G_PARAM_READABLE | G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
-
-        g_object_class_install_property
-                (object_class, PROP_INITIALIZED,
-                 g_param_spec_boolean ("initialized",
-                                       "Initialized",
-                                       "Initialized",
-                                       FALSE,
-                                       G_PARAM_READABLE));
 
         signals[CHANGED] =
                 g_signal_new ("changed",
@@ -204,10 +126,11 @@ emit_initialized (CEPage *self,
 }
 
 void
-ce_page_complete_init (CEPage      *self,
-                       const gchar *setting_name,
-                       GVariant    *secrets,
-                       GError      *error)
+ce_page_complete_init (CEPage       *self,
+                       NMConnection *connection,
+                       const gchar  *setting_name,
+                       GVariant     *secrets,
+                       GError       *error)
 {
 	g_autoptr(GError) update_error = NULL;
 	g_autoptr(GVariant) setting_dict = NULL;
@@ -242,7 +165,7 @@ ce_page_complete_init (CEPage      *self,
 	}
 
 	/* Update the connection with the new secrets */
-	if (!nm_connection_update_secrets (self->connection,
+	if (!nm_connection_update_secrets (connection,
                                            setting_name,
                                            secrets,
                                            &update_error))
