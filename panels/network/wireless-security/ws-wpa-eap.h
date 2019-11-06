@@ -23,10 +23,14 @@
 #ifndef WS_WPA_EAP_H
 #define WS_WPA_EAP_H
 
+#include <gtk/gtk.h>
+
 typedef struct _WirelessSecurityWPAEAP WirelessSecurityWPAEAP;
 
-WirelessSecurityWPAEAP * ws_wpa_eap_new (NMConnection *connection,
-                                         gboolean is_editor,
-                                         gboolean secrets_only);
+WirelessSecurityWPAEAP *ws_wpa_eap_new            (NMConnection *connection,
+                                                   gboolean is_editor,
+                                                   gboolean secrets_only);
+
+GtkComboBox            *ws_wpa_eap_get_auth_combo (WirelessSecurityWPAEAP *sec);
 
 #endif /* WS_WPA_EAP_H */
