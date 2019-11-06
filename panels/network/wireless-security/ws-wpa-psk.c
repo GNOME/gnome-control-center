@@ -36,6 +36,7 @@
 struct _WirelessSecurityWPAPSK {
 	WirelessSecurity parent;
 
+	GtkBuilder     *builder;
 	GtkGrid        *grid;
 	GtkEntry       *password_entry;
 	GtkLabel       *password_label;
@@ -46,6 +47,14 @@ struct _WirelessSecurityWPAPSK {
 	gboolean editing_connection;
 	const char *password_flags_name;
 };
+
+static void
+destroy (WirelessSecurity *parent)
+{
+	WirelessSecurityWPAPSK *self = (WirelessSecurityWPAPSK *) parent;
+
+	g_clear_object (&self->builder);
+}
 
 static GtkWidget *
 get_widget (WirelessSecurity *parent)
@@ -181,24 +190,30 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	WirelessSecurity *parent;
 	WirelessSecurityWPAPSK *self;
 	NMSetting *setting = NULL;
+	g_autoptr(GError) error = NULL;
 
 	parent = wireless_security_init (sizeof (WirelessSecurityWPAPSK),
 	                                 get_widget,
 	                                 validate,
 	                                 add_to_size_group,
 	                                 fill_connection,
-	                                 NULL,
-	                                 "/org/gnome/ControlCenter/network/ws-wpa-psk.ui");
+	                                 destroy);
 	if (!parent)
 		return NULL;
 	self = (WirelessSecurityWPAPSK *) parent;
 
-	self->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
-	self->password_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "password_entry"));
-	self->password_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "password_label"));
-	self->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "show_password_check"));
-	self->type_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "type_combo"));
-	self->type_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "type_label"));
+	self->builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/ws-wpa-psk.ui", &error)) {
+		g_warning ("Couldn't load UI builder resource: %s", error->message);
+		return NULL;
+	}
+
+	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
+	self->password_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "password_entry"));
+	self->password_label = GTK_LABEL (gtk_builder_get_object (self->builder, "password_label"));
+	self->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "show_password_check"));
+	self->type_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "type_combo"));
+	self->type_label = GTK_LABEL (gtk_builder_get_object (self->builder, "type_label"));
 
 	wireless_security_set_adhoc_compatible (parent, FALSE);
 
