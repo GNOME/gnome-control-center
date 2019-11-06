@@ -41,33 +41,37 @@ struct _WirelessSecurityWPAEAP {
 	GtkSizeGroup *size_group;
 };
 
+G_DEFINE_TYPE (WirelessSecurityWPAEAP, ws_wpa_eap, wireless_security_get_type ())
+
 static void
-destroy (WirelessSecurity *parent)
+ws_wpa_eap_dispose (GObject *object)
 {
-	WirelessSecurityWPAEAP *self = (WirelessSecurityWPAEAP *) parent;
+	WirelessSecurityWPAEAP *self = WS_WPA_EAP (object);
 
 	g_clear_object (&self->builder);
 	g_clear_object (&self->size_group);
+
+	G_OBJECT_CLASS (ws_wpa_eap_parent_class)->dispose (object);
 }
 
 static GtkWidget *
-get_widget (WirelessSecurity *parent)
+get_widget (WirelessSecurity *security)
 {
-	WirelessSecurityWPAEAP *self = (WirelessSecurityWPAEAP *) parent;
+	WirelessSecurityWPAEAP *self = WS_WPA_EAP (security);
 	return GTK_WIDGET (self->grid);
 }
 
 static gboolean
-validate (WirelessSecurity *parent, GError **error)
+validate (WirelessSecurity *security, GError **error)
 {
-	WirelessSecurityWPAEAP *self = (WirelessSecurityWPAEAP *) parent;
+	WirelessSecurityWPAEAP *self = WS_WPA_EAP (security);
 	return eap_method_validate (ws_802_1x_auth_combo_get_eap (self->auth_combo), error);
 }
 
 static void
-add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
+add_to_size_group (WirelessSecurity *security, GtkSizeGroup *group)
 {
-	WirelessSecurityWPAEAP *self = (WirelessSecurityWPAEAP *) parent;
+	WirelessSecurityWPAEAP *self = WS_WPA_EAP (security);
 
 	g_clear_object (&self->size_group);
 	self->size_group = g_object_ref (group);
@@ -77,9 +81,9 @@ add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 }
 
 static void
-fill_connection (WirelessSecurity *parent, NMConnection *connection)
+fill_connection (WirelessSecurity *security, NMConnection *connection)
 {
-	WirelessSecurityWPAEAP *self = (WirelessSecurityWPAEAP *) parent;
+	WirelessSecurityWPAEAP *self = WS_WPA_EAP (security);
 	NMSettingWirelessSecurity *s_wireless_sec;
 
 	ws_802_1x_fill_connection (self->auth_combo, connection);
@@ -100,24 +104,33 @@ auth_combo_changed_cb (WirelessSecurityWPAEAP *self)
 	wireless_security_notify_changed (WIRELESS_SECURITY (self));
 }
 
+void
+ws_wpa_eap_init (WirelessSecurityWPAEAP *self)
+{
+}
+
+void
+ws_wpa_eap_class_init (WirelessSecurityWPAEAPClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	WirelessSecurityClass *ws_class = WIRELESS_SECURITY_CLASS (klass);
+
+	object_class->dispose = ws_wpa_eap_dispose;
+	ws_class->get_widget = get_widget;
+	ws_class->validate = validate;
+	ws_class->add_to_size_group = add_to_size_group;
+	ws_class->fill_connection = fill_connection;
+}
+
 WirelessSecurityWPAEAP *
 ws_wpa_eap_new (NMConnection *connection,
                 gboolean is_editor,
                 gboolean secrets_only)
 {
-	WirelessSecurity *parent;
 	WirelessSecurityWPAEAP *self;
 	g_autoptr(GError) error = NULL;
 
-	parent = wireless_security_init (sizeof (WirelessSecurityWPAEAP),
-	                                 get_widget,
-	                                 validate,
-	                                 add_to_size_group,
-	                                 fill_connection,
-	                                 destroy);
-	if (!parent)
-		return NULL;
-	self = (WirelessSecurityWPAEAP *) parent;
+	self = g_object_new (ws_wpa_eap_get_type (), NULL);
 
 	self->builder = gtk_builder_new ();
 	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/ws-wpa-eap.ui", &error)) {
@@ -130,9 +143,9 @@ ws_wpa_eap_new (NMConnection *connection,
 	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
 	self->method_box = GTK_BOX (gtk_builder_get_object (self->builder, "method_box"));
 
-	wireless_security_set_adhoc_compatible (parent, FALSE);
+	wireless_security_set_adhoc_compatible (WIRELESS_SECURITY (self), FALSE);
 
-	ws_802_1x_auth_combo_init (parent,
+	ws_802_1x_auth_combo_init (WIRELESS_SECURITY (self),
 	                           self->auth_combo,
 	                           connection,
 	                           is_editor,

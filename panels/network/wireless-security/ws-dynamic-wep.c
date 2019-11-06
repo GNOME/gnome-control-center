@@ -41,33 +41,37 @@ struct _WirelessSecurityDynamicWEP {
 	GtkSizeGroup *size_group;
 };
 
+G_DEFINE_TYPE (WirelessSecurityDynamicWEP, ws_dynamic_wep, wireless_security_get_type ())
+
 static void
-destroy (WirelessSecurity *parent)
+ws_dynamic_wep_dispose (GObject *object)
 {
-	WirelessSecurityDynamicWEP *self = (WirelessSecurityDynamicWEP *) parent;
+	WirelessSecurityDynamicWEP *self = WS_DYNAMIC_WEP (object);
 
 	g_clear_object (&self->builder);
 	g_clear_object (&self->size_group);
+
+	G_OBJECT_CLASS (ws_dynamic_wep_parent_class)->dispose (object);
 }
 
 static GtkWidget *
-get_widget (WirelessSecurity *parent)
+get_widget (WirelessSecurity *security)
 {
-	WirelessSecurityDynamicWEP *self = (WirelessSecurityDynamicWEP *) parent;
+	WirelessSecurityDynamicWEP *self = WS_DYNAMIC_WEP (security);
 	return GTK_WIDGET (self->grid);
 }
 
 static gboolean
-validate (WirelessSecurity *parent, GError **error)
+validate (WirelessSecurity *security, GError **error)
 {
-	WirelessSecurityDynamicWEP *self = (WirelessSecurityDynamicWEP *) parent;
+	WirelessSecurityDynamicWEP *self = WS_DYNAMIC_WEP (security);
 	return eap_method_validate (ws_802_1x_auth_combo_get_eap (self->auth_combo), error);
 }
 
 static void
-add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
+add_to_size_group (WirelessSecurity *security, GtkSizeGroup *group)
 {
-	WirelessSecurityDynamicWEP *self = (WirelessSecurityDynamicWEP *) parent;
+	WirelessSecurityDynamicWEP *self = WS_DYNAMIC_WEP (security);
 
 	g_clear_object (&self->size_group);
 	self->size_group = g_object_ref (group);
@@ -77,9 +81,9 @@ add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 }
 
 static void
-fill_connection (WirelessSecurity *parent, NMConnection *connection)
+fill_connection (WirelessSecurity *security, NMConnection *connection)
 {
-	WirelessSecurityDynamicWEP *self = (WirelessSecurityDynamicWEP *) parent;
+	WirelessSecurityDynamicWEP *self = WS_DYNAMIC_WEP (security);
 	NMSettingWirelessSecurity *s_wireless_sec;
 
 	ws_802_1x_fill_connection (self->auth_combo, connection);
@@ -100,24 +104,33 @@ auth_combo_changed_cb (WirelessSecurityDynamicWEP *self)
 	wireless_security_notify_changed (WIRELESS_SECURITY (self));
 }
 
+void
+ws_dynamic_wep_init (WirelessSecurityDynamicWEP *self)
+{
+}
+
+void
+ws_dynamic_wep_class_init (WirelessSecurityDynamicWEPClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	WirelessSecurityClass *ws_class = WIRELESS_SECURITY_CLASS (klass);
+
+	object_class->dispose = ws_dynamic_wep_dispose;
+	ws_class->get_widget = get_widget;
+	ws_class->validate = validate;
+	ws_class->add_to_size_group = add_to_size_group;
+	ws_class->fill_connection = fill_connection;
+}
+
 WirelessSecurityDynamicWEP *
 ws_dynamic_wep_new (NMConnection *connection,
                     gboolean is_editor,
                     gboolean secrets_only)
 {
-	WirelessSecurity *parent;
 	WirelessSecurityDynamicWEP *self;
 	g_autoptr(GError) error = NULL;
 
-	parent = wireless_security_init (sizeof (WirelessSecurityDynamicWEP),
-	                                 get_widget,
-	                                 validate,
-	                                 add_to_size_group,
-	                                 fill_connection,
-	                                 destroy);
-	if (!parent)
-		return NULL;
-	self = (WirelessSecurityDynamicWEP *) parent;
+	self = g_object_new (ws_dynamic_wep_get_type (), NULL);
 
 	self->builder = gtk_builder_new ();
 	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/ws-dynamic-wep.ui", &error)) {
@@ -130,9 +143,9 @@ ws_dynamic_wep_new (NMConnection *connection,
 	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
 	self->method_box = GTK_BOX (gtk_builder_get_object (self->builder, "method_box"));
 
-	wireless_security_set_adhoc_compatible (parent, FALSE);
+	wireless_security_set_adhoc_compatible (WIRELESS_SECURITY (self), FALSE);
 
-	ws_802_1x_auth_combo_init (parent,
+	ws_802_1x_auth_combo_init (WIRELESS_SECURITY (self),
 	                           self->auth_combo,
 	                           connection,
 	                           is_editor,
