@@ -864,15 +864,6 @@ net_connection_editor_forget (NetConnectionEditor *self)
 }
 
 void
-net_connection_editor_reset (NetConnectionEditor *self)
-{
-        g_autoptr(GVariant) settings = NULL;
-
-        settings = nm_connection_to_dbus (self->orig_connection, NM_CONNECTION_SERIALIZE_ALL);
-        nm_connection_replace_settings (self->connection, settings, NULL);
-}
-
-void
 net_connection_editor_set_title (NetConnectionEditor *self,
                                  const gchar         *title)
 {
