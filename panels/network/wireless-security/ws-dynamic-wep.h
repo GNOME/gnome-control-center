@@ -20,13 +20,18 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#ifndef WS_DYNAMIC_WEP_H
-#define WS_DYNAMIC_WEP_H
+#pragma once
 
-typedef struct _WirelessSecurityDynamicWEP WirelessSecurityDynamicWEP;
+#include <NetworkManager.h>
+
+#include "wireless-security.h"
+
+G_BEGIN_DECLS
+
+G_DECLARE_FINAL_TYPE (WirelessSecurityDynamicWEP, ws_dynamic_wep, WS, DYNAMIC_WEP, WirelessSecurity)
 
 WirelessSecurityDynamicWEP *ws_dynamic_wep_new (NMConnection *connection,
                                                 gboolean is_editor,
                                                 gboolean secrets_only);
 
-#endif /* WS_DYNAMIC_WEP_H */
+G_END_DECLS
