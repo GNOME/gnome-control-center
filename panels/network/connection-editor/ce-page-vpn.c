@@ -33,9 +33,9 @@ struct _CEPageVpn
 {
         CEPage parent;
 
+        GtkBox   *box;
         GtkLabel *failure_label;
         GtkEntry *name_entry;
-        GtkBox   *page;
 
         NMSettingConnection *setting_connection;
         NMSettingVpn *setting_vpn;
@@ -108,7 +108,7 @@ load_vpn_plugin (CEPageVpn *self, NMConnection *connection)
 
         gtk_widget_destroy (GTK_WIDGET (self->failure_label));
 
-        gtk_box_pack_start (self->page, ui_widget, TRUE, TRUE, 0);
+        gtk_box_pack_start (self->box, ui_widget, TRUE, TRUE, 0);
 	gtk_widget_show_all (ui_widget);
 
         g_signal_connect_swapped (self->editor, "changed", G_CALLBACK (ce_page_changed), self);
@@ -138,6 +138,13 @@ static const gchar *
 ce_page_vpn_get_security_setting (CEPage *page)
 {
         return NM_SETTING_VPN_SETTING_NAME;
+}
+
+static GtkWidget *
+ce_page_vpn_get_widget (CEPage *page)
+{
+        CEPageVpn *self = CE_PAGE_VPN (page);
+        return GTK_WIDGET (self->box);
 }
 
 static const gchar *
@@ -179,6 +186,7 @@ ce_page_vpn_class_init (CEPageVpnClass *class)
 
         object_class->dispose = ce_page_vpn_dispose;
         page_class->get_security_setting = ce_page_vpn_get_security_setting;
+        page_class->get_widget = ce_page_vpn_get_widget;
         page_class->get_title = ce_page_vpn_get_title;
         page_class->validate = ce_page_vpn_validate;
 }
@@ -210,9 +218,9 @@ ce_page_vpn_new (NMConnection     *connection,
 					 connection,
 					 "/org/gnome/control-center/network/vpn-page.ui"));
 
+        self->box = GTK_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "box"));
         self->failure_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "failure_label"));
         self->name_entry = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (self)->builder, "name_entry"));
-        self->page = GTK_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "page"));
 
         g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
 

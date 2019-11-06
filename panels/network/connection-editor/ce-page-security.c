@@ -39,6 +39,7 @@ struct _CEPageSecurity
         CEPage parent;
 
         GtkBox      *box;
+        GtkNotebook *notebook;
         GtkComboBox *security_combo;
         GtkLabel    *security_label;
 
@@ -232,6 +233,7 @@ finish_setup (CEPageSecurity *self)
         self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
         self->box = GTK_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "box"));
+        self->notebook = GTK_NOTEBOOK (gtk_builder_get_object (CE_PAGE (self)->builder, "notebook"));
         self->security_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "security_label"));
         self->security_combo = GTK_COMBO_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "security_combo"));
 
@@ -380,6 +382,13 @@ ce_page_security_get_security_setting (CEPage *page)
         return CE_PAGE_SECURITY (page)->security_setting;
 }
 
+static GtkWidget *
+ce_page_security_get_widget (CEPage *page)
+{
+        CEPageSecurity *self = CE_PAGE_SECURITY (page);
+        return GTK_WIDGET (self->notebook);
+}
+
 static const gchar *
 ce_page_security_get_title (CEPage *page)
 {
@@ -449,6 +458,7 @@ ce_page_security_class_init (CEPageSecurityClass *class)
 
         object_class->dispose = ce_page_security_dispose;
         page_class->get_security_setting = ce_page_security_get_security_setting;
+        page_class->get_widget = ce_page_security_get_widget;
         page_class->get_title = ce_page_security_get_title;
         page_class->validate = ce_page_security_validate;
 }

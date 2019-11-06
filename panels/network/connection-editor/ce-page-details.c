@@ -37,6 +37,7 @@ struct _CEPageDetails
         GtkLabel *dns_heading_label;
         GtkLabel *dns_label;
         GtkButton *forget_button;
+        GtkGrid *grid;
         GtkLabel *ipv4_heading_label;
         GtkLabel *ipv4_label;
         GtkLabel *ipv6_heading_label;
@@ -393,6 +394,13 @@ connect_details_page (CEPageDetails *self)
                 gtk_widget_hide (GTK_WIDGET (self->forget_button));
 }
 
+static GtkWidget *
+ce_page_details_get_widget (CEPage *page)
+{
+        CEPageDetails *self = CE_PAGE_DETAILS (page);
+        return GTK_WIDGET (self->grid);
+}
+
 static const gchar *
 ce_page_details_get_title (CEPage *page)
 {
@@ -409,6 +417,7 @@ ce_page_details_class_init (CEPageDetailsClass *class)
 {
         CEPageClass *page_class = CE_PAGE_CLASS (class);
 
+        page_class->get_widget = ce_page_details_get_widget;
         page_class->get_title = ce_page_details_get_title;
 }
 
@@ -430,6 +439,7 @@ ce_page_details_new (NMConnection        *connection,
         self->dns_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "dns_heading_label"));
         self->dns_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "dns_label"));
         self->forget_button = GTK_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "forget_button"));
+        self->grid = GTK_GRID (gtk_builder_get_object (CE_PAGE (self)->builder, "grid"));
         self->ipv4_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "ipv4_heading_label"));
         self->ipv4_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "ipv4_label"));
         self->ipv6_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "ipv6_heading_label"));

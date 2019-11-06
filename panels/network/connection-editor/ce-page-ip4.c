@@ -39,20 +39,21 @@ struct _CEPageIP4
 {
         CEPage parent;
 
-        GtkBox         *address_box;
-        GtkSizeGroup   *address_sizegroup;
-        GtkSwitch      *auto_dns_switch;
-        GtkSwitch      *auto_routes_switch;
-        GtkRadioButton *automatic_radio;
-        GtkBox         *content_box;
-        GtkRadioButton *disabled_radio;
-        GtkEntry       *dns_entry;
-        GtkRadioButton *local_radio;
-        GtkRadioButton *manual_radio;
-        GtkCheckButton *never_default_check;
-        GtkBox         *routes_box;
-        GtkSizeGroup   *routes_metric_sizegroup;
-        GtkSizeGroup   *routes_sizegroup;
+        GtkBox            *address_box;
+        GtkSizeGroup      *address_sizegroup;
+        GtkSwitch         *auto_dns_switch;
+        GtkSwitch         *auto_routes_switch;
+        GtkRadioButton    *automatic_radio;
+        GtkBox            *content_box;
+        GtkRadioButton    *disabled_radio;
+        GtkEntry          *dns_entry;
+        GtkRadioButton    *local_radio;
+        GtkRadioButton    *manual_radio;
+        GtkCheckButton    *never_default_check;
+        GtkBox            *routes_box;
+        GtkSizeGroup      *routes_metric_sizegroup;
+        GtkSizeGroup      *routes_sizegroup;
+        GtkScrolledWindow *scrolled_window;
 
         NMSettingIPConfig *setting;
 
@@ -153,7 +154,7 @@ remove_row (CEPageIP4 *self)
         GtkWidget *row;
         GtkWidget *row_box;
 
-        row_box = gtk_widget_get_parent (GTK_WIDGET (CE_PAGE (self)->page));
+        row_box = gtk_widget_get_parent (GTK_WIDGET (self->scrolled_window));
         row = gtk_widget_get_parent (row_box);
         list = gtk_widget_get_parent (row);
 
@@ -523,6 +524,7 @@ connect_ip4_page (CEPageIP4 *self)
         self->routes_box = GTK_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "routes_box"));
         self->routes_metric_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (self)->builder, "routes_metric_sizegroup"));
         self->routes_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (self)->builder, "routes_sizegroup"));
+        self->scrolled_window = GTK_SCROLLED_WINDOW (gtk_builder_get_object (CE_PAGE (self)->builder, "scrolled_window"));
 
         add_address_box (self);
         add_dns_section (self);
@@ -860,6 +862,13 @@ out:
         return ret;
 }
 
+static GtkWidget *
+ce_page_ip4_get_widget (CEPage *page)
+{
+        CEPageIP4 *self = CE_PAGE_IP4 (page);
+        return GTK_WIDGET (self->scrolled_window);
+}
+
 static const gchar *
 ce_page_ip4_get_title (CEPage *page)
 {
@@ -887,6 +896,7 @@ ce_page_ip4_class_init (CEPageIP4Class *class)
 {
         CEPageClass *page_class = CE_PAGE_CLASS (class);
 
+        page_class->get_widget = ce_page_ip4_get_widget;
         page_class->get_title = ce_page_ip4_get_title;
         page_class->validate = ce_page_ip4_validate;
 }

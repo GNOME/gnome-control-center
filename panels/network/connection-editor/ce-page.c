@@ -66,7 +66,6 @@ dispose (GObject *object)
 {
         CEPage *self = CE_PAGE (object);
 
-        g_clear_object (&self->page);
         g_clear_object (&self->builder);
         g_clear_object (&self->connection);
 
@@ -74,11 +73,11 @@ dispose (GObject *object)
 }
 
 GtkWidget *
-ce_page_get_page (CEPage *self)
+ce_page_get_widget (CEPage *self)
 {
         g_return_val_if_fail (CE_IS_PAGE (self), NULL);
 
-        return self->page;
+        return CE_PAGE_GET_CLASS (self)->get_widget (self);
 }
 
 const char *
@@ -214,13 +213,6 @@ ce_page_new (GType             type,
                         g_warning ("Couldn't load builder file: %s", error->message);
                         return NULL;
                 }
-                self->page = GTK_WIDGET (gtk_builder_get_object (self->builder, "page"));
-                if (!self->page) {
-                        g_warning ("Couldn't load page widget from %s", ui_resource);
-                        return NULL;
-                }
-
-                g_object_ref_sink (self->page);
         }
 
         return g_steal_pointer (&self);

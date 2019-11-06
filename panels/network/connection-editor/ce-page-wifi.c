@@ -37,6 +37,7 @@ struct _CEPageWifi
 
         GtkComboBoxText *bssid_combo;
         GtkComboBoxText *cloned_mac_combo;
+        GtkGrid         *grid;
         GtkComboBoxText *mac_combo;
         GtkEntry        *ssid_entry;
 
@@ -122,6 +123,13 @@ ui_to_setting (CEPageWifi *self)
                       NULL);
 }
 
+static GtkWidget *
+ce_page_wifi_get_widget (CEPage *page)
+{
+        CEPageWifi *self = CE_PAGE_WIFI (page);
+        return GTK_WIDGET (self->grid);
+}
+
 static const gchar *
 ce_page_wifi_get_title (CEPage *page)
 {
@@ -178,6 +186,7 @@ ce_page_wifi_class_init (CEPageWifiClass *class)
 {
         CEPageClass *page_class= CE_PAGE_CLASS (class);
 
+        page_class->get_widget = ce_page_wifi_get_widget;
         page_class->get_title = ce_page_wifi_get_title;
         page_class->validate = ce_page_wifi_class_validate;
 }
@@ -194,6 +203,7 @@ ce_page_wifi_new (NMConnection     *connection,
 
         self->bssid_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "bssid_combo"));
         self->cloned_mac_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "cloned_mac_combo"));
+        self->grid = GTK_GRID (gtk_builder_get_object (CE_PAGE (self)->builder, "grid"));
         self->mac_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "mac_combo"));
         self->ssid_entry = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (self)->builder, "ssid_entry"));
 

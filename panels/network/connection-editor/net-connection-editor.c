@@ -345,7 +345,7 @@ update_sensitivity (NetConnectionEditor *self)
         }
 
         for (l = self->pages; l; l = l->next) {
-                widget = ce_page_get_page (CE_PAGE (l->data));
+                widget = ce_page_get_widget (CE_PAGE (l->data));
                 gtk_widget_set_sensitive (widget, sensitive);
         }
 }
@@ -417,7 +417,7 @@ page_initialized (NetConnectionEditor *self, GError *error, CEPage *page)
         GList *children, *l;
         gint i;
 
-        widget = ce_page_get_page (page);
+        widget = ce_page_get_widget (page);
         position = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (page), "position"));
         g_object_set_data (G_OBJECT (widget), "position", GINT_TO_POINTER (position));
         children = gtk_container_get_children (GTK_CONTAINER (self->notebook));
