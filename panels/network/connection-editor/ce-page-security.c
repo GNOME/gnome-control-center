@@ -194,7 +194,7 @@ add_security_item (CEPageSecurity   *self,
                             S_SEC_COLUMN, sec,
                             S_ADHOC_VALID_COLUMN, adhoc_valid,
                             -1);
-        wireless_security_unref (sec);
+        g_object_unref (sec);
 }
 
 static void
@@ -250,7 +250,7 @@ finish_setup (CEPageSecurity *self)
         if (sws)
                 default_type = get_default_type_for_security (sws);
 
-        sec_model = gtk_list_store_new (3, G_TYPE_STRING, WIRELESS_TYPE_SECURITY, G_TYPE_BOOLEAN);
+        sec_model = gtk_list_store_new (3, G_TYPE_STRING, wireless_security_get_type (), G_TYPE_BOOLEAN);
 
         if (nm_utils_security_valid (NMU_SEC_NONE, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
                 gtk_list_store_insert_with_values (sec_model, &iter, -1,
