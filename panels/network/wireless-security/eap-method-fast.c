@@ -40,6 +40,7 @@ struct _EAPMethodFAST {
 
 	GtkEntry             *anon_identity_entry;
 	GtkLabel             *anon_identity_label;
+	GtkGrid              *grid;
 	GtkComboBox          *inner_auth_combo;
 	GtkLabel             *inner_auth_label;
 	GtkBox               *inner_auth_box;
@@ -272,6 +273,20 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 	                                         I_METHOD_COLUMN);
 }
 
+static GtkWidget *
+get_widget (EAPMethod *parent)
+{
+	EAPMethodFAST *self = (EAPMethodFAST *) parent;
+	return GTK_WIDGET (self->grid);
+}
+
+static GtkWidget *
+get_default_field (EAPMethod *parent)
+{
+	EAPMethodFAST *self = (EAPMethodFAST *) parent;
+	return GTK_WIDGET (self->anon_identity_entry);
+}
+
 static void
 pac_toggled_cb (EAPMethodFAST *self)
 {
@@ -307,10 +322,10 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 	                          add_to_size_group,
 	                          fill_connection,
 	                          update_secrets,
+	                          get_widget,
+	                          get_default_field,
 	                          destroy,
 	                          "/org/gnome/ControlCenter/network/eap-method-fast.ui",
-	                          "grid",
-	                          "anon_identity_entry",
 	                          FALSE);
 	if (!parent)
 		return NULL;
@@ -322,6 +337,7 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 
 	self->anon_identity_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "anon_identity_entry"));
 	self->anon_identity_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "anon_identity_label"));
+	self->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
 	self->inner_auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 	self->inner_auth_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "inner_auth_label"));
 	self->inner_auth_box = GTK_BOX (gtk_builder_get_object (parent->builder, "inner_auth_box"));

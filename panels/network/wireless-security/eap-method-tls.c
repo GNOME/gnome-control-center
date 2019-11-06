@@ -38,6 +38,7 @@ struct _EAPMethodTLS {
 	GtkFileChooserButton *ca_cert_button;
 	GtkLabel             *ca_cert_label;
 	GtkCheckButton       *ca_cert_not_required_check;
+	GtkGrid              *grid;
 	GtkEntry             *identity_entry;
 	GtkLabel             *identity_label;
 	GtkFileChooserButton *private_key_button;
@@ -264,7 +265,7 @@ private_key_picker_helper (EAPMethod *parent, const char *filename, gboolean cha
 		GtkWidget *toplevel;
 		GtkWindow *parent_window = NULL;
 
-		toplevel = gtk_widget_get_toplevel (parent->ui_widget);
+		toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self->grid));
 		if (gtk_widget_is_toplevel (toplevel))
 			parent_window = GTK_WINDOW (toplevel);
 
@@ -395,6 +396,20 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 	}
 }
 
+static GtkWidget *
+get_widget (EAPMethod *parent)
+{
+	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+	return GTK_WIDGET (self->grid);
+}
+
+static GtkWidget *
+get_default_field (EAPMethod *parent)
+{
+	EAPMethodTLS *self = (EAPMethodTLS *) parent;
+	return GTK_WIDGET (self->identity_entry);
+}
+
 EAPMethodTLS *
 eap_method_tls_new (WirelessSecurity *ws_parent,
                     NMConnection *connection,
@@ -411,10 +426,10 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	                          add_to_size_group,
 	                          fill_connection,
 	                          update_secrets,
+	                          get_widget,
+	                          get_default_field,
 	                          NULL,
 	                          "/org/gnome/ControlCenter/network/eap-method-tls.ui",
-	                          "grid",
-	                          "identity_entry",
 	                          phase2);
 	if (!parent)
 		return NULL;
@@ -429,6 +444,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	self->ca_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_button"));
 	self->ca_cert_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "ca_cert_label"));
 	self->ca_cert_not_required_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
+	self->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
 	self->identity_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "identity_entry"));
 	self->identity_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "identity_label"));
 	self->private_key_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "private_key_button"));
