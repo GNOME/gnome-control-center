@@ -22,11 +22,14 @@
 
 #pragma once
 
+#include <gtk/gtk.h>
+#include <NetworkManager.h>
+
 #include "wireless-security.h"
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (EAPMethodPEAP, eap_method_peap, EAP, METHOD_PEAP, GObject)
+G_DECLARE_FINAL_TYPE (EAPMethodPEAP, eap_method_peap, EAP, METHOD_PEAP, GtkGrid)
 
 EAPMethodPEAP *eap_method_peap_new (WirelessSecurity *ws_parent,
                                     NMConnection *connection,

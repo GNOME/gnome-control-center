@@ -33,10 +33,8 @@
 #include "utils.h"
 
 struct _EAPMethodLEAP {
-	GObject parent;
+	GtkGrid parent;
 
-	GtkBuilder     *builder;
-	GtkGrid        *grid;
 	GtkEntry       *password_entry;
 	GtkLabel       *password_label;
 	GtkCheckButton *show_password_check;
@@ -50,7 +48,7 @@ struct _EAPMethodLEAP {
 
 static void eap_method_iface_init (EAPMethodInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (EAPMethodLEAP, eap_method_leap, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (EAPMethodLEAP, eap_method_leap, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (eap_method_get_type (), eap_method_iface_init))
 
 static void
@@ -134,13 +132,6 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 }
 
 static GtkWidget *
-get_widget (EAPMethod *parent)
-{
-	EAPMethodLEAP *self = (EAPMethodLEAP *) parent;
-	return GTK_WIDGET (self->grid);
-}
-
-static GtkWidget *
 get_default_field (EAPMethod *parent)
 {
 	EAPMethodLEAP *self = (EAPMethodLEAP *) parent;
@@ -192,8 +183,7 @@ eap_method_leap_dispose (GObject *object)
 {
 	EAPMethodLEAP *self = EAP_METHOD_LEAP (object);
 
-	g_clear_object (&self->builder);
-	g_signal_handlers_disconnect_by_data (self->grid, self);
+	g_signal_handlers_disconnect_by_data (self, self);
 	g_signal_handlers_disconnect_by_data (self->username_entry, self->ws_parent);
 	g_signal_handlers_disconnect_by_data (self->password_entry, self->ws_parent);
 	g_signal_handlers_disconnect_by_data (self->show_password_check, self);
@@ -210,14 +200,24 @@ changed_cb (EAPMethodLEAP *self)
 static void
 eap_method_leap_init (EAPMethodLEAP *self)
 {
+	gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
 eap_method_leap_class_init (EAPMethodLEAPClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
 	object_class->dispose = eap_method_leap_dispose;
+
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/eap-method-leap.ui");
+
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodLEAP, password_entry);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodLEAP, password_label);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodLEAP, show_password_check);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodLEAP, username_entry);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodLEAP, username_label);
 }
 
 static void
@@ -227,7 +227,6 @@ eap_method_iface_init (EAPMethodInterface *iface)
 	iface->add_to_size_group = add_to_size_group;
 	iface->fill_connection = fill_connection;
 	iface->update_secrets = update_secrets;
-	iface->get_widget = get_widget;
 	iface->get_default_field = get_default_field;
 	iface->get_password_flags_name = get_password_flags_name;
 }
@@ -239,27 +238,13 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 {
 	EAPMethodLEAP *self;
 	NMSetting8021x *s_8021x = NULL;
-	g_autoptr(GError) error = NULL;
 
 	self = g_object_new (eap_method_leap_get_type (), NULL);
 	self->editing_connection = secrets_only ? FALSE : TRUE;
 	self->ws_parent = ws_parent;
 
-	self->builder = gtk_builder_new ();
-	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/eap-method-leap.ui", &error)) {
-		g_warning ("Couldn't load UI builder resource: %s", error->message);
-		return NULL;
-	}
-
-	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
-	self->password_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "password_entry"));
-	self->password_label = GTK_LABEL (gtk_builder_get_object (self->builder, "password_label"));
-	self->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "show_password_check"));
-	self->username_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "username_entry"));
-	self->username_label = GTK_LABEL (gtk_builder_get_object (self->builder, "username_label"));
-
-	g_signal_connect_swapped (self->grid, "realize", G_CALLBACK (widgets_realized), self);
-	g_signal_connect_swapped (self->grid, "unrealize", G_CALLBACK (widgets_unrealized), self);
+	g_signal_connect_swapped (self, "realize", G_CALLBACK (widgets_realized), self);
+	g_signal_connect_swapped (self, "unrealize", G_CALLBACK (widgets_unrealized), self);
 
 	g_signal_connect_swapped (self->username_entry, "changed", G_CALLBACK (changed_cb), self);
 
