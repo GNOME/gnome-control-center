@@ -41,14 +41,6 @@ eap_method_default_init (EAPMethodInterface *iface)
 }
 
 GtkWidget *
-eap_method_get_widget (EAPMethod *self)
-{
-	g_return_val_if_fail (self != NULL, NULL);
-
-	return EAP_METHOD_GET_IFACE (self)->get_widget (self);
-}
-
-GtkWidget *
 eap_method_get_default_field (EAPMethod *self)
 {
 	g_return_val_if_fail (self != NULL, NULL);

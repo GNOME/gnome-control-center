@@ -33,13 +33,11 @@
 #include "utils.h"
 
 struct _EAPMethodTLS {
-	GObject parent;
+	GtkGrid parent;
 
-	GtkBuilder           *builder;
 	GtkFileChooserButton *ca_cert_button;
 	GtkLabel             *ca_cert_label;
 	GtkCheckButton       *ca_cert_not_required_check;
-	GtkGrid              *grid;
 	GtkEntry             *identity_entry;
 	GtkLabel             *identity_label;
 	GtkFileChooserButton *private_key_button;
@@ -58,18 +56,8 @@ struct _EAPMethodTLS {
 
 static void eap_method_iface_init (EAPMethodInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (EAPMethodTLS, eap_method_tls, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (EAPMethodTLS, eap_method_tls, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (eap_method_get_type (), eap_method_iface_init))
-
-static void
-eap_method_tls_dispose (GObject *object)
-{
-	EAPMethodTLS *self = EAP_METHOD_TLS (object);
-
-	g_clear_object (&self->builder);
-
-	G_OBJECT_CLASS (eap_method_tls_parent_class)->dispose (object);
-}
 
 static void
 show_toggled_cb (EAPMethodTLS *self)
@@ -281,7 +269,7 @@ private_key_picker_helper (EAPMethodTLS *self, const char *filename, gboolean ch
 		GtkWidget *toplevel;
 		GtkWindow *parent_window = NULL;
 
-		toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self->grid));
+		toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
 		if (gtk_widget_is_toplevel (toplevel))
 			parent_window = GTK_WINDOW (toplevel);
 
@@ -413,13 +401,6 @@ update_secrets (EAPMethod *method, NMConnection *connection)
 }
 
 static GtkWidget *
-get_widget (EAPMethod *method)
-{
-	EAPMethodTLS *self = EAP_METHOD_TLS (method);
-	return GTK_WIDGET (self->grid);
-}
-
-static GtkWidget *
 get_default_field (EAPMethod *method)
 {
 	EAPMethodTLS *self = EAP_METHOD_TLS (method);
@@ -443,14 +424,28 @@ get_phase2 (EAPMethod *method)
 static void
 eap_method_tls_init (EAPMethodTLS *self)
 {
+	gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
 eap_method_tls_class_init (EAPMethodTLSClass *klass)
 {
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-	object_class->dispose = eap_method_tls_dispose;
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/eap-method-tls.ui");
+
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodTLS, ca_cert_button);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodTLS, ca_cert_label);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodTLS, ca_cert_not_required_check);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodTLS, identity_entry);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodTLS, identity_label);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodTLS, private_key_button);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodTLS, private_key_label);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodTLS, private_key_password_entry);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodTLS, private_key_password_label);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodTLS, show_password_check);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodTLS, user_cert_button);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodTLS, user_cert_label);
 }
 
 static void
@@ -460,7 +455,6 @@ eap_method_iface_init (EAPMethodInterface *iface)
 	iface->add_to_size_group = add_to_size_group;
 	iface->fill_connection = fill_connection;
 	iface->update_secrets = update_secrets;
-	iface->get_widget = get_widget;
 	iface->get_default_field = get_default_field;
 	iface->get_password_flags_name = get_password_flags_name;
 	iface->get_phase2 = get_phase2;
@@ -475,7 +469,6 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	EAPMethodTLS *self;
 	NMSetting8021x *s_8021x = NULL;
 	gboolean ca_not_required = FALSE;
-	g_autoptr(GError) error = NULL;
 
 	self = g_object_new (eap_method_tls_get_type (), NULL);
 	self->phase2 = phase2;
@@ -484,26 +477,6 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	                            NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD;
 	self->sec_parent = ws_parent;
 	self->editing_connection = secrets_only ? FALSE : TRUE;
-
-	self->builder = gtk_builder_new ();
-	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/eap-method-tls.ui", &error)) {
-		g_warning ("Couldn't load UI builder resource: %s", error->message);
-		return NULL;
-	}
-
-	self->ca_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (self->builder, "ca_cert_button"));
-	self->ca_cert_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ca_cert_label"));
-	self->ca_cert_not_required_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "ca_cert_not_required_check"));
-	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
-	self->identity_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "identity_entry"));
-	self->identity_label = GTK_LABEL (gtk_builder_get_object (self->builder, "identity_label"));
-	self->private_key_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (self->builder, "private_key_button"));
-	self->private_key_label = GTK_LABEL (gtk_builder_get_object (self->builder, "private_key_label"));
-	self->private_key_password_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "private_key_password_entry"));
-	self->private_key_password_label = GTK_LABEL (gtk_builder_get_object (self->builder, "private_key_password_label"));
-	self->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "show_password_check"));
-	self->user_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (self->builder, "user_cert_button"));
-	self->user_cert_label = GTK_LABEL (gtk_builder_get_object (self->builder, "user_cert_label"));
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);

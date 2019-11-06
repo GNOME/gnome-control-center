@@ -22,11 +22,14 @@
 
 #pragma once
 
+#include <gtk/gtk.h>
+#include <NetworkManager.h>
+
 #include "wireless-security.h"
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (EAPMethodSimple, eap_method_simple, EAP, METHOD_SIMPLE, GObject)
+G_DECLARE_FINAL_TYPE (EAPMethodSimple, eap_method_simple, EAP, METHOD_SIMPLE, GtkGrid)
 
 typedef enum {
 	/* NOTE: when updating this table, also update eap_methods[] */

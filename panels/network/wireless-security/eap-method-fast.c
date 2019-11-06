@@ -36,12 +36,10 @@
 #define I_METHOD_COLUMN 1
 
 struct _EAPMethodFAST {
-	GObject parent;
+	GtkGrid parent;
 
-	GtkBuilder           *builder;
 	GtkEntry             *anon_identity_entry;
 	GtkLabel             *anon_identity_label;
-	GtkGrid              *grid;
 	GtkComboBox          *inner_auth_combo;
 	GtkLabel             *inner_auth_label;
 	GtkBox               *inner_auth_box;
@@ -57,7 +55,7 @@ struct _EAPMethodFAST {
 
 static void eap_method_iface_init (EAPMethodInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (EAPMethodFAST, eap_method_fast, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (EAPMethodFAST, eap_method_fast, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (eap_method_get_type (), eap_method_iface_init))
 
 static void
@@ -65,7 +63,6 @@ eap_method_fast_dispose (GObject *object)
 {
 	EAPMethodFAST *self = EAP_METHOD_FAST (object);
 
-	g_clear_object (&self->builder);
 	g_clear_object (&self->size_group);
 
 	G_OBJECT_CLASS (eap_method_fast_parent_class)->dispose (object);
@@ -185,7 +182,6 @@ inner_auth_combo_changed_cb (EAPMethodFAST *self)
 	GList *elt, *children;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	GtkWidget *eap_widget;
 
 	/* Remove any previous wireless security widgets */
 	children = gtk_container_get_children (GTK_CONTAINER (self->inner_auth_box));
@@ -198,13 +194,10 @@ inner_auth_combo_changed_cb (EAPMethodFAST *self)
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
 
-	eap_widget = eap_method_get_widget (eap);
-	g_assert (eap_widget);
-	gtk_widget_unparent (eap_widget);
-
+	gtk_widget_unparent (GTK_WIDGET (eap));
 	if (self->size_group)
 		eap_method_add_to_size_group (eap, self->size_group);
-	gtk_container_add (GTK_CONTAINER (self->inner_auth_box), eap_widget);
+	gtk_container_add (GTK_CONTAINER (self->inner_auth_box), g_object_ref (GTK_WIDGET (eap)));
 
 	wireless_security_notify_changed (self->sec_parent);
 }
@@ -283,13 +276,6 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 }
 
 static GtkWidget *
-get_widget (EAPMethod *parent)
-{
-	EAPMethodFAST *self = (EAPMethodFAST *) parent;
-	return GTK_WIDGET (self->grid);
-}
-
-static GtkWidget *
 get_default_field (EAPMethod *parent)
 {
 	EAPMethodFAST *self = (EAPMethodFAST *) parent;
@@ -322,14 +308,28 @@ changed_cb (EAPMethodFAST *self)
 static void
 eap_method_fast_init (EAPMethodFAST *self)
 {
+	gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
 eap_method_fast_class_init (EAPMethodFASTClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
 	object_class->dispose = eap_method_fast_dispose;
+
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/eap-method-fast.ui");
+
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, anon_identity_entry);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, anon_identity_label);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, inner_auth_combo);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, inner_auth_label);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, inner_auth_box);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, pac_file_button);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, pac_file_label);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, pac_provision_check);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, pac_provision_combo);
 }
 
 static void
@@ -339,7 +339,6 @@ eap_method_iface_init (EAPMethodInterface *iface)
 	iface->add_to_size_group = add_to_size_group;
 	iface->fill_connection = fill_connection;
 	iface->update_secrets = update_secrets;
-	iface->get_widget = get_widget;
 	iface->get_default_field = get_default_field;
 	iface->get_password_flags_name = get_password_flags_name;
 }
@@ -355,28 +354,10 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 	NMSetting8021x *s_8021x = NULL;
 	const char *filename;
 	gboolean provisioning_enabled = TRUE;
-	g_autoptr(GError) error = NULL;
 
 	self = g_object_new (eap_method_fast_get_type (), NULL);
 	self->sec_parent = ws_parent;
 	self->is_editor = is_editor;
-
-	self->builder = gtk_builder_new ();
-	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/eap-method-fast.ui", &error)) {
-		g_warning ("Couldn't load UI builder resource: %s", error->message);
-		return NULL;
-	}
-
-	self->anon_identity_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "anon_identity_entry"));
-	self->anon_identity_label = GTK_LABEL (gtk_builder_get_object (self->builder, "anon_identity_label"));
-	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
-	self->inner_auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "inner_auth_combo"));
-	self->inner_auth_label = GTK_LABEL (gtk_builder_get_object (self->builder, "inner_auth_label"));
-	self->inner_auth_box = GTK_BOX (gtk_builder_get_object (self->builder, "inner_auth_box"));
-	self->pac_file_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (self->builder, "pac_file_button"));
-	self->pac_file_label = GTK_LABEL (gtk_builder_get_object (self->builder, "pac_file_label"));
-	self->pac_provision_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "pac_provision_check"));
-	self->pac_provision_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "pac_provision_combo"));
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
