@@ -73,17 +73,6 @@ dispose (GObject *object)
         G_OBJECT_CLASS (ce_page_parent_class)->dispose (object);
 }
 
-static void
-finalize (GObject *object)
-{
-        CEPage *self = CE_PAGE (object);
-
-        g_cancellable_cancel (self->cancellable);
-        g_clear_object (&self->cancellable);
-
-        G_OBJECT_CLASS (ce_page_parent_class)->finalize (object);
-}
-
 GtkWidget *
 ce_page_get_page (CEPage *self)
 {
@@ -160,7 +149,6 @@ static void
 ce_page_init (CEPage *self)
 {
         self->builder = gtk_builder_new ();
-        self->cancellable = g_cancellable_new ();
 }
 
 static void
@@ -170,7 +158,6 @@ ce_page_class_init (CEPageClass *page_class)
 
         /* virtual methods */
         object_class->dispose      = dispose;
-        object_class->finalize     = finalize;
         object_class->get_property = get_property;
         object_class->set_property = set_property;
 

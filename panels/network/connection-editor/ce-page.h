@@ -50,7 +50,6 @@ struct _CEPage
 
         NMConnection *connection;
         NMClient *client;
-        GCancellable *cancellable;
 };
 
 struct _CEPageClass
