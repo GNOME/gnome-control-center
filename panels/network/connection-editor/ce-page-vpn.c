@@ -208,7 +208,6 @@ ce_page_vpn_new (NMConnection     *connection,
 
         self = CE_PAGE_VPN (ce_page_new (ce_page_vpn_get_type (),
 					 connection,
-					 client,
 					 "/org/gnome/control-center/network/vpn-page.ui"));
 
         self->failure_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "failure_label"));

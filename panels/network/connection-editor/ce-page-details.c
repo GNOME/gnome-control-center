@@ -423,7 +423,6 @@ ce_page_details_new (NMConnection        *connection,
 
         self = CE_PAGE_DETAILS (ce_page_new (ce_page_details_get_type (),
                                              connection,
-                                             client,
                                              "/org/gnome/control-center/network/details-page.ui"));
 
         self->all_user_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "all_user_check"));

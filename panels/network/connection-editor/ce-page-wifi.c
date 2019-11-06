@@ -40,6 +40,7 @@ struct _CEPageWifi
         GtkComboBoxText *mac_combo;
         GtkEntry        *ssid_entry;
 
+        NMClient          *client;
         NMSettingWireless *setting;
 };
 
@@ -78,7 +79,7 @@ connect_wifi_page (CEPageWifi *self)
         g_strfreev (bssid_list);
         g_signal_connect_swapped (self->bssid_combo, "changed", G_CALLBACK (ce_page_changed), self);
 
-        mac_list = ce_page_get_mac_list (CE_PAGE (self)->client, NM_TYPE_DEVICE_WIFI,
+        mac_list = ce_page_get_mac_list (self->client, NM_TYPE_DEVICE_WIFI,
                                          NM_DEVICE_WIFI_PERMANENT_HW_ADDRESS);
         s_mac_str = nm_setting_wireless_get_mac_address (self->setting);
         ce_page_setup_mac_combo (self->mac_combo, s_mac_str, mac_list);
@@ -189,7 +190,6 @@ ce_page_wifi_new (NMConnection     *connection,
 
         self = CE_PAGE_WIFI (ce_page_new (ce_page_wifi_get_type (),
                                           connection,
-                                          client,
                                           "/org/gnome/control-center/network/wifi-page.ui"));
 
         self->bssid_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "bssid_combo"));
@@ -197,6 +197,7 @@ ce_page_wifi_new (NMConnection     *connection,
         self->mac_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "mac_combo"));
         self->ssid_entry = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (self)->builder, "ssid_entry"));
 
+        self->client = client;
         self->setting = nm_connection_get_setting_wireless (connection);
 
         connect_wifi_page (self);

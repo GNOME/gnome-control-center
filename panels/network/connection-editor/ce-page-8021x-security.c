@@ -103,7 +103,6 @@ ce_page_8021x_security_new (NMConnection     *connection,
 
 	self = CE_PAGE_8021X_SECURITY (ce_page_new (ce_page_8021x_security_get_type (),
 	                                            connection,
-	                                            client,
 	                                            "/org/gnome/control-center/network/8021x-security-page.ui"));
 
         self->box = GTK_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "box"));

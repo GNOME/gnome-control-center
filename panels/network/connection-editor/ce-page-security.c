@@ -463,7 +463,6 @@ ce_page_security_new (NMConnection      *connection,
 
         self = CE_PAGE_SECURITY (ce_page_new (ce_page_security_get_type (),
                                               connection,
-                                              client,
                                               "/org/gnome/control-center/network/security-page.ui"));
 
         sws = nm_connection_get_setting_wireless_security (connection);

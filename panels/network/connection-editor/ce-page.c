@@ -200,7 +200,6 @@ ce_page_class_init (CEPageClass *page_class)
 CEPage *
 ce_page_new (GType             type,
              NMConnection     *connection,
-             NMClient         *client,
              const gchar      *ui_resource)
 {
         g_autoptr(CEPage) self = NULL;
@@ -209,7 +208,6 @@ ce_page_new (GType             type,
         self = CE_PAGE (g_object_new (type,
                                       "connection", connection,
                                       NULL));
-        self->client = client;
 
         if (ui_resource) {
                 if (!gtk_builder_add_from_resource (self->builder, ui_resource, &error)) {

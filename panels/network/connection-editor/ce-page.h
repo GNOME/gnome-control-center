@@ -49,7 +49,6 @@ struct _CEPage
         GtkWidget *page;
 
         NMConnection *connection;
-        NMClient *client;
 };
 
 struct _CEPageClass
@@ -73,7 +72,6 @@ gboolean     ce_page_get_initialized (CEPage           *page);
 void         ce_page_changed         (CEPage           *page);
 CEPage      *ce_page_new             (GType             type,
                                       NMConnection     *connection,
-                                      NMClient         *client,
                                       const gchar      *ui_resource);
 void         ce_page_complete_init   (CEPage           *page,
                                       const gchar      *setting_name,

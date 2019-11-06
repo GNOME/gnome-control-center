@@ -823,7 +823,6 @@ ce_page_ip6_new (NMConnection     *connection,
 
         self = CE_PAGE_IP6 (ce_page_new (ce_page_ip6_get_type (),
                                          connection,
-                                         client,
                                          "/org/gnome/control-center/network/ip6-page.ui"));
 
         self->setting = nm_connection_get_setting_ip6_config (connection);

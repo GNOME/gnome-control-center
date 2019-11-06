@@ -35,14 +35,15 @@ struct _CEPageEthernet
 {
         CEPage parent;
 
-        NMSettingConnection *setting_connection;
-        NMSettingWired *setting_wired;
-
         GtkEntry        *name;
         GtkComboBoxText *device_mac;
         GtkComboBoxText *cloned_mac;
         GtkSpinButton   *mtu;
         GtkWidget       *mtu_label;
+
+        NMClient *client;
+        NMSettingConnection *setting_connection;
+        NMSettingWired *setting_wired;
 };
 
 G_DEFINE_TYPE (CEPageEthernet, ce_page_ethernet, CE_TYPE_PAGE)
@@ -87,7 +88,7 @@ connect_ethernet_page (CEPageEthernet *self)
         gtk_entry_set_text (self->name, name);
 
         /* Device MAC address */
-        mac_list = ce_page_get_mac_list (CE_PAGE (self)->client, NM_TYPE_DEVICE_ETHERNET,
+        mac_list = ce_page_get_mac_list (self->client, NM_TYPE_DEVICE_ETHERNET,
                                          NM_DEVICE_ETHERNET_PERMANENT_HW_ADDRESS);
         s_mac_str = nm_setting_wired_get_mac_address (setting);
         ce_page_setup_mac_combo (self->device_mac, s_mac_str, mac_list);
@@ -203,7 +204,6 @@ ce_page_ethernet_new (NMConnection     *connection,
 
         self = CE_PAGE_ETHERNET (ce_page_new (ce_page_ethernet_get_type (),
                                               connection,
-                                              client,
                                               "/org/gnome/control-center/network/ethernet-page.ui"));
 
         self->name = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (self)->builder, "name_entry"));
@@ -212,6 +212,7 @@ ce_page_ethernet_new (NMConnection     *connection,
         self->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "mtu_spin"));
         self->mtu_label = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (self)->builder, "mtu_label"));
 
+        self->client = client;
         self->setting_connection = nm_connection_get_setting_connection (connection);
         self->setting_wired = nm_connection_get_setting_wired (connection);
 
