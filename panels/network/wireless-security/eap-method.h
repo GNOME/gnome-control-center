@@ -44,7 +44,6 @@ struct _EAPMethod {
 	const char *password_flags_name;
 
 	gboolean phase2;
-	gboolean secrets_only;
 
 	EMAddToSizeGroupFunc add_to_size_group;
 	EMFillConnectionFunc fill_connection;
