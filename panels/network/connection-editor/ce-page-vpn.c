@@ -109,10 +109,20 @@ connect_vpn_page (CEPageVpn *self)
         g_signal_connect_swapped (self->name_entry, "changed", G_CALLBACK (ce_page_changed), self);
 }
 
+static void
+ce_page_vpn_dispose (GObject *object)
+{
+        CEPageVpn *self = CE_PAGE_VPN (object);
+
+        g_clear_object (&self->editor);
+
+        G_OBJECT_CLASS (ce_page_vpn_parent_class)->dispose (object);
+}
+
 static gboolean
-validate (CEPage        *page,
-          NMConnection  *connection,
-          GError       **error)
+ce_page_vpn_validate (CEPage        *page,
+                      NMConnection  *connection,
+                      GError       **error)
 {
         CEPageVpn *self = CE_PAGE_VPN (page);
 
@@ -135,24 +145,14 @@ ce_page_vpn_init (CEPageVpn *self)
 }
 
 static void
-dispose (GObject *object)
-{
-        CEPageVpn *self = CE_PAGE_VPN (object);
-
-        g_clear_object (&self->editor);
-
-        G_OBJECT_CLASS (ce_page_vpn_parent_class)->dispose (object);
-}
-
-static void
 ce_page_vpn_class_init (CEPageVpnClass *class)
 {
         CEPageClass *page_class = CE_PAGE_CLASS (class);
         GObjectClass *object_class = G_OBJECT_CLASS (class);
 
-        object_class->dispose = dispose;
+        object_class->dispose = ce_page_vpn_dispose;
 
-        page_class->validate = validate;
+        page_class->validate = ce_page_vpn_validate;
 }
 
 static void

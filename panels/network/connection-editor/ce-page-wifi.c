@@ -110,9 +110,9 @@ ui_to_setting (CEPageWifi *self)
 }
 
 static gboolean
-validate (CEPage        *parent,
-          NMConnection  *connection,
-          GError       **error)
+ce_page_wifi_class_validate (CEPage        *parent,
+                             NMConnection  *connection,
+                             GError       **error)
 {
         CEPageWifi *self = (CEPageWifi *) parent;
         GtkWidget *entry;
@@ -159,7 +159,7 @@ ce_page_wifi_class_init (CEPageWifiClass *class)
 {
         CEPageClass *page_class= CE_PAGE_CLASS (class);
 
-        page_class->validate = validate;
+        page_class->validate = ce_page_wifi_class_validate;
 }
 
 CEPage *

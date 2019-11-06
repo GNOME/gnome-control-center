@@ -125,9 +125,9 @@ ui_to_setting (CEPageEthernet *self)
 }
 
 static gboolean
-validate (CEPage        *page,
-          NMConnection  *connection,
-          GError       **error)
+ce_page_ethernet_validate (CEPage        *page,
+                           NMConnection  *connection,
+                           GError       **error)
 {
         CEPageEthernet *self = CE_PAGE_ETHERNET (page);
         GtkWidget *entry;
@@ -169,9 +169,9 @@ ce_page_ethernet_init (CEPageEthernet *self)
 static void
 ce_page_ethernet_class_init (CEPageEthernetClass *class)
 {
-        CEPageClass *page_class= CE_PAGE_CLASS (class);
+        CEPageClass *page_class = CE_PAGE_CLASS (class);
 
-        page_class->validate = validate;
+        page_class->validate = ce_page_ethernet_validate;
 }
 
 CEPage *

@@ -836,9 +836,9 @@ out:
 }
 
 static gboolean
-validate (CEPage        *self,
-          NMConnection  *connection,
-          GError       **error)
+ce_page_ip4_validate (CEPage        *self,
+                      NMConnection  *connection,
+                      GError       **error)
 {
         if (!ui_to_setting (CE_PAGE_IP4 (self)))
                 return FALSE;
@@ -854,9 +854,9 @@ ce_page_ip4_init (CEPageIP4 *self)
 static void
 ce_page_ip4_class_init (CEPageIP4Class *class)
 {
-        CEPageClass *page_class= CE_PAGE_CLASS (class);
+        CEPageClass *page_class = CE_PAGE_CLASS (class);
 
-        page_class->validate = validate;
+        page_class->validate = ce_page_ip4_validate;
 }
 
 CEPage *

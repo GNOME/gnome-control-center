@@ -110,7 +110,7 @@ ce_page_8021x_security_new (NMConnection     *connection,
 }
 
 static gboolean
-validate (CEPage *cepage, NMConnection *connection, GError **error)
+ce_page_8021x_security_validate (CEPage *cepage, NMConnection *connection, GError **error)
 {
 	CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (cepage);
 	gboolean valid = TRUE;
@@ -176,5 +176,5 @@ ce_page_8021x_security_class_init (CEPage8021xSecurityClass *security_class)
 	/* virtual methods */
 	object_class->dispose = dispose;
 
-	parent_class->validate = validate;
+	parent_class->validate = ce_page_8021x_security_validate;
 }

@@ -351,10 +351,20 @@ finish_setup (CEPageSecurity *self)
                                   G_CALLBACK (security_combo_changed), self);
 }
 
+static void
+ce_page_security_dispose (GObject *object)
+{
+        CEPageSecurity *self = CE_PAGE_SECURITY (object);
+
+        g_clear_object (&self->group);
+
+        G_OBJECT_CLASS (ce_page_security_parent_class)->dispose (object);
+}
+
 static gboolean
-validate (CEPage        *page,
-          NMConnection  *connection,
-          GError       **error)
+ce_page_security_validate (CEPage        *page,
+                           NMConnection  *connection,
+                           GError       **error)
 {
         CEPageSecurity *self = CE_PAGE_SECURITY (page);
         NMSettingWireless *sw;
@@ -407,23 +417,13 @@ ce_page_security_init (CEPageSecurity *self)
 }
 
 static void
-dispose (GObject *object)
-{
-        CEPageSecurity *self = CE_PAGE_SECURITY (object);
-
-        g_clear_object (&self->group);
-
-        G_OBJECT_CLASS (ce_page_security_parent_class)->dispose (object);
-}
-
-static void
 ce_page_security_class_init (CEPageSecurityClass *class)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (class);
         CEPageClass *page_class = CE_PAGE_CLASS (class);
 
-        object_class->dispose = dispose;
-        page_class->validate = validate;
+        object_class->dispose = ce_page_security_dispose;
+        page_class->validate = ce_page_security_validate;
 }
 
 CEPage *
