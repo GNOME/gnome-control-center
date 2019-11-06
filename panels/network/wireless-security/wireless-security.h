@@ -20,30 +20,24 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#ifndef WIRELESS_SECURITY_H
-#define WIRELESS_SECURITY_H
+#pragma once
 
 #include <gtk/gtk.h>
 
-#define WIRELESS_TYPE_SECURITY (wireless_security_get_type ())
+G_BEGIN_DECLS
 
-typedef struct _WirelessSecurity WirelessSecurity;
-typedef struct _WirelessSecurityPrivate WirelessSecurityPrivate;
+G_DECLARE_DERIVABLE_TYPE (WirelessSecurity, wireless_security, WIRELESS, SECURITY, GObject)
 
 typedef void (*WSChangedFunc) (WirelessSecurity *sec, gpointer user_data);
 
-typedef void (*WSAddToSizeGroupFunc)  (WirelessSecurity *sec, GtkSizeGroup *group);
-typedef void (*WSFillConnectionFunc)  (WirelessSecurity *sec, NMConnection *connection);
-typedef void (*WSDestroyFunc)         (WirelessSecurity *sec);
-typedef gboolean (*WSValidateFunc)    (WirelessSecurity *sec, GError **error);
-typedef GtkWidget* (*WSGetWidgetFunc) (WirelessSecurity *sec);
+struct _WirelessSecurityClass {
+	GObjectClass parent_class;
 
-struct _WirelessSecurity {
-	WirelessSecurityPrivate *priv;
+	void       (*add_to_size_group) (WirelessSecurity *sec, GtkSizeGroup *group);
+	void       (*fill_connection)   (WirelessSecurity *sec, NMConnection *connection);
+	gboolean   (*validate)          (WirelessSecurity *sec, GError **error);
+	GtkWidget* (*get_widget)        (WirelessSecurity *sec);
 };
-
-#define WIRELESS_SECURITY(x) ((WirelessSecurity *) x)
-
 
 GtkWidget *wireless_security_get_widget (WirelessSecurity *sec);
 
@@ -78,20 +72,7 @@ void wireless_security_set_userpass (WirelessSecurity *sec,
                                      gboolean always_ask,
                                      gboolean show_password);
 
-WirelessSecurity *wireless_security_ref (WirelessSecurity *sec);
-
-void wireless_security_unref (WirelessSecurity *sec);
-
-GType wireless_security_get_type (void);
-
 /* Below for internal use only */
-
-WirelessSecurity *wireless_security_init (gsize obj_size,
-                                          WSGetWidgetFunc get_widget,
-                                          WSValidateFunc validate,
-                                          WSAddToSizeGroupFunc add_to_size_group,
-                                          WSFillConnectionFunc fill_connection,
-                                          WSDestroyFunc destroy);
 
 void wireless_security_notify_changed (WirelessSecurity *sec);
 
@@ -117,6 +98,4 @@ EAPMethod *ws_802_1x_auth_combo_get_eap (GtkComboBox *combo);
 void ws_802_1x_fill_connection (GtkComboBox *combo,
                                 NMConnection *connection);
 
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (WirelessSecurity, wireless_security_unref)
-
-#endif /* WIRELESS_SECURITY_H */
+G_END_DECLS
