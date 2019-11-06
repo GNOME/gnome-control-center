@@ -361,6 +361,12 @@ ce_page_security_dispose (GObject *object)
         G_OBJECT_CLASS (ce_page_security_parent_class)->dispose (object);
 }
 
+static const gchar *
+ce_page_security_get_title (CEPage *page)
+{
+        return _("Security");
+}
+
 static gboolean
 ce_page_security_validate (CEPage        *page,
                            NMConnection  *connection,
@@ -423,6 +429,7 @@ ce_page_security_class_init (CEPageSecurityClass *class)
         CEPageClass *page_class = CE_PAGE_CLASS (class);
 
         object_class->dispose = ce_page_security_dispose;
+        page_class->get_title = ce_page_security_get_title;
         page_class->validate = ce_page_security_validate;
 }
 
@@ -437,8 +444,7 @@ ce_page_security_new (NMConnection      *connection,
         self = CE_PAGE_SECURITY (ce_page_new (CE_TYPE_PAGE_SECURITY,
                                               connection,
                                               client,
-                                              "/org/gnome/control-center/network/security-page.ui",
-                                              _("Security")));
+                                              "/org/gnome/control-center/network/security-page.ui"));
 
         sws = nm_connection_get_setting_wireless_security (connection);
         if (sws)

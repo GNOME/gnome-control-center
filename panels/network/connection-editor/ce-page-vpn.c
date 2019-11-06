@@ -119,6 +119,12 @@ ce_page_vpn_dispose (GObject *object)
         G_OBJECT_CLASS (ce_page_vpn_parent_class)->dispose (object);
 }
 
+static const gchar *
+ce_page_vpn_get_title (CEPage *page)
+{
+        return _("Identity");
+}
+
 static gboolean
 ce_page_vpn_validate (CEPage        *page,
                       NMConnection  *connection,
@@ -151,7 +157,7 @@ ce_page_vpn_class_init (CEPageVpnClass *class)
         GObjectClass *object_class = G_OBJECT_CLASS (class);
 
         object_class->dispose = ce_page_vpn_dispose;
-
+        page_class->get_title = ce_page_vpn_get_title;
         page_class->validate = ce_page_vpn_validate;
 }
 
@@ -181,8 +187,7 @@ ce_page_vpn_new (NMConnection     *connection,
         self = CE_PAGE_VPN (ce_page_new (CE_TYPE_PAGE_VPN,
 					 connection,
 					 client,
-					 "/org/gnome/control-center/network/vpn-page.ui",
-					 _("Identity")));
+					 "/org/gnome/control-center/network/vpn-page.ui"));
 
         self->failure_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "failure_label"));
         self->name_entry = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (self)->builder, "name_entry"));

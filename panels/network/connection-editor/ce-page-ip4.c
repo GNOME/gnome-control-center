@@ -835,6 +835,12 @@ out:
         return ret;
 }
 
+static const gchar *
+ce_page_ip4_get_title (CEPage *page)
+{
+        return _("IPv4");
+}
+
 static gboolean
 ce_page_ip4_validate (CEPage        *self,
                       NMConnection  *connection,
@@ -856,6 +862,7 @@ ce_page_ip4_class_init (CEPageIP4Class *class)
 {
         CEPageClass *page_class = CE_PAGE_CLASS (class);
 
+        page_class->get_title = ce_page_ip4_get_title;
         page_class->validate = ce_page_ip4_validate;
 }
 
@@ -868,8 +875,7 @@ ce_page_ip4_new (NMConnection     *connection,
         self = CE_PAGE_IP4 (ce_page_new (CE_TYPE_PAGE_IP4,
                                            connection,
                                            client,
-                                           "/org/gnome/control-center/network/ip4-page.ui",
-                                           _("IPv4")));
+                                           "/org/gnome/control-center/network/ip4-page.ui"));
 
         self->setting = nm_connection_get_setting_ip4_config (connection);
         if (!self->setting) {

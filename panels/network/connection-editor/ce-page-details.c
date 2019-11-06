@@ -361,6 +361,12 @@ connect_details_page (CEPageDetails *self)
                 gtk_widget_hide (GTK_WIDGET (self->forget_button));
 }
 
+static const gchar *
+ce_page_details_get_title (CEPage *page)
+{
+        return _("Details");
+}
+
 static void
 ce_page_details_init (CEPageDetails *self)
 {
@@ -369,6 +375,9 @@ ce_page_details_init (CEPageDetails *self)
 static void
 ce_page_details_class_init (CEPageDetailsClass *class)
 {
+        CEPageClass *page_class = CE_PAGE_CLASS (class);
+
+        page_class->get_title = ce_page_details_get_title;
 }
 
 CEPage *
@@ -383,8 +392,7 @@ ce_page_details_new (NMConnection        *connection,
         self = CE_PAGE_DETAILS (ce_page_new (CE_TYPE_PAGE_DETAILS,
                                              connection,
                                              client,
-                                             "/org/gnome/control-center/network/details-page.ui",
-                                             _("Details")));
+                                             "/org/gnome/control-center/network/details-page.ui"));
 
         self->all_user_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "all_user_check"));
         self->auto_connect_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "auto_connect_check"));

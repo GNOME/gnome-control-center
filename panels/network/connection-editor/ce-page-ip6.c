@@ -757,6 +757,12 @@ out:
         return ret;
 }
 
+static const gchar *
+ce_page_ip6_get_title (CEPage *page)
+{
+        return _("IPv6");
+}
+
 static gboolean
 ce_page_ip6_validate (CEPage        *self,
                       NMConnection  *connection,
@@ -778,6 +784,7 @@ ce_page_ip6_class_init (CEPageIP6Class *class)
 {
         CEPageClass *page_class = CE_PAGE_CLASS (class);
 
+        page_class->get_title = ce_page_ip6_get_title;
         page_class->validate = ce_page_ip6_validate;
 }
 
@@ -790,8 +797,7 @@ ce_page_ip6_new (NMConnection     *connection,
         self = CE_PAGE_IP6 (ce_page_new (CE_TYPE_PAGE_IP6,
                                            connection,
                                            client,
-                                           "/org/gnome/control-center/network/ip6-page.ui",
-                                           _("IPv6")));
+                                           "/org/gnome/control-center/network/ip6-page.ui"));
 
         self->setting = nm_connection_get_setting_ip6_config (connection);
         if (!self->setting) {

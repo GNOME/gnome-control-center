@@ -78,7 +78,6 @@ finalize (GObject *object)
 {
         CEPage *self = CE_PAGE (object);
 
-        g_clear_pointer (&self->title, g_free);
         g_cancellable_cancel (self->cancellable);
         g_clear_object (&self->cancellable);
 
@@ -98,7 +97,7 @@ ce_page_get_title (CEPage *self)
 {
         g_return_val_if_fail (CE_IS_PAGE (self), NULL);
 
-        return self->title;
+        return CE_PAGE_GET_CLASS (self)->get_title (self);
 }
 
 gboolean
@@ -215,8 +214,7 @@ CEPage *
 ce_page_new (GType             type,
              NMConnection     *connection,
              NMClient         *client,
-             const gchar      *ui_resource,
-             const gchar      *title)
+             const gchar      *ui_resource)
 {
         g_autoptr(CEPage) self = NULL;
         g_autoptr(GError) error = NULL;
@@ -224,7 +222,6 @@ ce_page_new (GType             type,
         self = CE_PAGE (g_object_new (type,
                                       "connection", connection,
                                       NULL));
-        self->title = g_strdup (title);
         self->client = client;
 
         if (ui_resource) {

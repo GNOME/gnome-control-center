@@ -47,7 +47,6 @@ struct _CEPage
         gboolean initialized;
         GtkBuilder *builder;
         GtkWidget *page;
-        gchar *title;
         const gchar *security_setting;
 
         NMConnection *connection;
@@ -59,7 +58,8 @@ struct _CEPageClass
 {
         GObjectClass parent_class;
 
-        gboolean (*validate) (CEPage *page, NMConnection *connection, GError **error);
+        gboolean     (*validate)  (CEPage *page, NMConnection *connection, GError **error);
+        const gchar *(*get_title) (CEPage *page);
         void (*changed)     (CEPage *page);
         void (*initialized) (CEPage *page, GError *error);
 };
@@ -77,8 +77,7 @@ void         ce_page_changed         (CEPage           *page);
 CEPage      *ce_page_new             (GType             type,
                                       NMConnection     *connection,
                                       NMClient         *client,
-                                      const gchar      *ui_resource,
-                                      const gchar      *title);
+                                      const gchar      *ui_resource);
 void         ce_page_complete_init   (CEPage           *page,
                                       const gchar      *setting_name,
                                       GVariant         *variant,

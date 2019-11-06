@@ -109,6 +109,12 @@ ui_to_setting (CEPageWifi *self)
                       NULL);
 }
 
+static const gchar *
+ce_page_wifi_get_title (CEPage *page)
+{
+        return _("Identity");
+}
+
 static gboolean
 ce_page_wifi_class_validate (CEPage        *parent,
                              NMConnection  *connection,
@@ -159,6 +165,7 @@ ce_page_wifi_class_init (CEPageWifiClass *class)
 {
         CEPageClass *page_class= CE_PAGE_CLASS (class);
 
+        page_class->get_title = ce_page_wifi_get_title;
         page_class->validate = ce_page_wifi_class_validate;
 }
 
@@ -171,8 +178,7 @@ ce_page_wifi_new (NMConnection     *connection,
         self = CE_PAGE_WIFI (ce_page_new (CE_TYPE_PAGE_WIFI,
                                           connection,
                                           client,
-                                          "/org/gnome/control-center/network/wifi-page.ui",
-                                          _("Identity")));
+                                          "/org/gnome/control-center/network/wifi-page.ui"));
 
         self->bssid_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "bssid_combo"));
         self->cloned_mac_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "cloned_mac_combo"));

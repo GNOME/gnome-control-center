@@ -124,6 +124,12 @@ ui_to_setting (CEPageEthernet *self)
                       NULL);
 }
 
+static const gchar *
+ce_page_ethernet_get_title (CEPage *page)
+{
+        return _("Identity");
+}
+
 static gboolean
 ce_page_ethernet_validate (CEPage        *page,
                            NMConnection  *connection,
@@ -171,6 +177,7 @@ ce_page_ethernet_class_init (CEPageEthernetClass *class)
 {
         CEPageClass *page_class = CE_PAGE_CLASS (class);
 
+        page_class->get_title = ce_page_ethernet_get_title;
         page_class->validate = ce_page_ethernet_validate;
 }
 
@@ -183,8 +190,7 @@ ce_page_ethernet_new (NMConnection     *connection,
         self = CE_PAGE_ETHERNET (ce_page_new (CE_TYPE_PAGE_ETHERNET,
                                               connection,
                                               client,
-                                              "/org/gnome/control-center/network/ethernet-page.ui",
-                                              _("Identity")));
+                                              "/org/gnome/control-center/network/ethernet-page.ui"));
 
         self->name = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (self)->builder, "name_entry"));
         self->device_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "mac_combo"));
