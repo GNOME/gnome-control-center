@@ -32,6 +32,7 @@
 struct _WirelessSecurityWPAEAP {
 	WirelessSecurity parent;
 
+	GtkBuilder  *builder;
 	GtkComboBox *auth_combo;
 	GtkLabel    *auth_label;
 	GtkGrid     *grid;
@@ -40,12 +41,12 @@ struct _WirelessSecurityWPAEAP {
 	GtkSizeGroup *size_group;
 };
 
-
 static void
 destroy (WirelessSecurity *parent)
 {
 	WirelessSecurityWPAEAP *self = (WirelessSecurityWPAEAP *) parent;
 
+	g_clear_object (&self->builder);
 	g_clear_object (&self->size_group);
 }
 
@@ -106,22 +107,28 @@ ws_wpa_eap_new (NMConnection *connection,
 {
 	WirelessSecurity *parent;
 	WirelessSecurityWPAEAP *self;
+	g_autoptr(GError) error = NULL;
 
 	parent = wireless_security_init (sizeof (WirelessSecurityWPAEAP),
 	                                 get_widget,
 	                                 validate,
 	                                 add_to_size_group,
 	                                 fill_connection,
-	                                 destroy,
-	                                 "/org/gnome/ControlCenter/network/ws-wpa-eap.ui");
+	                                 destroy);
 	if (!parent)
 		return NULL;
 	self = (WirelessSecurityWPAEAP *) parent;
 
-	self->auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "auth_combo"));
-	self->auth_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "auth_label"));
-	self->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
-	self->method_box = GTK_BOX (gtk_builder_get_object (parent->builder, "method_box"));
+	self->builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/ws-wpa-eap.ui", &error)) {
+		g_warning ("Couldn't load UI builder resource: %s", error->message);
+		return NULL;
+	}
+
+	self->auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "auth_combo"));
+	self->auth_label = GTK_LABEL (gtk_builder_get_object (self->builder, "auth_label"));
+	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
+	self->method_box = GTK_BOX (gtk_builder_get_object (self->builder, "method_box"));
 
 	wireless_security_set_adhoc_compatible (parent, FALSE);
 
