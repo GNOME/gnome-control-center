@@ -20,20 +20,17 @@
  * (C) Copyright 2007 - 2010 Red Hat, Inc.
  */
 
-#ifndef EAP_METHOD_TTLS_H
-#define EAP_METHOD_TTLS_H
+#pragma once
 
 #include "wireless-security.h"
 
-typedef struct _EAPMethodTTLS EAPMethodTTLS;
+G_BEGIN_DECLS
+
+G_DECLARE_FINAL_TYPE (EAPMethodTTLS, eap_method_ttls, EAP, METHOD_TTLS, GObject)
 
 EAPMethodTTLS *eap_method_ttls_new (WirelessSecurity *ws_parent,
                                     NMConnection *connection,
                                     gboolean is_editor,
                                     gboolean secrets_only);
 
-static void eap_method_ttls_unref (EAPMethodTTLS *method) { eap_method_unref (EAP_METHOD (method)); }
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (EAPMethodTTLS, eap_method_ttls_unref)
-
-#endif /* EAP_METHOD_TTLS_H */
-
+G_END_DECLS

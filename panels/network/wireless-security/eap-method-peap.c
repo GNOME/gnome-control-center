@@ -35,7 +35,7 @@
 #define I_METHOD_COLUMN 1
 
 struct _EAPMethodPEAP {
-	EAPMethod parent;
+	GObject parent;
 
 	GtkBuilder           *builder;
 	GtkEntry             *anon_identity_entry;
@@ -55,19 +55,26 @@ struct _EAPMethodPEAP {
 	gboolean is_editor;
 };
 
+static void eap_method_iface_init (EAPMethodInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (EAPMethodPEAP, eap_method_peap, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (eap_method_get_type (), eap_method_iface_init))
+
 static void
-destroy (EAPMethod *parent)
+eap_method_peap_dispose (GObject *object)
 {
-	EAPMethodPEAP *self = (EAPMethodPEAP *) parent;
+	EAPMethodPEAP *self = EAP_METHOD_PEAP (object);
 
 	g_clear_object (&self->builder);
 	g_clear_object (&self->size_group);
+
+	G_OBJECT_CLASS (eap_method_peap_parent_class)->dispose (object);
 }
 
 static gboolean
-validate (EAPMethod *parent, GError **error)
+validate (EAPMethod *method, GError **error)
 {
-	EAPMethodPEAP *self = (EAPMethodPEAP *) parent;
+	EAPMethodPEAP *self = EAP_METHOD_PEAP (method);
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	g_autoptr(EAPMethod) eap = NULL;
@@ -102,9 +109,9 @@ ca_cert_not_required_toggled (EAPMethodPEAP *self)
 }
 
 static void
-add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
+add_to_size_group (EAPMethod *method, GtkSizeGroup *group)
 {
-	EAPMethodPEAP *self = (EAPMethodPEAP *) parent;
+	EAPMethodPEAP *self = EAP_METHOD_PEAP (method);
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	g_autoptr(EAPMethod) eap = NULL;
@@ -126,9 +133,9 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 }
 
 static void
-fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFlags flags)
+fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFlags flags)
 {
-	EAPMethodPEAP *self = (EAPMethodPEAP *) parent;
+	EAPMethodPEAP *self = EAP_METHOD_PEAP (method);
 	NMSetting8021x *s_8021x;
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	const char *text;
@@ -154,7 +161,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 		g_warning ("Couldn't read CA certificate '%s': %s", filename, error ? error->message : "(unknown)");
 		ca_cert_error = TRUE;
 	}
-	eap_method_ca_cert_ignore_set (parent, connection, filename, ca_cert_error);
+	eap_method_ca_cert_ignore_set (method, connection, filename, ca_cert_error);
 
 	peapver_active = gtk_combo_box_get_active (self->version_combo);
 	switch (peapver_active) {
@@ -286,31 +293,31 @@ inner_auth_combo_init (EAPMethodPEAP *self,
 }
 
 static void
-update_secrets (EAPMethod *parent, NMConnection *connection)
+update_secrets (EAPMethod *method, NMConnection *connection)
 {
-	EAPMethodPEAP *self = (EAPMethodPEAP *) parent;
-	eap_method_phase2_update_secrets_helper (parent,
+	EAPMethodPEAP *self = EAP_METHOD_PEAP (method);
+	eap_method_phase2_update_secrets_helper (method,
 	                                         connection,
 	                                         self->inner_auth_combo,
 	                                         I_METHOD_COLUMN);
 }
 
 static GtkWidget *
-get_widget (EAPMethod *parent)
+get_widget (EAPMethod *method)
 {
-	EAPMethodPEAP *self = (EAPMethodPEAP *) parent;
+	EAPMethodPEAP *self = EAP_METHOD_PEAP (method);
 	return GTK_WIDGET (self->grid);
 }
 
 static GtkWidget *
-get_default_field (EAPMethod *parent)
+get_default_field (EAPMethod *method)
 {
-	EAPMethodPEAP *self = (EAPMethodPEAP *) parent;
+	EAPMethodPEAP *self = EAP_METHOD_PEAP (method);
 	return GTK_WIDGET (self->anon_identity_entry);
 }
 
 static const gchar *
-get_password_flags_name (EAPMethod *parent)
+get_password_flags_name (EAPMethod *method)
 {
 	return NM_SETTING_802_1X_PASSWORD;
 }
@@ -321,33 +328,44 @@ changed_cb (EAPMethodPEAP *self)
 	wireless_security_notify_changed (self->sec_parent);
 }
 
+static void
+eap_method_peap_init (EAPMethodPEAP *self)
+{
+}
+
+static void
+eap_method_peap_class_init (EAPMethodPEAPClass *klass)
+{
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	object_class->dispose = eap_method_peap_dispose;
+}
+
+static void
+eap_method_iface_init (EAPMethodInterface *iface)
+{
+	iface->validate = validate;
+	iface->add_to_size_group = add_to_size_group;
+	iface->fill_connection = fill_connection;
+	iface->update_secrets = update_secrets;
+	iface->get_widget = get_widget;
+	iface->get_default_field = get_default_field;
+	iface->get_password_flags_name = get_password_flags_name;
+}
+
 EAPMethodPEAP *
 eap_method_peap_new (WirelessSecurity *ws_parent,
                      NMConnection *connection,
                      gboolean is_editor,
                      gboolean secrets_only)
 {
-	EAPMethod *parent;
 	EAPMethodPEAP *self;
 	GtkFileFilter *filter;
 	NMSetting8021x *s_8021x = NULL;
 	const char *filename;
 	g_autoptr(GError) error = NULL;
 
-	parent = eap_method_init (sizeof (EAPMethodPEAP),
-	                          validate,
-	                          add_to_size_group,
-	                          fill_connection,
-	                          update_secrets,
-	                          get_widget,
-	                          get_default_field,
-	                          get_password_flags_name,
-	                          NULL,
-	                          destroy);
-	if (!parent)
-		return NULL;
-
-	self = (EAPMethodPEAP *) parent;
+	self = g_object_new (eap_method_peap_get_type (), NULL);
 	self->sec_parent = ws_parent;
 	self->is_editor = is_editor;
 
@@ -388,7 +406,7 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 				gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (self->ca_cert_button), filename);
 		}
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check),
-		                              !filename && eap_method_ca_cert_ignore_get (parent, connection));
+		                              !filename && eap_method_ca_cert_ignore_get (EAP_METHOD (self), connection));
 	}
 
 	inner_auth_combo_init (self, connection, s_8021x, secrets_only);

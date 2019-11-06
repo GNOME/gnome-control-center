@@ -36,7 +36,7 @@
 #define I_METHOD_COLUMN 1
 
 struct _EAPMethodFAST {
-	EAPMethod parent;
+	GObject parent;
 
 	GtkBuilder           *builder;
 	GtkEntry             *anon_identity_entry;
@@ -55,13 +55,20 @@ struct _EAPMethodFAST {
 	gboolean is_editor;
 };
 
+static void eap_method_iface_init (EAPMethodInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (EAPMethodFAST, eap_method_fast, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (eap_method_get_type (), eap_method_iface_init))
+
 static void
-destroy (EAPMethod *parent)
+eap_method_fast_dispose (GObject *object)
 {
-	EAPMethodFAST *self = (EAPMethodFAST *) parent;
+	EAPMethodFAST *self = EAP_METHOD_FAST (object);
 
 	g_clear_object (&self->builder);
 	g_clear_object (&self->size_group);
+
+	G_OBJECT_CLASS (eap_method_fast_parent_class)->dispose (object);
 }
 
 static gboolean
@@ -312,13 +319,37 @@ changed_cb (EAPMethodFAST *self)
 	wireless_security_notify_changed (self->sec_parent);
 }
 
+static void
+eap_method_fast_init (EAPMethodFAST *self)
+{
+}
+
+static void
+eap_method_fast_class_init (EAPMethodFASTClass *klass)
+{
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	object_class->dispose = eap_method_fast_dispose;
+}
+
+static void
+eap_method_iface_init (EAPMethodInterface *iface)
+{
+	iface->validate = validate;
+	iface->add_to_size_group = add_to_size_group;
+	iface->fill_connection = fill_connection;
+	iface->update_secrets = update_secrets;
+	iface->get_widget = get_widget;
+	iface->get_default_field = get_default_field;
+	iface->get_password_flags_name = get_password_flags_name;
+}
+
 EAPMethodFAST *
 eap_method_fast_new (WirelessSecurity *ws_parent,
                      NMConnection *connection,
                      gboolean is_editor,
                      gboolean secrets_only)
 {
-	EAPMethod *parent;
 	EAPMethodFAST *self;
 	GtkFileFilter *filter;
 	NMSetting8021x *s_8021x = NULL;
@@ -326,20 +357,7 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 	gboolean provisioning_enabled = TRUE;
 	g_autoptr(GError) error = NULL;
 
-	parent = eap_method_init (sizeof (EAPMethodFAST),
-	                          validate,
-	                          add_to_size_group,
-	                          fill_connection,
-	                          update_secrets,
-	                          get_widget,
-	                          get_default_field,
-	                          get_password_flags_name,
-	                          NULL,
-	                          destroy);
-	if (!parent)
-		return NULL;
-
-	self = (EAPMethodFAST *) parent;
+	self = g_object_new (eap_method_fast_get_type (), NULL);
 	self->sec_parent = ws_parent;
 	self->is_editor = is_editor;
 
