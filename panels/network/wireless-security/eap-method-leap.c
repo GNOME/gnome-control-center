@@ -127,6 +127,20 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 	                          (HelperSecretFunc) nm_setting_802_1x_get_password);
 }
 
+static GtkWidget *
+get_widget (EAPMethod *parent)
+{
+	EAPMethodLEAP *self = (EAPMethodLEAP *) parent;
+	return GTK_WIDGET (self->grid);
+}
+
+static GtkWidget *
+get_default_field (EAPMethod *parent)
+{
+	EAPMethodLEAP *self = (EAPMethodLEAP *) parent;
+	return GTK_WIDGET (self->username_entry);
+}
+
 /* Set the UI fields for user, password and show_password to the
  * values as provided by self->ws_parent. */
 static void
@@ -192,10 +206,10 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	                          add_to_size_group,
 	                          fill_connection,
 	                          update_secrets,
+	                          get_widget,
+	                          get_default_field,
 	                          destroy,
 	                          "/org/gnome/ControlCenter/network/eap-method-leap.ui",
-	                          "grid",
-	                          "username_entry",
 	                          FALSE);
 	if (!parent)
 		return NULL;

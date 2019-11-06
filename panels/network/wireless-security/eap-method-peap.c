@@ -42,6 +42,7 @@ struct _EAPMethodPEAP {
 	GtkFileChooserButton *ca_cert_button;
 	GtkLabel             *ca_cert_label;
 	GtkCheckButton       *ca_cert_not_required_check;
+	GtkGrid              *grid;
 	GtkBox               *inner_auth_box;
 	GtkComboBox          *inner_auth_combo;
 	GtkLabel             *inner_auth_label;
@@ -292,6 +293,20 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 	                                         I_METHOD_COLUMN);
 }
 
+static GtkWidget *
+get_widget (EAPMethod *parent)
+{
+	EAPMethodPEAP *self = (EAPMethodPEAP *) parent;
+	return GTK_WIDGET (self->grid);
+}
+
+static GtkWidget *
+get_default_field (EAPMethod *parent)
+{
+	EAPMethodPEAP *self = (EAPMethodPEAP *) parent;
+	return GTK_WIDGET (self->anon_identity_entry);
+}
+
 static void
 changed_cb (EAPMethodPEAP *self)
 {
@@ -315,10 +330,10 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 	                          add_to_size_group,
 	                          fill_connection,
 	                          update_secrets,
+	                          get_widget,
+	                          get_default_field,
 	                          destroy,
 	                          "/org/gnome/ControlCenter/network/eap-method-peap.ui",
-	                          "grid",
-	                          "anon_identity_entry",
 	                          FALSE);
 	if (!parent)
 		return NULL;
@@ -333,9 +348,10 @@ eap_method_peap_new (WirelessSecurity *ws_parent,
 	self->ca_cert_button = GTK_FILE_CHOOSER_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_button"));
 	self->ca_cert_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "ca_cert_label"));
 	self->ca_cert_not_required_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
+	self->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
+	self->inner_auth_box = GTK_BOX (gtk_builder_get_object (parent->builder, "inner_auth_box"));
 	self->inner_auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 	self->inner_auth_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "inner_auth_label"));
-	self->inner_auth_box = GTK_BOX (gtk_builder_get_object (parent->builder, "inner_auth_box"));
 	self->version_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "version_combo"));
 	self->version_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "version_label"));
 
