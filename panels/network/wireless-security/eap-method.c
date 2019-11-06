@@ -52,7 +52,15 @@ eap_method_get_widget (EAPMethod *self)
 {
 	g_return_val_if_fail (self != NULL, NULL);
 
-	return self->ui_widget;
+	return self->get_widget (self);
+}
+
+GtkWidget *
+eap_method_get_default_field (EAPMethod *self)
+{
+	g_return_val_if_fail (self != NULL, NULL);
+
+	return self->get_default_field (self);
 }
 
 gboolean
@@ -123,10 +131,10 @@ eap_method_init (gsize obj_size,
                  EMAddToSizeGroupFunc add_to_size_group,
                  EMFillConnectionFunc fill_connection,
                  EMUpdateSecretsFunc update_secrets,
+                 EMGetWidgetFunc get_widget,
+                 EMGetWidgetFunc get_default_field,
                  EMDestroyFunc destroy,
                  const char *ui_resource,
-                 const char *ui_widget_name,
-                 const char *default_field,
                  gboolean phase2)
 {
 	g_autoptr(EAPMethod) self = NULL;
@@ -134,7 +142,6 @@ eap_method_init (gsize obj_size,
 
 	g_return_val_if_fail (obj_size > 0, NULL);
 	g_return_val_if_fail (ui_resource != NULL, NULL);
-	g_return_val_if_fail (ui_widget_name != NULL, NULL);
 
 	self = g_slice_alloc0 (obj_size);
 	g_assert (self);
@@ -145,7 +152,8 @@ eap_method_init (gsize obj_size,
 	self->add_to_size_group = add_to_size_group;
 	self->fill_connection = fill_connection;
 	self->update_secrets = update_secrets;
-	self->default_field = default_field;
+	self->get_widget = get_widget;
+	self->get_default_field = get_default_field;
 	self->phase2 = phase2;
 
 	self->builder = gtk_builder_new ();
@@ -154,14 +162,6 @@ eap_method_init (gsize obj_size,
 		           ui_resource, error->message);
 		return NULL;
 	}
-
-	self->ui_widget = GTK_WIDGET (gtk_builder_get_object (self->builder, ui_widget_name));
-	if (!self->ui_widget) {
-		g_warning ("Couldn't load UI widget '%s' from UI file %s",
-		           ui_widget_name, ui_resource);
-		return NULL;
-	}
-	g_object_ref_sink (self->ui_widget);
 
 	self->destroy = destroy;
 
@@ -191,7 +191,6 @@ eap_method_unref (EAPMethod *self)
 			self->destroy (self);
 
 		g_clear_object (&self->builder);
-		g_clear_object (&self->ui_widget);
 
 		g_slice_free1 (self->obj_size, self);
 	}

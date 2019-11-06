@@ -44,6 +44,7 @@ struct _EAPMethodTTLS {
 	GtkCheckButton       *ca_cert_not_required_check;
 	GtkEntry             *domain_match_entry;
 	GtkLabel             *domain_match_label;
+	GtkGrid              *grid;
 	GtkComboBox          *inner_auth_combo;
 	GtkLabel             *inner_auth_label;
 	GtkBox               *inner_auth_box;
@@ -345,6 +346,20 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 	                                         I_METHOD_COLUMN);
 }
 
+static GtkWidget *
+get_widget (EAPMethod *parent)
+{
+	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
+	return GTK_WIDGET (self->grid);
+}
+
+static GtkWidget *
+get_default_field (EAPMethod *parent)
+{
+	EAPMethodTTLS *self = (EAPMethodTTLS *) parent;
+	return GTK_WIDGET (self->anon_identity_entry);
+}
+
 static void
 changed_cb (EAPMethodTTLS *self)
 {
@@ -368,10 +383,10 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	                          add_to_size_group,
 	                          fill_connection,
 	                          update_secrets,
+	                          get_widget,
+	                          get_default_field,
 	                          destroy,
 	                          "/org/gnome/ControlCenter/network/eap-method-ttls.ui",
-	                          "grid",
-	                          "anon_identity_entry",
 	                          FALSE);
 	if (!parent)
 		return NULL;
@@ -388,6 +403,7 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	self->ca_cert_not_required_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "ca_cert_not_required_check"));
 	self->domain_match_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "domain_match_entry"));
 	self->domain_match_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "domain_match_label"));
+	self->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
 	self->inner_auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "inner_auth_combo"));
 	self->inner_auth_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "inner_auth_label"));
 	self->inner_auth_box = GTK_BOX (gtk_builder_get_object (parent->builder, "inner_auth_box"));
