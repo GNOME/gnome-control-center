@@ -140,11 +140,11 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	/* If this is the main EAP method, clear any existing methods because the
 	 * user-selected on will replace it.
 	 */
-	if (parent->phase2 == FALSE)
+	if (eap_method_get_phase2 (parent) == FALSE)
 		nm_setting_802_1x_clear_eap_methods (s_8021x);
 
 	eap_type = &eap_table[self->type];
-	if (parent->phase2) {
+	if (eap_method_get_phase2 (parent)) {
 		/* If the outer EAP method (TLS, TTLS, PEAP, etc) allows inner/phase2
 		 * EAP methods (which only TTLS allows) *and* the inner/phase2 method
 		 * supports being an inner EAP method, then set PHASE2_AUTHEAP.
@@ -210,6 +210,13 @@ static const gchar *
 get_password_flags_name (EAPMethod *parent)
 {
 	return NM_SETTING_802_1X_PASSWORD;
+}
+
+static const gboolean
+get_phase2 (EAPMethod *parent)
+{
+	EAPMethodSimple *self = (EAPMethodSimple *) parent;
+	return self->flags & EAP_METHOD_SIMPLE_FLAG_PHASE2;
 }
 
 static gboolean
@@ -315,8 +322,8 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	                          get_widget,
 	                          get_default_field,
 	                          get_password_flags_name,
-	                          destroy,
-	                          flags & EAP_METHOD_SIMPLE_FLAG_PHASE2);
+	                          get_phase2,
+	                          destroy);
 	if (!parent)
 		return NULL;
 
