@@ -35,6 +35,7 @@
 struct _EAPMethodSimple {
 	EAPMethod parent;
 
+	GtkBuilder      *builder;
 	GtkGrid         *grid;
 	GtkEntry        *password_entry;
 	GtkLabel        *password_label;
@@ -273,6 +274,7 @@ destroy (EAPMethod *parent)
 {
 	EAPMethodSimple *self = (EAPMethodSimple *) parent;
 
+	g_clear_object (&self->builder);
 	g_signal_handlers_disconnect_by_data (self->grid, self);
 	g_signal_handlers_disconnect_by_data (self->username_entry, self->ws_parent);
 	g_signal_handlers_disconnect_by_data (self->password_entry, self->ws_parent);
@@ -297,6 +299,7 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	EAPMethod *parent;
 	EAPMethodSimple *self;
 	NMSetting8021x *s_8021x = NULL;
+	g_autoptr(GError) error = NULL;
 
 	parent = eap_method_init (sizeof (EAPMethodSimple),
 	                          validate,
@@ -306,7 +309,6 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	                          get_widget,
 	                          get_default_field,
 	                          destroy,
-	                          "/org/gnome/ControlCenter/network/eap-method-simple.ui",
 	                          flags & EAP_METHOD_SIMPLE_FLAG_PHASE2);
 	if (!parent)
 		return NULL;
@@ -318,12 +320,18 @@ eap_method_simple_new (WirelessSecurity *ws_parent,
 	self->type = type;
 	g_assert (type < EAP_METHOD_SIMPLE_TYPE_LAST);
 
-	self->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
-	self->password_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "password_label"));
-	self->username_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "username_label"));
-	self->password_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "password_entry"));
-	self->show_password_check = GTK_TOGGLE_BUTTON (gtk_builder_get_object (parent->builder, "show_password_check"));
-	self->username_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "username_entry"));
+	self->builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/eap-method-simple.ui", &error)) {
+		g_warning ("Couldn't load UI builder resource: %s", error->message);
+		return NULL;
+	}
+
+	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
+	self->password_label = GTK_LABEL (gtk_builder_get_object (self->builder, "password_label"));
+	self->username_label = GTK_LABEL (gtk_builder_get_object (self->builder, "username_label"));
+	self->password_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "password_entry"));
+	self->show_password_check = GTK_TOGGLE_BUTTON (gtk_builder_get_object (self->builder, "show_password_check"));
+	self->username_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "username_entry"));
 
 	g_signal_connect_swapped (self->grid, "realize", G_CALLBACK (widgets_realized), self);
 	g_signal_connect_swapped (self->grid, "unrealize", G_CALLBACK (widgets_unrealized), self);
