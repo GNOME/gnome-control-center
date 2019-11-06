@@ -31,6 +31,18 @@
 #include "ce-page-wifi.h"
 #include "ui-helpers.h"
 
+struct _CEPageWifi
+{
+        CEPage parent;
+
+        GtkComboBoxText *bssid_combo;
+        GtkComboBoxText *cloned_mac_combo;
+        GtkComboBoxText *mac_combo;
+        GtkEntry        *ssid_entry;
+
+        NMSettingWireless *setting;
+};
+
 G_DEFINE_TYPE (CEPageWifi, ce_page_wifi, CE_TYPE_PAGE)
 
 static void
@@ -175,7 +187,7 @@ ce_page_wifi_new (NMConnection     *connection,
 {
         CEPageWifi *self;
 
-        self = CE_PAGE_WIFI (ce_page_new (CE_TYPE_PAGE_WIFI,
+        self = CE_PAGE_WIFI (ce_page_new (ce_page_wifi_get_type (),
                                           connection,
                                           client,
                                           "/org/gnome/control-center/network/wifi-page.ui"));

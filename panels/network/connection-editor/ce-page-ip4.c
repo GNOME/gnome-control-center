@@ -35,6 +35,31 @@
 static void ensure_empty_address_row (CEPageIP4 *self);
 static void ensure_empty_routes_row (CEPageIP4 *self);
 
+struct _CEPageIP4
+{
+        CEPage parent;
+
+        GtkBox         *address_box;
+        GtkSizeGroup   *address_sizegroup;
+        GtkSwitch      *auto_dns_switch;
+        GtkSwitch      *auto_routes_switch;
+        GtkRadioButton *automatic_radio;
+        GtkBox         *content_box;
+        GtkRadioButton *disabled_radio;
+        GtkEntry       *dns_entry;
+        GtkRadioButton *local_radio;
+        GtkRadioButton *manual_radio;
+        GtkCheckButton *never_default_check;
+        GtkBox         *routes_box;
+        GtkSizeGroup   *routes_metric_sizegroup;
+        GtkSizeGroup   *routes_sizegroup;
+
+        NMSettingIPConfig *setting;
+
+        GtkWidget      *address_list;
+        GtkWidget      *routes_list;
+};
+
 G_DEFINE_TYPE (CEPageIP4, ce_page_ip4, CE_TYPE_PAGE)
 
 enum {
@@ -872,10 +897,10 @@ ce_page_ip4_new (NMConnection     *connection,
 {
         CEPageIP4 *self;
 
-        self = CE_PAGE_IP4 (ce_page_new (CE_TYPE_PAGE_IP4,
-                                           connection,
-                                           client,
-                                           "/org/gnome/control-center/network/ip4-page.ui"));
+        self = CE_PAGE_IP4 (ce_page_new (ce_page_ip4_get_type (),
+                                         connection,
+                                         client,
+                                         "/org/gnome/control-center/network/ip4-page.ui"));
 
         self->setting = nm_connection_get_setting_ip4_config (connection);
         if (!self->setting) {

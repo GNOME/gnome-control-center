@@ -35,6 +35,33 @@
 static void ensure_empty_address_row (CEPageIP6 *self);
 static void ensure_empty_routes_row (CEPageIP6 *self);
 
+
+struct _CEPageIP6
+{
+        CEPage parent;
+
+        GtkBox         *address_box;
+        GtkSizeGroup   *address_sizegroup;
+        GtkSwitch      *auto_dns_switch;
+        GtkSwitch      *auto_routes_switch;
+        GtkRadioButton *automatic_radio;
+        GtkBox         *content_box;
+        GtkRadioButton *dhcp_radio;
+        GtkRadioButton *disabled_radio;
+        GtkEntry       *dns_entry;
+        GtkRadioButton *local_radio;
+        GtkRadioButton *manual_radio;
+        GtkCheckButton *never_default_check;
+        GtkBox         *routes_box;
+        GtkSizeGroup   *routes_metric_sizegroup;
+        GtkSizeGroup   *routes_sizegroup;
+
+        NMSettingIPConfig *setting;
+
+        GtkWidget       *address_list;
+        GtkWidget       *routes_list;
+};
+
 G_DEFINE_TYPE (CEPageIP6, ce_page_ip6, CE_TYPE_PAGE)
 
 enum {
@@ -794,10 +821,10 @@ ce_page_ip6_new (NMConnection     *connection,
 {
         CEPageIP6 *self;
 
-        self = CE_PAGE_IP6 (ce_page_new (CE_TYPE_PAGE_IP6,
-                                           connection,
-                                           client,
-                                           "/org/gnome/control-center/network/ip6-page.ui"));
+        self = CE_PAGE_IP6 (ce_page_new (ce_page_ip6_get_type (),
+                                         connection,
+                                         client,
+                                         "/org/gnome/control-center/network/ip6-page.ui"));
 
         self->setting = nm_connection_get_setting_ip6_config (connection);
         if (!self->setting) {

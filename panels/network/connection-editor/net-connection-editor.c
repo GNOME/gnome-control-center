@@ -47,6 +47,36 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
+struct _NetConnectionEditor
+{
+        GtkDialog parent;
+
+        GtkWidget        *parent_window;
+        NMClient         *client;
+        NMDevice         *device;
+
+        NMConnection     *connection;
+        NMConnection     *orig_connection;
+        gboolean          is_new_connection;
+        gboolean          is_changed;
+        NMAccessPoint    *ap;
+
+        GtkButton        *cancel_button;
+        GtkButton        *apply_button;
+        GtkNotebook      *notebook;
+        GtkFrame         *add_connection_frame;
+        GtkNotebook      *toplevel_notebook;
+
+        GSList *initializing_pages;
+        GSList *pages;
+
+        guint                    permission_id;
+        NMClientPermissionResult can_modify;
+
+        gboolean          title_set;
+        gboolean          show_when_initialized;
+};
+
 G_DEFINE_TYPE (NetConnectionEditor, net_connection_editor, GTK_TYPE_DIALOG)
 
 static void page_changed (NetConnectionEditor *self);
@@ -191,7 +221,7 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
         signals[DONE] = g_signal_new ("done",
                                       G_OBJECT_CLASS_TYPE (object_class),
                                       G_SIGNAL_RUN_FIRST,
-                                      G_STRUCT_OFFSET (NetConnectionEditorClass, done),
+                                      0,
                                       NULL, NULL,
                                       NULL,
                                       G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
@@ -769,7 +799,7 @@ net_connection_editor_new (GtkWindow        *parent_window,
 {
         NetConnectionEditor *self;
 
-        self = g_object_new (NET_TYPE_CONNECTION_EDITOR,
+        self = g_object_new (net_connection_editor_get_type (),
                              /* This doesn't seem to work for a template, so it is also hardcoded. */
                              "use-header-bar", 1,
                              NULL);

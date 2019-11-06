@@ -19,62 +19,17 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __CE_PAGE_IP4_H
-#define __CE_PAGE_IP4_H
+#pragma once
 
-#include <glib-object.h>
+#include <NetworkManager.h>
 
-#include <gtk/gtk.h>
 #include "ce-page.h"
 
 G_BEGIN_DECLS
 
-#define CE_TYPE_PAGE_IP4          (ce_page_ip4_get_type ())
-#define CE_PAGE_IP4(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), CE_TYPE_PAGE_IP4, CEPageIP4))
-#define CE_PAGE_IP4_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), CE_TYPE_PAGE_IP4, CEPageIP4Class))
-#define CE_IS_PAGE_IP4(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), CE_TYPE_PAGE_IP4))
-#define CE_IS_PAGE_IP4_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), CE_TYPE_PAGE_IP4))
-#define CE_PAGE_IP4_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), CE_TYPE_PAGE_IP4, CEPageIP4Class))
+G_DECLARE_FINAL_TYPE (CEPageIP4, ce_page_ip4, CE, PAGE_IP4, CEPage)
 
-typedef struct _CEPageIP4          CEPageIP4;
-typedef struct _CEPageIP4Class     CEPageIP4Class;
-
-struct _CEPageIP4
-{
-        CEPage parent;
-
-        GtkBox         *address_box;
-        GtkSizeGroup   *address_sizegroup;
-        GtkSwitch      *auto_dns_switch;
-        GtkSwitch      *auto_routes_switch;
-        GtkRadioButton *automatic_radio;
-        GtkBox         *content_box;
-        GtkRadioButton *disabled_radio;
-        GtkEntry       *dns_entry;
-        GtkRadioButton *local_radio;
-        GtkRadioButton *manual_radio;
-        GtkCheckButton *never_default_check;
-        GtkBox         *routes_box;
-        GtkSizeGroup   *routes_metric_sizegroup;
-        GtkSizeGroup   *routes_sizegroup;
-
-        NMSettingIPConfig *setting;
-
-        GtkWidget      *address_list;
-        GtkWidget      *routes_list;
-};
-
-struct _CEPageIP4Class
-{
-        CEPageClass parent_class;
-};
-
-GType   ce_page_ip4_get_type (void);
-
-CEPage *ce_page_ip4_new      (NMConnection     *connection,
-                              NMClient         *client);
+CEPage *ce_page_ip4_new (NMConnection     *connection,
+                         NMClient         *client);
 
 G_END_DECLS
-
-#endif /* __CE_PAGE_IP4_H */
-

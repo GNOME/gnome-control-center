@@ -29,6 +29,21 @@
 #include "ce-page-vpn.h"
 #include "vpn-helpers.h"
 
+struct _CEPageVpn
+{
+        CEPage parent;
+
+        GtkLabel *failure_label;
+        GtkEntry *name_entry;
+        GtkBox   *page;
+
+        NMSettingConnection *setting_connection;
+        NMSettingVpn *setting_vpn;
+
+	NMVpnEditorPlugin *plugin;
+	NMVpnEditor *editor;
+};
+
 G_DEFINE_TYPE (CEPageVpn, ce_page_vpn, CE_TYPE_PAGE)
 
 /* Hack to make the plugin-provided editor widget fit in better with
@@ -184,7 +199,7 @@ ce_page_vpn_new (NMConnection     *connection,
 {
         CEPageVpn *self;
 
-        self = CE_PAGE_VPN (ce_page_new (CE_TYPE_PAGE_VPN,
+        self = CE_PAGE_VPN (ce_page_new (ce_page_vpn_get_type (),
 					 connection,
 					 client,
 					 "/org/gnome/control-center/network/vpn-page.ui"));

@@ -34,6 +34,19 @@
 #include "ce-page-ethernet.h"
 #include "ce-page-8021x-security.h"
 
+struct _CEPage8021xSecurity {
+	CEPage parent;
+
+        GtkBox    *box;
+        GtkSwitch *enable_8021x_switch;
+        GtkLabel  *security_label;
+
+        GtkWidget *security_widget;
+        WirelessSecurity *security;
+        GtkSizeGroup *group;
+        gboolean initial_have_8021x;
+};
+
 G_DEFINE_TYPE (CEPage8021xSecurity, ce_page_8021x_security, CE_TYPE_PAGE)
 
 static void
@@ -88,7 +101,7 @@ ce_page_8021x_security_new (NMConnection     *connection,
 {
 	CEPage8021xSecurity *self;
 
-	self = CE_PAGE_8021X_SECURITY (ce_page_new (CE_TYPE_PAGE_8021X_SECURITY,
+	self = CE_PAGE_8021X_SECURITY (ce_page_new (ce_page_8021x_security_get_type (),
 	                                            connection,
 	                                            client,
 	                                            "/org/gnome/control-center/network/8021x-security-page.ui"));

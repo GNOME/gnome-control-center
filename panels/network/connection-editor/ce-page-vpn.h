@@ -19,54 +19,17 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __CE_PAGE_VPN_H
-#define __CE_PAGE_VPN_H
-
-#include <glib-object.h>
+#pragma once
 
 #include <NetworkManager.h>
 
-#include <gtk/gtk.h>
 #include "ce-page.h"
 
 G_BEGIN_DECLS
 
-#define CE_TYPE_PAGE_VPN          (ce_page_vpn_get_type ())
-#define CE_PAGE_VPN(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), CE_TYPE_PAGE_VPN, CEPageVpn))
-#define CE_PAGE_VPN_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), CE_TYPE_PAGE_VPN, CEPageVpnClass))
-#define CE_IS_PAGE_VPN(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), CE_TYPE_PAGE_VPN))
-#define CE_IS_PAGE_VPN_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), CE_TYPE_PAGE_VPN))
-#define CE_PAGE_VPN_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), CE_TYPE_PAGE_VPN, CEPageVpnClass))
+G_DECLARE_FINAL_TYPE (CEPageVpn, ce_page_vpn, CE, PAGE_VPN, CEPage)
 
-typedef struct _CEPageVpn          CEPageVpn;
-typedef struct _CEPageVpnClass     CEPageVpnClass;
-
-struct _CEPageVpn
-{
-        CEPage parent;
-
-        GtkLabel *failure_label;
-        GtkEntry *name_entry;
-        GtkBox   *page;
-
-        NMSettingConnection *setting_connection;
-        NMSettingVpn *setting_vpn;
-
-	NMVpnEditorPlugin *plugin;
-	NMVpnEditor *editor;
-};
-
-struct _CEPageVpnClass
-{
-        CEPageClass parent_class;
-};
-
-GType   ce_page_vpn_get_type (void);
-
-CEPage *ce_page_vpn_new      (NMConnection     *connection,
-			      NMClient         *client);
+CEPage *ce_page_vpn_new (NMConnection     *connection,
+                         NMClient         *client);
 
 G_END_DECLS
-
-#endif /* __CE_PAGE_VPN_H */
-

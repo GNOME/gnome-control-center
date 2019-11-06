@@ -34,6 +34,18 @@
 #include "ws-wpa-eap.h"
 #include "ws-wpa-psk.h"
 
+struct _CEPageSecurity
+{
+        CEPage parent;
+
+        GtkBox      *box;
+        GtkComboBox *security_combo;
+        GtkLabel    *security_label;
+
+        GtkSizeGroup *group;
+        gboolean     adhoc;
+};
+
 G_DEFINE_TYPE (CEPageSecurity, ce_page_security, CE_TYPE_PAGE)
 
 enum {
@@ -441,7 +453,7 @@ ce_page_security_new (NMConnection      *connection,
         NMUtilsSecurityType default_type = NMU_SEC_NONE;
         NMSettingWirelessSecurity *sws;
 
-        self = CE_PAGE_SECURITY (ce_page_new (CE_TYPE_PAGE_SECURITY,
+        self = CE_PAGE_SECURITY (ce_page_new (ce_page_security_get_type (),
                                               connection,
                                               client,
                                               "/org/gnome/control-center/network/security-page.ui"));

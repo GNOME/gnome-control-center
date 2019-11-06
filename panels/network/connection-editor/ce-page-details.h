@@ -19,73 +19,21 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __CE_PAGE_DETAILS_H
-#define __CE_PAGE_DETAILS_H
+#pragma once
 
-#include <glib-object.h>
+#include <NetworkManager.h>
 
-#include <gtk/gtk.h>
-#include "net-connection-editor.h"
 #include "ce-page.h"
+#include "net-connection-editor.h"
 
 G_BEGIN_DECLS
 
-#define CE_TYPE_PAGE_DETAILS          (ce_page_details_get_type ())
-#define CE_PAGE_DETAILS(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), CE_TYPE_PAGE_DETAILS, CEPageDetails))
-#define CE_PAGE_DETAILS_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), CE_TYPE_PAGE_DETAILS, CEPageDetailsClass))
-#define CE_IS_PAGE_DETAILS(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), CE_TYPE_PAGE_DETAILS))
-#define CE_IS_PAGE_DETAILS_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), CE_TYPE_PAGE_DETAILS))
-#define CE_PAGE_DETAILS_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), CE_TYPE_PAGE_DETAILS, CEPageDetailsClass))
+G_DECLARE_FINAL_TYPE (CEPageDetails, ce_page_details, CE, PAGE_DETAILS, CEPage)
 
-typedef struct _CEPageDetails          CEPageDetails;
-typedef struct _CEPageDetailsClass     CEPageDetailsClass;
-
-struct _CEPageDetails
-{
-        CEPage parent;
-
-        GtkCheckButton *all_user_check;
-        GtkCheckButton *auto_connect_check;
-        GtkLabel *dns_heading_label;
-        GtkLabel *dns_label;
-        GtkButton *forget_button;
-        GtkLabel *ipv4_heading_label;
-        GtkLabel *ipv4_label;
-        GtkLabel *ipv6_heading_label;
-        GtkLabel *ipv6_label;
-        GtkLabel *last_used_heading_label;
-        GtkLabel *last_used_label;
-        GtkLabel *mac_heading_label;
-        GtkLabel *mac_label;
-        GtkCheckButton *restrict_data_check;
-        GtkLabel *route_heading_label;
-        GtkLabel *route_label;
-        GtkLabel *security_heading_label;
-        GtkLabel *security_label;
-        GtkLabel *speed_heading_label;
-        GtkLabel *speed_label;
-        GtkLabel *strength_heading_label;
-        GtkLabel *strength_label;
-
-        NMDevice *device;
-        NMAccessPoint *ap;
-        NetConnectionEditor *editor;
-};
-
-struct _CEPageDetailsClass
-{
-        CEPageClass parent_class;
-};
-
-GType   ce_page_details_get_type (void);
-
-CEPage *ce_page_details_new      (NMConnection        *connection,
-                                  NMClient            *client,
-                                  NMDevice            *device,
-                                  NMAccessPoint       *ap,
-                                  NetConnectionEditor *editor);
+CEPage *ce_page_details_new (NMConnection        *connection,
+                             NMClient            *client,
+                             NMDevice            *device,
+                             NMAccessPoint       *ap,
+                             NetConnectionEditor *editor);
 
 G_END_DECLS
-
-#endif /* __CE_PAGE_DETAILS_H */
-

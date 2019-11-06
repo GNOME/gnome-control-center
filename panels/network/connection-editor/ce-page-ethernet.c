@@ -31,6 +31,20 @@
 #include "ce-page-ethernet.h"
 #include "ui-helpers.h"
 
+struct _CEPageEthernet
+{
+        CEPage parent;
+
+        NMSettingConnection *setting_connection;
+        NMSettingWired *setting_wired;
+
+        GtkEntry        *name;
+        GtkComboBoxText *device_mac;
+        GtkComboBoxText *cloned_mac;
+        GtkSpinButton   *mtu;
+        GtkWidget       *mtu_label;
+};
+
 G_DEFINE_TYPE (CEPageEthernet, ce_page_ethernet, CE_TYPE_PAGE)
 
 static void
@@ -187,7 +201,7 @@ ce_page_ethernet_new (NMConnection     *connection,
 {
         CEPageEthernet *self;
 
-        self = CE_PAGE_ETHERNET (ce_page_new (CE_TYPE_PAGE_ETHERNET,
+        self = CE_PAGE_ETHERNET (ce_page_new (ce_page_ethernet_get_type (),
                                               connection,
                                               client,
                                               "/org/gnome/control-center/network/ethernet-page.ui"));
