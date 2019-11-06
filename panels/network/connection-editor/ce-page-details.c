@@ -32,6 +32,7 @@ struct _CEPageDetails
 {
         CEPage parent;
 
+        GtkBuilder *builder;
         GtkCheckButton *all_user_check;
         GtkCheckButton *auto_connect_check;
         GtkLabel *dns_heading_label;
@@ -394,6 +395,16 @@ connect_details_page (CEPageDetails *self)
                 gtk_widget_hide (GTK_WIDGET (self->forget_button));
 }
 
+static void
+ce_page_details_dispose (GObject *object)
+{
+        CEPageDetails *self = CE_PAGE_DETAILS (object);
+
+        g_clear_object (&self->builder);
+
+        G_OBJECT_CLASS (ce_page_details_parent_class)->dispose (object);
+}
+
 static GtkWidget *
 ce_page_details_get_widget (CEPage *page)
 {
@@ -415,8 +426,10 @@ ce_page_details_init (CEPageDetails *self)
 static void
 ce_page_details_class_init (CEPageDetailsClass *class)
 {
+        GObjectClass *object_class = G_OBJECT_CLASS (class);
         CEPageClass *page_class = CE_PAGE_CLASS (class);
 
+        object_class->dispose = ce_page_details_dispose;
         page_class->get_widget = ce_page_details_get_widget;
         page_class->get_title = ce_page_details_get_title;
 }
@@ -429,34 +442,41 @@ ce_page_details_new (NMConnection        *connection,
                      NetConnectionEditor *editor)
 {
         CEPageDetails *self;
+        g_autoptr(GError) error = NULL;
 
-        self = CE_PAGE_DETAILS (ce_page_new (ce_page_details_get_type (),
-                                             connection,
-                                             "/org/gnome/control-center/network/details-page.ui"));
+        self = CE_PAGE_DETAILS (g_object_new (ce_page_details_get_type (),
+                                              "connection", connection,
+                                              NULL));
 
-        self->all_user_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "all_user_check"));
-        self->auto_connect_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "auto_connect_check"));
-        self->dns_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "dns_heading_label"));
-        self->dns_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "dns_label"));
-        self->forget_button = GTK_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "forget_button"));
-        self->grid = GTK_GRID (gtk_builder_get_object (CE_PAGE (self)->builder, "grid"));
-        self->ipv4_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "ipv4_heading_label"));
-        self->ipv4_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "ipv4_label"));
-        self->ipv6_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "ipv6_heading_label"));
-        self->ipv6_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "ipv6_label"));
-        self->last_used_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "last_used_heading_label"));
-        self->last_used_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "last_used_label"));
-        self->mac_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "mac_heading_label"));
-        self->mac_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "mac_label"));
-        self->restrict_data_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "restrict_data_check"));
-        self->route_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "route_heading_label"));
-        self->route_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "route_label"));
-        self->security_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "security_heading_label"));
-        self->security_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "security_label"));
-        self->speed_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "speed_heading_label"));
-        self->speed_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "speed_label"));
-        self->strength_heading_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "strength_heading_label"));
-        self->strength_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "strength_label"));
+        self->builder = gtk_builder_new ();
+        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/details-page.ui", &error)) {
+                g_warning ("Couldn't load builder file: %s", error->message);
+                return NULL;
+        }
+
+        self->all_user_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "all_user_check"));
+        self->auto_connect_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "auto_connect_check"));
+        self->dns_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "dns_heading_label"));
+        self->dns_label = GTK_LABEL (gtk_builder_get_object (self->builder, "dns_label"));
+        self->forget_button = GTK_BUTTON (gtk_builder_get_object (self->builder, "forget_button"));
+        self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
+        self->ipv4_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv4_heading_label"));
+        self->ipv4_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv4_label"));
+        self->ipv6_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv6_heading_label"));
+        self->ipv6_label = GTK_LABEL (gtk_builder_get_object (self->builder, "ipv6_label"));
+        self->last_used_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "last_used_heading_label"));
+        self->last_used_label = GTK_LABEL (gtk_builder_get_object (self->builder, "last_used_label"));
+        self->mac_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "mac_heading_label"));
+        self->mac_label = GTK_LABEL (gtk_builder_get_object (self->builder, "mac_label"));
+        self->restrict_data_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "restrict_data_check"));
+        self->route_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "route_heading_label"));
+        self->route_label = GTK_LABEL (gtk_builder_get_object (self->builder, "route_label"));
+        self->security_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "security_heading_label"));
+        self->security_label = GTK_LABEL (gtk_builder_get_object (self->builder, "security_label"));
+        self->speed_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "speed_heading_label"));
+        self->speed_label = GTK_LABEL (gtk_builder_get_object (self->builder, "speed_label"));
+        self->strength_heading_label = GTK_LABEL (gtk_builder_get_object (self->builder, "strength_heading_label"));
+        self->strength_label = GTK_LABEL (gtk_builder_get_object (self->builder, "strength_label"));
 
         self->editor = editor;
         self->device = device;

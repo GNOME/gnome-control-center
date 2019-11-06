@@ -45,8 +45,6 @@ struct _CEPage
         GObject parent;
 
         gboolean initialized;
-        GtkBuilder *builder;
-
         NMConnection *connection;
 };
 
@@ -70,9 +68,6 @@ gboolean     ce_page_validate        (CEPage           *page,
                                       GError          **error);
 gboolean     ce_page_get_initialized (CEPage           *page);
 void         ce_page_changed         (CEPage           *page);
-CEPage      *ce_page_new             (GType             type,
-                                      NMConnection     *connection,
-                                      const gchar      *ui_resource);
 void         ce_page_complete_init   (CEPage           *page,
                                       const gchar      *setting_name,
                                       GVariant         *variant,

@@ -66,7 +66,6 @@ dispose (GObject *object)
 {
         CEPage *self = CE_PAGE (object);
 
-        g_clear_object (&self->builder);
         g_clear_object (&self->connection);
 
         G_OBJECT_CLASS (ce_page_parent_class)->dispose (object);
@@ -147,7 +146,6 @@ set_property (GObject      *object,
 static void
 ce_page_init (CEPage *self)
 {
-        self->builder = gtk_builder_new ();
 }
 
 static void
@@ -194,28 +192,6 @@ ce_page_class_init (CEPageClass *page_class)
                               NULL, NULL,
                               g_cclosure_marshal_VOID__POINTER,
                               G_TYPE_NONE, 1, G_TYPE_POINTER);
-}
-
-CEPage *
-ce_page_new (GType             type,
-             NMConnection     *connection,
-             const gchar      *ui_resource)
-{
-        g_autoptr(CEPage) self = NULL;
-        g_autoptr(GError) error = NULL;
-
-        self = CE_PAGE (g_object_new (type,
-                                      "connection", connection,
-                                      NULL));
-
-        if (ui_resource) {
-                if (!gtk_builder_add_from_resource (self->builder, ui_resource, &error)) {
-                        g_warning ("Couldn't load builder file: %s", error->message);
-                        return NULL;
-                }
-        }
-
-        return g_steal_pointer (&self);
 }
 
 static void

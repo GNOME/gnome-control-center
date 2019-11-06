@@ -35,6 +35,7 @@ struct _CEPageEthernet
 {
         CEPage parent;
 
+        GtkBuilder      *builder;
         GtkComboBoxText *cloned_mac;
         GtkComboBoxText *device_mac;
         GtkGrid         *grid;
@@ -140,6 +141,16 @@ ui_to_setting (CEPageEthernet *self)
                       NULL);
 }
 
+static void
+ce_page_ethernet_dispose (GObject *object)
+{
+        CEPageEthernet *self = CE_PAGE_ETHERNET (object);
+
+        g_clear_object (&self->builder);
+
+        G_OBJECT_CLASS (ce_page_ethernet_parent_class)->dispose (object);
+}
+
 static GtkWidget *
 ce_page_ethernet_get_widget (CEPage *page)
 {
@@ -198,8 +209,10 @@ ce_page_ethernet_init (CEPageEthernet *self)
 static void
 ce_page_ethernet_class_init (CEPageEthernetClass *class)
 {
+        GObjectClass *object_class = G_OBJECT_CLASS (class);
         CEPageClass *page_class = CE_PAGE_CLASS (class);
 
+        object_class->dispose = ce_page_ethernet_dispose;
         page_class->get_widget = ce_page_ethernet_get_widget;
         page_class->get_title = ce_page_ethernet_get_title;
         page_class->validate = ce_page_ethernet_validate;
@@ -210,17 +223,24 @@ ce_page_ethernet_new (NMConnection     *connection,
                       NMClient         *client)
 {
         CEPageEthernet *self;
+        g_autoptr(GError) error = NULL;
 
-        self = CE_PAGE_ETHERNET (ce_page_new (ce_page_ethernet_get_type (),
-                                              connection,
-                                              "/org/gnome/control-center/network/ethernet-page.ui"));
+        self = CE_PAGE_ETHERNET (g_object_new (ce_page_ethernet_get_type (),
+                                               "connection", connection,
+                                               NULL));
 
-        self->cloned_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "cloned_mac_combo"));
-        self->device_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "mac_combo"));
-        self->grid = GTK_GRID (gtk_builder_get_object (CE_PAGE (self)->builder, "grid"));
-        self->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "mtu_spin"));
-        self->mtu_label = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (self)->builder, "mtu_label"));
-        self->name = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (self)->builder, "name_entry"));
+        self->builder = gtk_builder_new ();
+        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/ethernet-page.ui", &error)) {
+                g_warning ("Couldn't load builder file: %s", error->message);
+                return NULL;
+        }
+
+        self->cloned_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (self->builder, "cloned_mac_combo"));
+        self->device_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (self->builder, "mac_combo"));
+        self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
+        self->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (self->builder, "mtu_spin"));
+        self->mtu_label = GTK_WIDGET (gtk_builder_get_object (self->builder, "mtu_label"));
+        self->name = GTK_ENTRY (gtk_builder_get_object (self->builder, "name_entry"));
 
         self->client = client;
         self->setting_connection = nm_connection_get_setting_connection (connection);

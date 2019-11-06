@@ -37,6 +37,7 @@
 struct _CEPage8021xSecurity {
 	CEPage parent;
 
+        GtkBuilder  *builder;
         GtkBox      *box;
         GtkSwitch   *enable_8021x_switch;
         GtkNotebook *notebook;
@@ -101,15 +102,22 @@ ce_page_8021x_security_new (NMConnection     *connection,
                             NMClient         *client)
 {
 	CEPage8021xSecurity *self;
+        g_autoptr(GError) error = NULL;
 
-	self = CE_PAGE_8021X_SECURITY (ce_page_new (ce_page_8021x_security_get_type (),
-	                                            connection,
-	                                            "/org/gnome/control-center/network/8021x-security-page.ui"));
+        self = CE_PAGE_8021X_SECURITY (g_object_new (ce_page_8021x_security_get_type (),
+                                                     "connection", connection,
+                                                     NULL));
 
-        self->box = GTK_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "box"));
-        self->enable_8021x_switch = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (self)->builder, "enable_8021x_switch"));
-        self->notebook = GTK_NOTEBOOK (gtk_builder_get_object (CE_PAGE (self)->builder, "notebook"));
-        self->security_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "security_label"));
+        self->builder = gtk_builder_new ();
+        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/8021x-security-page.ui", &error)) {
+                g_warning ("Couldn't load builder file: %s", error->message);
+                return NULL;
+        }
+
+        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
+        self->enable_8021x_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "enable_8021x_switch"));
+        self->notebook = GTK_NOTEBOOK (gtk_builder_get_object (self->builder, "notebook"));
+        self->security_label = GTK_LABEL (gtk_builder_get_object (self->builder, "security_label"));
 
 	if (nm_connection_get_setting_802_1x (connection))
 		self->initial_have_8021x = TRUE;
@@ -191,11 +199,8 @@ dispose (GObject *object)
 {
 	CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (object);
 
-	if (self->security) {
-		wireless_security_unref (self->security);
-                self->security = NULL;
-        }
-
+        g_clear_object (&self->builder);
+        g_clear_pointer (&self->security, wireless_security_unref);
         g_clear_object (&self->group);
 
 	G_OBJECT_CLASS (ce_page_8021x_security_parent_class)->dispose (object);

@@ -39,6 +39,7 @@ struct _CEPageIP4
 {
         CEPage parent;
 
+        GtkBuilder        *builder;
         GtkBox            *address_box;
         GtkSizeGroup      *address_sizegroup;
         GtkSwitch         *auto_dns_switch;
@@ -510,22 +511,6 @@ connect_ip4_page (CEPageIP4 *self)
         gboolean disabled;
         guint method;
 
-        self->address_box = GTK_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "address_box"));
-        self->address_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (self)->builder, "address_sizegroup"));
-        self->auto_dns_switch = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (self)->builder, "auto_dns_switch"));
-        self->auto_routes_switch = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (self)->builder, "auto_routes_switch"));
-        self->automatic_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "automatic_radio"));
-        self->content_box = GTK_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "content_box"));
-        self->disabled_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "disabled_radio"));
-        self->dns_entry = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (self)->builder, "dns_entry"));
-        self->local_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "local_radio"));
-        self->manual_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "manual_radio"));
-        self->never_default_check = GTK_CHECK_BUTTON (gtk_builder_get_object (CE_PAGE (self)->builder, "never_default_check"));
-        self->routes_box = GTK_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "routes_box"));
-        self->routes_metric_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (self)->builder, "routes_metric_sizegroup"));
-        self->routes_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (self)->builder, "routes_sizegroup"));
-        self->scrolled_window = GTK_SCROLLED_WINDOW (gtk_builder_get_object (CE_PAGE (self)->builder, "scrolled_window"));
-
         add_address_box (self);
         add_dns_section (self);
         add_routes_box (self);
@@ -862,6 +847,16 @@ out:
         return ret;
 }
 
+static void
+ce_page_ip4_dispose (GObject *object)
+{
+        CEPageIP4 *self = CE_PAGE_IP4 (object);
+
+        g_clear_object (&self->builder);
+
+        G_OBJECT_CLASS (ce_page_ip4_parent_class)->dispose (object);
+}
+
 static GtkWidget *
 ce_page_ip4_get_widget (CEPage *page)
 {
@@ -894,8 +889,10 @@ ce_page_ip4_init (CEPageIP4 *self)
 static void
 ce_page_ip4_class_init (CEPageIP4Class *class)
 {
+        GObjectClass *object_class = G_OBJECT_CLASS (class);
         CEPageClass *page_class = CE_PAGE_CLASS (class);
 
+        object_class->dispose = ce_page_ip4_dispose;
         page_class->get_widget = ce_page_ip4_get_widget;
         page_class->get_title = ce_page_ip4_get_title;
         page_class->validate = ce_page_ip4_validate;
@@ -906,10 +903,33 @@ ce_page_ip4_new (NMConnection     *connection,
                  NMClient         *client)
 {
         CEPageIP4 *self;
+        g_autoptr(GError) error = NULL;
 
-        self = CE_PAGE_IP4 (ce_page_new (ce_page_ip4_get_type (),
-                                         connection,
-                                         "/org/gnome/control-center/network/ip4-page.ui"));
+        self = CE_PAGE_IP4 (g_object_new (ce_page_ip4_get_type (),
+                                          "connection", connection,
+                                          NULL));
+
+        self->builder = gtk_builder_new ();
+        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/ip4-page.ui", &error)) {
+                g_warning ("Couldn't load builder file: %s", error->message);
+                return NULL;
+        }
+
+        self->address_box = GTK_BOX (gtk_builder_get_object (self->builder, "address_box"));
+        self->address_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (self->builder, "address_sizegroup"));
+        self->auto_dns_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "auto_dns_switch"));
+        self->auto_routes_switch = GTK_SWITCH (gtk_builder_get_object (self->builder, "auto_routes_switch"));
+        self->automatic_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (self->builder, "automatic_radio"));
+        self->content_box = GTK_BOX (gtk_builder_get_object (self->builder, "content_box"));
+        self->disabled_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (self->builder, "disabled_radio"));
+        self->dns_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "dns_entry"));
+        self->local_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (self->builder, "local_radio"));
+        self->manual_radio = GTK_RADIO_BUTTON (gtk_builder_get_object (self->builder, "manual_radio"));
+        self->never_default_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "never_default_check"));
+        self->routes_box = GTK_BOX (gtk_builder_get_object (self->builder, "routes_box"));
+        self->routes_metric_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (self->builder, "routes_metric_sizegroup"));
+        self->routes_sizegroup = GTK_SIZE_GROUP (gtk_builder_get_object (self->builder, "routes_sizegroup"));
+        self->scrolled_window = GTK_SCROLLED_WINDOW (gtk_builder_get_object (self->builder, "scrolled_window"));
 
         self->setting = nm_connection_get_setting_ip4_config (connection);
         if (!self->setting) {

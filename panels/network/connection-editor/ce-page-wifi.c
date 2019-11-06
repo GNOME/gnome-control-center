@@ -35,6 +35,7 @@ struct _CEPageWifi
 {
         CEPage parent;
 
+        GtkBuilder      *builder;
         GtkComboBoxText *bssid_combo;
         GtkComboBoxText *cloned_mac_combo;
         GtkGrid         *grid;
@@ -123,6 +124,16 @@ ui_to_setting (CEPageWifi *self)
                       NULL);
 }
 
+static void
+ce_page_wifi_dispose (GObject *object)
+{
+        CEPageWifi *self = CE_PAGE_WIFI (object);
+
+        g_clear_object (&self->builder);
+
+        G_OBJECT_CLASS (ce_page_wifi_parent_class)->dispose (object);
+}
+
 static GtkWidget *
 ce_page_wifi_get_widget (CEPage *page)
 {
@@ -184,8 +195,10 @@ ce_page_wifi_init (CEPageWifi *self)
 static void
 ce_page_wifi_class_init (CEPageWifiClass *class)
 {
-        CEPageClass *page_class= CE_PAGE_CLASS (class);
+        GObjectClass *object_class = G_OBJECT_CLASS (class);
+        CEPageClass *page_class = CE_PAGE_CLASS (class);
 
+        object_class->dispose = ce_page_wifi_dispose;
         page_class->get_widget = ce_page_wifi_get_widget;
         page_class->get_title = ce_page_wifi_get_title;
         page_class->validate = ce_page_wifi_class_validate;
@@ -196,16 +209,23 @@ ce_page_wifi_new (NMConnection     *connection,
                   NMClient         *client)
 {
         CEPageWifi *self;
+        g_autoptr(GError) error = NULL;
 
-        self = CE_PAGE_WIFI (ce_page_new (ce_page_wifi_get_type (),
-                                          connection,
-                                          "/org/gnome/control-center/network/wifi-page.ui"));
+        self = CE_PAGE_WIFI (g_object_new (ce_page_wifi_get_type (),
+                                           "connection", connection,
+                                           NULL));
 
-        self->bssid_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "bssid_combo"));
-        self->cloned_mac_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "cloned_mac_combo"));
-        self->grid = GTK_GRID (gtk_builder_get_object (CE_PAGE (self)->builder, "grid"));
-        self->mac_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (self)->builder, "mac_combo"));
-        self->ssid_entry = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (self)->builder, "ssid_entry"));
+        self->builder = gtk_builder_new ();
+        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/wifi-page.ui", &error)) {
+                g_warning ("Couldn't load builder file: %s", error->message);
+                return NULL;
+        }
+
+        self->bssid_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (self->builder, "bssid_combo"));
+        self->cloned_mac_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (self->builder, "cloned_mac_combo"));
+        self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
+        self->mac_combo = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (self->builder, "mac_combo"));
+        self->ssid_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "ssid_entry"));
 
         self->client = client;
         self->setting = nm_connection_get_setting_wireless (connection);

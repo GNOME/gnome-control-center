@@ -38,6 +38,7 @@ struct _CEPageSecurity
 {
         CEPage parent;
 
+        GtkBuilder  *builder;
         GtkBox      *box;
         GtkNotebook *notebook;
         GtkComboBox *security_combo;
@@ -232,11 +233,6 @@ finish_setup (CEPageSecurity *self)
 
         self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-        self->box = GTK_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "box"));
-        self->notebook = GTK_NOTEBOOK (gtk_builder_get_object (CE_PAGE (self)->builder, "notebook"));
-        self->security_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "security_label"));
-        self->security_combo = GTK_COMBO_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "security_combo"));
-
         dev_caps =   NM_WIFI_DEVICE_CAP_CIPHER_WEP40
                    | NM_WIFI_DEVICE_CAP_CIPHER_WEP104
                    | NM_WIFI_DEVICE_CAP_CIPHER_TKIP
@@ -371,6 +367,7 @@ ce_page_security_dispose (GObject *object)
 {
         CEPageSecurity *self = CE_PAGE_SECURITY (object);
 
+        g_clear_object (&self->builder);
         g_clear_object (&self->group);
 
         G_OBJECT_CLASS (ce_page_security_parent_class)->dispose (object);
@@ -470,10 +467,22 @@ ce_page_security_new (NMConnection      *connection,
         CEPageSecurity *self;
         NMUtilsSecurityType default_type = NMU_SEC_NONE;
         NMSettingWirelessSecurity *sws;
+        g_autoptr(GError) error = NULL;
 
-        self = CE_PAGE_SECURITY (ce_page_new (ce_page_security_get_type (),
-                                              connection,
-                                              "/org/gnome/control-center/network/security-page.ui"));
+        self = CE_PAGE_SECURITY (g_object_new (ce_page_security_get_type (),
+                                               "connection", connection,
+                                               NULL));
+
+        self->builder = gtk_builder_new ();
+        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/security-page.ui", &error)) {
+                g_warning ("Couldn't load builder file: %s", error->message);
+                return NULL;
+        }
+
+        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
+        self->notebook = GTK_NOTEBOOK (gtk_builder_get_object (self->builder, "notebook"));
+        self->security_label = GTK_LABEL (gtk_builder_get_object (self->builder, "security_label"));
+        self->security_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "security_combo"));
 
         sws = nm_connection_get_setting_wireless_security (connection);
         if (sws)

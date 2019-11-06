@@ -33,9 +33,10 @@ struct _CEPageVpn
 {
         CEPage parent;
 
-        GtkBox   *box;
-        GtkLabel *failure_label;
-        GtkEntry *name_entry;
+        GtkBuilder *builder;
+        GtkBox     *box;
+        GtkLabel   *failure_label;
+        GtkEntry   *name_entry;
 
         NMSettingConnection *setting_connection;
         NMSettingVpn *setting_vpn;
@@ -129,6 +130,7 @@ ce_page_vpn_dispose (GObject *object)
 {
         CEPageVpn *self = CE_PAGE_VPN (object);
 
+        g_clear_object (&self->builder);
         g_clear_object (&self->editor);
 
         G_OBJECT_CLASS (ce_page_vpn_parent_class)->dispose (object);
@@ -213,14 +215,21 @@ ce_page_vpn_new (NMConnection     *connection,
 		 NMClient         *client)
 {
         CEPageVpn *self;
+        g_autoptr(GError) error = NULL;
 
-        self = CE_PAGE_VPN (ce_page_new (ce_page_vpn_get_type (),
-					 connection,
-					 "/org/gnome/control-center/network/vpn-page.ui"));
+        self = CE_PAGE_VPN (g_object_new (ce_page_vpn_get_type (),
+                                          "connection", connection,
+                                          NULL));
 
-        self->box = GTK_BOX (gtk_builder_get_object (CE_PAGE (self)->builder, "box"));
-        self->failure_label = GTK_LABEL (gtk_builder_get_object (CE_PAGE (self)->builder, "failure_label"));
-        self->name_entry = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (self)->builder, "name_entry"));
+        self->builder = gtk_builder_new ();
+        if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/control-center/network/vpn-page.ui", &error)) {
+                g_warning ("Couldn't load builder file: %s", error->message);
+                return NULL;
+        }
+
+        self->box = GTK_BOX (gtk_builder_get_object (self->builder, "box"));
+        self->failure_label = GTK_LABEL (gtk_builder_get_object (self->builder, "failure_label"));
+        self->name_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "name_entry"));
 
         g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
 
