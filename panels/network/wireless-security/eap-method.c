@@ -92,16 +92,6 @@ eap_method_fill_connection (EAPMethod *self,
 }
 
 void
-eap_method_update_secrets (EAPMethod *self, NMConnection *connection)
-{
-	g_return_if_fail (self != NULL);
-	g_return_if_fail (connection != NULL);
-
-	if (self->update_secrets)
-		self->update_secrets (self, connection);
-}
-
-void
 eap_method_phase2_update_secrets_helper (EAPMethod *self,
                                          NMConnection *connection,
                                          GtkComboBox *combo,
@@ -121,8 +111,8 @@ eap_method_phase2_update_secrets_helper (EAPMethod *self,
 			g_autoptr(EAPMethod) eap = NULL;
 
 			gtk_tree_model_get (model, &iter, column, &eap, -1);
-			if (eap)
-				eap_method_update_secrets (eap, connection);
+			if (eap && eap->update_secrets)
+				eap->update_secrets (self, connection);
 		} while (gtk_tree_model_iter_next (model, &iter));
 	}
 }
