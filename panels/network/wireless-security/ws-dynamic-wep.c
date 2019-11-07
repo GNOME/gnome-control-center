@@ -88,13 +88,10 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 }
 
 static void
-auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
+auth_combo_changed_cb (WirelessSecurityDynamicWEP *self)
 {
-	WirelessSecurity *parent = WIRELESS_SECURITY (user_data);
-	WirelessSecurityDynamicWEP *self = (WirelessSecurityDynamicWEP *) parent;
-
-	ws_802_1x_auth_combo_changed (combo,
-	                              parent,
+	ws_802_1x_auth_combo_changed (self->auth_combo,
+	                              WIRELESS_SECURITY (self),
 	                              self->method_box,
 	                              self->size_group);
 }
@@ -128,12 +125,17 @@ ws_dynamic_wep_new (NMConnection *connection,
 
 	ws_802_1x_auth_combo_init (parent,
 	                           self->auth_combo,
-	                           self->auth_label,
-	                           (GCallback) auth_combo_changed_cb,
 	                           connection,
 	                           is_editor,
 	                           secrets_only);
-	auth_combo_changed_cb (GTK_WIDGET (self->auth_combo), (gpointer) parent);
+
+	if (secrets_only) {
+		gtk_widget_hide (GTK_WIDGET (self->auth_combo));
+		gtk_widget_hide (GTK_WIDGET (self->auth_label));
+	}
+
+	g_signal_connect_object (G_OBJECT (self->auth_combo), "changed", G_CALLBACK (auth_combo_changed_cb), self, G_CONNECT_SWAPPED);
+	auth_combo_changed_cb (self);
 
 	return self;
 }
