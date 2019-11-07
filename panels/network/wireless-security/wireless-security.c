@@ -567,28 +567,3 @@ ws_802_1x_fill_connection (GtkComboBox *combo,
 
 	eap_method_fill_connection (eap, connection, secret_flags);
 }
-
-void
-ws_802_1x_update_secrets (GtkComboBox *combo,
-                          NMConnection *connection)
-{
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-
-	g_return_if_fail (combo != NULL);
-	g_return_if_fail (connection != NULL);
-
-	model = gtk_combo_box_get_model (combo);
-
-	/* Let each EAP method try to update its secrets */
-	if (gtk_tree_model_get_iter_first (model, &iter)) {
-		do {
-			g_autoptr(EAPMethod) eap = NULL;
-
-			gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
-			if (eap)
-				eap_method_update_secrets (eap, connection);
-		} while (gtk_tree_model_iter_next (model, &iter));
-	}
-}
-
