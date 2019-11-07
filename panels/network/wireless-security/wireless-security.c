@@ -36,15 +36,19 @@
 #include "utils.h"
 
 typedef struct  {
-	WSChangedFunc changed_notify;
-	gpointer changed_notify_data;
 	gboolean adhoc_compatible;
-
 	char *username, *password;
 	gboolean always_ask, show_password;
 } WirelessSecurityPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (WirelessSecurity, wireless_security, G_TYPE_OBJECT)
+
+enum {
+        CHANGED,
+        LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = { 0 };
 
 static void
 wireless_security_dispose (GObject *object)
@@ -77,6 +81,15 @@ wireless_security_class_init (WirelessSecurityClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->dispose = wireless_security_dispose;
+
+        signals[CHANGED] =
+                g_signal_new ("changed",
+                              G_TYPE_FROM_CLASS (object_class),
+                              G_SIGNAL_RUN_FIRST,
+                              0,
+                              NULL, NULL,
+                              g_cclosure_marshal_VOID__VOID,
+                              G_TYPE_NONE, 0);
 }
 
 GtkWidget *
@@ -88,25 +101,11 @@ wireless_security_get_widget (WirelessSecurity *self)
 }
 
 void
-wireless_security_set_changed_notify (WirelessSecurity *self,
-                                      WSChangedFunc func,
-                                      gpointer user_data)
-{
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
-	g_return_if_fail (WIRELESS_IS_SECURITY (self));
-
-	priv->changed_notify = func;
-	priv->changed_notify_data = user_data;
-}
-
-void
 wireless_security_notify_changed (WirelessSecurity *self)
 {
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
+        g_return_if_fail (WIRELESS_IS_SECURITY (self));
 
-	if (priv->changed_notify)
-		(*(priv->changed_notify)) (self, priv->changed_notify_data);
+        g_signal_emit (self, signals[CHANGED], 0);
 }
 
 gboolean
