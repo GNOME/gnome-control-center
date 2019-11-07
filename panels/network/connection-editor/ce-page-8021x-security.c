@@ -59,9 +59,9 @@ enable_toggled (CEPage8021xSecurity *self)
 }
 
 static void
-stuff_changed (WirelessSecurity *sec, gpointer user_data)
+security_item_changed_cb (CEPage8021xSecurity *self)
 {
-        ce_page_changed (CE_PAGE (user_data));
+        ce_page_changed (CE_PAGE (self));
 }
 
 static void
@@ -80,7 +80,7 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 		return;
 	}
 
-	wireless_security_set_changed_notify (WIRELESS_SECURITY (self->security), stuff_changed, self);
+        g_signal_connect_object (WIRELESS_SECURITY (self->security), "changed", G_CALLBACK (security_item_changed_cb), self, G_CONNECT_SWAPPED);
 	self->security_widget = wireless_security_get_widget (WIRELESS_SECURITY (self->security));
 	parent = gtk_widget_get_parent (self->security_widget);
 	if (parent)
