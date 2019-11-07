@@ -142,6 +142,12 @@ fill_connection (WirelessSecurity *security, NMConnection *connection)
 		                                   NM_SETTING (s_wireless_sec), self->password_flags_name);
 }
 
+static gboolean
+adhoc_compatible (WirelessSecurity *security)
+{
+	return FALSE;
+}
+
 static void
 changed_cb (WirelessSecurityLEAP *self)
 {
@@ -164,6 +170,7 @@ ws_leap_class_init (WirelessSecurityLEAPClass *klass)
 	ws_class->validate = validate;
 	ws_class->add_to_size_group = add_to_size_group;
 	ws_class->fill_connection = fill_connection;
+	ws_class->adhoc_compatible = adhoc_compatible;
 }
 
 WirelessSecurityLEAP *
@@ -186,8 +193,6 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 				wsec = NULL;
 		}
 	}
-
-	wireless_security_set_adhoc_compatible (WIRELESS_SECURITY (self), FALSE);
 
 	self->editing_connection = secrets_only ? FALSE : TRUE;
 	self->password_flags_name = NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD;

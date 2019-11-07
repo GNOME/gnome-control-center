@@ -172,6 +172,12 @@ fill_connection (WirelessSecurity *security, NMConnection *connection)
 	}
 }
 
+static gboolean
+adhoc_compatible (WirelessSecurity *security)
+{
+	return FALSE;
+}
+
 static void
 changed_cb (WirelessSecurityWPAPSK *self)
 {
@@ -194,6 +200,7 @@ ws_wpa_psk_class_init (WirelessSecurityWPAPSKClass *klass)
 	ws_class->validate = validate;
 	ws_class->add_to_size_group = add_to_size_group;
 	ws_class->fill_connection = fill_connection;
+	ws_class->adhoc_compatible = adhoc_compatible;
 }
 
 WirelessSecurityWPAPSK *
@@ -217,8 +224,6 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	self->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "show_password_check"));
 	self->type_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "type_combo"));
 	self->type_label = GTK_LABEL (gtk_builder_get_object (self->builder, "type_label"));
-
-	wireless_security_set_adhoc_compatible (WIRELESS_SECURITY (self), FALSE);
 
 	self->editing_connection = secrets_only ? FALSE : TRUE;
 	self->password_flags_name = NM_SETTING_WIRELESS_SECURITY_PSK;
