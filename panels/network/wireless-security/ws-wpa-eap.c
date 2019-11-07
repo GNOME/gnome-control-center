@@ -94,6 +94,12 @@ fill_connection (WirelessSecurity *security, NMConnection *connection)
 	g_object_set (s_wireless_sec, NM_SETTING_WIRELESS_SECURITY_KEY_MGMT, "wpa-eap", NULL);
 }
 
+static gboolean
+adhoc_compatible (WirelessSecurity *security)
+{
+	return FALSE;
+}
+
 static void
 auth_combo_changed_cb (WirelessSecurityWPAEAP *self)
 {
@@ -120,6 +126,7 @@ ws_wpa_eap_class_init (WirelessSecurityWPAEAPClass *klass)
 	ws_class->validate = validate;
 	ws_class->add_to_size_group = add_to_size_group;
 	ws_class->fill_connection = fill_connection;
+	ws_class->adhoc_compatible = adhoc_compatible;
 }
 
 WirelessSecurityWPAEAP *
@@ -142,8 +149,6 @@ ws_wpa_eap_new (NMConnection *connection,
 	self->auth_label = GTK_LABEL (gtk_builder_get_object (self->builder, "auth_label"));
 	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
 	self->method_box = GTK_BOX (gtk_builder_get_object (self->builder, "method_box"));
-
-	wireless_security_set_adhoc_compatible (WIRELESS_SECURITY (self), FALSE);
 
 	ws_802_1x_auth_combo_init (WIRELESS_SECURITY (self),
 	                           self->auth_combo,
