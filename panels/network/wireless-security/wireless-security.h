@@ -65,11 +65,6 @@ void wireless_security_set_adhoc_compatible (WirelessSecurity *sec,
 
 gboolean wireless_security_adhoc_compatible (WirelessSecurity *sec);
 
-void wireless_security_set_hotspot_compatible (WirelessSecurity *sec,
-                                               gboolean hotspot_compatible);
-
-gboolean wireless_security_hotspot_compatible (WirelessSecurity *sec);
-
 const gchar *wireless_security_get_username (WirelessSecurity *sec);
 
 const gchar *wireless_security_get_password (WirelessSecurity *sec);
