@@ -175,7 +175,6 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 	}
 
 	wireless_security_set_adhoc_compatible (parent, FALSE);
-	wireless_security_set_hotspot_compatible (parent, FALSE);
 	self = (WirelessSecurityLEAP *) parent;
 	self->editing_connection = secrets_only ? FALSE : TRUE;
 	self->password_flags_name = NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD;
