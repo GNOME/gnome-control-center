@@ -402,7 +402,7 @@ ws_802_1x_validate (GtkComboBox *combo, GError **error)
 }
 
 void
-ws_802_1x_auth_combo_changed (GtkWidget *combo,
+ws_802_1x_auth_combo_changed (GtkComboBox *combo,
                               WirelessSecurity *self,
                               GtkBox *vbox,
                               GtkSizeGroup *size_group)
@@ -441,8 +441,6 @@ ws_802_1x_auth_combo_changed (GtkWidget *combo,
 void
 ws_802_1x_auth_combo_init (WirelessSecurity *self,
                            GtkComboBox *combo,
-                           GtkLabel *label,
-                           GCallback auth_combo_changed_cb,
                            NMConnection *connection,
                            gboolean is_editor,
                            gboolean secrets_only)
@@ -566,13 +564,6 @@ ws_802_1x_auth_combo_init (WirelessSecurity *self,
 
 	gtk_combo_box_set_model (combo, GTK_TREE_MODEL (auth_model));
 	gtk_combo_box_set_active (combo, active < 0 ? 0 : (guint32) active);
-
-	g_signal_connect (G_OBJECT (combo), "changed", auth_combo_changed_cb, self);
-
-	if (secrets_only) {
-		gtk_widget_hide (GTK_WIDGET (combo));
-		gtk_widget_hide (GTK_WIDGET (label));
-	}
 }
 
 void
