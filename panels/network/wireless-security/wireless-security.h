@@ -28,8 +28,6 @@ G_BEGIN_DECLS
 
 G_DECLARE_DERIVABLE_TYPE (WirelessSecurity, wireless_security, WIRELESS, SECURITY, GObject)
 
-typedef void (*WSChangedFunc) (WirelessSecurity *sec, gpointer user_data);
-
 struct _WirelessSecurityClass {
 	GObjectClass parent_class;
 
@@ -40,10 +38,6 @@ struct _WirelessSecurityClass {
 };
 
 GtkWidget *wireless_security_get_widget (WirelessSecurity *sec);
-
-void wireless_security_set_changed_notify (WirelessSecurity *sec,
-                                           WSChangedFunc func,
-                                           gpointer user_data);
 
 gboolean wireless_security_validate (WirelessSecurity *sec, GError **error);
 
