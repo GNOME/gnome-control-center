@@ -36,7 +36,6 @@
 #include "utils.h"
 
 typedef struct  {
-	gboolean adhoc_compatible;
 	char *username, *password;
 	gboolean always_ask, show_password;
 } WirelessSecurityPrivate;
@@ -68,11 +67,7 @@ wireless_security_dispose (GObject *object)
 void
 wireless_security_init (WirelessSecurity *self)
 {
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
 	g_resources_register (wireless_security_get_resource ());
-
-	priv->adhoc_compatible = TRUE;
 }
 
 void
@@ -141,24 +136,13 @@ wireless_security_fill_connection (WirelessSecurity *self,
 	return WIRELESS_SECURITY_GET_CLASS (self)->fill_connection (self, connection);
 }
 
-void
-wireless_security_set_adhoc_compatible (WirelessSecurity *self, gboolean adhoc_compatible)
-{
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
-	g_return_if_fail (WIRELESS_IS_SECURITY (self));
-
-	priv->adhoc_compatible = adhoc_compatible;
-}
-
 gboolean
 wireless_security_adhoc_compatible (WirelessSecurity *self)
 {
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
-	g_return_val_if_fail (WIRELESS_IS_SECURITY (self), FALSE);
-
-	return priv->adhoc_compatible;
+	if (WIRELESS_SECURITY_GET_CLASS (self)->adhoc_compatible)
+		return WIRELESS_SECURITY_GET_CLASS (self)->adhoc_compatible (self);
+	else
+		return TRUE;
 }
 
 const gchar *
