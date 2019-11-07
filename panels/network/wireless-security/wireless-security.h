@@ -126,10 +126,6 @@ EAPMethod *ws_802_1x_auth_combo_get_eap (GtkComboBox *combo);
 void ws_802_1x_fill_connection (GtkComboBox *combo,
                                 NMConnection *connection);
 
-void ws_802_1x_update_secrets (GtkComboBox *combo,
-                               NMConnection *connection);
-
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (WirelessSecurity, wireless_security_unref)
 
 #endif /* WIRELESS_SECURITY_H */
-
