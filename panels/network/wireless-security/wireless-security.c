@@ -35,7 +35,6 @@ struct _WirelessSecurityPrivate {
 	WSChangedFunc changed_notify;
 	gpointer changed_notify_data;
 	gboolean adhoc_compatible;
-	gboolean hotspot_compatible;
 
 	char *username, *password;
 	gboolean always_ask, show_password;
@@ -211,7 +210,6 @@ wireless_security_init (gsize obj_size,
 
 	priv->destroy = destroy;
 	priv->adhoc_compatible = TRUE;
-	priv->hotspot_compatible = TRUE;
 
 	return g_steal_pointer (&self);
 }
@@ -234,26 +232,6 @@ wireless_security_adhoc_compatible (WirelessSecurity *self)
 	g_return_val_if_fail (self != NULL, FALSE);
 
 	return priv->adhoc_compatible;
-}
-
-void
-wireless_security_set_hotspot_compatible (WirelessSecurity *self, gboolean hotspot_compatible)
-{
-	WirelessSecurityPrivate *priv = self->priv;
-
-	g_return_if_fail (self != NULL);
-
-	priv->hotspot_compatible = hotspot_compatible;
-}
-
-gboolean
-wireless_security_hotspot_compatible (WirelessSecurity *self)
-{
-	WirelessSecurityPrivate *priv = self->priv;
-
-	g_return_val_if_fail (self != NULL, FALSE);
-
-	return priv->hotspot_compatible;
 }
 
 const gchar *
