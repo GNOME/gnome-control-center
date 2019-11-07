@@ -65,8 +65,6 @@ void eap_method_fill_connection (EAPMethod *method,
                                  NMConnection *connection,
                                  NMSettingSecretFlags flags);
 
-void eap_method_update_secrets (EAPMethod *method, NMConnection *connection);
-
 EAPMethod *eap_method_ref (EAPMethod *method);
 
 void eap_method_unref (EAPMethod *method);
