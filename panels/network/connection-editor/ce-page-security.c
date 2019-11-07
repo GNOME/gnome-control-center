@@ -174,9 +174,9 @@ security_combo_changed (CEPageSecurity *self)
 }
 
 static void
-stuff_changed_cb (WirelessSecurity *sec, gpointer user_data)
+security_item_changed_cb (CEPageSecurity *self)
 {
-        ce_page_changed (CE_PAGE (user_data));
+        ce_page_changed (CE_PAGE (self));
 }
 
 static void
@@ -187,7 +187,7 @@ add_security_item (CEPageSecurity   *self,
                    const char       *text,
                    gboolean          adhoc_valid)
 {
-        wireless_security_set_changed_notify (sec, stuff_changed_cb, self);
+        g_signal_connect_object (sec, "changed", G_CALLBACK (security_item_changed_cb), self, G_CONNECT_SWAPPED);
         gtk_list_store_append (model, iter);
         gtk_list_store_set (model, iter,
                             S_NAME_COLUMN, text,
