@@ -145,6 +145,17 @@ wireless_security_adhoc_compatible (WirelessSecurity *self)
 		return TRUE;
 }
 
+void
+wireless_security_set_username (WirelessSecurity *self, const gchar *username)
+{
+	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
+
+	g_return_if_fail (WIRELESS_IS_SECURITY (self));
+
+	g_clear_pointer (&priv->username, g_free);
+	priv->username = g_strdup (username);
+}
+
 const gchar *
 wireless_security_get_username (WirelessSecurity *self)
 {
@@ -153,6 +164,20 @@ wireless_security_get_username (WirelessSecurity *self)
 	g_return_val_if_fail (WIRELESS_IS_SECURITY (self), NULL);
 
 	return priv->username;
+}
+
+void
+wireless_security_set_password (WirelessSecurity *self, const gchar *password)
+{
+	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
+
+	g_return_if_fail (WIRELESS_IS_SECURITY (self));
+
+	if (priv->password)
+		memset (priv->password, 0, strlen (priv->password));
+
+	g_clear_pointer (&priv->password, g_free);
+	priv->password = g_strdup (password);
 }
 
 const gchar *
@@ -165,6 +190,16 @@ wireless_security_get_password (WirelessSecurity *self)
 	return priv->password;
 }
 
+void
+wireless_security_set_always_ask (WirelessSecurity *self, gboolean always_ask)
+{
+	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
+
+	g_return_if_fail (WIRELESS_IS_SECURITY (self));
+
+	priv->always_ask = always_ask;
+}
+
 gboolean
 wireless_security_get_always_ask (WirelessSecurity *self)
 {
@@ -175,6 +210,16 @@ wireless_security_get_always_ask (WirelessSecurity *self)
 	return priv->always_ask;
 }
 
+void
+wireless_security_set_show_password (WirelessSecurity *self, gboolean show_password)
+{
+	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
+
+	g_return_if_fail (WIRELESS_IS_SECURITY (self));
+
+	priv->show_password = show_password;
+}
+
 gboolean
 wireless_security_get_show_password (WirelessSecurity *self)
 {
@@ -183,29 +228,6 @@ wireless_security_get_show_password (WirelessSecurity *self)
 	g_return_val_if_fail (WIRELESS_IS_SECURITY (self), FALSE);
 
 	return priv->show_password;
-}
-
-void
-wireless_security_set_userpass (WirelessSecurity *self,
-                                const char *user,
-                                const char *password,
-                                gboolean always_ask,
-                                gboolean show_password)
-{
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
-	g_clear_pointer (&priv->username, g_free);
-	priv->username = g_strdup (user);
-
-	if (priv->password)
-		memset (priv->password, 0, strlen (priv->password));
-
-	g_clear_pointer (&priv->password, g_free);
-	priv->password = g_strdup (password);
-
-	if (always_ask != (gboolean) -1)
-		priv->always_ask = always_ask;
-	priv->show_password = show_password;
 }
 
 void
@@ -319,7 +341,10 @@ ws_802_1x_auth_combo_init (WirelessSecurity *self,
 				always_ask = !!(flags & NM_SETTING_SECRET_FLAG_NOT_SAVED);
 		}
 	}
-	wireless_security_set_userpass (self, user, password, always_ask, FALSE);
+	wireless_security_set_username (self, user);
+	wireless_security_set_password (self, password);
+	wireless_security_set_always_ask (self, always_ask);
+	wireless_security_set_show_password (self, FALSE);
 
 	auth_model = gtk_list_store_new (2, G_TYPE_STRING, eap_method_get_type ());
 
