@@ -156,7 +156,7 @@ activate_panel (CcWindow          *self,
                 GIcon             *gicon,
                 CcPanelVisibility  visibility)
 {
-  g_autoptr (GTimer) timer = NULL;
+  g_autoptr(GTimer) timer = NULL;
   GtkWidget *sidebar_widget;
   GtkWidget *title_widget;
   gdouble ellapsed_time;

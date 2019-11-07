@@ -88,7 +88,7 @@ cc_panel_set_property (GObject      *object,
 
     case PROP_PARAMETERS:
       {
-        g_autoptr (GVariant) v = NULL;
+        g_autoptr(GVariant) v = NULL;
         GVariant *parameters;
         gsize n_parameters;
 
