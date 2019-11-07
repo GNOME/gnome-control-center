@@ -34,6 +34,7 @@ struct _WirelessSecurityClass {
 	void       (*add_to_size_group) (WirelessSecurity *sec, GtkSizeGroup *group);
 	void       (*fill_connection)   (WirelessSecurity *sec, NMConnection *connection);
 	gboolean   (*validate)          (WirelessSecurity *sec, GError **error);
+	gboolean   (*adhoc_compatible)  (WirelessSecurity *sec);
 	GtkWidget* (*get_widget)        (WirelessSecurity *sec);
 };
 
@@ -46,9 +47,6 @@ void wireless_security_add_to_size_group (WirelessSecurity *sec,
 
 void wireless_security_fill_connection (WirelessSecurity *sec,
                                         NMConnection *connection);
-
-void wireless_security_set_adhoc_compatible (WirelessSecurity *sec,
-                                             gboolean adhoc_compatible);
 
 gboolean wireless_security_adhoc_compatible (WirelessSecurity *sec);
 
