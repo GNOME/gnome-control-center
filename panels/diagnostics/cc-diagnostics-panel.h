@@ -1,6 +1,6 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*-
  *
- * Copyright (C) 2012 Red Hat, Inc
+ * Copyright (C) 2018 Red Hat, Inc
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,9 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_PRIVACY_PANEL (cc_privacy_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcPrivacyPanel, cc_privacy_panel, CC, PRIVACY_PANEL, CcPanel)
+#define CC_TYPE_DIAGNOSTICS_PANEL (cc_diagnostics_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcDiagnosticsPanel, cc_diagnostics_panel, CC, DIAGNOSTICS_PANEL, CcPanel)
+
+void cc_diagnostics_panel_static_init_func (void);
 
 G_END_DECLS

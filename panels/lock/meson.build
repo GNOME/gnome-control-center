@@ -17,9 +17,9 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
-sources = files('cc-privacy-panel.c')
+sources = files('cc-lock-panel.c')
 
-resource_data = files('cc-privacy-panel.ui')
+resource_data = files('cc-lock-panel.ui')
 
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
@@ -28,6 +28,8 @@ sources += gnome.compile_resources(
   dependencies: resource_data,
   export: true
 )
+
+cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
 
 panels_libs += static_library(
   cappletname,

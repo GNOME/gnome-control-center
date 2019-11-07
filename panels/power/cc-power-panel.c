@@ -33,6 +33,7 @@
 #include "list-box-helper.h"
 #include "cc-power-panel.h"
 #include "cc-power-resources.h"
+#include "cc-util.h"
 
 /* Uncomment this to test the behaviour of the panel in
  * battery-less situations:
@@ -1254,46 +1255,6 @@ combo_time_changed_cb (GtkWidget *widget, CcPowerPanel *self)
   g_settings_set_int (self->gsd_settings, key, value);
 }
 
-/* Copied from src/properties/bacon-video-widget-properties.c
- * in totem */
-static char *
-time_to_string_text (gint64 msecs)
-{
-	int sec, min, hour, _time;
-	g_autofree gchar *hours = NULL;
-	g_autofree gchar *mins = NULL;
-	g_autofree gchar *secs = NULL;
-
-	_time = (int) (msecs / 1000);
-	sec = _time % 60;
-	_time = _time - sec;
-	min = (_time % (60*60)) / 60;
-	_time = _time - (min * 60);
-	hour = _time / (60*60);
-
-	hours = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d hour", "%d hours", hour), hour);
-
-	mins = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d minute",
-					  "%d minutes", min), min);
-
-	secs = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d second",
-					  "%d seconds", sec), sec);
-
-	if (hour > 0) {
-		/* 5 hours 2 minutes 12 seconds */
-		return g_strdup_printf (C_("time", "%s %s %s"), hours, mins, secs);
-	} else if (min > 0) {
-		/* 2 minutes 12 seconds */
-		return g_strdup_printf (C_("time", "%s %s"), mins, secs);
-	} else if (sec > 0) {
-		/* 10 seconds */
-		return g_strdup (secs);
-	} else {
-		/* 0 seconds */
-		return g_strdup (_("0 seconds"));
-	}
-}
-
 static void
 set_value_for_combo (GtkComboBox *combo_box, gint value)
 {
@@ -1335,7 +1296,7 @@ set_value_for_combo (GtkComboBox *combo_box, gint value)
   /* The value is not listed, so add it at the best point (or the end). */
   gtk_list_store_insert_before (GTK_LIST_STORE (model), &new, insert);
 
-  text = time_to_string_text (value * 1000);
+  text = cc_util_time_to_string_text (value * 1000);
   gtk_list_store_set (GTK_LIST_STORE (model), &new,
                       ACTION_MODEL_TEXT, text,
                       ACTION_MODEL_VALUE, value,
