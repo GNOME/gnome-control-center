@@ -124,7 +124,6 @@ ws_wpa_eap_new (NMConnection *connection,
 	self->method_box = GTK_BOX (gtk_builder_get_object (parent->builder, "method_box"));
 
 	wireless_security_set_adhoc_compatible (parent, FALSE);
-	wireless_security_set_hotspot_compatible (parent, FALSE);
 
 	ws_802_1x_auth_combo_init (parent,
 	                           self->auth_combo,
