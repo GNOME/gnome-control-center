@@ -1186,7 +1186,7 @@ session_bus_ready (GObject        *source,
 static void
 cc_display_panel_init (CcDisplayPanel *self)
 {
-  g_autoptr (GtkCssProvider) provider = NULL;
+  g_autoptr(GtkCssProvider) provider = NULL;
   GtkCellRenderer *renderer;
 
   g_resources_register (cc_display_get_resource ());
