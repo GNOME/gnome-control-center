@@ -171,11 +171,9 @@ widgets_realized (EAPMethodLEAP *self)
 static void
 widgets_unrealized (EAPMethodLEAP *self)
 {
-	wireless_security_set_userpass (self->ws_parent,
-	                                gtk_entry_get_text (self->username_entry),
-	                                gtk_entry_get_text (self->password_entry),
-	                                (gboolean) -1,
-	                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->show_password_check)));
+	wireless_security_set_username (self->ws_parent, gtk_entry_get_text (self->username_entry));
+	wireless_security_set_password (self->ws_parent, gtk_entry_get_text (self->password_entry));
+	wireless_security_set_show_password (self->ws_parent, gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->show_password_check)));
 }
 
 static void
