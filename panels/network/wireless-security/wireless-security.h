@@ -123,7 +123,6 @@ void ws_802_1x_auth_combo_changed (GtkComboBox *combo,
 gboolean ws_802_1x_validate (GtkComboBox *combo, GError **error);
 
 void ws_802_1x_add_to_size_group (GtkSizeGroup *size_group,
-                                  GtkLabel *label,
                                   GtkComboBox *combo);
 
 void ws_802_1x_fill_connection (GtkComboBox *combo,
