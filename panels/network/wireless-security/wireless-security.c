@@ -360,20 +360,31 @@ wireless_security_clear_ciphers (NMConnection *connection)
 	nm_setting_wireless_security_clear_groups (s_wireless_sec);
 }
 
+static EAPMethod *
+get_active_method (GtkComboBox *combo)
+{
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	EAPMethod *eap;
+
+	model = gtk_combo_box_get_model (combo);
+	if (!gtk_combo_box_get_active_iter (combo, &iter))
+		return NULL;
+
+	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
+	return eap;
+}
+
 void
 ws_802_1x_add_to_size_group (GtkSizeGroup *size_group,
                              GtkLabel *label,
                              GtkComboBox *combo)
 {
-	GtkTreeModel *model;
-	GtkTreeIter iter;
 	g_autoptr(EAPMethod) eap = NULL;
 
 	gtk_size_group_add_widget (size_group, GTK_WIDGET (label));
 
-	model = gtk_combo_box_get_model (combo);
-	gtk_combo_box_get_active_iter (combo, &iter);
-	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
+	eap = get_active_method (combo);
 	g_assert (eap);
 	eap_method_add_to_size_group (eap, size_group);
 }
@@ -381,14 +392,10 @@ ws_802_1x_add_to_size_group (GtkSizeGroup *size_group,
 gboolean
 ws_802_1x_validate (GtkComboBox *combo, GError **error)
 {
-	GtkTreeModel *model;
-	GtkTreeIter iter;
 	g_autoptr(EAPMethod) eap = NULL;
 	gboolean valid = FALSE;
 
-	model = gtk_combo_box_get_model (combo);
-	gtk_combo_box_get_active_iter (combo, &iter);
-	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
+	eap = get_active_method (combo);
 	g_assert (eap);
 	valid = eap_method_validate (eap, error);
 	return valid;
@@ -402,8 +409,6 @@ ws_802_1x_auth_combo_changed (GtkWidget *combo,
 {
 	g_autoptr(EAPMethod) eap = NULL;
 	GList *elt, *children;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
 	GtkWidget *eap_widget;
 	GtkWidget *eap_default_widget = NULL;
 
@@ -412,9 +417,7 @@ ws_802_1x_auth_combo_changed (GtkWidget *combo,
 	for (elt = children; elt; elt = g_list_next (elt))
 		gtk_container_remove (GTK_CONTAINER (vbox), GTK_WIDGET (elt->data));
 
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter);
-	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
+	eap = get_active_method (GTK_COMBO_BOX (combo));
 	g_assert (eap);
 
 	eap_widget = eap_method_get_widget (eap);
@@ -580,13 +583,9 @@ ws_802_1x_fill_connection (GtkComboBox *combo,
 	NMSetting8021x *s_8021x;
 	NMSettingSecretFlags secret_flags = NM_SETTING_SECRET_FLAG_NONE;
 	g_autoptr(EAPMethod) eap = NULL;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
 
 	/* Get the EAPMethod object */
-	model = gtk_combo_box_get_model (combo);
-	gtk_combo_box_get_active_iter (combo, &iter);
-	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
+	eap = get_active_method (combo);
 	g_assert (eap);
 
 	/* Get previous pasword flags, if any. Otherwise default to agent-owned secrets */
