@@ -81,10 +81,6 @@ void ws_802_1x_auth_combo_init (WirelessSecurity *sec,
                                 gboolean is_editor,
                                 gboolean secrets_only);
 
-void ws_802_1x_auth_combo_changed (GtkComboBox *combo,
-                                   GtkBox *vbox,
-                                   GtkSizeGroup *size_group);
-
 #include "eap-method.h"
 
 EAPMethod *ws_802_1x_auth_combo_get_eap (GtkComboBox *combo);
