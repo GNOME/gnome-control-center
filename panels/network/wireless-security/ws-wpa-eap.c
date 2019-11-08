@@ -71,7 +71,8 @@ add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 	g_clear_object (&self->size_group);
 	self->size_group = g_object_ref (group);
 
-	ws_802_1x_add_to_size_group (self->size_group, self->auth_label, self->auth_combo);
+	gtk_size_group_add_widget (self->size_group, GTK_WIDGET (self->auth_label));
+	ws_802_1x_add_to_size_group (self->size_group, self->auth_combo);
 }
 
 static void
