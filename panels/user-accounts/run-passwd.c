@@ -404,7 +404,9 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
 
                         if (is_string_complete (str->str, "assword: ", "failure", "wrong", "error", NULL)) {
 
-                                if (strstr (str->str, "assword: ") != NULL && strstr (str->str, "incorrect") == NULL) {
+                                if (strstr (str->str, "assword: ") != NULL &&
+                                    strstr (str->str, "incorrect") == NULL &&
+                                    strstr (str->str, "urrent") == NULL) {
                                         /* Authentication successful */
 
                                         passwd_handler->backend_state = PASSWD_STATE_NEW;
