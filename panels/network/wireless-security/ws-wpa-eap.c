@@ -93,9 +93,10 @@ static void
 auth_combo_changed_cb (WirelessSecurityWPAEAP *self)
 {
 	ws_802_1x_auth_combo_changed (self->auth_combo,
-	                              WIRELESS_SECURITY (self),
 	                              self->method_box,
 	                              self->size_group);
+
+	wireless_security_notify_changed (WIRELESS_SECURITY (self));
 }
 
 WirelessSecurityWPAEAP *
