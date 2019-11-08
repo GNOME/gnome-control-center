@@ -336,6 +336,11 @@ password_entry_key_press_cb (CcPasswordDialog *self,
 {
         GdkEventKey *key = (GdkEventKey *)event;
 
+        if (self->password_entry_timeout_id != 0) {
+                g_source_remove (self->password_entry_timeout_id);
+                self->password_entry_timeout_id = 0;
+        }
+
         if (key->keyval == GDK_KEY_Tab)
                password_entry_timeout (self);
 
@@ -476,7 +481,6 @@ cc_password_dialog_class_init (CcPasswordDialogClass *klass)
         gtk_widget_class_bind_template_callback (widget_class, password_entry_focus_out_cb);
         gtk_widget_class_bind_template_callback (widget_class, password_entry_icon_press_cb);
         gtk_widget_class_bind_template_callback (widget_class, password_entry_key_press_cb);
-        gtk_widget_class_bind_template_callback (widget_class, password_entry_timeout);
         gtk_widget_class_bind_template_callback (widget_class, verify_entry_changed);
 }
 
