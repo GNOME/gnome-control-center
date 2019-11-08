@@ -48,7 +48,7 @@ get_gtk_gles_renderer (void)
 int
 main (int argc, char **argv)
 {
-        char *renderer_string = NULL;
+        g_autofree char *renderer_string = NULL;
 
         gtk_init (NULL, NULL);
 
