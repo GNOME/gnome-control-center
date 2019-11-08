@@ -116,7 +116,6 @@ void ws_802_1x_auth_combo_init (WirelessSecurity *sec,
                                 gboolean secrets_only);
 
 void ws_802_1x_auth_combo_changed (GtkComboBox *combo,
-                                   WirelessSecurity *sec,
                                    GtkBox *vbox,
                                    GtkSizeGroup *size_group);
 
