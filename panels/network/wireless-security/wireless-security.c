@@ -377,7 +377,6 @@ ws_802_1x_auth_combo_get_eap (GtkComboBox *combo)
 
 void
 ws_802_1x_auth_combo_changed (GtkComboBox *combo,
-                              WirelessSecurity *self,
                               GtkBox *vbox,
                               GtkSizeGroup *size_group)
 {
@@ -408,8 +407,6 @@ ws_802_1x_auth_combo_changed (GtkComboBox *combo,
 		if (eap_default_widget)
 			gtk_widget_grab_focus (eap_default_widget);
 	}
-
-	wireless_security_notify_changed (WIRELESS_SECURITY (self));
 }
 
 void
