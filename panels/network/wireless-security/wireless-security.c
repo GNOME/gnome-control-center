@@ -377,12 +377,9 @@ get_active_method (GtkComboBox *combo)
 
 void
 ws_802_1x_add_to_size_group (GtkSizeGroup *size_group,
-                             GtkLabel *label,
                              GtkComboBox *combo)
 {
 	g_autoptr(EAPMethod) eap = NULL;
-
-	gtk_size_group_add_widget (size_group, GTK_WIDGET (label));
 
 	eap = get_active_method (combo);
 	g_assert (eap);
