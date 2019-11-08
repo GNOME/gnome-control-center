@@ -49,6 +49,9 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
+#define AUTH_NAME_COLUMN   0
+#define AUTH_METHOD_COLUMN 1
+
 static void
 wireless_security_dispose (GObject *object)
 {
