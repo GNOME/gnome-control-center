@@ -261,34 +261,6 @@ ws_802_1x_auth_combo_get_eap (GtkComboBox *combo)
 }
 
 void
-ws_802_1x_auth_combo_changed (GtkComboBox *combo,
-                              GtkBox *vbox,
-                              GtkSizeGroup *size_group)
-{
-	EAPMethod *eap;
-	GList *elt, *children;
-	GtkWidget *eap_default_field;
-
-	/* Remove any previous wireless security widgets */
-	children = gtk_container_get_children (GTK_CONTAINER (vbox));
-	for (elt = children; elt; elt = g_list_next (elt))
-		gtk_container_remove (GTK_CONTAINER (vbox), GTK_WIDGET (elt->data));
-
-	eap = ws_802_1x_auth_combo_get_eap (GTK_COMBO_BOX (combo));
-	g_assert (eap);
-
-	gtk_widget_unparent (GTK_WIDGET (eap));
-	if (size_group)
-		eap_method_add_to_size_group (eap, size_group);
-	gtk_container_add (GTK_CONTAINER (vbox), g_object_ref (GTK_WIDGET (eap)));
-
-	/* Refocus the EAP method's default widget */
-	eap_default_field = eap_method_get_default_field (eap);
-	if (eap_default_field)
-		gtk_widget_grab_focus (eap_default_field);
-}
-
-void
 ws_802_1x_auth_combo_init (WirelessSecurity *self,
                            GtkComboBox *combo,
                            NMConnection *connection,
