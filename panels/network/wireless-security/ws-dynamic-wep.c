@@ -59,7 +59,7 @@ static gboolean
 validate (WirelessSecurity *parent, GError **error)
 {
 	WirelessSecurityDynamicWEP *self = (WirelessSecurityDynamicWEP *) parent;
-	return ws_802_1x_validate (self->auth_combo, error);
+	return eap_method_validate (ws_802_1x_auth_combo_get_eap (self->auth_combo), error);
 }
 
 static void
@@ -71,7 +71,7 @@ add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 	self->size_group = g_object_ref (group);
 
 	gtk_size_group_add_widget (self->size_group, GTK_WIDGET (self->auth_label));
-	ws_802_1x_add_to_size_group (self->size_group, self->auth_combo);
+	eap_method_add_to_size_group (ws_802_1x_auth_combo_get_eap (self->auth_combo), self->size_group);
 }
 
 static void
