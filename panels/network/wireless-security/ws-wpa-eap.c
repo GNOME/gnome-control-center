@@ -103,9 +103,27 @@ adhoc_compatible (WirelessSecurity *security)
 static void
 auth_combo_changed_cb (WirelessSecurityWPAEAP *self)
 {
-	ws_802_1x_auth_combo_changed (self->auth_combo,
-	                              self->method_box,
-	                              self->size_group);
+	EAPMethod *eap;
+	GList *elt, *children;
+	GtkWidget *eap_default_field;
+
+	/* Remove any previous wireless security widgets */
+	children = gtk_container_get_children (GTK_CONTAINER (self->method_box));
+	for (elt = children; elt; elt = g_list_next (elt))
+		gtk_container_remove (GTK_CONTAINER (self->method_box), GTK_WIDGET (elt->data));
+
+	eap = ws_802_1x_auth_combo_get_eap (self->auth_combo);
+	g_assert (eap);
+
+	gtk_widget_unparent (GTK_WIDGET (eap));
+	if (self->size_group)
+		eap_method_add_to_size_group (eap, self->size_group);
+	gtk_container_add (GTK_CONTAINER (self->method_box), g_object_ref (GTK_WIDGET (eap)));
+
+	/* Refocus the EAP method's default widget */
+	eap_default_field = eap_method_get_default_field (eap);
+	if (eap_default_field)
+		gtk_widget_grab_focus (eap_default_field);
 
 	wireless_security_notify_changed (WIRELESS_SECURITY (self));
 }
