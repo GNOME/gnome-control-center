@@ -120,10 +120,9 @@ void ws_802_1x_auth_combo_changed (GtkComboBox *combo,
                                    GtkBox *vbox,
                                    GtkSizeGroup *size_group);
 
-gboolean ws_802_1x_validate (GtkComboBox *combo, GError **error);
+#include "eap-method.h"
 
-void ws_802_1x_add_to_size_group (GtkSizeGroup *size_group,
-                                  GtkComboBox *combo);
+EAPMethod *ws_802_1x_auth_combo_get_eap (GtkComboBox *combo);
 
 void ws_802_1x_fill_connection (GtkComboBox *combo,
                                 NMConnection *connection);
