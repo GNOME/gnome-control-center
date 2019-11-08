@@ -72,9 +72,6 @@ void wireless_security_notify_changed (WirelessSecurity *sec);
 
 void wireless_security_clear_ciphers (NMConnection *connection);
 
-#define AUTH_NAME_COLUMN   0
-#define AUTH_METHOD_COLUMN 1
-
 void ws_802_1x_auth_combo_init (WirelessSecurity *sec,
                                 GtkComboBox *combo,
                                 NMConnection *connection,
