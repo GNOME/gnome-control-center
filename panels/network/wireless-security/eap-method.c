@@ -84,6 +84,15 @@ eap_method_validate (EAPMethod *self, GError **error)
 }
 
 void
+eap_method_update_secrets (EAPMethod *self, NMConnection *connection)
+{
+	g_return_if_fail (self != NULL);
+
+	if (EAP_METHOD_GET_IFACE (self)->update_secrets)
+		EAP_METHOD_GET_IFACE (self)->update_secrets (self, connection);
+}
+
+void
 eap_method_add_to_size_group (EAPMethod *self, GtkSizeGroup *group)
 {
 	g_return_if_fail (self != NULL);
@@ -101,32 +110,6 @@ eap_method_fill_connection (EAPMethod *self,
 	g_return_if_fail (connection != NULL);
 
 	return (*(EAP_METHOD_GET_IFACE (self)->fill_connection)) (self, connection, flags);
-}
-
-void
-eap_method_phase2_update_secrets_helper (EAPMethod *self,
-                                         NMConnection *connection,
-                                         GtkComboBox *combo,
-                                         guint32 column)
-{
-	GtkTreeIter iter;
-	GtkTreeModel *model;
-
-	g_return_if_fail (self != NULL);
-	g_return_if_fail (connection != NULL);
-	g_return_if_fail (combo != NULL);
-
-	/* Let each EAP phase2 method try to update its secrets */
-	model = gtk_combo_box_get_model (combo);
-	if (gtk_tree_model_get_iter_first (model, &iter)) {
-		do {
-			g_autoptr(EAPMethod) eap = NULL;
-
-			gtk_tree_model_get (model, &iter, column, &eap, -1);
-			if (eap && EAP_METHOD_GET_IFACE (eap)->update_secrets)
-				EAP_METHOD_GET_IFACE (eap)->update_secrets (self, connection);
-		} while (gtk_tree_model_iter_next (model, &iter));
-	}
 }
 
 gboolean
