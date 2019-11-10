@@ -270,10 +270,19 @@ static void
 update_secrets (EAPMethod *parent, NMConnection *connection)
 {
 	EAPMethodFAST *self = (EAPMethodFAST *) parent;
-	eap_method_phase2_update_secrets_helper (parent,
-	                                         connection,
-	                                         self->inner_auth_combo,
-	                                         I_METHOD_COLUMN);
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+
+	model = gtk_combo_box_get_model (self->inner_auth_combo);
+	if (!gtk_tree_model_get_iter_first (model, &iter))
+		return;
+
+	do {
+		g_autoptr(EAPMethod) eap = NULL;
+
+		gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
+		eap_method_update_secrets (eap, connection);
+	} while (gtk_tree_model_iter_next (model, &iter));
 }
 
 static GtkWidget *

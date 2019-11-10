@@ -47,6 +47,8 @@ const gchar *eap_method_get_password_flags_name (EAPMethod *method);
 
 gboolean eap_method_get_phase2 (EAPMethod *method);
 
+void eap_method_update_secrets (EAPMethod *method, NMConnection *connection);
+
 gboolean eap_method_validate (EAPMethod *method, GError **error);
 
 void eap_method_add_to_size_group (EAPMethod *method, GtkSizeGroup *group);
@@ -70,11 +72,6 @@ gboolean eap_method_validate_filepicker (GtkFileChooser *chooser,
                                          const char *password,
                                          NMSetting8021xCKFormat *out_format,
                                          GError **error);
-
-void eap_method_phase2_update_secrets_helper (EAPMethod *method,
-                                              NMConnection *connection,
-                                              GtkComboBox *combo,
-                                              guint32 column);
 
 gboolean eap_method_ca_cert_required (GtkToggleButton *id_ca_cert_is_not_required_checkbutton,
                                       GtkFileChooser *id_ca_cert_chooser);
