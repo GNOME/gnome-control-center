@@ -32,8 +32,8 @@
 #include "utils.h"
 #include "helpers.h"
 
-#define I_NAME_COLUMN   0
-#define I_METHOD_COLUMN 1
+#define I_NAME_COLUMN 0
+#define I_ID_COLUMN   1
 
 struct _EAPMethodFAST {
 	GtkGrid parent;
@@ -42,13 +42,16 @@ struct _EAPMethodFAST {
 	GtkLabel             *anon_identity_label;
 	GtkComboBox          *inner_auth_combo;
 	GtkLabel             *inner_auth_label;
+	GtkListStore         *inner_auth_model;
 	GtkBox               *inner_auth_box;
 	GtkFileChooserButton *pac_file_button;
 	GtkLabel             *pac_file_label;
 	GtkCheckButton       *pac_provision_check;
 	GtkComboBox          *pac_provision_combo;
 
-	GtkSizeGroup *size_group;
+	EAPMethodSimple      *em_gtc;
+	EAPMethodSimple      *em_mschap_v2;
+
 	WirelessSecurity *sec_parent;
 	gboolean is_editor;
 };
@@ -58,23 +61,28 @@ static void eap_method_iface_init (EAPMethodInterface *);
 G_DEFINE_TYPE_WITH_CODE (EAPMethodFAST, eap_method_fast, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (eap_method_get_type (), eap_method_iface_init))
 
-static void
-eap_method_fast_dispose (GObject *object)
+static EAPMethod *
+get_inner_method (EAPMethodFAST *self)
 {
-	EAPMethodFAST *self = EAP_METHOD_FAST (object);
+	GtkTreeIter iter;
+	g_autofree gchar *id = NULL;
 
-	g_clear_object (&self->size_group);
+	if (!gtk_combo_box_get_active_iter (self->inner_auth_combo, &iter))
+		return NULL;
+	gtk_tree_model_get (GTK_TREE_MODEL (self->inner_auth_model), &iter, I_ID_COLUMN, &id, -1);
 
-	G_OBJECT_CLASS (eap_method_fast_parent_class)->dispose (object);
+	if (strcmp (id, "gtc") == 0)
+		return EAP_METHOD (self->em_gtc);
+	if (strcmp (id, "mschapv2") == 0)
+		return EAP_METHOD (self->em_mschap_v2);
+
+	return NULL;
 }
 
 static gboolean
 validate (EAPMethod *parent, GError **error)
 {
 	EAPMethodFAST *self = (EAPMethodFAST *) parent;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	g_autoptr(EAPMethod) eap = NULL;
 	const char *file;
 	gboolean provisioning;
 	gboolean valid = TRUE;
@@ -88,35 +96,21 @@ validate (EAPMethod *parent, GError **error)
 	} else
 		widget_unset_error (GTK_WIDGET (self->pac_file_button));
 
-	model = gtk_combo_box_get_model (self->inner_auth_combo);
-	gtk_combo_box_get_active_iter (self->inner_auth_combo, &iter);
-	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
-	g_assert (eap);
-	valid = eap_method_validate (eap, valid ? error : NULL) && valid;
-	return valid;
+	return eap_method_validate (get_inner_method (self), valid ? error : NULL) && valid;
 }
 
 static void
 add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 {
 	EAPMethodFAST *self = (EAPMethodFAST *) parent;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	g_autoptr(EAPMethod) eap = NULL;
-
-	g_clear_object (&self->size_group);
-	self->size_group = g_object_ref (group);
 
 	gtk_size_group_add_widget (group, GTK_WIDGET (self->anon_identity_label));
 	gtk_size_group_add_widget (group, GTK_WIDGET (self->pac_file_label));
 	gtk_size_group_add_widget (group, GTK_WIDGET (self->pac_provision_check));
 	gtk_size_group_add_widget (group, GTK_WIDGET (self->inner_auth_label));
 
-	model = gtk_combo_box_get_model (self->inner_auth_combo);
-	gtk_combo_box_get_active_iter (self->inner_auth_combo, &iter);
-	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
-	g_assert (eap);
-	eap_method_add_to_size_group (eap, group);
+	eap_method_add_to_size_group (EAP_METHOD (self->em_gtc), group);
+	eap_method_add_to_size_group (EAP_METHOD (self->em_mschap_v2), group);
 }
 
 static void
@@ -126,9 +120,6 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	NMSetting8021x *s_8021x;
 	const char *text;
 	char *filename;
-	g_autoptr(EAPMethod) eap = NULL;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
 	gboolean enabled;
 	int pac_provisioning = 0;
 
@@ -167,122 +158,32 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 		}
 	}
 
-	model = gtk_combo_box_get_model (self->inner_auth_combo);
-	gtk_combo_box_get_active_iter (self->inner_auth_combo, &iter);
-	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
-	g_assert (eap);
-
-	eap_method_fill_connection (eap, connection, flags);
+	eap_method_fill_connection (get_inner_method (self), connection, flags);
 }
 
 static void
 inner_auth_combo_changed_cb (EAPMethodFAST *self)
 {
-	g_autoptr(EAPMethod) eap = NULL;
+	EAPMethod *inner_method;
 	GList *elt, *children;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
 
-	/* Remove any previous wireless security widgets */
 	children = gtk_container_get_children (GTK_CONTAINER (self->inner_auth_box));
 	for (elt = children; elt; elt = g_list_next (elt))
 		gtk_container_remove (GTK_CONTAINER (self->inner_auth_box), GTK_WIDGET (elt->data));
-	g_list_free (children);
 
-	model = gtk_combo_box_get_model (self->inner_auth_combo);
-	gtk_combo_box_get_active_iter (self->inner_auth_combo, &iter);
-	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
-	g_assert (eap);
-
-	gtk_widget_unparent (GTK_WIDGET (eap));
-	if (self->size_group)
-		eap_method_add_to_size_group (eap, self->size_group);
-	gtk_widget_show (GTK_WIDGET (eap));
-	gtk_container_add (GTK_CONTAINER (self->inner_auth_box), g_object_ref (GTK_WIDGET (eap)));
+	inner_method = get_inner_method (self);
+	gtk_container_add (GTK_CONTAINER (self->inner_auth_box), g_object_ref (GTK_WIDGET (inner_method)));
 
 	wireless_security_notify_changed (self->sec_parent);
-}
-
-static void
-inner_auth_combo_init (EAPMethodFAST *self,
-                       NMConnection *connection,
-                       NMSetting8021x *s_8021x,
-                       gboolean secrets_only)
-{
-	g_autoptr(GtkListStore) auth_model = NULL;
-	GtkTreeIter iter;
-	g_autoptr(EAPMethodSimple) em_gtc = NULL;
-	g_autoptr(EAPMethodSimple) em_mschap_v2 = NULL;
-	guint32 active = 0;
-	const char *phase2_auth = NULL;
-	EAPMethodSimpleFlags simple_flags;
-
-	auth_model = gtk_list_store_new (2, G_TYPE_STRING, eap_method_get_type ());
-
-	if (s_8021x) {
-		if (nm_setting_802_1x_get_phase2_auth (s_8021x))
-			phase2_auth = nm_setting_802_1x_get_phase2_auth (s_8021x);
-		else if (nm_setting_802_1x_get_phase2_autheap (s_8021x))
-			phase2_auth = nm_setting_802_1x_get_phase2_autheap (s_8021x);
-	}
-
-	simple_flags = EAP_METHOD_SIMPLE_FLAG_PHASE2;
-	if (self->is_editor)
-		simple_flags |= EAP_METHOD_SIMPLE_FLAG_IS_EDITOR;
-	if (secrets_only)
-		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
-
-	em_gtc = eap_method_simple_new (self->sec_parent,
-	                                connection,
-	                                EAP_METHOD_SIMPLE_TYPE_GTC,
-	                                simple_flags);
-	gtk_list_store_append (auth_model, &iter);
-	gtk_list_store_set (auth_model, &iter,
-	                    I_NAME_COLUMN, _("GTC"),
-	                    I_METHOD_COLUMN, em_gtc,
-	                    -1);
-
-	/* Check for defaulting to GTC */
-	if (phase2_auth && !strcasecmp (phase2_auth, "gtc"))
-		active = 0;
-
-	em_mschap_v2 = eap_method_simple_new (self->sec_parent,
-	                                      connection,
-	                                      EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2,
-	                                      simple_flags);
-	gtk_list_store_append (auth_model, &iter);
-	gtk_list_store_set (auth_model, &iter,
-	                    I_NAME_COLUMN, _("MSCHAPv2"),
-	                    I_METHOD_COLUMN, em_mschap_v2,
-	                    -1);
-
-	/* Check for defaulting to MSCHAPv2 */
-	if (phase2_auth && !strcasecmp (phase2_auth, "mschapv2"))
-		active = 1;
-
-	gtk_combo_box_set_model (self->inner_auth_combo, GTK_TREE_MODEL (auth_model));
-	gtk_combo_box_set_active (self->inner_auth_combo, active);
-
-	g_signal_connect_swapped (self->inner_auth_combo, "changed", G_CALLBACK (inner_auth_combo_changed_cb), self);
 }
 
 static void
 update_secrets (EAPMethod *parent, NMConnection *connection)
 {
 	EAPMethodFAST *self = (EAPMethodFAST *) parent;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
 
-	model = gtk_combo_box_get_model (self->inner_auth_combo);
-	if (!gtk_tree_model_get_iter_first (model, &iter))
-		return;
-
-	do {
-		g_autoptr(EAPMethod) eap = NULL;
-
-		gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
-		eap_method_update_secrets (eap, connection);
-	} while (gtk_tree_model_iter_next (model, &iter));
+	eap_method_update_secrets (EAP_METHOD (self->em_gtc), connection);
+	eap_method_update_secrets (EAP_METHOD (self->em_mschap_v2), connection);
 }
 
 static GtkWidget *
@@ -324,10 +225,7 @@ eap_method_fast_init (EAPMethodFAST *self)
 static void
 eap_method_fast_class_init (EAPMethodFASTClass *klass)
 {
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-	object_class->dispose = eap_method_fast_dispose;
 
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/eap-method-fast.ui");
 
@@ -335,6 +233,7 @@ eap_method_fast_class_init (EAPMethodFASTClass *klass)
 	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, anon_identity_label);
 	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, inner_auth_combo);
 	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, inner_auth_label);
+	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, inner_auth_model);
 	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, inner_auth_box);
 	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, pac_file_button);
 	gtk_widget_class_bind_template_child (widget_class, EAPMethodFAST, pac_file_label);
@@ -364,6 +263,9 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 	NMSetting8021x *s_8021x = NULL;
 	const char *filename;
 	gboolean provisioning_enabled = TRUE;
+	EAPMethodSimpleFlags simple_flags;
+	const gchar *phase2_auth = NULL;
+	GtkTreeIter iter;
 
 	self = g_object_new (eap_method_fast_get_type (), NULL);
 	self->sec_parent = ws_parent;
@@ -418,7 +320,43 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (self->pac_file_button), filename);
 	}
 
-	inner_auth_combo_init (self, connection, s_8021x, secrets_only);
+	simple_flags = EAP_METHOD_SIMPLE_FLAG_PHASE2;
+	if (self->is_editor)
+		simple_flags |= EAP_METHOD_SIMPLE_FLAG_IS_EDITOR;
+	if (secrets_only)
+		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
+
+	self->em_gtc = eap_method_simple_new (self->sec_parent,
+	                                      connection,
+	                                      EAP_METHOD_SIMPLE_TYPE_GTC,
+	                                      simple_flags);
+	gtk_widget_show (GTK_WIDGET (self->em_gtc));
+
+	self->em_mschap_v2 = eap_method_simple_new (self->sec_parent,
+	                                            connection,
+	                                            EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2,
+	                                            simple_flags);
+	gtk_widget_show (GTK_WIDGET (self->em_mschap_v2));
+
+	if (s_8021x) {
+		if (nm_setting_802_1x_get_phase2_auth (s_8021x))
+			phase2_auth = nm_setting_802_1x_get_phase2_auth (s_8021x);
+		else if (nm_setting_802_1x_get_phase2_autheap (s_8021x))
+			phase2_auth = nm_setting_802_1x_get_phase2_autheap (s_8021x);
+	}
+	if (phase2_auth == NULL)
+		phase2_auth = "gtc";
+
+	if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->inner_auth_model), &iter)) {
+		do {
+			g_autofree gchar *id = NULL;
+			gtk_tree_model_get (GTK_TREE_MODEL (self->inner_auth_model), &iter, I_ID_COLUMN, &id, -1);
+			if (strcmp (id, phase2_auth) == 0)
+				gtk_combo_box_set_active_iter (self->inner_auth_combo, &iter);
+		} while (gtk_tree_model_iter_next (GTK_TREE_MODEL (self->inner_auth_model), &iter));
+	}
+
+	g_signal_connect_swapped (self->inner_auth_combo, "changed", G_CALLBACK (inner_auth_combo_changed_cb), self);
 	inner_auth_combo_changed_cb (self);
 
 	if (secrets_only) {
