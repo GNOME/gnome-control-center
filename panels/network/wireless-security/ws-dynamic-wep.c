@@ -118,6 +118,7 @@ auth_combo_changed_cb (WirelessSecurityDynamicWEP *self)
 	gtk_widget_unparent (GTK_WIDGET (eap));
 	if (self->size_group)
 		eap_method_add_to_size_group (eap, self->size_group);
+	gtk_widget_show (GTK_WIDGET (eap));
 	gtk_container_add (GTK_CONTAINER (self->method_box), g_object_ref (GTK_WIDGET (eap)));
 
 	/* Refocus the EAP method's default widget */
