@@ -91,10 +91,12 @@ validate (EAPMethod *method, GError **error)
 			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: %s"), ca_cert_error->message);
 			ret = FALSE;
 		}
-	} else if (eap_method_ca_cert_required (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check),
-	                                        GTK_FILE_CHOOSER (self->ca_cert_button))) {
-		widget_set_error (GTK_WIDGET (self->ca_cert_button));
-		if (ret) {
+	} else if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check))) {
+		g_autofree gchar *filename = NULL;
+
+		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
+		if (filename == NULL) {
+			widget_set_error (GTK_WIDGET (self->ca_cert_button));
 			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: no certificate specified"));
 			ret = FALSE;
 		}
