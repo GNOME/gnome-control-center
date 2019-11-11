@@ -22,9 +22,9 @@
 
 #include <glib/gi18n.h>
 
+#include "helpers.h"
 #include "wireless-security.h"
 #include "wireless-security-resources.h"
-#include "utils.h"
 
 typedef struct  {
 	char *username, *password;

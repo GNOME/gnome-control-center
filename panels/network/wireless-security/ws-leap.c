@@ -22,11 +22,11 @@
 
 #include <glib/gi18n.h>
 
-#include "ws-leap.h"
-#include "wireless-security.h"
 #include "helpers.h"
 #include "nma-ui-utils.h"
-#include "utils.h"
+#include "ui-helpers.h"
+#include "wireless-security.h"
+#include "ws-leap.h"
 
 struct _WirelessSecurityLEAP {
 	WirelessSecurity parent;

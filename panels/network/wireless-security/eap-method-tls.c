@@ -24,10 +24,10 @@
 
 #include "eap-method.h"
 #include "eap-method-tls.h"
-#include "wireless-security.h"
 #include "helpers.h"
 #include "nma-ui-utils.h"
-#include "utils.h"
+#include "ui-helpers.h"
+#include "wireless-security.h"
 
 struct _EAPMethodTLS {
 	GtkGrid parent;

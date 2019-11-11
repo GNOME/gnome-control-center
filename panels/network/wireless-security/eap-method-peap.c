@@ -25,8 +25,9 @@
 #include "eap-method.h"
 #include "eap-method-peap.h"
 #include "eap-method-simple.h"
+#include "helpers.h"
+#include "ui-helpers.h"
 #include "wireless-security.h"
-#include "utils.h"
 
 #define I_NAME_COLUMN 0
 #define I_ID_COLUMN   1

@@ -26,6 +26,12 @@
 #include <NetworkManager.h>
 #include <gtk/gtk.h>
 
+#define NMA_ERROR (g_quark_from_static_string ("nma-error-quark"))
+
+typedef enum  {
+	NMA_ERROR_GENERIC
+} NMAError;
+
 typedef const char * (*HelperSecretFunc)(NMSetting *);
 
 void helper_fill_secret_entry (NMConnection *connection,
