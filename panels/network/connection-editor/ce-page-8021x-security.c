@@ -139,7 +139,7 @@ ce_page_8021x_security_validate (CEPage *cepage, NMConnection *connection, GErro
 			s_con = nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
 			nm_connection_add_setting (tmp_connection, nm_setting_duplicate (s_con));
 
-			ws_802_1x_fill_connection (ws_wpa_eap_get_auth_combo (self->security), tmp_connection);
+			ws_wpa_eap_fill_connection (self->security, tmp_connection);
 
 			s_8021x = nm_connection_get_setting (tmp_connection, NM_TYPE_SETTING_802_1X);
 			nm_connection_add_setting (connection, NM_SETTING (g_object_ref (s_8021x)));

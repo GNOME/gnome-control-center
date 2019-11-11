@@ -186,8 +186,8 @@ ws_wpa_eap_new (NMConnection *connection,
 	return self;
 }
 
-GtkComboBox *
-ws_wpa_eap_get_auth_combo (WirelessSecurityWPAEAP *self)
+void
+ws_wpa_eap_fill_connection (WirelessSecurityWPAEAP *self, NMConnection *connection)
 {
-        return self->auth_combo;
+        ws_802_1x_fill_connection (self->auth_combo, connection);
 }
