@@ -42,7 +42,6 @@ struct _WirelessSecurityDynamicWEP {
 	GtkGrid      *grid;
 	GtkBox       *method_box;
 
-	EAPMethodSimple *em_md5;
 	EAPMethodTLS    *em_tls;
 	EAPMethodLEAP   *em_leap;
 	EAPMethodSimple *em_pwd;
@@ -66,8 +65,6 @@ get_eap (WirelessSecurityDynamicWEP *self)
 		return NULL;
 	gtk_tree_model_get (GTK_TREE_MODEL (self->auth_model), &iter, AUTH_ID_COLUMN, &id, -1);
 
-	if (strcmp (id, "md5") == 0)
-		return EAP_METHOD (self->em_md5);
 	if (strcmp (id, "tls") == 0)
 		return EAP_METHOD (self->em_tls);
 	if (strcmp (id, "leap") == 0)
@@ -114,7 +111,6 @@ add_to_size_group (WirelessSecurity *security, GtkSizeGroup *group)
 	WirelessSecurityDynamicWEP *self = WS_DYNAMIC_WEP (security);
 
 	gtk_size_group_add_widget (group, GTK_WIDGET (self->auth_label));
-	eap_method_add_to_size_group (EAP_METHOD (self->em_md5), group);
 	eap_method_add_to_size_group (EAP_METHOD (self->em_tls), group);
 	eap_method_add_to_size_group (EAP_METHOD (self->em_leap), group);
 	eap_method_add_to_size_group (EAP_METHOD (self->em_pwd), group);
@@ -211,8 +207,7 @@ ws_dynamic_wep_new (NMConnection *connection,
 	WirelessSecurityDynamicWEP *self;
 	const gchar *user = NULL, *password = NULL;
 	gboolean always_ask = FALSE;
-	const gchar *remove_method, *default_method = NULL;
-	gboolean wired = FALSE;
+	const gchar *default_method = NULL;
 	EAPMethodSimpleFlags simple_flags = EAP_METHOD_SIMPLE_FLAG_NONE;
 	GtkTreeIter iter;
 	g_autoptr(GError) error = NULL;
@@ -233,31 +228,14 @@ ws_dynamic_wep_new (NMConnection *connection,
 
 	/* Grab the default EAP method out of the security object */
 	if (connection) {
-		NMSettingConnection *s_con;
 		NMSetting8021x *s_8021x;
-		const gchar *ctype = NULL;
-
-		s_con = nm_connection_get_setting_connection (connection);
-		if (s_con)
-			ctype = nm_setting_connection_get_connection_type (s_con);
-		if ((g_strcmp0 (ctype, NM_SETTING_WIRED_SETTING_NAME) == 0)
-		    || nm_connection_get_setting_wired (connection))
-			wired = TRUE;
 
 		s_8021x = nm_connection_get_setting_802_1x (connection);
 		if (s_8021x && nm_setting_802_1x_get_num_eap_methods (s_8021x))
 			default_method = nm_setting_802_1x_get_eap_method (s_8021x, 0);
 	}
-	if (wired)
-		remove_method = "leap";
-	else
-		remove_method = "md5";
-	if (default_method == NULL) {
-		if (wired)
-			default_method = "md5";
-		else
-			default_method = "tls";
-	}
+	if (default_method == NULL)
+		default_method = "tls";
 
 	/* initialize WirelessSecurity userpass from connection (clear if no connection) */
 	if (connection) {
@@ -284,8 +262,6 @@ ws_dynamic_wep_new (NMConnection *connection,
 	if (secrets_only)
 		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
 
-	self->em_md5 = eap_method_simple_new (WIRELESS_SECURITY (self), connection, EAP_METHOD_SIMPLE_TYPE_MD5, simple_flags);
-	gtk_widget_show (GTK_WIDGET (self->em_md5));
 	self->em_tls = eap_method_tls_new (WIRELESS_SECURITY (self), connection, FALSE, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_tls));
 	self->em_leap = eap_method_leap_new (WIRELESS_SECURITY (self), connection, secrets_only);
@@ -299,16 +275,6 @@ ws_dynamic_wep_new (NMConnection *connection,
 	self->em_peap = eap_method_peap_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_peap));
 
-	if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->auth_model), &iter)) {
-		do {
-			g_autofree gchar *id = NULL;
-			gtk_tree_model_get (GTK_TREE_MODEL (self->auth_model), &iter, AUTH_ID_COLUMN, &id, -1);
-			if (strcmp (id, remove_method) == 0) {
-				gtk_list_store_remove (self->auth_model, &iter);
-				break;
-			}
-		} while (gtk_tree_model_iter_next (GTK_TREE_MODEL (self->auth_model), &iter));
-	}
 	if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->auth_model), &iter)) {
 		do {
 			g_autofree gchar *id = NULL;
