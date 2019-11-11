@@ -27,7 +27,7 @@
               <object class="GtkSearchEntry" id="search_entry">
                 <property name="visible">True</property>
                 <property name="width_chars">30</property>
-                <signal name="notify::text" handler="gtk_list_box_invalidate_filter" object="listbox" swapped="yes" />
+                <signal name="notify::text" handler="gtk_list_box_invalidate_filter" object="shortcuts_listbox" swapped="yes" />
               </object>
             </child>
           </object>
@@ -58,7 +58,38 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkListBox" id="listbox">
+                      <object class="GtkListBox" id="alternate_chars_listbox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="selection-mode">none</property>
+                        <property name="width-request">250</property>
+                        <signal name="row-activated" handler="alternate_chars_activated" object="CcKeyboardPanel" swapped="no" />
+                        <child>
+                          <object class="HdyActionRow">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="use-underline">true</property>
+                            <property name="title" translatable="yes">Alternate Characters Key</property>
+                            <property name="subtitle" translatable="yes">Hold down and type to enter different characters</property>
+                            <child type="action">
+                              <object class="GtkLabel" id="value_alternate_chars">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="label" translatable="no">Right Alt</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkFrame">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkListBox" id="shortcuts_listbox">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="selection-mode">none</property>
