@@ -20,10 +20,7 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#include "nm-default.h"
-
-#include <ctype.h>
-#include <string.h>
+#include <glib/gi18n.h>
 
 #include "eap-method.h"
 #include "eap-method-fast.h"
