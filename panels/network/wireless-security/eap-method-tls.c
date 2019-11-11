@@ -47,7 +47,6 @@ struct _EAPMethodTLS {
 
 	gboolean phase2;
 	const gchar *password_flags_name;
-	WirelessSecurity *sec_parent;
 	gboolean editing_connection;
 };
 
@@ -134,7 +133,7 @@ ca_cert_not_required_toggled (EAPMethodTLS *self)
 {
 	eap_method_ca_cert_not_required_toggled (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check),
 	                                         GTK_FILE_CHOOSER (self->ca_cert_button));
-	wireless_security_notify_changed (self->sec_parent);
+	eap_method_emit_changed (EAP_METHOD (self));
 }
 
 static void
@@ -310,7 +309,7 @@ typedef NMSetting8021xCKScheme (*SchemeFunc)  (NMSetting8021x *setting);
 static void
 changed_cb (EAPMethodTLS *self)
 {
-	wireless_security_notify_changed (self->sec_parent);
+	eap_method_emit_changed (EAP_METHOD (self));
 }
 
 static void
@@ -472,7 +471,6 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	self->password_flags_name = phase2 ?
 	                            NM_SETTING_802_1X_PHASE2_PRIVATE_KEY_PASSWORD :
 	                            NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD;
-	self->sec_parent = ws_parent;
 	self->editing_connection = secrets_only ? FALSE : TRUE;
 
 	if (connection)
