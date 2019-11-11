@@ -96,13 +96,11 @@ update_active_radio (CcAltCharsKeyDialog *self)
       if (!radio)
         continue;
 
-      g_message ("Found radio for %s", options[i]);
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
       return;
     }
 
   /* Fallback to Right Alt as default */
-  g_message ("Using fallback");
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->rightalt_radio), TRUE);
 }
 
