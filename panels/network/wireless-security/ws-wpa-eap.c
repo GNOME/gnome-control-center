@@ -35,33 +35,53 @@
 struct _WirelessSecurityWPAEAP {
 	WirelessSecurity parent;
 
-	GtkBuilder  *builder;
-	GtkComboBox *auth_combo;
-	GtkLabel    *auth_label;
-	GtkGrid     *grid;
-	GtkBox      *method_box;
+	GtkBuilder   *builder;
+	GtkComboBox  *auth_combo;
+	GtkLabel     *auth_label;
+	GtkListStore *auth_model;
+	GtkGrid      *grid;
+	GtkBox       *method_box;
 
-	GtkSizeGroup *size_group;
+	EAPMethodSimple *em_md5;
+	EAPMethodTLS    *em_tls;
+	EAPMethodLEAP   *em_leap;
+	EAPMethodSimple *em_pwd;
+	EAPMethodFAST   *em_fast;
+	EAPMethodTTLS   *em_ttls;
+	EAPMethodPEAP   *em_peap;
 };
 
 G_DEFINE_TYPE (WirelessSecurityWPAEAP, ws_wpa_eap, wireless_security_get_type ())
 
-#define AUTH_NAME_COLUMN   0
-#define AUTH_METHOD_COLUMN 1
+#define AUTH_NAME_COLUMN    0
+#define AUTH_ID_COLUMN      1
 
 static EAPMethod *
 get_eap (WirelessSecurityWPAEAP *self)
 {
-	GtkTreeModel *model;
 	GtkTreeIter iter;
-	g_autoptr(EAPMethod) eap = NULL;
+	g_autofree gchar *id = NULL;
 
-	model = gtk_combo_box_get_model (self->auth_combo);
 	if (!gtk_combo_box_get_active_iter (self->auth_combo, &iter))
 		return NULL;
+	gtk_tree_model_get (GTK_TREE_MODEL (self->auth_model), &iter, AUTH_ID_COLUMN, &id, -1);
 
-	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
-	return eap;
+	if (strcmp (id, "md5") == 0)
+		return EAP_METHOD (self->em_md5);
+	if (strcmp (id, "tls") == 0)
+		return EAP_METHOD (self->em_tls);
+	if (strcmp (id, "leap") == 0)
+		return EAP_METHOD (self->em_leap);
+	if (strcmp (id, "pwd") == 0)
+		return EAP_METHOD (self->em_pwd);
+	if (strcmp (id, "fast") == 0)
+		return EAP_METHOD (self->em_fast);
+	if (strcmp (id, "ttls") == 0)
+		return EAP_METHOD (self->em_ttls);
+	if (strcmp (id, "peap") == 0)
+		return EAP_METHOD (self->em_peap);
+
+	return NULL;
 }
 
 static void
@@ -70,7 +90,6 @@ ws_wpa_eap_dispose (GObject *object)
 	WirelessSecurityWPAEAP *self = WS_WPA_EAP (object);
 
 	g_clear_object (&self->builder);
-	g_clear_object (&self->size_group);
 
 	G_OBJECT_CLASS (ws_wpa_eap_parent_class)->dispose (object);
 }
@@ -94,11 +113,14 @@ add_to_size_group (WirelessSecurity *security, GtkSizeGroup *group)
 {
 	WirelessSecurityWPAEAP *self = WS_WPA_EAP (security);
 
-	g_clear_object (&self->size_group);
-	self->size_group = g_object_ref (group);
-
-	gtk_size_group_add_widget (self->size_group, GTK_WIDGET (self->auth_label));
-	eap_method_add_to_size_group (get_eap (self), self->size_group);
+	gtk_size_group_add_widget (group, GTK_WIDGET (self->auth_label));
+	eap_method_add_to_size_group (EAP_METHOD (self->em_md5), group);
+	eap_method_add_to_size_group (EAP_METHOD (self->em_tls), group);
+	eap_method_add_to_size_group (EAP_METHOD (self->em_leap), group);
+	eap_method_add_to_size_group (EAP_METHOD (self->em_pwd), group);
+	eap_method_add_to_size_group (EAP_METHOD (self->em_fast), group);
+	eap_method_add_to_size_group (EAP_METHOD (self->em_ttls), group);
+	eap_method_add_to_size_group (EAP_METHOD (self->em_peap), group);
 }
 
 static void
@@ -127,7 +149,7 @@ ws_802_1x_fill_connection (WirelessSecurityWPAEAP *self, NMConnection *connectio
 	s_8021x = (NMSetting8021x *) nm_setting_802_1x_new ();
 	nm_connection_add_setting (connection, (NMSetting *) s_8021x);
 
-	eap_method_fill_connection (eap, connection, secret_flags);  
+	eap_method_fill_connection (eap, connection, secret_flags);
 }
 
 static void
@@ -163,12 +185,6 @@ auth_combo_changed_cb (WirelessSecurityWPAEAP *self)
 		gtk_container_remove (GTK_CONTAINER (self->method_box), GTK_WIDGET (elt->data));
 
 	eap = get_eap (self);
-	g_assert (eap);
-
-	gtk_widget_unparent (GTK_WIDGET (eap));
-	if (self->size_group)
-		eap_method_add_to_size_group (eap, self->size_group);
-	gtk_widget_show (GTK_WIDGET (eap));
 	gtk_container_add (GTK_CONTAINER (self->method_box), g_object_ref (GTK_WIDGET (eap)));
 
 	/* Refocus the EAP method's default widget */
@@ -206,17 +222,10 @@ ws_wpa_eap_new (NMConnection *connection,
 	WirelessSecurityWPAEAP *self;
 	const gchar *user = NULL, *password = NULL;
 	gboolean always_ask = FALSE;
-	g_autoptr(GtkListStore) auth_model = NULL;
-	GtkTreeIter iter;
-	g_autoptr(EAPMethodTLS) em_tls = NULL;
-	g_autoptr(EAPMethodSimple) em_pwd = NULL;
-	g_autoptr(EAPMethodFAST) em_fast = NULL;
-	g_autoptr(EAPMethodTTLS) em_ttls = NULL;
-	g_autoptr(EAPMethodPEAP) em_peap = NULL;
-	const char *default_method = NULL, *ctype = NULL;
-	int active = -1, item = 0;
+	const gchar *remove_method, *default_method = NULL;
 	gboolean wired = FALSE;
 	EAPMethodSimpleFlags simple_flags = EAP_METHOD_SIMPLE_FLAG_NONE;
+	GtkTreeIter iter;
 	g_autoptr(GError) error = NULL;
 
 	self = g_object_new (ws_wpa_eap_get_type (), NULL);
@@ -229,6 +238,7 @@ ws_wpa_eap_new (NMConnection *connection,
 
 	self->auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "auth_combo"));
 	self->auth_label = GTK_LABEL (gtk_builder_get_object (self->builder, "auth_label"));
+	self->auth_model = GTK_LIST_STORE (gtk_builder_get_object (self->builder, "auth_model"));
 	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
 	self->method_box = GTK_BOX (gtk_builder_get_object (self->builder, "method_box"));
 
@@ -236,17 +246,28 @@ ws_wpa_eap_new (NMConnection *connection,
 	if (connection) {
 		NMSettingConnection *s_con;
 		NMSetting8021x *s_8021x;
+		const char *ctype = NULL;
 
 		s_con = nm_connection_get_setting_connection (connection);
 		if (s_con)
 			ctype = nm_setting_connection_get_connection_type (s_con);
-		if (   (g_strcmp0 (ctype, NM_SETTING_WIRED_SETTING_NAME) == 0)
+		if ((g_strcmp0 (ctype, NM_SETTING_WIRED_SETTING_NAME) == 0)
 		    || nm_connection_get_setting_wired (connection))
 			wired = TRUE;
 
 		s_8021x = nm_connection_get_setting_802_1x (connection);
 		if (s_8021x && nm_setting_802_1x_get_num_eap_methods (s_8021x))
 			default_method = nm_setting_802_1x_get_eap_method (s_8021x, 0);
+	}
+	if (wired)
+		remove_method = "leap";
+	else
+		remove_method = "md5";
+	if (default_method == NULL) {
+		if (wired)
+			default_method = "md5";
+		else
+			default_method = "tls";
 	}
 
 	/* initialize WirelessSecurity userpass from connection (clear if no connection) */
@@ -269,93 +290,44 @@ ws_wpa_eap_new (NMConnection *connection,
 	wireless_security_set_always_ask (WIRELESS_SECURITY (self), always_ask);
 	wireless_security_set_show_password (WIRELESS_SECURITY (self), FALSE);
 
-	auth_model = gtk_list_store_new (2, G_TYPE_STRING, eap_method_get_type ());
-
 	if (is_editor)
 		simple_flags |= EAP_METHOD_SIMPLE_FLAG_IS_EDITOR;
 	if (secrets_only)
 		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
 
-	if (wired) {
-		g_autoptr(EAPMethodSimple) em_md5 = NULL;
+	self->em_md5 = eap_method_simple_new (WIRELESS_SECURITY (self), connection, EAP_METHOD_SIMPLE_TYPE_MD5, simple_flags);
+	gtk_widget_show (GTK_WIDGET (self->em_md5));
+	self->em_tls = eap_method_tls_new (WIRELESS_SECURITY (self), connection, FALSE, secrets_only);
+	gtk_widget_show (GTK_WIDGET (self->em_tls));
+	self->em_leap = eap_method_leap_new (WIRELESS_SECURITY (self), connection, secrets_only);
+	gtk_widget_show (GTK_WIDGET (self->em_leap));
+	self->em_pwd = eap_method_simple_new (WIRELESS_SECURITY (self), connection, EAP_METHOD_SIMPLE_TYPE_PWD, simple_flags);
+	gtk_widget_show (GTK_WIDGET (self->em_pwd));
+	self->em_fast = eap_method_fast_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
+	gtk_widget_show (GTK_WIDGET (self->em_fast));
+	self->em_ttls = eap_method_ttls_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
+	gtk_widget_show (GTK_WIDGET (self->em_ttls));
+	self->em_peap = eap_method_peap_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
+	gtk_widget_show (GTK_WIDGET (self->em_peap));
 
-		em_md5 = eap_method_simple_new (WIRELESS_SECURITY (self), connection, EAP_METHOD_SIMPLE_TYPE_MD5, simple_flags);
-		gtk_list_store_append (auth_model, &iter);
-		gtk_list_store_set (auth_model, &iter,
-			                AUTH_NAME_COLUMN, _("MD5"),
-			                AUTH_METHOD_COLUMN, em_md5,
-			                -1);
-		if (default_method && (active < 0) && !strcmp (default_method, "md5"))
-			active = item;
-		item++;
+	if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->auth_model), &iter)) {
+		do {
+			g_autofree gchar *id = NULL;
+			gtk_tree_model_get (GTK_TREE_MODEL (self->auth_model), &iter, AUTH_ID_COLUMN, &id, -1);
+			if (strcmp (id, remove_method) == 0) {
+				gtk_list_store_remove (self->auth_model, &iter);
+				break;
+			}
+		} while (gtk_tree_model_iter_next (GTK_TREE_MODEL (self->auth_model), &iter));
+	}  
+	if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->auth_model), &iter)) {
+		do {
+			g_autofree gchar *id = NULL;
+			gtk_tree_model_get (GTK_TREE_MODEL (self->auth_model), &iter, AUTH_ID_COLUMN, &id, -1);
+			if (strcmp (id, default_method) == 0)
+				gtk_combo_box_set_active_iter (self->auth_combo, &iter);
+		} while (gtk_tree_model_iter_next (GTK_TREE_MODEL (self->auth_model), &iter));
 	}
-
-	em_tls = eap_method_tls_new (WIRELESS_SECURITY (self), connection, FALSE, secrets_only);
-	gtk_list_store_append (auth_model, &iter);
-	gtk_list_store_set (auth_model, &iter,
-	                    AUTH_NAME_COLUMN, _("TLS"),
-	                    AUTH_METHOD_COLUMN, em_tls,
-	                    -1);
-	if (default_method && (active < 0) && !strcmp (default_method, "tls"))
-		active = item;
-	item++;
-
-	if (!wired) {
-		g_autoptr(EAPMethodLEAP) em_leap = NULL;
-
-		em_leap = eap_method_leap_new (WIRELESS_SECURITY (self), connection, secrets_only);
-		gtk_list_store_append (auth_model, &iter);
-		gtk_list_store_set (auth_model, &iter,
-		                    AUTH_NAME_COLUMN, _("LEAP"),
-		                    AUTH_METHOD_COLUMN, em_leap,
-		                    -1);
-		if (default_method && (active < 0) && !strcmp (default_method, "leap"))
-			active = item;
-		item++;
-	}
-
-	em_pwd = eap_method_simple_new (WIRELESS_SECURITY (self), connection, EAP_METHOD_SIMPLE_TYPE_PWD, simple_flags);
-	gtk_list_store_append (auth_model, &iter);
-	gtk_list_store_set (auth_model, &iter,
-	                    AUTH_NAME_COLUMN, _("PWD"),
-	                    AUTH_METHOD_COLUMN, em_pwd,
-	                    -1);
-	if (default_method && (active < 0) && !strcmp (default_method, "pwd"))
-		active = item;
-	item++;
-
-	em_fast = eap_method_fast_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
-	gtk_list_store_append (auth_model, &iter);
-	gtk_list_store_set (auth_model, &iter,
-	                    AUTH_NAME_COLUMN, _("FAST"),
-	                    AUTH_METHOD_COLUMN, em_fast,
-	                    -1);
-	if (default_method && (active < 0) && !strcmp (default_method, "fast"))
-		active = item;
-	item++;
-
-	em_ttls = eap_method_ttls_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
-	gtk_list_store_append (auth_model, &iter);
-	gtk_list_store_set (auth_model, &iter,
-	                    AUTH_NAME_COLUMN, _("Tunneled TLS"),
-	                    AUTH_METHOD_COLUMN, em_ttls,
-	                    -1);
-	if (default_method && (active < 0) && !strcmp (default_method, "ttls"))
-		active = item;
-	item++;
-
-	em_peap = eap_method_peap_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
-	gtk_list_store_append (auth_model, &iter);
-	gtk_list_store_set (auth_model, &iter,
-	                    AUTH_NAME_COLUMN, _("Protected EAP (PEAP)"),
-	                    AUTH_METHOD_COLUMN, em_peap,
-	                    -1);
-	if (default_method && (active < 0) && !strcmp (default_method, "peap"))
-		active = item;
-	item++;
-
-	gtk_combo_box_set_model (self->auth_combo, GTK_TREE_MODEL (auth_model));
-	gtk_combo_box_set_active (self->auth_combo, active < 0 ? 0 : (guint32) active);
 
 	if (secrets_only) {
 		gtk_widget_hide (GTK_WIDGET (self->auth_combo));
