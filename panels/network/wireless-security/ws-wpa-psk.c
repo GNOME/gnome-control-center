@@ -23,11 +23,11 @@
 #include <ctype.h>
 #include <glib/gi18n.h>
 
-#include "ws-wpa-psk.h"
-#include "wireless-security.h"
 #include "helpers.h"
 #include "nma-ui-utils.h"
-#include "utils.h"
+#include "ui-helpers.h"
+#include "ws-wpa-psk.h"
+#include "wireless-security.h"
 
 #define WPA_PMK_LEN 32
 

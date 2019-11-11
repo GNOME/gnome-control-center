@@ -3,6 +3,8 @@ deps = common_deps + network_manager_deps + [
   dependency('gmodule-2.0')
 ]
 
+network_inc = include_directories('.')
+
 subdir('wireless-security')
 subdir('connection-editor')
 
@@ -46,7 +48,8 @@ sources = files(
   'net-proxy.c',
   'net-vpn.c',
   'network-dialogs.c',
-  'panel-common.c'
+  'panel-common.c',
+  'ui-helpers.c'
 )
 
 resource_data = files(
