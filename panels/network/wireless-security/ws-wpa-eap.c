@@ -297,18 +297,25 @@ ws_wpa_eap_new (NMConnection *connection,
 
 	self->em_md5 = eap_method_simple_new (WIRELESS_SECURITY (self), connection, EAP_METHOD_SIMPLE_TYPE_MD5, simple_flags);
 	gtk_widget_show (GTK_WIDGET (self->em_md5));
+	g_signal_connect_object (self->em_md5, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 	self->em_tls = eap_method_tls_new (WIRELESS_SECURITY (self), connection, FALSE, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_tls));
+	g_signal_connect_object (self->em_tls, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 	self->em_leap = eap_method_leap_new (WIRELESS_SECURITY (self), connection, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_leap));
+	g_signal_connect_object (self->em_leap, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 	self->em_pwd = eap_method_simple_new (WIRELESS_SECURITY (self), connection, EAP_METHOD_SIMPLE_TYPE_PWD, simple_flags);
 	gtk_widget_show (GTK_WIDGET (self->em_pwd));
+	g_signal_connect_object (self->em_pwd, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 	self->em_fast = eap_method_fast_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_fast));
+	g_signal_connect_object (self->em_fast, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 	self->em_ttls = eap_method_ttls_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_ttls));
+	g_signal_connect_object (self->em_ttls, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 	self->em_peap = eap_method_peap_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_peap));
+	g_signal_connect_object (self->em_peap, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 
 	if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->auth_model), &iter)) {
 		do {

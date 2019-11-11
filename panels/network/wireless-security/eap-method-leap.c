@@ -189,7 +189,7 @@ eap_method_leap_dispose (GObject *object)
 static void
 changed_cb (EAPMethodLEAP *self)
 {
-	wireless_security_notify_changed (self->ws_parent);
+	eap_method_emit_changed (EAP_METHOD (self));
 }
 
 static void

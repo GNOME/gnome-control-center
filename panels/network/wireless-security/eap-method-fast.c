@@ -49,7 +49,6 @@ struct _EAPMethodFAST {
 	EAPMethodSimple      *em_gtc;
 	EAPMethodSimple      *em_mschap_v2;
 
-	WirelessSecurity *sec_parent;
 	gboolean is_editor;
 };
 
@@ -171,7 +170,7 @@ inner_auth_combo_changed_cb (EAPMethodFAST *self)
 	inner_method = get_inner_method (self);
 	gtk_container_add (GTK_CONTAINER (self->inner_auth_box), g_object_ref (GTK_WIDGET (inner_method)));
 
-	wireless_security_notify_changed (self->sec_parent);
+	eap_method_emit_changed (EAP_METHOD (self));
 }
 
 static void
@@ -204,13 +203,13 @@ pac_toggled_cb (EAPMethodFAST *self)
 	enabled = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->pac_provision_check));
 	gtk_widget_set_sensitive (GTK_WIDGET (self->pac_provision_combo), enabled);
 
-	wireless_security_notify_changed (self->sec_parent);
+	eap_method_emit_changed (EAP_METHOD (self));
 }
 
 static void
 changed_cb (EAPMethodFAST *self)
 {
-	wireless_security_notify_changed (self->sec_parent);
+	eap_method_emit_changed (EAP_METHOD (self));
 }
 
 static void
@@ -265,7 +264,6 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 	GtkTreeIter iter;
 
 	self = g_object_new (eap_method_fast_get_type (), NULL);
-	self->sec_parent = ws_parent;
 	self->is_editor = is_editor;
 
 	if (connection)
@@ -323,17 +321,19 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 	if (secrets_only)
 		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
 
-	self->em_gtc = eap_method_simple_new (self->sec_parent,
+	self->em_gtc = eap_method_simple_new (ws_parent,
 	                                      connection,
 	                                      EAP_METHOD_SIMPLE_TYPE_GTC,
 	                                      simple_flags);
 	gtk_widget_show (GTK_WIDGET (self->em_gtc));
+	g_signal_connect_object (self->em_gtc, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
-	self->em_mschap_v2 = eap_method_simple_new (self->sec_parent,
+	self->em_mschap_v2 = eap_method_simple_new (ws_parent,
 	                                            connection,
 	                                            EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2,
 	                                            simple_flags);
 	gtk_widget_show (GTK_WIDGET (self->em_mschap_v2));
+	g_signal_connect_object (self->em_mschap_v2, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
 	if (s_8021x) {
 		if (nm_setting_802_1x_get_phase2_auth (s_8021x))

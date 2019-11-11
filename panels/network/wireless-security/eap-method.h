@@ -57,6 +57,8 @@ void eap_method_fill_connection (EAPMethod *method,
                                  NMConnection *connection,
                                  NMSettingSecretFlags flags);
 
+void eap_method_emit_changed (EAPMethod *method);
+
 /* Below for internal use only */
 
 GtkFileFilter * eap_method_default_file_chooser_filter_new (gboolean privkey);
