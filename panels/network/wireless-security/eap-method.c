@@ -30,9 +30,24 @@
 
 G_DEFINE_INTERFACE (EAPMethod, eap_method, G_TYPE_OBJECT)
 
+enum {
+        CHANGED,
+        LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = { 0 };
+
 static void
 eap_method_default_init (EAPMethodInterface *iface)
 {
+        signals[CHANGED] =
+                g_signal_new ("changed",
+                              G_TYPE_FROM_INTERFACE (iface),
+                              G_SIGNAL_RUN_FIRST,
+                              0,
+                              NULL, NULL,
+                              g_cclosure_marshal_VOID__VOID,
+                              G_TYPE_NONE, 0);
 }
 
 GtkWidget *
@@ -105,6 +120,14 @@ eap_method_fill_connection (EAPMethod *self,
 	g_return_if_fail (connection != NULL);
 
 	return (*(EAP_METHOD_GET_IFACE (self)->fill_connection)) (self, connection, flags);
+}
+
+void
+eap_method_emit_changed (EAPMethod *self)
+{
+        g_return_if_fail (EAP_IS_METHOD (self));
+
+        g_signal_emit (self, signals[CHANGED], 0);
 }
 
 gboolean

@@ -215,7 +215,7 @@ get_phase2 (EAPMethod *method)
 static gboolean
 stuff_changed (EAPMethodSimple *self)
 {
-	wireless_security_notify_changed (self->ws_parent);
+	eap_method_emit_changed (EAP_METHOD (self));
 	self->idle_func_id = 0;
 	return FALSE;
 }
@@ -296,7 +296,7 @@ eap_method_simple_dispose (GObject *object)
 static void
 changed_cb (EAPMethodSimple *self)
 {
-	wireless_security_notify_changed (self->ws_parent);
+	eap_method_emit_changed (EAP_METHOD (self));
 }
 
 static void
