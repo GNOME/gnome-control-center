@@ -30,9 +30,9 @@
 #include <libmm-glib.h>
 
 #include "list-box-helper.h"
-#include "connection-editor/ui-helpers.h"
 #include "cc-wifi-hotspot-dialog.h"
 #include "cc-network-resources.h"
+#include "ui-helpers.h"
 
 /**
  * @short_description: WWAN network type selection dialog

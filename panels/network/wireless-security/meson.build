@@ -63,6 +63,6 @@ sources += gnome.compile_resources(
 libwireless_security = static_library(
   name,
   sources: sources,
-  include_directories: top_inc,
+  include_directories: [top_inc, network_inc],
   dependencies: deps
 )

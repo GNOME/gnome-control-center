@@ -25,8 +25,8 @@
 #include <glib/gi18n.h>
 
 #include "eap-method.h"
-#include "utils.h"
 #include "helpers.h"
+#include "ui-helpers.h"
 
 G_DEFINE_INTERFACE (EAPMethod, eap_method, G_TYPE_OBJECT)
 
