@@ -72,17 +72,4 @@ void wireless_security_notify_changed (WirelessSecurity *sec);
 
 void wireless_security_clear_ciphers (NMConnection *connection);
 
-void ws_802_1x_auth_combo_init (WirelessSecurity *sec,
-                                GtkComboBox *combo,
-                                NMConnection *connection,
-                                gboolean is_editor,
-                                gboolean secrets_only);
-
-#include "eap-method.h"
-
-EAPMethod *ws_802_1x_auth_combo_get_eap (GtkComboBox *combo);
-
-void ws_802_1x_fill_connection (GtkComboBox *combo,
-                                NMConnection *connection);
-
 G_END_DECLS
