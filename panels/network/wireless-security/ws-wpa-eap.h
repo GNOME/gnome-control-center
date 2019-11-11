@@ -30,10 +30,11 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (WirelessSecurityWPAEAP, ws_wpa_eap, WS, WPA_EAP, WirelessSecurity)
 
-WirelessSecurityWPAEAP *ws_wpa_eap_new            (NMConnection *connection,
-                                                   gboolean is_editor,
-                                                   gboolean secrets_only);
+WirelessSecurityWPAEAP *ws_wpa_eap_new             (NMConnection *connection,
+                                                    gboolean is_editor,
+                                                    gboolean secrets_only);
 
-GtkComboBox            *ws_wpa_eap_get_auth_combo (WirelessSecurityWPAEAP *sec);
+void                    ws_wpa_eap_fill_connection (WirelessSecurityWPAEAP *sec,
+                                                    NMConnection *connection);
 
 G_END_DECLS
