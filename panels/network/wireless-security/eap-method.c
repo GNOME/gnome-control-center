@@ -21,13 +21,8 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#include "nm-default.h"
-
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
-#include <unistd.h>
+#include <glib/gi18n.h>
 
 #include "eap-method.h"
 #include "utils.h"

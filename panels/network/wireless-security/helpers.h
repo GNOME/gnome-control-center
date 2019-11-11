@@ -23,6 +23,9 @@
 #ifndef _HELPERS_H_
 #define _HELPERS_H_
 
+#include <NetworkManager.h>
+#include <gtk/gtk.h>
+
 typedef const char * (*HelperSecretFunc)(NMSetting *);
 
 void helper_fill_secret_entry (NMConnection *connection,

@@ -23,6 +23,7 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#include <NetworkManager.h>
 
 G_BEGIN_DECLS
 

@@ -20,10 +20,7 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#include "nm-default.h"
-
-#include <ctype.h>
-#include <string.h>
+#include <glib/gi18n.h>
 
 #include "eap-method.h"
 #include "eap-method-simple.h"
@@ -288,7 +285,10 @@ eap_method_simple_dispose (GObject *object)
 	g_signal_handlers_disconnect_by_data (self->password_entry, self);
 	g_signal_handlers_disconnect_by_data (self->show_password_check, self);
 
-	nm_clear_g_source (&self->idle_func_id);
+	if (self->idle_func_id != 0) {
+		g_source_remove (self->idle_func_id);
+		self->idle_func_id = 0;
+	}
 
 	G_OBJECT_CLASS (eap_method_simple_parent_class)->dispose (object);
 }
