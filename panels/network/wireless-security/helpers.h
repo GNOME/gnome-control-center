@@ -30,5 +30,7 @@ void helper_fill_secret_entry (NMConnection *connection,
                                GType setting_type,
                                HelperSecretFunc func);
 
+void wireless_security_clear_ciphers (NMConnection *connection);
+
 #endif  /* _HELPERS_H_ */
 

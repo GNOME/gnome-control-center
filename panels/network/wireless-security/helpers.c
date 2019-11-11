@@ -46,3 +46,17 @@ helper_fill_secret_entry (NMConnection *connection,
 	}
 }
 
+void
+wireless_security_clear_ciphers (NMConnection *connection)
+{
+	NMSettingWirelessSecurity *s_wireless_sec;
+
+	g_return_if_fail (connection != NULL);
+
+	s_wireless_sec = nm_connection_get_setting_wireless_security (connection);
+	g_assert (s_wireless_sec);
+
+	nm_setting_wireless_security_clear_protos (s_wireless_sec);
+	nm_setting_wireless_security_clear_pairwise (s_wireless_sec);
+	nm_setting_wireless_security_clear_groups (s_wireless_sec);
+}

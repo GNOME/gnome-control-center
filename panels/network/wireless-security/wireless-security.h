@@ -66,10 +66,6 @@ void wireless_security_set_show_password (WirelessSecurity *sec, gboolean show_p
 
 gboolean wireless_security_get_show_password (WirelessSecurity *sec);
 
-/* Below for internal use only */
-
 void wireless_security_notify_changed (WirelessSecurity *sec);
-
-void wireless_security_clear_ciphers (NMConnection *connection);
 
 G_END_DECLS
