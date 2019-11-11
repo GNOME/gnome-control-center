@@ -382,27 +382,6 @@ eap_method_is_encrypted_private_key (const char *path)
 	return is_encrypted;
 }
 
-/* Some methods (PEAP, TLS, TTLS) require a CA certificate. The user can choose
- * not to provide such a certificate. This method whether the checkbox
- * id_ca_cert_not_required_checkbutton is checked or id_ca_cert_chooser has a certificate
- * selected.
- */
-gboolean
-eap_method_ca_cert_required (GtkToggleButton *id_ca_cert_not_required_checkbutton, GtkFileChooser *id_ca_cert_chooser)
-{
-	g_assert (id_ca_cert_not_required_checkbutton && id_ca_cert_chooser);
-
-	if (!gtk_toggle_button_get_active (id_ca_cert_not_required_checkbutton)) {
-		g_autofree gchar *filename = NULL;
-
-		filename = gtk_file_chooser_get_filename (id_ca_cert_chooser);
-		if (!filename)
-			return TRUE;
-	}
-	return FALSE;
-}
-
-
 void
 eap_method_ca_cert_not_required_toggled (GtkToggleButton *id_ca_cert_not_required_checkbutton, GtkFileChooser *id_ca_cert_chooser)
 {

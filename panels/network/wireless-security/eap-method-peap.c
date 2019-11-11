@@ -90,10 +90,15 @@ validate (EAPMethod *method, GError **error)
 		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-PEAP CA certificate: %s"), local_error->message);
 		return FALSE;
 	}
-	if (eap_method_ca_cert_required (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check),
-	                                 GTK_FILE_CHOOSER (self->ca_cert_button))) {
-		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-PEAP CA certificate: no certificate specified"));
-		return FALSE;
+
+	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check))) {
+		g_autofree gchar *filename = NULL;
+
+		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
+		if (filename == NULL) {
+			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-PEAP CA certificate: no certificate specified"));
+			return FALSE;
+		}
 	}
 
 	return eap_method_validate (get_inner_method (self), error);

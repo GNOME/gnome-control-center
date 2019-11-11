@@ -75,8 +75,6 @@ gboolean eap_method_validate_filepicker (GtkFileChooser *chooser,
                                          NMSetting8021xCKFormat *out_format,
                                          GError **error);
 
-gboolean eap_method_ca_cert_required (GtkToggleButton *id_ca_cert_is_not_required_checkbutton,
-                                      GtkFileChooser *id_ca_cert_chooser);
 void eap_method_ca_cert_not_required_toggled (GtkToggleButton *id_ca_cert_is_not_required_checkbox,
                                               GtkFileChooser *id_ca_cert_chooser);
 
