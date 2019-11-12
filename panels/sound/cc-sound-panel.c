@@ -58,7 +58,6 @@ struct _CcSoundPanel
   GtkListBoxRow     *input_profile_row;
   CcVolumeSlider    *input_volume_slider;
   GtkSizeGroup      *label_size_group;
-  GtkBox            *main_box;
   CcDeviceComboBox  *output_device_combo_box;
   GtkListStore      *output_device_model;
   CcLevelBar        *output_level_bar;
@@ -205,7 +204,6 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_profile_row);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_volume_slider);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, label_size_group);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, main_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_device_combo_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_level_bar);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_list_box);
