@@ -47,6 +47,12 @@
  * #define TEST_FAKE_DEVICES
  */
 
+/* Uncomment this to test the behaviour of a desktop machine
+ * with a UPS
+ *
+ * #define TEST_UPS
+ */
+
 struct _CcPowerPanel
 {
   CcPanel        parent_instance;
@@ -866,6 +872,30 @@ up_client_changed (UpClient     *client,
                       "energy-rate", 15.0,
                       "time-to-empty", 400,
                       "icon-name", "battery-full-charged-symbolic",
+                      NULL);
+        g_ptr_array_add (self->devices, device);
+      }
+  }
+#endif
+
+#ifdef TEST_UPS
+  {
+    static gboolean fake_devices_added = FALSE;
+
+    if (!fake_devices_added)
+      {
+        fake_devices_added = TRUE;
+        g_print ("adding fake UPS\n");
+        device = up_device_new ();
+        g_object_set (device,
+                      "kind", UP_DEVICE_KIND_UPS,
+                      "native-path", "dummy:usb-hiddev0",
+                      "model", "APC UPS",
+                      "percentage", 70.0,
+                      "state", UP_DEVICE_STATE_DISCHARGING,
+                      "is-present", TRUE,
+                      "power-supply", TRUE,
+                      "battery-level", UP_DEVICE_LEVEL_NONE,
                       NULL);
         g_ptr_array_add (self->devices, device);
       }
