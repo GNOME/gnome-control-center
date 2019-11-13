@@ -185,7 +185,7 @@ get_portal_permissions (CcApplicationsPanel *self,
   while (g_variant_iter_loop (iter, "{s@as}", &key, &val))
     {
       if (strcmp (key, app_id) == 0)
-        return g_variant_dup_strv (val, NULL); 
+        return g_variant_dup_strv (val, NULL);
     }
 
   val = NULL; /* freed by g_variant_iter_loop */
@@ -335,7 +335,7 @@ get_search_enabled (CcApplicationsPanel *self,
   else if (search_disabled_for_app (self, app_id))
     *enabled = FALSE;
   else
-    *enabled = !GPOINTER_TO_INT (value); 
+    *enabled = !GPOINTER_TO_INT (value);
 }
 
 static void
@@ -555,7 +555,7 @@ add_static_permissions (CcApplicationsPanel *self,
   g_autofree gchar *str = NULL;
   gint added = 0;
   g_autofree gchar *text = NULL;
-  
+
   keyfile = get_flatpak_metadata (app_id);
   if (keyfile == NULL)
     return FALSE;
@@ -702,7 +702,7 @@ unset_cb (CcActionRow         *row,
   GAppInfo *info;
 
   selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->sidebar_listbox));
-  info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (selected));  
+  info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (selected));
 
   type = (const gchar *)g_object_get_data (G_OBJECT (row), "type");
 
@@ -1119,7 +1119,7 @@ handler_reset_cb (GtkButton           *button,
   gint i;
 
   selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->sidebar_listbox));
-  info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (selected));  
+  info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (selected));
 
   types = g_app_info_get_supported_types (info);
   if (types == NULL || types[0] == NULL)
