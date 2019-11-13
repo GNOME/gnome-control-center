@@ -498,15 +498,6 @@ add_routes_box (CEPageIP4 *self)
         gtk_widget_show_all (GTK_WIDGET (self->routes_box));
 }
 
-enum
-{
-        RADIO_AUTOMATIC,
-        RADIO_LOCAL,
-        RADIO_MANUAL,
-        RADIO_DISABLED,
-        N_RADIO
-};
-
 static void
 connect_ip4_page (CEPageIP4 *self)
 {
