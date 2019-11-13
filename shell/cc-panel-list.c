@@ -343,6 +343,15 @@ row_data_new (CcPanelCategory     category,
   gtk_label_set_max_width_chars (GTK_LABEL (label), 25);
   gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
 
+  /* The applications panel has a submenu, so hint this with an icon */
+  if (strcmp (id, "applications") == 0)
+    {
+      image = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_BUTTON);
+      gtk_style_context_add_class (gtk_widget_get_style_context (image), "sidebar-icon");
+      gtk_grid_attach (GTK_GRID (grid), image, 2, 0, 1, 1);
+      gtk_widget_show (image);
+    }
+
   gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
   gtk_grid_attach (GTK_GRID (grid), label, 1, 1, 1, 1);
 
