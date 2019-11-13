@@ -219,7 +219,7 @@ static void
 cc_shell_model_init (CcShellModel *self)
 {
   GType types[] = {G_TYPE_STRING, G_TYPE_STRING, G_TYPE_APP_INFO, G_TYPE_STRING, G_TYPE_UINT,
-                   G_TYPE_STRING, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV, G_TYPE_UINT };
+                   G_TYPE_STRING, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV, G_TYPE_UINT, G_TYPE_BOOLEAN };
 
   gtk_list_store_set_column_types (GTK_LIST_STORE (self),
                                    N_COLS, types);
@@ -286,11 +286,13 @@ cc_shell_model_add_item (CcShellModel    *model,
   g_auto(GStrv) keywords = NULL;
   g_autofree gchar *casefolded_name = NULL;
   g_autofree gchar *casefolded_description = NULL;
+  gboolean has_sidebar;
 
   casefolded_name = cc_util_normalize_casefold_and_unaccent (name);
   casefolded_description = cc_util_normalize_casefold_and_unaccent (comment);
   keywords = get_casefolded_keywords (appinfo);
   icon = symbolicize_g_icon (g_app_info_get_icon (appinfo));
+  has_sidebar = g_desktop_app_info_get_boolean (G_DESKTOP_APP_INFO (appinfo), "X-GNOME-ControlCenter-HasSidebar");
 
   gtk_list_store_insert_with_values (GTK_LIST_STORE (model), NULL, 0,
                                      COL_NAME, name,
@@ -303,6 +305,7 @@ cc_shell_model_add_item (CcShellModel    *model,
                                      COL_GICON, icon,
                                      COL_KEYWORDS, keywords,
                                      COL_VISIBILITY, CC_PANEL_VISIBLE,
+                                     COL_HAS_SIDEBAR, has_sidebar,
                                      -1);
 }
 

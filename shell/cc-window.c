@@ -351,6 +351,7 @@ setup_model (CcWindow *self)
       g_autofree gchar *id = NULL;
       g_auto(GStrv) keywords = NULL;
       CcPanelVisibility visibility;
+      gboolean has_sidebar;
       const gchar *icon_name = NULL;
 
       gtk_tree_model_get (model, &iter,
@@ -361,6 +362,7 @@ setup_model (CcWindow *self)
                           COL_NAME, &name,
                           COL_KEYWORDS, &keywords,
                           COL_VISIBILITY, &visibility,
+                          COL_HAS_SIDEBAR, &has_sidebar,
                           -1);
 
       if (G_IS_THEMED_ICON (icon))
@@ -373,7 +375,8 @@ setup_model (CcWindow *self)
                                description,
                                keywords,
                                icon_name,
-                               visibility);
+                               visibility,
+                               has_sidebar);
 
       valid = gtk_tree_model_iter_next (model, &iter);
     }

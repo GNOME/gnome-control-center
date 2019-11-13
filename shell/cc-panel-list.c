@@ -295,7 +295,8 @@ row_data_new (CcPanelCategory     category,
               const gchar        *description,
               const GStrv         keywords,
               const gchar        *icon,
-              CcPanelVisibility   visibility)
+              CcPanelVisibility   visibility,
+              gboolean            has_sidebar)
 {
   GtkWidget *label, *grid, *image;
   RowData *data;
@@ -342,6 +343,14 @@ row_data_new (CcPanelCategory     category,
                         NULL);
   gtk_label_set_max_width_chars (GTK_LABEL (label), 25);
   gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+
+  if (has_sidebar)
+    {
+      image = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_BUTTON);
+      gtk_style_context_add_class (gtk_widget_get_style_context (image), "sidebar-icon");
+      gtk_grid_attach (GTK_GRID (grid), image, 2, 0, 1, 1);
+      gtk_widget_show (image);
+    }
 
   gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
   gtk_grid_attach (GTK_GRID (grid), label, 1, 1, 1, 1);
@@ -1017,7 +1026,8 @@ cc_panel_list_add_panel (CcPanelList        *self,
                          const gchar        *description,
                          const GStrv         keywords,
                          const gchar        *icon,
-                         CcPanelVisibility   visibility)
+                         CcPanelVisibility   visibility,
+                         gboolean            has_sidebar)
 {
   GtkWidget *listbox;
   RowData *data, *search_data;
@@ -1025,14 +1035,14 @@ cc_panel_list_add_panel (CcPanelList        *self,
   g_return_if_fail (CC_IS_PANEL_LIST (self));
 
   /* Add the panel to the proper listbox */
-  data = row_data_new (category, id, title, description, keywords, icon, visibility);
+  data = row_data_new (category, id, title, description, keywords, icon, visibility, has_sidebar);
   gtk_widget_set_visible (data->row, visibility == CC_PANEL_VISIBLE);
 
   listbox = get_listbox_from_category (self, category);
   gtk_container_add (GTK_CONTAINER (listbox), data->row);
 
   /* And add to the search listbox too */
-  search_data = row_data_new (category, id, title, description, keywords, icon, visibility);
+  search_data = row_data_new (category, id, title, description, keywords, icon, visibility, has_sidebar);
   gtk_widget_set_visible (search_data->row, visibility != CC_PANEL_HIDDEN);
 
   gtk_container_add (GTK_CONTAINER (self->search_listbox), search_data->row);
