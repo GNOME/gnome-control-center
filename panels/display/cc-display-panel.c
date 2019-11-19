@@ -106,9 +106,11 @@ struct _CcDisplayPanel
   GtkWidget      *config_type_switcher_frame;
   GtkLabel       *current_output_label;
   GtkWidget      *display_settings_frame;
+  GtkBox         *multi_selection_box;
   GtkSwitch      *output_enabled_switch;
   GtkComboBox    *output_selection_combo;
   GtkStack       *output_selection_stack;
+  GtkButtonBox   *output_selection_two_buttonbox;
   GtkButtonBox   *output_selection_two_first;
   GtkButtonBox   *output_selection_two_second;
   HdyComboRow    *primary_display_row;
@@ -656,10 +658,12 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_single);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, current_output_label);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_frame);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, multi_selection_box);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_page);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, output_enabled_switch);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, output_selection_combo);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, output_selection_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, output_selection_two_buttonbox);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, output_selection_two_first);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, output_selection_two_second);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, primary_display_row);
@@ -828,9 +832,9 @@ rebuild_ui (CcDisplayPanel *panel)
 
       /* We need a switcher except in CLONE mode */
       if (type == CC_DISPLAY_CONFIG_CLONE)
-        gtk_stack_set_visible_child_name (panel->output_selection_stack, "no-selection");
+        gtk_stack_set_visible_child (panel->output_selection_stack, GTK_WIDGET (panel->current_output_label));
       else
-        gtk_stack_set_visible_child_name (panel->output_selection_stack, "two-selection");
+        gtk_stack_set_visible_child (panel->output_selection_stack, GTK_WIDGET (panel->output_selection_two_buttonbox));
     }
   else if (n_usable_outputs > 1)
     {
@@ -844,7 +848,7 @@ rebuild_ui (CcDisplayPanel *panel)
       if (type == CC_DISPLAY_CONFIG_CLONE || type > CC_DISPLAY_CONFIG_LAST_VALID)
         type = CC_DISPLAY_CONFIG_JOIN;
 
-      gtk_stack_set_visible_child_name (panel->output_selection_stack, "multi-selection");
+      gtk_stack_set_visible_child (panel->output_selection_stack, GTK_WIDGET (panel->multi_selection_box));
     }
   else
     {
@@ -856,7 +860,7 @@ rebuild_ui (CcDisplayPanel *panel)
       gtk_widget_set_visible (panel->config_type_switcher_frame, FALSE);
       gtk_widget_set_visible (panel->arrangement_frame, FALSE);
 
-      gtk_stack_set_visible_child_name (panel->output_selection_stack, "no-selection");
+      gtk_stack_set_visible_child (panel->output_selection_stack, GTK_WIDGET (panel->current_output_label));
     }
 
   cc_panel_set_selected_type (panel, type);
