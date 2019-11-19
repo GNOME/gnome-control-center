@@ -111,8 +111,8 @@ struct _CcDisplayPanel
   GtkComboBox    *output_selection_combo;
   GtkStack       *output_selection_stack;
   GtkButtonBox   *output_selection_two_buttonbox;
-  GtkButtonBox   *output_selection_two_first;
-  GtkButtonBox   *output_selection_two_second;
+  GtkRadioButton *output_selection_two_first;
+  GtkRadioButton *output_selection_two_second;
   HdyComboRow    *primary_display_row;
   GtkWidget      *stack_switcher;
 };
