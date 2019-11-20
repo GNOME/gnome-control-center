@@ -301,7 +301,7 @@ cc_carousel_add (GtkContainer *container,
 
         last_box_is_full = ((g_list_length (self->children) - 1) % ITEMS_PER_PAGE == 0);
         if (last_box_is_full) {
-                gchar *page;
+                g_autofree gchar *page = NULL;
 
                 page = g_strdup_printf ("%d", CC_CAROUSEL_ITEM (widget)->page);
                 self->last_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
