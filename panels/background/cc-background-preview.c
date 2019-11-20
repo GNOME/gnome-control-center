@@ -26,7 +26,9 @@ struct _CcBackgroundPreview
 
   GtkImage         *animated_background_icon;
   GtkLabel         *desktop_clock_label;
+  GtkFrame         *desktop_frame;
   GtkDrawingArea   *drawing_area;
+  GtkFrame         *lock_frame;
   GtkLabel         *lock_screen_label;
   GtkStack         *stack;
 
@@ -229,8 +231,8 @@ cc_background_preview_set_property (GObject      *object,
     {
     case PROP_IS_LOCK_SCREEN:
       self->is_lock_screen = g_value_get_boolean (value);
-      gtk_stack_set_visible_child_name (self->stack,
-                                        self->is_lock_screen ? "lock" : "desktop");
+      gtk_stack_set_visible_child (self->stack,
+                                   self->is_lock_screen ? GTK_WIDGET (self->lock_frame) : GTK_WIDGET (self->desktop_frame));
       break;
 
     case PROP_ITEM:
@@ -323,7 +325,9 @@ cc_background_preview_class_init (CcBackgroundPreviewClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, animated_background_icon);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, desktop_clock_label);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, desktop_frame);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, drawing_area);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, lock_frame);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, lock_screen_label);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, stack);
 
