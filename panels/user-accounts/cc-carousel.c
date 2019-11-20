@@ -199,8 +199,8 @@ void
 cc_carousel_select_item (CcCarousel     *self,
                          CcCarouselItem *item)
 {
-        gchar *page_name;
         gboolean page_changed = TRUE;
+        GList *children;
 
         /* Select first user if none is specified */
         if (item == NULL)
@@ -227,10 +227,8 @@ cc_carousel_select_item (CcCarousel     *self,
                 return;
         }
 
-        page_name = g_strdup_printf ("%d", self->visible_page);
-        gtk_stack_set_visible_child_name (self->stack, page_name);
-
-        g_free (page_name);
+        children = gtk_container_get_children (GTK_CONTAINER (self->stack));
+        gtk_stack_set_visible_child (self->stack, GTK_WIDGET (g_list_nth_data (children, self->visible_page)));
 
         update_buttons_visibility (self);
 
@@ -301,13 +299,10 @@ cc_carousel_add (GtkContainer *container,
 
         last_box_is_full = ((g_list_length (self->children) - 1) % ITEMS_PER_PAGE == 0);
         if (last_box_is_full) {
-                g_autofree gchar *page = NULL;
-
-                page = g_strdup_printf ("%d", CC_CAROUSEL_ITEM (widget)->page);
                 self->last_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
                 gtk_widget_show (self->last_box);
                 gtk_widget_set_valign (self->last_box, GTK_ALIGN_CENTER);
-                gtk_stack_add_named (self->stack, self->last_box, page);
+                gtk_container_add (GTK_CONTAINER (self->stack), self->last_box);
         }
 
         gtk_widget_show_all (widget);
