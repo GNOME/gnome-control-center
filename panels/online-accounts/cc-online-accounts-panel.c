@@ -42,6 +42,7 @@ struct _CcGoaPanel
   GtkListBox    *accounts_listbox;
   GtkDialog     *edit_account_dialog;
   GtkHeaderBar  *edit_account_headerbar;
+  GtkBox        *editor_box;
   GtkListBoxRow *more_providers_row;
   GtkBox        *new_account_vbox;
   GtkLabel      *notification_label;
@@ -255,7 +256,7 @@ add_account (CcGoaPanel  *self,
   reset_headerbar (self);
 
   /* Move to the new account page */
-  gtk_stack_set_visible_child_name (self->stack, "new-account");
+  gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->new_account_vbox));
 
   /* Reset the dialog size */
   gtk_window_resize (GTK_WINDOW (self->edit_account_dialog), 1, 1);
@@ -547,6 +548,7 @@ cc_goa_panel_class_init (CcGoaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, edit_account_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, edit_account_headerbar);
+  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, editor_box);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, more_providers_row);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, new_account_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, notification_label);
@@ -590,7 +592,7 @@ show_page_account (CcGoaPanel  *panel,
   reset_headerbar (panel);
 
   /* Move to the account editor page */
-  gtk_stack_set_visible_child_name (panel->stack, "editor");
+  gtk_stack_set_visible_child (panel->stack, GTK_WIDGET (panel->editor_box));
 
   /* Out with the old */
   children = gtk_container_get_children (GTK_CONTAINER (panel->accounts_vbox));
