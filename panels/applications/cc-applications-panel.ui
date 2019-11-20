@@ -20,7 +20,7 @@
               <object class="GtkStack" id="stack">
                 <property name="visible">1</property>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkBox" id="empty_box">
                     <property name="visible">1</property>
                     <property name="orientation">vertical</property>
                     <property name="valign">center</property>
@@ -69,12 +69,9 @@
                       </packing>
                     </child>
                   </object>
-                  <packing>
-                    <property name="name">empty</property>
-                  </packing>
                 </child>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkBox" id="settings_box">
                     <property name="visible">1</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">24</property>
@@ -396,9 +393,6 @@
                       </object>
                     </child>
                   </object>
-                  <packing>
-                    <property name="name">settings</property>
-                  </packing>
                 </child>
               </object>
             </child>
