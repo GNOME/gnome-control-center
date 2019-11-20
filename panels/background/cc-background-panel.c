@@ -241,10 +241,9 @@ set_background (CcBackgroundPanel *panel,
 
 
 static void
-on_chooser_background_chosen_cb (CcBackgroundChooser        *chooser,
+on_chooser_background_chosen_cb (CcBackgroundPanel          *self,
                                  CcBackgroundItem           *item,
-                                 CcBackgroundSelectionFlags  flags,
-                                 CcBackgroundPanel          *self)
+                                 CcBackgroundSelectionFlags  flags)
 {
 
   if (flags & CC_BACKGROUND_SELECTION_DESKTOP)
@@ -255,8 +254,7 @@ on_chooser_background_chosen_cb (CcBackgroundChooser        *chooser,
 }
 
 static void
-on_add_picture_button_clicked_cb (GtkWidget         *button,
-                                  CcBackgroundPanel *self)
+on_add_picture_button_clicked_cb (CcBackgroundPanel *self)
 {
   cc_background_chooser_select_file (self->background_chooser);
 }

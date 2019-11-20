@@ -149,9 +149,8 @@ stop_monitor_time (CcBackgroundPreview *self)
 /* Callbacks */
 
 static gboolean
-on_preview_draw_cb (GtkWidget           *widget,
-                    cairo_t             *cr,
-                    CcBackgroundPreview *self)
+on_preview_draw_cb (CcBackgroundPreview *self,
+                    cairo_t             *cr)
 {
   g_autoptr(GdkPixbuf) pixbuf = NULL;
   GtkAllocation allocation;
@@ -160,8 +159,8 @@ on_preview_draw_cb (GtkWidget           *widget,
   if (!self->item)
     return FALSE;
 
-  scale_factor = gtk_widget_get_scale_factor (widget);
-  gtk_widget_get_allocation (widget, &allocation);
+  scale_factor = gtk_widget_get_scale_factor (self->drawing_area);
+  gtk_widget_get_allocation (self->drawing_area, &allocation);
   pixbuf = cc_background_item_get_frame_thumbnail (self->item,
                                                    self->thumbnail_factory,
                                                    allocation.width,
