@@ -23,7 +23,7 @@
             <property name="vexpand">True</property>
             <property name="border_width">12</property>
             <child>
-              <object class="GtkBox">
+              <object class="GtkBox" id="edit_box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
@@ -45,7 +45,7 @@
                     <property name="expand">True</property>
                     <property name="transition_type">crossfade</property>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkBox" id="standard_edit_box">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="orientation">vertical</property>
@@ -72,12 +72,9 @@
                           </object>
                         </child>
                       </object>
-                      <packing>
-                        <property name="name">change-shortcut</property>
-                      </packing>
                     </child>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkBox" id="standard_box">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="hexpand">True</property>
@@ -130,19 +127,13 @@
                           </object>
                         </child>
                       </object>
-                      <packing>
-                        <property name="name">main</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="name">edit</property>
-              </packing>
             </child>
             <child>
-              <object class="GtkGrid">
+              <object class="GtkGrid" id="custom_grid">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
@@ -259,9 +250,6 @@
                         <property name="label" translatable="yes">Set Shortcut…</property>
                         <signal name="clicked" handler="change_custom_shortcut_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
                       </object>
-                      <packing>
-                        <property name="name">button</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkShortcutLabel" id="custom_shortcut_accel_label">
@@ -271,9 +259,6 @@
                         <property name="hexpand">True</property>
                         <property name="disabled-text" translatable="yes">None</property>
                       </object>
-                      <packing>
-                        <property name="name">label</property>
-                      </packing>
                     </child>
                   </object>
                   <packing>
@@ -282,13 +267,9 @@
                   </packing>
                 </child>
               </object>
-              <packing>
-                <property name="name">custom</property>
-                <property name="position">1</property>
-              </packing>
             </child>
             <child>
-              <object class="GtkBox">
+              <object class="GtkBox" id="custom_edit_box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
@@ -322,10 +303,6 @@
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="name">change-shortcut</property>
-                <property name="position">2</property>
-              </packing>
             </child>
           </object>
           <packing>
