@@ -61,9 +61,6 @@ struct _CcBackgroundPanel
   CcBackgroundChooser *background_chooser;
   GtkWidget *add_picture_button;
   CcBackgroundPreview *desktop_preview;
-
-  GtkWidget *spinner;
-  GtkWidget *chooser;
 };
 
 CC_PANEL_REGISTER (CcBackgroundPanel, cc_background_panel)
@@ -244,8 +241,6 @@ cc_background_panel_dispose (GObject *object)
   g_clear_object (&panel->settings);
   g_clear_object (&panel->lock_settings);
   g_clear_object (&panel->thumb_factory);
-
-  g_clear_pointer (&panel->chooser, gtk_widget_destroy);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
 }
