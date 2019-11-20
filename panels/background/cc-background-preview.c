@@ -24,9 +24,9 @@ struct _CcBackgroundPreview
 {
   GtkBox            parent;
 
-  GtkWidget        *animated_background_icon;
+  GtkImage         *animated_background_icon;
   GtkLabel         *desktop_clock_label;
-  GtkWidget        *drawing_area;
+  GtkDrawingArea   *drawing_area;
   GtkLabel         *lock_screen_label;
   GtkStack         *stack;
 
@@ -159,8 +159,8 @@ on_preview_draw_cb (CcBackgroundPreview *self,
   if (!self->item)
     return FALSE;
 
-  scale_factor = gtk_widget_get_scale_factor (self->drawing_area);
-  gtk_widget_get_allocation (self->drawing_area, &allocation);
+  scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (self->drawing_area));
+  gtk_widget_get_allocation (GTK_WIDGET (self->drawing_area), &allocation);
   pixbuf = cc_background_item_get_frame_thumbnail (self->item,
                                                    self->thumbnail_factory,
                                                    allocation.width,
@@ -367,10 +367,10 @@ cc_background_preview_set_item (CcBackgroundPreview *self,
   if (!g_set_object (&self->item, item))
     return;
 
-  gtk_widget_set_visible (self->animated_background_icon,
+  gtk_widget_set_visible (GTK_WIDGET (self->animated_background_icon),
                           cc_background_item_changes_with_time (item));
 
-  gtk_widget_queue_draw (self->drawing_area);
+  gtk_widget_queue_draw (GTK_WIDGET (self->drawing_area));
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ITEM]);
 }
