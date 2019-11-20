@@ -7,9 +7,6 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
       </object>
-      <packing>
-        <property name="name">_lock</property>
-      </packing>
     </child>
     <child>
       <object class="GtkButton" id="add_user_button">
@@ -22,9 +19,6 @@
           <class name="suggested-action"/>
         </style>
       </object>
-      <packing>
-        <property name="name">_adduser</property>
-      </packing>
     </child>
   </object>
   <object class="GtkListStore" id="shortname-model">
@@ -46,9 +40,9 @@
     <child>
       <object class="GtkStack" id="stack">
         <property name="visible">True</property>
-        <property name="visible-child">empty-state</property>
+        <property name="visible-child">no_users_box</property>
         <child>
-          <object class="GtkOverlay" id="overlay">
+          <object class="GtkOverlay" id="users_overlay">
             <property name="visible">True</property>
             <child type="overlay">
               <object class="GtkRevealer" id="notification_revealer">
@@ -460,12 +454,9 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="name">_users</property>
-          </packing>
         </child>
         <child>
-          <object class="GtkBox" id="empty-state">
+          <object class="GtkBox" id="no_users_box">
             <property name="visible">True</property>
             <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
             <property name="valign">GTK_ALIGN_CENTER</property>
@@ -497,9 +488,6 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="name">_empty_state</property>
-          </packing>
         </child>
       </object>
     </child>
