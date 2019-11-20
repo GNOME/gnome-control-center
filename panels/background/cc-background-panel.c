@@ -59,7 +59,7 @@ struct _CcBackgroundPanel
   CcBackgroundItem *current_background;
 
   CcBackgroundChooser *background_chooser;
-  GtkWidget *add_picture_button;
+  GtkButton *add_picture_button;
   CcBackgroundPreview *desktop_preview;
 };
 
@@ -228,7 +228,7 @@ cc_background_panel_constructed (GObject *object)
   self = CC_BACKGROUND_PANEL (object);
   shell = cc_panel_get_shell (CC_PANEL (self));
 
-  cc_shell_embed_widget_in_header (shell, self->add_picture_button, GTK_POS_RIGHT);
+  cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->add_picture_button), GTK_POS_RIGHT);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->constructed (object);
 }
