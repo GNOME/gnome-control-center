@@ -75,6 +75,8 @@ struct _CcApplicationsPanel
   GSettings       *search_settings;
 
   GtkStack        *stack;
+  GtkBox          *empty_box;
+  GtkBox          *settings_box;
 
   GtkBox          *permission_section;
   GtkListBox      *permission_list;
@@ -93,7 +95,7 @@ struct _CcApplicationsPanel
   GtkListBox      *integration_list;
   CcToggleRow     *notification;
   CcToggleRow     *background;
-  GtkToggleRow    *wallpaper;
+  CcToggleRow     *wallpaper;
   CcToggleRow     *sound;
   CcInfoRow       *no_sound;
   CcToggleRow     *search;
@@ -1561,7 +1563,7 @@ update_panel (CcApplicationsPanel *self,
   if (row == NULL)
     {
       gtk_label_set_label (self->title_label, _("Applications"));
-      gtk_stack_set_visible_child_name (self->stack, "empty");
+      gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->empty_box));
       gtk_widget_hide (GTK_WIDGET (GTK_WIDGET (self->header_button)));
       return;
     }
@@ -1569,7 +1571,7 @@ update_panel (CcApplicationsPanel *self,
   info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (row));
 
   gtk_label_set_label (self->title_label, g_app_info_get_display_name (info));
-  gtk_stack_set_visible_child_name (self->stack, "settings");
+  gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->settings_box));
   gtk_widget_show (GTK_WIDGET (self->header_button));
 
   g_clear_pointer (&self->current_app_id, g_free);
@@ -1856,6 +1858,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, camera);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, clear_cache_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, data);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, empty_box);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, header_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_reset);
@@ -1878,6 +1881,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_search_entry);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, search);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, settings_box);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sound);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage);
