@@ -21,11 +21,12 @@
  * THE SOFTWARE.
  */
 
-#ifndef _calibrator_h
-#define _calibrator_h
+#pragma once
 
 #include <glib.h>
 #include "calibrator-gui.h"
+
+G_BEGIN_DECLS
 
 /*
  * Number of blocks. We partition the screen into 'num_blocks' x 'num_blocks'
@@ -95,4 +96,4 @@ gboolean finish     (struct Calib *c,
                  XYinfo       *new_axis,
                  gboolean         *swap);
 
-#endif /* _calibrator_h */
+G_END_DECLS
