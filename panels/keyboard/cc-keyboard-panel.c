@@ -310,15 +310,15 @@ add_item (CcKeyboardPanel *self,
   gtk_style_context_add_class (gtk_widget_get_style_context (reset_button), "circular");
   gtk_style_context_add_class (gtk_widget_get_style_context (reset_button), "reset-shortcut-button");
 
-  g_signal_connect (item,
-                    "notify::is-value-default",
-                    G_CALLBACK (shortcut_modified_changed_cb),
-                    reset_button);
+  g_signal_connect_object (item,
+                           "notify::is-value-default",
+                           G_CALLBACK (shortcut_modified_changed_cb),
+                           reset_button, 0);
 
-  g_signal_connect (reset_button,
-                    "clicked",
-                    G_CALLBACK (reset_shortcut_cb),
-                    item);
+  g_signal_connect_object (reset_button,
+                           "clicked",
+                           G_CALLBACK (reset_shortcut_cb),
+                           item, 0);
 
   /* The row */
   row = gtk_list_box_row_new ();
@@ -806,15 +806,17 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
   /* Use a sizegroup to make the accelerator labels the same width */
   self->accelerator_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-  g_signal_connect_swapped (self->manager,
-                            "shortcut-added",
-                            G_CALLBACK (add_item),
-                            self);
+  g_signal_connect_object (self->manager,
+                           "shortcut-added",
+                           G_CALLBACK (add_item),
+                           self,
+                           G_CONNECT_SWAPPED);
 
-  g_signal_connect_swapped (self->manager,
-                            "shortcut-removed",
-                            G_CALLBACK (remove_item),
-                            self);
+  g_signal_connect_object (self->manager,
+                           "shortcut-removed",
+                           G_CALLBACK (remove_item),
+                           self,
+                           G_CONNECT_SWAPPED);
 
   cc_keyboard_manager_load_shortcuts (self->manager);
 
