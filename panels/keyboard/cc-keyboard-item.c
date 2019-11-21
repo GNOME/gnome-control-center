@@ -609,9 +609,8 @@ settings_get_binding (GSettings  *settings,
 }
 
 static void
-binding_changed (GSettings *settings,
-		 const char *key,
-		 CcKeyboardItem *item)
+binding_changed (CcKeyboardItem *item,
+		 const char *key)
 {
   char *value;
 
@@ -656,8 +655,8 @@ cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem *item,
   g_free (item->binding);
   item->binding = settings_get_binding (item->settings, item->key);
   binding_from_string (item->binding, item->primary_combo);
-  g_signal_connect (G_OBJECT (item->settings), "changed::binding",
-		    G_CALLBACK (binding_changed), item);
+  g_signal_connect_object (G_OBJECT (item->settings), "changed::binding",
+                           G_CALLBACK (binding_changed), item, G_CONNECT_SWAPPED);
 
   return TRUE;
 }
@@ -687,8 +686,8 @@ cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
   item->default_combos = settings_get_key_combos (item->settings, item->key, TRUE);
 
   signal_name = g_strdup_printf ("changed::%s", item->key);
-  g_signal_connect (G_OBJECT (item->settings), signal_name,
-		    G_CALLBACK (binding_changed), item);
+  g_signal_connect_object (G_OBJECT (item->settings), signal_name,
+                           G_CALLBACK (binding_changed), item, G_CONNECT_SWAPPED);
   g_free (signal_name);
 
   return TRUE;
