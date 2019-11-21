@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef _BG_COLORS_SOURCE_H
-#define _BG_COLORS_SOURCE_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include "bg-source.h"
@@ -37,5 +36,3 @@ gboolean bg_colors_source_add        (BgColorsSource       *self,
                                       GtkTreeRowReference **ret_row_ref);
 
 G_END_DECLS
-
-#endif /* _BG_COLORS_SOURCE_H */

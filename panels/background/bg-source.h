@@ -18,8 +18,7 @@
  *
  */
 
-#ifndef _BG_SOURCE_H
-#define _BG_SOURCE_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
@@ -45,5 +44,3 @@ gint bg_source_get_thumbnail_width (BgSource *source);
 GnomeDesktopThumbnailFactory* bg_source_get_thumbnail_factory (BgSource *source);
 
 G_END_DECLS
-
-#endif /* _BG_SOURCE_H */

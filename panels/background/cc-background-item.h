@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef __CC_BACKGROUND_ITEM_H
-#define __CC_BACKGROUND_ITEM_H
+#pragma once
 
 #include <glib-object.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -82,5 +81,3 @@ gboolean                  cc_background_item_compare        (CcBackgroundItem *s
 void                      cc_background_item_dump           (CcBackgroundItem *item);
 
 G_END_DECLS
-
-#endif /* __CC_BACKGROUND_ITEM_H */
