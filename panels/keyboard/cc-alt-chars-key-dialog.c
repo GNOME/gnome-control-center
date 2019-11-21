@@ -147,9 +147,7 @@ on_active_lv3_changed_cb (GtkRadioButton      *radio,
 }
 
 static void
-on_xkb_options_changed_cb (GSettings           *settings,
-                           const gchar         *key,
-                           CcAltCharsKeyDialog *self)
+on_xkb_options_changed_cb (CcAltCharsKeyDialog *self)
 {
   update_active_radio (self);
 }
@@ -190,10 +188,10 @@ cc_alt_chars_key_dialog_init (CcAltCharsKeyDialog *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->input_source_settings = g_settings_new ("org.gnome.desktop.input-sources");
-  g_signal_connect (self->input_source_settings,
-                    "changed::xkb-options",
-                    G_CALLBACK (on_xkb_options_changed_cb),
-                    self);
+  g_signal_connect_object (self->input_source_settings,
+                           "changed::xkb-options",
+                           G_CALLBACK (on_xkb_options_changed_cb),
+                           self, G_CONNECT_SWAPPED);
   update_active_radio (self);
 }
 
