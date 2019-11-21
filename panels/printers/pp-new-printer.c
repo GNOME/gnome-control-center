@@ -484,16 +484,14 @@ get_ppd_item_from_output (GVariant *output)
       if (array)
         {
           GVariantIter *iter;
-          GVariant     *item;
 
           for (j = 0; j < G_N_ELEMENTS (match_levels) && !ppd_item; j++)
             {
-              g_variant_get (array, "a(ss)", &iter);
-              while ((item = g_variant_iter_next_value (iter)) && !ppd_item)
-                {
-                  const gchar *driver, *match;
+              const gchar *driver, *match;
 
-                  g_variant_get (item, "(&s&s)", &driver, &match);
+              g_variant_get (array, "a(ss)", &iter);
+              while (g_variant_iter_next (iter, "(&s&s)", &driver, &match) && !ppd_item)
+                {
                   if (g_str_equal (match, match_levels[j]))
                     {
                       ppd_item = g_new0 (PPDName, 1);
@@ -510,8 +508,6 @@ get_ppd_item_from_output (GVariant *output)
                       else if (g_strcmp0 (match, "none") == 0)
                         ppd_item->ppd_match_level = PPD_NO_MATCH;
                     }
-
-                  g_variant_unref (item);
                 }
             }
 
@@ -1040,16 +1036,11 @@ get_missing_executables_cb (GObject      *source_object,
       if (array)
         {
           GVariantIter *iter;
-          GVariant     *item;
-          gchar        *executable;
+          const gchar  *executable;
 
           g_variant_get (array, "as", &iter);
-          while ((item = g_variant_iter_next_value (iter)))
-            {
-              g_variant_get (item, "s", &executable);
-              executables = g_list_append (executables, executable);
-              g_variant_unref (item);
-            }
+          while (g_variant_iter_next (iter, "&s", &executable))
+            executables = g_list_append (executables, g_strdup (executable));
 
           g_variant_unref (array);
         }
