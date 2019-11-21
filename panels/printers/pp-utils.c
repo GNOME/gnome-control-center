@@ -1935,23 +1935,17 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
       if (array)
         {
           GVariantIter *iter;
-          GVariant     *item;
 
           for (j = 0; j < G_N_ELEMENTS (match_levels) && n < data->count; j++)
             {
+              const gchar *driver, *match;
+
               g_variant_get (array,
                              "a(ss)",
                              &iter);
 
-              while ((item = g_variant_iter_next_value (iter)))
+              while (g_variant_iter_next (iter, "(&s&s)", &driver, &match))
                 {
-                  const gchar *driver, *match;
-
-                  g_variant_get (item,
-                                 "(&s&s)",
-                                 &driver,
-                                 &match);
-
                   if (g_str_equal (match, match_levels[j]) && n < data->count)
                     {
                       ppd_item = g_new0 (PPDName, 1);
@@ -1972,8 +1966,6 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
 
                       n++;
                     }
-
-                  g_variant_unref (item);
                 }
             }
 
@@ -2172,26 +2164,19 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
       if (devices_variant)
         {
           GVariantIter *iter;
-          GVariant     *item;
           gint          index = -1;
 
           if (data->device_uri)
             {
+              const gchar *key, *value;
               g_autofree gchar *suffix = NULL;
 
               g_variant_get (devices_variant,
                              "a{ss}",
                              &iter);
 
-              while ((item = g_variant_iter_next_value (iter)))
+              while (g_variant_iter_next (iter, "{&s&s}", &key, &value))
                 {
-                  const gchar *key, *value;
-
-                  g_variant_get (item,
-                                 "{&s&s}",
-                                 &key,
-                                 &value);
-
                   if (g_str_equal (value, data->device_uri))
                     {
                       gchar *number = g_strrstr (key, ":");
@@ -2205,8 +2190,6 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
                             index = -1;
                         }
                     }
-
-                  g_variant_unref (item);
                 }
 
               suffix = g_strdup_printf (":%d", index);
@@ -2215,15 +2198,8 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
                              "a{ss}",
                              &iter);
 
-              while ((item = g_variant_iter_next_value (iter)))
+              while (g_variant_iter_next (iter, "{&s&s}", &key, &value))
                 {
-                  const gchar *key, *value;
-
-                  g_variant_get (item,
-                                 "{&s&s}",
-                                 &key,
-                                 &value);
-
                   if (g_str_has_suffix (key, suffix))
                     {
                       if (g_str_has_prefix (key, "device-id"))
@@ -2236,8 +2212,6 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
                           device_make_and_model = g_strdup (value);
                         }
                     }
-
-                  g_variant_unref (item);
                 }
             }
 
@@ -3333,21 +3307,15 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
       if (devices_variant)
         {
           GVariantIter *iter;
-          GVariant     *item;
+          const gchar  *key, *value;
           gint          index = -1, max_index = -1, i;
 
           g_variant_get (devices_variant, "a{ss}", &iter);
-          while ((item = g_variant_iter_next_value (iter)))
+          while (g_variant_iter_next (iter, "{&s&s}", &key, &value))
             {
-              const gchar *key, *value;
-
-              g_variant_get (item, "{&s&s}", &key, &value);
-
               index = get_suffix_index (key);
               if (index > max_index)
                 max_index = index;
-
-              g_variant_unref (item);
             }
 
           if (max_index >= 0)
@@ -3356,12 +3324,8 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
               devices = g_new0 (PpPrintDevice *, num_of_devices);
 
               g_variant_get (devices_variant, "a{ss}", &iter);
-              while ((item = g_variant_iter_next_value (iter)))
+              while (g_variant_iter_next (iter, "{&s&s}", &key, &value))
                 {
-                  const gchar *key, *value;
-
-                  g_variant_get (item, "{&s&s}", &key, &value);
-
                   index = get_suffix_index (key);
                   if (index >= 0)
                     {
@@ -3391,8 +3355,6 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
 
                       g_object_set (devices[index], "acquisition-method", ACQUISITION_METHOD_DEFAULT_CUPS_SERVER, NULL);
                     }
-
-                  g_variant_unref (item);
                 }
 
               for (i = 0; i < num_of_devices; i++)
