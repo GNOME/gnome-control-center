@@ -332,12 +332,10 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
 }
 
 static void
-on_settings_changed (GSettings         *settings,
-                     gchar             *key,
-                     CcBackgroundPanel *panel)
+on_settings_changed (CcBackgroundPanel *panel)
 {
-  reload_current_bg (panel, settings);
-  update_preview (panel, settings, NULL);
+  reload_current_bg (panel, panel->settings);
+  update_preview (panel, panel->settings, NULL);
 }
 
 static void
@@ -364,6 +362,6 @@ cc_background_panel_init (CcBackgroundPanel *panel)
   update_preview (panel, panel->lock_settings, NULL);
 
   /* Background settings */
-  g_signal_connect (panel->settings, "changed", G_CALLBACK (on_settings_changed), panel);
-  g_signal_connect (panel->lock_settings, "changed", G_CALLBACK (on_settings_changed), panel);
+  g_signal_connect_object (panel->settings, "changed", G_CALLBACK (on_settings_changed), panel, G_CONNECT_SWAPPED);
+  g_signal_connect_object (panel->lock_settings, "changed", G_CALLBACK (on_settings_changed), panel, G_CONNECT_SWAPPED);
 }
