@@ -466,7 +466,7 @@ printer_add_real_async (PpNewPrinter *self)
 static PPDName *
 get_ppd_item_from_output (GVariant *output)
 {
-  PPDName  *ppd_item = NULL;
+  g_autoptr(GVariant) array = NULL;
   gint      j;
   static const char * const match_levels[] = {
              "exact-cmd",
@@ -475,40 +475,42 @@ get_ppd_item_from_output (GVariant *output)
              "generic",
              "none"};
 
-  if (output)
+  if (output == NULL)
+    return NULL;
+
+  g_variant_get (output, "(@a(ss))", &array);
+  for (j = 0; j < G_N_ELEMENTS (match_levels); j++)
     {
-      g_autoptr(GVariant) array = NULL;
+      g_autoptr(GVariantIter) iter = NULL;
+      const gchar *driver, *match;
 
-      g_variant_get (output, "(@a(ss))", &array);
-      for (j = 0; j < G_N_ELEMENTS (match_levels) && !ppd_item; j++)
+      g_variant_get (array, "a(ss)", &iter);
+      while (g_variant_iter_next (iter, "(&s&s)", &driver, &match))
         {
-          g_autoptr(GVariantIter) iter = NULL;
-          const gchar *driver, *match;
+          PPDName *ppd_item;
 
-          g_variant_get (array, "a(ss)", &iter);
-          while (g_variant_iter_next (iter, "(&s&s)", &driver, &match) && !ppd_item)
-            {
-              if (g_str_equal (match, match_levels[j]))
-                {
-                  ppd_item = g_new0 (PPDName, 1);
-                  ppd_item->ppd_name = g_strdup (driver);
+          if (!g_str_equal (match, match_levels[j]))
+            continue;
 
-                  if (g_strcmp0 (match, "exact-cmd") == 0)
-                    ppd_item->ppd_match_level = PPD_EXACT_CMD_MATCH;
-                  else if (g_strcmp0 (match, "exact") == 0)
-                    ppd_item->ppd_match_level = PPD_EXACT_MATCH;
-                  else if (g_strcmp0 (match, "close") == 0)
-                    ppd_item->ppd_match_level = PPD_CLOSE_MATCH;
-                  else if (g_strcmp0 (match, "generic") == 0)
-                    ppd_item->ppd_match_level = PPD_GENERIC_MATCH;
-                  else if (g_strcmp0 (match, "none") == 0)
-                    ppd_item->ppd_match_level = PPD_NO_MATCH;
-                }
-            }
+          ppd_item = g_new0 (PPDName, 1);
+          ppd_item->ppd_name = g_strdup (driver);
+
+          if (g_strcmp0 (match, "exact-cmd") == 0)
+            ppd_item->ppd_match_level = PPD_EXACT_CMD_MATCH;
+          else if (g_strcmp0 (match, "exact") == 0)
+            ppd_item->ppd_match_level = PPD_EXACT_MATCH;
+          else if (g_strcmp0 (match, "close") == 0)
+            ppd_item->ppd_match_level = PPD_CLOSE_MATCH;
+          else if (g_strcmp0 (match, "generic") == 0)
+            ppd_item->ppd_match_level = PPD_GENERIC_MATCH;
+          else if (g_strcmp0 (match, "none") == 0)
+            ppd_item->ppd_match_level = PPD_NO_MATCH;
+
+          return ppd_item;
         }
     }
 
-  return ppd_item;
+  return NULL;
 }
 
 
