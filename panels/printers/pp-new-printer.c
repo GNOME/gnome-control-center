@@ -483,10 +483,9 @@ get_ppd_item_from_output (GVariant *output)
       g_variant_get (output, "(@a(ss))", &array);
       if (array)
         {
-          GVariantIter *iter;
-
           for (j = 0; j < G_N_ELEMENTS (match_levels) && !ppd_item; j++)
             {
+              g_autoptr(GVariantIter) iter = NULL;
               const gchar *driver, *match;
 
               g_variant_get (array, "a(ss)", &iter);
@@ -1035,7 +1034,7 @@ get_missing_executables_cb (GObject      *source_object,
 
       if (array)
         {
-          GVariantIter *iter;
+          g_autoptr(GVariantIter) iter = NULL;
           const gchar  *executable;
 
           g_variant_get (array, "as", &iter);
