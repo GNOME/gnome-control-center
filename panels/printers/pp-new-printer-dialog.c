@@ -898,7 +898,7 @@ group_physical_devices_dbus_cb (GObject      *source_object,
   GVariant         *output;
   g_autoptr(GError) error = NULL;
   gchar          ***result = NULL;
-  gint              i, j;
+  gint              i;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -914,26 +914,14 @@ group_physical_devices_dbus_cb (GObject      *source_object,
       if (array)
         {
           GVariantIter *iter;
-          GVariantIter *subiter;
-          GVariant     *item;
+          GStrv device_uris;
 
           result = g_new0 (gchar **, g_variant_n_children (array) + 1);
           g_variant_get (array, "aas", &iter);
           i = 0;
-          while ((item = g_variant_iter_next_value (iter)))
+          while (g_variant_iter_next (iter, "^as", &device_uris))
             {
-              const gchar *device_uri;
-
-              result[i] = g_new0 (gchar *, g_variant_n_children (item) + 1);
-              g_variant_get (item, "as", &subiter);
-              j = 0;
-              while (g_variant_iter_next (subiter, "&s", &device_uri))
-                {
-                  result[i][j] = g_strdup (device_uri);
-                  j++;
-                }
-
-              g_variant_unref (item);
+              result[i] = device_uris;
               i++;
             }
 
