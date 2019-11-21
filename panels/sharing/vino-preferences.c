@@ -39,7 +39,7 @@ vino_get_authtype (GValue   *value,
   g_variant_iter_init (&iter, variant);
   g_value_set_boolean (value, TRUE);
 
-  while (g_variant_iter_next (&iter, "s", &type))
+  while (g_variant_iter_next (&iter, "&s", &type))
     if (strcmp (type, "none") == 0)
       g_value_set_boolean (value, FALSE);
 
