@@ -155,11 +155,11 @@ printer_rename_dbus_cb (GObject      *source_object,
                         GAsyncResult *res,
                         gpointer      user_data)
 {
-  PpPrinter        *self;
-  GVariant         *output;
-  gboolean          result = FALSE;
-  g_autoptr(GError) error = NULL;
-  GTask            *task = user_data;
+  PpPrinter          *self;
+  g_autoptr(GVariant) output = NULL;
+  gboolean            result = FALSE;
+  g_autoptr(GError)   error = NULL;
+  GTask              *task = user_data;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -186,8 +186,6 @@ printer_rename_dbus_cb (GObject      *source_object,
         }
 
       g_task_return_boolean (task, result);
-
-      g_variant_unref (output);
     }
   else
     {
@@ -423,10 +421,10 @@ pp_printer_delete_dbus_cb (GObject      *source_object,
                            GAsyncResult *res,
                            gpointer      user_data)
 {
-  GVariant         *output;
-  gboolean          result = FALSE;
-  g_autoptr(GError) error = NULL;
-  GTask            *task = user_data;
+  g_autoptr(GVariant) output = NULL;
+  gboolean            result = FALSE;
+  g_autoptr(GError)   error = NULL;
+  GTask              *task = user_data;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -447,8 +445,6 @@ pp_printer_delete_dbus_cb (GObject      *source_object,
         result = TRUE;
 
       g_task_return_boolean (task, result);
-
-      g_variant_unref (output);
     }
   else
     {
