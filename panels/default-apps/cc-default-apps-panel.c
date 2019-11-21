@@ -52,8 +52,8 @@ struct _CcDefaultAppsPanel
 G_DEFINE_TYPE (CcDefaultAppsPanel, cc_default_apps_panel, CC_TYPE_PANEL)
 
 static void
-default_app_changed (GtkAppChooserButton *button,
-                     CcDefaultAppsPanel  *self)
+default_app_changed (CcDefaultAppsPanel  *self,
+                     GtkAppChooserButton *button)
 {
   g_autoptr(GAppInfo) info = NULL;
   g_autoptr(GError) error = NULL;
@@ -144,8 +144,8 @@ info_panel_setup_default_app (CcDefaultAppsPanel *self,
   gtk_app_chooser_button_set_show_default_item (GTK_APP_CHOOSER_BUTTON (button), TRUE);
   gtk_grid_attach (GTK_GRID (self->default_apps_grid), button, left_attach, top_attach,
                    1, 1);
-  g_signal_connect (G_OBJECT (button), "changed",
-                    G_CALLBACK (default_app_changed), self);
+  g_signal_connect_object (G_OBJECT (button), "changed",
+                           G_CALLBACK (default_app_changed), self, G_CONNECT_SWAPPED);
   gtk_widget_show (button);
 
   label = WIDGET_FROM_OFFSET (data->label_offset);
