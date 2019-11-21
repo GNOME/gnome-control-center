@@ -536,7 +536,7 @@ gboolean
 printer_set_location (const gchar *printer_name,
                       const gchar *location)
 {
-  GDBusConnection    *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
   gboolean            result = FALSE;
   g_autoptr(GError)   error = NULL;
@@ -562,7 +562,6 @@ printer_set_location (const gchar *printer_name,
                                         -1,
                                         NULL,
                                         &error);
-  g_object_unref (bus);
 
   if (output)
     {
@@ -587,7 +586,7 @@ printer_set_accepting_jobs (const gchar *printer_name,
                             gboolean     accepting_jobs,
                             const gchar *reason)
 {
-  GDBusConnection    *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
   gboolean            result = FALSE;
   g_autoptr(GError)   error = NULL;
@@ -616,7 +615,6 @@ printer_set_accepting_jobs (const gchar *printer_name,
                                         -1,
                                         NULL,
                                         &error);
-  g_object_unref (bus);
 
   if (output)
     {
@@ -640,7 +638,7 @@ gboolean
 printer_set_enabled (const gchar *printer_name,
                      gboolean     enabled)
 {
-  GDBusConnection    *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
   gboolean            result = FALSE;
   g_autoptr(GError)   error = NULL;
@@ -666,7 +664,6 @@ printer_set_enabled (const gchar *printer_name,
                                         -1,
                                         NULL,
                                         &error);
-  g_object_unref (bus);
 
   if (output)
     {
@@ -689,7 +686,7 @@ printer_set_enabled (const gchar *printer_name,
 gboolean
 printer_delete (const gchar *printer_name)
 {
-  GDBusConnection    *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
   gboolean            result = FALSE;
   g_autoptr(GError)   error = NULL;
@@ -715,7 +712,6 @@ printer_delete (const gchar *printer_name)
                                         -1,
                                         NULL,
                                         &error);
-  g_object_unref (bus);
 
   if (output)
     {
@@ -738,7 +734,6 @@ printer_delete (const gchar *printer_name)
 gboolean
 printer_set_default (const gchar *printer_name)
 {
-  GDBusConnection  *bus;
   const char       *cups_server;
   gboolean          result = FALSE;
   g_autoptr(GError) error = NULL;
@@ -752,6 +747,8 @@ printer_set_default (const gchar *printer_name)
       g_ascii_strncasecmp (cups_server, "::1", 3) == 0 ||
       cups_server[0] == '/')
     {
+      g_autoptr(GDBusConnection) bus = NULL;
+
       /* Clean .cups/lpoptions before setting
        * default printer on local CUPS server.
        */
@@ -777,7 +774,6 @@ printer_set_default (const gchar *printer_name)
                                                 -1,
                                                 NULL,
                                                 &error);
-          g_object_unref (bus);
 
           if (output)
             {
@@ -810,7 +806,7 @@ gboolean
 printer_set_shared (const gchar *printer_name,
                     gboolean     shared)
 {
-  GDBusConnection    *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
   gboolean            result = FALSE;
   g_autoptr(GError)   error = NULL;
@@ -836,7 +832,6 @@ printer_set_shared (const gchar *printer_name,
                                         -1,
                                         NULL,
                                         &error);
-  g_object_unref (bus);
 
   if (output)
     {
@@ -861,7 +856,7 @@ printer_set_job_sheets (const gchar *printer_name,
                         const gchar *start_sheet,
                         const gchar *end_sheet)
 {
-  GDBusConnection    *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
   g_autoptr(GError)   error = NULL;
   gboolean            result = FALSE;
@@ -887,7 +882,6 @@ printer_set_job_sheets (const gchar *printer_name,
                                         -1,
                                         NULL,
                                         &error);
-  g_object_unref (bus);
 
   if (output)
     {
@@ -912,7 +906,7 @@ printer_set_policy (const gchar *printer_name,
                     const gchar *policy,
                     gboolean     error_policy)
 {
-  GDBusConnection    *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
   gboolean            result = FALSE;
   g_autoptr(GError)   error = NULL;
@@ -951,7 +945,6 @@ printer_set_policy (const gchar *printer_name,
                                           -1,
                                           NULL,
                                           &error);
-  g_object_unref (bus);
 
   if (output)
     {
@@ -976,7 +969,7 @@ printer_set_users (const gchar  *printer_name,
                    gchar       **users,
                    gboolean      allowed)
 {
-  GDBusConnection    *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   GVariantBuilder     array_builder;
   gint                i;
   g_autoptr(GVariant) output = NULL;
@@ -1021,7 +1014,6 @@ printer_set_users (const gchar  *printer_name,
                                           -1,
                                           NULL,
                                           &error);
-  g_object_unref (bus);
 
   if (output)
     {
@@ -1045,7 +1037,7 @@ gboolean
 class_add_printer (const gchar *class_name,
                    const gchar *printer_name)
 {
-  GDBusConnection    *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
   gboolean            result = FALSE;
   g_autoptr(GError)   error = NULL;
@@ -1071,7 +1063,6 @@ class_add_printer (const gchar *class_name,
                                         -1,
                                         NULL,
                                         &error);
-  g_object_unref (bus);
 
   if (output)
     {
