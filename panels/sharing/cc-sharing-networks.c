@@ -134,8 +134,8 @@ cc_sharing_update_networks (CcSharingNetworks *self)
 }
 
 static void
-cc_sharing_networks_remove_network (GtkWidget         *button,
-				    CcSharingNetworks *self)
+cc_sharing_networks_remove_network (CcSharingNetworks *self,
+                                    GtkWidget         *button)
 {
   GtkWidget *row;
   g_autoptr(GError) error = NULL;
@@ -159,11 +159,10 @@ cc_sharing_networks_remove_network (GtkWidget         *button,
 }
 
 static gboolean
-cc_sharing_networks_enable_network (GtkSwitch *widget,
+cc_sharing_networks_enable_network (CcSharingNetworks *self,
 				    gboolean   state,
-				    gpointer   user_data)
+                                    GtkSwitch *widget)
 {
-  CcSharingNetworks *self = user_data;
   g_autoptr(GError) error = NULL;
   gboolean ret;
 
@@ -242,8 +241,8 @@ cc_sharing_networks_new_row (const char        *uuid,
   gtk_widget_set_margin_end (w, 12);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_box_pack_end (GTK_BOX (box), w, FALSE, FALSE, 0);
-  g_signal_connect (G_OBJECT (w), "clicked",
-		    G_CALLBACK (cc_sharing_networks_remove_network), self);
+  g_signal_connect_object (G_OBJECT (w), "clicked",
+                           G_CALLBACK (cc_sharing_networks_remove_network), self, G_CONNECT_SWAPPED);
   g_object_set_data (G_OBJECT (w), "row", row);
 
   g_object_set_data_full (G_OBJECT (row), "uuid", g_strdup (uuid), g_free);
@@ -284,8 +283,8 @@ cc_sharing_networks_new_current_row (CcSharingNetworks *self)
   gtk_widget_set_margin_end (w, 12);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_box_pack_end (GTK_BOX (box), w, FALSE, FALSE, 0);
-  g_signal_connect (G_OBJECT (w), "state-set",
-		    G_CALLBACK (cc_sharing_networks_enable_network), self);
+  g_signal_connect_object (G_OBJECT (w), "state-set",
+                           G_CALLBACK (cc_sharing_networks_enable_network), self, G_CONNECT_SWAPPED);
   self->current_switch = w;
   g_object_set_data (G_OBJECT (w), "row", row);
 
@@ -401,9 +400,7 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
 }
 
 static void
-current_network_changed (GObject           *object,
-			 GParamSpec        *pspec,
-			 CcSharingNetworks *self)
+current_network_changed (CcSharingNetworks *self)
 {
   cc_sharing_update_networks (self);
   cc_sharing_update_networks_box (self);
@@ -434,8 +431,8 @@ cc_sharing_networks_constructed (GObject *object)
   cc_sharing_update_networks (self);
   cc_sharing_update_networks_box (self);
 
-  g_signal_connect (self->proxy, "notify::current-network",
-		    G_CALLBACK (current_network_changed), self);
+  g_signal_connect_object (self->proxy, "notify::current-network",
+                           G_CALLBACK (current_network_changed), self, G_CONNECT_SWAPPED);
 }
 
 static void
