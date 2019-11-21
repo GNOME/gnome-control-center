@@ -1934,10 +1934,9 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
 
       if (array)
         {
-          GVariantIter *iter;
-
           for (j = 0; j < G_N_ELEMENTS (match_levels) && n < data->count; j++)
             {
+              g_autoptr(GVariantIter) iter = NULL;
               const gchar *driver, *match;
 
               g_variant_get (array,
@@ -2163,11 +2162,11 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
 
       if (devices_variant)
         {
-          GVariantIter *iter;
           gint          index = -1;
 
           if (data->device_uri)
             {
+              g_autoptr(GVariantIter) iter = NULL;
               const gchar *key, *value;
               g_autofree gchar *suffix = NULL;
 
@@ -3306,7 +3305,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
 
       if (devices_variant)
         {
-          GVariantIter *iter;
+          g_autoptr(GVariantIter) iter = NULL;
           const gchar  *key, *value;
           gint          index = -1, max_index = -1, i;
 
@@ -3320,11 +3319,13 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
 
           if (max_index >= 0)
             {
+              g_autoptr(GVariantIter) iter2 = NULL;
+
               num_of_devices = max_index + 1;
               devices = g_new0 (PpPrintDevice *, num_of_devices);
 
-              g_variant_get (devices_variant, "a{ss}", &iter);
-              while (g_variant_iter_next (iter, "{&s&s}", &key, &value))
+              g_variant_get (devices_variant, "a{ss}", &iter2);
+              while (g_variant_iter_next (iter2, "{&s&s}", &key, &value))
                 {
                   index = get_suffix_index (key);
                   if (index >= 0)
