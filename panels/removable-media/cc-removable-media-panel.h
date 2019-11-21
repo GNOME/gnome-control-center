@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef CC_REMOVABLE_MEDIA_PANEL_H
-#define CC_REMOVABLE_MEDIA_PANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -27,7 +26,4 @@ G_BEGIN_DECLS
 #define CC_TYPE_REMOVABLE_MEDIA_PANEL (cc_removable_media_panel_get_type ())
 G_DECLARE_FINAL_TYPE (CcRemovableMediaPanel, cc_removable_media_panel, CC, REMOVABLE_MEDIA_PANEL, CcPanel)
 
-
 G_END_DECLS
-
-#endif /* CC_REMOVABLE_MEDIA_PANEL_H */
