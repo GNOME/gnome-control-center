@@ -40,8 +40,6 @@ struct _CcColorProfile
   GtkWidget   *widget_image;
   GtkWidget   *widget_info;
   GSettings   *settings;
-  guint        device_changed_id;
-  guint        profile_changed_id;
 };
 
 #define GCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD      "recalibrate-printer-threshold"
@@ -332,11 +330,6 @@ cc_color_profile_finalize (GObject *object)
 {
   CcColorProfile *color_profile = CC_COLOR_PROFILE (object);
 
-  if (color_profile->device_changed_id > 0)
-    g_signal_handler_disconnect (color_profile->device, color_profile->device_changed_id);
-  if (color_profile->profile_changed_id > 0)
-    g_signal_handler_disconnect (color_profile->profile, color_profile->profile_changed_id);
-
   g_free (color_profile->sortable);
   g_object_unref (color_profile->device);
   g_object_unref (color_profile->profile);
@@ -346,13 +339,12 @@ cc_color_profile_finalize (GObject *object)
 }
 
 static void
-cc_color_profile_changed_cb (CdDevice *device,
-                             CcColorProfile *color_profile)
+cc_color_profile_changed_cb (CcColorProfile *color_profile)
 {
   g_autoptr(CdProfile) profile = NULL;
 
   /* check to see if the default has changed */
-  profile = cd_device_get_default_profile (device);
+  profile = cd_device_get_default_profile (color_profile->device);
   if (profile != NULL)
     color_profile->is_default = g_strcmp0 (cd_profile_get_object_path (profile),
                                            cd_profile_get_object_path (color_profile->profile)) == 0;
@@ -384,12 +376,10 @@ cc_color_profile_constructed (GObject *object)
   g_autofree gchar *title = NULL;
 
   /* watch to see if the default changes */
-  color_profile->device_changed_id =
-    g_signal_connect (color_profile->device, "changed",
-                      G_CALLBACK (cc_color_profile_changed_cb), color_profile);
-  color_profile->profile_changed_id =
-    g_signal_connect (color_profile->profile, "changed",
-                      G_CALLBACK (cc_color_profile_changed_cb), color_profile);
+  g_signal_connect_object (color_profile->device, "changed",
+                           G_CALLBACK (cc_color_profile_changed_cb), color_profile, G_CONNECT_SWAPPED);
+  g_signal_connect_object (color_profile->profile, "changed",
+                           G_CALLBACK (cc_color_profile_changed_cb), color_profile, G_CONNECT_SWAPPED);
 
   /* sort the profiles in the list by:
    * 1. thier device (required)

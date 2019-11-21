@@ -279,10 +279,9 @@ cc_color_calibrate_calib_set_output_gamma (CcColorCalibrate *calibrate,
 }
 
 static void
-cc_color_calibrate_property_changed_cb (GDBusProxy *proxy,
+cc_color_calibrate_property_changed_cb (CcColorCalibrate *calibrate,
                                         GVariant *changed_properties,
-                                        GStrv invalidated_properties,
-                                        CcColorCalibrate *calibrate)
+                                        GStrv invalidated_properties)
 {
   gboolean ret;
   GtkWidget *widget;
@@ -473,11 +472,10 @@ cc_color_calibrate_finished (CcColorCalibrate *calibrate,
 }
 
 static void
-cc_color_calibrate_signal_cb (GDBusProxy *proxy,
+cc_color_calibrate_signal_cb (CcColorCalibrate *calibrate,
                               const gchar *sender_name,
                               const gchar *signal_name,
-                              GVariant *parameters,
-                              CcColorCalibrate *calibrate)
+                              GVariant *parameters)
 {
   CdColorRGB color;
   CdColorRGB *color_tmp;
@@ -656,22 +654,27 @@ out:
 }
 
 static void
-cc_color_calibrate_window_realize_cb (GtkWidget *widget,
-                                      CcColorCalibrate *calibrate)
+cc_color_calibrate_window_realize_cb (CcColorCalibrate *self)
 {
+  GtkWidget *widget;
+
+  widget = GTK_WIDGET (gtk_builder_get_object (self->builder,
+                                               "dialog_calibrate"));
   gtk_window_fullscreen (GTK_WINDOW (widget));
   gtk_window_maximize (GTK_WINDOW (widget));
 }
 
 static gboolean
-cc_color_calibrate_window_state_cb (GtkWidget *widget,
-                                    GdkEvent *event,
-                                    CcColorCalibrate *calibrate)
+cc_color_calibrate_window_state_cb (CcColorCalibrate *calibrate,
+                                    GdkEvent *event)
 {
   gboolean ret;
   g_autoptr(GError) error = NULL;
   GdkEventWindowState *event_state = (GdkEventWindowState *) event;
-  GtkWindow *window = GTK_WINDOW (widget);
+  GtkWindow *window;
+
+  window = GTK_WINDOW (gtk_builder_get_object (calibrate->builder,
+                                               "dialog_calibrate"));
 
   /* check event */
   if (event->type != GDK_WINDOW_STATE)
@@ -689,16 +692,15 @@ cc_color_calibrate_window_state_cb (GtkWidget *widget,
 }
 
 static void
-cc_color_calibrate_button_done_cb (GtkWidget *widget,
-                                   CcColorCalibrate *calibrate)
+cc_color_calibrate_button_done_cb (CcColorCalibrate *calibrate)
 {
   g_main_loop_quit (calibrate->loop);
 }
 
 static void
-cc_color_calibrate_button_start_cb (GtkWidget *widget,
-                                    CcColorCalibrate *calibrate)
+cc_color_calibrate_button_start_cb (CcColorCalibrate *calibrate)
 {
+  GtkWidget *widget;
   g_autoptr(GError) error = NULL;
   g_autoptr(GVariant) retval = NULL;
 
@@ -723,15 +725,19 @@ cc_color_calibrate_button_start_cb (GtkWidget *widget,
 }
 
 static void
-cc_color_calibrate_button_cancel_cb (GtkWidget *widget,
-                                     CcColorCalibrate *calibrate)
+cc_color_calibrate_button_cancel_cb (CcColorCalibrate *calibrate)
 {
   cc_color_calibrate_cancel (calibrate);
 }
 
 static gboolean
-cc_color_calibrate_alpha_window_draw (GtkWidget *widget, cairo_t *cr)
+cc_color_calibrate_alpha_window_draw (CcColorCalibrate *calibrate, cairo_t *cr)
 {
+  GtkWidget *widget;
+
+  widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
+                                               "dialog_calibrate"));
+
   if (gdk_screen_get_rgba_visual (gtk_widget_get_screen (widget)) &&
       gdk_screen_is_composited (gtk_widget_get_screen (widget)))
     {
@@ -749,12 +755,16 @@ cc_color_calibrate_alpha_window_draw (GtkWidget *widget, cairo_t *cr)
 }
 
 static void
-cc_color_calibrate_alpha_screen_changed_cb (GtkWindow *window,
-                                            GdkScreen *old_screen,
-                                            gpointer user_data)
+cc_color_calibrate_alpha_screen_changed_cb (CcColorCalibrate *calibrate)
 {
-  GdkScreen *screen = gtk_widget_get_screen (GTK_WIDGET (window));
-  GdkVisual *visual = gdk_screen_get_rgba_visual (screen);
+  GtkWidget *window;
+  GdkScreen *screen;
+  GdkVisual *visual;
+
+  window = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
+                                               "dialog_calibrate"));
+  screen = gtk_widget_get_screen (GTK_WIDGET (window));
+  visual = gdk_screen_get_rgba_visual (screen);
   if (visual == NULL)
     visual = gdk_screen_get_system_visual (screen);
   gtk_widget_set_visual (GTK_WIDGET (window), visual);
@@ -871,11 +881,11 @@ cc_color_calibrate_setup (CcColorCalibrate *calibrate,
   g_signal_connect_object (calibrate->proxy_helper,
                            "g-properties-changed",
                            G_CALLBACK (cc_color_calibrate_property_changed_cb),
-                           calibrate, 0);
+                           calibrate, G_CONNECT_SWAPPED);
   g_signal_connect_object (calibrate->proxy_helper,
                            "g-signal",
                            G_CALLBACK (cc_color_calibrate_signal_cb),
-                           calibrate, 0);
+                           calibrate, G_CONNECT_SWAPPED);
 out:
   return ret;
 }
@@ -976,9 +986,7 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
 }
 
 static gboolean
-cc_color_calibrate_delete_event_cb (GtkWidget *widget,
-                                    GdkEvent *event,
-                                    CcColorCalibrate *calibrate)
+cc_color_calibrate_delete_event_cb (CcColorCalibrate *calibrate)
 {
   /* do not destroy the window */
   cc_color_calibrate_cancel (calibrate);
@@ -1049,38 +1057,38 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
   /* connect to buttons */
   widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_start"));
-  g_signal_connect (widget, "clicked",
-                    G_CALLBACK (cc_color_calibrate_button_start_cb), calibrate);
+  g_signal_connect_object (widget, "clicked",
+                           G_CALLBACK (cc_color_calibrate_button_start_cb), calibrate, G_CONNECT_SWAPPED);
   widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_resume"));
-  g_signal_connect (widget, "clicked",
-                    G_CALLBACK (cc_color_calibrate_button_start_cb), calibrate);
+  g_signal_connect_object (widget, "clicked",
+                           G_CALLBACK (cc_color_calibrate_button_start_cb), calibrate, G_CONNECT_SWAPPED);
   widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_done"));
-  g_signal_connect (widget, "clicked",
-                    G_CALLBACK (cc_color_calibrate_button_done_cb), calibrate);
+  g_signal_connect_object (widget, "clicked",
+                           G_CALLBACK (cc_color_calibrate_button_done_cb), calibrate, G_CONNECT_SWAPPED);
   widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_cancel"));
-  g_signal_connect (widget, "clicked",
-                    G_CALLBACK (cc_color_calibrate_button_cancel_cb), calibrate);
+  g_signal_connect_object (widget, "clicked",
+                           G_CALLBACK (cc_color_calibrate_button_cancel_cb), calibrate, G_CONNECT_SWAPPED);
   gtk_widget_show (widget);
 
   /* setup the specialist calibration window */
   window = GTK_WINDOW (gtk_builder_get_object (calibrate->builder,
                                                "dialog_calibrate"));
-  g_signal_connect (window, "draw",
-                    G_CALLBACK (cc_color_calibrate_alpha_window_draw), calibrate);
-  g_signal_connect (window, "realize",
-                    G_CALLBACK (cc_color_calibrate_window_realize_cb), calibrate);
-  g_signal_connect (window, "window-state-event",
-                    G_CALLBACK (cc_color_calibrate_window_state_cb), calibrate);
-  g_signal_connect (window, "delete-event",
-                    G_CALLBACK (cc_color_calibrate_delete_event_cb), calibrate);
+  g_signal_connect_object (window, "draw",
+                           G_CALLBACK (cc_color_calibrate_alpha_window_draw), calibrate, G_CONNECT_SWAPPED);
+  g_signal_connect_object (window, "realize",
+                           G_CALLBACK (cc_color_calibrate_window_realize_cb), calibrate, G_CONNECT_SWAPPED);
+  g_signal_connect_object (window, "window-state-event",
+                           G_CALLBACK (cc_color_calibrate_window_state_cb), calibrate, G_CONNECT_SWAPPED);
+  g_signal_connect_object (window, "delete-event",
+                           G_CALLBACK (cc_color_calibrate_delete_event_cb), calibrate, G_CONNECT_SWAPPED);
   gtk_widget_set_app_paintable (GTK_WIDGET (window), TRUE);
   gtk_window_set_keep_above (window, TRUE);
-  cc_color_calibrate_alpha_screen_changed_cb (GTK_WINDOW (window), NULL, calibrate);
-  g_signal_connect (window, "screen-changed",
-                    G_CALLBACK (cc_color_calibrate_alpha_screen_changed_cb), calibrate);
+  cc_color_calibrate_alpha_screen_changed_cb (calibrate);
+  g_signal_connect_object (window, "screen-changed",
+                           G_CALLBACK (cc_color_calibrate_alpha_screen_changed_cb), calibrate, G_CONNECT_SWAPPED);
   calibrate->window = window;
 }
 
