@@ -123,7 +123,6 @@ on_password_stored (GObject      *source,
                     GAsyncResult *result,
                     gpointer      user_data)
 {
-  GtkEntry *entry = GTK_ENTRY (user_data);
   GError *error = NULL;
 
   if (!secret_password_store_finish (result, &error))
@@ -131,41 +130,18 @@ on_password_stored (GObject      *source,
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           g_warning ("Failed to store VNC password: %s", error->message);
-          g_object_set_data (G_OBJECT (entry),
-                             "vnc-password-cancellable", NULL);
         }
       g_error_free (error);
-    }
-  else
-    {
-      g_object_set_data (G_OBJECT (entry),
-                         "vnc-password-cancellable", NULL);
     }
 }
 
 void
-cc_grd_on_vnc_password_entry_notify_text (GtkEntry   *entry,
-                                          GParamSpec *pspec,
-                                          gpointer    user_data)
+cc_grd_store_vnc_password (const gchar *password, GCancellable *cancellable)
 {
-  GCancellable *cancellable;
-  const char *password;
-
-  cancellable = g_object_get_data (G_OBJECT (entry), "vnc-password-cancellable");
-  if (cancellable)
-    g_cancellable_cancel (cancellable);
-
-  cancellable = g_cancellable_new ();
-  g_object_set_data_full (G_OBJECT (entry),
-                          "vnc-password-cancellable",
-                          cancellable, g_object_unref);
-
-  password = gtk_entry_get_text (entry);
-
   secret_password_store (CC_GRD_VNC_PASSWORD_SCHEMA,
                          SECRET_COLLECTION_DEFAULT,
                          "GNOME Remote Desktop VNC password",
                          password,
-                         cancellable, on_password_stored, entry,
+                         cancellable, on_password_stored, NULL,
                          NULL);
 }
