@@ -1076,6 +1076,12 @@ cc_sharing_panel_setup_screen_sharing_dialog_vino (CcSharingPanel *self)
 }
 
 static void
+on_vnc_password_entry_notify_text (CcSharingPanel *self)
+{
+  cc_grd_store_vnc_password (gtk_entry_get_text (GTK_ENTRY (self->remote_control_password_entry)), cc_panel_get_cancellable (CC_PANEL (self)));
+}
+
+static void
 cc_sharing_panel_setup_screen_sharing_dialog_gnome_remote_desktop (CcSharingPanel *self)
 {
   g_autoptr(GSettings) vnc_settings = NULL;
@@ -1142,10 +1148,11 @@ cc_sharing_panel_setup_screen_sharing_dialog_gnome_remote_desktop (CcSharingPane
                                 NULL,
                                 NULL);
 
-  g_signal_connect (self->remote_control_password_entry,
-                    "notify::text",
-                    G_CALLBACK (cc_grd_on_vnc_password_entry_notify_text),
-                    self);
+  g_signal_connect_object (self->remote_control_password_entry,
+                           "notify::text",
+                           G_CALLBACK (on_vnc_password_entry_notify_text),
+                           self,
+                           G_CONNECT_SWAPPED);
 
   networks = cc_sharing_networks_new (self->sharing_proxy, "gnome-remote-desktop");
   gtk_box_pack_end (GTK_BOX (self->remote_control_box), networks, TRUE, TRUE, 0);
