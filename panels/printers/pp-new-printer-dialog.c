@@ -935,7 +935,7 @@ group_physical_devices_dbus_cb (GObject      *source_object,
 
       if (array)
         {
-          GVariantIter *iter;
+          g_autoptr(GVariantIter) iter = NULL;
           GStrv device_uris;
 
           result = g_new0 (gchar **, g_variant_n_children (array) + 1);
