@@ -366,8 +366,8 @@ setup_keyboard_options (GtkListStore *store)
   GList *l;
 
   for (l = cc_keyboard_option_get_all (); l; l = l->next)
-    g_signal_connect (l->data, "changed",
-                      G_CALLBACK (xkb_option_changed), store);
+    g_signal_connect_object (l->data, "changed",
+                             G_CALLBACK (xkb_option_changed), store, 0);
 }
 
 KeyList*
