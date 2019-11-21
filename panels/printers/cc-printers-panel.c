@@ -136,19 +136,21 @@ execute_action (CcPrintersPanel *self,
   PpPrinterEntry         *printer_entry;
   const gchar            *action_name;
   const gchar            *printer_name;
-  GVariant               *variant;
-  GVariant               *action_variant;
   gint                    count;
 
   count = g_variant_n_children (action);
   if (count == 2)
     {
+      g_autoptr(GVariant) action_variant = NULL;
+
       g_variant_get_child (action, 0, "v", &action_variant);
       action_name = g_variant_get_string (action_variant, NULL);
 
       /* authenticate-jobs printer-name */
       if (g_strcmp0 (action_name, "authenticate-jobs") == 0)
         {
+          g_autoptr(GVariant) variant = NULL;
+
           g_variant_get_child (action, 1, "v", &variant);
           printer_name = g_variant_get_string (variant, NULL);
 
@@ -157,12 +159,12 @@ execute_action (CcPrintersPanel *self,
             pp_printer_entry_authenticate_jobs (printer_entry);
           else
             g_warning ("Could not find printer \"%s\"!", printer_name);
-
-          g_variant_unref (variant);
         }
       /* show-jobs printer-name */
       else if (g_strcmp0 (action_name, "show-jobs") == 0)
         {
+          g_autoptr(GVariant) variant = NULL;
+
           g_variant_get_child (action, 1, "v", &variant);
           printer_name = g_variant_get_string (variant, NULL);
 
@@ -171,11 +173,7 @@ execute_action (CcPrintersPanel *self,
             pp_printer_entry_show_jobs_dialog (printer_entry);
           else
             g_warning ("Could not find printer \"%s\"!", printer_name);
-
-          g_variant_unref (variant);
         }
-
-      g_variant_unref (action_variant);
     }
 }
 
@@ -340,9 +338,7 @@ on_get_job_attributes_cb (GObject      *source_object,
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   const gchar            *job_originating_user_name;
   const gchar            *job_printer_uri;
-  GVariant               *attributes;
-  GVariant               *username;
-  GVariant               *printer_uri;
+  g_autoptr(GVariant)     attributes = NULL;
   g_autoptr(GError)       error = NULL;
 
   attributes = pp_job_get_attributes_finish (PP_JOB (source_object), res, &error);
@@ -350,8 +346,12 @@ on_get_job_attributes_cb (GObject      *source_object,
 
   if (attributes != NULL)
     {
+      g_autoptr(GVariant) username = NULL;
+
       if ((username = g_variant_lookup_value (attributes, "job-originating-user-name", G_VARIANT_TYPE ("as"))) != NULL)
         {
+          g_autoptr(GVariant) printer_uri = NULL;
+
           if ((printer_uri = g_variant_lookup_value (attributes, "job-printer-uri", G_VARIANT_TYPE ("as"))) != NULL)
             {
               job_originating_user_name = g_variant_get_string (g_variant_get_child_value (username, 0), NULL);
@@ -370,14 +370,8 @@ on_get_job_attributes_cb (GObject      *source_object,
 
                   pp_printer_entry_update_jobs_count (printer_entry);
                 }
-
-              g_variant_unref (printer_uri);
             }
-
-          g_variant_unref (username);
         }
-
-      g_variant_unref (attributes);
     }
 }
 

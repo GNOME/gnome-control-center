@@ -1905,7 +1905,7 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
 
   if (output)
     {
-      GVariant *array;
+      g_autoptr(GVariant) array = NULL;
 
       g_variant_get (output, "(@a(ss))",
                      &array);
@@ -1945,8 +1945,6 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
                     }
                 }
             }
-
-          g_variant_unref (array);
         }
     }
   else
@@ -2125,7 +2123,7 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
   if (output)
     {
       const gchar *ret_error;
-      GVariant    *devices_variant = NULL;
+      g_autoptr(GVariant) devices_variant = NULL;
 
       g_variant_get (output, "(&s@a{ss})",
                      &ret_error,
@@ -2189,8 +2187,6 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
                     }
                 }
             }
-
-          g_variant_unref (devices_variant);
         }
     }
   else
@@ -3263,7 +3259,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
   if (output)
     {
       const gchar *ret_error;
-      GVariant    *devices_variant = NULL;
+      g_autoptr(GVariant) devices_variant = NULL;
       gboolean     is_network_device;
 
       g_variant_get (output, "(&s@a{ss})",
@@ -3335,8 +3331,6 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
 
               g_free (devices);
             }
-
-          g_variant_unref (devices_variant);
         }
     }
   else
