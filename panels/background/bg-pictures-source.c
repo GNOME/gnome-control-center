@@ -751,13 +751,11 @@ file_added (GFile            *file,
 }
 
 static void
-files_changed_cb (GFileMonitor      *monitor,
+files_changed_cb (BgPicturesSource  *self,
                   GFile             *file,
                   GFile             *other_file,
-                  GFileMonitorEvent  event_type,
-                  gpointer           user_data)
+                  GFileMonitorEvent  event_type)
 {
-  BgPicturesSource *self = BG_PICTURES_SOURCE (user_data);
   g_autofree gchar *uri = NULL;
 
   switch (event_type)
@@ -798,10 +796,10 @@ monitor_path (BgPicturesSource *self,
                                       NULL);
 
   if (monitor)
-    g_signal_connect (monitor,
-                      "changed",
-                      G_CALLBACK (files_changed_cb),
-                      self);
+    g_signal_connect_object (monitor,
+                             "changed",
+                             G_CALLBACK (files_changed_cb),
+                             self, G_CONNECT_SWAPPED);
 
   return monitor;
 }
@@ -840,7 +838,7 @@ bg_pictures_source_init (BgPicturesSource *self)
   self->cache_dir_monitor = monitor_path (self, cache_path);
 
   self->grl_miner = cc_background_grilo_miner_new ();
-  g_signal_connect_swapped (self->grl_miner, "media-found", G_CALLBACK (media_found_cb), self);
+  g_signal_connect_object (self->grl_miner, "media-found", G_CALLBACK (media_found_cb), self, G_CONNECT_SWAPPED);
   cc_background_grilo_miner_start (self->grl_miner);
 }
 
