@@ -387,12 +387,12 @@ reset_titlebar (CcDisplayPanel *self)
 }
 
 static void
-active_panel_changed (CcShell    *shell,
-                      GParamSpec *pspec,
-                      CcPanel    *self)
+active_panel_changed (CcPanel *self)
 {
+  CcShell *shell;
   g_autoptr(CcPanel) panel = NULL;
 
+  shell = cc_panel_get_shell (CC_PANEL (self));
   g_object_get (shell, "active-panel", &panel, NULL);
   if (panel != self)
     reset_titlebar (CC_DISPLAY_PANEL (self));
@@ -402,8 +402,6 @@ static void
 cc_display_panel_dispose (GObject *object)
 {
   CcDisplayPanel *self = CC_DISPLAY_PANEL (object);
-  CcShell *shell;
-  GtkWidget *toplevel;
 
   reset_titlebar (CC_DISPLAY_PANEL (object));
 
@@ -417,11 +415,6 @@ cc_display_panel_dispose (GObject *object)
 
   if (self->focus_id)
     {
-      shell = cc_panel_get_shell (CC_PANEL (object));
-      toplevel = cc_shell_get_toplevel (shell);
-      if (toplevel != NULL)
-        g_signal_handler_disconnect (G_OBJECT (toplevel),
-                                     self->focus_id);
       self->focus_id = 0;
       monitor_labeler_hide (CC_DISPLAY_PANEL (object));
     }
@@ -609,7 +602,7 @@ static void
 cc_display_panel_constructed (GObject *object)
 {
   g_signal_connect_object (cc_panel_get_shell (CC_PANEL (object)), "notify::active-panel",
-                           G_CALLBACK (active_panel_changed), object, 0);
+                           G_CALLBACK (active_panel_changed), object, G_CONNECT_SWAPPED);
 
   G_OBJECT_CLASS (cc_display_panel_parent_class)->constructed (object);
 }
@@ -1033,18 +1026,16 @@ mapped_cb (CcDisplayPanel *panel)
   shell = cc_panel_get_shell (CC_PANEL (panel));
   toplevel = cc_shell_get_toplevel (shell);
   if (toplevel && !panel->focus_id)
-    panel->focus_id = g_signal_connect_swapped (toplevel, "notify::has-toplevel-focus",
-                                               G_CALLBACK (dialog_toplevel_focus_changed), panel);
+    panel->focus_id = g_signal_connect_object (toplevel, "notify::has-toplevel-focus",
+                                               G_CALLBACK (dialog_toplevel_focus_changed), panel, G_CONNECT_SWAPPED);
 }
 
 static void
-cc_display_panel_up_client_changed (UpClient       *client,
-                                    GParamSpec     *pspec,
-                                    CcDisplayPanel *self)
+cc_display_panel_up_client_changed (CcDisplayPanel *self)
 {
   gboolean lid_is_closed;
 
-  lid_is_closed = up_client_get_lid_is_closed (client);
+  lid_is_closed = up_client_get_lid_is_closed (self->up_client);
 
   if (lid_is_closed != self->lid_is_closed)
     {
@@ -1104,10 +1095,9 @@ update_has_accel (CcDisplayPanel *self)
 }
 
 static void
-sensor_proxy_properties_changed_cb (GDBusProxy     *proxy,
+sensor_proxy_properties_changed_cb (CcDisplayPanel *self,
                                     GVariant       *changed_properties,
-                                    GStrv           invalidated_properties,
-                                    CcDisplayPanel *self)
+                                    GStrv           invalidated_properties)
 {
   GVariantDict dict;
 
@@ -1137,8 +1127,8 @@ sensor_proxy_appeared_cb (GDBusConnection *connection,
                                                         NULL);
   g_return_if_fail (self->iio_sensor_proxy);
 
-  g_signal_connect (self->iio_sensor_proxy, "g-properties-changed",
-                    G_CALLBACK (sensor_proxy_properties_changed_cb), self);
+  g_signal_connect_object (self->iio_sensor_proxy, "g-properties-changed",
+                           G_CALLBACK (sensor_proxy_properties_changed_cb), self, G_CONNECT_SWAPPED);
   update_has_accel (self);
 }
 
@@ -1232,9 +1222,9 @@ cc_display_panel_init (CcDisplayPanel *self)
   self->up_client = up_client_new ();
   if (up_client_get_lid_is_present (self->up_client))
     {
-      g_signal_connect (self->up_client, "notify::lid-is-closed",
-                        G_CALLBACK (cc_display_panel_up_client_changed), self);
-      cc_display_panel_up_client_changed (self->up_client, NULL, self);
+      g_signal_connect_object (self->up_client, "notify::lid-is-closed",
+                               G_CALLBACK (cc_display_panel_up_client_changed), self, G_CONNECT_SWAPPED);
+      cc_display_panel_up_client_changed (self);
     }
   else
     g_clear_object (&self->up_client);
