@@ -938,24 +938,20 @@ group_physical_devices_dbus_cb (GObject      *source_object,
           GVariantIter *iter;
           GVariantIter *subiter;
           GVariant     *item;
-          GVariant     *subitem;
-          gchar        *device_uri;
 
           result = g_new0 (gchar **, g_variant_n_children (array) + 1);
           g_variant_get (array, "aas", &iter);
           i = 0;
           while ((item = g_variant_iter_next_value (iter)))
             {
+              const gchar *device_uri;
+
               result[i] = g_new0 (gchar *, g_variant_n_children (item) + 1);
               g_variant_get (item, "as", &subiter);
               j = 0;
-              while ((subitem = g_variant_iter_next_value (subiter)))
+              while (g_variant_iter_next (subiter, "&s", &device_uri))
                 {
-                  g_variant_get (subitem, "s", &device_uri);
-
-                  result[i][j] = device_uri;
-
-                  g_variant_unref (subitem);
+                  result[i][j] = g_strdup (device_uri);
                   j++;
                 }
 
