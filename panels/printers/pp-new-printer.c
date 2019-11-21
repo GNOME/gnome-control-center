@@ -466,7 +466,6 @@ printer_add_real_async (PpNewPrinter *self)
 static PPDName *
 get_ppd_item_from_output (GVariant *output)
 {
-  GVariant *array;
   PPDName  *ppd_item = NULL;
   gint      j;
   static const char * const match_levels[] = {
@@ -478,6 +477,8 @@ get_ppd_item_from_output (GVariant *output)
 
   if (output)
     {
+      g_autoptr(GVariant) array = NULL;
+
       g_variant_get (output, "(@a(ss))", &array);
       if (array)
         {
@@ -507,8 +508,6 @@ get_ppd_item_from_output (GVariant *output)
                     }
                 }
             }
-
-          g_variant_unref (array);
         }
     }
 
@@ -1007,7 +1006,7 @@ get_missing_executables_cb (GObject      *source_object,
 
   if (output)
     {
-      GVariant *array;
+      g_autoptr(GVariant) array = NULL;
 
       g_variant_get (output, "(@as)", &array);
 
@@ -1019,8 +1018,6 @@ get_missing_executables_cb (GObject      *source_object,
           g_variant_get (array, "as", &iter);
           while (g_variant_iter_next (iter, "&s", &executable))
             executables = g_list_append (executables, g_strdup (executable));
-
-          g_variant_unref (array);
         }
     }
   else if (error->domain == G_DBUS_ERROR &&
