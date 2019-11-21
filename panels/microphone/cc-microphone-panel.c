@@ -102,7 +102,7 @@ on_microphone_app_state_set (GtkSwitch *widget,
   CcMicrophonePanel *self = data->self;
   GVariant *params;
   GVariantIter iter;
-  gchar *key;
+  const gchar *key;
   gchar **value;
   GVariantBuilder builder;
 
@@ -114,24 +114,16 @@ on_microphone_app_state_set (GtkSwitch *widget,
 
   g_variant_iter_init (&iter, self->microphone_apps_perms);
   g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
-  while (g_variant_iter_loop (&iter, "{s^as}", &key, &value))
+  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
     {
-      gchar *tmp = NULL;
-
       if (g_strv_length (value) != 1)
         /* It's OK to drop the entry if it's not in expected format */
         continue;
 
       if (g_strcmp0 (data->app_id, key) == 0)
-        {
-          tmp = value[0];
-          value[0] = state ? "yes" : "no";
-        }
+        value[0] = state ? "yes" : "no";
 
       g_variant_builder_add (&builder, "{s^as}", key, value);
-
-      if (tmp != NULL)
-        value[0] = tmp;
     }
 
   params = g_variant_new ("(sbsa{sas}v)",
@@ -255,7 +247,7 @@ update_perm_store (CcMicrophonePanel *self,
                    GVariant *permissions_data)
 {
   GVariantIter iter;
-  gchar *key;
+  const gchar *key;
   gchar **value;
 
   g_clear_pointer (&self->microphone_apps_perms, g_variant_unref);
@@ -264,7 +256,7 @@ update_perm_store (CcMicrophonePanel *self,
   self->microphone_apps_data = permissions_data;
 
   g_variant_iter_init (&iter, permissions);
-  while (g_variant_iter_loop (&iter, "{s^as}", &key, &value))
+  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
     {
       gboolean enabled;
 
