@@ -72,17 +72,12 @@ pp_job_cancel_purge_async_dbus_cb (GObject      *source_object,
                                    GAsyncResult *res,
                                    gpointer      user_data)
 {
-  GVariant *output;
+  g_autoptr(GVariant) output = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           NULL);
   g_object_unref (source_object);
-
-  if (output != NULL)
-    {
-      g_variant_unref (output);
-    }
 }
 
 void
@@ -123,17 +118,12 @@ pp_job_set_hold_until_async_dbus_cb (GObject      *source_object,
                                      GAsyncResult *res,
                                      gpointer      user_data)
 {
-  GVariant *output;
+  g_autoptr(GVariant) output = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           NULL);
   g_object_unref (source_object);
-
-  if (output)
-    {
-      g_variant_unref (output);
-    }
 }
 
 void
