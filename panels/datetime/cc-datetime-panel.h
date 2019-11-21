@@ -18,9 +18,7 @@
  *
  */
 
-
-#ifndef _CC_DATE_TIME_PANEL_H
-#define _CC_DATE_TIME_PANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -30,5 +28,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcDateTimePanel, cc_date_time_panel, CC, DATE_TIME_PANEL, CcPanel)
 
 G_END_DECLS
-
-#endif /* _CC_DATE_TIME_PANEL_H */
