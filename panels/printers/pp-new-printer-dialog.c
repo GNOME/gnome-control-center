@@ -895,10 +895,10 @@ group_physical_devices_dbus_cb (GObject      *source_object,
                                 GAsyncResult *res,
                                 gpointer      user_data)
 {
-  GVariant         *output;
-  g_autoptr(GError) error = NULL;
-  gchar          ***result = NULL;
-  gint              i;
+  g_autoptr(GVariant) output = NULL;
+  g_autoptr(GError)   error = NULL;
+  gchar            ***result = NULL;
+  gint                i;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -927,8 +927,6 @@ group_physical_devices_dbus_cb (GObject      *source_object,
 
           g_variant_unref (array);
         }
-
-      g_variant_unref (output);
     }
   else if (error &&
            error->domain == G_DBUS_ERROR &&
