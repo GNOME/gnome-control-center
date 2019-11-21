@@ -19,7 +19,6 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
 #include <libsecret/secret.h>
 
 G_BEGIN_DECLS
@@ -43,10 +42,9 @@ GVariant * cc_grd_set_is_auth_method_password (const GValue       *value,
                                                const GVariantType *type,
                                                gpointer            user_data);
 
-void cc_grd_on_vnc_password_entry_notify_text (GtkEntry   *entry,
-                                               GParamSpec *pspec,
-                                               gpointer    user_data);
+void cc_grd_store_vnc_password (const gchar  *password,
+                                GCancellable *cancellable);
 
-void cc_grd_update_password_entry (GtkEntry *entry);
+gchar * cc_grd_lookup_vnc_password (GCancellable *cancellable);
 
 G_END_DECLS
