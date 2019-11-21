@@ -258,7 +258,7 @@ printer_rename (const gchar *old_name,
   cups_dest_t      *dests = NULL;
   cups_dest_t      *dest = NULL;
   cups_job_t       *jobs = NULL;
-  GDBusConnection  *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   const gchar      *printer_location = NULL;
   const gchar      *printer_info = NULL;
   const gchar      *printer_uri = NULL;
@@ -477,7 +477,6 @@ printer_rename (const gchar *old_name,
                                                 -1,
                                                 NULL,
                                                 &add_error);
-          g_object_unref (bus);
 
           if (output)
             {
