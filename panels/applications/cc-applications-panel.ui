@@ -61,7 +61,7 @@
                         <property name="can-focus">1</property>
                         <property name="receives-default">1</property>
                         <property name="halign">center</property>
-                        <signal name="clicked" handler="open_software_cb"/>
+                        <signal name="clicked" handler="open_software_cb" object="CcApplicationsPanel" swapped="yes"/>
                       </object>
                       <packing>
                         <property name="fill">0</property>
@@ -120,11 +120,11 @@
                           <object class="GtkListBox" id="permission_list">
                             <property name="visible">1</property>
                             <property name="selection-mode">none</property>
-                            <signal name="row-activated" handler="permission_row_activated_cb"/>
+                            <signal name="row-activated" handler="permission_row_activated_cb" object="CcApplicationsPanel" swapped="yes"/>
                             <child>
                               <object class="CcToggleRow" id="camera">
                                 <property name="title" translatable="yes">Camera</property>
-                                <signal name="notify::allowed" handler="camera_cb" swapped="yes"/>
+                                <signal name="notify::allowed" handler="camera_cb" object="CcApplicationsPanel" swapped="yes"/>
                               </object>
                             </child>
                             <child>
@@ -136,7 +136,7 @@
                             <child>
                               <object class="CcToggleRow" id="microphone">
                                 <property name="title" translatable="yes">Microphone</property>
-                                <signal name="notify::allowed" handler="microphone_cb" swapped="yes"/>
+                                <signal name="notify::allowed" handler="microphone_cb" object="CcApplicationsPanel" swapped="yes"/>
                               </object>
                             </child>
                             <child>
@@ -148,7 +148,7 @@
                             <child>
                               <object class="CcToggleRow" id="location">
                                 <property name="title" translatable="yes">Location Services</property>
-                                <signal name="notify::allowed" handler="location_cb" swapped="yes"/>
+                                <signal name="notify::allowed" handler="location_cb" object="CcApplicationsPanel" swapped="yes"/>
                               </object>
                             </child>
                             <child>
@@ -179,7 +179,7 @@
                             <property name="max-width-chars">50</property>
                             <property name="label" translatable="yes">Individual permissions for applications can be reviewed in the &lt;a href=&quot;privacy&quot;&gt;Privacy&lt;/a&gt; Settings.</property>
                             <property name="use-markup">1</property>
-                            <signal name="activate-link" handler="privacy_link_cb" swapped="yes"/>
+                            <signal name="activate-link" handler="privacy_link_cb" object="CcApplicationsPanel" swapped="yes"/>
                           </object>
                         </child>
                       </object>
@@ -228,7 +228,7 @@
                             <child>
                               <object class="CcToggleRow" id="search">
                                 <property name="title" translatable="yes">Search</property>
-                                <signal name="notify::allowed" handler="search_cb" swapped="yes"/>
+                                <signal name="notify::allowed" handler="search_cb" object="CcApplicationsPanel" swapped="yes"/>
                               </object>
                             </child>
                             <child>
@@ -240,13 +240,13 @@
                             <child>
                               <object class="CcToggleRow" id="notification">
                                 <property name="title" translatable="yes">Notifications</property>
-                                <signal name="notify::allowed" handler="notification_cb" swapped="yes"/>
+                                <signal name="notify::allowed" handler="notification_cb" object="CcApplicationsPanel" swapped="yes"/>
                               </object>
                             </child>
                             <child>
                               <object class="CcToggleRow" id="sound">
                                 <property name="title" translatable="yes">Sounds</property>
-                                <signal name="notify::allowed" handler="sound_cb" swapped="yes"/>
+                                <signal name="notify::allowed" handler="sound_cb" object="CcApplicationsPanel" swapped="yes"/>
                               </object>
                             </child>
                             <child>
@@ -313,7 +313,7 @@
                                 <property name="halign">end</property>
                                 <property name="valign">center</property>
                                 <property name="label" translatable="yes">Reset</property>
-                                <signal name="clicked" handler="handler_reset_cb"/>
+                                <signal name="clicked" handler="handler_reset_cb" object="CcApplicationsPanel" swapped="yes"/>
                               </object>
                             </child>
                           </object>
@@ -322,7 +322,7 @@
                           <object class="GtkListBox" id="handler_list">
                             <property name="visible">1</property>
                             <property name="selection-mode">none</property>
-                            <signal name="row-activated" handler="handler_row_activated_cb"/>
+                            <signal name="row-activated" handler="handler_row_activated_cb" object="CcApplicationsPanel" swapped="yes"/>
                             <style>
                               <class name="view"/>
                               <class name="frame"/>
@@ -372,7 +372,7 @@
                           <object class="GtkListBox" id="usage_list">
                             <property name="visible">1</property>
                             <property name="selection-mode">none</property>
-                            <signal name="row-activated" handler="storage_row_activated_cb"/>
+                            <signal name="row-activated" handler="storage_row_activated_cb" object="CcApplicationsPanel" swapped="yes"/>
                             <child>
                               <object class="CcInfoRow" id="storage">
                                 <property name="title" translatable="yes">Storage</property>
@@ -424,9 +424,9 @@
         <property name="has-focus">True</property>
         <property name="margin">12</property>
         <property name="margin-bottom">6</property>
-        <signal name="activate" handler="on_sidebar_search_entry_activated_cb" object="CcApplicationsPanel" swapped="no" />
-        <signal name="search-changed" handler="on_sidebar_search_entry_search_changed_cb" object="CcApplicationsPanel" swapped="no" />
-        <signal name="stop-search" handler="on_sidebar_search_entry_search_stopped_cb" object="CcApplicationsPanel" swapped="no" />
+        <signal name="activate" handler="on_sidebar_search_entry_activated_cb" object="CcApplicationsPanel" swapped="yes" />
+        <signal name="search-changed" handler="on_sidebar_search_entry_search_changed_cb" object="CcApplicationsPanel" swapped="yes" />
+        <signal name="stop-search" handler="on_sidebar_search_entry_search_stopped_cb" object="CcApplicationsPanel" swapped="yes" />
       </object>
     </child>
     <child>
@@ -584,7 +584,7 @@
               <object class="GtkButton" id="clear_cache_button">
                 <property name="visible">1</property>
                 <property name="label" translatable="yes">Clear Cache…</property>
-                <signal name="clicked" handler="clear_cache_cb" swapped="yes"/>
+                <signal name="clicked" handler="clear_cache_cb" object="CcApplicationsPanel" swapped="yes"/>
               </object>
               <packing>
                 <property name="pack-type">end</property>
