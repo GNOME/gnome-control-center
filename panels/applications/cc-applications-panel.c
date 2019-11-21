@@ -147,8 +147,7 @@ privacy_link_cb (CcApplicationsPanel *self)
 }
 
 static void
-open_software_cb (GtkButton           *button,
-                  CcApplicationsPanel *self)
+open_software_cb (CcApplicationsPanel *self)
 {
   const gchar *argv[] = { "gnome-software", "--details", "appid", NULL };
 
@@ -528,9 +527,8 @@ add_static_permission_row (CcApplicationsPanel *self,
 }
 
 static void
-permission_row_activated_cb (GtkListBox          *list,
-                             GtkListBoxRow       *list_row,
-                             CcApplicationsPanel *self)
+permission_row_activated_cb (CcApplicationsPanel *self,
+                             GtkListBoxRow       *list_row)
 {
   GtkWidget *row = GTK_WIDGET (list_row);
 
@@ -694,8 +692,8 @@ update_integration_section (CcApplicationsPanel *self,
 /* --- handler section --- */
 
 static void
-unset_cb (CcActionRow         *row,
-          CcApplicationsPanel *self)
+unset_cb (CcApplicationsPanel *self,
+          CcActionRow         *row)
 {
   const gchar *type;
   GtkListBoxRow *selected;
@@ -763,7 +761,7 @@ add_scheme (CcApplicationsPanel *self,
   g_signal_connect_object (row,
                            "activated",
                            G_CALLBACK (unset_cb),
-                           self, 0);
+                           self, G_CONNECT_SWAPPED);
 
   if (after)
     {
@@ -796,7 +794,7 @@ add_file_type (CcApplicationsPanel *self,
   cc_action_row_set_subtitle (row, glob ? glob : "");
   cc_action_row_set_action (row, _("Unset"), TRUE);
   g_object_set_data_full (G_OBJECT (row), "type", g_strdup (type), g_free);
-  g_signal_connect (row, "activated", G_CALLBACK (unset_cb), self);
+  g_signal_connect_object (row, "activated", G_CALLBACK (unset_cb), self, G_CONNECT_SWAPPED);
 
   if (after)
     {
@@ -1063,9 +1061,8 @@ add_handler_row (CcApplicationsPanel *self,
 }
 
 static void
-handler_row_activated_cb (GtkListBox          *list,
-                          GtkListBoxRow       *list_row,
-                          CcApplicationsPanel *self)
+handler_row_activated_cb (CcApplicationsPanel *self,
+                          GtkListBoxRow       *list_row)
 {
   GtkWidget *row = GTK_WIDGET (list_row);
 
@@ -1110,8 +1107,7 @@ app_info_recommended_for (GAppInfo    *info,
 }
 
 static void
-handler_reset_cb (GtkButton           *button,
-                  CcApplicationsPanel *self)
+handler_reset_cb (CcApplicationsPanel *self)
 {
   GtkListBoxRow *selected;
   GAppInfo *info;
@@ -1186,9 +1182,8 @@ update_handler_sections (CcApplicationsPanel *self,
 /* --- usage section --- */
 
 static void
-storage_row_activated_cb (GtkListBox          *list,
-                          GtkListBoxRow       *list_row,
-                          CcApplicationsPanel *self)
+storage_row_activated_cb (CcApplicationsPanel *self,
+                          GtkListBoxRow       *list_row)
 {
   GtkWidget *row = GTK_WIDGET (list_row);
 
@@ -1452,16 +1447,14 @@ filter_sidebar_rows (GtkListBoxRow *row,
 }
 
 static void
-apps_changed (GAppInfoMonitor     *monitor,
-              CcApplicationsPanel *self)
+apps_changed (CcApplicationsPanel *self)
 {
   populate_applications (self);
 }
 
 static void
-row_activated_cb (GtkListBox          *list,
-                  GtkListBoxRow       *row,
-                  CcApplicationsPanel *self)
+row_activated_cb (CcApplicationsPanel *self,
+                  GtkListBoxRow       *row)
 {
   update_panel (self, row);
   g_signal_emit_by_name (self, "sidebar-activated");
@@ -1511,8 +1504,7 @@ select_app (CcApplicationsPanel *self,
 }
 
 static void
-on_sidebar_search_entry_activated_cb (GtkSearchEntry      *search_entry,
-                                      CcApplicationsPanel *self)
+on_sidebar_search_entry_activated_cb (CcApplicationsPanel *self)
 {
   GtkListBoxRow *row;
 
@@ -1531,15 +1523,13 @@ on_sidebar_search_entry_activated_cb (GtkSearchEntry      *search_entry,
 }
 
 static void
-on_sidebar_search_entry_search_changed_cb (GtkSearchEntry      *search_entry,
-                                           CcApplicationsPanel *self)
+on_sidebar_search_entry_search_changed_cb (CcApplicationsPanel *self)
 {
   gtk_list_box_invalidate_filter (self->sidebar_listbox);
 }
 
 static void
-on_sidebar_search_entry_search_stopped_cb (GtkSearchEntry      *search_entry,
-                                           CcApplicationsPanel *self)
+on_sidebar_search_entry_search_stopped_cb (CcApplicationsPanel *self)
 {
   gtk_entry_set_text (self->sidebar_search_entry, "");
 }
@@ -1735,10 +1725,10 @@ cc_applications_panel_init (CcApplicationsPanel *self)
                                              provider,
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-  g_signal_connect (self->sidebar_listbox, "row-activated",
-                    G_CALLBACK (row_activated_cb), self);
+  g_signal_connect_object (self->sidebar_listbox, "row-activated",
+                           G_CALLBACK (row_activated_cb), self, G_CONNECT_SWAPPED);
 
-  g_signal_connect (self->header_button, "clicked", G_CALLBACK (open_software_cb), self);
+  g_signal_connect_object (self->header_button, "clicked", G_CALLBACK (open_software_cb), self, G_CONNECT_SWAPPED);
 
   gtk_list_box_set_header_func (GTK_LIST_BOX (self->permission_list),
                                 cc_list_box_update_header_func,
@@ -1779,7 +1769,7 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   populate_applications (self);
 
   self->monitor = g_app_info_monitor_get ();
-  self->monitor_id = g_signal_connect (self->monitor, "changed", G_CALLBACK (apps_changed), self);
+  self->monitor_id = g_signal_connect_object (self->monitor, "changed", G_CALLBACK (apps_changed), self, G_CONNECT_SWAPPED);
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                             G_DBUS_PROXY_FLAGS_NONE,
