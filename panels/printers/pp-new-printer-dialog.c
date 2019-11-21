@@ -929,7 +929,7 @@ group_physical_devices_dbus_cb (GObject      *source_object,
 
   if (output)
     {
-      GVariant *array;
+      g_autoptr(GVariant) array = NULL;
 
       g_variant_get (output, "(@aas)", &array);
 
@@ -946,8 +946,6 @@ group_physical_devices_dbus_cb (GObject      *source_object,
               result[i] = device_uris;
               i++;
             }
-
-          g_variant_unref (array);
         }
     }
   else if (error &&
