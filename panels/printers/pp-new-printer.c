@@ -480,32 +480,29 @@ get_ppd_item_from_output (GVariant *output)
       g_autoptr(GVariant) array = NULL;
 
       g_variant_get (output, "(@a(ss))", &array);
-      if (array)
+      for (j = 0; j < G_N_ELEMENTS (match_levels) && !ppd_item; j++)
         {
-          for (j = 0; j < G_N_ELEMENTS (match_levels) && !ppd_item; j++)
+          g_autoptr(GVariantIter) iter = NULL;
+          const gchar *driver, *match;
+
+          g_variant_get (array, "a(ss)", &iter);
+          while (g_variant_iter_next (iter, "(&s&s)", &driver, &match) && !ppd_item)
             {
-              g_autoptr(GVariantIter) iter = NULL;
-              const gchar *driver, *match;
-
-              g_variant_get (array, "a(ss)", &iter);
-              while (g_variant_iter_next (iter, "(&s&s)", &driver, &match) && !ppd_item)
+              if (g_str_equal (match, match_levels[j]))
                 {
-                  if (g_str_equal (match, match_levels[j]))
-                    {
-                      ppd_item = g_new0 (PPDName, 1);
-                      ppd_item->ppd_name = g_strdup (driver);
+                  ppd_item = g_new0 (PPDName, 1);
+                  ppd_item->ppd_name = g_strdup (driver);
 
-                      if (g_strcmp0 (match, "exact-cmd") == 0)
-                        ppd_item->ppd_match_level = PPD_EXACT_CMD_MATCH;
-                      else if (g_strcmp0 (match, "exact") == 0)
-                        ppd_item->ppd_match_level = PPD_EXACT_MATCH;
-                      else if (g_strcmp0 (match, "close") == 0)
-                        ppd_item->ppd_match_level = PPD_CLOSE_MATCH;
-                      else if (g_strcmp0 (match, "generic") == 0)
-                        ppd_item->ppd_match_level = PPD_GENERIC_MATCH;
-                      else if (g_strcmp0 (match, "none") == 0)
-                        ppd_item->ppd_match_level = PPD_NO_MATCH;
-                    }
+                  if (g_strcmp0 (match, "exact-cmd") == 0)
+                    ppd_item->ppd_match_level = PPD_EXACT_CMD_MATCH;
+                  else if (g_strcmp0 (match, "exact") == 0)
+                    ppd_item->ppd_match_level = PPD_EXACT_MATCH;
+                  else if (g_strcmp0 (match, "close") == 0)
+                    ppd_item->ppd_match_level = PPD_CLOSE_MATCH;
+                  else if (g_strcmp0 (match, "generic") == 0)
+                    ppd_item->ppd_match_level = PPD_GENERIC_MATCH;
+                  else if (g_strcmp0 (match, "none") == 0)
+                    ppd_item->ppd_match_level = PPD_NO_MATCH;
                 }
             }
         }
@@ -1007,18 +1004,14 @@ get_missing_executables_cb (GObject      *source_object,
   if (output)
     {
       g_autoptr(GVariant) array = NULL;
+      g_autoptr(GVariantIter) iter = NULL;
+      const gchar *executable;
 
       g_variant_get (output, "(@as)", &array);
 
-      if (array)
-        {
-          g_autoptr(GVariantIter) iter = NULL;
-          const gchar  *executable;
-
-          g_variant_get (array, "as", &iter);
-          while (g_variant_iter_next (iter, "&s", &executable))
-            executables = g_list_append (executables, g_strdup (executable));
-        }
+      g_variant_get (array, "as", &iter);
+      while (g_variant_iter_next (iter, "&s", &executable))
+        executables = g_list_append (executables, g_strdup (executable));
     }
   else if (error->domain == G_DBUS_ERROR &&
            (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||

@@ -1910,39 +1910,36 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
       g_variant_get (output, "(@a(ss))",
                      &array);
 
-      if (array)
+      for (j = 0; j < G_N_ELEMENTS (match_levels) && n < data->count; j++)
         {
-          for (j = 0; j < G_N_ELEMENTS (match_levels) && n < data->count; j++)
+          g_autoptr(GVariantIter) iter = NULL;
+          const gchar *driver, *match;
+
+          g_variant_get (array,
+                         "a(ss)",
+                         &iter);
+
+          while (g_variant_iter_next (iter, "(&s&s)", &driver, &match))
             {
-              g_autoptr(GVariantIter) iter = NULL;
-              const gchar *driver, *match;
-
-              g_variant_get (array,
-                             "a(ss)",
-                             &iter);
-
-              while (g_variant_iter_next (iter, "(&s&s)", &driver, &match))
+              if (g_str_equal (match, match_levels[j]) && n < data->count)
                 {
-                  if (g_str_equal (match, match_levels[j]) && n < data->count)
-                    {
-                      ppd_item = g_new0 (PPDName, 1);
-                      ppd_item->ppd_name = g_strdup (driver);
+                  ppd_item = g_new0 (PPDName, 1);
+                  ppd_item->ppd_name = g_strdup (driver);
 
-                      if (g_strcmp0 (match, "exact-cmd") == 0)
-                        ppd_item->ppd_match_level = PPD_EXACT_CMD_MATCH;
-                      else if (g_strcmp0 (match, "exact") == 0)
-                        ppd_item->ppd_match_level = PPD_EXACT_MATCH;
-                      else if (g_strcmp0 (match, "close") == 0)
-                        ppd_item->ppd_match_level = PPD_CLOSE_MATCH;
-                      else if (g_strcmp0 (match, "generic") == 0)
-                        ppd_item->ppd_match_level = PPD_GENERIC_MATCH;
-                      else if (g_strcmp0 (match, "none") == 0)
-                        ppd_item->ppd_match_level = PPD_NO_MATCH;
+                  if (g_strcmp0 (match, "exact-cmd") == 0)
+                    ppd_item->ppd_match_level = PPD_EXACT_CMD_MATCH;
+                  else if (g_strcmp0 (match, "exact") == 0)
+                    ppd_item->ppd_match_level = PPD_EXACT_MATCH;
+                  else if (g_strcmp0 (match, "close") == 0)
+                    ppd_item->ppd_match_level = PPD_CLOSE_MATCH;
+                  else if (g_strcmp0 (match, "generic") == 0)
+                    ppd_item->ppd_match_level = PPD_GENERIC_MATCH;
+                  else if (g_strcmp0 (match, "none") == 0)
+                    ppd_item->ppd_match_level = PPD_NO_MATCH;
 
-                      driver_list = g_list_append (driver_list, ppd_item);
+                  driver_list = g_list_append (driver_list, ppd_item);
 
-                      n++;
-                    }
+                  n++;
                 }
             }
         }
@@ -2124,6 +2121,7 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
     {
       const gchar *ret_error;
       g_autoptr(GVariant) devices_variant = NULL;
+      gint index = -1;
 
       g_variant_get (output, "(&s@a{ss})",
                      &ret_error,
@@ -2134,56 +2132,51 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
           g_warning ("cups-pk-helper: getting of attributes for printer %s failed: %s", data->printer_name, ret_error);
         }
 
-      if (devices_variant)
+      if (data->device_uri)
         {
-          gint          index = -1;
+          g_autoptr(GVariantIter) iter = NULL;
+          const gchar *key, *value;
+          g_autofree gchar *suffix = NULL;
 
-          if (data->device_uri)
+          g_variant_get (devices_variant,
+                         "a{ss}",
+                         &iter);
+
+          while (g_variant_iter_next (iter, "{&s&s}", &key, &value))
             {
-              g_autoptr(GVariantIter) iter = NULL;
-              const gchar *key, *value;
-              g_autofree gchar *suffix = NULL;
-
-              g_variant_get (devices_variant,
-                             "a{ss}",
-                             &iter);
-
-              while (g_variant_iter_next (iter, "{&s&s}", &key, &value))
+              if (g_str_equal (value, data->device_uri))
                 {
-                  if (g_str_equal (value, data->device_uri))
+                  gchar *number = g_strrstr (key, ":");
+                  if (number != NULL)
                     {
-                      gchar *number = g_strrstr (key, ":");
-                      if (number != NULL)
-                        {
-                          gchar *endptr;
+                      gchar *endptr;
 
-                          number++;
-                          index = g_ascii_strtoll (number, &endptr, 10);
-                          if (index == 0 && endptr == (number))
-                            index = -1;
-                        }
+                      number++;
+                      index = g_ascii_strtoll (number, &endptr, 10);
+                      if (index == 0 && endptr == (number))
+                        index = -1;
                     }
                 }
+            }
 
-              suffix = g_strdup_printf (":%d", index);
+          suffix = g_strdup_printf (":%d", index);
 
-              g_variant_get (devices_variant,
-                             "a{ss}",
-                             &iter);
+          g_variant_get (devices_variant,
+                         "a{ss}",
+                         &iter);
 
-              while (g_variant_iter_next (iter, "{&s&s}", &key, &value))
+          while (g_variant_iter_next (iter, "{&s&s}", &key, &value))
+            {
+              if (g_str_has_suffix (key, suffix))
                 {
-                  if (g_str_has_suffix (key, suffix))
+                  if (g_str_has_prefix (key, "device-id"))
                     {
-                      if (g_str_has_prefix (key, "device-id"))
-                        {
-                          device_id = g_strdup (value);
-                        }
+                      device_id = g_strdup (value);
+                    }
 
-                      if (g_str_has_prefix (key, "device-make-and-model"))
-                        {
-                          device_make_and_model = g_strdup (value);
-                        }
+                  if (g_str_has_prefix (key, "device-make-and-model"))
+                    {
+                      device_make_and_model = g_strdup (value);
                     }
                 }
             }
@@ -3261,6 +3254,9 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
       const gchar *ret_error;
       g_autoptr(GVariant) devices_variant = NULL;
       gboolean     is_network_device;
+      g_autoptr(GVariantIter) iter = NULL;
+      const gchar  *key, *value;
+      gint          index = -1, max_index = -1, i;
 
       g_variant_get (output, "(&s@a{ss})",
                      &ret_error,
@@ -3271,66 +3267,59 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
           g_warning ("cups-pk-helper: getting of CUPS devices failed: %s", ret_error);
         }
 
-      if (devices_variant)
+      g_variant_get (devices_variant, "a{ss}", &iter);
+      while (g_variant_iter_next (iter, "{&s&s}", &key, &value))
         {
-          g_autoptr(GVariantIter) iter = NULL;
-          const gchar  *key, *value;
-          gint          index = -1, max_index = -1, i;
+          index = get_suffix_index (key);
+          if (index > max_index)
+            max_index = index;
+        }
 
-          g_variant_get (devices_variant, "a{ss}", &iter);
-          while (g_variant_iter_next (iter, "{&s&s}", &key, &value))
+      if (max_index >= 0)
+        {
+          g_autoptr(GVariantIter) iter2 = NULL;
+
+          num_of_devices = max_index + 1;
+          devices = g_new0 (PpPrintDevice *, num_of_devices);
+
+          g_variant_get (devices_variant, "a{ss}", &iter2);
+          while (g_variant_iter_next (iter2, "{&s&s}", &key, &value))
             {
               index = get_suffix_index (key);
-              if (index > max_index)
-                max_index = index;
-            }
-
-          if (max_index >= 0)
-            {
-              g_autoptr(GVariantIter) iter2 = NULL;
-
-              num_of_devices = max_index + 1;
-              devices = g_new0 (PpPrintDevice *, num_of_devices);
-
-              g_variant_get (devices_variant, "a{ss}", &iter2);
-              while (g_variant_iter_next (iter2, "{&s&s}", &key, &value))
+              if (index >= 0)
                 {
-                  index = get_suffix_index (key);
-                  if (index >= 0)
+                  if (!devices[index])
+                    devices[index] = pp_print_device_new ();
+
+                  if (g_str_has_prefix (key, "device-class"))
                     {
-                      if (!devices[index])
-                        devices[index] = pp_print_device_new ();
-
-                      if (g_str_has_prefix (key, "device-class"))
-                        {
-                          is_network_device = g_strcmp0 (value, "network") == 0;
-                          g_object_set (devices[index], "is-network-device", is_network_device, NULL);
-                        }
-                      else if (g_str_has_prefix (key, "device-id"))
-                        g_object_set (devices[index], "device-id", value, NULL);
-                      else if (g_str_has_prefix (key, "device-info"))
-                        g_object_set (devices[index], "device-info", value, NULL);
-                      else if (g_str_has_prefix (key, "device-make-and-model"))
-                        {
-                          g_object_set (devices[index],
-                                        "device-make-and-model", value,
-                                        "device-name", value,
-                                        NULL);
-                        }
-                      else if (g_str_has_prefix (key, "device-uri"))
-                        g_object_set (devices[index], "device-uri", value, NULL);
-                      else if (g_str_has_prefix (key, "device-location"))
-                        g_object_set (devices[index], "device-location", value, NULL);
-
-                      g_object_set (devices[index], "acquisition-method", ACQUISITION_METHOD_DEFAULT_CUPS_SERVER, NULL);
+                      is_network_device = g_strcmp0 (value, "network") == 0;
+                      g_object_set (devices[index], "is-network-device", is_network_device, NULL);
                     }
+                  else if (g_str_has_prefix (key, "device-id"))
+                    g_object_set (devices[index], "device-id", value, NULL);
+                  else if (g_str_has_prefix (key, "device-info"))
+                    g_object_set (devices[index], "device-info", value, NULL);
+                  else if (g_str_has_prefix (key, "device-make-and-model"))
+                    {
+                      g_object_set (devices[index],
+                                    "device-make-and-model", value,
+                                    "device-name", value,
+                                    NULL);
+                    }
+                  else if (g_str_has_prefix (key, "device-uri"))
+                    g_object_set (devices[index], "device-uri", value, NULL);
+                  else if (g_str_has_prefix (key, "device-location"))
+                    g_object_set (devices[index], "device-location", value, NULL);
+
+                  g_object_set (devices[index], "acquisition-method", ACQUISITION_METHOD_DEFAULT_CUPS_SERVER, NULL);
                 }
-
-              for (i = 0; i < num_of_devices; i++)
-                result = g_list_append (result, devices[i]);
-
-              g_free (devices);
             }
+
+          for (i = 0; i < num_of_devices; i++)
+            result = g_list_append (result, devices[i]);
+
+          g_free (devices);
         }
     }
   else
