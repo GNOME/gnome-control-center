@@ -537,8 +537,8 @@ printer_set_location (const gchar *printer_name,
 {
   g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
-  gboolean            result = FALSE;
-  g_autoptr(GError)   error = NULL;
+  const gchar *ret_error;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name || !location)
     return TRUE;
@@ -562,22 +562,20 @@ printer_set_location (const gchar *printer_name,
                                         NULL,
                                         &error);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of location for printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of location for printer %s failed: %s", printer_name, ret_error);
+      return FALSE;
+    }
+
+  return TRUE;
 }
 
 gboolean
@@ -587,8 +585,8 @@ printer_set_accepting_jobs (const gchar *printer_name,
 {
   g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
-  gboolean            result = FALSE;
-  g_autoptr(GError)   error = NULL;
+  const gchar *ret_error;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -615,22 +613,20 @@ printer_set_accepting_jobs (const gchar *printer_name,
                                         NULL,
                                         &error);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of acceptance of jobs for printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of acceptance of jobs for printer %s failed: %s", printer_name, ret_error);
+      return FALSE;
+    }
+
+  return TRUE;
 }
 
 gboolean
@@ -639,8 +635,8 @@ printer_set_enabled (const gchar *printer_name,
 {
   g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
-  gboolean            result = FALSE;
-  g_autoptr(GError)   error = NULL;
+  const gchar *ret_error;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -664,22 +660,20 @@ printer_set_enabled (const gchar *printer_name,
                                         NULL,
                                         &error);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of enablement of printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of enablement of printer %s failed: %s", printer_name, ret_error);
+      return FALSE;
+    }
+
+  return TRUE;
 }
 
 gboolean
@@ -687,8 +681,8 @@ printer_delete (const gchar *printer_name)
 {
   g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
-  gboolean            result = FALSE;
-  g_autoptr(GError)   error = NULL;
+  const gchar *ret_error;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -712,29 +706,26 @@ printer_delete (const gchar *printer_name)
                                         NULL,
                                         &error);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: removing of printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: removing of printer %s failed: %s", printer_name, ret_error);
+      return FALSE;
+    }
+
+  return TRUE;
 }
 
 gboolean
 printer_set_default (const gchar *printer_name)
 {
-  const char       *cups_server;
-  gboolean          result = FALSE;
+  const char *cups_server;
   g_autoptr(GError) error = NULL;
 
   if (!printer_name)
@@ -747,6 +738,8 @@ printer_set_default (const gchar *printer_name)
       cups_server[0] == '/')
     {
       g_autoptr(GDBusConnection) bus = NULL;
+      g_autoptr(GVariant) output = NULL;
+      const gchar *ret_error;
 
       /* Clean .cups/lpoptions before setting
        * default printer on local CUPS server.
@@ -757,38 +750,35 @@ printer_set_default (const gchar *printer_name)
       if (!bus)
         {
           g_warning ("Failed to get system bus: %s", error->message);
+          return FALSE;
         }
-      else
+
+      output = g_dbus_connection_call_sync (bus,
+                                            MECHANISM_BUS,
+                                            "/",
+                                            MECHANISM_BUS,
+                                            "PrinterSetDefault",
+                                            g_variant_new ("(s)", printer_name),
+                                            G_VARIANT_TYPE ("(s)"),
+                                            G_DBUS_CALL_FLAGS_NONE,
+                                            -1,
+                                            NULL,
+                                            &error);
+
+      if (output == NULL)
         {
-          g_autoptr(GVariant) output = NULL;
-
-          output = g_dbus_connection_call_sync (bus,
-                                                MECHANISM_BUS,
-                                                "/",
-                                                MECHANISM_BUS,
-                                                "PrinterSetDefault",
-                                                g_variant_new ("(s)", printer_name),
-                                                G_VARIANT_TYPE ("(s)"),
-                                                G_DBUS_CALL_FLAGS_NONE,
-                                                -1,
-                                                NULL,
-                                                &error);
-
-          if (output)
-            {
-              const gchar *ret_error;
-
-              g_variant_get (output, "(&s)", &ret_error);
-              if (ret_error[0] != '\0')
-                g_warning ("cups-pk-helper: setting default printer to %s failed: %s", printer_name, ret_error);
-              else
-                result = TRUE;
-            }
-          else
-            {
-              g_warning ("%s", error->message);
-            }
+          g_warning ("%s", error->message);
+          return FALSE;
         }
+
+      g_variant_get (output, "(&s)", &ret_error);
+      if (ret_error[0] != '\0')
+        {
+          g_warning ("cups-pk-helper: setting default printer to %s failed: %s", printer_name, ret_error);
+          return FALSE;
+        }
+
+      return TRUE;
     }
   else
     /* Store default printer to .cups/lpoptions
@@ -796,9 +786,8 @@ printer_set_default (const gchar *printer_name)
      */
     {
       set_local_default_printer (printer_name);
+      return TRUE;
     }
-
-  return result;
 }
 
 gboolean
@@ -807,8 +796,8 @@ printer_set_shared (const gchar *printer_name,
 {
   g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
-  gboolean            result = FALSE;
-  g_autoptr(GError)   error = NULL;
+  const gchar *ret_error;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -832,22 +821,20 @@ printer_set_shared (const gchar *printer_name,
                                         NULL,
                                         &error);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of sharing of printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of sharing of printer %s failed: %s", printer_name, ret_error);
+      return FALSE;
+    }
+
+  return TRUE;
 }
 
 gboolean
@@ -857,8 +844,8 @@ printer_set_job_sheets (const gchar *printer_name,
 {
   g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
-  g_autoptr(GError)   error = NULL;
-  gboolean            result = FALSE;
+  const gchar *ret_error;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name || !start_sheet || !end_sheet)
     return TRUE;
@@ -882,22 +869,20 @@ printer_set_job_sheets (const gchar *printer_name,
                                         NULL,
                                         &error);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of job sheets for printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of job sheets for printer %s failed: %s", printer_name, ret_error);
+      return FALSE;
+    }
+
+  return TRUE;
 }
 
 gboolean
@@ -907,8 +892,8 @@ printer_set_policy (const gchar *printer_name,
 {
   g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
-  gboolean            result = FALSE;
-  g_autoptr(GError)   error = NULL;
+  const gchar *ret_error;
+  g_autoptr(GError) error = NULL;
 
   if (!printer_name || !policy)
     return TRUE;
@@ -945,22 +930,20 @@ printer_set_policy (const gchar *printer_name,
                                           NULL,
                                           &error);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of a policy for printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of a policy for printer %s failed: %s", printer_name, ret_error);
+      return FALSE;
+    }
+
+  return TRUE;
 }
 
 gboolean
@@ -972,7 +955,7 @@ printer_set_users (const gchar  *printer_name,
   GVariantBuilder     array_builder;
   gint                i;
   g_autoptr(GVariant) output = NULL;
-  gboolean            result = FALSE;
+  const gchar        *ret_error;
   g_autoptr(GError)   error = NULL;
 
   if (!printer_name || !users)
@@ -1014,22 +997,20 @@ printer_set_users (const gchar  *printer_name,
                                           NULL,
                                           &error);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of access list for printer %s failed: %s", printer_name, ret_error);
-      else
-        result = TRUE;
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: setting of access list for printer %s failed: %s", printer_name, ret_error);
+      return FALSE;
+    }
+
+  return TRUE;
 }
 
 gboolean
@@ -1038,8 +1019,8 @@ class_add_printer (const gchar *class_name,
 {
   g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GVariant) output = NULL;
-  gboolean            result = FALSE;
-  g_autoptr(GError)   error = NULL;
+  const gchar *ret_error;
+  g_autoptr(GError) error = NULL;
 
   if (!class_name || !printer_name)
     return TRUE;
@@ -1063,22 +1044,20 @@ class_add_printer (const gchar *class_name,
                                         NULL,
                                         &error);
 
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: adding of printer %s to class %s failed: %s", printer_name, class_name, ret_error);
-      else
-        result = TRUE;
-    }
-  else
+  if (output == NULL)
     {
       g_warning ("%s", error->message);
+      return FALSE;
     }
 
-  return result;
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    {
+      g_warning ("cups-pk-helper: adding of printer %s to class %s failed: %s", printer_name, class_name, ret_error);
+      return FALSE;
+    }
+
+  return TRUE;
 }
 
 gboolean
