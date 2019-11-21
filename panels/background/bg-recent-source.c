@@ -171,11 +171,10 @@ query_info_finished_cb (GObject      *source,
 }
 
 static void
-on_file_changed_cb (GFileMonitor      *monitor,
+on_file_changed_cb (BgRecentSource    *self,
                     GFile             *file,
                     GFile             *other_file,
-                    GFileMonitorEvent  event_type,
-                    BgRecentSource    *self)
+                    GFileMonitorEvent  event_type)
 {
   g_autofree gchar *uri = NULL;
 
@@ -322,7 +321,7 @@ load_backgrounds (BgRecentSource *self)
       return;
     }
 
-  g_signal_connect (self->monitor, "changed", G_CALLBACK (on_file_changed_cb), self);
+  g_signal_connect_object (self->monitor, "changed", G_CALLBACK (on_file_changed_cb), self, G_CONNECT_SWAPPED);
 }
 
 /* Callbacks */

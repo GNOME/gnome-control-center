@@ -62,9 +62,8 @@ list_load_cb (GObject *source_object,
 }
 
 static void
-item_added (CcBackgroundXml    *xml,
-	    CcBackgroundItem   *item,
-	    BgWallpapersSource *self)
+item_added (BgWallpapersSource *self,
+            CcBackgroundItem   *item)
 {
   load_wallpapers (NULL, item, self);
 }
@@ -97,8 +96,8 @@ bg_wallpapers_source_constructed (GObject *object)
 
   G_OBJECT_CLASS (bg_wallpapers_source_parent_class)->constructed (object);
 
-  g_signal_connect (G_OBJECT (self->xml), "added",
-		    G_CALLBACK (item_added), self);
+  g_signal_connect_object (G_OBJECT (self->xml), "added",
+                           G_CALLBACK (item_added), self, G_CONNECT_SWAPPED);
 
   /* Try adding the default background first */
   load_default_bg (self);
