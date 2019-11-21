@@ -18,8 +18,7 @@
  * Author: Georges Basile Stavracas Neto <gbsneto@gnome.org>
  */
 
-#ifndef CC_PANEL_LIST_H
-#define CC_PANEL_LIST_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -78,6 +77,3 @@ void                 cc_panel_list_set_selection_mode            (CcPanelList   
                                                                   GtkSelectionMode    selection_mode);
 
 G_END_DECLS
-
-#endif /* CC_PANEL_LIST_H */
-
