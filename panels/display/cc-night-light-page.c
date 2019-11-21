@@ -372,10 +372,7 @@ dialog_color_temperature_value_changed_cb (GtkAdjustment    *adjustment,
 }
 
 static void
-dialog_color_properties_changed_cb (GDBusProxy       *proxy,
-                                    GVariant         *changed_properties,
-                                    GStrv             invalidated_properties,
-                                    CcNightLightPage *self)
+dialog_color_properties_changed_cb (CcNightLightPage *self)
 {
   dialog_update_state (self);
 }
@@ -400,7 +397,7 @@ dialog_got_proxy_cb (GObject      *source_object,
   self->proxy_color = proxy;
 
   g_signal_connect_object (self->proxy_color, "g-properties-changed",
-                           G_CALLBACK (dialog_color_properties_changed_cb), self, 0);
+                           G_CALLBACK (dialog_color_properties_changed_cb), self, G_CONNECT_SWAPPED);
   dialog_update_state (self);
   self->timer_id = g_timeout_add_seconds (10, dialog_tick_cb, self);
 }
@@ -487,19 +484,15 @@ dialog_update_adjustments (CcNightLightPage *self)
 }
 
 static void
-dialog_settings_changed_cb (GSettings        *settings_display,
-                            gchar            *key,
-                            CcNightLightPage *self)
+dialog_settings_changed_cb (CcNightLightPage *self)
 {
   dialog_update_state (self);
 }
 
 static void
-dialog_clock_settings_changed_cb (GSettings        *settings_display,
-                                  gchar            *key,
-                                  CcNightLightPage *self)
+dialog_clock_settings_changed_cb (CcNightLightPage *self)
 {
-  self->clock_format = g_settings_get_enum (settings_display, CLOCK_FORMAT_KEY);
+  self->clock_format = g_settings_get_enum (self->settings_clock, CLOCK_FORMAT_KEY);
 
   /* uncontionally widen this to avoid truncation */
   gtk_adjustment_set_lower (self->adjustment_from_hours, 0);
@@ -636,7 +629,7 @@ cc_night_light_page_init (CcNightLightPage *self)
   self->cancellable = g_cancellable_new ();
   self->settings_display = g_settings_new (DISPLAY_SCHEMA);
 
-  g_signal_connect (self->settings_display, "changed", G_CALLBACK (dialog_settings_changed_cb), self);
+  g_signal_connect_object (self->settings_display, "changed", G_CALLBACK (dialog_settings_changed_cb), self, G_CONNECT_SWAPPED);
 
   build_schedule_combo_row (self);
 
@@ -690,10 +683,10 @@ cc_night_light_page_init (CcNightLightPage *self)
   self->settings_clock = g_settings_new (CLOCK_SCHEMA);
   self->clock_format = g_settings_get_enum (self->settings_clock, CLOCK_FORMAT_KEY);
   dialog_update_adjustments (self);
-  g_signal_connect (self->settings_clock,
-                    "changed::" CLOCK_FORMAT_KEY,
-                    G_CALLBACK (dialog_clock_settings_changed_cb),
-                    self);
+  g_signal_connect_object (self->settings_clock,
+                           "changed::" CLOCK_FORMAT_KEY,
+                           G_CALLBACK (dialog_clock_settings_changed_cb),
+                           self, G_CONNECT_SWAPPED);
 
   dialog_update_state (self);
 }
