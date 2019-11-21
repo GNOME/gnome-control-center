@@ -170,8 +170,9 @@ get_portal_permissions (CcApplicationsPanel *self,
 {
   g_autoptr(GVariant) ret = NULL;
   g_autoptr(GVariantIter) iter = NULL;
-  g_autoptr(GVariant) val = NULL;
-  g_autofree gchar *key = NULL;
+  const gchar *key = NULL;
+  GStrv val;
+  GStrv result = NULL;
 
   ret = g_dbus_proxy_call_sync (self->perm_store,
                                 "Lookup",
@@ -182,16 +183,13 @@ get_portal_permissions (CcApplicationsPanel *self,
 
   g_variant_get (ret, "(a{sas}v)", &iter, NULL);
 
-  while (g_variant_iter_loop (iter, "{s@as}", &key, &val))
+  while (g_variant_iter_loop (iter, "{&s^a&s}", &key, &val))
     {
-      if (strcmp (key, app_id) == 0)
-        return g_variant_dup_strv (val, NULL);
+      if (strcmp (key, app_id) == 0 && result == NULL)
+        result = g_strdupv (val);
     }
 
-  val = NULL; /* freed by g_variant_iter_loop */
-  key = NULL;
-
-  return NULL;
+  return result;
 }
 
 static void
