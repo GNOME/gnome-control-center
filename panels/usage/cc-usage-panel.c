@@ -47,8 +47,7 @@ struct _CcUsagePanel
 CC_PANEL_REGISTER (CcUsagePanel, cc_usage_panel)
 
 static void
-purge_after_combo_changed_cb (GtkWidget    *widget,
-                              CcUsagePanel *self)
+purge_after_combo_changed_cb (CcUsagePanel *self)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
@@ -56,12 +55,12 @@ purge_after_combo_changed_cb (GtkWidget    *widget,
   gboolean ret;
 
   /* no selection */
-  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
+  ret = gtk_combo_box_get_active_iter (self->purge_after_combo, &iter);
   if (!ret)
     return;
 
   /* get entry */
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
+  model = gtk_combo_box_get_model (self->purge_after_combo);
   gtk_tree_model_get (model, &iter,
                       1, &value,
                       -1);
@@ -202,19 +201,18 @@ cc_usage_panel_finalize (GObject *object)
 }
 
 static void
-retain_history_combo_changed_cb (GtkWidget *widget,
-                                 CcUsagePanel *self)
+retain_history_combo_changed_cb (CcUsagePanel *self)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
   gint value;
   gboolean ret;
 
-  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
+  ret = gtk_combo_box_get_active_iter (self->retain_history_combo, &iter);
   if (!ret)
     return;
 
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
+  model = gtk_combo_box_get_model (self->retain_history_combo);
   gtk_tree_model_get (model, &iter,
                       1, &value,
                       -1);
@@ -283,10 +281,11 @@ cc_usage_panel_init (CcUsagePanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   set_retain_history_value_for_combo (self->retain_history_combo, self);
-  g_signal_connect (self->retain_history_combo,
-                    "changed",
-                    G_CALLBACK (retain_history_combo_changed_cb),
-                    self);
+  g_signal_connect_object (self->retain_history_combo,
+                           "changed",
+                           G_CALLBACK (retain_history_combo_changed_cb),
+                           self,
+                           G_CONNECT_SWAPPED);
 
   g_settings_bind (self->privacy_settings,
                    "remember-recent-files",
@@ -303,13 +302,14 @@ cc_usage_panel_init (CcUsagePanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   set_purge_after_value_for_combo (self->purge_after_combo, self);
-  g_signal_connect (self->purge_after_combo,
-                    "changed",
-                    G_CALLBACK (purge_after_combo_changed_cb),
-                    self);
+  g_signal_connect_object (self->purge_after_combo,
+                           "changed",
+                           G_CALLBACK (purge_after_combo_changed_cb),
+                           self,
+                           G_CONNECT_SWAPPED);
 
-  g_signal_connect_swapped (self->purge_trash_button, "clicked", G_CALLBACK (empty_trash), self);
-  g_signal_connect_swapped (self->purge_temp_button, "clicked", G_CALLBACK (purge_temp), self);
+  g_signal_connect_object (self->purge_trash_button, "clicked", G_CALLBACK (empty_trash), self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->purge_temp_button, "clicked", G_CALLBACK (purge_temp), self, G_CONNECT_SWAPPED);
 }
 
 static void
