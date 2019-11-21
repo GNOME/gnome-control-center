@@ -39,7 +39,6 @@ struct _CcColorDevice
   GtkWidget   *widget_switch;
   GtkWidget   *widget_arrow;
   GtkWidget   *widget_nocalib;
-  guint        device_changed_id;
 };
 
 G_DEFINE_TYPE (CcColorDevice, cc_color_device, GTK_TYPE_LIST_BOX_ROW)
@@ -148,9 +147,6 @@ cc_color_device_finalize (GObject *object)
 {
   CcColorDevice *color_device = CC_COLOR_DEVICE (object);
 
-  if (color_device->device_changed_id > 0)
-    g_signal_handler_disconnect (color_device->device, color_device->device_changed_id);
-
   g_free (color_device->sortable);
   g_object_unref (color_device->device);
 
@@ -174,16 +170,13 @@ cc_color_device_set_expanded (CcColorDevice *color_device,
 }
 
 static void
-cc_color_device_notify_enable_device_cb (GtkSwitch *sw,
-                                         GParamSpec *pspec,
-                                         gpointer user_data)
+cc_color_device_notify_enable_device_cb (CcColorDevice *color_device)
 {
-  CcColorDevice *color_device = CC_COLOR_DEVICE (user_data);
   gboolean enable;
   gboolean ret;
   g_autoptr(GError) error = NULL;
 
-  enable = gtk_switch_get_active (sw);
+  enable = gtk_switch_get_active (GTK_SWITCH (color_device->widget_switch));
   g_debug ("Set %s to %i", cd_device_get_id (color_device->device), enable);
   ret = cd_device_set_enabled_sync (color_device->device,
                                     enable, NULL, &error);
@@ -196,8 +189,7 @@ cc_color_device_notify_enable_device_cb (GtkSwitch *sw,
 }
 
 static void
-cc_color_device_changed_cb (CdDevice *device,
-                                   CcColorDevice *color_device)
+cc_color_device_changed_cb (CcColorDevice *color_device)
 {
   cc_color_device_refresh (color_device);
 }
@@ -209,9 +201,8 @@ cc_color_device_constructed (GObject *object)
   g_autofree gchar *sortable_tmp = NULL;
 
   /* watch the device for changes */
-  color_device->device_changed_id =
-    g_signal_connect (color_device->device, "changed",
-                      G_CALLBACK (cc_color_device_changed_cb), color_device);
+  g_signal_connect_object (color_device->device, "changed",
+                           G_CALLBACK (cc_color_device_changed_cb), color_device, G_CONNECT_SWAPPED);
 
   /* calculate sortable -- FIXME: we have to hack this as EggListBox
    * does not let us specify a GtkSortType:
@@ -222,9 +213,9 @@ cc_color_device_constructed (GObject *object)
   cc_color_device_refresh (color_device);
 
   /* watch to see if the user flicked the switch */
-  g_signal_connect (color_device->widget_switch, "notify::active",
-                    G_CALLBACK (cc_color_device_notify_enable_device_cb),
-                    color_device);
+  g_signal_connect_object (color_device->widget_switch, "notify::active",
+                           G_CALLBACK (cc_color_device_notify_enable_device_cb),
+                           color_device, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -251,10 +242,8 @@ cc_color_device_class_init (CcColorDeviceClass *klass)
 }
 
 static void
-cc_color_device_clicked_expander_cb (GtkButton *button,
-                                     gpointer user_data)
+cc_color_device_clicked_expander_cb (CcColorDevice *color_device)
 {
-  CcColorDevice *color_device = CC_COLOR_DEVICE (user_data);
   color_device->expanded = !color_device->expanded;
   cc_color_device_refresh (color_device);
   g_signal_emit (color_device, signals[SIGNAL_EXPANDED_CHANGED], 0,
@@ -287,9 +276,9 @@ cc_color_device_init (CcColorDevice *color_device)
   color_device->widget_arrow = gtk_image_new_from_icon_name ("pan-end-symbolic",
                                                      GTK_ICON_SIZE_BUTTON);
   color_device->widget_button = gtk_button_new ();
-  g_signal_connect (color_device->widget_button, "clicked",
-                    G_CALLBACK (cc_color_device_clicked_expander_cb),
-                    color_device);
+  g_signal_connect_object (color_device->widget_button, "clicked",
+                           G_CALLBACK (cc_color_device_clicked_expander_cb),
+                           color_device, G_CONNECT_SWAPPED);
   gtk_widget_set_valign (color_device->widget_button, GTK_ALIGN_CENTER);
   gtk_button_set_relief (GTK_BUTTON (color_device->widget_button), GTK_RELIEF_NONE);
   gtk_container_add (GTK_CONTAINER (color_device->widget_button), color_device->widget_arrow);

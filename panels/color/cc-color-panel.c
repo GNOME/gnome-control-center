@@ -86,8 +86,6 @@ struct _CcColorPanel
   CcColorCalibrate *calibrate;
   GtkListBox    *list_box;
   gchar         *list_box_filter;
-  guint          list_box_selected_id;
-  guint          list_box_activated_id;
   GtkSizeGroup  *list_box_size;
   gboolean       is_live_cd;
   gboolean       model_is_changing;
@@ -204,7 +202,7 @@ gcm_prefs_combobox_add_profile (CcColorPanel *prefs,
 }
 
 static void
-gcm_prefs_default_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_default_cb (CcColorPanel *prefs)
 {
   g_autoptr(CdProfile) profile = NULL;
   gboolean ret;
@@ -271,7 +269,7 @@ gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *prefs)
 }
 
 static void
-gcm_prefs_calib_cancel_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_calib_cancel_cb (CcColorPanel *prefs)
 {
   gtk_widget_hide (prefs->assistant_calib);
 }
@@ -288,9 +286,8 @@ gcm_prefs_calib_delayed_complete_cb (gpointer user_data)
 }
 
 static void
-gcm_prefs_calib_prepare_cb (GtkAssistant *assistant,
-                            GtkWidget    *page,
-                            CcColorPanel *panel)
+gcm_prefs_calib_prepare_cb (CcColorPanel *panel,
+                            GtkWidget    *page)
 {
   /* give the user the indication they should actually manually set the
    * desired brightness rather than clicking blindly by delaying the
@@ -303,11 +300,11 @@ gcm_prefs_calib_prepare_cb (GtkAssistant *assistant,
 
   /* disable the brightness page as we don't want to show a 'Finished'
    * button if the user goes back at any point */
-  gtk_assistant_set_page_complete (assistant, panel->box_calib_brightness, FALSE);
+  gtk_assistant_set_page_complete (GTK_ASSISTANT (panel->assistant_calib), panel->box_calib_brightness, FALSE);
 }
 
 static void
-gcm_prefs_calib_apply_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_calib_apply_cb (CcColorPanel *prefs)
 {
   gboolean ret;
   g_autoptr(GError) error = NULL;
@@ -342,18 +339,16 @@ gcm_prefs_calib_apply_cb (GtkWidget *widget, CcColorPanel *prefs)
 }
 
 static gboolean
-gcm_prefs_calib_delete_event_cb (GtkWidget *widget,
-                                 GdkEvent *event,
-                                 CcColorPanel *prefs)
+gcm_prefs_calib_delete_event_cb (CcColorPanel *prefs)
 {
   /* do not destroy the window */
-  gcm_prefs_calib_cancel_cb (widget, prefs);
+  gcm_prefs_calib_cancel_cb (prefs);
   return TRUE;
 }
 
 static void
-gcm_prefs_calib_temp_treeview_clicked_cb (GtkTreeSelection *selection,
-                                          CcColorPanel *prefs)
+gcm_prefs_calib_temp_treeview_clicked_cb (CcColorPanel *prefs,
+                                          GtkTreeSelection *selection)
 {
   gboolean ret;
   GtkTreeIter iter;
@@ -375,8 +370,8 @@ gcm_prefs_calib_temp_treeview_clicked_cb (GtkTreeSelection *selection,
 }
 
 static void
-gcm_prefs_calib_kind_treeview_clicked_cb (GtkTreeSelection *selection,
-                                          CcColorPanel *prefs)
+gcm_prefs_calib_kind_treeview_clicked_cb (CcColorPanel *prefs,
+                                          GtkTreeSelection *selection)
 {
   CdSensorCap device_kind;
   gboolean ret;
@@ -399,8 +394,8 @@ gcm_prefs_calib_kind_treeview_clicked_cb (GtkTreeSelection *selection,
 }
 
 static void
-gcm_prefs_calib_quality_treeview_clicked_cb (GtkTreeSelection *selection,
-                                             CcColorPanel *prefs)
+gcm_prefs_calib_quality_treeview_clicked_cb (CcColorPanel *prefs,
+                                             GtkTreeSelection *selection)
 {
   CdProfileQuality quality;
   gboolean ret;
@@ -490,8 +485,8 @@ gcm_prefs_calib_set_sensor (CcColorPanel *prefs,
 }
 
 static void
-gcm_prefs_calib_sensor_treeview_clicked_cb (GtkTreeSelection *selection,
-                                             CcColorPanel *prefs)
+gcm_prefs_calib_sensor_treeview_clicked_cb (CcColorPanel *prefs,
+                                            GtkTreeSelection *selection)
 {
   gboolean ret;
   GtkTreeIter iter;
@@ -565,9 +560,7 @@ gcm_prefs_calibrate_display (CcColorPanel *prefs)
 }
 
 static void
-gcm_prefs_title_entry_changed_cb (GtkWidget *widget,
-                                  GParamSpec *param_spec,
-                                  CcColorPanel *prefs)
+gcm_prefs_title_entry_changed_cb (CcColorPanel *prefs)
 {
   GtkAssistant *assistant;
   const gchar *value;
@@ -579,7 +572,7 @@ gcm_prefs_title_entry_changed_cb (GtkWidget *widget,
 }
 
 static void
-gcm_prefs_calibrate_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_calibrate_cb (CcColorPanel *prefs)
 {
   gboolean ret;
   g_autoptr(GError) error = NULL;
@@ -783,7 +776,7 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
 }
 
 static void
-gcm_prefs_calib_upload_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_calib_upload_cb (CcColorPanel *prefs)
 {
   CdProfile *profile;
   const gchar *uri;
@@ -868,7 +861,7 @@ gcm_prefs_calib_upload_cb (GtkWidget *widget, CcColorPanel *prefs)
 }
 
 static void
-gcm_prefs_calib_export_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_calib_export_cb (CcColorPanel *prefs)
 {
   CdProfile *profile;
   gboolean ret;
@@ -917,9 +910,8 @@ gcm_prefs_calib_export_cb (GtkWidget *widget, CcColorPanel *prefs)
 }
 
 static void
-gcm_prefs_calib_export_link_cb (GtkLabel *widget,
-                                const gchar *url,
-                                CcColorPanel *prefs)
+gcm_prefs_calib_export_link_cb (CcColorPanel *prefs,
+                                const gchar *url)
 {
   gtk_show_uri_on_window (GTK_WINDOW (prefs->main_window),
                           "help:gnome-help/color-howtoimport",
@@ -928,7 +920,7 @@ gcm_prefs_calib_export_link_cb (GtkLabel *widget,
 }
 
 static void
-gcm_prefs_profile_add_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_profile_add_cb (CcColorPanel *prefs)
 {
   g_autoptr(GPtrArray) profiles = NULL;
 
@@ -945,7 +937,7 @@ gcm_prefs_profile_add_cb (GtkWidget *widget, CcColorPanel *prefs)
 }
 
 static void
-gcm_prefs_profile_remove_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_profile_remove_cb (CcColorPanel *prefs)
 {
   CdProfile *profile;
   gboolean ret = FALSE;
@@ -997,7 +989,7 @@ gcm_prefs_make_profile_default_cb (GObject *object,
 }
 
 static void
-gcm_prefs_device_profile_enable_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_device_profile_enable_cb (CcColorPanel *prefs)
 {
   CdProfile *profile;
   GtkListBoxRow *row;
@@ -1050,9 +1042,8 @@ gcm_prefs_profile_view (CcColorPanel *prefs, CdProfile *profile)
 }
 
 static void
-gcm_prefs_profile_assign_link_activate_cb (GtkLabel *label,
-                                           const gchar *uri,
-                                           CcColorPanel *prefs)
+gcm_prefs_profile_assign_link_activate_cb (CcColorPanel *prefs,
+                                           const gchar *uri)
 {
   CdProfile *profile;
   GtkListBoxRow *row;
@@ -1073,7 +1064,7 @@ gcm_prefs_profile_assign_link_activate_cb (GtkLabel *label,
 }
 
 static void
-gcm_prefs_profile_view_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_profile_view_cb (CcColorPanel *prefs)
 {
   CdProfile *profile;
   GtkListBoxRow *row;
@@ -1094,13 +1085,13 @@ gcm_prefs_profile_view_cb (GtkWidget *widget, CcColorPanel *prefs)
 }
 
 static void
-gcm_prefs_button_assign_cancel_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_button_assign_cancel_cb (CcColorPanel *prefs)
 {
   gtk_widget_hide (prefs->dialog_assign);
 }
 
 static void
-gcm_prefs_button_assign_ok_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_button_assign_ok_cb (CcColorPanel *prefs)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
@@ -1110,8 +1101,7 @@ gcm_prefs_button_assign_ok_cb (GtkWidget *widget, CcColorPanel *prefs)
   GtkTreeSelection *selection;
 
   /* hide window */
-  widget = GTK_WIDGET (prefs->dialog_assign);
-  gtk_widget_hide (widget);
+  gtk_widget_hide (GTK_WIDGET (prefs->dialog_assign));
 
   /* get the selected profile */
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_assign));
@@ -1162,11 +1152,9 @@ gcm_prefs_button_assign_ok_cb (GtkWidget *widget, CcColorPanel *prefs)
 }
 
 static gboolean
-gcm_prefs_profile_delete_event_cb (GtkWidget *widget,
-                                   GdkEvent *event,
-                                   CcColorPanel *prefs)
+gcm_prefs_profile_delete_event_cb (CcColorPanel *prefs)
 {
-  gcm_prefs_button_assign_cancel_cb (widget, prefs);
+  gcm_prefs_button_assign_cancel_cb (prefs);
   return TRUE;
 }
 
@@ -1302,8 +1290,8 @@ gcm_prefs_profile_clicked (CcColorPanel *prefs, CdProfile *profile, CdDevice *de
 }
 
 static void
-gcm_prefs_profiles_treeview_clicked_cb (GtkTreeSelection *selection,
-                                        CcColorPanel *prefs)
+gcm_prefs_profiles_treeview_clicked_cb (CcColorPanel *prefs,
+                                        GtkTreeSelection *selection)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
@@ -1332,24 +1320,21 @@ gcm_prefs_profiles_treeview_clicked_cb (GtkTreeSelection *selection,
 }
 
 static void
-gcm_prefs_profiles_row_activated_cb (GtkTreeView *tree_view,
-                                     GtkTreePath *path,
-                                     GtkTreeViewColumn *column,
-                                     CcColorPanel *prefs)
+gcm_prefs_profiles_row_activated_cb (CcColorPanel *prefs,
+                                     GtkTreePath *path)
 {
   GtkTreeIter iter;
   gboolean ret;
 
-  ret = gtk_tree_model_get_iter (gtk_tree_view_get_model (tree_view), &iter, path);
+  ret = gtk_tree_model_get_iter (gtk_tree_view_get_model (GTK_TREE_VIEW (prefs->treeview_assign)), &iter, path);
   if (!ret)
     return;
-  gcm_prefs_button_assign_ok_cb (NULL, prefs);
+  gcm_prefs_button_assign_ok_cb (prefs);
 }
 
 
 static void
-gcm_prefs_button_assign_import_cb (GtkWidget *widget,
-                                   CcColorPanel *prefs)
+gcm_prefs_button_assign_import_cb (CcColorPanel *prefs)
 {
   g_autoptr(GFile) file = NULL;
   g_autoptr(GError) error = NULL;
@@ -1359,8 +1344,7 @@ gcm_prefs_button_assign_import_cb (GtkWidget *widget,
   if (file == NULL)
     {
       g_warning ("failed to get ICC file");
-      widget = GTK_WIDGET (prefs->dialog_assign);
-      gtk_widget_hide (widget);
+      gtk_widget_hide (GTK_WIDGET (prefs->dialog_assign));
       return;
     }
 
@@ -1377,7 +1361,7 @@ gcm_prefs_button_assign_import_cb (GtkWidget *widget,
 #endif
 
   /* add to list view */
-  gcm_prefs_profile_add_cb (NULL, prefs);
+  gcm_prefs_profile_add_cb (prefs);
 }
 
 static void
@@ -1592,9 +1576,9 @@ gcm_prefs_device_changed_cb (CdDevice *device, CcColorPanel *prefs)
 }
 
 static void
-gcm_prefs_device_expanded_changed_cb (CcColorDevice *widget,
+gcm_prefs_device_expanded_changed_cb (CcColorPanel *prefs,
                                       gboolean is_expanded,
-                                      CcColorPanel *prefs)
+                                      CcColorDevice *widget)
 {
   /* ignore internal changes */
   if (prefs->model_is_changing)
@@ -1644,8 +1628,8 @@ gcm_prefs_add_device (CcColorPanel *prefs, CdDevice *device)
 
   /* add device */
   widget = cc_color_device_new (device);
-  g_signal_connect (widget, "expanded-changed",
-                    G_CALLBACK (gcm_prefs_device_expanded_changed_cb), prefs);
+  g_signal_connect_object (widget, "expanded-changed",
+                           G_CALLBACK (gcm_prefs_device_expanded_changed_cb), prefs, G_CONNECT_SWAPPED);
   gtk_widget_show (widget);
   gtk_container_add (GTK_CONTAINER (prefs->list_box), widget);
   gtk_size_group_add_widget (prefs->list_box_size, widget);
@@ -1655,8 +1639,8 @@ gcm_prefs_add_device (CcColorPanel *prefs, CdDevice *device)
 
   /* watch for changes */
   g_ptr_array_add (prefs->devices, g_object_ref (device));
-  g_signal_connect (device, "changed",
-                    G_CALLBACK (gcm_prefs_device_changed_cb), prefs);
+  g_signal_connect_object (device, "changed",
+                           G_CALLBACK (gcm_prefs_device_changed_cb), prefs, G_CONNECT_SWAPPED);
   gtk_list_box_invalidate_sort (prefs->list_box);
 }
 
@@ -1758,9 +1742,8 @@ gcm_prefs_get_devices_cb (GObject *object,
 }
 
 static void
-gcm_prefs_list_box_row_selected_cb (GtkListBox *list_box,
-                                    GtkListBoxRow *row,
-                                    CcColorPanel *panel)
+gcm_prefs_list_box_row_selected_cb (CcColorPanel *panel,
+                                    GtkListBoxRow *row)
 {
   gcm_prefs_refresh_toolbar_buttons (panel);
 }
@@ -1812,13 +1795,12 @@ gcm_prefs_refresh_toolbar_buttons (CcColorPanel *panel)
 }
 
 static void
-gcm_prefs_list_box_row_activated_cb (GtkListBox *list_box,
-                                     GtkListBoxRow *row,
-                                     CcColorPanel *prefs)
+gcm_prefs_list_box_row_activated_cb (CcColorPanel *prefs,
+                                     GtkListBoxRow *row)
 {
   if (CC_IS_COLOR_PROFILE (row))
     {
-      gcm_prefs_device_profile_enable_cb (NULL, prefs);
+      gcm_prefs_device_profile_enable_cb (prefs);
     }
 }
 
@@ -1884,9 +1866,9 @@ gcm_prefs_is_livecd (void)
 }
 
 static void
-gcm_prefs_window_realize_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_window_realize_cb (CcColorPanel *prefs)
 {
-  prefs->main_window = gtk_widget_get_toplevel (widget);
+  prefs->main_window = gtk_widget_get_toplevel (GTK_WIDGET (prefs));
 }
 
 static const char *
@@ -1925,39 +1907,12 @@ static void
 cc_color_panel_dispose (GObject *object)
 {
   CcColorPanel *prefs = CC_COLOR_PANEL (object);
-  CdDevice *device;
-  guint i;
-
-  /* stop the EggListView from firing when it gets disposed */
-  if (prefs->list_box_selected_id != 0)
-    {
-      g_signal_handler_disconnect (prefs->list_box,
-                                   prefs->list_box_selected_id);
-      prefs->list_box_selected_id = 0;
-
-      /* row-activated event should be connected at this point */
-      g_signal_handler_disconnect (prefs->list_box,
-                                   prefs->list_box_activated_id);
-      prefs->list_box_activated_id = 0;
-    }
-
-  /* stop the devices from emitting after the ListBox has been disposed */
-  if (prefs->devices != NULL)
-    {
-      for (i = 0; i < prefs->devices->len; i++)
-        {
-          device = g_ptr_array_index (prefs->devices, i);
-          g_signal_handlers_disconnect_by_func (device,
-                                                G_CALLBACK (gcm_prefs_device_changed_cb),
-                                                CC_COLOR_PANEL (object));
-        }
-      g_clear_pointer (&prefs->devices, g_ptr_array_unref);
-    }
 
   g_clear_object (&prefs->settings);
   g_clear_object (&prefs->settings_colord);
   g_clear_object (&prefs->client);
   g_clear_object (&prefs->current_device);
+  g_clear_pointer (&prefs->devices, g_ptr_array_unref);
   g_clear_object (&prefs->calibrate);
   g_clear_object (&prefs->list_box_size);
   g_clear_pointer (&prefs->sensors, g_ptr_array_unref);
@@ -2105,67 +2060,67 @@ cc_color_panel_init (CcColorPanel *prefs)
   prefs->settings_colord = g_settings_new (COLORD_SETTINGS_SCHEMA);
 
   /* assign buttons */
-  g_signal_connect (prefs->toolbutton_profile_add, "clicked",
-                    G_CALLBACK (gcm_prefs_profile_add_cb), prefs);
-  g_signal_connect (prefs->toolbutton_profile_remove, "clicked",
-                    G_CALLBACK (gcm_prefs_profile_remove_cb), prefs);
-  g_signal_connect (prefs->toolbutton_profile_view, "clicked",
-                    G_CALLBACK (gcm_prefs_profile_view_cb), prefs);
+  g_signal_connect_object (prefs->toolbutton_profile_add, "clicked",
+                           G_CALLBACK (gcm_prefs_profile_add_cb), prefs, G_CONNECT_SWAPPED);
+  g_signal_connect_object (prefs->toolbutton_profile_remove, "clicked",
+                           G_CALLBACK (gcm_prefs_profile_remove_cb), prefs, G_CONNECT_SWAPPED);
+  g_signal_connect_object (prefs->toolbutton_profile_view, "clicked",
+                           G_CALLBACK (gcm_prefs_profile_view_cb), prefs, G_CONNECT_SWAPPED);
 
   /* href */
-  g_signal_connect (prefs->label_assign_warning, "activate-link",
-                    G_CALLBACK (gcm_prefs_profile_assign_link_activate_cb), prefs);
+  g_signal_connect_object (prefs->label_assign_warning, "activate-link",
+                           G_CALLBACK (gcm_prefs_profile_assign_link_activate_cb), prefs, G_CONNECT_SWAPPED);
 
   /* add columns to profile tree view */
   gcm_prefs_add_profiles_columns (prefs, GTK_TREE_VIEW (prefs->treeview_assign));
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_assign));
-  g_signal_connect (selection, "changed",
-                    G_CALLBACK (gcm_prefs_profiles_treeview_clicked_cb),
-                    prefs);
-  g_signal_connect (GTK_TREE_VIEW (prefs->treeview_assign), "row-activated",
-                    G_CALLBACK (gcm_prefs_profiles_row_activated_cb),
-                    prefs);
+  g_signal_connect_object (selection, "changed",
+                           G_CALLBACK (gcm_prefs_profiles_treeview_clicked_cb),
+                           prefs, G_CONNECT_SWAPPED);
+  g_signal_connect_object (prefs->treeview_assign, "row-activated",
+                           G_CALLBACK (gcm_prefs_profiles_row_activated_cb),
+                           prefs, G_CONNECT_SWAPPED);
 
-  g_signal_connect (prefs->toolbutton_device_default, "clicked",
-                    G_CALLBACK (gcm_prefs_default_cb), prefs);
-  g_signal_connect (prefs->toolbutton_device_enable, "clicked",
-                    G_CALLBACK (gcm_prefs_device_profile_enable_cb), prefs);
-  g_signal_connect (prefs->toolbutton_device_calibrate, "clicked",
-                    G_CALLBACK (gcm_prefs_calibrate_cb), prefs);
+  g_signal_connect_object (prefs->toolbutton_device_default, "clicked",
+                           G_CALLBACK (gcm_prefs_default_cb), prefs, G_CONNECT_SWAPPED);
+  g_signal_connect_object (prefs->toolbutton_device_enable, "clicked",
+                           G_CALLBACK (gcm_prefs_device_profile_enable_cb), prefs, G_CONNECT_SWAPPED);
+  g_signal_connect_object (prefs->toolbutton_device_calibrate, "clicked",
+                           G_CALLBACK (gcm_prefs_calibrate_cb), prefs, G_CONNECT_SWAPPED);
 
   context = gtk_widget_get_style_context (prefs->toolbar_devices);
   gtk_style_context_add_class (context, GTK_STYLE_CLASS_INLINE_TOOLBAR);
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
   /* set up assign dialog */
-  g_signal_connect (prefs->dialog_assign, "delete-event",
-                    G_CALLBACK (gcm_prefs_profile_delete_event_cb), prefs);
+  g_signal_connect_object (prefs->dialog_assign, "delete-event",
+                           G_CALLBACK (gcm_prefs_profile_delete_event_cb), prefs, G_CONNECT_SWAPPED);
 
-  g_signal_connect (prefs->button_assign_cancel, "clicked",
-                    G_CALLBACK (gcm_prefs_button_assign_cancel_cb), prefs);
-  g_signal_connect (prefs->button_assign_ok, "clicked",
-                    G_CALLBACK (gcm_prefs_button_assign_ok_cb), prefs);
+  g_signal_connect_object (prefs->button_assign_cancel, "clicked",
+                           G_CALLBACK (gcm_prefs_button_assign_cancel_cb), prefs, G_CONNECT_SWAPPED);
+  g_signal_connect_object (prefs->button_assign_ok, "clicked",
+                           G_CALLBACK (gcm_prefs_button_assign_ok_cb), prefs, G_CONNECT_SWAPPED);
 
   /* setup icc profiles list */
-  g_signal_connect (prefs->button_assign_import, "clicked",
-                    G_CALLBACK (gcm_prefs_button_assign_import_cb), prefs);
+  g_signal_connect_object (prefs->button_assign_import, "clicked",
+                           G_CALLBACK (gcm_prefs_button_assign_import_cb), prefs, G_CONNECT_SWAPPED);
 
   /* setup the calibration helper */
-  g_signal_connect (prefs->assistant_calib, "delete-event",
-                    G_CALLBACK (gcm_prefs_calib_delete_event_cb),
-                    prefs);
-  g_signal_connect (prefs->assistant_calib, "apply",
-                    G_CALLBACK (gcm_prefs_calib_apply_cb),
-                    prefs);
-  g_signal_connect (prefs->assistant_calib, "cancel",
-                    G_CALLBACK (gcm_prefs_calib_cancel_cb),
-                    prefs);
-  g_signal_connect (prefs->assistant_calib, "close",
-                    G_CALLBACK (gcm_prefs_calib_cancel_cb),
-                    prefs);
-  g_signal_connect (prefs->assistant_calib, "prepare",
-                    G_CALLBACK (gcm_prefs_calib_prepare_cb),
-                    prefs);
+  g_signal_connect_object (prefs->assistant_calib, "delete-event",
+                           G_CALLBACK (gcm_prefs_calib_delete_event_cb),
+                           prefs, G_CONNECT_SWAPPED);
+  g_signal_connect_object (prefs->assistant_calib, "apply",
+                           G_CALLBACK (gcm_prefs_calib_apply_cb),
+                           prefs, G_CONNECT_SWAPPED);
+  g_signal_connect_object (prefs->assistant_calib, "cancel",
+                           G_CALLBACK (gcm_prefs_calib_cancel_cb),
+                           prefs, G_CONNECT_SWAPPED);
+  g_signal_connect_object (prefs->assistant_calib, "close",
+                           G_CALLBACK (gcm_prefs_calib_cancel_cb),
+                           prefs, G_CONNECT_SWAPPED);
+  g_signal_connect_object (prefs->assistant_calib, "prepare",
+                           G_CALLBACK (gcm_prefs_calib_prepare_cb),
+                           prefs, G_CONNECT_SWAPPED);
 
   /* setup the calibration helper ::TreeView */
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_calib_quality));
@@ -2173,9 +2128,9 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_tree_model_foreach (model,
                           cc_color_panel_treeview_quality_default_cb,
                           selection);
-  g_signal_connect (selection, "changed",
-                    G_CALLBACK (gcm_prefs_calib_quality_treeview_clicked_cb),
-                    prefs);
+  g_signal_connect_object (selection, "changed",
+                           G_CALLBACK (gcm_prefs_calib_quality_treeview_clicked_cb),
+                           prefs, G_CONNECT_SWAPPED);
   column = gtk_tree_view_column_new ();
   renderer = gtk_cell_renderer_text_new ();
   g_object_set (renderer,
@@ -2203,9 +2158,9 @@ cc_color_panel_init (CcColorPanel *prefs)
                                GTK_TREE_VIEW_COLUMN (column));
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_calib_sensor));
-  g_signal_connect (selection, "changed",
-                    G_CALLBACK (gcm_prefs_calib_sensor_treeview_clicked_cb),
-                    prefs);
+  g_signal_connect_object (selection, "changed",
+                           G_CALLBACK (gcm_prefs_calib_sensor_treeview_clicked_cb),
+                           prefs, G_CONNECT_SWAPPED);
   column = gtk_tree_view_column_new ();
   renderer = gtk_cell_renderer_text_new ();
   g_object_set (renderer,
@@ -2220,9 +2175,9 @@ cc_color_panel_init (CcColorPanel *prefs)
                                GTK_TREE_VIEW_COLUMN (column));
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_calib_kind));
-  g_signal_connect (selection, "changed",
-                    G_CALLBACK (gcm_prefs_calib_kind_treeview_clicked_cb),
-                    prefs);
+  g_signal_connect_object (selection, "changed",
+                           G_CALLBACK (gcm_prefs_calib_kind_treeview_clicked_cb),
+                           prefs, G_CONNECT_SWAPPED);
   column = gtk_tree_view_column_new ();
   renderer = gtk_cell_renderer_text_new ();
   g_object_set (renderer,
@@ -2243,9 +2198,9 @@ cc_color_panel_init (CcColorPanel *prefs)
                                GTK_TREE_VIEW_COLUMN (column));
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_calib_temp));
-  g_signal_connect (selection, "changed",
-                    G_CALLBACK (gcm_prefs_calib_temp_treeview_clicked_cb),
-                    prefs);
+  g_signal_connect_object (selection, "changed",
+                           G_CALLBACK (gcm_prefs_calib_temp_treeview_clicked_cb),
+                           prefs, G_CONNECT_SWAPPED);
   column = gtk_tree_view_column_new ();
   renderer = gtk_cell_renderer_text_new ();
   g_object_set (renderer,
@@ -2258,8 +2213,8 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (prefs->treeview_calib_temp),
                                GTK_TREE_VIEW_COLUMN (column));
-  g_signal_connect (prefs->entry_calib_title, "notify::text",
-        G_CALLBACK (gcm_prefs_title_entry_changed_cb), prefs);
+  g_signal_connect_object (prefs->entry_calib_title, "notify::text",
+                           G_CALLBACK (gcm_prefs_title_entry_changed_cb), prefs, G_CONNECT_SWAPPED);
 
   /* use a device client array */
   prefs->client = cd_client_new ();
@@ -2284,14 +2239,12 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_list_box_set_selection_mode (prefs->list_box,
                                    GTK_SELECTION_SINGLE);
   gtk_list_box_set_activate_on_single_click (prefs->list_box, FALSE);
-  prefs->list_box_selected_id =
-    g_signal_connect (prefs->list_box, "row-selected",
-                      G_CALLBACK (gcm_prefs_list_box_row_selected_cb),
-                      prefs);
-  prefs->list_box_activated_id =
-    g_signal_connect (prefs->list_box, "row-activated",
-                    G_CALLBACK (gcm_prefs_list_box_row_activated_cb),
-                    prefs);
+  g_signal_connect_object (prefs->list_box, "row-selected",
+                           G_CALLBACK (gcm_prefs_list_box_row_selected_cb),
+                           prefs, G_CONNECT_SWAPPED);
+  g_signal_connect_object (prefs->list_box, "row-activated",
+                           G_CALLBACK (gcm_prefs_list_box_row_activated_cb),
+                           prefs, G_CONNECT_SWAPPED);
   prefs->list_box_size = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
 
   gtk_container_add (GTK_CONTAINER (prefs->frame_devices), GTK_WIDGET (prefs->list_box));
@@ -2317,14 +2270,14 @@ cc_color_panel_init (CcColorPanel *prefs)
   /* show the confirmation export page if we are running from a LiveCD */
   prefs->is_live_cd = gcm_prefs_is_livecd ();
   gtk_widget_set_visible (prefs->box_calib_summary, prefs->is_live_cd);
-  g_signal_connect (prefs->button_calib_export, "clicked",
-                    G_CALLBACK (gcm_prefs_calib_export_cb), prefs);
-  g_signal_connect (prefs->button_calib_upload, "clicked",
-                    G_CALLBACK (gcm_prefs_calib_upload_cb), prefs);
-  g_signal_connect (prefs->label_calib_summary_message, "activate-link",
-                    G_CALLBACK (gcm_prefs_calib_export_link_cb), prefs);
+  g_signal_connect_object (prefs->button_calib_export, "clicked",
+                           G_CALLBACK (gcm_prefs_calib_export_cb), prefs, G_CONNECT_SWAPPED);
+  g_signal_connect_object (prefs->button_calib_upload, "clicked",
+                           G_CALLBACK (gcm_prefs_calib_upload_cb), prefs, G_CONNECT_SWAPPED);
+  g_signal_connect_object (prefs->label_calib_summary_message, "activate-link",
+                           G_CALLBACK (gcm_prefs_calib_export_link_cb), prefs, G_CONNECT_SWAPPED);
 
   g_signal_connect (prefs, "realize",
                     G_CALLBACK (gcm_prefs_window_realize_cb),
-                    prefs);
+                    NULL);
 }
