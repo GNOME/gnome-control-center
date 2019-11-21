@@ -392,7 +392,7 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
                                 gpointer      user_data)
 {
   PpNewPrinter        *self = user_data;
-  GVariant            *output;
+  g_autoptr(GVariant)  output = NULL;
   g_autoptr(GError)    error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
@@ -409,8 +409,6 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
         {
           g_warning ("cups-pk-helper: addition of printer %s failed: %s", self->name, ret_error);
         }
-
-      g_variant_unref (output);
     }
   else
     {
@@ -524,7 +522,7 @@ printer_add_async_scb3 (GObject      *source_object,
                         gpointer      user_data)
 {
   PpNewPrinter        *self = user_data;
-  GVariant            *output;
+  g_autoptr(GVariant)  output = NULL;
   PPDName             *ppd_item = NULL;
   g_autoptr(GError)    error = NULL;
 
@@ -536,7 +534,6 @@ printer_add_async_scb3 (GObject      *source_object,
   if (output)
     {
       ppd_item = get_ppd_item_from_output (output);
-      g_variant_unref (output);
     }
   else
     {
@@ -568,7 +565,7 @@ install_printer_drivers_cb (GObject      *source_object,
                             gpointer      user_data)
 {
   PpNewPrinter        *self = user_data;
-  GVariant            *output;
+  g_autoptr(GVariant)  output = NULL;
   g_autoptr(GError)    error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
@@ -576,11 +573,7 @@ install_printer_drivers_cb (GObject      *source_object,
                                           &error);
   g_object_unref (source_object);
 
-  if (output)
-    {
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
@@ -627,7 +620,7 @@ printer_add_async_scb (GObject      *source_object,
   PpNewPrinter        *self = user_data;
   GDBusConnection     *bus;
   GVariantBuilder      array_builder;
-  GVariant            *output;
+  g_autoptr(GVariant)  output = NULL;
   gboolean             cancelled = FALSE;
   PPDName             *ppd_item = NULL;
   g_autoptr(GError)    error = NULL;
@@ -640,7 +633,6 @@ printer_add_async_scb (GObject      *source_object,
   if (output)
     {
       ppd_item = get_ppd_item_from_output (output);
-      g_variant_unref (output);
     }
   else
     {
@@ -786,20 +778,16 @@ printer_set_accepting_jobs_cb (GObject      *source_object,
                                GAsyncResult *res,
                                gpointer      user_data)
 {
-  GVariant         *output;
-  PCData           *data = (PCData *) user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) output = NULL;
+  PCData             *data = (PCData *) user_data;
+  g_autoptr(GError)   error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
   g_object_unref (source_object);
 
-  if (output)
-    {
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
@@ -814,20 +802,16 @@ printer_set_enabled_cb (GObject      *source_object,
                         GAsyncResult *res,
                         gpointer      user_data)
 {
-  GVariant         *output;
-  PCData           *data = (PCData *) user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) output = NULL;
+  PCData             *data = (PCData *) user_data;
+  g_autoptr(GError)   error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
   g_object_unref (source_object);
 
-  if (output)
-    {
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
@@ -884,20 +868,16 @@ install_package_names_cb (GObject      *source_object,
                           GAsyncResult *res,
                           gpointer      user_data)
 {
-  GVariant         *output;
-  IMEData          *data = (IMEData *) user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) output = NULL;
+  IMEData            *data = (IMEData *) user_data;
+  g_autoptr(GError)   error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
   g_object_unref (source_object);
 
-  if (output)
-    {
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
@@ -912,10 +892,10 @@ search_files_cb (GObject      *source_object,
                  GAsyncResult *res,
                  gpointer      user_data)
 {
-  GVariant         *output;
-  IMEData          *data = (IMEData *) user_data;
-  g_autoptr(GError) error = NULL;
-  GList            *item;
+  g_autoptr(GVariant) output = NULL;
+  IMEData            *data = (IMEData *) user_data;
+  g_autoptr(GError)   error = NULL;
+  GList              *item;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -932,7 +912,6 @@ search_files_cb (GObject      *source_object,
 
       if (!installed)
         data->packages = g_list_append (data->packages, g_strdup (package));
-      g_variant_unref (output);
     }
   else
     {
@@ -1010,11 +989,11 @@ get_missing_executables_cb (GObject      *source_object,
                             GAsyncResult *res,
                             gpointer      user_data)
 {
-  GVariant         *output;
-  IMEData          *data = (IMEData *) user_data;
-  g_autoptr(GError) error = NULL;
-  GList            *executables = NULL;
-  GList            *item;
+  g_autoptr(GVariant) output = NULL;
+  IMEData            *data = (IMEData *) user_data;
+  g_autoptr(GError)   error = NULL;
+  GList              *executables = NULL;
+  GList              *item;
 
   if (data->ppd_file_name)
     {
@@ -1043,8 +1022,6 @@ get_missing_executables_cb (GObject      *source_object,
 
           g_variant_unref (array);
         }
-
-      g_variant_unref (output);
     }
   else if (error->domain == G_DBUS_ERROR &&
            (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
