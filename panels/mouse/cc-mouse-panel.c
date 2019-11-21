@@ -65,10 +65,6 @@ struct _CcMousePanel
   GSettings         *gsd_mouse_settings;
   GSettings         *touchpad_settings;
 
-  GsdDeviceManager  *device_manager;
-  guint              device_added_id;
-  guint              device_removed_id;
-
   gboolean           have_mouse;
   gboolean           have_touchpad;
   gboolean           have_touchscreen;
@@ -310,9 +306,7 @@ setup_dialog (CcMousePanel *self)
 
 /* Callback issued when a button is clicked on the dialog */
 static void
-device_changed (GsdDeviceManager *device_manager,
-                GsdDevice        *device,
-                CcMousePanel     *self)
+device_changed (CcMousePanel *self)
 {
   self->have_touchpad = touchpad_is_present ();
 
@@ -351,14 +345,6 @@ cc_mouse_panel_dispose (GObject *object)
   g_clear_object (&self->right_gesture);
   g_clear_object (&self->left_gesture);
 
-  if (self->device_manager != NULL) {
-    g_signal_handler_disconnect (self->device_manager, self->device_added_id);
-    self->device_added_id = 0;
-    g_signal_handler_disconnect (self->device_manager, self->device_removed_id);
-    self->device_removed_id = 0;
-    self->device_manager = NULL;
-  }
-
   G_OBJECT_CLASS (cc_mouse_panel_parent_class)->dispose (object);
 }
 
@@ -393,6 +379,8 @@ cc_mouse_panel_constructed (GObject *object)
 static void
 cc_mouse_panel_init (CcMousePanel *self)
 {
+  GsdDeviceManager  *device_manager;
+
   g_resources_register (cc_mouse_get_resource ());
 
   cc_mouse_test_get_type ();
@@ -402,11 +390,11 @@ cc_mouse_panel_init (CcMousePanel *self)
   self->gsd_mouse_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.mouse");
   self->touchpad_settings = g_settings_new ("org.gnome.desktop.peripherals.touchpad");
 
-  self->device_manager = gsd_device_manager_get ();
-  self->device_added_id = g_signal_connect (self->device_manager, "device-added",
-                 G_CALLBACK (device_changed), self);
-  self->device_removed_id = g_signal_connect (self->device_manager, "device-removed",
-             G_CALLBACK (device_changed), self);
+  device_manager = gsd_device_manager_get ();
+  g_signal_connect_object (device_manager, "device-added",
+                           G_CALLBACK (device_changed), self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (device_manager, "device-removed",
+                           G_CALLBACK (device_changed), self, G_CONNECT_SWAPPED);
 
   self->have_mouse = mouse_is_present ();
   self->have_touchpad = touchpad_is_present ();
