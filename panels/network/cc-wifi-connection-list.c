@@ -56,8 +56,8 @@ static void on_device_ap_added_cb   (CcWifiConnectionList *self,
 static void on_device_ap_removed_cb (CcWifiConnectionList *self,
                                      NMAccessPoint        *ap,
                                      NMDeviceWifi         *device);
-static void on_row_configured_cb    (CcWifiConnectionRow  *row,
-                                     CcWifiConnectionList *list);
+static void on_row_configured_cb    (CcWifiConnectionList *self,
+                                     CcWifiConnectionRow  *row);
 
 G_DEFINE_TYPE (CcWifiConnectionList, cc_wifi_connection_list, GTK_TYPE_LIST_BOX)
 
@@ -130,7 +130,7 @@ cc_wifi_connection_list_row_add (CcWifiConnectionList *self,
   gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (res));
   gtk_widget_show (GTK_WIDGET (res));
 
-  g_signal_connect (res, "configure", G_CALLBACK (on_row_configured_cb), self);
+  g_signal_connect_object (res, "configure", G_CALLBACK (on_row_configured_cb), self, G_CONNECT_SWAPPED);
 
   return res;
 }
@@ -240,7 +240,7 @@ update_connections (CcWifiConnectionList *self)
 }
 
 static void
-on_row_configured_cb (CcWifiConnectionRow *row, CcWifiConnectionList *self)
+on_row_configured_cb (CcWifiConnectionList *self, CcWifiConnectionRow *row)
 {
   g_signal_emit_by_name (self, "configure", row);
 }
