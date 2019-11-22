@@ -72,7 +72,6 @@ struct _NetDeviceMobile
 
         /* New MM >= 0.7 support */
         MMObject   *mm_object;
-        guint       operator_name_updated;
 
         NMAMobileProvidersDatabase *mpd;
 };
@@ -624,10 +623,11 @@ device_mobile_device_got_modem_manager_gsm_cb (GObject      *source_object,
         }
 
         /* Setup value updates */
-        g_signal_connect_swapped (self->gsm_proxy,
-                                  "g-signal",
-                                  G_CALLBACK (device_mobile_gsm_signal_cb),
-                                  self);
+        g_signal_connect_object (self->gsm_proxy,
+                                 "g-signal",
+                                 G_CALLBACK (device_mobile_gsm_signal_cb),
+                                 self,
+                                 G_CONNECT_SWAPPED);
 
         /* Load initial value */
         g_dbus_proxy_call (self->gsm_proxy,
@@ -720,12 +720,6 @@ net_device_mobile_dispose (GObject *object)
         g_clear_object (&self->cancellable);
         g_clear_object (&self->gsm_proxy);
         g_clear_object (&self->cdma_proxy);
-
-        if (self->operator_name_updated) {
-                g_assert (self->mm_object != NULL);
-                g_signal_handler_disconnect (mm_object_peek_modem_3gpp (self->mm_object), self->operator_name_updated);
-                self->operator_name_updated = 0;
-        }
         g_clear_object (&self->mm_object);
         g_clear_object (&self->mpd);
 
@@ -803,11 +797,11 @@ net_device_mobile_new (NMClient *client, NMDevice *device, GDBusObject *modem)
                 /* Follow changes in operator name and load initial values */
                 modem_3gpp = mm_object_peek_modem_3gpp (self->mm_object);
                 if (modem_3gpp != NULL) {
-                        g_assert (self->operator_name_updated == 0);
-                        self->operator_name_updated = g_signal_connect_swapped (modem_3gpp,
-                                                                                "notify::operator-name",
-                                                                                G_CALLBACK (operator_name_updated),
-                                                                                self);
+                        g_signal_connect_object (modem_3gpp,
+                                                 "notify::operator-name",
+                                                 G_CALLBACK (operator_name_updated),
+                                                 self,
+                                                 G_CONNECT_SWAPPED);
                         device_mobile_refresh_operator_name (self);
                 }
         }
