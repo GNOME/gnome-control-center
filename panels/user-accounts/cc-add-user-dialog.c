@@ -167,9 +167,9 @@ finish_action (CcAddUserDialog *self)
 }
 
 static void
-user_loaded_cb (ActUser         *user,
+user_loaded_cb (CcAddUserDialog *self,
                 GParamSpec      *pspec,
-                CcAddUserDialog *self)
+                ActUser         *user)
 {
   const gchar *password;
 
@@ -210,9 +210,9 @@ create_user_done (ActUserManager  *manager,
 
                 /* Check if the returned object is fully loaded before returning it */
                 if (act_user_is_loaded (user))
-                        user_loaded_cb (user, NULL, self);
+                        user_loaded_cb (self, NULL, user);
                 else
-                        g_signal_connect (user, "notify::is-loaded", G_CALLBACK (user_loaded_cb), self);
+                        g_signal_connect_object (user, "notify::is-loaded", G_CALLBACK (user_loaded_cb), self, G_CONNECT_SWAPPED);
         }
 }
 
@@ -863,11 +863,9 @@ enterprise_add_realm (CcAddUserDialog *self,
 }
 
 static void
-on_manager_realm_added (CcRealmManager  *manager,
-                        CcRealmObject   *realm,
-                        gpointer         user_data)
+on_manager_realm_added (CcAddUserDialog *self,
+                        CcRealmObject   *realm)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
         enterprise_add_realm (self, realm);
 }
 
@@ -988,12 +986,10 @@ enterprise_permit_user_login (CcAddUserDialog *self)
 }
 
 static void
-on_join_response (GtkDialog *dialog,
+on_join_response (CcAddUserDialog *self,
                   gint response,
-                  gpointer user_data)
+                  GtkDialog *dialog)
 {
-        CcAddUserDialog *self = CC_ADD_USER_DIALOG (user_data);
-
         gtk_widget_hide (GTK_WIDGET (dialog));
         if (response != GTK_RESPONSE_OK) {
                 finish_action (self);
@@ -1123,8 +1119,8 @@ join_init (CcAddUserDialog *self)
         self->join_name = GTK_ENTRY (gtk_builder_get_object (builder, "join-name"));
         self->join_password = GTK_ENTRY (gtk_builder_get_object (builder, "join-password"));
 
-        g_signal_connect (self->join_dialog, "response",
-                          G_CALLBACK (on_join_response), self);
+        g_signal_connect_object (self->join_dialog, "response",
+                                 G_CALLBACK (on_join_response), self, G_CONNECT_SWAPPED);
 
         g_object_unref (builder);
 }
@@ -1387,8 +1383,8 @@ on_realm_manager_created (GObject *source,
         for (l = realms; l != NULL; l = g_list_next (l))
                 enterprise_add_realm (self, l->data);
         g_list_free (realms);
-        g_signal_connect (self->realm_manager, "realm-added",
-                          G_CALLBACK (on_manager_realm_added), self);
+        g_signal_connect_object (self->realm_manager, "realm-added",
+                                 G_CALLBACK (on_manager_realm_added), self, G_CONNECT_SWAPPED);
 
         /* When no realms try to discover a sensible default, triggers realm-added signal */
         cc_realm_manager_discover (self->realm_manager, "", self->cancellable,
