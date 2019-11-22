@@ -67,18 +67,18 @@ struct _PpPPDSelectionDialog {
 };
 
 static void
-manufacturer_selection_changed_cb (GtkTreeSelection *selection,
-                                   gpointer          user_data)
+manufacturer_selection_changed_cb (PpPPDSelectionDialog *self)
 {
-  PpPPDSelectionDialog *self = user_data;
-  GtkListStore         *store;
-  GtkTreeModel         *model;
-  GtkTreeIter           iter;
-  GtkTreeView          *models_treeview;
-  gchar                *manufacturer_name = NULL;
-  gint                  i, index;
+  GtkTreeView  *treeview;
+  GtkListStore *store;
+  GtkTreeModel *model;
+  GtkTreeIter   iter;
+  GtkTreeView  *models_treeview;
+  gchar        *manufacturer_name = NULL;
+  gint          i, index;
 
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  treeview = GTK_TREE_VIEW (gtk_builder_get_object (self->builder, "ppd-selection-manufacturers-treeview"));
+  if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection (treeview), &model, &iter))
     {
       gtk_tree_model_get (model, &iter,
 			  PPD_MANUFACTURERS_NAMES_COLUMN, &manufacturer_name,
@@ -124,16 +124,16 @@ manufacturer_selection_changed_cb (GtkTreeSelection *selection,
 }
 
 static void
-model_selection_changed_cb (GtkTreeSelection *selection,
-                            gpointer          user_data)
+model_selection_changed_cb (PpPPDSelectionDialog *self)
 {
-  PpPPDSelectionDialog *self = user_data;
-  GtkTreeModel         *model;
-  GtkTreeIter           iter;
-  GtkWidget            *widget;
-  gchar                *model_name = NULL;
+  GtkTreeView  *treeview;
+  GtkTreeModel *model;
+  GtkTreeIter   iter;
+  GtkWidget    *widget;
+  gchar        *model_name = NULL;
 
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  treeview = GTK_TREE_VIEW (gtk_builder_get_object (self->builder, "ppd-selection-models-treeview"));
+  if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection (treeview), &model, &iter))
     {
       gtk_tree_model_get (model, &iter,
                           PPD_NAMES_COLUMN, &model_name,
@@ -258,11 +258,11 @@ populate_dialog (PpPPDSelectionDialog *self)
   gtk_tree_view_append_column (models_treeview, column);
 
 
-  g_signal_connect (gtk_tree_view_get_selection (models_treeview),
-                    "changed", G_CALLBACK (model_selection_changed_cb), self);
+  g_signal_connect_object (gtk_tree_view_get_selection (models_treeview),
+                           "changed", G_CALLBACK (model_selection_changed_cb), self, G_CONNECT_SWAPPED);
 
-  g_signal_connect (gtk_tree_view_get_selection (manufacturers_treeview),
-                    "changed", G_CALLBACK (manufacturer_selection_changed_cb), self);
+  g_signal_connect_object (gtk_tree_view_get_selection (manufacturers_treeview),
+                           "changed", G_CALLBACK (manufacturer_selection_changed_cb), self, G_CONNECT_SWAPPED);
 
   gtk_widget_show_all (self->dialog);
 
@@ -284,15 +284,13 @@ populate_dialog (PpPPDSelectionDialog *self)
 }
 
 static void
-ppd_selection_dialog_response_cb (GtkDialog *dialog,
-                                  gint       response_id,
-                                  gpointer   user_data)
+ppd_selection_dialog_response_cb (PpPPDSelectionDialog *self,
+                                  gint       response_id)
 {
-  PpPPDSelectionDialog *self = user_data;
-  GtkTreeSelection     *selection;
-  GtkTreeModel         *model;
-  GtkTreeView          *models_treeview;
-  GtkTreeIter           iter;
+  GtkTreeSelection *selection;
+  GtkTreeModel     *model;
+  GtkTreeView      *models_treeview;
+  GtkTreeIter       iter;
 
   pp_ppd_selection_dialog_hide (self);
 
@@ -361,7 +359,7 @@ pp_ppd_selection_dialog_new (GtkWindow            *parent,
 
   /* connect signals */
   g_signal_connect (self->dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-  g_signal_connect (self->dialog, "response", G_CALLBACK (ppd_selection_dialog_response_cb), self);
+  g_signal_connect_object (self->dialog, "response", G_CALLBACK (ppd_selection_dialog_response_cb), self, G_CONNECT_SWAPPED);
 
   gtk_window_set_transient_for (GTK_WINDOW (self->dialog), GTK_WINDOW (parent));
 
