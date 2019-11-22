@@ -72,7 +72,6 @@ struct _NetConnectionEditor
         GSList *initializing_pages;
         GSList *pages;
 
-        guint                    permission_id;
         NMClientPermissionResult can_modify;
 
         gboolean          title_set;
@@ -198,8 +197,6 @@ net_connection_editor_finalize (GObject *object)
         for (l = self->pages; l != NULL; l = l->next)
                 g_signal_handlers_disconnect_by_func (l->data, page_changed, self);
 
-        if (self->permission_id > 0 && self->client)
-                g_signal_handler_disconnect (self->client, self->permission_id);
         g_clear_object (&self->connection);
         g_clear_object (&self->orig_connection);
         g_clear_object (&self->parent_window);
@@ -491,8 +488,8 @@ add_page (NetConnectionEditor *self, CEPage *page)
 
         self->initializing_pages = g_slist_append (self->initializing_pages, page);
 
-        g_signal_connect_swapped (page, "changed", G_CALLBACK (page_changed), self);
-        g_signal_connect_swapped (page, "initialized", G_CALLBACK (page_initialized), self);
+        g_signal_connect_object (page, "changed", G_CALLBACK (page_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (page, "initialized", G_CALLBACK (page_initialized), self, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -645,7 +642,7 @@ vpn_import_complete (NMConnection *connection, gpointer user_data)
 }
 
 static void
-vpn_type_activated (GtkListBox *list, GtkWidget *row, NetConnectionEditor *self)
+vpn_type_activated (NetConnectionEditor *self, GtkWidget *row)
 {
         const char *service_name = g_object_get_data (G_OBJECT (row), "service_name");
         NMConnection *connection;
@@ -746,8 +743,8 @@ select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
         g_object_set_data (G_OBJECT (row), "service_name", "import");
         gtk_container_add (GTK_CONTAINER (list), row);
 
-        g_signal_connect (list, "row-activated",
-                          G_CALLBACK (vpn_type_activated), self);
+        g_signal_connect_object (list, "row-activated",
+                                 G_CALLBACK (vpn_type_activated), self, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -773,10 +770,9 @@ net_connection_editor_add_connection (NetConnectionEditor *self)
 }
 
 static void
-permission_changed (NMClient                 *client,
+permission_changed (NetConnectionEditor      *self,
                     NMClientPermission        permission,
-                    NMClientPermissionResult  result,
-                    NetConnectionEditor      *self)
+                    NMClientPermissionResult  result)
 {
         if (permission != NM_CLIENT_PERMISSION_SETTINGS_MODIFY_SYSTEM)
                 return;
@@ -815,8 +811,8 @@ net_connection_editor_new (GtkWindow        *parent_window,
         self->client = g_object_ref (client);
 
         self->can_modify = nm_client_get_permission_result (client, NM_CLIENT_PERMISSION_SETTINGS_MODIFY_SYSTEM);
-        self->permission_id = g_signal_connect (self->client, "permission-changed",
-                                                G_CALLBACK (permission_changed), self);
+        g_signal_connect_object (self->client, "permission-changed",
+                                 G_CALLBACK (permission_changed), self, G_CONNECT_SWAPPED);
 
         if (connection)
                 net_connection_editor_set_connection (self, connection);

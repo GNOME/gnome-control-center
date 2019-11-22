@@ -800,8 +800,8 @@ hotspot_off_switch_changed_cb (NetDeviceWifi *self)
                                 _("_Cancel"), GTK_RESPONSE_CANCEL,
                                 _("_Stop Hotspot"), GTK_RESPONSE_OK,
                                 NULL);
-        g_signal_connect_swapped (dialog, "response",
-                                  G_CALLBACK (stop_hotspot_response_cb), self);
+        g_signal_connect_object (dialog, "response",
+                                 G_CALLBACK (stop_hotspot_response_cb), self, G_CONNECT_SWAPPED);
         gtk_window_present (GTK_WINDOW (dialog));
 }
 
@@ -1073,11 +1073,11 @@ history_button_clicked_cb (NetDeviceWifi *self)
         gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), TRUE);
         gtk_window_set_titlebar (GTK_WINDOW (dialog), header);
 
-        g_signal_connect_swapped (dialog, "response",
-                                  G_CALLBACK (gtk_widget_destroy), dialog);
+        g_signal_connect (dialog, "response",
+                          G_CALLBACK (gtk_widget_destroy), NULL);
 
-        g_signal_connect_swapped (dialog, "delete-event",
-                                  G_CALLBACK (gtk_widget_destroy), dialog);
+        g_signal_connect (dialog, "delete-event",
+                          G_CALLBACK (gtk_widget_destroy), NULL);
 
         content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
         gtk_container_set_border_width (GTK_CONTAINER (content_area), 0);
@@ -1120,18 +1120,22 @@ history_button_clicked_cb (NetDeviceWifi *self)
         g_object_set_data (G_OBJECT (list), "forget", forget);
         g_object_set_data (G_OBJECT (list), "net", self);
 
-        g_signal_connect_swapped (list, "add",
-                                  G_CALLBACK (on_connection_list_row_added_cb),
-                                  self);
-        g_signal_connect_swapped (list, "remove",
-                                  G_CALLBACK (on_connection_list_row_removed_cb),
-                                  self);
-        g_signal_connect_swapped (list, "row-activated",
-                                  G_CALLBACK (on_connection_list_row_activated_cb),
-                                  self);
-        g_signal_connect_swapped (list, "configure",
-                                  G_CALLBACK (show_details_for_row),
-                                  self);
+        g_signal_connect_object (list, "add",
+                                 G_CALLBACK (on_connection_list_row_added_cb),
+                                 self,
+                                 G_CONNECT_SWAPPED);
+        g_signal_connect_object (list, "remove",
+                                 G_CALLBACK (on_connection_list_row_removed_cb),
+                                 self,
+                                 G_CONNECT_SWAPPED);
+        g_signal_connect_object (list, "row-activated",
+                                 G_CALLBACK (on_connection_list_row_activated_cb),
+                                 self,
+                                 G_CONNECT_SWAPPED);
+        g_signal_connect_object (list, "configure",
+                                 G_CALLBACK (show_details_for_row),
+                                 self,
+                                 G_CONNECT_SWAPPED);
 
         list_rows = gtk_container_get_children (GTK_CONTAINER (list));
         while (list_rows)
@@ -1254,11 +1258,10 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
         gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)ap_sort, NULL, NULL);
 
-        g_signal_connect_swapped (list, "row-activated",
-                                  G_CALLBACK (ap_activated), self);
-        g_signal_connect_swapped (list, "configure",
-                                  G_CALLBACK (show_details_for_row),
-                                  self);
+        g_signal_connect_object (list, "row-activated",
+                                 G_CALLBACK (ap_activated), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (list, "configure",
+                                 G_CALLBACK (show_details_for_row), self, G_CONNECT_SWAPPED);
 
         /* only enable the button if the user can create a hotspot */
         perm = nm_client_get_permission_result (client, NM_CLIENT_PERMISSION_WIFI_SHARE_OPEN);

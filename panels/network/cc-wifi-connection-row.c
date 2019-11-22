@@ -505,7 +505,7 @@ cc_wifi_connection_row_init (CcWifiConnectionRow *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  g_signal_connect_swapped (self->configure_button, "clicked", G_CALLBACK (configure_clicked_cb), self);
+  g_signal_connect_object (self->configure_button, "clicked", G_CALLBACK (configure_clicked_cb), self, G_CONNECT_SWAPPED);
 
   self->aps = g_ptr_array_new_with_free_func (g_object_unref);
 
