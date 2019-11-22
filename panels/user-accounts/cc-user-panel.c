@@ -393,9 +393,9 @@ delete_user_done (ActUserManager *manager,
 }
 
 static void
-delete_user_response (GtkWidget   *dialog,
+delete_user_response (CcUserPanel *self,
                       gint         response_id,
-                      CcUserPanel *self)
+                      GtkWidget   *dialog)
 {
         ActUser *user;
         gboolean remove_files;
@@ -562,11 +562,10 @@ enterprise_user_uncached (GObject           *source,
 }
 
 static void
-delete_enterprise_user_response (GtkWidget          *dialog,
-                                 gint                response_id,
-                                 gpointer            user_data)
+delete_enterprise_user_response (CcUserPanel *self,
+                                 gint         response_id,
+                                 GtkWidget   *dialog)
 {
-        CcUserPanel *self = CC_USER_PANEL (user_data);
         AsyncDeleteData *data;
         ActUser *user;
 
@@ -643,8 +642,8 @@ delete_user (CcUserPanel *self)
 
                 gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
 
-                g_signal_connect (dialog, "response",
-                                  G_CALLBACK (delete_user_response), self);
+                g_signal_connect_object (dialog, "response",
+                                         G_CALLBACK (delete_user_response), self, G_CONNECT_SWAPPED);
         }
         else {
                 dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
@@ -661,8 +660,8 @@ delete_user (CcUserPanel *self)
 
                 gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
 
-                g_signal_connect (dialog, "response",
-                                  G_CALLBACK (delete_enterprise_user_response), self);
+                g_signal_connect_object (dialog, "response",
+                                         G_CALLBACK (delete_enterprise_user_response), self, G_CONNECT_SWAPPED);
         }
 
         g_signal_connect (dialog, "close",
@@ -975,9 +974,9 @@ show_restart_notification (CcUserPanel *self, const gchar *locale)
 }
 
 static void
-language_response (GtkDialog   *dialog,
+language_response (CcUserPanel *self,
                    gint         response_id,
-                   CcUserPanel *self)
+                   GtkDialog   *dialog)
 {
         ActUser *user;
         const gchar *lang, *account_language;
@@ -1022,8 +1021,8 @@ change_language (CcUserPanel *self)
                 gtk_window_set_transient_for (GTK_WINDOW (self->language_chooser),
                                               GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
 
-                g_signal_connect (self->language_chooser, "response",
-                                  G_CALLBACK (language_response), self);
+                g_signal_connect_object (self->language_chooser, "response",
+                                         G_CALLBACK (language_response), self, G_CONNECT_SWAPPED);
                 g_signal_connect (self->language_chooser, "delete-event",
                                   G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
@@ -1098,9 +1097,9 @@ users_loaded (CcUserPanel *self)
                                                  _("Failed to contact the accounts service"));
                 gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                                           _("Please make sure that the AccountService is installed and enabled."));
-                g_signal_connect_swapped (dialog, "response",
-                                          G_CALLBACK (gtk_widget_destroy),
-                                          dialog);
+                g_signal_connect (dialog, "response",
+                                  G_CALLBACK (gtk_widget_destroy),
+                                  NULL);
                 gtk_widget_show (dialog);
 
                 gtk_widget_set_sensitive (GTK_WIDGET (self->accounts_box), FALSE);
