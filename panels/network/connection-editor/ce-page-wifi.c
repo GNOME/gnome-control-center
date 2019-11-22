@@ -67,7 +67,7 @@ connect_wifi_page (CEPageWifi *self)
                 utf8_ssid = g_strdup ("");
         gtk_entry_set_text (self->ssid_entry, utf8_ssid);
 
-        g_signal_connect_swapped (self->ssid_entry, "changed", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->ssid_entry, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
         bssid_array = g_ptr_array_new ();
         for (i = 0; i < nm_setting_wireless_get_num_seen_bssids (self->setting); i++) {
@@ -78,18 +78,18 @@ connect_wifi_page (CEPageWifi *self)
         s_bssid_str = nm_setting_wireless_get_bssid (self->setting);
         ce_page_setup_mac_combo (self->bssid_combo, s_bssid_str, bssid_list);
         g_strfreev (bssid_list);
-        g_signal_connect_swapped (self->bssid_combo, "changed", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->bssid_combo, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
         mac_list = ce_page_get_mac_list (self->client, NM_TYPE_DEVICE_WIFI,
                                          NM_DEVICE_WIFI_PERMANENT_HW_ADDRESS);
         s_mac_str = nm_setting_wireless_get_mac_address (self->setting);
         ce_page_setup_mac_combo (self->mac_combo, s_mac_str, mac_list);
         g_strfreev (mac_list);
-        g_signal_connect_swapped (self->mac_combo, "changed", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->mac_combo, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
         cloned_mac = nm_setting_wireless_get_cloned_mac_address (self->setting);
         ce_page_setup_cloned_mac_combo (self->cloned_mac_combo, cloned_mac);
-        g_signal_connect_swapped (self->cloned_mac_combo, "changed", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->cloned_mac_combo, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 }
 
 static void

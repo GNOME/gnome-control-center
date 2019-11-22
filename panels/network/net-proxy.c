@@ -290,10 +290,11 @@ net_proxy_init (NetProxy *self)
         gtk_widget_init_template (GTK_WIDGET (self));
 
         self->settings = g_settings_new ("org.gnome.system.proxy");
-        g_signal_connect_swapped (self->settings,
-                                  "changed",
-                                  G_CALLBACK (settings_changed_cb),
-                                  self);
+        g_signal_connect_object (self->settings,
+                                 "changed",
+                                 G_CALLBACK (settings_changed_cb),
+                                 self,
+                                 G_CONNECT_SWAPPED);
 
         /* actions */
         value = g_settings_get_enum (self->settings, "mode");
@@ -362,21 +363,23 @@ net_proxy_init (NetProxy *self)
         panel_proxy_mode_setup_widgets (self, value);
         panel_update_status_label (self, value);
 
-        g_signal_connect_swapped (self->none_radio, "toggled", G_CALLBACK (panel_proxy_mode_radio_changed_cb), self);
-        g_signal_connect_swapped (self->manual_radio, "toggled", G_CALLBACK (panel_proxy_mode_radio_changed_cb), self);
-        g_signal_connect_swapped (self->automatic_radio, "toggled", G_CALLBACK (panel_proxy_mode_radio_changed_cb), self);
+        g_signal_connect_object (self->none_radio, "toggled", G_CALLBACK (panel_proxy_mode_radio_changed_cb), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->manual_radio, "toggled", G_CALLBACK (panel_proxy_mode_radio_changed_cb), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->automatic_radio, "toggled", G_CALLBACK (panel_proxy_mode_radio_changed_cb), self, G_CONNECT_SWAPPED);
 
         /* show dialog button */
-        g_signal_connect_swapped (self->dialog_button,
-                                  "clicked",
-                                  G_CALLBACK (show_dialog_cb),
-                                  self);
+        g_signal_connect_object (self->dialog_button,
+                                 "clicked",
+                                 G_CALLBACK (show_dialog_cb),
+                                 self,
+                                 G_CONNECT_SWAPPED);
 
         /* prevent the dialog from being destroyed */
-        g_signal_connect (self->dialog,
-                          "delete-event",
-                          G_CALLBACK (gtk_widget_hide_on_delete),
-                          self->dialog);
+        g_signal_connect_object (self->dialog,
+                                 "delete-event",
+                                 G_CALLBACK (gtk_widget_hide_on_delete),
+                                 self->dialog,
+                                 G_CONNECT_SWAPPED);
 }
 
 NetProxy *
