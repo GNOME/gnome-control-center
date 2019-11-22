@@ -234,8 +234,8 @@ add_address_row (CEPageIP4   *self,
         gtk_style_context_add_class (gtk_widget_get_style_context (row_box), "linked");
 
         widget = gtk_entry_new ();
-        g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), self);
-        g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_address_row), self);
+        g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_address_row), self, G_CONNECT_SWAPPED);
         g_object_set_data (G_OBJECT (row), "address", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), address);
         gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
@@ -243,8 +243,8 @@ add_address_row (CEPageIP4   *self,
         gtk_container_add (GTK_CONTAINER (row_box), widget);
 
         widget = gtk_entry_new ();
-        g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), self);
-        g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_address_row), self);
+        g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_address_row), self, G_CONNECT_SWAPPED);
         g_object_set_data (G_OBJECT (row), "network", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), network);
         gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
@@ -252,8 +252,8 @@ add_address_row (CEPageIP4   *self,
         gtk_container_add (GTK_CONTAINER (row_box), widget);
 
         widget = gtk_entry_new ();
-        g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), self);
-        g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_address_row), self);
+        g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_address_row), self, G_CONNECT_SWAPPED);
         g_object_set_data (G_OBJECT (row), "gateway", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), gateway ? gateway : "");
         gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
@@ -263,7 +263,7 @@ add_address_row (CEPageIP4   *self,
         delete_button = gtk_button_new ();
         gtk_widget_set_sensitive (delete_button, FALSE);
         gtk_style_context_add_class (gtk_widget_get_style_context (delete_button), "image-button");
-        g_signal_connect_swapped (delete_button, "clicked", G_CALLBACK (remove_row), self);
+        g_signal_connect_object (delete_button, "clicked", G_CALLBACK (remove_row), self, G_CONNECT_SWAPPED);
         image = gtk_image_new_from_icon_name ("edit-delete-symbolic", GTK_ICON_SIZE_MENU);
         atk_object_set_name (gtk_widget_get_accessible (delete_button), _("Delete Address"));
         gtk_button_set_image (GTK_BUTTON (delete_button), image);
@@ -340,7 +340,7 @@ add_dns_section (CEPageIP4 *self)
         gint i;
 
         gtk_switch_set_active (self->auto_dns_switch, !nm_setting_ip_config_get_ignore_auto_dns (self->setting));
-        g_signal_connect_swapped (self->auto_dns_switch, "notify::active", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->auto_dns_switch, "notify::active", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
         string = g_string_new ("");
 
@@ -357,7 +357,7 @@ add_dns_section (CEPageIP4 *self)
 
         gtk_entry_set_text (self->dns_entry, string->str);
 
-        g_signal_connect_swapped (self->dns_entry, "notify::text", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->dns_entry, "notify::text", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
         g_string_free (string, TRUE);
 }
@@ -381,8 +381,8 @@ add_route_row (CEPageIP4   *self,
         gtk_style_context_add_class (gtk_widget_get_style_context (row_box), "linked");
 
         widget = gtk_entry_new ();
-        g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), self);
-        g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self);
+        g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self, G_CONNECT_SWAPPED);
         g_object_set_data (G_OBJECT (row), "address", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), address);
         gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
@@ -390,8 +390,8 @@ add_route_row (CEPageIP4   *self,
         gtk_container_add (GTK_CONTAINER (row_box), widget);
 
         widget = gtk_entry_new ();
-        g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), self);
-        g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self);
+        g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self, G_CONNECT_SWAPPED);
         g_object_set_data (G_OBJECT (row), "netmask", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), netmask);
         gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
@@ -399,8 +399,8 @@ add_route_row (CEPageIP4   *self,
         gtk_container_add (GTK_CONTAINER (row_box), widget);
 
         widget = gtk_entry_new ();
-        g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), self);
-        g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self);
+        g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self, G_CONNECT_SWAPPED);
         g_object_set_data (G_OBJECT (row), "gateway", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), gateway ? gateway : "");
         gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
@@ -408,8 +408,8 @@ add_route_row (CEPageIP4   *self,
         gtk_container_add (GTK_CONTAINER (row_box), widget);
 
         widget = gtk_entry_new ();
-        g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), self);
-        g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self);
+        g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self, G_CONNECT_SWAPPED);
         g_object_set_data (G_OBJECT (row), "metric", widget);
         if (metric >= 0) {
                 g_autofree gchar *s = g_strdup_printf ("%d", metric);
@@ -423,7 +423,7 @@ add_route_row (CEPageIP4   *self,
 
         delete_button = gtk_button_new ();
         gtk_style_context_add_class (gtk_widget_get_style_context (delete_button), "image-button");
-        g_signal_connect_swapped (delete_button, "clicked", G_CALLBACK (remove_row), self);
+        g_signal_connect_object (delete_button, "clicked", G_CALLBACK (remove_row), self, G_CONNECT_SWAPPED);
         image = gtk_image_new_from_icon_name ("edit-delete-symbolic", GTK_ICON_SIZE_MENU);
         atk_object_set_name (gtk_widget_get_accessible (delete_button), _("Delete Route"));
         gtk_button_set_image (GTK_BUTTON (delete_button), image);
@@ -471,8 +471,7 @@ add_routes_box (CEPageIP4 *self)
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (self->routes_box), list);
         gtk_switch_set_active (self->auto_routes_switch, !nm_setting_ip_config_get_ignore_auto_routes (self->setting));
-        g_signal_connect_swapped (self->auto_routes_switch, "notify::active", G_CALLBACK (ce_page_changed), self);
-
+        g_signal_connect_object (self->auto_routes_switch, "notify::active", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
         for (i = 0; i < nm_setting_ip_config_get_num_routes (self->setting); i++) {
                 NMIPRoute *route;
@@ -509,12 +508,12 @@ connect_ip4_page (CEPageIP4 *self)
         add_routes_box (self);
 
         str_method = nm_setting_ip_config_get_method (self->setting);
-        g_signal_connect_swapped (self->disabled_radio, "notify::active", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->disabled_radio, "notify::active", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
         g_object_bind_property (self->disabled_radio, "active",
                                 self->content_box, "sensitive",
                                 G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
 
-        g_signal_connect_swapped (self->shared_radio, "notify::active", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->shared_radio, "notify::active", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
         g_object_bind_property (self->shared_radio, "active",
                                 self->content_box, "sensitive",
                                 G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
@@ -532,12 +531,12 @@ connect_ip4_page (CEPageIP4 *self)
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->never_default_check),
                                       nm_setting_ip_config_get_never_default (self->setting));
-        g_signal_connect_swapped (self->never_default_check, "toggled", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->never_default_check, "toggled", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
-        g_signal_connect_swapped (self->automatic_radio, "toggled", G_CALLBACK (method_changed), self);
-        g_signal_connect_swapped (self->local_radio, "toggled", G_CALLBACK (method_changed), self);
-        g_signal_connect_swapped (self->manual_radio, "toggled", G_CALLBACK (method_changed), self);
-        g_signal_connect_swapped (self->disabled_radio, "toggled", G_CALLBACK (method_changed), self);
+        g_signal_connect_object (self->automatic_radio, "toggled", G_CALLBACK (method_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->local_radio, "toggled", G_CALLBACK (method_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->manual_radio, "toggled", G_CALLBACK (method_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->disabled_radio, "toggled", G_CALLBACK (method_changed), self, G_CONNECT_SWAPPED);
 
         switch (method) {
         case IP4_METHOD_AUTO:

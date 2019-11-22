@@ -114,7 +114,7 @@ load_vpn_plugin (CEPageVpn *self)
         gtk_box_pack_start (GTK_BOX (self), ui_widget, TRUE, TRUE, 0);
 	gtk_widget_show_all (ui_widget);
 
-        g_signal_connect_swapped (self->editor, "changed", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->editor, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -124,7 +124,7 @@ connect_vpn_page (CEPageVpn *self)
 
         name = nm_setting_connection_get_id (self->setting_connection);
         gtk_entry_set_text (self->name_entry, name);
-        g_signal_connect_swapped (self->name_entry, "changed", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->name_entry, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 }
 
 static void
