@@ -344,9 +344,8 @@ set_locale_id (CcLanguageChooser *chooser,
 }
 
 static void
-row_activated (GtkListBox        *box,
-               GtkListBoxRow     *row,
-               CcLanguageChooser *chooser)
+row_activated (CcLanguageChooser *chooser,
+               GtkListBoxRow     *row)
 {
         gchar *new_locale_id;
 
@@ -368,13 +367,12 @@ row_activated (GtkListBox        *box,
 }
 
 static void
-activate_default (GtkWindow         *window,
-                  CcLanguageChooser *chooser)
+activate_default (CcLanguageChooser *chooser)
 {
         GtkWidget *focus;
         gchar *locale_id;
 
-        focus = gtk_window_get_focus (window);
+        focus = gtk_window_get_focus (GTK_WINDOW (chooser));
         if (!focus)
                 return;
 
@@ -382,7 +380,7 @@ activate_default (GtkWindow         *window,
         if (g_strcmp0 (locale_id, chooser->language) == 0)
                 return;
 
-        g_signal_stop_emission_by_name (window, "activate-default");
+        g_signal_stop_emission_by_name (GTK_WINDOW (chooser), "activate-default");
         gtk_widget_activate (focus);
 }
 
@@ -409,16 +407,16 @@ cc_language_chooser_init (CcLanguageChooser *chooser)
                                       cc_list_box_update_header_func, NULL, NULL);
         add_all_languages (chooser);
 
-        g_signal_connect_swapped (chooser->language_filter_entry, "search-changed",
-                                  G_CALLBACK (filter_changed), chooser);
+        g_signal_connect_object (chooser->language_filter_entry, "search-changed",
+                                 G_CALLBACK (filter_changed), chooser, G_CONNECT_SWAPPED);
 
-        g_signal_connect (chooser->language_listbox, "row-activated",
-                          G_CALLBACK (row_activated), chooser);
+        g_signal_connect_object (chooser->language_listbox, "row-activated",
+                                 G_CALLBACK (row_activated), chooser, G_CONNECT_SWAPPED);
 
         gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->language_listbox));
 
         g_signal_connect (chooser, "activate-default",
-                          G_CALLBACK (activate_default), chooser);
+                          G_CALLBACK (activate_default), NULL);
 }
 
 static void
