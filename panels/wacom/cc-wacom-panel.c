@@ -56,9 +56,6 @@ struct _CcWacomPanel
 	GHashTable       *devices; /* key=GsdDevice, value=CcWacomDevice */
 	GHashTable       *pages; /* key=device name, value=GtkWidget */
 	GHashTable       *stylus_pages; /* key=CcWacomTool, value=GtkWidget */
-	GsdDeviceManager *manager;
-	guint             device_added_id;
-	guint             device_removed_id;
 
 	CcTabletToolMap  *tablet_tool_map;
 
@@ -244,13 +241,6 @@ cc_wacom_panel_dispose (GObject *object)
 
 	g_clear_object (&self->builder);
 
-	if (self->manager)
-	{
-		g_signal_handler_disconnect (self->manager, self->device_added_id);
-		g_signal_handler_disconnect (self->manager, self->device_removed_id);
-		self->manager = NULL;
-	}
-
 	g_clear_pointer (&self->devices, g_hash_table_unref);
 	g_clear_object (&self->proxy);
 	g_clear_pointer (&self->pages, g_hash_table_unref);
@@ -408,9 +398,8 @@ update_current_tool (CcWacomPanel  *panel,
 }
 
 static gboolean
-on_shell_event_cb (GtkWidget    *wigdet,
-		   GdkEvent     *event,
-		   CcWacomPanel *panel)
+on_shell_event_cb (CcWacomPanel *panel,
+		   GdkEvent     *event)
 {
 	if (event->type == GDK_MOTION_NOTIFY) {
 		update_current_tool (panel,
@@ -455,7 +444,7 @@ cc_wacom_panel_constructed (GObject *object)
 				G_BINDING_BIDIRECTIONAL);
 
 	g_signal_connect_object (shell, "event",
-				 G_CALLBACK (on_shell_event_cb), self, 0);
+				 G_CALLBACK (on_shell_event_cb), self, G_CONNECT_SWAPPED);
 
 	self->test_button = button;
 	update_test_button (self);
@@ -635,9 +624,8 @@ add_known_device (CcWacomPanel *self,
 }
 
 static void
-device_removed_cb (GsdDeviceManager *manager,
-		   GsdDevice        *gsd_device,
-		   CcWacomPanel     *self)
+device_removed_cb (CcWacomPanel     *self,
+		   GsdDevice        *gsd_device)
 {
 	g_autoptr(CcWacomDevice) device = NULL;
 
@@ -651,17 +639,15 @@ device_removed_cb (GsdDeviceManager *manager,
 }
 
 static void
-device_added_cb (GsdDeviceManager *manager,
-		 GsdDevice        *device,
-		 CcWacomPanel     *self)
+device_added_cb (CcWacomPanel *self,
+		 GsdDevice    *device)
 {
 	add_known_device (self, device);
 	update_current_page (self, NULL);
 }
 
 static gboolean
-link_activated (GtkLinkButton *button,
-		CcWacomPanel  *self)
+link_activated (CcWacomPanel  *self)
 {
 	cc_wacom_panel_switch_to_panel (self, "bluetooth");
 	return TRUE;
@@ -710,13 +696,11 @@ enbiggen_label (GtkLabel *label)
 }
 
 static void
-on_stack_visible_child_notify_cb (GObject      *object,
-				  GParamSpec   *pspec,
-				  CcWacomPanel *panel)
+on_stack_visible_child_notify_cb (CcWacomPanel *panel)
 {
 	GtkWidget *child;
 
-	child = gtk_stack_get_visible_child (GTK_STACK (object));
+	child = gtk_stack_get_visible_child (GTK_STACK (panel->stack));
 
 	if (child == panel->stylus_notebook) {
 		gtk_container_child_set (GTK_CONTAINER (panel->stack),
@@ -730,6 +714,7 @@ static void
 cc_wacom_panel_init (CcWacomPanel *self)
 {
 	GtkWidget *widget;
+	GsdDeviceManager *device_manager;
 	g_autoptr(GList) devices = NULL;
 	GList *l;
 	g_autoptr(GError) error = NULL;
@@ -777,8 +762,8 @@ cc_wacom_panel_init (CcWacomPanel *self)
 		      "margin-bottom", 30,
 		      NULL);
 
-	g_signal_connect (self->stack, "notify::visible-child",
-			  G_CALLBACK (on_stack_visible_child_notify_cb), self);
+	g_signal_connect_object (self->stack, "notify::visible-child",
+	                         G_CALLBACK (on_stack_visible_child_notify_cb), self, G_CONNECT_SWAPPED);
 
 	self->switcher = gtk_stack_switcher_new ();
 	gtk_stack_switcher_set_stack (GTK_STACK_SWITCHER (self->switcher),
@@ -818,20 +803,20 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	enbiggen_label (GTK_LABEL (WID ("advice-label1")));
 	gtk_notebook_append_page (GTK_NOTEBOOK (self->tablet_notebook), widget, NULL);
 
-	g_signal_connect (G_OBJECT (WID ("linkbutton")), "activate-link",
-			  G_CALLBACK (link_activated), self);
+	g_signal_connect_object (WID ("linkbutton"), "activate-link",
+			         G_CALLBACK (link_activated), self, G_CONNECT_SWAPPED);
 
 	self->devices = g_hash_table_new_full (g_direct_hash, g_direct_equal, NULL, g_object_unref);
 	self->pages = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 	self->stylus_pages = g_hash_table_new (NULL, NULL);
 
-	self->manager = gsd_device_manager_get ();
-	self->device_added_id = g_signal_connect (G_OBJECT (self->manager), "device-added",
-						  G_CALLBACK (device_added_cb), self);
-	self->device_removed_id = g_signal_connect (G_OBJECT (self->manager), "device-removed",
-						    G_CALLBACK (device_removed_cb), self);
+	device_manager = gsd_device_manager_get ();
+	g_signal_connect_object (device_manager, "device-added",
+				 G_CALLBACK (device_added_cb), self, G_CONNECT_SWAPPED);
+	g_signal_connect_object (device_manager, "device-removed",
+				 G_CALLBACK (device_removed_cb), self, G_CONNECT_SWAPPED);
 
-	devices = gsd_device_manager_list_devices (self->manager,
+	devices = gsd_device_manager_list_devices (device_manager,
 						   GSD_DEVICE_TYPE_TABLET);
 	for (l = devices; l ; l = l->next)
 		add_known_device (self, l->data);
