@@ -163,8 +163,7 @@ query_unlock_tooltip (GtkWidget  *widget,
                       gint        x,
                       gint        y,
                       gboolean    keyboard_tooltip,
-                      GtkTooltip *tooltip,
-                      gpointer    user_data)
+                      GtkTooltip *tooltip)
 {
         GtkWidget *label;
         PangoLayout *layout;
@@ -268,10 +267,7 @@ query_tooltip (GtkWidget  *widget,
 }
 
 static void
-icon_released (GtkEntry             *entry,
-              GtkEntryIconPosition  pos,
-              GdkEvent             *event,
-              gpointer              user_data)
+icon_released (GtkEntry *entry)
 {
         GtkSettings *settings;
         gint timeout;
@@ -298,7 +294,7 @@ set_entry_validation_error (GtkEntry    *entry,
                                         GTK_ENTRY_ICON_SECONDARY,
                                         TRUE);
         g_signal_connect (entry, "icon-release",
-                          G_CALLBACK (icon_released), FALSE);
+                          G_CALLBACK (icon_released), NULL);
         g_signal_connect (entry, "query-tooltip",
                           G_CALLBACK (query_tooltip), NULL);
         g_object_set (entry, "has-tooltip", TRUE, NULL);

@@ -81,7 +81,7 @@ is_realm_with_kerberos_and_membership (gpointer object)
 }
 
 static void
-on_interface_added (GDBusObjectManager *manager,
+on_interface_added (CcRealmManager *self,
                     GDBusObject *object,
                     GDBusInterface *interface)
 {
@@ -89,28 +89,27 @@ on_interface_added (GDBusObjectManager *manager,
 }
 
 static void
-on_object_added (GDBusObjectManager *manager,
-                 GDBusObject *object,
-                 gpointer user_data)
+on_object_added (CcRealmManager *self,
+                 GDBusObject *object)
 {
         GList *interfaces, *l;
 
         interfaces = g_dbus_object_get_interfaces (object);
         for (l = interfaces; l != NULL; l = g_list_next (l))
-                on_interface_added (manager, object, l->data);
+                on_interface_added (self, object, l->data);
         g_list_free_full (interfaces, g_object_unref);
 
         if (is_realm_with_kerberos_and_membership (object)) {
                 g_debug ("Saw realm: %s", g_dbus_object_get_object_path (object));
-                g_signal_emit (user_data, signals[REALM_ADDED], 0, object);
+                g_signal_emit (self, signals[REALM_ADDED], 0, object);
         }
 }
 
 static void
 cc_realm_manager_init (CcRealmManager *self)
 {
-        g_signal_connect (self, "object-added", G_CALLBACK (on_object_added), self);
-        g_signal_connect (self, "interface-added", G_CALLBACK (on_interface_added), self);
+        g_signal_connect (self, "object-added", G_CALLBACK (on_object_added), NULL);
+        g_signal_connect (self, "interface-added", G_CALLBACK (on_interface_added), NULL);
 }
 
 static void
