@@ -89,9 +89,9 @@ nm_device_refresh_vpn_ui (NetVpn *self)
                         auuid = nm_active_connection_get_uuid (a);
                         if (NM_IS_VPN_CONNECTION (a) && strcmp (auuid, uuid) == 0) {
                                 self->active_connection = g_object_ref (a);
-                                g_signal_connect_swapped (a, "notify::vpn-state",
-                                                          G_CALLBACK (nm_device_refresh_vpn_ui),
-                                                          self);
+                                g_signal_connect_object (a, "notify::vpn-state",
+                                                         G_CALLBACK (nm_device_refresh_vpn_ui),
+                                                         self, G_CONNECT_SWAPPED);
                                 state = nm_vpn_connection_get_vpn_state (NM_VPN_CONNECTION (a));
                                 break;
                         }
@@ -205,11 +205,11 @@ net_vpn_init (NetVpn *self)
 {
         gtk_widget_init_template (GTK_WIDGET (self));
 
-        g_signal_connect_swapped (self->device_off_switch, "notify::active",
-                                  G_CALLBACK (device_off_toggled), self);
+        g_signal_connect_object (self->device_off_switch, "notify::active",
+                                 G_CALLBACK (device_off_toggled), self, G_CONNECT_SWAPPED);
 
-        g_signal_connect_swapped (self->options_button, "clicked",
-                                  G_CALLBACK (edit_connection), self);
+        g_signal_connect_object (self->options_button, "clicked",
+                                 G_CALLBACK (edit_connection), self, G_CONNECT_SWAPPED);
 }
 
 NetVpn *
