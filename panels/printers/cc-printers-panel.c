@@ -631,11 +631,8 @@ cancel_notification_timeout (CcPrintersPanel *self)
 }
 
 static void
-on_printer_deletion_undone (GtkButton *button,
-                            gpointer   user_data)
+on_printer_deletion_undone (CcPrintersPanel *self)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-
   gtk_revealer_set_reveal_child (self->notification, FALSE);
 
   g_clear_pointer (&self->deleted_printer_name, g_free);
@@ -675,13 +672,12 @@ on_remove_printer_timeout (gpointer user_data)
 }
 
 static void
-on_printer_deleted (PpPrinterEntry *printer_entry,
-                    gpointer        user_data)
+on_printer_deleted (CcPrintersPanel *self,
+                    PpPrinterEntry  *printer_entry)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-  GtkLabel               *label;
-  g_autofree gchar       *notification_message = NULL;
-  g_autofree gchar       *printer_name = NULL;
+  GtkLabel         *label;
+  g_autofree gchar *notification_message = NULL;
+  g_autofree gchar *printer_name = NULL;
 
   gtk_widget_hide (GTK_WIDGET (printer_entry));
 
@@ -706,12 +702,10 @@ on_printer_deleted (PpPrinterEntry *printer_entry,
 }
 
 static void
-on_printer_renamed (PpPrinterEntry *printer_entry,
-                    gchar          *new_name,
-                    gpointer        user_data)
+on_printer_renamed (CcPrintersPanel *self,
+                    gchar           *new_name,
+                    PpPrinterEntry  *printer_entry)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-
   g_object_get (printer_entry,
                 "printer-name",
                 &self->old_printer_name,
@@ -720,10 +714,9 @@ on_printer_renamed (PpPrinterEntry *printer_entry,
 }
 
 static void
-on_printer_changed (PpPrinterEntry *printer_entry,
-                    gpointer        user_data)
+on_printer_changed (CcPrintersPanel *self)
 {
-  actualize_printers_list (user_data);
+  actualize_printers_list (self);
 }
 
 static void
@@ -743,18 +736,21 @@ add_printer_entry (CcPrintersPanel *self,
     gtk_size_group_add_widget (self->size_group, GTK_WIDGET (l->data));
   g_slist_free (widgets);
 
-  g_signal_connect (printer_entry,
-                    "printer-changed",
-                    G_CALLBACK (on_printer_changed),
-                    self);
-  g_signal_connect (printer_entry,
-                    "printer-delete",
-                    G_CALLBACK (on_printer_deleted),
-                    self);
-  g_signal_connect (printer_entry,
-                    "printer-renamed",
-                    G_CALLBACK (on_printer_renamed),
-                    self);
+  g_signal_connect_object (printer_entry,
+                           "printer-changed",
+                           G_CALLBACK (on_printer_changed),
+                           self,
+                           G_CONNECT_SWAPPED);
+  g_signal_connect_object (printer_entry,
+                           "printer-delete",
+                           G_CALLBACK (on_printer_deleted),
+                           self,
+                           G_CONNECT_SWAPPED);
+  g_signal_connect_object (printer_entry,
+                           "printer-renamed",
+                           G_CALLBACK (on_printer_renamed),
+                           self,
+                           G_CONNECT_SWAPPED);
 
   gtk_list_box_insert (GTK_LIST_BOX (content), GTK_WIDGET (printer_entry), -1);
   gtk_widget_show_all (content);
@@ -872,15 +868,12 @@ actualize_printers_list (CcPrintersPanel *self)
 }
 
 static void
-new_printer_dialog_pre_response_cb (PpNewPrinterDialog *dialog,
-                                    const gchar        *device_name,
-                                    const gchar        *device_location,
-                                    const gchar        *device_make_and_model,
-                                    gboolean            is_network_device,
-                                    gpointer            user_data)
+new_printer_dialog_pre_response_cb (CcPrintersPanel *self,
+                                    const gchar     *device_name,
+                                    const gchar     *device_location,
+                                    const gchar     *device_make_and_model,
+                                    gboolean         is_network_device)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-
   self->new_printer_name = g_strdup (device_name);
   self->new_printer_location = g_strdup (device_location);
   self->new_printer_make_and_model = g_strdup (device_make_and_model);
@@ -890,11 +883,9 @@ new_printer_dialog_pre_response_cb (PpNewPrinterDialog *dialog,
 }
 
 static void
-new_printer_dialog_response_cb (PpNewPrinterDialog *dialog,
-                                gint                response_id,
-                                gpointer            user_data)
+new_printer_dialog_response_cb (CcPrintersPanel *self,
+                                gint             response_id)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   GtkScrolledWindow      *scrolled_window;
   GtkAllocation           allocation;
   GtkAdjustment          *adjustment;
@@ -943,26 +934,26 @@ new_printer_dialog_response_cb (PpNewPrinterDialog *dialog,
 }
 
 static void
-printer_add_cb (GtkToolButton *toolbutton,
-                gpointer       user_data)
+printer_add_cb (CcPrintersPanel *self)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-  GtkWidget              *toplevel;
+  GtkWidget *toplevel;
 
   toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
   self->pp_new_printer_dialog = PP_NEW_PRINTER_DIALOG (
     pp_new_printer_dialog_new (GTK_WINDOW (toplevel),
                                self->all_ppds_list));
 
-  g_signal_connect (self->pp_new_printer_dialog,
-                    "pre-response",
-                    G_CALLBACK (new_printer_dialog_pre_response_cb),
-                    self);
+  g_signal_connect_object (self->pp_new_printer_dialog,
+                           "pre-response",
+                           G_CALLBACK (new_printer_dialog_pre_response_cb),
+                           self,
+                           G_CONNECT_SWAPPED);
 
-  g_signal_connect (self->pp_new_printer_dialog,
-                    "response",
-                    G_CALLBACK (new_printer_dialog_response_cb),
-                    self);
+  g_signal_connect_object (self->pp_new_printer_dialog,
+                           "response",
+                           G_CALLBACK (new_printer_dialog_response_cb),
+                           self,
+                           G_CONNECT_SWAPPED);
 }
 
 static void
@@ -1006,21 +997,16 @@ update_sensitivity (gpointer user_data)
 }
 
 static void
-on_permission_changed (GPermission *permission,
-                       GParamSpec  *pspec,
-                       gpointer     data)
+on_permission_changed (CcPrintersPanel *self)
 {
-  actualize_printers_list (data);
-  update_sensitivity (data);
+  actualize_printers_list (self);
+  update_sensitivity (self);
 }
 
 static void
-on_lockdown_settings_changed (GSettings  *settings,
-                              const char *key,
-                              gpointer    user_data)
+on_lockdown_settings_changed (CcPrintersPanel *self,
+                              const char      *key)
 {
-  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
-
   if (g_str_equal (key, "disable-print-setup") == FALSE)
     return;
 
@@ -1030,7 +1016,7 @@ on_lockdown_settings_changed (GSettings  *settings,
     !g_settings_get_boolean (self->lockdown_settings, "disable-print-setup"));
 #endif
 
-  on_permission_changed (self->permission, NULL, user_data);
+  on_permission_changed (self);
 }
 
 static void
@@ -1218,11 +1204,11 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   widget = (GtkWidget*)
     gtk_builder_get_object (self->builder, "notification-undo-button");
-  g_signal_connect (widget, "clicked", G_CALLBACK (on_printer_deletion_undone), self);
+  g_signal_connect_object (widget, "clicked", G_CALLBACK (on_printer_deletion_undone), self, G_CONNECT_SWAPPED);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (self->builder, "notification-dismiss-button");
-  g_signal_connect (widget, "clicked", G_CALLBACK (on_notification_dismissed), self);
+  g_signal_connect_object (widget, "clicked", G_CALLBACK (on_notification_dismissed), self, G_CONNECT_SWAPPED);
 
   self->permission_infobar = (CcPermissionInfobar*)
     gtk_builder_get_object (self->builder, "permission-infobar");
@@ -1234,11 +1220,11 @@ cc_printers_panel_init (CcPrintersPanel *self)
   /* connect signals */
   widget = (GtkWidget*)
     gtk_builder_get_object (self->builder, "printer-add-button");
-  g_signal_connect (widget, "clicked", G_CALLBACK (printer_add_cb), self);
+  g_signal_connect_object (widget, "clicked", G_CALLBACK (printer_add_cb), self, G_CONNECT_SWAPPED);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (self->builder, "printer-add-button2");
-  g_signal_connect (widget, "clicked", G_CALLBACK (printer_add_cb), self);
+  g_signal_connect_object (widget, "clicked", G_CALLBACK (printer_add_cb), self, G_CONNECT_SWAPPED);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (self->builder, "content");
@@ -1257,7 +1243,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
                              "changed",
                              G_CALLBACK (on_lockdown_settings_changed),
                              self,
-                             G_CONNECT_AFTER);
+                             G_CONNECT_SWAPPED | G_CONNECT_AFTER);
 
   /* Add unlock button */
   self->permission = (GPermission *)polkit_permission_new_sync (
@@ -1268,12 +1254,12 @@ cc_printers_panel_init (CcPrintersPanel *self)
                                "notify",
                                G_CALLBACK (on_permission_changed),
                                self,
-                               G_CONNECT_AFTER);
+                               G_CONNECT_SWAPPED | G_CONNECT_AFTER);
 
       cc_permission_infobar_set_permission (self->permission_infobar,
                                             self->permission);
 
-      on_permission_changed (self->permission, NULL, self);
+      on_permission_changed (self);
     }
   else
     g_warning ("Your system does not have the cups-pk-helper's policy \
