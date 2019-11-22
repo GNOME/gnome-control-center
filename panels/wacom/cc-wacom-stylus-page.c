@@ -83,17 +83,15 @@ set_pressurecurve (GtkRange *range, GSettings *settings, const gchar *key)
 }
 
 static void
-tip_feel_value_changed_cb (GtkRange *range, gpointer user_data)
+tip_feel_value_changed_cb (CcWacomStylusPage *page)
 {
-	CcWacomStylusPage *page = CC_WACOM_STYLUS_PAGE(user_data);
-	set_pressurecurve (range, page->stylus_settings, "pressure-curve");
+	set_pressurecurve (GTK_RANGE (WID ("scale-tip-feel")), page->stylus_settings, "pressure-curve");
 }
 
 static void
-eraser_feel_value_changed_cb (GtkRange *range, gpointer user_data)
+eraser_feel_value_changed_cb (CcWacomStylusPage *page)
 {
-	CcWacomStylusPage *page = CC_WACOM_STYLUS_PAGE(user_data);
-	set_pressurecurve (range, page->stylus_settings, "eraser-pressure-curve");
+	set_pressurecurve (GTK_RANGE (WID ("scale-eraser-feel")), page->stylus_settings, "eraser-pressure-curve");
 }
 
 static void
@@ -155,9 +153,8 @@ set_button_mapping_from_gsettings (GtkComboBox *combo, GSettings* settings, cons
 }
 
 static void
-button_changed_cb (GtkComboBox *combo, gpointer user_data)
+button_changed_cb (CcWacomStylusPage *page)
 {
-	CcWacomStylusPage	*page = CC_WACOM_STYLUS_PAGE(user_data);
 	GtkTreeIter		iter;
 	GtkListStore		*liststore;
 	gint			mapping_b2,
@@ -299,25 +296,25 @@ cc_wacom_stylus_page_init (CcWacomStylusPage *page)
 	add_marks (GTK_SCALE (WID ("scale-tip-feel")));
 	add_marks (GTK_SCALE (WID ("scale-eraser-feel")));
 
-	g_signal_connect (WID ("scale-tip-feel"), "value-changed",
-			  G_CALLBACK (tip_feel_value_changed_cb), page);
-	g_signal_connect (WID ("scale-eraser-feel"), "value-changed",
-			  G_CALLBACK (eraser_feel_value_changed_cb), page);
+	g_signal_connect_object (WID ("scale-tip-feel"), "value-changed",
+                                 G_CALLBACK (tip_feel_value_changed_cb), page, G_CONNECT_SWAPPED);
+	g_signal_connect_object (WID ("scale-eraser-feel"), "value-changed",
+                                 G_CALLBACK (eraser_feel_value_changed_cb), page, G_CONNECT_SWAPPED);
 
 	combo = GTK_COMBO_BOX (WID ("combo-topbutton"));
 	combobox_text_cellrenderer (combo, BUTTONNAME_COLUMN);
-	g_signal_connect (G_OBJECT (combo), "changed",
-			  G_CALLBACK (button_changed_cb), page);
+	g_signal_connect_object (combo, "changed",
+                                 G_CALLBACK (button_changed_cb), page, G_CONNECT_SWAPPED);
 
 	combo = GTK_COMBO_BOX (WID ("combo-bottombutton"));
 	combobox_text_cellrenderer (combo, BUTTONNAME_COLUMN);
-	g_signal_connect (G_OBJECT (combo), "changed",
-			  G_CALLBACK (button_changed_cb), page);
+	g_signal_connect_object (combo, "changed",
+                                 G_CALLBACK (button_changed_cb), page, G_CONNECT_SWAPPED);
 
 	combo = GTK_COMBO_BOX (WID ("combo-thirdbutton"));
 	combobox_text_cellrenderer (combo, BUTTONNAME_COLUMN);
-	g_signal_connect (G_OBJECT (combo), "changed",
-			  G_CALLBACK (button_changed_cb), page);
+	g_signal_connect_object (G_OBJECT (combo), "changed",
+                                 G_CALLBACK (button_changed_cb), page, G_CONNECT_SWAPPED);
 
 	page->nav = cc_wacom_nav_button_new ();
         gtk_widget_set_halign (page->nav, GTK_ALIGN_END);
