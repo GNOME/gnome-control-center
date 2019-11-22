@@ -88,25 +88,19 @@ cc_wacom_nav_button_update (CcWacomNavButton *nav)
 }
 
 static void
-pages_changed (GtkNotebook      *notebook,
-	       GtkWidget        *child,
-	       guint             page_num,
-	       CcWacomNavButton *nav)
+pages_changed (CcWacomNavButton *nav)
 {
 	cc_wacom_nav_button_update (nav);
 }
 
 static void
-page_switched (GtkNotebook      *notebook,
-	       GParamSpec       *pspec,
-	       CcWacomNavButton *nav)
+page_switched (CcWacomNavButton *nav)
 {
 	cc_wacom_nav_button_update (nav);
 }
 
 static void
-next_clicked (GtkButton        *button,
-	      CcWacomNavButton *nav)
+next_clicked (CcWacomNavButton *nav)
 {
 	int current_page;
 
@@ -116,8 +110,7 @@ next_clicked (GtkButton        *button,
 }
 
 static void
-prev_clicked (GtkButton        *button,
-	      CcWacomNavButton *nav)
+prev_clicked (CcWacomNavButton *nav)
 {
 	int current_page;
 
@@ -143,12 +136,12 @@ cc_wacom_nav_button_set_property (GObject      *object,
 		}
 		g_clear_object (&nav->notebook);
 		nav->notebook = g_value_dup_object (value);
-		nav->page_added_id = g_signal_connect (G_OBJECT (nav->notebook), "page-added",
-						       G_CALLBACK (pages_changed), nav);
-		nav->page_removed_id = g_signal_connect (G_OBJECT (nav->notebook), "page-removed",
-							 G_CALLBACK (pages_changed), nav);
-		nav->page_switched_id = g_signal_connect (G_OBJECT (nav->notebook), "notify::page",
-							  G_CALLBACK (page_switched), nav);
+		nav->page_added_id = g_signal_connect_object (nav->notebook, "page-added",
+                                                              G_CALLBACK (pages_changed), nav, G_CONNECT_SWAPPED);
+		nav->page_removed_id = g_signal_connect_object (nav->notebook, "page-removed",
+                                                                G_CALLBACK (pages_changed), nav, G_CONNECT_SWAPPED);
+		nav->page_switched_id = g_signal_connect_object (nav->notebook, "notify::page",
+                                                                 G_CALLBACK (page_switched), nav, G_CONNECT_SWAPPED);
 		cc_wacom_nav_button_update (nav);
 		break;
 	case PROP_IGNORE_FIRST:
@@ -161,30 +154,11 @@ cc_wacom_nav_button_set_property (GObject      *object,
 }
 
 static void
-cc_wacom_nav_button_dispose (GObject *object)
-{
-	CcWacomNavButton *self = CC_WACOM_NAV_BUTTON (object);
-
-	if (self->notebook) {
-		g_signal_handler_disconnect (self->notebook, self->page_added_id);
-		self->page_added_id = 0;
-		g_signal_handler_disconnect (self->notebook, self->page_removed_id);
-		self->page_removed_id = 0;
-		g_signal_handler_disconnect (self->notebook, self->page_switched_id);
-		self->page_switched_id = 0;
-		g_clear_object (&self->notebook);
-	}
-
-	G_OBJECT_CLASS (cc_wacom_nav_button_parent_class)->dispose (object);
-}
-
-static void
 cc_wacom_nav_button_class_init (CcWacomNavButtonClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->set_property = cc_wacom_nav_button_set_property;
-	object_class->dispose = cc_wacom_nav_button_dispose;
 
 	g_object_class_install_property (object_class, PROP_NOTEBOOK,
 					 g_param_spec_object ("notebook", "notebook", "notebook",
@@ -218,16 +192,16 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 	self->prev = gtk_button_new ();
 	image = gtk_image_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
 	gtk_container_add (GTK_CONTAINER (self->prev), image);
-	g_signal_connect (G_OBJECT (self->prev), "clicked",
-			  G_CALLBACK (prev_clicked), self);
+	g_signal_connect_object (G_OBJECT (self->prev), "clicked",
+                                 G_CALLBACK (prev_clicked), self, G_CONNECT_SWAPPED);
 	gtk_widget_set_valign (self->prev, GTK_ALIGN_CENTER);
 
 	/* Next button */
 	self->next = gtk_button_new ();
 	image = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_MENU);
 	gtk_container_add (GTK_CONTAINER (self->next), image);
-	g_signal_connect (G_OBJECT (self->next), "clicked",
-			  G_CALLBACK (next_clicked), self);
+	g_signal_connect_object (G_OBJECT (self->next), "clicked",
+                                 G_CALLBACK (next_clicked), self, G_CONNECT_SWAPPED);
 	gtk_widget_set_valign (self->next, GTK_ALIGN_CENTER);
 
 	gtk_box_pack_start (GTK_BOX (box), self->prev,
