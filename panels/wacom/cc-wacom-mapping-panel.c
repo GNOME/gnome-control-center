@@ -53,9 +53,9 @@ enum {
 	MONITOR_NUM_COLUMNS
 };
 
-static void combobox_changed_cb (GtkWidget *widget, CcWacomMappingPanel *self);
-static void checkbutton_toggled_cb (GtkWidget *widget, CcWacomMappingPanel *self);
-static void aspectswitch_toggled_cb (GtkWidget *widget, GParamSpec *pspec, CcWacomMappingPanel *self);
+static void combobox_changed_cb (CcWacomMappingPanel *self);
+static void checkbutton_toggled_cb (CcWacomMappingPanel *self);
+static void aspectswitch_toggled_cb (CcWacomMappingPanel *self);
 
 static void
 set_combobox_sensitive (CcWacomMappingPanel *self,
@@ -189,12 +189,11 @@ cc_wacom_mapping_panel_set_device (CcWacomMappingPanel *self,
 }
 
 static void
-checkbutton_toggled_cb (GtkWidget           *widget,
-			CcWacomMappingPanel *self)
+checkbutton_toggled_cb (CcWacomMappingPanel *self)
 {
 	gboolean active;
 
-	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->checkbutton));
 	set_combobox_sensitive (self, active);
 	if (!active)
 		gtk_switch_set_active (GTK_SWITCH(self->aspectswitch), FALSE);
@@ -202,21 +201,18 @@ checkbutton_toggled_cb (GtkWidget           *widget,
 }
 
 static void
-aspectswitch_toggled_cb (GtkWidget           *widget,
-                         GParamSpec          *pspec,
-			 CcWacomMappingPanel *self)
+aspectswitch_toggled_cb (CcWacomMappingPanel *self)
 {
 	GSettings *settings;
 
 	settings = cc_wacom_device_get_settings (self->device);
 	g_settings_set_boolean (settings,
 				"keep-aspect",
-				gtk_switch_get_active (GTK_SWITCH (widget)));
+				gtk_switch_get_active (GTK_SWITCH (self->aspectswitch)));
 }
 
 static void
-combobox_changed_cb (GtkWidget           *widget,
-                     CcWacomMappingPanel *self)
+combobox_changed_cb (CcWacomMappingPanel *self)
 {
 	update_mapping (self);
 }
@@ -233,8 +229,8 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 	if (error)
 		g_warning ("Could not get RR screen: %s", error->message);
 
-	g_signal_connect_swapped (self->rr_screen, "changed",
-				  G_CALLBACK (update_monitor_chooser), self);
+	g_signal_connect_object (self->rr_screen, "changed",
+				 G_CALLBACK (update_monitor_chooser), self, G_CONNECT_SWAPPED);
 
 	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 8);
 	gtk_container_add (GTK_CONTAINER (self), vbox);
@@ -249,8 +245,8 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 	self->label = gtk_label_new (_("Output:"));
 	gtk_widget_set_halign (self->label, GTK_ALIGN_END);
 	self->combobox = gtk_combo_box_new ();
-	g_signal_connect (G_OBJECT (self->combobox), "changed",
-	                      G_CALLBACK (combobox_changed_cb), self);
+	g_signal_connect_object (self->combobox, "changed",
+	                         G_CALLBACK (combobox_changed_cb), self, G_CONNECT_SWAPPED);
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT(self->combobox), renderer, TRUE);
 	gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT(self->combobox), renderer, "text", 0);
@@ -263,16 +259,16 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 	self->aspectswitch = gtk_switch_new ();
 	gtk_widget_set_halign (self->aspectswitch, GTK_ALIGN_START);
 	gtk_switch_set_active (GTK_SWITCH (self->aspectswitch), FALSE);
-	g_signal_connect (GTK_SWITCH (self->aspectswitch), "notify::active",
-                      G_CALLBACK (aspectswitch_toggled_cb), self);
+	g_signal_connect_object (self->aspectswitch, "notify::active",
+                                 G_CALLBACK (aspectswitch_toggled_cb), self, G_CONNECT_SWAPPED);
 	gtk_grid_attach (GTK_GRID(grid), GTK_WIDGET(self->aspectlabel), 0, 1, 1, 1);
 	gtk_grid_attach (GTK_GRID(grid), GTK_WIDGET(self->aspectswitch), 1, 1, 1, 1);
 
 	/* Whole-desktop checkbox */
 	self->checkbutton = gtk_check_button_new_with_label (_("Map to single monitor"));
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->checkbutton), FALSE);
-	g_signal_connect (G_OBJECT (self->checkbutton), "toggled",
-                      G_CALLBACK (checkbutton_toggled_cb), self);
+	g_signal_connect_object (self->checkbutton, "toggled",
+                                 G_CALLBACK (checkbutton_toggled_cb), self, G_CONNECT_SWAPPED);
 
 	gtk_box_pack_start (GTK_BOX(vbox), GTK_WIDGET(self->checkbutton),
 				FALSE, FALSE, 0);
