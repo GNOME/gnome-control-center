@@ -85,7 +85,7 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 		gtk_container_remove (GTK_CONTAINER (parent), GTK_WIDGET (self->security));
 
 	gtk_switch_set_active (self->enable_8021x_switch, self->initial_have_8021x);
-	g_signal_connect_swapped (self->enable_8021x_switch, "notify::active", G_CALLBACK (enable_toggled), self);
+	g_signal_connect_object (self->enable_8021x_switch, "notify::active", G_CALLBACK (enable_toggled), self, G_CONNECT_SWAPPED);
 	gtk_widget_set_sensitive (GTK_WIDGET (self->security), self->initial_have_8021x);
 
         gtk_size_group_add_widget (self->group, GTK_WIDGET (self->security_label));

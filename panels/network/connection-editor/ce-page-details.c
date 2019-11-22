@@ -214,8 +214,8 @@ update_restrict_data (CEPageDetails *self)
                                       metered == NM_METERED_YES || metered == NM_METERED_GUESS_YES);
         gtk_widget_show (GTK_WIDGET (self->restrict_data_check));
 
-        g_signal_connect_swapped (self->restrict_data_check, "notify::active", G_CALLBACK (restrict_data_changed), self);
-        g_signal_connect_swapped (self->restrict_data_check, "notify::active", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->restrict_data_check, "notify::active", G_CALLBACK (restrict_data_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->restrict_data_check, "notify::active", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -409,21 +409,20 @@ connect_details_page (CEPageDetails *self)
                 g_object_bind_property (sc, "autoconnect",
                                         self->auto_connect_check, "active",
                                         G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
-                g_signal_connect_swapped (self->auto_connect_check, "toggled", G_CALLBACK (ce_page_changed), self);
+                g_signal_connect_object (self->auto_connect_check, "toggled", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
         }
 
         /* All users check */
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->all_user_check),
                                       nm_setting_connection_get_num_permissions (sc) == 0);
-        g_signal_connect_swapped (self->all_user_check, "toggled",
-                                  G_CALLBACK (all_user_changed), self);
-        g_signal_connect_swapped (self->all_user_check, "toggled", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->all_user_check, "toggled", G_CALLBACK (all_user_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->all_user_check, "toggled", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
         /* Restrict Data check */
         update_restrict_data (self);
 
         /* Forget button */
-        g_signal_connect_swapped (self->forget_button, "clicked", G_CALLBACK (forget_cb), self);
+        g_signal_connect_object (self->forget_button, "clicked", G_CALLBACK (forget_cb), self, G_CONNECT_SWAPPED);
 
         if (g_str_equal (type, NM_SETTING_WIRELESS_SETTING_NAME))
                 gtk_button_set_label (self->forget_button, _("Forget Connection"));
