@@ -129,8 +129,7 @@ auth_popup_filled (PpJobsDialog *self)
 }
 
 static void
-auth_entries_changed (GtkEntry     *entry,
-                      PpJobsDialog *self)
+auth_entries_changed (PpJobsDialog *self)
 {
   GtkWidget *widget;
 
@@ -139,8 +138,7 @@ auth_entries_changed (GtkEntry     *entry,
 }
 
 static void
-auth_entries_activated (GtkEntry     *entry,
-                        PpJobsDialog *self)
+auth_entries_activated (PpJobsDialog *self)
 {
   GtkWidget *widget;
 
@@ -437,12 +435,9 @@ update_jobs_list (PpJobsDialog *self)
 }
 
 static void
-jobs_dialog_response_cb (GtkDialog *dialog,
-                         gint       response_id,
-                         gpointer   user_data)
+jobs_dialog_response_cb (PpJobsDialog *self,
+                         gint          response_id)
 {
-  PpJobsDialog *self = (PpJobsDialog*) user_data;
-
   pp_jobs_dialog_hide (self);
 
   self->user_callback (GTK_DIALOG (self->dialog),
@@ -451,10 +446,8 @@ jobs_dialog_response_cb (GtkDialog *dialog,
 }
 
 static void
-on_clear_all_button_clicked (GtkButton *button,
-                             gpointer   user_data)
+on_clear_all_button_clicked (PpJobsDialog *self)
 {
-  PpJobsDialog *self = user_data;
   guint num_items;
   guint i;
 
@@ -493,10 +486,8 @@ pp_job_authenticate_cb (GObject      *source_object,
 }
 
 static void
-authenticate_button_clicked (GtkWidget *button,
-                             gpointer   user_data)
+authenticate_button_clicked (PpJobsDialog *self)
 {
-  PpJobsDialog *self = user_data;
   GtkWidget    *widget;
   PpJob        *job;
   gchar       **auth_info_required = NULL;
@@ -588,26 +579,26 @@ pp_jobs_dialog_new (GtkWindow            *parent,
 
   /* connect signals */
   g_signal_connect (self->dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-  g_signal_connect (self->dialog, "response", G_CALLBACK (jobs_dialog_response_cb), self);
+  g_signal_connect_object (self->dialog, "response", G_CALLBACK (jobs_dialog_response_cb), self, G_CONNECT_SWAPPED);
   g_signal_connect (self->dialog, "key-press-event", G_CALLBACK (key_press_event_cb), NULL);
 
   widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "jobs-clear-all-button"));
-  g_signal_connect (widget, "clicked", G_CALLBACK (on_clear_all_button_clicked), self);
+  g_signal_connect_object (widget, "clicked", G_CALLBACK (on_clear_all_button_clicked), self, G_CONNECT_SWAPPED);
 
   widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "authenticate-button"));
-  g_signal_connect (widget, "clicked", G_CALLBACK (authenticate_button_clicked), self);
+  g_signal_connect_object (widget, "clicked", G_CALLBACK (authenticate_button_clicked), self, G_CONNECT_SWAPPED);
 
   widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "domain-entry"));
-  g_signal_connect (widget, "changed", G_CALLBACK (auth_entries_changed), self);
-  g_signal_connect (widget, "activate", G_CALLBACK (auth_entries_activated), self);
+  g_signal_connect_object (widget, "changed", G_CALLBACK (auth_entries_changed), self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (widget, "activate", G_CALLBACK (auth_entries_activated), self, G_CONNECT_SWAPPED);
 
   widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "username-entry"));
-  g_signal_connect (widget, "changed", G_CALLBACK (auth_entries_changed), self);
-  g_signal_connect (widget, "activate", G_CALLBACK (auth_entries_activated), self);
+  g_signal_connect_object (widget, "changed", G_CALLBACK (auth_entries_changed), self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (widget, "activate", G_CALLBACK (auth_entries_activated), self, G_CONNECT_SWAPPED);
 
   widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "password-entry"));
-  g_signal_connect (widget, "changed", G_CALLBACK (auth_entries_changed), self);
-  g_signal_connect (widget, "activate", G_CALLBACK (auth_entries_activated), self);
+  g_signal_connect_object (widget, "changed", G_CALLBACK (auth_entries_changed), self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (widget, "activate", G_CALLBACK (auth_entries_activated), self, G_CONNECT_SWAPPED);
 
   /* Translators: This is the printer name for which we are showing the active jobs */
   title = g_strdup_printf (C_("Printer jobs dialog title", "%s — Active Jobs"), printer_name);
