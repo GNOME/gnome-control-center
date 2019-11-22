@@ -377,8 +377,8 @@ finish_setup (CEPageSecurity *self)
         gtk_combo_box_set_active (self->security_combo, active < 0 ? 0 : (guint32) active);
 
         security_combo_changed (self);
-        g_signal_connect_swapped (self->security_combo, "changed",
-                                  G_CALLBACK (security_combo_changed), self);
+        g_signal_connect_object (self->security_combo, "changed",
+                                 G_CALLBACK (security_combo_changed), self, G_CONNECT_SWAPPED);
 }
 
 static void
