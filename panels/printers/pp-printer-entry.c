@@ -275,9 +275,8 @@ tone_down_color (GdkRGBA *color,
 }
 
 static gboolean
-supply_levels_draw_cb (GtkWidget      *widget,
-                       cairo_t        *cr,
-                       PpPrinterEntry *self)
+supply_levels_draw_cb (PpPrinterEntry *self,
+                       cairo_t        *cr)
 {
   GtkStyleContext        *context;
   gboolean                is_empty = TRUE;
@@ -286,10 +285,10 @@ supply_levels_draw_cb (GtkWidget      *widget,
   gint                    height;
   int                     i;
 
-  context = gtk_widget_get_style_context (widget);
+  context = gtk_widget_get_style_context (GTK_WIDGET (self->supply_drawing_area));
 
-  width = gtk_widget_get_allocated_width (widget);
-  height = gtk_widget_get_allocated_height (widget);
+  width = gtk_widget_get_allocated_width (GTK_WIDGET (self->supply_drawing_area));
+  height = gtk_widget_get_allocated_height (GTK_WIDGET (self->supply_drawing_area));
 
   gtk_render_background (context, cr, 0, 0, width, height);
 
@@ -388,12 +387,12 @@ supply_levels_draw_cb (GtkWidget      *widget,
 
     if (tooltip_text)
       {
-        gtk_widget_set_tooltip_text (widget, tooltip_text);
+        gtk_widget_set_tooltip_text (GTK_WIDGET (self->supply_drawing_area), tooltip_text);
       }
     else
       {
-        gtk_widget_set_tooltip_text (widget, NULL);
-        gtk_widget_set_has_tooltip (widget, FALSE);
+        gtk_widget_set_tooltip_text (GTK_WIDGET (self->supply_drawing_area), NULL);
+        gtk_widget_set_has_tooltip (GTK_WIDGET (self->supply_drawing_area), FALSE);
       }
     }
 
@@ -946,7 +945,7 @@ pp_printer_entry_new (cups_dest_t  printer,
       gtk_label_set_text (self->printer_location_address_label, location);
     }
 
-  g_signal_connect (self->supply_drawing_area, "draw", G_CALLBACK (supply_levels_draw_cb), self);
+  g_signal_connect_object (self->supply_drawing_area, "draw", G_CALLBACK (supply_levels_draw_cb), self, G_CONNECT_SWAPPED);
   ink_supply_is_empty = supply_level_is_empty (self);
   gtk_widget_set_visible (GTK_WIDGET (self->printer_inklevel_label), !ink_supply_is_empty);
   gtk_widget_set_visible (GTK_WIDGET (self->supply_frame), !ink_supply_is_empty);
