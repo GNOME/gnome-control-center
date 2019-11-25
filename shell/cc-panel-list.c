@@ -221,10 +221,20 @@ update_search (CcPanelList *self)
       if (self->view == CC_PANEL_LIST_MAIN)
         switch_to_view (self, CC_PANEL_LIST_SEARCH);
     }
-  else
+  else if (self->view == CC_PANEL_LIST_SEARCH)
     {
-      if (self->view == CC_PANEL_LIST_SEARCH)
-        switch_to_view (self, self->previous_view);
+      GtkSelectionMode selection_mode;
+      gboolean autoselect_panel;
+
+      /* Autoselect panel only if allowed.  Autoselect of
+       * panel isn’t allowed if the panel is folded */
+      autoselect_panel = self->autoselect_panel;
+      selection_mode = gtk_list_box_get_selection_mode (GTK_LIST_BOX (self->main_listbox));
+      self->autoselect_panel = selection_mode != GTK_SELECTION_NONE;
+
+      switch_to_view (self, self->previous_view);
+
+      self->autoselect_panel = autoselect_panel;
     }
 
   gtk_list_box_invalidate_filter (GTK_LIST_BOX (self->search_listbox));
