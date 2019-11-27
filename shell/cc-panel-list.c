@@ -435,11 +435,11 @@ static const gchar * const panel_order[] = {
   /* Details page */
   "region",
   "universal-access",
-  "info-overview",
-  "datetime",
   "user-accounts",
   "default-apps",
-  "reset-settings"
+  "reset-settings",
+  "datetime",
+  "info-overview",
 };
 
 static guint
