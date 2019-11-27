@@ -395,8 +395,6 @@ static const gchar * const panel_order[] = {
   "privacy",
   "online-accounts",
   "sharing",
-  "sound",
-  "power",
   "network",
 
   /* Privacy page */
@@ -408,9 +406,11 @@ static const gchar * const panel_order[] = {
   "diagnostics",
 
   /* Devices page */
+  "sound",
+  "power",
   "display",
-  "keyboard",
   "mouse",
+  "keyboard",
   "printers",
   "removable-media",
   "thunderbolt",
