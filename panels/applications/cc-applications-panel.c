@@ -140,7 +140,7 @@ privacy_link_cb (CcApplicationsPanel *self)
   CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
   g_autoptr(GError) error = NULL;
 
-  if (!cc_shell_set_active_panel_from_id (shell, "privacy", NULL, &error))
+  if (!cc_shell_set_active_panel_from_id (shell, "location", NULL, &error))
     g_warning ("Failed to switch to privacy panel: %s", error->message);
 
   return TRUE;
