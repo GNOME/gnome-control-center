@@ -15,8 +15,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __CC_IBUS_UTILS_H__
-#define __CC_IBUS_UTILS_H__
+#pragma once
 
 #include <ibus.h>
 
@@ -25,5 +24,3 @@ G_BEGIN_DECLS
 gchar *engine_get_display_name (IBusEngineDesc *engine_desc);
 
 G_END_DECLS
-
-#endif /* __CC_IBUS_UTILS_H__ */

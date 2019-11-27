@@ -22,8 +22,7 @@
  *
  */
 
-#ifndef _CC_BLUETOOTH_PANEL_H
-#define _CC_BLUETOOTH_PANEL_H
+#pragma once
 
 #include <shell/cc-shell.h>
 
@@ -33,6 +32,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcBluetoothPanel, cc_bluetooth_panel, CC, BLUETOOTH_PANEL, CcPanel)
 
 G_END_DECLS
-
-#endif /* _CC_BLUETOOTH_PANEL_H */
-

@@ -21,10 +21,11 @@
  * THE SOFTWARE.
  */
 
-#ifndef __CALIBRATOR_GUI_H__
-#define __CALIBRATOR_GUI_H__
+#pragma once
 
 #include <gtk/gtk.h>
+
+G_BEGIN_DECLS
 
 /* struct to hold min/max info of the X and Y axis */
 typedef struct
@@ -60,4 +61,5 @@ void calib_area_get_axis (CalibArea *area,
 
 void calib_area_get_padding (CalibArea *area,
                              XYinfo    *padding);
-#endif /* __CALIBRATOR_GUI_H__ */
+
+G_END_DECLS

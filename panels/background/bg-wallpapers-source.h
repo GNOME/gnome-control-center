@@ -19,9 +19,7 @@
  *
  */
 
-
-#ifndef _BG_WALLPAPERS_SOURCE_H
-#define _BG_WALLPAPERS_SOURCE_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include "bg-source.h"
@@ -34,5 +32,3 @@ G_DECLARE_FINAL_TYPE (BgWallpapersSource, bg_wallpapers_source, BG, WALLPAPERS_S
 BgWallpapersSource *bg_wallpapers_source_new (GtkWidget *widget);
 
 G_END_DECLS
-
-#endif /* _BG_WALLPAPERS_SOURCE_H */

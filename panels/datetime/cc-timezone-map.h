@@ -18,9 +18,7 @@
  *
  */
 
-
-#ifndef _CC_TIMEZONE_MAP_H
-#define _CC_TIMEZONE_MAP_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include "tz.h"
@@ -39,5 +37,3 @@ void cc_timezone_map_set_bubble_text (CcTimezoneMap *map,
 TzLocation * cc_timezone_map_get_location (CcTimezoneMap *map);
 
 G_END_DECLS
-
-#endif /* _CC_TIMEZONE_MAP_H */

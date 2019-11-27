@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef __GVC_MIXER_STREAM_PRIVATE_H
-#define __GVC_MIXER_STREAM_PRIVATE_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -29,5 +28,3 @@ G_BEGIN_DECLS
 pa_context *        gvc_mixer_stream_get_pa_context  (GvcMixerStream *stream);
 
 G_END_DECLS
-
-#endif /* __GVC_MIXER_STREAM_PRIVATE_H */

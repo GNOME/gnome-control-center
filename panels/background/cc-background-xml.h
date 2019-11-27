@@ -17,8 +17,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _CC_BACKGROUND_XML_H_
-#define _CC_BACKGROUND_XML_H_
+#pragma once
 
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 #include <gtk/gtk.h>
@@ -46,6 +45,3 @@ gboolean cc_background_xml_load_list_finish          (CcBackgroundXml    *xml,
 						      GError            **error);
 
 G_END_DECLS
-
-#endif
-

@@ -19,9 +19,7 @@
  *
  */
 
-
-#ifndef _BG_PICTURES_SOURCE_H
-#define _BG_PICTURES_SOURCE_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include "bg-source.h"
@@ -46,5 +44,3 @@ gboolean          bg_pictures_source_is_known       (BgPicturesSource *bg_source
 const char * const * bg_pictures_get_support_content_types (void);
 
 G_END_DECLS
-
-#endif /* _BG_PICTURES_SOURCE_H */
