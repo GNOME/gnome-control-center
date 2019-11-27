@@ -386,6 +386,7 @@ filter_func (GtkListBoxRow *row,
 static const gchar * const panel_order[] = {
   /* Main page */
   "wifi",
+  "network",
   "mobile-broadband",
   "bluetooth",
   "background",
@@ -395,7 +396,6 @@ static const gchar * const panel_order[] = {
   "privacy",
   "online-accounts",
   "sharing",
-  "network",
 
   /* Privacy page */
   "location",
