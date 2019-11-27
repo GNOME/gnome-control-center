@@ -100,7 +100,7 @@ on_camera_app_state_set (GtkSwitch *widget,
   CcCameraPanel *self;
   GVariantIter iter;
   GVariant *params;
-  gchar *key;
+  const gchar *key;
   gchar **value;
 
   self = data->self;
@@ -113,7 +113,7 @@ on_camera_app_state_set (GtkSwitch *widget,
 
   g_variant_iter_init (&iter, self->camera_apps_perms);
   g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
-  while (g_variant_iter_loop (&iter, "{s^as}", &key, &value))
+  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
     {
       gchar *tmp = NULL;
 
@@ -253,7 +253,7 @@ update_perm_store (CcCameraPanel *self,
                    GVariant      *permissions_data)
 {
   GVariantIter iter;
-  gchar *key;
+  const gchar *key;
   gchar **value;
 
   g_clear_pointer (&self->camera_apps_perms, g_variant_unref);
@@ -262,7 +262,7 @@ update_perm_store (CcCameraPanel *self,
   self->camera_apps_data = permissions_data;
 
   g_variant_iter_init (&iter, permissions);
-  while (g_variant_iter_loop (&iter, "{s^as}", &key, &value))
+  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
     {
       gboolean enabled;
 

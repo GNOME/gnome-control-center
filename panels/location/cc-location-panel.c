@@ -101,7 +101,7 @@ on_location_app_state_set (GtkSwitch *widget,
   CcLocationPanel *self = data->self;
   GVariant *params;
   GVariantIter iter;
-  gchar *key;
+  const gchar *key;
   gchar **value;
   GVariantBuilder builder;
 
@@ -113,24 +113,16 @@ on_location_app_state_set (GtkSwitch *widget,
 
   g_variant_iter_init (&iter, self->location_apps_perms);
   g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
-  while (g_variant_iter_loop (&iter, "{s^as}", &key, &value))
+  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
     {
-      gchar *tmp = NULL;
-
       /* It's OK to drop the entry if it's not in expected format */
       if (g_strv_length (value) < 2)
         continue;
 
       if (g_strcmp0 (data->app_id, key) == 0)
-        {
-          tmp = value[0];
-          value[0] = state ? "EXACT" : "NONE";
-        }
+        value[0] = state ? "EXACT" : "NONE";
 
       g_variant_builder_add (&builder, "{s^as}", key, value);
-
-      if (tmp != NULL)
-        value[0] = tmp;
     }
 
   params = g_variant_new ("(sbsa{sas}v)",
@@ -266,7 +258,7 @@ update_perm_store (CcLocationPanel *self,
                    GVariant        *permissions_data)
 {
   GVariantIter iter;
-  gchar *key;
+  const gchar *key;
   gchar **value;
 
   g_clear_pointer (&self->location_apps_perms, g_variant_unref);
@@ -276,7 +268,7 @@ update_perm_store (CcLocationPanel *self,
   self->location_apps_data = permissions_data;
 
   g_variant_iter_init (&iter, permissions);
-  while (g_variant_iter_loop (&iter, "{s^as}", &key, &value))
+  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
     {
       gboolean enabled;
       gint64 last_used;
