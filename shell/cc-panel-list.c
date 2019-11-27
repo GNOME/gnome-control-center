@@ -401,6 +401,7 @@ static const gchar * const panel_order[] = {
   "location",
   "camera",
   "microphone",
+  "thunderbolt",
   "usage",
   "lock",
   "diagnostics",
@@ -413,7 +414,6 @@ static const gchar * const panel_order[] = {
   "keyboard",
   "printers",
   "removable-media",
-  "thunderbolt",
   "wacom",
   "color",
 
