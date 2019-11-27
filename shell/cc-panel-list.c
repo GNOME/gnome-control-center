@@ -405,8 +405,6 @@ static const gchar * const panel_order[] = {
   "background",
   "notifications",
   "search",
-  "region",
-  "universal-access",
   "applications",
   "privacy",
   "online-accounts",
@@ -435,6 +433,8 @@ static const gchar * const panel_order[] = {
   "color",
 
   /* Details page */
+  "region",
+  "universal-access",
   "info-overview",
   "datetime",
   "user-accounts",
