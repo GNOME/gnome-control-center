@@ -20,10 +20,16 @@
  * (C) Copyright 2007 - 2010 Red Hat, Inc.
  */
 
-#ifndef EAP_METHOD_SIMPLE_H
-#define EAP_METHOD_SIMPLE_H
+#pragma once
+
+#include <gtk/gtk.h>
+#include <NetworkManager.h>
 
 #include "wireless-security.h"
+
+G_BEGIN_DECLS
+
+G_DECLARE_FINAL_TYPE (EAPMethodSimple, eap_method_simple, EAP, METHOD_SIMPLE, GtkGrid)
 
 typedef enum {
 	/* NOTE: when updating this table, also update eap_methods[] */
@@ -52,15 +58,9 @@ typedef enum {
 	EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY    = 0x08
 } EAPMethodSimpleFlags;
 
-typedef struct _EAPMethodSimple EAPMethodSimple;
-
 EAPMethodSimple *eap_method_simple_new (WirelessSecurity *ws_parent,
                                         NMConnection *connection,
                                         EAPMethodSimpleType type,
                                         EAPMethodSimpleFlags flags);
 
-static void eap_method_simple_unref (EAPMethodSimple *method) { eap_method_unref (EAP_METHOD (method)); }
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (EAPMethodSimple, eap_method_simple_unref)
-
-#endif /* EAP_METHOD_SIMPLE_H */
-
+G_END_DECLS

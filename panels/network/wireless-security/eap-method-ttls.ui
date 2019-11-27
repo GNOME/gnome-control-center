@@ -1,19 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.4"/>
-  <object class="GtkListStore" id="auth_model">
+  <object class="GtkListStore" id="inner_auth_model">
     <columns>
-      <!-- column-name gchararray -->
+      <!-- column-name label -->
+      <column type="gchararray"/>
+      <!-- column-name id -->
       <column type="gchararray"/>
     </columns>
     <data>
       <row>
-        <col id="0"> </col>
+        <col id="0" translatable="yes">PAP</col>
+        <col id="1">pap</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">MSCHAP</col>
+        <col id="1">mschap</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">MSCHAPv2</col>
+        <col id="1">mschapv2</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">MSCHAPv2 (no EAP)</col>
+        <col id="1">plain_mschapv2</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">CHAP</col>
+        <col id="1">chap</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">MD5</col>
+        <col id="1">md5</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">GTC</col>
+        <col id="1">gtc</col>
       </row>
     </data>
   </object>
-  <object class="GtkGrid" id="grid">
-    <property name="visible">True</property>
+  <template class="EAPMethodTTLS" parent="GtkGrid">
     <property name="can_focus">False</property>
     <property name="column_spacing">6</property>
     <property name="row_spacing">6</property>
@@ -129,7 +155,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="hexpand">True</property>
-        <property name="model">auth_model</property>
+        <property name="model">inner_auth_model</property>
         <child>
           <object class="GtkCellRendererText"/>
           <attributes>
@@ -158,5 +184,5 @@
         <property name="width">2</property>
       </packing>
     </child>
-  </object>
+  </template>
 </interface>

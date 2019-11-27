@@ -174,9 +174,9 @@ security_combo_changed (CEPageSecurity *self)
 }
 
 static void
-stuff_changed_cb (WirelessSecurity *sec, gpointer user_data)
+security_item_changed_cb (CEPageSecurity *self)
 {
-        ce_page_changed (CE_PAGE (user_data));
+        ce_page_changed (CE_PAGE (self));
 }
 
 static void
@@ -187,14 +187,14 @@ add_security_item (CEPageSecurity   *self,
                    const char       *text,
                    gboolean          adhoc_valid)
 {
-        wireless_security_set_changed_notify (sec, stuff_changed_cb, self);
+        g_signal_connect_object (sec, "changed", G_CALLBACK (security_item_changed_cb), self, G_CONNECT_SWAPPED);
         gtk_list_store_append (model, iter);
         gtk_list_store_set (model, iter,
                             S_NAME_COLUMN, text,
                             S_SEC_COLUMN, sec,
                             S_ADHOC_VALID_COLUMN, adhoc_valid,
                             -1);
-        wireless_security_unref (sec);
+        g_object_unref (sec);
 }
 
 static void
@@ -250,7 +250,7 @@ finish_setup (CEPageSecurity *self)
         if (sws)
                 default_type = get_default_type_for_security (sws);
 
-        sec_model = gtk_list_store_new (3, G_TYPE_STRING, WIRELESS_TYPE_SECURITY, G_TYPE_BOOLEAN);
+        sec_model = gtk_list_store_new (3, G_TYPE_STRING, wireless_security_get_type (), G_TYPE_BOOLEAN);
 
         if (nm_utils_security_valid (NMU_SEC_NONE, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
                 gtk_list_store_insert_with_values (sec_model, &iter, -1,

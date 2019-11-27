@@ -20,43 +20,34 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#ifndef EAP_METHOD_H
-#define EAP_METHOD_H
+#pragma once
 
+#include <gtk/gtk.h>
 #include <NetworkManager.h>
 
-typedef struct _EAPMethod EAPMethod;
+G_BEGIN_DECLS
 
-typedef void        (*EMAddToSizeGroupFunc) (EAPMethod *method, GtkSizeGroup *group);
-typedef void        (*EMFillConnectionFunc) (EAPMethod *method, NMConnection *connection, NMSettingSecretFlags flags);
-typedef void        (*EMUpdateSecretsFunc)  (EAPMethod *method, NMConnection *connection);
-typedef void        (*EMDestroyFunc)        (EAPMethod *method);
-typedef gboolean    (*EMValidateFunc)       (EAPMethod *method, GError **error);
+G_DECLARE_INTERFACE (EAPMethod, eap_method, EAP, METHOD, GtkGrid)
 
-struct _EAPMethod {
-	guint32 refcount;
-	gsize obj_size;
+struct _EAPMethodInterface {
+	GTypeInterface g_iface;
 
-	GtkBuilder *builder;
-	GtkWidget *ui_widget;
-
-	const char *default_field;
-	const char *password_flags_name;
-
-	gboolean phase2;
-	gboolean secrets_only;
-
-	EMAddToSizeGroupFunc add_to_size_group;
-	EMFillConnectionFunc fill_connection;
-	EMUpdateSecretsFunc update_secrets;
-	EMValidateFunc validate;
-	EMDestroyFunc destroy;
+	void         (*add_to_size_group)       (EAPMethod *method, GtkSizeGroup *group);
+	void         (*fill_connection)         (EAPMethod *method, NMConnection *connection, NMSettingSecretFlags flags);
+	void         (*update_secrets)          (EAPMethod *method, NMConnection *connection);
+	gboolean     (*validate)                (EAPMethod *method, GError **error);
+	GtkWidget*   (*get_default_field)       (EAPMethod *method);
+	const gchar* (*get_password_flags_name) (EAPMethod *method);
+	gboolean     (*get_phase2)              (EAPMethod *method);
 };
 
-#define EAP_METHOD(x) ((EAPMethod *) x)
+GtkWidget *eap_method_get_default_field (EAPMethod *method);
 
+const gchar *eap_method_get_password_flags_name (EAPMethod *method);
 
-GtkWidget *eap_method_get_widget (EAPMethod *method);
+gboolean eap_method_get_phase2 (EAPMethod *method);
+
+void eap_method_update_secrets (EAPMethod *method, NMConnection *connection);
 
 gboolean eap_method_validate (EAPMethod *method, GError **error);
 
@@ -66,33 +57,9 @@ void eap_method_fill_connection (EAPMethod *method,
                                  NMConnection *connection,
                                  NMSettingSecretFlags flags);
 
-void eap_method_update_secrets (EAPMethod *method, NMConnection *connection);
-
-EAPMethod *eap_method_ref (EAPMethod *method);
-
-void eap_method_unref (EAPMethod *method);
-
-GType eap_method_get_type (void);
+void eap_method_emit_changed (EAPMethod *method);
 
 /* Below for internal use only */
-
-#include "eap-method-tls.h"
-#include "eap-method-leap.h"
-#include "eap-method-fast.h"
-#include "eap-method-ttls.h"
-#include "eap-method-peap.h"
-#include "eap-method-simple.h"
-
-EAPMethod *eap_method_init (gsize obj_size,
-                            EMValidateFunc validate,
-                            EMAddToSizeGroupFunc add_to_size_group,
-                            EMFillConnectionFunc fill_connection,
-                            EMUpdateSecretsFunc update_secrets,
-                            EMDestroyFunc destroy,
-                            const char *ui_resource,
-                            const char *ui_widget_name,
-                            const char *default_field,
-                            gboolean phase2);
 
 GtkFileFilter * eap_method_default_file_chooser_filter_new (gboolean privkey);
 
@@ -108,13 +75,6 @@ gboolean eap_method_validate_filepicker (GtkFileChooser *chooser,
                                          NMSetting8021xCKFormat *out_format,
                                          GError **error);
 
-void eap_method_phase2_update_secrets_helper (EAPMethod *method,
-                                              NMConnection *connection,
-                                              GtkComboBox *combo,
-                                              guint32 column);
-
-gboolean eap_method_ca_cert_required (GtkToggleButton *id_ca_cert_is_not_required_checkbutton,
-                                      GtkFileChooser *id_ca_cert_chooser);
 void eap_method_ca_cert_not_required_toggled (GtkToggleButton *id_ca_cert_is_not_required_checkbox,
                                               GtkFileChooser *id_ca_cert_chooser);
 
@@ -127,6 +87,4 @@ gboolean eap_method_ca_cert_ignore_get (EAPMethod *method, NMConnection *connect
 void eap_method_ca_cert_ignore_save (NMConnection *connection);
 void eap_method_ca_cert_ignore_load (NMConnection *connection);
 
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (EAPMethod, eap_method_unref)
-
-#endif /* EAP_METHOD_H */
+G_END_DECLS

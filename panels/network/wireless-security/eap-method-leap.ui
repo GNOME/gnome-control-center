@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.4"/>
-  <object class="GtkGrid" id="grid">
-    <property name="visible">True</property>
+  <template class="EAPMethodLEAP" parent="GtkGrid">
     <property name="can_focus">False</property>
     <property name="valign">start</property>
     <property name="column_spacing">6</property>
@@ -77,5 +76,5 @@
         <property name="top_attach">0</property>
       </packing>
     </child>
-  </object>
+  </template>
 </interface>

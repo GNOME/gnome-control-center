@@ -20,20 +20,20 @@
  * (C) Copyright 2007 - 2010 Red Hat, Inc.
  */
 
-#ifndef EAP_METHOD_TLS_H
-#define EAP_METHOD_TLS_H
+#pragma once
+
+#include <gtk/gtk.h>
+#include <NetworkManager.h>
 
 #include "wireless-security.h"
 
-typedef struct _EAPMethodTLS EAPMethodTLS;
+G_BEGIN_DECLS
+
+G_DECLARE_FINAL_TYPE (EAPMethodTLS, eap_method_tls, EAP, METHOD_TLS, GtkGrid)
 
 EAPMethodTLS *eap_method_tls_new (WirelessSecurity *ws_parent,
                                   NMConnection *connection,
                                   gboolean phase2,
                                   gboolean secrets_only);
 
-static void eap_method_tls_unref (EAPMethodTLS *method) { eap_method_unref (EAP_METHOD (method)); }
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (EAPMethodTLS, eap_method_tls_unref)
-
-#endif /* EAP_METHOD_TLS_H */
-
+G_END_DECLS

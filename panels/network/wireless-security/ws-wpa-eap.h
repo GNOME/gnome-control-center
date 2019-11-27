@@ -20,13 +20,21 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#ifndef WS_WPA_EAP_H
-#define WS_WPA_EAP_H
+#pragma once
 
-typedef struct _WirelessSecurityWPAEAP WirelessSecurityWPAEAP;
+#include <NetworkManager.h>
 
-WirelessSecurityWPAEAP * ws_wpa_eap_new (NMConnection *connection,
-                                         gboolean is_editor,
-                                         gboolean secrets_only);
+#include "wireless-security.h"
 
-#endif /* WS_WPA_EAP_H */
+G_BEGIN_DECLS
+
+G_DECLARE_FINAL_TYPE (WirelessSecurityWPAEAP, ws_wpa_eap, WS, WPA_EAP, WirelessSecurity)
+
+WirelessSecurityWPAEAP *ws_wpa_eap_new             (NMConnection *connection,
+                                                    gboolean is_editor,
+                                                    gboolean secrets_only);
+
+void                    ws_wpa_eap_fill_connection (WirelessSecurityWPAEAP *sec,
+                                                    NMConnection *connection);
+
+G_END_DECLS

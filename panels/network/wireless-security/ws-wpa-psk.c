@@ -20,22 +20,21 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#include "nm-default.h"
-
 #include <ctype.h>
-#include <string.h>
+#include <glib/gi18n.h>
 
-#include "ws-wpa-psk.h"
-#include "wireless-security.h"
 #include "helpers.h"
 #include "nma-ui-utils.h"
-#include "utils.h"
+#include "ui-helpers.h"
+#include "ws-wpa-psk.h"
+#include "wireless-security.h"
 
 #define WPA_PMK_LEN 32
 
 struct _WirelessSecurityWPAPSK {
 	WirelessSecurity parent;
 
+	GtkBuilder     *builder;
 	GtkGrid        *grid;
 	GtkEntry       *password_entry;
 	GtkLabel       *password_label;
@@ -47,10 +46,22 @@ struct _WirelessSecurityWPAPSK {
 	const char *password_flags_name;
 };
 
-static GtkWidget *
-get_widget (WirelessSecurity *parent)
+G_DEFINE_TYPE (WirelessSecurityWPAPSK, ws_wpa_psk, wireless_security_get_type ())
+
+static void
+ws_wpa_psk_dispose (GObject *object)
 {
-	WirelessSecurityWPAPSK *self = (WirelessSecurityWPAPSK *) parent;
+	WirelessSecurityWPAPSK *self = WS_WPA_PSK (object);
+
+	g_clear_object (&self->builder);
+
+	G_OBJECT_CLASS (ws_wpa_psk_parent_class)->dispose (object);
+}
+
+static GtkWidget *
+get_widget (WirelessSecurity *security)
+{
+	WirelessSecurityWPAPSK *self = WS_WPA_PSK (security);
 	return GTK_WIDGET (self->grid);
 }
 
@@ -64,9 +75,9 @@ show_toggled_cb (WirelessSecurityWPAPSK *self)
 }
 
 static gboolean
-validate (WirelessSecurity *parent, GError **error)
+validate (WirelessSecurity *security, GError **error)
 {
-	WirelessSecurityWPAPSK *self = (WirelessSecurityWPAPSK *) parent;
+	WirelessSecurityWPAPSK *self = WS_WPA_PSK (security);
 	const char *key;
 	gsize len;
 	int i;
@@ -97,17 +108,17 @@ validate (WirelessSecurity *parent, GError **error)
 }
 
 static void
-add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
+add_to_size_group (WirelessSecurity *security, GtkSizeGroup *group)
 {
-	WirelessSecurityWPAPSK *self = (WirelessSecurityWPAPSK *) parent;
+	WirelessSecurityWPAPSK *self = WS_WPA_PSK (security);
 	gtk_size_group_add_widget (group, GTK_WIDGET (self->type_label));
 	gtk_size_group_add_widget (group, GTK_WIDGET (self->password_label));
 }
 
 static void
-fill_connection (WirelessSecurity *parent, NMConnection *connection)
+fill_connection (WirelessSecurity *security, NMConnection *connection)
 {
-	WirelessSecurityWPAPSK *self = (WirelessSecurityWPAPSK *) parent;
+	WirelessSecurityWPAPSK *self = WS_WPA_PSK (security);
 	const char *key;
 	NMSettingWireless *s_wireless;
 	NMSettingWirelessSecurity *s_wireless_sec;
@@ -159,14 +170,10 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	}
 }
 
-static void
-update_secrets (WirelessSecurity *parent, NMConnection *connection)
+static gboolean
+adhoc_compatible (WirelessSecurity *security)
 {
-	WirelessSecurityWPAPSK *self = (WirelessSecurityWPAPSK *) parent;
-	helper_fill_secret_entry (connection,
-	                          self->password_entry,
-	                          NM_TYPE_SETTING_WIRELESS_SECURITY,
-	                          (HelperSecretFunc) nm_setting_wireless_security_get_psk);
+	return FALSE;
 }
 
 static void
@@ -175,32 +182,46 @@ changed_cb (WirelessSecurityWPAPSK *self)
 	wireless_security_notify_changed ((WirelessSecurity *) self);
 }
 
+void
+ws_wpa_psk_init (WirelessSecurityWPAPSK *self)
+{
+}
+
+void
+ws_wpa_psk_class_init (WirelessSecurityWPAPSKClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	WirelessSecurityClass *ws_class = WIRELESS_SECURITY_CLASS (klass);
+
+	object_class->dispose = ws_wpa_psk_dispose;
+	ws_class->get_widget = get_widget;
+	ws_class->validate = validate;
+	ws_class->add_to_size_group = add_to_size_group;
+	ws_class->fill_connection = fill_connection;
+	ws_class->adhoc_compatible = adhoc_compatible;
+}
+
 WirelessSecurityWPAPSK *
 ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 {
-	WirelessSecurity *parent;
 	WirelessSecurityWPAPSK *self;
 	NMSetting *setting = NULL;
+	g_autoptr(GError) error = NULL;
 
-	parent = wireless_security_init (sizeof (WirelessSecurityWPAPSK),
-	                                 get_widget,
-	                                 validate,
-	                                 add_to_size_group,
-	                                 fill_connection,
-	                                 NULL,
-	                                 "/org/gnome/ControlCenter/network/ws-wpa-psk.ui");
-	if (!parent)
+	self = g_object_new (ws_wpa_psk_get_type (), NULL);
+
+	self->builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/ws-wpa-psk.ui", &error)) {
+		g_warning ("Couldn't load UI builder resource: %s", error->message);
 		return NULL;
-	self = (WirelessSecurityWPAPSK *) parent;
+	}
 
-	self->grid = GTK_GRID (gtk_builder_get_object (parent->builder, "grid"));
-	self->password_entry = GTK_ENTRY (gtk_builder_get_object (parent->builder, "password_entry"));
-	self->password_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "password_label"));
-	self->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (parent->builder, "show_password_check"));
-	self->type_combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "type_combo"));
-	self->type_label = GTK_LABEL (gtk_builder_get_object (parent->builder, "type_label"));
-
-	wireless_security_set_adhoc_compatible (parent, FALSE);
+	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
+	self->password_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "password_entry"));
+	self->password_label = GTK_LABEL (gtk_builder_get_object (self->builder, "password_label"));
+	self->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "show_password_check"));
+	self->type_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "type_combo"));
+	self->type_label = GTK_LABEL (gtk_builder_get_object (self->builder, "type_label"));
 
 	self->editing_connection = secrets_only ? FALSE : TRUE;
 	self->password_flags_name = NM_SETTING_WIRELESS_SECURITY_PSK;
@@ -215,8 +236,12 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	                                  FALSE, secrets_only);
 
 	/* Fill secrets, if any */
-	if (connection)
-		update_secrets (WIRELESS_SECURITY (self), connection);
+	if (connection) {
+		helper_fill_secret_entry (connection,
+		                          self->password_entry,
+		                          NM_TYPE_SETTING_WIRELESS_SECURITY,
+		                          (HelperSecretFunc) nm_setting_wireless_security_get_psk);
+	}
 
 	g_signal_connect_swapped (self->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), self);
 

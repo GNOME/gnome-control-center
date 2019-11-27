@@ -20,37 +20,26 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#ifndef WIRELESS_SECURITY_H
-#define WIRELESS_SECURITY_H
+#pragma once
 
 #include <gtk/gtk.h>
+#include <NetworkManager.h>
 
-#define WIRELESS_TYPE_SECURITY (wireless_security_get_type ())
+G_BEGIN_DECLS
 
-typedef struct _WirelessSecurity WirelessSecurity;
-typedef struct _WirelessSecurityPrivate WirelessSecurityPrivate;
+G_DECLARE_DERIVABLE_TYPE (WirelessSecurity, wireless_security, WIRELESS, SECURITY, GObject)
 
-typedef void (*WSChangedFunc) (WirelessSecurity *sec, gpointer user_data);
+struct _WirelessSecurityClass {
+	GObjectClass parent_class;
 
-typedef void (*WSAddToSizeGroupFunc)  (WirelessSecurity *sec, GtkSizeGroup *group);
-typedef void (*WSFillConnectionFunc)  (WirelessSecurity *sec, NMConnection *connection);
-typedef void (*WSDestroyFunc)         (WirelessSecurity *sec);
-typedef gboolean (*WSValidateFunc)    (WirelessSecurity *sec, GError **error);
-typedef GtkWidget* (*WSGetWidgetFunc) (WirelessSecurity *sec);
-
-struct _WirelessSecurity {
-	WirelessSecurityPrivate *priv;
-	GtkBuilder *builder;
+	void       (*add_to_size_group) (WirelessSecurity *sec, GtkSizeGroup *group);
+	void       (*fill_connection)   (WirelessSecurity *sec, NMConnection *connection);
+	gboolean   (*validate)          (WirelessSecurity *sec, GError **error);
+	gboolean   (*adhoc_compatible)  (WirelessSecurity *sec);
+	GtkWidget* (*get_widget)        (WirelessSecurity *sec);
 };
 
-#define WIRELESS_SECURITY(x) ((WirelessSecurity *) x)
-
-
 GtkWidget *wireless_security_get_widget (WirelessSecurity *sec);
-
-void wireless_security_set_changed_notify (WirelessSecurity *sec,
-                                           WSChangedFunc func,
-                                           gpointer user_data);
 
 gboolean wireless_security_validate (WirelessSecurity *sec, GError **error);
 
@@ -60,81 +49,24 @@ void wireless_security_add_to_size_group (WirelessSecurity *sec,
 void wireless_security_fill_connection (WirelessSecurity *sec,
                                         NMConnection *connection);
 
-void wireless_security_set_adhoc_compatible (WirelessSecurity *sec,
-                                             gboolean adhoc_compatible);
-
 gboolean wireless_security_adhoc_compatible (WirelessSecurity *sec);
 
-void wireless_security_set_hotspot_compatible (WirelessSecurity *sec,
-                                               gboolean hotspot_compatible);
-
-gboolean wireless_security_hotspot_compatible (WirelessSecurity *sec);
+void wireless_security_set_username (WirelessSecurity *sec, const gchar *username);
 
 const gchar *wireless_security_get_username (WirelessSecurity *sec);
 
+void wireless_security_set_password (WirelessSecurity *sec, const gchar *password);
+
 const gchar *wireless_security_get_password (WirelessSecurity *sec);
+
+void wireless_security_set_always_ask (WirelessSecurity *sec, gboolean always_ask);
 
 gboolean wireless_security_get_always_ask (WirelessSecurity *sec);
 
+void wireless_security_set_show_password (WirelessSecurity *sec, gboolean show_password);
+
 gboolean wireless_security_get_show_password (WirelessSecurity *sec);
-
-void wireless_security_set_userpass (WirelessSecurity *sec,
-                                     const char *user,
-                                     const char *password,
-                                     gboolean always_ask,
-                                     gboolean show_password);
-void wireless_security_set_userpass_802_1x (WirelessSecurity *sec,
-                                            NMConnection *connection);
-
-WirelessSecurity *wireless_security_ref (WirelessSecurity *sec);
-
-void wireless_security_unref (WirelessSecurity *sec);
-
-GType wireless_security_get_type (void);
-
-/* Below for internal use only */
-
-WirelessSecurity *wireless_security_init (gsize obj_size,
-                                          WSGetWidgetFunc get_widget,
-                                          WSValidateFunc validate,
-                                          WSAddToSizeGroupFunc add_to_size_group,
-                                          WSFillConnectionFunc fill_connection,
-                                          WSDestroyFunc destroy,
-                                          const char *ui_resource);
 
 void wireless_security_notify_changed (WirelessSecurity *sec);
 
-void wireless_security_clear_ciphers (NMConnection *connection);
-
-#define AUTH_NAME_COLUMN   0
-#define AUTH_METHOD_COLUMN 1
-
-void ws_802_1x_auth_combo_init (WirelessSecurity *sec,
-                                GtkComboBox *combo,
-                                GtkLabel *label,
-                                GCallback auth_combo_changed_cb,
-                                NMConnection *connection,
-                                gboolean is_editor,
-                                gboolean secrets_only);
-
-void ws_802_1x_auth_combo_changed (GtkWidget *combo,
-                                   WirelessSecurity *sec,
-                                   GtkBox *vbox,
-                                   GtkSizeGroup *size_group);
-
-gboolean ws_802_1x_validate (GtkComboBox *combo, GError **error);
-
-void ws_802_1x_add_to_size_group (GtkSizeGroup *size_group,
-                                  GtkLabel *label,
-                                  GtkComboBox *combo);
-
-void ws_802_1x_fill_connection (GtkComboBox *combo,
-                                NMConnection *connection);
-
-void ws_802_1x_update_secrets (GtkComboBox *combo,
-                               NMConnection *connection);
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (WirelessSecurity, wireless_security_unref)
-
-#endif /* WIRELESS_SECURITY_H */
-
+G_END_DECLS
