@@ -233,6 +233,7 @@ editor_done (NetConnectionEditor *editor,
 {
         g_object_unref (editor);
         device_ethernet_refresh_ui (device);
+        g_object_unref (device);
 }
 
 static void
@@ -255,7 +256,7 @@ show_details (GtkButton *button, NetDeviceEthernet *device, const gchar *title)
         editor = net_connection_editor_new (GTK_WINDOW (window), connection, nmdev, NULL, client);
         if (title)
                 net_connection_editor_set_title (editor, title);
-        g_signal_connect (editor, "done", G_CALLBACK (editor_done), device);
+        g_signal_connect (editor, "done", G_CALLBACK (editor_done), g_object_ref (device));
         net_connection_editor_run (editor);
 }
 
@@ -455,7 +456,7 @@ add_profile (GtkButton *button, NetDeviceEthernet *device)
 
         nmdev = net_device_get_nm_device (NET_DEVICE (device));
         editor = net_connection_editor_new (GTK_WINDOW (window), connection, nmdev, NULL, client);
-        g_signal_connect (editor, "done", G_CALLBACK (editor_done), device);
+        g_signal_connect (editor, "done", G_CALLBACK (editor_done), g_object_ref (device));
         net_connection_editor_run (editor);
 }
 
