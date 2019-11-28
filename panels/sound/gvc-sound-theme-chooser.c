@@ -632,11 +632,11 @@ update_theme (GvcSoundThemeChooser *chooser)
                         load_theme_name (DEFAULT_THEME,
                                          &chooser->current_parent);
                 }
+
+                update_alerts_from_theme_name (chooser, chooser->current_theme);
         }
 
         gtk_widget_set_sensitive (chooser->selection_box, events_enabled);
-
-        update_alerts_from_theme_name (chooser, chooser->current_theme);
 }
 
 static GObject *
