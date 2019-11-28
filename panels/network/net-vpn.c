@@ -146,7 +146,6 @@ static void
 editor_done (NetVpn *self)
 {
         nm_device_refresh_vpn_ui (self);
-        g_object_unref (self);
 }
 
 static void
@@ -164,7 +163,7 @@ edit_connection (NetVpn *self)
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (self->connection));
         net_connection_editor_set_title (editor, title);
 
-        g_signal_connect_swapped (editor, "done", G_CALLBACK (editor_done), g_object_ref (self));
+        g_signal_connect_object (editor, "done", G_CALLBACK (editor_done), self, G_CONNECT_SWAPPED);
         net_connection_editor_run (editor);
 }
 
