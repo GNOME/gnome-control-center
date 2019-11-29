@@ -1286,6 +1286,9 @@ on_control_input_removed (GvcMixerControl *control,
         if (found) {
                 gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
         }
+
+        if (gtk_tree_model_iter_n_children (model, NULL) == 0)
+                gtk_widget_set_sensitive (dialog->input_bar, FALSE);
 }
 
 static void
