@@ -411,16 +411,16 @@ cheese_camera_device_monitor_new_cb (GObject *source,
 }
 #endif /* HAVE_CHEESE */
 
-static GSList *
+static GStrv
 get_settings_facesdirs (void)
 {
-        GSList *facesdirs = NULL;
-        int i;
-
-        GSettingsSchemaSource *source = g_settings_schema_source_get_default ();
         g_autoptr(GSettingsSchema) schema = NULL;
         g_autoptr(GSettings) settings = NULL;
         g_auto(GStrv) settings_dirs = NULL;
+        g_autoptr(GPtrArray) facesdirs = NULL;
+        GSettingsSchemaSource *source = g_settings_schema_source_get_default ();
+
+        facesdirs = g_ptr_array_new ();
 
         if (source) {
                 schema = g_settings_schema_source_lookup (source,
@@ -434,46 +434,49 @@ get_settings_facesdirs (void)
                 settings_dirs = g_settings_get_strv (settings, "facesdirs");
 
                 if (settings_dirs != NULL) {
+                        int i;
                         for (i = 0; settings_dirs[i] != NULL; i++) {
                                 char *path = settings_dirs[i];
                                 if (path != NULL && g_strcmp0 (path, "") != 0)
-                                        facesdirs = g_slist_prepend (facesdirs, g_strdup (path));
+                                        g_ptr_array_add (facesdirs, g_strdup (path));
                         }
                 }
         }
 
-        return g_slist_reverse (facesdirs);
+        return (GStrv) g_steal_pointer (&facesdirs->pdata);
 }
 
-static GSList *
+static GStrv
 get_system_facesdirs (void)
 {
-        GSList *facesdirs = NULL;
+        g_autoptr(GPtrArray) facesdirs = NULL;
         const char * const * data_dirs;
         int i;
+
+        facesdirs = g_ptr_array_new ();
 
         data_dirs = g_get_system_data_dirs ();
         for (i = 0; data_dirs[i] != NULL; i++) {
                 char *path = g_build_filename (data_dirs[i], "pixmaps", "faces", NULL);
-                facesdirs = g_slist_prepend (facesdirs, path);
+                g_ptr_array_add (facesdirs, path);
         }
 
-        return g_slist_reverse (facesdirs);
+        return (GStrv) g_steal_pointer (&facesdirs->pdata);
 }
 
 static gboolean
-add_faces_from_dirs (GListStore *faces, GSList *facesdirs, gboolean add_all)
+add_faces_from_dirs (GListStore *faces, GStrv facesdirs, gboolean add_all)
 {
-        GSList *facesdir_it;
         gboolean added_faces = FALSE;
         const gchar *target;
+        int i;
         GFileType type;
 
-        for (facesdir_it = facesdirs; facesdir_it; facesdir_it = facesdir_it->next) {
+        for (i = 0; facesdirs[i] != NULL; i++) {
                 g_autoptr(GFileEnumerator) enumerator = NULL;
                 g_autoptr(GFile) dir = NULL;
+                const char *path = facesdirs[i];
                 gpointer infoptr;
-                const char *path = facesdir_it->data;
 
                 dir = g_file_new_for_path (path);
                 enumerator = g_file_enumerate_children (dir,
@@ -515,7 +518,7 @@ add_faces_from_dirs (GListStore *faces, GSList *facesdirs, gboolean add_all)
 static void
 setup_photo_popup (CcAvatarChooser *self)
 {
-        GSList *facesdirs;
+        g_auto(GStrv) facesdirs;
         gboolean added_faces = FALSE;
 
         self->faces = g_list_store_new (G_TYPE_FILE);
@@ -530,12 +533,10 @@ setup_photo_popup (CcAvatarChooser *self)
 
         facesdirs = get_settings_facesdirs ();
         added_faces = add_faces_from_dirs (self->faces, facesdirs, TRUE);
-        g_slist_free_full (facesdirs, g_free);
 
         if (!added_faces) {
                 facesdirs = get_system_facesdirs ();
                 add_faces_from_dirs (self->faces, facesdirs, FALSE);
-                g_slist_free_full (facesdirs, g_free);
         }
 
 #ifdef HAVE_CHEESE
