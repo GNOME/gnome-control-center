@@ -1151,6 +1151,8 @@ add_input_ui_entry (GvcMixerDialog *dialog,
                             ICON_COLUMN, icon,
                             ID_COLUMN, gvc_mixer_ui_device_get_id (input),
                             -1);
+        if (gtk_tree_model_iter_n_children (model, NULL) == 1)
+                active_input_update (dialog, input);
 }
 
 static void
