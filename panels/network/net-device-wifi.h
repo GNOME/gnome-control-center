@@ -42,5 +42,7 @@ GtkWidget     *net_device_wifi_get_header_widget (NetDeviceWifi *device);
 
 GtkWidget     *net_device_wifi_get_title_widget  (NetDeviceWifi *device);
 
+void           net_device_wifi_turn_off_hotspot  (NetDeviceWifi *self);
+
 G_END_DECLS
 
