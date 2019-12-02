@@ -26,10 +26,7 @@
 #include "wireless-security.h"
 #include "wireless-security-resources.h"
 
-typedef struct {
-} WirelessSecurityPrivate;
-
-G_DEFINE_TYPE_WITH_PRIVATE (WirelessSecurity, wireless_security, G_TYPE_OBJECT)
+G_DEFINE_INTERFACE (WirelessSecurity, wireless_security, G_TYPE_OBJECT)
 
 enum {
         CHANGED,
@@ -38,20 +35,14 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-void
-wireless_security_init (WirelessSecurity *self)
+static void
+wireless_security_default_init (WirelessSecurityInterface *iface)
 {
 	g_resources_register (wireless_security_get_resource ());
-}
-
-void
-wireless_security_class_init (WirelessSecurityClass *klass)
-{
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         signals[CHANGED] =
                 g_signal_new ("changed",
-                              G_TYPE_FROM_CLASS (object_class),
+                              G_TYPE_FROM_INTERFACE (iface),
                               G_SIGNAL_RUN_FIRST,
                               0,
                               NULL, NULL,
@@ -64,7 +55,7 @@ wireless_security_get_widget (WirelessSecurity *self)
 {
 	g_return_val_if_fail (WIRELESS_IS_SECURITY (self), NULL);
 
-	return WIRELESS_SECURITY_GET_CLASS (self)->get_widget (self);
+	return WIRELESS_SECURITY_GET_IFACE (self)->get_widget (self);
 }
 
 void
@@ -83,7 +74,7 @@ wireless_security_validate (WirelessSecurity *self, GError **error)
 	g_return_val_if_fail (WIRELESS_IS_SECURITY (self), FALSE);
 	g_return_val_if_fail (!error || !*error, FALSE);
 
-	result = WIRELESS_SECURITY_GET_CLASS (self)->validate (self, error);
+	result = WIRELESS_SECURITY_GET_IFACE (self)->validate (self, error);
 	if (!result && error && !*error)
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("Unknown error validating 802.1X security"));
 	return result;
@@ -95,7 +86,7 @@ wireless_security_add_to_size_group (WirelessSecurity *self, GtkSizeGroup *group
 	g_return_if_fail (WIRELESS_IS_SECURITY (self));
 	g_return_if_fail (GTK_IS_SIZE_GROUP (group));
 
-	return WIRELESS_SECURITY_GET_CLASS (self)->add_to_size_group (self, group);
+	return WIRELESS_SECURITY_GET_IFACE (self)->add_to_size_group (self, group);
 }
 
 void
@@ -105,14 +96,14 @@ wireless_security_fill_connection (WirelessSecurity *self,
 	g_return_if_fail (WIRELESS_IS_SECURITY (self));
 	g_return_if_fail (connection != NULL);
 
-	return WIRELESS_SECURITY_GET_CLASS (self)->fill_connection (self, connection);
+	return WIRELESS_SECURITY_GET_IFACE (self)->fill_connection (self, connection);
 }
 
 gboolean
 wireless_security_adhoc_compatible (WirelessSecurity *self)
 {
-	if (WIRELESS_SECURITY_GET_CLASS (self)->adhoc_compatible)
-		return WIRELESS_SECURITY_GET_CLASS (self)->adhoc_compatible (self);
+	if (WIRELESS_SECURITY_GET_IFACE (self)->adhoc_compatible)
+		return WIRELESS_SECURITY_GET_IFACE (self)->adhoc_compatible (self);
 	else
 		return TRUE;
 }

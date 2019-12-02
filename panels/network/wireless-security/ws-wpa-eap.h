@@ -24,11 +24,9 @@
 
 #include <NetworkManager.h>
 
-#include "wireless-security.h"
-
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (WirelessSecurityWPAEAP, ws_wpa_eap, WS, WPA_EAP, WirelessSecurity)
+G_DECLARE_FINAL_TYPE (WirelessSecurityWPAEAP, ws_wpa_eap, WS, WPA_EAP, GObject)
 
 WirelessSecurityWPAEAP *ws_wpa_eap_new             (NMConnection *connection,
                                                     gboolean is_editor,
