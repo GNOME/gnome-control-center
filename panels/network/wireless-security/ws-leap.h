@@ -24,11 +24,9 @@
 
 #include <NetworkManager.h>
 
-#include "wireless-security.h"
-
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (WirelessSecurityLEAP, ws_leap, WS, LEAP, WirelessSecurity)
+G_DECLARE_FINAL_TYPE (WirelessSecurityLEAP, ws_leap, WS, LEAP, GObject)
 
 WirelessSecurityLEAP * ws_leap_new (NMConnection *connection, gboolean secrets_only);
 

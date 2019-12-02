@@ -29,7 +29,7 @@
 #include "ws-leap.h"
 
 struct _WirelessSecurityLEAP {
-	WirelessSecurity parent;
+	GObject parent;
 
 	GtkBuilder     *builder;
 	GtkGrid        *grid;
@@ -43,7 +43,10 @@ struct _WirelessSecurityLEAP {
 	const char *password_flags_name;
 };
 
-G_DEFINE_TYPE (WirelessSecurityLEAP, ws_leap, wireless_security_get_type ())
+static void wireless_security_iface_init (WirelessSecurityInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (WirelessSecurityLEAP, ws_leap, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (wireless_security_get_type (), wireless_security_iface_init));
 
 static void
 ws_leap_dispose (GObject *object)
@@ -161,14 +164,18 @@ void
 ws_leap_class_init (WirelessSecurityLEAPClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	WirelessSecurityClass *ws_class = WIRELESS_SECURITY_CLASS (klass);
 
 	object_class->dispose = ws_leap_dispose;
-	ws_class->get_widget = get_widget;
-	ws_class->validate = validate;
-	ws_class->add_to_size_group = add_to_size_group;
-	ws_class->fill_connection = fill_connection;
-	ws_class->adhoc_compatible = adhoc_compatible;
+}
+
+static void
+wireless_security_iface_init (WirelessSecurityInterface *iface)
+{
+	iface->get_widget = get_widget;
+	iface->validate = validate;
+	iface->add_to_size_group = add_to_size_group;
+	iface->fill_connection = fill_connection;
+	iface->adhoc_compatible = adhoc_compatible;
 }
 
 WirelessSecurityLEAP *

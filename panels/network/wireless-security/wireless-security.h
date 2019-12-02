@@ -27,10 +27,10 @@
 
 G_BEGIN_DECLS
 
-G_DECLARE_DERIVABLE_TYPE (WirelessSecurity, wireless_security, WIRELESS, SECURITY, GObject)
+G_DECLARE_INTERFACE (WirelessSecurity, wireless_security, WIRELESS, SECURITY, GObject)
 
-struct _WirelessSecurityClass {
-	GObjectClass parent_class;
+struct _WirelessSecurityInterface {
+	GTypeInterface g_iface;
 
 	void       (*add_to_size_group) (WirelessSecurity *sec, GtkSizeGroup *group);
 	void       (*fill_connection)   (WirelessSecurity *sec, NMConnection *connection);

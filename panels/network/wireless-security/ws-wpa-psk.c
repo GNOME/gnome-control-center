@@ -32,7 +32,7 @@
 #define WPA_PMK_LEN 32
 
 struct _WirelessSecurityWPAPSK {
-	WirelessSecurity parent;
+	GObject parent;
 
 	GtkBuilder     *builder;
 	GtkGrid        *grid;
@@ -46,7 +46,10 @@ struct _WirelessSecurityWPAPSK {
 	const char *password_flags_name;
 };
 
-G_DEFINE_TYPE (WirelessSecurityWPAPSK, ws_wpa_psk, wireless_security_get_type ())
+static void wireless_security_iface_init (WirelessSecurityInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (WirelessSecurityWPAPSK, ws_wpa_psk, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (wireless_security_get_type (), wireless_security_iface_init));
 
 static void
 ws_wpa_psk_dispose (GObject *object)
@@ -191,14 +194,18 @@ void
 ws_wpa_psk_class_init (WirelessSecurityWPAPSKClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	WirelessSecurityClass *ws_class = WIRELESS_SECURITY_CLASS (klass);
 
 	object_class->dispose = ws_wpa_psk_dispose;
-	ws_class->get_widget = get_widget;
-	ws_class->validate = validate;
-	ws_class->add_to_size_group = add_to_size_group;
-	ws_class->fill_connection = fill_connection;
-	ws_class->adhoc_compatible = adhoc_compatible;
+}
+
+static void
+wireless_security_iface_init (WirelessSecurityInterface *iface)
+{
+	iface->get_widget = get_widget;
+	iface->validate = validate;
+	iface->add_to_size_group = add_to_size_group;
+	iface->fill_connection = fill_connection;
+	iface->adhoc_compatible = adhoc_compatible;
 }
 
 WirelessSecurityWPAPSK *

@@ -24,11 +24,9 @@
 
 #include <NetworkManager.h>
 
-#include "wireless-security.h"
-
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (WirelessSecurityWPAPSK, ws_wpa_psk, WS, WPA_PSK, WirelessSecurity)
+G_DECLARE_FINAL_TYPE (WirelessSecurityWPAPSK, ws_wpa_psk, WS, WPA_PSK, GObject)
 
 WirelessSecurityWPAPSK * ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only);
 
