@@ -51,22 +51,6 @@ void wireless_security_fill_connection (WirelessSecurity *sec,
 
 gboolean wireless_security_adhoc_compatible (WirelessSecurity *sec);
 
-void wireless_security_set_username (WirelessSecurity *sec, const gchar *username);
-
-const gchar *wireless_security_get_username (WirelessSecurity *sec);
-
-void wireless_security_set_password (WirelessSecurity *sec, const gchar *password);
-
-const gchar *wireless_security_get_password (WirelessSecurity *sec);
-
-void wireless_security_set_always_ask (WirelessSecurity *sec, gboolean always_ask);
-
-gboolean wireless_security_get_always_ask (WirelessSecurity *sec);
-
-void wireless_security_set_show_password (WirelessSecurity *sec, gboolean show_password);
-
-gboolean wireless_security_get_show_password (WirelessSecurity *sec);
-
 void wireless_security_notify_changed (WirelessSecurity *sec);
 
 G_END_DECLS
