@@ -24,11 +24,9 @@
 
 #include <NetworkManager.h>
 
-#include "wireless-security.h"
-
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (WirelessSecurityWEPKey, ws_wep_key, WS, WEP_KEY, WirelessSecurity)
+G_DECLARE_FINAL_TYPE (WirelessSecurityWEPKey, ws_wep_key, WS, WEP_KEY, GObject)
 
 WirelessSecurityWEPKey *ws_wep_key_new (NMConnection *connection,
                                         NMWepKeyType type,
