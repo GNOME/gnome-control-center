@@ -213,6 +213,46 @@
                         <property name="can-focus">False</property>
                         <property name="orientation">vertical</property>
 
+                        <child>
+                          <object class="GtkBox" id="hotspot_box">
+                            <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
+
+                            <!-- Hotspot QR code -->
+                            <child>
+                              <object class="GtkImage" id="wifi_qr_image">
+                                <property name="visible">True</property>
+                                <property name="halign">center</property>
+                                <property name="width-request">180</property>
+                                <property name="height-request">180</property>
+                                <style>
+                                  <class name="frame"/>
+                                </style>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="margin-top">12</property>
+                                <property name="label" translatable="yes">Wi-Fi Hotspot Active</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold" />
+                                  <attribute name="scale" value="1.8" />
+                                </attributes>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">Mobile devices can scan the QR code to connect.</property>
+                              </object>
+                            </child>
+
+                          </object>
+                        </child>
+
                         <!-- Visible Networks label & spinner -->
                         <child>
                           <object class="GtkBox">
@@ -222,7 +262,7 @@
                             <property name="spacing">6</property>
                             <property name="margin_bottom">12</property>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkLabel" id="list_label">
                                 <property name="visible">True</property>
                                 <property name="label" translatable="yes">Visible Networks</property>
                                 <property name="xalign">0.0</property>
@@ -259,6 +299,7 @@
                             </child>
                           </object>
                         </child>
+
                       </object>
                       <packing>
                         <property name="name">wifi-connections</property>
