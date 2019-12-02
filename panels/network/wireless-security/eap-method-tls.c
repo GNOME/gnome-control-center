@@ -47,12 +47,26 @@ struct _EAPMethodTLS {
 	gboolean phase2;
 	const gchar *password_flags_name;
 	gboolean editing_connection;
+	gchar *username;
+	gchar *password;
+	gboolean show_password;
 };
 
 static void eap_method_iface_init (EAPMethodInterface *);
 
 G_DEFINE_TYPE_WITH_CODE (EAPMethodTLS, eap_method_tls, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (eap_method_get_type (), eap_method_iface_init))
+
+static void
+eap_method_tls_dispose (GObject *object)
+{
+	EAPMethodTLS *self = EAP_METHOD_TLS (object);
+
+	g_clear_pointer (&self->username, g_free);
+	g_clear_pointer (&self->password, g_free);
+
+	G_OBJECT_CLASS (eap_method_tls_parent_class)->dispose (object);
+}
 
 static void
 show_toggled_cb (EAPMethodTLS *self)
@@ -417,16 +431,65 @@ get_phase2 (EAPMethod *method)
 	return self->phase2;
 }
 
+static const gchar *
+get_username (EAPMethod *method)
+{
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
+	return self->username;
+}
+
+static void
+set_username (EAPMethod *method, const gchar *username)
+{
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
+	g_free (self->username);
+	self->username = g_strdup (username);
+}
+
+static const gchar *
+get_password (EAPMethod *method)
+{
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
+	return self->password;
+}
+
+static void
+set_password (EAPMethod *method, const gchar *password)
+{
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
+	g_free (self->password);
+	self->password = g_strdup (password);
+}
+
+static const gboolean
+get_show_password (EAPMethod *method)
+{
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
+	return self->show_password;
+}
+
+static void
+set_show_password (EAPMethod *method, gboolean show_password)
+{
+	EAPMethodTLS *self = EAP_METHOD_TLS (method);
+	self->show_password = show_password;
+}
+
 static void
 eap_method_tls_init (EAPMethodTLS *self)
 {
 	gtk_widget_init_template (GTK_WIDGET (self));
+	self->username = g_strdup ("");
+	self->password = g_strdup ("");
 }
 
 static void
 eap_method_tls_class_init (EAPMethodTLSClass *klass)
 {
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+	object_class->dispose = eap_method_tls_dispose;
 
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/eap-method-tls.ui");
 
@@ -454,6 +517,12 @@ eap_method_iface_init (EAPMethodInterface *iface)
 	iface->get_default_field = get_default_field;
 	iface->get_password_flags_name = get_password_flags_name;
 	iface->get_phase2 = get_phase2;
+	iface->get_username = get_username;
+	iface->set_username = set_username;
+	iface->get_password = get_password;
+	iface->set_password = set_password;
+	iface->get_show_password = get_show_password;
+	iface->set_show_password = set_show_password;
 }
 
 EAPMethodTLS *

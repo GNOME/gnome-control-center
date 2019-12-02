@@ -176,18 +176,22 @@ static void
 auth_combo_changed_cb (WirelessSecurityWPAEAP *self)
 {
 	EAPMethod *eap;
-	GList *elt, *children;
+	GList *children;
 	GtkWidget *eap_default_field;
 
-	/* Remove any previous wireless security widgets */
-	children = gtk_container_get_children (GTK_CONTAINER (self->method_box));
-	for (elt = children; elt; elt = g_list_next (elt))
-		gtk_container_remove (GTK_CONTAINER (self->method_box), GTK_WIDGET (elt->data));
-
 	eap = get_eap (self);
-	gtk_container_add (GTK_CONTAINER (self->method_box), g_object_ref (GTK_WIDGET (eap)));
 
-	/* Refocus the EAP method's default widget */
+	/* Remove the previous method and migrate username/password across */
+	children = gtk_container_get_children (GTK_CONTAINER (self->method_box));
+	if (children != NULL) {
+		EAPMethod *old_eap = g_list_nth_data (children, 0);
+		eap_method_set_username (eap, eap_method_get_username (old_eap));
+		eap_method_set_password (eap, eap_method_get_password (old_eap));
+		eap_method_set_show_password (eap, eap_method_get_show_password (old_eap));
+		gtk_container_remove (GTK_CONTAINER (self->method_box), GTK_WIDGET (old_eap));
+	}
+
+	gtk_container_add (GTK_CONTAINER (self->method_box), g_object_ref (GTK_WIDGET (eap)));
 	eap_default_field = eap_method_get_default_field (eap);
 	if (eap_default_field)
 		gtk_widget_grab_focus (eap_default_field);
@@ -220,8 +224,6 @@ ws_wpa_eap_new (NMConnection *connection,
                 gboolean secrets_only)
 {
 	WirelessSecurityWPAEAP *self;
-	const gchar *user = NULL, *password = NULL;
-	gboolean always_ask = FALSE;
 	const gchar *remove_method, *default_method = NULL;
 	gboolean wired = FALSE;
 	EAPMethodSimpleFlags simple_flags = EAP_METHOD_SIMPLE_FLAG_NONE;
@@ -270,50 +272,30 @@ ws_wpa_eap_new (NMConnection *connection,
 			default_method = "tls";
 	}
 
-	/* initialize WirelessSecurity userpass from connection (clear if no connection) */
-	if (connection) {
-		NMSetting8021x *setting;
-
-		setting = nm_connection_get_setting_802_1x (connection);
-		if (setting) {
-			NMSettingSecretFlags flags;
-
-			user = nm_setting_802_1x_get_identity (setting);
-			password = nm_setting_802_1x_get_password (setting);
-
-			if (nm_setting_get_secret_flags (NM_SETTING (setting), NM_SETTING_802_1X_PASSWORD, &flags, NULL))
-				always_ask = !!(flags & NM_SETTING_SECRET_FLAG_NOT_SAVED);
-		}
-	}
-	wireless_security_set_username (WIRELESS_SECURITY (self), user);
-	wireless_security_set_password (WIRELESS_SECURITY (self), password);
-	wireless_security_set_always_ask (WIRELESS_SECURITY (self), always_ask);
-	wireless_security_set_show_password (WIRELESS_SECURITY (self), FALSE);
-
 	if (is_editor)
 		simple_flags |= EAP_METHOD_SIMPLE_FLAG_IS_EDITOR;
 	if (secrets_only)
 		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
 
-	self->em_md5 = eap_method_simple_new (WIRELESS_SECURITY (self), connection, EAP_METHOD_SIMPLE_TYPE_MD5, simple_flags);
+	self->em_md5 = eap_method_simple_new (connection, EAP_METHOD_SIMPLE_TYPE_MD5, simple_flags);
 	gtk_widget_show (GTK_WIDGET (self->em_md5));
 	g_signal_connect_object (self->em_md5, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 	self->em_tls = eap_method_tls_new (connection, FALSE, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_tls));
 	g_signal_connect_object (self->em_tls, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_leap = eap_method_leap_new (WIRELESS_SECURITY (self), connection, secrets_only);
+	self->em_leap = eap_method_leap_new (connection, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_leap));
 	g_signal_connect_object (self->em_leap, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_pwd = eap_method_simple_new (WIRELESS_SECURITY (self), connection, EAP_METHOD_SIMPLE_TYPE_PWD, simple_flags);
+	self->em_pwd = eap_method_simple_new (connection, EAP_METHOD_SIMPLE_TYPE_PWD, simple_flags);
 	gtk_widget_show (GTK_WIDGET (self->em_pwd));
 	g_signal_connect_object (self->em_pwd, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_fast = eap_method_fast_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
+	self->em_fast = eap_method_fast_new (connection, is_editor, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_fast));
 	g_signal_connect_object (self->em_fast, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_ttls = eap_method_ttls_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
+	self->em_ttls = eap_method_ttls_new (connection, is_editor, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_ttls));
 	g_signal_connect_object (self->em_ttls, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_peap = eap_method_peap_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
+	self->em_peap = eap_method_peap_new (connection, is_editor, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_peap));
 	g_signal_connect_object (self->em_peap, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 
@@ -339,6 +321,17 @@ ws_wpa_eap_new (NMConnection *connection,
 	if (secrets_only) {
 		gtk_widget_hide (GTK_WIDGET (self->auth_combo));
 		gtk_widget_hide (GTK_WIDGET (self->auth_label));
+	}
+
+
+	if (connection) {
+		NMSetting8021x *setting;
+
+		setting = nm_connection_get_setting_802_1x (connection);
+		if (setting) {
+			eap_method_set_username (get_eap (self), nm_setting_802_1x_get_identity (setting));
+			eap_method_set_password (get_eap (self), nm_setting_802_1x_get_password (setting));
+		}
 	}
 
 	g_signal_connect_object (G_OBJECT (self->auth_combo), "changed", G_CALLBACK (auth_combo_changed_cb), self, G_CONNECT_SWAPPED);

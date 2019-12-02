@@ -25,8 +25,6 @@
 #include <gtk/gtk.h>
 #include <NetworkManager.h>
 
-#include "wireless-security.h"
-
 G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (EAPMethodSimple, eap_method_simple, EAP, METHOD_SIMPLE, GtkGrid)
@@ -58,8 +56,7 @@ typedef enum {
 	EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY    = 0x08
 } EAPMethodSimpleFlags;
 
-EAPMethodSimple *eap_method_simple_new (WirelessSecurity *ws_parent,
-                                        NMConnection *connection,
+EAPMethodSimple *eap_method_simple_new (NMConnection *connection,
                                         EAPMethodSimpleType type,
                                         EAPMethodSimpleFlags flags);
 
