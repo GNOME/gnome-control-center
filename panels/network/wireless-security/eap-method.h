@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-G_DECLARE_INTERFACE (EAPMethod, eap_method, EAP, METHOD, GtkGrid)
+G_DECLARE_INTERFACE (EAPMethod, eap_method, EAP, METHOD, GObject)
 
 struct _EAPMethodInterface {
 	GTypeInterface g_iface;
