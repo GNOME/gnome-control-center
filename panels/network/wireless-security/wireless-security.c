@@ -26,9 +26,7 @@
 #include "wireless-security.h"
 #include "wireless-security-resources.h"
 
-typedef struct  {
-	char *username, *password;
-	gboolean always_ask, show_password;
+typedef struct {
 } WirelessSecurityPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (WirelessSecurity, wireless_security, G_TYPE_OBJECT)
@@ -40,21 +38,6 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-static void
-wireless_security_dispose (GObject *object)
-{
-	WirelessSecurity *self = WIRELESS_SECURITY (object);
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
-	if (priv->password)
-		memset (priv->password, 0, strlen (priv->password));
-
-	g_clear_pointer (&priv->username, g_free);
-	g_clear_pointer (&priv->password, g_free);
-
-	G_OBJECT_CLASS (wireless_security_parent_class)->dispose (object);
-}
-
 void
 wireless_security_init (WirelessSecurity *self)
 {
@@ -65,8 +48,6 @@ void
 wireless_security_class_init (WirelessSecurityClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-	object_class->dispose = wireless_security_dispose;
 
         signals[CHANGED] =
                 g_signal_new ("changed",
@@ -134,89 +115,4 @@ wireless_security_adhoc_compatible (WirelessSecurity *self)
 		return WIRELESS_SECURITY_GET_CLASS (self)->adhoc_compatible (self);
 	else
 		return TRUE;
-}
-
-void
-wireless_security_set_username (WirelessSecurity *self, const gchar *username)
-{
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
-	g_return_if_fail (WIRELESS_IS_SECURITY (self));
-
-	g_clear_pointer (&priv->username, g_free);
-	priv->username = g_strdup (username);
-}
-
-const gchar *
-wireless_security_get_username (WirelessSecurity *self)
-{
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
-	g_return_val_if_fail (WIRELESS_IS_SECURITY (self), NULL);
-
-	return priv->username;
-}
-
-void
-wireless_security_set_password (WirelessSecurity *self, const gchar *password)
-{
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
-	g_return_if_fail (WIRELESS_IS_SECURITY (self));
-
-	if (priv->password)
-		memset (priv->password, 0, strlen (priv->password));
-
-	g_clear_pointer (&priv->password, g_free);
-	priv->password = g_strdup (password);
-}
-
-const gchar *
-wireless_security_get_password (WirelessSecurity *self)
-{
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
-	g_return_val_if_fail (WIRELESS_IS_SECURITY (self), NULL);
-
-	return priv->password;
-}
-
-void
-wireless_security_set_always_ask (WirelessSecurity *self, gboolean always_ask)
-{
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
-	g_return_if_fail (WIRELESS_IS_SECURITY (self));
-
-	priv->always_ask = always_ask;
-}
-
-gboolean
-wireless_security_get_always_ask (WirelessSecurity *self)
-{
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
-	g_return_val_if_fail (WIRELESS_IS_SECURITY (self), FALSE);
-
-	return priv->always_ask;
-}
-
-void
-wireless_security_set_show_password (WirelessSecurity *self, gboolean show_password)
-{
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
-	g_return_if_fail (WIRELESS_IS_SECURITY (self));
-
-	priv->show_password = show_password;
-}
-
-gboolean
-wireless_security_get_show_password (WirelessSecurity *self)
-{
-	WirelessSecurityPrivate *priv = wireless_security_get_instance_private (self);
-
-	g_return_val_if_fail (WIRELESS_IS_SECURITY (self), FALSE);
-
-	return priv->show_password;
 }

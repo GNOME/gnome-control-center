@@ -39,6 +39,12 @@ struct _EAPMethodInterface {
 	GtkWidget*   (*get_default_field)       (EAPMethod *method);
 	const gchar* (*get_password_flags_name) (EAPMethod *method);
 	gboolean     (*get_phase2)              (EAPMethod *method);
+	const gchar* (*get_username)            (EAPMethod *method);
+	void         (*set_username)            (EAPMethod *method, const gchar *username);
+	const gchar* (*get_password)            (EAPMethod *method);
+	void         (*set_password)            (EAPMethod *method, const gchar *password);
+	gboolean     (*get_show_password)       (EAPMethod *method);
+	void         (*set_show_password)       (EAPMethod *method, gboolean show_password);
 };
 
 GtkWidget *eap_method_get_default_field (EAPMethod *method);
@@ -58,6 +64,18 @@ void eap_method_fill_connection (EAPMethod *method,
                                  NMSettingSecretFlags flags);
 
 void eap_method_emit_changed (EAPMethod *method);
+
+const gchar *eap_method_get_username (EAPMethod *method);
+
+void eap_method_set_username (EAPMethod *method, const gchar *username);
+
+const gchar *eap_method_get_password (EAPMethod *method);
+
+void eap_method_set_password (EAPMethod *method, const gchar *password);
+
+gboolean eap_method_get_show_password (EAPMethod *method);
+
+void eap_method_set_show_password (EAPMethod *method, gboolean show_password);
 
 /* Below for internal use only */
 

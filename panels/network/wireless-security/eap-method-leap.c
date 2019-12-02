@@ -27,7 +27,6 @@
 #include "helpers.h"
 #include "nma-ui-utils.h"
 #include "ui-helpers.h"
-#include "wireless-security.h"
 
 struct _EAPMethodLEAP {
 	GtkGrid parent;
@@ -37,8 +36,6 @@ struct _EAPMethodLEAP {
 	GtkCheckButton *show_password_check;
 	GtkEntry       *username_entry;
 	GtkLabel       *username_label;
-
-	WirelessSecurity *ws_parent;
 
 	gboolean editing_connection;
 };
@@ -141,36 +138,46 @@ get_password_flags_name (EAPMethod *parent)
 	return NM_SETTING_802_1X_PASSWORD;
 }
 
-/* Set the UI fields for user, password and show_password to the
- * values as provided by self->ws_parent. */
-static void
-set_userpass_ui (EAPMethodLEAP *self)
+static const gchar *
+get_username (EAPMethod *method)
 {
-	if (wireless_security_get_username (self->ws_parent))
-		gtk_entry_set_text (self->username_entry, wireless_security_get_username (self->ws_parent));
-	else
-		gtk_entry_set_text (self->username_entry, "");
-
-	if (wireless_security_get_password (self->ws_parent) && !wireless_security_get_always_ask (self->ws_parent))
-		gtk_entry_set_text (self->password_entry, wireless_security_get_password (self->ws_parent));
-	else
-		gtk_entry_set_text (self->password_entry, "");
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->show_password_check), wireless_security_get_show_password (self->ws_parent));
+	EAPMethodLEAP *self = EAP_METHOD_LEAP (method);
+	return gtk_entry_get_text (self->username_entry);
 }
 
 static void
-widgets_realized (EAPMethodLEAP *self)
+set_username (EAPMethod *method, const gchar *username)
 {
-	set_userpass_ui (self);
+	EAPMethodLEAP *self = EAP_METHOD_LEAP (method);
+	gtk_entry_set_text (self->username_entry, username);
+}
+
+static const gchar *
+get_password (EAPMethod *method)
+{
+	EAPMethodLEAP *self = EAP_METHOD_LEAP (method);
+	return gtk_entry_get_text (self->password_entry);
 }
 
 static void
-widgets_unrealized (EAPMethodLEAP *self)
+set_password (EAPMethod *method, const gchar *password)
 {
-	wireless_security_set_username (self->ws_parent, gtk_entry_get_text (self->username_entry));
-	wireless_security_set_password (self->ws_parent, gtk_entry_get_text (self->password_entry));
-	wireless_security_set_show_password (self->ws_parent, gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->show_password_check)));
+	EAPMethodLEAP *self = EAP_METHOD_LEAP (method);
+	gtk_entry_set_text (self->password_entry, password);
+}
+
+static gboolean
+get_show_password (EAPMethod *method)
+{
+	EAPMethodLEAP *self = EAP_METHOD_LEAP (method);
+	return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->show_password_check));
+}
+
+static void
+set_show_password (EAPMethod *method, gboolean show_password)
+{
+	EAPMethodLEAP *self = EAP_METHOD_LEAP (method);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->show_password_check), show_password);
 }
 
 static void
@@ -179,8 +186,6 @@ eap_method_leap_dispose (GObject *object)
 	EAPMethodLEAP *self = EAP_METHOD_LEAP (object);
 
 	g_signal_handlers_disconnect_by_data (self, self);
-	g_signal_handlers_disconnect_by_data (self->username_entry, self->ws_parent);
-	g_signal_handlers_disconnect_by_data (self->password_entry, self->ws_parent);
 	g_signal_handlers_disconnect_by_data (self->show_password_check, self);
 
 	G_OBJECT_CLASS (eap_method_leap_parent_class)->dispose (object);
@@ -224,11 +229,16 @@ eap_method_iface_init (EAPMethodInterface *iface)
 	iface->update_secrets = update_secrets;
 	iface->get_default_field = get_default_field;
 	iface->get_password_flags_name = get_password_flags_name;
+	iface->get_username = get_username;
+	iface->set_username = set_username;
+	iface->get_password = get_password;
+	iface->set_password = set_password;
+	iface->get_show_password = get_show_password;
+	iface->set_show_password = set_show_password;
 }
 
 EAPMethodLEAP *
-eap_method_leap_new (WirelessSecurity *ws_parent,
-                     NMConnection *connection,
+eap_method_leap_new (NMConnection *connection,
                      gboolean secrets_only)
 {
 	EAPMethodLEAP *self;
@@ -236,10 +246,6 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 
 	self = g_object_new (eap_method_leap_get_type (), NULL);
 	self->editing_connection = secrets_only ? FALSE : TRUE;
-	self->ws_parent = ws_parent;
-
-	g_signal_connect_swapped (self, "realize", G_CALLBACK (widgets_realized), self);
-	g_signal_connect_swapped (self, "unrealize", G_CALLBACK (widgets_unrealized), self);
 
 	g_signal_connect_swapped (self->username_entry, "changed", G_CALLBACK (changed_cb), self);
 
@@ -255,14 +261,6 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	                                  FALSE, secrets_only);
 
 	g_signal_connect_swapped (self->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), self);
-
-	/* Initialize the UI fields with the security settings from self->ws_parent.
-	 * This will be done again when the widget gets realized. It must be done here as well,
-	 * because the outer dialog will ask to 'validate' the connection before the security tab
-	 * is shown/realized (to enable the 'Apply' button).
-	 * As 'validate' accesses the contents of the UI fields, they must be initialized now, even
-	 * if the widgets are not yet visible. */
-	set_userpass_ui (self);
 
 	return self;
 }

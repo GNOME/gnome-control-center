@@ -130,6 +130,48 @@ eap_method_emit_changed (EAPMethod *self)
         g_signal_emit (self, signals[CHANGED], 0);
 }
 
+const gchar *
+eap_method_get_username (EAPMethod *self)
+{
+	g_return_val_if_fail (EAP_IS_METHOD (self), NULL);
+	return EAP_METHOD_GET_IFACE (self)->get_username (self);
+}
+
+void
+eap_method_set_username (EAPMethod *self, const gchar *username)
+{
+	g_return_if_fail (EAP_IS_METHOD (self));
+	EAP_METHOD_GET_IFACE (self)->set_username (self, username);
+}
+
+const gchar *
+eap_method_get_password (EAPMethod *self)
+{
+	g_return_val_if_fail (EAP_IS_METHOD (self), NULL);
+	return EAP_METHOD_GET_IFACE (self)->get_password (self);
+}
+
+void
+eap_method_set_password (EAPMethod *self, const gchar *password)
+{
+	g_return_if_fail (EAP_IS_METHOD (self));
+	EAP_METHOD_GET_IFACE (self)->set_password (self, password);
+}
+
+gboolean
+eap_method_get_show_password (EAPMethod *self)
+{
+	g_return_val_if_fail (EAP_IS_METHOD (self), FALSE);
+	return EAP_METHOD_GET_IFACE (self)->get_show_password (self);
+}
+
+void
+eap_method_set_show_password (EAPMethod *self, gboolean show_password)
+{
+	g_return_if_fail (EAP_IS_METHOD (self));
+	EAP_METHOD_GET_IFACE (self)->set_show_password (self, show_password);
+}
+
 gboolean
 eap_method_validate_filepicker (GtkFileChooser *chooser,
                                 guint32 item_type,
