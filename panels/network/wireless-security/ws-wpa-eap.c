@@ -33,13 +33,11 @@
 #include "eap-method-ttls.h"
 
 struct _WirelessSecurityWPAEAP {
-	GObject parent;
+	GtkGrid parent;
 
-	GtkBuilder   *builder;
 	GtkComboBox  *auth_combo;
 	GtkLabel     *auth_label;
 	GtkListStore *auth_model;
-	GtkGrid      *grid;
 	GtkBox       *method_box;
 
 	EAPMethodSimple *em_md5;
@@ -53,7 +51,7 @@ struct _WirelessSecurityWPAEAP {
 
 static void wireless_security_iface_init (WirelessSecurityInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (WirelessSecurityWPAEAP, ws_wpa_eap, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (WirelessSecurityWPAEAP, ws_wpa_eap, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (wireless_security_get_type (), wireless_security_iface_init));
 
 #define AUTH_NAME_COLUMN    0
@@ -85,23 +83,6 @@ get_eap (WirelessSecurityWPAEAP *self)
 		return EAP_METHOD (self->em_peap);
 
 	return NULL;
-}
-
-static void
-ws_wpa_eap_dispose (GObject *object)
-{
-	WirelessSecurityWPAEAP *self = WS_WPA_EAP (object);
-
-	g_clear_object (&self->builder);
-
-	G_OBJECT_CLASS (ws_wpa_eap_parent_class)->dispose (object);
-}
-
-static GtkWidget *
-get_widget (WirelessSecurity *security)
-{
-	WirelessSecurityWPAEAP *self = WS_WPA_EAP (security);
-	return GTK_WIDGET (self->grid);
 }
 
 static gboolean
@@ -205,20 +186,25 @@ auth_combo_changed_cb (WirelessSecurityWPAEAP *self)
 void
 ws_wpa_eap_init (WirelessSecurityWPAEAP *self)
 {
+	gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 void
 ws_wpa_eap_class_init (WirelessSecurityWPAEAPClass *klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-	object_class->dispose = ws_wpa_eap_dispose;
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/ws-wpa-eap.ui");
+
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWPAEAP, auth_combo);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWPAEAP, auth_label);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWPAEAP, auth_model);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWPAEAP, method_box);
 }
 
 static void
 wireless_security_iface_init (WirelessSecurityInterface *iface)
 {
-	iface->get_widget = get_widget;
 	iface->validate = validate;
 	iface->add_to_size_group = add_to_size_group;
 	iface->fill_connection = fill_connection;
@@ -235,21 +221,8 @@ ws_wpa_eap_new (NMConnection *connection,
 	gboolean wired = FALSE;
 	EAPMethodSimpleFlags simple_flags = EAP_METHOD_SIMPLE_FLAG_NONE;
 	GtkTreeIter iter;
-	g_autoptr(GError) error = NULL;
 
 	self = g_object_new (ws_wpa_eap_get_type (), NULL);
-
-	self->builder = gtk_builder_new ();
-	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/ws-wpa-eap.ui", &error)) {
-		g_warning ("Couldn't load UI builder resource: %s", error->message);
-		return NULL;
-	}
-
-	self->auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "auth_combo"));
-	self->auth_label = GTK_LABEL (gtk_builder_get_object (self->builder, "auth_label"));
-	self->auth_model = GTK_LIST_STORE (gtk_builder_get_object (self->builder, "auth_model"));
-	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
-	self->method_box = GTK_BOX (gtk_builder_get_object (self->builder, "method_box"));
 
 	/* Grab the default EAP method out of the security object */
 	if (connection) {

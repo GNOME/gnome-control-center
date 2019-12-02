@@ -36,10 +36,7 @@ struct _WirelessSecurityInterface {
 	void       (*fill_connection)   (WirelessSecurity *sec, NMConnection *connection);
 	gboolean   (*validate)          (WirelessSecurity *sec, GError **error);
 	gboolean   (*adhoc_compatible)  (WirelessSecurity *sec);
-	GtkWidget* (*get_widget)        (WirelessSecurity *sec);
 };
-
-GtkWidget *wireless_security_get_widget (WirelessSecurity *sec);
 
 gboolean wireless_security_validate (WirelessSecurity *sec, GError **error);
 

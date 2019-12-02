@@ -160,19 +160,16 @@ security_combo_changed (CEPageSecurity *self)
 
         sec = security_combo_get_active (self);
         if (sec) {
-                GtkWidget *sec_widget;
                 GtkWidget *parent;
 
-                sec_widget = wireless_security_get_widget (sec);
-                g_assert (sec_widget);
-                parent = gtk_widget_get_parent (sec_widget);
+                parent = gtk_widget_get_parent (GTK_WIDGET (sec));
                 if (parent)
-                        gtk_container_remove (GTK_CONTAINER (parent), sec_widget);
+                        gtk_container_remove (GTK_CONTAINER (parent), GTK_WIDGET (sec));
 
                 gtk_size_group_add_widget (self->group, GTK_WIDGET (self->security_label));
                 wireless_security_add_to_size_group (sec, self->group);
 
-                gtk_container_add (GTK_CONTAINER (self->box), sec_widget);
+                gtk_container_add (GTK_CONTAINER (self->box), g_object_ref (GTK_WIDGET (sec)));
         }
 
         ce_page_changed (CE_PAGE (self));

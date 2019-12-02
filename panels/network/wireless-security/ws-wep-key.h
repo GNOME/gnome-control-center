@@ -22,11 +22,12 @@
 
 #pragma once
 
+#include <gtk/gtk.h>
 #include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (WirelessSecurityWEPKey, ws_wep_key, WS, WEP_KEY, GObject)
+G_DECLARE_FINAL_TYPE (WirelessSecurityWEPKey, ws_wep_key, WS, WEP_KEY, GtkGrid)
 
 WirelessSecurityWEPKey *ws_wep_key_new (NMConnection *connection,
                                         NMWepKeyType type,
