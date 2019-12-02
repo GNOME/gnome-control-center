@@ -27,7 +27,6 @@
 #include "helpers.h"
 #include "nma-ui-utils.h"
 #include "ui-helpers.h"
-#include "wireless-security.h"
 
 struct _EAPMethodTLS {
 	GtkGrid parent;
@@ -318,7 +317,6 @@ static void
 setup_filepicker (EAPMethodTLS *self,
                   GtkFileChooserButton *button,
                   const char *title,
-                  WirelessSecurity *ws_parent,
                   NMSetting8021x *s_8021x,
                   SchemeFunc scheme_func,
                   PathFunc path_func,
@@ -459,8 +457,7 @@ eap_method_iface_init (EAPMethodInterface *iface)
 }
 
 EAPMethodTLS *
-eap_method_tls_new (WirelessSecurity *ws_parent,
-                    NMConnection *connection,
+eap_method_tls_new (NMConnection *connection,
                     gboolean phase2,
                     gboolean secrets_only)
 {
@@ -487,21 +484,21 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	setup_filepicker (self,
 	                  self->user_cert_button,
 	                  _("Choose your personal certificate"),
-	                  ws_parent, s_8021x,
+	                  s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_client_cert_scheme : nm_setting_802_1x_get_client_cert_scheme,
 	                  phase2 ? nm_setting_802_1x_get_phase2_client_cert_path : nm_setting_802_1x_get_client_cert_path,
 	                  FALSE, TRUE);
 	setup_filepicker (self,
 	                  self->ca_cert_button,
 	                  _("Choose a Certificate Authority certificate"),
-	                  ws_parent, s_8021x,
+	                  s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_ca_cert_scheme : nm_setting_802_1x_get_ca_cert_scheme,
 	                  phase2 ? nm_setting_802_1x_get_phase2_ca_cert_path : nm_setting_802_1x_get_ca_cert_path,
 	                  FALSE, FALSE);
 	setup_filepicker (self,
 	                  self->private_key_button,
 	                  _("Choose your private key"),
-	                  ws_parent, s_8021x,
+	                  s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_private_key_scheme : nm_setting_802_1x_get_private_key_scheme,
 	                  phase2 ? nm_setting_802_1x_get_phase2_private_key_path : nm_setting_802_1x_get_private_key_path,
 	                  TRUE, FALSE);
