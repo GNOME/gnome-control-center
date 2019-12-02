@@ -29,10 +29,8 @@
 #include "ws-leap.h"
 
 struct _WirelessSecurityLEAP {
-	GObject parent;
+	GtkGrid parent;
 
-	GtkBuilder     *builder;
-	GtkGrid        *grid;
 	GtkEntry       *password_entry;
 	GtkLabel       *password_label;
 	GtkCheckButton *show_password_check;
@@ -45,18 +43,8 @@ struct _WirelessSecurityLEAP {
 
 static void wireless_security_iface_init (WirelessSecurityInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (WirelessSecurityLEAP, ws_leap, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (WirelessSecurityLEAP, ws_leap, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (wireless_security_get_type (), wireless_security_iface_init));
-
-static void
-ws_leap_dispose (GObject *object)
-{
-	WirelessSecurityLEAP *self = WS_LEAP (object);
-
-	g_clear_object (&self->builder);
-
-	G_OBJECT_CLASS (ws_leap_parent_class)->dispose (object);
-}
 
 static void
 show_toggled_cb (WirelessSecurityLEAP *self)
@@ -65,13 +53,6 @@ show_toggled_cb (WirelessSecurityLEAP *self)
 
 	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->show_password_check));
 	gtk_entry_set_visibility (self->password_entry, visible);
-}
-
-static GtkWidget *
-get_widget (WirelessSecurity *security)
-{
-	WirelessSecurityLEAP *self = WS_LEAP (security);
-	return GTK_WIDGET (self->grid);
 }
 
 static gboolean
@@ -158,20 +139,26 @@ changed_cb (WirelessSecurityLEAP *self)
 void
 ws_leap_init (WirelessSecurityLEAP *self)
 {
+	gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 void
 ws_leap_class_init (WirelessSecurityLEAPClass *klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-	object_class->dispose = ws_leap_dispose;
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/ws-leap.ui");
+
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityLEAP, password_entry);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityLEAP, password_label);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityLEAP, show_password_check);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityLEAP, username_entry);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityLEAP, username_label);
 }
 
 static void
 wireless_security_iface_init (WirelessSecurityInterface *iface)
 {
-	iface->get_widget = get_widget;
 	iface->validate = validate;
 	iface->add_to_size_group = add_to_size_group;
 	iface->fill_connection = fill_connection;
@@ -183,7 +170,6 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 {
 	WirelessSecurityLEAP *self;
 	NMSettingWirelessSecurity *wsec = NULL;
-	g_autoptr(GError) error = NULL;
 
 	self = g_object_new (ws_leap_get_type (), NULL);
 
@@ -201,19 +187,6 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 
 	self->editing_connection = secrets_only ? FALSE : TRUE;
 	self->password_flags_name = NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD;
-
-	self->builder = gtk_builder_new ();
-	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/ws-leap.ui", &error)) {
-		g_warning ("Couldn't load UI builder resource: %s", error->message);
-		return NULL;
-	}
-
-	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
-	self->password_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "password_entry"));
-	self->password_label = GTK_LABEL (gtk_builder_get_object (self->builder, "password_label"));
-	self->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "show_password_check"));
-	self->username_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "username_entry"));
-	self->username_label = GTK_LABEL (gtk_builder_get_object (self->builder, "username_label"));
 
 	g_signal_connect_swapped (self->password_entry, "changed", G_CALLBACK (changed_cb), self);
 
