@@ -298,7 +298,7 @@ ws_wpa_eap_new (NMConnection *connection,
 	self->em_md5 = eap_method_simple_new (WIRELESS_SECURITY (self), connection, EAP_METHOD_SIMPLE_TYPE_MD5, simple_flags);
 	gtk_widget_show (GTK_WIDGET (self->em_md5));
 	g_signal_connect_object (self->em_md5, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_tls = eap_method_tls_new (WIRELESS_SECURITY (self), connection, FALSE, secrets_only);
+	self->em_tls = eap_method_tls_new (connection, FALSE, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_tls));
 	g_signal_connect_object (self->em_tls, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 	self->em_leap = eap_method_leap_new (WIRELESS_SECURITY (self), connection, secrets_only);

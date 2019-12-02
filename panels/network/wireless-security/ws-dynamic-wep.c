@@ -262,7 +262,7 @@ ws_dynamic_wep_new (NMConnection *connection,
 	if (secrets_only)
 		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
 
-	self->em_tls = eap_method_tls_new (WIRELESS_SECURITY (self), connection, FALSE, secrets_only);
+	self->em_tls = eap_method_tls_new (connection, FALSE, secrets_only);
 	gtk_widget_show (GTK_WIDGET (self->em_tls));
 	g_signal_connect_object (self->em_tls, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 	self->em_leap = eap_method_leap_new (WIRELESS_SECURITY (self), connection, secrets_only);
