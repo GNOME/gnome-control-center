@@ -33,7 +33,7 @@
 #include "ws-dynamic-wep.h"
 
 struct _WirelessSecurityDynamicWEP {
-	WirelessSecurity parent;
+	GObject parent;
 
 	GtkBuilder   *builder;
 	GtkComboBox  *auth_combo;
@@ -50,7 +50,10 @@ struct _WirelessSecurityDynamicWEP {
 	EAPMethodPEAP   *em_peap;
 };
 
-G_DEFINE_TYPE (WirelessSecurityDynamicWEP, ws_dynamic_wep, wireless_security_get_type ())
+static void wireless_security_iface_init (WirelessSecurityInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (WirelessSecurityDynamicWEP, ws_dynamic_wep, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (wireless_security_get_type (), wireless_security_iface_init));
 
 #define AUTH_NAME_COLUMN    0
 #define AUTH_ID_COLUMN      1
@@ -193,14 +196,18 @@ void
 ws_dynamic_wep_class_init (WirelessSecurityDynamicWEPClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	WirelessSecurityClass *ws_class = WIRELESS_SECURITY_CLASS (klass);
 
 	object_class->dispose = ws_dynamic_wep_dispose;
-	ws_class->get_widget = get_widget;
-	ws_class->validate = validate;
-	ws_class->add_to_size_group = add_to_size_group;
-	ws_class->fill_connection = fill_connection;
-	ws_class->adhoc_compatible = adhoc_compatible;
+}
+
+static void
+wireless_security_iface_init (WirelessSecurityInterface *iface)
+{
+	iface->get_widget = get_widget;
+	iface->validate = validate;
+	iface->add_to_size_group = add_to_size_group;
+	iface->fill_connection = fill_connection;
+	iface->adhoc_compatible = adhoc_compatible;
 }
 
 WirelessSecurityDynamicWEP *
