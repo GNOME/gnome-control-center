@@ -36,6 +36,7 @@ foreach name: panel_names
 endforeach
 
 sources = files(
+  'cc-qr-code.c',
   'cc-network-panel.c',
   'cc-wifi-connection-row.c',
   'cc-wifi-connection-list.c',
