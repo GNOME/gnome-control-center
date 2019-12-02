@@ -32,10 +32,8 @@
 #define WPA_PMK_LEN 32
 
 struct _WirelessSecurityWPAPSK {
-	GObject parent;
+	GtkGrid parent;
 
-	GtkBuilder     *builder;
-	GtkGrid        *grid;
 	GtkEntry       *password_entry;
 	GtkLabel       *password_label;
 	GtkCheckButton *show_password_check;
@@ -48,25 +46,8 @@ struct _WirelessSecurityWPAPSK {
 
 static void wireless_security_iface_init (WirelessSecurityInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (WirelessSecurityWPAPSK, ws_wpa_psk, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (WirelessSecurityWPAPSK, ws_wpa_psk, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (wireless_security_get_type (), wireless_security_iface_init));
-
-static void
-ws_wpa_psk_dispose (GObject *object)
-{
-	WirelessSecurityWPAPSK *self = WS_WPA_PSK (object);
-
-	g_clear_object (&self->builder);
-
-	G_OBJECT_CLASS (ws_wpa_psk_parent_class)->dispose (object);
-}
-
-static GtkWidget *
-get_widget (WirelessSecurity *security)
-{
-	WirelessSecurityWPAPSK *self = WS_WPA_PSK (security);
-	return GTK_WIDGET (self->grid);
-}
 
 static void
 show_toggled_cb (WirelessSecurityWPAPSK *self)
@@ -188,20 +169,26 @@ changed_cb (WirelessSecurityWPAPSK *self)
 void
 ws_wpa_psk_init (WirelessSecurityWPAPSK *self)
 {
+	gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 void
 ws_wpa_psk_class_init (WirelessSecurityWPAPSKClass *klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-	object_class->dispose = ws_wpa_psk_dispose;
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/ws-wpa-psk.ui");
+
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWPAPSK, password_entry);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWPAPSK, password_label);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWPAPSK, show_password_check);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWPAPSK, type_combo);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWPAPSK, type_label);
 }
 
 static void
 wireless_security_iface_init (WirelessSecurityInterface *iface)
 {
-	iface->get_widget = get_widget;
 	iface->validate = validate;
 	iface->add_to_size_group = add_to_size_group;
 	iface->fill_connection = fill_connection;
@@ -213,22 +200,8 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 {
 	WirelessSecurityWPAPSK *self;
 	NMSetting *setting = NULL;
-	g_autoptr(GError) error = NULL;
 
 	self = g_object_new (ws_wpa_psk_get_type (), NULL);
-
-	self->builder = gtk_builder_new ();
-	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/ws-wpa-psk.ui", &error)) {
-		g_warning ("Couldn't load UI builder resource: %s", error->message);
-		return NULL;
-	}
-
-	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
-	self->password_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "password_entry"));
-	self->password_label = GTK_LABEL (gtk_builder_get_object (self->builder, "password_label"));
-	self->show_password_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "show_password_check"));
-	self->type_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "type_combo"));
-	self->type_label = GTK_LABEL (gtk_builder_get_object (self->builder, "type_label"));
 
 	self->editing_connection = secrets_only ? FALSE : TRUE;
 	self->password_flags_name = NM_SETTING_WIRELESS_SECURITY_PSK;

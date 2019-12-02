@@ -50,14 +50,6 @@ wireless_security_default_init (WirelessSecurityInterface *iface)
                               G_TYPE_NONE, 0);
 }
 
-GtkWidget *
-wireless_security_get_widget (WirelessSecurity *self)
-{
-	g_return_val_if_fail (WIRELESS_IS_SECURITY (self), NULL);
-
-	return WIRELESS_SECURITY_GET_IFACE (self)->get_widget (self);
-}
-
 void
 wireless_security_notify_changed (WirelessSecurity *self)
 {
