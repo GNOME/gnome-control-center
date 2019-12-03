@@ -107,8 +107,10 @@ validate (EAPMethod *method, GError **error)
 		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
 		if (filename == NULL) {
 			widget_set_error (GTK_WIDGET (self->ca_cert_button));
-			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: no certificate specified"));
-			ret = FALSE;
+			if (ret) {
+				g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: no certificate specified"));
+				ret = FALSE;
+			}
 		}
 	}
 
