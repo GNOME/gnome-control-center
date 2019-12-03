@@ -249,7 +249,7 @@ ws_wpa_eap_new (NMConnection *connection)
 			default_method = "tls";
 	}
 
-	self->em_md5 = eap_method_simple_new (connection, EAP_METHOD_SIMPLE_TYPE_MD5, FALSE, FALSE);
+	self->em_md5 = eap_method_simple_new (connection, "md5", FALSE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_md5));
 	g_signal_connect_object (self->em_md5, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 	self->em_tls = eap_method_tls_new (connection);
@@ -258,7 +258,7 @@ ws_wpa_eap_new (NMConnection *connection)
 	self->em_leap = eap_method_leap_new (connection);
 	gtk_widget_show (GTK_WIDGET (self->em_leap));
 	g_signal_connect_object (self->em_leap, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_pwd = eap_method_simple_new (connection, EAP_METHOD_SIMPLE_TYPE_PWD, FALSE, FALSE);
+	self->em_pwd = eap_method_simple_new (connection, "pwd", FALSE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_pwd));
 	g_signal_connect_object (self->em_pwd, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 	self->em_fast = eap_method_fast_new (connection);
