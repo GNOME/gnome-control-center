@@ -99,7 +99,8 @@ security_combo_get_active (CEPageSecurity *page)
         WirelessSecurity *sec = NULL;
 
         model = gtk_combo_box_get_model (page->security_combo);
-        gtk_combo_box_get_active_iter (page->security_combo, &iter);
+        if (!gtk_combo_box_get_active_iter (page->security_combo, &iter))
+                return NULL;
         gtk_tree_model_get (model, &iter, S_SEC_COLUMN, &sec, -1);
 
         return sec;
