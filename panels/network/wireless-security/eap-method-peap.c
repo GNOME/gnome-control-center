@@ -340,21 +340,15 @@ eap_method_peap_new (NMConnection *connection)
 		                              !filename && eap_method_ca_cert_ignore_get (EAP_METHOD (self), connection));
 	}
 
-	self->em_mschap_v2 = eap_method_simple_new (connection,
-	                                            EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2,
-	                                            TRUE, FALSE);
+	self->em_mschap_v2 = eap_method_simple_new (connection, "mschapv2", TRUE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_mschap_v2));
 	g_signal_connect_object (self->em_mschap_v2, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
-	self->em_md5 = eap_method_simple_new (connection,
-	                                      EAP_METHOD_SIMPLE_TYPE_MD5,
-	                                      TRUE, FALSE);
+	self->em_md5 = eap_method_simple_new (connection, "md5", TRUE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_md5));
 	g_signal_connect_object (self->em_md5, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
-	self->em_gtc = eap_method_simple_new (connection,
-	                                      EAP_METHOD_SIMPLE_TYPE_GTC,
-	                                      TRUE, FALSE);
+	self->em_gtc = eap_method_simple_new (connection, "gtc", TRUE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_gtc));
 	g_signal_connect_object (self->em_gtc, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 

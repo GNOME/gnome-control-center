@@ -45,7 +45,7 @@ typedef enum {
 } EAPMethodSimpleType;
 
 EAPMethodSimple *eap_method_simple_new (NMConnection *connection,
-                                        EAPMethodSimpleType type,
+                                        const gchar *name,
                                         gboolean phase2,
                                         gboolean autheap_allowed);
 

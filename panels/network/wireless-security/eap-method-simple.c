@@ -37,7 +37,7 @@ struct _EAPMethodSimple {
 	GtkEntry        *username_entry;
 	GtkLabel        *username_label;
 
-	EAPMethodSimpleType type;
+	gchar *name;
 	gboolean phase2;
 	gboolean autheap_allowed;
 
@@ -106,22 +106,6 @@ add_to_size_group (EAPMethod *method, GtkSizeGroup *group)
 	gtk_size_group_add_widget (group, GTK_WIDGET (self->password_label));
 }
 
-typedef struct {
-	const char *name;
-} EapType;
-
-/* Indexed by EAP_METHOD_SIMPLE_TYPE_* */
-static const EapType eap_table[EAP_METHOD_SIMPLE_TYPE_LAST] = {
-	[EAP_METHOD_SIMPLE_TYPE_PAP]             = { "pap" },
-	[EAP_METHOD_SIMPLE_TYPE_MSCHAP]          = { "mschap" },
-	[EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2]       = { "mschapv2" },
-	[EAP_METHOD_SIMPLE_TYPE_PLAIN_MSCHAP_V2] = { "mschapv2" },
-	[EAP_METHOD_SIMPLE_TYPE_MD5]             = { "md5" },
-	[EAP_METHOD_SIMPLE_TYPE_PWD]             = { "pwd" },
-	[EAP_METHOD_SIMPLE_TYPE_CHAP]            = { "chap" },
-	[EAP_METHOD_SIMPLE_TYPE_GTC]             = { "gtc" },
-};
-
 static void
 fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFlags prev_flags)
 {
@@ -129,7 +113,6 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 	NMSetting8021x *s_8021x;
 	gboolean not_saved = FALSE;
 	NMSettingSecretFlags flags;
-	const EapType *eap_type;
 
 	s_8021x = nm_connection_get_setting_802_1x (connection);
 	g_assert (s_8021x);
@@ -140,7 +123,6 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 	if (eap_method_get_phase2 (method) == FALSE)
 		nm_setting_802_1x_clear_eap_methods (s_8021x);
 
-	eap_type = &eap_table[self->type];
 	if (eap_method_get_phase2 (method)) {
 		/* If the outer EAP method (TLS, TTLS, PEAP, etc) allows inner/phase2
 		 * EAP methods (which only TTLS allows) *and* the inner/phase2 method
@@ -148,14 +130,14 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 		 * Otherwise the inner/phase2 method goes into PHASE2_AUTH.
 		 */
 		if (self->autheap_allowed) {
-			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTHEAP, eap_type->name, NULL);
+			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTHEAP, self->name, NULL);
 			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, NULL, NULL);
 		} else {
-			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, eap_type->name, NULL);
+			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, self->name, NULL);
 			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTHEAP, NULL, NULL);
 		}
 	} else
-		nm_setting_802_1x_add_eap_method (s_8021x, eap_type->name);
+		nm_setting_802_1x_add_eap_method (s_8021x, self->name);
 
 	g_object_set (s_8021x, NM_SETTING_802_1X_IDENTITY, gtk_entry_get_text (self->username_entry), NULL);
 
@@ -281,6 +263,8 @@ eap_method_simple_dispose (GObject *object)
 {
 	EAPMethodSimple *self = EAP_METHOD_SIMPLE (object);
 
+	g_clear_pointer (&self->name, g_free);
+
 	g_signal_handlers_disconnect_by_data (self, self);
 	g_signal_handlers_disconnect_by_data (self->password_entry, self);
 	g_signal_handlers_disconnect_by_data (self->show_password_check, self);
@@ -341,16 +325,15 @@ eap_method_iface_init (EAPMethodInterface *iface)
 }
 
 EAPMethodSimple *
-eap_method_simple_new (NMConnection *connection, EAPMethodSimpleType type, gboolean phase2, gboolean autheap_allowed)
+eap_method_simple_new (NMConnection *connection, const gchar *name, gboolean phase2, gboolean autheap_allowed)
 {
 	EAPMethodSimple *self;
 	NMSetting8021x *s_8021x = NULL;
 
 	self = g_object_new (eap_method_simple_get_type (), NULL);
-	self->type = type;
+	self->name = g_strdup (name);
 	self->phase2 = phase2;
 	self->autheap_allowed = autheap_allowed;
-	g_assert (type < EAP_METHOD_SIMPLE_TYPE_LAST);
 
 	g_signal_connect_swapped (self->username_entry, "changed", G_CALLBACK (changed_cb), self);
 
