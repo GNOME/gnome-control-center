@@ -341,7 +341,7 @@ get_renderer_from_switcheroo (void)
       g_autoptr(GVariant) gpu;
       g_autoptr(GVariant) name = NULL;
       g_autoptr(GVariant) env = NULL;
-      g_autoptr(GVariant) is_default = NULL;
+      g_autoptr(GVariant) default_variant = NULL;
       const char *name_s;
       g_autofree const char **env_s = NULL;
       g_autofree char *renderer = NULL;
@@ -360,6 +360,7 @@ get_renderer_from_switcheroo (void)
       g_debug ("Getting renderer from helper for GPU '%s'", name_s);
       env_s = g_variant_get_strv (env, NULL);
       renderer = get_renderer_from_helper (env_s);
+      default_variant = g_variant_lookup_value (gpu, "Default", NULL);
 
       /* We could give up if we don't have a renderer, but that
        * might just mean gnome-session isn't installed. We fall back
@@ -367,7 +368,7 @@ get_renderer_from_switcheroo (void)
 
       gpu_data = g_new0 (GpuData, 1);
       gpu_data->name = g_strdup (renderer ? renderer : name_s);
-      gpu_data->is_default = is_default ? g_variant_get_boolean (is_default) : FALSE;
+      gpu_data->is_default = default_variant ? g_variant_get_boolean (default_variant) : FALSE;
       renderers = g_slist_prepend (renderers, gpu_data);
     }
 
