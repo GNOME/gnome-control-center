@@ -46,6 +46,7 @@ build:
   stage: build
 
   script:
+    - dnf -y install qrencode-devel
     - *environment_information
     - *build_procedure
 
@@ -75,6 +76,7 @@ test:
     - build
 
   script:
+    - dnf -y install qrencode-devel
     - *environment_information
     - *run_tests
 
@@ -100,6 +102,7 @@ coverage:
     - master@GNOME/gnome-control-center
 
   script:
+    - dnf -y install qrencode-devel
     - *environment_information
     - *build_procedure
     - *run_tests
@@ -257,6 +260,7 @@ stop_review:
   stage: manual
   when: manual
   script:
+    - dnf -y install qrencode-devel
     - *environment_information
     - *build_procedure
     - *run_tests
