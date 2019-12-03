@@ -44,7 +44,6 @@ struct _EAPMethodTLS {
 	GtkFileChooserButton *user_cert_button;
 	GtkLabel             *user_cert_label;
 
-	const gchar *password_flags_name;
 	gchar *username;
 	gchar *password;
 	gboolean show_password;
