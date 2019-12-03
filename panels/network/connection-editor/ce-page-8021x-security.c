@@ -73,7 +73,7 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 
         self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-	self->security = ws_wpa_eap_new (self->connection, TRUE, FALSE);
+	self->security = ws_wpa_eap_new (self->connection);
 	if (!self->security) {
 		g_warning ("Could not load 802.1x user interface.");
 		return;

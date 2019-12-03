@@ -29,8 +29,6 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (EAPMethodPEAP, eap_method_peap, EAP, METHOD_PEAP, GtkGrid)
 
-EAPMethodPEAP *eap_method_peap_new (NMConnection *connection,
-                                    gboolean is_editor,
-                                    gboolean secrets_only);
+EAPMethodPEAP *eap_method_peap_new (NMConnection *connection);
 
 G_END_DECLS

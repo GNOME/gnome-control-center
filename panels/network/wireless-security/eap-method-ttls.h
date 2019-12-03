@@ -29,8 +29,6 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (EAPMethodTTLS, eap_method_ttls, EAP, METHOD_TTLS, GtkGrid)
 
-EAPMethodTTLS *eap_method_ttls_new (NMConnection *connection,
-                                    gboolean is_editor,
-                                    gboolean secrets_only);
+EAPMethodTTLS *eap_method_ttls_new (NMConnection *connection);
 
 G_END_DECLS

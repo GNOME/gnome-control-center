@@ -52,8 +52,6 @@ struct _EAPMethodTTLS {
 	EAPMethodSimple      *em_mschap_v2;
 	EAPMethodSimple      *em_pap;
 	EAPMethodSimple      *em_plain_mschap_v2;
-
-	gboolean is_editor;
 };
 
 static void eap_method_iface_init (EAPMethodInterface *);
@@ -317,20 +315,16 @@ eap_method_iface_init (EAPMethodInterface *iface)
 }
 
 EAPMethodTTLS *
-eap_method_ttls_new (NMConnection *connection,
-                     gboolean is_editor,
-                     gboolean secrets_only)
+eap_method_ttls_new (NMConnection *connection)
 {
 	EAPMethodTTLS *self;
 	GtkFileFilter *filter;
 	NMSetting8021x *s_8021x = NULL;
 	const char *filename;
-	EAPMethodSimpleFlags simple_flags;
 	const char *phase2_auth = NULL;
 	GtkTreeIter iter;
 
 	self = g_object_new (eap_method_ttls_get_type (), NULL);
-	self->is_editor = is_editor;
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
@@ -361,51 +355,45 @@ eap_method_ttls_new (NMConnection *connection,
 		gtk_entry_set_text (self->domain_match_entry, nm_setting_802_1x_get_domain_suffix_match (s_8021x));
 	g_signal_connect_swapped (self->domain_match_entry, "changed", G_CALLBACK (changed_cb), self);
 
-	simple_flags = EAP_METHOD_SIMPLE_FLAG_PHASE2 | EAP_METHOD_SIMPLE_FLAG_AUTHEAP_ALLOWED;
-	if (self->is_editor)
-		simple_flags |= EAP_METHOD_SIMPLE_FLAG_IS_EDITOR;
-	if (secrets_only)
-		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
-
 	self->em_pap = eap_method_simple_new (connection,
 	                                      EAP_METHOD_SIMPLE_TYPE_PAP,
-	                                      simple_flags);
+	                                      TRUE, TRUE);
 	gtk_widget_show (GTK_WIDGET (self->em_pap));
 	g_signal_connect_object (self->em_pap, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
 	self->em_mschap = eap_method_simple_new (connection,
 	                                         EAP_METHOD_SIMPLE_TYPE_MSCHAP,
-	                                         simple_flags);
+	                                         TRUE, TRUE);
 	gtk_widget_show (GTK_WIDGET (self->em_mschap));
 	g_signal_connect_object (self->em_mschap, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
 	self->em_mschap_v2 = eap_method_simple_new (connection,
 	                                            EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2,
-	                                            simple_flags);
+	                                            TRUE, TRUE);
 	gtk_widget_show (GTK_WIDGET (self->em_mschap_v2));
 	g_signal_connect_object (self->em_mschap_v2, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
 	self->em_plain_mschap_v2 = eap_method_simple_new (connection,
 	                                                  EAP_METHOD_SIMPLE_TYPE_PLAIN_MSCHAP_V2,
-	                                                  simple_flags);
+	                                                  TRUE, TRUE);
 	gtk_widget_show (GTK_WIDGET (self->em_plain_mschap_v2));
 	g_signal_connect_object (self->em_plain_mschap_v2, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
 	self->em_chap = eap_method_simple_new (connection,
 	                                       EAP_METHOD_SIMPLE_TYPE_CHAP,
-	                                       simple_flags);
+	                                       TRUE, TRUE);
 	gtk_widget_show (GTK_WIDGET (self->em_chap));
 	g_signal_connect_object (self->em_chap, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
 	self->em_md5 = eap_method_simple_new (connection,
 	                                      EAP_METHOD_SIMPLE_TYPE_MD5,
-	                                      simple_flags);
+	                                      TRUE, TRUE);
 	gtk_widget_show (GTK_WIDGET (self->em_md5));
 	g_signal_connect_object (self->em_md5, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
 	self->em_gtc = eap_method_simple_new (connection,
 	                                      EAP_METHOD_SIMPLE_TYPE_GTC,
-	                                      simple_flags);
+	                                      TRUE, TRUE);
 	gtk_widget_show (GTK_WIDGET (self->em_gtc));
 	g_signal_connect_object (self->em_gtc, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
@@ -432,18 +420,6 @@ eap_method_ttls_new (NMConnection *connection,
 
 	g_signal_connect_swapped (self->inner_auth_combo, "changed", G_CALLBACK (inner_auth_combo_changed_cb), self);
 	inner_auth_combo_changed_cb (self);
-
-	if (secrets_only) {
-		gtk_widget_hide (GTK_WIDGET (self->anon_identity_label));
-		gtk_widget_hide (GTK_WIDGET (self->anon_identity_entry));
-		gtk_widget_hide (GTK_WIDGET (self->domain_match_label));
-		gtk_widget_hide (GTK_WIDGET (self->domain_match_entry));
-		gtk_widget_hide (GTK_WIDGET (self->ca_cert_label));
-		gtk_widget_hide (GTK_WIDGET (self->ca_cert_button));
-		gtk_widget_hide (GTK_WIDGET (self->ca_cert_not_required_check));
-		gtk_widget_hide (GTK_WIDGET (self->inner_auth_label));
-		gtk_widget_hide (GTK_WIDGET (self->inner_auth_combo));
-	}
 
 	return self;
 }
