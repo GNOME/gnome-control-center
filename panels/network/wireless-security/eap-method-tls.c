@@ -44,9 +44,7 @@ struct _EAPMethodTLS {
 	GtkFileChooserButton *user_cert_button;
 	GtkLabel             *user_cert_label;
 
-	gboolean phase2;
 	const gchar *password_flags_name;
-	gboolean editing_connection;
 	gchar *username;
 	gchar *password;
 	gboolean show_password;
@@ -175,14 +173,13 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 	g_autofree gchar *pk_filename = NULL;
 	const char *password = NULL;
 	gboolean ca_cert_error = FALSE;
+	g_autoptr(GError) error = NULL;
+	g_autoptr(GError) error2 = NULL;
 
 	s_8021x = nm_connection_get_setting_802_1x (connection);
 	g_assert (s_8021x);
 
-	if (self->phase2)
-		g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, "tls", NULL);
-	else
-		nm_setting_802_1x_add_eap_method (s_8021x, "tls");
+	nm_setting_802_1x_add_eap_method (s_8021x, "tls");
 
 	g_object_set (s_8021x, NM_SETTING_802_1X_IDENTITY, gtk_entry_get_text (self->identity_entry), NULL);
 
@@ -192,30 +189,22 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 	pk_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->private_key_button));
 	g_assert (pk_filename);
 
-	if (self->phase2) {
-		g_autoptr(GError) error = NULL;
-		if (!nm_setting_802_1x_set_phase2_private_key (s_8021x, pk_filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
-			g_warning ("Couldn't read phase2 private key '%s': %s", pk_filename, error ? error->message : "(unknown)");
-	} else {
-		g_autoptr(GError) error = NULL;
-		if (!nm_setting_802_1x_set_private_key (s_8021x, pk_filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
-			g_warning ("Couldn't read private key '%s': %s", pk_filename, error ? error->message : "(unknown)");
-	}
+	if (!nm_setting_802_1x_set_private_key (s_8021x, pk_filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
+		g_warning ("Couldn't read private key '%s': %s", pk_filename, error ? error->message : "(unknown)");
 
 	/* Save 802.1X password flags to the connection */
 	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->private_key_password_entry));
-	nm_setting_set_secret_flags (NM_SETTING (s_8021x), self->password_flags_name,
+	nm_setting_set_secret_flags (NM_SETTING (s_8021x), NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD,
 	                             secret_flags, NULL);
 
 	/* Update secret flags and popup when editing the connection */
-	if (self->editing_connection) {
-		nma_utils_update_password_storage (GTK_WIDGET (self->private_key_password_entry), secret_flags,
-		                                   NM_SETTING (s_8021x), self->password_flags_name);
-	}
+	nma_utils_update_password_storage (GTK_WIDGET (self->private_key_password_entry), secret_flags,
+	                                   NM_SETTING (s_8021x), NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD);
 
 	/* TLS client certificate */
 	if (format != NM_SETTING_802_1X_CK_FORMAT_PKCS12) {
 		g_autofree gchar *cc_filename = NULL;
+		g_autoptr(GError) error = NULL;
 
 		/* If the key is pkcs#12 nm_setting_802_1x_set_private_key() already
 		 * set the client certificate for us.
@@ -224,33 +213,17 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 		g_assert (cc_filename);
 
 		format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
-		if (self->phase2) {
-			g_autoptr(GError) error = NULL;
-			if (!nm_setting_802_1x_set_phase2_client_cert (s_8021x, cc_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
-				g_warning ("Couldn't read phase2 client certificate '%s': %s", cc_filename, error ? error->message : "(unknown)");
-		} else {
-			g_autoptr(GError) error = NULL;
-			if (!nm_setting_802_1x_set_client_cert (s_8021x, cc_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
-				g_warning ("Couldn't read client certificate '%s': %s", cc_filename, error ? error->message : "(unknown)");
-		}
+		if (!nm_setting_802_1x_set_client_cert (s_8021x, cc_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
+			g_warning ("Couldn't read client certificate '%s': %s", cc_filename, error ? error->message : "(unknown)");
 	}
 
 	/* TLS CA certificate */
 	ca_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
 
 	format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
-	if (self->phase2) {
-		g_autoptr(GError) error = NULL;
-		if (!nm_setting_802_1x_set_phase2_ca_cert (s_8021x, ca_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
-			g_warning ("Couldn't read phase2 CA certificate '%s': %s", ca_filename, error ? error->message : "(unknown)");
-			ca_cert_error = TRUE;
-		}
-	} else {
-		g_autoptr(GError) error = NULL;
-		if (!nm_setting_802_1x_set_ca_cert (s_8021x, ca_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
-			g_warning ("Couldn't read CA certificate '%s': %s", ca_filename, error ? error->message : "(unknown)");
-			ca_cert_error = TRUE;
-		}
+	if (!nm_setting_802_1x_set_ca_cert (s_8021x, ca_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error2)) {
+		g_warning ("Couldn't read CA certificate '%s': %s", ca_filename, error2 ? error2->message : "(unknown)");
+		ca_cert_error = TRUE;
 	}
 	eap_method_ca_cert_ignore_set (method, connection, ca_filename, ca_cert_error);
 }
@@ -381,30 +354,17 @@ update_secrets (EAPMethod *method, NMConnection *connection)
 {
 	EAPMethodTLS *self = EAP_METHOD_TLS (method);
 	NMSetting8021x *s_8021x;
-	HelperSecretFunc password_func;
-	SchemeFunc scheme_func;
-	PathFunc path_func;
 	const char *filename;
-
-	if (self->phase2) {
-		password_func = (HelperSecretFunc) nm_setting_802_1x_get_phase2_private_key_password;
-		scheme_func = nm_setting_802_1x_get_phase2_private_key_scheme;
-		path_func = nm_setting_802_1x_get_phase2_private_key_path;
-	} else {
-		password_func = (HelperSecretFunc) nm_setting_802_1x_get_private_key_password;
-		scheme_func = nm_setting_802_1x_get_private_key_scheme;
-		path_func = nm_setting_802_1x_get_private_key_path;
-	}
 
 	helper_fill_secret_entry (connection,
 	                          self->private_key_password_entry,
 	                          NM_TYPE_SETTING_802_1X,
-	                          password_func);
+	                          (HelperSecretFunc) nm_setting_802_1x_get_private_key_password);
 
 	/* Set the private key filepicker button path if we have a private key */
 	s_8021x = nm_connection_get_setting_802_1x (connection);
-	if (s_8021x && (scheme_func (s_8021x) == NM_SETTING_802_1X_CK_SCHEME_PATH)) {
-		filename = path_func (s_8021x);
+	if (s_8021x && (nm_setting_802_1x_get_private_key_scheme (s_8021x) == NM_SETTING_802_1X_CK_SCHEME_PATH)) {
+		filename = nm_setting_802_1x_get_private_key_path (s_8021x);
 		if (filename)
 			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (self->private_key_button), filename);
 	}
@@ -420,15 +380,7 @@ get_default_field (EAPMethod *method)
 static const gchar *
 get_password_flags_name (EAPMethod *method)
 {
-	EAPMethodTLS *self = EAP_METHOD_TLS (method);
-	return self->password_flags_name;
-}
-
-static gboolean
-get_phase2 (EAPMethod *method)
-{
-	EAPMethodTLS *self = EAP_METHOD_TLS (method);
-	return self->phase2;
+	return NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD;
 }
 
 static const gchar *
@@ -516,7 +468,6 @@ eap_method_iface_init (EAPMethodInterface *iface)
 	iface->update_secrets = update_secrets;
 	iface->get_default_field = get_default_field;
 	iface->get_password_flags_name = get_password_flags_name;
-	iface->get_phase2 = get_phase2;
 	iface->get_username = get_username;
 	iface->set_username = set_username;
 	iface->get_password = get_password;
@@ -526,20 +477,13 @@ eap_method_iface_init (EAPMethodInterface *iface)
 }
 
 EAPMethodTLS *
-eap_method_tls_new (NMConnection *connection,
-                    gboolean phase2,
-                    gboolean secrets_only)
+eap_method_tls_new (NMConnection *connection)
 {
 	EAPMethodTLS *self;
 	NMSetting8021x *s_8021x = NULL;
 	gboolean ca_not_required = FALSE;
 
 	self = g_object_new (eap_method_tls_get_type (), NULL);
-	self->phase2 = phase2;
-	self->password_flags_name = phase2 ?
-	                            NM_SETTING_802_1X_PHASE2_PRIVATE_KEY_PASSWORD :
-	                            NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD;
-	self->editing_connection = secrets_only ? FALSE : TRUE;
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
@@ -554,22 +498,22 @@ eap_method_tls_new (NMConnection *connection,
 	                  self->user_cert_button,
 	                  _("Choose your personal certificate"),
 	                  s_8021x,
-	                  phase2 ? nm_setting_802_1x_get_phase2_client_cert_scheme : nm_setting_802_1x_get_client_cert_scheme,
-	                  phase2 ? nm_setting_802_1x_get_phase2_client_cert_path : nm_setting_802_1x_get_client_cert_path,
+	                  nm_setting_802_1x_get_client_cert_scheme,
+	                  nm_setting_802_1x_get_client_cert_path,
 	                  FALSE, TRUE);
 	setup_filepicker (self,
 	                  self->ca_cert_button,
 	                  _("Choose a Certificate Authority certificate"),
 	                  s_8021x,
-	                  phase2 ? nm_setting_802_1x_get_phase2_ca_cert_scheme : nm_setting_802_1x_get_ca_cert_scheme,
-	                  phase2 ? nm_setting_802_1x_get_phase2_ca_cert_path : nm_setting_802_1x_get_ca_cert_path,
+	                  nm_setting_802_1x_get_ca_cert_scheme,
+	                  nm_setting_802_1x_get_ca_cert_path,
 	                  FALSE, FALSE);
 	setup_filepicker (self,
 	                  self->private_key_button,
 	                  _("Choose your private key"),
 	                  s_8021x,
-	                  phase2 ? nm_setting_802_1x_get_phase2_private_key_scheme : nm_setting_802_1x_get_private_key_scheme,
-	                  phase2 ? nm_setting_802_1x_get_phase2_private_key_path : nm_setting_802_1x_get_private_key_path,
+	                  nm_setting_802_1x_get_private_key_scheme,
+	                  nm_setting_802_1x_get_private_key_path,
 	                  TRUE, FALSE);
 
 	if (connection && eap_method_ca_cert_ignore_get (EAP_METHOD (self), connection))
@@ -583,21 +527,10 @@ eap_method_tls_new (NMConnection *connection,
 	g_signal_connect_swapped (self->private_key_password_entry, "changed", G_CALLBACK (changed_cb), self);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
-	nma_utils_setup_password_storage (GTK_WIDGET (self->private_key_password_entry), 0, (NMSetting *) s_8021x, self->password_flags_name,
-	                                  FALSE, secrets_only);
+	nma_utils_setup_password_storage (GTK_WIDGET (self->private_key_password_entry), 0, (NMSetting *) s_8021x, NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD,
+	                                  FALSE, FALSE);
 
 	g_signal_connect_swapped (self->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), self);
-
-	if (secrets_only) {
-		gtk_widget_set_sensitive (GTK_WIDGET (self->identity_entry), FALSE);
-		gtk_widget_hide (GTK_WIDGET (self->user_cert_label));
-		gtk_widget_hide (GTK_WIDGET (self->user_cert_button));
-		gtk_widget_hide (GTK_WIDGET (self->private_key_label));
-		gtk_widget_hide (GTK_WIDGET (self->private_key_button));
-		gtk_widget_hide (GTK_WIDGET (self->ca_cert_label));
-		gtk_widget_hide (GTK_WIDGET (self->ca_cert_button));
-		gtk_widget_hide (GTK_WIDGET (self->ca_cert_not_required_check));
-	}
 
 	return self;
 }
