@@ -39,8 +39,6 @@ struct _WirelessSecurityWEPKey {
 	GtkLabel       *key_label;
 	GtkCheckButton *show_key_check;
 
-	const char *password_flags_name;
-
 	NMWepKeyType type;
 	char keys[4][65];
 	guint8 cur_index;
@@ -193,7 +191,7 @@ fill_connection (WirelessSecurity *security, NMConnection *connection)
 
 	/* Update secret flags and popup when editing the connection */
 	nma_utils_update_password_storage (GTK_WIDGET (self->key_entry), secret_flags,
-		                           NM_SETTING (s_wsec), self->password_flags_name);
+		                           NM_SETTING (s_wsec), NM_SETTING_WIRELESS_SECURITY_WEP_KEY0);
 }
 
 static void
@@ -291,7 +289,6 @@ ws_wep_key_new (NMConnection *connection,
 
 	self = g_object_new (ws_wep_key_get_type (), NULL);
 
-	self->password_flags_name = NM_SETTING_WIRELESS_SECURITY_WEP_KEY0;
 	self->type = type;
 
 	gtk_entry_set_width_chars (self->key_entry, 28);
@@ -299,7 +296,7 @@ ws_wep_key_new (NMConnection *connection,
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
 	if (connection)
 		setting = (NMSetting *) nm_connection_get_setting_wireless_security (connection);
-	nma_utils_setup_password_storage (GTK_WIDGET (self->key_entry), 0, setting, self->password_flags_name,
+	nma_utils_setup_password_storage (GTK_WIDGET (self->key_entry), 0, setting, NM_SETTING_WIRELESS_SECURITY_WEP_KEY0,
 	                                  FALSE, FALSE);
 
 	if (connection) {
