@@ -38,7 +38,8 @@ struct _EAPMethodSimple {
 	GtkLabel        *username_label;
 
 	EAPMethodSimpleType type;
-	EAPMethodSimpleFlags flags;
+	gboolean phase2;
+	gboolean autheap_allowed;
 
 	guint idle_func_id;
 };
@@ -147,7 +148,7 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 		 * supports being an inner EAP method, then set PHASE2_AUTHEAP.
 		 * Otherwise the inner/phase2 method goes into PHASE2_AUTH.
 		 */
-		if ((self->flags & EAP_METHOD_SIMPLE_FLAG_AUTHEAP_ALLOWED) && eap_type->autheap_allowed) {
+		if (self->autheap_allowed && eap_type->autheap_allowed) {
 			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTHEAP, eap_type->name, NULL);
 			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, NULL, NULL);
 		} else {
@@ -169,14 +170,12 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 	 * back to NM in response to a GetSecrets() call, we don't save it if the
 	 * user checked "Always Ask".
 	 */
-	if (!(self->flags & EAP_METHOD_SIMPLE_FLAG_IS_EDITOR) || not_saved == FALSE)
+	if (not_saved == FALSE)
 		g_object_set (s_8021x, NM_SETTING_802_1X_PASSWORD, gtk_entry_get_text (self->password_entry), NULL);
 
 	/* Update secret flags and popup when editing the connection */
-	if (!(self->flags & EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY)) {
-		nma_utils_update_password_storage (GTK_WIDGET (self->password_entry), flags,
-		                                   NM_SETTING (s_8021x), NM_SETTING_802_1X_PASSWORD);
-	}
+	nma_utils_update_password_storage (GTK_WIDGET (self->password_entry), flags,
+	                                   NM_SETTING (s_8021x), NM_SETTING_802_1X_PASSWORD);
 }
 
 static void
@@ -206,7 +205,7 @@ static const gboolean
 get_phase2 (EAPMethod *method)
 {
 	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
-	return self->flags & EAP_METHOD_SIMPLE_FLAG_PHASE2;
+	return self->phase2;
 }
 
 static const gchar *
@@ -263,18 +262,16 @@ static void
 password_storage_changed (EAPMethodSimple *self)
 {
 	gboolean always_ask;
-	gboolean secrets_only = self->flags & EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
 
 	always_ask = always_ask_selected (self->password_entry);
 
-	if (always_ask && !secrets_only) {
+	if (always_ask) {
 		/* we always clear this button and do not restore it
 		 * (because we want to hide the password). */
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->show_password_check), FALSE);
 	}
 
-	gtk_widget_set_sensitive (GTK_WIDGET (self->show_password_check),
-	                          !always_ask || secrets_only);
+	gtk_widget_set_sensitive (GTK_WIDGET (self->show_password_check), !always_ask);
 
 	if (!self->idle_func_id)
 		self->idle_func_id = g_idle_add ((GSourceFunc) stuff_changed, self);
@@ -345,22 +342,18 @@ eap_method_iface_init (EAPMethodInterface *iface)
 }
 
 EAPMethodSimple *
-eap_method_simple_new (NMConnection *connection,
-                       EAPMethodSimpleType type,
-                       EAPMethodSimpleFlags flags)
+eap_method_simple_new (NMConnection *connection, EAPMethodSimpleType type, gboolean phase2, gboolean autheap_allowed)
 {
 	EAPMethodSimple *self;
 	NMSetting8021x *s_8021x = NULL;
 
 	self = g_object_new (eap_method_simple_get_type (), NULL);
-	self->flags = flags;
 	self->type = type;
+	self->phase2 = phase2;
+	self->autheap_allowed = autheap_allowed;
 	g_assert (type < EAP_METHOD_SIMPLE_TYPE_LAST);
 
 	g_signal_connect_swapped (self->username_entry, "changed", G_CALLBACK (changed_cb), self);
-
-	if (self->flags & EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY)
-		gtk_widget_set_sensitive (GTK_WIDGET (self->username_entry), FALSE);
 
 	g_signal_connect_swapped (self->password_entry, "changed", G_CALLBACK (changed_cb), self);
 
@@ -368,7 +361,7 @@ eap_method_simple_new (NMConnection *connection,
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
 	nma_utils_setup_password_storage (GTK_WIDGET (self->password_entry), 0, (NMSetting *) s_8021x, NM_SETTING_802_1X_PASSWORD,
-	                                  FALSE, flags & EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY);
+	                                  FALSE, FALSE);
 
 	g_signal_connect_swapped (self->password_entry, "notify::secondary-icon-name", G_CALLBACK (password_storage_changed), self);
 

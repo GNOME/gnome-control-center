@@ -44,20 +44,9 @@ typedef enum {
 	EAP_METHOD_SIMPLE_TYPE_LAST
 } EAPMethodSimpleType;
 
-typedef enum {
-	EAP_METHOD_SIMPLE_FLAG_NONE            = 0x00,
-	/* Indicates the EAP method is an inner/phase2 method */
-	EAP_METHOD_SIMPLE_FLAG_PHASE2          = 0x01,
-	/* Set by TTLS to indicate that inner/phase2 EAP is allowed */
-	EAP_METHOD_SIMPLE_FLAG_AUTHEAP_ALLOWED = 0x02,
-	/* Set from nm-connection-editor or the GNOME network panel */
-	EAP_METHOD_SIMPLE_FLAG_IS_EDITOR       = 0x04,
-	/* Set to indicate that this request is only for secrets */
-	EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY    = 0x08
-} EAPMethodSimpleFlags;
-
 EAPMethodSimple *eap_method_simple_new (NMConnection *connection,
                                         EAPMethodSimpleType type,
-                                        EAPMethodSimpleFlags flags);
+                                        gboolean phase2,
+                                        gboolean autheap_allowed);
 
 G_END_DECLS

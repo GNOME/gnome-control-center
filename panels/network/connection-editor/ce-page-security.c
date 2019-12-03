@@ -307,7 +307,7 @@ finish_setup (CEPageSecurity *self)
         if (nm_utils_security_valid (NMU_SEC_DYNAMIC_WEP, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
                 WirelessSecurityDynamicWEP *ws_dynamic_wep;
 
-                ws_dynamic_wep = ws_dynamic_wep_new (self->connection, TRUE, FALSE);
+                ws_dynamic_wep = ws_dynamic_wep_new (self->connection);
                 if (ws_dynamic_wep) {
                         add_security_item (self, WIRELESS_SECURITY (ws_dynamic_wep), sec_model,
                                            &iter, _("Dynamic WEP (802.1x)"), FALSE);
@@ -335,7 +335,7 @@ finish_setup (CEPageSecurity *self)
             nm_utils_security_valid (NMU_SEC_WPA2_ENTERPRISE, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
                 WirelessSecurityWPAEAP *ws_wpa_eap;
 
-                ws_wpa_eap = ws_wpa_eap_new (self->connection, TRUE, FALSE);
+                ws_wpa_eap = ws_wpa_eap_new (self->connection);
                 if (ws_wpa_eap) {
                         add_security_item (self, WIRELESS_SECURITY (ws_wpa_eap), sec_model,
                                            &iter, _("WPA & WPA2 Enterprise"), FALSE);

@@ -29,8 +29,6 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (WirelessSecurityDynamicWEP, ws_dynamic_wep, WS, DYNAMIC_WEP, GtkGrid)
 
-WirelessSecurityDynamicWEP *ws_dynamic_wep_new (NMConnection *connection,
-                                                gboolean is_editor,
-                                                gboolean secrets_only);
+WirelessSecurityDynamicWEP *ws_dynamic_wep_new (NMConnection *connection);
 
 G_END_DECLS
