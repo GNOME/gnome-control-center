@@ -126,7 +126,8 @@ security_combo_get_active (CEPageSecurity *self)
         WirelessSecurity *sec = NULL;
 
         model = gtk_combo_box_get_model (self->security_combo);
-        gtk_combo_box_get_active_iter (self->security_combo, &iter);
+        if (!gtk_combo_box_get_active_iter (self->security_combo, &iter))
+                return NULL;
         gtk_tree_model_get (model, &iter, S_SEC_COLUMN, &sec, -1);
 
         return sec;
