@@ -29,6 +29,6 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (WirelessSecurityLEAP, ws_leap, WS, LEAP, GtkGrid)
 
-WirelessSecurityLEAP * ws_leap_new (NMConnection *connection, gboolean secrets_only);
+WirelessSecurityLEAP *ws_leap_new (NMConnection *connection);
 
 G_END_DECLS

@@ -271,7 +271,7 @@ finish_setup (CEPageSecurity *self)
                                 wep_type = NM_WEP_KEY_TYPE_KEY;
                 }
 
-                ws_wep = ws_wep_key_new (self->connection, NM_WEP_KEY_TYPE_KEY, FALSE, FALSE);
+                ws_wep = ws_wep_key_new (self->connection, NM_WEP_KEY_TYPE_KEY);
                 if (ws_wep) {
                         add_security_item (self, WIRELESS_SECURITY (ws_wep), sec_model,
                                            &iter, _("WEP 40/128-bit Key (Hex or ASCII)"),
@@ -281,7 +281,7 @@ finish_setup (CEPageSecurity *self)
                         item++;
                 }
 
-                ws_wep = ws_wep_key_new (self->connection, NM_WEP_KEY_TYPE_PASSPHRASE, FALSE, FALSE);
+                ws_wep = ws_wep_key_new (self->connection, NM_WEP_KEY_TYPE_PASSPHRASE);
                 if (ws_wep) {
                         add_security_item (self, WIRELESS_SECURITY (ws_wep), sec_model,
                                            &iter, _("WEP 128-bit Passphrase"), TRUE);
@@ -294,7 +294,7 @@ finish_setup (CEPageSecurity *self)
         if (nm_utils_security_valid (NMU_SEC_LEAP, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
                 WirelessSecurityLEAP *ws_leap;
 
-                ws_leap = ws_leap_new (self->connection, FALSE);
+                ws_leap = ws_leap_new (self->connection);
                 if (ws_leap) {
                         add_security_item (self, WIRELESS_SECURITY (ws_leap), sec_model,
                                            &iter, _("LEAP"), FALSE);
@@ -321,7 +321,7 @@ finish_setup (CEPageSecurity *self)
             nm_utils_security_valid (NMU_SEC_WPA2_PSK, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
                 WirelessSecurityWPAPSK *ws_wpa_psk;
 
-                ws_wpa_psk = ws_wpa_psk_new (self->connection, FALSE);
+                ws_wpa_psk = ws_wpa_psk_new (self->connection);
                 if (ws_wpa_psk) {
                         add_security_item (self, WIRELESS_SECURITY (ws_wpa_psk), sec_model,
                                            &iter, _("WPA & WPA2 Personal"), FALSE);
