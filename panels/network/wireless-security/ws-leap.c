@@ -37,7 +37,6 @@ struct _WirelessSecurityLEAP {
 	GtkEntry       *username_entry;
 	GtkLabel       *username_label;
 
-	gboolean editing_connection;
 	const char *password_flags_name;
 };
 
@@ -119,9 +118,8 @@ fill_connection (WirelessSecurity *security, NMConnection *connection)
 	                             secret_flags, NULL);
 
 	/* Update secret flags and popup when editing the connection */
-	if (self->editing_connection)
-		nma_utils_update_password_storage (GTK_WIDGET (self->password_entry), secret_flags,
-		                                   NM_SETTING (s_wireless_sec), self->password_flags_name);
+	nma_utils_update_password_storage (GTK_WIDGET (self->password_entry), secret_flags,
+	                                   NM_SETTING (s_wireless_sec), self->password_flags_name);
 }
 
 static gboolean
@@ -166,7 +164,7 @@ wireless_security_iface_init (WirelessSecurityInterface *iface)
 }
 
 WirelessSecurityLEAP *
-ws_leap_new (NMConnection *connection, gboolean secrets_only)
+ws_leap_new (NMConnection *connection)
 {
 	WirelessSecurityLEAP *self;
 	NMSettingWirelessSecurity *wsec = NULL;
@@ -185,14 +183,13 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 		}
 	}
 
-	self->editing_connection = secrets_only ? FALSE : TRUE;
 	self->password_flags_name = NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD;
 
 	g_signal_connect_swapped (self->password_entry, "changed", G_CALLBACK (changed_cb), self);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
 	nma_utils_setup_password_storage (GTK_WIDGET (self->password_entry), 0, (NMSetting *) wsec, self->password_flags_name,
-	                                  FALSE, secrets_only);
+	                                  FALSE, FALSE);
 
 	if (wsec)
 		helper_fill_secret_entry (connection,
@@ -203,9 +200,6 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 	g_signal_connect_swapped (self->username_entry, "changed", G_CALLBACK (changed_cb), self);
 	if (wsec)
 		gtk_entry_set_text (self->username_entry, nm_setting_wireless_security_get_leap_username (wsec));
-
-	if (secrets_only)
-		gtk_widget_hide (GTK_WIDGET (self->username_entry));
 
 	g_signal_connect_swapped (self->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), self);
 

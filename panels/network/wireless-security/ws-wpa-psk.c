@@ -40,7 +40,6 @@ struct _WirelessSecurityWPAPSK {
 	GtkComboBox    *type_combo;
 	GtkLabel       *type_label;
 
-	gboolean editing_connection;
 	const char *password_flags_name;
 };
 
@@ -130,9 +129,8 @@ fill_connection (WirelessSecurity *security, NMConnection *connection)
 	                             secret_flags, NULL);
 
 	/* Update secret flags and popup when editing the connection */
-	if (self->editing_connection)
-		nma_utils_update_password_storage (GTK_WIDGET (self->password_entry), secret_flags,
-		                                   NM_SETTING (s_wireless_sec), self->password_flags_name);
+	nma_utils_update_password_storage (GTK_WIDGET (self->password_entry), secret_flags,
+	                                   NM_SETTING (s_wireless_sec), self->password_flags_name);
 
 	wireless_security_clear_ciphers (connection);
 	if (is_adhoc) {
@@ -196,14 +194,13 @@ wireless_security_iface_init (WirelessSecurityInterface *iface)
 }
 
 WirelessSecurityWPAPSK *
-ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
+ws_wpa_psk_new (NMConnection *connection)
 {
 	WirelessSecurityWPAPSK *self;
 	NMSetting *setting = NULL;
 
 	self = g_object_new (ws_wpa_psk_get_type (), NULL);
 
-	self->editing_connection = secrets_only ? FALSE : TRUE;
 	self->password_flags_name = NM_SETTING_WIRELESS_SECURITY_PSK;
 
 	g_signal_connect_swapped (self->password_entry, "changed", G_CALLBACK (changed_cb), self);
@@ -213,7 +210,7 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	if (connection)
 		setting = (NMSetting *) nm_connection_get_setting_wireless_security (connection);
 	nma_utils_setup_password_storage (GTK_WIDGET (self->password_entry), 0, setting, self->password_flags_name,
-	                                  FALSE, secrets_only);
+	                                  FALSE, FALSE);
 
 	/* Fill secrets, if any */
 	if (connection) {
