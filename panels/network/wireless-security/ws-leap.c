@@ -36,8 +36,6 @@ struct _WirelessSecurityLEAP {
 	GtkCheckButton *show_password_check;
 	GtkEntry       *username_entry;
 	GtkLabel       *username_label;
-
-	const char *password_flags_name;
 };
 
 static void wireless_security_iface_init (WirelessSecurityInterface *);
@@ -114,12 +112,12 @@ fill_connection (WirelessSecurity *security, NMConnection *connection)
 
 	/* Save LEAP_PASSWORD_FLAGS to the connection */
 	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->password_entry));
-	nm_setting_set_secret_flags (NM_SETTING (s_wireless_sec), self->password_flags_name,
+	nm_setting_set_secret_flags (NM_SETTING (s_wireless_sec), NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD,
 	                             secret_flags, NULL);
 
 	/* Update secret flags and popup when editing the connection */
 	nma_utils_update_password_storage (GTK_WIDGET (self->password_entry), secret_flags,
-	                                   NM_SETTING (s_wireless_sec), self->password_flags_name);
+	                                   NM_SETTING (s_wireless_sec), NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD);
 }
 
 static gboolean
@@ -183,12 +181,10 @@ ws_leap_new (NMConnection *connection)
 		}
 	}
 
-	self->password_flags_name = NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD;
-
 	g_signal_connect_swapped (self->password_entry, "changed", G_CALLBACK (changed_cb), self);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
-	nma_utils_setup_password_storage (GTK_WIDGET (self->password_entry), 0, (NMSetting *) wsec, self->password_flags_name,
+	nma_utils_setup_password_storage (GTK_WIDGET (self->password_entry), 0, (NMSetting *) wsec, NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD,
 	                                  FALSE, FALSE);
 
 	if (wsec)
