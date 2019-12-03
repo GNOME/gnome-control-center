@@ -355,45 +355,31 @@ eap_method_ttls_new (NMConnection *connection)
 		gtk_entry_set_text (self->domain_match_entry, nm_setting_802_1x_get_domain_suffix_match (s_8021x));
 	g_signal_connect_swapped (self->domain_match_entry, "changed", G_CALLBACK (changed_cb), self);
 
-	self->em_pap = eap_method_simple_new (connection,
-	                                      EAP_METHOD_SIMPLE_TYPE_PAP,
-	                                      TRUE, FALSE);
+	self->em_pap = eap_method_simple_new (connection, "pap", TRUE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_pap));
 	g_signal_connect_object (self->em_pap, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
-	self->em_mschap = eap_method_simple_new (connection,
-	                                         EAP_METHOD_SIMPLE_TYPE_MSCHAP,
-	                                         TRUE, FALSE);
+	self->em_mschap = eap_method_simple_new (connection, "mschap", TRUE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_mschap));
 	g_signal_connect_object (self->em_mschap, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
-	self->em_mschap_v2 = eap_method_simple_new (connection,
-	                                            EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2,
-	                                            TRUE, TRUE);
+	self->em_mschap_v2 = eap_method_simple_new (connection, "mschapv2", TRUE, TRUE);
 	gtk_widget_show (GTK_WIDGET (self->em_mschap_v2));
 	g_signal_connect_object (self->em_mschap_v2, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
-	self->em_plain_mschap_v2 = eap_method_simple_new (connection,
-	                                                  EAP_METHOD_SIMPLE_TYPE_PLAIN_MSCHAP_V2,
-	                                                  TRUE, FALSE);
+	self->em_plain_mschap_v2 = eap_method_simple_new (connection, "mschapv2", TRUE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_plain_mschap_v2));
 	g_signal_connect_object (self->em_plain_mschap_v2, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
-	self->em_chap = eap_method_simple_new (connection,
-	                                       EAP_METHOD_SIMPLE_TYPE_CHAP,
-	                                       TRUE, FALSE);
+	self->em_chap = eap_method_simple_new (connection, "chap", TRUE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_chap));
 	g_signal_connect_object (self->em_chap, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
-	self->em_md5 = eap_method_simple_new (connection,
-	                                      EAP_METHOD_SIMPLE_TYPE_MD5,
-	                                      TRUE, TRUE);
+	self->em_md5 = eap_method_simple_new (connection, "md5", TRUE, TRUE);
 	gtk_widget_show (GTK_WIDGET (self->em_md5));
 	g_signal_connect_object (self->em_md5, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
-	self->em_gtc = eap_method_simple_new (connection,
-	                                      EAP_METHOD_SIMPLE_TYPE_GTC,
-	                                      TRUE, TRUE);
+	self->em_gtc = eap_method_simple_new (connection, "gtc", TRUE, TRUE);
 	gtk_widget_show (GTK_WIDGET (self->em_gtc));
 	g_signal_connect_object (self->em_gtc, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
