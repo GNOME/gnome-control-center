@@ -621,20 +621,20 @@ cc_wifi_panel_init (CcWifiPanel *self)
   /* Load NetworkManager */
   self->client = nm_client_new (NULL, NULL);
 
-  g_signal_connect (self->client,
-                    "device-added",
-                    G_CALLBACK (device_added_cb),
-                    self);
+  g_signal_connect_object (self->client,
+                           "device-added",
+                           G_CALLBACK (device_added_cb),
+                           self, 0);
 
-  g_signal_connect (self->client,
-                    "device-removed",
-                    G_CALLBACK (device_removed_cb),
-                    self);
+  g_signal_connect_object (self->client,
+                           "device-removed",
+                           G_CALLBACK (device_removed_cb),
+                           self, 0);
 
-  g_signal_connect (self->client,
-                    "notify::wireless-enabled",
-                    G_CALLBACK (wireless_enabled_cb),
-                    self);
+  g_signal_connect_object (self->client,
+                           "notify::wireless-enabled",
+                           G_CALLBACK (wireless_enabled_cb),
+                           self, 0);
 
   /* Load Wi-Fi devices */
   load_wifi_devices (self);
