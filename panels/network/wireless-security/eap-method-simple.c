@@ -108,19 +108,18 @@ add_to_size_group (EAPMethod *method, GtkSizeGroup *group)
 
 typedef struct {
 	const char *name;
-	gboolean autheap_allowed;
 } EapType;
 
 /* Indexed by EAP_METHOD_SIMPLE_TYPE_* */
 static const EapType eap_table[EAP_METHOD_SIMPLE_TYPE_LAST] = {
-	[EAP_METHOD_SIMPLE_TYPE_PAP]             = { "pap",      FALSE },
-	[EAP_METHOD_SIMPLE_TYPE_MSCHAP]          = { "mschap",   FALSE },
-	[EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2]       = { "mschapv2", TRUE  },
-	[EAP_METHOD_SIMPLE_TYPE_PLAIN_MSCHAP_V2] = { "mschapv2", FALSE },
-	[EAP_METHOD_SIMPLE_TYPE_MD5]             = { "md5",      TRUE  },
-	[EAP_METHOD_SIMPLE_TYPE_PWD]             = { "pwd",      TRUE  },
-	[EAP_METHOD_SIMPLE_TYPE_CHAP]            = { "chap",     FALSE },
-	[EAP_METHOD_SIMPLE_TYPE_GTC]             = { "gtc",      TRUE  },
+	[EAP_METHOD_SIMPLE_TYPE_PAP]             = { "pap" },
+	[EAP_METHOD_SIMPLE_TYPE_MSCHAP]          = { "mschap" },
+	[EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2]       = { "mschapv2" },
+	[EAP_METHOD_SIMPLE_TYPE_PLAIN_MSCHAP_V2] = { "mschapv2" },
+	[EAP_METHOD_SIMPLE_TYPE_MD5]             = { "md5" },
+	[EAP_METHOD_SIMPLE_TYPE_PWD]             = { "pwd" },
+	[EAP_METHOD_SIMPLE_TYPE_CHAP]            = { "chap" },
+	[EAP_METHOD_SIMPLE_TYPE_GTC]             = { "gtc" },
 };
 
 static void
@@ -148,7 +147,7 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 		 * supports being an inner EAP method, then set PHASE2_AUTHEAP.
 		 * Otherwise the inner/phase2 method goes into PHASE2_AUTH.
 		 */
-		if (self->autheap_allowed && eap_type->autheap_allowed) {
+		if (self->autheap_allowed) {
 			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTHEAP, eap_type->name, NULL);
 			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, NULL, NULL);
 		} else {
