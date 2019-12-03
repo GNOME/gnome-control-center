@@ -47,8 +47,6 @@ struct _EAPMethodFAST {
 
 	EAPMethodSimple      *em_gtc;
 	EAPMethodSimple      *em_mschap_v2;
-
-	gboolean is_editor;
 };
 
 static void eap_method_iface_init (EAPMethodInterface *);
@@ -303,21 +301,17 @@ eap_method_iface_init (EAPMethodInterface *iface)
 }
 
 EAPMethodFAST *
-eap_method_fast_new (NMConnection *connection,
-                     gboolean is_editor,
-                     gboolean secrets_only)
+eap_method_fast_new (NMConnection *connection)
 {
 	EAPMethodFAST *self;
 	GtkFileFilter *filter;
 	NMSetting8021x *s_8021x = NULL;
 	const char *filename;
 	gboolean provisioning_enabled = TRUE;
-	EAPMethodSimpleFlags simple_flags;
 	const gchar *phase2_auth = NULL;
 	GtkTreeIter iter;
 
 	self = g_object_new (eap_method_fast_get_type (), NULL);
-	self->is_editor = is_editor;
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
@@ -368,21 +362,15 @@ eap_method_fast_new (NMConnection *connection,
 			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (self->pac_file_button), filename);
 	}
 
-	simple_flags = EAP_METHOD_SIMPLE_FLAG_PHASE2;
-	if (self->is_editor)
-		simple_flags |= EAP_METHOD_SIMPLE_FLAG_IS_EDITOR;
-	if (secrets_only)
-		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
-
 	self->em_gtc = eap_method_simple_new (connection,
 	                                      EAP_METHOD_SIMPLE_TYPE_GTC,
-	                                      simple_flags);
+	                                      TRUE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_gtc));
 	g_signal_connect_object (self->em_gtc, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
 	self->em_mschap_v2 = eap_method_simple_new (connection,
 	                                            EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2,
-	                                            simple_flags);
+	                                            TRUE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_mschap_v2));
 	g_signal_connect_object (self->em_mschap_v2, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
@@ -406,17 +394,6 @@ eap_method_fast_new (NMConnection *connection,
 
 	g_signal_connect_swapped (self->inner_auth_combo, "changed", G_CALLBACK (inner_auth_combo_changed_cb), self);
 	inner_auth_combo_changed_cb (self);
-
-	if (secrets_only) {
-		gtk_widget_hide (GTK_WIDGET (self->anon_identity_label));
-		gtk_widget_hide (GTK_WIDGET (self->anon_identity_entry));
-		gtk_widget_hide (GTK_WIDGET (self->pac_provision_check));
-		gtk_widget_hide (GTK_WIDGET (self->pac_provision_combo));
-		gtk_widget_hide (GTK_WIDGET (self->pac_file_label));
-		gtk_widget_hide (GTK_WIDGET (self->pac_file_button));
-		gtk_widget_hide (GTK_WIDGET (self->inner_auth_label));
-		gtk_widget_hide (GTK_WIDGET (self->inner_auth_combo));
-	}
 
 	return self;
 }

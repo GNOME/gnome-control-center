@@ -36,8 +36,6 @@ struct _EAPMethodLEAP {
 	GtkCheckButton *show_password_check;
 	GtkEntry       *username_entry;
 	GtkLabel       *username_label;
-
-	gboolean editing_connection;
 };
 
 static void eap_method_iface_init (EAPMethodInterface *);
@@ -110,9 +108,8 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 	                             secret_flags, NULL);
 
 	/* Update secret flags and popup when editing the connection */
-	if (self->editing_connection)
-		nma_utils_update_password_storage (GTK_WIDGET (self->password_entry), secret_flags,
-		                                   NM_SETTING (s_8021x), NM_SETTING_802_1X_PASSWORD);
+	nma_utils_update_password_storage (GTK_WIDGET (self->password_entry), secret_flags,
+	                                   NM_SETTING (s_8021x), NM_SETTING_802_1X_PASSWORD);
 }
 
 static void
@@ -238,19 +235,14 @@ eap_method_iface_init (EAPMethodInterface *iface)
 }
 
 EAPMethodLEAP *
-eap_method_leap_new (NMConnection *connection,
-                     gboolean secrets_only)
+eap_method_leap_new (NMConnection *connection)
 {
 	EAPMethodLEAP *self;
 	NMSetting8021x *s_8021x = NULL;
 
 	self = g_object_new (eap_method_leap_get_type (), NULL);
-	self->editing_connection = secrets_only ? FALSE : TRUE;
 
 	g_signal_connect_swapped (self->username_entry, "changed", G_CALLBACK (changed_cb), self);
-
-	if (secrets_only)
-		gtk_widget_set_sensitive (GTK_WIDGET (self->username_entry), FALSE);
 
 	g_signal_connect_swapped (self->password_entry, "changed", G_CALLBACK (changed_cb), self);
 
@@ -258,7 +250,7 @@ eap_method_leap_new (NMConnection *connection,
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
 	nma_utils_setup_password_storage (GTK_WIDGET (self->password_entry), 0, (NMSetting *) s_8021x, NM_SETTING_802_1X_PASSWORD,
-	                                  FALSE, secrets_only);
+	                                  FALSE, FALSE);
 
 	g_signal_connect_swapped (self->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), self);
 

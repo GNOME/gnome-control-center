@@ -197,13 +197,10 @@ wireless_security_iface_init (WirelessSecurityInterface *iface)
 }
 
 WirelessSecurityDynamicWEP *
-ws_dynamic_wep_new (NMConnection *connection,
-                    gboolean is_editor,
-                    gboolean secrets_only)
+ws_dynamic_wep_new (NMConnection *connection)
 {
 	WirelessSecurityDynamicWEP *self;
 	const gchar *default_method = NULL;
-	EAPMethodSimpleFlags simple_flags = EAP_METHOD_SIMPLE_FLAG_NONE;
 	GtkTreeIter iter;
 
 	self = g_object_new (ws_dynamic_wep_get_type (), NULL);
@@ -219,27 +216,22 @@ ws_dynamic_wep_new (NMConnection *connection,
 	if (default_method == NULL)
 		default_method = "tls";
 
-	if (is_editor)
-		simple_flags |= EAP_METHOD_SIMPLE_FLAG_IS_EDITOR;
-	if (secrets_only)
-		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
-
-	self->em_tls = eap_method_tls_new (connection, FALSE, secrets_only);
+	self->em_tls = eap_method_tls_new (connection);
 	gtk_widget_show (GTK_WIDGET (self->em_tls));
 	g_signal_connect_object (self->em_tls, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_leap = eap_method_leap_new (connection, secrets_only);
+	self->em_leap = eap_method_leap_new (connection);
 	gtk_widget_show (GTK_WIDGET (self->em_leap));
 	g_signal_connect_object (self->em_leap, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_pwd = eap_method_simple_new (connection, EAP_METHOD_SIMPLE_TYPE_PWD, simple_flags);
+	self->em_pwd = eap_method_simple_new (connection, EAP_METHOD_SIMPLE_TYPE_PWD, FALSE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_pwd));
 	g_signal_connect_object (self->em_pwd, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_fast = eap_method_fast_new (connection, is_editor, secrets_only);
+	self->em_fast = eap_method_fast_new (connection);
 	gtk_widget_show (GTK_WIDGET (self->em_fast));
 	g_signal_connect_object (self->em_fast, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_ttls = eap_method_ttls_new (connection, is_editor, secrets_only);
+	self->em_ttls = eap_method_ttls_new (connection);
 	gtk_widget_show (GTK_WIDGET (self->em_ttls));
 	g_signal_connect_object (self->em_ttls, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_peap = eap_method_peap_new (connection, is_editor, secrets_only);
+	self->em_peap = eap_method_peap_new (connection);
 	gtk_widget_show (GTK_WIDGET (self->em_peap));
 	g_signal_connect_object (self->em_peap, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 
@@ -250,11 +242,6 @@ ws_dynamic_wep_new (NMConnection *connection,
 			if (strcmp (id, default_method) == 0)
 				gtk_combo_box_set_active_iter (self->auth_combo, &iter);
 		} while (gtk_tree_model_iter_next (GTK_TREE_MODEL (self->auth_model), &iter));
-	}
-
-	if (secrets_only) {
-		gtk_widget_hide (GTK_WIDGET (self->auth_combo));
-		gtk_widget_hide (GTK_WIDGET (self->auth_label));
 	}
 
 	if (connection) {
