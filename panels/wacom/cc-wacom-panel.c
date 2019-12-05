@@ -54,7 +54,7 @@ struct _CcWacomPanel
 	GtkWidget        *test_draw_area;
 	GtkWidget        *test_button;
 	GHashTable       *devices; /* key=GsdDevice, value=CcWacomDevice */
-	GHashTable       *pages; /* key=device name, value=GtkWidget */
+	GHashTable       *pages; /* key=CcWacomDevice, value=GtkWidget */
 	GHashTable       *stylus_pages; /* key=CcWacomTool, value=GtkWidget */
 
 	CcTabletToolMap  *tablet_tool_map;
@@ -116,23 +116,39 @@ cc_wacom_panel_static_init_func (void)
 	update_visibility (manager, NULL, NULL);
 }
 
+static CcWacomDevice *
+lookup_wacom_device (CcWacomPanel *self,
+		     const gchar  *name)
+{
+	GHashTableIter iter;
+	CcWacomDevice *wacom_device;
+
+	g_hash_table_iter_init (&iter, self->devices);
+	while (g_hash_table_iter_next (&iter, NULL, (gpointer *) &wacom_device)) {
+		if (g_strcmp0 (cc_wacom_device_get_name (wacom_device), name) == 0)
+			return wacom_device;
+	}
+
+	return NULL;
+}
+
 static CcWacomPage *
 set_device_page (CcWacomPanel *self, const gchar *device_name)
 {
 	CcWacomPage *page;
+	CcWacomDevice *wacom_device;
 	gint current;
 
 	if (device_name == NULL)
 		return NULL;
 
-	/* Choose correct device */
-	page = g_hash_table_lookup (self->pages, device_name);
-
-	if (page == NULL) {
+	wacom_device = lookup_wacom_device (self, device_name);
+	if (!wacom_device) {
 		g_warning ("Failed to find device '%s', supplied in the command line.", device_name);
-		return page;
+		return NULL;
 	}
 
+	page = g_hash_table_lookup (self->pages, wacom_device);
 	current = gtk_notebook_page_num (GTK_NOTEBOOK (self->tablet_notebook), GTK_WIDGET (page));
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (self->tablet_notebook), current);
 
@@ -482,107 +498,13 @@ cc_wacom_panel_class_init (CcWacomPanelClass *klass)
 }
 
 static void
-remove_page (GtkNotebook *notebook,
-	     GtkWidget   *widget)
+update_current_page (CcWacomPanel  *self)
 {
-	int num_pages, i;
+	int num_pages;
 
-	num_pages = gtk_notebook_get_n_pages (notebook);
-	g_return_if_fail (num_pages > 1);
-	for (i = 1; i < num_pages; i++) {
-		if (gtk_notebook_get_nth_page (notebook, i) == widget) {
-			gtk_notebook_remove_page (notebook, i);
-			return;
-		}
-	}
-}
-
-static void
-update_current_page (CcWacomPanel  *self,
-		     CcWacomDevice *removed_device)
-{
-	GHashTable *ht;
-	g_autoptr(GList) tablets = NULL;
-	GList *l;
-	gboolean changed;
-	GHashTableIter iter;
-	GsdDevice *gsd_device;
-	CcWacomDevice *device;
-
-	changed = FALSE;
-
-	ht = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_free);
-
-	if (removed_device) {
-		Tablet *tablet = g_new0 (Tablet, 1);
-		tablet->name = cc_wacom_device_get_name (removed_device);
-		g_hash_table_insert (ht, (gpointer) tablet->name, tablet);
-	}
-
-	g_hash_table_iter_init (&iter, self->devices);
-
-	while (g_hash_table_iter_next (&iter, (gpointer*) &gsd_device,
-				       (gpointer*) &device)) {
-		Tablet *tablet;
-		GsdDeviceType device_type;
-
-		device_type = gsd_device_get_device_type (gsd_device);
-		tablet = g_hash_table_lookup (ht, cc_wacom_device_get_name (device));
-		if (tablet == NULL) {
-			tablet = g_new0 (Tablet, 1);
-			tablet->name = cc_wacom_device_get_name (device);
-			g_hash_table_insert (ht, (gpointer) tablet->name, tablet);
-		}
-
-		if (device_type & GSD_DEVICE_TYPE_PAD) {
-			tablet->pad = device;
-		} else if (device_type & GSD_DEVICE_TYPE_TABLET) {
-			tablet->stylus = device;
-		}
-	}
-
-	/* We now have a list of Tablet structs,
-	 * see which ones are full tablets */
-	tablets = g_hash_table_get_values (ht);
-	for (l = tablets; l; l = l->next) {
-		Tablet *tablet;
-		GtkWidget *page;
-
-		tablet = l->data;
-		if (tablet->stylus == NULL) {
-			page = g_hash_table_lookup (self->pages, tablet->name);
-			if (page != NULL) {
-				remove_page (GTK_NOTEBOOK (self->tablet_notebook), page);
-				g_hash_table_remove (self->pages, tablet->name);
-
-				changed = TRUE;
-			}
-			continue;
-		}
-		/* this code is called once the stylus is set up, but the pad does not exist yet */
-		page = g_hash_table_lookup (self->pages, tablet->name);
-		if (page == NULL) {
-			page = cc_wacom_page_new (self, tablet->stylus, tablet->pad);
-			cc_wacom_page_set_navigation (CC_WACOM_PAGE (page), GTK_NOTEBOOK (self->tablet_notebook), TRUE);
-			gtk_widget_show (page);
-			gtk_notebook_append_page (GTK_NOTEBOOK (self->tablet_notebook), page, NULL);
-			g_hash_table_insert (self->pages, g_strdup (tablet->name), page);
-
-			changed = TRUE;
-		} else {
-			cc_wacom_page_update_tools (CC_WACOM_PAGE (page), tablet->stylus, tablet->pad);
-		}
-	}
-
-	g_hash_table_destroy (ht);
-
-	if (changed == TRUE) {
-		int num_pages;
-
-		num_pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (self->tablet_notebook));
-		if (num_pages > 1)
-			gtk_notebook_set_current_page (GTK_NOTEBOOK (self->tablet_notebook), 1);
-	}
+	num_pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (self->tablet_notebook));
+	if (num_pages > 1)
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (self->tablet_notebook), 1);
 
 	update_test_button (self);
 }
@@ -593,6 +515,9 @@ add_known_device (CcWacomPanel *self,
 {
 	CcWacomDevice *device;
 	GsdDeviceType device_type;
+	g_autoptr(GList) tools = NULL;
+	GtkWidget *page;
+	GList *l;
 
 	device_type = gsd_device_get_device_type (gsd_device);
 
@@ -600,7 +525,9 @@ add_known_device (CcWacomPanel *self,
 		return;
 
 	if ((device_type &
-	     (GSD_DEVICE_TYPE_TOUCHSCREEN | GSD_DEVICE_TYPE_TOUCHPAD)) != 0) {
+	     (GSD_DEVICE_TYPE_PAD |
+	      GSD_DEVICE_TYPE_TOUCHSCREEN |
+	      GSD_DEVICE_TYPE_TOUCHPAD)) != 0) {
 		return;
 	}
 
@@ -610,32 +537,39 @@ add_known_device (CcWacomPanel *self,
 
 	g_hash_table_insert (self->devices, gsd_device, device);
 
-	/* Only trigger tool lookup on pen devices */
-	if ((device_type & GSD_DEVICE_TYPE_TABLET) != 0) {
-		g_autoptr(GList) tools = NULL;
-		GList *l;
+	tools = cc_tablet_tool_map_list_tools (self->tablet_tool_map, device);
 
-		tools = cc_tablet_tool_map_list_tools (self->tablet_tool_map, device);
-
-		for (l = tools; l != NULL; l = l->next) {
-			add_stylus (self, l->data);
-		}
+	for (l = tools; l != NULL; l = l->next) {
+		add_stylus (self, l->data);
 	}
+
+	page = cc_wacom_page_new (self, device);
+	cc_wacom_page_set_navigation (CC_WACOM_PAGE (page), GTK_NOTEBOOK (self->tablet_notebook), TRUE);
+	gtk_widget_show (page);
+	gtk_notebook_append_page (GTK_NOTEBOOK (self->tablet_notebook), page, NULL);
+	g_hash_table_insert (self->pages, device, page);
 }
 
 static void
 device_removed_cb (CcWacomPanel     *self,
 		   GsdDevice        *gsd_device)
 {
-	g_autoptr(CcWacomDevice) device = NULL;
+	CcWacomDevice *device;
+	GtkWidget *page;
 
 	device = g_hash_table_lookup (self->devices, gsd_device);
 	if (!device)
 		return;
 
-	g_hash_table_steal (self->devices, gsd_device);
-	update_current_page (self, device);
+	page = g_hash_table_lookup (self->pages, device);
+	if (page) {
+		g_hash_table_remove (self->pages, device);
+		gtk_widget_destroy (page);
+	}
+
+	g_hash_table_remove (self->devices, gsd_device);
 	check_remove_stylus_pages (self);
+	update_current_page (self);
 }
 
 static void
@@ -643,7 +577,7 @@ device_added_cb (CcWacomPanel *self,
 		 GsdDevice    *device)
 {
 	add_known_device (self, device);
-	update_current_page (self, NULL);
+	update_current_page (self);
 }
 
 static gboolean
@@ -807,7 +741,7 @@ cc_wacom_panel_init (CcWacomPanel *self)
 			         G_CALLBACK (link_activated), self, G_CONNECT_SWAPPED);
 
 	self->devices = g_hash_table_new_full (g_direct_hash, g_direct_equal, NULL, g_object_unref);
-	self->pages = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+	self->pages = g_hash_table_new (NULL, NULL);
 	self->stylus_pages = g_hash_table_new (NULL, NULL);
 
 	device_manager = gsd_device_manager_get ();
@@ -821,7 +755,7 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	for (l = devices; l ; l = l->next)
 		add_known_device (self, l->data);
 
-	update_current_page (self, NULL);
+	update_current_page (self);
 }
 
 GDBusProxy *
