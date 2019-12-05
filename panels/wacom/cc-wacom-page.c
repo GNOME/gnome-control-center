@@ -954,7 +954,8 @@ cc_wacom_page_new (CcWacomPanel  *panel,
 	/* FIXME move this to construct */
 	page->wacom_settings  = cc_wacom_device_get_settings (stylus);
 	set_mode_from_gsettings (GTK_COMBO_BOX (WID ("combo-tabletmode")), page);
-	set_display_decoupled_from_gsettings (GTK_SWITCH (WID ("switch-decouple-display")), page);
+	if (get_layout_type (page->stylus) == LAYOUT_SCREEN)
+		set_display_decoupled_from_gsettings (GTK_SWITCH (WID ("switch-decouple-display")), page);
 
 	/* Tablet name */
 	gtk_label_set_text (GTK_LABEL (WID ("label-tabletmodel")), cc_wacom_device_get_name (stylus));
