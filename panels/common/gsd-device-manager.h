@@ -80,5 +80,7 @@ gboolean	   gsd_device_get_dimensions  (GsdDevice  *device,
 
 GsdDevice *	   gsd_device_manager_lookup_gdk_device (GsdDeviceManager *manager,
 							 GdkDevice	  *gdk_device);
+gboolean	   gsd_device_shares_group (GsdDevice *device1,
+					    GsdDevice *device2);
 
 G_END_DECLS
