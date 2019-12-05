@@ -422,6 +422,7 @@ add_device (GsdDeviceManager *manager,
         GsdDeviceManagerPrivate *priv = gsd_device_manager_get_instance_private (manager);
 	GUdevDevice *parent;
 	GsdDevice *device;
+	const gchar *syspath;
 
 	parent = g_udev_device_get_parent (udev_device);
 
@@ -429,7 +430,8 @@ add_device (GsdDeviceManager *manager,
 		return;
 
 	device = create_device (udev_device);
-	g_hash_table_insert (priv->devices, g_object_ref (udev_device), device);
+	syspath = g_udev_device_get_sysfs_path (udev_device);
+	g_hash_table_insert (priv->devices, g_strdup (syspath), device);
 	g_signal_emit_by_name (manager, "device-added", device);
 }
 
@@ -437,19 +439,20 @@ static void
 remove_device (GsdDeviceManager *manager,
 	       GUdevDevice	*udev_device)
 {
-        GsdDeviceManagerPrivate *priv = gsd_device_manager_get_instance_private (manager);
+	GsdDeviceManagerPrivate *priv = gsd_device_manager_get_instance_private (manager);
 	GsdDevice *device;
+	const gchar *syspath;
 
-	device = g_hash_table_lookup (priv->devices, udev_device);
+	syspath = g_udev_device_get_sysfs_path (udev_device);
+	device = g_hash_table_lookup (priv->devices, syspath);
 
 	if (!device)
 		return;
 
-	g_hash_table_steal (priv->devices, udev_device);
+	g_hash_table_steal (priv->devices, syspath);
 	g_signal_emit_by_name (manager, "device-removed", device);
 
 	g_object_unref (device);
-	g_object_unref (udev_device);
 }
 
 static void
@@ -476,9 +479,9 @@ gsd_device_manager_init (GsdDeviceManager *manager)
 	g_autoptr(GList) devices = NULL;
 	GList *l;
 
-	priv->devices = g_hash_table_new_full (NULL, NULL,
-                                               (GDestroyNotify) g_object_unref,
-                                               (GDestroyNotify) g_object_unref);
+	priv->devices = g_hash_table_new_full (g_str_hash, g_str_equal,
+					       (GDestroyNotify) g_free,
+					       (GDestroyNotify) g_object_unref);
 
 	priv->udev_client = g_udev_client_new (subsystems);
 	g_signal_connect (priv->udev_client, "uevent",
