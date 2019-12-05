@@ -31,3 +31,19 @@ test(
       env : envs,
   timeout : 60
 )
+
+exe = executable(
+  'test-wifi-panel-text',
+  ['test-wifi-text.c'],
+  include_directories : includes + [common_inc],
+  dependencies : common_deps + network_manager_deps + [libtestshell_dep],
+  link_with : [network_panel_lib],
+  c_args : cflags,
+)
+
+test(
+  'test-wif-panel-text',
+  exe,
+  env : envs,
+  timeout : 60
+)
