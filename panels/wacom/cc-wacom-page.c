@@ -933,15 +933,13 @@ check_add_pad (CcWacomPage *page,
 	if ((gsd_device_get_device_type (gsd_device) & GSD_DEVICE_TYPE_PAD) == 0)
 		return;
 
+	if (!gsd_device_shares_group (cc_wacom_device_get_device (page->stylus),
+				      gsd_device))
+		return;
+
 	wacom_device = cc_wacom_device_new (gsd_device);
 	if (!wacom_device)
 		return;
-
-	if (g_strcmp0 (cc_wacom_device_get_name (page->stylus),
-		       cc_wacom_device_get_name (wacom_device)) != 0) {
-		g_object_unref (wacom_device);
-		return;
-	}
 
 	page->pads = g_list_prepend (page->pads, wacom_device);
 	update_pad_availability (page);
