@@ -509,7 +509,15 @@ is_valid_username_async (const gchar *username,
          * future, so it would be nice to have some official way for this
          * instead of relying on the current "--login" implementation.
          */
-        argv[0] = "usermod";
+        if (g_find_program_in_path ("usermod") != NULL)
+                argv[0] = "usermod";
+        else if (g_file_test ("/usr/sbin/usermod", G_FILE_TEST_IS_EXECUTABLE))
+                argv[0] = "/usr/sbin/usermod";
+        else {
+                g_warning ("Can't find command usermod");
+                return;
+        }
+
         argv[1] = "--login";
         argv[2] = data->username;
         argv[3] = "--";
