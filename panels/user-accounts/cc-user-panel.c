@@ -84,6 +84,7 @@ struct _CcUserPanel {
         GtkLabel        *last_login_button_label;
         GtkLabel        *last_login_label;
         GtkLockButton   *lock_button;
+        GtkBox          *no_users_box;
         GtkRevealer     *notification_revealer;
         GtkButton       *password_button;
         GtkLabel        *password_button_label;
@@ -93,6 +94,7 @@ struct _CcUserPanel {
         CcUserImage     *user_icon_image;
         CcUserImage     *user_icon_image2;
         GtkStack        *user_icon_stack;
+        GtkOverlay      *users_overlay;
 
         ActUser *selected_user;
         GPermission *permission;
@@ -104,14 +106,6 @@ struct _CcUserPanel {
 };
 
 CC_PANEL_REGISTER (CcUserPanel, cc_user_panel)
-
-/* Headerbar button states. */
-#define PAGE_LOCK "_lock"
-#define PAGE_ADDUSER "_adduser"
-
-/* Panel states */
-#define PAGE_NO_USERS "_empty_state"
-#define PAGE_USERS "_users"
 
 static void show_restart_notification (CcUserPanel *self, const gchar *locale);
 static gint user_compare (gconstpointer i, gconstpointer u);
@@ -253,7 +247,7 @@ user_added (CcUserPanel *self, ActUser *user)
         show_carousel = (self->other_accounts > 0);
         gtk_revealer_set_reveal_child (GTK_REVEALER (self->carousel), show_carousel);
 
-        gtk_stack_set_visible_child_name (self->stack, PAGE_USERS);
+        gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->users_overlay));
 }
 
 static gint
@@ -315,7 +309,7 @@ reload_users (CcUserPanel *self, ActUser *selected_user)
         g_slist_free (list);
 
         if (cc_carousel_get_item_count (self->carousel) == 0)
-                gtk_stack_set_visible_child_name (self->stack, PAGE_NO_USERS);
+                gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->no_users_box));
         if (self->other_accounts == 0)
                 gtk_revealer_set_reveal_child (GTK_REVEALER (self->carousel), FALSE);
 
@@ -1198,7 +1192,7 @@ on_permission_changed (CcUserPanel *self)
         is_authorized = g_permission_get_allowed (G_PERMISSION (self->permission));
         self_selected = act_user_get_uid (user) == geteuid ();
 
-        gtk_stack_set_visible_child_name (self->headerbar_button_stack, is_authorized ? PAGE_ADDUSER : PAGE_LOCK);
+        gtk_stack_set_visible_child (self->headerbar_button_stack, is_authorized ? GTK_WIDGET (self->add_user_button) : GTK_WIDGET (self->lock_button));
 
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_user_button), is_authorized);
         if (is_authorized) {
@@ -1480,6 +1474,7 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, last_login_button_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, last_login_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, lock_button);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, no_users_box);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, notification_revealer);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, password_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, password_button_label);
@@ -1489,6 +1484,7 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_icon_image);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_icon_image2);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_icon_stack);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, users_overlay);
 
         gtk_widget_class_bind_template_callback (widget_class, account_type_changed);
         gtk_widget_class_bind_template_callback (widget_class, add_user);
