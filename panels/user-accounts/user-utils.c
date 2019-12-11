@@ -486,7 +486,7 @@ is_valid_username_async (const gchar *username,
          * future, so it would be nice to have some official way for this
          * instead of relying on the current "--login" implementation.
          */
-        argv[0] = "usermod";
+        argv[0] = "/usr/sbin/usermod";
         argv[1] = "--login";
         argv[2] = data->username;
         argv[3] = "--";
