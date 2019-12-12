@@ -620,6 +620,7 @@ client_connection_removed_cb (CcNetworkPanel *self, NMConnection *connection)
                 if (net_vpn_get_connection (vpn) == connection) {
                         g_ptr_array_remove (self->vpns, vpn);
                         gtk_widget_destroy (GTK_WIDGET (vpn));
+                        update_vpn_section (self);
                         return;
                 }
         }
