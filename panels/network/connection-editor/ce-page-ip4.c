@@ -515,6 +515,9 @@ connect_ip4_page (CEPageIP4 *page)
         gboolean disabled;
         guint method, i;
 
+        gtk_container_set_focus_vadjustment (GTK_CONTAINER (gtk_builder_get_object (CE_PAGE (page)->builder, "main_box")),
+                                             gtk_scrolled_window_get_vadjustment (gtk_builder_get_object (CE_PAGE (page)->builder, "page")));
+
         add_address_section (page);
         add_dns_section (page);
         add_routes_section (page);
