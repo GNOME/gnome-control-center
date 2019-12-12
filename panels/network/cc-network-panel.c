@@ -762,6 +762,33 @@ notify_connection_added_cb (NMClient           *client,
 }
 
 static void
+notify_connection_removed_cb (NMClient           *client,
+                              NMRemoteConnection *connection,
+                              CcNetworkPanel     *panel)
+{
+        guint i;
+
+        for (i = 0; i < panel->devices->len; i++) {
+                NetObject *object = g_ptr_array_index (panel->devices, i);
+                NMConnection *vpn_conn;
+                gboolean equal;
+
+                if (!NET_IS_VPN (object))
+                        continue;
+
+                g_object_get (object, "connection", &vpn_conn, NULL);
+                equal = vpn_conn == NM_CONNECTION (connection);
+                g_object_unref (vpn_conn);
+
+                if (equal) {
+                        g_ptr_array_remove (panel->devices, object);
+                        update_vpn_section (panel);
+                        return;
+                }
+        }
+}
+
+static void
 panel_check_network_manager_version (CcNetworkPanel *panel)
 {
         GtkWidget *box;
@@ -912,6 +939,8 @@ cc_network_panel_init (CcNetworkPanel *panel)
         /* add remote settings such as VPN settings as virtual devices */
         g_signal_connect (panel->client, NM_CLIENT_CONNECTION_ADDED,
                           G_CALLBACK (notify_connection_added_cb), panel);
+        g_signal_connect (panel->client, NM_CLIENT_CONNECTION_REMOVED,
+                          G_CALLBACK (notify_connection_removed_cb), panel);
 
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         g_signal_connect_after (toplevel, "map", G_CALLBACK (on_toplevel_map), panel);
