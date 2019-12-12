@@ -39,6 +39,7 @@ struct _CEPageIP4
 {
         GtkScrolledWindow parent;
 
+        GtkWidget         *main_box;
         GtkBox            *address_box;
         GtkSizeGroup      *address_sizegroup;
         GtkSwitch         *auto_dns_switch;
@@ -504,6 +505,9 @@ connect_ip4_page (CEPageIP4 *self)
         const gchar *str_method;
         guint method;
 
+        gtk_container_set_focus_vadjustment (GTK_CONTAINER (self->main_box),
+                                             gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (self)));
+
         add_address_box (self);
         add_dns_section (self);
         add_routes_box (self);
@@ -876,6 +880,7 @@ ce_page_ip4_class_init (CEPageIP4Class *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/ip4-page.ui");
 
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, main_box);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, address_box);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, address_sizegroup);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, auto_dns_switch);
