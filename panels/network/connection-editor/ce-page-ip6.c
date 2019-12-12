@@ -51,6 +51,7 @@ struct _CEPageIP6
         GtkRadioButton    *disabled_radio;
         GtkEntry          *dns_entry;
         GtkRadioButton    *local_radio;
+        GtkGrid           *main_box;
         GtkRadioButton    *manual_radio;
         GtkCheckButton    *never_default_check;
         GtkBox            *routes_box;
@@ -443,6 +444,9 @@ connect_ip6_page (CEPageIP6 *self)
         const gchar *str_method;
         guint method;
 
+        gtk_container_set_focus_vadjustment (GTK_CONTAINER (self->main_box),
+                                             gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (self)));
+
         add_address_box (self);
         add_dns_section (self);
         add_routes_box (self);
@@ -756,6 +760,7 @@ ce_page_ip6_class_init (CEPageIP6Class *klass)
         gtk_widget_class_bind_template_child (widget_class, CEPageIP6, disabled_radio);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP6, dns_entry);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP6, local_radio);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP6, main_box);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP6, manual_radio);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP6, never_default_check);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP6, routes_box);
