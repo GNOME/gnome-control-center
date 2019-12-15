@@ -403,23 +403,22 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
   if (collision_item)
     {
       GtkWidget *label;
-      gchar *friendly_accelerator;
-      gchar *collision_text;
+      g_autofree gchar *friendly_accelerator = NULL;
+      g_autofree gchar *accelerator_text = NULL;
+      g_autofree gchar *collision_text = NULL;
 
       friendly_accelerator = convert_keysym_state_to_string (self->custom_combo);
 
-      collision_text = g_strdup_printf (_("%s is already being used for <b>%s</b>. If you "
+      accelerator_text = g_strdup_printf ("<b>%s</b>", friendly_accelerator);
+      collision_text = g_strdup_printf (_("%s is already being used for %s. If you "
                                           "replace it, %s will be disabled"),
-                                        friendly_accelerator,
+                                        accelerator_text,
                                         cc_keyboard_item_get_description (collision_item),
                                         cc_keyboard_item_get_description (collision_item));
 
       label = is_custom_shortcut (self) ? self->new_shortcut_conflict_label : self->shortcut_conflict_label;
 
       gtk_label_set_markup (GTK_LABEL (label), collision_text);
-
-      g_free (friendly_accelerator);
-      g_free (collision_text);
     }
 
   /*
@@ -559,8 +558,9 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
 {
   CcKeyCombo *combo;
   gboolean is_custom;
-  gchar *accel;
-  gchar *text;
+  g_autofree gchar *accel = NULL;
+  g_autofree gchar *description_text = NULL;
+  g_autofree gchar *text = NULL;
 
   if (!item)
     return;
@@ -587,7 +587,9 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
   gtk_widget_hide (self->replace_button);
 
   /* Setup the top label */
-  text = g_strdup_printf (_("Enter new shortcut to change <b>%s</b>."), cc_keyboard_item_get_description (item));
+  description_text = g_strdup_printf ("<b>%s</b>", cc_keyboard_item_get_description (item));
+  /* TRANSLATORS: %s is replaced with a description of the keyboard shortcut */
+  text = g_strdup_printf (_("Enter new shortcut to change %s."), description_text);
 
   gtk_label_set_markup (GTK_LABEL (self->top_info_label), text);
 
@@ -629,9 +631,6 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
       g_signal_handlers_unblock_by_func (self->command_entry, command_entry_changed_cb, self);
       g_signal_handlers_unblock_by_func (self->name_entry, name_entry_changed_cb, self);
     }
-
-  g_free (accel);
-  g_free (text);
 
   /* Show the apropriate view */
   set_shortcut_editor_page (self, is_custom ? PAGE_CUSTOM : PAGE_STANDARD_EDIT);
