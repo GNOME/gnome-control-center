@@ -723,11 +723,23 @@ cc_sharing_panel_setup_label (CcSharingPanel *self,
   g_autofree gchar *text = NULL;
 
   if (label == self->personal_file_sharing_label)
-    text = g_strdup_printf (_("File Sharing allows you to share your Public folder with others on your current network using: <a href=\"dav://%s\">dav://%s</a>"), hostname, hostname);
+    {
+      g_autofree gchar *url = g_strdup_printf ("<a href=\"dav://%s\">dav://%s</a>", hostname, hostname);
+      /* TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL */
+      text = g_strdup_printf (_("File Sharing allows you to share your Public folder with others on your current network using: %s"), url);
+    }
   else if (label == self->remote_login_label)
-    text = g_strdup_printf (_("When remote login is enabled, remote users can connect using the Secure Shell command:\n<a href=\"ssh %s\">ssh %s</a>"), hostname, hostname);
+    {
+      g_autofree gchar *command = g_strdup_printf ("<a href=\"ssh %s\">ssh %s</a>", hostname, hostname);
+      /* TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run */
+      text = g_strdup_printf (_("When remote login is enabled, remote users can connect using the Secure Shell command:\n%s"), command);
+    }
   else if (label == self->screen_sharing_label)
-    text = g_strdup_printf (_("Screen sharing allows remote users to view or control your screen by connecting to <a href=\"vnc://%s\">vnc://%s</a>"), hostname, hostname);
+    {
+      g_autofree gchar *url = g_strdup_printf ("<a href=\"vnc://%s\">vnc://%s</a>", hostname, hostname);
+      /* TRANSLATORS: %s is replaced with a link to a vnc://<hostname> URL */
+      text = g_strdup_printf (_("Screen sharing allows remote users to view or control your screen by connecting to %s"), url);
+    }
   else
     g_assert_not_reached ();
 
