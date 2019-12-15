@@ -2086,12 +2086,18 @@ cc_color_panel_treeview_quality_default_cb (GtkTreeModel *model,
 static void
 cc_color_panel_init (CcColorPanel *prefs)
 {
+  g_autofree gchar *url = NULL;
+  g_autofree gchar *warning_text = NULL;
   GtkCellRenderer *renderer;
   GtkStyleContext *context;
   GtkTreeModel *model;
   GtkTreeModel *model_filter;
   GtkTreeSelection *selection;
   GtkTreeViewColumn *column;
+  g_autofree gchar *linux_url = NULL;
+  g_autofree gchar *osx_url = NULL;
+  g_autofree gchar *windows_url = NULL;
+  g_autofree gchar *summary_text = NULL;
 
   g_resources_register (cc_color_get_resource ());
 
@@ -2117,6 +2123,12 @@ cc_color_panel_init (CcColorPanel *prefs)
                     G_CALLBACK (gcm_prefs_profile_view_cb), prefs);
 
   /* href */
+  url = g_strdup_printf ("<a href="">%s</a>",
+                         /* TRANSLATORS: Text inside link to show details on why color profile not working */
+                         _("Show details"));
+  warning_text = g_strdup_printf (/* TRANSLATORS: Label shown when problems detected with color profile */
+                                  _("Problems detected. The profile may not work correctly. %s."), url);
+  gtk_label_set_label (GTK_LABEL (prefs->label_assign_warning), warning_text);
   g_signal_connect (prefs->label_assign_warning, "activate-link",
                     G_CALLBACK (gcm_prefs_profile_assign_link_activate_cb), prefs);
 
@@ -2325,6 +2337,13 @@ cc_color_panel_init (CcColorPanel *prefs)
                     G_CALLBACK (gcm_prefs_calib_export_cb), prefs);
   g_signal_connect (prefs->button_calib_upload, "clicked",
                     G_CALLBACK (gcm_prefs_calib_upload_cb), prefs);
+  linux_url = g_strdup_printf ("<a href=\"linux\">%s</a>", _("GNU/Linux"));
+  osx_url = g_strdup_printf ("<a href=\"osx\">%s</a>", _("Apple OS X"));
+  windows_url = g_strdup_printf ("<a href=\"windows\">%s</a>", _("Microsoft Windows"));
+  summary_text = g_strdup_printf (/* TRANSLATORS: The %s values are replaced with URLs to GNU/Linux, Apple OS X and Microsoft Windows */
+                                  _("You may find these instructions on how to use the profile on %s, %s and %s systems useful."),
+                                  linux_url, osx_url, windows_url);
+  gtk_label_set_label (GTK_LABEL (prefs->label_calib_summary_message), summary_text);
   g_signal_connect (prefs->label_calib_summary_message, "activate-link",
                     G_CALLBACK (gcm_prefs_calib_export_link_cb), prefs);
 
