@@ -82,6 +82,7 @@ struct _CcApplicationsPanel
   GtkWidget       *builtin_dialog;
   GtkWidget       *builtin_label;
   GtkWidget       *builtin_list;
+  GtkLabel        *privacy_label;
 
   GtkWidget       *integration_section;
   GtkWidget       *integration_list;
@@ -1720,6 +1721,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, background);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_list);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, privacy_label);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_box);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_search_entry);
@@ -1756,12 +1758,25 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
 static void
 cc_applications_panel_init (CcApplicationsPanel *self)
 {
+  g_autofree gchar *privacy_url = NULL;
+  g_autofree gchar *privacy_text = NULL;
+  g_autofree gchar *total_text = NULL;
   g_autoptr(GtkStyleProvider) provider = NULL;
   GtkListBoxRow *row;
 
   g_resources_register (cc_applications_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  privacy_url = g_strdup_printf ("<a href=\"privacy\">%s</a>",
+                                 /* TRANSLATORS: Text used inside the privacy URL link. It must match the surrounding words in that label */
+                                 _("Privacy"));
+  privacy_text = g_strdup_printf (/* TRANSLATORS: Label to link to the privacy settings page. The %s is replaced with a link to that page, and contains a translatable string */
+                                  _("Individual permissions for applications can be reviewed in the %s Settings"), privacy_url);
+  gtk_label_set_label (self->privacy_label, privacy_text);
+
+  total_text = g_strdup_printf ("<b>%s</b>", _("Total"));
+  cc_info_row_set_title (CC_INFO_ROW (self->total), total_text);
 
   self->cancellable = g_cancellable_new ();
 

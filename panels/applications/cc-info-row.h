@@ -34,4 +34,7 @@ void       cc_info_row_set_expanded (CcInfoRow *row,
 
 gboolean   cc_info_row_get_expanded (CcInfoRow *row);
 
+void       cc_info_row_set_title    (CcInfoRow *row,
+                                     const gchar *title);
+
 G_END_DECLS
