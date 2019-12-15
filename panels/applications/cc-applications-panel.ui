@@ -172,12 +172,12 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkLabel">
+                          <object class="GtkLabel" id="privacy_label">
                             <property name="visible">1</property>
                             <property name="xalign">0</property>
                             <property name="wrap">1</property>
                             <property name="max-width-chars">50</property>
-                            <property name="label" translatable="yes">Individual permissions for applications can be reviewed in the &lt;a href=&quot;privacy&quot;&gt;Privacy&lt;/a&gt; Settings.</property>
+                            <property name="label" translatable="no">PRIVACY INFO GOES HERE</property>
                             <property name="use-markup">1</property>
                             <signal name="activate-link" handler="privacy_link_cb" swapped="yes"/>
                           </object>
@@ -572,7 +572,8 @@
             </child>
             <child>
               <object class="CcInfoRow" id="total">
-                <property name="title" translatable="yes">&lt;b&gt;Total&lt;/b&gt;</property>
+                <!-- Text set inside .c file as it uses markup -->
+                <property name="title" translatable="no">TOTAL</property>
                 <property name="use-markup">1</property>
                 <property name="info">Unknown</property>
               </object>

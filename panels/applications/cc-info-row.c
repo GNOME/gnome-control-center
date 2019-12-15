@@ -106,6 +106,7 @@ cc_info_row_set_property (GObject      *object,
     {
     case PROP_TITLE:
       gtk_label_set_label (GTK_LABEL (row->title), g_value_get_string (value));
+      cc_info_row_set_title (row, g_value_get_string (value));
       break;
 
     case PROP_INFO:
@@ -213,3 +214,9 @@ cc_info_row_set_expanded (CcInfoRow *row,
   g_object_notify (G_OBJECT (row), "expanded");
 }
 
+void
+cc_info_row_set_title (CcInfoRow   *row,
+                       const gchar *title)
+{
+  gtk_label_set_label (GTK_LABEL (row->title), title);
+}
