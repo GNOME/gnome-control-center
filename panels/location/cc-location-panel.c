@@ -36,6 +36,7 @@ struct _CcLocationPanel
 
   GtkStack     *stack;
   GtkListBox   *location_apps_list_box;
+  GtkLabel     *location_privacy_policy_label;
 
   GSettings    *location_settings;
 
@@ -443,14 +444,25 @@ cc_location_panel_class_init (CcLocationPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, location_apps_list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, location_privacy_policy_label);
 }
 
 static void
 cc_location_panel_init (CcLocationPanel *self)
 {
+  g_autofree gchar *url = NULL;
+  g_autofree gchar *text = NULL;
+
   g_resources_register (cc_location_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  url = g_strdup_printf ("<a href=\"https://location.services.mozilla.com/privacy\">%s</a>",
+                         /* TRANSLATORS: Text inside privacy policy link */
+                         _("Privacy Policy"));
+  text = g_strdup_printf (/* TRANSLATORS: Label shown to link to location services privacy policy */
+                          _("Uses Mozilla Location Service: %s"), url);
+  gtk_label_set_label (self->location_privacy_policy_label, text);
 
   gtk_list_box_set_header_func (self->location_apps_list_box,
                                 cc_list_box_update_header_func,
