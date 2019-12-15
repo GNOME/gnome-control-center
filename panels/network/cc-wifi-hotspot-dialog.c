@@ -106,6 +106,7 @@ wifi_hotspot_dialog_update_main_label (CcWifiHotspotDialog *self)
   GBytes *ssid = NULL;
   g_autofree gchar *active_ssid = NULL;
   g_autofree gchar *escape = NULL;
+  g_autofree gchar *ssid_text = NULL;
   g_autofree gchar *label = NULL;
 
   g_assert (CC_IS_WIFI_HOTSPOT_DIALOG (self));
@@ -126,9 +127,10 @@ wifi_hotspot_dialog_update_main_label (CcWifiHotspotDialog *self)
     return;
 
   escape = g_markup_escape_text (active_ssid, -1);
+  ssid_text = g_strdup_printf ("<b>%s</b>", escape);
   /* TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name */
-  label = g_strdup_printf (_("Turning on the hotspot will disconnect from <b>%s</b>, "
-                             "and it will not be possible to access the internet through Wi-Fi."), escape);
+  label = g_strdup_printf (_("Turning on the hotspot will disconnect from %s, "
+                             "and it will not be possible to access the internet through Wi-Fi."), ssid_text);
   gtk_label_set_markup (self->connection_label, label);
 }
 
