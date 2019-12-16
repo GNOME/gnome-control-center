@@ -87,6 +87,7 @@ struct _CcApplicationsPanel
   GtkStack        *stack;
   GtkBox          *empty_box;
   GtkBox          *settings_box;
+  GtkButton       *install_button;
 
   GtkBox          *permission_section;
   GtkListBox      *permission_list;
@@ -152,6 +153,13 @@ enum
   PROP_0,
   PROP_PARAMETERS
 };
+
+static gboolean
+gnome_software_is_installed (void)
+{
+  g_autofree gchar *path = g_find_program_in_path ("gnome-software");
+  return path != NULL;
+}
 
 /* Callbacks */
 
@@ -1659,7 +1667,7 @@ update_panel (CcApplicationsPanel *self,
 
   gtk_label_set_label (self->title_label, g_app_info_get_display_name (info));
   gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->settings_box));
-  gtk_widget_show (GTK_WIDGET (self->header_button));
+  gtk_widget_set_visible (GTK_WIDGET (self->header_button), gnome_software_is_installed ());
 
   g_clear_pointer (&self->current_app_id, g_free);
   g_clear_pointer (&self->current_portal_app_id, g_free);
@@ -1975,6 +1983,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_reset);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_list);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, install_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, integration_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, integration_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, location);
@@ -2042,6 +2051,8 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   g_type_ensure(CC_TYPE_INFO_ROW);
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  gtk_widget_set_visible (GTK_WIDGET (self->install_button), gnome_software_is_installed ());
 
   provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
   gtk_css_provider_load_from_resource (GTK_CSS_PROVIDER (provider),
