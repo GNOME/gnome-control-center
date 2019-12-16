@@ -80,6 +80,7 @@ static void
 nm_device_bluetooth_refresh_ui (NetDeviceBluetooth *self)
 {
         NMDeviceState state;
+        g_autofree gchar *path = NULL;
 
         /* set up the device on/off switch */
         state = nm_device_get_state (self->device);
@@ -89,7 +90,8 @@ nm_device_bluetooth_refresh_ui (NetDeviceBluetooth *self)
         update_off_switch_from_device_state (self->device_off_switch, state, self);
 
         /* set up the Options button */
-        gtk_widget_set_visible (GTK_WIDGET (self->options_button), state != NM_DEVICE_STATE_UNMANAGED && g_find_program_in_path ("nm-connection-editor") != NULL);
+        path = g_find_program_in_path ("nm-connection-editor");
+        gtk_widget_set_visible (GTK_WIDGET (self->options_button), state != NM_DEVICE_STATE_UNMANAGED && path != NULL);
 }
 
 static void
@@ -179,8 +181,12 @@ net_device_bluetooth_class_init (NetDeviceBluetoothClass *klass)
 static void
 net_device_bluetooth_init (NetDeviceBluetooth *self)
 {
+        g_autofree gchar *path = NULL;
+
         gtk_widget_init_template (GTK_WIDGET (self));
-        gtk_widget_set_visible (GTK_WIDGET (self->options_button), g_find_program_in_path ("nm-connection-editor") != NULL);
+
+        path = g_find_program_in_path ("nm-connection-editor");
+        gtk_widget_set_visible (GTK_WIDGET (self->options_button), path != NULL);
 }
 
 NetDeviceBluetooth *
