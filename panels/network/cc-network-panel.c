@@ -908,14 +908,14 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         /* use NetworkManager client */
         panel->client = nm_client_new (NULL, NULL);
-        g_signal_connect (panel->client, "notify::nm-running" ,
-                          G_CALLBACK (manager_running), panel);
-        g_signal_connect (panel->client, "notify::active-connections",
-                          G_CALLBACK (active_connections_changed), panel);
-        g_signal_connect (panel->client, "device-added",
-                          G_CALLBACK (device_added_cb), panel);
-        g_signal_connect (panel->client, "device-removed",
-                          G_CALLBACK (device_removed_cb), panel);
+        g_signal_connect_object (panel->client, "notify::nm-running" ,
+                                 G_CALLBACK (manager_running), panel, 0);
+        g_signal_connect_object (panel->client, "notify::active-connections",
+                                 G_CALLBACK (active_connections_changed), panel, 0);
+        g_signal_connect_object (panel->client, "device-added",
+                                 G_CALLBACK (device_added_cb), panel, 0);
+        g_signal_connect_object (panel->client, "device-removed",
+                                 G_CALLBACK (device_removed_cb), panel, 0);
 
         /* Setup ModemManager client */
         system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
