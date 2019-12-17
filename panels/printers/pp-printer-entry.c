@@ -568,18 +568,15 @@ get_jobs_cb (GObject      *source_object,
              GAsyncResult *result,
              gpointer      user_data)
 {
-  PpPrinterEntry   *self = user_data;
-  PpPrinter        *printer = PP_PRINTER (source_object);
-  g_autoptr(GError) error = NULL;
-  GList            *jobs;
-  g_autofree gchar *button_label = NULL;
-  gint              num_jobs;
+  PpPrinterEntry      *self = user_data;
+  PpPrinter           *printer = PP_PRINTER (source_object);
+  g_autoptr(GError)    error = NULL;
+  g_autoptr(GPtrArray) jobs = NULL;
+  g_autofree gchar    *button_label = NULL;
 
   jobs = pp_printer_get_jobs_finish (printer, result, &error);
-  num_jobs = g_list_length (jobs);
 
   g_object_unref (source_object);
-  g_list_free_full (jobs, (GDestroyNotify) g_object_unref);
 
   if (error != NULL)
     {
@@ -591,7 +588,7 @@ get_jobs_cb (GObject      *source_object,
       return;
     }
 
-  if (num_jobs == 0)
+  if (jobs->len == 0)
     {
       /* Translators: This is the label of the button that opens the Jobs Dialog. */
       button_label = g_strdup (_("No Active Jobs"));
@@ -599,11 +596,11 @@ get_jobs_cb (GObject      *source_object,
   else
     {
       /* Translators: This is the label of the button that opens the Jobs Dialog. */
-      button_label = g_strdup_printf (ngettext ("%u Job", "%u Jobs", num_jobs), num_jobs);
+      button_label = g_strdup_printf (ngettext ("%u Job", "%u Jobs", jobs->len), jobs->len);
     }
 
   gtk_button_set_label (GTK_BUTTON (self->show_jobs_dialog_button), button_label);
-  gtk_widget_set_sensitive (self->show_jobs_dialog_button, num_jobs > 0);
+  gtk_widget_set_sensitive (self->show_jobs_dialog_button, jobs->len > 0);
 
   if (self->pp_jobs_dialog != NULL)
     {
