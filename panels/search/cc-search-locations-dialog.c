@@ -89,6 +89,10 @@ place_new (CcSearchLocationsDialog *dialog,
     new_place->display_name = display_name;
   else
     new_place->display_name = g_file_get_basename (location);
+  if (g_strcmp0 (g_file_get_path (location), g_get_home_dir ()) == 0)
+    new_place->settings_key = TRACKER_KEY_SINGLE_DIRECTORIES;
+  else
+    new_place->settings_key = TRACKER_KEY_RECURSIVE_DIRECTORIES;
   new_place->place_type = place_type;
 
   return new_place;
@@ -256,10 +260,52 @@ path_from_tracker_dir (const gchar *value)
   return path;
 }
 
+static GPtrArray *
+place_get_new_settings_values (CcSearchLocationsDialog *self,
+                               Place *place,
+                               gboolean remove)
+{
+  g_auto(GStrv) values = NULL;
+  g_autofree gchar *path = NULL;
+  GPtrArray *new_values;
+  const gchar *tracker_dir;
+  gboolean found;
+  gint idx;
+
+  new_values = g_ptr_array_new_with_free_func (g_free);
+  values = g_settings_get_strv (self->tracker_preferences, place->settings_key);
+  path = g_file_get_path (place->location);
+  tracker_dir = path_to_tracker_dir (path);
+
+  found = FALSE;
+
+  for (idx = 0; values[idx] != NULL; idx++)
+    {
+      if (g_strcmp0 (values[idx], tracker_dir) == 0)
+        {
+          found = TRUE;
+
+          if (remove)
+            continue;
+        }
+
+      g_ptr_array_add (new_values, g_strdup (values[idx]));
+    }
+
+  if (!found && !remove)
+    g_ptr_array_add (new_values, g_strdup (tracker_dir));
+
+  g_ptr_array_add (new_values, NULL);
+
+  return new_values;
+}
+
+
 static GList *
 get_tracker_locations (CcSearchLocationsDialog *self)
 {
   g_auto(GStrv) locations = NULL;
+  GFile *file;
   GList *list;
   gint idx;
   Place *location;
@@ -272,11 +318,25 @@ get_tracker_locations (CcSearchLocationsDialog *self)
     {
       path = path_from_tracker_dir (locations[idx]);
 
+      file = g_file_new_for_commandline_arg (path);
       location = place_new (self,
-                            g_file_new_for_commandline_arg (path),
+                            file,
                             NULL,
                             PLACE_OTHER);
-      list = g_list_prepend (list, location);
+
+      if (file != NULL && g_file_query_exists (file, NULL))
+        {
+          list = g_list_prepend (list, location);
+        }
+      else
+        {
+          g_autoptr(GPtrArray) new_values = NULL;
+
+          new_values = place_get_new_settings_values (self, location, TRUE);
+          g_settings_set_strv (self->tracker_preferences,
+                               TRACKER_KEY_RECURSIVE_DIRECTORIES,
+                               (const gchar **) new_values->pdata);
+        }
     }
 
   return g_list_reverse (list);
@@ -377,46 +437,6 @@ switch_tracker_get_mapping (GValue *value,
   return TRUE;
 }
 
-static GPtrArray *
-place_get_new_settings_values (CcSearchLocationsDialog *self,
-                               Place *place,
-                               gboolean remove)
-{
-  g_auto(GStrv) values = NULL;
-  g_autofree gchar *path = NULL;
-  GPtrArray *new_values;
-  const gchar *tracker_dir;
-  gboolean found;
-  gint idx;
-
-  new_values = g_ptr_array_new_with_free_func (g_free);
-  values = g_settings_get_strv (self->tracker_preferences, place->settings_key);
-  path = g_file_get_path (place->location);
-  tracker_dir = path_to_tracker_dir (path);
-
-  found = FALSE;
-
-  for (idx = 0; values[idx] != NULL; idx++)
-    {
-      if (g_strcmp0 (values[idx], tracker_dir) == 0)
-        {
-          found = TRUE;
-
-          if (remove)
-            continue;
-        }
-
-      g_ptr_array_add (new_values, g_strdup (values[idx]));
-    }
-
-  if (!found && !remove)
-    g_ptr_array_add (new_values, g_strdup (tracker_dir));
-
-  g_ptr_array_add (new_values, NULL);
-
-  return new_values;
-}
-
 static GVariant *
 switch_tracker_set_mapping (const GValue *value,
                             const GVariantType *expected_type,
@@ -451,12 +471,6 @@ place_query_info_ready (GObject *source,
 
   box = gtk_bin_get_child (GTK_BIN (row));
   gtk_widget_show (box);
-
-  path = g_file_get_path (G_FILE (source));
-  if (g_strcmp0 (path, g_get_home_dir ()) == 0)
-    place->settings_key = TRACKER_KEY_SINGLE_DIRECTORIES;
-  else
-    place->settings_key = TRACKER_KEY_RECURSIVE_DIRECTORIES;
 
   w = gtk_label_new (place->display_name);
   gtk_widget_show (w);
