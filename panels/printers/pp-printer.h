@@ -60,7 +60,7 @@ void         pp_printer_get_jobs_async (PpPrinter           *printer,
                                         GAsyncReadyCallback  callback,
                                         gpointer             user_data);
 
-GList       *pp_printer_get_jobs_finish (PpPrinter          *printer,
+GPtrArray   *pp_printer_get_jobs_finish (PpPrinter          *printer,
                                          GAsyncResult       *res,
                                          GError            **error);
 
