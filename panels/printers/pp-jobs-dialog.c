@@ -317,17 +317,18 @@ update_jobs_list_cb (GObject      *source_object,
                      GAsyncResult *result,
                      gpointer      user_data)
 {
-  PpJobsDialog     *self = user_data;
-  PpPrinter        *printer = PP_PRINTER (source_object);
-  GtkWidget        *clear_all_button;
-  GtkWidget        *infobar;
-  GtkWidget        *label;
-  GtkStack         *stack;
-  g_autoptr(GError) error = NULL;
-  GList            *jobs, *l;
-  PpJob            *job;
-  gchar           **auth_info_required = NULL;
-  gint              num_of_jobs, num_of_auth_jobs = 0;
+  PpJobsDialog        *self = user_data;
+  PpPrinter           *printer = PP_PRINTER (source_object);
+  GtkWidget           *clear_all_button;
+  GtkWidget           *infobar;
+  GtkWidget           *label;
+  GtkStack            *stack;
+  g_autoptr(GError)    error = NULL;
+  g_autoptr(GPtrArray) jobs;
+  PpJob               *job;
+  gchar              **auth_info_required = NULL;
+  gint                 num_of_auth_jobs = 0;
+  guint                i;
 
   g_list_store_remove_all (self->store);
 
@@ -345,8 +346,7 @@ update_jobs_list_cb (GObject      *source_object,
       return;
     }
 
-  num_of_jobs = g_list_length (jobs);
-  if (num_of_jobs > 0)
+  if (jobs->len > 0)
     {
       gtk_widget_set_sensitive (clear_all_button, TRUE);
       gtk_stack_set_visible_child_name (stack, "list-jobs-page");
@@ -357,11 +357,11 @@ update_jobs_list_cb (GObject      *source_object,
       gtk_stack_set_visible_child_name (stack, "no-jobs-page");
     }
 
-  for (l = jobs; l != NULL; l = l->next)
+  for (i = 0; i < jobs->len; i++)
     {
-      job = PP_JOB (l->data);
+      job = PP_JOB (g_ptr_array_index (jobs, i));
 
-      g_list_store_append (self->store, job);
+      g_list_store_append (self->store, g_object_ref (job));
 
       g_object_get (G_OBJECT (job),
                     "auth-info-required", &auth_info_required,
@@ -399,7 +399,6 @@ update_jobs_list_cb (GObject      *source_object,
 
   authenticate_popover_update (self);
 
-  g_list_free (jobs);
   g_clear_object (&self->get_jobs_cancellable);
 
   if (!self->jobs_filled)
