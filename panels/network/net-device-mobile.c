@@ -770,11 +770,14 @@ net_device_mobile_class_init (NetDeviceMobileClass *klass)
 static void
 net_device_mobile_init (NetDeviceMobile *self)
 {
+        g_autofree gchar *path = NULL;
+
         gtk_widget_init_template (GTK_WIDGET (self));
 
         self->cancellable = g_cancellable_new ();
 
-        gtk_widget_set_visible (GTK_WIDGET (self->options_button), g_find_program_in_path ("nm-connection-editor") != NULL);
+        path = g_find_program_in_path ("nm-connection-editor");
+        gtk_widget_set_visible (GTK_WIDGET (self->options_button), path != NULL);
 }
 
 NetDeviceMobile *
