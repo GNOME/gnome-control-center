@@ -43,6 +43,27 @@ struct _CcVolumeSlider
 G_DEFINE_TYPE (CcVolumeSlider, cc_volume_slider, GTK_TYPE_BOX)
 
 static void
+update_volume_icon (CcVolumeSlider *self)
+{
+  const gchar *icon_name = NULL;
+  gdouble volume, fraction;
+
+  volume = gtk_adjustment_get_value (self->volume_adjustment);
+  fraction = (100.0 * volume) / gtk_adjustment_get_upper (self->volume_adjustment);
+
+  if (gtk_toggle_button_get_active (self->mute_button))
+    icon_name = "audio-volume-muted-symbolic";
+  else if (fraction > 0.0 && fraction < 30.0)
+    icon_name = "audio-volume-low-symbolic";
+  else if (fraction > 30.0 && fraction < 70.0)
+    icon_name = "audio-volume-medium-symbolic";
+  else
+    icon_name = "audio-volume-high-symbolic";
+
+  gtk_image_set_from_icon_name (self->stream_type_icon, icon_name, GTK_ICON_SIZE_BUTTON);
+}
+
+static void
 volume_changed_cb (CcVolumeSlider *self)
 {
   gdouble volume, rounded;
@@ -57,6 +78,8 @@ volume_changed_cb (CcVolumeSlider *self)
 
   if (gvc_mixer_stream_set_volume (self->stream, (pa_volume_t) rounded))
       gvc_mixer_stream_push_volume (self->stream);
+
+  update_volume_icon (self);
 }
 
 static void
@@ -108,6 +131,8 @@ mute_button_toggled_cb (CcVolumeSlider *self)
     return;
 
   gvc_mixer_stream_change_is_muted (self->stream, gtk_toggle_button_get_active (self->mute_button));
+
+  update_volume_icon (self);
 }
 
 static void
@@ -217,6 +242,7 @@ cc_volume_slider_set_stream (CcVolumeSlider *self,
                                                                   self, G_CONNECT_SWAPPED);
       notify_volume_cb (self);
       notify_is_muted_cb (self);
+      update_volume_icon (self);
     }
 }
 
