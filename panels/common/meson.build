@@ -46,12 +46,14 @@ sources = common_sources + files(
   'cc-common-language.c',
   'cc-language-chooser.c',
   'cc-list-row.c',
+  'cc-permission-infobar.c',
   'cc-util.c'
 )
 
 resource_data = files(
   'cc-language-chooser.ui',
   'cc-list-row.ui',
+  'cc-permission-infobar.ui',
 )
 
 sources += gnome.compile_resources(
