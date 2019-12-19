@@ -52,6 +52,7 @@
 #include "user-utils.h"
 
 #include "cc-common-language.h"
+#include "cc-permission-infobar.h"
 #include "cc-util.h"
 
 #define USER_ACCOUNTS_PERMISSION "org.gnome.controlcenter.user-accounts.administration"
@@ -76,18 +77,17 @@ struct _CcUserPanel {
         GtkButton       *fingerprint_button;
         GtkLabel        *fingerprint_label;
         GtkEntry        *full_name_entry;
-        GtkStack        *headerbar_button_stack;
         GtkButton       *language_button;
         GtkLabel        *language_button_label;
         GtkLabel        *language_label;
         GtkButton       *last_login_button;
         GtkLabel        *last_login_button_label;
         GtkLabel        *last_login_label;
-        GtkLockButton   *lock_button;
         GtkBox          *no_users_box;
         GtkRevealer     *notification_revealer;
         GtkButton       *password_button;
         GtkLabel        *password_button_label;
+        CcPermissionInfobar *permission_infobar;
         GtkButton       *remove_user_button;
         GtkStack        *stack;
         GtkToggleButton *user_icon_button;
@@ -1192,7 +1192,8 @@ on_permission_changed (CcUserPanel *self)
         is_authorized = g_permission_get_allowed (G_PERMISSION (self->permission));
         self_selected = act_user_get_uid (user) == geteuid ();
 
-        gtk_stack_set_visible_child (self->headerbar_button_stack, is_authorized ? GTK_WIDGET (self->add_user_button) : GTK_WIDGET (self->lock_button));
+        //gtk_revealer_set_reveal_child (GTK_REVEALER (self->permission_infobar), !is_authorized);
+        gtk_widget_set_visible (GTK_WIDGET (self->add_user_button), is_authorized);
 
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_user_button), is_authorized);
         if (is_authorized) {
@@ -1383,9 +1384,9 @@ cc_user_panel_constructed (GObject *object)
         G_OBJECT_CLASS (cc_user_panel_parent_class)->constructed (object);
 
         shell = cc_panel_get_shell (CC_PANEL (self));
-        cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->headerbar_button_stack), GTK_POS_RIGHT);
+        cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->add_user_button), GTK_POS_RIGHT);
 
-        gtk_lock_button_set_permission (self->lock_button, self->permission);
+        cc_permission_infobar_set_permission (self->permission_infobar, self->permission);
 }
 
 static void
@@ -1399,6 +1400,7 @@ cc_user_panel_init (CcUserPanel *self)
         /* register types that the builder might need */
         type = cc_user_image_get_type ();
         type = cc_carousel_get_type ();
+        type = cc_permission_infobar_get_type ();
 
         gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -1466,18 +1468,17 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, fingerprint_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, fingerprint_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_entry);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, headerbar_button_stack);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, language_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, language_button_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, language_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, last_login_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, last_login_button_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, last_login_label);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, lock_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, no_users_box);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, notification_revealer);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, password_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, password_button_label);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, permission_infobar);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, remove_user_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, stack);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_icon_button);

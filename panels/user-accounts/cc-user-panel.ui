@@ -1,26 +1,14 @@
 <interface>
-  <object class="GtkStack" id="headerbar_button_stack">
+  <object class="GtkButton" id="add_user_button">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <child>
-      <object class="GtkLockButton" id="lock_button">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton" id="add_user_button">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="label" translatable="yes">_Add User…</property>
-        <property name="use_underline">True</property>
-        <signal name="clicked" handler="add_user" object="CcUserPanel" swapped="yes"/>
-        <style>
-          <class name="suggested-action"/>
-        </style>
-      </object>
-    </child>
-  </object>
+    <property name="can_focus">True</property>
+    <property name="label" translatable="yes">_Add User…</property>
+    <property name="use_underline">True</property>
+    <signal name="clicked" handler="add_user" object="CcUserPanel" swapped="yes"/>
+    <style>
+      <class name="suggested-action"/>
+     </style>
+   </object>
   <object class="GtkListStore" id="shortname-model">
     <columns>
       <!-- column-name gchararray -->
@@ -98,6 +86,12 @@
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
                 <property name="border_width">0</property>
+                <child>
+                  <object class="CcPermissionInfobar" id="permission_infobar">
+                    <property name="visible">True</property>
+                  </object>
+                </child>
+
                 <child>
                   <object class="CcCarousel" id="carousel">
                     <property name="visible">True</property>
