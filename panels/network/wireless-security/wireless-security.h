@@ -25,6 +25,10 @@
 #include <gtk/gtk.h>
 #include <NetworkManager.h>
 
+/* For compatibility with NetworkManager-1.20 and earlier. */
+#define NMU_SEC_SAE 9
+#define NM_802_11_AP_SEC_KEY_MGMT_SAE = 0x00000400
+
 G_BEGIN_DECLS
 
 G_DECLARE_DERIVABLE_TYPE (WirelessSecurity, wireless_security, WIRELESS, SECURITY, GObject)
