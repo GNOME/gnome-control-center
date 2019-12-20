@@ -91,6 +91,10 @@ get_default_type_for_security (NMSettingWirelessSecurity *sec)
                 return NMU_SEC_DYNAMIC_WEP;
         }
 
+        if (!strcmp (key_mgmt, "sae")) {
+                return NMU_SEC_SAE;
+        }
+
         if (   !strcmp (key_mgmt, "wpa-none")
             || !strcmp (key_mgmt, "wpa-psk")) {
                 if (find_proto (sec, "rsn"))
@@ -320,6 +324,19 @@ finish_setup (CEPageSecurity *self)
                 }
         }
 
+        if (nm_utils_security_valid (NMU_SEC_SAE, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
+                WirelessSecurityWPAPSK *ws_wpa_psk;
+
+                ws_wpa_psk = ws_wpa_psk_new (self->connection, FALSE);
+                if (ws_wpa_psk) {
+                        add_security_item (self, WIRELESS_SECURITY (ws_wpa_psk), sec_model,
+                                           &iter, _("WPA3 Personal"), FALSE);
+                        if ((active < 0) && ((default_type == NMU_SEC_SAE)))
+                                active = item;
+                        item++;
+                }
+        }
+
         if (nm_utils_security_valid (NMU_SEC_WPA_PSK, dev_caps, FALSE, is_adhoc, 0, 0, 0) ||
             nm_utils_security_valid (NMU_SEC_WPA2_PSK, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
                 WirelessSecurityWPAPSK *ws_wpa_psk;
@@ -483,7 +500,8 @@ ce_page_security_new (NMConnection *connection)
         if (default_type == NMU_SEC_STATIC_WEP ||
             default_type == NMU_SEC_LEAP ||
             default_type == NMU_SEC_WPA_PSK ||
-            default_type == NMU_SEC_WPA2_PSK) {
+            default_type == NMU_SEC_WPA2_PSK ||
+            default_type == NMU_SEC_SAE) {
                 self->security_setting = NM_SETTING_WIRELESS_SECURITY_SETTING_NAME;
         }
 
