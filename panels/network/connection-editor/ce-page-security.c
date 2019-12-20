@@ -90,6 +90,11 @@ get_default_type_for_security (NMSettingWirelessSecurity *sec)
                         return NMU_SEC_LEAP;
                 return NMU_SEC_DYNAMIC_WEP;
         }
+#if NM_CHECK_VERSION(1,20,6)
+        if (!strcmp (key_mgmt, "sae")) {
+                return NMU_SEC_SAE;
+        }
+#endif
 
         if (   !strcmp (key_mgmt, "wpa-none")
             || !strcmp (key_mgmt, "wpa-psk")) {
@@ -319,6 +324,20 @@ finish_setup (CEPageSecurity *self)
                         item++;
                 }
         }
+#if NM_CHECK_VERSION(1,20,6)
+        if (nm_utils_security_valid (NMU_SEC_SAE, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
+                WirelessSecurityWPAPSK *ws_wpa_psk;
+
+                ws_wpa_psk = ws_wpa_psk_new (self->connection, FALSE);
+                if (ws_wpa_psk) {
+                        add_security_item (self, WIRELESS_SECURITY (ws_wpa_psk), sec_model,
+                                           &iter, _("WPA3 Personal"), FALSE);
+                        if ((active < 0) && ((default_type == NMU_SEC_SAE)))
+                                active = item;
+                        item++;
+                }
+        }
+#endif
 
         if (nm_utils_security_valid (NMU_SEC_WPA_PSK, dev_caps, FALSE, is_adhoc, 0, 0, 0) ||
             nm_utils_security_valid (NMU_SEC_WPA2_PSK, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
@@ -483,6 +502,9 @@ ce_page_security_new (NMConnection *connection)
         if (default_type == NMU_SEC_STATIC_WEP ||
             default_type == NMU_SEC_LEAP ||
             default_type == NMU_SEC_WPA_PSK ||
+#if NM_CHECK_VERSION(1,20,6)
+	    default_type == NMU_SEC_SAE ||
+#endif
             default_type == NMU_SEC_WPA2_PSK) {
                 self->security_setting = NM_SETTING_WIRELESS_SECURITY_SETTING_NAME;
         }
