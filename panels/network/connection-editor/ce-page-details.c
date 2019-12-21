@@ -97,8 +97,13 @@ get_ap_security_string (NMAccessPoint *ap)
                 g_string_append_printf (str, "%s, ", _("WPA"));
         }
         if (rsn_flags != NM_802_11_AP_SEC_NONE) {
-                /* TRANSLATORS: this WPA WiFi security */
-                g_string_append_printf (str, "%s, ", _("WPA2"));
+                if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_SAE) {
+                        /* TRANSLATORS: this WPA3 WiFi security */
+                        g_string_append_printf (str, "%s, ", _("WPA3"));
+                } else {
+                        /* TRANSLATORS: this WPA WiFi security */
+                        g_string_append_printf (str, "%s, ", _("WPA2"));
+                }
         }
         if ((wpa_flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X) ||
             (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X)) {
