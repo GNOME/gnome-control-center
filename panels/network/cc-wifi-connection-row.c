@@ -59,7 +59,8 @@ typedef enum
   NM_AP_SEC_NONE,
   NM_AP_SEC_WEP,
   NM_AP_SEC_WPA,
-  NM_AP_SEC_WPA2
+  NM_AP_SEC_WPA2,
+  NM_AP_SEC_SAE
 } NMAccessPointSecurity;
 
 G_DEFINE_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, GTK_TYPE_LIST_BOX_ROW)
@@ -96,6 +97,12 @@ get_access_point_security (NMAccessPoint *ap)
     {
       type = NM_AP_SEC_WPA;
     }
+#if NM_CHECK_VERSION(1,20,6)
+  else if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_SAE)
+    {
+      type = NM_AP_SEC_SAE;
+    }
+#endif
   else
     {
       type = NM_AP_SEC_WPA2;
@@ -128,6 +135,8 @@ get_connection_security (NMConnection *con)
     return NM_AP_SEC_WPA2;
   else if (strncmp (key_mgmt, "wpa-", 4) == 0)
     return NM_AP_SEC_WPA;
+  else if (g_str_equal (key_mgmt, "sae"))
+    return NM_AP_SEC_SAE;
   else
     return NM_AP_SEC_UNKNOWN;
 }
@@ -257,6 +266,11 @@ update_ui (CcWifiConnectionRow *self)
 	{
           icon_name = "network-wireless-encrypted-symbolic";
           gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA2)"));
+	}
+	  else if (security == NM_AP_SEC_SAE)
+	{
+          icon_name = "network-wireless-encrypted-symbolic";
+          gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA3)"));
 	}
       else
 	{
