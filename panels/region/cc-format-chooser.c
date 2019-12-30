@@ -43,9 +43,11 @@ struct _CcFormatChooser {
         GtkWidget *cancel_button;
         GtkWidget *back_button;
         GtkWidget *done_button;
+        GtkWidget *empty_results_view;
         GtkWidget *main_leaflet;
-        GtkWidget *no_results;
         GtkWidget *region_filter_entry;
+        GtkWidget *region_list;
+        GtkWidget *region_list_stack;
         GtkWidget *common_region_title;
         GtkWidget *common_region_listbox;
         GtkWidget *region_title;
@@ -58,6 +60,7 @@ struct _CcFormatChooser {
         GtkWidget *paper_format_label;
         gboolean adding;
         gboolean showing_extra;
+        gboolean no_results;
         gchar *region;
         gchar *preview_region;
         gchar **filter_words;
@@ -368,16 +371,6 @@ region_widget_new (CcFormatChooser *self,
         return row;
 }
 
-static GtkWidget *
-no_results_widget_new (void)
-{
-        GtkWidget *widget;
-
-        widget = padded_label_new (_("No regions found"));
-        gtk_widget_set_sensitive (widget, FALSE);
-        return widget;
-}
-
 static void
 add_regions (CcFormatChooser *chooser,
              gchar          **locale_ids,
@@ -456,23 +449,30 @@ region_visible (GtkListBoxRow *row,
         g_autofree gchar *locale_name = NULL;
         g_autofree gchar *locale_current_name = NULL;
         g_autofree gchar *locale_untranslated_name = NULL;
+        gboolean match = TRUE;
 
         if (!chooser->filter_words)
-                return TRUE;
+          goto end;
 
         locale_name =
                 cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-name"));
         if (match_all (chooser->filter_words, locale_name))
-                 return TRUE;
+          goto end;
 
         locale_current_name =
                 cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-current-name"));
         if (match_all (chooser->filter_words, locale_current_name))
-                 return TRUE;
+          goto end;
 
         locale_untranslated_name =
                 cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-untranslated-name"));
-        return match_all (chooser->filter_words, locale_untranslated_name);
+
+        match = match_all (chooser->filter_words, locale_untranslated_name);
+
+ end:
+        if (match)
+          chooser->no_results = FALSE;
+        return match;
 }
 
 static void
@@ -492,14 +492,23 @@ filter_changed (CcFormatChooser *chooser)
         gtk_widget_set_visible (chooser->common_region_title, visible);
         gtk_widget_set_visible (chooser->region_title, visible);
 
+        /* Reset cached search state */
+        chooser->no_results = TRUE;
+
         if (!filter_contents) {
                 gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->region_listbox));
                 gtk_list_box_set_placeholder (GTK_LIST_BOX (chooser->region_listbox), NULL);
                 return;
         }
         chooser->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
-        gtk_list_box_set_placeholder (GTK_LIST_BOX (chooser->region_listbox), GTK_WIDGET (chooser->no_results));
         gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->region_listbox));
+
+        if (chooser->no_results)
+          gtk_stack_set_visible_child (GTK_STACK (chooser->region_list_stack),
+                                       GTK_WIDGET (chooser->empty_results_view));
+        else
+          gtk_stack_set_visible_child (GTK_STACK (chooser->region_list_stack),
+                                       GTK_WIDGET (chooser->region_list));
 }
 
 static void
@@ -544,7 +553,6 @@ cc_format_chooser_dispose (GObject *object)
 {
         CcFormatChooser *chooser = CC_FORMAT_CHOOSER (object);
 
-        g_clear_object (&chooser->no_results);
         g_clear_pointer (&chooser->filter_words, g_strfreev);
         g_clear_pointer (&chooser->region, g_free);
 
@@ -578,6 +586,9 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, number_format_label);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, measurement_format_label);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, paper_format_label);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list_stack);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, empty_results_view);
 
         gtk_widget_class_bind_template_callback (widget_class, format_chooser_back_button_clicked_cb);
         gtk_widget_class_bind_template_callback (widget_class, format_chooser_leaflet_fold_changed_cb);
@@ -589,10 +600,6 @@ void
 cc_format_chooser_init (CcFormatChooser *chooser)
 {
         gtk_widget_init_template (GTK_WIDGET (chooser));
-
-        /* We ref-sink here so we can reuse this widget multiple times */
-        chooser->no_results = g_object_ref_sink (no_results_widget_new ());
-        gtk_widget_show (chooser->no_results);
 
         gtk_list_box_set_sort_func (GTK_LIST_BOX (chooser->common_region_listbox),
                                     (GtkListBoxSortFunc)sort_regions, chooser, NULL);
