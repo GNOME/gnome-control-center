@@ -136,85 +136,126 @@
 
                 <!-- Language format list -->
                 <child>
-                  <object class="GtkScrolledWindow">
+                  <object class="GtkStack" id="region_list_stack">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="vexpand">True</property>
-                    <property name="hscrollbar_policy">never</property>
-                    <property name="vscrollbar_policy">automatic</property>
-                    <property name="propagate-natural-height">True</property>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkScrolledWindow" id="region_list">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin">18</property>
-                        <property name="orientation">vertical</property>
-
-                        <!-- Common formats title -->
+                        <property name="can_focus">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="hscrollbar_policy">never</property>
+                        <property name="vscrollbar_policy">automatic</property>
+                        <property name="propagate-natural-height">True</property>
                         <child>
-                          <object class="GtkLabel" id="common_region_title">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">Common Formats</property>
-                            <property name="halign">start</property>
-                            <property name="margin-bottom">6</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                            </attributes>
-                            <style>
-                             <class name="dim-label" />
-                            </style>
+                            <property name="can_focus">False</property>
+                            <property name="margin">18</property>
+                            <property name="orientation">vertical</property>
+
+                            <!-- Common formats title -->
+                            <child>
+                              <object class="GtkLabel" id="common_region_title">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">Common Formats</property>
+                                <property name="halign">start</property>
+                                <property name="margin-bottom">6</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                                <style>
+                                 <class name="dim-label" />
+                                </style>
+                              </object>
+                            </child>
+
+                            <!-- Common formats list -->
+                            <child>
+                              <object class="GtkListBox" id="common_region_listbox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="vexpand">True</property>
+                                <property name="margin-bottom">24</property>
+                                <property name="selection-mode">none</property>
+                                <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
+                                <style>
+                                 <class name="frame" />
+                                </style>
+                              </object>
+                            </child>
+
+                            <!-- Complete formats title -->
+                            <child>
+                              <object class="GtkLabel" id="region_title">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">All Formats</property>
+                                <property name="halign">start</property>
+                                <property name="margin-bottom">6</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                                <style>
+                                 <class name="dim-label" />
+                                </style>
+                              </object>
+                            </child>
+
+                            <!-- Complete formats list -->
+                            <child>
+                              <object class="GtkListBox" id="region_listbox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="vexpand">True</property>
+                                <property name="halign">fill</property>
+                                <property name="valign">start</property>
+                                <property name="selection-mode">none</property>
+                                <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
+                                <style>
+                                 <class name="frame" />
+                                </style>
+                              </object>
+                            </child>
+
                           </object>
                         </child>
-
-                        <!-- Common formats list -->
-                        <child>
-                          <object class="GtkListBox" id="common_region_listbox">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="vexpand">True</property>
-                            <property name="margin-bottom">24</property>
-                            <property name="selection-mode">none</property>
-                            <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
-                            <style>
-                             <class name="frame" />
-                            </style>
-                          </object>
-                        </child>
-
-                        <!-- Complete formats title -->
-                        <child>
-                          <object class="GtkLabel" id="region_title">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">All Formats</property>
-                            <property name="halign">start</property>
-                            <property name="margin-bottom">6</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                            </attributes>
-                            <style>
-                             <class name="dim-label" />
-                            </style>
-                          </object>
-                        </child>
-
-                        <!-- Complete formats list -->
-                        <child>
-                          <object class="GtkListBox" id="region_listbox">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="vexpand">True</property>
-                            <property name="halign">fill</property>
-                            <property name="valign">start</property>
-                            <property name="selection-mode">none</property>
-                            <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
-                            <style>
-                             <class name="frame" />
-                            </style>
-                          </object>
-                        </child>
-
                       </object>
                     </child>
+
+                    <!-- Empty search results view -->
+                    <child>
+                      <object class="GtkBox" id="empty_results_view">
+                        <property name="visible">True</property>
+                        <property name="valign">center</property>
+                        <property name="margin-bottom">18</property>
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">6</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="icon-name">system-search-symbolic</property>
+                            <property name="pixel-size">96</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">No Search Results</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                              <attribute name="scale" value="1.6"/>
+                            </attributes>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="wrap">True</property>
+                            <property name="label" translatable="yes">Search again for countries or languages</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
                   </object>
                 </child>
 
