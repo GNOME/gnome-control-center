@@ -421,7 +421,6 @@ password_entry_icon_press_cb (CcPasswordDialog *self)
                 return;
 
         gtk_entry_set_text (self->password_entry, pwd);
-        gtk_entry_set_text (self->verify_entry, pwd);
         gtk_entry_set_visibility (self->password_entry, TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), TRUE);
 }
