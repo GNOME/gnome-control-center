@@ -23,10 +23,13 @@
 #include <pulse/pulseaudio.h>
 #include <gvc-mixer-stream.h>
 
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
+
 G_BEGIN_DECLS
 
 #define CC_TYPE_OUTPUT_TEST_DIALOG (cc_output_test_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcOutputTestDialog, cc_output_test_dialog, CC, OUTPUT_TEST_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (CcOutputTestDialog, cc_output_test_dialog, CC, OUTPUT_TEST_DIALOG, HdyDialog)
 
 CcOutputTestDialog *cc_output_test_dialog_new (GvcMixerUIDevice *device,
                                                GvcMixerStream   *stream);
