@@ -36,12 +36,21 @@
 #include <libgnome-desktop/gnome-languages.h>
 
 struct _CcFormatChooser {
-        GtkDialog parent_instance;
+        HdyDialog parent_instance;
 
+        GtkWidget *title_bar;
+        GtkWidget *title_buttons;
+        GtkWidget *cancel_button;
+        GtkWidget *back_button;
         GtkWidget *done_button;
-        GtkWidget *no_results;
-        GtkListBoxRow *more_item;
+        GtkWidget *empty_results_view;
+        GtkWidget *main_leaflet;
         GtkWidget *region_filter_entry;
+        GtkWidget *region_list;
+        GtkWidget *region_list_stack;
+        GtkWidget *common_region_title;
+        GtkWidget *common_region_listbox;
+        GtkWidget *region_title;
         GtkWidget *region_listbox;
         GtkWidget *date_format_label;
         GtkWidget *time_format_label;
@@ -51,11 +60,13 @@ struct _CcFormatChooser {
         GtkWidget *paper_format_label;
         gboolean adding;
         gboolean showing_extra;
+        gboolean no_results;
         gchar *region;
+        gchar *preview_region;
         gchar **filter_words;
 };
 
-G_DEFINE_TYPE (CcFormatChooser, cc_format_chooser, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (CcFormatChooser, cc_format_chooser, HDY_TYPE_DIALOG)
 
 static void
 display_date (GtkWidget *label, GDateTime *dt, const gchar *format)
@@ -65,7 +76,8 @@ display_date (GtkWidget *label, GDateTime *dt, const gchar *format)
 }
 
 static void
-update_format_examples (CcFormatChooser *chooser)
+update_format_examples (CcFormatChooser *chooser,
+                        const gchar     *region)
 {
         locale_t locale;
         locale_t old_locale;
@@ -74,9 +86,12 @@ update_format_examples (CcFormatChooser *chooser)
         const gchar *fmt;
         g_autoptr(GtkPaperSize) paper = NULL;
 
-        locale = newlocale (LC_TIME_MASK, chooser->region, (locale_t) 0);
+        if (!region || !*region)
+                return;
+
+        locale = newlocale (LC_TIME_MASK, region, (locale_t) 0);
         if (locale == (locale_t) 0)
-                g_warning ("Failed to create locale %s: %s", chooser->region, g_strerror (errno));
+                g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
         else
                 old_locale = uselocale (locale);
 
@@ -90,9 +105,9 @@ update_format_examples (CcFormatChooser *chooser)
                 freelocale (locale);
         }
 
-        locale = newlocale (LC_NUMERIC_MASK, chooser->region, (locale_t) 0);
+        locale = newlocale (LC_NUMERIC_MASK, region, (locale_t) 0);
         if (locale == (locale_t) 0)
-                g_warning ("Failed to create locale %s: %s", chooser->region, g_strerror (errno));
+                g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
         else
                 old_locale = uselocale (locale);
 
@@ -105,9 +120,9 @@ update_format_examples (CcFormatChooser *chooser)
         }
 
 #if 0
-        locale = newlocale (LC_MONETARY_MASK, chooser->region, (locale_t) 0);
+        locale = newlocale (LC_MONETARY_MASK, region, (locale_t) 0);
         if (locale == (locale_t) 0)
-                g_warning ("Failed to create locale %s: %s", chooser->region, g_strerror (errno));
+                g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
         else
                 old_locale = uselocale (locale);
 
@@ -122,9 +137,9 @@ update_format_examples (CcFormatChooser *chooser)
 #endif
 
 #ifdef LC_MEASUREMENT
-        locale = newlocale (LC_MEASUREMENT_MASK, chooser->region, (locale_t) 0);
+        locale = newlocale (LC_MEASUREMENT_MASK, region, (locale_t) 0);
         if (locale == (locale_t) 0)
-                g_warning ("Failed to create locale %s: %s", chooser->region, g_strerror (errno));
+                g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
         else
                 old_locale = uselocale (locale);
 
@@ -141,9 +156,9 @@ update_format_examples (CcFormatChooser *chooser)
 #endif
 
 #ifdef LC_PAPER
-        locale = newlocale (LC_PAPER_MASK, chooser->region, (locale_t) 0);
+        locale = newlocale (LC_PAPER_MASK, region, (locale_t) 0);
         if (locale == (locale_t) 0)
-                g_warning ("Failed to create locale %s: %s", chooser->region, g_strerror (errno));
+                g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
         else
                 old_locale = uselocale (locale);
 
@@ -158,43 +173,40 @@ update_format_examples (CcFormatChooser *chooser)
 }
 
 static void
+update_check_button_for_list (GtkWidget   *list_box,
+                              const gchar *locale_id)
+{
+  g_autoptr(GList) children = NULL;
+  GList *l;
+
+  g_assert (GTK_IS_CONTAINER (list_box));
+
+  children = gtk_container_get_children (GTK_CONTAINER (list_box));
+  for (l = children; l; l = l->next)
+    {
+      GtkWidget *row = l->data;
+      GtkWidget *check = g_object_get_data (G_OBJECT (row), "check");
+      const gchar *region = g_object_get_data (G_OBJECT (row), "locale-id");
+      if (check == NULL || region == NULL)
+        continue;
+
+      if (g_strcmp0 (locale_id, region) == 0)
+        gtk_widget_set_opacity (check, 1.0);
+      else
+        gtk_widget_set_opacity (check, 0.0);
+    }
+}
+
+static void
 set_locale_id (CcFormatChooser *chooser,
                const gchar     *locale_id)
 {
-        g_autoptr(GList) children = NULL;
-        GList *l;
-
-        children = gtk_container_get_children (GTK_CONTAINER (chooser->region_listbox));
-        for (l = children; l; l = l->next) {
-                GtkWidget *row = l->data;
-                GtkWidget *check = g_object_get_data (G_OBJECT (row), "check");
-                const gchar *region = g_object_get_data (G_OBJECT (row), "locale-id");
-                if (check == NULL || region == NULL)
-                        continue;
-
-                if (g_strcmp0 (locale_id, region) == 0) {
-                        gboolean is_extra;
-
-                        /* mark as selected */
-                        gtk_widget_set_opacity (check, 1.0);
-
-                        /* make sure this row is shown */
-                        is_extra = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "is-extra"));
-                        if (!chooser->showing_extra && is_extra) {
-                                g_object_set_data (G_OBJECT (row), "is-extra", GINT_TO_POINTER (FALSE));
-                                gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->region_listbox));
-                        }
-
-                } else {
-                        /* mark as unselected */
-                        gtk_widget_set_opacity (check, 0.0);
-                }
-        }
-
         g_free (chooser->region);
         chooser->region = g_strdup (locale_id);
 
-        update_format_examples (chooser);
+        update_check_button_for_list (chooser->region_listbox, locale_id);
+        update_check_button_for_list (chooser->common_region_listbox, locale_id);
+        update_format_examples (chooser, locale_id);
 }
 
 static gint
@@ -217,31 +229,110 @@ sort_regions (gconstpointer a,
 }
 
 static GtkWidget *
-padded_label_new (char *text, gboolean narrow)
+padded_label_new (const char *text)
 {
         GtkWidget *widget, *label;
 
         widget = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
-        gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
-        gtk_widget_set_margin_top (widget, 10);
-        gtk_widget_set_margin_bottom (widget, 10);
-        gtk_widget_set_margin_start (widget, narrow ? 10 : 80);
-        gtk_widget_set_margin_end (widget, narrow ? 10 : 80);
+        g_object_set (widget, "margin-top", 4, NULL);
+        g_object_set (widget, "margin-bottom", 4, NULL);
+        g_object_set (widget, "margin-start", 10, NULL);
+        g_object_set (widget, "margin-end", 10, NULL);
+
         label = gtk_label_new (text);
+        gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
         gtk_widget_show (label);
         gtk_container_add (GTK_CONTAINER (widget), label);
 
         return widget;
 }
 
+static void
+format_chooser_back_button_clicked_cb (CcFormatChooser *self)
+{
+  g_assert (CC_IS_FORMAT_CHOOSER (self));
+
+  gtk_header_bar_set_title (GTK_HEADER_BAR (self->title_bar), _("Formats"));
+  hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "region-list");
+  gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->cancel_button);
+  gtk_widget_show (self->done_button);
+}
+
+static void
+cc_format_chooser_preview_button_set_visible (GtkListBoxRow *row,
+                                              gpointer       user_data)
+{
+  GtkWidget *button;
+  gboolean visible;
+
+  g_assert (GTK_IS_LIST_BOX_ROW (row));
+
+  visible = GPOINTER_TO_INT (user_data);
+  button = g_object_get_data (G_OBJECT (row), "preview-button");
+  g_assert (button);
+
+  gtk_widget_set_opacity (button, visible);
+  gtk_widget_set_sensitive (button, visible);
+}
+
+static void
+format_chooser_leaflet_fold_changed_cb (CcFormatChooser *self)
+{
+  gboolean folded;
+
+  g_assert (CC_IS_FORMAT_CHOOSER (self));
+
+  folded = hdy_leaflet_get_fold (HDY_LEAFLET (self->main_leaflet)) == HDY_FOLD_FOLDED;
+  gtk_container_foreach (GTK_CONTAINER (self->common_region_listbox),
+                         (GtkCallback)cc_format_chooser_preview_button_set_visible,
+                         GINT_TO_POINTER (folded));
+  gtk_container_foreach (GTK_CONTAINER (self->region_listbox),
+                         (GtkCallback)cc_format_chooser_preview_button_set_visible,
+                         GINT_TO_POINTER (folded));
+
+  if (!folded)
+    {
+      update_format_examples (self, self->region);
+      gtk_header_bar_set_title (GTK_HEADER_BAR (self->title_bar), _("Formats"));
+      hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "region-list");
+      gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->cancel_button);
+      gtk_widget_show (self->done_button);
+    }
+}
+
+static void
+preview_button_clicked_cb (CcFormatChooser *self,
+                           GtkWidget       *button)
+{
+  GtkWidget *row;
+  const gchar *region, *locale_name;
+
+  g_assert (CC_IS_FORMAT_CHOOSER (self));
+  g_assert (GTK_IS_WIDGET (button));
+
+  row = gtk_widget_get_ancestor (button, GTK_TYPE_LIST_BOX_ROW);
+  g_assert (row);
+
+  region = g_object_get_data (G_OBJECT (row), "locale-id");
+  locale_name = g_object_get_data (G_OBJECT (row), "locale-name");
+  update_format_examples (self, region);
+
+  hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "preview");
+  gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->back_button);
+  gtk_widget_hide (self->done_button);
+
+  if (locale_name)
+    gtk_header_bar_set_title (GTK_HEADER_BAR (self->title_bar), locale_name);
+}
+
 static GtkWidget *
-region_widget_new (const gchar *locale_id,
-                   gboolean     is_extra)
+region_widget_new (CcFormatChooser *self,
+                   const gchar     *locale_id)
 {
         gchar *locale_name;
         gchar *locale_current_name;
         gchar *locale_untranslated_name;
-        GtkWidget *row, *box;
+        GtkWidget *row, *box, *button;
         GtkWidget *check;
 
         locale_name = gnome_get_country_from_locale (locale_id, locale_id);
@@ -253,18 +344,15 @@ region_widget_new (const gchar *locale_id,
 
         row = gtk_list_box_row_new ();
         gtk_widget_show (row);
-        box = padded_label_new (locale_name, is_extra);
+        box = padded_label_new (locale_name);
         gtk_widget_show (box);
         gtk_container_add (GTK_CONTAINER (row), box);
 
-        /* We add a check on each side of the label to keep it centered. */
-        check = gtk_image_new ();
-        gtk_widget_show (check);
-        gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
-        gtk_widget_set_opacity (check, 0.0);
-        g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
-        gtk_container_add (GTK_CONTAINER (box), check);
-        gtk_box_reorder_child (GTK_BOX (box), check, 0);
+        button = gtk_button_new_from_icon_name ("view-layout-symbolic", GTK_ICON_SIZE_BUTTON);
+        g_signal_connect_object (button, "clicked", G_CALLBACK (preview_button_clicked_cb),
+                                 self, G_CONNECT_SWAPPED);
+        gtk_widget_show (button);
+        gtk_box_pack_end (GTK_BOX (box), button, FALSE, TRUE, 0);
 
         check = gtk_image_new ();
         gtk_widget_show (check);
@@ -274,46 +362,13 @@ region_widget_new (const gchar *locale_id,
         gtk_container_add (GTK_CONTAINER (box), check);
 
         g_object_set_data (G_OBJECT (row), "check", check);
+        g_object_set_data (G_OBJECT (row), "preview-button", button);
         g_object_set_data_full (G_OBJECT (row), "locale-id", g_strdup (locale_id), g_free);
         g_object_set_data_full (G_OBJECT (row), "locale-name", locale_name, g_free);
         g_object_set_data_full (G_OBJECT (row), "locale-current-name", locale_current_name, g_free);
         g_object_set_data_full (G_OBJECT (row), "locale-untranslated-name", locale_untranslated_name, g_free);
-        g_object_set_data (G_OBJECT (row), "is-extra", GUINT_TO_POINTER (is_extra));
 
         return row;
-}
-
-static GtkListBoxRow *
-more_widget_new (void)
-{
-        GtkWidget *box, *row;
-        GtkWidget *arrow;
-
-        row = gtk_list_box_row_new ();
-        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
-        gtk_widget_show (box);
-        gtk_container_add (GTK_CONTAINER (row), box);
-        gtk_widget_set_tooltip_text (box, _("More…"));
-
-        arrow = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_MENU);
-        gtk_widget_show (arrow);
-        gtk_style_context_add_class (gtk_widget_get_style_context (arrow), "dim-label");
-        gtk_widget_set_hexpand (arrow, TRUE);
-        gtk_widget_set_margin_top (box, 10);
-        gtk_widget_set_margin_bottom (box, 10);
-        gtk_container_add (GTK_CONTAINER (box), arrow);
-
-        return GTK_LIST_BOX_ROW (row);
-}
-
-static GtkWidget *
-no_results_widget_new (void)
-{
-        GtkWidget *widget;
-
-        widget = padded_label_new (_("No regions found"), TRUE);
-        gtk_widget_set_sensitive (widget, FALSE);
-        return widget;
 }
 
 static void
@@ -321,12 +376,29 @@ add_regions (CcFormatChooser *chooser,
              gchar          **locale_ids,
              GHashTable      *initial)
 {
-        chooser->adding = TRUE;
+        g_autoptr(GList) initial_locales = NULL;
+        GtkWidget *widget;
+        GList *l;
 
+        chooser->adding = TRUE;
+        initial_locales = g_hash_table_get_keys (initial);
+
+        /* Populate Common Locales */
+        for (l = initial_locales; l != NULL; l = l->next) {
+                if (!cc_common_language_has_font (l->data))
+                        continue;
+
+                widget = region_widget_new (chooser, l->data);
+                if (!widget)
+                        continue;
+
+                gtk_widget_show (widget);
+                gtk_container_add (GTK_CONTAINER (chooser->common_region_listbox), widget);
+          }
+
+        /* Populate All locales */
         while (*locale_ids) {
                 gchar *locale_id;
-                gboolean is_initial;
-                GtkWidget *widget;
 
                 locale_id = *locale_ids;
                 locale_ids ++;
@@ -334,16 +406,13 @@ add_regions (CcFormatChooser *chooser,
                 if (!cc_common_language_has_font (locale_id))
                         continue;
 
-                is_initial = (g_hash_table_lookup (initial, locale_id) != NULL);
-                widget = region_widget_new (locale_id, !is_initial);
+                widget = region_widget_new (chooser, locale_id);
                 if (!widget)
                   continue;
 
                 gtk_widget_show (widget);
                 gtk_container_add (GTK_CONTAINER (chooser->region_listbox), widget);
         }
-
-        gtk_container_add (GTK_CONTAINER (chooser->region_listbox), GTK_WIDGET (chooser->more_item));
 
         chooser->adding = FALSE;
 }
@@ -380,68 +449,66 @@ region_visible (GtkListBoxRow *row,
         g_autofree gchar *locale_name = NULL;
         g_autofree gchar *locale_current_name = NULL;
         g_autofree gchar *locale_untranslated_name = NULL;
-        gboolean is_extra;
-
-        if (row == chooser->more_item)
-                return !chooser->showing_extra;
-
-        is_extra = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "is-extra"));
-
-        if (!chooser->showing_extra && is_extra)
-                return FALSE;
+        gboolean match = TRUE;
 
         if (!chooser->filter_words)
-                return TRUE;
+          goto end;
 
         locale_name =
                 cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-name"));
         if (match_all (chooser->filter_words, locale_name))
-                 return TRUE;
+          goto end;
 
         locale_current_name =
                 cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-current-name"));
         if (match_all (chooser->filter_words, locale_current_name))
-                 return TRUE;
+          goto end;
 
         locale_untranslated_name =
                 cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-untranslated-name"));
-        return match_all (chooser->filter_words, locale_untranslated_name);
+
+        match = match_all (chooser->filter_words, locale_untranslated_name);
+
+ end:
+        if (match)
+          chooser->no_results = FALSE;
+        return match;
 }
 
 static void
 filter_changed (CcFormatChooser *chooser)
 {
         g_autofree gchar *filter_contents = NULL;
+        gboolean visible;
 
         g_clear_pointer (&chooser->filter_words, g_strfreev);
 
         filter_contents =
                 cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (chooser->region_filter_entry)));
+
+        /* The popular listbox is shown only if search is empty */
+        visible = filter_contents == NULL || *filter_contents == '\0';
+        gtk_widget_set_visible (chooser->common_region_listbox, visible);
+        gtk_widget_set_visible (chooser->common_region_title, visible);
+        gtk_widget_set_visible (chooser->region_title, visible);
+
+        /* Reset cached search state */
+        chooser->no_results = TRUE;
+
         if (!filter_contents) {
                 gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->region_listbox));
                 gtk_list_box_set_placeholder (GTK_LIST_BOX (chooser->region_listbox), NULL);
                 return;
         }
         chooser->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
-        gtk_list_box_set_placeholder (GTK_LIST_BOX (chooser->region_listbox), GTK_WIDGET (chooser->no_results));
         gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->region_listbox));
-}
 
-static void
-show_more (CcFormatChooser *chooser)
-{
-        gint width, height;
-
-        gtk_window_get_size (GTK_WINDOW (chooser), &width, &height);
-        gtk_widget_set_size_request (GTK_WIDGET (chooser), width, height);
-        gtk_window_set_resizable (GTK_WINDOW (chooser), TRUE);
-
-        gtk_widget_show (chooser->region_filter_entry);
-        gtk_widget_grab_focus (chooser->region_filter_entry);
-
-        chooser->showing_extra = TRUE;
-
-        gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->region_listbox));
+        if (chooser->no_results)
+          gtk_stack_set_visible_child (GTK_STACK (chooser->region_list_stack),
+                                       GTK_WIDGET (chooser->empty_results_view));
+        else
+          gtk_stack_set_visible_child (GTK_STACK (chooser->region_list_stack),
+                                       GTK_WIDGET (chooser->region_list));
 }
 
 static void
@@ -453,13 +520,6 @@ row_activated (CcFormatChooser *chooser,
         if (chooser->adding)
                 return;
 
-        if (row == NULL)
-                return;
-
-        if (row == chooser->more_item) {
-                show_more (chooser);
-                return;
-        }
         new_locale_id = g_object_get_data (G_OBJECT (row), "locale-id");
         if (g_strcmp0 (new_locale_id, chooser->region) == 0) {
                 gtk_dialog_response (GTK_DIALOG (chooser),
@@ -493,7 +553,6 @@ cc_format_chooser_dispose (GObject *object)
 {
         CcFormatChooser *chooser = CC_FORMAT_CHOOSER (object);
 
-        g_clear_object (&chooser->no_results);
         g_clear_pointer (&chooser->filter_words, g_strfreev);
         g_clear_pointer (&chooser->region, g_free);
 
@@ -510,8 +569,16 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-format-chooser.ui");
 
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, title_bar);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, title_buttons);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, cancel_button);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, back_button);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, done_button);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, main_leaflet);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_filter_entry);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, common_region_title);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, common_region_listbox);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_title);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, date_format_label);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, time_format_label);
@@ -519,6 +586,14 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, number_format_label);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, measurement_format_label);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, paper_format_label);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list_stack);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, empty_results_view);
+
+        gtk_widget_class_bind_template_callback (widget_class, format_chooser_back_button_clicked_cb);
+        gtk_widget_class_bind_template_callback (widget_class, format_chooser_leaflet_fold_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, filter_changed);
+        gtk_widget_class_bind_template_callback (widget_class, row_activated);
 }
 
 void
@@ -526,30 +601,20 @@ cc_format_chooser_init (CcFormatChooser *chooser)
 {
         gtk_widget_init_template (GTK_WIDGET (chooser));
 
-        chooser->more_item = more_widget_new ();
-        gtk_widget_show (GTK_WIDGET (chooser->more_item));
-        /* We ref-sink here so we can reuse this widget multiple times */
-        chooser->no_results = g_object_ref_sink (no_results_widget_new ());
-        gtk_widget_show (chooser->no_results);
-
+        gtk_list_box_set_sort_func (GTK_LIST_BOX (chooser->common_region_listbox),
+                                    (GtkListBoxSortFunc)sort_regions, chooser, NULL);
         gtk_list_box_set_sort_func (GTK_LIST_BOX (chooser->region_listbox),
                                     (GtkListBoxSortFunc)sort_regions, chooser, NULL);
         gtk_list_box_set_filter_func (GTK_LIST_BOX (chooser->region_listbox),
                                       region_visible, chooser, NULL);
-        gtk_list_box_set_selection_mode (GTK_LIST_BOX (chooser->region_listbox),
-                                         GTK_SELECTION_NONE);
         gtk_list_box_set_header_func (GTK_LIST_BOX (chooser->region_listbox),
+                                      cc_list_box_update_header_func, NULL, NULL);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (chooser->common_region_listbox),
                                       cc_list_box_update_header_func, NULL, NULL);
 
         add_all_regions (chooser);
-
-        g_signal_connect_object (chooser->region_filter_entry, "search-changed",
-                                 G_CALLBACK (filter_changed), chooser, G_CONNECT_SWAPPED);
-
-        g_signal_connect_object (chooser->region_listbox, "row-activated",
-                                 G_CALLBACK (row_activated), chooser, G_CONNECT_SWAPPED);
-
         gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->region_listbox));
+        format_chooser_leaflet_fold_changed_cb (chooser);
 
         g_signal_connect_object (chooser, "activate-default",
                                  G_CALLBACK (activate_default), chooser, G_CONNECT_SWAPPED);

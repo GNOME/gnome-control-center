@@ -21,11 +21,13 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_FORMAT_CHOOSER (cc_format_chooser_get_type ())
-G_DECLARE_FINAL_TYPE (CcFormatChooser, cc_format_chooser, CC, FORMAT_CHOOSER, GtkDialog)
+G_DECLARE_FINAL_TYPE (CcFormatChooser, cc_format_chooser, CC, FORMAT_CHOOSER, HdyDialog)
 
 CcFormatChooser *cc_format_chooser_new          (void);
 void             cc_format_chooser_clear_filter (CcFormatChooser *chooser);
