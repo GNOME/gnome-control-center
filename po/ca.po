@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-12-24 07:05+0000\n"
-"PO-Revision-Date: 2020-01-01 21:18+0100\n"
+"POT-Creation-Date: 2020-01-08 15:54+0000\n"
+"PO-Revision-Date: 2020-01-08 21:06+0100\n"
 "Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
 "Language: ca\n"
@@ -50,8 +50,7 @@ msgstr "Sessió del bus"
 
 #: panels/applications/cc-applications-panel.c:714
 #: panels/power/cc-power-panel.c:2469 panels/thunderbolt/cc-bolt-panel.ui:466
-#: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:103
-#: shell/cc-window.c:285
+#: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Dispositius"
 
@@ -87,8 +86,8 @@ msgid "File System"
 msgstr "Sistema de fitxers"
 
 #: panels/applications/cc-applications-panel.c:734
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:289
-#: shell/cc-window.c:972 shell/cc-window.ui:125
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:281
+#: shell/cc-window.c:964 shell/cc-window.ui:125
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Paràmetres"
@@ -305,12 +304,12 @@ msgstr "Emmagatzematge"
 msgid "Open in Software"
 msgstr "Obre al Programari"
 
-#: panels/applications/cc-applications-panel.ui:469 shell/cc-panel-list.ui:259
+#: panels/applications/cc-applications-panel.ui:469 shell/cc-panel-list.ui:121
 msgid "No results found"
 msgstr "No s'ha trobat cap resultat"
 
 #: panels/applications/cc-applications-panel.ui:480
-#: panels/keyboard/cc-keyboard-panel.ui:188 shell/cc-panel-list.ui:270
+#: panels/keyboard/cc-keyboard-panel.ui:188 shell/cc-panel-list.ui:132
 msgid "Try a different search"
 msgstr "Proveu amb una cerca diferent"
 
@@ -449,7 +448,9 @@ msgstr "Canvieu els paràmetres de la xarxa de baix nivell"
 
 #: panels/applications/cc-snap-row.c:113
 msgid "Access the NetworkManager service to read and change network settings"
-msgstr "Accedeix al servei NetworkManager per a llegir i canviar els paràmetres de la xarxa"
+msgstr ""
+"Accedeix al servei NetworkManager per a llegir i canviar els paràmetres de "
+"la xarxa"
 
 #: panels/applications/cc-snap-row.c:115
 msgid "Read access to network settings"
@@ -468,8 +469,8 @@ msgid ""
 "Access the ofono service to read and change network settings for mobile "
 "telephony"
 msgstr ""
-"Accedeix al servei ofono per llegir i canviar paràmetres de la xarxa "
-"per a la telefonia mòbil"
+"Accedeix al servei ofono per llegir i canviar paràmetres de la xarxa per a "
+"la telefonia mòbil"
 
 #: panels/applications/cc-snap-row.c:123
 msgid "Control Open vSwitch hardware"
@@ -488,8 +489,8 @@ msgid ""
 "Access pppd and ppp devices for configuring Point-to-Point Protocol "
 "connections"
 msgstr ""
-"Accedeix als dispositius pppd i ppp per a configurar les connexions "
-"de protocol punt a punt"
+"Accedeix als dispositius pppd i ppp per a configurar les connexions de "
+"protocol punt a punt"
 
 #: panels/applications/cc-snap-row.c:131
 msgid "Pause or end any process on the system"
@@ -590,7 +591,7 @@ msgstr "Selecciona una imatge"
 #: panels/network/net-device-wifi.c:800 panels/network/net-device-wifi.c:908
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:252
-#: panels/region/cc-format-chooser.ui:24 panels/region/cc-input-chooser.ui:11
+#: panels/region/cc-format-chooser.ui:28 panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:638
 #: panels/sharing/cc-sharing-panel.c:428 panels/usage/cc-usage-panel.c:134
 #: panels/user-accounts/cc-add-user-dialog.ui:28
@@ -859,7 +860,7 @@ msgid "_Resume"
 msgstr "_Continua"
 
 #. This button returns the user back to the color control panel
-#: panels/color/cc-color-calibrate.ui:67 panels/region/cc-format-chooser.ui:13
+#: panels/color/cc-color-calibrate.ui:67 panels/region/cc-format-chooser.ui:64
 msgid "_Done"
 msgstr "_Fet"
 
@@ -1412,8 +1413,7 @@ msgstr "Color;ICC;Perfil;Calibratge;Impressora;Pantalla;"
 msgid "Other…"
 msgstr "Altres…"
 
-#: panels/common/cc-language-chooser.c:127
-#: panels/region/cc-format-chooser.c:296 panels/region/cc-input-chooser.c:178
+#: panels/common/cc-language-chooser.c:127 panels/region/cc-input-chooser.c:178
 msgid "More…"
 msgstr "Més…"
 
@@ -1428,6 +1428,18 @@ msgstr "Seleccioneu un idioma"
 #: panels/common/cc-language-chooser.ui:12
 msgid "_Select"
 msgstr "_Selecciona"
+
+#: panels/common/cc-permission-infobar.ui:20
+msgid "Unlock…"
+msgstr "Desbloqueja…"
+
+#: panels/common/cc-permission-infobar.ui:45
+msgid "Unlock to Change Settings"
+msgstr "Desbloqueja per a canviar els paràmetres"
+
+#: panels/common/cc-permission-infobar.ui:55
+msgid "Some settings must be unlocked before they can be changed."
+msgstr "Alguns paràmetres s'han desbloquejar abans de poder-los canviar."
 
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:143
@@ -1927,7 +1939,7 @@ msgid "Manual Schedule"
 msgstr "Planificació manual"
 
 #: panels/display/cc-night-light-page.ui:148
-#: panels/region/cc-format-chooser.ui:154
+#: panels/region/cc-format-chooser.ui:346
 msgid "Times"
 msgstr "Hores"
 
@@ -2073,8 +2085,8 @@ msgid ""
 "The device name is used to identify this device when it is viewed over the "
 "network, or when pairing Bluetooth devices."
 msgstr ""
-"El nom del dispositiu s'utilitza per a identificar aquest dispositiu quan "
-"es visualitza en xarxa, o quan s'emparella amb dispositius Bluetooth."
+"El nom del dispositiu s'utilitza per a identificar aquest dispositiu quan es "
+"visualitza en xarxa, o quan s'emparella amb dispositius Bluetooth."
 
 #: panels/info-overview/cc-info-overview-panel.ui:226
 msgid "_Rename"
@@ -2283,8 +2295,9 @@ msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
 msgstr ""
-"La tecla de caràcters alternatius s'utilitza per a introduir caràcters addicionals. "
-"Aquests alguns cops estan impresos com a tercera opció en el teclat."
+"La tecla de caràcters alternatius s'utilitza per a introduir caràcters "
+"addicionals. Aquests alguns cops estan impresos com a tercera opció en el "
+"teclat."
 
 #: panels/keyboard/cc-alt-chars-key-dialog.ui:45
 msgid "Left Alt"
@@ -2409,12 +2422,10 @@ msgstr "Restableix totes les dreceres als seus valors per omissió"
 msgid "No keyboard shortcut found"
 msgstr "No s'ha trobat la tecla de drecera"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:411
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:413
 #, c-format
-msgid ""
-"%s is already being used for <b>%s</b>. If you replace it, %s will be "
-"disabled"
-msgstr "%s ja s'utilitza per <b>%s</b>. Si la reemplaceu, %s s'inhabilitarà"
+msgid "%s is already being used for %s. If you replace it, %s will be disabled"
+msgstr "%s ja s'utilitza per %s. Si la reemplaceu, %s s'inhabilitarà"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:581
 msgid "Set Custom Shortcut"
@@ -2424,13 +2435,13 @@ msgstr "Estableix la drecera personalitzada"
 msgid "Set Shortcut"
 msgstr "Estableix la drecera"
 
-#. Setup the top label
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:590
+#. TRANSLATORS: %s is replaced with a description of the keyboard shortcut
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:592
 #, c-format
-msgid "Enter new shortcut to change <b>%s</b>."
-msgstr "Introduïu una drecera nova per canviar <b>%s</b>."
+msgid "Enter new shortcut to change %s."
+msgstr "Introduïu una drecera nova per canviar %s."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:1017
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:1016
 msgid "Add Custom Shortcut"
 msgstr "Afegeix drecera personalitzada"
 
@@ -2887,20 +2898,21 @@ msgid "Options…"
 msgstr "Opcions…"
 
 #. TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name
-#: panels/network/cc-wifi-hotspot-dialog.c:130
+#: panels/network/cc-wifi-hotspot-dialog.c:132
 #, c-format
+#| msgid ""
 msgid ""
-"Turning on the hotspot will disconnect from <b>%s</b>, and it will not be "
-"possible to access the internet through Wi-Fi."
+"Turning on the hotspot will disconnect from %s, and it will not be possible "
+"to access the internet through Wi-Fi."
 msgstr ""
-"En activar el punt d'accés Wi-Fi es desconnectarà de <b>%s</b>, i no serà "
+"En activar el punt d'accés Wi-Fi es desconnectarà de %s, i no serà "
 "possible accedir a Internet a través de Wifi."
 
-#: panels/network/cc-wifi-hotspot-dialog.c:246
+#: panels/network/cc-wifi-hotspot-dialog.c:248
 msgid "Must have a minimum of 8 characters"
 msgstr "Ha de tenir com a mínim 8 caràcters"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:456
+#: panels/network/cc-wifi-hotspot-dialog.c:458
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Cal activar el punt d'accés Wi-Fi?"
 
@@ -2910,9 +2922,9 @@ msgid ""
 "Wi-Fi network that they can connect to. To do this, you must have an "
 "internet connection through a source other than Wi-Fi."
 msgstr ""
-"El punt d'accés WiFi permet compatir la vostra connexió a Internet amb altres "
-"creant una xarxa amb la qual es poden connectar. Per fer això, heu de tenir "
-"una connexió a Internet per un mitjà que no sigui la Wifi."
+"El punt d'accés WiFi permet compatir la vostra connexió a Internet amb "
+"altres creant una xarxa amb la qual es poden connectar. Per fer això, heu de "
+"tenir una connexió a Internet per un mitjà que no sigui la Wifi."
 
 #: panels/network/cc-wifi-hotspot-dialog.ui:44
 #: panels/network/network-wifi.ui:105
@@ -3143,7 +3155,6 @@ msgid "Remove VPN"
 msgstr "Suprimeix VPN"
 
 #: panels/network/connection-editor/ce-page-details.c:442
-#: shell/cc-panel-list.ui:161 shell/cc-window.c:281
 msgid "Details"
 msgstr "Detalls"
 
@@ -3250,12 +3261,14 @@ msgid "Make available to _other users"
 msgstr "Fes-la disponible a _altres usuaris"
 
 #: panels/network/connection-editor/details-page.ui:428
-msgid "Restrict _background data usage"
-msgstr "_Limita l'ús de les dades en segon pla"
+msgid "_Metered connection: has data limits or can incur charges"
+msgstr "Connexió li_mitada: té dades limitades o pot incórrer en càrrecs"
 
 #: panels/network/connection-editor/details-page.ui:439
-msgid "Appropriate for connections that have data charges or limits."
-msgstr "Adequat per a connexions que tenen càrrecs de dades o límits."
+msgid ""
+"Software updates and other large downloads will not be started automatically."
+msgstr ""
+"Les actualitzacions de programari i altres baixades grans no s'iniciaran automàticamentChoose the format for n."
 
 #: panels/network/connection-editor/ethernet-page.ui:25
 #: panels/network/connection-editor/vpn-page.ui:23
@@ -4061,7 +4074,7 @@ msgstr "Nom d'_usuari"
 #: panels/sharing/cc-sharing-panel.ui:351
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:210
+#: panels/user-accounts/cc-user-panel.ui:204
 msgid "_Password"
 msgstr "_Contrasenya"
 
@@ -4430,10 +4443,10 @@ msgstr "S'ha produït un error en suprimir el compte"
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:989
+#: panels/online-accounts/cc-online-accounts-panel.c:991
 #, c-format
-msgid "<b>%s</b> removed"
-msgstr "<b>%s</b> s'ha suprimit"
+msgid "%s removed"
+msgstr "s'ha suprimit %s"
 
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in.in:3
 msgid "Online Accounts"
@@ -5514,45 +5527,74 @@ msgstr ""
 "Perdó! Sembla que el servei d'impressió\n"
 "del sistema no està disponible."
 
-#: panels/region/cc-format-chooser.c:133
+#: panels/region/cc-format-chooser.c:148
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Imperial"
 
-#: panels/region/cc-format-chooser.c:135
+#: panels/region/cc-format-chooser.c:150
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Mètric"
 
-#: panels/region/cc-format-chooser.c:314
-msgid "No regions found"
-msgstr "No s'han trobat regions"
-
-#: panels/region/cc-format-chooser.ui:7
+#: panels/region/cc-format-chooser.c:255 panels/region/cc-format-chooser.c:296
+#: panels/region/cc-format-chooser.ui:6
 msgid "Formats"
 msgstr "Formats"
 
-#: panels/region/cc-format-chooser.ui:106
+#: panels/region/cc-format-chooser.ui:48 panels/wacom/wacom-stylus-page.ui:37
+#: shell/cc-window.ui:232
+msgid "Back"
+msgstr "Enrere"
+
+#: panels/region/cc-format-chooser.ui:103
+msgid ""
+"Choose the format for numbers, dates and currencies. Changes take effect on "
+"next login."
+msgstr ""
+"Trieu el format pels nombres, dates i monedes. Els canvis tindran efecte la pròxima vegada que entreu"
+
+#: panels/region/cc-format-chooser.ui:119
+msgid "Search locales..."
+msgstr "Cerca en configuracions locals..."
+
+#: panels/region/cc-format-chooser.ui:160
+msgid "Common Formats"
+msgstr "Formats comuns"
+
+#: panels/region/cc-format-chooser.ui:191
+msgid "All Formats"
+msgstr "Tots els formats"
+
+#: panels/region/cc-format-chooser.ui:244
+msgid "No Search Results"
+msgstr "La cerca no ha retornat resultats"
+
+#: panels/region/cc-format-chooser.ui:257
+msgid "Searches can be for countries or languages."
+msgstr "Es pot cerca per països o idiomes."
+
+#: panels/region/cc-format-chooser.ui:309
 msgid "Preview"
 msgstr "Visualització prèvia"
 
-#: panels/region/cc-format-chooser.ui:123
+#: panels/region/cc-format-chooser.ui:324
 msgid "Dates"
 msgstr "Dates"
 
-#: panels/region/cc-format-chooser.ui:185
+#: panels/region/cc-format-chooser.ui:368
 msgid "Dates & Times"
 msgstr "Dates i hores"
 
-#: panels/region/cc-format-chooser.ui:216
+#: panels/region/cc-format-chooser.ui:390
 msgid "Numbers"
 msgstr "Nombres"
 
-#: panels/region/cc-format-chooser.ui:233
+#: panels/region/cc-format-chooser.ui:412
 msgid "Measurement"
 msgstr "Mesura"
 
-#: panels/region/cc-format-chooser.ui:250
+#: panels/region/cc-format-chooser.ui:434
 msgid "Paper"
 msgstr "Paper"
 
@@ -5578,7 +5620,7 @@ msgid "Login _Screen"
 msgstr "_Pantalla d'entrada"
 
 #: panels/region/cc-region-panel.ui:64
-#: panels/user-accounts/cc-user-panel.ui:358
+#: panels/user-accounts/cc-user-panel.ui:352
 msgid "_Language"
 msgstr "_Idioma"
 
@@ -5912,40 +5954,47 @@ msgstr "Actiu"
 msgid "Choose a Folder"
 msgstr "Trieu una carpeta"
 
-#: panels/sharing/cc-sharing-panel.c:726
+#. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
+#: panels/sharing/cc-sharing-panel.c:729
 #, c-format
+#| msgid ""
+#| "File Sharing allows you to share your Public folder with others on your "
+#| "current network using: <a href=\"dav://%s\">dav://%s</a>"
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
-"current network using: <a href=\"dav://%s\">dav://%s</a>"
+"current network using: %s"
 msgstr ""
 "La compartició de fitxers us permet compartir la carpeta pública amb altres "
-"a la xarxa actual utilitzant: <a href=\"dav://%s\">dav://%s</a>"
+"a la xarxa actual utilitzant: %s"
 
-#: panels/sharing/cc-sharing-panel.c:728
+#. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
+#: panels/sharing/cc-sharing-panel.c:735
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
 "Shell command:\n"
-"<a href=\"ssh %s\">ssh %s</a>"
+"%s"
 msgstr ""
 "Quan l'entrada remota està habilitada, els usuaris remots poden connectar-se "
 "utilitzant l'ordre del Secure Shell:\n"
-"<a href=\"ssh %s\">ssh %s</a>"
+"%s"
 
-#: panels/sharing/cc-sharing-panel.c:730
+#. TRANSLATORS: %s is replaced with a link to a vnc://<hostname> URL
+#: panels/sharing/cc-sharing-panel.c:741
 #, c-format
+#| msgid ""
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
-"connecting to <a href=\"vnc://%s\">vnc://%s</a>"
+"connecting to %s"
 msgstr ""
 "La compartició de pantalla permet a usuaris remots visualitzar o controlar "
-"la pantalla connectant-se a: <a href=\"vnc://%s\">vnc://%s</a>"
+"la pantalla connectant-se a %s"
 
-#: panels/sharing/cc-sharing-panel.c:834
+#: panels/sharing/cc-sharing-panel.c:846
 msgid "Copy"
 msgstr "Copia"
 
-#: panels/sharing/cc-sharing-panel.c:1287
+#: panels/sharing/cc-sharing-panel.c:1299
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "Compartició"
@@ -6945,7 +6994,8 @@ msgid ""
 "information. Automatically deleting them can help to protect privacy."
 msgstr ""
 "La paperera i els fitxers temporal poden alguns cops incloure informació "
-"personal o sensible. Suprimint-los automàticament pot ajudar a protegir la privadesa."
+"personal o sensible. Suprimint-los automàticament pot ajudar a protegir la "
+"privadesa."
 
 #: panels/usage/cc-usage-panel.ui:161
 msgid "Automatically Delete _Trash Content"
@@ -7121,17 +7171,17 @@ msgid "_Full Name"
 msgstr "_Nom complet"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:206
-#: panels/user-accounts/cc-user-panel.ui:147
+#: panels/user-accounts/cc-user-panel.ui:141
 msgid "Standard"
 msgstr "Estàndard"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:216
-#: panels/user-accounts/cc-user-panel.ui:157
+#: panels/user-accounts/cc-user-panel.ui:151
 msgid "Administrator"
 msgstr "Administrador"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:232
-#: panels/user-accounts/cc-user-panel.ui:175
+#: panels/user-accounts/cc-user-panel.ui:169
 msgid "Account _Type"
 msgstr "_Tipus de compte"
 
@@ -7436,45 +7486,45 @@ msgstr ""
 "Per suprimir el compte d'usuari seleccionat,\n"
 "primer feu clic a la icona *"
 
-#: panels/user-accounts/cc-user-panel.ui:15
+#: panels/user-accounts/cc-user-panel.ui:5
 msgid "_Add User…"
 msgstr "_Afegeix usuari…"
 
-#: panels/user-accounts/cc-user-panel.ui:64
+#: panels/user-accounts/cc-user-panel.ui:52
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "S'ha de tornar a iniciar la sessió perquè els canvis tinguin efecte"
 
-#: panels/user-accounts/cc-user-panel.ui:72
+#: panels/user-accounts/cc-user-panel.ui:60
 msgid "Restart Now"
 msgstr "Reinicia ara"
 
-#: panels/user-accounts/cc-user-panel.ui:250
+#: panels/user-accounts/cc-user-panel.ui:244
 msgid "A_utomatic Login"
 msgstr "Entrada a_utomàtica"
 
-#: panels/user-accounts/cc-user-panel.ui:292
+#: panels/user-accounts/cc-user-panel.ui:286
 msgid "_Fingerprint Login"
 msgstr "Entrada amb _empremta dactilar"
 
-#: panels/user-accounts/cc-user-panel.ui:318
-#: panels/user-accounts/cc-user-panel.ui:334
+#: panels/user-accounts/cc-user-panel.ui:312
+#: panels/user-accounts/cc-user-panel.ui:328
 msgid "User Icon"
 msgstr "Icona d'usuari"
 
-#: panels/user-accounts/cc-user-panel.ui:398
+#: panels/user-accounts/cc-user-panel.ui:392
 msgid "Last Login"
 msgstr "Últim inici de sessió"
 
-#: panels/user-accounts/cc-user-panel.ui:447
+#: panels/user-accounts/cc-user-panel.ui:441
 msgid "Remove User…"
 msgstr "Suprimeix l'usuari..."
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:477
+#: panels/user-accounts/cc-user-panel.ui:471
 msgid "No Users Found"
 msgstr "No s'ha trobat cap usuari"
 
-#: panels/user-accounts/cc-user-panel.ui:487
+#: panels/user-accounts/cc-user-panel.ui:481
 msgid "Unlock to add a user account."
 msgstr "Desbloqueja per afegir un compte d'usuari."
 
@@ -8030,10 +8080,6 @@ msgstr "Clic amb el botó del mig del ratolí"
 msgid "Right Mouse Button Click"
 msgstr "Clic amb el botó dret del ratolí"
 
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:232
-msgid "Back"
-msgstr "Enrere"
-
 #: panels/wacom/wacom-stylus-page.ui:41
 msgid "Forward"
 msgstr "Endavant"
@@ -8229,6 +8275,15 @@ msgstr[1] "%u entrades"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Sons del sistema"
+
+#~ msgid "Restrict _background data usage"
+#~ msgstr "_Limita l'ús de les dades en segon pla"
+
+#~ msgid "Appropriate for connections that have data charges or limits."
+#~ msgstr "Adequat per a connexions que tenen càrrecs de dades o límits."
+
+#~ msgid "No regions found"
+#~ msgstr "No s'han trobat regions"
 
 #~ msgid "Flash the _window title"
 #~ msgstr "Fes parpellejar el títol de la _finestra"
