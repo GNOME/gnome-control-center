@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-01-07 02:00+0000\n"
-"PO-Revision-Date: 2020-01-07 12:16+0100\n"
+"POT-Creation-Date: 2020-01-08 15:54+0000\n"
+"PO-Revision-Date: 2020-01-08 17:05+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -1429,12 +1429,10 @@ msgid "_Select"
 msgstr "_Seleccionar"
 
 #: panels/common/cc-permission-infobar.ui:20
-#| msgid "_Unlock"
 msgid "Unlock…"
 msgstr "Desbloquear…"
 
 #: panels/common/cc-permission-infobar.ui:45
-#| msgid "Can change settings"
 msgid "Unlock to Change Settings"
 msgstr "Desbloquear para cambiar la configuración"
 
@@ -2425,9 +2423,6 @@ msgstr "No se ha encontrado un atajo del teclado"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:413
 #, c-format
-#| msgid ""
-#| "%s is already being used for <b>%s</b>. If you replace it, %s will be "
-#| "disabled"
 msgid "%s is already being used for %s. If you replace it, %s will be disabled"
 msgstr "%s ya está en uso por %s. Si lo reemplaza, %s se desactivará"
 
@@ -2442,7 +2437,6 @@ msgstr "Establecer atajo"
 #. TRANSLATORS: %s is replaced with a description of the keyboard shortcut
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:592
 #, c-format
-#| msgid "Enter new shortcut to change <b>%s</b>."
 msgid "Enter new shortcut to change %s."
 msgstr "Introduzca el nuevo atajo para cambiar %s."
 
@@ -2904,9 +2898,6 @@ msgstr "Opciones…"
 #. TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name
 #: panels/network/cc-wifi-hotspot-dialog.c:132
 #, c-format
-#| msgid ""
-#| "Turning on the hotspot will disconnect from <b>%s</b>, and it will not be "
-#| "possible to access the internet through Wi-Fi."
 msgid ""
 "Turning on the hotspot will disconnect from %s, and it will not be possible "
 "to access the internet through Wi-Fi."
@@ -3268,12 +3259,15 @@ msgid "Make available to _other users"
 msgstr "Hacer disponible para _otros usuarios"
 
 #: panels/network/connection-editor/details-page.ui:428
-msgid "Restrict _background data usage"
-msgstr "Restringir el uso de datos en _segundo plano"
+msgid "_Metered connection: has data limits or can incur charges"
+msgstr "Conexión _medida: tiene límite de datos o puede incurrir en cargos"
 
 #: panels/network/connection-editor/details-page.ui:439
-msgid "Appropriate for connections that have data charges or limits."
-msgstr "Adecuado para conexiones que consumen o limitan los datos."
+msgid ""
+"Software updates and other large downloads will not be started automatically."
+msgstr ""
+"Las actualizaciones de software y otras descargas grandes no se iniciarán "
+"automáticamente."
 
 #: panels/network/connection-editor/ethernet-page.ui:25
 #: panels/network/connection-editor/vpn-page.ui:23
@@ -4452,7 +4446,6 @@ msgstr "Error al quitar la cuenta"
 #.
 #: panels/online-accounts/cc-online-accounts-panel.c:991
 #, c-format
-#| msgid "<b>%s</b> removed"
 msgid "%s removed"
 msgstr "%s eliminado"
 
@@ -5562,22 +5555,18 @@ msgstr ""
 "en el siguiente inicio de sesión."
 
 #: panels/region/cc-format-chooser.ui:119
-#| msgid "Search Locations"
 msgid "Search locales..."
 msgstr "Buscar configuraciones regionales…"
 
 #: panels/region/cc-format-chooser.ui:160
-#| msgid "Common Tasks"
 msgid "Common Formats"
 msgstr "Formatos comunes"
 
 #: panels/region/cc-format-chooser.ui:191
-#| msgid "Formats"
 msgid "All Formats"
 msgstr "Todos los formatos"
 
 #: panels/region/cc-format-chooser.ui:244
-#| msgid "Search settings"
 msgid "No Search Results"
 msgstr "No se han encontrado resultados"
 
@@ -5970,9 +5959,6 @@ msgstr "Elija una carpeta"
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
 #: panels/sharing/cc-sharing-panel.c:729
 #, c-format
-#| msgid ""
-#| "File Sharing allows you to share your Public folder with others on your "
-#| "current network using: <a href=\"dav://%s\">dav://%s</a>"
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
 "current network using: %s"
@@ -5983,10 +5969,6 @@ msgstr ""
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
 #: panels/sharing/cc-sharing-panel.c:735
 #, c-format
-#| msgid ""
-#| "When remote login is enabled, remote users can connect using the Secure "
-#| "Shell command:\n"
-#| "<a href=\"ssh %s\">ssh %s</a>"
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
 "Shell command:\n"
@@ -5999,9 +5981,6 @@ msgstr ""
 #. TRANSLATORS: %s is replaced with a link to a vnc://<hostname> URL
 #: panels/sharing/cc-sharing-panel.c:741
 #, c-format
-#| msgid ""
-#| "Screen sharing allows remote users to view or control your screen by "
-#| "connecting to <a href=\"vnc://%s\">vnc://%s</a>"
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
 "connecting to %s"
@@ -8296,6 +8275,12 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
+
+#~ msgid "Restrict _background data usage"
+#~ msgstr "Restringir el uso de datos en _segundo plano"
+
+#~ msgid "Appropriate for connections that have data charges or limits."
+#~ msgstr "Adecuado para conexiones que consumen o limitan los datos."
 
 #~ msgid "No regions found"
 #~ msgstr "No se han encontrado regiones"
