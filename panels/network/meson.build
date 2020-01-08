@@ -1,3 +1,6 @@
+panels_list += cappletname
+desktop = 'gnome-@0@-panel.desktop'.format(cappletname)
+
 deps = common_deps + network_manager_deps + [
   polkit_gobject_dep,
   dependency('gmodule-2.0')
@@ -8,38 +11,26 @@ network_inc = include_directories('.')
 subdir('wireless-security')
 subdir('connection-editor')
 
-panel_names = [
-  cappletname,
-  'wifi'
-]
+desktop_in = configure_file(
+  input: desktop + '.in.in',
+  output: desktop + '.in',
+  configuration: desktop_conf
+)
 
-panels_list += panel_names
-
-foreach name: panel_names
-  desktop = 'gnome-' + name + '-panel.desktop'
-
-  desktop_in = configure_file(
-    input: desktop + '.in.in',
-    output: desktop + '.in',
-    configuration: desktop_conf
-  )
-
-  i18n.merge_file(
-    desktop,
-    type: 'desktop',
-    input: desktop_in,
-    output: desktop,
-    po_dir: po_dir,
-    install: true,
-    install_dir: control_center_desktopdir
-  )
-endforeach
+i18n.merge_file(
+  desktop,
+  type: 'desktop',
+  input: desktop_in,
+  output: desktop,
+  po_dir: po_dir,
+  install: true,
+  install_dir: control_center_desktopdir
+)
 
 sources = files(
   'cc-network-panel.c',
   'cc-wifi-connection-row.c',
   'cc-wifi-connection-list.c',
-  'cc-wifi-panel.c',
   'cc-wifi-hotspot-dialog.c',
   'net-device-bluetooth.c',
   'net-device-ethernet.c',
@@ -55,7 +46,6 @@ sources = files(
 resource_data = files(
   'cc-network-panel.ui',
   'cc-wifi-connection-row.ui',
-  'cc-wifi-panel.ui',
   'cc-wifi-hotspot-dialog.ui',
   'network-bluetooth.ui',
   'network-ethernet.ui',
