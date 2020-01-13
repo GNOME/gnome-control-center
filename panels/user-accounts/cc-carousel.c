@@ -87,7 +87,7 @@ cc_carousel_item_get_x (CcCarouselItem *item,
 {
         GtkWidget *widget, *parent;
         gint width;
-        gint dest_x;
+        gint dest_x = 0;
 
         parent = GTK_WIDGET (carousel->stack);
         widget = GTK_WIDGET (item);
