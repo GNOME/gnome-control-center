@@ -45,7 +45,7 @@ enum {
 };
 
 typedef struct {
-        GtkButton *editable_button;
+        GtkLabel *state_label;
 
         GtkWidget *ass;
         GtkBuilder *dialog;
@@ -177,7 +177,7 @@ get_error_dialog (const char *title,
 }
 
 gboolean
-set_fingerprint_label (GtkButton *editable_button)
+set_fingerprint_label (GtkLabel *state_label)
 {
         GDBusProxy *device;
         GVariant *result;
@@ -208,12 +208,11 @@ set_fingerprint_label (GtkButton *editable_button)
 
         if (fingers == NULL || g_variant_iter_n_children (fingers) == 0) {
                 is_disable = FALSE;
-                gtk_button_set_label (editable_button, _("Disabled"));
+                gtk_label_set_text (state_label, _("Disabled"));
         } else {
                 is_disable = TRUE;
-                gtk_button_set_label (editable_button, _("Enabled"));
+                gtk_label_set_text (state_label, _("Enabled"));
         }
-        gtk_widget_set_halign (gtk_bin_get_child (GTK_BIN (editable_button)), GTK_ALIGN_START);
 
         if (result != NULL)
                 g_variant_unref (result);
@@ -247,7 +246,7 @@ delete_fingerprints (void)
 
 static void
 delete_fingerprints_question (GtkWindow *parent,
-                              GtkButton *editable_button,
+                              GtkLabel  *state_label,
                               ActUser   *user)
 {
         GtkWidget *question;
@@ -272,7 +271,7 @@ delete_fingerprints_question (GtkWindow *parent,
 
         if (gtk_dialog_run (GTK_DIALOG (question)) == GTK_RESPONSE_OK) {
                 delete_fingerprints ();
-                set_fingerprint_label (editable_button);
+                set_fingerprint_label (state_label);
         }
 
         gtk_widget_destroy (question);
@@ -414,10 +413,10 @@ finger_combobox_changed (GtkComboBox *combobox, EnrollData *data)
 static void
 assistant_cancelled (GtkAssistant *ass, EnrollData *data)
 {
-        GtkButton *editable_button = data->editable_button;
+        GtkLabel *state_label = data->state_label;
 
         enroll_data_destroy (data);
-        set_fingerprint_label (editable_button);
+        set_fingerprint_label (state_label);
 }
 
 static void
@@ -607,7 +606,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 
 static void
 enroll_fingerprints (GtkWindow *parent,
-                     GtkButton *editable_button,
+                     GtkLabel  *state_label,
                      ActUser   *user)
 {
         GDBusProxy *device = NULL;
@@ -635,7 +634,7 @@ enroll_fingerprints (GtkWindow *parent,
 
         data = g_new0 (EnrollData, 1);
         data->device = device;
-        data->editable_button = editable_button;
+        data->state_label = state_label;
 
         /* Get some details about the device */
         result = g_dbus_connection_call_sync (connection,
@@ -735,16 +734,16 @@ enroll_fingerprints (GtkWindow *parent,
 
 void
 fingerprint_button_clicked (GtkWindow *parent,
-                            GtkButton *editable_button,
+                            GtkLabel  *state_label,
                             ActUser   *user)
 {
         bindtextdomain ("fprintd", GNOMELOCALEDIR);
         bind_textdomain_codeset ("fprintd", "UTF-8");
 
         if (is_disable != FALSE) {
-                delete_fingerprints_question (parent, editable_button, user);
+                delete_fingerprints_question (parent, state_label, user);
         } else {
-                enroll_fingerprints (parent, editable_button, user);
+                enroll_fingerprints (parent, state_label, user);
         }
 }
 
