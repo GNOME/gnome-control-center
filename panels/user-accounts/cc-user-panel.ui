@@ -181,14 +181,58 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="full_name_entry">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
-                        <property name="max-length">255</property>
-                        <property name="width-chars">18</property>
-                        <property name="max-width-chars">30</property>
                         <property name="valign">GTK_ALIGN_CENTER</property>
-                        <signal name="activate" handler="change_name_done" object="CcUserPanel" swapped="yes"/>
-                        <signal name="focus-out-event" handler="change_name_focus_out" object="CcUserPanel" swapped="yes"/>
+                        <property name="spacing">10</property>
+                        <child>
+                          <object class="GtkStack" id="full_name_stack">
+                            <property name="visible">True</property>
+                            <child>
+                              <object class="GtkLabel" id="full_name_label">
+                                <property name="visible">True</property>
+                                <property name="halign">GTK_ALIGN_START</property>
+                                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                <property name="width-chars">18</property>
+                                <property name="max-width-chars">30</property>
+                                <attributes>
+                                  <attribute name="scale" value="1.2"/>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkEntry" id="full_name_entry">
+                                <property name="visible">True</property>
+                                <property name="max-length">255</property>
+                                <property name="width-chars">18</property>
+                                <property name="max-width-chars">30</property>
+                                <property name="valign">GTK_ALIGN_CENTER</property>
+                                <signal name="activate" handler="full_name_entry_activate" object="CcUserPanel" swapped="yes"/>
+                                <signal name="key-press-event" handler="full_name_entry_key_press_cb" object="CcUserPanel" swapped="yes"/>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkToggleButton" id="full_name_edit_button">
+                            <property name="visible">True</property>
+                            <signal name="toggled" handler="full_name_edit_button_toggled" object="CcUserPanel" swapped="yes"/>
+                            <style>
+                              <class name="circular"/>
+                            </style>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="margin">5</property>
+                                <property name="icon-name">document-edit-symbolic</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="pack_type">end</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
