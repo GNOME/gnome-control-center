@@ -351,8 +351,23 @@ cc_carousel_new (void)
 }
 
 static void
+cc_carousel_dispose (GObject *object)
+{
+        CcCarousel *self = CC_CAROUSEL (object);
+
+        g_clear_object (&self->provider);
+        if (self->children != NULL) {
+                g_list_free (self->children);
+                self->children = NULL;
+        }
+
+        G_OBJECT_CLASS (cc_carousel_parent_class)->dispose (object);
+}
+
+static void
 cc_carousel_class_init (CcCarouselClass *klass)
 {
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
         GtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
 
@@ -366,6 +381,8 @@ cc_carousel_class_init (CcCarouselClass *klass)
 
         gtk_widget_class_bind_template_callback (wclass, cc_carousel_goto_previous_page);
         gtk_widget_class_bind_template_callback (wclass, cc_carousel_goto_next_page);
+
+        object_class->dispose = cc_carousel_dispose;
 
         container_class->add = cc_carousel_add;
 
