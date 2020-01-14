@@ -18,6 +18,11 @@ levelbar .strength-high {
 .user-icon-button {
   background: transparent;
   box-shadow: none;
-  border: none;
+  border: 1px solid @borders;
+  border-radius: 50%;
+  padding: 3px;
 }
 
+.user-icon-button > .user-icon-button {
+  padding: 0;
+}

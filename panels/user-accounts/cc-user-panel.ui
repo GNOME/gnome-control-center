@@ -129,12 +129,18 @@
                               <object class="GtkStack" id="user_icon_stack">
                                 <property name="visible">True</property>
                                 <property name="halign">GTK_ALIGN_END</property>
+                                <style>
+                                  <class name="user-icon-button"/>
+                                </style>
                                 <child>
                                   <object class="CcUserImage" id="user_icon_image">
                                     <property name="visible">True</property>
                                     <property name="icon_name">avatar-default</property>
                                     <property name="pixel_size">96</property>
                                     <property name="halign">GTK_ALIGN_END</property>
+                                    <style>
+                                      <class name="user-icon-button"/>
+                                    </style>
                                     <child internal-child="accessible">
                                       <object class="AtkObject">
                                         <property name="accessible-name" translatable="yes">User Icon</property>
