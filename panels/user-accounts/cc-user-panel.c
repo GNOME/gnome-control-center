@@ -863,7 +863,7 @@ show_user (ActUser *user, CcUserPanel *self)
         show = act_user_get_uid (user) == getuid () ||
                act_user_get_account_type (current) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR;
         if (show) {
-                text = get_login_time_text (user);
+                text = g_strdup_printf (_("Last login: %s"), get_login_time_text (user));
                 gtk_label_set_label (self->last_login_button_label, text);
                 g_free (text);
         }
