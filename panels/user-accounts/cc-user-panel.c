@@ -728,7 +728,7 @@ autologin_changed (CcUserPanel *self)
         gboolean active;
         ActUser *user;
 
-        active = gtk_switch_get_active (self->autologin_switch);
+        active = !gtk_switch_get_active (self->autologin_switch);
         user = get_selected_user (self);
 
         if (active != act_user_get_automatic_login (user)) {
@@ -825,7 +825,7 @@ show_user (ActUser *user, CcUserPanel *self)
         gtk_widget_set_sensitive (GTK_WIDGET (self->password_button_label), enable);
 
         g_signal_handlers_block_by_func (self->autologin_switch, autologin_changed, self);
-        gtk_switch_set_active (self->autologin_switch, act_user_get_automatic_login (user));
+        gtk_switch_set_active (self->autologin_switch, !act_user_get_automatic_login (user));
         g_signal_handlers_unblock_by_func (self->autologin_switch, autologin_changed, self);
         gtk_widget_set_sensitive (GTK_WIDGET (self->autologin_switch), get_autologin_possible (user));
 
