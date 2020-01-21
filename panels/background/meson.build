@@ -99,7 +99,8 @@ deps = common_deps + [
 
 cflags += [
   '-DDATADIR="@0@"'.format(control_center_datadir),
-  '-DGNOME_DESKTOP_USE_UNSTABLE_API'
+  '-DGNOME_DESKTOP_USE_UNSTABLE_API',
+  '-DGNOME_DESKTOP_BG_API_BREAK="@0@"'.format(gnome_desktop_dep.version().version_compare('>=3.35.4'))
 ]
 
 panels_libs += static_library(
