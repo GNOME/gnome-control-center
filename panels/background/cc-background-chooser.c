@@ -22,6 +22,7 @@
 #define G_LOG_DOMAIN "cc-background-chooser"
 
 #include <glib/gi18n.h>
+#include <libgnome-desktop/gnome-desktop-thumbnail.h>
 
 #include "bg-colors-source.h"
 #include "bg-pictures-source.h"
