@@ -18,6 +18,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#include <libgnome-desktop/gnome-desktop-thumbnail.h>
+
 #include "cc-background-preview.h"
 
 struct _CcBackgroundPreview
