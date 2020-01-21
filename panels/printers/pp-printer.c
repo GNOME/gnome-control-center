@@ -301,7 +301,7 @@ get_jobs_thread (GTask        *task,
   ipp_t            *printer_response;
   gchar           **auth_info_required = NULL;
   g_autofree gchar *printer_name = NULL;
-  GList            *list = NULL;
+  g_autoptr(GPtrArray) array = NULL;
   gint              num_jobs;
   gint              i, j;
 
@@ -312,6 +312,7 @@ get_jobs_thread (GTask        *task,
                           get_jobs_data->myjobs ? 1 : 0,
                           get_jobs_data->which_jobs);
 
+  array = g_ptr_array_new_with_free_func (g_object_unref);
   for (i = 0; i < num_jobs; i++)
     {
       auth_info_is_required = FALSE;
@@ -374,7 +375,7 @@ get_jobs_thread (GTask        *task,
                           "auth-info-required", auth_info_is_required ? auth_info_required : NULL,
                           NULL);
 
-      list = g_list_append (list, job);
+      g_ptr_array_add (array, job);
     }
 
   g_strfreev (auth_info_required);
@@ -382,7 +383,7 @@ get_jobs_thread (GTask        *task,
 
   if (g_task_set_return_on_cancel (task, FALSE))
     {
-      g_task_return_pointer (task, list, (GDestroyNotify) g_list_free);
+      g_task_return_pointer (task, g_steal_pointer (&array), (GDestroyNotify) g_ptr_array_unref);
     }
 }
 
@@ -408,7 +409,7 @@ pp_printer_get_jobs_async (PpPrinter           *self,
   g_object_unref (task);
 }
 
-GList *
+GPtrArray *
 pp_printer_get_jobs_finish (PpPrinter          *self,
                             GAsyncResult       *res,
                             GError            **error)
