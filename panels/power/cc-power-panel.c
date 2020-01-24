@@ -2354,7 +2354,8 @@ add_suspend_and_power_off_section (CcPowerPanel *self)
     }
 
   if (g_strcmp0 (self->chassis_type, "vm") == 0 ||
-      g_strcmp0 (self->chassis_type, "tablet") == 0)
+      g_strcmp0 (self->chassis_type, "tablet") == 0 ||
+      g_strcmp0 (self->chassis_type, "handset") == 0)
     return;
 
   /* Power button row */
