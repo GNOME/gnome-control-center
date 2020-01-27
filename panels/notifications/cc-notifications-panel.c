@@ -42,7 +42,7 @@ struct _CcNotificationsPanel {
   GtkScrolledWindow *main_scrolled_window;
   GtkBox            *main_box;
   GtkListBox        *options_listbox;
-  GtkSwitch         *popups_switch;
+  GtkSwitch         *dnd_switch;
   GtkSizeGroup      *sizegroup1;
 
   GSettings         *master_settings;
@@ -180,7 +180,7 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
   panel->master_settings = g_settings_new (MASTER_SCHEMA);
 
   g_settings_bind (panel->master_settings, "show-banners",
-                   panel->popups_switch,
+                   panel->dnd_switch,
                    "active", G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (panel->master_settings, "show-in-lock-screen",
                    panel->lock_screen_switch,
@@ -244,7 +244,7 @@ cc_notifications_panel_class_init (CcNotificationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, main_scrolled_window);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, main_box);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, options_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, popups_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, dnd_switch);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, sizegroup1);
 
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed);
