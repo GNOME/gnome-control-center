@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-01-16 12:38+0000\n"
-"PO-Revision-Date: 2020-01-19 13:19+0100\n"
+"POT-Creation-Date: 2020-01-19 12:21+0000\n"
+"PO-Revision-Date: 2020-01-27 09:27+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -204,7 +204,7 @@ msgstr ""
 #: panels/applications/cc-applications-panel.ui:132
 #: panels/camera/gnome-camera-panel.desktop.in.in:3
 msgid "Camera"
-msgstr "Fotoaparát"
+msgstr "Kamera"
 
 # 4. GtkComboBox item (manual, dhcp, link-local...)
 #. This label is displayed in a treeview cell displaying
@@ -289,10 +289,8 @@ msgstr "Zvuky"
 
 # GtkLabel label
 #: panels/applications/cc-applications-panel.ui:293
-#, fuzzy
-#| msgid "_Default printer"
 msgid "Default Handlers"
-msgstr "_Predvolená tlačiareň"
+msgstr "Predvolené obslužné programy"
 
 #: panels/applications/cc-applications-panel.ui:305
 msgid "Types of files and links that this application opens."
@@ -365,15 +363,15 @@ msgstr "Pridanie používateľských účtov a zmena hesiel"
 
 #: panels/applications/cc-snap-row.c:57 panels/applications/cc-snap-row.c:133
 msgid "Play and record sound"
-msgstr ""
+msgstr "Prehrávanie a záznam zvuku"
 
 #: panels/applications/cc-snap-row.c:59
 msgid "Detect network devices using mDNS/DNS-SD (Bonjour/zeroconf)"
-msgstr ""
+msgstr "Rozpoznanie sieťových zariadení pomocou mDNS/DNS-SD (Bonjour/zeroconf)"
 
 #: panels/applications/cc-snap-row.c:61
 msgid "Access bluetooth hardware directly"
-msgstr ""
+msgstr "Priamy prístup k hardvéru bluetooth"
 
 # GtkLinkButton label
 #: panels/applications/cc-snap-row.c:63
@@ -382,7 +380,7 @@ msgstr "Používanie zariadení bluetooth"
 
 #: panels/applications/cc-snap-row.c:65
 msgid "Use your camera"
-msgstr ""
+msgstr "Používanie vyšej kamery"
 
 # desktop entry name
 #: panels/applications/cc-snap-row.c:67
@@ -391,7 +389,7 @@ msgstr "Tlač dokumentov"
 
 #: panels/applications/cc-snap-row.c:69
 msgid "Use any connected joystick"
-msgstr ""
+msgstr "Používanie akéhokoľvek pripojeného pákového ovládača"
 
 #: panels/applications/cc-snap-row.c:71
 msgid "Allow connecting to the Docker service"
@@ -412,7 +410,7 @@ msgstr "Aktualizácia firmvéru tohoto zariadenia"
 
 #: panels/applications/cc-snap-row.c:81
 msgid "Access hardware information"
-msgstr ""
+msgstr "Prístup k informáciám o hardvéri"
 
 #: panels/applications/cc-snap-row.c:83
 msgid "Provide entropy to hardware random number generator"
@@ -420,15 +418,15 @@ msgstr ""
 
 #: panels/applications/cc-snap-row.c:85
 msgid "Use hardware-generated random numbers"
-msgstr ""
+msgstr "Používanie hardvérom generovaných náhodných čísel"
 
 #: panels/applications/cc-snap-row.c:87
 msgid "Access files in your home folder"
-msgstr ""
+msgstr "Prístup k súborom vo vašom domovskom priečinku"
 
 #: panels/applications/cc-snap-row.c:89
 msgid "Access libvirt service"
-msgstr ""
+msgstr "Prístup k službe libvirt"
 
 # policy description
 #: panels/applications/cc-snap-row.c:91
@@ -437,7 +435,7 @@ msgstr "Zmena systémového jazyka a nastavení oblasti"
 
 #: panels/applications/cc-snap-row.c:93
 msgid "Change location settings and providers"
-msgstr ""
+msgstr "Zmena nastavení a poskytovateľov umiestnenia"
 
 # GtkButton label
 #: panels/applications/cc-snap-row.c:95
@@ -446,11 +444,11 @@ msgstr "Prístup k vášmu umiestneniu"
 
 #: panels/applications/cc-snap-row.c:97
 msgid "Read system and application logs"
-msgstr ""
+msgstr "Čítanie systémových a aplikačných záznamov"
 
 #: panels/applications/cc-snap-row.c:99
 msgid "Access LXD service"
-msgstr ""
+msgstr "Prístup k službe LXD"
 
 #: panels/applications/cc-snap-row.c:101
 msgid "access the media-hub service"
@@ -458,7 +456,7 @@ msgstr ""
 
 #: panels/applications/cc-snap-row.c:103
 msgid "Use and configure modems"
-msgstr ""
+msgstr "Používanie a nastavovanie modemov"
 
 #: panels/applications/cc-snap-row.c:105
 msgid "Read system mount information and disk quotas"
@@ -466,7 +464,7 @@ msgstr ""
 
 #: panels/applications/cc-snap-row.c:107
 msgid "Control music and video players"
-msgstr ""
+msgstr "Ovládanie prehrávačov hudby a videa"
 
 # policy description
 #: panels/applications/cc-snap-row.c:111
@@ -476,10 +474,11 @@ msgstr "Zmena nízko úrovňových nastavení siete"
 #: panels/applications/cc-snap-row.c:113
 msgid "Access the NetworkManager service to read and change network settings"
 msgstr ""
+"Prístup k službe NetworkManager kvôli čítaniu a zmene sieťových nastavení"
 
 #: panels/applications/cc-snap-row.c:115
 msgid "Read access to network settings"
-msgstr ""
+msgstr "Prístup k čítaniu sieťových nastavení"
 
 #: panels/applications/cc-snap-row.c:117
 msgid "Change network settings"
@@ -501,45 +500,47 @@ msgstr ""
 
 #: panels/applications/cc-snap-row.c:125
 msgid "Read from CD/DVD"
-msgstr ""
+msgstr "Čítanie z diskov CD/DVD"
 
 #: panels/applications/cc-snap-row.c:127
 msgid "Read, add, change, or remove saved passwords"
-msgstr ""
+msgstr "Čítanie, pridávanie, zmena alebo odstraňovanie uložených hesiel"
 
 #: panels/applications/cc-snap-row.c:129
 msgid ""
 "Access pppd and ppp devices for configuring Point-to-Point Protocol "
 "connections"
 msgstr ""
+"Prístup k zariadeniam pppd a ppp pre nastavovanie pripojení protokolu Point-"
+"to-Point"
 
 #: panels/applications/cc-snap-row.c:131
 msgid "Pause or end any process on the system"
-msgstr ""
+msgstr "Pozastavenie alebo ukončenie akéhokoľvek procesu v systéme"
 
 #: panels/applications/cc-snap-row.c:135
 msgid "Access USB hardware directly"
-msgstr ""
+msgstr "Priamy prístup k hardvéru na zbernici USB"
 
 #: panels/applications/cc-snap-row.c:137
 msgid "Read/write files on removable storage devices"
-msgstr ""
+msgstr "Čítanie alebo zápis súborov na vymeniteľné zariadenia"
 
 #: panels/applications/cc-snap-row.c:139
 msgid "Prevent screen sleep/lock"
-msgstr ""
+msgstr "Zabránenie uspatiu alebo uzamknutiu obrazovky"
 
 #: panels/applications/cc-snap-row.c:141
 msgid "Access serial port hardware"
-msgstr ""
+msgstr "Prístup k hardvéru cez sériový port"
 
 #: panels/applications/cc-snap-row.c:143
 msgid "Restart or power off the device"
-msgstr ""
+msgstr "Řeštartovanie alebo vypnutie zariadenia"
 
 #: panels/applications/cc-snap-row.c:145
 msgid "Install, remove and configure software"
-msgstr ""
+msgstr "Inštalácia, odstránenie a nastavenie softvéru"
 
 #: panels/applications/cc-snap-row.c:147
 msgid "Access Storage Framework service"
@@ -547,11 +548,11 @@ msgstr ""
 
 #: panels/applications/cc-snap-row.c:149
 msgid "Read process and system information"
-msgstr ""
+msgstr "Čítanie informácií o procesoch a systéme"
 
 #: panels/applications/cc-snap-row.c:151
 msgid "Monitor and control any running program"
-msgstr ""
+msgstr "Sledovanie a ovládanie akéhokoľvek spusteného programu"
 
 # desktop entry comment
 #: panels/applications/cc-snap-row.c:153
@@ -582,7 +583,7 @@ msgstr ""
 
 #: panels/applications/cc-snap-row.c:165
 msgid "Access energy usage data"
-msgstr ""
+msgstr "Prístup k údajom využitia energie"
 
 #: panels/applications/cc-snap-row.c:167
 msgid "Read/write access to U2F devices exposed"
@@ -776,9 +777,8 @@ msgid ""
 "Use of the camera allows applications to capture photos and video. Disabling "
 "the camera may cause some applications to not function properly."
 msgstr ""
-"Použitie fotoaparátu umožňuje aplikáciám snímať fotografie a videá. "
-"Zakázanie fotoaparátu môže spôsobiť nesprávne fungovanie niektorých "
-"aplikácií."
+"Použitie kamery umožňuje aplikáciám snímať fotografie a videá. Zakázanie "
+"kamery môže spôsobiť nesprávne fungovanie niektorých aplikácií."
 
 #: panels/camera/cc-camera-panel.ui:87
 msgid "Allow the applications below to use your camera."
@@ -939,7 +939,7 @@ msgstr "Skener %s"
 #: panels/color/cc-color-common.c:73
 #, c-format
 msgid "%s Camera"
-msgstr "Fotoaparát %s"
+msgstr "Kamera %s"
 
 #. TRANSLATORS: a printer device, e.g. 'Epson Photosmart Printer'
 #: panels/color/cc-color-common.c:77
@@ -2541,6 +2541,8 @@ msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
 msgstr ""
+"Kláves alternatívnych znakov môže byť použitý na zadávanie dodatočných "
+"znakov. Tie sú niekedy vyznačené ako tretia voľba na vašej klávesnici."
 
 #: panels/keyboard/cc-alt-chars-key-dialog.ui:45
 msgid "Left Alt"
@@ -6637,6 +6639,8 @@ msgid ""
 "Control which search results are shown in the Activities Overview. The order "
 "of search results can also be changed by moving rows in the list."
 msgstr ""
+"Ovláda, aké výsledky vyhľadávania sú zobrazované v prehľade Aktivít. Poradie "
+"výsledkov vyhľadávania môže byť tiež zmenené presunom riadkov v zozname."
 
 # desktop entry comment
 #: panels/search/gnome-search-panel.desktop.in.in:4
@@ -7109,6 +7113,9 @@ msgid ""
 "Either the system lacks Thunderbolt support, it has been disabled in the "
 "BIOS or is set to an unsupported security level in the BIOS."
 msgstr ""
+"Rozhranie Thunderbolt sa nepodarilo rozpoznať.\n"
+"Buď systém nepodporuje rozhranie Thunderbolt, alebo bola zakázaná v BIOSe, "
+"alebo je nastavená na nepodporovanú bezpečnostnú úroveň v BIOSe."
 
 #: panels/thunderbolt/cc-bolt-panel.c:513
 msgid "Thunderbolt support has been disabled in the BIOS."
