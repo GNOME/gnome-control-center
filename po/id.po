@@ -13,9 +13,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-01-11 10:41+0000\n"
-"PO-Revision-Date: 2020-01-13 11:17+0700\n"
-"Last-Translator: Sofyan Sugianto <ssugianto@gnome.org>\n"
+"POT-Creation-Date: 2020-01-27 23:24+0000\n"
+"PO-Revision-Date: 2020-01-28 17:07+0700\n"
+"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
@@ -40,7 +40,7 @@ msgid "Session Bus"
 msgstr "Bus Sesi"
 
 #: panels/applications/cc-applications-panel.c:714
-#: panels/power/cc-power-panel.c:2469 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2470 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Perangkat"
@@ -565,11 +565,11 @@ msgstr "Kontrol berbagai izin dan pengaturan aplikasi"
 msgid "application;flatpak;permission;setting;"
 msgstr "aplikasi;flatpak;izin;pengaturan;"
 
-#: panels/background/cc-background-chooser.c:349
+#: panels/background/cc-background-chooser.c:350
 msgid "Select a picture"
 msgstr "Pilih gambar"
 
-#: panels/background/cc-background-chooser.c:352
+#: panels/background/cc-background-chooser.c:353
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:241
 #: panels/color/cc-color-panel.c:894 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
@@ -596,7 +596,7 @@ msgstr "Pilih gambar"
 msgid "_Cancel"
 msgstr "Ba_tal"
 
-#: panels/background/cc-background-chooser.c:353
+#: panels/background/cc-background-chooser.c:354
 #: panels/network/connection-editor/vpn-helpers.c:177
 #: panels/printers/pp-details-dialog.c:253
 #: panels/sharing/cc-sharing-panel.c:429
@@ -631,7 +631,7 @@ msgstr "ukuran berganda"
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:278
+#: panels/background/cc-background-item.c:282
 msgid "No Desktop Background"
 msgstr "Tanpa Latar Belakang Desktop"
 
@@ -1427,12 +1427,12 @@ msgid "Some settings must be unlocked before they can be changed."
 msgstr "Beberapa pengaturan harus dibuka kuncinya sebelum dapat diubah."
 
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:143
+#: panels/network/connection-editor/ce-page-details.c:152
 msgid "Today"
 msgstr "Hari ini"
 
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:145
+#: panels/network/connection-editor/ce-page-details.c:154
 msgid "Yesterday"
 msgstr "Kemarin"
 
@@ -2846,25 +2846,29 @@ msgid "Not set up"
 msgstr "Belum ditata"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:189
+#: panels/network/cc-wifi-connection-row.c:198
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:249
+#: panels/network/cc-wifi-connection-row.c:258
 msgid "Insecure network (WEP)"
 msgstr "Jaringan tidak aman (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:254
+#: panels/network/cc-wifi-connection-row.c:263
 msgid "Secure network (WPA)"
 msgstr "Jaringan aman (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:259
+#: panels/network/cc-wifi-connection-row.c:268
 msgid "Secure network (WPA2)"
 msgstr "Jaringan aman (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:264
+#: panels/network/cc-wifi-connection-row.c:273
+msgid "Secure network (WPA3)"
+msgstr "Jaringan aman (WPA3)"
+
+#: panels/network/cc-wifi-connection-row.c:278
 msgid "Secure network"
 msgstr "Jaringan aman"
 
@@ -2972,7 +2976,7 @@ msgid "802.1x _Security"
 msgstr "_Keamanan 802.1x"
 
 #: panels/network/connection-editor/ce-page-8021x-security.c:114
-#: panels/network/connection-editor/ce-page-security.c:386
+#: panels/network/connection-editor/ce-page-security.c:406
 #: panels/network/connection-editor/details-page.ui:90
 msgid "Security"
 msgstr "Keamanan"
@@ -3020,27 +3024,32 @@ msgstr "WEP"
 msgid "WPA"
 msgstr "WPA"
 
+#. TRANSLATORS: this WPA3 WiFi security
+#: panels/network/connection-editor/ce-page-details.c:103
+msgid "WPA3"
+msgstr "WPA3"
+
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:101
+#: panels/network/connection-editor/ce-page-details.c:109
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:106
+#: panels/network/connection-editor/ce-page-details.c:115
 msgid "Enterprise"
 msgstr "Enterprise"
 
-#: panels/network/connection-editor/ce-page-details.c:111
+#: panels/network/connection-editor/ce-page-details.c:120
 #: panels/network/net-device-wifi.c:225
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Nihil"
 
-#: panels/network/connection-editor/ce-page-details.c:132
+#: panels/network/connection-editor/ce-page-details.c:141
 msgid "Never"
 msgstr "Tak pernah"
 
-#: panels/network/connection-editor/ce-page-details.c:147
+#: panels/network/connection-editor/ce-page-details.c:156
 #: panels/network/net-device-ethernet.c:108
 #, c-format
 msgid "%i day ago"
@@ -3048,63 +3057,63 @@ msgid_plural "%i days ago"
 msgstr[0] "%i hari yang lalu"
 msgstr[1] "%i hari yang lalu"
 
-#: panels/network/connection-editor/ce-page-details.c:272
+#: panels/network/connection-editor/ce-page-details.c:281
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d Mb/s (%1.1f GHz)"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:274
+#: panels/network/connection-editor/ce-page-details.c:283
 #: panels/network/net-device-ethernet.c:202
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: panels/network/connection-editor/ce-page-details.c:291
+#: panels/network/connection-editor/ce-page-details.c:300
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 GHz / 5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:293
+#: panels/network/connection-editor/ce-page-details.c:302
 msgid "2.4 GHz"
 msgstr "2.4 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:295
+#: panels/network/connection-editor/ce-page-details.c:304
 msgid "5 GHz"
 msgstr "5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:315
+#: panels/network/connection-editor/ce-page-details.c:324
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Nihil"
 
-#: panels/network/connection-editor/ce-page-details.c:317
+#: panels/network/connection-editor/ce-page-details.c:326
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Lemah"
 
-#: panels/network/connection-editor/ce-page-details.c:319
+#: panels/network/connection-editor/ce-page-details.c:328
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Ok"
 
-#: panels/network/connection-editor/ce-page-details.c:321
+#: panels/network/connection-editor/ce-page-details.c:330
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Bagus"
 
-#: panels/network/connection-editor/ce-page-details.c:323
+#: panels/network/connection-editor/ce-page-details.c:332
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Sempurna"
 
-#: panels/network/connection-editor/ce-page-details.c:381
+#: panels/network/connection-editor/ce-page-details.c:390
 #: panels/network/connection-editor/details-page.ui:108
 #: panels/network/net-device-ethernet.c:143
 #: panels/network/net-device-mobile.c:431
 msgid "IPv4 Address"
 msgstr "Alamat IPv4"
 
-#: panels/network/connection-editor/ce-page-details.c:382
+#: panels/network/connection-editor/ce-page-details.c:391
 #: panels/network/connection-editor/details-page.ui:126
 #: panels/network/net-device-ethernet.c:144
 #: panels/network/net-device-ethernet.c:148
@@ -3112,27 +3121,27 @@ msgstr "Alamat IPv4"
 msgid "IPv6 Address"
 msgstr "Alamat IPv6"
 
-#: panels/network/connection-editor/ce-page-details.c:385
-#: panels/network/connection-editor/ce-page-details.c:386
+#: panels/network/connection-editor/ce-page-details.c:394
+#: panels/network/connection-editor/ce-page-details.c:395
 #: panels/network/net-device-ethernet.c:146
 #: panels/network/net-device-mobile.c:435
 #: panels/network/net-device-mobile.c:436 panels/network/network-mobile.ui:183
 msgid "IP Address"
 msgstr "Alamat IP"
 
-#: panels/network/connection-editor/ce-page-details.c:420
+#: panels/network/connection-editor/ce-page-details.c:429
 msgid "Forget Connection"
 msgstr "Lupakan Sambungan"
 
-#: panels/network/connection-editor/ce-page-details.c:422
+#: panels/network/connection-editor/ce-page-details.c:431
 msgid "Remove Connection Profile"
 msgstr "Hapus Profil Sambungan"
 
-#: panels/network/connection-editor/ce-page-details.c:424
+#: panels/network/connection-editor/ce-page-details.c:433
 msgid "Remove VPN"
 msgstr "Hapus VPN"
 
-#: panels/network/connection-editor/ce-page-details.c:442
+#: panels/network/connection-editor/ce-page-details.c:451
 msgid "Details"
 msgstr "Rincian"
 
@@ -3164,36 +3173,40 @@ msgstr "IPv4"
 msgid "IPv6"
 msgstr "IPv6"
 
-#: panels/network/connection-editor/ce-page-security.c:257
+#: panels/network/connection-editor/ce-page-security.c:262
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Tak Ada"
 
-#: panels/network/connection-editor/ce-page-security.c:280
+#: panels/network/connection-editor/ce-page-security.c:285
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "Kunci WEP 40/128-bit (Heksa atau ASCII)"
 
-#: panels/network/connection-editor/ce-page-security.c:290
+#: panels/network/connection-editor/ce-page-security.c:295
 msgid "WEP 128-bit Passphrase"
 msgstr "Frasa-sandi WEP 128-bit"
 
-#: panels/network/connection-editor/ce-page-security.c:303
+#: panels/network/connection-editor/ce-page-security.c:308
 #: panels/network/wireless-security/ws-dynamic-wep.ui:20
 #: panels/network/wireless-security/ws-wpa-eap.ui:25
 msgid "LEAP"
 msgstr "LEAP"
 
-#: panels/network/connection-editor/ce-page-security.c:316
+#: panels/network/connection-editor/ce-page-security.c:321
 msgid "Dynamic WEP (802.1x)"
 msgstr "WEP Dinamik (802.1x)"
 
-#: panels/network/connection-editor/ce-page-security.c:330
+#: panels/network/connection-editor/ce-page-security.c:335
 msgid "WPA & WPA2 Personal"
 msgstr "WPA & WPA2 Personal"
 
-#: panels/network/connection-editor/ce-page-security.c:344
+#: panels/network/connection-editor/ce-page-security.c:349
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 Enterprise"
+
+#: panels/network/connection-editor/ce-page-security.c:363
+msgid "WPA3 Personal"
+msgstr "WPA3 Pribadi"
 
 #: panels/network/connection-editor/details-page.ui:18
 msgid "Signal Strength"
@@ -4382,8 +4395,8 @@ msgid "On"
 msgstr "Nyala"
 
 #: panels/notifications/cc-notifications-panel.ui:70
-msgid "Notification _Popups"
-msgstr "_Popup Notifikasi"
+msgid "_Do Not Disturb"
+msgstr "Jangan _Ganggu"
 
 #: panels/notifications/cc-notifications-panel.ui:121
 msgid "_Lock Screen Notifications"
@@ -4602,7 +4615,7 @@ msgstr "Perangkat masukan permainan"
 
 #. TRANSLATORS: secondary battery, misc
 #: panels/power/cc-power-panel.c:660 panels/power/cc-power-panel.c:942
-#: panels/power/cc-power-panel.c:2422
+#: panels/power/cc-power-panel.c:2423
 msgid "Battery"
 msgstr "Baterai"
 
@@ -4735,7 +4748,7 @@ msgstr "Suspensi Otom_atis"
 msgid "Automatic suspend"
 msgstr "Suspensi otomatis"
 
-#: panels/power/cc-power-panel.c:2366
+#: panels/power/cc-power-panel.c:2367
 msgid "Po_wer Button Action"
 msgstr "Aksi Tombol Da_ya"
 
@@ -5105,14 +5118,14 @@ msgstr[0] "%u Tugas Memerlukan Autentikasi"
 msgstr[1] "%u Tugas Memerlukan Autentikasi"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:613
+#: panels/printers/pp-jobs-dialog.c:612
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — Tugas Aktif"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:617
+#: panels/printers/pp-jobs-dialog.c:616
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Masukkan kredensial untuk mencetak dari %s."
@@ -5312,12 +5325,12 @@ msgid "Manufacturer"
 msgstr "Pabrikan"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:597 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:594 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "Tidak Ada Tugas Aktif"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:602
+#: panels/printers/pp-printer-entry.c:599
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -5325,111 +5338,111 @@ msgstr[0] "%u Tugas"
 msgstr[1] "%u Tugas"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:757
+#: panels/printers/pp-printer-entry.c:754
 msgid "Low on toner"
 msgstr "Pewarna sedikit"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:759
+#: panels/printers/pp-printer-entry.c:756
 msgid "Out of toner"
 msgstr "Pewarna habis"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:762
+#: panels/printers/pp-printer-entry.c:759
 msgid "Low on developer"
 msgstr "Developer sedikit"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:765
+#: panels/printers/pp-printer-entry.c:762
 msgid "Out of developer"
 msgstr "Developer habis"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:767
+#: panels/printers/pp-printer-entry.c:764
 msgid "Low on a marker supply"
 msgstr "Asupan penanda sedikit"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:769
+#: panels/printers/pp-printer-entry.c:766
 msgid "Out of a marker supply"
 msgstr "Asupan penanda habis"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:771
+#: panels/printers/pp-printer-entry.c:768
 msgid "Open cover"
 msgstr "Buka penutup"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:773
+#: panels/printers/pp-printer-entry.c:770
 msgid "Open door"
 msgstr "Buka pinta"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:775
+#: panels/printers/pp-printer-entry.c:772
 msgid "Low on paper"
 msgstr "Kertas sedikit"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:777
+#: panels/printers/pp-printer-entry.c:774
 msgid "Out of paper"
 msgstr "Kertas habis"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:779
+#: panels/printers/pp-printer-entry.c:776
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Luring"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:781
-#: panels/printers/pp-printer-entry.c:909
+#: panels/printers/pp-printer-entry.c:778
+#: panels/printers/pp-printer-entry.c:906
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Dihentikan"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:783
+#: panels/printers/pp-printer-entry.c:780
 msgid "Waste receptacle almost full"
 msgstr "Penampung sampah hampir penuh"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:785
+#: panels/printers/pp-printer-entry.c:782
 msgid "Waste receptacle full"
 msgstr "Penampung sampah penuh"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:787
+#: panels/printers/pp-printer-entry.c:784
 msgid "The optical photo conductor is near end of life"
 msgstr "Penghantar foto optik hampir mati"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:789
+#: panels/printers/pp-printer-entry.c:786
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Penghantar foto optik tak berfungsi lagi"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:895
+#: panels/printers/pp-printer-entry.c:892
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Siap"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:900
+#: panels/printers/pp-printer-entry.c:897
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Tak menerima tugas"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:905
+#: panels/printers/pp-printer-entry.c:902
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Memroses"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:929
+#: panels/printers/pp-printer-entry.c:926
 msgid "Clean print heads"
 msgstr "Bersihkan kepala cetak"
 
@@ -8232,6 +8245,9 @@ msgstr[1] "%u Masukan"
 msgid "System Sounds"
 msgstr "Suara Sistem"
 
+#~ msgid "Notification _Popups"
+#~ msgstr "_Popup Notifikasi"
+
 #~ msgid "Restrict _background data usage"
 #~ msgstr "Batasi _penggunaan data di belakang"
 
@@ -8933,10 +8949,6 @@ msgstr "Suara Sistem"
 
 #~ msgid "Wa­com Tab­let"
 #~ msgstr "Tablet Wacom"
-
-#~ msgctxt "category"
-#~ msgid "Personal"
-#~ msgstr "Pribadi"
 
 #~ msgctxt "category"
 #~ msgid "Hardware"
