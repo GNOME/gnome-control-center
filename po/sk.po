@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-01-19 12:21+0000\n"
-"PO-Revision-Date: 2020-01-27 09:27+0100\n"
+"POT-Creation-Date: 2020-01-29 03:55+0000\n"
+"PO-Revision-Date: 2020-01-29 14:25+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -44,7 +44,7 @@ msgstr "Zbernica relácie"
 
 # label
 #: panels/applications/cc-applications-panel.c:714
-#: panels/power/cc-power-panel.c:2469 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2470 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Zariadenia"
@@ -600,12 +600,12 @@ msgid "application;flatpak;permission;setting;"
 msgstr "aplikácia;flatpak;oprávnenie;nastavenie;"
 
 # file chooser dialog title
-#: panels/background/cc-background-chooser.c:349
+#: panels/background/cc-background-chooser.c:350
 msgid "Select a picture"
 msgstr "Výber obrázka"
 
 # GtkButton label
-#: panels/background/cc-background-chooser.c:352
+#: panels/background/cc-background-chooser.c:353
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:241
 #: panels/color/cc-color-panel.c:894 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
@@ -632,7 +632,7 @@ msgstr "Výber obrázka"
 msgid "_Cancel"
 msgstr "_Zrušiť"
 
-#: panels/background/cc-background-chooser.c:353
+#: panels/background/cc-background-chooser.c:354
 #: panels/network/connection-editor/vpn-helpers.c:177
 #: panels/printers/pp-details-dialog.c:253
 #: panels/sharing/cc-sharing-panel.c:429
@@ -671,7 +671,7 @@ msgstr "viac veľkostí"
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:278
+#: panels/background/cc-background-item.c:282
 msgid "No Desktop Background"
 msgstr "Bez pozadia plochy"
 
@@ -1558,13 +1558,13 @@ msgstr ""
 
 # naposledy použité
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:143
+#: panels/network/connection-editor/ce-page-details.c:152
 msgid "Today"
 msgstr "Dnes"
 
 # naposledy použité
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:145
+#: panels/network/connection-editor/ce-page-details.c:154
 msgid "Yesterday"
 msgstr "Včera"
 
@@ -3229,25 +3229,29 @@ msgid "Not set up"
 msgstr "Nenastavené"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:189
+#: panels/network/cc-wifi-connection-row.c:198
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:249
+#: panels/network/cc-wifi-connection-row.c:258
 msgid "Insecure network (WEP)"
 msgstr "Nezabezpečená sieť (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:254
+#: panels/network/cc-wifi-connection-row.c:263
 msgid "Secure network (WPA)"
 msgstr "Zabezpečená sieť (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:259
+#: panels/network/cc-wifi-connection-row.c:268
 msgid "Secure network (WPA2)"
 msgstr "Zabezpečená sieť (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:264
+#: panels/network/cc-wifi-connection-row.c:273
+msgid "Secure network (WPA3)"
+msgstr "Zabezpečená sieť (WPA3)"
+
+#: panels/network/cc-wifi-connection-row.c:278
 msgid "Secure network"
 msgstr "Zabezpečená sieť"
 
@@ -3300,7 +3304,8 @@ msgstr "Názov siete"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:69
 #: panels/printers/authentication-dialog.ui:96
-#: panels/printers/jobs-dialog.ui:70 panels/printers/new-printer-dialog.ui:383
+#: panels/printers/new-printer-dialog.ui:383
+#: panels/printers/pp-jobs-dialog.ui:70
 #: panels/user-accounts/cc-add-user-dialog.ui:249
 msgid "Password"
 msgstr "Heslo"
@@ -3369,7 +3374,7 @@ msgstr "_Zabezpečenie 802.1x"
 
 #  1.2. page; 3. 4. GtkLabel label
 #: panels/network/connection-editor/ce-page-8021x-security.c:114
-#: panels/network/connection-editor/ce-page-security.c:386
+#: panels/network/connection-editor/ce-page-security.c:406
 #: panels/network/connection-editor/details-page.ui:90
 msgid "Security"
 msgstr "Zabezpečenie"
@@ -3420,33 +3425,38 @@ msgstr "WEP"
 msgid "WPA"
 msgstr "WPA"
 
+#. TRANSLATORS: this WPA3 WiFi security
+#: panels/network/connection-editor/ce-page-details.c:103
+msgid "WPA3"
+msgstr "WPA3"
+
 # zabezpečenie
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:101
+#: panels/network/connection-editor/ce-page-details.c:109
 msgid "WPA2"
 msgstr "WPA2"
 
 # PM: toto je v NMA preložené
 # zabezpečenie
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:106
+#: panels/network/connection-editor/ce-page-details.c:115
 msgid "Enterprise"
 msgstr "Podnikové"
 
 # zabezpečenie
-#: panels/network/connection-editor/ce-page-details.c:111
+#: panels/network/connection-editor/ce-page-details.c:120
 #: panels/network/net-device-wifi.c:225
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Žiadne"
 
 # naposledy použité
-#: panels/network/connection-editor/ce-page-details.c:132
+#: panels/network/connection-editor/ce-page-details.c:141
 msgid "Never"
 msgstr "Nikdy"
 
 # naposledy použité
-#: panels/network/connection-editor/ce-page-details.c:147
+#: panels/network/connection-editor/ce-page-details.c:156
 #: panels/network/net-device-ethernet.c:108
 #, c-format
 msgid "%i day ago"
@@ -3455,63 +3465,63 @@ msgstr[0] "pred %i dňami"
 msgstr[1] "pred %i dňom"
 msgstr[2] "pred %i dňami"
 
-#: panels/network/connection-editor/ce-page-details.c:272
+#: panels/network/connection-editor/ce-page-details.c:281
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d Mb/s (%1.1f GHz)"
 
 # rýchlosť pripojenia
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:274
+#: panels/network/connection-editor/ce-page-details.c:283
 #: panels/network/net-device-ethernet.c:202
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mbit/s"
 
-#: panels/network/connection-editor/ce-page-details.c:291
+#: panels/network/connection-editor/ce-page-details.c:300
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 GHz / 5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:293
+#: panels/network/connection-editor/ce-page-details.c:302
 msgid "2.4 GHz"
 msgstr "2.4 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:295
+#: panels/network/connection-editor/ce-page-details.c:304
 msgid "5 GHz"
 msgstr "5 GHz"
 
 # sila signálu
-#: panels/network/connection-editor/ce-page-details.c:315
+#: panels/network/connection-editor/ce-page-details.c:324
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Žiadny"
 
 # sila signálu
-#: panels/network/connection-editor/ce-page-details.c:317
+#: panels/network/connection-editor/ce-page-details.c:326
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Slabý"
 
 # sila signálu
-#: panels/network/connection-editor/ce-page-details.c:319
+#: panels/network/connection-editor/ce-page-details.c:328
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Ok"
 
 # sila signálu
-#: panels/network/connection-editor/ce-page-details.c:321
+#: panels/network/connection-editor/ce-page-details.c:330
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Dobrý"
 
 # sila signálu
-#: panels/network/connection-editor/ce-page-details.c:323
+#: panels/network/connection-editor/ce-page-details.c:332
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Vynikajúci"
 
 # GtkLabel label
-#: panels/network/connection-editor/ce-page-details.c:381
+#: panels/network/connection-editor/ce-page-details.c:390
 #: panels/network/connection-editor/details-page.ui:108
 #: panels/network/net-device-ethernet.c:143
 #: panels/network/net-device-mobile.c:431
@@ -3519,7 +3529,7 @@ msgid "IPv4 Address"
 msgstr "Adresa IPv4"
 
 # GtkLabel label
-#: panels/network/connection-editor/ce-page-details.c:382
+#: panels/network/connection-editor/ce-page-details.c:391
 #: panels/network/connection-editor/details-page.ui:126
 #: panels/network/net-device-ethernet.c:144
 #: panels/network/net-device-ethernet.c:148
@@ -3527,8 +3537,8 @@ msgstr "Adresa IPv4"
 msgid "IPv6 Address"
 msgstr "Adresa IPv6"
 
-#: panels/network/connection-editor/ce-page-details.c:385
-#: panels/network/connection-editor/ce-page-details.c:386
+#: panels/network/connection-editor/ce-page-details.c:394
+#: panels/network/connection-editor/ce-page-details.c:395
 #: panels/network/net-device-ethernet.c:146
 #: panels/network/net-device-mobile.c:435
 #: panels/network/net-device-mobile.c:436 panels/network/network-mobile.ui:183
@@ -3536,22 +3546,22 @@ msgid "IP Address"
 msgstr "Adresa IP"
 
 # gtk button
-#: panels/network/connection-editor/ce-page-details.c:420
+#: panels/network/connection-editor/ce-page-details.c:429
 msgid "Forget Connection"
 msgstr "Zabudnúť pripojenie"
 
 # gtk button
-#: panels/network/connection-editor/ce-page-details.c:422
+#: panels/network/connection-editor/ce-page-details.c:431
 msgid "Remove Connection Profile"
 msgstr "Odstrániť profil pripojenia"
 
 # gtk button
-#: panels/network/connection-editor/ce-page-details.c:424
+#: panels/network/connection-editor/ce-page-details.c:433
 msgid "Remove VPN"
 msgstr "Odstrániť VPN"
 
 # 1.desktop entry name;2. page; 3. GtkListStore item
-#: panels/network/connection-editor/ce-page-details.c:442
+#: panels/network/connection-editor/ce-page-details.c:451
 msgid "Details"
 msgstr "Podrobnosti"
 
@@ -3593,37 +3603,43 @@ msgid "IPv6"
 msgstr "IPv6"
 
 # GtkListStore item
-#: panels/network/connection-editor/ce-page-security.c:257
+#: panels/network/connection-editor/ce-page-security.c:262
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Žiadne"
 
-#: panels/network/connection-editor/ce-page-security.c:280
+#: panels/network/connection-editor/ce-page-security.c:285
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/128 bitový kľúč (šestnástkový alebo ASCII)"
 
-#: panels/network/connection-editor/ce-page-security.c:290
+#: panels/network/connection-editor/ce-page-security.c:295
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128 bitové heslo"
 
 # liststore item
-#: panels/network/connection-editor/ce-page-security.c:303
+#: panels/network/connection-editor/ce-page-security.c:308
 #: panels/network/wireless-security/ws-dynamic-wep.ui:20
 #: panels/network/wireless-security/ws-wpa-eap.ui:25
 msgid "LEAP"
 msgstr "LEAP"
 
-#: panels/network/connection-editor/ce-page-security.c:316
+#: panels/network/connection-editor/ce-page-security.c:321
 msgid "Dynamic WEP (802.1x)"
 msgstr "Dynamické WEP (802.1x)"
 
-#: panels/network/connection-editor/ce-page-security.c:330
+#: panels/network/connection-editor/ce-page-security.c:335
 msgid "WPA & WPA2 Personal"
 msgstr "Osobný WPA a WPA2"
 
-#: panels/network/connection-editor/ce-page-security.c:344
+#: panels/network/connection-editor/ce-page-security.c:349
 msgid "WPA & WPA2 Enterprise"
 msgstr "Podnikový WPA a WPA 2"
+
+#: panels/network/connection-editor/ce-page-security.c:363
+#| msgctxt "category"
+#| msgid "Personal"
+msgid "WPA3 Personal"
+msgstr "Osobný WPA3"
 
 # GtkLabel label
 #: panels/network/connection-editor/details-page.ui:18
@@ -4959,10 +4975,9 @@ msgstr "Zobrazovať _obsah správ v uzamknutej obrazovke"
 msgid "On"
 msgstr "Zapnuté"
 
-# policy_settings
 #: panels/notifications/cc-notifications-panel.ui:70
-msgid "Notification _Popups"
-msgstr "Vy_skakovacie oznámenia"
+msgid "_Do Not Disturb"
+msgstr "Nevyr_ušovať"
 
 # desktop entry name
 #: panels/notifications/cc-notifications-panel.ui:121
@@ -5193,7 +5208,7 @@ msgstr "Herné vstupné zariadenie"
 
 #. TRANSLATORS: secondary battery, misc
 #: panels/power/cc-power-panel.c:660 panels/power/cc-power-panel.c:942
-#: panels/power/cc-power-panel.c:2422
+#: panels/power/cc-power-panel.c:2423
 msgid "Battery"
 msgstr "Batéria"
 
@@ -5351,7 +5366,7 @@ msgstr "_Automatické uspanie"
 msgid "Automatic suspend"
 msgstr "Automatické uspanie"
 
-#: panels/power/cc-power-panel.c:2366
+#: panels/power/cc-power-panel.c:2367
 msgid "Po_wer Button Action"
 msgstr "Akcia po stlačení _tlačidla napájania"
 
@@ -5497,7 +5512,8 @@ msgstr "Overeniť totožnosť"
 # GtkLabel label
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
-#: panels/printers/jobs-dialog.ui:57 panels/printers/new-printer-dialog.ui:362
+#: panels/printers/new-printer-dialog.ui:362
+#: panels/printers/pp-jobs-dialog.ui:57
 msgid "Username"
 msgstr "Meno používateľa"
 
@@ -5540,35 +5556,6 @@ msgstr ""
 #: panels/printers/gnome-printers-panel.desktop.in.in:16
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Tlačiareň;Rad;Tlač;Papier;Atrament;Toner;"
-
-# GtkLabel
-#. Translators: This is a windows domain used with SMB protocol.
-#: panels/printers/jobs-dialog.ui:44
-msgid "Domain"
-msgstr "Doména"
-
-# GtkButton label
-#. Translators: This button authenticates all print jobs and send them for printing.
-#: panels/printers/jobs-dialog.ui:123
-msgid "A_uthenticate"
-msgstr "Overiť _totožnosť"
-
-# GtkButton label
-#. Translators: this action removes (purges) all the listed jobs from the list.
-#: panels/printers/jobs-dialog.ui:163
-msgid "Clear All"
-msgstr "Vymazať všetky"
-
-# GtkButton label
-#. Translators: This button pop up authentication dialog for print jobs which need credentials.
-#: panels/printers/jobs-dialog.ui:225
-msgid "_Authenticate"
-msgstr "_Overiť totožnosť"
-
-#. Translators: this label describes the dialog empty state, with no jobs listed.
-#: panels/printers/jobs-dialog.ui:354
-msgid "No Active Printer Jobs"
-msgstr "Žiadne aktívne úlohy tlačiarne"
 
 # GtkToolButton label
 #. Translators: This is the title presented at top of the dialog.
@@ -5726,55 +5713,55 @@ msgid "Reverse portrait"
 msgstr "Opačne na výšku"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: panels/printers/pp-jobs-dialog.c:234
+#: panels/printers/pp-jobs-dialog.c:222
 msgctxt "print job"
 msgid "Pending"
 msgstr "Čaká"
 
 #. Translators: Job's state (job is held for printing)
-#: panels/printers/pp-jobs-dialog.c:240
+#: panels/printers/pp-jobs-dialog.c:228
 msgctxt "print job"
 msgid "Paused"
 msgstr "Pozastavená"
 
 #. Translators: Job's state (job needs authentication to proceed further)
-#: panels/printers/pp-jobs-dialog.c:245
+#: panels/printers/pp-jobs-dialog.c:233
 msgctxt "print job"
 msgid "Authentication required"
 msgstr "Vyžaduje sa overenie totožnosti"
 
 #. Translators: Job's state (job is currently printing)
-#: panels/printers/pp-jobs-dialog.c:250
+#: panels/printers/pp-jobs-dialog.c:238
 msgctxt "print job"
 msgid "Processing"
 msgstr "Spracúva sa"
 
 #. Translators: Job's state (job has been stopped)
-#: panels/printers/pp-jobs-dialog.c:254
+#: panels/printers/pp-jobs-dialog.c:242
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Zastavená"
 
 #. Translators: Job's state (job has been canceled)
-#: panels/printers/pp-jobs-dialog.c:258
+#: panels/printers/pp-jobs-dialog.c:246
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Zrušená"
 
 #. Translators: Job's state (job has aborted due to error)
-#: panels/printers/pp-jobs-dialog.c:262
+#: panels/printers/pp-jobs-dialog.c:250
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Prerušená"
 
 #. Translators: Job's state (job has completed successfully)
-#: panels/printers/pp-jobs-dialog.c:266
+#: panels/printers/pp-jobs-dialog.c:254
 msgctxt "print job"
 msgid "Completed"
 msgstr "Dokončená"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:390
+#: panels/printers/pp-jobs-dialog.c:363
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -5783,17 +5770,46 @@ msgstr[1] "%u úloha vyžaduje overenie totožnosti"
 msgstr[2] "%u úlohy vyžadujú overenie totožnosti"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:613
+#: panels/printers/pp-jobs-dialog.c:520
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — Aktívne úlohy"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:617
+#: panels/printers/pp-jobs-dialog.c:524
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Zadajte poverenia na tlač z tlačiarne %s."
+
+# GtkLabel
+#. Translators: This is a windows domain used with SMB protocol.
+#: panels/printers/pp-jobs-dialog.ui:44
+msgid "Domain"
+msgstr "Doména"
+
+# GtkButton label
+#. Translators: This button authenticates all print jobs and send them for printing.
+#: panels/printers/pp-jobs-dialog.ui:129
+msgid "A_uthenticate"
+msgstr "Overiť _totožnosť"
+
+# GtkButton label
+#. Translators: this action removes (purges) all the listed jobs from the list.
+#: panels/printers/pp-jobs-dialog.ui:169
+msgid "Clear All"
+msgstr "Vymazať všetky"
+
+# GtkButton label
+#. Translators: This button pop up authentication dialog for print jobs which need credentials.
+#: panels/printers/pp-jobs-dialog.ui:232
+msgid "_Authenticate"
+msgstr "_Overiť totožnosť"
+
+#. Translators: this label describes the dialog empty state, with no jobs listed.
+#: panels/printers/pp-jobs-dialog.ui:358
+msgid "No Active Printer Jobs"
+msgstr "Žiadne aktívne úlohy tlačiarne"
 
 # headerbar
 #: panels/printers/pp-new-printer-dialog.c:380
@@ -5997,12 +6013,12 @@ msgstr "Výrobca"
 
 # GtkDialog title
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:597 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:594 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "Žiadne aktívne úlohy"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:602
+#: panels/printers/pp-printer-entry.c:599
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -6011,111 +6027,111 @@ msgstr[1] "%u úloha"
 msgstr[2] "%u úlohy"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:757
+#: panels/printers/pp-printer-entry.c:745
 msgid "Low on toner"
 msgstr "Málo tonera"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:759
+#: panels/printers/pp-printer-entry.c:747
 msgid "Out of toner"
 msgstr "Minul sa toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:762
+#: panels/printers/pp-printer-entry.c:750
 msgid "Low on developer"
 msgstr "Málo vývojky"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:765
+#: panels/printers/pp-printer-entry.c:753
 msgid "Out of developer"
 msgstr "Minula sa vývojka"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:767
+#: panels/printers/pp-printer-entry.c:755
 msgid "Low on a marker supply"
 msgstr "Málo farby"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:769
+#: panels/printers/pp-printer-entry.c:757
 msgid "Out of a marker supply"
 msgstr "Minula sa farba"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:771
+#: panels/printers/pp-printer-entry.c:759
 msgid "Open cover"
 msgstr "Otvorený kryt"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:773
+#: panels/printers/pp-printer-entry.c:761
 msgid "Open door"
 msgstr "Otvorené dvierka"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:775
+#: panels/printers/pp-printer-entry.c:763
 msgid "Low on paper"
 msgstr "Málo papiera"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:777
+#: panels/printers/pp-printer-entry.c:765
 msgid "Out of paper"
 msgstr "Minul sa papier"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:779
+#: panels/printers/pp-printer-entry.c:767
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Vypnutá"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:781
-#: panels/printers/pp-printer-entry.c:909
+#: panels/printers/pp-printer-entry.c:769
+#: panels/printers/pp-printer-entry.c:897
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Zastavená"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:783
+#: panels/printers/pp-printer-entry.c:771
 msgid "Waste receptacle almost full"
 msgstr "Odpadová nádržka takmer plná"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:785
+#: panels/printers/pp-printer-entry.c:773
 msgid "Waste receptacle full"
 msgstr "Odpadová nádržka plná"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:787
+#: panels/printers/pp-printer-entry.c:775
 msgid "The optical photo conductor is near end of life"
 msgstr "Fotovalcu onedlho skončí životnosť"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:789
+#: panels/printers/pp-printer-entry.c:777
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Fotovalec už nie je funkčný"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:895
+#: panels/printers/pp-printer-entry.c:883
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Pripravená"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:900
+#: panels/printers/pp-printer-entry.c:888
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Neprijíma úlohy"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:905
+#: panels/printers/pp-printer-entry.c:893
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Pracuje"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:929
+#: panels/printers/pp-printer-entry.c:917
 msgid "Clean print heads"
 msgstr "Čistenie tlačových hláv"
 
@@ -9313,6 +9329,10 @@ msgstr[2] "%u vstupy"
 msgid "System Sounds"
 msgstr "Systémové zvuky"
 
+# policy_settings
+#~ msgid "Notification _Popups"
+#~ msgstr "Vy_skakovacie oznámenia"
+
 #~ msgid "Version %s"
 #~ msgstr "Verzia %s"
 
@@ -10032,10 +10052,6 @@ msgstr "Systémové zvuky"
 # desktop entry name
 #~ msgid "Wa­com Tab­let"
 #~ msgstr "Tablet Wacom"
-
-#~ msgctxt "category"
-#~ msgid "Personal"
-#~ msgstr "Osobné"
 
 #~ msgctxt "category"
 #~ msgid "Hardware"
