@@ -95,6 +95,7 @@ struct _CcPrintersPanel
   GCancellable *subscription_renew_cancellable;
   GCancellable *actualize_printers_list_cancellable;
   GCancellable *cups_status_check_cancellable;
+  GCancellable *get_job_attributes_cancellable;
 
   gchar    *new_printer_name;
   gchar    *new_printer_location;
@@ -283,6 +284,7 @@ cc_printers_panel_dispose (GObject *object)
   g_cancellable_cancel (self->actualize_printers_list_cancellable);
   g_cancellable_cancel (self->cups_status_check_cancellable);
   g_cancellable_cancel (self->get_all_ppds_cancellable);
+  g_cancellable_cancel (self->get_job_attributes_cancellable);
 
   detach_from_cups_notifier (CC_PRINTERS_PANEL (object));
 
@@ -315,6 +317,7 @@ cc_printers_panel_dispose (GObject *object)
   g_clear_pointer (&self->printer_entries, g_hash_table_destroy);
   g_clear_pointer (&self->all_ppds_list, ppd_list_free);
   free_dests (self);
+  g_clear_object (&self->get_job_attributes_cancellable);
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
 }
@@ -471,7 +474,7 @@ on_cups_notification (GDBusConnection *connection,
       job = g_object_new (PP_TYPE_JOB, "id", job_id, NULL);
       pp_job_get_attributes_async (job,
                                    requested_attrs,
-                                   NULL,
+                                   self->get_job_attributes_cancellable,
                                    on_get_job_attributes_cb,
                                    self);
     }
@@ -1231,6 +1234,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   self->actualize_printers_list_cancellable = g_cancellable_new ();
   self->cups_status_check_cancellable = g_cancellable_new ();
+  self->get_job_attributes_cancellable = g_cancellable_new ();
 
   builder_result = gtk_builder_add_objects_from_resource (self->builder,
                                                           "/org/gnome/control-center/printers/printers.ui",
