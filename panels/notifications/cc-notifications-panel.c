@@ -384,28 +384,6 @@ maybe_add_app_id (CcNotificationsPanel *panel,
   add_application (panel, app);
 }
 
-static gboolean
-queued_app_info (gpointer data)
-{
-  g_autoptr(Application) app = NULL;
-  g_autoptr(CcNotificationsPanel) panel = NULL;
-
-  app = data;
-  panel = g_steal_pointer (&app->panel);
-
-  if (g_cancellable_is_cancelled (panel->cancellable) ||
-      g_hash_table_contains (panel->known_applications,
-                             app->canonical_app_id))
-    return FALSE;
-
-  g_debug ("Processing queued application %s", app->canonical_app_id);
-
-  add_application (panel, app);
-  g_steal_pointer (&app);
-
-  return FALSE;
-}
-
 static char *
 app_info_get_id (GAppInfo *app_info)
 {
@@ -435,14 +413,12 @@ app_info_get_id (GAppInfo *app_info)
 
 static void
 process_app_info (CcNotificationsPanel *panel,
-                  GTask                *task,
                   GAppInfo             *app_info)
 {
   Application *app;
   g_autofree gchar *app_id = NULL;
   g_autofree gchar *path = NULL;
   g_autoptr(GSettings) settings = NULL;
-  GSource *source;
   guint i;
 
   app_id = app_info_get_id (app_info);
@@ -464,28 +440,29 @@ process_app_info (CcNotificationsPanel *panel,
   app->app_info = g_object_ref (app_info);
   app->panel = g_object_ref (panel);
 
-  source = g_idle_source_new ();
-  g_source_set_callback (source, queued_app_info, app, NULL);
-  g_source_attach (source, g_task_get_context (task));
+  if (g_hash_table_contains (panel->known_applications,
+                             app->canonical_app_id))
+    return;
+
+  g_debug ("Processing queued application %s", app->canonical_app_id);
+
+  add_application (panel, app);
 }
 
 static void
-load_apps_thread (GTask        *task,
-                  gpointer      panel,
-                  gpointer      task_data,
-                  GCancellable *cancellable)
+load_apps (CcNotificationsPanel *panel)
 {
   GList *iter, *apps;
 
   apps = g_app_info_get_all ();
 
-  for (iter = apps; iter && !g_cancellable_is_cancelled (cancellable); iter = iter->next)
+  for (iter = apps; iter; iter = iter->next)
     {
       GDesktopAppInfo *app;
 
       app = iter->data;
       if (g_desktop_app_info_get_boolean (app, "X-GNOME-UsesNotifications")) {
-        process_app_info (panel, task, G_APP_INFO (app));
+        process_app_info (panel, G_APP_INFO (app));
         g_debug ("Processing app '%s'", g_app_info_get_id (G_APP_INFO (app)));
       } else {
         g_debug ("Skipped app '%s', doesn't use notifications", g_app_info_get_id (G_APP_INFO (app)));
@@ -493,16 +470,6 @@ load_apps_thread (GTask        *task,
     }
 
   g_list_free_full (apps, g_object_unref);
-}
-
-static void
-load_apps_async (CcNotificationsPanel *panel)
-{
-  g_autoptr(GTask) task = NULL;
-
-  panel->cancellable = cc_panel_get_cancellable (CC_PANEL (panel)); // FIXME: Storing reference to cancellable because it will be accessed inside the thread
-  task = g_task_new (panel, cc_panel_get_cancellable (CC_PANEL (panel)), NULL, NULL);
-  g_task_run_in_thread (task, load_apps_thread);
 }
 
 static void
@@ -529,7 +496,7 @@ build_app_store (CcNotificationsPanel *panel)
                            G_CALLBACK (children_changed), panel, G_CONNECT_SWAPPED);
 
   /* Scan applications that statically declare to show notifications */
-  load_apps_async (panel);
+  load_apps (panel);
 }
 
 static void
