@@ -33,7 +33,6 @@ struct _CcDiagnosticsPanel
   CcPanel     parent_instance;
 
   GtkLabel   *diagnostics_explanation_label;
-  GtkLabel   *diagnostics_learn_more_label;
   GtkListBox *diagnostics_list_box;
   GtkSwitch   *abrt_switch;
 
@@ -110,7 +109,6 @@ cc_diagnostics_panel_class_init (CcDiagnosticsPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/diagnostics/cc-diagnostics-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPanel, diagnostics_explanation_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPanel, diagnostics_learn_more_label);
   gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPanel, diagnostics_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPanel, abrt_switch);
 }
@@ -121,6 +119,7 @@ cc_diagnostics_panel_init (CcDiagnosticsPanel *self)
   g_autofree gchar *os_name = NULL;
   g_autofree gchar *url = NULL;
   g_autofree gchar *msg = NULL;
+  g_autofree gchar *link = NULL;
 
   g_resources_register (cc_diagnostics_get_resource ());
 
@@ -137,18 +136,14 @@ cc_diagnostics_panel_init (CcDiagnosticsPanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   os_name = cc_os_release_get_value ("NAME");
-  /* translators: '%s' is the distributor's name, such as 'Fedora' */
-  msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports "
-                           "are sent anonymously and are scrubbed of personal data."),
-                         os_name);
-  gtk_label_set_text (self->diagnostics_explanation_label, msg);
-
   url = cc_os_release_get_value ("PRIVACY_POLICY_URL");
   if (!url)
     url = g_strdup ("http://www.gnome.org/privacy-policy");
-
-  msg = g_strdup_printf ("%s <a href=\"%s\">Learn more</a>",
-                         _("Reports are sent anonymously and are scrubbed of personal data."),
-                         url);
-  gtk_label_set_markup (self->diagnostics_learn_more_label, msg);
+  /* translators: Text used in link to privacy policy */
+  link = g_strdup_printf ("<a href=\"%s\">%s</a>", url, _("Learn more"));
+  /* translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy */
+  msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports "
+                           "are sent anonymously and are scrubbed of personal data. %s"),
+                         os_name, link);
+  gtk_label_set_markup (self->diagnostics_explanation_label, msg);
 }
