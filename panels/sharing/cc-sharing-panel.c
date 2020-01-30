@@ -98,11 +98,7 @@ struct _CcSharingPanel
   GtkWidget *shared_folders_listbox;
   GtkWidget *show_password_checkbutton;
 
-  GCancellable *sharing_proxy_cancellable;
   GDBusProxy *sharing_proxy;
-
-  GCancellable *remote_login_cancellable;
-  GCancellable *hostname_cancellable;
 
   guint remote_desktop_name_watch;
 };
@@ -167,18 +163,6 @@ cc_sharing_panel_dispose (GObject *object)
       self->personal_file_sharing_dialog = NULL;
     }
 
-  if (self->remote_login_cancellable)
-    {
-      g_cancellable_cancel (self->remote_login_cancellable);
-      g_clear_object (&self->remote_login_cancellable);
-    }
-
-  if (self->hostname_cancellable)
-    {
-      g_cancellable_cancel (self->hostname_cancellable);
-      g_clear_object (&self->hostname_cancellable);
-    }
-
   if (self->remote_login_dialog)
     {
       gtk_widget_destroy (self->remote_login_dialog);
@@ -191,8 +175,6 @@ cc_sharing_panel_dispose (GObject *object)
       self->screen_sharing_dialog = NULL;
     }
 
-  g_cancellable_cancel (self->sharing_proxy_cancellable);
-  g_clear_object (&self->sharing_proxy_cancellable);
   g_clear_object (&self->sharing_proxy);
 
   G_OBJECT_CLASS (cc_sharing_panel_parent_class)->dispose (object);
@@ -825,7 +807,7 @@ cc_sharing_panel_bus_ready (GObject         *object,
                           (GVariantType*)"(s)",
                           G_DBUS_CALL_FLAGS_NONE,
                           -1,
-                          data->panel->hostname_cancellable,
+                          cc_panel_get_cancellable (CC_PANEL (data->panel)),
                           cc_sharing_panel_get_host_name_fqdn_done,
                           data);
   g_steal_pointer (&data);
@@ -865,7 +847,7 @@ cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
   get_hostname_data->panel = self;
   get_hostname_data->label = label;
   g_bus_get (G_BUS_TYPE_SYSTEM,
-             self->hostname_cancellable,
+             cc_panel_get_cancellable (CC_PANEL (self)),
              cc_sharing_panel_bus_ready,
              get_hostname_data);
 }
@@ -948,7 +930,7 @@ remote_login_switch_activate (GtkSwitch      *remote_login_switch,
                               GParamSpec     *pspec,
                               CcSharingPanel *self)
 {
-  cc_remote_login_set_enabled (self->remote_login_cancellable, remote_login_switch);
+  cc_remote_login_set_enabled (cc_panel_get_cancellable (CC_PANEL (self)), remote_login_switch);
 }
 
 static void
@@ -963,7 +945,7 @@ cc_sharing_panel_setup_remote_login_dialog (CcSharingPanel *self)
                     G_CALLBACK (remote_login_switch_activate), self);
   gtk_widget_set_sensitive (self->remote_login_switch, FALSE);
 
-  cc_remote_login_get_enabled (self->remote_login_cancellable,
+  cc_remote_login_get_enabled (cc_panel_get_cancellable (CC_PANEL (self)),
                                GTK_SWITCH (self->remote_login_switch),
                                self->remote_login_button);
 }
@@ -1271,10 +1253,6 @@ cc_sharing_panel_init (CcSharingPanel *self)
   g_signal_connect (self->main_list_box, "row-activated",
                     G_CALLBACK (cc_sharing_panel_main_list_box_row_activated), self);
 
-  self->hostname_cancellable = g_cancellable_new ();
-
-  self->remote_login_cancellable = g_cancellable_new ();
-
   g_signal_connect (self->media_sharing_dialog, "response",
                     G_CALLBACK (gtk_widget_hide), NULL);
   g_signal_connect (self->personal_file_sharing_dialog, "response",
@@ -1306,12 +1284,11 @@ cc_sharing_panel_init (CcSharingPanel *self)
   g_signal_connect (self->master_switch, "notify::active",
                     G_CALLBACK (cc_sharing_panel_master_switch_notify), self);
 
-  self->sharing_proxy_cancellable = g_cancellable_new ();
   gsd_sharing_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                                  G_DBUS_PROXY_FLAGS_NONE,
                                  "org.gnome.SettingsDaemon.Sharing",
                                  "/org/gnome/SettingsDaemon/Sharing",
-                                 self->sharing_proxy_cancellable,
+                                 cc_panel_get_cancellable (CC_PANEL (self)),
                                  sharing_proxy_ready,
                                  self);
 

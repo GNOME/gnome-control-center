@@ -38,8 +38,6 @@ struct _CcCameraPanel
 
   GSettings    *privacy_settings;
 
-  GCancellable *cancellable;
-
   GDBusProxy   *perm_store;
   GVariant     *camera_apps_perms;
   GVariant     *camera_apps_data;
@@ -145,7 +143,7 @@ on_camera_app_state_set (GtkSwitch *widget,
                      params,
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     self->cancellable,
+                     cc_panel_get_cancellable (CC_PANEL (self)),
                      on_perm_store_set_done,
                      data);
 
@@ -353,7 +351,7 @@ on_perm_store_ready (GObject      *source_object,
                      params,
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     self->cancellable,
+                     cc_panel_get_cancellable (CC_PANEL (self)),
                      on_perm_store_lookup_done,
                      self);
 }
@@ -363,9 +361,7 @@ cc_camera_panel_finalize (GObject *object)
 {
   CcCameraPanel *self = CC_CAMERA_PANEL (object);
 
-  g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->privacy_settings);
-  g_clear_object (&self->cancellable);
   g_clear_object (&self->perm_store);
   g_clear_object (&self->camera_icon_size_group);
   g_clear_pointer (&self->camera_apps_perms, g_variant_unref);
@@ -437,8 +433,6 @@ cc_camera_panel_init (CcCameraPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->cancellable = g_cancellable_new ();
-
   gtk_list_box_set_header_func (self->camera_apps_list_box,
                                 cc_list_box_update_header_func,
                                 NULL,
@@ -459,7 +453,7 @@ cc_camera_panel_init (CcCameraPanel *self)
                             "org.freedesktop.impl.portal.PermissionStore",
                             "/org/freedesktop/impl/portal/PermissionStore",
                             "org.freedesktop.impl.portal.PermissionStore",
-                            self->cancellable,
+                            cc_panel_get_cancellable (CC_PANEL (self)),
                             on_perm_store_ready,
                             self);
 }

@@ -89,7 +89,6 @@ struct _CcRegionPanel {
         GPermission *permission;
         GDBusProxy  *localed;
         GDBusProxy  *session;
-        GCancellable *cancellable;
 
         ActUserManager *user_manager;
         ActUser        *user;
@@ -143,9 +142,6 @@ cc_region_panel_finalize (GObject *object)
 {
         CcRegionPanel *self = CC_REGION_PANEL (object);
         GtkWidget *chooser;
-
-        g_cancellable_cancel (self->cancellable);
-        g_clear_object (&self->cancellable);
 
         if (self->user_manager) {
                 g_signal_handlers_disconnect_by_data (self->user_manager, self);
@@ -345,7 +341,7 @@ maybe_notify (CcRegionPanel *self,
                            g_variant_new ("(i)", category),
                            G_DBUS_CALL_FLAGS_NONE,
                            -1,
-                           self->cancellable,
+                           cc_panel_get_cancellable (CC_PANEL (self)),
                            maybe_notify_finish,
                            mnd);
 }
@@ -535,7 +531,7 @@ activate_language_row (CcRegionPanel *self,
                         show_language_chooser (self);
                 } else if (g_permission_get_can_acquire (self->permission)) {
                         g_permission_acquire_async (self->permission,
-                                                    self->cancellable,
+                                                    cc_panel_get_cancellable (CC_PANEL (self)),
                                                     choose_language_permission_cb,
                                                     self);
                 }
@@ -544,7 +540,7 @@ activate_language_row (CcRegionPanel *self,
                         show_region_chooser (self);
                 } else if (g_permission_get_can_acquire (self->permission)) {
                         g_permission_acquire_async (self->permission,
-                                                    self->cancellable,
+                                                    cc_panel_get_cancellable (CC_PANEL (self)),
                                                     choose_region_permission_cb,
                                                     self);
                 }
@@ -697,7 +693,7 @@ fetch_ibus_engines (CcRegionPanel *self)
 {
         ibus_bus_list_engines_async (self->ibus,
                                      -1,
-                                     self->cancellable,
+                                     cc_panel_get_cancellable (CC_PANEL (self)),
                                      (GAsyncReadyCallback)fetch_ibus_engines_result,
                                      self);
 
@@ -1019,7 +1015,7 @@ add_input (CcRegionPanel *self)
                 show_input_chooser (self);
         } else if (g_permission_get_can_acquire (self->permission)) {
                 g_permission_acquire_async (self->permission,
-                                            self->cancellable,
+                                            cc_panel_get_cancellable (CC_PANEL (self)),
                                             add_input_permission_cb,
                                             self);
         }
@@ -1082,7 +1078,7 @@ remove_input (CcRegionPanel *self, CcInputRow *row)
                 do_remove_input (self, row);
         } else if (g_permission_get_can_acquire (self->permission)) {
                 g_permission_acquire_async (self->permission,
-                                            self->cancellable,
+                                            cc_panel_get_cancellable (CC_PANEL (self)),
                                             remove_input_permission_cb,
                                             row_data_new (self, row, NULL));
         }
@@ -1124,7 +1120,7 @@ move_input (CcRegionPanel *self,
                 do_move_input (self, source, dest);
         } else if (g_permission_get_can_acquire (self->permission)) {
                 g_permission_acquire_async (self->permission,
-                                            self->cancellable,
+                                            cc_panel_get_cancellable (CC_PANEL (self)),
                                             move_input_permission_cb,
                                             row_data_new (self, source, dest));
         }
@@ -1504,7 +1500,7 @@ setup_login_button (CcRegionPanel *self)
                           "org.freedesktop.locale1",
                           "/org/freedesktop/locale1",
                           "org.freedesktop.locale1",
-                          self->cancellable,
+                          cc_panel_get_cancellable (CC_PANEL (self)),
                           (GAsyncReadyCallback) localed_proxy_ready,
                           self);
 
@@ -1597,15 +1593,13 @@ cc_region_panel_init (CcRegionPanel *self)
 
         self->user_manager = act_user_manager_get_default ();
 
-        self->cancellable = g_cancellable_new ();
-
         g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                                   G_DBUS_PROXY_FLAGS_NONE,
                                   NULL,
                                   "org.gnome.SessionManager",
                                   "/org/gnome/SessionManager",
                                   "org.gnome.SessionManager",
-                                  self->cancellable,
+                                  cc_panel_get_cancellable (CC_PANEL (self)),
                                   session_proxy_ready,
                                   self);
 

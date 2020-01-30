@@ -61,7 +61,6 @@ struct _CcUserPanel {
         CcPanel parent_instance;
 
         ActUserManager *um;
-        GCancellable  *cancellable;
         GSettings *login_screen_settings;
 
         GtkBox          *accounts_box;
@@ -546,7 +545,7 @@ enterprise_user_uncached (GObject           *source,
         act_user_manager_uncache_user_finish (manager, res, &error);
         if (error == NULL) {
                 /* Find realm manager */
-                cc_realm_manager_new (self->cancellable, realm_manager_found, data);
+                cc_realm_manager_new (cc_panel_get_cancellable (CC_PANEL (self)), realm_manager_found, data);
         }
         else {
                 show_error_dialog (self, _("Failed to revoke remotely managed user"), error);
@@ -574,7 +573,7 @@ delete_enterprise_user_response (GtkWidget          *dialog,
 
         data = g_slice_new (AsyncDeleteData);
         data->self = g_object_ref (self);
-        data->cancellable = g_object_ref (self->cancellable);
+        data->cancellable = g_object_ref (cc_panel_get_cancellable (CC_PANEL (self)));
         data->login = g_strdup (act_user_get_user_name (user));
 
         /* Uncache the user account from the accountsservice */
@@ -1404,7 +1403,6 @@ cc_user_panel_init (CcUserPanel *self)
         gtk_widget_init_template (GTK_WIDGET (self));
 
         self->um = act_user_manager_get_default ();
-        self->cancellable = g_cancellable_new ();
 
         provider = gtk_css_provider_new ();
         gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/user-accounts/user-accounts-dialog.css");
@@ -1423,9 +1421,6 @@ static void
 cc_user_panel_dispose (GObject *object)
 {
         CcUserPanel *self = CC_USER_PANEL (object);
-
-        g_cancellable_cancel (self->cancellable);
-        g_clear_object (&self->cancellable);
 
         g_clear_object (&self->login_screen_settings);
 
