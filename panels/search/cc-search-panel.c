@@ -37,7 +37,6 @@ struct _CcSearchPanel
   GtkWidget  *settings_button;
   CcSearchPanelRow  *selected_row;
 
-  GCancellable *load_cancellable;
   GSettings  *search_settings;
   GHashTable *sort_order;
 
@@ -511,8 +510,6 @@ search_providers_discover_ready (GObject *source,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  g_clear_object (&self->load_cancellable);
-
   if (providers == NULL)
     {
       search_panel_set_no_providers (self);
@@ -608,21 +605,9 @@ populate_search_providers (CcSearchPanel *self)
 {
   g_autoptr(GTask) task = NULL;
 
-  self->load_cancellable = g_cancellable_new ();
-  task = g_task_new (self, self->load_cancellable,
+  task = g_task_new (self, cc_panel_get_cancellable (CC_PANEL (self)),
                      search_providers_discover_ready, self);
   g_task_run_in_thread (task, search_providers_discover_thread);
-}
-
-static void
-cc_search_panel_dispose (GObject *object)
-{
-  CcSearchPanel *self = CC_SEARCH_PANEL (object);
-
-  g_cancellable_cancel (self->load_cancellable);
-  g_clear_object (&self->load_cancellable);
-
-  G_OBJECT_CLASS (cc_search_panel_parent_class)->dispose (object);
 }
 
 static void
@@ -700,7 +685,6 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
   GObjectClass *oclass = G_OBJECT_CLASS (klass);
 
   oclass->constructed = cc_search_panel_constructed;
-  oclass->dispose = cc_search_panel_dispose;
   oclass->finalize = cc_search_panel_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class,

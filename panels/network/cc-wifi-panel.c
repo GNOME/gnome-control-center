@@ -59,7 +59,6 @@ struct _CcWifiPanel
   GPtrArray          *devices;
 
   GBinding           *spinner_binding;
-  GCancellable       *cancellable;
 
   /* Command-line arguments */
   CmdlineOperation    arg_operation;
@@ -524,7 +523,7 @@ rfkill_switch_notify_activate_cb (GtkSwitch   *rfkill_switch,
                                            g_variant_new_boolean (enable)),
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     self->cancellable,
+                     cc_panel_get_cancellable (CC_PANEL (self)),
                      NULL,
                      NULL);
 }
@@ -592,9 +591,6 @@ cc_wifi_panel_finalize (GObject *object)
 {
   CcWifiPanel *self = (CcWifiPanel *)object;
 
-  g_cancellable_cancel (self->cancellable);
-
-  g_clear_object (&self->cancellable);
   g_clear_object (&self->client);
   g_clear_object (&self->rfkill_proxy);
 
@@ -710,7 +706,6 @@ cc_wifi_panel_init (CcWifiPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->cancellable = g_cancellable_new ();
   self->devices = g_ptr_array_new ();
 
   /* Create and store a NMClient instance if it doesn't exist yet */
@@ -750,7 +745,7 @@ cc_wifi_panel_init (CcWifiPanel *self)
                                        "org.gnome.SettingsDaemon.Rfkill",
                                        "/org/gnome/SettingsDaemon/Rfkill",
                                        "org.gnome.SettingsDaemon.Rfkill",
-                                       self->cancellable,
+                                       cc_panel_get_cancellable (CC_PANEL (self)),
                                        rfkill_proxy_acquired_cb,
                                        self);
 

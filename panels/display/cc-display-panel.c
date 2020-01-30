@@ -83,7 +83,6 @@ struct _CcDisplayPanel
   gboolean lid_is_closed;
 
   GDBusProxy *shell_proxy;
-  GCancellable *shell_cancellable;
 
   guint       sensor_watch_id;
   GDBusProxy *iio_sensor_proxy;
@@ -431,8 +430,6 @@ cc_display_panel_dispose (GObject *object)
   g_clear_object (&self->current_config);
   g_clear_object (&self->up_client);
 
-  g_cancellable_cancel (self->shell_cancellable);
-  g_clear_object (&self->shell_cancellable);
   g_clear_object (&self->shell_proxy);
 
   g_clear_pointer ((GtkWidget **) &self->night_light_dialog, gtk_widget_destroy);
@@ -1244,7 +1241,6 @@ cc_display_panel_init (CcDisplayPanel *self)
 
   g_signal_connect (self, "map", G_CALLBACK (mapped_cb), NULL);
 
-  self->shell_cancellable = g_cancellable_new ();
   cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
                                        G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES |
                                        G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS |
@@ -1252,12 +1248,12 @@ cc_display_panel_init (CcDisplayPanel *self)
                                        "org.gnome.Shell",
                                        "/org/gnome/Shell",
                                        "org.gnome.Shell",
-                                       self->shell_cancellable,
+                                       cc_panel_get_cancellable (CC_PANEL (self)),
                                        (GAsyncReadyCallback) shell_proxy_ready,
                                        self);
 
   g_bus_get (G_BUS_TYPE_SESSION,
-             self->shell_cancellable,
+             cc_panel_get_cancellable (CC_PANEL (self)),
              (GAsyncReadyCallback) session_bus_ready,
              self);
 

@@ -39,8 +39,6 @@ struct _CcLocationPanel
 
   GSettings    *location_settings;
 
-  GCancellable *cancellable;
-
   GDBusProxy   *perm_store;
   GVariant     *location_apps_perms;
   GVariant     *location_apps_data;
@@ -137,7 +135,7 @@ on_location_app_state_set (GtkSwitch *widget,
                      params,
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     self->cancellable,
+                     cc_panel_get_cancellable (CC_PANEL (self)),
                      on_perm_store_set_done,
                      data);
 
@@ -363,7 +361,7 @@ on_perm_store_ready (GObject      *source_object,
                      params,
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     self->cancellable,
+                     cc_panel_get_cancellable (CC_PANEL (self)),
                      on_perm_store_lookup_done,
                      self);
 }
@@ -373,9 +371,7 @@ cc_location_panel_finalize (GObject *object)
 {
   CcLocationPanel *self = CC_LOCATION_PANEL (object);
 
-  g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->location_settings);
-  g_clear_object (&self->cancellable);
   g_clear_object (&self->perm_store);
   g_clear_object (&self->location_icon_size_group);
   g_clear_pointer (&self->location_apps_perms, g_variant_unref);
@@ -455,7 +451,6 @@ cc_location_panel_init (CcLocationPanel *self)
   gtk_list_box_set_header_func (self->location_apps_list_box,
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
-  self->cancellable = g_cancellable_new ();
   self->location_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
   self->location_settings = g_settings_new ("org.gnome.system.location");
 
@@ -470,7 +465,7 @@ cc_location_panel_init (CcLocationPanel *self)
                             "org.freedesktop.impl.portal.PermissionStore",
                             "/org/freedesktop/impl/portal/PermissionStore",
                             "org.freedesktop.impl.portal.PermissionStore",
-                            self->cancellable,
+                            cc_panel_get_cancellable (CC_PANEL (self)),
                             on_perm_store_ready,
                             self);
 }
