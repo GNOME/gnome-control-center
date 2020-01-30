@@ -138,8 +138,7 @@ cc_diagnostics_panel_init (CcDiagnosticsPanel *self)
 
   os_name = cc_os_release_get_value ("NAME");
   /* translators: '%s' is the distributor's name, such as 'Fedora' */
-  msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports "
-                           "are sent anonymously and are scrubbed of personal data."),
+  msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s."),
                          os_name);
   gtk_label_set_text (self->diagnostics_explanation_label, msg);
 
