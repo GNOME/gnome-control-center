@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-01-27 23:24+0000\n"
-"PO-Revision-Date: 2020-01-28 15:34+0100\n"
+"POT-Creation-Date: 2020-01-30 08:07+0000\n"
+"PO-Revision-Date: 2020-01-30 14:45+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -599,10 +599,10 @@ msgstr "Seleccionar una imagen"
 #: panels/user-accounts/cc-avatar-chooser.c:107
 #: panels/user-accounts/cc-avatar-chooser.c:235
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:635
-#: panels/user-accounts/cc-user-panel.c:653
+#: panels/user-accounts/cc-user-panel.c:637
+#: panels/user-accounts/cc-user-panel.c:655
 #: panels/user-accounts/data/join-dialog.ui:20
-#: panels/user-accounts/um-fingerprint-dialog.c:261
+#: panels/user-accounts/um-fingerprint-dialog.c:260
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -1149,7 +1149,7 @@ msgstr ""
 "\"windows\">Microsoft Windows</a>."
 
 #: panels/color/cc-color-panel.ui:607
-#: panels/user-accounts/um-fingerprint-dialog.c:720
+#: panels/user-accounts/um-fingerprint-dialog.c:719
 msgid "Summary"
 msgstr "Resumen"
 
@@ -2884,7 +2884,6 @@ msgid "Secure network (WPA2)"
 msgstr "Red segura (WPA2)"
 
 #: panels/network/cc-wifi-connection-row.c:273
-#| msgid "Secure network (WPA)"
 msgid "Secure network (WPA3)"
 msgstr "Red segura (WPA3)"
 
@@ -2937,7 +2936,8 @@ msgstr "Nombre de red"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:69
 #: panels/printers/authentication-dialog.ui:96
-#: panels/printers/jobs-dialog.ui:70 panels/printers/new-printer-dialog.ui:383
+#: panels/printers/new-printer-dialog.ui:383
+#: panels/printers/pp-jobs-dialog.ui:70
 #: panels/user-accounts/cc-add-user-dialog.ui:249
 msgid "Password"
 msgstr "Contraseña"
@@ -3226,8 +3226,6 @@ msgid "WPA & WPA2 Enterprise"
 msgstr "WPA y WPA2 enterprise"
 
 #: panels/network/connection-editor/ce-page-security.c:363
-#| msgctxt "category"
-#| msgid "Personal"
 msgid "WPA3 Personal"
 msgstr "WPA3 personal"
 
@@ -4086,7 +4084,7 @@ msgstr "Nombre de _usuario"
 #: panels/sharing/cc-sharing-panel.ui:351
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:204
+#: panels/user-accounts/cc-user-panel.ui:385
 msgid "_Password"
 msgstr "_Contraseña"
 
@@ -4887,7 +4885,8 @@ msgstr "Autenticar"
 
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
-#: panels/printers/jobs-dialog.ui:57 panels/printers/new-printer-dialog.ui:362
+#: panels/printers/new-printer-dialog.ui:362
+#: panels/printers/pp-jobs-dialog.ui:57
 msgid "Username"
 msgstr "Nombre de usuario"
 
@@ -4927,31 +4926,6 @@ msgstr ""
 #: panels/printers/gnome-printers-panel.desktop.in.in:16
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Impresora;Cola;Imprimir;Papel;Tinta;Tóner;"
-
-#. Translators: This is a windows domain used with SMB protocol.
-#: panels/printers/jobs-dialog.ui:44
-msgid "Domain"
-msgstr "Dominio"
-
-#. Translators: This button authenticates all print jobs and send them for printing.
-#: panels/printers/jobs-dialog.ui:123
-msgid "A_uthenticate"
-msgstr "A_utenticar"
-
-#. Translators: this action removes (purges) all the listed jobs from the list.
-#: panels/printers/jobs-dialog.ui:163
-msgid "Clear All"
-msgstr "Limpiar todos"
-
-#. Translators: This button pop up authentication dialog for print jobs which need credentials.
-#: panels/printers/jobs-dialog.ui:225
-msgid "_Authenticate"
-msgstr "_Autenticar"
-
-#. Translators: this label describes the dialog empty state, with no jobs listed.
-#: panels/printers/jobs-dialog.ui:354
-msgid "No Active Printer Jobs"
-msgstr "No hay trabajos de impresión activos"
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
@@ -5094,55 +5068,55 @@ msgid "Reverse portrait"
 msgstr "Vertical invertido"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: panels/printers/pp-jobs-dialog.c:234
+#: panels/printers/pp-jobs-dialog.c:222
 msgctxt "print job"
 msgid "Pending"
 msgstr "Pendiente"
 
 #. Translators: Job's state (job is held for printing)
-#: panels/printers/pp-jobs-dialog.c:240
+#: panels/printers/pp-jobs-dialog.c:228
 msgctxt "print job"
 msgid "Paused"
 msgstr "Pausado"
 
 #. Translators: Job's state (job needs authentication to proceed further)
-#: panels/printers/pp-jobs-dialog.c:245
+#: panels/printers/pp-jobs-dialog.c:233
 msgctxt "print job"
 msgid "Authentication required"
 msgstr "Autenticación requerida"
 
 #. Translators: Job's state (job is currently printing)
-#: panels/printers/pp-jobs-dialog.c:250
+#: panels/printers/pp-jobs-dialog.c:238
 msgctxt "print job"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Job's state (job has been stopped)
-#: panels/printers/pp-jobs-dialog.c:254
+#: panels/printers/pp-jobs-dialog.c:242
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Detenido"
 
 #. Translators: Job's state (job has been canceled)
-#: panels/printers/pp-jobs-dialog.c:258
+#: panels/printers/pp-jobs-dialog.c:246
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Cancelado"
 
 #. Translators: Job's state (job has aborted due to error)
-#: panels/printers/pp-jobs-dialog.c:262
+#: panels/printers/pp-jobs-dialog.c:250
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Abortado"
 
 #. Translators: Job's state (job has completed successfully)
-#: panels/printers/pp-jobs-dialog.c:266
+#: panels/printers/pp-jobs-dialog.c:254
 msgctxt "print job"
 msgid "Completed"
 msgstr "Completado"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:390
+#: panels/printers/pp-jobs-dialog.c:363
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -5150,17 +5124,42 @@ msgstr[0] "%u trabajo requiere autenticación"
 msgstr[1] "%u trabajos requieren autenticación"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:612
+#: panels/printers/pp-jobs-dialog.c:520
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s - trabajos activos"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:616
+#: panels/printers/pp-jobs-dialog.c:524
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Introduzca las credenciales para imprimir desde %s."
+
+#. Translators: This is a windows domain used with SMB protocol.
+#: panels/printers/pp-jobs-dialog.ui:44
+msgid "Domain"
+msgstr "Dominio"
+
+#. Translators: This button authenticates all print jobs and send them for printing.
+#: panels/printers/pp-jobs-dialog.ui:129
+msgid "A_uthenticate"
+msgstr "A_utenticar"
+
+#. Translators: this action removes (purges) all the listed jobs from the list.
+#: panels/printers/pp-jobs-dialog.ui:169
+msgid "Clear All"
+msgstr "Limpiar todos"
+
+#. Translators: This button pop up authentication dialog for print jobs which need credentials.
+#: panels/printers/pp-jobs-dialog.ui:232
+msgid "_Authenticate"
+msgstr "_Autenticar"
+
+#. Translators: this label describes the dialog empty state, with no jobs listed.
+#: panels/printers/pp-jobs-dialog.ui:358
+msgid "No Active Printer Jobs"
+msgstr "No hay trabajos de impresión activos"
 
 #: panels/printers/pp-new-printer-dialog.c:380
 msgid "Unlock Print Server"
@@ -5371,111 +5370,111 @@ msgstr[0] "%u trabajo"
 msgstr[1] "%u trabajos"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:754
+#: panels/printers/pp-printer-entry.c:745
 msgid "Low on toner"
 msgstr "Tóner bajo"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:756
+#: panels/printers/pp-printer-entry.c:747
 msgid "Out of toner"
 msgstr "Sin tóner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:759
+#: panels/printers/pp-printer-entry.c:750
 msgid "Low on developer"
 msgstr "Nivel de revelador bajo"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:762
+#: panels/printers/pp-printer-entry.c:753
 msgid "Out of developer"
 msgstr "Sin revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:764
+#: panels/printers/pp-printer-entry.c:755
 msgid "Low on a marker supply"
 msgstr "Marcador bajo"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:766
+#: panels/printers/pp-printer-entry.c:757
 msgid "Out of a marker supply"
 msgstr "Sin marcador"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:768
+#: panels/printers/pp-printer-entry.c:759
 msgid "Open cover"
 msgstr "Abrir cubierta"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:770
+#: panels/printers/pp-printer-entry.c:761
 msgid "Open door"
 msgstr "Abrir puerta"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:772
+#: panels/printers/pp-printer-entry.c:763
 msgid "Low on paper"
 msgstr "Nivel de papel bajo"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:774
+#: panels/printers/pp-printer-entry.c:765
 msgid "Out of paper"
 msgstr "Sin papel"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:776
+#: panels/printers/pp-printer-entry.c:767
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Desconectada"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:778
-#: panels/printers/pp-printer-entry.c:906
+#: panels/printers/pp-printer-entry.c:769
+#: panels/printers/pp-printer-entry.c:897
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Detenida"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:780
+#: panels/printers/pp-printer-entry.c:771
 msgid "Waste receptacle almost full"
 msgstr "Recipiente de residuos casi lleno"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:782
+#: panels/printers/pp-printer-entry.c:773
 msgid "Waste receptacle full"
 msgstr "Receptáculo de residuos lleno"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:784
+#: panels/printers/pp-printer-entry.c:775
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor óptico está cerca del final de su vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:786
+#: panels/printers/pp-printer-entry.c:777
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor óptico ya no funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:892
+#: panels/printers/pp-printer-entry.c:883
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Preparada"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:897
+#: panels/printers/pp-printer-entry.c:888
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "No aceptar trabajos"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:902
+#: panels/printers/pp-printer-entry.c:893
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:926
+#: panels/printers/pp-printer-entry.c:917
 msgid "Clean print heads"
 msgstr "Limpiar cabezales de la impresora"
 
@@ -5637,7 +5636,7 @@ msgid "Login _Screen"
 msgstr "Pantalla de inicio de _sesión"
 
 #: panels/region/cc-region-panel.ui:64
-#: panels/user-accounts/cc-user-panel.ui:352
+#: panels/user-accounts/cc-user-panel.ui:313
 msgid "_Language"
 msgstr "_Idioma"
 
@@ -7187,17 +7186,14 @@ msgid "_Full Name"
 msgstr "Nombre _completo"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:206
-#: panels/user-accounts/cc-user-panel.ui:141
 msgid "Standard"
 msgstr "Estándar"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:216
-#: panels/user-accounts/cc-user-panel.ui:151
 msgid "Administrator"
 msgstr "Administrador"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:232
-#: panels/user-accounts/cc-user-panel.ui:169
 msgid "Account _Type"
 msgstr "_Tipo de cuenta"
 
@@ -7286,7 +7282,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:765
+#: panels/user-accounts/cc-user-panel.c:767
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7294,7 +7290,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:769
+#: panels/user-accounts/cc-user-panel.c:771
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7379,30 +7375,30 @@ msgstr "Contraseña no válida, inténtelo de nuevo"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "No se pudo conectar al dominio %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:208
+#: panels/user-accounts/cc-user-panel.c:210
 msgid "Your account"
 msgstr "Su cuenta"
 
-#: panels/user-accounts/cc-user-panel.c:383
+#: panels/user-accounts/cc-user-panel.c:385
 msgid "Failed to delete user"
 msgstr "Falló al eliminar el usuario"
 
-#: panels/user-accounts/cc-user-panel.c:441
-#: panels/user-accounts/cc-user-panel.c:500
-#: panels/user-accounts/cc-user-panel.c:552
+#: panels/user-accounts/cc-user-panel.c:443
+#: panels/user-accounts/cc-user-panel.c:502
+#: panels/user-accounts/cc-user-panel.c:554
 msgid "Failed to revoke remotely managed user"
 msgstr "Falló al revocar remotamente el usuario gestionado"
 
-#: panels/user-accounts/cc-user-panel.c:604
+#: panels/user-accounts/cc-user-panel.c:606
 msgid "You cannot delete your own account."
 msgstr "No puede eliminar su propia cuenta."
 
-#: panels/user-accounts/cc-user-panel.c:613
+#: panels/user-accounts/cc-user-panel.c:615
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aún está registrado en el sistema"
 
-#: panels/user-accounts/cc-user-panel.c:617
+#: panels/user-accounts/cc-user-panel.c:619
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7410,12 +7406,12 @@ msgstr ""
 "Eliminar un usuario mientras está registrado en el sistema puede dejar el "
 "sistema en un estado inconsistente."
 
-#: panels/user-accounts/cc-user-panel.c:626
+#: panels/user-accounts/cc-user-panel.c:628
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "¿Quiere mantener los archivos de %s?"
 
-#: panels/user-accounts/cc-user-panel.c:630
+#: panels/user-accounts/cc-user-panel.c:632
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7423,48 +7419,48 @@ msgstr ""
 "Es posible mantener la carpeta personal, el «spool» del correo y los "
 "archivos temporales al eliminar una cuenta de usuario."
 
-#: panels/user-accounts/cc-user-panel.c:633
+#: panels/user-accounts/cc-user-panel.c:635
 msgid "_Delete Files"
 msgstr "_Eliminar archivos"
 
-#: panels/user-accounts/cc-user-panel.c:634
+#: panels/user-accounts/cc-user-panel.c:636
 msgid "_Keep Files"
 msgstr "_Mantener archivos"
 
-#: panels/user-accounts/cc-user-panel.c:648
+#: panels/user-accounts/cc-user-panel.c:650
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr ""
 "¿Está seguro de que quiere revocar remotamente la cuenta gestionada de %s?"
 
-#: panels/user-accounts/cc-user-panel.c:652
+#: panels/user-accounts/cc-user-panel.c:654
 msgid "_Delete"
 msgstr "_Eliminar"
 
-#: panels/user-accounts/cc-user-panel.c:702
+#: panels/user-accounts/cc-user-panel.c:704
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Cuenta desactivada"
 
-#: panels/user-accounts/cc-user-panel.c:710
+#: panels/user-accounts/cc-user-panel.c:712
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar en el siguiente inicio de sesión"
 
-#: panels/user-accounts/cc-user-panel.c:713
+#: panels/user-accounts/cc-user-panel.c:715
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ninguno"
 
-#: panels/user-accounts/cc-user-panel.c:758
+#: panels/user-accounts/cc-user-panel.c:760
 msgid "Logged in"
 msgstr "Sesión iniciada"
 
-#: panels/user-accounts/cc-user-panel.c:1092
+#: panels/user-accounts/cc-user-panel.c:1138
 msgid "Failed to contact the accounts service"
 msgstr "Falló al contactar con el servicio de cuentas"
 
-#: panels/user-accounts/cc-user-panel.c:1094
+#: panels/user-accounts/cc-user-panel.c:1140
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 
@@ -7472,7 +7468,7 @@ msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1126
+#: panels/user-accounts/cc-user-panel.c:1172
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7480,12 +7476,12 @@ msgstr ""
 "Para realizar los cambios\n"
 "pulse primero el icono *"
 
-#: panels/user-accounts/cc-user-panel.c:1199
+#: panels/user-accounts/cc-user-panel.c:1245
 msgid "Create a user account"
 msgstr "Crear una cuenta de usuario"
 
-#: panels/user-accounts/cc-user-panel.c:1210
-#: panels/user-accounts/cc-user-panel.c:1338
+#: panels/user-accounts/cc-user-panel.c:1256
+#: panels/user-accounts/cc-user-panel.c:1384
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7493,12 +7489,12 @@ msgstr ""
 "Para crear un usuario\n"
 "pulse primero el icono *"
 
-#: panels/user-accounts/cc-user-panel.c:1219
+#: panels/user-accounts/cc-user-panel.c:1265
 msgid "Delete the selected user account"
 msgstr "Quitar la cuenta de usuario seleccionada"
 
-#: panels/user-accounts/cc-user-panel.c:1231
-#: panels/user-accounts/cc-user-panel.c:1342
+#: panels/user-accounts/cc-user-panel.c:1277
+#: panels/user-accounts/cc-user-panel.c:1388
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7518,33 +7514,57 @@ msgstr "Debe reiniciar la sesión para que se apliquen los cambios"
 msgid "Restart Now"
 msgstr "Reiniciar ahora"
 
-#: panels/user-accounts/cc-user-panel.ui:244
-msgid "A_utomatic Login"
-msgstr "_Inicio de sesión automático"
-
-#: panels/user-accounts/cc-user-panel.ui:286
-msgid "_Fingerprint Login"
-msgstr "Inicio de sesión con _huella"
-
-#: panels/user-accounts/cc-user-panel.ui:312
-#: panels/user-accounts/cc-user-panel.ui:328
+#: panels/user-accounts/cc-user-panel.ui:146
+#: panels/user-accounts/cc-user-panel.ui:162
 msgid "User Icon"
 msgstr "Icono de usuario"
 
-#: panels/user-accounts/cc-user-panel.ui:392
-msgid "Last Login"
-msgstr "Último inicio de sesión"
+#: panels/user-accounts/cc-user-panel.ui:238
+#| msgid "Sound Settings"
+msgid "Account Settings"
+msgstr "Configuración de la cuenta"
 
-#: panels/user-accounts/cc-user-panel.ui:441
+#: panels/user-accounts/cc-user-panel.ui:265
+#| msgid "Administrator"
+msgid "_Administrator"
+msgstr "_Administrador"
+
+#: panels/user-accounts/cc-user-panel.ui:285
+msgid ""
+"Administrators can add and remove other users, and can change settings for "
+"all users."
+msgstr ""
+"Los administradores pueden añadir o quitar a otros usuarios y cambiar la "
+"configuración de las cuenta."
+
+#: panels/user-accounts/cc-user-panel.ui:359
+#| msgid "Au_thentication"
+msgid "Authentication & Login"
+msgstr "Autenticación e inicio de sesión"
+
+#: panels/user-accounts/cc-user-panel.ui:428
+msgid "_Fingerprint Login"
+msgstr "Inicio de sesión con _huella"
+
+#: panels/user-accounts/cc-user-panel.ui:470
+msgid "A_utomatic Login"
+msgstr "_Inicio de sesión automático"
+
+#: panels/user-accounts/cc-user-panel.ui:500
+#| msgid "_Account Activity"
+msgid "Account Activity"
+msgstr "Actividad de la cuenta"
+
+#: panels/user-accounts/cc-user-panel.ui:541
 msgid "Remove User…"
 msgstr "Quitar usuario…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:471
+#: panels/user-accounts/cc-user-panel.ui:580
 msgid "No Users Found"
 msgstr "No se han encontrado usuarios"
 
-#: panels/user-accounts/cc-user-panel.ui:481
+#: panels/user-accounts/cc-user-panel.ui:590
 msgid "Unlock to add a user account."
 msgstr "Desbloquear para añadir una cuenta de usuario."
 
@@ -7581,7 +7601,7 @@ msgid "Right little finger"
 msgstr "Dedo meñique derecho"
 
 #: panels/user-accounts/data/account-fingerprint.ui:39
-#: panels/user-accounts/um-fingerprint-dialog.c:677
+#: panels/user-accounts/um-fingerprint-dialog.c:676
 msgid "Enable Fingerprint Login"
 msgstr "Activar el inicio de sesión con huella"
 
@@ -7827,15 +7847,15 @@ msgstr "Ocurrió un error interno."
 msgid "Enabled"
 msgstr "Activada"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:260
+#: panels/user-accounts/um-fingerprint-dialog.c:259
 msgid "Delete registered fingerprints?"
 msgstr "¿Eliminar las huellas registradas?"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:264
+#: panels/user-accounts/um-fingerprint-dialog.c:263
 msgid "_Delete Fingerprints"
 msgstr "_Eliminar huellas"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:270
+#: panels/user-accounts/um-fingerprint-dialog.c:269
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -7843,15 +7863,15 @@ msgstr ""
 "¿Quiere eliminar sus huellas registradas y así desactivar el inicio de "
 "sesión con huella?"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:440
+#: panels/user-accounts/um-fingerprint-dialog.c:439
 msgid "Done!"
 msgstr "Hecho"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:501
-#: panels/user-accounts/um-fingerprint-dialog.c:543
+#: panels/user-accounts/um-fingerprint-dialog.c:500
+#: panels/user-accounts/um-fingerprint-dialog.c:542
 #, c-format
 msgid "Could not access “%s” device"
 msgstr "No se pudo acceder al dispositivo «%s»"
@@ -7859,16 +7879,16 @@ msgstr "No se pudo acceder al dispositivo «%s»"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:584
+#: panels/user-accounts/um-fingerprint-dialog.c:583
 #, c-format
 msgid "Could not start finger capture on “%s” device"
 msgstr "No se pudo iniciar la captura de dedo en el dispositivo «%s»"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:628
+#: panels/user-accounts/um-fingerprint-dialog.c:627
 msgid "Could not access any fingerprint readers"
 msgstr "No se pudo acceder a ninguna lectura de huellas"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:629
+#: panels/user-accounts/um-fingerprint-dialog.c:628
 msgid "Please contact your system administrator for help."
 msgstr "Contacte con el administrador de su sistema para obtener ayuda."
 
@@ -7877,7 +7897,7 @@ msgstr "Contacte con el administrador de su sistema para obtener ayuda."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: panels/user-accounts/um-fingerprint-dialog.c:711
+#: panels/user-accounts/um-fingerprint-dialog.c:710
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -7886,11 +7906,11 @@ msgstr ""
 "Para activar el inicio de sesión con huella debe guardar una de sus huellas "
 "usando el dispositivo «%s»."
 
-#: panels/user-accounts/um-fingerprint-dialog.c:718
+#: panels/user-accounts/um-fingerprint-dialog.c:717
 msgid "Selecting finger"
 msgstr "Seleccionando dedo"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:719
+#: panels/user-accounts/um-fingerprint-dialog.c:718
 msgid "Enrolling fingerprints"
 msgstr "Registrando huellas digitales"
 
@@ -8291,6 +8311,9 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
+
+#~ msgid "Last Login"
+#~ msgstr "Último inicio de sesión"
 
 #~ msgid "Notification _Popups"
 #~ msgstr "_Notificaciones emergentes"
@@ -9602,9 +9625,6 @@ msgstr "Sonidos del sistema"
 #~ msgid "Add User Account"
 #~ msgstr "Añadir cuenta de usuario"
 
-#~ msgid "_Account Activity"
-#~ msgstr "_Actividad de la cuenta"
-
 #~ msgid "Login History"
 #~ msgstr "Histórico de inicio de sesión"
 
@@ -9952,9 +9972,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Mouse & Touchpad Settings"
 #~ msgstr "Configuración del ratón y del «touchpad»"
-
-#~ msgid "Sound Settings"
-#~ msgstr "Configuración del sonido"
 
 #~ msgid "Keyboard Settings"
 #~ msgstr "Configuración del teclado"
