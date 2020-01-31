@@ -27,7 +27,6 @@
 #include "eap-method-simple.h"
 #include "helpers.h"
 #include "ui-helpers.h"
-#include "wireless-security.h"
 
 #define I_NAME_COLUMN 0
 #define I_ID_COLUMN   1
@@ -48,8 +47,6 @@ struct _EAPMethodFAST {
 
 	EAPMethodSimple      *em_gtc;
 	EAPMethodSimple      *em_mschap_v2;
-
-	gboolean is_editor;
 };
 
 static void eap_method_iface_init (EAPMethodInterface *);
@@ -161,13 +158,20 @@ static void
 inner_auth_combo_changed_cb (EAPMethodFAST *self)
 {
 	EAPMethod *inner_method;
-	GList *elt, *children;
-
-	children = gtk_container_get_children (GTK_CONTAINER (self->inner_auth_box));
-	for (elt = children; elt; elt = g_list_next (elt))
-		gtk_container_remove (GTK_CONTAINER (self->inner_auth_box), GTK_WIDGET (elt->data));
+	GList *children;
 
 	inner_method = get_inner_method (self);
+
+	/* Remove the previous method and migrate username/password across */
+	children = gtk_container_get_children (GTK_CONTAINER (self->inner_auth_box));
+	if (children != NULL) {
+		EAPMethod *old_eap = g_list_nth_data (children, 0);
+		eap_method_set_username (inner_method, eap_method_get_username (old_eap));
+		eap_method_set_password (inner_method, eap_method_get_password (old_eap));
+		eap_method_set_show_password (inner_method, eap_method_get_show_password (old_eap));
+		gtk_container_remove (GTK_CONTAINER (self->inner_auth_box), GTK_WIDGET (old_eap));
+	}
+
 	gtk_container_add (GTK_CONTAINER (self->inner_auth_box), g_object_ref (GTK_WIDGET (inner_method)));
 
 	eap_method_emit_changed (EAP_METHOD (self));
@@ -193,6 +197,48 @@ static const gchar *
 get_password_flags_name (EAPMethod *parent)
 {
 	return NM_SETTING_802_1X_PASSWORD;
+}
+
+static const gchar *
+get_username (EAPMethod *method)
+{
+	EAPMethodFAST *self = EAP_METHOD_FAST (method);
+	return eap_method_get_username (get_inner_method (self));
+}
+
+static void
+set_username (EAPMethod *method, const gchar *username)
+{
+	EAPMethodFAST *self = EAP_METHOD_FAST (method);
+	return eap_method_set_username (get_inner_method (self), username);
+}
+
+static const gchar *
+get_password (EAPMethod *method)
+{
+	EAPMethodFAST *self = EAP_METHOD_FAST (method);
+	return eap_method_get_password (get_inner_method (self));
+}
+
+static void
+set_password (EAPMethod *method, const gchar *password)
+{
+	EAPMethodFAST *self = EAP_METHOD_FAST (method);
+	return eap_method_set_password (get_inner_method (self), password);
+}
+
+static gboolean
+get_show_password (EAPMethod *method)
+{
+	EAPMethodFAST *self = EAP_METHOD_FAST (method);
+	return eap_method_get_show_password (get_inner_method (self));
+}
+
+static void
+set_show_password (EAPMethod *method, gboolean show_password)
+{
+	EAPMethodFAST *self = EAP_METHOD_FAST (method);
+	return eap_method_set_show_password (get_inner_method (self), show_password);
 }
 
 static void
@@ -246,25 +292,26 @@ eap_method_iface_init (EAPMethodInterface *iface)
 	iface->update_secrets = update_secrets;
 	iface->get_default_field = get_default_field;
 	iface->get_password_flags_name = get_password_flags_name;
+	iface->get_username = get_username;
+	iface->set_username = set_username;
+	iface->get_password = get_password;
+	iface->set_password = set_password;
+	iface->get_show_password = get_show_password;
+	iface->set_show_password = set_show_password;
 }
 
 EAPMethodFAST *
-eap_method_fast_new (WirelessSecurity *ws_parent,
-                     NMConnection *connection,
-                     gboolean is_editor,
-                     gboolean secrets_only)
+eap_method_fast_new (NMConnection *connection)
 {
 	EAPMethodFAST *self;
 	GtkFileFilter *filter;
 	NMSetting8021x *s_8021x = NULL;
 	const char *filename;
 	gboolean provisioning_enabled = TRUE;
-	EAPMethodSimpleFlags simple_flags;
 	const gchar *phase2_auth = NULL;
 	GtkTreeIter iter;
 
 	self = g_object_new (eap_method_fast_get_type (), NULL);
-	self->is_editor = is_editor;
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
@@ -315,23 +362,11 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (self->pac_file_button), filename);
 	}
 
-	simple_flags = EAP_METHOD_SIMPLE_FLAG_PHASE2;
-	if (self->is_editor)
-		simple_flags |= EAP_METHOD_SIMPLE_FLAG_IS_EDITOR;
-	if (secrets_only)
-		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
-
-	self->em_gtc = eap_method_simple_new (ws_parent,
-	                                      connection,
-	                                      EAP_METHOD_SIMPLE_TYPE_GTC,
-	                                      simple_flags);
+	self->em_gtc = eap_method_simple_new (connection, "gtc", TRUE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_gtc));
 	g_signal_connect_object (self->em_gtc, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
-	self->em_mschap_v2 = eap_method_simple_new (ws_parent,
-	                                            connection,
-	                                            EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2,
-	                                            simple_flags);
+	self->em_mschap_v2 = eap_method_simple_new (connection, "mschapv2", TRUE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_mschap_v2));
 	g_signal_connect_object (self->em_mschap_v2, "changed", G_CALLBACK (eap_method_emit_changed), self, G_CONNECT_SWAPPED);
 
@@ -355,17 +390,6 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 
 	g_signal_connect_swapped (self->inner_auth_combo, "changed", G_CALLBACK (inner_auth_combo_changed_cb), self);
 	inner_auth_combo_changed_cb (self);
-
-	if (secrets_only) {
-		gtk_widget_hide (GTK_WIDGET (self->anon_identity_label));
-		gtk_widget_hide (GTK_WIDGET (self->anon_identity_entry));
-		gtk_widget_hide (GTK_WIDGET (self->pac_provision_check));
-		gtk_widget_hide (GTK_WIDGET (self->pac_provision_combo));
-		gtk_widget_hide (GTK_WIDGET (self->pac_file_label));
-		gtk_widget_hide (GTK_WIDGET (self->pac_file_button));
-		gtk_widget_hide (GTK_WIDGET (self->inner_auth_label));
-		gtk_widget_hide (GTK_WIDGET (self->inner_auth_combo));
-	}
 
 	return self;
 }

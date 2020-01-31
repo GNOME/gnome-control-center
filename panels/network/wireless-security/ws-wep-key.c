@@ -29,27 +29,25 @@
 #include "wireless-security.h"
 
 struct _WirelessSecurityWEPKey {
-	WirelessSecurity parent;
+	GtkGrid parent;
 
-	GtkBuilder     *builder;
 	GtkComboBox    *auth_method_combo;
 	GtkLabel       *auth_method_label;
-	GtkGrid        *grid;
 	GtkEntry       *key_entry;
 	GtkComboBox    *key_index_combo;
 	GtkLabel       *key_index_label;
 	GtkLabel       *key_label;
 	GtkCheckButton *show_key_check;
 
-	gboolean editing_connection;
-	const char *password_flags_name;
-
 	NMWepKeyType type;
 	char keys[4][65];
 	guint8 cur_index;
 };
 
-G_DEFINE_TYPE (WirelessSecurityWEPKey, ws_wep_key, wireless_security_get_type ())
+static void wireless_security_iface_init (WirelessSecurityInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (WirelessSecurityWEPKey, ws_wep_key, GTK_TYPE_GRID,
+                         G_IMPLEMENT_INTERFACE (wireless_security_get_type (), wireless_security_iface_init));
 
 static void
 show_toggled_cb (WirelessSecurityWEPKey *self)
@@ -90,18 +88,10 @@ ws_wep_key_dispose (GObject *object)
 	WirelessSecurityWEPKey *self = WS_WEP_KEY (object);
 	int i;
 
-	g_clear_object (&self->builder);
 	for (i = 0; i < 4; i++)
 		memset (self->keys[i], 0, sizeof (self->keys[i]));
 
 	G_OBJECT_CLASS (ws_wep_key_parent_class)->dispose (object);
-}
-
-static GtkWidget *
-get_widget (WirelessSecurity *security)
-{
-	WirelessSecurityWEPKey *self = WS_WEP_KEY (security);
-	return GTK_WIDGET (self->grid);
 }
 
 static gboolean
@@ -200,9 +190,8 @@ fill_connection (WirelessSecurity *security, NMConnection *connection)
 	g_object_set (s_wsec, NM_SETTING_WIRELESS_SECURITY_WEP_KEY_FLAGS, secret_flags, NULL);
 
 	/* Update secret flags and popup when editing the connection */
-	if (self->editing_connection)
-		nma_utils_update_password_storage (GTK_WIDGET (self->key_entry), secret_flags,
-		                                   NM_SETTING (s_wsec), self->password_flags_name);
+	nma_utils_update_password_storage (GTK_WIDGET (self->key_entry), secret_flags,
+		                           NM_SETTING (s_wsec), NM_SETTING_WIRELESS_SECURITY_WEP_KEY0);
 }
 
 static void
@@ -257,54 +246,49 @@ changed_cb (WirelessSecurityWEPKey *self)
 void
 ws_wep_key_init (WirelessSecurityWEPKey *self)
 {
+	gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 void
 ws_wep_key_class_init (WirelessSecurityWEPKeyClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	WirelessSecurityClass *ws_class = WIRELESS_SECURITY_CLASS (klass);
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
 	object_class->dispose = ws_wep_key_dispose;
-	ws_class->get_widget = get_widget;
-	ws_class->validate = validate;
-	ws_class->add_to_size_group = add_to_size_group;
-	ws_class->fill_connection = fill_connection;
+
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/ws-wep-key.ui");
+
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWEPKey, auth_method_combo);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWEPKey, auth_method_label);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWEPKey, key_entry);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWEPKey, key_index_combo);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWEPKey, key_index_label);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWEPKey, key_label);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWEPKey, show_key_check);
+}
+
+static void
+wireless_security_iface_init (WirelessSecurityInterface *iface)
+{
+	iface->validate = validate;
+	iface->add_to_size_group = add_to_size_group;
+	iface->fill_connection = fill_connection;
 }
 
 WirelessSecurityWEPKey *
 ws_wep_key_new (NMConnection *connection,
-                NMWepKeyType type,
-                gboolean adhoc_create,
-                gboolean secrets_only)
+                NMWepKeyType type)
 {
 	WirelessSecurityWEPKey *self;
 	NMSettingWirelessSecurity *s_wsec = NULL;
 	NMSetting *setting = NULL;
 	guint8 default_key_idx = 0;
-	gboolean is_adhoc = adhoc_create;
+	gboolean is_adhoc = FALSE;
 	gboolean is_shared_key = FALSE;
-	g_autoptr(GError) error = NULL;
 
 	self = g_object_new (ws_wep_key_get_type (), NULL);
 
-	self->builder = gtk_builder_new ();
-	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/ws-wep-key.ui", &error)) {
-		g_warning ("Couldn't load UI builder resource: %s", error->message);
-		return NULL;
-	}
-
-	self->auth_method_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "auth_method_combo"));
-	self->auth_method_label = GTK_LABEL (gtk_builder_get_object (self->builder, "auth_method_label"));
-	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
-	self->key_entry = GTK_ENTRY (gtk_builder_get_object (self->builder, "key_entry"));
-	self->key_index_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "key_index_combo"));
-	self->key_index_label = GTK_LABEL (gtk_builder_get_object (self->builder, "key_index_label"));
-	self->key_label = GTK_LABEL (gtk_builder_get_object (self->builder, "key_label"));
-	self->show_key_check = GTK_CHECK_BUTTON (gtk_builder_get_object (self->builder, "show_key_check"));
-
-	self->editing_connection = secrets_only ? FALSE : TRUE;
-	self->password_flags_name = NM_SETTING_WIRELESS_SECURITY_WEP_KEY0;
 	self->type = type;
 
 	gtk_entry_set_width_chars (self->key_entry, 28);
@@ -312,8 +296,8 @@ ws_wep_key_new (NMConnection *connection,
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
 	if (connection)
 		setting = (NMSetting *) nm_connection_get_setting_wireless_security (connection);
-	nma_utils_setup_password_storage (GTK_WIDGET (self->key_entry), 0, setting, self->password_flags_name,
-	                                  FALSE, secrets_only);
+	nma_utils_setup_password_storage (GTK_WIDGET (self->key_entry), 0, setting, NM_SETTING_WIRELESS_SECURITY_WEP_KEY0,
+	                                  FALSE, FALSE);
 
 	if (connection) {
 		NMSettingWireless *s_wireless;
@@ -347,7 +331,7 @@ ws_wep_key_new (NMConnection *connection,
 	g_signal_connect_swapped (self->key_index_combo, "changed", G_CALLBACK (key_index_combo_changed_cb), self);
 
 	/* Key index is useless with adhoc networks */
-	if (is_adhoc || secrets_only) {
+	if (is_adhoc) {
 		gtk_widget_hide (GTK_WIDGET (self->key_index_combo));
 		gtk_widget_hide (GTK_WIDGET (self->key_index_label));
 	}
@@ -365,7 +349,7 @@ ws_wep_key_new (NMConnection *connection,
 	/* Don't show auth method for adhoc (which always uses open-system) or
 	 * when in "simple" mode.
 	 */
-	if (is_adhoc || secrets_only) {
+	if (is_adhoc) {
 		/* Ad-Hoc connections can't use Shared Key auth */
 		if (is_adhoc)
 			gtk_combo_box_set_active (self->auth_method_combo, 0);

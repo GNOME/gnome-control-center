@@ -27,19 +27,16 @@
 
 G_BEGIN_DECLS
 
-G_DECLARE_DERIVABLE_TYPE (WirelessSecurity, wireless_security, WIRELESS, SECURITY, GObject)
+G_DECLARE_INTERFACE (WirelessSecurity, wireless_security, WIRELESS, SECURITY, GObject)
 
-struct _WirelessSecurityClass {
-	GObjectClass parent_class;
+struct _WirelessSecurityInterface {
+	GTypeInterface g_iface;
 
 	void       (*add_to_size_group) (WirelessSecurity *sec, GtkSizeGroup *group);
 	void       (*fill_connection)   (WirelessSecurity *sec, NMConnection *connection);
 	gboolean   (*validate)          (WirelessSecurity *sec, GError **error);
 	gboolean   (*adhoc_compatible)  (WirelessSecurity *sec);
-	GtkWidget* (*get_widget)        (WirelessSecurity *sec);
 };
-
-GtkWidget *wireless_security_get_widget (WirelessSecurity *sec);
 
 gboolean wireless_security_validate (WirelessSecurity *sec, GError **error);
 
@@ -50,22 +47,6 @@ void wireless_security_fill_connection (WirelessSecurity *sec,
                                         NMConnection *connection);
 
 gboolean wireless_security_adhoc_compatible (WirelessSecurity *sec);
-
-void wireless_security_set_username (WirelessSecurity *sec, const gchar *username);
-
-const gchar *wireless_security_get_username (WirelessSecurity *sec);
-
-void wireless_security_set_password (WirelessSecurity *sec, const gchar *password);
-
-const gchar *wireless_security_get_password (WirelessSecurity *sec);
-
-void wireless_security_set_always_ask (WirelessSecurity *sec, gboolean always_ask);
-
-gboolean wireless_security_get_always_ask (WirelessSecurity *sec);
-
-void wireless_security_set_show_password (WirelessSecurity *sec, gboolean show_password);
-
-gboolean wireless_security_get_show_password (WirelessSecurity *sec);
 
 void wireless_security_notify_changed (WirelessSecurity *sec);
 

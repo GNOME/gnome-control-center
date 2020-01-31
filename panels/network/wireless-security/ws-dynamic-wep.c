@@ -33,13 +33,11 @@
 #include "ws-dynamic-wep.h"
 
 struct _WirelessSecurityDynamicWEP {
-	WirelessSecurity parent;
+	GtkGrid parent;
 
-	GtkBuilder   *builder;
 	GtkComboBox  *auth_combo;
 	GtkLabel     *auth_label;
 	GtkListStore *auth_model;
-	GtkGrid      *grid;
 	GtkBox       *method_box;
 
 	EAPMethodTLS    *em_tls;
@@ -50,7 +48,10 @@ struct _WirelessSecurityDynamicWEP {
 	EAPMethodPEAP   *em_peap;
 };
 
-G_DEFINE_TYPE (WirelessSecurityDynamicWEP, ws_dynamic_wep, wireless_security_get_type ())
+static void wireless_security_iface_init (WirelessSecurityInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (WirelessSecurityDynamicWEP, ws_dynamic_wep, GTK_TYPE_GRID,
+                         G_IMPLEMENT_INTERFACE (wireless_security_get_type (), wireless_security_iface_init));
 
 #define AUTH_NAME_COLUMN    0
 #define AUTH_ID_COLUMN      1
@@ -79,23 +80,6 @@ get_eap (WirelessSecurityDynamicWEP *self)
 		return EAP_METHOD (self->em_peap);
 
 	return NULL;
-}
-
-static void
-ws_dynamic_wep_dispose (GObject *object)
-{
-	WirelessSecurityDynamicWEP *self = WS_DYNAMIC_WEP (object);
-
-	g_clear_object (&self->builder);
-
-	G_OBJECT_CLASS (ws_dynamic_wep_parent_class)->dispose (object);
-}
-
-static GtkWidget *
-get_widget (WirelessSecurity *security)
-{
-	WirelessSecurityDynamicWEP *self = WS_DYNAMIC_WEP (security);
-	return GTK_WIDGET (self->grid);
 }
 
 static gboolean
@@ -161,18 +145,22 @@ static void
 auth_combo_changed_cb (WirelessSecurityDynamicWEP *self)
 {
 	EAPMethod *eap;
-	GList *elt, *children;
+	GList *children;
 	GtkWidget *eap_default_field;
 
-	/* Remove any previous wireless security widgets */
-	children = gtk_container_get_children (GTK_CONTAINER (self->method_box));
-	for (elt = children; elt; elt = g_list_next (elt))
-		gtk_container_remove (GTK_CONTAINER (self->method_box), GTK_WIDGET (elt->data));
-
 	eap = get_eap (self);
-	gtk_container_add (GTK_CONTAINER (self->method_box), g_object_ref (GTK_WIDGET (eap)));
 
-	/* Refocus the EAP method's default widget */
+	/* Remove the previous method and migrate username/password across */
+	children = gtk_container_get_children (GTK_CONTAINER (self->method_box));
+	if (children != NULL) {
+		EAPMethod *old_eap = g_list_nth_data (children, 0);
+		eap_method_set_username (eap, eap_method_get_username (old_eap));
+		eap_method_set_password (eap, eap_method_get_password (old_eap));
+		eap_method_set_show_password (eap, eap_method_get_show_password (old_eap));
+		gtk_container_remove (GTK_CONTAINER (self->method_box), GTK_WIDGET (old_eap));
+	}
+
+	gtk_container_add (GTK_CONTAINER (self->method_box), g_object_ref (GTK_WIDGET (eap)));
 	eap_default_field = eap_method_get_default_field (eap);
 	if (eap_default_field)
 		gtk_widget_grab_focus (eap_default_field);
@@ -183,48 +171,39 @@ auth_combo_changed_cb (WirelessSecurityDynamicWEP *self)
 void
 ws_dynamic_wep_init (WirelessSecurityDynamicWEP *self)
 {
+	gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 void
 ws_dynamic_wep_class_init (WirelessSecurityDynamicWEPClass *klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	WirelessSecurityClass *ws_class = WIRELESS_SECURITY_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-	object_class->dispose = ws_dynamic_wep_dispose;
-	ws_class->get_widget = get_widget;
-	ws_class->validate = validate;
-	ws_class->add_to_size_group = add_to_size_group;
-	ws_class->fill_connection = fill_connection;
-	ws_class->adhoc_compatible = adhoc_compatible;
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/ws-dynamic-wep.ui");
+
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityDynamicWEP, auth_combo);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityDynamicWEP, auth_label);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityDynamicWEP, auth_model);
+	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityDynamicWEP, method_box);
+}
+
+static void
+wireless_security_iface_init (WirelessSecurityInterface *iface)
+{
+	iface->validate = validate;
+	iface->add_to_size_group = add_to_size_group;
+	iface->fill_connection = fill_connection;
+	iface->adhoc_compatible = adhoc_compatible;
 }
 
 WirelessSecurityDynamicWEP *
-ws_dynamic_wep_new (NMConnection *connection,
-                    gboolean is_editor,
-                    gboolean secrets_only)
+ws_dynamic_wep_new (NMConnection *connection)
 {
 	WirelessSecurityDynamicWEP *self;
-	const gchar *user = NULL, *password = NULL;
-	gboolean always_ask = FALSE;
 	const gchar *default_method = NULL;
-	EAPMethodSimpleFlags simple_flags = EAP_METHOD_SIMPLE_FLAG_NONE;
 	GtkTreeIter iter;
-	g_autoptr(GError) error = NULL;
 
 	self = g_object_new (ws_dynamic_wep_get_type (), NULL);
-
-	self->builder = gtk_builder_new ();
-	if (!gtk_builder_add_from_resource (self->builder, "/org/gnome/ControlCenter/network/ws-dynamic-wep.ui", &error)) {
-		g_warning ("Couldn't load UI builder resource: %s", error->message);
-		return NULL;
-	}
-
-	self->auth_combo = GTK_COMBO_BOX (gtk_builder_get_object (self->builder, "auth_combo"));
-	self->auth_label = GTK_LABEL (gtk_builder_get_object (self->builder, "auth_label"));
-	self->auth_model = GTK_LIST_STORE (gtk_builder_get_object (self->builder, "auth_model"));
-	self->grid = GTK_GRID (gtk_builder_get_object (self->builder, "grid"));
-	self->method_box = GTK_BOX (gtk_builder_get_object (self->builder, "method_box"));
 
 	/* Grab the default EAP method out of the security object */
 	if (connection) {
@@ -237,47 +216,22 @@ ws_dynamic_wep_new (NMConnection *connection,
 	if (default_method == NULL)
 		default_method = "tls";
 
-	/* initialize WirelessSecurity userpass from connection (clear if no connection) */
-	if (connection) {
-		NMSetting8021x *setting;
-
-		setting = nm_connection_get_setting_802_1x (connection);
-		if (setting) {
-			NMSettingSecretFlags flags;
-
-			user = nm_setting_802_1x_get_identity (setting);
-			password = nm_setting_802_1x_get_password (setting);
-
-			if (nm_setting_get_secret_flags (NM_SETTING (setting), NM_SETTING_802_1X_PASSWORD, &flags, NULL))
-				always_ask = !!(flags & NM_SETTING_SECRET_FLAG_NOT_SAVED);
-		}
-	}
-	wireless_security_set_username (WIRELESS_SECURITY (self), user);
-	wireless_security_set_password (WIRELESS_SECURITY (self), password);
-	wireless_security_set_always_ask (WIRELESS_SECURITY (self), always_ask);
-	wireless_security_set_show_password (WIRELESS_SECURITY (self), FALSE);
-
-	if (is_editor)
-		simple_flags |= EAP_METHOD_SIMPLE_FLAG_IS_EDITOR;
-	if (secrets_only)
-		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
-
-	self->em_tls = eap_method_tls_new (WIRELESS_SECURITY (self), connection, FALSE, secrets_only);
+	self->em_tls = eap_method_tls_new (connection);
 	gtk_widget_show (GTK_WIDGET (self->em_tls));
 	g_signal_connect_object (self->em_tls, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_leap = eap_method_leap_new (WIRELESS_SECURITY (self), connection, secrets_only);
+	self->em_leap = eap_method_leap_new (connection);
 	gtk_widget_show (GTK_WIDGET (self->em_leap));
 	g_signal_connect_object (self->em_leap, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_pwd = eap_method_simple_new (WIRELESS_SECURITY (self), connection, EAP_METHOD_SIMPLE_TYPE_PWD, simple_flags);
+	self->em_pwd = eap_method_simple_new (connection, "pwd", FALSE, FALSE);
 	gtk_widget_show (GTK_WIDGET (self->em_pwd));
 	g_signal_connect_object (self->em_pwd, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_fast = eap_method_fast_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
+	self->em_fast = eap_method_fast_new (connection);
 	gtk_widget_show (GTK_WIDGET (self->em_fast));
 	g_signal_connect_object (self->em_fast, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_ttls = eap_method_ttls_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
+	self->em_ttls = eap_method_ttls_new (connection);
 	gtk_widget_show (GTK_WIDGET (self->em_ttls));
 	g_signal_connect_object (self->em_ttls, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
-	self->em_peap = eap_method_peap_new (WIRELESS_SECURITY (self), connection, is_editor, secrets_only);
+	self->em_peap = eap_method_peap_new (connection);
 	gtk_widget_show (GTK_WIDGET (self->em_peap));
 	g_signal_connect_object (self->em_peap, "changed", G_CALLBACK (wireless_security_notify_changed), self, G_CONNECT_SWAPPED);
 
@@ -290,9 +244,14 @@ ws_dynamic_wep_new (NMConnection *connection,
 		} while (gtk_tree_model_iter_next (GTK_TREE_MODEL (self->auth_model), &iter));
 	}
 
-	if (secrets_only) {
-		gtk_widget_hide (GTK_WIDGET (self->auth_combo));
-		gtk_widget_hide (GTK_WIDGET (self->auth_label));
+	if (connection) {
+		NMSetting8021x *setting;
+
+		setting = nm_connection_get_setting_802_1x (connection);
+		if (setting) {
+			eap_method_set_username (get_eap (self), nm_setting_802_1x_get_identity (setting));
+			eap_method_set_password (get_eap (self), nm_setting_802_1x_get_password (setting));
+		}
 	}
 
 	g_signal_connect_object (G_OBJECT (self->auth_combo), "changed", G_CALLBACK (auth_combo_changed_cb), self, G_CONNECT_SWAPPED);

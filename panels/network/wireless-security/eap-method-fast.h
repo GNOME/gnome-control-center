@@ -25,15 +25,10 @@
 #include <gtk/gtk.h>
 #include <NetworkManager.h>
 
-#include "wireless-security.h"
-
 G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (EAPMethodFAST, eap_method_fast, EAP, METHOD_FAST, GtkGrid)
 
-EAPMethodFAST *eap_method_fast_new (WirelessSecurity *ws_parent,
-                                    NMConnection *connection,
-                                    gboolean is_editor,
-                                    gboolean secrets_only);
+EAPMethodFAST *eap_method_fast_new (NMConnection *connection);
 
 G_END_DECLS

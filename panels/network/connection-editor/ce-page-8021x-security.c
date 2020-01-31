@@ -40,7 +40,6 @@ struct _CEPage8021xSecurity {
         GtkLabel    *security_label;
 
         NMConnection *connection;
-        GtkWidget *security_widget;
         WirelessSecurityWPAEAP *security;
         GtkSizeGroup *group;
         gboolean initial_have_8021x;
@@ -54,7 +53,7 @@ G_DEFINE_TYPE_WITH_CODE (CEPage8021xSecurity, ce_page_8021x_security, GTK_TYPE_G
 static void
 enable_toggled (CEPage8021xSecurity *self)
 {
-	gtk_widget_set_sensitive (self->security_widget, gtk_switch_get_active (self->enable_8021x_switch));
+	gtk_widget_set_sensitive (GTK_WIDGET (self->security), gtk_switch_get_active (self->enable_8021x_switch));
 	ce_page_changed (CE_PAGE (self));
 }
 
@@ -74,26 +73,25 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 
         self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-	self->security = ws_wpa_eap_new (self->connection, TRUE, FALSE);
+	self->security = ws_wpa_eap_new (self->connection);
 	if (!self->security) {
 		g_warning ("Could not load 802.1x user interface.");
 		return;
 	}
 
         g_signal_connect_object (WIRELESS_SECURITY (self->security), "changed", G_CALLBACK (security_item_changed_cb), self, G_CONNECT_SWAPPED);
-	self->security_widget = wireless_security_get_widget (WIRELESS_SECURITY (self->security));
-	parent = gtk_widget_get_parent (self->security_widget);
+	parent = gtk_widget_get_parent (GTK_WIDGET (self->security));
 	if (parent)
-		gtk_container_remove (GTK_CONTAINER (parent), self->security_widget);
+		gtk_container_remove (GTK_CONTAINER (parent), GTK_WIDGET (self->security));
 
 	gtk_switch_set_active (self->enable_8021x_switch, self->initial_have_8021x);
 	g_signal_connect_swapped (self->enable_8021x_switch, "notify::active", G_CALLBACK (enable_toggled), self);
-	gtk_widget_set_sensitive (self->security_widget, self->initial_have_8021x);
+	gtk_widget_set_sensitive (GTK_WIDGET (self->security), self->initial_have_8021x);
 
         gtk_size_group_add_widget (self->group, GTK_WIDGET (self->security_label));
         wireless_security_add_to_size_group (WIRELESS_SECURITY (self->security), self->group);
 
-	gtk_container_add (GTK_CONTAINER (self->box), self->security_widget);
+	gtk_container_add (GTK_CONTAINER (self->box), GTK_WIDGET (self->security));
 
 }
 
