@@ -355,7 +355,7 @@ finish_setup (CEPageSecurity *self)
         if (nm_utils_security_valid (NMU_SEC_SAE, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
                 WirelessSecurityWPAPSK *ws_wpa_psk;
 
-                ws_wpa_psk = ws_wpa_psk_new (self->connection, FALSE);
+                ws_wpa_psk = ws_wpa_psk_new (self->connection);
                 if (ws_wpa_psk) {
                         add_security_item (self, WIRELESS_SECURITY (ws_wpa_psk), sec_model,
                                            &iter, _("WPA3 Personal"), FALSE);
