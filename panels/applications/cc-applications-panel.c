@@ -95,6 +95,7 @@ struct _CcApplicationsPanel
   GtkWidget       *integration_list;
   GtkWidget       *notification;
   GtkWidget       *background;
+  GtkWidget       *wallpaper;
   GtkWidget       *sound;
   GtkWidget       *no_sound;
   GtkWidget       *search;
@@ -226,9 +227,8 @@ get_portal_app_id (GAppInfo *info)
 {
   if (G_IS_DESKTOP_APP_INFO (info))
     {
-      gchar *flatpak_id;
       g_autofree gchar *snap_name = NULL;
-      g_autofree gchar *executable = NULL;
+      gchar *flatpak_id;
 
       flatpak_id = g_desktop_app_info_get_string (G_DESKTOP_APP_INFO (info), "X-Flatpak");
       if (flatpak_id != NULL)
@@ -469,6 +469,37 @@ background_cb (CcApplicationsPanel *self)
 {
   if (self->current_app_id)
     set_background_allowed (self, cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->background)));
+}
+
+/* --- wallpaper --- */
+
+static void
+get_wallpaper_allowed (CcApplicationsPanel *self,
+                       const gchar         *app_id,
+                       gboolean            *set,
+                       gboolean            *allowed)
+{
+  g_auto(GStrv) perms = get_portal_permissions (self, "wallpaper", "wallpaper", app_id);
+
+  *set = perms != NULL;
+  *allowed = perms == NULL || strcmp (perms[0], "no") != 0;
+}
+
+static void
+set_wallpaper_allowed (CcApplicationsPanel *self,
+                       gboolean             allowed)
+{
+  const gchar *perms[2] = { NULL, NULL };
+
+  perms[0] = allowed ? "yes" : "no";
+  set_portal_permissions (self, "wallpaper", "wallpaper", self->current_app_id, perms);
+}
+
+static void
+wallpaper_cb (CcApplicationsPanel *self)
+{
+  if (self->current_app_id)
+    set_wallpaper_allowed (self, cc_toggle_row_get_allowed (CC_TOGGLE_ROW (self->wallpaper)));
 }
 
 /* --- device (microphone, camera, speaker) permissions (flatpak) --- */
@@ -823,6 +854,11 @@ update_integration_section (CcApplicationsPanel *self,
       gtk_widget_set_visible (self->background, set);
       has_any |= set;
 
+      get_wallpaper_allowed (self, portal_app_id, &set, &allowed);
+      cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->wallpaper), allowed);
+      gtk_widget_set_visible (self->wallpaper, set);
+      has_any |= set;
+
       disabled = g_settings_get_boolean (self->privacy_settings, "disable-sound-output");
       get_device_allowed (self, "speakers", portal_app_id, &set, &allowed);
       cc_toggle_row_set_allowed (CC_TOGGLE_ROW (self->sound), allowed);
@@ -838,6 +874,7 @@ update_integration_section (CcApplicationsPanel *self,
       has_any |= set;
 
       gtk_widget_hide (self->background);
+      gtk_widget_hide (self->wallpaper);
       gtk_widget_hide (self->sound);
       gtk_widget_hide (self->no_sound);
     }
@@ -1840,6 +1877,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, no_sound);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, notification);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, background);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, wallpaper);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_box);
@@ -1862,6 +1900,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, search_cb);
   gtk_widget_class_bind_template_callback (widget_class, notification_cb);
   gtk_widget_class_bind_template_callback (widget_class, background_cb);
+  gtk_widget_class_bind_template_callback (widget_class, wallpaper_cb);
   gtk_widget_class_bind_template_callback (widget_class, privacy_link_cb);
   gtk_widget_class_bind_template_callback (widget_class, sound_cb);
   gtk_widget_class_bind_template_callback (widget_class, permission_row_activated_cb);
