@@ -40,7 +40,6 @@ struct _CcBoltPanel
   CcPanel             parent;
 
   BoltClient         *client;
-  GCancellable       *cancel;
 
   /* headerbar menu */
   GtkBox             *headerbar_box;
@@ -280,7 +279,7 @@ devices_table_synchronize (CcBoltPanel *panel)
   g_autoptr(GError) err = NULL;
   guint i;
 
-  devices = bolt_client_list_devices (panel->client, panel->cancel, &err);
+  devices = bolt_client_list_devices (panel->client, cc_panel_get_cancellable (CC_PANEL (panel)), &err);
 
   if (!devices)
     {
@@ -533,7 +532,7 @@ cc_bolt_panel_name_owner_changed (CcBoltPanel *panel)
     {
       polkit_permission_new ("org.freedesktop.bolt.manage",
                              NULL,
-                             panel->cancel,
+                             cc_panel_get_cancellable (CC_PANEL (panel)),
                              on_permission_ready,
                              g_object_ref (panel));
     }
@@ -566,7 +565,7 @@ on_bolt_device_added_cb (BoltClient  *cli,
     return;
 
   bus = g_dbus_proxy_get_connection (G_DBUS_PROXY (panel->client));
-  dev = bolt_device_new_for_object_path (bus, path, panel->cancel, &err);
+  dev = bolt_device_new_for_object_path (bus, path, cc_panel_get_cancellable (CC_PANEL (panel)), &err);
 
   if (!dev)
     {
@@ -898,9 +897,6 @@ cc_bolt_panel_dispose (GObject *object)
 {
   CcBoltPanel *panel = CC_BOLT_PANEL (object);
 
-  /* cancel any ongoing operation */
-  g_cancellable_cancel (panel->cancel);
-
   /* Must be destroyed in dispose, not finalize. */
   g_clear_pointer ((GtkWidget **) &panel->device_dialog, gtk_widget_destroy);
 
@@ -993,7 +989,6 @@ cc_bolt_panel_init (CcBoltPanel *panel)
                            G_CALLBACK (on_device_dialog_delete_event_cb),
                            panel, 0);
 
-  panel->cancel = g_cancellable_new ();
-  bolt_client_new_async (panel->cancel, bolt_client_ready, g_object_ref (panel));
+  bolt_client_new_async (cc_panel_get_cancellable (CC_PANEL (panel)), bolt_client_ready, g_object_ref (panel));
 
 }

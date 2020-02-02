@@ -63,7 +63,6 @@ struct _CcWacomPanel
 	CcTabletToolMap  *tablet_tool_map;
 
 	/* DBus */
-	GCancellable  *cancellable;
 	GDBusProxy    *proxy;
 };
 
@@ -253,7 +252,6 @@ cc_wacom_panel_dispose (GObject *object)
 	}
 
 	g_clear_pointer (&self->devices, g_hash_table_unref);
-	g_clear_object (&self->cancellable);
 	g_clear_object (&self->proxy);
 	g_clear_pointer (&self->pages, g_hash_table_unref);
 	g_clear_pointer (&self->stylus_pages, g_hash_table_unref);
@@ -694,8 +692,6 @@ got_osd_proxy_cb (GObject      *source_object,
 	self = CC_WACOM_PANEL (data);
 	self->proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
 
-	g_clear_object (&self->cancellable);
-
 	if (self->proxy == NULL) {
 		g_printerr ("Error creating proxy: %s\n", error->message);
 		return;
@@ -762,15 +758,13 @@ cc_wacom_panel_init (CcWacomPanel *self)
 
 	self->tablet_tool_map = cc_tablet_tool_map_new ();
 
-	self->cancellable = g_cancellable_new ();
-
 	g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
 				  G_DBUS_PROXY_FLAGS_NONE,
 				  NULL,
 				  "org.gnome.Shell",
 				  "/org/gnome/Shell/Wacom",
 				  "org.gnome.Shell.Wacom.PadOsd",
-				  self->cancellable,
+				  cc_panel_get_cancellable (CC_PANEL (self)),
 				  got_osd_proxy_cb,
 				  self);
 

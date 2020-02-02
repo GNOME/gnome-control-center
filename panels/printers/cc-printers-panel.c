@@ -92,11 +92,6 @@ struct _CcPrintersPanel
 
   GtkRevealer  *notification;
   PPDList      *all_ppds_list;
-  GCancellable *get_all_ppds_cancellable;
-  GCancellable *subscription_renew_cancellable;
-  GCancellable *actualize_printers_list_cancellable;
-  GCancellable *cups_status_check_cancellable;
-  GCancellable *get_job_attributes_cancellable;
 
   gchar    *new_printer_name;
   gchar    *new_printer_location;
@@ -277,12 +272,6 @@ cc_printers_panel_dispose (GObject *object)
 {
   CcPrintersPanel *self = CC_PRINTERS_PANEL (object);
 
-  g_cancellable_cancel (self->subscription_renew_cancellable);
-  g_cancellable_cancel (self->actualize_printers_list_cancellable);
-  g_cancellable_cancel (self->cups_status_check_cancellable);
-  g_cancellable_cancel (self->get_all_ppds_cancellable);
-  g_cancellable_cancel (self->get_job_attributes_cancellable);
-
   detach_from_cups_notifier (CC_PRINTERS_PANEL (object));
 
   if (self->deleted_printer_name != NULL)
@@ -303,18 +292,13 @@ cc_printers_panel_dispose (GObject *object)
   g_clear_object (&self->builder);
   g_clear_object (&self->lockdown_settings);
   g_clear_object (&self->permission);
-  g_clear_object (&self->subscription_renew_cancellable);
-  g_clear_object (&self->actualize_printers_list_cancellable);
-  g_clear_object (&self->cups_status_check_cancellable);
   g_clear_handle_id (&self->cups_status_check_id, g_source_remove);
   g_clear_handle_id (&self->remove_printer_timeout_id, g_source_remove);
-  g_clear_object (&self->get_all_ppds_cancellable);
   g_clear_pointer (&self->deleted_printer_name, g_free);
   g_clear_pointer (&self->action, g_variant_unref);
   g_clear_pointer (&self->printer_entries, g_hash_table_destroy);
   g_clear_pointer (&self->all_ppds_list, ppd_list_free);
   free_dests (self);
-  g_clear_object (&self->get_job_attributes_cancellable);
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
 }
@@ -471,7 +455,7 @@ on_cups_notification (GDBusConnection *connection,
       job = g_object_new (PP_TYPE_JOB, "id", job_id, NULL);
       pp_job_get_attributes_async (job,
                                    requested_attrs,
-                                   self->get_job_attributes_cancellable,
+                                   cc_panel_get_cancellable (CC_PANEL (self)),
                                    on_get_job_attributes_cb,
                                    self);
     }
@@ -513,7 +497,7 @@ renew_subscription (gpointer data)
                                     self->subscription_id,
                                     subscription_events,
                                     SUBSCRIPTION_DURATION,
-                                    self->subscription_renew_cancellable,
+                                    cc_panel_get_cancellable (CC_PANEL (self)),
                                     renew_subscription_cb,
                                     data);
 
@@ -581,7 +565,7 @@ attach_to_cups_notifier (gpointer data)
                                     self->subscription_id,
                                     subscription_events,
                                     SUBSCRIPTION_DURATION,
-                                    self->subscription_renew_cancellable,
+                                    cc_panel_get_cancellable (CC_PANEL (self)),
                                     attach_to_cups_notifier_cb,
                                     data);
 }
@@ -886,7 +870,7 @@ actualize_printers_list (CcPrintersPanel *self)
 
   cups = pp_cups_new ();
   pp_cups_get_dests_async (cups,
-                           self->actualize_printers_list_cancellable,
+                           cc_panel_get_cancellable (CC_PANEL (self)),
                            actualize_printers_list_cb,
                            self);
 }
@@ -1134,9 +1118,6 @@ get_all_ppds_async_cb (PPDList  *ppds,
   if (self->pp_new_printer_dialog)
     pp_new_printer_dialog_set_ppd_list (self->pp_new_printer_dialog,
                                         self->all_ppds_list);
-
-  g_object_unref (self->get_all_ppds_cancellable);
-  self->get_all_ppds_cancellable = NULL;
 }
 
 static gboolean
@@ -1223,10 +1204,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
   self->entries_filled = FALSE;
   self->action = NULL;
 
-  self->actualize_printers_list_cancellable = g_cancellable_new ();
-  self->cups_status_check_cancellable = g_cancellable_new ();
-  self->get_job_attributes_cancellable = g_cancellable_new ();
-
   g_type_ensure (CC_TYPE_PERMISSION_INFOBAR);
 
   builder_result = gtk_builder_add_objects_from_resource (self->builder,
@@ -1307,20 +1284,17 @@ cc_printers_panel_init (CcPrintersPanel *self)
 \"org.opensuse.cupspkhelper.mechanism.all-edit\" installed. \
 Please check your installation");
 
-  self->subscription_renew_cancellable = g_cancellable_new ();
-
   self->size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
   actualize_printers_list (self);
   attach_to_cups_notifier (self);
 
-  self->get_all_ppds_cancellable = g_cancellable_new ();
-  get_all_ppds_async (self->get_all_ppds_cancellable,
+  get_all_ppds_async (cc_panel_get_cancellable (CC_PANEL (self)),
                       get_all_ppds_async_cb,
                       self);
 
   cups = pp_cups_new ();
-  pp_cups_connection_test_async (cups, self->cups_status_check_cancellable, connection_test_cb, self);
+  pp_cups_connection_test_async (cups, cc_panel_get_cancellable (CC_PANEL (self)), connection_test_cb, self);
   gtk_container_add (GTK_CONTAINER (self), top_widget);
   gtk_widget_show_all (GTK_WIDGET (self));
 }

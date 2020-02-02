@@ -62,8 +62,6 @@ struct _CcApplicationsPanel
   GAppInfoMonitor *monitor;
   gulong           monitor_id;
 
-  GCancellable    *cancellable;
-
   gchar           *current_app_id;
   gchar           *current_portal_app_id;
 
@@ -673,7 +671,7 @@ add_snap_permissions (CcApplicationsPanel *self,
           g_ptr_array_add (available_slots, g_object_ref (slot));
         }
 
-      row = cc_snap_row_new (self->cancellable, plug, available_slots);
+      row = cc_snap_row_new (cc_panel_get_cancellable (CC_PANEL (self)), plug, available_slots);
       gtk_widget_show (GTK_WIDGET (row));
       gtk_list_box_insert (GTK_LIST_BOX (self->permission_list), GTK_WIDGET (row), index);
       index++;
@@ -1435,7 +1433,7 @@ update_cache_row (CcApplicationsPanel *self,
 {
   g_autoptr(GFile) dir = get_flatpak_app_dir (app_id, "cache");
   g_object_set (self->cache, "info", "...", NULL);
-  file_size_async (dir, self->cancellable, set_cache_size, self);
+  file_size_async (dir, cc_panel_get_cancellable (CC_PANEL (self)), set_cache_size, self);
 }
 
 static void
@@ -1469,7 +1467,7 @@ update_data_row (CcApplicationsPanel *self,
   g_autoptr(GFile) dir = get_flatpak_app_dir (app_id, "data");
 
   g_object_set (self->data, "info", "...", NULL);
-  file_size_async (dir, self->cancellable, set_data_size, self);
+  file_size_async (dir, cc_panel_get_cancellable (CC_PANEL (self)), set_data_size, self);
 }
 
 static void
@@ -1499,7 +1497,7 @@ clear_cache_cb (CcApplicationsPanel *self)
     return;
 
   dir = get_flatpak_app_dir (self->current_app_id, "cache");
-  file_remove_async (dir, self->cancellable, cache_cleared, self);
+  file_remove_async (dir, cc_panel_get_cancellable (CC_PANEL (self)), cache_cleared, self);
 }
 
 static void
@@ -1747,8 +1745,6 @@ cc_applications_panel_dispose (GObject *object)
   g_clear_object (&self->monitor);
   g_clear_object (&self->perm_store);
 
-  g_cancellable_cancel (self->cancellable);
-
   G_OBJECT_CLASS (cc_applications_panel_parent_class)->dispose (object);
 }
 
@@ -1761,7 +1757,6 @@ cc_applications_panel_finalize (GObject *object)
   g_clear_object (&self->location_settings);
   g_clear_object (&self->privacy_settings);
   g_clear_object (&self->search_settings);
-  g_clear_object (&self->cancellable);
 
   g_free (self->current_app_id);
   g_free (self->current_portal_app_id);
@@ -1924,8 +1919,6 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->cancellable = g_cancellable_new ();
-
   provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
   gtk_css_provider_load_from_resource (GTK_CSS_PROVIDER (provider),
                                        "/org/gnome/control-center/applications/cc-applications-panel.css");
@@ -1986,7 +1979,7 @@ cc_applications_panel_init (CcApplicationsPanel *self)
                             "org.freedesktop.impl.portal.PermissionStore",
                             "/org/freedesktop/impl/portal/PermissionStore",
                             "org.freedesktop.impl.portal.PermissionStore",
-                            self->cancellable,
+                            cc_panel_get_cancellable (CC_PANEL (self)),
                             on_perm_store_ready,
                             self);
 

@@ -41,8 +41,6 @@ struct _CcBluetoothPanel {
 	BluetoothSettingsWidget *settings_widget;
 	GtkStack                *stack;
 
-	GCancellable            *cancellable;
-
 	/* Killswitch */
 	GDBusProxy              *rfkill;
 	GDBusProxy              *properties;
@@ -66,9 +64,6 @@ cc_bluetooth_panel_finalize (GObject *object)
 	CcBluetoothPanel *self;
 
 	self = CC_BLUETOOTH_PANEL (object);
-
-	g_cancellable_cancel (self->cancellable);
-	g_clear_object (&self->cancellable);
 
 	g_clear_object (&self->properties);
 	g_clear_object (&self->rfkill);
@@ -101,7 +96,7 @@ enable_switch_changed_cb (CcBluetoothPanel *self)
 						 g_variant_new_boolean (!state)),
 			   G_DBUS_CALL_FLAGS_NONE,
 			   -1,
-			   self->cancellable,
+			   cc_panel_get_cancellable (CC_PANEL (self)),
 			   NULL, NULL);
 }
 
@@ -193,7 +188,7 @@ airplane_mode_off_button_clicked_cb (CcBluetoothPanel *self)
 						 g_variant_new_boolean (FALSE)),
 			   G_DBUS_CALL_FLAGS_NONE,
 			   -1,
-			   self->cancellable,
+			   cc_panel_get_cancellable (CC_PANEL (self)),
 			   NULL, NULL);
 }
 
@@ -245,8 +240,6 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	g_resources_register (cc_bluetooth_get_resource ());
 
 	gtk_widget_init_template (GTK_WIDGET (self));
-
-	self->cancellable = g_cancellable_new ();
 
 	/* RFKill */
 	self->rfkill = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
