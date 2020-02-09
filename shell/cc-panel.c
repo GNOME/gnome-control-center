@@ -42,12 +42,6 @@
 
 typedef struct
 {
-  gchar    *id;
-  gchar    *display_name;
-  gchar    *category;
-  gchar    *current_location;
-
-  gboolean      is_active;
   CcShell      *shell;
   GCancellable *cancellable;
 } CcPanelPrivate;
@@ -145,9 +139,6 @@ static void
 cc_panel_finalize (GObject *object)
 {
   CcPanelPrivate *priv = cc_panel_get_instance_private (CC_PANEL (object));
-
-  g_clear_pointer (&priv->id, g_free);
-  g_clear_pointer (&priv->display_name, g_free);
 
   g_cancellable_cancel (priv->cancellable);
   g_clear_object (&priv->cancellable);
