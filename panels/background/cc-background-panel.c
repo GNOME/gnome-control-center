@@ -82,23 +82,11 @@ get_current_background (CcBackgroundPanel *panel,
 
 static void
 update_preview (CcBackgroundPanel *panel,
-                GSettings         *settings,
-                CcBackgroundItem  *item)
+                GSettings         *settings)
 {
   CcBackgroundItem *current_background;
 
   current_background = get_current_background (panel, settings);
-
-  if (item && current_background)
-    {
-      g_object_unref (current_background);
-      current_background = cc_background_item_copy (item);
-      if (settings == panel->settings)
-        panel->current_background = current_background;
-      else
-        panel->current_lock_background = current_background;
-      cc_background_item_load (current_background, NULL);
-    }
 
   if (settings == panel->settings)
     cc_background_preview_set_item (panel->desktop_preview, current_background);
@@ -337,7 +325,7 @@ on_settings_changed (GSettings         *settings,
                      CcBackgroundPanel *panel)
 {
   reload_current_bg (panel, settings);
-  update_preview (panel, settings, NULL);
+  update_preview (panel, settings);
 }
 
 static void
@@ -359,9 +347,9 @@ cc_background_panel_init (CcBackgroundPanel *panel)
 
   /* Load the backgrounds */
   reload_current_bg (panel, panel->settings);
-  update_preview (panel, panel->settings, NULL);
+  update_preview (panel, panel->settings);
   reload_current_bg (panel, panel->lock_settings);
-  update_preview (panel, panel->lock_settings, NULL);
+  update_preview (panel, panel->lock_settings);
 
   /* Background settings */
   g_signal_connect (panel->settings, "changed", G_CALLBACK (on_settings_changed), panel);
