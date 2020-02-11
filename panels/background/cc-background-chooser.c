@@ -181,26 +181,10 @@ on_delete_background_clicked_cb (GtkButton           *button,
 }
 
 static void
-on_selection_desktop_lock_clicked_cb (GtkButton           *button,
-                                      CcBackgroundChooser *self)
-{
-  emit_background_chosen (self, CC_BACKGROUND_SELECTION_DESKTOP | CC_BACKGROUND_SELECTION_LOCK_SCREEN);
-  gtk_popover_popdown (self->selection_popover);
-}
-
-static void
 on_selection_desktop_clicked_cb (GtkButton           *button,
                                  CcBackgroundChooser *self)
 {
   emit_background_chosen (self, CC_BACKGROUND_SELECTION_DESKTOP);
-  gtk_popover_popdown (self->selection_popover);
-}
-
-static void
-on_selection_lock_clicked_cb (GtkButton           *button,
-                              CcBackgroundChooser *self)
-{
-  emit_background_chosen (self, CC_BACKGROUND_SELECTION_LOCK_SCREEN);
   gtk_popover_popdown (self->selection_popover);
 }
 
@@ -320,9 +304,7 @@ cc_background_chooser_class_init (CcBackgroundChooserClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, on_delete_background_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_item_activated_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_selection_desktop_lock_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_selection_desktop_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_selection_lock_clicked_cb);
 }
 
 static void
