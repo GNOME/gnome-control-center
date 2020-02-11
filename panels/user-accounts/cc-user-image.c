@@ -22,6 +22,7 @@
 #include <act/act.h>
 #include <sys/stat.h>
 
+#include "cc-avatar-chooser.h"
 #include "user-utils.h"
 
 struct _CcUserImage {
@@ -39,7 +40,6 @@ render_user_icon (ActUser *user,
 {
         g_autoptr(GdkPixbuf) source_pixbuf = NULL;
         GdkPixbuf    *pixbuf = NULL;
-        GError       *error;
         const gchar  *icon_file;
         cairo_surface_t *surface = NULL;
 
@@ -61,17 +61,13 @@ render_user_icon (ActUser *user,
                 goto out;
         }
 
-        error = NULL;
-        pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-                                           "avatar-default",
-                                           icon_size * scale,
-                                           GTK_ICON_LOOKUP_FORCE_SIZE,
-                                           &error);
-        if (error) {
-                g_warning ("%s", error->message);
-                g_error_free (error);
+        if (source_pixbuf != NULL) {
+                g_object_unref (source_pixbuf);
         }
 
+        source_pixbuf = generate_default_avatar (user, AVATAR_CHOOSER_PIXEL_SIZE);
+        if (source_pixbuf)
+            pixbuf = round_image (source_pixbuf);
  out:
 
         if (pixbuf != NULL) {
