@@ -231,7 +231,6 @@ set_background (CcBackgroundPanel *panel,
 static void
 on_chooser_background_chosen_cb (CcBackgroundChooser        *chooser,
                                  CcBackgroundItem           *item,
-                                 CcBackgroundSelectionFlags  flags,
                                  CcBackgroundPanel          *self)
 {
   set_background (self, item);
