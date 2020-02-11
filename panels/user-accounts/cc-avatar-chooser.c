@@ -42,7 +42,6 @@
 #include "user-utils.h"
 
 #define ROW_SPAN 5
-#define AVATAR_CHOOSER_PIXEL_SIZE 80
 #define PIXEL_SIZE 512
 
 struct _CcAvatarChooser {

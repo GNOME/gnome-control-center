@@ -23,6 +23,8 @@
 #include <gtk/gtk.h>
 #include <act/act.h>
 
+#define AVATAR_CHOOSER_PIXEL_SIZE 80
+
 G_BEGIN_DECLS
 
 #define CC_TYPE_AVATAR_CHOOSER (cc_avatar_chooser_get_type())
