@@ -182,16 +182,18 @@ create_save_dir (void)
 
 static void
 set_background (CcBackgroundPanel *panel,
-                GSettings         *settings,
                 CcBackgroundItem  *item)
 {
   GDesktopBackgroundStyle style;
   CcBackgroundItemFlags flags;
+  GSettings *settings;
   g_autofree gchar *filename = NULL;
   const char *uri;
 
   if (item == NULL)
     return;
+
+  settings = panel->settings;
 
   uri = cc_background_item_get_uri (item);
   flags = cc_background_item_get_flags (item);
@@ -232,12 +234,7 @@ on_chooser_background_chosen_cb (CcBackgroundChooser        *chooser,
                                  CcBackgroundSelectionFlags  flags,
                                  CcBackgroundPanel          *self)
 {
-
-  if (flags & CC_BACKGROUND_SELECTION_DESKTOP)
-    set_background (self, self->settings, item);
-
-  if (flags & CC_BACKGROUND_SELECTION_LOCK_SCREEN)
-    set_background (self, self->lock_settings, item);
+  set_background (self, item);
 }
 
 static void
