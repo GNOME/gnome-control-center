@@ -24,13 +24,6 @@
 
 G_BEGIN_DECLS
 
-typedef enum
-{
-  CC_BACKGROUND_SELECTION_NONE        = 0,
-  CC_BACKGROUND_SELECTION_DESKTOP     = 1 << 0,
-  CC_BACKGROUND_SELECTION_LOCK_SCREEN = 1 << 1,
-} CcBackgroundSelectionFlags;
-
 #define CC_TYPE_BACKGROUND_CHOOSER (cc_background_chooser_get_type())
 G_DECLARE_FINAL_TYPE (CcBackgroundChooser, cc_background_chooser, CC, BACKGROUND_CHOOSER, GtkBox)
 
