@@ -169,3 +169,19 @@ cc_grd_on_vnc_password_entry_notify_text (GtkEntry   *entry,
                          cancellable, on_password_stored, entry,
                          NULL);
 }
+
+void
+cc_grd_update_password_entry (GtkEntry *entry)
+{
+  g_autoptr(GError) error = NULL;
+  g_autofree gchar *password = NULL;
+
+  password = secret_password_lookup_sync (CC_GRD_VNC_PASSWORD_SCHEMA,
+                                          NULL, &error,
+                                          NULL);
+  if (error)
+    g_warning ("Failed to get password: %s", error->message);
+
+  if (password)
+    gtk_entry_set_text (entry, password);
+}
