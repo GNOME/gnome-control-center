@@ -1106,6 +1106,8 @@ cc_sharing_panel_setup_screen_sharing_dialog_gnome_remote_desktop (CcSharingPane
   g_signal_connect (priv->screen_sharing_dialog, "hide",
                     G_CALLBACK (screen_sharing_hide_cb), self);
 
+  cc_grd_update_password_entry (WID ("remote-control-password-entry"));
+
   /* accept at most 8 bytes in password entry */
   g_signal_connect (WID ("remote-control-password-entry"), "insert-text",
                     G_CALLBACK (screen_sharing_password_insert_text_cb), self);
