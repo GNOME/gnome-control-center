@@ -57,8 +57,7 @@ enum
 static guint signals [N_SIGNALS];
 
 static void
-emit_background_chosen (CcBackgroundChooser        *self,
-                        CcBackgroundSelectionFlags  flags)
+emit_background_chosen (CcBackgroundChooser *self)
 {
   g_autoptr(GList) list = NULL;
   CcBackgroundItem *item;
@@ -70,7 +69,7 @@ emit_background_chosen (CcBackgroundChooser        *self,
 
   item = g_object_get_data (list->data, "item");
 
-  g_signal_emit (self, signals[BACKGROUND_CHOSEN], 0, item, flags);
+  g_signal_emit (self, signals[BACKGROUND_CHOSEN], 0, item);
 
   gtk_flow_box_unselect_all (flowbox);
 }
@@ -184,7 +183,7 @@ static void
 on_selection_desktop_clicked_cb (GtkButton           *button,
                                  CcBackgroundChooser *self)
 {
-  emit_background_chosen (self, CC_BACKGROUND_SELECTION_DESKTOP);
+  emit_background_chosen (self);
   gtk_popover_popdown (self->selection_popover);
 }
 
@@ -290,9 +289,8 @@ cc_background_chooser_class_init (CcBackgroundChooserClass *klass)
                                              G_SIGNAL_RUN_FIRST,
                                              0, NULL, NULL, NULL,
                                              G_TYPE_NONE,
-                                             2,
-                                             CC_TYPE_BACKGROUND_ITEM,
-                                             G_TYPE_INT);
+                                             1,
+                                             CC_TYPE_BACKGROUND_ITEM);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/background/cc-background-chooser.ui");
 
