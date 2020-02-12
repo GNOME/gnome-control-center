@@ -206,7 +206,6 @@ on_usb_protection_props_changed (CcLockPanel *self,
     gtk_widget_show (GTK_WIDGET (self->usb_protection_row));
   else
     gtk_widget_hide (GTK_WIDGET (self->usb_protection_row));
-
 }
 
 static void
