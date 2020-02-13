@@ -1,6 +1,6 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*-
  *
- * Copyright (C) 2017 Mohammed Sadiq <sadiq@sadiqpk.org>
+ * Copyright (C) 2019 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,19 +17,14 @@
  *
  */
 
-#ifndef CC_INFO_DEFAULT_APPS_PANEL_H
-#define CC_INFO_DEFAULT_APPS_PANEL_H
+#pragma once
 
-#include <shell/cc-panel.h>
+#include <glib.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_INFO_DEFAULT_APPS_PANEL (cc_info_default_apps_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcInfoDefaultAppsPanel, cc_info_default_apps_panel, CC, INFO_DEFAULT_APPS_PANEL, CcPanel)
+gchar      *cc_os_release_get_value  (const gchar *key);
 
-GtkWidget *cc_info_default_apps_panel_new (void);
-
+GHashTable *cc_os_release_get_values (void);
 
 G_END_DECLS
-
-#endif /* CC_INFO_DEFAULT_APPS_PANEL_H */

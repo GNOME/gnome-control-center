@@ -537,6 +537,21 @@ notify_fold_cb (HdyLeaflet *leaflet,
 }
 
 static void
+on_main_leaflet_fold_changed_cb (CcWindow *self)
+{
+  GtkSelectionMode selection_mode;
+
+  g_assert (CC_IS_WINDOW (self));
+
+  selection_mode = GTK_SELECTION_SINGLE;
+
+  if (hdy_leaflet_get_fold (HDY_LEAFLET (self->main_leaflet)) == HDY_FOLD_FOLDED)
+    selection_mode = GTK_SELECTION_NONE;
+
+  cc_panel_list_set_selection_mode (CC_PANEL_LIST (self->panel_list), selection_mode);
+}
+
+static void
 show_panel_cb (CcPanelList *panel_list,
                const gchar *panel_id,
                CcWindow    *self)
@@ -917,6 +932,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, gdk_window_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, notify_header_visible_child_cb);
   gtk_widget_class_bind_template_callback (widget_class, notify_fold_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_main_leaflet_fold_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_development_warning_dialog_responded_cb);
   gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);

@@ -64,8 +64,6 @@ deps = common_deps + [
   dependency('smbclient')
 ]
 
-cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
-
 printers_panel_lib = static_library(
   cappletname,
   sources: sources,

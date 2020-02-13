@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <template class="CcSearchLocationsDialog" parent="GtkDialog">
+  <template class="CcSearchLocationsDialog" parent="HdyDialog">
     <property name="can_focus">False</property>
     <property name="default_height">400</property>
-    <property name="default_width">400</property>
+    <property name="default_width">360</property>
     <property name="modal">True</property>
     <property name="title" translatable="yes">Search Locations</property>
     <property name="type_hint">dialog</property>
@@ -23,6 +23,15 @@
                 <property name="visible">True</property>
                 <property name="vexpand">True</property>
                 <property name="border-width">35</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="wrap">True</property>
+                    <property name="margin-bottom">35</property>
+                    <property name="label" translatable="yes">Folders which are searched by system applications, such as Files, Photos and Videos.</property>
+                  </object>
+                </child>
                 <child>
                   <object class="GtkListBox" id="places_list">
                     <property name="visible">True</property>
@@ -51,6 +60,15 @@
                     <property name="visible">True</property>
                     <property name="vexpand">True</property>
                     <property name="border-width">35</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="wrap">True</property>
+                        <property name="margin-bottom">35</property>
+                        <property name="label" translatable="yes">Folders which are searched by system applications, such as Files, Photos and Videos.</property>
+                      </object>
+                    </child>
                     <child>
                       <object class="GtkListBox" id="bookmarks_list">
                         <property name="visible">True</property>
@@ -82,6 +100,14 @@
                     <property name="vexpand">True</property>
                     <property name="orientation">vertical</property>
                     <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="wrap">True</property>
+                        <property name="margin">35</property>
+                        <property name="label" translatable="yes">Folders which are searched by system applications, such as Files, Photos and Videos.</property>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkListBox" id="others_list">
                         <property name="visible">True</property>
                         <child>
@@ -99,7 +125,7 @@
                         <property name="visible">True</property>
                         <property name="halign">center</property>
                         <property name="margin">5</property>
-                        <signal name="clicked" handler="add_button_clicked" swapped="no"/>
+                        <signal name="clicked" handler="add_button_clicked" object="CcSearchLocationsDialog" swapped="yes"/>
                         <child>
                           <object class="GtkImage">
                             <property name="visible">True</property>

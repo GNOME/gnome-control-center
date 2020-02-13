@@ -36,6 +36,10 @@ void             panel_set_device_status                       (GtkBuilder *buil
                                                                 const gchar *label_name,
                                                                 NMDevice *nm_device,
                                                                 const gchar *speed);
+void             panel_set_device_row_status                   (GtkBuilder *builder,
+                                                                const gchar *row_name,
+                                                                NMDevice *nm_device,
+                                                                const gchar *speed);
 gboolean         panel_set_device_widget_details               (GtkBuilder *builder,
                                                                 const gchar *widget_suffix,
                                                                 const gchar *value);

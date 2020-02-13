@@ -53,12 +53,14 @@ common_sources = files(
 # Generated files #
 ###################
 
+generated_sources = files()
+
 # Debug
 debug_conf = configuration_data()
 debug_conf.set('BUGREPORT_URL', 'https://gitlab.gnome.org/GNOME/' + meson.project_name() + '/issues/new')
 debug_conf.set10('ENABLE_TRACING', enable_tracing)
 
-common_sources += configure_file(
+generated_sources += configure_file(
           input : 'cc-debug.h.in',
          output : 'cc-debug.h',
   configuration : debug_conf
@@ -71,13 +73,14 @@ resource_data = files(
   'help-overlay.ui',
 )
 
-common_sources += gnome.compile_resources(
+generated_sources += gnome.compile_resources(
        'resources',
   meson.project_name() + '.gresource.xml',
      dependencies : resource_data,
            export : true
 )
 
+common_sources += generated_sources
 
 ############
 # libshell #
@@ -92,6 +95,7 @@ libshell = static_library(
 )
 
 libshell_dep = declare_dependency(
+              sources : generated_sources,
   include_directories : top_inc,
             link_with : libshell
 )
@@ -159,6 +163,7 @@ libtestshell = static_library(
             link_with : panels_libs,
 )
 libtestshell_dep = declare_dependency(
+              sources : generated_sources,
   include_directories : top_inc,
             link_with : libtestshell
 )

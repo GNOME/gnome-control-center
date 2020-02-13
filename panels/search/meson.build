@@ -19,12 +19,13 @@ i18n.merge_file(
 
 sources = files(
   'cc-search-panel.c',
-  'cc-search-locations-dialog.c'
+  'cc-search-locations-dialog.c',
+  'cc-search-panel-row.c'
 )
 
 resource_data = files(
+  'cc-search-locations-dialog.ui',
   'cc-search-panel.ui',
-  'search-locations-dialog.ui',
 )
 
 sources += gnome.compile_resources(
@@ -36,8 +37,7 @@ sources += gnome.compile_resources(
 )
 
 cflags += [
-  '-DDATADIR="@0@"'.format(control_center_datadir),
-  '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
+  '-DDATADIR="@0@"'.format(control_center_datadir)
 ]
 
 panels_libs += static_library(

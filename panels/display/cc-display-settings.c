@@ -27,10 +27,6 @@
 #include "cc-display-settings.h"
 #include "cc-display-config.h"
 
-/* The minimum supported size a monitor may have */
-#define MINIMUM_WIDTH 740
-#define MINIMUM_HEIGHT 530
-
 #define MAX_SCALE_BUTTONS 5
 
 struct _CcDisplaySettings
@@ -191,16 +187,6 @@ get_frequency_string (CcDisplayMode *mode)
   return g_strdup_printf (_("%.2lf Hz"), cc_display_mode_get_freq_f (mode));
 }
 
-static gboolean
-display_mode_supported_at_scale (CcDisplayMode *mode, double scale)
-{
-  int width, height;
-
-  cc_display_mode_get_resolution (mode, &width, &height);
-
-  return round (width / scale) >= MINIMUM_WIDTH && round (height / scale) >= MINIMUM_HEIGHT;
-}
-
 static double
 round_scale_for_ui (double scale)
 {
@@ -244,6 +230,9 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   GList *item;
   gint width, height;
   CcDisplayMode *current_mode;
+  GtkRadioButton *group = NULL;
+  gint buttons = 0;
+  const gdouble *scales, *scale;
 
   self->idle_udpate_id = 0;
 
@@ -368,7 +357,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       CcDisplayMode *mode = CC_DISPLAY_MODE (item->data);
 
       /* Exclude unusable low resolutions */
-      if (!display_mode_supported_at_scale (mode, 1.0))
+      if (!cc_display_config_is_scaled_mode_valid (self->config, mode, 1.0))
         continue;
 
       cc_display_mode_get_resolution (mode, &w, &h);
@@ -399,55 +388,46 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
     }
 
 
-  /* Update scale row. */
+  /* Scale row is usually shown. */
   gtk_container_foreach (GTK_CONTAINER (self->scale_bbox), (GtkCallback) gtk_widget_destroy, NULL);
-  if (!cc_display_config_is_cloning (self->config))
+  scales = cc_display_mode_get_supported_scales (current_mode);
+  for (scale = scales; *scale != 0.0; scale++)
     {
-      GtkRadioButton *group = NULL;
-      gint buttons = 0;
-      const gdouble *scales, *scale;
+      g_autofree gchar *scale_str = NULL;
+      GtkWidget *scale_btn;
 
-      scales = cc_display_mode_get_supported_scales (current_mode);
-      for (scale = scales; *scale != 0.0; scale++)
-        {
-          g_autofree gchar *scale_str = NULL;
-          GtkWidget *scale_btn;
+      if (!cc_display_config_is_scaled_mode_valid (self->config,
+                                                   cc_display_monitor_get_mode (self->selected_output),
+                                                   *scale) &&
+          cc_display_monitor_get_scale (self->selected_output) != *scale)
+        continue;
 
-          if (!display_mode_supported_at_scale (current_mode, *scale) &&
-              cc_display_monitor_get_scale (self->selected_output) != *scale)
-            continue;
+      scale_str = make_scale_string (*scale);
 
-          scale_str = make_scale_string (*scale);
+      scale_btn = gtk_radio_button_new_with_label_from_widget (group, scale_str);
+      if (!group)
+        group = GTK_RADIO_BUTTON (scale_btn);
+      gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (scale_btn), FALSE);
+      g_object_set_data_full (G_OBJECT (scale_btn),
+                              "scale",
+                              g_memdup (scale, sizeof (gdouble)),
+                              g_free);
+      gtk_widget_show (scale_btn);
+      gtk_container_add (GTK_CONTAINER (self->scale_bbox), scale_btn);
+      g_signal_connect_object (scale_btn,
+                               "notify::active",
+                               G_CALLBACK (on_scale_btn_active_changed_cb),
+                               self, 0);
 
-          scale_btn = gtk_radio_button_new_with_label_from_widget (group, scale_str);
-          if (!group)
-            group = GTK_RADIO_BUTTON (scale_btn);
-          gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (scale_btn), FALSE);
-          g_object_set_data_full (G_OBJECT (scale_btn),
-                                  "scale",
-                                  g_memdup (scale, sizeof (gdouble)),
-                                  g_free);
-          gtk_widget_show (scale_btn);
-          gtk_container_add (GTK_CONTAINER (self->scale_bbox), scale_btn);
-          g_signal_connect_object (scale_btn,
-                                   "notify::active",
-                                   G_CALLBACK (on_scale_btn_active_changed_cb),
-                                   self, 0);
+      if (cc_display_monitor_get_scale (self->selected_output) == *scale)
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (scale_btn), TRUE);
 
-          if (cc_display_monitor_get_scale (self->selected_output) == *scale)
-            gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (scale_btn), TRUE);
-
-          buttons += 1;
-          if (buttons >= MAX_SCALE_BUTTONS)
-            break;
-        }
-
-      gtk_widget_set_visible (self->scale_row, buttons > 1);
+      buttons += 1;
+      if (buttons >= MAX_SCALE_BUTTONS)
+        break;
     }
-  else
-    {
-      gtk_widget_set_visible (self->scale_row, FALSE);
-    }
+
+  gtk_widget_set_visible (self->scale_row, buttons > 1);
 
   gtk_widget_set_visible (self->underscanning_row,
                           cc_display_monitor_supports_underscanning (self->selected_output) &&

@@ -21,40 +21,20 @@
 
 #include <config.h>
 
-#include "cc-info-resources.h"
-#include "info-cleanup.h"
-
-#include <glib.h>
-#include <glib/gi18n.h>
-#include <gio/gio.h>
-#include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
-
-#include <glibtop/fsusage.h>
-#include <glibtop/mountlist.h>
-#include <glibtop/mem.h>
-#include <glibtop/sysinfo.h>
-
-#ifdef GDK_WINDOWING_WAYLAND
-#include <gdk/gdkwayland.h>
-#endif
-#ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
-#endif
-
-#include "cc-info-default-apps-panel.h"
+#include "cc-default-apps-panel.h"
+#include "cc-default-apps-resources.h"
 
 typedef struct
 {
   const char *content_type;
   gint label_offset;
-  /* A pattern used to filter supported mime types
+  /* Patterns used to filter supported mime types
      when changing preferred applications. NULL
      means no other types should be changed */
   const char *extra_type_filter;
 } DefaultAppData;
 
-struct _CcInfoDefaultAppsPanel
+struct _CcDefaultAppsPanel
 {
   CcPanel    parent_instance;
 
@@ -69,11 +49,11 @@ struct _CcInfoDefaultAppsPanel
 };
 
 
-G_DEFINE_TYPE (CcInfoDefaultAppsPanel, cc_info_default_apps_panel, CC_TYPE_PANEL)
+G_DEFINE_TYPE (CcDefaultAppsPanel, cc_default_apps_panel, CC_TYPE_PANEL)
 
 static void
-default_app_changed (GtkAppChooserButton    *button,
-                     CcInfoDefaultAppsPanel *self)
+default_app_changed (GtkAppChooserButton *button,
+                     CcDefaultAppsPanel  *self)
 {
   g_autoptr(GAppInfo) info = NULL;
   g_autoptr(GError) error = NULL;
@@ -96,17 +76,32 @@ default_app_changed (GtkAppChooserButton    *button,
 
   if (app_data->extra_type_filter)
     {
+      g_auto(GStrv) entries = NULL;
       const char *const *mime_types;
-      g_autoptr(GPatternSpec) pattern = NULL;
+      g_autoptr(GPtrArray) patterns = NULL;
 
-      pattern = g_pattern_spec_new (app_data->extra_type_filter);
+      entries = g_strsplit (app_data->extra_type_filter, ";", -1);
+      patterns = g_ptr_array_new_with_free_func ((GDestroyNotify) g_pattern_spec_free);
+      for (i = 0; entries[i] != NULL; i++)
+        {
+          GPatternSpec *pattern = g_pattern_spec_new (entries[i]);
+          g_ptr_array_add (patterns, pattern);
+        }
+
       mime_types = g_app_info_get_supported_types (info);
-
       for (i = 0; mime_types && mime_types[i]; i++)
         {
+          int j;
+          gboolean matched = FALSE;
           g_autoptr(GError) local_error = NULL;
 
-          if (!g_pattern_match_string (pattern, mime_types[i]))
+          for (j = 0; j < patterns->len; j++)
+            {
+              GPatternSpec *pattern = g_ptr_array_index (patterns, j);
+              if (g_pattern_match_string (pattern, mime_types[i]))
+                matched = TRUE;
+            }
+          if (!matched)
             continue;
 
           if (g_app_info_set_as_default_for_type (info, mime_types[i], &local_error) == FALSE)
@@ -124,14 +119,14 @@ default_app_changed (GtkAppChooserButton    *button,
     }
 }
 
-#define OFFSET(x)             (G_STRUCT_OFFSET (CcInfoDefaultAppsPanel, x))
+#define OFFSET(x)             (G_STRUCT_OFFSET (CcDefaultAppsPanel, x))
 #define WIDGET_FROM_OFFSET(x) (G_STRUCT_MEMBER (GtkWidget*, self, x))
 
 static void
-info_panel_setup_default_app (CcInfoDefaultAppsPanel *self,
-                              DefaultAppData         *data,
-                              guint                   left_attach,
-                              guint                   top_attach)
+info_panel_setup_default_app (CcDefaultAppsPanel *self,
+                              DefaultAppData     *data,
+                              guint               left_attach,
+                              guint               top_attach)
 {
   GtkWidget *button;
   GtkWidget *label;
@@ -158,11 +153,7 @@ info_panel_setup_default_app (CcInfoDefaultAppsPanel *self,
 }
 
 static DefaultAppData preferred_app_infos[] = {
-  /* for web, we need to support text/html,
-     application/xhtml+xml and x-scheme-handler/https,
-     hence the "*" pattern
-  */
-  { "x-scheme-handler/http", OFFSET (web_label), "*" },
+  { "x-scheme-handler/http", OFFSET (web_label), "text/html;application/xhtml+xml;x-scheme-handler/https" },
   { "x-scheme-handler/mailto", OFFSET (mail_label), NULL },
   { "text/calendar", OFFSET (calendar_label), NULL },
   { "audio/x-vorbis+ogg", OFFSET (music_label), "audio/*" },
@@ -171,7 +162,7 @@ static DefaultAppData preferred_app_infos[] = {
 };
 
 static void
-info_panel_setup_default_apps (CcInfoDefaultAppsPanel *self)
+info_panel_setup_default_apps (CcDefaultAppsPanel *self)
 {
   int i;
 
@@ -183,24 +174,24 @@ info_panel_setup_default_apps (CcInfoDefaultAppsPanel *self)
 }
 
 static void
-cc_info_default_apps_panel_class_init (CcInfoDefaultAppsPanelClass *klass)
+cc_default_apps_panel_class_init (CcDefaultAppsPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info/cc-info-default-apps-panel.ui");
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, default_apps_grid);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, web_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, mail_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, calendar_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, music_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, video_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoDefaultAppsPanel, photos_label);
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/default-apps/cc-default-apps-panel.ui");
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, default_apps_grid);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, web_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, mail_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, calendar_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, music_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, video_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, photos_label);
 }
 
 static void
-cc_info_default_apps_panel_init (CcInfoDefaultAppsPanel *self)
+cc_default_apps_panel_init (CcDefaultAppsPanel *self)
 {
-  g_resources_register (cc_info_get_resource ());
+  g_resources_register (cc_default_apps_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -208,8 +199,8 @@ cc_info_default_apps_panel_init (CcInfoDefaultAppsPanel *self)
 }
 
 GtkWidget *
-cc_info_default_apps_panel_new (void)
+cc_default_apps_panel_new (void)
 {
-  return g_object_new (CC_TYPE_INFO_DEFAULT_APPS_PANEL,
+  return g_object_new (CC_TYPE_DEFAULT_APPS_PANEL,
                        NULL);
 }

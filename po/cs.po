@@ -24,16 +24,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-04-18 15:26+0000\n"
-"PO-Revision-Date: 2019-04-18 21:38+0200\n"
-"Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
+"POT-Creation-Date: 2019-09-01 21:15+0000\n"
+"PO-Revision-Date: 2019-09-03 19:10+0200\n"
+"Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Gtranslator 2.91.7\n"
 "X-Project-Style: gnome\n"
 
 #: panels/applications/cc-applications-panel.c:561
@@ -52,9 +52,9 @@ msgid "Session Bus"
 msgstr "Sběrnice sezení"
 
 #: panels/applications/cc-applications-panel.c:568
-#: panels/power/cc-power-panel.c:2453 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2477 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525 shell/cc-panel-list.ui:45
-#: shell/cc-window.c:268
+#: shell/cc-window.c:273
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -72,13 +72,9 @@ msgstr "Síť"
 msgid "Has network access"
 msgstr "Má přístup k síti"
 
-#. translators: "Home" is used in place of the Pictures
-#. * directory in the string below when XDG_PICTURES_DIR is
-#. * undefined
 #: panels/applications/cc-applications-panel.c:579
 #: panels/applications/cc-applications-panel.c:581
-#: panels/background/cc-background-chooser-dialog.c:536
-#: panels/search/cc-search-locations-dialog.c:286
+#: panels/search/cc-search-locations-dialog.c:292
 msgid "Home"
 msgstr "Domů"
 
@@ -93,8 +89,8 @@ msgid "File System"
 msgstr "Souborový systém"
 
 #: panels/applications/cc-applications-panel.c:591
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:272
-#: shell/cc-window.c:935 shell/cc-window.ui:131
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:277
+#: shell/cc-window.c:975 shell/cc-window.ui:132
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Nastavení"
@@ -221,7 +217,7 @@ msgstr "Kamera"
 #: panels/keyboard/shortcut-editor.ui:96 panels/network/network-proxy.ui:123
 #: panels/network/network-wifi.ui:781 panels/network/network-wifi.ui:1058
 #: panels/user-accounts/um-fingerprint-dialog.c:211
-#: subprojects/gvc/gvc-mixer-control.c:1864
+#: subprojects/gvc/gvc-mixer-control.c:1876
 msgid "Disabled"
 msgstr "Vypnuto"
 
@@ -265,7 +261,7 @@ msgstr "Systémové funkce používané touto aplikací."
 #: panels/applications/cc-applications-panel.ui:230
 #: panels/applications/cc-applications-panel.ui:236
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:161
+#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:162
 msgid "Search"
 msgstr "Hledání"
 
@@ -313,7 +309,7 @@ msgid "No results found"
 msgstr "Nebyly nalezeny žádné výsledky"
 
 #: panels/applications/cc-applications-panel.ui:474
-#: panels/keyboard/cc-keyboard-panel.ui:175 shell/cc-panel-list.ui:201
+#: panels/keyboard/cc-keyboard-panel.ui:157 shell/cc-panel-list.ui:201
 msgid "Try a different search"
 msgstr "Zkuste jiné hledání"
 
@@ -352,129 +348,87 @@ msgstr "Řídí různorodá oprávnění a nastavení aplikací"
 msgid "application;flatpak;permission;setting;"
 msgstr "aplikace;flatpak;oprávnění;nastavení;"
 
-#: panels/background/background.ui:49
-msgid "_Background"
-msgstr "_Pozadí"
+#: panels/background/cc-background-chooser.c:348
+msgid "Select a picture"
+msgstr "Vyběr obrázku"
 
-#. This refers to a slideshow background
-#: panels/background/background.ui:99 panels/background/background.ui:212
-msgid "Changes throughout the day"
-msgstr "Měnit v průběhu dne"
-
-#. To translators: This is a noun, not a verb
-#: panels/background/background.ui:162
-msgid "_Lock Screen"
-msgstr "U_zamknutá obrazovka"
-
-#: panels/background/background.ui:268
-msgctxt "background, style"
-msgid "Tile"
-msgstr "Dlaždice"
-
-#: panels/background/background.ui:272
-msgctxt "background, style"
-msgid "Zoom"
-msgstr "Zvětšit"
-
-#: panels/background/background.ui:276
-msgctxt "background, style"
-msgid "Center"
-msgstr "Na střed"
-
-#: panels/background/background.ui:280
-msgctxt "background, style"
-msgid "Scale"
-msgstr "Přizpůsobit"
-
-#: panels/background/background.ui:284
-msgctxt "background, style"
-msgid "Fill"
-msgstr "Vyplnit"
-
-#: panels/background/background.ui:288
-msgctxt "background, style"
-msgid "Span"
-msgstr "Rozšířit"
-
-#: panels/background/cc-background-chooser-dialog.c:412
-msgid "Wallpapers"
-msgstr "Tapety"
-
-#: panels/background/cc-background-chooser-dialog.c:423
-msgid "Colors"
-msgstr "Barvy"
-
-#. translators: This is the title of the wallpaper chooser dialog.
-#: panels/background/cc-background-chooser-dialog.c:455
-msgid "Select Background"
-msgstr "Zvolit pozadí"
-
-#: panels/background/cc-background-chooser-dialog.c:484
-msgid "Pictures"
-msgstr "Obrázky"
-
-#. translators: No pictures were found
-#: panels/background/cc-background-chooser-dialog.c:519
-msgid "No Pictures Found"
-msgstr "Nenalezen žádný obrázek"
-
-#. translators: %s here is the name of the Pictures directory, the string should be translated in
-#. * the context "You can add images to your Pictures folder and they will show up here"
-#: panels/background/cc-background-chooser-dialog.c:546
-#, c-format
-msgid "You can add images to your %s folder and they will show up here"
-msgstr "Můžete obrázky přidat do své složky %s a potom se zde objeví"
-
-#: panels/background/cc-background-chooser-dialog.c:550
+#: panels/background/cc-background-chooser.c:351
 #: panels/color/cc-color-panel.c:241 panels/color/cc-color-panel.c:894
 #: panels/color/cc-color-panel.ui:657 panels/color/color-calibrate.ui:25
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:916
+#: panels/display/cc-display-panel.c:950
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:181
 #: panels/network/connection-editor/vpn-helpers.c:310
-#: panels/network/net-device-wifi.c:1200 panels/network/net-device-wifi.c:1280
-#: panels/network/net-device-wifi.c:1474 panels/network/network-wifi.ui:24
+#: panels/network/net-device-wifi.c:1260 panels/network/net-device-wifi.c:1340
+#: panels/network/net-device-wifi.c:1561 panels/network/network-wifi.ui:24
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:313
 #: panels/privacy/cc-privacy-panel.c:1137 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
-#: panels/search/cc-search-locations-dialog.c:607
-#: panels/sharing/cc-sharing-panel.c:427
+#: panels/search/cc-search-locations-dialog.c:613
+#: panels/sharing/cc-sharing-panel.c:428
 #: panels/user-accounts/cc-add-user-dialog.ui:28
-#: panels/user-accounts/cc-avatar-chooser.c:106
-#: panels/user-accounts/cc-avatar-chooser.c:234
+#: panels/user-accounts/cc-avatar-chooser.c:107
+#: panels/user-accounts/cc-avatar-chooser.c:235
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:640
-#: panels/user-accounts/cc-user-panel.c:658
+#: panels/user-accounts/cc-user-panel.c:641
+#: panels/user-accounts/cc-user-panel.c:659
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/user-accounts/um-fingerprint-dialog.c:261
 msgid "_Cancel"
 msgstr "_Zrušit"
 
-#: panels/background/cc-background-chooser-dialog.c:551
-#: panels/common/cc-language-chooser.ui:12
-msgid "_Select"
-msgstr "_Vybrat"
+#: panels/background/cc-background-chooser.c:352
+#: panels/network/connection-editor/vpn-helpers.c:182
+#: panels/printers/pp-details-dialog.c:314
+#: panels/sharing/cc-sharing-panel.c:429
+#: panels/user-accounts/cc-avatar-chooser.c:236
+msgid "_Open"
+msgstr "_Otevřít"
 
-#: panels/background/cc-background-item.c:191
+#: panels/background/cc-background-chooser.ui:104
+msgid "Set Background and Lock Screen"
+msgstr "Nastavit pozadí a zamykací obrazovku"
+
+#: panels/background/cc-background-chooser.ui:114
+msgid "Set Background"
+msgstr "Nastavit pozadí"
+
+#: panels/background/cc-background-chooser.ui:121
+msgid "Set Lock Screen"
+msgstr "Nastavit zamykací obrazovku"
+
+#: panels/background/cc-background-chooser.ui:143
+msgid "Remove Background"
+msgstr "Odebrat pozadí"
+
+#: panels/background/cc-background-item.c:140
 msgid "multiple sizes"
 msgstr "více velikostí"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:195
+#: panels/background/cc-background-item.c:144
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:320
+#: panels/background/cc-background-item.c:278
 msgid "No Desktop Background"
 msgstr "Bez pozadí pracovní plochy"
 
-#: panels/background/cc-background-panel.c:291
+#: panels/background/cc-background-panel.c:145
 msgid "Current background"
 msgstr "Aktuální pozadí"
+
+#: panels/background/cc-background-panel.ui:63
+msgid "Add Picture…"
+msgstr "Přidat obrázek…"
+
+#: panels/background/cc-background-preview.ui:55
+msgid "Activities"
+msgstr "Činnosti"
 
 #: panels/background/gnome-background-panel.desktop.in.in:3
 msgid "Background"
@@ -527,7 +481,6 @@ msgstr "Vypnout režim „letadlo“"
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/network/cc-network-panel.ui:101
 #: panels/printers/pp-new-printer-dialog.c:1697
 msgid "Bluetooth"
 msgstr "Bluetooth"
@@ -776,7 +729,7 @@ msgstr "Měřící sonda nepodporuje profilování tiskáren."
 msgid "The device type is not currently supported."
 msgstr "Typ zařízení není v současnosti podporován."
 
-#: panels/color/cc-color-panel.ui:6 panels/wacom/calibrator/calibrator.ui:47
+#: panels/color/cc-color-panel.ui:6 panels/wacom/calibrator/calibrator.ui:48
 msgid "Screen Calibration"
 msgstr "Kalibrace obrazovky"
 
@@ -1184,7 +1137,7 @@ msgid "Other…"
 msgstr "Ostatní…"
 
 #: panels/common/cc-language-chooser.c:125
-#: panels/region/cc-format-chooser.c:268 panels/region/cc-input-chooser.c:178
+#: panels/region/cc-format-chooser.c:296 panels/region/cc-input-chooser.c:178
 msgid "More…"
 msgstr "Více…"
 
@@ -1195,6 +1148,10 @@ msgstr "Žádné jazyky nenalezeny"
 #: panels/common/cc-language-chooser.ui:5
 msgid "Select Language"
 msgstr "Výběr jazyka"
+
+#: panels/common/cc-language-chooser.ui:12
+msgid "_Select"
+msgstr "_Vybrat"
 
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:106
@@ -1238,17 +1195,17 @@ msgid "Year"
 msgstr "Rok"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:332
+#: panels/datetime/cc-datetime-panel.c:334
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e. %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:337
+#: panels/datetime/cc-datetime-panel.c:339
 msgid "%e %B %Y, %R"
 msgstr "%e. %B %Y, %k:%M"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:502
+#: panels/datetime/cc-datetime-panel.c:504
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1256,7 +1213,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:529
+#: panels/datetime/cc-datetime-panel.c:531
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1264,23 +1221,23 @@ msgstr "%s (%s)"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: panels/datetime/cc-datetime-panel.c:536
+#: panels/datetime/cc-datetime-panel.c:538
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:541
+#: panels/datetime/cc-datetime-panel.c:543
 msgid "%l:%M %p"
 msgstr "%l∶%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:546
+#: panels/datetime/cc-datetime-panel.c:548
 msgid "%R"
 msgstr "%k∶%M"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: panels/datetime/cc-datetime-panel.c:551
+#: panels/datetime/cc-datetime-panel.c:553
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
@@ -1340,8 +1297,8 @@ msgid "Date & Time"
 msgstr "Datum a čas"
 
 #: panels/datetime/cc-datetime-panel.ui:113
-#: panels/display/cc-night-light-dialog.ui:245
-#: panels/display/cc-night-light-dialog.ui:352
+#: panels/display/cc-night-light-page.ui:194
+#: panels/display/cc-night-light-page.ui:314
 msgid "Hour"
 msgstr "Hodina"
 
@@ -1351,8 +1308,8 @@ msgid "∶"
 msgstr "∶"
 
 #: panels/datetime/cc-datetime-panel.ui:152
-#: panels/display/cc-night-light-dialog.ui:273
-#: panels/display/cc-night-light-dialog.ui:380
+#: panels/display/cc-night-light-page.ui:222
+#: panels/display/cc-night-light-page.ui:342
 msgid "Minute"
 msgstr "Minuta"
 
@@ -1417,75 +1374,42 @@ msgstr "Změnit nastavení systémového času a data"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Abyste mohli měnit nastavení času a data, musíte se autentizovat."
 
-#: panels/display/cc-display-panel.c:927
+#: panels/display/cc-display-panel.c:961
 #: panels/network/connection-editor/connection-editor.ui:27
 #: panels/network/network-wifi.ui:38
 msgid "_Apply"
 msgstr "_Použít"
 
-#: panels/display/cc-display-panel.c:948
+#: panels/display/cc-display-panel.c:982
 msgid "Apply Changes?"
 msgstr "Použít změny?"
 
-#: panels/display/cc-display-panel.c:953
+#: panels/display/cc-display-panel.c:987
 msgid "Changes Cannot be Applied"
 msgstr "Změny nelze použít"
 
-#: panels/display/cc-display-panel.c:954
+#: panels/display/cc-display-panel.c:988
 msgid "This could be due to hardware limitations."
 msgstr "Může to být dáno omezeními hardwaru."
 
-#. TRANSLATORS: the state of the night light setting
-#: panels/display/cc-display-panel.c:1127
-#: panels/notifications/cc-notifications-panel.c:270
-#: panels/power/cc-power-panel.c:2056 panels/power/cc-power-panel.c:2063
-#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
-#: panels/universal-access/cc-ua-panel.c:478
-#: panels/universal-access/cc-ua-panel.c:841
-#: panels/universal-access/cc-ua-panel.c:854
-#: panels/universal-access/cc-ua-panel.c:866
-#: panels/universal-access/cc-ua-panel.c:1031
-msgid "On"
-msgstr "Zapnuto"
-
-#: panels/display/cc-display-panel.c:1127 panels/network/net-proxy.c:54
-#: panels/notifications/cc-notifications-panel.c:270
-#: panels/power/cc-power-panel.c:2050 panels/power/cc-power-panel.c:2061
-#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
-#: panels/universal-access/cc-ua-panel.c:478
-#: panels/universal-access/cc-ua-panel.c:841
-#: panels/universal-access/cc-ua-panel.c:854
-#: panels/universal-access/cc-ua-panel.c:866
-#: panels/universal-access/cc-ua-panel.c:1031
-#: panels/universal-access/cc-ua-panel.ui:338
-#: panels/universal-access/cc-ua-panel.ui:384
-#: panels/universal-access/cc-ua-panel.ui:430
-#: panels/universal-access/cc-ua-panel.ui:536
-#: panels/universal-access/cc-ua-panel.ui:689
-#: panels/universal-access/cc-ua-panel.ui:735
-#: panels/universal-access/cc-ua-panel.ui:781
-#: panels/universal-access/cc-ua-panel.ui:933
-msgid "Off"
-msgstr "Vypnuto"
-
-#: panels/display/cc-display-panel.ui:81
+#: panels/display/cc-display-panel.ui:91
 msgid "Single Display"
 msgstr "Samostatný displej"
 
-#: panels/display/cc-display-panel.ui:100
-#: panels/display/cc-display-panel.ui:305
+#: panels/display/cc-display-panel.ui:110
+#: panels/display/cc-display-panel.ui:315
 msgid "Join Displays"
 msgstr "Sloučit displeje"
 
-#: panels/display/cc-display-panel.ui:118
+#: panels/display/cc-display-panel.ui:128
 msgid "Mirror"
 msgstr "Duplikovat"
 
-#: panels/display/cc-display-panel.ui:143
+#: panels/display/cc-display-panel.ui:153
 msgid "Display Mode"
 msgstr "Režim displeje"
 
-#: panels/display/cc-display-panel.ui:235
+#: panels/display/cc-display-panel.ui:245
 msgid ""
 "Drag displays to match your physical display setup. Select a display to "
 "change its settings."
@@ -1493,42 +1417,46 @@ msgstr ""
 "Přesuňte displeje tak, aby odpovídaly fyzickému uspořádání. Nastavení "
 "displeje můžete změnit jeho vybráním."
 
-#: panels/display/cc-display-panel.ui:242
+#: panels/display/cc-display-panel.ui:252
 msgid "Display Arrangement"
 msgstr "Uspořádání displejů"
 
-#: panels/display/cc-display-panel.ui:424
+#: panels/display/cc-display-panel.ui:434
 msgid "Display Configuration"
 msgstr "Nastavení displeje"
 
+#: panels/display/cc-display-panel.ui:453
+#: panels/display/gnome-display-panel.desktop.in.in:3
+msgid "Displays"
+msgstr "Displeje"
+
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:451
-#: panels/display/cc-display-panel.ui:469
-#: panels/display/cc-night-light-dialog.ui:505
+#: panels/display/cc-display-panel.ui:464
+#: panels/display/cc-night-light-page.ui:111
 msgid "Night Light"
 msgstr "Noční světlo"
 
-#: panels/display/cc-display-settings.c:108
+#: panels/display/cc-display-settings.c:104
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Na šířku"
 
-#: panels/display/cc-display-settings.c:111
+#: panels/display/cc-display-settings.c:107
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Na výšku vpravo"
 
-#: panels/display/cc-display-settings.c:114
+#: panels/display/cc-display-settings.c:110
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Na výšku vlevo"
 
-#: panels/display/cc-display-settings.c:117
+#: panels/display/cc-display-settings.c:113
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Na šířku (překlopené)"
 
-#: panels/display/cc-display-settings.c:191
+#: panels/display/cc-display-settings.c:187
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -1556,25 +1484,25 @@ msgctxt "display setting"
 msgid "Scale"
 msgstr "Škálovat"
 
-#: panels/display/cc-night-light-dialog.c:647
+#: panels/display/cc-night-light-page.c:622
 msgid "More Warm"
 msgstr "Více teplé"
 
-#: panels/display/cc-night-light-dialog.c:659
+#: panels/display/cc-night-light-page.c:634
 msgid "Less Warm"
 msgstr "Méně teplé"
 
 #. This cancels the redshift inhibit.
-#: panels/display/cc-night-light-dialog.ui:46
+#: panels/display/cc-night-light-page.ui:28
 msgid "Restart Filter"
 msgstr "Restartovat filtr"
 
 #. Inhibit the redshift functionality until the next day starts
-#: panels/display/cc-night-light-dialog.ui:79
+#: panels/display/cc-night-light-page.ui:61
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Dočasně vypnout do zítřka"
 
-#: panels/display/cc-night-light-dialog.ui:106
+#: panels/display/cc-night-light-page.ui:88
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
@@ -1582,59 +1510,51 @@ msgstr ""
 "Noční světlo dělá barvy obrazovky teplejší. To pomáhá zabránit únavě očí a "
 "nespavosti."
 
-#: panels/display/cc-night-light-dialog.ui:127
+#: panels/display/cc-night-light-page.ui:127
 msgid "Schedule"
 msgstr "Plánování"
 
-#: panels/display/cc-night-light-dialog.ui:148
+#: panels/display/cc-night-light-page.ui:136
 msgid "Sunset to Sunrise"
 msgstr "Od soumraku do rozbřesku"
 
-#: panels/display/cc-night-light-dialog.ui:164
-#: panels/network/connection-editor/ip4-page.ui:69
-#: panels/network/connection-editor/ip6-page.ui:83
-#: panels/network/net-proxy.c:56 panels/network/network-proxy.ui:113
-#: panels/network/network-wifi.ui:776 panels/network/network-wifi.ui:1053
-#: panels/privacy/cc-privacy-panel.c:239
-msgid "Manual"
-msgstr "Ruční"
+#: panels/display/cc-night-light-page.ui:137
+msgid "Manual Schedule"
+msgstr "Ruční plánování"
 
-#: panels/display/cc-night-light-dialog.ui:180
-msgid "_Off"
-msgstr "Vypn_out"
+#: panels/display/cc-night-light-page.ui:148
+#: panels/region/cc-format-chooser.ui:154
+msgid "Times"
+msgstr "Čas"
 
-#: panels/display/cc-night-light-dialog.ui:216
+#: panels/display/cc-night-light-page.ui:165
 msgid "From"
 msgstr "Od"
 
-#: panels/display/cc-night-light-dialog.ui:254
-#: panels/display/cc-night-light-dialog.ui:361
+#: panels/display/cc-night-light-page.ui:203
+#: panels/display/cc-night-light-page.ui:323
 msgid ":"
 msgstr ":"
 
 #. This is the short form for the time period in the morning
-#: panels/display/cc-night-light-dialog.ui:284
-#: panels/display/cc-night-light-dialog.ui:391
+#: panels/display/cc-night-light-page.ui:234
+#: panels/display/cc-night-light-page.ui:354
 msgid "AM"
 msgstr "dop."
 
 #. This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-dialog.ui:300
-#: panels/display/cc-night-light-dialog.ui:407
+#: panels/display/cc-night-light-page.ui:250
+#: panels/display/cc-night-light-page.ui:370
 msgid "PM"
 msgstr "odp."
 
-#: panels/display/cc-night-light-dialog.ui:449
+#: panels/display/cc-night-light-page.ui:284
 msgid "To"
 msgstr "Do"
 
-#: panels/display/cc-night-light-dialog.ui:470
+#: panels/display/cc-night-light-page.ui:408
 msgid "Color Temperature"
 msgstr "Barevná teplota"
-
-#: panels/display/gnome-display-panel.desktop.in.in:3
-msgid "Displays"
-msgstr "Displeje"
 
 #: panels/display/gnome-display-panel.desktop.in.in:4
 msgid "Choose how to use connected monitors and projectors"
@@ -1671,12 +1591,13 @@ msgid "_Video"
 msgstr "_Video"
 
 #: panels/info/cc-info-default-apps-panel.ui:162
-#: panels/info/cc-info-removable-media-panel.ui:161
+#: panels/info/cc-info-removable-media-panel.ui:162
 msgid "_Photos"
 msgstr "_Fotografie"
 
 #. TRANSLATORS: AP type
 #: panels/info/cc-info-overview-panel.c:369
+#: panels/info/cc-info-overview-panel.c:440
 #: panels/info/cc-info-overview-panel.c:452
 #: panels/info/cc-info-overview-panel.c:497
 #: panels/info/cc-info-overview-panel.c:527 panels/network/panel-common.c:123
@@ -1751,40 +1672,40 @@ msgstr "Počítá se…"
 msgid "Check for updates"
 msgstr "Zkontrolovat aktualizace"
 
-#: panels/info/cc-info-removable-media-panel.c:296
+#: panels/info/cc-info-removable-media-panel.c:307
 msgid "Ask what to do"
 msgstr "Zeptat se na další postup"
 
-#: panels/info/cc-info-removable-media-panel.c:300
+#: panels/info/cc-info-removable-media-panel.c:311
 msgid "Do nothing"
 msgstr "Nic nedělat"
 
-#: panels/info/cc-info-removable-media-panel.c:304
+#: panels/info/cc-info-removable-media-panel.c:315
 msgid "Open folder"
 msgstr "Otevřít složku"
 
-#: panels/info/cc-info-removable-media-panel.c:389
+#: panels/info/cc-info-removable-media-panel.c:401
 msgid "Other Media"
 msgstr "Ostatní média"
 
-#: panels/info/cc-info-removable-media-panel.c:422
+#: panels/info/cc-info-removable-media-panel.c:434
 msgid "Select an application for audio CDs"
 msgstr "Vyberte aplikaci pro zvuková CD"
 
-#: panels/info/cc-info-removable-media-panel.c:423
+#: panels/info/cc-info-removable-media-panel.c:435
 msgid "Select an application for video DVDs"
 msgstr "Vyberte aplikaci pro DVD s videem"
 
-#: panels/info/cc-info-removable-media-panel.c:424
+#: panels/info/cc-info-removable-media-panel.c:436
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Vyberte aplikaci, která má být spuštěna po připojení hudebního přehrávače"
 
-#: panels/info/cc-info-removable-media-panel.c:425
+#: panels/info/cc-info-removable-media-panel.c:437
 msgid "Select an application to run when a camera is connected"
 msgstr "Vyberte aplikaci, která má být spuštěna po připojení fotoaparátu"
 
-#: panels/info/cc-info-removable-media-panel.c:426
+#: panels/info/cc-info-removable-media-panel.c:438
 msgid "Select an application for software CDs"
 msgstr "Vyberte aplikaci pro CD se softwarem"
 
@@ -1793,91 +1714,91 @@ msgstr "Vyberte aplikaci pro CD se softwarem"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: panels/info/cc-info-removable-media-panel.c:438
+#: panels/info/cc-info-removable-media-panel.c:450
 msgid "audio DVD"
 msgstr "zvukové DVD"
 
-#: panels/info/cc-info-removable-media-panel.c:439
+#: panels/info/cc-info-removable-media-panel.c:451
 msgid "blank Blu-ray disc"
 msgstr "prázdný disk Blu-ray"
 
-#: panels/info/cc-info-removable-media-panel.c:440
+#: panels/info/cc-info-removable-media-panel.c:452
 msgid "blank CD disc"
 msgstr "prázdný disk CD"
 
-#: panels/info/cc-info-removable-media-panel.c:441
+#: panels/info/cc-info-removable-media-panel.c:453
 msgid "blank DVD disc"
 msgstr "prázdný disk DVD"
 
-#: panels/info/cc-info-removable-media-panel.c:442
+#: panels/info/cc-info-removable-media-panel.c:454
 msgid "blank HD DVD disc"
 msgstr "prázdný disk HD DVD"
 
-#: panels/info/cc-info-removable-media-panel.c:443
+#: panels/info/cc-info-removable-media-panel.c:455
 msgid "Blu-ray video disc"
 msgstr "videodisk Blu-ray"
 
-#: panels/info/cc-info-removable-media-panel.c:444
+#: panels/info/cc-info-removable-media-panel.c:456
 msgid "e-book reader"
 msgstr "čtečka elektronických knih"
 
-#: panels/info/cc-info-removable-media-panel.c:445
+#: panels/info/cc-info-removable-media-panel.c:457
 msgid "HD DVD video disc"
 msgstr "videodisk HD DVD"
 
-#: panels/info/cc-info-removable-media-panel.c:446
+#: panels/info/cc-info-removable-media-panel.c:458
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: panels/info/cc-info-removable-media-panel.c:447
+#: panels/info/cc-info-removable-media-panel.c:459
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: panels/info/cc-info-removable-media-panel.c:448
+#: panels/info/cc-info-removable-media-panel.c:460
 msgid "Video CD"
 msgstr "Video CD"
 
-#: panels/info/cc-info-removable-media-panel.c:449
+#: panels/info/cc-info-removable-media-panel.c:461
 msgid "Windows software"
 msgstr "Software Windows"
 
-#: panels/info/cc-info-removable-media-panel.ui:43
+#: panels/info/cc-info-removable-media-panel.ui:44
 msgid "Select how media should be handled"
 msgstr "Vyberte, jak budou média obsluhována"
 
-#: panels/info/cc-info-removable-media-panel.ui:74
+#: panels/info/cc-info-removable-media-panel.ui:75
 msgid "CD _audio"
 msgstr "Zvukové _CD"
 
-#: panels/info/cc-info-removable-media-panel.ui:91
+#: panels/info/cc-info-removable-media-panel.ui:92
 msgid "_DVD video"
 msgstr "Videodisk _DVD"
 
-#: panels/info/cc-info-removable-media-panel.ui:132
+#: panels/info/cc-info-removable-media-panel.ui:133
 msgid "_Music player"
 msgstr "_Hudební přehrávač"
 
-#: panels/info/cc-info-removable-media-panel.ui:190
+#: panels/info/cc-info-removable-media-panel.ui:191
 msgid "_Software"
 msgstr "_Software"
 
-#: panels/info/cc-info-removable-media-panel.ui:228
+#: panels/info/cc-info-removable-media-panel.ui:229
 msgid "_Other Media…"
 msgstr "_Ostatní média…"
 
-#: panels/info/cc-info-removable-media-panel.ui:272
+#: panels/info/cc-info-removable-media-panel.ui:287
 msgid "_Never prompt or start programs on media insertion"
 msgstr "_Nikdy se nedotazovat nebo spouštět programy na vloženém médiu"
 
-#: panels/info/cc-info-removable-media-panel.ui:331
+#: panels/info/cc-info-removable-media-panel.ui:339
 msgid "Select how other media should be handled"
 msgstr "Vyberte, jak by měla být obsluhována ostatní média"
 
-#: panels/info/cc-info-removable-media-panel.ui:370
+#: panels/info/cc-info-removable-media-panel.ui:378
 msgid "_Action:"
 msgstr "_Činnost:"
 
-#: panels/info/cc-info-removable-media-panel.ui:393
+#: panels/info/cc-info-removable-media-panel.ui:401
 msgid "_Type:"
 msgstr "_Typ:"
 
@@ -1941,8 +1862,8 @@ msgid "Sound and Media"
 msgstr "Zvuk a média"
 
 #: panels/keyboard/00-multimedia.xml.in:4
-msgid "Volume mute"
-msgstr "Úplně ztišit"
+msgid "Volume mute/unmute"
+msgstr "Úplně ztišit/obnovit hlasitost"
 
 #: panels/keyboard/00-multimedia.xml.in:6
 msgid "Volume down"
@@ -1953,35 +1874,39 @@ msgid "Volume up"
 msgstr "Zvýšit hlasitost"
 
 #: panels/keyboard/00-multimedia.xml.in:10
+msgid "Microphone mute/unmute"
+msgstr "Úplně ztišit/obnovit mikrofon"
+
+#: panels/keyboard/00-multimedia.xml.in:12
 msgid "Launch media player"
 msgstr "Spustit multimediální přehrávač"
 
-#: panels/keyboard/00-multimedia.xml.in:12
+#: panels/keyboard/00-multimedia.xml.in:14
 msgid "Play (or play/pause)"
 msgstr "Přehrát (nebo přehrát/pozastavit)"
 
-#: panels/keyboard/00-multimedia.xml.in:14
+#: panels/keyboard/00-multimedia.xml.in:16
 msgid "Pause playback"
 msgstr "Pozastavit přehrávání"
 
-#: panels/keyboard/00-multimedia.xml.in:16
+#: panels/keyboard/00-multimedia.xml.in:18
 msgid "Stop playback"
 msgstr "Zastavit přehrávání"
 
-#: panels/keyboard/00-multimedia.xml.in:18
+#: panels/keyboard/00-multimedia.xml.in:20
 msgid "Previous track"
 msgstr "Předchozí stopa"
 
-#: panels/keyboard/00-multimedia.xml.in:20
+#: panels/keyboard/00-multimedia.xml.in:22
 msgid "Next track"
 msgstr "Následující stopa"
 
-#: panels/keyboard/00-multimedia.xml.in:22
+#: panels/keyboard/00-multimedia.xml.in:24
 msgid "Eject"
 msgstr "Vysunout"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:580
+#: panels/universal-access/cc-ua-panel.ui:565
 msgid "Typing"
 msgstr "Psaní"
 
@@ -2016,6 +1941,11 @@ msgstr "Spustit webový prohlížeč"
 #: panels/keyboard/01-launchers.xml.in:14
 msgid "Home folder"
 msgstr "Domovská složka"
+
+#: panels/keyboard/01-launchers.xml.in:16
+msgctxt "keybinding"
+msgid "Search"
+msgstr "Hledat"
 
 #: panels/keyboard/01-screenshot.xml.in:2
 msgid "Screenshots"
@@ -2124,11 +2054,11 @@ msgstr "Klávesa Compose"
 msgid "Modifiers-only switch to next source"
 msgstr "Přepínač na další zdroj pouze pro modifikátory"
 
-#: panels/keyboard/cc-keyboard-panel.c:179
+#: panels/keyboard/cc-keyboard-panel.c:180
 msgid "Reset All Shortcuts?"
 msgstr "Vráti všechny klávesové zkratky na výchozí?"
 
-#: panels/keyboard/cc-keyboard-panel.c:182
+#: panels/keyboard/cc-keyboard-panel.c:183
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2136,35 +2066,30 @@ msgstr ""
 "Vrácení klávesových zkratek na výchozí může ovlivnit vaše vlastní klávesové "
 "zkratky. A nepůjde to vrátit zpět."
 
-#: panels/keyboard/cc-keyboard-panel.c:186
+#: panels/keyboard/cc-keyboard-panel.c:187
 #: panels/keyboard/shortcut-editor.ui:346
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: panels/keyboard/cc-keyboard-panel.c:187
+#: panels/keyboard/cc-keyboard-panel.c:188
 msgid "Reset All"
 msgstr "Všechny na výchozí"
 
-#: panels/keyboard/cc-keyboard-panel.c:283
+#: panels/keyboard/cc-keyboard-panel.c:284
 msgid "Reset the shortcut to its default value"
 msgstr "Vrátit klávesovou zkratku na výchozí"
 
-#: panels/keyboard/cc-keyboard-panel.ui:67 panels/region/cc-region-panel.ui:395
-#: shell/cc-window.ui:334
-msgid "Keyboard Shortcuts"
-msgstr "Klávesové zkratky"
-
-#: panels/keyboard/cc-keyboard-panel.ui:77
+#: panels/keyboard/cc-keyboard-panel.ui:116
 msgid "Reset All…"
 msgstr "Všechny na výchozí…"
 
-#: panels/keyboard/cc-keyboard-panel.ui:78
+#: panels/keyboard/cc-keyboard-panel.ui:117
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Vrátit všechny klávesové zkratky na výchozí klávesy"
 
-#: panels/keyboard/cc-keyboard-panel.ui:164
+#: panels/keyboard/cc-keyboard-panel.ui:146
 msgid "No keyboard shortcut found"
 msgstr "Nebyla nalezena žádná klávesová zkratka"
 
@@ -2196,8 +2121,9 @@ msgid "Add Custom Shortcut"
 msgstr "Přidání vlastní klávesové zkratky"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:3
-msgid "Keyboard"
-msgstr "Klávesnice"
+#: panels/region/cc-region-panel.ui:394 shell/cc-window.ui:340
+msgid "Keyboard Shortcuts"
+msgstr "Klávesové zkratky"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
 msgid "View and change keyboard shortcuts and set your typing preferences"
@@ -2380,7 +2306,7 @@ msgid "Single click, secondary button"
 msgstr "Kliknutí, vedlejší tlačítko"
 
 #. add proxy to device list
-#: panels/network/cc-network-panel.c:589
+#: panels/network/cc-network-panel.c:590
 msgid "Network proxy"
 msgstr "Proxy sítě"
 
@@ -2394,7 +2320,7 @@ msgstr "Proxy sítě"
 msgid "%s VPN"
 msgstr "VPN %s"
 
-#: panels/network/cc-network-panel.c:789 panels/network/cc-wifi-panel.ui:304
+#: panels/network/cc-network-panel.c:789 panels/network/cc-wifi-panel.ui:306
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Problém, něco se stalo špatně. Kontaktujte prosím vyrobce softwaru."
 
@@ -2402,12 +2328,16 @@ msgstr "Problém, něco se stalo špatně. Kontaktujte prosím vyrobce softwaru.
 msgid "NetworkManager needs to be running."
 msgstr "Je zapotřebí, aby běžel program NetworkManager."
 
-#: panels/network/cc-network-panel.ui:142
+#: panels/network/cc-network-panel.ui:102
+msgid "Other Devices"
+msgstr "Ostatní zařízení"
+
+#: panels/network/cc-network-panel.ui:143
 #: panels/network/connection-editor/net-connection-editor.c:581
 msgid "VPN"
 msgstr "VPN"
 
-#: panels/network/cc-network-panel.ui:194
+#: panels/network/cc-network-panel.ui:195
 msgid "Not set up"
 msgstr "Nenastaveno"
 
@@ -2418,14 +2348,14 @@ msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.ui:73
+#: panels/network/cc-wifi-connection-row.ui:102
 #: panels/network/net-device-ethernet.c:359
 #: panels/network/network-ethernet.ui:120 panels/network/network-mobile.ui:394
 #: panels/network/network-simple.ui:75 panels/network/network-vpn.ui:79
 msgid "Options…"
 msgstr "Volby…"
 
-#: panels/network/cc-wifi-panel.c:281
+#: panels/network/cc-wifi-panel.c:284
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
 #: panels/network/network-wifi.ui:1738
 msgid "Wi-Fi"
@@ -2455,11 +2385,11 @@ msgstr "Režim „Letadlo“ je zapnutý"
 msgid "Turn off to use Wi-Fi"
 msgstr "Musíte jej vypnout, když chcete používat Wi-Fi"
 
-#: panels/network/cc-wifi-panel.ui:226
+#: panels/network/cc-wifi-panel.ui:227
 msgid "Visible Networks"
 msgstr "Viditelné sítě"
 
-#: panels/network/cc-wifi-panel.ui:293
+#: panels/network/cc-wifi-panel.ui:295
 msgid "NetworkManager needs to be running"
 msgstr "Je zapotřebí, aby běžel program NetworkManager"
 
@@ -2497,43 +2427,69 @@ msgstr "strana 2"
 msgid "Security"
 msgstr "Zabezpečení"
 
-#: panels/network/connection-editor/ce-page.c:481
+#: panels/network/connection-editor/ce-page.c:396
+msgid "Preserve"
+msgstr "současná"
+
+#: panels/network/connection-editor/ce-page.c:397
+msgid "Permanent"
+msgstr "trvalá"
+
+#: panels/network/connection-editor/ce-page.c:398
+msgid "Random"
+msgstr "náhodná"
+
+#: panels/network/connection-editor/ce-page.c:399
+msgid "Stable"
+msgstr "stabilní"
+
+#: panels/network/connection-editor/ce-page.c:403
+msgid ""
+"The MAC address entered here will be used as hardware address for the "
+"network device this connection is activated on. This feature is known as MAC "
+"cloning or spoofing. Example: 00:11:22:33:44:55"
+msgstr ""
+"Zde zadaná adresa MAC bude použita jako hardwarová adresa pro síťové "
+"zařízení, na kterém je toto připojení aktivováno. Funkcionalita se nazývá "
+"klonování MAC nebo spoofing. Příklad: 00:11:22:33:44:55"
+
+#: panels/network/connection-editor/ce-page.c:538
 msgid "automatic"
 msgstr "automaticky"
 
-#: panels/network/connection-editor/ce-page.c:521
+#: panels/network/connection-editor/ce-page.c:578
 #, c-format
 msgid "Profile %d"
 msgstr "Profil %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:56
-#: panels/network/net-device-wifi.c:123 panels/network/net-device-wifi.c:299
+#: panels/network/net-device-wifi.c:134 panels/network/net-device-wifi.c:314
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:60
-#: panels/network/net-device-wifi.c:127 panels/network/net-device-wifi.c:304
+#: panels/network/net-device-wifi.c:138 panels/network/net-device-wifi.c:319
 #: panels/network/network-wifi.ui:592
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:64
-#: panels/network/net-device-wifi.c:131
+#: panels/network/net-device-wifi.c:142
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: panels/network/connection-editor/ce-page-details.c:69
-#: panels/network/net-device-wifi.c:136
+#: panels/network/net-device-wifi.c:147
 msgid "Enterprise"
 msgstr "Firemní"
 
 # Zabezpečení
 #: panels/network/connection-editor/ce-page-details.c:74
-#: panels/network/net-device-wifi.c:141 panels/network/net-device-wifi.c:289
+#: panels/network/net-device-wifi.c:152 panels/network/net-device-wifi.c:304
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Žádné"
@@ -2544,7 +2500,7 @@ msgstr "nikdy"
 
 #: panels/network/connection-editor/ce-page-details.c:110
 #: panels/network/net-device-ethernet.c:137
-#: panels/network/net-device-wifi.c:398
+#: panels/network/net-device-wifi.c:413
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2554,40 +2510,40 @@ msgstr[2] "před %i dny"
 
 #. Translators: network device speed
 #: panels/network/connection-editor/ce-page-details.c:228
-#: panels/network/net-device-ethernet.c:66 panels/network/net-device-wifi.c:476
+#: panels/network/net-device-ethernet.c:66 panels/network/net-device-wifi.c:536
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 # Síla signálu
 #: panels/network/connection-editor/ce-page-details.c:249
-#: panels/network/net-device-wifi.c:505
+#: panels/network/net-device-wifi.c:565
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Žádná"
 
 # Síla signálu
 #: panels/network/connection-editor/ce-page-details.c:251
-#: panels/network/net-device-wifi.c:507
+#: panels/network/net-device-wifi.c:567
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Slabá"
 
 #: panels/network/connection-editor/ce-page-details.c:253
-#: panels/network/net-device-wifi.c:509
+#: panels/network/net-device-wifi.c:569
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Dostačující"
 
 # Síla signálu
 #: panels/network/connection-editor/ce-page-details.c:255
-#: panels/network/net-device-wifi.c:511
+#: panels/network/net-device-wifi.c:571
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Dobrá"
 
 #: panels/network/connection-editor/ce-page-details.c:257
-#: panels/network/net-device-wifi.c:513
+#: panels/network/net-device-wifi.c:573
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Výborná"
@@ -2606,13 +2562,13 @@ msgstr "Odebrat VPN"
 
 #: panels/network/connection-editor/ce-page-details.c:332
 #: panels/network/network-wifi.ui:1433 shell/cc-panel-list.ui:103
-#: shell/cc-window.c:264
+#: shell/cc-window.c:269
 msgid "Details"
 msgstr "Podrobnosti"
 
-#: panels/network/connection-editor/ce-page-ethernet.c:174
+#: panels/network/connection-editor/ce-page-ethernet.c:177
 #: panels/network/connection-editor/ce-page-vpn.c:188
-#: panels/network/connection-editor/ce-page-wifi.c:194
+#: panels/network/connection-editor/ce-page-wifi.c:196
 #: panels/network/network-wifi.ui:1437
 msgid "Identity"
 msgstr "Identita"
@@ -2787,16 +2743,16 @@ msgstr "_Název"
 msgid "_MAC Address"
 msgstr "_MAC adresa"
 
-#: panels/network/connection-editor/ethernet-page.ui:146
+#: panels/network/connection-editor/ethernet-page.ui:151
 msgid "M_TU"
 msgstr "M_TU"
 
-#: panels/network/connection-editor/ethernet-page.ui:163
-#: panels/network/connection-editor/wifi-page.ui:97
+#: panels/network/connection-editor/ethernet-page.ui:168
+#: panels/network/connection-editor/wifi-page.ui:102
 msgid "_Cloned Address"
 msgstr "_Klonovaná adresa"
 
-#: panels/network/connection-editor/ethernet-page.ui:178
+#: panels/network/connection-editor/ethernet-page.ui:183
 msgid "bytes"
 msgstr "bajtů"
 
@@ -2813,6 +2769,14 @@ msgstr "Automatické (DHCP)"
 #: panels/network/connection-editor/ip6-page.ui:69
 msgid "Link-Local Only"
 msgstr "Pouze link-local"
+
+#: panels/network/connection-editor/ip4-page.ui:69
+#: panels/network/connection-editor/ip6-page.ui:83
+#: panels/network/net-proxy.c:56 panels/network/network-proxy.ui:113
+#: panels/network/network-wifi.ui:776 panels/network/network-wifi.ui:1053
+#: panels/privacy/cc-privacy-panel.c:239
+msgid "Manual"
+msgstr "Ruční"
 
 #: panels/network/connection-editor/ip4-page.ui:83
 #: panels/network/connection-editor/ip6-page.ui:97
@@ -2930,14 +2894,7 @@ msgstr ""
 
 #: panels/network/connection-editor/vpn-helpers.c:178
 msgid "Select file to import"
-msgstr "Vybrat soubor pro import"
-
-#: panels/network/connection-editor/vpn-helpers.c:182
-#: panels/printers/pp-details-dialog.c:314
-#: panels/sharing/cc-sharing-panel.c:428
-#: panels/user-accounts/cc-avatar-chooser.c:235
-msgid "_Open"
-msgstr "_Otevřít"
+msgstr "Výběr souboru pro import"
 
 #: panels/network/connection-editor/vpn-helpers.c:230
 #, c-format
@@ -2992,12 +2949,8 @@ msgstr "Určit, jak se připojujete k Internetu"
 
 #. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in.in:19
-msgid ""
-"Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
-"DNS;"
-msgstr ""
-"síť;bezdrátové;bezdrátová;Wi-Fi;WiFi;drátové;drátová;IP;LAN;proxy;WAN;"
-"širokopásmové;připojení;modem;Bluetooth;vpn;dns;"
+msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
+msgstr "síť;IP;LAN;proxy;WAN;širokopásmové;připojení;modem;Bluetooth;vpn;dns;"
 
 #: panels/network/gnome-wifi-panel.desktop.in.in:4
 msgid "Control how you connect to Wi-Fi networks"
@@ -3005,23 +2958,23 @@ msgstr "Určit, jak se připojujete k sítím Wi-Fi"
 
 #. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in.in:19
-msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;"
+msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 msgstr ""
 "síť;bezdrátové;bezdrátová;Wi-Fi;WiFi;drátové;drátová;IP;LAN;širokopásmové;"
-"připojení;dns;"
+"připojení;dns;přístupový bod;hotspot;"
 
 #: panels/network/net-device-ethernet.c:123
-#: panels/network/net-device-wifi.c:384
+#: panels/network/net-device-wifi.c:399
 msgid "never"
 msgstr "nikdy"
 
 #: panels/network/net-device-ethernet.c:133
-#: panels/network/net-device-wifi.c:394
+#: panels/network/net-device-wifi.c:409
 msgid "today"
 msgstr "dnes"
 
 #: panels/network/net-device-ethernet.c:135
-#: panels/network/net-device-wifi.c:396
+#: panels/network/net-device-wifi.c:411
 msgid "yesterday"
 msgstr "včera"
 
@@ -3049,13 +3002,13 @@ msgstr "Drátová"
 msgid "Add new connection"
 msgstr "Přidat nové připojení"
 
-#: panels/network/net-device-wifi.c:1157
+#: panels/network/net-device-wifi.c:1217
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Zapnutím bezdrátového přístupového bodu bude připojení k <b>%s</b> ztraceno."
 
-#: panels/network/net-device-wifi.c:1161
+#: panels/network/net-device-wifi.c:1221
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -3063,11 +3016,11 @@ msgstr ""
 "Není možné se k Internetu připojovat prostřednictvím bezdrátového připojení "
 "zatímco je aktivní režim přístupového bodu."
 
-#: panels/network/net-device-wifi.c:1168
+#: panels/network/net-device-wifi.c:1228
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Zapnout bezdrátový přístupový bod?"
 
-#: panels/network/net-device-wifi.c:1190
+#: panels/network/net-device-wifi.c:1250
 msgid ""
 "Wi-Fi hotspots are usually used to share an additional Internet connection "
 "over Wi-Fi."
@@ -3075,27 +3028,27 @@ msgstr ""
 "Bezdrátový přístupový bod se obvykle používá ke sdílení internetového "
 "připojení přes Wi-Fi."
 
-#: panels/network/net-device-wifi.c:1201
+#: panels/network/net-device-wifi.c:1261
 msgid "_Turn On"
 msgstr "Zapnou_t"
 
-#: panels/network/net-device-wifi.c:1278
+#: panels/network/net-device-wifi.c:1338
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Zastavit přístupový bod a odpojit případné uživatele?"
 
-#: panels/network/net-device-wifi.c:1281
+#: panels/network/net-device-wifi.c:1341
 msgid "_Stop Hotspot"
 msgstr "Za_stavit přístupový bod"
 
-#: panels/network/net-device-wifi.c:1337
+#: panels/network/net-device-wifi.c:1397
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Systémová zásada zakazuje použití jako přístupový bod"
 
-#: panels/network/net-device-wifi.c:1340
+#: panels/network/net-device-wifi.c:1400
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Bezdrátové zařízení nepodporuje režim přístupového bodu"
 
-#: panels/network/net-device-wifi.c:1471
+#: panels/network/net-device-wifi.c:1558
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -3103,19 +3056,39 @@ msgstr ""
 "Informace o síti pro vybrané sítě, včetně hesel a vlastního nastavení, budou "
 "ztraceny."
 
-#: panels/network/net-device-wifi.c:1475 panels/network/network-wifi.ui:1350
+#: panels/network/net-device-wifi.c:1562 panels/network/network-wifi.ui:1350
 msgid "_Forget"
 msgstr "_Zapomenout"
 
-#: panels/network/net-device-wifi.c:1638 panels/network/net-device-wifi.c:1645
+#: panels/network/net-device-wifi.c:1725 panels/network/net-device-wifi.c:1732
 msgid "Known Wi-Fi Networks"
 msgstr "Známé sítě Wi-Fi"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1682
+#: panels/network/net-device-wifi.c:1769
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Zapomenout"
+
+#: panels/network/net-proxy.c:54
+#: panels/notifications/cc-notifications-panel.c:270
+#: panels/power/cc-power-panel.c:2074 panels/power/cc-power-panel.c:2085
+#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
+#: panels/universal-access/cc-ua-panel.c:477
+#: panels/universal-access/cc-ua-panel.c:840
+#: panels/universal-access/cc-ua-panel.c:853
+#: panels/universal-access/cc-ua-panel.c:865
+#: panels/universal-access/cc-ua-panel.c:1030
+#: panels/universal-access/cc-ua-panel.ui:323
+#: panels/universal-access/cc-ua-panel.ui:369
+#: panels/universal-access/cc-ua-panel.ui:415
+#: panels/universal-access/cc-ua-panel.ui:521
+#: panels/universal-access/cc-ua-panel.ui:674
+#: panels/universal-access/cc-ua-panel.ui:720
+#: panels/universal-access/cc-ua-panel.ui:766
+#: panels/universal-access/cc-ua-panel.ui:918
+msgid "Off"
+msgstr "Vypnuto"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: panels/network/net-proxy.c:102
@@ -3209,7 +3182,7 @@ msgstr "podrobnosti"
 #: panels/sharing/cc-sharing-panel.ui:351
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:214
+#: panels/user-accounts/cc-user-panel.ui:216
 msgid "_Password"
 msgstr "_Heslo"
 
@@ -3642,13 +3615,13 @@ msgstr "schází soubor EAP-FAST PAC"
 
 #: panels/network/wireless-security/eap-method-fast.c:268
 #: panels/network/wireless-security/eap-method-peap.c:302
-#: panels/network/wireless-security/eap-method-ttls.c:351
+#: panels/network/wireless-security/eap-method-ttls.c:361
 msgid "GTC"
 msgstr "GTC"
 
 #: panels/network/wireless-security/eap-method-fast.c:283
 #: panels/network/wireless-security/eap-method-peap.c:272
-#: panels/network/wireless-security/eap-method-ttls.c:289
+#: panels/network/wireless-security/eap-method-ttls.c:299
 msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
@@ -3678,7 +3651,7 @@ msgstr "_Soubory PAC"
 
 #: panels/network/wireless-security/eap-method-fast.ui:122
 #: panels/network/wireless-security/eap-method-peap.ui:146
-#: panels/network/wireless-security/eap-method-ttls.ui:97
+#: panels/network/wireless-security/eap-method-ttls.ui:123
 msgid "_Inner authentication"
 msgstr "_Interní ověření totožnosti"
 
@@ -3722,14 +3695,14 @@ msgstr ""
 "zadán"
 
 #: panels/network/wireless-security/eap-method-peap.c:287
-#: panels/network/wireless-security/eap-method-ttls.c:336
+#: panels/network/wireless-security/eap-method-ttls.c:346
 #: panels/network/wireless-security/wireless-security.c:441
 msgid "MD5"
 msgstr "MD5"
 
 #: panels/network/wireless-security/eap-method-peap.c:381
 #: panels/network/wireless-security/eap-method-tls.c:492
-#: panels/network/wireless-security/eap-method-ttls.c:430
+#: panels/network/wireless-security/eap-method-ttls.c:440
 msgid "Choose a Certificate Authority certificate"
 msgstr "Vybrat certifikát certifikační autority"
 
@@ -3743,13 +3716,13 @@ msgstr "Verze 1"
 
 #: panels/network/wireless-security/eap-method-peap.ui:74
 #: panels/network/wireless-security/eap-method-tls.ui:75
-#: panels/network/wireless-security/eap-method-ttls.ui:57
+#: panels/network/wireless-security/eap-method-ttls.ui:82
 msgid "C_A certificate"
 msgstr "Certifikát C_A"
 
 #: panels/network/wireless-security/eap-method-peap.ui:96
 #: panels/network/wireless-security/eap-method-tls.ui:97
-#: panels/network/wireless-security/eap-method-ttls.ui:79
+#: panels/network/wireless-security/eap-method-ttls.ui:105
 msgid "No CA certificate is _required"
 msgstr "_Certifikát CA není požadován"
 
@@ -3843,21 +3816,27 @@ msgstr ""
 "neplatný certifikát EAP-TTLS certifikační autority: žádný certifikát není "
 "zadán"
 
-#: panels/network/wireless-security/eap-method-ttls.c:259
+#: panels/network/wireless-security/eap-method-ttls.c:269
 msgid "PAP"
 msgstr "PAP"
 
-#: panels/network/wireless-security/eap-method-ttls.c:274
+#: panels/network/wireless-security/eap-method-ttls.c:284
 msgid "MSCHAP"
 msgstr "MSCHAP"
 
-#: panels/network/wireless-security/eap-method-ttls.c:305
+#: panels/network/wireless-security/eap-method-ttls.c:315
 msgid "MSCHAPv2 (no EAP)"
 msgstr "MSCHAPv2 (bez EAP)"
 
-#: panels/network/wireless-security/eap-method-ttls.c:321
+#: panels/network/wireless-security/eap-method-ttls.c:331
 msgid "CHAP"
 msgstr "CHAP"
+
+#: panels/network/wireless-security/eap-method-ttls.ui:56
+#: panels/user-accounts/cc-add-user-dialog.ui:507
+#: panels/user-accounts/data/join-dialog.ui:116
+msgid "_Domain"
+msgstr "_Doména"
 
 #: panels/network/wireless-security/wireless-security.c:87
 msgid "Unknown error validating 802.1X security"
@@ -3974,23 +3953,23 @@ msgid "_Type"
 msgstr "_Typ"
 
 #. This is the per application switch for message tray usage.
-#: panels/notifications/cc-app-notifications-dialog.ui:61
+#: panels/notifications/cc-app-notifications-dialog.ui:60
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "_Upozornění"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/cc-app-notifications-dialog.ui:113
+#: panels/notifications/cc-app-notifications-dialog.ui:112
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "Zvuková _upozornění"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:169
+#: panels/notifications/cc-app-notifications-dialog.ui:168
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "Vyskakovací u_pozornění"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:185
+#: panels/notifications/cc-app-notifications-dialog.ui:184
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
@@ -3999,20 +3978,31 @@ msgstr ""
 "objevovat v seznamu upozornění."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/cc-app-notifications-dialog.ui:250
+#: panels/notifications/cc-app-notifications-dialog.ui:249
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "Zobrazovat o_bsah zpráv ve vyskakovacích cedulích"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:301
+#: panels/notifications/cc-app-notifications-dialog.ui:300
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Upozornění na za_mykací obrazovce"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:352
+#: panels/notifications/cc-app-notifications-dialog.ui:351
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Zobrazovat _obsah zpráv na zamykací obrazovce"
+
+#: panels/notifications/cc-notifications-panel.c:270
+#: panels/power/cc-power-panel.c:2080 panels/power/cc-power-panel.c:2087
+#: panels/privacy/cc-privacy-panel.c:212 panels/privacy/cc-privacy-panel.c:289
+#: panels/universal-access/cc-ua-panel.c:477
+#: panels/universal-access/cc-ua-panel.c:840
+#: panels/universal-access/cc-ua-panel.c:853
+#: panels/universal-access/cc-ua-panel.c:865
+#: panels/universal-access/cc-ua-panel.c:1030
+msgid "On"
+msgstr "Zapnuto"
 
 #: panels/notifications/cc-notifications-panel.ui:70
 msgid "Notification _Popups"
@@ -4097,11 +4087,11 @@ msgstr "Přidat účet"
 msgid "Remove Account"
 msgstr "Odebrat účet"
 
-#: panels/power/cc-power-panel.c:318
+#: panels/power/cc-power-panel.c:327
 msgid "Unknown time"
 msgstr "Neznámý čas"
 
-#: panels/power/cc-power-panel.c:324
+#: panels/power/cc-power-panel.c:333
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -4109,7 +4099,7 @@ msgstr[0] "%i minuta"
 msgstr[1] "%i minuty"
 msgstr[2] "%i minut"
 
-#: panels/power/cc-power-panel.c:336
+#: panels/power/cc-power-panel.c:345
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -4119,19 +4109,19 @@ msgstr[2] "%i hodin"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: panels/power/cc-power-panel.c:344
+#: panels/power/cc-power-panel.c:353
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: panels/power/cc-power-panel.c:345
+#: panels/power/cc-power-panel.c:354
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hodina"
 msgstr[1] "hodiny"
 msgstr[2] "hodin"
 
-#: panels/power/cc-power-panel.c:346
+#: panels/power/cc-power-panel.c:355
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuta"
@@ -4139,150 +4129,150 @@ msgstr[1] "minuty"
 msgstr[2] "minut"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:364
+#: panels/power/cc-power-panel.c:373
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s do plného nabití"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:371
+#: panels/power/cc-power-panel.c:380
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Pozor, zbývá %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:376
+#: panels/power/cc-power-panel.c:385
 #, c-format
 msgid "%s remaining"
 msgstr "Zbývá %s"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:381 panels/power/cc-power-panel.c:411
+#: panels/power/cc-power-panel.c:390 panels/power/cc-power-panel.c:420
 msgid "Fully charged"
 msgstr "Plně nabito"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:385 panels/power/cc-power-panel.c:415
+#: panels/power/cc-power-panel.c:394 panels/power/cc-power-panel.c:424
 msgid "Not charging"
 msgstr "Nenabíjí se"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:389 panels/power/cc-power-panel.c:419
+#: panels/power/cc-power-panel.c:398 panels/power/cc-power-panel.c:428
 msgid "Empty"
 msgstr "Vybitá"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:402
+#: panels/power/cc-power-panel.c:411
 msgid "Charging"
 msgstr "Nabíjí se"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:407
+#: panels/power/cc-power-panel.c:416
 msgid "Discharging"
 msgstr "Vybíjí se"
 
-#: panels/power/cc-power-panel.c:540
+#: panels/power/cc-power-panel.c:549
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Hlavní"
 
-#: panels/power/cc-power-panel.c:542
+#: panels/power/cc-power-panel.c:551
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Přídavná"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:611
+#: panels/power/cc-power-panel.c:626
 msgid "Wireless mouse"
 msgstr "Bezdrátová myš"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:614
+#: panels/power/cc-power-panel.c:629
 msgid "Wireless keyboard"
 msgstr "Bezdrátová klávesnice"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:617
+#: panels/power/cc-power-panel.c:632
 msgid "Uninterruptible power supply"
 msgstr "Záložní zdroj napájení"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:620
+#: panels/power/cc-power-panel.c:635
 msgid "Personal digital assistant"
 msgstr "Osobní digitální asistent (PDA)"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:623
+#: panels/power/cc-power-panel.c:638
 msgid "Cellphone"
 msgstr "Mobilní telefon"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:626
+#: panels/power/cc-power-panel.c:641
 msgid "Media player"
 msgstr "Multimediální přehrávač"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:629 panels/wacom/cc-wacom-panel.c:848
+#: panels/power/cc-power-panel.c:644 panels/wacom/cc-wacom-panel.c:848
 msgid "Tablet"
 msgstr "Tablet"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:632
+#: panels/power/cc-power-panel.c:647
 msgid "Computer"
 msgstr "Počítač"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:635
+#: panels/power/cc-power-panel.c:650
 msgid "Gaming input device"
 msgstr "Herní vstupní zařízení"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:638 panels/power/cc-power-panel.c:891
-#: panels/power/cc-power-panel.c:2406
+#: panels/power/cc-power-panel.c:653 panels/power/cc-power-panel.c:911
+#: panels/power/cc-power-panel.c:2430
 msgid "Battery"
 msgstr "Baterie"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:699
+#: panels/power/cc-power-panel.c:714
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Nabíjí se"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:706
+#: panels/power/cc-power-panel.c:721
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Pozor"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:711
+#: panels/power/cc-power-panel.c:726
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Nízká"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:716
+#: panels/power/cc-power-panel.c:731
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Dobrá"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:721
+#: panels/power/cc-power-panel.c:736
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Plně nabitá"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:725
+#: panels/power/cc-power-panel.c:740
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Vybitá"
 
-#: panels/power/cc-power-panel.c:889
+#: panels/power/cc-power-panel.c:909
 msgid "Batteries"
 msgstr "Baterie"
 
-#: panels/power/cc-power-panel.c:1250
+#: panels/power/cc-power-panel.c:1274
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -4290,7 +4280,7 @@ msgstr[0] "%d hodiny"
 msgstr[1] "%d hodin"
 msgstr[2] "%d hodin"
 
-#: panels/power/cc-power-panel.c:1252
+#: panels/power/cc-power-panel.c:1276
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -4298,7 +4288,7 @@ msgstr[0] "%d minuty"
 msgstr[1] "%d minut"
 msgstr[2] "%d minut"
 
-#: panels/power/cc-power-panel.c:1255
+#: panels/power/cc-power-panel.c:1279
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -4307,118 +4297,118 @@ msgstr[1] "%d sekund"
 msgstr[2] "%d sekund"
 
 #. 5 hours 2 minutes 12 seconds
-#: panels/power/cc-power-panel.c:1260
+#: panels/power/cc-power-panel.c:1284
 #, c-format
 msgctxt "time"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. 2 minutes 12 seconds
-#: panels/power/cc-power-panel.c:1263
+#: panels/power/cc-power-panel.c:1287
 #, c-format
 msgctxt "time"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 0 seconds
-#: panels/power/cc-power-panel.c:1269
+#: panels/power/cc-power-panel.c:1293
 msgid "0 seconds"
 msgstr "0 sekund"
 
-#: panels/power/cc-power-panel.c:1366
+#: panels/power/cc-power-panel.c:1390
 msgid "When _idle"
 msgstr "Při _nečinnosti"
 
-#: panels/power/cc-power-panel.c:1811
+#: panels/power/cc-power-panel.c:1835
 msgid "Power Saving"
 msgstr "Šetření energií"
 
-#: panels/power/cc-power-panel.c:1845
-msgid "_Screen brightness"
+#: panels/power/cc-power-panel.c:1869
+msgid "_Screen Brightness"
 msgstr "_Jas obrazovky"
 
-#: panels/power/cc-power-panel.c:1866
-msgid "Automatic brightness"
+#: panels/power/cc-power-panel.c:1890
+msgid "Automatic Brightness"
 msgstr "Automatický jas"
 
-#: panels/power/cc-power-panel.c:1879
-msgid "_Keyboard brightness"
+#: panels/power/cc-power-panel.c:1903
+msgid "_Keyboard Brightness"
 msgstr "_Jas klávesnice"
 
-#: panels/power/cc-power-panel.c:1890
-msgid "_Dim screen when inactive"
-msgstr "_Ztlumit jas obrazovky při neaktivitě"
+#: panels/power/cc-power-panel.c:1914
+msgid "_Dim Screen When Inactive"
+msgstr "_Ztlumit jas obrazovky při nečinnosti"
 
-#: panels/power/cc-power-panel.c:1908
-msgid "_Blank screen"
-msgstr "_Vypnout obrazovku po uplynutí"
+#: panels/power/cc-power-panel.c:1932
+msgid "_Blank Screen"
+msgstr "_Vypnout obrazovku"
 
-#: panels/power/cc-power-panel.c:1931
+#: panels/power/cc-power-panel.c:1955
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.c:1932
+#: panels/power/cc-power-panel.c:1956
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Když chcete šetřit energii, můžete vypnout Wi-Fi."
 
-#: panels/power/cc-power-panel.c:1948
-msgid "_Mobile broadband"
+#: panels/power/cc-power-panel.c:1972
+msgid "_Mobile Broadband"
 msgstr "_Mobilní připojení"
 
-#: panels/power/cc-power-panel.c:1949
+#: panels/power/cc-power-panel.c:1973
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
 "Když chcete šetřit energii, můžete vypnout mobilní připojení (3G, 4G, LTE "
 "atd.)."
 
-#: panels/power/cc-power-panel.c:1999
+#: panels/power/cc-power-panel.c:2023
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:2000
+#: panels/power/cc-power-panel.c:2024
 msgid "Bluetooth can be turned off to save power."
 msgstr "Když chcete šetřit energii, můžete vypnout Bluetooth."
 
-#: panels/power/cc-power-panel.c:2052
+#: panels/power/cc-power-panel.c:2076
 msgid "When on battery power"
 msgstr "Při napájení z baterie"
 
-#: panels/power/cc-power-panel.c:2054
+#: panels/power/cc-power-panel.c:2078
 msgid "When plugged in"
 msgstr "Při napájení ze sítě"
 
-#: panels/power/cc-power-panel.c:2148
+#: panels/power/cc-power-panel.c:2172
 msgid "Suspend"
 msgstr "Uspat do paměti"
 
-#: panels/power/cc-power-panel.c:2149
+#: panels/power/cc-power-panel.c:2173
 msgid "Power Off"
 msgstr "Vypnout"
 
-#: panels/power/cc-power-panel.c:2150
+#: panels/power/cc-power-panel.c:2174
 msgid "Hibernate"
 msgstr "Uspat na disk"
 
-#: panels/power/cc-power-panel.c:2151
+#: panels/power/cc-power-panel.c:2175
 msgid "Nothing"
 msgstr "Nic nedělat"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2251
+#: panels/power/cc-power-panel.c:2275
 msgid "Suspend & Power Button"
 msgstr "Uspávání a vypínací tlačítko"
 
-#: panels/power/cc-power-panel.c:2292
-msgid "_Automatic suspend"
+#: panels/power/cc-power-panel.c:2316
+msgid "_Automatic Suspend"
 msgstr "_Automaticky uspat"
 
-#: panels/power/cc-power-panel.c:2293
+#: panels/power/cc-power-panel.c:2317
 msgid "Automatic suspend"
 msgstr "Automaticky uspat"
 
-#: panels/power/cc-power-panel.c:2350
-msgid "_When the Power Button is pressed"
-msgstr "_Když je zmáčknuto vypínací tlačítko"
+#: panels/power/cc-power-panel.c:2374
+msgid "Po_wer Button Action"
+msgstr "Činnost tlačítka na_pájení"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -4553,7 +4543,7 @@ msgid "On _Battery Power"
 msgstr "_Při napájení z baterie"
 
 #: panels/power/cc-power-panel.ui:233 panels/power/cc-power-panel.ui:293
-#: panels/universal-access/cc-ua-panel.ui:1507
+#: panels/universal-access/cc-ua-panel.ui:1495
 msgid "Delay"
 msgstr "Po uplynutí"
 
@@ -4746,7 +4736,7 @@ msgid "Select Printer Driver"
 msgstr "Vyberte ovladač tiskárny"
 
 #: panels/printers/ppd-selection-dialog.ui:40
-#: panels/user-accounts/cc-avatar-chooser.c:108
+#: panels/user-accounts/cc-avatar-chooser.c:109
 msgid "Select"
 msgstr "Vybrat"
 
@@ -5624,17 +5614,17 @@ msgstr ""
 "obrazovka;zamknout;zámek;diagnostika;pád;zhroucení;soukromý;osobní;nedávný;"
 "dočasný;tmp;index;jméno;síť;identita;"
 
-#: panels/region/cc-format-chooser.c:114
+#: panels/region/cc-format-chooser.c:133
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Imperiální"
 
-#: panels/region/cc-format-chooser.c:116
+#: panels/region/cc-format-chooser.c:135
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrické"
 
-#: panels/region/cc-format-chooser.c:286
+#: panels/region/cc-format-chooser.c:314
 msgid "No regions found"
 msgstr "Žádné regiony nebyly nenalezeny"
 
@@ -5649,10 +5639,6 @@ msgstr "Náhled"
 #: panels/region/cc-format-chooser.ui:123
 msgid "Dates"
 msgstr "Datum"
-
-#: panels/region/cc-format-chooser.ui:154
-msgid "Times"
-msgstr "Čas"
 
 #: panels/region/cc-format-chooser.ui:185
 msgid "Dates & Times"
@@ -5687,12 +5673,12 @@ msgstr "Přidat vstupní zdroj"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Vstupní metody nemohou být použity na přihlašovací obrazovce"
 
-#: panels/region/cc-region-panel.c:1503
+#: panels/region/cc-region-panel.c:1511
 msgid "Login _Screen"
 msgstr "Při_hlašovací obrazovka"
 
 #: panels/region/cc-region-panel.ui:64
-#: panels/user-accounts/cc-user-panel.ui:362
+#: panels/user-accounts/cc-user-panel.ui:364
 msgid "_Language"
 msgstr "Jazy_k"
 
@@ -5726,39 +5712,39 @@ msgstr ""
 "Nastavení přihlášení jsou používány všemi uživateli při přihlašování do "
 "systému"
 
-#: panels/region/cc-region-panel.ui:338
+#: panels/region/cc-region-panel.ui:337
 msgid "Input Source Options"
 msgstr "Nastavení vstupního zdroje"
 
-#: panels/region/cc-region-panel.ui:353
+#: panels/region/cc-region-panel.ui:352
 msgid "Use the _same source for all windows"
 msgstr "Použít _stejný zdroj pro všechna okna"
 
-#: panels/region/cc-region-panel.ui:371
+#: panels/region/cc-region-panel.ui:370
 msgid "Allow _different sources for each window"
 msgstr "Umožnit _různé zdroje pro jednotlivá okna"
 
-#: panels/region/cc-region-panel.ui:413
+#: panels/region/cc-region-panel.ui:412
 msgid "Previous source"
 msgstr "Předchozí zdroj"
 
-#: panels/region/cc-region-panel.ui:431
+#: panels/region/cc-region-panel.ui:430
 msgid "Super+Shift+Space"
 msgstr "Super + Shift + mezerník"
 
-#: panels/region/cc-region-panel.ui:446
+#: panels/region/cc-region-panel.ui:445
 msgid "Next source"
 msgstr "Následující sdroj"
 
-#: panels/region/cc-region-panel.ui:464
+#: panels/region/cc-region-panel.ui:463
 msgid "Super+Space"
 msgstr "Super + mezerník"
 
-#: panels/region/cc-region-panel.ui:479
+#: panels/region/cc-region-panel.ui:478
 msgid "Left+Right Alt"
 msgstr "levý Alt + pravý Alt"
 
-#: panels/region/cc-region-panel.ui:495
+#: panels/region/cc-region-panel.ui:494
 msgid "These keyboard shortcuts can be changed in the keyboard settings"
 msgstr "Tyto klávesové zkratky můžete změnit v nastaveních klávesnice"
 
@@ -5776,29 +5762,38 @@ msgstr "Vyberte jazyk, formáty, rozložení klávesnice a vstupní zdroje"
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "jazyk;rozložení;klávesnice;vstup;"
 
-#: panels/search/cc-search-locations-dialog.c:604
+#: panels/search/cc-search-locations-dialog.c:610
 msgid "Select Location"
 msgstr "Vyberte umístění"
 
-#: panels/search/cc-search-locations-dialog.c:608
+#: panels/search/cc-search-locations-dialog.c:614
 msgid "_OK"
 msgstr "_Budiž"
 
-#: panels/search/cc-search-panel.c:175
+#: panels/search/cc-search-panel.c:153
 msgid "No applications found"
 msgstr "Žádné aplikace nenalezeny"
 
-#: panels/search/cc-search-panel.ui:52
+#: panels/search/cc-search-panel-row.ui:92
 msgid "Move Up"
 msgstr "Posunout výš"
 
-#: panels/search/cc-search-panel.ui:69
+#: panels/search/cc-search-panel-row.ui:102
 msgid "Move Down"
 msgstr "Posunout níž"
 
-#: panels/search/cc-search-panel.ui:105
-msgid "Preferences"
-msgstr "Předvolby"
+#: panels/search/cc-search-panel.ui:32
+msgid ""
+"Control which search results are shown in the Activities Overview. The order "
+"of search results can also be changed by moving rows in the list."
+msgstr ""
+"Určuje, které výsledky hledání se zobrazí v přehledu Činností. Přesunem "
+"řádků v seznamu se dá měnit také pořadí zobrazení výsledků."
+
+#: panels/search/cc-search-panel.ui:60
+#: panels/search/search-locations-dialog.ui:9
+msgid "Search Locations"
+msgstr "Prohledávaná umístění"
 
 #: panels/search/gnome-search-panel.desktop.in.in:4
 msgid ""
@@ -5812,19 +5807,25 @@ msgstr ""
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "hledání;hledat;najít;index;skrýt;soukromí;privátní;výsledky;"
 
-#: panels/search/search-locations-dialog.ui:9
-msgid "Search Locations"
-msgstr "Prohledávaná umístění"
+#: panels/search/search-locations-dialog.ui:32
+#: panels/search/search-locations-dialog.ui:69
+#: panels/search/search-locations-dialog.ui:107
+msgid ""
+"Folders which are searched by system applications, such as Files, Photos and "
+"Videos."
+msgstr ""
+"Složky, které jsou prohledávané systémovými aplikacemi, jako jsou Soubory, "
+"Fotky a Videa."
 
-#: panels/search/search-locations-dialog.ui:43
+#: panels/search/search-locations-dialog.ui:52
 msgid "Places"
 msgstr "Místa"
 
-#: panels/search/search-locations-dialog.ui:73
+#: panels/search/search-locations-dialog.ui:91
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: panels/search/search-locations-dialog.ui:130
+#: panels/search/search-locations-dialog.ui:156
 msgid "Other"
 msgstr "Ostatní"
 
@@ -5833,31 +5834,31 @@ msgstr "Ostatní"
 msgid "No networks selected for sharing"
 msgstr "Nebyly zvoleny žádné sítě pro sdílení"
 
-#: panels/sharing/cc-sharing-panel.c:319
+#: panels/sharing/cc-sharing-panel.c:320
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Zapnuto"
 
-#: panels/sharing/cc-sharing-panel.c:321 panels/sharing/cc-sharing-panel.c:348
+#: panels/sharing/cc-sharing-panel.c:322 panels/sharing/cc-sharing-panel.c:349
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Vypnuto"
 
-#: panels/sharing/cc-sharing-panel.c:351
+#: panels/sharing/cc-sharing-panel.c:352
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Zapnuto"
 
-#: panels/sharing/cc-sharing-panel.c:354
+#: panels/sharing/cc-sharing-panel.c:355
 msgctxt "service is active"
 msgid "Active"
 msgstr "Aktivní"
 
-#: panels/sharing/cc-sharing-panel.c:424
+#: panels/sharing/cc-sharing-panel.c:425
 msgid "Choose a Folder"
 msgstr "Výběr složky"
 
-#: panels/sharing/cc-sharing-panel.c:724
+#: panels/sharing/cc-sharing-panel.c:725
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5866,7 +5867,7 @@ msgstr ""
 "Sdílení souborů vám umožňuje sdílet složku Veřejné s ostatními v aktuální "
 "síti pomocí: <a href=\"dav://%s\">dav://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:726
+#: panels/sharing/cc-sharing-panel.c:727
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5877,7 +5878,7 @@ msgstr ""
 "příkazem Secure Shell:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:728
+#: panels/sharing/cc-sharing-panel.c:729
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
@@ -5886,11 +5887,11 @@ msgstr ""
 "Sdílení obrazovky umožňuje vzdáleným uživatelům, aby viděli nebo ovládali "
 "vaši obrazovku připojením k <a href=\"vnc://%s\">vnc://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:832
+#: panels/sharing/cc-sharing-panel.c:833
 msgid "Copy"
 msgstr "Kopírovat"
 
-#: panels/sharing/cc-sharing-panel.c:1285
+#: panels/sharing/cc-sharing-panel.c:1286
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "Sdílení"
@@ -5929,49 +5930,49 @@ msgid "_Require Password"
 msgstr "V_yžadovat heslo"
 
 #: panels/sharing/cc-sharing-panel.ui:424
-#: panels/sharing/cc-sharing-panel.ui:496
+#: panels/sharing/cc-sharing-panel.ui:494
 msgid "Remote Login"
 msgstr "Vzdálené přihlášení"
 
-#: panels/sharing/cc-sharing-panel.ui:519
-#: panels/sharing/cc-sharing-panel.ui:765
+#: panels/sharing/cc-sharing-panel.ui:517
+#: panels/sharing/cc-sharing-panel.ui:763
 msgid "Screen Sharing"
 msgstr "Sdílení obrazovky"
 
-#: panels/sharing/cc-sharing-panel.ui:577
+#: panels/sharing/cc-sharing-panel.ui:575
 msgid "_Allow connections to control the screen"
 msgstr "Umožnit připojení pro ovládání obr_azovky"
 
-#: panels/sharing/cc-sharing-panel.ui:622
+#: panels/sharing/cc-sharing-panel.ui:620
 msgid "_Password:"
 msgstr "_Heslo:"
 
-#: panels/sharing/cc-sharing-panel.ui:652
+#: panels/sharing/cc-sharing-panel.ui:650
 msgid "_Show Password"
 msgstr "_Zobrazit heslo"
 
-#: panels/sharing/cc-sharing-panel.ui:683
+#: panels/sharing/cc-sharing-panel.ui:681
 msgid "Access Options"
 msgstr "Volby přístupu"
 
-#: panels/sharing/cc-sharing-panel.ui:697
+#: panels/sharing/cc-sharing-panel.ui:695
 msgid "_New connections must ask for access"
 msgstr "_Nové připojení se musí dotázat o svolení"
 
-#: panels/sharing/cc-sharing-panel.ui:715
+#: panels/sharing/cc-sharing-panel.ui:713
 msgid "_Require a password"
 msgstr "_Vyžadovat heslo"
 
-#: panels/sharing/cc-sharing-panel.ui:776
-#: panels/sharing/cc-sharing-panel.ui:870
+#: panels/sharing/cc-sharing-panel.ui:774
+#: panels/sharing/cc-sharing-panel.ui:868
 msgid "Media Sharing"
 msgstr "Sdílení multimédií"
 
-#: panels/sharing/cc-sharing-panel.ui:809
+#: panels/sharing/cc-sharing-panel.ui:807
 msgid "Share music, photos and videos over the network."
 msgstr "Sdílet hudbu, fotografie a videa po síti."
 
-#: panels/sharing/cc-sharing-panel.ui:824
+#: panels/sharing/cc-sharing-panel.ui:822
 msgid "Folders"
 msgstr "Složky"
 
@@ -6092,7 +6093,7 @@ msgstr "Hlasitost"
 msgid "Alert Sound"
 msgstr "Zvuk upozornění"
 
-#: panels/sound/cc-volume-slider.c:178
+#: panels/sound/cc-volume-slider.c:63
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
@@ -6107,10 +6108,11 @@ msgstr "Změnit hlasitost zvuku, vstupy, výstupy a upozornění"
 
 #. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/gnome-sound-panel.desktop.in.in:20
-msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
+msgid ""
+"Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;Output;Input;"
 msgstr ""
-"karta;mikrofon;hlasitost;prolínání;vyvážení;bluetooth;náhlavní souprava;"
-"audio;"
+"karta;mikrofon;hlasitost;prolínání;vyvážení;bluetooth;náhlavní souprava;zvuk;"
+"výstup;vstup;"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.c:94
 #: panels/thunderbolt/cc-bolt-device-entry.c:125
@@ -6291,32 +6293,32 @@ msgstr "Thunderbolt;"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:498
+#: panels/universal-access/cc-ua-panel.c:497
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Výchozí"
 
-#: panels/universal-access/cc-ua-panel.c:501
+#: panels/universal-access/cc-ua-panel.c:500
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Střední"
 
-#: panels/universal-access/cc-ua-panel.c:504
+#: panels/universal-access/cc-ua-panel.c:503
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Velký"
 
-#: panels/universal-access/cc-ua-panel.c:507
+#: panels/universal-access/cc-ua-panel.c:506
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Větší"
 
-#: panels/universal-access/cc-ua-panel.c:510
+#: panels/universal-access/cc-ua-panel.c:509
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Největší"
 
-#: panels/universal-access/cc-ua-panel.c:514
+#: panels/universal-access/cc-ua-panel.c:513
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -6324,319 +6326,319 @@ msgstr[0] "%d pixel"
 msgstr[1] "%d pixely"
 msgstr[2] "%d pixelů"
 
-#: panels/universal-access/cc-ua-panel.ui:93
+#: panels/universal-access/cc-ua-panel.ui:78
 msgid "_Always Show Universal Access Menu"
 msgstr "Vždy zobr_azovat nabídku univerzálního přístupu"
 
-#: panels/universal-access/cc-ua-panel.ui:135
+#: panels/universal-access/cc-ua-panel.ui:120
 msgid "Seeing"
 msgstr "Zrak"
 
-#: panels/universal-access/cc-ua-panel.ui:181
+#: panels/universal-access/cc-ua-panel.ui:166
 msgid "_High Contrast"
 msgstr "V_ysoký kontrast"
 
-#: panels/universal-access/cc-ua-panel.ui:228
+#: panels/universal-access/cc-ua-panel.ui:213
 msgid "_Large Text"
 msgstr "Ve_lký text"
 
-#: panels/universal-access/cc-ua-panel.ui:273
+#: panels/universal-access/cc-ua-panel.ui:258
 msgid "C_ursor Size"
 msgstr "Velikost k_urzoru"
 
-#: panels/universal-access/cc-ua-panel.ui:320
+#: panels/universal-access/cc-ua-panel.ui:305
 #: panels/universal-access/zoom-options.ui:99
 msgid "_Zoom"
 msgstr "_Přiblížení"
 
-#: panels/universal-access/cc-ua-panel.ui:366
+#: panels/universal-access/cc-ua-panel.ui:351
 msgid "Screen _Reader"
 msgstr "Čtečka ob_razovky"
 
-#: panels/universal-access/cc-ua-panel.ui:412
-#: panels/universal-access/cc-ua-panel.ui:1243
+#: panels/universal-access/cc-ua-panel.ui:397
+#: panels/universal-access/cc-ua-panel.ui:1231
 msgid "_Sound Keys"
 msgstr "Ozvučení kláve_s"
 
-#: panels/universal-access/cc-ua-panel.ui:474
+#: panels/universal-access/cc-ua-panel.ui:459
 msgid "Hearing"
 msgstr "Sluch"
 
-#: panels/universal-access/cc-ua-panel.ui:518
-#: panels/universal-access/cc-ua-panel.ui:1346
+#: panels/universal-access/cc-ua-panel.ui:503
+#: panels/universal-access/cc-ua-panel.ui:1334
 msgid "_Visual Alerts"
 msgstr "_Vizuální upozornění"
 
-#: panels/universal-access/cc-ua-panel.ui:626
+#: panels/universal-access/cc-ua-panel.ui:611
 msgid "Screen _Keyboard"
 msgstr "_Klávesnice na obrazovce"
 
-#: panels/universal-access/cc-ua-panel.ui:671
+#: panels/universal-access/cc-ua-panel.ui:656
 msgid "R_epeat Keys"
 msgstr "Op_akování kláves"
 
-#: panels/universal-access/cc-ua-panel.ui:717
+#: panels/universal-access/cc-ua-panel.ui:702
 msgid "Cursor _Blinking"
 msgstr "_Blikání kurzoru"
 
-#: panels/universal-access/cc-ua-panel.ui:763
+#: panels/universal-access/cc-ua-panel.ui:748
 msgid "_Typing Assist (AccessX)"
 msgstr "Pomáha_t s psaním"
 
-#: panels/universal-access/cc-ua-panel.ui:824
+#: panels/universal-access/cc-ua-panel.ui:809
 msgid "Pointing & Clicking"
 msgstr "Ukazování a klikání"
 
-#: panels/universal-access/cc-ua-panel.ui:870
+#: panels/universal-access/cc-ua-panel.ui:855
 msgid "_Mouse Keys"
 msgstr "_Myš z klávesnice"
 
-#: panels/universal-access/cc-ua-panel.ui:915
+#: panels/universal-access/cc-ua-panel.ui:900
 msgid "_Click Assist"
 msgstr "Pomá_hat s klikáním"
 
-#: panels/universal-access/cc-ua-panel.ui:961
+#: panels/universal-access/cc-ua-panel.ui:946
 msgid "_Double-Click Delay"
 msgstr "Zpoždění _dvojitého kliknutí"
 
-#: panels/universal-access/cc-ua-panel.ui:981
+#: panels/universal-access/cc-ua-panel.ui:966
 msgid "Double-Click Delay"
 msgstr "Zpoždění dvojitého kliknutí"
 
-#: panels/universal-access/cc-ua-panel.ui:1048
+#: panels/universal-access/cc-ua-panel.ui:1036
 msgid "Cursor Size"
 msgstr "Velikost kurzoru"
 
-#: panels/universal-access/cc-ua-panel.ui:1075
+#: panels/universal-access/cc-ua-panel.ui:1063
 msgid ""
 "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgstr ""
 "Velikost kurzoru se dá kombinovat s přiblížením, aby byl kurzor lépe vidět."
 
-#: panels/universal-access/cc-ua-panel.ui:1111
+#: panels/universal-access/cc-ua-panel.ui:1099
 msgid "Screen Reader"
 msgstr "Čtečka obrazovky"
 
-#: panels/universal-access/cc-ua-panel.ui:1128
+#: panels/universal-access/cc-ua-panel.ui:1116
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr ""
 "Čtečka obrazovky čte zobrazený text postupně, jak text získává zaměření."
 
-#: panels/universal-access/cc-ua-panel.ui:1161
+#: panels/universal-access/cc-ua-panel.ui:1149
 msgid "_Screen Reader"
 msgstr "Čtečk_a obrazovky"
 
-#: panels/universal-access/cc-ua-panel.ui:1200
+#: panels/universal-access/cc-ua-panel.ui:1188
 msgid "Sound Keys"
 msgstr "Ozvučení kláves"
 
-#: panels/universal-access/cc-ua-panel.ui:1218
+#: panels/universal-access/cc-ua-panel.ui:1206
 msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr "Pípnout při zapnutí nebo vypnutí klávesy Num Lock nebo Caps Lock."
 
-#: panels/universal-access/cc-ua-panel.ui:1288
+#: panels/universal-access/cc-ua-panel.ui:1276
 msgid "Visual Alerts"
 msgstr "Vizuální upozornění"
 
-#: panels/universal-access/cc-ua-panel.ui:1292
+#: panels/universal-access/cc-ua-panel.ui:1280
 msgid "_Test flash"
 msgstr "O_testovat blikání"
 
-#: panels/universal-access/cc-ua-panel.ui:1321
+#: panels/universal-access/cc-ua-panel.ui:1309
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "Použít vizuální signalizaci, když se objeví zvukové upozornění."
 
-#: panels/universal-access/cc-ua-panel.ui:1372
+#: panels/universal-access/cc-ua-panel.ui:1360
 msgid "Flash the _window title"
 msgstr "Bliknout záhlavím _okna"
 
-#: panels/universal-access/cc-ua-panel.ui:1390
+#: panels/universal-access/cc-ua-panel.ui:1378
 msgid "Flash the entire _screen"
 msgstr "Bliknout _celou obrazovkou"
 
-#: panels/universal-access/cc-ua-panel.ui:1435
+#: panels/universal-access/cc-ua-panel.ui:1423
 msgid "Repeat Keys"
 msgstr "Opakování kláves"
 
-#: panels/universal-access/cc-ua-panel.ui:1465
+#: panels/universal-access/cc-ua-panel.ui:1453
 msgid "Key presses repeat when key is held down."
 msgstr "Opakovat zmáčknutí klávesy, když držíte klávesu zmáčknutou."
 
-#: panels/universal-access/cc-ua-panel.ui:1545
+#: panels/universal-access/cc-ua-panel.ui:1533
 msgid "Repeat keys delay"
 msgstr "Prodleva před opakováním kláves"
 
-#: panels/universal-access/cc-ua-panel.ui:1593
-#: panels/universal-access/cc-ua-panel.ui:1728
+#: panels/universal-access/cc-ua-panel.ui:1581
+#: panels/universal-access/cc-ua-panel.ui:1716
 msgid "Speed"
 msgstr "Rychlost"
 
-#: panels/universal-access/cc-ua-panel.ui:1632
+#: panels/universal-access/cc-ua-panel.ui:1620
 msgid "Repeat keys speed"
 msgstr "Rychlost opakování kláves"
 
-#: panels/universal-access/cc-ua-panel.ui:1656
+#: panels/universal-access/cc-ua-panel.ui:1644
 msgid "Cursor Blinking"
 msgstr "Blikání kurzoru"
 
-#: panels/universal-access/cc-ua-panel.ui:1686
+#: panels/universal-access/cc-ua-panel.ui:1674
 msgid "Cursor blinks in text fields."
 msgstr "Kurzor v textových polích bliká."
 
-#: panels/universal-access/cc-ua-panel.ui:1765
+#: panels/universal-access/cc-ua-panel.ui:1753
 msgid "Cursor blinking speed"
 msgstr "Rychlost blikání kurzoru"
 
-#: panels/universal-access/cc-ua-panel.ui:1801
+#: panels/universal-access/cc-ua-panel.ui:1789
 msgid "Typing Assist"
 msgstr "Pomoc s psaním"
 
-#: panels/universal-access/cc-ua-panel.ui:1840
+#: panels/universal-access/cc-ua-panel.ui:1828
 msgid "_Sticky Keys"
 msgstr "Kombinace kláves jedním pr_stem"
 
-#: panels/universal-access/cc-ua-panel.ui:1857
+#: panels/universal-access/cc-ua-panel.ui:1845
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Posloupnost modifikačních kláves považovat za kombinaci těchto kláves"
 
-#: panels/universal-access/cc-ua-panel.ui:1881
+#: panels/universal-access/cc-ua-panel.ui:1869
 msgid "_Disable if two keys are pressed together"
 msgstr "Vypnout při souběžném zmáčknutí _dvou kláves"
 
-#: panels/universal-access/cc-ua-panel.ui:1899
+#: panels/universal-access/cc-ua-panel.ui:1887
 msgid "Beep when a _modifier key is pressed"
 msgstr "Zvukové znamení při zmáčknutí _modifikační klávesy"
 
-#: panels/universal-access/cc-ua-panel.ui:1947
+#: panels/universal-access/cc-ua-panel.ui:1935
 msgid "S_low Keys"
 msgstr "Poma_lé klávesy"
 
-#: panels/universal-access/cc-ua-panel.ui:1964
+#: panels/universal-access/cc-ua-panel.ui:1952
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr ""
 "Zadejte jaké má být zpoždění, než je klávesa přijata po té, co je zmáčknuta"
 
-#: panels/universal-access/cc-ua-panel.ui:1997
-#: panels/universal-access/cc-ua-panel.ui:2210
-#: panels/universal-access/cc-ua-panel.ui:2547
+#: panels/universal-access/cc-ua-panel.ui:1985
+#: panels/universal-access/cc-ua-panel.ui:2198
+#: panels/universal-access/cc-ua-panel.ui:2535
 msgid "A_cceptance delay:"
 msgstr "Zpož_dění přijetí:"
 
-#: panels/universal-access/cc-ua-panel.ui:2019
+#: panels/universal-access/cc-ua-panel.ui:2007
 msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Krátké"
 
-#: panels/universal-access/cc-ua-panel.ui:2038
+#: panels/universal-access/cc-ua-panel.ui:2026
 msgid "Slow keys typing delay"
 msgstr "Prodleva při psaní pomalými klávesami"
 
-#: panels/universal-access/cc-ua-panel.ui:2053
+#: panels/universal-access/cc-ua-panel.ui:2041
 msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Dlouhé"
 
-#: panels/universal-access/cc-ua-panel.ui:2080
+#: panels/universal-access/cc-ua-panel.ui:2068
 msgid "Beep when a key is pr_essed"
 msgstr "Zvukové znam_ení při zmáčknutí klávesy"
 
-#: panels/universal-access/cc-ua-panel.ui:2097
+#: panels/universal-access/cc-ua-panel.ui:2085
 msgid "Beep when a key is _accepted"
 msgstr "Zvukové zn_amení při příjmutí klávesy"
 
-#: panels/universal-access/cc-ua-panel.ui:2114
-#: panels/universal-access/cc-ua-panel.ui:2293
+#: panels/universal-access/cc-ua-panel.ui:2102
+#: panels/universal-access/cc-ua-panel.ui:2281
 msgid "Beep when a key is _rejected"
 msgstr "Zvukové znamení při _odmítnutí klávesy"
 
-#: panels/universal-access/cc-ua-panel.ui:2160
+#: panels/universal-access/cc-ua-panel.ui:2148
 msgid "_Bounce Keys"
 msgstr "Vícenáso_bná zmáčknutí kláves"
 
-#: panels/universal-access/cc-ua-panel.ui:2177
+#: panels/universal-access/cc-ua-panel.ui:2165
 msgid "Ignores fast duplicate keypresses"
 msgstr "Ignorovat rychle opakované zmáčknutí klávesy"
 
-#: panels/universal-access/cc-ua-panel.ui:2232
+#: panels/universal-access/cc-ua-panel.ui:2220
 msgctxt "bounce keys delay"
 msgid "Short"
 msgstr "Krátké"
 
-#: panels/universal-access/cc-ua-panel.ui:2251
+#: panels/universal-access/cc-ua-panel.ui:2239
 msgid "Bounce keys typing delay"
 msgstr "Prodleva při psaní s vícenásobným zmáčknutím kláves"
 
-#: panels/universal-access/cc-ua-panel.ui:2266
+#: panels/universal-access/cc-ua-panel.ui:2254
 msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "Dlouhé"
 
-#: panels/universal-access/cc-ua-panel.ui:2379
+#: panels/universal-access/cc-ua-panel.ui:2367
 msgid "_Enable by Keyboard"
 msgstr "Zapnout z kláv_esnice"
 
-#: panels/universal-access/cc-ua-panel.ui:2396
+#: panels/universal-access/cc-ua-panel.ui:2384
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Zapínat funkce zpřístupnění pomocí klávesnice"
 
-#: panels/universal-access/cc-ua-panel.ui:2460
+#: panels/universal-access/cc-ua-panel.ui:2448
 msgid "Click Assist"
 msgstr "Pomoc s klikáním"
 
-#: panels/universal-access/cc-ua-panel.ui:2496
+#: panels/universal-access/cc-ua-panel.ui:2484
 msgid "_Simulated Secondary Click"
 msgstr "_Simulované druhé kliknutí"
 
-#: panels/universal-access/cc-ua-panel.ui:2514
+#: panels/universal-access/cc-ua-panel.ui:2502
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Zahájit druhé kliknutí podržením hlavního tlačítka"
 
-#: panels/universal-access/cc-ua-panel.ui:2568
+#: panels/universal-access/cc-ua-panel.ui:2556
 msgctxt "secondary click"
 msgid "Short"
 msgstr "Krátké"
 
-#: panels/universal-access/cc-ua-panel.ui:2587
+#: panels/universal-access/cc-ua-panel.ui:2575
 msgid "Secondary click delay"
 msgstr "Zpoždění druhého kliknutí"
 
-#: panels/universal-access/cc-ua-panel.ui:2602
+#: panels/universal-access/cc-ua-panel.ui:2590
 msgctxt "secondary click delay"
 msgid "Long"
 msgstr "Dlouhé"
 
-#: panels/universal-access/cc-ua-panel.ui:2659
+#: panels/universal-access/cc-ua-panel.ui:2647
 msgid "_Hover Click"
 msgstr "Kl_iknutí posečkáním"
 
-#: panels/universal-access/cc-ua-panel.ui:2677
+#: panels/universal-access/cc-ua-panel.ui:2665
 msgid "Trigger a click when the pointer hovers"
 msgstr "Zahájit kliknutí při zastavení pohybu ukazatele"
 
-#: panels/universal-access/cc-ua-panel.ui:2710
+#: panels/universal-access/cc-ua-panel.ui:2698
 msgid "D_elay:"
 msgstr "Zpož_dění:"
 
-#: panels/universal-access/cc-ua-panel.ui:2732
+#: panels/universal-access/cc-ua-panel.ui:2720
 msgctxt "dwell click delay"
 msgid "Short"
 msgstr "Krátké"
 
-#: panels/universal-access/cc-ua-panel.ui:2763
+#: panels/universal-access/cc-ua-panel.ui:2751
 msgctxt "dwell click delay"
 msgid "Long"
 msgstr "Dlouhé"
 
-#: panels/universal-access/cc-ua-panel.ui:2799
+#: panels/universal-access/cc-ua-panel.ui:2787
 msgid "Motion _threshold:"
 msgstr "Práh poh_ybu:"
 
-#: panels/universal-access/cc-ua-panel.ui:2821
+#: panels/universal-access/cc-ua-panel.ui:2809
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Nízký"
 
-#: panels/universal-access/cc-ua-panel.ui:2852
+#: panels/universal-access/cc-ua-panel.ui:2840
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Vysoký"
@@ -6659,27 +6661,27 @@ msgstr ""
 "poklepání;prodleva;rychlost;asistent;opakování;blikání;blikat;poruchy;"
 "handicap;vidění;sluch;psaní;"
 
-#: panels/universal-access/zoom-options.c:334
+#: panels/universal-access/zoom-options.c:305
 msgctxt "Distance"
 msgid "Short"
 msgstr "Krátká"
 
-#: panels/universal-access/zoom-options.c:335
+#: panels/universal-access/zoom-options.c:306
 msgctxt "Distance"
 msgid "¼ Screen"
 msgstr "¼ obrazovky"
 
-#: panels/universal-access/zoom-options.c:336
+#: panels/universal-access/zoom-options.c:307
 msgctxt "Distance"
 msgid "½ Screen"
 msgstr "½ obrazovky"
 
-#: panels/universal-access/zoom-options.c:337
+#: panels/universal-access/zoom-options.c:308
 msgctxt "Distance"
 msgid "¾ Screen"
 msgstr "¾ obrazovky"
 
-#: panels/universal-access/zoom-options.c:338
+#: panels/universal-access/zoom-options.c:309
 msgctxt "Distance"
 msgid "Long"
 msgstr "Dlouhá"
@@ -6728,110 +6730,110 @@ msgstr "Lupa se rozšiřuj_e mimo obrazovku"
 msgid "_Keep magnifier cursor centered"
 msgstr "Udržovat u_kazatel lupy na středu"
 
-#: panels/universal-access/zoom-options.ui:369
+#: panels/universal-access/zoom-options.ui:370
 msgid "Magnifier cursor _pushes contents around"
 msgstr "Ukazatel lu_py odsouvá okolní obsah"
 
-#: panels/universal-access/zoom-options.ui:388
+#: panels/universal-access/zoom-options.ui:390
 msgid "Magnifier cursor moves with _contents"
 msgstr "Ukazatel lupy se přesouvá s o_bsahem"
 
-#: panels/universal-access/zoom-options.ui:422
+#: panels/universal-access/zoom-options.ui:425
 msgid "Magnifier Position:"
 msgstr "Poloha lupy:"
 
-#: panels/universal-access/zoom-options.ui:443
+#: panels/universal-access/zoom-options.ui:446
 msgid "Magnifier"
 msgstr "Lupa"
 
-#: panels/universal-access/zoom-options.ui:490
+#: panels/universal-access/zoom-options.ui:493
 msgid "_Thickness:"
 msgstr "_Tloušťka:"
 
-#: panels/universal-access/zoom-options.ui:516
+#: panels/universal-access/zoom-options.ui:519
 msgctxt "universal access, thickness"
 msgid "Thin"
 msgstr "Tenký"
 
-#: panels/universal-access/zoom-options.ui:548
+#: panels/universal-access/zoom-options.ui:551
 msgctxt "universal access, thickness"
 msgid "Thick"
 msgstr "Tlustý"
 
-#: panels/universal-access/zoom-options.ui:574
+#: panels/universal-access/zoom-options.ui:577
 msgid "_Length:"
 msgstr "Dé_lka:"
 
 #. The color of the accessibility crosshair
-#: panels/universal-access/zoom-options.ui:623
+#: panels/universal-access/zoom-options.ui:626
 msgid "Co_lor:"
 msgstr "_Barva:"
 
-#: panels/universal-access/zoom-options.ui:687
+#: panels/universal-access/zoom-options.ui:690
 msgid "_Crosshairs:"
 msgstr "Zaměřovací _kříž:"
 
-#: panels/universal-access/zoom-options.ui:735
+#: panels/universal-access/zoom-options.ui:738
 msgid "_Overlaps mouse cursor"
 msgstr "Překrývat ukazat_el myši"
 
-#: panels/universal-access/zoom-options.ui:773
+#: panels/universal-access/zoom-options.ui:776
 msgid "Crosshairs"
 msgstr "Zaměřovací kříž"
 
-#: panels/universal-access/zoom-options.ui:822
+#: panels/universal-access/zoom-options.ui:825
 msgid "_White on black:"
 msgstr "_Bílá na černém:"
 
-#: panels/universal-access/zoom-options.ui:842
+#: panels/universal-access/zoom-options.ui:845
 msgid "_Brightness:"
 msgstr "_Jas:"
 
-#: panels/universal-access/zoom-options.ui:863
+#: panels/universal-access/zoom-options.ui:866
 msgid "_Contrast:"
 msgstr "_Kontrast:"
 
 #. The contrast scale goes from Color to None (grayscale)
-#: panels/universal-access/zoom-options.ui:883
+#: panels/universal-access/zoom-options.ui:886
 msgctxt "universal access, contrast"
 msgid "Co_lor"
 msgstr "_Barva"
 
-#: panels/universal-access/zoom-options.ui:908
+#: panels/universal-access/zoom-options.ui:911
 msgctxt "universal access, color"
 msgid "None"
 msgstr "Žádná"
 
-#: panels/universal-access/zoom-options.ui:940
+#: panels/universal-access/zoom-options.ui:943
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "Plná"
 
-#: panels/universal-access/zoom-options.ui:1003
+#: panels/universal-access/zoom-options.ui:1006
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Nízký"
 
-#: panels/universal-access/zoom-options.ui:1036
+#: panels/universal-access/zoom-options.ui:1039
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Vysoký"
 
-#: panels/universal-access/zoom-options.ui:1067
+#: panels/universal-access/zoom-options.ui:1070
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Nízký"
 
-#: panels/universal-access/zoom-options.ui:1100
+#: panels/universal-access/zoom-options.ui:1103
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Vysoký"
 
-#: panels/universal-access/zoom-options.ui:1136
+#: panels/universal-access/zoom-options.ui:1139
 msgid "Color Effects:"
 msgstr "Ovlivnění barev:"
 
-#: panels/universal-access/zoom-options.ui:1161
+#: panels/universal-access/zoom-options.ui:1164
 msgid "Color Effects"
 msgstr "Ovlivnění barev"
 
@@ -6840,30 +6842,30 @@ msgid "Should match the web address of your login provider."
 msgstr ""
 "Mělo by se shodovat s webovou adresou poskytovatele vašeho přihlašování."
 
-#: panels/user-accounts/cc-add-user-dialog.c:204
+#: panels/user-accounts/cc-add-user-dialog.c:205
 msgid "Failed to add account"
 msgstr "Přidání účtu selhalo"
 
-#: panels/user-accounts/cc-add-user-dialog.c:652
+#: panels/user-accounts/cc-add-user-dialog.c:676
 #: panels/user-accounts/cc-password-dialog.c:261
 msgid "The passwords do not match."
 msgstr "Hesla si neodpovídají."
 
-#: panels/user-accounts/cc-add-user-dialog.c:874
-#: panels/user-accounts/cc-add-user-dialog.c:920
-#: panels/user-accounts/cc-add-user-dialog.c:941
+#: panels/user-accounts/cc-add-user-dialog.c:898
+#: panels/user-accounts/cc-add-user-dialog.c:944
+#: panels/user-accounts/cc-add-user-dialog.c:965
 msgid "Failed to register account"
 msgstr "Registrace účtu selhala"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1064
+#: panels/user-accounts/cc-add-user-dialog.c:1088
 msgid "No supported way to authenticate with this domain"
 msgstr "Ověření s touto doménou není podporováno"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1137
+#: panels/user-accounts/cc-add-user-dialog.c:1161
 msgid "Failed to join domain"
 msgstr "Připojení k doméně selhalo"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1198
+#: panels/user-accounts/cc-add-user-dialog.c:1222
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6871,7 +6873,7 @@ msgstr ""
 "Toto přihlašovací jméno nefunguje.\n"
 "Zkuste to, prosím, znovu."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1205
+#: panels/user-accounts/cc-add-user-dialog.c:1229
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6879,11 +6881,11 @@ msgstr ""
 "Toto přihlašovací heslo nefunguje.\n"
 "Zkuste to, prosím, znovu."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1213
+#: panels/user-accounts/cc-add-user-dialog.c:1237
 msgid "Failed to log into domain"
 msgstr "Přihlášení do domény selhalo"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1271
+#: panels/user-accounts/cc-add-user-dialog.c:1295
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Nelze najít doménu. Nemáte v názvu překlep?"
 
@@ -6897,17 +6899,17 @@ msgid "_Full Name"
 msgstr "_Celé jméno"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:206
-#: panels/user-accounts/cc-user-panel.ui:151
+#: panels/user-accounts/cc-user-panel.ui:153
 msgid "Standard"
 msgstr "Běžný"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:216
-#: panels/user-accounts/cc-user-panel.ui:161
+#: panels/user-accounts/cc-user-panel.ui:163
 msgid "Administrator"
 msgstr "Správce"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:232
-#: panels/user-accounts/cc-user-panel.ui:179
+#: panels/user-accounts/cc-user-panel.ui:181
 msgid "Account _Type"
 msgstr "_Typ účtu"
 
@@ -6934,11 +6936,6 @@ msgstr ""
 "spravované uživatelské účty. Tento účet můžete pak použít i pro přístup k "
 "firemním prostředkům na Internetu."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:507
-#: panels/user-accounts/data/join-dialog.ui:116
-msgid "_Domain"
-msgstr "_Doména"
-
 #: panels/user-accounts/cc-add-user-dialog.ui:732
 msgid "You are Offline"
 msgstr "Jste odpojeni"
@@ -6951,15 +6948,15 @@ msgstr "Abyste mohli přidat doménové uživatele, musíte být připojeni."
 msgid "_Enterprise Login"
 msgstr "_Přihlášení do domény"
 
-#: panels/user-accounts/cc-avatar-chooser.c:231
+#: panels/user-accounts/cc-avatar-chooser.c:232
 msgid "Browse for more pictures"
 msgstr "Procházet další obrázky"
 
-#: panels/user-accounts/cc-avatar-chooser.ui:27
+#: panels/user-accounts/cc-avatar-chooser.ui:39
 msgid "Take a Picture…"
 msgstr "Pořídit fotografii…"
 
-#: panels/user-accounts/cc-avatar-chooser.ui:34
+#: panels/user-accounts/cc-avatar-chooser.ui:46
 msgid "Select a File…"
 msgstr "Vybrat soubor…"
 
@@ -6999,7 +6996,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:770
+#: panels/user-accounts/cc-user-panel.c:771
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7007,7 +7004,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:774
+#: panels/user-accounts/cc-user-panel.c:775
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7091,30 +7088,30 @@ msgstr "Neplatné heslo, zkuste to, prosím, znovu"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Nelze se připojit k doméně „%s“: %s"
 
-#: panels/user-accounts/cc-user-panel.c:213
+#: panels/user-accounts/cc-user-panel.c:214
 msgid "Your account"
 msgstr "Váš účet"
 
-#: panels/user-accounts/cc-user-panel.c:388
+#: panels/user-accounts/cc-user-panel.c:389
 msgid "Failed to delete user"
 msgstr "Selhalo smazání účtu"
 
-#: panels/user-accounts/cc-user-panel.c:446
-#: panels/user-accounts/cc-user-panel.c:505
-#: panels/user-accounts/cc-user-panel.c:557
+#: panels/user-accounts/cc-user-panel.c:447
+#: panels/user-accounts/cc-user-panel.c:506
+#: panels/user-accounts/cc-user-panel.c:558
 msgid "Failed to revoke remotely managed user"
 msgstr "Selhalo zneplatnění vzdáleně spravovaného uživatele"
 
-#: panels/user-accounts/cc-user-panel.c:609
+#: panels/user-accounts/cc-user-panel.c:610
 msgid "You cannot delete your own account."
 msgstr "Nemůžete smazat svůj vlastní účet."
 
-#: panels/user-accounts/cc-user-panel.c:618
+#: panels/user-accounts/cc-user-panel.c:619
 #, c-format
 msgid "%s is still logged in"
 msgstr "Uživatel %s je doposud přihlášen"
 
-#: panels/user-accounts/cc-user-panel.c:622
+#: panels/user-accounts/cc-user-panel.c:623
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7122,12 +7119,12 @@ msgstr ""
 "Smazání účtu, zatímco je dotyčný uživatel přihlášen, může přivést systém do "
 "nekonzistentního stavu."
 
-#: panels/user-accounts/cc-user-panel.c:631
+#: panels/user-accounts/cc-user-panel.c:632
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Chcete zachovat soubory uživatele %s?"
 
-#: panels/user-accounts/cc-user-panel.c:635
+#: panels/user-accounts/cc-user-panel.c:636
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7135,47 +7132,47 @@ msgstr ""
 "Je možné zachovat domovskou složku, poštovní schránku a dočasné soubory, i "
 "když bude uživatelský účet smazán."
 
-#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:639
 msgid "_Delete Files"
 msgstr "O_dstranit soubory"
 
-#: panels/user-accounts/cc-user-panel.c:639
+#: panels/user-accounts/cc-user-panel.c:640
 msgid "_Keep Files"
 msgstr "Zacho_vat soubory"
 
-#: panels/user-accounts/cc-user-panel.c:653
+#: panels/user-accounts/cc-user-panel.c:654
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Opravdu chcete zneplatnit vzdáleně spravovaný účet uživatele %s?"
 
-#: panels/user-accounts/cc-user-panel.c:657
+#: panels/user-accounts/cc-user-panel.c:658
 msgid "_Delete"
 msgstr "O_dstranit"
 
-#: panels/user-accounts/cc-user-panel.c:707
+#: panels/user-accounts/cc-user-panel.c:708
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Účet zakázán"
 
-#: panels/user-accounts/cc-user-panel.c:715
+#: panels/user-accounts/cc-user-panel.c:716
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Bude nastaveno při příštím přihlášení"
 
-#: panels/user-accounts/cc-user-panel.c:718
+#: panels/user-accounts/cc-user-panel.c:719
 msgctxt "Password mode"
 msgid "None"
 msgstr "Žádné"
 
-#: panels/user-accounts/cc-user-panel.c:763
+#: panels/user-accounts/cc-user-panel.c:764
 msgid "Logged in"
 msgstr "právě přihlášený"
 
-#: panels/user-accounts/cc-user-panel.c:1093
+#: panels/user-accounts/cc-user-panel.c:1098
 msgid "Failed to contact the accounts service"
 msgstr "Selhalo kontaktování účtovací služby"
 
-#: panels/user-accounts/cc-user-panel.c:1095
+#: panels/user-accounts/cc-user-panel.c:1100
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Zkontrolujte prosím, že je účtovací služba AccountService nainstalovaná a "
@@ -7185,7 +7182,7 @@ msgstr ""
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1127
+#: panels/user-accounts/cc-user-panel.c:1132
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7193,12 +7190,12 @@ msgstr ""
 "Abyste mohli provést změny,\n"
 "klikněte nejprve na ikonu *"
 
-#: panels/user-accounts/cc-user-panel.c:1200
+#: panels/user-accounts/cc-user-panel.c:1205
 msgid "Create a user account"
 msgstr "Vytvořit uživatelský účet"
 
-#: panels/user-accounts/cc-user-panel.c:1211
-#: panels/user-accounts/cc-user-panel.c:1339
+#: panels/user-accounts/cc-user-panel.c:1216
+#: panels/user-accounts/cc-user-panel.c:1344
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7206,12 +7203,12 @@ msgstr ""
 "Pro vytvoření uživatelského účtu\n"
 "nejprve klikněte na ikonu *"
 
-#: panels/user-accounts/cc-user-panel.c:1220
+#: panels/user-accounts/cc-user-panel.c:1225
 msgid "Delete the selected user account"
 msgstr "Odstranit vybraný uživatelský účet"
 
-#: panels/user-accounts/cc-user-panel.c:1232
-#: panels/user-accounts/cc-user-panel.c:1343
+#: panels/user-accounts/cc-user-panel.c:1237
+#: panels/user-accounts/cc-user-panel.c:1348
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7231,33 +7228,33 @@ msgstr "Aby se změny projevily, musí být sezení restartováno"
 msgid "Restart Now"
 msgstr "Restartovat nyní"
 
-#: panels/user-accounts/cc-user-panel.ui:254
+#: panels/user-accounts/cc-user-panel.ui:256
 msgid "A_utomatic Login"
 msgstr "A_utomatické přihlašování"
 
-#: panels/user-accounts/cc-user-panel.ui:296
+#: panels/user-accounts/cc-user-panel.ui:298
 msgid "_Fingerprint Login"
 msgstr "Přihlášení otiskem _prstu"
 
-#: panels/user-accounts/cc-user-panel.ui:322
-#: panels/user-accounts/cc-user-panel.ui:338
+#: panels/user-accounts/cc-user-panel.ui:324
+#: panels/user-accounts/cc-user-panel.ui:340
 msgid "User Icon"
 msgstr "Ikona uživatele"
 
-#: panels/user-accounts/cc-user-panel.ui:402
+#: panels/user-accounts/cc-user-panel.ui:404
 msgid "Last Login"
 msgstr "Poslední přihlášení"
 
-#: panels/user-accounts/cc-user-panel.ui:451
+#: panels/user-accounts/cc-user-panel.ui:453
 msgid "Remove User…"
 msgstr "Odebrat uživatele…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:484
+#: panels/user-accounts/cc-user-panel.ui:486
 msgid "No Users Found"
 msgstr "Žádný uživatel nebyl nalezen"
 
-#: panels/user-accounts/cc-user-panel.ui:494
+#: panels/user-accounts/cc-user-panel.ui:496
 msgid "Unlock to add a user account."
 msgstr "Odemkněte, abyste mohli přidat účet."
 
@@ -7310,7 +7307,7 @@ msgstr "Ukazováček _levé ruky"
 msgid "_Other finger:"
 msgstr "_Jiný prst:"
 
-#: panels/user-accounts/data/account-fingerprint.ui:262
+#: panels/user-accounts/data/account-fingerprint.ui:324
 msgid ""
 "Your fingerprint was successfully saved. You should now be able to log in "
 "using your fingerprint reader."
@@ -7521,28 +7518,23 @@ msgstr "Nové heslo neobsahuje dostatek různorodých znaků"
 msgid "Unknown error"
 msgstr "Neznámá chyba"
 
-#: panels/user-accounts/user-utils.c:430
+#: panels/user-accounts/user-utils.c:427
+msgid ""
+"The username should usually only consist of lower case letters from a-z, "
+"digits and the following characters: - _"
+msgstr ""
+"Uživatelské jméno se musí obvykle skládat jen z malých písmen a-z, číslic "
+"a následujících znaků: - _"
+
+#: panels/user-accounts/user-utils.c:431
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Toto uživatelské jméno není bohužel dostupné. Zkuste prosím jiné."
 
-#: panels/user-accounts/user-utils.c:433
-#, c-format
+#: panels/user-accounts/user-utils.c:476
 msgid "The username is too long."
 msgstr "Uživatelské jméno je příliš dlouhé."
 
-#: panels/user-accounts/user-utils.c:436
-msgid "The username cannot start with a “-”."
-msgstr "Uživatelské jméno nesmí začínat znakem „-“."
-
-#: panels/user-accounts/user-utils.c:439
-msgid ""
-"The username should only consist of upper and lower case letters from a-z, "
-"digits and the following characters: . - _"
-msgstr ""
-"Uživatelské jméno se musí skládat jen z malých a velkých písmen a-z, číslic "
-"a některého ze znaků: . - _"
-
-#: panels/user-accounts/user-utils.c:443
+#: panels/user-accounts/user-utils.c:526
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr ""
 "Bude použito k pojmenování vaší domovské složky a nemůže být dodatečně "
@@ -7655,7 +7647,7 @@ msgstr ""
 "klávesnici zkratkové tlačítko a držíte zmáčknuté nové klávesy, případně je "
 "pomocí Backspace smažete."
 
-#: panels/wacom/calibrator/calibrator.ui:60
+#: panels/wacom/calibrator/calibrator.ui:61
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -7663,7 +7655,7 @@ msgstr ""
 "Klepněte prosím na terčíky, které se objevily na obrazovce a tím "
 "zkalibrujete tablet."
 
-#: panels/wacom/calibrator/calibrator.ui:77
+#: panels/wacom/calibrator/calibrator.ui:78
 msgid "Mis-click detected, restarting…"
 msgstr "Zjištěno chybějící kliknutí, začíná se znovu…"
 
@@ -7898,19 +7890,19 @@ msgstr "[PANEL] [ARGUMENT…]"
 msgid "Available panels:"
 msgstr "Dostupné panely:"
 
-#: shell/cc-window.ui:146
+#: shell/cc-window.ui:147
 msgid "All Settings"
 msgstr "Všechna nastavení"
 
-#: shell/cc-window.ui:184
+#: shell/cc-window.ui:185
 msgid "Primary Menu"
 msgstr "Hlavní nabídka"
 
-#: shell/cc-window.ui:326
+#: shell/cc-window.ui:332
 msgid "Warning: Development Version"
 msgstr "Varování: Vývojová verze"
 
-#: shell/cc-window.ui:327
+#: shell/cc-window.ui:333
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -7919,7 +7911,7 @@ msgstr ""
 "Tato verze Nastavení by se měla používat jen pro účely vývoje. Můžete s ní "
 "narazit na nesprávné chování systému, ztrátu dat a další neočekávané chování."
 
-#: shell/cc-window.ui:338
+#: shell/cc-window.ui:344
 msgid "Help"
 msgstr "Nápověda"
 
@@ -7983,7 +7975,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1871
+#: subprojects/gvc/gvc-mixer-control.c:1883
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -7993,7 +7985,7 @@ msgstr[2] "%u výstupů"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1881
+#: subprojects/gvc/gvc-mixer-control.c:1893
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
@@ -8001,93 +7993,6 @@ msgstr[0] "%u vstup"
 msgstr[1] "%u vstupy"
 msgstr[2] "%u vstupů"
 
-#: subprojects/gvc/gvc-mixer-control.c:2736
+#: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Systémové zvuky"
-
-#~ msgid "application-x-executable"
-#~ msgstr "application-x-executable"
-
-#~ msgid "preferences-desktop-wallpaper"
-#~ msgstr "preferences-desktop-wallpaper"
-
-#~ msgid "bluetooth"
-#~ msgstr "bluetooth"
-
-#~ msgid "preferences-color"
-#~ msgstr "preferences-color"
-
-#~ msgid "preferences-system-time"
-#~ msgstr "preferences-system-time"
-
-#~ msgid "preferences-desktop-display"
-#~ msgstr "preferences-desktop-display"
-
-#~ msgid "starred"
-#~ msgstr "starred"
-
-#~ msgid "help-about"
-#~ msgstr "help-about"
-
-#~ msgid "media-removable"
-#~ msgstr "media-removable"
-
-#~ msgid "input-keyboard"
-#~ msgstr "input-keyboard"
-
-#~ msgid "input-mouse"
-#~ msgstr "input-mouse"
-
-#~ msgid "Connection/SSID"
-#~ msgstr "Připojení/SSID"
-
-#~ msgid "network-workgroup"
-#~ msgstr "network-workgroup"
-
-#~ msgid "network-wireless"
-#~ msgstr "network-wireless"
-
-#~ msgid "preferences-system-notifications"
-#~ msgstr "preferences-system-notifications"
-
-#~ msgid "goa-panel"
-#~ msgstr "goa-panel"
-
-#~ msgid "gnome-power-manager"
-#~ msgstr "gnome-power-manager"
-
-#~ msgid "printer"
-#~ msgstr "printer"
-
-#~ msgid "Show _Notifications"
-#~ msgstr "Zobrazovat _upozornění"
-
-#~ msgid "preferences-system-privacy"
-#~ msgstr "preferences-system-privacy"
-
-#~ msgid "preferences-desktop-locale"
-#~ msgstr "preferences-desktop-locale"
-
-#~ msgid "preferences-system-search"
-#~ msgstr "preferences-system-search"
-
-#~ msgid "preferences-system-sharing"
-#~ msgstr "preferences-system-sharing"
-
-#~ msgid "multimedia-volume-control"
-#~ msgstr "multimedia-volume-control"
-
-#~ msgid "thunderbolt"
-#~ msgstr "thunderbolt"
-
-#~ msgid "preferences-desktop-accessibility"
-#~ msgstr "preferences-desktop-accessibility"
-
-#~ msgid "system-users"
-#~ msgstr "system-users"
-
-#~ msgid "input-tablet"
-#~ msgstr "input-tablet"
-
-#~ msgid "org.gnome.Settings"
-#~ msgstr "org.gnome.Settings"

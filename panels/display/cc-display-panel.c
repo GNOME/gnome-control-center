@@ -40,7 +40,10 @@
 #include "cc-display-resources.h"
 #include "cc-display-settings.h"
 
-/* The minimum supported size for the panel */
+/* The minimum supported size for the panel
+ * Note that WIDTH is assumed to be the larger size and we accept portrait
+ * mode too effectively (in principle we should probably restrict the rotation
+ * setting in that case). */
 #define MINIMUM_WIDTH 740
 #define MINIMUM_HEIGHT 530
 
@@ -331,7 +334,7 @@ monitor_labeler_show (CcDisplayPanel *self)
     return monitor_labeler_hide (self);
 
   g_dbus_proxy_call (self->shell_proxy,
-                     "ShowMonitorLabels2",
+                     "ShowMonitorLabels",
                      g_variant_builder_end (&builder),
                      G_DBUS_CALL_FLAGS_NONE,
                      -1, NULL, NULL, NULL);
@@ -745,6 +748,12 @@ rebuild_ui (CcDisplayPanel *panel)
   g_list_store_remove_all (panel->primary_display_list);
   gtk_list_store_clear (panel->output_selection_list);
 
+  if (!panel->current_config)
+    {
+      panel->rebuilding_counter--;
+      return;
+    }
+
   n_active_outputs = 0;
   n_usable_outputs = 0;
   outputs = cc_display_config_get_ui_sorted_monitors (panel->current_config);
@@ -870,6 +879,7 @@ reset_current_config (CcDisplayPanel *panel)
   panel->current_output = NULL;
 
   current = cc_display_config_manager_get_current (panel->manager);
+  cc_display_config_set_minimum_size (current, MINIMUM_WIDTH, MINIMUM_HEIGHT);
   panel->current_config = current;
 
   g_list_store_remove_all (panel->primary_display_list);
@@ -985,6 +995,12 @@ update_apply_button (CcDisplayPanel *panel)
 {
   gboolean config_equal;
   g_autoptr(CcDisplayConfig) applied_config = NULL;
+
+  if (!panel->current_config)
+    {
+      reset_titlebar (panel);
+      return;
+    }
 
   applied_config = cc_display_config_manager_get_current (panel->manager);
 

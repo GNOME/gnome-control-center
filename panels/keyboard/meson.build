@@ -66,9 +66,9 @@ sources = files(
 )
 
 resource_data = files(
-  'cc-keyboard-panel.ui',
   'enter-keyboard-shortcut.svg',
-  'shortcut-editor.ui'
+  'cc-keyboard-panel.ui',
+  'cc-keyboard-shortcut-editor.ui',
 )
 
 sources += gnome.compile_resources(
@@ -83,8 +83,6 @@ deps = common_deps + [
   gnome_desktop_dep,
   x11_dep
 ]
-
-cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
 
 panels_libs += static_library(
   cappletname,

@@ -179,8 +179,7 @@ deps = common_deps + [
 ]
 
 cflags += [
-  '-DGNOMECC_DATA_DIR="@0@"'.format(control_center_pkgdatadir),
-  '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
+  '-DGNOMECC_DATA_DIR="@0@"'.format(control_center_pkgdatadir)
 ]
 
 datetime_panel_lib = static_library(
@@ -191,6 +190,12 @@ datetime_panel_lib = static_library(
   c_args: cflags
 )
 panels_libs += datetime_panel_lib
+
+datetime_panel_lib_dep = declare_dependency(
+              sources : resources,
+  include_directories : [top_inc, include_directories('.')],
+            link_with : datetime_panel_lib
+)
 
 subdir('po-timezones')
 subdir('icons')

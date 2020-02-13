@@ -34,8 +34,6 @@ deps = common_deps + [
   upower_glib_dep
 ]
 
-cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
-
 if host_is_linux
   deps += network_manager_deps
 endif

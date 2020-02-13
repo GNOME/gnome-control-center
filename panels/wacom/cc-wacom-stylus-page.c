@@ -243,11 +243,7 @@ cc_wacom_stylus_page_dispose (GObject *object)
 {
 	CcWacomStylusPage *page = CC_WACOM_STYLUS_PAGE (object);
 
-	if (page->builder) {
-		g_object_unref (page->builder);
-		page->builder = NULL;
-	}
-
+	g_clear_object (&page->builder);
 
 	G_OBJECT_CLASS (cc_wacom_stylus_page_parent_class)->dispose (object);
 }
@@ -263,9 +259,18 @@ cc_wacom_stylus_page_class_init (CcWacomStylusPageClass *klass)
 }
 
 static void
+add_marks (GtkScale *scale)
+{
+	gint i;
+
+	for (i = 0; i < N_PRESSURE_CURVES; i++)
+		gtk_scale_add_mark (scale, i, GTK_POS_BOTTOM, NULL);
+}
+
+static void
 cc_wacom_stylus_page_init (CcWacomStylusPage *page)
 {
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 	GtkComboBox *combo;
 	GtkWidget *box;
 	char *objects[] = {
@@ -284,14 +289,15 @@ cc_wacom_stylus_page_init (CcWacomStylusPage *page)
                                                &error);
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
-		g_object_unref (page->builder);
-		g_error_free (error);
 		return;
 	}
 
 	box = WID ("stylus-grid");
 	gtk_container_add (GTK_CONTAINER (page), box);
 	gtk_widget_set_vexpand (GTK_WIDGET (box), TRUE);
+
+	add_marks (GTK_SCALE (WID ("scale-tip-feel")));
+	add_marks (GTK_SCALE (WID ("scale-eraser-feel")));
 
 	g_signal_connect (WID ("scale-tip-feel"), "value-changed",
 			  G_CALLBACK (tip_feel_value_changed_cb), page);
@@ -325,11 +331,10 @@ set_icon_name (CcWacomStylusPage *page,
 	       const char  *widget_name,
 	       const char  *icon_name)
 {
-	char *resource;
+	g_autofree gchar *resource = NULL;
 
 	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
 	gtk_image_set_from_resource (GTK_IMAGE (WID (widget_name)), resource);
-	g_free (resource);
 }
 
 /* Different types of layout for the stylus config */

@@ -22,8 +22,9 @@
 #include <config.h>
 
 #include "cc-hostname-entry.h"
+#include "cc-os-release.h"
 
-#include "cc-info-resources.h"
+#include "cc-info-overview-resources.h"
 #include "info-cleanup.h"
 
 #include <glib.h>
@@ -371,73 +372,18 @@ get_graphics_data (void)
   return result;
 }
 
-static GHashTable*
-get_os_info (void)
-{
-  GHashTable *hashtable;
-  g_autofree gchar *buffer = NULL;
-
-  hashtable = NULL;
-
-  if (g_file_get_contents ("/etc/os-release", &buffer, NULL, NULL))
-    {
-      g_auto(GStrv) lines = NULL;
-      gint i;
-
-      lines = g_strsplit (buffer, "\n", -1);
-
-      for (i = 0; lines[i] != NULL; i++)
-        {
-          gchar *delimiter;
-
-          /* Initialize the hash table if needed */
-          if (!hashtable)
-            hashtable = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-
-          delimiter = strstr (lines[i], "=");
-
-          if (delimiter != NULL)
-            {
-              gint size;
-              gchar *key, *value;
-
-              key = g_strndup (lines[i], delimiter - lines[i]);
-
-              /* Jump the '=' */
-              delimiter += strlen ("=");
-
-              /* Eventually jump the ' " ' character */
-              if (g_str_has_prefix (delimiter, "\""))
-                delimiter += strlen ("\"");
-
-              size = strlen (delimiter);
-
-              /* Don't consider the last ' " ' too */
-              if (g_str_has_suffix (delimiter, "\""))
-                size -= strlen ("\"");
-
-              value = g_strndup (delimiter, size);
-
-              g_hash_table_insert (hashtable, key, value);
-            }
-        }
-    }
-
-  return hashtable;
-}
-
 static char *
 get_os_name (void)
 {
-  GHashTable *os_info;
-  gchar *name, *version_id, *pretty_name, *build_id;
+  g_autoptr(GHashTable) os_info = NULL;
+  const gchar *name, *version_id, *pretty_name, *build_id;
   gchar *result = NULL;
   g_autofree gchar *name_version = NULL;
 
-  os_info = get_os_info ();
+  os_info = cc_os_release_get_values ();
 
   if (!os_info)
-    g_strdup (_("Unknown"));
+    return g_strdup (_("Unknown"));
 
   name = g_hash_table_lookup (os_info, "NAME");
   version_id = g_hash_table_lookup (os_info, "VERSION_ID");
@@ -463,8 +409,6 @@ get_os_name (void)
     {
       result = g_strdup (name_version);
     }
-
-  g_clear_pointer (&os_info, g_hash_table_destroy);
 
   return result;
 }
@@ -805,7 +749,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   object_class->finalize = cc_info_overview_panel_finalize;
   object_class->dispose = cc_info_overview_panel_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info/cc-info-overview-panel.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-info-overview-panel.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, system_image);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, version_label);
@@ -833,7 +777,7 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  g_resources_register (cc_info_get_resource ());
+  g_resources_register (cc_info_overview_get_resource ());
 
   priv->graphics_data = get_graphics_data ();
 

@@ -27,8 +27,8 @@ sources = files(
 )
 
 resource_data = files(
+  'cc-color-calibrate.ui',
   'cc-color-panel.ui',
-  'color-calibrate.ui',
 )
 
 sources += gnome.compile_resources(
@@ -48,7 +48,6 @@ deps = common_deps + [
 ]
 
 cflags += [
-  '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir),
   '-DBINDIR="@0@"'.format(control_center_bindir)
 ]
 

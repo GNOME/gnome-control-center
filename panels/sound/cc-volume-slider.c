@@ -34,6 +34,8 @@ struct _CcVolumeSlider
   GtkAdjustment   *volume_adjustment;
   GtkScale        *volume_scale;
 
+  gboolean         is_amplified;
+  GvcMixerControl *mixer_control;
   GvcMixerStream  *stream;
   guint            notify_volume_handler_id;
   guint            notify_is_muted_handler_id;
@@ -53,11 +55,51 @@ volume_changed_cb (CcVolumeSlider *self)
   rounded = round (volume);
 
   gtk_toggle_button_set_active (self->mute_button, volume == 0.0);
-  if (gvc_mixer_stream_set_volume (self->stream,
-                                   (pa_volume_t) rounded))
-    {
+
+  if (gvc_mixer_stream_set_volume (self->stream, (pa_volume_t) rounded))
       gvc_mixer_stream_push_volume (self->stream);
+}
+
+static void
+notify_volume_cb (CcVolumeSlider *self)
+{
+  g_signal_handlers_block_by_func (self->volume_adjustment, volume_changed_cb, self);
+
+  if (gtk_toggle_button_get_active (self->mute_button))
+    gtk_adjustment_set_value (self->volume_adjustment, 0.0);
+  else
+    gtk_adjustment_set_value (self->volume_adjustment, gvc_mixer_stream_get_volume (self->stream));
+
+  g_signal_handlers_unblock_by_func (self->volume_adjustment, volume_changed_cb, self);
+}
+
+static void
+update_ranges (CcVolumeSlider *self)
+{
+  gdouble vol_max_norm;
+
+  if (self->mixer_control == NULL)
+    return;
+
+  vol_max_norm = gvc_mixer_control_get_vol_max_norm (self->mixer_control);
+
+  gtk_scale_clear_marks (self->volume_scale);
+  if (self->is_amplified)
+    {
+      gtk_adjustment_set_upper (self->volume_adjustment, gvc_mixer_control_get_vol_max_amplified (self->mixer_control));
+      gtk_scale_add_mark (self->volume_scale,
+                          vol_max_norm,
+                          GTK_POS_BOTTOM,
+                          C_("volume", "100%"));
     }
+  else
+    {
+      gtk_adjustment_set_upper (self->volume_adjustment, vol_max_norm);
+    }
+  gtk_adjustment_set_page_increment (self->volume_adjustment, vol_max_norm / 100.0);
+
+  if (self->stream)
+    notify_volume_cb (self);
 }
 
 static void
@@ -67,17 +109,6 @@ mute_button_toggled_cb (CcVolumeSlider *self)
     return;
 
   gvc_mixer_stream_change_is_muted (self->stream, gtk_toggle_button_get_active (self->mute_button));
-}
-
-static void
-notify_volume_cb (CcVolumeSlider *self)
-{
-  g_signal_handlers_block_by_func (self->volume_adjustment, volume_changed_cb, self);
-  if (gtk_toggle_button_get_active (self->mute_button))
-    gtk_adjustment_set_value (self->volume_adjustment, 0.0);
-  else
-    gtk_adjustment_set_value (self->volume_adjustment, gvc_mixer_stream_get_volume (self->stream));
-  g_signal_handlers_unblock_by_func (self->volume_adjustment, volume_changed_cb, self);
 }
 
 static void
@@ -94,6 +125,7 @@ cc_volume_slider_dispose (GObject *object)
 {
   CcVolumeSlider *self = CC_VOLUME_SLIDER (object);
 
+  g_clear_object (&self->mixer_control);
   g_clear_object (&self->stream);
 
   G_OBJECT_CLASS (cc_volume_slider_parent_class)->dispose (object);
@@ -121,15 +153,20 @@ cc_volume_slider_class_init (CcVolumeSliderClass *klass)
 void
 cc_volume_slider_init (CcVolumeSlider *self)
 {
-  gdouble vol_max_norm;
-
   g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
+}
 
-  vol_max_norm = gvc_mixer_control_get_vol_max_norm (NULL);
-  gtk_adjustment_set_upper (self->volume_adjustment, vol_max_norm);
-  gtk_adjustment_set_page_increment (self->volume_adjustment, vol_max_norm / 100.0);
+void
+cc_volume_slider_set_mixer_control (CcVolumeSlider  *self,
+                                    GvcMixerControl *mixer_control)
+{
+  g_return_if_fail (CC_IS_VOLUME_SLIDER (self));
+
+  g_set_object (&self->mixer_control, mixer_control);
+
+  update_ranges (self);
 }
 
 void
@@ -190,17 +227,7 @@ cc_volume_slider_set_is_amplified (CcVolumeSlider *self,
 {
   g_return_if_fail (CC_IS_VOLUME_SLIDER (self));
 
-  gtk_scale_clear_marks (self->volume_scale);
-  if (is_amplified)
-    {
-      gtk_adjustment_set_upper (self->volume_adjustment, gvc_mixer_control_get_vol_max_amplified (NULL));
-      gtk_scale_add_mark (self->volume_scale,
-                          gvc_mixer_control_get_vol_max_norm (NULL),
-                          GTK_POS_BOTTOM,
-                          C_("volume", "100%"));
-    }
-  else
-    {
-      gtk_adjustment_set_upper (self->volume_adjustment, gvc_mixer_control_get_vol_max_norm (NULL));
-    }
+  self->is_amplified = is_amplified;
+
+  update_ranges (self);
 }

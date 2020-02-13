@@ -17,6 +17,7 @@
  *
  */
 
+#include <gio/gio.h>
 #include <math.h>
 #include "cc-display-config.h"
 
@@ -480,12 +481,14 @@ cc_display_config_class_init (CcDisplayConfigClass *klass)
 GList *
 cc_display_config_get_monitors (CcDisplayConfig *self)
 {
+  g_return_val_if_fail (CC_IS_DISPLAY_CONFIG (self), NULL);
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->get_monitors (self);
 }
 
 GList *
 cc_display_config_get_ui_sorted_monitors (CcDisplayConfig *self)
 {
+  g_return_val_if_fail (CC_IS_DISPLAY_CONFIG (self), NULL);
   return CC_DISPLAY_CONFIG_GET_PRIVATE (self)->ui_sorted_monitors;
 }
 
@@ -495,6 +498,8 @@ cc_display_config_count_useful_monitors (CcDisplayConfig *self)
   CcDisplayConfigPrivate *priv = CC_DISPLAY_CONFIG_GET_PRIVATE (self);
   GList *outputs, *l;
   guint count = 0;
+
+  g_return_val_if_fail (CC_IS_DISPLAY_CONFIG (self), 0);
 
   outputs = priv->ui_sorted_monitors;
   for (l = outputs; l != NULL; l = l->next)
@@ -512,6 +517,7 @@ cc_display_config_count_useful_monitors (CcDisplayConfig *self)
 gboolean
 cc_display_config_is_applicable (CcDisplayConfig *self)
 {
+  g_return_val_if_fail (CC_IS_DISPLAY_CONFIG (self), FALSE);
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->is_applicable (self);
 }
 
@@ -520,6 +526,8 @@ cc_display_config_set_mode_on_all_outputs (CcDisplayConfig *config,
                                            CcDisplayMode   *mode)
 {
   GList *outputs, *l;
+
+  g_return_if_fail (CC_IS_DISPLAY_CONFIG (config));
 
   outputs = cc_display_config_get_monitors (config);
   for (l = outputs; l; l = l->next)
@@ -534,6 +542,9 @@ gboolean
 cc_display_config_equal (CcDisplayConfig *self,
                          CcDisplayConfig *other)
 {
+  g_return_val_if_fail (CC_IS_DISPLAY_CONFIG (self), FALSE);
+  g_return_val_if_fail (CC_IS_DISPLAY_CONFIG (other), FALSE);
+
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->equal (self, other);
 }
 
@@ -541,12 +552,23 @@ gboolean
 cc_display_config_apply (CcDisplayConfig *self,
                          GError **error)
 {
+  if (!CC_IS_DISPLAY_CONFIG (self))
+    {
+      g_warning ("Cannot apply invalid configuration");
+      g_set_error (error,
+                   G_IO_ERROR,
+                   G_IO_ERROR_FAILED,
+                   "Cannot apply invalid configuration");
+      return FALSE;
+    }
+
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->apply (self, error);
 }
 
 gboolean
 cc_display_config_is_cloning (CcDisplayConfig *self)
 {
+  g_return_val_if_fail (CC_IS_DISPLAY_CONFIG (self), FALSE);
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->is_cloning (self);
 }
 
@@ -554,17 +576,36 @@ void
 cc_display_config_set_cloning (CcDisplayConfig *self,
                                gboolean clone)
 {
+  g_return_if_fail (CC_IS_DISPLAY_CONFIG (self));
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->set_cloning (self, clone);
 }
 
 GList *
 cc_display_config_get_cloning_modes (CcDisplayConfig *self)
 {
+  g_return_val_if_fail (CC_IS_DISPLAY_CONFIG (self), NULL);
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->get_cloning_modes (self);
 }
 
 gboolean
 cc_display_config_is_layout_logical (CcDisplayConfig *self)
 {
+  g_return_val_if_fail (CC_IS_DISPLAY_CONFIG (self), FALSE);
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->is_layout_logical (self);
+}
+
+void
+cc_display_config_set_minimum_size (CcDisplayConfig *self,
+                                    int              width,
+                                    int              height)
+{
+  CC_DISPLAY_CONFIG_GET_CLASS (self)->set_minimum_size (self, width, height);
+}
+
+gboolean
+cc_display_config_is_scaled_mode_valid (CcDisplayConfig *self,
+                                        CcDisplayMode   *mode,
+                                        double           scale)
+{
+  return CC_DISPLAY_CONFIG_GET_CLASS (self)->is_scaled_mode_valid (self, mode, scale);
 }

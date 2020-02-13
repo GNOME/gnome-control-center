@@ -17,17 +17,15 @@
  *
  */
 
-#ifndef CC_INFO_REMOVABLE_MEDIA_PANEL_H
-#define CC_INFO_REMOVABLE_MEDIA_PANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_INFO_REMOVABLE_MEDIA_PANEL (cc_info_removable_media_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcInfoRemovableMediaPanel, cc_info_removable_media_panel, CC, INFO_REMOVABLE_MEDIA_PANEL, CcPanel)
+#define CC_TYPE_DEFAULT_APPS_PANEL (cc_default_apps_panel_get_type ())
+G_DECLARE_FINAL_TYPE (CcDefaultAppsPanel, cc_default_apps_panel, CC, DEFAULT_APPS_PANEL, CcPanel)
 
+GtkWidget *cc_default_apps_panel_new (void);
 
 G_END_DECLS
-
-#endif /* CC_INFO_REMOVABLE_MEDIA_PANEL_H */

@@ -18,8 +18,8 @@ i18n.merge_file(
 )
 
 resource_data = files(
-  'gnome-mouse-properties.ui',
-  'gnome-mouse-test.ui',
+  'cc-mouse-panel.ui',
+  'cc-mouse-test.ui',
   'scroll-test-gegl.svg',
   'scroll-test.svg'
 )
@@ -35,8 +35,7 @@ common_sources = gnome.compile_resources(
 sources = common_sources + files(
   'cc-mouse-panel.c',
   'cc-mouse-caps-helper.c',
-  'gnome-mouse-properties.c',
-  'gnome-mouse-test.c'
+  'cc-mouse-test.c',
 )
 
 deps = common_deps + [
@@ -45,8 +44,6 @@ deps = common_deps + [
   x11_dep,
   xi_dep
 ]
-
-cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
 
 panels_libs += static_library(
   cappletname + '-properties',
@@ -59,7 +56,7 @@ panels_libs += static_library(
 test_name = 'test-gnome-mouse-test'
 
 sources = common_sources + files(
-  'gnome-mouse-test.c',
+  'cc-mouse-test.c',
   test_name + '.c'
 )
 
