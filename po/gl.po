@@ -18,16 +18,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-02-05 08:22+0000\n"
-"PO-Revision-Date: 2020-02-10 00:01+0100\n"
-"Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
+"POT-Creation-Date: 2020-02-13 21:10+0000\n"
+"PO-Revision-Date: 2020-02-13 22:50+0100\n"
+"Last-Translator: Fran Diéguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "X-Launchpad-Export-Date: 2014-05-09 14:44+0000\n"
 "X-Project-Style: gnome\n"
 
@@ -747,7 +747,7 @@ msgstr "Permitir que os aplicativos de abaixo usar a súa cámara."
 
 #: panels/camera/cc-camera-panel.ui:107
 msgid "No Applications Have Asked for Camera Access"
-msgstr ""
+msgstr "Ningunha aplicación solicitou acceder á cámara"
 
 #: panels/camera/gnome-camera-panel.desktop.in.in:4
 msgid "Protect your pictures"
@@ -1184,7 +1184,9 @@ msgstr ""
 "Cada dispositivo necesita un perfil de cor actualizado para poder xestionar "
 "a cor."
 
+#. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:812
+#: panels/diagnostics/cc-diagnostics-panel.c:143
 msgid "Learn more"
 msgstr "Aprender máis"
 
@@ -1438,7 +1440,7 @@ msgstr "Desbloquear para cambiar as preferencias"
 
 #: panels/common/cc-permission-infobar.ui:55
 msgid "Some settings must be unlocked before they can be changed."
-msgstr ""
+msgstr "Algunhas preferencias deben desbloquearse antes de poder cambialas."
 
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:152
@@ -1739,33 +1741,21 @@ msgstr "Configurar as aplicacións predeterminadas"
 msgid "default;application;preferred;media;"
 msgstr "predeterminado;aplicación;prefirido;media;"
 
-#. translators: '%s' is the distributor's name, such as 'Fedora'
-#: panels/diagnostics/cc-diagnostics-panel.c:141
+#. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
+#: panels/diagnostics/cc-diagnostics-panel.c:145
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
-"anonymously and are scrubbed of personal data."
+"anonymously and are scrubbed of personal data. %s"
 msgstr ""
 "Ao enviar informes de problemas técnicos axudaranos a mellorar %s. Os "
-"informes envíanse de forma anónima e límpanse de datos persoais."
-
-#: panels/diagnostics/cc-diagnostics-panel.c:151
-#: panels/diagnostics/cc-diagnostics-panel.ui:53
-msgid "Reports are sent anonymously and are scrubbed of personal data."
-msgstr "Os informes envíanse de forma anónima e límpanse de datos persoais."
+"informes envíanse de forma anónima e límpanse de datos persoais. %s"
 
 #: panels/diagnostics/cc-diagnostics-panel.ui:30
 msgid "Problem Reporting"
 msgstr "Informe de erros"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:43
-msgid ""
-"Sending reports of technical problems help us improve this operating system."
-msgstr ""
-"Ao enviar informes de problemas técnicos axudaranos a mellorar este sistema "
-"operativo."
-
-#: panels/diagnostics/cc-diagnostics-panel.ui:78
+#: panels/diagnostics/cc-diagnostics-panel.ui:67
 msgid "_Automatic Problem Reporting"
 msgstr "Informar de problemas _automaticamente"
 
@@ -2084,6 +2074,8 @@ msgid ""
 "The device name is used to identify this device when it is viewed over the "
 "network, or when pairing Bluetooth devices."
 msgstr ""
+"O nome do dispositivo úsase para identificar este dispositivo cando se ve na "
+"rede, ou cando se emparellan os dispositivos Bluetooth."
 
 #: panels/info-overview/cc-info-overview-panel.ui:226
 msgid "_Rename"
@@ -2292,6 +2284,8 @@ msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
 msgstr ""
+"A tecla de trocar caracteres poden usarse para escribir caracteres "
+"adicionais. A veces imprímense como unha terceira opción no seu teclado."
 
 #: panels/keyboard/cc-alt-chars-key-dialog.ui:45
 msgid "Left Alt"
@@ -2532,11 +2526,11 @@ msgstr ""
 
 #: panels/location/cc-location-panel.ui:95
 msgid "Allow the applications below to determine your location."
-msgstr ""
+msgstr "Permitir ás aplicacións de embaixo determinar a súa localización."
 
 #: panels/location/cc-location-panel.ui:115
 msgid "No Applications Have Asked for Location Access"
-msgstr ""
+msgstr "Ningunha aplicación solicitou á localización"
 
 #: panels/location/gnome-location-panel.desktop.in.in:4
 msgid "Protect your location information"
@@ -2548,6 +2542,8 @@ msgid ""
 "Automatically locking the screen prevents others from access the computer "
 "while you're away."
 msgstr ""
+"Se bloquea automaticamente a pantalla evitará que outros poida acceder ao "
+"seu computador mentres non está presente."
 
 #: panels/lock/cc-lock-panel.ui:46
 msgid "Blank Screen Delay"
@@ -2555,7 +2551,7 @@ msgstr "Atraso da pantalla en branco"
 
 #: panels/lock/cc-lock-panel.ui:47
 msgid "Period of inactivity after which the screen will go blank."
-msgstr ""
+msgstr "O período de inactividade despois do cal a pantalla se porá en negro."
 
 #: panels/lock/cc-lock-panel.ui:67
 msgid "Automatic Screen _Lock"
@@ -2568,6 +2564,8 @@ msgstr "Atraso do _bloqueo de pantalla automático"
 #: panels/lock/cc-lock-panel.ui:85
 msgid "Period after the screen blanks when the screen is automatically locked."
 msgstr ""
+"Período despois de que pantalla se poña en negro, esta se bloquee "
+"automaticamente."
 
 #: panels/lock/cc-lock-panel.ui:105
 msgid "Show _Notifications on Lock Screen"
@@ -2709,11 +2707,11 @@ msgstr ""
 
 #: panels/microphone/cc-microphone-panel.ui:87
 msgid "Allow the applications below to use your microphone."
-msgstr ""
+msgstr "Permitir ás aplicacións de embaixo usar o seu micrófono."
 
 #: panels/microphone/cc-microphone-panel.ui:107
 msgid "No Applications Have Asked for Microphone Access"
-msgstr ""
+msgstr "Ningunha aplicación solicitou acceso ao micrófono"
 
 #: panels/microphone/gnome-microphone-panel.desktop.in.in:4
 msgid "Protect your conversations"
@@ -2897,6 +2895,8 @@ msgid ""
 "Turning on the hotspot will disconnect from %s, and it will not be possible "
 "to access the internet through Wi-Fi."
 msgstr ""
+"Activar o punto de acceso desconectarao de %s, non será posíbel acceder a "
+"internet mediante o Wifi."
 
 #: panels/network/cc-wifi-hotspot-dialog.c:248
 msgid "Must have a minimum of 8 characters"
@@ -2912,6 +2912,9 @@ msgid ""
 "Wi-Fi network that they can connect to. To do this, you must have an "
 "internet connection through a source other than Wi-Fi."
 msgstr ""
+"O punto de acceso Wifi permite a outras persoas compartir a súa conexión de "
+"internet creando unha rede Wifi ao que se pode conectar. Para facer isto, "
+"debe ter unha conexión a internet mediante outra orixe que non sexa o Wifi."
 
 #: panels/network/cc-wifi-hotspot-dialog.ui:44
 #: panels/network/network-wifi.ui:105
@@ -3259,12 +3262,14 @@ msgstr "Facer dispoñíbel a _outros usuarios"
 
 #: panels/network/connection-editor/details-page.ui:428
 msgid "_Metered connection: has data limits or can incur charges"
-msgstr ""
+msgstr "Conexión _medida: pode ter límites de datos ou incorrer en cobros."
 
 #: panels/network/connection-editor/details-page.ui:439
 msgid ""
 "Software updates and other large downloads will not be started automatically."
 msgstr ""
+"As actualizacións de software as descargas grandes non se iniciarán "
+"automaticamente."
 
 #: panels/network/connection-editor/ethernet-page.ui:25
 #: panels/network/connection-editor/vpn-page.ui:23
@@ -5545,6 +5550,8 @@ msgid ""
 "Choose the format for numbers, dates and currencies. Changes take effect on "
 "next login."
 msgstr ""
+"Seleccione o formato para os números, datas e moedas. Os cambios aplicaranse "
+"no seguinte inicio de sesión."
 
 #: panels/region/cc-format-chooser.ui:119
 msgid "Search locales..."
@@ -6951,6 +6958,9 @@ msgid ""
 "shared between applications, and makes it easier to find files that you "
 "might want to use."
 msgstr ""
+"O historial de ficheiros mantén un rexistro dos ficheiros que usou. Esta "
+"información está compartida entre as aplicacións, e fai máis doado atopar "
+"ficheiros que pode querer usar."
 
 #: panels/usage/cc-usage-panel.ui:58
 msgid "File H_istory"
@@ -6973,6 +6983,9 @@ msgid ""
 "Trash and temporary files can sometimes include personal or sensitive "
 "information. Automatically deleting them can help to protect privacy."
 msgstr ""
+"O lixo e ficheiros temporais poden incluír en ocasións información persoal "
+"ou sensíbel. Se os elimina automaticamente pode axudarlle a protexer a súa "
+"privacidade."
 
 #: panels/usage/cc-usage-panel.ui:161
 msgid "Automatically Delete _Trash Content"
@@ -7493,6 +7506,8 @@ msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
 msgstr ""
+"Os administradores poden engadir ou eliminar usuarios e poden cambiar as "
+"preferencias para todos os usuarios."
 
 #: panels/user-accounts/cc-user-panel.ui:359
 msgid "Authentication & Login"
@@ -8267,6 +8282,16 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Sistemas de son"
+
+#~ msgid "Reports are sent anonymously and are scrubbed of personal data."
+#~ msgstr "Os informes envíanse de forma anónima e límpanse de datos persoais."
+
+#~ msgid ""
+#~ "Sending reports of technical problems help us improve this operating "
+#~ "system."
+#~ msgstr ""
+#~ "Ao enviar informes de problemas técnicos axudaranos a mellorar este "
+#~ "sistema operativo."
 
 #, fuzzy
 #~| msgid "Restrict background data usage"
